@@ -11,7 +11,7 @@
       "act": "0D · point",
       "truth": "a point is a decision: here, not there — but only inside a system.",
       "count": 21,
-      "x_spread": 0.0398,
+      "x_spread": -1.0,
       "tiers": {
         "small": [
           "automatic_writing_desk",
@@ -48,8 +48,8 @@
       "order": 1,
       "act": "1D · line",
       "truth": "a line is the claim two things are connected — and the ruler that measures it.",
-      "count": 17,
-      "x_spread": -0.071,
+      "count": 18,
+      "x_spread": -0.9048,
       "tiers": {
         "small": [
           "coordinate_lines",
@@ -68,7 +68,8 @@
           "two_points_line"
         ],
         "medium": [
-          "parallel_lines"
+          "parallel_lines",
+          "line_builder_3d"
         ],
         "large": [
           "grid_lines",
@@ -83,7 +84,7 @@
       "act": "1D · line",
       "truth": "a line with a direction is an instruction, not a place.",
       "count": 2,
-      "x_spread": -1.0,
+      "x_spread": -0.8096,
       "tiers": {
         "small": [],
         "medium": [
@@ -101,7 +102,7 @@
       "act": "2D · surface",
       "truth": "three lines make the minimum enclosure — the first closed thing.",
       "count": 23,
-      "x_spread": 0.408,
+      "x_spread": -0.7142,
       "tiers": {
         "small": [
           "draw_triangle_faces",
@@ -141,7 +142,7 @@
       "act": "2D · surface",
       "truth": "a flat surface: the field a shape is drawn upon.",
       "count": 10,
-      "x_spread": 0.2201,
+      "x_spread": -0.619,
       "tiers": {
         "small": [
           "glass_planes_2_5d",
@@ -167,8 +168,8 @@
       "order": 5,
       "act": "2D · surface",
       "truth": "the grid is the commitment to discretize — to count space.",
-      "count": 27,
-      "x_spread": 0.1329,
+      "count": 30,
+      "x_spread": -0.5238,
       "tiers": {
         "small": [
           "array_rotate",
@@ -200,7 +201,10 @@
         ],
         "medium": [],
         "large": [
-          "transform_staircase_showcase"
+          "transform_staircase_showcase",
+          "grid_brush_demo",
+          "grid_ops_demo",
+          "modifier_grid_demo"
         ],
         "applied": []
       }
@@ -210,8 +214,8 @@
       "order": 6,
       "act": "3D · solids",
       "truth": "the cube: six faces, the faceted unit of volume.",
-      "count": 29,
-      "x_spread": 0.4719,
+      "count": 31,
+      "x_spread": -0.4286,
       "tiers": {
         "small": [
           "animated_cube",
@@ -238,7 +242,9 @@
           "transformation_cube",
           "translation_demo",
           "unitcube",
-          "wood_cube"
+          "wood_cube",
+          "path_cube",
+          "polyhedron_nets_cube"
         ],
         "medium": [
           "cube_lines"
@@ -257,8 +263,8 @@
       "order": 7,
       "act": "3D · solids",
       "truth": "the sphere: every point equidistant from a centre.",
-      "count": 14,
-      "x_spread": 0.0361,
+      "count": 17,
+      "x_spread": -0.3334,
       "tiers": {
         "small": [
           "grab_line_pusher",
@@ -271,10 +277,13 @@
           "sphere",
           "sphere_high",
           "sphere_low",
-          "sphere_mid"
+          "sphere_mid",
+          "dark_sphere"
         ],
         "medium": [
-          "combine_sphere"
+          "combine_sphere",
+          "laser_exploding_sphere",
+          "mesh_grammar_subdivided"
         ],
         "large": [
           "dome",
@@ -289,7 +298,7 @@
       "act": "3D · solids",
       "truth": "a circle swept along a line.",
       "count": 6,
-      "x_spread": -0.0809,
+      "x_spread": -0.238,
       "tiers": {
         "small": [
           "cylinder",
@@ -311,7 +320,7 @@
       "act": "3D · solids",
       "truth": "a cylinder with hemispherical caps — the soft solid.",
       "count": 4,
-      "x_spread": -0.0148,
+      "x_spread": -0.1428,
       "tiers": {
         "small": [
           "capsule_radials_rings",
@@ -331,7 +340,7 @@
       "act": "3D · solids",
       "truth": "a solid with a hole — genus one, the first topology.",
       "count": 6,
-      "x_spread": 0.0587,
+      "x_spread": -0.0476,
       "tiers": {
         "small": [
           "hollowrock",
@@ -353,7 +362,7 @@
       "act": "3D · solids",
       "truth": "the regular solids: symmetry made into volume.",
       "count": 10,
-      "x_spread": 0.2489,
+      "x_spread": 0.0476,
       "tiers": {
         "small": [
           "diamonds",
@@ -378,8 +387,8 @@
       "order": 12,
       "act": "3D · solids",
       "truth": "a base tapering to a point.",
-      "count": 8,
-      "x_spread": 0.0317,
+      "count": 9,
+      "x_spread": 0.1428,
       "tiers": {
         "small": [
           "bipyramid",
@@ -388,7 +397,8 @@
           "pyramidlong",
           "rock_primitive",
           "steppedpyramid",
-          "trafficcone"
+          "trafficcone",
+          "path_pyramid"
         ],
         "medium": [],
         "large": [],
@@ -403,7 +413,7 @@
       "act": "3D · solids",
       "truth": "a 2D profile pushed through the third dimension.",
       "count": 3,
-      "x_spread": 1.0,
+      "x_spread": 0.238,
       "tiers": {
         "small": [
           "prism",
@@ -421,7 +431,7 @@
       "act": "3D · solids",
       "truth": "a line that climbs as it turns.",
       "count": 2,
-      "x_spread": -0.0034,
+      "x_spread": 0.3334,
       "tiers": {
         "small": [
           "transform_staircase_dna",
@@ -438,7 +448,7 @@
       "act": "structures",
       "truth": "primitives composed into something that stands.",
       "count": 5,
-      "x_spread": 0.0103,
+      "x_spread": 0.4286,
       "tiers": {
         "small": [
           "arch",
@@ -459,7 +469,7 @@
       "act": "structures",
       "truth": "the smooth and the grown — designed and botanical form.",
       "count": 5,
-      "x_spread": -0.0595,
+      "x_spread": 0.5238,
       "tiers": {
         "small": [
           "aalto_vase",
@@ -479,7 +489,7 @@
       "act": "meta",
       "truth": "a primitive that carries a symbol.",
       "count": 8,
-      "x_spread": 0.1355,
+      "x_spread": 0.619,
       "tiers": {
         "small": [
           "grab_sphere_point_color_with_text",
@@ -504,7 +514,7 @@
       "act": "meta",
       "truth": "primitives combined: union, subtraction, the assembler.",
       "count": 5,
-      "x_spread": 0.1329,
+      "x_spread": 0.7142,
       "tiers": {
         "small": [
           "fontana_puncture"
@@ -527,7 +537,7 @@
       "act": "meta",
       "truth": "a primitive you grab, drag, snap or edit.",
       "count": 23,
-      "x_spread": 0.069,
+      "x_spread": 0.8096,
       "tiers": {
         "small": [
           "foldedpaper",
@@ -566,7 +576,7 @@
       "act": "meta",
       "truth": "primitive artifacts not yet sorted.",
       "count": 25,
-      "x_spread": 0.0525,
+      "x_spread": 0.9048,
       "tiers": {
         "small": [
           "achilles_tortoise",
@@ -601,490 +611,568 @@
         ],
         "applied": []
       }
+    },
+    {
+      "key": "· palette (unplaced)",
+      "order": 21,
+      "act": "Act IV",
+      "truth": "sequence artifacts available but not yet placed in a map",
+      "count": 16,
+      "x_spread": 1.0,
+      "tiers": {
+        "small": [
+          "CoordinateSystem3M",
+          "catalyst_foe",
+          "catalyst_vent",
+          "code_display",
+          "diamondtoruscollection",
+          "frame_counter_display",
+          "path_builder_foe",
+          "path_game_controller",
+          "path_watchdog",
+          "path_wedge"
+        ],
+        "medium": [
+          "mesh_grammar_extruded_spire",
+          "mesh_grammar_inset_pattern",
+          "mesh_grammar_seed",
+          "modulor_man_demo",
+          "wedge_skill_pickup"
+        ],
+        "large": [
+          "durer_scene"
+        ],
+        "applied": []
+      }
     }
   ],
   "concept_distance": [
     [
       0.0,
-      0.5798,
-      0.9202,
-      0.548,
-      0.7319,
-      0.5491,
-      0.5325,
-      0.5358,
-      0.7954,
-      0.9117,
-      0.9069,
-      0.8888,
-      0.7884,
-      0.8804,
-      0.9383,
-      0.6621,
-      0.8682,
-      0.3538,
-      0.788,
-      0.5225,
-      0.7969
+      0.0476,
+      0.0952,
+      0.1429,
+      0.1905,
+      0.2381,
+      0.2857,
+      0.3333,
+      0.381,
+      0.4286,
+      0.4762,
+      0.5238,
+      0.5714,
+      0.619,
+      0.6667,
+      0.7143,
+      0.7619,
+      0.8095,
+      0.8571,
+      0.9048,
+      0.9524,
+      1.0
     ],
     [
-      0.5798,
+      0.0476,
       0.0,
-      0.7145,
-      0.6835,
-      0.7781,
-      0.5037,
-      0.6304,
-      0.5222,
-      0.8087,
-      0.8667,
-      0.7965,
-      0.8058,
-      0.8253,
-      0.7855,
-      0.8497,
-      0.8275,
-      0.7914,
-      0.6477,
-      0.8058,
-      0.3575,
-      0.5303
+      0.0476,
+      0.0952,
+      0.1429,
+      0.1905,
+      0.2381,
+      0.2857,
+      0.3333,
+      0.381,
+      0.4286,
+      0.4762,
+      0.5238,
+      0.5714,
+      0.619,
+      0.6667,
+      0.7143,
+      0.7619,
+      0.8095,
+      0.8571,
+      0.9048,
+      0.9524
     ],
     [
-      0.9202,
-      0.7145,
+      0.0952,
+      0.0476,
       0.0,
-      0.9405,
-      0.8575,
-      0.8955,
-      0.8955,
-      0.8179,
-      0.8726,
-      0.8364,
-      0.8914,
-      0.9147,
-      0.949,
+      0.0476,
+      0.0952,
+      0.1429,
+      0.1905,
+      0.2381,
+      0.2857,
+      0.3333,
+      0.381,
+      0.4286,
+      0.4762,
+      0.5238,
+      0.5714,
+      0.619,
+      0.6667,
+      0.7143,
+      0.7619,
+      0.8095,
+      0.8571,
+      0.9048
+    ],
+    [
+      0.1429,
+      0.0952,
+      0.0476,
+      0.0,
+      0.0476,
+      0.0952,
+      0.1429,
+      0.1905,
+      0.2381,
+      0.2857,
+      0.3333,
+      0.381,
+      0.4286,
+      0.4762,
+      0.5238,
+      0.5714,
+      0.619,
+      0.6667,
+      0.7143,
+      0.7619,
+      0.8095,
+      0.8571
+    ],
+    [
+      0.1905,
+      0.1429,
+      0.0952,
+      0.0476,
+      0.0,
+      0.0476,
+      0.0952,
+      0.1429,
+      0.1905,
+      0.2381,
+      0.2857,
+      0.3333,
+      0.381,
+      0.4286,
+      0.4762,
+      0.5238,
+      0.5714,
+      0.619,
+      0.6667,
+      0.7143,
+      0.7619,
+      0.8095
+    ],
+    [
+      0.2381,
+      0.1905,
+      0.1429,
+      0.0952,
+      0.0476,
+      0.0,
+      0.0476,
+      0.0952,
+      0.1429,
+      0.1905,
+      0.2381,
+      0.2857,
+      0.3333,
+      0.381,
+      0.4286,
+      0.4762,
+      0.5238,
+      0.5714,
+      0.619,
+      0.6667,
+      0.7143,
+      0.7619
+    ],
+    [
+      0.2857,
+      0.2381,
+      0.1905,
+      0.1429,
+      0.0952,
+      0.0476,
+      0.0,
+      0.0476,
+      0.0952,
+      0.1429,
+      0.1905,
+      0.2381,
+      0.2857,
+      0.3333,
+      0.381,
+      0.4286,
+      0.4762,
+      0.5238,
+      0.5714,
+      0.619,
+      0.6667,
+      0.7143
+    ],
+    [
+      0.3333,
+      0.2857,
+      0.2381,
+      0.1905,
+      0.1429,
+      0.0952,
+      0.0476,
+      0.0,
+      0.0476,
+      0.0952,
+      0.1429,
+      0.1905,
+      0.2381,
+      0.2857,
+      0.3333,
+      0.381,
+      0.4286,
+      0.4762,
+      0.5238,
+      0.5714,
+      0.619,
+      0.6667
+    ],
+    [
+      0.381,
+      0.3333,
+      0.2857,
+      0.2381,
+      0.1905,
+      0.1429,
+      0.0952,
+      0.0476,
+      0.0,
+      0.0476,
+      0.0952,
+      0.1429,
+      0.1905,
+      0.2381,
+      0.2857,
+      0.3333,
+      0.381,
+      0.4286,
+      0.4762,
+      0.5238,
+      0.5714,
+      0.619
+    ],
+    [
+      0.4286,
+      0.381,
+      0.3333,
+      0.2857,
+      0.2381,
+      0.1905,
+      0.1429,
+      0.0952,
+      0.0476,
+      0.0,
+      0.0476,
+      0.0952,
+      0.1429,
+      0.1905,
+      0.2381,
+      0.2857,
+      0.3333,
+      0.381,
+      0.4286,
+      0.4762,
+      0.5238,
+      0.5714
+    ],
+    [
+      0.4762,
+      0.4286,
+      0.381,
+      0.3333,
+      0.2857,
+      0.2381,
+      0.1905,
+      0.1429,
+      0.0952,
+      0.0476,
+      0.0,
+      0.0476,
+      0.0952,
+      0.1429,
+      0.1905,
+      0.2381,
+      0.2857,
+      0.3333,
+      0.381,
+      0.4286,
+      0.4762,
+      0.5238
+    ],
+    [
+      0.5238,
+      0.4762,
+      0.4286,
+      0.381,
+      0.3333,
+      0.2857,
+      0.2381,
+      0.1905,
+      0.1429,
+      0.0952,
+      0.0476,
+      0.0,
+      0.0476,
+      0.0952,
+      0.1429,
+      0.1905,
+      0.2381,
+      0.2857,
+      0.3333,
+      0.381,
+      0.4286,
+      0.4762
+    ],
+    [
+      0.5714,
+      0.5238,
+      0.4762,
+      0.4286,
+      0.381,
+      0.3333,
+      0.2857,
+      0.2381,
+      0.1905,
+      0.1429,
+      0.0952,
+      0.0476,
+      0.0,
+      0.0476,
+      0.0952,
+      0.1429,
+      0.1905,
+      0.2381,
+      0.2857,
+      0.3333,
+      0.381,
+      0.4286
+    ],
+    [
+      0.619,
+      0.5714,
+      0.5238,
+      0.4762,
+      0.4286,
+      0.381,
+      0.3333,
+      0.2857,
+      0.2381,
+      0.1905,
+      0.1429,
+      0.0952,
+      0.0476,
+      0.0,
+      0.0476,
+      0.0952,
+      0.1429,
+      0.1905,
+      0.2381,
+      0.2857,
+      0.3333,
+      0.381
+    ],
+    [
+      0.6667,
+      0.619,
+      0.5714,
+      0.5238,
+      0.4762,
+      0.4286,
+      0.381,
+      0.3333,
+      0.2857,
+      0.2381,
+      0.1905,
+      0.1429,
+      0.0952,
+      0.0476,
+      0.0,
+      0.0476,
+      0.0952,
+      0.1429,
+      0.1905,
+      0.2381,
+      0.2857,
+      0.3333
+    ],
+    [
+      0.7143,
+      0.6667,
+      0.619,
+      0.5714,
+      0.5238,
+      0.4762,
+      0.4286,
+      0.381,
+      0.3333,
+      0.2857,
+      0.2381,
+      0.1905,
+      0.1429,
+      0.0952,
+      0.0476,
+      0.0,
+      0.0476,
+      0.0952,
+      0.1429,
+      0.1905,
+      0.2381,
+      0.2857
+    ],
+    [
+      0.7619,
+      0.7143,
+      0.6667,
+      0.619,
+      0.5714,
+      0.5238,
+      0.4762,
+      0.4286,
+      0.381,
+      0.3333,
+      0.2857,
+      0.2381,
+      0.1905,
+      0.1429,
+      0.0952,
+      0.0476,
+      0.0,
+      0.0476,
+      0.0952,
+      0.1429,
+      0.1905,
+      0.2381
+    ],
+    [
+      0.8095,
+      0.7619,
+      0.7143,
+      0.6667,
+      0.619,
+      0.5714,
+      0.5238,
+      0.4762,
+      0.4286,
+      0.381,
+      0.3333,
+      0.2857,
+      0.2381,
+      0.1905,
+      0.1429,
+      0.0952,
+      0.0476,
+      0.0,
+      0.0476,
+      0.0952,
+      0.1429,
+      0.1905
+    ],
+    [
+      0.8571,
+      0.8095,
+      0.7619,
+      0.7143,
+      0.6667,
+      0.619,
+      0.5714,
+      0.5238,
+      0.4762,
+      0.4286,
+      0.381,
+      0.3333,
+      0.2857,
+      0.2381,
+      0.1905,
+      0.1429,
+      0.0952,
+      0.0476,
+      0.0,
+      0.0476,
+      0.0952,
+      0.1429
+    ],
+    [
+      0.9048,
+      0.8571,
+      0.8095,
+      0.7619,
+      0.7143,
+      0.6667,
+      0.619,
+      0.5714,
+      0.5238,
+      0.4762,
+      0.4286,
+      0.381,
+      0.3333,
+      0.2857,
+      0.2381,
+      0.1905,
+      0.1429,
+      0.0952,
+      0.0476,
+      0.0,
+      0.0476,
+      0.0952
+    ],
+    [
+      0.9524,
+      0.9048,
+      0.8571,
+      0.8095,
+      0.7619,
+      0.7143,
+      0.6667,
+      0.619,
+      0.5714,
+      0.5238,
+      0.4762,
+      0.4286,
+      0.381,
+      0.3333,
+      0.2857,
+      0.2381,
+      0.1905,
+      0.1429,
+      0.0952,
+      0.0476,
+      0.0,
+      0.0476
+    ],
+    [
       1.0,
-      0.9538,
-      0.9538,
-      0.9405,
-      0.9797,
-      1.0,
-      0.7326,
-      0.9428
-    ],
-    [
-      0.548,
-      0.6835,
-      0.9405,
-      0.0,
-      0.1784,
-      0.4498,
-      0.5403,
-      0.8383,
-      0.8593,
-      0.9409,
-      0.9095,
-      0.723,
-      0.6595,
-      0.5325,
-      0.894,
-      0.9055,
-      0.8733,
-      0.7197,
-      0.8039,
-      0.4597,
-      0.6713
-    ],
-    [
-      0.7319,
-      0.7781,
-      0.8575,
-      0.1784,
-      0.0,
-      0.6946,
-      0.7097,
-      0.7131,
-      0.8283,
-      0.9021,
-      0.8818,
-      0.5705,
-      0.3582,
-      0.6374,
-      0.904,
-      0.9077,
-      0.8338,
-      0.8216,
-      0.8146,
-      0.3194,
-      0.8275
-    ],
-    [
-      0.5491,
-      0.5037,
-      0.8955,
-      0.4498,
-      0.6946,
-      0.0,
-      0.4889,
-      0.7459,
-      0.613,
-      0.9036,
-      0.7338,
-      0.7958,
-      0.8453,
-      0.7626,
-      0.1939,
-      0.7109,
-      0.925,
-      0.7581,
-      0.8512,
-      0.5535,
-      0.6329
-    ],
-    [
-      0.5325,
-      0.6304,
-      0.8955,
-      0.5403,
-      0.7097,
-      0.4889,
-      0.0,
-      0.699,
-      0.8117,
-      0.9675,
-      0.8863,
-      0.6699,
-      0.7286,
-      0.4236,
-      0.8246,
-      0.8567,
-      0.9014,
-      0.5938,
-      0.7903,
-      0.4409,
-      0.6614
-    ],
-    [
-      0.5358,
-      0.5222,
-      0.8179,
-      0.8383,
-      0.7131,
-      0.7459,
-      0.699,
-      0.0,
-      0.0288,
-      0.3504,
-      0.1795,
-      0.7511,
-      0.7533,
-      0.7818,
-      0.9682,
-      0.9165,
-      0.8139,
-      0.4047,
-      0.6038,
-      0.6148,
-      0.63
-    ],
-    [
-      0.7954,
-      0.8087,
-      0.8726,
-      0.8593,
-      0.8283,
-      0.613,
-      0.8117,
-      0.0288,
-      0.0,
-      0.0775,
-      0.0,
-      0.9649,
-      0.9357,
-      0.9535,
-      0.9812,
-      0.8863,
-      0.8287,
-      0.8818,
-      0.8305,
-      0.6532,
-      0.9029
-    ],
-    [
-      0.9117,
-      0.8667,
-      0.8364,
-      0.9409,
-      0.9021,
-      0.9036,
-      0.9675,
-      0.3504,
-      0.0775,
-      0.0,
-      0.0229,
-      0.8996,
-      0.9738,
-      0.8512,
-      0.9549,
-      0.9649,
-      0.9029,
-      0.9915,
-      0.8497,
-      0.798,
-      0.9439
-    ],
-    [
-      0.9069,
-      0.7965,
-      0.8914,
-      0.9095,
-      0.8818,
-      0.7338,
-      0.8863,
-      0.1795,
-      0.0,
-      0.0229,
-      0.0,
-      0.7766,
-      0.7806,
-      0.8327,
-      0.9627,
-      0.9044,
-      0.8541,
-      0.993,
-      0.5853,
-      0.7544,
-      0.8061
-    ],
-    [
-      0.8888,
-      0.8058,
-      0.9147,
-      0.723,
-      0.5705,
-      0.7958,
-      0.6699,
-      0.7511,
-      0.9649,
-      0.8996,
-      0.7766,
-      0.0,
-      0.7518,
-      0.6658,
-      1.0,
-      0.9863,
-      0.7363,
-      0.866,
-      0.7304,
-      0.2651,
-      0.8239
-    ],
-    [
-      0.7884,
-      0.8253,
-      0.949,
-      0.6595,
-      0.3582,
-      0.8453,
-      0.7286,
-      0.7533,
-      0.9357,
-      0.9738,
-      0.7806,
-      0.7518,
-      0.0,
-      0.9173,
-      0.9383,
-      0.8305,
-      0.7075,
-      0.9158,
-      0.8131,
-      0.5118,
-      0.7762
-    ],
-    [
-      0.8804,
-      0.7855,
-      1.0,
-      0.5325,
-      0.6374,
-      0.7626,
-      0.4236,
-      0.7818,
-      0.9535,
-      0.8512,
-      0.8327,
-      0.6658,
-      0.9173,
-      0.0,
-      0.9572,
-      0.9435,
-      1.0,
-      0.8442,
-      0.8671,
-      0.6636,
-      0.8903
-    ],
-    [
-      0.9383,
-      0.8497,
-      0.9538,
-      0.894,
-      0.904,
-      0.1939,
-      0.8246,
-      0.9682,
-      0.9812,
-      0.9549,
-      0.9627,
-      1.0,
-      0.9383,
-      0.9572,
-      0.0,
-      0.9723,
-      0.9686,
-      0.9878,
-      0.9188,
-      0.815,
-      0.8826
-    ],
-    [
-      0.6621,
-      0.8275,
-      0.9538,
-      0.9055,
-      0.9077,
-      0.7109,
-      0.8567,
-      0.9165,
-      0.8863,
-      0.9649,
-      0.9044,
-      0.9863,
-      0.8305,
-      0.9435,
-      0.9723,
-      0.0,
-      0.9756,
-      0.8719,
-      0.8227,
-      0.8035,
-      0.89
-    ],
-    [
-      0.8682,
-      0.7914,
-      0.9405,
-      0.8733,
-      0.8338,
-      0.925,
-      0.9014,
-      0.8139,
-      0.8287,
-      0.9029,
-      0.8541,
-      0.7363,
-      0.7075,
-      1.0,
-      0.9686,
-      0.9756,
-      0.0,
-      0.9354,
-      0.9383,
-      0.822,
-      0.8866
-    ],
-    [
-      0.3538,
-      0.6477,
-      0.9797,
-      0.7197,
-      0.8216,
-      0.7581,
-      0.5938,
-      0.4047,
-      0.8818,
-      0.9915,
-      0.993,
-      0.866,
-      0.9158,
-      0.8442,
-      0.9878,
-      0.8719,
-      0.9354,
-      0.0,
-      0.7482,
-      0.6739,
-      0.7973
-    ],
-    [
-      0.788,
-      0.8058,
-      1.0,
-      0.8039,
-      0.8146,
-      0.8512,
-      0.7903,
-      0.6038,
-      0.8305,
-      0.8497,
-      0.5853,
-      0.7304,
-      0.8131,
-      0.8671,
-      0.9188,
-      0.8227,
-      0.9383,
-      0.7482,
-      0.0,
-      0.6045,
-      0.9191
-    ],
-    [
-      0.5225,
-      0.3575,
-      0.7326,
-      0.4597,
-      0.3194,
-      0.5535,
-      0.4409,
-      0.6148,
-      0.6532,
-      0.798,
-      0.7544,
-      0.2651,
-      0.5118,
-      0.6636,
-      0.815,
-      0.8035,
-      0.822,
-      0.6739,
-      0.6045,
-      0.0,
-      0.6865
-    ],
-    [
-      0.7969,
-      0.5303,
-      0.9428,
-      0.6713,
-      0.8275,
-      0.6329,
-      0.6614,
-      0.63,
-      0.9029,
-      0.9439,
-      0.8061,
-      0.8239,
-      0.7762,
-      0.8903,
-      0.8826,
-      0.89,
-      0.8866,
-      0.7973,
-      0.9191,
-      0.6865,
+      0.9524,
+      0.9048,
+      0.8571,
+      0.8095,
+      0.7619,
+      0.7143,
+      0.6667,
+      0.619,
+      0.5714,
+      0.5238,
+      0.4762,
+      0.4286,
+      0.381,
+      0.3333,
+      0.2857,
+      0.2381,
+      0.1905,
+      0.1429,
+      0.0952,
+      0.0476,
       0.0
     ]
   ],
@@ -1099,7 +1187,8 @@
       "size": 5,
       "act": "0D · point",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "draw_dot",
@@ -1111,7 +1200,8 @@
       "size": 5,
       "act": "0D · point",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "draw_dot_time_domain",
@@ -1123,7 +1213,8 @@
       "size": 5,
       "act": "0D · point",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "grab_sphere_point",
@@ -1135,7 +1226,8 @@
       "size": 5,
       "act": "0D · point",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "grab_sphere_point_snap",
@@ -1147,7 +1239,8 @@
       "size": 10,
       "act": "0D · point",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "grab_sphere_point_with_color",
@@ -1159,7 +1252,8 @@
       "size": 5,
       "act": "0D · point",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "hand_telemetry_diptych",
@@ -1171,7 +1265,8 @@
       "size": 5,
       "act": "0D · point",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "hand_telemetry_display",
@@ -1183,7 +1278,8 @@
       "size": 5,
       "act": "0D · point",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "interactive_point_origin",
@@ -1195,7 +1291,8 @@
       "size": 5,
       "act": "0D · point",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "interactive_point_origin_force",
@@ -1207,7 +1304,8 @@
       "size": 5,
       "act": "0D · point",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "klee_walking_point",
@@ -1219,7 +1317,8 @@
       "size": 5,
       "act": "0D · point",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "living_paper",
@@ -1231,7 +1330,8 @@
       "size": 5,
       "act": "0D · point",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "origin",
@@ -1243,7 +1343,8 @@
       "size": 8,
       "act": "0D · point",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "perspective_lines",
@@ -1255,7 +1356,8 @@
       "size": 8,
       "act": "0D · point",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "pixel_thumb",
@@ -1267,7 +1369,8 @@
       "size": 5,
       "act": "0D · point",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "redline",
@@ -1279,7 +1382,8 @@
       "size": 5,
       "act": "0D · point",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "sliding_door",
@@ -1291,7 +1395,8 @@
       "size": 5,
       "act": "0D · point",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "star_primitive",
@@ -1303,7 +1408,8 @@
       "size": 5,
       "act": "0D · point",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "static_point",
@@ -1315,7 +1421,8 @@
       "size": 5,
       "act": "0D · point",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "you_are_here",
@@ -1327,7 +1434,8 @@
       "size": 5,
       "act": "0D · point",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "zigzagprofile",
@@ -1339,7 +1447,8 @@
       "size": 5,
       "act": "0D · point",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "coordinate_lines",
@@ -1351,7 +1460,8 @@
       "size": 5,
       "act": "1D · line",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "cross_lines",
@@ -1363,7 +1473,8 @@
       "size": 5,
       "act": "1D · line",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "grab_line",
@@ -1375,7 +1486,8 @@
       "size": 5,
       "act": "1D · line",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "grab_line_drawer",
@@ -1387,7 +1499,8 @@
       "size": 5,
       "act": "1D · line",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "grab_line_music",
@@ -1399,7 +1512,8 @@
       "size": 5,
       "act": "1D · line",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "grabbable_line",
@@ -1411,7 +1525,8 @@
       "size": 5,
       "act": "1D · line",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "grid_lines",
@@ -1423,7 +1538,8 @@
       "size": 14,
       "act": "1D · line",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "horizon_plumb_lines",
@@ -1435,7 +1551,8 @@
       "size": 5,
       "act": "1D · line",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "knowledge_prism",
@@ -1447,7 +1564,8 @@
       "size": 5,
       "act": "1D · line",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "line_collection",
@@ -1459,7 +1577,8 @@
       "size": 5,
       "act": "1D · line",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "line_demo",
@@ -1471,7 +1590,8 @@
       "size": 5,
       "act": "1D · line",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "one_meter_line",
@@ -1483,7 +1603,8 @@
       "size": 5,
       "act": "1D · line",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "parallel_lines",
@@ -1495,7 +1616,8 @@
       "size": 8,
       "act": "1D · line",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "plus_lines",
@@ -1507,7 +1629,8 @@
       "size": 5,
       "act": "1D · line",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "rockfactory_gravity",
@@ -1519,7 +1642,8 @@
       "size": 5,
       "act": "1D · line",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "scale_lines",
@@ -1531,7 +1655,8 @@
       "size": 14,
       "act": "1D · line",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "two_points_line",
@@ -1543,7 +1668,21 @@
       "size": 5,
       "act": "1D · line",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
+    },
+    {
+      "lookup": "line_builder_3d",
+      "name": "Line Builder 3D",
+      "concept": "Line / edge",
+      "concept_order": 1,
+      "tier": "medium",
+      "fp": 3,
+      "size": 8,
+      "act": "1D · line",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
     },
     {
       "lookup": "arrow",
@@ -1555,7 +1694,8 @@
       "size": 8,
       "act": "1D · line",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "laser_sword",
@@ -1567,7 +1707,8 @@
       "size": 10,
       "act": "1D · line",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "draw_triangle_faces",
@@ -1579,7 +1720,8 @@
       "size": 5,
       "act": "2D · surface",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "folded_strip",
@@ -1591,7 +1733,8 @@
       "size": 5,
       "act": "2D · surface",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "geometric_crystal",
@@ -1603,7 +1746,8 @@
       "size": 5,
       "act": "2D · surface",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "interactivetriangle",
@@ -1615,7 +1759,8 @@
       "size": 8,
       "act": "2D · surface",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "lefttriangle",
@@ -1627,7 +1772,8 @@
       "size": 5,
       "act": "2D · surface",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "parametric_surface",
@@ -1639,7 +1785,8 @@
       "size": 14,
       "act": "2D · surface",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "parasol_triangle",
@@ -1651,7 +1798,8 @@
       "size": 8,
       "act": "2D · surface",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "pink_triangle",
@@ -1663,7 +1811,8 @@
       "size": 5,
       "act": "2D · surface",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "pythagorean_proof",
@@ -1675,7 +1824,8 @@
       "size": 8,
       "act": "2D · surface",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "pythagorean_triangle",
@@ -1687,7 +1837,8 @@
       "size": 14,
       "act": "2D · surface",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "pythagorean_triangle_angles",
@@ -1699,7 +1850,8 @@
       "size": 14,
       "act": "2D · surface",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "quest_controller",
@@ -1711,7 +1863,8 @@
       "size": 5,
       "act": "2D · surface",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "right_triangle_lines",
@@ -1723,7 +1876,8 @@
       "size": 5,
       "act": "2D · surface",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "righttriangle",
@@ -1735,7 +1889,8 @@
       "size": 5,
       "act": "2D · surface",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "spatial_compass",
@@ -1747,7 +1902,8 @@
       "size": 5,
       "act": "2D · surface",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "tensegrity_triangle",
@@ -1759,7 +1915,8 @@
       "size": 5,
       "act": "2D · surface",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "three_points_triangle",
@@ -1771,7 +1928,8 @@
       "size": 5,
       "act": "2D · surface",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "triangle",
@@ -1783,7 +1941,8 @@
       "size": 8,
       "act": "2D · surface",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "triangle_chalkboard",
@@ -1795,7 +1954,8 @@
       "size": 5,
       "act": "2D · surface",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "triangle_whiteboard",
@@ -1807,7 +1967,8 @@
       "size": 5,
       "act": "2D · surface",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "triangleprofiles",
@@ -1819,7 +1980,8 @@
       "size": 5,
       "act": "2D · surface",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "triangularblock",
@@ -1831,7 +1993,8 @@
       "size": 5,
       "act": "2D · surface",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "trihedron",
@@ -1843,7 +2006,8 @@
       "size": 5,
       "act": "2D · surface",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "crystal",
@@ -1855,7 +2019,8 @@
       "size": 8,
       "act": "2D · surface",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "glass_planes_2_5d",
@@ -1867,7 +2032,8 @@
       "size": 5,
       "act": "2D · surface",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "glass_planes_empty",
@@ -1879,7 +2045,8 @@
       "size": 5,
       "act": "2D · surface",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "grab_trihedron",
@@ -1891,7 +2058,8 @@
       "size": 5,
       "act": "2D · surface",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "plane",
@@ -1903,7 +2071,8 @@
       "size": 5,
       "act": "2D · surface",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "quad",
@@ -1915,7 +2084,8 @@
       "size": 5,
       "act": "2D · surface",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "quad_chalkboard",
@@ -1927,7 +2097,8 @@
       "size": 5,
       "act": "2D · surface",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "quad_line_puzzle",
@@ -1939,7 +2110,8 @@
       "size": 10,
       "act": "2D · surface",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "square_pyramid",
@@ -1951,7 +2123,8 @@
       "size": 5,
       "act": "2D · surface",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "triangular_cupola",
@@ -1963,7 +2136,8 @@
       "size": 5,
       "act": "2D · surface",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "array_rotate",
@@ -1975,7 +2149,8 @@
       "size": 5,
       "act": "2D · surface",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "array_scale",
@@ -1987,7 +2162,8 @@
       "size": 5,
       "act": "2D · surface",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "array_translate",
@@ -1999,7 +2175,8 @@
       "size": 5,
       "act": "2D · surface",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "array_visualizer",
@@ -2011,7 +2188,8 @@
       "size": 5,
       "act": "2D · surface",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "chalkboard",
@@ -2023,7 +2201,8 @@
       "size": 5,
       "act": "2D · surface",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "circle_chalkboard",
@@ -2035,7 +2214,8 @@
       "size": 5,
       "act": "2D · surface",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "cube_chalkboard",
@@ -2047,7 +2227,8 @@
       "size": 5,
       "act": "2D · surface",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "dgrid",
@@ -2059,7 +2240,8 @@
       "size": 5,
       "act": "2D · surface",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "diamond",
@@ -2071,7 +2253,8 @@
       "size": 5,
       "act": "2D · surface",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "elevator_platform",
@@ -2083,7 +2266,8 @@
       "size": 5,
       "act": "2D · surface",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "endlessness_chalkboard",
@@ -2095,7 +2279,8 @@
       "size": 5,
       "act": "2D · surface",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "grid_chalkboard",
@@ -2107,7 +2292,8 @@
       "size": 5,
       "act": "2D · surface",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "ignorance_chalkboard",
@@ -2119,7 +2305,8 @@
       "size": 5,
       "act": "2D · surface",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "line_chalkboard",
@@ -2131,7 +2318,8 @@
       "size": 5,
       "act": "2D · surface",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "melencolia_chalkboard",
@@ -2143,7 +2331,8 @@
       "size": 5,
       "act": "2D · surface",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "mesh_chalkboard",
@@ -2155,7 +2344,8 @@
       "size": 5,
       "act": "2D · surface",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "network_chalkboard",
@@ -2167,7 +2357,8 @@
       "size": 5,
       "act": "2D · surface",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "player_trace",
@@ -2179,7 +2370,8 @@
       "size": 5,
       "act": "2D · surface",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "point_chalkboard",
@@ -2191,7 +2383,8 @@
       "size": 5,
       "act": "2D · surface",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "polyhedra_chalkboard",
@@ -2203,7 +2396,8 @@
       "size": 5,
       "act": "2D · surface",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "qfep_chalkboard",
@@ -2215,7 +2409,8 @@
       "size": 5,
       "act": "2D · surface",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "rockfactory",
@@ -2227,7 +2422,8 @@
       "size": 5,
       "act": "2D · surface",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "thrownness_chalkboard",
@@ -2239,7 +2435,8 @@
       "size": 5,
       "act": "2D · surface",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "trace_chalkboard",
@@ -2251,7 +2448,8 @@
       "size": 5,
       "act": "2D · surface",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "transform_staircase_fibonacci",
@@ -2263,7 +2461,8 @@
       "size": 5,
       "act": "2D · surface",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "transform_staircase_mobius",
@@ -2275,7 +2474,8 @@
       "size": 5,
       "act": "2D · surface",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "transform_staircase_showcase",
@@ -2287,7 +2487,47 @@
       "size": 14,
       "act": "2D · surface",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
+    },
+    {
+      "lookup": "grid_brush_demo",
+      "name": "Grid Brush Demo",
+      "concept": "Grid / array",
+      "concept_order": 5,
+      "tier": "large",
+      "fp": 256,
+      "size": 14,
+      "act": "2D · surface",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "grid_ops_demo",
+      "name": "Grid Ops Demo",
+      "concept": "Grid / array",
+      "concept_order": 5,
+      "tier": "large",
+      "fp": 720,
+      "size": 14,
+      "act": "2D · surface",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "modifier_grid_demo",
+      "name": "Modifier Grid Demo",
+      "concept": "Grid / array",
+      "concept_order": 5,
+      "tier": "large",
+      "fp": 81,
+      "size": 14,
+      "act": "2D · surface",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
     },
     {
       "lookup": "animated_cube",
@@ -2299,7 +2539,8 @@
       "size": 5,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "animatedcubebuilder",
@@ -2311,7 +2552,8 @@
       "size": 10,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "combo_cube_visual",
@@ -2323,7 +2565,8 @@
       "size": 5,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "cube",
@@ -2335,7 +2578,8 @@
       "size": 5,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "cube_lines",
@@ -2347,7 +2591,8 @@
       "size": 8,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "cube_projectile_spawner",
@@ -2359,7 +2604,8 @@
       "size": 14,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "cube_scene",
@@ -2371,7 +2617,8 @@
       "size": 5,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "cube_scene_drag_points",
@@ -2383,7 +2630,8 @@
       "size": 10,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "cube_with_shader",
@@ -2395,7 +2643,8 @@
       "size": 5,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "falling_cube",
@@ -2407,7 +2656,8 @@
       "size": 5,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "folding_cube",
@@ -2419,7 +2669,8 @@
       "size": 5,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "folding_cube_interactive",
@@ -2431,7 +2682,8 @@
       "size": 5,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "grab_cube",
@@ -2443,7 +2695,8 @@
       "size": 5,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "grab_cube_show",
@@ -2455,7 +2708,8 @@
       "size": 5,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "halocube",
@@ -2467,7 +2721,8 @@
       "size": 5,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "menu",
@@ -2479,7 +2734,8 @@
       "size": 5,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "oscillation_cube",
@@ -2491,7 +2747,8 @@
       "size": 5,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "pickup_cube_combo",
@@ -2503,7 +2760,8 @@
       "size": 5,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "pickup_cube_rotating",
@@ -2515,7 +2773,8 @@
       "size": 5,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "pickup_cube_scaling",
@@ -2527,7 +2786,8 @@
       "size": 5,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "pickup_cube_static",
@@ -2539,7 +2799,8 @@
       "size": 5,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "pickup_cube_transforming",
@@ -2551,7 +2812,8 @@
       "size": 5,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "rectcube",
@@ -2563,7 +2825,8 @@
       "size": 5,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "rotating_cube",
@@ -2575,7 +2838,8 @@
       "size": 5,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "small_subdivision_cube",
@@ -2587,7 +2851,8 @@
       "size": 5,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "transformation_cube",
@@ -2599,7 +2864,8 @@
       "size": 5,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "translation_demo",
@@ -2611,7 +2877,8 @@
       "size": 5,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "unitcube",
@@ -2623,7 +2890,8 @@
       "size": 5,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "wood_cube",
@@ -2635,7 +2903,34 @@
       "size": 5,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
+    },
+    {
+      "lookup": "path_cube",
+      "name": "Path Cube (wall)",
+      "concept": "Cube / box",
+      "concept_order": 6,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "3D · solids",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "polyhedron_nets_cube",
+      "name": "polyhedron_nets_cube",
+      "concept": "Cube / box",
+      "concept_order": 6,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "3D · solids",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
     },
     {
       "lookup": "combine_sphere",
@@ -2647,7 +2942,8 @@
       "size": 8,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "dome",
@@ -2659,7 +2955,8 @@
       "size": 14,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "floating_sphere_field",
@@ -2671,7 +2968,8 @@
       "size": 14,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "grab_line_pusher",
@@ -2683,7 +2981,8 @@
       "size": 5,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "light_sphere",
@@ -2695,7 +2994,8 @@
       "size": 5,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "line",
@@ -2707,7 +3007,8 @@
       "size": 5,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "point",
@@ -2719,7 +3020,8 @@
       "size": 5,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "probability_sphere",
@@ -2731,7 +3033,8 @@
       "size": 5,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "proceduralrock",
@@ -2743,7 +3046,8 @@
       "size": 5,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "simple_rock",
@@ -2755,7 +3059,8 @@
       "size": 5,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "sphere",
@@ -2767,7 +3072,8 @@
       "size": 5,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "sphere_high",
@@ -2779,7 +3085,8 @@
       "size": 5,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "sphere_low",
@@ -2791,7 +3098,8 @@
       "size": 5,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "sphere_mid",
@@ -2803,7 +3111,47 @@
       "size": 5,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
+    },
+    {
+      "lookup": "dark_sphere",
+      "name": "Dark Sphere",
+      "concept": "Sphere / ball",
+      "concept_order": 7,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "3D · solids",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "laser_exploding_sphere",
+      "name": "laser_exploding_sphere",
+      "concept": "Sphere / ball",
+      "concept_order": 7,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "3D · solids",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "mesh_grammar_subdivided",
+      "name": "MeshGrammar — Subdivided Sphere",
+      "concept": "Sphere / ball",
+      "concept_order": 7,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "3D · solids",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
     },
     {
       "lookup": "PipeLayout",
@@ -2815,7 +3163,8 @@
       "size": 14,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "cylinder",
@@ -2827,7 +3176,8 @@
       "size": 5,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "cylinder_low",
@@ -2839,7 +3189,8 @@
       "size": 5,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "cylinder_mid",
@@ -2851,7 +3202,8 @@
       "size": 5,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "cylinder_radials_rings",
@@ -2863,7 +3215,8 @@
       "size": 5,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "queer_cylinder_target",
@@ -2875,7 +3228,8 @@
       "size": 5,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "capsule",
@@ -2887,7 +3241,8 @@
       "size": 8,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "capsule_radials_rings",
@@ -2899,7 +3254,8 @@
       "size": 5,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "capsules",
@@ -2911,7 +3267,8 @@
       "size": 5,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "combine_capsule",
@@ -2923,7 +3280,8 @@
       "size": 8,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "combine_torus",
@@ -2935,7 +3293,8 @@
       "size": 8,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "hollowrock",
@@ -2947,7 +3306,8 @@
       "size": 5,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "noisetorus_ex_1",
@@ -2959,7 +3319,8 @@
       "size": 5,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "torus",
@@ -2971,7 +3332,8 @@
       "size": 5,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "torus_low",
@@ -2983,7 +3345,8 @@
       "size": 5,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "torus_radials_rings",
@@ -2995,7 +3358,8 @@
       "size": 5,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "diamonds",
@@ -3007,7 +3371,8 @@
       "size": 5,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "dodecahedron",
@@ -3019,7 +3384,8 @@
       "size": 5,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "grab_dodecahedron",
@@ -3031,7 +3397,8 @@
       "size": 5,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "grab_icosahedron",
@@ -3043,7 +3410,8 @@
       "size": 5,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "icosahedron",
@@ -3055,7 +3423,8 @@
       "size": 5,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "octahedron",
@@ -3067,7 +3436,8 @@
       "size": 5,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "platonic_demo",
@@ -3079,7 +3449,8 @@
       "size": 14,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "platonic_grabbables",
@@ -3091,7 +3462,8 @@
       "size": 14,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "tetrahedron",
@@ -3103,7 +3475,8 @@
       "size": 5,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "truncatedtetrahedron",
@@ -3115,7 +3488,8 @@
       "size": 5,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "bipyramid",
@@ -3127,7 +3501,8 @@
       "size": 5,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "hole_with_cones",
@@ -3139,7 +3514,8 @@
       "size": 5,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "pyramid",
@@ -3151,7 +3527,8 @@
       "size": 5,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "pyramid_edit",
@@ -3163,7 +3540,8 @@
       "size": 10,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "pyramidlong",
@@ -3175,7 +3553,8 @@
       "size": 5,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "rock_primitive",
@@ -3187,7 +3566,8 @@
       "size": 5,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "steppedpyramid",
@@ -3199,7 +3579,8 @@
       "size": 5,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "trafficcone",
@@ -3211,7 +3592,21 @@
       "size": 5,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
+    },
+    {
+      "lookup": "path_pyramid",
+      "name": "Path Pyramid (mound)",
+      "concept": "Cone / pyramid",
+      "concept_order": 12,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "3D · solids",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
     },
     {
       "lookup": "prism",
@@ -3223,7 +3618,8 @@
       "size": 5,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "prism_block",
@@ -3235,7 +3631,8 @@
       "size": 5,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "prismblock",
@@ -3247,7 +3644,8 @@
       "size": 5,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "transform_staircase_dna",
@@ -3259,7 +3657,8 @@
       "size": 5,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "transform_staircase_spiral",
@@ -3271,7 +3670,8 @@
       "size": 5,
       "act": "3D · solids",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "arch",
@@ -3283,7 +3683,8 @@
       "size": 5,
       "act": "structures",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "bigframe",
@@ -3295,7 +3696,8 @@
       "size": 14,
       "act": "structures",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "horizon_line",
@@ -3307,7 +3709,8 @@
       "size": 5,
       "act": "structures",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "mystic_writing_pad",
@@ -3319,7 +3722,8 @@
       "size": 5,
       "act": "structures",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "portal_frame",
@@ -3331,7 +3735,8 @@
       "size": 5,
       "act": "structures",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "aalto_vase",
@@ -3343,7 +3748,8 @@
       "size": 5,
       "act": "structures",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "alessi_tree",
@@ -3355,7 +3761,8 @@
       "size": 5,
       "act": "structures",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "bucket_of_tulips",
@@ -3367,7 +3774,8 @@
       "size": 5,
       "act": "structures",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "grab_aalto_vase",
@@ -3379,7 +3787,8 @@
       "size": 5,
       "act": "structures",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "grab_alessi_tree",
@@ -3391,7 +3800,8 @@
       "size": 5,
       "act": "structures",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "code_evolution_screen",
@@ -3403,7 +3813,8 @@
       "size": 10,
       "act": "meta",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "coordinate_axes_xy",
@@ -3415,7 +3826,8 @@
       "size": 8,
       "act": "meta",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "grab_sphere_point_color_with_text",
@@ -3427,7 +3839,8 @@
       "size": 5,
       "act": "meta",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "grab_sphere_point_with_text",
@@ -3439,7 +3852,8 @@
       "size": 5,
       "act": "meta",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "level_entrance",
@@ -3451,7 +3865,8 @@
       "size": 8,
       "act": "meta",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "pixel_heart",
@@ -3463,7 +3878,8 @@
       "size": 5,
       "act": "meta",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "point_collection",
@@ -3475,7 +3891,8 @@
       "size": 5,
       "act": "meta",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "wall_placard",
@@ -3487,7 +3904,8 @@
       "size": 5,
       "act": "meta",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "SDFDrawTool",
@@ -3499,7 +3917,8 @@
       "size": 10,
       "act": "meta",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "combine_portals",
@@ -3511,7 +3930,8 @@
       "size": 14,
       "act": "meta",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "combine_primitives",
@@ -3523,7 +3943,8 @@
       "size": 8,
       "act": "meta",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "fontana_puncture",
@@ -3535,7 +3956,8 @@
       "size": 5,
       "act": "meta",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "primitive_assembler",
@@ -3547,7 +3969,8 @@
       "size": 14,
       "act": "meta",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "cross_line_puzzle",
@@ -3559,7 +3982,8 @@
       "size": 10,
       "act": "meta",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "editable_bezier",
@@ -3571,7 +3995,8 @@
       "size": 10,
       "act": "meta",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "editable_catmull_rom",
@@ -3583,7 +4008,8 @@
       "size": 10,
       "act": "meta",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "editable_curve",
@@ -3595,7 +4021,8 @@
       "size": 10,
       "act": "meta",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "foldedpaper",
@@ -3607,7 +4034,8 @@
       "size": 5,
       "act": "meta",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "grab_octahedron",
@@ -3619,7 +4047,8 @@
       "size": 5,
       "act": "meta",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "grab_tetrahedron",
@@ -3631,7 +4060,8 @@
       "size": 5,
       "act": "meta",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "laser_measure",
@@ -3643,7 +4073,8 @@
       "size": 5,
       "act": "meta",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "mesh_builder_demo",
@@ -3655,7 +4086,8 @@
       "size": 10,
       "act": "meta",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "parallel_line_puzzle",
@@ -3667,7 +4099,8 @@
       "size": 10,
       "act": "meta",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "plus_line_puzzle",
@@ -3679,7 +4112,8 @@
       "size": 10,
       "act": "meta",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "primitive_combo_puzzle",
@@ -3691,7 +4125,8 @@
       "size": 10,
       "act": "meta",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "reality_modifier",
@@ -3703,7 +4138,8 @@
       "size": 5,
       "act": "meta",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "rotation_match_puzzle",
@@ -3715,7 +4151,8 @@
       "size": 10,
       "act": "meta",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "snap_demo",
@@ -3727,7 +4164,8 @@
       "size": 10,
       "act": "meta",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "snap_octahedron_puzzle",
@@ -3739,7 +4177,8 @@
       "size": 10,
       "act": "meta",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "snap_pyramid_puzzle",
@@ -3751,7 +4190,8 @@
       "size": 10,
       "act": "meta",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "snap_tetrahedron_puzzle",
@@ -3763,7 +4203,8 @@
       "size": 10,
       "act": "meta",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "snap_triangle_puzzle",
@@ -3775,7 +4216,8 @@
       "size": 10,
       "act": "meta",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "snap_wedge_puzzle",
@@ -3787,7 +4229,8 @@
       "size": 10,
       "act": "meta",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "tetrahedron_edit",
@@ -3799,7 +4242,8 @@
       "size": 10,
       "act": "meta",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "triangle_line_puzzle",
@@ -3811,7 +4255,8 @@
       "size": 10,
       "act": "meta",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "xyz_slider_plate",
@@ -3823,7 +4268,8 @@
       "size": 10,
       "act": "meta",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "achilles_tortoise",
@@ -3835,7 +4281,8 @@
       "size": 5,
       "act": "meta",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "cavetest",
@@ -3847,7 +4294,8 @@
       "size": 14,
       "act": "meta",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "chaos_attractor",
@@ -3859,7 +4307,8 @@
       "size": 5,
       "act": "meta",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "concept_synthesizer",
@@ -3871,7 +4320,8 @@
       "size": 5,
       "act": "meta",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "crystalcluster",
@@ -3883,7 +4333,8 @@
       "size": 5,
       "act": "meta",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "dimension_lens",
@@ -3895,7 +4346,8 @@
       "size": 5,
       "act": "meta",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "doublestick",
@@ -3907,7 +4359,8 @@
       "size": 8,
       "act": "meta",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "dynamic_rock",
@@ -3919,7 +4372,8 @@
       "size": 5,
       "act": "meta",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "folding_past",
@@ -3931,7 +4385,8 @@
       "size": 5,
       "act": "meta",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "grab_long_stick",
@@ -3943,7 +4398,8 @@
       "size": 8,
       "act": "meta",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "grab_rainbow_stick",
@@ -3955,7 +4411,8 @@
       "size": 8,
       "act": "meta",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "kochsnowflake",
@@ -3967,7 +4424,8 @@
       "size": 5,
       "act": "meta",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "lightrod",
@@ -3979,7 +4437,8 @@
       "size": 5,
       "act": "meta",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "lshape",
@@ -3991,7 +4450,8 @@
       "size": 5,
       "act": "meta",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "mengersponge",
@@ -4003,7 +4463,8 @@
       "size": 5,
       "act": "meta",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "modernchair",
@@ -4015,7 +4476,8 @@
       "size": 5,
       "act": "meta",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "modernpolysolid",
@@ -4027,7 +4489,8 @@
       "size": 5,
       "act": "meta",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "plus",
@@ -4039,7 +4502,8 @@
       "size": 5,
       "act": "meta",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "profile_chair",
@@ -4051,7 +4515,8 @@
       "size": 5,
       "act": "meta",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "quantum_dice",
@@ -4063,7 +4528,8 @@
       "size": 5,
       "act": "meta",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "random_object_spawner",
@@ -4075,7 +4541,8 @@
       "size": 5,
       "act": "meta",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "rock_scanner",
@@ -4087,7 +4554,8 @@
       "size": 14,
       "act": "meta",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "rock_spawner",
@@ -4099,7 +4567,8 @@
       "size": 5,
       "act": "meta",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "roughrock",
@@ -4111,7 +4580,8 @@
       "size": 5,
       "act": "meta",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "scifi_panel_wall",
@@ -4123,11 +4593,220 @@
       "size": 5,
       "act": "meta",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
+    },
+    {
+      "lookup": "CoordinateSystem3M",
+      "name": "CoordinateSystem3M",
+      "concept": "· palette (unplaced)",
+      "concept_order": 21,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "catalyst_foe",
+      "name": "Catalyst Foe",
+      "concept": "· palette (unplaced)",
+      "concept_order": 21,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "catalyst_vent",
+      "name": "Catalyst Vent",
+      "concept": "· palette (unplaced)",
+      "concept_order": 21,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "code_display",
+      "name": "Code Display",
+      "concept": "· palette (unplaced)",
+      "concept_order": 21,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "diamondtoruscollection",
+      "name": "diamondtoruscollection",
+      "concept": "· palette (unplaced)",
+      "concept_order": 21,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "durer_scene",
+      "name": "DÃ¼rer Melencolia Scene",
+      "concept": "· palette (unplaced)",
+      "concept_order": 21,
+      "tier": "large",
+      "fp": 80,
+      "size": 14,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "frame_counter_display",
+      "name": "frame_counter_display",
+      "concept": "· palette (unplaced)",
+      "concept_order": 21,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "mesh_grammar_extruded_spire",
+      "name": "MeshGrammar — Extruded Spire",
+      "concept": "· palette (unplaced)",
+      "concept_order": 21,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "mesh_grammar_inset_pattern",
+      "name": "MeshGrammar — Inset Pattern",
+      "concept": "· palette (unplaced)",
+      "concept_order": 21,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "mesh_grammar_seed",
+      "name": "MeshGrammar — Seed Icosahedron",
+      "concept": "· palette (unplaced)",
+      "concept_order": 21,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "modulor_man_demo",
+      "name": "modulor_man_demo",
+      "concept": "· palette (unplaced)",
+      "concept_order": 21,
+      "tier": "medium",
+      "fp": 3,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "path_builder_foe",
+      "name": "Path Builder Foe",
+      "concept": "· palette (unplaced)",
+      "concept_order": 21,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "path_game_controller",
+      "name": "Path Game Controller",
+      "concept": "· palette (unplaced)",
+      "concept_order": 21,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "path_watchdog",
+      "name": "Path Watchdog",
+      "concept": "· palette (unplaced)",
+      "concept_order": 21,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "path_wedge",
+      "name": "Path Wedge (ramp)",
+      "concept": "· palette (unplaced)",
+      "concept_order": 21,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "wedge_skill_pickup",
+      "name": "Wedge Skill Pickup",
+      "concept": "· palette (unplaced)",
+      "concept_order": 21,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
     }
   ],
-  "total_artifacts": 253,
-  "total_concepts": 21,
+  "total_artifacts": 279,
+  "total_concepts": 22,
   "placed": {
     "map": "MindMap_Primitives",
     "grid": [
@@ -4810,45 +5489,45 @@
         0.0
       ]
     ],
-    "conceptual_corr": -0.043,
+    "conceptual_corr": 1.0,
     "pulled_apart": [
       {
+        "a": "Point",
+        "b": "Other primitives",
+        "placed": 1.0,
+        "conceptual": 0.95
+      },
+      {
         "a": "Line / edge",
-        "b": "Interactive tool",
-        "placed": 0.9,
-        "conceptual": 0.36
+        "b": "Other primitives",
+        "placed": 0.95,
+        "conceptual": 0.9
       },
       {
         "a": "Point",
-        "b": "Text / glyph",
-        "placed": 0.85,
-        "conceptual": 0.35
-      },
-      {
-        "a": "Plane / quad",
         "b": "Interactive tool",
-        "placed": 0.75,
-        "conceptual": 0.32
+        "placed": 0.95,
+        "conceptual": 0.9
       }
     ],
     "jammed_together": [
       {
-        "a": "Arch / structure",
-        "b": "Curve / organic",
+        "a": "Point",
+        "b": "Line / edge",
         "placed": 0.05,
-        "conceptual": 0.98
+        "conceptual": 0.05
       },
       {
-        "a": "Helix / spiral",
-        "b": "Arch / structure",
+        "a": "Line / edge",
+        "b": "Arrow / vector",
         "placed": 0.05,
-        "conceptual": 0.97
+        "conceptual": 0.05
       },
       {
-        "a": "Prism / extrusion",
-        "b": "Helix / spiral",
+        "a": "Arrow / vector",
+        "b": "Triangle",
         "placed": 0.05,
-        "conceptual": 0.96
+        "conceptual": 0.05
       }
     ]
   }

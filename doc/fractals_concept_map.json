@@ -13,7 +13,8 @@
     "MengerSponge",
     "Recursion",
     "RecursiveTrees",
-    "Synthesis"
+    "Synthesis",
+    "· palette (unplaced)"
   ],
   "concept_meta": {
     "CantorSet": {
@@ -228,6 +229,28 @@
         "applied": []
       },
       "count": 10
+    },
+    "· palette (unplaced)": {
+      "act": "Act IV",
+      "truth": "sequence artifacts available but not yet placed in a map",
+      "tiers": {
+        "small": [
+          "endlessness_chalkboard",
+          "grid_substrate_runner"
+        ],
+        "medium": [
+          "barnsley_fern",
+          "living_paper_julia",
+          "living_paper_koch",
+          "mesh_grammar_branching_coral",
+          "mesh_grammar_lsystem_tree"
+        ],
+        "large": [
+          "modulor_cypress"
+        ],
+        "applied": []
+      },
+      "count": 8
     }
   },
   "concept_distance": [
@@ -360,7 +383,8 @@
         "fp": 182,
         "recommended": true,
         "tier": "large",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "dark_sphere",
@@ -368,7 +392,8 @@
         "fp": 1,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "example_8_4_cantor_set_vr",
@@ -376,7 +401,8 @@
         "fp": 3,
         "recommended": true,
         "tier": "medium",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "example_8_4_cantor_pagoda_vr",
@@ -384,7 +410,8 @@
         "fp": 117,
         "recommended": true,
         "tier": "large",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "stochastic_tree_separated",
@@ -392,7 +419,8 @@
         "fp": 2,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       }
     ],
     "CrossSequence": [
@@ -402,7 +430,8 @@
         "fp": 8,
         "recommended": true,
         "tier": "medium",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "dark_sphere",
@@ -410,7 +439,8 @@
         "fp": 1,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "fractal_stochastic_tree",
@@ -418,7 +448,8 @@
         "fp": 2,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "Hilbert3D",
@@ -426,7 +457,8 @@
         "fp": 36,
         "recommended": true,
         "tier": "large",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "evolutionary_algorithms",
@@ -434,7 +466,8 @@
         "fp": 4,
         "recommended": true,
         "tier": "medium",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "cellular_automata_3d_stacked",
@@ -442,7 +475,8 @@
         "fp": 4,
         "recommended": true,
         "tier": "medium",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       }
     ],
     "GoldenSpiral": [
@@ -452,7 +486,8 @@
         "fp": 1,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "golden_rectangle#preset",
@@ -460,7 +495,8 @@
         "fp": 4,
         "recommended": true,
         "tier": "medium",
-        "has_image": false
+        "has_image": false,
+        "map_ready": true
       },
       {
         "lookup": "dark_sphere",
@@ -468,7 +504,8 @@
         "fp": 1,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "fibonacci_terrain#preset",
@@ -476,7 +513,8 @@
         "fp": 4,
         "recommended": true,
         "tier": "medium",
-        "has_image": false
+        "has_image": false,
+        "map_ready": true
       },
       {
         "lookup": "romanesco",
@@ -484,7 +522,8 @@
         "fp": 64,
         "recommended": true,
         "tier": "large",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       }
     ],
     "JuliaSet": [
@@ -494,7 +533,8 @@
         "fp": 357,
         "recommended": true,
         "tier": "large",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "dark_sphere",
@@ -502,7 +542,8 @@
         "fp": 1,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "julia_set_explorer",
@@ -510,7 +551,8 @@
         "fp": 1,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "lyapunov_fractal",
@@ -518,7 +560,8 @@
         "fp": 4,
         "recommended": true,
         "tier": "medium",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       }
     ],
     "KochSierpinski": [
@@ -528,7 +571,8 @@
         "fp": 1,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "dark_sphere",
@@ -536,7 +580,8 @@
         "fp": 1,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "fractal_koch_curve",
@@ -544,7 +589,8 @@
         "fp": 3,
         "recommended": true,
         "tier": "medium",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "science_screen",
@@ -552,7 +598,8 @@
         "fp": 4,
         "recommended": true,
         "tier": "medium",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "koch_curve_3d",
@@ -560,7 +607,8 @@
         "fp": 6,
         "recommended": true,
         "tier": "medium",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "sierpinski_triangle",
@@ -568,7 +616,8 @@
         "fp": 1,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "cube_bookshelf",
@@ -576,7 +625,8 @@
         "fp": 1,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "box_counting_dimension",
@@ -584,7 +634,8 @@
         "fp": 4,
         "recommended": true,
         "tier": "medium",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "sierpinski_pyramid",
@@ -592,7 +643,8 @@
         "fp": 1,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       }
     ],
     "MandelbrotSet": [
@@ -602,7 +654,8 @@
         "fp": 153,
         "recommended": true,
         "tier": "large",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "dark_sphere",
@@ -610,7 +663,8 @@
         "fp": 1,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "mandelbrot_dive",
@@ -618,7 +672,8 @@
         "fp": 4,
         "recommended": true,
         "tier": "medium",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       }
     ],
     "MengerSponge": [
@@ -628,7 +683,8 @@
         "fp": 85,
         "recommended": true,
         "tier": "large",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "menger_sponge",
@@ -636,7 +692,8 @@
         "fp": 90,
         "recommended": true,
         "tier": "large",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "dark_sphere",
@@ -644,7 +701,8 @@
         "fp": 1,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       }
     ],
     "Recursion": [
@@ -654,7 +712,8 @@
         "fp": 4,
         "recommended": true,
         "tier": "medium",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "fibonacci_pagoda",
@@ -662,7 +721,8 @@
         "fp": 25,
         "recommended": true,
         "tier": "large",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "recursive_chair",
@@ -670,7 +730,8 @@
         "fp": 24,
         "recommended": true,
         "tier": "large",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "fractal_recursion_2",
@@ -678,7 +739,8 @@
         "fp": 3,
         "recommended": true,
         "tier": "medium",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "recursive_table",
@@ -686,7 +748,8 @@
         "fp": 24,
         "recommended": true,
         "tier": "large",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "dark_sphere",
@@ -694,7 +757,8 @@
         "fp": 1,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "example_8_3_recursion_circles_vr",
@@ -702,7 +766,8 @@
         "fp": 3,
         "recommended": true,
         "tier": "medium",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "cube_subdivision",
@@ -710,7 +775,8 @@
         "fp": 6,
         "recommended": true,
         "tier": "medium",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "recursive_boolean_cube",
@@ -718,7 +784,8 @@
         "fp": 9,
         "recommended": true,
         "tier": "large",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "cube_staircase",
@@ -726,7 +793,8 @@
         "fp": 1,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       }
     ],
     "RecursiveTrees": [
@@ -736,7 +804,8 @@
         "fp": 1,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "fractal_lsystem_tree",
@@ -744,7 +813,8 @@
         "fp": 3,
         "recommended": true,
         "tier": "medium",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "recursive_tree_2",
@@ -752,7 +822,8 @@
         "fp": 1,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "small_subdivision_cube",
@@ -760,7 +831,8 @@
         "fp": 1,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "inverted_tree_cloud",
@@ -768,7 +840,8 @@
         "fp": 117,
         "recommended": true,
         "tier": "large",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "recursive_tree",
@@ -776,7 +849,8 @@
         "fp": 13,
         "recommended": true,
         "tier": "large",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "dark_sphere",
@@ -784,7 +858,8 @@
         "fp": 1,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "cube_desk",
@@ -792,7 +867,8 @@
         "fp": 1,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "fractal_scene",
@@ -800,7 +876,8 @@
         "fp": 156,
         "recommended": true,
         "tier": "large",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "mobius_world",
@@ -808,7 +885,8 @@
         "fp": 4968,
         "recommended": true,
         "tier": "large",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       }
     ],
     "Synthesis": [
@@ -818,7 +896,8 @@
         "fp": 3,
         "recommended": true,
         "tier": "medium",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "koch_curve",
@@ -826,7 +905,8 @@
         "fp": 1,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "cantor_set",
@@ -834,7 +914,8 @@
         "fp": 182,
         "recommended": true,
         "tier": "large",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "strange_attractors",
@@ -842,7 +923,8 @@
         "fp": 4,
         "recommended": true,
         "tier": "medium",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "dark_sphere",
@@ -850,7 +932,8 @@
         "fp": 1,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "recursive_tree",
@@ -858,7 +941,8 @@
         "fp": 13,
         "recommended": true,
         "tier": "large",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "fibonacci_sequences",
@@ -866,7 +950,8 @@
         "fp": 1,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "fractal_clouds",
@@ -874,7 +959,8 @@
         "fp": 225,
         "recommended": true,
         "tier": "large",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "sierpinski_triangle",
@@ -882,7 +968,8 @@
         "fp": 1,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "romanesco",
@@ -890,12 +977,96 @@
         "fp": 64,
         "recommended": true,
         "tier": "large",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
+      }
+    ],
+    "· palette (unplaced)": [
+      {
+        "lookup": "barnsley_fern",
+        "name": "Barnsley Fern",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "endlessness_chalkboard",
+        "name": "Endlessness Chalkboard",
+        "registry": "",
+        "tier": "small",
+        "fp": 2,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "grid_substrate_runner",
+        "name": "Grid Substrate Runner",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "living_paper_julia",
+        "name": "living_paper_julia",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "living_paper_koch",
+        "name": "living_paper_koch",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "mesh_grammar_branching_coral",
+        "name": "MeshGrammar — Branching Coral",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "mesh_grammar_lsystem_tree",
+        "name": "MeshGrammar — L-System Tree",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "modulor_cypress",
+        "name": "Modulor Cypress",
+        "registry": "",
+        "tier": "large",
+        "fp": 9,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
       }
     ]
   },
-  "total": 65,
-  "total_concepts": 10,
+  "total": 73,
+  "total_concepts": 11,
   "recommended_total": 65,
-  "map_ready_total": 65
+  "map_ready_total": 65,
+  "palette_total": 8
 }

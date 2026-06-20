@@ -11,7 +11,7 @@
       "act": "Act I",
       "truth": "A salon for digital fingers. The nail color controller offers precise hue selection while color balls scatter like polish bottles on a shelf. Choose a color, apply it to the hand model, watch pigment become identity.",
       "count": 9,
-      "x_spread": 0.2293,
+      "x_spread": -1.0,
       "tiers": {
         "small": [
           "dark_sphere",
@@ -36,7 +36,7 @@
       "act": "Act I",
       "truth": "The grid becomes a canvas. Each cell awaits its color assignment, a pixel in a larger pattern you construct. The gridcolorizer transforms the floor into a palette - systematic, addressable, yours to paint.",
       "count": 4,
-      "x_spread": -0.1313,
+      "x_spread": -0.6666,
       "tiers": {
         "small": [
           "gridcolorizer",
@@ -56,7 +56,7 @@
       "act": "Act II",
       "truth": "Walk through light itself. Rainbow emitters line the corridor, cycling through the spectrum in slow waves. Red fades to orange fades to yellow - the continuous gradient made temporal.",
       "count": 4,
-      "x_spread": -1.0,
+      "x_spread": -0.3334,
       "tiers": {
         "small": [
           "mario_cube",
@@ -75,21 +75,27 @@
       "order": 3,
       "act": "Act III",
       "truth": "Pillars of color rise along the runway, each a collection point for chromatic data. Grab the color sticks, watch the flashlight demo reveal how light creates color from darkness.",
-      "count": 7,
-      "x_spread": 0.1662,
+      "count": 12,
+      "x_spread": 0.0,
       "tiers": {
         "small": [
           "pillarcolorcollection",
           "dark_sphere",
-          "SpectrumVisualizer"
+          "SpectrumVisualizer",
+          "color_mixing"
         ],
         "medium": [
           "loom_drum_persian_p6",
           "visual_color_mixing",
           "color_sets_overview",
-          "grab_rainbow_stick"
+          "grab_rainbow_stick",
+          "colorsheets",
+          "glitchcolor",
+          "k_means_color"
         ],
-        "large": [],
+        "large": [
+          "color_scanner"
+        ],
         "applied": []
       }
     },
@@ -99,7 +105,7 @@
       "act": "Act III",
       "truth": "Paint meets physics. The ball painting demo turns spheres into canvases, color into gesture. Throw paint, watch it splash, see how color accumulates on curved surfaces.",
       "count": 4,
-      "x_spread": 1.0,
+      "x_spread": 0.3334,
       "tiers": {
         "small": [
           "dark_sphere",
@@ -120,7 +126,7 @@
       "act": "Act IV",
       "truth": "The hallway dissolves into rainbow. Color transitions seamlessly from hue to hue, boundary to boundary, without the discrete steps of individual emitters.",
       "count": 6,
-      "x_spread": -0.8896,
+      "x_spread": 0.6666,
       "tiers": {
         "small": [
           "color_constellation_office",
@@ -136,55 +142,118 @@
         ],
         "applied": []
       }
+    },
+    {
+      "key": "· palette (unplaced)",
+      "order": 6,
+      "act": "Act IV",
+      "truth": "sequence artifacts available but not yet placed in a map",
+      "count": 31,
+      "x_spread": 1.0,
+      "tiers": {
+        "small": [
+          "MetamerismLab",
+          "RotatingLaser",
+          "advancedglitch",
+          "colortrails",
+          "disco_lights",
+          "flashlight_demo",
+          "grab_stick",
+          "grabcolorcollection",
+          "path_builder_foe",
+          "path_cube",
+          "path_game_controller",
+          "path_pyramid",
+          "path_watchdog",
+          "path_wedge",
+          "prism",
+          "shelf",
+          "shelf_with_stickers",
+          "strobe_lasers",
+          "textureglitch"
+        ],
+        "medium": [
+          "SimultaneousContrast",
+          "laser_turret",
+          "minimalglitch",
+          "pattern_loom",
+          "pattern_machine_a",
+          "pattern_machine_b",
+          "pattern_machine_d",
+          "primitive_combo_puzzle",
+          "spherecolors"
+        ],
+        "large": [
+          "coloredlines",
+          "pattern_machine_c",
+          "primitive_assembler"
+        ],
+        "applied": []
+      }
     }
   ],
   "concept_distance": [
     [
       0.0,
-      0.6453,
-      0.8363,
-      0.8562,
-      0.607,
-      0.9821
+      0.1667,
+      0.3333,
+      0.5,
+      0.6667,
+      0.8333,
+      1.0
     ],
     [
-      0.6453,
+      0.1667,
       0.0,
-      0.7682,
-      0.7468,
-      0.8995,
-      0.7035
+      0.1667,
+      0.3333,
+      0.5,
+      0.6667,
+      0.8333
     ],
     [
-      0.8363,
-      0.7682,
+      0.3333,
+      0.1667,
       0.0,
-      0.7886,
+      0.1667,
+      0.3333,
+      0.5,
+      0.6667
+    ],
+    [
+      0.5,
+      0.3333,
+      0.1667,
+      0.0,
+      0.1667,
+      0.3333,
+      0.5
+    ],
+    [
+      0.6667,
+      0.5,
+      0.3333,
+      0.1667,
+      0.0,
+      0.1667,
+      0.3333
+    ],
+    [
+      0.8333,
+      0.6667,
+      0.5,
+      0.3333,
+      0.1667,
+      0.0,
+      0.1667
+    ],
+    [
       1.0,
-      0.0
-    ],
-    [
-      0.8562,
-      0.7468,
-      0.7886,
-      0.0,
-      0.6224,
-      0.6791
-    ],
-    [
-      0.607,
-      0.8995,
-      1.0,
-      0.6224,
-      0.0,
-      0.8896
-    ],
-    [
-      0.9821,
-      0.7035,
-      0.0,
-      0.6791,
-      0.8896,
+      0.8333,
+      0.6667,
+      0.5,
+      0.3333,
+      0.1667,
       0.0
     ]
   ],
@@ -199,7 +268,8 @@
       "size": 5,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "nail_color_controller",
@@ -211,7 +281,8 @@
       "size": 5,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "hand_model",
@@ -223,7 +294,8 @@
       "size": 5,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "hand_color_controller",
@@ -235,7 +307,8 @@
       "size": 5,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "science_screen",
@@ -247,7 +320,8 @@
       "size": 8,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "dark_side_prism",
@@ -259,7 +333,8 @@
       "size": 5,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "grab_stick_scanner",
@@ -271,7 +346,8 @@
       "size": 5,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "colorballs",
@@ -283,7 +359,8 @@
       "size": 8,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "brick_wall_factory",
@@ -295,7 +372,8 @@
       "size": 5,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "gridcolorizer",
@@ -307,7 +385,8 @@
       "size": 5,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "science_screen",
@@ -319,7 +398,8 @@
       "size": 8,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "dark_sphere",
@@ -331,7 +411,8 @@
       "size": 5,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "spectrum_forest",
@@ -343,7 +424,8 @@
       "size": 8,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "mario_cube",
@@ -355,7 +437,8 @@
       "size": 5,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "dark_sphere",
@@ -367,7 +450,8 @@
       "size": 5,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "rainbow",
@@ -379,7 +463,8 @@
       "size": 14,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "pick_up_cube",
@@ -391,7 +476,8 @@
       "size": 5,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "pillarcolorcollection",
@@ -403,7 +489,8 @@
       "size": 5,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "loom_drum_persian_p6",
@@ -415,7 +502,8 @@
       "size": 8,
       "act": "Act III",
       "has_image": false,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "visual_color_mixing",
@@ -427,7 +515,8 @@
       "size": 8,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "color_sets_overview",
@@ -439,7 +528,8 @@
       "size": 8,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "dark_sphere",
@@ -451,7 +541,8 @@
       "size": 5,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "grab_rainbow_stick",
@@ -463,7 +554,8 @@
       "size": 8,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "SpectrumVisualizer",
@@ -475,7 +567,73 @@
       "size": 5,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
+    },
+    {
+      "lookup": "color_mixing",
+      "name": "Color Mixing",
+      "concept": "Pillars of color rise along the runway",
+      "concept_order": 3,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "color_scanner",
+      "name": "Color Scanner",
+      "concept": "Pillars of color rise along the runway",
+      "concept_order": 3,
+      "tier": "large",
+      "fp": 140,
+      "size": 14,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "colorsheets",
+      "name": "Color Sheets",
+      "concept": "Pillars of color rise along the runway",
+      "concept_order": 3,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "glitchcolor",
+      "name": "Glitch Color",
+      "concept": "Pillars of color rise along the runway",
+      "concept_order": 3,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "k_means_color",
+      "name": "K-Means Color Clustering",
+      "concept": "Pillars of color rise along the runway",
+      "concept_order": 3,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
     },
     {
       "lookup": "dark_sphere",
@@ -487,7 +645,8 @@
       "size": 5,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "ball_painting_demo",
@@ -499,7 +658,8 @@
       "size": 14,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "pattern_mill",
@@ -511,7 +671,8 @@
       "size": 8,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "albers_wall_gallery",
@@ -523,7 +684,8 @@
       "size": 5,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "color_space_navigator",
@@ -535,7 +697,8 @@
       "size": 8,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "loom_bolt_memphis_p4g",
@@ -547,7 +710,8 @@
       "size": 8,
       "act": "Act IV",
       "has_image": false,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "color_constellation_office",
@@ -559,7 +723,8 @@
       "size": 5,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "gradient_interpolator",
@@ -571,7 +736,8 @@
       "size": 8,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "rainbow_hallway",
@@ -583,7 +749,8 @@
       "size": 14,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "dark_sphere",
@@ -595,9 +762,413 @@
       "size": 5,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
+    },
+    {
+      "lookup": "MetamerismLab",
+      "name": "MetamerismLab",
+      "concept": "· palette (unplaced)",
+      "concept_order": 6,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "RotatingLaser",
+      "name": "RotatingLaser",
+      "concept": "· palette (unplaced)",
+      "concept_order": 6,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "SimultaneousContrast",
+      "name": "SimultaneousContrast",
+      "concept": "· palette (unplaced)",
+      "concept_order": 6,
+      "tier": "medium",
+      "fp": 3,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "advancedglitch",
+      "name": "advancedglitch",
+      "concept": "· palette (unplaced)",
+      "concept_order": 6,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "coloredlines",
+      "name": "Colored Lines",
+      "concept": "· palette (unplaced)",
+      "concept_order": 6,
+      "tier": "large",
+      "fp": 700,
+      "size": 14,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "colortrails",
+      "name": "colortrails",
+      "concept": "· palette (unplaced)",
+      "concept_order": 6,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "disco_lights",
+      "name": "disco_lights",
+      "concept": "· palette (unplaced)",
+      "concept_order": 6,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "flashlight_demo",
+      "name": "flashlight_demo",
+      "concept": "· palette (unplaced)",
+      "concept_order": 6,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "grab_stick",
+      "name": "grab_stick",
+      "concept": "· palette (unplaced)",
+      "concept_order": 6,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "grabcolorcollection",
+      "name": "grabcolorcollection",
+      "concept": "· palette (unplaced)",
+      "concept_order": 6,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "laser_turret",
+      "name": "Laser Turret",
+      "concept": "· palette (unplaced)",
+      "concept_order": 6,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "minimalglitch",
+      "name": "Minimal Glitch",
+      "concept": "· palette (unplaced)",
+      "concept_order": 6,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "path_builder_foe",
+      "name": "Path Builder Foe",
+      "concept": "· palette (unplaced)",
+      "concept_order": 6,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "path_cube",
+      "name": "Path Cube (wall)",
+      "concept": "· palette (unplaced)",
+      "concept_order": 6,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "path_game_controller",
+      "name": "Path Game Controller",
+      "concept": "· palette (unplaced)",
+      "concept_order": 6,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "path_pyramid",
+      "name": "Path Pyramid (mound)",
+      "concept": "· palette (unplaced)",
+      "concept_order": 6,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "path_watchdog",
+      "name": "Path Watchdog",
+      "concept": "· palette (unplaced)",
+      "concept_order": 6,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "path_wedge",
+      "name": "Path Wedge (ramp)",
+      "concept": "· palette (unplaced)",
+      "concept_order": 6,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "pattern_loom",
+      "name": "Pattern Loom",
+      "concept": "· palette (unplaced)",
+      "concept_order": 6,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "pattern_machine_a",
+      "name": "Pattern Machine A — Jacquard Punch-Card Loom",
+      "concept": "· palette (unplaced)",
+      "concept_order": 6,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "pattern_machine_b",
+      "name": "Pattern Printer (Holographic Press)",
+      "concept": "· palette (unplaced)",
+      "concept_order": 6,
+      "tier": "medium",
+      "fp": 6,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "pattern_machine_c",
+      "name": "Kaleidoscope Mill",
+      "concept": "· palette (unplaced)",
+      "concept_order": 6,
+      "tier": "large",
+      "fp": 12,
+      "size": 14,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "pattern_machine_d",
+      "name": "Pattern Machine D — Tile-Stamp Press",
+      "concept": "· palette (unplaced)",
+      "concept_order": 6,
+      "tier": "medium",
+      "fp": 6,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "primitive_assembler",
+      "name": "Primitive Assembler",
+      "concept": "· palette (unplaced)",
+      "concept_order": 6,
+      "tier": "large",
+      "fp": 18,
+      "size": 14,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "primitive_combo_puzzle",
+      "name": "Primitive Combo Puzzle",
+      "concept": "· palette (unplaced)",
+      "concept_order": 6,
+      "tier": "medium",
+      "fp": 6,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "prism",
+      "name": "prism",
+      "concept": "· palette (unplaced)",
+      "concept_order": 6,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "shelf",
+      "name": "shelf",
+      "concept": "· palette (unplaced)",
+      "concept_order": 6,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "shelf_with_stickers",
+      "name": "shelf_with_stickers",
+      "concept": "· palette (unplaced)",
+      "concept_order": 6,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "spherecolors",
+      "name": "spherecolors",
+      "concept": "· palette (unplaced)",
+      "concept_order": 6,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "strobe_lasers",
+      "name": "strobe_lasers",
+      "concept": "· palette (unplaced)",
+      "concept_order": 6,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "textureglitch",
+      "name": "textureglitch",
+      "concept": "· palette (unplaced)",
+      "concept_order": 6,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
     }
   ],
-  "total_artifacts": 34,
-  "total_concepts": 6
+  "total_artifacts": 70,
+  "total_concepts": 7
 }

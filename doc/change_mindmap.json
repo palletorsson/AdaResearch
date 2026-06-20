@@ -30,7 +30,7 @@
       "act": "Act I",
       "truth": "Intro",
       "count": 4,
-      "x_spread": 1.0,
+      "x_spread": -0.6,
       "tiers": {
         "small": [
           "derivative_pair",
@@ -50,7 +50,7 @@
       "act": "Act II",
       "truth": "Reconciliation",
       "count": 3,
-      "x_spread": 0.9601,
+      "x_spread": -0.2,
       "tiers": {
         "small": [
           "code_display",
@@ -69,7 +69,7 @@
       "act": "Act III",
       "truth": "Slope Surface",
       "count": 2,
-      "x_spread": 1.0,
+      "x_spread": 0.2,
       "tiers": {
         "small": [
           "partial_derivative_terrain"
@@ -87,7 +87,7 @@
       "act": "Act IV",
       "truth": "Velocity",
       "count": 4,
-      "x_spread": 0.7854,
+      "x_spread": 0.6,
       "tiers": {
         "small": [
           "code_display",
@@ -99,42 +99,75 @@
         "large": [],
         "applied": []
       }
+    },
+    {
+      "key": "· palette (unplaced)",
+      "order": 5,
+      "act": "Act IV",
+      "truth": "sequence artifacts available but not yet placed in a map",
+      "count": 5,
+      "x_spread": 1.0,
+      "tiers": {
+        "small": [
+          "catalyst_sustain_demo",
+          "integral_area",
+          "particle_flow_swarm",
+          "riemann_pump",
+          "vector_field_grid"
+        ],
+        "medium": [],
+        "large": [],
+        "applied": []
+      }
     }
   ],
   "concept_distance": [
     [
       0.0,
-      1.0,
-      1.0,
-      1.0,
+      0.2,
+      0.4,
+      0.6,
+      0.8,
       1.0
     ],
     [
-      1.0,
+      0.2,
       0.0,
-      0.0399,
+      0.2,
+      0.4,
+      0.6,
+      0.8
+    ],
+    [
+      0.4,
+      0.2,
       0.0,
-      0.2146
+      0.2,
+      0.4,
+      0.6
+    ],
+    [
+      0.6,
+      0.4,
+      0.2,
+      0.0,
+      0.2,
+      0.4
+    ],
+    [
+      0.8,
+      0.6,
+      0.4,
+      0.2,
+      0.0,
+      0.2
     ],
     [
       1.0,
-      0.0399,
-      0.0,
-      0.2436,
-      0.319
-    ],
-    [
-      1.0,
-      0.0,
-      0.2436,
-      0.0,
-      0.1388
-    ],
-    [
-      1.0,
-      0.2146,
-      0.319,
-      0.1388,
+      0.8,
+      0.6,
+      0.4,
+      0.2,
       0.0
     ]
   ],
@@ -149,7 +182,8 @@
       "size": 8,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "ftc_bridge",
@@ -161,7 +195,8 @@
       "size": 5,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "riemann_sum_workbench",
@@ -173,7 +208,8 @@
       "size": 8,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "science_screen",
@@ -185,7 +221,8 @@
       "size": 8,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "derivative_pair",
@@ -197,7 +234,8 @@
       "size": 5,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "code_display",
@@ -209,7 +247,8 @@
       "size": 5,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "slope_tangent_demo",
@@ -221,7 +260,8 @@
       "size": 5,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "code_display",
@@ -233,7 +273,8 @@
       "size": 5,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "science_screen",
@@ -245,7 +286,8 @@
       "size": 8,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "ftc_bridge",
@@ -257,7 +299,8 @@
       "size": 5,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "science_screen",
@@ -269,7 +312,8 @@
       "size": 8,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "partial_derivative_terrain",
@@ -281,7 +325,8 @@
       "size": 5,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "code_display",
@@ -293,7 +338,8 @@
       "size": 5,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "derivative_pair",
@@ -305,7 +351,8 @@
       "size": 5,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "player_trace",
@@ -317,7 +364,8 @@
       "size": 5,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "velocity_arrow",
@@ -329,9 +377,75 @@
       "size": 5,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
+    },
+    {
+      "lookup": "catalyst_sustain_demo",
+      "name": "Catalyst Sustain Demo",
+      "concept": "· palette (unplaced)",
+      "concept_order": 5,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "integral_area",
+      "name": "Integral Area",
+      "concept": "· palette (unplaced)",
+      "concept_order": 5,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "particle_flow_swarm",
+      "name": "Particle Flow Swarm",
+      "concept": "· palette (unplaced)",
+      "concept_order": 5,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "riemann_pump",
+      "name": "Riemann Pump",
+      "concept": "· palette (unplaced)",
+      "concept_order": 5,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "vector_field_grid",
+      "name": "Vector Field Grid",
+      "concept": "· palette (unplaced)",
+      "concept_order": 5,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
     }
   ],
-  "total_artifacts": 16,
-  "total_concepts": 5
+  "total_artifacts": 21,
+  "total_concepts": 6
 }

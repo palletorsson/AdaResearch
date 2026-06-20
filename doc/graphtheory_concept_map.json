@@ -17,7 +17,8 @@
     "Path Finding 3d",
     "Push Relabel Algorithm",
     "Tarjan s Algorithm",
-    "Topological Sort"
+    "Topological Sort",
+    "· palette (unplaced)"
   ],
   "concept_meta": {
     "Edmonds Algorithm": {
@@ -56,11 +57,12 @@
         "small": [],
         "medium": [],
         "large": [
-          "force_directed_layout"
+          "force_directed_layout",
+          "graph_basilica"
         ],
         "applied": []
       },
-      "count": 1
+      "count": 2
     },
     "Graphspace": {
       "truth": "Graphspace",
@@ -212,11 +214,34 @@
         "small": [
           "topological_sort_algorithm"
         ],
-        "medium": [],
+        "medium": [
+          "topological_sort"
+        ],
         "large": [],
         "applied": []
       },
-      "count": 1
+      "count": 2
+    },
+    "· palette (unplaced)": {
+      "act": "Act IV",
+      "truth": "sequence artifacts available but not yet placed in a map",
+      "tiers": {
+        "small": [
+          "grid_substrate_runner"
+        ],
+        "medium": [
+          "grid3d",
+          "grid3d_dfs",
+          "grid3d_prim",
+          "living_paper_bfs",
+          "living_paper_dfs_maze"
+        ],
+        "large": [
+          "rhizomatic_structure"
+        ],
+        "applied": []
+      },
+      "count": 7
     }
   },
   "concept_distance": [
@@ -453,7 +478,8 @@
         "fp": 49,
         "recommended": true,
         "tier": "large",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       }
     ],
     "Force Directed 3d": [
@@ -463,7 +489,8 @@
         "fp": 483,
         "recommended": true,
         "tier": "large",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       }
     ],
     "Force Directed Graph Layout": [
@@ -473,7 +500,18 @@
         "fp": 34,
         "recommended": true,
         "tier": "large",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
+      },
+      {
+        "lookup": "graph_basilica",
+        "name": "Graph Basilica",
+        "registry": "",
+        "tier": "large",
+        "fp": 81,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
       }
     ],
     "Graphspace": [
@@ -483,7 +521,8 @@
         "fp": 6800,
         "recommended": true,
         "tier": "large",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "KonigsbergBridge",
@@ -491,7 +530,8 @@
         "fp": 1600,
         "recommended": true,
         "tier": "large",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       }
     ],
     "Graphspace 3d": [
@@ -501,7 +541,8 @@
         "fp": 576,
         "recommended": true,
         "tier": "large",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       }
     ],
     "Karger s Algorithm": [
@@ -511,7 +552,8 @@
         "fp": 16,
         "recommended": true,
         "tier": "large",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       }
     ],
     "Kosaraju s Algorithm": [
@@ -521,7 +563,8 @@
         "fp": 25,
         "recommended": true,
         "tier": "large",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       }
     ],
     "Maximum Flow Algorithms": [
@@ -531,7 +574,8 @@
         "fp": 3422,
         "recommended": true,
         "tier": "large",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       }
     ],
     "Minimum Spanning Tree": [
@@ -541,7 +585,8 @@
         "fp": 1050,
         "recommended": true,
         "tier": "large",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       }
     ],
     "Network Analysis": [
@@ -551,7 +596,8 @@
         "fp": 1024,
         "recommended": true,
         "tier": "large",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "network_analysis",
@@ -559,7 +605,8 @@
         "fp": 50,
         "recommended": true,
         "tier": "large",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       }
     ],
     "Path Finding 3d": [
@@ -569,7 +616,8 @@
         "fp": 100,
         "recommended": true,
         "tier": "large",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       }
     ],
     "Push Relabel Algorithm": [
@@ -579,7 +627,8 @@
         "fp": 20,
         "recommended": true,
         "tier": "large",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       }
     ],
     "Tarjan s Algorithm": [
@@ -589,7 +638,8 @@
         "fp": 49,
         "recommended": true,
         "tier": "large",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       }
     ],
     "Topological Sort": [
@@ -599,12 +649,96 @@
         "fp": 1,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
+      },
+      {
+        "lookup": "topological_sort",
+        "name": "topological_sort",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      }
+    ],
+    "· palette (unplaced)": [
+      {
+        "lookup": "grid3d",
+        "name": "Grid3D Substrate",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "grid3d_dfs",
+        "name": "Grid3D — DFS",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "grid3d_prim",
+        "name": "Grid3D — Prim's MST",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "grid_substrate_runner",
+        "name": "Grid Substrate Runner",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "living_paper_bfs",
+        "name": "living_paper_bfs",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "living_paper_dfs_maze",
+        "name": "living_paper_dfs_maze",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "rhizomatic_structure",
+        "name": "Rhizomatic Structure",
+        "registry": "",
+        "tier": "large",
+        "fp": 280,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
       }
     ]
   },
-  "total": 16,
-  "total_concepts": 14,
+  "total": 25,
+  "total_concepts": 15,
   "recommended_total": 16,
-  "map_ready_total": 16
+  "map_ready_total": 16,
+  "palette_total": 9
 }

@@ -9,6 +9,64 @@
   ],
   "maps": [
     {
+      "name": "GT_Connectivity",
+      "score": -1.0,
+      "tag": "uncurated",
+      "grid": [
+        12,
+        8
+      ],
+      "n_concepts": 3,
+      "n_artifacts": 3,
+      "arts": [
+        {
+          "co": 12,
+          "col": 2,
+          "row": 2,
+          "lk": "tarjan_algorithm",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 6,
+          "col": 5,
+          "row": 4,
+          "lk": "kosaraju_algorithm",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 13,
+          "col": 8,
+          "row": 5,
+          "lk": "topological_sort",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "CA_Introduction",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        17
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 14,
+          "col": 3,
+          "row": 5,
+          "lk": "grid_substrate_runner",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
       "name": "ComputationalGeometry_Convex_Hull_Algorithms",
       "score": null,
       "tag": "sparse",
@@ -429,6 +487,72 @@
       ]
     },
     {
+      "name": "Gallery_Grid3D",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        6
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 3,
+      "arts": [
+        {
+          "co": 14,
+          "col": 2,
+          "row": 2,
+          "lk": "grid3d",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 14,
+          "col": 4,
+          "row": 2,
+          "lk": "grid3d_dfs",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 14,
+          "col": 6,
+          "row": 2,
+          "lk": "grid3d_prim",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Gallery_LivingPaper",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        18
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 14,
+          "col": 2,
+          "row": 2,
+          "lk": "living_paper_bfs",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 14,
+          "col": 2,
+          "row": 4,
+          "lk": "living_paper_dfs_maze",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    },
+    {
       "name": "GraphTheory_Edmonds_Algorithm",
       "score": null,
       "tag": "sparse",
@@ -739,35 +863,6 @@
       ]
     },
     {
-      "name": "GT_Connectivity",
-      "score": null,
-      "tag": "sparse",
-      "grid": [
-        12,
-        8
-      ],
-      "n_concepts": 2,
-      "n_artifacts": 2,
-      "arts": [
-        {
-          "co": 12,
-          "col": 2,
-          "row": 2,
-          "lk": "tarjan_algorithm",
-          "ai": 3,
-          "t": "l"
-        },
-        {
-          "co": 6,
-          "col": 5,
-          "row": 4,
-          "lk": "kosaraju_algorithm",
-          "ai": 1,
-          "t": "l"
-        }
-      ]
-    },
-    {
       "name": "GT_Flow",
       "score": null,
       "tag": "sparse",
@@ -875,8 +970,8 @@
         11,
         11
       ],
-      "n_concepts": 1,
-      "n_artifacts": 2,
+      "n_concepts": 2,
+      "n_artifacts": 3,
       "arts": [
         {
           "co": 9,
@@ -884,6 +979,14 @@
           "row": 4,
           "lk": "networkflow3d",
           "ai": 2,
+          "t": "l"
+        },
+        {
+          "co": 14,
+          "col": 9,
+          "row": 5,
+          "lk": "rhizomatic_structure",
+          "ai": 3,
           "t": "l"
         },
         {
@@ -1577,6 +1680,27 @@
       ]
     },
     {
+      "name": "Tutorial_3D",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        8
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 14,
+          "col": 3,
+          "row": 5,
+          "lk": "grid3d",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    },
+    {
       "name": "VFM_07_Gravity",
       "score": null,
       "tag": "sparse",
@@ -1598,5 +1722,5 @@
       ]
     }
   ],
-  "total_maps": 73
+  "total_maps": 77
 }

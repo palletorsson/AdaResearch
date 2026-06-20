@@ -82,7 +82,7 @@ def build(domain):
                 "concept": c, "concept_order": order_idx[c], "tier": tier,
                 "fp": a.get("fp", 4), "size": SIZE.get(tier, 8),
                 "act": cm[c].get("act", ""), "has_image": a.get("has_image", False),
-                "recommended": a.get("recommended", False),
+                "recommended": a.get("recommended", False), "map_ready": a.get("map_ready", True),
             })
     concept_list = [{
         "key": c, "order": order_idx[c], "act": cm[c].get("act", ""),

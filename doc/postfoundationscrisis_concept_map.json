@@ -11,7 +11,8 @@
     "No one system is complete. A commons m",
     "Deleuze and Guattari proposed a struct",
     "A laboratory. Benches at regulation he",
-    "Knowing the limits of formalization, w"
+    "Knowing the limits of formalization, w",
+    "· palette (unplaced)"
   ],
   "concept_meta": {
     "A room divided. The left half": {
@@ -21,7 +22,8 @@
       "act": "Act I",
       "tiers": {
         "small": [
-          "bias_visualizer"
+          "bias_visualizer",
+          "room_shape_demonstrator"
         ],
         "medium": [
           "science_screen",
@@ -30,7 +32,7 @@
         "large": [],
         "applied": []
       },
-      "count": 3
+      "count": 4
     },
     "Every classifier has an outside.": {
       "truth": "Every classifier has an outside.",
@@ -58,7 +60,8 @@
       "tiers": {
         "small": [
           "superposition_display",
-          "schrodinger_box"
+          "schrodinger_box",
+          "florensky_in_production"
         ],
         "medium": [
           "florensky_sphere",
@@ -67,7 +70,7 @@
         "large": [],
         "applied": []
       },
-      "count": 4
+      "count": 5
     },
     "There is no view from nowhere.": {
       "truth": "There is no view from nowhere.",
@@ -147,6 +150,32 @@
         "applied": []
       },
       "count": 4
+    },
+    "· palette (unplaced)": {
+      "act": "Act IV",
+      "truth": "sequence artifacts available but not yet placed in a map",
+      "tiers": {
+        "small": [
+          "cap_theorem_walk",
+          "citation_graph_node",
+          "edge_as_ground_capstone",
+          "ethical_design_clipboard",
+          "excluded_class_visualizer",
+          "locatable_knowledge_station",
+          "merge_conflict_visualizer",
+          "peer_edit_ledger",
+          "situated_sensor",
+          "wiki_fragment_station"
+        ],
+        "medium": [
+          "shannon_workbench"
+        ],
+        "large": [
+          "rhizome_vault"
+        ],
+        "applied": []
+      },
+      "count": 12
     }
   },
   "concept_distance": [
@@ -239,7 +268,8 @@
         "tier": "medium",
         "fp": 4,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "bias_visualizer",
@@ -247,7 +277,8 @@
         "tier": "small",
         "fp": 2,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "bias_from_inside",
@@ -255,7 +286,18 @@
         "tier": "medium",
         "fp": 4,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
+      },
+      {
+        "lookup": "room_shape_demonstrator",
+        "name": "Room Shape Demonstrator",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
       }
     ],
     "Every classifier has an outside.": [
@@ -265,7 +307,8 @@
         "tier": "medium",
         "fp": 4,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "godel_statement_plaque",
@@ -273,7 +316,8 @@
         "tier": "small",
         "fp": 2,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "tt",
@@ -281,7 +325,8 @@
         "tier": "medium",
         "fp": 4,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       }
     ],
     "The Florensky sphere, wired into produ": [
@@ -291,7 +336,8 @@
         "tier": "medium",
         "fp": 4,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "superposition_display",
@@ -299,7 +345,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "schrodinger_box",
@@ -307,7 +354,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "tt",
@@ -315,7 +363,18 @@
         "tier": "medium",
         "fp": 4,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
+      },
+      {
+        "lookup": "florensky_in_production",
+        "name": "Florensky in Production",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
       }
     ],
     "There is no view from nowhere.": [
@@ -325,7 +384,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       }
     ],
     "No one system is complete. A commons m": [
@@ -335,7 +395,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       }
     ],
     "Deleuze and Guattari proposed a struct": [
@@ -345,7 +406,8 @@
         "tier": "large",
         "fp": 26,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       }
     ],
     "A laboratory. Benches at regulation he": [
@@ -355,7 +417,8 @@
         "tier": "medium",
         "fp": 8,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       }
     ],
     "Knowing the limits of formalization, w": [
@@ -365,7 +428,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "bias_from_inside",
@@ -373,7 +437,8 @@
         "tier": "medium",
         "fp": 4,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "florensky_sphere",
@@ -381,7 +446,8 @@
         "tier": "medium",
         "fp": 4,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "tt",
@@ -389,12 +455,136 @@
         "tier": "medium",
         "fp": 4,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
+      }
+    ],
+    "· palette (unplaced)": [
+      {
+        "lookup": "cap_theorem_walk",
+        "name": "CAP Theorem Walk",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "citation_graph_node",
+        "name": "Citation Graph Node",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "edge_as_ground_capstone",
+        "name": "Edge as Ground Capstone",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "ethical_design_clipboard",
+        "name": "Ethical Design Clipboard",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "excluded_class_visualizer",
+        "name": "Excluded Class Visualizer",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "locatable_knowledge_station",
+        "name": "Locatable Knowledge Station",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "merge_conflict_visualizer",
+        "name": "Merge Conflict Visualizer",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "peer_edit_ledger",
+        "name": "Peer Edit Ledger",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "rhizome_vault",
+        "name": "Rhizome Vault",
+        "registry": "",
+        "tier": "large",
+        "fp": 100,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "shannon_workbench",
+        "name": "Shannon Workbench",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "situated_sensor",
+        "name": "Situated Sensor",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "wiki_fragment_station",
+        "name": "Wiki Fragment Station",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
       }
     ]
   },
-  "total": 18,
-  "total_concepts": 8,
+  "total": 32,
+  "total_concepts": 9,
   "recommended_total": 18,
-  "map_ready_total": 18
+  "map_ready_total": 18,
+  "palette_total": 14
 }

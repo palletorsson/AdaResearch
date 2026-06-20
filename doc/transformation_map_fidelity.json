@@ -5,19 +5,73 @@
     "rigid motions",
     "beyond rigid",
     "representation",
-    "operations on space"
+    "operations on space",
+    "Act IV"
   ],
   "maps": [
     {
-      "name": "Trans_Introduction",
-      "score": 0.714,
+      "name": "Trans_RotationSpectacle",
+      "score": 0.5,
       "tag": "curated",
+      "grid": [
+        10,
+        54
+      ],
+      "n_concepts": 3,
+      "n_artifacts": 5,
+      "arts": [
+        {
+          "co": 10,
+          "col": 3,
+          "row": 3,
+          "lk": "boolean_tunnel",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 12,
+          "col": 0,
+          "row": 4,
+          "lk": "righttriangle",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 12,
+          "col": 3,
+          "row": 6,
+          "lk": "dark_sphere",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 12,
+          "col": 2,
+          "row": 51,
+          "lk": "pick_up_cube",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 5,
+          "col": 3,
+          "row": 53,
+          "lk": "carousel_cake",
+          "ai": 1,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "Trans_Introduction",
+      "score": -0.394,
+      "tag": "uncurated",
       "grid": [
         11,
         16
       ],
-      "n_concepts": 4,
-      "n_artifacts": 5,
+      "n_concepts": 5,
+      "n_artifacts": 7,
       "arts": [
         {
           "co": 7,
@@ -52,25 +106,134 @@
           "t": "m"
         },
         {
+          "co": 12,
+          "col": 5,
+          "row": 10,
+          "lk": "balance_puzzle",
+          "ai": 4,
+          "t": "m"
+        },
+        {
           "co": 5,
           "col": 2,
           "row": 12,
           "lk": "transform_composition",
           "ai": 1,
           "t": "a"
+        },
+        {
+          "co": 12,
+          "col": 5,
+          "row": 14,
+          "lk": "dark_sphere",
+          "ai": 4,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Trans_Translation",
+      "score": -0.5,
+      "tag": "uncurated",
+      "grid": [
+        7,
+        24
+      ],
+      "n_concepts": 3,
+      "n_artifacts": 10,
+      "arts": [
+        {
+          "co": 12,
+          "col": 0,
+          "row": 0,
+          "lk": "player_trace",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 5,
+          "col": 3,
+          "row": 0,
+          "lk": "transform_composition_workbench",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 1,
+          "col": 6,
+          "row": 2,
+          "lk": "z_translation_cube",
+          "ai": 0,
+          "t": "m"
+        },
+        {
+          "co": 12,
+          "col": 5,
+          "row": 3,
+          "lk": "pick_up_cube",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 12,
+          "col": 3,
+          "row": 10,
+          "lk": "dark_sphere",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 1,
+          "col": 1,
+          "row": 11,
+          "lk": "y_translation_cube",
+          "ai": 0,
+          "t": "m"
+        },
+        {
+          "co": 12,
+          "col": 2,
+          "row": 12,
+          "lk": "pick_up_cube",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 12,
+          "col": 4,
+          "row": 12,
+          "lk": "pick_up_cube",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 12,
+          "col": 2,
+          "row": 19,
+          "lk": "pick_up_cube",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 12,
+          "col": 2,
+          "row": 20,
+          "lk": "pick_up_cube",
+          "ai": 4,
+          "t": "s"
         }
       ]
     },
     {
       "name": "Trans_AxisDecomposition",
-      "score": null,
-      "tag": "sparse",
+      "score": -1.0,
+      "tag": "uncurated",
       "grid": [
         9,
         16
       ],
-      "n_concepts": 2,
-      "n_artifacts": 4,
+      "n_concepts": 3,
+      "n_artifacts": 15,
       "arts": [
         {
           "co": 11,
@@ -89,6 +252,14 @@
           "t": "m"
         },
         {
+          "co": 12,
+          "col": 3,
+          "row": 6,
+          "lk": "dark_sphere",
+          "ai": 4,
+          "t": "s"
+        },
+        {
           "co": 1,
           "col": 2,
           "row": 8,
@@ -103,6 +274,86 @@
           "lk": "translation_cube_demo",
           "ai": 0,
           "t": "m"
+        },
+        {
+          "co": 12,
+          "col": 0,
+          "row": 12,
+          "lk": "cube_scene",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 12,
+          "col": 1,
+          "row": 12,
+          "lk": "cube_scene",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 12,
+          "col": 2,
+          "row": 12,
+          "lk": "cube_scene",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 12,
+          "col": 0,
+          "row": 13,
+          "lk": "cube_scene",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 12,
+          "col": 2,
+          "row": 13,
+          "lk": "cube_scene",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 12,
+          "col": 0,
+          "row": 14,
+          "lk": "cube_scene",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 12,
+          "col": 2,
+          "row": 14,
+          "lk": "cube_scene",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 12,
+          "col": 0,
+          "row": 15,
+          "lk": "cube_scene",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 12,
+          "col": 1,
+          "row": 15,
+          "lk": "pick_up_cube",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 12,
+          "col": 2,
+          "row": 15,
+          "lk": "cube_scene",
+          "ai": 4,
+          "t": "s"
         }
       ]
     },
@@ -114,9 +365,25 @@
         7,
         40
       ],
-      "n_concepts": 1,
-      "n_artifacts": 2,
+      "n_concepts": 2,
+      "n_artifacts": 5,
       "arts": [
+        {
+          "co": 12,
+          "col": 3,
+          "row": 3,
+          "lk": "rotate_grid_cubes",
+          "ai": 4,
+          "t": "m"
+        },
+        {
+          "co": 12,
+          "col": 2,
+          "row": 17,
+          "lk": "dark_sphere",
+          "ai": 4,
+          "t": "s"
+        },
         {
           "co": 2,
           "col": 2,
@@ -132,67 +399,134 @@
           "lk": "spin",
           "ai": 0,
           "t": "m"
-        }
-      ]
-    },
-    {
-      "name": "Trans_RotationSpectacle",
-      "score": null,
-      "tag": "sparse",
-      "grid": [
-        10,
-        54
-      ],
-      "n_concepts": 2,
-      "n_artifacts": 2,
-      "arts": [
-        {
-          "co": 10,
-          "col": 3,
-          "row": 3,
-          "lk": "boolean_tunnel",
-          "ai": 3,
-          "t": "l"
         },
         {
-          "co": 5,
+          "co": 12,
           "col": 3,
-          "row": 53,
-          "lk": "carousel_cake",
-          "ai": 1,
-          "t": "a"
+          "row": 36,
+          "lk": "pick_up_cube",
+          "ai": 4,
+          "t": "s"
         }
       ]
     },
     {
-      "name": "Trans_Translation",
+      "name": "Trans_Scale",
       "score": null,
       "tag": "sparse",
       "grid": [
         7,
-        24
+        21
       ],
-      "n_concepts": 1,
-      "n_artifacts": 2,
+      "n_concepts": 2,
+      "n_artifacts": 13,
       "arts": [
         {
-          "co": 1,
-          "col": 6,
-          "row": 2,
-          "lk": "z_translation_cube",
-          "ai": 0,
+          "co": 12,
+          "col": 3,
+          "row": 4,
+          "lk": "chair_assembly_puzzle",
+          "ai": 4,
           "t": "m"
         },
         {
-          "co": 1,
-          "col": 1,
-          "row": 11,
-          "lk": "y_translation_cube",
+          "co": 3,
+          "col": 3,
+          "row": 8,
+          "lk": "scale_me",
           "ai": 0,
-          "t": "m"
+          "t": "s"
+        },
+        {
+          "co": 12,
+          "col": 0,
+          "row": 10,
+          "lk": "prism_block",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 12,
+          "col": 1,
+          "row": 10,
+          "lk": "prism_block",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 12,
+          "col": 2,
+          "row": 10,
+          "lk": "cube_scene",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 12,
+          "col": 3,
+          "row": 10,
+          "lk": "cube_scene",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 12,
+          "col": 4,
+          "row": 10,
+          "lk": "cube_scene",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 12,
+          "col": 5,
+          "row": 10,
+          "lk": "prism_block",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 12,
+          "col": 6,
+          "row": 10,
+          "lk": "prism_block",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 12,
+          "col": 2,
+          "row": 13,
+          "lk": "dark_sphere",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 12,
+          "col": 1,
+          "row": 15,
+          "lk": "prism_block",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 12,
+          "col": 5,
+          "row": 15,
+          "lk": "prism_block",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 12,
+          "col": 3,
+          "row": 16,
+          "lk": "prism_block",
+          "ai": 4,
+          "t": "s"
         }
       ]
     }
   ],
-  "total_maps": 5
+  "total_maps": 6
 }

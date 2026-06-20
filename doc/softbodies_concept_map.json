@@ -37,7 +37,8 @@
     "softbody gm01 bottle in cylinder mould",
     "softbody gm02 vase in tapered mould",
     "softbody gm03 box in cube mould",
-    "softbody gm04 pressed onto sphere"
+    "softbody gm04 pressed onto sphere",
+    "· palette (unplaced)"
   ],
   "concept_meta": {
     "A cube that won't hold its shape. Pres": {
@@ -50,14 +51,15 @@
           "jelly_cube"
         ],
         "medium": [
-          "science_screen"
+          "science_screen",
+          "jelly_variants"
         ],
         "large": [
           "softmill"
         ],
         "applied": []
       },
-      "count": 3
+      "count": 4
     },
     "Cloth hangs from a spinning carousel. ": {
       "truth": "Cloth hangs from a spinning carousel. Soft mushroom bodies dangle from arms, swinging outward as the ride turns — then slamming into obstacles. Walk through the straps. Feel them part around you.",
@@ -68,7 +70,8 @@
         "small": [
           "pick_up_cube",
           "revolving_joy_ride",
-          "cloth_straps"
+          "cloth_straps",
+          "flex_cloth_pad"
         ],
         "medium": [
           "grab_long_stick"
@@ -78,7 +81,7 @@
         ],
         "applied": []
       },
-      "count": 5
+      "count": 6
     },
     "Walls breathe. Flags dance. A trampoli": {
       "truth": "Walls breathe. Flags dance. A trampoline catches what falls. Soft bodies don't just exist in space — they negotiate it. Every surface here pushes back, deforms, recovers, or doesn't.",
@@ -223,13 +226,14 @@
       "act": "Act II",
       "tiers": {
         "small": [
-          "gallery_marker_soft-body"
+          "gallery_marker_soft-body",
+          "softbody_gallery_part3"
         ],
         "medium": [],
         "large": [],
         "applied": []
       },
-      "count": 1
+      "count": 2
     },
     "softbody sb02 cloth drape top row": {
       "truth": "softbody sb02 cloth drape top row — to be authored",
@@ -575,6 +579,24 @@
         "applied": []
       },
       "count": 1
+    },
+    "· palette (unplaced)": {
+      "act": "Act IV",
+      "truth": "sequence artifacts available but not yet placed in a map",
+      "tiers": {
+        "small": [
+          "pressure_soft_body",
+          "soft_body_slicer",
+          "viscous_fluid_blob"
+        ],
+        "medium": [
+          "frozen_glass_vessel",
+          "mesh_grammar_detailed_bulge"
+        ],
+        "large": [],
+        "applied": []
+      },
+      "count": 5
     }
   },
   "concept_distance": [
@@ -1811,7 +1833,8 @@
         "tier": "medium",
         "fp": 4,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "jelly_cube",
@@ -1819,7 +1842,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "softmill",
@@ -1827,7 +1851,18 @@
         "tier": "large",
         "fp": 10,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
+      },
+      {
+        "lookup": "jelly_variants",
+        "name": "Jelly Cube Variants",
+        "registry": "",
+        "tier": "medium",
+        "fp": 3,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
       }
     ],
     "Cloth hangs from a spinning carousel. ": [
@@ -1837,7 +1872,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "grab_long_stick",
@@ -1845,7 +1881,8 @@
         "tier": "medium",
         "fp": 3,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "revolving_joy_ride",
@@ -1853,7 +1890,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "cloth_straps",
@@ -1861,7 +1899,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "soft_mushroom",
@@ -1869,7 +1908,18 @@
         "tier": "large",
         "fp": 25,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
+      },
+      {
+        "lookup": "flex_cloth_pad",
+        "name": "Flex Cloth Pad",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
       }
     ],
     "Walls breathe. Flags dance. A trampoli": [
@@ -1879,7 +1929,8 @@
         "tier": "large",
         "fp": 77,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "pick_up_cube",
@@ -1887,7 +1938,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "grab_long_stick",
@@ -1895,7 +1947,8 @@
         "tier": "medium",
         "fp": 3,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "flagdancer",
@@ -1903,7 +1956,8 @@
         "tier": "small",
         "fp": 2,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       }
     ],
     "Twelve more tests. Twelve more ways ma": [
@@ -1913,7 +1967,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "pick_up_cube",
@@ -1921,7 +1976,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "grab_long_stick",
@@ -1929,7 +1985,8 @@
         "tier": "medium",
         "fp": 3,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       }
     ],
     "A surface made of springs. Each vertex": [
@@ -1939,7 +1996,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       }
     ],
     "No instructions. No objectives. Just a": [
@@ -1949,7 +2007,8 @@
         "tier": "large",
         "fp": 54,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "branching_growth_algorithm",
@@ -1957,7 +2016,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "gridagent",
@@ -1965,7 +2025,8 @@
         "tier": "medium",
         "fp": 4,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       }
     ],
     "A single radiolarian floats in a displ": [
@@ -1975,7 +2036,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       }
     ],
     "Two chemicals. One miracle.": [
@@ -1985,7 +2047,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "reaction_diffusion",
@@ -1993,7 +2056,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       }
     ],
     "Matching pairs nodes. Given a graph, f": [
@@ -2003,7 +2067,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       }
     ],
     "The hopper bounces softly. Spring phys": [
@@ -2013,7 +2078,8 @@
         "tier": "medium",
         "fp": 4,
         "has_image": true,
-        "recommended": false
+        "recommended": false,
+        "map_ready": true
       },
       {
         "lookup": "catalyst_target",
@@ -2021,7 +2087,8 @@
         "tier": "large",
         "fp": 64,
         "has_image": true,
-        "recommended": false
+        "recommended": false,
+        "map_ready": true
       },
       {
         "lookup": "proximity_spawner#type",
@@ -2029,7 +2096,8 @@
         "tier": "medium",
         "fp": 4,
         "has_image": false,
-        "recommended": false
+        "recommended": false,
+        "map_ready": true
       }
     ],
     "softbody sb01 cloth drape corners": [
@@ -2039,7 +2107,18 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
+      },
+      {
+        "lookup": "softbody_gallery_part3",
+        "name": "softbody_gallery_part3",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
       }
     ],
     "softbody sb02 cloth drape top row": [
@@ -2049,7 +2128,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       }
     ],
     "softbody sb03 cloth flag sideways": [
@@ -2059,7 +2139,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       }
     ],
     "softbody sb04 cloth tablecloth": [
@@ -2069,7 +2150,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       }
     ],
     "softbody sb05 jelly box bounce": [
@@ -2079,7 +2161,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       }
     ],
     "softbody sb06 jelly grid settle": [
@@ -2089,7 +2172,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       }
     ],
     "softbody sb07 jelly grid tall stiff": [
@@ -2099,7 +2183,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       }
     ],
     "softbody sb08 jelly grid floppy": [
@@ -2109,7 +2194,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       }
     ],
     "softbody sb ls01 plant skeleton": [
@@ -2119,7 +2205,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       }
     ],
     "softbody sb ls02 plant wind collapse": [
@@ -2129,7 +2216,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       }
     ],
     "softbody sb ca01 conway cloth": [
@@ -2139,7 +2227,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       }
     ],
     "softbody sb ca02 life without death cl": [
@@ -2149,7 +2238,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       }
     ],
     "softbody sb noise01 jelly crystal": [
@@ -2159,7 +2249,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       }
     ],
     "softbody sb rd01 coral cloth": [
@@ -2169,7 +2260,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       }
     ],
     "softbody sb rd02 stripes flag": [
@@ -2179,7 +2271,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       }
     ],
     "softbody gl01 classic bulb": [
@@ -2189,7 +2282,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       }
     ],
     "softbody gl02 long bottle": [
@@ -2199,7 +2293,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       }
     ],
     "softbody gl03 wide bowl": [
@@ -2209,7 +2304,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       }
     ],
     "softbody gl04 lopsided vase": [
@@ -2219,7 +2315,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       }
     ],
     "softbody gl05 collapsed sag": [
@@ -2229,7 +2326,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       }
     ],
     "softbody gm01 bottle in cylinder mould": [
@@ -2239,7 +2337,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       }
     ],
     "softbody gm02 vase in tapered mould": [
@@ -2249,7 +2348,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       }
     ],
     "softbody gm03 box in cube mould": [
@@ -2259,7 +2359,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       }
     ],
     "softbody gm04 pressed onto sphere": [
@@ -2269,12 +2370,66 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
+      }
+    ],
+    "· palette (unplaced)": [
+      {
+        "lookup": "frozen_glass_vessel",
+        "name": "Frozen Glass Vessel",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "mesh_grammar_detailed_bulge",
+        "name": "MeshGrammar — Detailed Bulge",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "pressure_soft_body",
+        "name": "Pressure Soft Body",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "soft_body_slicer",
+        "name": "Soft Body Slicer",
+        "registry": "",
+        "tier": "small",
+        "fp": 2,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "viscous_fluid_blob",
+        "name": "Viscous Fluid Blob",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
       }
     ]
   },
-  "total": 50,
-  "total_concepts": 34,
+  "total": 58,
+  "total_concepts": 35,
   "recommended_total": 47,
-  "map_ready_total": 47
+  "map_ready_total": 47,
+  "palette_total": 8
 }

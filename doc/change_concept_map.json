@@ -8,7 +8,8 @@
     "Intro",
     "Reconciliation",
     "Slope Surface",
-    "Velocity"
+    "Velocity",
+    "· palette (unplaced)"
   ],
   "concept_meta": {
     "Bench": {
@@ -95,6 +96,23 @@
         "applied": []
       },
       "count": 4
+    },
+    "· palette (unplaced)": {
+      "act": "Act IV",
+      "truth": "sequence artifacts available but not yet placed in a map",
+      "tiers": {
+        "small": [
+          "catalyst_sustain_demo",
+          "integral_area",
+          "particle_flow_swarm",
+          "riemann_pump",
+          "vector_field_grid"
+        ],
+        "medium": [],
+        "large": [],
+        "applied": []
+      },
+      "count": 5
     }
   },
   "concept_distance": [
@@ -142,7 +160,8 @@
         "fp": 4,
         "recommended": true,
         "tier": "medium",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "ftc_bridge",
@@ -150,7 +169,8 @@
         "fp": 1,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "riemann_sum_workbench",
@@ -158,7 +178,8 @@
         "fp": 4,
         "recommended": true,
         "tier": "medium",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       }
     ],
     "Intro": [
@@ -168,7 +189,8 @@
         "fp": 4,
         "recommended": true,
         "tier": "medium",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "derivative_pair",
@@ -176,7 +198,8 @@
         "fp": 1,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "code_display",
@@ -184,7 +207,8 @@
         "fp": 1,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "slope_tangent_demo",
@@ -192,7 +216,8 @@
         "fp": 1,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       }
     ],
     "Reconciliation": [
@@ -202,7 +227,8 @@
         "fp": 1,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "science_screen",
@@ -210,7 +236,8 @@
         "fp": 4,
         "recommended": true,
         "tier": "medium",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "ftc_bridge",
@@ -218,7 +245,8 @@
         "fp": 1,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       }
     ],
     "Slope Surface": [
@@ -228,7 +256,8 @@
         "fp": 4,
         "recommended": true,
         "tier": "medium",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "partial_derivative_terrain",
@@ -236,7 +265,8 @@
         "fp": 1,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       }
     ],
     "Velocity": [
@@ -246,7 +276,8 @@
         "fp": 1,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "derivative_pair",
@@ -254,7 +285,8 @@
         "fp": 1,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "player_trace",
@@ -262,7 +294,8 @@
         "fp": 1,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "velocity_arrow",
@@ -270,12 +303,66 @@
         "fp": 1,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
+      }
+    ],
+    "· palette (unplaced)": [
+      {
+        "lookup": "catalyst_sustain_demo",
+        "name": "Catalyst Sustain Demo",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "integral_area",
+        "name": "Integral Area",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "particle_flow_swarm",
+        "name": "Particle Flow Swarm",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "riemann_pump",
+        "name": "Riemann Pump",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "vector_field_grid",
+        "name": "Vector Field Grid",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
       }
     ]
   },
-  "total": 16,
-  "total_concepts": 5,
+  "total": 21,
+  "total_concepts": 6,
   "recommended_total": 16,
-  "map_ready_total": 16
+  "map_ready_total": 16,
+  "palette_total": 5
 }

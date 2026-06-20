@@ -9,45 +9,8 @@
   ],
   "maps": [
     {
-      "name": "LSystems_Competition",
-      "score": 0.866,
-      "tag": "curated",
-      "grid": [
-        8,
-        10
-      ],
-      "n_concepts": 3,
-      "n_artifacts": 3,
-      "arts": [
-        {
-          "co": 7,
-          "col": 3,
-          "row": 2,
-          "lk": "ForestCompetition",
-          "ai": 1,
-          "t": "l"
-        },
-        {
-          "co": 12,
-          "col": 6,
-          "row": 4,
-          "lk": "branching_coral",
-          "ai": 3,
-          "t": "m"
-        },
-        {
-          "co": 8,
-          "col": 4,
-          "row": 7,
-          "lk": "dark_sphere",
-          "ai": 2,
-          "t": "s"
-        }
-      ]
-    },
-    {
       "name": "AutoGenTest",
-      "score": 0.58,
+      "score": 0.5,
       "tag": "curated",
       "grid": [
         14,
@@ -92,8 +55,8 @@
     },
     {
       "name": "Fractal_CrossSequence",
-      "score": -0.5,
-      "tag": "uncurated",
+      "score": 0.5,
+      "tag": "curated",
       "grid": [
         7,
         8
@@ -129,8 +92,8 @@
     },
     {
       "name": "LSystems_Architecture",
-      "score": -1.0,
-      "tag": "uncurated",
+      "score": 0.5,
+      "tag": "curated",
       "grid": [
         8,
         10
@@ -160,6 +123,43 @@
           "row": 6,
           "lk": "lsystem_dungeon",
           "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "LSystems_Competition",
+      "score": -0.866,
+      "tag": "uncurated",
+      "grid": [
+        8,
+        10
+      ],
+      "n_concepts": 3,
+      "n_artifacts": 3,
+      "arts": [
+        {
+          "co": 7,
+          "col": 3,
+          "row": 2,
+          "lk": "ForestCompetition",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 12,
+          "col": 6,
+          "row": 4,
+          "lk": "branching_coral",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 8,
+          "col": 4,
+          "row": 7,
+          "lk": "dark_sphere",
+          "ai": 2,
           "t": "s"
         }
       ]
@@ -988,8 +988,8 @@
         7,
         17
       ],
-      "n_concepts": 1,
-      "n_artifacts": 1,
+      "n_concepts": 2,
+      "n_artifacts": 2,
       "arts": [
         {
           "co": 8,
@@ -997,6 +997,14 @@
           "row": 2,
           "lk": "dark_sphere",
           "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 16,
+          "col": 3,
+          "row": 5,
+          "lk": "grid_substrate_runner",
+          "ai": 3,
           "t": "s"
         }
       ]
@@ -3320,6 +3328,96 @@
           "lk": "dark_sphere",
           "ai": 2,
           "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Gallery_LivingPaper",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        18
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 3,
+      "arts": [
+        {
+          "co": 12,
+          "col": 6,
+          "row": 4,
+          "lk": "living_paper_dragon",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 12,
+          "col": 8,
+          "row": 4,
+          "lk": "living_paper_fern",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 12,
+          "col": 6,
+          "row": 14,
+          "lk": "living_paper_tree",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Gallery_MeshGrammar",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        16
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 5,
+      "arts": [
+        {
+          "co": 6,
+          "col": 6,
+          "row": 2,
+          "lk": "mesh_grammar_blooming_bulge",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 6,
+          "col": 8,
+          "row": 2,
+          "lk": "mesh_grammar_branching_coral",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 6,
+          "col": 6,
+          "row": 4,
+          "lk": "mesh_grammar_coral_fingers",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 6,
+          "col": 2,
+          "row": 8,
+          "lk": "mesh_grammar_lsystem_tree",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 6,
+          "col": 8,
+          "row": 8,
+          "lk": "mesh_grammar_petal_flower",
+          "ai": 1,
+          "t": "m"
         }
       ]
     },
@@ -9264,5 +9362,5 @@
       ]
     }
   ],
-  "total_maps": 411
+  "total_maps": 413
 }

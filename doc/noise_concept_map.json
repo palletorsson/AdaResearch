@@ -12,7 +12,8 @@
     "Noise controlling noise. The output of",
     "Expand the canvas. Ten dimensions of p",
     "Perlin noise",
-    "The corridor back. Every sequence ends"
+    "The corridor back. Every sequence ends",
+    "· palette (unplaced)"
   ],
   "concept_meta": {
     "White noise screams chaos": {
@@ -25,14 +26,27 @@
           "randompoint",
           "randompoints"
         ],
-        "medium": [],
+        "medium": [
+          "curl_noise_particles",
+          "living_paper_noise_octaves",
+          "mesh_grammar_noise_sculpture",
+          "noise_mixer",
+          "pool_hole_noise",
+          "profile_noise",
+          "profile_noise_octaves",
+          "worley_noise"
+        ],
         "large": [
           "WhiteNoiseGallery",
-          "NoiseColors3D"
+          "NoiseColors3D",
+          "blue_noise",
+          "noise_terrain_with_blobs",
+          "random_transformations_noise",
+          "value_noise"
         ],
         "applied": []
       },
-      "count": 4
+      "count": 16
     },
     "Noise extruded vertically. Sample the ": {
       "truth": "Noise extruded vertically. Sample the 2D function, lift the result into height. Mountains rise from mathematics, valleys fall from continuous variation.",
@@ -60,14 +74,18 @@
         "small": [
           "dark_sphere"
         ],
-        "medium": [],
+        "medium": [
+          "living_paper_perlin",
+          "particle_randomness_perlin"
+        ],
         "large": [
           "noisetorus",
-          "noiselayers"
+          "noiselayers",
+          "perlin_noise_clouds"
         ],
         "applied": []
       },
-      "count": 3
+      "count": 6
     },
     "Three": {
       "truth": "Three-dimensional noise carved into blocks. Where the function exceeds threshold: solid. Where it falls below: void. Caves, overhangs, floating islands — topologies impossible with heightmaps alone.",
@@ -176,6 +194,30 @@
         "applied": []
       },
       "count": 1
+    },
+    "· palette (unplaced)": {
+      "act": "Act IV",
+      "truth": "sequence artifacts available but not yet placed in a map",
+      "tiers": {
+        "small": [
+          "RandomGaussianTexture",
+          "VectorFieldFlow",
+          "configurable_portal",
+          "grid_substrate_runner",
+          "noisetext"
+        ],
+        "medium": [
+          "living_paper_voronoi",
+          "mesh_grammar_crumpled",
+          "neon_wave_grid",
+          "profile"
+        ],
+        "large": [
+          "VoxelNoiseROIs"
+        ],
+        "applied": []
+      },
+      "count": 10
     }
   },
   "concept_distance": [
@@ -287,7 +329,8 @@
         "tier": "small",
         "fp": 2,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "randompoints",
@@ -295,7 +338,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "WhiteNoiseGallery",
@@ -303,7 +347,8 @@
         "tier": "large",
         "fp": 400,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "NoiseColors3D",
@@ -311,7 +356,128 @@
         "tier": "large",
         "fp": 90,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
+      },
+      {
+        "lookup": "blue_noise",
+        "name": "blue_noise",
+        "registry": "",
+        "tier": "large",
+        "fp": 21,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "curl_noise_particles",
+        "name": "Curl Noise Particles",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "living_paper_noise_octaves",
+        "name": "living_paper_noise_octaves",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "mesh_grammar_noise_sculpture",
+        "name": "MeshGrammar — Noise Sculpture",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "noise_mixer",
+        "name": "Noise Mixer",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "noise_terrain_with_blobs",
+        "name": "noise_terrain_with_blobs",
+        "registry": "",
+        "tier": "large",
+        "fp": 2500,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "pool_hole_noise",
+        "name": "pool_hole_noise",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "profile_noise",
+        "name": "Profile — 1D Noise",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "profile_noise_octaves",
+        "name": "Profile — Noise Octaves",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "random_transformations_noise",
+        "name": "random_transformations_noise",
+        "registry": "",
+        "tier": "large",
+        "fp": 121,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "value_noise",
+        "name": "value_noise",
+        "registry": "",
+        "tier": "large",
+        "fp": 121,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "worley_noise",
+        "name": "Worley Noise",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
       }
     ],
     "Noise extruded vertically. Sample the ": [
@@ -321,7 +487,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "MeltingBerniniScene",
@@ -329,7 +496,8 @@
         "tier": "large",
         "fp": 12,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       }
     ],
     "Before Perlin, noise was static": [
@@ -339,7 +507,8 @@
         "tier": "large",
         "fp": 25,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "noiselayers",
@@ -347,7 +516,8 @@
         "tier": "large",
         "fp": 44000,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "dark_sphere",
@@ -355,7 +525,38 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
+      },
+      {
+        "lookup": "living_paper_perlin",
+        "name": "living_paper_perlin",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "particle_randomness_perlin",
+        "name": "particle_randomness_perlin",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "perlin_noise_clouds",
+        "name": "perlin_noise_clouds",
+        "registry": "",
+        "tier": "large",
+        "fp": 2500,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
       }
     ],
     "Three": [
@@ -365,7 +566,8 @@
         "tier": "medium",
         "fp": 4,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "science_screen",
@@ -373,7 +575,8 @@
         "tier": "medium",
         "fp": 4,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "voxelnoise",
@@ -381,7 +584,8 @@
         "tier": "large",
         "fp": 1024,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "dark_sphere",
@@ -389,7 +593,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       }
     ],
     "Six octaves layered. Low frequency for": [
@@ -399,7 +604,8 @@
         "tier": "large",
         "fp": 532,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "dark_sphere",
@@ -407,7 +613,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       }
     ],
     "Noise controlling noise. The output of": [
@@ -417,7 +624,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "noisesphere",
@@ -425,7 +633,8 @@
         "tier": "large",
         "fp": 960,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       }
     ],
     "Expand the canvas. Ten dimensions of p": [
@@ -435,7 +644,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "noise_space",
@@ -443,7 +653,8 @@
         "tier": "large",
         "fp": 100,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       }
     ],
     "Perlin noise": [
@@ -453,7 +664,8 @@
         "tier": "large",
         "fp": 100,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "perlin_noise",
@@ -461,7 +673,8 @@
         "tier": "large",
         "fp": 100,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "noise_terrain",
@@ -469,7 +682,8 @@
         "tier": "large",
         "fp": 10000,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "dark_sphere",
@@ -477,7 +691,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "perlin_noise_terrain",
@@ -485,7 +700,8 @@
         "tier": "medium",
         "fp": 4,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "configurable_portal#dest_map",
@@ -493,7 +709,8 @@
         "tier": "medium",
         "fp": 4,
         "has_image": false,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       }
     ],
     "The corridor back. Every sequence ends": [
@@ -503,12 +720,116 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
+      }
+    ],
+    "· palette (unplaced)": [
+      {
+        "lookup": "RandomGaussianTexture",
+        "name": "RandomGaussianTexture",
+        "registry": "",
+        "tier": "small",
+        "fp": 2,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "VectorFieldFlow",
+        "name": "VectorFieldFlow",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "VoxelNoiseROIs",
+        "name": "VoxelNoiseROIs",
+        "registry": "",
+        "tier": "large",
+        "fp": 625,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "configurable_portal",
+        "name": "configurable_portal",
+        "registry": "",
+        "tier": "small",
+        "fp": 2,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "grid_substrate_runner",
+        "name": "Grid Substrate Runner",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "living_paper_voronoi",
+        "name": "living_paper_voronoi",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "mesh_grammar_crumpled",
+        "name": "MeshGrammar — Crumpled Form",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "neon_wave_grid",
+        "name": "neon_wave_grid",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "noisetext",
+        "name": "noisetext",
+        "registry": "",
+        "tier": "small",
+        "fp": 2,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "profile",
+        "name": "Profile Substrate",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
       }
     ]
   },
-  "total": 26,
-  "total_concepts": 9,
+  "total": 51,
+  "total_concepts": 10,
   "recommended_total": 26,
-  "map_ready_total": 26
+  "map_ready_total": 26,
+  "palette_total": 25
 }

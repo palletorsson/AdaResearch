@@ -15,7 +15,8 @@
     "Tiling / pattern",
     "Field / flow",
     "Boolean / CSG",
-    "Curved space (non-Euclidean)"
+    "Curved space (non-Euclidean)",
+    "· palette (unplaced)"
   ],
   "concept_meta": {
     "Three rigid motions": {
@@ -71,13 +72,14 @@
       "tiers": {
         "small": [
           "rotatescalecubes",
-          "scaleme"
+          "scaleme",
+          "scale_me"
         ],
         "medium": [],
         "large": [],
         "applied": []
       },
-      "count": 2,
+      "count": 3,
       "thin": false
     },
     "Shear": {
@@ -99,21 +101,25 @@
       "truth": "transforms compose, and the order is the meaning.",
       "tiers": {
         "small": [],
-        "medium": [],
+        "medium": [
+          "transform_composition_workbench"
+        ],
         "large": [],
         "applied": [
           "carousel_cake",
           "transform_composition"
         ]
       },
-      "count": 2,
+      "count": 3,
       "thin": false
     },
     "Matrix / homogeneous": {
       "act": "representation",
       "truth": "every transform is a matrix; homogeneous coordinates unify them.",
       "tiers": {
-        "small": [],
+        "small": [
+          "transform_matrix_cube"
+        ],
         "medium": [
           "homogeneous_coordinates",
           "matrix_4x4_viewer"
@@ -121,7 +127,7 @@
         "large": [],
         "applied": []
       },
-      "count": 2,
+      "count": 3,
       "thin": false
     },
     "Invariants": {
@@ -143,13 +149,15 @@
       "truth": "a transform repeated fills a plane.",
       "tiers": {
         "small": [],
-        "medium": [],
+        "medium": [
+          "pattern_tile_brick"
+        ],
         "large": [
           "floor_tiles"
         ],
         "applied": []
       },
-      "count": 1,
+      "count": 2,
       "thin": true
     },
     "Field / flow": {
@@ -213,6 +221,72 @@
       },
       "count": 18,
       "thin": false
+    },
+    "· palette (unplaced)": {
+      "act": "Act IV",
+      "truth": "sequence artifacts available but not yet placed in a map",
+      "tiers": {
+        "small": [
+          "VectorAddition",
+          "VectorBasics",
+          "VectorCrossProduct",
+          "VectorSubtraction",
+          "attractorsphere",
+          "catalyst_foe",
+          "catalyst_vent",
+          "cube_scene",
+          "dark_sphere",
+          "example_1_1_bouncing_ball_with_no_vectors_vr",
+          "example_1_3_vector_subtraction_vr",
+          "example_1_4_vector_multiplication_vr",
+          "example_1_5_vector_magnitude_vr",
+          "example_1_6_vector_normalize_vr",
+          "example_1_7_motion_101_velocity_vr",
+          "example_1_8_motion_101_velocity_and_constant_acceleration_vr",
+          "example_1_9_motion_101_velocity_and_random_acceleration_vr",
+          "example_2_2_forces_mass_variation_vr",
+          "example_2_3_gravity_scaled_by_mass_vr",
+          "example_2_5_fluid_resistance_vr",
+          "example_2_6_single_attractor_vr",
+          "example_2_7_multiple_attractors_vr",
+          "example_2_8_two_body_attraction_vr",
+          "example_2_9_n_body_attraction_vr",
+          "exercise_1_3_solution_3_d_bouncing_ball_vr",
+          "exercise_1_5_solution_accelerate_and_decelerate_vr",
+          "exercise_1_8_solution_attraction_magnitude_vr",
+          "grid_substrate_runner",
+          "path_builder_foe",
+          "path_cube",
+          "path_game_controller",
+          "path_pyramid",
+          "path_watchdog",
+          "path_wedge",
+          "pick_up_cube",
+          "player_trace",
+          "prism_block",
+          "righttriangle",
+          "vector_magnitude_demo",
+          "vector_normalize_demo"
+        ],
+        "medium": [
+          "balance_puzzle",
+          "chair_assembly_puzzle",
+          "grower_block",
+          "mesh_grammar_extruded_spire",
+          "mesh_grammar_subdivided",
+          "pusher_block",
+          "rotate_grid_cubes",
+          "sweeper_block"
+        ],
+        "large": [
+          "vector_addition_xl",
+          "vector_addition_xl_laser",
+          "vector_cross_product_xl",
+          "vector_subtraction_xl_laser"
+        ],
+        "applied": []
+      },
+      "count": 52
     }
   },
   "concept_distance": [
@@ -394,7 +468,8 @@
         "tier": "applied",
         "fp": 2,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       }
     ],
     "Translation": [
@@ -405,7 +480,8 @@
         "tier": "medium",
         "fp": 4,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "translation_cube_demo",
@@ -414,7 +490,8 @@
         "tier": "medium",
         "fp": 4,
         "has_image": true,
-        "recommended": false
+        "recommended": false,
+        "map_ready": true
       },
       {
         "lookup": "x_translation_cube",
@@ -423,7 +500,8 @@
         "tier": "medium",
         "fp": 4,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "y_translation_cube",
@@ -432,7 +510,8 @@
         "tier": "medium",
         "fp": 4,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "z_translation_cube",
@@ -441,7 +520,8 @@
         "tier": "medium",
         "fp": 4,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       }
     ],
     "Rotation": [
@@ -452,7 +532,8 @@
         "tier": "medium",
         "fp": 4,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "spin",
@@ -461,7 +542,8 @@
         "tier": "medium",
         "fp": 6,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       }
     ],
     "Scale": [
@@ -472,7 +554,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "scaleme",
@@ -481,7 +564,18 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
+      },
+      {
+        "lookup": "scale_me",
+        "name": "scale_me",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
       }
     ],
     "Shear": [
@@ -492,7 +586,8 @@
         "tier": "medium",
         "fp": 4,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       }
     ],
     "Composition": [
@@ -503,7 +598,8 @@
         "tier": "applied",
         "fp": 9,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "transform_composition",
@@ -512,7 +608,18 @@
         "tier": "applied",
         "fp": 4,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
+      },
+      {
+        "lookup": "transform_composition_workbench",
+        "name": "Transform Composition Workbench",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
       }
     ],
     "Matrix / homogeneous": [
@@ -523,7 +630,8 @@
         "tier": "medium",
         "fp": 4,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "matrix_4x4_viewer",
@@ -532,7 +640,18 @@
         "tier": "medium",
         "fp": 4,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
+      },
+      {
+        "lookup": "transform_matrix_cube",
+        "name": "Transform Matrix Cube",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
       }
     ],
     "Invariants": [
@@ -543,7 +662,8 @@
         "tier": "medium",
         "fp": 4,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       }
     ],
     "Tiling / pattern": [
@@ -554,7 +674,18 @@
         "tier": "large",
         "fp": 54,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
+      },
+      {
+        "lookup": "pattern_tile_brick",
+        "name": "pattern_tile_brick",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
       }
     ],
     "Field / flow": [
@@ -565,7 +696,8 @@
         "tier": "large",
         "fp": 4,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "vector_field",
@@ -574,7 +706,8 @@
         "tier": "large",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       }
     ],
     "Boolean / CSG": [
@@ -585,7 +718,8 @@
         "tier": "large",
         "fp": 12,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       }
     ],
     "Curved space (non-Euclidean)": [
@@ -596,7 +730,8 @@
         "tier": "large",
         "fp": 30,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "curvature_slider",
@@ -605,7 +740,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "elliptic_surface",
@@ -614,7 +750,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "entropy_morphogenesis",
@@ -623,7 +760,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "gyroid_cheese",
@@ -632,7 +770,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "hyperbolic_surface",
@@ -641,7 +780,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "marching_cubes",
@@ -650,7 +790,8 @@
         "tier": "large",
         "fp": 11,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "mobius_strip_altgeo",
@@ -659,7 +800,8 @@
         "tier": "large",
         "fp": 9,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "mobius_world",
@@ -668,7 +810,8 @@
         "tier": "large",
         "fp": 4968,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "non_euclidean_space",
@@ -677,7 +820,8 @@
         "tier": "large",
         "fp": 56,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "organic_space",
@@ -686,7 +830,8 @@
         "tier": "large",
         "fp": 13,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "rhizomatic_maze_space",
@@ -695,7 +840,8 @@
         "tier": "large",
         "fp": 2500,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "rhizomatic_structure",
@@ -704,7 +850,8 @@
         "tier": "large",
         "fp": 280,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "riemann_pi",
@@ -713,7 +860,8 @@
         "tier": "large",
         "fp": 92,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "riemann_sphere",
@@ -722,7 +870,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "riemann_torus",
@@ -731,7 +880,8 @@
         "tier": "large",
         "fp": 30,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "toruscylinder",
@@ -740,7 +890,8 @@
         "tier": "large",
         "fp": 20,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "triangle_curvature_workbench",
@@ -749,12 +900,536 @@
         "tier": "applied",
         "fp": 4,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
+      }
+    ],
+    "· palette (unplaced)": [
+      {
+        "lookup": "VectorAddition",
+        "name": "VectorAddition",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "VectorBasics",
+        "name": "VectorBasics",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "VectorCrossProduct",
+        "name": "VectorCrossProduct",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "VectorSubtraction",
+        "name": "VectorSubtraction",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "attractorsphere",
+        "name": "Attractor Sphere",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "balance_puzzle",
+        "name": "balance_puzzle",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "catalyst_foe",
+        "name": "Catalyst Foe",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "catalyst_vent",
+        "name": "Catalyst Vent",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "chair_assembly_puzzle",
+        "name": "chair_assembly_puzzle",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "cube_scene",
+        "name": "Basic Cube Scene",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "dark_sphere",
+        "name": "Dark Sphere",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "example_1_1_bouncing_ball_with_no_vectors_vr",
+        "name": "Bouncing Ball with No Vectors VR",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "example_1_3_vector_subtraction_vr",
+        "name": "Vector Subtraction VR",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "example_1_4_vector_multiplication_vr",
+        "name": "Vector Multiplication VR",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "example_1_5_vector_magnitude_vr",
+        "name": "Vector Magnitude VR",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "example_1_6_vector_normalize_vr",
+        "name": "Vector Normalize VR",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "example_1_7_motion_101_velocity_vr",
+        "name": "Motion 101 Velocity VR",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "example_1_8_motion_101_velocity_and_constant_acceleration_vr",
+        "name": "Motion 101 Velocity and Constant Acceleration VR",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "example_1_9_motion_101_velocity_and_random_acceleration_vr",
+        "name": "Motion 101 Velocity and Random Acceleration VR",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "example_2_2_forces_mass_variation_vr",
+        "name": "example_2_2_forces_mass_variation_vr",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "example_2_3_gravity_scaled_by_mass_vr",
+        "name": "example_2_3_gravity_scaled_by_mass_vr",
+        "registry": "",
+        "tier": "small",
+        "fp": 2,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "example_2_5_fluid_resistance_vr",
+        "name": "example_2_5_fluid_resistance_vr",
+        "registry": "",
+        "tier": "small",
+        "fp": 2,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "example_2_6_single_attractor_vr",
+        "name": "example_2_6_single_attractor_vr",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "example_2_7_multiple_attractors_vr",
+        "name": "example_2_7_multiple_attractors_vr",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "example_2_8_two_body_attraction_vr",
+        "name": "example_2_8_two_body_attraction_vr",
+        "registry": "",
+        "tier": "small",
+        "fp": 2,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "example_2_9_n_body_attraction_vr",
+        "name": "example_2_9_n_body_attraction_vr",
+        "registry": "",
+        "tier": "small",
+        "fp": 2,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "exercise_1_3_solution_3_d_bouncing_ball_vr",
+        "name": "3D Bouncing Ball",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "exercise_1_5_solution_accelerate_and_decelerate_vr",
+        "name": "Accelerate and Decelerate",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "exercise_1_8_solution_attraction_magnitude_vr",
+        "name": "Attraction and Orbit",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "grid_substrate_runner",
+        "name": "Grid Substrate Runner",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "grower_block",
+        "name": "Grower Block",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "mesh_grammar_extruded_spire",
+        "name": "MeshGrammar — Extruded Spire",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "mesh_grammar_subdivided",
+        "name": "MeshGrammar — Subdivided Sphere",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "path_builder_foe",
+        "name": "Path Builder Foe",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "path_cube",
+        "name": "Path Cube (wall)",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "path_game_controller",
+        "name": "Path Game Controller",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "path_pyramid",
+        "name": "Path Pyramid (mound)",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "path_watchdog",
+        "name": "Path Watchdog",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "path_wedge",
+        "name": "Path Wedge (ramp)",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "pick_up_cube",
+        "name": "Pick Up Cube",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "player_trace",
+        "name": "player_trace",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "prism_block",
+        "name": "prism_block",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "pusher_block",
+        "name": "Pusher Block",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "righttriangle",
+        "name": "righttriangle",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "rotate_grid_cubes",
+        "name": "rotate_grid_cubes",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "sweeper_block",
+        "name": "Sweeper Block",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "vector_addition_xl",
+        "name": "Vector Addition (Walk-Inside)",
+        "registry": "",
+        "tier": "large",
+        "fp": 25,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "vector_addition_xl_laser",
+        "name": "Vector Addition (Laser, 4 m+)",
+        "registry": "",
+        "tier": "large",
+        "fp": 64,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "vector_cross_product_xl",
+        "name": "Cross Product (Walk-Inside)",
+        "registry": "",
+        "tier": "large",
+        "fp": 25,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "vector_magnitude_demo",
+        "name": "Vector Magnitude",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "vector_normalize_demo",
+        "name": "Vector Normalization",
+        "registry": "",
+        "tier": "small",
+        "fp": 2,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "vector_subtraction_xl_laser",
+        "name": "Vector Subtraction (Laser, 4 m+)",
+        "registry": "",
+        "tier": "large",
+        "fp": 64,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
       }
     ]
   },
-  "total": 38,
-  "total_concepts": 12,
+  "total": 94,
+  "total_concepts": 13,
   "recommended_total": 37,
-  "map_ready_total": 37
+  "map_ready_total": 37,
+  "palette_total": 56
 }

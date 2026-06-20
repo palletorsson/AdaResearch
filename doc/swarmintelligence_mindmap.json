@@ -27,7 +27,7 @@
       "act": "Act I",
       "truth": "Ant Colony Optimization",
       "count": 1,
-      "x_spread": 0.2619,
+      "x_spread": -0.7142,
       "tiers": {
         "small": [],
         "medium": [],
@@ -43,7 +43,7 @@
       "act": "Act II",
       "truth": "Boids Algorithm",
       "count": 5,
-      "x_spread": -0.6421,
+      "x_spread": -0.4286,
       "tiers": {
         "small": [
           "boids_aquarium",
@@ -65,7 +65,7 @@
       "act": "Act II",
       "truth": "FlowFields",
       "count": 1,
-      "x_spread": 0.0097,
+      "x_spread": -0.1428,
       "tiers": {
         "small": [],
         "medium": [],
@@ -81,7 +81,7 @@
       "act": "Act III",
       "truth": "Particle Swarm Optimization",
       "count": 2,
-      "x_spread": -0.2968,
+      "x_spread": 0.1428,
       "tiers": {
         "small": [],
         "medium": [],
@@ -98,7 +98,7 @@
       "act": "Act III",
       "truth": "PhysarumColony",
       "count": 2,
-      "x_spread": 1.0,
+      "x_spread": 0.4286,
       "tiers": {
         "small": [],
         "medium": [
@@ -116,10 +116,27 @@
       "act": "Act IV",
       "truth": "Swarm Intelligence Algorithms",
       "count": 1,
-      "x_spread": -0.16,
+      "x_spread": 0.7142,
       "tiers": {
         "small": [
           "ecosystem_simulation"
+        ],
+        "medium": [],
+        "large": [],
+        "applied": []
+      }
+    },
+    {
+      "key": "· palette (unplaced)",
+      "order": 7,
+      "act": "Act IV",
+      "truth": "sequence artifacts available but not yet placed in a map",
+      "count": 2,
+      "x_spread": 1.0,
+      "tiers": {
+        "small": [
+          "catalyst_foe",
+          "catalyst_vent"
         ],
         "medium": [],
         "large": [],
@@ -130,65 +147,82 @@
   "concept_distance": [
     [
       0.0,
-      0.5306,
-      0.1552,
-      0.7274,
-      0.6828,
+      0.1429,
+      0.2857,
+      0.4286,
+      0.5714,
+      0.7143,
+      0.8571,
+      1.0
+    ],
+    [
+      0.1429,
+      0.0,
+      0.1429,
+      0.2857,
+      0.4286,
+      0.5714,
+      0.7143,
+      0.8571
+    ],
+    [
+      0.2857,
+      0.1429,
+      0.0,
+      0.1429,
+      0.2857,
+      0.4286,
+      0.5714,
+      0.7143
+    ],
+    [
+      0.4286,
+      0.2857,
+      0.1429,
+      0.0,
+      0.1429,
+      0.2857,
+      0.4286,
+      0.5714
+    ],
+    [
+      0.5714,
+      0.4286,
+      0.2857,
+      0.1429,
+      0.0,
+      0.1429,
+      0.2857,
+      0.4286
+    ],
+    [
+      0.7143,
+      0.5714,
+      0.4286,
+      0.2857,
+      0.1429,
+      0.0,
+      0.1429,
+      0.2857
+    ],
+    [
+      0.8571,
+      0.7143,
+      0.5714,
+      0.4286,
+      0.2857,
+      0.1429,
+      0.0,
+      0.1429
+    ],
+    [
       1.0,
-      0.582
-    ],
-    [
-      0.5306,
-      0.0,
-      0.8817,
-      0.7769,
-      0.0,
-      0.2687,
-      0.3734
-    ],
-    [
-      0.1552,
-      0.8817,
-      0.0,
-      0.4462,
-      0.644,
-      0.7973,
-      0.4821
-    ],
-    [
-      0.7274,
-      0.7769,
-      0.4462,
-      0.0,
-      0.7352,
-      0.7177,
-      0.7701
-    ],
-    [
-      0.6828,
-      0.0,
-      0.644,
-      0.7352,
-      0.0,
-      0.9796,
-      0.3725
-    ],
-    [
-      1.0,
-      0.2687,
-      0.7973,
-      0.7177,
-      0.9796,
-      0.0,
-      0.742
-    ],
-    [
-      0.582,
-      0.3734,
-      0.4821,
-      0.7701,
-      0.3725,
-      0.742,
+      0.8571,
+      0.7143,
+      0.5714,
+      0.4286,
+      0.2857,
+      0.1429,
       0.0
     ]
   ],
@@ -203,7 +237,8 @@
       "size": 14,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "AntColonyV2",
@@ -215,7 +250,8 @@
       "size": 14,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "boids_aquarium",
@@ -227,7 +263,8 @@
       "size": 5,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "boid_flocking",
@@ -239,7 +276,8 @@
       "size": 5,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "science_screen",
@@ -251,7 +289,8 @@
       "size": 8,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "boid_manager",
@@ -263,7 +302,8 @@
       "size": 14,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "boids_2d_in_3d",
@@ -275,7 +315,8 @@
       "size": 8,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "FlowFieldMain",
@@ -287,7 +328,8 @@
       "size": 14,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "fitness_landscape_politics",
@@ -299,7 +341,8 @@
       "size": 14,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "self_organizing_patterns",
@@ -311,7 +354,8 @@
       "size": 14,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "science_screen",
@@ -323,7 +367,8 @@
       "size": 8,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "PhysarumColony",
@@ -335,7 +380,8 @@
       "size": 14,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "ecosystem_simulation",
@@ -347,9 +393,36 @@
       "size": 5,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
+    },
+    {
+      "lookup": "catalyst_foe",
+      "name": "Catalyst Foe",
+      "concept": "· palette (unplaced)",
+      "concept_order": 7,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "catalyst_vent",
+      "name": "Catalyst Vent",
+      "concept": "· palette (unplaced)",
+      "concept_order": 7,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
     }
   ],
-  "total_artifacts": 13,
-  "total_concepts": 7
+  "total_artifacts": 15,
+  "total_concepts": 8
 }

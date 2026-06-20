@@ -578,6 +578,232 @@
       ]
     },
     {
+      "name": "Catalyst_01_Primitives",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 7,
+          "col": 6,
+          "row": 5,
+          "lk": "catalyst_vent",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Catalyst_02_Transformation",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 7,
+          "col": 6,
+          "row": 5,
+          "lk": "catalyst_vent",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Catalyst_03_Chromatic",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 7,
+          "col": 6,
+          "row": 5,
+          "lk": "catalyst_vent",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Catalyst_04_Forces",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 7,
+          "col": 6,
+          "row": 5,
+          "lk": "catalyst_vent",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Catalyst_05_Waveform",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 7,
+          "col": 6,
+          "row": 5,
+          "lk": "catalyst_vent",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Catalyst_06_Chaos",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 7,
+          "col": 6,
+          "row": 5,
+          "lk": "catalyst_vent",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 9,
+          "row": 5,
+          "lk": "catalyst_vent",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Catalyst_07_Cellular",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 7,
+          "col": 6,
+          "row": 5,
+          "lk": "catalyst_vent",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Catalyst_08_Fractal",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 7,
+          "col": 6,
+          "row": 5,
+          "lk": "catalyst_vent",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Catalyst_09_Branching",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 7,
+          "col": 6,
+          "row": 5,
+          "lk": "catalyst_vent",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Catalyst_10_Swarm",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 7,
+          "col": 8,
+          "row": 2,
+          "lk": "catalyst_vent",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 8,
+          "row": 7,
+          "lk": "catalyst_vent",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
       "name": "CA_BeyondBinary",
       "score": null,
       "tag": "sparse",
@@ -858,8 +1084,8 @@
         11,
         7
       ],
-      "n_concepts": 1,
-      "n_artifacts": 1,
+      "n_concepts": 2,
+      "n_artifacts": 2,
       "arts": [
         {
           "co": 5,
@@ -868,6 +1094,14 @@
           "lk": "science_screen",
           "ai": 2,
           "t": "m"
+        },
+        {
+          "co": 7,
+          "col": 6,
+          "row": 5,
+          "lk": "catalyst_vent",
+          "ai": 3,
+          "t": "s"
         }
       ]
     },
@@ -879,8 +1113,8 @@
         11,
         7
       ],
-      "n_concepts": 1,
-      "n_artifacts": 1,
+      "n_concepts": 2,
+      "n_artifacts": 2,
       "arts": [
         {
           "co": 5,
@@ -889,6 +1123,14 @@
           "lk": "science_screen",
           "ai": 2,
           "t": "m"
+        },
+        {
+          "co": 7,
+          "col": 4,
+          "row": 3,
+          "lk": "catalyst_vent",
+          "ai": 3,
+          "t": "s"
         }
       ]
     },
@@ -900,8 +1142,8 @@
         11,
         7
       ],
-      "n_concepts": 1,
-      "n_artifacts": 1,
+      "n_concepts": 2,
+      "n_artifacts": 2,
       "arts": [
         {
           "co": 5,
@@ -910,6 +1152,14 @@
           "lk": "science_screen",
           "ai": 2,
           "t": "m"
+        },
+        {
+          "co": 7,
+          "col": 3,
+          "row": 1,
+          "lk": "catalyst_vent",
+          "ai": 3,
+          "t": "s"
         }
       ]
     },
@@ -921,8 +1171,8 @@
         11,
         7
       ],
-      "n_concepts": 1,
-      "n_artifacts": 1,
+      "n_concepts": 2,
+      "n_artifacts": 2,
       "arts": [
         {
           "co": 5,
@@ -931,6 +1181,14 @@
           "lk": "science_screen",
           "ai": 2,
           "t": "m"
+        },
+        {
+          "co": 7,
+          "col": 3,
+          "row": 1,
+          "lk": "catalyst_vent",
+          "ai": 3,
+          "t": "s"
         }
       ]
     },
@@ -942,9 +1200,17 @@
         11,
         7
       ],
-      "n_concepts": 1,
-      "n_artifacts": 1,
+      "n_concepts": 2,
+      "n_artifacts": 2,
       "arts": [
+        {
+          "co": 7,
+          "col": 4,
+          "row": 1,
+          "lk": "catalyst_vent",
+          "ai": 3,
+          "t": "s"
+        },
         {
           "co": 5,
           "col": 2,
@@ -3153,8 +3419,8 @@
         12,
         13
       ],
-      "n_concepts": 1,
-      "n_artifacts": 1,
+      "n_concepts": 2,
+      "n_artifacts": 3,
       "arts": [
         {
           "co": 5,
@@ -3163,6 +3429,22 @@
           "lk": "science_screen",
           "ai": 2,
           "t": "m"
+        },
+        {
+          "co": 7,
+          "col": 6,
+          "row": 5,
+          "lk": "catalyst_vent",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 4,
+          "row": 6,
+          "lk": "catalyst_foe",
+          "ai": 3,
+          "t": "s"
         }
       ]
     },
@@ -3356,5 +3638,5 @@
       ]
     }
   ],
-  "total_maps": 151
+  "total_maps": 161
 }

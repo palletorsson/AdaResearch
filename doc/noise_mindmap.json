@@ -10,17 +10,30 @@
       "order": 0,
       "act": "Act I",
       "truth": "White noise screams chaos — every frequency, every sample independent, pure static. Blue noise whispers structure — random but refusing to clump, maintaining distance. Between them: the spectrum of coherent randomness.",
-      "count": 4,
+      "count": 16,
       "x_spread": -1.0,
       "tiers": {
         "small": [
           "randompoint",
           "randompoints"
         ],
-        "medium": [],
+        "medium": [
+          "curl_noise_particles",
+          "living_paper_noise_octaves",
+          "mesh_grammar_noise_sculpture",
+          "noise_mixer",
+          "pool_hole_noise",
+          "profile_noise",
+          "profile_noise_octaves",
+          "worley_noise"
+        ],
         "large": [
           "WhiteNoiseGallery",
-          "NoiseColors3D"
+          "NoiseColors3D",
+          "blue_noise",
+          "noise_terrain_with_blobs",
+          "random_transformations_noise",
+          "value_noise"
         ],
         "applied": []
       }
@@ -31,7 +44,7 @@
       "act": "Act I",
       "truth": "Noise extruded vertically. Sample the 2D function, lift the result into height. Mountains rise from mathematics, valleys fall from continuous variation.",
       "count": 2,
-      "x_spread": 0.0115,
+      "x_spread": -0.7778,
       "tiers": {
         "small": [
           "dark_sphere"
@@ -48,16 +61,20 @@
       "order": 2,
       "act": "Act I",
       "truth": "Before Perlin, noise was static — random values with no memory, no structure. Then came coherent noise: smooth, continuous, organic. Sample adjacent points and get adjacent values.",
-      "count": 3,
-      "x_spread": 0.1697,
+      "count": 6,
+      "x_spread": -0.5556,
       "tiers": {
         "small": [
           "dark_sphere"
         ],
-        "medium": [],
+        "medium": [
+          "living_paper_perlin",
+          "particle_randomness_perlin"
+        ],
         "large": [
           "noisetorus",
-          "noiselayers"
+          "noiselayers",
+          "perlin_noise_clouds"
         ],
         "applied": []
       }
@@ -68,7 +85,7 @@
       "act": "Act II",
       "truth": "Three-dimensional noise carved into blocks. Where the function exceeds threshold: solid. Where it falls below: void. Caves, overhangs, floating islands — topologies impossible with heightmaps alone.",
       "count": 4,
-      "x_spread": 0.0115,
+      "x_spread": -0.3334,
       "tiers": {
         "small": [
           "dark_sphere"
@@ -89,7 +106,7 @@
       "act": "Act II",
       "truth": "Six octaves layered. Low frequency for large features, high frequency for fine detail. Each octave adds texture at a different scale.",
       "count": 2,
-      "x_spread": 0.2726,
+      "x_spread": -0.1112,
       "tiers": {
         "small": [
           "dark_sphere"
@@ -107,7 +124,7 @@
       "act": "Act III",
       "truth": "Noise controlling noise. The output of one function becomes the input coordinate of another. Warped, distorted, folded space. What was smooth becomes turbulent. What was regular becomes organic.",
       "count": 2,
-      "x_spread": 1.0,
+      "x_spread": 0.1112,
       "tiers": {
         "small": [
           "dark_sphere"
@@ -125,7 +142,7 @@
       "act": "Act III",
       "truth": "Expand the canvas. Ten dimensions of parameters: position, time, octaves, persistence, lacunarity, seed. Each dimension adds variation, adds control, adds possibility.",
       "count": 2,
-      "x_spread": 0.1713,
+      "x_spread": 0.3334,
       "tiers": {
         "small": [
           "dark_sphere"
@@ -143,7 +160,7 @@
       "act": "Act IV",
       "truth": "Perlin noise: the original coherent gradient noise, 1983. Simplex noise: Ken Perlin's improved version, 2001. Compare them side by side. Perlin has axis-aligned artifacts; Simplex is cleaner in higher dimensions.",
       "count": 6,
-      "x_spread": -0.0315,
+      "x_spread": 0.5556,
       "tiers": {
         "small": [
           "dark_sphere"
@@ -166,7 +183,7 @@
       "act": "Act IV",
       "truth": "The corridor back. Every sequence ends here — nine maps of noise, and now the return. A dark sphere pulses in purple light, slow rotation, breathing emission. Not a lesson. A threshold.",
       "count": 1,
-      "x_spread": 0.0921,
+      "x_spread": 0.7778,
       "tiers": {
         "small": [
           "dark_sphere"
@@ -175,106 +192,154 @@
         "large": [],
         "applied": []
       }
+    },
+    {
+      "key": "· palette (unplaced)",
+      "order": 9,
+      "act": "Act IV",
+      "truth": "sequence artifacts available but not yet placed in a map",
+      "count": 10,
+      "x_spread": 1.0,
+      "tiers": {
+        "small": [
+          "RandomGaussianTexture",
+          "VectorFieldFlow",
+          "configurable_portal",
+          "grid_substrate_runner",
+          "noisetext"
+        ],
+        "medium": [
+          "living_paper_voronoi",
+          "mesh_grammar_crumpled",
+          "neon_wave_grid",
+          "profile"
+        ],
+        "large": [
+          "VoxelNoiseROIs"
+        ],
+        "applied": []
+      }
     }
   ],
   "concept_distance": [
     [
       0.0,
-      0.5868,
-      0.48,
-      0.7258,
-      0.7826,
+      0.1111,
+      0.2222,
+      0.3333,
+      0.4444,
+      0.5556,
+      0.6667,
+      0.7778,
+      0.8889,
+      1.0
+    ],
+    [
+      0.1111,
+      0.0,
+      0.1111,
+      0.2222,
+      0.3333,
+      0.4444,
+      0.5556,
+      0.6667,
+      0.7778,
+      0.8889
+    ],
+    [
+      0.2222,
+      0.1111,
+      0.0,
+      0.1111,
+      0.2222,
+      0.3333,
+      0.4444,
+      0.5556,
+      0.6667,
+      0.7778
+    ],
+    [
+      0.3333,
+      0.2222,
+      0.1111,
+      0.0,
+      0.1111,
+      0.2222,
+      0.3333,
+      0.4444,
+      0.5556,
+      0.6667
+    ],
+    [
+      0.4444,
+      0.3333,
+      0.2222,
+      0.1111,
+      0.0,
+      0.1111,
+      0.2222,
+      0.3333,
+      0.4444,
+      0.5556
+    ],
+    [
+      0.5556,
+      0.4444,
+      0.3333,
+      0.2222,
+      0.1111,
+      0.0,
+      0.1111,
+      0.2222,
+      0.3333,
+      0.4444
+    ],
+    [
+      0.6667,
+      0.5556,
+      0.4444,
+      0.3333,
+      0.2222,
+      0.1111,
+      0.0,
+      0.1111,
+      0.2222,
+      0.3333
+    ],
+    [
+      0.7778,
+      0.6667,
+      0.5556,
+      0.4444,
+      0.3333,
+      0.2222,
+      0.1111,
+      0.0,
+      0.1111,
+      0.2222
+    ],
+    [
+      0.8889,
+      0.7778,
+      0.6667,
+      0.5556,
+      0.4444,
+      0.3333,
+      0.2222,
+      0.1111,
+      0.0,
+      0.1111
+    ],
+    [
       1.0,
-      0.8687,
-      0.8656,
-      0.8041
-    ],
-    [
-      0.5868,
-      0.0,
-      0.4155,
-      0.3487,
-      0.679,
-      0.5753,
-      0.712,
-      0.7066,
-      0.9601
-    ],
-    [
-      0.48,
-      0.4155,
-      0.0,
-      0.6037,
-      0.0261,
-      0.3103,
-      0.3395,
-      0.8641,
-      0.8579
-    ],
-    [
-      0.7258,
-      0.3487,
-      0.6037,
-      0.0,
-      0.5806,
-      0.7143,
-      0.6359,
-      0.4908,
-      0.6052
-    ],
-    [
-      0.7826,
-      0.679,
-      0.0261,
-      0.5806,
-      0.0,
-      0.51,
-      0.0,
-      0.6237,
-      0.626
-    ],
-    [
-      1.0,
-      0.5753,
-      0.3103,
-      0.7143,
-      0.51,
-      0.0,
-      0.6974,
-      0.8971,
-      0.712
-    ],
-    [
-      0.8687,
-      0.712,
-      0.3395,
-      0.6359,
-      0.0,
-      0.6974,
-      0.0,
-      0.3986,
-      0.6475
-    ],
-    [
-      0.8656,
-      0.7066,
-      0.8641,
-      0.4908,
-      0.6237,
-      0.8971,
-      0.3986,
-      0.0,
-      0.563
-    ],
-    [
-      0.8041,
-      0.9601,
-      0.8579,
-      0.6052,
-      0.626,
-      0.712,
-      0.6475,
-      0.563,
+      0.8889,
+      0.7778,
+      0.6667,
+      0.5556,
+      0.4444,
+      0.3333,
+      0.2222,
+      0.1111,
       0.0
     ]
   ],
@@ -289,7 +354,8 @@
       "size": 5,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "randompoints",
@@ -301,7 +367,8 @@
       "size": 5,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "WhiteNoiseGallery",
@@ -313,7 +380,8 @@
       "size": 14,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "NoiseColors3D",
@@ -325,7 +393,164 @@
       "size": 14,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
+    },
+    {
+      "lookup": "blue_noise",
+      "name": "blue_noise",
+      "concept": "White noise screams chaos",
+      "concept_order": 0,
+      "tier": "large",
+      "fp": 21,
+      "size": 14,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "curl_noise_particles",
+      "name": "Curl Noise Particles",
+      "concept": "White noise screams chaos",
+      "concept_order": 0,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "living_paper_noise_octaves",
+      "name": "living_paper_noise_octaves",
+      "concept": "White noise screams chaos",
+      "concept_order": 0,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "mesh_grammar_noise_sculpture",
+      "name": "MeshGrammar — Noise Sculpture",
+      "concept": "White noise screams chaos",
+      "concept_order": 0,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "noise_mixer",
+      "name": "Noise Mixer",
+      "concept": "White noise screams chaos",
+      "concept_order": 0,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "noise_terrain_with_blobs",
+      "name": "noise_terrain_with_blobs",
+      "concept": "White noise screams chaos",
+      "concept_order": 0,
+      "tier": "large",
+      "fp": 2500,
+      "size": 14,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "pool_hole_noise",
+      "name": "pool_hole_noise",
+      "concept": "White noise screams chaos",
+      "concept_order": 0,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "profile_noise",
+      "name": "Profile — 1D Noise",
+      "concept": "White noise screams chaos",
+      "concept_order": 0,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "profile_noise_octaves",
+      "name": "Profile — Noise Octaves",
+      "concept": "White noise screams chaos",
+      "concept_order": 0,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "random_transformations_noise",
+      "name": "random_transformations_noise",
+      "concept": "White noise screams chaos",
+      "concept_order": 0,
+      "tier": "large",
+      "fp": 121,
+      "size": 14,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "value_noise",
+      "name": "value_noise",
+      "concept": "White noise screams chaos",
+      "concept_order": 0,
+      "tier": "large",
+      "fp": 121,
+      "size": 14,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "worley_noise",
+      "name": "Worley Noise",
+      "concept": "White noise screams chaos",
+      "concept_order": 0,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
     },
     {
       "lookup": "dark_sphere",
@@ -337,7 +562,8 @@
       "size": 5,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "MeltingBerniniScene",
@@ -349,7 +575,8 @@
       "size": 14,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "noisetorus",
@@ -361,7 +588,8 @@
       "size": 14,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "noiselayers",
@@ -373,7 +601,8 @@
       "size": 14,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "dark_sphere",
@@ -385,7 +614,47 @@
       "size": 5,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
+    },
+    {
+      "lookup": "living_paper_perlin",
+      "name": "living_paper_perlin",
+      "concept": "Before Perlin, noise was static",
+      "concept_order": 2,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "particle_randomness_perlin",
+      "name": "particle_randomness_perlin",
+      "concept": "Before Perlin, noise was static",
+      "concept_order": 2,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "perlin_noise_clouds",
+      "name": "perlin_noise_clouds",
+      "concept": "Before Perlin, noise was static",
+      "concept_order": 2,
+      "tier": "large",
+      "fp": 2500,
+      "size": 14,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
     },
     {
       "lookup": "perlin_terrain_sculptor",
@@ -397,7 +666,8 @@
       "size": 8,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "science_screen",
@@ -409,7 +679,8 @@
       "size": 8,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "voxelnoise",
@@ -421,7 +692,8 @@
       "size": 14,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "dark_sphere",
@@ -433,7 +705,8 @@
       "size": 5,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "shader_noise_space",
@@ -445,7 +718,8 @@
       "size": 14,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "dark_sphere",
@@ -457,7 +731,8 @@
       "size": 5,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "dark_sphere",
@@ -469,7 +744,8 @@
       "size": 5,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "noisesphere",
@@ -481,7 +757,8 @@
       "size": 14,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "dark_sphere",
@@ -493,7 +770,8 @@
       "size": 5,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "noise_space",
@@ -505,7 +783,8 @@
       "size": 14,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "simplex_noise",
@@ -517,7 +796,8 @@
       "size": 14,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "perlin_noise",
@@ -529,7 +809,8 @@
       "size": 14,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "noise_terrain",
@@ -541,7 +822,8 @@
       "size": 14,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "dark_sphere",
@@ -553,7 +835,8 @@
       "size": 5,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "perlin_noise_terrain",
@@ -565,7 +848,8 @@
       "size": 8,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "configurable_portal#dest_map",
@@ -577,7 +861,8 @@
       "size": 8,
       "act": "Act IV",
       "has_image": false,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "dark_sphere",
@@ -589,9 +874,140 @@
       "size": 5,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
+    },
+    {
+      "lookup": "RandomGaussianTexture",
+      "name": "RandomGaussianTexture",
+      "concept": "· palette (unplaced)",
+      "concept_order": 9,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "VectorFieldFlow",
+      "name": "VectorFieldFlow",
+      "concept": "· palette (unplaced)",
+      "concept_order": 9,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "VoxelNoiseROIs",
+      "name": "VoxelNoiseROIs",
+      "concept": "· palette (unplaced)",
+      "concept_order": 9,
+      "tier": "large",
+      "fp": 625,
+      "size": 14,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "configurable_portal",
+      "name": "configurable_portal",
+      "concept": "· palette (unplaced)",
+      "concept_order": 9,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "grid_substrate_runner",
+      "name": "Grid Substrate Runner",
+      "concept": "· palette (unplaced)",
+      "concept_order": 9,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "living_paper_voronoi",
+      "name": "living_paper_voronoi",
+      "concept": "· palette (unplaced)",
+      "concept_order": 9,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "mesh_grammar_crumpled",
+      "name": "MeshGrammar — Crumpled Form",
+      "concept": "· palette (unplaced)",
+      "concept_order": 9,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "neon_wave_grid",
+      "name": "neon_wave_grid",
+      "concept": "· palette (unplaced)",
+      "concept_order": 9,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "noisetext",
+      "name": "noisetext",
+      "concept": "· palette (unplaced)",
+      "concept_order": 9,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "profile",
+      "name": "Profile Substrate",
+      "concept": "· palette (unplaced)",
+      "concept_order": 9,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
     }
   ],
-  "total_artifacts": 26,
-  "total_concepts": 9
+  "total_artifacts": 51,
+  "total_concepts": 10
 }

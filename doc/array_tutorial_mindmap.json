@@ -30,7 +30,7 @@
       "act": "Act II",
       "truth": "Buren Courtyard",
       "count": 16,
-      "x_spread": -0.1907,
+      "x_spread": -0.5,
       "tiers": {
         "small": [],
         "medium": [
@@ -61,7 +61,7 @@
       "act": "Act III",
       "truth": "Patterns",
       "count": 13,
-      "x_spread": 1.0,
+      "x_spread": 0.0,
       "tiers": {
         "small": [
           "dark_sphere",
@@ -91,7 +91,7 @@
       "act": "Act IV",
       "truth": "Soane Plaza",
       "count": 3,
-      "x_spread": 0.0298,
+      "x_spread": 0.5,
       "tiers": {
         "small": [
           "array_disco_substrate",
@@ -102,31 +102,91 @@
         "large": [],
         "applied": []
       }
+    },
+    {
+      "key": "· palette (unplaced)",
+      "order": 4,
+      "act": "Act IV",
+      "truth": "sequence artifacts available but not yet placed in a map",
+      "count": 32,
+      "x_spread": 1.0,
+      "tiers": {
+        "small": [
+          "circular_buffer",
+          "path_builder_foe",
+          "path_cube",
+          "path_game_controller",
+          "path_pyramid",
+          "path_watchdog",
+          "path_wedge",
+          "pulsar_visualizer",
+          "xyz_coordinates"
+        ],
+        "medium": [
+          "array_carpet",
+          "column_3_z",
+          "gridagent",
+          "index_map_puzzle",
+          "matrix_multiply_visual",
+          "pattern_loom",
+          "pattern_machine_a",
+          "pattern_machine_b",
+          "pattern_machine_d",
+          "pattern_mill",
+          "pattern_studio_plate",
+          "pattern_tile_puzzle",
+          "primitive_combo_puzzle",
+          "row_3_x",
+          "script_runner",
+          "sparse_array_demo",
+          "step_sequencer",
+          "wall_cove",
+          "wall_pattern_colorizer"
+        ],
+        "large": [
+          "grid_2d_4x4",
+          "grid_3d_4x4x4",
+          "pattern_machine_c",
+          "primitive_assembler"
+        ],
+        "applied": []
+      }
     }
   ],
   "concept_distance": [
     [
       0.0,
-      0.6355,
+      0.25,
+      0.5,
+      0.75,
+      1.0
+    ],
+    [
+      0.25,
+      0.0,
+      0.25,
+      0.5,
+      0.75
+    ],
+    [
+      0.5,
+      0.25,
+      0.0,
+      0.25,
+      0.5
+    ],
+    [
+      0.75,
+      0.5,
+      0.25,
+      0.0,
+      0.25
+    ],
+    [
       1.0,
-      0.9484
-    ],
-    [
-      0.6355,
-      0.0,
-      0.8262,
-      0.0
-    ],
-    [
-      1.0,
-      0.8262,
-      0.0,
-      0.9186
-    ],
-    [
-      0.9484,
-      0.0,
-      0.9186,
+      0.75,
+      0.5,
+      0.25,
       0.0
     ]
   ],
@@ -141,7 +201,8 @@
       "size": 5,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "pick_up_cube",
@@ -153,7 +214,8 @@
       "size": 5,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "t",
@@ -165,7 +227,8 @@
       "size": 8,
       "act": "Act I",
       "has_image": false,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "buren_col_01_01",
@@ -177,7 +240,8 @@
       "size": 8,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "buren_col_01_04",
@@ -189,7 +253,8 @@
       "size": 8,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "buren_col_01_07",
@@ -201,7 +266,8 @@
       "size": 8,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "buren_col_01_10",
@@ -213,7 +279,8 @@
       "size": 8,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "buren_col_04_01",
@@ -225,7 +292,8 @@
       "size": 8,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "buren_col_04_04",
@@ -237,7 +305,8 @@
       "size": 8,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "buren_col_04_07",
@@ -249,7 +318,8 @@
       "size": 8,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "buren_col_04_10",
@@ -261,7 +331,8 @@
       "size": 8,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "buren_col_07_01",
@@ -273,7 +344,8 @@
       "size": 8,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "buren_col_07_04",
@@ -285,7 +357,8 @@
       "size": 8,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "buren_col_07_07",
@@ -297,7 +370,8 @@
       "size": 8,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "buren_col_07_10",
@@ -309,7 +383,8 @@
       "size": 8,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "buren_col_10_01",
@@ -321,7 +396,8 @@
       "size": 8,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "buren_col_10_04",
@@ -333,7 +409,8 @@
       "size": 8,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "buren_col_10_07",
@@ -345,7 +422,8 @@
       "size": 8,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "buren_col_10_10",
@@ -357,7 +435,8 @@
       "size": 8,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "pattern_tile_4x4",
@@ -369,7 +448,8 @@
       "size": 8,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "vr_tile_editor_mirror",
@@ -381,7 +461,8 @@
       "size": 8,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "pattern_tile_mirror",
@@ -393,7 +474,8 @@
       "size": 8,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "science_screen",
@@ -405,7 +487,8 @@
       "size": 8,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "tiling_demo",
@@ -417,7 +500,8 @@
       "size": 8,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "dark_sphere",
@@ -429,7 +513,8 @@
       "size": 5,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "pattern_tile_plate",
@@ -441,7 +526,8 @@
       "size": 8,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "pattern_tunnel_machine",
@@ -453,7 +539,8 @@
       "size": 14,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "panel_bridge_loom",
@@ -465,7 +552,8 @@
       "size": 5,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "grid_model",
@@ -477,7 +565,8 @@
       "size": 8,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "facade_grammar_demo",
@@ -489,7 +578,8 @@
       "size": 8,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "pattern_tile_brick",
@@ -501,7 +591,8 @@
       "size": 8,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "pattern_tile_herringbone",
@@ -513,7 +604,8 @@
       "size": 8,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "array_disco_substrate",
@@ -525,7 +617,8 @@
       "size": 5,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "array_slow_substrate",
@@ -537,7 +630,8 @@
       "size": 5,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "array_random_substrate",
@@ -549,9 +643,426 @@
       "size": 5,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
+    },
+    {
+      "lookup": "array_carpet",
+      "name": "Array Carpet",
+      "concept": "· palette (unplaced)",
+      "concept_order": 4,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "circular_buffer",
+      "name": "Circular Buffer",
+      "concept": "· palette (unplaced)",
+      "concept_order": 4,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "column_3_z",
+      "name": "column_3_z",
+      "concept": "· palette (unplaced)",
+      "concept_order": 4,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "grid_2d_4x4",
+      "name": "grid_2d_4x4",
+      "concept": "· palette (unplaced)",
+      "concept_order": 4,
+      "tier": "large",
+      "fp": 16,
+      "size": 14,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "grid_3d_4x4x4",
+      "name": "grid_3d_4x4x4",
+      "concept": "· palette (unplaced)",
+      "concept_order": 4,
+      "tier": "large",
+      "fp": 16,
+      "size": 14,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "gridagent",
+      "name": "Grid Agent",
+      "concept": "· palette (unplaced)",
+      "concept_order": 4,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "index_map_puzzle",
+      "name": "Index Map Puzzle",
+      "concept": "· palette (unplaced)",
+      "concept_order": 4,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "matrix_multiply_visual",
+      "name": "Matrix Multiply Visual",
+      "concept": "· palette (unplaced)",
+      "concept_order": 4,
+      "tier": "medium",
+      "fp": 6,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "path_builder_foe",
+      "name": "Path Builder Foe",
+      "concept": "· palette (unplaced)",
+      "concept_order": 4,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "path_cube",
+      "name": "Path Cube (wall)",
+      "concept": "· palette (unplaced)",
+      "concept_order": 4,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "path_game_controller",
+      "name": "Path Game Controller",
+      "concept": "· palette (unplaced)",
+      "concept_order": 4,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "path_pyramid",
+      "name": "Path Pyramid (mound)",
+      "concept": "· palette (unplaced)",
+      "concept_order": 4,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "path_watchdog",
+      "name": "Path Watchdog",
+      "concept": "· palette (unplaced)",
+      "concept_order": 4,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "path_wedge",
+      "name": "Path Wedge (ramp)",
+      "concept": "· palette (unplaced)",
+      "concept_order": 4,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "pattern_loom",
+      "name": "Pattern Loom",
+      "concept": "· palette (unplaced)",
+      "concept_order": 4,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "pattern_machine_a",
+      "name": "Pattern Machine A — Jacquard Punch-Card Loom",
+      "concept": "· palette (unplaced)",
+      "concept_order": 4,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "pattern_machine_b",
+      "name": "Pattern Printer (Holographic Press)",
+      "concept": "· palette (unplaced)",
+      "concept_order": 4,
+      "tier": "medium",
+      "fp": 6,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "pattern_machine_c",
+      "name": "Kaleidoscope Mill",
+      "concept": "· palette (unplaced)",
+      "concept_order": 4,
+      "tier": "large",
+      "fp": 12,
+      "size": 14,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "pattern_machine_d",
+      "name": "Pattern Machine D — Tile-Stamp Press",
+      "concept": "· palette (unplaced)",
+      "concept_order": 4,
+      "tier": "medium",
+      "fp": 6,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "pattern_mill",
+      "name": "Pattern Mill",
+      "concept": "· palette (unplaced)",
+      "concept_order": 4,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "pattern_studio_plate",
+      "name": "Pattern Studio Plate",
+      "concept": "· palette (unplaced)",
+      "concept_order": 4,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "pattern_tile_puzzle",
+      "name": "pattern_tile_puzzle",
+      "concept": "· palette (unplaced)",
+      "concept_order": 4,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "primitive_assembler",
+      "name": "Primitive Assembler",
+      "concept": "· palette (unplaced)",
+      "concept_order": 4,
+      "tier": "large",
+      "fp": 18,
+      "size": 14,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "primitive_combo_puzzle",
+      "name": "Primitive Combo Puzzle",
+      "concept": "· palette (unplaced)",
+      "concept_order": 4,
+      "tier": "medium",
+      "fp": 6,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "pulsar_visualizer",
+      "name": "pulsar_visualizer",
+      "concept": "· palette (unplaced)",
+      "concept_order": 4,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "row_3_x",
+      "name": "row_3_x",
+      "concept": "· palette (unplaced)",
+      "concept_order": 4,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "script_runner",
+      "name": "script_runner",
+      "concept": "· palette (unplaced)",
+      "concept_order": 4,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "sparse_array_demo",
+      "name": "Sparse Array Demo",
+      "concept": "· palette (unplaced)",
+      "concept_order": 4,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "step_sequencer",
+      "name": "step_sequencer",
+      "concept": "· palette (unplaced)",
+      "concept_order": 4,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "wall_cove",
+      "name": "Wall Cove",
+      "concept": "· palette (unplaced)",
+      "concept_order": 4,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "wall_pattern_colorizer",
+      "name": "Wall Pattern Colorizer",
+      "concept": "· palette (unplaced)",
+      "concept_order": 4,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "xyz_coordinates",
+      "name": "XYZ coordinates",
+      "concept": "· palette (unplaced)",
+      "concept_order": 4,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
     }
   ],
-  "total_artifacts": 35,
-  "total_concepts": 4
+  "total_artifacts": 67,
+  "total_concepts": 5
 }

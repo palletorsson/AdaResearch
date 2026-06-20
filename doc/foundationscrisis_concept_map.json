@@ -11,7 +11,8 @@
     "Each step makes sense. North side, hei",
     "Classical mathematics lets you prove a",
     "Classical logic has a rule",
-    "Gödel's plaque. Russell's boxes. Esche"
+    "Gödel's plaque. Russell's boxes. Esche",
+    "· palette (unplaced)"
   ],
   "concept_meta": {
     "Five axioms. Four are obvious. The fif": {
@@ -77,10 +78,12 @@
           "godel_statement_plaque"
         ],
         "medium": [],
-        "large": [],
+        "large": [
+          "goedel_atrium"
+        ],
         "applied": []
       },
-      "count": 1
+      "count": 2
     },
     "Each step makes sense. North side, hei": {
       "truth": "Each step makes sense. North side, height one. East side, height two. South, three. West, four. Climb the perimeter clockwise and every transition feels valid — just stairs, just geometry, just one foot after the other.",
@@ -149,14 +152,31 @@
         ],
         "medium": [
           "russell_set_box",
-          "florensky_sphere"
+          "florensky_sphere",
+          "russell_paradox_workbench"
         ],
         "large": [
           "bifurcation_diagram"
         ],
         "applied": []
       },
-      "count": 8
+      "count": 9
+    },
+    "· palette (unplaced)": {
+      "act": "Act IV",
+      "truth": "sequence artifacts available but not yet placed in a map",
+      "tiers": {
+        "small": [],
+        "medium": [
+          "cantor_diagonal_workbench",
+          "complexity_dial_workbench",
+          "halting_workbench",
+          "hilbert_hotel"
+        ],
+        "large": [],
+        "applied": []
+      },
+      "count": 4
     }
   },
   "concept_distance": [
@@ -249,7 +269,8 @@
         "tier": "medium",
         "fp": 4,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "parallel_lines",
@@ -257,7 +278,8 @@
         "tier": "medium",
         "fp": 3,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "angle_sum_triangle",
@@ -265,7 +287,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "euclid_postulates_plaque",
@@ -273,7 +296,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       }
     ],
     "Euclid's fifth postulate held for two ": [
@@ -283,7 +307,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "elliptic_surface",
@@ -291,7 +316,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "curvature_slider",
@@ -299,7 +325,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "poincare_disk",
@@ -307,7 +334,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "riemann_sphere",
@@ -315,7 +343,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       }
     ],
     "A set collects things. The set of even": [
@@ -325,7 +354,8 @@
         "tier": "medium",
         "fp": 4,
         "has_image": true,
-        "recommended": false
+        "recommended": false,
+        "map_ready": true
       }
     ],
     "In 1931, Kurt Gödel fed mathematics to": [
@@ -335,7 +365,18 @@
         "tier": "small",
         "fp": 2,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
+      },
+      {
+        "lookup": "goedel_atrium",
+        "name": "Gödel Atrium",
+        "registry": "",
+        "tier": "large",
+        "fp": 64,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
       }
     ],
     "Each step makes sense. North side, hei": [
@@ -345,7 +386,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "penrose_triangle",
@@ -353,7 +395,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "magritte_pipe",
@@ -361,7 +404,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       }
     ],
     "Classical mathematics lets you prove a": [
@@ -371,7 +415,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "constructive_proof",
@@ -379,7 +424,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "brouwer_choice_sequence",
@@ -387,7 +433,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       }
     ],
     "Classical logic has a rule": [
@@ -397,7 +444,8 @@
         "tier": "medium",
         "fp": 4,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "schrodinger_box",
@@ -405,7 +453,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "superposition_display",
@@ -413,7 +462,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       }
     ],
     "Gödel's plaque. Russell's boxes. Esche": [
@@ -423,7 +473,8 @@
         "tier": "small",
         "fp": 2,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "russell_set_box",
@@ -431,7 +482,8 @@
         "tier": "medium",
         "fp": 4,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "qfep_formula_3d",
@@ -439,7 +491,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "lambda_slider",
@@ -447,7 +500,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "phi_slider",
@@ -455,7 +509,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "escher_staircase",
@@ -463,7 +518,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "bifurcation_diagram",
@@ -471,7 +527,8 @@
         "tier": "large",
         "fp": 25,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "florensky_sphere",
@@ -479,12 +536,66 @@
         "tier": "medium",
         "fp": 4,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
+      },
+      {
+        "lookup": "russell_paradox_workbench",
+        "name": "Russell's Paradox Workbench",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      }
+    ],
+    "· palette (unplaced)": [
+      {
+        "lookup": "cantor_diagonal_workbench",
+        "name": "Cantor Diagonal Workbench",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "complexity_dial_workbench",
+        "name": "Complexity Dial Workbench",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "halting_workbench",
+        "name": "Halting Workbench",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "hilbert_hotel",
+        "name": "hilbert_hotel",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
       }
     ]
   },
-  "total": 28,
-  "total_concepts": 8,
+  "total": 34,
+  "total_concepts": 9,
   "recommended_total": 27,
-  "map_ready_total": 27
+  "map_ready_total": 27,
+  "palette_total": 6
 }

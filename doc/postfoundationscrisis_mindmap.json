@@ -10,11 +10,12 @@
       "order": 0,
       "act": "Act I",
       "truth": "A room divided. The left half: spacious, five columns wide. The right half: cramped, two columns, same population. The bias is architectural before it is mathematical. Walk through it. Feel the allocation.",
-      "count": 3,
-      "x_spread": 0.1679,
+      "count": 4,
+      "x_spread": -1.0,
       "tiers": {
         "small": [
-          "bias_visualizer"
+          "bias_visualizer",
+          "room_shape_demonstrator"
         ],
         "medium": [
           "science_screen",
@@ -30,7 +31,7 @@
       "act": "Act I",
       "truth": "Every classifier has an outside.",
       "count": 3,
-      "x_spread": -0.0999,
+      "x_spread": -0.75,
       "tiers": {
         "small": [
           "godel_statement_plaque"
@@ -48,12 +49,13 @@
       "order": 2,
       "act": "Act II",
       "truth": "The Florensky sphere, wired into production.",
-      "count": 4,
-      "x_spread": -0.3449,
+      "count": 5,
+      "x_spread": -0.5,
       "tiers": {
         "small": [
           "superposition_display",
-          "schrodinger_box"
+          "schrodinger_box",
+          "florensky_in_production"
         ],
         "medium": [
           "florensky_sphere",
@@ -69,7 +71,7 @@
       "act": "Act II",
       "truth": "There is no view from nowhere.",
       "count": 1,
-      "x_spread": -1.0,
+      "x_spread": -0.25,
       "tiers": {
         "small": [
           "situated_readout"
@@ -85,7 +87,7 @@
       "act": "Act III",
       "truth": "No one system is complete. A commons might be.",
       "count": 1,
-      "x_spread": -0.2102,
+      "x_spread": 0.0,
       "tiers": {
         "small": [
           "wiki_fragment"
@@ -101,7 +103,7 @@
       "act": "Act III",
       "truth": "Deleuze and Guattari proposed a structure with no root, no trunk, no privileged path. The rhizome: any point connects to any other. Not a tree. Not a hierarchy. A cave system that grows the way thought should.",
       "count": 1,
-      "x_spread": 1.0,
+      "x_spread": 0.25,
       "tiers": {
         "small": [],
         "medium": [],
@@ -117,7 +119,7 @@
       "act": "Act IV",
       "truth": "A laboratory. Benches at regulation height. Surfaces clean. Tools organized. The molecular designer sits at the center — a formal system made tangible, atoms snapping to valence rules, bonds obeying electron logic.",
       "count": 1,
-      "x_spread": 0.3879,
+      "x_spread": 0.5,
       "tiers": {
         "small": [],
         "medium": [
@@ -133,7 +135,7 @@
       "act": "Act IV",
       "truth": "Knowing the limits of formalization, what do we build?",
       "count": 4,
-      "x_spread": -0.4187,
+      "x_spread": 0.75,
       "tiers": {
         "small": [
           "qfep_formula_3d"
@@ -146,87 +148,135 @@
         "large": [],
         "applied": []
       }
+    },
+    {
+      "key": "· palette (unplaced)",
+      "order": 8,
+      "act": "Act IV",
+      "truth": "sequence artifacts available but not yet placed in a map",
+      "count": 12,
+      "x_spread": 1.0,
+      "tiers": {
+        "small": [
+          "cap_theorem_walk",
+          "citation_graph_node",
+          "edge_as_ground_capstone",
+          "ethical_design_clipboard",
+          "excluded_class_visualizer",
+          "locatable_knowledge_station",
+          "merge_conflict_visualizer",
+          "peer_edit_ledger",
+          "situated_sensor",
+          "wiki_fragment_station"
+        ],
+        "medium": [
+          "shannon_workbench"
+        ],
+        "large": [
+          "rhizome_vault"
+        ],
+        "applied": []
+      }
     }
   ],
   "concept_distance": [
     [
       0.0,
-      0.0,
-      0.766,
-      0.7631,
-      0.7619,
-      0.5952,
-      0.572,
-      0.5087
+      0.125,
+      0.25,
+      0.375,
+      0.5,
+      0.625,
+      0.75,
+      0.875,
+      1.0
     ],
     [
+      0.125,
       0.0,
-      0.0,
-      0.579,
-      0.6103,
-      0.4913,
-      0.7102,
-      0.8473,
-      0.4286
+      0.125,
+      0.25,
+      0.375,
+      0.5,
+      0.625,
+      0.75,
+      0.875
     ],
     [
-      0.766,
-      0.579,
+      0.25,
+      0.125,
       0.0,
-      0.4954,
-      0.2265,
-      0.8403,
-      0.806,
-      0.3856
+      0.125,
+      0.25,
+      0.375,
+      0.5,
+      0.625,
+      0.75
     ],
     [
-      0.7631,
-      0.6103,
-      0.4954,
+      0.375,
+      0.25,
+      0.125,
       0.0,
-      0.41,
+      0.125,
+      0.25,
+      0.375,
+      0.5,
+      0.625
+    ],
+    [
+      0.5,
+      0.375,
+      0.25,
+      0.125,
+      0.0,
+      0.125,
+      0.25,
+      0.375,
+      0.5
+    ],
+    [
+      0.625,
+      0.5,
+      0.375,
+      0.25,
+      0.125,
+      0.0,
+      0.125,
+      0.25,
+      0.375
+    ],
+    [
+      0.75,
+      0.625,
+      0.5,
+      0.375,
+      0.25,
+      0.125,
+      0.0,
+      0.125,
+      0.25
+    ],
+    [
+      0.875,
+      0.75,
+      0.625,
+      0.5,
+      0.375,
+      0.25,
+      0.125,
+      0.0,
+      0.125
+    ],
+    [
       1.0,
-      0.939,
-      0.2985
-    ],
-    [
-      0.7619,
-      0.4913,
-      0.2265,
-      0.41,
-      0.0,
-      0.6202,
-      0.6121,
-      0.2468
-    ],
-    [
-      0.5952,
-      0.7102,
-      0.8403,
-      1.0,
-      0.6202,
-      0.0,
-      0.5511,
-      0.7172
-    ],
-    [
-      0.572,
-      0.8473,
-      0.806,
-      0.939,
-      0.6121,
-      0.5511,
-      0.0,
-      0.3961
-    ],
-    [
-      0.5087,
-      0.4286,
-      0.3856,
-      0.2985,
-      0.2468,
-      0.7172,
-      0.3961,
+      0.875,
+      0.75,
+      0.625,
+      0.5,
+      0.375,
+      0.25,
+      0.125,
       0.0
     ]
   ],
@@ -241,7 +291,8 @@
       "size": 8,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "bias_visualizer",
@@ -253,7 +304,8 @@
       "size": 5,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "bias_from_inside",
@@ -265,7 +317,21 @@
       "size": 8,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
+    },
+    {
+      "lookup": "room_shape_demonstrator",
+      "name": "Room Shape Demonstrator",
+      "concept": "A room divided. The left half",
+      "concept_order": 0,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
     },
     {
       "lookup": "bias_from_inside",
@@ -277,7 +343,8 @@
       "size": 8,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "godel_statement_plaque",
@@ -289,7 +356,8 @@
       "size": 5,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "tt",
@@ -301,7 +369,8 @@
       "size": 8,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "florensky_sphere",
@@ -313,7 +382,8 @@
       "size": 8,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "superposition_display",
@@ -325,7 +395,8 @@
       "size": 5,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "schrodinger_box",
@@ -337,7 +408,8 @@
       "size": 5,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "tt",
@@ -349,7 +421,21 @@
       "size": 8,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
+    },
+    {
+      "lookup": "florensky_in_production",
+      "name": "Florensky in Production",
+      "concept": "The Florensky sphere, wired into produ",
+      "concept_order": 2,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
     },
     {
       "lookup": "situated_readout",
@@ -361,7 +447,8 @@
       "size": 5,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "wiki_fragment",
@@ -373,7 +460,8 @@
       "size": 5,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "rhizome_cave_demo",
@@ -385,7 +473,8 @@
       "size": 14,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "MolecularDesigner",
@@ -397,7 +486,8 @@
       "size": 8,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "qfep_formula_3d",
@@ -409,7 +499,8 @@
       "size": 5,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "bias_from_inside",
@@ -421,7 +512,8 @@
       "size": 8,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "florensky_sphere",
@@ -433,7 +525,8 @@
       "size": 8,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "tt",
@@ -445,9 +538,166 @@
       "size": 8,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
+    },
+    {
+      "lookup": "cap_theorem_walk",
+      "name": "CAP Theorem Walk",
+      "concept": "· palette (unplaced)",
+      "concept_order": 8,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "citation_graph_node",
+      "name": "Citation Graph Node",
+      "concept": "· palette (unplaced)",
+      "concept_order": 8,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "edge_as_ground_capstone",
+      "name": "Edge as Ground Capstone",
+      "concept": "· palette (unplaced)",
+      "concept_order": 8,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "ethical_design_clipboard",
+      "name": "Ethical Design Clipboard",
+      "concept": "· palette (unplaced)",
+      "concept_order": 8,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "excluded_class_visualizer",
+      "name": "Excluded Class Visualizer",
+      "concept": "· palette (unplaced)",
+      "concept_order": 8,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "locatable_knowledge_station",
+      "name": "Locatable Knowledge Station",
+      "concept": "· palette (unplaced)",
+      "concept_order": 8,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "merge_conflict_visualizer",
+      "name": "Merge Conflict Visualizer",
+      "concept": "· palette (unplaced)",
+      "concept_order": 8,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "peer_edit_ledger",
+      "name": "Peer Edit Ledger",
+      "concept": "· palette (unplaced)",
+      "concept_order": 8,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "rhizome_vault",
+      "name": "Rhizome Vault",
+      "concept": "· palette (unplaced)",
+      "concept_order": 8,
+      "tier": "large",
+      "fp": 100,
+      "size": 14,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "shannon_workbench",
+      "name": "Shannon Workbench",
+      "concept": "· palette (unplaced)",
+      "concept_order": 8,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "situated_sensor",
+      "name": "Situated Sensor",
+      "concept": "· palette (unplaced)",
+      "concept_order": 8,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "wiki_fragment_station",
+      "name": "Wiki Fragment Station",
+      "concept": "· palette (unplaced)",
+      "concept_order": 8,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
     }
   ],
-  "total_artifacts": 18,
-  "total_concepts": 8
+  "total_artifacts": 32,
+  "total_concepts": 9
 }

@@ -9,6 +9,75 @@
   ],
   "maps": [
     {
+      "name": "QFEP_Phi_Term",
+      "score": 0.866,
+      "tag": "curated",
+      "grid": [
+        10,
+        10
+      ],
+      "n_concepts": 3,
+      "n_artifacts": 7,
+      "arts": [
+        {
+          "co": 6,
+          "col": 2,
+          "row": 2,
+          "lk": "rigid_sculpture",
+          "ai": 2,
+          "t": "m"
+        },
+        {
+          "co": 6,
+          "col": 7,
+          "row": 2,
+          "lk": "fluid_form",
+          "ai": 2,
+          "t": "m"
+        },
+        {
+          "co": 7,
+          "col": 4,
+          "row": 4,
+          "lk": "phi_slider",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 1,
+          "row": 6,
+          "lk": "preserved_pattern",
+          "ai": 2,
+          "t": "m"
+        },
+        {
+          "co": 6,
+          "col": 7,
+          "row": 6,
+          "lk": "transforming_pattern",
+          "ai": 2,
+          "t": "m"
+        },
+        {
+          "co": 8,
+          "col": 2,
+          "row": 8,
+          "lk": "tt",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 8,
+          "col": 6,
+          "row": 8,
+          "lk": "tt",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    },
+    {
       "name": "QFEP_Introduction",
       "score": 0.5,
       "tag": "curated",
@@ -102,77 +171,8 @@
       ]
     },
     {
-      "name": "QFEP_Phi_Term",
-      "score": 0.5,
-      "tag": "curated",
-      "grid": [
-        10,
-        10
-      ],
-      "n_concepts": 3,
-      "n_artifacts": 7,
-      "arts": [
-        {
-          "co": 6,
-          "col": 2,
-          "row": 2,
-          "lk": "rigid_sculpture",
-          "ai": 2,
-          "t": "m"
-        },
-        {
-          "co": 6,
-          "col": 7,
-          "row": 2,
-          "lk": "fluid_form",
-          "ai": 2,
-          "t": "m"
-        },
-        {
-          "co": 7,
-          "col": 4,
-          "row": 4,
-          "lk": "phi_slider",
-          "ai": 3,
-          "t": "s"
-        },
-        {
-          "co": 6,
-          "col": 1,
-          "row": 6,
-          "lk": "preserved_pattern",
-          "ai": 2,
-          "t": "m"
-        },
-        {
-          "co": 6,
-          "col": 7,
-          "row": 6,
-          "lk": "transforming_pattern",
-          "ai": 2,
-          "t": "m"
-        },
-        {
-          "co": 8,
-          "col": 2,
-          "row": 8,
-          "lk": "tt",
-          "ai": 3,
-          "t": "m"
-        },
-        {
-          "co": 8,
-          "col": 6,
-          "row": 8,
-          "lk": "tt",
-          "ai": 3,
-          "t": "m"
-        }
-      ]
-    },
-    {
       "name": "QFEP_F_Term",
-      "score": -0.714,
+      "score": -0.177,
       "tag": "uncurated",
       "grid": [
         10,
@@ -244,6 +244,75 @@
           "lk": "dark_sphere",
           "ai": 0,
           "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Gallery_QFEP",
+      "score": -0.224,
+      "tag": "uncurated",
+      "grid": [
+        11,
+        12
+      ],
+      "n_concepts": 4,
+      "n_artifacts": 7,
+      "arts": [
+        {
+          "co": 1,
+          "col": 8,
+          "row": 2,
+          "lk": "edge_detector",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 1,
+          "col": 2,
+          "row": 4,
+          "lk": "edge_of_chaos_orb",
+          "ai": 0,
+          "t": "m"
+        },
+        {
+          "co": 9,
+          "col": 4,
+          "row": 4,
+          "lk": "entropy_meter",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 5,
+          "col": 8,
+          "row": 4,
+          "lk": "phase_cube",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 9,
+          "col": 2,
+          "row": 6,
+          "lk": "qfep_oscilloscope",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 4,
+          "row": 6,
+          "lk": "qfep_sandbox_console",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 9,
+          "col": 6,
+          "row": 6,
+          "lk": "reactive_particle_field",
+          "ai": 3,
+          "t": "m"
         }
       ]
     },
@@ -2985,6 +3054,27 @@
           "lk": "science_screen",
           "ai": 1,
           "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Fold_Theatre",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        13,
+        17
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 9,
+          "col": 6,
+          "row": 7,
+          "lk": "fold_theatre_runner",
+          "ai": 3,
+          "t": "s"
         }
       ]
     },
@@ -9310,5 +9400,5 @@
       ]
     }
   ],
-  "total_maps": 393
+  "total_maps": 395
 }

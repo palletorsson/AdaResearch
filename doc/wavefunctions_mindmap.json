@@ -10,7 +10,7 @@
       "order": 0,
       "act": "Act I",
       "truth": "the wave — a function that returns; oscillation as concept",
-      "count": 16,
+      "count": 22,
       "x_spread": -1.0,
       "tiers": {
         "small": [
@@ -25,13 +25,19 @@
           "control_pendulum",
           "pick_up_cube",
           "oscillation_controlled_cube",
-          "mario_cube_time_trace"
+          "mario_cube_time_trace",
+          "wave_interference_tank"
         ],
         "medium": [
           "y_oscillation_cube",
           "rotating_cube_demo",
           "science_screen",
-          "SphericalHarmonics"
+          "SphericalHarmonics",
+          "profile_saw",
+          "profile_square",
+          "profile_triangle",
+          "vertical_wave_lines",
+          "wave_equation_solver"
         ],
         "large": [],
         "applied": []
@@ -43,7 +49,7 @@
       "act": "Act I",
       "truth": "pendulum — gravity + length → period; the canonical mechanical oscillator",
       "count": 10,
-      "x_spread": -0.6328,
+      "x_spread": -0.8334,
       "tiers": {
         "small": [
           "draw_dot_time_domain",
@@ -70,7 +76,7 @@
       "act": "Act I",
       "truth": "unit circle — sine = vertical projection of uniform circular motion",
       "count": 6,
-      "x_spread": -0.8756,
+      "x_spread": -0.6666,
       "tiers": {
         "small": [
           "cube_scene",
@@ -92,8 +98,8 @@
       "order": 3,
       "act": "Act II",
       "truth": "sine space — walk the wave; the player traces sin(x) underfoot",
-      "count": 6,
-      "x_spread": -0.3553,
+      "count": 8,
+      "x_spread": -0.5,
       "tiers": {
         "small": [
           "dark_sphere"
@@ -101,11 +107,13 @@
         "medium": [
           "sine_wall_explanation",
           "sine_space_explanation",
-          "colorballs"
+          "colorballs",
+          "living_paper_sine"
         ],
         "large": [
           "sine_wall_corridor",
-          "sine_space"
+          "sine_space",
+          "sine_wall"
         ],
         "applied": []
       }
@@ -116,7 +124,7 @@
       "act": "Act II",
       "truth": "3D wave propagation — the wave is not just a curve; it's a field in space",
       "count": 4,
-      "x_spread": -0.1411,
+      "x_spread": -0.3334,
       "tiers": {
         "small": [
           "dark_sphere"
@@ -136,8 +144,8 @@
       "order": 5,
       "act": "Act II",
       "truth": "sound as wave — the player HEARS what they've been seeing",
-      "count": 24,
-      "x_spread": 0.2847,
+      "count": 25,
+      "x_spread": -0.1666,
       "tiers": {
         "small": [
           "pick_up_cube",
@@ -165,7 +173,8 @@
           "timbre_sculptor",
           "MarioSoundController#mode",
           "mario_test_sound_ui",
-          "MelodyChaser3D"
+          "MelodyChaser3D",
+          "sound_timeline"
         ],
         "large": [],
         "applied": []
@@ -177,7 +186,7 @@
       "act": "Act III",
       "truth": "Bernini — sculpture as frozen oscillation; the baroque as visual sine",
       "count": 4,
-      "x_spread": 0.3254,
+      "x_spread": 0.0,
       "tiers": {
         "small": [
           "dark_sphere",
@@ -197,7 +206,7 @@
       "act": "Act III",
       "truth": "John Cage — silence as wave, chance as oscillation; the philosophy of period",
       "count": 4,
-      "x_spread": 1.0,
+      "x_spread": 0.1666,
       "tiers": {
         "small": [
           "dark_sphere"
@@ -218,7 +227,7 @@
       "act": "Act III",
       "truth": "AirMusic — modulating air with wave gestures; instrument as oscillator",
       "count": 8,
-      "x_spread": 0.2853,
+      "x_spread": 0.3334,
       "tiers": {
         "small": [
           "GlassRack",
@@ -242,7 +251,7 @@
       "act": "Act IV",
       "truth": "Sky Stairs — frequency as elevation; the wave ascending",
       "count": 4,
-      "x_spread": -0.2775,
+      "x_spread": 0.5,
       "tiers": {
         "small": [
           "cube_scene",
@@ -263,7 +272,7 @@
       "act": "Act IV",
       "truth": "TrigWalkingPath — the player's footsteps trace trigonometry",
       "count": 6,
-      "x_spread": -0.3224,
+      "x_spread": 0.6666,
       "tiers": {
         "small": [
           "dark_sphere"
@@ -286,7 +295,7 @@
       "act": "Act IV",
       "truth": "Synthesis Lab — the player composes their own waves from harmonics",
       "count": 24,
-      "x_spread": -0.3577,
+      "x_spread": 0.8334,
       "tiers": {
         "small": [
           "dna_specimen",
@@ -320,175 +329,234 @@
         ],
         "applied": []
       }
+    },
+    {
+      "key": "· palette (unplaced)",
+      "order": 12,
+      "act": "Act IV",
+      "truth": "sequence artifacts available but not yet placed in a map",
+      "count": 15,
+      "x_spread": 1.0,
+      "tiers": {
+        "small": [
+          "coupled_pendulums",
+          "demo_compounds",
+          "demo_passive",
+          "demo_singles",
+          "oscilloscope_artifact"
+        ],
+        "medium": [
+          "MarioSoundController",
+          "doppler_effect_demo",
+          "harmonic_motion_demo",
+          "living_paper_fourier",
+          "living_paper_heat",
+          "living_paper_lissajous",
+          "profile",
+          "profile_beat",
+          "profile_lissajous"
+        ],
+        "large": [
+          "coshlea"
+        ],
+        "applied": []
+      }
     }
   ],
   "concept_distance": [
     [
       0.0,
-      0.0921,
+      0.0833,
+      0.1667,
+      0.25,
+      0.3333,
+      0.4167,
+      0.5,
+      0.5833,
+      0.6667,
+      0.75,
+      0.8333,
+      0.9167,
+      1.0
+    ],
+    [
+      0.0833,
       0.0,
-      0.366,
-      0.6071,
-      0.6968,
-      0.7877,
+      0.0833,
+      0.1667,
+      0.25,
+      0.3333,
+      0.4167,
+      0.5,
+      0.5833,
+      0.6667,
+      0.75,
+      0.8333,
+      0.9167
+    ],
+    [
+      0.1667,
+      0.0833,
+      0.0,
+      0.0833,
+      0.1667,
+      0.25,
+      0.3333,
+      0.4167,
+      0.5,
+      0.5833,
+      0.6667,
+      0.75,
+      0.8333
+    ],
+    [
+      0.25,
+      0.1667,
+      0.0833,
+      0.0,
+      0.0833,
+      0.1667,
+      0.25,
+      0.3333,
+      0.4167,
+      0.5,
+      0.5833,
+      0.6667,
+      0.75
+    ],
+    [
+      0.3333,
+      0.25,
+      0.1667,
+      0.0833,
+      0.0,
+      0.0833,
+      0.1667,
+      0.25,
+      0.3333,
+      0.4167,
+      0.5,
+      0.5833,
+      0.6667
+    ],
+    [
+      0.4167,
+      0.3333,
+      0.25,
+      0.1667,
+      0.0833,
+      0.0,
+      0.0833,
+      0.1667,
+      0.25,
+      0.3333,
+      0.4167,
+      0.5,
+      0.5833
+    ],
+    [
+      0.5,
+      0.4167,
+      0.3333,
+      0.25,
+      0.1667,
+      0.0833,
+      0.0,
+      0.0833,
+      0.1667,
+      0.25,
+      0.3333,
+      0.4167,
+      0.5
+    ],
+    [
+      0.5833,
+      0.5,
+      0.4167,
+      0.3333,
+      0.25,
+      0.1667,
+      0.0833,
+      0.0,
+      0.0833,
+      0.1667,
+      0.25,
+      0.3333,
+      0.4167
+    ],
+    [
+      0.6667,
+      0.5833,
+      0.5,
+      0.4167,
+      0.3333,
+      0.25,
+      0.1667,
+      0.0833,
+      0.0,
+      0.0833,
+      0.1667,
+      0.25,
+      0.3333
+    ],
+    [
+      0.75,
+      0.6667,
+      0.5833,
+      0.5,
+      0.4167,
+      0.3333,
+      0.25,
+      0.1667,
+      0.0833,
+      0.0,
+      0.0833,
+      0.1667,
+      0.25
+    ],
+    [
+      0.8333,
+      0.75,
+      0.6667,
+      0.5833,
+      0.5,
+      0.4167,
+      0.3333,
+      0.25,
+      0.1667,
+      0.0833,
+      0.0,
+      0.0833,
+      0.1667
+    ],
+    [
+      0.9167,
+      0.8333,
+      0.75,
+      0.6667,
+      0.5833,
+      0.5,
+      0.4167,
+      0.3333,
+      0.25,
+      0.1667,
+      0.0833,
+      0.0,
+      0.0833
+    ],
+    [
       1.0,
-      0.6142,
-      0.625,
-      0.5861,
-      0.2458
-    ],
-    [
-      0.0921,
-      0.0,
-      0.2572,
-      0.4611,
-      0.6615,
-      0.7859,
-      0.8122,
-      0.7249,
-      0.5078,
-      0.7811,
-      0.4958,
-      0.0532
-    ],
-    [
-      0.0,
-      0.2572,
-      0.0,
-      0.006,
-      0.3469,
-      0.6794,
-      0.8128,
-      0.8756,
-      0.8158,
-      0.3086,
-      0.3248,
-      0.3475
-    ],
-    [
-      0.366,
-      0.4611,
-      0.006,
-      0.0,
-      0.3325,
-      0.6477,
-      0.4934,
-      0.7213,
-      0.7524,
-      0.247,
-      0.1322,
-      0.485
-    ],
-    [
-      0.6071,
-      0.6615,
-      0.3469,
-      0.3325,
-      0.0,
-      0.7153,
-      0.7434,
-      0.7482,
-      0.619,
-      0.485,
-      0.7183,
-      0.4922
-    ],
-    [
-      0.6968,
-      0.7859,
-      0.6794,
-      0.6477,
-      0.7153,
-      0.0,
-      0.7434,
-      0.4121,
-      0.4904,
-      0.9163,
-      0.8768,
-      0.3678
-    ],
-    [
-      0.7877,
-      0.8122,
-      0.8128,
-      0.4934,
-      0.7434,
-      0.7434,
-      0.0,
-      0.4623,
-      0.6232,
-      0.7279,
-      0.7273,
-      0.7297
-    ],
-    [
-      1.0,
-      0.7249,
-      0.8756,
-      0.7213,
-      0.7482,
-      0.4121,
-      0.4623,
-      0.0,
-      0.3289,
-      0.9025,
-      0.9085,
-      0.6035
-    ],
-    [
-      0.6142,
-      0.5078,
-      0.8158,
-      0.7524,
-      0.619,
-      0.4904,
-      0.6232,
-      0.3289,
-      0.0,
-      0.817,
-      0.6172,
-      0.451
-    ],
-    [
-      0.625,
-      0.7811,
-      0.3086,
-      0.247,
-      0.485,
-      0.9163,
-      0.7279,
-      0.9025,
-      0.817,
-      0.0,
-      0.2321,
-      0.5126
-    ],
-    [
-      0.5861,
-      0.4958,
-      0.3248,
-      0.1322,
-      0.7183,
-      0.8768,
-      0.7273,
-      0.9085,
-      0.6172,
-      0.2321,
-      0.0,
-      0.1621
-    ],
-    [
-      0.2458,
-      0.0532,
-      0.3475,
-      0.485,
-      0.4922,
-      0.3678,
-      0.7297,
-      0.6035,
-      0.451,
-      0.5126,
-      0.1621,
+      0.9167,
+      0.8333,
+      0.75,
+      0.6667,
+      0.5833,
+      0.5,
+      0.4167,
+      0.3333,
+      0.25,
+      0.1667,
+      0.0833,
       0.0
     ]
   ],
@@ -503,7 +571,8 @@
       "size": 5,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "pickup_cube_static",
@@ -515,7 +584,8 @@
       "size": 5,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "cube_scene",
@@ -527,7 +597,8 @@
       "size": 5,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "transformation_cube",
@@ -539,7 +610,8 @@
       "size": 5,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "rotating_cube",
@@ -551,7 +623,8 @@
       "size": 5,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "y_oscillation_cube",
@@ -563,7 +636,8 @@
       "size": 8,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "rotating_cube_demo",
@@ -575,7 +649,8 @@
       "size": 8,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "science_screen",
@@ -587,7 +662,8 @@
       "size": 8,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "pickup_cube_transforming",
@@ -599,7 +675,8 @@
       "size": 5,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "pickup_cube_rotating",
@@ -611,7 +688,8 @@
       "size": 5,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "dark_sphere",
@@ -623,7 +701,8 @@
       "size": 5,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "control_pendulum",
@@ -635,7 +714,8 @@
       "size": 5,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "pick_up_cube",
@@ -647,7 +727,8 @@
       "size": 5,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "oscillation_controlled_cube",
@@ -659,7 +740,8 @@
       "size": 5,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "mario_cube_time_trace",
@@ -671,7 +753,8 @@
       "size": 5,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "SphericalHarmonics",
@@ -683,7 +766,86 @@
       "size": 8,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
+    },
+    {
+      "lookup": "profile_saw",
+      "name": "Profile — Sawtooth Wave",
+      "concept": "the wave",
+      "concept_order": 0,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "profile_square",
+      "name": "Profile — Square Wave",
+      "concept": "the wave",
+      "concept_order": 0,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "profile_triangle",
+      "name": "Profile — Triangle Wave",
+      "concept": "the wave",
+      "concept_order": 0,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "vertical_wave_lines",
+      "name": "Vertical Wave Lines",
+      "concept": "the wave",
+      "concept_order": 0,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "wave_equation_solver",
+      "name": "Wave Equation Solver",
+      "concept": "the wave",
+      "concept_order": 0,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "wave_interference_tank",
+      "name": "Wave Interference Tank",
+      "concept": "the wave",
+      "concept_order": 0,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
     },
     {
       "lookup": "PendulumWave",
@@ -695,7 +857,8 @@
       "size": 14,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "draw_dot_time_domain",
@@ -707,7 +870,8 @@
       "size": 5,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "dark_sphere",
@@ -719,7 +883,8 @@
       "size": 5,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "WavePaintings",
@@ -731,7 +896,8 @@
       "size": 14,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "GlassRack",
@@ -743,7 +909,8 @@
       "size": 5,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "lab_table",
@@ -755,7 +922,8 @@
       "size": 5,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "foucault_pendulum",
@@ -767,7 +935,8 @@
       "size": 14,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "BigPipeSystem",
@@ -779,7 +948,8 @@
       "size": 8,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "VRAudioMonitor",
@@ -791,7 +961,8 @@
       "size": 5,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "seismograph",
@@ -803,7 +974,8 @@
       "size": 5,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "cube_scene",
@@ -815,7 +987,8 @@
       "size": 5,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "unit_circle_advanced",
@@ -827,7 +1000,8 @@
       "size": 8,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "colorballs",
@@ -839,7 +1013,8 @@
       "size": 8,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "SimpleOscillatingBridge",
@@ -851,7 +1026,8 @@
       "size": 8,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "OscillationCurve",
@@ -863,7 +1039,8 @@
       "size": 14,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "dark_sphere",
@@ -875,7 +1052,8 @@
       "size": 5,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "sine_wall_corridor",
@@ -887,7 +1065,8 @@
       "size": 14,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "sine_wall_explanation",
@@ -899,7 +1078,8 @@
       "size": 8,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "sine_space_explanation",
@@ -911,7 +1091,8 @@
       "size": 8,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "colorballs",
@@ -923,7 +1104,8 @@
       "size": 8,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "dark_sphere",
@@ -935,7 +1117,8 @@
       "size": 5,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "sine_space",
@@ -947,7 +1130,34 @@
       "size": 14,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
+    },
+    {
+      "lookup": "living_paper_sine",
+      "name": "living_paper_sine",
+      "concept": "sine space",
+      "concept_order": 3,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "sine_wall",
+      "name": "Sine Wall",
+      "concept": "sine space",
+      "concept_order": 3,
+      "tier": "large",
+      "fp": 11,
+      "size": 14,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
     },
     {
       "lookup": "dark_sphere",
@@ -959,7 +1169,8 @@
       "size": 5,
       "act": "Act II",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "kusama_sine",
@@ -971,7 +1182,8 @@
       "size": 14,
       "act": "Act II",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "wave_propagation_3d",
@@ -983,7 +1195,8 @@
       "size": 14,
       "act": "Act II",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "coupled_oscillator_lattice",
@@ -995,7 +1208,8 @@
       "size": 8,
       "act": "Act II",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "BigPipeSystem",
@@ -1007,7 +1221,8 @@
       "size": 8,
       "act": "Act II",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "pick_up_cube",
@@ -1019,7 +1234,8 @@
       "size": 5,
       "act": "Act II",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "AudioContr",
@@ -1031,7 +1247,8 @@
       "size": 5,
       "act": "Act II",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "GlassRack#config",
@@ -1043,7 +1260,8 @@
       "size": 8,
       "act": "Act II",
       "has_image": false,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "RackSineBasic",
@@ -1055,7 +1273,8 @@
       "size": 5,
       "act": "Act II",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "cable_builder",
@@ -1067,7 +1286,8 @@
       "size": 8,
       "act": "Act II",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "VRAudioMonitor",
@@ -1079,7 +1299,8 @@
       "size": 5,
       "act": "Act II",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "dark_sphere",
@@ -1091,7 +1312,8 @@
       "size": 5,
       "act": "Act II",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "DualBallFMController",
@@ -1103,7 +1325,8 @@
       "size": 5,
       "act": "Act II",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "Rack303Acid",
@@ -1115,7 +1338,8 @@
       "size": 8,
       "act": "Act II",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "RackMoogBass",
@@ -1127,7 +1351,8 @@
       "size": 8,
       "act": "Act II",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "RackDX7Piano",
@@ -1139,7 +1364,8 @@
       "size": 8,
       "act": "Act II",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "audio_catalog_tablet",
@@ -1151,7 +1377,8 @@
       "size": 5,
       "act": "Act II",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "AudioContr#config",
@@ -1163,7 +1390,8 @@
       "size": 8,
       "act": "Act II",
       "has_image": false,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "wave_interference_3d",
@@ -1175,7 +1403,8 @@
       "size": 8,
       "act": "Act II",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "harmonic_distance_table",
@@ -1187,7 +1416,8 @@
       "size": 8,
       "act": "Act II",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "chord_tension_spring",
@@ -1199,7 +1429,8 @@
       "size": 8,
       "act": "Act II",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "timbre_sculptor",
@@ -1211,7 +1442,8 @@
       "size": 8,
       "act": "Act II",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "GlassRack",
@@ -1223,7 +1455,8 @@
       "size": 5,
       "act": "Act II",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "MarioSoundController#mode",
@@ -1235,7 +1468,8 @@
       "size": 8,
       "act": "Act II",
       "has_image": false,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "mario_test_sound_ui",
@@ -1247,7 +1481,8 @@
       "size": 8,
       "act": "Act II",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "MelodyChaser3D",
@@ -1259,7 +1494,8 @@
       "size": 8,
       "act": "Act II",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "interactable_demo",
@@ -1271,7 +1507,8 @@
       "size": 5,
       "act": "Act II",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "lab_table",
@@ -1283,7 +1520,21 @@
       "size": 5,
       "act": "Act II",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
+    },
+    {
+      "lookup": "sound_timeline",
+      "name": "Sound Timeline",
+      "concept": "sound as wave",
+      "concept_order": 5,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
     },
     {
       "lookup": "ElphabaDress",
@@ -1295,7 +1546,8 @@
       "size": 8,
       "act": "Act III",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "dark_sphere",
@@ -1307,7 +1559,8 @@
       "size": 5,
       "act": "Act III",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "bernini_columns",
@@ -1319,7 +1572,8 @@
       "size": 8,
       "act": "Act III",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "vowel_sound_board",
@@ -1331,7 +1585,8 @@
       "size": 5,
       "act": "Act III",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "dual_display_test",
@@ -1343,7 +1598,8 @@
       "size": 8,
       "act": "Act III",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "ruth_asawa_sculpture",
@@ -1355,7 +1611,8 @@
       "size": 8,
       "act": "Act III",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "dark_sphere",
@@ -1367,7 +1624,8 @@
       "size": 5,
       "act": "Act III",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "john_cage_tech_noir",
@@ -1379,7 +1637,8 @@
       "size": 14,
       "act": "Act III",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "GlassRack",
@@ -1391,7 +1650,8 @@
       "size": 5,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "lab_table",
@@ -1403,7 +1663,8 @@
       "size": 5,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "dark_sphere",
@@ -1415,7 +1676,8 @@
       "size": 5,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "SystemsMusicTest",
@@ -1427,7 +1689,8 @@
       "size": 8,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "RackAmbientDrone",
@@ -1439,7 +1702,8 @@
       "size": 8,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "BigPipeSystem",
@@ -1451,7 +1715,8 @@
       "size": 8,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "air_music_display_case",
@@ -1463,7 +1728,8 @@
       "size": 8,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "resonating_metallophone",
@@ -1475,7 +1741,8 @@
       "size": 8,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "cube_scene",
@@ -1487,7 +1754,8 @@
       "size": 5,
       "act": "Act IV",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "dark_sphere",
@@ -1499,7 +1767,8 @@
       "size": 5,
       "act": "Act IV",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "sine_cylinder_staircase",
@@ -1511,7 +1780,8 @@
       "size": 14,
       "act": "Act IV",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "math_objects",
@@ -1523,7 +1793,8 @@
       "size": 8,
       "act": "Act IV",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "sine_oscillation",
@@ -1535,7 +1806,8 @@
       "size": 8,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "lissajous_curves",
@@ -1547,7 +1819,8 @@
       "size": 8,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "TrigWalkingPath",
@@ -1559,7 +1832,8 @@
       "size": 14,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "wave_interference",
@@ -1571,7 +1845,8 @@
       "size": 14,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "beat_frequency_demo",
@@ -1583,7 +1858,8 @@
       "size": 8,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "dark_sphere",
@@ -1595,7 +1871,8 @@
       "size": 5,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "dna_specimen",
@@ -1607,7 +1884,8 @@
       "size": 5,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "holographicdisplay",
@@ -1619,7 +1897,8 @@
       "size": 8,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "electronicscales",
@@ -1631,7 +1910,8 @@
       "size": 8,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "air_music_display_case",
@@ -1643,7 +1923,8 @@
       "size": 8,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "samplevialrack",
@@ -1655,7 +1936,8 @@
       "size": 8,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "seismograph",
@@ -1667,7 +1949,8 @@
       "size": 5,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "dark_sphere",
@@ -1679,7 +1962,8 @@
       "size": 5,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "oscilloscope",
@@ -1691,7 +1975,8 @@
       "size": 5,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "GlassRack",
@@ -1703,7 +1988,8 @@
       "size": 5,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "biomagneticresonator",
@@ -1715,7 +2001,8 @@
       "size": 8,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "coloredlines",
@@ -1727,7 +2014,8 @@
       "size": 14,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "hallway_scene",
@@ -1739,7 +2027,8 @@
       "size": 14,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "UnitCircleTrig",
@@ -1751,7 +2040,8 @@
       "size": 14,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "petri_dish_worms",
@@ -1763,7 +2053,8 @@
       "size": 5,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "atmosphericmonitoring",
@@ -1775,7 +2066,8 @@
       "size": 8,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "additive_wave_demo",
@@ -1787,7 +2079,8 @@
       "size": 8,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "double_helix_scene",
@@ -1799,7 +2092,8 @@
       "size": 5,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "chladni_plate",
@@ -1811,7 +2105,8 @@
       "size": 5,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "spring_demo",
@@ -1823,7 +2118,8 @@
       "size": 5,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "SoundscapeRadioRack",
@@ -1835,7 +2131,8 @@
       "size": 8,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "microscope",
@@ -1847,7 +2144,8 @@
       "size": 8,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "chemicalapparatus",
@@ -1859,7 +2157,8 @@
       "size": 8,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "multimeter",
@@ -1871,7 +2170,8 @@
       "size": 8,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "lissajous_curves",
@@ -1883,9 +2183,205 @@
       "size": 8,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
+    },
+    {
+      "lookup": "MarioSoundController",
+      "name": "MarioSoundController",
+      "concept": "· palette (unplaced)",
+      "concept_order": 12,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "coshlea",
+      "name": "Cochlea Model",
+      "concept": "· palette (unplaced)",
+      "concept_order": 12,
+      "tier": "large",
+      "fp": 95,
+      "size": 14,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "coupled_pendulums",
+      "name": "Coupled Pendulums",
+      "concept": "· palette (unplaced)",
+      "concept_order": 12,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "demo_compounds",
+      "name": "demo_compounds",
+      "concept": "· palette (unplaced)",
+      "concept_order": 12,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "demo_passive",
+      "name": "demo_passive",
+      "concept": "· palette (unplaced)",
+      "concept_order": 12,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "demo_singles",
+      "name": "demo_singles",
+      "concept": "· palette (unplaced)",
+      "concept_order": 12,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "doppler_effect_demo",
+      "name": "Doppler Effect Demo",
+      "concept": "· palette (unplaced)",
+      "concept_order": 12,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "harmonic_motion_demo",
+      "name": "Harmonic Motion Demo",
+      "concept": "· palette (unplaced)",
+      "concept_order": 12,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "living_paper_fourier",
+      "name": "living_paper_fourier",
+      "concept": "· palette (unplaced)",
+      "concept_order": 12,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "living_paper_heat",
+      "name": "living_paper_heat",
+      "concept": "· palette (unplaced)",
+      "concept_order": 12,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "living_paper_lissajous",
+      "name": "living_paper_lissajous",
+      "concept": "· palette (unplaced)",
+      "concept_order": 12,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "oscilloscope_artifact",
+      "name": "Oscilloscope",
+      "concept": "· palette (unplaced)",
+      "concept_order": 12,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "profile",
+      "name": "Profile Substrate",
+      "concept": "· palette (unplaced)",
+      "concept_order": 12,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "profile_beat",
+      "name": "Profile — Beat Frequencies",
+      "concept": "· palette (unplaced)",
+      "concept_order": 12,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "profile_lissajous",
+      "name": "Profile — Lissajous Components",
+      "concept": "· palette (unplaced)",
+      "concept_order": 12,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
     }
   ],
-  "total_artifacts": 116,
-  "total_concepts": 12
+  "total_artifacts": 140,
+  "total_concepts": 13
 }

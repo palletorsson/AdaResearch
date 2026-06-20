@@ -12,7 +12,8 @@
     "Phase Chamber",
     "Phi Term",
     "Sandbox",
-    "Synthesis"
+    "Synthesis",
+    "· palette (unplaced)"
   ],
   "concept_meta": {
     "E Term": {
@@ -21,7 +22,8 @@
       "act": "Act I",
       "tiers": {
         "small": [
-          "lambda_slider"
+          "lambda_slider",
+          "qfep_term_compass"
         ],
         "medium": [
           "random_cubes",
@@ -31,7 +33,7 @@
         "large": [],
         "applied": []
       },
-      "count": 4
+      "count": 5
     },
     "Edge Of Chaos": {
       "truth": "Edge Of Chaos",
@@ -40,18 +42,20 @@
       "tiers": {
         "small": [
           "turing_pattern",
-          "lambda_slider"
+          "lambda_slider",
+          "edge_detector"
         ],
         "medium": [
           "edge_core",
           "edge_of_chaos_unlocked",
           "emergence_zone",
-          "tt"
+          "tt",
+          "edge_of_chaos_orb"
         ],
         "large": [],
         "applied": []
       },
-      "count": 6
+      "count": 8
     },
     "F Term": {
       "truth": "F Term",
@@ -113,25 +117,28 @@
           "chaos_particles"
         ],
         "large": [
-          "bifurcation_walkway"
+          "bifurcation_walkway",
+          "lambda_hall"
         ],
         "applied": []
       },
-      "count": 7
+      "count": 8
     },
     "Phase Chamber": {
       "truth": "Phase Chamber",
       "map": "QFEP_Phase_Chamber",
       "act": "Act III",
       "tiers": {
-        "small": [],
+        "small": [
+          "phase_cube"
+        ],
         "medium": [
           "lab_room#accent_color"
         ],
         "large": [],
         "applied": []
       },
-      "count": 1
+      "count": 2
     },
     "Phi Term": {
       "truth": "Phi Term",
@@ -166,12 +173,13 @@
         ],
         "medium": [
           "reactive_particles",
-          "tt"
+          "tt",
+          "qfep_sandbox_console"
         ],
         "large": [],
         "applied": []
       },
-      "count": 6
+      "count": 7
     },
     "Synthesis": {
       "truth": "Synthesis",
@@ -193,6 +201,24 @@
         "applied": []
       },
       "count": 7
+    },
+    "· palette (unplaced)": {
+      "act": "Act IV",
+      "truth": "sequence artifacts available but not yet placed in a map",
+      "tiers": {
+        "small": [
+          "entropy_meter",
+          "fold_theatre_runner",
+          "qfep_chalkboard",
+          "qfep_oscilloscope"
+        ],
+        "medium": [
+          "reactive_particle_field"
+        ],
+        "large": [],
+        "applied": []
+      },
+      "count": 5
     }
   },
   "concept_distance": [
@@ -304,7 +330,8 @@
         "fp": 4,
         "recommended": true,
         "tier": "medium",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "particle_chaos",
@@ -312,7 +339,8 @@
         "fp": 4,
         "recommended": true,
         "tier": "medium",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "lambda_slider",
@@ -320,7 +348,8 @@
         "fp": 1,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "tt",
@@ -328,7 +357,18 @@
         "fp": 4,
         "recommended": true,
         "tier": "medium",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
+      },
+      {
+        "lookup": "qfep_term_compass",
+        "name": "QFEP Term Compass",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
       }
     ],
     "Edge Of Chaos": [
@@ -338,7 +378,8 @@
         "fp": 1,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "edge_core",
@@ -346,7 +387,8 @@
         "fp": 4,
         "recommended": true,
         "tier": "medium",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "edge_of_chaos_unlocked",
@@ -354,7 +396,8 @@
         "fp": 4,
         "recommended": true,
         "tier": "medium",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "emergence_zone",
@@ -362,7 +405,8 @@
         "fp": 4,
         "recommended": true,
         "tier": "medium",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "lambda_slider",
@@ -370,7 +414,8 @@
         "fp": 1,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "tt",
@@ -378,7 +423,28 @@
         "fp": 4,
         "recommended": true,
         "tier": "medium",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
+      },
+      {
+        "lookup": "edge_detector",
+        "name": "edge_detector",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "edge_of_chaos_orb",
+        "name": "edge_of_chaos_orb",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
       }
     ],
     "F Term": [
@@ -388,7 +454,8 @@
         "fp": 4,
         "recommended": true,
         "tier": "medium",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "snap_cube_puzzle",
@@ -396,7 +463,8 @@
         "fp": 4,
         "recommended": true,
         "tier": "medium",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "snap_tetra_puzzle",
@@ -404,7 +472,8 @@
         "fp": 4,
         "recommended": true,
         "tier": "medium",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "science_screen",
@@ -412,7 +481,8 @@
         "fp": 4,
         "recommended": true,
         "tier": "medium",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "crystal_cluster",
@@ -420,7 +490,8 @@
         "fp": 4,
         "recommended": true,
         "tier": "medium",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "lambda_slider",
@@ -428,7 +499,8 @@
         "fp": 1,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "tt",
@@ -436,7 +508,8 @@
         "fp": 4,
         "recommended": true,
         "tier": "medium",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "dark_sphere",
@@ -444,7 +517,8 @@
         "fp": 1,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       }
     ],
     "Introduction": [
@@ -454,7 +528,8 @@
         "fp": 4,
         "recommended": true,
         "tier": "medium",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "qfep_formula_3d",
@@ -462,7 +537,8 @@
         "fp": 1,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "lambda_slider",
@@ -470,7 +546,8 @@
         "fp": 1,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "phi_slider",
@@ -478,7 +555,8 @@
         "fp": 1,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "science_screen",
@@ -486,7 +564,8 @@
         "fp": 4,
         "recommended": true,
         "tier": "medium",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "grab_sphere_F",
@@ -494,7 +573,8 @@
         "fp": 2,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "grab_sphere_E",
@@ -502,7 +582,8 @@
         "fp": 2,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "grab_sphere_lambda",
@@ -510,7 +591,8 @@
         "fp": 2,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "tt",
@@ -518,7 +600,8 @@
         "fp": 4,
         "recommended": true,
         "tier": "medium",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       }
     ],
     "Lambda Spectrum": [
@@ -528,7 +611,8 @@
         "fp": 4,
         "recommended": true,
         "tier": "medium",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "ordered_grid",
@@ -536,7 +620,8 @@
         "fp": 4,
         "recommended": true,
         "tier": "medium",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "bifurcation_walkway",
@@ -544,7 +629,8 @@
         "fp": 20,
         "recommended": true,
         "tier": "large",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "edge_particles",
@@ -552,7 +638,8 @@
         "fp": 4,
         "recommended": true,
         "tier": "medium",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "complexity_pattern",
@@ -560,7 +647,8 @@
         "fp": 4,
         "recommended": true,
         "tier": "medium",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "dissolving_form",
@@ -568,7 +656,8 @@
         "fp": 4,
         "recommended": true,
         "tier": "medium",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "chaos_particles",
@@ -576,7 +665,18 @@
         "fp": 4,
         "recommended": true,
         "tier": "medium",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
+      },
+      {
+        "lookup": "lambda_hall",
+        "name": "Lambda Hall",
+        "registry": "",
+        "tier": "large",
+        "fp": 98,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
       }
     ],
     "Phase Chamber": [
@@ -586,7 +686,18 @@
         "fp": 4,
         "recommended": true,
         "tier": "medium",
-        "has_image": false
+        "has_image": false,
+        "map_ready": true
+      },
+      {
+        "lookup": "phase_cube",
+        "name": "phase_cube",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
       }
     ],
     "Phi Term": [
@@ -596,7 +707,8 @@
         "fp": 4,
         "recommended": true,
         "tier": "medium",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "fluid_form",
@@ -604,7 +716,8 @@
         "fp": 4,
         "recommended": true,
         "tier": "medium",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "phi_slider",
@@ -612,7 +725,8 @@
         "fp": 1,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "preserved_pattern",
@@ -620,7 +734,8 @@
         "fp": 4,
         "recommended": true,
         "tier": "medium",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "transforming_pattern",
@@ -628,7 +743,8 @@
         "fp": 4,
         "recommended": true,
         "tier": "medium",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "tt",
@@ -636,7 +752,8 @@
         "fp": 4,
         "recommended": true,
         "tier": "medium",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       }
     ],
     "Sandbox": [
@@ -646,7 +763,8 @@
         "fp": 1,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "phi_slider",
@@ -654,7 +772,8 @@
         "fp": 1,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "qfep_reactor",
@@ -662,7 +781,8 @@
         "fp": 1,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "reactive_particles",
@@ -670,7 +790,8 @@
         "fp": 4,
         "recommended": true,
         "tier": "medium",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "tt",
@@ -678,7 +799,8 @@
         "fp": 4,
         "recommended": true,
         "tier": "medium",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "qfep_formula_3d",
@@ -686,7 +808,18 @@
         "fp": 1,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
+      },
+      {
+        "lookup": "qfep_sandbox_console",
+        "name": "qfep_sandbox_console",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
       }
     ],
     "Synthesis": [
@@ -696,7 +829,8 @@
         "fp": 1,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "grab_sphere_F",
@@ -704,7 +838,8 @@
         "fp": 2,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "grab_sphere_E",
@@ -712,7 +847,8 @@
         "fp": 2,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "grab_sphere_lambda",
@@ -720,7 +856,8 @@
         "fp": 2,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "grab_sphere_phi",
@@ -728,7 +865,8 @@
         "fp": 2,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "qfep_formula_3d",
@@ -736,7 +874,8 @@
         "fp": 1,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "tt",
@@ -744,12 +883,66 @@
         "fp": 4,
         "recommended": true,
         "tier": "medium",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
+      }
+    ],
+    "· palette (unplaced)": [
+      {
+        "lookup": "entropy_meter",
+        "name": "entropy_meter",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "fold_theatre_runner",
+        "name": "Fold Theatre Runner",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "qfep_chalkboard",
+        "name": "QFEP Chalkboard",
+        "registry": "",
+        "tier": "small",
+        "fp": 2,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "qfep_oscilloscope",
+        "name": "qfep_oscilloscope",
+        "registry": "",
+        "tier": "small",
+        "fp": 2,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "reactive_particle_field",
+        "name": "reactive_particle_field",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
       }
     ]
   },
-  "total": 54,
-  "total_concepts": 9,
+  "total": 65,
+  "total_concepts": 10,
   "recommended_total": 54,
-  "map_ready_total": 54
+  "map_ready_total": 54,
+  "palette_total": 11
 }

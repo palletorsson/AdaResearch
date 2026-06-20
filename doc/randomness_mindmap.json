@@ -10,7 +10,7 @@
       "order": 0,
       "act": "Act I — pure chance",
       "truth": "Flat chance — every outcome equally likely; the rectangle of pure ignorance before structure arrives.",
-      "count": 13,
+      "count": 14,
       "x_spread": -1.0,
       "tiers": {
         "small": [
@@ -18,7 +18,8 @@
           "randompoints",
           "randompoints_gaussian",
           "randompoint",
-          "spawn_randomcubes"
+          "spawn_randomcubes",
+          "random_object_spawner"
         ],
         "medium": [
           "2d_in_3d_randomness_vis",
@@ -42,7 +43,7 @@
       "act": "Act I — pure chance",
       "truth": "Discrete chance — a finite set of faces, each with its slice of certainty.",
       "count": 5,
-      "x_spread": -0.8948,
+      "x_spread": -0.9,
       "tiers": {
         "small": [
           "dice_throw",
@@ -64,8 +65,8 @@
       "order": 2,
       "act": "Act I — pure chance",
       "truth": "A path with no plan — each step a fresh coin, the whole a drunkard's signature.",
-      "count": 11,
-      "x_spread": -0.7894,
+      "count": 12,
+      "x_spread": -0.8,
       "tiers": {
         "small": [
           "random_walk_grab_paper",
@@ -74,7 +75,8 @@
           "living_paper_random_walk"
         ],
         "medium": [
-          "random_walk_bench"
+          "random_walk_bench",
+          "profile_random_walk"
         ],
         "large": [
           "crystal_random_walk_demo",
@@ -94,7 +96,7 @@
       "act": "Act II — distributions",
       "truth": "Not all outcomes are equal — a distribution is the shape chance prefers.",
       "count": 6,
-      "x_spread": -0.6842,
+      "x_spread": -0.7,
       "tiers": {
         "small": [
           "distribution_sampler",
@@ -118,7 +120,7 @@
       "act": "Act II — distributions",
       "truth": "The bell is what many small accidents add up to — the central-limit attractor.",
       "count": 10,
-      "x_spread": -0.579,
+      "x_spread": -0.6,
       "tiers": {
         "small": [
           "gaussian_random"
@@ -146,7 +148,7 @@
       "act": "Act II — distributions",
       "truth": "Throw darts, keep the ones under the curve — sample any shape by refusing the rest.",
       "count": 4,
-      "x_spread": -0.4736,
+      "x_spread": -0.5,
       "tiers": {
         "small": [
           "rejection_toy"
@@ -168,7 +170,7 @@
       "act": "Act II — distributions",
       "truth": "Estimate the unknowable by throwing enough random darts at it.",
       "count": 7,
-      "x_spread": -0.3684,
+      "x_spread": -0.4,
       "tiers": {
         "small": [
           "pi_dart_toy"
@@ -192,15 +194,18 @@
       "order": 7,
       "act": "Act III — noise",
       "truth": "Smooth, coherent randomness — noise with neighbours, the texture of the natural world.",
-      "count": 10,
-      "x_spread": -0.2632,
+      "count": 13,
+      "x_spread": -0.3,
       "tiers": {
         "small": [
           "perlin_noise_clouds",
           "living_paper_perlin"
         ],
         "medium": [
-          "perlin_bench"
+          "perlin_bench",
+          "living_paper_noise_octaves",
+          "profile_noise",
+          "profile_noise_octaves"
         ],
         "large": [
           "perlin_noise_terrain",
@@ -221,7 +226,7 @@
       "act": "Act III — noise",
       "truth": "Other ways to make coherent noise — lattices, cells, and gradients beyond Perlin.",
       "count": 6,
-      "x_spread": -0.1578,
+      "x_spread": -0.2,
       "tiers": {
         "small": [
           "shader_08_cellularnoise",
@@ -245,7 +250,7 @@
       "act": "Act III — noise",
       "truth": "Noise becomes a field — every point in space assigned a value that flows.",
       "count": 20,
-      "x_spread": -0.0526,
+      "x_spread": -0.1,
       "tiers": {
         "small": [
           "curl_noise_particles",
@@ -283,7 +288,7 @@
       "act": "Act III — noise",
       "truth": "Let noise be height — and randomness becomes landscape.",
       "count": 6,
-      "x_spread": 0.0526,
+      "x_spread": 0.0,
       "tiers": {
         "small": [
           "noise_height_toy"
@@ -307,7 +312,7 @@
       "act": "Act III — noise",
       "truth": "Random but evenly spaced — chance without clumping, the eye's preferred scatter.",
       "count": 5,
-      "x_spread": 0.1578,
+      "x_spread": 0.1,
       "tiers": {
         "small": [
           "blue_noise_toy"
@@ -330,7 +335,7 @@
       "act": "Act IV — process & measure",
       "truth": "The next state remembers only the last — memoryless chains that still make patterns.",
       "count": 6,
-      "x_spread": 0.2632,
+      "x_spread": 0.2,
       "tiers": {
         "small": [
           "grammar_markov"
@@ -354,7 +359,7 @@
       "act": "Act IV — process & measure",
       "truth": "Pseudo-randomness is deterministic in disguise — same seed, same 'chance' every time.",
       "count": 6,
-      "x_spread": 0.3684,
+      "x_spread": 0.3,
       "tiers": {
         "small": [
           "seed_toy"
@@ -378,7 +383,7 @@
       "act": "Act IV — process & measure",
       "truth": "Randomness measured — how many bits of surprise a source actually carries.",
       "count": 8,
-      "x_spread": 0.4736,
+      "x_spread": 0.4,
       "tiers": {
         "small": [
           "entropy_axiom",
@@ -404,7 +409,7 @@
       "act": "Act V — randomness as material",
       "truth": "Perturb the regular — rotation, position, decay drawn from chance.",
       "count": 15,
-      "x_spread": 0.579,
+      "x_spread": 0.5,
       "tiers": {
         "small": [
           "Random_Rotate_Random_XYZ",
@@ -436,14 +441,16 @@
       "order": 16,
       "act": "Act V — randomness as material",
       "truth": "One line of chance per cell builds a maze — the smallest generative grammar.",
-      "count": 5,
-      "x_spread": 0.6842,
+      "count": 7,
+      "x_spread": 0.6,
       "tiers": {
         "small": [
-          "ten_print_toy"
+          "ten_print_toy",
+          "grid_substrate_runner"
         ],
         "medium": [
-          "ten_print_bench"
+          "ten_print_bench",
+          "grid3d"
         ],
         "large": [
           "ten_print_maze_3d",
@@ -460,7 +467,7 @@
       "act": "Act V — randomness as material",
       "truth": "Chance as a brush — Pollock's drips, Molnar's disorder, the aesthetics of the unplanned.",
       "count": 11,
-      "x_spread": 0.7894,
+      "x_spread": 0.7,
       "tiers": {
         "small": [
           "random_butterflies"
@@ -489,7 +496,7 @@
       "act": "Act V — randomness as material",
       "truth": "Give a thousand particles their own dice — emergent texture from individual chance.",
       "count": 6,
-      "x_spread": 0.8948,
+      "x_spread": 0.8,
       "tiers": {
         "small": [
           "bubble_particles"
@@ -513,7 +520,7 @@
       "act": "Act VI — randomness as growth",
       "truth": "The deep end of randomness: a short genome (CritterDNA) grown by an L-system into a unique, reproducible organism. Not flat chance — store the seed, replay the costly growth. Same seed, same form.",
       "count": 4,
-      "x_spread": 1.0,
+      "x_spread": 0.9,
       "tiers": {
         "small": [
           "dna_sprout"
@@ -528,447 +535,534 @@
           "genetic_tree_sculptor"
         ]
       }
+    },
+    {
+      "key": "· palette (unplaced)",
+      "order": 20,
+      "act": "Act IV",
+      "truth": "sequence artifacts available but not yet placed in a map",
+      "count": 27,
+      "x_spread": 1.0,
+      "tiers": {
+        "small": [
+          "dark_sphere",
+          "origami_droideka"
+        ],
+        "medium": [
+          "RotateGridCubes",
+          "armadillo_eggling",
+          "bar_array",
+          "kaleidocycle_enemy",
+          "kresling_spire",
+          "living_paper_brownian",
+          "living_paper_dla",
+          "living_paper_self_avoiding",
+          "living_paper_voronoi",
+          "mesh_grammar_barnacle",
+          "mesh_grammar_nodule_sphere",
+          "mesh_grammar_spike_ball",
+          "miura_crawler",
+          "pickup_cube_placer",
+          "plane_manipulator",
+          "profile",
+          "profile_brownian",
+          "r_c",
+          "reaction_diffusion_intro",
+          "scissor_stalker",
+          "walkingsphere"
+        ],
+        "large": [
+          "hazards_demo",
+          "mushrooms",
+          "nature_system_demo",
+          "pipe_dream"
+        ],
+        "applied": []
+      }
     }
   ],
   "concept_distance": [
     [
       0.0,
-      0.0526,
-      0.1053,
-      0.1579,
-      0.2105,
-      0.2632,
-      0.3158,
-      0.3684,
-      0.4211,
-      0.4737,
-      0.5263,
-      0.5789,
-      0.6316,
-      0.6842,
-      0.7368,
-      0.7895,
-      0.8421,
-      0.8947,
-      0.9474,
+      0.05,
+      0.1,
+      0.15,
+      0.2,
+      0.25,
+      0.3,
+      0.35,
+      0.4,
+      0.45,
+      0.5,
+      0.55,
+      0.6,
+      0.65,
+      0.7,
+      0.75,
+      0.8,
+      0.85,
+      0.9,
+      0.95,
       1.0
     ],
     [
-      0.0526,
+      0.05,
       0.0,
-      0.0526,
-      0.1053,
-      0.1579,
-      0.2105,
-      0.2632,
-      0.3158,
-      0.3684,
-      0.4211,
-      0.4737,
-      0.5263,
-      0.5789,
-      0.6316,
-      0.6842,
-      0.7368,
-      0.7895,
-      0.8421,
-      0.8947,
-      0.9474
+      0.05,
+      0.1,
+      0.15,
+      0.2,
+      0.25,
+      0.3,
+      0.35,
+      0.4,
+      0.45,
+      0.5,
+      0.55,
+      0.6,
+      0.65,
+      0.7,
+      0.75,
+      0.8,
+      0.85,
+      0.9,
+      0.95
     ],
     [
-      0.1053,
-      0.0526,
+      0.1,
+      0.05,
       0.0,
-      0.0526,
-      0.1053,
-      0.1579,
-      0.2105,
-      0.2632,
-      0.3158,
-      0.3684,
-      0.4211,
-      0.4737,
-      0.5263,
-      0.5789,
-      0.6316,
-      0.6842,
-      0.7368,
-      0.7895,
-      0.8421,
-      0.8947
+      0.05,
+      0.1,
+      0.15,
+      0.2,
+      0.25,
+      0.3,
+      0.35,
+      0.4,
+      0.45,
+      0.5,
+      0.55,
+      0.6,
+      0.65,
+      0.7,
+      0.75,
+      0.8,
+      0.85,
+      0.9
     ],
     [
-      0.1579,
-      0.1053,
-      0.0526,
+      0.15,
+      0.1,
+      0.05,
       0.0,
-      0.0526,
-      0.1053,
-      0.1579,
-      0.2105,
-      0.2632,
-      0.3158,
-      0.3684,
-      0.4211,
-      0.4737,
-      0.5263,
-      0.5789,
-      0.6316,
-      0.6842,
-      0.7368,
-      0.7895,
-      0.8421
+      0.05,
+      0.1,
+      0.15,
+      0.2,
+      0.25,
+      0.3,
+      0.35,
+      0.4,
+      0.45,
+      0.5,
+      0.55,
+      0.6,
+      0.65,
+      0.7,
+      0.75,
+      0.8,
+      0.85
     ],
     [
-      0.2105,
-      0.1579,
-      0.1053,
-      0.0526,
+      0.2,
+      0.15,
+      0.1,
+      0.05,
       0.0,
-      0.0526,
-      0.1053,
-      0.1579,
-      0.2105,
-      0.2632,
-      0.3158,
-      0.3684,
-      0.4211,
-      0.4737,
-      0.5263,
-      0.5789,
-      0.6316,
-      0.6842,
-      0.7368,
-      0.7895
+      0.05,
+      0.1,
+      0.15,
+      0.2,
+      0.25,
+      0.3,
+      0.35,
+      0.4,
+      0.45,
+      0.5,
+      0.55,
+      0.6,
+      0.65,
+      0.7,
+      0.75,
+      0.8
     ],
     [
-      0.2632,
-      0.2105,
-      0.1579,
-      0.1053,
-      0.0526,
+      0.25,
+      0.2,
+      0.15,
+      0.1,
+      0.05,
       0.0,
-      0.0526,
-      0.1053,
-      0.1579,
-      0.2105,
-      0.2632,
-      0.3158,
-      0.3684,
-      0.4211,
-      0.4737,
-      0.5263,
-      0.5789,
-      0.6316,
-      0.6842,
-      0.7368
+      0.05,
+      0.1,
+      0.15,
+      0.2,
+      0.25,
+      0.3,
+      0.35,
+      0.4,
+      0.45,
+      0.5,
+      0.55,
+      0.6,
+      0.65,
+      0.7,
+      0.75
     ],
     [
-      0.3158,
-      0.2632,
-      0.2105,
-      0.1579,
-      0.1053,
-      0.0526,
+      0.3,
+      0.25,
+      0.2,
+      0.15,
+      0.1,
+      0.05,
       0.0,
-      0.0526,
-      0.1053,
-      0.1579,
-      0.2105,
-      0.2632,
-      0.3158,
-      0.3684,
-      0.4211,
-      0.4737,
-      0.5263,
-      0.5789,
-      0.6316,
-      0.6842
+      0.05,
+      0.1,
+      0.15,
+      0.2,
+      0.25,
+      0.3,
+      0.35,
+      0.4,
+      0.45,
+      0.5,
+      0.55,
+      0.6,
+      0.65,
+      0.7
     ],
     [
-      0.3684,
-      0.3158,
-      0.2632,
-      0.2105,
-      0.1579,
-      0.1053,
-      0.0526,
+      0.35,
+      0.3,
+      0.25,
+      0.2,
+      0.15,
+      0.1,
+      0.05,
       0.0,
-      0.0526,
-      0.1053,
-      0.1579,
-      0.2105,
-      0.2632,
-      0.3158,
-      0.3684,
-      0.4211,
-      0.4737,
-      0.5263,
-      0.5789,
-      0.6316
+      0.05,
+      0.1,
+      0.15,
+      0.2,
+      0.25,
+      0.3,
+      0.35,
+      0.4,
+      0.45,
+      0.5,
+      0.55,
+      0.6,
+      0.65
     ],
     [
-      0.4211,
-      0.3684,
-      0.3158,
-      0.2632,
-      0.2105,
-      0.1579,
-      0.1053,
-      0.0526,
+      0.4,
+      0.35,
+      0.3,
+      0.25,
+      0.2,
+      0.15,
+      0.1,
+      0.05,
       0.0,
-      0.0526,
-      0.1053,
-      0.1579,
-      0.2105,
-      0.2632,
-      0.3158,
-      0.3684,
-      0.4211,
-      0.4737,
-      0.5263,
-      0.5789
+      0.05,
+      0.1,
+      0.15,
+      0.2,
+      0.25,
+      0.3,
+      0.35,
+      0.4,
+      0.45,
+      0.5,
+      0.55,
+      0.6
     ],
     [
-      0.4737,
-      0.4211,
-      0.3684,
-      0.3158,
-      0.2632,
-      0.2105,
-      0.1579,
-      0.1053,
-      0.0526,
+      0.45,
+      0.4,
+      0.35,
+      0.3,
+      0.25,
+      0.2,
+      0.15,
+      0.1,
+      0.05,
       0.0,
-      0.0526,
-      0.1053,
-      0.1579,
-      0.2105,
-      0.2632,
-      0.3158,
-      0.3684,
-      0.4211,
-      0.4737,
-      0.5263
+      0.05,
+      0.1,
+      0.15,
+      0.2,
+      0.25,
+      0.3,
+      0.35,
+      0.4,
+      0.45,
+      0.5,
+      0.55
     ],
     [
-      0.5263,
-      0.4737,
-      0.4211,
-      0.3684,
-      0.3158,
-      0.2632,
-      0.2105,
-      0.1579,
-      0.1053,
-      0.0526,
+      0.5,
+      0.45,
+      0.4,
+      0.35,
+      0.3,
+      0.25,
+      0.2,
+      0.15,
+      0.1,
+      0.05,
       0.0,
-      0.0526,
-      0.1053,
-      0.1579,
-      0.2105,
-      0.2632,
-      0.3158,
-      0.3684,
-      0.4211,
-      0.4737
+      0.05,
+      0.1,
+      0.15,
+      0.2,
+      0.25,
+      0.3,
+      0.35,
+      0.4,
+      0.45,
+      0.5
     ],
     [
-      0.5789,
-      0.5263,
-      0.4737,
-      0.4211,
-      0.3684,
-      0.3158,
-      0.2632,
-      0.2105,
-      0.1579,
-      0.1053,
-      0.0526,
+      0.55,
+      0.5,
+      0.45,
+      0.4,
+      0.35,
+      0.3,
+      0.25,
+      0.2,
+      0.15,
+      0.1,
+      0.05,
       0.0,
-      0.0526,
-      0.1053,
-      0.1579,
-      0.2105,
-      0.2632,
-      0.3158,
-      0.3684,
-      0.4211
+      0.05,
+      0.1,
+      0.15,
+      0.2,
+      0.25,
+      0.3,
+      0.35,
+      0.4,
+      0.45
     ],
     [
-      0.6316,
-      0.5789,
-      0.5263,
-      0.4737,
-      0.4211,
-      0.3684,
-      0.3158,
-      0.2632,
-      0.2105,
-      0.1579,
-      0.1053,
-      0.0526,
+      0.6,
+      0.55,
+      0.5,
+      0.45,
+      0.4,
+      0.35,
+      0.3,
+      0.25,
+      0.2,
+      0.15,
+      0.1,
+      0.05,
       0.0,
-      0.0526,
-      0.1053,
-      0.1579,
-      0.2105,
-      0.2632,
-      0.3158,
-      0.3684
+      0.05,
+      0.1,
+      0.15,
+      0.2,
+      0.25,
+      0.3,
+      0.35,
+      0.4
     ],
     [
-      0.6842,
-      0.6316,
-      0.5789,
-      0.5263,
-      0.4737,
-      0.4211,
-      0.3684,
-      0.3158,
-      0.2632,
-      0.2105,
-      0.1579,
-      0.1053,
-      0.0526,
+      0.65,
+      0.6,
+      0.55,
+      0.5,
+      0.45,
+      0.4,
+      0.35,
+      0.3,
+      0.25,
+      0.2,
+      0.15,
+      0.1,
+      0.05,
       0.0,
-      0.0526,
-      0.1053,
-      0.1579,
-      0.2105,
-      0.2632,
-      0.3158
+      0.05,
+      0.1,
+      0.15,
+      0.2,
+      0.25,
+      0.3,
+      0.35
     ],
     [
-      0.7368,
-      0.6842,
-      0.6316,
-      0.5789,
-      0.5263,
-      0.4737,
-      0.4211,
-      0.3684,
-      0.3158,
-      0.2632,
-      0.2105,
-      0.1579,
-      0.1053,
-      0.0526,
+      0.7,
+      0.65,
+      0.6,
+      0.55,
+      0.5,
+      0.45,
+      0.4,
+      0.35,
+      0.3,
+      0.25,
+      0.2,
+      0.15,
+      0.1,
+      0.05,
       0.0,
-      0.0526,
-      0.1053,
-      0.1579,
-      0.2105,
-      0.2632
+      0.05,
+      0.1,
+      0.15,
+      0.2,
+      0.25,
+      0.3
     ],
     [
-      0.7895,
-      0.7368,
-      0.6842,
-      0.6316,
-      0.5789,
-      0.5263,
-      0.4737,
-      0.4211,
-      0.3684,
-      0.3158,
-      0.2632,
-      0.2105,
-      0.1579,
-      0.1053,
-      0.0526,
+      0.75,
+      0.7,
+      0.65,
+      0.6,
+      0.55,
+      0.5,
+      0.45,
+      0.4,
+      0.35,
+      0.3,
+      0.25,
+      0.2,
+      0.15,
+      0.1,
+      0.05,
       0.0,
-      0.0526,
-      0.1053,
-      0.1579,
-      0.2105
+      0.05,
+      0.1,
+      0.15,
+      0.2,
+      0.25
     ],
     [
-      0.8421,
-      0.7895,
-      0.7368,
-      0.6842,
-      0.6316,
-      0.5789,
-      0.5263,
-      0.4737,
-      0.4211,
-      0.3684,
-      0.3158,
-      0.2632,
-      0.2105,
-      0.1579,
-      0.1053,
-      0.0526,
+      0.8,
+      0.75,
+      0.7,
+      0.65,
+      0.6,
+      0.55,
+      0.5,
+      0.45,
+      0.4,
+      0.35,
+      0.3,
+      0.25,
+      0.2,
+      0.15,
+      0.1,
+      0.05,
       0.0,
-      0.0526,
-      0.1053,
-      0.1579
+      0.05,
+      0.1,
+      0.15,
+      0.2
     ],
     [
-      0.8947,
-      0.8421,
-      0.7895,
-      0.7368,
-      0.6842,
-      0.6316,
-      0.5789,
-      0.5263,
-      0.4737,
-      0.4211,
-      0.3684,
-      0.3158,
-      0.2632,
-      0.2105,
-      0.1579,
-      0.1053,
-      0.0526,
+      0.85,
+      0.8,
+      0.75,
+      0.7,
+      0.65,
+      0.6,
+      0.55,
+      0.5,
+      0.45,
+      0.4,
+      0.35,
+      0.3,
+      0.25,
+      0.2,
+      0.15,
+      0.1,
+      0.05,
       0.0,
-      0.0526,
-      0.1053
+      0.05,
+      0.1,
+      0.15
     ],
     [
-      0.9474,
-      0.8947,
-      0.8421,
-      0.7895,
-      0.7368,
-      0.6842,
-      0.6316,
-      0.5789,
-      0.5263,
-      0.4737,
-      0.4211,
-      0.3684,
-      0.3158,
-      0.2632,
-      0.2105,
-      0.1579,
-      0.1053,
-      0.0526,
+      0.9,
+      0.85,
+      0.8,
+      0.75,
+      0.7,
+      0.65,
+      0.6,
+      0.55,
+      0.5,
+      0.45,
+      0.4,
+      0.35,
+      0.3,
+      0.25,
+      0.2,
+      0.15,
+      0.1,
+      0.05,
       0.0,
-      0.0526
+      0.05,
+      0.1
+    ],
+    [
+      0.95,
+      0.9,
+      0.85,
+      0.8,
+      0.75,
+      0.7,
+      0.65,
+      0.6,
+      0.55,
+      0.5,
+      0.45,
+      0.4,
+      0.35,
+      0.3,
+      0.25,
+      0.2,
+      0.15,
+      0.1,
+      0.05,
+      0.0,
+      0.05
     ],
     [
       1.0,
-      0.9474,
-      0.8947,
-      0.8421,
-      0.7895,
-      0.7368,
-      0.6842,
-      0.6316,
-      0.5789,
-      0.5263,
-      0.4737,
-      0.4211,
-      0.3684,
-      0.3158,
-      0.2632,
-      0.2105,
-      0.1579,
-      0.1053,
-      0.0526,
+      0.95,
+      0.9,
+      0.85,
+      0.8,
+      0.75,
+      0.7,
+      0.65,
+      0.6,
+      0.55,
+      0.5,
+      0.45,
+      0.4,
+      0.35,
+      0.3,
+      0.25,
+      0.2,
+      0.15,
+      0.1,
+      0.05,
       0.0
     ]
   ],
@@ -983,7 +1077,8 @@
       "size": 10,
       "act": "Act I — pure chance",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "randompoints_uniform",
@@ -995,7 +1090,8 @@
       "size": 5,
       "act": "Act I — pure chance",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "randompoints",
@@ -1007,7 +1103,8 @@
       "size": 5,
       "act": "Act I — pure chance",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "2d_in_3d_randomness_vis",
@@ -1019,7 +1116,8 @@
       "size": 8,
       "act": "Act I — pure chance",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "randompoints_gaussian",
@@ -1031,7 +1129,8 @@
       "size": 5,
       "act": "Act I — pure chance",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "random_number_book_page_1955",
@@ -1043,7 +1142,8 @@
       "size": 8,
       "act": "Act I — pure chance",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "random_number_book_page_collection",
@@ -1055,7 +1155,8 @@
       "size": 14,
       "act": "Act I — pure chance",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "randomlines",
@@ -1067,7 +1168,8 @@
       "size": 8,
       "act": "Act I — pure chance",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "randomup",
@@ -1079,7 +1181,8 @@
       "size": 14,
       "act": "Act I — pure chance",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "plane_random",
@@ -1091,7 +1194,8 @@
       "size": 14,
       "act": "Act I — pure chance",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "random_space",
@@ -1103,7 +1207,8 @@
       "size": 14,
       "act": "Act I — pure chance",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "randompoint",
@@ -1115,7 +1220,8 @@
       "size": 5,
       "act": "Act I — pure chance",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "spawn_randomcubes",
@@ -1127,7 +1233,21 @@
       "size": 5,
       "act": "Act I — pure chance",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
+    },
+    {
+      "lookup": "random_object_spawner",
+      "name": "Random Object Spawner",
+      "concept": "Uniform random / RNG",
+      "concept_order": 0,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act I — pure chance",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
     },
     {
       "lookup": "coin_dice_bench",
@@ -1139,7 +1259,8 @@
       "size": 8,
       "act": "Act I — pure chance",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "dice_rain_room",
@@ -1151,7 +1272,8 @@
       "size": 14,
       "act": "Act I — pure chance",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "dice_throw",
@@ -1163,7 +1285,8 @@
       "size": 5,
       "act": "Act I — pure chance",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "coin_toss",
@@ -1175,7 +1298,8 @@
       "size": 5,
       "act": "Act I — pure chance",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "slot_machine",
@@ -1187,7 +1311,8 @@
       "size": 10,
       "act": "Act I — pure chance",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "random_walk_bench",
@@ -1199,7 +1324,8 @@
       "size": 8,
       "act": "Act I — pure chance",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "random_walk_terrarium",
@@ -1211,7 +1337,8 @@
       "size": 10,
       "act": "Act I — pure chance",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "crystal_random_walk_demo",
@@ -1223,7 +1350,8 @@
       "size": 14,
       "act": "Act I — pure chance",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "random_walk_128",
@@ -1235,7 +1363,8 @@
       "size": 14,
       "act": "Act I — pure chance",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "random_walk_collection",
@@ -1247,7 +1376,8 @@
       "size": 14,
       "act": "Act I — pure chance",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "random_walk_grab_paper",
@@ -1259,7 +1389,8 @@
       "size": 5,
       "act": "Act I — pure chance",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "random_walk_leash",
@@ -1271,7 +1402,8 @@
       "size": 5,
       "act": "Act I — pure chance",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "random_walker_machine",
@@ -1283,7 +1415,8 @@
       "size": 10,
       "act": "Act I — pure chance",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "walk_random",
@@ -1295,7 +1428,8 @@
       "size": 5,
       "act": "Act I — pure chance",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "living_paper_random_walk",
@@ -1307,7 +1441,8 @@
       "size": 5,
       "act": "Act I — pure chance",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "pixel_cloud",
@@ -1319,7 +1454,21 @@
       "size": 14,
       "act": "Act I — pure chance",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
+    },
+    {
+      "lookup": "profile_random_walk",
+      "name": "Profile — Random Walk (1D)",
+      "concept": "Random walk",
+      "concept_order": 2,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act I — pure chance",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
     },
     {
       "lookup": "distribution_bench",
@@ -1331,7 +1480,8 @@
       "size": 8,
       "act": "Act II — distributions",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "distribution_comparator",
@@ -1343,7 +1493,8 @@
       "size": 10,
       "act": "Act II — distributions",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "distribution_sampler",
@@ -1355,7 +1506,8 @@
       "size": 5,
       "act": "Act II — distributions",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "probability_distributions_3d",
@@ -1367,7 +1519,8 @@
       "size": 14,
       "act": "Act II — distributions",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "distribution_visualization",
@@ -1379,7 +1532,8 @@
       "size": 14,
       "act": "Act II — distributions",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "height_random",
@@ -1391,7 +1545,8 @@
       "size": 5,
       "act": "Act II — distributions",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "galton_board",
@@ -1403,7 +1558,8 @@
       "size": 10,
       "act": "Act II — distributions",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "random_bell_curve",
@@ -1415,7 +1571,8 @@
       "size": 14,
       "act": "Act II — distributions",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "bell_alley",
@@ -1427,7 +1584,8 @@
       "size": 14,
       "act": "Act II — distributions",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "gaussian_random",
@@ -1439,7 +1597,8 @@
       "size": 5,
       "act": "Act II — distributions",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "GaussianBlurCircle",
@@ -1451,7 +1610,8 @@
       "size": 14,
       "act": "Act II — distributions",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "GaussianBlurShader",
@@ -1463,7 +1623,8 @@
       "size": 8,
       "act": "Act II — distributions",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "GaussianPaintSplatter",
@@ -1475,7 +1636,8 @@
       "size": 8,
       "act": "Act II — distributions",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "random_gaussian_texture",
@@ -1487,7 +1649,8 @@
       "size": 8,
       "act": "Act II — distributions",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "RandomGaussianTexture",
@@ -1499,7 +1662,8 @@
       "size": 8,
       "act": "Act II — distributions",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "normal_distribution",
@@ -1511,7 +1675,8 @@
       "size": 8,
       "act": "Act II — distributions",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": false
     },
     {
       "lookup": "rejection_bench",
@@ -1523,7 +1688,8 @@
       "size": 8,
       "act": "Act II — distributions",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "rejection_room",
@@ -1535,7 +1701,8 @@
       "size": 14,
       "act": "Act II — distributions",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "rejection_toy",
@@ -1547,7 +1714,8 @@
       "size": 5,
       "act": "Act II — distributions",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "rejection_sampling_demo",
@@ -1559,7 +1727,8 @@
       "size": 10,
       "act": "Act II — distributions",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "pi_dart_bench",
@@ -1571,7 +1740,8 @@
       "size": 8,
       "act": "Act II — distributions",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "pi_dart_room",
@@ -1583,7 +1753,8 @@
       "size": 14,
       "act": "Act II — distributions",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "pi_dart_toy",
@@ -1595,7 +1766,8 @@
       "size": 5,
       "act": "Act II — distributions",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "monte_carlo_dartboard",
@@ -1607,7 +1779,8 @@
       "size": 10,
       "act": "Act II — distributions",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "monte_carlo_estimator",
@@ -1619,7 +1792,8 @@
       "size": 10,
       "act": "Act II — distributions",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "monte_carlo_protein",
@@ -1631,7 +1805,8 @@
       "size": 10,
       "act": "Act II — distributions",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "monte_carlo",
@@ -1643,7 +1818,8 @@
       "size": 10,
       "act": "Act II — distributions",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": false
     },
     {
       "lookup": "perlin_bench",
@@ -1655,7 +1831,8 @@
       "size": 8,
       "act": "Act III — noise",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "perlin_noise_bridge",
@@ -1667,7 +1844,8 @@
       "size": 10,
       "act": "Act III — noise",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "perlin_noise_clouds",
@@ -1679,7 +1857,8 @@
       "size": 5,
       "act": "Act III — noise",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "perlin_noise_terrain",
@@ -1691,7 +1870,8 @@
       "size": 14,
       "act": "Act III — noise",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "perlin_terrain_sculptor",
@@ -1703,7 +1883,8 @@
       "size": 10,
       "act": "Act III — noise",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "particle_randomness_perlin",
@@ -1715,7 +1896,8 @@
       "size": 14,
       "act": "Act III — noise",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "perlin_noise",
@@ -1727,7 +1909,8 @@
       "size": 14,
       "act": "Act III — noise",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "perlinvolume",
@@ -1739,7 +1922,8 @@
       "size": 14,
       "act": "Act III — noise",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "living_paper_perlin",
@@ -1751,7 +1935,8 @@
       "size": 5,
       "act": "Act III — noise",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "noise_field",
@@ -1763,7 +1948,47 @@
       "size": 14,
       "act": "Act III — noise",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
+    },
+    {
+      "lookup": "living_paper_noise_octaves",
+      "name": "living_paper_noise_octaves",
+      "concept": "Perlin noise",
+      "concept_order": 7,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act III — noise",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "profile_noise",
+      "name": "Profile — 1D Noise",
+      "concept": "Perlin noise",
+      "concept_order": 7,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act III — noise",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "profile_noise_octaves",
+      "name": "Profile — Noise Octaves",
+      "concept": "Perlin noise",
+      "concept_order": 7,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act III — noise",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
     },
     {
       "lookup": "noise_compare_bench",
@@ -1775,7 +2000,8 @@
       "size": 8,
       "act": "Act III — noise",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "noise_displacer",
@@ -1787,7 +2013,8 @@
       "size": 10,
       "act": "Act III — noise",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "shader_08_cellularnoise",
@@ -1799,7 +2026,8 @@
       "size": 5,
       "act": "Act III — noise",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "worley_noise",
@@ -1811,7 +2039,8 @@
       "size": 5,
       "act": "Act III — noise",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "simplex_noise",
@@ -1823,7 +2052,8 @@
       "size": 14,
       "act": "Act III — noise",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "value_noise",
@@ -1835,7 +2065,8 @@
       "size": 14,
       "act": "Act III — noise",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "noise_flow_drones",
@@ -1847,7 +2078,8 @@
       "size": 10,
       "act": "Act III — noise",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "marchingcubes_voxel_noise_demo",
@@ -1859,7 +2091,8 @@
       "size": 14,
       "act": "Act III — noise",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "shader_noise_space",
@@ -1871,7 +2104,8 @@
       "size": 14,
       "act": "Act III — noise",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "voxel_noise_demo",
@@ -1883,7 +2117,8 @@
       "size": 14,
       "act": "Act III — noise",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "VoxelNoiseROIs",
@@ -1895,7 +2130,8 @@
       "size": 8,
       "act": "Act III — noise",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "cloudvolume",
@@ -1907,7 +2143,8 @@
       "size": 14,
       "act": "Act III — noise",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "curl_noise_particles",
@@ -1919,7 +2156,8 @@
       "size": 5,
       "act": "Act III — noise",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "neon_wave_grid",
@@ -1931,7 +2169,8 @@
       "size": 14,
       "act": "Act III — noise",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "noise_mixer",
@@ -1943,7 +2182,8 @@
       "size": 5,
       "act": "Act III — noise",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "noise_space",
@@ -1955,7 +2195,8 @@
       "size": 14,
       "act": "Act III — noise",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "NoiseColors3D",
@@ -1967,7 +2208,8 @@
       "size": 14,
       "act": "Act III — noise",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "noiselayers",
@@ -1979,7 +2221,8 @@
       "size": 5,
       "act": "Act III — noise",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "noisesphere",
@@ -1991,7 +2234,8 @@
       "size": 14,
       "act": "Act III — noise",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "noisetext",
@@ -2003,7 +2247,8 @@
       "size": 5,
       "act": "Act III — noise",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "noisetorus",
@@ -2015,7 +2260,8 @@
       "size": 14,
       "act": "Act III — noise",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "noisetorus_ex_1",
@@ -2027,7 +2273,8 @@
       "size": 14,
       "act": "Act III — noise",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "pool_hole_noise",
@@ -2039,7 +2286,8 @@
       "size": 14,
       "act": "Act III — noise",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "shader_07_noise",
@@ -2051,7 +2299,8 @@
       "size": 5,
       "act": "Act III — noise",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "voxelnoise",
@@ -2063,7 +2312,8 @@
       "size": 14,
       "act": "Act III — noise",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "WhiteNoiseGallery",
@@ -2075,7 +2325,8 @@
       "size": 14,
       "act": "Act III — noise",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "noise_dunes_bench",
@@ -2087,7 +2338,8 @@
       "size": 8,
       "act": "Act III — noise",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "noise_height_toy",
@@ -2099,7 +2351,8 @@
       "size": 5,
       "act": "Act III — noise",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "noise_terrain_forge",
@@ -2111,7 +2364,8 @@
       "size": 10,
       "act": "Act III — noise",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "noise_terrain_with_blobs",
@@ -2123,7 +2377,8 @@
       "size": 14,
       "act": "Act III — noise",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "pheromone_terrain",
@@ -2135,7 +2390,8 @@
       "size": 14,
       "act": "Act III — noise",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "noise_terrain",
@@ -2147,7 +2403,8 @@
       "size": 14,
       "act": "Act III — noise",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "blue_noise_bench",
@@ -2159,7 +2416,8 @@
       "size": 8,
       "act": "Act III — noise",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "blue_noise_planter",
@@ -2171,7 +2429,8 @@
       "size": 10,
       "act": "Act III — noise",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "blue_noise_toy",
@@ -2183,7 +2442,8 @@
       "size": 5,
       "act": "Act III — noise",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "blue_noise",
@@ -2195,7 +2455,8 @@
       "size": 14,
       "act": "Act III — noise",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "instancingscatter",
@@ -2207,7 +2468,8 @@
       "size": 14,
       "act": "Act III — noise",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "markov_melody",
@@ -2219,7 +2481,8 @@
       "size": 10,
       "act": "Act IV — process & measure",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "markov_chains_tree",
@@ -2231,7 +2494,8 @@
       "size": 14,
       "act": "Act IV — process & measure",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "markov_chains",
@@ -2243,7 +2507,8 @@
       "size": 14,
       "act": "Act IV — process & measure",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "grammar_markov",
@@ -2255,7 +2520,8 @@
       "size": 5,
       "act": "Act IV — process & measure",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "puls_markov",
@@ -2267,7 +2533,8 @@
       "size": 14,
       "act": "Act IV — process & measure",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "markov_chain",
@@ -2279,7 +2546,8 @@
       "size": 8,
       "act": "Act IV — process & measure",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": false
     },
     {
       "lookup": "seed_bench",
@@ -2291,7 +2559,8 @@
       "size": 8,
       "act": "Act IV — process & measure",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "seed_toy",
@@ -2303,7 +2572,8 @@
       "size": 5,
       "act": "Act IV — process & measure",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "trng_vs_prng",
@@ -2315,7 +2585,8 @@
       "size": 10,
       "act": "Act IV — process & measure",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "prng_crank_machine",
@@ -2327,7 +2598,8 @@
       "size": 10,
       "act": "Act IV — process & measure",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "seed_replay_demo",
@@ -2339,7 +2611,8 @@
       "size": 10,
       "act": "Act IV — process & measure",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "grid2d_seeds",
@@ -2351,7 +2624,8 @@
       "size": 14,
       "act": "Act IV — process & measure",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "entropy_bench",
@@ -2363,7 +2637,8 @@
       "size": 8,
       "act": "Act IV — process & measure",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "entropy_axiom",
@@ -2375,7 +2650,8 @@
       "size": 5,
       "act": "Act IV — process & measure",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "entropy_jar",
@@ -2387,7 +2663,8 @@
       "size": 10,
       "act": "Act IV — process & measure",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "shannon_entropy_meter",
@@ -2399,7 +2676,8 @@
       "size": 10,
       "act": "Act IV — process & measure",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "entropy_morphogenesis",
@@ -2411,7 +2689,8 @@
       "size": 14,
       "act": "Act IV — process & measure",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "hardware_entropy_decay",
@@ -2423,7 +2702,8 @@
       "size": 10,
       "act": "Act IV — process & measure",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "digital_materiality_glitch",
@@ -2435,7 +2715,8 @@
       "size": 5,
       "act": "Act IV — process & measure",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "extreme_randomness",
@@ -2447,7 +2728,8 @@
       "size": 14,
       "act": "Act IV — process & measure",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "jitter_bench",
@@ -2459,7 +2741,8 @@
       "size": 8,
       "act": "Act V — randomness as material",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "Random_Rotate_Random_XYZ",
@@ -2471,7 +2754,8 @@
       "size": 5,
       "act": "Act V — randomness as material",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "random_decay_multimesh",
@@ -2483,7 +2767,8 @@
       "size": 10,
       "act": "Act V — randomness as material",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "random_decay_objects",
@@ -2495,7 +2780,8 @@
       "size": 10,
       "act": "Act V — randomness as material",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "randomize_cubes_over_Z",
@@ -2507,7 +2793,8 @@
       "size": 5,
       "act": "Act V — randomness as material",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "random_transformations",
@@ -2519,7 +2806,8 @@
       "size": 5,
       "act": "Act V — randomness as material",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "random_transformations_geometric",
@@ -2531,7 +2819,8 @@
       "size": 5,
       "act": "Act V — randomness as material",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "random_transformations_matrices",
@@ -2543,7 +2832,8 @@
       "size": 5,
       "act": "Act V — randomness as material",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "random_transformations_noise",
@@ -2555,7 +2845,8 @@
       "size": 5,
       "act": "Act V — randomness as material",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "random_transformations_stochastic",
@@ -2567,7 +2858,8 @@
       "size": 5,
       "act": "Act V — randomness as material",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "random_edge_profile",
@@ -2579,7 +2871,8 @@
       "size": 5,
       "act": "Act V — randomness as material",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "random_edge_profile_collection",
@@ -2591,7 +2884,8 @@
       "size": 14,
       "act": "Act V — randomness as material",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "remove_random",
@@ -2603,7 +2897,8 @@
       "size": 10,
       "act": "Act V — randomness as material",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "rotate_grid_cubes",
@@ -2615,7 +2910,8 @@
       "size": 5,
       "act": "Act V — randomness as material",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "rotate_random_y",
@@ -2627,7 +2923,8 @@
       "size": 5,
       "act": "Act V — randomness as material",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "ten_print_bench",
@@ -2639,7 +2936,8 @@
       "size": 8,
       "act": "Act V — randomness as material",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "ten_print_textile",
@@ -2651,7 +2949,8 @@
       "size": 10,
       "act": "Act V — randomness as material",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "ten_print_toy",
@@ -2663,7 +2962,8 @@
       "size": 5,
       "act": "Act V — randomness as material",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "ten_print_maze_3d",
@@ -2675,7 +2975,8 @@
       "size": 14,
       "act": "Act V — randomness as material",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "ten_print",
@@ -2687,7 +2988,34 @@
       "size": 14,
       "act": "Act V — randomness as material",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
+    },
+    {
+      "lookup": "grid3d",
+      "name": "Grid3D Substrate",
+      "concept": "10 PRINT / generative grid",
+      "concept_order": 16,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act V — randomness as material",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "grid_substrate_runner",
+      "name": "Grid Substrate Runner",
+      "concept": "10 PRINT / generative grid",
+      "concept_order": 16,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act V — randomness as material",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
     },
     {
       "lookup": "scatter_bench",
@@ -2699,7 +3027,8 @@
       "size": 8,
       "act": "Act V — randomness as material",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "pollock_3d",
@@ -2711,7 +3040,8 @@
       "size": 10,
       "act": "Act V — randomness as material",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "pollock_painting_in_3d",
@@ -2723,7 +3053,8 @@
       "size": 10,
       "act": "Act V — randomness as material",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "random_color_book_page_collection",
@@ -2735,7 +3066,8 @@
       "size": 14,
       "act": "Act V — randomness as material",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "vera_molnar_des_ordres",
@@ -2747,7 +3079,8 @@
       "size": 10,
       "act": "Act V — randomness as material",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "bubbles_random",
@@ -2759,7 +3092,8 @@
       "size": 14,
       "act": "Act V — randomness as material",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "omoss",
@@ -2771,7 +3105,8 @@
       "size": 14,
       "act": "Act V — randomness as material",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "random_butterflies",
@@ -2783,7 +3118,8 @@
       "size": 5,
       "act": "Act V — randomness as material",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "random_plants",
@@ -2795,7 +3131,8 @@
       "size": 14,
       "act": "Act V — randomness as material",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "sculpt_one",
@@ -2807,7 +3144,8 @@
       "size": 14,
       "act": "Act V — randomness as material",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "env_one",
@@ -2819,7 +3157,8 @@
       "size": 14,
       "act": "Act V — randomness as material",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "random_fireworks",
@@ -2831,7 +3170,8 @@
       "size": 10,
       "act": "Act V — randomness as material",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "particle_randomness_emergent",
@@ -2843,7 +3183,8 @@
       "size": 14,
       "act": "Act V — randomness as material",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "particle_randomness_evolutionary",
@@ -2855,7 +3196,8 @@
       "size": 8,
       "act": "Act V — randomness as material",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "particle_randomness_patterns",
@@ -2867,7 +3209,8 @@
       "size": 14,
       "act": "Act V — randomness as material",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "particle_randomness_pure",
@@ -2879,7 +3222,8 @@
       "size": 14,
       "act": "Act V — randomness as material",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "bubble_particles",
@@ -2891,7 +3235,8 @@
       "size": 5,
       "act": "Act V — randomness as material",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "dna_sprout",
@@ -2903,7 +3248,8 @@
       "size": 5,
       "act": "Act VI — randomness as growth",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "genetic_tree_sculptor",
@@ -2915,7 +3261,8 @@
       "size": 10,
       "act": "Act VI — randomness as growth",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "genome_bench",
@@ -2927,7 +3274,8 @@
       "size": 8,
       "act": "Act VI — randomness as growth",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "seed_vs_random",
@@ -2939,9 +3287,361 @@
       "size": 14,
       "act": "Act VI — randomness as growth",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
+    },
+    {
+      "lookup": "RotateGridCubes",
+      "name": "RotateGridCubes",
+      "concept": "· palette (unplaced)",
+      "concept_order": 20,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "armadillo_eggling",
+      "name": "armadillo_eggling",
+      "concept": "· palette (unplaced)",
+      "concept_order": 20,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "bar_array",
+      "name": "BarArray Substrate",
+      "concept": "· palette (unplaced)",
+      "concept_order": 20,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "dark_sphere",
+      "name": "Dark Sphere",
+      "concept": "· palette (unplaced)",
+      "concept_order": 20,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "hazards_demo",
+      "name": "Hazards Demo",
+      "concept": "· palette (unplaced)",
+      "concept_order": 20,
+      "tier": "large",
+      "fp": 256,
+      "size": 14,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "kaleidocycle_enemy",
+      "name": "kaleidocycle_enemy",
+      "concept": "· palette (unplaced)",
+      "concept_order": 20,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "kresling_spire",
+      "name": "kresling_spire",
+      "concept": "· palette (unplaced)",
+      "concept_order": 20,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "living_paper_brownian",
+      "name": "living_paper_brownian",
+      "concept": "· palette (unplaced)",
+      "concept_order": 20,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "living_paper_dla",
+      "name": "living_paper_dla",
+      "concept": "· palette (unplaced)",
+      "concept_order": 20,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "living_paper_self_avoiding",
+      "name": "living_paper_self_avoiding",
+      "concept": "· palette (unplaced)",
+      "concept_order": 20,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "living_paper_voronoi",
+      "name": "living_paper_voronoi",
+      "concept": "· palette (unplaced)",
+      "concept_order": 20,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "mesh_grammar_barnacle",
+      "name": "MeshGrammar — Barnacle Sphere",
+      "concept": "· palette (unplaced)",
+      "concept_order": 20,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "mesh_grammar_nodule_sphere",
+      "name": "MeshGrammar — Nodule Sphere",
+      "concept": "· palette (unplaced)",
+      "concept_order": 20,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "mesh_grammar_spike_ball",
+      "name": "MeshGrammar — Spike Ball",
+      "concept": "· palette (unplaced)",
+      "concept_order": 20,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "miura_crawler",
+      "name": "miura_crawler",
+      "concept": "· palette (unplaced)",
+      "concept_order": 20,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "mushrooms",
+      "name": "Mushrooms",
+      "concept": "· palette (unplaced)",
+      "concept_order": 20,
+      "tier": "large",
+      "fp": 121,
+      "size": 14,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "nature_system_demo",
+      "name": "Nature System Demo",
+      "concept": "· palette (unplaced)",
+      "concept_order": 20,
+      "tier": "large",
+      "fp": 42,
+      "size": 14,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "origami_droideka",
+      "name": "origami_droideka",
+      "concept": "· palette (unplaced)",
+      "concept_order": 20,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "pickup_cube_placer",
+      "name": "pickup_cube_placer",
+      "concept": "· palette (unplaced)",
+      "concept_order": 20,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "pipe_dream",
+      "name": "pipe_dream",
+      "concept": "· palette (unplaced)",
+      "concept_order": 20,
+      "tier": "large",
+      "fp": 15,
+      "size": 14,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "plane_manipulator",
+      "name": "plane_manipulator",
+      "concept": "· palette (unplaced)",
+      "concept_order": 20,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "profile",
+      "name": "Profile Substrate",
+      "concept": "· palette (unplaced)",
+      "concept_order": 20,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "profile_brownian",
+      "name": "Profile — Brownian Bridge",
+      "concept": "· palette (unplaced)",
+      "concept_order": 20,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "r_c",
+      "name": "r_c",
+      "concept": "· palette (unplaced)",
+      "concept_order": 20,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "reaction_diffusion_intro",
+      "name": "Reaction-Diffusion Intro",
+      "concept": "· palette (unplaced)",
+      "concept_order": 20,
+      "tier": "medium",
+      "fp": 6,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "scissor_stalker",
+      "name": "scissor_stalker",
+      "concept": "· palette (unplaced)",
+      "concept_order": 20,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "walkingsphere",
+      "name": "walkingsphere",
+      "concept": "· palette (unplaced)",
+      "concept_order": 20,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
     }
   ],
-  "total_artifacts": 164,
-  "total_concepts": 20
+  "total_artifacts": 198,
+  "total_concepts": 21
 }

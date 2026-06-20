@@ -7,20 +7,265 @@
     "2D · surface",
     "3D · solids",
     "structures",
-    "meta"
+    "meta",
+    "Act IV"
   ],
   "maps": [
     {
-      "name": "Primitives_Melencolia",
-      "score": 0.569,
+      "name": "Point_Triangle",
+      "score": 1.0,
       "tag": "curated",
+      "grid": [
+        7,
+        11
+      ],
+      "n_concepts": 3,
+      "n_artifacts": 5,
+      "arts": [
+        {
+          "co": 19,
+          "col": 3,
+          "row": 5,
+          "lk": "triangle_line_puzzle",
+          "ai": 5,
+          "t": "a"
+        },
+        {
+          "co": 3,
+          "col": 5,
+          "row": 6,
+          "lk": "parasol_triangle",
+          "ai": 2,
+          "t": "m"
+        },
+        {
+          "co": 6,
+          "col": 3,
+          "row": 7,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 3,
+          "col": 3,
+          "row": 8,
+          "lk": "triangle",
+          "ai": 2,
+          "t": "m"
+        },
+        {
+          "co": 3,
+          "col": 3,
+          "row": 9,
+          "lk": "triangleprofiles",
+          "ai": 2,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Primitives_Portals",
+      "score": 0.53,
+      "tag": "curated",
+      "grid": [
+        7,
+        35
+      ],
+      "n_concepts": 4,
+      "n_artifacts": 4,
+      "arts": [
+        {
+          "co": 7,
+          "col": 0,
+          "row": 0,
+          "lk": "dark_sphere",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 9,
+          "col": 5,
+          "row": 2,
+          "lk": "capsule",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 18,
+          "col": 3,
+          "row": 4,
+          "lk": "combine_portals",
+          "ai": 5,
+          "t": "l"
+        },
+        {
+          "co": 20,
+          "col": 5,
+          "row": 5,
+          "lk": "achilles_tortoise",
+          "ai": 5,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Point_Line_Grid",
+      "score": 0.5,
+      "tag": "curated",
+      "grid": [
+        8,
+        14
+      ],
+      "n_concepts": 3,
+      "n_artifacts": 3,
+      "arts": [
+        {
+          "co": 5,
+          "col": 0,
+          "row": 0,
+          "lk": "player_trace",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 1,
+          "col": 4,
+          "row": 3,
+          "lk": "grid_lines",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 0,
+          "col": 2,
+          "row": 8,
+          "lk": "grab_sphere_point_snap",
+          "ai": 0,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "Point_Triangle_Context",
+      "score": 0.257,
+      "tag": "partial",
+      "grid": [
+        7,
+        22
+      ],
+      "n_concepts": 4,
+      "n_artifacts": 11,
+      "arts": [
+        {
+          "co": 3,
+          "col": 5,
+          "row": 6,
+          "lk": "parasol_triangle",
+          "ai": 2,
+          "t": "m"
+        },
+        {
+          "co": 19,
+          "col": 3,
+          "row": 7,
+          "lk": "triangle_line_puzzle",
+          "ai": 5,
+          "t": "a"
+        },
+        {
+          "co": 7,
+          "col": 0,
+          "row": 10,
+          "lk": "dark_sphere",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 3,
+          "col": 2,
+          "row": 10,
+          "lk": "triangleprofiles",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 3,
+          "col": 5,
+          "row": 12,
+          "lk": "folded_strip",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 3,
+          "col": 1,
+          "row": 13,
+          "lk": "draw_triangle_faces",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 3,
+          "col": 2,
+          "row": 14,
+          "lk": "triangle",
+          "ai": 2,
+          "t": "m"
+        },
+        {
+          "co": 3,
+          "col": 4,
+          "row": 14,
+          "lk": "pythagorean_triangle_angles",
+          "ai": 2,
+          "t": "l"
+        },
+        {
+          "co": 4,
+          "col": 6,
+          "row": 15,
+          "lk": "quad",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 3,
+          "col": 0,
+          "row": 16,
+          "lk": "interactivetriangle",
+          "ai": 2,
+          "t": "m"
+        },
+        {
+          "co": 4,
+          "col": 3,
+          "row": 17,
+          "lk": "quad_line_puzzle",
+          "ai": 2,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "Primitives_Melencolia",
+      "score": 0.145,
+      "tag": "uncurated",
       "grid": [
         7,
         14
       ],
-      "n_concepts": 5,
-      "n_artifacts": 13,
+      "n_concepts": 7,
+      "n_artifacts": 17,
       "arts": [
+        {
+          "co": 7,
+          "col": 0,
+          "row": 0,
+          "lk": "dark_sphere",
+          "ai": 3,
+          "t": "s"
+        },
         {
           "co": 12,
           "col": 1,
@@ -124,309 +369,313 @@
           "lk": "bigframe",
           "ai": 4,
           "t": "l"
-        }
-      ]
-    },
-    {
-      "name": "Point_Line_Grid",
-      "score": 0.5,
-      "tag": "curated",
-      "grid": [
-        8,
-        14
-      ],
-      "n_concepts": 3,
-      "n_artifacts": 3,
-      "arts": [
-        {
-          "co": 5,
-          "col": 0,
-          "row": 0,
-          "lk": "player_trace",
-          "ai": 2,
-          "t": "s"
         },
         {
-          "co": 1,
-          "col": 4,
-          "row": 3,
-          "lk": "grid_lines",
-          "ai": 1,
-          "t": "l"
-        },
-        {
-          "co": 0,
-          "col": 2,
-          "row": 8,
-          "lk": "grab_sphere_point_snap",
-          "ai": 0,
-          "t": "a"
-        }
-      ]
-    },
-    {
-      "name": "Point_Triangle_Context",
-      "score": 0.5,
-      "tag": "curated",
-      "grid": [
-        7,
-        22
-      ],
-      "n_concepts": 3,
-      "n_artifacts": 10,
-      "arts": [
-        {
-          "co": 3,
-          "col": 5,
-          "row": 6,
-          "lk": "parasol_triangle",
-          "ai": 2,
-          "t": "m"
-        },
-        {
-          "co": 19,
+          "co": 21,
           "col": 3,
-          "row": 7,
-          "lk": "triangle_line_puzzle",
-          "ai": 5,
-          "t": "a"
-        },
-        {
-          "co": 3,
-          "col": 2,
           "row": 10,
-          "lk": "triangleprofiles",
-          "ai": 2,
+          "lk": "diamondtoruscollection",
+          "ai": 6,
           "t": "s"
         },
         {
-          "co": 3,
-          "col": 5,
+          "co": 21,
+          "col": 3,
           "row": 12,
-          "lk": "folded_strip",
-          "ai": 2,
-          "t": "s"
+          "lk": "durer_scene",
+          "ai": 6,
+          "t": "l"
         },
         {
-          "co": 3,
-          "col": 1,
+          "co": 21,
+          "col": 3,
           "row": 13,
-          "lk": "draw_triangle_faces",
-          "ai": 2,
+          "lk": "code_display",
+          "ai": 6,
           "t": "s"
-        },
+        }
+      ]
+    },
+    {
+      "name": "Point_Lines",
+      "score": -0.022,
+      "tag": "uncurated",
+      "grid": [
+        7,
+        27
+      ],
+      "n_concepts": 10,
+      "n_artifacts": 31,
+      "arts": [
         {
-          "co": 3,
-          "col": 2,
-          "row": 14,
-          "lk": "triangle",
-          "ai": 2,
-          "t": "m"
-        },
-        {
-          "co": 3,
-          "col": 4,
-          "row": 14,
-          "lk": "pythagorean_triangle_angles",
-          "ai": 2,
-          "t": "l"
-        },
-        {
-          "co": 4,
-          "col": 6,
-          "row": 15,
-          "lk": "quad",
-          "ai": 2,
-          "t": "s"
-        },
-        {
-          "co": 3,
+          "co": 7,
           "col": 0,
-          "row": 16,
-          "lk": "interactivetriangle",
-          "ai": 2,
-          "t": "m"
-        },
-        {
-          "co": 4,
-          "col": 3,
-          "row": 17,
-          "lk": "quad_line_puzzle",
-          "ai": 2,
-          "t": "a"
-        }
-      ]
-    },
-    {
-      "name": "Primitives_Portals",
-      "score": 0.5,
-      "tag": "curated",
-      "grid": [
-        7,
-        35
-      ],
-      "n_concepts": 3,
-      "n_artifacts": 3,
-      "arts": [
-        {
-          "co": 9,
-          "col": 5,
-          "row": 2,
-          "lk": "capsule",
-          "ai": 3,
-          "t": "m"
-        },
-        {
-          "co": 18,
-          "col": 3,
-          "row": 4,
-          "lk": "combine_portals",
-          "ai": 5,
-          "t": "l"
-        },
-        {
-          "co": 20,
-          "col": 5,
-          "row": 5,
-          "lk": "achilles_tortoise",
-          "ai": 5,
-          "t": "s"
-        }
-      ]
-    },
-    {
-      "name": "Primitives_Polythedra",
-      "score": 0.329,
-      "tag": "partial",
-      "grid": [
-        7,
-        11
-      ],
-      "n_concepts": 5,
-      "n_artifacts": 7,
-      "arts": [
-        {
-          "co": 0,
-          "col": 2,
-          "row": 3,
-          "lk": "interactive_point_origin_force",
-          "ai": 0,
-          "t": "s"
-        },
-        {
-          "co": 19,
-          "col": 3,
-          "row": 4,
-          "lk": "snap_tetrahedron_puzzle",
-          "ai": 5,
-          "t": "a"
-        },
-        {
-          "co": 4,
-          "col": 5,
-          "row": 5,
-          "lk": "grab_trihedron",
-          "ai": 2,
-          "t": "s"
-        },
-        {
-          "co": 6,
-          "col": 2,
-          "row": 6,
-          "lk": "cube_scene",
-          "ai": 3,
-          "t": "s"
-        },
-        {
-          "co": 6,
-          "col": 3,
-          "row": 6,
-          "lk": "cube_scene",
-          "ai": 3,
-          "t": "s"
-        },
-        {
-          "co": 6,
-          "col": 4,
-          "row": 6,
-          "lk": "cube_scene",
-          "ai": 3,
-          "t": "s"
-        },
-        {
-          "co": 12,
-          "col": 1,
-          "row": 9,
-          "lk": "pyramid_edit",
-          "ai": 3,
-          "t": "a"
-        }
-      ]
-    },
-    {
-      "name": "Point_One",
-      "score": 0.236,
-      "tag": "partial",
-      "grid": [
-        20,
-        21
-      ],
-      "n_concepts": 5,
-      "n_artifacts": 5,
-      "arts": [
-        {
-          "co": 20,
-          "col": 2,
           "row": 0,
-          "lk": "folding_past",
-          "ai": 5,
+          "lk": "dark_sphere",
+          "ai": 3,
           "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 0,
+          "row": 3,
+          "lk": "line",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 21,
+          "col": 1,
+          "row": 4,
+          "lk": "modulor_man_demo",
+          "ai": 6,
+          "t": "m"
         },
         {
           "co": 1,
-          "col": 3,
-          "row": 0,
-          "lk": "grid_lines",
+          "col": 5,
+          "row": 4,
+          "lk": "line_builder_3d",
           "ai": 1,
-          "t": "l"
+          "t": "m"
         },
         {
-          "co": 0,
-          "col": 3,
-          "row": 7,
-          "lk": "you_are_here",
-          "ai": 0,
+          "co": 19,
+          "col": 2,
+          "row": 10,
+          "lk": "plus_line_puzzle",
+          "ai": 5,
+          "t": "a"
+        },
+        {
+          "co": 19,
+          "col": 4,
+          "row": 10,
+          "lk": "parallel_line_puzzle",
+          "ai": 5,
+          "t": "a"
+        },
+        {
+          "co": 6,
+          "col": 2,
+          "row": 11,
+          "lk": "cube_scene",
+          "ai": 3,
           "t": "s"
         },
         {
-          "co": 18,
-          "col": 2,
-          "row": 10,
-          "lk": "fontana_puncture",
+          "co": 6,
+          "col": 4,
+          "row": 11,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 0,
+          "row": 13,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 3,
+          "row": 13,
+          "lk": "floating_sphere_field",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 19,
+          "col": 4,
+          "row": 13,
+          "lk": "laser_measure",
           "ai": 5,
           "t": "s"
         },
         {
           "co": 7,
-          "col": 5,
-          "row": 12,
-          "lk": "floating_sphere_field",
+          "col": 6,
+          "row": 13,
+          "lk": "laser_exploding_sphere",
           "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 6,
+          "col": 0,
+          "row": 14,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 1,
+          "row": 14,
+          "lk": "line",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 19,
+          "col": 4,
+          "row": 14,
+          "lk": "laser_measure",
+          "ai": 5,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 6,
+          "row": 14,
+          "lk": "laser_exploding_sphere",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 6,
+          "col": 0,
+          "row": 15,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 1,
+          "row": 15,
+          "lk": "line",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 1,
+          "col": 2,
+          "row": 15,
+          "lk": "grabbable_line",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 19,
+          "col": 4,
+          "row": 15,
+          "lk": "laser_measure",
+          "ai": 5,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 6,
+          "row": 16,
+          "lk": "laser_exploding_sphere",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 20,
+          "col": 1,
+          "row": 19,
+          "lk": "lightrod",
+          "ai": 5,
+          "t": "s"
+        },
+        {
+          "co": 20,
+          "col": 5,
+          "row": 19,
+          "lk": "lightrod",
+          "ai": 5,
+          "t": "s"
+        },
+        {
+          "co": 18,
+          "col": 1,
+          "row": 21,
+          "lk": "fontana_puncture",
+          "ai": 5,
+          "t": "s"
+        },
+        {
+          "co": 2,
+          "col": 2,
+          "row": 22,
+          "lk": "laser_sword",
+          "ai": 1,
+          "t": "a"
+        },
+        {
+          "co": 2,
+          "col": 4,
+          "row": 22,
+          "lk": "laser_sword",
+          "ai": 1,
+          "t": "a"
+        },
+        {
+          "co": 0,
+          "col": 1,
+          "row": 23,
+          "lk": "perspective_lines",
+          "ai": 0,
+          "t": "m"
+        },
+        {
+          "co": 1,
+          "col": 3,
+          "row": 23,
+          "lk": "scale_lines",
+          "ai": 1,
           "t": "l"
+        },
+        {
+          "co": 0,
+          "col": 5,
+          "row": 23,
+          "lk": "perspective_lines",
+          "ai": 0,
+          "t": "m"
+        },
+        {
+          "co": 0,
+          "col": 2,
+          "row": 24,
+          "lk": "klee_walking_point",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 5,
+          "col": 6,
+          "row": 26,
+          "lk": "dgrid",
+          "ai": 2,
+          "t": "s"
         }
       ]
     },
     {
       "name": "Primitives_Ignorance",
-      "score": -0.008,
+      "score": -0.033,
       "tag": "uncurated",
       "grid": [
         9,
         27
       ],
       "n_concepts": 11,
-      "n_artifacts": 37,
+      "n_artifacts": 38,
       "arts": [
+        {
+          "co": 7,
+          "col": 0,
+          "row": 0,
+          "lk": "dark_sphere",
+          "ai": 3,
+          "t": "s"
+        },
         {
           "co": 6,
           "col": 1,
@@ -726,268 +975,156 @@
       ]
     },
     {
-      "name": "Point_Lines",
-      "score": -0.297,
+      "name": "Point_One",
+      "score": -0.186,
       "tag": "uncurated",
       "grid": [
-        7,
-        27
+        20,
+        21
       ],
-      "n_concepts": 9,
-      "n_artifacts": 25,
+      "n_concepts": 6,
+      "n_artifacts": 7,
       "arts": [
         {
-          "co": 7,
-          "col": 0,
-          "row": 3,
-          "lk": "line",
-          "ai": 3,
-          "t": "s"
-        },
-        {
-          "co": 19,
+          "co": 20,
           "col": 2,
-          "row": 10,
-          "lk": "plus_line_puzzle",
+          "row": 0,
+          "lk": "folding_past",
           "ai": 5,
-          "t": "a"
-        },
-        {
-          "co": 19,
-          "col": 4,
-          "row": 10,
-          "lk": "parallel_line_puzzle",
-          "ai": 5,
-          "t": "a"
-        },
-        {
-          "co": 6,
-          "col": 2,
-          "row": 11,
-          "lk": "cube_scene",
-          "ai": 3,
-          "t": "s"
-        },
-        {
-          "co": 6,
-          "col": 4,
-          "row": 11,
-          "lk": "cube_scene",
-          "ai": 3,
-          "t": "s"
-        },
-        {
-          "co": 6,
-          "col": 0,
-          "row": 13,
-          "lk": "cube_scene",
-          "ai": 3,
-          "t": "s"
-        },
-        {
-          "co": 7,
-          "col": 3,
-          "row": 13,
-          "lk": "floating_sphere_field",
-          "ai": 3,
-          "t": "l"
-        },
-        {
-          "co": 19,
-          "col": 4,
-          "row": 13,
-          "lk": "laser_measure",
-          "ai": 5,
-          "t": "s"
-        },
-        {
-          "co": 6,
-          "col": 0,
-          "row": 14,
-          "lk": "cube_scene",
-          "ai": 3,
-          "t": "s"
-        },
-        {
-          "co": 7,
-          "col": 1,
-          "row": 14,
-          "lk": "line",
-          "ai": 3,
-          "t": "s"
-        },
-        {
-          "co": 19,
-          "col": 4,
-          "row": 14,
-          "lk": "laser_measure",
-          "ai": 5,
-          "t": "s"
-        },
-        {
-          "co": 6,
-          "col": 0,
-          "row": 15,
-          "lk": "cube_scene",
-          "ai": 3,
-          "t": "s"
-        },
-        {
-          "co": 7,
-          "col": 1,
-          "row": 15,
-          "lk": "line",
-          "ai": 3,
           "t": "s"
         },
         {
           "co": 1,
-          "col": 2,
-          "row": 15,
-          "lk": "grabbable_line",
+          "col": 3,
+          "row": 0,
+          "lk": "grid_lines",
           "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 21,
+          "col": 0,
+          "row": 5,
+          "lk": "frame_counter_display",
+          "ai": 6,
           "t": "s"
         },
         {
-          "co": 19,
-          "col": 4,
-          "row": 15,
-          "lk": "laser_measure",
-          "ai": 5,
-          "t": "s"
-        },
-        {
-          "co": 20,
-          "col": 1,
-          "row": 19,
-          "lk": "lightrod",
-          "ai": 5,
-          "t": "s"
-        },
-        {
-          "co": 20,
-          "col": 5,
-          "row": 19,
-          "lk": "lightrod",
-          "ai": 5,
+          "co": 0,
+          "col": 3,
+          "row": 7,
+          "lk": "you_are_here",
+          "ai": 0,
           "t": "s"
         },
         {
           "co": 18,
-          "col": 1,
-          "row": 21,
+          "col": 2,
+          "row": 10,
           "lk": "fontana_puncture",
           "ai": 5,
           "t": "s"
         },
         {
-          "co": 2,
-          "col": 2,
-          "row": 22,
-          "lk": "laser_sword",
-          "ai": 1,
-          "t": "a"
-        },
-        {
-          "co": 2,
-          "col": 4,
-          "row": 22,
-          "lk": "laser_sword",
-          "ai": 1,
-          "t": "a"
-        },
-        {
-          "co": 0,
-          "col": 1,
-          "row": 23,
-          "lk": "perspective_lines",
-          "ai": 0,
-          "t": "m"
-        },
-        {
-          "co": 1,
-          "col": 3,
-          "row": 23,
-          "lk": "scale_lines",
-          "ai": 1,
+          "co": 7,
+          "col": 5,
+          "row": 12,
+          "lk": "floating_sphere_field",
+          "ai": 3,
           "t": "l"
         },
         {
-          "co": 0,
-          "col": 5,
-          "row": 23,
-          "lk": "perspective_lines",
-          "ai": 0,
-          "t": "m"
-        },
-        {
-          "co": 0,
-          "col": 2,
-          "row": 24,
-          "lk": "klee_walking_point",
-          "ai": 0,
-          "t": "s"
-        },
-        {
-          "co": 5,
-          "col": 6,
-          "row": 26,
-          "lk": "dgrid",
-          "ai": 2,
+          "co": 21,
+          "col": 0,
+          "row": 14,
+          "lk": "CoordinateSystem3M",
+          "ai": 6,
           "t": "s"
         }
       ]
     },
     {
-      "name": "Point_Triangle",
-      "score": -0.5,
+      "name": "Primitives_Polythedra",
+      "score": -0.198,
       "tag": "uncurated",
       "grid": [
         7,
         11
       ],
-      "n_concepts": 3,
-      "n_artifacts": 5,
+      "n_concepts": 6,
+      "n_artifacts": 9,
       "arts": [
+        {
+          "co": 21,
+          "col": 0,
+          "row": 3,
+          "lk": "path_watchdog",
+          "ai": 6,
+          "t": "s"
+        },
+        {
+          "co": 21,
+          "col": 1,
+          "row": 3,
+          "lk": "path_game_controller",
+          "ai": 6,
+          "t": "s"
+        },
+        {
+          "co": 0,
+          "col": 2,
+          "row": 3,
+          "lk": "interactive_point_origin_force",
+          "ai": 0,
+          "t": "s"
+        },
         {
           "co": 19,
           "col": 3,
-          "row": 5,
-          "lk": "triangle_line_puzzle",
+          "row": 4,
+          "lk": "snap_tetrahedron_puzzle",
           "ai": 5,
           "t": "a"
         },
         {
-          "co": 3,
+          "co": 4,
           "col": 5,
-          "row": 6,
-          "lk": "parasol_triangle",
+          "row": 5,
+          "lk": "grab_trihedron",
           "ai": 2,
-          "t": "m"
+          "t": "s"
         },
         {
           "co": 6,
-          "col": 3,
-          "row": 7,
+          "col": 2,
+          "row": 6,
           "lk": "cube_scene",
           "ai": 3,
           "t": "s"
         },
         {
-          "co": 3,
+          "co": 6,
           "col": 3,
-          "row": 8,
-          "lk": "triangle",
-          "ai": 2,
-          "t": "m"
+          "row": 6,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
         },
         {
-          "co": 3,
-          "col": 3,
-          "row": 9,
-          "lk": "triangleprofiles",
-          "ai": 2,
+          "co": 6,
+          "col": 4,
+          "row": 6,
+          "lk": "cube_scene",
+          "ai": 3,
           "t": "s"
+        },
+        {
+          "co": 12,
+          "col": 1,
+          "row": 9,
+          "lk": "pyramid_edit",
+          "ai": 3,
+          "t": "a"
         }
       ]
     },
@@ -999,10 +1136,18 @@
         7,
         14
       ],
-      "n_concepts": 1,
-      "n_artifacts": 4,
+      "n_concepts": 2,
+      "n_artifacts": 6,
       "arts": [
         {
+          "co": 7,
+          "col": 0,
+          "row": 0,
+          "lk": "dark_sphere",
+          "ai": 3,
+          "t": "s"
+        },
+        {
           "co": 6,
           "col": 2,
           "row": 4,
@@ -1033,6 +1178,14 @@
           "lk": "animatedcubebuilder",
           "ai": 3,
           "t": "a"
+        },
+        {
+          "co": 6,
+          "col": 3,
+          "row": 10,
+          "lk": "polyhedron_nets_cube",
+          "ai": 3,
+          "t": "s"
         }
       ]
     },

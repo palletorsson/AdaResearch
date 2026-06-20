@@ -10,7 +10,8 @@
     "FlowFields",
     "Particle Swarm Optimization",
     "PhysarumColony",
-    "Swarm Intelligence Algorithms"
+    "Swarm Intelligence Algorithms",
+    "· palette (unplaced)"
   ],
   "concept_meta": {
     "Agent Based Modeling ABM": {
@@ -119,6 +120,20 @@
         "applied": []
       },
       "count": 1
+    },
+    "· palette (unplaced)": {
+      "act": "Act IV",
+      "truth": "sequence artifacts available but not yet placed in a map",
+      "tiers": {
+        "small": [
+          "catalyst_foe",
+          "catalyst_vent"
+        ],
+        "medium": [],
+        "large": [],
+        "applied": []
+      },
+      "count": 2
     }
   },
   "concept_distance": [
@@ -194,7 +209,8 @@
         "fp": 153,
         "recommended": true,
         "tier": "large",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       }
     ],
     "Ant Colony Optimization": [
@@ -204,7 +220,8 @@
         "fp": 66,
         "recommended": true,
         "tier": "large",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       }
     ],
     "Boids Algorithm": [
@@ -214,7 +231,8 @@
         "fp": 1,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "boid_flocking",
@@ -222,7 +240,8 @@
         "fp": 1,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "science_screen",
@@ -230,7 +249,8 @@
         "fp": 4,
         "recommended": true,
         "tier": "medium",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "boid_manager",
@@ -238,7 +258,8 @@
         "fp": 400,
         "recommended": true,
         "tier": "large",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "boids_2d_in_3d",
@@ -246,7 +267,8 @@
         "fp": 3,
         "recommended": true,
         "tier": "medium",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       }
     ],
     "FlowFields": [
@@ -256,7 +278,8 @@
         "fp": 176,
         "recommended": true,
         "tier": "large",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       }
     ],
     "Particle Swarm Optimization": [
@@ -266,7 +289,8 @@
         "fp": 9,
         "recommended": true,
         "tier": "large",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "self_organizing_patterns",
@@ -274,7 +298,8 @@
         "fp": 256,
         "recommended": true,
         "tier": "large",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       }
     ],
     "PhysarumColony": [
@@ -284,7 +309,8 @@
         "fp": 4,
         "recommended": true,
         "tier": "medium",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "PhysarumColony",
@@ -292,7 +318,8 @@
         "fp": 11,
         "recommended": true,
         "tier": "large",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       }
     ],
     "Swarm Intelligence Algorithms": [
@@ -302,12 +329,36 @@
         "fp": 1,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
+      }
+    ],
+    "· palette (unplaced)": [
+      {
+        "lookup": "catalyst_foe",
+        "name": "Catalyst Foe",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "catalyst_vent",
+        "name": "Catalyst Vent",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
       }
     ]
   },
-  "total": 13,
-  "total_concepts": 7,
+  "total": 15,
+  "total_concepts": 8,
   "recommended_total": 13,
-  "map_ready_total": 13
+  "map_ready_total": 13,
+  "palette_total": 2
 }

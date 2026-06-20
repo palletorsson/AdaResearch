@@ -1,0 +1,1282 @@
+{
+  "domain": "lsystem",
+  "title": "L-systems — every example, by concept",
+  "acts": [
+    "Act I — the rewriting rule",
+    "Act II — the turtle",
+    "Act III — branching plants",
+    "Act IV — variation",
+    "Act V — substrates & architecture",
+    "Act VI — DNA & biome"
+  ],
+  "maps": [
+    {
+      "name": "AutoGenTest",
+      "score": 0.5,
+      "tag": "curated",
+      "grid": [
+        14,
+        12
+      ],
+      "n_concepts": 3,
+      "n_artifacts": 3,
+      "arts": [
+        {
+          "co": 1,
+          "col": 7,
+          "row": 3,
+          "lk": "AnimatedTree",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 16,
+          "col": 10,
+          "row": 3,
+          "lk": "genetic_tree_sculptor",
+          "ai": 5,
+          "t": "a"
+        },
+        {
+          "co": 0,
+          "col": 5,
+          "row": 7,
+          "lk": "lsystem_editor",
+          "ai": 0,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "Gallery_LivingPaper",
+      "score": 0.5,
+      "tag": "curated",
+      "grid": [
+        11,
+        18
+      ],
+      "n_concepts": 3,
+      "n_artifacts": 3,
+      "arts": [
+        {
+          "co": 5,
+          "col": 6,
+          "row": 4,
+          "lk": "living_paper_dragon",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 9,
+          "col": 8,
+          "row": 4,
+          "lk": "living_paper_fern",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 4,
+          "col": 4,
+          "row": 8,
+          "lk": "living_paper_koch",
+          "ai": 1,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "LSystems_Growth",
+      "score": 0.177,
+      "tag": "partial",
+      "grid": [
+        8,
+        10
+      ],
+      "n_concepts": 4,
+      "n_artifacts": 4,
+      "arts": [
+        {
+          "co": 1,
+          "col": 2,
+          "row": 3,
+          "lk": "AnimatedTree",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 13,
+          "col": 6,
+          "row": 3,
+          "lk": "ContextSensitiveTree",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 8,
+          "col": 4,
+          "row": 5,
+          "lk": "lsystem_tree",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 12,
+          "col": 4,
+          "row": 7,
+          "lk": "parametric_lsystem",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "LSystems_Living",
+      "score": -1.0,
+      "tag": "uncurated",
+      "grid": [
+        10,
+        10
+      ],
+      "n_concepts": 3,
+      "n_artifacts": 3,
+      "arts": [
+        {
+          "co": 8,
+          "col": 5,
+          "row": 2,
+          "lk": "lsystem_tree",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 16,
+          "col": 4,
+          "row": 4,
+          "lk": "genetic_tree_sculptor",
+          "ai": 5,
+          "t": "a"
+        },
+        {
+          "co": 10,
+          "col": 2,
+          "row": 6,
+          "lk": "branching_coral",
+          "ai": 2,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "AutoGenTest2",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        16,
+        16
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 16,
+          "col": 8,
+          "row": 8,
+          "lk": "genetic_tree_sculptor",
+          "ai": 5,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "Fractal_CrossSequence",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        8
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 6,
+          "col": 2,
+          "row": 1,
+          "lk": "space_filling_curve_gallery",
+          "ai": 1,
+          "t": "a"
+        },
+        {
+          "co": 6,
+          "col": 5,
+          "row": 4,
+          "lk": "Hilbert3D",
+          "ai": 1,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Fractal_KochSierpinski",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        9
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 4,
+          "col": 5,
+          "row": 3,
+          "lk": "fractal_koch_curve",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 4,
+          "col": 5,
+          "row": 4,
+          "lk": "koch_curve_3d",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Fractal_RecursiveTrees",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        15,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 8,
+          "col": 10,
+          "row": 0,
+          "lk": "fractal_lsystem_tree",
+          "ai": 2,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Fractal_Synthesis",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        21,
+        19
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 4,
+          "col": 4,
+          "row": 2,
+          "lk": "koch_curve",
+          "ai": 1,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Gallery_Arrays_1",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        20
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 0,
+          "col": 2,
+          "row": 6,
+          "lk": "exact_meander_floor",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Gallery_Arrays_2",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        20
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 6,
+          "col": 2,
+          "row": 6,
+          "lk": "space_filling_floor",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 3,
+          "col": 2,
+          "row": 16,
+          "lk": "turtle_meander_floor",
+          "ai": 1,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Gallery_Commons_1",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        20
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 9,
+          "col": 6,
+          "row": 6,
+          "lk": "barnsley_fern",
+          "ai": 2,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Gallery_MachineLearning",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        24
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 0,
+          "col": 6,
+          "row": 4,
+          "lk": "axiom_garden",
+          "ai": 0,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "Gallery_MeshGrammar",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        16
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 14,
+          "col": 8,
+          "row": 2,
+          "lk": "mesh_grammar_branching_coral",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 8,
+          "col": 2,
+          "row": 8,
+          "lk": "mesh_grammar_lsystem_tree",
+          "ai": 2,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Gallery_Primitives_2",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        20
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 4,
+          "col": 4,
+          "row": 12,
+          "lk": "kochsnowflake",
+          "ai": 1,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Gallery_ProceduralGeneration",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        22
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 7,
+          "col": 8,
+          "row": 2,
+          "lk": "branching_growth_algorithm_continued",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 4,
+          "col": 8,
+          "row": 8,
+          "lk": "koch_curve_1",
+          "ai": 1,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "LSystems_Architecture",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        8,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 15,
+          "col": 2,
+          "row": 3,
+          "lk": "CityGenerator",
+          "ai": 4,
+          "t": "a"
+        },
+        {
+          "co": 15,
+          "col": 5,
+          "row": 6,
+          "lk": "lsystem_dungeon",
+          "ai": 4,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "LSystems_CityGenerator",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        9
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 15,
+          "col": 4,
+          "row": 4,
+          "lk": "CityGenerator",
+          "ai": 4,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "LSystems_Competition",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        8,
+        10
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 17,
+          "col": 3,
+          "row": 2,
+          "lk": "ForestCompetition",
+          "ai": 5,
+          "t": "a"
+        },
+        {
+          "co": 10,
+          "col": 6,
+          "row": 4,
+          "lk": "branching_coral",
+          "ai": 2,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "LSystems_ContextSensitiveTree",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        8
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 13,
+          "col": 5,
+          "row": 3,
+          "lk": "ContextSensitiveTree",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "LSystems_Context_Free_Grammars_CFG",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 5,
+          "row": 6,
+          "lk": "context_free_grammars",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "LSystems_ForestCompetition",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        8,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 17,
+          "col": 4,
+          "row": 5,
+          "lk": "ForestCompetition",
+          "ai": 5,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "LSystems_Grammars_And_Curves",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        8,
+        10
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 3,
+      "arts": [
+        {
+          "co": 6,
+          "col": 3,
+          "row": 3,
+          "lk": "Hilbert3D",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 6,
+          "col": 4,
+          "row": 6,
+          "lk": "space_filling_curve_gallery",
+          "ai": 1,
+          "t": "a"
+        },
+        {
+          "co": 2,
+          "col": 2,
+          "row": 7,
+          "lk": "ContextFreeGrammars",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "LSystems_Grammar_Lab",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        8,
+        10
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 4,
+      "arts": [
+        {
+          "co": 0,
+          "col": 4,
+          "row": 3,
+          "lk": "lsystem_editor",
+          "ai": 0,
+          "t": "a"
+        },
+        {
+          "co": 0,
+          "col": 1,
+          "row": 4,
+          "lk": "grammar_provenance",
+          "ai": 0,
+          "t": "a"
+        },
+        {
+          "co": 8,
+          "col": 2,
+          "row": 5,
+          "lk": "lsystem_tree",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 0,
+          "col": 6,
+          "row": 5,
+          "lk": "fractal_lsystem_string",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "LSystems_Hilbert3D",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        8,
+        8
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 6,
+          "col": 4,
+          "row": 3,
+          "lk": "Hilbert3D",
+          "ai": 1,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "LSystems_Tree_L_Systems",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        14
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 0,
+          "col": 7,
+          "row": 4,
+          "lk": "lsystem_editor",
+          "ai": 0,
+          "t": "a"
+        },
+        {
+          "co": 8,
+          "col": 3,
+          "row": 8,
+          "lk": "lsystem_tree",
+          "ai": 2,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Mosaic_Pompeii_Floors",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        6,
+        6
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 3,
+          "col": 0,
+          "row": 2,
+          "lk": "free_meander_floor",
+          "ai": 1,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "PatternGeneration_Penrose_Tilings",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        9
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 4,
+          "col": 4,
+          "row": 3,
+          "lk": "koch_curve",
+          "ai": 1,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "PG_Branching_Growth",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 7,
+          "col": 3,
+          "row": 0,
+          "lk": "branching_growth_algorithm",
+          "ai": 2,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "PG_Branching_Growth_p1",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 7,
+          "col": 3,
+          "row": 0,
+          "lk": "branching_growth_algorithm",
+          "ai": 2,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "PG_Branching_Growth_p2",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 7,
+          "col": 3,
+          "row": 0,
+          "lk": "branching_growth_algorithm",
+          "ai": 2,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "PG_Branching_Growth_p3",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 7,
+          "col": 3,
+          "row": 0,
+          "lk": "branching_growth_algorithm",
+          "ai": 2,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "ProceduralGeneration_BranchingGrowthAlgorithm",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 7,
+          "col": 5,
+          "row": 6,
+          "lk": "branching_growth_algorithm",
+          "ai": 2,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "ProceduralGeneration_Five",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 8,
+          "col": 5,
+          "row": 6,
+          "lk": "lsystem_tree",
+          "ai": 2,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "ProceduralGeneration_Ten",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        13
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 2,
+          "col": 2,
+          "row": 10,
+          "lk": "context_free_grammars",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "RecursiveEmergence_Iterated_Function_Systems_IFS",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        8,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 4,
+          "col": 3,
+          "row": 4,
+          "lk": "koch_curve_3d",
+          "ai": 1,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "RecursiveEmergence_Koch_Curve",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 4,
+          "col": 3,
+          "row": 4,
+          "lk": "koch_curve",
+          "ai": 1,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "SoftBodies_Playground_of_Joy",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        11
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 7,
+          "col": 4,
+          "row": 1,
+          "lk": "branching_growth_algorithm",
+          "ai": 2,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "SoftBodies_Playground_of_Joy_HumanoidWalker",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        11
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 7,
+          "col": 4,
+          "row": 1,
+          "lk": "branching_growth_algorithm",
+          "ai": 2,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "SoftBodies_Playground_of_Joy_Hybrid",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        11
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 7,
+          "col": 7,
+          "row": 4,
+          "lk": "branching_growth_algorithm",
+          "ai": 2,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "SoftBodies_Playground_of_Joy_p1",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        11
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 5,
+      "arts": [
+        {
+          "co": 7,
+          "col": 6,
+          "row": 2,
+          "lk": "branching_growth_algorithm",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 3,
+          "row": 4,
+          "lk": "branching_growth_algorithm",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 9,
+          "row": 4,
+          "lk": "branching_growth_algorithm",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 1,
+          "row": 7,
+          "lk": "branching_growth_algorithm",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 8,
+          "row": 8,
+          "lk": "branching_growth_algorithm",
+          "ai": 2,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "SoftBodies_Playground_of_Joy_p2",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        11
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 5,
+      "arts": [
+        {
+          "co": 7,
+          "col": 6,
+          "row": 2,
+          "lk": "branching_growth_algorithm",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 3,
+          "row": 4,
+          "lk": "branching_growth_algorithm",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 9,
+          "row": 4,
+          "lk": "branching_growth_algorithm",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 1,
+          "row": 7,
+          "lk": "branching_growth_algorithm",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 8,
+          "row": 8,
+          "lk": "branching_growth_algorithm",
+          "ai": 2,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "SoftBodies_Playground_of_Joy_p3",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        11
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 5,
+      "arts": [
+        {
+          "co": 7,
+          "col": 6,
+          "row": 2,
+          "lk": "branching_growth_algorithm",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 3,
+          "row": 4,
+          "lk": "branching_growth_algorithm",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 9,
+          "row": 4,
+          "lk": "branching_growth_algorithm",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 1,
+          "row": 7,
+          "lk": "branching_growth_algorithm",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 7,
+          "col": 8,
+          "row": 8,
+          "lk": "branching_growth_algorithm",
+          "ai": 2,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "SoftBodies_Playground_of_Joy_Placed",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        11
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 7,
+          "col": 4,
+          "row": 1,
+          "lk": "branching_growth_algorithm",
+          "ai": 2,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "SoftBodies_Playground_of_Joy_SimulatedAnnealing",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        11
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 7,
+          "col": 4,
+          "row": 4,
+          "lk": "branching_growth_algorithm",
+          "ai": 2,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Voxel_Grammar",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        11
+      ],
+      "n_concepts": 2,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 15,
+          "col": 2,
+          "row": 2,
+          "lk": "CityGenerator",
+          "ai": 4,
+          "t": "a"
+        },
+        {
+          "co": 13,
+          "col": 6,
+          "row": 2,
+          "lk": "ContextSensitiveTree",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Zone_ArchiveofMachines",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 0,
+          "col": 8,
+          "row": 6,
+          "lk": "lsystem_editor",
+          "ai": 0,
+          "t": "a"
+        }
+      ]
+    }
+  ],
+  "total_maps": 47
+}

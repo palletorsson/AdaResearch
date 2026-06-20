@@ -11,7 +11,7 @@
       "act": "Act I",
       "truth": "A 3D noise field fills invisible space with density values. Marching cubes walks the grid cube by cube — 256 possible configurations, one lookup table — and extracts geometry wherever density crosses a threshold.",
       "count": 2,
-      "x_spread": -0.6949,
+      "x_spread": -1.0,
       "tiers": {
         "small": [],
         "medium": [
@@ -29,7 +29,7 @@
       "act": "Act I",
       "truth": "Two hundred and fifty-six configurations collapse to fifteen. Every possible corner arrangement — vertex inside or outside — reduces through symmetry to a handful of cases. The lookup table is the entire algorithm.",
       "count": 2,
-      "x_spread": -0.4663,
+      "x_spread": -0.8334,
       "tiers": {
         "small": [],
         "medium": [],
@@ -46,7 +46,7 @@
       "act": "Act I",
       "truth": "Seven sculptures stand in a row. Each one computed from the same algorithm, different parameters — sphere, torus, strange attractors made solid.",
       "count": 3,
-      "x_spread": -0.1643,
+      "x_spread": -0.6666,
       "tiers": {
         "small": [],
         "medium": [],
@@ -64,7 +64,7 @@
       "act": "Act II",
       "truth": "A cube has eight corners. Each corner is inside or outside. Eight binary states: 256 configurations. For each configuration, a lookup table says where the surface cuts through.",
       "count": 2,
-      "x_spread": -0.3924,
+      "x_spread": -0.5,
       "tiers": {
         "small": [],
         "medium": [],
@@ -81,7 +81,7 @@
       "act": "Act II",
       "truth": "Two modes of summoning form from nothing. The fountain rises — marching cubes extract a vertical shape from a scalar field, geometry crystallizing where density crosses threshold.",
       "count": 2,
-      "x_spread": -0.0973,
+      "x_spread": -0.3334,
       "tiers": {
         "small": [],
         "medium": [
@@ -99,7 +99,7 @@
       "act": "Act II",
       "truth": "Two terrains. Same algorithm, different noise. The flat landscape rolls gently — marching cubes tracing where density crosses zero, converting a scalar field into walkable ground.",
       "count": 3,
-      "x_spread": -0.7966,
+      "x_spread": -0.1666,
       "tiers": {
         "small": [],
         "medium": [],
@@ -116,13 +116,15 @@
       "order": 6,
       "act": "Act III",
       "truth": "Marching cubes at landscape scale. A terrain field — noise-driven, continuous — gets sliced at a threshold. Where the function crosses zero, triangles appear. Ground forms.",
-      "count": 1,
-      "x_spread": -1.0,
+      "count": 3,
+      "x_spread": 0.0,
       "tiers": {
         "small": [],
         "medium": [],
         "large": [
-          "marchingcubes_portal_landscape"
+          "marchingcubes_portal_landscape",
+          "marchingcubes_flat_landscape",
+          "marchingcubes_voxel_noise_demo"
         ],
         "applied": []
       }
@@ -133,7 +135,7 @@
       "act": "Act III",
       "truth": "Two views of the same algorithm. Outside: terrain stretches under open sky, stone arches rise from the ground like thresholds to nowhere — portals carved by mathematics, not erosion. Inside: the cave closes around you.",
       "count": 3,
-      "x_spread": -0.9109,
+      "x_spread": 0.1666,
       "tiers": {
         "small": [],
         "medium": [],
@@ -151,7 +153,7 @@
       "act": "Act III",
       "truth": "Noise becomes architecture. A 3D scalar field — Perlin, simplex, whatever turbulence you choose — fills a volume with densities. Marching cubes walks through, voxel by voxel, checking each corner against a threshold.",
       "count": 2,
-      "x_spread": -0.5445,
+      "x_spread": 0.3334,
       "tiers": {
         "small": [],
         "medium": [],
@@ -168,7 +170,7 @@
       "act": "Act IV",
       "truth": "Noise evolves. The isosurface chases it.",
       "count": 2,
-      "x_spread": -0.412,
+      "x_spread": 0.5,
       "tiers": {
         "small": [],
         "medium": [],
@@ -185,7 +187,7 @@
       "act": "Act IV",
       "truth": "Each metaball is a point radiating influence. A distance field — strongest at center, fading outward. One sphere alone is trivial. But place two near each other and their fields sum.",
       "count": 4,
-      "x_spread": 0.1017,
+      "x_spread": 0.6666,
       "tiers": {
         "small": [],
         "medium": [
@@ -204,13 +206,34 @@
       "order": 11,
       "act": "Act IV",
       "truth": "A sphere is where distance from center equals radius. Not a mesh. Not vertices. A condition. Implicit surfaces define shape as equation — every point in space returns a signed distance. Negative means inside.",
-      "count": 1,
-      "x_spread": 1.0,
+      "count": 2,
+      "x_spread": 0.8334,
       "tiers": {
-        "small": [],
+        "small": [
+          "dark_sphere"
+        ],
         "medium": [],
         "large": [
           "implicit_surface_modeling"
+        ],
+        "applied": []
+      }
+    },
+    {
+      "key": "· palette (unplaced)",
+      "order": 12,
+      "act": "Act IV",
+      "truth": "sequence artifacts available but not yet placed in a map",
+      "count": 3,
+      "x_spread": 1.0,
+      "tiers": {
+        "small": [],
+        "medium": [
+          "portal"
+        ],
+        "large": [
+          "marchingcubes_inside_cave",
+          "marchingcubes_torus_sculpture"
         ],
         "applied": []
       }
@@ -219,170 +242,197 @@
   "concept_distance": [
     [
       0.0,
-      0.385,
-      0.6875,
-      0.4107,
-      0.5467,
-      0.7784,
-      0.1239,
-      0.7058,
-      0.2842,
-      0.1521,
-      0.6454,
-      0.8188
-    ],
-    [
-      0.385,
-      0.0,
-      0.721,
-      0.5571,
-      0.9279,
-      0.9652,
-      0.5041,
-      0.6741,
-      0.6193,
-      0.638,
-      0.8353,
-      0.9704
-    ],
-    [
-      0.6875,
-      0.721,
-      0.0,
-      0.4316,
-      0.5059,
-      0.7666,
-      0.7488,
-      0.6141,
-      0.7949,
-      0.2403,
-      0.6958,
-      0.9131
-    ],
-    [
-      0.4107,
-      0.5571,
-      0.4316,
-      0.0,
-      0.5919,
-      0.7931,
-      0.1517,
-      0.9722,
-      0.3272,
-      0.1486,
-      0.6236,
-      0.5441
-    ],
-    [
-      0.5467,
-      0.9279,
-      0.5059,
-      0.5919,
-      0.0,
-      0.7566,
-      0.6706,
-      0.8501,
-      0.8318,
-      0.5732,
-      0.5093,
-      0.7679
-    ],
-    [
-      0.7784,
-      0.9652,
-      0.7666,
-      0.7931,
-      0.7566,
-      0.0,
-      0.163,
-      0.3959,
-      0.5463,
-      0.6984,
-      0.8866,
-      0.9596
-    ],
-    [
-      0.1239,
-      0.5041,
-      0.7488,
-      0.1517,
-      0.6706,
-      0.163,
-      0.0,
-      0.0,
-      0.2208,
-      0.5563,
-      0.6141,
+      0.0833,
+      0.1667,
+      0.25,
+      0.3333,
+      0.4167,
+      0.5,
+      0.5833,
+      0.6667,
+      0.75,
+      0.8333,
+      0.9167,
       1.0
     ],
     [
-      0.7058,
-      0.6741,
-      0.6141,
-      0.9722,
-      0.8501,
-      0.3959,
+      0.0833,
       0.0,
-      0.0,
-      0.5154,
-      0.6858,
-      0.8857,
-      0.9109
+      0.0833,
+      0.1667,
+      0.25,
+      0.3333,
+      0.4167,
+      0.5,
+      0.5833,
+      0.6667,
+      0.75,
+      0.8333,
+      0.9167
     ],
     [
-      0.2842,
-      0.6193,
-      0.7949,
-      0.3272,
-      0.8318,
-      0.5463,
-      0.2208,
-      0.5154,
+      0.1667,
+      0.0833,
       0.0,
-      0.5476,
-      0.8266,
-      0.7653
+      0.0833,
+      0.1667,
+      0.25,
+      0.3333,
+      0.4167,
+      0.5,
+      0.5833,
+      0.6667,
+      0.75,
+      0.8333
     ],
     [
-      0.1521,
-      0.638,
-      0.2403,
-      0.1486,
-      0.5732,
-      0.6984,
-      0.5563,
-      0.6858,
-      0.5476,
+      0.25,
+      0.1667,
+      0.0833,
       0.0,
-      0.6901,
-      0.9683
+      0.0833,
+      0.1667,
+      0.25,
+      0.3333,
+      0.4167,
+      0.5,
+      0.5833,
+      0.6667,
+      0.75
     ],
     [
-      0.6454,
-      0.8353,
-      0.6958,
-      0.6236,
-      0.5093,
-      0.8866,
-      0.6141,
-      0.8857,
-      0.8266,
-      0.6901,
+      0.3333,
+      0.25,
+      0.1667,
+      0.0833,
       0.0,
-      0.5124
+      0.0833,
+      0.1667,
+      0.25,
+      0.3333,
+      0.4167,
+      0.5,
+      0.5833,
+      0.6667
     ],
     [
-      0.8188,
-      0.9704,
-      0.9131,
-      0.5441,
-      0.7679,
-      0.9596,
+      0.4167,
+      0.3333,
+      0.25,
+      0.1667,
+      0.0833,
+      0.0,
+      0.0833,
+      0.1667,
+      0.25,
+      0.3333,
+      0.4167,
+      0.5,
+      0.5833
+    ],
+    [
+      0.5,
+      0.4167,
+      0.3333,
+      0.25,
+      0.1667,
+      0.0833,
+      0.0,
+      0.0833,
+      0.1667,
+      0.25,
+      0.3333,
+      0.4167,
+      0.5
+    ],
+    [
+      0.5833,
+      0.5,
+      0.4167,
+      0.3333,
+      0.25,
+      0.1667,
+      0.0833,
+      0.0,
+      0.0833,
+      0.1667,
+      0.25,
+      0.3333,
+      0.4167
+    ],
+    [
+      0.6667,
+      0.5833,
+      0.5,
+      0.4167,
+      0.3333,
+      0.25,
+      0.1667,
+      0.0833,
+      0.0,
+      0.0833,
+      0.1667,
+      0.25,
+      0.3333
+    ],
+    [
+      0.75,
+      0.6667,
+      0.5833,
+      0.5,
+      0.4167,
+      0.3333,
+      0.25,
+      0.1667,
+      0.0833,
+      0.0,
+      0.0833,
+      0.1667,
+      0.25
+    ],
+    [
+      0.8333,
+      0.75,
+      0.6667,
+      0.5833,
+      0.5,
+      0.4167,
+      0.3333,
+      0.25,
+      0.1667,
+      0.0833,
+      0.0,
+      0.0833,
+      0.1667
+    ],
+    [
+      0.9167,
+      0.8333,
+      0.75,
+      0.6667,
+      0.5833,
+      0.5,
+      0.4167,
+      0.3333,
+      0.25,
+      0.1667,
+      0.0833,
+      0.0,
+      0.0833
+    ],
+    [
       1.0,
-      0.9109,
-      0.7653,
-      0.9683,
-      0.5124,
+      0.9167,
+      0.8333,
+      0.75,
+      0.6667,
+      0.5833,
+      0.5,
+      0.4167,
+      0.3333,
+      0.25,
+      0.1667,
+      0.0833,
       0.0
     ]
   ],
@@ -397,7 +447,8 @@
       "size": 8,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "voxel_noise_demo",
@@ -409,7 +460,8 @@
       "size": 14,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "fifteen_cases_demo",
@@ -421,7 +473,8 @@
       "size": 14,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "mc_cave",
@@ -433,7 +486,8 @@
       "size": 14,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "mc_shapes_gallery",
@@ -445,7 +499,8 @@
       "size": 14,
       "act": "Act I",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "gyroid_demo",
@@ -457,7 +512,8 @@
       "size": 14,
       "act": "Act I",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "mc_torus_sculpture",
@@ -469,7 +525,8 @@
       "size": 14,
       "act": "Act I",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "mc_torus_sculpture",
@@ -481,7 +538,8 @@
       "size": 14,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "GyroidDemo",
@@ -493,7 +551,8 @@
       "size": 14,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "fountain_demo",
@@ -505,7 +564,8 @@
       "size": 14,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "mc_sculpt_vr",
@@ -517,7 +577,8 @@
       "size": 8,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "mc_flat_landscape",
@@ -529,7 +590,8 @@
       "size": 14,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "mc_overhang_landscape",
@@ -541,7 +603,8 @@
       "size": 14,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "mc_terrain_demo",
@@ -553,7 +616,8 @@
       "size": 14,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "marchingcubes_portal_landscape",
@@ -565,7 +629,34 @@
       "size": 14,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
+    },
+    {
+      "lookup": "marchingcubes_flat_landscape",
+      "name": "marchingcubes_flat_landscape",
+      "concept": "Marching cubes at landscape scale. A t",
+      "concept_order": 6,
+      "tier": "large",
+      "fp": 1800,
+      "size": 14,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "marchingcubes_voxel_noise_demo",
+      "name": "Marching Cubes Voxel Noise",
+      "concept": "Marching cubes at landscape scale. A t",
+      "concept_order": 6,
+      "tier": "large",
+      "fp": 1089,
+      "size": 14,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
     },
     {
       "lookup": "mc_portal_landscape",
@@ -577,7 +668,8 @@
       "size": 14,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "mc_inside_cave",
@@ -589,7 +681,8 @@
       "size": 14,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "queer_marching_cave",
@@ -601,7 +694,8 @@
       "size": 14,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "marchingcave",
@@ -613,7 +707,8 @@
       "size": 14,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "marchingcubes_cave",
@@ -625,7 +720,8 @@
       "size": 14,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "mc_base",
@@ -637,7 +733,8 @@
       "size": 14,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "animated_noise_explorer",
@@ -649,7 +746,8 @@
       "size": 14,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "metaball_world",
@@ -661,7 +759,8 @@
       "size": 14,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "metaballs",
@@ -673,7 +772,8 @@
       "size": 14,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "raymarched_metaballs",
@@ -685,7 +785,8 @@
       "size": 8,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "nakama_metaballs",
@@ -697,7 +798,8 @@
       "size": 8,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "implicit_surface_modeling",
@@ -709,9 +811,62 @@
       "size": 14,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
+    },
+    {
+      "lookup": "dark_sphere",
+      "name": "Dark Sphere",
+      "concept": "A sphere is where distance from center",
+      "concept_order": 11,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "marchingcubes_inside_cave",
+      "name": "marchingcubes_inside_cave",
+      "concept": "· palette (unplaced)",
+      "concept_order": 12,
+      "tier": "large",
+      "fp": 2500,
+      "size": 14,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "marchingcubes_torus_sculpture",
+      "name": "marchingcubes_torus_sculpture",
+      "concept": "· palette (unplaced)",
+      "concept_order": 12,
+      "tier": "large",
+      "fp": 2500,
+      "size": 14,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "portal",
+      "name": "Portal",
+      "concept": "· palette (unplaced)",
+      "concept_order": 12,
+      "tier": "medium",
+      "fp": 3,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
     }
   ],
-  "total_artifacts": 27,
-  "total_concepts": 12
+  "total_artifacts": 33,
+  "total_concepts": 13
 }

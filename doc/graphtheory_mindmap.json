@@ -11,7 +11,7 @@
       "act": "Act I",
       "truth": "Edmonds Algorithm",
       "count": 1,
-      "x_spread": 0.9769,
+      "x_spread": -1.0,
       "tiers": {
         "small": [],
         "medium": [],
@@ -27,7 +27,7 @@
       "act": "Act I",
       "truth": "Force Directed 3d",
       "count": 1,
-      "x_spread": 0.8614,
+      "x_spread": -0.8572,
       "tiers": {
         "small": [],
         "medium": [],
@@ -42,13 +42,14 @@
       "order": 2,
       "act": "Act I",
       "truth": "Force Directed Graph Layout",
-      "count": 1,
-      "x_spread": -0.0216,
+      "count": 2,
+      "x_spread": -0.7142,
       "tiers": {
         "small": [],
         "medium": [],
         "large": [
-          "force_directed_layout"
+          "force_directed_layout",
+          "graph_basilica"
         ],
         "applied": []
       }
@@ -59,7 +60,7 @@
       "act": "Act I",
       "truth": "Graphspace",
       "count": 2,
-      "x_spread": 0.9238,
+      "x_spread": -0.5714,
       "tiers": {
         "small": [],
         "medium": [],
@@ -76,7 +77,7 @@
       "act": "Act II",
       "truth": "Graphspace 3d",
       "count": 1,
-      "x_spread": 0.5836,
+      "x_spread": -0.4286,
       "tiers": {
         "small": [],
         "medium": [],
@@ -92,7 +93,7 @@
       "act": "Act II",
       "truth": "Karger s Algorithm",
       "count": 1,
-      "x_spread": 0.0888,
+      "x_spread": -0.2858,
       "tiers": {
         "small": [],
         "medium": [],
@@ -108,7 +109,7 @@
       "act": "Act II",
       "truth": "Kosaraju s Algorithm",
       "count": 1,
-      "x_spread": 0.0201,
+      "x_spread": -0.1428,
       "tiers": {
         "small": [],
         "medium": [],
@@ -124,7 +125,7 @@
       "act": "Act III",
       "truth": "Maximum Flow Algorithms",
       "count": 1,
-      "x_spread": -1.0,
+      "x_spread": 0.0,
       "tiers": {
         "small": [],
         "medium": [],
@@ -140,7 +141,7 @@
       "act": "Act III",
       "truth": "Minimum Spanning Tree",
       "count": 1,
-      "x_spread": 0.1097,
+      "x_spread": 0.1428,
       "tiers": {
         "small": [],
         "medium": [],
@@ -156,7 +157,7 @@
       "act": "Act III",
       "truth": "Network Analysis",
       "count": 2,
-      "x_spread": -0.2967,
+      "x_spread": 0.2858,
       "tiers": {
         "small": [],
         "medium": [],
@@ -173,7 +174,7 @@
       "act": "Act III",
       "truth": "Path Finding 3d",
       "count": 1,
-      "x_spread": 1.0,
+      "x_spread": 0.4286,
       "tiers": {
         "small": [],
         "medium": [],
@@ -189,7 +190,7 @@
       "act": "Act IV",
       "truth": "Push Relabel Algorithm",
       "count": 1,
-      "x_spread": -0.0175,
+      "x_spread": 0.5714,
       "tiers": {
         "small": [],
         "medium": [],
@@ -205,7 +206,7 @@
       "act": "Act IV",
       "truth": "Tarjan s Algorithm",
       "count": 1,
-      "x_spread": 0.069,
+      "x_spread": 0.7142,
       "tiers": {
         "small": [],
         "medium": [],
@@ -220,14 +221,40 @@
       "order": 13,
       "act": "Act IV",
       "truth": "Topological Sort",
-      "count": 1,
-      "x_spread": 0.1239,
+      "count": 2,
+      "x_spread": 0.8572,
       "tiers": {
         "small": [
           "topological_sort_algorithm"
         ],
-        "medium": [],
+        "medium": [
+          "topological_sort"
+        ],
         "large": [],
+        "applied": []
+      }
+    },
+    {
+      "key": "· palette (unplaced)",
+      "order": 14,
+      "act": "Act IV",
+      "truth": "sequence artifacts available but not yet placed in a map",
+      "count": 7,
+      "x_spread": 1.0,
+      "tiers": {
+        "small": [
+          "grid_substrate_runner"
+        ],
+        "medium": [
+          "grid3d",
+          "grid3d_dfs",
+          "grid3d_prim",
+          "living_paper_bfs",
+          "living_paper_dfs_maze"
+        ],
+        "large": [
+          "rhizomatic_structure"
+        ],
         "applied": []
       }
     }
@@ -235,226 +262,257 @@
   "concept_distance": [
     [
       0.0,
-      0.212,
-      0.8995,
-      0.1297,
-      0.1663,
-      0.7621,
-      0.9634,
-      0.9769,
-      0.9307,
-      0.9528,
-      0.0,
-      0.8809,
-      0.8335,
-      0.8132
+      0.0714,
+      0.1429,
+      0.2143,
+      0.2857,
+      0.3571,
+      0.4286,
+      0.5,
+      0.5714,
+      0.6429,
+      0.7143,
+      0.7857,
+      0.8571,
+      0.9286,
+      1.0
     ],
     [
-      0.212,
+      0.0714,
       0.0,
-      0.671,
-      0.2793,
-      0.2463,
-      0.8624,
-      0.8944,
-      0.9939,
-      0.8083,
-      0.9276,
-      0.1325,
-      0.8637,
-      0.8291,
-      0.8528
+      0.0714,
+      0.1429,
+      0.2143,
+      0.2857,
+      0.3571,
+      0.4286,
+      0.5,
+      0.5714,
+      0.6429,
+      0.7143,
+      0.7857,
+      0.8571,
+      0.9286
     ],
     [
-      0.8995,
-      0.671,
+      0.1429,
+      0.0714,
       0.0,
-      0.9094,
-      0.9515,
-      0.8761,
-      0.8276,
-      0.868,
-      0.8743,
-      0.7801,
-      0.8896,
-      0.8982,
-      0.8507,
-      0.8228
+      0.0714,
+      0.1429,
+      0.2143,
+      0.2857,
+      0.3571,
+      0.4286,
+      0.5,
+      0.5714,
+      0.6429,
+      0.7143,
+      0.7857,
+      0.8571
     ],
     [
-      0.1297,
-      0.2793,
-      0.9094,
+      0.2143,
+      0.1429,
+      0.0714,
       0.0,
-      0.2691,
-      0.8662,
-      0.9601,
-      0.9868,
-      0.8847,
-      0.9134,
-      0.063,
-      0.8337,
-      0.8662,
-      0.8601
+      0.0714,
+      0.1429,
+      0.2143,
+      0.2857,
+      0.3571,
+      0.4286,
+      0.5,
+      0.5714,
+      0.6429,
+      0.7143,
+      0.7857
     ],
     [
-      0.1663,
-      0.2463,
-      0.9515,
-      0.2691,
+      0.2857,
+      0.2143,
+      0.1429,
+      0.0714,
       0.0,
-      0.818,
-      0.8962,
-      0.9012,
-      0.9342,
-      0.9749,
-      0.3176,
-      0.8901,
-      0.8408,
-      0.92
+      0.0714,
+      0.1429,
+      0.2143,
+      0.2857,
+      0.3571,
+      0.4286,
+      0.5,
+      0.5714,
+      0.6429,
+      0.7143
     ],
     [
-      0.7621,
-      0.8624,
-      0.8761,
-      0.8662,
-      0.818,
+      0.3571,
+      0.2857,
+      0.2143,
+      0.1429,
+      0.0714,
       0.0,
-      0.771,
-      0.8682,
-      0.7972,
-      0.7383,
-      0.7794,
-      0.9799,
-      0.9,
-      0.7862
+      0.0714,
+      0.1429,
+      0.2143,
+      0.2857,
+      0.3571,
+      0.4286,
+      0.5,
+      0.5714,
+      0.6429
     ],
     [
-      0.9634,
-      0.8944,
-      0.8276,
-      0.9601,
-      0.8962,
-      0.771,
+      0.4286,
+      0.3571,
+      0.2857,
+      0.2143,
+      0.1429,
+      0.0714,
       0.0,
-      0.9744,
-      0.8624,
-      0.9228,
-      0.9543,
-      0.9002,
-      0.5126,
-      0.8309
+      0.0714,
+      0.1429,
+      0.2143,
+      0.2857,
+      0.3571,
+      0.4286,
+      0.5,
+      0.5714
     ],
     [
-      0.9769,
-      0.9939,
-      0.868,
-      0.9868,
-      0.9012,
-      0.8682,
-      0.9744,
+      0.5,
+      0.4286,
+      0.3571,
+      0.2857,
+      0.2143,
+      0.1429,
+      0.0714,
       0.0,
-      0.9716,
-      0.6337,
+      0.0714,
+      0.1429,
+      0.2143,
+      0.2857,
+      0.3571,
+      0.4286,
+      0.5
+    ],
+    [
+      0.5714,
+      0.5,
+      0.4286,
+      0.3571,
+      0.2857,
+      0.2143,
+      0.1429,
+      0.0714,
+      0.0,
+      0.0714,
+      0.1429,
+      0.2143,
+      0.2857,
+      0.3571,
+      0.4286
+    ],
+    [
+      0.6429,
+      0.5714,
+      0.5,
+      0.4286,
+      0.3571,
+      0.2857,
+      0.2143,
+      0.1429,
+      0.0714,
+      0.0,
+      0.0714,
+      0.1429,
+      0.2143,
+      0.2857,
+      0.3571
+    ],
+    [
+      0.7143,
+      0.6429,
+      0.5714,
+      0.5,
+      0.4286,
+      0.3571,
+      0.2857,
+      0.2143,
+      0.1429,
+      0.0714,
+      0.0,
+      0.0714,
+      0.1429,
+      0.2143,
+      0.2857
+    ],
+    [
+      0.7857,
+      0.7143,
+      0.6429,
+      0.5714,
+      0.5,
+      0.4286,
+      0.3571,
+      0.2857,
+      0.2143,
+      0.1429,
+      0.0714,
+      0.0,
+      0.0714,
+      0.1429,
+      0.2143
+    ],
+    [
+      0.8571,
+      0.7857,
+      0.7143,
+      0.6429,
+      0.5714,
+      0.5,
+      0.4286,
+      0.3571,
+      0.2857,
+      0.2143,
+      0.1429,
+      0.0714,
+      0.0,
+      0.0714,
+      0.1429
+    ],
+    [
+      0.9286,
+      0.8571,
+      0.7857,
+      0.7143,
+      0.6429,
+      0.5714,
+      0.5,
+      0.4286,
+      0.3571,
+      0.2857,
+      0.2143,
+      0.1429,
+      0.0714,
+      0.0,
+      0.0714
+    ],
+    [
       1.0,
-      0.8741,
-      0.8903,
-      0.9624
-    ],
-    [
-      0.9307,
-      0.8083,
-      0.8743,
-      0.8847,
-      0.9342,
-      0.7972,
-      0.8624,
-      0.9716,
-      0.0,
-      0.801,
-      0.8619,
-      0.8302,
-      0.8878,
-      0.8558
-    ],
-    [
-      0.9528,
-      0.9276,
-      0.7801,
-      0.9134,
-      0.9749,
-      0.7383,
-      0.9228,
-      0.6337,
-      0.801,
-      0.0,
-      0.9304,
-      0.6608,
-      0.833,
-      0.9195
-    ],
-    [
-      0.0,
-      0.1325,
-      0.8896,
-      0.063,
-      0.3176,
-      0.7794,
-      0.9543,
-      1.0,
-      0.8619,
-      0.9304,
-      0.0,
-      0.8916,
-      0.8213,
-      0.8385
-    ],
-    [
-      0.8809,
-      0.8637,
-      0.8982,
-      0.8337,
-      0.8901,
-      0.9799,
-      0.9002,
-      0.8741,
-      0.8302,
-      0.6608,
-      0.8916,
-      0.0,
-      0.8741,
-      0.9111
-    ],
-    [
-      0.8335,
-      0.8291,
-      0.8507,
-      0.8662,
-      0.8408,
-      0.9,
-      0.5126,
-      0.8903,
-      0.8878,
-      0.833,
-      0.8213,
-      0.8741,
-      0.0,
-      0.7367
-    ],
-    [
-      0.8132,
-      0.8528,
-      0.8228,
-      0.8601,
-      0.92,
-      0.7862,
-      0.8309,
-      0.9624,
-      0.8558,
-      0.9195,
-      0.8385,
-      0.9111,
-      0.7367,
+      0.9286,
+      0.8571,
+      0.7857,
+      0.7143,
+      0.6429,
+      0.5714,
+      0.5,
+      0.4286,
+      0.3571,
+      0.2857,
+      0.2143,
+      0.1429,
+      0.0714,
       0.0
     ]
   ],
@@ -469,7 +527,8 @@
       "size": 14,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "forcedirected3d",
@@ -481,7 +540,8 @@
       "size": 14,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "force_directed_layout",
@@ -493,7 +553,21 @@
       "size": 14,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
+    },
+    {
+      "lookup": "graph_basilica",
+      "name": "Graph Basilica",
+      "concept": "Force Directed Graph Layout",
+      "concept_order": 2,
+      "tier": "large",
+      "fp": 81,
+      "size": 14,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
     },
     {
       "lookup": "graphspace",
@@ -505,7 +579,8 @@
       "size": 14,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "KonigsbergBridge",
@@ -517,7 +592,8 @@
       "size": 14,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "graphspace3d",
@@ -529,7 +605,8 @@
       "size": 14,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "karger_algorithm",
@@ -541,7 +618,8 @@
       "size": 14,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "kosaraju_algorithm",
@@ -553,7 +631,8 @@
       "size": 14,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "env_one",
@@ -565,7 +644,8 @@
       "size": 14,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "mst_visualization",
@@ -577,7 +657,8 @@
       "size": 14,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "networkflow3d",
@@ -589,7 +670,8 @@
       "size": 14,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "network_analysis",
@@ -601,7 +683,8 @@
       "size": 14,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "pathfinding3d",
@@ -613,7 +696,8 @@
       "size": 14,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "push_relabel_algorithm",
@@ -625,7 +709,8 @@
       "size": 14,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "tarjan_algorithm",
@@ -637,7 +722,8 @@
       "size": 14,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "topological_sort_algorithm",
@@ -649,9 +735,114 @@
       "size": 5,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
+    },
+    {
+      "lookup": "topological_sort",
+      "name": "topological_sort",
+      "concept": "Topological Sort",
+      "concept_order": 13,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "grid3d",
+      "name": "Grid3D Substrate",
+      "concept": "· palette (unplaced)",
+      "concept_order": 14,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "grid3d_dfs",
+      "name": "Grid3D — DFS",
+      "concept": "· palette (unplaced)",
+      "concept_order": 14,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "grid3d_prim",
+      "name": "Grid3D — Prim's MST",
+      "concept": "· palette (unplaced)",
+      "concept_order": 14,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "grid_substrate_runner",
+      "name": "Grid Substrate Runner",
+      "concept": "· palette (unplaced)",
+      "concept_order": 14,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "living_paper_bfs",
+      "name": "living_paper_bfs",
+      "concept": "· palette (unplaced)",
+      "concept_order": 14,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "living_paper_dfs_maze",
+      "name": "living_paper_dfs_maze",
+      "concept": "· palette (unplaced)",
+      "concept_order": 14,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "rhizomatic_structure",
+      "name": "Rhizomatic Structure",
+      "concept": "· palette (unplaced)",
+      "concept_order": 14,
+      "tier": "large",
+      "fp": 280,
+      "size": 14,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
     }
   ],
-  "total_artifacts": 16,
-  "total_concepts": 14
+  "total_artifacts": 25,
+  "total_concepts": 15
 }

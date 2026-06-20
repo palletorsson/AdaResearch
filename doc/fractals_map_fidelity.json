@@ -938,14 +938,22 @@
         7,
         17
       ],
-      "n_concepts": 1,
-      "n_artifacts": 1,
+      "n_concepts": 2,
+      "n_artifacts": 2,
       "arts": [
         {
           "co": 9,
           "col": 3,
           "row": 2,
           "lk": "dark_sphere",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 10,
+          "col": 3,
+          "row": 5,
+          "lk": "grid_substrate_runner",
           "ai": 3,
           "t": "s"
         }
@@ -3363,6 +3371,85 @@
           "lk": "romanesco",
           "ai": 3,
           "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Gallery_Commons_1",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        20
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 10,
+          "col": 6,
+          "row": 6,
+          "lk": "barnsley_fern",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Gallery_LivingPaper",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        18
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 10,
+          "col": 8,
+          "row": 6,
+          "lk": "living_paper_julia",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 10,
+          "col": 4,
+          "row": 8,
+          "lk": "living_paper_koch",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Gallery_MeshGrammar",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        16
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 10,
+          "col": 8,
+          "row": 2,
+          "lk": "mesh_grammar_branching_coral",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 10,
+          "col": 2,
+          "row": 8,
+          "lk": "mesh_grammar_lsystem_tree",
+          "ai": 3,
+          "t": "m"
         }
       ]
     },
@@ -8820,5 +8907,5 @@
       ]
     }
   ],
-  "total_maps": 375
+  "total_maps": 378
 }

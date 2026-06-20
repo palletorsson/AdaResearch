@@ -19,7 +19,8 @@
     "Living",
     "Shape Grammars",
     "Stochastic L Systems",
-    "Tree L Systems"
+    "Tree L Systems",
+    "· palette (unplaced)"
   ],
   "concept_meta": {
     "Architecture": {
@@ -119,13 +120,19 @@
       "act": "Act II",
       "tiers": {
         "small": [],
-        "medium": [],
+        "medium": [
+          "mesh_grammar_blooming_bulge",
+          "mesh_grammar_branching_coral",
+          "mesh_grammar_coral_fingers",
+          "mesh_grammar_lsystem_tree",
+          "mesh_grammar_petal_flower"
+        ],
         "large": [
           "env_one"
         ],
         "applied": []
       },
-      "count": 1
+      "count": 6
     },
     "ForestCompetition": {
       "truth": "ForestCompetition",
@@ -222,12 +229,15 @@
         ],
         "medium": [
           "genetic_tree_sculptor",
-          "branching_coral"
+          "branching_coral",
+          "living_paper_dragon",
+          "living_paper_fern",
+          "living_paper_tree"
         ],
         "large": [],
         "applied": []
       },
-      "count": 3
+      "count": 6
     },
     "Shape Grammars": {
       "truth": "Shape Grammars",
@@ -268,10 +278,27 @@
           "lsystem_tree"
         ],
         "medium": [],
-        "large": [],
+        "large": [
+          "lindenmayer_tube_tree"
+        ],
         "applied": []
       },
-      "count": 3
+      "count": 4
+    },
+    "· palette (unplaced)": {
+      "act": "Act IV",
+      "truth": "sequence artifacts available but not yet placed in a map",
+      "tiers": {
+        "small": [
+          "grid_substrate_runner"
+        ],
+        "medium": [],
+        "large": [
+          "modulor_cypress"
+        ],
+        "applied": []
+      },
+      "count": 2
     }
   },
   "concept_distance": [
@@ -572,7 +599,8 @@
         "fp": 1,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "CityGenerator",
@@ -580,7 +608,8 @@
         "fp": 11,
         "recommended": true,
         "tier": "large",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "lsystem_dungeon",
@@ -588,7 +617,8 @@
         "fp": 1,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       }
     ],
     "Backus Naur Form BNF": [
@@ -598,7 +628,8 @@
         "fp": 3422,
         "recommended": true,
         "tier": "large",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       }
     ],
     "CityGenerator": [
@@ -608,7 +639,8 @@
         "fp": 11,
         "recommended": true,
         "tier": "large",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       }
     ],
     "Competition": [
@@ -618,7 +650,8 @@
         "fp": 24,
         "recommended": true,
         "tier": "large",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "branching_coral",
@@ -626,7 +659,8 @@
         "fp": 4,
         "recommended": true,
         "tier": "medium",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "dark_sphere",
@@ -634,7 +668,8 @@
         "fp": 1,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       }
     ],
     "ContextSensitiveTree": [
@@ -644,7 +679,8 @@
         "fp": 4,
         "recommended": true,
         "tier": "medium",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       }
     ],
     "Context Free Grammars CFG": [
@@ -654,7 +690,8 @@
         "fp": 1,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       }
     ],
     "Different Grammar Types": [
@@ -664,7 +701,58 @@
         "fp": 3422,
         "recommended": true,
         "tier": "large",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
+      },
+      {
+        "lookup": "mesh_grammar_blooming_bulge",
+        "name": "MeshGrammar — Blooming Bulge",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "mesh_grammar_branching_coral",
+        "name": "MeshGrammar — Branching Coral",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "mesh_grammar_coral_fingers",
+        "name": "MeshGrammar — Coral Fingers",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "mesh_grammar_lsystem_tree",
+        "name": "MeshGrammar — L-System Tree",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "mesh_grammar_petal_flower",
+        "name": "MeshGrammar — Petal Flower",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
       }
     ],
     "ForestCompetition": [
@@ -674,7 +762,8 @@
         "fp": 24,
         "recommended": true,
         "tier": "large",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       }
     ],
     "Grammar Lab": [
@@ -684,7 +773,8 @@
         "fp": 4,
         "recommended": true,
         "tier": "medium",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "lsystem_editor",
@@ -692,7 +782,8 @@
         "fp": 1,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "grammar_provenance",
@@ -700,7 +791,8 @@
         "fp": 8,
         "recommended": true,
         "tier": "medium",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "lsystem_tree",
@@ -708,7 +800,8 @@
         "fp": 1,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "fractal_lsystem_string",
@@ -716,7 +809,8 @@
         "fp": 3,
         "recommended": true,
         "tier": "medium",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "dark_sphere",
@@ -724,7 +818,8 @@
         "fp": 1,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       }
     ],
     "Grammars And Curves": [
@@ -734,7 +829,8 @@
         "fp": 36,
         "recommended": true,
         "tier": "large",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "space_filling_curve_gallery",
@@ -742,7 +838,8 @@
         "fp": 8,
         "recommended": true,
         "tier": "medium",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "ContextFreeGrammars",
@@ -750,7 +847,8 @@
         "fp": 1,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       }
     ],
     "Growth": [
@@ -760,7 +858,8 @@
         "fp": 9,
         "recommended": true,
         "tier": "large",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "ContextSensitiveTree",
@@ -768,7 +867,8 @@
         "fp": 4,
         "recommended": true,
         "tier": "medium",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "lsystem_tree",
@@ -776,7 +876,8 @@
         "fp": 1,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "parametric_lsystem",
@@ -784,7 +885,8 @@
         "fp": 4,
         "recommended": true,
         "tier": "medium",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       }
     ],
     "Hilbert3D": [
@@ -794,7 +896,8 @@
         "fp": 36,
         "recommended": true,
         "tier": "large",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       }
     ],
     "Living": [
@@ -804,7 +907,8 @@
         "fp": 1,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "genetic_tree_sculptor",
@@ -812,7 +916,8 @@
         "fp": 4,
         "recommended": true,
         "tier": "medium",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "branching_coral",
@@ -820,7 +925,38 @@
         "fp": 4,
         "recommended": true,
         "tier": "medium",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
+      },
+      {
+        "lookup": "living_paper_dragon",
+        "name": "living_paper_dragon",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "living_paper_fern",
+        "name": "living_paper_fern",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "living_paper_tree",
+        "name": "living_paper_tree",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
       }
     ],
     "Shape Grammars": [
@@ -830,7 +966,8 @@
         "fp": 3422,
         "recommended": true,
         "tier": "large",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       }
     ],
     "Stochastic L Systems": [
@@ -840,7 +977,8 @@
         "fp": 3422,
         "recommended": true,
         "tier": "large",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       }
     ],
     "Tree L Systems": [
@@ -850,7 +988,8 @@
         "fp": 1,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "tree_generation",
@@ -858,7 +997,8 @@
         "fp": 1,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
       },
       {
         "lookup": "lsystem_tree",
@@ -866,12 +1006,46 @@
         "fp": 1,
         "recommended": true,
         "tier": "small",
-        "has_image": true
+        "has_image": true,
+        "map_ready": true
+      },
+      {
+        "lookup": "lindenmayer_tube_tree",
+        "name": "Lindenmayer Tube Tree",
+        "registry": "",
+        "tier": "large",
+        "fp": 9,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      }
+    ],
+    "· palette (unplaced)": [
+      {
+        "lookup": "grid_substrate_runner",
+        "name": "Grid Substrate Runner",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "modulor_cypress",
+        "name": "Modulor Cypress",
+        "registry": "",
+        "tier": "large",
+        "fp": 9,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
       }
     ]
   },
-  "total": 34,
-  "total_concepts": 16,
+  "total": 45,
+  "total_concepts": 17,
   "recommended_total": 34,
-  "map_ready_total": 34
+  "map_ready_total": 34,
+  "palette_total": 11
 }

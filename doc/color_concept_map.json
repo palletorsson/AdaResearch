@@ -9,7 +9,8 @@
     "Walk through light itself. Rainbow emi",
     "Pillars of color rise along the runway",
     "Paint meets physics. The ball painting",
-    "The hallway dissolves into rainbow. Co"
+    "The hallway dissolves into rainbow. Co",
+    "· palette (unplaced)"
   ],
   "concept_meta": {
     "A salon for digital fingers. The nail ": {
@@ -83,18 +84,24 @@
         "small": [
           "pillarcolorcollection",
           "dark_sphere",
-          "SpectrumVisualizer"
+          "SpectrumVisualizer",
+          "color_mixing"
         ],
         "medium": [
           "loom_drum_persian_p6",
           "visual_color_mixing",
           "color_sets_overview",
-          "grab_rainbow_stick"
+          "grab_rainbow_stick",
+          "colorsheets",
+          "glitchcolor",
+          "k_means_color"
         ],
-        "large": [],
+        "large": [
+          "color_scanner"
+        ],
         "applied": []
       },
-      "count": 7
+      "count": 12
     },
     "Paint meets physics. The ball painting": {
       "truth": "Paint meets physics. The ball painting demo turns spheres into canvases, color into gesture. Throw paint, watch it splash, see how color accumulates on curved surfaces.",
@@ -137,6 +144,51 @@
         "applied": []
       },
       "count": 6
+    },
+    "· palette (unplaced)": {
+      "act": "Act IV",
+      "truth": "sequence artifacts available but not yet placed in a map",
+      "tiers": {
+        "small": [
+          "MetamerismLab",
+          "RotatingLaser",
+          "advancedglitch",
+          "colortrails",
+          "disco_lights",
+          "flashlight_demo",
+          "grab_stick",
+          "grabcolorcollection",
+          "path_builder_foe",
+          "path_cube",
+          "path_game_controller",
+          "path_pyramid",
+          "path_watchdog",
+          "path_wedge",
+          "prism",
+          "shelf",
+          "shelf_with_stickers",
+          "strobe_lasers",
+          "textureglitch"
+        ],
+        "medium": [
+          "SimultaneousContrast",
+          "laser_turret",
+          "minimalglitch",
+          "pattern_loom",
+          "pattern_machine_a",
+          "pattern_machine_b",
+          "pattern_machine_d",
+          "primitive_combo_puzzle",
+          "spherecolors"
+        ],
+        "large": [
+          "coloredlines",
+          "pattern_machine_c",
+          "primitive_assembler"
+        ],
+        "applied": []
+      },
+      "count": 31
     }
   },
   "concept_distance": [
@@ -197,7 +249,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "nail_color_controller",
@@ -205,7 +258,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "hand_model",
@@ -213,7 +267,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "hand_color_controller",
@@ -221,7 +276,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "science_screen",
@@ -229,7 +285,8 @@
         "tier": "medium",
         "fp": 4,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "dark_side_prism",
@@ -237,7 +294,8 @@
         "tier": "small",
         "fp": 2,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "grab_stick_scanner",
@@ -245,7 +303,8 @@
         "tier": "small",
         "fp": 2,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "colorballs",
@@ -253,7 +312,8 @@
         "tier": "medium",
         "fp": 4,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "brick_wall_factory",
@@ -261,7 +321,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       }
     ],
     "The grid becomes a canvas. Each cell a": [
@@ -271,7 +332,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "science_screen",
@@ -279,7 +341,8 @@
         "tier": "medium",
         "fp": 4,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "dark_sphere",
@@ -287,7 +350,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "spectrum_forest",
@@ -295,7 +359,8 @@
         "tier": "medium",
         "fp": 6,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       }
     ],
     "Walk through light itself. Rainbow emi": [
@@ -305,7 +370,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "dark_sphere",
@@ -313,7 +379,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "rainbow",
@@ -321,7 +388,8 @@
         "tier": "large",
         "fp": 50,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "pick_up_cube",
@@ -329,7 +397,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       }
     ],
     "Pillars of color rise along the runway": [
@@ -339,7 +408,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "loom_drum_persian_p6",
@@ -347,7 +417,8 @@
         "tier": "medium",
         "fp": 4,
         "has_image": false,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "visual_color_mixing",
@@ -355,7 +426,8 @@
         "tier": "medium",
         "fp": 6,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "color_sets_overview",
@@ -363,7 +435,8 @@
         "tier": "medium",
         "fp": 4,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "dark_sphere",
@@ -371,7 +444,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "grab_rainbow_stick",
@@ -379,7 +453,8 @@
         "tier": "medium",
         "fp": 3,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "SpectrumVisualizer",
@@ -387,7 +462,58 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
+      },
+      {
+        "lookup": "color_mixing",
+        "name": "Color Mixing",
+        "registry": "",
+        "tier": "small",
+        "fp": 2,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "color_scanner",
+        "name": "Color Scanner",
+        "registry": "",
+        "tier": "large",
+        "fp": 140,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "colorsheets",
+        "name": "Color Sheets",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "glitchcolor",
+        "name": "Glitch Color",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "k_means_color",
+        "name": "K-Means Color Clustering",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
       }
     ],
     "Paint meets physics. The ball painting": [
@@ -397,7 +523,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "ball_painting_demo",
@@ -405,7 +532,8 @@
         "tier": "large",
         "fp": 20,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "pattern_mill",
@@ -413,7 +541,8 @@
         "tier": "medium",
         "fp": 4,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "albers_wall_gallery",
@@ -421,7 +550,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       }
     ],
     "The hallway dissolves into rainbow. Co": [
@@ -431,7 +561,8 @@
         "tier": "medium",
         "fp": 4,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "loom_bolt_memphis_p4g",
@@ -439,7 +570,8 @@
         "tier": "medium",
         "fp": 4,
         "has_image": false,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "color_constellation_office",
@@ -447,7 +579,8 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "gradient_interpolator",
@@ -455,7 +588,8 @@
         "tier": "medium",
         "fp": 4,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "rainbow_hallway",
@@ -463,7 +597,8 @@
         "tier": "large",
         "fp": 13,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "dark_sphere",
@@ -471,12 +606,326 @@
         "tier": "small",
         "fp": 1,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
+      }
+    ],
+    "· palette (unplaced)": [
+      {
+        "lookup": "MetamerismLab",
+        "name": "MetamerismLab",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "RotatingLaser",
+        "name": "RotatingLaser",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "SimultaneousContrast",
+        "name": "SimultaneousContrast",
+        "registry": "",
+        "tier": "medium",
+        "fp": 3,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "advancedglitch",
+        "name": "advancedglitch",
+        "registry": "",
+        "tier": "small",
+        "fp": 2,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "coloredlines",
+        "name": "Colored Lines",
+        "registry": "",
+        "tier": "large",
+        "fp": 700,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "colortrails",
+        "name": "colortrails",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "disco_lights",
+        "name": "disco_lights",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "flashlight_demo",
+        "name": "flashlight_demo",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "grab_stick",
+        "name": "grab_stick",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "grabcolorcollection",
+        "name": "grabcolorcollection",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "laser_turret",
+        "name": "Laser Turret",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "minimalglitch",
+        "name": "Minimal Glitch",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "path_builder_foe",
+        "name": "Path Builder Foe",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "path_cube",
+        "name": "Path Cube (wall)",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "path_game_controller",
+        "name": "Path Game Controller",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "path_pyramid",
+        "name": "Path Pyramid (mound)",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "path_watchdog",
+        "name": "Path Watchdog",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "path_wedge",
+        "name": "Path Wedge (ramp)",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "pattern_loom",
+        "name": "Pattern Loom",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "pattern_machine_a",
+        "name": "Pattern Machine A — Jacquard Punch-Card Loom",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "pattern_machine_b",
+        "name": "Pattern Printer (Holographic Press)",
+        "registry": "",
+        "tier": "medium",
+        "fp": 6,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "pattern_machine_c",
+        "name": "Kaleidoscope Mill",
+        "registry": "",
+        "tier": "large",
+        "fp": 12,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "pattern_machine_d",
+        "name": "Pattern Machine D — Tile-Stamp Press",
+        "registry": "",
+        "tier": "medium",
+        "fp": 6,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "primitive_assembler",
+        "name": "Primitive Assembler",
+        "registry": "",
+        "tier": "large",
+        "fp": 18,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "primitive_combo_puzzle",
+        "name": "Primitive Combo Puzzle",
+        "registry": "",
+        "tier": "medium",
+        "fp": 6,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "prism",
+        "name": "prism",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "shelf",
+        "name": "shelf",
+        "registry": "",
+        "tier": "small",
+        "fp": 2,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "shelf_with_stickers",
+        "name": "shelf_with_stickers",
+        "registry": "",
+        "tier": "small",
+        "fp": 2,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "spherecolors",
+        "name": "spherecolors",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "strobe_lasers",
+        "name": "strobe_lasers",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "textureglitch",
+        "name": "textureglitch",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
       }
     ]
   },
-  "total": 34,
-  "total_concepts": 6,
+  "total": 70,
+  "total_concepts": 7,
   "recommended_total": 34,
-  "map_ready_total": 34
+  "map_ready_total": 34,
+  "palette_total": 36
 }

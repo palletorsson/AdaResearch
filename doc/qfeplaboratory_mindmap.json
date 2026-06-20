@@ -10,11 +10,12 @@
       "order": 0,
       "act": "Act I",
       "truth": "E Term",
-      "count": 4,
-      "x_spread": -0.432,
+      "count": 5,
+      "x_spread": -1.0,
       "tiers": {
         "small": [
-          "lambda_slider"
+          "lambda_slider",
+          "qfep_term_compass"
         ],
         "medium": [
           "random_cubes",
@@ -30,18 +31,20 @@
       "order": 1,
       "act": "Act I",
       "truth": "Edge Of Chaos",
-      "count": 6,
-      "x_spread": -0.216,
+      "count": 8,
+      "x_spread": -0.7778,
       "tiers": {
         "small": [
           "turing_pattern",
-          "lambda_slider"
+          "lambda_slider",
+          "edge_detector"
         ],
         "medium": [
           "edge_core",
           "edge_of_chaos_unlocked",
           "emergence_zone",
-          "tt"
+          "tt",
+          "edge_of_chaos_orb"
         ],
         "large": [],
         "applied": []
@@ -53,7 +56,7 @@
       "act": "Act I",
       "truth": "F Term",
       "count": 8,
-      "x_spread": -1.0,
+      "x_spread": -0.5556,
       "tiers": {
         "small": [
           "lambda_slider",
@@ -77,7 +80,7 @@
       "act": "Act II",
       "truth": "Introduction",
       "count": 9,
-      "x_spread": -0.5736,
+      "x_spread": -0.3334,
       "tiers": {
         "small": [
           "qfep_formula_3d",
@@ -101,8 +104,8 @@
       "order": 4,
       "act": "Act II",
       "truth": "Lambda Spectrum",
-      "count": 7,
-      "x_spread": -0.3452,
+      "count": 8,
+      "x_spread": -0.1112,
       "tiers": {
         "small": [],
         "medium": [
@@ -114,7 +117,8 @@
           "chaos_particles"
         ],
         "large": [
-          "bifurcation_walkway"
+          "bifurcation_walkway",
+          "lambda_hall"
         ],
         "applied": []
       }
@@ -124,10 +128,12 @@
       "order": 5,
       "act": "Act III",
       "truth": "Phase Chamber",
-      "count": 1,
-      "x_spread": 1.0,
+      "count": 2,
+      "x_spread": 0.1112,
       "tiers": {
-        "small": [],
+        "small": [
+          "phase_cube"
+        ],
         "medium": [
           "lab_room#accent_color"
         ],
@@ -141,7 +147,7 @@
       "act": "Act III",
       "truth": "Phi Term",
       "count": 6,
-      "x_spread": -0.3631,
+      "x_spread": 0.3334,
       "tiers": {
         "small": [
           "phi_slider"
@@ -162,8 +168,8 @@
       "order": 7,
       "act": "Act IV",
       "truth": "Sandbox",
-      "count": 6,
-      "x_spread": -0.3631,
+      "count": 7,
+      "x_spread": 0.5556,
       "tiers": {
         "small": [
           "lambda_slider",
@@ -173,7 +179,8 @@
         ],
         "medium": [
           "reactive_particles",
-          "tt"
+          "tt",
+          "qfep_sandbox_console"
         ],
         "large": [],
         "applied": []
@@ -185,7 +192,7 @@
       "act": "Act IV",
       "truth": "Synthesis",
       "count": 7,
-      "x_spread": -0.4026,
+      "x_spread": 0.7778,
       "tiers": {
         "small": [
           "queer_morphology_specimen",
@@ -201,106 +208,148 @@
         "large": [],
         "applied": []
       }
+    },
+    {
+      "key": "· palette (unplaced)",
+      "order": 9,
+      "act": "Act IV",
+      "truth": "sequence artifacts available but not yet placed in a map",
+      "count": 5,
+      "x_spread": 1.0,
+      "tiers": {
+        "small": [
+          "entropy_meter",
+          "fold_theatre_runner",
+          "qfep_chalkboard",
+          "qfep_oscilloscope"
+        ],
+        "medium": [
+          "reactive_particle_field"
+        ],
+        "large": [],
+        "applied": []
+      }
     }
   ],
   "concept_distance": [
     [
       0.0,
-      0.4887,
-      0.4646,
-      0.4699,
-      0.2917,
-      0.8966,
-      0.6103,
-      0.5458,
-      0.5551
-    ],
-    [
-      0.4887,
-      0.0,
-      0.6859,
-      0.5567,
-      0.0,
-      0.9019,
-      0.4971,
-      0.4178,
-      0.6195
-    ],
-    [
-      0.4646,
-      0.6859,
-      0.0,
-      0.4264,
-      0.6548,
-      1.0,
-      0.6369,
-      0.6369,
-      0.5974
-    ],
-    [
-      0.4699,
-      0.5567,
-      0.4264,
-      0.0,
-      0.5962,
-      1.0,
-      0.4158,
-      0.16,
-      0.1883
-    ],
-    [
-      0.2917,
-      0.0,
-      0.6548,
-      0.5962,
-      0.0,
-      1.0,
-      0.5789,
-      0.466,
-      0.6629
-    ],
-    [
-      0.8966,
-      0.9019,
-      1.0,
-      1.0,
-      1.0,
-      0.0,
-      1.0,
-      1.0,
+      0.1111,
+      0.2222,
+      0.3333,
+      0.4444,
+      0.5556,
+      0.6667,
+      0.7778,
+      0.8889,
       1.0
     ],
     [
-      0.6103,
-      0.4971,
-      0.6369,
-      0.4158,
-      0.5789,
-      1.0,
+      0.1111,
       0.0,
-      0.4685,
-      0.5161
+      0.1111,
+      0.2222,
+      0.3333,
+      0.4444,
+      0.5556,
+      0.6667,
+      0.7778,
+      0.8889
     ],
     [
-      0.5458,
-      0.4178,
-      0.6369,
-      0.16,
-      0.466,
-      1.0,
-      0.4685,
+      0.2222,
+      0.1111,
       0.0,
-      0.3416
+      0.1111,
+      0.2222,
+      0.3333,
+      0.4444,
+      0.5556,
+      0.6667,
+      0.7778
     ],
     [
-      0.5551,
-      0.6195,
-      0.5974,
-      0.1883,
-      0.6629,
+      0.3333,
+      0.2222,
+      0.1111,
+      0.0,
+      0.1111,
+      0.2222,
+      0.3333,
+      0.4444,
+      0.5556,
+      0.6667
+    ],
+    [
+      0.4444,
+      0.3333,
+      0.2222,
+      0.1111,
+      0.0,
+      0.1111,
+      0.2222,
+      0.3333,
+      0.4444,
+      0.5556
+    ],
+    [
+      0.5556,
+      0.4444,
+      0.3333,
+      0.2222,
+      0.1111,
+      0.0,
+      0.1111,
+      0.2222,
+      0.3333,
+      0.4444
+    ],
+    [
+      0.6667,
+      0.5556,
+      0.4444,
+      0.3333,
+      0.2222,
+      0.1111,
+      0.0,
+      0.1111,
+      0.2222,
+      0.3333
+    ],
+    [
+      0.7778,
+      0.6667,
+      0.5556,
+      0.4444,
+      0.3333,
+      0.2222,
+      0.1111,
+      0.0,
+      0.1111,
+      0.2222
+    ],
+    [
+      0.8889,
+      0.7778,
+      0.6667,
+      0.5556,
+      0.4444,
+      0.3333,
+      0.2222,
+      0.1111,
+      0.0,
+      0.1111
+    ],
+    [
       1.0,
-      0.5161,
-      0.3416,
+      0.8889,
+      0.7778,
+      0.6667,
+      0.5556,
+      0.4444,
+      0.3333,
+      0.2222,
+      0.1111,
       0.0
     ]
   ],
@@ -315,7 +364,8 @@
       "size": 8,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "particle_chaos",
@@ -327,7 +377,8 @@
       "size": 8,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "lambda_slider",
@@ -339,7 +390,8 @@
       "size": 5,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "tt",
@@ -351,7 +403,21 @@
       "size": 8,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
+    },
+    {
+      "lookup": "qfep_term_compass",
+      "name": "QFEP Term Compass",
+      "concept": "E Term",
+      "concept_order": 0,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
     },
     {
       "lookup": "turing_pattern",
@@ -363,7 +429,8 @@
       "size": 5,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "edge_core",
@@ -375,7 +442,8 @@
       "size": 8,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "edge_of_chaos_unlocked",
@@ -387,7 +455,8 @@
       "size": 8,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "emergence_zone",
@@ -399,7 +468,8 @@
       "size": 8,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "lambda_slider",
@@ -411,7 +481,8 @@
       "size": 5,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "tt",
@@ -423,7 +494,34 @@
       "size": 8,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
+    },
+    {
+      "lookup": "edge_detector",
+      "name": "edge_detector",
+      "concept": "Edge Of Chaos",
+      "concept_order": 1,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "edge_of_chaos_orb",
+      "name": "edge_of_chaos_orb",
+      "concept": "Edge Of Chaos",
+      "concept_order": 1,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act I",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
     },
     {
       "lookup": "shannon_workbench",
@@ -435,7 +533,8 @@
       "size": 8,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "snap_cube_puzzle",
@@ -447,7 +546,8 @@
       "size": 8,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "snap_tetra_puzzle",
@@ -459,7 +559,8 @@
       "size": 8,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "science_screen",
@@ -471,7 +572,8 @@
       "size": 8,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "crystal_cluster",
@@ -483,7 +585,8 @@
       "size": 8,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "lambda_slider",
@@ -495,7 +598,8 @@
       "size": 5,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "tt",
@@ -507,7 +611,8 @@
       "size": 8,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "dark_sphere",
@@ -519,7 +624,8 @@
       "size": 5,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "qfep_balance_workbench",
@@ -531,7 +637,8 @@
       "size": 8,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "qfep_formula_3d",
@@ -543,7 +650,8 @@
       "size": 5,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "lambda_slider",
@@ -555,7 +663,8 @@
       "size": 5,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "phi_slider",
@@ -567,7 +676,8 @@
       "size": 5,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "science_screen",
@@ -579,7 +689,8 @@
       "size": 8,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "grab_sphere_F",
@@ -591,7 +702,8 @@
       "size": 5,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "grab_sphere_E",
@@ -603,7 +715,8 @@
       "size": 5,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "grab_sphere_lambda",
@@ -615,7 +728,8 @@
       "size": 5,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "tt",
@@ -627,7 +741,8 @@
       "size": 8,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "crystal_formation",
@@ -639,7 +754,8 @@
       "size": 8,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "ordered_grid",
@@ -651,7 +767,8 @@
       "size": 8,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "bifurcation_walkway",
@@ -663,7 +780,8 @@
       "size": 14,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "edge_particles",
@@ -675,7 +793,8 @@
       "size": 8,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "complexity_pattern",
@@ -687,7 +806,8 @@
       "size": 8,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "dissolving_form",
@@ -699,7 +819,8 @@
       "size": 8,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "chaos_particles",
@@ -711,7 +832,21 @@
       "size": 8,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
+    },
+    {
+      "lookup": "lambda_hall",
+      "name": "Lambda Hall",
+      "concept": "Lambda Spectrum",
+      "concept_order": 4,
+      "tier": "large",
+      "fp": 98,
+      "size": 14,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
     },
     {
       "lookup": "lab_room#accent_color",
@@ -723,7 +858,21 @@
       "size": 8,
       "act": "Act III",
       "has_image": false,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
+    },
+    {
+      "lookup": "phase_cube",
+      "name": "phase_cube",
+      "concept": "Phase Chamber",
+      "concept_order": 5,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act III",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
     },
     {
       "lookup": "rigid_sculpture",
@@ -735,7 +884,8 @@
       "size": 8,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "fluid_form",
@@ -747,7 +897,8 @@
       "size": 8,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "phi_slider",
@@ -759,7 +910,8 @@
       "size": 5,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "preserved_pattern",
@@ -771,7 +923,8 @@
       "size": 8,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "transforming_pattern",
@@ -783,7 +936,8 @@
       "size": 8,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "tt",
@@ -795,7 +949,8 @@
       "size": 8,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "lambda_slider",
@@ -807,7 +962,8 @@
       "size": 5,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "phi_slider",
@@ -819,7 +975,8 @@
       "size": 5,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "qfep_reactor",
@@ -831,7 +988,8 @@
       "size": 5,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "reactive_particles",
@@ -843,7 +1001,8 @@
       "size": 8,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "tt",
@@ -855,7 +1014,8 @@
       "size": 8,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "qfep_formula_3d",
@@ -867,7 +1027,21 @@
       "size": 5,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
+    },
+    {
+      "lookup": "qfep_sandbox_console",
+      "name": "qfep_sandbox_console",
+      "concept": "Sandbox",
+      "concept_order": 7,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
     },
     {
       "lookup": "queer_morphology_specimen",
@@ -879,7 +1053,8 @@
       "size": 5,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "grab_sphere_F",
@@ -891,7 +1066,8 @@
       "size": 5,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "grab_sphere_E",
@@ -903,7 +1079,8 @@
       "size": 5,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "grab_sphere_lambda",
@@ -915,7 +1092,8 @@
       "size": 5,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "grab_sphere_phi",
@@ -927,7 +1105,8 @@
       "size": 5,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "qfep_formula_3d",
@@ -939,7 +1118,8 @@
       "size": 5,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "tt",
@@ -951,9 +1131,75 @@
       "size": 8,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
+    },
+    {
+      "lookup": "entropy_meter",
+      "name": "entropy_meter",
+      "concept": "· palette (unplaced)",
+      "concept_order": 9,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "fold_theatre_runner",
+      "name": "Fold Theatre Runner",
+      "concept": "· palette (unplaced)",
+      "concept_order": 9,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "qfep_chalkboard",
+      "name": "QFEP Chalkboard",
+      "concept": "· palette (unplaced)",
+      "concept_order": 9,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "qfep_oscilloscope",
+      "name": "qfep_oscilloscope",
+      "concept": "· palette (unplaced)",
+      "concept_order": 9,
+      "tier": "small",
+      "fp": 2,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "reactive_particle_field",
+      "name": "reactive_particle_field",
+      "concept": "· palette (unplaced)",
+      "concept_order": 9,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
     }
   ],
-  "total_artifacts": 54,
-  "total_concepts": 9
+  "total_artifacts": 65,
+  "total_concepts": 10
 }

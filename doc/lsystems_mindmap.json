@@ -11,7 +11,7 @@
       "act": "Act I",
       "truth": "Architecture",
       "count": 3,
-      "x_spread": 0.5455,
+      "x_spread": -1.0,
       "tiers": {
         "small": [
           "dark_sphere",
@@ -30,7 +30,7 @@
       "act": "Act I",
       "truth": "Backus Naur Form BNF",
       "count": 1,
-      "x_spread": -1.0,
+      "x_spread": -0.875,
       "tiers": {
         "small": [],
         "medium": [],
@@ -46,7 +46,7 @@
       "act": "Act I",
       "truth": "CityGenerator",
       "count": 1,
-      "x_spread": 1.0,
+      "x_spread": -0.75,
       "tiers": {
         "small": [],
         "medium": [],
@@ -62,7 +62,7 @@
       "act": "Act I",
       "truth": "Competition",
       "count": 3,
-      "x_spread": 0.025,
+      "x_spread": -0.625,
       "tiers": {
         "small": [
           "dark_sphere"
@@ -82,7 +82,7 @@
       "act": "Act II",
       "truth": "ContextSensitiveTree",
       "count": 1,
-      "x_spread": 0.1771,
+      "x_spread": -0.5,
       "tiers": {
         "small": [],
         "medium": [
@@ -98,7 +98,7 @@
       "act": "Act II",
       "truth": "Context Free Grammars CFG",
       "count": 1,
-      "x_spread": 0.2038,
+      "x_spread": -0.375,
       "tiers": {
         "small": [
           "context_free_grammars"
@@ -113,11 +113,17 @@
       "order": 6,
       "act": "Act II",
       "truth": "Different Grammar Types",
-      "count": 1,
-      "x_spread": -0.9702,
+      "count": 6,
+      "x_spread": -0.25,
       "tiers": {
         "small": [],
-        "medium": [],
+        "medium": [
+          "mesh_grammar_blooming_bulge",
+          "mesh_grammar_branching_coral",
+          "mesh_grammar_coral_fingers",
+          "mesh_grammar_lsystem_tree",
+          "mesh_grammar_petal_flower"
+        ],
         "large": [
           "env_one"
         ],
@@ -130,7 +136,7 @@
       "act": "Act II",
       "truth": "ForestCompetition",
       "count": 1,
-      "x_spread": -0.0156,
+      "x_spread": -0.125,
       "tiers": {
         "small": [],
         "medium": [],
@@ -146,7 +152,7 @@
       "act": "Act III",
       "truth": "Grammar Lab",
       "count": 6,
-      "x_spread": 0.123,
+      "x_spread": 0.0,
       "tiers": {
         "small": [
           "lsystem_editor",
@@ -168,7 +174,7 @@
       "act": "Act III",
       "truth": "Grammars And Curves",
       "count": 3,
-      "x_spread": -0.0731,
+      "x_spread": 0.125,
       "tiers": {
         "small": [
           "ContextFreeGrammars"
@@ -188,7 +194,7 @@
       "act": "Act III",
       "truth": "Growth",
       "count": 4,
-      "x_spread": 0.0573,
+      "x_spread": 0.25,
       "tiers": {
         "small": [
           "lsystem_tree"
@@ -209,7 +215,7 @@
       "act": "Act III",
       "truth": "Hilbert3D",
       "count": 1,
-      "x_spread": -0.0459,
+      "x_spread": 0.375,
       "tiers": {
         "small": [],
         "medium": [],
@@ -224,15 +230,18 @@
       "order": 12,
       "act": "Act IV",
       "truth": "Living",
-      "count": 3,
-      "x_spread": 0.1217,
+      "count": 6,
+      "x_spread": 0.5,
       "tiers": {
         "small": [
           "lsystem_tree"
         ],
         "medium": [
           "genetic_tree_sculptor",
-          "branching_coral"
+          "branching_coral",
+          "living_paper_dragon",
+          "living_paper_fern",
+          "living_paper_tree"
         ],
         "large": [],
         "applied": []
@@ -244,7 +253,7 @@
       "act": "Act IV",
       "truth": "Shape Grammars",
       "count": 1,
-      "x_spread": -0.9768,
+      "x_spread": 0.625,
       "tiers": {
         "small": [],
         "medium": [],
@@ -260,7 +269,7 @@
       "act": "Act IV",
       "truth": "Stochastic L Systems",
       "count": 1,
-      "x_spread": -0.0916,
+      "x_spread": 0.75,
       "tiers": {
         "small": [],
         "medium": [],
@@ -275,8 +284,8 @@
       "order": 15,
       "act": "Act IV",
       "truth": "Tree L Systems",
-      "count": 3,
-      "x_spread": -0.0631,
+      "count": 4,
+      "x_spread": 0.875,
       "tiers": {
         "small": [
           "lsystem_editor",
@@ -284,7 +293,27 @@
           "lsystem_tree"
         ],
         "medium": [],
-        "large": [],
+        "large": [
+          "lindenmayer_tube_tree"
+        ],
+        "applied": []
+      }
+    },
+    {
+      "key": "· palette (unplaced)",
+      "order": 16,
+      "act": "Act IV",
+      "truth": "sequence artifacts available but not yet placed in a map",
+      "count": 2,
+      "x_spread": 1.0,
+      "tiers": {
+        "small": [
+          "grid_substrate_runner"
+        ],
+        "medium": [],
+        "large": [
+          "modulor_cypress"
+        ],
         "applied": []
       }
     }
@@ -292,290 +321,325 @@
   "concept_distance": [
     [
       0.0,
-      0.8612,
-      0.3157,
-      0.4056,
-      0.5978,
-      0.5484,
-      0.7794,
-      0.8134,
-      0.1913,
-      0.4049,
-      0.3671,
-      0.7809,
-      0.2579,
-      0.7992,
-      0.6643,
-      0.8105
+      0.0625,
+      0.125,
+      0.1875,
+      0.25,
+      0.3125,
+      0.375,
+      0.4375,
+      0.5,
+      0.5625,
+      0.625,
+      0.6875,
+      0.75,
+      0.8125,
+      0.875,
+      0.9375,
+      1.0
     ],
     [
-      0.8612,
+      0.0625,
       0.0,
+      0.0625,
+      0.125,
+      0.1875,
+      0.25,
+      0.3125,
+      0.375,
+      0.4375,
+      0.5,
+      0.5625,
+      0.625,
+      0.6875,
+      0.75,
+      0.8125,
+      0.875,
+      0.9375
+    ],
+    [
+      0.125,
+      0.0625,
+      0.0,
+      0.0625,
+      0.125,
+      0.1875,
+      0.25,
+      0.3125,
+      0.375,
+      0.4375,
+      0.5,
+      0.5625,
+      0.625,
+      0.6875,
+      0.75,
+      0.8125,
+      0.875
+    ],
+    [
+      0.1875,
+      0.125,
+      0.0625,
+      0.0,
+      0.0625,
+      0.125,
+      0.1875,
+      0.25,
+      0.3125,
+      0.375,
+      0.4375,
+      0.5,
+      0.5625,
+      0.625,
+      0.6875,
+      0.75,
+      0.8125
+    ],
+    [
+      0.25,
+      0.1875,
+      0.125,
+      0.0625,
+      0.0,
+      0.0625,
+      0.125,
+      0.1875,
+      0.25,
+      0.3125,
+      0.375,
+      0.4375,
+      0.5,
+      0.5625,
+      0.625,
+      0.6875,
+      0.75
+    ],
+    [
+      0.3125,
+      0.25,
+      0.1875,
+      0.125,
+      0.0625,
+      0.0,
+      0.0625,
+      0.125,
+      0.1875,
+      0.25,
+      0.3125,
+      0.375,
+      0.4375,
+      0.5,
+      0.5625,
+      0.625,
+      0.6875
+    ],
+    [
+      0.375,
+      0.3125,
+      0.25,
+      0.1875,
+      0.125,
+      0.0625,
+      0.0,
+      0.0625,
+      0.125,
+      0.1875,
+      0.25,
+      0.3125,
+      0.375,
+      0.4375,
+      0.5,
+      0.5625,
+      0.625
+    ],
+    [
+      0.4375,
+      0.375,
+      0.3125,
+      0.25,
+      0.1875,
+      0.125,
+      0.0625,
+      0.0,
+      0.0625,
+      0.125,
+      0.1875,
+      0.25,
+      0.3125,
+      0.375,
+      0.4375,
+      0.5,
+      0.5625
+    ],
+    [
+      0.5,
+      0.4375,
+      0.375,
+      0.3125,
+      0.25,
+      0.1875,
+      0.125,
+      0.0625,
+      0.0,
+      0.0625,
+      0.125,
+      0.1875,
+      0.25,
+      0.3125,
+      0.375,
+      0.4375,
+      0.5
+    ],
+    [
+      0.5625,
+      0.5,
+      0.4375,
+      0.375,
+      0.3125,
+      0.25,
+      0.1875,
+      0.125,
+      0.0625,
+      0.0,
+      0.0625,
+      0.125,
+      0.1875,
+      0.25,
+      0.3125,
+      0.375,
+      0.4375
+    ],
+    [
+      0.625,
+      0.5625,
+      0.5,
+      0.4375,
+      0.375,
+      0.3125,
+      0.25,
+      0.1875,
+      0.125,
+      0.0625,
+      0.0,
+      0.0625,
+      0.125,
+      0.1875,
+      0.25,
+      0.3125,
+      0.375
+    ],
+    [
+      0.6875,
+      0.625,
+      0.5625,
+      0.5,
+      0.4375,
+      0.375,
+      0.3125,
+      0.25,
+      0.1875,
+      0.125,
+      0.0625,
+      0.0,
+      0.0625,
+      0.125,
+      0.1875,
+      0.25,
+      0.3125
+    ],
+    [
+      0.75,
+      0.6875,
+      0.625,
+      0.5625,
+      0.5,
+      0.4375,
+      0.375,
+      0.3125,
+      0.25,
+      0.1875,
+      0.125,
+      0.0625,
+      0.0,
+      0.0625,
+      0.125,
+      0.1875,
+      0.25
+    ],
+    [
+      0.8125,
+      0.75,
+      0.6875,
+      0.625,
+      0.5625,
+      0.5,
+      0.4375,
+      0.375,
+      0.3125,
+      0.25,
+      0.1875,
+      0.125,
+      0.0625,
+      0.0,
+      0.0625,
+      0.125,
+      0.1875
+    ],
+    [
+      0.875,
+      0.8125,
+      0.75,
+      0.6875,
+      0.625,
+      0.5625,
+      0.5,
+      0.4375,
+      0.375,
+      0.3125,
+      0.25,
+      0.1875,
+      0.125,
+      0.0625,
+      0.0,
+      0.0625,
+      0.125
+    ],
+    [
+      0.9375,
+      0.875,
+      0.8125,
+      0.75,
+      0.6875,
+      0.625,
+      0.5625,
+      0.5,
+      0.4375,
+      0.375,
+      0.3125,
+      0.25,
+      0.1875,
+      0.125,
+      0.0625,
+      0.0,
+      0.0625
+    ],
+    [
       1.0,
-      0.8833,
-      0.9641,
-      0.9504,
-      0.0,
-      0.9348,
-      0.9235,
-      0.7926,
-      0.9248,
-      0.8662,
-      0.7604,
-      0.0074,
-      0.7268,
-      0.8617
-    ],
-    [
-      0.3157,
-      1.0,
-      0.0,
-      0.8583,
-      0.787,
-      0.7466,
-      0.9702,
-      0.9504,
-      0.8005,
-      0.8657,
-      0.8675,
-      0.9121,
-      0.6387,
-      0.9842,
-      0.8184,
-      0.9248
-    ],
-    [
-      0.4056,
-      0.8833,
-      0.8583,
-      0.0,
-      0.7369,
-      0.6606,
-      0.882,
-      0.2573,
-      0.3663,
-      0.5561,
-      0.4492,
-      0.8422,
-      0.2101,
-      0.8374,
-      0.7448,
-      0.835
-    ],
-    [
-      0.5978,
-      0.9641,
-      0.787,
-      0.7369,
-      0.0,
-      0.4999,
-      0.8902,
-      0.6931,
-      0.5329,
-      0.6102,
-      0.3019,
-      0.8665,
-      0.6989,
-      0.8617,
-      0.7105,
-      0.7435
-    ],
-    [
-      0.5484,
-      0.9504,
-      0.7466,
-      0.6606,
-      0.4999,
-      0.0,
-      0.8044,
-      0.8469,
-      0.4006,
-      0.497,
-      0.6619,
-      0.7654,
-      0.6899,
-      0.7965,
-      0.8081,
-      0.6809
-    ],
-    [
-      0.7794,
-      0.0,
-      0.9702,
-      0.882,
-      0.8902,
-      0.8044,
-      0.0,
-      0.9258,
-      0.8242,
-      0.7493,
-      0.8643,
-      0.8266,
-      0.7279,
-      0.0662,
-      0.8242,
-      0.9784
-    ],
-    [
-      0.8134,
-      0.9348,
-      0.9504,
-      0.2573,
-      0.6931,
-      0.8469,
-      0.9258,
-      0.0,
-      0.7572,
-      0.7714,
-      0.6767,
-      0.8931,
-      0.6508,
-      0.9311,
-      0.7981,
-      0.8928
-    ],
-    [
-      0.1913,
-      0.9235,
-      0.8005,
-      0.3663,
-      0.5329,
-      0.4006,
-      0.8242,
-      0.7572,
-      0.0,
-      0.3526,
-      0.162,
-      0.797,
-      0.3566,
-      0.8823,
-      0.7403,
-      0.706
-    ],
-    [
-      0.4049,
-      0.7926,
-      0.8657,
-      0.5561,
-      0.6102,
-      0.497,
-      0.7493,
-      0.7714,
-      0.3526,
-      0.0,
-      0.412,
-      0.1578,
-      0.4706,
-      0.8116,
-      0.7582,
-      0.8752
-    ],
-    [
-      0.3671,
-      0.9248,
-      0.8675,
-      0.4492,
-      0.3019,
-      0.6619,
-      0.8643,
-      0.6767,
-      0.162,
-      0.412,
-      0.0,
-      0.7406,
-      0.2803,
-      0.8084,
-      0.6809,
-      0.7495
-    ],
-    [
-      0.7809,
-      0.8662,
-      0.9121,
-      0.8422,
-      0.8665,
-      0.7654,
-      0.8266,
-      0.8931,
-      0.797,
-      0.1578,
-      0.7406,
-      0.0,
-      0.7765,
-      0.8596,
-      0.9422,
-      0.9319
-    ],
-    [
-      0.2579,
-      0.7604,
-      0.6387,
-      0.2101,
-      0.6989,
-      0.6899,
-      0.7279,
-      0.6508,
-      0.3566,
-      0.4706,
-      0.2803,
-      0.7765,
-      0.0,
-      0.7472,
-      0.6482,
-      0.8089
-    ],
-    [
-      0.7992,
-      0.0074,
-      0.9842,
-      0.8374,
-      0.8617,
-      0.7965,
-      0.0662,
-      0.9311,
-      0.8823,
-      0.8116,
-      0.8084,
-      0.8596,
-      0.7472,
-      0.0,
-      0.8261,
-      0.9842
-    ],
-    [
-      0.6643,
-      0.7268,
-      0.8184,
-      0.7448,
-      0.7105,
-      0.8081,
-      0.8242,
-      0.7981,
-      0.7403,
-      0.7582,
-      0.6809,
-      0.9422,
-      0.6482,
-      0.8261,
-      0.0,
-      0.7004
-    ],
-    [
-      0.8105,
-      0.8617,
-      0.9248,
-      0.835,
-      0.7435,
-      0.6809,
-      0.9784,
-      0.8928,
-      0.706,
-      0.8752,
-      0.7495,
-      0.9319,
-      0.8089,
-      0.9842,
-      0.7004,
+      0.9375,
+      0.875,
+      0.8125,
+      0.75,
+      0.6875,
+      0.625,
+      0.5625,
+      0.5,
+      0.4375,
+      0.375,
+      0.3125,
+      0.25,
+      0.1875,
+      0.125,
+      0.0625,
       0.0
     ]
   ],
@@ -590,7 +654,8 @@
       "size": 5,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "CityGenerator",
@@ -602,7 +667,8 @@
       "size": 14,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "lsystem_dungeon",
@@ -614,7 +680,8 @@
       "size": 5,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "env_one",
@@ -626,7 +693,8 @@
       "size": 14,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "CityGenerator",
@@ -638,7 +706,8 @@
       "size": 14,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "ForestCompetition",
@@ -650,7 +719,8 @@
       "size": 14,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "branching_coral",
@@ -662,7 +732,8 @@
       "size": 8,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "dark_sphere",
@@ -674,7 +745,8 @@
       "size": 5,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "ContextSensitiveTree",
@@ -686,7 +758,8 @@
       "size": 8,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "context_free_grammars",
@@ -698,7 +771,8 @@
       "size": 5,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "env_one",
@@ -710,7 +784,73 @@
       "size": 14,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
+    },
+    {
+      "lookup": "mesh_grammar_blooming_bulge",
+      "name": "MeshGrammar — Blooming Bulge",
+      "concept": "Different Grammar Types",
+      "concept_order": 6,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "mesh_grammar_branching_coral",
+      "name": "MeshGrammar — Branching Coral",
+      "concept": "Different Grammar Types",
+      "concept_order": 6,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "mesh_grammar_coral_fingers",
+      "name": "MeshGrammar — Coral Fingers",
+      "concept": "Different Grammar Types",
+      "concept_order": 6,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "mesh_grammar_lsystem_tree",
+      "name": "MeshGrammar — L-System Tree",
+      "concept": "Different Grammar Types",
+      "concept_order": 6,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "mesh_grammar_petal_flower",
+      "name": "MeshGrammar — Petal Flower",
+      "concept": "Different Grammar Types",
+      "concept_order": 6,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
     },
     {
       "lookup": "ForestCompetition",
@@ -722,7 +862,8 @@
       "size": 14,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "science_screen",
@@ -734,7 +875,8 @@
       "size": 8,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "lsystem_editor",
@@ -746,7 +888,8 @@
       "size": 5,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "grammar_provenance",
@@ -758,7 +901,8 @@
       "size": 8,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "lsystem_tree",
@@ -770,7 +914,8 @@
       "size": 5,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "fractal_lsystem_string",
@@ -782,7 +927,8 @@
       "size": 8,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "dark_sphere",
@@ -794,7 +940,8 @@
       "size": 5,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "Hilbert3D",
@@ -806,7 +953,8 @@
       "size": 14,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "space_filling_curve_gallery",
@@ -818,7 +966,8 @@
       "size": 8,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "ContextFreeGrammars",
@@ -830,7 +979,8 @@
       "size": 5,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "AnimatedTree",
@@ -842,7 +992,8 @@
       "size": 14,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "ContextSensitiveTree",
@@ -854,7 +1005,8 @@
       "size": 8,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "lsystem_tree",
@@ -866,7 +1018,8 @@
       "size": 5,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "parametric_lsystem",
@@ -878,7 +1031,8 @@
       "size": 8,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "Hilbert3D",
@@ -890,7 +1044,8 @@
       "size": 14,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "lsystem_tree",
@@ -902,7 +1057,8 @@
       "size": 5,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "genetic_tree_sculptor",
@@ -914,7 +1070,8 @@
       "size": 8,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "branching_coral",
@@ -926,7 +1083,47 @@
       "size": 8,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
+    },
+    {
+      "lookup": "living_paper_dragon",
+      "name": "living_paper_dragon",
+      "concept": "Living",
+      "concept_order": 12,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "living_paper_fern",
+      "name": "living_paper_fern",
+      "concept": "Living",
+      "concept_order": 12,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "living_paper_tree",
+      "name": "living_paper_tree",
+      "concept": "Living",
+      "concept_order": 12,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
     },
     {
       "lookup": "env_one",
@@ -938,7 +1135,8 @@
       "size": 14,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "env_one",
@@ -950,7 +1148,8 @@
       "size": 14,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "lsystem_editor",
@@ -962,7 +1161,8 @@
       "size": 5,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "tree_generation",
@@ -974,7 +1174,8 @@
       "size": 5,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "lsystem_tree",
@@ -986,9 +1187,49 @@
       "size": 5,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
+    },
+    {
+      "lookup": "lindenmayer_tube_tree",
+      "name": "Lindenmayer Tube Tree",
+      "concept": "Tree L Systems",
+      "concept_order": 15,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "grid_substrate_runner",
+      "name": "Grid Substrate Runner",
+      "concept": "· palette (unplaced)",
+      "concept_order": 16,
+      "tier": "small",
+      "fp": 1,
+      "size": 5,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "modulor_cypress",
+      "name": "Modulor Cypress",
+      "concept": "· palette (unplaced)",
+      "concept_order": 16,
+      "tier": "large",
+      "fp": 9,
+      "size": 14,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
     }
   ],
-  "total_artifacts": 34,
-  "total_concepts": 16
+  "total_artifacts": 45,
+  "total_concepts": 17
 }

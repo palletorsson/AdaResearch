@@ -9,9 +9,275 @@
   ],
   "maps": [
     {
+      "name": "WaveFunctions_Pendulum",
+      "score": 0.464,
+      "tag": "partial",
+      "grid": [
+        11,
+        19
+      ],
+      "n_concepts": 4,
+      "n_artifacts": 14,
+      "arts": [
+        {
+          "co": 1,
+          "col": 9,
+          "row": 0,
+          "lk": "PendulumWave",
+          "ai": 0,
+          "t": "l"
+        },
+        {
+          "co": 1,
+          "col": 1,
+          "row": 1,
+          "lk": "draw_dot_time_domain",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 1,
+          "col": 10,
+          "row": 1,
+          "lk": "PendulumWave",
+          "ai": 0,
+          "t": "l"
+        },
+        {
+          "co": 1,
+          "col": 9,
+          "row": 2,
+          "lk": "PendulumWave",
+          "ai": 0,
+          "t": "l"
+        },
+        {
+          "co": 11,
+          "col": 4,
+          "row": 4,
+          "lk": "dark_sphere",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 1,
+          "col": 5,
+          "row": 7,
+          "lk": "WavePaintings",
+          "ai": 0,
+          "t": "l"
+        },
+        {
+          "co": 11,
+          "col": 1,
+          "row": 9,
+          "lk": "GlassRack",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 11,
+          "col": 9,
+          "row": 9,
+          "lk": "GlassRack",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 8,
+          "col": 1,
+          "row": 10,
+          "lk": "lab_table",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 8,
+          "col": 9,
+          "row": 10,
+          "lk": "lab_table",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 1,
+          "col": 5,
+          "row": 12,
+          "lk": "foucault_pendulum",
+          "ai": 0,
+          "t": "l"
+        },
+        {
+          "co": 8,
+          "col": 1,
+          "row": 14,
+          "lk": "BigPipeSystem",
+          "ai": 2,
+          "t": "m"
+        },
+        {
+          "co": 5,
+          "col": 3,
+          "row": 16,
+          "lk": "VRAudioMonitor",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 11,
+          "col": 7,
+          "row": 16,
+          "lk": "seismograph",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "WaveFunctions_Unit_Circle",
+      "score": -0.257,
+      "tag": "uncurated",
+      "grid": [
+        13,
+        17
+      ],
+      "n_concepts": 4,
+      "n_artifacts": 16,
+      "arts": [
+        {
+          "co": 9,
+          "col": 2,
+          "row": 0,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 9,
+          "col": 3,
+          "row": 0,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 9,
+          "col": 4,
+          "row": 0,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 9,
+          "col": 5,
+          "row": 0,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 9,
+          "col": 6,
+          "row": 0,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 9,
+          "col": 7,
+          "row": 0,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 9,
+          "col": 8,
+          "row": 0,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 9,
+          "col": 9,
+          "row": 0,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 9,
+          "col": 10,
+          "row": 0,
+          "lk": "cube_scene",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 2,
+          "col": 6,
+          "row": 3,
+          "lk": "unit_circle_advanced",
+          "ai": 0,
+          "t": "m"
+        },
+        {
+          "co": 3,
+          "col": 5,
+          "row": 6,
+          "lk": "colorballs",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 2,
+          "col": 0,
+          "row": 13,
+          "lk": "SimpleOscillatingBridge",
+          "ai": 0,
+          "t": "m"
+        },
+        {
+          "co": 2,
+          "col": 1,
+          "row": 13,
+          "lk": "OscillationCurve",
+          "ai": 0,
+          "t": "l"
+        },
+        {
+          "co": 11,
+          "col": 6,
+          "row": 13,
+          "lk": "dark_sphere",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 2,
+          "col": 11,
+          "row": 13,
+          "lk": "OscillationCurve",
+          "ai": 0,
+          "t": "l"
+        },
+        {
+          "co": 2,
+          "col": 12,
+          "row": 13,
+          "lk": "SimpleOscillatingBridge",
+          "ai": 0,
+          "t": "m"
+        }
+      ]
+    },
+    {
       "name": "WaveFunctions_Effect_Sound",
-      "score": 1.0,
-      "tag": "curated",
+      "score": -0.866,
+      "tag": "uncurated",
       "grid": [
         12,
         14
@@ -295,8 +561,8 @@
     },
     {
       "name": "WaveFunctions_Intro",
-      "score": 0.829,
-      "tag": "curated",
+      "score": -0.886,
+      "tag": "uncurated",
       "grid": [
         9,
         22
@@ -469,272 +735,6 @@
           "col": 7,
           "row": 18,
           "lk": "SphericalHarmonics",
-          "ai": 0,
-          "t": "m"
-        }
-      ]
-    },
-    {
-      "name": "WaveFunctions_Pendulum",
-      "score": 0.543,
-      "tag": "curated",
-      "grid": [
-        11,
-        19
-      ],
-      "n_concepts": 4,
-      "n_artifacts": 14,
-      "arts": [
-        {
-          "co": 1,
-          "col": 9,
-          "row": 0,
-          "lk": "PendulumWave",
-          "ai": 0,
-          "t": "l"
-        },
-        {
-          "co": 1,
-          "col": 1,
-          "row": 1,
-          "lk": "draw_dot_time_domain",
-          "ai": 0,
-          "t": "s"
-        },
-        {
-          "co": 1,
-          "col": 10,
-          "row": 1,
-          "lk": "PendulumWave",
-          "ai": 0,
-          "t": "l"
-        },
-        {
-          "co": 1,
-          "col": 9,
-          "row": 2,
-          "lk": "PendulumWave",
-          "ai": 0,
-          "t": "l"
-        },
-        {
-          "co": 11,
-          "col": 4,
-          "row": 4,
-          "lk": "dark_sphere",
-          "ai": 3,
-          "t": "s"
-        },
-        {
-          "co": 1,
-          "col": 5,
-          "row": 7,
-          "lk": "WavePaintings",
-          "ai": 0,
-          "t": "l"
-        },
-        {
-          "co": 11,
-          "col": 1,
-          "row": 9,
-          "lk": "GlassRack",
-          "ai": 3,
-          "t": "s"
-        },
-        {
-          "co": 11,
-          "col": 9,
-          "row": 9,
-          "lk": "GlassRack",
-          "ai": 3,
-          "t": "s"
-        },
-        {
-          "co": 8,
-          "col": 1,
-          "row": 10,
-          "lk": "lab_table",
-          "ai": 2,
-          "t": "s"
-        },
-        {
-          "co": 8,
-          "col": 9,
-          "row": 10,
-          "lk": "lab_table",
-          "ai": 2,
-          "t": "s"
-        },
-        {
-          "co": 1,
-          "col": 5,
-          "row": 12,
-          "lk": "foucault_pendulum",
-          "ai": 0,
-          "t": "l"
-        },
-        {
-          "co": 8,
-          "col": 1,
-          "row": 14,
-          "lk": "BigPipeSystem",
-          "ai": 2,
-          "t": "m"
-        },
-        {
-          "co": 5,
-          "col": 3,
-          "row": 16,
-          "lk": "VRAudioMonitor",
-          "ai": 1,
-          "t": "s"
-        },
-        {
-          "co": 11,
-          "col": 7,
-          "row": 16,
-          "lk": "seismograph",
-          "ai": 3,
-          "t": "s"
-        }
-      ]
-    },
-    {
-      "name": "WaveFunctions_Unit_Circle",
-      "score": 0.543,
-      "tag": "curated",
-      "grid": [
-        13,
-        17
-      ],
-      "n_concepts": 4,
-      "n_artifacts": 16,
-      "arts": [
-        {
-          "co": 9,
-          "col": 2,
-          "row": 0,
-          "lk": "cube_scene",
-          "ai": 3,
-          "t": "s"
-        },
-        {
-          "co": 9,
-          "col": 3,
-          "row": 0,
-          "lk": "cube_scene",
-          "ai": 3,
-          "t": "s"
-        },
-        {
-          "co": 9,
-          "col": 4,
-          "row": 0,
-          "lk": "cube_scene",
-          "ai": 3,
-          "t": "s"
-        },
-        {
-          "co": 9,
-          "col": 5,
-          "row": 0,
-          "lk": "cube_scene",
-          "ai": 3,
-          "t": "s"
-        },
-        {
-          "co": 9,
-          "col": 6,
-          "row": 0,
-          "lk": "cube_scene",
-          "ai": 3,
-          "t": "s"
-        },
-        {
-          "co": 9,
-          "col": 7,
-          "row": 0,
-          "lk": "cube_scene",
-          "ai": 3,
-          "t": "s"
-        },
-        {
-          "co": 9,
-          "col": 8,
-          "row": 0,
-          "lk": "cube_scene",
-          "ai": 3,
-          "t": "s"
-        },
-        {
-          "co": 9,
-          "col": 9,
-          "row": 0,
-          "lk": "cube_scene",
-          "ai": 3,
-          "t": "s"
-        },
-        {
-          "co": 9,
-          "col": 10,
-          "row": 0,
-          "lk": "cube_scene",
-          "ai": 3,
-          "t": "s"
-        },
-        {
-          "co": 2,
-          "col": 6,
-          "row": 3,
-          "lk": "unit_circle_advanced",
-          "ai": 0,
-          "t": "m"
-        },
-        {
-          "co": 3,
-          "col": 5,
-          "row": 6,
-          "lk": "colorballs",
-          "ai": 1,
-          "t": "m"
-        },
-        {
-          "co": 2,
-          "col": 0,
-          "row": 13,
-          "lk": "SimpleOscillatingBridge",
-          "ai": 0,
-          "t": "m"
-        },
-        {
-          "co": 2,
-          "col": 1,
-          "row": 13,
-          "lk": "OscillationCurve",
-          "ai": 0,
-          "t": "l"
-        },
-        {
-          "co": 11,
-          "col": 6,
-          "row": 13,
-          "lk": "dark_sphere",
-          "ai": 3,
-          "t": "s"
-        },
-        {
-          "co": 2,
-          "col": 11,
-          "row": 13,
-          "lk": "OscillationCurve",
-          "ai": 0,
-          "t": "l"
-        },
-        {
-          "co": 2,
-          "col": 12,
-          "row": 13,
-          "lk": "SimpleOscillatingBridge",
           "ai": 0,
           "t": "m"
         }

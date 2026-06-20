@@ -11,7 +11,7 @@
       "act": "Act I",
       "truth": "Five axioms. Four are obvious. The fifth is not.",
       "count": 4,
-      "x_spread": -0.5349,
+      "x_spread": -1.0,
       "tiers": {
         "small": [
           "angle_sum_triangle",
@@ -31,7 +31,7 @@
       "act": "Act I",
       "truth": "Euclid's fifth postulate held for two millennia. Then Bolyai, Lobachevsky, and Riemann asked: what if parallel lines don't behave?",
       "count": 5,
-      "x_spread": -1.0,
+      "x_spread": -0.75,
       "tiers": {
         "small": [
           "hyperbolic_surface",
@@ -51,7 +51,7 @@
       "act": "Act II",
       "truth": "A set collects things. The set of even numbers. The set of red objects. Most sets don't contain themselves — the set of even numbers is not itself an even number.",
       "count": 1,
-      "x_spread": 0.6706,
+      "x_spread": -0.5,
       "tiers": {
         "small": [],
         "medium": [
@@ -66,14 +66,16 @@
       "order": 3,
       "act": "Act II",
       "truth": "In 1931, Kurt Gödel fed mathematics to itself.",
-      "count": 1,
-      "x_spread": 1.0,
+      "count": 2,
+      "x_spread": -0.25,
       "tiers": {
         "small": [
           "godel_statement_plaque"
         ],
         "medium": [],
-        "large": [],
+        "large": [
+          "goedel_atrium"
+        ],
         "applied": []
       }
     },
@@ -83,7 +85,7 @@
       "act": "Act III",
       "truth": "Each step makes sense. North side, height one. East side, height two. South, three. West, four. Climb the perimeter clockwise and every transition feels valid — just stairs, just geometry, just one foot after the other.",
       "count": 3,
-      "x_spread": 0.2978,
+      "x_spread": 0.0,
       "tiers": {
         "small": [
           "escher_staircase",
@@ -101,7 +103,7 @@
       "act": "Act III",
       "truth": "Classical mathematics lets you prove a bridge exists by showing that its absence is absurd. You never build the bridge. You never cross it. You just know, somewhere, it must be.",
       "count": 3,
-      "x_spread": -0.1266,
+      "x_spread": 0.25,
       "tiers": {
         "small": [
           "excluded_middle_demo",
@@ -119,7 +121,7 @@
       "act": "Act IV",
       "truth": "Classical logic has a rule: if a contradiction exists, everything follows. One false step and the entire system collapses into triviality. Pavel Florensky — mathematician, priest, executed by Stalin — rejected this.",
       "count": 3,
-      "x_spread": 0.1804,
+      "x_spread": 0.5,
       "tiers": {
         "small": [
           "schrodinger_box",
@@ -137,8 +139,8 @@
       "order": 7,
       "act": "Act IV",
       "truth": "Gödel's plaque. Russell's boxes. Escher's staircase. Florensky's sphere. Four wings of a single argument, radiating from a summit where the formula stands complete: QFE = F - λE(S) + φΔE(S,t).",
-      "count": 8,
-      "x_spread": 0.2085,
+      "count": 9,
+      "x_spread": 0.75,
       "tiers": {
         "small": [
           "godel_statement_plaque",
@@ -149,11 +151,31 @@
         ],
         "medium": [
           "russell_set_box",
-          "florensky_sphere"
+          "florensky_sphere",
+          "russell_paradox_workbench"
         ],
         "large": [
           "bifurcation_diagram"
         ],
+        "applied": []
+      }
+    },
+    {
+      "key": "· palette (unplaced)",
+      "order": 8,
+      "act": "Act IV",
+      "truth": "sequence artifacts available but not yet placed in a map",
+      "count": 4,
+      "x_spread": 1.0,
+      "tiers": {
+        "small": [],
+        "medium": [
+          "cantor_diagonal_workbench",
+          "complexity_dial_workbench",
+          "halting_workbench",
+          "hilbert_hotel"
+        ],
+        "large": [],
         "applied": []
       }
     }
@@ -161,82 +183,101 @@
   "concept_distance": [
     [
       0.0,
-      0.0,
-      0.8018,
-      0.5349,
-      0.5601,
-      0.6163,
-      0.9656,
-      0.866
+      0.125,
+      0.25,
+      0.375,
+      0.5,
+      0.625,
+      0.75,
+      0.875,
+      1.0
     ],
     [
+      0.125,
       0.0,
+      0.125,
+      0.25,
+      0.375,
+      0.5,
+      0.625,
+      0.75,
+      0.875
+    ],
+    [
+      0.25,
+      0.125,
       0.0,
-      0.7216,
+      0.125,
+      0.25,
+      0.375,
+      0.5,
+      0.625,
+      0.75
+    ],
+    [
+      0.375,
+      0.25,
+      0.125,
+      0.0,
+      0.125,
+      0.25,
+      0.375,
+      0.5,
+      0.625
+    ],
+    [
+      0.5,
+      0.375,
+      0.25,
+      0.125,
+      0.0,
+      0.125,
+      0.25,
+      0.375,
+      0.5
+    ],
+    [
+      0.625,
+      0.5,
+      0.375,
+      0.25,
+      0.125,
+      0.0,
+      0.125,
+      0.25,
+      0.375
+    ],
+    [
+      0.75,
+      0.625,
+      0.5,
+      0.375,
+      0.25,
+      0.125,
+      0.0,
+      0.125,
+      0.25
+    ],
+    [
+      0.875,
+      0.75,
+      0.625,
+      0.5,
+      0.375,
+      0.25,
+      0.125,
+      0.0,
+      0.125
+    ],
+    [
       1.0,
-      0.8505,
-      0.6088,
-      0.9593,
-      0.63
-    ],
-    [
-      0.8018,
-      0.7216,
-      0.0,
-      0.051,
-      0.445,
-      0.8259,
-      0.6077,
-      0.3895
-    ],
-    [
-      0.5349,
-      1.0,
-      0.051,
-      0.0,
-      0.5527,
-      0.7354,
-      0.7789,
-      0.4215
-    ],
-    [
-      0.5601,
-      0.8505,
-      0.445,
-      0.5527,
-      0.0,
-      0.6501,
-      0.8677,
-      0.1523
-    ],
-    [
-      0.6163,
-      0.6088,
-      0.8259,
-      0.7354,
-      0.6501,
-      0.0,
-      0.4777,
-      0.7199
-    ],
-    [
-      0.9656,
-      0.9593,
-      0.6077,
-      0.7789,
-      0.8677,
-      0.4777,
-      0.0,
-      0.4622
-    ],
-    [
-      0.866,
-      0.63,
-      0.3895,
-      0.4215,
-      0.1523,
-      0.7199,
-      0.4622,
+      0.875,
+      0.75,
+      0.625,
+      0.5,
+      0.375,
+      0.25,
+      0.125,
       0.0
     ]
   ],
@@ -251,7 +292,8 @@
       "size": 8,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "parallel_lines",
@@ -263,7 +305,8 @@
       "size": 8,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "angle_sum_triangle",
@@ -275,7 +318,8 @@
       "size": 5,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "euclid_postulates_plaque",
@@ -287,7 +331,8 @@
       "size": 5,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "hyperbolic_surface",
@@ -299,7 +344,8 @@
       "size": 5,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "elliptic_surface",
@@ -311,7 +357,8 @@
       "size": 5,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "curvature_slider",
@@ -323,7 +370,8 @@
       "size": 5,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "poincare_disk",
@@ -335,7 +383,8 @@
       "size": 5,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "riemann_sphere",
@@ -347,7 +396,8 @@
       "size": 5,
       "act": "Act I",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "russell_set_box",
@@ -359,7 +409,8 @@
       "size": 8,
       "act": "Act II",
       "has_image": true,
-      "recommended": false
+      "recommended": false,
+      "map_ready": true
     },
     {
       "lookup": "godel_statement_plaque",
@@ -371,7 +422,21 @@
       "size": 5,
       "act": "Act II",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
+    },
+    {
+      "lookup": "goedel_atrium",
+      "name": "Gödel Atrium",
+      "concept": "In 1931, Kurt Gödel fed mathematics to",
+      "concept_order": 3,
+      "tier": "large",
+      "fp": 64,
+      "size": 14,
+      "act": "Act II",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
     },
     {
       "lookup": "escher_staircase",
@@ -383,7 +448,8 @@
       "size": 5,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "penrose_triangle",
@@ -395,7 +461,8 @@
       "size": 5,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "magritte_pipe",
@@ -407,7 +474,8 @@
       "size": 5,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "excluded_middle_demo",
@@ -419,7 +487,8 @@
       "size": 5,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "constructive_proof",
@@ -431,7 +500,8 @@
       "size": 5,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "brouwer_choice_sequence",
@@ -443,7 +513,8 @@
       "size": 5,
       "act": "Act III",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "florensky_sphere",
@@ -455,7 +526,8 @@
       "size": 8,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "schrodinger_box",
@@ -467,7 +539,8 @@
       "size": 5,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "superposition_display",
@@ -479,7 +552,8 @@
       "size": 5,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "godel_statement_plaque",
@@ -491,7 +565,8 @@
       "size": 5,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "russell_set_box",
@@ -503,7 +578,8 @@
       "size": 8,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "qfep_formula_3d",
@@ -515,7 +591,8 @@
       "size": 5,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "lambda_slider",
@@ -527,7 +604,8 @@
       "size": 5,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "phi_slider",
@@ -539,7 +617,8 @@
       "size": 5,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "escher_staircase",
@@ -551,7 +630,8 @@
       "size": 5,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "bifurcation_diagram",
@@ -563,7 +643,8 @@
       "size": 14,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
     },
     {
       "lookup": "florensky_sphere",
@@ -575,9 +656,75 @@
       "size": 8,
       "act": "Act IV",
       "has_image": true,
-      "recommended": true
+      "recommended": true,
+      "map_ready": true
+    },
+    {
+      "lookup": "russell_paradox_workbench",
+      "name": "Russell's Paradox Workbench",
+      "concept": "Gödel's plaque. Russell's boxes. Esche",
+      "concept_order": 7,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "cantor_diagonal_workbench",
+      "name": "Cantor Diagonal Workbench",
+      "concept": "· palette (unplaced)",
+      "concept_order": 8,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "complexity_dial_workbench",
+      "name": "Complexity Dial Workbench",
+      "concept": "· palette (unplaced)",
+      "concept_order": 8,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "halting_workbench",
+      "name": "Halting Workbench",
+      "concept": "· palette (unplaced)",
+      "concept_order": 8,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
+    },
+    {
+      "lookup": "hilbert_hotel",
+      "name": "hilbert_hotel",
+      "concept": "· palette (unplaced)",
+      "concept_order": 8,
+      "tier": "medium",
+      "fp": 4,
+      "size": 8,
+      "act": "Act IV",
+      "has_image": true,
+      "recommended": false,
+      "map_ready": false
     }
   ],
-  "total_artifacts": 28,
-  "total_concepts": 8
+  "total_artifacts": 34,
+  "total_concepts": 9
 }

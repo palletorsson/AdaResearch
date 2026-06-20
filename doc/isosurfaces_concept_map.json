@@ -15,7 +15,8 @@
     "Noise becomes architecture. A 3D scala",
     "Noise evolves. The isosurface chases i",
     "Each metaball is a point radiating inf",
-    "A sphere is where distance from center"
+    "A sphere is where distance from center",
+    "· palette (unplaced)"
   ],
   "concept_meta": {
     "A 3D noise field fills invisible space": {
@@ -127,11 +128,13 @@
         "small": [],
         "medium": [],
         "large": [
-          "marchingcubes_portal_landscape"
+          "marchingcubes_portal_landscape",
+          "marchingcubes_flat_landscape",
+          "marchingcubes_voxel_noise_demo"
         ],
         "applied": []
       },
-      "count": 1
+      "count": 3
     },
     "Two views of the same algorithm. Outsi": {
       "truth": "Two views of the same algorithm. Outside: terrain stretches under open sky, stone arches rise from the ground like thresholds to nowhere — portals carved by mathematics, not erosion. Inside: the cave closes around you.",
@@ -207,14 +210,32 @@
       "id": "I12",
       "act": "Act IV",
       "tiers": {
-        "small": [],
+        "small": [
+          "dark_sphere"
+        ],
         "medium": [],
         "large": [
           "implicit_surface_modeling"
         ],
         "applied": []
       },
-      "count": 1
+      "count": 2
+    },
+    "· palette (unplaced)": {
+      "act": "Act IV",
+      "truth": "sequence artifacts available but not yet placed in a map",
+      "tiers": {
+        "small": [],
+        "medium": [
+          "portal"
+        ],
+        "large": [
+          "marchingcubes_inside_cave",
+          "marchingcubes_torus_sculpture"
+        ],
+        "applied": []
+      },
+      "count": 3
     }
   },
   "concept_distance": [
@@ -395,7 +416,8 @@
         "tier": "medium",
         "fp": 4,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "voxel_noise_demo",
@@ -403,7 +425,8 @@
         "tier": "large",
         "fp": 31,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       }
     ],
     "Two hundred and fifty": [
@@ -413,7 +436,8 @@
         "tier": "large",
         "fp": 11,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "mc_cave",
@@ -421,7 +445,8 @@
         "tier": "large",
         "fp": 2300,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       }
     ],
     "Seven sculptures stand in a row. Each ": [
@@ -431,7 +456,8 @@
         "tier": "large",
         "fp": 50,
         "has_image": true,
-        "recommended": false
+        "recommended": false,
+        "map_ready": true
       },
       {
         "lookup": "gyroid_demo",
@@ -439,7 +465,8 @@
         "tier": "large",
         "fp": 1681,
         "has_image": true,
-        "recommended": false
+        "recommended": false,
+        "map_ready": true
       },
       {
         "lookup": "mc_torus_sculpture",
@@ -447,7 +474,8 @@
         "tier": "large",
         "fp": 2500,
         "has_image": true,
-        "recommended": false
+        "recommended": false,
+        "map_ready": true
       }
     ],
     "A cube has eight corners. Each corner ": [
@@ -457,7 +485,8 @@
         "tier": "large",
         "fp": 2500,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "GyroidDemo",
@@ -465,7 +494,8 @@
         "tier": "large",
         "fp": 1681,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       }
     ],
     "Two modes of summoning form from nothi": [
@@ -475,7 +505,8 @@
         "tier": "large",
         "fp": 50,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "mc_sculpt_vr",
@@ -483,7 +514,8 @@
         "tier": "medium",
         "fp": 4,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       }
     ],
     "Two terrains. Same algorithm, differen": [
@@ -493,7 +525,8 @@
         "tier": "large",
         "fp": 1800,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "mc_overhang_landscape",
@@ -501,7 +534,8 @@
         "tier": "large",
         "fp": 2500,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "mc_terrain_demo",
@@ -509,7 +543,8 @@
         "tier": "large",
         "fp": 11,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       }
     ],
     "Marching cubes at landscape scale. A t": [
@@ -519,7 +554,28 @@
         "tier": "large",
         "fp": 2500,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
+      },
+      {
+        "lookup": "marchingcubes_flat_landscape",
+        "name": "marchingcubes_flat_landscape",
+        "registry": "",
+        "tier": "large",
+        "fp": 1800,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "marchingcubes_voxel_noise_demo",
+        "name": "Marching Cubes Voxel Noise",
+        "registry": "",
+        "tier": "large",
+        "fp": 1089,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
       }
     ],
     "Two views of the same algorithm. Outsi": [
@@ -529,7 +585,8 @@
         "tier": "large",
         "fp": 2500,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "mc_inside_cave",
@@ -537,7 +594,8 @@
         "tier": "large",
         "fp": 2500,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "queer_marching_cave",
@@ -545,7 +603,8 @@
         "tier": "large",
         "fp": 961,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       }
     ],
     "Noise becomes architecture. A 3D scala": [
@@ -555,7 +614,8 @@
         "tier": "large",
         "fp": 350,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "marchingcubes_cave",
@@ -563,7 +623,8 @@
         "tier": "large",
         "fp": 2300,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       }
     ],
     "Noise evolves. The isosurface chases i": [
@@ -573,7 +634,8 @@
         "tier": "large",
         "fp": 350,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "animated_noise_explorer",
@@ -581,7 +643,8 @@
         "tier": "large",
         "fp": 16,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       }
     ],
     "Each metaball is a point radiating inf": [
@@ -591,7 +654,8 @@
         "tier": "large",
         "fp": 441,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "metaballs",
@@ -599,7 +663,8 @@
         "tier": "large",
         "fp": 144,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "raymarched_metaballs",
@@ -607,7 +672,8 @@
         "tier": "medium",
         "fp": 4,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       },
       {
         "lookup": "nakama_metaballs",
@@ -615,7 +681,8 @@
         "tier": "medium",
         "fp": 6,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
       }
     ],
     "A sphere is where distance from center": [
@@ -625,12 +692,56 @@
         "tier": "large",
         "fp": 144,
         "has_image": true,
-        "recommended": true
+        "recommended": true,
+        "map_ready": true
+      },
+      {
+        "lookup": "dark_sphere",
+        "name": "Dark Sphere",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      }
+    ],
+    "· palette (unplaced)": [
+      {
+        "lookup": "marchingcubes_inside_cave",
+        "name": "marchingcubes_inside_cave",
+        "registry": "",
+        "tier": "large",
+        "fp": 2500,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "marchingcubes_torus_sculpture",
+        "name": "marchingcubes_torus_sculpture",
+        "registry": "",
+        "tier": "large",
+        "fp": 2500,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "portal",
+        "name": "Portal",
+        "registry": "",
+        "tier": "medium",
+        "fp": 3,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
       }
     ]
   },
-  "total": 27,
-  "total_concepts": 12,
+  "total": 33,
+  "total_concepts": 13,
   "recommended_total": 24,
-  "map_ready_total": 24
+  "map_ready_total": 24,
+  "palette_total": 6
 }

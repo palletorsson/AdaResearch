@@ -29,11 +29,12 @@
     "10 PRINT / generative grid",
     "Random art / scatter",
     "Particle randomness",
-    "Seeded growth / DNA -> form"
+    "Seeded growth / DNA -> form",
+    "· palette (unplaced)"
   ],
   "concept_meta": {
     "Uniform random / RNG": {
-      "count": 13,
+      "count": 14,
       "map_ready": 13,
       "has_image": 13,
       "best": "lottery_drum",
@@ -46,7 +47,8 @@
           "randompoints",
           "randompoints_gaussian",
           "randompoint",
-          "spawn_randomcubes"
+          "spawn_randomcubes",
+          "random_object_spawner"
         ],
         "medium": [
           "2d_in_3d_randomness_vis",
@@ -91,7 +93,7 @@
       "missing_tiers": []
     },
     "Random walk": {
-      "count": 11,
+      "count": 12,
       "map_ready": 11,
       "has_image": 11,
       "best": "random_walk_bench",
@@ -106,7 +108,8 @@
           "living_paper_random_walk"
         ],
         "medium": [
-          "random_walk_bench"
+          "random_walk_bench",
+          "profile_random_walk"
         ],
         "large": [
           "crystal_random_walk_demo",
@@ -229,7 +232,7 @@
       "missing_tiers": []
     },
     "Perlin noise": {
-      "count": 10,
+      "count": 13,
       "map_ready": 10,
       "has_image": 10,
       "best": "perlin_bench",
@@ -242,7 +245,10 @@
           "living_paper_perlin"
         ],
         "medium": [
-          "perlin_bench"
+          "perlin_bench",
+          "living_paper_noise_octaves",
+          "profile_noise",
+          "profile_noise_octaves"
         ],
         "large": [
           "perlin_noise_terrain",
@@ -491,7 +497,7 @@
       "missing_tiers": []
     },
     "10 PRINT / generative grid": {
-      "count": 5,
+      "count": 7,
       "map_ready": 5,
       "has_image": 5,
       "best": "ten_print_bench",
@@ -500,10 +506,12 @@
       "thin": false,
       "tiers": {
         "small": [
-          "ten_print_toy"
+          "ten_print_toy",
+          "grid_substrate_runner"
         ],
         "medium": [
-          "ten_print_bench"
+          "ten_print_bench",
+          "grid3d"
         ],
         "large": [
           "ten_print_maze_3d",
@@ -595,9 +603,50 @@
         ]
       },
       "missing_tiers": []
+    },
+    "· palette (unplaced)": {
+      "act": "Act IV",
+      "truth": "sequence artifacts available but not yet placed in a map",
+      "tiers": {
+        "small": [
+          "dark_sphere",
+          "origami_droideka"
+        ],
+        "medium": [
+          "RotateGridCubes",
+          "armadillo_eggling",
+          "bar_array",
+          "kaleidocycle_enemy",
+          "kresling_spire",
+          "living_paper_brownian",
+          "living_paper_dla",
+          "living_paper_self_avoiding",
+          "living_paper_voronoi",
+          "mesh_grammar_barnacle",
+          "mesh_grammar_nodule_sphere",
+          "mesh_grammar_spike_ball",
+          "miura_crawler",
+          "pickup_cube_placer",
+          "plane_manipulator",
+          "profile",
+          "profile_brownian",
+          "r_c",
+          "reaction_diffusion_intro",
+          "scissor_stalker",
+          "walkingsphere"
+        ],
+        "large": [
+          "hazards_demo",
+          "mushrooms",
+          "nature_system_demo",
+          "pipe_dream"
+        ],
+        "applied": []
+      },
+      "count": 27
     }
   },
-  "total": 164,
+  "total": 198,
   "map_ready_total": 161,
   "image_total": 164,
   "empty_slots": 0,
@@ -745,6 +794,16 @@
         "score": 6,
         "fp": 1,
         "tier": "small"
+      },
+      {
+        "lookup": "random_object_spawner",
+        "name": "Random Object Spawner",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
       }
     ],
     "Coin / dice / discrete chance": [
@@ -925,6 +984,16 @@
         "score": 3,
         "fp": 9,
         "tier": "large"
+      },
+      {
+        "lookup": "profile_random_walk",
+        "name": "Profile — Random Walk (1D)",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
       }
     ],
     "Probability distribution": [
@@ -1342,6 +1411,36 @@
         "score": 4,
         "fp": 9,
         "tier": "large"
+      },
+      {
+        "lookup": "living_paper_noise_octaves",
+        "name": "living_paper_noise_octaves",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "profile_noise",
+        "name": "Profile — 1D Noise",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "profile_noise_octaves",
+        "name": "Profile — Noise Octaves",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
       }
     ],
     "Simplex / Worley / value noise": [
@@ -2207,6 +2306,26 @@
         "score": 8,
         "fp": 9,
         "tier": "large"
+      },
+      {
+        "lookup": "grid3d",
+        "name": "Grid3D Substrate",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "grid_substrate_runner",
+        "name": "Grid Substrate Runner",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
       }
     ],
     "Random art / scatter": [
@@ -2445,6 +2564,280 @@
         "fp": 9,
         "tier": "large"
       }
+    ],
+    "· palette (unplaced)": [
+      {
+        "lookup": "RotateGridCubes",
+        "name": "RotateGridCubes",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "armadillo_eggling",
+        "name": "armadillo_eggling",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "bar_array",
+        "name": "BarArray Substrate",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "dark_sphere",
+        "name": "Dark Sphere",
+        "registry": "",
+        "tier": "small",
+        "fp": 1,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "hazards_demo",
+        "name": "Hazards Demo",
+        "registry": "",
+        "tier": "large",
+        "fp": 256,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "kaleidocycle_enemy",
+        "name": "kaleidocycle_enemy",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "kresling_spire",
+        "name": "kresling_spire",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "living_paper_brownian",
+        "name": "living_paper_brownian",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "living_paper_dla",
+        "name": "living_paper_dla",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "living_paper_self_avoiding",
+        "name": "living_paper_self_avoiding",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "living_paper_voronoi",
+        "name": "living_paper_voronoi",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "mesh_grammar_barnacle",
+        "name": "MeshGrammar — Barnacle Sphere",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "mesh_grammar_nodule_sphere",
+        "name": "MeshGrammar — Nodule Sphere",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "mesh_grammar_spike_ball",
+        "name": "MeshGrammar — Spike Ball",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "miura_crawler",
+        "name": "miura_crawler",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "mushrooms",
+        "name": "Mushrooms",
+        "registry": "",
+        "tier": "large",
+        "fp": 121,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "nature_system_demo",
+        "name": "Nature System Demo",
+        "registry": "",
+        "tier": "large",
+        "fp": 42,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "origami_droideka",
+        "name": "origami_droideka",
+        "registry": "",
+        "tier": "small",
+        "fp": 2,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "pickup_cube_placer",
+        "name": "pickup_cube_placer",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "pipe_dream",
+        "name": "pipe_dream",
+        "registry": "",
+        "tier": "large",
+        "fp": 15,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "plane_manipulator",
+        "name": "plane_manipulator",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "profile",
+        "name": "Profile Substrate",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "profile_brownian",
+        "name": "Profile — Brownian Bridge",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "r_c",
+        "name": "r_c",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "reaction_diffusion_intro",
+        "name": "Reaction-Diffusion Intro",
+        "registry": "",
+        "tier": "medium",
+        "fp": 6,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "scissor_stalker",
+        "name": "scissor_stalker",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      },
+      {
+        "lookup": "walkingsphere",
+        "name": "walkingsphere",
+        "registry": "",
+        "tier": "medium",
+        "fp": 4,
+        "has_image": true,
+        "recommended": false,
+        "map_ready": false
+      }
     ]
-  }
+  },
+  "total_concepts": 21,
+  "palette_total": 37
 }

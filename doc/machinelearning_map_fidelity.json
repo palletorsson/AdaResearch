@@ -9,6 +9,450 @@
   ],
   "maps": [
     {
+      "name": "Gallery_MachineLearning",
+      "score": 0.163,
+      "tag": "partial",
+      "grid": [
+        11,
+        24
+      ],
+      "n_concepts": 16,
+      "n_artifacts": 37,
+      "arts": [
+        {
+          "co": 18,
+          "col": 2,
+          "row": 2,
+          "lk": "9_1_ga_shakespeare_vr",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 18,
+          "col": 4,
+          "row": 2,
+          "lk": "9_2_smart_rockets_basic_vr",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 18,
+          "col": 6,
+          "row": 2,
+          "lk": "9_4_interactive_selection_vr",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 18,
+          "col": 8,
+          "row": 2,
+          "lk": "9_6_ga_shakespeare_annotated_vr",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 18,
+          "col": 2,
+          "row": 4,
+          "lk": "adaboost",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 0,
+          "col": 4,
+          "row": 4,
+          "lk": "attention_mechanisms",
+          "ai": 0,
+          "t": "l"
+        },
+        {
+          "co": 18,
+          "col": 6,
+          "row": 4,
+          "lk": "axiom_garden",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 2,
+          "col": 8,
+          "row": 4,
+          "lk": "clustering_algorithms",
+          "ai": 0,
+          "t": "l"
+        },
+        {
+          "co": 18,
+          "col": 2,
+          "row": 6,
+          "lk": "computer_vision",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 18,
+          "col": 4,
+          "row": 6,
+          "lk": "decision_boundary_viewer",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 4,
+          "col": 6,
+          "row": 6,
+          "lk": "dimensionality_reduction",
+          "ai": 0,
+          "t": "l"
+        },
+        {
+          "co": 18,
+          "col": 8,
+          "row": 6,
+          "lk": "ensemble_methods",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 5,
+          "col": 2,
+          "row": 8,
+          "lk": "evolved_creatures_v2",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 5,
+          "col": 4,
+          "row": 8,
+          "lk": "evolving_creatures_ea",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 7,
+          "col": 6,
+          "row": 8,
+          "lk": "explainable_ai",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 18,
+          "col": 8,
+          "row": 8,
+          "lk": "feature_engineering",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 8,
+          "col": 2,
+          "row": 10,
+          "lk": "fine_tuning",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 9,
+          "col": 4,
+          "row": 10,
+          "lk": "gans",
+          "ai": 2,
+          "t": "l"
+        },
+        {
+          "co": 18,
+          "col": 6,
+          "row": 10,
+          "lk": "genetic_algorithm",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 18,
+          "col": 8,
+          "row": 10,
+          "lk": "gradient_descent",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 18,
+          "col": 2,
+          "row": 12,
+          "lk": "gradient_descent_landscape",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 18,
+          "col": 4,
+          "row": 12,
+          "lk": "kmeans_simple",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 10,
+          "col": 6,
+          "row": 12,
+          "lk": "lstms",
+          "ai": 2,
+          "t": "l"
+        },
+        {
+          "co": 3,
+          "col": 8,
+          "row": 12,
+          "lk": "neural_networks",
+          "ai": 0,
+          "t": "l"
+        },
+        {
+          "co": 18,
+          "col": 2,
+          "row": 14,
+          "lk": "nlp",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 1,
+          "col": 4,
+          "row": 14,
+          "lk": "optimization_algorithms",
+          "ai": 0,
+          "t": "l"
+        },
+        {
+          "co": 18,
+          "col": 6,
+          "row": 14,
+          "lk": "perceptron_playground",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 12,
+          "col": 8,
+          "row": 14,
+          "lk": "random_forest",
+          "ai": 2,
+          "t": "l"
+        },
+        {
+          "co": 13,
+          "col": 2,
+          "row": 16,
+          "lk": "recommendation_systems",
+          "ai": 2,
+          "t": "l"
+        },
+        {
+          "co": 15,
+          "col": 4,
+          "row": 16,
+          "lk": "reinforcement_learning",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 18,
+          "col": 6,
+          "row": 16,
+          "lk": "shape_learner_2d",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 18,
+          "col": 8,
+          "row": 16,
+          "lk": "shape_learner_3d",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 0,
+          "col": 2,
+          "row": 18,
+          "lk": "spotlight_attention",
+          "ai": 0,
+          "t": "l"
+        },
+        {
+          "co": 0,
+          "col": 4,
+          "row": 18,
+          "lk": "switchboard_attention",
+          "ai": 0,
+          "t": "m"
+        },
+        {
+          "co": 18,
+          "col": 6,
+          "row": 18,
+          "lk": "time_series_analysis",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 16,
+          "col": 8,
+          "row": 18,
+          "lk": "transformers",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 17,
+          "col": 2,
+          "row": 20,
+          "lk": "vaes",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "ML_Neural_Networks",
+      "score": -0.5,
+      "tag": "uncurated",
+      "grid": [
+        5,
+        14
+      ],
+      "n_concepts": 3,
+      "n_artifacts": 3,
+      "arts": [
+        {
+          "co": 11,
+          "col": 1,
+          "row": 1,
+          "lk": "neural_networks_vr",
+          "ai": 2,
+          "t": "l"
+        },
+        {
+          "co": 3,
+          "col": 2,
+          "row": 5,
+          "lk": "neural_network_visualization",
+          "ai": 0,
+          "t": "l"
+        },
+        {
+          "co": 18,
+          "col": 1,
+          "row": 10,
+          "lk": "learn_world_stacked",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "ML_Synthesis",
+      "score": -0.5,
+      "tag": "uncurated",
+      "grid": [
+        10,
+        10
+      ],
+      "n_concepts": 3,
+      "n_artifacts": 3,
+      "arts": [
+        {
+          "co": 15,
+          "col": 7,
+          "row": 1,
+          "lk": "joint_learn_walk",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 7,
+          "col": 5,
+          "row": 5,
+          "lk": "explainable_ai_xai_vr",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 18,
+          "col": 0,
+          "row": 9,
+          "lk": "anomaly_detection",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "ML_Evolution",
+      "score": -1.0,
+      "tag": "uncurated",
+      "grid": [
+        12,
+        10
+      ],
+      "n_concepts": 3,
+      "n_artifacts": 6,
+      "arts": [
+        {
+          "co": 5,
+          "col": 3,
+          "row": 1,
+          "lk": "evolved_creatures",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 6,
+          "col": 10,
+          "row": 2,
+          "lk": "evolvingflowers",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 18,
+          "col": 1,
+          "row": 4,
+          "lk": "9_3_smart_rockets_vr",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 18,
+          "col": 5,
+          "row": 5,
+          "lk": "non_teleological_evolution",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 5,
+          "col": 1,
+          "row": 6,
+          "lk": "9_5_evolving_bloops_vr",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 5,
+          "col": 3,
+          "row": 7,
+          "lk": "gradient_descent_visualization",
+          "ai": 1,
+          "t": "l"
+        }
+      ]
+    },
+    {
       "name": "ComputationalGeometry_Convex_Hull_Algorithms",
       "score": null,
       "tag": "sparse",
@@ -404,6 +848,90 @@
           "lk": "gradient_descent_visualization",
           "ai": 1,
           "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Gallery_Commons_1",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        20
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 18,
+          "col": 4,
+          "row": 6,
+          "lk": "backpropagation_flow",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Gallery_Commons_2",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        20
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 18,
+          "col": 4,
+          "row": 10,
+          "lk": "latent_space_walk",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Gallery_Commons_3",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        20
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 18,
+          "col": 2,
+          "row": 2,
+          "lk": "overfitting_demo",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Gallery_LivingPaper",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        18
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 18,
+          "col": 2,
+          "row": 8,
+          "lk": "living_paper_kmeans",
+          "ai": 3,
+          "t": "m"
         }
       ]
     },
@@ -947,38 +1475,38 @@
       ]
     },
     {
-      "name": "ML_Evolution",
+      "name": "ML_Classification",
       "score": null,
       "tag": "sparse",
       "grid": [
-        12,
-        10
+        10,
+        8
       ],
       "n_concepts": 2,
       "n_artifacts": 3,
       "arts": [
         {
-          "co": 5,
-          "col": 3,
+          "co": 2,
+          "col": 1,
           "row": 1,
-          "lk": "evolved_creatures",
-          "ai": 1,
+          "lk": "enhanced_kmeans",
+          "ai": 0,
           "t": "l"
         },
         {
-          "co": 6,
-          "col": 10,
+          "co": 12,
+          "col": 4,
           "row": 2,
-          "lk": "evolvingflowers",
-          "ai": 1,
+          "lk": "svm_visualization",
+          "ai": 2,
           "t": "l"
         },
         {
-          "co": 5,
-          "col": 3,
-          "row": 7,
-          "lk": "gradient_descent_visualization",
-          "ai": 1,
+          "co": 12,
+          "col": 8,
+          "row": 3,
+          "lk": "random_forest_visualization",
+          "ai": 2,
           "t": "l"
         }
       ]
@@ -1012,8 +1540,8 @@
         9,
         10
       ],
-      "n_concepts": 1,
-      "n_artifacts": 1,
+      "n_concepts": 2,
+      "n_artifacts": 3,
       "arts": [
         {
           "co": 5,
@@ -1022,27 +1550,22 @@
           "lk": "gradient_descent_visualization",
           "ai": 1,
           "t": "l"
-        }
-      ]
-    },
-    {
-      "name": "ML_Neural_Networks",
-      "score": null,
-      "tag": "sparse",
-      "grid": [
-        5,
-        14
-      ],
-      "n_concepts": 1,
-      "n_artifacts": 1,
-      "arts": [
+        },
         {
-          "co": 11,
-          "col": 1,
-          "row": 1,
-          "lk": "neural_networks_vr",
-          "ai": 2,
+          "co": 18,
+          "col": 4,
+          "row": 4,
+          "lk": "pca_visualization",
+          "ai": 3,
           "t": "l"
+        },
+        {
+          "co": 18,
+          "col": 5,
+          "row": 7,
+          "lk": "loss_function_comparator",
+          "ai": 3,
+          "t": "s"
         }
       ]
     },
@@ -1100,27 +1623,6 @@
           "row": 6,
           "lk": "transformers_vr",
           "ai": 2,
-          "t": "l"
-        }
-      ]
-    },
-    {
-      "name": "ML_Synthesis",
-      "score": null,
-      "tag": "sparse",
-      "grid": [
-        10,
-        10
-      ],
-      "n_concepts": 1,
-      "n_artifacts": 1,
-      "arts": [
-        {
-          "co": 7,
-          "col": 5,
-          "row": 5,
-          "lk": "explainable_ai_xai_vr",
-          "ai": 1,
           "t": "l"
         }
       ]
@@ -1273,5 +1775,5 @@
       ]
     }
   ],
-  "total_maps": 56
+  "total_maps": 62
 }

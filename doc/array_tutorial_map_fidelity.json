@@ -9,6 +9,221 @@
   ],
   "maps": [
     {
+      "name": "Tutorial_2D_Build",
+      "score": 0.866,
+      "tag": "curated",
+      "grid": [
+        8,
+        23
+      ],
+      "n_concepts": 3,
+      "n_artifacts": 8,
+      "arts": [
+        {
+          "co": 0,
+          "col": 1,
+          "row": 1,
+          "lk": "pick_up_cube",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 4,
+          "col": 2,
+          "row": 3,
+          "lk": "row_3_x",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 4,
+          "col": 6,
+          "row": 5,
+          "lk": "column_3_z",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 2,
+          "col": 3,
+          "row": 7,
+          "lk": "dark_sphere",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 4,
+          "col": 2,
+          "row": 11,
+          "lk": "grid_2d_4x4",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 4,
+          "col": 3,
+          "row": 17,
+          "lk": "pulsar_visualizer",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 4,
+          "col": 1,
+          "row": 21,
+          "lk": "gridagent",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 4,
+          "col": 7,
+          "row": 22,
+          "lk": "xyz_coordinates",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Tutorial_2D_Color",
+      "score": 0.866,
+      "tag": "curated",
+      "grid": [
+        7,
+        7
+      ],
+      "n_concepts": 3,
+      "n_artifacts": 10,
+      "arts": [
+        {
+          "co": 4,
+          "col": 2,
+          "row": 0,
+          "lk": "xyz_coordinates",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 2,
+          "col": 3,
+          "row": 1,
+          "lk": "dark_sphere",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 0,
+          "col": 2,
+          "row": 2,
+          "lk": "pick_up_cube",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 0,
+          "col": 3,
+          "row": 2,
+          "lk": "pick_up_cube",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 0,
+          "col": 4,
+          "row": 2,
+          "lk": "pick_up_cube",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 0,
+          "col": 2,
+          "row": 3,
+          "lk": "pick_up_cube",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 0,
+          "col": 4,
+          "row": 3,
+          "lk": "pick_up_cube",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 0,
+          "col": 2,
+          "row": 4,
+          "lk": "pick_up_cube",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 0,
+          "col": 3,
+          "row": 4,
+          "lk": "pick_up_cube",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 0,
+          "col": 4,
+          "row": 4,
+          "lk": "pick_up_cube",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Tutorial_Single",
+      "score": 0.866,
+      "tag": "curated",
+      "grid": [
+        4,
+        3
+      ],
+      "n_concepts": 3,
+      "n_artifacts": 4,
+      "arts": [
+        {
+          "co": 2,
+          "col": 3,
+          "row": 0,
+          "lk": "science_screen",
+          "ai": 2,
+          "t": "m"
+        },
+        {
+          "co": 0,
+          "col": 1,
+          "row": 1,
+          "lk": "pick_up_cube",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 2,
+          "col": 0,
+          "row": 2,
+          "lk": "dark_sphere",
+          "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 4,
+          "col": 2,
+          "row": 2,
+          "lk": "xyz_coordinates",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
       "name": "Accumulation_Area",
       "score": null,
       "tag": "sparse",
@@ -1981,9 +2196,25 @@
         15,
         35
       ],
-      "n_concepts": 1,
-      "n_artifacts": 1,
+      "n_concepts": 2,
+      "n_artifacts": 3,
       "arts": [
+        {
+          "co": 4,
+          "col": 5,
+          "row": 2,
+          "lk": "primitive_assembler",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 4,
+          "col": 8,
+          "row": 4,
+          "lk": "primitive_combo_puzzle",
+          "ai": 3,
+          "t": "m"
+        },
         {
           "co": 2,
           "col": 1,
@@ -2102,8 +2333,8 @@
         11,
         17
       ],
-      "n_concepts": 1,
-      "n_artifacts": 1,
+      "n_concepts": 2,
+      "n_artifacts": 2,
       "arts": [
         {
           "co": 2,
@@ -2112,6 +2343,14 @@
           "lk": "dark_sphere",
           "ai": 2,
           "t": "s"
+        },
+        {
+          "co": 4,
+          "col": 3,
+          "row": 8,
+          "lk": "pattern_mill",
+          "ai": 3,
+          "t": "m"
         }
       ]
     },
@@ -2569,6 +2808,27 @@
           "row": 7,
           "lk": "pattern_tile_mirror",
           "ai": 2,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Disposition_Test_Rooms",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        14,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 4,
+          "col": 4,
+          "row": 5,
+          "lk": "pattern_tile_puzzle",
+          "ai": 3,
           "t": "m"
         }
       ]
@@ -3333,6 +3593,106 @@
       ]
     },
     {
+      "name": "Gallery_Commons_1",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        20
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 4,
+          "col": 2,
+          "row": 10,
+          "lk": "circular_buffer",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Gallery_Commons_2",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        20
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 4,
+          "col": 4,
+          "row": 8,
+          "lk": "index_map_puzzle",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 4,
+          "col": 6,
+          "row": 12,
+          "lk": "matrix_multiply_visual",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Gallery_Commons_3",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        20
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 4,
+          "col": 2,
+          "row": 10,
+          "lk": "sparse_array_demo",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Gallery_Shaders",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 4,
+          "col": 4,
+          "row": 8,
+          "lk": "wall_cove",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 4,
+          "col": 6,
+          "row": 8,
+          "lk": "wall_pattern_colorizer",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    },
+    {
       "name": "Geometric_1",
       "score": null,
       "tag": "sparse",
@@ -3370,6 +3730,154 @@
           "row": 1,
           "lk": "science_screen",
           "ai": 2,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "gridagent_puzzle01_copy",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        9
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 4,
+          "col": 4,
+          "row": 4,
+          "lk": "gridagent",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "gridagent_puzzle02_translate",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        9
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 4,
+          "col": 5,
+          "row": 4,
+          "lk": "gridagent",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "gridagent_puzzle03_rotate",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        11
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 4,
+          "col": 5,
+          "row": 5,
+          "lk": "gridagent",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Hazards_Zoo_2",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        15,
+        11
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 9,
+      "arts": [
+        {
+          "co": 4,
+          "col": 1,
+          "row": 7,
+          "lk": "gridagent",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 4,
+          "col": 3,
+          "row": 7,
+          "lk": "gridagent",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 4,
+          "col": 5,
+          "row": 7,
+          "lk": "gridagent",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 4,
+          "col": 7,
+          "row": 7,
+          "lk": "gridagent",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 4,
+          "col": 1,
+          "row": 8,
+          "lk": "gridagent",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 4,
+          "col": 3,
+          "row": 8,
+          "lk": "gridagent",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 4,
+          "col": 5,
+          "row": 8,
+          "lk": "gridagent",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 4,
+          "col": 7,
+          "row": 8,
+          "lk": "gridagent",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 4,
+          "col": 9,
+          "row": 8,
+          "lk": "gridagent",
+          "ai": 3,
           "t": "m"
         }
       ]
@@ -3413,6 +3921,35 @@
           "lk": "science_screen",
           "ai": 2,
           "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Kernel_Demo2",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 4,
+          "col": 0,
+          "row": 0,
+          "lk": "column_3_z",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 4,
+          "col": 2,
+          "row": 0,
+          "lk": "grid_2d_4x4",
+          "ai": 3,
+          "t": "l"
         }
       ]
     },
@@ -3546,6 +4083,48 @@
           "row": 0,
           "lk": "science_screen",
           "ai": 2,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Mosaic_Pattern_Maker",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        5,
+        5
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 4,
+          "col": 3,
+          "row": 1,
+          "lk": "pattern_tile_puzzle",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "Mosaic_WFC_Reconstruction",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        5,
+        4
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 4,
+          "col": 3,
+          "row": 1,
+          "lk": "pattern_tile_puzzle",
+          "ai": 3,
           "t": "m"
         }
       ]
@@ -4150,6 +4729,205 @@
       ]
     },
     {
+      "name": "Path_Block_01",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 14,
+      "arts": [
+        {
+          "co": 4,
+          "col": 1,
+          "row": 0,
+          "lk": "path_watchdog",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 4,
+          "col": 3,
+          "row": 3,
+          "lk": "path_game_controller",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 4,
+          "col": 0,
+          "row": 6,
+          "lk": "path_cube",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 4,
+          "col": 1,
+          "row": 6,
+          "lk": "path_cube",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 4,
+          "col": 2,
+          "row": 6,
+          "lk": "path_cube",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 4,
+          "col": 3,
+          "row": 6,
+          "lk": "path_cube",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 4,
+          "col": 4,
+          "row": 6,
+          "lk": "path_cube",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 4,
+          "col": 5,
+          "row": 6,
+          "lk": "path_cube",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 4,
+          "col": 6,
+          "row": 6,
+          "lk": "path_cube",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 4,
+          "col": 7,
+          "row": 6,
+          "lk": "path_cube",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 4,
+          "col": 8,
+          "row": 6,
+          "lk": "path_cube",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 4,
+          "col": 9,
+          "row": 6,
+          "lk": "path_wedge",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 4,
+          "col": 10,
+          "row": 6,
+          "lk": "path_cube",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 4,
+          "col": 11,
+          "row": 6,
+          "lk": "path_cube",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Path_Block_02",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        10
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 4,
+          "col": 1,
+          "row": 0,
+          "lk": "path_watchdog",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 4,
+          "col": 5,
+          "row": 5,
+          "lk": "path_builder_foe",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Pattern_Foundry",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        24,
+        26
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 4,
+      "arts": [
+        {
+          "co": 4,
+          "col": 11,
+          "row": 2,
+          "lk": "pattern_machine_c",
+          "ai": 3,
+          "t": "l"
+        },
+        {
+          "co": 4,
+          "col": 2,
+          "row": 12,
+          "lk": "pattern_machine_a",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 4,
+          "col": 21,
+          "row": 14,
+          "lk": "pattern_machine_b",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 4,
+          "col": 11,
+          "row": 23,
+          "lk": "pattern_machine_d",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    },
+    {
       "name": "Pattern_Generation_One",
       "score": null,
       "tag": "sparse",
@@ -4262,9 +5040,17 @@
         12,
         10
       ],
-      "n_concepts": 1,
-      "n_artifacts": 5,
+      "n_concepts": 2,
+      "n_artifacts": 7,
       "arts": [
+        {
+          "co": 4,
+          "col": 0,
+          "row": 0,
+          "lk": "pattern_tile_puzzle",
+          "ai": 3,
+          "t": "m"
+        },
         {
           "co": 2,
           "col": 2,
@@ -4298,6 +5084,14 @@
           "t": "m"
         },
         {
+          "co": 4,
+          "col": 6,
+          "row": 1,
+          "lk": "array_carpet",
+          "ai": 3,
+          "t": "m"
+        },
+        {
           "co": 2,
           "col": 6,
           "row": 2,
@@ -4325,6 +5119,27 @@
           "lk": "pattern_tunnel_machine",
           "ai": 2,
           "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Pattern_Walls_Pearl",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        40,
+        40
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 4,
+          "col": 6,
+          "row": 32,
+          "lk": "pattern_tile_puzzle",
+          "ai": 3,
+          "t": "m"
         }
       ]
     },
@@ -4957,6 +5772,35 @@
           "row": 0,
           "lk": "dark_sphere",
           "ai": 2,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Primitives_Polythedra",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        7,
+        11
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 4,
+          "col": 0,
+          "row": 3,
+          "lk": "path_watchdog",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 4,
+          "col": 1,
+          "row": 3,
+          "lk": "path_game_controller",
+          "ai": 3,
           "t": "s"
         }
       ]
@@ -6637,6 +7481,174 @@
       ]
     },
     {
+      "name": "SoftBodies_Playground_of_Joy",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        11
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 4,
+          "col": 1,
+          "row": 7,
+          "lk": "gridagent",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "SoftBodies_Playground_of_Joy_HumanoidWalker",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        11
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 4,
+          "col": 1,
+          "row": 7,
+          "lk": "gridagent",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "SoftBodies_Playground_of_Joy_Hybrid",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        11
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 4,
+          "col": 4,
+          "row": 7,
+          "lk": "gridagent",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "SoftBodies_Playground_of_Joy_p1",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        11
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 4,
+          "col": 2,
+          "row": 1,
+          "lk": "gridagent",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "SoftBodies_Playground_of_Joy_p2",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        11
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 4,
+          "col": 2,
+          "row": 1,
+          "lk": "gridagent",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "SoftBodies_Playground_of_Joy_p3",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        11
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 4,
+          "col": 2,
+          "row": 1,
+          "lk": "gridagent",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "SoftBodies_Playground_of_Joy_Placed",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        11
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 4,
+          "col": 1,
+          "row": 7,
+          "lk": "gridagent",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "SoftBodies_Playground_of_Joy_SimulatedAnnealing",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        11
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 4,
+          "col": 6,
+          "row": 9,
+          "lk": "gridagent",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    },
+    {
       "name": "SoftBodies_Soft_Body_Deformation",
       "score": null,
       "tag": "sparse",
@@ -6763,6 +7775,48 @@
       ]
     },
     {
+      "name": "test_gridagent",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        9,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 4,
+          "col": 4,
+          "row": 4,
+          "lk": "gridagent",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    },
+    {
+      "name": "test_gridagent_algogun",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        11,
+        14
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 4,
+          "col": 5,
+          "row": 5,
+          "lk": "gridagent",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    },
+    {
       "name": "Test_Panel_Bridge",
       "score": null,
       "tag": "sparse",
@@ -6862,8 +7916,8 @@
         9,
         16
       ],
-      "n_concepts": 1,
-      "n_artifacts": 1,
+      "n_concepts": 2,
+      "n_artifacts": 2,
       "arts": [
         {
           "co": 2,
@@ -6872,6 +7926,14 @@
           "lk": "dark_sphere",
           "ai": 2,
           "t": "s"
+        },
+        {
+          "co": 4,
+          "col": 7,
+          "row": 6,
+          "lk": "pattern_tile_puzzle",
+          "ai": 3,
+          "t": "m"
         }
       ]
     },
@@ -7158,129 +8220,23 @@
         6,
         8
       ],
-      "n_concepts": 1,
-      "n_artifacts": 1,
-      "arts": [
-        {
-          "co": 2,
-          "col": 2,
-          "row": 3,
-          "lk": "dark_sphere",
-          "ai": 2,
-          "t": "s"
-        }
-      ]
-    },
-    {
-      "name": "Tutorial_2D_Build",
-      "score": null,
-      "tag": "sparse",
-      "grid": [
-        8,
-        23
-      ],
       "n_concepts": 2,
       "n_artifacts": 2,
       "arts": [
         {
-          "co": 0,
+          "co": 4,
           "col": 1,
           "row": 1,
-          "lk": "pick_up_cube",
-          "ai": 0,
-          "t": "s"
+          "lk": "grid_2d_4x4",
+          "ai": 3,
+          "t": "l"
         },
         {
           "co": 2,
-          "col": 3,
-          "row": 7,
-          "lk": "dark_sphere",
-          "ai": 2,
-          "t": "s"
-        }
-      ]
-    },
-    {
-      "name": "Tutorial_2D_Color",
-      "score": null,
-      "tag": "sparse",
-      "grid": [
-        7,
-        7
-      ],
-      "n_concepts": 2,
-      "n_artifacts": 9,
-      "arts": [
-        {
-          "co": 2,
-          "col": 3,
-          "row": 1,
-          "lk": "dark_sphere",
-          "ai": 2,
-          "t": "s"
-        },
-        {
-          "co": 0,
-          "col": 2,
-          "row": 2,
-          "lk": "pick_up_cube",
-          "ai": 0,
-          "t": "s"
-        },
-        {
-          "co": 0,
-          "col": 3,
-          "row": 2,
-          "lk": "pick_up_cube",
-          "ai": 0,
-          "t": "s"
-        },
-        {
-          "co": 0,
-          "col": 4,
-          "row": 2,
-          "lk": "pick_up_cube",
-          "ai": 0,
-          "t": "s"
-        },
-        {
-          "co": 0,
           "col": 2,
           "row": 3,
-          "lk": "pick_up_cube",
-          "ai": 0,
-          "t": "s"
-        },
-        {
-          "co": 0,
-          "col": 4,
-          "row": 3,
-          "lk": "pick_up_cube",
-          "ai": 0,
-          "t": "s"
-        },
-        {
-          "co": 0,
-          "col": 2,
-          "row": 4,
-          "lk": "pick_up_cube",
-          "ai": 0,
-          "t": "s"
-        },
-        {
-          "co": 0,
-          "col": 3,
-          "row": 4,
-          "lk": "pick_up_cube",
-          "ai": 0,
-          "t": "s"
-        },
-        {
-          "co": 0,
-          "col": 4,
-          "row": 4,
-          "lk": "pick_up_cube",
-          "ai": 0,
+          "lk": "dark_sphere",
+          "ai": 2,
           "t": "s"
         }
       ]
@@ -7293,15 +8249,44 @@
         7,
         8
       ],
-      "n_concepts": 1,
-      "n_artifacts": 1,
+      "n_concepts": 2,
+      "n_artifacts": 2,
       "arts": [
+        {
+          "co": 4,
+          "col": 1,
+          "row": 2,
+          "lk": "grid_3d_4x4x4",
+          "ai": 3,
+          "t": "l"
+        },
         {
           "co": 2,
           "col": 2,
           "row": 3,
           "lk": "dark_sphere",
           "ai": 2,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Tutorial_App",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        8,
+        20
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 4,
+          "col": 3,
+          "row": 12,
+          "lk": "xyz_coordinates",
+          "ai": 3,
           "t": "s"
         }
       ]
@@ -7314,15 +8299,31 @@
         8,
         3
       ],
-      "n_concepts": 1,
-      "n_artifacts": 1,
+      "n_concepts": 2,
+      "n_artifacts": 3,
       "arts": [
+        {
+          "co": 4,
+          "col": 2,
+          "row": 1,
+          "lk": "row_3_x",
+          "ai": 3,
+          "t": "m"
+        },
         {
           "co": 2,
           "col": 3,
           "row": 1,
           "lk": "dark_sphere",
           "ai": 2,
+          "t": "s"
+        },
+        {
+          "co": 4,
+          "col": 6,
+          "row": 2,
+          "lk": "xyz_coordinates",
+          "ai": 3,
           "t": "s"
         }
       ]
@@ -7335,9 +8336,17 @@
         18,
         17
       ],
-      "n_concepts": 1,
-      "n_artifacts": 1,
+      "n_concepts": 2,
+      "n_artifacts": 2,
       "arts": [
+        {
+          "co": 4,
+          "col": 4,
+          "row": 1,
+          "lk": "step_sequencer",
+          "ai": 3,
+          "t": "m"
+        },
         {
           "co": 2,
           "col": 4,
@@ -7377,8 +8386,8 @@
         10,
         13
       ],
-      "n_concepts": 1,
-      "n_artifacts": 7,
+      "n_concepts": 2,
+      "n_artifacts": 10,
       "arts": [
         {
           "co": 2,
@@ -7386,6 +8395,14 @@
           "row": 2,
           "lk": "grid_model",
           "ai": 2,
+          "t": "m"
+        },
+        {
+          "co": 4,
+          "col": 7,
+          "row": 3,
+          "lk": "pattern_studio_plate",
+          "ai": 3,
           "t": "m"
         },
         {
@@ -7429,12 +8446,28 @@
           "t": "m"
         },
         {
+          "co": 4,
+          "col": 5,
+          "row": 7,
+          "lk": "pattern_tile_puzzle",
+          "ai": 3,
+          "t": "m"
+        },
+        {
           "co": 2,
           "col": 7,
           "row": 8,
           "lk": "panel_bridge_loom",
           "ai": 2,
           "t": "s"
+        },
+        {
+          "co": 4,
+          "col": 3,
+          "row": 9,
+          "lk": "script_runner",
+          "ai": 3,
+          "t": "m"
         }
       ]
     },
@@ -7446,9 +8479,17 @@
         7,
         9
       ],
-      "n_concepts": 1,
-      "n_artifacts": 1,
+      "n_concepts": 2,
+      "n_artifacts": 3,
       "arts": [
+        {
+          "co": 4,
+          "col": 1,
+          "row": 2,
+          "lk": "column_3_z",
+          "ai": 3,
+          "t": "m"
+        },
         {
           "co": 2,
           "col": 2,
@@ -7456,42 +8497,13 @@
           "lk": "dark_sphere",
           "ai": 2,
           "t": "s"
-        }
-      ]
-    },
-    {
-      "name": "Tutorial_Single",
-      "score": null,
-      "tag": "sparse",
-      "grid": [
-        4,
-        3
-      ],
-      "n_concepts": 2,
-      "n_artifacts": 3,
-      "arts": [
-        {
-          "co": 2,
-          "col": 3,
-          "row": 0,
-          "lk": "science_screen",
-          "ai": 2,
-          "t": "m"
         },
         {
-          "co": 0,
-          "col": 1,
-          "row": 1,
-          "lk": "pick_up_cube",
-          "ai": 0,
-          "t": "s"
-        },
-        {
-          "co": 2,
-          "col": 0,
-          "row": 2,
-          "lk": "dark_sphere",
-          "ai": 2,
+          "co": 4,
+          "col": 2,
+          "row": 7,
+          "lk": "xyz_coordinates",
+          "ai": 3,
           "t": "s"
         }
       ]
@@ -7929,6 +8941,27 @@
           "lk": "dark_sphere",
           "ai": 2,
           "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "VFM_01_Foundations",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        22,
+        16
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 4,
+          "col": 21,
+          "row": 8,
+          "lk": "script_runner",
+          "ai": 3,
+          "t": "m"
         }
       ]
     },
@@ -9714,6 +10747,72 @@
       ]
     },
     {
+      "name": "Zone_ArchiveofMachines",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 4,
+      "arts": [
+        {
+          "co": 4,
+          "col": 2,
+          "row": 2,
+          "lk": "pattern_machine_a",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 4,
+          "col": 4,
+          "row": 2,
+          "lk": "pattern_loom",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 4,
+          "col": 2,
+          "row": 6,
+          "lk": "pattern_mill",
+          "ai": 3,
+          "t": "m"
+        },
+        {
+          "co": 4,
+          "col": 4,
+          "row": 6,
+          "lk": "pattern_machine_c",
+          "ai": 3,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Zone_TemporalStorage",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 4,
+          "col": 2,
+          "row": 2,
+          "lk": "sparse_array_demo",
+          "ai": 3,
+          "t": "m"
+        }
+      ]
+    },
+    {
       "name": "_Example_Branch",
       "score": null,
       "tag": "sparse",
@@ -9777,5 +10876,5 @@
       ]
     }
   ],
-  "total_maps": 384
+  "total_maps": 415
 }

@@ -9,8 +9,119 @@
   ],
   "maps": [
     {
+      "name": "Accumulation_Area",
+      "score": -0.5,
+      "tag": "uncurated",
+      "grid": [
+        10,
+        11
+      ],
+      "n_concepts": 3,
+      "n_artifacts": 3,
+      "arts": [
+        {
+          "co": 4,
+          "col": 2,
+          "row": 5,
+          "lk": "code_display",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 3,
+          "col": 6,
+          "row": 5,
+          "lk": "science_screen",
+          "ai": 2,
+          "t": "m"
+        },
+        {
+          "co": 5,
+          "col": 4,
+          "row": 7,
+          "lk": "integral_area",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Change_Reconciliation",
+      "score": -0.5,
+      "tag": "uncurated",
+      "grid": [
+        10,
+        11
+      ],
+      "n_concepts": 3,
+      "n_artifacts": 3,
+      "arts": [
+        {
+          "co": 4,
+          "col": 2,
+          "row": 5,
+          "lk": "code_display",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 3,
+          "col": 6,
+          "row": 5,
+          "lk": "science_screen",
+          "ai": 2,
+          "t": "m"
+        },
+        {
+          "co": 2,
+          "col": 4,
+          "row": 7,
+          "lk": "ftc_bridge",
+          "ai": 1,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "VFM_Velocity",
+      "score": -0.5,
+      "tag": "uncurated",
+      "grid": [
+        10,
+        10
+      ],
+      "n_concepts": 3,
+      "n_artifacts": 3,
+      "arts": [
+        {
+          "co": 3,
+          "col": 4,
+          "row": 2,
+          "lk": "science_screen",
+          "ai": 2,
+          "t": "m"
+        },
+        {
+          "co": 4,
+          "col": 3,
+          "row": 5,
+          "lk": "velocity_arrow",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 1,
+          "col": 6,
+          "row": 5,
+          "lk": "slope_tangent_demo",
+          "ai": 0,
+          "t": "s"
+        }
+      ]
+    },
+    {
       "name": "Change_Intro",
-      "score": -0.866,
+      "score": 0.0,
       "tag": "uncurated",
       "grid": [
         10,
@@ -54,105 +165,31 @@
       ]
     },
     {
-      "name": "Change_Reconciliation",
-      "score": -0.866,
-      "tag": "uncurated",
-      "grid": [
-        10,
-        11
-      ],
-      "n_concepts": 3,
-      "n_artifacts": 3,
-      "arts": [
-        {
-          "co": 4,
-          "col": 2,
-          "row": 5,
-          "lk": "code_display",
-          "ai": 3,
-          "t": "s"
-        },
-        {
-          "co": 3,
-          "col": 6,
-          "row": 5,
-          "lk": "science_screen",
-          "ai": 2,
-          "t": "m"
-        },
-        {
-          "co": 2,
-          "col": 4,
-          "row": 7,
-          "lk": "ftc_bridge",
-          "ai": 1,
-          "t": "s"
-        }
-      ]
-    },
-    {
-      "name": "VFM_Velocity",
-      "score": -1.0,
-      "tag": "uncurated",
-      "grid": [
-        10,
-        10
-      ],
-      "n_concepts": 3,
-      "n_artifacts": 3,
-      "arts": [
-        {
-          "co": 3,
-          "col": 4,
-          "row": 2,
-          "lk": "science_screen",
-          "ai": 2,
-          "t": "m"
-        },
-        {
-          "co": 4,
-          "col": 3,
-          "row": 5,
-          "lk": "velocity_arrow",
-          "ai": 3,
-          "t": "s"
-        },
-        {
-          "co": 1,
-          "col": 6,
-          "row": 5,
-          "lk": "slope_tangent_demo",
-          "ai": 0,
-          "t": "s"
-        }
-      ]
-    },
-    {
-      "name": "Accumulation_Area",
+      "name": "Accumulation_Riemann",
       "score": null,
       "tag": "sparse",
       "grid": [
         10,
         11
       ],
-      "n_concepts": 2,
+      "n_concepts": 1,
       "n_artifacts": 2,
       "arts": [
         {
-          "co": 4,
-          "col": 2,
+          "co": 5,
+          "col": 6,
           "row": 5,
-          "lk": "code_display",
+          "lk": "integral_area",
           "ai": 3,
           "t": "s"
         },
         {
-          "co": 3,
-          "col": 6,
-          "row": 5,
-          "lk": "science_screen",
-          "ai": 2,
-          "t": "m"
+          "co": 5,
+          "col": 4,
+          "row": 7,
+          "lk": "riemann_pump",
+          "ai": 3,
+          "t": "s"
         }
       ]
     },
@@ -1873,8 +1910,8 @@
         10,
         11
       ],
-      "n_concepts": 1,
-      "n_artifacts": 1,
+      "n_concepts": 2,
+      "n_artifacts": 2,
       "arts": [
         {
           "co": 3,
@@ -1883,6 +1920,43 @@
           "lk": "science_screen",
           "ai": 2,
           "t": "m"
+        },
+        {
+          "co": 5,
+          "col": 4,
+          "row": 7,
+          "lk": "vector_field_grid",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
+    },
+    {
+      "name": "Flow_Particle_Pulse",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        10,
+        11
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 2,
+      "arts": [
+        {
+          "co": 5,
+          "col": 2,
+          "row": 5,
+          "lk": "particle_flow_swarm",
+          "ai": 3,
+          "t": "s"
+        },
+        {
+          "co": 5,
+          "col": 4,
+          "row": 7,
+          "lk": "vector_field_grid",
+          "ai": 3,
+          "t": "s"
         }
       ]
     },
@@ -3068,8 +3142,8 @@
         10,
         10
       ],
-      "n_concepts": 1,
-      "n_artifacts": 1,
+      "n_concepts": 2,
+      "n_artifacts": 2,
       "arts": [
         {
           "co": 3,
@@ -3078,6 +3152,14 @@
           "lk": "science_screen",
           "ai": 2,
           "t": "m"
+        },
+        {
+          "co": 5,
+          "col": 2,
+          "row": 6,
+          "lk": "vector_field_grid",
+          "ai": 3,
+          "t": "s"
         }
       ]
     },
@@ -3243,7 +3325,28 @@
           "t": "m"
         }
       ]
+    },
+    {
+      "name": "Zone_TemporalStorage",
+      "score": null,
+      "tag": "sparse",
+      "grid": [
+        12,
+        12
+      ],
+      "n_concepts": 1,
+      "n_artifacts": 1,
+      "arts": [
+        {
+          "co": 5,
+          "col": 6,
+          "row": 8,
+          "lk": "vector_field_grid",
+          "ai": 3,
+          "t": "s"
+        }
+      ]
     }
   ],
-  "total_maps": 140
+  "total_maps": 143
 }

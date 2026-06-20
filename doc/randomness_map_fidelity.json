@@ -7,20 +7,37 @@
     "Act III — noise",
     "Act IV — process & measure",
     "Act V — randomness as material",
-    "Act VI — randomness as growth"
+    "Act VI — randomness as growth",
+    "Act IV"
   ],
   "maps": [
     {
       "name": "Random_Mushrooms",
-      "score": 1.0,
+      "score": 0.657,
       "tag": "curated",
       "grid": [
         12,
         13
       ],
-      "n_concepts": 3,
-      "n_artifacts": 3,
+      "n_concepts": 4,
+      "n_artifacts": 6,
       "arts": [
+        {
+          "co": 20,
+          "col": 5,
+          "row": 5,
+          "lk": "dark_sphere",
+          "ai": 6,
+          "t": "s"
+        },
+        {
+          "co": 20,
+          "col": 4,
+          "row": 6,
+          "lk": "mushrooms",
+          "ai": 6,
+          "t": "l"
+        },
         {
           "co": 17,
           "col": 5,
@@ -38,6 +55,14 @@
           "t": "s"
         },
         {
+          "co": 20,
+          "col": 6,
+          "row": 8,
+          "lk": "reaction_diffusion_intro",
+          "ai": 6,
+          "t": "m"
+        },
+        {
           "co": 0,
           "col": 5,
           "row": 12,
@@ -48,15 +73,169 @@
       ]
     },
     {
+      "name": "Randomness_10_PRINT_Algorithm",
+      "score": 0.5,
+      "tag": "curated",
+      "grid": [
+        13,
+        14
+      ],
+      "n_concepts": 3,
+      "n_artifacts": 7,
+      "arts": [
+        {
+          "co": 15,
+          "col": 1,
+          "row": 1,
+          "lk": "remove_random",
+          "ai": 4,
+          "t": "a"
+        },
+        {
+          "co": 16,
+          "col": 1,
+          "row": 2,
+          "lk": "ten_print_maze_3d",
+          "ai": 4,
+          "t": "l"
+        },
+        {
+          "co": 20,
+          "col": 2,
+          "row": 2,
+          "lk": "pickup_cube_placer",
+          "ai": 6,
+          "t": "m"
+        },
+        {
+          "co": 16,
+          "col": 11,
+          "row": 2,
+          "lk": "ten_print_maze_3d",
+          "ai": 4,
+          "t": "l"
+        },
+        {
+          "co": 20,
+          "col": 5,
+          "row": 7,
+          "lk": "dark_sphere",
+          "ai": 6,
+          "t": "s"
+        },
+        {
+          "co": 20,
+          "col": 6,
+          "row": 8,
+          "lk": "nature_system_demo",
+          "ai": 6,
+          "t": "l"
+        },
+        {
+          "co": 16,
+          "col": 1,
+          "row": 12,
+          "lk": "ten_print_maze_3d",
+          "ai": 4,
+          "t": "l"
+        }
+      ]
+    },
+    {
+      "name": "Random_Gaussian",
+      "score": 0.5,
+      "tag": "curated",
+      "grid": [
+        13,
+        22
+      ],
+      "n_concepts": 3,
+      "n_artifacts": 9,
+      "arts": [
+        {
+          "co": 4,
+          "col": 2,
+          "row": 1,
+          "lk": "GaussianBlurShader",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 4,
+          "col": 7,
+          "row": 5,
+          "lk": "GaussianPaintSplatter",
+          "ai": 1,
+          "t": "m"
+        },
+        {
+          "co": 4,
+          "col": 10,
+          "row": 7,
+          "lk": "GaussianBlurCircle",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 20,
+          "col": 6,
+          "row": 9,
+          "lk": "dark_sphere",
+          "ai": 6,
+          "t": "s"
+        },
+        {
+          "co": 4,
+          "col": 9,
+          "row": 13,
+          "lk": "random_bell_curve",
+          "ai": 1,
+          "t": "l"
+        },
+        {
+          "co": 3,
+          "col": 4,
+          "row": 17,
+          "lk": "distribution_comparator",
+          "ai": 1,
+          "t": "a"
+        },
+        {
+          "co": 4,
+          "col": 9,
+          "row": 17,
+          "lk": "gaussian_random",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 3,
+          "col": 10,
+          "row": 18,
+          "lk": "distribution_sampler",
+          "ai": 1,
+          "t": "s"
+        },
+        {
+          "co": 4,
+          "col": 7,
+          "row": 19,
+          "lk": "galton_board",
+          "ai": 1,
+          "t": "a"
+        }
+      ]
+    },
+    {
       "name": "Random_Space_Geometry",
-      "score": 0.177,
+      "score": 0.343,
       "tag": "partial",
       "grid": [
         12,
         24
       ],
-      "n_concepts": 4,
-      "n_artifacts": 5,
+      "n_concepts": 5,
+      "n_artifacts": 6,
       "arts": [
         {
           "co": 15,
@@ -64,6 +243,14 @@
           "row": 2,
           "lk": "random_transformations_geometric",
           "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 20,
+          "col": 5,
+          "row": 5,
+          "lk": "dark_sphere",
+          "ai": 6,
           "t": "s"
         },
         {
@@ -102,14 +289,14 @@
     },
     {
       "name": "Random_Definition",
-      "score": 0.165,
+      "score": 0.244,
       "tag": "partial",
       "grid": [
         5,
         21
       ],
-      "n_concepts": 5,
-      "n_artifacts": 10,
+      "n_concepts": 6,
+      "n_artifacts": 11,
       "arts": [
         {
           "co": 1,
@@ -168,6 +355,14 @@
           "t": "a"
         },
         {
+          "co": 20,
+          "col": 2,
+          "row": 12,
+          "lk": "dark_sphere",
+          "ai": 6,
+          "t": "s"
+        },
+        {
           "co": 14,
           "col": 0,
           "row": 15,
@@ -195,14 +390,14 @@
     },
     {
       "name": "Randomness_Examples_of_Randomness",
-      "score": -0.5,
+      "score": -0.232,
       "tag": "uncurated",
       "grid": [
         12,
         17
       ],
-      "n_concepts": 3,
-      "n_artifacts": 3,
+      "n_concepts": 4,
+      "n_artifacts": 5,
       "arts": [
         {
           "co": 17,
@@ -211,6 +406,22 @@
           "lk": "pollock_painting_in_3d",
           "ai": 4,
           "t": "a"
+        },
+        {
+          "co": 20,
+          "col": 5,
+          "row": 4,
+          "lk": "pipe_dream",
+          "ai": 6,
+          "t": "l"
+        },
+        {
+          "co": 20,
+          "col": 5,
+          "row": 5,
+          "lk": "dark_sphere",
+          "ai": 6,
+          "t": "s"
         },
         {
           "co": 6,
@@ -232,14 +443,14 @@
     },
     {
       "name": "Random_Space",
-      "score": -0.58,
+      "score": -0.416,
       "tag": "uncurated",
       "grid": [
         13,
         15
       ],
-      "n_concepts": 4,
-      "n_artifacts": 4,
+      "n_concepts": 5,
+      "n_artifacts": 5,
       "arts": [
         {
           "co": 9,
@@ -266,6 +477,14 @@
           "t": "l"
         },
         {
+          "co": 20,
+          "col": 5,
+          "row": 7,
+          "lk": "dark_sphere",
+          "ai": 6,
+          "t": "s"
+        },
+        {
           "co": 14,
           "col": 4,
           "row": 9,
@@ -276,60 +495,15 @@
       ]
     },
     {
-      "name": "Randomness_10_PRINT_Algorithm",
-      "score": null,
-      "tag": "sparse",
-      "grid": [
-        13,
-        14
-      ],
-      "n_concepts": 2,
-      "n_artifacts": 4,
-      "arts": [
-        {
-          "co": 15,
-          "col": 1,
-          "row": 1,
-          "lk": "remove_random",
-          "ai": 4,
-          "t": "a"
-        },
-        {
-          "co": 16,
-          "col": 1,
-          "row": 2,
-          "lk": "ten_print_maze_3d",
-          "ai": 4,
-          "t": "l"
-        },
-        {
-          "co": 16,
-          "col": 11,
-          "row": 2,
-          "lk": "ten_print_maze_3d",
-          "ai": 4,
-          "t": "l"
-        },
-        {
-          "co": 16,
-          "col": 1,
-          "row": 12,
-          "lk": "ten_print_maze_3d",
-          "ai": 4,
-          "t": "l"
-        }
-      ]
-    },
-    {
       "name": "Random_Cubes",
-      "score": null,
-      "tag": "sparse",
+      "score": -0.58,
+      "tag": "uncurated",
       "grid": [
         12,
         20
       ],
-      "n_concepts": 2,
-      "n_artifacts": 50,
+      "n_concepts": 4,
+      "n_artifacts": 53,
       "arts": [
         {
           "co": 1,
@@ -348,6 +522,30 @@
           "t": "s"
         },
         {
+          "co": 20,
+          "col": 6,
+          "row": 4,
+          "lk": "dark_sphere",
+          "ai": 6,
+          "t": "s"
+        },
+        {
+          "co": 0,
+          "col": 5,
+          "row": 6,
+          "lk": "random_object_spawner",
+          "ai": 0,
+          "t": "s"
+        },
+        {
+          "co": 0,
+          "col": 6,
+          "row": 6,
+          "lk": "random_object_spawner",
+          "ai": 0,
+          "t": "s"
+        },
+        {
           "co": 15,
           "col": 3,
           "row": 8,
@@ -734,79 +932,108 @@
       ]
     },
     {
-      "name": "Random_Gaussian",
+      "name": "Random_Rotate_Random_XYZ",
+      "score": -1.0,
+      "tag": "uncurated",
+      "grid": [
+        13,
+        16
+      ],
+      "n_concepts": 3,
+      "n_artifacts": 5,
+      "arts": [
+        {
+          "co": 15,
+          "col": 1,
+          "row": 1,
+          "lk": "Random_Rotate_Random_XYZ",
+          "ai": 4,
+          "t": "s"
+        },
+        {
+          "co": 20,
+          "col": 5,
+          "row": 8,
+          "lk": "dark_sphere",
+          "ai": 6,
+          "t": "s"
+        },
+        {
+          "co": 15,
+          "col": 5,
+          "row": 9,
+          "lk": "random_decay_multimesh",
+          "ai": 4,
+          "t": "a"
+        },
+        {
+          "co": 20,
+          "col": 6,
+          "row": 10,
+          "lk": "RotateGridCubes",
+          "ai": 6,
+          "t": "m"
+        },
+        {
+          "co": 14,
+          "col": 8,
+          "row": 10,
+          "lk": "hardware_entropy_decay",
+          "ai": 3,
+          "t": "a"
+        }
+      ]
+    },
+    {
+      "name": "Random_Game",
       "score": null,
       "tag": "sparse",
       "grid": [
         13,
-        22
+        17
       ],
-      "n_concepts": 2,
-      "n_artifacts": 8,
+      "n_concepts": 1,
+      "n_artifacts": 5,
       "arts": [
         {
-          "co": 4,
+          "co": 20,
           "col": 2,
-          "row": 1,
-          "lk": "GaussianBlurShader",
-          "ai": 1,
+          "row": 0,
+          "lk": "miura_crawler",
+          "ai": 6,
           "t": "m"
         },
         {
-          "co": 4,
-          "col": 7,
-          "row": 5,
-          "lk": "GaussianPaintSplatter",
-          "ai": 1,
+          "co": 20,
+          "col": 0,
+          "row": 2,
+          "lk": "scissor_stalker",
+          "ai": 6,
           "t": "m"
         },
         {
-          "co": 4,
-          "col": 10,
-          "row": 7,
-          "lk": "GaussianBlurCircle",
-          "ai": 1,
-          "t": "l"
-        },
-        {
-          "co": 4,
-          "col": 9,
-          "row": 13,
-          "lk": "random_bell_curve",
-          "ai": 1,
-          "t": "l"
-        },
-        {
-          "co": 3,
+          "co": 20,
           "col": 4,
-          "row": 17,
-          "lk": "distribution_comparator",
-          "ai": 1,
-          "t": "a"
+          "row": 2,
+          "lk": "kaleidocycle_enemy",
+          "ai": 6,
+          "t": "m"
         },
         {
-          "co": 4,
-          "col": 9,
-          "row": 17,
-          "lk": "gaussian_random",
-          "ai": 1,
-          "t": "s"
+          "co": 20,
+          "col": 2,
+          "row": 3,
+          "lk": "kresling_spire",
+          "ai": 6,
+          "t": "m"
         },
         {
-          "co": 3,
-          "col": 10,
-          "row": 18,
-          "lk": "distribution_sampler",
-          "ai": 1,
-          "t": "s"
-        },
-        {
-          "co": 4,
-          "col": 7,
-          "row": 19,
-          "lk": "galton_board",
-          "ai": 1,
-          "t": "a"
+          "co": 20,
+          "col": 11,
+          "row": 15,
+          "lk": "r_c",
+          "ai": 6,
+          "t": "m"
         }
       ]
     },
@@ -818,9 +1045,17 @@
         13,
         14
       ],
-      "n_concepts": 1,
-      "n_artifacts": 1,
+      "n_concepts": 2,
+      "n_artifacts": 2,
       "arts": [
+        {
+          "co": 20,
+          "col": 4,
+          "row": 5,
+          "lk": "dark_sphere",
+          "ai": 6,
+          "t": "s"
+        },
         {
           "co": 10,
           "col": 5,
@@ -839,8 +1074,8 @@
         13,
         18
       ],
-      "n_concepts": 1,
-      "n_artifacts": 1,
+      "n_concepts": 2,
+      "n_artifacts": 3,
       "arts": [
         {
           "co": 15,
@@ -849,43 +1084,22 @@
           "lk": "remove_random",
           "ai": 4,
           "t": "a"
-        }
-      ]
-    },
-    {
-      "name": "Random_Rotate_Random_XYZ",
-      "score": null,
-      "tag": "sparse",
-      "grid": [
-        13,
-        16
-      ],
-      "n_concepts": 2,
-      "n_artifacts": 3,
-      "arts": [
+        },
         {
-          "co": 15,
-          "col": 1,
-          "row": 1,
-          "lk": "Random_Rotate_Random_XYZ",
-          "ai": 4,
+          "co": 20,
+          "col": 5,
+          "row": 8,
+          "lk": "dark_sphere",
+          "ai": 6,
           "t": "s"
         },
         {
-          "co": 15,
+          "co": 20,
           "col": 5,
           "row": 9,
-          "lk": "random_decay_multimesh",
-          "ai": 4,
-          "t": "a"
-        },
-        {
-          "co": 14,
-          "col": 8,
-          "row": 10,
-          "lk": "hardware_entropy_decay",
-          "ai": 3,
-          "t": "a"
+          "lk": "hazards_demo",
+          "ai": 6,
+          "t": "l"
         }
       ]
     },
@@ -897,8 +1111,8 @@
         13,
         14
       ],
-      "n_concepts": 1,
-      "n_artifacts": 7,
+      "n_concepts": 2,
+      "n_artifacts": 8,
       "arts": [
         {
           "co": 2,
@@ -933,6 +1147,14 @@
           "t": "l"
         },
         {
+          "co": 20,
+          "col": 5,
+          "row": 7,
+          "lk": "dark_sphere",
+          "ai": 6,
+          "t": "s"
+        },
+        {
           "co": 2,
           "col": 8,
           "row": 8,
@@ -959,5 +1181,5 @@
       ]
     }
   ],
-  "total_maps": 12
+  "total_maps": 13
 }
