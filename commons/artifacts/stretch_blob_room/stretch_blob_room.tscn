@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/artifacts/stretch_blob_room/stretch_blob_room.gd" id="1"]
+
+[node name="StretchBlobRoom" type="Node3D"]
+script = ExtResource("1")

@@ -108,6 +108,22 @@ CONCEPTS = [
   ["entropy_morphogenesis", "matter_finds_shape", "soft_thesis"],
   ["thesis", "self-organise", "becoming"],
   "Entropy becoming morphology: the soft body is the project's thesis made flesh — gradient descent toward max Q, structure that persists by moving, the edge of chaos you can poke."),
+ ("Grab & stretch (native soft bodies)",
+  ["grab_jelly", "stretch_blob", "taffy_pull"],
+  ["grab", "pin", "stretch", "handle"],
+  "A real SoftBody3D pinned to grabbable handles: take hold of a corner and the jelly stretches like taffy, let go and it wobbles back. The soft body you can grab."),
+ ("Poke & dent (native soft bodies)",
+  ["poke_dough", "pressure_balloon", "poke_pillar", "squish_press"],
+  ["poke", "dent", "press", "pressure"],
+  "Its collision skin carries the player layer, so a hand or body pushing in dents it and it springs back. Pressure pushes out, the poke pushes in - strain you can feel."),
+ ("Bounce & pile (native soft bodies)",
+  ["bounce_blob", "bounce_membrane", "jelly_ball_pit", "soft_catapult"],
+  ["bounce", "trampoline", "pile", "pit", "sling"],
+  "Soft bodies that store an impact and give it back: a trampoline membrane, a pit of squishy balls you wade through, a sling that stores the throw."),
+ ("Soft pets & membranes (native)",
+  ["blob_pet", "tentacle_grab", "curtain_membrane", "soft_handshake"],
+  ["pet", "tentacle", "curtain", "handshake", "creature"],
+  "Soft bodies as beings and boundaries you touch: a pet you grab by the scruff, a boneless tentacle that follows your hand, a curtain you part, a paw that squeezes back."),
 ]
 
 APPLIED_KW = ["slicer", "placer", "mill", "trampoline", "ball_pit", "_pit", "joy_ride", "tide_pool",
@@ -121,6 +137,22 @@ def tier_of(lookup, name, fp):
     return "small"
 
 FORCE = {
+  "grab_jelly_toy": ("Grab & stretch (native soft bodies)", "small"),
+  "grab_jelly_bench": ("Grab & stretch (native soft bodies)", "medium"),
+  "stretch_blob_room": ("Grab & stretch (native soft bodies)", "large"),
+  "taffy_pull": ("Grab & stretch (native soft bodies)", "applied"),
+  "poke_dough_toy": ("Poke & dent (native soft bodies)", "small"),
+  "pressure_balloon": ("Poke & dent (native soft bodies)", "medium"),
+  "poke_pillar_room": ("Poke & dent (native soft bodies)", "large"),
+  "squish_press": ("Poke & dent (native soft bodies)", "applied"),
+  "bounce_blob_toy": ("Bounce & pile (native soft bodies)", "small"),
+  "bounce_membrane": ("Bounce & pile (native soft bodies)", "medium"),
+  "jelly_ball_pit_room": ("Bounce & pile (native soft bodies)", "large"),
+  "soft_catapult": ("Bounce & pile (native soft bodies)", "applied"),
+  "blob_pet_toy": ("Soft pets & membranes (native)", "small"),
+  "tentacle_grab_bench": ("Soft pets & membranes (native)", "medium"),
+  "curtain_membrane_room": ("Soft pets & membranes (native)", "large"),
+  "soft_handshake": ("Soft pets & membranes (native)", "applied"),
   "spring_node_toy": ("Mass-spring networks", "small"),
   "mass_spring_bench": ("Mass-spring networks", "medium"),
   "verlet_workbench": ("Verlet & the soft-body sim", "applied"),
@@ -224,7 +256,7 @@ def main():
         "Act III — cloth, jelly, flesh": ["Jelly & deformation", "Cloth physics", "Bounce & play", "Viscous & flowing"],
         "Act IV — the membrane": ["The membrane", "Breathing & the abject boundary"],
         "Act V — the soft creature": ["Origami & the Miura fold", "Folding creatures", "Tentacle & octopus", "Soft morphology"],
-        "Act VI — soft as the lambda_edge": ["Soft vs rigid (the alive middle)", "The abject as force", "Matter that finds its shape"],
+        "Act VI — soft as the lambda_edge": ["Soft vs rigid (the alive middle)", "The abject as force", "Matter that finds its shape"],        "Act VII — touch it (native SoftBody3D)": ["Grab & stretch (native soft bodies)", "Poke & dent (native soft bodies)", "Bounce & pile (native soft bodies)", "Soft pets & membranes (native)"],
     }
     concept_act = {cc: act for act, cs in ACTS.items() for cc in cs}
     meta = {}

@@ -7,7 +7,8 @@
     "Act III — cloth, jelly, flesh",
     "Act IV — the membrane",
     "Act V — the soft creature",
-    "Act VI — soft as the lambda_edge"
+    "Act VI — soft as the lambda_edge",
+    "Act VII — touch it (native SoftBody3D)"
   ],
   "concepts": [
     "Mass-spring networks",
@@ -26,7 +27,11 @@
     "Soft morphology",
     "Soft vs rigid (the alive middle)",
     "The abject as force",
-    "Matter that finds its shape"
+    "Matter that finds its shape",
+    "Grab & stretch (native soft bodies)",
+    "Poke & dent (native soft bodies)",
+    "Bounce & pile (native soft bodies)",
+    "Soft pets & membranes (native)"
   ],
   "concept_meta": {
     "Mass-spring networks": {
@@ -450,11 +455,107 @@
         ]
       },
       "missing_tiers": []
+    },
+    "Grab & stretch (native soft bodies)": {
+      "count": 4,
+      "map_ready": 4,
+      "has_image": 4,
+      "best": "grab_jelly_bench",
+      "truth": "A real SoftBody3D pinned to grabbable handles: take hold of a corner and the jelly stretches like taffy, let go and it wobbles back. The soft body you can grab.",
+      "act": "Act VII — touch it (native SoftBody3D)",
+      "thin": false,
+      "tiers": {
+        "small": [
+          "grab_jelly_toy"
+        ],
+        "medium": [
+          "grab_jelly_bench"
+        ],
+        "large": [
+          "stretch_blob_room"
+        ],
+        "applied": [
+          "taffy_pull"
+        ]
+      },
+      "missing_tiers": []
+    },
+    "Poke & dent (native soft bodies)": {
+      "count": 4,
+      "map_ready": 4,
+      "has_image": 4,
+      "best": "poke_dough_toy",
+      "truth": "Its collision skin carries the player layer, so a hand or body pushing in dents it and it springs back. Pressure pushes out, the poke pushes in - strain you can feel.",
+      "act": "Act VII — touch it (native SoftBody3D)",
+      "thin": false,
+      "tiers": {
+        "small": [
+          "poke_dough_toy"
+        ],
+        "medium": [
+          "pressure_balloon"
+        ],
+        "large": [
+          "poke_pillar_room"
+        ],
+        "applied": [
+          "squish_press"
+        ]
+      },
+      "missing_tiers": []
+    },
+    "Bounce & pile (native soft bodies)": {
+      "count": 4,
+      "map_ready": 4,
+      "has_image": 4,
+      "best": "bounce_blob_toy",
+      "truth": "Soft bodies that store an impact and give it back: a trampoline membrane, a pit of squishy balls you wade through, a sling that stores the throw.",
+      "act": "Act VII — touch it (native SoftBody3D)",
+      "thin": false,
+      "tiers": {
+        "small": [
+          "bounce_blob_toy"
+        ],
+        "medium": [
+          "bounce_membrane"
+        ],
+        "large": [
+          "jelly_ball_pit_room"
+        ],
+        "applied": [
+          "soft_catapult"
+        ]
+      },
+      "missing_tiers": []
+    },
+    "Soft pets & membranes (native)": {
+      "count": 4,
+      "map_ready": 4,
+      "has_image": 4,
+      "best": "blob_pet_toy",
+      "truth": "Soft bodies as beings and boundaries you touch: a pet you grab by the scruff, a boneless tentacle that follows your hand, a curtain you part, a paw that squeezes back.",
+      "act": "Act VII — touch it (native SoftBody3D)",
+      "thin": false,
+      "tiers": {
+        "small": [
+          "blob_pet_toy"
+        ],
+        "medium": [
+          "tentacle_grab_bench"
+        ],
+        "large": [
+          "curtain_membrane_room"
+        ],
+        "applied": [
+          "soft_handshake"
+        ]
+      },
+      "missing_tiers": []
     }
   },
-  "total": 82,
-  "map_ready_total": 82,
-  "image_total": 82,
+  "total": 98,
+  "map_ready_total": 98,
+  "image_total": 98,
   "empty_slots": 0,
   "groups": {
     "Mass-spring networks": [
@@ -1391,6 +1492,190 @@
         "score": 6,
         "fp": 9,
         "tier": "large"
+      }
+    ],
+    "Grab & stretch (native soft bodies)": [
+      {
+        "lookup": "grab_jelly_bench",
+        "name": "Grab Jelly Bench (a soft body you can take hold of)",
+        "registry": "soft_bodies.json",
+        "category": "soft_bodies",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
+      {
+        "lookup": "grab_jelly_toy",
+        "name": "Grab Jelly Toy (take it in your hand)",
+        "registry": "soft_bodies.json",
+        "category": "soft_bodies",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 2,
+        "tier": "small"
+      },
+      {
+        "lookup": "stretch_blob_room",
+        "name": "Stretch Blob Room (take hold and it follows)",
+        "registry": "soft_bodies.json",
+        "category": "soft_bodies",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 9,
+        "tier": "large"
+      },
+      {
+        "lookup": "taffy_pull",
+        "name": "Taffy Pull (it stretches between your hands)",
+        "registry": "soft_bodies.json",
+        "category": "soft_bodies",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "applied"
+      }
+    ],
+    "Poke & dent (native soft bodies)": [
+      {
+        "lookup": "poke_dough_toy",
+        "name": "Poke Dough Toy (leave a dent)",
+        "registry": "soft_bodies.json",
+        "category": "soft_bodies",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 2,
+        "tier": "small"
+      },
+      {
+        "lookup": "poke_pillar_room",
+        "name": "Poke Pillar Room (they give and return)",
+        "registry": "soft_bodies.json",
+        "category": "soft_bodies",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 9,
+        "tier": "large"
+      },
+      {
+        "lookup": "pressure_balloon",
+        "name": "Pressure Balloon (it pushes back)",
+        "registry": "soft_bodies.json",
+        "category": "soft_bodies",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
+      {
+        "lookup": "squish_press",
+        "name": "Squish Press (force in, dent out)",
+        "registry": "soft_bodies.json",
+        "category": "soft_bodies",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "applied"
+      }
+    ],
+    "Bounce & pile (native soft bodies)": [
+      {
+        "lookup": "bounce_blob_toy",
+        "name": "Bounce Blob Toy (bounces, not breaks)",
+        "registry": "soft_bodies.json",
+        "category": "soft_bodies",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 2,
+        "tier": "small"
+      },
+      {
+        "lookup": "bounce_membrane",
+        "name": "Bounce Membrane (store it, give it back)",
+        "registry": "soft_bodies.json",
+        "category": "soft_bodies",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
+      {
+        "lookup": "jelly_ball_pit_room",
+        "name": "Jelly Ball Pit Room (the pile gives)",
+        "registry": "soft_bodies.json",
+        "category": "soft_bodies",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 9,
+        "tier": "large"
+      },
+      {
+        "lookup": "soft_catapult",
+        "name": "Soft Catapult (a soft body stores the throw)",
+        "registry": "soft_bodies.json",
+        "category": "soft_bodies",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "applied"
+      }
+    ],
+    "Soft pets & membranes (native)": [
+      {
+        "lookup": "blob_pet_toy",
+        "name": "Blob Pet Toy (grab its scruff, it dangles)",
+        "registry": "soft_bodies.json",
+        "category": "soft_bodies",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 2,
+        "tier": "small"
+      },
+      {
+        "lookup": "curtain_membrane_room",
+        "name": "Curtain Membrane Room (push through, it parts)",
+        "registry": "soft_bodies.json",
+        "category": "soft_bodies",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 9,
+        "tier": "large"
+      },
+      {
+        "lookup": "soft_handshake",
+        "name": "Soft Handshake (it squeezes back)",
+        "registry": "soft_bodies.json",
+        "category": "soft_bodies",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "applied"
+      },
+      {
+        "lookup": "tentacle_grab_bench",
+        "name": "Tentacle Grab Bench (no bone, it follows)",
+        "registry": "soft_bodies.json",
+        "category": "soft_bodies",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
       }
     ]
   }

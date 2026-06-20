@@ -3503,6 +3503,742 @@
         "measured_footprint_cells": 4,
         "footprint_source": "designed"
       }
+    },
+    "grab_jelly_toy": {
+      "lookup_name": "grab_jelly_toy",
+      "scene": "res://commons/artifacts/grab_jelly_toy/grab_jelly_toy.tscn",
+      "class_name": "GrabJellyToy",
+      "name": "Grab Jelly Toy (take it in your hand)",
+      "description": "A held native SoftBody3D jelly cube with two grabbable nubs - take hold of a corner and it stretches, let go and it wobbles back.",
+      "category": "soft_bodies",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "softbodies"
+      ],
+      "tags": [
+        "soft_body",
+        "native",
+        "interactive",
+        "small"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "soft_bodies",
+        "native_softbody3d",
+        "interactive"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 2,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 2,
+        "footprint_source": "designed"
+      }
+    },
+    "grab_jelly_bench": {
+      "lookup_name": "grab_jelly_bench",
+      "scene": "res://commons/artifacts/grab_jelly_bench/grab_jelly_bench.tscn",
+      "class_name": "GrabJellyBench",
+      "name": "Grab Jelly Bench (a soft body you can take hold of)",
+      "description": "A real SoftBody3D jelly on a bench, pinned to four grabbable corner nubs - grab a corner and the jelly stretches like taffy, poke it and it dents.",
+      "category": "soft_bodies",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "softbodies"
+      ],
+      "tags": [
+        "soft_body",
+        "native",
+        "interactive",
+        "medium"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "soft_bodies",
+        "native_softbody3d",
+        "interactive"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "designed"
+      }
+    },
+    "stretch_blob_room": {
+      "lookup_name": "stretch_blob_room",
+      "scene": "res://commons/artifacts/stretch_blob_room/stretch_blob_room.tscn",
+      "class_name": "StretchBlobRoom",
+      "name": "Stretch Blob Room (take hold and it follows)",
+      "description": "A room-scale soft blob hung from grabbable handles on a frame - grab a handle and the whole blob sags and stretches toward your hand.",
+      "category": "soft_bodies",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "softbodies"
+      ],
+      "tags": [
+        "soft_body",
+        "native",
+        "interactive",
+        "large"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "soft_bodies",
+        "native_softbody3d",
+        "interactive"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 9,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 9,
+        "footprint_source": "designed"
+      }
+    },
+    "taffy_pull": {
+      "lookup_name": "taffy_pull",
+      "scene": "res://commons/artifacts/taffy_pull/taffy_pull.tscn",
+      "class_name": "TaffyPull",
+      "name": "Taffy Pull (it stretches between your hands)",
+      "description": "A soft rod pinned between two grabbable handles - pull them apart and the taffy necks and stretches thin, with a live span readout.",
+      "category": "soft_bodies",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "softbodies"
+      ],
+      "tags": [
+        "soft_body",
+        "native",
+        "interactive",
+        "applied"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "soft_bodies",
+        "native_softbody3d",
+        "interactive"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "designed"
+      }
+    },
+    "poke_dough_toy": {
+      "lookup_name": "poke_dough_toy",
+      "scene": "res://commons/artifacts/poke_dough_toy/poke_dough_toy.tscn",
+      "class_name": "PokeDoughToy",
+      "name": "Poke Dough Toy (leave a dent)",
+      "description": "A held soft dough ball - press a finger in and it dents, slowly recovering. The player layer is in its collision mask, so a hand really pushes it.",
+      "category": "soft_bodies",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "softbodies"
+      ],
+      "tags": [
+        "soft_body",
+        "native",
+        "interactive",
+        "small"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "soft_bodies",
+        "native_softbody3d",
+        "interactive"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 2,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 2,
+        "footprint_source": "designed"
+      }
+    },
+    "pressure_balloon": {
+      "lookup_name": "pressure_balloon",
+      "scene": "res://commons/artifacts/pressure_balloon/pressure_balloon.tscn",
+      "class_name": "PressureBalloon",
+      "name": "Pressure Balloon (it pushes back)",
+      "description": "An over-pressurised native SoftBody3D balloon on a knot - poke it and it dents, then bobs back taut. Pressure pushing out against your push in.",
+      "category": "soft_bodies",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "softbodies"
+      ],
+      "tags": [
+        "soft_body",
+        "native",
+        "interactive",
+        "medium"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "soft_bodies",
+        "native_softbody3d",
+        "interactive"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "designed"
+      }
+    },
+    "poke_pillar_room": {
+      "lookup_name": "poke_pillar_room",
+      "scene": "res://commons/artifacts/poke_pillar_room/poke_pillar_room.tscn",
+      "class_name": "PokePillarRoom",
+      "name": "Poke Pillar Room (they give and return)",
+      "description": "A room of tall soft pillars pinned at base and top - push through and they bend around you and spring back.",
+      "category": "soft_bodies",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "softbodies"
+      ],
+      "tags": [
+        "soft_body",
+        "native",
+        "interactive",
+        "large"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "soft_bodies",
+        "native_softbody3d",
+        "interactive"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 9,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 9,
+        "footprint_source": "designed"
+      }
+    },
+    "squish_press": {
+      "lookup_name": "squish_press",
+      "scene": "res://commons/artifacts/squish_press/squish_press.tscn",
+      "class_name": "SquishPress",
+      "name": "Squish Press (force in, dent out)",
+      "description": "A press whose plate descends onto a soft block by real collision, denting it, with a force/dent readout - strain made visible.",
+      "category": "soft_bodies",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "softbodies"
+      ],
+      "tags": [
+        "soft_body",
+        "native",
+        "interactive",
+        "applied"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "soft_bodies",
+        "native_softbody3d",
+        "interactive"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "designed"
+      }
+    },
+    "bounce_blob_toy": {
+      "lookup_name": "bounce_blob_toy",
+      "scene": "res://commons/artifacts/bounce_blob_toy/bounce_blob_toy.tscn",
+      "class_name": "BounceBlobToy",
+      "name": "Bounce Blob Toy (bounces, not breaks)",
+      "description": "A held squishy ball resting in a cupped saucer - it sits, squishes, and bounces in place instead of breaking.",
+      "category": "soft_bodies",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "softbodies"
+      ],
+      "tags": [
+        "soft_body",
+        "native",
+        "interactive",
+        "small"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "soft_bodies",
+        "native_softbody3d",
+        "interactive"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 2,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 2,
+        "footprint_source": "designed"
+      }
+    },
+    "bounce_membrane": {
+      "lookup_name": "bounce_membrane",
+      "scene": "res://commons/artifacts/bounce_membrane/bounce_membrane.tscn",
+      "class_name": "BounceMembrane",
+      "name": "Bounce Membrane (store it, give it back)",
+      "description": "A native cloth trampoline pinned at its corners with a heavier soft ball dimpling the sheet - store the impact in the springs and give it back.",
+      "category": "soft_bodies",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "softbodies"
+      ],
+      "tags": [
+        "soft_body",
+        "native",
+        "interactive",
+        "medium"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "soft_bodies",
+        "native_softbody3d",
+        "interactive"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "designed"
+      }
+    },
+    "jelly_ball_pit_room": {
+      "lookup_name": "jelly_ball_pit_room",
+      "scene": "res://commons/artifacts/jelly_ball_pit_room/jelly_ball_pit_room.tscn",
+      "class_name": "JellyBallPitRoom",
+      "name": "Jelly Ball Pit Room (the pile gives)",
+      "description": "A pit of self-colliding soft balls settling into a squishy pile you can wade through - native SoftBody3D, contained in a tray.",
+      "category": "soft_bodies",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "softbodies"
+      ],
+      "tags": [
+        "soft_body",
+        "native",
+        "interactive",
+        "large"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "soft_bodies",
+        "native_softbody3d",
+        "interactive"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 9,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 9,
+        "footprint_source": "designed"
+      }
+    },
+    "soft_catapult": {
+      "lookup_name": "soft_catapult",
+      "scene": "res://commons/artifacts/soft_catapult/soft_catapult.tscn",
+      "class_name": "SoftCatapult",
+      "name": "Soft Catapult (a soft body stores the throw)",
+      "description": "A sling whose soft membrane pocket holds a ball, pinned along its back edge to a frame - the soft body stores the throw, with a load readout.",
+      "category": "soft_bodies",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "softbodies"
+      ],
+      "tags": [
+        "soft_body",
+        "native",
+        "interactive",
+        "applied"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "soft_bodies",
+        "native_softbody3d",
+        "interactive"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "designed"
+      }
+    },
+    "blob_pet_toy": {
+      "lookup_name": "blob_pet_toy",
+      "scene": "res://commons/artifacts/blob_pet_toy/blob_pet_toy.tscn",
+      "class_name": "BlobPetToy",
+      "name": "Blob Pet Toy (grab its scruff, it dangles)",
+      "description": "A held soft creature with googly eyes and a grabbable scruff-nub - pick it up by the scruff and it dangles and wobbles.",
+      "category": "soft_bodies",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "softbodies"
+      ],
+      "tags": [
+        "soft_body",
+        "native",
+        "interactive",
+        "small"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "soft_bodies",
+        "native_softbody3d",
+        "interactive"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 2,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 2,
+        "footprint_source": "designed"
+      }
+    },
+    "tentacle_grab_bench": {
+      "lookup_name": "tentacle_grab_bench",
+      "scene": "res://commons/artifacts/tentacle_grab_bench/tentacle_grab_bench.tscn",
+      "class_name": "TentacleGrabBench",
+      "name": "Tentacle Grab Bench (no bone, it follows)",
+      "description": "A boneless soft tentacle rising from a bench, base-pinned, with a grabbable tip - grab the tip and the whole arm follows and trails.",
+      "category": "soft_bodies",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "softbodies"
+      ],
+      "tags": [
+        "soft_body",
+        "native",
+        "interactive",
+        "medium"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "soft_bodies",
+        "native_softbody3d",
+        "interactive"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "designed"
+      }
+    },
+    "curtain_membrane_room": {
+      "lookup_name": "curtain_membrane_room",
+      "scene": "res://commons/artifacts/curtain_membrane_room/curtain_membrane_room.tscn",
+      "class_name": "CurtainMembraneRoom",
+      "name": "Curtain Membrane Room (push through, it parts)",
+      "description": "A hanging native soft membrane pinned along its top bar - walk through and it parts and drapes around you, then falls back.",
+      "category": "soft_bodies",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "softbodies"
+      ],
+      "tags": [
+        "soft_body",
+        "native",
+        "interactive",
+        "large"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "soft_bodies",
+        "native_softbody3d",
+        "interactive"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 9,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 9,
+        "footprint_source": "designed"
+      }
+    },
+    "soft_handshake": {
+      "lookup_name": "soft_handshake",
+      "scene": "res://commons/artifacts/soft_handshake/soft_handshake.tscn",
+      "class_name": "SoftHandshake",
+      "name": "Soft Handshake (it squeezes back)",
+      "description": "A greeting device: a soft paw on a post with a grabbable handle - shake hands with a soft body and it gives and squeezes back, with a squeeze readout.",
+      "category": "soft_bodies",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "softbodies"
+      ],
+      "tags": [
+        "soft_body",
+        "native",
+        "interactive",
+        "applied"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "soft_bodies",
+        "native_softbody3d",
+        "interactive"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 2,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "designed"
+      }
     }
   }
 }
