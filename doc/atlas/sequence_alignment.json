@@ -7,7 +7,7 @@
       ],
       "n_maps": 5,
       "n_maps_evaluated": 5,
-      "alignment_pct": 80.0,
+      "alignment_pct": 60.0,
       "sequence_centroid_edge": "I",
       "centroid_in_target": true,
       "maps": [
@@ -15,9 +15,9 @@
           "map": "BodyProg_Hands",
           "n_artifacts_total": 2,
           "n_artifacts_in_atlas": 1,
-          "centroid_edge": "I",
-          "centroid_sim": 0.236,
-          "aligned": true,
+          "centroid_edge": "H",
+          "centroid_sim": 0.247,
+          "aligned": false,
           "declared_edges": [
             "E",
             "I"
@@ -25,8 +25,8 @@
           "artifact_edges": [
             {
               "id": "mirror_artifact",
-              "edge": "I",
-              "in_target": true
+              "edge": "H",
+              "in_target": false
             }
           ]
         },
@@ -35,7 +35,7 @@
           "n_artifacts_total": 1,
           "n_artifacts_in_atlas": 1,
           "centroid_edge": "H",
-          "centroid_sim": 0.169,
+          "centroid_sim": 0.14,
           "aligned": false,
           "declared_edges": [
             "E",
@@ -54,7 +54,7 @@
           "n_artifacts_total": 1,
           "n_artifacts_in_atlas": 1,
           "centroid_edge": "I",
-          "centroid_sim": 0.164,
+          "centroid_sim": 0.141,
           "aligned": true,
           "declared_edges": [
             "E",
@@ -73,7 +73,7 @@
           "n_artifacts_total": 1,
           "n_artifacts_in_atlas": 1,
           "centroid_edge": "I",
-          "centroid_sim": 0.127,
+          "centroid_sim": 0.095,
           "aligned": true,
           "declared_edges": [
             "E",
@@ -92,7 +92,7 @@
           "n_artifacts_total": 1,
           "n_artifacts_in_atlas": 1,
           "centroid_edge": "I",
-          "centroid_sim": 0.189,
+          "centroid_sim": 0.182,
           "aligned": true,
           "declared_edges": [
             "E",
@@ -127,7 +127,7 @@
           "n_artifacts_total": 5,
           "n_artifacts_in_atlas": 5,
           "centroid_edge": "M",
-          "centroid_sim": 0.142,
+          "centroid_sim": 0.165,
           "aligned": true,
           "declared_edges": [
             "D",
@@ -144,7 +144,7 @@
             },
             {
               "id": "bias_from_inside",
-              "edge": "M",
+              "edge": "L",
               "in_target": true
             },
             {
@@ -173,7 +173,7 @@
         "I",
         "K"
       ],
-      "n_maps": 9,
+      "n_maps": 8,
       "n_maps_evaluated": 8,
       "alignment_pct": 75.0,
       "sequence_centroid_edge": "D",
@@ -184,7 +184,7 @@
           "n_artifacts_total": 4,
           "n_artifacts_in_atlas": 3,
           "centroid_edge": "D",
-          "centroid_sim": 0.086,
+          "centroid_sim": 0.108,
           "aligned": true,
           "declared_edges": [
             "A",
@@ -205,7 +205,7 @@
             },
             {
               "id": "parallel_lines",
-              "edge": "L",
+              "edge": "G",
               "in_target": false
             }
           ]
@@ -215,7 +215,7 @@
           "n_artifacts_total": 5,
           "n_artifacts_in_atlas": 5,
           "centroid_edge": "K",
-          "centroid_sim": 0.064,
+          "centroid_sim": 0.101,
           "aligned": true,
           "declared_edges": [
             "A",
@@ -253,11 +253,11 @@
         },
         {
           "map": "Russell_Paradox",
-          "n_artifacts_total": 1,
-          "n_artifacts_in_atlas": 1,
-          "centroid_edge": "D",
-          "centroid_sim": 0.091,
-          "aligned": true,
+          "n_artifacts_total": 4,
+          "n_artifacts_in_atlas": 4,
+          "centroid_edge": "B",
+          "centroid_sim": 0.121,
+          "aligned": false,
           "declared_edges": [
             "A",
             "D",
@@ -266,19 +266,34 @@
           ],
           "artifact_edges": [
             {
+              "id": "barber_paradox",
+              "edge": "B",
+              "in_target": false
+            },
+            {
+              "id": "liar_loop",
+              "edge": "B",
+              "in_target": false
+            },
+            {
               "id": "russell_set_box",
               "edge": "D",
               "in_target": true
+            },
+            {
+              "id": "self_membership_set",
+              "edge": "B",
+              "in_target": false
             }
           ]
         },
         {
           "map": "Godel_Incompleteness",
-          "n_artifacts_total": 1,
-          "n_artifacts_in_atlas": 1,
-          "centroid_edge": "D",
-          "centroid_sim": 0.096,
-          "aligned": true,
+          "n_artifacts_total": 4,
+          "n_artifacts_in_atlas": 4,
+          "centroid_edge": "B",
+          "centroid_sim": 0.132,
+          "aligned": false,
           "declared_edges": [
             "A",
             "D",
@@ -287,18 +302,33 @@
           ],
           "artifact_edges": [
             {
+              "id": "godel_sentence_machine",
+              "edge": "B",
+              "in_target": false
+            },
+            {
               "id": "godel_statement_plaque",
               "edge": "D",
               "in_target": true
+            },
+            {
+              "id": "incompleteness_tower",
+              "edge": "B",
+              "in_target": false
+            },
+            {
+              "id": "provability_sorter",
+              "edge": "B",
+              "in_target": false
             }
           ]
         },
         {
           "map": "Escher_Impossible",
-          "n_artifacts_total": 3,
-          "n_artifacts_in_atlas": 3,
+          "n_artifacts_total": 4,
+          "n_artifacts_in_atlas": 4,
           "centroid_edge": "D",
-          "centroid_sim": 0.099,
+          "centroid_sim": 0.083,
           "aligned": true,
           "declared_edges": [
             "A",
@@ -310,6 +340,11 @@
             {
               "id": "escher_staircase",
               "edge": "D",
+              "in_target": true
+            },
+            {
+              "id": "impossible_trident",
+              "edge": "A",
               "in_target": true
             },
             {
@@ -326,11 +361,11 @@
         },
         {
           "map": "Brouwer_Intuitionism",
-          "n_artifacts_total": 3,
-          "n_artifacts_in_atlas": 3,
-          "centroid_edge": "F",
-          "centroid_sim": 0.101,
-          "aligned": false,
+          "n_artifacts_total": 4,
+          "n_artifacts_in_atlas": 4,
+          "centroid_edge": "D",
+          "centroid_sim": 0.138,
+          "aligned": true,
           "declared_edges": [
             "A",
             "D",
@@ -340,27 +375,32 @@
           "artifact_edges": [
             {
               "id": "brouwer_choice_sequence",
-              "edge": "F",
-              "in_target": false
+              "edge": "D",
+              "in_target": true
             },
             {
               "id": "constructive_proof",
-              "edge": "F",
-              "in_target": false
+              "edge": "D",
+              "in_target": true
+            },
+            {
+              "id": "constructive_staircase",
+              "edge": "A",
+              "in_target": true
             },
             {
               "id": "excluded_middle_demo",
-              "edge": "K",
+              "edge": "D",
               "in_target": true
             }
           ]
         },
         {
           "map": "Florensky_Paraconsistent",
-          "n_artifacts_total": 3,
-          "n_artifacts_in_atlas": 3,
-          "centroid_edge": "I",
-          "centroid_sim": 0.065,
+          "n_artifacts_total": 4,
+          "n_artifacts_in_atlas": 4,
+          "centroid_edge": "D",
+          "centroid_sim": 0.103,
           "aligned": true,
           "declared_edges": [
             "A",
@@ -369,6 +409,11 @@
             "K"
           ],
           "artifact_edges": [
+            {
+              "id": "both_true_gate",
+              "edge": "A",
+              "in_target": true
+            },
             {
               "id": "florensky_sphere",
               "edge": "D",
@@ -390,9 +435,9 @@
           "map": "Crisis_Synthesis",
           "n_artifacts_total": 8,
           "n_artifacts_in_atlas": 8,
-          "centroid_edge": "L",
-          "centroid_sim": 0.191,
-          "aligned": false,
+          "centroid_edge": "I",
+          "centroid_sim": 0.165,
+          "aligned": true,
           "declared_edges": [
             "A",
             "D",
@@ -402,7 +447,7 @@
           "artifact_edges": [
             {
               "id": "bifurcation_diagram",
-              "edge": "I",
+              "edge": "A",
               "in_target": true
             },
             {
@@ -427,13 +472,13 @@
             },
             {
               "id": "phi_slider",
-              "edge": "L",
-              "in_target": false
+              "edge": "I",
+              "in_target": true
             },
             {
               "id": "qfep_formula_3d",
-              "edge": "L",
-              "in_target": false
+              "edge": "I",
+              "in_target": true
             },
             {
               "id": "russell_set_box",
@@ -441,18 +486,6 @@
               "in_target": true
             }
           ]
-        },
-        {
-          "map": "Chamber_Foundations",
-          "artifacts": [
-            "catalyst_target",
-            "proximity_spawner#type",
-            "science_screen"
-          ],
-          "in_atlas": 0,
-          "centroid_edge": null,
-          "aligned": false,
-          "note": "no artifacts found in atlas embeddings"
         }
       ]
     },
@@ -472,7 +505,7 @@
           "n_artifacts_total": 3,
           "n_artifacts_in_atlas": 2,
           "centroid_edge": "H",
-          "centroid_sim": 0.315,
+          "centroid_sim": 0.272,
           "aligned": true,
           "declared_edges": [
             "E",
@@ -481,8 +514,8 @@
           "artifact_edges": [
             {
               "id": "DoublePendulum",
-              "edge": "E",
-              "in_target": true
+              "edge": "M",
+              "in_target": false
             },
             {
               "id": "PendulumPin",
@@ -496,7 +529,7 @@
           "n_artifacts_total": 2,
           "n_artifacts_in_atlas": 2,
           "centroid_edge": "H",
-          "centroid_sim": 0.284,
+          "centroid_sim": 0.224,
           "aligned": true,
           "declared_edges": [
             "E",
@@ -520,7 +553,7 @@
           "n_artifacts_total": 2,
           "n_artifacts_in_atlas": 2,
           "centroid_edge": "H",
-          "centroid_sim": 0.264,
+          "centroid_sim": 0.223,
           "aligned": true,
           "declared_edges": [
             "E",
@@ -544,7 +577,7 @@
           "n_artifacts_total": 2,
           "n_artifacts_in_atlas": 2,
           "centroid_edge": "H",
-          "centroid_sim": 0.301,
+          "centroid_sim": 0.257,
           "aligned": true,
           "declared_edges": [
             "E",
@@ -568,7 +601,7 @@
           "n_artifacts_total": 2,
           "n_artifacts_in_atlas": 2,
           "centroid_edge": "H",
-          "centroid_sim": 0.277,
+          "centroid_sim": 0.212,
           "aligned": true,
           "declared_edges": [
             "E",
@@ -592,7 +625,7 @@
           "n_artifacts_total": 2,
           "n_artifacts_in_atlas": 2,
           "centroid_edge": "H",
-          "centroid_sim": 0.236,
+          "centroid_sim": 0.188,
           "aligned": true,
           "declared_edges": [
             "E",
@@ -606,8 +639,8 @@
             },
             {
               "id": "IKArm",
-              "edge": "H",
-              "in_target": true
+              "edge": "C",
+              "in_target": false
             }
           ]
         }
@@ -619,7 +652,7 @@
         "J",
         "L"
       ],
-      "n_maps": 9,
+      "n_maps": 8,
       "n_maps_evaluated": 8,
       "alignment_pct": 100.0,
       "sequence_centroid_edge": "J",
@@ -630,7 +663,7 @@
           "n_artifacts_total": 7,
           "n_artifacts_in_atlas": 6,
           "centroid_edge": "C",
-          "centroid_sim": 0.21,
+          "centroid_sim": 0.192,
           "aligned": true,
           "declared_edges": [
             "C",
@@ -675,7 +708,7 @@
           "n_artifacts_total": 3,
           "n_artifacts_in_atlas": 3,
           "centroid_edge": "C",
-          "centroid_sim": 0.335,
+          "centroid_sim": 0.336,
           "aligned": true,
           "declared_edges": [
             "C",
@@ -705,7 +738,7 @@
           "n_artifacts_total": 3,
           "n_artifacts_in_atlas": 3,
           "centroid_edge": "J",
-          "centroid_sim": 0.147,
+          "centroid_sim": 0.155,
           "aligned": true,
           "declared_edges": [
             "C",
@@ -734,8 +767,8 @@
           "map": "ML_Neural_Networks",
           "n_artifacts_total": 3,
           "n_artifacts_in_atlas": 3,
-          "centroid_edge": "C",
-          "centroid_sim": 0.084,
+          "centroid_edge": "J",
+          "centroid_sim": 0.121,
           "aligned": true,
           "declared_edges": [
             "C",
@@ -750,13 +783,13 @@
             },
             {
               "id": "neural_network_visualization",
-              "edge": "C",
+              "edge": "J",
               "in_target": true
             },
             {
               "id": "neural_networks_vr",
-              "edge": "A",
-              "in_target": false
+              "edge": "J",
+              "in_target": true
             }
           ]
         },
@@ -765,7 +798,7 @@
           "n_artifacts_total": 2,
           "n_artifacts_in_atlas": 2,
           "centroid_edge": "J",
-          "centroid_sim": 0.072,
+          "centroid_sim": 0.061,
           "aligned": true,
           "declared_edges": [
             "C",
@@ -790,7 +823,7 @@
           "n_artifacts_total": 2,
           "n_artifacts_in_atlas": 2,
           "centroid_edge": "J",
-          "centroid_sim": 0.101,
+          "centroid_sim": 0.072,
           "aligned": true,
           "declared_edges": [
             "C",
@@ -800,8 +833,8 @@
           "artifact_edges": [
             {
               "id": "lstms_vr",
-              "edge": "A",
-              "in_target": false
+              "edge": "J",
+              "in_target": true
             },
             {
               "id": "transformers_vr",
@@ -815,7 +848,7 @@
           "n_artifacts_total": 1,
           "n_artifacts_in_atlas": 1,
           "centroid_edge": "J",
-          "centroid_sim": 0.083,
+          "centroid_sim": 0.072,
           "aligned": true,
           "declared_edges": [
             "C",
@@ -835,7 +868,7 @@
           "n_artifacts_total": 3,
           "n_artifacts_in_atlas": 3,
           "centroid_edge": "J",
-          "centroid_sim": 0.143,
+          "centroid_sim": 0.152,
           "aligned": true,
           "declared_edges": [
             "C",
@@ -859,18 +892,6 @@
               "in_target": true
             }
           ]
-        },
-        {
-          "map": "Chamber_ML",
-          "artifacts": [
-            "catalyst_target",
-            "proximity_spawner#type",
-            "science_screen"
-          ],
-          "in_atlas": 0,
-          "centroid_edge": null,
-          "aligned": false,
-          "note": "no artifacts found in atlas embeddings"
         }
       ]
     },
@@ -892,8 +913,8 @@
           "map": "CriticalAlgorithms_Algorithmic_Bias_Visualization",
           "n_artifacts_total": 3,
           "n_artifacts_in_atlas": 2,
-          "centroid_edge": "M",
-          "centroid_sim": 0.232,
+          "centroid_edge": "L",
+          "centroid_sim": 0.217,
           "aligned": true,
           "declared_edges": [
             "D",
@@ -905,12 +926,12 @@
           "artifact_edges": [
             {
               "id": "bias_from_inside",
-              "edge": "M",
+              "edge": "L",
               "in_target": true
             },
             {
               "id": "bias_visualizer",
-              "edge": "M",
+              "edge": "L",
               "in_target": true
             }
           ]
@@ -920,7 +941,7 @@
           "n_artifacts_total": 3,
           "n_artifacts_in_atlas": 2,
           "centroid_edge": "L",
-          "centroid_sim": 0.203,
+          "centroid_sim": 0.191,
           "aligned": true,
           "declared_edges": [
             "D",
@@ -932,7 +953,7 @@
           "artifact_edges": [
             {
               "id": "bias_from_inside",
-              "edge": "M",
+              "edge": "L",
               "in_target": true
             },
             {
@@ -946,8 +967,8 @@
           "map": "SpeculativeComputation_Paraconsistent_Engineering",
           "n_artifacts_total": 4,
           "n_artifacts_in_atlas": 3,
-          "centroid_edge": "I",
-          "centroid_sim": 0.065,
+          "centroid_edge": "D",
+          "centroid_sim": 0.075,
           "aligned": true,
           "declared_edges": [
             "D",
@@ -978,8 +999,8 @@
           "map": "SpeculativeComputation_Situated_Computation",
           "n_artifacts_total": 1,
           "n_artifacts_in_atlas": 1,
-          "centroid_edge": "B",
-          "centroid_sim": 0.375,
+          "centroid_edge": "K",
+          "centroid_sim": 0.392,
           "aligned": false,
           "declared_edges": [
             "D",
@@ -991,7 +1012,7 @@
           "artifact_edges": [
             {
               "id": "situated_readout",
-              "edge": "B",
+              "edge": "K",
               "in_target": false
             }
           ]
@@ -1001,7 +1022,7 @@
           "n_artifacts_total": 1,
           "n_artifacts_in_atlas": 1,
           "centroid_edge": "M",
-          "centroid_sim": 0.503,
+          "centroid_sim": 0.53,
           "aligned": true,
           "declared_edges": [
             "D",
@@ -1022,8 +1043,8 @@
           "map": "SpeculativeComputation_Rhizome_Network",
           "n_artifacts_total": 1,
           "n_artifacts_in_atlas": 1,
-          "centroid_edge": "C",
-          "centroid_sim": 0.015,
+          "centroid_edge": "A",
+          "centroid_sim": 0.056,
           "aligned": false,
           "declared_edges": [
             "D",
@@ -1035,7 +1056,7 @@
           "artifact_edges": [
             {
               "id": "rhizome_cave_demo",
-              "edge": "C",
+              "edge": "A",
               "in_target": false
             }
           ]
@@ -1045,7 +1066,7 @@
           "n_artifacts_total": 1,
           "n_artifacts_in_atlas": 1,
           "centroid_edge": "G",
-          "centroid_sim": 0.069,
+          "centroid_sim": 0.032,
           "aligned": false,
           "declared_edges": [
             "D",
@@ -1067,7 +1088,7 @@
           "n_artifacts_total": 4,
           "n_artifacts_in_atlas": 3,
           "centroid_edge": "L",
-          "centroid_sim": 0.262,
+          "centroid_sim": 0.24,
           "aligned": true,
           "declared_edges": [
             "D",
@@ -1079,7 +1100,7 @@
           "artifact_edges": [
             {
               "id": "bias_from_inside",
-              "edge": "M",
+              "edge": "L",
               "in_target": true
             },
             {
@@ -1089,7 +1110,7 @@
             },
             {
               "id": "qfep_formula_3d",
-              "edge": "L",
+              "edge": "I",
               "in_target": true
             }
           ]
@@ -1103,18 +1124,18 @@
         "I",
         "L"
       ],
-      "n_maps": 9,
+      "n_maps": 8,
       "n_maps_evaluated": 8,
-      "alignment_pct": 87.5,
-      "sequence_centroid_edge": "L",
+      "alignment_pct": 100.0,
+      "sequence_centroid_edge": "I",
       "centroid_in_target": true,
       "maps": [
         {
           "map": "QFEP_Introduction",
-          "n_artifacts_total": 8,
-          "n_artifacts_in_atlas": 6,
-          "centroid_edge": "L",
-          "centroid_sim": 0.195,
+          "n_artifacts_total": 9,
+          "n_artifacts_in_atlas": 7,
+          "centroid_edge": "I",
+          "centroid_sim": 0.182,
           "aligned": true,
           "declared_edges": [
             "F",
@@ -1145,22 +1166,27 @@
             },
             {
               "id": "phi_slider",
-              "edge": "L",
+              "edge": "I",
+              "in_target": true
+            },
+            {
+              "id": "qfep_balance_workbench",
+              "edge": "F",
               "in_target": true
             },
             {
               "id": "qfep_formula_3d",
-              "edge": "L",
+              "edge": "I",
               "in_target": true
             }
           ]
         },
         {
           "map": "QFEP_F_Term",
-          "n_artifacts_total": 7,
-          "n_artifacts_in_atlas": 5,
-          "centroid_edge": "L",
-          "centroid_sim": 0.206,
+          "n_artifacts_total": 8,
+          "n_artifacts_in_atlas": 6,
+          "centroid_edge": "I",
+          "centroid_sim": 0.249,
           "aligned": true,
           "declared_edges": [
             "F",
@@ -1185,23 +1211,28 @@
               "in_target": true
             },
             {
+              "id": "shannon_workbench",
+              "edge": "I",
+              "in_target": true
+            },
+            {
               "id": "snap_cube_puzzle",
-              "edge": "C",
-              "in_target": false
+              "edge": "L",
+              "in_target": true
             },
             {
               "id": "snap_tetra_puzzle",
-              "edge": "H",
+              "edge": "L",
               "in_target": true
             }
           ]
         },
         {
           "map": "QFEP_E_Term",
-          "n_artifacts_total": 4,
-          "n_artifacts_in_atlas": 3,
-          "centroid_edge": "L",
-          "centroid_sim": 0.158,
+          "n_artifacts_total": 7,
+          "n_artifacts_in_atlas": 6,
+          "centroid_edge": "I",
+          "centroid_sim": 0.243,
           "aligned": true,
           "declared_edges": [
             "F",
@@ -1211,13 +1242,28 @@
           ],
           "artifact_edges": [
             {
+              "id": "entropy_fan",
+              "edge": "I",
+              "in_target": true
+            },
+            {
               "id": "lambda_slider",
+              "edge": "I",
+              "in_target": true
+            },
+            {
+              "id": "microstate_counter",
               "edge": "I",
               "in_target": true
             },
             {
               "id": "particle_chaos",
               "edge": "L",
+              "in_target": true
+            },
+            {
+              "id": "possibility_space_cloud",
+              "edge": "I",
               "in_target": true
             },
             {
@@ -1232,7 +1278,7 @@
           "n_artifacts_total": 7,
           "n_artifacts_in_atlas": 7,
           "centroid_edge": "L",
-          "centroid_sim": 0.152,
+          "centroid_sim": 0.138,
           "aligned": true,
           "declared_edges": [
             "F",
@@ -1268,8 +1314,8 @@
             },
             {
               "id": "edge_particles",
-              "edge": "M",
-              "in_target": false
+              "edge": "L",
+              "in_target": true
             },
             {
               "id": "ordered_grid",
@@ -1283,7 +1329,7 @@
           "n_artifacts_total": 6,
           "n_artifacts_in_atlas": 5,
           "centroid_edge": "L",
-          "centroid_sim": 0.157,
+          "centroid_sim": 0.116,
           "aligned": true,
           "declared_edges": [
             "F",
@@ -1299,7 +1345,7 @@
             },
             {
               "id": "phi_slider",
-              "edge": "L",
+              "edge": "I",
               "in_target": true
             },
             {
@@ -1323,9 +1369,9 @@
           "map": "QFEP_Edge_Of_Chaos",
           "n_artifacts_total": 6,
           "n_artifacts_in_atlas": 5,
-          "centroid_edge": "K",
-          "centroid_sim": 0.207,
-          "aligned": false,
+          "centroid_edge": "I",
+          "centroid_sim": 0.205,
+          "aligned": true,
           "declared_edges": [
             "F",
             "H",
@@ -1335,8 +1381,8 @@
           "artifact_edges": [
             {
               "id": "edge_core",
-              "edge": "M",
-              "in_target": false
+              "edge": "L",
+              "in_target": true
             },
             {
               "id": "edge_of_chaos_unlocked",
@@ -1345,7 +1391,7 @@
             },
             {
               "id": "emergence_zone",
-              "edge": "I",
+              "edge": "L",
               "in_target": true
             },
             {
@@ -1355,7 +1401,7 @@
             },
             {
               "id": "turing_pattern",
-              "edge": "K",
+              "edge": "A",
               "in_target": false
             }
           ]
@@ -1364,8 +1410,8 @@
           "map": "QFEP_Sandbox",
           "n_artifacts_total": 6,
           "n_artifacts_in_atlas": 5,
-          "centroid_edge": "L",
-          "centroid_sim": 0.236,
+          "centroid_edge": "I",
+          "centroid_sim": 0.224,
           "aligned": true,
           "declared_edges": [
             "F",
@@ -1381,12 +1427,12 @@
             },
             {
               "id": "phi_slider",
-              "edge": "L",
+              "edge": "I",
               "in_target": true
             },
             {
               "id": "qfep_formula_3d",
-              "edge": "L",
+              "edge": "I",
               "in_target": true
             },
             {
@@ -1406,7 +1452,7 @@
           "n_artifacts_total": 7,
           "n_artifacts_in_atlas": 6,
           "centroid_edge": "L",
-          "centroid_sim": 0.186,
+          "centroid_sim": 0.138,
           "aligned": true,
           "declared_edges": [
             "F",
@@ -1432,12 +1478,12 @@
             },
             {
               "id": "grab_sphere_phi",
-              "edge": "L",
+              "edge": "F",
               "in_target": true
             },
             {
               "id": "qfep_formula_3d",
-              "edge": "L",
+              "edge": "I",
               "in_target": true
             },
             {
@@ -1446,18 +1492,6 @@
               "in_target": true
             }
           ]
-        },
-        {
-          "map": "Chamber_QFEP",
-          "artifacts": [
-            "catalyst_target",
-            "proximity_spawner#type",
-            "science_screen"
-          ],
-          "in_atlas": 0,
-          "centroid_edge": null,
-          "aligned": false,
-          "note": "no artifacts found in atlas embeddings"
         }
       ]
     },
@@ -1476,7 +1510,7 @@
           "n_artifacts_total": 3,
           "n_artifacts_in_atlas": 3,
           "centroid_edge": "F",
-          "centroid_sim": 0.159,
+          "centroid_sim": 0.179,
           "aligned": false,
           "declared_edges": [
             "B"

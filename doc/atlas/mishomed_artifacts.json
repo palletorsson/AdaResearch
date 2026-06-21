@@ -2,6 +2,16 @@
   "count": 21,
   "items": [
     {
+      "artifact": "mirror_artifact",
+      "artifact_edge": "H",
+      "map": "BodyProg_Hands",
+      "sequence": "bodyprogression",
+      "sequence_edges": [
+        "E",
+        "I"
+      ]
+    },
+    {
       "artifact": "necklace_anchor",
       "artifact_edge": "H",
       "map": "BodyProg_Necklace",
@@ -26,7 +36,7 @@
     },
     {
       "artifact": "parallel_lines",
-      "artifact_edge": "L",
+      "artifact_edge": "G",
       "map": "Euclid_Parallel",
       "sequence": "foundationscrisis",
       "sequence_edges": [
@@ -37,9 +47,9 @@
       ]
     },
     {
-      "artifact": "brouwer_choice_sequence",
-      "artifact_edge": "F",
-      "map": "Brouwer_Intuitionism",
+      "artifact": "barber_paradox",
+      "artifact_edge": "B",
+      "map": "Russell_Paradox",
       "sequence": "foundationscrisis",
       "sequence_edges": [
         "A",
@@ -49,9 +59,9 @@
       ]
     },
     {
-      "artifact": "constructive_proof",
-      "artifact_edge": "F",
-      "map": "Brouwer_Intuitionism",
+      "artifact": "liar_loop",
+      "artifact_edge": "B",
+      "map": "Russell_Paradox",
       "sequence": "foundationscrisis",
       "sequence_edges": [
         "A",
@@ -61,9 +71,9 @@
       ]
     },
     {
-      "artifact": "phi_slider",
-      "artifact_edge": "L",
-      "map": "Crisis_Synthesis",
+      "artifact": "self_membership_set",
+      "artifact_edge": "B",
+      "map": "Russell_Paradox",
       "sequence": "foundationscrisis",
       "sequence_edges": [
         "A",
@@ -73,9 +83,9 @@
       ]
     },
     {
-      "artifact": "qfep_formula_3d",
-      "artifact_edge": "L",
-      "map": "Crisis_Synthesis",
+      "artifact": "godel_sentence_machine",
+      "artifact_edge": "B",
+      "map": "Godel_Incompleteness",
       "sequence": "foundationscrisis",
       "sequence_edges": [
         "A",
@@ -85,30 +95,52 @@
       ]
     },
     {
-      "artifact": "neural_networks_vr",
-      "artifact_edge": "A",
-      "map": "ML_Neural_Networks",
-      "sequence": "machinelearning",
+      "artifact": "incompleteness_tower",
+      "artifact_edge": "B",
+      "map": "Godel_Incompleteness",
+      "sequence": "foundationscrisis",
       "sequence_edges": [
-        "C",
-        "J",
-        "L"
+        "A",
+        "D",
+        "I",
+        "K"
       ]
     },
     {
-      "artifact": "lstms_vr",
-      "artifact_edge": "A",
-      "map": "ML_Sequence_Memory",
-      "sequence": "machinelearning",
+      "artifact": "provability_sorter",
+      "artifact_edge": "B",
+      "map": "Godel_Incompleteness",
+      "sequence": "foundationscrisis",
       "sequence_edges": [
-        "C",
-        "J",
-        "L"
+        "A",
+        "D",
+        "I",
+        "K"
+      ]
+    },
+    {
+      "artifact": "DoublePendulum",
+      "artifact_edge": "M",
+      "map": "Joints_ConstrainedMotion",
+      "sequence": "joints",
+      "sequence_edges": [
+        "E",
+        "H"
+      ]
+    },
+    {
+      "artifact": "IKArm",
+      "artifact_edge": "C",
+      "map": "Joints_Kinematics",
+      "sequence": "joints",
+      "sequence_edges": [
+        "E",
+        "H"
       ]
     },
     {
       "artifact": "situated_readout",
-      "artifact_edge": "B",
+      "artifact_edge": "K",
       "map": "SpeculativeComputation_Situated_Computation",
       "sequence": "postfoundationscrisis",
       "sequence_edges": [
@@ -121,7 +153,7 @@
     },
     {
       "artifact": "rhizome_cave_demo",
-      "artifact_edge": "C",
+      "artifact_edge": "A",
       "map": "SpeculativeComputation_Rhizome_Network",
       "sequence": "postfoundationscrisis",
       "sequence_edges": [
@@ -146,42 +178,6 @@
       ]
     },
     {
-      "artifact": "snap_cube_puzzle",
-      "artifact_edge": "C",
-      "map": "QFEP_F_Term",
-      "sequence": "qfeplaboratory",
-      "sequence_edges": [
-        "F",
-        "H",
-        "I",
-        "L"
-      ]
-    },
-    {
-      "artifact": "edge_particles",
-      "artifact_edge": "M",
-      "map": "QFEP_Lambda_Spectrum",
-      "sequence": "qfeplaboratory",
-      "sequence_edges": [
-        "F",
-        "H",
-        "I",
-        "L"
-      ]
-    },
-    {
-      "artifact": "edge_core",
-      "artifact_edge": "M",
-      "map": "QFEP_Edge_Of_Chaos",
-      "sequence": "qfeplaboratory",
-      "sequence_edges": [
-        "F",
-        "H",
-        "I",
-        "L"
-      ]
-    },
-    {
       "artifact": "edge_of_chaos_unlocked",
       "artifact_edge": "K",
       "map": "QFEP_Edge_Of_Chaos",
@@ -195,7 +191,7 @@
     },
     {
       "artifact": "turing_pattern",
-      "artifact_edge": "K",
+      "artifact_edge": "A",
       "map": "QFEP_Edge_Of_Chaos",
       "sequence": "qfeplaboratory",
       "sequence_edges": [
