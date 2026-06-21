@@ -16,6 +16,7 @@ class_name BounceBlobToy
 const GSB = preload("res://commons/soft_body/grab_soft_body.gd")
 
 var _sb: SoftBody3D
+var _pins: Array = []   # [{pos:Vector3, node:Node3D}]
 
 
 func _ready() -> void:
@@ -66,33 +67,21 @@ func _build() -> void:
 	floor_body.add_child(floor_mesh)
 	add_child(floor_body)
 
-	# Ring wall — tilted box segments forming a shallow cup lip.
-	var seg_count: int = 12
-	for i in seg_count:
-		var ang: float = TAU * float(i) / float(seg_count)
-		var wall := StaticBody3D.new()
-		wall.collision_layer = 1
-		wall.collision_mask = 1
-		var wx: float = cos(ang) * bowl_r
-		var wz: float = sin(ang) * bowl_r
-		wall.position = Vector3(wx, bowl_y + r * 0.55, wz)
-		wall.rotation = Vector3(0, -ang, 0.35)   # lean inward to cup the ball
-		var wcol := CollisionShape3D.new()
-		var wshape := BoxShape3D.new()
-		var seg_w: float = (TAU * bowl_r) / float(seg_count) * 0.62
-		wshape.size = Vector3(seg_w, r * 1.3, 0.05)
-		wcol.shape = wshape
-		wall.add_child(wcol)
-		var wmesh := MeshInstance3D.new()
-		var wbm := BoxMesh.new()
-		wbm.size = wshape.size
-		wmesh.mesh = wbm
-		wmesh.material_override = mat
-		wall.add_child(wmesh)
-		add_child(wall)
+	# A smooth torus rim instead of a ring of slabs — reads as a clean saucer lip, not a spiky crown.
+	var rim := MeshInstance3D.new()
+	var tm := TorusMesh.new()
+	tm.inner_radius = bowl_r * 0.9
+	tm.outer_radius = bowl_r * 1.14
+	tm.rings = 28
+	rim.mesh = tm
+	rim.rotation = Vector3(PI * 0.5, 0, 0)        # lay the ring flat as a lip
+	rim.position = Vector3(0, bowl_y + r * 0.42, 0)
+	rim.material_override = mat
+	add_child(rim)
 
-	# The squishy ball — pressure-inflated so it springs back after each landing.
-	var cy: float = bowl_y + r * 1.4 + 0.12     # start a little above the cup so it drops + bounces
+	# The squishy ball — pressure-inflated, resting in the saucer. Its underside is lightly pinned so
+	# it stays centred and squishes in place (a free ball would roll off the flat disc in capture).
+	var cy: float = bowl_y + r + 0.01
 	var sb := GSB.soft_setup(SoftBody3D.new(), {
 		"mass": 1.0, "stiffness": 0.5, "pressure": bounciness, "damping": 0.12,
 		"precision": 5, "color": blob_color, "emissive": emissive,
@@ -101,8 +90,17 @@ func _build() -> void:
 	sb.position = Vector3(0, cy, 0)
 	add_child(sb)
 	_sb = sb
+	_pins.append({"pos": Vector3(0, -r, 0), "node": null})
 
 	add_child(_label("A BALL THAT BOUNCES\nINSTEAD OF BREAKING", Vector3(0, bowl_r + 0.5, 0)))
+	call_deferred("_apply_pins")
+
+
+func _apply_pins() -> void:
+	if not is_instance_valid(_sb):
+		return
+	for p in _pins:
+		GSB.pin_patch(_sb, p["pos"], p["node"], 0.08)
 
 
 func _label(text: String, pos: Vector3) -> Label3D:

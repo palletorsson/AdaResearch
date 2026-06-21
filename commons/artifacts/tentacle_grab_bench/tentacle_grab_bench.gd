@@ -82,9 +82,12 @@ func _build() -> void:
 	var base_local := Vector3(0, -hgt * 0.5, 0)
 	_pins.append({"pos": base_local, "node": null})
 
-	# A grabbable nub at the very TIP (local +Y) — grab it and wave; the whole arm follows.
+	# A grabbable nub at the very TIP (local +Y) — grab it and wave; the whole arm follows. The handle
+	# is placed OFF to the side and a little low (not straight up), so at rest the slack tentacle curls
+	# toward it in a soft C — a boneless arm reaching, not a rigid pole.
 	var tip_local := Vector3(0, hgt * 0.5, 0)
-	var tip := GSB.add_handle(self, sb.to_global(tip_local), 0.06, Color(0.95, 0.6, 0.35))
+	var curl_target := Vector3(hgt * 0.42, base_y + hgt * 0.78, hgt * 0.12)
+	var tip := GSB.add_handle(self, curl_target, 0.06, Color(0.95, 0.6, 0.35))
 	_pins.append({"pos": tip_local, "node": tip})
 
 	# A couple of rigid suction-bump decorations near the base (do NOT deform) for character.

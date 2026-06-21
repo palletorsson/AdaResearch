@@ -49,17 +49,8 @@ func _build() -> void:
 	floor.material_override = fmat
 	add_child(floor)
 
-	# Faint ceiling slab the pillars pin up into (also gives a visible top anchor).
-	var ceil := MeshInstance3D.new()
-	var cbm := BoxMesh.new()
-	cbm.size = Vector3(7.0, 0.1, 7.0)
-	ceil.mesh = cbm
-	ceil.position = Vector3(0, pillar_height + 0.05, 0)
-	var cmat := StandardMaterial3D.new()
-	cmat.albedo_color = Color(0.1, 0.11, 0.14)
-	cmat.roughness = 0.9
-	ceil.material_override = cmat
-	add_child(ceil)
+	# (No ceiling slab — the pillars pin their heads to the world directly, so a full ceiling only
+	# occluded the forest from above. Thin caps mark each head anchor instead, below.)
 
 	# A grid of tall soft pillars to push through.
 	var t: float = pillar_thick
@@ -88,10 +79,23 @@ func _make_pillar(base_xz: Vector3, thick: float, height: float) -> void:
 	bm.subdivide_height = 8       # vertical resolution = smooth bend
 	bm.subdivide_depth = 2
 	sb.mesh = bm
-	# Centre the column so its bottom sits on the floor and its top meets the ceiling.
+	# Centre the column so its bottom sits on the floor; its head pins to the world above.
 	sb.position = base_xz + Vector3(0, height * 0.5, 0)
 	add_child(sb)
 	_bodies.append({"sb": sb, "h": height})
+
+	# A small cap + foot plate so each pinned end reads as anchored, not floating.
+	var cmat := StandardMaterial3D.new()
+	cmat.albedo_color = Color(0.14, 0.15, 0.18)
+	cmat.roughness = 0.8
+	for ey in [0.02, height - 0.02]:
+		var cap := MeshInstance3D.new()
+		var cbm := BoxMesh.new()
+		cbm.size = Vector3(thick * 1.4, 0.06, thick * 1.4)
+		cap.mesh = cbm
+		cap.position = base_xz + Vector3(0, ey, 0)
+		cap.material_override = cmat
+		add_child(cap)
 
 
 func _apply_pins() -> void:

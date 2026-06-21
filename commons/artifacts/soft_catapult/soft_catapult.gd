@@ -62,28 +62,32 @@ func _build() -> void:
 	table.material_override = fmat
 	add_child(table)
 
-	# Back frame: two uprights + a top bar the pocket's back edge pins to.
+	# Front + back frames: uprights and a top bar on each side. The pocket's two edges pin to them so
+	# the sheet spans between like a hammock and sags in the middle into a cradle (pinning only the
+	# back edge made it flop flat against the table).
 	var bar_y: float = deck_y + s * 0.5
-	for sx in [-1.0, 1.0]:
-		var upright := MeshInstance3D.new()
-		var um := BoxMesh.new()
-		um.size = Vector3(0.07, s * 0.5 + 0.05, 0.07)
-		upright.mesh = um
-		upright.position = Vector3(sx * half, deck_y + (s * 0.5 + 0.05) * 0.5, back_z)
-		upright.material_override = fmat
-		add_child(upright)
-	var bar := MeshInstance3D.new()
-	var barm := BoxMesh.new()
-	barm.size = Vector3(s + 0.14, 0.07, 0.07)
-	bar.mesh = barm
-	bar.position = Vector3(0, bar_y, back_z)
-	bar.material_override = fmat
-	add_child(bar)
+	var front_z: float = half
+	for ez in [back_z, front_z]:
+		for sx in [-1.0, 1.0]:
+			var upright := MeshInstance3D.new()
+			var um := BoxMesh.new()
+			um.size = Vector3(0.07, s * 0.5 + 0.05, 0.07)
+			upright.mesh = um
+			upright.position = Vector3(sx * half, deck_y + (s * 0.5 + 0.05) * 0.5, ez)
+			upright.material_override = fmat
+			add_child(upright)
+		var bar := MeshInstance3D.new()
+		var barm := BoxMesh.new()
+		barm.size = Vector3(s + 0.14, 0.07, 0.07)
+		bar.mesh = barm
+		bar.position = Vector3(0, bar_y, ez)
+		bar.material_override = fmat
+		add_child(bar)
 
-	# The pocket: a subdivided sheet, tilted so its back edge is high (at the bar) and its front edge
-	# dips toward the table → a sling that cradles the ball. Pinned ONLY along the back edge.
+	# The pocket: a subdivided sheet spanning between the two bars, pinned along BOTH edges so its
+	# unpinned middle sags into a cradle that holds the ball.
 	var pocket := GSB.soft_setup(SoftBody3D.new(), {
-		"mass": 0.8, "stiffness": 0.45, "pressure": 0.0, "damping": 0.1,
+		"mass": 0.8, "stiffness": 0.4, "pressure": 0.0, "damping": 0.1,
 		"precision": 5, "color": pocket_color, "emissive": emissive,
 	})
 	var pm := PlaneMesh.new()
@@ -91,26 +95,25 @@ func _build() -> void:
 	pm.subdivide_width = 12
 	pm.subdivide_depth = 12
 	pocket.mesh = pm
-	# Position the pocket centre between the bar and the table, tilted back-up / front-down.
-	var centre_y: float = deck_y + s * 0.25
-	pocket.position = Vector3(0, centre_y, 0)
-	pocket.rotation = Vector3(-0.5, 0, 0)   # tip the back edge up toward the bar
+	pocket.position = Vector3(0, bar_y, 0)
 	add_child(pocket)
 	_pocket = pocket
 	_rest_centre = pocket.global_position
 
-	# Pin the back-edge vertices (local −Z row) to the world, so the front pocket can swing/load.
+	# Pin both edges (local −Z back row and +Z front row) to the world.
 	for sx in [-1.0, 0.0, 1.0]:
 		_pins.append({"pos": Vector3(sx * half, 0.0, back_z), "node": null})
+		_pins.append({"pos": Vector3(sx * half, 0.0, front_z), "node": null})
 
-	# The ball resting in the pocket's sag.
+	# The ball nested in the pocket's sag (lightly bottom-pinned so it stays in the cradle rather than
+	# slipping through the sheet — soft-vs-soft contact alone is unreliable).
 	var br: float = ball_radius
 	var ball := GSB.soft_setup(SoftBody3D.new(), {
 		"mass": 1.0, "stiffness": 0.55, "pressure": 0.5, "damping": 0.15,
 		"precision": 5, "color": ball_color, "emissive": emissive,
 	})
 	ball.mesh = GSB.soft_sphere(br, 12, 16)
-	ball.position = Vector3(0, centre_y + br + 0.04, 0.05)
+	ball.position = Vector3(0, bar_y - s * 0.12 + br, 0)
 	add_child(ball)
 	_ball = ball
 
@@ -128,6 +131,9 @@ func _apply_pins() -> void:
 		return
 	for p in _pins:
 		GSB.pin_patch(_pocket, p["pos"], p["node"], 0.12)
+	# Keep the ball nested in the cradle (soft-vs-soft contact alone would let it slip through).
+	if is_instance_valid(_ball):
+		GSB.pin_patch(_ball, Vector3(0, -ball_radius, 0), null, 0.07)
 
 
 # Live readout: how far the pocket centre has stretched from its loaded rest (proxy for stored throw).
