@@ -33,10 +33,10 @@
   ],
   "concept_meta": {
     "Marching cubes": {
-      "count": 24,
-      "map_ready": 24,
-      "has_image": 24,
-      "best": "voxel_noise_demo",
+      "count": 25,
+      "map_ready": 25,
+      "has_image": 25,
+      "best": "mc_field_bench",
       "truth": "A field says how 'inside' each point is; marching cubes walks the grid and stitches a surface where inside meets outside — 256 cases, and a noise becomes a cave.",
       "act": "Act I — fields become surface",
       "thin": false,
@@ -51,7 +51,9 @@
           "marchingcubes_cave",
           "marchingcubes_inside_cave"
         ],
-        "medium": [],
+        "medium": [
+          "mc_field_bench"
+        ],
         "large": [
           "mc_flat_landscape",
           "mc_overhang_landscape",
@@ -73,9 +75,7 @@
           "marchingcubes_torus_sculpture"
         ]
       },
-      "missing_tiers": [
-        "medium"
-      ]
+      "missing_tiers": []
     },
     "Metaballs & implicit surfaces": {
       "count": 9,
@@ -107,17 +107,23 @@
       "missing_tiers": []
     },
     "SDF sculpting": {
-      "count": 12,
-      "map_ready": 12,
-      "has_image": 12,
-      "best": "mc_sculpt_vr",
+      "count": 15,
+      "map_ready": 15,
+      "has_image": 15,
+      "best": "sdf_blob_toy",
       "truth": "Hold the field in your hands: add a blob, subtract a blob, smooth the union, and the surface re-forms live. Modelling by editing the function, not the mesh.",
       "act": "Act I — fields become surface",
       "thin": false,
       "tiers": {
-        "small": [],
-        "medium": [],
-        "large": [],
+        "small": [
+          "sdf_blob_toy"
+        ],
+        "medium": [
+          "sdf_sculpt_bench"
+        ],
+        "large": [
+          "sdf_cavern_room"
+        ],
         "applied": [
           "mc_sculpt_vr",
           "animated_noise_explorer",
@@ -133,17 +139,13 @@
           "WFCSculptureGenerator"
         ]
       },
-      "missing_tiers": [
-        "small",
-        "medium",
-        "large"
-      ]
+      "missing_tiers": []
     },
     "Wave function collapse": {
-      "count": 7,
-      "map_ready": 7,
-      "has_image": 7,
-      "best": "wfc",
+      "count": 8,
+      "map_ready": 8,
+      "has_image": 8,
+      "best": "wfc_tile_bench",
       "truth": "Give every cell all possibilities, collapse the least-uncertain one, and let the constraints ripple out. The tiles agree on a world none of them chose alone.",
       "act": "Act II — constraints that agree",
       "thin": false,
@@ -152,7 +154,9 @@
           "wfc_tile_mosaic",
           "WFCCav"
         ],
-        "medium": [],
+        "medium": [
+          "wfc_tile_bench"
+        ],
         "large": [
           "wfc",
           "modelsynthesis",
@@ -163,15 +167,13 @@
           "wfc_3d_demo"
         ]
       },
-      "missing_tiers": [
-        "medium"
-      ]
+      "missing_tiers": []
     },
     "WFC structures & rooms": {
-      "count": 2,
-      "map_ready": 2,
-      "has_image": 2,
-      "best": "room_grammar",
+      "count": 4,
+      "map_ready": 4,
+      "has_image": 4,
+      "best": "wfc_dungeon_room",
       "truth": "The same collapse, scaled to rooms: a corridor meets a door meets a room because the adjacency rules forbid anything else. Architecture as a satisfied constraint.",
       "act": "Act II — constraints that agree",
       "thin": false,
@@ -179,45 +181,48 @@
         "small": [
           "room_grammar"
         ],
-        "medium": [],
-        "large": [],
+        "medium": [
+          "wfc_room_bench"
+        ],
+        "large": [
+          "wfc_dungeon_room"
+        ],
         "applied": [
           "wfc_dungeon_generator"
         ]
       },
-      "missing_tiers": [
-        "medium",
-        "large"
-      ]
+      "missing_tiers": []
     },
     "Boolean & space partition": {
-      "count": 2,
-      "map_ready": 2,
-      "has_image": 2,
-      "best": "binary_space_partitioning",
+      "count": 5,
+      "map_ready": 5,
+      "has_image": 5,
+      "best": "bsp_bench",
       "truth": "Cut space in two, then cut each half — recursive binary partition is how a blank box becomes rooms, how subtraction becomes architecture.",
       "act": "Act II — constraints that agree",
       "thin": false,
       "tiers": {
-        "small": [],
-        "medium": [],
+        "small": [
+          "bsp_toy"
+        ],
+        "medium": [
+          "bsp_bench"
+        ],
         "large": [
           "binary_space_partitioning",
           "boolean_patterns"
         ],
-        "applied": []
+        "applied": [
+          "bsp_floorplan_tool"
+        ]
       },
-      "missing_tiers": [
-        "small",
-        "medium",
-        "applied"
-      ]
+      "missing_tiers": []
     },
     "Space colonization": {
-      "count": 3,
-      "map_ready": 3,
-      "has_image": 3,
-      "best": "branching_growth_algorithm_continued",
+      "count": 6,
+      "map_ready": 6,
+      "has_image": 6,
+      "best": "colonization_bench",
       "truth": "Scatter attractors, grow branches toward the nearest, retire the reached — and a tree, a leaf vein, a river network draws itself toward what it feeds on.",
       "act": "Act III — growth & agents",
       "thin": false,
@@ -227,39 +232,43 @@
           "space_colonization_algorithm",
           "branching_growth_algorithm"
         ],
-        "medium": [],
-        "large": [],
-        "applied": []
+        "medium": [
+          "colonization_bench"
+        ],
+        "large": [
+          "colonization_room"
+        ],
+        "applied": [
+          "colonization_grower"
+        ]
       },
-      "missing_tiers": [
-        "medium",
-        "large",
-        "applied"
-      ]
+      "missing_tiers": []
     },
     "Genetic & evolutionary": {
-      "count": 3,
-      "map_ready": 3,
-      "has_image": 3,
-      "best": "GeneticProgramming",
+      "count": 6,
+      "map_ready": 6,
+      "has_image": 6,
+      "best": "genetic_bench",
       "truth": "No designer — only variation, selection, and time. Forms you never drew appear because they outlived the ones you did.",
       "act": "Act III — growth & agents",
       "thin": false,
       "tiers": {
-        "small": [],
-        "medium": [],
+        "small": [
+          "genome_toy"
+        ],
+        "medium": [
+          "genetic_bench"
+        ],
         "large": [
           "GeneticProgramming",
           "genetic_programming",
           "genetic_algorithm"
         ],
-        "applied": []
+        "applied": [
+          "genetic_breeder"
+        ]
       },
-      "missing_tiers": [
-        "small",
-        "medium",
-        "applied"
-      ]
+      "missing_tiers": []
     },
     "Agent walks & caves": {
       "count": 13,
@@ -295,27 +304,29 @@
       "missing_tiers": []
     },
     "Slime, DLA & aggregation": {
-      "count": 2,
-      "map_ready": 2,
-      "has_image": 2,
-      "best": "diffusion_limited_aggregation",
+      "count": 5,
+      "map_ready": 5,
+      "has_image": 5,
+      "best": "slime_bench",
       "truth": "Agents that follow their own trail, or particles that stick where they land — transport networks and corals self-organising from nothing but local rules.",
       "act": "Act III — growth & agents",
       "thin": false,
       "tiers": {
-        "small": [],
-        "medium": [],
+        "small": [
+          "slime_toy"
+        ],
+        "medium": [
+          "slime_bench"
+        ],
         "large": [
           "diffusion_limited_aggregation",
           "slime_mold"
         ],
-        "applied": []
+        "applied": [
+          "slime_farm"
+        ]
       },
-      "missing_tiers": [
-        "small",
-        "medium",
-        "applied"
-      ]
+      "missing_tiers": []
     },
     "Reaction-diffusion & phase transition": {
       "count": 11,
@@ -349,10 +360,10 @@
       "missing_tiers": []
     },
     "Voronoi & Delaunay": {
-      "count": 8,
-      "map_ready": 8,
-      "has_image": 8,
-      "best": "delaunay_triangulation_3d_cell",
+      "count": 10,
+      "map_ready": 10,
+      "has_image": 10,
+      "best": "voronoi_bench",
       "truth": "Every point claims the territory nearest it — Voronoi cells are how cracked mud, a giraffe's coat, and living tissue all partition a plane the same way.",
       "act": "Act IV — partition & scatter",
       "thin": false,
@@ -362,7 +373,9 @@
           "voronoi_grid_3d",
           "voronoi_visualization"
         ],
-        "medium": [],
+        "medium": [
+          "voronoi_bench"
+        ],
         "large": [
           "delaunay_triangulation_3d_cell",
           "spatial_voronoi",
@@ -370,34 +383,35 @@
           "voronoi_diagrams",
           "voronoi_space"
         ],
-        "applied": []
+        "applied": [
+          "voronoi_shatter_tool"
+        ]
       },
-      "missing_tiers": [
-        "medium",
-        "applied"
-      ]
+      "missing_tiers": []
     },
     "Poisson-disk & scatter": {
-      "count": 1,
-      "map_ready": 1,
-      "has_image": 1,
-      "best": "poisson_disk_sampling_3d",
+      "count": 4,
+      "map_ready": 4,
+      "has_image": 4,
+      "best": "poisson_forest_scatter",
       "truth": "Random, but never too close — Poisson-disk scatter places a forest, freckles, or stars so they read as natural and never clump.",
       "act": "Act IV — partition & scatter",
-      "thin": true,
+      "thin": false,
       "tiers": {
-        "small": [],
-        "medium": [],
+        "small": [
+          "poisson_scatter_toy"
+        ],
+        "medium": [
+          "poisson_scatter_bench"
+        ],
         "large": [
           "poisson_disk_sampling_3d"
         ],
-        "applied": []
+        "applied": [
+          "poisson_forest_scatter"
+        ]
       },
-      "missing_tiers": [
-        "small",
-        "medium",
-        "applied"
-      ]
+      "missing_tiers": []
     },
     "Mazes": {
       "count": 7,
@@ -427,10 +441,10 @@
       "missing_tiers": []
     },
     "Markov & probabilistic grammars": {
-      "count": 6,
-      "map_ready": 5,
-      "has_image": 6,
-      "best": "grammar_markov",
+      "count": 7,
+      "map_ready": 6,
+      "has_image": 7,
+      "best": "markov_generator",
       "truth": "What comes next depends only on where you are — a Markov chain hums out text, terrain, or a tree from a table of 'what usually follows'.",
       "act": "Act V — grammars & rules",
       "thin": false,
@@ -447,17 +461,17 @@
           "markov_chains_tree",
           "puls_markov"
         ],
-        "applied": []
+        "applied": [
+          "markov_generator"
+        ]
       },
-      "missing_tiers": [
-        "applied"
-      ]
+      "missing_tiers": []
     },
     "Mesh & shape grammars": {
-      "count": 23,
-      "map_ready": 23,
-      "has_image": 23,
-      "best": "facade_grammar_demo",
+      "count": 25,
+      "map_ready": 25,
+      "has_image": 25,
+      "best": "mesh_grammar_bench",
       "truth": "Start with a shape, apply a rule, apply it again — extrude, inset, bud — and a plain mesh grows barnacles, coral, armour, towers.",
       "act": "Act V — grammars & rules",
       "thin": false,
@@ -485,23 +499,24 @@
           "mesh_grammar_petal_flower",
           "mesh_grammar_spike_ball"
         ],
-        "medium": [],
-        "large": [],
+        "medium": [
+          "mesh_grammar_bench"
+        ],
+        "large": [
+          "mesh_grammar_room"
+        ],
         "applied": [
           "facade_grammar_demo",
           "dna_mesh_grammar_gen00_petals"
         ]
       },
-      "missing_tiers": [
-        "medium",
-        "large"
-      ]
+      "missing_tiers": []
     },
     "Tilings & symmetry": {
-      "count": 33,
-      "map_ready": 33,
-      "has_image": 33,
-      "best": "grammar_tessellation_field_alhambra_penrose_d_vertex",
+      "count": 34,
+      "map_ready": 34,
+      "has_image": 34,
+      "best": "tiling_bench",
       "truth": "Tiles that lock by rule alone — Truchet's coin-flip arcs, Penrose's never-repeating fivefold — pattern out of constraint, not out of a plan.",
       "act": "Act V — grammars & rules",
       "thin": false,
@@ -536,7 +551,9 @@
           "penrose_triangle",
           "tile_patterns"
         ],
-        "medium": [],
+        "medium": [
+          "tiling_bench"
+        ],
         "large": [
           "penrose_tilings",
           "truchettiles"
@@ -547,15 +564,13 @@
           "tessellation_lattice_demo"
         ]
       },
-      "missing_tiers": [
-        "medium"
-      ]
+      "missing_tiers": []
     },
     "Higher-dimensional generation": {
-      "count": 6,
-      "map_ready": 6,
-      "has_image": 6,
-      "best": "sixteen_cell_net_space_showcase",
+      "count": 7,
+      "map_ready": 7,
+      "has_image": 7,
+      "best": "tesseract_bench",
       "truth": "Generate in four dimensions and project down — a tesseract's shadow, a polytope's net unfolding — structure from a space you can't quite stand inside.",
       "act": "Act V — grammars & rules",
       "thin": false,
@@ -565,7 +580,9 @@
           "tesseract_phaser",
           "tesseract_tunnel"
         ],
-        "medium": [],
+        "medium": [
+          "tesseract_bench"
+        ],
         "large": [
           "sixteen_cell_net_space_showcase",
           "tesseract_net_space_showcase"
@@ -574,15 +591,13 @@
           "tesseract_tunnel_demo"
         ]
       },
-      "missing_tiers": [
-        "medium"
-      ]
+      "missing_tiers": []
     },
     "Generated worlds": {
-      "count": 7,
-      "map_ready": 7,
-      "has_image": 7,
-      "best": "metaball_world",
+      "count": 8,
+      "map_ready": 8,
+      "has_image": 8,
+      "best": "terrain_world_generator",
       "truth": "Stack the techniques and a whole place appears — eroded terrain, a mound that builds itself, a world meshed live as you walk into it.",
       "act": "Act VI — worlds (design without a designer)",
       "thin": false,
@@ -600,11 +615,11 @@
           "fatwireframe",
           "spherenetwork"
         ],
-        "applied": []
+        "applied": [
+          "terrain_world_generator"
+        ]
       },
-      "missing_tiers": [
-        "applied"
-      ]
+      "missing_tiers": []
     },
     "Seed -> world": {
       "count": 4,
@@ -631,12 +646,23 @@
       "missing_tiers": []
     }
   },
-  "total": 183,
-  "map_ready_total": 182,
-  "image_total": 183,
-  "empty_slots": 30,
+  "total": 213,
+  "map_ready_total": 212,
+  "image_total": 213,
+  "empty_slots": 0,
   "groups": {
     "Marching cubes": [
+      {
+        "lookup": "mc_field_bench",
+        "name": "MC Field Bench (a noise becomes a skin)",
+        "registry": "procedural_generation.json",
+        "category": "procedural_generation",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
       {
         "lookup": "voxel_noise_demo",
         "name": "voxel_noise_demo",
@@ -1005,6 +1031,39 @@
     ],
     "SDF sculpting": [
       {
+        "lookup": "sdf_blob_toy",
+        "name": "SDF Blob Toy (the function crosses zero)",
+        "registry": "procedural_generation.json",
+        "category": "procedural_generation",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 2,
+        "tier": "small"
+      },
+      {
+        "lookup": "sdf_cavern_room",
+        "name": "SDF Cavern Room (carve the function, walk the hollow)",
+        "registry": "procedural_generation.json",
+        "category": "procedural_generation",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 9,
+        "tier": "large"
+      },
+      {
+        "lookup": "sdf_sculpt_bench",
+        "name": "SDF Sculpt Bench (add a blob, subtract a blob)",
+        "registry": "procedural_generation.json",
+        "category": "procedural_generation",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
+      {
         "lookup": "mc_sculpt_vr",
         "name": "mc_sculpt_vr",
         "registry": "isosurfaces.json",
@@ -1139,6 +1198,17 @@
     ],
     "Wave function collapse": [
       {
+        "lookup": "wfc_tile_bench",
+        "name": "WFC Tile Bench (the tiles agree)",
+        "registry": "procedural_generation.json",
+        "category": "procedural_generation",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
+      {
         "lookup": "wfc",
         "name": "Wave Function Collapse",
         "registry": "procgen_extra.json",
@@ -1218,6 +1288,28 @@
     ],
     "WFC structures & rooms": [
       {
+        "lookup": "wfc_dungeon_room",
+        "name": "WFC Dungeon Room (architecture as constraint)",
+        "registry": "procedural_generation.json",
+        "category": "procedural_generation",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 9,
+        "tier": "large"
+      },
+      {
+        "lookup": "wfc_room_bench",
+        "name": "WFC Room Bench (a corridor meets a door)",
+        "registry": "procedural_generation.json",
+        "category": "procedural_generation",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
+      {
         "lookup": "room_grammar",
         "name": "Room Grammar",
         "registry": "procgen_extra.json",
@@ -1242,6 +1334,39 @@
     ],
     "Boolean & space partition": [
       {
+        "lookup": "bsp_bench",
+        "name": "BSP Bench (subtraction becomes architecture)",
+        "registry": "procedural_generation.json",
+        "category": "procedural_generation",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
+      {
+        "lookup": "bsp_floorplan_tool",
+        "name": "BSP Floorplan Tool (a new plan on tap)",
+        "registry": "procedural_generation.json",
+        "category": "procedural_generation",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "applied"
+      },
+      {
+        "lookup": "bsp_toy",
+        "name": "BSP Toy (cut in two, then cut each half)",
+        "registry": "procedural_generation.json",
+        "category": "procedural_generation",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 2,
+        "tier": "small"
+      },
+      {
         "lookup": "binary_space_partitioning",
         "name": "binary_space_partitioning",
         "registry": "procgen_extra.json",
@@ -1265,6 +1390,39 @@
       }
     ],
     "Space colonization": [
+      {
+        "lookup": "colonization_bench",
+        "name": "Colonization Bench (branches grow toward food)",
+        "registry": "procedural_generation.json",
+        "category": "procedural_generation",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
+      {
+        "lookup": "colonization_grower",
+        "name": "Colonization Grower (watch it reach)",
+        "registry": "procedural_generation.json",
+        "category": "procedural_generation",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "applied"
+      },
+      {
+        "lookup": "colonization_room",
+        "name": "Colonization Room (a network reaching)",
+        "registry": "procedural_generation.json",
+        "category": "procedural_generation",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 9,
+        "tier": "large"
+      },
       {
         "lookup": "branching_growth_algorithm_continued",
         "name": "Branching Growth Algorithm continued",
@@ -1300,6 +1458,39 @@
       }
     ],
     "Genetic & evolutionary": [
+      {
+        "lookup": "genetic_bench",
+        "name": "Genetic Bench (variation and selection)",
+        "registry": "procedural_generation.json",
+        "category": "procedural_generation",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
+      {
+        "lookup": "genetic_breeder",
+        "name": "Genetic Breeder (evolution on tap)",
+        "registry": "procedural_generation.json",
+        "category": "procedural_generation",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "applied"
+      },
+      {
+        "lookup": "genome_toy",
+        "name": "Genome Toy (a body is a short string)",
+        "registry": "procedural_generation.json",
+        "category": "procedural_generation",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 2,
+        "tier": "small"
+      },
       {
         "lookup": "GeneticProgramming",
         "name": "GeneticProgramming",
@@ -1481,6 +1672,39 @@
     ],
     "Slime, DLA & aggregation": [
       {
+        "lookup": "slime_bench",
+        "name": "Slime Bench (follow your own trail)",
+        "registry": "procedural_generation.json",
+        "category": "procedural_generation",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
+      {
+        "lookup": "slime_farm",
+        "name": "Slime Farm (a network growing)",
+        "registry": "procedural_generation.json",
+        "category": "procedural_generation",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "applied"
+      },
+      {
+        "lookup": "slime_toy",
+        "name": "Slime Toy (stick where you land)",
+        "registry": "procedural_generation.json",
+        "category": "procedural_generation",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 2,
+        "tier": "small"
+      },
+      {
         "lookup": "diffusion_limited_aggregation",
         "name": "diffusion_limited_aggregation",
         "registry": "procgen_extra.json",
@@ -1628,6 +1852,28 @@
     ],
     "Voronoi & Delaunay": [
       {
+        "lookup": "voronoi_bench",
+        "name": "Voronoi Bench (claim the nearest)",
+        "registry": "procedural_generation.json",
+        "category": "procedural_generation",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
+      {
+        "lookup": "voronoi_shatter_tool",
+        "name": "Voronoi Shatter Tool (fracture on demand)",
+        "registry": "procedural_generation.json",
+        "category": "procedural_generation",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "applied"
+      },
+      {
         "lookup": "delaunay_triangulation_3d_cell",
         "name": "delaunay_triangulation_3d_cell",
         "registry": "procgen_extra.json",
@@ -1717,6 +1963,39 @@
       }
     ],
     "Poisson-disk & scatter": [
+      {
+        "lookup": "poisson_forest_scatter",
+        "name": "Poisson Forest Scatter (a forest that grew itself)",
+        "registry": "procedural_generation.json",
+        "category": "procedural_generation",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "applied"
+      },
+      {
+        "lookup": "poisson_scatter_bench",
+        "name": "Poisson Scatter Bench (same count, different texture)",
+        "registry": "procedural_generation.json",
+        "category": "procedural_generation",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
+      {
+        "lookup": "poisson_scatter_toy",
+        "name": "Poisson Scatter Toy (random, but never too close)",
+        "registry": "procedural_generation.json",
+        "category": "procedural_generation",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 2,
+        "tier": "small"
+      },
       {
         "lookup": "poisson_disk_sampling_3d",
         "name": "poisson_disk_sampling_3d",
@@ -1810,6 +2089,17 @@
     ],
     "Markov & probabilistic grammars": [
       {
+        "lookup": "markov_generator",
+        "name": "Markov Generator (what usually follows)",
+        "registry": "procedural_generation.json",
+        "category": "procedural_generation",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "applied"
+      },
+      {
         "lookup": "grammar_markov",
         "name": "Grammar Markov",
         "registry": "hazards.json",
@@ -1877,6 +2167,28 @@
       }
     ],
     "Mesh & shape grammars": [
+      {
+        "lookup": "mesh_grammar_bench",
+        "name": "Mesh Grammar Bench (a mesh grows barnacles)",
+        "registry": "procedural_generation.json",
+        "category": "procedural_generation",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
+      {
+        "lookup": "mesh_grammar_room",
+        "name": "Mesh Grammar Room (a tower grown by rule)",
+        "registry": "procedural_generation.json",
+        "category": "procedural_generation",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 9,
+        "tier": "large"
+      },
       {
         "lookup": "facade_grammar_demo",
         "name": "Facade Grammar Demo",
@@ -2132,6 +2444,17 @@
       }
     ],
     "Tilings & symmetry": [
+      {
+        "lookup": "tiling_bench",
+        "name": "Tiling Bench (tiles that lock by rule)",
+        "registry": "procedural_generation.json",
+        "category": "procedural_generation",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
       {
         "lookup": "grammar_tessellation_field_alhambra_penrose_d_vertex",
         "name": "grammar_tessellation_field_alhambra_penrose_d_vertex",
@@ -2498,6 +2821,17 @@
     ],
     "Higher-dimensional generation": [
       {
+        "lookup": "tesseract_bench",
+        "name": "Tesseract Bench (a shadow from 4D)",
+        "registry": "procedural_generation.json",
+        "category": "procedural_generation",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
+      {
         "lookup": "sixteen_cell_net_space_showcase",
         "name": "sixteen_cell_net_space_showcase",
         "registry": "procgen_extra.json",
@@ -2565,6 +2899,17 @@
       }
     ],
     "Generated worlds": [
+      {
+        "lookup": "terrain_world_generator",
+        "name": "Terrain World Generator (a world from a few numbers)",
+        "registry": "procedural_generation.json",
+        "category": "procedural_generation",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "applied"
+      },
       {
         "lookup": "metaball_world",
         "name": "metaball_world",
