@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/artifacts/edge_ground_room/edge_ground_room.gd" id="1"]
+
+[node name="EdgeGroundRoom" type="Node3D"]
+script = ExtResource("1")
