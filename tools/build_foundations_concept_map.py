@@ -89,7 +89,22 @@ def tier_of(lookup, name, fp):
     if fp >= 2: return "medium"
     return "small"
 
-FORCE = {}
+FORCE = {
+  "euclid_parallel_bench": ("Euclid & the parallel postulate", "medium"),
+  "flatland_room": ("Euclid & the parallel postulate", "large"),
+  "curvature_bench": ("Non-Euclidean geometry", "medium"),
+  "russell_paradox_room": ("Russell's paradox", "large"),
+  "godel_incompleteness_room": ("Gödel's incompleteness", "large"),
+  "halting_bench": ("Halting & infinity", "medium"),
+  "hilbert_hotel_room": ("Halting & infinity", "large"),
+  "escher_room": ("Escher & impossible objects", "large"),
+  "impossible_object_press": ("Escher & impossible objects", "applied"),
+  "constructive_room": ("Brouwer & intuitionism", "large"),
+  "paraconsistent_room": ("Florensky & paraconsistency", "large"),
+  "contradiction_engine": ("Florensky & paraconsistency", "applied"),
+  "crisis_edge_toy": ("The crisis & the edge", "small"),
+  "crisis_synthesis_bench": ("The crisis & the edge", "medium"),
+}
 
 
 def score(text, strong, weak):

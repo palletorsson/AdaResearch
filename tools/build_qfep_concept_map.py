@@ -71,7 +71,16 @@ def tier_of(lookup, name, fp):
     if fp >= 2: return "medium"
     return "small"
 
-FORCE = {}
+FORCE = {
+  "f_order_bench": ("F — free energy & order", "medium"),
+  "f_order_room": ("F — free energy & order", "large"),
+  "lambda_dial_bench": ("λ — the order-chaos dial", "medium"),
+  "phi_rate_bench": ("φ — rate & becoming", "medium"),
+  "phi_becoming_room": ("φ — rate & becoming", "large"),
+  "qfep_reactor_toy": ("The reactor — the whole formula", "small"),
+  "qfep_reactor_bench": ("The reactor — the whole formula", "medium"),
+  "qfep_formula_toy": ("The formula made yours", "small"),
+}
 
 
 def score(text, strong, weak):

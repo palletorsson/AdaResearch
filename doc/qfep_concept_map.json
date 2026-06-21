@@ -17,10 +17,10 @@
   ],
   "concept_meta": {
     "F — free energy & order": {
-      "count": 9,
-      "map_ready": 7,
-      "has_image": 9,
-      "best": "rigid_sculpture",
+      "count": 11,
+      "map_ready": 9,
+      "has_image": 11,
+      "best": "f_order_bench",
       "truth": "F is the cost and the comfort of order — the crystal, the lattice, the snapped-together solid. Minimize F alone and you get a perfect, frozen, dead thing. Necessary, and never enough.",
       "act": "Act I — the four terms",
       "thin": false,
@@ -32,8 +32,12 @@
           "crystal_formation",
           "ordered_grid"
         ],
-        "medium": [],
-        "large": [],
+        "medium": [
+          "f_order_bench"
+        ],
+        "large": [
+          "f_order_room"
+        ],
         "applied": [
           "shannon_entropy_meter",
           "shannon_workbench",
@@ -41,10 +45,7 @@
           "snap_tetra_puzzle"
         ]
       },
-      "missing_tiers": [
-        "medium",
-        "large"
-      ]
+      "missing_tiers": []
     },
     "E — entropy as possibility": {
       "count": 18,
@@ -85,10 +86,10 @@
       "missing_tiers": []
     },
     "λ — the order-chaos dial": {
-      "count": 6,
-      "map_ready": 5,
-      "has_image": 6,
-      "best": "grab_sphere_lambda",
+      "count": 7,
+      "map_ready": 6,
+      "has_image": 7,
+      "best": "lambda_dial_bench",
       "truth": "λ weights how hard entropy pulls. Turn it to zero and you get crystal; turn it to one and you get noise. Life sits at λ ≈ 0.3–0.5 — the dial-setting between the two deaths.",
       "act": "Act I — the four terms",
       "thin": false,
@@ -99,7 +100,9 @@
           "dissolving_form",
           "qfep_chalkboard"
         ],
-        "medium": [],
+        "medium": [
+          "lambda_dial_bench"
+        ],
         "large": [
           "bifurcation_walkway"
         ],
@@ -107,15 +110,13 @@
           "lambda_slider"
         ]
       },
-      "missing_tiers": [
-        "medium"
-      ]
+      "missing_tiers": []
     },
     "φ — rate & becoming": {
-      "count": 5,
-      "map_ready": 5,
-      "has_image": 5,
-      "best": "phi_slider",
+      "count": 7,
+      "map_ready": 7,
+      "has_image": 7,
+      "best": "phi_becoming_room",
       "truth": "φ cares not how much entropy but how fast it changes — ΔE over time. The term of becoming: a system sensitive to its own rate of change can preserve a pattern by keeping it moving.",
       "act": "Act I — the four terms",
       "thin": false,
@@ -126,16 +127,17 @@
           "preserved_pattern",
           "transforming_pattern"
         ],
-        "medium": [],
-        "large": [],
+        "medium": [
+          "phi_rate_bench"
+        ],
+        "large": [
+          "phi_becoming_room"
+        ],
         "applied": [
           "phi_slider"
         ]
       },
-      "missing_tiers": [
-        "medium",
-        "large"
-      ]
+      "missing_tiers": []
     },
     "The edge of chaos": {
       "count": 10,
@@ -168,16 +170,20 @@
       "missing_tiers": []
     },
     "The reactor — the whole formula": {
-      "count": 7,
-      "map_ready": 6,
-      "has_image": 7,
-      "best": "qfep_reactor",
+      "count": 9,
+      "map_ready": 8,
+      "has_image": 9,
+      "best": "qfep_reactor_bench",
       "truth": "All four knobs at once: the reactor where you set F, λ, φ and watch a dead-ordered or dead-random system flicker into life. The formula stops being written and starts being driven.",
       "act": "Act II — where they meet",
       "thin": false,
       "tiers": {
-        "small": [],
-        "medium": [],
+        "small": [
+          "qfep_reactor_toy"
+        ],
+        "medium": [
+          "qfep_reactor_bench"
+        ],
         "large": [
           "reactive_particle_field",
           "reactive_particles"
@@ -190,21 +196,20 @@
           "qfep_sandbox_console"
         ]
       },
-      "missing_tiers": [
-        "small",
-        "medium"
-      ]
+      "missing_tiers": []
     },
     "The formula made yours": {
-      "count": 8,
-      "map_ready": 8,
-      "has_image": 8,
-      "best": "earths_delight",
+      "count": 9,
+      "map_ready": 9,
+      "has_image": 9,
+      "best": "qfep_formula_toy",
       "truth": "The formula handed over — the 3D equation you assemble, the artist's labs where QFEP drives a whole world. Not a claim to read but a machine to think with.",
       "act": "Act III — the formula made yours",
       "thin": false,
       "tiers": {
-        "small": [],
+        "small": [
+          "qfep_formula_toy"
+        ],
         "medium": [
           "qfep_formula_3d"
         ],
@@ -220,17 +225,37 @@
           "science_glasses"
         ]
       },
-      "missing_tiers": [
-        "small"
-      ]
+      "missing_tiers": []
     }
   },
-  "total": 63,
-  "map_ready_total": 58,
-  "image_total": 63,
-  "empty_slots": 8,
+  "total": 71,
+  "map_ready_total": 66,
+  "image_total": 71,
+  "empty_slots": 0,
   "groups": {
     "F — free energy & order": [
+      {
+        "lookup": "f_order_bench",
+        "name": "F Order Bench",
+        "registry": "qfep.json",
+        "category": "qfep",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
+      {
+        "lookup": "f_order_room",
+        "name": "F Order Room",
+        "registry": "qfep.json",
+        "category": "qfep",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 9,
+        "tier": "large"
+      },
       {
         "lookup": "rigid_sculpture",
         "name": "Rigid Sculpture",
@@ -533,6 +558,17 @@
     ],
     "λ — the order-chaos dial": [
       {
+        "lookup": "lambda_dial_bench",
+        "name": "Lambda Dial Bench",
+        "registry": "qfep.json",
+        "category": "qfep",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
+      {
         "lookup": "grab_sphere_lambda",
         "name": "Lambda Term Sphere",
         "registry": "qfep.json",
@@ -600,6 +636,28 @@
       }
     ],
     "φ — rate & becoming": [
+      {
+        "lookup": "phi_becoming_room",
+        "name": "Phi Becoming Room",
+        "registry": "qfep.json",
+        "category": "qfep",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 9,
+        "tier": "large"
+      },
+      {
+        "lookup": "phi_rate_bench",
+        "name": "Phi Rate Bench",
+        "registry": "qfep.json",
+        "category": "qfep",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
       {
         "lookup": "phi_slider",
         "name": "Phi Slider",
@@ -770,6 +828,28 @@
     ],
     "The reactor — the whole formula": [
       {
+        "lookup": "qfep_reactor_bench",
+        "name": "QFEP Reactor Bench",
+        "registry": "qfep.json",
+        "category": "qfep",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
+      {
+        "lookup": "qfep_reactor_toy",
+        "name": "QFEP Reactor Toy",
+        "registry": "qfep.json",
+        "category": "qfep",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 2,
+        "tier": "small"
+      },
+      {
         "lookup": "qfep_reactor",
         "name": "QFEP Reactor",
         "registry": "qfep.json",
@@ -848,6 +928,17 @@
       }
     ],
     "The formula made yours": [
+      {
+        "lookup": "qfep_formula_toy",
+        "name": "QFEP Formula Toy",
+        "registry": "qfep.json",
+        "category": "qfep",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 2,
+        "tier": "small"
+      },
       {
         "lookup": "earths_delight",
         "name": "earths_delight",

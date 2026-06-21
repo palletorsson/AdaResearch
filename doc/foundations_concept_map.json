@@ -20,10 +20,10 @@
   ],
   "concept_meta": {
     "Euclid & the parallel postulate": {
-      "count": 4,
-      "map_ready": 4,
-      "has_image": 4,
-      "best": "angle_sum_triangle",
+      "count": 6,
+      "map_ready": 6,
+      "has_image": 6,
+      "best": "euclid_parallel_bench",
       "truth": "Five axioms held flat space together for two millennia — and the fifth, the one about parallels, was the one nobody could prove from the others. The crack starts where the obvious turns out to be a choice.",
       "act": "Act I — geometry cracks",
       "thin": false,
@@ -33,22 +33,23 @@
           "euclid_postulates_plaque",
           "parallel_lines"
         ],
-        "medium": [],
-        "large": [],
+        "medium": [
+          "euclid_parallel_bench"
+        ],
+        "large": [
+          "flatland_room"
+        ],
         "applied": [
           "parallel_line_puzzle"
         ]
       },
-      "missing_tiers": [
-        "medium",
-        "large"
-      ]
+      "missing_tiers": []
     },
     "Non-Euclidean geometry": {
-      "count": 9,
-      "map_ready": 9,
-      "has_image": 9,
-      "best": "curvature_slider",
+      "count": 10,
+      "map_ready": 10,
+      "has_image": 10,
+      "best": "curvature_bench",
       "truth": "Drop the fifth postulate and geometry doesn't break — it multiplies. On a sphere triangles bulge past 180°, on a saddle they fall short. There was never one geometry; the surface decides.",
       "act": "Act I — geometry cracks",
       "thin": false,
@@ -59,7 +60,9 @@
           "poincare_disk",
           "riemann_sphere"
         ],
-        "medium": [],
+        "medium": [
+          "curvature_bench"
+        ],
         "large": [
           "non_euclidean_space",
           "riemann_pi",
@@ -70,15 +73,13 @@
           "triangle_curvature_workbench"
         ]
       },
-      "missing_tiers": [
-        "medium"
-      ]
+      "missing_tiers": []
     },
     "Russell's paradox": {
-      "count": 5,
-      "map_ready": 5,
-      "has_image": 5,
-      "best": "barber_paradox",
+      "count": 6,
+      "map_ready": 6,
+      "has_image": 6,
+      "best": "russell_paradox_room",
       "truth": "The set of all sets that don't contain themselves: does it contain itself? Either answer is its own refutation. Self-reference turned the foundations of set theory against themselves.",
       "act": "Act II — self-reference",
       "thin": false,
@@ -91,20 +92,20 @@
           "liar_loop",
           "self_membership_set"
         ],
-        "large": [],
+        "large": [
+          "russell_paradox_room"
+        ],
         "applied": [
           "russell_paradox_workbench"
         ]
       },
-      "missing_tiers": [
-        "large"
-      ]
+      "missing_tiers": []
     },
     "Gödel's incompleteness": {
-      "count": 5,
-      "map_ready": 5,
-      "has_image": 5,
-      "best": "godel_sentence_machine",
+      "count": 6,
+      "map_ready": 6,
+      "has_image": 6,
+      "best": "godel_incompleteness_room",
       "truth": "Any system strong enough to do arithmetic can write the sentence 'this is unprovable' — true, and forever out of its own reach. Consistency buys incompleteness; the gap never closes.",
       "act": "Act II — self-reference",
       "thin": false,
@@ -115,22 +116,22 @@
         "medium": [
           "incompleteness_tower"
         ],
-        "large": [],
+        "large": [
+          "godel_incompleteness_room"
+        ],
         "applied": [
           "godel_sentence_machine",
           "provability_sorter",
           "incompleteness_scale"
         ]
       },
-      "missing_tiers": [
-        "large"
-      ]
+      "missing_tiers": []
     },
     "Halting & infinity": {
-      "count": 3,
-      "map_ready": 3,
-      "has_image": 3,
-      "best": "halting_lantern",
+      "count": 5,
+      "map_ready": 5,
+      "has_image": 5,
+      "best": "halting_bench",
       "truth": "Some questions have no algorithm — will this program stop? — and some infinities make room for more of themselves. The limits of computation and of counting, same crisis, different door.",
       "act": "Act II — self-reference",
       "thin": false,
@@ -139,22 +140,23 @@
           "halting_lantern",
           "hilbert_hotel"
         ],
-        "medium": [],
-        "large": [],
+        "medium": [
+          "halting_bench"
+        ],
+        "large": [
+          "hilbert_hotel_room"
+        ],
         "applied": [
           "halting_workbench"
         ]
       },
-      "missing_tiers": [
-        "medium",
-        "large"
-      ]
+      "missing_tiers": []
     },
     "Escher & impossible objects": {
-      "count": 5,
-      "map_ready": 5,
-      "has_image": 5,
-      "best": "penrose_triangle",
+      "count": 7,
+      "map_ready": 7,
+      "has_image": 7,
+      "best": "escher_room",
       "truth": "The Penrose triangle and the endless staircase are consistent at every corner and impossible as a whole — a drawing that lies only when you take it all in. The local rules don't add up to a global truth.",
       "act": "Act III — the impossible & the constructive",
       "thin": false,
@@ -168,19 +170,20 @@
           "impossible_trident",
           "escher_staircase"
         ],
-        "large": [],
-        "applied": []
+        "large": [
+          "escher_room"
+        ],
+        "applied": [
+          "impossible_object_press"
+        ]
       },
-      "missing_tiers": [
-        "large",
-        "applied"
-      ]
+      "missing_tiers": []
     },
     "Brouwer & intuitionism": {
-      "count": 4,
-      "map_ready": 4,
-      "has_image": 4,
-      "best": "excluded_middle_demo",
+      "count": 5,
+      "map_ready": 5,
+      "has_image": 5,
+      "best": "constructive_room",
       "truth": "Brouwer refused to call a thing true until you could build it. No law of the excluded middle, no proof by contradiction from thin air — only what you can construct exists. Mathematics as an act, not a discovery.",
       "act": "Act III — the impossible & the constructive",
       "thin": false,
@@ -192,20 +195,20 @@
         "medium": [
           "constructive_staircase"
         ],
-        "large": [],
+        "large": [
+          "constructive_room"
+        ],
         "applied": [
           "excluded_middle_demo"
         ]
       },
-      "missing_tiers": [
-        "large"
-      ]
+      "missing_tiers": []
     },
     "Florensky & paraconsistency": {
-      "count": 5,
-      "map_ready": 4,
-      "has_image": 5,
-      "best": "both_true_gate",
+      "count": 7,
+      "map_ready": 6,
+      "has_image": 7,
+      "best": "contradiction_engine",
       "truth": "Classical logic says one contradiction proves everything. Florensky and the paraconsistent logicians said: hold the contradiction, and the world doesn't end. P and not-P, and reasoning carries on.",
       "act": "Act IV — living with the limit",
       "thin": false,
@@ -219,25 +222,30 @@
         "medium": [
           "both_true_gate"
         ],
-        "large": [],
-        "applied": []
+        "large": [
+          "paraconsistent_room"
+        ],
+        "applied": [
+          "contradiction_engine"
+        ]
       },
-      "missing_tiers": [
-        "large",
-        "applied"
-      ]
+      "missing_tiers": []
     },
     "The crisis & the edge": {
-      "count": 2,
-      "map_ready": 2,
-      "has_image": 2,
-      "best": "bifurcation_diagram",
+      "count": 4,
+      "map_ready": 4,
+      "has_image": 4,
+      "best": "crisis_edge_toy",
       "truth": "The crisis isn't a list of failures — it's one discovery: every formal system has an outside, and the edge where it meets that outside is where the life is. Pure order can't close. The limit is the feature.",
       "act": "Act IV — living with the limit",
       "thin": false,
       "tiers": {
-        "small": [],
-        "medium": [],
+        "small": [
+          "crisis_edge_toy"
+        ],
+        "medium": [
+          "crisis_synthesis_bench"
+        ],
         "large": [
           "bifurcation_diagram"
         ],
@@ -245,18 +253,37 @@
           "complexity_dial_workbench"
         ]
       },
-      "missing_tiers": [
-        "small",
-        "medium"
-      ]
+      "missing_tiers": []
     }
   },
-  "total": 42,
-  "map_ready_total": 41,
-  "image_total": 42,
-  "empty_slots": 14,
+  "total": 56,
+  "map_ready_total": 55,
+  "image_total": 56,
+  "empty_slots": 0,
   "groups": {
     "Euclid & the parallel postulate": [
+      {
+        "lookup": "euclid_parallel_bench",
+        "name": "Euclid Parallel Bench",
+        "registry": "foundations_crisis.json",
+        "category": "foundations",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
+      {
+        "lookup": "flatland_room",
+        "name": "Flatland Room",
+        "registry": "foundations_crisis.json",
+        "category": "foundations",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 9,
+        "tier": "large"
+      },
       {
         "lookup": "angle_sum_triangle",
         "name": "angle_sum_triangle",
@@ -303,6 +330,17 @@
       }
     ],
     "Non-Euclidean geometry": [
+      {
+        "lookup": "curvature_bench",
+        "name": "Curvature Bench",
+        "registry": "foundations_crisis.json",
+        "category": "foundations",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
       {
         "lookup": "curvature_slider",
         "name": "Curvature Slider",
@@ -405,6 +443,17 @@
     ],
     "Russell's paradox": [
       {
+        "lookup": "russell_paradox_room",
+        "name": "Russell Paradox Room",
+        "registry": "foundations_crisis.json",
+        "category": "foundations",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 9,
+        "tier": "large"
+      },
+      {
         "lookup": "barber_paradox",
         "name": "BarberParadox",
         "registry": "foundations_crisis.json",
@@ -461,6 +510,17 @@
       }
     ],
     "Gödel's incompleteness": [
+      {
+        "lookup": "godel_incompleteness_room",
+        "name": "Godel Incompleteness Room",
+        "registry": "foundations_crisis.json",
+        "category": "foundations",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 9,
+        "tier": "large"
+      },
       {
         "lookup": "godel_sentence_machine",
         "name": "GodelSentenceMachine",
@@ -519,6 +579,28 @@
     ],
     "Halting & infinity": [
       {
+        "lookup": "halting_bench",
+        "name": "Halting Bench",
+        "registry": "foundations_crisis.json",
+        "category": "foundations",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
+      {
+        "lookup": "hilbert_hotel_room",
+        "name": "Hilbert Hotel Room",
+        "registry": "foundations_crisis.json",
+        "category": "foundations",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 9,
+        "tier": "large"
+      },
+      {
         "lookup": "halting_lantern",
         "name": "Halting Lantern",
         "registry": "instruments.json",
@@ -553,6 +635,28 @@
       }
     ],
     "Escher & impossible objects": [
+      {
+        "lookup": "escher_room",
+        "name": "Escher Room",
+        "registry": "foundations_crisis.json",
+        "category": "foundations",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 9,
+        "tier": "large"
+      },
+      {
+        "lookup": "impossible_object_press",
+        "name": "Impossible Object Press",
+        "registry": "foundations_crisis.json",
+        "category": "foundations",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "applied"
+      },
       {
         "lookup": "penrose_triangle",
         "name": "penrose_triangle",
@@ -611,6 +715,17 @@
     ],
     "Brouwer & intuitionism": [
       {
+        "lookup": "constructive_room",
+        "name": "Constructive Room",
+        "registry": "foundations_crisis.json",
+        "category": "foundations",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 9,
+        "tier": "large"
+      },
+      {
         "lookup": "excluded_middle_demo",
         "name": "excluded_middle_demo",
         "registry": "foundations.json",
@@ -656,6 +771,28 @@
       }
     ],
     "Florensky & paraconsistency": [
+      {
+        "lookup": "contradiction_engine",
+        "name": "Contradiction Engine",
+        "registry": "foundations_crisis.json",
+        "category": "foundations",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "applied"
+      },
+      {
+        "lookup": "paraconsistent_room",
+        "name": "Paraconsistent Room",
+        "registry": "foundations_crisis.json",
+        "category": "foundations",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 9,
+        "tier": "large"
+      },
       {
         "lookup": "both_true_gate",
         "name": "BothTrueGate",
@@ -713,6 +850,28 @@
       }
     ],
     "The crisis & the edge": [
+      {
+        "lookup": "crisis_edge_toy",
+        "name": "Crisis Edge Toy",
+        "registry": "foundations_crisis.json",
+        "category": "foundations",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 2,
+        "tier": "small"
+      },
+      {
+        "lookup": "crisis_synthesis_bench",
+        "name": "Crisis Synthesis Bench",
+        "registry": "foundations_crisis.json",
+        "category": "foundations",
+        "map_ready": true,
+        "has_image": true,
+        "score": 99,
+        "fp": 4,
+        "tier": "medium"
+      },
       {
         "lookup": "bifurcation_diagram",
         "name": "Bifurcation Diagram",

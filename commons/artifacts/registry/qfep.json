@@ -5207,6 +5207,342 @@
         "measured_footprint_cells": 2,
         "footprint_source": "designed"
       }
+    },
+    "f_order_bench": {
+      "lookup_name": "f_order_bench",
+      "scene": "res://commons/artifacts/f_order_bench/f_order_bench.tscn",
+      "class_name": "FOrderBench",
+      "name": "F Order Bench",
+      "description": "Free-energy minimization building a crystal - minimize F alone and you get a perfect, frozen, dead thing.",
+      "category": "qfep",
+      "complexity": "advanced",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "qfeplaboratory"
+      ],
+      "tags": [
+        "qfep",
+        "medium"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "qfep"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 1,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "designed"
+      }
+    },
+    "f_order_room": {
+      "lookup_name": "f_order_room",
+      "scene": "res://commons/artifacts/f_order_room/f_order_room.tscn",
+      "class_name": "FOrderRoom",
+      "name": "F Order Room",
+      "description": "A room-scale crystal palace: pure F, perfect order, flawless and motionless - and its deadness.",
+      "category": "qfep",
+      "complexity": "advanced",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "qfeplaboratory"
+      ],
+      "tags": [
+        "qfep",
+        "large"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "qfep"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 9,
+        "clearance": {
+          "front": 1,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 9,
+        "footprint_source": "designed"
+      }
+    },
+    "lambda_dial_bench": {
+      "lookup_name": "lambda_dial_bench",
+      "scene": "res://commons/artifacts/lambda_dial_bench/lambda_dial_bench.tscn",
+      "class_name": "LambdaDialBench",
+      "name": "Lambda Dial Bench",
+      "description": "The lambda dial sweeping 0 to 1: crystal at 0, noise at 1, living complexity at lambda approx 0.4.",
+      "category": "qfep",
+      "complexity": "advanced",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "qfeplaboratory"
+      ],
+      "tags": [
+        "qfep",
+        "medium"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "qfep"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 1,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "designed"
+      }
+    },
+    "phi_rate_bench": {
+      "lookup_name": "phi_rate_bench",
+      "scene": "res://commons/artifacts/phi_rate_bench/phi_rate_bench.tscn",
+      "class_name": "PhiRateBench",
+      "name": "Phi Rate Bench",
+      "description": "Phi is sensitivity to the rate of change - a pattern that survives only by moving; freeze it and it dies.",
+      "category": "qfep",
+      "complexity": "advanced",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "qfeplaboratory"
+      ],
+      "tags": [
+        "qfep",
+        "medium"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "qfep"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 1,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "designed"
+      }
+    },
+    "phi_becoming_room": {
+      "lookup_name": "phi_becoming_room",
+      "scene": "res://commons/artifacts/phi_becoming_room/phi_becoming_room.tscn",
+      "class_name": "PhiBecomingRoom",
+      "name": "Phi Becoming Room",
+      "description": "A room of becoming - forms held alive by their own rate of change; stop and they collapse.",
+      "category": "qfep",
+      "complexity": "advanced",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "qfeplaboratory"
+      ],
+      "tags": [
+        "qfep",
+        "large"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "qfep"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 9,
+        "clearance": {
+          "front": 1,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 9,
+        "footprint_source": "designed"
+      }
+    },
+    "qfep_reactor_toy": {
+      "lookup_name": "qfep_reactor_toy",
+      "scene": "res://commons/artifacts/qfep_reactor_toy/qfep_reactor_toy.tscn",
+      "class_name": "QfepReactorToy",
+      "name": "QFEP Reactor Toy",
+      "description": "The whole formula in your hand: three knobs F, lambda, phi and a chamber flickering order to chaos.",
+      "category": "qfep",
+      "complexity": "advanced",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "qfeplaboratory"
+      ],
+      "tags": [
+        "qfep",
+        "small"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "qfep"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 2,
+        "clearance": {
+          "front": 1,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 2,
+        "footprint_source": "designed"
+      }
+    },
+    "qfep_reactor_bench": {
+      "lookup_name": "qfep_reactor_bench",
+      "scene": "res://commons/artifacts/qfep_reactor_bench/qfep_reactor_bench.tscn",
+      "class_name": "QfepReactorBench",
+      "name": "QFEP Reactor Bench",
+      "description": "Set F, lambda, phi and watch a dead-ordered or dead-random system flicker into life at the edge.",
+      "category": "qfep",
+      "complexity": "advanced",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "qfeplaboratory"
+      ],
+      "tags": [
+        "qfep",
+        "medium"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "qfep"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 1,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "designed"
+      }
+    },
+    "qfep_formula_toy": {
+      "lookup_name": "qfep_formula_toy",
+      "scene": "res://commons/artifacts/qfep_formula_toy/qfep_formula_toy.tscn",
+      "class_name": "QfepFormulaToy",
+      "name": "QFEP Formula Toy",
+      "description": "The equation QFE = F - lambda*E(S) + phi*dE(S,t) as a held object - a machine to think with.",
+      "category": "qfep",
+      "complexity": "advanced",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "qfeplaboratory"
+      ],
+      "tags": [
+        "qfep",
+        "small"
+      ],
+      "parameters": {
+        "emissive": "Bool"
+      },
+      "dev_themes": [
+        "qfep"
+      ],
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 2,
+        "clearance": {
+          "front": 1,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "front",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 2,
+        "footprint_source": "designed"
+      }
     }
   }
 }
