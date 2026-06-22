@@ -520,7 +520,7 @@ func create_line_mesh(mesh_instance: MeshInstance3D, points: Array[Vector3], col
 		return  # need >= 2 points; add_surface_from_arrays errors on an empty surface
 	var arrays = []
 	arrays.resize(Mesh.ARRAY_MAX)
-	arrays[Mesh.ARRAY_VERTEX] = points
+	arrays[Mesh.ARRAY_VERTEX] = PackedVector3Array(points)
 	
 	var indices: PackedInt32Array = []
 	for i in range(points.size() - 1):

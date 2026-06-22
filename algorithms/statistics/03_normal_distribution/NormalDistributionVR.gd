@@ -126,7 +126,7 @@ func create_curve_mesh(points: Array[Vector3]) -> void:
 	# Create line strip mesh
 	var arrays = []
 	arrays.resize(Mesh.ARRAY_MAX)
-	arrays[Mesh.ARRAY_VERTEX] = points
+	arrays[Mesh.ARRAY_VERTEX] = PackedVector3Array(points)
 	
 	# Create indices for line strips
 	var indices: PackedInt32Array = []
