@@ -155,9 +155,15 @@ strip from a wall source, `vent`→a pipe to the ceiling; the screen (`power`+`d
 - `commons/testing/render_systems.gd` renders a generated map's `systems` block via `HangarKit`
   (power/data = lit floor strips, vent/fluid = overhead pipes) — the generation→data→render proof.
 
-**Remaining (core-grid — notify first):** render the `systems` block at map **LOAD** in
-`GridSystem` (the in-engine version of `render_systems.gd`), so every loaded generated map is a
-live caused facility — and let the gated placement hook spawn sources/edges alongside packaging.
+**In-engine render — DONE, gated** (commit `9a75d7902`): `GridInteractablesComponent.render_map_systems()`
+(called once from `GridSystem._on_interactables_complete`) renders a loaded map's `systems` block as
+visible flow — gated by the runtime flag **`systems_render`** (default OFF in `ada_run/runtime_flags.json`,
+same mechanism as `artifacts_enabled`), reload-safe. Verified: `Kernel_Sys_Demo` loaded via
+`capture_multi_angle --mode=map` renders the sources + pipes/strips in-engine. **To walk one:** set
+`"systems_render": true` in `ada_run/runtime_flags.json` and load a kernel-generated map.
+
+**Remaining:** tune the floor-Y for non-flat maps; let the gated placement hook spawn sources/edges
+alongside packaging; pulse the flows; and make most edges *dead* (the scarce-flow ruin aesthetic).
 
 ---
 
