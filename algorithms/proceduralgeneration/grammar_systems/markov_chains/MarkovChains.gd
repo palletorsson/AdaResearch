@@ -249,7 +249,7 @@ func create_transitions() -> void:
 					var up = Vector3.UP
 					if abs(direction.normalized().dot(up)) > 0.99:
 						up = Vector3.RIGHT
-					transition.look_at(to_pos, up)
+					transition.look_at_from_position(transition.position, to_pos, up)
 					transition.rotate_object_local(Vector3.RIGHT, PI/2)
 
 				transitions_node.add_child(transition)

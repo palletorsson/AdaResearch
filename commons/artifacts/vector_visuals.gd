@@ -325,7 +325,8 @@ static func _create_axis(parent: Node3D, direction: Vector3, color: Color, label
 	shaft.position = direction / 2.0
 	
 	if abs(norm.dot(Vector3.UP)) < 0.99:
-		shaft.look_at(shaft.position + direction, Vector3.UP)
+		# look_at_from_position works before the node is added to the tree
+		shaft.look_at_from_position(shaft.position, shaft.position + direction, Vector3.UP)
 		shaft.rotate_object_local(Vector3.RIGHT, PI/2)
 	
 	parent.add_child(shaft)
@@ -341,7 +342,7 @@ static func _create_axis(parent: Node3D, direction: Vector3, color: Color, label
 	head.position = direction
 	
 	if abs(norm.dot(Vector3.UP)) < 0.99:
-		head.look_at(head.position + direction, Vector3.UP)
+		head.look_at_from_position(head.position, head.position + direction, Vector3.UP)
 		head.rotate_object_local(Vector3.RIGHT, -PI/2)
 	elif norm.y < 0:
 		head.rotation_degrees.z = 180
