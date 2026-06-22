@@ -144,9 +144,20 @@ strip from a wall source, `vent`→a pipe to the ceiling; the screen (`power`+`d
 + a data line and reads "POWER ON". The edges render via `HangarKit.system_source(kind)` +
 `system_edge(a, b, kind)`. The grammar generalises from here to pipes / drainage / rails.
 
-**Next:** run `infer()` across the registry to give the whole catalogue default needs, then let the
-kernel + the placement hook spawn sources + route edges from needs — i.e. *caused rooms at
-generation time*, not just this hand-placed proof.
+**Generation is now CAUSED** (commit `8d5f82dfb`):
+- `tools/infer_needs.py` → `doc/artifact_needs.json` — inferred needs for all **2548** artifacts
+  (power 249 · data 113 · vent 158 · fluid/waste 19 · load-2 748). Derived/regenerable; `--apply`
+  bakes into `spatial_needs`.
+- `tools/kernel_map.py` reads the catalogue, **raises heavy artifacts (load≥2) onto a supported
+  slab**, and emits a **`systems` block** in the `map_data.json` — one **source** per active
+  life-support kind on the boundary + an **edge** from it to every artifact that needs it. Verified:
+  a 5-artifact bag → 9×22, `path_ok`, 5 sources / 9 edges, and `map_pathfinder check` still clean.
+- `commons/testing/render_systems.gd` renders a generated map's `systems` block via `HangarKit`
+  (power/data = lit floor strips, vent/fluid = overhead pipes) — the generation→data→render proof.
+
+**Remaining (core-grid — notify first):** render the `systems` block at map **LOAD** in
+`GridSystem` (the in-engine version of `render_systems.gd`), so every loaded generated map is a
+live caused facility — and let the gated placement hook spawn sources/edges alongside packaging.
 
 ---
 
@@ -172,7 +183,9 @@ generation time*, not just this hand-placed proof.
 | `commons/artifacts/spine_runner/` | the endless streaming world (loads `.corridor.json`) |
 | `commons/artifacts/_hangar/` | packaging family + the systems-edge renderer (`system_source`/`system_edge`) |
 | `commons/artifacts/_hangar/needs_model.gd` | STEP 7 keystone — `NeedsModel.infer` (needs → building) |
-| `commons/artifacts/caused_room/` | the first "caused room" proof (commit `578b0fc29`) |
+| `tools/infer_needs.py` → `doc/artifact_needs.json` | inferred needs catalogue for all artifacts (the kernel reads it) |
+| `commons/artifacts/caused_room/` | the first hand-placed "caused room" proof (commit `578b0fc29`) |
+| `commons/testing/render_systems.gd` | renders a generated map's `systems` block via HangarKit |
 | `commons/maps/<Map>/map_data.json` | the emitted, game-valid result |
 
 **Related:** the web prototype of this pipeline is `/scrabble-maps` in the encyclopedia (place a
