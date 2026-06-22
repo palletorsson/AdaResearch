@@ -1821,7 +1821,7 @@ func _build_sweep() -> Array:
 		{
 			"top_height": 1.0, "top_size": 0.5, "taper": 0.12,
 			"top_style": "tray", "panel_style": "paneled", "edge_light": true,
-			"accent_color": Color(0.25, 0.85, 0.95),
+			"accent_color": Color(0.25, 0.85, 0.95), "stencil_text": "PED-01",
 		}))
 	sweep.append(_p("hangar_podium", "2_low_display", "low display plinth",
 		"0.55m — look DOWN into a medium artifact; flush top, clean sides",
@@ -1837,11 +1837,40 @@ func _build_sweep() -> Array:
 			"accent_color": Color(0.98, 0.62, 0.10),
 		}))
 	sweep.append(_p("hangar_podium", "4_grate_rig", "maintenance rig",
-		"the bay look — grated top, greebled body, posted frame, green status light",
+		"the bay look — grated top, greebled body, posts, hazard trim, stencil ID, heavy wear",
 		{
 			"top_height": 1.05, "top_size": 0.7, "taper": 0.08,
 			"top_style": "grate", "panel_style": "greebled", "corner_posts": true,
 			"accent_color": Color(0.30, 0.95, 0.45),
+			"wear": 0.45, "hazard_trim": true, "stencil_text": "BAY-04",
+		}))
+
+	# ── artifact_readout_screen: critical_parameter = mount ─────────────────
+	sweep.append(_p("artifact_readout_screen", "1_stalk", "stalk readout",
+		"the field-instrument caption — green-on-dark on a stalk with an antenna (image-2 style)",
+		{
+			"header": "VECTOR · ADD", "body": "MAGNITUDE  4.2\nANGLE      37°\nSTATUS     LIVE",
+			"mount": "stalk",
+		}))
+	sweep.append(_p("artifact_readout_screen", "2_wall_plate", "wall plate",
+		"a bolted wall sign — names the artifact against a backing wall",
+		{
+			"header": "REACTION-DIFFUSION", "body": "FEED  0.035\nKILL  0.065\nGRAY-SCOTT",
+			"mount": "wall", "screen_w": 0.6, "screen_h": 0.4,
+			"text_color": Color(0.45, 0.85, 1.0), "header_color": Color(0.95, 0.55, 0.2),
+		}))
+	sweep.append(_p("artifact_readout_screen", "3_freestand", "freestanding sign",
+		"a two-legged readout that stands beside a floor artifact",
+		{
+			"header": "L-SYSTEM", "body": "AXIOM  F\nRULE   F→F+F−F\nDEPTH  4",
+			"mount": "freestand",
+		}))
+	sweep.append(_p("artifact_readout_screen", "4_desk", "desk readout",
+		"a low tabletop screen for a benchtop artifact",
+		{
+			"header": "POWER", "body": "CONSUMPTION  30%\nNOMINAL",
+			"mount": "desk", "screen_w": 0.42, "screen_h": 0.3,
+			"text_color": Color(1.0, 0.45, 0.45), "header_color": Color(1.0, 0.8, 0.3),
 		}))
 
 	return sweep

@@ -31,6 +31,36 @@
         "wall_backing": false
       },
       "dev_themes": ["environment", "hangar", "packaging", "placement"]
+    },
+    "artifact_readout_screen": {
+      "lookup_name": "artifact_readout_screen",
+      "scene": "res://commons/artifacts/artifact_readout_screen/artifact_readout_screen.tscn",
+      "class_name": "ArtifactReadoutScreen",
+      "name": "Artifact Readout Screen",
+      "description": "A curated, framed 2D-in-3D screen that names an artifact — a worn-metal bezel around a self-lit panel of baked text (amber header + green lines), on a stalk / wall-plate / two legs / desk stand. The deliberate replacement for floating billboard labels. Text is baked via BakedTextAlbedo (headless-safe).",
+      "category": "packaging",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [],
+      "tags": ["packaging", "screen", "readout", "label", "2d-in-3d", "hangar", "sci-fi"],
+      "parameters": {
+        "header": "Top header line (amber). Default 'ARTIFACT'.",
+        "body": "Newline-separated body lines (green terminal text).",
+        "screen_w": "Screen width in metres (default 0.5).",
+        "screen_h": "Screen height in metres (default 0.34).",
+        "mount": "stalk | wall | freestand | desk (default stalk).",
+        "screen_bg": "Screen background colour.",
+        "text_color": "Body text colour.",
+        "header_color": "Header colour.",
+        "frame_color": "Bezel / mount colour."
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 1,
+        "wall_backing": false
+      },
+      "dev_themes": ["environment", "hangar", "packaging", "ui", "label"]
     }
   }
 }

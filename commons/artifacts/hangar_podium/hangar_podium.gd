@@ -1,6 +1,9 @@
 extends Node3D
 class_name HangarPodium
 
+# Preload (not the global class_name) so a freshly-created kit resolves headless too.
+const HangarKit := preload("res://commons/artifacts/_hangar/hangar_kit.gd")
+
 # @identity
 # essence: the sci-fi hangar plinth that an artifact stands ON so the player can reach it — a battered, paneled maintenance-bay pedestal, not a museum case. Origin at the floor; the top is a work surface at a chosen reach height.
 # desire: to give a small artifact a body in the room — to lift a thing that would otherwise sit lost on the floor up to hand height, and to say "this is the thing, stand here and work it".
@@ -34,6 +37,14 @@ class_name HangarPodium
 @export var body_color: Color = Color(0.40, 0.42, 0.46)
 @export var panel_color: Color = Color(0.28, 0.30, 0.34)
 @export var accent_color: Color = Color(0.25, 0.85, 0.95)
+
+@export_group("Surface")
+## Weathering 0..1 — darkens + roughens toward scuffed bare metal.
+@export var wear: float = 0.18
+## Stencilled ID painted on the front face (e.g. "PED-01"). Empty = none.
+@export var stencil_text: String = ""
+## Diagonal caution-stripe band around the plinth foot.
+@export var hazard_trim: bool = false
 
 # ── Constants ─────────────────────────────────────────────────────────
 const CAP_THICK := 0.08
@@ -70,6 +81,9 @@ func _read_metadata_overrides() -> void:
 	if has_meta("config_body_color"): body_color = _pc(str(get_meta("config_body_color")), body_color)
 	if has_meta("config_panel_color"): panel_color = _pc(str(get_meta("config_panel_color")), panel_color)
 	if has_meta("config_accent_color"): accent_color = _pc(str(get_meta("config_accent_color")), accent_color)
+	if has_meta("config_wear"): wear = float(str(get_meta("config_wear")))
+	if has_meta("config_stencil_text"): stencil_text = str(get_meta("config_stencil_text"))
+	if has_meta("config_hazard_trim"): hazard_trim = str(get_meta("config_hazard_trim")).to_lower() in ["true", "1", "yes", "on"]
 
 
 # ── Build ─────────────────────────────────────────────────────────────
@@ -104,6 +118,10 @@ func _build() -> void:
 
 	if edge_light:
 		_build_edge_light()
+	if hazard_trim:
+		_build_hazard_trim(base_w)
+	if stencil_text.strip_edges() != "":
+		_build_stencil(body_w, body_bottom, body_h)
 
 
 func _build_panels(body_w: float, body_bottom: float, body_h: float) -> void:
@@ -164,23 +182,32 @@ func _build_edge_light() -> void:
 	add_child(_box(Vector3(-ls * 0.5, ly, 0), Vector3(lt, lt, ls), gmat))
 
 
-# ── Local helpers (self-contained, like the lab props) ────────────────
+# Caution-stripe band around the plinth foot (the hazard-bay look).
+func _build_hazard_trim(base_w: float) -> void:
+	var smat := HangarKit.striped_mat()
+	var y: float = PLINTH_THICK * 0.5
+	var t := 0.014
+	add_child(_box(Vector3(0, y, base_w * 0.5 + t * 0.5), Vector3(base_w, PLINTH_THICK * 0.7, t), smat))
+	add_child(_box(Vector3(0, y, -base_w * 0.5 - t * 0.5), Vector3(base_w, PLINTH_THICK * 0.7, t), smat))
+	add_child(_box(Vector3(base_w * 0.5 + t * 0.5, y, 0), Vector3(t, PLINTH_THICK * 0.7, base_w), smat))
+	add_child(_box(Vector3(-base_w * 0.5 - t * 0.5, y, 0), Vector3(t, PLINTH_THICK * 0.7, base_w), smat))
+
+
+# Stencilled ID painted on the front face — replaces a floating label.
+func _build_stencil(body_w: float, body_bottom: float, body_h: float) -> void:
+	var q: MeshInstance3D = HangarKit.stencil(stencil_text, Vector2(body_w * 0.62, body_h * 0.16))
+	if q:
+		q.position = Vector3(0, body_bottom + body_h * 0.5, body_w * 0.5 + 0.012)
+		add_child(q)
+
+
+# ── Local helpers (delegate to the shared HangarKit for the family look) ──
 func _mat(c: Color, rough: float, metal: float) -> StandardMaterial3D:
-	var m := StandardMaterial3D.new()
-	m.albedo_color = c
-	m.roughness = rough
-	m.metallic = metal
-	return m
+	return HangarKit.painted_metal(c, wear, metal, rough)
 
 
 func _emi(c: Color, energy: float) -> StandardMaterial3D:
-	var m := StandardMaterial3D.new()
-	m.albedo_color = c
-	m.emission_enabled = true
-	m.emission = c
-	m.emission_energy_multiplier = energy
-	m.shading_mode = BaseMaterial3D.SHADING_MODE_PER_PIXEL
-	return m
+	return HangarKit.emissive(c, energy)
 
 
 func _box(center: Vector3, size: Vector3, mat: Material) -> MeshInstance3D:
