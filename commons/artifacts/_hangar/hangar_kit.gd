@@ -255,3 +255,76 @@ static func readout(header: String, lines: Array, size: Vector2 = Vector2(0.5, 0
 			block.position = Vector3(0, -h * 0.08, face_z + 0.004)
 			root.add_child(block)
 	return root
+
+
+# ── Systems (STEP 7): visible flow edges from a source to a sink ───────
+# A system is rendered as the EDGE between two points: power/data run on the FLOOR as a lit strip
+# (the "light on the floor" idea); vent/fluid/waste run as a PIPE up to a ceiling carry height and
+# across. Colour per kind. See doc/GENERATIVE_MAPS.md §5.
+const SYS_COLOR := {
+	"power": Color(0.86, 0.34, 0.11), "data": Color(0.30, 0.72, 0.95),
+	"fluid": Color(0.32, 0.55, 0.95), "vent": Color(0.72, 0.74, 0.80), "waste": Color(0.45, 0.40, 0.30),
+}
+
+
+## A boundary fixture where a system enters the room (a wall outlet, a ceiling intake). +Z faces out.
+static func system_source(kind: String, size: float = 0.3) -> Node3D:
+	var root := Node3D.new()
+	root.name = "Source_" + kind
+	var c: Color = SYS_COLOR.get(kind, BRAUN_ACCENT)
+	root.add_child(box(Vector3(0, 0, 0), Vector3(size, size, 0.12), rams_body(PANEL_TRIM, 0.12)))
+	root.add_child(box(Vector3(0, 0, 0.07), Vector3(size * 0.62, size * 0.34, 0.03), emissive(c, 1.5)))
+	return root
+
+
+## A routed visible edge a -> b for a system `kind`. power/data: a lit strip on the floor (Manhattan
+## L) + a riser to the sink. vent/fluid/waste: a pipe up to a ceiling carry height, across, and down.
+static func system_edge(a: Vector3, b: Vector3, kind: String) -> Node3D:
+	var root := Node3D.new()
+	root.name = "Edge_" + kind
+	var c: Color = SYS_COLOR.get(kind, BRAUN_ACCENT)
+	if kind == "power" or kind == "data":
+		var y := 0.02
+		var w := 0.055 if kind == "power" else 0.028
+		var mat := emissive(c, 1.5)
+		var p0 := Vector3(a.x, y, a.z)
+		var corner := Vector3(b.x, y, a.z)
+		var p2 := Vector3(b.x, y, b.z)
+		root.add_child(_strip(p0, corner, w, mat))
+		root.add_child(_strip(corner, p2, w, mat))
+		root.add_child(_pipe(p2, b, w * 0.45, worn_metal(Color(0.10, 0.10, 0.12))))   # riser to the sink
+	else:
+		var r := 0.075 if kind == "vent" else 0.055
+		var mat := rams_body(PANEL_TRIM, 0.14)
+		var ch := maxf(a.y, b.y) + 1.1                                                 # ceiling carry height
+		var a1 := Vector3(a.x, ch, a.z)
+		var b1 := Vector3(b.x, ch, b.z)
+		root.add_child(_pipe(a, a1, r, mat))
+		root.add_child(_pipe(a1, b1, r, mat))
+		root.add_child(_pipe(b1, b, r, mat))
+	return root
+
+
+# an axis-aligned thin lit/material strip lying on the floor between a and b
+static func _strip(a: Vector3, b: Vector3, w: float, mat: Material) -> MeshInstance3D:
+	var ln: float = maxf(a.distance_to(b), 0.001)
+	var d := b - a
+	var size: Vector3 = Vector3(ln, 0.014, w) if absf(d.x) >= absf(d.z) else Vector3(w, 0.014, ln)
+	return box((a + b) * 0.5, size, mat)
+
+
+# a cylinder pipe between a and b (any orientation)
+static func _pipe(a: Vector3, b: Vector3, r: float, mat: Material) -> MeshInstance3D:
+	var mesh := CylinderMesh.new()
+	mesh.top_radius = r
+	mesh.bottom_radius = r
+	mesh.height = maxf(a.distance_to(b), 0.001)
+	var mi := MeshInstance3D.new()
+	mi.mesh = mesh
+	mi.material_override = mat
+	var yv: Vector3 = (b - a).normalized()
+	var ref: Vector3 = Vector3.UP if absf(yv.dot(Vector3.UP)) < 0.985 else Vector3.RIGHT
+	var xv: Vector3 = ref.cross(yv).normalized()
+	var zv: Vector3 = xv.cross(yv).normalized()
+	mi.transform = Transform3D(Basis(xv, yv, zv), (a + b) * 0.5)
+	return mi

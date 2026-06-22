@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/artifacts/caused_room/caused_room.gd" id="1_caused"]
+
+[node name="CausedRoom" type="Node3D"]
+script = ExtResource("1_caused")
