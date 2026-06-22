@@ -1672,6 +1672,106 @@ func _build_sweep() -> Array:
 			"screen_content": "off",
 		}))
 
+	# ── control_console (INTERACTIVE): critical_parameter = body form/colour ──
+	# Our console that houses real sliders/readout. DNA = housing style: desktop
+	# vs floor-standing + body/trim colour. Scene lives in commons/ui, so we
+	# override the default artifacts/ scene path via `extra`.
+	var CC_SCENE := {"scene": "res://commons/ui/control_console.tscn"}
+	sweep.append(_p("control_console", "1_steel_desk", "steel desk",
+		"brushed-steel desktop console — the board at hand height on a short stand",
+		{
+			"face_to_origin": true, "body_height": 0.40,
+			"body_color": Color(0.62, 0.63, 0.65), "trim_color": Color(0.35, 0.36, 0.38),
+		}, CC_SCENE))
+	sweep.append(_p("control_console", "2_dark_industrial", "dark industrial",
+		"dark floor-standing cabinet — the heavy-duty terminal form",
+		{
+			"face_to_origin": false, "body_height": 1.0,
+			"body_color": Color(0.20, 0.21, 0.24), "trim_color": Color(0.12, 0.12, 0.14),
+		}, CC_SCENE))
+	sweep.append(_p("control_console", "3_warm_civic", "warm civic (clean)",
+		"warm sand body, door+vent genes OFF — the clean public-kiosk register",
+		{
+			"face_to_origin": true, "body_height": 0.45,
+			"body_color": Color(0.57, 0.51, 0.41), "trim_color": Color(0.34, 0.30, 0.24),
+			"has_door": false, "has_vent": false,
+		}, CC_SCENE))
+	# Apparatus genes — operator station + its machine in front (desktop form;
+	# viz_floor -0.62 = the console's own base plane so both share the ground).
+	sweep.append(_p("control_console", "4_monitor_station", "monitor station",
+		"console driving a hooded monitor totem in front — the operator-station pair",
+		{
+			"face_to_origin": true, "body_height": 0.40, "viz_floor": -0.62,
+			"demo_apparatus": "monitor",
+			"body_color": Color(0.62, 0.63, 0.65), "trim_color": Color(0.35, 0.36, 0.38),
+		}, CC_SCENE))
+	sweep.append(_p("control_console", "5_cube_gantry", "cube gantry",
+		"console driving a portal-gantry 3D volume — the scanner form",
+		{
+			"face_to_origin": true, "body_height": 0.40, "viz_floor": -0.62,
+			"demo_apparatus": "cube",
+			"body_color": Color(0.20, 0.21, 0.24), "trim_color": Color(0.12, 0.12, 0.14),
+		}, CC_SCENE))
+	sweep.append(_p("control_console", "6_specimen_station", "specimen station",
+		"console driving a glass specimen tank on its pedestal — the surreal-lab pair",
+		{
+			"face_to_origin": true, "body_height": 0.45, "viz_floor": -0.62,
+			"demo_apparatus": "jar",
+			"body_color": Color(0.57, 0.51, 0.41), "trim_color": Color(0.34, 0.30, 0.24),
+		}, CC_SCENE))
+
+	# ── WORKBENCH INSTRUMENTS (real console examples): each swept across its
+	#    critical_parameter — the @identity gene the slider drives in VR. ──────
+	sweep.append(_p("shannon_workbench", "1_max_entropy", "p = 0.5 (max entropy)",
+		"peak of the hill — salt-and-pepper grid, incompressible 256/256",
+		{"initial_p": 0.5}))
+	sweep.append(_p("shannon_workbench", "2_low_entropy", "p = 0.08 (ordered)",
+		"sparse ones — far down the hill, highly compressible",
+		{"initial_p": 0.08}))
+	sweep.append(_p("shannon_workbench", "3_biased_high", "p = 0.85 (biased)",
+		"mostly ones — the hill is symmetric, order returns",
+		{"initial_p": 0.85}))
+
+	sweep.append(_p("riemann_sum_workbench", "1_coarse", "N = 4 (coarse)",
+		"four blocky rectangles — the polygon barely follows the curve",
+		{"initial_n": 4}))
+	sweep.append(_p("riemann_sum_workbench", "2_mid", "N = 16",
+		"sixteen rectangles — readable error, the approximation taking shape",
+		{"initial_n": 16}))
+	sweep.append(_p("riemann_sum_workbench", "3_fine", "N = 128 (converged)",
+		"the staircase hugs the curve — error vanishing",
+		{"initial_n": 128}))
+
+	sweep.append(_p("tangent_slope_workbench", "1_early", "x = 0.5",
+		"tangent sampled early on the curve",
+		{"initial_x": 0.5}))
+	sweep.append(_p("tangent_slope_workbench", "2_mid", "x = 2.4",
+		"tangent sampled mid-curve",
+		{"initial_x": 2.4}))
+	sweep.append(_p("tangent_slope_workbench", "3_late", "x = 4.2",
+		"tangent sampled late on the curve",
+		{"initial_x": 4.2}))
+
+	sweep.append(_p("cantor_diagonal_workbench", "1_small", "N = 8",
+		"a short list — the diagonal escape is easy to follow row by row",
+		{"initial_n": 8}))
+	sweep.append(_p("cantor_diagonal_workbench", "2_mid", "N = 16",
+		"the standard list — d differs from every row",
+		{"initial_n": 16}))
+	sweep.append(_p("cantor_diagonal_workbench", "3_large", "N = 32",
+		"a long list — and still the diagonal slips out",
+		{"initial_n": 32}))
+
+	sweep.append(_p("triangle_curvature_workbench", "1_elliptic", "K = +1 (sphere)",
+		"angles sum past 180° — elliptic excess on the sphere",
+		{"initial_k": 1.0}))
+	sweep.append(_p("triangle_curvature_workbench", "2_flat", "K = 0 (flat)",
+		"exactly 180° — the Euclidean baseline",
+		{"initial_k": 0.0}))
+	sweep.append(_p("triangle_curvature_workbench", "3_hyperbolic", "K = -1 (disk)",
+		"angles fall short of 180° — hyperbolic defect on the Poincaré disk",
+		{"initial_k": -1.0}))
+
 	# ── computer_keyboard: critical_parameter = layout ─────────────
 	sweep.append(_p("computer_keyboard", "1_full_numpad", "full (numpad)",
 		"full-size layout — main block plus the numpad",
@@ -1713,6 +1813,35 @@ func _build_sweep() -> Array:
 		{
 			"hazard_type": "electrical",
 			"restricted_text": "DANGER · HV",
+		}))
+
+	# ── hangar_podium: critical_parameter = top_height (reach) ──────────────
+	sweep.append(_p("hangar_podium", "1_reach_pedestal", "reach pedestal",
+		"the canonical case — lifts a small artifact to ~1m hand height; recessed tray",
+		{
+			"top_height": 1.0, "top_size": 0.5, "taper": 0.12,
+			"top_style": "tray", "panel_style": "paneled", "edge_light": true,
+			"accent_color": Color(0.25, 0.85, 0.95),
+		}))
+	sweep.append(_p("hangar_podium", "2_low_display", "low display plinth",
+		"0.55m — look DOWN into a medium artifact; flush top, clean sides",
+		{
+			"top_height": 0.55, "top_size": 0.85, "taper": 0.16,
+			"top_style": "flat", "panel_style": "clean", "edge_light": false,
+		}))
+	sweep.append(_p("hangar_podium", "3_console_base", "console base",
+		"a wide work surface — 1.2m top, greebled, framed by corner posts",
+		{
+			"top_height": 0.9, "top_size": 1.2, "taper": 0.10,
+			"top_style": "tray", "panel_style": "greebled", "corner_posts": true,
+			"accent_color": Color(0.98, 0.62, 0.10),
+		}))
+	sweep.append(_p("hangar_podium", "4_grate_rig", "maintenance rig",
+		"the bay look — grated top, greebled body, posted frame, green status light",
+		{
+			"top_height": 1.05, "top_size": 0.7, "taper": 0.08,
+			"top_style": "grate", "panel_style": "greebled", "corner_posts": true,
+			"accent_color": Color(0.30, 0.95, 0.45),
 		}))
 
 	return sweep

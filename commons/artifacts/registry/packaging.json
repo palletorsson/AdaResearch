@@ -1,0 +1,36 @@
+{
+  "_comment": "Artifact packaging / grounding furniture — the shared sci-fi-hangar prop family that gives an artifact its relation to the ground (podium, step-base, wall-backing, framed readout). Parameterized by DNA; an artifact configures the right packaging from its spatial_needs. See blog: the artifact's close environment.",
+  "artifacts": {
+    "hangar_podium": {
+      "lookup_name": "hangar_podium",
+      "scene": "res://commons/artifacts/hangar_podium/hangar_podium.tscn",
+      "class_name": "HangarPodium",
+      "name": "Hangar Podium",
+      "description": "A battered, paneled sci-fi maintenance-bay plinth that an artifact stands ON so the player can reach it. Origin at the floor; the top is a work surface at a chosen reach height (top_height). Tray / flat / grate tops, clean / paneled / greebled sides, optional corner posts and an emissive rim light.",
+      "category": "packaging",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [],
+      "tags": ["packaging", "grounding", "prop", "furniture", "hangar", "pedestal", "sci-fi"],
+      "parameters": {
+        "top_height": "Top work-surface height in metres — the reach decision (default 1.0; 0.55 = low display, 0.9+ = console).",
+        "top_size": "XZ size of the top surface, square (default 0.6).",
+        "taper": "How much wider the base is than the top per side — battered plinth (default 0.12).",
+        "top_style": "flat | tray | grate (default tray — recessed lip holds the artifact).",
+        "panel_style": "clean | paneled | greebled (default paneled).",
+        "corner_posts": "Four vertical corner posts framing the body (default false).",
+        "edge_light": "Emissive accent strip under the top rim (default true).",
+        "body_color": "Main body colour.",
+        "panel_color": "Inset panel colour.",
+        "accent_color": "Edge-light colour."
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 1,
+        "wall_backing": false
+      },
+      "dev_themes": ["environment", "hangar", "packaging", "placement"]
+    }
+  }
+}
