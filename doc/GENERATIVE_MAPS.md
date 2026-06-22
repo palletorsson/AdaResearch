@@ -132,10 +132,21 @@ place in the room.
 - Apply systems where the **subject is flow** — vector fields, `flow_field`, L-systems (transport
   networks), procgen, the post-crisis **rhizome** — so the map teaches by *being* the network.
 
-**Smallest convincing slice to build first:** one **source machine** → a **power edge** rendered as
-a light-strip on the floor (pulsing toward the sink) + a thin cable → a **table with a screen** that
-reads "powered." One live edge in a mostly-dead room. If that reads, the grammar generalises to
-pipes / drainage / rails.
+**The keystone — `needs`.** The one addition that unlocks the rest: declare what each artifact
+**needs** and the building derives from it. `commons/artifacts/_hangar/needs_model.gd`
+(`NeedsModel.infer`) returns `{power, fluid, data, vent, waste : bool · load : 0..2 · hangs}` from an
+artifact's tags/category/lookup (explicit `spatial_needs.needs` overrides). The compression seed:
+*needs in, building out.* Without it the generator can only pack; with it, it can reason.
+
+**First slice — BUILT** (commit `578b0fc29`, `commons/artifacts/caused_room/`): one logical room
+where the reactor's inferred needs *cause* the build — `load`→a supported slab, `power`→a lit floor
+strip from a wall source, `vent`→a pipe to the ceiling; the screen (`power`+`data`) gets a power edge
++ a data line and reads "POWER ON". The edges render via `HangarKit.system_source(kind)` +
+`system_edge(a, b, kind)`. The grammar generalises from here to pipes / drainage / rails.
+
+**Next:** run `infer()` across the registry to give the whole catalogue default needs, then let the
+kernel + the placement hook spawn sources + route edges from needs — i.e. *caused rooms at
+generation time*, not just this hand-placed proof.
 
 ---
 
@@ -159,7 +170,9 @@ pipes / drainage / rails.
 | `tools/structure_recipes.py` | tectonics vocab + `jittered_corridor` + `derive_connectors` |
 | `tools/walk_evaluator.py` | walkability scoring (the invisible movement graph) |
 | `commons/artifacts/spine_runner/` | the endless streaming world (loads `.corridor.json`) |
-| `commons/artifacts/_hangar/` | packaging family + (STEP 7) the systems-edge renderer |
+| `commons/artifacts/_hangar/` | packaging family + the systems-edge renderer (`system_source`/`system_edge`) |
+| `commons/artifacts/_hangar/needs_model.gd` | STEP 7 keystone — `NeedsModel.infer` (needs → building) |
+| `commons/artifacts/caused_room/` | the first "caused room" proof (commit `578b0fc29`) |
 | `commons/maps/<Map>/map_data.json` | the emitted, game-valid result |
 
 **Related:** the web prototype of this pipeline is `/scrabble-maps` in the encyclopedia (place a
