@@ -22,6 +22,16 @@ import json, re, glob, math, argparse, os
 from collections import deque
 
 PLAT_H = {"pedestal": 2, "table": 2, "sunken": 0, "floor": 1, "wall": 1, "none": 1}
+LIFE = ["power", "fluid", "data", "vent", "waste"]
+
+
+def load_needs(root="."):
+    """token -> needs dict, from the derived catalogue (tools/infer_needs.py). {} if absent."""
+    p = os.path.join(root, "doc", "artifact_needs.json")
+    try:
+        return (json.load(open(p, encoding="utf-8")) or {}).get("needs", {})
+    except Exception:
+        return {}
 
 
 def loose(t):
@@ -90,14 +100,17 @@ def pack(bag, FP, s=1, width=9):
     return placed, W, cy + shelf_d
 
 
-def build(placed, W, D):
-    """Rule 4: pathfind. Flat (1) floor; per-artifact relief from platform."""
+def build(placed, W, D, needs_map=None):
+    """Rule 4: pathfind. Flat (1) floor; per-artifact relief from platform + load (heavy->slab)."""
+    needs_map = needs_map or {}
     height = [[1] * W for _ in range(D)]          # default flat
     occ = [[0] * W for _ in range(D)]
     inter = [[""] * W for _ in range(D)]
     util = [[""] * W for _ in range(D)]
     for t, r, c, w, d, plat, wall in placed:
         h = PLAT_H.get(plat, 1)                    # exception: pedestal/table=2, sunken=0
+        if int((needs_map.get(t) or {}).get("load", 0)) >= 2:
+            h = max(h, 2)                          # heavy (load>=2) -> raised on a supported slab
         for rr in range(r, r + d):
             for cc in range(c, c + w):
                 if 0 <= rr < D and 0 <= cc < W:
@@ -126,6 +139,34 @@ def build(placed, W, D):
     return height, inter, util, occ, start, end, (end in seen), len(seen), unreached
 
 
+def systems(placed, W, D, occ, needs_map):
+    """Caused by needs: one SOURCE per active life-support kind on the boundary, and an EDGE from
+    that source to every artifact (sink) that needs it. Cells are [row, col]; the runtime routes
+    the visible flow (HangarKit.system_edge). Returns {"sources":[...], "edges":[...]}."""
+    needs_map = needs_map or {}
+    active = []
+    for t, r, c, w, d, plat, wall in placed:
+        nd = needs_map.get(t) or {}
+        for k in LIFE:
+            if nd.get(k) and k not in active:
+                active.append(k)
+    if not active:
+        return {"sources": [], "edges": []}
+    free0 = [c for c in range(W) if not occ[0][c]] or [0]   # boundary slots on the entry row
+    src, sources = {}, []
+    for i, k in enumerate(active):
+        cell = [0, free0[(i * 2) % len(free0)]]
+        src[k] = cell
+        sources.append({"kind": k, "cell": cell})
+    edges = []
+    for t, r, c, w, d, plat, wall in placed:
+        nd = needs_map.get(t) or {}
+        for k in active:
+            if nd.get(k):
+                edges.append({"kind": k, "from": src[k], "to": [r, c], "token": t})
+    return {"sources": sources, "edges": edges}
+
+
 def grid_rows(height, inter, util, occ, W, D):
     rows = []
     for r in range(D):
@@ -142,7 +183,7 @@ def grid_rows(height, inter, util, occ, W, D):
     return rows
 
 
-def to_map_data(height, inter, util, W, D, name, n_art):
+def to_map_data(height, inter, util, W, D, name, n_art, sys_block=None):
     struct = [[str(height[r][c]) for c in range(W)] for r in range(D)]
     util_out = [[("#sp" if util[r][c] == "sp" else "t" if util[r][c] == "t" else " ")
                  for c in range(W)] for r in range(D)]
@@ -164,6 +205,7 @@ def to_map_data(height, inter, util, W, D, name, n_art):
             "name": name, "version": "1.0",
         },
         "layers": {"structure": struct, "utilities": util_out, "interactables": inter_out},
+        "systems": sys_block or {"sources": [], "edges": []},
         "settings": {
             "background": {"color": [0.08, 0.1, 0.18], "type": "sky"},
             "cube_size": 1, "gutter": 0, "show_grid": True,
@@ -188,7 +230,8 @@ def write_compact(path, d):
         out.append("    ]" + ("," if li < len(names) - 1 else ""))
     out.append("  },")
     out.append('  "settings": ' + json.dumps(d["settings"], ensure_ascii=False) + ",")
-    out.append('  "utility_definitions": ' + json.dumps(d["utility_definitions"], ensure_ascii=False))
+    out.append('  "utility_definitions": ' + json.dumps(d["utility_definitions"], ensure_ascii=False) + ",")
+    out.append('  "systems": ' + json.dumps(d.get("systems", {"sources": [], "edges": []}), ensure_ascii=False))
     out.append("}")
     open(path, "w", encoding="utf-8").write("\n".join(out))
 
@@ -203,14 +246,17 @@ def main():
     ap.add_argument("--name", default=None, help="lookup_name for the emitted map")
     a = ap.parse_args()
     FP = build_footprints()
+    NEEDS = load_needs()
     bag = [t.strip() for t in a.bag.split(",")] if a.bag else bag_from_map(a.map)
     placed, W, D = pack(bag, FP, a.s, a.width)
-    height, inter, util, occ, start, end, ok, nfree, unreached = build(placed, W, D)
+    height, inter, util, occ, start, end, ok, nfree, unreached = build(placed, W, D, NEEDS)
+    sys_block = systems(placed, W, D, occ, NEEDS)
     relief = sorted({p[5] for p in placed if PLAT_H.get(p[5], 1) != 1})
     walls = sum(1 for p in placed if p[6])
     src = a.map or "bag"
     print(f"KERNEL {src} {W}x{D} (default w={a.width}) s={a.s} artifacts={len(bag)} "
-          f"path_ok={ok} free={nfree} relief={relief or 'flat'} walls={walls} unreached={unreached}")
+          f"path_ok={ok} free={nfree} relief={relief or 'flat'} walls={walls} unreached={unreached} "
+          f"systems={len(sys_block['sources'])}src/{len(sys_block['edges'])}edges")
     print("<<ROWS")
     for r in grid_rows(height, inter, util, occ, W, D):
         print(r)
@@ -218,7 +264,7 @@ def main():
     if a.out:
         name = a.name or os.path.splitext(os.path.basename(os.path.dirname(a.out)))[0] or "Kernel_Demo"
         os.makedirs(os.path.dirname(a.out), exist_ok=True)
-        write_compact(a.out, to_map_data(height, inter, util, W, D, name, len(bag)))
+        write_compact(a.out, to_map_data(height, inter, util, W, D, name, len(bag), sys_block))
         print("wrote", a.out, "as", name)
 
 
