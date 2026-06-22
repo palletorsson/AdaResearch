@@ -31,6 +31,7 @@ var _busy: bool = false
 
 var _mount: Node3D = null
 var _current_inst: Node = null
+var _scale_ref: Node3D = null     # 1.8 m human silhouette for scale, repositioned per artifact
 var _camera: Camera3D = null
 var _spin: bool = true
 
@@ -160,24 +161,75 @@ func _build_world() -> void:
 	floor_body.add_child(floor_col)
 	add_child(floor_body)
 
-	var ped := MeshInstance3D.new()
-	var cyl := CylinderMesh.new()
-	cyl.top_radius = 0.9
-	cyl.bottom_radius = 1.1
-	cyl.height = 0.6
-	ped.mesh = cyl
-	ped.position = Vector3(0, 0.3, 0)
-	var pmat := StandardMaterial3D.new()
-	pmat.albedo_color = Color(0.16, 0.17, 0.21)
-	pmat.metallic = 0.2
-	pmat.roughness = 0.7
-	ped.material_override = pmat
-	add_child(ped)
+	# No podium — the artifact sits on the ground. Scale comes from a 1 m grid + a human ref.
+	_build_grid()
+	_build_scale_ref()
 
 	_mount = Node3D.new()
 	_mount.name = "ArtifactMount"
-	_mount.position = Vector3(0, 0.6, 0)   # pedestal top
+	_mount.position = Vector3.ZERO   # artifact base rests on the floor
 	add_child(_mount)
+
+
+func _build_grid() -> void:
+	# 1 m grid on the floor so footprint cells are countable by eye. Major line every 5 m,
+	# brighter axes through the origin (where the artifact stands).
+	var im := ImmediateMesh.new()
+	var mat := StandardMaterial3D.new()
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mat.vertex_color_use_as_albedo = true
+	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	im.surface_begin(Mesh.PRIMITIVE_LINES, mat)
+	var n := 14
+	for i in range(-n, n + 1):
+		var c := Color(0.45, 0.5, 0.58, 0.16)
+		if i == 0:
+			c = Color(0.6, 0.72, 0.9, 0.65)
+		elif i % 5 == 0:
+			c = Color(0.5, 0.56, 0.66, 0.42)
+		im.surface_set_color(c); im.surface_add_vertex(Vector3(i, 0.012, -n))
+		im.surface_set_color(c); im.surface_add_vertex(Vector3(i, 0.012, n))
+		im.surface_set_color(c); im.surface_add_vertex(Vector3(-n, 0.012, i))
+		im.surface_set_color(c); im.surface_add_vertex(Vector3(n, 0.012, i))
+	im.surface_end()
+	var mi := MeshInstance3D.new()
+	mi.name = "FloorGrid"
+	mi.mesh = im
+	add_child(mi)
+
+	var glabel := Label3D.new()
+	glabel.text = "1 m grid"
+	glabel.font_size = 22
+	glabel.pixel_size = 0.004
+	glabel.modulate = Color(0.5, 0.56, 0.66)
+	glabel.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	glabel.position = Vector3(float(n) - 1.0, 0.05, float(n) - 1.0)
+	add_child(glabel)
+
+
+func _build_scale_ref() -> void:
+	# A ghostly ~1.8 m human standing beside the artifact, for instant size intuition.
+	_scale_ref = Node3D.new()
+	_scale_ref.name = "ScaleRef"
+	var refmat := StandardMaterial3D.new()
+	refmat.albedo_color = Color(0.55, 0.8, 0.95, 0.42)
+	refmat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	var body := MeshInstance3D.new()
+	var bcap := CapsuleMesh.new(); bcap.radius = 0.19; bcap.height = 1.45
+	body.mesh = bcap; body.position = Vector3(0, 0.725, 0); body.material_override = refmat
+	_scale_ref.add_child(body)
+	var head := MeshInstance3D.new()
+	var hsph := SphereMesh.new(); hsph.radius = 0.15; hsph.height = 0.3
+	head.mesh = hsph; head.position = Vector3(0, 1.62, 0); head.material_override = refmat
+	_scale_ref.add_child(head)
+	var lbl := Label3D.new()
+	lbl.text = "≈1.8 m"
+	lbl.font_size = 26; lbl.pixel_size = 0.004
+	lbl.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	lbl.modulate = Color(0.7, 0.85, 0.95)
+	lbl.position = Vector3(0, 1.95, 0)
+	_scale_ref.add_child(lbl)
+	add_child(_scale_ref)
 
 
 func _build_camera() -> void:
@@ -478,14 +530,19 @@ func _show(i: int) -> void:
 		var aabb := _combined_aabb(_current_inst)
 		if aabb.size.length() > 0.001:
 			size = aabb.size
-			# sit the artifact's base on the pedestal top
+			# sit the artifact's base on the floor (no podium)
 			(_current_inst as Node3D).position = Vector3(0, -aabb.position.y, 0)
 			center = Vector3(0, aabb.size.y * 0.5, 0)
+	# Park the human reference at the artifact's front-left footprint edge.
+	if _scale_ref:
+		_scale_ref.position = Vector3(-(size.x * 0.5 + 0.7), 0.0, size.z * 0.5 + 0.2)
 	var max_dim: float = maxf(size.x, maxf(size.y, size.z))
-	_target = _mount.position + center
-	_dist = clampf(max_dim * 1.7 + 1.2, 1.5, 60.0)
+	# Always frame at least the 1.8 m human, so tiny artifacts read as tiny beside a person.
+	var frame_dim: float = maxf(max_dim, 1.9)
+	_target = _mount.position + Vector3(0, maxf(center.y, 0.9), 0)
+	_dist = clampf(frame_dim * 1.7 + 1.2, 2.0, 60.0)
 	_yaw = 0.7
-	_pitch = 0.45
+	_pitch = 0.4
 	_update_camera()
 
 	_populate_ui(nm, entry, size)
