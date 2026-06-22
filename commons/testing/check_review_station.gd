@@ -57,9 +57,26 @@ func _run() -> void:
 		DirAccess.make_dir_recursive_absolute(shot.get_base_dir())
 		img.save_png(shot)
 
-	var ok: bool = q > 0 and live
-	_report("queue=%d  index=%d  current='%s'  live=%s  shot=%s  ->  %s" % [
-		q, station._index, nm, str(live), shot, ("PASS" if ok else "FAIL")])
+	# --- walk mode: toggle, let gravity settle, confirm the player stands on the floor ---
+	station._toggle_mode()
+	for i in range(40):
+		await physics_frame
+	for i in range(3):
+		await process_frame
+	var walk_ok: bool = station._mode == "walk" and station._player_cam != null \
+		and station._player_cam.current and is_instance_valid(station._player)
+	var py: float = station._player.global_position.y if is_instance_valid(station._player) else -99.0
+	var grounded: bool = py > -0.3 and py < 0.6   # capsule origin = feet → rests ~0; not fallen through
+	var img2 := root.get_texture().get_image()
+	var shot2 := ProjectSettings.globalize_path("res://ada_run/review_station_walk.png")
+	if img2:
+		img2.save_png(shot2)
+
+	var ok: bool = q > 0 and live and walk_ok and grounded
+	_report("queue=%d index=%d current='%s' live=%s | WALK mode=%s cam_current=%s player_y=%.2f grounded=%s -> %s" % [
+		q, station._index, nm, str(live),
+		station._mode, str(station._player_cam.current if station._player_cam else false), py, str(grounded),
+		("PASS" if ok else "FAIL")])
 	quit(0 if ok else 2)
 
 

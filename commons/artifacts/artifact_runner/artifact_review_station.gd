@@ -41,6 +41,16 @@ var _dist: float = 5.0
 var _target: Vector3 = Vector3(0, 1.0, 0)
 var _dragging: bool = false
 
+# walk mode (Tab toggles orbit <-> walk; no streaming, just this one room)
+var _mode: String = "orbit"            # "orbit" | "walk"
+var _player: CharacterBody3D = null
+var _player_cam: Camera3D = null
+var _look: bool = false                # mouse captured for look (RMB held in walk mode)
+var _player_pitch: float = 0.0
+const GRAVITY := 22.0
+const WALK_SPEED := 4.5
+const JUMP_VELOCITY := 7.0
+
 # UI refs
 var _title: Label = null
 var _rating_buttons: Array = []
@@ -56,6 +66,8 @@ var _ceil_check: CheckBox = null
 var _isolate_check: CheckBox = null
 var _comment_edit: TextEdit = null
 var _status: Label = null
+var _mode_btn: Button = null
+var _help: Label = null
 
 
 func _ready() -> void:
@@ -71,6 +83,7 @@ func _ready() -> void:
 	_load_reviews()
 	_build_world()
 	_build_camera()
+	_build_player()
 	_build_ui()
 	_index = clampi(start_index, 0, _queue.size() - 1)
 	_show(_index)
@@ -136,6 +149,17 @@ func _build_world() -> void:
 	ground.material_override = gmat
 	add_child(ground)
 
+	# Floor collider for walk mode (the mesh above is visual only). Top surface at y=0.
+	var floor_body := StaticBody3D.new()
+	floor_body.name = "WalkFloor"
+	var floor_col := CollisionShape3D.new()
+	var floor_box := BoxShape3D.new()
+	floor_box.size = Vector3(80, 1.0, 80)
+	floor_col.shape = floor_box
+	floor_col.position = Vector3(0, -0.5, 0)
+	floor_body.add_child(floor_col)
+	add_child(floor_body)
+
 	var ped := MeshInstance3D.new()
 	var cyl := CylinderMesh.new()
 	cyl.top_radius = 0.9
@@ -173,6 +197,92 @@ func _update_camera() -> void:
 		cos(_pitch) * cos(_yaw))
 	_camera.global_position = _target + dir * _dist
 	_camera.look_at(_target, Vector3.UP)
+
+
+# ---------------------------------------------------------------- walk mode
+func _build_player() -> void:
+	_player = CharacterBody3D.new()
+	_player.name = "WalkPlayer"
+	_player.collision_layer = 0       # never collide with anything as a target
+	_player.collision_mask = 1        # only stand on the floor; artifacts are inert
+	var pc := CollisionShape3D.new()
+	var cap := CapsuleShape3D.new()
+	cap.radius = 0.3
+	cap.height = 1.7
+	pc.shape = cap
+	pc.position = Vector3(0, 0.85, 0)
+	_player.add_child(pc)
+	_player_cam = Camera3D.new()
+	_player_cam.fov = 70.0
+	_player_cam.position = Vector3(0, 1.55, 0)
+	_player_cam.current = false
+	_player.add_child(_player_cam)
+	add_child(_player)
+	_reset_player_spawn()
+
+
+func _reset_player_spawn() -> void:
+	if _player == null:
+		return
+	# stand back far enough to see the current artifact, facing it (default basis faces -z)
+	var back: float = clampf(_dist, 3.0, 14.0)
+	_player.global_position = Vector3(0, 0.1, back)   # capsule origin is at the feet → rests at y≈0
+	_player.rotation = Vector3.ZERO
+	_player.velocity = Vector3.ZERO
+	_player_pitch = 0.0
+	if _player_cam:
+		_player_cam.rotation = Vector3.ZERO
+
+
+func _toggle_mode() -> void:
+	if _mode == "orbit":
+		_mode = "walk"
+		_reset_player_spawn()
+		if _player_cam: _player_cam.current = true
+		_dragging = false
+	else:
+		_mode = "orbit"
+		_look = false
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		if _camera: _camera.current = true
+		_update_camera()
+	_refresh_mode_label()
+
+
+func _refresh_mode_label() -> void:
+	if _mode_btn:
+		_mode_btn.text = "Mode: WALK  (Tab)" if _mode == "walk" else "Mode: ORBIT  (Tab)"
+	if _help:
+		_help.text = ("WALK: WASD move · hold RMB look · Space jump · Tab orbit · 1–5 rate · ←/→ nav"
+			if _mode == "walk"
+			else "ORBIT: drag rotate · wheel zoom · Tab walk · 1–5 rate · ←/→ nav · S save")
+
+
+func _physics_process(delta: float) -> void:
+	if _mode != "walk" or _player == null:
+		return
+	var v := _player.velocity
+	v.y -= GRAVITY * delta
+	# don't drive movement while the user is typing an improvement note
+	var foc = get_viewport().gui_get_focus_owner()
+	var typing := foc is TextEdit or foc is LineEdit
+	var dir := Vector3.ZERO
+	if not typing:
+		var fwd := -_player.global_transform.basis.z
+		var rgt := _player.global_transform.basis.x
+		fwd.y = 0.0; rgt.y = 0.0
+		fwd = fwd.normalized(); rgt = rgt.normalized()
+		if Input.is_key_pressed(KEY_W): dir += fwd
+		if Input.is_key_pressed(KEY_S): dir -= fwd
+		if Input.is_key_pressed(KEY_D): dir += rgt
+		if Input.is_key_pressed(KEY_A): dir -= rgt
+		if Input.is_key_pressed(KEY_SPACE) and _player.is_on_floor():
+			v.y = JUMP_VELOCITY
+	dir = dir.normalized()
+	v.x = dir.x * WALK_SPEED
+	v.z = dir.z * WALK_SPEED
+	_player.velocity = v
+	_player.move_and_slide()
 
 
 # ---------------------------------------------------------------- UI
@@ -299,17 +409,22 @@ func _build_ui() -> void:
 	spin_check.toggled.connect(func(on): _spin = on)
 	vb.add_child(spin_check)
 
+	_mode_btn = _make_btn("Mode: ORBIT  (Tab)")
+	_mode_btn.pressed.connect(_toggle_mode)
+	vb.add_child(_mode_btn)
+
 	_status = Label.new()
 	_status.add_theme_font_size_override("font_size", 11)
 	_status.modulate = Color(0.7, 0.78, 0.7)
 	_status.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	vb.add_child(_status)
 
-	var help := Label.new()
-	help.add_theme_font_size_override("font_size", 10)
-	help.modulate = Color(0.55, 0.58, 0.64)
-	help.text = "drag = orbit · wheel = zoom · 1–5 rate · ←/→ prev/next · S save"
-	vb.add_child(help)
+	_help = Label.new()
+	_help.add_theme_font_size_override("font_size", 10)
+	_help.modulate = Color(0.55, 0.58, 0.64)
+	_help.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_help.text = "ORBIT: drag rotate · wheel zoom · Tab walk · 1–5 rate · ←/→ nav · S save"
+	vb.add_child(_help)
 
 
 func _section_label(t: String) -> Label:
@@ -523,34 +638,56 @@ func _write_reviews() -> void:
 
 # ---------------------------------------------------------------- input (orbit + shortcuts)
 func _process(delta: float) -> void:
-	if _spin and is_instance_valid(_current_inst) and _current_inst is Node3D:
+	if _mode == "orbit" and _spin and is_instance_valid(_current_inst) and _current_inst is Node3D:
 		(_current_inst as Node3D).rotate_y(delta * 0.4)
 
 
 func _unhandled_input(event: InputEvent) -> void:
 	# _unhandled_input only fires for events the UI panel didn't consume — so clicking
-	# buttons and typing in the comment box never reach orbit/shortcuts. Clean separation.
-	if event is InputEventMouseButton:
-		var mb := event as InputEventMouseButton
-		if mb.button_index == MOUSE_BUTTON_LEFT:
-			_dragging = mb.pressed
-		elif mb.button_index == MOUSE_BUTTON_WHEEL_UP and mb.pressed:
-			_dist = clampf(_dist * 0.9, 1.0, 80.0); _update_camera()
-		elif mb.button_index == MOUSE_BUTTON_WHEEL_DOWN and mb.pressed:
-			_dist = clampf(_dist * 1.1, 1.0, 80.0); _update_camera()
-	elif event is InputEventMouseMotion and _dragging:
-		var mm := event as InputEventMouseMotion
-		_yaw -= mm.relative.x * 0.01
-		_pitch = clampf(_pitch + mm.relative.y * 0.01, -1.4, 1.4)
-		_update_camera()
-	elif event is InputEventKey and event.pressed and not event.echo:
-		var k := event as InputEventKey
-		match k.keycode:
+	# buttons and typing in the comment box never reach orbit/look/shortcuts.
+	if event is InputEventKey and event.pressed and not event.echo and (event as InputEventKey).keycode == KEY_TAB:
+		_toggle_mode()
+		get_viewport().set_input_as_handled()
+		return
+
+	if _mode == "walk":
+		# Hold RMB to look; cursor stays free otherwise so the panel is clickable.
+		if event is InputEventMouseButton and (event as InputEventMouseButton).button_index == MOUSE_BUTTON_RIGHT:
+			_look = (event as InputEventMouseButton).pressed
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED if _look else Input.MOUSE_MODE_VISIBLE
+		elif event is InputEventMouseMotion and _look and _player:
+			var mm := event as InputEventMouseMotion
+			_player.rotate_y(-mm.relative.x * 0.005)
+			_player_pitch = clampf(_player_pitch - mm.relative.y * 0.005, -1.4, 1.4)
+			if _player_cam:
+				_player_cam.rotation.x = _player_pitch
+	else:
+		# Orbit camera.
+		if event is InputEventMouseButton:
+			var mb := event as InputEventMouseButton
+			if mb.button_index == MOUSE_BUTTON_LEFT:
+				_dragging = mb.pressed
+			elif mb.button_index == MOUSE_BUTTON_WHEEL_UP and mb.pressed:
+				_dist = clampf(_dist * 0.9, 1.0, 80.0); _update_camera()
+			elif mb.button_index == MOUSE_BUTTON_WHEEL_DOWN and mb.pressed:
+				_dist = clampf(_dist * 1.1, 1.0, 80.0); _update_camera()
+		elif event is InputEventMouseMotion and _dragging:
+			var mm := event as InputEventMouseMotion
+			_yaw -= mm.relative.x * 0.01
+			_pitch = clampf(_pitch + mm.relative.y * 0.01, -1.4, 1.4)
+			_update_camera()
+
+	# Shortcuts in both modes. Numbers/arrows never collide with WASD; S = save only in
+	# orbit (in walk, S is "step back", and nav already auto-saves).
+	if event is InputEventKey and event.pressed and not event.echo:
+		var kc: int = (event as InputEventKey).keycode
+		match kc:
 			KEY_LEFT, KEY_P: _go(-1)
 			KEY_RIGHT, KEY_N: _go(1)
-			KEY_S: _save_current()
 			KEY_1: _on_rating(1)
 			KEY_2: _on_rating(2)
 			KEY_3: _on_rating(3)
 			KEY_4: _on_rating(4)
 			KEY_5: _on_rating(5)
+		if kc == KEY_S and _mode == "orbit":
+			_save_current()
