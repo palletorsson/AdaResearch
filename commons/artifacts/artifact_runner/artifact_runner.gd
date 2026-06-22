@@ -139,8 +139,9 @@ func _spawn_slot(idx: int) -> void:
 	add_child(root)
 	_slots[idx] = root
 
-	# Floor strip the player walks on.
+	# Floor strip the player walks on. Stays on layer 1 (solid) — it is NOT made inert.
 	var floor := StaticBody3D.new()
+	floor.name = "SlotFloor"
 	var col := CollisionShape3D.new()
 	var box := BoxShape3D.new()
 	box.size = Vector3(slot_width, 0.2, slot_depth)
