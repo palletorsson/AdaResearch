@@ -48,7 +48,7 @@ func create_ambient_lights() -> void:
 	# Main directional light
 	var main_light = DirectionalLight3D.new()
 	main_light.position = Vector3(10, 15, 10)
-	main_light.look_at(Vector3.ZERO, Vector3.UP)
+	main_light.look_at_from_position(main_light.position, Vector3.ZERO, Vector3.UP)
 	main_light.light_energy = 0.8
 	main_light.light_color = Color(0.9, 0.9, 1.0)
 	add_child(main_light)

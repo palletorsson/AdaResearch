@@ -85,7 +85,7 @@ func _find_and_connect_grid() -> void:
 		print("HeightRandomnessAlgorithm: WARNING - Could not find GridSystem!")
 
 func _find_node_by_class(node: Node, target_class_name: String) -> Node:
-	if node.get_script() and node.get_script().get_global_name() == target_class_name:
+	if node and node.get_script() and node.get_script().get_global_name() == target_class_name:
 		return node
 	
 	for child in node.get_children():
