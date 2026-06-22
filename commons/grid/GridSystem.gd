@@ -535,6 +535,10 @@ func _on_utilities_complete(utility_count: int):
 func _on_interactables_complete(interactable_count: int):
 	print("GridSystem: Interactables generation complete (%d interactables)" % interactable_count)
 
+	# Render the map's kernel-emitted `systems` block as visible flow (gated, default OFF).
+	if interactables_component and interactables_component.has_method("render_map_systems"):
+		interactables_component.render_map_systems()
+
 	# Generate ceiling if configured
 	_handle_ceiling_generation()
 

@@ -800,6 +800,7 @@ func _place_dialectic_panels(dialectic_name: String, origin: Vector3, rotation: 
 # (default false), so existing maps are unchanged until you switch it on. preload (not the global
 # class_name) so it resolves headless. See commons/artifacts/_hangar/.
 const PackagingResolver := preload("res://commons/artifacts/_hangar/packaging_resolver.gd")
+const HangarKit := preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 
 # Place a single artifact using lookup_name
 func _place_artifact(x: int, y: int, z: int, lookup_name: String, total_size: float, overrides: Dictionary = {}, config_data: Dictionary = {}, tag: String = "", trigger_action: String = "") -> bool:
@@ -1721,6 +1722,49 @@ func _spawn_packaging_for(artifact: Node3D, lookup_name: String, artifact_info: 
 			artifact.position.y += raise_to
 	if specs.size() > 0:
 		print("  📦 Packaging: spawned %d prop(s) for '%s'" % [specs.size(), lookup_name])
+
+
+## Render the map's kernel-emitted `systems` block (sources + edges) as visible flow infrastructure.
+## GATED by the runtime flag "systems_render" (default OFF) — existing maps are untouched until set
+## in ada_run/runtime_flags.json. Read straight from the map file (the block is a simple top-level
+## key) to avoid threading it through the data-loader getters. Reload-safe (clears prior nodes).
+func render_map_systems() -> void:
+	if not _runtime_flag_enabled("systems_render", false):
+		return
+	if parent_node == null or map_data_component == null:
+		return
+	var mname: String = map_data_component.get_current_map_name()
+	if mname == "":
+		return
+	var path := "res://commons/maps/%s/map_data.json" % mname
+	if not FileAccess.file_exists(path):
+		return
+	var d = JSON.parse_string(FileAccess.open(path, FileAccess.READ).get_as_text())
+	if not (d is Dictionary):
+		return
+	var sys = d.get("systems")
+	if not (sys is Dictionary):
+		return
+	for c in parent_node.get_children():           # reload-safe: drop any prior system nodes
+		if c.has_meta("is_system"):
+			c.queue_free()
+	var total: float = float(cube_size) + float(gutter)
+	var fy: float = float(cube_size)                # ~floor top for a flat (height-1) generated map
+	for s in sys.get("sources", []):
+		var cell: Array = s.get("cell", [0, 0])
+		var node: Node3D = HangarKit.system_source(str(s.get("kind", "power")))
+		node.position = Vector3(int(cell[1]) * total, fy + 1.0, int(cell[0]) * total)
+		node.set_meta("is_system", true)
+		parent_node.add_child(node)
+	var n_edges := 0
+	for e in sys.get("edges", []):
+		var a := Vector3(int(e["from"][1]) * total, fy + 0.04, int(e["from"][0]) * total)
+		var b := Vector3(int(e["to"][1]) * total, fy + 0.6, int(e["to"][0]) * total)
+		var edge: Node3D = HangarKit.system_edge(a, b, str(e.get("kind", "power")))
+		edge.set_meta("is_system", true)
+		parent_node.add_child(edge)
+		n_edges += 1
+	print("GridInteractablesComponent: 🔌 systems — %d sources, %d edges" % [sys.get("sources", []).size(), n_edges])
 
 
 ## Recursively compute the local-space AABB of a node and all its children.
