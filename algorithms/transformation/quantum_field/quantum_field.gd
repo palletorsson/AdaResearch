@@ -282,6 +282,8 @@ func _on_mass_changed(_value: float) -> void:
 
 
 func _init_mode() -> void:
+	if _field_mi == null:
+		return  # called before _ready built the meshes (e.g. apply_grid_config pre-tree); _ready runs it again
 	_field_mi.visible = (_mode == Mode.FIELD)
 	_particle_mi.visible = (_mode == Mode.PARTICLES)
 	_diagram_mi.visible = (_mode == Mode.FEYNMAN)

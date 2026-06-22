@@ -179,8 +179,6 @@ func _spawn_artifact(root: Node3D, entry: Dictionary, local_pos: Vector3) -> voi
 	holder.position = local_pos
 	var s: float = float(TIER_SCALE.get(str(entry.get("tier", "medium")), 0.85))
 	inst.scale = Vector3(s, s, s)
-	if inst.has_method("apply_grid_config"):
-		inst.apply_grid_config({"emissive": false})
 	holder.add_child(inst)
 	# Name plate at the artifact's feet, facing the path.
 	var tag := Label3D.new()
@@ -192,6 +190,11 @@ func _spawn_artifact(root: Node3D, entry: Dictionary, local_pos: Vector3) -> voi
 	tag.position = Vector3(0, 0.05, 0)
 	holder.add_child(tag)
 	root.add_child(holder)
+	# Config AFTER tree-entry: adding holder to root puts inst in the tree, so its
+	# _ready has already built its child nodes. Calling apply_grid_config pre-_ready
+	# crashes artifacts whose config touches _ready-built nodes (e.g. quantum_field).
+	if inst.has_method("apply_grid_config"):
+		inst.apply_grid_config({"emissive": false})
 
 
 func _free_slot(idx: int) -> void:
