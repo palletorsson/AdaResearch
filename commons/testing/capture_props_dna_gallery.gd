@@ -1873,6 +1873,66 @@ func _build_sweep() -> Array:
 			"text_color": Color(1.0, 0.45, 0.45), "header_color": Color(1.0, 0.8, 0.3),
 		}))
 
+	# ── hangar_step_base: critical_parameter = footprint (a stage you mount) ──
+	sweep.append(_p("hangar_step_base", "1_solid", "solid step", "2×2 mounting block, hazard lip, STEP-01",
+		{ "width": 2.0, "depth": 2.0, "step_height": 0.25, "top_style": "solid", "ramp": false, "edge_rail": false, "hazard_edge": true, "stencil_text": "STEP-01" }))
+	sweep.append(_p("hangar_step_base", "2_ramp", "ramp step", "wheel a cart up the front",
+		{ "width": 2.4, "depth": 2.0, "step_height": 0.30, "top_style": "solid", "ramp": true, "hazard_edge": true, "stencil_text": "RAMP-02" }))
+	sweep.append(_p("hangar_step_base", "3_railed_deck", "railed deck", "3×3 grated work platform with rails",
+		{ "width": 3.0, "depth": 3.0, "step_height": 0.30, "top_style": "grate", "edge_rail": true, "hazard_edge": true, "stencil_text": "DECK-03" }))
+	sweep.append(_p("hangar_step_base", "4_kerb", "wall kerb", "wide shallow step to a panel",
+		{ "width": 3.2, "depth": 1.2, "step_height": 0.18, "hazard_edge": true, "stencil_text": "KERB-04" }))
+
+	# ── hangar_wall_panel: critical_parameter = panel_style ────────────────
+	sweep.append(_p("hangar_wall_panel", "1_perforated", "perforated", "a recessed hole-grid vent wall, lit seams",
+		{ "panel_style": "perforated", "lit_channels": true }))
+	sweep.append(_p("hangar_wall_panel", "2_greebled_screen", "greebled + screen", "panels, bolts, vent + an embedded readout",
+		{ "panel_style": "greebled", "screen_slot": true }))
+	sweep.append(_p("hangar_wall_panel", "3_ribbed_branded", "ribbed + brand", "vertical ribs, VALLEY LABORATORIES, hazard base",
+		{ "panel_style": "ribbed", "brand_text": "VALLEY LABORATORIES", "hazard_base": true }))
+	sweep.append(_p("hangar_wall_panel", "4_full", "full greebled", "screen + brand + lit seams + wear",
+		{ "panel_style": "greebled", "screen_slot": true, "brand_text": "BAY 7", "lit_channels": true, "wear": 0.35 }))
+
+	# ── hangar_cabinet_cluster: critical_parameter = unit_count ────────────
+	sweep.append(_p("hangar_cabinet_cluster", "1_cool_pair", "cool pair", "two cool-grey cabinets, screens + vents",
+		{ "unit_count": 2, "palette": "cool", "with_screens": true, "vents": true }))
+	sweep.append(_p("hangar_cabinet_cluster", "2_mixed_bank", "mixed bank", "three mixed-palette units — the default",
+		{ "unit_count": 3, "palette": "mixed", "with_screens": true, "vents": true }))
+	sweep.append(_p("hangar_cabinet_cluster", "3_warm_quad", "warm quad", "four warm units, full screens + vents",
+		{ "unit_count": 4, "palette": "warm", "with_screens": true, "vents": true }))
+	sweep.append(_p("hangar_cabinet_cluster", "4_dormant_row", "dormant row", "four cool units, dark — no screens or vents",
+		{ "unit_count": 4, "palette": "cool", "with_screens": false, "vents": false }))
+
+	# ── hangar_supply_pile: critical_parameter = crate_count ───────────────
+	sweep.append(_p("hangar_supply_pile", "1_cardboard_four", "cardboard · 4", "the canonical supply corner — crates, cylinder, cone",
+		{ "crate_count": 4, "palette": "cardboard", "hazard_labels": true, "with_cylinder": true, "with_cone": true, "wear": 0.3 }))
+	sweep.append(_p("hangar_supply_pile", "2_wood_five", "wood · 5 full", "a fully-stocked wooden freight pile",
+		{ "crate_count": 5, "palette": "wood", "hazard_labels": true, "with_cylinder": true, "with_cone": true, "wear": 0.45 }))
+	sweep.append(_p("hangar_supply_pile", "3_metal_two", "metal · 2 bare", "a small drop-off — two metal crates + cone",
+		{ "crate_count": 2, "palette": "metal", "hazard_labels": false, "with_cylinder": false, "with_cone": true, "wear": 0.2 }))
+	sweep.append(_p("hangar_supply_pile", "4_refuel", "cardboard · 3 + cylinder", "three crates + the gas cylinder, no cone",
+		{ "crate_count": 3, "palette": "cardboard", "hazard_labels": true, "with_cylinder": true, "with_cone": false, "cylinder_color": Color(0.85, 0.55, 0.10), "wear": 0.6 }))
+
+	# ── hangar_barrier_fence: critical_parameter = panel_count ─────────────
+	sweep.append(_p("hangar_barrier_fence", "1_short_branded", "short branded gate", "2 panels, VALLEY LABORATORIES + subtitle",
+		{ "panel_count": 2, "brand_text": "VALLEY LABORATORIES", "subtitle_text": "AUTHORIZED PERSONNEL" }))
+	sweep.append(_p("hangar_barrier_fence", "2_long_cordon", "long cordon", "5 panels, biohazard, caution base",
+		{ "panel_count": 5, "brand_text": "BIOHAZARD CONTAINMENT", "stripe_base": true }))
+	sweep.append(_p("hangar_barrier_fence", "3_l_corner", "L-corner wrap", "4 panels bent into an L",
+		{ "panel_count": 4, "corner": true, "brand_text": "RESTRICTED ZONE" }))
+	sweep.append(_p("hangar_barrier_fence", "4_plain_run", "plain run", "3 unbranded panels",
+		{ "panel_count": 3, "brand_text": "" }))
+
+	# ── hangar_worktable: critical_parameter = width ───────────────────────
+	sweep.append(_p("hangar_worktable", "1_single_station", "single station", "1.2m bench — drawers, screen, tools",
+		{ "width": 1.2, "top_style": "solid", "with_screen": true, "with_tools": true, "drawers": true, "stencil_text": "BENCH-01" }))
+	sweep.append(_p("hangar_worktable", "2_two_tool", "two-tool bench", "1.6m default — full kit",
+		{ "width": 1.6, "with_screen": true, "with_tools": true, "drawers": true, "stencil_text": "BENCH-02" }))
+	sweep.append(_p("hangar_worktable", "3_shared_run", "shared run", "2.4m, clear top, screen only",
+		{ "width": 2.4, "depth": 1.0, "with_screen": true, "with_tools": false, "drawers": false, "stencil_text": "BENCH-03" }))
+	sweep.append(_p("hangar_worktable", "4_wet_bench", "wet bench", "1.8m grated drainage top, worn",
+		{ "width": 1.8, "depth": 0.9, "top_style": "grate", "with_screen": false, "with_tools": true, "drawers": true, "wear": 0.55, "stencil_text": "BENCH-04" }))
+
 	return sweep
 
 

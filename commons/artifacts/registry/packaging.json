@@ -61,6 +61,108 @@
         "wall_backing": false
       },
       "dev_themes": ["environment", "hangar", "packaging", "ui", "label"]
+    },
+    "hangar_step_base": {
+      "lookup_name": "hangar_step_base",
+      "scene": "res://commons/artifacts/hangar_step_base/hangar_step_base.tscn",
+      "class_name": "HangarStepBase",
+      "name": "Hangar Step Base",
+      "description": "A low WIDE section of maintenance-bay floor the player steps ONTO to reach a big artifact or stand inside one. A thick slab rises one step (<=0.35m) with an inset paneled skirt, solid or grated top, a caution-striped front edge, a stencilled ID, an optional front ramp and optional back/side railing.",
+      "category": "packaging", "complexity": "intermediate", "include_in_map_data": true, "map_ready": true, "map_sequences": [],
+      "tags": ["packaging", "grounding", "prop", "hangar", "stage", "platform", "step", "sci-fi"],
+      "parameters": {
+        "width": "X footprint (default 2.0).", "depth": "Z footprint (default 2.0).",
+        "step_height": "Step rise, clamped <=0.35 (default 0.25).", "top_style": "solid | grate.",
+        "edge_rail": "Low railing on back + two sides.", "ramp": "Sloped front ramp instead of a step face.",
+        "hazard_edge": "Caution stripe along the front edge.", "stencil_text": "Stencilled ID on the front skirt.",
+        "body_color": "Slab colour.", "accent_color": "Hazard-stripe colour."
+      },
+      "spatial_needs": { "platform": "none", "footprint_cells": 4, "wall_backing": false },
+      "dev_themes": ["environment", "hangar", "packaging", "placement"]
+    },
+    "hangar_wall_panel": {
+      "lookup_name": "hangar_wall_panel",
+      "scene": "res://commons/artifacts/hangar_wall_panel/hangar_wall_panel.tscn",
+      "class_name": "HangarWallPanel",
+      "name": "Hangar Wall Panel",
+      "description": "A modular maintenance-bay backing WALL behind an artifact — painted-metal plates with a perforated, greebled, or ribbed face, optional lit vertical seams, an embedded framed readout, a printed brand patch, a floor caution stripe and a stencilled ID.",
+      "category": "packaging", "complexity": "intermediate", "include_in_map_data": true, "map_ready": true, "map_sequences": [],
+      "tags": ["packaging", "grounding", "prop", "wall", "backing", "hangar", "sci-fi"],
+      "parameters": {
+        "width": "Wall width X (default 2.4).", "height": "Wall height (default 2.6).",
+        "panel_style": "perforated | greebled | ribbed.", "screen_slot": "Embed a readout upper-centre.",
+        "lit_channels": "Emissive vertical seam strips.", "hazard_base": "Caution stripe at the foot.",
+        "brand_text": "Brand patch near the top (empty = none).", "stencil_text": "Stencilled ID.",
+        "wear": "Weathering 0..1.", "body_color": "Slab colour.", "panel_color": "Panel colour.", "accent_color": "Seam colour."
+      },
+      "spatial_needs": { "platform": "none", "footprint_cells": 2, "wall_backing": true },
+      "dev_themes": ["environment", "hangar", "packaging", "placement", "backdrop"]
+    },
+    "hangar_cabinet_cluster": {
+      "lookup_name": "hangar_cabinet_cluster",
+      "scene": "res://commons/artifacts/hangar_cabinet_cluster/hangar_cabinet_cluster.tscn",
+      "class_name": "HangarCabinetCluster",
+      "name": "Hangar Cabinet Cluster",
+      "description": "A bank of mixed-height utility/server cabinets side by side — painted-metal boxes with inset panels, slatted vents, small self-lit status screens and stencilled unit IDs (U1..Un). unit_count sets how much wall the bank claims.",
+      "category": "packaging", "complexity": "intermediate", "include_in_map_data": true, "map_ready": true, "map_sequences": [],
+      "tags": ["packaging", "prop", "hangar", "cabinet", "equipment", "server", "sci-fi"],
+      "parameters": {
+        "unit_count": "Cabinets side by side, 2..4 (default 3).", "unit_width": "Per-unit width (0.6).", "depth": "Depth (0.6).",
+        "base_height": "Nominal height (1.6).", "height_variation": "Per-unit height swing (0.3).",
+        "with_screens": "Some units get a status readout.", "vents": "Slatted vent panels.",
+        "palette": "cool | warm | mixed.", "wear": "0..1.", "panel_color": "Trim colour.", "screen_accent": "Screen text colour."
+      },
+      "spatial_needs": { "platform": "none", "footprint_cells": 3, "wall_backing": false },
+      "dev_themes": ["environment", "hangar", "packaging", "placement", "infrastructure"]
+    },
+    "hangar_supply_pile": {
+      "lookup_name": "hangar_supply_pile",
+      "scene": "res://commons/artifacts/hangar_supply_pile/hangar_supply_pile.tscn",
+      "class_name": "HangarSupplyPile",
+      "name": "Hangar Supply Pile",
+      "description": "A staged pile of supplies — stacked crates (varying sizes, base crates bigger) with FRAGILE/KEEP DRY stencils, a red gas cylinder with a draping hose, and a striped warning cone. The lived-in clutter that furnishes a bay by its leftovers.",
+      "category": "packaging", "complexity": "intermediate", "include_in_map_data": true, "map_ready": true, "map_sequences": [],
+      "tags": ["packaging", "prop", "hangar", "crates", "supplies", "hazard", "sci-fi"],
+      "parameters": {
+        "crate_count": "Crates in the pile, 2..5 (default 4).", "palette": "cardboard | wood | metal.",
+        "hazard_labels": "FRAGILE/KEEP DRY stencils on crate faces.", "with_cylinder": "Red gas cylinder + hose.",
+        "with_cone": "Striped warning cone.", "cylinder_color": "Cylinder body colour.", "wear": "0..1."
+      },
+      "spatial_needs": { "platform": "none", "footprint_cells": 3, "wall_backing": false },
+      "dev_themes": ["environment", "hangar", "packaging", "clutter", "placement"]
+    },
+    "hangar_barrier_fence": {
+      "lookup_name": "hangar_barrier_fence",
+      "scene": "res://commons/artifacts/hangar_barrier_fence/hangar_barrier_fence.tscn",
+      "class_name": "HangarBarrierFence",
+      "name": "Hangar Barrier Fence",
+      "description": "A branded modular crowd/area barrier — pale-grey panels strung between dark posts on foot plates, a horizontal seam across each panel, a lab brand patch spanning the run. Bends into an L; optional caution stripe at the base.",
+      "category": "packaging", "complexity": "intermediate", "include_in_map_data": true, "map_ready": true, "map_sequences": [],
+      "tags": ["packaging", "prop", "hangar", "barrier", "fence", "branding", "sci-fi"],
+      "parameters": {
+        "panel_count": "Panels in the run, 2..5 (default 3).", "panel_width": "Per-panel width (1.4).", "height": "Barrier height (1.1).",
+        "brand_text": "Brand patch across the run (empty = none).", "subtitle_text": "Smaller stencil line under the brand.",
+        "corner": "Bend the run into an L.", "stripe_base": "Caution stripe at the base.",
+        "panel_color": "Panel colour.", "post_color": "Post colour.", "wear": "0..1."
+      },
+      "spatial_needs": { "platform": "none", "footprint_cells": 3, "wall_backing": false },
+      "dev_themes": ["environment", "hangar", "packaging", "placement", "cordon"]
+    },
+    "hangar_worktable": {
+      "lookup_name": "hangar_worktable",
+      "scene": "res://commons/artifacts/hangar_worktable/hangar_worktable.tscn",
+      "class_name": "HangarWorktable",
+      "name": "Hangar Worktable",
+      "description": "A battered painted-metal maintenance worktable — a flat top on four sturdy legs that turns a patch of floor into a workspace. Solid or grate top, optional drawer unit, fixed tool clutter, and a small back-standing DIAG readout.",
+      "category": "packaging", "complexity": "intermediate", "include_in_map_data": true, "map_ready": true, "map_sequences": [],
+      "tags": ["packaging", "furniture", "prop", "table", "workbench", "hangar", "sci-fi"],
+      "parameters": {
+        "width": "Tabletop width X (default 1.6).", "depth": "Tabletop depth Z (0.8).", "top_height": "Work-surface height (0.95).",
+        "top_style": "solid | grate.", "with_screen": "Back-standing DIAG readout.", "with_tools": "Fixed tool clutter on top.",
+        "drawers": "Drawer unit under one side.", "body_color": "Legs/apron colour.", "top_color": "Top colour.", "wear": "0..1."
+      },
+      "spatial_needs": { "platform": "table", "footprint_cells": 2, "wall_backing": false },
+      "dev_themes": ["environment", "hangar", "packaging", "furniture", "placement"]
     }
   }
 }
