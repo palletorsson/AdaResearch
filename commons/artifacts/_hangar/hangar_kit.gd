@@ -19,6 +19,40 @@ const TEXT_DISPLAY := Color(0.90, 0.89, 0.85)   # warm off-white readout on the 
 # A clean three-colour accent triad (the "three colour bar").
 const BAR_TRIAD := [Color(0.86, 0.34, 0.11), Color(0.20, 0.22, 0.26), Color(0.82, 0.80, 0.75)]
 
+# Alternate DARK "terminal" finish — the heavy charcoal-console look (the dark-terminal refs).
+# A non-default DNA finish: dark worn-metal housing, signal-red accent, a green CRT screen.
+const TERMINAL_BODY := Color(0.14, 0.14, 0.155)
+const TERMINAL_PANEL := Color(0.09, 0.09, 0.10)
+const TERMINAL_ACCENT := Color(0.85, 0.30, 0.12)
+const TERMINAL_SCREEN := Color(0.05, 0.10, 0.06)   # dark green-black CRT
+const TERMINAL_TEXT := Color(0.45, 0.95, 0.50)     # green CRT text
+
+
+## The palette for a named finish: "rams" (light Braun default) | "terminal" (dark console).
+## Returns { body, panel, accent, screen, text, header, wear }.
+static func finish_palette(finish: String) -> Dictionary:
+	if finish.to_lower() == "terminal":
+		return {"body": TERMINAL_BODY, "panel": TERMINAL_PANEL, "accent": TERMINAL_ACCENT,
+			"screen": TERMINAL_SCREEN, "text": TERMINAL_TEXT, "header": TERMINAL_ACCENT, "wear": 0.32}
+	return {"body": BODY_LIGHT, "panel": PANEL_TRIM, "accent": BRAUN_ACCENT,
+		"screen": DISPLAY_DARK, "text": TEXT_DISPLAY, "header": BRAUN_ACCENT, "wear": 0.08}
+
+
+## Body material for a finish — light matte (rams) or dark worn metal (terminal).
+static func finish_body(finish: String, c: Color, wear: float) -> StandardMaterial3D:
+	if finish.to_lower() == "terminal":
+		return terminal_body(c, wear)
+	return rams_body(c, wear)
+
+
+## Dark worn-metal "terminal" housing — the alternate finish (heavy charcoal console).
+static func terminal_body(c: Color = TERMINAL_BODY, wear: float = 0.3) -> StandardMaterial3D:
+	var m := StandardMaterial3D.new()
+	m.albedo_color = c.darkened(wear * 0.18)
+	m.metallic = 0.55
+	m.roughness = clampf(0.42 + wear * 0.2, 0.05, 1.0)
+	return m
+
 
 # ── Materials ─────────────────────────────────────────────────────────
 ## Light matte Braun/Rams housing — the family DEFAULT surface. Plastic-painted, calm; `wear`

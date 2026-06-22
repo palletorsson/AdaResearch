@@ -50,6 +50,8 @@ const HangarKit := preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 @export var stencil_text: String = ""
 ## Diagonal caution-stripe band around the plinth foot.
 @export var hazard_trim: bool = false
+## Finish preset: "rams" (light Braun default) | "terminal" (dark charcoal console). DNA can pick.
+@export var finish: String = "rams"
 
 # ── Constants ─────────────────────────────────────────────────────────
 const CAP_THICK := 0.08
@@ -91,11 +93,19 @@ func _read_metadata_overrides() -> void:
 	if has_meta("config_hazard_trim"): hazard_trim = str(get_meta("config_hazard_trim")).to_lower() in ["true", "1", "yes", "on"]
 	if has_meta("config_three_bar"): three_bar = str(get_meta("config_three_bar")).to_lower() in ["true", "1", "yes", "on"]
 	if has_meta("config_grime"): grime = str(get_meta("config_grime")).to_lower() in ["true", "1", "yes", "on"]
+	if has_meta("config_finish"): finish = str(get_meta("config_finish")).to_lower()
 
 
 # ── Build ─────────────────────────────────────────────────────────────
 func _build() -> void:
 	_built = true
+	# Apply the finish preset to any colours still at their Braun defaults (explicit DNA wins).
+	if finish.to_lower() != "rams":
+		var pal := HangarKit.finish_palette(finish)
+		if body_color.is_equal_approx(HangarKit.BODY_LIGHT): body_color = pal["body"]
+		if panel_color.is_equal_approx(HangarKit.PANEL_TRIM): panel_color = pal["panel"]
+		if accent_color.is_equal_approx(HangarKit.BRAUN_ACCENT): accent_color = pal["accent"]
+		if absf(wear - 0.08) < 0.001: wear = float(pal["wear"])
 	var base_w: float = top_size + taper * 2.0
 	var body_mat := _mat(body_color, 0.55, 0.35)
 	var cap_mat := _mat(body_color.lightened(0.06), 0.45, 0.45)
@@ -223,9 +233,9 @@ func _build_three_bar(body_w: float, body_bottom: float, body_h: float) -> void:
 
 
 # ── Local helpers (delegate to the shared HangarKit for the family look) ──
-# Light matte Braun finish — the housing recedes. (rough/metal ignored: Rams is matte.)
+# Finish-aware body material (light matte "rams" or dark worn "terminal").
 func _mat(c: Color, _rough: float, _metal: float) -> StandardMaterial3D:
-	return HangarKit.rams_body(c, wear)
+	return HangarKit.finish_body(finish, c, wear)
 
 
 func _emi(c: Color, energy: float) -> StandardMaterial3D:

@@ -1844,6 +1844,12 @@ func _build_sweep() -> Array:
 			"accent_color": Color(0.30, 0.95, 0.45),
 			"wear": 0.45, "hazard_trim": true, "stencil_text": "BAY-04",
 		}))
+	sweep.append(_p("hangar_podium", "5_terminal", "terminal finish",
+		"the dark alternate DNA — charcoal worn-metal console, signal-red bar",
+		{
+			"top_height": 1.0, "top_size": 0.55, "taper": 0.12,
+			"top_style": "tray", "panel_style": "greebled", "finish": "terminal", "stencil_text": "TRM-05",
+		}))
 
 	# ── artifact_readout_screen: critical_parameter = mount ─────────────────
 	sweep.append(_p("artifact_readout_screen", "1_stalk", "stalk readout",
@@ -1871,6 +1877,12 @@ func _build_sweep() -> Array:
 			"header": "POWER", "body": "CONSUMPTION  30%\nNOMINAL",
 			"mount": "desk", "screen_w": 0.42, "screen_h": 0.3,
 			"text_color": Color(1.0, 0.45, 0.45), "header_color": Color(1.0, 0.8, 0.3),
+		}))
+	sweep.append(_p("artifact_readout_screen", "5_terminal", "terminal finish",
+		"the dark alternate DNA — green-CRT console screen on a charcoal stalk",
+		{
+			"header": "SYSTEM", "body": "CORE   ONLINE\nMEM    OK\nLINK   2400",
+			"mount": "stalk", "finish": "terminal",
 		}))
 
 	# ── hangar_step_base: critical_parameter = footprint (a stage you mount) ──

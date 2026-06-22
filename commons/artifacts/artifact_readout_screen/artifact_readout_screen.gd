@@ -30,6 +30,8 @@ const HangarKit := preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 @export var text_color: Color = Color(0.90, 0.89, 0.85)
 @export var header_color: Color = Color(0.86, 0.34, 0.11)
 @export var frame_color: Color = Color(0.70, 0.68, 0.64)
+## Finish preset: "rams" (calm light Braun) | "terminal" (dark green-CRT console). DNA can pick.
+@export var finish: String = "rams"
 
 const MOUNT_Y := {"stalk": 1.25, "wall": 1.55, "freestand": 1.35, "desk": 0.95}
 
@@ -62,10 +64,18 @@ func _read_metadata_overrides() -> void:
 	if has_meta("config_text_color"): text_color = _pc(str(get_meta("config_text_color")), text_color)
 	if has_meta("config_header_color"): header_color = _pc(str(get_meta("config_header_color")), header_color)
 	if has_meta("config_frame_color"): frame_color = _pc(str(get_meta("config_frame_color")), frame_color)
+	if has_meta("config_finish"): finish = str(get_meta("config_finish")).to_lower()
 
 
 func _build() -> void:
 	_built = true
+	# Apply the finish preset to any colours still at their Braun defaults (explicit DNA wins).
+	if finish.to_lower() != "rams":
+		var pal := HangarKit.finish_palette(finish)
+		if screen_bg.is_equal_approx(HangarKit.DISPLAY_DARK): screen_bg = pal["screen"]
+		if text_color.is_equal_approx(HangarKit.TEXT_DISPLAY): text_color = pal["text"]
+		if header_color.is_equal_approx(HangarKit.BRAUN_ACCENT): header_color = pal["header"]
+		if frame_color.is_equal_approx(HangarKit.PANEL_TRIM): frame_color = pal["panel"]
 	var lines: Array = []
 	for l in body.split("\n"):
 		if str(l).strip_edges() != "":
@@ -84,8 +94,8 @@ func _build() -> void:
 
 
 func _build_stalk(sy: float) -> void:
-	var mat := HangarKit.rams_body(frame_color, 0.08)
-	var worn := HangarKit.rams_body(frame_color, 0.14)
+	var mat := HangarKit.finish_body(finish, frame_color, 0.08)
+	var worn := HangarKit.finish_body(finish, frame_color, 0.14)
 	# foot
 	add_child(HangarKit.box(Vector3(0, 0.05, -0.02), Vector3(0.22, 0.10, 0.18), worn))
 	# post up the back of the screen
@@ -111,7 +121,7 @@ func _build_stalk(sy: float) -> void:
 
 func _build_wall(sy: float) -> void:
 	# a tall narrow backing plate (reads as wall-mounted signage)
-	var mat := HangarKit.rams_body(frame_color, 0.08)
+	var mat := HangarKit.finish_body(finish, frame_color, 0.08)
 	add_child(HangarKit.box(Vector3(0, sy, -0.05), Vector3(screen_w + 0.3, 2.0, 0.06), mat))
 	# bolt rows down the sides
 	var bm := HangarKit.worn_metal(Color(0.1, 0.1, 0.12))
@@ -120,8 +130,8 @@ func _build_wall(sy: float) -> void:
 
 
 func _build_legs(sy: float) -> void:
-	var mat := HangarKit.rams_body(frame_color, 0.08)
-	var foot := HangarKit.rams_body(frame_color, 0.13)
+	var mat := HangarKit.finish_body(finish, frame_color, 0.08)
+	var foot := HangarKit.finish_body(finish, frame_color, 0.13)
 	for sx in [-1.0, 1.0]:
 		var x: float = sx * (screen_w * 0.5 - 0.04)
 		var leg := CylinderMesh.new()
@@ -137,7 +147,7 @@ func _build_legs(sy: float) -> void:
 
 
 func _build_desk(sy: float) -> void:
-	var mat := HangarKit.rams_body(frame_color, 0.13)
+	var mat := HangarKit.finish_body(finish, frame_color, 0.13)
 	# small wedge stand under a low screen
 	add_child(HangarKit.box(Vector3(0, 0.04, -0.02), Vector3(screen_w + 0.1, 0.08, 0.16), mat))
 	add_child(HangarKit.box(Vector3(0, sy * 0.5, -screen_h * 0.5 - 0.03), Vector3(0.06, sy, 0.06), mat))
