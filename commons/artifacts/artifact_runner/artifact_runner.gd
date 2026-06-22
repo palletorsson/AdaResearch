@@ -26,6 +26,10 @@ const ArtifactQueueScript = preload("res://commons/artifacts/artifact_runner/art
 @export var only_maps: Array[String] = []
 @export var shuffle_within_map: bool = false
 @export var use_all_registry: bool = false  # ignore concept maps, walk every registered artifact
+# Strip streamed artifacts from the physics world (collision off, rigidbodies frozen) so a spawning
+# RigidBody/SoftBody can't shove or trap the player. You walk THROUGH them; they still animate. Off = let
+# them collide (you can be body-checked when a chunk loads).
+@export var artifacts_inert: bool = true
 
 # Tier → uniform scale, so room-scale artifacts fit a corridor cell.
 const TIER_SCALE := {"small": 1.0, "medium": 0.85, "large": 0.4, "applied": 0.75}
@@ -63,7 +67,11 @@ func _ready() -> void:
 	add_child(_header)
 
 	_find_player()
-	_update_window()
+	# Defer the first spawn: spawning slots/artifacts DURING _ready runs each
+	# artifact's _ready while the tree is still blocked (mid-add), which trips
+	# add_child / global-transform calls in many legacy artifacts. Let _ready
+	# finish first so every artifact enters a settled, unblocked tree.
+	call_deferred("_update_window")
 
 
 func _build_name_scene_index() -> void:
@@ -177,10 +185,10 @@ func _spawn_artifact(root: Node3D, entry: Dictionary, local_pos: Vector3) -> voi
 		return
 	var holder := Node3D.new()
 	holder.position = local_pos
-	var s: float = float(TIER_SCALE.get(str(entry.get("tier", "medium")), 0.85))
-	inst.scale = Vector3(s, s, s)
-	holder.add_child(inst)
-	# Name plate at the artifact's feet, facing the path.
+	# Put the holder in the (already-live) slot tree FIRST, with its name plate, then
+	# add the artifact LAST — so the artifact's _ready fires as a clean top-level add
+	# into a settled, unblocked tree (it can add_child / read global transforms safely).
+	root.add_child(holder)
 	var tag := Label3D.new()
 	tag.text = name
 	tag.font_size = 22
@@ -189,12 +197,34 @@ func _spawn_artifact(root: Node3D, entry: Dictionary, local_pos: Vector3) -> voi
 	tag.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 	tag.position = Vector3(0, 0.05, 0)
 	holder.add_child(tag)
-	root.add_child(holder)
-	# Config AFTER tree-entry: adding holder to root puts inst in the tree, so its
-	# _ready has already built its child nodes. Calling apply_grid_config pre-_ready
-	# crashes artifacts whose config touches _ready-built nodes (e.g. quantum_field).
+	var s: float = float(TIER_SCALE.get(str(entry.get("tier", "medium")), 0.85))
+	inst.scale = Vector3(s, s, s)
+	holder.add_child(inst)   # inst enters a live tree here → its _ready runs cleanly
+	# Config AFTER tree-entry, so the artifact's _ready has built its nodes first.
 	if inst.has_method("apply_grid_config"):
 		inst.apply_grid_config({"emissive": false})
+	# Strip from the physics world LAST (after config may have rebuilt children), so a
+	# spawning RigidBody/SoftBody can't body-check or trap the player as the chunk loads.
+	if artifacts_inert:
+		_make_inert(inst)
+
+
+# Recursively remove a streamed artifact from physics: no collisions in or out, rigidbodies
+# frozen so they don't fall. You walk THROUGH it; it still renders and animates.
+func _make_inert(node: Node) -> void:
+	if node is CollisionObject3D:
+		node.collision_layer = 0
+		node.collision_mask = 0
+		if node is RigidBody3D:
+			node.freeze = true
+		elif node is CharacterBody3D:
+			node.set_physics_process(false)
+	elif node is SoftBody3D:
+		# SoftBody3D is a MeshInstance3D, not a CollisionObject3D — it has its own layers.
+		node.collision_layer = 0
+		node.collision_mask = 0
+	for c in node.get_children():
+		_make_inert(c)
 
 
 func _free_slot(idx: int) -> void:

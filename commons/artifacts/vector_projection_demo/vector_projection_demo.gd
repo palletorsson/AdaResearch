@@ -235,7 +235,8 @@ func _create_axis_line(direction: Vector3, color: Color, label_text: String):
 	shaft.position = direction / 2.0
 
 	if abs(norm.dot(Vector3.UP)) < 0.99:
-		shaft.look_at(shaft.position + direction, Vector3.UP)
+		# look_at_from_position works before the node is added to the tree (look_at errors)
+		shaft.look_at_from_position(shaft.position, shaft.position + direction, Vector3.UP)
 		shaft.rotate_object_local(Vector3.RIGHT, PI/2)
 
 	_axes_container.add_child(shaft)

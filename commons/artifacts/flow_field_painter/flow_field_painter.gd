@@ -322,6 +322,15 @@ func _process(delta):
 ## Rebuild trail line geometry from particle trails using the cached ImmediateMesh.
 func _update_trail_mesh():
 	_im.clear_surfaces()
+	# Nothing to draw until a particle has at least 2 trail points — calling
+	# surface_end() on an empty surface errors. Bail early on those first frames.
+	var _has_trail := false
+	for p in _particles:
+		if p.trail.size() >= 2:
+			_has_trail = true
+			break
+	if not _has_trail:
+		return
 	_im.surface_begin(Mesh.PRIMITIVE_LINES)
 
 	for p in _particles:

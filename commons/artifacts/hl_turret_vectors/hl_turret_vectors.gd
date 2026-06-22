@@ -339,7 +339,8 @@ func _create_line_mesh(start: Vector3, end: Vector3, mat: Material) -> MeshInsta
 	line.position = (start + end) / 2.0
 
 	if abs(direction.normalized().dot(Vector3.UP)) < 0.99:
-		line.look_at(line.position + direction, Vector3.UP)
+		# look_at_from_position works before the node is added to the tree (look_at errors)
+		line.look_at_from_position(line.position, line.position + direction, Vector3.UP)
 		line.rotate_object_local(Vector3.RIGHT, PI / 2)
 
 	return line

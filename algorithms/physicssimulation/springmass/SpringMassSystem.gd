@@ -101,9 +101,12 @@ func _create_spring_visual(spring) -> void:
 	var mid_point = (spring.point1.position + spring.point2.position) / 2
 	spring_line.position = mid_point
 	
-	# Orient spring to point from point1 to point2
+	# Orient spring to point from point1 to point2. Guard degenerate cases:
+	# a zero-length spring, or one parallel to the up vector, makes look_at error.
 	var direction = (spring.point2.position - spring.point1.position).normalized()
-	spring_line.look_at_from_position(spring_line.position, spring.point2.position, Vector3.UP)
+	if direction.length_squared() > 0.0001:
+		var up := Vector3.UP if abs(direction.dot(Vector3.UP)) < 0.99 else Vector3.RIGHT
+		spring_line.look_at_from_position(spring_line.position, spring.point2.position, up)
 	
 	$Springs.add_child(spring_line)
 	spring["visual"] = spring_line
