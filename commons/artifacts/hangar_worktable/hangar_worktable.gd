@@ -34,12 +34,18 @@ const HangarKit := preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 @export var drawers: bool = true
 
 @export_group("Color")
-@export var body_color: Color = Color(0.34, 0.36, 0.40)
-@export var top_color: Color = Color(0.42, 0.44, 0.48)
+## Dieter Rams / Braun default — light matte body so the housing recedes; the top is the work surface.
+@export var body_color: Color = Color(0.81, 0.79, 0.75)
+@export var top_color: Color = Color(0.70, 0.68, 0.64)
+@export var accent_color: Color = Color(0.86, 0.34, 0.11)
 
 @export_group("Surface")
-## Weathering 0..1 — darkens + roughens toward scuffed bare metal.
-@export var wear: float = 0.25
+## Weathering 0..1 — subtle dust by default (Rams clean), not heavy grime.
+@export var wear: float = 0.08
+## Three-colour Rams accent bar across the front apron rail, proud of its face.
+@export var three_bar: bool = true
+## Faint dust band at the foot (subtle) + a few dust streaks on the apron.
+@export var grime: bool = true
 ## Stencilled ID painted on the apron rail under the top (e.g. "BENCH-01"). Empty = none.
 @export var stencil_text: String = ""
 
@@ -77,7 +83,10 @@ func _read_metadata_overrides() -> void:
 	if has_meta("config_drawers"): drawers = str(get_meta("config_drawers")).to_lower() in ["true", "1", "yes", "on"]
 	if has_meta("config_body_color"): body_color = _pc(str(get_meta("config_body_color")), body_color)
 	if has_meta("config_top_color"): top_color = _pc(str(get_meta("config_top_color")), top_color)
+	if has_meta("config_accent_color"): accent_color = _pc(str(get_meta("config_accent_color")), accent_color)
 	if has_meta("config_wear"): wear = float(str(get_meta("config_wear")))
+	if has_meta("config_three_bar"): three_bar = str(get_meta("config_three_bar")).to_lower() in ["true", "1", "yes", "on"]
+	if has_meta("config_grime"): grime = str(get_meta("config_grime")).to_lower() in ["true", "1", "yes", "on"]
 	if has_meta("config_stencil_text"): stencil_text = str(get_meta("config_stencil_text"))
 
 
@@ -121,6 +130,15 @@ func _build() -> void:
 		_build_tools(w, d, h)
 	if with_screen:
 		_build_screen(w, d, h)
+	if three_bar:
+		_build_three_bar(w, d, apron_cy)
+	if grime:
+		# faint dust band at the foot, just proud of the +Z base footprint
+		add_child(HangarKit.grime_band(w, 0.07, d * 0.5 + 0.004, body_color))
+		# a few faint dust streaks hanging down the front apron face
+		var streaks := HangarKit.dust_streaks(w * 0.7, APRON_H * 0.9, at * 0.5 + 0.006, 4)
+		streaks.position = Vector3(0, apron_cy, d * 0.5)
+		add_child(streaks)
 	if stencil_text.strip_edges() != "":
 		_build_stencil(w, d, apron_cy)
 
@@ -141,7 +159,8 @@ func _build_grate_top(w: float, d: float, h: float, mat: Material) -> void:
 # A drawer unit (2-3 stacked drawer faces with a thin handle line) under one side.
 func _build_drawers(w: float, d: float, h: float) -> void:
 	var face_mat := _mat(body_color.lightened(0.05), 0.5, 0.4)
-	var handle_mat := HangarKit.worn_metal(body_color)
+	# one warm accent line per drawer (Braun "one warm element"), not dark scuffed metal
+	var handle_mat := HangarKit.rams_body(accent_color, wear)
 	var unit_w: float = minf(w * 0.32, 0.42)
 	var unit_d: float = d * 0.78
 	# nestle the unit under the +X end of the bench, just inside the legs
@@ -186,20 +205,28 @@ func _build_screen(w: float, d: float, h: float) -> void:
 		add_child(screen)
 		# a short stalk down to the tabletop so it reads as standing, not floating
 		var stalk_h: float = sh * 0.5 + 0.04
-		add_child(_box(Vector3(-w * 0.12, h + stalk_h * 0.5, -d * 0.5 + 0.06), Vector3(0.03, stalk_h, 0.03), HangarKit.worn_metal(body_color)))
+		add_child(_box(Vector3(-w * 0.12, h + stalk_h * 0.5, -d * 0.5 + 0.06), Vector3(0.03, stalk_h, 0.03), HangarKit.rams_body(top_color, wear)))
 
 
 # Stencilled ID painted on the front apron rail — replaces a floating label.
 func _build_stencil(w: float, d: float, apron_cy: float) -> void:
-	var q: MeshInstance3D = HangarKit.stencil(stencil_text, Vector2(minf(w * 0.5, 0.7), APRON_H * 0.7))
+	var q: MeshInstance3D = HangarKit.stencil(stencil_text, Vector2(minf(w * 0.5, 0.7), APRON_H * 0.7), HangarKit.TEXT_DARK)
 	if q:
 		q.position = Vector3(0, apron_cy, d * 0.5 + 0.012)
 		add_child(q)
 
 
+# The Dieter-Rams three-colour accent bar across the front apron rail, proud of its face.
+func _build_three_bar(w: float, d: float, apron_cy: float) -> void:
+	var bar: Node3D = HangarKit.three_color_bar((w - LEG_W) * 0.72, APRON_H * 0.5, [accent_color, HangarKit.DISPLAY_DARK, top_color])
+	bar.position = Vector3(0, apron_cy, d * 0.5 + 0.013)
+	add_child(bar)
+
+
 # ── Local helpers (delegate to the shared HangarKit for the family look) ──
-func _mat(c: Color, rough: float, metal: float) -> StandardMaterial3D:
-	return HangarKit.painted_metal(c, wear, metal, rough)
+# Light matte Braun finish — the housing recedes. (rough/metal ignored: Rams is matte.)
+func _mat(c: Color, _rough: float, _metal: float) -> StandardMaterial3D:
+	return HangarKit.rams_body(c, wear)
 
 
 func _box(center: Vector3, size: Vector3, mat: Material) -> MeshInstance3D:

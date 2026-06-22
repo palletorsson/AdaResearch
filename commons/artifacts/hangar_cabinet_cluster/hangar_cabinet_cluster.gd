@@ -5,7 +5,7 @@ class_name HangarCabinetCluster
 const HangarKit := preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 
 # @identity
-# essence: a bank of mixed-height utility/server cabinets standing shoulder to shoulder — the equipment wall of a sci-fi maintenance bay. Battered painted-metal boxes with inset panels, slatted vents, the odd small status screen and a stencilled unit ID. Origin at the floor; the row's bottom sits at y=0.
+# essence: a bank of mixed-height utility/server cabinets standing shoulder to shoulder — the equipment wall of a maintenance bay, in the Dieter Rams / Braun key. Light matte off-white boxes with inset trim panels, slatted vents, a calm anthracite status screen, a three-colour accent bar across the row and a stencilled unit ID; restrained dust at the foot, not heavy rust. Origin at the floor; the row's bottom sits at y=0.
 # desire: to fill the edge of a room with infrastructure — to read as "this place is run by machines that hum behind these doors", and to give a wall presence and depth without being a single flat panel.
 # critical_parameter: unit_count — how much of the wall this bank claims. 2 = a small equipment nook; 4 = a long server bank. Each unit is its own cabinet with its own height, colour, vents and (maybe) screen.
 # triggers: _ready/_read_metadata_overrides/_build from DNA; apply_grid_config rebuilds with a new count/footprint/style.
@@ -36,14 +36,22 @@ const HangarKit := preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 @export var vents: bool = true
 
 @export_group("Style")
-## "cool" | "warm" | "mixed" — controls the per-cabinet base colours.
+## "cool" | "warm" | "mixed" — controls the per-cabinet base tint (all light Braun tints now).
 @export var palette: String = "mixed"
-## Weathering 0..1 — darkens + roughens toward scuffed bare metal.
-@export var wear: float = 0.25
+## Weathering 0..1 — subtle dust by default (Rams clean), not heavy grime.
+@export var wear: float = 0.08
 
 @export_group("Color")
-@export var panel_color: Color = Color(0.24, 0.26, 0.30)
-@export var screen_accent: Color = Color(0.40, 0.95, 0.55)
+## Dieter Rams / Braun default — light matte trim so the housing recedes.
+@export var panel_color: Color = Color(0.70, 0.68, 0.64)   # PANEL_TRIM
+## Calm anthracite readout text (Braun "no glow") — warm off-white on the dark screen.
+@export var screen_accent: Color = Color(0.90, 0.89, 0.85)  # TEXT_DISPLAY
+
+@export_group("Surface")
+## Three-colour Rams accent bar across the front of the bank, proud of the face.
+@export var three_bar: bool = true
+## Faint dust band at the foot of the row + a few subtle streaks on a couple of faces.
+@export var grime: bool = true
 
 # ── Constants ─────────────────────────────────────────────────────────
 const GAP := 0.012            # hairline gap between cabinets
@@ -51,9 +59,10 @@ const PANEL_INSET := 0.02     # how far the front panel sits proud
 const FOOT_H := 0.05          # base lip / feet height
 const FOOT_INSET := 0.06      # feet pulled in from the body edge
 
-# Cabinet base palettes (cool / warm). Indexed per-unit, wraps.
-const COOL := [Color(0.34, 0.40, 0.48), Color(0.30, 0.34, 0.40), Color(0.38, 0.44, 0.50)]
-const WARM := [Color(0.46, 0.40, 0.34), Color(0.42, 0.36, 0.30), Color(0.50, 0.42, 0.34)]
+# Cabinet base palettes — now LIGHT Braun tints (off-white body / light grey trim),
+# not dark metal. "cool" leans toward PANEL_TRIM grey, "warm" toward BODY_LIGHT. Wraps per-unit.
+const COOL := [Color(0.78, 0.78, 0.77), Color(0.72, 0.71, 0.69), Color(0.80, 0.80, 0.78)]
+const WARM := [Color(0.83, 0.80, 0.75), Color(0.81, 0.79, 0.75), Color(0.85, 0.82, 0.76)]
 
 var _built := false
 
@@ -86,6 +95,8 @@ func _read_metadata_overrides() -> void:
 	if has_meta("config_wear"): wear = float(str(get_meta("config_wear")))
 	if has_meta("config_panel_color"): panel_color = _pc(str(get_meta("config_panel_color")), panel_color)
 	if has_meta("config_screen_accent"): screen_accent = _pc(str(get_meta("config_screen_accent")), screen_accent)
+	if has_meta("config_three_bar"): three_bar = str(get_meta("config_three_bar")).to_lower() in ["true", "1", "yes", "on"]
+	if has_meta("config_grime"): grime = str(get_meta("config_grime")).to_lower() in ["true", "1", "yes", "on"]
 
 
 # ── Build ─────────────────────────────────────────────────────────────
@@ -101,6 +112,16 @@ func _build() -> void:
 	for i in range(n):
 		var cx: float = x0 + pitch * float(i)
 		_build_cabinet(i, cx, uw, dz)
+
+	# A single Dieter-Rams three-colour accent bar across the front of the whole bank,
+	# proud of the +Z face — the one composed accent the row gets.
+	if three_bar:
+		_build_bank_three_bar(total_w, dz)
+
+	# Restrained dirt: a faint dust band along the foot of the row + a few subtle streaks
+	# on a couple of the cabinet faces (deterministic, barely there).
+	if grime:
+		_build_bank_grime(n, total_w, x0, pitch, uw, dz)
 
 
 # One cabinet: body + inset front panel + optional vents + optional readout + stencil ID + feet.
@@ -153,8 +174,10 @@ func _build_readout(i: int, cx: float, dz: float, uw: float, h: float) -> void:
 	var k: int = i % headers.size()
 	var sw: float = minf(uw * 0.5, 0.26)
 	var sh: float = sw * 0.62
+	# Calm anthracite screen + warm off-white text (HangarKit.readout DISPLAY_DARK default,
+	# Braun "no glow"); screen_accent supplies the text colour (defaults to TEXT_DISPLAY).
 	var rd: Node3D = HangarKit.readout(headers[k], bodies[k], Vector2(sw, sh),
-		Color(0.04, 0.08, 0.06), screen_accent)
+		HangarKit.DISPLAY_DARK, screen_accent)
 	if rd:
 		rd.position = Vector3(cx, h * 0.74, dz * 0.5 + PANEL_INSET + 0.03)
 		add_child(rd)
@@ -181,6 +204,34 @@ func _build_feet(cx: float, uw: float, dz: float, body_mat: Material) -> void:
 		add_child(_box(Vector3(cx + sx * fx, FOOT_H * 0.4, dz * 0.5 - FOOT_INSET), Vector3(fw, FOOT_H * 0.8, fw), fmat))
 
 
+# One Dieter-Rams three-colour accent bar across the front of the whole bank, low on the
+# row and proud of the +Z face — the row's single composed accent (BRAUN_ACCENT / anthracite / trim).
+func _build_bank_three_bar(total_w: float, dz: float) -> void:
+	var bar: Node3D = HangarKit.three_color_bar(total_w * 0.9, 0.05,
+		[HangarKit.BRAUN_ACCENT, HangarKit.DISPLAY_DARK, panel_color])
+	bar.position = Vector3(0, FOOT_H + 0.10, dz * 0.5 + PANEL_INSET + 0.02)
+	add_child(bar)
+
+
+# Restrained dirt across the bank: a faint dust band along the foot of the row, plus a few
+# subtle vertical streaks on a couple of cabinet faces. Deterministic, low-alpha — barely there.
+func _build_bank_grime(n: int, total_w: float, x0: float, pitch: float, uw: float, dz: float) -> void:
+	# Dust band hugging the floor along the whole row.
+	add_child(HangarKit.grime_band(total_w, 0.06, dz * 0.5 + PANEL_INSET + 0.004, panel_color))
+	# Streaks on just a couple of faces (units 1 and, if present, the last one).
+	var faces: Array = [1]
+	if n >= 4:
+		faces.append(n - 1)
+	for i in faces:
+		if i < 0 or i >= n:
+			continue
+		var cx: float = x0 + pitch * float(i)
+		var h: float = maxf(base_height + _height_offset(i), 0.4)
+		var streaks := HangarKit.dust_streaks(uw * 0.7, h * 0.7, dz * 0.5 + PANEL_INSET + 0.014, 4)
+		streaks.position = Vector3(cx, h * 0.5, 0)
+		add_child(streaks)
+
+
 # ── Per-index deterministic variation (no randf — captures stay stable) ──
 # A fixed sawtooth-ish pattern so neighbouring cabinets differ in height.
 func _height_offset(i: int) -> float:
@@ -203,8 +254,9 @@ func _cabinet_color(i: int) -> Color:
 
 
 # ── Local helpers (delegate to the shared HangarKit for the family look) ──
-func _mat(c: Color, rough: float, metal: float) -> StandardMaterial3D:
-	return HangarKit.painted_metal(c, wear, metal, rough)
+# Light matte Braun finish — the cabinet housing recedes. (rough/metal ignored: Rams is matte.)
+func _mat(c: Color, _rough: float, _metal: float) -> StandardMaterial3D:
+	return HangarKit.rams_body(c, wear)
 
 
 func _box(center: Vector3, size: Vector3, mat: Material) -> MeshInstance3D:

@@ -35,12 +35,18 @@ const HangarKit := preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 @export var stripe_base: bool = false
 
 @export_group("Color")
-@export var panel_color: Color = Color(0.62, 0.64, 0.68)
-@export var post_color: Color = Color(0.10, 0.11, 0.13)
+## Dieter Rams / Braun default — light matte panels so the housing recedes.
+@export var panel_color: Color = Color(0.81, 0.79, 0.75)
+## Posts a slightly darker light grey — NOT near-black.
+@export var post_color: Color = Color(0.70, 0.68, 0.64)
 
 @export_group("Surface")
-## Weathering 0..1 — darkens + roughens toward scuffed bare metal.
-@export var wear: float = 0.15
+## Weathering 0..1 — subtle dust by default (Rams clean), not heavy grime.
+@export var wear: float = 0.08
+## Optional three-colour Rams accent bar (off — the brand patch is the accent).
+@export var three_bar: bool = false
+## Faint dust band along the foot of the run + a few faint streaks (subtle).
+@export var grime: bool = true
 
 # ── Constants ─────────────────────────────────────────────────────────
 const PANEL_DEPTH := 0.05
@@ -79,6 +85,8 @@ func _read_metadata_overrides() -> void:
 	if has_meta("config_panel_color"): panel_color = _pc(str(get_meta("config_panel_color")), panel_color)
 	if has_meta("config_post_color"): post_color = _pc(str(get_meta("config_post_color")), post_color)
 	if has_meta("config_wear"): wear = float(str(get_meta("config_wear")))
+	if has_meta("config_three_bar"): three_bar = str(get_meta("config_three_bar")).to_lower() in ["true", "1", "yes", "on"]
+	if has_meta("config_grime"): grime = str(get_meta("config_grime")).to_lower() in ["true", "1", "yes", "on"]
 
 
 # ── Build ─────────────────────────────────────────────────────────────
@@ -94,10 +102,11 @@ func _build() -> void:
 	var n_posts: int = pc + 1
 	var start_x: float = -run_w * 0.5
 
-	var post_mat := HangarKit.painted_metal(post_color, wear, 0.6, 0.5)
+	# Light matte Braun/Rams housing — panels + posts recede; feet plates stay slightly darker.
+	var post_mat := HangarKit.rams_body(post_color, wear)
 	var foot_mat := HangarKit.worn_metal(post_color)
-	var panel_mat := HangarKit.painted_metal(panel_color, wear, 0.25, 0.6)
-	var seam_mat := HangarKit.painted_metal(panel_color.darkened(0.35), wear, 0.3, 0.55)
+	var panel_mat := HangarKit.rams_body(panel_color, wear)
+	var seam_mat := HangarKit.rams_body(panel_color.darkened(0.18), wear)
 
 	# Posts + feet for the straight section (and the pivot post shared with the bend).
 	for i in range(straight + 1):
@@ -135,6 +144,28 @@ func _build() -> void:
 			if sq:
 				sq.position = Vector3(center_x, height * 0.72 - bh * 0.85, PANEL_DEPTH * 0.5 + 0.02)
 				add_child(sq)
+
+	# Optional Dieter-Rams three-colour bar across the straight run (off by default — the brand
+	# patch is the accent). Sits just under the brand patch on the +Z face.
+	if three_bar:
+		var sw: float = float(straight) * panel_width
+		var bar_cx: float = start_x + sw * 0.5
+		var bar: Node3D = HangarKit.three_color_bar(clampf(sw * 0.6, 0.4, sw), 0.045,
+			[HangarKit.BRAUN_ACCENT, HangarKit.DISPLAY_DARK, panel_color])
+		bar.position = Vector3(bar_cx, height * 0.5, PANEL_DEPTH * 0.5 + 0.014)
+		add_child(bar)
+
+	# Restrained dirt (Rams clean): a faint dust band along the base of the run + a few faint
+	# vertical streaks on a panel or two. Copies the podium's grime approach.
+	if grime:
+		add_child(HangarKit.grime_band(run_w, 0.07, PANEL_DEPTH * 0.5 + 0.006, panel_color))
+		var ph: float = height * 0.86
+		var streak_count: int = mini(straight, 2)
+		for i in range(streak_count):
+			var cx: float = start_x + (float(i) + 0.5) * panel_width
+			var streaks: Node3D = HangarKit.dust_streaks(panel_width * 0.7, ph * 0.8, PANEL_DEPTH * 0.5 + 0.012, 3)
+			streaks.position = Vector3(cx, height * 0.5, 0)
+			add_child(streaks)
 
 	if stripe_base:
 		_add_base_stripe(start_x, run_w)

@@ -128,7 +128,10 @@ func _build() -> void:
 	if three_bar:
 		_build_three_bar(body_w, body_bottom, body_h)
 	if grime:
-		add_child(HangarKit.grime_band(base_w, 0.06, base_w * 0.5 + 0.004, body_color))
+		add_child(HangarKit.grime_band(base_w, 0.07, base_w * 0.5 + 0.004, body_color))
+		var streaks := HangarKit.dust_streaks(body_w * 0.8, body_h * 0.8, body_w * 0.5 + 0.014, 4)
+		streaks.position = Vector3(0, body_bottom + body_h * 0.5, 0)
+		add_child(streaks)
 	if hazard_trim:
 		_build_hazard_trim(base_w)
 	if stencil_text.strip_edges() != "":

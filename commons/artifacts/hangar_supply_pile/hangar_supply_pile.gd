@@ -9,7 +9,7 @@ const HangarKit := preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 # desire: to make a corner of a hangar map read as lived-in and provisioned — to be the staging area a crew left mid-shift, not an empty floor.
 # critical_parameter: crate_count — how big the pile reads. 2 = a small drop-off; 5 = a fully-stocked supply corner. Base crates are bigger; the stack tapers and offsets as it climbs.
 # triggers: _ready/_read_metadata_overrides/_build from DNA; apply_grid_config rebuilds with a new count/palette/contents.
-# emerges: tan crates read "cardboard shipment"; brown read "wooden freight"; the cylinder + cone read "hazard, handle with care"; FRAGILE/KEEP DRY stencils read "someone owns this".
+# emerges: tan crates read "cardboard shipment"; brown read "wooden freight"; light-grey "metal" reads "clean supply crate" (Rams/Braun family); the cylinder + cone read "hazard, handle with care"; FRAGILE/KEEP DRY stencils read "someone owns this".
 # truth: a room is furnished by its leftovers. The pile no one cleared is more honest about the place than anything on a plinth.
 
 # ── DNA ───────────────────────────────────────────────────────────────
@@ -32,8 +32,11 @@ const HangarKit := preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 @export var cylinder_color: Color = Color(0.80, 0.12, 0.10)
 
 @export_group("Surface")
-## Weathering 0..1 — darkens + roughens toward scuffed/battered.
-@export var wear: float = 0.3
+## Weathering 0..1 — darkens + roughens toward scuffed/battered. Low by default (clean direction):
+## crates read worn-but-not-filthy, in line with the Rams/Braun family.
+@export var wear: float = 0.2
+## A single restrained dust band at the very base of the pile (subtle, not heavy grime).
+@export var base_grime: bool = true
 
 # ── Constants ─────────────────────────────────────────────────────────
 # Fixed per-index crate sizes (base → top, biggest first). DETERMINISTIC.
@@ -82,6 +85,7 @@ func _read_metadata_overrides() -> void:
 	if has_meta("config_with_cone"): with_cone = str(get_meta("config_with_cone")).to_lower() in ["true", "1", "yes", "on"]
 	if has_meta("config_cylinder_color"): cylinder_color = _pc(str(get_meta("config_cylinder_color")), cylinder_color)
 	if has_meta("config_wear"): wear = float(str(get_meta("config_wear")))
+	if has_meta("config_base_grime"): base_grime = str(get_meta("config_base_grime")).to_lower() in ["true", "1", "yes", "on"]
 
 
 # ── Build ─────────────────────────────────────────────────────────────
@@ -105,6 +109,12 @@ func _build() -> void:
 		if hazard_labels and i < 2:
 			_add_crate_label(i, off, y, s)
 		y += s.y
+
+	# A single restrained dust band at the very base of the pile (subtle, not heavy grime).
+	if base_grime:
+		var base_s: Vector3 = CRATE_SIZES[0]
+		var gb := HangarKit.grime_band(base_s.x, 0.06, base_s.z * 0.5 + 0.004, _palette_color())
+		add_child(gb)
 
 	if with_cylinder:
 		_build_cylinder()
@@ -198,10 +208,12 @@ func _build_cone() -> void:
 
 # ── Local helpers (delegate to the shared HangarKit for the family look) ──
 func _palette_color() -> Color:
+	# Cleaner direction (Rams/Braun family): metal reads as a light grey near BODY_LIGHT;
+	# cardboard (tan) and wood (brown) keep their material identity but a touch lighter/cleaner.
 	match palette:
-		"wood": return Color(0.45, 0.32, 0.20)
-		"metal": return Color(0.55, 0.56, 0.60)
-		_: return Color(0.62, 0.48, 0.32)  # cardboard (tan)
+		"wood": return Color(0.52, 0.39, 0.26)   # warmer, cleaner brown
+		"metal": return Color(0.74, 0.73, 0.71)  # light grey, BODY_LIGHT-ish (was dark blue-grey)
+		_: return Color(0.70, 0.57, 0.40)        # cardboard (tan), lighter/cleaner
 
 
 func _yaw_for(off: Vector2) -> float:

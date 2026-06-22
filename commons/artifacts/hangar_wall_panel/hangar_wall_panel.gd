@@ -26,8 +26,8 @@ const HangarKit := preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 @export var panel_style: String = "greebled"
 ## Embed a small framed readout screen in the upper centre.
 @export var screen_slot: bool = false
-## Thin emissive vertical seam strips down the face.
-@export var lit_channels: bool = true
+## Thin emissive vertical seam strips down the face (low-energy Braun accent — off by default, the three-colour bar is the accent).
+@export var lit_channels: bool = false
 ## Caution-stripe band along the floor foot.
 @export var hazard_base: bool = false
 
@@ -36,13 +36,18 @@ const HangarKit := preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 @export var brand_text: String = ""
 ## Stencilled ID painted low on the face (e.g. "WP-01"). Empty = none.
 @export var stencil_text: String = ""
-## Weathering 0..1 — darkens + roughens toward scuffed bare metal.
-@export var wear: float = 0.2
+## Weathering 0..1 — subtle dust by default (Rams clean), not heavy grime.
+@export var wear: float = 0.08
+## Three-colour Rams accent bar across the upper front face.
+@export var three_bar: bool = true
+## Faint dust band at the foot + dust streaks on the main face (subtle).
+@export var grime: bool = true
 
 @export_group("Color")
-@export var body_color: Color = Color(0.38, 0.40, 0.45)
-@export var panel_color: Color = Color(0.28, 0.30, 0.34)
-@export var accent_color: Color = Color(0.25, 0.85, 0.95)
+## Dieter Rams / Braun default — light matte body so the housing recedes; one warm accent.
+@export var body_color: Color = Color(0.81, 0.79, 0.75)
+@export var panel_color: Color = Color(0.70, 0.68, 0.64)
+@export var accent_color: Color = Color(0.86, 0.34, 0.11)
 
 # ── Constants ─────────────────────────────────────────────────────────
 const SLAB_DEPTH := 0.15
@@ -78,6 +83,8 @@ func _read_metadata_overrides() -> void:
 	if has_meta("config_brand_text"): brand_text = str(get_meta("config_brand_text"))
 	if has_meta("config_stencil_text"): stencil_text = str(get_meta("config_stencil_text"))
 	if has_meta("config_wear"): wear = float(str(get_meta("config_wear")))
+	if has_meta("config_three_bar"): three_bar = str(get_meta("config_three_bar")).to_lower() in ["true", "1", "yes", "on"]
+	if has_meta("config_grime"): grime = str(get_meta("config_grime")).to_lower() in ["true", "1", "yes", "on"]
 	if has_meta("config_body_color"): body_color = _pc(str(get_meta("config_body_color")), body_color)
 	if has_meta("config_panel_color"): panel_color = _pc(str(get_meta("config_panel_color")), panel_color)
 	if has_meta("config_accent_color"): accent_color = _pc(str(get_meta("config_accent_color")), accent_color)
@@ -106,6 +113,13 @@ func _build() -> void:
 		_build_lit_channels(w, h)
 	if screen_slot:
 		_build_screen_slot(w, h)
+	if three_bar:
+		_build_three_bar(w, h)
+	if grime:
+		add_child(HangarKit.grime_band(w, 0.08, FRONT_Z + 0.02, body_color))
+		var streaks := HangarKit.dust_streaks(w * 0.8, h * 0.8, FRONT_Z + 0.06, 4)
+		streaks.position = Vector3(0, h * 0.5, 0)
+		add_child(streaks)
 	if hazard_base:
 		_build_hazard_base(w)
 	if brand_text.strip_edges() != "":
@@ -186,13 +200,20 @@ func _build_greebles(w: float, h: float) -> void:
 		add_child(_box(Vector3(vx, sy, FRONT_Z + 0.075), Vector3(vw * 0.86, 0.02, 0.02), smat))
 
 
-# Thin emissive vertical seam strips down the face.
+# Thin emissive vertical seam strips down the face — low-energy Braun accent (no bright cyan).
 func _build_lit_channels(w: float, h: float) -> void:
-	var gmat := _emi(accent_color, 1.8)
+	var gmat := _emi(HangarKit.BRAUN_ACCENT, 0.6)
 	var sh: float = h * 0.82
 	var sw := 0.02
 	for sx in [-w * 0.28, w * 0.28]:
 		add_child(_box(Vector3(sx, h * 0.5, FRONT_Z + 0.055), Vector3(sw, sh, 0.015), gmat))
+
+
+# The Dieter-Rams three-colour accent bar across the upper front (+Z) face.
+func _build_three_bar(w: float, h: float) -> void:
+	var bar: Node3D = HangarKit.three_color_bar(w * 0.5, 0.05, [accent_color, HangarKit.DISPLAY_DARK, panel_color])
+	bar.position = Vector3(0, h * 0.86, FRONT_Z + 0.06)
+	add_child(bar)
 
 
 # Embedded framed readout screen in the upper centre (faces +Z).
@@ -229,8 +250,9 @@ func _build_stencil(w: float, h: float) -> void:
 
 
 # ── Local helpers (delegate to the shared HangarKit for the family look) ──
-func _mat(c: Color, rough: float, metal: float) -> StandardMaterial3D:
-	return HangarKit.painted_metal(c, wear, metal, rough)
+# Light matte Braun finish — the housing recedes. (rough/metal ignored: Rams is matte.)
+func _mat(c: Color, _rough: float, _metal: float) -> StandardMaterial3D:
+	return HangarKit.rams_body(c, wear)
 
 
 func _emi(c: Color, energy: float) -> StandardMaterial3D:

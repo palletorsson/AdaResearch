@@ -48,14 +48,37 @@ static func three_color_bar(length: float, thickness: float = 0.05, cols: Array 
 	return root
 
 
-## A faint darker band where dust settles (a prop's base). SUBTLE — low contrast, a thin strip
-## just proud of the +Z face. The restrained "dirt" the refs asked for, not heavy grime.
+## A faint darker band where dust settles (a prop's base). Restrained — a thin low-contrast strip
+## just proud of the +Z face. Not heavy grime, but reads as "this has sat a while".
 static func grime_band(length: float, height: float, z: float, base: Color = BODY_LIGHT) -> MeshInstance3D:
 	var m := StandardMaterial3D.new()
-	m.albedo_color = base.darkened(0.2)
+	m.albedo_color = base.darkened(0.28)
 	m.metallic = 0.0
-	m.roughness = 0.9
+	m.roughness = 0.92
 	return box(Vector3(0.0, height * 0.5, z), Vector3(length, height, 0.006), m)
+
+
+## Faint vertical dust streaks running DOWN a face (below vents/seams) — the restrained dirt the
+## refs asked for. Returns a +Z facing Node3D centred on its origin within a w×h rect; place it at
+## a face centre (z baked in). Deterministic (varies by index), translucent, dark — barely there.
+static func dust_streaks(w: float, h: float, z: float, count: int = 4) -> Node3D:
+	var root := Node3D.new()
+	root.name = "DustStreaks"
+	for i in range(count):
+		var t: float = (float(i) + 0.5) / float(count)
+		var x: float = lerpf(-w * 0.40, w * 0.40, t)
+		var ln: float = h * (0.30 + 0.34 * fmod(float(i) * 0.61, 1.0))
+		var sw: float = 0.010 + 0.012 * fmod(float(i) * 0.43, 1.0)
+		var cy: float = h * 0.5 - ln * 0.5 - h * 0.05   # hang from near the top of the face
+		var m := StandardMaterial3D.new()
+		m.albedo_color = Color(0.13, 0.12, 0.11, 0.22)  # faint, dark, low alpha
+		m.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+		m.roughness = 0.95
+		m.metallic = 0.0
+		var s := box(Vector3(x, cy, z), Vector3(sw, ln, 0.004), m)
+		s.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		root.add_child(s)
+	return root
 
 
 ## Weathered painted metal — the heavier alternate finish (kept for non-default DNA / dirty variants).

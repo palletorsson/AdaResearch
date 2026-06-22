@@ -30,16 +30,22 @@ const HangarKit := preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 @export var edge_rail: bool = false
 ## Sloped ramp box on the front (+Z) instead of a vertical step face.
 @export var ramp: bool = false
-## Caution-stripe strip along the front (+Z) edge.
+## Caution-stripe strip along the front (+Z) edge — semantic for a step you mount.
 @export var hazard_edge: bool = true
 
 @export_group("Color")
-@export var body_color: Color = Color(0.40, 0.42, 0.46)
-@export var accent_color: Color = Color(0.95, 0.75, 0.05)
+## Dieter Rams / Braun default — light matte body so the housing recedes; one warm accent.
+@export var body_color: Color = Color(0.81, 0.79, 0.75)
+@export var panel_color: Color = Color(0.70, 0.68, 0.64)
+@export var accent_color: Color = Color(0.86, 0.34, 0.11)
 
 @export_group("Surface")
-## Weathering 0..1 — darkens + roughens toward scuffed bare metal.
-@export var wear: float = 0.2
+## Weathering 0..1 — subtle dust by default (Rams clean), not heavy grime.
+@export var wear: float = 0.08
+## Three-colour Rams accent bar on the front riser face.
+@export var three_bar: bool = true
+## Faint dust band at the foot + a few faint dust streaks on the top/front face (subtle).
+@export var grime: bool = true
 ## Stencilled ID painted on the front skirt (e.g. "STEP-01"). Empty = none.
 @export var stencil_text: String = "STEP-01"
 
@@ -77,8 +83,11 @@ func _read_metadata_overrides() -> void:
 	if has_meta("config_ramp"): ramp = str(get_meta("config_ramp")).to_lower() in ["true", "1", "yes", "on"]
 	if has_meta("config_hazard_edge"): hazard_edge = str(get_meta("config_hazard_edge")).to_lower() in ["true", "1", "yes", "on"]
 	if has_meta("config_body_color"): body_color = _pc(str(get_meta("config_body_color")), body_color)
+	if has_meta("config_panel_color"): panel_color = _pc(str(get_meta("config_panel_color")), panel_color)
 	if has_meta("config_accent_color"): accent_color = _pc(str(get_meta("config_accent_color")), accent_color)
 	if has_meta("config_wear"): wear = float(str(get_meta("config_wear")))
+	if has_meta("config_three_bar"): three_bar = str(get_meta("config_three_bar")).to_lower() in ["true", "1", "yes", "on"]
+	if has_meta("config_grime"): grime = str(get_meta("config_grime")).to_lower() in ["true", "1", "yes", "on"]
 	if has_meta("config_stencil_text"): stencil_text = str(get_meta("config_stencil_text"))
 
 
@@ -89,8 +98,8 @@ func _build() -> void:
 	var w: float = maxf(width, 0.5)
 	var d: float = maxf(depth, 0.5)
 	var body_mat := _mat(body_color, 0.55, 0.35)
-	var skirt_mat := _mat(body_color.darkened(0.22), 0.65, 0.3)
-	var cap_mat := _mat(body_color.lightened(0.06), 0.45, 0.45)
+	var skirt_mat := _mat(panel_color, 0.65, 0.3)            # PANEL_TRIM band, proud of the slab
+	var cap_mat := _mat(body_color.lightened(0.04), 0.45, 0.45)
 
 	# Slab — the thick step block, y = 0..h. Slightly inset so the skirt sits proud.
 	var slab_w: float = w - SKIRT_INSET * 2.0
@@ -116,9 +125,20 @@ func _build() -> void:
 	if edge_rail:
 		_build_rail(slab_w, slab_d, h)
 
-	# Hazard stripe along the front (+Z) edge.
+	# Hazard stripe along the front (+Z) edge — semantic "step up" cue, kept.
 	if hazard_edge:
 		_build_hazard_edge(w, d, h)
+
+	# Dieter-Rams three-colour accent bar on the front riser face.
+	if three_bar:
+		_build_three_bar(w, d, h)
+
+	# Restrained dirt — faint base grime + a few faint dust streaks on the top/front face.
+	if grime:
+		add_child(HangarKit.grime_band(w, 0.06, d * 0.5 + 0.004, body_color))
+		var streaks := HangarKit.dust_streaks(w * 0.78, h * 0.7, d * 0.5 + 0.014, 3)
+		streaks.position = Vector3(0, h * 0.5, 0)
+		add_child(streaks)
 
 	# Stencilled ID on the front skirt.
 	if stencil_text.strip_edges() != "":
@@ -196,6 +216,14 @@ func _build_hazard_edge(w: float, d: float, h: float) -> void:
 	add_child(_box(Vector3(0, strip_h * 0.5 + h - strip_h, d * 0.5 + t * 0.5), Vector3(w, strip_h, t), smat))
 
 
+# The Dieter-Rams three-colour accent bar on the front (+Z) riser face. It's a low slab,
+# so the bar sits low and proud; thinner than the podium's so it doesn't crowd the riser.
+func _build_three_bar(w: float, d: float, h: float) -> void:
+	var bar: Node3D = HangarKit.three_color_bar(minf(w * 0.6, 0.9), 0.04, [accent_color, HangarKit.DISPLAY_DARK, panel_color])
+	bar.position = Vector3(0, h * 0.5, d * 0.5 + 0.013)
+	add_child(bar)
+
+
 # Stencilled ID painted on the front skirt — replaces a floating label.
 func _build_stencil(w: float, d: float, h: float) -> void:
 	var q: MeshInstance3D = HangarKit.stencil(stencil_text, Vector2(minf(w * 0.5, 0.7), h * 0.5))
@@ -205,8 +233,9 @@ func _build_stencil(w: float, d: float, h: float) -> void:
 
 
 # ── Local helpers (delegate to the shared HangarKit for the family look) ──
-func _mat(c: Color, rough: float, metal: float) -> StandardMaterial3D:
-	return HangarKit.painted_metal(c, wear, metal, rough)
+# Light matte Braun finish — the housing recedes. (rough/metal ignored: Rams is matte.)
+func _mat(_c: Color, _rough: float, _metal: float) -> StandardMaterial3D:
+	return HangarKit.rams_body(_c, wear)
 
 
 func _box(center: Vector3, size: Vector3, mat: Material) -> MeshInstance3D:
