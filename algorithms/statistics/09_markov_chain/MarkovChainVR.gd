@@ -516,6 +516,8 @@ func calculate_steady_state() -> void:
 
 func create_line_mesh(mesh_instance: MeshInstance3D, points: Array[Vector3], color: Color) -> void:
 	"""Create line mesh from points"""
+	if points.size() < 2:
+		return  # need >= 2 points; add_surface_from_arrays errors on an empty surface
 	var arrays = []
 	arrays.resize(Mesh.ARRAY_MAX)
 	arrays[Mesh.ARRAY_VERTEX] = points

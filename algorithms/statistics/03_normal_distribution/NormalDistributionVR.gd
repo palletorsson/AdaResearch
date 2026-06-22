@@ -119,6 +119,8 @@ func create_theoretical_curve() -> void:
 
 func create_curve_mesh(points: Array[Vector3]) -> void:
 	"""Create 3D mesh for the normal curve"""
+	if points.size() < 2:
+		return  # need >= 2 points; add_surface_from_arrays errors on an empty surface
 	var curve_mesh = MeshInstance3D.new()
 	
 	# Create line strip mesh
