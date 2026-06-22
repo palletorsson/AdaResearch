@@ -30,17 +30,22 @@ const HangarKit := preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 @export var panel_style: String = "paneled"
 ## Four vertical corner posts framing the body — the maintenance-rig look.
 @export var corner_posts: bool = false
-## Emissive accent strip under the top rim.
-@export var edge_light: bool = true
+## Emissive accent strip under the top rim (off by default — the three-colour bar is the accent).
+@export var edge_light: bool = false
 
 @export_group("Color")
-@export var body_color: Color = Color(0.40, 0.42, 0.46)
-@export var panel_color: Color = Color(0.28, 0.30, 0.34)
-@export var accent_color: Color = Color(0.25, 0.85, 0.95)
+## Dieter Rams / Braun default — light matte body so the housing recedes; one warm accent.
+@export var body_color: Color = Color(0.81, 0.79, 0.75)
+@export var panel_color: Color = Color(0.70, 0.68, 0.64)
+@export var accent_color: Color = Color(0.86, 0.34, 0.11)
 
 @export_group("Surface")
-## Weathering 0..1 — darkens + roughens toward scuffed bare metal.
-@export var wear: float = 0.18
+## Weathering 0..1 — subtle dust by default (Rams clean), not heavy grime.
+@export var wear: float = 0.08
+## Three-colour Rams accent bar across the front of the body.
+@export var three_bar: bool = true
+## Faint dust band at the foot (subtle).
+@export var grime: bool = true
 ## Stencilled ID painted on the front face (e.g. "PED-01"). Empty = none.
 @export var stencil_text: String = ""
 ## Diagonal caution-stripe band around the plinth foot.
@@ -84,6 +89,8 @@ func _read_metadata_overrides() -> void:
 	if has_meta("config_wear"): wear = float(str(get_meta("config_wear")))
 	if has_meta("config_stencil_text"): stencil_text = str(get_meta("config_stencil_text"))
 	if has_meta("config_hazard_trim"): hazard_trim = str(get_meta("config_hazard_trim")).to_lower() in ["true", "1", "yes", "on"]
+	if has_meta("config_three_bar"): three_bar = str(get_meta("config_three_bar")).to_lower() in ["true", "1", "yes", "on"]
+	if has_meta("config_grime"): grime = str(get_meta("config_grime")).to_lower() in ["true", "1", "yes", "on"]
 
 
 # ── Build ─────────────────────────────────────────────────────────────
@@ -118,6 +125,10 @@ func _build() -> void:
 
 	if edge_light:
 		_build_edge_light()
+	if three_bar:
+		_build_three_bar(body_w, body_bottom, body_h)
+	if grime:
+		add_child(HangarKit.grime_band(base_w, 0.06, base_w * 0.5 + 0.004, body_color))
 	if hazard_trim:
 		_build_hazard_trim(base_w)
 	if stencil_text.strip_edges() != "":
@@ -195,15 +206,23 @@ func _build_hazard_trim(base_w: float) -> void:
 
 # Stencilled ID painted on the front face — replaces a floating label.
 func _build_stencil(body_w: float, body_bottom: float, body_h: float) -> void:
-	var q: MeshInstance3D = HangarKit.stencil(stencil_text, Vector2(body_w * 0.62, body_h * 0.16))
+	var q: MeshInstance3D = HangarKit.stencil(stencil_text, Vector2(body_w * 0.62, body_h * 0.16), HangarKit.TEXT_DARK)
 	if q:
 		q.position = Vector3(0, body_bottom + body_h * 0.5, body_w * 0.5 + 0.012)
 		add_child(q)
 
 
+# The Dieter-Rams three-colour accent bar across the upper front of the body.
+func _build_three_bar(body_w: float, body_bottom: float, body_h: float) -> void:
+	var bar: Node3D = HangarKit.three_color_bar(body_w * 0.72, 0.05, [accent_color, HangarKit.DISPLAY_DARK, panel_color])
+	bar.position = Vector3(0, body_bottom + body_h * 0.72, body_w * 0.5 + 0.013)
+	add_child(bar)
+
+
 # ── Local helpers (delegate to the shared HangarKit for the family look) ──
-func _mat(c: Color, rough: float, metal: float) -> StandardMaterial3D:
-	return HangarKit.painted_metal(c, wear, metal, rough)
+# Light matte Braun finish — the housing recedes. (rough/metal ignored: Rams is matte.)
+func _mat(c: Color, _rough: float, _metal: float) -> StandardMaterial3D:
+	return HangarKit.rams_body(c, wear)
 
 
 func _emi(c: Color, energy: float) -> StandardMaterial3D:

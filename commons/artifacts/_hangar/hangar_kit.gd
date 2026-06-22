@@ -7,9 +7,59 @@ class_name HangarKit
 ## framed readout screens. All static; props call HangarKit.painted_metal(...), HangarKit.readout(...)
 ## so the whole family reads as one set. Stencils/screens are baked via BakedTextAlbedo (headless-safe).
 
+# ── Dieter Rams / Braun palette (the family DEFAULT — "less, but better") ──
+# Light matte housing that RECEDES so the artifact is the expressive thing; one warm accent;
+# a calm anthracite display (no glow, no green); dark functional type. From toy_console.gd.
+const BODY_LIGHT := Color(0.81, 0.79, 0.75)     # warm off-white body
+const PANEL_TRIM := Color(0.70, 0.68, 0.64)     # slightly darker light grey
+const BRAUN_ACCENT := Color(0.86, 0.34, 0.11)   # the one warm element
+const DISPLAY_DARK := Color(0.12, 0.12, 0.135)  # calm anthracite screen
+const TEXT_DARK := Color(0.17, 0.17, 0.19)      # functional labels on the light housing
+const TEXT_DISPLAY := Color(0.90, 0.89, 0.85)   # warm off-white readout on the dark screen
+# A clean three-colour accent triad (the "three colour bar").
+const BAR_TRIAD := [Color(0.86, 0.34, 0.11), Color(0.20, 0.22, 0.26), Color(0.82, 0.80, 0.75)]
+
+
 # ── Materials ─────────────────────────────────────────────────────────
-## Weathered painted metal — the family default surface. `wear` (0..1) darkens + roughens
-## toward bare scuffed metal.
+## Light matte Braun/Rams housing — the family DEFAULT surface. Plastic-painted, calm; `wear`
+## (0..1) only LIGHTLY darkens/roughens (subtle dust, not heavy grime).
+static func rams_body(c: Color = BODY_LIGHT, wear: float = 0.08) -> StandardMaterial3D:
+	var m := StandardMaterial3D.new()
+	m.albedo_color = c.darkened(wear * 0.12)
+	m.metallic = 0.04
+	m.roughness = clampf(0.58 + wear * 0.18, 0.05, 1.0)
+	return m
+
+
+## A crisp Dieter-Rams accent bar split into 3 colour segments along X. Returns a +Z facing
+## Node3D centred on origin — place it proud of a face (z += small). Default = the Braun triad.
+static func three_color_bar(length: float, thickness: float = 0.05, cols: Array = []) -> Node3D:
+	var c: Array = cols if cols.size() >= 3 else BAR_TRIAD
+	var root := Node3D.new()
+	root.name = "ThreeColorBar"
+	var seg: float = length / 3.0
+	for i in range(3):
+		var m := StandardMaterial3D.new()
+		m.albedo_color = c[i]
+		m.metallic = 0.0
+		m.roughness = 0.5
+		var x: float = -length * 0.5 + seg * (float(i) + 0.5)
+		root.add_child(box(Vector3(x, 0.0, 0.0), Vector3(seg, thickness, 0.02), m))
+	return root
+
+
+## A faint darker band where dust settles (a prop's base). SUBTLE — low contrast, a thin strip
+## just proud of the +Z face. The restrained "dirt" the refs asked for, not heavy grime.
+static func grime_band(length: float, height: float, z: float, base: Color = BODY_LIGHT) -> MeshInstance3D:
+	var m := StandardMaterial3D.new()
+	m.albedo_color = base.darkened(0.2)
+	m.metallic = 0.0
+	m.roughness = 0.9
+	return box(Vector3(0.0, height * 0.5, z), Vector3(length, height, 0.006), m)
+
+
+## Weathered painted metal — the heavier alternate finish (kept for non-default DNA / dirty variants).
+## `wear` (0..1) darkens + roughens toward bare scuffed metal.
 static func painted_metal(base: Color, wear: float = 0.15, metal: float = 0.35, rough: float = 0.62) -> StandardMaterial3D:
 	var m := StandardMaterial3D.new()
 	m.albedo_color = base.darkened(wear * 0.35)
@@ -116,22 +166,22 @@ static func brand_patch(text: String, world_size: Vector2, bg: Color = Color(0.1
 ## dark emissive face + a baked amber header + green text lines. The reusable "screen" used by
 ## artifact_readout_screen and by cabinets/consoles. `lines` is an Array of short strings.
 static func readout(header: String, lines: Array, size: Vector2 = Vector2(0.5, 0.34),
-		screen_bg: Color = Color(0.04, 0.08, 0.06), text_color: Color = Color(0.40, 0.95, 0.55),
-		header_color: Color = Color(0.97, 0.78, 0.22)) -> Node3D:
+		screen_bg: Color = DISPLAY_DARK, text_color: Color = TEXT_DISPLAY,
+		header_color: Color = BRAUN_ACCENT) -> Node3D:
 	var root := Node3D.new()
 	root.name = "Readout"
 	var w: float = size.x
 	var h: float = size.y
 	var ft: float = maxf(w, h) * 0.06          # frame bar thickness
 	var fd: float = 0.05                         # frame depth
-	var bez := worn_metal(Color(0.20, 0.21, 0.24))
+	var bez := rams_body(PANEL_TRIM, 0.06)       # light matte bezel (Braun, recedes)
 	# four bezel bars
 	root.add_child(box(Vector3(0, h * 0.5 + ft * 0.5, 0), Vector3(w + ft * 2.0, ft, fd), bez))
 	root.add_child(box(Vector3(0, -h * 0.5 - ft * 0.5, 0), Vector3(w + ft * 2.0, ft, fd), bez))
 	root.add_child(box(Vector3(-w * 0.5 - ft * 0.5, 0, 0), Vector3(ft, h, fd), bez))
 	root.add_child(box(Vector3(w * 0.5 + ft * 0.5, 0, 0), Vector3(ft, h, fd), bez))
-	# screen face (thin box, emissive dark)
-	var face_mat := emissive(screen_bg, 0.6)
+	# screen face (thin box, calm dark — barely lit, Braun "no glow")
+	var face_mat := emissive(screen_bg, 0.32)
 	root.add_child(box(Vector3(0, 0, 0), Vector3(w, h, 0.03), face_mat))
 	var face_z: float = 0.018
 	# header (top strip)

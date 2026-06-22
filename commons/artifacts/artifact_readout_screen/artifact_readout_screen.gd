@@ -25,10 +25,11 @@ const HangarKit := preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 @export var mount: String = "stalk"
 
 @export_group("Color")
-@export var screen_bg: Color = Color(0.04, 0.08, 0.06)
-@export var text_color: Color = Color(0.40, 0.95, 0.55)
-@export var header_color: Color = Color(0.97, 0.78, 0.22)
-@export var frame_color: Color = Color(0.30, 0.31, 0.35)
+## Dieter Rams / Braun default — calm anthracite screen, warm off-white text, one warm header.
+@export var screen_bg: Color = Color(0.12, 0.12, 0.135)
+@export var text_color: Color = Color(0.90, 0.89, 0.85)
+@export var header_color: Color = Color(0.86, 0.34, 0.11)
+@export var frame_color: Color = Color(0.70, 0.68, 0.64)
 
 const MOUNT_Y := {"stalk": 1.25, "wall": 1.55, "freestand": 1.35, "desk": 0.95}
 
@@ -83,8 +84,8 @@ func _build() -> void:
 
 
 func _build_stalk(sy: float) -> void:
-	var mat := HangarKit.painted_metal(frame_color, 0.2)
-	var worn := HangarKit.worn_metal(frame_color)
+	var mat := HangarKit.rams_body(frame_color, 0.08)
+	var worn := HangarKit.rams_body(frame_color, 0.14)
 	# foot
 	add_child(HangarKit.box(Vector3(0, 0.05, -0.02), Vector3(0.22, 0.10, 0.18), worn))
 	# post up the back of the screen
@@ -110,7 +111,7 @@ func _build_stalk(sy: float) -> void:
 
 func _build_wall(sy: float) -> void:
 	# a tall narrow backing plate (reads as wall-mounted signage)
-	var mat := HangarKit.painted_metal(frame_color, 0.25)
+	var mat := HangarKit.rams_body(frame_color, 0.08)
 	add_child(HangarKit.box(Vector3(0, sy, -0.05), Vector3(screen_w + 0.3, 2.0, 0.06), mat))
 	# bolt rows down the sides
 	var bm := HangarKit.worn_metal(Color(0.1, 0.1, 0.12))
@@ -119,8 +120,8 @@ func _build_wall(sy: float) -> void:
 
 
 func _build_legs(sy: float) -> void:
-	var mat := HangarKit.painted_metal(frame_color, 0.2)
-	var foot := HangarKit.worn_metal(frame_color)
+	var mat := HangarKit.rams_body(frame_color, 0.08)
+	var foot := HangarKit.rams_body(frame_color, 0.13)
 	for sx in [-1.0, 1.0]:
 		var x: float = sx * (screen_w * 0.5 - 0.04)
 		var leg := CylinderMesh.new()
@@ -136,7 +137,7 @@ func _build_legs(sy: float) -> void:
 
 
 func _build_desk(sy: float) -> void:
-	var mat := HangarKit.worn_metal(frame_color)
+	var mat := HangarKit.rams_body(frame_color, 0.13)
 	# small wedge stand under a low screen
 	add_child(HangarKit.box(Vector3(0, 0.04, -0.02), Vector3(screen_w + 0.1, 0.08, 0.16), mat))
 	add_child(HangarKit.box(Vector3(0, sy * 0.5, -screen_h * 0.5 - 0.03), Vector3(0.06, sy, 0.06), mat))
