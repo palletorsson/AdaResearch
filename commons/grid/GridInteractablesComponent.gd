@@ -795,6 +795,12 @@ func _place_dialectic_panels(dialectic_name: String, origin: Vector3, rotation: 
 	print("GridInteractablesComponent: ✅ Generated %d dialectic panels for '%s'" % [generator.get_panel_count(), dialectic_name])
 	return true
 
+# Artifact "packaging" — grounding furniture + a framed caption spawned around an artifact from
+# its spatial_needs. GATED: only runs when ProjectSettings "ada/packaging/auto_spawn" == true
+# (default false), so existing maps are unchanged until you switch it on. preload (not the global
+# class_name) so it resolves headless. See commons/artifacts/_hangar/.
+const PackagingResolver := preload("res://commons/artifacts/_hangar/packaging_resolver.gd")
+
 # Place a single artifact using lookup_name
 func _place_artifact(x: int, y: int, z: int, lookup_name: String, total_size: float, overrides: Dictionary = {}, config_data: Dictionary = {}, tag: String = "", trigger_action: String = "") -> bool:
 	var world_pos = Vector3(x, y, z) * total_size
@@ -976,17 +982,26 @@ func _place_artifact(x: int, y: int, z: int, lookup_name: String, total_size: fl
 	if parent_node.get_tree() and parent_node.get_tree().edited_scene_root:
 		artifact_object.owner = parent_node.get_tree().edited_scene_root
 
-	# Auto-ground DISABLED (2026-05-03): the feature was silently lifting
-	# artifacts whose AABB extended below origin (particle systems with
-	# large visibility radii, lights with negative-Y direction, etc.) by
-	# meters at runtime — a 4m lift on becoming_catalyst was the trigger.
-	# Artifacts now use whatever position the grid composer + their own
-	# _ready() agreed on. If a specific artifact needs lifting, opt IN
-	# explicitly with `auto_ground: true` in its registry entry.
+	# Auto-ground ON BY DEFAULT (2026-06-12, convention: "all artifacts grounded
+	# at 0,0,0; otherwise change with name:rot:y_offset:scale"). Every artifact's
+	# geometry base is snapped to the cell surface. Opt OUT either by setting
+	# `auto_ground: false` in the registry, or by giving an explicit y in the
+	# token (an explicit y means the placer is taking manual control).
+	# The earlier particle-AABB blow-ups (becoming_catalyst 4m lift) are handled
+	# by excluding GPUParticles3D from the grounding AABB + the 5.0m safety cap.
 	if artifact_object is Node3D:
-		var want_ground: bool = artifact_info.get("auto_ground", false)
+		var want_ground: bool = artifact_info.get("auto_ground", true) and not overrides.has("y_position")
 		if want_ground:
 			call_deferred("_auto_ground_artifact", artifact_object, lookup_name)
+
+	# Packaging (GATED, default OFF): spawn grounding furniture + a framed caption around the
+	# artifact from its spatial_needs. Deferred so it runs AFTER _auto_ground (registered first),
+	# and after the artifact has built its geometry. Never package a packaging prop (recursion)
+	# or a placeholder.
+	if artifact_object is Node3D and _packaging_enabled() \
+			and str(artifact_info.get("category", "")) != "packaging" \
+			and str(artifact_info.get("artifact_type", "")) != "placeholder":
+		call_deferred("_spawn_packaging_for", artifact_object, lookup_name, artifact_info, world_pos)
 
 # Handle successful placement
 	var display_name = artifact_info.get("name", lookup_name)
@@ -1648,24 +1663,70 @@ func _auto_ground_artifact(artifact: Node3D, lookup_name: String) -> void:
 			return  # All geometry is hidden
 
 	var min_y: float = aabb.position.y
-	if min_y >= -0.01:
+	if absf(min_y) < 0.01:
 		return  # Already grounded (within tolerance)
 
-	var correction: float = abs(min_y)
+	# Snap the geometry base to the cell surface — lift a sunk artifact UP, drop a
+	# floating one DOWN. correction = -min_y (negative min_y → lift; positive → drop).
+	var correction: float = -min_y
 
 	# Safety cap: skip unreasonably large corrections (probably an environment
-	# object like a 40m sphere, a laser beam, or something that should have
-	# no_auto_ground in the registry)
-	if correction > 5.0:
-		print("  ⚠ Auto-ground: '%s' needs %.2f shift (exceeds 5.0 cap) — skipped. Consider adding no_auto_ground to registry." % [lookup_name, correction])
+	# object like a 40m sphere, a laser beam, or something that should set
+	# auto_ground:false in the registry).
+	if absf(correction) > 5.0:
+		print("  ⚠ Auto-ground: '%s' needs %.2f shift (exceeds 5.0 cap) — skipped. Set auto_ground:false in registry." % [lookup_name, correction])
 		return
 
 	artifact.position.y += correction
-	print("  ↑ Auto-ground: shifted '%s' up by %.3f" % [lookup_name, correction])
+	print("  %s Auto-ground: shifted '%s' by %.3f" % ["↑" if correction > 0.0 else "↓", lookup_name, correction])
+
+
+## Is the gated packaging feature on? Default OFF — existing maps untouched until flipped.
+func _packaging_enabled() -> bool:
+	return bool(ProjectSettings.get_setting("ada/packaging/auto_spawn", false))
+
+
+## Spawn packaging props (podium / step / wall / readout) around `artifact` from its spatial_needs.
+## Runs deferred, after auto-ground. Packaging props are added as siblings under parent_node, built
+## origin-at-floor, and tagged is_packaging. A grounding prop also lifts the artifact onto its top.
+func _spawn_packaging_for(artifact: Node3D, lookup_name: String, artifact_info: Dictionary, world_pos: Vector3) -> void:
+	if not is_instance_valid(artifact):
+		return
+	var sn: Variant = artifact_info.get("spatial_needs", {})
+	if not (sn is Dictionary):
+		sn = {}
+	var aabb: AABB = _compute_local_aabb(artifact)
+	var disp_name := str(artifact_info.get("name", lookup_name))
+	var specs: Array = PackagingResolver.resolve(sn, aabb.size, disp_name)
+	for spec in specs:
+		var scene_path := str(spec.get("scene", ""))
+		if scene_path == "" or not ResourceLoader.exists(scene_path):
+			continue
+		var packed = load(scene_path)
+		if packed == null:
+			continue
+		var inst = packed.instantiate()
+		if inst == null:
+			continue
+		parent_node.add_child(inst)
+		if inst is Node3D:
+			(inst as Node3D).position = world_pos + (spec.get("pos_offset", Vector3.ZERO) as Vector3)
+		if inst.has_method("apply_grid_config"):
+			inst.apply_grid_config(spec.get("dna", {}))
+		inst.set_meta("is_packaging", true)
+		inst.set_meta("packaging_for", lookup_name)
+		# Lift the artifact onto the packaging top (the base already grounded by _auto_ground).
+		var raise_to := float(spec.get("raise_to", -1.0))
+		if raise_to >= 0.0 and is_instance_valid(artifact):
+			artifact.position.y += raise_to
+	if specs.size() > 0:
+		print("  📦 Packaging: spawned %d prop(s) for '%s'" % [specs.size(), lookup_name])
 
 
 ## Recursively compute the local-space AABB of a node and all its children.
-## Walks MeshInstance3D, MultiMeshInstance3D, CSGShape3D, GPUParticles3D.
+## Walks MeshInstance3D, MultiMeshInstance3D, CSGShape3D — SOLID geometry only.
+## GPUParticles3D are intentionally EXCLUDED: their visibility AABBs are large and
+## arbitrary, which is what caused bad auto-ground lifts (becoming_catalyst 4m).
 func _compute_local_aabb(node: Node3D) -> AABB:
 	var result := AABB()
 	var first := true
@@ -1690,9 +1751,8 @@ func _compute_local_aabb(node: Node3D) -> AABB:
 				if m is Mesh:
 					child_aabb = child.transform * m.get_aabb()
 					has_aabb = true
-		elif child is GPUParticles3D:
-			child_aabb = child.transform * child.visibility_aabb
-			has_aabb = true
+		# GPUParticles3D deliberately excluded — their visibility_aabb is not the
+		# solid footprint and would skew grounding.
 
 		if has_aabb and child_aabb.size.length() > 0:
 			if first:
