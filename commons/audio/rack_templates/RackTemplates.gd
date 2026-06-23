@@ -1,6 +1,8 @@
 extends Node3D
 class_name RackTemplates
 
+const BakedTextAlbedo := preload("res://commons/utils/baked_text_albedo.gd")
+
 ## Composable rack panel builder — Dieter Rams aesthetic.
 ##
 ## Universal API:
@@ -122,10 +124,10 @@ static func create_panel(title: String, rows: Array, frameless: bool = false) ->
 					node.transform.origin = Vector3(cx, cy, 0.012)
 					module.add_child(node)
 
-				# Label below element
+				# Label below element — capped to this control's column width so labels never collide.
 				var lbl_text: String = elem.get("label", "")
 				if lbl_text != "":
-					_add_label(module, lbl_text, Vector3(cx, cy - sz.y / 2.0 - 0.006, 0.012), 11)
+					_add_label(module, lbl_text, Vector3(cx, cy - sz.y / 2.0 - 0.012, 0.012), 11, HORIZONTAL_ALIGNMENT_CENTER, sz.x + ELEM_GAP)
 
 			cursor_x += sz.x + ELEM_GAP
 
@@ -174,6 +176,9 @@ static func _instantiate_element(type: String, elem: Dictionary, counters: Dicti
 			slider.scale = Vector3.ONE * 0.7
 			if slider.has_method("set_param_name"):
 				slider.set_param_name(elem.get("label", "P%d" % idx))
+			var nm_lbl = slider.find_child("LabelName", true, false)
+			if nm_lbl:
+				nm_lbl.visible = false
 			var def: float = elem.get("default", -1.0)
 			if def >= 0.0 and slider.has_method("set_normalized_value"):
 				slider.set_normalized_value(def)
@@ -1697,11 +1702,23 @@ static func _add_title(parent: Node3D, text: String, _panel_w: float, panel_h: f
 	parent.add_child(lbl)
 
 
-static func _add_label(parent: Node3D, text: String, pos: Vector3, size: int = 14, align: int = HORIZONTAL_ALIGNMENT_CENTER) -> void:
+static func _add_label(parent: Node3D, text: String, pos: Vector3, size: int = 14, align: int = HORIZONTAL_ALIGNMENT_CENTER, max_w: float = 0.18) -> void:
+	if text.strip_edges() == "":
+		return
+	# Crisp 2D-in-3D label tag: a small dark plate + light text, surface-pinned (not a billboard).
+	# This both LABELS the control and gives it a readable plate under it. Width is capped to the
+	# control's own column (max_w) so adjacent labels never collide — the text auto-shrinks to fit.
+	var w: float = clampf(float(text.length()) * 0.016 + 0.024, 0.045, max_w)
+	var tag: MeshInstance3D = BakedTextAlbedo.make_panel_mesh(text, Color(0.11, 0.12, 0.14), Color(0.94, 0.92, 0.88), Vector2(w, 0.024), 1400, true)
+	if tag:
+		tag.transform.origin = pos + Vector3(0, 0, 0.004)
+		parent.add_child(tag)
+		return
+	# Fallback if text-baking is unavailable (keeps panels working): plain dark Label3D.
 	var lbl := Label3D.new()
 	lbl.text = text
 	lbl.font_size = size
-	lbl.pixel_size = 0.0004
+	lbl.pixel_size = 0.0005
 	lbl.modulate = Color(0.15, 0.15, 0.15)
 	lbl.horizontal_alignment = align
 	lbl.transform.origin = pos
