@@ -1,30 +1,28 @@
 {
-	"sequences": {
-		"resourcemanagement": {
-			"name": "Resource Management",
-			"status": "deferred",
-			"deferred_reason": "All 6 maps were env_one placeholders. No real content. Rebuild when content exists.",
-			"description": "Algorithmic complexity, hardware considerations, and development practices",
-			"difficulty": "intermediate",
-			"learning_objectives": [
-				"Big O complexity",
-				"Data locality and caching",
-				"Real-time vs offline processing",
-				"Version control",
-				"Testing and debugging"
-			],
-			"maps": [],
-			"deferred_maps": [
-				"ResourceManagement_Real_time_vs_Offline_Processing",
-				"ResourceManagement_Hardware_Considerations",
-				"ResourceManagement_Algorithmic_Complexity_Big_O",
-				"ResourceManagement_Data_Locality_Caching",
-				"ResourceManagement_Version_Control",
-				"ResourceManagement_Testing_and_Debugging"
-			],
-			"artifact_groups": []
-		}
-	},
-	"world_phase": "beyond",
-	"artifact_groups": []
+  "sequences": {
+    "resourcemanagement": {
+      "name": "Resource Management",
+      "description": "Algorithmic complexity, hardware considerations, and development practices",
+      "difficulty": "intermediate",
+      "learning_objectives": [
+        "Big O complexity",
+        "Data locality and caching",
+        "Real-time vs offline processing",
+        "Version control",
+        "Testing and debugging"
+      ],
+      "maps": [
+        "ResourceManagement_Algorithmic_Complexity_Big_O",
+        "ResourceManagement_Data_Locality_Caching",
+        "ResourceManagement_Real_time_vs_Offline_Processing",
+        "ResourceManagement_Version_Control",
+        "ResourceManagement_Testing_and_Debugging",
+        "ResourceManagement_Hardware_Considerations"
+      ],
+      "deferred_maps": [],
+      "artifact_groups": []
+    }
+  },
+  "world_phase": "beyond",
+  "artifact_groups": []
 }

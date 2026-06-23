@@ -1,1095 +1,1131 @@
 {
-	"_meta": {
-		"description": "Soft stage definitions: what unlocks at each sequence for hazards, ecosystem, and capability tracks. All 3 managers read their own section. Allow flags and hand verbs are cumulative across completed stages.",
-		"version": "1.0",
-		"last_updated": "2026-03-03",
-		"catalyst_enemy_kinds": "goo: convert on contact (primitives base). transport: friend pushes peer foe AWAY from player (transformation). swarm: 2x wave + 30% faster step (forces, noise, swarm). drainfriend: caught player drags 1 friend back to foe (entropy/CA/ML)."
-	},
-	"stages": {
-		"primitives": {
-			"order": 1,
-			"ecosystem": {
-				"allow_flags": [
-					"static_geometry",
-					"grey_palette"
-				],
-				"nature_kingdoms": [],
-				"vegetation_density": 0.0,
-				"terrain_mode": "flat",
-				"ambient_preset": "empty_lab"
-			},
-			"hazards": {
-				"unlock_types": [],
-				"spawner_behavior": "dormant",
-				"personality_shift": {},
-				"max_concurrent": 1
-			},
-			"capability": {
-				"capacity_level": 1,
-				"hand_verbs": [
-					"observe",
-					"grab",
-					"snap"
-				],
-				"catalyst_mode": "primitives",
-				"catalyst_affordances": [
-					"orb",
-					"wand",
-					"spell",
-					"agent"
-				],
-				"movement_abilities": [
-					"teleport"
-				]
-			},
-			"enemies": {
-				"kind": "goo",
-				"comment": "Catalyst foe variant for the primitives sequence."
-			}
-		},
-		"transformation": {
-			"order": 2,
-			"ecosystem": {
-				"allow_flags": [
-					"static_movement"
-				],
-				"nature_kingdoms": [],
-				"vegetation_density": 0.0,
-				"terrain_mode": "flat",
-				"ambient_preset": "empty_lab"
-			},
-			"hazards": {
-				"unlock_types": [
-					"miura_crawler"
-				],
-				"spawner_behavior": "dormant",
-				"personality_shift": {},
-				"max_concurrent": 1
-			},
-			"capability": {
-				"capacity_level": 2,
-				"hand_verbs": [
-					"rotate_object",
-					"translate_object"
-				],
-				"catalyst_mode": "transformation",
-				"catalyst_affordances": [
-					"shift",
-					"rotate",
-					"shrink"
-				],
-				"movement_abilities": [
-					"teleport"
-				]
-			},
-			"enemies": {
-				"kind": "transport",
-				"comment": "Catalyst foe variant for the transformation sequence."
-			}
-		},
-		"color": {
-			"order": 4,
-			"ecosystem": {
-				"allow_flags": [
-					"color"
-				],
-				"nature_kingdoms": [
-					"flower"
-				],
-				"vegetation_density": 0.1,
-				"terrain_mode": "flat",
-				"ambient_preset": "perception_shift"
-			},
-			"hazards": {
-				"unlock_types": [
-					"kaleidocycle_enemy"
-				],
-				"spawner_behavior": "active",
-				"personality_shift": {
-					"miura_crawler": "wary"
-				},
-				"max_concurrent": 2
-			},
-			"capability": {
-				"capacity_level": 2,
-				"hand_verbs": [
-					"paint",
-					"shoot_color"
-				],
-				"catalyst_mode": "chromatic",
-				"catalyst_affordances": [
-					"paint",
-					"rainbow-arc",
-					"context-tint"
-				],
-				"movement_abilities": [
-					"teleport"
-				]
-			},
-			"enemies": {
-				"kind": "goo",
-				"comment": "Catalyst foe variant for the color sequence."
-			}
-		},
-		"change": {
-			"order": 4.5,
-			"_provenance": "Added 2026-05-13 — calculus substrate sequence proposed in doc/sequence_proposals/2026-05-13_change-sequence.md. Sits between color and forces. Introduces the `sustain` catalyst affordance (catalyst-as-accumulation).",
-			"ecosystem": {
-				"allow_flags": [
-					"function_visualization",
-					"rate_arrows",
-					"field_arrows"
-				],
-				"nature_kingdoms": [
-					"flower"
-				],
-				"vegetation_density": 0.08,
-				"terrain_mode": "flat",
-				"ambient_preset": "calc_lab"
-			},
-			"hazards": {
-				"unlock_types": [],
-				"spawner_behavior": "dormant",
-				"personality_shift": {},
-				"max_concurrent": 1
-			},
-			"capability": {
-				"capacity_level": 4,
-				"hand_verbs": [
-					"observe",
-					"grab",
-					"snap",
-					"trace",
-					"sustain"
-				],
-				"catalyst_mode": "change",
-				"catalyst_affordances": [
-					"accumulate",
-					"trace-rate",
-					"flow-along"
-				],
-				"movement_abilities": [
-					"teleport"
-				]
-			},
-			"enemies": {
-				"kind": "goo",
-				"comment": "Foe variant for the calculus sequence — same goo, but tickled by sustained contact rather than one-shot impact. The new affordance teaches a new way to engage."
-			}
-		},
-		"forces": {
-			"order": 5,
-			"ecosystem": {
-				"allow_flags": [
-					"force"
-				],
-				"nature_kingdoms": [
-					"flower",
-					"tree"
-				],
-				"vegetation_density": 0.15,
-				"terrain_mode": "flat",
-				"ambient_preset": "perception_shift"
-			},
-			"hazards": {
-				"unlock_types": [
-					"kresling_spire",
-					"force_field",
-					"goomba_box",
-					"shell_roller",
-					"spring_hopper"
-				],
-				"spawner_behavior": "active",
-				"personality_shift": {
-					"miura_crawler": "neutral",
-					"kaleidocycle_enemy": "wary"
-				},
-				"max_concurrent": 3
-			},
-			"capability": {
-				"capacity_level": 3,
-				"hand_verbs": [
-					"push",
-					"pull",
-					"force_shield"
-				],
-				"catalyst_mode": "forces",
-				"movement_abilities": [
-					"teleport"
-				],
-				"catalyst_affordances": [
-					"drive",
-					"push"
-				]
-			},
-			"enemies": {
-				"kind": "swarm",
-				"comment": "Catalyst foe variant for the forces sequence."
-			}
-		},
-		"array_tutorial": {
-			"order": 3,
-			"ecosystem": {
-				"allow_flags": [
-					"arrays"
-				],
-				"nature_kingdoms": [
-					"flower",
-					"tree"
-				],
-				"vegetation_density": 0.2,
-				"terrain_mode": "flat",
-				"ambient_preset": "perception_shift"
-			},
-			"hazards": {
-				"unlock_types": [
-					"gridagent"
-				],
-				"spawner_behavior": "active",
-				"personality_shift": {},
-				"max_concurrent": 3
-			},
-			"capability": {
-				"capacity_level": 3,
-				"hand_verbs": [
-					"snap_place",
-					"reorder"
-				],
-				"catalyst_mode": "array",
-				"catalyst_affordances": [
-					"grid-stamp",
-					"pattern"
-				],
-				"movement_abilities": [
-					"teleport"
-				]
-			},
-			"enemies": {
-				"kind": "goo",
-				"comment": "Catalyst foe variant for the array_tutorial sequence."
-			}
-		},
-		"wavefunctions": {
-			"order": 6,
-			"ecosystem": {
-				"allow_flags": [
-					"sine_wave"
-				],
-				"nature_kingdoms": [
-					"flower",
-					"tree"
-				],
-				"vegetation_density": 0.25,
-				"terrain_mode": "flat",
-				"ambient_preset": "perception_shift"
-			},
-			"hazards": {
-				"unlock_types": [
-					"waterbomb_enemy"
-				],
-				"spawner_behavior": "active",
-				"personality_shift": {
-					"kresling_spire": "wary"
-				},
-				"max_concurrent": 3
-			},
-			"capability": {
-				"capacity_level": 3,
-				"hand_verbs": [
-					"oscillate",
-					"tune_frequency"
-				],
-				"catalyst_mode": "waveform",
-				"movement_abilities": [
-					"teleport"
-				],
-				"catalyst_affordances": [
-					"oscillate"
-				]
-			},
-			"enemies": {
-				"kind": "goo",
-				"comment": "Catalyst foe variant for the wavefunctions sequence."
-			}
-		},
-		"randomness": {
-			"order": 7,
-			"ecosystem": {
-				"allow_flags": [
-					"random_placement",
-					"random_variation"
-				],
-				"nature_kingdoms": [
-					"flower",
-					"tree",
-					"fungus"
-				],
-				"vegetation_density": 0.3,
-				"terrain_mode": "flat",
-				"ambient_preset": "environmental_entropy"
-			},
-			"hazards": {
-				"unlock_types": [
-					"octapod_crawler",
-					"plasma_critter"
-				],
-				"spawner_behavior": "active",
-				"personality_shift": {
-					"kaleidocycle_enemy": "neutral",
-					"waterbomb_enemy": "wary"
-				},
-				"max_concurrent": 4
-			},
-			"capability": {
-				"capacity_level": 3,
-				"hand_verbs": [
-					"randomize",
-					"entropy_trigger"
-				],
-				"catalyst_mode": "chaos",
-				"movement_abilities": [
-					"teleport"
-				],
-				"catalyst_affordances": [
-					"scatter"
-				]
-			},
-			"enemies": {
-				"kind": "swarm",
-				"comment": "Catalyst foe variant for the randomness sequence."
-			}
-		},
-		"noise": {
-			"order": 8,
-			"ecosystem": {
-				"allow_flags": [
-					"noise_terrain",
-					"noise_voxels"
-				],
-				"nature_kingdoms": [
-					"flower",
-					"tree",
-					"fungus"
-				],
-				"vegetation_density": 0.4,
-				"terrain_mode": "noise",
-				"ambient_preset": "environmental_entropy"
-			},
-			"hazards": {
-				"unlock_types": [],
-				"spawner_behavior": "active",
-				"personality_shift": {
-					"octapod_crawler": "wary"
-				},
-				"max_concurrent": 4
-			},
-			"capability": {
-				"capacity_level": 4,
-				"hand_verbs": [
-					"sculpt_terrain"
-				],
-				"catalyst_mode": null,
-				"movement_abilities": [
-					"teleport",
-					"climb"
-				],
-				"catalyst_affordances": [
-					"flow"
-				]
-			},
-			"enemies": {
-				"kind": "swarm",
-				"comment": "Catalyst foe variant for the noise sequence."
-			}
-		},
-		"cellularautomata": {
-			"order": 9,
-			"ecosystem": {
-				"allow_flags": [
-					"growth",
-					"game_of_life"
-				],
-				"nature_kingdoms": [
-					"flower",
-					"tree",
-					"fungus"
-				],
-				"vegetation_density": 0.5,
-				"terrain_mode": "growth",
-				"ambient_preset": "ecology_emerges"
-			},
-			"hazards": {
-				"unlock_types": [
-					"armadillo_droideka"
-				],
-				"spawner_behavior": "aggressive",
-				"personality_shift": {
-					"miura_crawler": "curious",
-					"kresling_spire": "neutral",
-					"octapod_crawler": "neutral"
-				},
-				"max_concurrent": 5
-			},
-			"capability": {
-				"capacity_level": 4,
-				"hand_verbs": [
-					"seed_life",
-					"edit_rules"
-				],
-				"catalyst_mode": "cellular",
-				"movement_abilities": [
-					"teleport",
-					"climb"
-				],
-				"catalyst_affordances": [
-					"evolve"
-				]
-			},
-			"enemies": {
-				"kind": "drainfriend",
-				"comment": "Catalyst foe variant for the cellularautomata sequence."
-			}
-		},
-		"fractals": {
-			"order": 10,
-			"ecosystem": {
-				"allow_flags": [
-					"fractal_flora",
-					"fractal_terrain"
-				],
-				"nature_kingdoms": [
-					"flower",
-					"tree",
-					"fungus"
-				],
-				"vegetation_density": 0.6,
-				"terrain_mode": "growth",
-				"ambient_preset": "recursive_world"
-			},
-			"hazards": {
-				"unlock_types": [
-					"origami_droideka"
-				],
-				"spawner_behavior": "aggressive",
-				"personality_shift": {
-					"waterbomb_enemy": "neutral",
-					"armadillo_droideka": "wary"
-				},
-				"max_concurrent": 5
-			},
-			"capability": {
-				"capacity_level": 5,
-				"hand_verbs": [
-					"zoom_fractal",
-					"iterate"
-				],
-				"catalyst_mode": "fractal",
-				"movement_abilities": [
-					"teleport",
-					"climb"
-				],
-				"catalyst_affordances": [
-					"split"
-				]
-			},
-			"enemies": {
-				"kind": "goo",
-				"comment": "Catalyst foe variant for the fractals sequence."
-			}
-		},
-		"lsystems": {
-			"order": 11,
-			"ecosystem": {
-				"allow_flags": [
-					"lsystem_branching",
-					"lsystem_flowers",
-					"lsystem_trees"
-				],
-				"nature_kingdoms": [
-					"flower",
-					"tree",
-					"fungus",
-					"creature"
-				],
-				"vegetation_density": 0.7,
-				"terrain_mode": "growth",
-				"ambient_preset": "recursive_world"
-			},
-			"hazards": {
-				"unlock_types": [
-					"scissor_stalker"
-				],
-				"spawner_behavior": "aggressive",
-				"personality_shift": {
-					"plasma_critter": "neutral",
-					"origami_droideka": "wary"
-				},
-				"max_concurrent": 6
-			},
-			"capability": {
-				"capacity_level": 5,
-				"hand_verbs": [
-					"write_rule",
-					"branch_grow"
-				],
-				"catalyst_mode": "branching",
-				"movement_abilities": [
-					"teleport",
-					"climb"
-				],
-				"catalyst_affordances": [
-					"grow"
-				]
-			},
-			"enemies": {
-				"kind": "goo",
-				"comment": "Catalyst foe variant for the lsystems sequence."
-			}
-		},
-		"proceduralgeneration": {
-			"order": 12,
-			"ecosystem": {
-				"allow_flags": [
-					"self_generating_world"
-				],
-				"nature_kingdoms": [
-					"flower",
-					"tree",
-					"fungus",
-					"creature"
-				],
-				"vegetation_density": 0.8,
-				"terrain_mode": "self_generating",
-				"ambient_preset": "recursive_world"
-			},
-			"hazards": {
-				"unlock_types": [
-					"sphere_droideka"
-				],
-				"spawner_behavior": "aggressive",
-				"personality_shift": {
-					"scissor_stalker": "wary",
-					"armadillo_droideka": "neutral"
-				},
-				"max_concurrent": 6
-			},
-			"capability": {
-				"capacity_level": 5,
-				"hand_verbs": [
-					"generate_world",
-					"parameter_tune"
-				],
-				"catalyst_mode": null,
-				"movement_abilities": [
-					"teleport",
-					"climb"
-				],
-				"catalyst_affordances": [
-					"seed"
-				]
-			},
-			"enemies": {
-				"kind": "drainfriend",
-				"comment": "Catalyst foe variant for the proceduralgeneration sequence."
-			}
-		},
-		"softbodies": {
-			"order": 14,
-			"ecosystem": {
-				"allow_flags": [
-					"morphogenesis",
-					"soft_matter"
-				],
-				"nature_kingdoms": [
-					"flower",
-					"tree",
-					"fungus",
-					"creature"
-				],
-				"vegetation_density": 0.85,
-				"terrain_mode": "self_generating",
-				"ambient_preset": "living_matter"
-			},
-			"hazards": {
-				"unlock_types": [
-					"waterbomb_hopper"
-				],
-				"spawner_behavior": "aggressive",
-				"personality_shift": {
-					"origami_droideka": "neutral",
-					"sphere_droideka": "wary"
-				},
-				"max_concurrent": 6
-			},
-			"capability": {
-				"capacity_level": 5,
-				"hand_verbs": [
-					"deform",
-					"tune_lambda"
-				],
-				"catalyst_mode": null,
-				"movement_abilities": [
-					"teleport",
-					"climb"
-				],
-				"catalyst_affordances": [
-					"flex",
-					"drape"
-				]
-			},
-			"enemies": {
-				"kind": "transport",
-				"comment": "Catalyst foe variant for the softbodies sequence."
-			}
-		},
-		"swarmintelligence": {
-			"order": 13,
-			"ecosystem": {
-				"allow_flags": [
-					"swarm_behavior",
-					"flocking"
-				],
-				"nature_kingdoms": [
-					"flower",
-					"tree",
-					"fungus",
-					"creature"
-				],
-				"vegetation_density": 0.9,
-				"terrain_mode": "self_generating",
-				"ambient_preset": "collective_creatures"
-			},
-			"hazards": {
-				"unlock_types": [],
-				"spawner_behavior": "aggressive",
-				"personality_shift": {
-					"miura_crawler": "friend",
-					"kaleidocycle_enemy": "curious",
-					"octapod_crawler": "curious"
-				},
-				"max_concurrent": 8
-			},
-			"capability": {
-				"capacity_level": 6,
-				"hand_verbs": [
-					"swarm_command",
-					"embody_flock"
-				],
-				"catalyst_mode": "swarm",
-				"movement_abilities": [
-					"teleport",
-					"climb",
-					"flight"
-				],
-				"catalyst_affordances": [
-					"flock"
-				]
-			},
-			"enemies": {
-				"kind": "swarm",
-				"comment": "Catalyst foe variant for the swarmintelligence sequence."
-			}
-		},
-		"machinelearning": {
-			"order": 15,
-			"ecosystem": {
-				"allow_flags": [
-					"adaptive_evolution",
-					"mutation"
-				],
-				"nature_kingdoms": [
-					"flower",
-					"tree",
-					"fungus",
-					"creature"
-				],
-				"vegetation_density": 0.95,
-				"terrain_mode": "self_generating",
-				"ambient_preset": "adaptive_world"
-			},
-			"hazards": {
-				"unlock_types": [],
-				"spawner_behavior": "aggressive",
-				"personality_shift": {
-					"kresling_spire": "curious",
-					"waterbomb_enemy": "curious",
-					"armadillo_droideka": "curious"
-				},
-				"max_concurrent": 8
-			},
-			"capability": {
-				"capacity_level": 6,
-				"hand_verbs": [
-					"train",
-					"evolve"
-				],
-				"catalyst_mode": null,
-				"movement_abilities": [
-					"teleport",
-					"climb",
-					"flight"
-				],
-				"catalyst_affordances": [
-					"learn"
-				]
-			},
-			"enemies": {
-				"kind": "drainfriend",
-				"comment": "Catalyst foe variant for the machinelearning sequence."
-			}
-		},
-		"foundationscrisis": {
-			"order": 17,
-			"ecosystem": {
-				"allow_flags": [
-					"contradiction",
-					"paradox_terrain"
-				],
-				"nature_kingdoms": [
-					"flower",
-					"tree",
-					"fungus",
-					"creature"
-				],
-				"vegetation_density": 0.9,
-				"terrain_mode": "self_generating",
-				"ambient_preset": "contradictory_world"
-			},
-			"hazards": {
-				"unlock_types": [],
-				"spawner_behavior": "aggressive",
-				"personality_shift": {
-					"plasma_critter": "curious",
-					"scissor_stalker": "neutral",
-					"origami_droideka": "curious"
-				},
-				"max_concurrent": 8
-			},
-			"capability": {
-				"capacity_level": 6,
-				"hand_verbs": [
-					"hold_paradox",
-					"walk_impossible"
-				],
-				"catalyst_mode": null,
-				"movement_abilities": [
-					"teleport",
-					"climb",
-					"flight"
-				],
-				"catalyst_affordances": [
-					"paradox"
-				]
-			},
-			"enemies": {
-				"kind": "drainfriend",
-				"comment": "Catalyst foe variant for the foundationscrisis sequence."
-			}
-		},
-		"qfeplaboratory": {
-			"order": 18,
-			"ecosystem": {
-				"allow_flags": [
-					"tunable_becoming",
-					"parameter_world"
-				],
-				"nature_kingdoms": [
-					"flower",
-					"tree",
-					"fungus",
-					"creature"
-				],
-				"vegetation_density": 1.0,
-				"terrain_mode": "self_generating",
-				"ambient_preset": "tunable_becoming"
-			},
-			"hazards": {
-				"unlock_types": [],
-				"spawner_behavior": "aggressive",
-				"personality_shift": {
-					"waterbomb_hopper": "curious",
-					"sphere_droideka": "neutral"
-				},
-				"max_concurrent": 10
-			},
-			"capability": {
-				"capacity_level": 6,
-				"hand_verbs": [
-					"tune_phi",
-					"tune_delta_e",
-					"full_parameter_control"
-				],
-				"catalyst_mode": null,
-				"movement_abilities": [
-					"teleport",
-					"climb",
-					"flight"
-				],
-				"catalyst_affordances": [
-					"tune"
-				]
-			},
-			"enemies": {
-				"kind": "goo",
-				"comment": "Catalyst foe variant for the qfeplaboratory sequence."
-			}
-		},
-		"postfoundationscrisis": {
-			"order": 19,
-			"ecosystem": {
-				"allow_flags": [
-					"applied_limits"
-				],
-				"nature_kingdoms": [
-					"flower",
-					"tree",
-					"fungus",
-					"creature"
-				],
-				"vegetation_density": 1.0,
-				"terrain_mode": "self_generating",
-				"ambient_preset": "tunable_becoming"
-			},
-			"hazards": {
-				"unlock_types": [],
-				"spawner_behavior": "aggressive",
-				"personality_shift": {
-					"scissor_stalker": "curious",
-					"sphere_droideka": "curious"
-				},
-				"max_concurrent": 10
-			},
-			"capability": {
-				"capacity_level": 6,
-				"hand_verbs": [
-					"apply_limits"
-				],
-				"catalyst_mode": null,
-				"movement_abilities": [
-					"teleport",
-					"climb",
-					"flight"
-				],
-				"catalyst_affordances": [
-					"compose"
-				]
-			},
-			"enemies": {
-				"kind": "goo",
-				"comment": "Catalyst foe variant for the postfoundationscrisis sequence."
-			}
-		},
-		"mosaicanalysis": {
-			"order": 20,
-			"ecosystem": {
-				"allow_flags": [
-					"pattern_world",
-					"mosaic_world"
-				],
-				"nature_kingdoms": [
-					"flower",
-					"tree",
-					"fungus"
-				],
-				"vegetation_density": 0.6,
-				"terrain_mode": "stone_floor",
-				"ambient_preset": "mediterranean"
-			},
-			"hazards": {
-				"unlock_types": [],
-				"spawner_behavior": "passive",
-				"personality_shift": {},
-				"max_concurrent": 3
-			},
-			"capability": {
-				"capacity_level": 5,
-				"hand_verbs": [
-					"analyze_pattern",
-					"extract_motif",
-					"classify_symmetry"
-				],
-				"catalyst_mode": null,
-				"movement_abilities": [
-					"teleport",
-					"climb"
-				]
-			},
-			"enemies": {
-				"kind": "goo",
-				"comment": "Catalyst foe variant for the mosaicanalysis sequence."
-			}
-		},
-		"graphtheory": {
-			"order": 16,
-			"ecosystem": {
-				"allow_flags": [
-					"connection_topology",
-					"network_world"
-				],
-				"nature_kingdoms": [
-					"flower",
-					"tree",
-					"fungus",
-					"creature"
-				],
-				"vegetation_density": 1.0,
-				"terrain_mode": "self_generating",
-				"ambient_preset": "tunable_becoming"
-			},
-			"hazards": {
-				"unlock_types": [],
-				"spawner_behavior": "aggressive",
-				"personality_shift": {
-					"waterbomb_hopper": "friend",
-					"sphere_droideka": "friend",
-					"scissor_stalker": "friend",
-					"origami_droideka": "friend",
-					"plasma_critter": "friend"
-				},
-				"max_concurrent": 10
-			},
-			"capability": {
-				"capacity_level": 6,
-				"hand_verbs": [
-					"connect_nodes",
-					"traverse_graph"
-				],
-				"catalyst_mode": null,
-				"movement_abilities": [
-					"teleport",
-					"climb",
-					"flight"
-				],
-				"catalyst_affordances": [
-					"connect"
-				]
-			},
-			"enemies": {
-				"kind": "transport",
-				"comment": "Catalyst foe variant for the graphtheory sequence."
-			}
-		},
-		"biome_lab": {
-			"order": 99,
-			"comment": "Lab sequence � Biome_Spine and Biome_Zoo. All kingdoms unlocked, max density. Lets the dispatcher work test code through every substrate.",
-			"ecosystem": {
-				"allow_flags": [
-					"all_kingdoms",
-					"all_substrates",
-					"auto_research"
-				],
-				"nature_kingdoms": [
-					"flower",
-					"tree",
-					"fungus",
-					"creature"
-				],
-				"vegetation_density": 1.0,
-				"terrain_mode": "self_generating",
-				"ambient_preset": "lush_lab"
-			},
-			"hazards": {
-				"unlock_types": [],
-				"spawner_behavior": "dormant",
-				"personality_shift": {},
-				"max_concurrent": 0
-			},
-			"capability": {
-				"capacity_level": 5,
-				"hand_verbs": [
-					"observe",
-					"grab",
-					"snap",
-					"paint",
-					"dispatch"
-				],
-				"catalyst_mode": "all",
-				"movement_abilities": [
-					"teleport",
-					"walk",
-					"fly"
-				]
-			},
-			"enemies": {
-				"kind": "none",
-				"comment": "No combat � these are visualization labs."
-			}
-		},
-		"isosurfaces": {
-			"order": 4.6,
-			"ecosystem": {
-				"allow_flags": [
-					"field_volumes",
-					"extracted_surfaces"
-				],
-				"nature_kingdoms": [],
-				"vegetation_density": 0.0,
-				"terrain_mode": "voxel_marched",
-				"ambient_preset": "empty_lab"
-			},
-			"hazards": {
-				"unlock_types": [],
-				"spawner_behavior": "dormant",
-				"personality_shift": {},
-				"max_concurrent": 1
-			},
-			"capability": {
-				"capacity_level": 1,
-				"hand_verbs": [
-					"observe",
-					"grab",
-					"snap"
-				],
-				"catalyst_mode": "isosurface",
-				"catalyst_affordances": [
-					"threshold-extract"
-				],
-				"movement_abilities": [
-					"teleport"
-				]
-			},
-			"enemies": {
-				"kind": "goo",
-				"comment": "F_order geometry: minimal hazards, density crossing the threshold becomes mesh."
-			}
-		},
-		"boolean_surfaces": {
-			"order": 4.7,
-			"ecosystem": {
-				"allow_flags": [
-					"static_geometry",
-					"composed_solids"
-				],
-				"nature_kingdoms": [],
-				"vegetation_density": 0.0,
-				"terrain_mode": "flat",
-				"ambient_preset": "empty_lab"
-			},
-			"hazards": {
-				"unlock_types": [],
-				"spawner_behavior": "dormant",
-				"personality_shift": {},
-				"max_concurrent": 1
-			},
-			"capability": {
-				"capacity_level": 1,
-				"hand_verbs": [
-					"observe",
-					"grab",
-					"snap"
-				],
-				"catalyst_mode": "csg",
-				"catalyst_affordances": [
-					"csg-compose"
-				],
-				"movement_abilities": [
-					"teleport"
-				]
-			},
-			"enemies": {
-				"kind": "goo",
-				"comment": "F_order geometry: union, intersection, difference as composition algebra."
-			}
-		}
-	}
+  "_meta": {
+    "description": "Soft stage definitions: what unlocks at each sequence for hazards, ecosystem, and capability tracks. All 3 managers read their own section. Allow flags and hand verbs are cumulative across completed stages.",
+    "version": "1.0",
+    "last_updated": "2026-03-03",
+    "catalyst_enemy_kinds": "goo: convert on contact (primitives base). transport: friend pushes peer foe AWAY from player (transformation). swarm: 2x wave + 30% faster step (forces, noise, swarm). drainfriend: caught player drags 1 friend back to foe (entropy/CA/ML)."
+  },
+  "stages": {
+    "primitives": {
+      "order": 1,
+      "ecosystem": {
+        "allow_flags": [
+          "static_geometry",
+          "grey_palette"
+        ],
+        "nature_kingdoms": [],
+        "vegetation_density": 0.0,
+        "terrain_mode": "flat",
+        "ambient_preset": "empty_lab"
+      },
+      "hazards": {
+        "unlock_types": [],
+        "spawner_behavior": "dormant",
+        "personality_shift": {},
+        "max_concurrent": 1
+      },
+      "capability": {
+        "capacity_level": 1,
+        "hand_verbs": [
+          "observe",
+          "grab",
+          "snap"
+        ],
+        "catalyst_mode": "primitives",
+        "catalyst_affordances": [
+          "orb",
+          "wand",
+          "spell",
+          "agent"
+        ],
+        "movement_abilities": [
+          "teleport"
+        ]
+      },
+      "enemies": {
+        "kind": "goo",
+        "comment": "Catalyst foe variant for the primitives sequence."
+      }
+    },
+    "transformation": {
+      "order": 2,
+      "ecosystem": {
+        "allow_flags": [
+          "static_movement"
+        ],
+        "nature_kingdoms": [],
+        "vegetation_density": 0.0,
+        "terrain_mode": "flat",
+        "ambient_preset": "empty_lab"
+      },
+      "hazards": {
+        "unlock_types": [
+          "miura_crawler"
+        ],
+        "spawner_behavior": "dormant",
+        "personality_shift": {},
+        "max_concurrent": 1
+      },
+      "capability": {
+        "capacity_level": 2,
+        "hand_verbs": [
+          "rotate_object",
+          "translate_object"
+        ],
+        "catalyst_mode": "transformation",
+        "catalyst_affordances": [
+          "shift",
+          "rotate",
+          "shrink"
+        ],
+        "movement_abilities": [
+          "teleport"
+        ]
+      },
+      "enemies": {
+        "kind": "transport",
+        "comment": "Catalyst foe variant for the transformation sequence."
+      }
+    },
+    "color": {
+      "order": 4,
+      "ecosystem": {
+        "allow_flags": [
+          "color"
+        ],
+        "nature_kingdoms": [
+          "flower"
+        ],
+        "vegetation_density": 0.1,
+        "terrain_mode": "flat",
+        "ambient_preset": "perception_shift"
+      },
+      "hazards": {
+        "unlock_types": [
+          "kaleidocycle_enemy"
+        ],
+        "spawner_behavior": "active",
+        "personality_shift": {
+          "miura_crawler": "wary"
+        },
+        "max_concurrent": 2
+      },
+      "capability": {
+        "capacity_level": 2,
+        "hand_verbs": [
+          "paint",
+          "shoot_color"
+        ],
+        "catalyst_mode": "chromatic",
+        "catalyst_affordances": [
+          "paint",
+          "rainbow-arc",
+          "context-tint"
+        ],
+        "movement_abilities": [
+          "teleport"
+        ]
+      },
+      "enemies": {
+        "kind": "goo",
+        "comment": "Catalyst foe variant for the color sequence."
+      }
+    },
+    "change": {
+      "order": 4.5,
+      "_provenance": "Added 2026-05-13 — calculus substrate sequence proposed in doc/sequence_proposals/2026-05-13_change-sequence.md. Sits between color and forces. Introduces the `sustain` catalyst affordance (catalyst-as-accumulation).",
+      "ecosystem": {
+        "allow_flags": [
+          "function_visualization",
+          "rate_arrows",
+          "field_arrows"
+        ],
+        "nature_kingdoms": [
+          "flower"
+        ],
+        "vegetation_density": 0.08,
+        "terrain_mode": "flat",
+        "ambient_preset": "calc_lab"
+      },
+      "hazards": {
+        "unlock_types": [],
+        "spawner_behavior": "dormant",
+        "personality_shift": {},
+        "max_concurrent": 1
+      },
+      "capability": {
+        "capacity_level": 4,
+        "hand_verbs": [
+          "observe",
+          "grab",
+          "snap",
+          "trace",
+          "sustain"
+        ],
+        "catalyst_mode": "change",
+        "catalyst_affordances": [
+          "accumulate",
+          "trace-rate",
+          "flow-along"
+        ],
+        "movement_abilities": [
+          "teleport"
+        ]
+      },
+      "enemies": {
+        "kind": "goo",
+        "comment": "Foe variant for the calculus sequence — same goo, but tickled by sustained contact rather than one-shot impact. The new affordance teaches a new way to engage."
+      }
+    },
+    "forces": {
+      "order": 5,
+      "ecosystem": {
+        "allow_flags": [
+          "force"
+        ],
+        "nature_kingdoms": [
+          "flower",
+          "tree"
+        ],
+        "vegetation_density": 0.15,
+        "terrain_mode": "flat",
+        "ambient_preset": "perception_shift"
+      },
+      "hazards": {
+        "unlock_types": [
+          "kresling_spire",
+          "force_field",
+          "goomba_box",
+          "shell_roller",
+          "spring_hopper"
+        ],
+        "spawner_behavior": "active",
+        "personality_shift": {
+          "miura_crawler": "neutral",
+          "kaleidocycle_enemy": "wary"
+        },
+        "max_concurrent": 3
+      },
+      "capability": {
+        "capacity_level": 3,
+        "hand_verbs": [
+          "push",
+          "pull",
+          "force_shield"
+        ],
+        "catalyst_mode": "forces",
+        "movement_abilities": [
+          "teleport"
+        ],
+        "catalyst_affordances": [
+          "drive",
+          "push"
+        ]
+      },
+      "enemies": {
+        "kind": "swarm",
+        "comment": "Catalyst foe variant for the forces sequence."
+      }
+    },
+    "array_tutorial": {
+      "order": 3,
+      "ecosystem": {
+        "allow_flags": [
+          "arrays"
+        ],
+        "nature_kingdoms": [
+          "flower",
+          "tree"
+        ],
+        "vegetation_density": 0.2,
+        "terrain_mode": "flat",
+        "ambient_preset": "perception_shift"
+      },
+      "hazards": {
+        "unlock_types": [
+          "gridagent"
+        ],
+        "spawner_behavior": "active",
+        "personality_shift": {},
+        "max_concurrent": 3
+      },
+      "capability": {
+        "capacity_level": 3,
+        "hand_verbs": [
+          "snap_place",
+          "reorder"
+        ],
+        "catalyst_mode": "array",
+        "catalyst_affordances": [
+          "grid-stamp",
+          "pattern"
+        ],
+        "movement_abilities": [
+          "teleport"
+        ]
+      },
+      "enemies": {
+        "kind": "goo",
+        "comment": "Catalyst foe variant for the array_tutorial sequence."
+      }
+    },
+    "wavefunctions": {
+      "order": 6,
+      "ecosystem": {
+        "allow_flags": [
+          "sine_wave"
+        ],
+        "nature_kingdoms": [
+          "flower",
+          "tree"
+        ],
+        "vegetation_density": 0.25,
+        "terrain_mode": "flat",
+        "ambient_preset": "perception_shift"
+      },
+      "hazards": {
+        "unlock_types": [
+          "waterbomb_enemy"
+        ],
+        "spawner_behavior": "active",
+        "personality_shift": {
+          "kresling_spire": "wary"
+        },
+        "max_concurrent": 3
+      },
+      "capability": {
+        "capacity_level": 3,
+        "hand_verbs": [
+          "oscillate",
+          "tune_frequency"
+        ],
+        "catalyst_mode": "waveform",
+        "movement_abilities": [
+          "teleport"
+        ],
+        "catalyst_affordances": [
+          "oscillate"
+        ]
+      },
+      "enemies": {
+        "kind": "goo",
+        "comment": "Catalyst foe variant for the wavefunctions sequence."
+      }
+    },
+    "randomness": {
+      "order": 7,
+      "ecosystem": {
+        "allow_flags": [
+          "random_placement",
+          "random_variation"
+        ],
+        "nature_kingdoms": [
+          "flower",
+          "tree",
+          "fungus"
+        ],
+        "vegetation_density": 0.3,
+        "terrain_mode": "flat",
+        "ambient_preset": "environmental_entropy"
+      },
+      "hazards": {
+        "unlock_types": [
+          "octapod_crawler",
+          "plasma_critter"
+        ],
+        "spawner_behavior": "active",
+        "personality_shift": {
+          "kaleidocycle_enemy": "neutral",
+          "waterbomb_enemy": "wary"
+        },
+        "max_concurrent": 4
+      },
+      "capability": {
+        "capacity_level": 3,
+        "hand_verbs": [
+          "randomize",
+          "entropy_trigger"
+        ],
+        "catalyst_mode": "chaos",
+        "movement_abilities": [
+          "teleport"
+        ],
+        "catalyst_affordances": [
+          "scatter"
+        ]
+      },
+      "enemies": {
+        "kind": "swarm",
+        "comment": "Catalyst foe variant for the randomness sequence."
+      }
+    },
+    "noise": {
+      "order": 8,
+      "ecosystem": {
+        "allow_flags": [
+          "noise_terrain",
+          "noise_voxels"
+        ],
+        "nature_kingdoms": [
+          "flower",
+          "tree",
+          "fungus"
+        ],
+        "vegetation_density": 0.4,
+        "terrain_mode": "noise",
+        "ambient_preset": "environmental_entropy"
+      },
+      "hazards": {
+        "unlock_types": [],
+        "spawner_behavior": "active",
+        "personality_shift": {
+          "octapod_crawler": "wary"
+        },
+        "max_concurrent": 4
+      },
+      "capability": {
+        "capacity_level": 4,
+        "hand_verbs": [
+          "sculpt_terrain"
+        ],
+        "catalyst_mode": null,
+        "movement_abilities": [
+          "teleport",
+          "climb"
+        ],
+        "catalyst_affordances": [
+          "flow"
+        ]
+      },
+      "enemies": {
+        "kind": "swarm",
+        "comment": "Catalyst foe variant for the noise sequence."
+      }
+    },
+    "cellularautomata": {
+      "order": 9,
+      "ecosystem": {
+        "allow_flags": [
+          "growth",
+          "game_of_life"
+        ],
+        "nature_kingdoms": [
+          "flower",
+          "tree",
+          "fungus"
+        ],
+        "vegetation_density": 0.5,
+        "terrain_mode": "growth",
+        "ambient_preset": "ecology_emerges"
+      },
+      "hazards": {
+        "unlock_types": [
+          "armadillo_droideka"
+        ],
+        "spawner_behavior": "aggressive",
+        "personality_shift": {
+          "miura_crawler": "curious",
+          "kresling_spire": "neutral",
+          "octapod_crawler": "neutral"
+        },
+        "max_concurrent": 5
+      },
+      "capability": {
+        "capacity_level": 4,
+        "hand_verbs": [
+          "seed_life",
+          "edit_rules"
+        ],
+        "catalyst_mode": "cellular",
+        "movement_abilities": [
+          "teleport",
+          "climb"
+        ],
+        "catalyst_affordances": [
+          "evolve"
+        ]
+      },
+      "enemies": {
+        "kind": "drainfriend",
+        "comment": "Catalyst foe variant for the cellularautomata sequence."
+      }
+    },
+    "fractals": {
+      "order": 10,
+      "ecosystem": {
+        "allow_flags": [
+          "fractal_flora",
+          "fractal_terrain"
+        ],
+        "nature_kingdoms": [
+          "flower",
+          "tree",
+          "fungus"
+        ],
+        "vegetation_density": 0.6,
+        "terrain_mode": "growth",
+        "ambient_preset": "recursive_world"
+      },
+      "hazards": {
+        "unlock_types": [
+          "origami_droideka"
+        ],
+        "spawner_behavior": "aggressive",
+        "personality_shift": {
+          "waterbomb_enemy": "neutral",
+          "armadillo_droideka": "wary"
+        },
+        "max_concurrent": 5
+      },
+      "capability": {
+        "capacity_level": 5,
+        "hand_verbs": [
+          "zoom_fractal",
+          "iterate"
+        ],
+        "catalyst_mode": "fractal",
+        "movement_abilities": [
+          "teleport",
+          "climb"
+        ],
+        "catalyst_affordances": [
+          "split"
+        ]
+      },
+      "enemies": {
+        "kind": "goo",
+        "comment": "Catalyst foe variant for the fractals sequence."
+      }
+    },
+    "lsystems": {
+      "order": 11,
+      "ecosystem": {
+        "allow_flags": [
+          "lsystem_branching",
+          "lsystem_flowers",
+          "lsystem_trees"
+        ],
+        "nature_kingdoms": [
+          "flower",
+          "tree",
+          "fungus",
+          "creature"
+        ],
+        "vegetation_density": 0.7,
+        "terrain_mode": "growth",
+        "ambient_preset": "recursive_world"
+      },
+      "hazards": {
+        "unlock_types": [
+          "scissor_stalker"
+        ],
+        "spawner_behavior": "aggressive",
+        "personality_shift": {
+          "plasma_critter": "neutral",
+          "origami_droideka": "wary"
+        },
+        "max_concurrent": 6
+      },
+      "capability": {
+        "capacity_level": 5,
+        "hand_verbs": [
+          "write_rule",
+          "branch_grow"
+        ],
+        "catalyst_mode": "branching",
+        "movement_abilities": [
+          "teleport",
+          "climb"
+        ],
+        "catalyst_affordances": [
+          "grow"
+        ]
+      },
+      "enemies": {
+        "kind": "goo",
+        "comment": "Catalyst foe variant for the lsystems sequence."
+      }
+    },
+    "proceduralgeneration": {
+      "order": 12,
+      "ecosystem": {
+        "allow_flags": [
+          "self_generating_world"
+        ],
+        "nature_kingdoms": [
+          "flower",
+          "tree",
+          "fungus",
+          "creature"
+        ],
+        "vegetation_density": 0.8,
+        "terrain_mode": "self_generating",
+        "ambient_preset": "recursive_world"
+      },
+      "hazards": {
+        "unlock_types": [
+          "sphere_droideka"
+        ],
+        "spawner_behavior": "aggressive",
+        "personality_shift": {
+          "scissor_stalker": "wary",
+          "armadillo_droideka": "neutral"
+        },
+        "max_concurrent": 6
+      },
+      "capability": {
+        "capacity_level": 5,
+        "hand_verbs": [
+          "generate_world",
+          "parameter_tune"
+        ],
+        "catalyst_mode": null,
+        "movement_abilities": [
+          "teleport",
+          "climb"
+        ],
+        "catalyst_affordances": [
+          "seed"
+        ]
+      },
+      "enemies": {
+        "kind": "drainfriend",
+        "comment": "Catalyst foe variant for the proceduralgeneration sequence."
+      }
+    },
+    "softbodies": {
+      "order": 14,
+      "ecosystem": {
+        "allow_flags": [
+          "morphogenesis",
+          "soft_matter"
+        ],
+        "nature_kingdoms": [
+          "flower",
+          "tree",
+          "fungus",
+          "creature"
+        ],
+        "vegetation_density": 0.85,
+        "terrain_mode": "self_generating",
+        "ambient_preset": "living_matter"
+      },
+      "hazards": {
+        "unlock_types": [
+          "waterbomb_hopper"
+        ],
+        "spawner_behavior": "aggressive",
+        "personality_shift": {
+          "origami_droideka": "neutral",
+          "sphere_droideka": "wary"
+        },
+        "max_concurrent": 6
+      },
+      "capability": {
+        "capacity_level": 5,
+        "hand_verbs": [
+          "deform",
+          "tune_lambda"
+        ],
+        "catalyst_mode": null,
+        "movement_abilities": [
+          "teleport",
+          "climb"
+        ],
+        "catalyst_affordances": [
+          "flex",
+          "drape"
+        ]
+      },
+      "enemies": {
+        "kind": "transport",
+        "comment": "Catalyst foe variant for the softbodies sequence."
+      }
+    },
+    "swarmintelligence": {
+      "order": 13,
+      "ecosystem": {
+        "allow_flags": [
+          "swarm_behavior",
+          "flocking"
+        ],
+        "nature_kingdoms": [
+          "flower",
+          "tree",
+          "fungus",
+          "creature"
+        ],
+        "vegetation_density": 0.9,
+        "terrain_mode": "self_generating",
+        "ambient_preset": "collective_creatures"
+      },
+      "hazards": {
+        "unlock_types": [],
+        "spawner_behavior": "aggressive",
+        "personality_shift": {
+          "miura_crawler": "friend",
+          "kaleidocycle_enemy": "curious",
+          "octapod_crawler": "curious"
+        },
+        "max_concurrent": 8
+      },
+      "capability": {
+        "capacity_level": 6,
+        "hand_verbs": [
+          "swarm_command",
+          "embody_flock"
+        ],
+        "catalyst_mode": "swarm",
+        "movement_abilities": [
+          "teleport",
+          "climb",
+          "flight"
+        ],
+        "catalyst_affordances": [
+          "flock"
+        ]
+      },
+      "enemies": {
+        "kind": "swarm",
+        "comment": "Catalyst foe variant for the swarmintelligence sequence."
+      }
+    },
+    "machinelearning": {
+      "order": 15,
+      "ecosystem": {
+        "allow_flags": [
+          "adaptive_evolution",
+          "mutation"
+        ],
+        "nature_kingdoms": [
+          "flower",
+          "tree",
+          "fungus",
+          "creature"
+        ],
+        "vegetation_density": 0.95,
+        "terrain_mode": "self_generating",
+        "ambient_preset": "adaptive_world"
+      },
+      "hazards": {
+        "unlock_types": [],
+        "spawner_behavior": "aggressive",
+        "personality_shift": {
+          "kresling_spire": "curious",
+          "waterbomb_enemy": "curious",
+          "armadillo_droideka": "curious"
+        },
+        "max_concurrent": 8
+      },
+      "capability": {
+        "capacity_level": 6,
+        "hand_verbs": [
+          "train",
+          "evolve"
+        ],
+        "catalyst_mode": null,
+        "movement_abilities": [
+          "teleport",
+          "climb",
+          "flight"
+        ],
+        "catalyst_affordances": [
+          "learn"
+        ]
+      },
+      "enemies": {
+        "kind": "drainfriend",
+        "comment": "Catalyst foe variant for the machinelearning sequence."
+      }
+    },
+    "foundationscrisis": {
+      "order": 17,
+      "ecosystem": {
+        "allow_flags": [
+          "contradiction",
+          "paradox_terrain"
+        ],
+        "nature_kingdoms": [
+          "flower",
+          "tree",
+          "fungus",
+          "creature"
+        ],
+        "vegetation_density": 0.9,
+        "terrain_mode": "self_generating",
+        "ambient_preset": "contradictory_world"
+      },
+      "hazards": {
+        "unlock_types": [],
+        "spawner_behavior": "aggressive",
+        "personality_shift": {
+          "plasma_critter": "curious",
+          "scissor_stalker": "neutral",
+          "origami_droideka": "curious"
+        },
+        "max_concurrent": 8
+      },
+      "capability": {
+        "capacity_level": 6,
+        "hand_verbs": [
+          "hold_paradox",
+          "walk_impossible"
+        ],
+        "catalyst_mode": null,
+        "movement_abilities": [
+          "teleport",
+          "climb",
+          "flight"
+        ],
+        "catalyst_affordances": [
+          "paradox"
+        ]
+      },
+      "enemies": {
+        "kind": "drainfriend",
+        "comment": "Catalyst foe variant for the foundationscrisis sequence."
+      }
+    },
+    "qfeplaboratory": {
+      "order": 18,
+      "ecosystem": {
+        "allow_flags": [
+          "tunable_becoming",
+          "parameter_world"
+        ],
+        "nature_kingdoms": [
+          "flower",
+          "tree",
+          "fungus",
+          "creature"
+        ],
+        "vegetation_density": 1.0,
+        "terrain_mode": "self_generating",
+        "ambient_preset": "tunable_becoming"
+      },
+      "hazards": {
+        "unlock_types": [],
+        "spawner_behavior": "aggressive",
+        "personality_shift": {
+          "waterbomb_hopper": "curious",
+          "sphere_droideka": "neutral"
+        },
+        "max_concurrent": 10
+      },
+      "capability": {
+        "capacity_level": 6,
+        "hand_verbs": [
+          "tune_phi",
+          "tune_delta_e",
+          "full_parameter_control"
+        ],
+        "catalyst_mode": null,
+        "movement_abilities": [
+          "teleport",
+          "climb",
+          "flight"
+        ],
+        "catalyst_affordances": [
+          "tune"
+        ]
+      },
+      "enemies": {
+        "kind": "goo",
+        "comment": "Catalyst foe variant for the qfeplaboratory sequence."
+      }
+    },
+    "postfoundationscrisis": {
+      "order": 19,
+      "ecosystem": {
+        "allow_flags": [
+          "applied_limits"
+        ],
+        "nature_kingdoms": [
+          "flower",
+          "tree",
+          "fungus",
+          "creature"
+        ],
+        "vegetation_density": 1.0,
+        "terrain_mode": "self_generating",
+        "ambient_preset": "tunable_becoming"
+      },
+      "hazards": {
+        "unlock_types": [],
+        "spawner_behavior": "aggressive",
+        "personality_shift": {
+          "scissor_stalker": "curious",
+          "sphere_droideka": "curious"
+        },
+        "max_concurrent": 10
+      },
+      "capability": {
+        "capacity_level": 6,
+        "hand_verbs": [
+          "apply_limits"
+        ],
+        "catalyst_mode": null,
+        "movement_abilities": [
+          "teleport",
+          "climb",
+          "flight"
+        ],
+        "catalyst_affordances": [
+          "compose"
+        ]
+      },
+      "enemies": {
+        "kind": "goo",
+        "comment": "Catalyst foe variant for the postfoundationscrisis sequence."
+      }
+    },
+    "mosaicanalysis": {
+      "order": 20,
+      "ecosystem": {
+        "allow_flags": [
+          "pattern_world",
+          "mosaic_world"
+        ],
+        "nature_kingdoms": [
+          "flower",
+          "tree",
+          "fungus"
+        ],
+        "vegetation_density": 0.6,
+        "terrain_mode": "stone_floor",
+        "ambient_preset": "mediterranean"
+      },
+      "hazards": {
+        "unlock_types": [],
+        "spawner_behavior": "passive",
+        "personality_shift": {},
+        "max_concurrent": 3
+      },
+      "capability": {
+        "capacity_level": 5,
+        "hand_verbs": [
+          "analyze_pattern",
+          "extract_motif",
+          "classify_symmetry"
+        ],
+        "catalyst_mode": null,
+        "movement_abilities": [
+          "teleport",
+          "climb"
+        ]
+      },
+      "enemies": {
+        "kind": "goo",
+        "comment": "Catalyst foe variant for the mosaicanalysis sequence."
+      }
+    },
+    "graphtheory": {
+      "order": 16,
+      "ecosystem": {
+        "allow_flags": [
+          "connection_topology",
+          "network_world"
+        ],
+        "nature_kingdoms": [
+          "flower",
+          "tree",
+          "fungus",
+          "creature"
+        ],
+        "vegetation_density": 1.0,
+        "terrain_mode": "self_generating",
+        "ambient_preset": "tunable_becoming"
+      },
+      "hazards": {
+        "unlock_types": [],
+        "spawner_behavior": "aggressive",
+        "personality_shift": {
+          "waterbomb_hopper": "friend",
+          "sphere_droideka": "friend",
+          "scissor_stalker": "friend",
+          "origami_droideka": "friend",
+          "plasma_critter": "friend"
+        },
+        "max_concurrent": 10
+      },
+      "capability": {
+        "capacity_level": 6,
+        "hand_verbs": [
+          "connect_nodes",
+          "traverse_graph"
+        ],
+        "catalyst_mode": null,
+        "movement_abilities": [
+          "teleport",
+          "climb",
+          "flight"
+        ],
+        "catalyst_affordances": [
+          "connect"
+        ]
+      },
+      "enemies": {
+        "kind": "transport",
+        "comment": "Catalyst foe variant for the graphtheory sequence."
+      }
+    },
+    "biome_lab": {
+      "order": 99,
+      "comment": "Lab sequence � Biome_Spine and Biome_Zoo. All kingdoms unlocked, max density. Lets the dispatcher work test code through every substrate.",
+      "ecosystem": {
+        "allow_flags": [
+          "all_kingdoms",
+          "all_substrates",
+          "auto_research"
+        ],
+        "nature_kingdoms": [
+          "flower",
+          "tree",
+          "fungus",
+          "creature"
+        ],
+        "vegetation_density": 1.0,
+        "terrain_mode": "self_generating",
+        "ambient_preset": "lush_lab"
+      },
+      "hazards": {
+        "unlock_types": [],
+        "spawner_behavior": "dormant",
+        "personality_shift": {},
+        "max_concurrent": 0
+      },
+      "capability": {
+        "capacity_level": 5,
+        "hand_verbs": [
+          "observe",
+          "grab",
+          "snap",
+          "paint",
+          "dispatch"
+        ],
+        "catalyst_mode": "all",
+        "movement_abilities": [
+          "teleport",
+          "walk",
+          "fly"
+        ]
+      },
+      "enemies": {
+        "kind": "none",
+        "comment": "No combat � these are visualization labs."
+      }
+    },
+    "isosurfaces": {
+      "order": 4.6,
+      "ecosystem": {
+        "allow_flags": [
+          "field_volumes",
+          "extracted_surfaces"
+        ],
+        "nature_kingdoms": [],
+        "vegetation_density": 0.0,
+        "terrain_mode": "voxel_marched",
+        "ambient_preset": "empty_lab"
+      },
+      "hazards": {
+        "unlock_types": [],
+        "spawner_behavior": "dormant",
+        "personality_shift": {},
+        "max_concurrent": 1
+      },
+      "capability": {
+        "capacity_level": 1,
+        "hand_verbs": [
+          "observe",
+          "grab",
+          "snap"
+        ],
+        "catalyst_mode": "isosurface",
+        "catalyst_affordances": [
+          "threshold-extract"
+        ],
+        "movement_abilities": [
+          "teleport"
+        ]
+      },
+      "enemies": {
+        "kind": "goo",
+        "comment": "F_order geometry: minimal hazards, density crossing the threshold becomes mesh."
+      }
+    },
+    "boolean_surfaces": {
+      "order": 4.7,
+      "ecosystem": {
+        "allow_flags": [
+          "static_geometry",
+          "composed_solids"
+        ],
+        "nature_kingdoms": [],
+        "vegetation_density": 0.0,
+        "terrain_mode": "flat",
+        "ambient_preset": "empty_lab"
+      },
+      "hazards": {
+        "unlock_types": [],
+        "spawner_behavior": "dormant",
+        "personality_shift": {},
+        "max_concurrent": 1
+      },
+      "capability": {
+        "capacity_level": 1,
+        "hand_verbs": [
+          "observe",
+          "grab",
+          "snap"
+        ],
+        "catalyst_mode": "csg",
+        "catalyst_affordances": [
+          "csg-compose"
+        ],
+        "movement_abilities": [
+          "teleport"
+        ]
+      },
+      "enemies": {
+        "kind": "goo",
+        "comment": "F_order geometry: union, intersection, difference as composition algebra."
+      }
+    },
+    "resourcemanagement": {
+      "order": 21,
+      "ecosystem": {
+        "allow_flags": [
+          "complexity",
+          "performance",
+          "tooling"
+        ],
+        "nature_kingdoms": [],
+        "vegetation_density": 0.0,
+        "terrain_mode": "flat",
+        "ambient_preset": "empty_lab"
+      },
+      "hazards": {
+        "unlock_types": [],
+        "spawner_behavior": "dormant",
+        "personality_shift": {},
+        "max_concurrent": 1
+      },
+      "capability": {
+        "capacity_level": 1,
+        "hand_verbs": [
+          "observe",
+          "grab"
+        ],
+        "catalyst_mode": "off",
+        "catalyst_affordances": [],
+        "movement_abilities": [
+          "teleport"
+        ]
+      },
+      "enemies": {
+        "kind": "goo",
+        "comment": "Meta layer: how software is made well. Sterile lab — abstract CS concepts, the artifact is the whole scene; no biome."
+      }
+    }
+  }
 }
