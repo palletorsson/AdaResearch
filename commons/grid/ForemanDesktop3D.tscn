@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://commons/grid/ForemanController.gd" id="1_foreman"]
+[ext_resource type="PackedScene" path="res://commons/grid/GridEditorDesktop3D.tscn" id="2_editor"]
+
+[node name="ForemanDesktop3D" type="Node3D"]
+script = ExtResource("1_foreman")
+
+[node name="GridEditorDesktop3D" parent="." instance=ExtResource("2_editor")]
