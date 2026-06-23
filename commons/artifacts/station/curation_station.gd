@@ -71,9 +71,7 @@ var _built := false
 func _ready() -> void:
 	_read_overrides()
 	_build_name_index()
-	_build_kit()
-	# Load artifacts after the kit is in a settled tree (grounding reads global AABBs).
-	call_deferred("_load_artifacts")
+	_assemble()
 
 
 func apply_grid_config(config_data: Dictionary) -> void:
@@ -85,8 +83,7 @@ func apply_grid_config(config_data: Dictionary) -> void:
 			c.queue_free()
 		_plinth_tops.clear()
 		_built = false
-		_build_kit()
-		call_deferred("_load_artifacts")
+		_assemble()
 
 
 func _read_overrides() -> void:
@@ -114,19 +111,78 @@ func _count() -> int:
 	return clampi(artifacts.size(), 1, 5)
 
 
-func _build_kit() -> void:
+# Measure each artifact's footprint, then build a kit sized to the set — each item gets a plinth that
+# fits it (tall+narrow for small things, low+broad for big ones), the row laid out by cumulative width.
+func _assemble() -> void:
 	_built = true
 	var n: int = _count()
-	var spacing: float = float(maxi(plinth_spacing_cells, 1)) * CELL
-	# Plinth row, centred on origin.
-	var xs: Array = []
+	# 1. Instantiate + prep each artifact (hidden until we know where it goes).
+	var items: Array = []
 	for i in range(n):
-		xs.append((float(i) - float(n - 1) * 0.5) * spacing)
-	var row_span: float = float(n - 1) * spacing
-	# Stage footprint (whole cells), wide enough for the row + margin.
-	var stage_w_cells: int = int(ceil(row_span)) + maxi(stage_margin_cells, 1) * 2 + 1
-	var depth_cells: int = maxi(stage_depth_cells, 2)
-	var plinth_z: float = float(depth_cells) * 0.5 * CELL - 1.1   # toward the front of the deck
+		var nm := str(artifacts[i]) if i < artifacts.size() else ""
+		var inst: Node = null
+		if nm != "" and _name_scene.has(nm):
+			var packed = load(_name_scene[nm])
+			if packed != null:
+				inst = packed.instantiate()
+		if inst != null:
+			if inst is Node3D:
+				(inst as Node3D).visible = false
+			add_child(inst)
+			_make_inert(inst)
+			if hide_floating_labels:
+				_hide_labels(inst)
+			if inst.has_method("apply_grid_config"):
+				inst.apply_grid_config({"emissive": false})
+		items.append({"inst": inst, "name": nm})
+	# 2. Let each artifact's _ready (and any deferred build) settle, then measure its footprint in cells.
+	await get_tree().process_frame
+	await get_tree().process_frame
+	for item in items:
+		var wc := 1
+		var dc := 1
+		var base_y := 0.0
+		if item["inst"] != null:
+			var ab := _combined_aabb(item["inst"])
+			if ab.size.length() > 0.0:
+				wc = clampi(int(ceil(ab.size.x - 0.1)), 1, 4)
+				dc = clampi(int(ceil(ab.size.z - 0.1)), 1, 4)
+				base_y = ab.position.y
+		item["w"] = wc
+		item["d"] = dc
+		item["base_y"] = base_y
+	# 3. Build the kit sized to the measured set.
+	_build_kit(items)
+
+
+# Plinth height drops as the footprint grows: small things stand tall and narrow, big things sit low.
+func _plinth_height_for(max_dim: int) -> float:
+	match max_dim:
+		1: return plinth_height
+		2: return plinth_height * 0.68
+		3: return plinth_height * 0.46
+		_: return plinth_height * 0.32
+
+
+func _build_kit(items: Array) -> void:
+	var n: int = items.size()
+	var gap: int = 1   # cells between plinths
+	# X layout — cumulative plinth widths + gaps, centred on origin.
+	var total_w: int = 0
+	var max_d: int = 1
+	for item in items:
+		total_w += int(item["w"])
+		max_d = maxi(max_d, int(item["d"]))
+	total_w += gap * maxi(n - 1, 0)
+	var xs: Array = []
+	var cursor: float = -float(total_w) * 0.5 * CELL
+	for item in items:
+		xs.append(cursor + float(int(item["w"])) * 0.5 * CELL)
+		cursor += float(int(item["w"]) + gap) * CELL
+	# Stage footprint (whole cells), sized to the row + the deepest plinth.
+	var stage_w_cells: int = total_w + maxi(stage_margin_cells, 1) * 2
+	var depth_cells: int = maxi(max_d + 2, maxi(stage_depth_cells, 2))
+	var front_line: float = float(depth_cells) * 0.5 * CELL - 0.9   # plinth FRONTS align here
 	var back_z: float = -float(depth_cells) * 0.5 * CELL
 
 	# Stage.
@@ -139,24 +195,30 @@ func _build_kit() -> void:
 		"panel_color": _cs(panel_color), "accent_color": _cs(accent_color),
 	})
 
-	# Plinths + record where each artifact sits.
+	# Plinths (sized to each artifact) + the artifact grounded on the cap + a caption plaque.
 	for i in range(n):
-		var nm := str(artifacts[i]) if i < artifacts.size() else ""
+		var item: Dictionary = items[i]
+		var wc: int = int(item["w"])
+		var dc: int = int(item["d"])
+		var h: float = _plinth_height_for(maxi(wc, dc))
+		var pz: float = front_line - float(dc) * 0.5 * CELL   # front-aligned row
 		var p: Node3D = StationPlinthScene.instantiate()
 		add_child(p)
-		p.position = Vector3(xs[i], stage_step_height, plinth_z)
+		p.position = Vector3(xs[i], stage_step_height, pz)
 		p.apply_grid_config({
-			"footprint_cells": 1, "top_height": plinth_height, "top_style": "tray",
+			"width_cells": wc, "depth_cells": dc, "top_height": h, "top_style": "tray",
 			"edge_light": true, "stencil_text": "", "three_bar": false, "body_color": _cs(body_color),
 			"panel_color": _cs(panel_color), "accent_color": _cs(accent_color),
 		})
-		_plinth_tops.append({"x": xs[i], "z": plinth_z, "top_y": stage_step_height + plinth_height})
-		# Framed, multi-line 2D-in-3D name plaque mounted PROUD of the plinth front (no z-fighting
-		# with the body panel; catalogue number + wrapped name in one bezelled caption).
+		var inst = item["inst"]
+		if inst != null and inst is Node3D:
+			(inst as Node3D).visible = true
+			(inst as Node3D).position = Vector3(xs[i], stage_step_height + h - float(item["base_y"]), pz)
 		if label_plinths:
+			var nm := str(item["name"])
 			var disp: String = _clean_name(str(_name_disp.get(nm, nm))) if nm != "" else "ITEM-%d" % (i + 1)
 			var plaque := _make_label_plaque(disp, "%02d" % (i + 1))
-			plaque.position = Vector3(xs[i], stage_step_height + plinth_height * 0.42, plinth_z + 0.32)
+			plaque.position = Vector3(xs[i], stage_step_height + clampf(h * 0.5, 0.22, 0.62), pz + float(dc) * 0.5 * CELL - 0.17)
 			add_child(plaque)
 
 	# Backing wall — tiling run with end caps, length = stage width.
@@ -219,32 +281,6 @@ func _build_kit() -> void:
 			cr.apply_grid_config({"footprint_cells": 1, "crate_count": 4, "palette": "metal", "seed_index": int(sx2) + 3})
 
 
-func _load_artifacts() -> void:
-	var n: int = _count()
-	for i in range(n):
-		if i >= _plinth_tops.size():
-			break
-		var nm := str(artifacts[i]) if i < artifacts.size() else ""
-		if nm == "" or not _name_scene.has(nm):
-			continue
-		var packed = load(_name_scene[nm])
-		if packed == null:
-			continue
-		var inst = packed.instantiate()
-		if inst == null:
-			continue
-		var slot: Dictionary = _plinth_tops[i]
-		add_child(inst)   # enters a settled tree -> its _ready builds before we measure
-		_make_inert(inst)
-		if hide_floating_labels:
-			_hide_labels(inst)
-		if inst.has_method("apply_grid_config"):
-			inst.apply_grid_config({"emissive": false})
-		# Ground the artifact so its base sits on the plinth cap.
-		var aabb := _combined_aabb(inst)
-		var base_y: float = aabb.position.y if aabb.size.length() > 0.0 else 0.0
-		if inst is Node3D:
-			inst.position = Vector3(slot["x"], float(slot["top_y"]) - base_y, slot["z"])
 
 
 # ---------------------------------------------------------------- registry + helpers

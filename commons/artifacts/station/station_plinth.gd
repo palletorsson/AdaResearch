@@ -4,23 +4,24 @@ class_name StationPlinth
 const HangarKit := preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 
 # @identity
-# essence: the GRID-MODULAR display column one curated artifact stands ON — a footprint_cells × footprint_cells (1 m per cell) painted-metal plinth with a tray cap at reach height, an ID stencil, and an optional small readout collar. Origin at the floor centre; the cap top sits at top_height.
-# desire: to give one thing its own square of ground and lift it to where a hand and an eye meet it — to say "this one, here, by itself".
-# critical_parameter: top_height + footprint_cells — how high the thing is presented and how much grid it claims; the composer sets these so a row of plinths reads even.
-# triggers: _ready/_read_metadata_overrides/_build from DNA; apply_grid_config rebuilds.
-# emerges: a tray cap reads "set the thing in here"; a flat cap reads "stand the thing on top"; the stencil reads "catalogued"; the collar light reads "powered station".
-# needs: a plinth foot [present]; a body column [present]; a cap at top_height [present]; optional tray rim, edge light, stencil [optional].
-# relationships: the single-item sibling of [[station_stage]] (the set stands on the stage, each item on a plinth); the grid-tiling cousin of [[hangar_podium]]; placed in rows by [[curation_station]].
-# truth: a plinth is a claim that one thing is worth isolating. To pick it up off the floor and give it a square is the smallest act of curation.
+# essence: the GRID-MODULAR display plinth one curated artifact stands ON — a width_cells × depth_cells (1 m per cell) painted-metal block with a tray cap, per-cell panels, and an ID stencil. ANY footprint snaps to the grid: 1×1 and 1×2/1×3 podiums for held things, 2×2/3×3/4×4 plinths for big ones. Origin at the floor centre; the cap top sits at top_height.
+# desire: to give one thing its own measured patch of ground at the right size and the right height — a tall narrow podium for a small precious thing, a low broad plinth for a large one — so the lift always says "this one, here, by itself".
+# critical_parameter: width_cells × depth_cells + top_height — how much grid the item claims and how high it is presented; the composer measures each artifact and picks these so the plinth fits.
+# triggers: _ready/_read_metadata_overrides/_build from DNA; apply_grid_config rebuilds at a new size.
+# emerges: 1×1 tall = a single specimen at eye height; 1×2/1×3 = a long thing laid across; 3×3/4×4 low = a big thing on a broad stage. Per-cell panels keep every size reading modular.
+# needs: a foot plate [present]; a body block [present]; a cap at top_height [present]; per-cell inset panels [present]; optional tray rim, edge light, stencil [optional].
+# relationships: the single-item sibling of [[station_stage]] (the set stands on the stage, each item on a plinth); the grid-tiling cousin of [[hangar_podium]]; sized + placed by [[curation_station]].
+# truth: a plinth is a claim that one thing is worth isolating, cut to the thing's own measure. Size IS part of the argument — what you raise high and narrow, you call precious; what you set low and broad, you call a world.
 
 @export_group("Grid")
-## Plinth footprint in 1 m cells, square (1 = 1×1, 2 = 2×2).
-@export var footprint_cells: int = 1
+## Footprint in 1 m cells along X (width) and Z (depth). Any combo: 1×1, 1×2, 1×3, 2×2, 3×3, 4×4 …
+@export var width_cells: int = 1
+@export var depth_cells: int = 1
 
 @export_group("Dimensions")
-## Cap-top height — where the artifact's base sits (reach height ≈ 1.0 m).
+## Cap-top height — where the artifact's base sits (reach height ≈ 1.0 m for small; lower for big plinths).
 @export var top_height: float = 1.0
-## Cap inset from the footprint edge (so the column reads narrower than its cell).
+## Cap inset from the footprint edge (so the block reads narrower than its cells).
 @export var cap_inset: float = 0.16
 
 @export_group("Style")
@@ -64,7 +65,13 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 
 func _read_metadata_overrides() -> void:
-	if has_meta("config_footprint_cells"): footprint_cells = int(str(get_meta("config_footprint_cells")))
+	# footprint_cells (legacy / convenience) = square; width_cells/depth_cells override per axis.
+	if has_meta("config_footprint_cells"):
+		var fc := int(str(get_meta("config_footprint_cells")))
+		width_cells = fc
+		depth_cells = fc
+	if has_meta("config_width_cells"): width_cells = int(str(get_meta("config_width_cells")))
+	if has_meta("config_depth_cells"): depth_cells = int(str(get_meta("config_depth_cells")))
 	if has_meta("config_top_height"): top_height = float(str(get_meta("config_top_height")))
 	if has_meta("config_cap_inset"): cap_inset = float(str(get_meta("config_cap_inset")))
 	if has_meta("config_top_style"): top_style = str(get_meta("config_top_style")).to_lower()
@@ -80,76 +87,89 @@ func _read_metadata_overrides() -> void:
 
 func _build() -> void:
 	_built = true
-	var fc: float = float(maxi(footprint_cells, 1)) * CELL
-	var cap_w: float = fc - cap_inset * 2.0
+	var wcells: int = maxi(width_cells, 1)
+	var dcells: int = maxi(depth_cells, 1)
+	var wc: float = float(wcells) * CELL
+	var dc: float = float(dcells) * CELL
+	var inset: float = minf(cap_inset, minf(wc, dc) * 0.28)
+	var cap_w: float = wc - inset * 2.0
+	var cap_d: float = dc - inset * 2.0
 	var body_w: float = cap_w - 0.1
-	var th: float = maxf(top_height, 0.4)
+	var body_d: float = cap_d - 0.1
+	var th: float = maxf(top_height, 0.25)
 	var body_mat := _mat(body_color)
 	var cap_mat := _mat(body_color.lightened(0.06))
 
-	# Foot — wide plate on the cell.
-	add_child(_box(Vector3(0, PLINTH_THICK * 0.5, 0), Vector3(cap_w + 0.06, PLINTH_THICK, cap_w + 0.06), body_mat))
+	# Foot — wide plate on the cells.
+	add_child(_box(Vector3(0, PLINTH_THICK * 0.5, 0), Vector3(cap_w + 0.06, PLINTH_THICK, cap_d + 0.06), body_mat))
 
-	# Body column.
+	# Body block.
 	var body_bottom: float = PLINTH_THICK
 	var body_top: float = th - CAP_THICK
 	var body_h: float = maxf(body_top - body_bottom, 0.12)
-	add_child(_box(Vector3(0, body_bottom + body_h * 0.5, 0), Vector3(body_w, body_h, body_w), body_mat))
+	add_child(_box(Vector3(0, body_bottom + body_h * 0.5, 0), Vector3(body_w, body_h, body_d), body_mat))
 
-	# Inset panels on the four faces.
-	_build_panels(body_w, body_bottom, body_h)
+	# Per-cell inset panels on the four faces (modular at every size).
+	_build_panels(body_w, body_d, body_bottom, body_h, wcells, dcells)
 
 	# Cap — top sits exactly at top_height.
-	add_child(_box(Vector3(0, th - CAP_THICK * 0.5, 0), Vector3(cap_w, CAP_THICK, cap_w), cap_mat))
+	add_child(_box(Vector3(0, th - CAP_THICK * 0.5, 0), Vector3(cap_w, CAP_THICK, cap_d), cap_mat))
 
 	match top_style:
-		"tray": _build_tray(cap_w, th)
-		"grate": _build_grate(cap_w, th)
+		"tray": _build_tray(cap_w, cap_d, th)
+		"grate": _build_grate(cap_w, cap_d, th)
 		_: pass
 
+	# Front face is +Z (toward the viewer): dressing sits there.
 	if edge_light:
-		var lit := _emi(accent_color, 0.7)
-		add_child(_box(Vector3(0, th - CAP_THICK - 0.02, body_w * 0.5 + 0.012), Vector3(body_w * 0.8, 0.022, 0.02), lit))
+		add_child(_box(Vector3(0, th - CAP_THICK - 0.02, body_d * 0.5 + 0.012), Vector3(body_w * 0.84, 0.022, 0.02), _emi(accent_color, 0.7)))
 	if three_bar:
-		var bar: Node3D = HangarKit.three_color_bar(body_w * 0.6, 0.04, [accent_color, HangarKit.DISPLAY_DARK, panel_color])
-		bar.position = Vector3(0, body_bottom + body_h * 0.62, body_w * 0.5 + 0.02)
+		var bar: Node3D = HangarKit.three_color_bar(minf(body_w * 0.6, 1.0), 0.04, [accent_color, HangarKit.DISPLAY_DARK, panel_color])
+		bar.position = Vector3(0, body_bottom + body_h * 0.62, body_d * 0.5 + 0.02)
 		add_child(bar)
 	if grime:
-		add_child(HangarKit.grime_band(cap_w + 0.06, 0.06, (cap_w + 0.06) * 0.5 + 0.004, body_color))
+		add_child(HangarKit.grime_band(cap_w + 0.06, 0.06, (cap_d + 0.06) * 0.5 + 0.004, body_color))
 	if stencil_text.strip_edges() != "":
 		var q: MeshInstance3D = HangarKit.stencil(stencil_text, Vector2(minf(body_w * 0.7, 0.5), body_h * 0.16))
 		if q:
-			q.position = Vector3(0, body_bottom + body_h * 0.28, body_w * 0.5 + 0.02)
+			q.position = Vector3(0, body_bottom + body_h * 0.28, body_d * 0.5 + 0.02)
 			add_child(q)
 
 
-func _build_panels(body_w: float, body_bottom: float, body_h: float) -> void:
+func _build_panels(body_w: float, body_d: float, body_bottom: float, body_h: float, wcells: int, dcells: int) -> void:
 	var pmat := _mat(panel_color)
 	var body_cy: float = body_bottom + body_h * 0.5
-	var pw: float = body_w * 0.74
 	var ph: float = body_h * 0.78
 	var t := 0.02
-	for nrm in [Vector3(1, 0, 0), Vector3(-1, 0, 0), Vector3(0, 0, 1), Vector3(0, 0, -1)]:
-		var center: Vector3 = nrm * (body_w * 0.5 + t * 0.5) + Vector3(0, body_cy, 0)
-		var size: Vector3 = Vector3(t, ph, pw) if absf(nrm.x) > 0.5 else Vector3(pw, ph, t)
-		add_child(_box(center, size, pmat))
+	# Front + back faces (±Z): one panel per width cell.
+	var cell_w: float = body_w / float(wcells)
+	for sz in [1.0, -1.0]:
+		for i in range(wcells):
+			var px: float = -body_w * 0.5 + (float(i) + 0.5) * cell_w
+			add_child(_box(Vector3(px, body_cy, sz * (body_d * 0.5 + t * 0.5)), Vector3(cell_w * 0.82, ph, t), pmat))
+	# Side faces (±X): one panel per depth cell.
+	var cell_d: float = body_d / float(dcells)
+	for sx in [1.0, -1.0]:
+		for i in range(dcells):
+			var pz: float = -body_d * 0.5 + (float(i) + 0.5) * cell_d
+			add_child(_box(Vector3(sx * (body_w * 0.5 + t * 0.5), body_cy, pz), Vector3(t, ph, cell_d * 0.82), pmat))
 
 
-func _build_tray(cap_w: float, th: float) -> void:
+func _build_tray(cap_w: float, cap_d: float, th: float) -> void:
 	var rim_mat := _mat(panel_color)
-	var inner: float = cap_w - 0.1
-	for nrm in [Vector3(1, 0, 0), Vector3(-1, 0, 0), Vector3(0, 0, 1), Vector3(0, 0, -1)]:
-		var center: Vector3 = nrm * (inner * 0.5) + Vector3(0, th + RIM_H * 0.5, 0)
-		var size: Vector3 = Vector3(0.04, RIM_H, cap_w) if absf(nrm.x) > 0.5 else Vector3(cap_w, RIM_H, 0.04)
-		add_child(_box(center, size, rim_mat))
+	var ry: float = th + RIM_H * 0.5
+	add_child(_box(Vector3(0, ry, cap_d * 0.5 - 0.02), Vector3(cap_w, RIM_H, 0.04), rim_mat))
+	add_child(_box(Vector3(0, ry, -cap_d * 0.5 + 0.02), Vector3(cap_w, RIM_H, 0.04), rim_mat))
+	add_child(_box(Vector3(cap_w * 0.5 - 0.02, ry, 0), Vector3(0.04, RIM_H, cap_d), rim_mat))
+	add_child(_box(Vector3(-cap_w * 0.5 + 0.02, ry, 0), Vector3(0.04, RIM_H, cap_d), rim_mat))
 
 
-func _build_grate(cap_w: float, th: float) -> void:
+func _build_grate(cap_w: float, cap_d: float, th: float) -> void:
 	var fmat := HangarKit.worn_metal(panel_color.darkened(0.1))
-	var slats := 5
+	var slats: int = maxi(int(cap_w / 0.18), 4)
 	for i in range(slats):
-		var x: float = lerpf(-cap_w * 0.42, cap_w * 0.42, float(i) / float(slats - 1))
-		add_child(_box(Vector3(x, th + 0.012, 0), Vector3(0.04, 0.02, cap_w * 0.9), fmat))
+		var x: float = lerpf(-cap_w * 0.44, cap_w * 0.44, float(i) / float(slats - 1))
+		add_child(_box(Vector3(x, th + 0.012, 0), Vector3(0.04, 0.02, cap_d * 0.92), fmat))
 
 
 func _mat(c: Color) -> StandardMaterial3D:

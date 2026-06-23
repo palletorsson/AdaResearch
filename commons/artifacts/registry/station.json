@@ -50,17 +50,18 @@
       "scene": "res://commons/artifacts/station/station_plinth.tscn",
       "class_name": "StationPlinth",
       "name": "Station Plinth (display column)",
-      "description": "A grid-modular display column (1x1 or 2x2 cells) with a tray cap at reach height — one artifact stands on each.",
+      "description": "A grid-modular display plinth at ANY footprint — width_cells x depth_cells (1x1, 1x2, 1x3, 2x2, 3x3, 4x4 …) with per-cell panels and a tray cap. Tall+narrow for small things, low+broad for big ones; one artifact stands on each.",
       "category": "station",
       "complexity": "beginner",
       "include_in_map_data": true,
       "map_ready": true,
       "tags": ["station", "modular", "plinth", "podium", "display", "grid"],
       "parameters": {
-        "footprint_cells": "Square footprint in cells (1 = 1x1, 2 = 2x2)",
-        "top_height": "Cap-top height where the artifact sits (default 1.0 m)",
-        "top_style": "tray | flat | grate",
-        "stencil_text": "ID stencilled on the front"
+        "width_cells": "Footprint width in 1 m cells (X)",
+        "depth_cells": "Footprint depth in 1 m cells (Z) — any combo, e.g. 1x2, 2x3, 4x4",
+        "footprint_cells": "Convenience: square footprint (sets width = depth)",
+        "top_height": "Cap-top height where the artifact sits (≈1.0 m for small, lower for big plinths)",
+        "top_style": "tray | flat | grate"
       },
       "spatial_needs": {"footprint_cells": 1, "platform": "pedestal"}
     },
