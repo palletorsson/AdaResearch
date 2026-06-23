@@ -100,6 +100,20 @@ def load_artifact_data() -> tuple[np.ndarray, np.ndarray, np.ndarray, list[dict]
     return npz["ids"], npz["families"], npz["vectors"], cards
 
 
+def _fp_dims(card: dict) -> tuple[float, float]:
+    """Ground footprint (width_x, depth_z) in metres from the card's [w, h, d]."""
+    fp = card.get("footprint")
+    if not isinstance(fp, (list, tuple)) or len(fp) < 3:
+        return 1.0, 1.0
+    return max(float(fp[0]), 0.5), max(float(fp[2]), 0.5)
+
+
+def _fp_cells(card: dict) -> int:
+    """Ground footprint in whole 1 m grid cells (ceil(w) * ceil(d)) — the atlas size dimension."""
+    w, d = _fp_dims(card)
+    return max(1, int(np.ceil(w)) * int(np.ceil(d)))
+
+
 def main():
     ap = argparse.ArgumentParser(description="Project artifact embeddings to 2D atlas.")
     ap.add_argument("--width", type=int, default=1600)
@@ -208,9 +222,13 @@ def main():
         x, y = to_canvas((x_norm, y_norm))
         f = families[i] if i < len(families) else "unknown"
         c = family_color(str(f))
-        title = f"{ids[i]} | family={f} | edge={edge_assignment[i]} (sim={closest_edge_score[i]:.2f})"
+        # Circle radius reflects the artifact's physical ground footprint — big things read big.
+        w_fp, d_fp = _fp_dims(cards[i])
+        r = float(np.clip(2.0 + np.sqrt(w_fp * d_fp) * 0.5, 2.0, 16.0))
+        title = (f"{ids[i]} | family={f} | edge={edge_assignment[i]} "
+                 f"(sim={closest_edge_score[i]:.2f}) | footprint={int(np.ceil(w_fp))}x{int(np.ceil(d_fp))} cells")
         svg_parts.append(
-            f'<circle class="artifact" cx="{x:.1f}" cy="{y:.1f}" r="3.2" fill="{c}">'
+            f'<circle class="artifact" cx="{x:.1f}" cy="{y:.1f}" r="{r:.1f}" fill="{c}" fill-opacity="0.82">'
             f'<title>{title}</title></circle>'
         )
 
@@ -266,6 +284,7 @@ def main():
                 "family": str(families[i]),
                 "edge": edge_assignment[i],
                 "sim": round(float(closest_edge_score[i]), 3),
+                "footprint_cells": _fp_cells(cards[i]),
                 "x": round(float(art_xyz_norm[i, 0]), 4),
                 "y": round(float(art_xyz_norm[i, 1]), 4),
                 "z": round(float(art_xyz_norm[i, 2]), 4),
