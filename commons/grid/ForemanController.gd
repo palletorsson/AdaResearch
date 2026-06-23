@@ -34,6 +34,17 @@ const LAYERS := [
 ]
 var _active: String = "pathfind"
 var _organized: Dictionary = {}   # artifacts auto-organize: old anchor (Vector2i) -> suggested anchor
+var _desc_lbl: Label = null
+var _actions_box: VBoxContainer = null
+
+# What each layer shows + does, shown in the panel when it's selected.
+const LAYER_DESC := {
+	"pathfind": "Walkable floor flood-filled from spawn.\ngreen=reachable  red=stranded  blue=spawn",
+	"artifacts": "Each artifact's footprint + placement quality.\nAuto-organize packs them; Apply moves them for real.",
+	"grid": "Floor-height heatmap (low blue -> high yellow).",
+	"gameplay": "Spawn -> teleporter reachability + the\nencounter order (green=first -> amber=last).",
+	"graph": "Concept-distance drawn as edges in 3D.\ngreen=near & related   red=split apart",
+}
 
 var _overlay: MultiMeshInstance3D = null
 var _score_lbl: Label = null
@@ -167,6 +178,7 @@ func _set_layer(id: String) -> void:
 	_active = id
 	for lid in _layer_buttons:
 		_layer_buttons[lid].button_pressed = (lid == id)
+	_rebuild_actions()
 	_refresh()
 
 
@@ -301,11 +313,20 @@ func _build_hud() -> void:
 		b.pressed.connect(func(): _set_layer(lid))
 		vb.add_child(b)
 		_layer_buttons[lid] = b
-	var hint := Label.new()
-	hint.text = "R = refresh layer"
-	hint.add_theme_color_override("font_color", Color(0.6, 0.62, 0.68))
-	hint.add_theme_font_size_override("font_size", 11)
-	vb.add_child(hint)
+
+	vb.add_child(HSeparator.new())
+	# Active-layer description.
+	_desc_lbl = Label.new()
+	_desc_lbl.custom_minimum_size = Vector2(220, 0)
+	_desc_lbl.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_desc_lbl.add_theme_color_override("font_color", Color(0.78, 0.8, 0.86))
+	_desc_lbl.add_theme_font_size_override("font_size", 12)
+	vb.add_child(_desc_lbl)
+	# This layer's TOOL actions (buttons — keys get eaten by the editor).
+	_actions_box = VBoxContainer.new()
+	_actions_box.add_theme_constant_override("separation", 3)
+	vb.add_child(_actions_box)
+	_rebuild_actions()
 
 	# Score readout — bottom-centre band.
 	var sp := PanelContainer.new()
@@ -348,6 +369,55 @@ func _toast(t: String) -> void:
 	if _toast_lbl:
 		_toast_lbl.text = t
 		_toast_t = 2.5
+
+
+# Rebuild the active layer's description + tool buttons (called on every layer switch).
+func _rebuild_actions() -> void:
+	if _actions_box == null:
+		return
+	for c in _actions_box.get_children():
+		c.queue_free()
+	if _desc_lbl:
+		_desc_lbl.text = str(LAYER_DESC.get(_active, ""))
+	for a in _actions_for(_active):
+		var b := Button.new()
+		b.text = a["t"]
+		b.alignment = HORIZONTAL_ALIGNMENT_CENTER
+		b.add_theme_color_override("font_color", a.get("col", Color(0.9, 0.92, 0.96)))
+		var fn: String = a["f"]
+		b.pressed.connect(func(): _do_action(fn))
+		_actions_box.add_child(b)
+
+
+func _actions_for(id: String) -> Array:
+	match id:
+		"artifacts":
+			return [
+				{"t": "AUTO-ORGANIZE (preview)", "f": "organize", "col": Color(0.45, 0.85, 0.55)},
+				{"t": "APPLY -> move artifacts", "f": "apply", "col": Color(0.95, 0.7, 0.2)},
+				{"t": "Refresh", "f": "refresh"},
+			]
+		_:
+			return [{"t": "Refresh", "f": "refresh"}]
+
+
+func _do_action(fn: String) -> void:
+	if not _bound:
+		_toast("grid still loading…")
+		return
+	match fn:
+		"refresh":
+			_refresh()
+			_toast("refreshed")
+		"organize":
+			if _active != "artifacts":
+				_set_layer("artifacts")
+			_auto_organize_artifacts()
+			_toast("packed preview — press APPLY to move them")
+		"apply":
+			if _organized.is_empty():
+				_auto_organize_artifacts()
+			_apply_artifacts()
 
 
 # ── ONTOLOGY GRAPH layer: concept-distance edges in 3D + spatial↔conceptual fidelity ──
@@ -797,7 +867,7 @@ func _layer_artifacts() -> void:
 			var ty := float(_height_at(cell.x, cell.y)) * _cube + 0.07
 			quads.append({"pos": Vector3((float(cell.x) + 0.5) * _cube, ty, (float(cell.y) + 0.5) * _cube), "color": col})
 	_paint_overlay(quads)
-	_set_score("ARTIFACTS    fit %d/%d    wall %d/%d    isolate %d/%d    cluster %d/%d        [G = auto-organize]" % [
+	_set_score("ARTIFACTS    fit %d/%d    wall %d/%d    isolate %d/%d    cluster %d/%d        (tools at left)" % [
 		fit_ok, arts.size(), wall_ok, wall_total, iso_ok, iso_total, clus_ok, clus_total])
 
 
