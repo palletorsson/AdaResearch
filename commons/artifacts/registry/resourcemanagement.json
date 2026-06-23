@@ -1,0 +1,25 @@
+{
+  "category": "resourcemanagement",
+  "description": "Resource Management sequence — the meta layer of the curriculum: how software is made well. Algorithmic complexity, data locality/caching, real-time vs offline, version control, testing/debugging, hardware.",
+  "artifacts": {
+    "big_o_complexity": {
+      "lookup_name": "big_o_complexity",
+      "scene": "res://algorithms/resourcemanagement/big_o_complexity/big_o_complexity.tscn",
+      "class_name": "BigOComplexity",
+      "name": "Algorithmic Complexity (Big O)",
+      "description": "The complexity race — one bar per Big-O class (O(1) to O(2^n)) growing as the input size n sweeps up. At small n they stand level; at large n the quadratic and exponential peg the ceiling and flash OFF CHART. Scale made visible.",
+      "category": "resourcemanagement",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "tags": ["resourcemanagement", "complexity", "big-o", "performance", "scale", "applied"],
+      "parameters": {
+        "n_max": "Largest input size the sweep reaches (default 24)",
+        "sweep_seconds": "Seconds for n to sweep 1 -> n_max (default 8)",
+        "freeze_n": "If > 0, hold at this n (for stills) instead of animating",
+        "max_height": "Chart ceiling height in metres (default 4)"
+      },
+      "spatial_needs": {"footprint_cells": 4, "platform": "step"}
+    }
+  }
+}

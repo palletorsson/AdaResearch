@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://algorithms/resourcemanagement/big_o_complexity/big_o_complexity.gd" id="1"]
+
+[node name="BigOComplexity" type="Node3D"]
+script = ExtResource("1")
