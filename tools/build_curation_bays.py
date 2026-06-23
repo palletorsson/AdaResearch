@@ -23,6 +23,7 @@ import glob
 import json
 import math
 import os
+import shutil
 import sys
 
 import numpy as np
@@ -42,6 +43,13 @@ INFRA = {
 
 ROWS, COLS = 18, 38
 ANCHOR, SPAWN, TELE = (7, 19), (14, 19), (16, 19)
+
+# Artifacts wider/deeper than this (metres ~= cells) sprawl past a display plinth (the composer caps a
+# plinth at 4x4). Room-scale things — fractal trees at d=13, menger at 9x10 — bow out of bays.
+MAX_SPAN = 5
+
+# Non-content sequence files (scratch / scaffolding) — kept out of the bay collection.
+EXCLUDE_SEQS = {"testmaps", "unused", "devexamples"}
 
 SPINE = [
     "primitives", "transformation", "array_tutorial", "color", "change", "forces", "wavefunctions",
@@ -79,16 +87,36 @@ def load_footprints():
     return fp
 
 
+def load_card_spans():
+    """lookup_name -> (width_m, depth_m) from the atlas cards' [w,h,d] footprint."""
+    spans = {}
+    cards = json.load(open(os.path.join(ROOT, "doc", "atlas", "artifact_cards.json"), encoding="utf-8"))
+    for c in cards:
+        fpv = c.get("footprint")
+        if isinstance(fpv, list) and len(fpv) == 3:
+            spans[c["lookup_name"]] = (float(fpv[0]), float(fpv[2]))
+    return spans
+
+
 def seq_artifacts(seq):
     """Ordered unique artifact names with their first-appearance map index (for walk order)."""
     path = os.path.join(ROOT, "commons", "maps", "sequences", seq + ".json")
     if not os.path.exists(path):
         return []
-    d = json.load(open(path, encoding="utf-8"))
-    node = d.get("sequences", {}).get(seq, d)
-    ag = node.get("artifact_groups") or d.get("artifact_groups") or []
+    try:
+        d = json.load(open(path, encoding="utf-8"))
+    except Exception:
+        return []
+    node = d if isinstance(d, dict) else {}
+    if isinstance(d, dict):
+        seqs = d.get("sequences")
+        if isinstance(seqs, dict) and isinstance(seqs.get(seq), dict):
+            node = seqs[seq]
+    ag = node.get("artifact_groups") or (d.get("artifact_groups") if isinstance(d, dict) else None) or []
     order = {}
     for gi, g in enumerate(ag):
+        if not isinstance(g, dict):
+            continue
         for a in g.get("artifacts", []):
             if a not in order:
                 order[a] = gi
@@ -115,7 +143,7 @@ def _cluster_le5(idxs, V):
     return out
 
 
-def make_bays(seq, idx, V, fp):
+def make_bays(seq, idx, V, fp, spans):
     """Return a list of bays; each bay is an ordered list of <=5 artifact lookup-names."""
     kept = []
     for name, mi in seq_artifacts(seq):
@@ -123,6 +151,9 @@ def make_bays(seq, idx, V, fp):
             continue
         f = fp.get(name)
         if f is not None and f > 16:   # architectural — can't ride the 4x4 composer cap
+            continue
+        sp = spans.get(name)
+        if sp is not None and (sp[0] > MAX_SPAN or sp[1] > MAX_SPAN):   # sprawls past a display plinth
             continue
         kept.append((name, mi))
     if not kept:
@@ -210,8 +241,12 @@ def build_map(name, title, arts, nxt):
     }
 
 
-def emit_sequence(seq, idx, V, fp):
-    bays = make_bays(seq, idx, V, fp)
+def emit_sequence(seq, idx, V, fp, spans):
+    # Clear this sequence's existing bays first — counts change between runs (filters, re-clustering),
+    # so stale Curation_Bay_<seq>_N directories must not linger.
+    for old in glob.glob(os.path.join(ROOT, "commons", "maps", "Curation_Bay_%s_*" % seq)):
+        shutil.rmtree(old, ignore_errors=True)
+    bays = make_bays(seq, idx, V, fp, spans)
     if not bays:
         return 0
     names = ["Curation_Bay_%s_%d" % (seq, i) for i in range(len(bays))]
@@ -242,14 +277,16 @@ def main():
         seqs = sorted(os.path.splitext(os.path.basename(p))[0]
                       for p in glob.glob(os.path.join(ROOT, "commons", "maps", "sequences", "*.json"))
                       if not p.endswith(".beats.json"))
+        seqs = [s for s in seqs if s not in EXCLUDE_SEQS]
     else:
         ap.error("pass --seq <id>, --spine, or --all")
 
     idx, V = load_embeddings()
     fp = load_footprints()
+    spans = load_card_spans()
     total = 0
     for s in seqs:
-        total += emit_sequence(s, idx, V, fp)
+        total += emit_sequence(s, idx, V, fp, spans)
     print("\n%d bays written across %d sequences." % (total, len(seqs)))
 
 
