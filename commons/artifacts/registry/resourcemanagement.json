@@ -20,6 +20,76 @@
         "max_height": "Chart ceiling height in metres (default 4)"
       },
       "spatial_needs": {"footprint_cells": 4, "platform": "step"}
+    },
+    "data_locality_caching": {
+      "lookup_name": "data_locality_caching",
+      "scene": "res://algorithms/resourcemanagement/data_locality_caching/data_locality_caching.tscn",
+      "class_name": "DataLocalityCaching",
+      "name": "Data Locality & Caching",
+      "description": "The memory hierarchy ladder — registers, L1/L2/L3, RAM, disk stacked with log-latency gaps. A probe climbs to fetch: fast (HIT) when data is near, ruinously slow (MISS) when far. Where a thing IS costs more than what it is.",
+      "category": "resourcemanagement",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "tags": ["resourcemanagement", "caching", "memory", "locality", "performance", "applied"],
+      "parameters": {"cycle_seconds": "Seconds for the probe to cycle levels", "freeze_level": "-1 animate; >=0 park the probe at a level for stills"},
+      "spatial_needs": {"footprint_cells": 4}
+    },
+    "realtime_vs_offline": {
+      "lookup_name": "realtime_vs_offline",
+      "scene": "res://algorithms/resourcemanagement/realtime_vs_offline/realtime_vs_offline.tscn",
+      "class_name": "RealtimeVsOffline",
+      "name": "Real-time vs Offline Processing",
+      "description": "Twin pipelines — a real-time lane with a frame deadline (finish or drop, red) and an offline lane with no deadline (all complete, full quality). The clock changes the algorithm.",
+      "category": "resourcemanagement",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "tags": ["resourcemanagement", "realtime", "latency", "throughput", "deadline", "applied"],
+      "parameters": {"item_rate": "Items spawned per second", "freeze": "Static representative frame for stills"},
+      "spatial_needs": {"footprint_cells": 6}
+    },
+    "version_control_tree": {
+      "lookup_name": "version_control_tree",
+      "scene": "res://algorithms/resourcemanagement/version_control_tree/version_control_tree.tscn",
+      "class_name": "VersionControlTree",
+      "name": "Version Control",
+      "description": "A commit tree — a main branch and a feature branch that peels off and merges back, with HEAD advancing commit by commit. History as a navigable branching shape, not a line.",
+      "category": "resourcemanagement",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "tags": ["resourcemanagement", "version-control", "git", "dag", "history", "applied"],
+      "parameters": {"main_commits": "Commits on main", "freeze_head": "-1 animate; >=0 park HEAD at a commit for stills"},
+      "spatial_needs": {"footprint_cells": 6}
+    },
+    "test_harness": {
+      "lookup_name": "test_harness",
+      "scene": "res://algorithms/resourcemanagement/test_harness/test_harness.tscn",
+      "class_name": "TestHarness",
+      "name": "Testing & Debugging",
+      "description": "A test board — a grid of cases that pass green or fail red. Inject a bug and a band flips red; fix it and they heal left to right. A test is a claim about the future.",
+      "category": "resourcemanagement",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "tags": ["resourcemanagement", "testing", "debugging", "ci", "regression", "applied"],
+      "parameters": {"cols": "Test grid columns", "rows": "Test grid rows", "freeze_phase": "-1 animate; 0 green / 1 bug / 2 fixing for stills"},
+      "spatial_needs": {"footprint_cells": 4, "wall_backing": true}
+    },
+    "hardware_cross_section": {
+      "lookup_name": "hardware_cross_section",
+      "scene": "res://algorithms/resourcemanagement/hardware_cross_section/hardware_cross_section.tscn",
+      "class_name": "HardwareCrossSection",
+      "name": "Hardware Considerations",
+      "description": "A machine cutaway — CPU, GPU, RAM, cache, disk strung on a bus, with data tokens flowing at component-specific throughput (cache fast, disk slow). The algorithm runs on a place, not in the abstract.",
+      "category": "resourcemanagement",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "tags": ["resourcemanagement", "hardware", "throughput", "bus", "bandwidth", "applied"],
+      "parameters": {"token_count": "Data tokens on the bus", "flow_speed": "Token flow rate", "freeze": "Static frame for stills"},
+      "spatial_needs": {"footprint_cells": 8}
     }
   }
 }
