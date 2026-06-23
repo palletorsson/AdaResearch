@@ -1,6 +1,8 @@
 extends Node3D
 class_name DecisionBoundaryViewer
 
+const HangarKit := preload("res://commons/artifacts/_hangar/hangar_kit.gd")
+
 ## Decision Boundary Viewer — 2D classification with live decision boundary.
 ## Generates two clusters of points (class A and class B) on a 128x128 floor quad.
 ## A linear classifier (w1*x + w2*y + bias > 0) separates them. Background is
@@ -209,18 +211,10 @@ func _update_plot() -> void:
 # --- Labels ---
 
 func _build_labels() -> void:
-	_title_label = Label3D.new()
-	_title_label.name = "TitleLabel"
-	_title_label.text = "DECISION BOUNDARY"
-	_title_label.font_size = 24
-	_title_label.pixel_size = 0.001
-	_title_label.position = Vector3(0, 0.005, -plot_size * 0.5 - 0.04)
-	_title_label.rotation_degrees.x = -90
-	_title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	_title_label.modulate = Color(0.92, 0.92, 0.97)
-	_title_label.outline_size = 4
-	_title_label.billboard = BaseMaterial3D.BILLBOARD_DISABLED
-	add_child(_title_label)
+	# Title — a framed 2D-in-3D sign on a STALK standing up at the back edge (mounted, not flat text).
+	var title := HangarKit.signage("DECISION BOUNDARY", [], Vector2(plot_size * 0.55, 0.12), 0.22, Vector3(0, 1, 0))
+	title.position = Vector3(0, 0.0, -plot_size * 0.5 - 0.05)
+	add_child(title)
 
 	_formula_label = Label3D.new()
 	_formula_label.name = "FormulaLabel"

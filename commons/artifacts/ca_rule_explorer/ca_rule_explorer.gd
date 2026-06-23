@@ -16,6 +16,8 @@ extends Node3D
 
 class_name CARuleExplorer
 ## Implements Wolfram's elementary 1D cellular automaton (rules 0–255).
+
+const HangarKit := preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 ## Each generation applies a 3-neighbor lookup against the 8-bit rule number
 ## to determine the next row state. Rows scroll downward on a MultiMesh board.
 ## Key parameters: rule selects the automaton, generations_per_second controls speed.
@@ -201,11 +203,19 @@ func _create_multimesh() -> void:
 
 ## Create the floating rule label above the board
 func _create_rule_display() -> void:
+	# A framed plate on a STALK at the back of the board; the live rule text sits on its face
+	# (2D-on-surface, fixed orientation) so it reads as a mounted readout, not floating.
+	var rule_plate := HangarKit.signage("", [], Vector2(0.62, 0.22), 0.3, Vector3(0, 1, 0))
+	rule_plate.position = Vector3(0, 0.0, -board_size / 2 - 0.06)
+	add_child(rule_plate)
+	_created_nodes.append(rule_plate)
 	_rule_label = Label3D.new()
 	_rule_label.name = "RuleLabel"
-	_rule_label.pixel_size = 0.002
+	_rule_label.pixel_size = 0.0014
 	_rule_label.font_size = 48
-	_rule_label.position = Vector3(0, 0.05, -board_size / 2 - 0.08)
+	_rule_label.billboard = BaseMaterial3D.BILLBOARD_DISABLED
+	_rule_label.modulate = Color(0.90, 0.95, 0.96)
+	_rule_label.position = Vector3(0, 0.3, -board_size / 2 - 0.06 + 0.04)
 	add_child(_rule_label)
 	_created_nodes.append(_rule_label)
 	_update_rule_display()
