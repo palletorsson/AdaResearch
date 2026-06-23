@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="PackedScene" uid="uid://cgrljkfrmkgda" path="res://commons/scenes/base.tscn" id="1_base"]
+[ext_resource type="PackedScene" path="res://commons/artifacts/station/curation_station.tscn" id="2_station"]
+
+[sub_resource type="BoxShape3D" id="FloorShape"]
+size = Vector3(80, 1, 80)
+
+[sub_resource type="BoxMesh" id="FloorMesh"]
+size = Vector3(80, 0.1, 80)
+
+[sub_resource type="StandardMaterial3D" id="FloorMat"]
+albedo_color = Color(0.5, 0.51, 0.55, 1)
+roughness = 0.9
+
+[node name="VRCurationStation" instance=ExtResource("1_base")]
+
+[node name="XROrigin3D" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6)
+
+[node name="StationFloor" type="StaticBody3D" parent="."]
+
+[node name="Col" type="CollisionShape3D" parent="StationFloor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("FloorShape")
+
+[node name="Mesh" type="MeshInstance3D" parent="StationFloor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
+mesh = SubResource("FloorMesh")
+material_override = SubResource("FloorMat")
+
+[node name="CurationStation" parent="." instance=ExtResource("2_station")]

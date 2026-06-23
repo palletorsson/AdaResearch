@@ -6,6 +6,9 @@ const StationStageScene := preload("res://commons/artifacts/station/station_stag
 const StationPlinthScene := preload("res://commons/artifacts/station/station_plinth.tscn")
 const StationWallScene := preload("res://commons/artifacts/station/station_wall.tscn")
 const StationPillarScene := preload("res://commons/artifacts/station/station_pillar.tscn")
+const StationCabinetScene := preload("res://commons/artifacts/station/station_cabinet.tscn")
+const StationBarrierScene := preload("res://commons/artifacts/station/station_barrier.tscn")
+const StationCratesScene := preload("res://commons/artifacts/station/station_crates.tscn")
 const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
 
 # @identity
@@ -38,6 +41,13 @@ const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
 @export_group("Pieces")
 @export var with_wall: bool = true
 @export var with_pillars: bool = true
+## A low front barrier (threshold) across the stage front. Open "rail" by default so it never blocks the set.
+@export var with_barrier: bool = true
+@export var barrier_style: String = "rail"
+## Flank the back wall with storage/display cabinets (the "archive behind" read).
+@export var with_cabinets: bool = false
+## Drop supply crates in the back corners (lived-in dressing).
+@export var with_crates: bool = false
 @export var with_wall_screen: bool = true
 @export var label_plinths: bool = true
 ## Hide the loaded artifacts' floating billboard Label3D text, so the only text on show is the
@@ -92,6 +102,10 @@ func _read_overrides() -> void:
 	if has_meta("config_plinth_height"): plinth_height = float(str(get_meta("config_plinth_height")))
 	if has_meta("config_with_wall"): with_wall = _b(get_meta("config_with_wall"))
 	if has_meta("config_with_pillars"): with_pillars = _b(get_meta("config_with_pillars"))
+	if has_meta("config_with_barrier"): with_barrier = _b(get_meta("config_with_barrier"))
+	if has_meta("config_barrier_style"): barrier_style = str(get_meta("config_barrier_style")).to_lower()
+	if has_meta("config_with_cabinets"): with_cabinets = _b(get_meta("config_with_cabinets"))
+	if has_meta("config_with_crates"): with_crates = _b(get_meta("config_with_crates"))
 
 
 func _count() -> int:
@@ -168,6 +182,39 @@ func _build_kit() -> void:
 				"height": wall_height, "lit_groove": true, "body_color": _cs(body_color),
 				"panel_color": _cs(panel_color), "accent_color": _cs(accent_color),
 			})
+
+	var half_w: float = float(stage_w_cells) * 0.5 * CELL
+	var front_z: float = float(depth_cells) * 0.5 * CELL
+
+	# Front barrier — a low threshold across the stage front (open rail = never blocks the set).
+	if with_barrier:
+		var bar: Node3D = StationBarrierScene.instantiate()
+		add_child(bar)
+		bar.position = Vector3(0, 0, front_z + 0.05)
+		bar.apply_grid_config({
+			"length_cells": stage_w_cells, "height": 1.0, "style": barrier_style,
+			"hazard_base": true, "panel_color": _cs(body_color), "post_color": _cs(panel_color),
+			"accent_color": _cs(accent_color),
+		})
+
+	# Flanking storage/display cabinets against the back wall (the "archive behind" read).
+	if with_cabinets:
+		for sx in [-1.0, 1.0]:
+			var cab: Node3D = StationCabinetScene.instantiate()
+			add_child(cab)
+			cab.position = Vector3(sx * (half_w - 1.0), 0, back_z + 0.45)
+			cab.apply_grid_config({
+				"width_cells": 2, "shelf_count": 4, "front_style": "glass",
+				"body_color": _cs(body_color), "panel_color": _cs(panel_color), "accent_color": _cs(accent_color),
+			})
+
+	# Supply crates in the back corners (lived-in dressing).
+	if with_crates:
+		for sx2 in [-1.0, 1.0]:
+			var cr: Node3D = StationCratesScene.instantiate()
+			add_child(cr)
+			cr.position = Vector3(sx2 * (half_w - 0.55), 0, back_z + 0.6)
+			cr.apply_grid_config({"footprint_cells": 1, "crate_count": 4, "palette": "metal", "seed_index": int(sx2) + 3})
 
 
 func _load_artifacts() -> void:

@@ -102,6 +102,105 @@
         "with_pillars": "Build framing pillars (bool)"
       },
       "spatial_needs": {"footprint_cells": 33}
+    },
+    "station_cabinet": {
+      "lookup_name": "station_cabinet",
+      "scene": "res://commons/artifacts/station/station_cabinet.tscn",
+      "class_name": "StationCabinet",
+      "name": "Station Cabinet (storage / display)",
+      "description": "A grid-modular display/storage cabinet (width_cells x 1 m) with a tinted glass front and lit internal shelves — cabinets line up cell-to-cell as a glowing back wall of stored specimens.",
+      "category": "station",
+      "complexity": "intermediate",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "tags": ["station", "modular", "cabinet", "storage", "display", "glass", "grid"],
+      "parameters": {
+        "width_cells": "Cabinet width in 1 m cells (int, default 2)",
+        "height": "Height in metres (default 1.9)",
+        "shelf_count": "Lit shelves per cell (default 4)",
+        "front_style": "glass | solid",
+        "glow_color": "Interior shelf glow colour",
+        "top_readout": "Framed readout on top (bool)"
+      },
+      "spatial_needs": {"footprint_cells": 2, "wall_backing": true}
+    },
+    "station_barrier": {
+      "lookup_name": "station_barrier",
+      "scene": "res://commons/artifacts/station/station_barrier.tscn",
+      "class_name": "StationBarrier",
+      "name": "Station Barrier (front rail)",
+      "description": "A grid-modular front barrier (length_cells x 1 m) of posts with a low panel or rail and a caution base — marks the front edge of the stage: stand back, look, do not cross.",
+      "category": "station",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "tags": ["station", "modular", "barrier", "rail", "threshold", "grid"],
+      "parameters": {
+        "length_cells": "Run length in 1 m cells (int, default 4)",
+        "height": "Barrier height in metres (default 1.0)",
+        "style": "panel | rail",
+        "brand_text": "2D-in-3D brand text across the front",
+        "hazard_base": "Caution stripe at the base (bool)"
+      },
+      "spatial_needs": {"footprint_cells": 4}
+    },
+    "station_panel": {
+      "lookup_name": "station_panel",
+      "scene": "res://commons/artifacts/station/station_panel.tscn",
+      "class_name": "StationPanel",
+      "name": "Station Panel (wall info screen)",
+      "description": "A grid-modular wall-mounted info panel (width_cells x 1 m) showing crisp 2D-in-3D text (a title + lines) on a dark face — mounts flat on a station_wall to caption the bay.",
+      "category": "station",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "tags": ["station", "modular", "panel", "screen", "info", "2d-in-3d", "grid"],
+      "parameters": {
+        "width_cells": "Panel width in 1 m cells (int, default 2)",
+        "height": "Panel height in metres (default 0.6)",
+        "header": "Title line",
+        "lines": "Array of body text lines",
+        "header_color": "Header colour (amber by default)"
+      },
+      "spatial_needs": {"footprint_cells": 2, "wall_backing": true}
+    },
+    "station_bench": {
+      "lookup_name": "station_bench",
+      "scene": "res://commons/artifacts/station/station_bench.tscn",
+      "class_name": "StationBench",
+      "name": "Station Bench (workbench)",
+      "description": "A grid-modular worktable (length_cells x depth_cells) with a top at working height, apron, legs, and optional drawers — the flat way to present a set, laid out rather than raised on plinths.",
+      "category": "station",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "tags": ["station", "modular", "bench", "workbench", "table", "grid"],
+      "parameters": {
+        "length_cells": "Bench length in 1 m cells (int, default 2)",
+        "depth_cells": "Bench depth in 1 m cells (int, default 1)",
+        "top_height": "Work-surface height in metres (default 0.92)",
+        "drawers": "Drawer block under one end (bool)"
+      },
+      "spatial_needs": {"footprint_cells": 2, "platform": "table"}
+    },
+    "station_crates": {
+      "lookup_name": "station_crates",
+      "scene": "res://commons/artifacts/station/station_crates.tscn",
+      "class_name": "StationCrates",
+      "name": "Station Crates (supply stack)",
+      "description": "A grid-modular cluster of stacked crates and a canister with hazard labels, filling one cell — the lived-in back-of-house clutter that makes a clean stage believable.",
+      "category": "station",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "tags": ["station", "modular", "crates", "boxes", "supply", "props", "grid"],
+      "parameters": {
+        "footprint_cells": "Square footprint in cells (default 1)",
+        "crate_count": "Number of crates 1-6 (default 4)",
+        "palette": "cardboard | wood | metal",
+        "with_canister": "Add a gas canister (bool)"
+      },
+      "spatial_needs": {"footprint_cells": 1}
     }
   }
 }
