@@ -802,6 +802,19 @@ func _place_dialectic_panels(dialectic_name: String, origin: Vector3, rotation: 
 const PackagingResolver := preload("res://commons/artifacts/_hangar/packaging_resolver.gd")
 const HangarKit := preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 
+# Suppress standalone-demo chrome on an embedded artifact: hide screen-space CanvasLayers
+# (2D overlays have no place in a VR map) and de-activate the artifact's own Camera3D so it
+# can't steal the player's view. Recurses the whole subtree. Safe to call more than once.
+func _suppress_embedded_chrome(node: Node) -> void:
+	if not is_instance_valid(node):
+		return
+	for child in node.get_children():
+		if child is CanvasLayer:
+			(child as CanvasLayer).visible = false
+		elif child is Camera3D:
+			(child as Camera3D).current = false
+		_suppress_embedded_chrome(child)
+
 # Place a single artifact using lookup_name
 func _place_artifact(x: int, y: int, z: int, lookup_name: String, total_size: float, overrides: Dictionary = {}, config_data: Dictionary = {}, tag: String = "", trigger_action: String = "") -> bool:
 	var world_pos = Vector3(x, y, z) * total_size
@@ -970,6 +983,15 @@ func _place_artifact(x: int, y: int, z: int, lookup_name: String, total_size: fl
 			print("    Set puzzle trigger_action: '%s'" % trigger_action)
 
 	parent_node.add_child(artifact_object)
+
+	# Demo-artifact hygiene: many older algorithms/ scenes were authored as standalone
+	# demos with their own screen-space CanvasLayer UI and/or Camera3D. Embedded as a map
+	# artifact those leak — the UI overlays the player's view and the camera can steal
+	# focus. Screen-space UI is never correct in VR (world-space / 2D-in-3D is), so suppress
+	# that demo chrome on embed. The artifact's 3D content is untouched. The deferred pass
+	# catches UI/cameras created inside the artifact's own _ready/call_deferred.
+	_suppress_embedded_chrome(artifact_object)
+	call_deferred("_suppress_embedded_chrome", artifact_object)
 
 	# Make it editable in VR: the catalyst's Edit-mode laser targets this group,
 	# and the B-save uses grid_cell / vr_saved_cell to move it (clearing the old
