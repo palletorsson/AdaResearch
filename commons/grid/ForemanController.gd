@@ -28,8 +28,8 @@ var _bound: bool = false
 const LAYERS := [
 	{"id": "pathfind", "label": "PATHFIND", "ready": true},
 	{"id": "artifacts", "label": "ARTIFACTS", "ready": true},
-	{"id": "graph", "label": "ONTOLOGY GRAPH", "ready": false},
-	{"id": "gameplay", "label": "GAMEPLAY", "ready": false},
+	{"id": "graph", "label": "ONTOLOGY GRAPH", "ready": true},
+	{"id": "gameplay", "label": "GAMEPLAY", "ready": true},
 	{"id": "grid", "label": "GRID", "ready": true},
 ]
 var _active: String = "pathfind"
@@ -45,6 +45,7 @@ var _toast_t: float = 0.0
 func _ready() -> void:
 	_editor = get_node_or_null("GridEditorDesktop3D")
 	_build_overlay()
+	_build_lines()
 	_build_hud()
 	set_process(true)
 
@@ -138,10 +139,13 @@ func _find_spawn() -> Vector2i:
 func _refresh() -> void:
 	if not _bound:
 		return
+	_clear_lines()
 	match _active:
 		"pathfind": _layer_pathfind()
 		"artifacts": _layer_artifacts()
 		"grid": _layer_grid()
+		"gameplay": _layer_gameplay()
+		"graph": _layer_graph()
 		_:
 			_clear_overlay()
 			_set_score("%s — coming soon" % _active.to_upper())
@@ -343,6 +347,269 @@ func _toast(t: String) -> void:
 		_toast_t = 2.5
 
 
+# ── ONTOLOGY GRAPH layer: concept-distance edges in 3D + spatial↔conceptual fidelity ──
+var _mindmaps: Array = []   # [{lk2co: Dictionary, dist: Array(NxN)}]
+var _lines: MeshInstance3D = null
+
+func _build_lines() -> void:
+	_lines = MeshInstance3D.new()
+	_lines.name = "ForemanLines"
+	_lines.mesh = ImmediateMesh.new()
+	var mat := StandardMaterial3D.new()
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mat.vertex_color_use_as_albedo = true
+	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	_lines.material_override = mat
+	add_child(_lines)
+
+
+func _paint_lines(segments: Array) -> void:
+	var im := _lines.mesh as ImmediateMesh
+	im.clear_surfaces()
+	if segments.is_empty():
+		return
+	im.surface_begin(Mesh.PRIMITIVE_LINES)
+	for s in segments:
+		im.surface_set_color(s["color"])
+		im.surface_add_vertex(s["a"])
+		im.surface_set_color(s["color"])
+		im.surface_add_vertex(s["b"])
+	im.surface_end()
+
+
+func _clear_lines() -> void:
+	if _lines and _lines.mesh is ImmediateMesh:
+		(_lines.mesh as ImmediateMesh).clear_surfaces()
+
+
+func _load_mindmaps() -> void:
+	var dir := DirAccess.open("res://doc")
+	if dir == null:
+		_mindmaps.append({"lk2co": {}, "dist": []})   # mark loaded
+		return
+	for fn in dir.get_files():
+		if not fn.ends_with("_mindmap.json"):
+			continue
+		var f := FileAccess.open("res://doc/" + fn, FileAccess.READ)
+		if f == null:
+			continue
+		var d = JSON.parse_string(f.get_as_text())
+		if not (d is Dictionary):
+			continue
+		var lk2co: Dictionary = {}
+		for art in d.get("artifacts", []):
+			if art is Dictionary and art.has("lookup") and art.has("concept_order"):
+				lk2co[str(art["lookup"])] = int(art["concept_order"])
+		_mindmaps.append({"lk2co": lk2co, "dist": d.get("concept_distance", [])})
+
+
+func _resolve_concept(name: String) -> Dictionary:
+	for i in _mindmaps.size():
+		if _mindmaps[i]["lk2co"].has(name):
+			return {"mm": i, "co": int(_mindmaps[i]["lk2co"][name])}
+	return {"mm": -1, "co": -1}
+
+
+func _concept_dist(mm: int, a: int, b: int) -> float:
+	var dist = _mindmaps[mm]["dist"]
+	if not (dist is Array) or a < 0 or b < 0 or a >= dist.size():
+		return -1.0
+	var row = dist[a]
+	if not (row is Array) or b >= row.size():
+		return -1.0
+	return float(row[b])
+
+
+func _ranks(arr: Array) -> Array:
+	var idx: Array = []
+	for i in arr.size():
+		idx.append(i)
+	idx.sort_custom(func(i, j): return arr[i] < arr[j])
+	var ranks: Array = []
+	ranks.resize(arr.size())
+	for r in arr.size():
+		ranks[idx[r]] = float(r)
+	return ranks
+
+
+func _spearman(a: Array, b: Array) -> float:
+	var n := a.size()
+	if n < 3:
+		return 0.0
+	var ra := _ranks(a)
+	var rb := _ranks(b)
+	var ma := 0.0
+	var mb := 0.0
+	for i in n:
+		ma += ra[i]
+		mb += rb[i]
+	ma /= float(n)
+	mb /= float(n)
+	var num := 0.0
+	var da := 0.0
+	var db := 0.0
+	for i in n:
+		var xa: float = ra[i] - ma
+		var xb: float = rb[i] - mb
+		num += xa * xb
+		da += xa * xa
+		db += xb * xb
+	if da == 0.0 or db == 0.0:
+		return 0.0
+	return num / sqrt(da * db)
+
+
+func _layer_graph() -> void:
+	if _mindmaps.is_empty():
+		_load_mindmaps()
+	var arts := _artifact_list()
+	var nodes: Array = []
+	for a in arts:
+		var res := _resolve_concept(a["name"])
+		if int(res["mm"]) >= 0:
+			var anc: Vector2i = a["anchor"]
+			nodes.append({
+				"anchor": anc, "mm": int(res["mm"]), "co": int(res["co"]),
+				"pos": Vector3((float(anc.x) + 0.5) * _cube, float(_height_at(anc.x, anc.y)) * _cube + 0.4, (float(anc.y) + 0.5) * _cube),
+			})
+	var spatial: Array = []
+	var concep: Array = []
+	var segments: Array = []
+	for i in nodes.size():
+		for j in range(i + 1, nodes.size()):
+			var na: Dictionary = nodes[i]
+			var nb: Dictionary = nodes[j]
+			if int(na["mm"]) != int(nb["mm"]):
+				continue
+			var cd := _concept_dist(int(na["mm"]), int(na["co"]), int(nb["co"]))
+			if cd < 0.0:
+				continue
+			var sd := Vector2(na["anchor"]).distance_to(Vector2(nb["anchor"]))
+			spatial.append(sd)
+			concep.append(cd)
+			if cd < 0.28:   # conceptually close → these "want" to be spatially near
+				var close_spatial: bool = sd <= 5.0
+				var col := Color(0.3, 0.9, 0.45, 0.7) if close_spatial else Color(0.95, 0.35, 0.3, 0.6)
+				segments.append({"a": na["pos"], "b": nb["pos"], "color": col})
+	var fid := _spearman(spatial, concep)
+	var fid01 := clampf((fid + 1.0) * 0.5, 0.0, 1.0)
+	var quads: Array = []
+	for n in nodes:
+		quads.append(_q(n["anchor"], Color(0.4, 0.7, 1.0, 0.7)))
+	_paint_overlay(quads)
+	_paint_lines(segments)
+	_set_score("ONTOLOGY GRAPH    %d concept-nodes    %d affinity edges (green=near, red=split)    fidelity %d%%" % [
+		nodes.size(), segments.size(), int(round(fid01 * 100.0))])
+
+
+# ── shared helpers (reachability + quad-at-cell) ─────────────────────
+func _q(c: Vector2i, col: Color) -> Dictionary:
+	var ty := float(_height_at(c.x, c.y)) * _cube + 0.08
+	return {"pos": Vector3((float(c.x) + 0.5) * _cube, ty, (float(c.y) + 0.5) * _cube), "color": col}
+
+
+func _reachable_from(spawn: Vector2i) -> Dictionary:
+	var reachable: Dictionary = {}
+	if spawn == Vector2i(-1, -1):
+		return reachable
+	var q: Array = [spawn]
+	reachable[spawn] = true
+	while not q.is_empty():
+		var c: Vector2i = q.pop_front()
+		var ch := _height_at(c.x, c.y)
+		for nb in [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]:
+			var nc: Vector2i = c + nb
+			if nc.x < 0 or nc.x >= _w or nc.y < 0 or nc.y >= _d:
+				continue
+			if reachable.has(nc):
+				continue
+			var nh := _height_at(nc.x, nc.y)
+			if nh < 1 or abs(nh - ch) > 1:
+				continue
+			reachable[nc] = true
+			q.append(nc)
+	return reachable
+
+
+func _cell_reachable(c: Vector2i, reachable: Dictionary) -> bool:
+	for nb in [Vector2i(0, 0), Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]:
+		if reachable.has(c + nb):
+			return true
+	return false
+
+
+# ── GAMEPLAY layer: spawn / teleporter / hazards + encounter-order path ──
+func _layer_gameplay() -> void:
+	var spawn := _find_spawn()
+	var reachable := _reachable_from(spawn)
+	var teles: Array = []
+	var hazards: Array = []
+	var g := _token_grid("_utilities")
+	for z in range(min(g.size(), _d)):
+		var row = g[z]
+		if not (row is Array):
+			continue
+		for x in range(min(row.size(), _w)):
+			var t := str(row[x]).strip_edges().to_lower()
+			if t == "t" or t.begins_with("t:"):
+				teles.append(Vector2i(x, z))
+			elif t == "h" or t.begins_with("h:"):
+				hazards.append(Vector2i(x, z))
+	var arts := _artifact_cells()
+
+	# Encounter order: greedy nearest reachable artifact from spawn.
+	var order: Array = []
+	var remaining := arts.duplicate()
+	var cur := spawn
+	while not remaining.is_empty():
+		var best := -1
+		var bestd := 1000000
+		for i in remaining.size():
+			if not _cell_reachable(remaining[i], reachable):
+				continue
+			var dd: int = abs(remaining[i].x - cur.x) + abs(remaining[i].y - cur.y)
+			if dd < bestd:
+				bestd = dd
+				best = i
+		if best < 0:
+			break
+		order.append(remaining[best])
+		cur = remaining[best]
+		remaining.remove_at(best)
+
+	var walk_len := 0
+	var p := spawn
+	for c in order:
+		walk_len += abs(c.x - p.x) + abs(c.y - p.y)
+		p = c
+	if not teles.is_empty():
+		walk_len += abs(teles[0].x - p.x) + abs(teles[0].y - p.y)
+	var tele_ok := 0
+	for tl in teles:
+		if _cell_reachable(tl, reachable):
+			tele_ok += 1
+
+	var ordered := {}
+	for c in order:
+		ordered[c] = true
+	var quads: Array = []
+	if spawn != Vector2i(-1, -1):
+		quads.append(_q(spawn, Color(0.2, 0.55, 1.0, 0.92)))      # spawn = blue
+	for tl in teles:
+		quads.append(_q(tl, Color(0.72, 0.32, 0.96, 0.92) if _cell_reachable(tl, reachable) else Color(0.4, 0.15, 0.5, 0.85)))
+	for hz in hazards:
+		quads.append(_q(hz, Color(1.0, 0.25, 0.15, 0.88)))        # hazard = red
+	for i in order.size():
+		var tt := float(i) / float(maxi(order.size() - 1, 1))     # encounter order: green → amber
+		quads.append(_q(order[i], Color(0.3, 0.9, 0.4).lerp(Color(0.96, 0.6, 0.12), tt)))
+	for a in arts:
+		if not ordered.has(a):
+			quads.append(_q(a, Color(0.5, 0.5, 0.55, 0.7)))       # unreachable artifact = grey
+	_paint_overlay(quads)
+	_set_score("GAMEPLAY    spawn %s    teleporters %d/%d reachable    encounter %d/%d artifacts    walk ~%d cells" % [
+		"OK" if spawn != Vector2i(-1, -1) else "MISSING", tele_ok, teles.size(), order.size(), arts.size(), walk_len])
+
+
 # ── GRID layer: height heatmap lens + fill score ─────────────────────
 func _layer_grid() -> void:
 	var floor := 0
@@ -416,10 +683,12 @@ func _artifact_list() -> Array:
 			var t := str(row[x]).strip_edges()
 			if t == "" or t == " " or t.begins_with("#"):
 				continue
-			var sn := _spatial_for(t)
+			# tokens are "lookup:rotation:y_offset" — strip to the lookup name.
+			var name := t.split(":")[0].strip_edges()
+			var sn := _spatial_for(name)
 			var fp := _footprint_of(sn)
 			out.append({
-				"name": t, "anchor": Vector2i(x, z), "fw": fp.x, "fd": fp.y,
+				"name": name, "anchor": Vector2i(x, z), "fw": fp.x, "fd": fp.y,
 				"wall": bool(sn.get("wall_backing", false)),
 				"iso": int(sn.get("isolation", 0)) >= 2,
 				"cluster": sn.get("cluster_with", []),
