@@ -1,0 +1,4519 @@
+{
+ "sequences": {
+  "array_tutorial": {
+   "bay_count": 6,
+   "bays": [
+    {
+     "name": "Curation_Bay_array_tutorial_0",
+     "index": 0,
+     "title": "array_tutorial — Bay 1 of 6",
+     "artifacts": [
+      {
+       "id": "pattern_tile_4x4",
+       "name": "4x4 Pattern Tile"
+      },
+      {
+       "id": "pattern_tile_mirror",
+       "name": "Mirror Pattern Tile"
+      },
+      {
+       "id": "pattern_tile_brick",
+       "name": "Brick Pattern Tile"
+      },
+      {
+       "id": "pattern_tile_herringbone",
+       "name": "Herringbone Pattern Tile"
+      },
+      {
+       "id": "pattern_tile_puzzle",
+       "name": "Pattern Tile Puzzle"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_array_tutorial_1",
+     "index": 1,
+     "title": "array_tutorial — Bay 2 of 6",
+     "artifacts": [
+      {
+       "id": "pulsar_compact",
+       "name": "Pulsar Compact"
+      },
+      {
+       "id": "pulsar_visualizer",
+       "name": "Pulsar B1919+21 Visualizer"
+      },
+      {
+       "id": "tiling_demo",
+       "name": "Tiling System Demo"
+      },
+      {
+       "id": "facade_grammar_demo",
+       "name": "Facade Grammar Demo"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_array_tutorial_2",
+     "index": 2,
+     "title": "array_tutorial — Bay 3 of 6",
+     "artifacts": [
+      {
+       "id": "pattern_tile_puzzle",
+       "name": "Pattern Tile Puzzle"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_array_tutorial_3",
+     "index": 3,
+     "title": "array_tutorial — Bay 4 of 6",
+     "artifacts": [
+      {
+       "id": "pick_up_cube",
+       "name": "Pick Up Cube"
+      },
+      {
+       "id": "xyz_coordinates",
+       "name": "XYZ coordinates"
+      },
+      {
+       "id": "standalone_disco",
+       "name": "Standalone Disco Floor"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_array_tutorial_4",
+     "index": 4,
+     "title": "array_tutorial — Bay 5 of 6",
+     "artifacts": [
+      {
+       "id": "column_3_z",
+       "name": "column_3_z"
+      },
+      {
+       "id": "grid_2d_4x4",
+       "name": "grid_2d_4x4"
+      },
+      {
+       "id": "grid_3d_4x4x4",
+       "name": "grid_3d_4x4x4"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_array_tutorial_5",
+     "index": 5,
+     "title": "array_tutorial — Bay 6 of 6",
+     "artifacts": [
+      {
+       "id": "gridagent",
+       "name": "Grid Agent"
+      },
+      {
+       "id": "script_runner",
+       "name": "Script Runner"
+      }
+     ]
+    }
+   ]
+  },
+  "artmathematics": {
+   "bay_count": 1,
+   "bays": [
+    {
+     "name": "Curation_Bay_artmathematics_0",
+     "index": 0,
+     "title": "artmathematics — Bay 1 of 1",
+     "artifacts": [
+      {
+       "id": "magritte_pipe",
+       "name": "Magritte Pipe"
+      },
+      {
+       "id": "penrose_triangle",
+       "name": "penrose_triangle"
+      },
+      {
+       "id": "escher_staircase",
+       "name": "Escher Staircase"
+      }
+     ]
+    }
+   ]
+  },
+  "biological_growth": {
+   "bay_count": 1,
+   "bays": [
+    {
+     "name": "Curation_Bay_biological_growth_0",
+     "index": 0,
+     "title": "biological_growth — Bay 1 of 1",
+     "artifacts": [
+      {
+       "id": "tree_gen",
+       "name": "Tree Generator"
+      },
+      {
+       "id": "slimemold",
+       "name": "slimemold"
+      }
+     ]
+    }
+   ]
+  },
+  "bodyprogression": {
+   "bay_count": 2,
+   "bays": [
+    {
+     "name": "Curation_Bay_bodyprogression_0",
+     "index": 0,
+     "title": "bodyprogression — Bay 1 of 2",
+     "artifacts": [
+      {
+       "id": "color_picker",
+       "name": "color_picker"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_bodyprogression_1",
+     "index": 1,
+     "title": "bodyprogression — Bay 2 of 2",
+     "artifacts": [
+      {
+       "id": "necklace_anchor",
+       "name": "Necklace Anchor"
+      },
+      {
+       "id": "ik_arm_demo",
+       "name": "IK Arm Demo"
+      },
+      {
+       "id": "torso_estimation_vis",
+       "name": "Torso Estimation Visualization"
+      },
+      {
+       "id": "mirror_artifact",
+       "name": "Mirror Artifact"
+      },
+      {
+       "id": "dress_selector",
+       "name": "Dress Selector"
+      }
+     ]
+    }
+   ]
+  },
+  "boolean_surfaces": {
+   "bay_count": 1,
+   "bays": [
+    {
+     "name": "Curation_Bay_boolean_surfaces_0",
+     "index": 0,
+     "title": "boolean_surfaces — Bay 1 of 1",
+     "artifacts": [
+      {
+       "id": "csg_union_demo",
+       "name": "CSG Union Demo"
+      },
+      {
+       "id": "csg_intersection_demo",
+       "name": "CSG Intersection Demo"
+      },
+      {
+       "id": "csg_difference_demo",
+       "name": "CSG Difference Demo"
+      },
+      {
+       "id": "csg_compose_workbench",
+       "name": "CSG Compose Workbench"
+      },
+      {
+       "id": "csg_architecture_cavity",
+       "name": "CSG Architecture Cavity"
+      }
+     ]
+    }
+   ]
+  },
+  "bricolage": {
+   "bay_count": 8,
+   "bays": [
+    {
+     "name": "Curation_Bay_bricolage_0",
+     "index": 0,
+     "title": "bricolage — Bay 1 of 8",
+     "artifacts": [
+      {
+       "id": "cube_specimen",
+       "name": "cube_specimen"
+      },
+      {
+       "id": "cylinder_specimen",
+       "name": "cylinder_specimen"
+      },
+      {
+       "id": "inventory_workbench",
+       "name": "inventory_workbench"
+      },
+      {
+       "id": "line_specimen",
+       "name": "line_specimen"
+      },
+      {
+       "id": "plane_specimen",
+       "name": "plane_specimen"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_bricolage_1",
+     "index": 1,
+     "title": "bricolage — Bay 2 of 8",
+     "artifacts": [
+      {
+       "id": "point_specimen",
+       "name": "point_specimen"
+      },
+      {
+       "id": "sphere_specimen",
+       "name": "sphere_specimen"
+      },
+      {
+       "id": "torus_specimen",
+       "name": "torus_specimen"
+      },
+      {
+       "id": "triangle_specimen",
+       "name": "triangle_specimen"
+      },
+      {
+       "id": "cylinder_as_axle",
+       "name": "cylinder_as_axle"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_bricolage_2",
+     "index": 2,
+     "title": "bricolage — Bay 3 of 8",
+     "artifacts": [
+      {
+       "id": "cylinder_as_column",
+       "name": "cylinder_as_column"
+      },
+      {
+       "id": "plane_as_seat",
+       "name": "plane_as_seat"
+      },
+      {
+       "id": "plane_as_wall",
+       "name": "plane_as_wall"
+      },
+      {
+       "id": "sphere_as_hub",
+       "name": "sphere_as_hub"
+      },
+      {
+       "id": "sphere_as_joint",
+       "name": "sphere_as_joint"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_bricolage_3",
+     "index": 3,
+     "title": "bricolage — Bay 4 of 8",
+     "artifacts": [
+      {
+       "id": "grid_array_demo",
+       "name": "grid_array_demo"
+      },
+      {
+       "id": "linear_array_demo",
+       "name": "linear_array_demo"
+      },
+      {
+       "id": "radial_array_demo",
+       "name": "radial_array_demo"
+      },
+      {
+       "id": "stack_array_demo",
+       "name": "stack_array_demo"
+      },
+      {
+       "id": "balance_fail_demo",
+       "name": "balance_fail_demo"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_bricolage_4",
+     "index": 4,
+     "title": "bricolage — Bay 5 of 8",
+     "artifacts": [
+      {
+       "id": "balance_pass_demo",
+       "name": "balance_pass_demo"
+      },
+      {
+       "id": "gravity_fail_demo",
+       "name": "gravity_fail_demo"
+      },
+      {
+       "id": "gravity_pass_demo",
+       "name": "gravity_pass_demo"
+      },
+      {
+       "id": "triangulation_fail_demo",
+       "name": "triangulation_fail_demo"
+      },
+      {
+       "id": "triangulation_pass_demo",
+       "name": "triangulation_pass_demo"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_bricolage_5",
+     "index": 5,
+     "title": "bricolage — Bay 6 of 8",
+     "artifacts": [
+      {
+       "id": "chair_assembled",
+       "name": "chair_assembled"
+      },
+      {
+       "id": "chair_builder",
+       "name": "chair_builder"
+      },
+      {
+       "id": "chair_parts_inventory",
+       "name": "chair_parts_inventory"
+      },
+      {
+       "id": "balanced_sculpture_1",
+       "name": "balanced_sculpture_1"
+      },
+      {
+       "id": "balanced_sculpture_2",
+       "name": "balanced_sculpture_2"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_bricolage_6",
+     "index": 6,
+     "title": "bricolage — Bay 7 of 8",
+     "artifacts": [
+      {
+       "id": "counterweight_demo",
+       "name": "counterweight_demo"
+      },
+      {
+       "id": "sculpture_builder",
+       "name": "sculpture_builder"
+      },
+      {
+       "id": "tension_demo",
+       "name": "tension_demo"
+      },
+      {
+       "id": "dome_builder",
+       "name": "dome_builder"
+      },
+      {
+       "id": "geodesic_dome",
+       "name": "geodesic_dome"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_bricolage_7",
+     "index": 7,
+     "title": "bricolage — Bay 8 of 8",
+     "artifacts": [
+      {
+       "id": "icosahedron_base",
+       "name": "icosahedron_base"
+      },
+      {
+       "id": "strut_inventory",
+       "name": "strut_inventory"
+      },
+      {
+       "id": "subdivision_demo",
+       "name": "subdivision_demo"
+      }
+     ]
+    }
+   ]
+  },
+  "cellularautomata": {
+   "bay_count": 4,
+   "bays": [
+    {
+     "name": "Curation_Bay_cellularautomata_0",
+     "index": 0,
+     "title": "cellularautomata — Bay 1 of 4",
+     "artifacts": [
+      {
+       "id": "ca_bridge",
+       "name": "CA Bridge"
+      },
+      {
+       "id": "volumetric_fog_ca",
+       "name": "Volumetric Fog CA"
+      },
+      {
+       "id": "persian_rug",
+       "name": "Persian Rug"
+      },
+      {
+       "id": "mirrored_cellular_automata",
+       "name": "Mirrored Cellular Automata"
+      },
+      {
+       "id": "crossway_ca",
+       "name": "Crossway CA"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_cellularautomata_1",
+     "index": 1,
+     "title": "cellularautomata — Bay 2 of 4",
+     "artifacts": [
+      {
+       "id": "ca_chair_test",
+       "name": "CA Chair Test"
+      },
+      {
+       "id": "rule_30_110_gravity",
+       "name": "Rule 30/110 Gravity"
+      },
+      {
+       "id": "CellularAutomata3DStacked",
+       "name": "CellularAutomata3DStacked"
+      },
+      {
+       "id": "ca_growth_network",
+       "name": "CA Growth Network"
+      },
+      {
+       "id": "cellular_automata_3d_tree",
+       "name": "Cellular Automata 3D Tree"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_cellularautomata_2",
+     "index": 2,
+     "title": "cellularautomata — Bay 3 of 4",
+     "artifacts": [
+      {
+       "id": "game_of_life_petri",
+       "name": "Game of Life Petri Dish"
+      },
+      {
+       "id": "ca_rule_explorer",
+       "name": "Cellular Automata Rule Explorer"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_cellularautomata_3",
+     "index": 3,
+     "title": "cellularautomata — Bay 4 of 4",
+     "artifacts": [
+      {
+       "id": "mold_network",
+       "name": "Mold Network"
+      },
+      {
+       "id": "ca_sphere",
+       "name": "CA Sphere"
+      },
+      {
+       "id": "sierpinski_pyramid",
+       "name": "Sierpinski Pyramid"
+      }
+     ]
+    }
+   ]
+  },
+  "change": {
+   "bay_count": 5,
+   "bays": [
+    {
+     "name": "Curation_Bay_change_0",
+     "index": 0,
+     "title": "change — Bay 1 of 5",
+     "artifacts": [
+      {
+       "id": "slope_tangent_demo",
+       "name": "Slope Tangent Demo"
+      },
+      {
+       "id": "derivative_pair",
+       "name": "Derivative Pair"
+      },
+      {
+       "id": "velocity_arrow",
+       "name": "Velocity Arrow"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_change_1",
+     "index": 1,
+     "title": "change — Bay 2 of 5",
+     "artifacts": [
+      {
+       "id": "player_trace",
+       "name": "player_trace"
+      },
+      {
+       "id": "becoming_catalyst",
+       "name": "The Catalyst"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_change_2",
+     "index": 2,
+     "title": "change — Bay 3 of 5",
+     "artifacts": [
+      {
+       "id": "partial_derivative_terrain",
+       "name": "Partial Derivative Terrain"
+      },
+      {
+       "id": "catalyst_foe",
+       "name": "Catalyst Foe"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_change_3",
+     "index": 3,
+     "title": "change — Bay 4 of 5",
+     "artifacts": [
+      {
+       "id": "vector_field_grid",
+       "name": "Vector Field Grid"
+      },
+      {
+       "id": "particle_flow_swarm",
+       "name": "Particle Flow Swarm"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_change_4",
+     "index": 4,
+     "title": "change — Bay 5 of 5",
+     "artifacts": [
+      {
+       "id": "integral_area",
+       "name": "Integral Area"
+      },
+      {
+       "id": "riemann_pump",
+       "name": "Riemann Pump"
+      },
+      {
+       "id": "ftc_bridge",
+       "name": "FTC Bridge"
+      },
+      {
+       "id": "catalyst_sustain_demo",
+       "name": "Catalyst Sustain Demo"
+      }
+     ]
+    }
+   ]
+  },
+  "color": {
+   "bay_count": 5,
+   "bays": [
+    {
+     "name": "Curation_Bay_color_0",
+     "index": 0,
+     "title": "color — Bay 1 of 5",
+     "artifacts": [
+      {
+       "id": "hand_model",
+       "name": "hand_model"
+      },
+      {
+       "id": "nail_color_controller",
+       "name": "nail_color_controller"
+      },
+      {
+       "id": "hand_color_controller",
+       "name": "hand_color_controller"
+      },
+      {
+       "id": "ball_painting_demo",
+       "name": "ball_painting_demo"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_color_1",
+     "index": 1,
+     "title": "color — Bay 2 of 5",
+     "artifacts": [
+      {
+       "id": "gridcolorizer",
+       "name": "gridcolorizer"
+      },
+      {
+       "id": "SpectrumVisualizer",
+       "name": "SpectrumVisualizer"
+      },
+      {
+       "id": "brick_wall_factory",
+       "name": "brick_wall_factory"
+      },
+      {
+       "id": "grab_stick_scanner",
+       "name": "grab_stick_scannerk"
+      },
+      {
+       "id": "color_sets_overview",
+       "name": "Color Sets Overview"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_color_2",
+     "index": 2,
+     "title": "color — Bay 3 of 5",
+     "artifacts": [
+      {
+       "id": "colorballs",
+       "name": "colorballs"
+      },
+      {
+       "id": "visual_color_mixing",
+       "name": "visual_color_mixing"
+      },
+      {
+       "id": "dark_side_prism",
+       "name": "dark_side_prism"
+      },
+      {
+       "id": "pillarcolorcollection",
+       "name": "pillarcolorcollection"
+      },
+      {
+       "id": "color_constellation_office",
+       "name": "color_constellation_office"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_color_3",
+     "index": 3,
+     "title": "color — Bay 4 of 5",
+     "artifacts": [
+      {
+       "id": "pick_up_cube",
+       "name": "Pick Up Cube"
+      },
+      {
+       "id": "grab_rainbow_stick",
+       "name": "grab_rainbow_stick"
+      },
+      {
+       "id": "mario_cube",
+       "name": "Mario Cube"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_color_4",
+     "index": 4,
+     "title": "color — Bay 5 of 5",
+     "artifacts": [
+      {
+       "id": "albers_wall_gallery",
+       "name": "albers_wall_gallery"
+      },
+      {
+       "id": "rainbow_hallway",
+       "name": "rainbow_hallway"
+      },
+      {
+       "id": "flashlight_demo",
+       "name": "flashlight_demo"
+      }
+     ]
+    }
+   ]
+  },
+  "computationalgeometry": {
+   "bay_count": 1,
+   "bays": [
+    {
+     "name": "Curation_Bay_computationalgeometry_0",
+     "index": 0,
+     "title": "computationalgeometry — Bay 1 of 1",
+     "artifacts": [
+      {
+       "id": "fibonacci_sequences",
+       "name": "Fibonacci Sequences"
+      }
+     ]
+    }
+   ]
+  },
+  "facade_assembly": {
+   "bay_count": 1,
+   "bays": [
+    {
+     "name": "Curation_Bay_facade_assembly_0",
+     "index": 0,
+     "title": "facade_assembly — Bay 1 of 1",
+     "artifacts": [
+      {
+       "id": "facade_builder",
+       "name": "Facade Builder"
+      }
+     ]
+    }
+   ]
+  },
+  "facades": {
+   "bay_count": 1,
+   "bays": [
+    {
+     "name": "Curation_Bay_facades_0",
+     "index": 0,
+     "title": "facades — Bay 1 of 1",
+     "artifacts": [
+      {
+       "id": "facade_grammar_demo",
+       "name": "Facade Grammar Demo"
+      },
+      {
+       "id": "facade_builder",
+       "name": "Facade Builder"
+      }
+     ]
+    }
+   ]
+  },
+  "flowers": {
+   "bay_count": 1,
+   "bays": [
+    {
+     "name": "Curation_Bay_flowers_0",
+     "index": 0,
+     "title": "flowers — Bay 1 of 1",
+     "artifacts": [
+      {
+       "id": "botanical_flower",
+       "name": "Botanical Flower"
+      },
+      {
+       "id": "evolving_flowers",
+       "name": "Evolving Flowers"
+      },
+      {
+       "id": "water_flowers",
+       "name": "Water Flowers"
+      }
+     ]
+    }
+   ]
+  },
+  "fold_system": {
+   "bay_count": 3,
+   "bays": [
+    {
+     "name": "Curation_Bay_fold_system_0",
+     "index": 0,
+     "title": "fold_system — Bay 1 of 3",
+     "artifacts": [
+      {
+       "id": "fibonacci_snake_stages",
+       "name": "Fibonacci Snake Stages"
+      },
+      {
+       "id": "fibonacci_snake",
+       "name": "Fibonacci Snake"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_fold_system_1",
+     "index": 1,
+     "title": "fold_system — Bay 2 of 3",
+     "artifacts": [
+      {
+       "id": "helix_cylinder_creature",
+       "name": "Helix Cylinder Creature"
+      },
+      {
+       "id": "inflate_flock",
+       "name": "Inflate Flock"
+      },
+      {
+       "id": "helix_fold",
+       "name": "Helix Fold"
+      },
+      {
+       "id": "helix_cylinder",
+       "name": "Helix Cylinder"
+      },
+      {
+       "id": "fold_wall",
+       "name": "Fold Wall / Curtain"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_fold_system_2",
+     "index": 2,
+     "title": "fold_system — Bay 3 of 3",
+     "artifacts": [
+      {
+       "id": "origami_bird",
+       "name": "Origami Bird"
+      },
+      {
+       "id": "deltahedron_creature",
+       "name": "Deltahedron Creature"
+      },
+      {
+       "id": "fold_demo_critter",
+       "name": "Fold Demo Critter"
+      },
+      {
+       "id": "deltahedron_stages",
+       "name": "Deltahedron Stages"
+      },
+      {
+       "id": "folding_zoo",
+       "name": "Folding Zoo"
+      }
+     ]
+    }
+   ]
+  },
+  "forces": {
+   "bay_count": 7,
+   "bays": [
+    {
+     "name": "Curation_Bay_forces_0",
+     "index": 0,
+     "title": "forces — Bay 1 of 7",
+     "artifacts": [
+      {
+       "id": "becoming_catalyst",
+       "name": "The Catalyst"
+      },
+      {
+       "id": "ForceMagnitudeDemo",
+       "name": "ForceMagnitudeDemo"
+      },
+      {
+       "id": "coordinate_system_switcher",
+       "name": "Coordinate System Switcher"
+      },
+      {
+       "id": "normal_force_demo",
+       "name": "Normal Force & Reflection Demo"
+      },
+      {
+       "id": "basis_vectors_rig",
+       "name": "Basis Vectors Rig"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_forces_1",
+     "index": 1,
+     "title": "forces — Bay 2 of 7",
+     "artifacts": [
+      {
+       "id": "chaos_attractor",
+       "name": "Chaos Attractor"
+      },
+      {
+       "id": "VectorBasics",
+       "name": "VectorBasics"
+      },
+      {
+       "id": "vector_addition_demo",
+       "name": "Vector Addition"
+      },
+      {
+       "id": "vector_subtraction_demo",
+       "name": "Vector Subtraction"
+      },
+      {
+       "id": "vector_projection_demo",
+       "name": "Vector Projection"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_forces_2",
+     "index": 2,
+     "title": "forces — Bay 3 of 7",
+     "artifacts": [
+      {
+       "id": "exercise_1_3_solution_3_d_bouncing_ball_vr",
+       "name": "3D Bouncing Ball"
+      },
+      {
+       "id": "exercise_1_8_solution_attraction_magnitude_vr",
+       "name": "Attraction and Orbit"
+      },
+      {
+       "id": "VectorFieldFlow",
+       "name": "VectorFieldFlow"
+      },
+      {
+       "id": "VectorThrowing",
+       "name": "VectorThrowing"
+      },
+      {
+       "id": "hl_turret_vectors",
+       "name": "Half-Life Turret - Vector Compendium"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_forces_3",
+     "index": 3,
+     "title": "forces — Bay 4 of 7",
+     "artifacts": [
+      {
+       "id": "firework_launcher",
+       "name": "Firework Launcher"
+      },
+      {
+       "id": "force_field_visualizer",
+       "name": "Force Field Visualizer"
+      },
+      {
+       "id": "vector_fields",
+       "name": "Vector Fields"
+      },
+      {
+       "id": "force_fields",
+       "name": "Force Fields"
+      },
+      {
+       "id": "dot_product_projector",
+       "name": "Dot Product Projector"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_forces_4",
+     "index": 4,
+     "title": "forces — Bay 5 of 7",
+     "artifacts": [
+      {
+       "id": "torque_demo",
+       "name": "Torque Demo"
+      },
+      {
+       "id": "combined_forces_demo",
+       "name": "Combined Forces Demo"
+      },
+      {
+       "id": "work_energy_demo",
+       "name": "Work-Energy Demo"
+      },
+      {
+       "id": "gravity_gun_test_scene",
+       "name": "gravity_gun_test_scene"
+      },
+      {
+       "id": "vector_drone",
+       "name": "vector_drone"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_forces_5",
+     "index": 5,
+     "title": "forces — Bay 6 of 7",
+     "artifacts": [
+      {
+       "id": "example_3_3_pointing_in_the_direction_of_motion_vr",
+       "name": "Pointing in Direction of Motion"
+      },
+      {
+       "id": "nbody_simulation",
+       "name": "N-Body Gravitational Simulation"
+      },
+      {
+       "id": "example_3_2_forces_with_arbitrary_angular_motion_vr",
+       "name": "Arbitrary Angular Motion"
+      },
+      {
+       "id": "example_2_5_fluid_resistance_vr",
+       "name": "example_2_5_fluid_resistance_vr"
+      },
+      {
+       "id": "momentum_collision",
+       "name": "Momentum Collision"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_forces_6",
+     "index": 6,
+     "title": "forces — Bay 7 of 7",
+     "artifacts": [
+      {
+       "id": "destructibles_test_scene",
+       "name": "destructibles_test_scene"
+      },
+      {
+       "id": "sphere_splitting_showcase",
+       "name": "sphere_splitting_showcase"
+      }
+     ]
+    }
+   ]
+  },
+  "foundationscrisis": {
+   "bay_count": 6,
+   "bays": [
+    {
+     "name": "Curation_Bay_foundationscrisis_0",
+     "index": 0,
+     "title": "foundationscrisis — Bay 1 of 6",
+     "artifacts": [
+      {
+       "id": "angle_sum_triangle",
+       "name": "angle_sum_triangle"
+      },
+      {
+       "id": "poincare_disk",
+       "name": "poincare_disk"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_foundationscrisis_1",
+     "index": 1,
+     "title": "foundationscrisis — Bay 2 of 6",
+     "artifacts": [
+      {
+       "id": "hyperbolic_surface",
+       "name": "Hyperbolic Surface"
+      },
+      {
+       "id": "elliptic_surface",
+       "name": "Elliptic Surface"
+      },
+      {
+       "id": "curvature_slider",
+       "name": "Curvature Slider"
+      },
+      {
+       "id": "riemann_sphere",
+       "name": "Riemann Sphere"
+      },
+      {
+       "id": "parallel_lines",
+       "name": "parallel_lines"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_foundationscrisis_2",
+     "index": 2,
+     "title": "foundationscrisis — Bay 3 of 6",
+     "artifacts": [
+      {
+       "id": "euclid_postulates_plaque",
+       "name": "euclid_postulates_plaque"
+      },
+      {
+       "id": "excluded_middle_demo",
+       "name": "excluded_middle_demo"
+      },
+      {
+       "id": "constructive_proof",
+       "name": "constructive_proof"
+      },
+      {
+       "id": "brouwer_choice_sequence",
+       "name": "brouwer_choice_sequence"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_foundationscrisis_3",
+     "index": 3,
+     "title": "foundationscrisis — Bay 4 of 6",
+     "artifacts": [
+      {
+       "id": "russell_set_box",
+       "name": "Russell's Set Box"
+      },
+      {
+       "id": "godel_statement_plaque",
+       "name": "GÃ¶del Statement Plaque"
+      },
+      {
+       "id": "escher_staircase",
+       "name": "Escher Staircase"
+      },
+      {
+       "id": "bifurcation_diagram",
+       "name": "Bifurcation Diagram"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_foundationscrisis_4",
+     "index": 4,
+     "title": "foundationscrisis — Bay 5 of 6",
+     "artifacts": [
+      {
+       "id": "florensky_sphere",
+       "name": "Florensky Sphere"
+      },
+      {
+       "id": "schrodinger_box",
+       "name": "schrodinger_box"
+      },
+      {
+       "id": "superposition_display",
+       "name": "Superposition Display"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_foundationscrisis_5",
+     "index": 5,
+     "title": "foundationscrisis — Bay 6 of 6",
+     "artifacts": [
+      {
+       "id": "qfep_formula_3d",
+       "name": "QFEP Formula 3D"
+      },
+      {
+       "id": "lambda_slider",
+       "name": "Lambda Slider"
+      },
+      {
+       "id": "phi_slider",
+       "name": "Phi Slider"
+      }
+     ]
+    }
+   ]
+  },
+  "fractals": {
+   "bay_count": 7,
+   "bays": [
+    {
+     "name": "Curation_Bay_fractals_0",
+     "index": 0,
+     "title": "fractals — Bay 1 of 7",
+     "artifacts": [
+      {
+       "id": "cube_staircase",
+       "name": "Cube Staircase"
+      },
+      {
+       "id": "cube_desk",
+       "name": "Cube Desk"
+      },
+      {
+       "id": "cube_bookshelf",
+       "name": "Cube Bookshelf"
+      },
+      {
+       "id": "cube_cabin",
+       "name": "Cube Cabin"
+      },
+      {
+       "id": "recursive_boolean_cube",
+       "name": "recursive_boolean_cube"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_fractals_1",
+     "index": 1,
+     "title": "fractals — Bay 2 of 7",
+     "artifacts": [
+      {
+       "id": "example_8_4_cantor_set_vr",
+       "name": "example_8_4_cantor_set_vr"
+      },
+      {
+       "id": "example_8_3_recursion_circles_vr",
+       "name": "example_8_3_recursion_circles_vr"
+      },
+      {
+       "id": "fibonacci_pagoda",
+       "name": "fibonacci_pagoda"
+      },
+      {
+       "id": "golden_rectangle",
+       "name": "Golden Rectangle"
+      },
+      {
+       "id": "sierpinski_triangle",
+       "name": "sierpinski_triangle"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_fractals_2",
+     "index": 2,
+     "title": "fractals — Bay 3 of 7",
+     "artifacts": [
+      {
+       "id": "fractal_koch_curve",
+       "name": "Koch Curve"
+      },
+      {
+       "id": "fractal_recursion_1",
+       "name": "Fractal Recursion 1"
+      },
+      {
+       "id": "fractal_recursion_2",
+       "name": "Fractal Recursion 2"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_fractals_3",
+     "index": 3,
+     "title": "fractals — Bay 4 of 7",
+     "artifacts": [
+      {
+       "id": "living_paper",
+       "name": "Living Paper"
+      },
+      {
+       "id": "small_subdivision_cube",
+       "name": "small_subdivision_cube"
+      },
+      {
+       "id": "julia_set_explorer",
+       "name": "Julia Set Explorer"
+      },
+      {
+       "id": "mandelbrot_dive",
+       "name": "Mandelbrot Dive"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_fractals_4",
+     "index": 4,
+     "title": "fractals — Bay 5 of 7",
+     "artifacts": [
+      {
+       "id": "recursive_tree_2",
+       "name": "recursive_tree_2"
+      },
+      {
+       "id": "fractal_stochastic_tree",
+       "name": "Stochastic Tree"
+      },
+      {
+       "id": "stochastic_tree_separated",
+       "name": "stochastic_tree_separated"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_fractals_5",
+     "index": 5,
+     "title": "fractals — Bay 6 of 7",
+     "artifacts": [
+      {
+       "id": "fibonacci_sequences",
+       "name": "Fibonacci Sequences"
+      },
+      {
+       "id": "koch_curve",
+       "name": "Koch Curve"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_fractals_6",
+     "index": 6,
+     "title": "fractals — Bay 7 of 7",
+     "artifacts": [
+      {
+       "id": "evolutionary_algorithms",
+       "name": "Evolutionary Algorithms"
+      },
+      {
+       "id": "cellular_automata_3d_stacked",
+       "name": "Cellular Automata 3D Stacked"
+      },
+      {
+       "id": "sierpinski_pyramid",
+       "name": "Sierpinski Pyramid"
+      }
+     ]
+    }
+   ]
+  },
+  "grammar_systems": {
+   "bay_count": 2,
+   "bays": [
+    {
+     "name": "Curation_Bay_grammar_systems_0",
+     "index": 0,
+     "title": "grammar_systems — Bay 1 of 2",
+     "artifacts": [
+      {
+       "id": "VoxelNoiseROIs",
+       "name": "Voxel Noise ROIs"
+      },
+      {
+       "id": "ContextSensitiveTree",
+       "name": "Context-Sensitive Tree"
+      },
+      {
+       "id": "markov_chains",
+       "name": "Markov Chains"
+      },
+      {
+       "id": "markov_chains_tree",
+       "name": "Markov Chains Tree"
+      },
+      {
+       "id": "CityGenerator",
+       "name": "City Generator"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_grammar_systems_1",
+     "index": 1,
+     "title": "grammar_systems — Bay 2 of 2",
+     "artifacts": [
+      {
+       "id": "cellular_automata_3d_tree",
+       "name": "Cellular Automata 3D Tree"
+      }
+     ]
+    }
+   ]
+  },
+  "graphtheory": {
+   "bay_count": 1,
+   "bays": [
+    {
+     "name": "Curation_Bay_graphtheory_0",
+     "index": 0,
+     "title": "graphtheory — Bay 1 of 1",
+     "artifacts": [
+      {
+       "id": "kosaraju_algorithm",
+       "name": "Kosaraju's Algorithm"
+      },
+      {
+       "id": "push_relabel_algorithm",
+       "name": "Push-Relabel Algorithm"
+      }
+     ]
+    }
+   ]
+  },
+  "hazards": {
+   "bay_count": 18,
+   "bays": [
+    {
+     "name": "Curation_Bay_hazards_0",
+     "index": 0,
+     "title": "hazards — Bay 1 of 18",
+     "artifacts": [
+      {
+       "id": "progression_driver",
+       "name": "Progression Driver"
+      },
+      {
+       "id": "soft_stage_dashboard",
+       "name": "Soft Stage Dashboard"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_hazards_1",
+     "index": 1,
+     "title": "hazards — Bay 2 of 18",
+     "artifacts": [
+      {
+       "id": "miura_crawler",
+       "name": "Miura Crawler"
+      },
+      {
+       "id": "scissor_stalker",
+       "name": "Scissor Stalker"
+      },
+      {
+       "id": "proximity_spawner",
+       "name": "Proximity Spawner"
+      },
+      {
+       "id": "origami_droideka",
+       "name": "Origami Droideka"
+      },
+      {
+       "id": "armadillo_droideka",
+       "name": "Armadillo Droideka"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_hazards_2",
+     "index": 2,
+     "title": "hazards — Bay 3 of 18",
+     "artifacts": [
+      {
+       "id": "kresling_spire",
+       "name": "Kresling Spire"
+      },
+      {
+       "id": "waterbomb_enemy",
+       "name": "Waterbomb Enemy"
+      },
+      {
+       "id": "gridagent",
+       "name": "Grid Agent"
+      },
+      {
+       "id": "waterbomb_hopper",
+       "name": "Waterbomb Hopper"
+      },
+      {
+       "id": "bricoleur_golem",
+       "name": "Bricoleur Golem"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_hazards_3",
+     "index": 3,
+     "title": "hazards — Bay 4 of 18",
+     "artifacts": [
+      {
+       "id": "octapod_crawler",
+       "name": "Octapod Crawler"
+      },
+      {
+       "id": "edible_mushroom",
+       "name": "Edible Mushroom"
+      },
+      {
+       "id": "collision_crasher",
+       "name": "Collision Crasher"
+      },
+      {
+       "id": "armadillo_eggling",
+       "name": "Armadillo Eggling"
+      },
+      {
+       "id": "plasma_critter",
+       "name": "Plasma Critter"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_hazards_4",
+     "index": 4,
+     "title": "hazards — Bay 5 of 18",
+     "artifacts": [
+      {
+       "id": "octapod_ik",
+       "name": "Octapod IK"
+      },
+      {
+       "id": "one_leg",
+       "name": "One Leg"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_hazards_5",
+     "index": 5,
+     "title": "hazards — Bay 6 of 18",
+     "artifacts": [
+      {
+       "id": "two_leg_critter",
+       "name": "Two Leg Critter"
+      },
+      {
+       "id": "five_leg_critter",
+       "name": "Five Leg Critter"
+      },
+      {
+       "id": "four_leg_critter",
+       "name": "Four Leg Critter"
+      },
+      {
+       "id": "six_leg_critter",
+       "name": "Six Leg Critter"
+      },
+      {
+       "id": "three_leg_critter",
+       "name": "Three Leg Critter"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_hazards_6",
+     "index": 6,
+     "title": "hazards — Bay 7 of 18",
+     "artifacts": [
+      {
+       "id": "tesseract_phaser",
+       "name": "Tesseract Phaser"
+      },
+      {
+       "id": "origami_pyre_plane",
+       "name": "Pyre Plane"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_hazards_7",
+     "index": 7,
+     "title": "hazards — Bay 8 of 18",
+     "artifacts": [
+      {
+       "id": "becoming_catalyst",
+       "name": "The Catalyst"
+      },
+      {
+       "id": "loving_triangle",
+       "name": "Loving Triangle"
+      },
+      {
+       "id": "stick_tool",
+       "name": "Stick Tool"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_hazards_8",
+     "index": 8,
+     "title": "hazards — Bay 9 of 18",
+     "artifacts": [
+      {
+       "id": "hull_crusher",
+       "name": "Hull Crusher"
+      },
+      {
+       "id": "techstrider",
+       "name": "Tech Strider"
+      },
+      {
+       "id": "sphere_droideka",
+       "name": "Sphere Droideka"
+      },
+      {
+       "id": "isosurface_trap",
+       "name": "Isosurface Trap"
+      },
+      {
+       "id": "pattern_mine",
+       "name": "Pattern Mine"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_hazards_9",
+     "index": 9,
+     "title": "hazards — Bay 10 of 18",
+     "artifacts": [
+      {
+       "id": "spring_mass_bouncer",
+       "name": "Spring Mass Bouncer"
+      },
+      {
+       "id": "data_tree_walker",
+       "name": "Data Tree Walker"
+      },
+      {
+       "id": "graph_weaver",
+       "name": "Graph Weaver"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_hazards_10",
+     "index": 10,
+     "title": "hazards — Bay 11 of 18",
+     "artifacts": [
+      {
+       "id": "kaleidocycle_enemy",
+       "name": "Kaleidocycle"
+      },
+      {
+       "id": "gradient_hunter",
+       "name": "Gradient Hunter"
+      },
+      {
+       "id": "chromatic_field",
+       "name": "Chromatic Field"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_hazards_11",
+     "index": 11,
+     "title": "hazards — Bay 12 of 18",
+     "artifacts": [
+      {
+       "id": "qfep_calibrator",
+       "name": "QFEP Calibrator"
+      },
+      {
+       "id": "swarm_hive",
+       "name": "Swarm Hive"
+      },
+      {
+       "id": "recursion_spiral",
+       "name": "Recursion Spiral"
+      },
+      {
+       "id": "force_field",
+       "name": "Force Field"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_hazards_12",
+     "index": 12,
+     "title": "hazards — Bay 13 of 18",
+     "artifacts": [
+      {
+       "id": "tentacle_cube",
+       "name": "Tentacle Cube"
+      },
+      {
+       "id": "index_sentinel",
+       "name": "Index Sentinel"
+      },
+      {
+       "id": "lifeform_walker",
+       "name": "Lifeform Walker"
+      },
+      {
+       "id": "spatial_voronoi",
+       "name": "Spatial Voronoi"
+      },
+      {
+       "id": "noise_field",
+       "name": "Noise Field"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_hazards_13",
+     "index": 13,
+     "title": "hazards — Bay 14 of 18",
+     "artifacts": [
+      {
+       "id": "fallingblocks",
+       "name": "Falling Blocks"
+      },
+      {
+       "id": "mesh_morpher",
+       "name": "Mesh Morpher"
+      },
+      {
+       "id": "fractal_hydra",
+       "name": "Fractal Hydra"
+      },
+      {
+       "id": "particle_emitter_hazard",
+       "name": "Particle Emitter"
+      },
+      {
+       "id": "blockbuilderentity",
+       "name": "Block Builder Entity"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_hazards_14",
+     "index": 14,
+     "title": "hazards — Bay 15 of 18",
+     "artifacts": [
+      {
+       "id": "branching_vine",
+       "name": "Branching Vine"
+      },
+      {
+       "id": "grammar_markov",
+       "name": "Grammar Markov"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_hazards_15",
+     "index": 15,
+     "title": "hazards — Bay 16 of 18",
+     "artifacts": [
+      {
+       "id": "joint_articulator",
+       "name": "Joint Articulator"
+      },
+      {
+       "id": "constraint_web",
+       "name": "Constraint Web"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_hazards_16",
+     "index": 16,
+     "title": "hazards — Bay 17 of 18",
+     "artifacts": [
+      {
+       "id": "wave_rider",
+       "name": "Wave Rider"
+      },
+      {
+       "id": "resonance_chamber",
+       "name": "Resonance Chamber"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_hazards_17",
+     "index": 17,
+     "title": "hazards — Bay 18 of 18",
+     "artifacts": [
+      {
+       "id": "paradox_stalker",
+       "name": "Paradox Stalker"
+      },
+      {
+       "id": "escher_stairwalker",
+       "name": "Escher Stairwalker"
+      },
+      {
+       "id": "maze_spinner",
+       "name": "Maze Spinner"
+      }
+     ]
+    }
+   ]
+  },
+  "isosurfaces": {
+   "bay_count": 5,
+   "bays": [
+    {
+     "name": "Curation_Bay_isosurfaces_0",
+     "index": 0,
+     "title": "isosurfaces — Bay 1 of 5",
+     "artifacts": [
+      {
+       "id": "mc_torus_sculpture",
+       "name": "mc_torus_sculpture"
+      },
+      {
+       "id": "mc:sphere",
+       "name": "mc:sphere"
+      },
+      {
+       "id": "fifteen_cases_demo",
+       "name": "fifteen_cases_demo"
+      },
+      {
+       "id": "queer_marching_cave",
+       "name": "queer_marching_cave"
+      },
+      {
+       "id": "mc_shapes_gallery",
+       "name": "mc_shapes_gallery"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_isosurfaces_1",
+     "index": 1,
+     "title": "isosurfaces — Bay 2 of 5",
+     "artifacts": [
+      {
+       "id": "mc_flat_landscape",
+       "name": "mc_flat_landscape"
+      },
+      {
+       "id": "mc_overhang_landscape",
+       "name": "mc_overhang_landscape"
+      },
+      {
+       "id": "mc_terrain_demo",
+       "name": "mc_terrain_demo"
+      },
+      {
+       "id": "mc_portal_landscape",
+       "name": "mc_portal_landscape"
+      },
+      {
+       "id": "voxel_noise_demo",
+       "name": "voxel_noise_demo"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_isosurfaces_2",
+     "index": 2,
+     "title": "isosurfaces — Bay 3 of 5",
+     "artifacts": [
+      {
+       "id": "animated_noise_explorer",
+       "name": "animated_noise_explorer"
+      },
+      {
+       "id": "mc:torus",
+       "name": "mc:torus"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_isosurfaces_3",
+     "index": 3,
+     "title": "isosurfaces — Bay 4 of 5",
+     "artifacts": [
+      {
+       "id": "mc_cave",
+       "name": "mc_cave"
+      },
+      {
+       "id": "mc_inside_cave",
+       "name": "mc_inside_cave"
+      },
+      {
+       "id": "mc_base",
+       "name": "mc_base"
+      },
+      {
+       "id": "fountain_demo",
+       "name": "fountain_demo"
+      },
+      {
+       "id": "metaball_world",
+       "name": "metaball_world"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_isosurfaces_4",
+     "index": 4,
+     "title": "isosurfaces — Bay 5 of 5",
+     "artifacts": [
+      {
+       "id": "nakama_metaballs",
+       "name": "nakama_metaballs"
+      },
+      {
+       "id": "mc_sculpt_vr",
+       "name": "mc_sculpt_vr"
+      },
+      {
+       "id": "raymarched_metaballs",
+       "name": "raymarched_metaballs"
+      }
+     ]
+    }
+   ]
+  },
+  "joints": {
+   "bay_count": 2,
+   "bays": [
+    {
+     "name": "Curation_Bay_joints_0",
+     "index": 0,
+     "title": "joints — Bay 1 of 2",
+     "artifacts": [
+      {
+       "id": "PendulumPin",
+       "name": "PendulumPin"
+      },
+      {
+       "id": "CharacterRagdoll",
+       "name": "CharacterRagdoll"
+      },
+      {
+       "id": "HingeCrank",
+       "name": "HingeCrank"
+      },
+      {
+       "id": "SliderPress",
+       "name": "SliderPress"
+      },
+      {
+       "id": "constraints",
+       "name": "Constraints & Joints"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_joints_1",
+     "index": 1,
+     "title": "joints — Bay 2 of 2",
+     "artifacts": [
+      {
+       "id": "IKArm",
+       "name": "IKArm"
+      },
+      {
+       "id": "ChainSwing",
+       "name": "ChainSwing"
+      },
+      {
+       "id": "SpringSuspension",
+       "name": "SpringSuspension"
+      },
+      {
+       "id": "GimbalStabilizer",
+       "name": "GimbalStabilizer"
+      },
+      {
+       "id": "DoublePendulum",
+       "name": "Double Pendulum"
+      }
+     ]
+    }
+   ]
+  },
+  "lab": {
+   "bay_count": 2,
+   "bays": [
+    {
+     "name": "Curation_Bay_lab_0",
+     "index": 0,
+     "title": "lab — Bay 1 of 2",
+     "artifacts": [
+      {
+       "id": "becoming_catalyst",
+       "name": "The Catalyst"
+      },
+      {
+       "id": "loving_triangle",
+       "name": "Loving Triangle"
+      },
+      {
+       "id": "progression_driver",
+       "name": "Progression Driver"
+      },
+      {
+       "id": "world_map_tablet",
+       "name": "World Map Tablet"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_lab_1",
+     "index": 1,
+     "title": "lab — Bay 2 of 2",
+     "artifacts": [
+      {
+       "id": "cube_scene",
+       "name": "Basic Cube Scene"
+      },
+      {
+       "id": "light_sphere",
+       "name": "light_sphere"
+      },
+      {
+       "id": "rotating_cube",
+       "name": "Rotating Cube"
+      },
+      {
+       "id": "cube_lines",
+       "name": "cube_lines"
+      }
+     ]
+    }
+   ]
+  },
+  "lsystems": {
+   "bay_count": 3,
+   "bays": [
+    {
+     "name": "Curation_Bay_lsystems_0",
+     "index": 0,
+     "title": "lsystems — Bay 1 of 3",
+     "artifacts": [
+      {
+       "id": "lsystem_editor",
+       "name": "L-System Editor"
+      },
+      {
+       "id": "space_filling_curve_gallery",
+       "name": "Space-Filling Curve Gallery"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_lsystems_1",
+     "index": 1,
+     "title": "lsystems — Bay 2 of 3",
+     "artifacts": [
+      {
+       "id": "lsystem_tree",
+       "name": "L-System Tree"
+      },
+      {
+       "id": "AnimatedTree",
+       "name": "Animated Tree Growth"
+      },
+      {
+       "id": "parametric_lsystem",
+       "name": "Parametric L-System"
+      },
+      {
+       "id": "ContextSensitiveTree",
+       "name": "Context-Sensitive Tree"
+      },
+      {
+       "id": "ForestCompetition",
+       "name": "Forest Ecosystem"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_lsystems_2",
+     "index": 2,
+     "title": "lsystems — Bay 3 of 3",
+     "artifacts": [
+      {
+       "id": "lsystem_dungeon",
+       "name": "L-System Dungeon"
+      },
+      {
+       "id": "fractal_lsystem_string",
+       "name": "L-System String Expansion"
+      },
+      {
+       "id": "branching_coral",
+       "name": "Branching Coral"
+      },
+      {
+       "id": "CityGenerator",
+       "name": "City Generator"
+      },
+      {
+       "id": "genetic_tree_sculptor",
+       "name": "Genetic Tree Sculptor"
+      }
+     ]
+    }
+   ]
+  },
+  "machinelearning": {
+   "bay_count": 1,
+   "bays": [
+    {
+     "name": "Curation_Bay_machinelearning_0",
+     "index": 0,
+     "title": "machinelearning — Bay 1 of 1",
+     "artifacts": [
+      {
+       "id": "learn_input_pair_stand",
+       "name": "Learn Input-Pair Stand"
+      }
+     ]
+    }
+   ]
+  },
+  "mosaicanalysis": {
+   "bay_count": 2,
+   "bays": [
+    {
+     "name": "Curation_Bay_mosaicanalysis_0",
+     "index": 0,
+     "title": "mosaicanalysis — Bay 1 of 2",
+     "artifacts": [
+      {
+       "id": "tiles_explained",
+       "name": "Tiles Explained"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_mosaicanalysis_1",
+     "index": 1,
+     "title": "mosaicanalysis — Bay 2 of 2",
+     "artifacts": [
+      {
+       "id": "pattern_tile_puzzle",
+       "name": "Pattern Tile Puzzle"
+      },
+      {
+       "id": "tessellation_lattice_demo",
+       "name": "Tessellation Lattice Demo"
+      },
+      {
+       "id": "wfc_tile_mosaic",
+       "name": "WFC Tile Mosaic"
+      },
+      {
+       "id": "lsystem_editor",
+       "name": "L-System Editor"
+      },
+      {
+       "id": "pattern_maker_station",
+       "name": "Pattern Maker Station"
+      }
+     ]
+    }
+   ]
+  },
+  "noise": {
+   "bay_count": 2,
+   "bays": [
+    {
+     "name": "Curation_Bay_noise_0",
+     "index": 0,
+     "title": "noise — Bay 1 of 2",
+     "artifacts": [
+      {
+       "id": "randompoint",
+       "name": "randompoint"
+      },
+      {
+       "id": "randompoints",
+       "name": "randompoints"
+      },
+      {
+       "id": "perlin_terrain_sculptor",
+       "name": "Perlin Terrain Sculptor"
+      },
+      {
+       "id": "perlin_noise_terrain",
+       "name": "Perlin Noise Terrain"
+      },
+      {
+       "id": "noisetorus",
+       "name": "noisetorus"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_noise_1",
+     "index": 1,
+     "title": "noise — Bay 2 of 2",
+     "artifacts": [
+      {
+       "id": "configurable_portal",
+       "name": "Configurable Portal"
+      }
+     ]
+    }
+   ]
+  },
+  "particles": {
+   "bay_count": 3,
+   "bays": [
+    {
+     "name": "Curation_Bay_particles_0",
+     "index": 0,
+     "title": "particles — Bay 1 of 3",
+     "artifacts": [
+      {
+       "id": "example_4_2_array_particles_vr",
+       "name": "Array Particles VR"
+      },
+      {
+       "id": "example_4_4_multiple_emitters_vr",
+       "name": "Multiple Emitters VR"
+      },
+      {
+       "id": "example_4_5_inheritance_polymorphism_vr",
+       "name": "Inheritance Polymorphism VR"
+      },
+      {
+       "id": "example_2_6_single_attractor_vr",
+       "name": "example_2_6_single_attractor_vr"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_particles_1",
+     "index": 1,
+     "title": "particles — Bay 2 of 3",
+     "artifacts": [
+      {
+       "id": "example_4_1_single_particle_vr",
+       "name": "Single Particle VR"
+      },
+      {
+       "id": "example_4_3_particle_emitter_vr",
+       "name": "Particle Emitter VR"
+      },
+      {
+       "id": "example_particle_body",
+       "name": "example_particle_body"
+      },
+      {
+       "id": "example_4_6_particle_repeller_vr",
+       "name": "Particle Repeller VR"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_particles_2",
+     "index": 2,
+     "title": "particles — Bay 3 of 3",
+     "artifacts": [
+      {
+       "id": "sub_emitters",
+       "name": "sub_emitters"
+      },
+      {
+       "id": "lifetime_curves",
+       "name": "lifetime_curves"
+      },
+      {
+       "id": "particle_campfire",
+       "name": "particle_campfire"
+      },
+      {
+       "id": "force_fields",
+       "name": "Force Fields"
+      }
+     ]
+    }
+   ]
+  },
+  "patterngeneration": {
+   "bay_count": 4,
+   "bays": [
+    {
+     "name": "Curation_Bay_patterngeneration_0",
+     "index": 0,
+     "title": "patterngeneration — Bay 1 of 4",
+     "artifacts": [
+      {
+       "id": "shader_01_shaping",
+       "name": "Shader 01 — Shaping Functions"
+      },
+      {
+       "id": "shader_03_shapes",
+       "name": "Shader 03 — Shapes"
+      },
+      {
+       "id": "shader_04_matrices",
+       "name": "Shader 04 — Matrices"
+      },
+      {
+       "id": "shader_06_random",
+       "name": "Shader 06 — Random"
+      },
+      {
+       "id": "shader_12_pinkextravaganza",
+       "name": "Shader 12 — Pink Extravaganza"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_patterngeneration_1",
+     "index": 1,
+     "title": "patterngeneration — Bay 2 of 4",
+     "artifacts": [
+      {
+       "id": "shader_10_reactiondiffusion",
+       "name": "Shader 10 — Reaction Diffusion"
+      },
+      {
+       "id": "shader_02_colors",
+       "name": "Shader 02 — Colors"
+      },
+      {
+       "id": "shader_11_queerrubber",
+       "name": "Shader 11 — Queer Rubber"
+      },
+      {
+       "id": "shader_08_cellularnoise",
+       "name": "Shader 08 — Cellular Noise"
+      },
+      {
+       "id": "shader_05_patterns",
+       "name": "Shader 05 — Patterns"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_patterngeneration_2",
+     "index": 2,
+     "title": "patterngeneration — Bay 3 of 4",
+     "artifacts": [
+      {
+       "id": "shader_07_noise",
+       "name": "Shader 07 — Noise"
+      },
+      {
+       "id": "shader_09_fbm",
+       "name": "Shader 09 — Fractal Brownian Motion"
+      },
+      {
+       "id": "koch_curve",
+       "name": "Koch Curve"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_patterngeneration_3",
+     "index": 3,
+     "title": "patterngeneration — Bay 4 of 4",
+     "artifacts": [
+      {
+       "id": "wall_pattern_gallery",
+       "name": "Wall Pattern Gallery"
+      },
+      {
+       "id": "shader_arch_gallery",
+       "name": "Shader Arch Gallery"
+      },
+      {
+       "id": "pattern_maker_station",
+       "name": "Pattern Maker Station"
+      },
+      {
+       "id": "markov_chains",
+       "name": "Markov Chains"
+      }
+     ]
+    }
+   ]
+  },
+  "physicssimulation": {
+   "bay_count": 5,
+   "bays": [
+    {
+     "name": "Curation_Bay_physicssimulation_0",
+     "index": 0,
+     "title": "physicssimulation — Bay 1 of 5",
+     "artifacts": [
+      {
+       "id": "newtons_laws",
+       "name": "Newton's Laws"
+      },
+      {
+       "id": "verlet_integration",
+       "name": "Verlet Integration"
+      },
+      {
+       "id": "rigid_body",
+       "name": "Rigid Body Dynamics"
+      },
+      {
+       "id": "constraints",
+       "name": "Constraints & Joints"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_physicssimulation_1",
+     "index": 1,
+     "title": "physicssimulation — Bay 2 of 5",
+     "artifacts": [
+      {
+       "id": "numerical_integration",
+       "name": "Numerical Integration Methods"
+      },
+      {
+       "id": "nbody_simulation",
+       "name": "N-Body Gravitational Simulation"
+      },
+      {
+       "id": "simulation_instability",
+       "name": "simulation_instability"
+      },
+      {
+       "id": "fem_simulation",
+       "name": "Finite Element Method"
+      },
+      {
+       "id": "collision_detection",
+       "name": "Collision Detection"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_physicssimulation_2",
+     "index": 2,
+     "title": "physicssimulation — Bay 3 of 5",
+     "artifacts": [
+      {
+       "id": "soft_bodies",
+       "name": "Soft Body Physics"
+      },
+      {
+       "id": "cloth_simulation",
+       "name": "Cloth Simulation"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_physicssimulation_3",
+     "index": 3,
+     "title": "physicssimulation — Bay 4 of 5",
+     "artifacts": [
+      {
+       "id": "force_fields",
+       "name": "Force Fields"
+      },
+      {
+       "id": "vector_fields",
+       "name": "Vector Fields"
+      },
+      {
+       "id": "fluid_simulation",
+       "name": "Fluid Simulation (SPH)"
+      },
+      {
+       "id": "magnetic_simulation",
+       "name": "Magnetic Field Simulation"
+      },
+      {
+       "id": "surreal_kinetic_sculpture",
+       "name": "Surreal Kinetic Sculpture"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_physicssimulation_4",
+     "index": 4,
+     "title": "physicssimulation — Bay 5 of 5",
+     "artifacts": [
+      {
+       "id": "lattice_gas_automata",
+       "name": "Lattice Gas Automata"
+      },
+      {
+       "id": "spring_mass_system",
+       "name": "Spring-Mass Network"
+      }
+     ]
+    }
+   ]
+  },
+  "pokemonstudio": {
+   "bay_count": 1,
+   "bays": [
+    {
+     "name": "Curation_Bay_pokemonstudio_0",
+     "index": 0,
+     "title": "pokemonstudio — Bay 1 of 1",
+     "artifacts": [
+      {
+       "id": "pokemon_studio",
+       "name": "Pokemon Studio"
+      }
+     ]
+    }
+   ]
+  },
+  "postfoundationscrisis": {
+   "bay_count": 4,
+   "bays": [
+    {
+     "name": "Curation_Bay_postfoundationscrisis_0",
+     "index": 0,
+     "title": "postfoundationscrisis — Bay 1 of 4",
+     "artifacts": [
+      {
+       "id": "excluded_class_visualizer",
+       "name": "Excluded Class Visualizer"
+      },
+      {
+       "id": "room_shape_demonstrator",
+       "name": "Room Shape Demonstrator"
+      },
+      {
+       "id": "merge_conflict_visualizer",
+       "name": "Merge Conflict Visualizer"
+      },
+      {
+       "id": "florensky_in_production",
+       "name": "Florensky in Production"
+      },
+      {
+       "id": "cap_theorem_walk",
+       "name": "CAP Theorem Walk"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_postfoundationscrisis_1",
+     "index": 1,
+     "title": "postfoundationscrisis — Bay 2 of 4",
+     "artifacts": [
+      {
+       "id": "ethical_design_clipboard",
+       "name": "Ethical Design Clipboard"
+      },
+      {
+       "id": "situated_sensor",
+       "name": "Situated Sensor"
+      },
+      {
+       "id": "locatable_knowledge_station",
+       "name": "Locatable Knowledge Station"
+      },
+      {
+       "id": "wiki_fragment_station",
+       "name": "Wiki Fragment Station"
+      },
+      {
+       "id": "peer_edit_ledger",
+       "name": "Peer Edit Ledger"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_postfoundationscrisis_2",
+     "index": 2,
+     "title": "postfoundationscrisis — Bay 3 of 4",
+     "artifacts": [
+      {
+       "id": "rhizome_cave_demo",
+       "name": "rhizome_cave_demo"
+      },
+      {
+       "id": "bias_visualizer",
+       "name": "Bias Visualizer"
+      },
+      {
+       "id": "MolecularDesigner",
+       "name": "Molecular Designer"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_postfoundationscrisis_3",
+     "index": 3,
+     "title": "postfoundationscrisis — Bay 4 of 4",
+     "artifacts": [
+      {
+       "id": "citation_graph_node",
+       "name": "Citation Graph Node"
+      },
+      {
+       "id": "edge_as_ground_capstone",
+       "name": "Edge as Ground Capstone"
+      }
+     ]
+    }
+   ]
+  },
+  "primitives": {
+   "bay_count": 16,
+   "bays": [
+    {
+     "name": "Curation_Bay_primitives_0",
+     "index": 0,
+     "title": "primitives — Bay 1 of 16",
+     "artifacts": [
+      {
+       "id": "modulor_man_demo",
+       "name": "modulor_man_demo"
+      },
+      {
+       "id": "line_builder_3d",
+       "name": "Line Builder 3D"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_primitives_1",
+     "index": 1,
+     "title": "primitives — Bay 2 of 16",
+     "artifacts": [
+      {
+       "id": "lightrod",
+       "name": "Light Rod"
+      },
+      {
+       "id": "draw_dot",
+       "name": "draw_dot"
+      },
+      {
+       "id": "line_demo",
+       "name": "line_demo"
+      },
+      {
+       "id": "CoordinateSystem3M",
+       "name": "CoordinateSystem3M"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_primitives_2",
+     "index": 2,
+     "title": "primitives — Bay 3 of 16",
+     "artifacts": [
+      {
+       "id": "dgrid",
+       "name": "DÃ¼rer Grid"
+      },
+      {
+       "id": "perspective_lines",
+       "name": "perspective_lines"
+      },
+      {
+       "id": "grid_lines",
+       "name": "grid_lines"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_primitives_3",
+     "index": 3,
+     "title": "primitives — Bay 4 of 16",
+     "artifacts": [
+      {
+       "id": "static_point",
+       "name": "Static Point"
+      },
+      {
+       "id": "interactive_point_origin",
+       "name": "1.0.1 Interactive Point with Origin Line"
+      },
+      {
+       "id": "grab_sphere_point_snap",
+       "name": "grab_sphere_point_snap"
+      },
+      {
+       "id": "sphere",
+       "name": "sphere"
+      },
+      {
+       "id": "laser_exploding_sphere",
+       "name": "Laser Exploding Sphere"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_primitives_4",
+     "index": 4,
+     "title": "primitives — Bay 5 of 16",
+     "artifacts": [
+      {
+       "id": "plus_line_puzzle",
+       "name": "Plus Line Puzzle"
+      },
+      {
+       "id": "parallel_line_puzzle",
+       "name": "Parallel Line Puzzle"
+      },
+      {
+       "id": "triangle_line_puzzle",
+       "name": "Triangle Line Puzzle"
+      },
+      {
+       "id": "quad_line_puzzle",
+       "name": "Quad Line Puzzle"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_primitives_5",
+     "index": 5,
+     "title": "primitives — Bay 6 of 16",
+     "artifacts": [
+      {
+       "id": "frame_counter_display",
+       "name": "frame_counter_display"
+      },
+      {
+       "id": "polyhedron_nets_cube",
+       "name": "polyhedron_nets_cube"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_primitives_6",
+     "index": 6,
+     "title": "primitives — Bay 7 of 16",
+     "artifacts": [
+      {
+       "id": "laser_measure",
+       "name": "laser_measure"
+      },
+      {
+       "id": "achilles_tortoise",
+       "name": "Achilles and the Tortoise"
+      },
+      {
+       "id": "folding_past",
+       "name": "Folding Past"
+      },
+      {
+       "id": "triangleprofiles",
+       "name": "1.2: A triangleprofilese"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_primitives_7",
+     "index": 7,
+     "title": "primitives — Bay 8 of 16",
+     "artifacts": [
+      {
+       "id": "draw_triangle_faces",
+       "name": "draw_triangle_faces"
+      },
+      {
+       "id": "truncatedtetrahedron",
+       "name": "truncatedtetrahedron"
+      },
+      {
+       "id": "quad",
+       "name": "quad"
+      },
+      {
+       "id": "origin",
+       "name": "Point Zero"
+      },
+      {
+       "id": "folded_strip",
+       "name": "1.2: folded_strip"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_primitives_8",
+     "index": 8,
+     "title": "primitives — Bay 9 of 16",
+     "artifacts": [
+      {
+       "id": "line",
+       "name": "1.1 A Line"
+      },
+      {
+       "id": "pyramid_edit",
+       "name": "pyramid_edit"
+      },
+      {
+       "id": "animatedcubebuilder",
+       "name": "animatedcubebuilder"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_primitives_9",
+     "index": 9,
+     "title": "primitives — Bay 10 of 16",
+     "artifacts": [
+      {
+       "id": "plus",
+       "name": "Plus"
+      },
+      {
+       "id": "script_runner",
+       "name": "Script Runner"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_primitives_10",
+     "index": 10,
+     "title": "primitives — Bay 11 of 16",
+     "artifacts": [
+      {
+       "id": "cube_scene",
+       "name": "Basic Cube Scene"
+      },
+      {
+       "id": "player_trace",
+       "name": "player_trace"
+      },
+      {
+       "id": "righttriangle",
+       "name": "righttriangle"
+      },
+      {
+       "id": "prism_block",
+       "name": "prism_block"
+      },
+      {
+       "id": "diamondtoruscollection",
+       "name": "diamondtoruscollection"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_primitives_11",
+     "index": 11,
+     "title": "primitives — Bay 12 of 16",
+     "artifacts": [
+      {
+       "id": "grab_octahedron",
+       "name": "grab_octahedron"
+      },
+      {
+       "id": "pyramidlong",
+       "name": "pyramidlong"
+      },
+      {
+       "id": "grab_trihedron",
+       "name": "grab_trihedron"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_primitives_12",
+     "index": 12,
+     "title": "primitives — Bay 13 of 16",
+     "artifacts": [
+      {
+       "id": "snap_tetrahedron_puzzle",
+       "name": "Snap Tetrahedron Puzzle"
+      },
+      {
+       "id": "snap_octahedron_puzzle",
+       "name": "Snap Octahedron Puzzle"
+      },
+      {
+       "id": "snap_pyramid_puzzle",
+       "name": "Snap Pyramid Puzzle"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_primitives_13",
+     "index": 13,
+     "title": "primitives — Bay 14 of 16",
+     "artifacts": [
+      {
+       "id": "sphere_high",
+       "name": "sphere_high"
+      },
+      {
+       "id": "sphere_mid",
+       "name": "sphere_mid"
+      },
+      {
+       "id": "sphere_low",
+       "name": "sphere_low"
+      },
+      {
+       "id": "torus_radials_rings",
+       "name": "Torus Radials Rings"
+      },
+      {
+       "id": "capsule_radials_rings",
+       "name": "Capsule Radials Rings"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_primitives_14",
+     "index": 14,
+     "title": "primitives — Bay 15 of 16",
+     "artifacts": [
+      {
+       "id": "star_primitive",
+       "name": "Star"
+      },
+      {
+       "id": "capsule",
+       "name": "capsule"
+      },
+      {
+       "id": "bigframe",
+       "name": "bigframe"
+      },
+      {
+       "id": "lshape",
+       "name": "L Shape"
+      },
+      {
+       "id": "hole_with_cones",
+       "name": "Hole With Cones"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_primitives_15",
+     "index": 15,
+     "title": "primitives — Bay 16 of 16",
+     "artifacts": [
+      {
+       "id": "roughrock",
+       "name": "roughrock"
+      },
+      {
+       "id": "pyramid",
+       "name": "pyramid"
+      }
+     ]
+    }
+   ]
+  },
+  "proceduralgeneration": {
+   "bay_count": 2,
+   "bays": [
+    {
+     "name": "Curation_Bay_proceduralgeneration_0",
+     "index": 0,
+     "title": "proceduralgeneration — Bay 1 of 2",
+     "artifacts": [
+      {
+       "id": "space_colonization_algorithm",
+       "name": "space_colonization_algorithm"
+      },
+      {
+       "id": "branching_growth_algorithm",
+       "name": "Branching Growth Algorithm"
+      },
+      {
+       "id": "maze_generation",
+       "name": "Maze Generation"
+      },
+      {
+       "id": "caverandomwalk",
+       "name": "caverandomwalk"
+      },
+      {
+       "id": "layered_membrane",
+       "name": "Layered Membrane"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_proceduralgeneration_1",
+     "index": 1,
+     "title": "proceduralgeneration — Bay 2 of 2",
+     "artifacts": [
+      {
+       "id": "seed_orb",
+       "name": "Seed Orb"
+      },
+      {
+       "id": "GeneticProgramming",
+       "name": "GeneticProgramming"
+      }
+     ]
+    }
+   ]
+  },
+  "proceduralgeneration_all": {
+   "bay_count": 10,
+   "bays": [
+    {
+     "name": "Curation_Bay_proceduralgeneration_all_0",
+     "index": 0,
+     "title": "proceduralgeneration_all — Bay 1 of 10",
+     "artifacts": [
+      {
+       "id": "caverandomwalk",
+       "name": "caverandomwalk"
+      },
+      {
+       "id": "layered_membrane",
+       "name": "Layered Membrane"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_proceduralgeneration_all_1",
+     "index": 1,
+     "title": "proceduralgeneration_all — Bay 2 of 10",
+     "artifacts": [
+      {
+       "id": "mc",
+       "name": "mc"
+      },
+      {
+       "id": "GeneticProgramming",
+       "name": "GeneticProgramming"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_proceduralgeneration_all_2",
+     "index": 2,
+     "title": "proceduralgeneration_all — Bay 3 of 10",
+     "artifacts": [
+      {
+       "id": "branching_growth_algorithm",
+       "name": "Branching Growth Algorithm"
+      },
+      {
+       "id": "space_colonization_algorithm",
+       "name": "space_colonization_algorithm"
+      },
+      {
+       "id": "tree_gen",
+       "name": "Tree Generator"
+      },
+      {
+       "id": "array_visualizer",
+       "name": "Array Visualizer"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_proceduralgeneration_all_3",
+     "index": 3,
+     "title": "proceduralgeneration_all — Bay 4 of 10",
+     "artifacts": [
+      {
+       "id": "lsystem_tree",
+       "name": "L-System Tree"
+      },
+      {
+       "id": "fibonacci_sequences",
+       "name": "Fibonacci Sequences"
+      },
+      {
+       "id": "context_free_grammars",
+       "name": "Context-Free Grammars"
+      },
+      {
+       "id": "markov_chains",
+       "name": "Markov Chains"
+      },
+      {
+       "id": "markov_chains_tree",
+       "name": "Markov Chains Tree"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_proceduralgeneration_all_4",
+     "index": 4,
+     "title": "proceduralgeneration_all — Bay 5 of 10",
+     "artifacts": [
+      {
+       "id": "portal",
+       "name": "Portal"
+      },
+      {
+       "id": "interactable_demo",
+       "name": "interactable_demo"
+      },
+      {
+       "id": "voronoi_space",
+       "name": "voronoi_space"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_proceduralgeneration_all_5",
+     "index": 5,
+     "title": "proceduralgeneration_all — Bay 6 of 10",
+     "artifacts": [
+      {
+       "id": "reaction_diffusion",
+       "name": "Reaction Diffusion"
+      },
+      {
+       "id": "rule_30_110",
+       "name": "Rule 30/110"
+      },
+      {
+       "id": "turing_pattern_generator",
+       "name": "Turing Pattern Generator"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_proceduralgeneration_all_6",
+     "index": 6,
+     "title": "proceduralgeneration_all — Bay 7 of 10",
+     "artifacts": [
+      {
+       "id": "boolean_patterns_demo",
+       "name": "boolean_patterns_demo"
+      },
+      {
+       "id": "grab_stick",
+       "name": "grab_stick"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_proceduralgeneration_all_7",
+     "index": 7,
+     "title": "proceduralgeneration_all — Bay 8 of 10",
+     "artifacts": [
+      {
+       "id": "voronoi_grid_3d",
+       "name": "voronoi_grid_3d"
+      },
+      {
+       "id": "delaunay_triangulation_3d_cell",
+       "name": "delaunay_triangulation_3d_cell"
+      },
+      {
+       "id": "poisson_disk_sampling_3d",
+       "name": "poisson_disk_sampling_3d"
+      },
+      {
+       "id": "voronoi_diagram_3d",
+       "name": "voronoi_diagram_3d"
+      },
+      {
+       "id": "cave_explorer_3d_ui",
+       "name": "cave_explorer_3d_ui"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_proceduralgeneration_all_8",
+     "index": 8,
+     "title": "proceduralgeneration_all — Bay 9 of 10",
+     "artifacts": [
+      {
+       "id": "maze_generation",
+       "name": "Maze Generation"
+      },
+      {
+       "id": "marching_cubes_sculpt_vr",
+       "name": "Marching Cubes VR Sculpt"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_proceduralgeneration_all_9",
+     "index": 9,
+     "title": "proceduralgeneration_all — Bay 10 of 10",
+     "artifacts": [
+      {
+       "id": "crystal_random_walk_demo",
+       "name": "Crystal Random Walk Demo"
+      },
+      {
+       "id": "marchingcubes_voxel_noise_demo",
+       "name": "Marching Cubes Voxel Noise"
+      }
+     ]
+    }
+   ]
+  },
+  "qfeplaboratory": {
+   "bay_count": 8,
+   "bays": [
+    {
+     "name": "Curation_Bay_qfeplaboratory_0",
+     "index": 0,
+     "title": "qfeplaboratory — Bay 1 of 8",
+     "artifacts": [
+      {
+       "id": "snap_cube_puzzle",
+       "name": "Snap Cube Puzzle"
+      },
+      {
+       "id": "snap_tetra_puzzle",
+       "name": "Snap Tetra Puzzle"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_qfeplaboratory_1",
+     "index": 1,
+     "title": "qfeplaboratory — Bay 2 of 8",
+     "artifacts": [
+      {
+       "id": "grab_sphere_F",
+       "name": "F Term Sphere"
+      },
+      {
+       "id": "grab_sphere_E",
+       "name": "E Term Sphere"
+      },
+      {
+       "id": "grab_sphere_lambda",
+       "name": "Lambda Term Sphere"
+      },
+      {
+       "id": "grab_sphere_phi",
+       "name": "Phi Term Sphere"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_qfeplaboratory_2",
+     "index": 2,
+     "title": "qfeplaboratory — Bay 3 of 8",
+     "artifacts": [
+      {
+       "id": "qfep_term_compass",
+       "name": "QFEP Term Compass"
+      },
+      {
+       "id": "qfep_formula_3d",
+       "name": "QFEP Formula 3D"
+      },
+      {
+       "id": "lambda_slider",
+       "name": "Lambda Slider"
+      },
+      {
+       "id": "phi_slider",
+       "name": "Phi Slider"
+      },
+      {
+       "id": "bifurcation_walkway",
+       "name": "Bifurcation Walkway"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_qfeplaboratory_3",
+     "index": 3,
+     "title": "qfeplaboratory — Bay 4 of 8",
+     "artifacts": [
+      {
+       "id": "particle_chaos",
+       "name": "Particle Chaos"
+      },
+      {
+       "id": "chaos_particles",
+       "name": "Chaos Particles"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_qfeplaboratory_4",
+     "index": 4,
+     "title": "qfeplaboratory — Bay 5 of 8",
+     "artifacts": [
+      {
+       "id": "crystal_cluster",
+       "name": "Crystal Cluster"
+      },
+      {
+       "id": "dissolving_form",
+       "name": "Dissolving Form"
+      },
+      {
+       "id": "ordered_grid",
+       "name": "Ordered Grid"
+      },
+      {
+       "id": "random_cubes",
+       "name": "Random Cubes"
+      },
+      {
+       "id": "reactive_particles",
+       "name": "Reactive Particles"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_qfeplaboratory_5",
+     "index": 5,
+     "title": "qfeplaboratory — Bay 6 of 8",
+     "artifacts": [
+      {
+       "id": "crystal_formation",
+       "name": "Crystal Formation"
+      },
+      {
+       "id": "preserved_pattern",
+       "name": "Preserved Pattern"
+      },
+      {
+       "id": "transforming_pattern",
+       "name": "Transforming Pattern"
+      },
+      {
+       "id": "turing_pattern",
+       "name": "Turing Pattern"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_qfeplaboratory_6",
+     "index": 6,
+     "title": "qfeplaboratory — Bay 7 of 8",
+     "artifacts": [
+      {
+       "id": "complexity_pattern",
+       "name": "Complexity Pattern"
+      },
+      {
+       "id": "edge_particles",
+       "name": "Edge Particles"
+      },
+      {
+       "id": "edge_core",
+       "name": "Edge Core"
+      },
+      {
+       "id": "emergence_zone",
+       "name": "Emergence Zone"
+      },
+      {
+       "id": "qfep_reactor",
+       "name": "QFEP Reactor"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_qfeplaboratory_7",
+     "index": 7,
+     "title": "qfeplaboratory — Bay 8 of 8",
+     "artifacts": [
+      {
+       "id": "rigid_sculpture",
+       "name": "Rigid Sculpture"
+      },
+      {
+       "id": "fluid_form",
+       "name": "Fluid Form"
+      },
+      {
+       "id": "queer_morphology_specimen",
+       "name": "Queer Morphology Specimen"
+      }
+     ]
+    }
+   ]
+  },
+  "randomness": {
+   "bay_count": 12,
+   "bays": [
+    {
+     "name": "Curation_Bay_randomness_0",
+     "index": 0,
+     "title": "randomness — Bay 1 of 12",
+     "artifacts": [
+      {
+       "id": "random_object_spawner",
+       "name": "Random Object Spawner"
+      },
+      {
+       "id": "clipboard",
+       "name": "Clipboard"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_randomness_1",
+     "index": 1,
+     "title": "randomness — Bay 2 of 12",
+     "artifacts": [
+      {
+       "id": "slot_machine",
+       "name": "Slot Machine"
+      },
+      {
+       "id": "prng_crank_machine",
+       "name": "PRNG Crank Machine"
+      },
+      {
+       "id": "dice_throw",
+       "name": "Dice Throw"
+      },
+      {
+       "id": "coin_toss",
+       "name": "Coin Toss"
+      },
+      {
+       "id": "galton_board",
+       "name": "Galton Board"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_randomness_2",
+     "index": 2,
+     "title": "randomness — Bay 3 of 12",
+     "artifacts": [
+      {
+       "id": "remove_random",
+       "name": "Random Destructor"
+      },
+      {
+       "id": "Random_Rotate_Random_XYZ",
+       "name": "Random Rotate XYZ"
+      },
+      {
+       "id": "random_transformations_geometric",
+       "name": "Random Transformations - Geometric"
+      },
+      {
+       "id": "trng_vs_prng",
+       "name": "TRNG vs PRNG"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_randomness_3",
+     "index": 3,
+     "title": "randomness — Bay 4 of 12",
+     "artifacts": [
+      {
+       "id": "random_number_book_page_collection",
+       "name": "Random Number Book — Live Cascade"
+      },
+      {
+       "id": "random_number_book_page_1955",
+       "name": "Random Number Book Page 1955"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_randomness_4",
+     "index": 4,
+     "title": "randomness — Bay 5 of 12",
+     "artifacts": [
+      {
+       "id": "gaussian_random",
+       "name": "Gaussian Generator"
+      },
+      {
+       "id": "distribution_sampler",
+       "name": "Distribution Sampler"
+      },
+      {
+       "id": "random_butterflies",
+       "name": "Random Butterflies"
+      },
+      {
+       "id": "random_decay_multimesh",
+       "name": "Random Decay MultiMesh"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_randomness_5",
+     "index": 5,
+     "title": "randomness — Bay 6 of 12",
+     "artifacts": [
+      {
+       "id": "random_walk_terrarium",
+       "name": "Random Walk Terrarium"
+      },
+      {
+       "id": "random_walk_leash",
+       "name": "Random Walk Leash"
+      },
+      {
+       "id": "random_walk_128",
+       "name": "Random Walk 128x128"
+      },
+      {
+       "id": "pixel_cloud",
+       "name": "pixel_cloud"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_randomness_6",
+     "index": 6,
+     "title": "randomness — Bay 7 of 12",
+     "artifacts": [
+      {
+       "id": "clipboard",
+       "name": "Clipboard"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_randomness_7",
+     "index": 7,
+     "title": "randomness — Bay 8 of 12",
+     "artifacts": [
+      {
+       "id": "pickup_cube_placer",
+       "name": "pickup_cube_placer"
+      },
+      {
+       "id": "random_edge_profile",
+       "name": "Random Edge Profile"
+      },
+      {
+       "id": "pipe_dream",
+       "name": "Pipe Dream"
+      },
+      {
+       "id": "sculpt_one",
+       "name": "Sculpt One"
+      },
+      {
+       "id": "extreme_randomness",
+       "name": "Extreme Randomness"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_randomness_8",
+     "index": 8,
+     "title": "randomness — Bay 9 of 12",
+     "artifacts": [
+      {
+       "id": "entropy_jar",
+       "name": "Entropy Jar"
+      },
+      {
+       "id": "clipboard",
+       "name": "Clipboard"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_randomness_9",
+     "index": 9,
+     "title": "randomness — Bay 10 of 12",
+     "artifacts": [
+      {
+       "id": "kaleidocycle_enemy",
+       "name": "Kaleidocycle"
+      },
+      {
+       "id": "clipboard",
+       "name": "Clipboard"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_randomness_10",
+     "index": 10,
+     "title": "randomness — Bay 11 of 12",
+     "artifacts": [
+      {
+       "id": "r_c",
+       "name": "Random Cycle Cube"
+      },
+      {
+       "id": "pollock_painting_in_3d",
+       "name": "Pollock Painting in 3D"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_randomness_11",
+     "index": 11,
+     "title": "randomness — Bay 12 of 12",
+     "artifacts": [
+      {
+       "id": "miura_crawler",
+       "name": "Miura Crawler"
+      },
+      {
+       "id": "kresling_spire",
+       "name": "Kresling Spire"
+      },
+      {
+       "id": "scissor_stalker",
+       "name": "Scissor Stalker"
+      },
+      {
+       "id": "origami_droideka",
+       "name": "Origami Droideka"
+      },
+      {
+       "id": "armadillo_eggling",
+       "name": "Armadillo Eggling"
+      }
+     ]
+    }
+   ]
+  },
+  "recursiveemergence": {
+   "bay_count": 3,
+   "bays": [
+    {
+     "name": "Curation_Bay_recursiveemergence_0",
+     "index": 0,
+     "title": "recursiveemergence — Bay 1 of 3",
+     "artifacts": [
+      {
+       "id": "cellular_automata_grabable",
+       "name": "Cellular Automata Grabable"
+      },
+      {
+       "id": "cellular_automata_3d",
+       "name": "Cellular Automata 3D"
+      },
+      {
+       "id": "rule_30_110_gravity",
+       "name": "Rule 30/110 Gravity"
+      },
+      {
+       "id": "cellular_automata_3d_stacked",
+       "name": "Cellular Automata 3D Stacked"
+      },
+      {
+       "id": "cellular_automata_2d",
+       "name": "Cellular Automata 2D"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_recursiveemergence_1",
+     "index": 1,
+     "title": "recursiveemergence — Bay 2 of 3",
+     "artifacts": [
+      {
+       "id": "lattice_gas_automata",
+       "name": "Lattice Gas Automata"
+      },
+      {
+       "id": "evolutionary_algorithms",
+       "name": "Evolutionary Algorithms"
+      },
+      {
+       "id": "sierpinski_pyramid",
+       "name": "Sierpinski Pyramid"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_recursiveemergence_2",
+     "index": 2,
+     "title": "recursiveemergence — Bay 3 of 3",
+     "artifacts": [
+      {
+       "id": "fibonacci_sequences",
+       "name": "Fibonacci Sequences"
+      },
+      {
+       "id": "koch_curve",
+       "name": "Koch Curve"
+      }
+     ]
+    }
+   ]
+  },
+  "softbodies": {
+   "bay_count": 5,
+   "bays": [
+    {
+     "name": "Curation_Bay_softbodies_0",
+     "index": 0,
+     "title": "softbodies — Bay 1 of 5",
+     "artifacts": [
+      {
+       "id": "cloth_straps",
+       "name": "Cloth Straps"
+      },
+      {
+       "id": "flagdancer",
+       "name": "Flag Dancer"
+      },
+      {
+       "id": "breathing_room",
+       "name": "Breathing Room"
+      },
+      {
+       "id": "revolving_joy_ride",
+       "name": "Revolving Joy Ride"
+      },
+      {
+       "id": "soft_mushroom",
+       "name": "soft_mushroom"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_softbodies_1",
+     "index": 1,
+     "title": "softbodies — Bay 2 of 5",
+     "artifacts": [
+      {
+       "id": "jelly_cube",
+       "name": "Jelly Cube"
+      },
+      {
+       "id": "rounded_softbody_test",
+       "name": "Rounded SoftBody — Strain Energy"
+      },
+      {
+       "id": "softbody_gallery_part2",
+       "name": "SoftBody Gallery Part 2"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_softbodies_2",
+     "index": 2,
+     "title": "softbodies — Bay 3 of 5",
+     "artifacts": [
+      {
+       "id": "gridagent",
+       "name": "Grid Agent"
+      },
+      {
+       "id": "softmill",
+       "name": "softmill"
+      },
+      {
+       "id": "softstopscene",
+       "name": "softstopscene"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_softbodies_3",
+     "index": 3,
+     "title": "softbodies — Bay 4 of 5",
+     "artifacts": [
+      {
+       "id": "pick_up_cube",
+       "name": "Pick Up Cube"
+      },
+      {
+       "id": "flex_cloth_pad",
+       "name": "Flex Cloth Pad"
+      },
+      {
+       "id": "grab_long_stick",
+       "name": "grab_long_stick"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_softbodies_4",
+     "index": 4,
+     "title": "softbodies — Bay 5 of 5",
+     "artifacts": [
+      {
+       "id": "branching_growth_algorithm",
+       "name": "Branching Growth Algorithm"
+      },
+      {
+       "id": "reaction_diffusion",
+       "name": "Reaction Diffusion"
+      },
+      {
+       "id": "turing_pattern_generator",
+       "name": "Turing Pattern Generator"
+      },
+      {
+       "id": "radiolaria",
+       "name": "Radiolaria"
+      },
+      {
+       "id": "entropy_morphogenesis",
+       "name": "entropy_morphogenesis"
+      }
+     ]
+    }
+   ]
+  },
+  "spatial_partitioning": {
+   "bay_count": 1,
+   "bays": [
+    {
+     "name": "Curation_Bay_spatial_partitioning_0",
+     "index": 0,
+     "title": "spatial_partitioning — Bay 1 of 1",
+     "artifacts": [
+      {
+       "id": "voronoi_diagram_3d",
+       "name": "voronoi_diagram_3d"
+      },
+      {
+       "id": "delaunay_triangulation_3d_cell",
+       "name": "delaunay_triangulation_3d_cell"
+      },
+      {
+       "id": "poisson_disk_sampling_3d",
+       "name": "poisson_disk_sampling_3d"
+      }
+     ]
+    }
+   ]
+  },
+  "structure": {
+   "bay_count": 3,
+   "bays": [
+    {
+     "name": "Curation_Bay_structure_0",
+     "index": 0,
+     "title": "structure — Bay 1 of 3",
+     "artifacts": [
+      {
+       "id": "light_sphere",
+       "name": "light_sphere"
+      },
+      {
+       "id": "animated_cube",
+       "name": "Animated Cube"
+      },
+      {
+       "id": "cube_scene",
+       "name": "Basic Cube Scene"
+      },
+      {
+       "id": "probability_sphere",
+       "name": "Probability Sphere"
+      },
+      {
+       "id": "noisetorus",
+       "name": "noisetorus"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_structure_1",
+     "index": 1,
+     "title": "structure — Bay 2 of 3",
+     "artifacts": [
+      {
+       "id": "spectrum_display",
+       "name": "Frequency Spectrum Analyzer"
+      },
+      {
+       "id": "unit_circle",
+       "name": "Unit Circle"
+      },
+      {
+       "id": "fourier_transform",
+       "name": "Fourier Transform"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_structure_2",
+     "index": 2,
+     "title": "structure — Bay 3 of 3",
+     "artifacts": [
+      {
+       "id": "crystal_ball",
+       "name": "Crystal Ball"
+      },
+      {
+       "id": "homagetothesquare",
+       "name": "homagetothesquare"
+      }
+     ]
+    }
+   ]
+  },
+  "swarmintelligence": {
+   "bay_count": 2,
+   "bays": [
+    {
+     "name": "Curation_Bay_swarmintelligence_0",
+     "index": 0,
+     "title": "swarmintelligence — Bay 1 of 2",
+     "artifacts": [
+      {
+       "id": "ant_colony_optimization",
+       "name": "Ant Colony Optimization"
+      },
+      {
+       "id": "stigmergy_grid",
+       "name": "Stigmergy Grid"
+      },
+      {
+       "id": "boids_aquarium",
+       "name": "Boids Aquarium"
+      },
+      {
+       "id": "particle_swarm_optimization",
+       "name": "Particle Swarm Optimization"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_swarmintelligence_1",
+     "index": 1,
+     "title": "swarmintelligence — Bay 2 of 2",
+     "artifacts": [
+      {
+       "id": "boid_flocking",
+       "name": "Boid Flocking"
+      },
+      {
+       "id": "ecosystem_simulation",
+       "name": "Ecosystem Simulation"
+      },
+      {
+       "id": "boids_2d_in_3d",
+       "name": "boids_2d_in_3d"
+      }
+     ]
+    }
+   ]
+  },
+  "transformation": {
+   "bay_count": 5,
+   "bays": [
+    {
+     "name": "Curation_Bay_transformation_0",
+     "index": 0,
+     "title": "transformation — Bay 1 of 5",
+     "artifacts": [
+      {
+       "id": "pick_up_cube",
+       "name": "Pick Up Cube"
+      },
+      {
+       "id": "pickup_gate",
+       "name": "Pickup Gate"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_transformation_1",
+     "index": 1,
+     "title": "transformation — Bay 2 of 5",
+     "artifacts": [
+      {
+       "id": "y_translation_cube",
+       "name": "Y-Translation Cube"
+      },
+      {
+       "id": "x_translation_cube",
+       "name": "X-Translation Cube"
+      },
+      {
+       "id": "z_translation_cube",
+       "name": "Z-Translation Cube"
+      },
+      {
+       "id": "translation_cube_demo",
+       "name": "Translation Cube Demo"
+      },
+      {
+       "id": "toruscylinder",
+       "name": "Torus Cylinder"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_transformation_2",
+     "index": 2,
+     "title": "transformation — Bay 3 of 5",
+     "artifacts": [
+      {
+       "id": "balance_puzzle",
+       "name": "Balance Puzzle"
+      },
+      {
+       "id": "chair_assembly_puzzle",
+       "name": "Chair Assembly Puzzle"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_transformation_3",
+     "index": 3,
+     "title": "transformation — Bay 4 of 5",
+     "artifacts": [
+      {
+       "id": "player_trace",
+       "name": "player_trace"
+      },
+      {
+       "id": "cube_scene",
+       "name": "Basic Cube Scene"
+      },
+      {
+       "id": "righttriangle",
+       "name": "righttriangle"
+      },
+      {
+       "id": "scale_me",
+       "name": "scale_me"
+      },
+      {
+       "id": "prism_block",
+       "name": "prism_block"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_transformation_4",
+     "index": 4,
+     "title": "transformation — Bay 5 of 5",
+     "artifacts": [
+      {
+       "id": "rotate_grid_cubes",
+       "name": "Rotate Grid Cubes"
+      },
+      {
+       "id": "boolean_tunnel",
+       "name": "Boolean Tunnel"
+      }
+     ]
+    }
+   ]
+  },
+  "wavefunctions": {
+   "bay_count": 21,
+   "bays": [
+    {
+     "name": "Curation_Bay_wavefunctions_0",
+     "index": 0,
+     "title": "wavefunctions — Bay 1 of 21",
+     "artifacts": [
+      {
+       "id": "cube_scene",
+       "name": "Basic Cube Scene"
+      },
+      {
+       "id": "pick_up_cube",
+       "name": "Pick Up Cube"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_wavefunctions_1",
+     "index": 1,
+     "title": "wavefunctions — Bay 2 of 21",
+     "artifacts": [
+      {
+       "id": "pickup_cube_rotating",
+       "name": "Rotating Pickup Cube"
+      },
+      {
+       "id": "pickup_cube_static",
+       "name": "Static Pickup Cube"
+      },
+      {
+       "id": "pickup_cube_transforming",
+       "name": "Transforming Pickup Cube"
+      },
+      {
+       "id": "rotating_cube",
+       "name": "Rotating Cube"
+      },
+      {
+       "id": "transformation_cube",
+       "name": "transformation_cube"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_wavefunctions_2",
+     "index": 2,
+     "title": "wavefunctions — Bay 3 of 21",
+     "artifacts": [
+      {
+       "id": "oscillation_controlled_cube",
+       "name": "Oscillation Controlled Cube"
+      },
+      {
+       "id": "rotating_cube_demo",
+       "name": "Rotating Cube Demo"
+      },
+      {
+       "id": "y_oscillation_cube",
+       "name": "Y-Oscillation Cube"
+      },
+      {
+       "id": "holographicdisplay",
+       "name": "Holographic Display"
+      },
+      {
+       "id": "rotatescalecubes",
+       "name": "Rotate Scale Cubes"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_wavefunctions_3",
+     "index": 3,
+     "title": "wavefunctions — Bay 4 of 21",
+     "artifacts": [
+      {
+       "id": "draw_dot_time_domain",
+       "name": "draw_dot_time_domain"
+      },
+      {
+       "id": "sine_wall_explanation",
+       "name": "Sine Wall Explanation"
+      },
+      {
+       "id": "sine_space_explanation",
+       "name": "Sine Space Explanation"
+      },
+      {
+       "id": "sine_space",
+       "name": "Sine Space"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_wavefunctions_4",
+     "index": 4,
+     "title": "wavefunctions — Bay 5 of 21",
+     "artifacts": [
+      {
+       "id": "mario_cube_time_trace",
+       "name": "Mario Cube Time Trace"
+      },
+      {
+       "id": "AudioContr",
+       "name": "AudioContr"
+      },
+      {
+       "id": "interactable_demo",
+       "name": "interactable_demo"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_wavefunctions_5",
+     "index": 5,
+     "title": "wavefunctions — Bay 6 of 21",
+     "artifacts": [
+      {
+       "id": "ElphabaDress",
+       "name": "Elphaba Dress"
+      },
+      {
+       "id": "BigPipeSystem",
+       "name": "Big Pipe System"
+      },
+      {
+       "id": "ruth_asawa_sculpture",
+       "name": "Ruth Asawa Sculpture"
+      },
+      {
+       "id": "cable_builder",
+       "name": "Cable Builder"
+      },
+      {
+       "id": "SimpleOscillatingBridge",
+       "name": "Simple Oscillating Bridge"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_wavefunctions_6",
+     "index": 6,
+     "title": "wavefunctions — Bay 7 of 21",
+     "artifacts": [
+      {
+       "id": "PendulumWave",
+       "name": "PendulumWave"
+      },
+      {
+       "id": "sine_wall_corridor",
+       "name": "Sine Wall Corridor"
+      },
+      {
+       "id": "wave_propagation_3d",
+       "name": "3D Wave Propagation"
+      },
+      {
+       "id": "bernini_columns",
+       "name": "Bernini Columns"
+      },
+      {
+       "id": "sine_cylinder_staircase",
+       "name": "sine_cylinder_staircase"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_wavefunctions_7",
+     "index": 7,
+     "title": "wavefunctions — Bay 8 of 21",
+     "artifacts": [
+      {
+       "id": "harmonic_distance_table",
+       "name": "Harmonic Distance Table"
+      },
+      {
+       "id": "timbre_sculptor",
+       "name": "Timbre Sculptor"
+      },
+      {
+       "id": "oscilloscope",
+       "name": "Oscilloscope"
+      },
+      {
+       "id": "colorballs",
+       "name": "colorballs"
+      },
+      {
+       "id": "WavePaintings",
+       "name": "Wave Paintings"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_wavefunctions_8",
+     "index": 8,
+     "title": "wavefunctions — Bay 9 of 21",
+     "artifacts": [
+      {
+       "id": "GlassRack",
+       "name": "Glass Rack"
+      },
+      {
+       "id": "seismograph",
+       "name": "seismograph"
+      },
+      {
+       "id": "OscillationCurve",
+       "name": "OscillationCurve"
+      },
+      {
+       "id": "hallway_scene",
+       "name": "hallway_scene"
+      },
+      {
+       "id": "double_helix_scene",
+       "name": "double_helix_scene"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_wavefunctions_9",
+     "index": 9,
+     "title": "wavefunctions — Bay 10 of 21",
+     "artifacts": [
+      {
+       "id": "vowel_sound_board",
+       "name": "vowel_sound_board"
+      },
+      {
+       "id": "audio_catalog_tablet",
+       "name": "Audio Catalog Tablet"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_wavefunctions_10",
+     "index": 10,
+     "title": "wavefunctions — Bay 11 of 21",
+     "artifacts": [
+      {
+       "id": "control_pendulum",
+       "name": "Control Pendulum"
+      },
+      {
+       "id": "additive_wave_demo",
+       "name": "Additive Wave Demo"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_wavefunctions_11",
+     "index": 11,
+     "title": "wavefunctions — Bay 12 of 21",
+     "artifacts": [
+      {
+       "id": "Rack303Acid",
+       "name": "303 Acid Rack"
+      },
+      {
+       "id": "RackDX7Piano",
+       "name": "DX7 Piano Rack"
+      },
+      {
+       "id": "RackMoogBass",
+       "name": "Moog Bass Rack"
+      },
+      {
+       "id": "RackAmbientDrone",
+       "name": "Ambient Drone Rack"
+      },
+      {
+       "id": "resonating_metallophone",
+       "name": "Resonating Metallophone"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_wavefunctions_12",
+     "index": 12,
+     "title": "wavefunctions — Bay 13 of 21",
+     "artifacts": [
+      {
+       "id": "MarioSoundController",
+       "name": "MarioSoundController"
+      },
+      {
+       "id": "mario_test_sound_ui",
+       "name": "mario_test_sound_ui"
+      },
+      {
+       "id": "SoundscapeRadioRack",
+       "name": "SoundscapeRadioRack"
+      },
+      {
+       "id": "chladni_plate",
+       "name": "Chladni Plate"
+      },
+      {
+       "id": "SphericalHarmonics",
+       "name": "Spherical Harmonics"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_wavefunctions_13",
+     "index": 13,
+     "title": "wavefunctions — Bay 14 of 21",
+     "artifacts": [
+      {
+       "id": "MelodyChaser3D",
+       "name": "MelodyChaser3D"
+      },
+      {
+       "id": "SystemsMusicTest",
+       "name": "Systems Music Test"
+      },
+      {
+       "id": "air_music_display_case",
+       "name": "Air Music Display Case"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_wavefunctions_14",
+     "index": 14,
+     "title": "wavefunctions — Bay 15 of 21",
+     "artifacts": [
+      {
+       "id": "TrigWalkingPath",
+       "name": "TrigWalkingPath"
+      },
+      {
+       "id": "atmosphericmonitoring",
+       "name": "Atmospheric Monitoring Station"
+      },
+      {
+       "id": "lab_table",
+       "name": "Lab Table"
+      },
+      {
+       "id": "unit_circle_advanced",
+       "name": "Advanced Unit Circle"
+      },
+      {
+       "id": "UnitCircleTrig",
+       "name": "UnitCircleTrig"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_wavefunctions_15",
+     "index": 15,
+     "title": "wavefunctions — Bay 16 of 21",
+     "artifacts": [
+      {
+       "id": "VRAudioMonitor",
+       "name": "VR Audio Monitor"
+      },
+      {
+       "id": "RackSineBasic",
+       "name": "Sine Wave Rack"
+      },
+      {
+       "id": "electronicscales",
+       "name": "Electronic Scales"
+      },
+      {
+       "id": "multimeter",
+       "name": "Multimeter"
+      },
+      {
+       "id": "dual_display_test",
+       "name": "dual_display_test"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_wavefunctions_16",
+     "index": 16,
+     "title": "wavefunctions — Bay 17 of 21",
+     "artifacts": [
+      {
+       "id": "spring_demo",
+       "name": "Spring Demo"
+      },
+      {
+       "id": "chord_tension_spring",
+       "name": "Chord Tension Spring"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_wavefunctions_17",
+     "index": 17,
+     "title": "wavefunctions — Bay 18 of 21",
+     "artifacts": [
+      {
+       "id": "ibomagneticresonator",
+       "name": "ibomagneticresonator"
+      },
+      {
+       "id": "DualBallFMController",
+       "name": "Dual Ball FM Synth"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_wavefunctions_18",
+     "index": 18,
+     "title": "wavefunctions — Bay 19 of 21",
+     "artifacts": [
+      {
+       "id": "lissajous_curves",
+       "name": "LissajousCurves"
+      },
+      {
+       "id": "math_objects",
+       "name": "Mathematical Objects"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_wavefunctions_19",
+     "index": 19,
+     "title": "wavefunctions — Bay 20 of 21",
+     "artifacts": [
+      {
+       "id": "dna_specimen",
+       "name": "DNA Specimen"
+      },
+      {
+       "id": "petri_dish_worms",
+       "name": "Petri Dish Worms"
+      }
+     ]
+    },
+    {
+     "name": "Curation_Bay_wavefunctions_20",
+     "index": 20,
+     "title": "wavefunctions — Bay 21 of 21",
+     "artifacts": [
+      {
+       "id": "chemicalapparatus",
+       "name": "Chemical Apparatus"
+      },
+      {
+       "id": "samplevialrack",
+       "name": "Sample Vial Rack"
+      },
+      {
+       "id": "microscope",
+       "name": "Microscope"
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "total_bays": 203,
+ "sequence_count": 44
+}
