@@ -391,10 +391,30 @@ func _rebuild_actions() -> void:
 
 func _actions_for(id: String) -> Array:
 	match id:
+		"pathfind":
+			return [
+				{"t": "CARVE -> connect stranded", "f": "carve", "col": Color(0.45, 0.85, 0.55)},
+				{"t": "Refresh", "f": "refresh"},
+			]
 		"artifacts":
 			return [
 				{"t": "AUTO-ORGANIZE (preview)", "f": "organize", "col": Color(0.45, 0.85, 0.55)},
 				{"t": "APPLY -> move artifacts", "f": "apply", "col": Color(0.95, 0.7, 0.2)},
+				{"t": "Refresh", "f": "refresh"},
+			]
+		"grid":
+			return [
+				{"t": "FILL voids -> floor", "f": "fill", "col": Color(0.45, 0.85, 0.55)},
+				{"t": "Refresh", "f": "refresh"},
+			]
+		"gameplay":
+			return [
+				{"t": "ADD exit teleporter", "f": "teleport", "col": Color(0.72, 0.45, 0.95)},
+				{"t": "Refresh", "f": "refresh"},
+			]
+		"graph":
+			return [
+				{"t": "RELAX -> cluster by concept", "f": "relax", "col": Color(0.45, 0.7, 0.95)},
 				{"t": "Refresh", "f": "refresh"},
 			]
 		_:
@@ -418,6 +438,14 @@ func _do_action(fn: String) -> void:
 			if _organized.is_empty():
 				_auto_organize_artifacts()
 			_apply_artifacts()
+		"carve":
+			_pathfind_carve()
+		"fill":
+			_grid_fill_voids()
+		"teleport":
+			_gameplay_add_teleporter()
+		"relax":
+			_graph_relax()
 
 
 # ── ONTOLOGY GRAPH layer: concept-distance edges in 3D + spatial↔conceptual fidelity ──
@@ -956,3 +984,186 @@ func _apply_artifacts() -> void:
 	_organized.clear()
 	_refresh()
 	_toast("applied — %d artifacts moved · press W in the editor to save" % done)
+
+
+# ── GRID tool: fill every void cell up to floor (solid walkable floor) ──
+func _grid_fill_voids() -> void:
+	if _structure == null or not _structure.has_method("set_height_at"):
+		_toast("structure not editable here")
+		return
+	if _editor.has_method("_push_undo"):
+		_editor._push_undo()
+	var filled := 0
+	for z in _d:
+		for x in _w:
+			if _height_at(x, z) < 1:
+				_structure.set_height_at(x, z, 1)
+				filled += 1
+	_refresh()
+	_toast("filled %d void cells -> floor · press W to save" % filled)
+
+
+# ── PATHFIND tool: carve void cells to connect stranded floor to the reachable set ──
+func _line_cells(a: Vector2i, b: Vector2i) -> Array:
+	var cells: Array = []
+	var dx: int = abs(b.x - a.x)
+	var dz: int = abs(b.y - a.y)
+	var sx: int = 1 if a.x < b.x else -1
+	var sz: int = 1 if a.y < b.y else -1
+	var err: int = dx - dz
+	var cx: int = a.x
+	var cz: int = a.y
+	for _i in range(dx + dz + 1):
+		cells.append(Vector2i(cx, cz))
+		if cx == b.x and cz == b.y:
+			break
+		var e2: int = err * 2
+		if e2 > -dz:
+			err -= dz
+			cx += sx
+		if e2 < dx:
+			err += dx
+			cz += sz
+	return cells
+
+
+func _pathfind_carve() -> void:
+	if _structure == null or not _structure.has_method("set_height_at"):
+		_toast("structure not editable here")
+		return
+	var spawn := _find_spawn()
+	var reachable := _reachable_from(spawn)
+	var stranded: Array = []
+	for z in _d:
+		for x in _w:
+			if _height_at(x, z) >= 1 and not reachable.has(Vector2i(x, z)):
+				stranded.append(Vector2i(x, z))
+	if stranded.is_empty():
+		_toast("nothing stranded — every floor cell is already reachable")
+		return
+	var reach_arr := reachable.keys()
+	if reach_arr.is_empty():
+		_toast("no reachable floor (no spawn?) — can't carve")
+		return
+	if _editor.has_method("_push_undo"):
+		_editor._push_undo()
+	var carved := 0
+	for s in stranded:
+		var best := Vector2i(-1, -1)
+		var bd := 1000000
+		for r in reach_arr:
+			var dd: int = abs(r.x - s.x) + abs(r.y - s.y)
+			if dd < bd:
+				bd = dd
+				best = r
+		if best == Vector2i(-1, -1):
+			continue
+		for c in _line_cells(s, best):
+			if c.x >= 0 and c.x < _w and c.y >= 0 and c.y < _d and _height_at(c.x, c.y) < 1:
+				_structure.set_height_at(c.x, c.y, 1)
+				carved += 1
+	_refresh()
+	_toast("carved %d cells to reach %d stranded floor cells · press W to save" % [carved, stranded.size()])
+
+
+# ── GAMEPLAY tool: drop an exit teleporter at the farthest reachable cell ──
+func _gameplay_add_teleporter() -> void:
+	var spawn := _find_spawn()
+	if spawn == Vector2i(-1, -1):
+		_toast("no spawn — can't site an exit")
+		return
+	var reachable := _reachable_from(spawn)
+	var far := spawn
+	var fd := -1
+	for c in reachable:
+		var dd: int = abs(c.x - spawn.x) + abs(c.y - spawn.y)
+		if dd > fd:
+			fd = dd
+			far = c
+	var util = _editor.get("_utilities")
+	if not (util is Array) or far.y >= util.size() or far.x >= (util[far.y] as Array).size():
+		_toast("can't reach the utilities layer")
+		return
+	if _editor.has_method("_push_utility_undo"):
+		_editor._push_utility_undo()
+	if _editor.has_method("_despawn_utility_at"):
+		_editor._despawn_utility_at(far.x, far.y)
+	util[far.y][far.x] = "t"
+	if _editor.has_method("_spawn_utility"):
+		_editor._spawn_utility(far.x, far.y, "t")
+	_refresh()
+	_toast("exit teleporter at (%d,%d) — %d cells from spawn · press W to save" % [far.x, far.y, fd])
+
+
+# ── GRAPH tool: nudge each artifact toward its conceptually-closest neighbours ──
+func _nearest_free_floor(want: Vector2i, occ: Dictionary) -> Vector2i:
+	for r in range(0, maxi(_w, _d) + 1):
+		for dz in range(-r, r + 1):
+			for dx in range(-r, r + 1):
+				if abs(dx) != r and abs(dz) != r:
+					continue
+				var c := Vector2i(want.x + dx, want.y + dz)
+				if c.x < 0 or c.x >= _w or c.y < 0 or c.y >= _d:
+					continue
+				if _height_at(c.x, c.y) >= 1 and not occ.has(c):
+					return c
+	return Vector2i(-1, -1)
+
+
+func _graph_relax() -> void:
+	if _mindmaps.is_empty():
+		_load_mindmaps()
+	var arts := _artifact_list()
+	var nodes: Array = []
+	for a in arts:
+		var res := _resolve_concept(a["name"])
+		if int(res["mm"]) >= 0:
+			nodes.append({"anchor": a["anchor"], "mm": int(res["mm"]), "co": int(res["co"])})
+	if nodes.size() < 3:
+		_toast("too few concept-mapped artifacts here to relax")
+		return
+	var occ: Dictionary = {}
+	for a in arts:
+		occ[a["anchor"]] = true
+	if _editor.has_method("_push_artifact_undo"):
+		_editor._push_artifact_undo()
+	var inter = _editor.get("_interactables")
+	if not (inter is Array):
+		_toast("can't reach the interactables layer")
+		return
+	var moved := 0
+	for n in nodes:
+		var tx := 0.0
+		var tz := 0.0
+		var wsum := 0.0
+		for m in nodes:
+			if m["anchor"] == n["anchor"] or int(m["mm"]) != int(n["mm"]):
+				continue
+			var cd := _concept_dist(int(n["mm"]), int(n["co"]), int(m["co"]))
+			if cd < 0.0:
+				continue
+			var wt := 1.0 - clampf(cd, 0.0, 1.0)
+			tx += float(m["anchor"].x) * wt
+			tz += float(m["anchor"].y) * wt
+			wsum += wt
+		if wsum <= 0.001:
+			continue
+		var want := Vector2i(
+			int(round(lerp(float(n["anchor"].x), tx / wsum, 0.5))),
+			int(round(lerp(float(n["anchor"].y), tz / wsum, 0.5))))
+		var dest := _nearest_free_floor(want, occ)
+		if dest == Vector2i(-1, -1) or dest == n["anchor"]:
+			continue
+		var anc: Vector2i = n["anchor"]
+		var token := str(inter[anc.y][anc.x])
+		if _editor.has_method("_despawn_artifact_at"):
+			_editor._despawn_artifact_at(anc.x, anc.y)
+		inter[anc.y][anc.x] = " "
+		occ.erase(anc)
+		inter[dest.y][dest.x] = token
+		occ[dest] = true
+		if _editor.has_method("_spawn_artifact"):
+			_editor._spawn_artifact(dest.x, dest.y, token.split(":")[0])
+		moved += 1
+	_refresh()
+	_toast("relaxed %d artifacts toward their concepts · press W to save" % moved)
