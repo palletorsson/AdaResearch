@@ -254,6 +254,24 @@ func _short_label(nm: String, i: int) -> String:
 	return up.substr(0, 14)
 
 
+# Hide the artifact's floating billboard text (Label3D) so the station's 2D-in-3D
+# plates are the only captions; surface-baked text (MeshInstance3D) is untouched.
+func _hide_labels(node: Node) -> void:
+	if node is Label3D:
+		(node as Label3D).visible = false
+	for c in node.get_children():
+		_hide_labels(c)
+
+
+# Strip a leading curriculum number prefix (e.g. "1.0 a Point" -> "Point") for clean plates.
+func _clean_name(s: String) -> String:
+	var re := RegEx.new()
+	re.compile("^\\s*\\d+(\\.\\d+)?\\s+([a-zA-Z]\\s+)?")
+	var out := re.sub(s, "", false)
+	out = out.strip_edges()
+	return out if out != "" else s
+
+
 func _cs(c: Color) -> String:
 	return "%f,%f,%f" % [c.r, c.g, c.b]
 
