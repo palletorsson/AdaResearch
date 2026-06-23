@@ -1,0 +1,62 @@
+[gd_scene load_steps=9 format=3]
+
+[ext_resource type="PackedScene" path="res://commons/scenes/desktop_player.tscn" id="1_player"]
+[ext_resource type="PackedScene" path="res://commons/artifacts/station/curation_station.tscn" id="2_station"]
+
+[sub_resource type="ProceduralSkyMaterial" id="SkyMat"]
+sky_top_color = Color(0.55, 0.6, 0.7, 1)
+sky_horizon_color = Color(0.72, 0.74, 0.8, 1)
+ground_bottom_color = Color(0.32, 0.33, 0.36, 1)
+ground_horizon_color = Color(0.55, 0.56, 0.6, 1)
+
+[sub_resource type="Sky" id="Sky"]
+sky_material = SubResource("SkyMat")
+
+[sub_resource type="Environment" id="Env"]
+background_mode = 2
+sky = SubResource("Sky")
+ambient_light_source = 3
+ambient_light_color = Color(0.72, 0.74, 0.8, 1)
+ambient_light_energy = 1.4
+tonemap_mode = 3
+tonemap_white = 6.0
+
+[sub_resource type="BoxShape3D" id="FloorShape"]
+size = Vector3(80, 1, 80)
+
+[sub_resource type="BoxMesh" id="FloorMesh"]
+size = Vector3(80, 0.1, 80)
+
+[sub_resource type="StandardMaterial3D" id="FloorMat"]
+albedo_color = Color(0.5, 0.51, 0.55, 1)
+roughness = 0.9
+
+[node name="DesktopCurationStation" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Env")
+
+[node name="KeyLight" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.77, -0.42, 0.48, 0, 0.75, 0.66, -0.64, -0.51, 0.58, 0, 10, 0)
+light_energy = 1.1
+shadow_enabled = true
+
+[node name="FillLight" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.87, 0, -0.5, 0, 1, 0, 0.5, 0, 0.87, 0, 8, 0)
+light_energy = 0.4
+
+[node name="Floor" type="StaticBody3D" parent="."]
+
+[node name="Col" type="CollisionShape3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("FloorShape")
+
+[node name="Mesh" type="MeshInstance3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
+mesh = SubResource("FloorMesh")
+material_override = SubResource("FloorMat")
+
+[node name="DesktopPlayer" parent="." instance=ExtResource("1_player")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 7)
+
+[node name="CurationStation" parent="." instance=ExtResource("2_station")]
