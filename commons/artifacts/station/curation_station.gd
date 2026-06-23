@@ -23,7 +23,9 @@ const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
 
 @export_group("Set")
 ## 1 to 5 artifact lookup-names to curate. Missing names leave an empty plinth.
-@export var artifacts: Array[String] = ["point", "csg_union_demo", "game_of_life_petri"]
+## Default set is INTERACTIVE (buttons + sliders) so you can test the desktop crosshair / VR
+## interaction out of the box — swap in any registered artifact.
+@export var artifacts: Array[String] = ["ca_rule_explorer", "distribution_sampler", "decision_boundary_viewer"]
 
 @export_group("Layout (grid cells)")
 ## Cells between plinth centres along the row.
@@ -145,17 +147,17 @@ func _build_kit() -> void:
 		p.position = Vector3(xs[i], stage_step_height, plinth_z)
 		p.apply_grid_config({
 			"footprint_cells": 1, "top_height": plinth_height, "top_style": "tray",
-			"edge_light": true, "stencil_text": "%02d" % (i + 1), "body_color": _cs(body_color),
+			"edge_light": true, "stencil_text": "", "three_bar": false, "body_color": _cs(body_color),
 			"panel_color": _cs(panel_color), "accent_color": _cs(accent_color),
 		})
 		_plinth_tops.append({"x": xs[i], "z": plinth_z, "top_y": stage_step_height + plinth_height})
-		# 2D-in-3D name plate pinned to the plinth front — a museum caption, surface-fixed (not a billboard).
+		# Framed, multi-line 2D-in-3D name plaque mounted PROUD of the plinth front (no z-fighting
+		# with the body panel; catalogue number + wrapped name in one bezelled caption).
 		if label_plinths:
 			var disp: String = _clean_name(str(_name_disp.get(nm, nm))) if nm != "" else "ITEM-%d" % (i + 1)
-			var plate: MeshInstance3D = BakedText.make_panel_mesh(disp.to_upper(), Color(0.10, 0.11, 0.13), Color(0.93, 0.91, 0.86), Vector2(0.56, 0.12), 1400, true)
-			if plate:
-				plate.position = Vector3(xs[i], stage_step_height + plinth_height * 0.40, plinth_z + 0.31)
-				add_child(plate)
+			var plaque := _make_label_plaque(disp, "%02d" % (i + 1))
+			plaque.position = Vector3(xs[i], stage_step_height + plinth_height * 0.42, plinth_z + 0.32)
+			add_child(plaque)
 
 	# Backing wall — tiling run with end caps, length = stage width.
 	if with_wall:
@@ -267,14 +269,21 @@ func _build_name_index() -> void:
 				_name_disp[ln] = str(v.get("name", ln))
 
 
+# Layers an artifact KEEPS even when made inert, so its controls stay usable:
+# 3 (pickable) + 19 (grab handles) + 21 (area buttons). World/body layers are dropped.
+const INTERACT_LAYERS := 1310724
+
 func _make_inert(node: Node) -> void:
+	# Non-blocking + non-falling, but PRESERVE interaction layers so the artifact's
+	# buttons / sliders / knobs / grab still respond — you can test them with the desktop
+	# crosshair (LMB press / drag, RMB grab) or in VR, instead of just looking at them.
 	if node is CollisionObject3D:
-		node.collision_layer = 0
+		node.collision_layer = node.collision_layer & INTERACT_LAYERS
 		node.collision_mask = 0
 		if node is RigidBody3D:
 			node.freeze = true
 	elif node is SoftBody3D:
-		node.collision_layer = 0
+		node.collision_layer = node.collision_layer & INTERACT_LAYERS
 		node.collision_mask = 0
 	for c in node.get_children():
 		_make_inert(c)
@@ -317,6 +326,77 @@ func _clean_name(s: String) -> String:
 	var out := re.sub(s, "", false)
 	out = out.strip_edges()
 	return out if out != "" else s
+
+
+# A framed, multi-line 2D-in-3D caption plaque (museum label) that stands PROUD of a surface:
+# a light bezel + a dark emissive screen + an accent catalogue number + the wrapped name.
+# Origin at the plaque centre on the mounting plane; it builds forward (+Z).
+func _make_label_plaque(name_text: String, number: String) -> Node3D:
+	var root := Node3D.new()
+	var name_lines: Array = _wrap(name_text.to_upper(), 11)
+	if name_lines.is_empty():
+		name_lines = [name_text.to_upper()]
+	var num_h := 0.034
+	var name_h := 0.052
+	var pad := 0.03
+	var pw := 0.5
+	var ph: float = pad * 2.0 + num_h + name_h * float(name_lines.size())
+	var depth := 0.03
+	# Light bezel frame.
+	root.add_child(_box(Vector3(0, 0, depth * 0.5), Vector3(pw + 0.05, ph + 0.05, depth), HangarKit.rams_body(panel_color.lightened(0.06), 0.05)))
+	# Dark emissive screen face, proud of the frame.
+	root.add_child(_box(Vector3(0, 0, depth + 0.005), Vector3(pw, ph, 0.008), _emi(Color(0.09, 0.10, 0.12), 0.3)))
+	# Accent groove under the number line.
+	root.add_child(_box(Vector3(0, ph * 0.5 - pad - num_h - 0.004, depth + 0.01), Vector3(pw * 0.82, 0.006, 0.006), _emi(accent_color, 0.7)))
+	# Text — number then wrapped name, stacked top-down, all crisp 2D-in-3D.
+	var tz: float = depth + 0.014
+	var ty: float = ph * 0.5 - pad
+	var num: MeshInstance3D = BakedText.make_label_mesh(number, accent_color, Vector2(pw * 0.5, num_h * 0.85), 1400, true)
+	if num:
+		num.position = Vector3(0, ty - num_h * 0.5, tz)
+		root.add_child(num)
+	ty -= num_h
+	for ln in name_lines:
+		var q: MeshInstance3D = BakedText.make_label_mesh(str(ln), Color(0.94, 0.92, 0.87), Vector2(pw * 0.92, name_h * 0.82), 1400, true)
+		if q:
+			q.position = Vector3(0, ty - name_h * 0.5, tz)
+			root.add_child(q)
+		ty -= name_h
+	return root
+
+
+# Word-wrap a string to lines of at most max_chars (keeps whole words).
+func _wrap(s: String, max_chars: int) -> Array:
+	var lines: Array = []
+	var cur := ""
+	for w in s.split(" "):
+		var word := str(w)
+		if word == "":
+			continue
+		if cur == "":
+			cur = word
+		elif cur.length() + 1 + word.length() <= max_chars:
+			cur += " " + word
+		else:
+			lines.append(cur)
+			cur = word
+	if cur != "":
+		lines.append(cur)
+	return lines
+
+
+func _box(center: Vector3, size: Vector3, mat: Material) -> MeshInstance3D:
+	var mesh := BoxMesh.new()
+	mesh.size = size
+	var mi := MeshInstance3D.new()
+	mi.mesh = mesh
+	mi.material_override = mat
+	mi.position = center
+	return mi
+
+
+func _emi(c: Color, energy: float) -> StandardMaterial3D:
+	return HangarKit.emissive(c, energy)
 
 
 func _cs(c: Color) -> String:
