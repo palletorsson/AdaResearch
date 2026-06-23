@@ -27,7 +27,7 @@ var _bound: bool = false
 # Layers — each: id, label, enabled (built), and whether it's implemented yet.
 const LAYERS := [
 	{"id": "pathfind", "label": "PATHFIND", "ready": true},
-	{"id": "artifacts", "label": "ARTIFACTS", "ready": false},
+	{"id": "artifacts", "label": "ARTIFACTS", "ready": true},
 	{"id": "graph", "label": "ONTOLOGY GRAPH", "ready": false},
 	{"id": "gameplay", "label": "GAMEPLAY", "ready": false},
 	{"id": "grid", "label": "GRID", "ready": false},
@@ -63,6 +63,9 @@ func _unhandled_key_input(event: InputEvent) -> void:
 		if event.keycode == KEY_R and _bound:
 			_refresh()
 			_toast("layer refreshed")
+		elif event.keycode == KEY_G and _bound and _active == "artifacts":
+			_auto_organize_artifacts()
+			_toast("auto-organized (preview)")
 
 
 # ── Bind to the editor once its grid is built ─────────────────────────
@@ -137,6 +140,7 @@ func _refresh() -> void:
 		return
 	match _active:
 		"pathfind": _layer_pathfind()
+		"artifacts": _layer_artifacts()
 		_:
 			_clear_overlay()
 			_set_score("%s — coming soon" % _active.to_upper())
@@ -336,3 +340,204 @@ func _toast(t: String) -> void:
 	if _toast_lbl:
 		_toast_lbl.text = t
 		_toast_t = 2.5
+
+
+# ── ARTIFACTS layer: footprint lens + fit/wall/isolate/cluster score + auto-organize ──
+var _spatial_cache: Dictionary = {}
+
+func _spatial_for(name: String) -> Dictionary:
+	if _spatial_cache.is_empty():
+		var dir := DirAccess.open("res://commons/artifacts/registry")
+		if dir:
+			for fn in dir.get_files():
+				if not fn.ends_with(".json"):
+					continue
+				var f := FileAccess.open("res://commons/artifacts/registry/" + fn, FileAccess.READ)
+				if f == null:
+					continue
+				var data = JSON.parse_string(f.get_as_text())
+				if not (data is Dictionary):
+					continue
+				for k in (data.get("artifacts", {}) as Dictionary).keys():
+					var v = data["artifacts"][k]
+					if v is Dictionary:
+						_spatial_cache[str(v.get("lookup_name", k))] = v.get("spatial_needs", {})
+		if _spatial_cache.is_empty():
+			_spatial_cache["__none__"] = {}   # mark loaded even if empty
+	return _spatial_cache.get(name, {})
+
+
+func _footprint_of(sn: Dictionary) -> Vector2i:
+	var fc = sn.get("footprint_cells", 1)
+	if fc is Array and (fc as Array).size() >= 2:
+		return Vector2i(maxi(int(fc[0]), 1), maxi(int(fc[1]), 1))
+	var n := int(fc) if (fc is int or fc is float) else 1
+	var side := maxi(1, int(round(sqrt(float(maxi(n, 1))))))
+	return Vector2i(side, side)
+
+
+func _artifact_list() -> Array:
+	# [{name, anchor:Vector2i, fw, fd, wall:bool, iso:bool, cluster:Array}]
+	var out: Array = []
+	var g := _token_grid("_interactables")
+	for z in range(min(g.size(), _d)):
+		var row = g[z]
+		if not (row is Array):
+			continue
+		for x in range(min(row.size(), _w)):
+			var t := str(row[x]).strip_edges()
+			if t == "" or t == " " or t.begins_with("#"):
+				continue
+			var sn := _spatial_for(t)
+			var fp := _footprint_of(sn)
+			out.append({
+				"name": t, "anchor": Vector2i(x, z), "fw": fp.x, "fd": fp.y,
+				"wall": bool(sn.get("wall_backing", false)),
+				"iso": int(sn.get("isolation", 0)) >= 2,
+				"cluster": sn.get("cluster_with", []),
+			})
+	return out
+
+
+func _footprint_cells(a: Dictionary) -> Array:
+	var cells: Array = []
+	for dx in int(a["fw"]):
+		for dz in int(a["fd"]):
+			cells.append(Vector2i(a["anchor"].x + dx, a["anchor"].y + dz))
+	return cells
+
+
+func _wall_behind(a: Dictionary) -> bool:
+	var z: int = a["anchor"].y - 1
+	if z < 0:
+		return true   # against the grid edge counts as backed
+	return _height_at(a["anchor"].x, z) < 1   # non-floor (wall/void) behind = backed
+
+
+func _iso_ok(a: Dictionary, arts: Array) -> bool:
+	for b in arts:
+		if b["anchor"] == a["anchor"]:
+			continue
+		var dist: int = abs(b["anchor"].x - a["anchor"].x) + abs(b["anchor"].y - a["anchor"].y)
+		if dist <= 2:
+			return false
+	return true
+
+
+func _cluster_ok(a: Dictionary, name_anchor: Dictionary) -> bool:
+	var any_present := false
+	for partner in a["cluster"]:
+		var pn := str(partner)
+		if name_anchor.has(pn):
+			any_present = true
+			var pa: Vector2i = name_anchor[pn]
+			if abs(pa.x - a["anchor"].x) + abs(pa.y - a["anchor"].y) <= 4:
+				return true
+	return not any_present
+
+
+func _layer_artifacts() -> void:
+	var arts := _artifact_list()
+	var occ: Dictionary = {}
+	for a in arts:
+		for cell in _footprint_cells(a):
+			occ[cell] = int(occ.get(cell, 0)) + 1
+	var name_anchor: Dictionary = {}
+	for a in arts:
+		name_anchor[a["name"]] = a["anchor"]
+
+	var fit_ok := 0
+	var wall_ok := 0
+	var wall_total := 0
+	var iso_ok := 0
+	var iso_total := 0
+	var clus_ok := 0
+	var clus_total := 0
+	var quads: Array = []
+	for a in arts:
+		var cells := _footprint_cells(a)
+		var on_floor := true
+		var overlap := false
+		for cell in cells:
+			if cell.x < 0 or cell.x >= _w or cell.y < 0 or cell.y >= _d or _height_at(cell.x, cell.y) < 1:
+				on_floor = false
+			if int(occ.get(cell, 0)) > 1:
+				overlap = true
+		var fit := on_floor and not overlap
+		if fit:
+			fit_ok += 1
+		var wb_ok := true
+		if a["wall"]:
+			wall_total += 1
+			wb_ok = _wall_behind(a)
+			if wb_ok:
+				wall_ok += 1
+		var io_ok := true
+		if a["iso"]:
+			iso_total += 1
+			io_ok = _iso_ok(a, arts)
+			if io_ok:
+				iso_ok += 1
+		var cl_ok := true
+		if a["cluster"] is Array and (a["cluster"] as Array).size() > 0:
+			clus_total += 1
+			cl_ok = _cluster_ok(a, name_anchor)
+			if cl_ok:
+				clus_ok += 1
+		var col: Color
+		if not fit:
+			col = Color(0.9, 0.2, 0.2, 0.62)              # off-floor / overlap
+		elif not (wb_ok and io_ok and cl_ok):
+			col = Color(0.95, 0.6, 0.12, 0.6)             # soft-hook violation
+		else:
+			col = Color(0.25, 0.7, 0.92, 0.5)             # well placed
+		for cell in cells:
+			if cell.x < 0 or cell.x >= _w or cell.y < 0 or cell.y >= _d:
+				continue
+			var ty := float(_height_at(cell.x, cell.y)) * _cube + 0.07
+			quads.append({"pos": Vector3((float(cell.x) + 0.5) * _cube, ty, (float(cell.y) + 0.5) * _cube), "color": col})
+	_paint_overlay(quads)
+	_set_score("ARTIFACTS    fit %d/%d    wall %d/%d    isolate %d/%d    cluster %d/%d        [G = auto-organize]" % [
+		fit_ok, arts.size(), wall_ok, wall_total, iso_ok, iso_total, clus_ok, clus_total])
+
+
+# Greedy auto-organize: pack every artifact onto floor cells, largest first, no overlap. Preview only.
+func _auto_organize_artifacts() -> void:
+	var arts := _artifact_list()
+	var floor_cells: Array = []
+	for z in _d:
+		for x in _w:
+			if _height_at(x, z) >= 1:
+				floor_cells.append(Vector2i(x, z))
+	arts.sort_custom(func(a, b): return int(a["fw"]) * int(a["fd"]) > int(b["fw"]) * int(b["fd"]))
+	var taken: Dictionary = {}
+	var placed: Dictionary = {}
+	for a in arts:
+		var best := Vector2i(-1, -1)
+		for cell in floor_cells:
+			var ok := true
+			for dx in int(a["fw"]):
+				for dz in int(a["fd"]):
+					var c := Vector2i(cell.x + dx, cell.y + dz)
+					if c.x >= _w or c.y >= _d or _height_at(c.x, c.y) < 1 or taken.has(c):
+						ok = false
+			if ok:
+				best = cell
+				break
+		if best != Vector2i(-1, -1):
+			for dx in int(a["fw"]):
+				for dz in int(a["fd"]):
+					taken[Vector2i(best.x + dx, best.y + dz)] = true
+			placed[a["anchor"]] = best
+	var quads: Array = []
+	for a in arts:
+		var anc: Vector2i = placed.get(a["anchor"], a["anchor"])
+		for dx in int(a["fw"]):
+			for dz in int(a["fd"]):
+				var c := Vector2i(anc.x + dx, anc.y + dz)
+				if c.x < 0 or c.x >= _w or c.y < 0 or c.y >= _d:
+					continue
+				var ty := float(_height_at(c.x, c.y)) * _cube + 0.08
+				quads.append({"pos": Vector3((float(c.x) + 0.5) * _cube, ty, (float(c.y) + 0.5) * _cube), "color": Color(0.3, 0.9, 0.42, 0.62)})
+	_paint_overlay(quads)
+	_set_score("ARTIFACTS · auto-organized preview — %d/%d packed onto floor, no overlap    [R = back to current]" % [placed.size(), arts.size()])
