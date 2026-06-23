@@ -221,11 +221,12 @@ func _build_labels() -> void:
 	_formula_label.text = "%.2f*x + %.2f*y + %.2f = 0" % [w1, w2, bias]
 	_formula_label.font_size = 14
 	_formula_label.pixel_size = 0.001
-	_formula_label.position = Vector3(0, 0.005, -plot_size * 0.5 - 0.07)
+	_add_flat_plate(Vector3(0, 0.012, -plot_size * 0.5 - 0.07), plot_size * 0.62, 0.07)
+	_formula_label.position = Vector3(0, 0.016, -plot_size * 0.5 - 0.07)
 	_formula_label.rotation_degrees.x = -90
 	_formula_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	_formula_label.modulate = Color(0.75, 0.75, 0.55)
-	_formula_label.outline_size = 2
+	_formula_label.modulate = Color(0.10, 0.10, 0.12)
+	_formula_label.outline_size = 0
 	_formula_label.billboard = BaseMaterial3D.BILLBOARD_DISABLED
 	add_child(_formula_label)
 
@@ -234,14 +235,21 @@ func _build_labels() -> void:
 	_accuracy_label.text = "Accuracy: --"
 	_accuracy_label.font_size = 18
 	_accuracy_label.pixel_size = 0.001
-	_accuracy_label.position = Vector3(0, 0.005, plot_size * 0.5 + 0.04)
+	_add_flat_plate(Vector3(0, 0.012, plot_size * 0.5 + 0.04), plot_size * 0.5, 0.07)
+	_accuracy_label.position = Vector3(0, 0.016, plot_size * 0.5 + 0.04)
 	_accuracy_label.rotation_degrees.x = -90
 	_accuracy_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	_accuracy_label.modulate = Color(0.5, 0.9, 0.55)
-	_accuracy_label.outline_size = 3
+	_accuracy_label.modulate = Color(0.10, 0.10, 0.12)
+	_accuracy_label.outline_size = 0
 	_accuracy_label.billboard = BaseMaterial3D.BILLBOARD_DISABLED
 	add_child(_accuracy_label)
 
+
+
+# A flat off-white framed plate lying on the plot — black readout text sits on it (black-on-off-white).
+func _add_flat_plate(center: Vector3, w: float, d: float) -> void:
+	add_child(HangarKit.box(center - Vector3(0, 0.004, 0), Vector3(w + 0.03, 0.004, d + 0.03), HangarKit.rams_body(Color(0.70, 0.68, 0.64), 0.06)))
+	add_child(HangarKit.box(center, Vector3(w, 0.005, d), HangarKit.rams_body(Color(0.88, 0.86, 0.80), 0.04)))
 
 # --- Slider setup ---
 
