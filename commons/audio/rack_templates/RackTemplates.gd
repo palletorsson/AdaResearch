@@ -1705,11 +1705,11 @@ static func _add_title(parent: Node3D, text: String, _panel_w: float, panel_h: f
 static func _add_label(parent: Node3D, text: String, pos: Vector3, size: int = 14, align: int = HORIZONTAL_ALIGNMENT_CENTER, max_w: float = 0.18) -> void:
 	if text.strip_edges() == "":
 		return
-	# Crisp 2D-in-3D label tag: a small dark plate + light text, surface-pinned (not a billboard).
+	# Crisp 2D-in-3D label tag: BLACK text on a matte OFF-WHITE plate, surface-pinned (not a billboard).
 	# This both LABELS the control and gives it a readable plate under it. Width is capped to the
 	# control's own column (max_w) so adjacent labels never collide — the text auto-shrinks to fit.
 	var w: float = clampf(float(text.length()) * 0.016 + 0.024, 0.045, max_w)
-	var tag: MeshInstance3D = BakedTextAlbedo.make_panel_mesh(text, Color(0.11, 0.12, 0.14), Color(0.94, 0.92, 0.88), Vector2(w, 0.024), 1400, true)
+	var tag: MeshInstance3D = BakedTextAlbedo.make_panel_mesh(text, Color(0.88, 0.86, 0.80), Color(0.09, 0.09, 0.11), Vector2(w, 0.024), 1400, false)
 	if tag:
 		tag.transform.origin = pos + Vector3(0, 0, 0.004)
 		parent.add_child(tag)

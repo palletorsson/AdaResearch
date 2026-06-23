@@ -237,8 +237,9 @@ static func readout(header: String, lines: Array, size: Vector2 = Vector2(0.5, 0
 	root.add_child(box(Vector3(0, -h * 0.5 - ft * 0.5, 0), Vector3(w + ft * 2.0, ft, fd), bez))
 	root.add_child(box(Vector3(-w * 0.5 - ft * 0.5, 0, 0), Vector3(ft, h, fd), bez))
 	root.add_child(box(Vector3(w * 0.5 + ft * 0.5, 0, 0), Vector3(ft, h, fd), bez))
-	# screen face (thin box, calm dark — barely lit, Braun "no glow")
-	var face_mat := emissive(screen_bg, 0.32)
+	# Face: a light background reads as a MATTE printed label (black-on-off-white); a dark
+	# background stays a softly-lit screen. Auto-switch on luminance.
+	var face_mat: Material = rams_body(screen_bg, 0.04) if screen_bg.get_luminance() > 0.45 else emissive(screen_bg, 0.32)
 	root.add_child(box(Vector3(0, 0, 0), Vector3(w, h, 0.03), face_mat))
 	var face_z: float = 0.018
 	# header (top strip)
@@ -287,8 +288,8 @@ static func signage(header: String, lines: Array, size: Vector2 = Vector2(0.5, 0
 	var back: Vector3 = panel_pos - d * 0.03
 	for s in [1.0, -1.0]:
 		root.add_child(_pipe(perp * (s * off), back + perp * (s * off), 0.012, steel))
-	# Framed 2D-in-3D panel at the bracket end.
-	var panel: Node3D = readout(header, lines, size)
+	# Framed 2D-in-3D panel at the bracket end — black text on a matte off-white label.
+	var panel: Node3D = readout(header, lines, size, Color(0.88, 0.86, 0.80), Color(0.09, 0.09, 0.11), Color(0.09, 0.09, 0.11))
 	panel.position = panel_pos
 	if tilt_deg != 0.0:
 		panel.rotation_degrees.x = tilt_deg

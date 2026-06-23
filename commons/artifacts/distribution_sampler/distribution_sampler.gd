@@ -254,7 +254,7 @@ func _create_labels() -> void:
 	_stats_label.pixel_size = 0.0011
 	_stats_label.font_size = 12
 	_stats_label.billboard = BaseMaterial3D.BILLBOARD_DISABLED
-	_stats_label.modulate = Color(0.86, 0.95, 0.86)
+	_stats_label.modulate = Color(0.09, 0.09, 0.11)
 	_stats_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_stats_label.position = Vector3(sx + arm, sy + 0.02, 0.05)
 	add_child(_stats_label)

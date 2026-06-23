@@ -358,6 +358,8 @@ func _hide_labels(node: Node, in_sign: bool = false) -> void:
 	if node is Label3D and not sig:
 		var L := node as Label3D
 		L.billboard = BaseMaterial3D.BILLBOARD_DISABLED
+		L.modulate = Color(0.09, 0.09, 0.11)   # black text on the off-white label plate
+		L.outline_size = 0
 		var ls := L.text.split("
 ")
 		var ml := 1
@@ -366,7 +368,7 @@ func _hide_labels(node: Node, in_sign: bool = false) -> void:
 		var w: float = clampf(float(ml) * float(L.font_size) * L.pixel_size * 0.6 + 0.05, 0.08, 1.5)
 		var hh: float = clampf(float(ls.size()) * float(L.font_size) * L.pixel_size * 1.4 + 0.04, 0.05, 0.8)
 		L.add_child(HangarKit.box(Vector3(0, 0, -0.014), Vector3(w + 0.03, hh + 0.03, 0.012), HangarKit.rams_body(Color(0.70, 0.68, 0.64), 0.06)))
-		L.add_child(HangarKit.box(Vector3(0, 0, -0.007), Vector3(w, hh, 0.008), HangarKit.emissive(Color(0.09, 0.10, 0.12), 0.3)))
+		L.add_child(HangarKit.box(Vector3(0, 0, -0.007), Vector3(w, hh, 0.008), HangarKit.rams_body(Color(0.88, 0.86, 0.80), 0.04)))
 	for c in node.get_children():
 		_hide_labels(c, sig)
 

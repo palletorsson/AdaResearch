@@ -21,14 +21,14 @@ const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
 @export_group("Content")
 @export var header: String = "CURATION"
 @export var lines: Array = ["ON SHOW", "LINK  OK"]
-## Header colour (amber by default — a live-system read).
-@export var header_color: Color = Color(0.86, 0.46, 0.16)
-@export var text_color: Color = Color(0.90, 0.92, 0.95)
+## Black text on a matte off-white label (header slightly bolder, same near-black).
+@export var header_color: Color = Color(0.09, 0.09, 0.11)
+@export var text_color: Color = Color(0.12, 0.12, 0.14)
 @export_group("Surface")
 @export var accent_bar: bool = true
 @export_group("Color")
 @export var frame_color: Color = Color(0.74, 0.72, 0.68)
-@export var screen_color: Color = Color(0.09, 0.10, 0.12)
+@export var screen_color: Color = Color(0.88, 0.86, 0.80)
 @export var accent_color: Color = Color(0.86, 0.34, 0.11)
 @export var wear: float = 0.06
 
@@ -72,9 +72,9 @@ func _build() -> void:
 	var w: float = float(maxi(width_cells, 1)) * CELL - 0.1
 	var h: float = maxf(height, 0.25)
 
-	# Frame (light matte) + recessed dark emissive screen face.
+	# Frame (light matte) + recessed matte off-white label face (black text reads on it).
 	add_child(_box(Vector3(0, 0, 0), Vector3(w, h, DEPTH), HangarKit.rams_body(frame_color, wear)))
-	var face := _emi(screen_color, 0.35)
+	var face := HangarKit.rams_body(screen_color, 0.04) if screen_color.get_luminance() > 0.45 else _emi(screen_color, 0.35)
 	add_child(_box(Vector3(0, 0, DEPTH * 0.5), Vector3(w - FRAME_T * 2.0, h - FRAME_T * 2.0, 0.02), face))
 
 	# 2D-in-3D header.

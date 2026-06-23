@@ -213,7 +213,8 @@ func _build_cap(x: float, h: float) -> void:
 func _build_screen(w: float, h: float) -> void:
 	var sw: float = minf(w * 0.42, 0.8)
 	var sh: float = sw * 0.62
-	var screen: Node3D = HangarKit.readout(screen_header, screen_lines, Vector2(sw, sh))
+	# Black text on a matte off-white label (not a dark screen).
+	var screen: Node3D = HangarKit.readout(screen_header, screen_lines, Vector2(sw, sh), Color(0.88, 0.86, 0.80), Color(0.09, 0.09, 0.11), Color(0.09, 0.09, 0.11))
 	if screen:
 		screen.position = Vector3(0, h * 0.62, FRONT_Z + 0.06)
 		add_child(screen)

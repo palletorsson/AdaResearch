@@ -214,7 +214,8 @@ func _create_rule_display() -> void:
 	_rule_label.pixel_size = 0.0014
 	_rule_label.font_size = 48
 	_rule_label.billboard = BaseMaterial3D.BILLBOARD_DISABLED
-	_rule_label.modulate = Color(0.90, 0.95, 0.96)
+	_rule_label.modulate = Color(0.09, 0.09, 0.11)
+	_rule_label.outline_size = 0
 	_rule_label.position = Vector3(0, 0.3, -board_size / 2 - 0.06 + 0.04)
 	add_child(_rule_label)
 	_created_nodes.append(_rule_label)
