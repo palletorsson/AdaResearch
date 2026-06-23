@@ -6,6 +6,7 @@ const StationStageScene := preload("res://commons/artifacts/station/station_stag
 const StationPlinthScene := preload("res://commons/artifacts/station/station_plinth.tscn")
 const StationWallScene := preload("res://commons/artifacts/station/station_wall.tscn")
 const StationPillarScene := preload("res://commons/artifacts/station/station_pillar.tscn")
+const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
 
 # @identity
 # essence: the COMPOSER — give it 1 to 5 artifact lookup-names and it assembles a whole curation bay on the 1 m grid: a step-stage sized to the set, a plinth per item in an even row, a tiling backing wall with end caps, framing pillars, and each artifact grounded inert on its plinth. Origin at the stage centre on the floor.
@@ -39,6 +40,9 @@ const StationPillarScene := preload("res://commons/artifacts/station/station_pil
 @export var with_pillars: bool = true
 @export var with_wall_screen: bool = true
 @export var label_plinths: bool = true
+## Hide the loaded artifacts' floating billboard Label3D text, so the only text on show is the
+## station's own 2D-in-3D plates/screens (surface-pinned). Surface-baked artifact text is kept.
+@export var hide_floating_labels: bool = true
 
 @export_group("Color")
 @export var body_color: Color = Color(0.81, 0.79, 0.75)
@@ -48,6 +52,7 @@ const StationPillarScene := preload("res://commons/artifacts/station/station_pil
 const CELL := 1.0
 
 var _name_scene: Dictionary = {}
+var _name_disp: Dictionary = {}   # lookup_name -> human display name
 var _plinth_tops: Array = []   # [{x, z, top_y}] per item, set during kit build
 var _built := false
 
@@ -120,18 +125,23 @@ func _build_kit() -> void:
 
 	# Plinths + record where each artifact sits.
 	for i in range(n):
+		var nm := str(artifacts[i]) if i < artifacts.size() else ""
 		var p: Node3D = StationPlinthScene.instantiate()
 		add_child(p)
 		p.position = Vector3(xs[i], stage_step_height, plinth_z)
-		var label := ""
-		if label_plinths:
-			label = _short_label(artifacts[i] if i < artifacts.size() else "", i)
 		p.apply_grid_config({
 			"footprint_cells": 1, "top_height": plinth_height, "top_style": "tray",
-			"edge_light": true, "stencil_text": label, "body_color": _cs(body_color),
+			"edge_light": true, "stencil_text": "%02d" % (i + 1), "body_color": _cs(body_color),
 			"panel_color": _cs(panel_color), "accent_color": _cs(accent_color),
 		})
 		_plinth_tops.append({"x": xs[i], "z": plinth_z, "top_y": stage_step_height + plinth_height})
+		# 2D-in-3D name plate pinned to the plinth front — a museum caption, surface-fixed (not a billboard).
+		if label_plinths:
+			var disp: String = _clean_name(str(_name_disp.get(nm, nm))) if nm != "" else "ITEM-%d" % (i + 1)
+			var plate: MeshInstance3D = BakedText.make_panel_mesh(disp.to_upper(), Color(0.10, 0.11, 0.13), Color(0.93, 0.91, 0.86), Vector2(0.56, 0.12), 1400, true)
+			if plate:
+				plate.position = Vector3(xs[i], stage_step_height + plinth_height * 0.40, plinth_z + 0.31)
+				add_child(plate)
 
 	# Backing wall — tiling run with end caps, length = stage width.
 	if with_wall:
@@ -141,6 +151,7 @@ func _build_kit() -> void:
 		wall.apply_grid_config({
 			"length_cells": stage_w_cells, "start_cap": true, "end_cap": true,
 			"height": wall_height, "panel_style": "panel", "screen_slot": with_wall_screen,
+			"screen_header": "CURATION", "screen_lines": ["%d ON SHOW" % n, "LINK  OK"],
 			"lit_seam": true, "body_color": _cs(body_color), "panel_color": _cs(panel_color),
 			"accent_color": _cs(accent_color),
 		})
@@ -176,6 +187,8 @@ func _load_artifacts() -> void:
 		var slot: Dictionary = _plinth_tops[i]
 		add_child(inst)   # enters a settled tree -> its _ready builds before we measure
 		_make_inert(inst)
+		if hide_floating_labels:
+			_hide_labels(inst)
 		if inst.has_method("apply_grid_config"):
 			inst.apply_grid_config({"emissive": false})
 		# Ground the artifact so its base sits on the plinth cap.
@@ -202,7 +215,9 @@ func _build_name_index() -> void:
 		for k in (data.get("artifacts", {}) as Dictionary).keys():
 			var v = data["artifacts"][k]
 			if v is Dictionary and v.has("scene") and ResourceLoader.exists(str(v["scene"])):
-				_name_scene[str(v.get("lookup_name", k))] = str(v["scene"])
+				var ln := str(v.get("lookup_name", k))
+				_name_scene[ln] = str(v["scene"])
+				_name_disp[ln] = str(v.get("name", ln))
 
 
 func _make_inert(node: Node) -> void:

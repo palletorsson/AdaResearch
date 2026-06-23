@@ -32,8 +32,11 @@ const HangarKit := preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 @export var panel_style: String = "panel"
 ## Embed a small framed readout screen in the upper centre.
 @export var screen_slot: bool = false
-## Thin emissive seam line along the top rail (low Braun accent).
-@export var lit_seam: bool = false
+## Readout header + lines (2D-in-3D screen text). The composer fills these with the curated set.
+@export var screen_header: String = "CURATION"
+@export var screen_lines: Array = ["SET ONLINE", "LINK  OK"]
+## Emissive accent band along the top, full wall width — runs edge-to-edge and continues across tiled sections.
+@export var lit_seam: bool = true
 ## Caution-stripe band along the floor foot.
 @export var hazard_base: bool = false
 
@@ -86,6 +89,13 @@ func _read_metadata_overrides() -> void:
 	if has_meta("config_height"): height = float(str(get_meta("config_height")))
 	if has_meta("config_panel_style"): panel_style = str(get_meta("config_panel_style")).to_lower()
 	if has_meta("config_screen_slot"): screen_slot = _b(get_meta("config_screen_slot"))
+	if has_meta("config_screen_header"): screen_header = str(get_meta("config_screen_header"))
+	if has_meta("config_screen_lines"):
+		var raw = get_meta("config_screen_lines")
+		if raw is Array:
+			screen_lines = []
+			for ln in raw:
+				screen_lines.append(str(ln))
 	if has_meta("config_lit_seam"): lit_seam = _b(get_meta("config_lit_seam"))
 	if has_meta("config_hazard_base"): hazard_base = _b(get_meta("config_hazard_base"))
 	if has_meta("config_stencil_text"): stencil_text = str(get_meta("config_stencil_text"))
@@ -127,7 +137,9 @@ func _build() -> void:
 		_build_cap(w * 0.5, h)
 
 	if lit_seam:
-		add_child(_box(Vector3(0, h - RAIL_H - 0.03, FRONT_Z + 0.04), Vector3(w * 0.96, 0.03, 0.02), _emi(accent_color, 0.7)))
+		# Full slab width so the band reaches the wall ends (the caps) and butts
+		# continuously across tiled sections — no gap at the joins.
+		add_child(_box(Vector3(0, h - RAIL_H - 0.04, FRONT_Z + 0.05), Vector3(w, 0.06, 0.025), _emi(accent_color, 0.8)))
 	if screen_slot:
 		_build_screen(w, h)
 	if three_bar:
@@ -199,9 +211,9 @@ func _build_cap(x: float, h: float) -> void:
 
 
 func _build_screen(w: float, h: float) -> void:
-	var sw: float = minf(w * 0.42, 0.7)
+	var sw: float = minf(w * 0.42, 0.8)
 	var sh: float = sw * 0.62
-	var screen: Node3D = HangarKit.readout("CURATION", ["SET ONLINE", "ITEMS  1-5", "LINK  OK"], Vector2(sw, sh))
+	var screen: Node3D = HangarKit.readout(screen_header, screen_lines, Vector2(sw, sh))
 	if screen:
 		screen.position = Vector3(0, h * 0.62, FRONT_Z + 0.06)
 		add_child(screen)
