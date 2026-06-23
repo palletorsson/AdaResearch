@@ -39,11 +39,11 @@ var _actions_box: VBoxContainer = null
 
 # What each layer shows + does, shown in the panel when it's selected.
 const LAYER_DESC := {
-	"pathfind": "Walkable floor flood-filled from spawn.\ngreen=reachable  red=stranded  blue=spawn",
+	"pathfind": "Reachability flood-filled from spawn, drawn as flow\nlines spreading cell-by-cell. green=reachable red=stranded",
 	"artifacts": "Each artifact's footprint + placement quality.\nAuto-organize packs them; Apply moves them for real.",
-	"grid": "Floor-height heatmap (low blue -> high yellow).",
+	"grid": "The height field drawn as columns in space\n(low blue -> high yellow). Fill voids raises gaps to floor.",
 	"gameplay": "Spawn -> teleporter reachability + the\nencounter order (green=first -> amber=last).",
-	"graph": "Concept-distance drawn as edges in 3D.\ngreen=near & related   red=split apart",
+	"graph": "Ghost layout: faint markers + lines show where each\nartifact WOULD sit if the floor matched its meaning.",
 }
 
 var _overlay: MultiMeshInstance3D = null
@@ -193,6 +193,7 @@ func _layer_pathfind() -> void:
 
 	# Flood-fill reachable floor from spawn (4-connected, step ≤ 1 height).
 	var reachable: Dictionary = {}
+	var parent: Dictionary = {}   # cell -> the cell we reached it from (the BFS tree, for flow lines)
 	if spawn != Vector2i(-1, -1):
 		var q: Array = [spawn]
 		reachable[spawn] = true
@@ -211,6 +212,7 @@ func _layer_pathfind() -> void:
 				if abs(nh - ch) > 1:
 					continue
 				reachable[nc] = true
+				parent[nc] = c
 				q.append(nc)
 
 	# Reach verdict: each artifact has a reachable walkable cell at/adjacent to it.
@@ -242,6 +244,20 @@ func _layer_pathfind() -> void:
 			col = Color(0.85, 0.2, 0.2, 0.6)          # stranded = red
 		quads.append({"pos": Vector3((float(c.x) + 0.5) * _cube, top_y, (float(c.y) + 0.5) * _cube), "color": col})
 	_paint_overlay(quads)
+
+	# Flow lines — the reachability spreading from spawn, drawn as a tree raised above the floor,
+	# so you SEE the path travel cell-by-cell instead of just reading coloured tiles.
+	var flow: Array = []
+	for c in reachable:
+		if not parent.has(c):
+			continue
+		var p: Vector2i = parent[c]
+		flow.append({
+			"a": Vector3((float(c.x) + 0.5) * _cube, float(_height_at(c.x, c.y)) * _cube + 0.45, (float(c.y) + 0.5) * _cube),
+			"b": Vector3((float(p.x) + 0.5) * _cube, float(_height_at(p.x, p.y)) * _cube + 0.45, (float(p.y) + 0.5) * _cube),
+			"color": Color(0.25, 0.85, 0.95, 0.7),
+		})
+	_paint_lines(flow)
 
 	_set_score("PATHFIND    walk %d%%  (%d/%d cells)    reach %d/%d artifacts%s" % [
 		int(round(walk_pct)), reachable.size(), floor_cells.size(), reached, arts.size(),
@@ -596,11 +612,41 @@ func _layer_graph() -> void:
 	var fid01 := clampf((fid + 1.0) * 0.5, 0.0, 1.0)
 	var quads: Array = []
 	for n in nodes:
-		quads.append(_q(n["anchor"], Color(0.4, 0.7, 1.0, 0.7)))
+		quads.append(_q(n["anchor"], Color(0.4, 0.7, 1.0, 0.75)))
+	# GHOST LAYOUT — where each artifact WOULD sit if the floor matched meaning: the weighted centroid
+	# of its concept-close neighbours. A faint ghost marker at that ideal cell + a line from its current
+	# cell to the ghost. The gap between a node and its ghost is the layout's disagreement with the concept.
+	var ghosts := 0
+	for i in nodes.size():
+		var n2: Dictionary = nodes[i]
+		var tx := 0.0
+		var tz := 0.0
+		var wsum := 0.0
+		for j in nodes.size():
+			if j == i:
+				continue
+			var m: Dictionary = nodes[j]
+			if int(m["mm"]) != int(n2["mm"]):
+				continue
+			var cd2 := _concept_dist(int(n2["mm"]), int(n2["co"]), int(m["co"]))
+			if cd2 < 0.0:
+				continue
+			var wt := 1.0 - clampf(cd2, 0.0, 1.0)
+			tx += float(m["anchor"].x) * wt
+			tz += float(m["anchor"].y) * wt
+			wsum += wt
+		if wsum <= 0.001:
+			continue
+		var gcx := clampi(int(round(tx / wsum)), 0, maxi(_w - 1, 0))
+		var gcz := clampi(int(round(tz / wsum)), 0, maxi(_d - 1, 0))
+		var gpos := Vector3((float(gcx) + 0.5) * _cube, float(_height_at(gcx, gcz)) * _cube + 0.45, (float(gcz) + 0.5) * _cube)
+		quads.append({"pos": gpos, "color": Color(0.6, 0.86, 1.0, 0.3)})              # the ghost
+		segments.append({"a": n2["pos"], "b": gpos, "color": Color(0.6, 0.8, 1.0, 0.28)})   # now -> ideal
+		ghosts += 1
 	_paint_overlay(quads)
 	_paint_lines(segments)
-	_set_score("ONTOLOGY GRAPH    %d concept-nodes    %d affinity edges (green=near, red=split)    fidelity %d%%" % [
-		nodes.size(), segments.size(), int(round(fid01 * 100.0))])
+	_set_score("ONTOLOGY GRAPH    %d concept-nodes · %d ghosts (where meaning wants them)    fidelity %d%%" % [
+		nodes.size(), ghosts, int(round(fid01 * 100.0))])
 
 
 # ── shared helpers (reachability + quad-at-cell) ─────────────────────
@@ -734,6 +780,25 @@ func _layer_grid() -> void:
 			var ty := float(h) * _cube + 0.06
 			quads.append({"pos": Vector3((float(x) + 0.5) * _cube, ty, (float(z) + 0.5) * _cube), "color": col})
 	_paint_overlay(quads)
+
+	# Vertical pins — draw the height field IN SPACE (a "new grid" read as columns, not a flat map):
+	# a pin per cell from the floor up to its height, coloured by height.
+	var pins: Array = []
+	for z in _d:
+		for x in _w:
+			var hh := _height_at(x, z)
+			if hh < 1:
+				continue
+			var tt := float(hh - 1) / float(maxi(maxh - 1, 1))
+			var pc := Color(0.15, 0.4, 0.9).lerp(Color(0.96, 0.85, 0.2), tt)
+			pc.a = 0.7
+			pins.append({
+				"a": Vector3((float(x) + 0.5) * _cube, 0.02, (float(z) + 0.5) * _cube),
+				"b": Vector3((float(x) + 0.5) * _cube, float(hh) * _cube, (float(z) + 0.5) * _cube),
+				"color": pc,
+			})
+	_paint_lines(pins)
+
 	_set_score("GRID    fill %d%% (%d/%d cells floor)    heights 1..%d" % [
 		int(round(100.0 * float(floor) / float(maxi(total, 1)))), floor, total, maxh])
 
