@@ -12,7 +12,14 @@
       "complexity": "intermediate",
       "include_in_map_data": true,
       "map_ready": true,
-      "tags": ["station", "modular", "wall", "grid", "sci-fi", "lab"],
+      "tags": [
+        "station",
+        "modular",
+        "wall",
+        "grid",
+        "sci-fi",
+        "lab"
+      ],
       "parameters": {
         "length_cells": "Wall length in 1 m grid cells (int, default 2)",
         "start_cap": "End-cap post at the -X face (bool)",
@@ -23,7 +30,10 @@
         "lit_seam": "Emissive seam line along the top (bool)",
         "accent_color": "Braun-orange accent by default"
       },
-      "spatial_needs": {"footprint_cells": 2, "wall_backing": true}
+      "spatial_needs": {
+        "footprint_cells": 2,
+        "wall_backing": true
+      }
     },
     "station_stage": {
       "lookup_name": "station_stage",
@@ -35,7 +45,14 @@
       "complexity": "intermediate",
       "include_in_map_data": true,
       "map_ready": true,
-      "tags": ["station", "modular", "stage", "step", "platform", "grid"],
+      "tags": [
+        "station",
+        "modular",
+        "stage",
+        "step",
+        "platform",
+        "grid"
+      ],
       "parameters": {
         "width_cells": "Stage width in 1 m cells (int, default 5)",
         "depth_cells": "Stage depth in 1 m cells (int, default 3)",
@@ -43,7 +60,10 @@
         "top_style": "solid | grate",
         "hazard_edge": "Caution stripe on the front lip (bool)"
       },
-      "spatial_needs": {"footprint_cells": 15, "platform": "step"}
+      "spatial_needs": {
+        "footprint_cells": 15,
+        "platform": "step"
+      }
     },
     "station_plinth": {
       "lookup_name": "station_plinth",
@@ -55,7 +75,14 @@
       "complexity": "beginner",
       "include_in_map_data": true,
       "map_ready": true,
-      "tags": ["station", "modular", "plinth", "podium", "display", "grid"],
+      "tags": [
+        "station",
+        "modular",
+        "plinth",
+        "podium",
+        "display",
+        "grid"
+      ],
       "parameters": {
         "width_cells": "Footprint width in 1 m cells (X)",
         "depth_cells": "Footprint depth in 1 m cells (Z) — any combo, e.g. 1x2, 2x3, 4x4",
@@ -63,7 +90,10 @@
         "top_height": "Cap-top height where the artifact sits (≈1.0 m for small, lower for big plinths)",
         "top_style": "tray | flat | grate"
       },
-      "spatial_needs": {"footprint_cells": 1, "platform": "pedestal"}
+      "spatial_needs": {
+        "footprint_cells": 1,
+        "platform": "pedestal"
+      }
     },
     "station_pillar": {
       "lookup_name": "station_pillar",
@@ -75,14 +105,23 @@
       "complexity": "beginner",
       "include_in_map_data": true,
       "map_ready": true,
-      "tags": ["station", "modular", "pillar", "column", "corner", "grid"],
+      "tags": [
+        "station",
+        "modular",
+        "pillar",
+        "column",
+        "corner",
+        "grid"
+      ],
       "parameters": {
         "height": "Pillar height in metres (default 2.5)",
         "post_width": "Shaft width, fits inside a 1 m cell (default 0.42)",
         "lit_groove": "Vertical lit accent groove (bool)",
         "readout_face": "Small framed readout on the +Z face (bool)"
       },
-      "spatial_needs": {"footprint_cells": 1}
+      "spatial_needs": {
+        "footprint_cells": 1
+      }
     },
     "curation_station": {
       "lookup_name": "curation_station",
@@ -94,7 +133,14 @@
       "complexity": "advanced",
       "include_in_map_data": true,
       "map_ready": true,
-      "tags": ["station", "modular", "curation", "composer", "gallery", "grid"],
+      "tags": [
+        "station",
+        "modular",
+        "curation",
+        "composer",
+        "gallery",
+        "grid"
+      ],
       "parameters": {
         "artifacts": "Array of 1-5 artifact lookup-names to curate",
         "plinth_spacing_cells": "Cells between plinth centres (default 2)",
@@ -102,7 +148,10 @@
         "with_wall": "Build the backing wall (bool)",
         "with_pillars": "Build framing pillars (bool)"
       },
-      "spatial_needs": {"footprint_cells": 33}
+      "spatial_needs": {
+        "footprint_cells": 33
+      },
+      "auto_ground": false
     },
     "station_cabinet": {
       "lookup_name": "station_cabinet",
@@ -114,7 +163,15 @@
       "complexity": "intermediate",
       "include_in_map_data": true,
       "map_ready": true,
-      "tags": ["station", "modular", "cabinet", "storage", "display", "glass", "grid"],
+      "tags": [
+        "station",
+        "modular",
+        "cabinet",
+        "storage",
+        "display",
+        "glass",
+        "grid"
+      ],
       "parameters": {
         "width_cells": "Cabinet width in 1 m cells (int, default 2)",
         "height": "Height in metres (default 1.9)",
@@ -123,7 +180,10 @@
         "glow_color": "Interior shelf glow colour",
         "top_readout": "Framed readout on top (bool)"
       },
-      "spatial_needs": {"footprint_cells": 2, "wall_backing": true}
+      "spatial_needs": {
+        "footprint_cells": 2,
+        "wall_backing": true
+      }
     },
     "station_barrier": {
       "lookup_name": "station_barrier",
@@ -135,7 +195,14 @@
       "complexity": "beginner",
       "include_in_map_data": true,
       "map_ready": true,
-      "tags": ["station", "modular", "barrier", "rail", "threshold", "grid"],
+      "tags": [
+        "station",
+        "modular",
+        "barrier",
+        "rail",
+        "threshold",
+        "grid"
+      ],
       "parameters": {
         "length_cells": "Run length in 1 m cells (int, default 4)",
         "height": "Barrier height in metres (default 1.0)",
@@ -143,7 +210,9 @@
         "brand_text": "2D-in-3D brand text across the front",
         "hazard_base": "Caution stripe at the base (bool)"
       },
-      "spatial_needs": {"footprint_cells": 4}
+      "spatial_needs": {
+        "footprint_cells": 4
+      }
     },
     "station_panel": {
       "lookup_name": "station_panel",
@@ -155,7 +224,15 @@
       "complexity": "beginner",
       "include_in_map_data": true,
       "map_ready": true,
-      "tags": ["station", "modular", "panel", "screen", "info", "2d-in-3d", "grid"],
+      "tags": [
+        "station",
+        "modular",
+        "panel",
+        "screen",
+        "info",
+        "2d-in-3d",
+        "grid"
+      ],
       "parameters": {
         "width_cells": "Panel width in 1 m cells (int, default 2)",
         "height": "Panel height in metres (default 0.6)",
@@ -163,7 +240,10 @@
         "lines": "Array of body text lines",
         "header_color": "Header colour (amber by default)"
       },
-      "spatial_needs": {"footprint_cells": 2, "wall_backing": true}
+      "spatial_needs": {
+        "footprint_cells": 2,
+        "wall_backing": true
+      }
     },
     "station_bench": {
       "lookup_name": "station_bench",
@@ -175,14 +255,24 @@
       "complexity": "beginner",
       "include_in_map_data": true,
       "map_ready": true,
-      "tags": ["station", "modular", "bench", "workbench", "table", "grid"],
+      "tags": [
+        "station",
+        "modular",
+        "bench",
+        "workbench",
+        "table",
+        "grid"
+      ],
       "parameters": {
         "length_cells": "Bench length in 1 m cells (int, default 2)",
         "depth_cells": "Bench depth in 1 m cells (int, default 1)",
         "top_height": "Work-surface height in metres (default 0.92)",
         "drawers": "Drawer block under one end (bool)"
       },
-      "spatial_needs": {"footprint_cells": 2, "platform": "table"}
+      "spatial_needs": {
+        "footprint_cells": 2,
+        "platform": "table"
+      }
     },
     "station_crates": {
       "lookup_name": "station_crates",
@@ -194,14 +284,24 @@
       "complexity": "beginner",
       "include_in_map_data": true,
       "map_ready": true,
-      "tags": ["station", "modular", "crates", "boxes", "supply", "props", "grid"],
+      "tags": [
+        "station",
+        "modular",
+        "crates",
+        "boxes",
+        "supply",
+        "props",
+        "grid"
+      ],
       "parameters": {
         "footprint_cells": "Square footprint in cells (default 1)",
         "crate_count": "Number of crates 1-6 (default 4)",
         "palette": "cardboard | wood | metal",
         "with_canister": "Add a gas canister (bool)"
       },
-      "spatial_needs": {"footprint_cells": 1}
+      "spatial_needs": {
+        "footprint_cells": 1
+      }
     }
   }
 }
