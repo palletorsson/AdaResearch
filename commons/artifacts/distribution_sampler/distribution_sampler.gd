@@ -25,6 +25,8 @@ extends Node3D
 
 class_name DistributionSampler
 
+const HangarKit := preload("res://commons/artifacts/_hangar/hangar_kit.gd")
+
 # --- Constants ---
 const AXIS_RADIUS := 0.002
 const BAR_DEPTH := 0.02
@@ -234,20 +236,27 @@ func _create_sample_markers() -> void:
 
 ## Create title and statistics labels.
 func _create_labels() -> void:
-	_info_label = Label3D.new()
-	_info_label.name = "InfoLabel"
-	_info_label.pixel_size = 0.002
-	_info_label.font_size = 16
-	_info_label.position = Vector3(0, display_height + 0.08, 0)
-	_info_label.text = "DISTRIBUTION SAMPLER"
-	add_child(_info_label)
+	# Title — a framed 2D-in-3D sign on a STALK above the screen (mounted to the body, not floating).
+	var title := HangarKit.signage("DISTRIBUTION SAMPLER", [], Vector2(display_width * 0.64, 0.11), 0.13, Vector3(0, 1, 0))
+	title.position = Vector3(0, display_height, 0)
+	add_child(title)
 
+	# Stats — an empty framed plate on a side BRACKET; the live value text sits on its face
+	# (2D-on-surface, fixed orientation), updated every frame by _update_stats().
+	var arm := 0.12
+	var sx := display_width / 2 + 0.05
+	var sy := display_height / 2
+	var stats_plate := HangarKit.signage("", [], Vector2(0.34, 0.3), arm, Vector3(1, 0, 0))
+	stats_plate.position = Vector3(sx, sy, 0)
+	add_child(stats_plate)
 	_stats_label = Label3D.new()
 	_stats_label.name = "StatsLabel"
-	_stats_label.pixel_size = 0.0012
+	_stats_label.pixel_size = 0.0011
 	_stats_label.font_size = 12
-	_stats_label.position = Vector3(display_width / 2 + 0.08, display_height / 2, 0)
-	_stats_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+	_stats_label.billboard = BaseMaterial3D.BILLBOARD_DISABLED
+	_stats_label.modulate = Color(0.86, 0.95, 0.86)
+	_stats_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_stats_label.position = Vector3(sx + arm, sy + 0.02, 0.05)
 	add_child(_stats_label)
 
 ## Create VR-interactive buttons for switching distributions and clearing data.

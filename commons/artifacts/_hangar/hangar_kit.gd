@@ -267,6 +267,35 @@ const SYS_COLOR := {
 }
 
 
+## A framed 2D-in-3D readout panel mounted on a VISIBLE BRACKET, so the text reads as PART of the
+## artifact (a sign on a wall bracket, a screen on a stalk) rather than floating beside it. Origin =
+## the MOUNT POINT on the artifact surface; the panel sits `reach` away along `dir`, joined by two
+## struts off a mount plate. dir: (0,0,1) boom toward viewer · (0,1,0) stalk up · (±1,0,0) side arm.
+static func signage(header: String, lines: Array, size: Vector2 = Vector2(0.5, 0.18), reach: float = 0.14, dir: Vector3 = Vector3(0, 0, 1), tilt_deg: float = 0.0) -> Node3D:
+	var root := Node3D.new()
+	root.name = "Signage"
+	var d: Vector3 = dir.normalized()
+	if d == Vector3.ZERO:
+		d = Vector3(0, 0, 1)
+	var panel_pos: Vector3 = d * reach
+	var steel := worn_metal(PANEL_TRIM)
+	# Mount plate flush on the artifact surface.
+	root.add_child(box(Vector3.ZERO, Vector3(0.07, 0.07, 0.022), steel))
+	# Two struts from the mount to just behind the panel, offset perpendicular to the reach.
+	var perp: Vector3 = Vector3(0, 1, 0) if absf(d.dot(Vector3(0, 1, 0))) < 0.85 else Vector3(1, 0, 0)
+	var off: float = clampf(size.y * 0.34, 0.04, size.y * 0.5)
+	var back: Vector3 = panel_pos - d * 0.03
+	for s in [1.0, -1.0]:
+		root.add_child(_pipe(perp * (s * off), back + perp * (s * off), 0.012, steel))
+	# Framed 2D-in-3D panel at the bracket end.
+	var panel: Node3D = readout(header, lines, size)
+	panel.position = panel_pos
+	if tilt_deg != 0.0:
+		panel.rotation_degrees.x = tilt_deg
+	root.add_child(panel)
+	return root
+
+
 ## A boundary fixture where a system enters the room (a wall outlet, a ceiling intake). +Z faces out.
 static func system_source(kind: String, size: float = 0.3) -> Node3D:
 	var root := Node3D.new()
