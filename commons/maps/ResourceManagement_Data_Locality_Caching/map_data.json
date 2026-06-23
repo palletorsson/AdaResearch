@@ -3,7 +3,12 @@
     "name": "ResourceManagement_Data_Locality_Caching",
     "lookup_name": "ResourceManagement_Data_Locality_Caching",
     "title": "Data Locality & Caching",
-    "description": "Resource Management II — caching. A memory ladder stacked by log-latency: registers, L1/L2/L3, RAM, disk. A probe climbs to fetch — a HIT when the data is near, a ruinous MISS when it is far."
+    "description": "Resource Management II — caching. A memory ladder stacked by log-latency: registers, L1/L2/L3, RAM, disk. A probe climbs to fetch — a HIT when the data is near, a ruinous MISS when it is far.",
+    "dimensions": {
+      "width": 14,
+      "depth": 22,
+      "max_height": 2
+    }
   },
   "subtitles": {
     "intro": {

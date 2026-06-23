@@ -3,7 +3,12 @@
     "name": "ResourceManagement_Real_time_vs_Offline_Processing",
     "lookup_name": "ResourceManagement_Real_time_vs_Offline_Processing",
     "title": "Real-time vs Offline",
-    "description": "Resource Management III — the clock. Twin pipelines: a real-time lane with a frame deadline (finish or drop the frame, red) and an offline lane with no deadline that completes everything at full quality."
+    "description": "Resource Management III — the clock. Twin pipelines: a real-time lane with a frame deadline (finish or drop the frame, red) and an offline lane with no deadline that completes everything at full quality.",
+    "dimensions": {
+      "width": 14,
+      "depth": 22,
+      "max_height": 2
+    }
   },
   "subtitles": {
     "intro": {

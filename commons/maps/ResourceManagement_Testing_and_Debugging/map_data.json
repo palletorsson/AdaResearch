@@ -3,7 +3,12 @@
     "name": "ResourceManagement_Testing_and_Debugging",
     "lookup_name": "ResourceManagement_Testing_and_Debugging",
     "title": "Testing & Debugging",
-    "description": "Resource Management V — the test board. A grid of cases that pass green or fail red; inject a bug and a band flips red, fix it and they heal left to right. Each cell is a claim about the future."
+    "description": "Resource Management V — the test board. A grid of cases that pass green or fail red; inject a bug and a band flips red, fix it and they heal left to right. Each cell is a claim about the future.",
+    "dimensions": {
+      "width": 14,
+      "depth": 22,
+      "max_height": 2
+    }
   },
   "subtitles": {
     "intro": {

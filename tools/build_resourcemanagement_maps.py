@@ -110,7 +110,10 @@ def _build(m):
     util[TELE[0]][TELE[1]] = "t:" + m["next"]
     inter[ART[0]][ART[1]] = m["artifact"]
     return {
-        "map_info": {"name": m["name"], "lookup_name": m["name"], "title": m["title"], "description": m["desc"]},
+        "map_info": {
+            "name": m["name"], "lookup_name": m["name"], "title": m["title"], "description": m["desc"],
+            "dimensions": {"width": COLS, "depth": ROWS, "max_height": 2},
+        },
         "subtitles": {
             "intro": {"text": m["intro"], "speaker": m["title"], "level": 1},
             m["truth_key"]: {"text": m["truth"], "speaker": m["title"], "level": 1},
