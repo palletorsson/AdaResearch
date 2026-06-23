@@ -32,6 +32,7 @@ var strategy_type: int = CAStrategy.StrategyType.SIMPLE_SWITCHED
 var is_playing: bool = false
 var step_timer: float = 0.0
 var step_interval: float = 0.5
+var _embedded: bool = false  # true when loaded as an artifact inside a map (vs run standalone)
 
 # Camera
 var _xr_active: bool = false
@@ -41,7 +42,16 @@ var camera_target: Vector3 = Vector3(10, 12, 10)
 
 func _ready() -> void:
 	_xr_active = XRServer.primary_interface != null
-	setup_camera()
+	# Embedded as an artifact inside a map (not run standalone): suppress the demo's
+	# screen-space UI panel and standalone camera so they don't leak into the host scene.
+	# The CA content (ca_grid) still builds and renders — only the demo chrome is hidden.
+	_embedded = get_tree().current_scene != self
+	if _embedded:
+		if is_instance_valid(ui): ui.visible = false
+		if is_instance_valid(camera): camera.current = false
+		set_process_unhandled_input(false)
+	else:
+		setup_camera()
 	setup_ui()
 	reset_simulation()
 
