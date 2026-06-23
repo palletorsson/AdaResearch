@@ -23,9 +23,10 @@ const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
 
 @export_group("Set")
 ## 1 to 5 artifact lookup-names to curate. Missing names leave an empty plinth.
-## Default set is INTERACTIVE (buttons + sliders) so you can test the desktop crosshair / VR
-## interaction out of the box — swap in any registered artifact.
-@export var artifacts: Array[String] = ["ca_rule_explorer", "distribution_sampler", "decision_boundary_viewer"]
+## Default set spans the full size range — a tiny point on a 1x1 podium up to a room-scale 3D CA grid
+## on a 4x4 platform — and keeps two INTERACTIVE artifacts (ca_rule_explorer, distribution_sampler) so
+## you can test the desktop crosshair / VR pointer out of the box. Swap in any registered artifact.
+@export var artifacts: Array[String] = ["point", "ca_rule_explorer", "distribution_sampler", "grid_3d_4x4x4"]
 
 @export_group("Layout (grid cells)")
 ## Cells between plinth centres along the row.
@@ -348,11 +349,26 @@ func _short_label(nm: String, i: int) -> String:
 
 # Hide the artifact's floating billboard text (Label3D) so the station's 2D-in-3D
 # plates are the only captions; surface-baked text (MeshInstance3D) is untouched.
-func _hide_labels(node: Node) -> void:
-	if node is Label3D:
-		(node as Label3D).visible = false
+func _hide_labels(node: Node, in_sign: bool = false) -> void:
+	# Despite the name, this now FRAMES each curated artifact's floating text instead of hiding it:
+	# the Label3D is pinned (billboard off) and gets a dark back-plate + light bezel behind it, so
+	# every artifact's text reads as a framed 2D-on-surface readout. Skips text already inside a
+	# HangarKit Signage/Readout (the hand-mounted signs) to avoid double-framing.
+	var sig := in_sign or node.name == "Signage" or node.name == "Readout"
+	if node is Label3D and not sig:
+		var L := node as Label3D
+		L.billboard = BaseMaterial3D.BILLBOARD_DISABLED
+		var ls := L.text.split("
+")
+		var ml := 1
+		for ss in ls:
+			ml = maxi(ml, str(ss).length())
+		var w: float = clampf(float(ml) * float(L.font_size) * L.pixel_size * 0.6 + 0.05, 0.08, 1.5)
+		var hh: float = clampf(float(ls.size()) * float(L.font_size) * L.pixel_size * 1.4 + 0.04, 0.05, 0.8)
+		L.add_child(HangarKit.box(Vector3(0, 0, -0.014), Vector3(w + 0.03, hh + 0.03, 0.012), HangarKit.rams_body(Color(0.70, 0.68, 0.64), 0.06)))
+		L.add_child(HangarKit.box(Vector3(0, 0, -0.007), Vector3(w, hh, 0.008), HangarKit.emissive(Color(0.09, 0.10, 0.12), 0.3)))
 	for c in node.get_children():
-		_hide_labels(c)
+		_hide_labels(c, sig)
 
 
 # Strip a leading curriculum number prefix (e.g. "1.0 a Point" -> "Point") for clean plates.
