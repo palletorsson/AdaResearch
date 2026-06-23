@@ -30,7 +30,7 @@ const LAYERS := [
 	{"id": "artifacts", "label": "ARTIFACTS", "ready": true},
 	{"id": "graph", "label": "ONTOLOGY GRAPH", "ready": false},
 	{"id": "gameplay", "label": "GAMEPLAY", "ready": false},
-	{"id": "grid", "label": "GRID", "ready": false},
+	{"id": "grid", "label": "GRID", "ready": true},
 ]
 var _active: String = "pathfind"
 
@@ -141,6 +141,7 @@ func _refresh() -> void:
 	match _active:
 		"pathfind": _layer_pathfind()
 		"artifacts": _layer_artifacts()
+		"grid": _layer_grid()
 		_:
 			_clear_overlay()
 			_set_score("%s — coming soon" % _active.to_upper())
@@ -340,6 +341,33 @@ func _toast(t: String) -> void:
 	if _toast_lbl:
 		_toast_lbl.text = t
 		_toast_t = 2.5
+
+
+# ── GRID layer: height heatmap lens + fill score ─────────────────────
+func _layer_grid() -> void:
+	var floor := 0
+	var maxh := 1
+	for z in _d:
+		for x in _w:
+			var h := _height_at(x, z)
+			if h >= 1:
+				floor += 1
+				maxh = maxi(maxh, h)
+	var total := _w * _d
+	var quads: Array = []
+	for z in _d:
+		for x in _w:
+			var h := _height_at(x, z)
+			if h < 1:
+				continue
+			var t := float(h - 1) / float(maxi(maxh - 1, 1))   # 0..1 across the height range
+			var col := Color(0.15, 0.4, 0.9).lerp(Color(0.96, 0.85, 0.2), t)   # low blue → high yellow
+			col.a = 0.55
+			var ty := float(h) * _cube + 0.06
+			quads.append({"pos": Vector3((float(x) + 0.5) * _cube, ty, (float(z) + 0.5) * _cube), "color": col})
+	_paint_overlay(quads)
+	_set_score("GRID    fill %d%% (%d/%d cells floor)    heights 1..%d" % [
+		int(round(100.0 * float(floor) / float(maxi(total, 1)))), floor, total, maxh])
 
 
 # ── ARTIFACTS layer: footprint lens + fit/wall/isolate/cluster score + auto-organize ──
