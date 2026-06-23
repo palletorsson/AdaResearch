@@ -33,6 +33,7 @@ const LAYERS := [
 	{"id": "grid", "label": "GRID", "ready": true},
 ]
 var _active: String = "pathfind"
+var _organized: Dictionary = {}   # artifacts auto-organize: old anchor (Vector2i) -> suggested anchor
 
 var _overlay: MultiMeshInstance3D = null
 var _score_lbl: Label = null
@@ -66,7 +67,9 @@ func _unhandled_key_input(event: InputEvent) -> void:
 			_toast("layer refreshed")
 		elif event.keycode == KEY_G and _bound and _active == "artifacts":
 			_auto_organize_artifacts()
-			_toast("auto-organized (preview)")
+			_toast("auto-organized (preview) — Enter to apply")
+		elif (event.keycode == KEY_ENTER or event.keycode == KEY_KP_ENTER) and _bound and _active == "artifacts" and not _organized.is_empty():
+			_apply_artifacts()
 
 
 # ── Bind to the editor once its grid is built ─────────────────────────
@@ -836,5 +839,50 @@ func _auto_organize_artifacts() -> void:
 					continue
 				var ty := float(_height_at(c.x, c.y)) * _cube + 0.08
 				quads.append({"pos": Vector3((float(c.x) + 0.5) * _cube, ty, (float(c.y) + 0.5) * _cube), "color": Color(0.3, 0.9, 0.42, 0.62)})
+	_organized = placed
 	_paint_overlay(quads)
-	_set_score("ARTIFACTS · auto-organized preview — %d/%d packed onto floor, no overlap    [R = back to current]" % [placed.size(), arts.size()])
+	_set_score("ARTIFACTS · auto-organized preview — %d/%d packed, no overlap    [Enter = apply to map · R = cancel]" % [placed.size(), arts.size()])
+
+
+# Apply the previewed auto-organize to the real map: move each artifact to its suggested cell by
+# driving the editor's own despawn/spawn + rewriting its _interactables data, so a Save (W) persists it.
+func _apply_artifacts() -> void:
+	if _organized.is_empty():
+		_toast("press G to auto-organize first")
+		return
+	var inter = _editor.get("_interactables")
+	if not (inter is Array):
+		_toast("cannot reach the editor's interactables layer")
+		return
+	if _editor.has_method("_push_artifact_undo"):
+		_editor._push_artifact_undo()   # so Ctrl+Z in the editor can undo the whole apply
+	var moves: Array = []
+	for old in _organized:
+		var nw: Vector2i = _organized[old]
+		if old == nw:
+			continue
+		if old.y < 0 or old.y >= inter.size() or old.x < 0 or old.x >= (inter[old.y] as Array).size():
+			continue
+		var token := str(inter[old.y][old.x])
+		if token.strip_edges() in ["", " "]:
+			continue
+		moves.append({"token": token, "old": old, "new": nw})
+	# Clear + despawn every source first, so moves into vacated cells don't collide.
+	for m in moves:
+		var o: Vector2i = m["old"]
+		if _editor.has_method("_despawn_artifact_at"):
+			_editor._despawn_artifact_at(o.x, o.y)
+		inter[o.y][o.x] = " "
+	# Write + spawn at the destinations (data keeps the full token; spawn uses the bare lookup).
+	var done := 0
+	for m in moves:
+		var dst: Vector2i = m["new"]
+		if dst.y < 0 or dst.y >= inter.size() or dst.x < 0 or dst.x >= (inter[dst.y] as Array).size():
+			continue
+		inter[dst.y][dst.x] = m["token"]
+		if _editor.has_method("_spawn_artifact"):
+			_editor._spawn_artifact(dst.x, dst.y, str(m["token"]).split(":")[0])
+		done += 1
+	_organized.clear()
+	_refresh()
+	_toast("applied — %d artifacts moved · press W in the editor to save" % done)
