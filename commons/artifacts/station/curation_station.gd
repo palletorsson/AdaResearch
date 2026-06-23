@@ -35,6 +35,9 @@ const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
 @export var stage_depth_cells: int = 3
 ## Extra cells of stage margin each side of the plinth row.
 @export var stage_margin_cells: int = 2
+## Bay shape: row (a single front-facing line) | corner (an L — two walls meeting at a 90° corner,
+## plinths along both legs). More shapes (two_side | u | ring) build on the same perimeter-path model.
+@export var layout: String = "row"
 
 @export_group("Heights (m)")
 @export var plinth_height: float = 1.0
@@ -106,6 +109,7 @@ func _read_overrides() -> void:
 	if has_meta("config_barrier_style"): barrier_style = str(get_meta("config_barrier_style")).to_lower()
 	if has_meta("config_with_cabinets"): with_cabinets = _b(get_meta("config_with_cabinets"))
 	if has_meta("config_with_crates"): with_crates = _b(get_meta("config_with_crates"))
+	if has_meta("config_layout"): layout = str(get_meta("config_layout")).to_lower()
 
 
 func _count() -> int:
@@ -166,46 +170,36 @@ func _plinth_height_for(max_dim: int) -> float:
 
 
 func _build_kit(items: Array) -> void:
-	var n: int = items.size()
-	var gap: int = 1   # cells between plinths
-	# X layout — cumulative plinth widths + gaps, centred on origin.
-	var total_w: int = 0
-	var max_d: int = 1
-	for item in items:
-		total_w += int(item["w"])
-		max_d = maxi(max_d, int(item["d"]))
-	total_w += gap * maxi(n - 1, 0)
-	var xs: Array = []
-	var cursor: float = -float(total_w) * 0.5 * CELL
-	for item in items:
-		xs.append(cursor + float(int(item["w"])) * 0.5 * CELL)
-		cursor += float(int(item["w"]) + gap) * CELL
-	# Stage footprint (whole cells), sized to the row + the deepest plinth.
-	var stage_w_cells: int = total_w + maxi(stage_margin_cells, 1) * 2
-	var depth_cells: int = maxi(max_d + 2, maxi(stage_depth_cells, 2))
-	var front_line: float = float(depth_cells) * 0.5 * CELL - 0.9   # plinth FRONTS align here
-	var back_z: float = -float(depth_cells) * 0.5 * CELL
+	# A layout builder fills a PERIMETER PATH: _slots (plinths, each with a yaw) + _segments (walls,
+	# each with a yaw) + pillars (junctions/corners) + barriers (open edges). The instancing below is
+	# layout-agnostic — row / corner / (later) two_side / u / ring are all the same emitter.
+	var L: Dictionary = _compute_layout(items)
+	var slots: Array = L["slots"]
 
-	# Stage.
+	# Stage sized to the layout.
 	var stage: Node3D = StationStageScene.instantiate()
 	add_child(stage)
 	stage.apply_grid_config({
-		"width_cells": stage_w_cells, "depth_cells": depth_cells,
-		"step_height": stage_step_height, "hazard_edge": true, "edge_light": true,
+		"width_cells": int(L["w_cells"]), "depth_cells": int(L["d_cells"]),
+		"step_height": stage_step_height, "hazard_edge": bool(L["hazard"]), "edge_light": true,
 		"stencil_text": "CURATION", "body_color": _cs(body_color),
 		"panel_color": _cs(panel_color), "accent_color": _cs(accent_color),
 	})
 
 	# Plinths (sized to each artifact) + the artifact grounded on the cap + a caption plaque.
-	for i in range(n):
-		var item: Dictionary = items[i]
-		var wc: int = int(item["w"])
-		var dc: int = int(item["d"])
+	# Only the plinth + plaque rotate to the slot yaw; the ARTIFACT stays axis-aligned so its
+	# measured base_y grounding stays valid.
+	for i in range(slots.size()):
+		var slot: Dictionary = slots[i]
+		var wc: int = int(slot["w"])
+		var dc: int = int(slot["d"])
+		var yaw: float = float(slot["yaw"])
 		var h: float = _plinth_height_for(maxi(wc, dc))
-		var pz: float = front_line - float(dc) * 0.5 * CELL   # front-aligned row
+		var item: Dictionary = slot["item"]
 		var p: Node3D = StationPlinthScene.instantiate()
 		add_child(p)
-		p.position = Vector3(xs[i], stage_step_height, pz)
+		p.position = Vector3(float(slot["x"]), stage_step_height, float(slot["z"]))
+		p.rotation.y = yaw
 		p.apply_grid_config({
 			"width_cells": wc, "depth_cells": dc, "top_height": h, "top_style": "tray",
 			"edge_light": true, "stencil_text": "", "three_bar": false, "body_color": _cs(body_color),
@@ -214,72 +208,175 @@ func _build_kit(items: Array) -> void:
 		var inst = item["inst"]
 		if inst != null and inst is Node3D:
 			(inst as Node3D).visible = true
-			(inst as Node3D).position = Vector3(xs[i], stage_step_height + h - float(item["base_y"]), pz)
+			(inst as Node3D).position = Vector3(float(slot["x"]), stage_step_height + h - float(item["base_y"]), float(slot["z"]))
 		if label_plinths:
 			var nm := str(item["name"])
 			var disp: String = _clean_name(str(_name_disp.get(nm, nm))) if nm != "" else "ITEM-%d" % (i + 1)
 			var plaque := _make_label_plaque(disp, "%02d" % (i + 1))
-			plaque.position = Vector3(xs[i], stage_step_height + clampf(h * 0.5, 0.22, 0.62), pz + float(dc) * 0.5 * CELL - 0.17)
+			var off: Vector3 = Vector3(0, 0, float(dc) * 0.5 * CELL - 0.17).rotated(Vector3.UP, yaw)
+			plaque.position = Vector3(float(slot["x"]) + off.x, stage_step_height + clampf(h * 0.5, 0.22, 0.62), float(slot["z"]) + off.z)
+			plaque.rotation.y = yaw
 			add_child(plaque)
 
-	# Backing wall — tiling run with end caps, length = stage width.
+	# Backing wall — one tiling run per segment, rotated to face into the room.
 	if with_wall:
-		var wall: Node3D = StationWallScene.instantiate()
-		add_child(wall)
-		wall.position = Vector3(0, 0, back_z - 0.12)
-		wall.apply_grid_config({
-			"length_cells": stage_w_cells, "start_cap": true, "end_cap": true,
-			"height": wall_height, "panel_style": "panel", "screen_slot": with_wall_screen,
-			"screen_header": "CURATION", "screen_lines": ["%d ON SHOW" % n, "LINK  OK"],
-			"lit_seam": true, "body_color": _cs(body_color), "panel_color": _cs(panel_color),
-			"accent_color": _cs(accent_color),
-		})
+		var segs: Array = L["segments"]
+		for seg in segs:
+			var wall: Node3D = StationWallScene.instantiate()
+			add_child(wall)
+			wall.position = Vector3(float(seg["x"]), 0, float(seg["z"]))
+			wall.rotation.y = float(seg["yaw"])
+			wall.apply_grid_config({
+				"length_cells": int(seg["length_cells"]), "start_cap": bool(seg["start_cap"]), "end_cap": bool(seg["end_cap"]),
+				"height": wall_height, "panel_style": "panel", "screen_slot": with_wall_screen and bool(seg.get("screen", false)),
+				"screen_header": "CURATION", "screen_lines": ["%d ON SHOW" % slots.size(), "LINK  OK"],
+				"lit_seam": true, "body_color": _cs(body_color), "panel_color": _cs(panel_color),
+				"accent_color": _cs(accent_color),
+			})
 
-	# Framing pillars at the two front corners of the stage.
+	# Framing pillars (front corners of a row; the inside corner of an L).
 	if with_pillars:
-		var half_w: float = float(stage_w_cells) * 0.5 * CELL
-		var front_z: float = float(depth_cells) * 0.5 * CELL
-		for sx in [-1.0, 1.0]:
+		for pp in L["pillars"]:
 			var pil: Node3D = StationPillarScene.instantiate()
 			add_child(pil)
-			pil.position = Vector3(sx * (half_w - 0.45), 0, front_z - 0.45)
+			pil.position = pp
 			pil.apply_grid_config({
 				"height": wall_height, "lit_groove": true, "body_color": _cs(body_color),
 				"panel_color": _cs(panel_color), "accent_color": _cs(accent_color),
 			})
 
-	var half_w: float = float(stage_w_cells) * 0.5 * CELL
-	var front_z: float = float(depth_cells) * 0.5 * CELL
-
-	# Front barrier — a low threshold across the stage front (open rail = never blocks the set).
+	# Barrier(s) — a low threshold across each open edge (open rail = never blocks the set).
 	if with_barrier:
-		var bar: Node3D = StationBarrierScene.instantiate()
-		add_child(bar)
-		bar.position = Vector3(0, 0, front_z + 0.05)
-		bar.apply_grid_config({
-			"length_cells": stage_w_cells, "height": 1.0, "style": barrier_style,
-			"hazard_base": true, "panel_color": _cs(body_color), "post_color": _cs(panel_color),
-			"accent_color": _cs(accent_color),
-		})
-
-	# Flanking storage/display cabinets against the back wall (the "archive behind" read).
-	if with_cabinets:
-		for sx in [-1.0, 1.0]:
-			var cab: Node3D = StationCabinetScene.instantiate()
-			add_child(cab)
-			cab.position = Vector3(sx * (half_w - 1.0), 0, back_z + 0.45)
-			cab.apply_grid_config({
-				"width_cells": 2, "shelf_count": 4, "front_style": "glass",
-				"body_color": _cs(body_color), "panel_color": _cs(panel_color), "accent_color": _cs(accent_color),
+		for b in L["barriers"]:
+			var bar: Node3D = StationBarrierScene.instantiate()
+			add_child(bar)
+			bar.position = Vector3(float(b["x"]), 0, float(b["z"]))
+			bar.rotation.y = float(b["yaw"])
+			bar.apply_grid_config({
+				"length_cells": int(b["length_cells"]), "height": 1.0, "style": barrier_style,
+				"hazard_base": true, "panel_color": _cs(body_color), "post_color": _cs(panel_color),
+				"accent_color": _cs(accent_color),
 			})
 
-	# Supply crates in the back corners (lived-in dressing).
-	if with_crates:
-		for sx2 in [-1.0, 1.0]:
-			var cr: Node3D = StationCratesScene.instantiate()
-			add_child(cr)
-			cr.position = Vector3(sx2 * (half_w - 0.55), 0, back_z + 0.6)
-			cr.apply_grid_config({"footprint_cells": 1, "crate_count": 4, "palette": "metal", "seed_index": int(sx2) + 3})
+	# Flanking cabinets / crates — back-wall dressing (row layout only for now).
+	if str(L["layout"]) == "row":
+		var half_w: float = float(int(L["w_cells"])) * 0.5 * CELL
+		var back_z: float = -float(int(L["d_cells"])) * 0.5 * CELL
+		if with_cabinets:
+			for sx in [-1.0, 1.0]:
+				var cab: Node3D = StationCabinetScene.instantiate()
+				add_child(cab)
+				cab.position = Vector3(sx * (half_w - 1.0), 0, back_z + 0.45)
+				cab.apply_grid_config({
+					"width_cells": 2, "shelf_count": 4, "front_style": "glass",
+					"body_color": _cs(body_color), "panel_color": _cs(panel_color), "accent_color": _cs(accent_color),
+				})
+		if with_crates:
+			for sx2 in [-1.0, 1.0]:
+				var cr: Node3D = StationCratesScene.instantiate()
+				add_child(cr)
+				cr.position = Vector3(sx2 * (half_w - 0.55), 0, back_z + 0.6)
+				cr.apply_grid_config({"footprint_cells": 1, "crate_count": 4, "palette": "metal", "seed_index": int(sx2) + 3})
+
+
+# Dispatch to a layout builder. Each returns {layout, w_cells, d_cells, hazard, slots, segments, pillars, barriers}.
+func _compute_layout(items: Array) -> Dictionary:
+	match layout:
+		"corner":
+			return _layout_corner(items)
+		_:
+			return _layout_row(items)
+
+
+# ROW — a single front-facing line of plinths with a back wall, front pillars + barrier (the original bay).
+func _layout_row(items: Array) -> Dictionary:
+	var n: int = items.size()
+	var gap: int = 1
+	var total_w: int = 0
+	var max_d: int = 1
+	for item in items:
+		total_w += int(item["w"])
+		max_d = maxi(max_d, int(item["d"]))
+	total_w += gap * maxi(n - 1, 0)
+	var w_cells: int = total_w + maxi(stage_margin_cells, 1) * 2
+	var d_cells: int = maxi(max_d + 2, maxi(stage_depth_cells, 2))
+	var front_line: float = float(d_cells) * 0.5 * CELL - 0.9
+	var back_z: float = -float(d_cells) * 0.5 * CELL
+	var front_z: float = float(d_cells) * 0.5 * CELL
+	var half_w: float = float(w_cells) * 0.5 * CELL
+	var slots: Array = []
+	var cursor: float = -float(total_w) * 0.5 * CELL
+	for item in items:
+		var wc: int = int(item["w"])
+		var dc: int = int(item["d"])
+		slots.append({
+			"x": cursor + float(wc) * 0.5 * CELL, "z": front_line - float(dc) * 0.5 * CELL,
+			"w": wc, "d": dc, "yaw": 0.0, "item": item,
+		})
+		cursor += float(wc + gap) * CELL
+	return {
+		"layout": "row", "w_cells": w_cells, "d_cells": d_cells, "hazard": true,
+		"slots": slots,
+		"segments": [{"x": 0.0, "z": back_z - 0.12, "length_cells": w_cells, "yaw": 0.0, "start_cap": true, "end_cap": true, "screen": true}],
+		"pillars": [Vector3(-(half_w - 0.45), 0, front_z - 0.45), Vector3(half_w - 0.45, 0, front_z - 0.45)],
+		"barriers": [{"x": 0.0, "z": front_z + 0.05, "length_cells": w_cells, "yaw": 0.0}],
+	}
+
+
+# CORNER (L) — two walls meeting at a 90° back-left corner; plinths split along both legs, facing into
+# the room; one junction pillar fills the corner notch. The first step of the perimeter-path family.
+func _layout_corner(items: Array) -> Dictionary:
+	var n: int = items.size()
+	var gap: int = 1
+	var n_back: int = int(ceil(float(n) / 2.0))   # back leg gets the extra item
+	var back_items: Array = items.slice(0, n_back)
+	var side_items: Array = items.slice(n_back)
+	var back_w: int = 0
+	for it in back_items:
+		back_w += int(it["w"])
+	back_w += gap * maxi(back_items.size() - 1, 0)
+	var side_w: int = 0
+	for it in side_items:
+		side_w += int(it["w"])
+	side_w += gap * maxi(side_items.size() - 1, 0)
+	var corner_clear: int = 2   # cells of clearance at the corner so the legs don't collide
+	var run: int = maxi(back_w, side_w) + corner_clear
+	var side_cells: int = run + maxi(stage_margin_cells, 1) * 2
+	var half: float = float(side_cells) * 0.5 * CELL
+	var back_z: float = -half
+	var left_x: float = -half
+	var inset: float = 0.6   # plinth front sits this far in front of its wall
+	var slots: Array = []
+	# Back leg — runs along +X from near the corner, plinths facing +Z (into the room).
+	var cx: float = left_x + float(corner_clear) * CELL
+	for it in back_items:
+		var wcA: int = int(it["w"])
+		var dcA: int = int(it["d"])
+		slots.append({
+			"x": cx + float(wcA) * 0.5 * CELL, "z": back_z + float(dcA) * 0.5 * CELL + inset,
+			"w": wcA, "d": dcA, "yaw": 0.0, "item": it,
+		})
+		cx += float(wcA + gap) * CELL
+	# Side leg — runs along +Z from near the corner, plinths rotated +90° to face +X (into the room).
+	var cz: float = back_z + float(corner_clear) * CELL
+	for it in side_items:
+		var wcB: int = int(it["w"])
+		var dcB: int = int(it["d"])
+		slots.append({
+			"x": left_x + float(dcB) * 0.5 * CELL + inset, "z": cz + float(wcB) * 0.5 * CELL,
+			"w": wcB, "d": dcB, "yaw": PI * 0.5, "item": it,
+		})
+		cz += float(wcB + gap) * CELL
+	return {
+		"layout": "corner", "w_cells": side_cells, "d_cells": side_cells, "hazard": false,
+		"slots": slots,
+		"segments": [
+			{"x": 0.0, "z": back_z - 0.12, "length_cells": side_cells, "yaw": 0.0, "start_cap": false, "end_cap": true, "screen": true},
+			{"x": left_x - 0.12, "z": 0.0, "length_cells": side_cells, "yaw": PI * 0.5, "start_cap": true, "end_cap": false, "screen": false},
+		],
+		"pillars": [Vector3(left_x, 0, back_z)],
+		"barriers": [],
+	}
 
 
 

@@ -146,7 +146,8 @@
         "plinth_spacing_cells": "Cells between plinth centres (default 2)",
         "stage_depth_cells": "Stage depth in cells (default 3)",
         "with_wall": "Build the backing wall (bool)",
-        "with_pillars": "Build framing pillars (bool)"
+        "with_pillars": "Build framing pillars (bool)",
+        "layout": "Bay shape: row (default, a front-facing line) | corner (an L — two walls, plinths along both legs)"
       },
       "spatial_needs": {
         "footprint_cells": 33
