@@ -108,7 +108,7 @@ def _metrics(struct, D, W, spawn, anchors, foot):
     }
 
 
-def fold(map_name, cap=3, thread_path=True):
+def fold(map_name, cap=3, thread_path=True, artifacts=None):
     p = os.path.join(ROOT, "commons", "maps", map_name, "map_data.json")
     if not os.path.exists(p):
         print("no map", map_name)
@@ -119,7 +119,6 @@ def fold(map_name, cap=3, thread_path=True):
     util = _cells(m["layers"]["utilities"])
     D, W = len(struct), len(struct[0])
     sizes, edges = load_sizes(), load_edges()
-    disp = _display_names()
 
     def is_large(a):
         sp = sizes.get(a)
@@ -128,26 +127,49 @@ def fold(map_name, cap=3, thread_path=True):
     def is_crit(a):
         return edges.get(a) in CRITICAL_EDGES
 
-    # New interactables grid: keep larges + infra in place, pull smalls out to fold.
+    # New interactables grid. MAP MODE keeps larges + raised displays in place and pulls floor smalls
+    # out to fold; LIST MODE folds an arbitrary roster (the edited table of contents).
     new_inter = [["" for _ in range(W)] for _ in range(D)]
-    smalls = {"formal": [], "critical": []}   # ordered, deduped: (base, z, x)
+    smalls = {"formal": [], "critical": []}   # (base, z|None, x|None)
+    roster = []
+    grid_ids = []                              # list-mode landmarks, placed once the helpers exist
     seen = set()
-    for z in range(D):
-        for x in range(min(W, len(inter[z]))):
-            c = str(inter[z][x]).strip()
-            if not c or c.startswith("#"):
+    if artifacts is None:
+        for z in range(D):
+            for x in range(min(W, len(inter[z]))):
+                c = str(inter[z][x]).strip()
+                if not c or c.startswith("#"):
+                    continue
+                base = c.split(":")[0].split("#")[0]
+                reg = "critical" if is_crit(base) else "formal"
+                if base in INFRA or is_large(base):
+                    new_inter[z][x] = c                      # landmark / infra stays exactly where it is
+                    if base not in INFRA and base not in seen:
+                        seen.add(base)
+                        roster.append({"id": base, "role": "grid", "register": reg})
+                elif base in seen:
+                    continue
+                elif str(struct[z][x]).strip() != "1":
+                    seen.add(base)
+                    new_inter[z][x] = c                      # raised/pedestal = authored display, keep it
+                    roster.append({"id": base, "role": "wall", "register": reg})
+                else:
+                    seen.add(base)
+                    smalls[reg].append((base, z, x))
+                    roster.append({"id": base, "role": "wall", "register": reg})
+    else:
+        for a in artifacts:
+            aid = str(a.get("id", "")).strip()
+            if not aid or aid in seen or aid in INFRA:
                 continue
-            base = c.split(":")[0].split("#")[0]
-            if base in INFRA or is_large(base):
-                new_inter[z][x] = c                          # landmark / infra stays exactly where it is
-            elif base in seen:
-                continue
-            elif str(struct[z][x]).strip() != "1":
-                seen.add(base)
-                new_inter[z][x] = c                          # on a pedestal/raised cell = authored display, keep
+            seen.add(aid)
+            role = a.get("role") or ("grid" if is_large(aid) else "wall")
+            reg = a.get("register") or ("critical" if is_crit(aid) else "formal")
+            roster.append({"id": aid, "role": role, "register": reg})
+            if role == "grid":
+                grid_ids.append(aid)
             else:
-                seen.add(base)
-                smalls["critical" if is_crit(base) else "formal"].append((base, z, x))
+                smalls[reg].append((aid, None, None))
 
     # cluster each register into <=cap; fold clusters of >=2 into sections, keep lone smalls where they are.
     clusters, lone = [], []
@@ -171,7 +193,8 @@ def fold(map_name, cap=3, thread_path=True):
                 occ.add((z, x))
     for chunk in lone:
         for base, z, x in chunk:
-            occ.add((z, x))                                  # keep lone smalls' cells out of section footprints
+            if z is not None:
+                occ.add((z, x))                              # keep lone smalls' cells out of section footprints
 
     def is_floor(z, x):
         return 0 <= z < D and 0 <= x < W and str(struct[z][x]).strip() == "1"
@@ -203,7 +226,24 @@ def fold(map_name, cap=3, thread_path=True):
                     return spot[0], spot[1], ww, h
         return None
 
-    placed, unplaced, footprints = [], [], {}
+    def land_landmark():
+        for w, h in ((5, 5), (4, 4), (3, 3)):
+            spot = land(w, h)
+            if spot:
+                return spot[0], spot[1], w, h
+        return None
+
+    footprints, stray = {}, []
+    for aid in grid_ids:                                     # list-mode landmarks placed on clear floor
+        res = land_landmark()
+        if res:
+            cz, cx, w, h = res
+            new_inter[cz][cx] = aid
+            footprints[(cz, cx)] = (w, h)
+        else:
+            stray.append(aid)
+
+    placed, unplaced = [], []
     for reg, chunk in clusters:
         ids = [b for b, _, _ in chunk]
         res = land_flex(len(ids))
@@ -227,16 +267,25 @@ def fold(map_name, cap=3, thread_path=True):
         return None
     for chunk in lone:
         for base, z, x in chunk:
-            new_inter[z][x] = base
+            if z is not None:
+                new_inter[z][x] = base                       # map mode: keep its authored cell
+            else:
+                fc = free_cell()
+                if fc:
+                    new_inter[fc[0]][fc[1]] = base           # list mode: drop on a clear cell
     for reg, chunk in unplaced:
         for base, z, x in chunk:
-            if (z, x) not in occ:
+            if z is not None and (z, x) not in occ:
                 new_inter[z][x] = base
                 occ.add((z, x))
             else:
                 fc = free_cell()
                 if fc:
                     new_inter[fc[0]][fc[1]] = base
+    for aid in stray:
+        fc = free_cell()
+        if fc:
+            new_inter[fc[0]][fc[1]] = aid
 
     # locate spawn / teleporter / artifact anchors (+ footprints) for the walk and the metrics
     spawn_cell = tele_cell = None
@@ -262,13 +311,9 @@ def fold(map_name, cap=3, thread_path=True):
     m["layers"]["interactables"] = new_inter
     m["map_info"]["name"] = map_name + "_Folded"
     m["map_info"]["lookup_name"] = map_name + "_Folded"
-    m["map_info"]["description"] = ("Augmented %s: %d small artifacts folded into %d wall sections on the "
-                                    "clear floor; %d large artifacts kept as landmarks." %
-                                    (map_name, sum(len(c) for _, c, _ in placed), len(placed),
-                                     sum(1 for z in range(D) for x in range(W)
-                                         if str(new_inter[z][x]).strip() and "curation_station" not in str(new_inter[z][x])
-                                         and is_large(str(new_inter[z][x]).split(":")[0].split("#")[0]))))
-    return m, placed, unplaced, metrics
+    m["map_info"]["description"] = ("Folded %s: %d wall sections + %d landmarks on a 3-wide walk." %
+                                    (map_name, len(placed), sum(1 for r in roster if r["role"] == "grid")))
+    return m, placed, unplaced, metrics, roster
 
 
 def main():
@@ -276,13 +321,16 @@ def main():
     ap.add_argument("--map", required=True)
     ap.add_argument("--no-path", action="store_true", help="keep the authored floor instead of the 3-wide walk")
     ap.add_argument("--stdout", action="store_true", help="print folded map JSON to stdout, no file write")
+    ap.add_argument("--artifacts", help="JSON list of {id,role,register} to fold instead of the map's own")
     args = ap.parse_args()
-    res = fold(args.map, thread_path=not args.no_path)
+    artifacts = json.loads(args.artifacts) if args.artifacts else None
+    res = fold(args.map, thread_path=not args.no_path, artifacts=artifacts)
     if not res:
         return
-    m, placed, unplaced, metrics = res
+    m, placed, unplaced, metrics, roster = res
     if args.stdout:
-        print(json.dumps({"folded": m, "placed": placed, "unplaced": unplaced, "metrics": metrics}))
+        print(json.dumps({"folded": m, "placed": placed, "unplaced": unplaced,
+                          "metrics": metrics, "roster": roster}))
         return
     name = args.map + "_Folded"
     out = os.path.join(ROOT, "commons", "maps", name)
