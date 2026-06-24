@@ -292,13 +292,13 @@ def fold(map_name, cap=3, thread_path=True, artifacts=None, walk_width=3, walk_o
         if fc:
             new_inter[fc[0]][fc[1]] = aid
 
-    # locate spawn / teleporter / artifact anchors (+ footprints) for the walk and the metrics
-    spawn_cell = tele_cell = None
+    # detect teleporter (+ the authored spawn, used only when not threading a walk)
+    orig_spawn = tele_cell = None
     for z in range(D):
         for x in range(min(W, len(util[z]))):
             u = str(util[z][x]).strip()
             if u[:1] == "s" and u[:2] not in ("su",):
-                spawn_cell = (z, x)
+                orig_spawn = (z, x)
             elif u[:1] == "t":
                 tele_cell = (z, x)
     anchors, foot = [], {}
@@ -322,10 +322,21 @@ def fold(map_name, cap=3, thread_path=True, artifacts=None, walk_width=3, walk_o
 
         anchors = sorted(anchors, key=_rank)
     if thread_path:
-        # spawn -> every artifact -> teleporter; the rest of the grid becomes void.
-        m["layers"]["structure"] = thread_walk(struct, D, W, spawn_cell, anchors, tele_cell, foot,
+        # the walk starts at the (0,0) corner, touches every artifact, ends at the teleporter.
+        start = (0, 0)
+        m["layers"]["structure"] = thread_walk(struct, D, W, start, anchors, tele_cell, foot,
                                                 width=walk_width, order=walk_order)
-    metrics = _metrics(m["layers"]["structure"] if thread_path else struct, D, W, spawn_cell, anchors, foot)
+        new_util = [["" for _ in range(W)] for _ in range(D)]
+        for z in range(D):
+            for x in range(min(W, len(util[z]))):
+                u = str(util[z][x]).strip()
+                if u and not (u[:1] == "s" and u[:2] not in ("su",)):
+                    new_util[z][x] = u                       # keep teleporter + everything but the old spawn
+        new_util[0][0] = "s"                                 # spawn at the corner where the walk begins
+        m["layers"]["utilities"] = new_util
+    else:
+        start = orig_spawn
+    metrics = _metrics(m["layers"]["structure"] if thread_path else struct, D, W, start, anchors, foot)
 
     m["layers"]["interactables"] = new_inter
     m["map_info"]["name"] = map_name + "_Folded"
