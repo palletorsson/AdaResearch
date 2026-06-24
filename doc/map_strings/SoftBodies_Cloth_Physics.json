@@ -3,8 +3,8 @@
  "sequence": "softbodies",
  "counts": {
   "existing": 1,
-  "added": 1,
-  "large": 1
+  "added": 2,
+  "large": 2
  },
  "pearls": [
   {
@@ -26,6 +26,17 @@
    "concept": "The abject as force",
    "footprint": [
     1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "verlet_integration",
+   "name": "Verlet Integration",
+   "size": "large",
+   "source": "added",
+   "concept": "Verlet & the soft-body sim",
+   "footprint": [
+    9.0,
     1.0
    ]
   }

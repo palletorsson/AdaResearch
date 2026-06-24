@@ -3,8 +3,8 @@
  "sequence": "transformation",
  "counts": {
   "existing": 4,
-  "added": 4,
-  "large": 1
+  "added": 5,
+  "large": 2
  },
  "pearls": [
   {
@@ -19,14 +19,14 @@
    ]
   },
   {
-   "id": "attractorsphere",
-   "name": "Attractor Sphere",
+   "id": "pattern_tile_brick",
+   "name": "Brick Pattern Tile",
    "size": "small",
    "source": "added",
-   "concept": "· palette (unplaced)",
+   "concept": "Tiling / pattern",
    "footprint": [
-    3.0,
-    2.0
+    1.0,
+    1.0
    ]
   },
   {
@@ -93,6 +93,17 @@
    "footprint": [
     1.0,
     1.0
+   ]
+  },
+  {
+   "id": "rhizomatic_structure",
+   "name": "Rhizomatic Structure",
+   "size": "large",
+   "source": "added",
+   "concept": "Curved space (non-Euclidean)",
+   "footprint": [
+    15.0,
+    18.0
    ]
   }
  ]

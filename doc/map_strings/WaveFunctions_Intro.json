@@ -8,19 +8,19 @@
  },
  "pearls": [
   {
-   "id": "SphericalHarmonics",
-   "name": "Spherical Harmonics",
-   "size": "small",
+   "id": "rotatescalecubes",
+   "name": "Rotate Scale Cubes",
+   "size": "large",
    "source": "existing",
    "concept": "the wave",
    "footprint": [
-    2.0,
-    2.0
+    19.0,
+    18.0
    ]
   },
   {
-   "id": "control_pendulum",
-   "name": "Control Pendulum",
+   "id": "pickup_cube_static",
+   "name": "Static Pickup Cube",
    "size": "small",
    "source": "existing",
    "concept": "the wave",
@@ -41,85 +41,30 @@
    ]
   },
   {
-   "id": "mario_cube_time_trace",
-   "name": "Mario Cube Time Trace",
+   "id": "transformation_cube",
+   "name": "transformation_cube",
    "size": "small",
    "source": "existing",
    "concept": "the wave",
    "footprint": [
     1.0,
     1.0
-   ]
-  },
-  {
-   "id": "oscillation_controlled_cube",
-   "name": "Oscillation Controlled Cube",
-   "size": "small",
-   "source": "existing",
-   "concept": "the wave",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "pick_up_cube",
-   "name": "Pick Up Cube",
-   "size": "small",
-   "source": "existing",
-   "concept": "the wave",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "pickup_cube_rotating",
-   "name": "Rotating Pickup Cube",
-   "size": "small",
-   "source": "existing",
-   "concept": "the wave",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "pickup_cube_static",
-   "name": "Static Pickup Cube",
-   "size": "small",
-   "source": "existing",
-   "concept": "the wave",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "pickup_cube_transforming",
-   "name": "Transforming Pickup Cube",
-   "size": "small",
-   "source": "existing",
-   "concept": "the wave",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "rotatescalecubes",
-   "name": "Rotate Scale Cubes",
-   "size": "large",
-   "source": "existing",
-   "concept": "the wave",
-   "footprint": [
-    19.0,
-    18.0
    ]
   },
   {
    "id": "rotating_cube",
    "name": "Rotating Cube",
+   "size": "small",
+   "source": "existing",
+   "concept": "the wave",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "y_oscillation_cube",
+   "name": "Y-Oscillation Cube",
    "size": "small",
    "source": "existing",
    "concept": "the wave",
@@ -140,8 +85,8 @@
    ]
   },
   {
-   "id": "transformation_cube",
-   "name": "transformation_cube",
+   "id": "pickup_cube_transforming",
+   "name": "Transforming Pickup Cube",
    "size": "small",
    "source": "existing",
    "concept": "the wave",
@@ -151,14 +96,69 @@
    ]
   },
   {
-   "id": "y_oscillation_cube",
-   "name": "Y-Oscillation Cube",
+   "id": "pickup_cube_rotating",
+   "name": "Rotating Pickup Cube",
    "size": "small",
    "source": "existing",
    "concept": "the wave",
    "footprint": [
     1.0,
     1.0
+   ]
+  },
+  {
+   "id": "control_pendulum",
+   "name": "Control Pendulum",
+   "size": "small",
+   "source": "existing",
+   "concept": "the wave",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "pick_up_cube",
+   "name": "Pick Up Cube",
+   "size": "small",
+   "source": "existing",
+   "concept": "the wave",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "oscillation_controlled_cube",
+   "name": "Oscillation Controlled Cube",
+   "size": "small",
+   "source": "existing",
+   "concept": "the wave",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "mario_cube_time_trace",
+   "name": "Mario Cube Time Trace",
+   "size": "small",
+   "source": "existing",
+   "concept": "the wave",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "SphericalHarmonics",
+   "name": "Spherical Harmonics",
+   "size": "small",
+   "source": "existing",
+   "concept": "the wave",
+   "footprint": [
+    2.0,
+    2.0
    ]
   }
  ]

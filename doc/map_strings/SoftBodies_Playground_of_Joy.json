@@ -3,10 +3,21 @@
  "sequence": "softbodies",
  "counts": {
   "existing": 3,
-  "added": 6,
+  "added": 3,
   "large": 2
  },
  "pearls": [
+  {
+   "id": "rounded_softbody_test",
+   "name": "Rounded SoftBody — Strain Energy",
+   "size": "small",
+   "source": "existing",
+   "concept": "Strain, pressure & elasticity",
+   "footprint": [
+    2.0,
+    2.0
+   ]
+  },
   {
    "id": "branching_growth_algorithm",
    "name": "Branching Growth Algorithm",
@@ -52,17 +63,6 @@
    ]
   },
   {
-   "id": "spring_mass_bouncer",
-   "name": "Spring Mass Bouncer",
-   "size": "small",
-   "source": "added",
-   "concept": "Mass-spring networks",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
    "id": "fold_demo_critter",
    "name": "Fold Demo Critter",
    "size": "small",
@@ -71,39 +71,6 @@
    "footprint": [
     1.0,
     1.0
-   ]
-  },
-  {
-   "id": "tentacle_cube",
-   "name": "Tentacle Cube",
-   "size": "small",
-   "source": "added",
-   "concept": "Tentacle & octopus",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "miura_crawler",
-   "name": "Miura Crawler",
-   "size": "small",
-   "source": "added",
-   "concept": "Folding creatures",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "rounded_softbody_test",
-   "name": "Rounded SoftBody — Strain Energy",
-   "size": "small",
-   "source": "existing",
-   "concept": "Strain, pressure & elasticity",
-   "footprint": [
-    2.0,
-    2.0
    ]
   }
  ]

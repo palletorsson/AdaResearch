@@ -2,9 +2,109 @@
  "map": "ML_Synthesis",
  "sequence": "machinelearning",
  "counts": {
-  "existing": 0,
-  "added": 0,
-  "large": 0
+  "existing": 3,
+  "added": 6,
+  "large": 8
  },
- "pearls": []
+ "pearls": [
+  {
+   "id": "joint_learn_walk",
+   "name": "Joint Learn Walk (Reinforcement Learning)",
+   "size": "small",
+   "source": "existing",
+   "concept": "Transfer Learning",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "fine_tuning",
+   "name": "Fine-Tuning",
+   "size": "large",
+   "source": "added",
+   "concept": "Fine tuning",
+   "footprint": [
+    11.0,
+    3.0
+   ]
+  },
+  {
+   "id": "explainable_ai_xai_vr",
+   "name": "ExplainableAIXAI_VR",
+   "size": "large",
+   "source": "existing",
+   "concept": "Explainable AI XAI",
+   "footprint": [
+    27.0,
+    7.0
+   ]
+  },
+  {
+   "id": "anomaly_detection",
+   "name": "Anomaly Detection",
+   "size": "large",
+   "source": "existing",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    18.0,
+    18.0
+   ]
+  },
+  {
+   "id": "spotlight_attention",
+   "name": "Spotlight Attention",
+   "size": "large",
+   "source": "added",
+   "concept": "Attention Mechanisms",
+   "footprint": [
+    21.0,
+    21.0
+   ]
+  },
+  {
+   "id": "gans",
+   "name": "Generative Adversarial Networks",
+   "size": "large",
+   "source": "added",
+   "concept": "Generative Adversarial Networks GANs",
+   "footprint": [
+    22.0,
+    9.0
+   ]
+  },
+  {
+   "id": "time_series_analysis",
+   "name": "Time Series Analysis",
+   "size": "large",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    20.0,
+    3.0
+   ]
+  },
+  {
+   "id": "explainable_ai",
+   "name": "Explainable AI (XAI)",
+   "size": "large",
+   "source": "added",
+   "concept": "Explainable AI XAI",
+   "footprint": [
+    18.0,
+    4.0
+   ]
+  },
+  {
+   "id": "reinforcement_learning",
+   "name": "Reinforcement Learning",
+   "size": "large",
+   "source": "added",
+   "concept": "Transfer Learning",
+   "footprint": [
+    20.0,
+    4.0
+   ]
+  }
+ ]
 }

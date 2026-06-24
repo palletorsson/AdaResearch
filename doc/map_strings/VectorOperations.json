@@ -2,11 +2,33 @@
  "map": "VectorOperations",
  "sequence": "forces",
  "counts": {
-  "existing": 5,
-  "added": 0,
-  "large": 1
+  "existing": 10,
+  "added": 3,
+  "large": 2
  },
  "pearls": [
+  {
+   "id": "VectorDotProduct",
+   "name": "VectorDotProduct",
+   "size": "small",
+   "source": "existing",
+   "concept": "Dot product",
+   "footprint": [
+    2.0,
+    1.0
+   ]
+  },
+  {
+   "id": "VectorCrossProduct",
+   "name": "VectorCrossProduct",
+   "size": "small",
+   "source": "existing",
+   "concept": "Cross product / torque",
+   "footprint": [
+    2.0,
+    1.0
+   ]
+  },
   {
    "id": "VectorBasics",
    "name": "VectorBasics",
@@ -41,6 +63,28 @@
    ]
   },
   {
+   "id": "vector_dot_product_xl",
+   "name": "Dot Product (Walk-Inside)",
+   "size": "small",
+   "source": "existing",
+   "concept": "Dot product",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "vector_cross_product_xl",
+   "name": "Cross Product (Walk-Inside)",
+   "size": "small",
+   "source": "existing",
+   "concept": "Cross product / torque",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
    "id": "vector_projection_demo",
    "name": "Vector Projection",
    "size": "small",
@@ -57,6 +101,50 @@
    "size": "small",
    "source": "existing",
    "concept": "Restitution / bounce",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "proximity_spawner",
+   "name": "Proximity Spawner",
+   "size": "small",
+   "source": "existing",
+   "concept": "",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "force_field",
+   "name": "Force Field",
+   "size": "large",
+   "source": "added",
+   "concept": "Force field (zone)",
+   "footprint": [
+    8.0,
+    8.0
+   ]
+  },
+  {
+   "id": "spring_mass_bouncer",
+   "name": "Spring Mass Bouncer",
+   "size": "small",
+   "source": "added",
+   "concept": "Spring / Hooke",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "spring_hopper",
+   "name": "Spring Hopper",
+   "size": "small",
+   "source": "added",
+   "concept": "Spring / Hooke",
    "footprint": [
     1.0,
     1.0

@@ -8,6 +8,17 @@
  },
  "pearls": [
   {
+   "id": "boids_aquarium",
+   "name": "Boids Aquarium",
+   "size": "small",
+   "source": "existing",
+   "concept": "Boids Algorithm",
+   "footprint": [
+    2.0,
+    2.0
+   ]
+  },
+  {
    "id": "boid_flocking",
    "name": "Boid Flocking",
    "size": "small",
@@ -38,17 +49,6 @@
    "footprint": [
     3.0,
     1.0
-   ]
-  },
-  {
-   "id": "boids_aquarium",
-   "name": "Boids Aquarium",
-   "size": "small",
-   "source": "existing",
-   "concept": "Boids Algorithm",
-   "footprint": [
-    2.0,
-    2.0
    ]
   }
  ]

@@ -2,9 +2,9 @@
  "map": "Color_Paint",
  "sequence": "color",
  "counts": {
-  "existing": 2,
-  "added": 1,
-  "large": 2
+  "existing": 3,
+  "added": 6,
+  "large": 4
  },
  "pearls": [
   {
@@ -19,6 +19,83 @@
    ]
   },
   {
+   "id": "pattern_mill",
+   "name": "Pattern Mill",
+   "size": "small",
+   "source": "existing",
+   "concept": "Paint meets physics. The ball painting",
+   "footprint": [
+    2.0,
+    2.0
+   ]
+  },
+  {
+   "id": "primitive_assembler",
+   "name": "Primitive Assembler",
+   "size": "large",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    6.0,
+    3.0
+   ]
+  },
+  {
+   "id": "pattern_machine_c",
+   "name": "Kaleidoscope Mill",
+   "size": "large",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    3.0,
+    4.0
+   ]
+  },
+  {
+   "id": "pattern_machine_d",
+   "name": "Pattern Machine D — Tile-Stamp Press",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    2.0,
+    3.0
+   ]
+  },
+  {
+   "id": "pattern_machine_b",
+   "name": "Pattern Printer (Holographic Press)",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    2.0,
+    3.0
+   ]
+  },
+  {
+   "id": "pattern_machine_a",
+   "name": "Pattern Machine A — Jacquard Punch-Card Loom",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    2.0,
+    2.0
+   ]
+  },
+  {
+   "id": "pattern_loom",
+   "name": "Pattern Loom",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    2.0,
+    2.0
+   ]
+  },
+  {
    "id": "albers_wall_gallery",
    "name": "albers_wall_gallery",
    "size": "large",
@@ -27,17 +104,6 @@
    "footprint": [
     8.0,
     1.0
-   ]
-  },
-  {
-   "id": "loom_bolt_memphis_p4g",
-   "name": "Loom: Memphis p4g (wall bolt)",
-   "size": "small",
-   "source": "added",
-   "concept": "The hallway dissolves into rainbow. Co",
-   "footprint": [
-    2.0,
-    2.0
    ]
   }
  ]

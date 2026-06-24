@@ -2,11 +2,88 @@
  "map": "Random_Space",
  "sequence": "randomness",
  "counts": {
-  "existing": 1,
-  "added": 1,
+  "existing": 4,
+  "added": 6,
   "large": 1
  },
  "pearls": [
+  {
+   "id": "noise_mixer",
+   "name": "Noise Mixer",
+   "size": "small",
+   "source": "existing",
+   "concept": "Noise fields & textures",
+   "footprint": [
+    1.0,
+    2.0
+   ]
+  },
+  {
+   "id": "noise_terrain_forge",
+   "name": "Noise Terrain Forge (stamps ground)",
+   "size": "small",
+   "source": "added",
+   "concept": "Noise terrain / landscapes",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "worley_noise",
+   "name": "Worley Noise",
+   "size": "small",
+   "source": "existing",
+   "concept": "Simplex / Worley / value noise",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "noise_dunes_bench",
+   "name": "Noise Dunes Bench (tabletop landscape)",
+   "size": "small",
+   "source": "added",
+   "concept": "Noise terrain / landscapes",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "noise_height_toy",
+   "name": "Noise Height Toy (held heightfield)",
+   "size": "small",
+   "source": "added",
+   "concept": "Noise terrain / landscapes",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "blue_noise_toy",
+   "name": "Blue Noise Toy (even-spaced points)",
+   "size": "small",
+   "source": "added",
+   "concept": "Blue noise / sampling",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "perlin_bench",
+   "name": "Perlin Bench (coherent curve)",
+   "size": "small",
+   "source": "added",
+   "concept": "Perlin noise",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
   {
    "id": "random_space",
    "name": "random_space",
@@ -19,11 +96,22 @@
    ]
   },
   {
-   "id": "vera_molnar_des_ordres",
-   "name": "Vera Molnar Des-Ordres",
+   "id": "shannon_entropy_meter",
+   "name": "Shannon Entropy Meter",
+   "size": "small",
+   "source": "existing",
+   "concept": "Entropy",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "jitter_bench",
+   "name": "Jitter Bench (perturb the grid)",
    "size": "small",
    "source": "added",
-   "concept": "Random art / scatter",
+   "concept": "Random transformations",
    "footprint": [
     1.0,
     1.0

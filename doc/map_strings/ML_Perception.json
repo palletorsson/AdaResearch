@@ -2,9 +2,32 @@
  "map": "ML_Perception",
  "sequence": "machinelearning",
  "counts": {
-  "existing": 0,
+  "existing": 2,
   "added": 0,
-  "large": 0
+  "large": 2
  },
- "pearls": []
+ "pearls": [
+  {
+   "id": "computer_vision_vr",
+   "name": "ComputerVision_VR",
+   "size": "large",
+   "source": "existing",
+   "concept": "Explainable AI XAI",
+   "footprint": [
+    25.0,
+    2.0
+   ]
+  },
+  {
+   "id": "convolutional_neural_networks_cnns_vr",
+   "name": "ConvolutionalNeuralNetworksCNNs_VR",
+   "size": "large",
+   "source": "existing",
+   "concept": "Explainable AI XAI",
+   "footprint": [
+    51.0,
+    2.0
+   ]
+  }
+ ]
 }

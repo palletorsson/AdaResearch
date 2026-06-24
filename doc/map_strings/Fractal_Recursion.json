@@ -3,10 +3,87 @@
  "sequence": "fractals",
  "counts": {
   "existing": 8,
-  "added": 3,
-  "large": 4
+  "added": 1,
+  "large": 2
  },
  "pearls": [
+  {
+   "id": "fibonacci_pagoda",
+   "name": "fibonacci_pagoda",
+   "size": "large",
+   "source": "existing",
+   "concept": "Golden spiral & phyllotaxis",
+   "footprint": [
+    4.0,
+    4.0
+   ]
+  },
+  {
+   "id": "recursive_chair",
+   "name": "Recursive Chair",
+   "size": "small",
+   "source": "existing",
+   "concept": "Fractal furniture",
+   "footprint": [
+    2.0,
+    2.0
+   ]
+  },
+  {
+   "id": "fractal_recursion_2",
+   "name": "Fractal Recursion 2",
+   "size": "small",
+   "source": "existing",
+   "concept": "Recursion (calls itself)",
+   "footprint": [
+    2.0,
+    1.0
+   ]
+  },
+  {
+   "id": "recursive_table",
+   "name": "recursive_table",
+   "size": "small",
+   "source": "existing",
+   "concept": "Fractal furniture",
+   "footprint": [
+    3.0,
+    3.0
+   ]
+  },
+  {
+   "id": "example_8_3_recursion_circles_vr",
+   "name": "example_8_3_recursion_circles_vr",
+   "size": "large",
+   "source": "existing",
+   "concept": "Recursion (calls itself)",
+   "footprint": [
+    4.0,
+    4.0
+   ]
+  },
+  {
+   "id": "cube_subdivision",
+   "name": "cube_subdivision",
+   "size": "small",
+   "source": "existing",
+   "concept": "",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "recursive_boolean_cube",
+   "name": "recursive_boolean_cube",
+   "size": "small",
+   "source": "existing",
+   "concept": "Recursion (calls itself)",
+   "footprint": [
+    2.0,
+    2.0
+   ]
+  },
   {
    "id": "cube_staircase",
    "name": "Cube Staircase",
@@ -27,105 +104,6 @@
    "footprint": [
     1.0,
     1.0
-   ]
-  },
-  {
-   "id": "cube_subdivision",
-   "name": "cube_subdivision",
-   "size": "small",
-   "source": "existing",
-   "concept": "",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "example_8_3_recursion_circles_vr",
-   "name": "example_8_3_recursion_circles_vr",
-   "size": "large",
-   "source": "existing",
-   "concept": "Recursion (calls itself)",
-   "footprint": [
-    4.0,
-    4.0
-   ]
-  },
-  {
-   "id": "fibonacci_pagoda",
-   "name": "fibonacci_pagoda",
-   "size": "large",
-   "source": "existing",
-   "concept": "Golden spiral & phyllotaxis",
-   "footprint": [
-    4.0,
-    4.0
-   ]
-  },
-  {
-   "id": "diffusion_limited_aggregation",
-   "name": "diffusion_limited_aggregation",
-   "size": "large",
-   "source": "added",
-   "concept": "Diffusion-limited aggregation",
-   "footprint": [
-    17.0,
-    1.0
-   ]
-  },
-  {
-   "id": "fractal_recursion_2",
-   "name": "Fractal Recursion 2",
-   "size": "small",
-   "source": "existing",
-   "concept": "Recursion (calls itself)",
-   "footprint": [
-    2.0,
-    1.0
-   ]
-  },
-  {
-   "id": "recursive_boolean_cube",
-   "name": "recursive_boolean_cube",
-   "size": "small",
-   "source": "existing",
-   "concept": "Recursion (calls itself)",
-   "footprint": [
-    2.0,
-    2.0
-   ]
-  },
-  {
-   "id": "recursive_chair",
-   "name": "Recursive Chair",
-   "size": "small",
-   "source": "existing",
-   "concept": "Fractal furniture",
-   "footprint": [
-    2.0,
-    2.0
-   ]
-  },
-  {
-   "id": "recursive_table",
-   "name": "recursive_table",
-   "size": "small",
-   "source": "existing",
-   "concept": "Fractal furniture",
-   "footprint": [
-    3.0,
-    3.0
-   ]
-  },
-  {
-   "id": "SierpinskiPyramid",
-   "name": "SierpinskiPyramid",
-   "size": "large",
-   "source": "added",
-   "concept": "Sierpinski",
-   "footprint": [
-    10.0,
-    10.0
    ]
   }
  ]

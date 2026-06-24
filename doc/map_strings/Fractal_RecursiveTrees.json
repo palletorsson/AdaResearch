@@ -2,28 +2,61 @@
  "map": "Fractal_RecursiveTrees",
  "sequence": "fractals",
  "counts": {
-  "existing": 8,
+  "existing": 9,
   "added": 6,
   "large": 2
  },
  "pearls": [
   {
-   "id": "cube_desk",
-   "name": "Cube Desk",
+   "id": "living_paper",
+   "name": "Living Paper",
    "size": "small",
    "source": "existing",
-   "concept": "Fractal furniture",
+   "concept": "",
    "footprint": [
     1.0,
     1.0
    ]
   },
   {
-   "id": "fractal_scene",
-   "name": "fractal_scene",
+   "id": "fractal_lsystem_tree",
+   "name": "L-System Tree",
    "size": "small",
    "source": "existing",
-   "concept": "Fractal architecture",
+   "concept": "",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "recursive_tree_2",
+   "name": "recursive_tree_2",
+   "size": "small",
+   "source": "existing",
+   "concept": "Recursive trees",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "small_subdivision_cube",
+   "name": "small_subdivision_cube",
+   "size": "small",
+   "source": "existing",
+   "concept": "",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "mengersponge",
+   "name": "Menger Sponge",
+   "size": "small",
+   "source": "added",
+   "concept": "Menger sponge",
    "footprint": [
     1.0,
     1.0
@@ -41,28 +74,6 @@
    ]
   },
   {
-   "id": "living_paper",
-   "name": "Living Paper",
-   "size": "small",
-   "source": "existing",
-   "concept": "",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "mobius_world",
-   "name": "MÃ¶bius World",
-   "size": "small",
-   "source": "existing",
-   "concept": "",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
    "id": "recursive_tree",
    "name": "recursive_tree",
    "size": "large",
@@ -71,17 +82,6 @@
    "footprint": [
     16.0,
     16.0
-   ]
-  },
-  {
-   "id": "grammar_recursive_branching_tree_d4",
-   "name": "grammar_recursive_branching_tree_d4",
-   "size": "small",
-   "source": "added",
-   "concept": "Recursive trees",
-   "footprint": [
-    1.0,
-    1.0
    ]
   },
   {
@@ -118,6 +118,17 @@
    ]
   },
   {
+   "id": "fractal_recursive_tree",
+   "name": "Recursive Tree",
+   "size": "small",
+   "source": "added",
+   "concept": "Recursive trees",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
    "id": "example_8_6_recursive_tree_vr",
    "name": "example_8_6_recursive_tree_vr",
    "size": "small",
@@ -129,33 +140,33 @@
    ]
   },
   {
-   "id": "recursive_tree_2",
-   "name": "recursive_tree_2",
+   "id": "cube_desk",
+   "name": "Cube Desk",
    "size": "small",
    "source": "existing",
-   "concept": "Recursive trees",
+   "concept": "Fractal furniture",
    "footprint": [
     1.0,
     1.0
    ]
   },
   {
-   "id": "small_subdivision_cube",
-   "name": "small_subdivision_cube",
+   "id": "fractal_scene",
+   "name": "fractal_scene",
+   "size": "small",
+   "source": "existing",
+   "concept": "Fractal architecture",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "mobius_world",
+   "name": "MÃ¶bius World",
    "size": "small",
    "source": "existing",
    "concept": "",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "mengersponge",
-   "name": "Menger Sponge",
-   "size": "small",
-   "source": "added",
-   "concept": "Menger sponge",
    "footprint": [
     1.0,
     1.0

@@ -2,9 +2,142 @@
  "map": "ML_Evolution",
  "sequence": "machinelearning",
  "counts": {
-  "existing": 0,
-  "added": 0,
-  "large": 0
+  "existing": 6,
+  "added": 6,
+  "large": 4
  },
- "pearls": []
+ "pearls": [
+  {
+   "id": "evolved_creatures",
+   "name": "Evolved Creatures (Karl Sims)",
+   "size": "large",
+   "source": "existing",
+   "concept": "Evolving Creatures",
+   "footprint": [
+    40.0,
+    40.0
+   ]
+  },
+  {
+   "id": "genetic_algorithm",
+   "name": "Evolutionary Ecosystem",
+   "size": "large",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    30.0,
+    30.0
+   ]
+  },
+  {
+   "id": "evolved_creatures_v2",
+   "name": "Evolved Creatures v2",
+   "size": "large",
+   "source": "added",
+   "concept": "Evolving Creatures",
+   "footprint": [
+    50.0,
+    50.0
+   ]
+  },
+  {
+   "id": "evolving_creatures_ea",
+   "name": "Evolving Creatures (EA)",
+   "size": "small",
+   "source": "added",
+   "concept": "Evolving Creatures",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "evolvingflowers",
+   "name": "evolvingflowers",
+   "size": "large",
+   "source": "existing",
+   "concept": "Evolving Flowers",
+   "footprint": [
+    20.0,
+    20.0
+   ]
+  },
+  {
+   "id": "9_3_smart_rockets_vr",
+   "name": "Smart Rockets (Genetic Algorithm)",
+   "size": "small",
+   "source": "existing",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    2.0,
+    1.0
+   ]
+  },
+  {
+   "id": "9_1_ga_shakespeare_vr",
+   "name": "GA Shakespeare (Basic)",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "non_teleological_evolution",
+   "name": "Non-Teleological Evolution",
+   "size": "small",
+   "source": "existing",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "9_5_evolving_bloops_vr",
+   "name": "Evolving Bloops",
+   "size": "small",
+   "source": "existing",
+   "concept": "Evolving Creatures",
+   "footprint": [
+    2.0,
+    1.0
+   ]
+  },
+  {
+   "id": "9_6_ga_shakespeare_annotated_vr",
+   "name": "GA Shakespeare (Annotated)",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "9_4_interactive_selection_vr",
+   "name": "Interactive Selection",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    2.0,
+    1.0
+   ]
+  },
+  {
+   "id": "gradient_descent_visualization",
+   "name": "Gradient Descent",
+   "size": "small",
+   "source": "existing",
+   "concept": "Evolving Creatures",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  }
+ ]
 }

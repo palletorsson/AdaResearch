@@ -3,10 +3,32 @@
  "sequence": "softbodies",
  "counts": {
   "existing": 3,
-  "added": 5,
+  "added": 4,
   "large": 3
  },
  "pearls": [
+  {
+   "id": "softbody_gallery_part2",
+   "name": "SoftBody Gallery Part 2",
+   "size": "large",
+   "source": "existing",
+   "concept": "",
+   "footprint": [
+    26.0,
+    7.0
+   ]
+  },
+  {
+   "id": "pick_up_cube",
+   "name": "Pick Up Cube",
+   "size": "small",
+   "source": "existing",
+   "concept": "",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
   {
    "id": "grab_long_stick",
    "name": "grab_long_stick",
@@ -52,17 +74,6 @@
    ]
   },
   {
-   "id": "foldedpaper",
-   "name": "1.2: A foldedpaper",
-   "size": "small",
-   "source": "added",
-   "concept": "Origami & the Miura fold",
-   "footprint": [
-    3.0,
-    1.0
-   ]
-  },
-  {
    "id": "folding_cube",
    "name": "folding_cube",
    "size": "small",
@@ -71,28 +82,6 @@
    "footprint": [
     2.0,
     1.0
-   ]
-  },
-  {
-   "id": "pick_up_cube",
-   "name": "Pick Up Cube",
-   "size": "small",
-   "source": "existing",
-   "concept": "",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "softbody_gallery_part2",
-   "name": "SoftBody Gallery Part 2",
-   "size": "large",
-   "source": "existing",
-   "concept": "",
-   "footprint": [
-    26.0,
-    7.0
    ]
   }
  ]

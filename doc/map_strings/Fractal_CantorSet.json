@@ -3,7 +3,7 @@
  "sequence": "fractals",
  "counts": {
   "existing": 4,
-  "added": 3,
+  "added": 2,
   "large": 4
  },
  "pearls": [
@@ -30,28 +30,6 @@
    ]
   },
   {
-   "id": "example_8_4_cantor_pagoda_vr",
-   "name": "example_8_4_cantor_pagoda_vr",
-   "size": "large",
-   "source": "existing",
-   "concept": "Cantor set",
-   "footprint": [
-    20.0,
-    4.0
-   ]
-  },
-  {
-   "id": "cantor_diagonal_workbench",
-   "name": "Cantor Diagonal Workbench",
-   "size": "small",
-   "source": "added",
-   "concept": "Cantor set",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
    "id": "example_8_4_cantor_set_vr",
    "name": "example_8_4_cantor_set_vr",
    "size": "small",
@@ -71,6 +49,17 @@
    "footprint": [
     1.0,
     1.0
+   ]
+  },
+  {
+   "id": "example_8_4_cantor_pagoda_vr",
+   "name": "example_8_4_cantor_pagoda_vr",
+   "size": "large",
+   "source": "existing",
+   "concept": "Cantor set",
+   "footprint": [
+    20.0,
+    4.0
    ]
   },
   {

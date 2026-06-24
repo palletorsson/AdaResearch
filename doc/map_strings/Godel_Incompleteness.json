@@ -2,28 +2,17 @@
  "map": "Godel_Incompleteness",
  "sequence": "foundationscrisis",
  "counts": {
-  "existing": 1,
+  "existing": 4,
   "added": 6,
   "large": 0
  },
  "pearls": [
   {
-   "id": "godel_statement_plaque",
-   "name": "GÃ¶del Statement Plaque",
+   "id": "godel_sentence_machine",
+   "name": "GodelSentenceMachine",
    "size": "small",
    "source": "existing",
    "concept": "Gödel's incompleteness",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "escher_room",
-   "name": "Escher Room",
-   "size": "small",
-   "source": "added",
-   "concept": "Escher & impossible objects",
    "footprint": [
     1.0,
     1.0
@@ -41,8 +30,41 @@
    ]
   },
   {
-   "id": "barber_paradox",
-   "name": "BarberParadox",
+   "id": "godel_statement_plaque",
+   "name": "GÃ¶del Statement Plaque",
+   "size": "small",
+   "source": "existing",
+   "concept": "Gödel's incompleteness",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "provability_sorter",
+   "name": "ProvabilitySorter",
+   "size": "small",
+   "source": "existing",
+   "concept": "Gödel's incompleteness",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "halting_bench",
+   "name": "Halting Bench",
+   "size": "small",
+   "source": "added",
+   "concept": "Halting & infinity",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "russell_paradox_room",
+   "name": "Russell Paradox Room",
    "size": "small",
    "source": "added",
    "concept": "Russell's paradox",
@@ -52,11 +74,22 @@
    ]
   },
   {
-   "id": "impossible_trident",
-   "name": "ImpossibleTrident",
+   "id": "incompleteness_tower",
+   "name": "IncompletenessTower",
+   "size": "small",
+   "source": "existing",
+   "concept": "Gödel's incompleteness",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "godel_incompleteness_room",
+   "name": "Godel Incompleteness Room",
    "size": "small",
    "source": "added",
-   "concept": "Escher & impossible objects",
+   "concept": "Gödel's incompleteness",
    "footprint": [
     1.0,
     1.0
@@ -74,11 +107,11 @@
    ]
   },
   {
-   "id": "constructive_staircase",
-   "name": "ConstructiveStaircase",
+   "id": "impossible_trident",
+   "name": "ImpossibleTrident",
    "size": "small",
    "source": "added",
-   "concept": "Brouwer & intuitionism",
+   "concept": "Escher & impossible objects",
    "footprint": [
     1.0,
     1.0

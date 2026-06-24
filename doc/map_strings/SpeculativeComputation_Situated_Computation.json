@@ -2,11 +2,44 @@
  "map": "SpeculativeComputation_Situated_Computation",
  "sequence": "postfoundationscrisis",
  "counts": {
-  "existing": 2,
-  "added": 1,
+  "existing": 3,
+  "added": 4,
   "large": 0
  },
  "pearls": [
+  {
+   "id": "situated_readout",
+   "name": "Situated Readout",
+   "size": "small",
+   "source": "existing",
+   "concept": "Situated computation",
+   "footprint": [
+    2.0,
+    1.0
+   ]
+  },
+  {
+   "id": "commons_bench",
+   "name": "CommonsBench",
+   "size": "small",
+   "source": "added",
+   "concept": "Collective knowledge / the commons",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "situated_bench",
+   "name": "SituatedBench",
+   "size": "small",
+   "source": "added",
+   "concept": "Situated computation",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
   {
    "id": "situated_sensor",
    "name": "Situated Sensor",
@@ -19,11 +52,22 @@
    ]
   },
   {
-   "id": "situated_bench",
-   "name": "SituatedBench",
+   "id": "edge_ground_synthesis",
+   "name": "EdgeGroundSynthesis",
    "size": "small",
    "source": "added",
-   "concept": "Situated computation",
+   "concept": "The edge is the ground",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "accountability_ledger",
+   "name": "AccountabilityLedger",
+   "size": "small",
+   "source": "added",
+   "concept": "Ethical design after incompleteness",
    "footprint": [
     1.0,
     1.0

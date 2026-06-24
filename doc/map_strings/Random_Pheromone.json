@@ -2,9 +2,9 @@
  "map": "Random_Pheromone",
  "sequence": "randomness",
  "counts": {
-  "existing": 3,
-  "added": 6,
-  "large": 3
+  "existing": 1,
+  "added": 3,
+  "large": 2
  },
  "pearls": [
   {
@@ -19,28 +19,6 @@
    ]
   },
   {
-   "id": "voxel_noise_demo",
-   "name": "voxel_noise_demo",
-   "size": "large",
-   "source": "added",
-   "concept": "Noise fields & textures",
-   "footprint": [
-    32.0,
-    32.0
-   ]
-  },
-  {
-   "id": "noisetorus_ex_1",
-   "name": "noisetorus_ex_1",
-   "size": "large",
-   "source": "added",
-   "concept": "Noise fields & textures",
-   "footprint": [
-    5.0,
-    6.0
-   ]
-  },
-  {
    "id": "grid_substrate_runner",
    "name": "Grid Substrate Runner",
    "size": "small",
@@ -52,25 +30,14 @@
    ]
   },
   {
-   "id": "noise_terrain_forge",
-   "name": "Noise Terrain Forge (stamps ground)",
-   "size": "small",
+   "id": "voxel_noise_demo",
+   "name": "voxel_noise_demo",
+   "size": "large",
    "source": "added",
-   "concept": "Noise terrain / landscapes",
+   "concept": "Noise fields & textures",
    "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "perlin_noise_bridge",
-   "name": "Perlin Noise Bridge",
-   "size": "small",
-   "source": "added",
-   "concept": "Perlin noise",
-   "footprint": [
-    1.0,
-    1.0
+    32.0,
+    32.0
    ]
   },
   {
@@ -82,28 +49,6 @@
    "footprint": [
     2.0,
     2.0
-   ]
-  },
-  {
-   "id": "clipboard#pheromone_axioms",
-   "name": "clipboard#pheromone_axioms",
-   "size": "small",
-   "source": "existing",
-   "concept": "",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "clipboard#queer_energy",
-   "name": "clipboard#queer_energy",
-   "size": "small",
-   "source": "existing",
-   "concept": "",
-   "footprint": [
-    1.0,
-    1.0
    ]
   }
  ]

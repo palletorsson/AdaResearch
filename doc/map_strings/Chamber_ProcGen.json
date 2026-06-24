@@ -2,11 +2,77 @@
  "map": "Chamber_ProcGen",
  "sequence": "proceduralgeneration",
  "counts": {
-  "existing": 1,
+  "existing": 2,
   "added": 6,
   "large": 1
  },
  "pearls": [
+  {
+   "id": "proximity_spawner",
+   "name": "Proximity Spawner",
+   "size": "small",
+   "source": "existing",
+   "concept": "",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "grammar_markov",
+   "name": "Grammar Markov",
+   "size": "small",
+   "source": "added",
+   "concept": "Markov & probabilistic grammars",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "spatial_voronoi",
+   "name": "Spatial Voronoi",
+   "size": "large",
+   "source": "added",
+   "concept": "Voronoi & Delaunay",
+   "footprint": [
+    5.0,
+    5.0
+   ]
+  },
+  {
+   "id": "isosurface_trap",
+   "name": "Isosurface Trap",
+   "size": "small",
+   "source": "added",
+   "concept": "Metaballs & implicit surfaces",
+   "footprint": [
+    2.0,
+    2.0
+   ]
+  },
+  {
+   "id": "tesseract_phaser",
+   "name": "Tesseract Phaser",
+   "size": "small",
+   "source": "added",
+   "concept": "Higher-dimensional generation",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "maze_spinner",
+   "name": "Maze Spinner",
+   "size": "small",
+   "source": "added",
+   "concept": "Mazes",
+   "footprint": [
+    2.0,
+    2.0
+   ]
+  },
   {
    "id": "seed_orb",
    "name": "Seed Orb",
@@ -19,63 +85,8 @@
    ]
   },
   {
-   "id": "terrain_world_generator",
-   "name": "Terrain World Generator (a world from a few numbers)",
-   "size": "small",
-   "source": "added",
-   "concept": "Generated worlds",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "gray_scott_comparison",
-   "name": "Gray-Scott Comparison Garden",
-   "size": "large",
-   "source": "added",
-   "concept": "Reaction-diffusion & phase transition",
-   "footprint": [
-    11.0,
-    11.0
-   ]
-  },
-  {
-   "id": "seed_world_room",
-   "name": "Seed World Room (design without a designer)",
-   "size": "small",
-   "source": "added",
-   "concept": "Seed -> world",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "seed_world_bench",
-   "name": "Seed World Bench (the seed picks the noise)",
-   "size": "small",
-   "source": "added",
-   "concept": "Seed -> world",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
    "id": "world_forge",
    "name": "World Forge (a new world on tap)",
-   "size": "small",
-   "source": "added",
-   "concept": "Seed -> world",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "seed_world_toy",
-   "name": "Seed World Toy (a world in your hand)",
    "size": "small",
    "source": "added",
    "concept": "Seed -> world",

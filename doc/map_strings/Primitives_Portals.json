@@ -2,72 +2,28 @@
  "map": "Primitives_Portals",
  "sequence": "primitives",
  "counts": {
-  "existing": 3,
+  "existing": 4,
   "added": 6,
   "large": 4
  },
  "pearls": [
-  {
-   "id": "combine_portals",
-   "name": "combine_portals",
-   "size": "large",
-   "source": "existing",
-   "concept": "Assembly / SDF / boolean",
-   "footprint": [
-    8.0,
-    87.0
-   ]
-  },
-  {
-   "id": "combine_sphere",
-   "name": "combine_sphere",
-   "size": "large",
-   "source": "added",
-   "concept": "Sphere / ball",
-   "footprint": [
-    9.0,
-    14.0
-   ]
-  },
-  {
-   "id": "torus",
-   "name": "torus",
-   "size": "small",
-   "source": "added",
-   "concept": "Torus / ring",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "hollowrock",
-   "name": "Hollow Rock",
-   "size": "small",
-   "source": "added",
-   "concept": "Torus / ring",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "achilles_tortoise",
-   "name": "Achilles and the Tortoise",
-   "size": "large",
-   "source": "existing",
-   "concept": "Other primitives",
-   "footprint": [
-    1.0,
-    7.0
-   ]
-  },
   {
    "id": "capsule",
    "name": "capsule",
    "size": "small",
    "source": "existing",
    "concept": "Capsule",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "rockfactory",
+   "name": "Rock Factory",
+   "size": "small",
+   "source": "added",
+   "concept": "Grid / array",
    "footprint": [
     1.0,
     1.0
@@ -96,11 +52,66 @@
    ]
   },
   {
-   "id": "lefttriangle",
-   "name": "lefttriangle",
+   "id": "combine_portals",
+   "name": "combine_portals",
+   "size": "large",
+   "source": "existing",
+   "concept": "Assembly / SDF / boolean",
+   "footprint": [
+    8.0,
+    87.0
+   ]
+  },
+  {
+   "id": "combine_torus",
+   "name": "combine_torus",
+   "size": "large",
+   "source": "added",
+   "concept": "Torus / ring",
+   "footprint": [
+    31.0,
+    31.0
+   ]
+  },
+  {
+   "id": "probability_sphere",
+   "name": "Probability Sphere",
    "size": "small",
    "source": "added",
-   "concept": "Triangle",
+   "concept": "Sphere / ball",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "hollowrock",
+   "name": "Hollow Rock",
+   "size": "small",
+   "source": "added",
+   "concept": "Torus / ring",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "achilles_tortoise",
+   "name": "Achilles and the Tortoise",
+   "size": "large",
+   "source": "existing",
+   "concept": "Other primitives",
+   "footprint": [
+    1.0,
+    7.0
+   ]
+  },
+  {
+   "id": "floating_sphere_field",
+   "name": "Floating Sphere Field",
+   "size": "small",
+   "source": "existing",
+   "concept": "Sphere / ball",
    "footprint": [
     1.0,
     1.0

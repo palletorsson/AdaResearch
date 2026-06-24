@@ -2,8 +2,8 @@
  "map": "CriticalAlgorithms_Algorithmic_Bias_Visualization",
  "sequence": "postfoundationscrisis",
  "counts": {
-  "existing": 1,
-  "added": 5,
+  "existing": 2,
+  "added": 3,
   "large": 1
  },
  "pearls": [
@@ -30,25 +30,14 @@
    ]
   },
   {
-   "id": "wiki_fragment",
-   "name": "Wiki Fragment",
+   "id": "bias_from_inside",
+   "name": "Bias From Inside",
    "size": "small",
-   "source": "added",
-   "concept": "Collective knowledge / the commons",
+   "source": "existing",
+   "concept": "Bias as structural incompleteness",
    "footprint": [
     2.0,
-    1.0
-   ]
-  },
-  {
-   "id": "situated_readout",
-   "name": "Situated Readout",
-   "size": "small",
-   "source": "added",
-   "concept": "Situated computation",
-   "footprint": [
-    2.0,
-    1.0
+    2.0
    ]
   },
   {
@@ -63,14 +52,14 @@
    ]
   },
   {
-   "id": "bias_from_inside",
-   "name": "Bias From Inside",
+   "id": "bias_atlas_room",
+   "name": "BiasAtlasRoom",
    "size": "small",
    "source": "added",
    "concept": "Bias as structural incompleteness",
    "footprint": [
-    2.0,
-    2.0
+    1.0,
+    1.0
    ]
   }
  ]

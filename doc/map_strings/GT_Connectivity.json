@@ -2,9 +2,9 @@
  "map": "GT_Connectivity",
  "sequence": "graphtheory",
  "counts": {
-  "existing": 2,
-  "added": 2,
-  "large": 4
+  "existing": 3,
+  "added": 0,
+  "large": 3
  },
  "pearls": [
   {
@@ -19,28 +19,6 @@
    ]
   },
   {
-   "id": "topological_sort",
-   "name": "topological_sort",
-   "size": "large",
-   "source": "added",
-   "concept": "Topological Sort",
-   "footprint": [
-    4.0,
-    1.0
-   ]
-  },
-  {
-   "id": "topological_sort_algorithm",
-   "name": "Topological Sort",
-   "size": "large",
-   "source": "added",
-   "concept": "Topological Sort",
-   "footprint": [
-    4.0,
-    1.0
-   ]
-  },
-  {
    "id": "kosaraju_algorithm",
    "name": "Kosaraju's Algorithm",
    "size": "large",
@@ -49,6 +27,17 @@
    "footprint": [
     5.0,
     5.0
+   ]
+  },
+  {
+   "id": "topological_sort",
+   "name": "topological_sort",
+   "size": "large",
+   "source": "existing",
+   "concept": "Topological Sort",
+   "footprint": [
+    4.0,
+    1.0
    ]
   }
  ]

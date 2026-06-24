@@ -8,17 +8,6 @@
  },
  "pearls": [
   {
-   "id": "velocity_arrow",
-   "name": "Velocity Arrow",
-   "size": "small",
-   "source": "existing",
-   "concept": "Velocity",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
    "id": "derivative_pair",
    "name": "Derivative Pair",
    "size": "small",
@@ -32,6 +21,17 @@
   {
    "id": "player_trace",
    "name": "player_trace",
+   "size": "small",
+   "source": "existing",
+   "concept": "Velocity",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "velocity_arrow",
+   "name": "Velocity Arrow",
    "size": "small",
    "source": "existing",
    "concept": "Velocity",

@@ -3,7 +3,7 @@
  "sequence": "lsystems",
  "counts": {
   "existing": 4,
-  "added": 1,
+  "added": 2,
   "large": 1
  },
  "pearls": [
@@ -26,6 +26,17 @@
    "concept": "Context-sensitive L-systems",
    "footprint": [
     8.0,
+    1.0
+   ]
+  },
+  {
+   "id": "context_free_grammars",
+   "name": "Context-Free Grammars",
+   "size": "small",
+   "source": "added",
+   "concept": "Formal grammars (Chomsky)",
+   "footprint": [
+    2.0,
     1.0
    ]
   },

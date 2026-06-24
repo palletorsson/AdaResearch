@@ -2,50 +2,28 @@
  "map": "Point_Lines",
  "sequence": "primitives",
  "counts": {
-  "existing": 13,
+  "existing": 19,
   "added": 6,
   "large": 1
  },
  "pearls": [
   {
-   "id": "line_demo",
-   "name": "line_demo",
+   "id": "lab_room",
+   "name": "Lab Room",
    "size": "small",
    "source": "existing",
-   "concept": "Line / edge",
+   "concept": "",
    "footprint": [
     1.0,
     1.0
    ]
   },
   {
-   "id": "coordinate_axes_xy",
-   "name": "coordinate_axes_xy",
+   "id": "line",
+   "name": "1.1 A Line",
    "size": "small",
-   "source": "added",
-   "concept": "Text / glyph",
-   "footprint": [
-    2.0,
-    1.0
-   ]
-  },
-  {
-   "id": "plus_lines",
-   "name": "plus_lines",
-   "size": "small",
-   "source": "added",
-   "concept": "Line / edge",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "one_meter_line",
-   "name": "one_meter_line",
-   "size": "small",
-   "source": "added",
-   "concept": "Line / edge",
+   "source": "existing",
+   "concept": "Sphere / ball",
    "footprint": [
     1.0,
     1.0
@@ -107,8 +85,8 @@
    ]
   },
   {
-   "id": "line",
-   "name": "1.1 A Line",
+   "id": "floating_sphere_field",
+   "name": "Floating Sphere Field",
    "size": "small",
    "source": "existing",
    "concept": "Sphere / ball",
@@ -140,6 +118,50 @@
    ]
   },
   {
+   "id": "grabbable_line",
+   "name": "Grabbable Line",
+   "size": "small",
+   "source": "existing",
+   "concept": "Line / edge",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "lightrod",
+   "name": "Light Rod",
+   "size": "small",
+   "source": "existing",
+   "concept": "Other primitives",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "fontana_puncture",
+   "name": "Fontana Puncture",
+   "size": "small",
+   "source": "existing",
+   "concept": "Assembly / SDF / boolean",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "laser_sword",
+   "name": "Laser Sword",
+   "size": "small",
+   "source": "existing",
+   "concept": "Arrow / vector",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
    "id": "perspective_lines",
    "name": "perspective_lines",
    "size": "small",
@@ -148,17 +170,6 @@
    "footprint": [
     2.0,
     3.0
-   ]
-  },
-  {
-   "id": "coordinate_lines",
-   "name": "coordinate_lines",
-   "size": "small",
-   "source": "added",
-   "concept": "Line / edge",
-   "footprint": [
-    1.0,
-    1.0
    ]
   },
   {
@@ -195,11 +206,11 @@
    ]
   },
   {
-   "id": "lightrod",
-   "name": "Light Rod",
+   "id": "klee_walking_point",
+   "name": "Klee Walking Point",
    "size": "small",
    "source": "existing",
-   "concept": "Other primitives",
+   "concept": "Point",
    "footprint": [
     1.0,
     1.0
@@ -213,6 +224,61 @@
    "concept": "Grid / array",
    "footprint": [
     2.0,
+    1.0
+   ]
+  },
+  {
+   "id": "line_demo",
+   "name": "line_demo",
+   "size": "small",
+   "source": "existing",
+   "concept": "Line / edge",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "line_collection",
+   "name": "line_collection",
+   "size": "small",
+   "source": "added",
+   "concept": "Line / edge",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "plus_lines",
+   "name": "plus_lines",
+   "size": "small",
+   "source": "added",
+   "concept": "Line / edge",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "coordinate_axes_xy",
+   "name": "coordinate_axes_xy",
+   "size": "small",
+   "source": "added",
+   "concept": "Text / glyph",
+   "footprint": [
+    2.0,
+    1.0
+   ]
+  },
+  {
+   "id": "one_meter_line",
+   "name": "one_meter_line",
+   "size": "small",
+   "source": "added",
+   "concept": "Line / edge",
+   "footprint": [
+    1.0,
     1.0
    ]
   }

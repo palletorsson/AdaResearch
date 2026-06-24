@@ -2,11 +2,22 @@
  "map": "ForcesSystems",
  "sequence": "forces",
  "counts": {
-  "existing": 11,
+  "existing": 13,
   "added": 6,
-  "large": 7
+  "large": 9
  },
  "pearls": [
+  {
+   "id": "library_rack",
+   "name": "Library Rack",
+   "size": "small",
+   "source": "existing",
+   "concept": "",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
   {
    "id": "vector_fields",
    "name": "Vector Fields",
@@ -52,28 +63,6 @@
    ]
   },
   {
-   "id": "particle_systems",
-   "name": "Particle Systems",
-   "size": "large",
-   "source": "existing",
-   "concept": "",
-   "footprint": [
-    12.0,
-    11.0
-   ]
-  },
-  {
-   "id": "sub_emitters",
-   "name": "sub_emitters",
-   "size": "small",
-   "source": "added",
-   "concept": "Projectile / launch",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
    "id": "force_fields",
    "name": "Force Fields",
    "size": "large",
@@ -96,6 +85,17 @@
    ]
   },
   {
+   "id": "fluid_simulation",
+   "name": "Fluid Simulation (SPH)",
+   "size": "large",
+   "source": "added",
+   "concept": "Motion / velocity",
+   "footprint": [
+    16.0,
+    16.0
+   ]
+  },
+  {
    "id": "gravity_well",
    "name": "Gravity Well",
    "size": "small",
@@ -104,6 +104,39 @@
    "footprint": [
     1.0,
     2.0
+   ]
+  },
+  {
+   "id": "proximity_spawner",
+   "name": "Proximity Spawner",
+   "size": "small",
+   "source": "existing",
+   "concept": "",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "particle_systems",
+   "name": "Particle Systems",
+   "size": "large",
+   "source": "existing",
+   "concept": "",
+   "footprint": [
+    12.0,
+    11.0
+   ]
+  },
+  {
+   "id": "sub_emitters",
+   "name": "sub_emitters",
+   "size": "small",
+   "source": "added",
+   "concept": "Projectile / launch",
+   "footprint": [
+    1.0,
+    1.0
    ]
   },
   {
@@ -118,6 +151,17 @@
    ]
   },
   {
+   "id": "SpringSuspension",
+   "name": "SpringSuspension",
+   "size": "large",
+   "source": "added",
+   "concept": "Spring / Hooke",
+   "footprint": [
+    4.0,
+    2.0
+   ]
+  },
+  {
    "id": "verlet_integration",
    "name": "Verlet Integration",
    "size": "large",
@@ -125,17 +169,6 @@
    "concept": "Motion / velocity",
    "footprint": [
     9.0,
-    1.0
-   ]
-  },
-  {
-   "id": "newtons_laws",
-   "name": "Newton's Laws",
-   "size": "small",
-   "source": "added",
-   "concept": "General force / pad",
-   "footprint": [
-    1.0,
     1.0
    ]
   },
@@ -169,17 +202,6 @@
    "concept": "Gravity / orbit",
    "footprint": [
     2.0,
-    1.0
-   ]
-  },
-  {
-   "id": "friction_ramp",
-   "name": "Friction Ramp",
-   "size": "small",
-   "source": "added",
-   "concept": "Friction / drag",
-   "footprint": [
-    1.0,
     1.0
    ]
   },

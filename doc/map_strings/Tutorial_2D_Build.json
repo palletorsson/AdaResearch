@@ -2,11 +2,44 @@
  "map": "Tutorial_2D_Build",
  "sequence": "array_tutorial",
  "counts": {
-  "existing": 5,
+  "existing": 7,
   "added": 6,
-  "large": 1
+  "large": 3
  },
  "pearls": [
+  {
+   "id": "pick_up_cube",
+   "name": "Pick Up Cube",
+   "size": "small",
+   "source": "existing",
+   "concept": "Basics",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "row_3_x",
+   "name": "row_3_x",
+   "size": "large",
+   "source": "existing",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    4.0,
+    2.0
+   ]
+  },
+  {
+   "id": "column_3_z",
+   "name": "column_3_z",
+   "size": "large",
+   "source": "existing",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    1.0,
+    4.0
+   ]
+  },
   {
    "id": "grid_2d_4x4",
    "name": "grid_2d_4x4",
@@ -19,10 +52,10 @@
    ]
   },
   {
-   "id": "pick_up_cube",
-   "name": "Pick Up Cube",
+   "id": "IndexVisualizer",
+   "name": "IndexVisualizer",
    "size": "small",
-   "source": "existing",
+   "source": "added",
    "concept": "Basics",
    "footprint": [
     1.0,
@@ -41,17 +74,6 @@
    ]
   },
   {
-   "id": "xyz_coordinates",
-   "name": "XYZ coordinates",
-   "size": "small",
-   "source": "existing",
-   "concept": "· palette (unplaced)",
-   "footprint": [
-    2.0,
-    2.0
-   ]
-  },
-  {
    "id": "gridagent",
    "name": "Grid Agent",
    "size": "small",
@@ -63,19 +85,8 @@
    ]
   },
   {
-   "id": "path_game_controller",
-   "name": "Path Game Controller",
-   "size": "small",
-   "source": "added",
-   "concept": "· palette (unplaced)",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "path_cube",
-   "name": "Path Cube (wall)",
+   "id": "path_builder_foe",
+   "name": "Path Builder Foe",
    "size": "small",
    "source": "added",
    "concept": "· palette (unplaced)",
@@ -96,19 +107,8 @@
    ]
   },
   {
-   "id": "path_pyramid",
-   "name": "Path Pyramid (mound)",
-   "size": "small",
-   "source": "added",
-   "concept": "· palette (unplaced)",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "path_builder_foe",
-   "name": "Path Builder Foe",
+   "id": "path_cube",
+   "name": "Path Cube (wall)",
    "size": "small",
    "source": "added",
    "concept": "· palette (unplaced)",
@@ -126,6 +126,28 @@
    "footprint": [
     1.0,
     1.0
+   ]
+  },
+  {
+   "id": "path_pyramid",
+   "name": "Path Pyramid (mound)",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "xyz_coordinates",
+   "name": "XYZ coordinates",
+   "size": "small",
+   "source": "existing",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    2.0,
+    2.0
    ]
   }
  ]

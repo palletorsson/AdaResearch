@@ -3,10 +3,21 @@
  "sequence": "cellularautomata",
  "counts": {
   "existing": 4,
-  "added": 2,
-  "large": 2
+  "added": 6,
+  "large": 4
  },
  "pearls": [
+  {
+   "id": "ca_chair_test",
+   "name": "CA Chair Test",
+   "size": "small",
+   "source": "existing",
+   "concept": "Growth & dendrites",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
   {
    "id": "cellular_automata_3d_tree",
    "name": "Cellular Automata 3D Tree",
@@ -30,14 +41,25 @@
    ]
   },
   {
-   "id": "hexagon_cave_vr",
-   "name": "Hexagon Cave VR",
-   "size": "small",
+   "id": "cellular_automata_2d",
+   "name": "Cellular Automata 2D",
+   "size": "large",
    "source": "added",
-   "concept": "Alternative neighbourhoods (hex)",
+   "concept": "Conway's Game of Life",
    "footprint": [
-    3.0,
-    3.0
+    22.0,
+    22.0
+   ]
+  },
+  {
+   "id": "cellular_automata_1d",
+   "name": "Cellular Automata 1D",
+   "size": "large",
+   "source": "added",
+   "concept": "Elementary CA (1D rules)",
+   "footprint": [
+    11.0,
+    11.0
    ]
   },
   {
@@ -52,6 +74,39 @@
    ]
   },
   {
+   "id": "cellular_automata_3d",
+   "name": "Cellular Automata 3D",
+   "size": "small",
+   "source": "added",
+   "concept": "3D / volumetric CA",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "cellular_automata_grabable",
+   "name": "Cellular Automata Grabable",
+   "size": "small",
+   "source": "added",
+   "concept": "Elementary CA (1D rules)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "cellular_automata_3d_stacked",
+   "name": "Cellular Automata 3D Stacked",
+   "size": "small",
+   "source": "added",
+   "concept": "3D / volumetric CA",
+   "footprint": [
+    2.0,
+    2.0
+   ]
+  },
+  {
    "id": "decaying_bridge",
    "name": "Decaying Bridge",
    "size": "large",
@@ -60,17 +115,6 @@
    "footprint": [
     5.0,
     30.0
-   ]
-  },
-  {
-   "id": "ca_chair_test",
-   "name": "CA Chair Test",
-   "size": "small",
-   "source": "existing",
-   "concept": "Growth & dendrites",
-   "footprint": [
-    1.0,
-    1.0
    ]
   }
  ]

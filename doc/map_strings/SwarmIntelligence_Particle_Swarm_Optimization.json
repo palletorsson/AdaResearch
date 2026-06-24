@@ -2,20 +2,31 @@
  "map": "SwarmIntelligence_Particle_Swarm_Optimization",
  "sequence": "swarmintelligence",
  "counts": {
-  "existing": 2,
-  "added": 0,
-  "large": 1
+  "existing": 3,
+  "added": 1,
+  "large": 2
  },
  "pearls": [
   {
-   "id": "particle_swarm_optimization",
-   "name": "Particle Swarm Optimization",
+   "id": "fitness_landscape_politics",
+   "name": "Fitness Landscape Politics",
    "size": "large",
    "source": "existing",
-   "concept": "",
+   "concept": "Particle Swarm Optimization",
    "footprint": [
-    17.0,
+    4.0,
     3.0
+   ]
+  },
+  {
+   "id": "catalyst_foe",
+   "name": "Catalyst Foe",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    1.0,
+    1.0
    ]
   },
   {
@@ -27,6 +38,17 @@
    "footprint": [
     1.0,
     1.0
+   ]
+  },
+  {
+   "id": "particle_swarm_optimization",
+   "name": "Particle Swarm Optimization",
+   "size": "large",
+   "source": "existing",
+   "concept": "",
+   "footprint": [
+    17.0,
+    3.0
    ]
   }
  ]

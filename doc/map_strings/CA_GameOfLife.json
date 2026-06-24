@@ -2,11 +2,33 @@
  "map": "CA_GameOfLife",
  "sequence": "cellularautomata",
  "counts": {
-  "existing": 3,
+  "existing": 4,
   "added": 6,
-  "large": 4
+  "large": 3
  },
  "pearls": [
+  {
+   "id": "lab_room",
+   "name": "Lab Room",
+   "size": "small",
+   "source": "existing",
+   "concept": "",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "gray_scott_comparison",
+   "name": "Gray-Scott Comparison Garden",
+   "size": "large",
+   "source": "added",
+   "concept": "Reaction-diffusion (Turing)",
+   "footprint": [
+    11.0,
+    11.0
+   ]
+  },
   {
    "id": "ca_columns",
    "name": "CA Columns",
@@ -16,6 +38,39 @@
    "footprint": [
     9.0,
     9.0
+   ]
+  },
+  {
+   "id": "living_paper_brians_brain",
+   "name": "Living Paper — Brian's Brain",
+   "size": "small",
+   "source": "added",
+   "concept": "Brian's Brain / multi-state",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "lenia_room",
+   "name": "Lenia Room (soft gliders)",
+   "size": "small",
+   "source": "added",
+   "concept": "Continuous CA (Lenia)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "morpho_menagerie",
+   "name": "Morpho Menagerie (one genome, many coats)",
+   "size": "small",
+   "source": "added",
+   "concept": "Morphogenesis (DNA -> pattern)",
+   "footprint": [
+    1.0,
+    1.0
    ]
   },
   {
@@ -30,6 +85,28 @@
    ]
   },
   {
+   "id": "morphogenesis_bench",
+   "name": "Morphogenesis Bench (scrub the coat)",
+   "size": "small",
+   "source": "added",
+   "concept": "Morphogenesis (DNA -> pattern)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "morpho_egg",
+   "name": "Morpho Egg (DNA paints a coat)",
+   "size": "small",
+   "source": "added",
+   "concept": "Morphogenesis (DNA -> pattern)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
    "id": "ca_bridge",
    "name": "CA Bridge",
    "size": "small",
@@ -38,72 +115,6 @@
    "footprint": [
     1.0,
     1.0
-   ]
-  },
-  {
-   "id": "ca_showcase",
-   "name": "CA Showcase",
-   "size": "small",
-   "source": "added",
-   "concept": "Elementary CA (1D rules)",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "cellular_automata_3d_stacked",
-   "name": "Cellular Automata 3D Stacked",
-   "size": "small",
-   "source": "added",
-   "concept": "3D / volumetric CA",
-   "footprint": [
-    2.0,
-    2.0
-   ]
-  },
-  {
-   "id": "cellular_automata_3d",
-   "name": "Cellular Automata 3D",
-   "size": "small",
-   "source": "added",
-   "concept": "3D / volumetric CA",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "cellular_automata_grabable",
-   "name": "Cellular Automata Grabable",
-   "size": "small",
-   "source": "added",
-   "concept": "Elementary CA (1D rules)",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "cellular_automata_2d",
-   "name": "Cellular Automata 2D",
-   "size": "large",
-   "source": "added",
-   "concept": "Conway's Game of Life",
-   "footprint": [
-    22.0,
-    22.0
-   ]
-  },
-  {
-   "id": "cellular_automata_1d",
-   "name": "Cellular Automata 1D",
-   "size": "large",
-   "source": "added",
-   "concept": "Elementary CA (1D rules)",
-   "footprint": [
-    11.0,
-    11.0
    ]
   }
  ]

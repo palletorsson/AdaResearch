@@ -8,28 +8,6 @@
  },
  "pearls": [
   {
-   "id": "BigPipeSystem",
-   "name": "Big Pipe System",
-   "size": "small",
-   "source": "existing",
-   "concept": "pendulum",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "GlassRack",
-   "name": "Glass Rack",
-   "size": "small",
-   "source": "existing",
-   "concept": "pendulum",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
    "id": "PendulumWave",
    "name": "PendulumWave",
    "size": "large",
@@ -41,8 +19,8 @@
    ]
   },
   {
-   "id": "VRAudioMonitor",
-   "name": "VR Audio Monitor",
+   "id": "draw_dot_time_domain",
+   "name": "draw_dot_time_domain",
    "size": "small",
    "source": "existing",
    "concept": "pendulum",
@@ -63,13 +41,24 @@
    ]
   },
   {
-   "id": "draw_dot_time_domain",
-   "name": "draw_dot_time_domain",
+   "id": "GlassRack",
+   "name": "Glass Rack",
    "size": "small",
    "source": "existing",
    "concept": "pendulum",
    "footprint": [
     1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "lab_table",
+   "name": "Lab Table",
+   "size": "small",
+   "source": "existing",
+   "concept": "pendulum",
+   "footprint": [
+    2.0,
     1.0
    ]
   },
@@ -107,13 +96,24 @@
    ]
   },
   {
-   "id": "lab_table",
-   "name": "Lab Table",
+   "id": "BigPipeSystem",
+   "name": "Big Pipe System",
    "size": "small",
    "source": "existing",
    "concept": "pendulum",
    "footprint": [
-    2.0,
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "VRAudioMonitor",
+   "name": "VR Audio Monitor",
+   "size": "small",
+   "source": "existing",
+   "concept": "pendulum",
+   "footprint": [
+    1.0,
     1.0
    ]
   },

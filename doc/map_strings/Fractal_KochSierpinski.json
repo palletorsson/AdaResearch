@@ -2,22 +2,11 @@
  "map": "Fractal_KochSierpinski",
  "sequence": "fractals",
  "counts": {
-  "existing": 6,
-  "added": 6,
-  "large": 6
+  "existing": 7,
+  "added": 1,
+  "large": 4
  },
  "pearls": [
-  {
-   "id": "cube_bookshelf",
-   "name": "Cube Bookshelf",
-   "size": "small",
-   "source": "existing",
-   "concept": "Fractal furniture",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
   {
    "id": "cube_cabin",
    "name": "Cube Cabin",
@@ -41,17 +30,6 @@
    ]
   },
   {
-   "id": "living_paper_koch",
-   "name": "Living Paper — Koch Snowflake",
-   "size": "small",
-   "source": "added",
-   "concept": "Koch curve & snowflake",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
    "id": "koch_curve_3d",
    "name": "3D Koch Curve",
    "size": "large",
@@ -60,61 +38,6 @@
    "footprint": [
     4.0,
     2.0
-   ]
-  },
-  {
-   "id": "space_filling_curve_gallery",
-   "name": "Space-Filling Curve Gallery",
-   "size": "large",
-   "source": "added",
-   "concept": "Space-filling curves",
-   "footprint": [
-    4.0,
-    2.0
-   ]
-  },
-  {
-   "id": "space_filling_floor",
-   "name": "Space-Filling Floor",
-   "size": "small",
-   "source": "added",
-   "concept": "Space-filling curves",
-   "footprint": [
-    2.0,
-    1.0
-   ]
-  },
-  {
-   "id": "koch_curve_1",
-   "name": "koch_curve_!",
-   "size": "large",
-   "source": "added",
-   "concept": "Koch curve & snowflake",
-   "footprint": [
-    41.0,
-    1.0
-   ]
-  },
-  {
-   "id": "koch_loom",
-   "name": "Koch Loom (edge fabric)",
-   "size": "small",
-   "source": "added",
-   "concept": "Koch curve & snowflake",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "sierpinski_pyramid",
-   "name": "Sierpinski Pyramid",
-   "size": "large",
-   "source": "existing",
-   "concept": "Sierpinski",
-   "footprint": [
-    9.0,
-    9.0
    ]
   },
   {
@@ -129,14 +52,47 @@
    ]
   },
   {
+   "id": "living_paper_sierpinski",
+   "name": "Living Paper — Sierpinski Triangle",
+   "size": "small",
+   "source": "added",
+   "concept": "Sierpinski",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "cube_bookshelf",
+   "name": "Cube Bookshelf",
+   "size": "small",
+   "source": "existing",
+   "concept": "Fractal furniture",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
    "id": "box_counting_dimension",
    "name": "box_counting_dimension",
    "size": "large",
-   "source": "added",
+   "source": "existing",
    "concept": "Fractal dimension",
    "footprint": [
     12.0,
     6.0
+   ]
+  },
+  {
+   "id": "sierpinski_pyramid",
+   "name": "Sierpinski Pyramid",
+   "size": "large",
+   "source": "existing",
+   "concept": "Sierpinski",
+   "footprint": [
+    9.0,
+    9.0
    ]
   }
  ]

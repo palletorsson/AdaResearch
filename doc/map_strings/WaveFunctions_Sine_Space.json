@@ -3,10 +3,54 @@
  "sequence": "wavefunctions",
  "counts": {
   "existing": 5,
-  "added": 5,
-  "large": 3
+  "added": 6,
+  "large": 4
  },
  "pearls": [
+  {
+   "id": "sine_wall_corridor",
+   "name": "Sine Wall Corridor",
+   "size": "large",
+   "source": "existing",
+   "concept": "sine space",
+   "footprint": [
+    3.0,
+    8.0
+   ]
+  },
+  {
+   "id": "vertical_wave_lines",
+   "name": "Vertical Wave Lines",
+   "size": "large",
+   "source": "added",
+   "concept": "the wave",
+   "footprint": [
+    12.0,
+    12.0
+   ]
+  },
+  {
+   "id": "sine_wall_explanation",
+   "name": "Sine Wall Explanation",
+   "size": "small",
+   "source": "existing",
+   "concept": "sine space",
+   "footprint": [
+    1.0,
+    2.0
+   ]
+  },
+  {
+   "id": "sine_space_explanation",
+   "name": "Sine Space Explanation",
+   "size": "small",
+   "source": "existing",
+   "concept": "sine space",
+   "footprint": [
+    2.0,
+    2.0
+   ]
+  },
   {
    "id": "colorballs",
    "name": "colorballs",
@@ -41,28 +85,6 @@
    ]
   },
   {
-   "id": "doppler_effect_demo",
-   "name": "Doppler Effect Demo",
-   "size": "small",
-   "source": "added",
-   "concept": "· palette (unplaced)",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "sine_oscillation",
-   "name": "Sine Oscillation",
-   "size": "small",
-   "source": "added",
-   "concept": "TrigWalkingPath",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
    "id": "sine_wall",
    "name": "Sine Wall",
    "size": "large",
@@ -85,36 +107,25 @@
    ]
   },
   {
-   "id": "sine_space_explanation",
-   "name": "Sine Space Explanation",
+   "id": "profile_square",
+   "name": "Profile — Square Wave",
    "size": "small",
-   "source": "existing",
-   "concept": "sine space",
-   "footprint": [
-    2.0,
-    2.0
-   ]
-  },
-  {
-   "id": "sine_wall_corridor",
-   "name": "Sine Wall Corridor",
-   "size": "large",
-   "source": "existing",
-   "concept": "sine space",
-   "footprint": [
-    3.0,
-    8.0
-   ]
-  },
-  {
-   "id": "sine_wall_explanation",
-   "name": "Sine Wall Explanation",
-   "size": "small",
-   "source": "existing",
-   "concept": "sine space",
+   "source": "added",
+   "concept": "the wave",
    "footprint": [
     1.0,
-    2.0
+    1.0
+   ]
+  },
+  {
+   "id": "profile_saw",
+   "name": "Profile — Sawtooth Wave",
+   "size": "small",
+   "source": "added",
+   "concept": "the wave",
+   "footprint": [
+    1.0,
+    1.0
    ]
   }
  ]

@@ -2,9 +2,87 @@
  "map": "ML_Neural_Networks",
  "sequence": "machinelearning",
  "counts": {
-  "existing": 0,
-  "added": 0,
-  "large": 0
+  "existing": 3,
+  "added": 4,
+  "large": 5
  },
- "pearls": []
+ "pearls": [
+  {
+   "id": "neural_networks_vr",
+   "name": "NeuralNetworks_VR",
+   "size": "large",
+   "source": "existing",
+   "concept": "Neural Networks",
+   "footprint": [
+    28.0,
+    8.0
+   ]
+  },
+  {
+   "id": "neural_network_visualization",
+   "name": "Neural Network Visualization",
+   "size": "large",
+   "source": "existing",
+   "concept": "Convolutional Neural Networks CNNs",
+   "footprint": [
+    10.0,
+    1.0
+   ]
+  },
+  {
+   "id": "neural_networks",
+   "name": "Neural Networks",
+   "size": "large",
+   "source": "added",
+   "concept": "Convolutional Neural Networks CNNs",
+   "footprint": [
+    17.0,
+    1.0
+   ]
+  },
+  {
+   "id": "learn_world_stacked",
+   "name": "Learn World (Stacked)",
+   "size": "large",
+   "source": "existing",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    20.0,
+    20.0
+   ]
+  },
+  {
+   "id": "backpropagation_flow",
+   "name": "Backpropagation Flow",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "lstms",
+   "name": "LSTMs",
+   "size": "large",
+   "source": "added",
+   "concept": "LSTMs",
+   "footprint": [
+    29.0,
+    9.0
+   ]
+  },
+  {
+   "id": "convolutional_neural_networks",
+   "name": "Convolutional Neural Networks (CNNs)",
+   "size": "small",
+   "source": "added",
+   "concept": "Convolutional Neural Networks CNNs",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  }
+ ]
 }

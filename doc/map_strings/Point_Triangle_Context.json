@@ -2,11 +2,66 @@
  "map": "Point_Triangle_Context",
  "sequence": "primitives",
  "counts": {
-  "existing": 7,
+  "existing": 13,
   "added": 6,
-  "large": 1
+  "large": 4
  },
  "pearls": [
+  {
+   "id": "lab_room",
+   "name": "Lab Room",
+   "size": "small",
+   "source": "existing",
+   "concept": "",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "parasol_triangle",
+   "name": "Parasol Triangle",
+   "size": "small",
+   "source": "existing",
+   "concept": "Triangle",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "triangle_line_puzzle",
+   "name": "Triangle Line Puzzle",
+   "size": "small",
+   "source": "existing",
+   "concept": "Interactive tool",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "triangleprofiles",
+   "name": "1.2: A triangleprofilese",
+   "size": "large",
+   "source": "existing",
+   "concept": "Triangle",
+   "footprint": [
+    6.0,
+    6.0
+   ]
+  },
+  {
+   "id": "floating_sphere_field",
+   "name": "Floating Sphere Field",
+   "size": "small",
+   "source": "existing",
+   "concept": "Sphere / ball",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
   {
    "id": "folded_strip",
    "name": "1.2: folded_strip",
@@ -15,50 +70,6 @@
    "concept": "Triangle",
    "footprint": [
     5.0,
-    1.0
-   ]
-  },
-  {
-   "id": "rectcube",
-   "name": "Rectangular Cube",
-   "size": "small",
-   "source": "added",
-   "concept": "Cube / box",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "capsules",
-   "name": "capsules",
-   "size": "small",
-   "source": "added",
-   "concept": "Capsule",
-   "footprint": [
-    2.0,
-    1.0
-   ]
-  },
-  {
-   "id": "kochsnowflake",
-   "name": "kochsnowflake",
-   "size": "small",
-   "source": "added",
-   "concept": "Other primitives",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "SDFDrawTool",
-   "name": "SDFDrawTool",
-   "size": "small",
-   "source": "added",
-   "concept": "Assembly / SDF / boolean",
-   "footprint": [
-    1.0,
     1.0
    ]
   },
@@ -74,13 +85,46 @@
    ]
   },
   {
-   "id": "interactivetriangle",
-   "name": "1.2: A triangle",
+   "id": "triangle",
+   "name": "triangle",
    "size": "small",
    "source": "existing",
    "concept": "Triangle",
    "footprint": [
-    2.0,
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "foldedpaper",
+   "name": "1.2: A foldedpaper",
+   "size": "small",
+   "source": "added",
+   "concept": "Interactive tool",
+   "footprint": [
+    3.0,
+    1.0
+   ]
+  },
+  {
+   "id": "plane",
+   "name": "plane",
+   "size": "large",
+   "source": "added",
+   "concept": "Plane / quad",
+   "footprint": [
+    10.0,
+    10.0
+   ]
+  },
+  {
+   "id": "pythagorean_proof",
+   "name": "pythagorean_proof",
+   "size": "large",
+   "source": "added",
+   "concept": "Triangle",
+   "footprint": [
+    8.0,
     1.0
    ]
   },
@@ -118,17 +162,6 @@
    ]
   },
   {
-   "id": "quad_line_puzzle",
-   "name": "Quad Line Puzzle",
-   "size": "small",
-   "source": "existing",
-   "concept": "Plane / quad",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
    "id": "quad",
    "name": "quad",
    "size": "small",
@@ -136,6 +169,39 @@
    "concept": "Plane / quad",
    "footprint": [
     2.0,
+    1.0
+   ]
+  },
+  {
+   "id": "interactivetriangle",
+   "name": "1.2: A triangle",
+   "size": "small",
+   "source": "existing",
+   "concept": "Triangle",
+   "footprint": [
+    2.0,
+    1.0
+   ]
+  },
+  {
+   "id": "menu",
+   "name": "menu",
+   "size": "small",
+   "source": "added",
+   "concept": "Cube / box",
+   "footprint": [
+    3.0,
+    1.0
+   ]
+  },
+  {
+   "id": "quad_line_puzzle",
+   "name": "Quad Line Puzzle",
+   "size": "small",
+   "source": "existing",
+   "concept": "Plane / quad",
+   "footprint": [
+    1.0,
     1.0
    ]
   },

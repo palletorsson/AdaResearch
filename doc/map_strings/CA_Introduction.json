@@ -2,9 +2,9 @@
  "map": "CA_Introduction",
  "sequence": "cellularautomata",
  "counts": {
-  "existing": 2,
-  "added": 3,
-  "large": 2
+  "existing": 3,
+  "added": 6,
+  "large": 1
  },
  "pearls": [
   {
@@ -30,11 +30,55 @@
    ]
   },
   {
-   "id": "pulsing_ca",
-   "name": "Pulsing CA",
+   "id": "grid_substrate_runner",
+   "name": "Grid Substrate Runner",
+   "size": "small",
+   "source": "existing",
+   "concept": "",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "lattice_gas_room",
+   "name": "Lattice Gas Room (flow + obstacle)",
    "size": "small",
    "source": "added",
-   "concept": "Life patterns & variants",
+   "concept": "Lattice gas / physical CA",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "stigmergy_toy",
+   "name": "Stigmergy Toy (ant trails)",
+   "size": "small",
+   "source": "added",
+   "concept": "Stigmergy & ecological CA",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "langton_toy",
+   "name": "Langton's Ant Toy (held)",
+   "size": "small",
+   "source": "added",
+   "concept": "Langton's ant / turmites",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "brians_brain_display",
+   "name": "Brian's Brain Display (shimmer screen)",
+   "size": "small",
+   "source": "added",
+   "concept": "Brian's Brain / multi-state",
    "footprint": [
     1.0,
     1.0
@@ -52,14 +96,14 @@
    ]
   },
   {
-   "id": "mirror_cellular_texture_for_3d",
-   "name": "Mirror Cellular Texture for 3D",
-   "size": "large",
+   "id": "lenia_continuous",
+   "name": "Lenia Continuous",
+   "size": "small",
    "source": "added",
-   "concept": "CA materials & texture",
+   "concept": "Continuous CA (Lenia)",
    "footprint": [
-    4.0,
-    4.0
+    1.0,
+    1.0
    ]
   }
  ]

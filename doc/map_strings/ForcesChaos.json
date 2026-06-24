@@ -2,11 +2,22 @@
  "map": "ForcesChaos",
  "sequence": "forces",
  "counts": {
-  "existing": 4,
+  "existing": 11,
   "added": 6,
-  "large": 5
+  "large": 7
  },
  "pearls": [
+  {
+   "id": "library_rack",
+   "name": "Library Rack",
+   "size": "small",
+   "source": "existing",
+   "concept": "",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
   {
    "id": "three_body_problem",
    "name": "Three-Body Problem",
@@ -19,14 +30,14 @@
    ]
   },
   {
-   "id": "cloth_simulation",
-   "name": "Cloth Simulation",
-   "size": "large",
+   "id": "pendulum_slap",
+   "name": "Pendulum Slap",
+   "size": "small",
    "source": "added",
-   "concept": "Gravity / orbit",
+   "concept": "Pendulum",
    "footprint": [
-    4.0,
-    5.0
+    2.0,
+    2.0
    ]
   },
   {
@@ -38,6 +49,17 @@
    "footprint": [
     16.0,
     2.0
+   ]
+  },
+  {
+   "id": "cloth_simulation",
+   "name": "Cloth Simulation",
+   "size": "large",
+   "source": "added",
+   "concept": "Gravity / orbit",
+   "footprint": [
+    4.0,
+    5.0
    ]
   },
   {
@@ -63,17 +85,6 @@
    ]
   },
   {
-   "id": "rockfactory_gravity",
-   "name": "Rock Factory (Gravity)",
-   "size": "small",
-   "source": "added",
-   "concept": "Gravity / orbit",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
    "id": "forcedirected3d",
    "name": "forcedirected3d",
    "size": "large",
@@ -82,17 +93,6 @@
    "footprint": [
     16.0,
     18.0
-   ]
-  },
-  {
-   "id": "scale_me",
-   "name": "scale_me",
-   "size": "small",
-   "source": "added",
-   "concept": "Scaling",
-   "footprint": [
-    1.0,
-    1.0
    ]
   },
   {
@@ -114,6 +114,83 @@
    "concept": "Spring / Hooke",
    "footprint": [
     17.0,
+    1.0
+   ]
+  },
+  {
+   "id": "example_2_8_two_body_attraction_vr",
+   "name": "example_2_8_two_body_attraction_vr",
+   "size": "small",
+   "source": "existing",
+   "concept": "Gravity / orbit",
+   "footprint": [
+    1.0,
+    2.0
+   ]
+  },
+  {
+   "id": "particle_systems",
+   "name": "Particle Systems",
+   "size": "large",
+   "source": "existing",
+   "concept": "",
+   "footprint": [
+    12.0,
+    11.0
+   ]
+  },
+  {
+   "id": "proximity_spawner",
+   "name": "Proximity Spawner",
+   "size": "small",
+   "source": "existing",
+   "concept": "",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "spring_system",
+   "name": "Spring System",
+   "size": "large",
+   "source": "existing",
+   "concept": "Spring / Hooke",
+   "footprint": [
+    9.0,
+    11.0
+   ]
+  },
+  {
+   "id": "vector_field_visualizer",
+   "name": "Vector Field Visualizer",
+   "size": "small",
+   "source": "existing",
+   "concept": "Vector field / flow",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "example_2_9_n_body_attraction_vr",
+   "name": "example_2_9_n_body_attraction_vr",
+   "size": "small",
+   "source": "existing",
+   "concept": "Gravity / orbit",
+   "footprint": [
+    1.0,
+    2.0
+   ]
+  },
+  {
+   "id": "example_2_6_single_attractor_vr",
+   "name": "example_2_6_single_attractor_vr",
+   "size": "small",
+   "source": "added",
+   "concept": "Gravity / orbit",
+   "footprint": [
+    2.0,
     1.0
    ]
   }

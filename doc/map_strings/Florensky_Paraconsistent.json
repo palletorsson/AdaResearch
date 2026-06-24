@@ -2,7 +2,7 @@
  "map": "Florensky_Paraconsistent",
  "sequence": "foundationscrisis",
  "counts": {
-  "existing": 3,
+  "existing": 4,
   "added": 1,
   "large": 0
  },
@@ -10,6 +10,17 @@
   {
    "id": "florensky_sphere",
    "name": "Florensky Sphere",
+   "size": "small",
+   "source": "existing",
+   "concept": "Florensky & paraconsistency",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "both_true_gate",
+   "name": "BothTrueGate",
    "size": "small",
    "source": "existing",
    "concept": "Florensky & paraconsistency",

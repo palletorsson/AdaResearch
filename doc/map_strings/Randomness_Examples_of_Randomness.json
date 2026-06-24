@@ -4,7 +4,7 @@
  "counts": {
   "existing": 4,
   "added": 6,
-  "large": 7
+  "large": 6
  },
  "pearls": [
   {
@@ -52,6 +52,17 @@
    ]
   },
   {
+   "id": "random_edge_profile_collection",
+   "name": "Random Edge Profile Collection",
+   "size": "small",
+   "source": "added",
+   "concept": "Random transformations",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
    "id": "monte_carlo_dartboard",
    "name": "Monte Carlo Dart Board",
    "size": "small",
@@ -74,36 +85,25 @@
    ]
   },
   {
-   "id": "value_noise",
-   "name": "Value Noise",
+   "id": "omoss",
+   "name": "Omoss",
    "size": "large",
    "source": "added",
-   "concept": "Simplex / Worley / value noise",
-   "footprint": [
-    21.0,
-    21.0
-   ]
-  },
-  {
-   "id": "neon_wave_grid",
-   "name": "Neon Wave Grid",
-   "size": "large",
-   "source": "added",
-   "concept": "Noise fields & textures",
-   "footprint": [
-    14.0,
-    8.0
-   ]
-  },
-  {
-   "id": "noisetorus",
-   "name": "noisetorus",
-   "size": "large",
-   "source": "added",
-   "concept": "Noise fields & textures",
+   "concept": "Random art / scatter",
    "footprint": [
     5.0,
     5.0
+   ]
+  },
+  {
+   "id": "random_color_book_page_collection",
+   "name": "Random Color Book Page Collection",
+   "size": "large",
+   "source": "added",
+   "concept": "Random art / scatter",
+   "footprint": [
+    13.0,
+    1.0
    ]
   },
   {

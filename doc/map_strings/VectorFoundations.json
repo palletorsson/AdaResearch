@@ -3,8 +3,8 @@
  "sequence": "forces",
  "counts": {
   "existing": 7,
-  "added": 4,
-  "large": 3
+  "added": 1,
+  "large": 2
  },
  "pearls": [
   {
@@ -19,46 +19,13 @@
    ]
   },
   {
-   "id": "force_field",
-   "name": "Force Field",
-   "size": "large",
-   "source": "added",
-   "concept": "Force field (zone)",
-   "footprint": [
-    8.0,
-    8.0
-   ]
-  },
-  {
-   "id": "spring_mass_bouncer",
-   "name": "Spring Mass Bouncer",
+   "id": "scale_me",
+   "name": "scale_me",
    "size": "small",
    "source": "added",
-   "concept": "Spring / Hooke",
+   "concept": "Scaling",
    "footprint": [
     1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "spring_hopper",
-   "name": "Spring Hopper",
-   "size": "small",
-   "source": "added",
-   "concept": "Spring / Hooke",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "homogeneous_coordinates",
-   "name": "Homogeneous Coordinates",
-   "size": "small",
-   "source": "added",
-   "concept": "Coordinate system",
-   "footprint": [
-    2.0,
     1.0
    ]
   },

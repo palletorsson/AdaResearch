@@ -2,9 +2,9 @@
  "map": "Randomness_10_PRINT_Algorithm",
  "sequence": "randomness",
  "counts": {
-  "existing": 5,
-  "added": 6,
-  "large": 3
+  "existing": 4,
+  "added": 5,
+  "large": 2
  },
  "pearls": [
   {
@@ -19,11 +19,11 @@
    ]
   },
   {
-   "id": "seed_replay_demo",
-   "name": "Seed Replay Demo",
+   "id": "grid3d",
+   "name": "Grid3D Substrate",
    "size": "small",
    "source": "added",
-   "concept": "Seeds / PRNG vs TRNG",
+   "concept": "10 PRINT / generative grid",
    "footprint": [
     1.0,
     1.0
@@ -38,6 +38,17 @@
    "footprint": [
     1.0,
     11.0
+   ]
+  },
+  {
+   "id": "mesh_grammar_barnacle",
+   "name": "MeshGrammar — Barnacle Sphere",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    1.0,
+    1.0
    ]
   },
   {
@@ -63,17 +74,6 @@
    ]
   },
   {
-   "id": "clipboard#ten_print_axioms",
-   "name": "clipboard#ten_print_axioms",
-   "size": "small",
-   "source": "existing",
-   "concept": "",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
    "id": "nature_system_demo",
    "name": "Nature System Demo",
    "size": "large",
@@ -82,17 +82,6 @@
    "footprint": [
     15.0,
     53.0
-   ]
-  },
-  {
-   "id": "puls_markov",
-   "name": "Pulsing Markov Blanket",
-   "size": "large",
-   "source": "added",
-   "concept": "Markov chains",
-   "footprint": [
-    8.0,
-    8.0
    ]
   },
   {
@@ -107,25 +96,14 @@
    ]
   },
   {
-   "id": "dna_sprout",
-   "name": "DNA Sprout (held seed -> plant)",
+   "id": "grid2d_seeds",
+   "name": "Grid2D — Seeds",
    "size": "small",
    "source": "added",
-   "concept": "Seeded growth / DNA -> form",
+   "concept": "Seeds / PRNG vs TRNG",
    "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "genome_bench",
-   "name": "Genome Bench (scrub -> regrow)",
-   "size": "small",
-   "source": "added",
-   "concept": "Seeded growth / DNA -> form",
-   "footprint": [
-    1.0,
-    1.0
+    3.0,
+    3.0
    ]
   }
  ]

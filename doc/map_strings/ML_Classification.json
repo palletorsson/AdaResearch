@@ -2,9 +2,109 @@
  "map": "ML_Classification",
  "sequence": "machinelearning",
  "counts": {
-  "existing": 0,
-  "added": 0,
-  "large": 0
+  "existing": 3,
+  "added": 6,
+  "large": 8
  },
- "pearls": []
+ "pearls": [
+  {
+   "id": "enhanced_kmeans",
+   "name": "Enhanced K-Means Clustering",
+   "size": "large",
+   "source": "existing",
+   "concept": "Clustering Algorithms",
+   "footprint": [
+    50.0,
+    50.0
+   ]
+  },
+  {
+   "id": "svm_visualization",
+   "name": "Support Vector Machine Visualization",
+   "size": "large",
+   "source": "existing",
+   "concept": "Random Walker Machine",
+   "footprint": [
+    10.0,
+    10.0
+   ]
+  },
+  {
+   "id": "dimensionality_reduction",
+   "name": "Dimensionality Reduction",
+   "size": "large",
+   "source": "added",
+   "concept": "Dimensionality Reduction",
+   "footprint": [
+    20.0,
+    4.0
+   ]
+  },
+  {
+   "id": "computer_vision",
+   "name": "Computer Vision",
+   "size": "large",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    19.0,
+    3.0
+   ]
+  },
+  {
+   "id": "kmeans_simple",
+   "name": "K-Means Simple",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "recommendation_systems",
+   "name": "Recommendation Systems",
+   "size": "large",
+   "source": "added",
+   "concept": "Recommendation Systems",
+   "footprint": [
+    20.0,
+    4.0
+   ]
+  },
+  {
+   "id": "nlp",
+   "name": "Natural Language Processing",
+   "size": "large",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    19.0,
+    3.0
+   ]
+  },
+  {
+   "id": "ensemble_methods",
+   "name": "Ensemble Methods",
+   "size": "large",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    19.0,
+    3.0
+   ]
+  },
+  {
+   "id": "random_forest_visualization",
+   "name": "Random Forest Visualization",
+   "size": "large",
+   "source": "existing",
+   "concept": "Random Walker Machine",
+   "footprint": [
+    20.0,
+    20.0
+   ]
+  }
+ ]
 }

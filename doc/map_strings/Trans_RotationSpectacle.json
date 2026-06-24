@@ -3,8 +3,8 @@
  "sequence": "transformation",
  "counts": {
   "existing": 4,
-  "added": 6,
-  "large": 3
+  "added": 4,
+  "large": 2
  },
  "pearls": [
   {
@@ -30,33 +30,22 @@
    ]
   },
   {
-   "id": "rotation_gimbal",
-   "name": "Rotation Gimbal",
+   "id": "hyperbolic_surface",
+   "name": "Hyperbolic Surface",
    "size": "small",
    "source": "added",
-   "concept": "Rotation",
+   "concept": "Curved space (non-Euclidean)",
    "footprint": [
     1.0,
     1.0
    ]
   },
   {
-   "id": "transform_composition",
-   "name": "Transform Composition",
+   "id": "elliptic_surface",
+   "name": "Elliptic Surface",
    "size": "small",
    "source": "added",
-   "concept": "Composition",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "invariants_demo",
-   "name": "Invariants Demo",
-   "size": "small",
-   "source": "added",
-   "concept": "Invariants",
+   "concept": "Curved space (non-Euclidean)",
    "footprint": [
     1.0,
     1.0
@@ -85,6 +74,17 @@
    ]
   },
   {
+   "id": "example_2_8_two_body_attraction_vr",
+   "name": "example_2_8_two_body_attraction_vr",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    1.0,
+    2.0
+   ]
+  },
+  {
    "id": "carousel_cake",
    "name": "carousel_cake",
    "size": "large",
@@ -93,28 +93,6 @@
    "footprint": [
     10.0,
     10.0
-   ]
-  },
-  {
-   "id": "transform_composition_workbench",
-   "name": "Transform Composition Workbench",
-   "size": "small",
-   "source": "added",
-   "concept": "Composition",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "rotatescalecubes",
-   "name": "Rotate Scale Cubes",
-   "size": "large",
-   "source": "added",
-   "concept": "Scale",
-   "footprint": [
-    19.0,
-    18.0
    ]
   }
  ]

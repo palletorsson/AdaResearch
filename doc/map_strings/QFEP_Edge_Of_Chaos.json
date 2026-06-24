@@ -2,8 +2,8 @@
  "map": "QFEP_Edge_Of_Chaos",
  "sequence": "qfeplaboratory",
  "counts": {
-  "existing": 4,
-  "added": 6,
+  "existing": 5,
+  "added": 5,
   "large": 4
  },
  "pearls": [
@@ -38,6 +38,17 @@
    "footprint": [
     8.0,
     8.0
+   ]
+  },
+  {
+   "id": "edge_of_chaos_unlocked",
+   "name": "Edge of Chaos Unlocked",
+   "size": "small",
+   "source": "existing",
+   "concept": "The edge of chaos",
+   "footprint": [
+    3.0,
+    1.0
    ]
   },
   {
@@ -92,17 +103,6 @@
    "concept": "The edge of chaos",
    "footprint": [
     1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "edge_of_chaos_unlocked",
-   "name": "Edge of Chaos Unlocked",
-   "size": "small",
-   "source": "added",
-   "concept": "The edge of chaos",
-   "footprint": [
-    3.0,
     1.0
    ]
   },

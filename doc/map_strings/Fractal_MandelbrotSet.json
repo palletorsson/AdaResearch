@@ -8,6 +8,17 @@
  },
  "pearls": [
   {
+   "id": "mandelbrot_set",
+   "name": "Mandelbrot Set",
+   "size": "large",
+   "source": "existing",
+   "concept": "Mandelbrot set",
+   "footprint": [
+    17.0,
+    10.0
+   ]
+  },
+  {
    "id": "mandelbrot_dive",
    "name": "Mandelbrot Dive",
    "size": "small",
@@ -16,6 +27,28 @@
    "footprint": [
     2.0,
     2.0
+   ]
+  },
+  {
+   "id": "lyapunov_bench",
+   "name": "Lyapunov Bench (stability landscape)",
+   "size": "small",
+   "source": "added",
+   "concept": "Lyapunov & escape-time",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "escape_time_room",
+   "name": "Escape-Time Room (edge of chaos)",
+   "size": "small",
+   "source": "added",
+   "concept": "Lyapunov & escape-time",
+   "footprint": [
+    1.0,
+    1.0
    ]
   },
   {
@@ -60,39 +93,6 @@
    "footprint": [
     1.0,
     1.0
-   ]
-  },
-  {
-   "id": "strange_attractors",
-   "name": "Strange Attractors",
-   "size": "small",
-   "source": "added",
-   "concept": "Strange attractors",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "lyapunov_fractal",
-   "name": "Lyapunov Fractal",
-   "size": "small",
-   "source": "added",
-   "concept": "Lyapunov & escape-time",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "mandelbrot_set",
-   "name": "Mandelbrot Set",
-   "size": "large",
-   "source": "existing",
-   "concept": "Mandelbrot set",
-   "footprint": [
-    17.0,
-    10.0
    ]
   }
  ]

@@ -2,9 +2,87 @@
  "map": "ML_Gradient_Landscape",
  "sequence": "machinelearning",
  "counts": {
-  "existing": 0,
-  "added": 0,
-  "large": 0
+  "existing": 3,
+  "added": 4,
+  "large": 3
  },
- "pearls": []
+ "pearls": [
+  {
+   "id": "gradient_descent_visualization",
+   "name": "Gradient Descent",
+   "size": "small",
+   "source": "existing",
+   "concept": "Evolving Creatures",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "gradient_descent_well",
+   "name": "Gradient Descent Well",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    2.0,
+    2.0
+   ]
+  },
+  {
+   "id": "pca_visualization",
+   "name": "PCA Visualization",
+   "size": "large",
+   "source": "existing",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    12.0,
+    12.0
+   ]
+  },
+  {
+   "id": "loss_function_comparator",
+   "name": "Loss Function Comparator",
+   "size": "small",
+   "source": "existing",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    2.0,
+    1.0
+   ]
+  },
+  {
+   "id": "gradient_descent",
+   "name": "Gradient Descent",
+   "size": "large",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    20.0,
+    20.0
+   ]
+  },
+  {
+   "id": "gradient_descent_landscape",
+   "name": "Gradient Descent Landscape",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "optimization_algorithms",
+   "name": "Optimization Algorithms",
+   "size": "large",
+   "source": "added",
+   "concept": "Classification Algorithms",
+   "footprint": [
+    20.0,
+    4.0
+   ]
+  }
+ ]
 }

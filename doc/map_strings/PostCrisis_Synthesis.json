@@ -2,11 +2,44 @@
  "map": "PostCrisis_Synthesis",
  "sequence": "postfoundationscrisis",
  "counts": {
-  "existing": 1,
-  "added": 6,
-  "large": 1
+  "existing": 4,
+  "added": 3,
+  "large": 0
  },
  "pearls": [
+  {
+   "id": "qfep_formula_3d",
+   "name": "QFEP Formula 3D",
+   "size": "small",
+   "source": "existing",
+   "concept": "",
+   "footprint": [
+    3.0,
+    1.0
+   ]
+  },
+  {
+   "id": "bias_from_inside",
+   "name": "Bias From Inside",
+   "size": "small",
+   "source": "existing",
+   "concept": "Bias as structural incompleteness",
+   "footprint": [
+    2.0,
+    2.0
+   ]
+  },
+  {
+   "id": "florensky_sphere",
+   "name": "Florensky Sphere",
+   "size": "small",
+   "source": "existing",
+   "concept": "",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
   {
    "id": "edge_as_ground_capstone",
    "name": "Edge as Ground Capstone",
@@ -19,30 +52,8 @@
    ]
   },
   {
-   "id": "edge_ground_bench",
-   "name": "EdgeGroundBench",
-   "size": "small",
-   "source": "added",
-   "concept": "The edge is the ground",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "cap_theorem_bench",
-   "name": "CapTheoremBench",
-   "size": "small",
-   "source": "added",
-   "concept": "Paraconsistent engineering",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "edge_ground_synthesis",
-   "name": "EdgeGroundSynthesis",
+   "id": "edge_ground_room",
+   "name": "EdgeGroundRoom",
    "size": "small",
    "source": "added",
    "concept": "The edge is the ground",
@@ -63,25 +74,14 @@
    ]
   },
   {
-   "id": "edge_ground_room",
-   "name": "EdgeGroundRoom",
+   "id": "edge_ground_bench",
+   "name": "EdgeGroundBench",
    "size": "small",
    "source": "added",
    "concept": "The edge is the ground",
    "footprint": [
     1.0,
     1.0
-   ]
-  },
-  {
-   "id": "rhizome_vault",
-   "name": "Rhizome Vault",
-   "size": "large",
-   "source": "added",
-   "concept": "Rhizome networks",
-   "footprint": [
-    10.0,
-    10.0
    ]
   }
  ]

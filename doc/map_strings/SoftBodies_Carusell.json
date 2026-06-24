@@ -8,13 +8,13 @@
  },
  "pearls": [
   {
-   "id": "cloth_straps",
-   "name": "Cloth Straps",
+   "id": "pick_up_cube",
+   "name": "Pick Up Cube",
    "size": "small",
    "source": "existing",
-   "concept": "Cloth physics",
+   "concept": "",
    "footprint": [
-    3.0,
+    1.0,
     1.0
    ]
   },
@@ -26,17 +26,6 @@
    "concept": "",
    "footprint": [
     2.0,
-    1.0
-   ]
-  },
-  {
-   "id": "pick_up_cube",
-   "name": "Pick Up Cube",
-   "size": "small",
-   "source": "existing",
-   "concept": "",
-   "footprint": [
-    1.0,
     1.0
    ]
   },
@@ -104,6 +93,17 @@
    "footprint": [
     20.0,
     20.0
+   ]
+  },
+  {
+   "id": "cloth_straps",
+   "name": "Cloth Straps",
+   "size": "small",
+   "source": "existing",
+   "concept": "Cloth physics",
+   "footprint": [
+    3.0,
+    1.0
    ]
   },
   {

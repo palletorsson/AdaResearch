@@ -2,8 +2,8 @@
  "map": "Random_Mushrooms",
  "sequence": "randomness",
  "counts": {
-  "existing": 3,
-  "added": 6,
+  "existing": 5,
+  "added": 3,
   "large": 4
  },
  "pearls": [
@@ -30,17 +30,6 @@
    ]
   },
   {
-   "id": "mesh_grammar_nodule_sphere",
-   "name": "MeshGrammar — Nodule Sphere",
-   "size": "small",
-   "source": "added",
-   "concept": "· palette (unplaced)",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
    "id": "markov_chains_tree",
    "name": "Markov Chains Tree",
    "size": "large",
@@ -49,6 +38,17 @@
    "footprint": [
     10.0,
     3.0
+   ]
+  },
+  {
+   "id": "monte_carlo_protein",
+   "name": "Monte Carlo Protein Folding",
+   "size": "large",
+   "source": "added",
+   "concept": "Monte Carlo",
+   "footprint": [
+    24.0,
+    8.0
    ]
   },
   {
@@ -63,36 +63,25 @@
    ]
   },
   {
-   "id": "noise_terrain_with_blobs",
-   "name": "Noise Terrain with Animated Blobs",
+   "id": "bubble_particles",
+   "name": "Bubble Particles",
    "size": "small",
-   "source": "added",
-   "concept": "Noise terrain / landscapes",
+   "source": "existing",
+   "concept": "Particle randomness",
    "footprint": [
     1.0,
     1.0
    ]
   },
   {
-   "id": "noise_mixer",
-   "name": "Noise Mixer",
+   "id": "reaction_diffusion_intro",
+   "name": "Reaction-Diffusion Intro",
    "size": "small",
-   "source": "added",
-   "concept": "Noise fields & textures",
+   "source": "existing",
+   "concept": "· palette (unplaced)",
    "footprint": [
     1.0,
-    2.0
-   ]
-  },
-  {
-   "id": "noise_space",
-   "name": "Noise Space Explorer",
-   "size": "large",
-   "source": "added",
-   "concept": "Noise fields & textures",
-   "footprint": [
-    10.0,
-    10.0
+    1.0
    ]
   },
   {

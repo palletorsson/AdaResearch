@@ -2,11 +2,22 @@
  "map": "Point_Triangle",
  "sequence": "primitives",
  "counts": {
-  "existing": 4,
+  "existing": 6,
   "added": 6,
   "large": 2
  },
  "pearls": [
+  {
+   "id": "lab_room",
+   "name": "Lab Room",
+   "size": "small",
+   "source": "existing",
+   "concept": "",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
   {
    "id": "triangle_line_puzzle",
    "name": "Triangle Line Puzzle",
@@ -19,19 +30,8 @@
    ]
   },
   {
-   "id": "cube_scene",
-   "name": "Basic Cube Scene",
-   "size": "small",
-   "source": "existing",
-   "concept": "Cube / box",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "triangle",
-   "name": "triangle",
+   "id": "parasol_triangle",
+   "name": "Parasol Triangle",
    "size": "small",
    "source": "existing",
    "concept": "Triangle",
@@ -41,8 +41,30 @@
    ]
   },
   {
+   "id": "triangle_chalkboard",
+   "name": "Triangle Chalkboard",
+   "size": "small",
+   "source": "added",
+   "concept": "Triangle",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
    "id": "three_points_triangle",
    "name": "Three Points Triangle",
+   "size": "small",
+   "source": "added",
+   "concept": "Triangle",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "triangle_whiteboard",
+   "name": "Triangle Whiteboard",
    "size": "small",
    "source": "added",
    "concept": "Triangle",
@@ -74,21 +96,21 @@
    ]
   },
   {
-   "id": "editable_curve",
-   "name": "editable_curve",
+   "id": "cube_scene",
+   "name": "Basic Cube Scene",
    "size": "small",
-   "source": "added",
-   "concept": "Interactive tool",
+   "source": "existing",
+   "concept": "Cube / box",
    "footprint": [
-    3.0,
+    1.0,
     1.0
    ]
   },
   {
-   "id": "parasol_triangle",
-   "name": "Parasol Triangle",
+   "id": "triangle",
+   "name": "triangle",
    "size": "small",
-   "source": "added",
+   "source": "existing",
    "concept": "Triangle",
    "footprint": [
     1.0,

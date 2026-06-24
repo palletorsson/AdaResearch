@@ -2,9 +2,9 @@
  "map": "Random_Space_Geometry",
  "sequence": "randomness",
  "counts": {
-  "existing": 3,
+  "existing": 5,
   "added": 6,
-  "large": 5
+  "large": 6
  },
  "pearls": [
   {
@@ -30,14 +30,36 @@
    ]
   },
   {
-   "id": "instancingscatter",
-   "name": "Instancing Scatter",
+   "id": "VoxelNoiseROIs",
+   "name": "Voxel Noise ROIs",
+   "size": "small",
+   "source": "added",
+   "concept": "Noise fields & textures",
+   "footprint": [
+    2.0,
+    2.0
+   ]
+  },
+  {
+   "id": "cloudvolume",
+   "name": "Cloud Volume",
    "size": "large",
    "source": "added",
-   "concept": "Blue noise / sampling",
+   "concept": "Noise fields & textures",
    "footprint": [
-    41.0,
-    44.0
+    4.0,
+    4.0
+   ]
+  },
+  {
+   "id": "perlinvolume",
+   "name": "Perlin Volume",
+   "size": "large",
+   "source": "added",
+   "concept": "Perlin noise",
+   "footprint": [
+    4.0,
+    4.0
    ]
   },
   {
@@ -49,6 +71,28 @@
    "footprint": [
     1.0,
     1.0
+   ]
+  },
+  {
+   "id": "curl_noise_particles",
+   "name": "Curl Noise Particles",
+   "size": "small",
+   "source": "existing",
+   "concept": "Noise fields & textures",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "blue_noise",
+   "name": "Blue Noise",
+   "size": "large",
+   "source": "added",
+   "concept": "Blue noise / sampling",
+   "footprint": [
+    17.0,
+    2.0
    ]
   },
   {
@@ -74,33 +118,11 @@
    ]
   },
   {
-   "id": "walk_random",
-   "name": "Random Walker",
+   "id": "perlin_noise_bridge",
+   "name": "Perlin Noise Bridge",
    "size": "small",
-   "source": "added",
-   "concept": "Random walk",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "random_plants",
-   "name": "Random Plants",
-   "size": "large",
-   "source": "added",
-   "concept": "Random art / scatter",
-   "footprint": [
-    21.0,
-    22.0
-   ]
-  },
-  {
-   "id": "height_random",
-   "name": "Height Distributor",
-   "size": "small",
-   "source": "added",
-   "concept": "Probability distribution",
+   "source": "existing",
+   "concept": "Perlin noise",
    "footprint": [
     1.0,
     1.0

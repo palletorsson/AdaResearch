@@ -2,25 +2,91 @@
  "map": "Random_Gaussian",
  "sequence": "randomness",
  "counts": {
-  "existing": 4,
+  "existing": 8,
   "added": 6,
-  "large": 4
+  "large": 5
  },
  "pearls": [
   {
-   "id": "galton_board",
-   "name": "Galton Board",
+   "id": "GaussianBlurShader",
+   "name": "Gaussian Blur Shader",
    "size": "small",
    "source": "existing",
    "concept": "Gaussian / normal",
    "footprint": [
-    1.0,
+    3.0,
     1.0
    ]
   },
   {
-   "id": "distribution_sampler",
-   "name": "Distribution Sampler",
+   "id": "GaussianPaintSplatter",
+   "name": "Gaussian Paint Splatter",
+   "size": "large",
+   "source": "existing",
+   "concept": "Gaussian / normal",
+   "footprint": [
+    4.0,
+    1.0
+   ]
+  },
+  {
+   "id": "probability_distributions_3d",
+   "name": "Probability Distributions 3D",
+   "size": "large",
+   "source": "added",
+   "concept": "Probability distribution",
+   "footprint": [
+    21.0,
+    21.0
+   ]
+  },
+  {
+   "id": "RandomGaussianTexture",
+   "name": "Random Gaussian Texture",
+   "size": "small",
+   "source": "added",
+   "concept": "Gaussian / normal",
+   "footprint": [
+    2.0,
+    2.0
+   ]
+  },
+  {
+   "id": "GaussianBlurCircle",
+   "name": "Gaussian Blur Circle",
+   "size": "large",
+   "source": "existing",
+   "concept": "Gaussian / normal",
+   "footprint": [
+    10.0,
+    20.0
+   ]
+  },
+  {
+   "id": "bell_alley",
+   "name": "Bell Curve Alley",
+   "size": "large",
+   "source": "added",
+   "concept": "Gaussian / normal",
+   "footprint": [
+    29.0,
+    60.0
+   ]
+  },
+  {
+   "id": "random_bell_curve",
+   "name": "Random Bell Curve Terrain",
+   "size": "large",
+   "source": "existing",
+   "concept": "Gaussian / normal",
+   "footprint": [
+    20.0,
+    21.0
+   ]
+  },
+  {
+   "id": "distribution_comparator",
+   "name": "Distribution Comparator",
    "size": "small",
    "source": "existing",
    "concept": "Probability distribution",
@@ -41,18 +107,18 @@
    ]
   },
   {
-   "id": "GaussianBlurShader",
-   "name": "Gaussian Blur Shader",
+   "id": "random_transformations_stochastic",
+   "name": "Random Transformations - Stochastic",
    "size": "small",
    "source": "added",
-   "concept": "Gaussian / normal",
+   "concept": "Random transformations",
    "footprint": [
-    3.0,
+    1.0,
     1.0
    ]
   },
   {
-   "id": "RandomGaussianTexture",
+   "id": "random_gaussian_texture",
    "name": "Random Gaussian Texture",
    "size": "small",
    "source": "added",
@@ -60,28 +126,6 @@
    "footprint": [
     2.0,
     2.0
-   ]
-  },
-  {
-   "id": "GaussianPaintSplatter",
-   "name": "Gaussian Paint Splatter",
-   "size": "large",
-   "source": "added",
-   "concept": "Gaussian / normal",
-   "footprint": [
-    4.0,
-    1.0
-   ]
-  },
-  {
-   "id": "bell_alley",
-   "name": "Bell Curve Alley",
-   "size": "large",
-   "source": "added",
-   "concept": "Gaussian / normal",
-   "footprint": [
-    29.0,
-    60.0
    ]
   },
   {
@@ -96,25 +140,25 @@
    ]
   },
   {
-   "id": "GaussianBlurCircle",
-   "name": "Gaussian Blur Circle",
-   "size": "large",
-   "source": "added",
-   "concept": "Gaussian / normal",
+   "id": "distribution_sampler",
+   "name": "Distribution Sampler",
+   "size": "small",
+   "source": "existing",
+   "concept": "Probability distribution",
    "footprint": [
-    10.0,
-    20.0
+    1.0,
+    1.0
    ]
   },
   {
-   "id": "random_bell_curve",
-   "name": "Random Bell Curve Terrain",
-   "size": "large",
+   "id": "galton_board",
+   "name": "Galton Board",
+   "size": "small",
    "source": "existing",
    "concept": "Gaussian / normal",
    "footprint": [
-    20.0,
-    21.0
+    1.0,
+    1.0
    ]
   }
  ]

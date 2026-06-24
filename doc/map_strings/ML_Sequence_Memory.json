@@ -2,9 +2,32 @@
  "map": "ML_Sequence_Memory",
  "sequence": "machinelearning",
  "counts": {
-  "existing": 0,
+  "existing": 2,
   "added": 0,
-  "large": 0
+  "large": 2
  },
- "pearls": []
+ "pearls": [
+  {
+   "id": "lstms_vr",
+   "name": "LSTMs_VR",
+   "size": "large",
+   "source": "existing",
+   "concept": "LSTMs",
+   "footprint": [
+    11.0,
+    11.0
+   ]
+  },
+  {
+   "id": "transformers_vr",
+   "name": "Transformers_VR",
+   "size": "large",
+   "source": "existing",
+   "concept": "Neural Networks",
+   "footprint": [
+    15.0,
+    11.0
+   ]
+  }
+ ]
 }

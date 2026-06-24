@@ -2,9 +2,9 @@
  "map": "ISO_ShapesGallery",
  "sequence": "isosurfaces",
  "counts": {
-  "existing": 3,
+  "existing": 4,
   "added": 0,
-  "large": 1
+  "large": 2
  },
  "pearls": [
   {
@@ -19,19 +19,30 @@
    ]
   },
   {
-   "id": "mc:sphere",
-   "name": "mc:sphere",
+   "id": "gyroid_demo",
+   "name": "gyroid_demo",
+   "size": "large",
+   "source": "existing",
+   "concept": "Seven sculptures stand in a row. Each ",
+   "footprint": [
+    20.0,
+    20.0
+   ]
+  },
+  {
+   "id": "mc_torus_sculpture",
+   "name": "mc_torus_sculpture",
    "size": "small",
    "source": "existing",
-   "concept": "",
+   "concept": "Seven sculptures stand in a row. Each ",
    "footprint": [
     1.0,
     1.0
    ]
   },
   {
-   "id": "mc:torus",
-   "name": "mc:torus",
+   "id": "mc",
+   "name": "mc",
    "size": "small",
    "source": "existing",
    "concept": "",

@@ -3,8 +3,8 @@
  "sequence": "transformation",
  "counts": {
   "existing": 7,
-  "added": 6,
-  "large": 3
+  "added": 5,
+  "large": 5
  },
  "pearls": [
   {
@@ -19,58 +19,47 @@
    ]
   },
   {
-   "id": "floor_tiles",
-   "name": "floor_tiles",
+   "id": "riemann_pi",
+   "name": "riemann_pi",
    "size": "large",
    "source": "added",
-   "concept": "Tiling / pattern",
-   "footprint": [
-    12.0,
-    7.0
-   ]
-  },
-  {
-   "id": "shear_matrix_demo",
-   "name": "Shear Matrix Demo",
-   "size": "small",
-   "source": "added",
-   "concept": "Shear",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "scaleme",
-   "name": "scaleme",
-   "size": "large",
-   "source": "added",
-   "concept": "Scale",
+   "concept": "Curved space (non-Euclidean)",
    "footprint": [
     26.0,
-    26.0
+    8.0
    ]
   },
   {
-   "id": "homogeneous_coordinates",
-   "name": "Homogeneous Coordinates",
+   "id": "rhizomatic_maze_space",
+   "name": "Rhizomatic Maze Space",
    "size": "small",
    "source": "added",
-   "concept": "Matrix / homogeneous",
-   "footprint": [
-    2.0,
-    1.0
-   ]
-  },
-  {
-   "id": "matrix_4x4_viewer",
-   "name": "Matrix 4x4 Viewer",
-   "size": "small",
-   "source": "added",
-   "concept": "Matrix / homogeneous",
+   "concept": "Curved space (non-Euclidean)",
    "footprint": [
     1.0,
     1.0
+   ]
+  },
+  {
+   "id": "gyroid_cheese",
+   "name": "gyroid_cheese",
+   "size": "large",
+   "source": "added",
+   "concept": "Curved space (non-Euclidean)",
+   "footprint": [
+    16.0,
+    16.0
+   ]
+  },
+  {
+   "id": "entropy_morphogenesis",
+   "name": "entropy_morphogenesis",
+   "size": "large",
+   "source": "added",
+   "concept": "Curved space (non-Euclidean)",
+   "footprint": [
+    5.0,
+    5.0
    ]
   },
   {
@@ -82,17 +71,6 @@
    "footprint": [
     1.0,
     2.0
-   ]
-  },
-  {
-   "id": "axis_translation_cube",
-   "name": "Axis Translation Cube",
-   "size": "small",
-   "source": "added",
-   "concept": "Translation",
-   "footprint": [
-    1.0,
-    1.0
    ]
   },
   {
@@ -137,6 +115,17 @@
    "footprint": [
     1.0,
     1.0
+   ]
+  },
+  {
+   "id": "organic_space",
+   "name": "Organic Space",
+   "size": "large",
+   "source": "added",
+   "concept": "Curved space (non-Euclidean)",
+   "footprint": [
+    25.0,
+    25.0
    ]
   },
   {

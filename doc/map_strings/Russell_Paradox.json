@@ -2,11 +2,33 @@
  "map": "Russell_Paradox",
  "sequence": "foundationscrisis",
  "counts": {
-  "existing": 1,
-  "added": 3,
+  "existing": 4,
+  "added": 0,
   "large": 0
  },
  "pearls": [
+  {
+   "id": "self_membership_set",
+   "name": "SelfMembershipSet",
+   "size": "small",
+   "source": "existing",
+   "concept": "Russell's paradox",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "barber_paradox",
+   "name": "BarberParadox",
+   "size": "small",
+   "source": "existing",
+   "concept": "Russell's paradox",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
   {
    "id": "russell_set_box",
    "name": "Russell's Set Box",
@@ -19,32 +41,10 @@
    ]
   },
   {
-   "id": "hilbert_hotel",
-   "name": "hilbert_hotel",
+   "id": "liar_loop",
+   "name": "LiarLoop",
    "size": "small",
-   "source": "added",
-   "concept": "Halting & infinity",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "self_membership_set",
-   "name": "SelfMembershipSet",
-   "size": "small",
-   "source": "added",
-   "concept": "Russell's paradox",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "russell_paradox_room",
-   "name": "Russell Paradox Room",
-   "size": "small",
-   "source": "added",
+   "source": "existing",
    "concept": "Russell's paradox",
    "footprint": [
     1.0,

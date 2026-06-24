@@ -2,9 +2,9 @@
  "map": "GT_Flow",
  "sequence": "graphtheory",
  "counts": {
-  "existing": 1,
-  "added": 2,
-  "large": 1
+  "existing": 2,
+  "added": 4,
+  "large": 4
  },
  "pearls": [
   {
@@ -22,11 +22,33 @@
    "id": "karger_algorithm",
    "name": "Karger's Algorithm",
    "size": "small",
-   "source": "added",
+   "source": "existing",
    "concept": "Karger s Algorithm",
    "footprint": [
     1.0,
     1.0
+   ]
+  },
+  {
+   "id": "topological_sort_algorithm",
+   "name": "Topological Sort",
+   "size": "large",
+   "source": "added",
+   "concept": "Topological Sort",
+   "footprint": [
+    4.0,
+    1.0
+   ]
+  },
+  {
+   "id": "env_one",
+   "name": "Environment One",
+   "size": "large",
+   "source": "added",
+   "concept": "Maximum Flow Algorithms",
+   "footprint": [
+    61.0,
+    60.0
    ]
   },
   {
@@ -38,6 +60,17 @@
    "footprint": [
     1.0,
     1.0
+   ]
+  },
+  {
+   "id": "forcedirected3d",
+   "name": "forcedirected3d",
+   "size": "large",
+   "source": "added",
+   "concept": "Force Directed 3d",
+   "footprint": [
+    16.0,
+    18.0
    ]
   }
  ]

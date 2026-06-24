@@ -2,33 +2,11 @@
  "map": "Fractal_Synthesis",
  "sequence": "fractals",
  "counts": {
-  "existing": 7,
-  "added": 4,
+  "existing": 9,
+  "added": 2,
   "large": 6
  },
  "pearls": [
-  {
-   "id": "cantor_set",
-   "name": "cantor_set",
-   "size": "large",
-   "source": "existing",
-   "concept": "Cantor set",
-   "footprint": [
-    9.0,
-    1.0
-   ]
-  },
-  {
-   "id": "fibonacci_sequences",
-   "name": "Fibonacci Sequences",
-   "size": "small",
-   "source": "existing",
-   "concept": "Golden spiral & phyllotaxis",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
   {
    "id": "fractal_recursion_1",
    "name": "Fractal Recursion 1",
@@ -38,28 +16,6 @@
    "footprint": [
     1.0,
     1.0
-   ]
-  },
-  {
-   "id": "Hilbert3D",
-   "name": "3D Hilbert Curve",
-   "size": "small",
-   "source": "added",
-   "concept": "Space-filling curves",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "fractal_clouds",
-   "name": "Fractal Clouds",
-   "size": "large",
-   "source": "added",
-   "concept": "Fractal terrain & clouds",
-   "footprint": [
-    9.0,
-    8.0
    ]
   },
   {
@@ -85,6 +41,39 @@
    ]
   },
   {
+   "id": "living_paper_koch",
+   "name": "Living Paper — Koch Snowflake",
+   "size": "small",
+   "source": "added",
+   "concept": "Koch curve & snowflake",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "cantor_set",
+   "name": "cantor_set",
+   "size": "large",
+   "source": "existing",
+   "concept": "Cantor set",
+   "footprint": [
+    9.0,
+    1.0
+   ]
+  },
+  {
+   "id": "strange_attractors",
+   "name": "Strange Attractors",
+   "size": "small",
+   "source": "existing",
+   "concept": "Strange attractors",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
    "id": "recursive_tree",
    "name": "recursive_tree",
    "size": "large",
@@ -96,25 +85,25 @@
    ]
   },
   {
-   "id": "fractal_recursive_tree",
-   "name": "Recursive Tree",
-   "size": "small",
-   "source": "added",
-   "concept": "Recursive trees",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "romanesco",
-   "name": "romanesco",
+   "id": "fibonacci_sequences",
+   "name": "Fibonacci Sequences",
    "size": "small",
    "source": "existing",
    "concept": "Golden spiral & phyllotaxis",
    "footprint": [
     1.0,
     1.0
+   ]
+  },
+  {
+   "id": "fractal_clouds",
+   "name": "Fractal Clouds",
+   "size": "large",
+   "source": "existing",
+   "concept": "Fractal terrain & clouds",
+   "footprint": [
+    9.0,
+    8.0
    ]
   },
   {
@@ -126,6 +115,17 @@
    "footprint": [
     10.0,
     9.0
+   ]
+  },
+  {
+   "id": "romanesco",
+   "name": "romanesco",
+   "size": "small",
+   "source": "existing",
+   "concept": "Golden spiral & phyllotaxis",
+   "footprint": [
+    1.0,
+    1.0
    ]
   }
  ]

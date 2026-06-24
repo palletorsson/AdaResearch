@@ -2,11 +2,55 @@
  "map": "QFEP_E_Term",
  "sequence": "qfeplaboratory",
  "counts": {
-  "existing": 3,
-  "added": 4,
-  "large": 4
+  "existing": 6,
+  "added": 6,
+  "large": 3
  },
  "pearls": [
+  {
+   "id": "microstate_counter",
+   "name": "MicrostateCounter",
+   "size": "small",
+   "source": "existing",
+   "concept": "E — entropy as possibility",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "f_order_room",
+   "name": "F Order Room",
+   "size": "small",
+   "source": "added",
+   "concept": "F — free energy & order",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "f_order_bench",
+   "name": "F Order Bench",
+   "size": "small",
+   "source": "added",
+   "concept": "F — free energy & order",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "entropy_meter",
+   "name": "Entropy Meter",
+   "size": "small",
+   "source": "added",
+   "concept": "E — entropy as possibility",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
   {
    "id": "random_cubes",
    "name": "Random Cubes",
@@ -30,14 +74,14 @@
    ]
   },
   {
-   "id": "lambda_slider",
-   "name": "Lambda Slider",
-   "size": "large",
+   "id": "entropy_fan",
+   "name": "EntropyFan",
+   "size": "small",
    "source": "existing",
-   "concept": "λ — the order-chaos dial",
+   "concept": "E — entropy as possibility",
    "footprint": [
-    8.0,
-    8.0
+    1.0,
+    1.0
    ]
   },
   {
@@ -52,10 +96,21 @@
    ]
   },
   {
-   "id": "grid3d_entropy",
-   "name": "Grid3D — Entropy Field",
+   "id": "shannon_entropy_meter",
+   "name": "Shannon Entropy Meter",
    "size": "small",
    "source": "added",
+   "concept": "F — free energy & order",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "possibility_space_cloud",
+   "name": "PossibilitySpaceCloud",
+   "size": "small",
+   "source": "existing",
    "concept": "E — entropy as possibility",
    "footprint": [
     1.0,
@@ -63,22 +118,22 @@
    ]
   },
   {
-   "id": "entropy_axiom",
-   "name": "Entropy Axiom",
+   "id": "lambda_slider",
+   "name": "Lambda Slider",
    "size": "large",
-   "source": "added",
-   "concept": "E — entropy as possibility",
+   "source": "existing",
+   "concept": "λ — the order-chaos dial",
    "footprint": [
-    3.0,
+    8.0,
     8.0
    ]
   },
   {
-   "id": "shannon_entropy_meter",
-   "name": "Shannon Entropy Meter",
+   "id": "entropy_jar",
+   "name": "Entropy Jar",
    "size": "small",
    "source": "added",
-   "concept": "F — free energy & order",
+   "concept": "E — entropy as possibility",
    "footprint": [
     1.0,
     1.0

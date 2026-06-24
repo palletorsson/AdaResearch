@@ -2,33 +2,11 @@
  "map": "LSystems_Grammar_Lab",
  "sequence": "lsystems",
  "counts": {
-  "existing": 3,
+  "existing": 4,
   "added": 6,
-  "large": 2
+  "large": 4
  },
  "pearls": [
-  {
-   "id": "fractal_lsystem_string",
-   "name": "L-System String Expansion",
-   "size": "small",
-   "source": "existing",
-   "concept": "Axiom & production rules",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "modulor_cypress",
-   "name": "Modulor Cypress",
-   "size": "large",
-   "source": "added",
-   "concept": "L-system trees",
-   "footprint": [
-    5.0,
-    1.0
-   ]
-  },
   {
    "id": "lsystem_editor",
    "name": "L-System Editor",
@@ -41,11 +19,44 @@
    ]
   },
   {
+   "id": "lsystem_artifact",
+   "name": "L-System Artifact",
+   "size": "large",
+   "source": "added",
+   "concept": "Axiom & production rules",
+   "footprint": [
+    3.0,
+    5.0
+   ]
+  },
+  {
    "id": "barnsley_fern",
    "name": "Barnsley Fern",
    "size": "small",
    "source": "added",
    "concept": "Ferns & self-similar plants",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "grammar_provenance",
+   "name": "Grammar Provenance",
+   "size": "large",
+   "source": "existing",
+   "concept": "Axiom & production rules",
+   "footprint": [
+    18.0,
+    1.0
+   ]
+  },
+  {
+   "id": "dna_sprout",
+   "name": "DNA Sprout (held seed -> plant)",
+   "size": "small",
+   "source": "added",
+   "concept": "CritterDNA -> L-system tree",
    "footprint": [
     1.0,
     1.0
@@ -63,24 +74,13 @@
    ]
   },
   {
-   "id": "tree_nursery",
-   "name": "Tree Nursery (grow them)",
-   "size": "small",
+   "id": "axiom_garden",
+   "name": "Axiom Garden",
+   "size": "large",
    "source": "added",
-   "concept": "L-system trees",
+   "concept": "Axiom & production rules",
    "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "lsystem_tree_room",
-   "name": "L-system Tree Room (a whole tree)",
-   "size": "small",
-   "source": "added",
-   "concept": "L-system trees",
-   "footprint": [
-    1.0,
+    9.0,
     1.0
    ]
   },
@@ -96,13 +96,24 @@
    ]
   },
   {
-   "id": "ContextFreeGrammars",
-   "name": "Context-Free Grammars",
+   "id": "fractal_lsystem_string",
+   "name": "L-System String Expansion",
+   "size": "small",
+   "source": "existing",
+   "concept": "Axiom & production rules",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "fractal_koch_curve",
+   "name": "Koch Curve",
    "size": "small",
    "source": "added",
-   "concept": "Formal grammars (Chomsky)",
+   "concept": "Koch & fractal curves",
    "footprint": [
-    2.0,
+    1.0,
     1.0
    ]
   }

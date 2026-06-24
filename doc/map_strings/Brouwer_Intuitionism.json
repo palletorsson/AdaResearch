@@ -2,8 +2,8 @@
  "map": "Brouwer_Intuitionism",
  "sequence": "foundationscrisis",
  "counts": {
-  "existing": 3,
-  "added": 2,
+  "existing": 4,
+  "added": 4,
   "large": 0
  },
  "pearls": [
@@ -13,6 +13,17 @@
    "size": "small",
    "source": "existing",
    "concept": "Brouwer & intuitionism",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "halting_workbench",
+   "name": "Halting Workbench",
+   "size": "small",
+   "source": "added",
+   "concept": "Halting & infinity",
    "footprint": [
     1.0,
     1.0
@@ -46,6 +57,28 @@
    "size": "small",
    "source": "added",
    "concept": "Escher & impossible objects",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "hilbert_hotel",
+   "name": "hilbert_hotel",
+   "size": "small",
+   "source": "added",
+   "concept": "Halting & infinity",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "constructive_staircase",
+   "name": "ConstructiveStaircase",
+   "size": "small",
+   "source": "existing",
+   "concept": "Brouwer & intuitionism",
    "footprint": [
     1.0,
     1.0

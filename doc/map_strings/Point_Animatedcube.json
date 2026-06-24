@@ -2,7 +2,7 @@
  "map": "Point_Animatedcube",
  "sequence": "primitives",
  "counts": {
-  "existing": 2,
+  "existing": 3,
   "added": 5,
   "large": 0
  },
@@ -52,22 +52,33 @@
    ]
   },
   {
-   "id": "combo_cube_visual",
-   "name": "Transformation Rotation Scale Cube",
+   "id": "floating_sphere_field",
+   "name": "Floating Sphere Field",
    "size": "small",
-   "source": "added",
-   "concept": "Cube / box",
+   "source": "existing",
+   "concept": "Sphere / ball",
    "footprint": [
-    2.0,
-    2.0
+    1.0,
+    1.0
    ]
   },
   {
-   "id": "animated_cube",
-   "name": "Animated Cube",
+   "id": "mesh_chalkboard",
+   "name": "Mesh Chalkboard",
    "size": "small",
    "source": "added",
-   "concept": "Cube / box",
+   "concept": "Grid / array",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "cube_chalkboard",
+   "name": "Cube Chalkboard",
+   "size": "small",
+   "source": "added",
+   "concept": "Grid / array",
    "footprint": [
     1.0,
     1.0

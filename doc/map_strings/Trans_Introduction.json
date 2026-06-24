@@ -2,11 +2,110 @@
  "map": "Trans_Introduction",
  "sequence": "transformation",
  "counts": {
-  "existing": 1,
+  "existing": 6,
   "added": 6,
-  "large": 0
+  "large": 3
  },
  "pearls": [
+  {
+   "id": "invariants_demo",
+   "name": "Invariants Demo",
+   "size": "small",
+   "source": "existing",
+   "concept": "Invariants",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "vector_field",
+   "name": "vector_field",
+   "size": "large",
+   "source": "added",
+   "concept": "Field / flow",
+   "footprint": [
+    15.0,
+    15.0
+   ]
+  },
+  {
+   "id": "floor_tiles",
+   "name": "floor_tiles",
+   "size": "large",
+   "source": "added",
+   "concept": "Tiling / pattern",
+   "footprint": [
+    12.0,
+    7.0
+   ]
+  },
+  {
+   "id": "scaleme",
+   "name": "scaleme",
+   "size": "large",
+   "source": "added",
+   "concept": "Scale",
+   "footprint": [
+    26.0,
+    26.0
+   ]
+  },
+  {
+   "id": "matrix_4x4_viewer",
+   "name": "Matrix 4x4 Viewer",
+   "size": "small",
+   "source": "existing",
+   "concept": "Matrix / homogeneous",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "homogeneous_coordinates",
+   "name": "Homogeneous Coordinates",
+   "size": "small",
+   "source": "existing",
+   "concept": "Matrix / homogeneous",
+   "footprint": [
+    2.0,
+    1.0
+   ]
+  },
+  {
+   "id": "axis_translation_cube",
+   "name": "Axis Translation Cube",
+   "size": "small",
+   "source": "added",
+   "concept": "Translation",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "shear_matrix_demo",
+   "name": "Shear Matrix Demo",
+   "size": "small",
+   "source": "added",
+   "concept": "Shear",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "rotation_gimbal",
+   "name": "Rotation Gimbal",
+   "size": "small",
+   "source": "existing",
+   "concept": "Rotation",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
   {
    "id": "balance_puzzle",
    "name": "Balance Puzzle",
@@ -19,68 +118,24 @@
    ]
   },
   {
-   "id": "example_2_7_multiple_attractors_vr",
-   "name": "example_2_7_multiple_attractors_vr",
+   "id": "transform_composition",
+   "name": "Transform Composition",
    "size": "small",
-   "source": "added",
-   "concept": "· palette (unplaced)",
-   "footprint": [
-    1.0,
-    2.0
-   ]
-  },
-  {
-   "id": "example_2_9_n_body_attraction_vr",
-   "name": "example_2_9_n_body_attraction_vr",
-   "size": "small",
-   "source": "added",
-   "concept": "· palette (unplaced)",
-   "footprint": [
-    1.0,
-    2.0
-   ]
-  },
-  {
-   "id": "pattern_tile_brick",
-   "name": "Brick Pattern Tile",
-   "size": "small",
-   "source": "added",
-   "concept": "Tiling / pattern",
+   "source": "existing",
+   "concept": "Composition",
    "footprint": [
     1.0,
     1.0
    ]
   },
   {
-   "id": "example_2_2_forces_mass_variation_vr",
-   "name": "example_2_2_forces_mass_variation_vr",
+   "id": "transformation_workbench",
+   "name": "Transformation Workbench",
    "size": "small",
    "source": "added",
-   "concept": "· palette (unplaced)",
+   "concept": "Three rigid motions",
    "footprint": [
-    1.0,
-    2.0
-   ]
-  },
-  {
-   "id": "example_2_3_gravity_scaled_by_mass_vr",
-   "name": "example_2_3_gravity_scaled_by_mass_vr",
-   "size": "small",
-   "source": "added",
-   "concept": "· palette (unplaced)",
-   "footprint": [
-    1.0,
-    2.0
-   ]
-  },
-  {
-   "id": "path_game_controller",
-   "name": "Path Game Controller",
-   "size": "small",
-   "source": "added",
-   "concept": "· palette (unplaced)",
-   "footprint": [
-    1.0,
+    2.0,
     1.0
    ]
   }

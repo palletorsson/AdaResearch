@@ -2,7 +2,7 @@
  "map": "Random_Walk",
  "sequence": "randomness",
  "counts": {
-  "existing": 5,
+  "existing": 7,
   "added": 6,
   "large": 4
  },
@@ -74,6 +74,17 @@
    ]
   },
   {
+   "id": "lab_room",
+   "name": "Lab Room",
+   "size": "small",
+   "source": "existing",
+   "concept": "",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
    "id": "random_walk_128",
    "name": "Random Walk 128x128",
    "size": "small",
@@ -123,6 +134,17 @@
    "size": "small",
    "source": "added",
    "concept": "Random walk",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "catalyst_pickup",
+   "name": "catalyst_pickup",
+   "size": "small",
+   "source": "existing",
+   "concept": "",
    "footprint": [
     1.0,
     1.0

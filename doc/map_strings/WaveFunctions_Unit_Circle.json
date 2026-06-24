@@ -8,39 +8,6 @@
  },
  "pearls": [
   {
-   "id": "OscillationCurve",
-   "name": "OscillationCurve",
-   "size": "large",
-   "source": "existing",
-   "concept": "unit circle",
-   "footprint": [
-    6.0,
-    2.0
-   ]
-  },
-  {
-   "id": "SimpleOscillatingBridge",
-   "name": "Simple Oscillating Bridge",
-   "size": "large",
-   "source": "existing",
-   "concept": "unit circle",
-   "footprint": [
-    2.0,
-    40.0
-   ]
-  },
-  {
-   "id": "colorballs",
-   "name": "colorballs",
-   "size": "small",
-   "source": "existing",
-   "concept": "unit circle",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
    "id": "cube_scene",
    "name": "Basic Cube Scene",
    "size": "small",
@@ -60,6 +27,39 @@
    "footprint": [
     3.0,
     1.0
+   ]
+  },
+  {
+   "id": "colorballs",
+   "name": "colorballs",
+   "size": "small",
+   "source": "existing",
+   "concept": "unit circle",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "SimpleOscillatingBridge",
+   "name": "Simple Oscillating Bridge",
+   "size": "large",
+   "source": "existing",
+   "concept": "unit circle",
+   "footprint": [
+    2.0,
+    40.0
+   ]
+  },
+  {
+   "id": "OscillationCurve",
+   "name": "OscillationCurve",
+   "size": "large",
+   "source": "existing",
+   "concept": "unit circle",
+   "footprint": [
+    6.0,
+    2.0
    ]
   }
  ]

@@ -8,11 +8,11 @@
  },
  "pearls": [
   {
-   "id": "qfep_term_compass",
-   "name": "QFEP Term Compass",
+   "id": "queer_morphology_specimen",
+   "name": "Queer Morphology Specimen",
    "size": "small",
    "source": "existing",
-   "concept": "The reactor — the whole formula",
+   "concept": "",
    "footprint": [
     1.0,
     1.0
@@ -41,17 +41,6 @@
    ]
   },
   {
-   "id": "qfep_formula_3d",
-   "name": "QFEP Formula 3D",
-   "size": "small",
-   "source": "existing",
-   "concept": "The formula made yours",
-   "footprint": [
-    3.0,
-    1.0
-   ]
-  },
-  {
    "id": "grab_sphere_lambda",
    "name": "Lambda Term Sphere",
    "size": "small",
@@ -74,11 +63,22 @@
    ]
   },
   {
-   "id": "queer_morphology_specimen",
-   "name": "Queer Morphology Specimen",
+   "id": "qfep_formula_3d",
+   "name": "QFEP Formula 3D",
    "size": "small",
    "source": "existing",
-   "concept": "",
+   "concept": "The formula made yours",
+   "footprint": [
+    3.0,
+    1.0
+   ]
+  },
+  {
+   "id": "qfep_term_compass",
+   "name": "QFEP Term Compass",
+   "size": "small",
+   "source": "existing",
+   "concept": "The reactor — the whole formula",
    "footprint": [
     1.0,
     1.0

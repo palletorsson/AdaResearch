@@ -2,11 +2,44 @@
  "map": "Fractal_MengerSponge",
  "sequence": "fractals",
  "counts": {
-  "existing": 1,
-  "added": 1,
-  "large": 1
+  "existing": 2,
+  "added": 2,
+  "large": 4
  },
  "pearls": [
+  {
+   "id": "diffusion_limited_aggregation",
+   "name": "diffusion_limited_aggregation",
+   "size": "large",
+   "source": "existing",
+   "concept": "Diffusion-limited aggregation",
+   "footprint": [
+    17.0,
+    1.0
+   ]
+  },
+  {
+   "id": "SierpinskiPyramid",
+   "name": "SierpinskiPyramid",
+   "size": "large",
+   "source": "added",
+   "concept": "Sierpinski",
+   "footprint": [
+    10.0,
+    10.0
+   ]
+  },
+  {
+   "id": "koch_curve_1",
+   "name": "koch_curve_!",
+   "size": "large",
+   "source": "added",
+   "concept": "Koch curve & snowflake",
+   "footprint": [
+    41.0,
+    1.0
+   ]
+  },
   {
    "id": "menger_sponge",
    "name": "menger_sponge",
@@ -16,17 +49,6 @@
    "footprint": [
     9.0,
     9.0
-   ]
-  },
-  {
-   "id": "menger_toy",
-   "name": "Menger Toy (held sponge)",
-   "size": "small",
-   "source": "added",
-   "concept": "Menger sponge",
-   "footprint": [
-    1.0,
-    1.0
    ]
   }
  ]

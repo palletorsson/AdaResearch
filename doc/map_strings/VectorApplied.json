@@ -2,22 +2,11 @@
  "map": "VectorApplied",
  "sequence": "forces",
  "counts": {
-  "existing": 6,
-  "added": 6,
+  "existing": 8,
+  "added": 0,
   "large": 3
  },
  "pearls": [
-  {
-   "id": "VectorFieldFlow",
-   "name": "VectorFieldFlow",
-   "size": "large",
-   "source": "existing",
-   "concept": "Vector field / flow",
-   "footprint": [
-    4.0,
-    2.0
-   ]
-  },
   {
    "id": "force_field_visualizer",
    "name": "Force Field Visualizer",
@@ -30,91 +19,14 @@
    ]
   },
   {
-   "id": "spring_demo",
-   "name": "Spring Demo",
-   "size": "small",
-   "source": "added",
-   "concept": "Spring / Hooke",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "flow_field_painter",
-   "name": "Flow Field Painter",
-   "size": "small",
-   "source": "added",
-   "concept": "Vector field / flow",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "impulse_collision_demo",
-   "name": "Impulse Collision Demo",
-   "size": "small",
-   "source": "added",
-   "concept": "Momentum / collision",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "orbital_mechanics_demo",
-   "name": "Orbital Mechanics Demo",
-   "size": "small",
-   "source": "added",
-   "concept": "Gravity / orbit",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "centripetal_force_demo",
-   "name": "Centripetal Force Demo",
-   "size": "small",
-   "source": "added",
-   "concept": "Centripetal",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "drag_coefficient_wind_tunnel",
-   "name": "Drag Coefficient Wind Tunnel",
-   "size": "small",
-   "source": "added",
-   "concept": "Vector field / flow",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "VectorBasics",
-   "name": "VectorBasics",
+   "id": "VectorForces",
+   "name": "VectorForces",
    "size": "small",
    "source": "existing",
-   "concept": "Vector basics",
+   "concept": "General force / pad",
    "footprint": [
     2.0,
     1.0
-   ]
-  },
-  {
-   "id": "basis_vectors_rig",
-   "name": "Basis Vectors Rig",
-   "size": "small",
-   "source": "existing",
-   "concept": "Coordinate system",
-   "footprint": [
-    2.0,
-    2.0
    ]
   },
   {
@@ -129,6 +41,28 @@
    ]
   },
   {
+   "id": "proximity_spawner",
+   "name": "Proximity Spawner",
+   "size": "small",
+   "source": "existing",
+   "concept": "",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "VectorFieldFlow",
+   "name": "VectorFieldFlow",
+   "size": "large",
+   "source": "existing",
+   "concept": "Vector field / flow",
+   "footprint": [
+    4.0,
+    2.0
+   ]
+  },
+  {
    "id": "weather_vector_field",
    "name": "Weather Vector Field — Storm Chamber",
    "size": "large",
@@ -137,6 +71,28 @@
    "footprint": [
     6.0,
     6.0
+   ]
+  },
+  {
+   "id": "basis_vectors_rig",
+   "name": "Basis Vectors Rig",
+   "size": "small",
+   "source": "existing",
+   "concept": "Coordinate system",
+   "footprint": [
+    2.0,
+    2.0
+   ]
+  },
+  {
+   "id": "VectorBasics",
+   "name": "VectorBasics",
+   "size": "small",
+   "source": "existing",
+   "concept": "Vector basics",
+   "footprint": [
+    2.0,
+    1.0
    ]
   }
  ]

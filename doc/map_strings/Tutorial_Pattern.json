@@ -2,17 +2,94 @@
  "map": "Tutorial_Pattern",
  "sequence": "array_tutorial",
  "counts": {
-  "existing": 5,
-  "added": 1,
-  "large": 0
+  "existing": 9,
+  "added": 6,
+  "large": 3
  },
  "pearls": [
   {
-   "id": "script_runner#array",
-   "name": "script_runner#array",
+   "id": "grid_model",
+   "name": "Grid Model",
    "size": "small",
    "source": "existing",
-   "concept": "",
+   "concept": "Patterns",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "pattern_studio_plate",
+   "name": "Pattern Studio Plate",
+   "size": "large",
+   "source": "existing",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    4.0,
+    3.0
+   ]
+  },
+  {
+   "id": "pattern_mill",
+   "name": "Pattern Mill",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    2.0,
+    2.0
+   ]
+  },
+  {
+   "id": "pattern_machine_d",
+   "name": "Pattern Machine D — Tile-Stamp Press",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    2.0,
+    3.0
+   ]
+  },
+  {
+   "id": "pattern_machine_b",
+   "name": "Pattern Printer (Holographic Press)",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    2.0,
+    3.0
+   ]
+  },
+  {
+   "id": "pattern_machine_a",
+   "name": "Pattern Machine A — Jacquard Punch-Card Loom",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    2.0,
+    2.0
+   ]
+  },
+  {
+   "id": "pattern_tile_plate",
+   "name": "Pattern Tile Plate",
+   "size": "small",
+   "source": "existing",
+   "concept": "Patterns",
+   "footprint": [
+    2.0,
+    2.0
+   ]
+  },
+  {
+   "id": "pattern_tile_mirror",
+   "name": "Mirror Pattern Tile",
+   "size": "small",
+   "source": "existing",
+   "concept": "Patterns",
    "footprint": [
     1.0,
     1.0
@@ -30,22 +107,55 @@
    ]
   },
   {
-   "id": "pattern_tile_puzzle#p4m",
-   "name": "pattern_tile_puzzle#p4m",
-   "size": "small",
+   "id": "pattern_maker_station",
+   "name": "Pattern Maker Station",
+   "size": "large",
    "source": "existing",
    "concept": "",
+   "footprint": [
+    4.0,
+    4.0
+   ]
+  },
+  {
+   "id": "pattern_machine_c",
+   "name": "Kaleidoscope Mill",
+   "size": "large",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    3.0,
+    4.0
+   ]
+  },
+  {
+   "id": "array_carpet",
+   "name": "Array Carpet",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
    "footprint": [
     1.0,
     1.0
    ]
   },
   {
-   "id": "pattern_tile_mirror",
-   "name": "Mirror Pattern Tile",
+   "id": "panel_bridge_loom",
+   "name": "Panel Bridge — Loom Simulator",
    "size": "small",
    "source": "existing",
    "concept": "Patterns",
+   "footprint": [
+    2.0,
+    1.0
+   ]
+  },
+  {
+   "id": "script_runner",
+   "name": "Script Runner",
+   "size": "small",
+   "source": "existing",
+   "concept": "· palette (unplaced)",
    "footprint": [
     1.0,
     1.0
@@ -57,17 +167,6 @@
    "size": "small",
    "source": "existing",
    "concept": "",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "step_sequencer",
-   "name": "Step Sequencer",
-   "size": "small",
-   "source": "added",
-   "concept": "· palette (unplaced)",
    "footprint": [
     1.0,
     1.0

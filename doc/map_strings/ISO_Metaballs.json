@@ -8,6 +8,17 @@
  },
  "pearls": [
   {
+   "id": "metaball_world",
+   "name": "metaball_world",
+   "size": "small",
+   "source": "existing",
+   "concept": "Each metaball is a point radiating inf",
+   "footprint": [
+    3.0,
+    3.0
+   ]
+  },
+  {
    "id": "metaballs",
    "name": "Metaballs",
    "size": "large",
@@ -38,17 +49,6 @@
    "footprint": [
     1.0,
     1.0
-   ]
-  },
-  {
-   "id": "metaball_world",
-   "name": "metaball_world",
-   "size": "small",
-   "source": "existing",
-   "concept": "Each metaball is a point radiating inf",
-   "footprint": [
-    3.0,
-    3.0
    ]
   }
  ]

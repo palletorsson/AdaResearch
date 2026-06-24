@@ -2,8 +2,8 @@
  "map": "Point_Line_Grid",
  "sequence": "primitives",
  "counts": {
-  "existing": 3,
-  "added": 6,
+  "existing": 5,
+  "added": 3,
   "large": 4
  },
  "pearls": [
@@ -13,28 +13,6 @@
    "size": "small",
    "source": "existing",
    "concept": "Grid / array",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "floating_sphere_field",
-   "name": "Floating Sphere Field",
-   "size": "small",
-   "source": "added",
-   "concept": "Sphere / ball",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "interactive_point_origin_force",
-   "name": "1.0.2 Interactive Point — Force Catalyst",
-   "size": "small",
-   "source": "added",
-   "concept": "Point",
    "footprint": [
     1.0,
     1.0
@@ -52,14 +30,14 @@
    ]
   },
   {
-   "id": "grid_brush_demo",
-   "name": "Grid Brush Demo",
+   "id": "modifier_grid_demo",
+   "name": "Modifier Grid Demo",
    "size": "large",
    "source": "added",
    "concept": "Grid / array",
    "footprint": [
-    16.0,
-    16.0
+    9.0,
+    9.0
    ]
   },
   {
@@ -74,14 +52,25 @@
    ]
   },
   {
-   "id": "modifier_grid_demo",
-   "name": "Modifier Grid Demo",
+   "id": "grid_brush_demo",
+   "name": "Grid Brush Demo",
    "size": "large",
    "source": "added",
    "concept": "Grid / array",
    "footprint": [
-    9.0,
-    9.0
+    16.0,
+    16.0
+   ]
+  },
+  {
+   "id": "floating_sphere_field",
+   "name": "Floating Sphere Field",
+   "size": "small",
+   "source": "existing",
+   "concept": "Sphere / ball",
+   "footprint": [
+    1.0,
+    1.0
    ]
   },
   {
@@ -96,11 +85,11 @@
    ]
   },
   {
-   "id": "grab_sphere_point",
-   "name": "grab_sphere_point",
+   "id": "room_grammar",
+   "name": "Room Grammar",
    "size": "small",
-   "source": "added",
-   "concept": "Point",
+   "source": "existing",
+   "concept": "",
    "footprint": [
     1.0,
     1.0

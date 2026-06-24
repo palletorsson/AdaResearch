@@ -2,11 +2,33 @@
  "map": "ForcesArena",
  "sequence": "forces",
  "counts": {
-  "existing": 5,
-  "added": 0,
-  "large": 3
+  "existing": 19,
+  "added": 6,
+  "large": 8
  },
  "pearls": [
+  {
+   "id": "hits_reset_display",
+   "name": "hits_reset_display",
+   "size": "small",
+   "source": "existing",
+   "concept": "",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "health_display",
+   "name": "health_display",
+   "size": "small",
+   "source": "existing",
+   "concept": "",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
   {
    "id": "gravity_gun_test_scene",
    "name": "gravity_gun_test_scene",
@@ -19,6 +41,61 @@
    ]
   },
   {
+   "id": "queer_cylinder_target",
+   "name": "queer_cylinder_target",
+   "size": "large",
+   "source": "existing",
+   "concept": "",
+   "footprint": [
+    8.0,
+    8.0
+   ]
+  },
+  {
+   "id": "cube_projectile_spawner",
+   "name": "cube_projectile_spawner",
+   "size": "large",
+   "source": "added",
+   "concept": "Projectile / launch",
+   "footprint": [
+    8.0,
+    8.0
+   ]
+  },
+  {
+   "id": "catapult",
+   "name": "Catapult",
+   "size": "small",
+   "source": "existing",
+   "concept": "Projectile / launch",
+   "footprint": [
+    2.0,
+    3.0
+   ]
+  },
+  {
+   "id": "vector_arena",
+   "name": "Vector Arena",
+   "size": "large",
+   "source": "added",
+   "concept": "Magnitude / length",
+   "footprint": [
+    3.0,
+    4.0
+   ]
+  },
+  {
+   "id": "proximity_spawner",
+   "name": "Proximity Spawner",
+   "size": "small",
+   "source": "existing",
+   "concept": "",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
    "id": "vector_drone",
    "name": "vector_drone",
    "size": "small",
@@ -27,6 +104,61 @@
    "footprint": [
     2.0,
     2.0
+   ]
+  },
+  {
+   "id": "human_catapult",
+   "name": "Human Catapult",
+   "size": "small",
+   "source": "existing",
+   "concept": "Projectile / launch",
+   "footprint": [
+    2.0,
+    2.0
+   ]
+  },
+  {
+   "id": "mortar_vector_siege",
+   "name": "Mortar Vector Siege",
+   "size": "small",
+   "source": "added",
+   "concept": "Projectile / launch",
+   "footprint": [
+    3.0,
+    3.0
+   ]
+  },
+  {
+   "id": "force_vortex",
+   "name": "Force Vortex",
+   "size": "large",
+   "source": "added",
+   "concept": "Force field (zone)",
+   "footprint": [
+    4.0,
+    4.0
+   ]
+  },
+  {
+   "id": "reflection_hall",
+   "name": "Reflection Hall",
+   "size": "large",
+   "source": "added",
+   "concept": "Projection / reflection",
+   "footprint": [
+    5.0,
+    5.0
+   ]
+  },
+  {
+   "id": "force_pad",
+   "name": "Force Pad",
+   "size": "small",
+   "source": "added",
+   "concept": "General force / pad",
+   "footprint": [
+    1.0,
+    1.0
    ]
   },
   {
@@ -52,6 +184,28 @@
    ]
   },
   {
+   "id": "throw_ball",
+   "name": "throw_ball",
+   "size": "small",
+   "source": "existing",
+   "concept": "",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "grab_sphere_point",
+   "name": "grab_sphere_point",
+   "size": "small",
+   "source": "existing",
+   "concept": "",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
    "id": "sphere_splitting_showcase",
    "name": "sphere_splitting_showcase",
    "size": "large",
@@ -60,6 +214,72 @@
    "footprint": [
     7.0,
     4.0
+   ]
+  },
+  {
+   "id": "VectorBasics",
+   "name": "VectorBasics",
+   "size": "small",
+   "source": "existing",
+   "concept": "Vector basics",
+   "footprint": [
+    2.0,
+    1.0
+   ]
+  },
+  {
+   "id": "VectorAddition",
+   "name": "VectorAddition",
+   "size": "small",
+   "source": "existing",
+   "concept": "Addition",
+   "footprint": [
+    2.0,
+    1.0
+   ]
+  },
+  {
+   "id": "VectorSubtraction",
+   "name": "VectorSubtraction",
+   "size": "small",
+   "source": "existing",
+   "concept": "Subtraction",
+   "footprint": [
+    2.0,
+    1.0
+   ]
+  },
+  {
+   "id": "vector_magnitude_demo",
+   "name": "Vector Magnitude",
+   "size": "small",
+   "source": "existing",
+   "concept": "Magnitude / length",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "vector_normalize_demo",
+   "name": "Vector Normalization",
+   "size": "small",
+   "source": "existing",
+   "concept": "Unit vector / normalize",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "VectorCrossProduct",
+   "name": "VectorCrossProduct",
+   "size": "small",
+   "source": "existing",
+   "concept": "Cross product / torque",
+   "footprint": [
+    2.0,
+    1.0
    ]
   }
  ]

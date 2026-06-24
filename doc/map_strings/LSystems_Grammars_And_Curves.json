@@ -2,7 +2,7 @@
  "map": "LSystems_Grammars_And_Curves",
  "sequence": "lsystems",
  "counts": {
-  "existing": 2,
+  "existing": 3,
   "added": 6,
   "large": 1
  },
@@ -19,33 +19,77 @@
    ]
   },
   {
-   "id": "hilbert_room",
-   "name": "Hilbert Room (one line, every point)",
+   "id": "space_filling_curve_gallery",
+   "name": "Space-Filling Curve Gallery",
+   "size": "large",
+   "source": "existing",
+   "concept": "Space-filling curves (Hilbert)",
+   "footprint": [
+    4.0,
+    2.0
+   ]
+  },
+  {
+   "id": "ContextFreeGrammars",
+   "name": "Context-Free Grammars",
+   "size": "small",
+   "source": "existing",
+   "concept": "Formal grammars (Chomsky)",
+   "footprint": [
+    2.0,
+    1.0
+   ]
+  },
+  {
+   "id": "city_toy",
+   "name": "City Toy (a held block)",
    "size": "small",
    "source": "added",
-   "concept": "Space-filling curves (Hilbert)",
+   "concept": "Grammar architecture (cities/dungeons)",
    "footprint": [
     1.0,
     1.0
    ]
   },
   {
-   "id": "hilbert_bench",
-   "name": "Hilbert Bench (a line fills a square)",
+   "id": "city_bench",
+   "name": "City Bench (a street plan)",
    "size": "small",
    "source": "added",
-   "concept": "Space-filling curves (Hilbert)",
+   "concept": "Grammar architecture (cities/dungeons)",
    "footprint": [
     1.0,
     1.0
    ]
   },
   {
-   "id": "turtle_room",
-   "name": "Turtle Room (walk the curve)",
+   "id": "lsystem_tree_room",
+   "name": "L-system Tree Room (a whole tree)",
    "size": "small",
    "source": "added",
-   "concept": "Turtle interpretation",
+   "concept": "L-system trees",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "vine_grower",
+   "name": "Vine Trellis (climbing rule)",
+   "size": "small",
+   "source": "added",
+   "concept": "Coral & vines",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "tree_nursery",
+   "name": "Tree Nursery (grow them)",
+   "size": "small",
+   "source": "added",
+   "concept": "L-system trees",
    "footprint": [
     1.0,
     1.0
@@ -59,39 +103,6 @@
    "concept": "Turtle interpretation",
    "footprint": [
     1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "context_free_grammars",
-   "name": "Context-Free Grammars",
-   "size": "small",
-   "source": "added",
-   "concept": "Formal grammars (Chomsky)",
-   "footprint": [
-    2.0,
-    1.0
-   ]
-  },
-  {
-   "id": "space_filling_curve_gallery",
-   "name": "Space-Filling Curve Gallery",
-   "size": "large",
-   "source": "existing",
-   "concept": "Space-filling curves (Hilbert)",
-   "footprint": [
-    4.0,
-    2.0
-   ]
-  },
-  {
-   "id": "space_filling_floor",
-   "name": "Space-Filling Floor",
-   "size": "small",
-   "source": "added",
-   "concept": "Space-filling curves (Hilbert)",
-   "footprint": [
-    2.0,
     1.0
    ]
   }

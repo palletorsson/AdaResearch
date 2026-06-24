@@ -2,20 +2,64 @@
  "map": "Fractal_CrossSequence",
  "sequence": "fractals",
  "counts": {
-  "existing": 3,
-  "added": 0,
-  "large": 0
+  "existing": 5,
+  "added": 2,
+  "large": 1
  },
  "pearls": [
   {
-   "id": "cellular_automata_3d_stacked",
-   "name": "Cellular Automata 3D Stacked",
-   "size": "small",
+   "id": "space_filling_curve_gallery",
+   "name": "Space-Filling Curve Gallery",
+   "size": "large",
    "source": "existing",
-   "concept": "",
+   "concept": "Space-filling curves",
+   "footprint": [
+    4.0,
+    2.0
+   ]
+  },
+  {
+   "id": "space_filling_floor",
+   "name": "Space-Filling Floor",
+   "size": "small",
+   "source": "added",
+   "concept": "Space-filling curves",
    "footprint": [
     2.0,
-    2.0
+    1.0
+   ]
+  },
+  {
+   "id": "fractal_stochastic_tree",
+   "name": "Stochastic Tree",
+   "size": "small",
+   "source": "existing",
+   "concept": "Recursive trees",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "Hilbert3D",
+   "name": "3D Hilbert Curve",
+   "size": "small",
+   "source": "existing",
+   "concept": "Space-filling curves",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "koch_loom",
+   "name": "Koch Loom (edge fabric)",
+   "size": "small",
+   "source": "added",
+   "concept": "Koch curve & snowflake",
+   "footprint": [
+    1.0,
+    1.0
    ]
   },
   {
@@ -30,14 +74,14 @@
    ]
   },
   {
-   "id": "fractal_stochastic_tree",
-   "name": "Stochastic Tree",
+   "id": "cellular_automata_3d_stacked",
+   "name": "Cellular Automata 3D Stacked",
    "size": "small",
    "source": "existing",
-   "concept": "Recursive trees",
+   "concept": "",
    "footprint": [
-    1.0,
-    1.0
+    2.0,
+    2.0
    ]
   }
  ]

@@ -2,11 +2,33 @@
  "map": "WaveFunctions_Effect_Sound",
  "sequence": "wavefunctions",
  "counts": {
-  "existing": 20,
-  "added": 6,
+  "existing": 21,
+  "added": 3,
   "large": 2
  },
  "pearls": [
+  {
+   "id": "BigPipeSystem",
+   "name": "Big Pipe System",
+   "size": "small",
+   "source": "existing",
+   "concept": "pendulum",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "pick_up_cube",
+   "name": "Pick Up Cube",
+   "size": "small",
+   "source": "existing",
+   "concept": "the wave",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
   {
    "id": "AudioContr",
    "name": "AudioContr",
@@ -30,99 +52,11 @@
    ]
   },
   {
-   "id": "BigPipeSystem",
-   "name": "Big Pipe System",
-   "size": "small",
-   "source": "existing",
-   "concept": "pendulum",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "DualBallFMController",
-   "name": "Dual Ball FM Synth",
-   "size": "small",
-   "source": "existing",
-   "concept": "sound as wave",
-   "footprint": [
-    2.0,
-    1.0
-   ]
-  },
-  {
    "id": "GlassRack",
    "name": "Glass Rack",
    "size": "small",
    "source": "existing",
    "concept": "pendulum",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "MarioSoundController",
-   "name": "MarioSoundController",
-   "size": "small",
-   "source": "existing",
-   "concept": "· palette (unplaced)",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "MelodyChaser3D",
-   "name": "MelodyChaser3D",
-   "size": "small",
-   "source": "existing",
-   "concept": "sound as wave",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "Rack303Acid",
-   "name": "303 Acid Rack",
-   "size": "small",
-   "source": "existing",
-   "concept": "sound as wave",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "RackDX7Piano",
-   "name": "DX7 Piano Rack",
-   "size": "small",
-   "source": "existing",
-   "concept": "sound as wave",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "RackMoogBass",
-   "name": "Moog Bass Rack",
-   "size": "small",
-   "source": "existing",
-   "concept": "sound as wave",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "biomagneticresonator",
-   "name": "Biomagnetic Resonator",
-   "size": "small",
-   "source": "added",
-   "concept": "Synthesis Lab",
    "footprint": [
     1.0,
     1.0
@@ -136,6 +70,17 @@
    "concept": "sound as wave",
    "footprint": [
     1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "cable_builder",
+   "name": "Cable Builder",
+   "size": "large",
+   "source": "existing",
+   "concept": "sound as wave",
+   "footprint": [
+    5.0,
     1.0
    ]
   },
@@ -162,6 +107,50 @@
    ]
   },
   {
+   "id": "DualBallFMController",
+   "name": "Dual Ball FM Synth",
+   "size": "small",
+   "source": "existing",
+   "concept": "sound as wave",
+   "footprint": [
+    2.0,
+    1.0
+   ]
+  },
+  {
+   "id": "Rack303Acid",
+   "name": "303 Acid Rack",
+   "size": "small",
+   "source": "existing",
+   "concept": "sound as wave",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "RackMoogBass",
+   "name": "Moog Bass Rack",
+   "size": "small",
+   "source": "existing",
+   "concept": "sound as wave",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "RackDX7Piano",
+   "name": "DX7 Piano Rack",
+   "size": "small",
+   "source": "existing",
+   "concept": "sound as wave",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
    "id": "audio_catalog_tablet",
    "name": "Audio Catalog Tablet",
    "size": "small",
@@ -173,13 +162,35 @@
    ]
   },
   {
-   "id": "cable_builder",
-   "name": "Cable Builder",
-   "size": "large",
+   "id": "wave_interference_3d",
+   "name": "Wave Interference 3D",
+   "size": "small",
    "source": "existing",
    "concept": "sound as wave",
    "footprint": [
-    5.0,
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "wave_interference_tank",
+   "name": "Wave Interference Tank",
+   "size": "small",
+   "source": "added",
+   "concept": "the wave",
+   "footprint": [
+    1.0,
+    2.0
+   ]
+  },
+  {
+   "id": "harmonic_distance_table",
+   "name": "Harmonic Distance Table",
+   "size": "small",
+   "source": "existing",
+   "concept": "sound as wave",
+   "footprint": [
+    1.0,
     1.0
    ]
   },
@@ -195,8 +206,41 @@
    ]
   },
   {
-   "id": "harmonic_distance_table",
-   "name": "Harmonic Distance Table",
+   "id": "timbre_sculptor",
+   "name": "Timbre Sculptor",
+   "size": "small",
+   "source": "existing",
+   "concept": "sound as wave",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "MarioSoundController",
+   "name": "MarioSoundController",
+   "size": "small",
+   "source": "existing",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "mario_test_sound_ui",
+   "name": "mario_test_sound_ui",
+   "size": "small",
+   "source": "existing",
+   "concept": "sound as wave",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "MelodyChaser3D",
+   "name": "MelodyChaser3D",
    "size": "small",
    "source": "existing",
    "concept": "sound as wave",
@@ -217,39 +261,6 @@
    ]
   },
   {
-   "id": "demo_singles",
-   "name": "demo_singles",
-   "size": "small",
-   "source": "added",
-   "concept": "· palette (unplaced)",
-   "footprint": [
-    3.0,
-    1.0
-   ]
-  },
-  {
-   "id": "demo_passive",
-   "name": "demo_passive",
-   "size": "small",
-   "source": "added",
-   "concept": "· palette (unplaced)",
-   "footprint": [
-    3.0,
-    1.0
-   ]
-  },
-  {
-   "id": "demo_compounds",
-   "name": "demo_compounds",
-   "size": "small",
-   "source": "added",
-   "concept": "· palette (unplaced)",
-   "footprint": [
-    3.0,
-    1.0
-   ]
-  },
-  {
    "id": "lab_table",
    "name": "Lab Table",
    "size": "small",
@@ -257,39 +268,6 @@
    "concept": "pendulum",
    "footprint": [
     2.0,
-    1.0
-   ]
-  },
-  {
-   "id": "mario_test_sound_ui",
-   "name": "mario_test_sound_ui",
-   "size": "small",
-   "source": "existing",
-   "concept": "sound as wave",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "pick_up_cube",
-   "name": "Pick Up Cube",
-   "size": "small",
-   "source": "existing",
-   "concept": "the wave",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "timbre_sculptor",
-   "name": "Timbre Sculptor",
-   "size": "small",
-   "source": "existing",
-   "concept": "sound as wave",
-   "footprint": [
-    1.0,
     1.0
    ]
   }

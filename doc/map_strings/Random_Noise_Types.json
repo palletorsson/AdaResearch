@@ -2,9 +2,9 @@
  "map": "Random_Noise_Types",
  "sequence": "noise",
  "counts": {
-  "existing": 2,
-  "added": 2,
-  "large": 0
+  "existing": 4,
+  "added": 1,
+  "large": 2
  },
  "pearls": [
   {
@@ -30,17 +30,6 @@
    ]
   },
   {
-   "id": "grid_substrate_runner",
-   "name": "Grid Substrate Runner",
-   "size": "small",
-   "source": "added",
-   "concept": "· palette (unplaced)",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
    "id": "RandomGaussianTexture",
    "name": "Random Gaussian Texture",
    "size": "small",
@@ -49,6 +38,28 @@
    "footprint": [
     2.0,
     2.0
+   ]
+  },
+  {
+   "id": "WhiteNoiseGallery",
+   "name": "White Noise Gallery",
+   "size": "large",
+   "source": "existing",
+   "concept": "White noise screams chaos",
+   "footprint": [
+    20.0,
+    22.0
+   ]
+  },
+  {
+   "id": "NoiseColors3D",
+   "name": "Noise Colors 3D",
+   "size": "large",
+   "source": "existing",
+   "concept": "White noise screams chaos",
+   "footprint": [
+    10.0,
+    11.0
    ]
   }
  ]

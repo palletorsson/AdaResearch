@@ -2,14 +2,91 @@
  "map": "VectorAdvanced",
  "sequence": "forces",
  "counts": {
-  "existing": 4,
+  "existing": 10,
   "added": 0,
-  "large": 1
+  "large": 2
  },
  "pearls": [
   {
+   "id": "VectorFieldFlow",
+   "name": "VectorFieldFlow",
+   "size": "large",
+   "source": "existing",
+   "concept": "Vector field / flow",
+   "footprint": [
+    4.0,
+    2.0
+   ]
+  },
+  {
+   "id": "VectorTorque",
+   "name": "VectorTorque",
+   "size": "small",
+   "source": "existing",
+   "concept": "Cross product / torque",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "vector_projection_reflection_xl",
+   "name": "Projection & Reflection (Walk-Inside)",
+   "size": "small",
+   "source": "existing",
+   "concept": "",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
    "id": "exercise_1_3_solution_3_d_bouncing_ball_vr",
    "name": "3D Bouncing Ball",
+   "size": "small",
+   "source": "existing",
+   "concept": "General force / pad",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "proximity_spawner",
+   "name": "Proximity Spawner",
+   "size": "small",
+   "source": "existing",
+   "concept": "",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "example_1_9_motion_101_velocity_and_random_acceleration_vr",
+   "name": "Motion 101 Velocity and Random Acceleration VR",
+   "size": "small",
+   "source": "existing",
+   "concept": "Motion / velocity",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "torque_demo",
+   "name": "Torque Demo",
+   "size": "small",
+   "source": "existing",
+   "concept": "Cross product / torque",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "exercise_1_5_solution_accelerate_and_decelerate_vr",
+   "name": "Accelerate and Decelerate",
    "size": "small",
    "source": "existing",
    "concept": "General force / pad",
@@ -38,17 +115,6 @@
    "footprint": [
     4.0,
     2.0
-   ]
-  },
-  {
-   "id": "torque_demo",
-   "name": "Torque Demo",
-   "size": "small",
-   "source": "existing",
-   "concept": "Cross product / torque",
-   "footprint": [
-    1.0,
-    1.0
    ]
   }
  ]

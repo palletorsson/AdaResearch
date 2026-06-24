@@ -2,11 +2,44 @@
  "map": "QFEP_F_Term",
  "sequence": "qfeplaboratory",
  "counts": {
-  "existing": 4,
-  "added": 1,
+  "existing": 5,
+  "added": 2,
   "large": 1
  },
  "pearls": [
+  {
+   "id": "shannon_workbench",
+   "name": "Shannon Workbench",
+   "size": "small",
+   "source": "existing",
+   "concept": "F — free energy & order",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "russell_paradox_workbench",
+   "name": "Russell's Paradox Workbench",
+   "size": "small",
+   "source": "added",
+   "concept": "The formula made yours",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "cantor_diagonal_workbench",
+   "name": "Cantor Diagonal Workbench",
+   "size": "small",
+   "source": "added",
+   "concept": "The formula made yours",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
   {
    "id": "snap_cube_puzzle",
    "name": "Snap Cube Puzzle",
@@ -49,17 +82,6 @@
    "footprint": [
     8.0,
     8.0
-   ]
-  },
-  {
-   "id": "entropy_bellows",
-   "name": "Entropy Bellows",
-   "size": "small",
-   "source": "added",
-   "concept": "E — entropy as possibility",
-   "footprint": [
-    1.0,
-    1.0
    ]
   }
  ]

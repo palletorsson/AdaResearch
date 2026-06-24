@@ -2,9 +2,9 @@
  "map": "Primitives_Melencolia",
  "sequence": "primitives",
  "counts": {
-  "existing": 8,
-  "added": 2,
-  "large": 2
+  "existing": 9,
+  "added": 3,
+  "large": 3
  },
  "pearls": [
   {
@@ -19,22 +19,33 @@
    ]
   },
   {
-   "id": "path_pyramid",
-   "name": "Path Pyramid (mound)",
+   "id": "snap_pyramid_puzzle",
+   "name": "Snap Pyramid Puzzle",
    "size": "small",
-   "source": "added",
-   "concept": "Cone / pyramid",
+   "source": "existing",
+   "concept": "Interactive tool",
    "footprint": [
     1.0,
     1.0
    ]
   },
   {
-   "id": "snap_pyramid_puzzle",
-   "name": "Snap Pyramid Puzzle",
+   "id": "snap_wedge_puzzle",
+   "name": "Snap Wedge Puzzle",
+   "size": "small",
+   "source": "added",
+   "concept": "Interactive tool",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "cube_scene",
+   "name": "Basic Cube Scene",
    "size": "small",
    "source": "existing",
-   "concept": "Interactive tool",
+   "concept": "Cube / box",
    "footprint": [
     1.0,
     1.0
@@ -63,22 +74,22 @@
    ]
   },
   {
-   "id": "cube_scene",
-   "name": "Basic Cube Scene",
+   "id": "prism_block",
+   "name": "prism_block",
    "size": "small",
    "source": "existing",
-   "concept": "Cube / box",
+   "concept": "Prism / extrusion",
    "footprint": [
     1.0,
     1.0
    ]
   },
   {
-   "id": "prism_block",
-   "name": "prism_block",
+   "id": "floating_sphere_field",
+   "name": "Floating Sphere Field",
    "size": "small",
    "source": "existing",
-   "concept": "Prism / extrusion",
+   "concept": "Sphere / ball",
    "footprint": [
     1.0,
     1.0
@@ -93,6 +104,17 @@
    "footprint": [
     1.0,
     1.0
+   ]
+  },
+  {
+   "id": "cube_projectile_spawner",
+   "name": "cube_projectile_spawner",
+   "size": "large",
+   "source": "added",
+   "concept": "Cube / box",
+   "footprint": [
+    8.0,
+    8.0
    ]
   },
   {

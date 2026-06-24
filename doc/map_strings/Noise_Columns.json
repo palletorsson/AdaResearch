@@ -2,9 +2,54 @@
  "map": "Noise_Columns",
  "sequence": "noise",
  "counts": {
-  "existing": 0,
-  "added": 0,
-  "large": 0
+  "existing": 1,
+  "added": 3,
+  "large": 2
  },
- "pearls": []
+ "pearls": [
+  {
+   "id": "MeltingBerniniScene",
+   "name": "Melting Bernini Columns",
+   "size": "large",
+   "source": "existing",
+   "concept": "Noise extruded vertically. Sample the ",
+   "footprint": [
+    13.0,
+    13.0
+   ]
+  },
+  {
+   "id": "profile",
+   "name": "Profile Substrate",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "particle_randomness_perlin",
+   "name": "Particle Randomness - Perlin",
+   "size": "large",
+   "source": "added",
+   "concept": "Before Perlin, noise was static",
+   "footprint": [
+    10.0,
+    1.0
+   ]
+  },
+  {
+   "id": "random_transformations_noise",
+   "name": "Random Transformations - Noise",
+   "size": "small",
+   "source": "added",
+   "concept": "White noise screams chaos",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  }
+ ]
 }

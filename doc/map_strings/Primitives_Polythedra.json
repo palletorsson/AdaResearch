@@ -2,53 +2,130 @@
  "map": "Primitives_Polythedra",
  "sequence": "primitives",
  "counts": {
-  "existing": 4,
+  "existing": 11,
   "added": 6,
-  "large": 1
+  "large": 0
  },
  "pearls": [
   {
-   "id": "grab_trihedron",
-   "name": "grab_trihedron",
+   "id": "lab_room",
+   "name": "Lab Room",
    "size": "small",
    "source": "existing",
-   "concept": "Plane / quad",
-   "footprint": [
-    2.0,
-    2.0
-   ]
-  },
-  {
-   "id": "grab_dodecahedron",
-   "name": "grab_dodecahedron",
-   "size": "small",
-   "source": "added",
-   "concept": "Platonic / polyhedra",
+   "concept": "",
    "footprint": [
     1.0,
     1.0
    ]
   },
   {
-   "id": "grab_icosahedron",
-   "name": "grab_icosahedron",
+   "id": "path_watchdog",
+   "name": "Path Watchdog",
    "size": "small",
-   "source": "added",
-   "concept": "Platonic / polyhedra",
+   "source": "existing",
+   "concept": "· palette (unplaced)",
    "footprint": [
     1.0,
     1.0
    ]
   },
   {
-   "id": "grab_cube",
-   "name": "grab_cube",
+   "id": "path_cube",
+   "name": "Path Cube (wall)",
    "size": "small",
    "source": "added",
    "concept": "Cube / box",
    "footprint": [
     1.0,
     1.0
+   ]
+  },
+  {
+   "id": "path_wedge",
+   "name": "Path Wedge (ramp)",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "path_pyramid",
+   "name": "Path Pyramid (mound)",
+   "size": "small",
+   "source": "added",
+   "concept": "Cone / pyramid",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "catalyst_foe",
+   "name": "Catalyst Foe",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "path_builder_foe",
+   "name": "Path Builder Foe",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "path_game_controller",
+   "name": "Path Game Controller",
+   "size": "small",
+   "source": "existing",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "interactive_point_origin_force",
+   "name": "1.0.2 Interactive Point — Force Catalyst",
+   "size": "small",
+   "source": "existing",
+   "concept": "Point",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "becoming_catalyst",
+   "name": "The Catalyst",
+   "size": "small",
+   "source": "existing",
+   "concept": "",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "wedge_skill_pickup",
+   "name": "Wedge Skill Pickup",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    2.0,
+    2.0
    ]
   },
   {
@@ -63,25 +140,25 @@
    ]
   },
   {
-   "id": "snap_triangle_puzzle",
-   "name": "Snap Triangle Puzzle",
+   "id": "floating_sphere_field",
+   "name": "Floating Sphere Field",
    "size": "small",
-   "source": "added",
-   "concept": "Interactive tool",
+   "source": "existing",
+   "concept": "Sphere / ball",
    "footprint": [
     1.0,
     1.0
    ]
   },
   {
-   "id": "cube_projectile_spawner",
-   "name": "cube_projectile_spawner",
-   "size": "large",
-   "source": "added",
-   "concept": "Cube / box",
+   "id": "grab_trihedron",
+   "name": "grab_trihedron",
+   "size": "small",
+   "source": "existing",
+   "concept": "Plane / quad",
    "footprint": [
-    8.0,
-    8.0
+    2.0,
+    2.0
    ]
   },
   {
@@ -96,22 +173,22 @@
    ]
   },
   {
-   "id": "pyramid_edit",
-   "name": "pyramid_edit",
+   "id": "tentacle_placer",
+   "name": "Tentacle Placer",
    "size": "small",
    "source": "existing",
-   "concept": "Cone / pyramid",
+   "concept": "",
    "footprint": [
     1.0,
     1.0
    ]
   },
   {
-   "id": "zigzagprofile",
-   "name": "1.2: A zigzagprofile",
+   "id": "pyramid_edit",
+   "name": "pyramid_edit",
    "size": "small",
-   "source": "added",
-   "concept": "Point",
+   "source": "existing",
+   "concept": "Cone / pyramid",
    "footprint": [
     1.0,
     1.0

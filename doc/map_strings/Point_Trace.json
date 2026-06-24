@@ -2,16 +2,60 @@
  "map": "Point_Trace",
  "sequence": "primitives",
  "counts": {
-  "existing": 2,
+  "existing": 5,
   "added": 6,
   "large": 0
  },
  "pearls": [
   {
-   "id": "draw_dot",
-   "name": "draw_dot",
+   "id": "lab_room",
+   "name": "Lab Room",
    "size": "small",
    "source": "existing",
+   "concept": "",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "mystic_writing_pad",
+   "name": "Mystic Writing Pad",
+   "size": "small",
+   "source": "existing",
+   "concept": "Arch / structure",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "endlessness_chalkboard",
+   "name": "Endlessness Chalkboard",
+   "size": "small",
+   "source": "added",
+   "concept": "Grid / array",
+   "footprint": [
+    2.0,
+    1.0
+   ]
+  },
+  {
+   "id": "chalkboard",
+   "name": "Chalkboard",
+   "size": "small",
+   "source": "added",
+   "concept": "Grid / array",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "living_paper",
+   "name": "Living Paper",
+   "size": "small",
+   "source": "added",
    "concept": "Point",
    "footprint": [
     1.0,
@@ -19,44 +63,33 @@
    ]
   },
   {
-   "id": "pickup_cube_scaling",
-   "name": "Scaling Pickup Cube",
-   "size": "small",
-   "source": "added",
-   "concept": "Cube / box",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "pickup_cube_static",
-   "name": "Static Pickup Cube",
-   "size": "small",
-   "source": "added",
-   "concept": "Cube / box",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "rotating_cube",
-   "name": "Rotating Cube",
-   "size": "small",
-   "source": "added",
-   "concept": "Cube / box",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "cube_scene",
-   "name": "Basic Cube Scene",
+   "id": "floating_sphere_field",
+   "name": "Floating Sphere Field",
    "size": "small",
    "source": "existing",
-   "concept": "Cube / box",
+   "concept": "Sphere / ball",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "pixel_thumb",
+   "name": "Pixel Thumb",
+   "size": "small",
+   "source": "added",
+   "concept": "Point",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "pixel_heart",
+   "name": "Pixel Heart",
+   "size": "small",
+   "source": "added",
+   "concept": "Text / glyph",
    "footprint": [
     1.0,
     1.0
@@ -74,21 +107,21 @@
    ]
   },
   {
-   "id": "transformation_cube",
-   "name": "transformation_cube",
+   "id": "draw_dot",
+   "name": "draw_dot",
    "size": "small",
-   "source": "added",
-   "concept": "Cube / box",
+   "source": "existing",
+   "concept": "Point",
    "footprint": [
     1.0,
     1.0
    ]
   },
   {
-   "id": "cube",
-   "name": "cube",
+   "id": "cube_scene",
+   "name": "Basic Cube Scene",
    "size": "small",
-   "source": "added",
+   "source": "existing",
    "concept": "Cube / box",
    "footprint": [
     1.0,

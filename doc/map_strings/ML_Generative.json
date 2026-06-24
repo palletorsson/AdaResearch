@@ -2,9 +2,43 @@
  "map": "ML_Generative",
  "sequence": "machinelearning",
  "counts": {
-  "existing": 0,
-  "added": 0,
-  "large": 0
+  "existing": 1,
+  "added": 2,
+  "large": 3
  },
- "pearls": []
+ "pearls": [
+  {
+   "id": "generative_adversarial_networks_gans_vr",
+   "name": "GenerativeAdversarialNetworksGANs_VR",
+   "size": "large",
+   "source": "existing",
+   "concept": "LSTMs",
+   "footprint": [
+    18.0,
+    11.0
+   ]
+  },
+  {
+   "id": "variational_autoencoders_vaes_vr",
+   "name": "VariationalAutoencodersVAEs_VR",
+   "size": "large",
+   "source": "added",
+   "concept": "Neural Networks",
+   "footprint": [
+    30.0,
+    14.0
+   ]
+  },
+  {
+   "id": "fine_tuning_vr",
+   "name": "FineTuning_VR",
+   "size": "large",
+   "source": "added",
+   "concept": "LSTMs",
+   "footprint": [
+    11.0,
+    3.0
+   ]
+  }
+ ]
 }

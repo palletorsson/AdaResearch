@@ -2,17 +2,61 @@
  "map": "CriticalAlgorithms_Applied_Ethics",
  "sequence": "postfoundationscrisis",
  "counts": {
-  "existing": 3,
-  "added": 1,
-  "large": 0
+  "existing": 5,
+  "added": 6,
+  "large": 1
  },
  "pearls": [
+  {
+   "id": "bias_from_inside",
+   "name": "Bias From Inside",
+   "size": "small",
+   "source": "existing",
+   "concept": "Bias as structural incompleteness",
+   "footprint": [
+    2.0,
+    2.0
+   ]
+  },
+  {
+   "id": "godel_statement_plaque",
+   "name": "GÃ¶del Statement Plaque",
+   "size": "small",
+   "source": "existing",
+   "concept": "",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
   {
    "id": "ethical_design_clipboard",
    "name": "Ethical Design Clipboard",
    "size": "small",
    "source": "existing",
    "concept": "",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "rhizome_vault",
+   "name": "Rhizome Vault",
+   "size": "large",
+   "source": "added",
+   "concept": "Rhizome networks",
+   "footprint": [
+    10.0,
+    10.0
+   ]
+  },
+  {
+   "id": "cap_theorem_bench",
+   "name": "CapTheoremBench",
+   "size": "small",
+   "source": "added",
+   "concept": "Paraconsistent engineering",
    "footprint": [
     1.0,
     1.0
@@ -35,6 +79,39 @@
    "size": "small",
    "source": "existing",
    "concept": "Bias as structural incompleteness",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "merge_conflict_toy",
+   "name": "MergeConflictToy",
+   "size": "small",
+   "source": "added",
+   "concept": "Paraconsistent engineering",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "ethics_bench",
+   "name": "EthicsBench",
+   "size": "small",
+   "source": "added",
+   "concept": "Ethical design after incompleteness",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "ethics_toy",
+   "name": "EthicsToy",
+   "size": "small",
+   "source": "added",
+   "concept": "Ethical design after incompleteness",
    "footprint": [
     1.0,
     1.0

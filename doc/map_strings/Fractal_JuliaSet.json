@@ -2,22 +2,11 @@
  "map": "Fractal_JuliaSet",
  "sequence": "fractals",
  "counts": {
-  "existing": 3,
-  "added": 2,
+  "existing": 4,
+  "added": 3,
   "large": 3
  },
  "pearls": [
-  {
-   "id": "fibonacci_terrain",
-   "name": "Fibonacci Terrain",
-   "size": "large",
-   "source": "existing",
-   "concept": "Golden spiral & phyllotaxis",
-   "footprint": [
-    8.0,
-    5.0
-   ]
-  },
   {
    "id": "julia_set",
    "name": "Julia Set",
@@ -60,6 +49,39 @@
    "footprint": [
     1.0,
     1.0
+   ]
+  },
+  {
+   "id": "cantor_diagonal_workbench",
+   "name": "Cantor Diagonal Workbench",
+   "size": "small",
+   "source": "added",
+   "concept": "Cantor set",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "lyapunov_fractal",
+   "name": "Lyapunov Fractal",
+   "size": "small",
+   "source": "existing",
+   "concept": "Lyapunov & escape-time",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "fibonacci_terrain",
+   "name": "Fibonacci Terrain",
+   "size": "large",
+   "source": "existing",
+   "concept": "Golden spiral & phyllotaxis",
+   "footprint": [
+    8.0,
+    5.0
    ]
   }
  ]

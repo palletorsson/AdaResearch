@@ -2,11 +2,22 @@
  "map": "QFEP_Introduction",
  "sequence": "qfeplaboratory",
  "counts": {
-  "existing": 6,
-  "added": 3,
-  "large": 3
+  "existing": 7,
+  "added": 0,
+  "large": 2
  },
  "pearls": [
+  {
+   "id": "qfep_balance_workbench",
+   "name": "QFEP Balance Workbench",
+   "size": "small",
+   "source": "existing",
+   "concept": "The reactor — the whole formula",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
   {
    "id": "qfep_formula_3d",
    "name": "QFEP Formula 3D",
@@ -27,28 +38,6 @@
    "footprint": [
     8.0,
     8.0
-   ]
-  },
-  {
-   "id": "entropy_bench",
-   "name": "Entropy Bench (bits of surprise)",
-   "size": "small",
-   "source": "added",
-   "concept": "E — entropy as possibility",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "entropy_jar",
-   "name": "Entropy Jar",
-   "size": "small",
-   "source": "added",
-   "concept": "E — entropy as possibility",
-   "footprint": [
-    1.0,
-    1.0
    ]
   },
   {
@@ -82,17 +71,6 @@
    "footprint": [
     1.0,
     1.0
-   ]
-  },
-  {
-   "id": "entropy_morphogenesis",
-   "name": "entropy_morphogenesis",
-   "size": "large",
-   "source": "added",
-   "concept": "E — entropy as possibility",
-   "footprint": [
-    5.0,
-    5.0
    ]
   },
   {

@@ -8,17 +8,6 @@
  },
  "pearls": [
   {
-   "id": "BigPipeSystem",
-   "name": "Big Pipe System",
-   "size": "small",
-   "source": "existing",
-   "concept": "pendulum",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
    "id": "GlassRack",
    "name": "Glass Rack",
    "size": "small",
@@ -30,13 +19,13 @@
    ]
   },
   {
-   "id": "RackAmbientDrone",
-   "name": "Ambient Drone Rack",
+   "id": "lab_table",
+   "name": "Lab Table",
    "size": "small",
    "source": "existing",
-   "concept": "AirMusic",
+   "concept": "pendulum",
    "footprint": [
-    1.0,
+    2.0,
     1.0
    ]
   },
@@ -52,6 +41,28 @@
    ]
   },
   {
+   "id": "RackAmbientDrone",
+   "name": "Ambient Drone Rack",
+   "size": "small",
+   "source": "existing",
+   "concept": "AirMusic",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "BigPipeSystem",
+   "name": "Big Pipe System",
+   "size": "small",
+   "source": "existing",
+   "concept": "pendulum",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
    "id": "air_music_display_case",
    "name": "Air Music Display Case",
    "size": "small",
@@ -60,17 +71,6 @@
    "footprint": [
     3.0,
     3.0
-   ]
-  },
-  {
-   "id": "lab_table",
-   "name": "Lab Table",
-   "size": "small",
-   "source": "existing",
-   "concept": "pendulum",
-   "footprint": [
-    2.0,
-    1.0
    ]
   },
   {

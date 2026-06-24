@@ -68,8 +68,30 @@ def _seq_node(seq):
     return d, node
 
 
+def _map_artifact_ids(map_name):
+    """Artifact lookup-names actually placed in a map's interactables layer, in Z (row) order."""
+    p = os.path.join(ROOT, "commons", "maps", map_name, "map_data.json")
+    if not os.path.exists(p):
+        return []
+    try:
+        m = json.load(open(p, encoding="utf-8"))
+    except Exception:
+        return []
+    out, seen = [], set()
+    for row in m.get("layers", {}).get("interactables", []):
+        for c in (row if isinstance(row, list) else str(row).split(",")):
+            c = str(c).strip()
+            if c and not c.startswith("#"):
+                base = c.split(":")[0].split("#")[0].strip()   # lookup:rot:y / lookup#config -> lookup
+                if base and base not in seen:
+                    seen.add(base)
+                    out.append(base)
+    return out
+
+
 def roster_from_map_groups(seq):
-    """Ordered [(map_name, [artifact names])] — one entry per map, in sequence order."""
+    """Ordered [(map_name, [artifact names])] per map. The roster is what's ACTUALLY placed in the map's
+    interactables (Z-order, the truth), supplemented by any artifact_groups names not on the grid yet."""
     d, node = _seq_node(seq)
     if not node:
         return []
@@ -77,12 +99,18 @@ def roster_from_map_groups(seq):
     out = []
     for g in ag:
         if isinstance(g, dict) and g.get("map"):
+            mp = g["map"]
             names, seen = [], set()
-            for a in g.get("artifacts", []):
-                if a and a not in seen and a not in INFRA:
+            for a in _map_artifact_ids(mp):                    # actually placed, in walk order
+                if a not in seen and a not in INFRA:
                     seen.add(a)
                     names.append(a)
-            out.append((g["map"], names))
+            for a in g.get("artifacts", []):                   # artifact_groups extras (intent, not yet placed)
+                base = str(a).split(":")[0].split("#")[0].strip()
+                if base and base not in seen and base not in INFRA:
+                    seen.add(base)
+                    names.append(base)
+            out.append((mp, names))
     return out
 
 

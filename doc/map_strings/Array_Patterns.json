@@ -2,9 +2,9 @@
  "map": "Array_Patterns",
  "sequence": "array_tutorial",
  "counts": {
-  "existing": 7,
-  "added": 6,
-  "large": 5
+  "existing": 11,
+  "added": 2,
+  "large": 4
  },
  "pearls": [
   {
@@ -30,28 +30,6 @@
    ]
   },
   {
-   "id": "array_carpet",
-   "name": "Array Carpet",
-   "size": "small",
-   "source": "added",
-   "concept": "· palette (unplaced)",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "pattern_tunnel_machine",
-   "name": "Pattern Tunnel Machine",
-   "size": "large",
-   "source": "added",
-   "concept": "Patterns",
-   "footprint": [
-    3.0,
-    10.0
-   ]
-  },
-  {
    "id": "pattern_tile_mirror",
    "name": "Mirror Pattern Tile",
    "size": "small",
@@ -60,17 +38,6 @@
    "footprint": [
     1.0,
     1.0
-   ]
-  },
-  {
-   "id": "pattern_studio_plate",
-   "name": "Pattern Studio Plate",
-   "size": "large",
-   "source": "added",
-   "concept": "· palette (unplaced)",
-   "footprint": [
-    4.0,
-    3.0
    ]
   },
   {
@@ -85,11 +52,55 @@
    ]
   },
   {
+   "id": "pattern_tile_plate",
+   "name": "Pattern Tile Plate",
+   "size": "small",
+   "source": "existing",
+   "concept": "Patterns",
+   "footprint": [
+    2.0,
+    2.0
+   ]
+  },
+  {
+   "id": "pattern_tunnel_machine",
+   "name": "Pattern Tunnel Machine",
+   "size": "large",
+   "source": "existing",
+   "concept": "Patterns",
+   "footprint": [
+    3.0,
+    10.0
+   ]
+  },
+  {
    "id": "wall_pattern_colorizer",
    "name": "Wall Pattern Colorizer",
    "size": "small",
    "source": "added",
    "concept": "· palette (unplaced)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "panel_bridge_loom",
+   "name": "Panel Bridge — Loom Simulator",
+   "size": "small",
+   "source": "existing",
+   "concept": "Patterns",
+   "footprint": [
+    2.0,
+    1.0
+   ]
+  },
+  {
+   "id": "grid_model",
+   "name": "Grid Model",
+   "size": "small",
+   "source": "existing",
+   "concept": "Patterns",
    "footprint": [
     1.0,
     1.0
@@ -137,17 +148,6 @@
    "footprint": [
     1.0,
     1.0
-   ]
-  },
-  {
-   "id": "pattern_tile_plate",
-   "name": "Pattern Tile Plate",
-   "size": "small",
-   "source": "added",
-   "concept": "Patterns",
-   "footprint": [
-    2.0,
-    2.0
    ]
   }
  ]

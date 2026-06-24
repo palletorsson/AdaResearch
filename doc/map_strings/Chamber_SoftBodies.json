@@ -2,11 +2,66 @@
  "map": "Chamber_SoftBodies",
  "sequence": "softbodies",
  "counts": {
-  "existing": 1,
-  "added": 2,
-  "large": 1
+  "existing": 2,
+  "added": 6,
+  "large": 0
  },
  "pearls": [
+  {
+   "id": "proximity_spawner",
+   "name": "Proximity Spawner",
+   "size": "small",
+   "source": "existing",
+   "concept": "",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "tentacle_cube",
+   "name": "Tentacle Cube",
+   "size": "small",
+   "source": "added",
+   "concept": "Tentacle & octopus",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "miura_crawler",
+   "name": "Miura Crawler",
+   "size": "small",
+   "source": "added",
+   "concept": "Folding creatures",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "fold_wall",
+   "name": "Fold Wall / Curtain",
+   "size": "small",
+   "source": "added",
+   "concept": "Folding creatures",
+   "footprint": [
+    3.0,
+    1.0
+   ]
+  },
+  {
+   "id": "spring_mass_bouncer",
+   "name": "Spring Mass Bouncer",
+   "size": "small",
+   "source": "added",
+   "concept": "Mass-spring networks",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
   {
    "id": "flex_cloth_pad",
    "name": "Flex Cloth Pad",
@@ -30,13 +85,13 @@
    ]
   },
   {
-   "id": "verlet_integration",
-   "name": "Verlet Integration",
-   "size": "large",
+   "id": "foldedpaper",
+   "name": "1.2: A foldedpaper",
+   "size": "small",
    "source": "added",
-   "concept": "Verlet & the soft-body sim",
+   "concept": "Origami & the Miura fold",
    "footprint": [
-    9.0,
+    3.0,
     1.0
    ]
   }
