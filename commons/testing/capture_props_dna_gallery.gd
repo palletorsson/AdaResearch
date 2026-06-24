@@ -319,6 +319,80 @@ func _capture_and_record(spec: Dictionary, index: int, aabb: AABB) -> void:
 func _build_sweep() -> Array:
 	var sweep: Array = []
 
+	# ── CURATION STATION KIT (scenes live in commons/artifacts/station/) ──
+	var FRAME_SCENE := {"scene": "res://commons/artifacts/station/station_frame.tscn"}
+	var PLINTH_SCENE := {"scene": "res://commons/artifacts/station/station_plinth.tscn"}
+	var PILLAR_SCENE := {"scene": "res://commons/artifacts/station/station_pillar.tscn"}
+
+	# ── station_frame: critical_parameter = frame_width × frame_height + bar_style ──
+	sweep.append(_p("station_frame", "1_open_threshold", "open threshold",
+		"bare portal — two posts and a top ring, lit corner joints; pass through",
+		{
+			"frame_width": 2.0, "frame_height": 2.2, "frame_depth": 2.0,
+			"bar_style": "open", "lit_joints": true,
+			"body_color": Color(0.81, 0.79, 0.75),
+			"accent_color": Color(0.902, 0.224, 0.275),
+		}, FRAME_SCENE))
+	sweep.append(_p("station_frame", "2_wide_paneled_billboard", "wide paneled billboard",
+		"low broad proscenium — filled cells read as a screen/billboard frame",
+		{
+			"frame_width": 3.2, "frame_height": 1.8, "frame_depth": 2.0,
+			"bar_style": "paneled", "lit_joints": false,
+			"body_color": Color(0.78, 0.77, 0.74),
+			"accent_color": Color(0.20, 0.55, 0.95),
+		}, FRAME_SCENE))
+	sweep.append(_p("station_frame", "3_tall_greebled_gate", "tall greebled gate",
+		"tall narrow service portal — conduit stubs + gussets, no corner glow",
+		{
+			"frame_width": 1.4, "frame_height": 2.8, "frame_depth": 1.4,
+			"bar_style": "greebled", "lit_joints": false,
+			"body_color": Color(0.72, 0.71, 0.68),
+			"accent_color": Color(0.86, 0.34, 0.11),
+		}, FRAME_SCENE))
+
+	# ── station_plinth: critical_parameter = width_cells × depth_cells + top_height ──
+	sweep.append(_p("station_plinth", "1_tall_tray_specimen", "tall tray specimen",
+		"1×1 high tray — a single precious thing at eye height, emerald accent",
+		{
+			"width_cells": 1, "depth_cells": 1, "top_height": 1.15,
+			"top_style": "tray", "edge_light": true,
+			"accent_color": Color(0.20, 0.80, 0.30),
+		}, PLINTH_SCENE))
+	sweep.append(_p("station_plinth", "2_low_flat_world", "low flat world",
+		"3×3 low flat — a big broad thing set on a world, lambda crimson accent",
+		{
+			"width_cells": 3, "depth_cells": 3, "top_height": 0.45,
+			"top_style": "flat", "edge_light": true,
+			"accent_color": Color(0.902, 0.224, 0.275),
+		}, PLINTH_SCENE))
+	sweep.append(_p("station_plinth", "3_long_grate_lab", "long grate lab",
+		"1×3 grate cap — a long thing laid across a serviced plinth, blue accent",
+		{
+			"width_cells": 1, "depth_cells": 3, "top_height": 0.9,
+			"top_style": "grate", "edge_light": false,
+			"accent_color": Color(0.20, 0.55, 0.95),
+		}, PLINTH_SCENE))
+
+	# ── station_pillar: critical_parameter = height + post_width ──
+	sweep.append(_p("station_pillar", "1_tall_slim_lit", "tall slim lit",
+		"2.8m slim shaft — lit accent groove, the powered corner column",
+		{
+			"height": 2.8, "post_width": 0.34, "lit_groove": true,
+			"accent_color": Color(0.902, 0.224, 0.275),
+		}, PILLAR_SCENE))
+	sweep.append(_p("station_pillar", "2_short_heavy_plain", "short heavy plain",
+		"1.8m heavy shaft — groove off, the squat unpowered structural pier",
+		{
+			"height": 1.8, "post_width": 0.7, "lit_groove": false,
+			"accent_color": Color(0.86, 0.34, 0.11),
+		}, PILLAR_SCENE))
+	sweep.append(_p("station_pillar", "3_full_groove_emerald", "full groove emerald",
+		"2.5m default-width shaft — emerald lit groove, the standard bay corner",
+		{
+			"height": 2.5, "post_width": 0.42, "lit_groove": true,
+			"accent_color": Color(0.20, 0.80, 0.30),
+		}, PILLAR_SCENE))
+
 	# ── exit_sign: critical_parameter = sign_color ─────────────────
 	sweep.append(_p("exit_sign", "1_green_exit_right", "green exit right",
 		"the standard — emerald egress, arrow right",
