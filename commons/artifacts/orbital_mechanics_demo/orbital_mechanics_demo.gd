@@ -8,6 +8,16 @@ extends Node3D
 
 class_name OrbitalMechanicsDemo
 
+## @identity
+## name: "The orbit is a fall that keeps missing"
+## tier: medium
+## lineage: A satellite circles a central mass under an inverse-distance gravitational pull,
+##   integrated frame by frame from initial radius and tangent velocity. Tune the velocity and
+##   the perpetual fall closes into an ellipse; Kepler's laws emerge from F = ma alone.
+## truth: "AN ORBIT IS PERPETUAL FALLING THAT NEVER LANDS — EQUILIBRIUM AS UNRESOLVED MOTION"
+## applications: Kepler's laws, gravitational dynamics, dynamic equilibrium, conic-section orbits,
+##   the difference between a stable state and a settled one.
+
 ## Orbital parameters
 @export var central_mass: float = 1.0  # Arbitrary units
 @export var gravitational_constant: float = 0.5

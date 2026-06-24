@@ -6,6 +6,16 @@
 extends Node3D
 class_name TrajectoryArtifact
 
+## @identity
+## name: "Every path a force could have taken, drawn at once"
+## tier: medium
+## lineage: A placeable wrapper around the trajectory simulator: it reads a force-trajectory
+##   config, integrates the paths, and bakes all of them into a single MultiMesh of cylinder
+##   segments colored start to end. The bundle of trails IS the force field made visible.
+## truth: "A FORCE IS NOT A PUSH — IT IS THE WHOLE FAMILY OF PATHS IT WOULD CARVE"
+## applications: trajectory integration, force fields, phase portraits, batched MultiMesh
+##   rendering, seeing a dynamical system as the set of all its possible histories.
+
 const TrajSim = preload("res://commons/trajectory_grammar/trajectory_sim.gd")
 
 @export var config_path: String = ""
@@ -20,7 +30,7 @@ func _ready() -> void:
 
 
 func apply_grid_config(cfg: Dictionary) -> void:
-	if cfg.has("config_path"):  config_path = String(cfg["config_path"])
+	if cfg.has("config_path"):  config_path = str(cfg["config_path"])
 	if cfg.has("tube_radius"):  tube_radius_override = float(cfg["tube_radius"])
 	_clear()
 	_build()

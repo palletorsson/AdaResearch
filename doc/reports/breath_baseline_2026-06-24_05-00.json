@@ -1,0 +1,41 @@
+{
+  "timestamp": "2026-06-24T05:00:00",
+  "phase": "baseline",
+  "pipeline_summary": {
+    "sequences_scored": 22,
+    "complete": [
+      "randomness"
+    ],
+    "mean_head_avg": 6.0909,
+    "note": "all others at stage 6 vr_testing (human-gated)"
+  },
+  "heat_map_top_5": [
+    {
+      "item": "release_gates",
+      "temp": 60,
+      "note": "STALE - gates now 4/4 PASS"
+    },
+    {
+      "item": "mindmap maps",
+      "temp": 60
+    },
+    {
+      "item": "voice_coverage",
+      "temp": 60,
+      "note": "pipeline head saturated, VR-blocked"
+    }
+  ],
+  "garden_health": {
+    "voice_coverage_pct": 53,
+    "embodiment_rate_pct": 33,
+    "phantom_limbs": 846,
+    "voiceless_with_gd_entries": 367
+  },
+  "release_gates": {
+    "A": "PASS",
+    "B": "PASS",
+    "C": "PASS",
+    "D": "PASS",
+    "overall": "PASS"
+  }
+}

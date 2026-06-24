@@ -1,6 +1,16 @@
 extends Node3D
 class_name SpringNetwork
 
+## @identity
+## name: "A cloth that remembers its shape"
+## tier: medium
+## lineage: A lattice of masses tied to their neighbors — horizontal, vertical, diagonal — by
+##   rest-length springs, solved each frame with position-based constraints and Verlet integration.
+##   Fixed corners anchor it; a random kick on startup sets the whole sheet ringing until it settles.
+## truth: "STIFFNESS IS NOT A MATERIAL — IT IS A NETWORK OF AGREEMENTS BETWEEN NEIGHBORS"
+## applications: mass-spring systems, cloth and soft-body simulation, Verlet/PBD integration,
+##   emergent elasticity, how local constraints produce global form.
+
 ## Mass-spring lattice — a grid of masses connected by springs with Verlet integration.
 ## Each mass point is connected to its horizontal, vertical, and diagonal neighbors via
 ## springs with configurable stiffness and damping. Corner masses are fixed anchors.

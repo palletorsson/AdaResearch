@@ -360,6 +360,12 @@
       "topic": "voice_coverage",
       "insight": "Pipeline head saturated at 6.09 (VR-blocked); autonomous breaths should target voice coverage. garden_listener counts stub single-line '# @identity:' as voiceless (needs full 7-field block); find_gd resolves only by .gd stem so shared scenes report 'no .gd file'.",
       "lod": 3
+    },
+    {
+      "timestamp": "2026-06-24T03:04:11.945443+00:00",
+      "topic": "voice_coverage",
+      "insight": "forces is the largest single voice gap (108 voiceless of 266); voice-fill via comment-only @identity is the zero-parse-risk autonomous improvement type. 6th consecutive pipeline-saturated breath confirms pipeline mean-head (6.0909) is permanently VR-blocked for autonomous runs - garden voice/content metrics are the only movable needles.",
+      "lod": 3
     }
   ]
 }

@@ -2,6 +2,17 @@ extends Node3D
 
 class_name TurretTargeting
 
+## @identity
+## name: "Vector algebra with a kill switch"
+## tier: large
+## lineage: A laser turret tracks falling balls by doing the four vector operations out loud:
+##   subtraction finds the direction to a target, magnitude measures whether it is in range,
+##   normalization turns that into pure aim, and the dot product decides when the lock is true.
+##   VR push buttons let you arm and fire it.
+## truth: "TO AIM IS TO SUBTRACT WHERE YOU ARE FROM WHERE IT IS, THEN KEEP ONLY THE DIRECTION"
+## applications: vector subtraction and normalization, the dot product as alignment test,
+##   targeting and tracking, the geometry hidden inside every game's aim-assist.
+
 # Turret Targeting - Laser turret tracks and destroys falling balls
 # Demonstrates: Vector subtraction (direction), magnitude (range), normalization (aim), dot product (lock)
 # VR-enabled with push button controls

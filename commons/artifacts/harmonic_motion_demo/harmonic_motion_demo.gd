@@ -6,6 +6,16 @@ extends Node3D
 
 class_name HarmonicMotionDemo
 
+## @identity
+## name: "A sine wave you can grab the parameters of"
+## tier: medium
+## lineage: Simple harmonic motion made tangible — x = A·sin(ωt + φ) with live sliders for
+##   amplitude, frequency, phase, and damping. The oscillator traces its own sine curve in real
+##   time, so the equation and its picture are never apart.
+## truth: "EVERY OSCILLATION IS THE SAME EQUATION WEARING DIFFERENT NUMBERS"
+## applications: simple harmonic motion, waves, springs and pendulums, Fourier's claim that any
+##   signal is a sum of these, damping as energy leaving the system.
+
 ## Slider paths
 @export var amplitude_slider_path: NodePath = "ControlPanel/AmplitudeSlider"
 @export var frequency_slider_path: NodePath = "ControlPanel/FrequencySlider"
