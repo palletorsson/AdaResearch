@@ -238,11 +238,15 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--map", required=True)
     ap.add_argument("--no-path", action="store_true", help="keep the authored floor instead of the 3-wide walk")
+    ap.add_argument("--stdout", action="store_true", help="print folded map JSON to stdout, no file write")
     args = ap.parse_args()
     res = fold(args.map, thread_path=not args.no_path)
     if not res:
         return
     m, placed, unplaced = res
+    if args.stdout:
+        print(json.dumps({"folded": m, "placed": placed, "unplaced": unplaced}))
+        return
     name = args.map + "_Folded"
     out = os.path.join(ROOT, "commons", "maps", name)
     os.makedirs(out, exist_ok=True)
