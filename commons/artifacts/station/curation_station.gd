@@ -266,18 +266,29 @@ func _build_kit(items: Array) -> void:
 				"panel_color": _cs(panel_color), "accent_color": _cs(accent_color),
 			})
 
-	# Barrier(s) — a low threshold across each open edge (open rail = never blocks the set).
+	# Barrier(s) — a low front rail, SPLIT to leave a gap where each bridge crosses out to a platform.
 	if with_barrier:
 		for b in L["barriers"]:
-			var bar: Node3D = StationBarrierScene.instantiate()
-			add_child(bar)
-			bar.position = Vector3(float(b["x"]), 0, float(b["z"]))
-			bar.rotation.y = float(b["yaw"])
-			bar.apply_grid_config({
-				"length_cells": int(b["length_cells"]), "height": 1.0, "style": barrier_style,
-				"hazard_base": true, "panel_color": _cs(body_color), "post_color": _cs(panel_color),
-				"accent_color": _cs(accent_color),
-			})
+			if absf(float(b["yaw"])) > 0.01:
+				_emit_barrier(float(b["x"]), float(b["z"]), float(b["yaw"]), int(b["length_cells"]))
+				continue
+			var bz: float = float(b["z"])
+			var left: float = float(b["x"]) - float(int(b["length_cells"])) * 0.5 * CELL
+			var right: float = float(b["x"]) + float(int(b["length_cells"])) * 0.5 * CELL
+			var cuts: Array = []
+			for slot in slots:
+				if bool(slot["item"].get("large", false)):
+					cuts.append(float(slot["x"]))   # bridge crosses the rail here — leave a gap
+			cuts.sort()
+			var gap_half: float = 1.5 * CELL
+			var cursor: float = left
+			for gx in cuts:
+				var gs: float = float(gx) - gap_half
+				if gs - cursor > 0.4:
+					_emit_barrier((cursor + gs) * 0.5, bz, 0.0, int(round((gs - cursor) / CELL)))
+				cursor = maxf(cursor, float(gx) + gap_half)
+			if right - cursor > 0.4:
+				_emit_barrier((cursor + right) * 0.5, bz, 0.0, int(round((right - cursor) / CELL)))
 
 	# START + EXIT pads at the two ends of the bay front — enter one end, walk the hall, exit the other.
 	if with_endpoints:
@@ -350,6 +361,21 @@ func _build_platform_bridge(slot: Dictionary, item: Dictionary, i: int) -> void:
 		var plaque := _make_label_plaque(disp, "%02d" % (i + 1))
 		plaque.position = Vector3(sx, stage_step_height + 0.3, pz + float(td) * 0.5 * CELL + 0.2)
 		add_child(plaque)
+
+
+# One run of front rail (used to build the barrier in segments, leaving bridge gaps).
+func _emit_barrier(x: float, z: float, yaw: float, length_cells: int) -> void:
+	if length_cells < 1:
+		return
+	var bar: Node3D = StationBarrierScene.instantiate()
+	add_child(bar)
+	bar.position = Vector3(x, 0, z)
+	bar.rotation.y = yaw
+	bar.apply_grid_config({
+		"length_cells": length_cells, "height": 1.0, "style": barrier_style,
+		"hazard_base": true, "panel_color": _cs(body_color), "post_color": _cs(panel_color),
+		"accent_color": _cs(accent_color),
+	})
 
 
 # A small labelled pad — START (entry) or EXIT — at an end of the bay, marking where you walk in/out.
