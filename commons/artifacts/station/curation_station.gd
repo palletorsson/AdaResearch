@@ -9,6 +9,11 @@ const StationPillarScene := preload("res://commons/artifacts/station/station_pil
 const StationCabinetScene := preload("res://commons/artifacts/station/station_cabinet.tscn")
 const StationBarrierScene := preload("res://commons/artifacts/station/station_barrier.tscn")
 const StationCratesScene := preload("res://commons/artifacts/station/station_crates.tscn")
+
+# Wall hangar extension: artifacts bigger than LARGE_CELLS get an n-size forward platform + a bridge
+# back to the bay, so a single wall construct controls small AND large placement.
+const LARGE_CELLS := 3
+const MAX_PLATFORM_CELLS := 8
 const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
 
 # @identity
@@ -150,11 +155,16 @@ func _assemble() -> void:
 		if item["inst"] != null:
 			var ab := _combined_aabb(item["inst"])
 			if ab.size.length() > 0.0:
-				wc = clampi(int(ceil(ab.size.x - 0.1)), 1, 4)
-				dc = clampi(int(ceil(ab.size.z - 0.1)), 1, 4)
+				wc = clampi(int(ceil(ab.size.x - 0.1)), 1, MAX_PLATFORM_CELLS)
+				dc = clampi(int(ceil(ab.size.z - 0.1)), 1, MAX_PLATFORM_CELLS)
 				base_y = ab.position.y
-		item["w"] = wc
-		item["d"] = dc
+		var is_large := maxi(wc, dc) > LARGE_CELLS
+		item["large"] = is_large
+		item["true_w"] = wc
+		item["true_d"] = dc
+		# Large items take only a narrow bridge-anchor slot in the row; their true footprint goes to the platform.
+		item["w"] = 2 if is_large else wc
+		item["d"] = 2 if is_large else dc
 		item["base_y"] = base_y
 	# 3. Build the kit sized to the measured set.
 	_build_kit(items)
@@ -191,11 +201,14 @@ func _build_kit(items: Array) -> void:
 	# measured base_y grounding stays valid.
 	for i in range(slots.size()):
 		var slot: Dictionary = slots[i]
+		var item: Dictionary = slot["item"]
+		if bool(item.get("large", false)):
+			_build_platform_bridge(slot, item, i)
+			continue
 		var wc: int = int(slot["w"])
 		var dc: int = int(slot["d"])
 		var yaw: float = float(slot["yaw"])
 		var h: float = _plinth_height_for(maxi(wc, dc))
-		var item: Dictionary = slot["item"]
 		var p: Node3D = StationPlinthScene.instantiate()
 		add_child(p)
 		p.position = Vector3(float(slot["x"]), stage_step_height, float(slot["z"]))
@@ -280,6 +293,47 @@ func _build_kit(items: Array) -> void:
 
 
 # Dispatch to a layout builder. Each returns {layout, w_cells, d_cells, hazard, slots, segments, pillars, barriers}.
+# Large artifact: an n-size platform out in front of the bay, reached by a bridge from the row — so the
+# wall hangar controls the placement of big artifacts too, not just small ones on plinths.
+func _build_platform_bridge(slot: Dictionary, item: Dictionary, i: int) -> void:
+	var sx: float = float(slot["x"])
+	var sz: float = float(slot["z"])
+	var tw: int = int(item.get("true_w", 4))
+	var td: int = int(item.get("true_d", 4))
+	var reach_cells: int = td + 3
+	var pz: float = sz + float(reach_cells) * CELL
+	# the platform (n-size, sized to the artifact)
+	var platform: Node3D = StationStageScene.instantiate()
+	add_child(platform)
+	platform.position = Vector3(sx, 0, pz)
+	platform.apply_grid_config({
+		"width_cells": tw + 2, "depth_cells": td + 2, "step_height": stage_step_height,
+		"hazard_edge": true, "edge_light": true, "stencil_text": "", "body_color": _cs(body_color),
+		"panel_color": _cs(panel_color), "accent_color": _cs(accent_color),
+	})
+	# the bridge — a narrow walkway from the bay to the platform
+	var bridge: Node3D = StationStageScene.instantiate()
+	add_child(bridge)
+	bridge.position = Vector3(sx, 0, (sz + pz) * 0.5)
+	bridge.apply_grid_config({
+		"width_cells": 2, "depth_cells": reach_cells, "step_height": stage_step_height,
+		"hazard_edge": false, "edge_light": true, "stencil_text": "", "body_color": _cs(body_color),
+		"panel_color": _cs(panel_color), "accent_color": _cs(accent_color),
+	})
+	# the artifact grounded on the platform
+	var inst = item["inst"]
+	if inst != null and inst is Node3D:
+		(inst as Node3D).visible = true
+		(inst as Node3D).position = Vector3(sx, stage_step_height - float(item["base_y"]), pz)
+	# caption plaque at the platform front
+	if label_plinths:
+		var nm := str(item["name"])
+		var disp: String = _clean_name(str(_name_disp.get(nm, nm))) if nm != "" else "ITEM-%d" % (i + 1)
+		var plaque := _make_label_plaque(disp, "%02d" % (i + 1))
+		plaque.position = Vector3(sx, stage_step_height + 0.3, pz + float(td) * 0.5 * CELL + 0.2)
+		add_child(plaque)
+
+
 func _compute_layout(items: Array) -> Dictionary:
 	match layout:
 		"corner":
