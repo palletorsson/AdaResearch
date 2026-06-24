@@ -18,6 +18,7 @@ Always emits SIBLING maps (Corridor_*) — never overwrites an authored map.
 Run: python tools/build_corridor.py --seq primitives --per-map --mode blend
 """
 import argparse
+import glob
 import json
 import os
 import sys
@@ -28,6 +29,23 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "tools"))
 import compact_map_json                      # noqa: E402
 from build_curation_bays import load_embeddings, load_card_spans, INFRA  # noqa: E402
+
+
+def load_sizes():
+    """name -> (w, d) footprint in cells. Prefers the real measured AABB (registry
+    measurements.grid_cells, ~67% coverage) over the atlas card span (~22% measured)."""
+    sizes = dict(load_card_spans())   # (w, d) from atlas cards — fallback
+    for f in glob.glob(os.path.join(ROOT, "commons", "artifacts", "registry", "*.json")):
+        try:
+            d = json.load(open(f, encoding="utf-8"))
+        except Exception:
+            continue
+        for k, v in (d.get("artifacts", {}) or {}).items():
+            if isinstance(v, dict):
+                gc = (v.get("measurements", {}) or {}).get("grid_cells")
+                if isinstance(gc, list) and len(gc) >= 2:
+                    sizes[v.get("lookup_name", k)] = (float(gc[0]), float(gc[1]))   # measured wins
+    return sizes
 
 LARGE_M = 3.0
 COLS = 24
@@ -135,8 +153,8 @@ def corridor_map(name, title, desc, ordered, next_map, spans):
             token = ("curation_station#artifacts:" + ",".join(items)
                      + "#layout:row#with_wall:false#with_pillars:false#with_barrier:false")
         else:
-            sp = spans.get(items[0]) or (1.0, 1.0, 1.0)
-            depth = max(int(sp[1]) + 3, 4)
+            sp = spans.get(items[0]) or (1.0, 1.0)
+            depth = min(max(int(sp[1]) + 3, 5), 12)   # footprint-sized Z band, clamped for swarms/effects
             token = items[0]
         placements.append((z + depth // 2, token))
         z += depth + 1
@@ -223,7 +241,7 @@ def main():
     ap.add_argument("--per-concept", type=int, default=1)
     args = ap.parse_args()
     idx, V = load_embeddings()
-    spans = load_card_spans()
+    spans = load_sizes()
     if args.per_map:
         run_per_map(args.seq, args.mode, idx, V, spans)
     else:
