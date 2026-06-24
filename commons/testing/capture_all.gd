@@ -35,6 +35,7 @@ var _sequence_filter: String = ""
 var _skip_unchanged: bool = true
 var _artifacts_only: bool = false
 var _maps_only: bool = false
+var _bays_only: bool = false
 var _wait_seconds: float = 2.0
 var _settle_seconds: float = 0.5
 
@@ -91,6 +92,9 @@ func _parse_args() -> void:
 			continue
 		if arg == "--maps-only":
 			_maps_only = true
+			continue
+		if arg == "--bays-only":
+			_bays_only = true
 			continue
 		if not arg.begins_with("--") or arg.find("=") <= 2:
 			continue
@@ -182,6 +186,21 @@ func _enumerate_targets() -> Dictionary:
 	var maps: Array = []
 	var artifact_lookup_set: Dictionary = {}  # lookup_name -> scene_path
 	var artifact_targets: Array = []
+
+	# Bays mode: capture the standalone Curation_Bay_* gallery maps (they're not in any sequence).
+	# Skips any whose front.png already exists in the outdir, so a crash-recovery loop can resume
+	# (some bays contain creature/physics artifacts that can segfault Godot — one crash must not lose
+	# the whole run; the wrapper placeholders the crasher and re-invokes).
+	if _bays_only:
+		var bdir := DirAccess.open("res://commons/maps")
+		if bdir:
+			for sub in bdir.get_directories():
+				if sub.begins_with("Curation_Bay_") and FileAccess.file_exists("res://commons/maps/%s/map_data.json" % sub):
+					if FileAccess.file_exists(_map_shot_path(sub, "front")):
+						continue
+					maps.append({ "map_name": sub, "sequence": "bays" })
+		maps.sort_custom(func(a, b): return str(a["map_name"]) < str(b["map_name"]))
+		return { "artifacts": [], "maps": maps }
 
 	# Read sequence files to discover maps and their artifacts
 	var sequence_names: Array = _get_sequence_names()
