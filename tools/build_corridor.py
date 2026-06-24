@@ -273,25 +273,102 @@ def run_essence(seq, mode, per_concept, idx, V, spans):
     print("wrote %s: %d arts -> %d clusters + %d large (%d-deep, %s)" % (name, len(roster), nc, nl, rows, mode))
 
 
-# UNFOLD: read the edited string of pearls (doc/map_strings/<Map>.json, curated in the /map-strings
-# editor) and lay it out — the included pearls, in their edited order, become the corridor.
+# UNFOLD (layered): read the edited string of pearls (doc/map_strings/<Map>.json) and lay it out
+# honoring the flags — `role` decides cluster(wall) vs landmark(grid); `register`=critical puts the
+# artifact on a parallel LEFT track (the poetics/critique layer made spatial). Formal teaching runs
+# down the centre (clusters) + right (landmarks); the player walks the centre between the two voices.
+def corridor_layered(name, title, desc, pearls, next_map, spans):
+    cols, center, left, right = 30, 15, 8, 22
+
+    def role_of(p):
+        r = p.get("role")
+        if r in ("wall", "grid"):
+            return r
+        sp = spans.get(p["id"])
+        return "grid" if (sp is not None and max(sp[0], sp[1]) > LARGE_M) else "wall"
+
+    # bands honour role; consecutive wall pearls of the SAME register cluster together (formal clusters
+    # and critical clusters never mix).
+    bands, buf, buf_reg = [], [], None
+    for p in pearls:
+        reg = "critical" if p.get("register") == "critical" else "formal"
+        if role_of(p) == "grid":
+            if buf:
+                bands.append(("cluster", buf_reg, buf)); buf = []
+            bands.append(("large", reg, [p["id"]]))
+        else:
+            if buf and buf_reg != reg:
+                bands.append(("cluster", buf_reg, buf)); buf = []
+            buf.append(p["id"]); buf_reg = reg
+            if len(buf) == 5:
+                bands.append(("cluster", buf_reg, buf)); buf = []
+    if buf:
+        bands.append(("cluster", buf_reg, buf))
+
+    z, placements = 2, []
+    for kind, reg, items in bands:
+        crit = reg == "critical"
+        if kind == "cluster":
+            depth = 7
+            x = left if crit else center
+            token = ("curation_station#artifacts:" + ",".join(items)
+                     + "#layout:row#with_wall:false#with_pillars:false#with_barrier:false")
+        else:
+            sp = spans.get(items[0]) or (1.0, 1.0)
+            depth = min(max(int(sp[1]) + 3, 5), 12)
+            x = left if crit else right
+            token = items[0]
+        placements.append((z + depth // 2, x, token))
+        z += depth + 1
+    rows_total = max(z + 2, 8)
+
+    struct = [["1"] * cols for _ in range(rows_total)]
+    for x in range(cols):
+        struct[0][x] = "2"; struct[rows_total - 1][x] = "2"
+    for zz in range(rows_total):
+        struct[zz][0] = "2"; struct[zz][cols - 1] = "2"
+    util = [["" for _ in range(cols)] for _ in range(rows_total)]
+    inter = [["" for _ in range(cols)] for _ in range(rows_total)]
+    util[1][center] = "s"
+    tele_z = rows_total - 2
+    struct[tele_z][center] = "0"
+    util[tele_z][center] = "t:" + next_map
+    for za, x, token in placements:
+        inter[za][x] = token
+
+    n_cl = sum(1 for k, _, _ in bands if k == "cluster")
+    n_lg = sum(1 for k, _, _ in bands if k == "large")
+    n_crit = sum(1 for _, r, _ in bands if r == "critical")
+    return {
+        "map_info": {"name": name, "lookup_name": name, "title": title, "description": desc,
+                     "dimensions": {"width": cols, "depth": rows_total, "max_height": 2}},
+        "subtitles": {}, "lighting": {},
+        "settings": {"cube_size": 1, "gutter": 0, "show_grid": True, "enable_physics": True,
+                     "auto_reveal_on_entry": True, "initial_tile_visibility": "visible", "disable_biome": True,
+                     "background": {"type": "sky", "color": [0.10, 0.11, 0.16]}},
+        "layers": {"structure": struct, "utilities": util, "interactables": inter},
+    }, (n_cl, n_lg, n_crit, rows_total)
+
+
 def run_from_string(map_name, spans):
     p = os.path.join(ROOT, "doc", "map_strings", map_name + ".json")
     if not os.path.exists(p):
         print("no string for", map_name, "(run build_map_strings.py first)")
         return
     d = json.load(open(p, encoding="utf-8"))
-    ordered = [pl["id"] for pl in d.get("pearls", []) if pl.get("include", True)]
-    if not ordered:
+    pearls = [pl for pl in d.get("pearls", []) if pl.get("include", True)]
+    if not pearls:
         print("no kept pearls in", map_name)
         return
     name = "Corridor_" + map_name
-    m, (nc, nl, rows) = corridor_map(name, "%s — unfolded from its table of contents" % map_name,
-                                     "placeholder", ordered, name, spans)
-    m["map_info"]["description"] = ("Unfolded from doc/map_strings/%s.json (the edited string): "
-                                    "%d small-clusters + %d large-on-grid." % (map_name, nc, nl))
+    m, (nc, nl, ncrit, rows) = corridor_layered(
+        name, "%s — unfolded (role + critical layer)" % map_name, "placeholder", pearls, name, spans)
+    m["map_info"]["description"] = ("Unfolded from doc/map_strings/%s.json honoring role + register: "
+                                    "%d clusters + %d landmarks; %d critical bands on the left track."
+                                    % (map_name, nc, nl, ncrit))
     _write(name, m)
-    print("unfolded %s: %d kept pearls -> %d clusters + %d large (%d-deep)" % (name, len(ordered), nc, nl, rows))
+    print("unfolded %s: %d pearls -> %d clusters + %d landmarks, %d critical bands (%d-deep, layered)"
+          % (name, len(pearls), nc, nl, ncrit, rows))
 
 
 def main():
