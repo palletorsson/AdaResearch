@@ -12,6 +12,10 @@
    "name": "Partial Derivative Terrain",
    "size": "small",
    "source": "existing",
+   "role": "wall",
+   "register": "critical",
+   "edge": "M",
+   "edge_name": "Authenticity collapse",
    "concept": "Slope Surface",
    "footprint": [
     1.0,

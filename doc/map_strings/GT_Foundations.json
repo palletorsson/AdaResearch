@@ -12,6 +12,10 @@
    "name": "graphspace",
    "size": "small",
    "source": "existing",
+   "role": "wall",
+   "register": "critical",
+   "edge": "H",
+   "edge_name": "Apparatus-as-phenomenon",
    "concept": "Graphspace",
    "footprint": [
     1.0,
@@ -23,6 +27,10 @@
    "name": "Living Paper — BFS Flood Fill",
    "size": "small",
    "source": "added",
+   "role": "wall",
+   "register": "formal",
+   "edge": "F",
+   "edge_name": "Folding",
    "concept": "· palette (unplaced)",
    "footprint": [
     1.0,
@@ -34,6 +42,10 @@
    "name": "KonigsbergBridge",
    "size": "large",
    "source": "existing",
+   "role": "grid",
+   "register": "formal",
+   "edge": "C",
+   "edge_name": "Local-vs-global",
    "concept": "Graphspace",
    "footprint": [
     50.0,

@@ -12,6 +12,10 @@
    "name": "Pheromone Terrain",
    "size": "large",
    "source": "existing",
+   "role": "grid",
+   "register": "formal",
+   "edge": "C",
+   "edge_name": "Local-vs-global",
    "concept": "Noise terrain / landscapes",
    "footprint": [
     20.0,
@@ -23,6 +27,10 @@
    "name": "Grid Substrate Runner",
    "size": "small",
    "source": "added",
+   "role": "wall",
+   "register": "formal",
+   "edge": "F",
+   "edge_name": "Folding",
    "concept": "10 PRINT / generative grid",
    "footprint": [
     1.0,
@@ -34,6 +42,10 @@
    "name": "voxel_noise_demo",
    "size": "large",
    "source": "added",
+   "role": "grid",
+   "register": "critical",
+   "edge": "M",
+   "edge_name": "Authenticity collapse",
    "concept": "Noise fields & textures",
    "footprint": [
     32.0,
@@ -45,6 +57,10 @@
    "name": "Perlin Terrain Sculptor",
    "size": "small",
    "source": "added",
+   "role": "wall",
+   "register": "critical",
+   "edge": "L",
+   "edge_name": "Failure as method",
    "concept": "Perlin noise",
    "footprint": [
     2.0,

@@ -12,6 +12,10 @@
    "name": "LSTMs_VR",
    "size": "large",
    "source": "existing",
+   "role": "grid",
+   "register": "critical",
+   "edge": "J",
+   "edge_name": "Training-fossil",
    "concept": "LSTMs",
    "footprint": [
     11.0,
@@ -23,6 +27,10 @@
    "name": "Transformers_VR",
    "size": "large",
    "source": "existing",
+   "role": "grid",
+   "register": "critical",
+   "edge": "J",
+   "edge_name": "Training-fossil",
    "concept": "Neural Networks",
    "footprint": [
     15.0,

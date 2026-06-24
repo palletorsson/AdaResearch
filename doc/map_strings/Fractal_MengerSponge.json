@@ -12,6 +12,10 @@
    "name": "diffusion_limited_aggregation",
    "size": "large",
    "source": "existing",
+   "role": "grid",
+   "register": "formal",
+   "edge": "A",
+   "edge_name": "Formal impossibility",
    "concept": "Diffusion-limited aggregation",
    "footprint": [
     17.0,
@@ -23,6 +27,10 @@
    "name": "SierpinskiPyramid",
    "size": "large",
    "source": "added",
+   "role": "grid",
+   "register": "critical",
+   "edge": "I",
+   "edge_name": "Entropy debt",
    "concept": "Sierpinski",
    "footprint": [
     10.0,
@@ -34,6 +42,10 @@
    "name": "koch_curve_!",
    "size": "large",
    "source": "added",
+   "role": "grid",
+   "register": "formal",
+   "edge": "C",
+   "edge_name": "Local-vs-global",
    "concept": "Koch curve & snowflake",
    "footprint": [
     41.0,
@@ -45,6 +57,10 @@
    "name": "menger_sponge",
    "size": "large",
    "source": "existing",
+   "role": "grid",
+   "register": "critical",
+   "edge": "I",
+   "edge_name": "Entropy debt",
    "concept": "Menger sponge",
    "footprint": [
     9.0,

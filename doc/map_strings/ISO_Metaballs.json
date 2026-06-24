@@ -12,6 +12,10 @@
    "name": "metaball_world",
    "size": "small",
    "source": "existing",
+   "role": "wall",
+   "register": "critical",
+   "edge": "I",
+   "edge_name": "Entropy debt",
    "concept": "Each metaball is a point radiating inf",
    "footprint": [
     3.0,
@@ -23,6 +27,10 @@
    "name": "Metaballs",
    "size": "large",
    "source": "existing",
+   "role": "grid",
+   "register": "formal",
+   "edge": "C",
+   "edge_name": "Local-vs-global",
    "concept": "Each metaball is a point radiating inf",
    "footprint": [
     12.0,
@@ -34,6 +42,10 @@
    "name": "raymarched_metaballs",
    "size": "large",
    "source": "existing",
+   "role": "grid",
+   "register": "critical",
+   "edge": "M",
+   "edge_name": "Authenticity collapse",
    "concept": "Each metaball is a point radiating inf",
    "footprint": [
     12.0,
@@ -45,6 +57,10 @@
    "name": "nakama_metaballs",
    "size": "small",
    "source": "existing",
+   "role": "wall",
+   "register": "critical",
+   "edge": "K",
+   "edge_name": "Cosmotechnics",
    "concept": "Each metaball is a point radiating inf",
    "footprint": [
     1.0,

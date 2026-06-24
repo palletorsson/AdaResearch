@@ -12,6 +12,10 @@
    "name": "mc_flat_landscape",
    "size": "small",
    "source": "existing",
+   "role": "wall",
+   "register": "formal",
+   "edge": "C",
+   "edge_name": "Local-vs-global",
    "concept": "Two terrains. Same algorithm, differen",
    "footprint": [
     1.0,
@@ -23,6 +27,10 @@
    "name": "mc_overhang_landscape",
    "size": "small",
    "source": "existing",
+   "role": "wall",
+   "register": "formal",
+   "edge": "C",
+   "edge_name": "Local-vs-global",
    "concept": "Two terrains. Same algorithm, differen",
    "footprint": [
     1.0,
@@ -34,6 +42,10 @@
    "name": "mc_terrain_demo",
    "size": "small",
    "source": "existing",
+   "role": "wall",
+   "register": "critical",
+   "edge": "M",
+   "edge_name": "Authenticity collapse",
    "concept": "Two terrains. Same algorithm, differen",
    "footprint": [
     1.0,

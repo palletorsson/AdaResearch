@@ -12,6 +12,10 @@
    "name": "fifteen_cases_demo",
    "size": "large",
    "source": "existing",
+   "role": "grid",
+   "register": "critical",
+   "edge": "M",
+   "edge_name": "Authenticity collapse",
    "concept": "Two hundred and fifty",
    "footprint": [
     9.0,
@@ -23,6 +27,10 @@
    "name": "mc_cave",
    "size": "small",
    "source": "existing",
+   "role": "wall",
+   "register": "critical",
+   "edge": "M",
+   "edge_name": "Authenticity collapse",
    "concept": "Two hundred and fifty",
    "footprint": [
     1.0,

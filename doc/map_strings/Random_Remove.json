@@ -12,6 +12,10 @@
    "name": "Random Destructor",
    "size": "small",
    "source": "existing",
+   "role": "wall",
+   "register": "formal",
+   "edge": "B",
+   "edge_name": "Tractability cliff",
    "concept": "Random transformations",
    "footprint": [
     1.0,
@@ -23,6 +27,10 @@
    "name": "Hazards Demo",
    "size": "large",
    "source": "existing",
+   "role": "grid",
+   "register": "formal",
+   "edge": "E",
+   "edge_name": "Embodiment",
    "concept": "· palette (unplaced)",
    "footprint": [
     18.0,

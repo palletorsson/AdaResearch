@@ -12,6 +12,10 @@
    "name": "pathfinding3d",
    "size": "large",
    "source": "existing",
+   "role": "grid",
+   "register": "formal",
+   "edge": "F",
+   "edge_name": "Folding",
    "concept": "Path Finding 3d",
    "footprint": [
     10.0,
@@ -23,6 +27,10 @@
    "name": "Living Paper — DFS Maze",
    "size": "small",
    "source": "added",
+   "role": "wall",
+   "register": "formal",
+   "edge": "F",
+   "edge_name": "Folding",
    "concept": "· palette (unplaced)",
    "footprint": [
     1.0,
@@ -34,6 +42,10 @@
    "name": "Grid3D — DFS",
    "size": "small",
    "source": "added",
+   "role": "wall",
+   "register": "formal",
+   "edge": "F",
+   "edge_name": "Folding",
    "concept": "· palette (unplaced)",
    "footprint": [
     1.0,

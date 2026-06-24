@@ -12,6 +12,10 @@
    "name": "Derivative Pair",
    "size": "small",
    "source": "existing",
+   "role": "wall",
+   "register": "critical",
+   "edge": "M",
+   "edge_name": "Authenticity collapse",
    "concept": "Intro",
    "footprint": [
     1.0,
@@ -23,6 +27,10 @@
    "name": "Slope Tangent Demo",
    "size": "small",
    "source": "existing",
+   "role": "wall",
+   "register": "critical",
+   "edge": "M",
+   "edge_name": "Authenticity collapse",
    "concept": "Intro",
    "footprint": [
     1.0,
@@ -34,6 +42,10 @@
    "name": "Riemann Sum Workbench",
    "size": "small",
    "source": "added",
+   "role": "wall",
+   "register": "critical",
+   "edge": "K",
+   "edge_name": "Cosmotechnics",
    "concept": "Bench",
    "footprint": [
     1.0,
@@ -45,6 +57,10 @@
    "name": "Tangent Slope Workbench",
    "size": "small",
    "source": "added",
+   "role": "wall",
+   "register": "critical",
+   "edge": "K",
+   "edge_name": "Cosmotechnics",
    "concept": "Bench",
    "footprint": [
     1.0,

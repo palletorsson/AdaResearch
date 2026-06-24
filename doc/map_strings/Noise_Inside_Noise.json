@@ -12,6 +12,10 @@
    "name": "noisesphere",
    "size": "large",
    "source": "existing",
+   "role": "grid",
+   "register": "formal",
+   "edge": "E",
+   "edge_name": "Embodiment",
    "concept": "Noise controlling noise. The output of",
    "footprint": [
     32.0,
@@ -23,6 +27,10 @@
    "name": "noisetext",
    "size": "small",
    "source": "added",
+   "role": "wall",
+   "register": "critical",
+   "edge": "M",
+   "edge_name": "Authenticity collapse",
    "concept": "· palette (unplaced)",
    "footprint": [
     2.0,

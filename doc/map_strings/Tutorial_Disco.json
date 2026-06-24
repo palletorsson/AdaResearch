@@ -12,6 +12,10 @@
    "name": "Step Sequencer",
    "size": "small",
    "source": "existing",
+   "role": "wall",
+   "register": "critical",
+   "edge": "M",
+   "edge_name": "Authenticity collapse",
    "concept": "· palette (unplaced)",
    "footprint": [
     1.0,
@@ -23,6 +27,10 @@
    "name": "Standalone Disco Floor",
    "size": "large",
    "source": "existing",
+   "role": "grid",
+   "register": "critical",
+   "edge": "I",
+   "edge_name": "Entropy debt",
    "concept": "",
    "footprint": [
     6.0,
@@ -34,6 +42,10 @@
    "name": "Circular Buffer",
    "size": "small",
    "source": "added",
+   "role": "wall",
+   "register": "critical",
+   "edge": "M",
+   "edge_name": "Authenticity collapse",
    "concept": "· palette (unplaced)",
    "footprint": [
     1.0,

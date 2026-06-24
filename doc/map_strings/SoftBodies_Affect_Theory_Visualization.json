@@ -12,6 +12,10 @@
    "name": "Radiolaria",
    "size": "large",
    "source": "existing",
+   "role": "grid",
+   "register": "critical",
+   "edge": "L",
+   "edge_name": "Failure as method",
    "concept": "Soft morphology",
    "footprint": [
     13.0,
@@ -23,6 +27,10 @@
    "name": "Queer Morphology Specimen",
    "size": "small",
    "source": "added",
+   "role": "wall",
+   "register": "critical",
+   "edge": "L",
+   "edge_name": "Failure as method",
    "concept": "Soft morphology",
    "footprint": [
     1.0,
@@ -34,6 +42,10 @@
    "name": "Morpho Body",
    "size": "small",
    "source": "added",
+   "role": "wall",
+   "register": "critical",
+   "edge": "G",
+   "edge_name": "Opacity refusal",
    "concept": "Soft morphology",
    "footprint": [
     1.0,

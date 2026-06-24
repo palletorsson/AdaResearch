@@ -12,6 +12,10 @@
    "name": "mc_portal_landscape",
    "size": "small",
    "source": "existing",
+   "role": "wall",
+   "register": "formal",
+   "edge": "C",
+   "edge_name": "Local-vs-global",
    "concept": "Two views of the same algorithm. Outsi",
    "footprint": [
     1.0,
@@ -23,6 +27,10 @@
    "name": "mc_inside_cave",
    "size": "small",
    "source": "existing",
+   "role": "wall",
+   "register": "critical",
+   "edge": "M",
+   "edge_name": "Authenticity collapse",
    "concept": "Two views of the same algorithm. Outsi",
    "footprint": [
     1.0,
@@ -34,6 +42,10 @@
    "name": "queer_marching_cave",
    "size": "large",
    "source": "existing",
+   "role": "grid",
+   "register": "critical",
+   "edge": "M",
+   "edge_name": "Authenticity collapse",
    "concept": "Two views of the same algorithm. Outsi",
    "footprint": [
     20.0,

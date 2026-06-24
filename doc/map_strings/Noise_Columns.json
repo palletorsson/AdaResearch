@@ -12,6 +12,10 @@
    "name": "Melting Bernini Columns",
    "size": "large",
    "source": "existing",
+   "role": "grid",
+   "register": "critical",
+   "edge": "L",
+   "edge_name": "Failure as method",
    "concept": "Noise extruded vertically. Sample the ",
    "footprint": [
     13.0,
@@ -23,6 +27,10 @@
    "name": "Profile Substrate",
    "size": "small",
    "source": "added",
+   "role": "wall",
+   "register": "critical",
+   "edge": "H",
+   "edge_name": "Apparatus-as-phenomenon",
    "concept": "· palette (unplaced)",
    "footprint": [
     1.0,
@@ -34,6 +42,10 @@
    "name": "Particle Randomness - Perlin",
    "size": "large",
    "source": "added",
+   "role": "grid",
+   "register": "critical",
+   "edge": "H",
+   "edge_name": "Apparatus-as-phenomenon",
    "concept": "Before Perlin, noise was static",
    "footprint": [
     10.0,
@@ -45,6 +57,10 @@
    "name": "Random Transformations - Noise",
    "size": "small",
    "source": "added",
+   "role": "wall",
+   "register": "critical",
+   "edge": "H",
+   "edge_name": "Apparatus-as-phenomenon",
    "concept": "White noise screams chaos",
    "footprint": [
     1.0,

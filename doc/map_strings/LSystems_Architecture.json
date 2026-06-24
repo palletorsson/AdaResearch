@@ -12,6 +12,10 @@
    "name": "City Generator",
    "size": "large",
    "source": "existing",
+   "role": "grid",
+   "register": "formal",
+   "edge": "F",
+   "edge_name": "Folding",
    "concept": "Grammar architecture (cities/dungeons)",
    "footprint": [
     17.0,
@@ -23,6 +27,10 @@
    "name": "L-System Dungeon",
    "size": "small",
    "source": "existing",
+   "role": "wall",
+   "register": "critical",
+   "edge": "J",
+   "edge_name": "Training-fossil",
    "concept": "Grammar architecture (cities/dungeons)",
    "footprint": [
     1.0,

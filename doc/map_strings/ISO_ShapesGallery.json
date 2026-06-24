@@ -12,6 +12,10 @@
    "name": "mc_shapes_gallery",
    "size": "large",
    "source": "existing",
+   "role": "grid",
+   "register": "critical",
+   "edge": "L",
+   "edge_name": "Failure as method",
    "concept": "Seven sculptures stand in a row. Each ",
    "footprint": [
     10.0,
@@ -23,6 +27,10 @@
    "name": "gyroid_demo",
    "size": "large",
    "source": "existing",
+   "role": "grid",
+   "register": "critical",
+   "edge": "L",
+   "edge_name": "Failure as method",
    "concept": "Seven sculptures stand in a row. Each ",
    "footprint": [
     20.0,
@@ -34,6 +42,10 @@
    "name": "mc_torus_sculpture",
    "size": "small",
    "source": "existing",
+   "role": "wall",
+   "register": "critical",
+   "edge": "L",
+   "edge_name": "Failure as method",
    "concept": "Seven sculptures stand in a row. Each ",
    "footprint": [
     1.0,
@@ -45,6 +57,10 @@
    "name": "mc",
    "size": "small",
    "source": "existing",
+   "role": "wall",
+   "register": "formal",
+   "edge": "",
+   "edge_name": "",
    "concept": "",
    "footprint": [
     1.0,

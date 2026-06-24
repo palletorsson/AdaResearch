@@ -12,6 +12,10 @@
    "name": "Fitness Landscape Politics",
    "size": "large",
    "source": "existing",
+   "role": "grid",
+   "register": "critical",
+   "edge": "K",
+   "edge_name": "Cosmotechnics",
    "concept": "Particle Swarm Optimization",
    "footprint": [
     4.0,
@@ -23,6 +27,10 @@
    "name": "Catalyst Foe",
    "size": "small",
    "source": "added",
+   "role": "wall",
+   "register": "formal",
+   "edge": "A",
+   "edge_name": "Formal impossibility",
    "concept": "· palette (unplaced)",
    "footprint": [
     1.0,
@@ -34,6 +42,10 @@
    "name": "Self-Organizing Patterns",
    "size": "small",
    "source": "existing",
+   "role": "wall",
+   "register": "formal",
+   "edge": "F",
+   "edge_name": "Folding",
    "concept": "Particle Swarm Optimization",
    "footprint": [
     1.0,
@@ -45,6 +57,10 @@
    "name": "Particle Swarm Optimization",
    "size": "large",
    "source": "existing",
+   "role": "grid",
+   "register": "formal",
+   "edge": "C",
+   "edge_name": "Local-vs-global",
    "concept": "",
    "footprint": [
     17.0,

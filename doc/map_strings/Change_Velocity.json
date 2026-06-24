@@ -12,6 +12,10 @@
    "name": "Derivative Pair",
    "size": "small",
    "source": "existing",
+   "role": "wall",
+   "register": "critical",
+   "edge": "M",
+   "edge_name": "Authenticity collapse",
    "concept": "Intro",
    "footprint": [
     1.0,
@@ -23,6 +27,10 @@
    "name": "player_trace",
    "size": "small",
    "source": "existing",
+   "role": "wall",
+   "register": "critical",
+   "edge": "H",
+   "edge_name": "Apparatus-as-phenomenon",
    "concept": "Velocity",
    "footprint": [
     1.0,
@@ -34,6 +42,10 @@
    "name": "Velocity Arrow",
    "size": "small",
    "source": "existing",
+   "role": "wall",
+   "register": "critical",
+   "edge": "M",
+   "edge_name": "Authenticity collapse",
    "concept": "Velocity",
    "footprint": [
     1.0,

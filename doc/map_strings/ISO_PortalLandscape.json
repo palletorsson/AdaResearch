@@ -12,6 +12,10 @@
    "name": "marchingcubes_portal_landscape",
    "size": "small",
    "source": "existing",
+   "role": "wall",
+   "register": "formal",
+   "edge": "F",
+   "edge_name": "Folding",
    "concept": "Marching cubes at landscape scale. A t",
    "footprint": [
     1.0,
@@ -23,6 +27,10 @@
    "name": "Portal",
    "size": "small",
    "source": "added",
+   "role": "wall",
+   "register": "formal",
+   "edge": "F",
+   "edge_name": "Folding",
    "concept": "· palette (unplaced)",
    "footprint": [
     2.0,
@@ -34,6 +42,10 @@
    "name": "marchingcubes_flat_landscape",
    "size": "small",
    "source": "added",
+   "role": "wall",
+   "register": "formal",
+   "edge": "C",
+   "edge_name": "Local-vs-global",
    "concept": "Marching cubes at landscape scale. A t",
    "footprint": [
     1.0,

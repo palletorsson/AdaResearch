@@ -12,6 +12,10 @@
    "name": "CSG Compose Workbench",
    "size": "small",
    "source": "existing",
+   "role": "wall",
+   "register": "critical",
+   "edge": "I",
+   "edge_name": "Entropy debt",
    "concept": "AND, OR, NOT",
    "footprint": [
     1.0,

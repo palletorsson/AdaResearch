@@ -12,6 +12,10 @@
    "name": "Elphaba Dress",
    "size": "small",
    "source": "existing",
+   "role": "wall",
+   "register": "critical",
+   "edge": "H",
+   "edge_name": "Apparatus-as-phenomenon",
    "concept": "Bernini",
    "footprint": [
     1.0,
@@ -23,6 +27,10 @@
    "name": "Bernini Columns",
    "size": "large",
    "source": "existing",
+   "role": "grid",
+   "register": "critical",
+   "edge": "H",
+   "edge_name": "Apparatus-as-phenomenon",
    "concept": "Bernini",
    "footprint": [
     11.0,
@@ -34,6 +42,10 @@
    "name": "Profile — Triangle Wave",
    "size": "small",
    "source": "added",
+   "role": "wall",
+   "register": "formal",
+   "edge": "F",
+   "edge_name": "Folding",
    "concept": "the wave",
    "footprint": [
     1.0,
@@ -45,6 +57,10 @@
    "name": "vowel_sound_board",
    "size": "small",
    "source": "existing",
+   "role": "wall",
+   "register": "critical",
+   "edge": "M",
+   "edge_name": "Authenticity collapse",
    "concept": "Bernini",
    "footprint": [
     1.0,

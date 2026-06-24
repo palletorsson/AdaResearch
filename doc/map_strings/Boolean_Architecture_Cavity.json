@@ -12,6 +12,10 @@
    "name": "CSG Architecture Cavity",
    "size": "small",
    "source": "existing",
+   "role": "wall",
+   "register": "critical",
+   "edge": "I",
+   "edge_name": "Entropy debt",
    "concept": "Every room is a difference operation",
    "footprint": [
     1.0,

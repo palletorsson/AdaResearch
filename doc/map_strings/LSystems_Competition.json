@@ -12,6 +12,10 @@
    "name": "Forest Ecosystem",
    "size": "large",
    "source": "existing",
+   "role": "grid",
+   "register": "formal",
+   "edge": "F",
+   "edge_name": "Folding",
    "concept": "Forest & ecology (biome)",
    "footprint": [
     8.0,
@@ -23,6 +27,10 @@
    "name": "Branching Coral",
    "size": "small",
    "source": "existing",
+   "role": "wall",
+   "register": "formal",
+   "edge": "C",
+   "edge_name": "Local-vs-global",
    "concept": "Coral & vines",
    "footprint": [
     1.0,
@@ -34,6 +42,10 @@
    "name": "Branching Growth Algorithm",
    "size": "small",
    "source": "added",
+   "role": "wall",
+   "register": "formal",
+   "edge": "A",
+   "edge_name": "Formal impossibility",
    "concept": "Bracketed branching",
    "footprint": [
     1.0,
@@ -45,6 +57,10 @@
    "name": "kochsnowflake",
    "size": "small",
    "source": "added",
+   "role": "wall",
+   "register": "formal",
+   "edge": "D",
+   "edge_name": "Representational silence",
    "concept": "Koch & fractal curves",
    "footprint": [
     1.0,

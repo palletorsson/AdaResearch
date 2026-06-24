@@ -27,6 +27,26 @@ SPINE = ["primitives", "transformation", "array_tutorial", "color", "change", "f
          "proceduralgeneration", "softbodies", "isosurfaces", "boolean_surfaces", "swarmintelligence",
          "machinelearning", "graphtheory", "foundationscrisis", "qfeplaboratory", "postfoundationscrisis"]
 
+# The 13 edges of algorithm (doc/EDGES_OF_ALGORITHM.md). A-F = the FORMAL tradition (teaching the
+# limit), G-M = the CRITICAL tradition (poetics + critique of the apparatus). An artifact's nearest
+# edge IS its register — so "poetics/critique" is already in the ontology, not a new axis.
+EDGE_NAMES = {"A": "Formal impossibility", "B": "Tractability cliff", "C": "Local-vs-global",
+              "D": "Representational silence", "E": "Embodiment", "F": "Folding",
+              "G": "Opacity refusal", "H": "Apparatus-as-phenomenon", "I": "Entropy debt",
+              "J": "Training-fossil", "K": "Cosmotechnics", "L": "Failure as method",
+              "M": "Authenticity collapse"}
+CRITICAL_EDGES = set("GHIJKLM")
+
+
+def load_edges():
+    """lookup_name -> nearest edge letter (A-M) from the atlas."""
+    p = os.path.join(ROOT, "doc", "atlas", "atlas_3d.json")
+    if not os.path.exists(p):
+        return {}
+    a = json.load(open(p, encoding="utf-8"))
+    arts = a.get("artifacts", a) if isinstance(a, dict) else a
+    return {x["id"]: x.get("edge") for x in arts if isinstance(x, dict) and x.get("id")}
+
 
 def concept_roster(seq):
     """name -> {concept, name} from the sequence's concept map ladder (best + tiers)."""
@@ -61,7 +81,7 @@ def _display_names():
     return disp
 
 
-def build_sequence(seq, idx, V, sizes, disp, cap):
+def build_sequence(seq, idx, V, sizes, disp, cap, edges):
     groups = roster_from_map_groups(seq)        # [(map_name, [existing names])]
     if not groups:
         return [], 0
@@ -101,7 +121,14 @@ def build_sequence(seq, idx, V, sizes, disp, cap):
 
     def pearl(n, source):
         sp = sizes.get(n) or (1.0, 1.0)
-        return {"id": n, "name": disp.get(n, n), "size": size_of(n), "source": source,
+        sz = size_of(n)
+        e = edges.get(n)
+        return {"id": n, "name": disp.get(n, n), "size": sz, "source": source,
+                # role: where it lives — small things cluster on the WALL, large lift into the GRID.
+                "role": "grid" if sz == "large" else "wall",
+                # register: formal (teaching the limit) vs critical (poetics / critique), from the edge.
+                "register": "critical" if e in CRITICAL_EDGES else "formal",
+                "edge": e or "", "edge_name": EDGE_NAMES.get(e, ""),
                 "concept": concepts.get(n, ""), "footprint": [round(sp[0], 1), round(sp[1], 1)]}
 
     out, added_total = [], 0
@@ -143,12 +170,13 @@ def main():
     idx, V = load_embeddings()
     sizes = load_sizes()
     disp = _display_names()
+    edges = load_edges()
     out_dir = os.path.join(ROOT, "doc", "map_strings")
     os.makedirs(out_dir, exist_ok=True)
     index = []
     grand_added = grand_maps = 0
     for seq in seqs:
-        strings, added = build_sequence(seq, idx, V, sizes, disp, args.cap)
+        strings, added = build_sequence(seq, idx, V, sizes, disp, args.cap, edges)
         for s in strings:
             json.dump(s, open(os.path.join(out_dir, s["map"] + ".json"), "w", encoding="utf-8"),
                       indent=1, ensure_ascii=False)

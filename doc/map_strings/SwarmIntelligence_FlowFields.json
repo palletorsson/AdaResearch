@@ -12,6 +12,10 @@
    "name": "FlowFieldMain",
    "size": "large",
    "source": "existing",
+   "role": "grid",
+   "register": "critical",
+   "edge": "G",
+   "edge_name": "Opacity refusal",
    "concept": "FlowFields",
    "footprint": [
     50.0,
@@ -23,6 +27,10 @@
    "name": "Catalyst Vent",
    "size": "small",
    "source": "added",
+   "role": "wall",
+   "register": "critical",
+   "edge": "I",
+   "edge_name": "Entropy debt",
    "concept": "· palette (unplaced)",
    "footprint": [
     1.0,

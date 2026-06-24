@@ -12,6 +12,10 @@
    "name": "softstopscene",
    "size": "large",
    "source": "existing",
+   "role": "grid",
+   "register": "critical",
+   "edge": "H",
+   "edge_name": "Apparatus-as-phenomenon",
    "concept": "Cloth physics",
    "footprint": [
     4.0,
@@ -23,6 +27,10 @@
    "name": "Affect Theory Visualization",
    "size": "small",
    "source": "added",
+   "role": "wall",
+   "register": "critical",
+   "edge": "G",
+   "edge_name": "Opacity refusal",
    "concept": "The abject as force",
    "footprint": [
     1.0,
@@ -34,6 +42,10 @@
    "name": "Verlet Integration",
    "size": "large",
    "source": "added",
+   "role": "grid",
+   "register": "critical",
+   "edge": "H",
+   "edge_name": "Apparatus-as-phenomenon",
    "concept": "Verlet & the soft-body sim",
    "footprint": [
     9.0,
