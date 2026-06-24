@@ -4,6 +4,7 @@ class_name DesktopMapTester
 ## Desktop Map Tester - Load and test maps without VR
 ## Use this for quick desktop testing of map sequences
 
+@export var start_map: String = ""  ## Load this single map by name directly (e.g. "Corridor_Point_One"). Overrides start_sequence when set — for testing standalone maps like the corridors.
 @export var start_sequence: String = "wavefunctions"  ## Which sequence to start (wavefunctions, noise, etc.)
 @export var start_map_index: int = 0  ## Which map in sequence to start at (0 = first map)
 @export var auto_load_on_ready: bool = true  ## Auto-load map on scene ready
@@ -27,6 +28,12 @@ func _ready() -> void:
 		call_deferred("_auto_load_sequence")
 
 func _auto_load_sequence() -> void:
+	# A single map by name (e.g. a Corridor_* sibling) takes priority over the sequence path.
+	if not start_map.is_empty():
+		print("DesktopMapTester: Loading single map: %s" % start_map)
+		load_map(start_map)
+		return
+
 	if start_sequence.is_empty():
 		print("DesktopMapTester: No start sequence specified")
 		return
