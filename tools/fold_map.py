@@ -132,12 +132,17 @@ def fold(map_name, cap=3, thread_path=True, artifacts=None, walk_width=3, walk_o
     def is_crit(a):
         return edges.get(a) in CRITICAL_EDGES
 
+    def fp_of(a):
+        sp = sizes.get(a)
+        return [round(float(sp[0]), 1), round(float(sp[1]), 1)] if sp else [1.0, 1.0]
+
     # New interactables grid. MAP MODE keeps larges + raised displays in place and pulls floor smalls
     # out to fold; LIST MODE folds an arbitrary roster (the edited table of contents).
     new_inter = [["" for _ in range(W)] for _ in range(D)]
     smalls = {"formal": [], "critical": []}   # (base, z|None, x|None)
     roster = []
     grid_ids = []                              # list-mode landmarks, placed once the helpers exist
+    grid_fp = {}                               # list-mode landmark footprints (for the platform)
     seen = set()
     if artifacts is None:
         for z in range(D):
@@ -151,28 +156,34 @@ def fold(map_name, cap=3, thread_path=True, artifacts=None, walk_width=3, walk_o
                     new_inter[z][x] = c                      # landmark / infra stays exactly where it is
                     if base not in INFRA and base not in seen:
                         seen.add(base)
-                        roster.append({"id": base, "role": "grid", "register": reg})
+                        roster.append({"id": base, "role": "grid", "register": reg, "footprint": fp_of(base)})
                 elif base in seen:
                     continue
                 elif str(struct[z][x]).strip() != "1":
                     seen.add(base)
                     new_inter[z][x] = c                      # raised/pedestal = authored display, keep it
-                    roster.append({"id": base, "role": "wall", "register": reg})
+                    roster.append({"id": base, "role": "wall", "register": reg, "footprint": fp_of(base)})
                 else:
                     seen.add(base)
                     smalls[reg].append((base, z, x))
-                    roster.append({"id": base, "role": "wall", "register": reg})
+                    roster.append({"id": base, "role": "wall", "register": reg, "footprint": fp_of(base)})
     else:
         for a in artifacts:
             aid = str(a.get("id", "")).strip()
             if not aid or aid in seen or aid in INFRA:
                 continue
             seen.add(aid)
-            role = a.get("role") or ("grid" if is_large(aid) else "wall")
+            ov = a.get("footprint")                          # inspector footprint override
+            sp = (ov if (ov and len(ov) == 2) else sizes.get(aid)) or (1.0, 1.0)
+            sp = (float(sp[0]), float(sp[1]))
+            large = max(sp) > LARGE_M
+            role = a.get("role") or ("grid" if large else "wall")
             reg = a.get("register") or ("critical" if is_crit(aid) else "formal")
-            roster.append({"id": aid, "role": role, "register": reg})
+            roster.append({"id": aid, "role": role, "register": reg,
+                           "footprint": [round(sp[0], 1), round(sp[1], 1)]})
             if role == "grid":
                 grid_ids.append(aid)
+                grid_fp[aid] = sp
             else:
                 smalls[reg].append((aid, None, None))
 
@@ -244,7 +255,8 @@ def fold(map_name, cap=3, thread_path=True, artifacts=None, walk_width=3, walk_o
         if res:
             cz, cx, w, h = res
             new_inter[cz][cx] = aid
-            footprints[(cz, cx)] = (w, h)
+            gf = grid_fp.get(aid, (float(w), float(h)))      # platform reflects the (possibly edited) footprint
+            footprints[(cz, cx)] = (max(3, int(gf[0] + 0.99)), max(3, int(gf[1] + 0.99)))
         else:
             stray.append(aid)
 
