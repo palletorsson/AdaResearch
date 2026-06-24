@@ -26,10 +26,12 @@ def _cells(layer):
     return [layer[z] if isinstance(layer[z], list) else str(layer[z]).split(",") for z in range(len(layer))]
 
 
-def thread_3wide(struct, D, W, spawn, anchors, tele, foot):
-    """Rewrite structure to a 3-wide walk: spawn -> every artifact (nearest-neighbour order) -> teleporter.
-    Each artifact sits on a platform of its footprint; everything else becomes void ('0'). Floor = '1'."""
+def thread_walk(struct, D, W, spawn, anchors, tele, foot, width=3, order="nearest"):
+    """Rewrite structure to a `width`-wide walk: spawn -> every artifact -> teleporter. Each artifact sits
+    on a platform of its footprint; everything else becomes void ('0'). Floor = '1'.
+    order='nearest' = greedy shortest hop; order='sequence' = visit anchors in the given (list) order."""
     floor = set()
+    band = list(range(-((width - 1) // 2), width // 2 + 1))   # 3:[-1,0,1] 2:[0,1] 1:[0] 4:[-1,0,1,2]
 
     def add(z, x):
         if 0 <= z < D and 0 <= x < W:
@@ -40,23 +42,26 @@ def thread_3wide(struct, D, W, spawn, anchors, tele, foot):
             for x in range(cx - w // 2, cx - w // 2 + w):
                 add(z, x)
 
-    def seg(a, b):                                            # 3-wide L-corridor a -> b
+    def seg(a, b):                                            # width-wide L-corridor a -> b
         (z1, x1), (z2, x2) = a, b
         for x in range(min(x1, x2), max(x1, x2) + 1):
-            for dz in (-1, 0, 1):
-                add(z1 + dz, x)
+            for d in band:
+                add(z1 + d, x)
         for z in range(min(z1, z2), max(z1, z2) + 1):
-            for dx in (-1, 0, 1):
-                add(z, x2 + dx)
+            for d in band:
+                add(z, x2 + d)
 
     route = [spawn] if spawn else []
-    cur = spawn or (anchors[0] if anchors else None)
-    rem = list(anchors)
-    while rem and cur:
-        nxt = min(rem, key=lambda c: abs(c[0] - cur[0]) + abs(c[1] - cur[1]))
-        route.append(nxt)
-        rem.remove(nxt)
-        cur = nxt
+    if order == "sequence":
+        route += list(anchors)                               # caller pre-orders anchors by roster rank
+    else:
+        cur = spawn or (anchors[0] if anchors else None)
+        rem = list(anchors)
+        while rem and cur:
+            nxt = min(rem, key=lambda c: abs(c[0] - cur[0]) + abs(c[1] - cur[1]))
+            route.append(nxt)
+            rem.remove(nxt)
+            cur = nxt
     if tele:
         route.append(tele)
     for a, b in zip(route, route[1:]):
@@ -108,7 +113,7 @@ def _metrics(struct, D, W, spawn, anchors, foot):
     }
 
 
-def fold(map_name, cap=3, thread_path=True, artifacts=None):
+def fold(map_name, cap=3, thread_path=True, artifacts=None, walk_width=3, walk_order="nearest"):
     p = os.path.join(ROOT, "commons", "maps", map_name, "map_data.json")
     if not os.path.exists(p):
         print("no map", map_name)
@@ -303,9 +308,23 @@ def fold(map_name, cap=3, thread_path=True, artifacts=None):
             if c and not c.startswith("#"):
                 anchors.append((z, x))
                 foot[(z, x)] = footprints.get((z, x), (3, 3))
+    if walk_order == "sequence":
+        # visit anchors in the order they appear in the roster (a section ranks by its earliest member)
+        order_rank = {p["id"]: i for i, p in enumerate(roster)}
+
+        def _rank(cell):
+            tok = str(new_inter[cell[0]][cell[1]]).strip()
+            if "curation_station#artifacts:" in tok:
+                mids = tok.split("#artifacts:")[1].split("#")[0].split(",")
+                return min((order_rank.get(a.strip(), 9999) for a in mids), default=9999)
+            base = tok.split(":")[0].split("#")[0]
+            return order_rank.get(base, 9999)
+
+        anchors = sorted(anchors, key=_rank)
     if thread_path:
-        # 3-wide walk: spawn -> every artifact -> teleporter; the rest of the grid becomes void.
-        m["layers"]["structure"] = thread_3wide(struct, D, W, spawn_cell, anchors, tele_cell, foot)
+        # spawn -> every artifact -> teleporter; the rest of the grid becomes void.
+        m["layers"]["structure"] = thread_walk(struct, D, W, spawn_cell, anchors, tele_cell, foot,
+                                                width=walk_width, order=walk_order)
     metrics = _metrics(m["layers"]["structure"] if thread_path else struct, D, W, spawn_cell, anchors, foot)
 
     m["layers"]["interactables"] = new_inter
@@ -322,9 +341,13 @@ def main():
     ap.add_argument("--no-path", action="store_true", help="keep the authored floor instead of the 3-wide walk")
     ap.add_argument("--stdout", action="store_true", help="print folded map JSON to stdout, no file write")
     ap.add_argument("--artifacts", help="JSON list of {id,role,register} to fold instead of the map's own")
+    ap.add_argument("--walk-width", type=int, default=3, help="walk corridor width in cells (default 3)")
+    ap.add_argument("--walk-order", choices=["nearest", "sequence"], default="nearest",
+                    help="nearest = shortest hop; sequence = visit in table-of-contents order")
     args = ap.parse_args()
     artifacts = json.loads(args.artifacts) if args.artifacts else None
-    res = fold(args.map, thread_path=not args.no_path, artifacts=artifacts)
+    res = fold(args.map, thread_path=not args.no_path, artifacts=artifacts,
+               walk_width=args.walk_width, walk_order=args.walk_order)
     if not res:
         return
     m, placed, unplaced, metrics, roster = res
