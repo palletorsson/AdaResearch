@@ -146,38 +146,50 @@ def _bands(ordered, spans):
 
 def corridor_map(name, title, desc, ordered, next_map, spans):
     bands = _bands(ordered, spans)
-    z, placements = 2, []
+
+    def fp(n):
+        return spans.get(n) or (1.0, 1.0)
+    # Width = wide enough to set the widest large BESIDE a clear central walkway (footprint + pathfinding).
+    max_lw = max([int(fp(items[0])[0]) for k, items in bands if k == "large"] + [0])
+    cols = min(max(COLS, max_lw + 10), 30)
+    center = cols // 2
+
+    z, placements, side = 2, [], -1
     for kind, items in bands:
         if kind == "cluster":
-            depth = 7
+            depth, x = 7, center
             token = ("curation_station#artifacts:" + ",".join(items)
                      + "#layout:row#with_wall:false#with_pillars:false#with_barrier:false")
         else:
-            sp = spans.get(items[0]) or (1.0, 1.0)
-            depth = min(max(int(sp[1]) + 3, 5), 12)   # footprint-sized Z band, clamped for swarms/effects
+            w, d = fp(items[0])
+            depth = min(max(int(d) + 3, 5), 12)   # footprint-sized Z band, clamped for swarms/effects
+            half = int(w) // 2 + 1
+            # offset to alternating sides, keeping the centre walkway (centre +/- 2) clear
+            x = max(2, center - 3 - half) if side < 0 else min(cols - 3, center + 3 + half)
+            side = -side
             token = items[0]
-        placements.append((z + depth // 2, token))
+        placements.append((z + depth // 2, x, token))
         z += depth + 1
     rows_total = max(z + 2, 8)
-    struct = [["1"] * COLS for _ in range(rows_total)]
-    for x in range(COLS):
+    struct = [["1"] * cols for _ in range(rows_total)]
+    for x in range(cols):
         struct[0][x] = "2"; struct[rows_total - 1][x] = "2"
     for zz in range(rows_total):
-        struct[zz][0] = "2"; struct[zz][COLS - 1] = "2"
-    util = [["" for _ in range(COLS)] for _ in range(rows_total)]
-    inter = [["" for _ in range(COLS)] for _ in range(rows_total)]
-    util[1][CENTER] = "s"
+        struct[zz][0] = "2"; struct[zz][cols - 1] = "2"
+    util = [["" for _ in range(cols)] for _ in range(rows_total)]
+    inter = [["" for _ in range(cols)] for _ in range(rows_total)]
+    util[1][center] = "s"
     tele_z = rows_total - 2
-    struct[tele_z][CENTER] = "0"
-    util[tele_z][CENTER] = "t:" + next_map
-    for za, token in placements:
-        inter[za][CENTER] = token
+    struct[tele_z][center] = "0"
+    util[tele_z][center] = "t:" + next_map
+    for za, x, token in placements:
+        inter[za][x] = token
     n_cl = sum(1 for k, _ in bands if k == "cluster")
     n_lg = sum(1 for k, _ in bands if k == "large")
     return {
         "map_info": {
             "name": name, "lookup_name": name, "title": title, "description": desc,
-            "dimensions": {"width": COLS, "depth": rows_total, "max_height": 2},
+            "dimensions": {"width": cols, "depth": rows_total, "max_height": 2},
         },
         "subtitles": {}, "lighting": {},
         "settings": {
