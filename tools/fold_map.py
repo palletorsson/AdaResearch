@@ -143,6 +143,7 @@ def fold(map_name, cap=3, thread_path=True, artifacts=None, walk_width=3, walk_o
     roster = []
     grid_ids = []                              # list-mode landmarks, placed once the helpers exist
     grid_fp = {}                               # list-mode landmark footprints (for the platform)
+    pinned = []                                # (id, z, x, footprint) dragged to a fixed cell
     seen = set()
     if artifacts is None:
         for z in range(D):
@@ -179,9 +180,14 @@ def fold(map_name, cap=3, thread_path=True, artifacts=None, walk_width=3, walk_o
             large = max(sp) > LARGE_M
             role = a.get("role") or ("grid" if large else "wall")
             reg = a.get("register") or ("critical" if is_crit(aid) else "formal")
-            roster.append({"id": aid, "role": role, "register": reg,
-                           "footprint": [round(sp[0], 1), round(sp[1], 1)]})
-            if role == "grid":
+            cell = a.get("cell")
+            item = {"id": aid, "role": role, "register": reg, "footprint": [round(sp[0], 1), round(sp[1], 1)]}
+            if cell and len(cell) == 2:
+                item["cell"] = [int(cell[0]), int(cell[1])]
+            roster.append(item)
+            if cell and len(cell) == 2:
+                pinned.append((aid, int(cell[0]), int(cell[1]), sp))   # dragged to a fixed cell
+            elif role == "grid":
                 grid_ids.append(aid)
                 grid_fp[aid] = sp
             else:
@@ -250,6 +256,13 @@ def fold(map_name, cap=3, thread_path=True, artifacts=None, walk_width=3, walk_o
         return None
 
     footprints, stray = {}, []
+    for aid, pz, px, sp in pinned:                           # user-dragged artifacts pinned at their cell
+        if 0 <= pz < D and 0 <= px < W:
+            new_inter[pz][px] = aid
+            occ.add((pz, px))
+            footprints[(pz, px)] = (max(3, int(sp[0] + 0.99)), max(3, int(sp[1] + 0.99)))
+        else:
+            stray.append(aid)
     for aid in grid_ids:                                     # list-mode landmarks placed on clear floor
         res = land_landmark()
         if res:
