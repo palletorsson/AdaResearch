@@ -67,6 +67,10 @@ const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
 @export var frame_large: bool = true
 ## Build an empty slot ("" / missing name) as a framed VOID — negative space presented on purpose.
 @export var frame_voids: bool = true
+
+@export_group("Text frames")
+## Harvest each artifact's own text into a framed 2D-in-3D panel above it, joined by a connector line.
+@export var with_text_frames: bool = true
 @export var label_plinths: bool = true
 ## Hide the loaded artifacts' floating billboard Label3D text, so the only text on show is the
 ## station's own 2D-in-3D plates/screens (surface-pinned). Surface-baked artifact text is kept.
@@ -250,6 +254,11 @@ func _build_kit(items: Array) -> void:
 			plaque.position = Vector3(float(slot["x"]) + off.x, stage_step_height + clampf(h * 0.5, 0.22, 0.62), float(slot["z"]) + off.z)
 			plaque.rotation.y = yaw
 			add_child(plaque)
+		if with_text_frames and inst != null:
+			var tl: Array = []
+			_collect_labels(inst, tl)
+			_build_text_frame(float(slot["x"]), float(slot["z"]), stage_step_height + h, float(item.get("ah", 0.3)),
+				_clean_name(str(_name_disp.get(str(item["name"]), str(item["name"])))), tl)
 
 	# Backing wall — one tiling run per segment, rotated to face into the room.
 	if with_wall:
@@ -377,6 +386,11 @@ func _build_platform_bridge(slot: Dictionary, item: Dictionary, i: int) -> void:
 		var plaque := _make_label_plaque(disp, "%02d" % (i + 1))
 		plaque.position = Vector3(sx, stage_step_height + 0.3, pz + float(td) * 0.5 * CELL + 0.2)
 		add_child(plaque)
+	if with_text_frames and inst != null:
+		var tl: Array = []
+		_collect_labels(inst, tl)
+		_build_text_frame(sx, pz, stage_step_height, float(item.get("ah", 0.3)),
+			_clean_name(str(_name_disp.get(str(item["name"]), str(item["name"])))), tl)
 
 
 # One run of front rail (used to build the barrier in segments, leaving bridge gaps).
@@ -392,6 +406,38 @@ func _emit_barrier(x: float, z: float, yaw: float, length_cells: int) -> void:
 		"hazard_base": true, "panel_color": _cs(body_color), "post_color": _cs(panel_color),
 		"accent_color": _cs(accent_color),
 	})
+
+
+# Harvest every text string an artifact carries (its own Label3D / Label nodes), capped + deduped.
+func _collect_labels(node: Node, out: Array, in_sign: bool = false) -> void:
+	if out.size() >= 6:
+		return
+	var sig := in_sign or node.name == "Signage" or node.name == "Readout"
+	var t := ""
+	if node is Label3D and not sig:
+		t = String((node as Label3D).text).strip_edges()
+	elif node is Label and not sig:
+		t = String((node as Label).text).strip_edges()
+	if t != "" and not out.has(t):
+		out.append(t)
+	for c in node.get_children():
+		_collect_labels(c, out, sig)
+
+
+# A framed 2D-in-3D text panel above an artifact showing its harvested text, joined by a connector line.
+func _build_text_frame(x: float, z: float, grounded_y: float, ah: float, header: String, lines: Array) -> void:
+	var disp: Array = lines if not lines.is_empty() else ["—"]
+	var top: float = grounded_y + maxf(ah, 0.3) + 0.7
+	var ph: float = 0.12 + 0.055 * float(mini(disp.size(), 6))
+	var panel: Node3D = HangarKit.readout(header.substr(0, 18), disp, Vector2(0.72, ph),
+		Color(0.09, 0.10, 0.12), Color(0.90, 0.92, 0.96), accent_color)
+	if panel != null:
+		panel.position = Vector3(x, top, z)
+		add_child(panel)
+	var bottom: float = grounded_y + maxf(ah, 0.3)
+	var conn := _box(Vector3.ZERO, Vector3(0.022, top - bottom, 0.022), _emi(accent_color, 0.7))
+	conn.position = Vector3(x, (bottom + top) * 0.5, z)
+	add_child(conn)
 
 
 # A small labelled pad — START (entry) or EXIT — at an end of the bay, marking where you walk in/out.
