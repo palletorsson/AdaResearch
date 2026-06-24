@@ -9,11 +9,6 @@ const StationPillarScene := preload("res://commons/artifacts/station/station_pil
 const StationCabinetScene := preload("res://commons/artifacts/station/station_cabinet.tscn")
 const StationBarrierScene := preload("res://commons/artifacts/station/station_barrier.tscn")
 const StationCratesScene := preload("res://commons/artifacts/station/station_crates.tscn")
-
-# Wall hangar extension: artifacts bigger than LARGE_CELLS get an n-size forward platform + a bridge
-# back to the bay, so a single wall construct controls small AND large placement.
-const LARGE_CELLS := 3
-const MAX_PLATFORM_CELLS := 8
 const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
 
 # @identity
@@ -31,7 +26,7 @@ const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
 ## Default set spans the full size range — a tiny point on a 1x1 podium up to a room-scale 3D CA grid
 ## on a 4x4 platform — and keeps two INTERACTIVE artifacts (ca_rule_explorer, distribution_sampler) so
 ## you can test the desktop crosshair / VR pointer out of the box. Swap in any registered artifact.
-@export var artifacts: Array[String] = ["point", "ca_rule_explorer", "distribution_sampler", "grid_3d_4x4x4"]
+@export var artifacts: Array[String] = ["point", "ca_rule_explorer", "", "distribution_sampler", "grid_3d_4x4x4"]
 
 @export_group("Layout (grid cells)")
 ## Cells between plinth centres along the row.
@@ -62,6 +57,16 @@ const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
 @export var with_wall_screen: bool = true
 ## START + EXIT pads at the two ends of the bay front, so the hangar reads as a walkable hall.
 @export var with_endpoints: bool = true
+
+@export_group("Large artifacts")
+## Footprint (cells) above which an artifact gets a forward platform + bridge instead of a plinth.
+@export var large_cells: int = 3
+## n-size platform cap — how big a footprint a platform can grow to.
+@export var max_platform_cells: int = 12
+## Wrap each large platform in an open portal frame (frames the artifact + its negative space).
+@export var frame_large: bool = true
+## Build an empty slot ("" / missing name) as a framed VOID — negative space presented on purpose.
+@export var frame_voids: bool = true
 @export var label_plinths: bool = true
 ## Hide the loaded artifacts' floating billboard Label3D text, so the only text on show is the
 ## station's own 2D-in-3D plates/screens (surface-pinned). Surface-baked artifact text is kept.
@@ -156,17 +161,20 @@ func _assemble() -> void:
 		var base_y := 0.0
 		var cx := 0.0
 		var cz := 0.0
+		var ah := 0.0
 		if item["inst"] != null:
 			var ab := _combined_aabb(item["inst"])
 			if ab.size.length() > 0.0:
-				wc = clampi(int(ceil(ab.size.x - 0.1)), 1, MAX_PLATFORM_CELLS)
-				dc = clampi(int(ceil(ab.size.z - 0.1)), 1, MAX_PLATFORM_CELLS)
+				wc = clampi(int(ceil(ab.size.x - 0.1)), 1, max_platform_cells)
+				dc = clampi(int(ceil(ab.size.z - 0.1)), 1, max_platform_cells)
 				base_y = ab.position.y
 				cx = ab.position.x + ab.size.x * 0.5   # footprint centre offset from the artifact origin
 				cz = ab.position.z + ab.size.z * 0.5
+				ah = ab.size.y
 		item["cx"] = cx
 		item["cz"] = cz
-		var is_large := maxi(wc, dc) > LARGE_CELLS
+		item["ah"] = ah
+		var is_large := maxi(wc, dc) > large_cells
 		item["large"] = is_large
 		item["true_w"] = wc
 		item["true_d"] = dc
@@ -212,6 +220,10 @@ func _build_kit(items: Array) -> void:
 		var item: Dictionary = slot["item"]
 		if bool(item.get("large", false)):
 			_build_platform_bridge(slot, item, i)
+			continue
+		if item["inst"] == null and frame_voids:
+			# an empty slot becomes a framed VOID — negative space presented on purpose
+			_build_frame(float(slot["x"]), float(slot["z"]), int(slot["w"]) + 1, int(slot["d"]) + 1, wall_height * 0.85)
 			continue
 		var wc: int = int(slot["w"])
 		var dc: int = int(slot["d"])
@@ -354,6 +366,10 @@ func _build_platform_bridge(slot: Dictionary, item: Dictionary, i: int) -> void:
 		(inst as Node3D).position = Vector3(
 			sx - float(item.get("cx", 0.0)), stage_step_height - float(item["base_y"]), pz - float(item.get("cz", 0.0))
 		)
+	# frame the platform — the artifact (often open) presented inside an open portal frame
+	if frame_large:
+		var fh: float = maxf(wall_height, float(item.get("ah", 0.0)) + 0.6)
+		_build_frame(sx, pz, tw + 2, td + 2, fh)
 	# caption plaque at the platform front
 	if label_plinths:
 		var nm := str(item["name"])
@@ -391,6 +407,24 @@ func _build_endpoint(x: float, z: float, label_text: String, accent: Color) -> v
 	var plaque := _make_label_plaque(label_text, "")
 	plaque.position = Vector3(x, stage_step_height + 0.4, z)
 	add_child(plaque)
+
+
+# An open portal frame around a footprint — 4 corner posts + a top rectangle. Frames the artifact (often
+# open/lattice) and the negative space it sits in; with no artifact it frames pure negative space.
+func _build_frame(x: float, z: float, w_cells: int, d_cells: int, height: float) -> void:
+	var hw: float = float(maxi(w_cells, 1)) * 0.5 * CELL
+	var hd: float = float(maxi(d_cells, 1)) * 0.5 * CELL
+	var post: float = 0.16
+	var beam: float = 0.14
+	var mat: Material = _emi(accent_color, 0.5)
+	for ix in [-1.0, 1.0]:
+		for iz in [-1.0, 1.0]:
+			add_child(_box(Vector3(x + ix * hw, height * 0.5 + stage_step_height, z + iz * hd), Vector3(post, height, post), mat))
+	var top: float = height + stage_step_height
+	add_child(_box(Vector3(x, top, z - hd), Vector3(hw * 2.0 + post, beam, beam), mat))
+	add_child(_box(Vector3(x, top, z + hd), Vector3(hw * 2.0 + post, beam, beam), mat))
+	add_child(_box(Vector3(x - hw, top, z), Vector3(beam, beam, hd * 2.0 + post), mat))
+	add_child(_box(Vector3(x + hw, top, z), Vector3(beam, beam, hd * 2.0 + post), mat))
 
 
 func _compute_layout(items: Array) -> Dictionary:
