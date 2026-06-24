@@ -26,7 +26,54 @@ def _cells(layer):
     return [layer[z] if isinstance(layer[z], list) else str(layer[z]).split(",") for z in range(len(layer))]
 
 
-def fold(map_name, cap=3):
+def thread_3wide(struct, D, W, spawn, anchors, tele, foot):
+    """Rewrite structure to a 3-wide walk: spawn -> every artifact (nearest-neighbour order) -> teleporter.
+    Each artifact sits on a platform of its footprint; everything else becomes void ('0'). Floor = '1'."""
+    floor = set()
+
+    def add(z, x):
+        if 0 <= z < D and 0 <= x < W:
+            floor.add((z, x))
+
+    def plat(cz, cx, w, h):
+        for z in range(cz - h // 2, cz - h // 2 + h):
+            for x in range(cx - w // 2, cx - w // 2 + w):
+                add(z, x)
+
+    def seg(a, b):                                            # 3-wide L-corridor a -> b
+        (z1, x1), (z2, x2) = a, b
+        for x in range(min(x1, x2), max(x1, x2) + 1):
+            for dz in (-1, 0, 1):
+                add(z1 + dz, x)
+        for z in range(min(z1, z2), max(z1, z2) + 1):
+            for dx in (-1, 0, 1):
+                add(z, x2 + dx)
+
+    route = [spawn] if spawn else []
+    cur = spawn or (anchors[0] if anchors else None)
+    rem = list(anchors)
+    while rem and cur:
+        nxt = min(rem, key=lambda c: abs(c[0] - cur[0]) + abs(c[1] - cur[1]))
+        route.append(nxt)
+        rem.remove(nxt)
+        cur = nxt
+    if tele:
+        route.append(tele)
+    for a, b in zip(route, route[1:]):
+        seg(a, b)
+    for (cz, cx), (w, h) in foot.items():
+        plat(cz, cx, max(w, 3), max(h, 3))
+    if spawn:
+        plat(spawn[0], spawn[1], 3, 3)
+    if tele:
+        plat(tele[0], tele[1], 3, 3)
+    new = [["0" for _ in range(W)] for _ in range(D)]
+    for (z, x) in floor:
+        new[z][x] = "1"
+    return new
+
+
+def fold(map_name, cap=3, thread_path=True):
     p = os.path.join(ROOT, "commons", "maps", map_name, "map_data.json")
     if not os.path.exists(p):
         print("no map", map_name)
@@ -115,21 +162,23 @@ def fold(map_name, cap=3):
         # try progressively smaller footprints so a section still lands on a fragmented floor
         for h in (6, 5, 4):
             for w in (2 * n + 4, 2 * n + 2, 2 * n):
-                spot = land(min(w, W - 4), h)
+                ww = min(w, W - 4)
+                spot = land(ww, h)
                 if spot:
-                    return spot
+                    return spot[0], spot[1], ww, h
         return None
 
-    placed, unplaced = [], []
+    placed, unplaced, footprints = [], [], {}
     for reg, chunk in clusters:
         ids = [b for b, _, _ in chunk]
-        spot = land_flex(len(ids))
-        if spot:
-            cz, cx = spot
+        res = land_flex(len(ids))
+        if res:
+            cz, cx, w, h = res
             token = ("curation_station#artifacts:" + ",".join(ids)
                      + "#with_wall:true#with_pillars:false#with_barrier:true")
             new_inter[cz][cx] = token
             placed.append((reg, ids, (cz, cx)))
+            footprints[(cz, cx)] = (w, h)
         else:
             unplaced.append((reg, chunk))
 
@@ -154,6 +203,25 @@ def fold(map_name, cap=3):
                 if fc:
                     new_inter[fc[0]][fc[1]] = base
 
+    if thread_path:
+        # 3-wide walk: spawn -> every artifact -> teleporter; the rest of the grid becomes void.
+        spawn_cell = tele_cell = None
+        for z in range(D):
+            for x in range(min(W, len(util[z]))):
+                u = str(util[z][x]).strip()
+                if u[:1] == "s" and u[:2] not in ("su",):
+                    spawn_cell = (z, x)
+                elif u[:1] == "t":
+                    tele_cell = (z, x)
+        anchors, foot = [], {}
+        for z in range(D):
+            for x in range(min(W, len(new_inter[z]))):
+                c = str(new_inter[z][x]).strip()
+                if c and not c.startswith("#"):
+                    anchors.append((z, x))
+                    foot[(z, x)] = footprints.get((z, x), (3, 3))
+        m["layers"]["structure"] = thread_3wide(struct, D, W, spawn_cell, anchors, tele_cell, foot)
+
     m["layers"]["interactables"] = new_inter
     m["map_info"]["name"] = map_name + "_Folded"
     m["map_info"]["lookup_name"] = map_name + "_Folded"
@@ -169,8 +237,9 @@ def fold(map_name, cap=3):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--map", required=True)
+    ap.add_argument("--no-path", action="store_true", help="keep the authored floor instead of the 3-wide walk")
     args = ap.parse_args()
-    res = fold(args.map)
+    res = fold(args.map, thread_path=not args.no_path)
     if not res:
         return
     m, placed, unplaced = res
