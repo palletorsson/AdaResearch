@@ -1,0 +1,33 @@
+{
+ "map": "GT_Layout",
+ "sequence": "graphtheory",
+ "counts": {
+  "existing": 1,
+  "added": 1,
+  "large": 2
+ },
+ "pearls": [
+  {
+   "id": "force_directed_layout",
+   "name": "force_directed_layout",
+   "size": "large",
+   "source": "existing",
+   "concept": "Force Directed Graph Layout",
+   "footprint": [
+    17.0,
+    1.0
+   ]
+  },
+  {
+   "id": "forcedirected3d",
+   "name": "forcedirected3d",
+   "size": "large",
+   "source": "added",
+   "concept": "Force Directed 3d",
+   "footprint": [
+    16.0,
+    18.0
+   ]
+  }
+ ]
+}

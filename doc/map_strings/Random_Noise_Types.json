@@ -1,0 +1,55 @@
+{
+ "map": "Random_Noise_Types",
+ "sequence": "noise",
+ "counts": {
+  "existing": 2,
+  "added": 2,
+  "large": 0
+ },
+ "pearls": [
+  {
+   "id": "randompoint",
+   "name": "randompoint",
+   "size": "small",
+   "source": "existing",
+   "concept": "White noise screams chaos",
+   "footprint": [
+    2.0,
+    1.0
+   ]
+  },
+  {
+   "id": "randompoints",
+   "name": "randompoints",
+   "size": "small",
+   "source": "existing",
+   "concept": "White noise screams chaos",
+   "footprint": [
+    1.0,
+    2.0
+   ]
+  },
+  {
+   "id": "grid_substrate_runner",
+   "name": "Grid Substrate Runner",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "RandomGaussianTexture",
+   "name": "Random Gaussian Texture",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    2.0,
+    2.0
+   ]
+  }
+ ]
+}

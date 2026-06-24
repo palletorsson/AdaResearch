@@ -1,0 +1,88 @@
+{
+ "map": "SoftBodies_Soft_Body_Deformation",
+ "sequence": "softbodies",
+ "counts": {
+  "existing": 2,
+  "added": 5,
+  "large": 4
+ },
+ "pearls": [
+  {
+   "id": "jelly_cube",
+   "name": "Jelly Cube",
+   "size": "small",
+   "source": "existing",
+   "concept": "Jelly & deformation",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "cloth_simulation",
+   "name": "Cloth Simulation",
+   "size": "large",
+   "source": "added",
+   "concept": "Cloth physics",
+   "footprint": [
+    4.0,
+    5.0
+   ]
+  },
+  {
+   "id": "soft_bodies",
+   "name": "Soft Body Physics",
+   "size": "small",
+   "source": "added",
+   "concept": "Verlet & the soft-body sim",
+   "footprint": [
+    2.0,
+    2.0
+   ]
+  },
+  {
+   "id": "softbody3d",
+   "name": "SoftBody 3D",
+   "size": "small",
+   "source": "added",
+   "concept": "Verlet & the soft-body sim",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "spring_mass_system",
+   "name": "Spring-Mass Network",
+   "size": "large",
+   "source": "added",
+   "concept": "Mass-spring networks",
+   "footprint": [
+    7.0,
+    7.0
+   ]
+  },
+  {
+   "id": "softmill",
+   "name": "softmill",
+   "size": "large",
+   "source": "existing",
+   "concept": "Mass-spring networks",
+   "footprint": [
+    3.0,
+    4.0
+   ]
+  },
+  {
+   "id": "mass_spring_damper",
+   "name": "Mass-Spring-Damper",
+   "size": "large",
+   "source": "added",
+   "concept": "Mass-spring networks",
+   "footprint": [
+    6.0,
+    3.0
+   ]
+  }
+ ]
+}

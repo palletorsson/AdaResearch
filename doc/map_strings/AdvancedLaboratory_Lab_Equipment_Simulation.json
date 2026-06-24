@@ -1,0 +1,88 @@
+{
+ "map": "AdvancedLaboratory_Lab_Equipment_Simulation",
+ "sequence": "postfoundationscrisis",
+ "counts": {
+  "existing": 1,
+  "added": 6,
+  "large": 1
+ },
+ "pearls": [
+  {
+   "id": "MolecularDesigner",
+   "name": "Molecular Designer",
+   "size": "large",
+   "source": "existing",
+   "concept": "Molecular design after crisis",
+   "footprint": [
+    3.0,
+    4.0
+   ]
+  },
+  {
+   "id": "ethics_bench",
+   "name": "EthicsBench",
+   "size": "small",
+   "source": "added",
+   "concept": "Ethical design after incompleteness",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "bias_blindspot_toy",
+   "name": "BiasBlindspotToy",
+   "size": "small",
+   "source": "added",
+   "concept": "Bias as structural incompleteness",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "peer_production_tool",
+   "name": "PeerProductionTool",
+   "size": "small",
+   "source": "added",
+   "concept": "Collective knowledge / the commons",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "molecular_room",
+   "name": "MolecularRoom",
+   "size": "small",
+   "source": "added",
+   "concept": "Molecular design after crisis",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "molecular_toy",
+   "name": "MolecularToy",
+   "size": "small",
+   "source": "added",
+   "concept": "Molecular design after crisis",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "molecular_bench",
+   "name": "MolecularBench",
+   "size": "small",
+   "source": "added",
+   "concept": "Molecular design after crisis",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  }
+ ]
+}

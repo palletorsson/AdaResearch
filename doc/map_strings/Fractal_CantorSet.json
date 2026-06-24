@@ -1,0 +1,88 @@
+{
+ "map": "Fractal_CantorSet",
+ "sequence": "fractals",
+ "counts": {
+  "existing": 4,
+  "added": 3,
+  "large": 4
+ },
+ "pearls": [
+  {
+   "id": "cantor_set",
+   "name": "cantor_set",
+   "size": "large",
+   "source": "existing",
+   "concept": "Cantor set",
+   "footprint": [
+    9.0,
+    1.0
+   ]
+  },
+  {
+   "id": "cantor_pagoda_vr",
+   "name": "cantor_pagoda_vr",
+   "size": "large",
+   "source": "added",
+   "concept": "Fractal architecture",
+   "footprint": [
+    20.0,
+    4.0
+   ]
+  },
+  {
+   "id": "example_8_4_cantor_pagoda_vr",
+   "name": "example_8_4_cantor_pagoda_vr",
+   "size": "large",
+   "source": "existing",
+   "concept": "Cantor set",
+   "footprint": [
+    20.0,
+    4.0
+   ]
+  },
+  {
+   "id": "cantor_diagonal_workbench",
+   "name": "Cantor Diagonal Workbench",
+   "size": "small",
+   "source": "added",
+   "concept": "Cantor set",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "example_8_4_cantor_set_vr",
+   "name": "example_8_4_cantor_set_vr",
+   "size": "small",
+   "source": "existing",
+   "concept": "Cantor set",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "fractal_cantor_set",
+   "name": "Cantor Set",
+   "size": "small",
+   "source": "added",
+   "concept": "Cantor set",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "stochastic_tree_separated",
+   "name": "stochastic_tree_separated",
+   "size": "large",
+   "source": "existing",
+   "concept": "",
+   "footprint": [
+    4.0,
+    1.0
+   ]
+  }
+ ]
+}

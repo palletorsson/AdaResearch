@@ -1,0 +1,121 @@
+{
+ "map": "CA_BeyondBinary",
+ "sequence": "cellularautomata",
+ "counts": {
+  "existing": 4,
+  "added": 6,
+  "large": 2
+ },
+ "pearls": [
+  {
+   "id": "hexagon_ca_vr",
+   "name": "Hexagon CA VR",
+   "size": "large",
+   "source": "existing",
+   "concept": "Alternative neighbourhoods (hex)",
+   "footprint": [
+    36.0,
+    31.0
+   ]
+  },
+  {
+   "id": "game_of_life_oop_vr",
+   "name": "Game of Life OOP VR",
+   "size": "small",
+   "source": "added",
+   "concept": "Conway's Game of Life",
+   "footprint": [
+    2.0,
+    1.0
+   ]
+  },
+  {
+   "id": "7_3_game_of_life_oop_vr",
+   "name": "7_3_game_of_life_oop_vr",
+   "size": "small",
+   "source": "added",
+   "concept": "Conway's Game of Life",
+   "footprint": [
+    2.0,
+    1.0
+   ]
+  },
+  {
+   "id": "7_2_game_of_life_vr",
+   "name": "7_2_game_of_life_vr",
+   "size": "small",
+   "source": "added",
+   "concept": "Conway's Game of Life",
+   "footprint": [
+    2.0,
+    1.0
+   ]
+  },
+  {
+   "id": "ca_growth_network",
+   "name": "CA Growth Network",
+   "size": "small",
+   "source": "existing",
+   "concept": "Growth & dendrites",
+   "footprint": [
+    2.0,
+    2.0
+   ]
+  },
+  {
+   "id": "game_of_life_petri",
+   "name": "Game of Life Petri Dish",
+   "size": "small",
+   "source": "existing",
+   "concept": "Conway's Game of Life",
+   "footprint": [
+    1.0,
+    2.0
+   ]
+  },
+  {
+   "id": "life_zoo_bench",
+   "name": "Life Zoo Bench (still / pulse / travel)",
+   "size": "small",
+   "source": "added",
+   "concept": "Life patterns & variants",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "ca_conway_city",
+   "name": "Conway Emergent City",
+   "size": "large",
+   "source": "added",
+   "concept": "Conway's Game of Life",
+   "footprint": [
+    8.0,
+    8.0
+   ]
+  },
+  {
+   "id": "game_of_life_vr",
+   "name": "Game of Life VR",
+   "size": "small",
+   "source": "added",
+   "concept": "Conway's Game of Life",
+   "footprint": [
+    2.0,
+    1.0
+   ]
+  },
+  {
+   "id": "mold_network",
+   "name": "Mold Network",
+   "size": "small",
+   "source": "existing",
+   "concept": "Stigmergy & ecological CA",
+   "footprint": [
+    2.0,
+    2.0
+   ]
+  }
+ ]
+}

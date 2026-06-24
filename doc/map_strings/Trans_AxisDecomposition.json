@@ -1,0 +1,154 @@
+{
+ "map": "Trans_AxisDecomposition",
+ "sequence": "transformation",
+ "counts": {
+  "existing": 7,
+  "added": 6,
+  "large": 3
+ },
+ "pearls": [
+  {
+   "id": "toruscylinder",
+   "name": "Torus Cylinder",
+   "size": "large",
+   "source": "existing",
+   "concept": "Curved space (non-Euclidean)",
+   "footprint": [
+    4.0,
+    3.0
+   ]
+  },
+  {
+   "id": "floor_tiles",
+   "name": "floor_tiles",
+   "size": "large",
+   "source": "added",
+   "concept": "Tiling / pattern",
+   "footprint": [
+    12.0,
+    7.0
+   ]
+  },
+  {
+   "id": "shear_matrix_demo",
+   "name": "Shear Matrix Demo",
+   "size": "small",
+   "source": "added",
+   "concept": "Shear",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "scaleme",
+   "name": "scaleme",
+   "size": "large",
+   "source": "added",
+   "concept": "Scale",
+   "footprint": [
+    26.0,
+    26.0
+   ]
+  },
+  {
+   "id": "homogeneous_coordinates",
+   "name": "Homogeneous Coordinates",
+   "size": "small",
+   "source": "added",
+   "concept": "Matrix / homogeneous",
+   "footprint": [
+    2.0,
+    1.0
+   ]
+  },
+  {
+   "id": "matrix_4x4_viewer",
+   "name": "Matrix 4x4 Viewer",
+   "size": "small",
+   "source": "added",
+   "concept": "Matrix / homogeneous",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "z_translation_cube",
+   "name": "Z-Translation Cube",
+   "size": "small",
+   "source": "existing",
+   "concept": "Translation",
+   "footprint": [
+    1.0,
+    2.0
+   ]
+  },
+  {
+   "id": "axis_translation_cube",
+   "name": "Axis Translation Cube",
+   "size": "small",
+   "source": "added",
+   "concept": "Translation",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "x_translation_cube",
+   "name": "X-Translation Cube",
+   "size": "small",
+   "source": "existing",
+   "concept": "Translation",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "pickup_gate",
+   "name": "Pickup Gate",
+   "size": "small",
+   "source": "existing",
+   "concept": "",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "translation_cube_demo",
+   "name": "Translation Cube Demo",
+   "size": "small",
+   "source": "existing",
+   "concept": "Translation",
+   "footprint": [
+    2.0,
+    2.0
+   ]
+  },
+  {
+   "id": "cube_scene",
+   "name": "Basic Cube Scene",
+   "size": "small",
+   "source": "existing",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "pick_up_cube",
+   "name": "Pick Up Cube",
+   "size": "small",
+   "source": "existing",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  }
+ ]
+}

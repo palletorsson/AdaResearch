@@ -1,0 +1,154 @@
+{
+ "map": "Point_Triangle_Context",
+ "sequence": "primitives",
+ "counts": {
+  "existing": 7,
+  "added": 6,
+  "large": 1
+ },
+ "pearls": [
+  {
+   "id": "folded_strip",
+   "name": "1.2: folded_strip",
+   "size": "large",
+   "source": "existing",
+   "concept": "Triangle",
+   "footprint": [
+    5.0,
+    1.0
+   ]
+  },
+  {
+   "id": "rectcube",
+   "name": "Rectangular Cube",
+   "size": "small",
+   "source": "added",
+   "concept": "Cube / box",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "capsules",
+   "name": "capsules",
+   "size": "small",
+   "source": "added",
+   "concept": "Capsule",
+   "footprint": [
+    2.0,
+    1.0
+   ]
+  },
+  {
+   "id": "kochsnowflake",
+   "name": "kochsnowflake",
+   "size": "small",
+   "source": "added",
+   "concept": "Other primitives",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "SDFDrawTool",
+   "name": "SDFDrawTool",
+   "size": "small",
+   "source": "added",
+   "concept": "Assembly / SDF / boolean",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "draw_triangle_faces",
+   "name": "draw_triangle_faces",
+   "size": "small",
+   "source": "existing",
+   "concept": "Triangle",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "interactivetriangle",
+   "name": "1.2: A triangle",
+   "size": "small",
+   "source": "existing",
+   "concept": "Triangle",
+   "footprint": [
+    2.0,
+    1.0
+   ]
+  },
+  {
+   "id": "pythagorean_triangle_angles",
+   "name": "1.2: A pythagorean_triangle_angles",
+   "size": "small",
+   "source": "existing",
+   "concept": "Triangle",
+   "footprint": [
+    3.0,
+    1.0
+   ]
+  },
+  {
+   "id": "right_triangle_lines",
+   "name": "right_triangle_lines",
+   "size": "small",
+   "source": "added",
+   "concept": "Triangle",
+   "footprint": [
+    2.0,
+    2.0
+   ]
+  },
+  {
+   "id": "pythagorean_triangle",
+   "name": "pythagorean_triangle",
+   "size": "small",
+   "source": "added",
+   "concept": "Triangle",
+   "footprint": [
+    3.0,
+    1.0
+   ]
+  },
+  {
+   "id": "quad_line_puzzle",
+   "name": "Quad Line Puzzle",
+   "size": "small",
+   "source": "existing",
+   "concept": "Plane / quad",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "quad",
+   "name": "quad",
+   "size": "small",
+   "source": "existing",
+   "concept": "Plane / quad",
+   "footprint": [
+    2.0,
+    1.0
+   ]
+  },
+  {
+   "id": "cube_scene",
+   "name": "Basic Cube Scene",
+   "size": "small",
+   "source": "existing",
+   "concept": "Cube / box",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  }
+ ]
+}

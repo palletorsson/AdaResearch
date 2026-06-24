@@ -1,0 +1,176 @@
+{
+ "map": "Random_Definition",
+ "sequence": "randomness",
+ "counts": {
+  "existing": 9,
+  "added": 6,
+  "large": 3
+ },
+ "pearls": [
+  {
+   "id": "slot_machine",
+   "name": "Slot Machine",
+   "size": "small",
+   "source": "existing",
+   "concept": "Coin / dice / discrete chance",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "distribution_bench",
+   "name": "Distribution Bench (live histogram)",
+   "size": "small",
+   "source": "added",
+   "concept": "Probability distribution",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "prng_crank_machine",
+   "name": "PRNG Crank Machine",
+   "size": "small",
+   "source": "existing",
+   "concept": "Seeds / PRNG vs TRNG",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "random_fireworks",
+   "name": "Random Fireworks (per-particle chance)",
+   "size": "small",
+   "source": "added",
+   "concept": "Particle randomness",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "seed_vs_random",
+   "name": "Seed vs Random (the thesis bed)",
+   "size": "small",
+   "source": "added",
+   "concept": "Seeded growth / DNA -> form",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "entropy_axiom",
+   "name": "Entropy Axiom",
+   "size": "large",
+   "source": "existing",
+   "concept": "Entropy",
+   "footprint": [
+    3.0,
+    8.0
+   ]
+  },
+  {
+   "id": "entropy_jar",
+   "name": "Entropy Jar",
+   "size": "small",
+   "source": "existing",
+   "concept": "Entropy",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "entropy_bench",
+   "name": "Entropy Bench (bits of surprise)",
+   "size": "small",
+   "source": "added",
+   "concept": "Entropy",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "shannon_entropy_meter",
+   "name": "Shannon Entropy Meter",
+   "size": "small",
+   "source": "added",
+   "concept": "Entropy",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "random_butterflies",
+   "name": "Random Butterflies",
+   "size": "small",
+   "source": "existing",
+   "concept": "Random art / scatter",
+   "footprint": [
+    1.0,
+    2.0
+   ]
+  },
+  {
+   "id": "clipboard#prng_axioms",
+   "name": "clipboard#prng_axioms",
+   "size": "small",
+   "source": "existing",
+   "concept": "",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "digital_materiality_glitch",
+   "name": "Digital Materiality Glitch",
+   "size": "small",
+   "source": "existing",
+   "concept": "Entropy",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "trng_vs_prng",
+   "name": "TRNG vs PRNG",
+   "size": "large",
+   "source": "existing",
+   "concept": "Seeds / PRNG vs TRNG",
+   "footprint": [
+    23.0,
+    1.0
+   ]
+  },
+  {
+   "id": "randomize_cubes_over_Z",
+   "name": "Randomize Cubes Over Z",
+   "size": "small",
+   "source": "added",
+   "concept": "Random transformations",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "random_number_book_page_1955",
+   "name": "Random Number Book Page 1955",
+   "size": "large",
+   "source": "existing",
+   "concept": "Uniform random / RNG",
+   "footprint": [
+    4.0,
+    1.0
+   ]
+  }
+ ]
+}

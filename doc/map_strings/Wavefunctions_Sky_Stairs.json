@@ -1,0 +1,55 @@
+{
+ "map": "Wavefunctions_Sky_Stairs",
+ "sequence": "wavefunctions",
+ "counts": {
+  "existing": 3,
+  "added": 1,
+  "large": 2
+ },
+ "pearls": [
+  {
+   "id": "cube_scene",
+   "name": "Basic Cube Scene",
+   "size": "small",
+   "source": "existing",
+   "concept": "the wave",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "math_objects",
+   "name": "Mathematical Objects",
+   "size": "large",
+   "source": "existing",
+   "concept": "Sky Stairs",
+   "footprint": [
+    12.0,
+    12.0
+   ]
+  },
+  {
+   "id": "sine_cylinder_staircase",
+   "name": "sine_cylinder_staircase",
+   "size": "large",
+   "source": "existing",
+   "concept": "Sky Stairs",
+   "footprint": [
+    8.0,
+    8.0
+   ]
+  },
+  {
+   "id": "profile_lissajous",
+   "name": "Profile — Lissajous Components",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  }
+ ]
+}

@@ -1,0 +1,99 @@
+{
+ "map": "Color_Grid_Pallet",
+ "sequence": "color",
+ "counts": {
+  "existing": 2,
+  "added": 6,
+  "large": 3
+ },
+ "pearls": [
+  {
+   "id": "gridcolorizer",
+   "name": "gridcolorizer",
+   "size": "small",
+   "source": "existing",
+   "concept": "The grid becomes a canvas. Each cell a",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "spectrum_forest",
+   "name": "spectrum_forest",
+   "size": "large",
+   "source": "existing",
+   "concept": "The grid becomes a canvas. Each cell a",
+   "footprint": [
+    20.0,
+    20.0
+   ]
+  },
+  {
+   "id": "grabcolorcollection",
+   "name": "grabcolorcollection",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    2.0,
+    1.0
+   ]
+  },
+  {
+   "id": "colortrails",
+   "name": "colortrails",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "MetamerismLab",
+   "name": "MetamerismLab",
+   "size": "large",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    5.0,
+    1.0
+   ]
+  },
+  {
+   "id": "colorsheets",
+   "name": "Color Sheets",
+   "size": "small",
+   "source": "added",
+   "concept": "Pillars of color rise along the runway",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "strobe_lasers",
+   "name": "strobe_lasers",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "RotatingLaser",
+   "name": "RotatingLaser",
+   "size": "large",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    15.0,
+    7.0
+   ]
+  }
+ ]
+}

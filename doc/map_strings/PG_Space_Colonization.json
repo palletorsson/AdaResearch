@@ -1,0 +1,88 @@
+{
+ "map": "PG_Space_Colonization",
+ "sequence": "proceduralgeneration",
+ "counts": {
+  "existing": 1,
+  "added": 6,
+  "large": 2
+ },
+ "pearls": [
+  {
+   "id": "space_colonization_algorithm",
+   "name": "space_colonization_algorithm",
+   "size": "small",
+   "source": "existing",
+   "concept": "Space colonization",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "sculpt_one",
+   "name": "Sculpt One",
+   "size": "large",
+   "source": "added",
+   "concept": "SDF sculpting",
+   "footprint": [
+    5.0,
+    4.0
+   ]
+  },
+  {
+   "id": "reaction_diffusion_vr",
+   "name": "Reaction Diffusion (VR)",
+   "size": "small",
+   "source": "added",
+   "concept": "Reaction-diffusion & phase transition",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "reaction_diffusion",
+   "name": "Reaction Diffusion",
+   "size": "small",
+   "source": "added",
+   "concept": "Reaction-diffusion & phase transition",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "room_grammar",
+   "name": "Room Grammar",
+   "size": "small",
+   "source": "added",
+   "concept": "WFC structures & rooms",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "binary_space_partitioning",
+   "name": "binary_space_partitioning",
+   "size": "large",
+   "source": "added",
+   "concept": "Boolean & space partition",
+   "footprint": [
+    14.0,
+    14.0
+   ]
+  },
+  {
+   "id": "branching_growth_algorithm_continued",
+   "name": "Branching Growth Algorithm continued",
+   "size": "small",
+   "source": "added",
+   "concept": "Space colonization",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  }
+ ]
+}

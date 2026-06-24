@@ -1,0 +1,99 @@
+{
+ "map": "WaveFunctions_3D_Wave_Propagation",
+ "sequence": "wavefunctions",
+ "counts": {
+  "existing": 2,
+  "added": 6,
+  "large": 4
+ },
+ "pearls": [
+  {
+   "id": "kusama_sine",
+   "name": "Kusama Sine",
+   "size": "large",
+   "source": "existing",
+   "concept": "3D wave propagation",
+   "footprint": [
+    8.0,
+    8.0
+   ]
+  },
+  {
+   "id": "profile_saw",
+   "name": "Profile — Sawtooth Wave",
+   "size": "small",
+   "source": "added",
+   "concept": "the wave",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "wave_interference_tank",
+   "name": "Wave Interference Tank",
+   "size": "small",
+   "source": "added",
+   "concept": "the wave",
+   "footprint": [
+    1.0,
+    2.0
+   ]
+  },
+  {
+   "id": "vertical_wave_lines",
+   "name": "Vertical Wave Lines",
+   "size": "large",
+   "source": "added",
+   "concept": "the wave",
+   "footprint": [
+    12.0,
+    12.0
+   ]
+  },
+  {
+   "id": "wave_interference_3d",
+   "name": "Wave Interference 3D",
+   "size": "small",
+   "source": "added",
+   "concept": "sound as wave",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "wave_propagation_3d",
+   "name": "3D Wave Propagation",
+   "size": "large",
+   "source": "existing",
+   "concept": "3D wave propagation",
+   "footprint": [
+    14.0,
+    13.0
+   ]
+  },
+  {
+   "id": "wave_equation_solver",
+   "name": "Wave Equation Solver",
+   "size": "small",
+   "source": "added",
+   "concept": "the wave",
+   "footprint": [
+    1.0,
+    2.0
+   ]
+  },
+  {
+   "id": "wave_interference",
+   "name": "Wave Interference",
+   "size": "large",
+   "source": "added",
+   "concept": "TrigWalkingPath",
+   "footprint": [
+    21.0,
+    16.0
+   ]
+  }
+ ]
+}

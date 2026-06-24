@@ -1,0 +1,121 @@
+{
+ "map": "ForcesChaos",
+ "sequence": "forces",
+ "counts": {
+  "existing": 4,
+  "added": 6,
+  "large": 5
+ },
+ "pearls": [
+  {
+   "id": "three_body_problem",
+   "name": "Three-Body Problem",
+   "size": "small",
+   "source": "existing",
+   "concept": "Gravity / orbit",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "cloth_simulation",
+   "name": "Cloth Simulation",
+   "size": "large",
+   "source": "added",
+   "concept": "Gravity / orbit",
+   "footprint": [
+    4.0,
+    5.0
+   ]
+  },
+  {
+   "id": "DoublePendulum",
+   "name": "Double Pendulum",
+   "size": "large",
+   "source": "added",
+   "concept": "Pendulum",
+   "footprint": [
+    16.0,
+    2.0
+   ]
+  },
+  {
+   "id": "nbody_simulation",
+   "name": "N-Body Gravitational Simulation",
+   "size": "small",
+   "source": "existing",
+   "concept": "Gravity / orbit",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "chaos_attractor",
+   "name": "Chaos Attractor",
+   "size": "small",
+   "source": "existing",
+   "concept": "",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "rockfactory_gravity",
+   "name": "Rock Factory (Gravity)",
+   "size": "small",
+   "source": "added",
+   "concept": "Gravity / orbit",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "forcedirected3d",
+   "name": "forcedirected3d",
+   "size": "large",
+   "source": "existing",
+   "concept": "Spring / Hooke",
+   "footprint": [
+    16.0,
+    18.0
+   ]
+  },
+  {
+   "id": "scale_me",
+   "name": "scale_me",
+   "size": "small",
+   "source": "added",
+   "concept": "Scaling",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "FlowFieldMain",
+   "name": "FlowFieldMain",
+   "size": "large",
+   "source": "added",
+   "concept": "Vector field / flow",
+   "footprint": [
+    50.0,
+    50.0
+   ]
+  },
+  {
+   "id": "force_directed_layout",
+   "name": "force_directed_layout",
+   "size": "large",
+   "source": "added",
+   "concept": "Spring / Hooke",
+   "footprint": [
+    17.0,
+    1.0
+   ]
+  }
+ ]
+}

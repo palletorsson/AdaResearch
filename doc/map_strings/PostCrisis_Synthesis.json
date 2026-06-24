@@ -1,0 +1,88 @@
+{
+ "map": "PostCrisis_Synthesis",
+ "sequence": "postfoundationscrisis",
+ "counts": {
+  "existing": 1,
+  "added": 6,
+  "large": 1
+ },
+ "pearls": [
+  {
+   "id": "edge_as_ground_capstone",
+   "name": "Edge as Ground Capstone",
+   "size": "small",
+   "source": "existing",
+   "concept": "",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "edge_ground_bench",
+   "name": "EdgeGroundBench",
+   "size": "small",
+   "source": "added",
+   "concept": "The edge is the ground",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "cap_theorem_bench",
+   "name": "CapTheoremBench",
+   "size": "small",
+   "source": "added",
+   "concept": "Paraconsistent engineering",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "edge_ground_synthesis",
+   "name": "EdgeGroundSynthesis",
+   "size": "small",
+   "source": "added",
+   "concept": "The edge is the ground",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "edge_ground_toy",
+   "name": "EdgeGroundToy",
+   "size": "small",
+   "source": "added",
+   "concept": "The edge is the ground",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "edge_ground_room",
+   "name": "EdgeGroundRoom",
+   "size": "small",
+   "source": "added",
+   "concept": "The edge is the ground",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "rhizome_vault",
+   "name": "Rhizome Vault",
+   "size": "large",
+   "source": "added",
+   "concept": "Rhizome networks",
+   "footprint": [
+    10.0,
+    10.0
+   ]
+  }
+ ]
+}

@@ -1,0 +1,55 @@
+{
+ "map": "Tutorial_3D",
+ "sequence": "array_tutorial",
+ "counts": {
+  "existing": 1,
+  "added": 3,
+  "large": 2
+ },
+ "pearls": [
+  {
+   "id": "grid_3d_4x4x4",
+   "name": "grid_3d_4x4x4",
+   "size": "large",
+   "source": "existing",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    4.0,
+    4.0
+   ]
+  },
+  {
+   "id": "row_3_x",
+   "name": "row_3_x",
+   "size": "large",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    4.0,
+    2.0
+   ]
+  },
+  {
+   "id": "grid_model",
+   "name": "Grid Model",
+   "size": "small",
+   "source": "added",
+   "concept": "Patterns",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "IndexVisualizer",
+   "name": "IndexVisualizer",
+   "size": "small",
+   "source": "added",
+   "concept": "Basics",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  }
+ ]
+}

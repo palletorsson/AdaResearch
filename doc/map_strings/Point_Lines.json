@@ -1,0 +1,220 @@
+{
+ "map": "Point_Lines",
+ "sequence": "primitives",
+ "counts": {
+  "existing": 13,
+  "added": 6,
+  "large": 1
+ },
+ "pearls": [
+  {
+   "id": "line_demo",
+   "name": "line_demo",
+   "size": "small",
+   "source": "existing",
+   "concept": "Line / edge",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "coordinate_axes_xy",
+   "name": "coordinate_axes_xy",
+   "size": "small",
+   "source": "added",
+   "concept": "Text / glyph",
+   "footprint": [
+    2.0,
+    1.0
+   ]
+  },
+  {
+   "id": "plus_lines",
+   "name": "plus_lines",
+   "size": "small",
+   "source": "added",
+   "concept": "Line / edge",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "one_meter_line",
+   "name": "one_meter_line",
+   "size": "small",
+   "source": "added",
+   "concept": "Line / edge",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "modulor_man_demo",
+   "name": "modulor_man_demo",
+   "size": "small",
+   "source": "existing",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "line_builder_3d",
+   "name": "Line Builder 3D",
+   "size": "large",
+   "source": "existing",
+   "concept": "Line / edge",
+   "footprint": [
+    4.0,
+    1.0
+   ]
+  },
+  {
+   "id": "plus_line_puzzle",
+   "name": "Plus Line Puzzle",
+   "size": "small",
+   "source": "existing",
+   "concept": "Interactive tool",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "parallel_line_puzzle",
+   "name": "Parallel Line Puzzle",
+   "size": "small",
+   "source": "existing",
+   "concept": "Interactive tool",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "cube_scene",
+   "name": "Basic Cube Scene",
+   "size": "small",
+   "source": "existing",
+   "concept": "Cube / box",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "line",
+   "name": "1.1 A Line",
+   "size": "small",
+   "source": "existing",
+   "concept": "Sphere / ball",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "laser_measure",
+   "name": "laser_measure",
+   "size": "small",
+   "source": "existing",
+   "concept": "Interactive tool",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "laser_exploding_sphere",
+   "name": "Laser Exploding Sphere",
+   "size": "small",
+   "source": "existing",
+   "concept": "Sphere / ball",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "perspective_lines",
+   "name": "perspective_lines",
+   "size": "small",
+   "source": "existing",
+   "concept": "Point",
+   "footprint": [
+    2.0,
+    3.0
+   ]
+  },
+  {
+   "id": "coordinate_lines",
+   "name": "coordinate_lines",
+   "size": "small",
+   "source": "added",
+   "concept": "Line / edge",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "scale_lines",
+   "name": "scale_lines",
+   "size": "small",
+   "source": "existing",
+   "concept": "Line / edge",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "parallel_lines",
+   "name": "parallel_lines",
+   "size": "small",
+   "source": "added",
+   "concept": "Line / edge",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "cross_lines",
+   "name": "cross_lines",
+   "size": "small",
+   "source": "added",
+   "concept": "Line / edge",
+   "footprint": [
+    2.0,
+    1.0
+   ]
+  },
+  {
+   "id": "lightrod",
+   "name": "Light Rod",
+   "size": "small",
+   "source": "existing",
+   "concept": "Other primitives",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "dgrid",
+   "name": "DÃ¼rer Grid",
+   "size": "small",
+   "source": "existing",
+   "concept": "Grid / array",
+   "footprint": [
+    2.0,
+    1.0
+   ]
+  }
+ ]
+}

@@ -1,0 +1,110 @@
+{
+ "map": "Random_Rotate_Random_XYZ",
+ "sequence": "randomness",
+ "counts": {
+  "existing": 3,
+  "added": 6,
+  "large": 3
+ },
+ "pearls": [
+  {
+   "id": "Random_Rotate_Random_XYZ",
+   "name": "Random Rotate XYZ",
+   "size": "small",
+   "source": "existing",
+   "concept": "Random transformations",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "randompoint",
+   "name": "randompoint",
+   "size": "small",
+   "source": "added",
+   "concept": "Uniform random / RNG",
+   "footprint": [
+    2.0,
+    1.0
+   ]
+  },
+  {
+   "id": "random_transformations",
+   "name": "Random Transformations",
+   "size": "small",
+   "source": "added",
+   "concept": "Random transformations",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "random_transformations_matrices",
+   "name": "Random Transformations - Matrices",
+   "size": "small",
+   "source": "added",
+   "concept": "Random transformations",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "randomup",
+   "name": "Random Up",
+   "size": "large",
+   "source": "added",
+   "concept": "Uniform random / RNG",
+   "footprint": [
+    12.0,
+    16.0
+   ]
+  },
+  {
+   "id": "rotate_random_y",
+   "name": "Rotate Random Y",
+   "size": "small",
+   "source": "added",
+   "concept": "Random transformations",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "random_decay_multimesh",
+   "name": "Random Decay MultiMesh",
+   "size": "large",
+   "source": "existing",
+   "concept": "Random transformations",
+   "footprint": [
+    17.0,
+    2.0
+   ]
+  },
+  {
+   "id": "walkingsphere",
+   "name": "walkingsphere",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    2.0,
+    2.0
+   ]
+  },
+  {
+   "id": "hardware_entropy_decay",
+   "name": "Hardware Entropy Decay",
+   "size": "large",
+   "source": "existing",
+   "concept": "Entropy",
+   "footprint": [
+    7.0,
+    2.0
+   ]
+  }
+ ]
+}

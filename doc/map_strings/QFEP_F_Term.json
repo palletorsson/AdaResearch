@@ -1,0 +1,66 @@
+{
+ "map": "QFEP_F_Term",
+ "sequence": "qfeplaboratory",
+ "counts": {
+  "existing": 4,
+  "added": 1,
+  "large": 1
+ },
+ "pearls": [
+  {
+   "id": "snap_cube_puzzle",
+   "name": "Snap Cube Puzzle",
+   "size": "small",
+   "source": "existing",
+   "concept": "F — free energy & order",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "snap_tetra_puzzle",
+   "name": "Snap Tetra Puzzle",
+   "size": "small",
+   "source": "existing",
+   "concept": "F — free energy & order",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "crystal_cluster",
+   "name": "Crystal Cluster",
+   "size": "small",
+   "source": "existing",
+   "concept": "F — free energy & order",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "lambda_slider",
+   "name": "Lambda Slider",
+   "size": "large",
+   "source": "existing",
+   "concept": "λ — the order-chaos dial",
+   "footprint": [
+    8.0,
+    8.0
+   ]
+  },
+  {
+   "id": "entropy_bellows",
+   "name": "Entropy Bellows",
+   "size": "small",
+   "source": "added",
+   "concept": "E — entropy as possibility",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  }
+ ]
+}

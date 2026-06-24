@@ -1,0 +1,44 @@
+{
+ "map": "SpeculativeComputation_Situated_Computation",
+ "sequence": "postfoundationscrisis",
+ "counts": {
+  "existing": 2,
+  "added": 1,
+  "large": 0
+ },
+ "pearls": [
+  {
+   "id": "situated_sensor",
+   "name": "Situated Sensor",
+   "size": "small",
+   "source": "existing",
+   "concept": "Situated computation",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "situated_bench",
+   "name": "SituatedBench",
+   "size": "small",
+   "source": "added",
+   "concept": "Situated computation",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "locatable_knowledge_station",
+   "name": "Locatable Knowledge Station",
+   "size": "small",
+   "source": "existing",
+   "concept": "",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  }
+ ]
+}

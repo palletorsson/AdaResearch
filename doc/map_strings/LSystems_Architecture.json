@@ -1,0 +1,44 @@
+{
+ "map": "LSystems_Architecture",
+ "sequence": "lsystems",
+ "counts": {
+  "existing": 2,
+  "added": 1,
+  "large": 2
+ },
+ "pearls": [
+  {
+   "id": "CityGenerator",
+   "name": "City Generator",
+   "size": "large",
+   "source": "existing",
+   "concept": "Grammar architecture (cities/dungeons)",
+   "footprint": [
+    17.0,
+    17.0
+   ]
+  },
+  {
+   "id": "lsystem_dungeon",
+   "name": "L-System Dungeon",
+   "size": "small",
+   "source": "existing",
+   "concept": "Grammar architecture (cities/dungeons)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "grammar_provenance",
+   "name": "Grammar Provenance",
+   "size": "large",
+   "source": "added",
+   "concept": "Axiom & production rules",
+   "footprint": [
+    18.0,
+    1.0
+   ]
+  }
+ ]
+}

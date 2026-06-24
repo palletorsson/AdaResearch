@@ -1,0 +1,99 @@
+{
+ "map": "Noise_Voxel",
+ "sequence": "noise",
+ "counts": {
+  "existing": 2,
+  "added": 6,
+  "large": 1
+ },
+ "pearls": [
+  {
+   "id": "perlin_terrain_sculptor",
+   "name": "Perlin Terrain Sculptor",
+   "size": "small",
+   "source": "existing",
+   "concept": "Three",
+   "footprint": [
+    2.0,
+    2.0
+   ]
+  },
+  {
+   "id": "living_paper_noise_octaves",
+   "name": "Living Paper — Noise Octaves",
+   "size": "small",
+   "source": "added",
+   "concept": "White noise screams chaos",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "profile_noise_octaves",
+   "name": "Profile — Noise Octaves",
+   "size": "small",
+   "source": "added",
+   "concept": "White noise screams chaos",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "mesh_grammar_crumpled",
+   "name": "MeshGrammar — Crumpled Form",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "living_paper_perlin",
+   "name": "Living Paper — Perlin Noise",
+   "size": "small",
+   "source": "added",
+   "concept": "Before Perlin, noise was static",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "voxelnoise",
+   "name": "Voxel Noise",
+   "size": "large",
+   "source": "existing",
+   "concept": "Three",
+   "footprint": [
+    32.0,
+    32.0
+   ]
+  },
+  {
+   "id": "noise_terrain_with_blobs",
+   "name": "Noise Terrain with Animated Blobs",
+   "size": "small",
+   "source": "added",
+   "concept": "White noise screams chaos",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "VoxelNoiseROIs",
+   "name": "Voxel Noise ROIs",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    2.0,
+    2.0
+   ]
+  }
+ ]
+}

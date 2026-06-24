@@ -1,0 +1,77 @@
+{
+ "map": "PG_Branching_Growth",
+ "sequence": "proceduralgeneration",
+ "counts": {
+  "existing": 2,
+  "added": 4,
+  "large": 4
+ },
+ "pearls": [
+  {
+   "id": "branching_growth_algorithm",
+   "name": "Branching Growth Algorithm",
+   "size": "small",
+   "source": "existing",
+   "concept": "Space colonization",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "cave_system",
+   "name": "Cave System Generator",
+   "size": "large",
+   "source": "added",
+   "concept": "Agent walks & caves",
+   "footprint": [
+    25.0,
+    24.0
+   ]
+  },
+  {
+   "id": "organic_space",
+   "name": "Organic Space",
+   "size": "large",
+   "source": "existing",
+   "concept": "",
+   "footprint": [
+    25.0,
+    25.0
+   ]
+  },
+  {
+   "id": "voronoi_space",
+   "name": "voronoi_space",
+   "size": "large",
+   "source": "added",
+   "concept": "Voronoi & Delaunay",
+   "footprint": [
+    20.0,
+    20.0
+   ]
+  },
+  {
+   "id": "surreal_kinetic_sculpture",
+   "name": "Surreal Kinetic Sculpture",
+   "size": "large",
+   "source": "added",
+   "concept": "SDF sculpting",
+   "footprint": [
+    23.0,
+    24.0
+   ]
+  },
+  {
+   "id": "ruth_asawa_sculpture",
+   "name": "Ruth Asawa Sculpture",
+   "size": "small",
+   "source": "added",
+   "concept": "SDF sculpting",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  }
+ ]
+}

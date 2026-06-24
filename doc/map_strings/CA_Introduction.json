@@ -1,0 +1,66 @@
+{
+ "map": "CA_Introduction",
+ "sequence": "cellularautomata",
+ "counts": {
+  "existing": 2,
+  "added": 3,
+  "large": 2
+ },
+ "pearls": [
+  {
+   "id": "persian_rug",
+   "name": "Persian Rug",
+   "size": "large",
+   "source": "existing",
+   "concept": "CA materials & texture",
+   "footprint": [
+    3.0,
+    4.0
+   ]
+  },
+  {
+   "id": "wireworld_circuit",
+   "name": "Wireworld Circuit",
+   "size": "small",
+   "source": "added",
+   "concept": "Wireworld / CA circuits",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "pulsing_ca",
+   "name": "Pulsing CA",
+   "size": "small",
+   "source": "added",
+   "concept": "Life patterns & variants",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "line_network_ca",
+   "name": "Line Network CA",
+   "size": "small",
+   "source": "existing",
+   "concept": "Elementary CA (1D rules)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "mirror_cellular_texture_for_3d",
+   "name": "Mirror Cellular Texture for 3D",
+   "size": "large",
+   "source": "added",
+   "concept": "CA materials & texture",
+   "footprint": [
+    4.0,
+    4.0
+   ]
+  }
+ ]
+}

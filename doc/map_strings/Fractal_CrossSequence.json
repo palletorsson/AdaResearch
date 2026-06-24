@@ -1,0 +1,44 @@
+{
+ "map": "Fractal_CrossSequence",
+ "sequence": "fractals",
+ "counts": {
+  "existing": 3,
+  "added": 0,
+  "large": 0
+ },
+ "pearls": [
+  {
+   "id": "cellular_automata_3d_stacked",
+   "name": "Cellular Automata 3D Stacked",
+   "size": "small",
+   "source": "existing",
+   "concept": "",
+   "footprint": [
+    2.0,
+    2.0
+   ]
+  },
+  {
+   "id": "evolutionary_algorithms",
+   "name": "Evolutionary Algorithms",
+   "size": "small",
+   "source": "existing",
+   "concept": "",
+   "footprint": [
+    3.0,
+    1.0
+   ]
+  },
+  {
+   "id": "fractal_stochastic_tree",
+   "name": "Stochastic Tree",
+   "size": "small",
+   "source": "existing",
+   "concept": "Recursive trees",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  }
+ ]
+}

@@ -1,0 +1,110 @@
+{
+ "map": "CA_AgentsCircuits",
+ "sequence": "cellularautomata",
+ "counts": {
+  "existing": 3,
+  "added": 6,
+  "large": 3
+ },
+ "pearls": [
+  {
+   "id": "ca_rule_explorer",
+   "name": "Cellular Automata Rule Explorer",
+   "size": "small",
+   "source": "existing",
+   "concept": "Elementary CA (1D rules)",
+   "footprint": [
+    2.0,
+    2.0
+   ]
+  },
+  {
+   "id": "ca_rules_workbench",
+   "name": "CA Rules Workbench",
+   "size": "small",
+   "source": "added",
+   "concept": "Elementary CA (1D rules)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "CellularAutomata3DStacked",
+   "name": "CellularAutomata3DStacked",
+   "size": "small",
+   "source": "existing",
+   "concept": "3D / volumetric CA",
+   "footprint": [
+    2.0,
+    2.0
+   ]
+  },
+  {
+   "id": "rule110_computer",
+   "name": "Rule 110 Computer (universal)",
+   "size": "small",
+   "source": "added",
+   "concept": "Rule 110 — universal computation",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "ca_texture_bench",
+   "name": "CA Texture Bench (settle to texture)",
+   "size": "small",
+   "source": "added",
+   "concept": "CA materials & texture",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "ca_texture_wall",
+   "name": "CA Texture Wall (the rug is an algorithm)",
+   "size": "small",
+   "source": "added",
+   "concept": "CA materials & texture",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "ca_rule_comparison",
+   "name": "CA Rule Comparison Garden",
+   "size": "large",
+   "source": "added",
+   "concept": "The four Wolfram classes",
+   "footprint": [
+    12.0,
+    12.0
+   ]
+  },
+  {
+   "id": "CrosswayCA",
+   "name": "CrosswayCA",
+   "size": "large",
+   "source": "added",
+   "concept": "Elementary CA (1D rules)",
+   "footprint": [
+    10.0,
+    16.0
+   ]
+  },
+  {
+   "id": "sierpinski_pyramid",
+   "name": "Sierpinski Pyramid",
+   "size": "large",
+   "source": "existing",
+   "concept": "Rule 90 — Sierpinski",
+   "footprint": [
+    9.0,
+    9.0
+   ]
+  }
+ ]
+}

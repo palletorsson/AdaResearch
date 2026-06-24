@@ -1,0 +1,33 @@
+{
+ "map": "Fractal_MengerSponge",
+ "sequence": "fractals",
+ "counts": {
+  "existing": 1,
+  "added": 1,
+  "large": 1
+ },
+ "pearls": [
+  {
+   "id": "menger_sponge",
+   "name": "menger_sponge",
+   "size": "large",
+   "source": "existing",
+   "concept": "Menger sponge",
+   "footprint": [
+    9.0,
+    9.0
+   ]
+  },
+  {
+   "id": "menger_toy",
+   "name": "Menger Toy (held sponge)",
+   "size": "small",
+   "source": "added",
+   "concept": "Menger sponge",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  }
+ ]
+}

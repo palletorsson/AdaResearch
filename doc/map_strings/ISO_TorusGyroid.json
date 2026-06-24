@@ -1,0 +1,33 @@
+{
+ "map": "ISO_TorusGyroid",
+ "sequence": "isosurfaces",
+ "counts": {
+  "existing": 2,
+  "added": 0,
+  "large": 1
+ },
+ "pearls": [
+  {
+   "id": "GyroidDemo",
+   "name": "GyroidDemo",
+   "size": "large",
+   "source": "existing",
+   "concept": "A cube has eight corners. Each corner ",
+   "footprint": [
+    20.0,
+    20.0
+   ]
+  },
+  {
+   "id": "mc_torus_sculpture",
+   "name": "mc_torus_sculpture",
+   "size": "small",
+   "source": "existing",
+   "concept": "Seven sculptures stand in a row. Each ",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  }
+ ]
+}

@@ -1,0 +1,55 @@
+{
+ "map": "LSystems_Competition",
+ "sequence": "lsystems",
+ "counts": {
+  "existing": 2,
+  "added": 2,
+  "large": 1
+ },
+ "pearls": [
+  {
+   "id": "ForestCompetition",
+   "name": "Forest Ecosystem",
+   "size": "large",
+   "source": "existing",
+   "concept": "Forest & ecology (biome)",
+   "footprint": [
+    8.0,
+    7.0
+   ]
+  },
+  {
+   "id": "branching_coral",
+   "name": "Branching Coral",
+   "size": "small",
+   "source": "existing",
+   "concept": "Coral & vines",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "branching_growth_algorithm",
+   "name": "Branching Growth Algorithm",
+   "size": "small",
+   "source": "added",
+   "concept": "Bracketed branching",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "kochsnowflake",
+   "name": "kochsnowflake",
+   "size": "small",
+   "source": "added",
+   "concept": "Koch & fractal curves",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  }
+ ]
+}

@@ -1,0 +1,44 @@
+{
+ "map": "SwarmIntelligence_FlowFields",
+ "sequence": "swarmintelligence",
+ "counts": {
+  "existing": 1,
+  "added": 2,
+  "large": 1
+ },
+ "pearls": [
+  {
+   "id": "FlowFieldMain",
+   "name": "FlowFieldMain",
+   "size": "large",
+   "source": "existing",
+   "concept": "FlowFields",
+   "footprint": [
+    50.0,
+    50.0
+   ]
+  },
+  {
+   "id": "catalyst_vent",
+   "name": "Catalyst Vent",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "catalyst_foe",
+   "name": "Catalyst Foe",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  }
+ ]
+}

@@ -1,0 +1,44 @@
+{
+ "map": "ISO_PortalLandscape",
+ "sequence": "isosurfaces",
+ "counts": {
+  "existing": 1,
+  "added": 2,
+  "large": 0
+ },
+ "pearls": [
+  {
+   "id": "marchingcubes_portal_landscape",
+   "name": "marchingcubes_portal_landscape",
+   "size": "small",
+   "source": "existing",
+   "concept": "Marching cubes at landscape scale. A t",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "portal",
+   "name": "Portal",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    2.0,
+    1.0
+   ]
+  },
+  {
+   "id": "marchingcubes_flat_landscape",
+   "name": "marchingcubes_flat_landscape",
+   "size": "small",
+   "source": "added",
+   "concept": "Marching cubes at landscape scale. A t",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  }
+ ]
+}

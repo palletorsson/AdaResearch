@@ -1,0 +1,110 @@
+{
+ "map": "Fractal_GoldenSpiral",
+ "sequence": "fractals",
+ "counts": {
+  "existing": 4,
+  "added": 5,
+  "large": 2
+ },
+ "pearls": [
+  {
+   "id": "fibonacci_sequences",
+   "name": "Fibonacci Sequences",
+   "size": "small",
+   "source": "existing",
+   "concept": "Golden spiral & phyllotaxis",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "fibonacci_terrain",
+   "name": "Fibonacci Terrain",
+   "size": "large",
+   "source": "existing",
+   "concept": "Golden spiral & phyllotaxis",
+   "footprint": [
+    8.0,
+    5.0
+   ]
+  },
+  {
+   "id": "golden_rectangle",
+   "name": "Golden Rectangle",
+   "size": "large",
+   "source": "existing",
+   "concept": "Golden spiral & phyllotaxis",
+   "footprint": [
+    5.0,
+    4.0
+   ]
+  },
+  {
+   "id": "transform_staircase_fibonacci",
+   "name": "transform_staircase_fibonacci",
+   "size": "small",
+   "source": "added",
+   "concept": "Golden spiral & phyllotaxis",
+   "footprint": [
+    3.0,
+    3.0
+   ]
+  },
+  {
+   "id": "fibonacci_snake",
+   "name": "Fibonacci Snake",
+   "size": "small",
+   "source": "added",
+   "concept": "Golden spiral & phyllotaxis",
+   "footprint": [
+    2.0,
+    1.0
+   ]
+  },
+  {
+   "id": "bar_array_fibonacci",
+   "name": "BarArray — Fibonacci",
+   "size": "small",
+   "source": "added",
+   "concept": "Golden spiral & phyllotaxis",
+   "footprint": [
+    2.0,
+    1.0
+   ]
+  },
+  {
+   "id": "fibonacci_snake_stages",
+   "name": "Fibonacci Snake Stages",
+   "size": "small",
+   "source": "added",
+   "concept": "Golden spiral & phyllotaxis",
+   "footprint": [
+    2.0,
+    1.0
+   ]
+  },
+  {
+   "id": "recursion_spiral",
+   "name": "Recursion Spiral",
+   "size": "small",
+   "source": "added",
+   "concept": "Recursion (calls itself)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "romanesco",
+   "name": "romanesco",
+   "size": "small",
+   "source": "existing",
+   "concept": "Golden spiral & phyllotaxis",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  }
+ ]
+}

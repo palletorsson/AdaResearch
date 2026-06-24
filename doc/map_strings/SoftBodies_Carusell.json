@@ -1,0 +1,132 @@
+{
+ "map": "SoftBodies_Carusell",
+ "sequence": "softbodies",
+ "counts": {
+  "existing": 5,
+  "added": 6,
+  "large": 6
+ },
+ "pearls": [
+  {
+   "id": "cloth_straps",
+   "name": "Cloth Straps",
+   "size": "small",
+   "source": "existing",
+   "concept": "Cloth physics",
+   "footprint": [
+    3.0,
+    1.0
+   ]
+  },
+  {
+   "id": "grab_long_stick",
+   "name": "grab_long_stick",
+   "size": "small",
+   "source": "existing",
+   "concept": "",
+   "footprint": [
+    2.0,
+    1.0
+   ]
+  },
+  {
+   "id": "pick_up_cube",
+   "name": "Pick Up Cube",
+   "size": "small",
+   "source": "existing",
+   "concept": "",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "revolving_joy_ride",
+   "name": "Revolving Joy Ride",
+   "size": "large",
+   "source": "existing",
+   "concept": "Bounce & play",
+   "footprint": [
+    10.0,
+    10.0
+   ]
+  },
+  {
+   "id": "pressure_soft_body",
+   "name": "Pressure Soft Body",
+   "size": "small",
+   "source": "added",
+   "concept": "Strain, pressure & elasticity",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "pendulum_slap",
+   "name": "Pendulum Slap",
+   "size": "small",
+   "source": "added",
+   "concept": "Bounce & play",
+   "footprint": [
+    2.0,
+    2.0
+   ]
+  },
+  {
+   "id": "squishy_ball_pit",
+   "name": "Squishy Ball Pit",
+   "size": "large",
+   "source": "added",
+   "concept": "Bounce & play",
+   "footprint": [
+    15.0,
+    15.0
+   ]
+  },
+  {
+   "id": "soft_mushrooms",
+   "name": "Soft Mushrooms",
+   "size": "large",
+   "source": "added",
+   "concept": "Viscous & flowing",
+   "footprint": [
+    18.0,
+    18.0
+   ]
+  },
+  {
+   "id": "soft_trampoline",
+   "name": "Soft Trampoline",
+   "size": "large",
+   "source": "added",
+   "concept": "Bounce & play",
+   "footprint": [
+    20.0,
+    20.0
+   ]
+  },
+  {
+   "id": "soft_mushroom",
+   "name": "soft_mushroom",
+   "size": "large",
+   "source": "existing",
+   "concept": "Viscous & flowing",
+   "footprint": [
+    20.0,
+    21.0
+   ]
+  },
+  {
+   "id": "softbodytest",
+   "name": "softbodytest",
+   "size": "large",
+   "source": "added",
+   "concept": "Verlet & the soft-body sim",
+   "footprint": [
+    26.0,
+    6.0
+   ]
+  }
+ ]
+}

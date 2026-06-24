@@ -1,0 +1,66 @@
+{
+ "map": "Noise_Inside_Noise",
+ "sequence": "noise",
+ "counts": {
+  "existing": 1,
+  "added": 4,
+  "large": 4
+ },
+ "pearls": [
+  {
+   "id": "noisesphere",
+   "name": "noisesphere",
+   "size": "large",
+   "source": "existing",
+   "concept": "Noise controlling noise. The output of",
+   "footprint": [
+    32.0,
+    30.0
+   ]
+  },
+  {
+   "id": "noisetext",
+   "name": "noisetext",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    2.0,
+    1.0
+   ]
+  },
+  {
+   "id": "particle_randomness_perlin",
+   "name": "Particle Randomness - Perlin",
+   "size": "large",
+   "source": "added",
+   "concept": "Before Perlin, noise was static",
+   "footprint": [
+    10.0,
+    1.0
+   ]
+  },
+  {
+   "id": "NoiseColors3D",
+   "name": "Noise Colors 3D",
+   "size": "large",
+   "source": "added",
+   "concept": "White noise screams chaos",
+   "footprint": [
+    10.0,
+    11.0
+   ]
+  },
+  {
+   "id": "WhiteNoiseGallery",
+   "name": "White Noise Gallery",
+   "size": "large",
+   "source": "added",
+   "concept": "White noise screams chaos",
+   "footprint": [
+    20.0,
+    22.0
+   ]
+  }
+ ]
+}

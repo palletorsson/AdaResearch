@@ -1,0 +1,44 @@
+{
+ "map": "Noise_6_Wall",
+ "sequence": "noise",
+ "counts": {
+  "existing": 1,
+  "added": 2,
+  "large": 2
+ },
+ "pearls": [
+  {
+   "id": "shader_noise_space",
+   "name": "Shader Noise Space",
+   "size": "large",
+   "source": "existing",
+   "concept": "Six octaves layered. Low frequency for",
+   "footprint": [
+    19.0,
+    28.0
+   ]
+  },
+  {
+   "id": "blue_noise",
+   "name": "Blue Noise",
+   "size": "large",
+   "source": "added",
+   "concept": "White noise screams chaos",
+   "footprint": [
+    17.0,
+    2.0
+   ]
+  },
+  {
+   "id": "worley_noise",
+   "name": "Worley Noise",
+   "size": "small",
+   "source": "added",
+   "concept": "White noise screams chaos",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  }
+ ]
+}

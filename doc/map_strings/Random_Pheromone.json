@@ -1,0 +1,110 @@
+{
+ "map": "Random_Pheromone",
+ "sequence": "randomness",
+ "counts": {
+  "existing": 3,
+  "added": 6,
+  "large": 3
+ },
+ "pearls": [
+  {
+   "id": "pheromone_terrain",
+   "name": "Pheromone Terrain",
+   "size": "large",
+   "source": "existing",
+   "concept": "Noise terrain / landscapes",
+   "footprint": [
+    20.0,
+    20.0
+   ]
+  },
+  {
+   "id": "voxel_noise_demo",
+   "name": "voxel_noise_demo",
+   "size": "large",
+   "source": "added",
+   "concept": "Noise fields & textures",
+   "footprint": [
+    32.0,
+    32.0
+   ]
+  },
+  {
+   "id": "noisetorus_ex_1",
+   "name": "noisetorus_ex_1",
+   "size": "large",
+   "source": "added",
+   "concept": "Noise fields & textures",
+   "footprint": [
+    5.0,
+    6.0
+   ]
+  },
+  {
+   "id": "grid_substrate_runner",
+   "name": "Grid Substrate Runner",
+   "size": "small",
+   "source": "added",
+   "concept": "10 PRINT / generative grid",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "noise_terrain_forge",
+   "name": "Noise Terrain Forge (stamps ground)",
+   "size": "small",
+   "source": "added",
+   "concept": "Noise terrain / landscapes",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "perlin_noise_bridge",
+   "name": "Perlin Noise Bridge",
+   "size": "small",
+   "source": "added",
+   "concept": "Perlin noise",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "perlin_terrain_sculptor",
+   "name": "Perlin Terrain Sculptor",
+   "size": "small",
+   "source": "added",
+   "concept": "Perlin noise",
+   "footprint": [
+    2.0,
+    2.0
+   ]
+  },
+  {
+   "id": "clipboard#pheromone_axioms",
+   "name": "clipboard#pheromone_axioms",
+   "size": "small",
+   "source": "existing",
+   "concept": "",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "clipboard#queer_energy",
+   "name": "clipboard#queer_energy",
+   "size": "small",
+   "source": "existing",
+   "concept": "",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  }
+ ]
+}

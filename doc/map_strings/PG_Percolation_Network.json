@@ -1,0 +1,88 @@
+{
+ "map": "PG_Percolation_Network",
+ "sequence": "proceduralgeneration",
+ "counts": {
+  "existing": 1,
+  "added": 6,
+  "large": 5
+ },
+ "pearls": [
+  {
+   "id": "percolationnetwork_ca",
+   "name": "percolationnetwork_ca",
+   "size": "large",
+   "source": "existing",
+   "concept": "Reaction-diffusion & phase transition",
+   "footprint": [
+    9.0,
+    9.0
+   ]
+  },
+  {
+   "id": "spherenetwork",
+   "name": "spherenetwork",
+   "size": "large",
+   "source": "added",
+   "concept": "Generated worlds",
+   "footprint": [
+    7.0,
+    7.0
+   ]
+  },
+  {
+   "id": "truchettiles",
+   "name": "truchettiles",
+   "size": "large",
+   "source": "added",
+   "concept": "Tilings & symmetry",
+   "footprint": [
+    10.0,
+    10.0
+   ]
+  },
+  {
+   "id": "CaveGenerator",
+   "name": "CaveGenerator",
+   "size": "large",
+   "source": "added",
+   "concept": "Agent walks & caves",
+   "footprint": [
+    40.0,
+    40.0
+   ]
+  },
+  {
+   "id": "WFCCav",
+   "name": "WFCCav",
+   "size": "small",
+   "source": "added",
+   "concept": "Wave function collapse",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "GyroidDemo",
+   "name": "GyroidDemo",
+   "size": "large",
+   "source": "added",
+   "concept": "Metaballs & implicit surfaces",
+   "footprint": [
+    20.0,
+    20.0
+   ]
+  },
+  {
+   "id": "marchingcave",
+   "name": "marchingcave",
+   "size": "small",
+   "source": "added",
+   "concept": "Marching cubes",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  }
+ ]
+}

@@ -1,0 +1,33 @@
+{
+ "map": "Random_Space",
+ "sequence": "randomness",
+ "counts": {
+  "existing": 1,
+  "added": 1,
+  "large": 1
+ },
+ "pearls": [
+  {
+   "id": "random_space",
+   "name": "random_space",
+   "size": "large",
+   "source": "existing",
+   "concept": "Uniform random / RNG",
+   "footprint": [
+    11.0,
+    20.0
+   ]
+  },
+  {
+   "id": "vera_molnar_des_ordres",
+   "name": "Vera Molnar Des-Ordres",
+   "size": "small",
+   "source": "added",
+   "concept": "Random art / scatter",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  }
+ ]
+}

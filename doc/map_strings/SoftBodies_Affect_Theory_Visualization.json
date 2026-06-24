@@ -1,0 +1,44 @@
+{
+ "map": "SoftBodies_Affect_Theory_Visualization",
+ "sequence": "softbodies",
+ "counts": {
+  "existing": 1,
+  "added": 2,
+  "large": 1
+ },
+ "pearls": [
+  {
+   "id": "radiolaria",
+   "name": "Radiolaria",
+   "size": "large",
+   "source": "existing",
+   "concept": "Soft morphology",
+   "footprint": [
+    13.0,
+    13.0
+   ]
+  },
+  {
+   "id": "queer_morphology_specimen",
+   "name": "Queer Morphology Specimen",
+   "size": "small",
+   "source": "added",
+   "concept": "Soft morphology",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "morphobody",
+   "name": "Morpho Body",
+   "size": "small",
+   "source": "added",
+   "concept": "Soft morphology",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  }
+ ]
+}

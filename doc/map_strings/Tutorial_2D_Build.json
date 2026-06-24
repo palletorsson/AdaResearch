@@ -1,0 +1,132 @@
+{
+ "map": "Tutorial_2D_Build",
+ "sequence": "array_tutorial",
+ "counts": {
+  "existing": 5,
+  "added": 6,
+  "large": 1
+ },
+ "pearls": [
+  {
+   "id": "grid_2d_4x4",
+   "name": "grid_2d_4x4",
+   "size": "large",
+   "source": "existing",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    6.0,
+    4.0
+   ]
+  },
+  {
+   "id": "pick_up_cube",
+   "name": "Pick Up Cube",
+   "size": "small",
+   "source": "existing",
+   "concept": "Basics",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "pulsar_visualizer",
+   "name": "Pulsar B1919+21 Visualizer",
+   "size": "small",
+   "source": "existing",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    3.0,
+    2.0
+   ]
+  },
+  {
+   "id": "xyz_coordinates",
+   "name": "XYZ coordinates",
+   "size": "small",
+   "source": "existing",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    2.0,
+    2.0
+   ]
+  },
+  {
+   "id": "gridagent",
+   "name": "Grid Agent",
+   "size": "small",
+   "source": "existing",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "path_game_controller",
+   "name": "Path Game Controller",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "path_cube",
+   "name": "Path Cube (wall)",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "path_wedge",
+   "name": "Path Wedge (ramp)",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "path_pyramid",
+   "name": "Path Pyramid (mound)",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "path_builder_foe",
+   "name": "Path Builder Foe",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "path_watchdog",
+   "name": "Path Watchdog",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  }
+ ]
+}

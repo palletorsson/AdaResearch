@@ -1,0 +1,88 @@
+{
+ "map": "WaveFunctions_AirMusic",
+ "sequence": "wavefunctions",
+ "counts": {
+  "existing": 7,
+  "added": 0,
+  "large": 1
+ },
+ "pearls": [
+  {
+   "id": "BigPipeSystem",
+   "name": "Big Pipe System",
+   "size": "small",
+   "source": "existing",
+   "concept": "pendulum",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "GlassRack",
+   "name": "Glass Rack",
+   "size": "small",
+   "source": "existing",
+   "concept": "pendulum",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "RackAmbientDrone",
+   "name": "Ambient Drone Rack",
+   "size": "small",
+   "source": "existing",
+   "concept": "AirMusic",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "SystemsMusicTest",
+   "name": "Systems Music Test",
+   "size": "large",
+   "source": "existing",
+   "concept": "AirMusic",
+   "footprint": [
+    6.0,
+    6.0
+   ]
+  },
+  {
+   "id": "air_music_display_case",
+   "name": "Air Music Display Case",
+   "size": "small",
+   "source": "existing",
+   "concept": "AirMusic",
+   "footprint": [
+    3.0,
+    3.0
+   ]
+  },
+  {
+   "id": "lab_table",
+   "name": "Lab Table",
+   "size": "small",
+   "source": "existing",
+   "concept": "pendulum",
+   "footprint": [
+    2.0,
+    1.0
+   ]
+  },
+  {
+   "id": "resonating_metallophone",
+   "name": "Resonating Metallophone",
+   "size": "small",
+   "source": "existing",
+   "concept": "AirMusic",
+   "footprint": [
+    2.0,
+    1.0
+   ]
+  }
+ ]
+}

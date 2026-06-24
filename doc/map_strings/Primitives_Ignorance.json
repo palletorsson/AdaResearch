@@ -1,0 +1,297 @@
+{
+ "map": "Primitives_Ignorance",
+ "sequence": "primitives",
+ "counts": {
+  "existing": 20,
+  "added": 6,
+  "large": 3
+ },
+ "pearls": [
+  {
+   "id": "platonic_grabbables",
+   "name": "platonic_grabbables",
+   "size": "large",
+   "source": "existing",
+   "concept": "Platonic / polyhedra",
+   "footprint": [
+    7.0,
+    5.0
+   ]
+  },
+  {
+   "id": "hole_with_cones",
+   "name": "Hole With Cones",
+   "size": "large",
+   "source": "existing",
+   "concept": "Cone / pyramid",
+   "footprint": [
+    4.0,
+    4.0
+   ]
+  },
+  {
+   "id": "sphere_high",
+   "name": "sphere_high",
+   "size": "small",
+   "source": "existing",
+   "concept": "Sphere / ball",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "sphere_mid",
+   "name": "sphere_mid",
+   "size": "small",
+   "source": "existing",
+   "concept": "Sphere / ball",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "sphere_low",
+   "name": "sphere_low",
+   "size": "small",
+   "source": "existing",
+   "concept": "Sphere / ball",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "star_primitive",
+   "name": "Star",
+   "size": "small",
+   "source": "existing",
+   "concept": "Point",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "halocube",
+   "name": "Halo Cube",
+   "size": "small",
+   "source": "added",
+   "concept": "Cube / box",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "steppedpyramid",
+   "name": "Stepped Pyramid",
+   "size": "small",
+   "source": "added",
+   "concept": "Cone / pyramid",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "dimension_lens",
+   "name": "Dimension Lens",
+   "size": "small",
+   "source": "added",
+   "concept": "Other primitives",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "crystalcluster",
+   "name": "crystalcluster",
+   "size": "small",
+   "source": "added",
+   "concept": "Other primitives",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "light_sphere",
+   "name": "light_sphere",
+   "size": "small",
+   "source": "added",
+   "concept": "Sphere / ball",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "righttriangle",
+   "name": "righttriangle",
+   "size": "small",
+   "source": "existing",
+   "concept": "Triangle",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "roughrock",
+   "name": "roughrock",
+   "size": "small",
+   "source": "existing",
+   "concept": "Other primitives",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "truncatedtetrahedron",
+   "name": "truncatedtetrahedron",
+   "size": "small",
+   "source": "existing",
+   "concept": "Platonic / polyhedra",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "capsule",
+   "name": "capsule",
+   "size": "small",
+   "source": "existing",
+   "concept": "Capsule",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "cylinder",
+   "name": "cylinder",
+   "size": "small",
+   "source": "added",
+   "concept": "Cylinder",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "snap_octahedron_puzzle",
+   "name": "Snap Octahedron Puzzle",
+   "size": "small",
+   "source": "existing",
+   "concept": "Interactive tool",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "grab_octahedron",
+   "name": "grab_octahedron",
+   "size": "small",
+   "source": "existing",
+   "concept": "Interactive tool",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "cube_scene",
+   "name": "Basic Cube Scene",
+   "size": "small",
+   "source": "existing",
+   "concept": "Cube / box",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "sphere",
+   "name": "sphere",
+   "size": "small",
+   "source": "existing",
+   "concept": "Sphere / ball",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "lshape",
+   "name": "L Shape",
+   "size": "small",
+   "source": "existing",
+   "concept": "Other primitives",
+   "footprint": [
+    2.0,
+    1.0
+   ]
+  },
+  {
+   "id": "prism_block",
+   "name": "prism_block",
+   "size": "small",
+   "source": "existing",
+   "concept": "Prism / extrusion",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "torus_radials_rings",
+   "name": "Torus Radials Rings",
+   "size": "small",
+   "source": "existing",
+   "concept": "Torus / ring",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "capsule_radials_rings",
+   "name": "Capsule Radials Rings",
+   "size": "small",
+   "source": "existing",
+   "concept": "Capsule",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "diamonds",
+   "name": "diamonds",
+   "size": "large",
+   "source": "existing",
+   "concept": "Platonic / polyhedra",
+   "footprint": [
+    4.0,
+    4.0
+   ]
+  },
+  {
+   "id": "plus",
+   "name": "Plus",
+   "size": "small",
+   "source": "existing",
+   "concept": "Other primitives",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  }
+ ]
+}

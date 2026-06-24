@@ -1,0 +1,66 @@
+{
+ "map": "LSystems_Growth",
+ "sequence": "lsystems",
+ "counts": {
+  "existing": 4,
+  "added": 1,
+  "large": 1
+ },
+ "pearls": [
+  {
+   "id": "AnimatedTree",
+   "name": "Animated Tree Growth",
+   "size": "small",
+   "source": "existing",
+   "concept": "Parallel rewriting / generations",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "ContextSensitiveTree",
+   "name": "Context-Sensitive Tree",
+   "size": "large",
+   "source": "existing",
+   "concept": "Context-sensitive L-systems",
+   "footprint": [
+    8.0,
+    1.0
+   ]
+  },
+  {
+   "id": "lsystem_tree",
+   "name": "L-System Tree",
+   "size": "small",
+   "source": "existing",
+   "concept": "L-system trees",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "fractal_lsystem_tree",
+   "name": "L-System Tree",
+   "size": "small",
+   "source": "added",
+   "concept": "L-system trees",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "parametric_lsystem",
+   "name": "Parametric L-System",
+   "size": "small",
+   "source": "existing",
+   "concept": "Parametric L-systems",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  }
+ ]
+}

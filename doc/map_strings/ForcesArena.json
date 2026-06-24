@@ -1,0 +1,66 @@
+{
+ "map": "ForcesArena",
+ "sequence": "forces",
+ "counts": {
+  "existing": 5,
+  "added": 0,
+  "large": 3
+ },
+ "pearls": [
+  {
+   "id": "gravity_gun_test_scene",
+   "name": "gravity_gun_test_scene",
+   "size": "small",
+   "source": "existing",
+   "concept": "",
+   "footprint": [
+    3.0,
+    1.0
+   ]
+  },
+  {
+   "id": "vector_drone",
+   "name": "vector_drone",
+   "size": "small",
+   "source": "existing",
+   "concept": "Unit vector / normalize",
+   "footprint": [
+    2.0,
+    2.0
+   ]
+  },
+  {
+   "id": "destructibles_test_scene",
+   "name": "destructibles_test_scene",
+   "size": "large",
+   "source": "existing",
+   "concept": "",
+   "footprint": [
+    5.0,
+    8.0
+   ]
+  },
+  {
+   "id": "VectorThrowing",
+   "name": "VectorThrowing",
+   "size": "large",
+   "source": "existing",
+   "concept": "Projectile / launch",
+   "footprint": [
+    4.0,
+    2.0
+   ]
+  },
+  {
+   "id": "sphere_splitting_showcase",
+   "name": "sphere_splitting_showcase",
+   "size": "large",
+   "source": "existing",
+   "concept": "",
+   "footprint": [
+    7.0,
+    4.0
+   ]
+  }
+ ]
+}

@@ -1,0 +1,55 @@
+{
+ "map": "GT_Pathfinding",
+ "sequence": "graphtheory",
+ "counts": {
+  "existing": 1,
+  "added": 3,
+  "large": 2
+ },
+ "pearls": [
+  {
+   "id": "pathfinding3d",
+   "name": "pathfinding3d",
+   "size": "large",
+   "source": "existing",
+   "concept": "Path Finding 3d",
+   "footprint": [
+    10.0,
+    10.0
+   ]
+  },
+  {
+   "id": "living_paper_dfs_maze",
+   "name": "Living Paper — DFS Maze",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "grid3d_dfs",
+   "name": "Grid3D — DFS",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "env_one",
+   "name": "Environment One",
+   "size": "large",
+   "source": "added",
+   "concept": "Maximum Flow Algorithms",
+   "footprint": [
+    61.0,
+    60.0
+   ]
+  }
+ ]
+}

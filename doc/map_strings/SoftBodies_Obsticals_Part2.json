@@ -1,0 +1,99 @@
+{
+ "map": "SoftBodies_Obsticals_Part2",
+ "sequence": "softbodies",
+ "counts": {
+  "existing": 3,
+  "added": 5,
+  "large": 3
+ },
+ "pearls": [
+  {
+   "id": "grab_long_stick",
+   "name": "grab_long_stick",
+   "size": "small",
+   "source": "existing",
+   "concept": "",
+   "footprint": [
+    2.0,
+    1.0
+   ]
+  },
+  {
+   "id": "folding_past",
+   "name": "Folding Past",
+   "size": "large",
+   "source": "added",
+   "concept": "Origami & the Miura fold",
+   "footprint": [
+    6.0,
+    5.0
+   ]
+  },
+  {
+   "id": "folded_strip",
+   "name": "1.2: folded_strip",
+   "size": "large",
+   "source": "added",
+   "concept": "Origami & the Miura fold",
+   "footprint": [
+    5.0,
+    1.0
+   ]
+  },
+  {
+   "id": "folding_cube_interactive",
+   "name": "folding_cube_interactive",
+   "size": "small",
+   "source": "added",
+   "concept": "Origami & the Miura fold",
+   "footprint": [
+    3.0,
+    2.0
+   ]
+  },
+  {
+   "id": "foldedpaper",
+   "name": "1.2: A foldedpaper",
+   "size": "small",
+   "source": "added",
+   "concept": "Origami & the Miura fold",
+   "footprint": [
+    3.0,
+    1.0
+   ]
+  },
+  {
+   "id": "folding_cube",
+   "name": "folding_cube",
+   "size": "small",
+   "source": "added",
+   "concept": "Origami & the Miura fold",
+   "footprint": [
+    2.0,
+    1.0
+   ]
+  },
+  {
+   "id": "pick_up_cube",
+   "name": "Pick Up Cube",
+   "size": "small",
+   "source": "existing",
+   "concept": "",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "softbody_gallery_part2",
+   "name": "SoftBody Gallery Part 2",
+   "size": "large",
+   "source": "existing",
+   "concept": "",
+   "footprint": [
+    26.0,
+    7.0
+   ]
+  }
+ ]
+}

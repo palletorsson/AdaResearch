@@ -1,0 +1,88 @@
+{
+ "map": "Tutorial_Disco",
+ "sequence": "array_tutorial",
+ "counts": {
+  "existing": 1,
+  "added": 6,
+  "large": 2
+ },
+ "pearls": [
+  {
+   "id": "standalone_disco",
+   "name": "Standalone Disco Floor",
+   "size": "large",
+   "source": "existing",
+   "concept": "",
+   "footprint": [
+    6.0,
+    6.0
+   ]
+  },
+  {
+   "id": "pattern_loom",
+   "name": "Pattern Loom",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    2.0,
+    2.0
+   ]
+  },
+  {
+   "id": "pattern_machine_c",
+   "name": "Kaleidoscope Mill",
+   "size": "large",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    3.0,
+    4.0
+   ]
+  },
+  {
+   "id": "matrix_multiply_visual",
+   "name": "Matrix Multiply Visual",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "index_map_puzzle",
+   "name": "Index Map Puzzle",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "sparse_array_demo",
+   "name": "Sparse Array Demo",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "circular_buffer",
+   "name": "Circular Buffer",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  }
+ ]
+}

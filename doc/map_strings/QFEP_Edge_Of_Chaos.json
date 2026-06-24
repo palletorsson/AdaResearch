@@ -1,0 +1,121 @@
+{
+ "map": "QFEP_Edge_Of_Chaos",
+ "sequence": "qfeplaboratory",
+ "counts": {
+  "existing": 4,
+  "added": 6,
+  "large": 4
+ },
+ "pearls": [
+  {
+   "id": "turing_pattern",
+   "name": "Turing Pattern",
+   "size": "small",
+   "source": "existing",
+   "concept": "The edge of chaos",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "turing_pattern_generator",
+   "name": "Turing Pattern Generator",
+   "size": "small",
+   "source": "added",
+   "concept": "The edge of chaos",
+   "footprint": [
+    2.0,
+    2.0
+   ]
+  },
+  {
+   "id": "edge_core",
+   "name": "Edge Core",
+   "size": "large",
+   "source": "existing",
+   "concept": "The edge of chaos",
+   "footprint": [
+    8.0,
+    8.0
+   ]
+  },
+  {
+   "id": "emergence_zone",
+   "name": "Emergence Zone",
+   "size": "small",
+   "source": "existing",
+   "concept": "The edge of chaos",
+   "footprint": [
+    3.0,
+    3.0
+   ]
+  },
+  {
+   "id": "qfep_sandbox_console",
+   "name": "QFEP Sandbox Console",
+   "size": "large",
+   "source": "added",
+   "concept": "The reactor — the whole formula",
+   "footprint": [
+    8.0,
+    8.0
+   ]
+  },
+  {
+   "id": "edge_detector",
+   "name": "Edge Detector",
+   "size": "small",
+   "source": "added",
+   "concept": "The edge of chaos",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "edge_of_chaos_orb",
+   "name": "Edge of Chaos Orb",
+   "size": "large",
+   "source": "added",
+   "concept": "The edge of chaos",
+   "footprint": [
+    8.0,
+    8.0
+   ]
+  },
+  {
+   "id": "edge_of_chaos_bench",
+   "name": "Edge of Chaos Bench (lambda dial)",
+   "size": "small",
+   "source": "added",
+   "concept": "The edge of chaos",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "edge_of_chaos_unlocked",
+   "name": "Edge of Chaos Unlocked",
+   "size": "small",
+   "source": "added",
+   "concept": "The edge of chaos",
+   "footprint": [
+    3.0,
+    1.0
+   ]
+  },
+  {
+   "id": "lambda_slider",
+   "name": "Lambda Slider",
+   "size": "large",
+   "source": "existing",
+   "concept": "λ — the order-chaos dial",
+   "footprint": [
+    8.0,
+    8.0
+   ]
+  }
+ ]
+}

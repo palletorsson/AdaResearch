@@ -1,0 +1,88 @@
+{
+ "map": "CA_ElementaryRules",
+ "sequence": "cellularautomata",
+ "counts": {
+  "existing": 1,
+  "added": 6,
+  "large": 1
+ },
+ "pearls": [
+  {
+   "id": "structure_growth",
+   "name": "Structure Growth",
+   "size": "large",
+   "source": "existing",
+   "concept": "Growth & dendrites",
+   "footprint": [
+    8.0,
+    8.0
+   ]
+  },
+  {
+   "id": "dendrite_toy",
+   "name": "Dendrite Toy (DLA crystal)",
+   "size": "small",
+   "source": "added",
+   "concept": "Growth & dendrites",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "percolation_ca",
+   "name": "Percolation CA",
+   "size": "small",
+   "source": "added",
+   "concept": "Caves / percolation / cracks",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "crack_propagation_ca",
+   "name": "Crack Propagation CA",
+   "size": "small",
+   "source": "added",
+   "concept": "Caves / percolation / cracks",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "ecosystem_ca",
+   "name": "Ecosystem CA",
+   "size": "small",
+   "source": "added",
+   "concept": "Edge of chaos / self-organisation",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "recrystallization_ca",
+   "name": "Recrystallization CA",
+   "size": "small",
+   "source": "added",
+   "concept": "Edge of chaos / self-organisation",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "dendrite_growth_ca",
+   "name": "Dendrite Growth CA",
+   "size": "small",
+   "source": "added",
+   "concept": "Growth & dendrites",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  }
+ ]
+}

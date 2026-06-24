@@ -1,0 +1,154 @@
+{
+ "map": "Point_One",
+ "sequence": "primitives",
+ "counts": {
+  "existing": 7,
+  "added": 6,
+  "large": 3
+ },
+ "pearls": [
+  {
+   "id": "origin",
+   "name": "Point Zero",
+   "size": "small",
+   "source": "existing",
+   "concept": "Point",
+   "footprint": [
+    2.0,
+    2.0
+   ]
+  },
+  {
+   "id": "point_collection",
+   "name": "point_collection",
+   "size": "small",
+   "source": "added",
+   "concept": "Text / glyph",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "static_point",
+   "name": "Static Point",
+   "size": "small",
+   "source": "existing",
+   "concept": "Point",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "sliding_door",
+   "name": "Sliding Door",
+   "size": "large",
+   "source": "added",
+   "concept": "Point",
+   "footprint": [
+    4.0,
+    1.0
+   ]
+  },
+  {
+   "id": "interactive_point_origin",
+   "name": "1.0.1 Interactive Point with Origin Line",
+   "size": "small",
+   "source": "existing",
+   "concept": "Point",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "grab_sphere_point_with_color",
+   "name": "grab_sphere_point_with_color_text",
+   "size": "small",
+   "source": "added",
+   "concept": "Point",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "grab_sphere_point_with_text",
+   "name": "grab_sphere_point_with_text",
+   "size": "small",
+   "source": "added",
+   "concept": "Text / glyph",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "point",
+   "name": "1.0 A Point",
+   "size": "small",
+   "source": "added",
+   "concept": "Sphere / ball",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "script_runner#point",
+   "name": "script_runner#point",
+   "size": "small",
+   "source": "existing",
+   "concept": "",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "folding_past",
+   "name": "Folding Past",
+   "size": "large",
+   "source": "existing",
+   "concept": "Other primitives",
+   "footprint": [
+    6.0,
+    5.0
+   ]
+  },
+  {
+   "id": "draw_dot_time_domain",
+   "name": "draw_dot_time_domain",
+   "size": "small",
+   "source": "added",
+   "concept": "Point",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "frame_counter_display",
+   "name": "frame_counter_display",
+   "size": "small",
+   "source": "existing",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "CoordinateSystem3M",
+   "name": "CoordinateSystem3M",
+   "size": "large",
+   "source": "existing",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    5.0,
+    4.0
+   ]
+  }
+ ]
+}

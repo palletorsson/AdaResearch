@@ -1,0 +1,55 @@
+{
+ "map": "ISO_CaveGeneration",
+ "sequence": "isosurfaces",
+ "counts": {
+  "existing": 2,
+  "added": 2,
+  "large": 0
+ },
+ "pearls": [
+  {
+   "id": "marchingcave",
+   "name": "marchingcave",
+   "size": "small",
+   "source": "existing",
+   "concept": "Noise becomes architecture. A 3D scala",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "marchingcubes_cave",
+   "name": "marchingcubes_cave",
+   "size": "small",
+   "source": "existing",
+   "concept": "Noise becomes architecture. A 3D scala",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "marchingcubes_torus_sculpture",
+   "name": "marchingcubes_torus_sculpture",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "marchingcubes_inside_cave",
+   "name": "marchingcubes_inside_cave",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  }
+ ]
+}

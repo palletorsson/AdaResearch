@@ -1,0 +1,22 @@
+{
+ "map": "Boolean_Architecture_Cavity",
+ "sequence": "boolean_surfaces",
+ "counts": {
+  "existing": 1,
+  "added": 0,
+  "large": 0
+ },
+ "pearls": [
+  {
+   "id": "csg_architecture_cavity",
+   "name": "CSG Architecture Cavity",
+   "size": "small",
+   "source": "existing",
+   "concept": "Every room is a difference operation",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  }
+ ]
+}

@@ -1,0 +1,88 @@
+{
+ "map": "Chamber_ML",
+ "sequence": "machinelearning",
+ "counts": {
+  "existing": 1,
+  "added": 6,
+  "large": 5
+ },
+ "pearls": [
+  {
+   "id": "learn_input_pair_stand",
+   "name": "Learn Input-Pair Stand",
+   "size": "small",
+   "source": "existing",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "optimization_algorithms",
+   "name": "Optimization Algorithms",
+   "size": "large",
+   "source": "added",
+   "concept": "Classification Algorithms",
+   "footprint": [
+    20.0,
+    4.0
+   ]
+  },
+  {
+   "id": "anomaly_detection",
+   "name": "Anomaly Detection",
+   "size": "large",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    18.0,
+    18.0
+   ]
+  },
+  {
+   "id": "recommendation_systems",
+   "name": "Recommendation Systems",
+   "size": "large",
+   "source": "added",
+   "concept": "Recommendation Systems",
+   "footprint": [
+    20.0,
+    4.0
+   ]
+  },
+  {
+   "id": "svm_visualization",
+   "name": "Support Vector Machine Visualization",
+   "size": "large",
+   "source": "added",
+   "concept": "Random Walker Machine",
+   "footprint": [
+    10.0,
+    10.0
+   ]
+  },
+  {
+   "id": "perceptron_playground",
+   "name": "Perceptron Playground",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    2.0,
+    1.0
+   ]
+  },
+  {
+   "id": "reinforcement_learning",
+   "name": "Reinforcement Learning",
+   "size": "large",
+   "source": "added",
+   "concept": "Transfer Learning",
+   "footprint": [
+    20.0,
+    4.0
+   ]
+  }
+ ]
+}

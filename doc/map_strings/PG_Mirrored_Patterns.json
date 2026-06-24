@@ -1,0 +1,99 @@
+{
+ "map": "PG_Mirrored_Patterns",
+ "sequence": "proceduralgeneration",
+ "counts": {
+  "existing": 2,
+  "added": 6,
+  "large": 2
+ },
+ "pearls": [
+  {
+   "id": "mirror_cellular_texture_for_3d",
+   "name": "Mirror Cellular Texture for 3D",
+   "size": "large",
+   "source": "existing",
+   "concept": "",
+   "footprint": [
+    4.0,
+    4.0
+   ]
+  },
+  {
+   "id": "reaction_diffusion_bench",
+   "name": "Reaction-Diffusion Bench (Turing)",
+   "size": "small",
+   "source": "added",
+   "concept": "Reaction-diffusion & phase transition",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "percolation_ca",
+   "name": "Percolation CA",
+   "size": "small",
+   "source": "added",
+   "concept": "Reaction-diffusion & phase transition",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "cave_bench",
+   "name": "Cave CA Bench (noise to place)",
+   "size": "small",
+   "source": "added",
+   "concept": "Agent walks & caves",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "hexagon_cave_vr",
+   "name": "Hexagon Cave VR",
+   "size": "small",
+   "source": "added",
+   "concept": "Agent walks & caves",
+   "footprint": [
+    3.0,
+    3.0
+   ]
+  },
+  {
+   "id": "rhizomatic_maze_space",
+   "name": "Rhizomatic Maze Space",
+   "size": "small",
+   "source": "existing",
+   "concept": "Mazes",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "marching_cubes",
+   "name": "Marching Cubes Test",
+   "size": "small",
+   "source": "added",
+   "concept": "Marching cubes",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "gyroid_cheese",
+   "name": "gyroid_cheese",
+   "size": "large",
+   "source": "added",
+   "concept": "Metaballs & implicit surfaces",
+   "footprint": [
+    16.0,
+    16.0
+   ]
+  }
+ ]
+}

@@ -1,0 +1,110 @@
+{
+ "map": "QFEP_Lambda_Spectrum",
+ "sequence": "qfeplaboratory",
+ "counts": {
+  "existing": 7,
+  "added": 2,
+  "large": 3
+ },
+ "pearls": [
+  {
+   "id": "crystal_formation",
+   "name": "Crystal Formation",
+   "size": "small",
+   "source": "existing",
+   "concept": "F — free energy & order",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "ordered_grid",
+   "name": "Ordered Grid",
+   "size": "small",
+   "source": "existing",
+   "concept": "F — free energy & order",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "bifurcation_walkway",
+   "name": "Bifurcation Walkway",
+   "size": "large",
+   "source": "existing",
+   "concept": "λ — the order-chaos dial",
+   "footprint": [
+    13.0,
+    3.0
+   ]
+  },
+  {
+   "id": "edge_particles",
+   "name": "Edge Particles",
+   "size": "small",
+   "source": "existing",
+   "concept": "The edge of chaos",
+   "footprint": [
+    3.0,
+    3.0
+   ]
+  },
+  {
+   "id": "complexity_pattern",
+   "name": "Complexity Pattern",
+   "size": "small",
+   "source": "existing",
+   "concept": "λ — the order-chaos dial",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "dissolving_form",
+   "name": "Dissolving Form",
+   "size": "small",
+   "source": "existing",
+   "concept": "λ — the order-chaos dial",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "reactive_particle_field",
+   "name": "Reactive Particle Field",
+   "size": "small",
+   "source": "added",
+   "concept": "The reactor — the whole formula",
+   "footprint": [
+    2.0,
+    3.0
+   ]
+  },
+  {
+   "id": "chaos_particles",
+   "name": "Chaos Particles",
+   "size": "large",
+   "source": "existing",
+   "concept": "E — entropy as possibility",
+   "footprint": [
+    8.0,
+    8.0
+   ]
+  },
+  {
+   "id": "phase_cube",
+   "name": "Phase Cube",
+   "size": "large",
+   "source": "added",
+   "concept": "E — entropy as possibility",
+   "footprint": [
+    8.0,
+    8.0
+   ]
+  }
+ ]
+}

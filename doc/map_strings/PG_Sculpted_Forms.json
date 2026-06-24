@@ -1,0 +1,110 @@
+{
+ "map": "PG_Sculpted_Forms",
+ "sequence": "proceduralgeneration",
+ "counts": {
+  "existing": 3,
+  "added": 6,
+  "large": 5
+ },
+ "pearls": [
+  {
+   "id": "cube_mound_scene",
+   "name": "cube_mound_scene",
+   "size": "large",
+   "source": "existing",
+   "concept": "Generated worlds",
+   "footprint": [
+    11.0,
+    11.0
+   ]
+  },
+  {
+   "id": "dome",
+   "name": "dome",
+   "size": "large",
+   "source": "existing",
+   "concept": "",
+   "footprint": [
+    20.0,
+    20.0
+   ]
+  },
+  {
+   "id": "grammar_tessellation_field_k04_squares",
+   "name": "grammar_tessellation_field_k04_squares",
+   "size": "small",
+   "source": "added",
+   "concept": "Tilings & symmetry",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "grammar_tessellation_field_k06_honeycomb",
+   "name": "grammar_tessellation_field_k06_honeycomb",
+   "size": "small",
+   "source": "added",
+   "concept": "Tilings & symmetry",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "grammar_tessellation_field_k36_trihexagonal",
+   "name": "grammar_tessellation_field_k36_trihexagonal",
+   "size": "small",
+   "source": "added",
+   "concept": "Tilings & symmetry",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "grammar_tessellation_field_alhambra_stepped_pyramid_3d",
+   "name": "grammar_tessellation_field_alhambra_stepped_pyramid_3d",
+   "size": "small",
+   "source": "added",
+   "concept": "Tilings & symmetry",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "facade_grammar_demo",
+   "name": "Facade Grammar Demo",
+   "size": "large",
+   "source": "added",
+   "concept": "Mesh & shape grammars",
+   "footprint": [
+    14.0,
+    16.0
+   ]
+  },
+  {
+   "id": "cavetest",
+   "name": "cavetest",
+   "size": "large",
+   "source": "added",
+   "concept": "Agent walks & caves",
+   "footprint": [
+    40.0,
+    40.0
+   ]
+  },
+  {
+   "id": "layered_membrane",
+   "name": "Layered Membrane",
+   "size": "large",
+   "source": "existing",
+   "concept": "",
+   "footprint": [
+    7.0,
+    7.0
+   ]
+  }
+ ]
+}

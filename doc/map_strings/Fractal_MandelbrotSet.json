@@ -1,0 +1,99 @@
+{
+ "map": "Fractal_MandelbrotSet",
+ "sequence": "fractals",
+ "counts": {
+  "existing": 2,
+  "added": 6,
+  "large": 1
+ },
+ "pearls": [
+  {
+   "id": "mandelbrot_dive",
+   "name": "Mandelbrot Dive",
+   "size": "small",
+   "source": "existing",
+   "concept": "Mandelbrot set",
+   "footprint": [
+    2.0,
+    2.0
+   ]
+  },
+  {
+   "id": "julia_bench",
+   "name": "Julia Bench (move c, it breathes)",
+   "size": "small",
+   "source": "added",
+   "concept": "Julia sets",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "cantor_bench",
+   "name": "Cantor Bench (remove the middle third)",
+   "size": "small",
+   "source": "added",
+   "concept": "Cantor set",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "mandelbrot_bench",
+   "name": "Mandelbrot Bench (z -> z^2 + c)",
+   "size": "small",
+   "source": "added",
+   "concept": "Mandelbrot set",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "lyapunov_exponents",
+   "name": "Lyapunov Exponents",
+   "size": "small",
+   "source": "added",
+   "concept": "Lyapunov & escape-time",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "strange_attractors",
+   "name": "Strange Attractors",
+   "size": "small",
+   "source": "added",
+   "concept": "Strange attractors",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "lyapunov_fractal",
+   "name": "Lyapunov Fractal",
+   "size": "small",
+   "source": "added",
+   "concept": "Lyapunov & escape-time",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "mandelbrot_set",
+   "name": "Mandelbrot Set",
+   "size": "large",
+   "source": "existing",
+   "concept": "Mandelbrot set",
+   "footprint": [
+    17.0,
+    10.0
+   ]
+  }
+ ]
+}

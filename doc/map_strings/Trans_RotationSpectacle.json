@@ -1,0 +1,121 @@
+{
+ "map": "Trans_RotationSpectacle",
+ "sequence": "transformation",
+ "counts": {
+  "existing": 4,
+  "added": 6,
+  "large": 3
+ },
+ "pearls": [
+  {
+   "id": "boolean_tunnel",
+   "name": "Boolean Tunnel",
+   "size": "small",
+   "source": "existing",
+   "concept": "Boolean / CSG",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "bulging_tunnel",
+   "name": "Bulging Tunnel",
+   "size": "large",
+   "source": "added",
+   "concept": "Curved space (non-Euclidean)",
+   "footprint": [
+    4.0,
+    11.0
+   ]
+  },
+  {
+   "id": "rotation_gimbal",
+   "name": "Rotation Gimbal",
+   "size": "small",
+   "source": "added",
+   "concept": "Rotation",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "transform_composition",
+   "name": "Transform Composition",
+   "size": "small",
+   "source": "added",
+   "concept": "Composition",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "invariants_demo",
+   "name": "Invariants Demo",
+   "size": "small",
+   "source": "added",
+   "concept": "Invariants",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "righttriangle",
+   "name": "righttriangle",
+   "size": "small",
+   "source": "existing",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "pick_up_cube",
+   "name": "Pick Up Cube",
+   "size": "small",
+   "source": "existing",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "carousel_cake",
+   "name": "carousel_cake",
+   "size": "large",
+   "source": "existing",
+   "concept": "Composition",
+   "footprint": [
+    10.0,
+    10.0
+   ]
+  },
+  {
+   "id": "transform_composition_workbench",
+   "name": "Transform Composition Workbench",
+   "size": "small",
+   "source": "added",
+   "concept": "Composition",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "rotatescalecubes",
+   "name": "Rotate Scale Cubes",
+   "size": "large",
+   "source": "added",
+   "concept": "Scale",
+   "footprint": [
+    19.0,
+    18.0
+   ]
+  }
+ ]
+}

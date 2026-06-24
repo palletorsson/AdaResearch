@@ -1,0 +1,22 @@
+{
+ "map": "Change_Slope_Surface",
+ "sequence": "change",
+ "counts": {
+  "existing": 1,
+  "added": 0,
+  "large": 0
+ },
+ "pearls": [
+  {
+   "id": "partial_derivative_terrain",
+   "name": "Partial Derivative Terrain",
+   "size": "small",
+   "source": "existing",
+   "concept": "Slope Surface",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  }
+ ]
+}

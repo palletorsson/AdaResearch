@@ -1,0 +1,110 @@
+{
+ "map": "CA_GameOfLife",
+ "sequence": "cellularautomata",
+ "counts": {
+  "existing": 3,
+  "added": 6,
+  "large": 4
+ },
+ "pearls": [
+  {
+   "id": "ca_columns",
+   "name": "CA Columns",
+   "size": "large",
+   "source": "existing",
+   "concept": "Life patterns & variants",
+   "footprint": [
+    9.0,
+    9.0
+   ]
+  },
+  {
+   "id": "mirrored_cellular_automata",
+   "name": "Mirrored Cellular Automata",
+   "size": "large",
+   "source": "existing",
+   "concept": "Conway's Game of Life",
+   "footprint": [
+    4.0,
+    4.0
+   ]
+  },
+  {
+   "id": "ca_bridge",
+   "name": "CA Bridge",
+   "size": "small",
+   "source": "existing",
+   "concept": "Life patterns & variants",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "ca_showcase",
+   "name": "CA Showcase",
+   "size": "small",
+   "source": "added",
+   "concept": "Elementary CA (1D rules)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "cellular_automata_3d_stacked",
+   "name": "Cellular Automata 3D Stacked",
+   "size": "small",
+   "source": "added",
+   "concept": "3D / volumetric CA",
+   "footprint": [
+    2.0,
+    2.0
+   ]
+  },
+  {
+   "id": "cellular_automata_3d",
+   "name": "Cellular Automata 3D",
+   "size": "small",
+   "source": "added",
+   "concept": "3D / volumetric CA",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "cellular_automata_grabable",
+   "name": "Cellular Automata Grabable",
+   "size": "small",
+   "source": "added",
+   "concept": "Elementary CA (1D rules)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "cellular_automata_2d",
+   "name": "Cellular Automata 2D",
+   "size": "large",
+   "source": "added",
+   "concept": "Conway's Game of Life",
+   "footprint": [
+    22.0,
+    22.0
+   ]
+  },
+  {
+   "id": "cellular_automata_1d",
+   "name": "Cellular Automata 1D",
+   "size": "large",
+   "source": "added",
+   "concept": "Elementary CA (1D rules)",
+   "footprint": [
+    11.0,
+    11.0
+   ]
+  }
+ ]
+}

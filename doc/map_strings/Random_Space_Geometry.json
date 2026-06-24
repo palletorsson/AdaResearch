@@ -1,0 +1,110 @@
+{
+ "map": "Random_Space_Geometry",
+ "sequence": "randomness",
+ "counts": {
+  "existing": 3,
+  "added": 6,
+  "large": 5
+ },
+ "pearls": [
+  {
+   "id": "random_transformations_geometric",
+   "name": "Random Transformations - Geometric",
+   "size": "small",
+   "source": "existing",
+   "concept": "Random transformations",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "env_one",
+   "name": "Environment One",
+   "size": "large",
+   "source": "existing",
+   "concept": "Random art / scatter",
+   "footprint": [
+    61.0,
+    60.0
+   ]
+  },
+  {
+   "id": "instancingscatter",
+   "name": "Instancing Scatter",
+   "size": "large",
+   "source": "added",
+   "concept": "Blue noise / sampling",
+   "footprint": [
+    41.0,
+    44.0
+   ]
+  },
+  {
+   "id": "random_transformations_noise",
+   "name": "Random Transformations - Noise",
+   "size": "small",
+   "source": "added",
+   "concept": "Random transformations",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "sculpt_one",
+   "name": "Sculpt One",
+   "size": "large",
+   "source": "existing",
+   "concept": "Random art / scatter",
+   "footprint": [
+    5.0,
+    4.0
+   ]
+  },
+  {
+   "id": "WhiteNoiseGallery",
+   "name": "White Noise Gallery",
+   "size": "large",
+   "source": "added",
+   "concept": "Noise fields & textures",
+   "footprint": [
+    20.0,
+    22.0
+   ]
+  },
+  {
+   "id": "walk_random",
+   "name": "Random Walker",
+   "size": "small",
+   "source": "added",
+   "concept": "Random walk",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "random_plants",
+   "name": "Random Plants",
+   "size": "large",
+   "source": "added",
+   "concept": "Random art / scatter",
+   "footprint": [
+    21.0,
+    22.0
+   ]
+  },
+  {
+   "id": "height_random",
+   "name": "Height Distributor",
+   "size": "small",
+   "source": "added",
+   "concept": "Probability distribution",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  }
+ ]
+}

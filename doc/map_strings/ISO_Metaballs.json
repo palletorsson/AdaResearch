@@ -1,0 +1,55 @@
+{
+ "map": "ISO_Metaballs",
+ "sequence": "isosurfaces",
+ "counts": {
+  "existing": 4,
+  "added": 0,
+  "large": 2
+ },
+ "pearls": [
+  {
+   "id": "metaballs",
+   "name": "Metaballs",
+   "size": "large",
+   "source": "existing",
+   "concept": "Each metaball is a point radiating inf",
+   "footprint": [
+    12.0,
+    12.0
+   ]
+  },
+  {
+   "id": "raymarched_metaballs",
+   "name": "raymarched_metaballs",
+   "size": "large",
+   "source": "existing",
+   "concept": "Each metaball is a point radiating inf",
+   "footprint": [
+    12.0,
+    12.0
+   ]
+  },
+  {
+   "id": "nakama_metaballs",
+   "name": "nakama_metaballs",
+   "size": "small",
+   "source": "existing",
+   "concept": "Each metaball is a point radiating inf",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "metaball_world",
+   "name": "metaball_world",
+   "size": "small",
+   "source": "existing",
+   "concept": "Each metaball is a point radiating inf",
+   "footprint": [
+    3.0,
+    3.0
+   ]
+  }
+ ]
+}

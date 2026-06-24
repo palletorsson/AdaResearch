@@ -1,0 +1,132 @@
+{
+ "map": "ForcesComposition",
+ "sequence": "forces",
+ "counts": {
+  "existing": 5,
+  "added": 6,
+  "large": 4
+ },
+ "pearls": [
+  {
+   "id": "VectorBasics",
+   "name": "VectorBasics",
+   "size": "small",
+   "source": "existing",
+   "concept": "Vector basics",
+   "footprint": [
+    2.0,
+    1.0
+   ]
+  },
+  {
+   "id": "basis_vectors_rig",
+   "name": "Basis Vectors Rig",
+   "size": "small",
+   "source": "existing",
+   "concept": "Coordinate system",
+   "footprint": [
+    2.0,
+    2.0
+   ]
+  },
+  {
+   "id": "combined_forces_demo",
+   "name": "Combined Forces Demo",
+   "size": "small",
+   "source": "existing",
+   "concept": "Addition",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "work_energy_demo",
+   "name": "Work-Energy Demo",
+   "size": "small",
+   "source": "existing",
+   "concept": "Dot product",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "momentum_collision",
+   "name": "Momentum Collision",
+   "size": "large",
+   "source": "existing",
+   "concept": "Momentum / collision",
+   "footprint": [
+    10.0,
+    1.0
+   ]
+  },
+  {
+   "id": "PendulumPin",
+   "name": "PendulumPin",
+   "size": "small",
+   "source": "added",
+   "concept": "Pendulum",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "IKArm",
+   "name": "IKArm",
+   "size": "small",
+   "source": "added",
+   "concept": "Motion / velocity",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "slingshot_launcher",
+   "name": "Slingshot Launcher",
+   "size": "large",
+   "source": "added",
+   "concept": "Projectile / launch",
+   "footprint": [
+    2.0,
+    28.0
+   ]
+  },
+  {
+   "id": "rigid_body",
+   "name": "Rigid Body Dynamics",
+   "size": "large",
+   "source": "added",
+   "concept": "Cross product / torque",
+   "footprint": [
+    21.0,
+    21.0
+   ]
+  },
+  {
+   "id": "bouncing_ball",
+   "name": "Bouncing Ball",
+   "size": "large",
+   "source": "added",
+   "concept": "Restitution / bounce",
+   "footprint": [
+    9.0,
+    9.0
+   ]
+  },
+  {
+   "id": "newton_cradle",
+   "name": "Newton's Cradle",
+   "size": "small",
+   "source": "added",
+   "concept": "Momentum / collision",
+   "footprint": [
+    2.0,
+    1.0
+   ]
+  }
+ ]
+}

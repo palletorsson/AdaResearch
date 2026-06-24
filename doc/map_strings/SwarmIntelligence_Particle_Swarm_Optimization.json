@@ -1,0 +1,33 @@
+{
+ "map": "SwarmIntelligence_Particle_Swarm_Optimization",
+ "sequence": "swarmintelligence",
+ "counts": {
+  "existing": 2,
+  "added": 0,
+  "large": 1
+ },
+ "pearls": [
+  {
+   "id": "particle_swarm_optimization",
+   "name": "Particle Swarm Optimization",
+   "size": "large",
+   "source": "existing",
+   "concept": "",
+   "footprint": [
+    17.0,
+    3.0
+   ]
+  },
+  {
+   "id": "self_organizing_patterns",
+   "name": "Self-Organizing Patterns",
+   "size": "small",
+   "source": "existing",
+   "concept": "Particle Swarm Optimization",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  }
+ ]
+}

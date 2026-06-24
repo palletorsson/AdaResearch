@@ -1,0 +1,99 @@
+{
+ "map": "Trans_Rotation",
+ "sequence": "transformation",
+ "counts": {
+  "existing": 4,
+  "added": 4,
+  "large": 1
+ },
+ "pearls": [
+  {
+   "id": "rotate_grid_cubes",
+   "name": "Rotate Grid Cubes",
+   "size": "small",
+   "source": "existing",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "attractorsphere",
+   "name": "Attractor Sphere",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    3.0,
+    2.0
+   ]
+  },
+  {
+   "id": "spin",
+   "name": "spin",
+   "size": "large",
+   "source": "existing",
+   "concept": "Rotation",
+   "footprint": [
+    6.0,
+    1.0
+   ]
+  },
+  {
+   "id": "pick_up_cube",
+   "name": "Pick Up Cube",
+   "size": "small",
+   "source": "existing",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "catalyst_vent",
+   "name": "Catalyst Vent",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "catalyst_foe",
+   "name": "Catalyst Foe",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "pickup_gate",
+   "name": "Pickup Gate",
+   "size": "small",
+   "source": "existing",
+   "concept": "",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "grid_substrate_runner",
+   "name": "Grid Substrate Runner",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  }
+ ]
+}

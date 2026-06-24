@@ -1,0 +1,88 @@
+{
+ "map": "Point_Animatedcube",
+ "sequence": "primitives",
+ "counts": {
+  "existing": 2,
+  "added": 5,
+  "large": 0
+ },
+ "pearls": [
+  {
+   "id": "animatedcubebuilder",
+   "name": "animatedcubebuilder",
+   "size": "small",
+   "source": "existing",
+   "concept": "Cube / box",
+   "footprint": [
+    2.0,
+    2.0
+   ]
+  },
+  {
+   "id": "oscillation_cube",
+   "name": "Oscillation Cube",
+   "size": "small",
+   "source": "added",
+   "concept": "Cube / box",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "folding_cube_interactive",
+   "name": "folding_cube_interactive",
+   "size": "small",
+   "source": "added",
+   "concept": "Cube / box",
+   "footprint": [
+    3.0,
+    2.0
+   ]
+  },
+  {
+   "id": "folding_cube",
+   "name": "folding_cube",
+   "size": "small",
+   "source": "added",
+   "concept": "Cube / box",
+   "footprint": [
+    2.0,
+    1.0
+   ]
+  },
+  {
+   "id": "combo_cube_visual",
+   "name": "Transformation Rotation Scale Cube",
+   "size": "small",
+   "source": "added",
+   "concept": "Cube / box",
+   "footprint": [
+    2.0,
+    2.0
+   ]
+  },
+  {
+   "id": "animated_cube",
+   "name": "Animated Cube",
+   "size": "small",
+   "source": "added",
+   "concept": "Cube / box",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "polyhedron_nets_cube",
+   "name": "polyhedron_nets_cube",
+   "size": "small",
+   "source": "existing",
+   "concept": "Cube / box",
+   "footprint": [
+    2.0,
+    2.0
+   ]
+  }
+ ]
+}

@@ -1,0 +1,66 @@
+{
+ "map": "WaveFunctions_Unit_Circle",
+ "sequence": "wavefunctions",
+ "counts": {
+  "existing": 5,
+  "added": 0,
+  "large": 2
+ },
+ "pearls": [
+  {
+   "id": "OscillationCurve",
+   "name": "OscillationCurve",
+   "size": "large",
+   "source": "existing",
+   "concept": "unit circle",
+   "footprint": [
+    6.0,
+    2.0
+   ]
+  },
+  {
+   "id": "SimpleOscillatingBridge",
+   "name": "Simple Oscillating Bridge",
+   "size": "large",
+   "source": "existing",
+   "concept": "unit circle",
+   "footprint": [
+    2.0,
+    40.0
+   ]
+  },
+  {
+   "id": "colorballs",
+   "name": "colorballs",
+   "size": "small",
+   "source": "existing",
+   "concept": "unit circle",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "cube_scene",
+   "name": "Basic Cube Scene",
+   "size": "small",
+   "source": "existing",
+   "concept": "the wave",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "unit_circle_advanced",
+   "name": "Advanced Unit Circle",
+   "size": "small",
+   "source": "existing",
+   "concept": "unit circle",
+   "footprint": [
+    3.0,
+    1.0
+   ]
+  }
+ ]
+}

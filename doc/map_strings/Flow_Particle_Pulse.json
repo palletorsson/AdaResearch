@@ -1,0 +1,33 @@
+{
+ "map": "Flow_Particle_Pulse",
+ "sequence": "change",
+ "counts": {
+  "existing": 2,
+  "added": 0,
+  "large": 0
+ },
+ "pearls": [
+  {
+   "id": "vector_field_grid",
+   "name": "Vector Field Grid",
+   "size": "small",
+   "source": "existing",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "particle_flow_swarm",
+   "name": "Particle Flow Swarm",
+   "size": "small",
+   "source": "existing",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  }
+ ]
+}

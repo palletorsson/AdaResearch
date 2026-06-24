@@ -1,0 +1,121 @@
+{
+ "map": "Point_Triangle",
+ "sequence": "primitives",
+ "counts": {
+  "existing": 4,
+  "added": 6,
+  "large": 2
+ },
+ "pearls": [
+  {
+   "id": "triangle_line_puzzle",
+   "name": "Triangle Line Puzzle",
+   "size": "small",
+   "source": "existing",
+   "concept": "Interactive tool",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "cube_scene",
+   "name": "Basic Cube Scene",
+   "size": "small",
+   "source": "existing",
+   "concept": "Cube / box",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "triangle",
+   "name": "triangle",
+   "size": "small",
+   "source": "existing",
+   "concept": "Triangle",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "three_points_triangle",
+   "name": "Three Points Triangle",
+   "size": "small",
+   "source": "added",
+   "concept": "Triangle",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "tensegrity_triangle",
+   "name": "Tensegrity Triangle",
+   "size": "small",
+   "source": "added",
+   "concept": "Triangle",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "pink_triangle",
+   "name": "Pink Triangle",
+   "size": "small",
+   "source": "added",
+   "concept": "Triangle",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "editable_curve",
+   "name": "editable_curve",
+   "size": "small",
+   "source": "added",
+   "concept": "Interactive tool",
+   "footprint": [
+    3.0,
+    1.0
+   ]
+  },
+  {
+   "id": "parasol_triangle",
+   "name": "Parasol Triangle",
+   "size": "small",
+   "source": "added",
+   "concept": "Triangle",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "triangleprofiles",
+   "name": "1.2: A triangleprofilese",
+   "size": "large",
+   "source": "existing",
+   "concept": "Triangle",
+   "footprint": [
+    6.0,
+    6.0
+   ]
+  },
+  {
+   "id": "rotation_match_puzzle",
+   "name": "Rotation Match Puzzle",
+   "size": "large",
+   "source": "added",
+   "concept": "Interactive tool",
+   "footprint": [
+    4.0,
+    1.0
+   ]
+  }
+ ]
+}

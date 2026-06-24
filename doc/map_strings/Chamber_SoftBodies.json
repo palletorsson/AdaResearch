@@ -1,0 +1,44 @@
+{
+ "map": "Chamber_SoftBodies",
+ "sequence": "softbodies",
+ "counts": {
+  "existing": 1,
+  "added": 2,
+  "large": 1
+ },
+ "pearls": [
+  {
+   "id": "flex_cloth_pad",
+   "name": "Flex Cloth Pad",
+   "size": "small",
+   "source": "existing",
+   "concept": "Cloth physics",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "tentacle_placer",
+   "name": "Tentacle Placer",
+   "size": "small",
+   "source": "added",
+   "concept": "Tentacle & octopus",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "verlet_integration",
+   "name": "Verlet Integration",
+   "size": "large",
+   "source": "added",
+   "concept": "Verlet & the soft-body sim",
+   "footprint": [
+    9.0,
+    1.0
+   ]
+  }
+ ]
+}

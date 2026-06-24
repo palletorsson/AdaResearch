@@ -1,0 +1,198 @@
+{
+ "map": "ForcesSystems",
+ "sequence": "forces",
+ "counts": {
+  "existing": 11,
+  "added": 6,
+  "large": 7
+ },
+ "pearls": [
+  {
+   "id": "vector_fields",
+   "name": "Vector Fields",
+   "size": "large",
+   "source": "existing",
+   "concept": "Vector field / flow",
+   "footprint": [
+    4.0,
+    4.0
+   ]
+  },
+  {
+   "id": "force_field_visualizer",
+   "name": "Force Field Visualizer",
+   "size": "small",
+   "source": "existing",
+   "concept": "Force field (zone)",
+   "footprint": [
+    1.0,
+    2.0
+   ]
+  },
+  {
+   "id": "VectorBasics",
+   "name": "VectorBasics",
+   "size": "small",
+   "source": "existing",
+   "concept": "Vector basics",
+   "footprint": [
+    2.0,
+    1.0
+   ]
+  },
+  {
+   "id": "basis_vectors_rig",
+   "name": "Basis Vectors Rig",
+   "size": "small",
+   "source": "existing",
+   "concept": "Coordinate system",
+   "footprint": [
+    2.0,
+    2.0
+   ]
+  },
+  {
+   "id": "particle_systems",
+   "name": "Particle Systems",
+   "size": "large",
+   "source": "existing",
+   "concept": "",
+   "footprint": [
+    12.0,
+    11.0
+   ]
+  },
+  {
+   "id": "sub_emitters",
+   "name": "sub_emitters",
+   "size": "small",
+   "source": "added",
+   "concept": "Projectile / launch",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "force_fields",
+   "name": "Force Fields",
+   "size": "large",
+   "source": "existing",
+   "concept": "Gravity / orbit",
+   "footprint": [
+    9.0,
+    4.0
+   ]
+  },
+  {
+   "id": "surreal_kinetic_sculpture",
+   "name": "Surreal Kinetic Sculpture",
+   "size": "large",
+   "source": "added",
+   "concept": "Spring / Hooke",
+   "footprint": [
+    23.0,
+    24.0
+   ]
+  },
+  {
+   "id": "gravity_well",
+   "name": "Gravity Well",
+   "size": "small",
+   "source": "added",
+   "concept": "Gravity / orbit",
+   "footprint": [
+    1.0,
+    2.0
+   ]
+  },
+  {
+   "id": "mass_spring_damper",
+   "name": "Mass-Spring-Damper",
+   "size": "large",
+   "source": "existing",
+   "concept": "Spring / Hooke",
+   "footprint": [
+    6.0,
+    3.0
+   ]
+  },
+  {
+   "id": "verlet_integration",
+   "name": "Verlet Integration",
+   "size": "large",
+   "source": "added",
+   "concept": "Motion / velocity",
+   "footprint": [
+    9.0,
+    1.0
+   ]
+  },
+  {
+   "id": "newtons_laws",
+   "name": "Newton's Laws",
+   "size": "small",
+   "source": "added",
+   "concept": "General force / pad",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "spring_system",
+   "name": "Spring System",
+   "size": "large",
+   "source": "existing",
+   "concept": "Spring / Hooke",
+   "footprint": [
+    9.0,
+    11.0
+   ]
+  },
+  {
+   "id": "firework_launcher",
+   "name": "Firework Launcher",
+   "size": "small",
+   "source": "existing",
+   "concept": "Projectile / launch",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "example_3_2_forces_with_arbitrary_angular_motion_vr",
+   "name": "Arbitrary Angular Motion",
+   "size": "small",
+   "source": "existing",
+   "concept": "Gravity / orbit",
+   "footprint": [
+    2.0,
+    1.0
+   ]
+  },
+  {
+   "id": "friction_ramp",
+   "name": "Friction Ramp",
+   "size": "small",
+   "source": "added",
+   "concept": "Friction / drag",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "example_3_3_pointing_in_the_direction_of_motion_vr",
+   "name": "Pointing in Direction of Motion",
+   "size": "small",
+   "source": "existing",
+   "concept": "Motion / velocity",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  }
+ ]
+}

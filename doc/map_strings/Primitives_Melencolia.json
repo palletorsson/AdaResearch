@@ -1,0 +1,121 @@
+{
+ "map": "Primitives_Melencolia",
+ "sequence": "primitives",
+ "counts": {
+  "existing": 8,
+  "added": 2,
+  "large": 2
+ },
+ "pearls": [
+  {
+   "id": "pyramid",
+   "name": "pyramid",
+   "size": "small",
+   "source": "existing",
+   "concept": "Cone / pyramid",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "path_pyramid",
+   "name": "Path Pyramid (mound)",
+   "size": "small",
+   "source": "added",
+   "concept": "Cone / pyramid",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "snap_pyramid_puzzle",
+   "name": "Snap Pyramid Puzzle",
+   "size": "small",
+   "source": "existing",
+   "concept": "Interactive tool",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "pyramidlong",
+   "name": "pyramidlong",
+   "size": "small",
+   "source": "existing",
+   "concept": "Cone / pyramid",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "square_pyramid",
+   "name": "square_pyramid",
+   "size": "small",
+   "source": "added",
+   "concept": "Plane / quad",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "cube_scene",
+   "name": "Basic Cube Scene",
+   "size": "small",
+   "source": "existing",
+   "concept": "Cube / box",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "prism_block",
+   "name": "prism_block",
+   "size": "small",
+   "source": "existing",
+   "concept": "Prism / extrusion",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "bigframe",
+   "name": "bigframe",
+   "size": "small",
+   "source": "existing",
+   "concept": "Arch / structure",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "diamondtoruscollection",
+   "name": "diamondtoruscollection",
+   "size": "large",
+   "source": "existing",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    5.0,
+    5.0
+   ]
+  },
+  {
+   "id": "durer_scene",
+   "name": "DÃ¼rer Melencolia Scene",
+   "size": "large",
+   "source": "existing",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    6.0,
+    7.0
+   ]
+  }
+ ]
+}

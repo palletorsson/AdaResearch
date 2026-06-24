@@ -1,0 +1,55 @@
+{
+ "map": "VectorAdvanced",
+ "sequence": "forces",
+ "counts": {
+  "existing": 4,
+  "added": 0,
+  "large": 1
+ },
+ "pearls": [
+  {
+   "id": "exercise_1_3_solution_3_d_bouncing_ball_vr",
+   "name": "3D Bouncing Ball",
+   "size": "small",
+   "source": "existing",
+   "concept": "General force / pad",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "exercise_1_8_solution_attraction_magnitude_vr",
+   "name": "Attraction and Orbit",
+   "size": "small",
+   "source": "existing",
+   "concept": "Gravity / orbit",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "VectorThrowing",
+   "name": "VectorThrowing",
+   "size": "large",
+   "source": "existing",
+   "concept": "Projectile / launch",
+   "footprint": [
+    4.0,
+    2.0
+   ]
+  },
+  {
+   "id": "torque_demo",
+   "name": "Torque Demo",
+   "size": "small",
+   "source": "existing",
+   "concept": "Cross product / torque",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  }
+ ]
+}

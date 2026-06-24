@@ -1,0 +1,44 @@
+{
+ "map": "ISO_LookupTable",
+ "sequence": "isosurfaces",
+ "counts": {
+  "existing": 2,
+  "added": 1,
+  "large": 2
+ },
+ "pearls": [
+  {
+   "id": "fifteen_cases_demo",
+   "name": "fifteen_cases_demo",
+   "size": "large",
+   "source": "existing",
+   "concept": "Two hundred and fifty",
+   "footprint": [
+    9.0,
+    5.0
+   ]
+  },
+  {
+   "id": "gyroid_demo",
+   "name": "gyroid_demo",
+   "size": "large",
+   "source": "added",
+   "concept": "Seven sculptures stand in a row. Each ",
+   "footprint": [
+    20.0,
+    20.0
+   ]
+  },
+  {
+   "id": "mc_cave",
+   "name": "mc_cave",
+   "size": "small",
+   "source": "existing",
+   "concept": "Two hundred and fifty",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  }
+ ]
+}

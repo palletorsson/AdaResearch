@@ -1,0 +1,121 @@
+{
+ "map": "WaveFunctions_Sine_Space",
+ "sequence": "wavefunctions",
+ "counts": {
+  "existing": 5,
+  "added": 5,
+  "large": 3
+ },
+ "pearls": [
+  {
+   "id": "colorballs",
+   "name": "colorballs",
+   "size": "small",
+   "source": "existing",
+   "concept": "unit circle",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "sine_space",
+   "name": "Sine Space",
+   "size": "large",
+   "source": "existing",
+   "concept": "sine space",
+   "footprint": [
+    17.0,
+    1.0
+   ]
+  },
+  {
+   "id": "profile",
+   "name": "Profile Substrate",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "doppler_effect_demo",
+   "name": "Doppler Effect Demo",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "sine_oscillation",
+   "name": "Sine Oscillation",
+   "size": "small",
+   "source": "added",
+   "concept": "TrigWalkingPath",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "sine_wall",
+   "name": "Sine Wall",
+   "size": "large",
+   "source": "added",
+   "concept": "sine space",
+   "footprint": [
+    13.0,
+    1.0
+   ]
+  },
+  {
+   "id": "living_paper_sine",
+   "name": "Living Paper — Sine Wave",
+   "size": "small",
+   "source": "added",
+   "concept": "sine space",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "sine_space_explanation",
+   "name": "Sine Space Explanation",
+   "size": "small",
+   "source": "existing",
+   "concept": "sine space",
+   "footprint": [
+    2.0,
+    2.0
+   ]
+  },
+  {
+   "id": "sine_wall_corridor",
+   "name": "Sine Wall Corridor",
+   "size": "large",
+   "source": "existing",
+   "concept": "sine space",
+   "footprint": [
+    3.0,
+    8.0
+   ]
+  },
+  {
+   "id": "sine_wall_explanation",
+   "name": "Sine Wall Explanation",
+   "size": "small",
+   "source": "existing",
+   "concept": "sine space",
+   "footprint": [
+    1.0,
+    2.0
+   ]
+  }
+ ]
+}

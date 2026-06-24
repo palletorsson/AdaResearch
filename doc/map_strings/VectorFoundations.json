@@ -1,0 +1,132 @@
+{
+ "map": "VectorFoundations",
+ "sequence": "forces",
+ "counts": {
+  "existing": 7,
+  "added": 4,
+  "large": 3
+ },
+ "pearls": [
+  {
+   "id": "becoming_catalyst",
+   "name": "The Catalyst",
+   "size": "small",
+   "source": "existing",
+   "concept": "",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "force_field",
+   "name": "Force Field",
+   "size": "large",
+   "source": "added",
+   "concept": "Force field (zone)",
+   "footprint": [
+    8.0,
+    8.0
+   ]
+  },
+  {
+   "id": "spring_mass_bouncer",
+   "name": "Spring Mass Bouncer",
+   "size": "small",
+   "source": "added",
+   "concept": "Spring / Hooke",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "spring_hopper",
+   "name": "Spring Hopper",
+   "size": "small",
+   "source": "added",
+   "concept": "Spring / Hooke",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "homogeneous_coordinates",
+   "name": "Homogeneous Coordinates",
+   "size": "small",
+   "source": "added",
+   "concept": "Coordinate system",
+   "footprint": [
+    2.0,
+    1.0
+   ]
+  },
+  {
+   "id": "VectorBasics",
+   "name": "VectorBasics",
+   "size": "small",
+   "source": "existing",
+   "concept": "Vector basics",
+   "footprint": [
+    2.0,
+    1.0
+   ]
+  },
+  {
+   "id": "basis_vectors_rig",
+   "name": "Basis Vectors Rig",
+   "size": "small",
+   "source": "existing",
+   "concept": "Coordinate system",
+   "footprint": [
+    2.0,
+    2.0
+   ]
+  },
+  {
+   "id": "vector_addition_demo",
+   "name": "Vector Addition",
+   "size": "large",
+   "source": "existing",
+   "concept": "Addition",
+   "footprint": [
+    4.0,
+    4.0
+   ]
+  },
+  {
+   "id": "ForceMagnitudeDemo",
+   "name": "ForceMagnitudeDemo",
+   "size": "small",
+   "source": "existing",
+   "concept": "General force / pad",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "vector_subtraction_demo",
+   "name": "Vector Subtraction",
+   "size": "large",
+   "source": "existing",
+   "concept": "Subtraction",
+   "footprint": [
+    3.0,
+    4.0
+   ]
+  },
+  {
+   "id": "coordinate_system_switcher",
+   "name": "Coordinate System Switcher",
+   "size": "small",
+   "source": "existing",
+   "concept": "Coordinate system",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  }
+ ]
+}

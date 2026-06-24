@@ -1,0 +1,99 @@
+{
+ "map": "CA_EdgeOfChaos",
+ "sequence": "cellularautomata",
+ "counts": {
+  "existing": 3,
+  "added": 5,
+  "large": 1
+ },
+ "pearls": [
+  {
+   "id": "self_organization_ca",
+   "name": "Self Organization CA",
+   "size": "small",
+   "source": "existing",
+   "concept": "Edge of chaos / self-organisation",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "lattice_gas_automata",
+   "name": "Lattice Gas Automata",
+   "size": "small",
+   "source": "added",
+   "concept": "Lattice gas / physical CA",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "shader_10_reactiondiffusion",
+   "name": "Shader 10 — Reaction Diffusion",
+   "size": "large",
+   "source": "added",
+   "concept": "Reaction-diffusion (Turing)",
+   "footprint": [
+    6.0,
+    2.0
+   ]
+  },
+  {
+   "id": "turing_pattern",
+   "name": "Turing Pattern",
+   "size": "small",
+   "source": "added",
+   "concept": "Reaction-diffusion (Turing)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "rule_30_110",
+   "name": "Rule 30/110",
+   "size": "small",
+   "source": "added",
+   "concept": "Rule 30 — order to randomness",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "disease_spread_ca",
+   "name": "Disease Spread CA",
+   "size": "small",
+   "source": "existing",
+   "concept": "Stigmergy & ecological CA",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "stigmergy_grid",
+   "name": "Stigmergy Grid",
+   "size": "small",
+   "source": "added",
+   "concept": "Stigmergy & ecological CA",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "volumetric_fog_ca",
+   "name": "Volumetric Fog CA",
+   "size": "small",
+   "source": "existing",
+   "concept": "3D / volumetric CA",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  }
+ ]
+}

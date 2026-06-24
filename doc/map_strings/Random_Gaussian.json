@@ -1,0 +1,121 @@
+{
+ "map": "Random_Gaussian",
+ "sequence": "randomness",
+ "counts": {
+  "existing": 4,
+  "added": 6,
+  "large": 4
+ },
+ "pearls": [
+  {
+   "id": "galton_board",
+   "name": "Galton Board",
+   "size": "small",
+   "source": "existing",
+   "concept": "Gaussian / normal",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "distribution_sampler",
+   "name": "Distribution Sampler",
+   "size": "small",
+   "source": "existing",
+   "concept": "Probability distribution",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "gaussian_random",
+   "name": "Gaussian Generator",
+   "size": "small",
+   "source": "existing",
+   "concept": "Gaussian / normal",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "GaussianBlurShader",
+   "name": "Gaussian Blur Shader",
+   "size": "small",
+   "source": "added",
+   "concept": "Gaussian / normal",
+   "footprint": [
+    3.0,
+    1.0
+   ]
+  },
+  {
+   "id": "RandomGaussianTexture",
+   "name": "Random Gaussian Texture",
+   "size": "small",
+   "source": "added",
+   "concept": "Gaussian / normal",
+   "footprint": [
+    2.0,
+    2.0
+   ]
+  },
+  {
+   "id": "GaussianPaintSplatter",
+   "name": "Gaussian Paint Splatter",
+   "size": "large",
+   "source": "added",
+   "concept": "Gaussian / normal",
+   "footprint": [
+    4.0,
+    1.0
+   ]
+  },
+  {
+   "id": "bell_alley",
+   "name": "Bell Curve Alley",
+   "size": "large",
+   "source": "added",
+   "concept": "Gaussian / normal",
+   "footprint": [
+    29.0,
+    60.0
+   ]
+  },
+  {
+   "id": "randompoints_gaussian",
+   "name": "randompoints_gaussian",
+   "size": "small",
+   "source": "added",
+   "concept": "Uniform random / RNG",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "GaussianBlurCircle",
+   "name": "Gaussian Blur Circle",
+   "size": "large",
+   "source": "added",
+   "concept": "Gaussian / normal",
+   "footprint": [
+    10.0,
+    20.0
+   ]
+  },
+  {
+   "id": "random_bell_curve",
+   "name": "Random Bell Curve Terrain",
+   "size": "large",
+   "source": "existing",
+   "concept": "Gaussian / normal",
+   "footprint": [
+    20.0,
+    21.0
+   ]
+  }
+ ]
+}

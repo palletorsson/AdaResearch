@@ -1,0 +1,55 @@
+{
+ "map": "GT_Network_Analysis",
+ "sequence": "graphtheory",
+ "counts": {
+  "existing": 3,
+  "added": 1,
+  "large": 4
+ },
+ "pearls": [
+  {
+   "id": "networkflow3d",
+   "name": "networkflow3d",
+   "size": "large",
+   "source": "existing",
+   "concept": "Network Analysis",
+   "footprint": [
+    32.0,
+    32.0
+   ]
+  },
+  {
+   "id": "network_analysis",
+   "name": "network_analysis",
+   "size": "large",
+   "source": "existing",
+   "concept": "Network Analysis",
+   "footprint": [
+    20.0,
+    4.0
+   ]
+  },
+  {
+   "id": "graph_basilica",
+   "name": "Graph Basilica",
+   "size": "large",
+   "source": "added",
+   "concept": "Force Directed Graph Layout",
+   "footprint": [
+    9.0,
+    9.0
+   ]
+  },
+  {
+   "id": "rhizomatic_structure",
+   "name": "Rhizomatic Structure",
+   "size": "large",
+   "source": "existing",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    15.0,
+    18.0
+   ]
+  }
+ ]
+}

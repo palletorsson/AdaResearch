@@ -1,0 +1,44 @@
+{
+ "map": "GT_Foundations",
+ "sequence": "graphtheory",
+ "counts": {
+  "existing": 2,
+  "added": 1,
+  "large": 1
+ },
+ "pearls": [
+  {
+   "id": "graphspace",
+   "name": "graphspace",
+   "size": "small",
+   "source": "existing",
+   "concept": "Graphspace",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "living_paper_bfs",
+   "name": "Living Paper — BFS Flood Fill",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "KonigsbergBridge",
+   "name": "KonigsbergBridge",
+   "size": "large",
+   "source": "existing",
+   "concept": "Graphspace",
+   "footprint": [
+    50.0,
+    32.0
+   ]
+  }
+ ]
+}

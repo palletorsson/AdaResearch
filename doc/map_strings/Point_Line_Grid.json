@@ -1,0 +1,110 @@
+{
+ "map": "Point_Line_Grid",
+ "sequence": "primitives",
+ "counts": {
+  "existing": 3,
+  "added": 6,
+  "large": 4
+ },
+ "pearls": [
+  {
+   "id": "player_trace",
+   "name": "player_trace",
+   "size": "small",
+   "source": "existing",
+   "concept": "Grid / array",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "floating_sphere_field",
+   "name": "Floating Sphere Field",
+   "size": "small",
+   "source": "added",
+   "concept": "Sphere / ball",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "interactive_point_origin_force",
+   "name": "1.0.2 Interactive Point — Force Catalyst",
+   "size": "small",
+   "source": "added",
+   "concept": "Point",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "grid_lines",
+   "name": "grid_lines",
+   "size": "large",
+   "source": "existing",
+   "concept": "Line / edge",
+   "footprint": [
+    6.0,
+    6.0
+   ]
+  },
+  {
+   "id": "grid_brush_demo",
+   "name": "Grid Brush Demo",
+   "size": "large",
+   "source": "added",
+   "concept": "Grid / array",
+   "footprint": [
+    16.0,
+    16.0
+   ]
+  },
+  {
+   "id": "grid_ops_demo",
+   "name": "Grid Ops Demo",
+   "size": "large",
+   "source": "added",
+   "concept": "Grid / array",
+   "footprint": [
+    12.0,
+    60.0
+   ]
+  },
+  {
+   "id": "modifier_grid_demo",
+   "name": "Modifier Grid Demo",
+   "size": "large",
+   "source": "added",
+   "concept": "Grid / array",
+   "footprint": [
+    9.0,
+    9.0
+   ]
+  },
+  {
+   "id": "grab_sphere_point_snap",
+   "name": "grab_sphere_point_snap",
+   "size": "small",
+   "source": "existing",
+   "concept": "Point",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "grab_sphere_point",
+   "name": "grab_sphere_point",
+   "size": "small",
+   "source": "added",
+   "concept": "Point",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  }
+ ]
+}

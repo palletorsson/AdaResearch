@@ -1,0 +1,44 @@
+{
+ "map": "SwarmIntelligence_Agent_Based_Modeling_ABM",
+ "sequence": "swarmintelligence",
+ "counts": {
+  "existing": 2,
+  "added": 1,
+  "large": 1
+ },
+ "pearls": [
+  {
+   "id": "ant_colony_optimization",
+   "name": "Ant Colony Optimization",
+   "size": "small",
+   "source": "existing",
+   "concept": "Agent Based Modeling ABM",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "fitness_landscape_politics",
+   "name": "Fitness Landscape Politics",
+   "size": "large",
+   "source": "added",
+   "concept": "Particle Swarm Optimization",
+   "footprint": [
+    4.0,
+    3.0
+   ]
+  },
+  {
+   "id": "stigmergy_grid",
+   "name": "Stigmergy Grid",
+   "size": "small",
+   "source": "existing",
+   "concept": "",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  }
+ ]
+}

@@ -1,0 +1,33 @@
+{
+ "map": "SoftBodies_Cloth_Physics",
+ "sequence": "softbodies",
+ "counts": {
+  "existing": 1,
+  "added": 1,
+  "large": 1
+ },
+ "pearls": [
+  {
+   "id": "softstopscene",
+   "name": "softstopscene",
+   "size": "large",
+   "source": "existing",
+   "concept": "Cloth physics",
+   "footprint": [
+    4.0,
+    4.0
+   ]
+  },
+  {
+   "id": "affect_theory_visualization",
+   "name": "Affect Theory Visualization",
+   "size": "small",
+   "source": "added",
+   "concept": "The abject as force",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  }
+ ]
+}

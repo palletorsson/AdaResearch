@@ -1,0 +1,143 @@
+{
+ "map": "WaveFunctions_Pendulum",
+ "sequence": "wavefunctions",
+ "counts": {
+  "existing": 9,
+  "added": 3,
+  "large": 3
+ },
+ "pearls": [
+  {
+   "id": "BigPipeSystem",
+   "name": "Big Pipe System",
+   "size": "small",
+   "source": "existing",
+   "concept": "pendulum",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "GlassRack",
+   "name": "Glass Rack",
+   "size": "small",
+   "source": "existing",
+   "concept": "pendulum",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "PendulumWave",
+   "name": "PendulumWave",
+   "size": "large",
+   "source": "existing",
+   "concept": "pendulum",
+   "footprint": [
+    4.0,
+    8.0
+   ]
+  },
+  {
+   "id": "VRAudioMonitor",
+   "name": "VR Audio Monitor",
+   "size": "small",
+   "source": "existing",
+   "concept": "pendulum",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "WavePaintings",
+   "name": "Wave Paintings",
+   "size": "large",
+   "source": "existing",
+   "concept": "pendulum",
+   "footprint": [
+    22.0,
+    2.0
+   ]
+  },
+  {
+   "id": "draw_dot_time_domain",
+   "name": "draw_dot_time_domain",
+   "size": "small",
+   "source": "existing",
+   "concept": "pendulum",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "foucault_pendulum",
+   "name": "Foucault Pendulum",
+   "size": "large",
+   "source": "existing",
+   "concept": "pendulum",
+   "footprint": [
+    8.0,
+    8.0
+   ]
+  },
+  {
+   "id": "living_paper_lissajous",
+   "name": "Living Paper — Lissajous Figures",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "living_paper_fourier",
+   "name": "Living Paper — Fourier Series",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "lab_table",
+   "name": "Lab Table",
+   "size": "small",
+   "source": "existing",
+   "concept": "pendulum",
+   "footprint": [
+    2.0,
+    1.0
+   ]
+  },
+  {
+   "id": "seismograph",
+   "name": "seismograph",
+   "size": "small",
+   "source": "existing",
+   "concept": "pendulum",
+   "footprint": [
+    2.0,
+    1.0
+   ]
+  },
+  {
+   "id": "living_paper_heat",
+   "name": "Living Paper — Heat Diffusion",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  }
+ ]
+}

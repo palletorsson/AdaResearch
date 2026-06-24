@@ -1,0 +1,66 @@
+{
+ "map": "CA_SoftRules",
+ "sequence": "cellularautomata",
+ "counts": {
+  "existing": 2,
+  "added": 3,
+  "large": 2
+ },
+ "pearls": [
+  {
+   "id": "rule_30_110_gravity",
+   "name": "Rule 30/110 Gravity",
+   "size": "small",
+   "source": "existing",
+   "concept": "Rule 30 — order to randomness",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "7_8_hexagon_ca_vr",
+   "name": "7_8_hexagon_ca_vr",
+   "size": "large",
+   "source": "added",
+   "concept": "Alternative neighbourhoods (hex)",
+   "footprint": [
+    36.0,
+    31.0
+   ]
+  },
+  {
+   "id": "7_1_elementary_ca_vr",
+   "name": "7_1_elementary_ca_vr",
+   "size": "large",
+   "source": "added",
+   "concept": "Elementary CA (1D rules)",
+   "footprint": [
+    3.0,
+    16.0
+   ]
+  },
+  {
+   "id": "ca_sphere",
+   "name": "CA Sphere",
+   "size": "small",
+   "source": "existing",
+   "concept": "3D / volumetric CA",
+   "footprint": [
+    2.0,
+    2.0
+   ]
+  },
+  {
+   "id": "CA_sphere",
+   "name": "CA_sphere",
+   "size": "small",
+   "source": "added",
+   "concept": "Continuous CA (Lenia)",
+   "footprint": [
+    2.0,
+    2.0
+   ]
+  }
+ ]
+}

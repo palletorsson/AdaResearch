@@ -1,0 +1,44 @@
+{
+ "map": "Accumulation_Riemann",
+ "sequence": "change",
+ "counts": {
+  "existing": 3,
+  "added": 0,
+  "large": 1
+ },
+ "pearls": [
+  {
+   "id": "riemann_pump",
+   "name": "Riemann Pump",
+   "size": "small",
+   "source": "existing",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "riemann_pi",
+   "name": "riemann_pi",
+   "size": "large",
+   "source": "existing",
+   "concept": "",
+   "footprint": [
+    26.0,
+    8.0
+   ]
+  },
+  {
+   "id": "integral_area",
+   "name": "Integral Area",
+   "size": "small",
+   "source": "existing",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  }
+ ]
+}

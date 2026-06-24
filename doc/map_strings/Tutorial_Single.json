@@ -1,0 +1,44 @@
+{
+ "map": "Tutorial_Single",
+ "sequence": "array_tutorial",
+ "counts": {
+  "existing": 2,
+  "added": 1,
+  "large": 0
+ },
+ "pearls": [
+  {
+   "id": "pick_up_cube",
+   "name": "Pick Up Cube",
+   "size": "small",
+   "source": "existing",
+   "concept": "Basics",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "primitive_combo_puzzle",
+   "name": "Primitive Combo Puzzle",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    3.0,
+    2.0
+   ]
+  },
+  {
+   "id": "xyz_coordinates",
+   "name": "XYZ coordinates",
+   "size": "small",
+   "source": "existing",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    2.0,
+    2.0
+   ]
+  }
+ ]
+}

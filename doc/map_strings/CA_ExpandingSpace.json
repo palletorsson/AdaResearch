@@ -1,0 +1,77 @@
+{
+ "map": "CA_ExpandingSpace",
+ "sequence": "cellularautomata",
+ "counts": {
+  "existing": 4,
+  "added": 2,
+  "large": 2
+ },
+ "pearls": [
+  {
+   "id": "cellular_automata_3d_tree",
+   "name": "Cellular Automata 3D Tree",
+   "size": "small",
+   "source": "existing",
+   "concept": "3D / volumetric CA",
+   "footprint": [
+    3.0,
+    3.0
+   ]
+  },
+  {
+   "id": "crossway_ca",
+   "name": "Crossway CA",
+   "size": "large",
+   "source": "existing",
+   "concept": "3D / volumetric CA",
+   "footprint": [
+    10.0,
+    16.0
+   ]
+  },
+  {
+   "id": "hexagon_cave_vr",
+   "name": "Hexagon Cave VR",
+   "size": "small",
+   "source": "added",
+   "concept": "Alternative neighbourhoods (hex)",
+   "footprint": [
+    3.0,
+    3.0
+   ]
+  },
+  {
+   "id": "cellular_automata_basic",
+   "name": "Cellular Automata Basic",
+   "size": "small",
+   "source": "added",
+   "concept": "Elementary CA (1D rules)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "decaying_bridge",
+   "name": "Decaying Bridge",
+   "size": "large",
+   "source": "existing",
+   "concept": "Growth & dendrites",
+   "footprint": [
+    5.0,
+    30.0
+   ]
+  },
+  {
+   "id": "ca_chair_test",
+   "name": "CA Chair Test",
+   "size": "small",
+   "source": "existing",
+   "concept": "Growth & dendrites",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  }
+ ]
+}

@@ -1,0 +1,66 @@
+{
+ "map": "Fractal_JuliaSet",
+ "sequence": "fractals",
+ "counts": {
+  "existing": 3,
+  "added": 2,
+  "large": 3
+ },
+ "pearls": [
+  {
+   "id": "fibonacci_terrain",
+   "name": "Fibonacci Terrain",
+   "size": "large",
+   "source": "existing",
+   "concept": "Golden spiral & phyllotaxis",
+   "footprint": [
+    8.0,
+    5.0
+   ]
+  },
+  {
+   "id": "julia_set",
+   "name": "Julia Set",
+   "size": "large",
+   "source": "existing",
+   "concept": "Julia sets",
+   "footprint": [
+    6.0,
+    4.0
+   ]
+  },
+  {
+   "id": "julia_set_explorer",
+   "name": "Julia Set Explorer",
+   "size": "small",
+   "source": "existing",
+   "concept": "Julia sets",
+   "footprint": [
+    2.0,
+    2.0
+   ]
+  },
+  {
+   "id": "fractal_space",
+   "name": "fractal_space",
+   "size": "large",
+   "source": "added",
+   "concept": "Fractal terrain & clouds",
+   "footprint": [
+    20.0,
+    20.0
+   ]
+  },
+  {
+   "id": "barnsley_fern",
+   "name": "Barnsley Fern",
+   "size": "small",
+   "source": "added",
+   "concept": "Iterated function systems (IFS)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  }
+ ]
+}

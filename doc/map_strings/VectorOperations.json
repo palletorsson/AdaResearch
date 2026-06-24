@@ -1,0 +1,66 @@
+{
+ "map": "VectorOperations",
+ "sequence": "forces",
+ "counts": {
+  "existing": 5,
+  "added": 0,
+  "large": 1
+ },
+ "pearls": [
+  {
+   "id": "VectorBasics",
+   "name": "VectorBasics",
+   "size": "small",
+   "source": "existing",
+   "concept": "Vector basics",
+   "footprint": [
+    2.0,
+    1.0
+   ]
+  },
+  {
+   "id": "basis_vectors_rig",
+   "name": "Basis Vectors Rig",
+   "size": "small",
+   "source": "existing",
+   "concept": "Coordinate system",
+   "footprint": [
+    2.0,
+    2.0
+   ]
+  },
+  {
+   "id": "dot_product_projector",
+   "name": "Dot Product Projector",
+   "size": "large",
+   "source": "existing",
+   "concept": "Dot product",
+   "footprint": [
+    4.0,
+    4.0
+   ]
+  },
+  {
+   "id": "vector_projection_demo",
+   "name": "Vector Projection",
+   "size": "small",
+   "source": "existing",
+   "concept": "Projection / reflection",
+   "footprint": [
+    3.0,
+    3.0
+   ]
+  },
+  {
+   "id": "normal_force_demo",
+   "name": "Normal Force & Reflection Demo",
+   "size": "small",
+   "source": "existing",
+   "concept": "Restitution / bounce",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  }
+ ]
+}

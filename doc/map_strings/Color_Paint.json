@@ -1,0 +1,44 @@
+{
+ "map": "Color_Paint",
+ "sequence": "color",
+ "counts": {
+  "existing": 2,
+  "added": 1,
+  "large": 2
+ },
+ "pearls": [
+  {
+   "id": "ball_painting_demo",
+   "name": "ball_painting_demo",
+   "size": "large",
+   "source": "existing",
+   "concept": "Paint meets physics. The ball painting",
+   "footprint": [
+    5.0,
+    3.0
+   ]
+  },
+  {
+   "id": "albers_wall_gallery",
+   "name": "albers_wall_gallery",
+   "size": "large",
+   "source": "existing",
+   "concept": "Paint meets physics. The ball painting",
+   "footprint": [
+    8.0,
+    1.0
+   ]
+  },
+  {
+   "id": "loom_bolt_memphis_p4g",
+   "name": "Loom: Memphis p4g (wall bolt)",
+   "size": "small",
+   "source": "added",
+   "concept": "The hallway dissolves into rainbow. Co",
+   "footprint": [
+    2.0,
+    2.0
+   ]
+  }
+ ]
+}

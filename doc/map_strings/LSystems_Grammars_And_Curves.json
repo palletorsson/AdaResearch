@@ -1,0 +1,99 @@
+{
+ "map": "LSystems_Grammars_And_Curves",
+ "sequence": "lsystems",
+ "counts": {
+  "existing": 2,
+  "added": 6,
+  "large": 1
+ },
+ "pearls": [
+  {
+   "id": "Hilbert3D",
+   "name": "3D Hilbert Curve",
+   "size": "small",
+   "source": "existing",
+   "concept": "Space-filling curves (Hilbert)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "hilbert_room",
+   "name": "Hilbert Room (one line, every point)",
+   "size": "small",
+   "source": "added",
+   "concept": "Space-filling curves (Hilbert)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "hilbert_bench",
+   "name": "Hilbert Bench (a line fills a square)",
+   "size": "small",
+   "source": "added",
+   "concept": "Space-filling curves (Hilbert)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "turtle_room",
+   "name": "Turtle Room (walk the curve)",
+   "size": "small",
+   "source": "added",
+   "concept": "Turtle interpretation",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "turtle_plotter",
+   "name": "Turtle Plotter (pen on an arm)",
+   "size": "small",
+   "source": "added",
+   "concept": "Turtle interpretation",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "context_free_grammars",
+   "name": "Context-Free Grammars",
+   "size": "small",
+   "source": "added",
+   "concept": "Formal grammars (Chomsky)",
+   "footprint": [
+    2.0,
+    1.0
+   ]
+  },
+  {
+   "id": "space_filling_curve_gallery",
+   "name": "Space-Filling Curve Gallery",
+   "size": "large",
+   "source": "existing",
+   "concept": "Space-filling curves (Hilbert)",
+   "footprint": [
+    4.0,
+    2.0
+   ]
+  },
+  {
+   "id": "space_filling_floor",
+   "name": "Space-Filling Floor",
+   "size": "small",
+   "source": "added",
+   "concept": "Space-filling curves (Hilbert)",
+   "footprint": [
+    2.0,
+    1.0
+   ]
+  }
+ ]
+}

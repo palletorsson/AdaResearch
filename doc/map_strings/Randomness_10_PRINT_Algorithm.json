@@ -1,0 +1,132 @@
+{
+ "map": "Randomness_10_PRINT_Algorithm",
+ "sequence": "randomness",
+ "counts": {
+  "existing": 5,
+  "added": 6,
+  "large": 3
+ },
+ "pearls": [
+  {
+   "id": "remove_random",
+   "name": "Random Destructor",
+   "size": "small",
+   "source": "existing",
+   "concept": "Random transformations",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "seed_replay_demo",
+   "name": "Seed Replay Demo",
+   "size": "small",
+   "source": "added",
+   "concept": "Seeds / PRNG vs TRNG",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "ten_print_maze_3d",
+   "name": "ten_print_maze_3d",
+   "size": "large",
+   "source": "existing",
+   "concept": "10 PRINT / generative grid",
+   "footprint": [
+    1.0,
+    11.0
+   ]
+  },
+  {
+   "id": "pickup_cube_placer",
+   "name": "pickup_cube_placer",
+   "size": "small",
+   "source": "existing",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "rotate_grid_cubes",
+   "name": "Rotate Grid Cubes",
+   "size": "small",
+   "source": "added",
+   "concept": "Random transformations",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "clipboard#ten_print_axioms",
+   "name": "clipboard#ten_print_axioms",
+   "size": "small",
+   "source": "existing",
+   "concept": "",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "nature_system_demo",
+   "name": "Nature System Demo",
+   "size": "large",
+   "source": "existing",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    15.0,
+    53.0
+   ]
+  },
+  {
+   "id": "puls_markov",
+   "name": "Pulsing Markov Blanket",
+   "size": "large",
+   "source": "added",
+   "concept": "Markov chains",
+   "footprint": [
+    8.0,
+    8.0
+   ]
+  },
+  {
+   "id": "genetic_tree_sculptor",
+   "name": "Genetic Tree Sculptor",
+   "size": "small",
+   "source": "added",
+   "concept": "Seeded growth / DNA -> form",
+   "footprint": [
+    3.0,
+    3.0
+   ]
+  },
+  {
+   "id": "dna_sprout",
+   "name": "DNA Sprout (held seed -> plant)",
+   "size": "small",
+   "source": "added",
+   "concept": "Seeded growth / DNA -> form",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "genome_bench",
+   "name": "Genome Bench (scrub -> regrow)",
+   "size": "small",
+   "source": "added",
+   "concept": "Seeded growth / DNA -> form",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  }
+ ]
+}

@@ -1,0 +1,99 @@
+{
+ "map": "PG_Caves_Mazes",
+ "sequence": "proceduralgeneration",
+ "counts": {
+  "existing": 2,
+  "added": 6,
+  "large": 6
+ },
+ "pearls": [
+  {
+   "id": "caverandomwalk",
+   "name": "caverandomwalk",
+   "size": "large",
+   "source": "existing",
+   "concept": "Agent walks & caves",
+   "footprint": [
+    20.0,
+    20.0
+   ]
+  },
+  {
+   "id": "fatwireframe",
+   "name": "Fat Wireframe",
+   "size": "large",
+   "source": "added",
+   "concept": "Generated worlds",
+   "footprint": [
+    17.0,
+    19.0
+   ]
+  },
+  {
+   "id": "modelsynthesis",
+   "name": "modelsynthesis",
+   "size": "large",
+   "source": "added",
+   "concept": "Wave function collapse",
+   "footprint": [
+    12.0,
+    12.0
+   ]
+  },
+  {
+   "id": "maze_generation",
+   "name": "Maze Generation",
+   "size": "small",
+   "source": "existing",
+   "concept": "Mazes",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "maze_generator",
+   "name": "Maze Generator",
+   "size": "large",
+   "source": "added",
+   "concept": "Mazes",
+   "footprint": [
+    15.0,
+    15.0
+   ]
+  },
+  {
+   "id": "liquid_simulation",
+   "name": "Liquid Simulation",
+   "size": "small",
+   "source": "added",
+   "concept": "Generated worlds",
+   "footprint": [
+    2.0,
+    2.0
+   ]
+  },
+  {
+   "id": "slime_mold",
+   "name": "Slime Mold",
+   "size": "large",
+   "source": "added",
+   "concept": "Slime, DLA & aggregation",
+   "footprint": [
+    24.0,
+    27.0
+   ]
+  },
+  {
+   "id": "voronoi_diagrams",
+   "name": "Voronoi Diagrams",
+   "size": "large",
+   "source": "added",
+   "concept": "Voronoi & Delaunay",
+   "footprint": [
+    21.0,
+    10.0
+   ]
+  }
+ ]
+}

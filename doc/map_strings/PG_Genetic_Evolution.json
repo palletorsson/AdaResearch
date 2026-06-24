@@ -1,0 +1,88 @@
+{
+ "map": "PG_Genetic_Evolution",
+ "sequence": "proceduralgeneration",
+ "counts": {
+  "existing": 1,
+  "added": 6,
+  "large": 3
+ },
+ "pearls": [
+  {
+   "id": "GeneticProgramming",
+   "name": "GeneticProgramming",
+   "size": "large",
+   "source": "existing",
+   "concept": "Genetic & evolutionary",
+   "footprint": [
+    30.0,
+    24.0
+   ]
+  },
+  {
+   "id": "colonization_bench",
+   "name": "Colonization Bench (branches grow toward food)",
+   "size": "small",
+   "source": "added",
+   "concept": "Space colonization",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "poisson_forest_scatter",
+   "name": "Poisson Forest Scatter (a forest that grew itself)",
+   "size": "small",
+   "source": "added",
+   "concept": "Poisson-disk & scatter",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "genetic_breeder",
+   "name": "Genetic Breeder (evolution on tap)",
+   "size": "small",
+   "source": "added",
+   "concept": "Genetic & evolutionary",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "genetic_bench",
+   "name": "Genetic Bench (variation and selection)",
+   "size": "small",
+   "source": "added",
+   "concept": "Genetic & evolutionary",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "genetic_algorithm",
+   "name": "Evolutionary Ecosystem",
+   "size": "large",
+   "source": "added",
+   "concept": "Genetic & evolutionary",
+   "footprint": [
+    30.0,
+    30.0
+   ]
+  },
+  {
+   "id": "genetic_programming",
+   "name": "Genetic Programming",
+   "size": "large",
+   "source": "added",
+   "concept": "Genetic & evolutionary",
+   "footprint": [
+    30.0,
+    24.0
+   ]
+  }
+ ]
+}

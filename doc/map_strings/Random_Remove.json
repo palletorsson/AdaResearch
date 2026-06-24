@@ -1,0 +1,33 @@
+{
+ "map": "Random_Remove",
+ "sequence": "randomness",
+ "counts": {
+  "existing": 2,
+  "added": 0,
+  "large": 1
+ },
+ "pearls": [
+  {
+   "id": "remove_random",
+   "name": "Random Destructor",
+   "size": "small",
+   "source": "existing",
+   "concept": "Random transformations",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "hazards_demo",
+   "name": "Hazards Demo",
+   "size": "large",
+   "source": "existing",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    18.0,
+    18.0
+   ]
+  }
+ ]
+}

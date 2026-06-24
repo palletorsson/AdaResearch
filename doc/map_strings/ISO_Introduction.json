@@ -1,0 +1,33 @@
+{
+ "map": "ISO_Introduction",
+ "sequence": "isosurfaces",
+ "counts": {
+  "existing": 1,
+  "added": 1,
+  "large": 2
+ },
+ "pearls": [
+  {
+   "id": "voxel_noise_demo",
+   "name": "voxel_noise_demo",
+   "size": "large",
+   "source": "existing",
+   "concept": "A 3D noise field fills invisible space",
+   "footprint": [
+    32.0,
+    32.0
+   ]
+  },
+  {
+   "id": "marchingcubes_voxel_noise_demo",
+   "name": "Marching Cubes Voxel Noise",
+   "size": "large",
+   "source": "added",
+   "concept": "Marching cubes at landscape scale. A t",
+   "footprint": [
+    32.0,
+    32.0
+   ]
+  }
+ ]
+}

@@ -1,0 +1,110 @@
+{
+ "map": "Trans_Translation",
+ "sequence": "transformation",
+ "counts": {
+  "existing": 5,
+  "added": 4,
+  "large": 2
+ },
+ "pearls": [
+  {
+   "id": "player_trace",
+   "name": "player_trace",
+   "size": "small",
+   "source": "existing",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "rhizomatic_structure",
+   "name": "Rhizomatic Structure",
+   "size": "large",
+   "source": "added",
+   "concept": "Curved space (non-Euclidean)",
+   "footprint": [
+    15.0,
+    18.0
+   ]
+  },
+  {
+   "id": "rhizomatic_maze_space",
+   "name": "Rhizomatic Maze Space",
+   "size": "small",
+   "source": "added",
+   "concept": "Curved space (non-Euclidean)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "non_euclidean_space",
+   "name": "Non-Euclidean Space",
+   "size": "large",
+   "source": "added",
+   "concept": "Curved space (non-Euclidean)",
+   "footprint": [
+    19.0,
+    22.0
+   ]
+  },
+  {
+   "id": "z_translation_cube",
+   "name": "Z-Translation Cube",
+   "size": "small",
+   "source": "existing",
+   "concept": "Translation",
+   "footprint": [
+    1.0,
+    2.0
+   ]
+  },
+  {
+   "id": "y_translation_cube",
+   "name": "Y-Translation Cube",
+   "size": "small",
+   "source": "existing",
+   "concept": "Translation",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "pick_up_cube",
+   "name": "Pick Up Cube",
+   "size": "small",
+   "source": "existing",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "pusher_block",
+   "name": "Pusher Block",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    2.0,
+    1.0
+   ]
+  },
+  {
+   "id": "pickup_gate",
+   "name": "Pickup Gate",
+   "size": "small",
+   "source": "existing",
+   "concept": "",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  }
+ ]
+}

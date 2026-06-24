@@ -1,0 +1,55 @@
+{
+ "map": "GT_Spanning_Trees",
+ "sequence": "graphtheory",
+ "counts": {
+  "existing": 1,
+  "added": 3,
+  "large": 1
+ },
+ "pearls": [
+  {
+   "id": "mst_visualization",
+   "name": "mst_visualization",
+   "size": "large",
+   "source": "existing",
+   "concept": "Minimum Spanning Tree",
+   "footprint": [
+    30.0,
+    35.0
+   ]
+  },
+  {
+   "id": "grid3d_prim",
+   "name": "Grid3D — Prim's MST",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "grid3d",
+   "name": "Grid3D Substrate",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "grid_substrate_runner",
+   "name": "Grid Substrate Runner",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  }
+ ]
+}

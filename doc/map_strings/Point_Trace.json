@@ -1,0 +1,99 @@
+{
+ "map": "Point_Trace",
+ "sequence": "primitives",
+ "counts": {
+  "existing": 2,
+  "added": 6,
+  "large": 0
+ },
+ "pearls": [
+  {
+   "id": "draw_dot",
+   "name": "draw_dot",
+   "size": "small",
+   "source": "existing",
+   "concept": "Point",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "pickup_cube_scaling",
+   "name": "Scaling Pickup Cube",
+   "size": "small",
+   "source": "added",
+   "concept": "Cube / box",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "pickup_cube_static",
+   "name": "Static Pickup Cube",
+   "size": "small",
+   "source": "added",
+   "concept": "Cube / box",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "rotating_cube",
+   "name": "Rotating Cube",
+   "size": "small",
+   "source": "added",
+   "concept": "Cube / box",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "cube_scene",
+   "name": "Basic Cube Scene",
+   "size": "small",
+   "source": "existing",
+   "concept": "Cube / box",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "wall_placard",
+   "name": "Wall Placard",
+   "size": "small",
+   "source": "added",
+   "concept": "Text / glyph",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "transformation_cube",
+   "name": "transformation_cube",
+   "size": "small",
+   "source": "added",
+   "concept": "Cube / box",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "cube",
+   "name": "cube",
+   "size": "small",
+   "source": "added",
+   "concept": "Cube / box",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  }
+ ]
+}

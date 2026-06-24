@@ -1,0 +1,88 @@
+{
+ "map": "Chamber_ProcGen",
+ "sequence": "proceduralgeneration",
+ "counts": {
+  "existing": 1,
+  "added": 6,
+  "large": 1
+ },
+ "pearls": [
+  {
+   "id": "seed_orb",
+   "name": "Seed Orb",
+   "size": "small",
+   "source": "existing",
+   "concept": "",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "terrain_world_generator",
+   "name": "Terrain World Generator (a world from a few numbers)",
+   "size": "small",
+   "source": "added",
+   "concept": "Generated worlds",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "gray_scott_comparison",
+   "name": "Gray-Scott Comparison Garden",
+   "size": "large",
+   "source": "added",
+   "concept": "Reaction-diffusion & phase transition",
+   "footprint": [
+    11.0,
+    11.0
+   ]
+  },
+  {
+   "id": "seed_world_room",
+   "name": "Seed World Room (design without a designer)",
+   "size": "small",
+   "source": "added",
+   "concept": "Seed -> world",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "seed_world_bench",
+   "name": "Seed World Bench (the seed picks the noise)",
+   "size": "small",
+   "source": "added",
+   "concept": "Seed -> world",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "world_forge",
+   "name": "World Forge (a new world on tap)",
+   "size": "small",
+   "source": "added",
+   "concept": "Seed -> world",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "seed_world_toy",
+   "name": "Seed World Toy (a world in your hand)",
+   "size": "small",
+   "source": "added",
+   "concept": "Seed -> world",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  }
+ ]
+}

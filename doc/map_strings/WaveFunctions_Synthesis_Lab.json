@@ -1,0 +1,319 @@
+{
+ "map": "WaveFunctions_Synthesis_Lab",
+ "sequence": "wavefunctions",
+ "counts": {
+  "existing": 23,
+  "added": 5,
+  "large": 6
+ },
+ "pearls": [
+  {
+   "id": "GlassRack",
+   "name": "Glass Rack",
+   "size": "small",
+   "source": "existing",
+   "concept": "pendulum",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "SoundscapeRadioRack",
+   "name": "SoundscapeRadioRack",
+   "size": "small",
+   "source": "existing",
+   "concept": "Synthesis Lab",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "UnitCircleTrig",
+   "name": "UnitCircleTrig",
+   "size": "large",
+   "source": "existing",
+   "concept": "Synthesis Lab",
+   "footprint": [
+    4.0,
+    1.0
+   ]
+  },
+  {
+   "id": "additive_wave_demo",
+   "name": "Additive Wave Demo",
+   "size": "small",
+   "source": "existing",
+   "concept": "Synthesis Lab",
+   "footprint": [
+    3.0,
+    1.0
+   ]
+  },
+  {
+   "id": "air_music_display_case",
+   "name": "Air Music Display Case",
+   "size": "small",
+   "source": "existing",
+   "concept": "AirMusic",
+   "footprint": [
+    3.0,
+    3.0
+   ]
+  },
+  {
+   "id": "atmosphericmonitoring",
+   "name": "Atmospheric Monitoring Station",
+   "size": "small",
+   "source": "existing",
+   "concept": "Synthesis Lab",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "chemicalapparatus",
+   "name": "Chemical Apparatus",
+   "size": "small",
+   "source": "existing",
+   "concept": "Synthesis Lab",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "chladni_plate",
+   "name": "Chladni Plate",
+   "size": "small",
+   "source": "existing",
+   "concept": "Synthesis Lab",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "coloredlines",
+   "name": "Colored Lines",
+   "size": "large",
+   "source": "existing",
+   "concept": "Synthesis Lab",
+   "footprint": [
+    24.0,
+    23.0
+   ]
+  },
+  {
+   "id": "dna_specimen",
+   "name": "DNA Specimen",
+   "size": "small",
+   "source": "existing",
+   "concept": "Synthesis Lab",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "double_helix_scene",
+   "name": "double_helix_scene",
+   "size": "large",
+   "source": "existing",
+   "concept": "Synthesis Lab",
+   "footprint": [
+    7.0,
+    7.0
+   ]
+  },
+  {
+   "id": "electronicscales",
+   "name": "Electronic Scales",
+   "size": "small",
+   "source": "existing",
+   "concept": "Synthesis Lab",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "profile_beat",
+   "name": "Profile — Beat Frequencies",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "beat_frequency_demo",
+   "name": "Beat Frequency Demo",
+   "size": "small",
+   "source": "added",
+   "concept": "TrigWalkingPath",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "hallway_scene",
+   "name": "hallway_scene",
+   "size": "large",
+   "source": "existing",
+   "concept": "Synthesis Lab",
+   "footprint": [
+    6.0,
+    80.0
+   ]
+  },
+  {
+   "id": "holographicdisplay",
+   "name": "Holographic Display",
+   "size": "small",
+   "source": "existing",
+   "concept": "Synthesis Lab",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "ibomagneticresonator",
+   "name": "ibomagneticresonator",
+   "size": "small",
+   "source": "existing",
+   "concept": "",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "lissajous_curves",
+   "name": "LissajousCurves",
+   "size": "small",
+   "source": "existing",
+   "concept": "TrigWalkingPath",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "microscope",
+   "name": "Microscope",
+   "size": "small",
+   "source": "existing",
+   "concept": "Synthesis Lab",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "multimeter",
+   "name": "Multimeter",
+   "size": "small",
+   "source": "existing",
+   "concept": "Synthesis Lab",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "coshlea",
+   "name": "Cochlea Model",
+   "size": "large",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    55.0,
+    55.0
+   ]
+  },
+  {
+   "id": "oscilloscope",
+   "name": "Oscilloscope",
+   "size": "small",
+   "source": "existing",
+   "concept": "Synthesis Lab",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "petri_dish_worms",
+   "name": "Petri Dish Worms",
+   "size": "small",
+   "source": "existing",
+   "concept": "Synthesis Lab",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "samplevialrack",
+   "name": "Sample Vial Rack",
+   "size": "small",
+   "source": "existing",
+   "concept": "Synthesis Lab",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "seismograph",
+   "name": "seismograph",
+   "size": "small",
+   "source": "existing",
+   "concept": "pendulum",
+   "footprint": [
+    2.0,
+    1.0
+   ]
+  },
+  {
+   "id": "spring_demo",
+   "name": "Spring Demo",
+   "size": "small",
+   "source": "existing",
+   "concept": "Synthesis Lab",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "harmonic_motion_demo",
+   "name": "Harmonic Motion Demo",
+   "size": "large",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    4.0,
+    4.0
+   ]
+  },
+  {
+   "id": "coupled_pendulums",
+   "name": "Coupled Pendulums",
+   "size": "small",
+   "source": "added",
+   "concept": "· palette (unplaced)",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  }
+ ]
+}

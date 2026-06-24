@@ -1,0 +1,88 @@
+{
+ "map": "QFEP_E_Term",
+ "sequence": "qfeplaboratory",
+ "counts": {
+  "existing": 3,
+  "added": 4,
+  "large": 4
+ },
+ "pearls": [
+  {
+   "id": "random_cubes",
+   "name": "Random Cubes",
+   "size": "small",
+   "source": "existing",
+   "concept": "E — entropy as possibility",
+   "footprint": [
+    3.0,
+    2.0
+   ]
+  },
+  {
+   "id": "particle_chaos",
+   "name": "Particle Chaos",
+   "size": "large",
+   "source": "existing",
+   "concept": "E — entropy as possibility",
+   "footprint": [
+    8.0,
+    8.0
+   ]
+  },
+  {
+   "id": "lambda_slider",
+   "name": "Lambda Slider",
+   "size": "large",
+   "source": "existing",
+   "concept": "λ — the order-chaos dial",
+   "footprint": [
+    8.0,
+    8.0
+   ]
+  },
+  {
+   "id": "hardware_entropy_decay",
+   "name": "Hardware Entropy Decay",
+   "size": "large",
+   "source": "added",
+   "concept": "E — entropy as possibility",
+   "footprint": [
+    7.0,
+    2.0
+   ]
+  },
+  {
+   "id": "grid3d_entropy",
+   "name": "Grid3D — Entropy Field",
+   "size": "small",
+   "source": "added",
+   "concept": "E — entropy as possibility",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "entropy_axiom",
+   "name": "Entropy Axiom",
+   "size": "large",
+   "source": "added",
+   "concept": "E — entropy as possibility",
+   "footprint": [
+    3.0,
+    8.0
+   ]
+  },
+  {
+   "id": "shannon_entropy_meter",
+   "name": "Shannon Entropy Meter",
+   "size": "small",
+   "source": "added",
+   "concept": "F — free energy & order",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  }
+ ]
+}

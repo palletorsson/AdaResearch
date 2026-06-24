@@ -1,0 +1,55 @@
+{
+ "map": "SwarmIntelligence_Boids_Algorithm",
+ "sequence": "swarmintelligence",
+ "counts": {
+  "existing": 4,
+  "added": 0,
+  "large": 1
+ },
+ "pearls": [
+  {
+   "id": "boid_flocking",
+   "name": "Boid Flocking",
+   "size": "small",
+   "source": "existing",
+   "concept": "Boids Algorithm",
+   "footprint": [
+    1.0,
+    1.0
+   ]
+  },
+  {
+   "id": "boid_manager",
+   "name": "boid_manager",
+   "size": "large",
+   "source": "existing",
+   "concept": "Boids Algorithm",
+   "footprint": [
+    21.0,
+    20.0
+   ]
+  },
+  {
+   "id": "boids_2d_in_3d",
+   "name": "boids_2d_in_3d",
+   "size": "small",
+   "source": "existing",
+   "concept": "Boids Algorithm",
+   "footprint": [
+    3.0,
+    1.0
+   ]
+  },
+  {
+   "id": "boids_aquarium",
+   "name": "Boids Aquarium",
+   "size": "small",
+   "source": "existing",
+   "concept": "Boids Algorithm",
+   "footprint": [
+    2.0,
+    2.0
+   ]
+  }
+ ]
+}
