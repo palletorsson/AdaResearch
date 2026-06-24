@@ -60,6 +60,8 @@ const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
 ## Drop supply crates in the back corners (lived-in dressing).
 @export var with_crates: bool = false
 @export var with_wall_screen: bool = true
+## START + EXIT pads at the two ends of the bay front, so the hangar reads as a walkable hall.
+@export var with_endpoints: bool = true
 @export var label_plinths: bool = true
 ## Hide the loaded artifacts' floating billboard Label3D text, so the only text on show is the
 ## station's own 2D-in-3D plates/screens (surface-pinned). Surface-baked artifact text is kept.
@@ -152,12 +154,18 @@ func _assemble() -> void:
 		var wc := 1
 		var dc := 1
 		var base_y := 0.0
+		var cx := 0.0
+		var cz := 0.0
 		if item["inst"] != null:
 			var ab := _combined_aabb(item["inst"])
 			if ab.size.length() > 0.0:
 				wc = clampi(int(ceil(ab.size.x - 0.1)), 1, MAX_PLATFORM_CELLS)
 				dc = clampi(int(ceil(ab.size.z - 0.1)), 1, MAX_PLATFORM_CELLS)
 				base_y = ab.position.y
+				cx = ab.position.x + ab.size.x * 0.5   # footprint centre offset from the artifact origin
+				cz = ab.position.z + ab.size.z * 0.5
+		item["cx"] = cx
+		item["cz"] = cz
 		var is_large := maxi(wc, dc) > LARGE_CELLS
 		item["large"] = is_large
 		item["true_w"] = wc
@@ -271,6 +279,13 @@ func _build_kit(items: Array) -> void:
 				"accent_color": _cs(accent_color),
 			})
 
+	# START + EXIT pads at the two ends of the bay front — enter one end, walk the hall, exit the other.
+	if with_endpoints:
+		var hw: float = float(int(L["w_cells"])) * 0.5 * CELL
+		var fz: float = float(int(L["d_cells"])) * 0.5 * CELL - 0.45
+		_build_endpoint(-hw - CELL, fz, "START", Color(0.30, 0.85, 0.45))
+		_build_endpoint(hw + CELL, fz, "EXIT", Color(0.62, 0.42, 0.95))
+
 	# Flanking cabinets / crates — back-wall dressing (row layout only for now).
 	if str(L["layout"]) == "row":
 		var half_w: float = float(int(L["w_cells"])) * 0.5 * CELL
@@ -324,7 +339,10 @@ func _build_platform_bridge(slot: Dictionary, item: Dictionary, i: int) -> void:
 	var inst = item["inst"]
 	if inst != null and inst is Node3D:
 		(inst as Node3D).visible = true
-		(inst as Node3D).position = Vector3(sx, stage_step_height - float(item["base_y"]), pz)
+		# centre the artifact's footprint on the platform (its origin may be off-centre)
+		(inst as Node3D).position = Vector3(
+			sx - float(item.get("cx", 0.0)), stage_step_height - float(item["base_y"]), pz - float(item.get("cz", 0.0))
+		)
 	# caption plaque at the platform front
 	if label_plinths:
 		var nm := str(item["name"])
@@ -332,6 +350,21 @@ func _build_platform_bridge(slot: Dictionary, item: Dictionary, i: int) -> void:
 		var plaque := _make_label_plaque(disp, "%02d" % (i + 1))
 		plaque.position = Vector3(sx, stage_step_height + 0.3, pz + float(td) * 0.5 * CELL + 0.2)
 		add_child(plaque)
+
+
+# A small labelled pad — START (entry) or EXIT — at an end of the bay, marking where you walk in/out.
+func _build_endpoint(x: float, z: float, label_text: String, accent: Color) -> void:
+	var pad: Node3D = StationStageScene.instantiate()
+	add_child(pad)
+	pad.position = Vector3(x, 0, z)
+	pad.apply_grid_config({
+		"width_cells": 2, "depth_cells": 2, "step_height": stage_step_height,
+		"hazard_edge": true, "edge_light": true, "stencil_text": label_text,
+		"body_color": _cs(body_color), "panel_color": _cs(panel_color), "accent_color": _cs(accent),
+	})
+	var plaque := _make_label_plaque(label_text, "")
+	plaque.position = Vector3(x, stage_step_height + 0.4, z)
+	add_child(plaque)
 
 
 func _compute_layout(items: Array) -> Dictionary:
