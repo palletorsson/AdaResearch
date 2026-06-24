@@ -245,15 +245,42 @@ def run_essence(seq, mode, per_concept, idx, V, spans):
     print("wrote %s: %d arts -> %d clusters + %d large (%d-deep, %s)" % (name, len(roster), nc, nl, rows, mode))
 
 
+# UNFOLD: read the edited string of pearls (doc/map_strings/<Map>.json, curated in the /map-strings
+# editor) and lay it out — the included pearls, in their edited order, become the corridor.
+def run_from_string(map_name, spans):
+    p = os.path.join(ROOT, "doc", "map_strings", map_name + ".json")
+    if not os.path.exists(p):
+        print("no string for", map_name, "(run build_map_strings.py first)")
+        return
+    d = json.load(open(p, encoding="utf-8"))
+    ordered = [pl["id"] for pl in d.get("pearls", []) if pl.get("include", True)]
+    if not ordered:
+        print("no kept pearls in", map_name)
+        return
+    name = "Corridor_" + map_name
+    m, (nc, nl, rows) = corridor_map(name, "%s — unfolded from its table of contents" % map_name,
+                                     "placeholder", ordered, name, spans)
+    m["map_info"]["description"] = ("Unfolded from doc/map_strings/%s.json (the edited string): "
+                                    "%d small-clusters + %d large-on-grid." % (map_name, nc, nl))
+    _write(name, m)
+    print("unfolded %s: %d kept pearls -> %d clusters + %d large (%d-deep)" % (name, len(ordered), nc, nl, rows))
+
+
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--seq", required=True)
+    ap.add_argument("--seq")
+    ap.add_argument("--from-string", dest="from_string", help="unfold one map from its edited doc/map_strings/<Map>.json")
     ap.add_argument("--per-map", action="store_true", help="recreate each map (THE spine target)")
     ap.add_argument("--mode", choices=["blend", "replace"], default="blend")
     ap.add_argument("--per-concept", type=int, default=1)
     args = ap.parse_args()
     idx, V = load_embeddings()
     spans = load_sizes()
+    if args.from_string:
+        run_from_string(args.from_string, spans)
+        return
+    if not args.seq:
+        ap.error("pass --from-string <Map>, or --seq <id> [--per-map]")
     if args.per_map:
         run_per_map(args.seq, args.mode, idx, V, spans)
     else:
