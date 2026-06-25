@@ -323,6 +323,8 @@ func _build_sweep() -> Array:
 	var FRAME_SCENE := {"scene": "res://commons/artifacts/station/station_frame.tscn"}
 	var PLINTH_SCENE := {"scene": "res://commons/artifacts/station/station_plinth.tscn"}
 	var PILLAR_SCENE := {"scene": "res://commons/artifacts/station/station_pillar.tscn"}
+	var GANTRY_SCENE := {"scene": "res://commons/artifacts/station/station_gantry.tscn"}
+	var CONSOLE_DESK_SCENE := {"scene": "res://commons/artifacts/station/station_console_desk.tscn"}
 	var STATION_SCENE := {"scene": "res://commons/artifacts/station/curation_station.tscn"}
 
 	# ── curation_station BAY SHELLS — six hangar-bay PRINCIPLES rendered as
@@ -517,6 +519,64 @@ func _build_sweep() -> Array:
 			"height": 2.5, "post_width": 0.42, "lit_groove": true,
 			"accent_color": Color(0.20, 0.80, 0.30),
 		}, PILLAR_SCENE))
+
+	# ── station_gantry: critical_parameter = span_cells × leg_mode + with_hoist ──
+	sweep.append(_p("station_gantry", "1_wide_portal_rigged", "wide portal rigged",
+		"8-cell double-portal gate — a clean span over a broad stage with centre hoist + ring-light, full rig",
+		{
+			"span_cells": 8, "leg_mode": "double_portal", "height": 2.8,
+			"with_hoist": true, "with_cable_carrier": true, "with_struts": true, "with_lights": true,
+			"stencil_text": "GANTRY-08",
+			"body_color": Color(0.81, 0.79, 0.75), "panel_color": Color(0.70, 0.68, 0.64),
+			"accent_color": Color(0.86, 0.34, 0.11),
+		}, GANTRY_SCENE))
+	sweep.append(_p("station_gantry", "2_cantilever_arm_bare", "cantilever arm bare",
+		"5-cell single cantilever — one leg throws the beam out over the stage, no hoist, a bare reaching arm",
+		{
+			"span_cells": 5, "leg_mode": "single_cantilever", "height": 2.6,
+			"with_hoist": false, "with_cable_carrier": true, "with_struts": true, "with_lights": true,
+			"stencil_text": "ARM-05",
+			"body_color": Color(0.78, 0.77, 0.74), "panel_color": Color(0.68, 0.66, 0.62),
+			"accent_color": Color(0.20, 0.55, 0.95),
+		}, GANTRY_SCENE))
+	sweep.append(_p("station_gantry", "3_narrow_portal_hoist", "narrow portal hoist",
+		"3-cell tight double-portal — a low close gate with a drop hoist, the compact tooling rig",
+		{
+			"span_cells": 3, "leg_mode": "double_portal", "height": 2.4,
+			"with_hoist": true, "with_cable_carrier": false, "with_struts": true, "with_lights": true,
+			"stencil_text": "GANTRY-03",
+			"body_color": Color(0.84, 0.80, 0.76), "panel_color": Color(0.72, 0.68, 0.64),
+			"accent_color": Color(0.20, 0.80, 0.30),
+		}, GANTRY_SCENE))
+
+	# ── station_console_desk: critical_parameter = switchboard_cols × rows + vent_side + screen_lines ──
+	sweep.append(_p("station_console_desk", "1_dense_control_room", "dense control room",
+		"4×14 lit switchboard — a packed indicator grid reads control-room, vents right, busy readout",
+		{
+			"switchboard_rows": 4, "switchboard_cols": 14, "vent_side": "right",
+			"screen_lines": PackedStringArray(["REACTOR NOMINAL", "BAY 12 ARMED", "FLUX 0.94", "HOLD"]),
+			"with_keyboard": true,
+			"body_color": Color(0.81, 0.79, 0.75), "panel_color": Color(0.70, 0.68, 0.64),
+			"accent_color": Color(0.86, 0.34, 0.11),
+		}, CONSOLE_DESK_SCENE))
+	sweep.append(_p("station_console_desk", "2_sparse_left_vent", "sparse left-vent desk",
+		"2×6 sparse switchboard — a near-empty desk, vents left, a single-line standby readout",
+		{
+			"switchboard_rows": 2, "switchboard_cols": 6, "vent_side": "left",
+			"screen_lines": PackedStringArray(["STANDBY"]),
+			"with_keyboard": true,
+			"body_color": Color(0.78, 0.77, 0.74), "panel_color": Color(0.68, 0.66, 0.62),
+			"accent_color": Color(0.20, 0.55, 0.95),
+		}, CONSOLE_DESK_SCENE))
+	sweep.append(_p("station_console_desk", "3_tall_board_no_vents", "tall board no vents",
+		"6×10 deep switchboard — a tall many-watched board, no side vents, a multi-line status readout",
+		{
+			"switchboard_rows": 6, "switchboard_cols": 10, "vent_side": "none",
+			"screen_lines": PackedStringArray(["ARRAY ONLINE", "SECTORS 1-9", "ALL GREEN"]),
+			"with_keyboard": true,
+			"body_color": Color(0.84, 0.80, 0.76), "panel_color": Color(0.72, 0.68, 0.64),
+			"accent_color": Color(0.20, 0.80, 0.30),
+		}, CONSOLE_DESK_SCENE))
 
 	# ── exit_sign: critical_parameter = sign_color ─────────────────
 	sweep.append(_p("exit_sign", "1_green_exit_right", "green exit right",
