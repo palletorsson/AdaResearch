@@ -330,6 +330,14 @@ func _build_sweep() -> Array:
 	var STAGE_SCENE := {"scene": "res://commons/artifacts/station/station_stage.tscn"}
 	var CABINET_SCENE := {"scene": "res://commons/artifacts/station/station_cabinet.tscn"}
 	var STATION_SCENE := {"scene": "res://commons/artifacts/station/curation_station.tscn"}
+	# New station kit pieces — scenes also live under .../station/, so the default _p() path
+	# (res://commons/artifacts/<prop>/<prop>.tscn) is wrong; pass these via `extra`.
+	var LUMINAIRE_SCENE := {"scene": "res://commons/artifacts/station/station_luminaire.tscn"}
+	var TASK_LIGHT_SCENE := {"scene": "res://commons/artifacts/station/station_task_light.tscn"}
+	var LADDER_SCENE := {"scene": "res://commons/artifacts/station/station_ladder.tscn"}
+	var STAIR_RUN_SCENE := {"scene": "res://commons/artifacts/station/station_stair_run.tscn"}
+	var HANDRAIL_SCENE := {"scene": "res://commons/artifacts/station/station_handrail.tscn"}
+	var DOOR_SCENE := {"scene": "res://commons/artifacts/station/station_door.tscn"}
 
 	# ── curation_station BAY SHELLS — six hangar-bay PRINCIPLES rendered as
 	# empty shells (artifacts left as "" placement points = framed voids), so a
@@ -832,6 +840,166 @@ func _build_sweep() -> Array:
 			"body_color": Color(0.82, 0.80, 0.77), "panel_color": Color(0.72, 0.70, 0.66),
 			"accent_color": Color(0.86, 0.34, 0.11),
 		}, CABINET_SCENE))
+
+	# ── station_luminaire: critical_parameter = fixture_style × light_energy ──
+	# Scene lives under .../station/, so pass LUMINAIRE_SCENE via `extra`.
+	sweep.append(_p("station_luminaire", "station_luminaire__recessed_can_warm", "Recessed Can — warm flush downlight",
+		"A clean Dieter-Rams can sunk flush into the ceiling: square light-matte housing, a flush emissive lens facing down, and a real OmniLight3D throwing a warm pool on the floor below. The default, calm, architectural luminaire — caution rim + a Rams three-colour bar mark it as maintained plant. Low energy, wide range, soft fill for a bay.",
+		{
+			"fixture_style": "recessed", "mount": "ceiling", "size": 0.62, "housing_depth": 0.16,
+			"lit": true, "light_color": Color(1.0, 0.95, 0.86), "light_energy": 2.6,
+			"light_range": 6.5, "lens_energy": 2.0, "stencil_text": "LUM-01",
+		}, LUMINAIRE_SCENE))
+	sweep.append(_p("station_luminaire", "station_luminaire__pendant_spot_focus", "Focus Pendant — hung spot over one plinth",
+		"A shade hung on a drop stem with the gantry's ring-light lens at its mouth and a real SpotLight3D aimed straight down — a tight, focused cone for a single displayed artifact on a plinth. Warm key light, a hot accent pip at the hub, a Rams bar on the shade. The 'look here' fixture: it lights one thing, hard.",
+		{
+			"fixture_style": "pendant", "mount": "ceiling", "size": 0.46, "drop": 0.7,
+			"housing_depth": 0.24, "lit": true, "light_color": Color(1.0, 0.88, 0.66),
+			"light_energy": 4.2, "light_range": 5.0, "lens_energy": 2.8, "cast_shadows": true,
+			"stencil_text": "KEY",
+		}, LUMINAIRE_SCENE))
+	sweep.append(_p("station_luminaire", "station_luminaire__troffer_terminal_run", "Terminal Troffer — long cold-white bay strip",
+		"A long linear troffer in the dark 'terminal' finish: charcoal worn-metal housing, a cold-white emissive lens strip, end caps, bolted spine and two-to-three real OmniLight3Ds spread along its length so a whole bench run is lit evenly. Industrial, serviced, signal-red caution ends. The workhorse bay light over a [[station_bench]].",
+		{
+			"fixture_style": "troffer", "mount": "ceiling", "finish": "terminal", "length": 2.4,
+			"size": 0.42, "housing_depth": 0.18, "lit": true, "light_color": Color(0.86, 0.92, 1.0),
+			"light_energy": 3.4, "light_range": 7.0, "lens_energy": 2.4, "stencil_text": "BAY-TROFFER",
+		}, LUMINAIRE_SCENE))
+
+	# ── station_task_light: critical_parameter = reach × head_tilt ──
+	# Scene lives under .../station/, so pass TASK_LIGHT_SCENE via `extra`.
+	sweep.append(_p("station_task_light", "station_task_light__drafting_arm", "Drafting Arm (idle)",
+		"A long 3-segment Anglepoise-style arm clamped to a bench edge, throwing a tight cool-white task pool — but switched OFF, so the dark bulb reads 'nobody home'. Shows the strongest idle/in-use contrast and the longest jointed reach.",
+		{
+			"arm_segments": 3, "reach": 1.15, "post_height": 0.5, "head_size": 0.2,
+			"head_tilt": 58.0, "head_style": "bell", "clamp_style": "c_clamp", "lit": false,
+			"light_color": Color(0.92, 0.95, 1.0), "light_energy": 3.0, "spot_angle": 22.0,
+			"spot_range": 3.0, "stencil_text": "TASK-01",
+		}, TASK_LIGHT_SCENE))
+	sweep.append(_p("station_task_light", "station_task_light__gallery_softbox", "Gallery Softbox (artist spotlight)",
+		"A flat softbox head on a weighted base plate, short single-segment arm leaning in with a wide warm flood — the 'spotlight a displayed artifact' use. Lit, even fill, no harsh cone. The curator's lamp.",
+		{
+			"arm_segments": 1, "reach": 0.45, "post_height": 0.55, "head_size": 0.34,
+			"head_tilt": 38.0, "head_style": "softbox", "clamp_style": "base_plate", "lit": true,
+			"light_color": Color(1.0, 0.83, 0.55), "light_energy": 2.6, "spot_angle": 52.0,
+			"spot_range": 4.0, "caution_stripe": false, "signage_text": "ON DISPLAY",
+		}, TASK_LIGHT_SCENE))
+	sweep.append(_p("station_task_light", "station_task_light__terminal_inspection", "Terminal Inspection Lamp",
+		"Dark charcoal 'terminal' finish with a cylindrical can head on a short stiff 2-segment arm, throwing an intense narrow cold-white forensic cone almost straight down. The grimy inspection light of a working bay.",
+		{
+			"arm_segments": 2, "reach": 0.6, "post_height": 0.34, "head_size": 0.16,
+			"head_tilt": 78.0, "head_style": "tube", "clamp_style": "c_clamp", "grip_thickness": 0.05,
+			"lit": true, "light_color": Color(0.85, 0.92, 1.0), "light_energy": 5.0,
+			"spot_angle": 16.0, "spot_range": 2.5, "finish": "terminal", "wear": 0.34,
+			"stencil_text": "INSP",
+		}, TASK_LIGHT_SCENE))
+
+	# ── station_ladder: critical_parameter = height_cells + with_cage ──
+	# Scene lives under .../station/, so pass LADDER_SCENE via `extra`.
+	sweep.append(_p("station_ladder", "station_ladder__tall_caged_access", "Tall caged fixed ladder",
+		"The OSHA-tall 'real infrastructure' read: a 5-cell climb with a full safety cage of arc hoops + back straps starting at 2.2 m, tight code-spec rung spacing, a bolted floor shoe and a caution-stripe landing band. The default-est, most serious ladder — the kind bolted up a silo to a catwalk.",
+		{
+			"height_cells": 5, "with_cage": true, "cage_start": 2.2, "cage_hoop_spacing": 0.55,
+			"cage_radius": 0.36, "rung_count_auto": true, "rung_spacing": 0.28, "floor_shoe": true,
+			"caution_stripe": true, "lit_grooves": true, "stencil_text": "ACCESS L2",
+			"signage_text": "DECK 02",
+		}, LADDER_SCENE))
+	sweep.append(_p("station_ladder", "station_ladder__short_open_wall_rung", "Short open wall ladder (standoff)",
+		"A light, cage-free 2-cell wall ladder bolted off the surface on standoff brackets — the quick 'hop up to the mezzanine' rung run. Narrow stiles, no hoops, wider rung spacing, warm lit grooves up the rails, a small caution band at the lip. Reads as casual serviced access, not heavy plant.",
+		{
+			"height_cells": 2, "with_cage": false, "standoff": 0.16, "stile_gap": 0.42,
+			"stile_width": 0.045, "rung_count_auto": true, "rung_spacing": 0.32, "floor_shoe": false,
+			"caution_stripe": true, "lit_grooves": true, "dust": true, "stencil_text": "UP",
+		}, LADDER_SCENE))
+	sweep.append(_p("station_ladder", "station_ladder__terminal_charred_manual", "Terminal-finish manual-count ladder",
+		"The dark charcoal-console finish variant: a 4-cell climb in the 'terminal' palette (heavy worn metal, signal-red accent) with a manually pinned 11-rung count instead of auto, a partial cage from 2.6 m up, heavy wear/grime and a stencilled hazard ID. The grimy back-of-the-reactor maintenance climb.",
+		{
+			"finish": "terminal", "height_cells": 4, "rung_count_auto": false, "rung_count": 11,
+			"with_cage": true, "cage_start": 2.6, "cage_hoop_spacing": 0.6, "cage_radius": 0.34,
+			"stile_gap": 0.48, "stile_width": 0.055, "caution_stripe": true, "lit_grooves": true,
+			"wear": 0.4, "grime": true, "stencil_text": "H-CLIMB 04", "accent_color": Color(0.85, 0.30, 0.12),
+		}, LADDER_SCENE))
+
+	# ── station_stair_run: critical_parameter = rise_cells + width_cells ──
+	# Scene lives under .../station/, so pass STAIR_RUN_SCENE via `extra`.
+	sweep.append(_p("station_stair_run", "station_stair_run__public_flight_both_rails", "Public flight — panelled, both rails",
+		"A full 2-storey climb (rise 2m -> 11 auto steps) dressing the seam between two stacked floors: solid panelled stringer cheeks, a generous 1.5m-wide run, a station_barrier-style handrail on BOTH sides with lit accent grooves, striped nosings on every tread, a bolted foot plate at the base and a flush landing lip at the top. Reads contained, finished, load-bearing — the canonical 'two heights are one place' stair. Outer cheek carries a stencil + signage.",
+		{
+			"rise_cells": 2.0, "width_cells": 1.5, "stringer_style": "panelled", "with_handrail": "both",
+			"striped_nosing": true, "landing_lip": true, "foot_plate": true, "stencil_text": "STAIR-A",
+			"signage_text": "LEVEL 2", "three_bar": true,
+		}, STAIR_RUN_SCENE))
+	sweep.append(_p("station_stair_run", "station_stair_run__open_service_single", "Open service stair — single rail",
+		"A light single-file service stair you can see through: OPEN zig-zag stringers (slim diagonal spine + sawtooth riser blocks), 1-cell width, a guard rail on the RIGHT only (hug-the-wall service feel), a low rise of 1.2m so step_count derives to ~7 shallow steps. No three-bar/signage clutter. Reads as the gallery/service cousin — minimal plant that bridges a single floor lip.",
+		{
+			"rise_cells": 1.2, "width_cells": 1.0, "stringer_style": "open", "with_handrail": "right",
+			"striped_nosing": true, "three_bar": false, "going": 0.32,
+		}, STAIR_RUN_SCENE))
+	sweep.append(_p("station_stair_run", "station_stair_run__wide_terminal_step", "Wide stage step — terminal finish, no rails",
+		"A short, wide, dark stage step in the alternate TERMINAL finish (charcoal console body, signal-red accent): a low 0.6m rise forced to exactly 3 generous steps, a broad 3-cell width, NO handrails (a podium/stage approach you mount from the front), deeper 0.4m goings for a slow ceremonial climb. Striped nosings + landing lip keep it reading as built plant. The dark-finish, railless extreme of the kit.",
+		{
+			"rise_cells": 0.6, "step_count": 3, "width_cells": 3.0, "going": 0.4,
+			"stringer_style": "panelled", "with_handrail": "none", "finish": "terminal",
+			"striped_nosing": true, "landing_lip": true,
+		}, STAIR_RUN_SCENE))
+
+	# ── station_handrail: critical_parameter = length_cells + height + with_kickplate ──
+	# Scene lives under .../station/, so pass HANDRAIL_SCENE via `extra`. (SPEC variant 1 from prompt;
+	# variants 2-3 derive the critical_parameter axes — short open mezzanine rail + long terminal catwalk.)
+	sweep.append(_p("station_handrail", "station_handrail__industrial_catwalk_guard", "Industrial Catwalk Guard",
+		"Full regulation fall-protection: chest-high top rail at 1.1 m, mid-rail, caution-striped toe-board, and keep-clear chevrons on chunky stanchions. The heavy-plant read for a grate pit or tool-drop edge — 'mind the drop, this is serviced'. Stencilled with a bay ID.",
+		{
+			"length_cells": 5, "height": 1.1, "post_w": 0.1, "with_midrail": true,
+			"with_kickplate": true, "with_chevrons": true, "post_style": "bevelled",
+			"brand_text": "EDGE 04", "three_bar": true, "accent_color": Color(0.9, 0.32, 0.12),
+		}, HANDRAIL_SCENE))
+	sweep.append(_p("station_handrail", "station_handrail__mezzanine_lean_rail", "Mezzanine Lean Rail (open, no toe-board)",
+		"The light mezzanine read: a short 2-cell run with only a single waist-high top rail at 0.95 m on slim bevelled posts — no mid-rail, no kickplate, no chevrons. A lit accent groove and a quiet Rams bar. The 'lean on it and look over the edge' guard, not regulation fall-protection.",
+		{
+			"length_cells": 2, "height": 0.95, "post_w": 0.06, "with_midrail": false,
+			"with_kickplate": false, "with_chevrons": false, "post_style": "bevelled",
+			"cap_lights": true, "three_bar": true, "brand_text": "", "wear": 0.06,
+			"body_color": Color(0.82, 0.80, 0.77), "post_color": Color(0.72, 0.70, 0.66),
+			"accent_color": Color(0.86, 0.34, 0.11),
+		}, HANDRAIL_SCENE))
+	sweep.append(_p("station_handrail", "station_handrail__terminal_perimeter_run", "Terminal Perimeter Run (long, dark, sealed)",
+		"The long sealed-deck perimeter: a 6-cell dark 'terminal'-finish run of chunky box stanchions, chest-high rail + mid-rail, a caution kickplate sealing the floor gap, keep-clear chevrons and a branded plate down the deck side. Heavy wear. Reads as the guarded perimeter of a whole serviced catwalk deck.",
+		{
+			"length_cells": 6, "height": 1.1, "post_w": 0.14, "post_style": "box",
+			"with_midrail": true, "with_kickplate": true, "with_chevrons": true, "finish": "terminal",
+			"brand_text": "SECTOR 3 DECK", "bolt_rows": true, "cap_lights": true, "three_bar": true,
+			"grime": true, "wear": 0.34, "accent_color": Color(0.86, 0.30, 0.10),
+		}, HANDRAIL_SCENE))
+
+	# ── station_door: critical_parameter = open_amount × leaf_mode ──
+	# Scene lives under .../station/, so pass DOOR_SCENE via `extra`. (No prompt SPEC — variants
+	# derive the critical_parameter: sealed bi-parting, mid-slide single slab, fully-open terminal.)
+	sweep.append(_p("station_door", "station_door__sealed_biparting", "Sealed — bi-parting, the bay is wall",
+		"open_amount 0: two panelled leaves meet on the centreline and seal the aperture — the bay reads as wall. A lit vision slit at eye height + chest-height accent stripes on both leaves, a header track over the top, a caution-striped + downlit threshold band on the floor. Nests station_frame's 2.0-wide opening. The 'closed, occupied' read.",
+		{
+			"width": 1.84, "height": 2.12, "open_amount": 0.0, "leaf_mode": "bi_parting",
+			"with_window": true, "with_threshold_light": true, "panel_cells": 2, "accent_stripe": true,
+			"three_bar": true, "stencil_text": "BAY 04",
+			"body_color": Color(0.81, 0.79, 0.75), "panel_color": Color(0.70, 0.68, 0.64),
+			"accent_color": Color(0.86, 0.34, 0.11),
+		}, DOOR_SCENE))
+	sweep.append(_p("station_door", "station_door__half_single_slide", "Half-open — single slab sliding aside",
+		"open_amount 0.55, single leaf: one solid slab has slid halfway to -X, a gap of light opening at the jamb — the 'invitation, mid-action' read. No window so the slab reads as one clean panelled plane; threshold light on, header track over. The single-leaf counterpart to the bi-parting door.",
+		{
+			"width": 1.84, "height": 2.12, "open_amount": 0.55, "leaf_mode": "single",
+			"with_window": false, "with_threshold_light": true, "panel_cells": 3, "accent_stripe": true,
+			"three_bar": true, "stencil_text": "IN",
+			"body_color": Color(0.81, 0.79, 0.75), "panel_color": Color(0.70, 0.68, 0.64),
+			"accent_color": Color(0.20, 0.55, 0.95),
+		}, DOOR_SCENE))
+	sweep.append(_p("station_door", "station_door__open_terminal_corridor", "Fully open — terminal finish, corridor",
+		"open_amount 1.0, bi-parting, dark 'terminal' finish: both leaves fully retracted into the jambs — the aperture is a clear corridor, leaves stowed, signal-red accents and a lit threshold the only thing left printing the boundary on the floor. The dark, fully-open extreme: a door that has become a doorway.",
+		{
+			"width": 1.84, "height": 2.12, "open_amount": 1.0, "leaf_mode": "bi_parting",
+			"finish": "terminal", "with_window": true, "with_threshold_light": true, "panel_cells": 2,
+			"accent_stripe": true, "three_bar": true, "wear": 0.32, "stencil_text": "CORR-3",
+			"accent_color": Color(0.86, 0.30, 0.10),
+		}, DOOR_SCENE))
 
 	# ── exit_sign: critical_parameter = sign_color ─────────────────
 	sweep.append(_p("exit_sign", "1_green_exit_right", "green exit right",
