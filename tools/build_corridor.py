@@ -179,7 +179,10 @@ def corridor_map(name, title, desc, ordered, next_map, spans, thread=False):
         return spans.get(n) or (1.0, 1.0)
     # Width = wide enough to set the widest large BESIDE a clear central walkway (footprint + pathfinding).
     max_lw = max([int(fp(items[0])[0]) for k, items in bands if k == "large"] + [0])
-    cols = min(max(COLS, max_lw + 10), 30)
+    if thread:
+        cols = min(max(max_lw, 13) + 3, 30)   # thin ribbon — larges run inline, no side clearance needed
+    else:
+        cols = min(max(COLS, max_lw + 10), 30)
     center = cols // 2
 
     z, placements, side, foots = 2, [], -1, []
@@ -193,9 +196,12 @@ def corridor_map(name, title, desc, ordered, next_map, spans, thread=False):
             w, d = fp(items[0])
             depth = min(max(int(d) + 3, 5), 12)   # footprint-sized Z band, clamped for swarms/effects
             hw = int(w) // 2 + 1
-            # offset to alternating sides, keeping the centre walkway clear
-            x = max(2, center - 3 - hw) if side < 0 else min(cols - 3, center + 3 + hw)
-            side = -side
+            if thread:
+                x = center                        # inline on the spine — no side offset (removed for now)
+            else:
+                # offset to alternating sides, keeping the centre walkway clear
+                x = max(2, center - 3 - hw) if side < 0 else min(cols - 3, center + 3 + hw)
+                side = -side
             token = items[0]
         za = z + depth // 2
         placements.append((za, x, token))
