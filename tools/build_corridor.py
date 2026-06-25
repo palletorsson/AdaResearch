@@ -227,12 +227,13 @@ def corridor_map(name, title, desc, ordered, next_map, spans, thread=False):
             lo, hi = sorted((center, x))
             for xx in range(lo, hi + 1):
                 struct[za][xx] = "1"
+        # NO border — the carved ribbon stands in open void; a wall frame would just box it in.
     else:
         struct = [["1"] * cols for _ in range(rows_total)]
-    for x in range(cols):
-        struct[0][x] = "2"; struct[rows_total - 1][x] = "2"
-    for zz in range(rows_total):
-        struct[zz][0] = "2"; struct[zz][cols - 1] = "2"
+        for x in range(cols):
+            struct[0][x] = "2"; struct[rows_total - 1][x] = "2"
+        for zz in range(rows_total):
+            struct[zz][0] = "2"; struct[zz][cols - 1] = "2"
     util = [["" for _ in range(cols)] for _ in range(rows_total)]
     inter = [["" for _ in range(cols)] for _ in range(rows_total)]
     util[1][1 if thread else center] = "s"
