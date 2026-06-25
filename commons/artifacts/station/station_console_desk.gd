@@ -140,13 +140,16 @@ func _build() -> void:
 	# Front lip of the desk (the edge a hand rests on).
 	add_child(_box(Vector3(0.0, desk_y + 0.01, d * 0.5 - 0.02), Vector3(w, 0.04, 0.04), _mat(panel_color.darkened(0.06))))
 
-	# ── Screen readout on the desk (set back, tilted to face the operator) ─
+	# ── Screen readout: stood ON the desk in the gap BETWEEN the switchboard
+	# (back, z ≈ -d*0.22) and the keyboard (front), tilted gently to face the
+	# operator. A steep tilt + a back position made the panel's top edge swing
+	# behind the switchboard and poke through it — keep it upright and forward.
 	var scr_w: float = minf(w * 0.5, 0.62)
 	var scr_h: float = scr_w * 0.6
 	var screen: Node3D = HangarKit.readout("TERMINAL", _line_array(), Vector2(scr_w, scr_h))
 	if screen:
-		screen.position = Vector3(-w * 0.16, desk_y + 0.06 + scr_h * 0.5, -d * 0.18)
-		screen.rotation_degrees = Vector3(-58.0, 0.0, 0.0)
+		screen.position = Vector3(-w * 0.16, desk_y + 0.05 + scr_h * 0.5, -d * 0.08)
+		screen.rotation_degrees = Vector3(-15.0, 0.0, 0.0)
 		add_child(screen)
 
 	# ── Ridged keyboard block (front portion of the desk) ─────────────
