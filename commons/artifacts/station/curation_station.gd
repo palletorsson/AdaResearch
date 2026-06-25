@@ -9,6 +9,8 @@ const StationPillarScene := preload("res://commons/artifacts/station/station_pil
 const StationCabinetScene := preload("res://commons/artifacts/station/station_cabinet.tscn")
 const StationBarrierScene := preload("res://commons/artifacts/station/station_barrier.tscn")
 const StationCratesScene := preload("res://commons/artifacts/station/station_crates.tscn")
+const StationGantryScene := preload("res://commons/artifacts/station/station_gantry.tscn")
+const StationConsoleDeskScene := preload("res://commons/artifacts/station/station_console_desk.tscn")
 const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
 
 # @identity
@@ -71,6 +73,12 @@ const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
 @export_group("Text frames")
 ## Harvest each artifact's own text into a framed 2D-in-3D panel above it, joined by a connector line.
 @export var with_text_frames: bool = true
+
+@export_group("Furniture")
+## An overhead StationGantry rig spanning over the bay.
+@export var with_gantry: bool = false
+## A StationConsoleDesk operator terminal at one end of the bay.
+@export var with_console: bool = false
 @export var label_plinths: bool = true
 ## Hide the loaded artifacts' floating billboard Label3D text, so the only text on show is the
 ## station's own 2D-in-3D plates/screens (surface-pinned). Surface-baked artifact text is kept.
@@ -125,6 +133,8 @@ func _read_overrides() -> void:
 	if has_meta("config_barrier_style"): barrier_style = str(get_meta("config_barrier_style")).to_lower()
 	if has_meta("config_with_cabinets"): with_cabinets = _b(get_meta("config_with_cabinets"))
 	if has_meta("config_with_crates"): with_crates = _b(get_meta("config_with_crates"))
+	if has_meta("config_with_gantry"): with_gantry = _b(get_meta("config_with_gantry"))
+	if has_meta("config_with_console"): with_console = _b(get_meta("config_with_console"))
 	if has_meta("config_layout"): layout = str(get_meta("config_layout")).to_lower()
 
 
@@ -318,6 +328,12 @@ func _build_kit(items: Array) -> void:
 		_build_endpoint(-hw - CELL, fz, "START", Color(0.30, 0.85, 0.45))
 		_build_endpoint(hw + CELL, fz, "EXIT", Color(0.62, 0.42, 0.95))
 
+	# Overhead gantry + operator console — the new kit pieces composed into the bay.
+	if with_gantry:
+		_build_gantry(L)
+	if with_console:
+		_build_console(L)
+
 	# Flanking cabinets / crates — back-wall dressing (row layout only for now).
 	if str(L["layout"]) == "row":
 		var half_w: float = float(int(L["w_cells"])) * 0.5 * CELL
@@ -438,6 +454,33 @@ func _build_text_frame(x: float, z: float, grounded_y: float, ah: float, header:
 	var conn := _box(Vector3.ZERO, Vector3(0.022, top - bottom, 0.022), _emi(accent_color, 0.7))
 	conn.position = Vector3(x, (bottom + top) * 0.5, z)
 	add_child(conn)
+
+
+# An overhead StationGantry rig spanning over the bay stage.
+func _build_gantry(L: Dictionary) -> void:
+	var g: Node3D = StationGantryScene.instantiate()
+	add_child(g)
+	g.position = Vector3(0, 0, 0)
+	if g.has_method("apply_grid_config"):
+		g.apply_grid_config({
+			"span_cells": clampi(int(L["w_cells"]) - 2, 3, 11), "height": wall_height + 0.2,
+			"leg_mode": "double_portal", "with_hoist": true, "with_lights": true,
+			"body_color": _cs(body_color), "panel_color": _cs(panel_color), "accent_color": _cs(accent_color),
+		})
+
+
+# A StationConsoleDesk operator terminal at the right-front end of the bay, facing the viewer.
+func _build_console(L: Dictionary) -> void:
+	var c: Node3D = StationConsoleDeskScene.instantiate()
+	add_child(c)
+	var hw: float = float(int(L["w_cells"])) * 0.5 * CELL
+	var fz: float = float(int(L["d_cells"])) * 0.5 * CELL
+	c.position = Vector3(hw - 0.9, 0, fz - 0.7)
+	if c.has_method("apply_grid_config"):
+		c.apply_grid_config({
+			"body_color": _cs(body_color), "panel_color": _cs(panel_color), "accent_color": _cs(accent_color),
+			"screen_lines": "BAY|RDY", "label_text": "OPERATOR",
+		})
 
 
 # A small labelled pad — START (entry) or EXIT — at an end of the bay, marking where you walk in/out.
