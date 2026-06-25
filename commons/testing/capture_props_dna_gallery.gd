@@ -323,6 +323,131 @@ func _build_sweep() -> Array:
 	var FRAME_SCENE := {"scene": "res://commons/artifacts/station/station_frame.tscn"}
 	var PLINTH_SCENE := {"scene": "res://commons/artifacts/station/station_plinth.tscn"}
 	var PILLAR_SCENE := {"scene": "res://commons/artifacts/station/station_pillar.tscn"}
+	var STATION_SCENE := {"scene": "res://commons/artifacts/station/curation_station.tscn"}
+
+	# ── curation_station BAY SHELLS — six hangar-bay PRINCIPLES rendered as
+	# empty shells (artifacts left as "" placement points = framed voids), so a
+	# single sweep yields a gallery of bays to choose from; artifacts get placed
+	# LATER by handing the chosen config a real artifacts:[...] set.
+	#
+	# Scene override is REQUIRED: the default _p() path would be
+	# res://commons/artifacts/curation_station/curation_station.tscn (wrong) —
+	# the real scene lives under .../station/. The gallery sets each gene via
+	# node.set(key, val) before _ready(), so every key below is a real @export
+	# on curation_station.gd; `artifacts` is its typed Array[String] export and
+	# is passed as a typed empty-string array (placement points).
+	# Color exports (body/panel/accent) are passed as real Color() so the
+	# gallery's Color→"r,g,b,a" sidecar serialisation works.
+	#
+	# Settle: curation_station._assemble() awaits 2 process_frames then builds
+	# its whole kit; with empty artifact slots there are no sub-artifacts to
+	# instantiate/measure, so the kit geometry exists well within the sweep's
+	# 0.4s settle timer (~24 frames @60fps) before AABB-orbit framing runs. No
+	# longer settle needed for these shells. (If a future variant loads a real,
+	# async/GPU-building artifact, bump the per-cell wait at the create_timer in
+	# _run — `await create_timer(0.4).timeout` — to ~0.8s for that prop.)
+
+	# 1. console_wall — a straight front-facing row bay; the canonical "console
+	# wall" read: long backing wall + screen, framed voids as lit niches.
+	sweep.append(_p("curation_station", "1_console_wall", "console wall",
+		"straight row bay — long backing wall + screen, rail barrier, cabinets, framed voids as lit niches",
+		{
+			"artifacts": ["", "", "", "", ""] as Array[String],
+			"layout": "row",
+			"plinth_spacing_cells": 2, "stage_depth_cells": 4, "stage_margin_cells": 3,
+			"plinth_height": 1.2, "stage_step_height": 0.22, "wall_height": 3.0,
+			"with_wall": true, "with_pillars": true, "with_barrier": true, "barrier_style": "rail",
+			"with_cabinets": true, "with_crates": false, "with_wall_screen": true, "with_endpoints": true,
+			"large_cells": 4, "max_platform_cells": 12, "frame_large": true, "frame_voids": true,
+			"with_text_frames": false, "label_plinths": false, "hide_floating_labels": true,
+			"body_color": Color(0.81, 0.79, 0.75), "panel_color": Color(0.70, 0.68, 0.64),
+			"accent_color": Color(0.86, 0.34, 0.11),
+		}, STATION_SCENE))
+
+	# 2. gantry_bench — low broad bench bay; short plinths, tall wall, crates +
+	# cabinets for a lived-in service-gantry presence.
+	sweep.append(_p("curation_station", "2_gantry_bench", "gantry bench",
+		"low broad bench bay — short plinths under a tall wall, tight margins, crates + cabinets, lived-in gantry read",
+		{
+			"artifacts": ["", "", "", "", ""] as Array[String],
+			"layout": "row",
+			"plinth_spacing_cells": 2, "stage_depth_cells": 4, "stage_margin_cells": 1,
+			"plinth_height": 0.85, "stage_step_height": 0.22, "wall_height": 3.2,
+			"with_wall": true, "with_pillars": true, "with_barrier": true, "barrier_style": "rail",
+			"with_cabinets": true, "with_crates": true, "with_wall_screen": true, "with_endpoints": true,
+			"large_cells": 3, "max_platform_cells": 12, "frame_large": true, "frame_voids": true,
+			"with_text_frames": false, "label_plinths": false, "hide_floating_labels": true,
+			"body_color": Color(0.81, 0.79, 0.75), "panel_color": Color(0.70, 0.68, 0.64),
+			"accent_color": Color(0.86, 0.34, 0.11),
+		}, STATION_SCENE))
+
+	# 3. two_zone_suite — an L-corner bay; two walls meeting at 90°, plinths on
+	# both legs = two zones in one suite.
+	sweep.append(_p("curation_station", "3_two_zone_suite", "two-zone suite",
+		"L-corner bay — two walls at 90°, plinths along both legs (two zones, one suite), crates + cabinets",
+		{
+			"artifacts": ["", "", "", "", ""] as Array[String],
+			"layout": "corner",
+			"plinth_spacing_cells": 2, "stage_depth_cells": 4, "stage_margin_cells": 2,
+			"plinth_height": 1.0, "stage_step_height": 0.22, "wall_height": 2.8,
+			"with_wall": true, "with_pillars": true, "with_barrier": true, "barrier_style": "rail",
+			"with_cabinets": true, "with_crates": true, "with_wall_screen": true, "with_endpoints": true,
+			"large_cells": 3, "max_platform_cells": 12, "frame_large": true, "frame_voids": true,
+			"with_text_frames": false, "label_plinths": false, "hide_floating_labels": true,
+			"body_color": Color(0.84, 0.80, 0.76), "panel_color": Color(0.72, 0.68, 0.64),
+			"accent_color": Color(0.90, 0.38, 0.12),
+		}, STATION_SCENE))
+
+	# 4. vitrine_alcove — a tight L alcove; shallow stage, no barrier, plinth
+	# labels ON + floating labels shown = a museum vitrine reading.
+	sweep.append(_p("curation_station", "4_vitrine_alcove", "vitrine alcove",
+		"tight L alcove — shallow stage, no barrier, cabinets, plinth plaques + floating labels shown (museum vitrine read)",
+		{
+			"artifacts": ["", "", "", ""] as Array[String],
+			"layout": "corner",
+			"plinth_spacing_cells": 2, "stage_depth_cells": 2, "stage_margin_cells": 1,
+			"plinth_height": 0.9, "stage_step_height": 0.22, "wall_height": 2.8,
+			"with_wall": true, "with_pillars": true, "with_barrier": false, "barrier_style": "rail",
+			"with_cabinets": true, "with_crates": false, "with_wall_screen": true, "with_endpoints": true,
+			"large_cells": 4, "max_platform_cells": 12, "frame_large": true, "frame_voids": true,
+			"with_text_frames": false, "label_plinths": true, "hide_floating_labels": false,
+			"body_color": Color(0.81, 0.79, 0.75), "panel_color": Color(0.70, 0.68, 0.64),
+			"accent_color": Color(0.86, 0.34, 0.11),
+		}, STATION_SCENE))
+
+	# 5. open_lab — a generous open row; wide plinth spacing + big margins =
+	# breathing room, the airy open-lab floor.
+	sweep.append(_p("curation_station", "5_open_lab", "open lab",
+		"generous open row — wide plinth spacing + big margins, breathing room, full dressing (cabinets + crates), airy lab floor",
+		{
+			"artifacts": ["", "", "", "", ""] as Array[String],
+			"layout": "row",
+			"plinth_spacing_cells": 3, "stage_depth_cells": 4, "stage_margin_cells": 3,
+			"plinth_height": 1.2, "stage_step_height": 0.22, "wall_height": 2.8,
+			"with_wall": true, "with_pillars": true, "with_barrier": true, "barrier_style": "rail",
+			"with_cabinets": true, "with_crates": true, "with_wall_screen": true, "with_endpoints": true,
+			"large_cells": 4, "max_platform_cells": 12, "frame_large": true, "frame_voids": true,
+			"with_text_frames": false, "label_plinths": false, "hide_floating_labels": true,
+			"body_color": Color(0.81, 0.79, 0.75), "panel_color": Color(0.70, 0.68, 0.64),
+			"accent_color": Color(0.86, 0.34, 0.11),
+		}, STATION_SCENE))
+
+	# 6. solo_pavilion — a single-specimen bay; one tall plinth, deep stage,
+	# framed void + text frame = the lone-artifact pavilion read.
+	sweep.append(_p("curation_station", "6_solo_pavilion", "solo pavilion",
+		"single-specimen bay — one tall plinth on a deep stage, framed void, plaque + text frame, the lone-artifact pavilion",
+		{
+			"artifacts": [""] as Array[String],
+			"layout": "row",
+			"plinth_spacing_cells": 2, "stage_depth_cells": 5, "stage_margin_cells": 3,
+			"plinth_height": 1.3, "stage_step_height": 0.22, "wall_height": 3.0,
+			"with_wall": true, "with_pillars": true, "with_barrier": true, "barrier_style": "rail",
+			"with_cabinets": false, "with_crates": false, "with_wall_screen": true, "with_endpoints": true,
+			"large_cells": 4, "max_platform_cells": 12, "frame_large": true, "frame_voids": true,
+			"with_text_frames": true, "label_plinths": true, "hide_floating_labels": true,
+			"body_color": Color(0.81, 0.79, 0.75), "panel_color": Color(0.70, 0.68, 0.64),
+			"accent_color": Color(0.86, 0.34, 0.11),
+		}, STATION_SCENE))
 
 	# ── station_frame: critical_parameter = frame_width × frame_height + bar_style ──
 	sweep.append(_p("station_frame", "1_open_threshold", "open threshold",
