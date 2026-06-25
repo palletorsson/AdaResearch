@@ -49,6 +49,18 @@ const HangarKit := preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 @export var three_bar: bool = true
 ## Faint dust band at the foot + dust streaks on the main face.
 @export var grime: bool = true
+## A thin recessed bevel border framing the whole slab face — the machined-edge read.
+@export var bevel_frame: bool = true
+## Rows of bolt heads at the top/bottom rails and end-cap posts — the bolted-on read.
+@export var bolt_rows: bool = true
+## A continuous shadow-gap reveal lifting the slab a few cm off the floor (reads "set onto a base").
+@export var base_reveal: bool = true
+## A vertical recessed accent groove (a lit channel) at each end of the run — the warm seam down the face.
+@export var lit_groove: bool = true
+## Mount a framed 2D-in-3D caption plate proud of the face on a small bracket (the curation caption).
+@export var caption_text: String = ""
+## Caption sub-lines under the caption header.
+@export var caption_lines: Array = []
 
 @export_group("Color")
 ## Dieter Rams / Braun default — light matte body so the housing recedes; one warm accent.
@@ -102,6 +114,17 @@ func _read_metadata_overrides() -> void:
 	if has_meta("config_wear"): wear = float(str(get_meta("config_wear")))
 	if has_meta("config_three_bar"): three_bar = _b(get_meta("config_three_bar"))
 	if has_meta("config_grime"): grime = _b(get_meta("config_grime"))
+	if has_meta("config_bevel_frame"): bevel_frame = _b(get_meta("config_bevel_frame"))
+	if has_meta("config_bolt_rows"): bolt_rows = _b(get_meta("config_bolt_rows"))
+	if has_meta("config_base_reveal"): base_reveal = _b(get_meta("config_base_reveal"))
+	if has_meta("config_lit_groove"): lit_groove = _b(get_meta("config_lit_groove"))
+	if has_meta("config_caption_text"): caption_text = str(get_meta("config_caption_text"))
+	if has_meta("config_caption_lines"):
+		var rawc = get_meta("config_caption_lines")
+		if rawc is Array:
+			caption_lines = []
+			for ln in rawc:
+				caption_lines.append(str(ln))
 	if has_meta("config_body_color"): body_color = _pc(str(get_meta("config_body_color")), body_color)
 	if has_meta("config_panel_color"): panel_color = _pc(str(get_meta("config_panel_color")), panel_color)
 	if has_meta("config_accent_color"): accent_color = _pc(str(get_meta("config_accent_color")), accent_color)
@@ -115,26 +138,55 @@ func _build() -> void:
 	var h: float = maxf(height, 0.5)
 	var body_mat := _mat(body_color)
 
-	# Main slab — origin at floor centre, grows +Y, thin in Z, XY plane facing +Z.
-	add_child(_box(Vector3(0, h * 0.5, 0), Vector3(w, h, SLAB_DEPTH), body_mat))
+	# Shadow-gap base reveal: the slab sits on a slim recessed plinth so it reads as
+	# SET ONTO the floor (a machined edge, not poured into it). The reveal lifts the body.
+	var foot: float = 0.05 if base_reveal else 0.0
+	if base_reveal:
+		# A slightly inset, darker base shoe running the full width — the shadow gap.
+		add_child(_box(Vector3(0, foot * 0.5, 0), Vector3(w + 0.02, foot, SLAB_DEPTH * 0.78), HangarKit.worn_metal(panel_color)))
 
-	# Top rail beam — caps the run visually and continues across joins.
+	# Main slab — origin at floor centre (lifted by the reveal foot), grows +Y, thin in Z.
+	var body_cy: float = foot + (h - foot) * 0.5
+	add_child(_box(Vector3(0, body_cy, 0), Vector3(w, h - foot, SLAB_DEPTH), body_mat))
+
+	# Top rail beam — a chamfered cap: a wide trim plus a slim chamfer lip proud of the front.
 	add_child(_box(Vector3(0, h - RAIL_H * 0.5, 0), Vector3(w, RAIL_H, SLAB_DEPTH + 0.05), _mat(panel_color)))
+	add_child(_box(Vector3(0, h - RAIL_H - 0.012, FRONT_Z + 0.012), Vector3(w, 0.024, 0.03), HangarKit.worn_metal(panel_color)))
+
+	# Recessed bevel frame around the whole face — the machined-edge read (a thin inner border).
+	if bevel_frame:
+		_build_bevel_frame(w, h, foot)
 
 	# Per-cell dressing so seams land on every 1 m boundary (the modular read).
 	match panel_style:
-		"ribbed": _build_ribs(n, w, h)
-		"perforated": _build_perforation(n, w, h)
-		_: _build_cell_panels(n, w, h)
+		"ribbed": _build_ribs(n, w, h, foot)
+		"perforated": _build_perforation(n, w, h, foot)
+		_: _build_cell_panels(n, w, h, foot)
 
 	# Boundary seam strips at every internal 1 m line.
-	_build_seams(n, w, h)
+	_build_seams(n, w, h, foot)
+
+	# Bolt rows along the top and bottom rails — the bolted-on read (skips cap posts; they get their own).
+	if bolt_rows:
+		var bmat := HangarKit.worn_metal(panel_color.darkened(0.1))
+		var inX: float = 0.18
+		add_child(HangarKit.bolts(Vector3(-w * 0.5 + inX, h - RAIL_H * 0.5, FRONT_Z + 0.03), Vector3(w * 0.5 - inX, h - RAIL_H * 0.5, FRONT_Z + 0.03), maxi(n + 1, 2), 0.022, bmat))
+		add_child(HangarKit.bolts(Vector3(-w * 0.5 + inX, foot + 0.12, FRONT_Z + 0.03), Vector3(w * 0.5 - inX, foot + 0.12, FRONT_Z + 0.03), maxi(n + 1, 2), 0.022, bmat))
 
 	# End-cap posts — only where this section begins/ends a run.
 	if start_cap:
-		_build_cap(-w * 0.5, h)
+		_build_cap(-w * 0.5, h, foot)
 	if end_cap:
-		_build_cap(w * 0.5, h)
+		_build_cap(w * 0.5, h, foot)
+
+	# Vertical recessed accent grooves down the inner edges — the warm lit channel.
+	if lit_groove:
+		var gx: float = w * 0.5 - 0.14
+		for sx in [-gx, gx]:
+			# a recessed dark channel...
+			add_child(_box(Vector3(sx, foot + (h - foot) * 0.5, FRONT_Z + 0.015), Vector3(0.05, (h - foot) * 0.82, 0.02), HangarKit.worn_metal(panel_color.darkened(0.4))))
+			# ...with a slim warm light inside it.
+			add_child(_box(Vector3(sx, foot + (h - foot) * 0.5, FRONT_Z + 0.03), Vector3(0.018, (h - foot) * 0.7, 0.015), _emi(accent_color, 0.7)))
 
 	if lit_seam:
 		# Full slab width so the band reaches the wall ends (the caps) and butts
@@ -152,36 +204,71 @@ func _build() -> void:
 		streaks.position = Vector3(0, h * 0.5, 0)
 		add_child(streaks)
 	if hazard_base:
-		add_child(_box(Vector3(0, 0.09, FRONT_Z + 0.02), Vector3(w, 0.18, 0.02), HangarKit.striped_mat()))
+		add_child(_box(Vector3(0, foot + 0.09, FRONT_Z + 0.02), Vector3(w, 0.18, 0.02), HangarKit.striped_mat()))
 	if stencil_text.strip_edges() != "":
 		var q: MeshInstance3D = HangarKit.stencil(stencil_text, Vector2(minf(w * 0.32, 0.6), h * 0.07))
 		if q:
-			q.position = Vector3(-w * 0.5 + 0.4, h * 0.12, FRONT_Z + 0.07)
+			q.position = Vector3(-w * 0.5 + 0.4, foot + 0.12, FRONT_Z + 0.07)
 			add_child(q)
 
+	# Curation caption — a framed 2D-in-3D plate mounted proud of the face on a bracket
+	# (surface-pinned text, joined to the wall; not a floating label).
+	if caption_text.strip_edges() != "":
+		var cw: float = minf(w * 0.5, 0.9)
+		var sign: Node3D = HangarKit.signage(caption_text, caption_lines, Vector2(cw, cw * 0.32), 0.12, Vector3(0, 0, 1))
+		sign.position = Vector3(0, h * 0.40, FRONT_Z + 0.02)
+		add_child(sign)
 
-# One inset plate per grid cell — the seams between them sit on the 1 m lines.
-func _build_cell_panels(n: int, w: float, h: float) -> void:
+
+# A thin recessed bevel border framing the slab face — four worn-metal trim bars set just inside
+# the edges, reading as a machined inset around the negative space of the panel field.
+func _build_bevel_frame(w: float, h: float, foot: float) -> void:
+	var fmat := HangarKit.worn_metal(panel_color.darkened(0.18))
+	var m: float = 0.05                       # margin in from each edge
+	var t: float = 0.03                       # bar thickness
+	var iy0: float = foot + m
+	var iy1: float = h - RAIL_H - m
+	var ih: float = iy1 - iy0
+	var iw: float = w - m * 2.0
+	var cy: float = (iy0 + iy1) * 0.5
+	var z: float = FRONT_Z + 0.01
+	# top + bottom
+	add_child(_box(Vector3(0, iy1, z), Vector3(iw, t, 0.018), fmat))
+	add_child(_box(Vector3(0, iy0, z), Vector3(iw, t, 0.018), fmat))
+	# left + right
+	add_child(_box(Vector3(-iw * 0.5, cy, z), Vector3(t, ih, 0.018), fmat))
+	add_child(_box(Vector3(iw * 0.5, cy, z), Vector3(t, ih, 0.018), fmat))
+
+
+# One inset plate per grid cell — the seams between them sit on the 1 m lines. Each plate gets a
+# slim recessed inner border (a double-bevel read) so the panel field feels machined, not flat.
+func _build_cell_panels(n: int, w: float, h: float, foot: float) -> void:
 	var pmat := _mat(panel_color)
-	var inset := 0.08
-	var ph: float = h - RAIL_H - inset * 2.0
+	var imat := _mat(panel_color.darkened(0.08))
+	var inset := 0.10
+	var ph: float = h - RAIL_H - foot - inset * 2.0
+	var pw: float = CELL - inset * 2.0
 	var t := 0.03
 	for i in range(n):
 		var cx: float = -w * 0.5 + (float(i) + 0.5) * CELL
-		add_child(_box(Vector3(cx, inset + ph * 0.5, FRONT_Z + t * 0.5), Vector3(CELL - inset * 2.0, ph, t), pmat))
+		var cy: float = foot + inset + ph * 0.5
+		# the raised plate...
+		add_child(_box(Vector3(cx, cy, FRONT_Z + t * 0.5), Vector3(pw, ph, t), pmat))
+		# ...with a slightly recessed darker inner face for depth.
+		add_child(_box(Vector3(cx, cy, FRONT_Z + t * 0.5 - 0.006), Vector3(pw - 0.07, ph - 0.07, t * 0.5), imat))
 
 
-func _build_ribs(n: int, w: float, h: float) -> void:
+func _build_ribs(n: int, w: float, h: float, foot: float) -> void:
 	var rmat := _mat(body_color.lightened(0.05))
-	var rib_h: float = h - RAIL_H - 0.16
+	var rib_h: float = h - RAIL_H - foot - 0.16
 	# two ribs per cell — a reinforced bulkhead read, still on the grid.
 	for i in range(n):
 		var cx: float = -w * 0.5 + (float(i) + 0.5) * CELL
 		for off in [-0.22, 0.22]:
-			add_child(_box(Vector3(cx + off, 0.08 + rib_h * 0.5, FRONT_Z + 0.04), Vector3(0.08, rib_h, 0.06), rmat))
+			add_child(_box(Vector3(cx + off, foot + 0.08 + rib_h * 0.5, FRONT_Z + 0.04), Vector3(0.08, rib_h, 0.06), rmat))
 
 
-func _build_perforation(n: int, w: float, h: float) -> void:
+func _build_perforation(n: int, w: float, h: float, foot: float) -> void:
 	var holes := _mat(panel_color.darkened(0.5))
 	var rows := 6
 	for i in range(n):
@@ -189,25 +276,32 @@ func _build_perforation(n: int, w: float, h: float) -> void:
 		for c in range(3):
 			for r in range(rows):
 				var px: float = cx + lerpf(-0.3, 0.3, float(c) / 2.0)
-				var py: float = lerpf(h * 0.32, h * 0.72, float(r) / float(rows - 1))
+				var py: float = lerpf(maxf(h * 0.32, foot + 0.3), h * 0.72, float(r) / float(rows - 1))
 				add_child(_box(Vector3(px, py, FRONT_Z + 0.04), Vector3(0.14, 0.14, 0.04), holes))
 
 
 # Thin vertical strips on every internal cell boundary — the visible grid join.
-func _build_seams(n: int, w: float, h: float) -> void:
+func _build_seams(n: int, w: float, h: float, foot: float) -> void:
 	var smat := HangarKit.worn_metal(panel_color)
-	var sh: float = h - RAIL_H
+	var sh: float = h - RAIL_H - foot
 	for i in range(1, n):
 		var sx: float = -w * 0.5 + float(i) * CELL
-		add_child(_box(Vector3(sx, sh * 0.5, FRONT_Z + 0.03), Vector3(0.04, sh, 0.04), smat))
+		add_child(_box(Vector3(sx, foot + sh * 0.5, FRONT_Z + 0.03), Vector3(0.04, sh, 0.04), smat))
 
 
-# A vertical end-cap post — a structural column that begins or closes a wall run.
-func _build_cap(x: float, h: float) -> void:
+# A vertical end-cap post — a structural column that begins or closes a wall run, with a slim
+# warm accent groove down the outward face and a vertical bolt row pinning it on.
+func _build_cap(x: float, h: float, foot: float) -> void:
 	var post_mat := _mat(panel_color.darkened(0.06))
-	add_child(_box(Vector3(x, h * 0.5, 0), Vector3(POST_W, h, POST_W), post_mat))
+	var ph: float = h - foot
+	add_child(_box(Vector3(x, foot + ph * 0.5, 0), Vector3(POST_W, ph, POST_W), post_mat))
 	# a slim accent groove down the outward face
-	add_child(_box(Vector3(x, h * 0.5, POST_W * 0.5 + 0.01), Vector3(0.04, h * 0.7, 0.02), _emi(accent_color, 0.5)))
+	add_child(_box(Vector3(x, foot + ph * 0.5, POST_W * 0.5 + 0.01), Vector3(0.04, ph * 0.7, 0.02), _emi(accent_color, 0.5)))
+	# a vertical bolt row on the front face of the post.
+	if bolt_rows:
+		var bmat := HangarKit.worn_metal(panel_color.darkened(0.12))
+		var bz: float = POST_W * 0.5 + 0.02
+		add_child(HangarKit.bolts(Vector3(x, foot + ph * 0.18, bz), Vector3(x, foot + ph * 0.82, bz), 4, 0.02, bmat))
 
 
 func _build_screen(w: float, h: float) -> void:

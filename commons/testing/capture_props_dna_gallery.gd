@@ -321,10 +321,14 @@ func _build_sweep() -> Array:
 
 	# ── CURATION STATION KIT (scenes live in commons/artifacts/station/) ──
 	var FRAME_SCENE := {"scene": "res://commons/artifacts/station/station_frame.tscn"}
+	var WALL_SCENE := {"scene": "res://commons/artifacts/station/station_wall.tscn"}
 	var PLINTH_SCENE := {"scene": "res://commons/artifacts/station/station_plinth.tscn"}
 	var PILLAR_SCENE := {"scene": "res://commons/artifacts/station/station_pillar.tscn"}
 	var GANTRY_SCENE := {"scene": "res://commons/artifacts/station/station_gantry.tscn"}
 	var CONSOLE_DESK_SCENE := {"scene": "res://commons/artifacts/station/station_console_desk.tscn"}
+	var BARRIER_SCENE := {"scene": "res://commons/artifacts/station/station_barrier.tscn"}
+	var STAGE_SCENE := {"scene": "res://commons/artifacts/station/station_stage.tscn"}
+	var CABINET_SCENE := {"scene": "res://commons/artifacts/station/station_cabinet.tscn"}
 	var STATION_SCENE := {"scene": "res://commons/artifacts/station/curation_station.tscn"}
 
 	# ── curation_station BAY SHELLS — six hangar-bay PRINCIPLES rendered as
@@ -480,6 +484,47 @@ func _build_sweep() -> Array:
 			"accent_color": Color(0.86, 0.34, 0.11),
 		}, FRAME_SCENE))
 
+	# ── station_wall (improved VARIANTS): critical_parameter = length_cells × height + panel_style ──
+	# Scene lives under .../station/, so pass WALL_SCENE via `extra` (default _p path is wrong).
+	# screen_lines / caption_lines exports are plain Array → pass as untyped String arrays.
+	sweep.append(_p("station_wall", "station_wall__tray_caption_panel", "Tray — single-cell captioned plate",
+		"the small/tray form — a one-cell capped wall section that reads as a captioned info plate, base reveal lifts it off the floor; clean Rams body, no perforation",
+		{
+			"length_cells": 1, "height": 1.6, "start_cap": true, "end_cap": true,
+			"panel_style": "panel", "screen_slot": false, "lit_seam": true, "three_bar": true,
+			"bevel_frame": true, "bolt_rows": true, "base_reveal": true, "lit_groove": false,
+			"caption_text": "SET A", "caption_lines": ["CURATION", "BAY 01"],
+			"stencil_text": "WALL-A", "wear": 0.06, "grime": true,
+		}, WALL_SCENE))
+	sweep.append(_p("station_wall", "station_wall__monument_run", "Monumental — long capped run with readout",
+		"the large/monumental form — a five-cell tall capped run backing a whole curated set, lit accent grooves down both inner edges, embedded readout screen, continuous top seam",
+		{
+			"length_cells": 5, "height": 3.4, "start_cap": true, "end_cap": true,
+			"panel_style": "panel", "screen_slot": true, "screen_header": "CURATION",
+			"screen_lines": ["SET ONLINE", "5 EXHIBITS", "LINK  OK"],
+			"lit_seam": true, "three_bar": true, "bevel_frame": true, "bolt_rows": true,
+			"base_reveal": true, "lit_groove": true, "stencil_text": "WALL-MAIN",
+			"wear": 0.12, "grime": true,
+		}, WALL_SCENE))
+	sweep.append(_p("station_wall", "station_wall__greebled_bulkhead", "Greebled — ribbed weathered bulkhead",
+		"the heavily-greebled form — a three-cell ribbed bulkhead with hazard caution stripe at the foot, heavier weathering, every detail layer on; the dirty structural end of the family",
+		{
+			"length_cells": 3, "height": 2.8, "start_cap": true, "end_cap": true,
+			"panel_style": "ribbed", "screen_slot": true, "screen_header": "SERVICE",
+			"screen_lines": ["BULKHEAD", "SECTOR  3"],
+			"lit_seam": true, "hazard_base": true, "three_bar": true, "bevel_frame": true,
+			"bolt_rows": true, "base_reveal": true, "lit_groove": true, "stencil_text": "BLK-03",
+			"wear": 0.34, "grime": true, "accent_color": Color(0.86, 0.30, 0.10),
+		}, WALL_SCENE))
+	sweep.append(_p("station_wall", "station_wall__minimal_clean", "Minimal — uncapped clean continuation panel",
+		"the minimal/clean form — a two-cell mid panel with no caps (reads 'more wall continues here'), almost no detail; the quiet Rams backdrop that recedes so the artifact in front is the expressive thing",
+		{
+			"length_cells": 2, "height": 2.5, "start_cap": false, "end_cap": false,
+			"panel_style": "panel", "screen_slot": false, "lit_seam": false, "three_bar": false,
+			"bevel_frame": true, "bolt_rows": false, "base_reveal": true, "lit_groove": false,
+			"hazard_base": false, "stencil_text": "", "wear": 0.04, "grime": false,
+		}, WALL_SCENE))
+
 	# ── station_plinth: critical_parameter = width_cells × depth_cells + top_height ──
 	sweep.append(_p("station_plinth", "1_tall_tray_specimen", "tall tray specimen",
 		"1×1 high tray — a single precious thing at eye height, emerald accent",
@@ -503,6 +548,51 @@ func _build_sweep() -> Array:
 			"accent_color": Color(0.20, 0.55, 0.95),
 		}, PLINTH_SCENE))
 
+	# ── station_plinth (improved VARIANTS): footprint + finish family ──
+	sweep.append(_p("station_plinth", "station_plinth__specimen_podium_tray", "Specimen Podium (1x1 tall tray)",
+		"the precious-single-thing case — a tall narrow 1×1 podium at eye height, rimmed tray cap, wrapped lit groove, corner bolts, surface-pinned caption; crisp Rams palette",
+		{
+			"width_cells": 1, "depth_cells": 1, "top_height": 1.05, "cap_inset": 0.18,
+			"top_style": "tray", "edge_light": true, "edge_light_wrap": true, "chamfer_cap": true,
+			"base_reveal": true, "corner_bolts": true, "three_bar": true, "grime": true,
+			"dust": true, "wear": 0.08, "caption_text": "SPECIMEN 01", "caption_style": "frame",
+			"stencil_text": "P-01",
+			"body_color": Color(0.81, 0.79, 0.75), "panel_color": Color(0.70, 0.68, 0.64),
+			"accent_color": Color(0.86, 0.34, 0.11),
+		}, PLINTH_SCENE))
+	sweep.append(_p("station_plinth", "station_plinth__broad_world_stage", "Broad World Stage (4x4 monumental)",
+		"the 'a world, not a specimen' case — a low broad 4×4 plinth at knee height, many per-cell panels read as a modular slab, flat cap, signage caption, full corner-bolt rows",
+		{
+			"width_cells": 4, "depth_cells": 4, "top_height": 0.42, "cap_inset": 0.22,
+			"top_style": "flat", "edge_light": true, "edge_light_wrap": true, "chamfer_cap": true,
+			"base_reveal": true, "corner_bolts": true, "three_bar": true, "grime": true,
+			"dust": true, "wear": 0.1, "caption_text": "PLATFORM A", "caption_style": "signage",
+			"stencil_text": "STAGE-A",
+			"body_color": Color(0.81, 0.79, 0.75), "panel_color": Color(0.69, 0.67, 0.63),
+			"accent_color": Color(0.86, 0.34, 0.11),
+		}, PLINTH_SCENE))
+	sweep.append(_p("station_plinth", "station_plinth__terminal_greeble_rig", "Greebled Terminal Rig (2x1 dark)",
+		"the dirty-console end of the DNA — a heavily-greebled long 2×1 in the dark terminal finish, grate cap, wrapped signal-red groove, dense bolts, heavy wear + dust streaks",
+		{
+			"width_cells": 2, "depth_cells": 1, "top_height": 0.95, "cap_inset": 0.14,
+			"top_style": "grate", "edge_light": true, "edge_light_wrap": true, "chamfer_cap": true,
+			"base_reveal": true, "corner_bolts": true, "three_bar": true, "grime": true,
+			"dust": true, "wear": 0.34, "caption_text": "RIG 7 — ONLINE", "caption_style": "frame",
+			"stencil_text": "RIG-07",
+			"body_color": Color(0.16, 0.16, 0.175), "panel_color": Color(0.10, 0.10, 0.115),
+			"accent_color": Color(0.85, 0.30, 0.12),
+		}, PLINTH_SCENE))
+	sweep.append(_p("station_plinth", "station_plinth__clean_minimal_pedestal", "Clean Minimal Pedestal (1x1 quiet)",
+		"the Rams 'less, but better' silhouette — a pared-back 1×1 at hand height, flat cap, single front-only lit line, chamfered collar + base reveal but NO bolts/bar/dust/grime/stencil/caption",
+		{
+			"width_cells": 1, "depth_cells": 1, "top_height": 1.0, "cap_inset": 0.2,
+			"top_style": "flat", "edge_light": true, "edge_light_wrap": false, "chamfer_cap": true,
+			"base_reveal": true, "corner_bolts": false, "three_bar": false, "grime": false,
+			"dust": false, "wear": 0.03, "caption_text": "", "stencil_text": "",
+			"body_color": Color(0.81, 0.79, 0.75), "panel_color": Color(0.70, 0.68, 0.64),
+			"accent_color": Color(0.86, 0.34, 0.11),
+		}, PLINTH_SCENE))
+
 	# ── station_pillar: critical_parameter = height + post_width ──
 	sweep.append(_p("station_pillar", "1_tall_slim_lit", "tall slim lit",
 		"2.8m slim shaft — lit accent groove, the powered corner column",
@@ -521,6 +611,40 @@ func _build_sweep() -> Array:
 		{
 			"height": 2.5, "post_width": 0.42, "lit_groove": true,
 			"accent_color": Color(0.20, 0.80, 0.30),
+		}, PILLAR_SCENE))
+
+	# ── station_pillar (improved VARIANTS): the small→large + finish-swap family ──
+	sweep.append(_p("station_pillar", "station_pillar__tray_marker_post", "Tray Marker Post (small/clean)",
+		"the small/clean form — a short slim minimal corner marker, no flutes, plate cap, a quiet lit groove + Rams three-colour bar; the least-but-better column",
+		{
+			"height": 1.35, "post_width": 0.32, "chamfer": 0.04, "cap_style": "plate",
+			"flute_count": 0, "lit_groove": true, "three_bar": true, "bolts": false,
+			"caution_stripe": false, "dust": false, "grime": false, "wear": 0.05,
+			"readout_face": false,
+		}, PILLAR_SCENE))
+	sweep.append(_p("station_pillar", "station_pillar__monumental_fluted_column", "Monumental Fluted Column (large)",
+		"the large form — a tall heavy fluted monument framing a bay corner, six recessed reeds per face, stepped capital crown, bolted foot, surface-pinned signage header",
+		{
+			"height": 3.6, "post_width": 0.62, "chamfer": 0.12, "cap_style": "stepped",
+			"flute_count": 6, "lit_groove": true, "three_bar": true, "bolts": true,
+			"caution_stripe": true, "dust": true, "grime": true, "wear": 0.12,
+			"signage_text": "BAY CORNER", "stencil_text": "C-04",
+		}, PILLAR_SCENE))
+	sweep.append(_p("station_pillar", "station_pillar__greebled_service_pillar", "Greebled Service Pillar (heavy detail)",
+		"the heavily-greebled form — a working over-detailed service upright with a live readout face, dense fluting, full bolts, caution kick band, dust + stencil ID",
+		{
+			"height": 2.7, "post_width": 0.5, "chamfer": 0.08, "cap_style": "stepped",
+			"flute_count": 4, "lit_groove": true, "readout_face": true, "three_bar": true,
+			"bolts": true, "caution_stripe": true, "dust": true, "grime": true, "wear": 0.22,
+			"signage_text": "NODE 12", "stencil_text": "PWR",
+		}, PILLAR_SCENE))
+	sweep.append(_p("station_pillar", "station_pillar__terminal_dark_obelisk", "Terminal Dark Obelisk (minimal/finish swap)",
+		"the alternate charcoal terminal finish — dark worn metal, signal-red accent, calm green-CRT readout, minimal surface noise so the finish does the talking",
+		{
+			"finish": "terminal", "height": 2.5, "post_width": 0.44, "chamfer": 0.07,
+			"cap_style": "stepped", "flute_count": 0, "lit_groove": true, "readout_face": true,
+			"three_bar": true, "bolts": true, "caution_stripe": false, "dust": true,
+			"grime": true, "wear": 0.3,
 		}, PILLAR_SCENE))
 
 	# ── station_gantry: critical_parameter = span_cells × leg_mode + with_hoist ──
@@ -580,6 +704,134 @@ func _build_sweep() -> Array:
 			"body_color": Color(0.84, 0.80, 0.76), "panel_color": Color(0.72, 0.68, 0.64),
 			"accent_color": Color(0.20, 0.80, 0.30),
 		}, CONSOLE_DESK_SCENE))
+
+	# ── station_barrier (improved VARIANTS): length_cells × style + finish family ──
+	# Scene lives under .../station/, so pass BARRIER_SCENE via `extra` (default _p path is wrong).
+	sweep.append(_p("station_barrier", "station_barrier__specimen_rail", "Specimen Rail (small/tray)",
+		"the small/tray form — a low single-cell open rail run marking a specimen edge, slim bevelled posts, two thin rails, one lit accent groove; the quiet 'stand back' line",
+		{
+			"length_cells": 1, "height": 0.6, "post_w": 0.07, "style": "rail",
+			"finish": "rams", "post_style": "bevelled", "rail_count": 2,
+			"hazard_base": false, "chevrons": false, "top_rail": false, "brand_text": "",
+			"wear": 0.05, "three_bar": false, "grime": true, "bolt_rows": false,
+			"cap_lights": true, "panel_seams": false, "dust": false,
+			"panel_color": Color(0.81, 0.79, 0.75), "post_color": Color(0.70, 0.68, 0.64),
+			"accent_color": Color(0.86, 0.34, 0.11),
+		}, BARRIER_SCENE))
+	sweep.append(_p("station_barrier", "station_barrier__perimeter_run", "Perimeter Run (large/monumental)",
+		"the large/monumental form — a six-cell chunky-posted solid-panel cordon backing a whole set, continuous lit top rail, branded plate, seamed bays; reads 'secure perimeter, keep clear'",
+		{
+			"length_cells": 6, "height": 1.25, "post_w": 0.16, "style": "panel",
+			"finish": "rams", "post_style": "bevelled", "hazard_base": true, "chevrons": true,
+			"top_rail": true, "brand_text": "CURATION ZONE", "wear": 0.1, "three_bar": true,
+			"grime": true, "bolt_rows": true, "cap_lights": true, "panel_seams": true, "dust": true,
+			"panel_color": Color(0.81, 0.79, 0.75), "post_color": Color(0.70, 0.68, 0.64),
+			"accent_color": Color(0.86, 0.34, 0.11),
+		}, BARRIER_SCENE))
+	sweep.append(_p("station_barrier", "station_barrier__terminal_caution_bulwark", "Terminal Caution Bulwark (heavily-greebled)",
+		"the heavily-greebled form — a four-cell dark terminal-finish panel barrier piled with every detail layer: keep-clear chevrons, hazard kickplate, dense bolt rows, branded plate, heavy weathering + dust",
+		{
+			"length_cells": 4, "height": 1.1, "post_w": 0.14, "style": "panel",
+			"finish": "terminal", "post_style": "box", "hazard_base": true, "chevrons": true,
+			"top_rail": true, "brand_text": "SECTOR 3 — RESTRICTED", "wear": 0.34, "three_bar": true,
+			"grime": true, "bolt_rows": true, "cap_lights": true, "panel_seams": true, "dust": true,
+			"accent_color": Color(0.86, 0.30, 0.10),
+		}, BARRIER_SCENE))
+	sweep.append(_p("station_barrier", "station_barrier__gallery_rope", "Gallery Rope (minimal/clean)",
+		"the minimal/clean form — a three-cell open rail that reads as a museum rope: slim bevelled posts, a single rail, soft cap lights, no chevrons/stripes/brand; the quiet gallery 'look, don't cross'",
+		{
+			"length_cells": 3, "height": 0.95, "post_w": 0.08, "style": "rail",
+			"finish": "rams", "post_style": "bevelled", "rail_count": 1, "hazard_base": false,
+			"chevrons": false, "top_rail": false, "brand_text": "", "wear": 0.04, "three_bar": false,
+			"grime": false, "bolt_rows": false, "cap_lights": true, "panel_seams": false, "dust": false,
+			"panel_color": Color(0.82, 0.80, 0.77), "post_color": Color(0.72, 0.70, 0.66),
+			"accent_color": Color(0.86, 0.34, 0.11),
+		}, BARRIER_SCENE))
+
+	# ── station_stage (improved VARIANTS): width_cells × depth_cells + finish family ──
+	sweep.append(_p("station_stage", "station_stage__single_tray_deck", "Single Tray Deck (small/tray)",
+		"the small/tray form — a tight 2×2 low deck for one curated thing, chamfered cap, lit toe-groove, striped front lip, minimal skirt; the smallest honest pedestal",
+		{
+			"width_cells": 2, "depth_cells": 2, "step_height": 0.18, "cap_chamfer": 0.025,
+			"top_style": "solid", "hazard_edge": true, "edge_light": true, "three_bar": false,
+			"bolts": true, "finish": "rams", "stencil_text": "STAGE-01", "name_plate": "SET A",
+			"wear": 0.06, "grime": true, "dust": false,
+			"body_color": Color(0.81, 0.79, 0.75), "panel_color": Color(0.70, 0.68, 0.64),
+			"accent_color": Color(0.86, 0.34, 0.11),
+		}, STAGE_SCENE))
+	sweep.append(_p("station_stage", "station_stage__monumental_platform", "Monumental Platform (large/monumental)",
+		"the large/monumental form — a broad 7×5 raised deck holding a whole curated set, full bolted skirt per cell, chamfered cap, lit toe-groove, Rams three-colour bar + named plate",
+		{
+			"width_cells": 7, "depth_cells": 5, "step_height": 0.3, "cap_chamfer": 0.05,
+			"top_style": "solid", "hazard_edge": true, "edge_light": true, "three_bar": true,
+			"bolts": true, "finish": "rams", "stencil_text": "STAGE-MAIN", "name_plate": "MAIN EXHIBIT",
+			"wear": 0.1, "grime": true, "dust": true,
+			"body_color": Color(0.81, 0.79, 0.75), "panel_color": Color(0.69, 0.67, 0.63),
+			"accent_color": Color(0.86, 0.34, 0.11),
+		}, STAGE_SCENE))
+	sweep.append(_p("station_stage", "station_stage__terminal_service_grate", "Terminal Service Grate (heavily-greebled)",
+		"the heavily-greebled form — a 5×3 dark terminal-finish serviced deck with a slatted grate top, striped lip, lit toe-groove, three-bar, full bolts, heavy wear + dust; the working service-floor read",
+		{
+			"width_cells": 5, "depth_cells": 3, "step_height": 0.32, "cap_chamfer": 0.04,
+			"top_style": "grate", "hazard_edge": true, "edge_light": true, "three_bar": true,
+			"bolts": true, "finish": "terminal", "stencil_text": "DECK-07", "name_plate": "SERVICE",
+			"wear": 0.34, "grime": true, "dust": true,
+		}, STAGE_SCENE))
+	sweep.append(_p("station_stage", "station_stage__clean_riser", "Clean Riser (minimal/clean)",
+		"the minimal/clean form — a quiet 3×3 low riser with a smooth chamfered cap and nothing else: no stripe, no toe-light, no bolts/bar/stencil/plate; the bare Rams step that recedes under the work",
+		{
+			"width_cells": 3, "depth_cells": 3, "step_height": 0.16, "cap_chamfer": 0.03,
+			"top_style": "solid", "hazard_edge": false, "edge_light": false, "three_bar": false,
+			"bolts": false, "finish": "rams", "stencil_text": "", "name_plate": "",
+			"wear": 0.03, "grime": false, "dust": false,
+			"body_color": Color(0.82, 0.80, 0.77), "panel_color": Color(0.72, 0.70, 0.66),
+			"accent_color": Color(0.86, 0.34, 0.11),
+		}, STAGE_SCENE))
+
+	# ── station_cabinet (improved VARIANTS): width_cells × shelf_count + front_style + finish ──
+	sweep.append(_p("station_cabinet", "station_cabinet__vitrine_tray", "Vitrine Tray (small/tray)",
+		"the small/tray form — a single-cell glass vitrine with a few lit shelves and a soft back-wall glow, chamfered posts, one warm accent groove, captioned base; one kept specimen behind glass",
+		{
+			"width_cells": 1, "height": 1.5, "depth": 0.4, "shelf_count": 3, "toe_kick": 0.05,
+			"front_style": "glass", "finish": "rams", "glow_color": Color(0.62, 0.82, 0.92),
+			"back_glow": true, "top_readout": false, "glass_divider": false,
+			"stencil_text": "CAB-A", "caption_text": "SPECIMEN A", "wear": 0.06, "three_bar": false,
+			"grime": true, "bolts": true, "accent_groove": true, "chamfer_posts": true,
+			"body_color": Color(0.81, 0.79, 0.75), "panel_color": Color(0.70, 0.68, 0.64),
+			"accent_color": Color(0.86, 0.34, 0.11),
+		}, CABINET_SCENE))
+	sweep.append(_p("station_cabinet", "station_cabinet__archive_wall", "Archive Wall (large/monumental)",
+		"the large/monumental form — a four-cell tall glass-fronted archive wall, dense lit shelves + back-wall glow, mullion dividers per cell, monitored top readout, three-bar, captioned; the glowing back wall of a collection",
+		{
+			"width_cells": 4, "height": 2.3, "depth": 0.55, "shelf_count": 6, "toe_kick": 0.06,
+			"front_style": "glass", "finish": "rams", "glow_color": Color(0.62, 0.82, 0.92),
+			"back_glow": true, "top_readout": true, "glass_divider": true,
+			"stencil_text": "ARCHIVE", "caption_text": "COLLECTION 01", "wear": 0.1, "three_bar": true,
+			"grime": true, "bolts": true, "accent_groove": true, "chamfer_posts": true,
+			"body_color": Color(0.81, 0.79, 0.75), "panel_color": Color(0.69, 0.67, 0.63),
+			"accent_color": Color(0.86, 0.34, 0.11),
+		}, CABINET_SCENE))
+	sweep.append(_p("station_cabinet", "station_cabinet__terminal_sealed_locker", "Terminal Sealed Locker (heavily-greebled)",
+		"the heavily-greebled form — a three-cell dark terminal-finish SOLID-front locker bank with panelled doors + pulls, monitored readout, bolts, accent groove, three-bar, stencil + caption, heavy wear; reads 'stored, sealed'",
+		{
+			"width_cells": 3, "height": 2.1, "depth": 0.55, "shelf_count": 5, "toe_kick": 0.05,
+			"front_style": "solid", "finish": "terminal", "glow_color": Color(0.55, 0.78, 0.90),
+			"back_glow": true, "top_readout": true, "glass_divider": true,
+			"stencil_text": "LOCK-3", "caption_text": "SEALED — SECTOR 3", "wear": 0.32, "three_bar": true,
+			"grime": true, "bolts": true, "accent_groove": true, "chamfer_posts": true,
+			"accent_color": Color(0.86, 0.30, 0.10),
+		}, CABINET_SCENE))
+	sweep.append(_p("station_cabinet", "station_cabinet__clean_display_case", "Clean Display Case (minimal/clean)",
+		"the minimal/clean form — a two-cell glass case stripped to essentials: lit shelves + faint back glow, plain square posts, NO bolts/groove/bar/readout/stencil/caption/divider; the quiet Rams vitrine that lets the contents speak",
+		{
+			"width_cells": 2, "height": 1.9, "depth": 0.5, "shelf_count": 4, "toe_kick": 0.04,
+			"front_style": "glass", "finish": "rams", "glow_color": Color(0.64, 0.84, 0.94),
+			"back_glow": true, "top_readout": false, "glass_divider": false,
+			"stencil_text": "", "caption_text": "", "wear": 0.04, "three_bar": false,
+			"grime": false, "bolts": false, "accent_groove": false, "chamfer_posts": false,
+			"body_color": Color(0.82, 0.80, 0.77), "panel_color": Color(0.72, 0.70, 0.66),
+			"accent_color": Color(0.86, 0.34, 0.11),
+		}, CABINET_SCENE))
 
 	# ── exit_sign: critical_parameter = sign_color ─────────────────
 	sweep.append(_p("exit_sign", "1_green_exit_right", "green exit right",

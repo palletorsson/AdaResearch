@@ -116,8 +116,18 @@
       "parameters": {
         "height": "Pillar height in metres (default 2.5)",
         "post_width": "Shaft width, fits inside a 1 m cell (default 0.42)",
+        "chamfer": "Chamfer on base + capital edges (0 = square, larger = tapered)",
         "lit_groove": "Vertical lit accent groove (bool)",
-        "readout_face": "Small framed readout on the +Z face (bool)"
+        "readout_face": "Small framed readout on the +Z face (bool)",
+        "cap_style": "plate | stepped | bevel — capital + base crown style",
+        "flute_count": "Vertical flutes per face (0 = single inset panel)",
+        "finish": "rams (light Braun) | terminal (dark charcoal console)",
+        "three_bar": "Dieter-Rams three-colour accent bar (bool)",
+        "bolts": "Bolt rows on foot corners + capital underside (bool)",
+        "caution_stripe": "Diagonal caution-stripe kick band at the base (bool)",
+        "dust": "Faint vertical dust streaks down the front face (bool)",
+        "signage_text": "Surface-pinned bracketed signage header (empty = none)",
+        "stencil_text": "Painted stencil text on the shaft (empty = none)"
       },
       "spatial_needs": {
         "footprint_cells": 1
