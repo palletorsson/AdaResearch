@@ -190,8 +190,9 @@ def corridor_map(name, title, desc, ordered, next_map, spans, thread=False):
         if kind == "cluster":
             depth, x = 7, center
             hw = min(len(items) + 1, center - 2)             # the bay's floor half-width
-            token = ("curation_station#artifacts:" + ",".join(items)
-                     + "#layout:row#with_wall:false#with_pillars:false#with_barrier:false")
+            # :180 so the open front faces the player coming up +Z; no endpoints (the MAP owns the flow).
+            token = ("curation_station:180#artifacts:" + ",".join(items)
+                     + "#layout:row#with_wall:false#with_pillars:false#with_barrier:false#with_endpoints:false")
         else:
             w, d = fp(items[0])
             depth = min(max(int(d) + 3, 5), 12)   # footprint-sized Z band, clamped for swarms/effects
@@ -202,7 +203,7 @@ def corridor_map(name, title, desc, ordered, next_map, spans, thread=False):
                 # offset to alternating sides, keeping the centre walkway clear
                 x = max(2, center - 3 - hw) if side < 0 else min(cols - 3, center + 3 + hw)
                 side = -side
-            token = items[0]
+            token = items[0] + ":180"             # face the approaching +Z walker
         za = z + depth // 2
         placements.append((za, x, token))
         foots.append((za, x, hw, z, z + depth))
