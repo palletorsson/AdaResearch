@@ -371,9 +371,41 @@ def run_from_string(map_name, spans):
           % (name, len(pearls), nc, nl, ncrit, rows))
 
 
+def run_single_map(map_name, mode, idx, V, spans):
+    """CONSUME one arbitrary map: take its placed artifacts, order them ontologically (atlas), and
+    reassemble as a wall-hangar corridor — smalls into curation_station bays, larges solo on the grid,
+    spawn at the (0,0) origin corner, exit teleporter at the far end. Emits Corridor_<MapName>."""
+    arts = [a for a in _map_artifact_ids(map_name) if a not in INFRA]
+    if not arts:
+        print("no artifacts placed in", map_name)
+        return None
+    ordered = nn_order(arts, idx, V) if mode == "replace" else arts
+    name = "Corridor_%s" % map_name
+    m, (nc, nl, rows) = corridor_map(
+        name, "%s — wall-hangar corridor (%s)" % (map_name, mode), "placeholder", ordered, name, spans)
+    # Honour "0,0": move the spawn from the centre to the origin corner. The interior is open floor, so
+    # the pathfinder still reaches every bay + landmark from there (walk: spawn(0,0) -> all -> exit).
+    util = m["layers"]["utilities"]
+    cols = m["map_info"]["dimensions"]["width"]
+    for zz in range(len(util)):
+        for xx in range(cols):
+            if util[zz][xx] == "s":
+                util[zz][xx] = ""
+    util[1][1] = "s"
+    n_emb = sum(1 for a in arts if a in idx)
+    m["map_info"]["description"] = (
+        "Wall-hangar corridor consuming %s (%s): %d artifacts (%d atlas-ordered) -> %d curation bays + "
+        "%d large-on-grid; walk spawn(0,0) -> all -> exit." % (map_name, mode, len(arts), n_emb, nc, nl))
+    _write(name, m)
+    print("consumed %s: %d arts (%d embedded) -> %d bays + %d large-on-grid (%d-deep, %s) -> %s"
+          % (map_name, len(arts), n_emb, nc, nl, rows, mode, name))
+    return name
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--seq")
+    ap.add_argument("--map", help="consume ONE map's placed artifacts into a wall-hangar corridor (Corridor_<Name>)")
     ap.add_argument("--from-string", dest="from_string", help="unfold one map from its edited doc/map_strings/<Map>.json")
     ap.add_argument("--per-map", action="store_true", help="recreate each map (THE spine target)")
     ap.add_argument("--mode", choices=["blend", "replace"], default="blend")
@@ -384,8 +416,11 @@ def main():
     if args.from_string:
         run_from_string(args.from_string, spans)
         return
+    if args.map:
+        run_single_map(args.map, args.mode, idx, V, spans)
+        return
     if not args.seq:
-        ap.error("pass --from-string <Map>, or --seq <id> [--per-map]")
+        ap.error("pass --map <Name>, --from-string <Map>, or --seq <id> [--per-map]")
     if args.per_map:
         run_per_map(args.seq, args.mode, idx, V, spans)
     else:
