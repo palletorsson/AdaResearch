@@ -236,19 +236,49 @@ func _build_corner_bolts(cap_w: float, cap_d: float, mat: Material) -> void:
 
 func _build_caption(body_w: float, body_d: float, body_bottom: float, body_h: float) -> void:
 	# A framed 2D-in-3D caption pinned to the front (+Z) face — words on a surface, never floating.
-	var cap_w: float = clampf(body_w * 0.82, 0.22, 0.9)
-	var cap_h: float = clampf(body_h * 0.22, 0.1, 0.28)
-	var cy: float = body_bottom + body_h * 0.42
+	# The caption must sit INSIDE the front per-cell panel it is pinned to, and its inner text-plate
+	# must sit inside the surrounding frame border with a margin on all four sides. We derive sizes so
+	# the whole framed caption (HangarKit's readout = inner face + bezel added OUTSIDE the requested
+	# size) stays within the panel, then recess the inner plate from the frame by PANEL_PAD.
+	const PANEL_PAD := 0.022          # inset of the framed caption from the panel edge (all sides)
+	const FRAME_MARGIN := 0.018       # gap between the inner text-plate and its frame border (all sides)
+
+	# Front per-cell panel region the caption is mounted on (mirrors _build_panels for the 1×1 cell).
+	var panel_w: float = body_w * 0.82
+	var panel_h: float = body_h * 0.78
+	var panel_cy: float = body_bottom + body_h * 0.5
+
+	# Target OUTER extent of the framed caption — fit inside the panel with PANEL_PAD on every side.
+	var outer_w: float = clampf(panel_w - PANEL_PAD * 2.0, 0.16, 0.9)
+	var outer_h: float = clampf(minf(panel_h - PANEL_PAD * 2.0, body_h * 0.22), 0.08, 0.28)
+	var cy: float = panel_cy   # centred on the panel so the margins read evenly
+
 	if caption_style == "signage":
-		var sign: Node3D = HangarKit.signage("", [caption_text], Vector2(cap_w, cap_h), 0.1, Vector3(0, 0, 1))
+		# Signage adds its own bracket/struts; size its panel to the available outer extent.
+		var sign: Node3D = HangarKit.signage("", [caption_text], Vector2(outer_w, outer_h), 0.1, Vector3(0, 0, 1))
 		if sign:
 			sign.position = Vector3(0, cy, body_d * 0.5 + 0.012)
 			add_child(sign)
 	else:
-		var plate: Node3D = HangarKit.readout("", [caption_text], Vector2(cap_w, cap_h),
+		# readout() grows the bezel OUTSIDE the requested face size by ft = max(w,h) * 0.06 per side.
+		# Back the requested face out of the outer extent so the bezel (the frame border) lands inside
+		# the panel, then shrink the face again by FRAME_MARGIN so the inner text-plate is inset from
+		# that frame border on all four sides.
+		var ft_guess: float = maxf(outer_w, outer_h) * 0.06
+		var frame_w: float = maxf(outer_w - ft_guess * 2.0, 0.12)
+		var frame_h: float = maxf(outer_h - ft_guess * 2.0, 0.06)
+		var plate_w: float = maxf(frame_w - FRAME_MARGIN * 2.0, 0.08)
+		var plate_h: float = maxf(frame_h - FRAME_MARGIN * 2.0, 0.05)
+
+		# Frame border: a recessed backing plate sized to (frame_w, frame_h) sits behind the inner
+		# plate; the inner text-plate is smaller (plate_w, plate_h) so a uniform border shows around it.
+		var frame_mat := _mat(panel_color.darkened(0.18))
+		add_child(_box(Vector3(0, cy, body_d * 0.5 + 0.016), Vector3(frame_w, frame_h, 0.02), frame_mat))
+
+		var plate: Node3D = HangarKit.readout("", [caption_text], Vector2(plate_w, plate_h),
 			Color(0.88, 0.86, 0.80), Color(0.10, 0.10, 0.12), Color(0.10, 0.10, 0.12))
 		if plate:
-			plate.position = Vector3(0, cy, body_d * 0.5 + 0.026)
+			plate.position = Vector3(0, cy, body_d * 0.5 + 0.030)
 			add_child(plate)
 
 

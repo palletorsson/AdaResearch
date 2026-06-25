@@ -220,9 +220,13 @@ func _add_chamfer_post(x: float, h: float, fz: float, body_mat: Material, col_bo
 	add_child(_box(Vector3(x, cy, fz - FRAME_T * 0.5), Vector3(FRAME_T, h, FRAME_T), body_mat))
 	var bev_mat := _mat(col_body.lightened(0.06), wear)
 	for sgn in [1.0, -1.0]:
+		# Thin full-height facet, yawed 45° about Y so it presents a diagonal
+		# corner bevel. Keep the long axis VERTICAL (height stays h) — never
+		# rotate the tall box about Z, which would swing its 1.9 m length out
+		# diagonally and overshoot the cabinet as giant "X" beams.
 		var strip := _box(Vector3(x + sgn * FRAME_T * 0.45, cy, fz - FRAME_T * 0.15),
-			Vector3(FRAME_T * 0.32, h, FRAME_T * 0.32), bev_mat)
-		strip.rotation_degrees = Vector3(0, 0, 45.0 * sgn)
+			Vector3(FRAME_T * 0.45, h, FRAME_T * 0.12), bev_mat)
+		strip.rotation_degrees = Vector3(0, 45.0 * sgn, 0)
 		add_child(strip)
 
 

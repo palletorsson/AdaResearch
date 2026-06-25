@@ -178,8 +178,12 @@ func _build() -> void:
 			add_child(screen)
 
 	# ── Surface-pinned signage line (header on a bracketed plate) ──
+	# Inset within the column face: the readout() bezel adds ~max(w,h)*0.06 on each side, so
+	# size.x is kept to ~0.62 of pw → the framed plate (panel + bezel) lands ~0.7*pw, leaving a
+	# clear margin to the fluted outer edge. A small reach keeps it just proud, not floating off.
 	if signage_text.strip_edges() != "":
-		var sign: Node3D = HangarKit.signage(signage_text, [], Vector2(pw * 1.05, 0.16), 0.10, Vector3(0, 0, 1))
+		var sign_w: float = pw * 0.62
+		var sign: Node3D = HangarKit.signage(signage_text, [], Vector2(sign_w, 0.16), 0.045, Vector3(0, 0, 1))
 		if sign:
 			sign.position = Vector3(0, h * 0.45, pw * 0.5 + 0.01)
 			add_child(sign)
