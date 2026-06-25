@@ -172,7 +172,7 @@ def _bands(ordered, spans):
     return bands
 
 
-def corridor_map(name, title, desc, ordered, next_map, spans):
+def corridor_map(name, title, desc, ordered, next_map, spans, thread=False):
     bands = _bands(ordered, spans)
 
     def fp(n):
@@ -182,32 +182,54 @@ def corridor_map(name, title, desc, ordered, next_map, spans):
     cols = min(max(COLS, max_lw + 10), 30)
     center = cols // 2
 
-    z, placements, side = 2, [], -1
+    z, placements, side, foots = 2, [], -1, []
     for kind, items in bands:
         if kind == "cluster":
             depth, x = 7, center
+            hw = min(len(items) + 1, center - 2)             # the bay's floor half-width
             token = ("curation_station#artifacts:" + ",".join(items)
                      + "#layout:row#with_wall:false#with_pillars:false#with_barrier:false")
         else:
             w, d = fp(items[0])
             depth = min(max(int(d) + 3, 5), 12)   # footprint-sized Z band, clamped for swarms/effects
-            half = int(w) // 2 + 1
-            # offset to alternating sides, keeping the centre walkway (centre +/- 2) clear
-            x = max(2, center - 3 - half) if side < 0 else min(cols - 3, center + 3 + half)
+            hw = int(w) // 2 + 1
+            # offset to alternating sides, keeping the centre walkway clear
+            x = max(2, center - 3 - hw) if side < 0 else min(cols - 3, center + 3 + hw)
             side = -side
             token = items[0]
-        placements.append((z + depth // 2, x, token))
+        za = z + depth // 2
+        placements.append((za, x, token))
+        foots.append((za, x, hw, z, z + depth))
         z += depth + 1
     rows_total = max(z + 2, 8)
-    struct = [["1"] * cols for _ in range(rows_total)]
+    tele_z = rows_total - 2
+
+    if thread:
+        # THE GRID AS A CONSEQUENCE: floor exists ONLY where the walk threads, where a bay sits, and
+        # under a large's footprint — void everywhere else (string of pearls). pathfind + wall-hangar +
+        # artifact-footprint YIELD the grid, instead of placing things on a pre-made open floor.
+        struct = [["0"] * cols for _ in range(rows_total)]
+        for xx in range(1, center + 1):                       # spawn(0,0) corner -> spine connector
+            struct[1][xx] = "1"
+        for zz in range(1, tele_z):                           # central walk spine (3 wide)
+            for xx in range(center - 1, center + 2):
+                struct[zz][xx] = "1"
+        for (za, x, hw, z0, z1) in foots:                     # each bay / large footprint + its spur
+            for zz in range(max(1, z0), min(rows_total - 1, z1 + 1)):
+                for xx in range(max(1, x - hw), min(cols - 1, x + hw + 1)):
+                    struct[zz][xx] = "1"
+            lo, hi = sorted((center, x))
+            for xx in range(lo, hi + 1):
+                struct[za][xx] = "1"
+    else:
+        struct = [["1"] * cols for _ in range(rows_total)]
     for x in range(cols):
         struct[0][x] = "2"; struct[rows_total - 1][x] = "2"
     for zz in range(rows_total):
         struct[zz][0] = "2"; struct[zz][cols - 1] = "2"
     util = [["" for _ in range(cols)] for _ in range(rows_total)]
     inter = [["" for _ in range(cols)] for _ in range(rows_total)]
-    util[1][center] = "s"
-    tele_z = rows_total - 2
+    util[1][1 if thread else center] = "s"
     struct[tele_z][center] = "0"
     util[tele_z][center] = "t:" + next_map
     for za, x, token in placements:
@@ -382,16 +404,8 @@ def run_single_map(map_name, mode, idx, V, spans):
     ordered = nn_order(arts, idx, V) if mode == "replace" else arts
     name = "Corridor_%s" % map_name
     m, (nc, nl, rows) = corridor_map(
-        name, "%s — wall-hangar corridor (%s)" % (map_name, mode), "placeholder", ordered, name, spans)
-    # Honour "0,0": move the spawn from the centre to the origin corner. The interior is open floor, so
-    # the pathfinder still reaches every bay + landmark from there (walk: spawn(0,0) -> all -> exit).
-    util = m["layers"]["utilities"]
-    cols = m["map_info"]["dimensions"]["width"]
-    for zz in range(len(util)):
-        for xx in range(cols):
-            if util[zz][xx] == "s":
-                util[zz][xx] = ""
-    util[1][1] = "s"
+        name, "%s — wall-hangar corridor (%s)" % (map_name, mode), "placeholder", ordered, name, spans,
+        thread=True)   # the grid is CARVED from the walk + bay/large footprints; void elsewhere
     n_emb = sum(1 for a in arts if a in idx)
     m["map_info"]["description"] = (
         "Wall-hangar corridor consuming %s (%s): %d artifacts (%d atlas-ordered) -> %d curation bays + "
