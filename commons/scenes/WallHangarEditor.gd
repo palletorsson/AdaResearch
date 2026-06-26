@@ -23,6 +23,8 @@ const SAVE_PATH := "user://wall_hangar_layout.json"
 const REGISTRY_DIR := "res://commons/artifacts/registry"
 # Lookup-names that mount on the wall (everything else falls to the floor + stacks).
 const WALL_SET := ["station_panel", "station_frame", "framed_readout_screen"]
+# Registries treated as staging PROPS (bottom bar); everything else = artifacts (left).
+const PROP_REGISTRIES := ["station", "packaging", "furniture"]
 
 const WHPalette := preload("res://commons/scenes/wall_hangar/WHPalette.gd")
 const WHInspector := preload("res://commons/scenes/wall_hangar/WHInspector.gd")
@@ -42,6 +44,7 @@ var _depth_level := 1
 var _selected: Node3D = null
 var _sel_box: MeshInstance3D = null
 var _scene_map: Dictionary = {}    # lookup_name -> scene path (all registries)
+var _prop_lookups: Array = []      # lookups from the PROP registries (the bottom bar)
 var _palette: PanelContainer = null
 var _insp: PanelContainer = null
 var _hud: Control = null
@@ -61,6 +64,7 @@ func _build_scene_map() -> void:
 	for f in dir.get_files():
 		if not str(f).ends_with(".json"):
 			continue
+		var is_prop: bool = str(f).get_basename() in PROP_REGISTRIES
 		var d = JSON.parse_string(FileAccess.get_file_as_string("%s/%s" % [REGISTRY_DIR, f]))
 		var table = d
 		if d is Dictionary and d.has("artifacts") and d["artifacts"] is Dictionary:
@@ -69,7 +73,11 @@ func _build_scene_map() -> void:
 			for k in table.keys():
 				var e = table[k]
 				if e is Dictionary and e.has("scene"):
-					_scene_map[str(k)] = str(e["scene"])
+					var lookup := str(e.get("lookup_name", k))
+					_scene_map[lookup] = str(e["scene"])
+					if is_prop and not _prop_lookups.has(lookup):
+						_prop_lookups.append(lookup)
+	_prop_lookups.sort()
 
 
 # ── World (floor + long wall) ─────────────────────────────────────────
@@ -133,6 +141,10 @@ func _build_ui() -> void:
 	layer.add_child(_palette)
 	if _palette.has_method("set_wall_tokens"):
 		_palette.set_wall_tokens(WALL_SET)
+	if _palette.has_method("set_registries"):
+		_palette.set_registries([], PROP_REGISTRIES)   # artifacts only — props go to the bottom bar
+	if _palette.has_method("set_title"):
+		_palette.set_title("ARTIFACTS")
 	_palette.picked.connect(_pick)
 
 	_insp = WHInspector.new()
@@ -155,8 +167,41 @@ func _build_ui() -> void:
 		_hud.load_requested.connect(_on_load)
 	if _hud.has_signal("clear_requested"):
 		_hud.clear_requested.connect(_on_clear)
+	_build_props_bar(layer)
 	_hud_depth()
-	_status("pick a prop on the left — type to filter")
+	_status("ARTIFACTS left · PROPS bottom — pick one, 0-9 depth, LMB to stamp")
+
+
+func _build_props_bar(layer: CanvasLayer) -> void:
+	var bar := PanelContainer.new()
+	bar.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_WIDE)
+	bar.offset_top = -64
+	bar.add_theme_stylebox_override("panel", WHStyle.toolbar_box())
+	layer.add_child(bar)
+	var vb := VBoxContainer.new()
+	bar.add_child(vb)
+	var head := Label.new()
+	head.text = "PROPS"
+	head.add_theme_color_override("font_color", C_ACCENT)
+	head.add_theme_font_size_override("font_size", 11)
+	vb.add_child(head)
+	var scroll := ScrollContainer.new()
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO
+	scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	vb.add_child(scroll)
+	var hb := HBoxContainer.new()
+	hb.add_theme_constant_override("separation", 6)
+	scroll.add_child(hb)
+	for lookup in _prop_lookups:
+		var b := Button.new()
+		var is_wall: bool = lookup in WALL_SET
+		b.text = ("◰ " if is_wall else "") + str(lookup).replace("station_", "").replace("packaging_", "").replace("hangar_", "")
+		b.tooltip_text = str(lookup)
+		b.custom_minimum_size = Vector2(96, 32)
+		WHStyle.style_button(b)
+		b.pressed.connect(_pick.bind(str(lookup)))
+		hb.add_child(b)
 
 
 # ── Pick / stamp / select / grab ──────────────────────────────────────

@@ -35,6 +35,9 @@ var _search: LineEdit = null
 var _category: OptionButton = null
 var _list: VBoxContainer = null
 var _count_label: Label = null
+var _title: Label = null
+var _reg_only: Array = []      # if non-empty, show only these registries
+var _reg_skip: Array = []      # always hide these registries
 
 
 func _ready() -> void:
@@ -60,6 +63,49 @@ func set_wall_tokens(tokens: Array) -> void:
 ## How many scene-bearing artifacts were collected (after scanning).
 func item_count() -> int:
 	return _items.size()
+
+
+## Restrict which registries appear: show only `only` (if non-empty) and always hide
+## `skip`. Pass registry basenames, e.g. ["station","packaging","furniture"].
+func set_registries(only: Array = [], skip: Array = []) -> void:
+	_reg_only = []
+	for r in only:
+		_reg_only.append(str(r))
+	_reg_skip = []
+	for r in skip:
+		_reg_skip.append(str(r))
+	_rebuild_categories()
+	_refresh_list()
+
+
+## Set the panel heading (default "PROPS").
+func set_title(t: String) -> void:
+	if _title != null:
+		_title.text = t
+
+
+func _passes_registry(it: Dictionary) -> bool:
+	var reg := str(it.get("registry", ""))
+	if _reg_skip.has(reg):
+		return false
+	if not _reg_only.is_empty() and not _reg_only.has(reg):
+		return false
+	return true
+
+
+func _rebuild_categories() -> void:
+	if _category == null:
+		return
+	_category.clear()
+	_category.add_item("All", 0)
+	var seen: Dictionary = {}
+	for it in _items:
+		if _passes_registry(it):
+			seen[str(it["category"])] = true
+	var cats := seen.keys()
+	cats.sort()
+	for cat in cats:
+		_category.add_item(str(cat))
 
 
 # ── Scan ──────────────────────────────────────────────────────────────
@@ -113,6 +159,7 @@ func _scan_registries() -> void:
 				"name": disp,
 				"scene": scene,
 				"category": cat,
+				"registry": fname.get_basename(),
 			})
 	_items.sort_custom(func(a, b): return str(a["name"]).naturalnocasecmp_to(str(b["name"])) < 0)
 
@@ -149,6 +196,7 @@ func _build_ui() -> void:
 	title.text = "PROPS"
 	title.add_theme_color_override("font_color", C_ACCENT)
 	title.add_theme_font_size_override("font_size", 14)
+	_title = title
 	col.add_child(title)
 
 	_search = LineEdit.new()
@@ -205,7 +253,11 @@ func _refresh_list() -> void:
 	var needle := ("" if _search == null else _search.text).strip_edges().to_lower()
 	var cat_filter := _selected_category()
 	var shown := 0
+	var total := 0
 	for it in _items:
+		if not _passes_registry(it):
+			continue
+		total += 1
 		var cat := str(it["category"])
 		if cat_filter != "" and cat != cat_filter:
 			continue
@@ -216,7 +268,7 @@ func _refresh_list() -> void:
 		_list.add_child(_make_row(it))
 		shown += 1
 	if _count_label != null:
-		_count_label.text = "%d / %d" % [shown, _items.size()]
+		_count_label.text = "%d / %d" % [shown, total]
 
 
 func _make_row(it: Dictionary) -> Button:
