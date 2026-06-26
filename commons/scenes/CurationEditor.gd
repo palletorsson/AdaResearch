@@ -44,6 +44,7 @@ const PRESETS := {
 const C_PANEL := Color(0.11, 0.12, 0.15, 0.96)
 const C_ACCENT := Color(0.86, 0.40, 0.16)
 const C_TEXT := Color(0.87, 0.88, 0.90)
+const GRID := 1.0   # 1 m cells — the curation_station's CELL
 
 var _player: Node3D = null
 var _camera: Camera3D = null
@@ -200,11 +201,20 @@ func _toggle_carry() -> void:
 		_set_status("dropped")
 		return
 	var n := _aimed_prop()
-	if n != null:
-		_carry = n
-		_set_status("carrying %s — look where it should go, G to drop" % n.name)
-	else:
-		_set_status("aim at a piece you added, then G")
+	if n == null:
+		_set_status("aim at a piece, then G")
+		return
+	# Re-parent composer pieces (and artifacts) out into the free-form container so
+	# they survive a preset rebuild and become individually carry/remove-able.
+	if n.get_parent() != _container:
+		var gpos := n.global_position
+		n.get_parent().remove_child(n)
+		_container.add_child(n)
+		n.global_position = gpos
+	if not n.is_in_group("curation_editable"):
+		n.add_to_group("curation_editable")
+	_carry = n
+	_set_status("carrying %s — look where it should go, G to drop" % n.name)
 
 
 func _remove_aimed() -> void:
@@ -220,7 +230,11 @@ func _remove_aimed() -> void:
 
 func _process(_delta: float) -> void:
 	if _carry != null and is_instance_valid(_carry):
-		_carry.global_position = _aim_floor_point(4.0)
+		var aim := _aim_floor_point(4.0)
+		var gx := snappedf(aim.x, GRID)
+		var gz := snappedf(aim.z, GRID)
+		# Rest the carried piece on the highest surface under the cell (floor if none).
+		_carry.global_position = Vector3(gx, _stack_top(gx, gz, _carry), gz)
 
 
 # ── Aim helpers ───────────────────────────────────────────────────────
@@ -253,17 +267,20 @@ func _aim_floor_point(fallback_dist: float) -> Vector3:
 
 
 func _aimed_prop() -> Node3D:
-	# Nearest spawned piece to the crosshair (screen centre) — collider-independent,
-	# since the station pieces are display meshes with no physics body.
+	# Nearest movable piece to the crosshair — collider-independent (station pieces
+	# are display meshes). Spans pieces you added AND the composer's own pieces/artifacts.
 	if _camera == null:
 		return null
 	var center := get_viewport().get_visible_rect().size * 0.5
 	var best: Node3D = null
-	var best_d := 90.0
-	for n in get_tree().get_nodes_in_group("curation_editable"):
+	var best_d := 110.0
+	for n in _all_movable():
 		if not (n is Node3D) or n == _carry:
 			continue
-		var probe: Vector3 = (n as Node3D).global_position + Vector3(0.0, 0.8, 0.0)
+		var box := _world_aabb(n)
+		if box.size.y <= 0.001:
+			continue  # no visible geometry — skip marker / group nodes
+		var probe := box.get_center()
 		if _camera.is_position_behind(probe):
 			continue
 		var d := _camera.unproject_position(probe).distance_to(center)
@@ -271,6 +288,54 @@ func _aimed_prop() -> Node3D:
 			best_d = d
 			best = n
 	return best
+
+
+func _all_movable() -> Array:
+	# Free-form pieces you added + the composer's own top-level pieces.
+	var out: Array = []
+	out.append_array(_container.get_children())
+	if _station != null and is_instance_valid(_station):
+		for c in _station.get_children():
+			if c is Node3D and not out.has(c):
+				out.append(c)
+	return out
+
+
+func _stack_top(gx: float, gz: float, exclude: Node3D) -> float:
+	# Highest top among OTHER pieces whose footprint covers (gx,gz); 0 = floor.
+	var top := 0.0
+	for n in _all_movable():
+		if n == exclude or not (n is Node3D) or not is_instance_valid(n):
+			continue
+		var box := _world_aabb(n)
+		if box.size.y <= 0.001:
+			continue
+		var hw := box.size.x * 0.5 + 0.05
+		var hd := box.size.z * 0.5 + 0.05
+		var cx := box.position.x + box.size.x * 0.5
+		var cz := box.position.z + box.size.z * 0.5
+		if absf(gx - cx) <= hw and absf(gz - cz) <= hd:
+			top = maxf(top, box.position.y + box.size.y)
+	return top
+
+
+func _world_aabb(n: Node3D) -> AABB:
+	# World-space union of the piece's visible mesh AABBs (particles + hidden excluded).
+	var box := AABB()
+	var found := false
+	var stack: Array = [n]
+	while not stack.is_empty():
+		var node = stack.pop_back()
+		for ch in node.get_children():
+			stack.append(ch)
+		if node is VisualInstance3D and not (node is GPUParticles3D) and (node as VisualInstance3D).is_visible_in_tree():
+			var gb: AABB = (node as VisualInstance3D).global_transform * (node as VisualInstance3D).get_aabb()
+			if not found:
+				box = gb
+				found = true
+			else:
+				box = box.merge(gb)
+	return box if found else AABB()
 
 
 func _set_status(msg: String) -> void:
