@@ -479,12 +479,15 @@ func _cell_at(screen_pos: Vector2) -> Vector2i:
 
 
 func _left_press(screen_pos: Vector2, shift: bool) -> void:
-	var cell := _cell_at(screen_pos)
-	if cell.x == -9999:
-		return
-	var node := _artifact_at_cell(cell.x, cell.y)
+	# Find the placed prop nearest the cursor in SCREEN space — robust whether or
+	# not the artifact has a physics collider (many are display-only, so a physics
+	# raycast would pass straight through and hit the floor cell behind it).
+	var node := _prop_near_screen(screen_pos)
+	print("[hangar] left_press ", screen_pos, " shift=", shift, " -> ", (node.name if node else "<none>"))
 	if node == null:
+		_clear_selection()
 		return
+	var cell: Vector2i = node.get_meta("grid_cell", Vector2i.ZERO)
 	if shift:
 		_delete_artifact(node, cell.x, cell.y)
 		return
@@ -556,6 +559,49 @@ func _delete_artifact(node: Node3D, gx: int, gz: int) -> void:
 		_inter_grid[gz][gx] = " "
 	if is_instance_valid(node):
 		node.queue_free()
+	_clear_selection()
+
+
+func _prop_near_screen(screen_pos: Vector2) -> Node3D:
+	if _camera == null:
+		return null
+	var best: Node3D = null
+	var best_d := 1.0e9
+	for n in get_tree().get_nodes_in_group("vr_editable_artifact"):
+		if not (n is Node3D):
+			continue
+		var center := _visual_center(n)
+		if _camera.is_position_behind(center):
+			continue
+		var d := _camera.unproject_position(center).distance_to(screen_pos)
+		if d < best_d:
+			best_d = d
+			best = n
+	return best if best_d <= 90.0 else null
+
+
+func _visual_center(n: Node3D) -> Vector3:
+	# World-space centre of the prop's visible meshes, so a click on the BODY
+	# selects it (not just its base origin). Particles excluded (huge AABBs).
+	var box := AABB()
+	var found := false
+	var stack: Array = [n]
+	while not stack.is_empty():
+		var node = stack.pop_back()
+		for ch in node.get_children():
+			stack.append(ch)
+		if node is VisualInstance3D and not (node is GPUParticles3D):
+			var gb: AABB = (node as VisualInstance3D).global_transform * (node as VisualInstance3D).get_aabb()
+			if not found:
+				box = gb
+				found = true
+			else:
+				box = box.merge(gb)
+	return box.get_center() if found else n.global_position
+
+
+func _clear_selection() -> void:
+	_selected_lookup = ""
 	for c in _inspector.get_children():
 		c.queue_free()
 	_inspector.add_child(_heading("INSPECTOR"))
