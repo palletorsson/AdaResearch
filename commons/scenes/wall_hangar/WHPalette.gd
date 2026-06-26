@@ -38,6 +38,7 @@ var _count_label: Label = null
 var _title: Label = null
 var _reg_only: Array = []      # if non-empty, show only these registries
 var _reg_skip: Array = []      # always hide these registries
+var _exclude_lookups: Dictionary = {}   # hide these specific lookup_names
 
 
 func _ready() -> void:
@@ -84,7 +85,18 @@ func set_title(t: String) -> void:
 		_title.text = t
 
 
+## Hide specific lookup_names (e.g. the DNA props that live in the bottom bar).
+func set_exclude_lookups(lookups: Array) -> void:
+	_exclude_lookups.clear()
+	for l in lookups:
+		_exclude_lookups[str(l)] = true
+	_rebuild_categories()
+	_refresh_list()
+
+
 func _passes_registry(it: Dictionary) -> bool:
+	if _exclude_lookups.has(str(it.get("lookup_name", ""))):
+		return false
 	var reg := str(it.get("registry", ""))
 	if _reg_skip.has(reg):
 		return false

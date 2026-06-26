@@ -23,6 +23,7 @@ const SAVE_PATH := "user://wall_hangar_layout.json"
 const REGISTRY_DIR := "res://commons/artifacts/registry"
 const NEIGHBORS_PATH := "res://commons/data/artifact_neighbors.json"
 const SPINE_WALLS_PATH := "res://commons/data/spine_walls.json"
+const DNA_PROPS_PATH := "res://commons/data/dna_props.json"
 # Lookup-names that mount on the wall (everything else falls to the floor + stacks).
 const WALL_SET := ["station_panel", "station_frame", "framed_readout_screen"]
 # Registries treated as staging PROPS (bottom bar); everything else = artifacts (left).
@@ -46,7 +47,10 @@ var _depth_level := 1
 var _selected: Node3D = null
 var _sel_box: MeshInstance3D = null
 var _scene_map: Dictionary = {}    # lookup_name -> scene path (all registries)
-var _prop_lookups: Array = []      # lookups from the PROP registries (the bottom bar)
+var _dna_props: Array = []         # canonical prop lookups (props-dna-gallery, no workbenches)
+var _prop_lookups: Array = []      # _dna_props that have a scene here (the bottom bar)
+var _props_filter: LineEdit = null
+var _props_flow: HFlowContainer = null
 var _palette: PanelContainer = null
 var _insp: PanelContainer = null
 var _hud: Control = null
@@ -89,6 +93,15 @@ func _load_data() -> void:
 					var tk := str(p.get("token", ""))
 					if not tk.begins_with("station_") and not _artifact_seq.has(tk):
 						_artifact_seq[tk] = seq
+	# Canonical prop set (props-dna-gallery, workbenches excluded) -> the bottom bar.
+	if FileAccess.file_exists(DNA_PROPS_PATH):
+		var dp = JSON.parse_string(FileAccess.get_file_as_string(DNA_PROPS_PATH))
+		if dp is Dictionary and dp.get("props") is Array:
+			_dna_props = dp["props"]
+	_prop_lookups = []
+	for p in _dna_props:
+		if _scene_map.has(str(p)):
+			_prop_lookups.append(str(p))
 
 
 func _build_scene_map() -> void:
@@ -98,7 +111,6 @@ func _build_scene_map() -> void:
 	for f in dir.get_files():
 		if not str(f).ends_with(".json"):
 			continue
-		var is_prop: bool = str(f).get_basename() in PROP_REGISTRIES
 		var d = JSON.parse_string(FileAccess.get_file_as_string("%s/%s" % [REGISTRY_DIR, f]))
 		var table = d
 		if d is Dictionary and d.has("artifacts") and d["artifacts"] is Dictionary:
@@ -109,9 +121,6 @@ func _build_scene_map() -> void:
 				if e is Dictionary and e.has("scene"):
 					var lookup := str(e.get("lookup_name", k))
 					_scene_map[lookup] = str(e["scene"])
-					if is_prop and not _prop_lookups.has(lookup):
-						_prop_lookups.append(lookup)
-	_prop_lookups.sort()
 
 
 # ── World (floor + long wall) ─────────────────────────────────────────
@@ -171,12 +180,12 @@ func _build_ui() -> void:
 	_palette.offset_left = 8
 	_palette.offset_right = 340
 	_palette.offset_top = 86
-	_palette.offset_bottom = -70
+	_palette.offset_bottom = -184
 	layer.add_child(_palette)
 	if _palette.has_method("set_wall_tokens"):
 		_palette.set_wall_tokens(WALL_SET)
-	if _palette.has_method("set_registries"):
-		_palette.set_registries([], PROP_REGISTRIES)   # artifacts only — props go to the bottom bar
+	if _palette.has_method("set_exclude_lookups"):
+		_palette.set_exclude_lookups(_prop_lookups)   # artifacts only — the DNA props live in the bottom bar
 	if _palette.has_method("set_title"):
 		_palette.set_title("ARTIFACTS")
 	_palette.picked.connect(_pick)
@@ -211,33 +220,59 @@ func _build_ui() -> void:
 func _build_props_bar(layer: CanvasLayer) -> void:
 	var bar := PanelContainer.new()
 	bar.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_WIDE)
-	bar.offset_top = -64
+	bar.offset_top = -178   # tall enough for ~4-5 wrapped rows + the filter
 	bar.add_theme_stylebox_override("panel", WHStyle.toolbar_box())
 	layer.add_child(bar)
 	var vb := VBoxContainer.new()
+	vb.add_theme_constant_override("separation", 5)
 	bar.add_child(vb)
+	var headrow := HBoxContainer.new()
+	headrow.add_theme_constant_override("separation", 10)
+	vb.add_child(headrow)
 	var head := Label.new()
 	head.text = "PROPS"
 	head.add_theme_color_override("font_color", C_ACCENT)
-	head.add_theme_font_size_override("font_size", 11)
-	vb.add_child(head)
+	head.add_theme_font_size_override("font_size", 12)
+	headrow.add_child(head)
+	_props_filter = LineEdit.new()
+	_props_filter.placeholder_text = "filter props…"
+	_props_filter.clear_button_enabled = true
+	_props_filter.custom_minimum_size = Vector2(240, 0)
+	_props_filter.text_changed.connect(func(_t): _refresh_props_bar())
+	headrow.add_child(_props_filter)
 	var scroll := ScrollContainer.new()
-	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO
-	scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO
 	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	vb.add_child(scroll)
-	var hb := HBoxContainer.new()
-	hb.add_theme_constant_override("separation", 6)
-	scroll.add_child(hb)
+	_props_flow = HFlowContainer.new()
+	_props_flow.add_theme_constant_override("h_separation", 5)
+	_props_flow.add_theme_constant_override("v_separation", 5)
+	_props_flow.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	scroll.add_child(_props_flow)
+	_refresh_props_bar()
+
+
+func _refresh_props_bar() -> void:
+	if _props_flow == null:
+		return
+	for c in _props_flow.get_children():
+		c.queue_free()
+	var needle := ""
+	if _props_filter != null:
+		needle = _props_filter.text.strip_edges().to_lower()
 	for lookup in _prop_lookups:
+		if needle != "" and not str(lookup).to_lower().contains(needle):
+			continue
 		var b := Button.new()
 		var is_wall: bool = lookup in WALL_SET
-		b.text = ("◰ " if is_wall else "") + str(lookup).replace("station_", "").replace("packaging_", "").replace("hangar_", "")
+		b.text = ("◰ " if is_wall else "") + str(lookup).replace("station_", "").replace("hangar_", "")
 		b.tooltip_text = str(lookup)
-		b.custom_minimum_size = Vector2(96, 32)
+		b.custom_minimum_size = Vector2(120, 30)
+		b.clip_text = true
 		WHStyle.style_button(b)
 		b.pressed.connect(_pick.bind(str(lookup)))
-		hb.add_child(b)
+		_props_flow.add_child(b)
 
 
 # ── Pick / stamp / select / grab ──────────────────────────────────────
@@ -604,7 +639,7 @@ func _build_nearby(layer: CanvasLayer) -> void:
 	panel.offset_left = -290
 	panel.offset_right = -8
 	panel.offset_top = 482
-	panel.offset_bottom = -72
+	panel.offset_bottom = -184
 	panel.add_theme_stylebox_override("panel", WHStyle.panel_box())
 	layer.add_child(panel)
 	var vb := VBoxContainer.new()
