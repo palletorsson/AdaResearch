@@ -121,15 +121,27 @@ func _load_map(map_name: String) -> void:
 	var dims := Vector3i(12, 1, 12)
 	if _grid.has_method("get_grid_dimensions"):
 		dims = _grid.get_grid_dimensions()
+	# total_size = cube_size + gutter — the real grid spacing the structure uses
+	# (cube N is at world N*total_size). Must match for world<->cell conversion.
 	var cs := 1.0
+	var gut := 0.0
 	if "cube_size" in _grid:
 		cs = float(_grid.cube_size)
+	if "gutter" in _grid:
+		gut = float(_grid.gutter)
+	var st = _grid.get_structure_component() if _grid.has_method("get_structure_component") else null
+	if st:
+		if "cube_size" in st:
+			cs = float(st.cube_size)
+		if "gutter" in st:
+			gut = float(st.gutter)
 	_dims = dims
-	_cs = cs
+	_cs = cs + gut
 	_load_inter_grid()
-	_orbit_center = Vector3(dims.x * 0.5 * cs, 0.0, dims.z * 0.5 * cs)
-	_orbit_radius = maxf(float(dims.x), float(dims.z)) * cs * 1.15 + 9.0
+	_orbit_center = Vector3(dims.x * 0.5 * _cs, 0.0, dims.z * 0.5 * _cs)
+	_orbit_radius = maxf(float(dims.x), float(dims.z)) * _cs * 1.15 + 9.0
 	_update_camera()
+	print("[hangar] map '%s' dims=%s total_size=%.3f" % [_current_map, str(dims), _cs])
 
 
 func _load_inter_grid() -> void:
@@ -398,10 +410,20 @@ func _place(lookup: String, world_pos: Vector3) -> void:
 	# Sit on the floor surface (the highest cube layer), exactly like the game —
 	# GridInteractablesComponent.generate_interactables uses find_highest_y_at too.
 	var y_pos := _floor_y(gx, gz)
+	print("[hangar] place %s hit=%s -> cell=(%d,%d) y_pos=%d world_y=%.3f ts=%.3f" % [lookup, str(world_pos), gx, gz, y_pos, y_pos * _cs, _cs])
 	inter._place_artifact(gx, y_pos, gz, lookup, _cs)
 	_inter_grid[gz][gx] = lookup
+	call_deferred("_report_settled", gx, gz, lookup)
 	_selected_lookup = lookup
 	_show_inspector(lookup, Vector3i(gx, y_pos, gz))
+
+
+func _report_settled(gx: int, gz: int, lookup: String) -> void:
+	await get_tree().process_frame
+	await get_tree().process_frame
+	var n := _artifact_at_cell(gx, gz)
+	if n and is_instance_valid(n):
+		print("[hangar] settled %s world_y=%.3f" % [lookup, n.global_position.y])
 
 
 func _floor_y(gx: int, gz: int) -> int:
