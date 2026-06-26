@@ -21,6 +21,8 @@ const PAN_SPEED := 12.0
 const PAN_LIMIT := 20.0
 const SAVE_PATH := "user://wall_hangar_layout.json"
 const REGISTRY_DIR := "res://commons/artifacts/registry"
+const NEIGHBORS_PATH := "res://commons/data/artifact_neighbors.json"
+const SPINE_WALLS_PATH := "res://commons/data/spine_walls.json"
 # Lookup-names that mount on the wall (everything else falls to the floor + stacks).
 const WALL_SET := ["station_panel", "station_frame", "framed_readout_screen"]
 # Registries treated as staging PROPS (bottom bar); everything else = artifacts (left).
@@ -48,13 +50,30 @@ var _prop_lookups: Array = []      # lookups from the PROP registries (the botto
 var _palette: PanelContainer = null
 var _insp: PanelContainer = null
 var _hud: Control = null
+var _neighbors: Dictionary = {}    # lookup -> [{id, name, sim}, ...]
+var _spine_walls: Dictionary = {}  # MapName -> {sequence, small_count, pieces}
+var _map_select: OptionButton = null
+var _nearby_list: VBoxContainer = null
+var _nearby_head: Label = null
 
 
 func _ready() -> void:
 	_build_scene_map()
+	_load_data()
 	_build_world()
 	_build_camera()
 	_build_ui()
+
+
+func _load_data() -> void:
+	if FileAccess.file_exists(NEIGHBORS_PATH):
+		var d = JSON.parse_string(FileAccess.get_file_as_string(NEIGHBORS_PATH))
+		if d is Dictionary:
+			_neighbors = d
+	if FileAccess.file_exists(SPINE_WALLS_PATH):
+		var d = JSON.parse_string(FileAccess.get_file_as_string(SPINE_WALLS_PATH))
+		if d is Dictionary:
+			_spine_walls = d
 
 
 func _build_scene_map() -> void:
@@ -136,7 +155,7 @@ func _build_ui() -> void:
 	_palette.set_anchors_and_offsets_preset(Control.PRESET_LEFT_WIDE)
 	_palette.offset_left = 8
 	_palette.offset_right = 340
-	_palette.offset_top = 50
+	_palette.offset_top = 86
 	_palette.offset_bottom = -70
 	layer.add_child(_palette)
 	if _palette.has_method("set_wall_tokens"):
@@ -146,6 +165,8 @@ func _build_ui() -> void:
 	if _palette.has_method("set_title"):
 		_palette.set_title("ARTIFACTS")
 	_palette.picked.connect(_pick)
+	_build_map_select(layer)
+	_build_nearby(layer)
 
 	_insp = WHInspector.new()
 	_insp.set_anchors_and_offsets_preset(Control.PRESET_TOP_RIGHT)
@@ -265,7 +286,8 @@ func _select_at_mouse() -> void:
 		_update_selbox()
 		if _insp != null and _insp.has_method("show_node"):
 			_insp.show_node(n)
-		_status("selected %s — edit values right · G move · Del remove" % str(n.get_meta("token", n.name)))
+		_show_nearby(str(n.get_meta("token", "")))
+		_status("selected %s — edit right · nearby below · G move · Del remove" % str(n.get_meta("token", n.name)))
 	else:
 		_deselect()
 
@@ -310,6 +332,7 @@ func _deselect() -> void:
 		_sel_box.visible = false
 	if _insp != null and _insp.has_method("clear"):
 		_insp.clear()
+	_show_nearby("")
 
 
 func _on_insp_rebuilt(node: Node3D) -> void:
@@ -421,25 +444,11 @@ func _on_load() -> void:
 	if not FileAccess.file_exists(SAVE_PATH):
 		_status("no saved layout")
 		return
-	_on_clear()
 	var d = JSON.parse_string(FileAccess.get_file_as_string(SAVE_PATH))
 	if not (d is Dictionary):
 		return
 	var pieces: Array = d.get("pieces", [])
-	for item in pieces:
-		if not (item is Dictionary):
-			continue
-		var token := str(item.get("token", ""))
-		var path: String = _scene_map.get(token, "")
-		if path == "" or not ResourceLoader.exists(path):
-			continue
-		var inst: Node = load(path).instantiate()
-		inst.set_meta("token", token)
-		inst.set_meta("wall_piece", bool(item.get("wall", false)))
-		add_child(inst)
-		if inst is Node3D:
-			(inst as Node3D).global_position = Vector3(item.get("x", 0.0), item.get("y", 0.0), item.get("z", 0.0))
-		_placed.append(inst)
+	_load_wall(pieces)
 	_status("loaded %d pieces" % pieces.size())
 
 
@@ -544,3 +553,125 @@ func _hud_depth() -> void:
 func _status(msg: String) -> void:
 	if _hud != null and _hud.has_method("set_status"):
 		_hud.set_status(msg)
+
+
+# ── Spine-wall loading + ontological neighbours ───────────────────────
+func _build_map_select(layer: CanvasLayer) -> void:
+	var row := HBoxContainer.new()
+	row.position = Vector2(12, 48)
+	row.add_theme_constant_override("separation", 6)
+	layer.add_child(row)
+	var lbl := Label.new()
+	lbl.text = "MAP"
+	lbl.add_theme_color_override("font_color", C_ACCENT)
+	lbl.add_theme_font_size_override("font_size", 12)
+	row.add_child(lbl)
+	_map_select = OptionButton.new()
+	_map_select.custom_minimum_size = Vector2(300, 28)
+	WHStyle.style_button(_map_select)
+	_map_select.add_item("— load a spine map's wall —", 0)
+	var keys := _spine_walls.keys()
+	keys.sort()
+	for k in keys:
+		var entry: Variant = _spine_walls[k]
+		var seq := ""
+		if entry is Dictionary:
+			seq = str(entry.get("sequence", ""))
+		_map_select.add_item("%s   (%s)" % [str(k), seq])
+		_map_select.set_item_metadata(_map_select.item_count - 1, str(k))
+	_map_select.item_selected.connect(_on_map_picked)
+	row.add_child(_map_select)
+
+
+func _build_nearby(layer: CanvasLayer) -> void:
+	var panel := PanelContainer.new()
+	panel.set_anchors_and_offsets_preset(Control.PRESET_TOP_RIGHT)
+	panel.offset_left = -290
+	panel.offset_right = -8
+	panel.offset_top = 482
+	panel.offset_bottom = -72
+	panel.add_theme_stylebox_override("panel", WHStyle.panel_box())
+	layer.add_child(panel)
+	var vb := VBoxContainer.new()
+	panel.add_child(vb)
+	_nearby_head = Label.new()
+	_nearby_head.text = "NEARBY"
+	_nearby_head.add_theme_color_override("font_color", C_ACCENT)
+	_nearby_head.add_theme_font_size_override("font_size", 13)
+	vb.add_child(_nearby_head)
+	var hint := Label.new()
+	hint.text = "select an artifact to see kin to add"
+	hint.add_theme_color_override("font_color", Color(0.58, 0.60, 0.64))
+	hint.add_theme_font_size_override("font_size", 11)
+	vb.add_child(hint)
+	var scroll := ScrollContainer.new()
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	vb.add_child(scroll)
+	_nearby_list = VBoxContainer.new()
+	_nearby_list.add_theme_constant_override("separation", 3)
+	_nearby_list.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	scroll.add_child(_nearby_list)
+
+
+func _show_nearby(token: String) -> void:
+	if _nearby_list == null:
+		return
+	for c in _nearby_list.get_children():
+		c.queue_free()
+	var list: Variant = _neighbors.get(token, [])
+	var shown := 0
+	if list is Array:
+		for nb in list:
+			if not (nb is Dictionary):
+				continue
+			var id := str(nb.get("id", ""))
+			if not _scene_map.has(id):
+				continue   # only kin we can actually place
+			var b := Button.new()
+			b.text = "+ %s  ·  %.2f" % [str(nb.get("name", id)), float(nb.get("sim", 0.0))]
+			b.alignment = HORIZONTAL_ALIGNMENT_LEFT
+			b.clip_text = true
+			b.tooltip_text = id
+			b.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			WHStyle.style_button(b)
+			b.pressed.connect(_pick.bind(id))
+			_nearby_list.add_child(b)
+			shown += 1
+	if _nearby_head != null:
+		if token != "":
+			_nearby_head.text = "NEARBY (%d)" % shown
+		else:
+			_nearby_head.text = "NEARBY"
+
+
+func _on_map_picked(idx: int) -> void:
+	if idx <= 0 or _map_select == null:
+		return
+	var mapname := str(_map_select.get_item_metadata(idx))
+	var entry: Variant = _spine_walls.get(mapname, {})
+	if not (entry is Dictionary):
+		return
+	var pieces: Variant = entry.get("pieces", [])
+	if not (pieces is Array):
+		return
+	_load_wall(pieces)
+	_status("loaded %s — %d pieces (%d small)" % [mapname, pieces.size(), int(entry.get("small_count", 0))])
+
+
+func _load_wall(pieces: Array) -> void:
+	_on_clear()
+	for item in pieces:
+		if not (item is Dictionary):
+			continue
+		var token := str(item.get("token", ""))
+		var path: String = _scene_map.get(token, "")
+		if path == "" or not ResourceLoader.exists(path):
+			continue
+		var inst: Node = load(path).instantiate()
+		inst.set_meta("token", token)
+		inst.set_meta("wall_piece", bool(item.get("wall", false)))
+		add_child(inst)
+		if inst is Node3D:
+			(inst as Node3D).global_position = Vector3(item.get("x", 0.0), item.get("y", 0.0), item.get("z", 0.0))
+		_placed.append(inst)
