@@ -41,6 +41,10 @@ var _current_map := ""
 var _selected_lookup := ""
 var _inter_grid: Array = []             # local interactables layer [z][x] -> token
 var _dims := Vector3i.ZERO
+var _cs := 1.0                          # cube size of the active map
+var _drag_obj: Node3D = null            # placed artifact being moved
+var _drag_src := Vector2i.ZERO
+var _drag_lookup := ""
 
 var _map_list: ItemList
 var _palette_row: HBoxContainer
@@ -121,6 +125,7 @@ func _load_map(map_name: String) -> void:
 	if "cube_size" in _grid:
 		cs = float(_grid.cube_size)
 	_dims = dims
+	_cs = cs
 	_load_inter_grid()
 	_orbit_center = Vector3(dims.x * 0.5 * cs, 0.0, dims.z * 0.5 * cs)
 	_orbit_radius = maxf(float(dims.x), float(dims.z)) * cs * 1.15 + 9.0
@@ -380,22 +385,32 @@ func _raycast(screen_pos: Vector2) -> Dictionary:
 func _place(lookup: String, world_pos: Vector3) -> void:
 	if _grid == null:
 		return
-	var cs := 1.0
-	if "cube_size" in _grid:
-		cs = float(_grid.cube_size)
-	var gx := int(round(world_pos.x / cs))
-	var gz := int(round(world_pos.z / cs))
+	var gx := int(round(world_pos.x / _cs))
+	var gz := int(round(world_pos.z / _cs))
+	if gz < 0 or gz >= _inter_grid.size() or gx < 0 or gx >= _inter_grid[gz].size():
+		return  # outside the map grid
 	var inter = null
 	if _grid.has_method("get_interactables_component"):
 		inter = _grid.get_interactables_component()
-	if inter and inter.has_method("_place_artifact"):
-		inter._place_artifact(gx, 0, gz, lookup, cs)
-		if gz >= 0 and gz < _inter_grid.size() and gx >= 0 and gx < _inter_grid[gz].size():
-			_inter_grid[gz][gx] = lookup
-		_selected_lookup = lookup
-		_show_inspector(lookup, Vector3i(gx, 0, gz))
-	else:
+	if not (inter and inter.has_method("_place_artifact")):
 		push_warning("HangarEditor: interactables component / _place_artifact unavailable")
+		return
+	# Sit on the floor surface (the highest cube layer), exactly like the game —
+	# GridInteractablesComponent.generate_interactables uses find_highest_y_at too.
+	var y_pos := _floor_y(gx, gz)
+	inter._place_artifact(gx, y_pos, gz, lookup, _cs)
+	_inter_grid[gz][gx] = lookup
+	_selected_lookup = lookup
+	_show_inspector(lookup, Vector3i(gx, y_pos, gz))
+
+
+func _floor_y(gx: int, gz: int) -> int:
+	if _grid == null or not _grid.has_method("get_structure_component"):
+		return 0
+	var st = _grid.get_structure_component()
+	if st and st.has_method("find_highest_y_at"):
+		return int(st.find_highest_y_at(gx, gz))
+	return 0
 
 
 func _show_inspector(lookup: String, cell: Vector3i) -> void:
@@ -428,21 +443,122 @@ func _insp_row(k: String, v: String) -> void:
 	_inspector.add_child(row)
 
 
-# ── Viewport interaction (camera orbit + zoom + pick) ─────────────────
+# ── Viewport interaction ──────────────────────────────────────────────
+# RIGHT-drag orbit · wheel zoom · LEFT-click select · LEFT-drag move a
+# placed prop · SHIFT+LEFT-click delete · drag a palette tile in to add.
 func _on_viewport_gui(ev: InputEvent) -> void:
 	if ev is InputEventMouseButton:
-		if ev.button_index == MOUSE_BUTTON_RIGHT:
-			_dragging_cam = ev.pressed
-		elif ev.button_index == MOUSE_BUTTON_WHEEL_UP:
-			_orbit_radius = maxf(4.0, _orbit_radius - 2.0)
+		match ev.button_index:
+			MOUSE_BUTTON_RIGHT:
+				_dragging_cam = ev.pressed
+			MOUSE_BUTTON_WHEEL_UP:
+				_orbit_radius = maxf(4.0, _orbit_radius - 2.0)
+				_update_camera()
+			MOUSE_BUTTON_WHEEL_DOWN:
+				_orbit_radius = minf(120.0, _orbit_radius + 2.0)
+				_update_camera()
+			MOUSE_BUTTON_LEFT:
+				if ev.pressed:
+					_left_press(ev.position, ev.shift_pressed)
+				else:
+					_left_release(ev.position)
+	elif ev is InputEventMouseMotion:
+		if _dragging_cam:
+			_orbit_yaw -= ev.relative.x * 0.01
+			_orbit_pitch = clampf(_orbit_pitch + ev.relative.y * 0.01, 0.08, 1.5)
 			_update_camera()
-		elif ev.button_index == MOUSE_BUTTON_WHEEL_DOWN:
-			_orbit_radius = minf(120.0, _orbit_radius + 2.0)
-			_update_camera()
-	elif ev is InputEventMouseMotion and _dragging_cam:
-		_orbit_yaw -= ev.relative.x * 0.01
-		_orbit_pitch = clampf(_orbit_pitch + ev.relative.y * 0.01, 0.08, 1.5)
-		_update_camera()
+		elif _drag_obj != null:
+			_left_drag(ev.position)
+
+
+func _cell_at(screen_pos: Vector2) -> Vector2i:
+	var hit := _raycast(screen_pos)
+	if hit.is_empty():
+		return Vector2i(-9999, -9999)
+	return Vector2i(int(round(hit.position.x / _cs)), int(round(hit.position.z / _cs)))
+
+
+func _left_press(screen_pos: Vector2, shift: bool) -> void:
+	var cell := _cell_at(screen_pos)
+	if cell.x == -9999:
+		return
+	var node := _artifact_at_cell(cell.x, cell.y)
+	if node == null:
+		return
+	if shift:
+		_delete_artifact(node, cell.x, cell.y)
+		return
+	# Begin a move-drag (pick the prop up).
+	_drag_obj = node
+	_drag_src = cell
+	_drag_lookup = ""
+	if cell.y >= 0 and cell.y < _inter_grid.size() and cell.x >= 0 and cell.x < _inter_grid[cell.y].size():
+		_drag_lookup = str(_inter_grid[cell.y][cell.x])
+	_selected_lookup = _drag_lookup
+	_show_inspector(_drag_lookup, Vector3i(cell.x, _floor_y(cell.x, cell.y), cell.y))
+
+
+func _left_drag(screen_pos: Vector2) -> void:
+	if _drag_obj == null or not is_instance_valid(_drag_obj):
+		_drag_obj = null
+		return
+	var cell := _cell_at(screen_pos)
+	if cell.x == -9999:
+		return
+	var p := _drag_obj.position
+	p.x = cell.x * _cs
+	p.z = cell.y * _cs
+	_drag_obj.position = p
+
+
+func _left_release(screen_pos: Vector2) -> void:
+	if _drag_obj == null or not is_instance_valid(_drag_obj):
+		_drag_obj = null
+		return
+	var cell := _cell_at(screen_pos)
+	var sx := _drag_src.x
+	var sz := _drag_src.y
+	var in_bounds: bool = cell.y >= 0 and cell.y < _inter_grid.size() and cell.x >= 0 and cell.x < _inter_grid[cell.y].size()
+	if cell.x != -9999 and in_bounds and cell != _drag_src:
+		# Commit the move in data + the artifact's grid_cell meta (VR-edit convention).
+		if sz >= 0 and sz < _inter_grid.size() and sx >= 0 and sx < _inter_grid[sz].size():
+			_inter_grid[sz][sx] = " "
+		_inter_grid[cell.y][cell.x] = _drag_lookup
+		_drag_obj.set_meta("grid_cell", Vector2i(cell.x, cell.y))
+		_drag_obj.set_meta("vr_saved_cell", Vector2i(cell.x, cell.y))
+		var p := _drag_obj.position
+		p.x = cell.x * _cs
+		p.z = cell.y * _cs
+		p.y += (_floor_y(cell.x, cell.y) - _floor_y(sx, sz)) * _cs  # keep grounding across height changes
+		_drag_obj.position = p
+	else:
+		# Snap back to the source cell.
+		var p := _drag_obj.position
+		p.x = sx * _cs
+		p.z = sz * _cs
+		_drag_obj.position = p
+	_drag_obj = null
+
+
+func _artifact_at_cell(gx: int, gz: int) -> Node3D:
+	# Regular artifacts aren't in interactable_objects; they carry a grid_cell
+	# meta + the vr_editable_artifact group (the same handles VR edit-mode uses).
+	for n in get_tree().get_nodes_in_group("vr_editable_artifact"):
+		if n is Node3D and n.has_meta("grid_cell"):
+			var c: Vector2i = n.get_meta("grid_cell")
+			if c.x == gx and c.y == gz:
+				return n
+	return null
+
+
+func _delete_artifact(node: Node3D, gx: int, gz: int) -> void:
+	if gz >= 0 and gz < _inter_grid.size() and gx >= 0 and gx < _inter_grid[gz].size():
+		_inter_grid[gz][gx] = " "
+	if is_instance_valid(node):
+		node.queue_free()
+	for c in _inspector.get_children():
+		c.queue_free()
+	_inspector.add_child(_heading("INSPECTOR"))
 
 
 func _on_map_selected(idx: int) -> void:
