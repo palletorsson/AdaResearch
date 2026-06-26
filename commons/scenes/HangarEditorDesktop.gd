@@ -638,7 +638,7 @@ func _world_aabb(n: Node3D) -> AABB:
 		var node = stack.pop_back()
 		for ch in node.get_children():
 			stack.append(ch)
-		if node is VisualInstance3D and not (node is GPUParticles3D):
+		if node is VisualInstance3D and not (node is GPUParticles3D) and (node as VisualInstance3D).is_visible_in_tree():
 			var gb: AABB = (node as VisualInstance3D).global_transform * (node as VisualInstance3D).get_aabb()
 			if not found:
 				box = gb
