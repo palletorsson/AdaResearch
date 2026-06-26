@@ -296,11 +296,11 @@ func _create_vr_controls() -> void:
 			rst_area.button_pressed.connect(func(_b): _on_reset_pressed())
 
 func _sync_rule_slider() -> void:
-	if _rule_slider and _rule_slider.has_method("set_normalized_value"):
+	if is_instance_valid(_rule_slider) and _rule_slider.has_method("set_normalized_value"):
 		_rule_slider.set_normalized_value(float(rule) / 255.0)
 
 func _sync_speed_slider() -> void:
-	if _speed_slider and _speed_slider.has_method("set_normalized_value"):
+	if is_instance_valid(_speed_slider) and _speed_slider.has_method("set_normalized_value"):
 		_speed_slider.set_normalized_value((generations_per_second - 1.0) / 29.0)
 
 func _on_rule_slider_moved(_position) -> void:
@@ -323,6 +323,8 @@ func _on_reset_pressed() -> void:
 
 ## Update the rule label text with name if it's a famous rule
 func _update_rule_display() -> void:
+	if not is_instance_valid(_rule_label):
+		return
 	var rule_name = FAMOUS_RULES.get(rule, "")
 	if rule_name != "":
 		_rule_label.text = "RULE %d\n%s" % [rule, rule_name]
