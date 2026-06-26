@@ -413,17 +413,29 @@ func _place(lookup: String, world_pos: Vector3) -> void:
 	print("[hangar] place %s hit=%s -> cell=(%d,%d) y_pos=%d world_y=%.3f ts=%.3f" % [lookup, str(world_pos), gx, gz, y_pos, y_pos * _cs, _cs])
 	inter._place_artifact(gx, y_pos, gz, lookup, _cs)
 	_inter_grid[gz][gx] = lookup
-	call_deferred("_report_settled", gx, gz, lookup)
+	call_deferred("_settle_on_floor", gx, gz, lookup, float(y_pos) * _cs)
 	_selected_lookup = lookup
 	_show_inspector(lookup, Vector3i(gx, y_pos, gz))
 
 
-func _report_settled(gx: int, gz: int, lookup: String) -> void:
+func _settle_on_floor(gx: int, gz: int, lookup: String, target_y: float) -> void:
+	# Force the visible base onto the floor: target = y_pos*total_size, where the
+	# game's auto-grounded artifacts land. Station props (HangarKit) build their
+	# geometry deferred, so the component's 1-frame auto-ground measures nothing
+	# and they float; this runs after 2 frames (geometry exists) and applies to
+	# ALL props, so dropped props match the regular artifacts.
 	await get_tree().process_frame
 	await get_tree().process_frame
 	var n := _artifact_at_cell(gx, gz)
-	if n and is_instance_valid(n):
-		print("[hangar] settled %s world_y=%.3f" % [lookup, n.global_position.y])
+	if not (n and is_instance_valid(n)):
+		return
+	var box := _world_aabb(n)
+	if box.size.y <= 0.001:
+		return
+	var shift := target_y - box.position.y    # box.position.y = world min y (base)
+	if absf(shift) > 0.003 and absf(shift) < 6.0:
+		n.global_position.y += shift
+		print("[hangar] settle %s base %.3f -> %.3f (shift %.3f)" % [lookup, box.position.y, target_y, shift])
 
 
 func _floor_y(gx: int, gz: int) -> int:
@@ -604,7 +616,14 @@ func _prop_near_screen(screen_pos: Vector2) -> Node3D:
 
 func _visual_center(n: Node3D) -> Vector3:
 	# World-space centre of the prop's visible meshes, so a click on the BODY
-	# selects it (not just its base origin). Particles excluded (huge AABBs).
+	# selects it (not just its base origin).
+	var box := _world_aabb(n)
+	return box.get_center() if box.size.length() > 0.0 else n.global_position
+
+
+func _world_aabb(n: Node3D) -> AABB:
+	# Union of the prop's visible mesh AABBs in WORLD space. Particles excluded
+	# (their visibility AABB is not the solid footprint and would skew the base).
 	var box := AABB()
 	var found := false
 	var stack: Array = [n]
@@ -619,7 +638,7 @@ func _visual_center(n: Node3D) -> Vector3:
 				found = true
 			else:
 				box = box.merge(gb)
-	return box.get_center() if found else n.global_position
+	return box if found else AABB()
 
 
 func _clear_selection() -> void:
