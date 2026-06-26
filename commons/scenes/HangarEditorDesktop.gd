@@ -413,32 +413,36 @@ func _place(lookup: String, world_pos: Vector3) -> void:
 	print("[hangar] place %s hit=%s -> cell=(%d,%d) y_pos=%d world_y=%.3f ts=%.3f" % [lookup, str(world_pos), gx, gz, y_pos, y_pos * _cs, _cs])
 	inter._place_artifact(gx, y_pos, gz, lookup, _cs)
 	_inter_grid[gz][gx] = lookup
-	call_deferred("_settle_on_floor", gx, gz, lookup, float(y_pos) * _cs)
+	# Target the floor surface the ray actually hit (world_pos.y) — robust to the
+	# base_cube's mesh offset / centering, which y_pos*total_size doesn't know.
+	call_deferred("_settle_on_floor", gx, gz, lookup, world_pos.y)
 	_selected_lookup = lookup
 	_show_inspector(lookup, Vector3i(gx, y_pos, gz))
 
 
 func _settle_on_floor(gx: int, gz: int, lookup: String, target_y: float) -> void:
-	# Force the visible base onto the floor: target = y_pos*total_size, where the
-	# game's auto-grounded artifacts land. Station props (HangarKit) build their
-	# geometry DEFERRED and at varying speeds — a single early measurement can
-	# catch a PARTIAL shape (e.g. only the cabinet on top) and mis-ground it UP.
-	# Re-settle at increasing delays until geometry is built; each pass snaps the
-	# visible base to target, so it converges (idempotent once fully built).
-	for delay in [0.08, 0.25, 0.6]:
-		await get_tree().create_timer(delay).timeout
-		var n := _artifact_at_cell(gx, gz)
+	# Snap the prop's visible base onto the floor surface (target_y = the ray hit).
+	# HangarKit station props build geometry DEFERRED at varying speeds, so re-snap
+	# every frame for ~0.8s: once the full shape exists the base converges to target
+	# and the shift settles to ~0. Overrides the component's 1-frame auto-ground.
+	var n: Node3D = null
+	var final_base := 999.0
+	for _i in range(48):
+		await get_tree().process_frame
+		n = _artifact_at_cell(gx, gz)
 		if not (n and is_instance_valid(n)):
 			return
 		var box := _world_aabb(n)
 		if box.size.y <= 0.001:
 			continue
-		var shift := target_y - box.position.y    # box.position.y = world min y (base)
-		print("[hangar] settle %s d=%.2f base=%.3f target=%.3f shift=%.3f" % [lookup, delay, box.position.y, target_y, shift])
-		if absf(shift) > 0.003 and absf(shift) < 6.0:
+		final_base = box.position.y    # world min y (base)
+		var shift := target_y - final_base
+		if absf(shift) > 0.002 and absf(shift) < 8.0:
 			var gp := n.global_position
 			gp.y += shift
 			n.global_position = gp
+			final_base = target_y
+	print("[hangar] settled %s base=%.3f target=%.3f" % [lookup, final_base, target_y])
 
 
 func _floor_y(gx: int, gz: int) -> int:
