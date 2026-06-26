@@ -55,6 +55,8 @@ var _spine_walls: Dictionary = {}  # MapName -> {sequence, small_count, pieces}
 var _map_select: OptionButton = null
 var _nearby_list: VBoxContainer = null
 var _nearby_head: Label = null
+var _artifact_seq: Dictionary = {}    # content lookup -> its spine sequence (nearby weighting)
+var _current_seq: String = ""         # sequence of the currently loaded map
 
 
 func _ready() -> void:
@@ -74,6 +76,19 @@ func _load_data() -> void:
 		var d = JSON.parse_string(FileAccess.get_file_as_string(SPINE_WALLS_PATH))
 		if d is Dictionary:
 			_spine_walls = d
+	# Map each spine small-item -> its sequence, for in-domain nearby weighting.
+	for mapname in _spine_walls.keys():
+		var entry: Variant = _spine_walls[mapname]
+		if not (entry is Dictionary):
+			continue
+		var seq := str(entry.get("sequence", ""))
+		var ps: Variant = entry.get("pieces", [])
+		if ps is Array:
+			for p in ps:
+				if p is Dictionary:
+					var tk := str(p.get("token", ""))
+					if not tk.begins_with("station_") and not _artifact_seq.has(tk):
+						_artifact_seq[tk] = seq
 
 
 func _build_scene_map() -> void:
@@ -619,8 +634,11 @@ func _show_nearby(token: String) -> void:
 		return
 	for c in _nearby_list.get_children():
 		c.queue_free()
+	# Partition placeable kin by whether they share the loaded map's sequence —
+	# in-domain (★, accent) first, then the rest, each group kept in similarity order.
+	var same: Array = []
+	var other: Array = []
 	var list: Variant = _neighbors.get(token, [])
-	var shown := 0
 	if list is Array:
 		for nb in list:
 			if not (nb is Dictionary):
@@ -628,21 +646,35 @@ func _show_nearby(token: String) -> void:
 			var id := str(nb.get("id", ""))
 			if not _scene_map.has(id):
 				continue   # only kin we can actually place
-			var b := Button.new()
-			b.text = "+ %s  ·  %.2f" % [str(nb.get("name", id)), float(nb.get("sim", 0.0))]
-			b.alignment = HORIZONTAL_ALIGNMENT_LEFT
-			b.clip_text = true
-			b.tooltip_text = id
-			b.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-			WHStyle.style_button(b)
-			b.pressed.connect(_pick.bind(id))
-			_nearby_list.add_child(b)
-			shown += 1
+			if _current_seq != "" and str(_artifact_seq.get(id, "")) == _current_seq:
+				same.append(nb)
+			else:
+				other.append(nb)
+	var ordered: Array = same + other
+	for nb in ordered:
+		var id := str(nb.get("id", ""))
+		var in_seq: bool = _current_seq != "" and str(_artifact_seq.get(id, "")) == _current_seq
+		var b := Button.new()
+		b.text = ("★ " if in_seq else "+ ") + ("%s  ·  %.2f" % [str(nb.get("name", id)), float(nb.get("sim", 0.0))])
+		b.alignment = HORIZONTAL_ALIGNMENT_LEFT
+		b.clip_text = true
+		var tip := id
+		if in_seq:
+			tip += "   (in " + _current_seq + ")"
+		b.tooltip_text = tip
+		b.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		WHStyle.style_button(b)
+		if in_seq:
+			b.add_theme_color_override("font_color", C_ACCENT)
+		b.pressed.connect(_pick.bind(id))
+		_nearby_list.add_child(b)
 	if _nearby_head != null:
-		if token != "":
-			_nearby_head.text = "NEARBY (%d)" % shown
-		else:
+		if token == "":
 			_nearby_head.text = "NEARBY"
+		elif same.size() > 0:
+			_nearby_head.text = "NEARBY (%d · ★%d in seq)" % [ordered.size(), same.size()]
+		else:
+			_nearby_head.text = "NEARBY (%d)" % ordered.size()
 
 
 func _on_map_picked(idx: int) -> void:
@@ -655,6 +687,7 @@ func _on_map_picked(idx: int) -> void:
 	var pieces: Variant = entry.get("pieces", [])
 	if not (pieces is Array):
 		return
+	_current_seq = str(entry.get("sequence", ""))
 	_load_wall(pieces)
 	_status("loaded %s — %d pieces (%d small)" % [mapname, pieces.size(), int(entry.get("small_count", 0))])
 
@@ -675,3 +708,28 @@ func _load_wall(pieces: Array) -> void:
 		if inst is Node3D:
 			(inst as Node3D).global_position = Vector3(item.get("x", 0.0), item.get("y", 0.0), item.get("z", 0.0))
 		_placed.append(inst)
+	call_deferred("_settle_loaded")
+
+
+func _settle_loaded() -> void:
+	# Let the deferred-built geometry settle, then re-seat each CONTENT artifact onto
+	# the plinth beneath it at its REAL measured height (the generator used a fixed
+	# 1.0 m plinth-top guess, so tall/short small items sat a touch off).
+	for _i in range(40):
+		await get_tree().process_frame
+	for n in _placed:
+		if not is_instance_valid(n):
+			continue
+		if bool(n.get_meta("wall_piece", false)):
+			continue
+		if str(n.get_meta("token", "")).begins_with("station_"):
+			continue   # a staging prop, not the content artifact
+		var box := _world_aabb(n)
+		if box.size.y <= 0.001:
+			continue
+		var target := _stack_top(n.global_position.x, n.global_position.z, n)
+		var shift := target - box.position.y
+		if absf(shift) > 0.003 and absf(shift) < 6.0:
+			var gp: Vector3 = n.global_position
+			gp.y += shift
+			n.global_position = gp
