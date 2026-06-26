@@ -421,21 +421,24 @@ func _place(lookup: String, world_pos: Vector3) -> void:
 func _settle_on_floor(gx: int, gz: int, lookup: String, target_y: float) -> void:
 	# Force the visible base onto the floor: target = y_pos*total_size, where the
 	# game's auto-grounded artifacts land. Station props (HangarKit) build their
-	# geometry deferred, so the component's 1-frame auto-ground measures nothing
-	# and they float; this runs after 2 frames (geometry exists) and applies to
-	# ALL props, so dropped props match the regular artifacts.
-	await get_tree().process_frame
-	await get_tree().process_frame
-	var n := _artifact_at_cell(gx, gz)
-	if not (n and is_instance_valid(n)):
-		return
-	var box := _world_aabb(n)
-	if box.size.y <= 0.001:
-		return
-	var shift := target_y - box.position.y    # box.position.y = world min y (base)
-	if absf(shift) > 0.003 and absf(shift) < 6.0:
-		n.global_position.y += shift
-		print("[hangar] settle %s base %.3f -> %.3f (shift %.3f)" % [lookup, box.position.y, target_y, shift])
+	# geometry DEFERRED and at varying speeds — a single early measurement can
+	# catch a PARTIAL shape (e.g. only the cabinet on top) and mis-ground it UP.
+	# Re-settle at increasing delays until geometry is built; each pass snaps the
+	# visible base to target, so it converges (idempotent once fully built).
+	for delay in [0.08, 0.25, 0.6]:
+		await get_tree().create_timer(delay).timeout
+		var n := _artifact_at_cell(gx, gz)
+		if not (n and is_instance_valid(n)):
+			return
+		var box := _world_aabb(n)
+		if box.size.y <= 0.001:
+			continue
+		var shift := target_y - box.position.y    # box.position.y = world min y (base)
+		print("[hangar] settle %s d=%.2f base=%.3f target=%.3f shift=%.3f" % [lookup, delay, box.position.y, target_y, shift])
+		if absf(shift) > 0.003 and absf(shift) < 6.0:
+			var gp := n.global_position
+			gp.y += shift
+			n.global_position = gp
 
 
 func _floor_y(gx: int, gz: int) -> int:
