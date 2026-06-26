@@ -464,6 +464,14 @@ func _show_inspector(lookup: String, cell: Vector3i) -> void:
 	_insp_row("cell", "%d, %d, %d" % [cell.x, cell.y, cell.z])
 	if meta.has("category"):
 		_insp_row("category", str(meta["category"]))
+	# Live grounding readout (visible in screenshots) — select a prop to see where
+	# its base actually sits vs the floor it was dropped on.
+	var node := _artifact_at_cell(cell.x, cell.z)
+	if node and is_instance_valid(node):
+		var box := _world_aabb(node)
+		_insp_row("pos.y", "%.3f" % node.global_position.y)
+		_insp_row("base.y", "%.3f" % box.position.y)
+		_insp_row("top.y", "%.3f" % (box.position.y + box.size.y))
 
 
 func _insp_row(k: String, v: String) -> void:
