@@ -38,6 +38,12 @@ const C_ACCENT := Color(0.86, 0.40, 0.16)
 
 var _camera: Camera3D = null
 var _pan_x := 0.0
+var _free_cam := false             # false = iso front (ortho), true = free 3D orbit/fly
+var _orbit_yaw := 0.6
+var _orbit_pitch := 0.5
+var _orbit_radius := 16.0
+var _orbit_center := Vector3(0.0, 1.5, 1.0)
+var _orbit_drag := false
 var _placed: Array = []
 var _held: Node3D = null
 var _held_type := ""
@@ -214,7 +220,7 @@ func _build_ui() -> void:
 		_hud.clear_requested.connect(_on_clear)
 	_build_props_bar(layer)
 	_hud_depth()
-	_status("ARTIFACTS left · PROPS bottom — pick one, 0-9 depth, LMB to stamp")
+	_status("ARTIFACTS left · PROPS bottom · pick one, 0-9 depth, LMB stamp · C = free 3D cam")
 
 
 func _build_props_bar(layer: CanvasLayer) -> void:
@@ -394,7 +400,10 @@ func _on_insp_rebuilt(node: Node3D) -> void:
 
 # ── Per-frame: pan + ghost follow with depth + two-gravity snap ────────
 func _process(delta: float) -> void:
-	_update_pan(delta)
+	if _free_cam:
+		_update_free_move(delta)
+	else:
+		_update_pan(delta)
 	if _held != null and is_instance_valid(_held):
 		var w := _mouse_on_wall_plane()
 		var x := snappedf(w.x, GRID)
@@ -422,8 +431,15 @@ func _update_pan(delta: float) -> void:
 
 
 func _unhandled_input(ev: InputEvent) -> void:
-	if ev is InputEventMouseButton and ev.pressed:
-		match (ev as InputEventMouseButton).button_index:
+	if ev is InputEventMouseButton:
+		var mb := ev as InputEventMouseButton
+		if mb.button_index == MOUSE_BUTTON_MIDDLE:
+			if _free_cam:
+				_orbit_drag = mb.pressed   # middle-drag orbits in free mode
+			return
+		if not mb.pressed:
+			return
+		match mb.button_index:
 			MOUSE_BUTTON_LEFT:
 				if _held != null and is_instance_valid(_held):
 					_commit()
@@ -432,15 +448,31 @@ func _unhandled_input(ev: InputEvent) -> void:
 			MOUSE_BUTTON_RIGHT:
 				_remove_at_mouse()
 			MOUSE_BUTTON_WHEEL_UP, MOUSE_BUTTON_WHEEL_LEFT:
-				_pan(-1.0)
+				if _free_cam:
+					_orbit_radius = maxf(2.0, _orbit_radius - 1.5)
+					_update_free_cam()
+				else:
+					_pan(-1.0)
 			MOUSE_BUTTON_WHEEL_DOWN, MOUSE_BUTTON_WHEEL_RIGHT:
-				_pan(1.0)
+				if _free_cam:
+					_orbit_radius = minf(70.0, _orbit_radius + 1.5)
+					_update_free_cam()
+				else:
+					_pan(1.0)
+	elif ev is InputEventMouseMotion:
+		if _free_cam and _orbit_drag:
+			var mm := ev as InputEventMouseMotion
+			_orbit_yaw -= mm.relative.x * 0.01
+			_orbit_pitch = clampf(_orbit_pitch + mm.relative.y * 0.01, -1.45, 1.45)
+			_update_free_cam()
 	elif ev is InputEventKey and ev.pressed and not ev.echo:
 		var kc: int = (ev as InputEventKey).keycode
 		if kc >= KEY_0 and kc <= KEY_9:
 			_depth_level = kc - KEY_0
 			_apply_depth_to_selected()
 			_hud_depth()
+		elif kc == KEY_C:
+			_toggle_cam()
 		elif kc == KEY_G:
 			_grab_selected()
 		elif kc == KEY_H:
@@ -459,6 +491,54 @@ func _unhandled_input(ev: InputEvent) -> void:
 func _pan(dir: float) -> void:
 	_pan_x = clampf(_pan_x + dir, -PAN_LIMIT, PAN_LIMIT)
 	_camera.position.x = _pan_x
+
+
+func _toggle_cam() -> void:
+	_free_cam = not _free_cam
+	if _free_cam:
+		_camera.projection = Camera3D.PROJECTION_PERSPECTIVE
+		_camera.fov = 60.0
+		_orbit_center = Vector3(_pan_x, 1.5, 1.0)
+		_orbit_drag = false
+		_update_free_cam()
+		_status("FREE 3D camera — MIDDLE-drag orbit · wheel zoom · WASD/QE fly · C = iso")
+	else:
+		_camera.projection = Camera3D.PROJECTION_ORTHOGONAL
+		_camera.size = 7.0
+		_camera.rotation_degrees = Vector3(-9, 0, 0)
+		_camera.position = Vector3(_pan_x, 2.1, 9.0)
+		_status("ISO front camera — A/D · ←→ · wheel scroll · C = free 3D")
+
+
+func _update_free_cam() -> void:
+	var p := clampf(_orbit_pitch, -1.45, 1.45)
+	var dir := Vector3(cos(p) * sin(_orbit_yaw), sin(p), cos(p) * cos(_orbit_yaw))
+	_camera.position = _orbit_center + dir * _orbit_radius
+	_camera.look_at(_orbit_center, Vector3.UP)
+
+
+func _update_free_move(delta: float) -> void:
+	var move := Vector3.ZERO
+	if Input.is_key_pressed(KEY_W):
+		move -= _flat(_camera.global_transform.basis.z)
+	if Input.is_key_pressed(KEY_S):
+		move += _flat(_camera.global_transform.basis.z)
+	if Input.is_key_pressed(KEY_D):
+		move += _flat(_camera.global_transform.basis.x)
+	if Input.is_key_pressed(KEY_A):
+		move -= _flat(_camera.global_transform.basis.x)
+	if Input.is_key_pressed(KEY_E):
+		move += Vector3.UP
+	if Input.is_key_pressed(KEY_Q):
+		move += Vector3.DOWN
+	if move != Vector3.ZERO:
+		_orbit_center += move.normalized() * 7.0 * delta
+		_update_free_cam()
+
+
+func _flat(v: Vector3) -> Vector3:
+	v.y = 0.0
+	return v.normalized() if v.length() > 0.01 else Vector3.ZERO
 
 
 func _apply_depth_to_selected() -> void:
