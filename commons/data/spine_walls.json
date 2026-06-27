@@ -8424,14 +8424,40 @@
     "sequence": "forces",
     "counts": {
       "small": 4,
-      "medium": 0,
-      "large": 0,
-      "applied": 0
+      "medium": 1,
+      "large": 2,
+      "applied": 3
     },
     "pieces": [
       {
-        "token": "station_stage",
+        "token": "station_panel",
+        "x": 2.0,
+        "y": 1.9,
+        "z": 0.06,
+        "wall": true
+      },
+      {
+        "token": "station_plinth",
         "x": 0.0,
+        "y": 0.0,
+        "z": 0.8,
+        "wall": false,
+        "config": {
+          "width_cells": 1,
+          "depth_cells": 1,
+          "top_height": 0.9
+        }
+      },
+      {
+        "token": "coordinate_axes_xy",
+        "x": 0.0,
+        "y": 0.9,
+        "z": 0.8,
+        "wall": false
+      },
+      {
+        "token": "station_stage",
+        "x": 4.0,
         "y": 0.0,
         "z": 0.8,
         "wall": false,
@@ -8443,14 +8469,21 @@
       },
       {
         "token": "CoordinateSystem3M",
-        "x": 0.0,
+        "x": 4.0,
         "y": 0.18,
         "z": 0.8,
         "wall": false
       },
       {
+        "token": "station_panel",
+        "x": 4.0,
+        "y": 1.9,
+        "z": 0.06,
+        "wall": true
+      },
+      {
         "token": "station_plinth",
-        "x": 6.0,
+        "x": 8.0,
         "y": 0.0,
         "z": 0.8,
         "wall": false,
@@ -8461,15 +8494,112 @@
         }
       },
       {
+        "token": "coordinate_locator",
+        "x": 8.0,
+        "y": 0.9,
+        "z": 0.8,
+        "wall": false
+      },
+      {
+        "token": "station_pillar",
+        "x": 10.0,
+        "y": 0.0,
+        "z": 0.8,
+        "wall": false
+      },
+      {
+        "token": "station_plinth",
+        "x": 12.0,
+        "y": 0.0,
+        "z": 0.8,
+        "wall": false,
+        "config": {
+          "width_cells": 1,
+          "depth_cells": 1,
+          "top_height": 0.9
+        }
+      },
+      {
         "token": "VectorBasics",
-        "x": 6.0,
+        "x": 12.0,
         "y": 0.9,
         "z": 0.8,
         "wall": false
       },
       {
         "token": "station_plinth",
-        "x": 9.0,
+        "x": 14.0,
+        "y": 0.0,
+        "z": 0.8,
+        "wall": false,
+        "config": {
+          "width_cells": 2,
+          "depth_cells": 1,
+          "top_height": 0.9
+        }
+      },
+      {
+        "token": "vector_bench",
+        "x": 14.0,
+        "y": 0.9,
+        "z": 0.8,
+        "wall": false
+      },
+      {
+        "token": "station_plinth",
+        "x": 17.0,
+        "y": 0.0,
+        "z": 0.8,
+        "wall": false,
+        "config": {
+          "width_cells": 3,
+          "depth_cells": 3,
+          "top_height": 1.0
+        }
+      },
+      {
+        "token": "free_vector",
+        "x": 17.0,
+        "y": 1.0,
+        "z": 0.8,
+        "wall": false
+      },
+      {
+        "token": "station_panel",
+        "x": 17.0,
+        "y": 2.1,
+        "z": 0.06,
+        "wall": true
+      },
+      {
+        "token": "station_plinth",
+        "x": 21.0,
+        "y": 0.0,
+        "z": 0.8,
+        "wall": false,
+        "config": {
+          "width_cells": 2,
+          "depth_cells": 1,
+          "top_height": 0.9
+        }
+      },
+      {
+        "token": "route_vector",
+        "x": 21.0,
+        "y": 0.9,
+        "z": 0.8,
+        "wall": false
+      },
+      {
+        "token": "station_pillar",
+        "x": 23.0,
+        "y": 0.0,
+        "z": 0.8,
+        "wall": false
+      },
+      {
+        "token": "station_plinth",
+        "x": 25.0,
         "y": 0.0,
         "z": 0.8,
         "wall": false,
@@ -8481,14 +8611,28 @@
       },
       {
         "token": "length_lantern",
-        "x": 9.0,
+        "x": 25.0,
         "y": 1.2,
         "z": 0.8,
         "wall": false
       },
       {
+        "token": "station_panel",
+        "x": 25.0,
+        "y": 1.9,
+        "z": 0.06,
+        "wall": true
+      },
+      {
+        "token": "station_pillar",
+        "x": 27.0,
+        "y": 0.0,
+        "z": 0.8,
+        "wall": false
+      },
+      {
         "token": "station_plinth",
-        "x": 11.0,
+        "x": 29.0,
         "y": 0.0,
         "z": 0.8,
         "wall": false,
@@ -8500,14 +8644,33 @@
       },
       {
         "token": "vector_normalize_demo",
-        "x": 11.0,
+        "x": 29.0,
         "y": 1.2,
         "z": 0.8,
         "wall": false
       },
       {
+        "token": "station_plinth",
+        "x": 31.0,
+        "y": 0.0,
+        "z": 0.8,
+        "wall": false,
+        "config": {
+          "width_cells": 2,
+          "depth_cells": 2,
+          "top_height": 0.9
+        }
+      },
+      {
+        "token": "vector_drone",
+        "x": 31.0,
+        "y": 0.9,
+        "z": 0.8,
+        "wall": false
+      },
+      {
         "token": "station_panel",
-        "x": 5.5,
+        "x": 30.0,
         "y": 1.9,
         "z": 0.06,
         "wall": true
