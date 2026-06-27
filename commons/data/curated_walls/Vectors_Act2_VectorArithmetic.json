@@ -1,0 +1,57 @@
+{
+  "sequence": "forces",
+  "counts": { "small": 1, "medium": 2, "large": 1, "applied": 3 },
+  "pieces": [
+    { "token": "station_panel", "x": 5.0, "y": 2.05, "z": 0.06, "wall": true,
+      "config": { "width_cells": 3, "header": "ADD / SUBTRACT",
+        "lines": ["a + b is where you arrive", "a - b is the gap between"] } },
+
+    { "token": "station_plinth", "x": 1.5, "y": 0.0, "z": 1.0, "wall": false,
+      "config": { "width_cells": 1, "depth_cells": 2, "top_height": 0.85, "cap_inset": 0.22,
+        "caption_text": "Gravity Scaled by Mass" } },
+    { "token": "example_2_3_gravity_scaled_by_mass_vr", "x": 1.5, "y": 0.85, "z": 1.0, "wall": false },
+
+    { "token": "station_plinth", "x": 4.0, "y": 0.0, "z": 0.7, "wall": false,
+      "config": { "width_cells": 2, "depth_cells": 1, "top_height": 0.9, "cap_inset": 0.18,
+        "caption_text": "Vector Addition (a + b)" } },
+    { "token": "vector_add", "x": 4.0, "y": 0.9, "z": 0.7, "wall": false },
+
+    { "token": "station_plinth", "x": 6.5, "y": 0.0, "z": 1.3, "wall": false,
+      "config": { "width_cells": 2, "depth_cells": 1, "top_height": 0.9, "cap_inset": 0.18,
+        "caption_text": "Vector Subtraction (a - b)" } },
+    { "token": "vector_sub", "x": 6.5, "y": 0.9, "z": 1.3, "wall": false },
+
+    { "token": "station_pillar", "x": 8.5, "y": 0.0, "z": 2.4, "wall": false,
+      "config": { "height": 2.6, "readout_face": true } },
+
+    { "token": "station_panel", "x": 11.0, "y": 2.25, "z": 0.06, "wall": true,
+      "config": { "width_cells": 4, "header": "TO ADD IS TO WALK",
+        "lines": ["Step inside the sum.", "a + b is a place you arrive."] } },
+    { "token": "station_stage", "x": 11.0, "y": 0.0, "z": 2.4, "wall": false,
+      "config": { "width_cells": 4, "depth_cells": 4, "step_height": 0.18,
+        "name_plate": "Vector Addition Walk (Room Scale)" } },
+    { "token": "vector_addition_walk", "x": 11.0, "y": 0.18, "z": 2.4, "wall": false },
+
+    { "token": "station_pillar", "x": 13.5, "y": 0.0, "z": 2.4, "wall": false,
+      "config": { "height": 2.6, "readout_face": true } },
+
+    { "token": "station_panel", "x": 17.5, "y": 2.05, "z": 0.06, "wall": true,
+      "config": { "width_cells": 4, "header": "THE PRODUCTS",
+        "lines": ["agree - the dot", "shadow - the projection", "turn - the cross"] } },
+
+    { "token": "station_plinth", "x": 16.0, "y": 0.0, "z": 0.7, "wall": false,
+      "config": { "width_cells": 1, "depth_cells": 1, "top_height": 1.25, "cap_inset": 0.3,
+        "caption_text": "Dot-Aligner (agreement)" } },
+    { "token": "dot_aligner", "x": 16.0, "y": 1.25, "z": 0.7, "wall": false },
+
+    { "token": "station_plinth", "x": 17.5, "y": 0.0, "z": 1.3, "wall": false,
+      "config": { "width_cells": 1, "depth_cells": 1, "top_height": 1.15, "cap_inset": 0.3,
+        "caption_text": "Projection Shadow" } },
+    { "token": "projection_shadow", "x": 17.5, "y": 1.15, "z": 1.3, "wall": false },
+
+    { "token": "station_plinth", "x": 19.0, "y": 0.0, "z": 0.9, "wall": false,
+      "config": { "width_cells": 1, "depth_cells": 1, "top_height": 1.2, "cap_inset": 0.3,
+        "caption_text": "Torque Crank (the turn)" } },
+    { "token": "torque_crank", "x": 19.0, "y": 1.2, "z": 0.9, "wall": false }
+  ]
+}

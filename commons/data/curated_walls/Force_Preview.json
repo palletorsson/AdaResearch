@@ -1,0 +1,319 @@
+{
+ "sequence": "forces",
+ "counts": {
+  "small": 4,
+  "medium": 0,
+  "large": 2,
+  "applied": 4
+ },
+ "pieces": [
+  {
+   "token": "station_wall",
+   "x": 14.0,
+   "y": 0.0,
+   "z": 0.06,
+   "wall": true,
+   "config": {
+    "length_cells": 30,
+    "height_cells": 3,
+    "start_cap": true,
+    "end_cap": true
+   }
+  },
+  {
+   "token": "station_plinth",
+   "x": 2.0,
+   "y": 0.0,
+   "z": 1.4,
+   "wall": false,
+   "config": {
+    "width_cells": 1,
+    "depth_cells": 1,
+    "top_height": 1.3,
+    "cap_inset": 0.3,
+    "caption_text": "The Adder's Drafting Board"
+   }
+  },
+  {
+   "token": "adder_board",
+   "x": 2.0,
+   "y": 1.3,
+   "z": 1.4,
+   "wall": false
+  },
+  {
+   "token": "station_plinth",
+   "x": 4.0,
+   "y": 0.0,
+   "z": 0.7,
+   "wall": false,
+   "config": {
+    "width_cells": 1,
+    "depth_cells": 1,
+    "top_height": 1.15,
+    "cap_inset": 0.3,
+    "caption_text": "Length Lantern"
+   }
+  },
+  {
+   "token": "length_lantern",
+   "x": 4.0,
+   "y": 1.15,
+   "z": 0.7,
+   "wall": false
+  },
+  {
+   "token": "station_plinth",
+   "x": 6.0,
+   "y": 0.0,
+   "z": 1.4,
+   "wall": false,
+   "config": {
+    "width_cells": 1,
+    "depth_cells": 1,
+    "top_height": 1.3,
+    "cap_inset": 0.3,
+    "caption_text": "Stretch Bench"
+   }
+  },
+  {
+   "token": "stretch_bench",
+   "x": 6.0,
+   "y": 1.3,
+   "z": 1.4,
+   "wall": false
+  },
+  {
+   "token": "station_plinth",
+   "x": 8.0,
+   "y": 0.0,
+   "z": 0.7,
+   "wall": false,
+   "config": {
+    "width_cells": 1,
+    "depth_cells": 1,
+    "top_height": 1.15,
+    "cap_inset": 0.3,
+    "caption_text": "Agreement Gauge"
+   }
+  },
+  {
+   "token": "agreement_gauge",
+   "x": 8.0,
+   "y": 1.15,
+   "z": 0.7,
+   "wall": false
+  },
+  {
+   "token": "station_panel",
+   "x": 5.0,
+   "y": 2.05,
+   "z": 0.06,
+   "wall": true,
+   "config": {
+    "width_cells": 3,
+    "header": "NAME THE ARROWS",
+    "lines": [
+     "SUM  LEN  SCALE  DOT",
+     "FOUNDATIONS"
+    ]
+   }
+  },
+  {
+   "token": "station_pillar",
+   "x": 10.0,
+   "y": 0.0,
+   "z": 0.5,
+   "wall": false,
+   "config": {
+    "height_cells": 3,
+    "post_width": 0.7
+   }
+  },
+  {
+   "token": "station_plinth",
+   "x": 12.0,
+   "y": 0.0,
+   "z": 1.0,
+   "wall": false,
+   "config": {
+    "width_cells": 1,
+    "depth_cells": 1,
+    "top_height": 1.05,
+    "cap_inset": 0.3,
+    "caption_text": "Force Pad"
+   }
+  },
+  {
+   "token": "force_pad",
+   "x": 12.0,
+   "y": 1.05,
+   "z": 1.0,
+   "wall": false
+  },
+  {
+   "token": "station_stage",
+   "x": 15.0,
+   "y": 0.0,
+   "z": 0.5,
+   "wall": false,
+   "config": {
+    "width_cells": 4,
+    "depth_cells": 4,
+    "step_height": 0.18
+   }
+  },
+  {
+   "token": "force_vortex",
+   "x": 15.0,
+   "y": 0.18,
+   "z": 0.5,
+   "wall": false
+  },
+  {
+   "token": "station_panel",
+   "x": 13.5,
+   "y": 2.05,
+   "z": 0.06,
+   "wall": true,
+   "config": {
+    "width_cells": 2,
+    "header": "FORCES YOU FEEL",
+    "lines": [
+     "PUSH   SPIN",
+     "ACCELERATION"
+    ]
+   }
+  },
+  {
+   "token": "station_stage",
+   "x": 22.0,
+   "y": 0.0,
+   "z": 2.4,
+   "wall": false,
+   "config": {
+    "width_cells": 4,
+    "depth_cells": 4,
+    "step_height": 0.18
+   }
+  },
+  {
+   "token": "weather_vector_field",
+   "x": 22.0,
+   "y": 0.18,
+   "z": 2.4,
+   "wall": false
+  },
+  {
+   "token": "station_stage",
+   "x": 19.0,
+   "y": 0.0,
+   "z": 0.4,
+   "wall": false,
+   "config": {
+    "width_cells": 3,
+    "depth_cells": 3,
+    "step_height": 0.18
+   }
+  },
+  {
+   "token": "mortar_vector_siege",
+   "x": 19.0,
+   "y": 0.18,
+   "z": 0.4,
+   "wall": false
+  },
+  {
+   "token": "station_stage",
+   "x": 26.0,
+   "y": 0.0,
+   "z": 0.5,
+   "wall": false,
+   "config": {
+    "width_cells": 4,
+    "depth_cells": 4,
+    "step_height": 0.18
+   }
+  },
+  {
+   "token": "reflection_hall",
+   "x": 26.0,
+   "y": 0.18,
+   "z": 0.5,
+   "wall": false
+  },
+  {
+   "token": "station_panel",
+   "x": 22.0,
+   "y": 2.1,
+   "z": 0.06,
+   "wall": true,
+   "config": {
+    "width_cells": 4,
+    "header": "THREE ROOMS, ONE SHELF",
+    "lines": [
+     "STORM  -  MORTAR  -  BOUNCE",
+     "FIELD / PROJECTILE / REFLECTION"
+    ]
+   }
+  },
+  {
+   "token": "station_pillar",
+   "x": 17.0,
+   "y": 0.0,
+   "z": 0.5,
+   "wall": false,
+   "config": {
+    "height_cells": 3,
+    "post_width": 0.7
+   }
+  },
+  {
+   "token": "station_pillar",
+   "x": 28.5,
+   "y": 0.0,
+   "z": 0.5,
+   "wall": false,
+   "config": {
+    "height_cells": 3,
+    "post_width": 0.7
+   }
+  },
+  {
+   "token": "station_plinth",
+   "x": 31.0,
+   "y": 0.0,
+   "z": 1.6,
+   "wall": false,
+   "config": {
+    "width_cells": 2,
+    "depth_cells": 2,
+    "top_height": 0.85,
+    "cap_inset": 0.25,
+    "caption_text": "Human Catapult"
+   }
+  },
+  {
+   "token": "human_catapult",
+   "x": 31.0,
+   "y": 0.85,
+   "z": 1.6,
+   "wall": false
+  },
+  {
+   "token": "station_panel",
+   "x": 31.0,
+   "y": 2.05,
+   "z": 0.06,
+   "wall": true,
+   "config": {
+    "width_cells": 2,
+    "header": "LAUNCHED",
+    "lines": [
+     "YOU ARE THE SHELL",
+     "NOW WALK THE ARC"
+    ]
+   }
+  }
+ ]
+}

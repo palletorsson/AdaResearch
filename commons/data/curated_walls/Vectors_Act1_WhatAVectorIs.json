@@ -1,0 +1,325 @@
+{
+  "sequence": "forces",
+  "counts": {
+    "small": 4,
+    "medium": 1,
+    "large": 2,
+    "applied": 3
+  },
+  "pieces": [
+    {
+      "token": "station_panel",
+      "x": 2.0,
+      "y": 1.95,
+      "z": 0.06,
+      "wall": true,
+      "config": {
+        "header": "WHAT A VECTOR IS",
+        "lines": [
+          "WHERE · WHICH-WAY",
+          "HOW-FAR · REFUSED"
+        ],
+        "width_cells": 3
+      }
+    },
+    {
+      "token": "station_panel",
+      "x": 1.0,
+      "y": 2.35,
+      "z": 0.06,
+      "wall": true,
+      "config": {
+        "header": "COORDINATES",
+        "lines": [
+          "Space is a promise",
+          "three numbers keep"
+        ],
+        "width_cells": 3
+      }
+    },
+    {
+      "token": "station_plinth",
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.5,
+      "wall": false,
+      "config": {
+        "width_cells": 2,
+        "depth_cells": 1,
+        "top_height": 0.85,
+        "caption_text": "Coordinate Axes",
+        "caption_style": "frame"
+      }
+    },
+    {
+      "token": "coordinate_axes_xy",
+      "x": 0.0,
+      "y": 0.85,
+      "z": 0.5,
+      "wall": false
+    },
+    {
+      "token": "station_stage",
+      "x": 4.5,
+      "y": 0.0,
+      "z": 1.7,
+      "wall": false,
+      "config": {
+        "width_cells": 4,
+        "depth_cells": 4,
+        "step_height": 0.18,
+        "name_plate": "Coordinate System"
+      }
+    },
+    {
+      "token": "CoordinateSystem3M",
+      "x": 4.5,
+      "y": 0.18,
+      "z": 1.7,
+      "wall": false
+    },
+    {
+      "token": "station_plinth",
+      "x": 8.0,
+      "y": 0.0,
+      "z": 0.45,
+      "wall": false,
+      "config": {
+        "width_cells": 2,
+        "depth_cells": 1,
+        "top_height": 0.95,
+        "caption_text": "Coordinate Locator",
+        "caption_style": "frame"
+      }
+    },
+    {
+      "token": "coordinate_locator",
+      "x": 8.0,
+      "y": 0.95,
+      "z": 0.45,
+      "wall": false
+    },
+    {
+      "token": "station_pillar",
+      "x": 10.0,
+      "y": 0.0,
+      "z": 0.4,
+      "wall": false,
+      "config": {
+        "height": 2.4
+      }
+    },
+    {
+      "token": "station_plinth",
+      "x": 12.0,
+      "y": 0.0,
+      "z": 0.6,
+      "wall": false,
+      "config": {
+        "width_cells": 2,
+        "depth_cells": 1,
+        "top_height": 0.9,
+        "caption_text": "Vector Basics",
+        "caption_style": "frame"
+      }
+    },
+    {
+      "token": "VectorBasics",
+      "x": 12.0,
+      "y": 0.9,
+      "z": 0.6,
+      "wall": false
+    },
+    {
+      "token": "station_plinth",
+      "x": 14.5,
+      "y": 0.0,
+      "z": 1.25,
+      "wall": false,
+      "config": {
+        "width_cells": 2,
+        "depth_cells": 1,
+        "top_height": 0.85,
+        "caption_text": "Vector Bench",
+        "caption_style": "frame"
+      }
+    },
+    {
+      "token": "vector_bench",
+      "x": 14.5,
+      "y": 0.85,
+      "z": 1.25,
+      "wall": false
+    },
+    {
+      "token": "station_panel",
+      "x": 17.0,
+      "y": 2.45,
+      "z": 0.06,
+      "wall": true,
+      "config": {
+        "header": "VECTOR",
+        "lines": [
+          "A journey with",
+          "no starting address"
+        ],
+        "width_cells": 3
+      }
+    },
+    {
+      "token": "station_plinth",
+      "x": 17.0,
+      "y": 0.0,
+      "z": 2.2,
+      "wall": false,
+      "config": {
+        "width_cells": 3,
+        "depth_cells": 3,
+        "top_height": 1.0,
+        "caption_text": "Free Vector",
+        "caption_style": "frame"
+      }
+    },
+    {
+      "token": "free_vector",
+      "x": 17.0,
+      "y": 1.0,
+      "z": 2.2,
+      "wall": false
+    },
+    {
+      "token": "station_plinth",
+      "x": 21.0,
+      "y": 0.0,
+      "z": 0.5,
+      "wall": false,
+      "config": {
+        "width_cells": 2,
+        "depth_cells": 1,
+        "top_height": 0.9,
+        "caption_text": "Route Vector",
+        "caption_style": "frame"
+      }
+    },
+    {
+      "token": "route_vector",
+      "x": 21.0,
+      "y": 0.9,
+      "z": 0.5,
+      "wall": false
+    },
+    {
+      "token": "station_pillar",
+      "x": 23.0,
+      "y": 0.0,
+      "z": 0.4,
+      "wall": false,
+      "config": {
+        "height": 2.4
+      }
+    },
+    {
+      "token": "station_panel",
+      "x": 25.0,
+      "y": 2.3,
+      "z": 0.06,
+      "wall": true,
+      "config": {
+        "header": "MAGNITUDE",
+        "lines": [
+          "A diagonal",
+          "you can see"
+        ],
+        "width_cells": 2
+      }
+    },
+    {
+      "token": "station_plinth",
+      "x": 25.0,
+      "y": 0.0,
+      "z": 0.9,
+      "wall": false,
+      "config": {
+        "width_cells": 1,
+        "depth_cells": 2,
+        "top_height": 1.25,
+        "caption_text": "Length Lantern",
+        "caption_style": "frame"
+      }
+    },
+    {
+      "token": "length_lantern",
+      "x": 25.0,
+      "y": 1.25,
+      "z": 0.9,
+      "wall": false
+    },
+    {
+      "token": "station_pillar",
+      "x": 27.0,
+      "y": 0.0,
+      "z": 0.4,
+      "wall": false,
+      "config": {
+        "height": 2.4
+      }
+    },
+    {
+      "token": "station_panel",
+      "x": 29.5,
+      "y": 2.3,
+      "z": 0.06,
+      "wall": true,
+      "config": {
+        "header": "UNIT VECTOR",
+        "lines": [
+          "Keep which-way,",
+          "refuse how-far"
+        ],
+        "width_cells": 3
+      }
+    },
+    {
+      "token": "station_plinth",
+      "x": 29.0,
+      "y": 0.0,
+      "z": 0.7,
+      "wall": false,
+      "config": {
+        "width_cells": 1,
+        "depth_cells": 1,
+        "top_height": 1.2,
+        "caption_text": "Vector Normalization",
+        "caption_style": "signage"
+      }
+    },
+    {
+      "token": "vector_normalize_demo",
+      "x": 29.0,
+      "y": 1.2,
+      "z": 0.7,
+      "wall": false
+    },
+    {
+      "token": "station_plinth",
+      "x": 31.5,
+      "y": 0.0,
+      "z": 1.4,
+      "wall": false,
+      "config": {
+        "width_cells": 2,
+        "depth_cells": 2,
+        "top_height": 0.8,
+        "caption_text": "Vector Drone",
+        "caption_style": "frame"
+      }
+    },
+    {
+      "token": "vector_drone",
+      "x": 31.5,
+      "y": 0.8,
+      "z": 1.4,
+      "wall": false
+    }
+  ]
+}

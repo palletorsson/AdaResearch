@@ -1,0 +1,428 @@
+{
+ "sequence": "forces",
+ "counts": {
+  "small": 6,
+  "medium": 4,
+  "large": 1,
+  "applied": 3
+ },
+ "pieces": [
+  {
+   "token": "station_panel",
+   "x": 2.0,
+   "y": 2.25,
+   "z": 0.06,
+   "wall": true,
+   "config": {
+    "width_cells": 4,
+    "height": 0.85,
+    "header": "I  A WHERE",
+    "lines": [
+     "A coordinate system is a",
+     "choice of three directions",
+     "and an agreed origin."
+    ],
+    "accent_color": "0.20,0.62,0.86"
+   }
+  },
+  {
+   "token": "station_pillar",
+   "x": 0.0,
+   "y": 0.0,
+   "z": 2.3,
+   "wall": false,
+   "config": {
+    "height": 3.0,
+    "post_width": 0.42,
+    "accent_color": "0.20,0.62,0.86",
+    "signage_text": "FRAME"
+   }
+  },
+  {
+   "token": "station_pillar",
+   "x": 5.0,
+   "y": 0.0,
+   "z": 2.3,
+   "wall": false,
+   "config": {
+    "height": 3.0,
+    "post_width": 0.42,
+    "accent_color": "0.20,0.62,0.86"
+   }
+  },
+  {
+   "token": "station_stage",
+   "x": 2.0,
+   "y": 0.0,
+   "z": 1.5,
+   "wall": false,
+   "config": {
+    "width_cells": 4,
+    "depth_cells": 4,
+    "step_height": 0.18,
+    "accent_color": "0.20,0.62,0.86",
+    "name_plate": "CoordinateSystem3M",
+    "stencil_text": "FRAME-00"
+   }
+  },
+  {
+   "token": "CoordinateSystem3M",
+   "x": 2.0,
+   "y": 0.18,
+   "z": 1.5,
+   "wall": false
+  },
+  {
+   "token": "station_panel",
+   "x": 13.0,
+   "y": 2.15,
+   "z": 0.06,
+   "wall": true,
+   "config": {
+    "width_cells": 4,
+    "height": 0.8,
+    "header": "II  WHAT A VECTOR IS",
+    "lines": [
+     "Magnitude and direction:",
+     "the vector's two halves."
+    ]
+   }
+  },
+  {
+   "token": "station_plinth",
+   "x": 11.0,
+   "y": 0.0,
+   "z": 1.4,
+   "wall": false,
+   "config": {
+    "width_cells": 2,
+    "depth_cells": 1,
+    "top_height": 1.0,
+    "caption_text": "VectorBasics"
+   }
+  },
+  {
+   "token": "VectorBasics",
+   "x": 11.0,
+   "y": 1.0,
+   "z": 1.4,
+   "wall": false
+  },
+  {
+   "token": "station_plinth",
+   "x": 13.5,
+   "y": 0.0,
+   "z": 0.5,
+   "wall": false,
+   "config": {
+    "width_cells": 1,
+    "depth_cells": 1,
+    "top_height": 1.3,
+    "cap_inset": 0.3,
+    "caption_text": "Vector Magnitude"
+   }
+  },
+  {
+   "token": "vector_magnitude_demo",
+   "x": 13.5,
+   "y": 1.3,
+   "z": 0.5,
+   "wall": false
+  },
+  {
+   "token": "station_plinth",
+   "x": 15.0,
+   "y": 0.0,
+   "z": 1.95,
+   "wall": false,
+   "config": {
+    "width_cells": 1,
+    "depth_cells": 1,
+    "top_height": 1.4,
+    "cap_inset": 0.3,
+    "caption_text": "Vector Normalization"
+   }
+  },
+  {
+   "token": "vector_normalize_demo",
+   "x": 15.0,
+   "y": 1.4,
+   "z": 1.95,
+   "wall": false
+  },
+  {
+   "token": "station_panel",
+   "x": 23.0,
+   "y": 2.15,
+   "z": 0.06,
+   "wall": true,
+   "config": {
+    "width_cells": 5,
+    "height": 0.8,
+    "header": "III  ARITHMETIC ON THE IDEA",
+    "lines": [
+     "Scale, add, subtract, translate:",
+     "walk a, then b, and arrive."
+    ]
+   }
+  },
+  {
+   "token": "station_plinth",
+   "x": 18.0,
+   "y": 0.0,
+   "z": 0.6,
+   "wall": false,
+   "config": {
+    "width_cells": 1,
+    "depth_cells": 1,
+    "top_height": 1.3,
+    "cap_inset": 0.3,
+    "caption_text": "Vector Multiplication"
+   }
+  },
+  {
+   "token": "example_1_4_vector_multiplication_vr",
+   "x": 18.0,
+   "y": 1.3,
+   "z": 0.6,
+   "wall": false
+  },
+  {
+   "token": "station_plinth",
+   "x": 20.5,
+   "y": 0.0,
+   "z": 1.3,
+   "wall": false,
+   "config": {
+    "width_cells": 3,
+    "depth_cells": 1,
+    "top_height": 0.95,
+    "caption_text": "Vector Addition  a + b"
+   }
+  },
+  {
+   "token": "vector_add",
+   "x": 20.5,
+   "y": 0.95,
+   "z": 1.3,
+   "wall": false
+  },
+  {
+   "token": "station_plinth",
+   "x": 24.0,
+   "y": 0.0,
+   "z": 2.3,
+   "wall": false,
+   "config": {
+    "width_cells": 3,
+    "depth_cells": 1,
+    "top_height": 0.95,
+    "caption_text": "Vector Subtraction  a - b"
+   }
+  },
+  {
+   "token": "vector_sub",
+   "x": 24.0,
+   "y": 0.95,
+   "z": 2.3,
+   "wall": false
+  },
+  {
+   "token": "station_plinth",
+   "x": 27.0,
+   "y": 0.0,
+   "z": 0.9,
+   "wall": false,
+   "config": {
+    "width_cells": 2,
+    "depth_cells": 2,
+    "top_height": 0.9,
+    "caption_text": "Basis Vectors Rig"
+   }
+  },
+  {
+   "token": "basis_vectors_rig",
+   "x": 27.0,
+   "y": 0.9,
+   "z": 0.9,
+   "wall": false
+  },
+  {
+   "token": "station_plinth",
+   "x": 30.0,
+   "y": 0.0,
+   "z": 2.0,
+   "wall": false,
+   "config": {
+    "width_cells": 3,
+    "depth_cells": 1,
+    "top_height": 0.95,
+    "caption_text": "Vector Translation"
+   }
+  },
+  {
+   "token": "vector_translation_demo",
+   "x": 30.0,
+   "y": 0.95,
+   "z": 2.0,
+   "wall": false
+  },
+  {
+   "token": "station_pillar",
+   "x": 32.5,
+   "y": 0.0,
+   "z": 2.4,
+   "wall": false,
+   "config": {
+    "height": 2.6,
+    "post_width": 0.4
+   }
+  },
+  {
+   "token": "station_pillar",
+   "x": 39.5,
+   "y": 0.0,
+   "z": 2.4,
+   "wall": false,
+   "config": {
+    "height": 2.6,
+    "post_width": 0.4
+   }
+  },
+  {
+   "token": "station_panel",
+   "x": 36.0,
+   "y": 2.0,
+   "z": 0.06,
+   "wall": true,
+   "config": {
+    "width_cells": 5,
+    "height": 0.85,
+    "header": "IV  THE VECTOR BENCH",
+    "lines": [
+     "The ideas, made playable:",
+     "drag, crank, measure by hand."
+    ],
+    "accent_color": "0.86,0.34,0.11"
+   }
+  },
+  {
+   "token": "station_plinth",
+   "x": 33.5,
+   "y": 0.0,
+   "z": 0.8,
+   "wall": false,
+   "config": {
+    "width_cells": 1,
+    "depth_cells": 2,
+    "top_height": 0.85,
+    "caption_text": "The Adder's Drafting Board"
+   }
+  },
+  {
+   "token": "adder_board",
+   "x": 33.5,
+   "y": 0.85,
+   "z": 0.8,
+   "wall": false
+  },
+  {
+   "token": "station_plinth",
+   "x": 36.0,
+   "y": 0.0,
+   "z": 1.5,
+   "wall": false,
+   "config": {
+    "width_cells": 1,
+    "depth_cells": 2,
+    "top_height": 0.9,
+    "caption_text": "Length Lantern"
+   }
+  },
+  {
+   "token": "length_lantern",
+   "x": 36.0,
+   "y": 0.9,
+   "z": 1.5,
+   "wall": false
+  },
+  {
+   "token": "station_plinth",
+   "x": 38.5,
+   "y": 0.0,
+   "z": 0.7,
+   "wall": false,
+   "config": {
+    "width_cells": 1,
+    "depth_cells": 2,
+    "top_height": 0.9,
+    "caption_text": "Stretch Bench"
+   }
+  },
+  {
+   "token": "stretch_bench",
+   "x": 38.5,
+   "y": 0.9,
+   "z": 0.7,
+   "wall": false
+  },
+  {
+   "token": "station_panel",
+   "x": 42.0,
+   "y": 2.15,
+   "z": 0.06,
+   "wall": true,
+   "config": {
+    "width_cells": 4,
+    "height": 0.8,
+    "header": "V  TOWARD FORCES",
+    "lines": [
+     "Every one of Newton's laws",
+     "is a sentence about vectors."
+    ],
+    "accent_color": "0.90,0.55,0.12"
+   }
+  },
+  {
+   "token": "station_plinth",
+   "x": 41.0,
+   "y": 0.0,
+   "z": 1.4,
+   "wall": false,
+   "config": {
+    "width_cells": 1,
+    "depth_cells": 1,
+    "top_height": 1.35,
+    "cap_inset": 0.3,
+    "caption_text": "Newton's Laws"
+   }
+  },
+  {
+   "token": "newtons_laws",
+   "x": 41.0,
+   "y": 1.35,
+   "z": 1.4,
+   "wall": false
+  },
+  {
+   "token": "station_plinth",
+   "x": 43.0,
+   "y": 0.0,
+   "z": 2.1,
+   "wall": false,
+   "config": {
+    "width_cells": 2,
+    "depth_cells": 1,
+    "top_height": 1.0,
+    "caption_text": "Forces (2.1)"
+   }
+  },
+  {
+   "token": "example_2_1_forces_vr",
+   "x": 43.0,
+   "y": 1.0,
+   "z": 2.1,
+   "wall": false
+  }
+ ]
+}

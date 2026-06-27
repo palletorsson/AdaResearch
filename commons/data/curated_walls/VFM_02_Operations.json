@@ -1,0 +1,58 @@
+{
+  "sequence": "forces",
+  "counts": { "small": 5, "medium": 1, "large": 3, "applied": 3 },
+  "pieces": [
+    { "token": "station_pillar", "x": -0.5, "y": 0.0, "z": 0.4, "wall": false, "config": { "height": 2.7, "signage_text": "OPERATIONS" } },
+
+    { "token": "station_panel", "x": 2.5, "y": 2.05, "z": 0.06, "wall": true, "config": { "width_cells": 4, "height": 0.62, "header": "DOT · HOW ALIGNED", "lines": ["a·b = |a||b|cosθ", "one scalar: agree / right-angle / oppose"] } },
+
+    { "token": "station_stage", "x": 2.5, "y": 0.0, "z": 2.4, "wall": false, "config": { "width_cells": 4, "depth_cells": 3, "step_height": 0.18, "name_plate": "DOT PRODUCT · WALK INSIDE" } },
+    { "token": "vector_dot_product_xl", "x": 2.5, "y": 0.18, "z": 2.4, "wall": false },
+
+    { "token": "station_plinth", "x": 2.0, "y": 0.0, "z": 1.15, "wall": false, "config": { "width_cells": 3, "depth_cells": 1, "top_height": 0.9, "caption_text": "Vector Workbench" } },
+    { "token": "VectorWorkbench", "x": 2.0, "y": 0.9, "z": 1.15, "wall": false },
+
+    { "token": "station_plinth", "x": 4.4, "y": 0.0, "z": 0.55, "wall": false, "config": { "width_cells": 2, "depth_cells": 1, "top_height": 1.0, "caption_text": "Dot-Aligner" } },
+    { "token": "dot_aligner", "x": 4.4, "y": 1.0, "z": 0.55, "wall": false },
+
+    { "token": "station_plinth", "x": 0.6, "y": 0.0, "z": 0.5, "wall": false, "config": { "width_cells": 1, "depth_cells": 1, "top_height": 1.35, "cap_inset": 0.3, "caption_text": "Agreement Gauge" } },
+    { "token": "agreement_gauge", "x": 0.6, "y": 1.35, "z": 0.5, "wall": false },
+
+    { "token": "station_plinth", "x": 1.0, "y": 0.0, "z": 1.9, "wall": false, "config": { "width_cells": 1, "depth_cells": 1, "top_height": 1.15, "cap_inset": 0.3, "caption_text": "Work-Energy" } },
+    { "token": "work_energy_demo", "x": 1.0, "y": 1.15, "z": 1.9, "wall": false },
+
+    { "token": "station_pillar", "x": 5.6, "y": 0.0, "z": 0.4, "wall": false, "config": { "height": 2.5 } },
+
+    { "token": "station_panel", "x": 8.5, "y": 2.05, "z": 0.06, "wall": true, "config": { "width_cells": 4, "height": 0.62, "header": "CROSS · THE PERPENDICULAR", "lines": ["a×b ⊥ both, length = area", "right-hand rule; parallel → zero"] } },
+
+    { "token": "station_stage", "x": 8.5, "y": 0.0, "z": 2.4, "wall": false, "config": { "width_cells": 4, "depth_cells": 3, "step_height": 0.18, "name_plate": "CROSS PRODUCT · WALK INSIDE" } },
+    { "token": "vector_cross_product_xl", "x": 8.5, "y": 0.18, "z": 2.4, "wall": false },
+
+    { "token": "station_plinth", "x": 8.0, "y": 0.0, "z": 0.55, "wall": false, "config": { "width_cells": 2, "depth_cells": 1, "top_height": 1.0, "caption_text": "Torque Crank" } },
+    { "token": "torque_crank", "x": 8.0, "y": 1.0, "z": 0.55, "wall": false },
+
+    { "token": "station_plinth", "x": 10.2, "y": 0.0, "z": 1.0, "wall": false, "config": { "width_cells": 1, "depth_cells": 1, "top_height": 1.2, "cap_inset": 0.3, "caption_text": "Torque Demo" } },
+    { "token": "torque_demo", "x": 10.2, "y": 1.2, "z": 1.0, "wall": false },
+
+    { "token": "station_pillar", "x": 11.4, "y": 0.0, "z": 0.4, "wall": false, "config": { "height": 2.5 } },
+
+    { "token": "station_panel", "x": 14.5, "y": 2.15, "z": 0.06, "wall": true, "config": { "width_cells": 5, "height": 0.68, "header": "PROJECTION · THE SHADOW THAT RETURNS", "lines": ["(a·n̂)n̂ — the part of v along the other", "reflection, normal force: projection in a physics costume"] } },
+
+    { "token": "station_stage", "x": 14.5, "y": 0.0, "z": 2.6, "wall": false, "config": { "width_cells": 4, "depth_cells": 3, "step_height": 0.2, "name_plate": "PROJECTION & REFLECTION · WALK INSIDE", "edge_light": true } },
+    { "token": "vector_projection_reflection_xl", "x": 14.5, "y": 0.2, "z": 2.6, "wall": false },
+
+    { "token": "station_pillar", "x": 12.6, "y": 0.0, "z": 1.7, "wall": false, "config": { "height": 2.7, "lit_groove": true } },
+    { "token": "station_pillar", "x": 16.4, "y": 0.0, "z": 1.7, "wall": false, "config": { "height": 2.7, "lit_groove": true } },
+
+    { "token": "station_plinth", "x": 14.0, "y": 0.0, "z": 0.5, "wall": false, "config": { "width_cells": 2, "depth_cells": 1, "top_height": 1.0, "caption_text": "Projection Shadow" } },
+    { "token": "projection_shadow", "x": 14.0, "y": 1.0, "z": 0.5, "wall": false },
+
+    { "token": "station_plinth", "x": 16.0, "y": 0.0, "z": 1.05, "wall": false, "config": { "width_cells": 1, "depth_cells": 1, "top_height": 1.2, "cap_inset": 0.3, "caption_text": "Normal Force & Reflection" } },
+    { "token": "normal_force_demo", "x": 16.0, "y": 1.2, "z": 1.05, "wall": false },
+
+    { "token": "station_plinth", "x": 17.6, "y": 0.0, "z": 0.55, "wall": false, "config": { "width_cells": 1, "depth_cells": 1, "top_height": 1.3, "cap_inset": 0.3, "caption_text": "Angle Between Vectors" } },
+    { "token": "exercise_5_9_angle_between", "x": 17.6, "y": 1.3, "z": 0.55, "wall": false },
+
+    { "token": "station_pillar", "x": 18.8, "y": 0.0, "z": 0.4, "wall": false, "config": { "height": 2.7, "signage_text": "TO MOTION →" } }
+  ]
+}

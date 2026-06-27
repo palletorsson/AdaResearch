@@ -1,0 +1,206 @@
+{
+  "sequence": "forces",
+  "counts": {
+    "small": 0,
+    "medium": 1,
+    "large": 0,
+    "applied": 5
+  },
+  "pieces": [
+    {
+      "token": "station_panel",
+      "x": 0.0,
+      "y": 2.0,
+      "z": 0.06,
+      "wall": true,
+      "config": {
+        "width_cells": 3,
+        "height": 0.62,
+        "header": "ONE CONSOLE · SIX IDEAS",
+        "lines": [
+          "The same Braun panel + smooth slider",
+          "carries six incommensurable problems."
+        ]
+      }
+    },
+    {
+      "token": "station_plinth",
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.8,
+      "wall": false,
+      "config": {
+        "width_cells": 1,
+        "depth_cells": 1,
+        "top_height": 1.35,
+        "cap_inset": 0.3,
+        "caption_text": "Transform Composition Workbench"
+      }
+    },
+    {
+      "token": "transform_composition_workbench",
+      "x": 0.0,
+      "y": 1.35,
+      "z": 0.8,
+      "wall": false
+    },
+    {
+      "token": "station_plinth",
+      "x": 2.5,
+      "y": 0.0,
+      "z": 1.9,
+      "wall": false,
+      "config": {
+        "width_cells": 2,
+        "depth_cells": 2,
+        "top_height": 0.9,
+        "caption_text": "CA Rules Workbench"
+      }
+    },
+    {
+      "token": "ca_rules_workbench",
+      "x": 2.5,
+      "y": 0.9,
+      "z": 1.9,
+      "wall": false
+    },
+    {
+      "token": "station_plinth",
+      "x": 5.0,
+      "y": 0.0,
+      "z": 0.9,
+      "wall": false,
+      "config": {
+        "width_cells": 2,
+        "depth_cells": 2,
+        "top_height": 0.9,
+        "caption_text": "Complexity Dial Workbench"
+      }
+    },
+    {
+      "token": "complexity_dial_workbench",
+      "x": 5.0,
+      "y": 0.9,
+      "z": 0.9,
+      "wall": false
+    },
+    {
+      "token": "station_panel",
+      "x": 7.5,
+      "y": 2.1,
+      "z": 0.06,
+      "wall": true,
+      "config": {
+        "width_cells": 3,
+        "height": 0.66,
+        "header": "THE FRAME ITSELF",
+        "lines": [
+          "QFE = F − λ·E(S) + φ·ΔE",
+          "the project's organizing frame, hand-cranked"
+        ],
+        "header_color": [
+          1.0,
+          0.78,
+          0.32
+        ]
+      }
+    },
+    {
+      "token": "station_pillar",
+      "x": 6.5,
+      "y": 0.0,
+      "z": 2.4,
+      "wall": false,
+      "config": {
+        "height": 2.2
+      }
+    },
+    {
+      "token": "station_pillar",
+      "x": 8.5,
+      "y": 0.0,
+      "z": 2.4,
+      "wall": false,
+      "config": {
+        "height": 2.2
+      }
+    },
+    {
+      "token": "station_plinth",
+      "x": 7.5,
+      "y": 0.0,
+      "z": 2.4,
+      "wall": false,
+      "config": {
+        "width_cells": 1,
+        "depth_cells": 1,
+        "top_height": 1.45,
+        "cap_inset": 0.3,
+        "caption_text": "QFEP Balance Workbench"
+      }
+    },
+    {
+      "token": "qfep_balance_workbench",
+      "x": 7.5,
+      "y": 1.45,
+      "z": 2.4,
+      "wall": false
+    },
+    {
+      "token": "station_plinth",
+      "x": 10.0,
+      "y": 0.0,
+      "z": 1.9,
+      "wall": false,
+      "config": {
+        "width_cells": 2,
+        "depth_cells": 2,
+        "top_height": 0.9,
+        "caption_text": "Halting Workbench"
+      }
+    },
+    {
+      "token": "halting_workbench",
+      "x": 10.0,
+      "y": 0.9,
+      "z": 1.9,
+      "wall": false
+    },
+    {
+      "token": "station_panel",
+      "x": 12.5,
+      "y": 2.0,
+      "z": 0.06,
+      "wall": true,
+      "config": {
+        "width_cells": 3,
+        "height": 0.62,
+        "header": "SAME GRAMMAR · DIFFERENT WORLDS",
+        "lines": [
+          "Halting, paradox, matrix algebra:",
+          "one handle — do they look interchangeable?"
+        ]
+      }
+    },
+    {
+      "token": "station_plinth",
+      "x": 12.5,
+      "y": 0.0,
+      "z": 0.85,
+      "wall": false,
+      "config": {
+        "width_cells": 2,
+        "depth_cells": 2,
+        "top_height": 0.9,
+        "caption_text": "Russell's Paradox Workbench"
+      }
+    },
+    {
+      "token": "russell_paradox_workbench",
+      "x": 12.5,
+      "y": 0.9,
+      "z": 0.85,
+      "wall": false
+    }
+  ]
+}
