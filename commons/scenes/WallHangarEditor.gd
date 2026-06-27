@@ -44,6 +44,9 @@ var _orbit_pitch := 0.5
 var _orbit_radius := 16.0
 var _orbit_center := Vector3(0.0, 1.5, 1.0)
 var _orbit_drag := false
+var _lmb_press_pos := Vector2.ZERO    # click-vs-drag detection on placed pieces
+var _lmb_press_piece: Node3D = null
+var _lmb_dragging := false
 var _placed: Array = []
 var _held: Node3D = null
 var _held_type := ""
@@ -350,9 +353,14 @@ func _select_at_mouse() -> void:
 
 func _grab_selected() -> void:
 	if _selected == null or not is_instance_valid(_selected):
-		_status("select a piece first, then G")
+		_status("select a piece first, then G (or just drag it)")
 		return
-	var n := _selected
+	_grab_piece(_selected)
+
+
+func _grab_piece(n: Node3D) -> void:
+	if n == null or not is_instance_valid(n):
+		return
 	_placed.erase(n)
 	_deselect()
 	_clear_held()
@@ -361,7 +369,38 @@ func _grab_selected() -> void:
 	_held_is_wall = bool(n.get_meta("wall_piece", false))
 	_held_moving = true
 	WHStyle.dim_for_ghost(n)
-	_status("moving %s — LMB to drop" % _held_type)
+	_status("moving %s — release to drop" % _held_type)
+
+
+func _lmb_down() -> void:
+	if _held != null and is_instance_valid(_held):
+		_commit()   # holding a palette piece or finishing a move -> stamp / drop
+		_lmb_press_piece = null
+		return
+	# idle: record a potential click (select) or drag (move) on a placed piece
+	_lmb_press_pos = get_viewport().get_mouse_position()
+	_lmb_press_piece = _piece_under_mouse()
+	_lmb_dragging = false
+
+
+func _lmb_up() -> void:
+	if _lmb_dragging:
+		if _held != null and is_instance_valid(_held):
+			_commit()   # drop the dragged piece where it rests
+		_lmb_dragging = false
+		_lmb_press_piece = null
+		return
+	# plain click (no drag): select what was under the press, else deselect
+	if _lmb_press_piece != null and is_instance_valid(_lmb_press_piece):
+		_selected = _lmb_press_piece
+		_update_selbox()
+		if _insp != null and _insp.has_method("show_node"):
+			_insp.show_node(_selected)
+		_show_nearby(str(_selected.get_meta("token", "")))
+		_status("selected %s — edit right · nearby below · drag to move · Del remove" % str(_selected.get_meta("token", _selected.name)))
+	elif _held == null:
+		_deselect()
+	_lmb_press_piece = null
 
 
 func _delete_selected() -> void:
@@ -437,14 +476,15 @@ func _unhandled_input(ev: InputEvent) -> void:
 			if _free_cam:
 				_orbit_drag = mb.pressed   # middle-drag orbits in free mode
 			return
+		if mb.button_index == MOUSE_BUTTON_LEFT:
+			if mb.pressed:
+				_lmb_down()
+			else:
+				_lmb_up()
+			return
 		if not mb.pressed:
 			return
 		match mb.button_index:
-			MOUSE_BUTTON_LEFT:
-				if _held != null and is_instance_valid(_held):
-					_commit()
-				else:
-					_select_at_mouse()
 			MOUSE_BUTTON_RIGHT:
 				_remove_at_mouse()
 			MOUSE_BUTTON_WHEEL_UP, MOUSE_BUTTON_WHEEL_LEFT:
@@ -460,11 +500,15 @@ func _unhandled_input(ev: InputEvent) -> void:
 				else:
 					_pan(1.0)
 	elif ev is InputEventMouseMotion:
+		var mm := ev as InputEventMouseMotion
 		if _free_cam and _orbit_drag:
-			var mm := ev as InputEventMouseMotion
 			_orbit_yaw -= mm.relative.x * 0.01
 			_orbit_pitch = clampf(_orbit_pitch + mm.relative.y * 0.01, -1.45, 1.45)
 			_update_free_cam()
+		elif _held == null and _lmb_press_piece != null and not _lmb_dragging:
+			if mm.position.distance_to(_lmb_press_pos) > 6.0:
+				_grab_piece(_lmb_press_piece)   # drag past threshold -> pick it up
+				_lmb_dragging = true
 	elif ev is InputEventKey and ev.pressed and not ev.echo:
 		var kc: int = (ev as InputEventKey).keycode
 		if kc >= KEY_0 and kc <= KEY_9:
