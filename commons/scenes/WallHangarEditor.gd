@@ -990,6 +990,7 @@ func _settle_loaded() -> void:
 	for n in _placed:
 		if not is_instance_valid(n):
 			continue
+		_clean_loaded(n)   # hide artifacts' floating Label3D + embedded UI/cameras
 		if bool(n.get_meta("wall_piece", false)):
 			continue
 		if str(n.get_meta("token", "")).begins_with("station_"):
@@ -1003,3 +1004,17 @@ func _settle_loaded() -> void:
 			var gp: Vector3 = n.global_position
 			gp.y += shift
 			n.global_position = gp
+
+
+func _clean_loaded(n: Node) -> void:
+	# Strip a loaded artifact's floating chrome so the only label is its station plate
+	# (2D-in-3D): hide billboard Label3D, embedded screen-space CanvasLayer UI, and any
+	# artifact-owned Camera3D that would steal the view.
+	for c in n.get_children():
+		if c is Label3D:
+			(c as Label3D).visible = false
+		elif c is CanvasLayer:
+			(c as CanvasLayer).visible = false
+		elif c is Camera3D:
+			(c as Camera3D).current = false
+		_clean_loaded(c)
