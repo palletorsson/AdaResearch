@@ -95,6 +95,35 @@
         "platform": "pedestal"
       }
     },
+    "station_micropod": {
+      "lookup_name": "station_micropod",
+      "scene": "res://commons/artifacts/station/station_micropod.tscn",
+      "class_name": "StationPlinth",
+      "name": "Station Micro-Pedestal (sub-1 m post)",
+      "description": "A slim sub-grid pedestal (~0.6 m foot) for genuinely sub-1 m precious things — a held instrument, a thin readout — so the base no longer over-claims a full 1 m cell. Still snaps to one cell; same surface-pinned caption plate + detailing as station_plinth, built small via base_meters.",
+      "category": "station",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "tags": [
+        "station",
+        "modular",
+        "plinth",
+        "micropod",
+        "pedestal",
+        "display",
+        "grid"
+      ],
+      "parameters": {
+        "base_meters": "Sub-grid foot width in metres (default 0.6) — the micro-pedestal size",
+        "top_height": "Cap-top height where the artifact sits (≈1.1 m, eye level for a small thing)",
+        "caption_text": "The artifact's display name on the surface-pinned 2D-in-3D plate"
+      },
+      "spatial_needs": {
+        "footprint_cells": 1,
+        "platform": "pedestal"
+      }
+    },
     "station_pillar": {
       "lookup_name": "station_pillar",
       "scene": "res://commons/artifacts/station/station_pillar.tscn",

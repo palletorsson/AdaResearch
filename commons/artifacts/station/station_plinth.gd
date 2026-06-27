@@ -23,6 +23,10 @@ const HangarKit := preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 @export var top_height: float = 1.0
 ## Cap inset from the footprint edge (so the block reads narrower than its cells).
 @export var cap_inset: float = 0.16
+## If > 0, overrides the cell footprint with a true sub-grid metric width — a MICRO-PEDESTAL that
+## still snaps to one grid cell but reads narrower than 1 m, for genuinely sub-1 m precious things
+## (a held instrument, a thin readout). 0 = use width_cells × depth_cells (the normal plinth).
+@export var base_meters: float = 0.0
 
 @export_group("Style")
 ## "tray" (rimmed dish) | "flat" | "grate" cap.
@@ -92,6 +96,7 @@ func _read_metadata_overrides() -> void:
 	if has_meta("config_depth_cells"): depth_cells = int(str(get_meta("config_depth_cells")))
 	if has_meta("config_top_height"): top_height = float(str(get_meta("config_top_height")))
 	if has_meta("config_cap_inset"): cap_inset = float(str(get_meta("config_cap_inset")))
+	if has_meta("config_base_meters"): base_meters = float(str(get_meta("config_base_meters")))
 	if has_meta("config_top_style"): top_style = str(get_meta("config_top_style")).to_lower()
 	if has_meta("config_edge_light"): edge_light = _b(get_meta("config_edge_light"))
 	if has_meta("config_edge_light_wrap"): edge_light_wrap = _b(get_meta("config_edge_light_wrap"))
@@ -116,6 +121,11 @@ func _build() -> void:
 	var dcells: int = maxi(depth_cells, 1)
 	var wc: float = float(wcells) * CELL
 	var dc: float = float(dcells) * CELL
+	if base_meters > 0.0:
+		# Micro-pedestal: build the foot below the grid cell (the piece still snaps to one cell, but
+		# its visible base no longer over-claims 1 m under a genuinely sub-1 m thing).
+		wc = clampf(base_meters, 0.2, CELL)
+		dc = clampf(base_meters, 0.2, CELL)
 	var inset: float = minf(cap_inset, minf(wc, dc) * 0.28)
 	var cap_w: float = wc - inset * 2.0
 	var cap_d: float = dc - inset * 2.0

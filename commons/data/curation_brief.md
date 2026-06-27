@@ -32,18 +32,21 @@ player orbit, so depth reads.
 ## REQUIREMENTS (the quality bar)
 1. **Prop fits the footprint — never a default 1 m base for a tiny thing.** Size each base to the
    artifact's real footprint:
-   - footprint ≤1 cell → `station_plinth` `{"width_cells":1,"depth_cells":1,"top_height":1.0-1.4,
+   - genuinely **sub-1 m** (a held instrument / thin upright readout, measured AABB ≲ 0.7 m) →
+     `station_micropod` `{"caption_text":"<display name>","top_height":1.0-1.2}` — a ~0.6 m sub-grid
+     post that snaps to one cell but doesn't over-claim it. THIS is the home for tiny precious things.
+   - footprint ~1 cell → `station_plinth` `{"width_cells":1,"depth_cells":1,"top_height":1.0-1.4,
      "cap_inset":0.3}` — a SLIM, high-narrow podium (per the plinth's own "size IS the argument").
    - footprint 2-4 → `station_plinth` `{"width_cells":w,"depth_cells":h,"top_height":0.8-1.0}`.
    - footprint 5-9 → `station_stage` `{"width_cells":w,"depth_cells":h,"step_height":0.18}`, low.
    - footprint >9 → `station_stage` capped ~4×4.
-   If an artifact is clearly **sub-1 m** and even a slim 1×1 plinth's foot looks oversized, still use
-   the slim 1×1 but **FLAG it in the rationale** as a prop gap (a future micro-pedestal). Big things
-   go low+broad; precious small things go high+narrow.
-2. **Every artifact gets a 2D-in-3D PLATE label.** Set the prop's `caption_text` (plinth) to the
-   artifact's display name — the plinth renders it as a framed, surface-pinned plate. Use
-   `station_panel` (wall, 2D-in-3D) for tier-group headers carrying the map's own truth-beats. No
-   floating text — the editor hides artifact Label3D; your plates are the labels.
+   Big things go low+broad; precious small things go high+narrow.
+2. **Every artifact gets a 2D-in-3D PLATE label.** `station_plinth` / `station_micropod` render it
+   from `caption_text`; `station_stage` from `name_plate` (NOT caption_text) — both are framed,
+   surface-pinned plates, so a big artifact on a stage DOES get a plate (do NOT fall back to a
+   low-broad plinth just for the label). Set it to the artifact's display name. Use `station_panel`
+   (wall, 2D-in-3D) for tier-group headers carrying the map's own truth-beats. No floating text —
+   the editor hides artifact Label3D; your plates are the labels.
 3. **Use the 3D SPACE — do NOT line everything up on one flat z.** Stagger DEPTH (vary `z` ~0.2–2.6)
    and HEIGHT, cluster by tier with foreground/background, give the focal centerpiece its own depth.
    It must still read left→right from the front (iso), but reward orbiting (free-cam) with a genuine
