@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene format=3 uid="uid://bf8bew5bivfup"]
 
-[ext_resource type="Script" path="res://commons/scenes/WallHangarEditor.gd" id="1_wall"]
+[ext_resource type="Script" uid="uid://lj4xue8055et" path="res://commons/scenes/WallHangarEditor.gd" id="1_wall"]
 
-[node name="WallHangarEditor" type="Node3D"]
+[node name="WallHangarEditor" type="Node3D" unique_id=26318089]
 script = ExtResource("1_wall")

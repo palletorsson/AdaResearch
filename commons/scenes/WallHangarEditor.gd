@@ -626,14 +626,19 @@ func _build_map_select(layer: CanvasLayer) -> void:
 	_map_select.custom_minimum_size = Vector2(300, 28)
 	WHStyle.style_button(_map_select)
 	_map_select.add_item("— load a spine map's wall —", 0)
-	var keys := _spine_walls.keys()
-	keys.sort()
-	for k in keys:
+	# Natural key order = curriculum/spine order (the generator wrote maps sequence-by-
+	# sequence, in lesson order, and Godot preserves JSON key order). Group by sequence
+	# with separator headers, like the spine / slash editors.
+	var last_seq := ""
+	for k in _spine_walls.keys():
 		var entry: Variant = _spine_walls[k]
 		var seq := ""
 		if entry is Dictionary:
 			seq = str(entry.get("sequence", ""))
-		_map_select.add_item("%s   (%s)" % [str(k), seq])
+		if seq != last_seq:
+			_map_select.add_separator(seq)
+			last_seq = seq
+		_map_select.add_item(str(k))
 		_map_select.set_item_metadata(_map_select.item_count - 1, str(k))
 	_map_select.item_selected.connect(_on_map_picked)
 	row.add_child(_map_select)
