@@ -42,17 +42,14 @@
    "wall": false
   },
   {
-   "token": "station_plinth",
+   "token": "station_micropod",
    "x": 4.0,
    "y": 0.0,
    "z": 0.7,
    "wall": false,
    "config": {
-    "width_cells": 1,
-    "depth_cells": 1,
-    "top_height": 1.15,
-    "cap_inset": 0.3,
-    "caption_text": "Length Lantern"
+    "caption_text": "Length Lantern",
+    "top_height": 1.15
    }
   },
   {
@@ -131,17 +128,14 @@
    }
   },
   {
-   "token": "station_plinth",
+   "token": "station_micropod",
    "x": 12.0,
    "y": 0.0,
    "z": 1.0,
    "wall": false,
    "config": {
-    "width_cells": 1,
-    "depth_cells": 1,
-    "top_height": 1.05,
-    "cap_inset": 0.3,
-    "caption_text": "Force Pad"
+    "caption_text": "Force Pad",
+    "top_height": 1.05
    }
   },
   {

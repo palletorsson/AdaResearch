@@ -1,312 +1,317 @@
 {
-  "sequence": "forces",
-  "counts": {
-    "small": 6,
-    "medium": 2,
-    "large": 1,
-    "applied": 0
+ "sequence": "forces",
+ "counts": {
+  "small": 6,
+  "medium": 2,
+  "large": 1,
+  "applied": 0
+ },
+ "pieces": [
+  {
+   "token": "station_panel",
+   "x": 1.0,
+   "y": 2.2,
+   "z": 0.06,
+   "wall": true,
+   "config": {
+    "width_cells": 4,
+    "header": "VECTORS, MADE TO ACT",
+    "lines": [
+     "TURN  -  FALL  -  PULL  -  THROW",
+     "FOUR ISLANDS, FOUR VERBS"
+    ]
+   }
   },
-  "pieces": [
-    {
-      "token": "station_panel",
-      "x": 1.0,
-      "y": 2.2,
-      "z": 0.06,
-      "wall": true,
-      "config": {
-        "width_cells": 4,
-        "header": "VECTORS, MADE TO ACT",
-        "lines": ["TURN  -  FALL  -  PULL  -  THROW", "FOUR ISLANDS, FOUR VERBS"]
-      }
-    },
-
-    {
-      "token": "station_pillar",
-      "x": -1.0,
-      "y": 0.0,
-      "z": 0.4,
-      "wall": false,
-      "config": { "height": 2.6 }
-    },
-
-    {
-      "token": "station_stage",
-      "x": 1.5,
-      "y": 0.0,
-      "z": 2.3,
-      "wall": false,
-      "config": {
-        "width_cells": 4,
-        "depth_cells": 2,
-        "step_height": 0.16,
-        "name_plate": "THE FIELD YOU READ"
-      }
-    },
-    {
-      "token": "VectorFieldFlow",
-      "x": 1.5,
-      "y": 0.16,
-      "z": 2.3,
-      "wall": false
-    },
-
-    {
-      "token": "station_plinth",
-      "x": 4.0,
-      "y": 0.0,
-      "z": 0.7,
-      "wall": false,
-      "config": {
-        "width_cells": 1,
-        "depth_cells": 1,
-        "top_height": 1.2,
-        "cap_inset": 0.3,
-        "caption_text": "VectorTorque"
-      }
-    },
-    {
-      "token": "VectorTorque",
-      "x": 4.0,
-      "y": 1.2,
-      "z": 0.7,
-      "wall": false
-    },
-
-    {
-      "token": "station_plinth",
-      "x": 6.0,
-      "y": 0.0,
-      "z": 1.5,
-      "wall": false,
-      "config": {
-        "width_cells": 1,
-        "depth_cells": 1,
-        "top_height": 1.05,
-        "cap_inset": 0.3,
-        "caption_text": "Torque Demo"
-      }
-    },
-    {
-      "token": "torque_demo",
-      "x": 6.0,
-      "y": 1.05,
-      "z": 1.5,
-      "wall": false
-    },
-    {
-      "token": "station_panel",
-      "x": 5.0,
-      "y": 1.95,
-      "z": 0.06,
-      "wall": true,
-      "config": {
-        "width_cells": 3,
-        "header": "TURN",
-        "lines": ["TORQUE = LEVERAGE", "MADE MATHEMATICAL", "r x F"]
-      }
-    },
-
-    {
-      "token": "station_pillar",
-      "x": 8.0,
-      "y": 0.0,
-      "z": 0.4,
-      "wall": false,
-      "config": { "height": 2.6 }
-    },
-
-    {
-      "token": "station_plinth",
-      "x": 9.5,
-      "y": 0.0,
-      "z": 0.6,
-      "wall": false,
-      "config": {
-        "width_cells": 1,
-        "depth_cells": 1,
-        "top_height": 1.1,
-        "cap_inset": 0.3,
-        "caption_text": "3D Bouncing Ball"
-      }
-    },
-    {
-      "token": "exercise_1_3_solution_3_d_bouncing_ball_vr",
-      "x": 9.5,
-      "y": 1.1,
-      "z": 0.6,
-      "wall": false
-    },
-
-    {
-      "token": "station_plinth",
-      "x": 11.5,
-      "y": 0.0,
-      "z": 1.4,
-      "wall": false,
-      "config": {
-        "width_cells": 1,
-        "depth_cells": 1,
-        "top_height": 1.25,
-        "cap_inset": 0.3,
-        "caption_text": "Motion 101: Random Acceleration"
-      }
-    },
-    {
-      "token": "example_1_9_motion_101_velocity_and_random_acceleration_vr",
-      "x": 11.5,
-      "y": 1.25,
-      "z": 1.4,
-      "wall": false
-    },
-
-    {
-      "token": "station_plinth",
-      "x": 13.5,
-      "y": 0.0,
-      "z": 0.7,
-      "wall": false,
-      "config": {
-        "width_cells": 1,
-        "depth_cells": 1,
-        "top_height": 1.15,
-        "cap_inset": 0.3,
-        "caption_text": "Accelerate and Decelerate"
-      }
-    },
-    {
-      "token": "exercise_1_5_solution_accelerate_and_decelerate_vr",
-      "x": 13.5,
-      "y": 1.15,
-      "z": 0.7,
-      "wall": false
-    },
-    {
-      "token": "station_panel",
-      "x": 11.0,
-      "y": 2.0,
-      "z": 0.06,
-      "wall": true,
-      "config": {
-        "width_cells": 4,
-        "header": "FALL & SETTLE",
-        "lines": ["A BOUNCING BALL IS A CLOCK", "THAT RUNS DOWN", "v += a, EVERY FRAME"]
-      }
-    },
-
-    {
-      "token": "station_pillar",
-      "x": 15.5,
-      "y": 0.0,
-      "z": 0.4,
-      "wall": false,
-      "config": { "height": 2.8 }
-    },
-
-    {
-      "token": "station_stage",
-      "x": 21.0,
-      "y": 0.0,
-      "z": 2.6,
-      "wall": false,
-      "config": {
-        "width_cells": 4,
-        "depth_cells": 2,
-        "step_height": 0.18,
-        "name_plate": "PROJECTION & REFLECTION"
-      }
-    },
-    {
-      "token": "vector_projection_reflection_xl",
-      "x": 21.0,
-      "y": 0.18,
-      "z": 2.6,
-      "wall": false
-    },
-
-    {
-      "token": "station_plinth",
-      "x": 19.0,
-      "y": 0.0,
-      "z": 1.6,
-      "wall": false,
-      "config": {
-        "width_cells": 1,
-        "depth_cells": 1,
-        "top_height": 1.35,
-        "cap_inset": 0.3,
-        "caption_text": "Attraction and Orbit",
-        "three_bar": true
-      }
-    },
-    {
-      "token": "exercise_1_8_solution_attraction_magnitude_vr",
-      "x": 19.0,
-      "y": 1.35,
-      "z": 1.6,
-      "wall": false
-    },
-    {
-      "token": "station_panel",
-      "x": 19.0,
-      "y": 2.25,
-      "z": 0.06,
-      "wall": true,
-      "config": {
-        "width_cells": 4,
-        "header": "PULL  -  THE HEART",
-        "lines": ["AN ORBIT IS A PERPETUAL FALL", "THAT ALWAYS MISSES THE GROUND", "F = strength . dir / r^2"]
-      }
-    },
-
-    {
-      "token": "station_pillar",
-      "x": 24.0,
-      "y": 0.0,
-      "z": 0.4,
-      "wall": false,
-      "config": { "height": 2.8 }
-    },
-
-    {
-      "token": "station_stage",
-      "x": 27.5,
-      "y": 0.0,
-      "z": 2.0,
-      "wall": false,
-      "config": {
-        "width_cells": 4,
-        "depth_cells": 2,
-        "step_height": 0.18,
-        "name_plate": "VectorThrowing"
-      }
-    },
-    {
-      "token": "VectorThrowing",
-      "x": 27.5,
-      "y": 0.18,
-      "z": 2.0,
-      "wall": false
-    },
-    {
-      "token": "station_panel",
-      "x": 27.5,
-      "y": 2.1,
-      "z": 0.06,
-      "wall": true,
-      "config": {
-        "width_cells": 4,
-        "header": "THROW  -  THE CULMINATION",
-        "lines": ["A THROW IS AN INITIAL CONDITION", "AFTER RELEASE, PHYSICS DECIDES", "p(t) = p0 + v0 t + 1/2 g t^2"]
-      }
-    },
-
-    {
-      "token": "station_pillar",
-      "x": 30.0,
-      "y": 0.0,
-      "z": 0.4,
-      "wall": false,
-      "config": { "height": 2.6 }
-    }
-  ]
+  {
+   "token": "station_pillar",
+   "x": -1.0,
+   "y": 0.0,
+   "z": 0.4,
+   "wall": false,
+   "config": {
+    "height": 2.6
+   }
+  },
+  {
+   "token": "station_stage",
+   "x": 1.5,
+   "y": 0.0,
+   "z": 2.3,
+   "wall": false,
+   "config": {
+    "width_cells": 4,
+    "depth_cells": 2,
+    "step_height": 0.16,
+    "name_plate": "THE FIELD YOU READ"
+   }
+  },
+  {
+   "token": "VectorFieldFlow",
+   "x": 1.5,
+   "y": 0.16,
+   "z": 2.3,
+   "wall": false
+  },
+  {
+   "token": "station_plinth",
+   "x": 4.0,
+   "y": 0.0,
+   "z": 0.7,
+   "wall": false,
+   "config": {
+    "width_cells": 1,
+    "depth_cells": 1,
+    "top_height": 1.2,
+    "cap_inset": 0.3,
+    "caption_text": "VectorTorque"
+   }
+  },
+  {
+   "token": "VectorTorque",
+   "x": 4.0,
+   "y": 1.2,
+   "z": 0.7,
+   "wall": false
+  },
+  {
+   "token": "station_micropod",
+   "x": 6.0,
+   "y": 0.0,
+   "z": 1.5,
+   "wall": false,
+   "config": {
+    "caption_text": "Torque Demo",
+    "top_height": 1.05
+   }
+  },
+  {
+   "token": "torque_demo",
+   "x": 6.0,
+   "y": 1.05,
+   "z": 1.5,
+   "wall": false
+  },
+  {
+   "token": "station_panel",
+   "x": 5.0,
+   "y": 1.95,
+   "z": 0.06,
+   "wall": true,
+   "config": {
+    "width_cells": 3,
+    "header": "TURN",
+    "lines": [
+     "TORQUE = LEVERAGE",
+     "MADE MATHEMATICAL",
+     "r x F"
+    ]
+   }
+  },
+  {
+   "token": "station_pillar",
+   "x": 8.0,
+   "y": 0.0,
+   "z": 0.4,
+   "wall": false,
+   "config": {
+    "height": 2.6
+   }
+  },
+  {
+   "token": "station_plinth",
+   "x": 9.5,
+   "y": 0.0,
+   "z": 0.6,
+   "wall": false,
+   "config": {
+    "width_cells": 1,
+    "depth_cells": 1,
+    "top_height": 1.1,
+    "cap_inset": 0.3,
+    "caption_text": "3D Bouncing Ball"
+   }
+  },
+  {
+   "token": "exercise_1_3_solution_3_d_bouncing_ball_vr",
+   "x": 9.5,
+   "y": 1.1,
+   "z": 0.6,
+   "wall": false
+  },
+  {
+   "token": "station_plinth",
+   "x": 11.5,
+   "y": 0.0,
+   "z": 1.4,
+   "wall": false,
+   "config": {
+    "width_cells": 1,
+    "depth_cells": 1,
+    "top_height": 1.25,
+    "cap_inset": 0.3,
+    "caption_text": "Motion 101: Random Acceleration"
+   }
+  },
+  {
+   "token": "example_1_9_motion_101_velocity_and_random_acceleration_vr",
+   "x": 11.5,
+   "y": 1.25,
+   "z": 1.4,
+   "wall": false
+  },
+  {
+   "token": "station_micropod",
+   "x": 13.5,
+   "y": 0.0,
+   "z": 0.7,
+   "wall": false,
+   "config": {
+    "caption_text": "Accelerate and Decelerate",
+    "top_height": 1.15
+   }
+  },
+  {
+   "token": "exercise_1_5_solution_accelerate_and_decelerate_vr",
+   "x": 13.5,
+   "y": 1.15,
+   "z": 0.7,
+   "wall": false
+  },
+  {
+   "token": "station_panel",
+   "x": 11.0,
+   "y": 2.0,
+   "z": 0.06,
+   "wall": true,
+   "config": {
+    "width_cells": 4,
+    "header": "FALL & SETTLE",
+    "lines": [
+     "A BOUNCING BALL IS A CLOCK",
+     "THAT RUNS DOWN",
+     "v += a, EVERY FRAME"
+    ]
+   }
+  },
+  {
+   "token": "station_pillar",
+   "x": 15.5,
+   "y": 0.0,
+   "z": 0.4,
+   "wall": false,
+   "config": {
+    "height": 2.8
+   }
+  },
+  {
+   "token": "station_stage",
+   "x": 21.0,
+   "y": 0.0,
+   "z": 2.6,
+   "wall": false,
+   "config": {
+    "width_cells": 4,
+    "depth_cells": 2,
+    "step_height": 0.18,
+    "name_plate": "PROJECTION & REFLECTION"
+   }
+  },
+  {
+   "token": "vector_projection_reflection_xl",
+   "x": 21.0,
+   "y": 0.18,
+   "z": 2.6,
+   "wall": false
+  },
+  {
+   "token": "station_micropod",
+   "x": 19.0,
+   "y": 0.0,
+   "z": 1.6,
+   "wall": false,
+   "config": {
+    "caption_text": "Attraction and Orbit",
+    "top_height": 1.35
+   }
+  },
+  {
+   "token": "exercise_1_8_solution_attraction_magnitude_vr",
+   "x": 19.0,
+   "y": 1.35,
+   "z": 1.6,
+   "wall": false
+  },
+  {
+   "token": "station_panel",
+   "x": 19.0,
+   "y": 2.25,
+   "z": 0.06,
+   "wall": true,
+   "config": {
+    "width_cells": 4,
+    "header": "PULL  -  THE HEART",
+    "lines": [
+     "AN ORBIT IS A PERPETUAL FALL",
+     "THAT ALWAYS MISSES THE GROUND",
+     "F = strength . dir / r^2"
+    ]
+   }
+  },
+  {
+   "token": "station_pillar",
+   "x": 24.0,
+   "y": 0.0,
+   "z": 0.4,
+   "wall": false,
+   "config": {
+    "height": 2.8
+   }
+  },
+  {
+   "token": "station_stage",
+   "x": 27.5,
+   "y": 0.0,
+   "z": 2.0,
+   "wall": false,
+   "config": {
+    "width_cells": 4,
+    "depth_cells": 2,
+    "step_height": 0.18,
+    "name_plate": "VectorThrowing"
+   }
+  },
+  {
+   "token": "VectorThrowing",
+   "x": 27.5,
+   "y": 0.18,
+   "z": 2.0,
+   "wall": false
+  },
+  {
+   "token": "station_panel",
+   "x": 27.5,
+   "y": 2.1,
+   "z": 0.06,
+   "wall": true,
+   "config": {
+    "width_cells": 4,
+    "header": "THROW  -  THE CULMINATION",
+    "lines": [
+     "A THROW IS AN INITIAL CONDITION",
+     "AFTER RELEASE, PHYSICS DECIDES",
+     "p(t) = p0 + v0 t + 1/2 g t^2"
+    ]
+   }
+  },
+  {
+   "token": "station_pillar",
+   "x": 30.0,
+   "y": 0.0,
+   "z": 0.4,
+   "wall": false,
+   "config": {
+    "height": 2.6
+   }
+  }
+ ]
 }

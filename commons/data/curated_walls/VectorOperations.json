@@ -1,320 +1,317 @@
 {
-  "sequence": "forces",
-  "counts": {
-    "small": 4,
-    "medium": 3,
-    "large": 3,
-    "applied": 3
+ "sequence": "forces",
+ "counts": {
+  "small": 4,
+  "medium": 3,
+  "large": 3,
+  "applied": 3
+ },
+ "pieces": [
+  {
+   "token": "station_panel",
+   "x": 2.2,
+   "y": 2.55,
+   "z": 0.06,
+   "wall": true,
+   "config": {
+    "width_cells": 3,
+    "header": "DOT  \u00b7  AGREEMENT",
+    "lines": [
+     "A.B = |A||B| cosT",
+     "ALIGNMENT IS A NUMBER"
+    ]
+   }
   },
-  "pieces": [
-    {
-      "token": "station_panel",
-      "x": 2.2,
-      "y": 2.55,
-      "z": 0.06,
-      "wall": true,
-      "config": {
-        "width_cells": 3,
-        "header": "DOT  \u00b7  AGREEMENT",
-        "lines": [
-          "A.B = |A||B| cosT",
-          "ALIGNMENT IS A NUMBER"
-        ]
-      }
-    },
-    {
-      "token": "station_panel",
-      "x": 14.5,
-      "y": 2.55,
-      "z": 0.06,
-      "wall": true,
-      "config": {
-        "width_cells": 3,
-        "header": "CROSS  \u00b7  PERPENDICULAR",
-        "lines": [
-          "A x B RISES OUT",
-          "RIGHT-HAND RULE"
-        ]
-      }
-    },
-    {
-      "token": "station_panel",
-      "x": 26.0,
-      "y": 2.55,
-      "z": 0.06,
-      "wall": true,
-      "config": {
-        "width_cells": 3,
-        "header": "PROJECTION  \u00b7  ACCOUNTABILITY",
-        "lines": [
-          "A = proj + reject",
-          "GRAVITY ON A SLOPE"
-        ]
-      }
-    },
-    {
-      "token": "station_plinth",
-      "x": 0.0,
-      "y": 0.0,
-      "z": 0.8,
-      "wall": false,
-      "config": {
-        "width_cells": 2,
-        "depth_cells": 1,
-        "top_height": 1.3,
-        "caption_text": "VectorBasics",
-        "cap_inset": 0.3
-      }
-    },
-    {
-      "token": "VectorBasics",
-      "x": 0.0,
-      "y": 1.3,
-      "z": 0.8,
-      "wall": false
-    },
-    {
-      "token": "station_plinth",
-      "x": 0.4,
-      "y": 0.0,
-      "z": 3.3,
-      "wall": false,
-      "config": {
-        "width_cells": 2,
-        "depth_cells": 2,
-        "top_height": 0.95,
-        "caption_text": "Basis Vectors Rig"
-      }
-    },
-    {
-      "token": "basis_vectors_rig",
-      "x": 0.4,
-      "y": 0.95,
-      "z": 3.3,
-      "wall": false
-    },
-    {
-      "token": "station_plinth",
-      "x": 3.4,
-      "y": 0.0,
-      "z": 1.0,
-      "wall": false,
-      "config": {
-        "width_cells": 3,
-        "depth_cells": 2,
-        "top_height": 0.85,
-        "caption_text": "Vector Workbench"
-      }
-    },
-    {
-      "token": "VectorWorkbench",
-      "x": 3.4,
-      "y": 0.85,
-      "z": 1.0,
-      "wall": false
-    },
-    {
-      "token": "station_plinth",
-      "x": 3.7,
-      "y": 0.0,
-      "z": 3.4,
-      "wall": false,
-      "config": {
-        "width_cells": 2,
-        "depth_cells": 1,
-        "top_height": 1.42,
-        "caption_text": "Dot Product",
-        "cap_inset": 0.3
-      }
-    },
-    {
-      "token": "VectorDotProduct",
-      "x": 3.7,
-      "y": 1.42,
-      "z": 3.4,
-      "wall": false
-    },
-    {
-      "token": "station_plinth",
-      "x": 6.0,
-      "y": 0.0,
-      "z": 0.6,
-      "wall": false,
-      "config": {
-        "width_cells": 2,
-        "depth_cells": 1,
-        "top_height": 1.05,
-        "caption_text": "Dot-Aligner: aim.foe=mercy"
-      }
-    },
-    {
-      "token": "dot_aligner",
-      "x": 6.0,
-      "y": 1.05,
-      "z": 0.6,
-      "wall": false
-    },
-    {
-      "token": "station_stage",
-      "x": 9.0,
-      "y": 0.0,
-      "z": 2.4,
-      "wall": false,
-      "config": {
-        "width_cells": 4,
-        "depth_cells": 4,
-        "step_height": 0.18,
-        "name_plate": "Dot Product Projector"
-      }
-    },
-    {
-      "token": "dot_product_projector",
-      "x": 9.0,
-      "y": 0.18,
-      "z": 2.4,
-      "wall": false
-    },
-    {
-      "token": "station_plinth",
-      "x": 12.4,
-      "y": 0.0,
-      "z": 3.3,
-      "wall": false,
-      "config": {
-        "width_cells": 2,
-        "depth_cells": 1,
-        "top_height": 1.42,
-        "caption_text": "Cross Product",
-        "cap_inset": 0.3
-      }
-    },
-    {
-      "token": "VectorCrossProduct",
-      "x": 12.4,
-      "y": 1.42,
-      "z": 3.3,
-      "wall": false
-    },
-    {
-      "token": "station_plinth",
-      "x": 12.6,
-      "y": 0.0,
-      "z": 0.7,
-      "wall": false,
-      "config": {
-        "width_cells": 2,
-        "depth_cells": 1,
-        "top_height": 1.0,
-        "caption_text": "Torque Crank: r x F"
-      }
-    },
-    {
-      "token": "torque_crank",
-      "x": 12.6,
-      "y": 1.0,
-      "z": 0.7,
-      "wall": false
-    },
-    {
-      "token": "station_stage",
-      "x": 17.4,
-      "y": 0.0,
-      "z": 2.4,
-      "wall": false,
-      "config": {
-        "width_cells": 4,
-        "depth_cells": 4,
-        "step_height": 0.18,
-        "name_plate": "Cross Product Demo"
-      }
-    },
-    {
-      "token": "cross_product_demo",
-      "x": 17.4,
-      "y": 0.18,
-      "z": 2.4,
-      "wall": false
-    },
-    {
-      "token": "station_plinth",
-      "x": 23.0,
-      "y": 0.0,
-      "z": 3.3,
-      "wall": false,
-      "config": {
-        "width_cells": 1,
-        "depth_cells": 1,
-        "top_height": 1.3,
-        "caption_text": "Normal Force & Reflection",
-        "cap_inset": 0.3
-      }
-    },
-    {
-      "token": "normal_force_demo",
-      "x": 23.0,
-      "y": 1.3,
-      "z": 3.3,
-      "wall": false
-    },
-    {
-      "token": "station_plinth",
-      "x": 23.4,
-      "y": 0.0,
-      "z": 1.3,
-      "wall": false,
-      "config": {
-        "width_cells": 2,
-        "depth_cells": 2,
-        "top_height": 0.9,
-        "caption_text": "Projection & Reflection"
-      }
-    },
-    {
-      "token": "VectorProjectionReflection",
-      "x": 23.4,
-      "y": 0.9,
-      "z": 1.3,
-      "wall": false
-    },
-    {
-      "token": "station_plinth",
-      "x": 25.8,
-      "y": 0.0,
-      "z": 0.6,
-      "wall": false,
-      "config": {
-        "width_cells": 2,
-        "depth_cells": 1,
-        "top_height": 1.0,
-        "caption_text": "Projection Shadow: (a.n)n"
-      }
-    },
-    {
-      "token": "projection_shadow",
-      "x": 25.8,
-      "y": 1.0,
-      "z": 0.6,
-      "wall": false
-    },
-    {
-      "token": "station_stage",
-      "x": 28.8,
-      "y": 0.0,
-      "z": 2.4,
-      "wall": false,
-      "config": {
-        "width_cells": 3,
-        "depth_cells": 3,
-        "step_height": 0.18,
-        "name_plate": "Vector Projection"
-      }
-    },
-    {
-      "token": "vector_projection_demo",
-      "x": 28.8,
-      "y": 0.18,
-      "z": 2.4,
-      "wall": false
-    }
-  ]
+  {
+   "token": "station_panel",
+   "x": 14.5,
+   "y": 2.55,
+   "z": 0.06,
+   "wall": true,
+   "config": {
+    "width_cells": 3,
+    "header": "CROSS  \u00b7  PERPENDICULAR",
+    "lines": [
+     "A x B RISES OUT",
+     "RIGHT-HAND RULE"
+    ]
+   }
+  },
+  {
+   "token": "station_panel",
+   "x": 26.0,
+   "y": 2.55,
+   "z": 0.06,
+   "wall": true,
+   "config": {
+    "width_cells": 3,
+    "header": "PROJECTION  \u00b7  ACCOUNTABILITY",
+    "lines": [
+     "A = proj + reject",
+     "GRAVITY ON A SLOPE"
+    ]
+   }
+  },
+  {
+   "token": "station_plinth",
+   "x": 0.0,
+   "y": 0.0,
+   "z": 0.8,
+   "wall": false,
+   "config": {
+    "width_cells": 2,
+    "depth_cells": 1,
+    "top_height": 1.3,
+    "caption_text": "VectorBasics",
+    "cap_inset": 0.3
+   }
+  },
+  {
+   "token": "VectorBasics",
+   "x": 0.0,
+   "y": 1.3,
+   "z": 0.8,
+   "wall": false
+  },
+  {
+   "token": "station_plinth",
+   "x": 0.4,
+   "y": 0.0,
+   "z": 3.3,
+   "wall": false,
+   "config": {
+    "width_cells": 2,
+    "depth_cells": 2,
+    "top_height": 0.95,
+    "caption_text": "Basis Vectors Rig"
+   }
+  },
+  {
+   "token": "basis_vectors_rig",
+   "x": 0.4,
+   "y": 0.95,
+   "z": 3.3,
+   "wall": false
+  },
+  {
+   "token": "station_plinth",
+   "x": 3.4,
+   "y": 0.0,
+   "z": 1.0,
+   "wall": false,
+   "config": {
+    "width_cells": 3,
+    "depth_cells": 2,
+    "top_height": 0.85,
+    "caption_text": "Vector Workbench"
+   }
+  },
+  {
+   "token": "VectorWorkbench",
+   "x": 3.4,
+   "y": 0.85,
+   "z": 1.0,
+   "wall": false
+  },
+  {
+   "token": "station_plinth",
+   "x": 3.7,
+   "y": 0.0,
+   "z": 3.4,
+   "wall": false,
+   "config": {
+    "width_cells": 2,
+    "depth_cells": 1,
+    "top_height": 1.42,
+    "caption_text": "Dot Product",
+    "cap_inset": 0.3
+   }
+  },
+  {
+   "token": "VectorDotProduct",
+   "x": 3.7,
+   "y": 1.42,
+   "z": 3.4,
+   "wall": false
+  },
+  {
+   "token": "station_plinth",
+   "x": 6.0,
+   "y": 0.0,
+   "z": 0.6,
+   "wall": false,
+   "config": {
+    "width_cells": 2,
+    "depth_cells": 1,
+    "top_height": 1.05,
+    "caption_text": "Dot-Aligner: aim.foe=mercy"
+   }
+  },
+  {
+   "token": "dot_aligner",
+   "x": 6.0,
+   "y": 1.05,
+   "z": 0.6,
+   "wall": false
+  },
+  {
+   "token": "station_stage",
+   "x": 9.0,
+   "y": 0.0,
+   "z": 2.4,
+   "wall": false,
+   "config": {
+    "width_cells": 4,
+    "depth_cells": 4,
+    "step_height": 0.18,
+    "name_plate": "Dot Product Projector"
+   }
+  },
+  {
+   "token": "dot_product_projector",
+   "x": 9.0,
+   "y": 0.18,
+   "z": 2.4,
+   "wall": false
+  },
+  {
+   "token": "station_plinth",
+   "x": 12.4,
+   "y": 0.0,
+   "z": 3.3,
+   "wall": false,
+   "config": {
+    "width_cells": 2,
+    "depth_cells": 1,
+    "top_height": 1.42,
+    "caption_text": "Cross Product",
+    "cap_inset": 0.3
+   }
+  },
+  {
+   "token": "VectorCrossProduct",
+   "x": 12.4,
+   "y": 1.42,
+   "z": 3.3,
+   "wall": false
+  },
+  {
+   "token": "station_plinth",
+   "x": 12.6,
+   "y": 0.0,
+   "z": 0.7,
+   "wall": false,
+   "config": {
+    "width_cells": 2,
+    "depth_cells": 1,
+    "top_height": 1.0,
+    "caption_text": "Torque Crank: r x F"
+   }
+  },
+  {
+   "token": "torque_crank",
+   "x": 12.6,
+   "y": 1.0,
+   "z": 0.7,
+   "wall": false
+  },
+  {
+   "token": "station_stage",
+   "x": 17.4,
+   "y": 0.0,
+   "z": 2.4,
+   "wall": false,
+   "config": {
+    "width_cells": 4,
+    "depth_cells": 4,
+    "step_height": 0.18,
+    "name_plate": "Cross Product Demo"
+   }
+  },
+  {
+   "token": "cross_product_demo",
+   "x": 17.4,
+   "y": 0.18,
+   "z": 2.4,
+   "wall": false
+  },
+  {
+   "token": "station_micropod",
+   "x": 23.0,
+   "y": 0.0,
+   "z": 3.3,
+   "wall": false,
+   "config": {
+    "caption_text": "Normal Force & Reflection",
+    "top_height": 1.3
+   }
+  },
+  {
+   "token": "normal_force_demo",
+   "x": 23.0,
+   "y": 1.3,
+   "z": 3.3,
+   "wall": false
+  },
+  {
+   "token": "station_plinth",
+   "x": 23.4,
+   "y": 0.0,
+   "z": 1.3,
+   "wall": false,
+   "config": {
+    "width_cells": 2,
+    "depth_cells": 2,
+    "top_height": 0.9,
+    "caption_text": "Projection & Reflection"
+   }
+  },
+  {
+   "token": "VectorProjectionReflection",
+   "x": 23.4,
+   "y": 0.9,
+   "z": 1.3,
+   "wall": false
+  },
+  {
+   "token": "station_plinth",
+   "x": 25.8,
+   "y": 0.0,
+   "z": 0.6,
+   "wall": false,
+   "config": {
+    "width_cells": 2,
+    "depth_cells": 1,
+    "top_height": 1.0,
+    "caption_text": "Projection Shadow: (a.n)n"
+   }
+  },
+  {
+   "token": "projection_shadow",
+   "x": 25.8,
+   "y": 1.0,
+   "z": 0.6,
+   "wall": false
+  },
+  {
+   "token": "station_stage",
+   "x": 28.8,
+   "y": 0.0,
+   "z": 2.4,
+   "wall": false,
+   "config": {
+    "width_cells": 3,
+    "depth_cells": 3,
+    "step_height": 0.18,
+    "name_plate": "Vector Projection"
+   }
+  },
+  {
+   "token": "vector_projection_demo",
+   "x": 28.8,
+   "y": 0.18,
+   "z": 2.4,
+   "wall": false
+  }
+ ]
 }

@@ -1,144 +1,145 @@
 {
-  "sequence": "forces",
-  "counts": {
-    "small": 0,
-    "medium": 0,
-    "large": 0,
-    "applied": 4
+ "sequence": "forces",
+ "counts": {
+  "small": 0,
+  "medium": 0,
+  "large": 0,
+  "applied": 4
+ },
+ "pieces": [
+  {
+   "token": "station_panel",
+   "x": 1.5,
+   "y": 2.45,
+   "z": 0.06,
+   "wall": true,
+   "config": {
+    "width_cells": 3,
+    "header": "THE LAUNCH, VERTICAL",
+    "lines": [
+     "v0 IS GIVEN \u00b7 GRAVITY WRITES THE REST",
+     "the throw, and the throw home"
+    ],
+    "accent_bar": true
+   }
   },
-  "pieces": [
-    {
-      "token": "station_panel",
-      "x": 1.5,
-      "y": 2.45,
-      "z": 0.06,
-      "wall": true,
-      "config": {
-        "width_cells": 3,
-        "header": "THE LAUNCH, VERTICAL",
-        "lines": ["v0 IS GIVEN · GRAVITY WRITES THE REST", "the throw, and the throw home"],
-        "accent_bar": true
-      }
-    },
-    {
-      "token": "station_plinth",
-      "x": 0.0,
-      "y": 0.0,
-      "z": 0.55,
-      "wall": false,
-      "config": {
-        "width_cells": 1,
-        "depth_cells": 1,
-        "top_height": 1.35,
-        "cap_inset": 0.3,
-        "caption_text": "Force Pad",
-        "stencil_text": "v0",
-        "three_bar": true
-      }
-    },
-    {
-      "token": "force_pad",
-      "x": 0.0,
-      "y": 1.35,
-      "z": 0.55,
-      "wall": false
-    },
-    {
-      "token": "station_plinth",
-      "x": 3.0,
-      "y": 0.0,
-      "z": 1.5,
-      "wall": false,
-      "config": {
-        "width_cells": 2,
-        "depth_cells": 2,
-        "top_height": 0.9,
-        "caption_text": "Return Launcher",
-        "stencil_text": "HOME",
-        "three_bar": true
-      }
-    },
-    {
-      "token": "return_launcher",
-      "x": 3.0,
-      "y": 0.9,
-      "z": 1.5,
-      "wall": false
-    },
-    {
-      "token": "station_panel",
-      "x": 8.5,
-      "y": 2.45,
-      "z": 0.06,
-      "wall": true,
-      "config": {
-        "width_cells": 4,
-        "header": "THE BALANCE LAW, DRIFTING",
-        "lines": ["τ = w·d at every arm", "the still counterpoint to the throw"],
-        "accent_bar": true
-      }
-    },
-    {
-      "token": "station_pillar",
-      "x": 6.0,
-      "y": 0.0,
-      "z": 2.75,
-      "wall": false,
-      "config": {
-        "height": 3.2
-      }
-    },
-    {
-      "token": "station_plinth",
-      "x": 7.0,
-      "y": 0.0,
-      "z": 2.4,
-      "wall": false,
-      "config": {
-        "width_cells": 3,
-        "depth_cells": 3,
-        "top_height": 0.4,
-        "caption_text": "Calder Mobile — project primitives",
-        "three_bar": true
-      }
-    },
-    {
-      "token": "calder_object_mobile",
-      "x": 7.0,
-      "y": 0.4,
-      "z": 2.4,
-      "wall": false
-    },
-    {
-      "token": "station_plinth",
-      "x": 10.5,
-      "y": 0.0,
-      "z": 2.4,
-      "wall": false,
-      "config": {
-        "width_cells": 3,
-        "depth_cells": 3,
-        "top_height": 0.4,
-        "caption_text": "Calder Mobile — real weights",
-        "three_bar": true
-      }
-    },
-    {
-      "token": "calder_mobile",
-      "x": 10.5,
-      "y": 0.4,
-      "z": 2.4,
-      "wall": false
-    },
-    {
-      "token": "station_pillar",
-      "x": 12.0,
-      "y": 0.0,
-      "z": 2.75,
-      "wall": false,
-      "config": {
-        "height": 3.2
-      }
-    }
-  ]
+  {
+   "token": "station_micropod",
+   "x": 0.0,
+   "y": 0.0,
+   "z": 0.55,
+   "wall": false,
+   "config": {
+    "caption_text": "Force Pad",
+    "top_height": 1.35
+   }
+  },
+  {
+   "token": "force_pad",
+   "x": 0.0,
+   "y": 1.35,
+   "z": 0.55,
+   "wall": false
+  },
+  {
+   "token": "station_plinth",
+   "x": 3.0,
+   "y": 0.0,
+   "z": 1.5,
+   "wall": false,
+   "config": {
+    "width_cells": 2,
+    "depth_cells": 2,
+    "top_height": 0.9,
+    "caption_text": "Return Launcher",
+    "stencil_text": "HOME",
+    "three_bar": true
+   }
+  },
+  {
+   "token": "return_launcher",
+   "x": 3.0,
+   "y": 0.9,
+   "z": 1.5,
+   "wall": false
+  },
+  {
+   "token": "station_panel",
+   "x": 8.5,
+   "y": 2.45,
+   "z": 0.06,
+   "wall": true,
+   "config": {
+    "width_cells": 4,
+    "header": "THE BALANCE LAW, DRIFTING",
+    "lines": [
+     "\u03c4 = w\u00b7d at every arm",
+     "the still counterpoint to the throw"
+    ],
+    "accent_bar": true
+   }
+  },
+  {
+   "token": "station_pillar",
+   "x": 6.0,
+   "y": 0.0,
+   "z": 2.75,
+   "wall": false,
+   "config": {
+    "height": 3.2
+   }
+  },
+  {
+   "token": "station_plinth",
+   "x": 7.0,
+   "y": 0.0,
+   "z": 2.4,
+   "wall": false,
+   "config": {
+    "width_cells": 3,
+    "depth_cells": 3,
+    "top_height": 0.4,
+    "caption_text": "Calder Mobile \u2014 project primitives",
+    "three_bar": true
+   }
+  },
+  {
+   "token": "calder_object_mobile",
+   "x": 7.0,
+   "y": 0.4,
+   "z": 2.4,
+   "wall": false
+  },
+  {
+   "token": "station_plinth",
+   "x": 10.5,
+   "y": 0.0,
+   "z": 2.4,
+   "wall": false,
+   "config": {
+    "width_cells": 3,
+    "depth_cells": 3,
+    "top_height": 0.4,
+    "caption_text": "Calder Mobile \u2014 real weights",
+    "three_bar": true
+   }
+  },
+  {
+   "token": "calder_mobile",
+   "x": 10.5,
+   "y": 0.4,
+   "z": 2.4,
+   "wall": false
+  },
+  {
+   "token": "station_pillar",
+   "x": 12.0,
+   "y": 0.0,
+   "z": 2.75,
+   "wall": false,
+   "config": {
+    "height": 3.2
+   }
+  }
+ ]
 }
