@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/artifacts/station/station_floorline.gd" id="1"]
+
+[node name="StationFloorline" type="Node3D"]
+script = ExtResource("1")
+length_cells = 3
+width = 0.3
+style = "path"
+direction = 1
