@@ -1,0 +1,223 @@
+{
+ "sequence": "fractals",
+ "counts": {
+  "small": 2,
+  "medium": 1,
+  "large": 1,
+  "applied": 1
+ },
+ "pieces": [
+  {
+   "token": "station_pillar",
+   "x": -1.0,
+   "y": 0.0,
+   "z": 0.4,
+   "wall": false,
+   "config": {
+    "height": 2.6,
+    "signage_text": "THE LAMBDA-EDGE, IN FULL"
+   }
+  },
+  {
+   "token": "station_panel",
+   "x": 1.0,
+   "y": 2.0,
+   "z": 0.06,
+   "wall": true,
+   "config": {
+    "width_cells": 2,
+    "header": "THE SEED",
+    "lines": [
+     "F + lambda E(S): rule + noise",
+     "the QFEP made vegetable"
+    ],
+    "accent_bar": true
+   }
+  },
+  {
+   "token": "station_micropod",
+   "x": 1.0,
+   "y": 0.0,
+   "z": 2.4,
+   "wall": false,
+   "config": {
+    "caption_text": "Stochastic Tree",
+    "top_height": 1.25,
+    "cap_inset": 0.1,
+    "base_meters": 0.6,
+    "edge_light": true
+   }
+  },
+  {
+   "token": "fractal_stochastic_tree",
+   "x": 1.0,
+   "y": 1.25,
+   "z": 2.4,
+   "wall": false
+  },
+  {
+   "token": "station_panel",
+   "x": 5.0,
+   "y": 2.0,
+   "z": 0.06,
+   "wall": true,
+   "config": {
+    "width_cells": 2,
+    "header": "THE BRIDGE",
+    "lines": [
+     "one line visits every point",
+     "the way out to L-systems"
+    ],
+    "accent_bar": true
+   }
+  },
+  {
+   "token": "station_micropod",
+   "x": 5.0,
+   "y": 0.0,
+   "z": 1.4,
+   "wall": false,
+   "config": {
+    "caption_text": "3D Hilbert Curve",
+    "top_height": 1.3
+   }
+  },
+  {
+   "token": "Hilbert3D",
+   "x": 5.0,
+   "y": 1.3,
+   "z": 1.4,
+   "wall": false
+  },
+  {
+   "token": "station_panel",
+   "x": 9.0,
+   "y": 2.0,
+   "z": 0.06,
+   "wall": true,
+   "config": {
+    "width_cells": 2,
+    "header": "COMPUTATION",
+    "lines": [
+     "Rule 90 draws Sierpinski",
+     "the stack IS the fractal"
+    ],
+    "accent_bar": true
+   }
+  },
+  {
+   "token": "station_plinth",
+   "x": 9.0,
+   "y": 0.0,
+   "z": 0.5,
+   "wall": false,
+   "config": {
+    "width_cells": 2,
+    "depth_cells": 2,
+    "top_height": 0.9,
+    "caption_text": "Cellular Automata 3D Stacked"
+   }
+  },
+  {
+   "token": "cellular_automata_3d_stacked",
+   "x": 9.0,
+   "y": 0.9,
+   "z": 0.5,
+   "wall": false
+  },
+  {
+   "token": "station_panel",
+   "x": 13.5,
+   "y": 2.0,
+   "z": 0.06,
+   "wall": true,
+   "config": {
+    "width_cells": 3,
+    "header": "EVOLUTION",
+    "lines": [
+     "fitness landscapes are fractal",
+     "selection walks the ridges"
+    ],
+    "accent_bar": true
+   }
+  },
+  {
+   "token": "station_plinth",
+   "x": 13.5,
+   "y": 0.0,
+   "z": 1.7,
+   "wall": false,
+   "config": {
+    "width_cells": 3,
+    "depth_cells": 1,
+    "top_height": 0.85,
+    "caption_text": "Evolutionary Algorithms"
+   }
+  },
+  {
+   "token": "evolutionary_algorithms",
+   "x": 13.5,
+   "y": 0.85,
+   "z": 1.7,
+   "wall": false
+  },
+  {
+   "token": "station_pillar",
+   "x": 17.0,
+   "y": 0.0,
+   "z": 0.4,
+   "wall": false,
+   "config": {
+    "height": 2.6
+   }
+  },
+  {
+   "token": "station_panel",
+   "x": 20.0,
+   "y": 2.0,
+   "z": 0.06,
+   "wall": true,
+   "config": {
+    "width_cells": 3,
+    "header": "USEFUL STRUCTURE",
+    "lines": [
+     "Hilbert, Peano, Moore",
+     "infinite edge, finite room"
+    ],
+    "accent_bar": true
+   }
+  },
+  {
+   "token": "station_stage",
+   "x": 20.0,
+   "y": 0.0,
+   "z": 1.6,
+   "wall": false,
+   "config": {
+    "width_cells": 4,
+    "depth_cells": 2,
+    "step_height": 0.18,
+    "name_plate": "Space-Filling Curve Gallery",
+    "edge_light": true
+   }
+  },
+  {
+   "token": "space_filling_curve_gallery",
+   "x": 20.0,
+   "y": 0.18,
+   "z": 1.6,
+   "wall": false
+  },
+  {
+   "token": "station_pillar",
+   "x": 23.0,
+   "y": 0.0,
+   "z": 0.4,
+   "wall": false,
+   "config": {
+    "height": 2.6,
+    "signage_text": "WHERE GEOMETRY, COMPUTATION, LIFE CONVERGE"
+   }
+  }
+ ]
+}

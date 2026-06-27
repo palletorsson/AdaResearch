@@ -1,0 +1,90 @@
+{
+  "sequence": "fractals",
+  "counts": { "small": 2, "medium": 0, "large": 2, "applied": 0 },
+  "pieces": [
+    {
+      "token": "station_panel",
+      "x": 1.5,
+      "y": 2.1,
+      "z": 0.06,
+      "wall": true,
+      "config": {
+        "width_cells": 4,
+        "header": "F(n) = F(n-1) + F(n-2)",
+        "lines": ["RATIO -> PHI = 1.618", "NATURE GROWS THE NUMBER"]
+      }
+    },
+    {
+      "token": "station_micropod",
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.5,
+      "wall": false,
+      "config": { "caption_text": "Fibonacci Sequences", "top_height": 1.1 }
+    },
+    {
+      "token": "fibonacci_sequences",
+      "x": 0.0,
+      "y": 1.1,
+      "z": 0.5,
+      "wall": false
+    },
+    {
+      "token": "station_plinth",
+      "x": 3.0,
+      "y": 0.0,
+      "z": 0.4,
+      "wall": false,
+      "config": { "width_cells": 1, "depth_cells": 1, "top_height": 1.4, "cap_inset": 0.3, "caption_text": "romanesco" }
+    },
+    {
+      "token": "romanesco",
+      "x": 3.0,
+      "y": 1.4,
+      "z": 0.4,
+      "wall": false
+    },
+    {
+      "token": "station_panel",
+      "x": 11.0,
+      "y": 2.1,
+      "z": 0.06,
+      "wall": true,
+      "config": {
+        "width_cells": 4,
+        "header": "PHI = 1 + 1/PHI",
+        "lines": ["LOSE A SQUARE, STAY GOLDEN", "FROM PROOF TO LANDSCAPE"]
+      }
+    },
+    {
+      "token": "station_stage",
+      "x": 8.0,
+      "y": 0.0,
+      "z": 1.1,
+      "wall": false,
+      "config": { "width_cells": 5, "depth_cells": 4, "step_height": 0.18, "name_plate": "Golden Rectangle" }
+    },
+    {
+      "token": "golden_rectangle",
+      "x": 8.0,
+      "y": 0.18,
+      "z": 1.1,
+      "wall": false
+    },
+    {
+      "token": "station_stage",
+      "x": 15.0,
+      "y": 0.0,
+      "z": 1.7,
+      "wall": false,
+      "config": { "width_cells": 4, "depth_cells": 4, "step_height": 0.18, "name_plate": "Fibonacci Terrain" }
+    },
+    {
+      "token": "fibonacci_terrain",
+      "x": 15.0,
+      "y": 0.18,
+      "z": 1.7,
+      "wall": false
+    }
+  ]
+}

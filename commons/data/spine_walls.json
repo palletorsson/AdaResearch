@@ -21227,250 +21227,280 @@
  "Fractal_Recursion": {
   "sequence": "fractals",
   "counts": {
-   "small": 2,
-   "medium": 2,
+   "small": 1,
+   "medium": 1,
    "large": 1,
    "applied": 5
   },
   "pieces": [
    {
-    "token": "station_plinth",
+    "token": "station_wall",
+    "x": 1.0,
+    "y": 0.0,
+    "z": 0.0,
+    "wall": true,
+    "config": {
+     "width_cells": 5
+    }
+   },
+   {
+    "token": "station_panel",
+    "x": 1.0,
+    "y": 2.3,
+    "z": 0.06,
+    "wall": true,
+    "config": {
+     "width_cells": 4,
+     "header": "A FUNCTION THAT CALLS ITSELF",
+     "lines": [
+      "Recursion is not repetition \u2014 it is self-reference.",
+      "A square inside a square, with no bottom but the base case."
+     ]
+    }
+   },
+   {
+    "token": "station_micropod",
     "x": 0.0,
     "y": 0.0,
-    "z": 0.8,
+    "z": 0.5,
     "wall": false,
     "config": {
-     "width_cells": 2,
-     "depth_cells": 1,
-     "top_height": 0.9
+     "caption_text": "Fractal Recursion 2",
+     "top_height": 1.15,
+     "cap_inset": 0.1,
+     "base_meters": 0.6
     }
    },
    {
     "token": "fractal_recursion_2",
     "x": 0.0,
-    "y": 0.9,
-    "z": 0.8,
+    "y": 1.15,
+    "z": 0.5,
     "wall": false
    },
    {
     "token": "station_plinth",
-    "x": 3.0,
+    "x": 2.5,
     "y": 0.0,
-    "z": 0.8,
+    "z": 0.2,
     "wall": false,
     "config": {
      "width_cells": 1,
      "depth_cells": 1,
-     "top_height": 1.2
-    }
-   },
-   {
-    "token": "dark_sphere",
-    "x": 3.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_panel",
-    "x": 1.5,
-    "y": 1.9,
-    "z": 0.06,
-    "wall": true
-   },
-   {
-    "token": "station_pillar",
-    "x": 5.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 8.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 4,
-     "depth_cells": 1,
-     "top_height": 0.9
-    }
-   },
-   {
-    "token": "science_screen",
-    "x": 8.0,
-    "y": 0.9,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 13.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
+     "top_height": 1.3,
+     "cap_inset": 0.3,
+     "caption_text": "Cube Subdivision"
     }
    },
    {
     "token": "cube_subdivision",
-    "x": 13.0,
-    "y": 1.2,
-    "z": 0.8,
+    "x": 2.5,
+    "y": 1.3,
+    "z": 0.2,
     "wall": false
    },
    {
-    "token": "station_panel",
-    "x": 10.5,
-    "y": 1.9,
-    "z": 0.06,
-    "wall": true
-   },
-   {
-    "token": "station_pillar",
-    "x": 15.0,
+    "token": "station_wall",
+    "x": 6.0,
     "y": 0.0,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_stage",
-    "x": 18.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
+    "z": 0.0,
+    "wall": true,
     "config": {
-     "width_cells": 4,
-     "depth_cells": 4,
-     "step_height": 0.18
+     "width_cells": 5
     }
    },
    {
-    "token": "example_8_3_recursion_circles_vr",
-    "x": 18.0,
-    "y": 0.18,
-    "z": 0.8,
-    "wall": false
-   },
-   {
     "token": "station_panel",
-    "x": 19.5,
-    "y": 1.9,
+    "x": 6.0,
+    "y": 2.4,
     "z": 0.06,
-    "wall": true
-   },
-   {
-    "token": "station_pillar",
-    "x": 23.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_stage",
-    "x": 26.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
+    "wall": true,
     "config": {
-     "width_cells": 4,
-     "depth_cells": 4,
-     "step_height": 0.18
+     "width_cells": 5,
+     "header": "THE CHAIR WAS ALWAYS INSIDE THE CUBE",
+     "lines": [
+      "To subdivide is to choose.",
+      "Subdivision removes what is not the thing \u2014 and a chair, a table, are left."
+     ]
     }
-   },
-   {
-    "token": "fibonacci_pagoda",
-    "x": 26.0,
-    "y": 0.18,
-    "z": 0.8,
-    "wall": false
    },
    {
     "token": "station_plinth",
-    "x": 31.0,
+    "x": 5.0,
     "y": 0.0,
-    "z": 0.8,
+    "z": 1.0,
     "wall": false,
     "config": {
      "width_cells": 2,
      "depth_cells": 2,
-     "top_height": 0.9
+     "top_height": 0.95,
+     "caption_text": "Recursive Chair"
     }
    },
    {
     "token": "recursive_chair",
-    "x": 31.0,
-    "y": 0.9,
-    "z": 0.8,
+    "x": 5.0,
+    "y": 0.95,
+    "z": 1.0,
     "wall": false
    },
    {
     "token": "station_stage",
-    "x": 34.0,
+    "x": 7.5,
     "y": 0.0,
-    "z": 0.8,
+    "z": 1.6,
     "wall": false,
     "config": {
      "width_cells": 3,
      "depth_cells": 3,
-     "step_height": 0.18
+     "step_height": 0.18,
+     "name_plate": "Recursive Table (a cube that kept its top)"
     }
    },
    {
     "token": "recursive_table",
-    "x": 34.0,
+    "x": 7.5,
     "y": 0.18,
-    "z": 0.8,
+    "z": 1.6,
     "wall": false
    },
    {
-    "token": "station_plinth",
-    "x": 38.0,
+    "token": "station_wall",
+    "x": 12.0,
     "y": 0.0,
-    "z": 0.8,
+    "z": 0.0,
+    "wall": true,
+    "config": {
+     "width_cells": 5
+    }
+   },
+   {
+    "token": "station_panel",
+    "x": 12.0,
+    "y": 2.6,
+    "z": 0.06,
+    "wall": true,
+    "config": {
+     "width_cells": 5,
+     "header": "THE FIRST FRACTAL YOU CAN HOLD",
+     "lines": [
+      "A circle that contains circles, at every scale.",
+      "Step inside: the rule is the same all the way down."
+     ]
+    }
+   },
+   {
+    "token": "station_stage",
+    "x": 12.0,
+    "y": 0.0,
+    "z": 2.4,
+    "wall": false,
+    "config": {
+     "width_cells": 4,
+     "depth_cells": 4,
+     "step_height": 0.18,
+     "name_plate": "Recursion Circles \u2014 step inside"
+    }
+   },
+   {
+    "token": "example_8_3_recursion_circles_vr",
+    "x": 12.0,
+    "y": 0.18,
+    "z": 2.4,
+    "wall": false
+   },
+   {
+    "token": "science_screen",
+    "x": 9.5,
+    "y": 1.6,
+    "z": 0.06,
+    "wall": true
+   },
+   {
+    "token": "station_wall",
+    "x": 17.0,
+    "y": 0.0,
+    "z": 0.0,
+    "wall": true,
+    "config": {
+     "width_cells": 5
+    }
+   },
+   {
+    "token": "station_panel",
+    "x": 17.0,
+    "y": 2.3,
+    "z": 0.06,
+    "wall": true,
+    "config": {
+     "width_cells": 4,
+     "header": "THE RULE, PUT TO WORK",
+     "lines": [
+      "Recurse a cut, recurse a strut, recurse a tier.",
+      "A staircase, a boolean cut, a pagoda \u2014 recursion as architecture."
+     ]
+    }
+   },
+   {
+    "token": "station_plinth",
+    "x": 15.5,
+    "y": 0.0,
+    "z": 1.2,
     "wall": false,
     "config": {
      "width_cells": 2,
      "depth_cells": 2,
-     "top_height": 0.9
+     "top_height": 0.9,
+     "caption_text": "Recursive Boolean Cube"
     }
    },
    {
     "token": "recursive_boolean_cube",
-    "x": 38.0,
+    "x": 15.5,
     "y": 0.9,
-    "z": 0.8,
+    "z": 1.2,
     "wall": false
    },
    {
     "token": "station_plinth",
-    "x": 41.0,
+    "x": 17.5,
     "y": 0.0,
-    "z": 0.8,
+    "z": 0.3,
     "wall": false,
     "config": {
      "width_cells": 1,
      "depth_cells": 1,
-     "top_height": 1.2
+     "top_height": 1.1,
+     "cap_inset": 0.3,
+     "caption_text": "Cube Staircase"
     }
    },
    {
     "token": "cube_staircase",
-    "x": 41.0,
-    "y": 1.2,
-    "z": 0.8,
+    "x": 17.5,
+    "y": 1.1,
+    "z": 0.3,
     "wall": false
    },
    {
-    "token": "station_panel",
-    "x": 33.5,
-    "y": 1.9,
-    "z": 0.06,
-    "wall": true
+    "token": "station_stage",
+    "x": 20.0,
+    "y": 0.0,
+    "z": 2.2,
+    "wall": false,
+    "config": {
+     "width_cells": 4,
+     "depth_cells": 4,
+     "step_height": 0.18,
+     "name_plate": "Fibonacci Pagoda (the golden ratio as architecture)"
+    }
+   },
+   {
+    "token": "fibonacci_pagoda",
+    "x": 20.0,
+    "y": 0.18,
+    "z": 2.2,
+    "wall": false
    }
   ]
  },
@@ -21478,621 +21508,616 @@
   "sequence": "fractals",
   "counts": {
    "small": 4,
-   "medium": 1,
-   "large": 3,
-   "applied": 2
+   "medium": 0,
+   "large": 2,
+   "applied": 3
   },
   "pieces": [
    {
-    "token": "station_plinth",
+    "token": "station_panel",
+    "x": 2.5,
+    "y": 2.05,
+    "z": 0.06,
+    "wall": true,
+    "config": {
+     "width_cells": 3,
+     "header": "BRANCHING WITHOUT BLUEPRINTS",
+     "lines": [
+      "SPLIT  ROTATE  RECURSE",
+      "TWO SMALLER TREES, FOREVER"
+     ]
+    }
+   },
+   {
+    "token": "station_micropod",
     "x": 0.0,
     "y": 0.0,
-    "z": 0.8,
+    "z": 2.3,
     "wall": false,
     "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
+     "caption_text": "small_subdivision_cube",
+     "top_height": 1.15
+    }
+   },
+   {
+    "token": "station_micropod",
+    "x": 1.2,
+    "y": 0.0,
+    "z": 0.5,
+    "wall": false,
+    "config": {
+     "caption_text": "Living Paper \u2014 Mandelbrot",
+     "top_height": 1.0
     }
    },
    {
     "token": "living_paper",
-    "x": 0.0,
-    "y": 1.2,
-    "z": 0.8,
+    "x": 1.2,
+    "y": 1.0,
+    "z": 0.5,
     "wall": false
    },
    {
-    "token": "station_plinth",
-    "x": 2.0,
+    "token": "station_micropod",
+    "x": 2.5,
     "y": 0.0,
-    "z": 0.8,
+    "z": 1.1,
     "wall": false,
     "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
+     "caption_text": "recursive_tree_2",
+     "top_height": 1.3
     }
    },
    {
     "token": "recursive_tree_2",
-    "x": 2.0,
-    "y": 1.2,
-    "z": 0.8,
+    "x": 2.5,
+    "y": 1.3,
+    "z": 1.1,
     "wall": false
    },
    {
-    "token": "station_plinth",
+    "token": "station_micropod",
     "x": 4.0,
     "y": 0.0,
-    "z": 0.8,
+    "z": 0.4,
     "wall": false,
     "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
-    }
-   },
-   {
-    "token": "small_subdivision_cube",
-    "x": 4.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 6.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
-    }
-   },
-   {
-    "token": "dark_sphere",
-    "x": 6.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_panel",
-    "x": 3.0,
-    "y": 1.9,
-    "z": 0.06,
-    "wall": true
-   },
-   {
-    "token": "station_pillar",
-    "x": 8.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 11.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
+     "caption_text": "L-System Tree",
      "top_height": 1.2
     }
    },
    {
     "token": "fractal_lsystem_tree",
-    "x": 11.0,
+    "x": 4.0,
     "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_panel",
-    "x": 11.0,
-    "y": 1.9,
-    "z": 0.06,
-    "wall": true
-   },
-   {
-    "token": "station_pillar",
-    "x": 13.0,
-    "y": 0.0,
-    "z": 0.8,
+    "z": 0.4,
     "wall": false
    },
    {
     "token": "station_stage",
-    "x": 16.0,
+    "x": 6.5,
     "y": 0.0,
-    "z": 0.8,
+    "z": 2.5,
     "wall": false,
     "config": {
      "width_cells": 4,
      "depth_cells": 4,
-     "step_height": 0.18
-    }
-   },
-   {
-    "token": "inverted_tree_cloud",
-    "x": 16.0,
-    "y": 0.18,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_stage",
-    "x": 29.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 4,
-     "depth_cells": 4,
-     "step_height": 0.18
+     "step_height": 0.18,
+     "name_plate": "recursive_tree"
     }
    },
    {
     "token": "recursive_tree",
-    "x": 29.0,
+    "x": 6.5,
     "y": 0.18,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 46.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
-    }
-   },
-   {
-    "token": "mobius_world",
-    "x": 46.0,
-    "y": 1.2,
-    "z": 0.8,
+    "z": 2.5,
     "wall": false
    },
    {
     "token": "station_panel",
-    "x": 31.0,
-    "y": 1.9,
+    "x": 10.5,
+    "y": 2.25,
     "z": 0.06,
-    "wall": true
+    "wall": true,
+    "config": {
+     "width_cells": 3,
+     "header": "A LIST THAT LEARNED TO DECIDE",
+     "lines": [
+      "LEFT OR RIGHT  LESS OR GREATER",
+      "ROOTS DO THE REAL COMPUTATION"
+     ]
+    }
    },
    {
-    "token": "station_pillar",
-    "x": 48.0,
+    "token": "station_stage",
+    "x": 10.5,
     "y": 0.0,
-    "z": 0.8,
+    "z": 0.3,
+    "wall": false,
+    "config": {
+     "width_cells": 4,
+     "depth_cells": 4,
+     "step_height": 0.18,
+     "name_plate": "inverted_tree_cloud"
+    }
+   },
+   {
+    "token": "inverted_tree_cloud",
+    "x": 10.5,
+    "y": 0.18,
+    "z": 0.3,
     "wall": false
    },
    {
     "token": "station_plinth",
-    "x": 51.0,
+    "x": 13.5,
     "y": 0.0,
-    "z": 0.8,
+    "z": 1.6,
     "wall": false,
     "config": {
      "width_cells": 1,
      "depth_cells": 1,
-     "top_height": 1.2
+     "top_height": 1.0,
+     "cap_inset": 0.3,
+     "caption_text": "Cube Desk"
     }
    },
    {
     "token": "cube_desk",
-    "x": 51.0,
-    "y": 1.2,
-    "z": 0.8,
+    "x": 13.5,
+    "y": 1.0,
+    "z": 1.6,
     "wall": false
    },
    {
     "token": "station_plinth",
-    "x": 53.0,
+    "x": 15.0,
     "y": 0.0,
-    "z": 0.8,
+    "z": 0.7,
     "wall": false,
     "config": {
      "width_cells": 1,
      "depth_cells": 1,
-     "top_height": 1.2
+     "top_height": 1.2,
+     "cap_inset": 0.3,
+     "caption_text": "fractal_scene"
     }
    },
    {
     "token": "fractal_scene",
-    "x": 53.0,
+    "x": 15.0,
     "y": 1.2,
-    "z": 0.8,
+    "z": 0.7,
     "wall": false
    },
    {
-    "token": "station_panel",
-    "x": 52.0,
-    "y": 1.9,
-    "z": 0.06,
-    "wall": true
+    "token": "station_stage",
+    "x": 17.5,
+    "y": 0.0,
+    "z": 1.8,
+    "wall": false,
+    "config": {
+     "width_cells": 3,
+     "depth_cells": 3,
+     "step_height": 0.18,
+     "name_plate": "Mobius World"
+    }
+   },
+   {
+    "token": "mobius_world",
+    "x": 17.5,
+    "y": 0.18,
+    "z": 1.8,
+    "wall": false
    }
   ]
  },
  "Fractal_CantorSet": {
   "sequence": "fractals",
   "counts": {
-   "small": 3,
-   "medium": 0,
+   "small": 1,
+   "medium": 1,
    "large": 1,
-   "applied": 1
+   "applied": 2
   },
   "pieces": [
    {
-    "token": "station_plinth",
-    "x": 0.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
+    "token": "station_panel",
+    "x": 1.5,
+    "y": 2.0,
+    "z": 0.06,
+    "wall": true,
     "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
+     "width_cells": 3,
+     "header": "THE RULE",
+     "lines": [
+      "Remove the middle third.",
+      "Then do it again. Forever."
+     ],
+     "header_color": [
+      0.86,
+      0.34,
+      0.11
+     ]
     }
    },
    {
-    "token": "dark_sphere",
-    "x": 0.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 2.0,
+    "token": "station_micropod",
+    "x": 1.0,
     "y": 0.0,
-    "z": 0.8,
+    "z": 0.7,
     "wall": false,
     "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
+     "caption_text": "Cantor Set (radial)",
+     "top_height": 1.3
     }
    },
    {
     "token": "example_8_4_cantor_set_vr",
-    "x": 2.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 4.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 4,
-     "depth_cells": 1,
-     "top_height": 0.9
-    }
-   },
-   {
-    "token": "stochastic_tree_separated",
-    "x": 4.0,
-    "y": 0.9,
-    "z": 0.8,
+    "x": 1.0,
+    "y": 1.3,
+    "z": 0.7,
     "wall": false
    },
    {
     "token": "station_panel",
-    "x": 3.5,
-    "y": 1.9,
+    "x": 5.5,
+    "y": 2.0,
     "z": 0.06,
-    "wall": true
+    "wall": true,
+    "config": {
+     "width_cells": 3,
+     "header": "EXISTENCE WITHOUT EXTENSION",
+     "lines": [
+      "Length -> 0.  Points -> uncountable.",
+      "D = log 2 / log 3 = 0.63"
+     ],
+     "header_color": [
+      0.86,
+      0.34,
+      0.11
+     ]
+    }
    },
    {
-    "token": "station_pillar",
-    "x": 9.0,
+    "token": "station_plinth",
+    "x": 6.0,
     "y": 0.0,
-    "z": 0.8,
+    "z": 0.5,
+    "wall": false,
+    "config": {
+     "width_cells": 2,
+     "depth_cells": 2,
+     "top_height": 0.95,
+     "caption_text": "Cantor Bench"
+    }
+   },
+   {
+    "token": "cantor_bench",
+    "x": 6.0,
+    "y": 0.95,
+    "z": 0.5,
     "wall": false
+   },
+   {
+    "token": "station_panel",
+    "x": 12.5,
+    "y": 2.0,
+    "z": 0.06,
+    "wall": true,
+    "config": {
+     "width_cells": 4,
+     "header": "THE DUST IT LEAVES",
+     "lines": [
+      "What remains has zero length",
+      "yet as many points as the line."
+     ],
+     "header_color": [
+      0.86,
+      0.34,
+      0.11
+     ]
+    }
    },
    {
     "token": "station_stage",
     "x": 12.0,
     "y": 0.0,
-    "z": 0.8,
+    "z": 2.4,
     "wall": false,
     "config": {
-     "width_cells": 9,
-     "depth_cells": 1,
-     "step_height": 0.18
+     "width_cells": 4,
+     "depth_cells": 4,
+     "step_height": 0.18,
+     "name_plate": "Cantor Set",
+     "hazard_edge": true
     }
    },
    {
     "token": "cantor_set",
     "x": 12.0,
     "y": 0.18,
-    "z": 0.8,
+    "z": 2.4,
     "wall": false
    },
    {
     "token": "station_panel",
-    "x": 16.0,
-    "y": 1.9,
+    "x": 18.5,
+    "y": 2.0,
     "z": 0.06,
-    "wall": true
-   },
-   {
-    "token": "station_pillar",
-    "x": 22.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false
+    "wall": true,
+    "config": {
+     "width_cells": 4,
+     "header": "DELETION BECOMES ARCHITECTURE",
+     "lines": [
+      "Each pagoda tier = one Cantor cut.",
+      "The 1D rule, raised into 3D."
+     ],
+     "header_color": [
+      0.86,
+      0.34,
+      0.11
+     ]
+    }
    },
    {
     "token": "station_stage",
-    "x": 25.0,
+    "x": 18.0,
     "y": 0.0,
-    "z": 0.8,
+    "z": 2.2,
     "wall": false,
     "config": {
      "width_cells": 4,
      "depth_cells": 4,
-     "step_height": 0.18
+     "step_height": 0.18,
+     "name_plate": "Cantor Pagoda",
+     "hazard_edge": true
     }
    },
    {
     "token": "example_8_4_cantor_pagoda_vr",
-    "x": 25.0,
+    "x": 18.0,
     "y": 0.18,
-    "z": 0.8,
+    "z": 2.2,
     "wall": false
    },
    {
     "token": "station_panel",
-    "x": 34.5,
-    "y": 1.9,
+    "x": 22.0,
+    "y": 2.0,
     "z": 0.06,
-    "wall": true
+    "wall": true,
+    "config": {
+     "width_cells": 3,
+     "header": "UNCOUNTABLY MANY",
+     "lines": [
+      "Flip the diagonal: a real no row holds.",
+      "The dust outnumbers every list."
+     ],
+     "header_color": [
+      0.86,
+      0.34,
+      0.11
+     ]
+    }
+   },
+   {
+    "token": "station_plinth",
+    "x": 22.0,
+    "y": 0.0,
+    "z": 0.9,
+    "wall": false,
+    "config": {
+     "width_cells": 2,
+     "depth_cells": 2,
+     "top_height": 0.95,
+     "caption_text": "Cantor Diagonal Workbench"
+    }
+   },
+   {
+    "token": "cantor_diagonal_workbench",
+    "x": 22.0,
+    "y": 0.95,
+    "z": 0.9,
+    "wall": false
    }
   ]
  },
  "Fractal_KochSierpinski": {
   "sequence": "fractals",
   "counts": {
-   "small": 3,
-   "medium": 2,
+   "small": 2,
+   "medium": 1,
    "large": 2,
    "applied": 2
   },
   "pieces": [
    {
-    "token": "station_plinth",
-    "x": 0.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
+    "token": "station_panel",
+    "x": 1.0,
+    "y": 2.4,
+    "z": 0.06,
+    "wall": true,
     "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
+     "header": "INFINITE PERIMETER",
+     "lines": [
+      "A line that wants",
+      "to be a plane \u00b7 D 1.26"
+     ],
+     "width_cells": 3
     }
    },
    {
-    "token": "dark_sphere",
-    "x": 0.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 2.0,
+    "token": "station_micropod",
+    "x": 1.0,
     "y": 0.0,
-    "z": 0.8,
+    "z": 0.9,
     "wall": false,
     "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
-    }
-   },
-   {
-    "token": "fractal_koch_curve",
-    "x": 2.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 4.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
+     "base_meters": 0.6,
+     "top_height": 1.15,
+     "caption_text": "Box Counting Dimension",
+     "caption_style": "frame"
     }
    },
    {
     "token": "box_counting_dimension",
+    "x": 1.0,
+    "y": 1.15,
+    "z": 0.9,
+    "wall": false
+   },
+   {
+    "token": "station_micropod",
     "x": 4.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_panel",
-    "x": 2.0,
-    "y": 1.9,
-    "z": 0.06,
-    "wall": true
-   },
-   {
-    "token": "station_pillar",
-    "x": 6.0,
     "y": 0.0,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 9.0,
-    "y": 0.0,
-    "z": 0.8,
+    "z": 2.4,
     "wall": false,
     "config": {
-     "width_cells": 4,
-     "depth_cells": 1,
-     "top_height": 0.9
+     "caption_text": "Koch Curve",
+     "top_height": 1.25
     }
    },
    {
-    "token": "science_screen",
-    "x": 9.0,
-    "y": 0.9,
-    "z": 0.8,
+    "token": "fractal_koch_curve",
+    "x": 4.0,
+    "y": 1.25,
+    "z": 2.4,
     "wall": false
    },
    {
     "token": "station_stage",
-    "x": 14.0,
+    "x": 7.0,
     "y": 0.0,
-    "z": 0.8,
+    "z": 1.0,
     "wall": false,
     "config": {
      "width_cells": 4,
      "depth_cells": 2,
-     "step_height": 0.18
+     "step_height": 0.18,
+     "name_plate": "3D Koch Curve"
     }
    },
    {
     "token": "koch_curve_3d",
-    "x": 14.0,
+    "x": 7.0,
     "y": 0.18,
-    "z": 0.8,
+    "z": 1.0,
     "wall": false
    },
    {
     "token": "station_panel",
-    "x": 13.0,
-    "y": 1.9,
+    "x": 10.5,
+    "y": 2.5,
     "z": 0.06,
-    "wall": true
-   },
-   {
-    "token": "station_pillar",
-    "x": 19.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false
+    "wall": true,
+    "config": {
+     "header": "THE SAME HOLE",
+     "lines": [
+      "Zero area, infinite",
+      "structure \u00b7 D 1.585"
+     ],
+     "width_cells": 3
+    }
    },
    {
     "token": "station_stage",
-    "x": 22.0,
+    "x": 11.5,
     "y": 0.0,
-    "z": 0.8,
+    "z": 2.4,
     "wall": false,
     "config": {
-     "width_cells": 4,
-     "depth_cells": 4,
-     "step_height": 0.18
+     "width_cells": 3,
+     "depth_cells": 3,
+     "step_height": 0.18,
+     "name_plate": "Sierpinski Triangle"
     }
    },
    {
     "token": "sierpinski_triangle",
-    "x": 22.0,
+    "x": 11.5,
     "y": 0.18,
-    "z": 0.8,
+    "z": 2.4,
     "wall": false
    },
    {
     "token": "station_stage",
-    "x": 33.0,
+    "x": 15.5,
     "y": 0.0,
-    "z": 0.8,
+    "z": 2.4,
     "wall": false,
     "config": {
-     "width_cells": 4,
-     "depth_cells": 4,
-     "step_height": 0.18
+     "width_cells": 3,
+     "depth_cells": 3,
+     "step_height": 0.18,
+     "name_plate": "Sierpinski Pyramid"
     }
    },
    {
     "token": "sierpinski_pyramid",
-    "x": 33.0,
+    "x": 15.5,
     "y": 0.18,
-    "z": 0.8,
+    "z": 2.4,
     "wall": false
    },
    {
     "token": "station_panel",
-    "x": 31.5,
-    "y": 1.9,
+    "x": 19.5,
+    "y": 2.35,
     "z": 0.06,
-    "wall": true
-   },
-   {
-    "token": "station_pillar",
-    "x": 43.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false
+    "wall": true,
+    "config": {
+     "header": "FRACTAL TO FORM",
+     "lines": [
+      "Recurse a strut and",
+      "you get a place to live"
+     ],
+     "width_cells": 3
+    }
    },
    {
     "token": "station_plinth",
-    "x": 46.0,
+    "x": 19.0,
     "y": 0.0,
-    "z": 0.8,
+    "z": 0.7,
     "wall": false,
     "config": {
      "width_cells": 1,
      "depth_cells": 1,
-     "top_height": 1.2
+     "top_height": 1.0,
+     "cap_inset": 0.3,
+     "caption_text": "Cube Cabin",
+     "caption_style": "frame"
     }
    },
    {
     "token": "cube_cabin",
-    "x": 46.0,
-    "y": 1.2,
-    "z": 0.8,
+    "x": 19.0,
+    "y": 1.0,
+    "z": 0.7,
     "wall": false
    },
    {
     "token": "station_plinth",
-    "x": 48.0,
+    "x": 21.5,
     "y": 0.0,
-    "z": 0.8,
+    "z": 1.35,
     "wall": false,
     "config": {
      "width_cells": 1,
      "depth_cells": 1,
-     "top_height": 1.2
+     "top_height": 1.15,
+     "cap_inset": 0.3,
+     "caption_text": "Cube Bookshelf",
+     "caption_style": "frame"
     }
    },
    {
     "token": "cube_bookshelf",
-    "x": 48.0,
-    "y": 1.2,
-    "z": 0.8,
+    "x": 21.5,
+    "y": 1.15,
+    "z": 1.35,
     "wall": false
-   },
-   {
-    "token": "station_panel",
-    "x": 47.0,
-    "y": 1.9,
-    "z": 0.06,
-    "wall": true
    }
   ]
  },
@@ -22100,215 +22125,340 @@
   "sequence": "fractals",
   "counts": {
    "small": 1,
-   "medium": 0,
+   "medium": 1,
    "large": 2,
-   "applied": 0
+   "applied": 2
   },
   "pieces": [
    {
-    "token": "station_plinth",
-    "x": 0.0,
+    "token": "station_wall",
+    "x": 2.0,
     "y": 0.0,
-    "z": 0.8,
-    "wall": false,
+    "z": 0.0,
+    "wall": true,
     "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
+     "width_cells": 5
     }
-   },
-   {
-    "token": "dark_sphere",
-    "x": 0.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
    },
    {
     "token": "station_panel",
-    "x": 0.0,
-    "y": 1.9,
-    "z": 0.06,
-    "wall": true
-   },
-   {
-    "token": "station_pillar",
     "x": 2.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_stage",
-    "x": 5.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
+    "y": 2.3,
+    "z": 0.06,
+    "wall": true,
     "config": {
      "width_cells": 4,
-     "depth_cells": 1,
-     "step_height": 0.18
+     "header": "THE SAME HOLE, EVERY SCALE",
+     "lines": [
+      "Carve out the middle. Recurse.",
+      "The rule never changes \u2014 only the scale."
+     ]
     }
    },
    {
-    "token": "diffusion_limited_aggregation",
-    "x": 5.0,
-    "y": 0.18,
-    "z": 0.8,
+    "token": "station_micropod",
+    "x": 1.0,
+    "y": 0.0,
+    "z": 0.6,
+    "wall": false,
+    "config": {
+     "caption_text": "Menger Toy (held sponge)",
+     "top_height": 1.1,
+     "cap_inset": 0.1,
+     "base_meters": 0.6
+    }
+   },
+   {
+    "token": "menger_toy",
+    "x": 1.0,
+    "y": 1.1,
+    "z": 0.6,
     "wall": false
    },
    {
-    "token": "station_stage",
-    "x": 23.0,
+    "token": "station_plinth",
+    "x": 3.5,
     "y": 0.0,
-    "z": 0.8,
+    "z": 1.6,
+    "wall": false,
+    "config": {
+     "width_cells": 2,
+     "depth_cells": 2,
+     "top_height": 0.95,
+     "caption_text": "Menger Bench (zero volume)"
+    }
+   },
+   {
+    "token": "menger_bench",
+    "x": 3.5,
+    "y": 0.95,
+    "z": 1.6,
+    "wall": false
+   },
+   {
+    "token": "station_wall",
+    "x": 8.0,
+    "y": 0.0,
+    "z": 0.0,
+    "wall": true,
+    "config": {
+     "width_cells": 5
+    }
+   },
+   {
+    "token": "station_panel",
+    "x": 8.0,
+    "y": 2.6,
+    "z": 0.06,
+    "wall": true,
+    "config": {
+     "width_cells": 5,
+     "header": "INFINITE SURFACE, ZERO VOLUME",
+     "lines": [
+      "D \u2248 2.727 \u2014 between a surface and a solid.",
+      "A solid made entirely of holes. Walk inside."
+     ]
+    }
+   },
+   {
+    "token": "station_stage",
+    "x": 8.0,
+    "y": 0.0,
+    "z": 2.4,
     "wall": false,
     "config": {
      "width_cells": 4,
      "depth_cells": 4,
-     "step_height": 0.18
+     "step_height": 0.2,
+     "name_plate": "MENGER SPONGE \u2014 walk inside (D \u2248 2.727)"
     }
    },
    {
     "token": "menger_sponge",
-    "x": 23.0,
-    "y": 0.18,
-    "z": 0.8,
+    "x": 8.0,
+    "y": 0.2,
+    "z": 2.4,
+    "wall": false
+   },
+   {
+    "token": "station_wall",
+    "x": 14.0,
+    "y": 0.0,
+    "z": 0.0,
+    "wall": true,
+    "config": {
+     "width_cells": 5
+    }
+   },
+   {
+    "token": "station_panel",
+    "x": 14.0,
+    "y": 2.3,
+    "z": 0.06,
+    "wall": true,
+    "config": {
+     "width_cells": 4,
+     "header": "ALL SURFACE, PUT TO WORK",
+     "lines": [
+      "The same carve, used: a filter that is all wall.",
+      "And the boolean cut that makes it."
+     ]
+    }
+   },
+   {
+    "token": "station_plinth",
+    "x": 13.0,
+    "y": 0.0,
+    "z": 1.2,
+    "wall": false,
+    "config": {
+     "width_cells": 2,
+     "depth_cells": 2,
+     "top_height": 1.1,
+     "caption_text": "Menger Filter (all surface)"
+    }
+   },
+   {
+    "token": "menger_filter",
+    "x": 13.0,
+    "y": 1.1,
+    "z": 1.2,
+    "wall": false
+   },
+   {
+    "token": "station_plinth",
+    "x": 15.5,
+    "y": 0.0,
+    "z": 2.0,
+    "wall": false,
+    "config": {
+     "width_cells": 2,
+     "depth_cells": 2,
+     "top_height": 0.85,
+     "caption_text": "Recursive Boolean Cube (the carve)"
+    }
+   },
+   {
+    "token": "recursive_boolean_cube",
+    "x": 15.5,
+    "y": 0.85,
+    "z": 2.0,
     "wall": false
    },
    {
     "token": "station_panel",
-    "x": 18.0,
-    "y": 1.9,
+    "x": 11.0,
+    "y": 2.0,
     "z": 0.06,
-    "wall": true
+    "wall": true,
+    "config": {
+     "width_cells": 3,
+     "header": "GROWN, NOT CARVED",
+     "lines": [
+      "DLA: random walkers stick where they land.",
+      "The other way to a fractal \u2014 chance, not a rule."
+     ]
+    }
+   },
+   {
+    "token": "station_stage",
+    "x": 11.0,
+    "y": 0.0,
+    "z": 0.4,
+    "wall": false,
+    "config": {
+     "width_cells": 3,
+     "depth_cells": 3,
+     "step_height": 0.18,
+     "name_plate": "Diffusion-Limited Aggregation"
+    }
+   },
+   {
+    "token": "diffusion_limited_aggregation",
+    "x": 11.0,
+    "y": 0.18,
+    "z": 0.4,
+    "wall": false
    }
   ]
  },
  "Fractal_GoldenSpiral": {
   "sequence": "fractals",
   "counts": {
-   "small": 3,
+   "small": 2,
    "medium": 0,
    "large": 2,
    "applied": 0
   },
   "pieces": [
    {
-    "token": "station_plinth",
+    "token": "station_panel",
+    "x": 1.5,
+    "y": 2.1,
+    "z": 0.06,
+    "wall": true,
+    "config": {
+     "width_cells": 4,
+     "header": "F(n) = F(n-1) + F(n-2)",
+     "lines": [
+      "RATIO -> PHI = 1.618",
+      "NATURE GROWS THE NUMBER"
+     ]
+    }
+   },
+   {
+    "token": "station_micropod",
     "x": 0.0,
     "y": 0.0,
-    "z": 0.8,
+    "z": 0.5,
     "wall": false,
     "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
+     "caption_text": "Fibonacci Sequences",
+     "top_height": 1.1
     }
    },
    {
     "token": "fibonacci_sequences",
     "x": 0.0,
-    "y": 1.2,
-    "z": 0.8,
+    "y": 1.1,
+    "z": 0.5,
     "wall": false
    },
    {
     "token": "station_plinth",
-    "x": 2.0,
+    "x": 3.0,
     "y": 0.0,
-    "z": 0.8,
+    "z": 0.4,
     "wall": false,
     "config": {
      "width_cells": 1,
      "depth_cells": 1,
-     "top_height": 1.2
-    }
-   },
-   {
-    "token": "dark_sphere",
-    "x": 2.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 4.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
+     "top_height": 1.4,
+     "cap_inset": 0.3,
+     "caption_text": "romanesco"
     }
    },
    {
     "token": "romanesco",
-    "x": 4.0,
-    "y": 1.2,
-    "z": 0.8,
+    "x": 3.0,
+    "y": 1.4,
+    "z": 0.4,
     "wall": false
    },
    {
     "token": "station_panel",
-    "x": 2.0,
-    "y": 1.9,
+    "x": 11.0,
+    "y": 2.1,
     "z": 0.06,
-    "wall": true
-   },
-   {
-    "token": "station_pillar",
-    "x": 6.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false
+    "wall": true,
+    "config": {
+     "width_cells": 4,
+     "header": "PHI = 1 + 1/PHI",
+     "lines": [
+      "LOSE A SQUARE, STAY GOLDEN",
+      "FROM PROOF TO LANDSCAPE"
+     ]
+    }
    },
    {
     "token": "station_stage",
-    "x": 9.0,
+    "x": 8.0,
     "y": 0.0,
-    "z": 0.8,
+    "z": 1.1,
     "wall": false,
     "config": {
-     "width_cells": 4,
+     "width_cells": 5,
      "depth_cells": 4,
-     "step_height": 0.18
+     "step_height": 0.18,
+     "name_plate": "Golden Rectangle"
     }
    },
    {
     "token": "golden_rectangle",
-    "x": 9.0,
+    "x": 8.0,
     "y": 0.18,
-    "z": 0.8,
+    "z": 1.1,
     "wall": false
    },
    {
     "token": "station_stage",
     "x": 15.0,
     "y": 0.0,
-    "z": 0.8,
+    "z": 1.7,
     "wall": false,
     "config": {
      "width_cells": 4,
      "depth_cells": 4,
-     "step_height": 0.18
+     "step_height": 0.18,
+     "name_plate": "Fibonacci Terrain"
     }
    },
    {
     "token": "fibonacci_terrain",
     "x": 15.0,
     "y": 0.18,
-    "z": 0.8,
+    "z": 1.7,
     "wall": false
-   },
-   {
-    "token": "station_panel",
-    "x": 15.5,
-    "y": 1.9,
-    "z": 0.06,
-    "wall": true
    }
   ]
  },
@@ -22316,121 +22466,151 @@
   "sequence": "fractals",
   "counts": {
    "small": 2,
-   "medium": 0,
+   "medium": 1,
    "large": 1,
    "applied": 1
   },
   "pieces": [
    {
-    "token": "station_plinth",
-    "x": 0.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
+    "token": "station_panel",
+    "x": 1.0,
+    "y": 1.95,
+    "z": 0.06,
+    "wall": true,
     "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
+     "width_cells": 3,
+     "header": "JULIA SETS",
+     "lines": [
+      "ONE c, A WHOLE SET",
+      "MOVE c \u2014 IT BREATHES"
+     ]
     }
    },
    {
-    "token": "dark_sphere",
+    "token": "station_micropod",
     "x": 0.0,
-    "y": 1.2,
-    "z": 0.8,
+    "y": 0.0,
+    "z": 2.3,
+    "wall": false,
+    "config": {
+     "caption_text": "Julia Set",
+     "top_height": 1.15
+    }
+   },
+   {
+    "token": "living_paper_julia",
+    "x": 0.0,
+    "y": 1.15,
+    "z": 2.3,
     "wall": false
    },
    {
     "token": "station_plinth",
-    "x": 2.0,
+    "x": 3.0,
     "y": 0.0,
-    "z": 0.8,
+    "z": 1.2,
     "wall": false,
     "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
+     "width_cells": 2,
+     "depth_cells": 2,
+     "top_height": 0.9,
+     "caption_text": "Julia Bench"
     }
    },
    {
-    "token": "lyapunov_fractal",
-    "x": 2.0,
-    "y": 1.2,
-    "z": 0.8,
+    "token": "julia_bench",
+    "x": 3.0,
+    "y": 0.9,
+    "z": 1.2,
     "wall": false
    },
    {
     "token": "station_panel",
-    "x": 1.0,
-    "y": 1.9,
+    "x": 7.0,
+    "y": 1.95,
     "z": 0.06,
-    "wall": true
-   },
-   {
-    "token": "station_pillar",
-    "x": 4.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false
+    "wall": true,
+    "config": {
+     "width_cells": 4,
+     "header": "ESCAPE-TIME FIELD",
+     "lines": [
+      "z = z\u00b2 + c, EVERY POINT",
+      "BOUNDED OR GONE"
+     ]
+    }
    },
    {
     "token": "station_stage",
     "x": 7.0,
     "y": 0.0,
-    "z": 0.8,
+    "z": 0.4,
     "wall": false,
     "config": {
      "width_cells": 4,
      "depth_cells": 4,
-     "step_height": 0.18
+     "step_height": 0.18,
+     "name_plate": "Julia Set"
     }
    },
    {
     "token": "julia_set",
     "x": 7.0,
     "y": 0.18,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_panel",
-    "x": 9.5,
-    "y": 1.9,
-    "z": 0.06,
-    "wall": true
-   },
-   {
-    "token": "station_pillar",
-    "x": 14.0,
-    "y": 0.0,
-    "z": 0.8,
+    "z": 0.4,
     "wall": false
    },
    {
     "token": "station_plinth",
-    "x": 17.0,
+    "x": 12.0,
     "y": 0.0,
-    "z": 0.8,
+    "z": 1.3,
     "wall": false,
     "config": {
      "width_cells": 2,
      "depth_cells": 2,
-     "top_height": 0.9
+     "top_height": 0.9,
+     "caption_text": "Julia Set Explorer"
     }
    },
    {
     "token": "julia_set_explorer",
-    "x": 17.0,
+    "x": 12.0,
     "y": 0.9,
-    "z": 0.8,
+    "z": 1.3,
     "wall": false
    },
    {
     "token": "station_panel",
-    "x": 17.5,
-    "y": 1.9,
+    "x": 15.0,
+    "y": 1.95,
     "z": 0.06,
-    "wall": true
+    "wall": true,
+    "config": {
+     "width_cells": 3,
+     "header": "STABILITY AS LANDSCAPE",
+     "lines": [
+      "COLOUR BY DIVERGENCE",
+      "NEXT: THE MANDELBROT MAP"
+     ]
+    }
+   },
+   {
+    "token": "station_micropod",
+    "x": 15.0,
+    "y": 0.0,
+    "z": 2.4,
+    "wall": false,
+    "config": {
+     "caption_text": "Lyapunov Fractal",
+     "top_height": 1.3
+    }
+   },
+   {
+    "token": "lyapunov_fractal",
+    "x": 15.0,
+    "y": 1.3,
+    "z": 2.4,
+    "wall": false
    }
   ]
  },
@@ -22438,498 +22618,650 @@
   "sequence": "fractals",
   "counts": {
    "small": 1,
-   "medium": 0,
-   "large": 1,
-   "applied": 1
-  },
-  "pieces": [
-   {
-    "token": "station_plinth",
-    "x": 0.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
-    }
-   },
-   {
-    "token": "dark_sphere",
-    "x": 0.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_panel",
-    "x": 0.0,
-    "y": 1.9,
-    "z": 0.06,
-    "wall": true
-   },
-   {
-    "token": "station_pillar",
-    "x": 2.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_stage",
-    "x": 5.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 4,
-     "depth_cells": 4,
-     "step_height": 0.18
-    }
-   },
-   {
-    "token": "mandelbrot_set",
-    "x": 5.0,
-    "y": 0.18,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_panel",
-    "x": 13.0,
-    "y": 1.9,
-    "z": 0.06,
-    "wall": true
-   },
-   {
-    "token": "station_pillar",
-    "x": 23.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 26.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 2,
-     "depth_cells": 2,
-     "top_height": 0.9
-    }
-   },
-   {
-    "token": "mandelbrot_dive",
-    "x": 26.0,
-    "y": 0.9,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_panel",
-    "x": 26.5,
-    "y": 1.9,
-    "z": 0.06,
-    "wall": true
-   }
-  ]
- },
- "Fractal_Synthesis": {
-  "sequence": "fractals",
-  "counts": {
-   "small": 5,
-   "medium": 0,
-   "large": 5,
-   "applied": 0
-  },
-  "pieces": [
-   {
-    "token": "station_plinth",
-    "x": 0.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
-    }
-   },
-   {
-    "token": "fractal_recursion_1",
-    "x": 0.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 2.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
-    }
-   },
-   {
-    "token": "strange_attractors",
-    "x": 2.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 4.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
-    }
-   },
-   {
-    "token": "dark_sphere",
-    "x": 4.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 6.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
-    }
-   },
-   {
-    "token": "fibonacci_sequences",
-    "x": 6.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 8.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
-    }
-   },
-   {
-    "token": "romanesco",
-    "x": 8.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_panel",
-    "x": 4.0,
-    "y": 1.9,
-    "z": 0.06,
-    "wall": true
-   },
-   {
-    "token": "station_pillar",
-    "x": 10.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_stage",
-    "x": 13.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 4,
-     "depth_cells": 1,
-     "step_height": 0.18
-    }
-   },
-   {
-    "token": "koch_curve",
-    "x": 13.0,
-    "y": 0.18,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_stage",
-    "x": 55.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 9,
-     "depth_cells": 1,
-     "step_height": 0.18
-    }
-   },
-   {
-    "token": "cantor_set",
-    "x": 55.0,
-    "y": 0.18,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_stage",
-    "x": 65.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 4,
-     "depth_cells": 4,
-     "step_height": 0.18
-    }
-   },
-   {
-    "token": "recursive_tree",
-    "x": 65.0,
-    "y": 0.18,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_stage",
-    "x": 82.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 4,
-     "depth_cells": 4,
-     "step_height": 0.18
-    }
-   },
-   {
-    "token": "fractal_clouds",
-    "x": 82.0,
-    "y": 0.18,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_stage",
-    "x": 92.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 4,
-     "depth_cells": 4,
-     "step_height": 0.18
-    }
-   },
-   {
-    "token": "sierpinski_triangle",
-    "x": 92.0,
-    "y": 0.18,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_panel",
-    "x": 57.0,
-    "y": 1.9,
-    "z": 0.06,
-    "wall": true
-   }
-  ]
- },
- "Fractal_CrossSequence": {
-  "sequence": "fractals",
-  "counts": {
-   "small": 3,
    "medium": 1,
    "large": 1,
    "applied": 1
   },
   "pieces": [
    {
-    "token": "station_plinth",
-    "x": 0.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
-    }
-   },
-   {
-    "token": "dark_sphere",
-    "x": 0.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 2.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
-    }
-   },
-   {
-    "token": "fractal_stochastic_tree",
-    "x": 2.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 4.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
-    }
-   },
-   {
-    "token": "Hilbert3D",
-    "x": 4.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
     "token": "station_panel",
-    "x": 2.0,
-    "y": 1.9,
+    "x": 0.5,
+    "y": 2.0,
     "z": 0.06,
-    "wall": true
+    "wall": true,
+    "config": {
+     "width_cells": 3,
+     "header": "THE MASTER FRACTAL",
+     "lines": [
+      "z -> z^2 + c",
+      "FIVE CHARACTERS"
+     ]
+    }
+   },
+   {
+    "token": "station_micropod",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 2.0,
+    "wall": false,
+    "config": {
+     "caption_text": "Living Paper - Mandelbrot Set",
+     "top_height": 1.15,
+     "base_meters": 0.6,
+     "cap_inset": 0.1
+    }
+   },
+   {
+    "token": "living_paper_mandelbrot",
+    "x": 0.0,
+    "y": 1.15,
+    "z": 2.0,
+    "wall": false
+   },
+   {
+    "token": "mandelbrot_bench",
+    "x": 3.0,
+    "y": 0.9,
+    "z": 1.4,
+    "wall": false
+   },
+   {
+    "token": "station_plinth",
+    "x": 3.0,
+    "y": 0.0,
+    "z": 1.4,
+    "wall": false,
+    "config": {
+     "width_cells": 2,
+     "depth_cells": 2,
+     "top_height": 0.9,
+     "caption_text": "Mandelbrot Bench (z -> z^2 + c)"
+    }
    },
    {
     "token": "station_pillar",
     "x": 6.0,
     "y": 0.0,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 9.0,
-    "y": 0.0,
-    "z": 0.8,
+    "z": 2.6,
     "wall": false,
     "config": {
-     "width_cells": 3,
-     "depth_cells": 1,
-     "top_height": 0.9
+     "height": 3.0
     }
    },
    {
-    "token": "evolutionary_algorithms",
-    "x": 9.0,
-    "y": 0.9,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_panel",
+    "token": "station_pillar",
     "x": 10.0,
-    "y": 1.9,
-    "z": 0.06,
-    "wall": true
-   },
-   {
-    "token": "station_pillar",
-    "x": 13.0,
     "y": 0.0,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 16.0,
-    "y": 0.0,
-    "z": 0.8,
+    "z": 2.6,
     "wall": false,
     "config": {
-     "width_cells": 2,
-     "depth_cells": 2,
-     "top_height": 0.9
+     "height": 3.0
     }
    },
    {
-    "token": "cellular_automata_3d_stacked",
-    "x": 16.0,
-    "y": 0.9,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_panel",
-    "x": 16.5,
-    "y": 1.9,
-    "z": 0.06,
-    "wall": true
-   },
-   {
-    "token": "station_pillar",
-    "x": 19.0,
-    "y": 0.0,
-    "z": 0.8,
+    "token": "dark_sphere",
+    "x": 8.0,
+    "y": 3.2,
+    "z": 2.4,
     "wall": false
    },
    {
     "token": "station_stage",
-    "x": 22.0,
+    "x": 8.0,
     "y": 0.0,
-    "z": 0.8,
+    "z": 0.4,
     "wall": false,
     "config": {
      "width_cells": 4,
-     "depth_cells": 2,
-     "step_height": 0.18
+     "depth_cells": 4,
+     "step_height": 0.18,
+     "name_plate": "Mandelbrot Set"
     }
    },
    {
-    "token": "space_filling_curve_gallery",
-    "x": 22.0,
+    "token": "mandelbrot_set",
+    "x": 8.0,
     "y": 0.18,
-    "z": 0.8,
+    "z": 0.4,
     "wall": false
    },
    {
     "token": "station_panel",
-    "x": 23.5,
-    "y": 1.9,
+    "x": 14.0,
+    "y": 2.0,
     "z": 0.06,
-    "wall": true
+    "wall": true,
+    "config": {
+     "width_cells": 3,
+     "header": "THE EDGE NEVER RESOLVES",
+     "lines": [
+      "INFINITE BOUNDARY",
+      "ZOOM FOREVER"
+     ]
+    }
+   },
+   {
+    "token": "station_plinth",
+    "x": 14.0,
+    "y": 0.0,
+    "z": 1.2,
+    "wall": false,
+    "config": {
+     "width_cells": 2,
+     "depth_cells": 2,
+     "top_height": 0.9,
+     "caption_text": "Mandelbrot Dive"
+    }
+   },
+   {
+    "token": "mandelbrot_dive",
+    "x": 14.0,
+    "y": 0.9,
+    "z": 1.2,
+    "wall": false
+   }
+  ]
+ },
+ "Fractal_Synthesis": {
+  "sequence": "fractals",
+  "counts": {
+   "small": 4,
+   "medium": 0,
+   "large": 5,
+   "applied": 0
+  },
+  "pieces": [
+   {
+    "token": "station_wall",
+    "x": 3.0,
+    "y": 0.0,
+    "z": 0.06,
+    "wall": true,
+    "config": {
+     "length_cells": 7,
+     "height": 3.0,
+     "start_cap": true,
+     "panel_style": "perforated",
+     "lit_seam": true
+    }
+   },
+   {
+    "token": "station_wall",
+    "x": 13.0,
+    "y": 0.0,
+    "z": 0.06,
+    "wall": true,
+    "config": {
+     "length_cells": 7,
+     "height": 3.0,
+     "end_cap": true,
+     "panel_style": "perforated",
+     "lit_seam": true
+    }
+   },
+   {
+    "token": "station_panel",
+    "x": 1.5,
+    "y": 2.35,
+    "z": 0.07,
+    "wall": true,
+    "config": {
+     "width_cells": 3,
+     "height": 0.7,
+     "header": "D = log N / log S",
+     "lines": [
+      "One law. Every fractal here obeys it.",
+      "The edge of chaos, made walkable."
+     ]
+    }
+   },
+   {
+    "token": "station_panel",
+    "x": 7.0,
+    "y": 2.35,
+    "z": 0.07,
+    "wall": true,
+    "config": {
+     "width_cells": 4,
+     "height": 0.7,
+     "header": "THREE EDGES, ONE RULE",
+     "lines": [
+      "Cantor: set vs void.  Koch: finite vs infinite.",
+      "Sierpinski: curve vs surface."
+     ]
+    }
+   },
+   {
+    "token": "station_panel",
+    "x": 15.0,
+    "y": 2.35,
+    "z": 0.07,
+    "wall": true,
+    "config": {
+     "width_cells": 4,
+     "height": 0.7,
+     "header": "NATURE COMPUTES IT",
+     "lines": [
+      "Branch, spiral, chaos \u2014 the same math.",
+      "F + variation, structure at the boundary."
+     ]
+    }
+   },
+   {
+    "token": "station_plinth",
+    "x": 1.5,
+    "y": 0.0,
+    "z": 1.9,
+    "wall": false,
+    "config": {
+     "width_cells": 3,
+     "depth_cells": 3,
+     "top_height": 0.85,
+     "cap_inset": 0.3,
+     "top_style": "tray",
+     "caption_text": "Fractal Recursion 1"
+    }
+   },
+   {
+    "token": "fractal_recursion_1",
+    "x": 1.5,
+    "y": 0.85,
+    "z": 1.9,
+    "wall": false
+   },
+   {
+    "token": "station_stage",
+    "x": 4.5,
+    "y": 0.0,
+    "z": 2.7,
+    "wall": false,
+    "config": {
+     "width_cells": 4,
+     "depth_cells": 4,
+     "step_height": 0.18,
+     "hazard_edge": true,
+     "name_plate": "Cantor Set"
+    }
+   },
+   {
+    "token": "cantor_set",
+    "x": 4.5,
+    "y": 0.18,
+    "z": 2.7,
+    "wall": false
+   },
+   {
+    "token": "station_plinth",
+    "x": 6.0,
+    "y": 0.0,
+    "z": 0.7,
+    "wall": false,
+    "config": {
+     "width_cells": 1,
+     "depth_cells": 1,
+     "top_height": 1.4,
+     "cap_inset": 0.3,
+     "top_style": "tray",
+     "caption_text": "Koch Curve"
+    }
+   },
+   {
+    "token": "koch_curve",
+    "x": 6.0,
+    "y": 1.4,
+    "z": 0.7,
+    "wall": false
+   },
+   {
+    "token": "station_plinth",
+    "x": 8.0,
+    "y": 0.0,
+    "z": 1.5,
+    "wall": false,
+    "config": {
+     "width_cells": 1,
+     "depth_cells": 1,
+     "top_height": 1.3,
+     "cap_inset": 0.3,
+     "top_style": "tray",
+     "caption_text": "Sierpinski Triangle"
+    }
+   },
+   {
+    "token": "sierpinski_triangle",
+    "x": 8.0,
+    "y": 1.3,
+    "z": 1.5,
+    "wall": false
+   },
+   {
+    "token": "station_micropod",
+    "x": 10.0,
+    "y": 0.0,
+    "z": 0.25,
+    "wall": false,
+    "config": {
+     "base_meters": 0.6,
+     "top_height": 1.15,
+     "caption_text": "Strange Attractors"
+    }
+   },
+   {
+    "token": "strange_attractors",
+    "x": 10.0,
+    "y": 1.15,
+    "z": 0.25,
+    "wall": false
+   },
+   {
+    "token": "station_micropod",
+    "x": 11.8,
+    "y": 0.0,
+    "z": 1.4,
+    "wall": false,
+    "config": {
+     "base_meters": 0.6,
+     "top_height": 1.35,
+     "caption_text": "Fibonacci Sequences"
+    }
+   },
+   {
+    "token": "fibonacci_sequences",
+    "x": 11.8,
+    "y": 1.35,
+    "z": 1.4,
+    "wall": false
+   },
+   {
+    "token": "station_stage",
+    "x": 13.8,
+    "y": 0.0,
+    "z": 3.4,
+    "wall": false,
+    "config": {
+     "width_cells": 2,
+     "depth_cells": 4,
+     "step_height": 0.18,
+     "name_plate": "Recursive Tree"
+    }
+   },
+   {
+    "token": "recursive_tree",
+    "x": 13.8,
+    "y": 0.18,
+    "z": 3.4,
+    "wall": false
+   },
+   {
+    "token": "station_stage",
+    "x": 16.5,
+    "y": 0.0,
+    "z": 2.7,
+    "wall": false,
+    "config": {
+     "width_cells": 4,
+     "depth_cells": 4,
+     "step_height": 0.18,
+     "name_plate": "Romanesco"
+    }
+   },
+   {
+    "token": "romanesco",
+    "x": 16.5,
+    "y": 0.18,
+    "z": 2.7,
+    "wall": false
+   },
+   {
+    "token": "station_stage",
+    "x": 9.5,
+    "y": 0.0,
+    "z": 6.5,
+    "wall": false,
+    "config": {
+     "width_cells": 4,
+     "depth_cells": 4,
+     "step_height": 0.18,
+     "top_style": "grate",
+     "name_plate": "Fractal Clouds (fBm)"
+    }
+   },
+   {
+    "token": "fractal_clouds",
+    "x": 9.5,
+    "y": 0.18,
+    "z": 6.5,
+    "wall": false
+   },
+   {
+    "token": "dark_sphere",
+    "x": 18.0,
+    "y": 3.4,
+    "z": 5.2,
+    "wall": false
+   }
+  ]
+ },
+ "Fractal_CrossSequence": {
+  "sequence": "fractals",
+  "counts": {
+   "small": 2,
+   "medium": 1,
+   "large": 1,
+   "applied": 1
+  },
+  "pieces": [
+   {
+    "token": "station_pillar",
+    "x": -1.0,
+    "y": 0.0,
+    "z": 0.4,
+    "wall": false,
+    "config": {
+     "height": 2.6,
+     "signage_text": "THE LAMBDA-EDGE, IN FULL"
+    }
+   },
+   {
+    "token": "station_panel",
+    "x": 1.0,
+    "y": 2.0,
+    "z": 0.06,
+    "wall": true,
+    "config": {
+     "width_cells": 2,
+     "header": "THE SEED",
+     "lines": [
+      "F + lambda E(S): rule + noise",
+      "the QFEP made vegetable"
+     ],
+     "accent_bar": true
+    }
+   },
+   {
+    "token": "station_micropod",
+    "x": 1.0,
+    "y": 0.0,
+    "z": 2.4,
+    "wall": false,
+    "config": {
+     "caption_text": "Stochastic Tree",
+     "top_height": 1.25,
+     "cap_inset": 0.1,
+     "base_meters": 0.6,
+     "edge_light": true
+    }
+   },
+   {
+    "token": "fractal_stochastic_tree",
+    "x": 1.0,
+    "y": 1.25,
+    "z": 2.4,
+    "wall": false
+   },
+   {
+    "token": "station_panel",
+    "x": 5.0,
+    "y": 2.0,
+    "z": 0.06,
+    "wall": true,
+    "config": {
+     "width_cells": 2,
+     "header": "THE BRIDGE",
+     "lines": [
+      "one line visits every point",
+      "the way out to L-systems"
+     ],
+     "accent_bar": true
+    }
+   },
+   {
+    "token": "station_micropod",
+    "x": 5.0,
+    "y": 0.0,
+    "z": 1.4,
+    "wall": false,
+    "config": {
+     "caption_text": "3D Hilbert Curve",
+     "top_height": 1.3
+    }
+   },
+   {
+    "token": "Hilbert3D",
+    "x": 5.0,
+    "y": 1.3,
+    "z": 1.4,
+    "wall": false
+   },
+   {
+    "token": "station_panel",
+    "x": 9.0,
+    "y": 2.0,
+    "z": 0.06,
+    "wall": true,
+    "config": {
+     "width_cells": 2,
+     "header": "COMPUTATION",
+     "lines": [
+      "Rule 90 draws Sierpinski",
+      "the stack IS the fractal"
+     ],
+     "accent_bar": true
+    }
+   },
+   {
+    "token": "station_plinth",
+    "x": 9.0,
+    "y": 0.0,
+    "z": 0.5,
+    "wall": false,
+    "config": {
+     "width_cells": 2,
+     "depth_cells": 2,
+     "top_height": 0.9,
+     "caption_text": "Cellular Automata 3D Stacked"
+    }
+   },
+   {
+    "token": "cellular_automata_3d_stacked",
+    "x": 9.0,
+    "y": 0.9,
+    "z": 0.5,
+    "wall": false
+   },
+   {
+    "token": "station_panel",
+    "x": 13.5,
+    "y": 2.0,
+    "z": 0.06,
+    "wall": true,
+    "config": {
+     "width_cells": 3,
+     "header": "EVOLUTION",
+     "lines": [
+      "fitness landscapes are fractal",
+      "selection walks the ridges"
+     ],
+     "accent_bar": true
+    }
+   },
+   {
+    "token": "station_plinth",
+    "x": 13.5,
+    "y": 0.0,
+    "z": 1.7,
+    "wall": false,
+    "config": {
+     "width_cells": 3,
+     "depth_cells": 1,
+     "top_height": 0.85,
+     "caption_text": "Evolutionary Algorithms"
+    }
+   },
+   {
+    "token": "evolutionary_algorithms",
+    "x": 13.5,
+    "y": 0.85,
+    "z": 1.7,
+    "wall": false
+   },
+   {
+    "token": "station_pillar",
+    "x": 17.0,
+    "y": 0.0,
+    "z": 0.4,
+    "wall": false,
+    "config": {
+     "height": 2.6
+    }
+   },
+   {
+    "token": "station_panel",
+    "x": 20.0,
+    "y": 2.0,
+    "z": 0.06,
+    "wall": true,
+    "config": {
+     "width_cells": 3,
+     "header": "USEFUL STRUCTURE",
+     "lines": [
+      "Hilbert, Peano, Moore",
+      "infinite edge, finite room"
+     ],
+     "accent_bar": true
+    }
+   },
+   {
+    "token": "station_stage",
+    "x": 20.0,
+    "y": 0.0,
+    "z": 1.6,
+    "wall": false,
+    "config": {
+     "width_cells": 4,
+     "depth_cells": 2,
+     "step_height": 0.18,
+     "name_plate": "Space-Filling Curve Gallery",
+     "edge_light": true
+    }
+   },
+   {
+    "token": "space_filling_curve_gallery",
+    "x": 20.0,
+    "y": 0.18,
+    "z": 1.6,
+    "wall": false
+   },
+   {
+    "token": "station_pillar",
+    "x": 23.0,
+    "y": 0.0,
+    "z": 0.4,
+    "wall": false,
+    "config": {
+     "height": 2.6,
+     "signage_text": "WHERE GEOMETRY, COMPUTATION, LIFE CONVERGE"
+    }
    }
   ]
  },

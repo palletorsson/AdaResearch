@@ -1,0 +1,200 @@
+{
+  "sequence": "fractals",
+  "counts": { "small": 1, "medium": 1, "large": 1, "applied": 5 },
+  "pieces": [
+    {
+      "token": "station_wall",
+      "x": 1.0,
+      "y": 0.0,
+      "z": 0.0,
+      "wall": true,
+      "config": { "width_cells": 5 }
+    },
+    {
+      "token": "station_panel",
+      "x": 1.0,
+      "y": 2.3,
+      "z": 0.06,
+      "wall": true,
+      "config": { "width_cells": 4, "header": "A FUNCTION THAT CALLS ITSELF", "lines": ["Recursion is not repetition — it is self-reference.", "A square inside a square, with no bottom but the base case."] }
+    },
+    {
+      "token": "station_micropod",
+      "x": 0.0,
+      "y": 0.0,
+      "z": 0.5,
+      "wall": false,
+      "config": { "caption_text": "Fractal Recursion 2", "top_height": 1.15, "cap_inset": 0.1, "base_meters": 0.6 }
+    },
+    {
+      "token": "fractal_recursion_2",
+      "x": 0.0,
+      "y": 1.15,
+      "z": 0.5,
+      "wall": false
+    },
+    {
+      "token": "station_plinth",
+      "x": 2.5,
+      "y": 0.0,
+      "z": 0.2,
+      "wall": false,
+      "config": { "width_cells": 1, "depth_cells": 1, "top_height": 1.3, "cap_inset": 0.3, "caption_text": "Cube Subdivision" }
+    },
+    {
+      "token": "cube_subdivision",
+      "x": 2.5,
+      "y": 1.3,
+      "z": 0.2,
+      "wall": false
+    },
+
+    {
+      "token": "station_wall",
+      "x": 6.0,
+      "y": 0.0,
+      "z": 0.0,
+      "wall": true,
+      "config": { "width_cells": 5 }
+    },
+    {
+      "token": "station_panel",
+      "x": 6.0,
+      "y": 2.4,
+      "z": 0.06,
+      "wall": true,
+      "config": { "width_cells": 5, "header": "THE CHAIR WAS ALWAYS INSIDE THE CUBE", "lines": ["To subdivide is to choose.", "Subdivision removes what is not the thing — and a chair, a table, are left."] }
+    },
+    {
+      "token": "station_plinth",
+      "x": 5.0,
+      "y": 0.0,
+      "z": 1.0,
+      "wall": false,
+      "config": { "width_cells": 2, "depth_cells": 2, "top_height": 0.95, "caption_text": "Recursive Chair" }
+    },
+    {
+      "token": "recursive_chair",
+      "x": 5.0,
+      "y": 0.95,
+      "z": 1.0,
+      "wall": false
+    },
+    {
+      "token": "station_stage",
+      "x": 7.5,
+      "y": 0.0,
+      "z": 1.6,
+      "wall": false,
+      "config": { "width_cells": 3, "depth_cells": 3, "step_height": 0.18, "name_plate": "Recursive Table (a cube that kept its top)" }
+    },
+    {
+      "token": "recursive_table",
+      "x": 7.5,
+      "y": 0.18,
+      "z": 1.6,
+      "wall": false
+    },
+
+    {
+      "token": "station_wall",
+      "x": 12.0,
+      "y": 0.0,
+      "z": 0.0,
+      "wall": true,
+      "config": { "width_cells": 5 }
+    },
+    {
+      "token": "station_panel",
+      "x": 12.0,
+      "y": 2.6,
+      "z": 0.06,
+      "wall": true,
+      "config": { "width_cells": 5, "header": "THE FIRST FRACTAL YOU CAN HOLD", "lines": ["A circle that contains circles, at every scale.", "Step inside: the rule is the same all the way down."] }
+    },
+    {
+      "token": "station_stage",
+      "x": 12.0,
+      "y": 0.0,
+      "z": 2.4,
+      "wall": false,
+      "config": { "width_cells": 4, "depth_cells": 4, "step_height": 0.18, "name_plate": "Recursion Circles — step inside" }
+    },
+    {
+      "token": "example_8_3_recursion_circles_vr",
+      "x": 12.0,
+      "y": 0.18,
+      "z": 2.4,
+      "wall": false
+    },
+    {
+      "token": "science_screen",
+      "x": 9.5,
+      "y": 1.6,
+      "z": 0.06,
+      "wall": true
+    },
+
+    {
+      "token": "station_wall",
+      "x": 17.0,
+      "y": 0.0,
+      "z": 0.0,
+      "wall": true,
+      "config": { "width_cells": 5 }
+    },
+    {
+      "token": "station_panel",
+      "x": 17.0,
+      "y": 2.3,
+      "z": 0.06,
+      "wall": true,
+      "config": { "width_cells": 4, "header": "THE RULE, PUT TO WORK", "lines": ["Recurse a cut, recurse a strut, recurse a tier.", "A staircase, a boolean cut, a pagoda — recursion as architecture."] }
+    },
+    {
+      "token": "station_plinth",
+      "x": 15.5,
+      "y": 0.0,
+      "z": 1.2,
+      "wall": false,
+      "config": { "width_cells": 2, "depth_cells": 2, "top_height": 0.9, "caption_text": "Recursive Boolean Cube" }
+    },
+    {
+      "token": "recursive_boolean_cube",
+      "x": 15.5,
+      "y": 0.9,
+      "z": 1.2,
+      "wall": false
+    },
+    {
+      "token": "station_plinth",
+      "x": 17.5,
+      "y": 0.0,
+      "z": 0.3,
+      "wall": false,
+      "config": { "width_cells": 1, "depth_cells": 1, "top_height": 1.1, "cap_inset": 0.3, "caption_text": "Cube Staircase" }
+    },
+    {
+      "token": "cube_staircase",
+      "x": 17.5,
+      "y": 1.1,
+      "z": 0.3,
+      "wall": false
+    },
+    {
+      "token": "station_stage",
+      "x": 20.0,
+      "y": 0.0,
+      "z": 2.2,
+      "wall": false,
+      "config": { "width_cells": 4, "depth_cells": 4, "step_height": 0.18, "name_plate": "Fibonacci Pagoda (the golden ratio as architecture)" }
+    },
+    {
+      "token": "fibonacci_pagoda",
+      "x": 20.0,
+      "y": 0.18,
+      "z": 2.2,
+      "wall": false
+    }
+  ]
+}

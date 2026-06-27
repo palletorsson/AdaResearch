@@ -1,0 +1,211 @@
+{
+ "sequence": "fractals",
+ "counts": {
+  "small": 1,
+  "medium": 1,
+  "large": 1,
+  "applied": 2
+ },
+ "pieces": [
+  {
+   "token": "station_panel",
+   "x": 1.5,
+   "y": 2.0,
+   "z": 0.06,
+   "wall": true,
+   "config": {
+    "width_cells": 3,
+    "header": "THE RULE",
+    "lines": [
+     "Remove the middle third.",
+     "Then do it again. Forever."
+    ],
+    "header_color": [
+     0.86,
+     0.34,
+     0.11
+    ]
+   }
+  },
+  {
+   "token": "station_micropod",
+   "x": 1.0,
+   "y": 0.0,
+   "z": 0.7,
+   "wall": false,
+   "config": {
+    "caption_text": "Cantor Set (radial)",
+    "top_height": 1.3
+   }
+  },
+  {
+   "token": "example_8_4_cantor_set_vr",
+   "x": 1.0,
+   "y": 1.3,
+   "z": 0.7,
+   "wall": false
+  },
+  {
+   "token": "station_panel",
+   "x": 5.5,
+   "y": 2.0,
+   "z": 0.06,
+   "wall": true,
+   "config": {
+    "width_cells": 3,
+    "header": "EXISTENCE WITHOUT EXTENSION",
+    "lines": [
+     "Length -> 0.  Points -> uncountable.",
+     "D = log 2 / log 3 = 0.63"
+    ],
+    "header_color": [
+     0.86,
+     0.34,
+     0.11
+    ]
+   }
+  },
+  {
+   "token": "station_plinth",
+   "x": 6.0,
+   "y": 0.0,
+   "z": 0.5,
+   "wall": false,
+   "config": {
+    "width_cells": 2,
+    "depth_cells": 2,
+    "top_height": 0.95,
+    "caption_text": "Cantor Bench"
+   }
+  },
+  {
+   "token": "cantor_bench",
+   "x": 6.0,
+   "y": 0.95,
+   "z": 0.5,
+   "wall": false
+  },
+  {
+   "token": "station_panel",
+   "x": 12.5,
+   "y": 2.0,
+   "z": 0.06,
+   "wall": true,
+   "config": {
+    "width_cells": 4,
+    "header": "THE DUST IT LEAVES",
+    "lines": [
+     "What remains has zero length",
+     "yet as many points as the line."
+    ],
+    "header_color": [
+     0.86,
+     0.34,
+     0.11
+    ]
+   }
+  },
+  {
+   "token": "station_stage",
+   "x": 12.0,
+   "y": 0.0,
+   "z": 2.4,
+   "wall": false,
+   "config": {
+    "width_cells": 4,
+    "depth_cells": 4,
+    "step_height": 0.18,
+    "name_plate": "Cantor Set",
+    "hazard_edge": true
+   }
+  },
+  {
+   "token": "cantor_set",
+   "x": 12.0,
+   "y": 0.18,
+   "z": 2.4,
+   "wall": false
+  },
+  {
+   "token": "station_panel",
+   "x": 18.5,
+   "y": 2.0,
+   "z": 0.06,
+   "wall": true,
+   "config": {
+    "width_cells": 4,
+    "header": "DELETION BECOMES ARCHITECTURE",
+    "lines": [
+     "Each pagoda tier = one Cantor cut.",
+     "The 1D rule, raised into 3D."
+    ],
+    "header_color": [
+     0.86,
+     0.34,
+     0.11
+    ]
+   }
+  },
+  {
+   "token": "station_stage",
+   "x": 18.0,
+   "y": 0.0,
+   "z": 2.2,
+   "wall": false,
+   "config": {
+    "width_cells": 4,
+    "depth_cells": 4,
+    "step_height": 0.18,
+    "name_plate": "Cantor Pagoda",
+    "hazard_edge": true
+   }
+  },
+  {
+   "token": "example_8_4_cantor_pagoda_vr",
+   "x": 18.0,
+   "y": 0.18,
+   "z": 2.2,
+   "wall": false
+  },
+  {
+   "token": "station_panel",
+   "x": 22.0,
+   "y": 2.0,
+   "z": 0.06,
+   "wall": true,
+   "config": {
+    "width_cells": 3,
+    "header": "UNCOUNTABLY MANY",
+    "lines": [
+     "Flip the diagonal: a real no row holds.",
+     "The dust outnumbers every list."
+    ],
+    "header_color": [
+     0.86,
+     0.34,
+     0.11
+    ]
+   }
+  },
+  {
+   "token": "station_plinth",
+   "x": 22.0,
+   "y": 0.0,
+   "z": 0.9,
+   "wall": false,
+   "config": {
+    "width_cells": 2,
+    "depth_cells": 2,
+    "top_height": 0.95,
+    "caption_text": "Cantor Diagonal Workbench"
+   }
+  },
+  {
+   "token": "cantor_diagonal_workbench",
+   "x": 22.0,
+   "y": 0.95,
+   "z": 0.9,
+   "wall": false
+  }
+ ]
+}
