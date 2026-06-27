@@ -21,6 +21,7 @@ const PAN_SPEED := 12.0
 const PAN_LIMIT := 20.0
 const SAVE_PATH := "user://wall_hangar_layout.json"
 const REGISTRY_DIR := "res://commons/artifacts/registry"
+const MAPS_DIR := "res://commons/maps"
 const NEIGHBORS_PATH := "res://commons/data/artifact_neighbors.json"
 const SPINE_WALLS_PATH := "res://commons/data/spine_walls.json"
 const DNA_PROPS_PATH := "res://commons/data/dna_props.json"
@@ -35,6 +36,8 @@ const WHStyle := preload("res://commons/scenes/wall_hangar/WHStyle.gd")
 const WHHud := preload("res://commons/scenes/wall_hangar/WHHud.gd")
 
 const C_ACCENT := Color(0.86, 0.40, 0.16)
+const C_TEXT := Color(0.87, 0.88, 0.90)
+const C_DIM := Color(0.60, 0.62, 0.66)
 
 var _camera: Camera3D = null
 var _pan_x := 0.0
@@ -65,7 +68,9 @@ var _insp: PanelContainer = null
 var _hud: Control = null
 var _neighbors: Dictionary = {}    # lookup -> [{id, name, sim}, ...]
 var _spine_walls: Dictionary = {}  # MapName -> {sequence, small_count, pieces}
-var _map_select: OptionButton = null
+var _map_filter: LineEdit = null
+var _map_list: ItemList = null
+var _map_index: Array = []         # [{name, seq, spine}] — spine maps (spine order) then others
 var _nearby_list: VBoxContainer = null
 var _nearby_head: Label = null
 var _artifact_seq: Dictionary = {}    # content lookup -> its spine sequence (nearby weighting)
@@ -188,7 +193,7 @@ func _build_ui() -> void:
 	_palette.set_anchors_and_offsets_preset(Control.PRESET_LEFT_WIDE)
 	_palette.offset_left = 8
 	_palette.offset_right = 340
-	_palette.offset_top = 86
+	_palette.offset_top = 222
 	_palette.offset_bottom = -184
 	layer.add_child(_palette)
 	if _palette.has_method("set_wall_tokens"):
@@ -198,7 +203,7 @@ func _build_ui() -> void:
 	if _palette.has_method("set_title"):
 		_palette.set_title("ARTIFACTS")
 	_palette.picked.connect(_pick)
-	_build_map_select(layer)
+	_build_map_browser(layer)
 	_build_nearby(layer)
 
 	_insp = WHInspector.new()
@@ -736,36 +741,90 @@ func _status(msg: String) -> void:
 
 
 # ── Spine-wall loading + ontological neighbours ───────────────────────
-func _build_map_select(layer: CanvasLayer) -> void:
-	var row := HBoxContainer.new()
-	row.position = Vector2(12, 48)
-	row.add_theme_constant_override("separation", 6)
-	layer.add_child(row)
-	var lbl := Label.new()
-	lbl.text = "MAP"
-	lbl.add_theme_color_override("font_color", C_ACCENT)
-	lbl.add_theme_font_size_override("font_size", 12)
-	row.add_child(lbl)
-	_map_select = OptionButton.new()
-	_map_select.custom_minimum_size = Vector2(300, 28)
-	WHStyle.style_button(_map_select)
-	_map_select.add_item("— load a spine map's wall —", 0)
-	# Natural key order = curriculum/spine order (the generator wrote maps sequence-by-
-	# sequence, in lesson order, and Godot preserves JSON key order). Group by sequence
-	# with separator headers, like the spine / slash editors.
-	var last_seq := ""
+func _build_map_browser(layer: CanvasLayer) -> void:
+	_build_map_index()
+	var panel := PanelContainer.new()
+	panel.set_anchors_and_offsets_preset(Control.PRESET_TOP_LEFT)
+	panel.offset_left = 8
+	panel.offset_top = 46
+	panel.offset_right = 340
+	panel.offset_bottom = 214
+	panel.add_theme_stylebox_override("panel", WHStyle.panel_box())
+	layer.add_child(panel)
+	var vb := VBoxContainer.new()
+	vb.add_theme_constant_override("separation", 4)
+	panel.add_child(vb)
+	var head := Label.new()
+	head.text = "MAP"
+	head.add_theme_color_override("font_color", C_ACCENT)
+	head.add_theme_font_size_override("font_size", 12)
+	vb.add_child(head)
+	_map_filter = LineEdit.new()
+	_map_filter.placeholder_text = "find a map…"
+	_map_filter.clear_button_enabled = true
+	_map_filter.add_theme_color_override("font_color", C_TEXT)
+	_map_filter.text_changed.connect(func(_t): _refresh_map_list())
+	vb.add_child(_map_filter)
+	_map_list = ItemList.new()
+	_map_list.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	_map_list.add_theme_color_override("font_color", C_TEXT)
+	_map_list.add_theme_font_size_override("font_size", 12)
+	_map_list.item_selected.connect(_on_map_item)
+	vb.add_child(_map_list)
+	_refresh_map_list()
+
+
+func _build_map_index() -> void:
+	# Spine maps first (in spine_walls key order = curriculum order); every other map
+	# on disk alphabetically last.
+	_map_index = []
+	var added: Dictionary = {}
 	for k in _spine_walls.keys():
 		var entry: Variant = _spine_walls[k]
 		var seq := ""
 		if entry is Dictionary:
 			seq = str(entry.get("sequence", ""))
-		if seq != last_seq:
-			_map_select.add_separator(seq)
-			last_seq = seq
-		_map_select.add_item(str(k))
-		_map_select.set_item_metadata(_map_select.item_count - 1, str(k))
-	_map_select.item_selected.connect(_on_map_picked)
-	row.add_child(_map_select)
+		_map_index.append({"name": str(k), "seq": seq, "spine": true})
+		added[str(k)] = true
+	var others: Array = []
+	var dir := DirAccess.open(MAPS_DIR)
+	if dir != null:
+		for sub in dir.get_directories():
+			var nm := str(sub).strip_edges()
+			if nm == "" or nm.begins_with(".") or added.has(nm):
+				continue
+			if FileAccess.file_exists("%s/%s/map_data.json" % [MAPS_DIR, nm]):
+				others.append(nm)
+	others.sort()
+	for nm in others:
+		_map_index.append({"name": nm, "seq": "", "spine": false})
+
+
+func _refresh_map_list() -> void:
+	if _map_list == null:
+		return
+	_map_list.clear()
+	var needle := ""
+	if _map_filter != null:
+		needle = _map_filter.text.strip_edges().to_lower()
+	for m in _map_index:
+		var nm := str(m["name"])
+		var seq := str(m["seq"])
+		if needle != "" and not (nm.to_lower().contains(needle) or seq.to_lower().contains(needle)):
+			continue
+		var label := ""
+		if bool(m["spine"]):
+			label = "%s   (%s)" % [nm, seq]
+		else:
+			label = "%s   · off-spine" % nm
+		var idx := _map_list.add_item(label)
+		_map_list.set_item_metadata(idx, nm)
+		if not bool(m["spine"]):
+			_map_list.set_item_custom_fg_color(idx, C_DIM)
+
+
+func _on_map_item(idx: int) -> void:
+	_load_map_by_name(str(_map_list.get_item_metadata(idx)))
 
 
 func _build_nearby(layer: CanvasLayer) -> void:
@@ -847,19 +906,57 @@ func _show_nearby(token: String) -> void:
 			_nearby_head.text = "NEARBY (%d)" % ordered.size()
 
 
-func _on_map_picked(idx: int) -> void:
-	if idx <= 0 or _map_select == null:
+func _load_map_by_name(mapname: String) -> void:
+	if mapname == "":
 		return
-	var mapname := str(_map_select.get_item_metadata(idx))
-	var entry: Variant = _spine_walls.get(mapname, {})
-	if not (entry is Dictionary):
+	if _spine_walls.has(mapname):
+		var entry: Variant = _spine_walls[mapname]
+		if entry is Dictionary:
+			var pieces: Variant = entry.get("pieces", [])
+			if pieces is Array:
+				_current_seq = str(entry.get("sequence", ""))
+				_load_wall(pieces)
+				_status("loaded %s — %d pieces" % [mapname, pieces.size()])
+	else:
+		_load_raw_map(mapname)
+
+
+func _load_raw_map(mapname: String) -> void:
+	# Off-spine map: no curated wall — stage its raw artifacts on plinths so you can see + curate.
+	var path := "%s/%s/map_data.json" % [MAPS_DIR, mapname]
+	if not FileAccess.file_exists(path):
+		_status("no map_data for %s" % mapname)
 		return
-	var pieces: Variant = entry.get("pieces", [])
-	if not (pieces is Array):
+	var d = JSON.parse_string(FileAccess.get_file_as_string(path))
+	if not (d is Dictionary):
 		return
-	_current_seq = str(entry.get("sequence", ""))
+	var inter: Variant = []
+	var layers: Variant = d.get("layers", {})
+	if layers is Dictionary:
+		inter = layers.get("interactables", [])
+	var lookups: Array = []
+	var seen: Dictionary = {}
+	if inter is Array:
+		for r in inter:
+			if r is Array:
+				for cell in r:
+					var tk := str(cell).strip_edges()
+					if tk == "" or tk == " ":
+						continue
+					tk = tk.split(":")[0].split("#")[0].strip_edges()
+					if _scene_map.has(tk) and not seen.has(tk):
+						seen[tk] = true
+						lookups.append(tk)
+	var pieces: Array = [{"token": "station_panel", "x": 0.0, "y": 1.8, "z": 0.06, "wall": true}]
+	var i := 0
+	for tk in lookups:
+		var x := 1.0 + float(i) * 2.0
+		pieces.append({"token": "station_plinth", "x": x, "y": 0.0, "z": 0.8, "wall": false})
+		pieces.append({"token": str(tk), "x": x, "y": 1.0, "z": 0.8, "wall": false})
+		i += 1
+	_current_seq = ""
 	_load_wall(pieces)
-	_status("loaded %s — %d pieces (%d small)" % [mapname, pieces.size(), int(entry.get("small_count", 0))])
+	_status("loaded %s (off-spine, %d raw artifacts — not curated)" % [mapname, lookups.size()])
 
 
 func _load_wall(pieces: Array) -> void:
