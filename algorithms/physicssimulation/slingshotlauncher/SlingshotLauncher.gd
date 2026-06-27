@@ -6,6 +6,16 @@
 #
 # QFEP: Impulse — a short burst of force that changes everything.
 # ===========================================================================
+# @identity
+# essence: A charging platform detects a body standing on it, builds power, then catapults it along a parabolic arc — impulse you feel in your own trajectory
+# desire: To collapse the distance between reading "impulse = force × time" and being the projectile that the impulse launches
+# critical_parameter: launch_force and launch_angle_deg — together they set range and height; 45° maximises distance, steep angles trade reach for altitude
+# triggers: Too little force and you barely hop; 85° fires you almost straight up; the same charge at 30° versus 60° lands in completely different places
+# emerges: The full parabola of projectile motion appears from a single burst — after release no force steers you but gravity, yet the path was decided in the launch instant
+# needs: charge-and-fire mechanism [has], player/body detection [has], adjustable angle and power [has], trajectory preview [has]
+# relationships: Physics-simulation sibling to gravity_well and newton_cradle; the impulse-and-projectile counterpart to the forces accumulation artifacts
+# truth: A brief force applied once writes a whole trajectory — change nothing after launch, and the arc was already inevitable at the moment of release.
+# ===========================================================================
 extends Node3D
 
 class_name SlingshotLauncher

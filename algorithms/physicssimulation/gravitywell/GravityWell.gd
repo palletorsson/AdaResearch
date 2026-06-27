@@ -5,6 +5,16 @@
 #
 # QFEP: Geometry IS gravity — mass tells space how to curve.
 # ===========================================================================
+# @identity
+# essence: A deformable grid sheet warps around a movable mass while test particles roll into the depression — Einstein's rubber-sheet metaphor made grabbable
+# desire: To turn the abstract claim "mass curves spacetime" into a surface you can deform with your hands and watch govern motion
+# critical_parameter: mass_strength — it sets how deep the well dips; shallow wells let particles skim past, deep wells capture everything
+# triggers: Too little mass and orbits decay into straight lines; too much and the sheet swallows every particle; the right depth produces stable orbits
+# emerges: Orbital and escape trajectories appear without any orbit being programmed — the geometry alone decides who circles, who spirals in, and who flees
+# needs: deformable grid mesh [has], movable mass [has], rolling test particles [has], adjustable mass strength [has]
+# relationships: Physics-simulation sibling to newton_cradle and slingshot_launcher; the geometric counterpart to forces example_2_3 (gravity scaled by mass)
+# truth: Gravity is not a force reaching across space — it is the shape of space, and motion is just falling along the curve.
+# ===========================================================================
 extends Node3D
 
 class_name GravityWell

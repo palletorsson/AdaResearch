@@ -5,6 +5,16 @@
 #
 # QFEP: Momentum as conserved quantity — what enters must exit.
 # ===========================================================================
+# @identity
+# essence: Five suspended balls trade momentum through elastic collisions — lift one, release it, and exactly one leaves the far end
+# desire: To make conservation of momentum audible and visible, so a conserved quantity stops being an equation and becomes a click-clack you can count
+# critical_parameter: damping — at near-1.0 the cradle rings for minutes; lower it and the swing decays, revealing that "conservation" is always an idealisation energy leaks from
+# triggers: Lift two balls and two leave; lift one and one leaves — the count is never negotiable, but friction eventually steals the height
+# emerges: A one-in-one-out rule no ball was told to obey falls out of equal masses and elastic contact alone
+# needs: pendulum balls [has], elastic collision transfer [has], suspending frame [has], slight damping [has]
+# relationships: Physics-simulation sibling to gravity_well and slingshot_launcher; the collision-side complement to the forces vector-accumulation artifacts
+# truth: In a closed line of equal masses, momentum cannot be created or destroyed — it can only be handed down the chain.
+# ===========================================================================
 extends Node3D
 
 class_name NewtonCradle

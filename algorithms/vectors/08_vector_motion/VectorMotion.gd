@@ -1,10 +1,21 @@
+# ===========================================================================
+# @identity
+# essence: A moving ball carrying three live arrows — position, velocity, and acceleration — plus a fading trail, so the calculus of motion is shown as nested vectors
+# desire: To make the chain "acceleration changes velocity changes position" visible at once, instead of as three separate equations a student must mentally integrate
+# critical_parameter: acceleration — it is the only thing directly driven; velocity is its running sum and position is velocity's sum, so the top of the chain governs the whole arc
+# triggers: A constant acceleration bends the path into a parabola; a centre-pointing one curls it into an orbit; zero acceleration straightens the trail into a line
+# emerges: The relationship between the three vectors becomes legible — velocity always tangent to the trail, acceleration always bending it — without any formula on screen
+# needs: moving ball [has], position/velocity/acceleration vectors [has], motion trail [has], live readout label [has]
+# relationships: Vectors-sequence sibling to VectorBasics and VectorForces; the moving-body reading of the static vector_field flow
+# truth: Position, velocity, and acceleration are one quantity seen at three depths of change — each is the rate at which the one below it is rewritten.
+# ===========================================================================
 extends "res://algorithms/vectors/shared/vector_scene_base.gd"
 
 var ball: RigidBody3D
 var acceleration_vector: Node3D
 var velocity_vector: Node3D
 var position_vector: Node3D
-var info_label: Label3D
+var info_label: Label
 var accumulator := 0.0
 
 # Pedagogical Enhancements: Trail

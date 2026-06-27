@@ -1,3 +1,14 @@
+# ===========================================================================
+# @identity
+# essence: A 3D lattice of arrows that each point the way the field flows at that location, with particles advected through it — a function from space to direction, made walkable
+# desire: To show that a vector field is not arrows decorating space but a rule assigning every point a push, by letting you stand inside one and watch particles obey it
+# critical_parameter: field_type — switching between Vortex, Saddle, Source, Sink, Tornado, Wave, and Circular completely rewrites where the flow carries you
+# triggers: A Source scatters every particle outward, a Sink drains them to one point, a Saddle splits neighbours that started together — same lattice, opposite destinies by field choice
+# emerges: Coherent global flow — drains, swirls, separatrices — arises purely from a local direction rule evaluated independently at each grid point
+# needs: arrow lattice [has], selectable field functions [has], advected particles [has], noise modulation [has]
+# relationships: Transformation-sequence kin to VectorMotion and the vectors workbench; the spatial-field reading of the forces that example_2 artifacts accumulate point-by-point
+# truth: A field is a decision made everywhere at once — give every point a direction and motion through space becomes obedience to a map you can see.
+# ===========================================================================
 @tool
 extends Node3D
 
