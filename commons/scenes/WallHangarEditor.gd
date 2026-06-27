@@ -25,6 +25,7 @@ const MAPS_DIR := "res://commons/maps"
 const NEIGHBORS_PATH := "res://commons/data/artifact_neighbors.json"
 const SPINE_WALLS_PATH := "res://commons/data/spine_walls.json"
 const DNA_PROPS_PATH := "res://commons/data/dna_props.json"
+const CURATED_WALLS_DIR := "res://commons/data/curated_walls"
 # Lookup-names that mount on the wall (everything else falls to the floor + stacks).
 const WALL_SET := ["station_panel", "station_frame", "framed_readout_screen"]
 # Registries treated as staging PROPS (bottom bar); everything else = artifacts (left).
@@ -83,6 +84,9 @@ func _ready() -> void:
 	_build_world()
 	_build_camera()
 	_build_ui()
+	var caps := _capture_targets()
+	if not caps.is_empty():
+		_run_capture(caps)   # headless batch render of curated walls -> user://wall_shots/
 
 
 func _load_data() -> void:
@@ -1018,3 +1022,86 @@ func _clean_loaded(n: Node) -> void:
 		elif c is Camera3D:
 			(c as Camera3D).current = false
 		_clean_loaded(c)
+
+
+# ── Headless wall capture ─────────────────────────────────────────────
+# Run:  Godot --path . --no-window --xr-mode off res://commons/scenes/desktop_wall_hangar_editor.tscn -- --capture-all
+#       (or --capture=<MapName> for one). Writes user://wall_shots/<Map>.png.
+func _capture_targets() -> Array:
+	var one := ""
+	var all := false
+	for a in OS.get_cmdline_user_args():
+		if a == "--capture-all":
+			all = true
+		elif a.begins_with("--capture="):
+			one = a.substr(a.find("=") + 1)
+	if one != "":
+		return [one]
+	if all:
+		var out: Array = []
+		var d := DirAccess.open(CURATED_WALLS_DIR)
+		if d:
+			for f in d.get_files():
+				if str(f).ends_with(".json"):
+					out.append(str(f).get_basename())
+		out.sort()
+		return out
+	return []
+
+
+func _capture_extent(pieces: Array) -> Vector2:
+	# X span of the FLOOR pieces (the wall itself spans the whole hall, so ignore it).
+	var lo := INF
+	var hi := -INF
+	for p in pieces:
+		if p is Dictionary and not bool(p.get("wall", false)):
+			var x := float(p.get("x", 0.0))
+			lo = minf(lo, x)
+			hi = maxf(hi, x)
+	if lo == INF:
+		return Vector2(0.0, 10.0)
+	return Vector2(lo, hi)
+
+
+func _run_capture(targets: Array) -> void:
+	# Hide the editor chrome so only the wall renders.
+	for c in get_children():
+		if c is CanvasLayer:
+			(c as CanvasLayer).visible = false
+	# Curated walls run along POSITIVE x (to ~36), past the editor's centered ±24 world wall.
+	# Lay a long capture-only backdrop + floor behind the whole span so far-right pieces are
+	# never on the void (interactive editing is untouched — this only runs in capture mode).
+	add_child(_box(Vector3(18.0, 2.0, -0.33), Vector3(60.0, 4.0, 0.6), Color(0.80, 0.79, 0.75)))
+	add_child(_box(Vector3(18.0, -0.07, 2.0), Vector3(60.0, 0.1, 6.0), Color(0.50, 0.51, 0.55)))
+	add_child(_box(Vector3(18.0, 3.0, 0.012), Vector3(60.0, 0.05, 0.02), C_ACCENT))
+	_camera.keep_aspect = Camera3D.KEEP_WIDTH   # fit the whole (wide) wall horizontally
+	_camera.rotation_degrees = Vector3(-8, 0, 0)  # slight tilt so the staggered depth reads
+	const W := 2400
+	DirAccess.make_dir_recursive_absolute("user://wall_shots")
+	var done := 0
+	for mapname in targets:
+		if not _spine_walls.has(mapname):
+			print("CAPTURE skip (no wall): ", mapname)
+			continue
+		var entry: Dictionary = _spine_walls[mapname]
+		var pieces: Array = entry.get("pieces", [])
+		_load_wall(pieces)
+		for _i in range(72):   # deferred geometry + _settle_loaded (40f) + margin
+			await get_tree().process_frame
+		var ext := _capture_extent(pieces)
+		var cx: float = (ext.x + ext.y) * 0.5
+		var ww: float = maxf(ext.y - ext.x + 3.0, 6.0)
+		var h: int = clampi(int(round(float(W) * 5.0 / ww)), 320, 1000)  # ~5 m vertical, any wall length
+		get_window().size = Vector2i(W, h)
+		_camera.size = ww
+		_camera.position = Vector3(cx, 2.3, 14.0)
+		for _i in range(3):
+			await get_tree().process_frame
+		await RenderingServer.frame_post_draw
+		var img := get_viewport().get_texture().get_image()
+		var path := "user://wall_shots/%s.png" % mapname
+		img.save_png(path)
+		done += 1
+		print("CAPTURE wrote ", path, "  ", W, "x", h)
+	print("CAPTURE done: ", done, "/", targets.size())
+	get_tree().quit()
