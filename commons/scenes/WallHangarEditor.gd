@@ -478,10 +478,16 @@ func _on_save() -> void:
 	for n in _placed:
 		if not is_instance_valid(n):
 			continue
+		var cfg: Dictionary = {}
+		for m in n.get_meta_list():
+			var ms := str(m)
+			if ms.begins_with("config_"):
+				cfg[ms.substr(7)] = n.get_meta(m)   # DNA edits (apply_grid_config metas)
 		arr.append({
 			"token": str(n.get_meta("token", "")),
 			"x": n.global_position.x, "y": n.global_position.y, "z": n.global_position.z,
 			"wall": bool(n.get_meta("wall_piece", false)),
+			"config": cfg,
 		})
 	var f := FileAccess.open(SAVE_PATH, FileAccess.WRITE)
 	if f != null:
@@ -742,6 +748,9 @@ func _load_wall(pieces: Array) -> void:
 		add_child(inst)
 		if inst is Node3D:
 			(inst as Node3D).global_position = Vector3(item.get("x", 0.0), item.get("y", 0.0), item.get("z", 0.0))
+		var cfg: Variant = item.get("config", {})
+		if cfg is Dictionary and not (cfg as Dictionary).is_empty() and inst.has_method("apply_grid_config"):
+			inst.apply_grid_config(cfg)   # size plinths/stages to the artifact's footprint
 		_placed.append(inst)
 	call_deferred("_settle_loaded")
 
