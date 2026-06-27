@@ -15,10 +15,14 @@ extends Node3D
 const GRID := 1.0
 const WALL_FACE_Z := 0.0
 const DEPTH_STEP := 0.7
-const WALL_LEN := 48.0
+# Curated walls run along POSITIVE x (to ~92); the world backdrop + iso pan span this range so
+# the iso view reaches every piece (not just the first ±20 m).
+const WALL_X0 := -6.0
+const WALL_X1 := 98.0
 const WALL_TOP := 3.4
 const PAN_SPEED := 12.0
-const PAN_LIMIT := 20.0
+const PAN_MIN := -4.0
+const PAN_MAX := 96.0
 const SAVE_PATH := "user://wall_hangar_layout.json"
 const REGISTRY_DIR := "res://commons/artifacts/registry"
 const MAPS_DIR := "res://commons/maps"
@@ -158,10 +162,12 @@ func _build_world() -> void:
 	sun.light_energy = 1.0
 	sun.shadow_enabled = true
 	add_child(sun)
-	add_child(_box(Vector3(0, -0.05, 2.0), Vector3(WALL_LEN, 0.1, 6.0), Color(0.50, 0.51, 0.55)))
-	add_child(_box(Vector3(0, 2.0, -0.3), Vector3(WALL_LEN, 4.0, 0.6), Color(0.80, 0.79, 0.75)))
-	add_child(_box(Vector3(0, 3.0, 0.02), Vector3(WALL_LEN, 0.05, 0.02), C_ACCENT))
-	for i in range(int(-WALL_LEN * 0.5), int(WALL_LEN * 0.5) + 1):
+	var wlen := WALL_X1 - WALL_X0
+	var wcx := (WALL_X0 + WALL_X1) * 0.5
+	add_child(_box(Vector3(wcx, -0.05, 2.0), Vector3(wlen, 0.1, 6.0), Color(0.50, 0.51, 0.55)))
+	add_child(_box(Vector3(wcx, 2.0, -0.3), Vector3(wlen, 4.0, 0.6), Color(0.80, 0.79, 0.75)))
+	add_child(_box(Vector3(wcx, 3.0, 0.02), Vector3(wlen, 0.05, 0.02), C_ACCENT))
+	for i in range(int(WALL_X0), int(WALL_X1) + 1):
 		add_child(_box(Vector3(float(i), 0.005, 2.0), Vector3(0.02, 0.01, 6.0), Color(0.42, 0.43, 0.47)))
 
 
@@ -474,7 +480,7 @@ func _update_pan(delta: float) -> void:
 	if Input.is_key_pressed(KEY_D) or Input.is_key_pressed(KEY_RIGHT):
 		dx += 1.0
 	if dx != 0.0:
-		_pan_x = clampf(_pan_x + dx * PAN_SPEED * delta, -PAN_LIMIT, PAN_LIMIT)
+		_pan_x = clampf(_pan_x + dx * PAN_SPEED * delta, PAN_MIN, PAN_MAX)
 		_camera.position.x = _pan_x
 
 
@@ -542,7 +548,7 @@ func _unhandled_input(ev: InputEvent) -> void:
 
 
 func _pan(dir: float) -> void:
-	_pan_x = clampf(_pan_x + dir, -PAN_LIMIT, PAN_LIMIT)
+	_pan_x = clampf(_pan_x + dir, PAN_MIN, PAN_MAX)
 	_camera.position.x = _pan_x
 
 
@@ -1068,12 +1074,6 @@ func _run_capture(targets: Array) -> void:
 	for c in get_children():
 		if c is CanvasLayer:
 			(c as CanvasLayer).visible = false
-	# Curated walls run along POSITIVE x (to ~36), past the editor's centered ±24 world wall.
-	# Lay a long capture-only backdrop + floor behind the whole span so far-right pieces are
-	# never on the void (interactive editing is untouched — this only runs in capture mode).
-	add_child(_box(Vector3(18.0, 2.0, -0.33), Vector3(60.0, 4.0, 0.6), Color(0.80, 0.79, 0.75)))
-	add_child(_box(Vector3(18.0, -0.07, 2.0), Vector3(60.0, 0.1, 6.0), Color(0.50, 0.51, 0.55)))
-	add_child(_box(Vector3(18.0, 3.0, 0.012), Vector3(60.0, 0.05, 0.02), C_ACCENT))
 	_camera.keep_aspect = Camera3D.KEEP_WIDTH   # fit the whole (wide) wall horizontally
 	_camera.rotation_degrees = Vector3(-8, 0, 0)  # slight tilt so the staggered depth reads
 	const W := 2400
