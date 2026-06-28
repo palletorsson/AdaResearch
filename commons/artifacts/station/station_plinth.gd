@@ -27,6 +27,10 @@ const HangarKit := preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 ## still snaps to one grid cell but reads narrower than 1 m, for genuinely sub-1 m precious things
 ## (a held instrument, a thin readout). 0 = use width_cells × depth_cells (the normal plinth).
 @export var base_meters: float = 0.0
+## If > 0, sets the CAP (tray + body + foot) to this fixed metric width, OVERRIDING the cap_inset
+## taper — so a 1-cell plinth can present a full ~1 m cap a 1 m-base artifact sits flush on (the
+## default cap tapers to ~0.68 m, so a 1 m thing overhangs). The foot follows at cap + 0.06.
+@export var cap_meters: float = 0.0
 
 @export_group("Style")
 ## "tray" (rimmed dish) | "flat" | "grate" cap.
@@ -97,6 +101,7 @@ func _read_metadata_overrides() -> void:
 	if has_meta("config_top_height"): top_height = float(str(get_meta("config_top_height")))
 	if has_meta("config_cap_inset"): cap_inset = float(str(get_meta("config_cap_inset")))
 	if has_meta("config_base_meters"): base_meters = float(str(get_meta("config_base_meters")))
+	if has_meta("config_cap_meters"): cap_meters = float(str(get_meta("config_cap_meters")))
 	if has_meta("config_top_style"): top_style = str(get_meta("config_top_style")).to_lower()
 	if has_meta("config_edge_light"): edge_light = _b(get_meta("config_edge_light"))
 	if has_meta("config_edge_light_wrap"): edge_light_wrap = _b(get_meta("config_edge_light_wrap"))
@@ -129,6 +134,10 @@ func _build() -> void:
 	var inset: float = minf(cap_inset, minf(wc, dc) * 0.28)
 	var cap_w: float = wc - inset * 2.0
 	var cap_d: float = dc - inset * 2.0
+	if cap_meters > 0.0:
+		# Fixed cap width — overrides the taper so the cap fits the artifact's base; foot follows at +0.06.
+		cap_w = clampf(cap_meters, 0.2, 4.0)
+		cap_d = clampf(cap_meters, 0.2, 4.0)
 	var body_w: float = cap_w - 0.1
 	var body_d: float = cap_d - 0.1
 	var th: float = maxf(top_height, 0.25)
