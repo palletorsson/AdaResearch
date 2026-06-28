@@ -92,25 +92,26 @@ func _settle() -> void:
 			continue
 		if str(n.get_meta("token", "")).begins_with("station_"):
 			continue   # a staging prop, not the content artifact
-		var box := _world_aabb(n)
+		var box := _local_aabb(n)
 		if box.size.y <= 0.001:
 			continue
-		var target := _stack_top(n.global_position.x, n.global_position.z, n)
+		var target := _stack_top(n.position.x, n.position.z, n)
 		var shift := target - box.position.y
 		if absf(shift) > 0.003 and absf(shift) < 6.0:
-			var gp: Vector3 = n.global_position
-			gp.y += shift
-			n.global_position = gp
+			var lp: Vector3 = n.position
+			lp.y += shift
+			n.position = lp   # local frame: Y-rotation-safe re-grounding
 
 
 func _stack_top(x: float, z: float, exclude: Node3D) -> float:
+	# x/z are in THIS resolver's LOCAL frame (see _settle) so footprint matching is rotation-safe.
 	var top := 0.0
 	for n in _placed:
 		if n == exclude or not is_instance_valid(n):
 			continue
 		if bool(n.get_meta("wall_piece", false)):
 			continue
-		var box := _world_aabb(n)
+		var box := _local_aabb(n)
 		if box.size.y <= 0.001:
 			continue
 		var cx := box.position.x + box.size.x * 0.5
@@ -130,6 +131,28 @@ func _world_aabb(n: Node3D) -> AABB:
 			stack.append(ch)
 		if node is VisualInstance3D and not (node is GPUParticles3D) and (node as VisualInstance3D).is_visible_in_tree():
 			var gb: AABB = (node as VisualInstance3D).global_transform * (node as VisualInstance3D).get_aabb()
+			if not found:
+				box = gb
+				found = true
+			else:
+				box = box.merge(gb)
+	return box if found else AABB()
+
+
+func _local_aabb(n: Node3D) -> AABB:
+	# Like _world_aabb but in THIS resolver's local frame, so a Y-rotated cluster's footprints stay
+	# axis-aligned — global AABBs swell at non-orthogonal angles and mis-match neighbouring bases.
+	var inv := global_transform.affine_inverse()
+	var box := AABB()
+	var found := false
+	var stack: Array = [n]
+	while not stack.is_empty():
+		var node = stack.pop_back()
+		for ch in node.get_children():
+			stack.append(ch)
+		if node is VisualInstance3D and not (node is GPUParticles3D) and (node as VisualInstance3D).is_visible_in_tree():
+			var lt: Transform3D = inv * (node as VisualInstance3D).global_transform
+			var gb: AABB = lt * (node as VisualInstance3D).get_aabb()
 			if not found:
 				box = gb
 				found = true

@@ -30,6 +30,7 @@ const NEIGHBORS_PATH := "res://commons/data/artifact_neighbors.json"
 const SPINE_WALLS_PATH := "res://commons/data/spine_walls.json"
 const DNA_PROPS_PATH := "res://commons/data/dna_props.json"
 const CURATED_WALLS_DIR := "res://commons/data/curated_walls"
+const CLUSTERS_DIR := "res://commons/data/curated_walls/clusters"
 # Lookup-names that mount on the wall (everything else falls to the floor + stacks).
 const WALL_SET := ["station_panel", "station_frame", "framed_readout_screen"]
 # Registries treated as staging PROPS (bottom bar); everything else = artifacts (left).
@@ -56,6 +57,9 @@ var _lmb_press_pos := Vector2.ZERO    # click-vs-drag detection on placed pieces
 var _lmb_press_piece: Node3D = null
 var _lmb_dragging := false
 var _placed: Array = []
+var _current_map := ""           # the loaded map = the cluster name for Save-as-Cluster (K)
+var _dais_h := 0.0               # dais/platform height (toggle P); recorded in the saved cluster def
+var _dais_box: Node3D = null
 var _held: Node3D = null
 var _held_type := ""
 var _held_is_wall := false
@@ -463,7 +467,7 @@ func _process(delta: float) -> void:
 		var x := snappedf(w.x, GRID)
 		if _held_is_wall:
 			var y := clampf(snappedf(w.y, GRID * 0.5), 0.6, WALL_TOP)
-			_held.global_position = Vector3(x, y, WALL_FACE_Z + 0.06)
+			_held.global_position = Vector3(x, y + _dais_h, WALL_FACE_Z + 0.06)   # wall rides the dais too
 		else:
 			var z := _depth_z()
 			_held.global_position = Vector3(x, _stack_top(x, z, _held), z)
@@ -537,6 +541,10 @@ func _unhandled_input(ev: InputEvent) -> void:
 		elif kc == KEY_H:
 			if _hud != null and _hud.has_method("toggle_help"):
 				_hud.toggle_help()
+		elif kc == KEY_P:
+			_toggle_dais()
+		elif kc == KEY_K:
+			_save_as_cluster()
 		elif kc == KEY_DELETE or kc == KEY_BACKSPACE:
 			_delete_selected()
 		elif kc == KEY_ESCAPE:
@@ -653,6 +661,10 @@ func _on_clear() -> void:
 		if is_instance_valid(n):
 			n.queue_free()
 	_placed.clear()
+	_dais_h = 0.0
+	if _dais_box != null and is_instance_valid(_dais_box):
+		_dais_box.queue_free()
+	_dais_box = null
 	_status("cleared")
 
 
@@ -686,7 +698,7 @@ func _piece_under_mouse() -> Node3D:
 
 
 func _stack_top(x: float, z: float, exclude: Node3D) -> float:
-	var top := 0.0
+	var top := _dais_h   # the dais is the floor: bare-cell pieces sit on it, stacks ride higher (no double-count)
 	for n in _placed:
 		if n == exclude or not is_instance_valid(n):
 			continue
@@ -926,6 +938,7 @@ func _load_map_by_name(mapname: String) -> void:
 			if pieces is Array:
 				_current_seq = str(entry.get("sequence", ""))
 				_load_wall(pieces)
+				_current_map = mapname   # commit only after a load actually succeeds — K saves under this name
 				_status("loaded %s — %d pieces" % [mapname, pieces.size()])
 	else:
 		_load_raw_map(mapname)
@@ -966,6 +979,7 @@ func _load_raw_map(mapname: String) -> void:
 		i += 1
 	_current_seq = ""
 	_load_wall(pieces)
+	_current_map = mapname   # commit only after a successful load
 	_status("loaded %s (off-spine, %d raw artifacts — not curated)" % [mapname, lookups.size()])
 
 
@@ -1039,6 +1053,8 @@ func _capture_targets() -> Array:
 	for a in OS.get_cmdline_user_args():
 		if a == "--capture-all":
 			all = true
+		elif a == "--capture-props":
+			return ["_NewProps"]   # code-built showcase of the new station prop kinds
 		elif a.begins_with("--capture="):
 			one = a.substr(a.find("=") + 1)
 	if one != "":
@@ -1080,15 +1096,22 @@ func _run_capture(targets: Array) -> void:
 	DirAccess.make_dir_recursive_absolute("user://wall_shots")
 	var done := 0
 	for mapname in targets:
-		if not _spine_walls.has(mapname):
+		var pieces: Array
+		var ext: Vector2
+		if mapname == "_NewProps":
+			pieces = _prop_showcase_pieces()       # the five new prop kinds, laid out in code
+			ext = Vector2(2.0, 36.0)
+		elif _spine_walls.has(mapname):
+			pieces = (_spine_walls[mapname] as Dictionary).get("pieces", [])
+			ext = Vector2.ZERO
+		else:
 			print("CAPTURE skip (no wall): ", mapname)
 			continue
-		var entry: Dictionary = _spine_walls[mapname]
-		var pieces: Array = entry.get("pieces", [])
 		_load_wall(pieces)
 		for _i in range(72):   # deferred geometry + _settle_loaded (40f) + margin
 			await get_tree().process_frame
-		var ext := _capture_extent(pieces)
+		if mapname != "_NewProps":
+			ext = _capture_extent(pieces)
 		var cx: float = (ext.x + ext.y) * 0.5
 		var ww: float = maxf(ext.y - ext.x + 3.0, 6.0)
 		var h: int = clampi(int(round(float(W) * 5.0 / ww)), 320, 1000)  # ~5 m vertical, any wall length
@@ -1105,3 +1128,116 @@ func _run_capture(targets: Array) -> void:
 		print("CAPTURE wrote ", path, "  ", W, "x", h)
 	print("CAPTURE done: ", done, "/", targets.size())
 	get_tree().quit()
+
+
+func _prop_showcase_pieces() -> Array:
+	# The five NEW prop kinds laid out in a row with a header panel over each, for --capture-props.
+	return [
+		{"token": "station_luminaire", "x": 4.0, "y": 0.0, "z": 1.1, "wall": false,
+			"config": {"mode": "task", "height": 2.3, "arm_reach": 0.9, "intensity": 7.0}},
+		{"token": "station_panel", "x": 4.0, "y": 2.6, "z": 0.06, "wall": true,
+			"config": {"width_cells": 2, "header": "LUMINAIRE", "lines": ["LIGHT"]}},
+		{"token": "station_floorline", "x": 9.5, "y": 0.0, "z": 1.3, "wall": false,
+			"config": {"style": "path", "direction": 1, "length_cells": 3, "width": 0.45}},
+		{"token": "station_panel", "x": 9.5, "y": 2.6, "z": 0.06, "wall": true,
+			"config": {"width_cells": 2, "header": "FLOORLINE", "lines": ["THE FLOOR, MADE TO POINT"]}},
+		{"token": "station_skydome", "x": 15.0, "y": 0.0, "z": 0.6, "wall": false,
+			"config": {"mode": "gradient", "width_cells": 3, "height": 2.7, "depth_offset": 0.3,
+				"top_color": "0.10,0.13,0.27,1", "bottom_color": "0.46,0.52,0.66,1"}},
+		{"token": "station_panel", "x": 15.0, "y": 2.6, "z": 0.06, "wall": true,
+			"config": {"width_cells": 2, "header": "SKYDOME", "lines": ["ATMOSPHERE"]}},
+		{"token": "station_ascent", "x": 20.5, "y": 0.0, "z": 1.0, "wall": false,
+			"config": {"style": "stair", "rise": 1.4, "width": 1.2, "handrail": true}},
+		{"token": "station_panel", "x": 20.5, "y": 2.6, "z": 0.06, "wall": true,
+			"config": {"width_cells": 2, "header": "ASCENT", "lines": ["PASSAGE"]}},
+		{"token": "station_multiscreen", "x": 26.0, "y": 1.45, "z": 0.06, "wall": true,
+			"config": {"rows": 2, "cols": 2, "header": "MULTISCREEN",
+				"cell_labels": ["QUANTUM", "FRACTAL", "EMERGENT", "EDGE"]}},
+	]
+
+
+# ── Cluster sandbox: dais toggle (P) + Save-as-Cluster (K) ─────────────
+func _toggle_dais() -> void:
+	# Raise/lower the whole curated cluster onto a 1 m platform so you author it on its dais (WYSIWYG).
+	# The height is recorded in the saved cluster def; the map re-applies it as raised grid structure.
+	var new_h := 0.0 if _dais_h > 0.0 else 1.0
+	var delta := new_h - _dais_h
+	_dais_h = new_h
+	for n in _placed:
+		if is_instance_valid(n) and n is Node3D:
+			(n as Node3D).global_position.y += delta
+	_rebuild_dais()
+	_status("dais %s" % ("ON — 1 m preview; realised as raised map structure on placement" if _dais_h > 0.0 else "off"))
+
+
+func _rebuild_dais() -> void:
+	if _dais_box != null and is_instance_valid(_dais_box):
+		_dais_box.queue_free()
+	_dais_box = null
+	if _dais_h <= 0.0:
+		return
+	var lo_x := INF
+	var hi_x := -INF
+	var lo_z := INF
+	var hi_z := -INF
+	for n in _placed:
+		if not is_instance_valid(n):
+			continue
+		var p: Vector3 = (n as Node3D).global_position   # all pieces, incl. the wall, so the dais covers it
+		lo_x = minf(lo_x, p.x)
+		hi_x = maxf(hi_x, p.x)
+		lo_z = minf(lo_z, p.z)
+		hi_z = maxf(hi_z, p.z)
+	if lo_x == INF:
+		return
+	var cx := (lo_x + hi_x) * 0.5
+	var cz := (lo_z + hi_z) * 0.5 + 0.3
+	var w := (hi_x - lo_x) + 3.0
+	var d := (hi_z - lo_z) + 2.2
+	_dais_box = _box(Vector3(cx, _dais_h * 0.5, cz), Vector3(w, _dais_h, d), Color(0.52, 0.53, 0.58))
+	add_child(_dais_box)
+
+
+func _save_as_cluster() -> void:
+	# Export the curated pieces as a portable CLUSTER def to clusters/<map>.json — the unit a
+	# cluster:<name> map token rebuilds. Pieces are stored floor-relative (dais-stripped); "dais" is
+	# recorded as a HINT for the map: the platform is realised as raised grid structure under the
+	# cluster cell (see Proto_Fractal_Recursion), which the cluster then auto-sits on via find_highest_y_at.
+	if _placed.is_empty():
+		_status("nothing to save as cluster")
+		return
+	var lo_x := INF
+	for n in _placed:
+		if is_instance_valid(n):
+			lo_x = minf(lo_x, (n as Node3D).global_position.x)
+	if lo_x == INF:
+		lo_x = 0.0
+	var shift_x := 1.5 - lo_x   # normalise so the cluster reads from ~x=1.5 out (anchor-relative)
+	var arr: Array = []
+	for n in _placed:
+		if not is_instance_valid(n):
+			continue
+		var cfg: Dictionary = {}
+		for m in n.get_meta_list():
+			var ms := str(m)
+			if ms.begins_with("config_"):
+				cfg[ms.substr(7)] = n.get_meta(m)
+		var gp: Vector3 = (n as Node3D).global_position
+		arr.append({
+			"token": str(n.get_meta("token", "")),
+			"x": snappedf(gp.x + shift_x, 0.01),
+			"y": snappedf(gp.y - _dais_h, 0.01),   # store dais-agnostic; the dais height is its own field
+			"z": snappedf(gp.z, 0.01),
+			"wall": bool(n.get_meta("wall_piece", false)),
+			"config": cfg,
+		})
+	var cname := _current_map.to_lower() if _current_map != "" else "cluster"
+	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(CLUSTERS_DIR))
+	var path := "%s/%s.json" % [CLUSTERS_DIR, cname]
+	var f := FileAccess.open(path, FileAccess.WRITE)
+	if f != null:
+		f.store_string(JSON.stringify({"name": cname, "dais": _dais_h, "pieces": arr}, "\t"))
+		f.close()
+		_status("saved cluster '%s' — %d pieces, dais %.0f m  →  clusters/%s.json" % [cname, arr.size(), _dais_h, cname])
+	else:
+		_status("could not write clusters/%s.json" % cname)
