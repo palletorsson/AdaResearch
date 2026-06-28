@@ -3,10 +3,10 @@
     "name": "Proto Fractal Recursion",
     "lookup_name": "Proto_Fractal_Recursion",
     "title": "Recursion — interior",
-    "description": "Phase-1 prototype of the wall-into-grid integration: the small/medium HELD things are one curated cluster (cluster:fractal_recursion) at the back; the large + applied WORLDS stand on the open floor among it (furniture sits plinth-free).",
+    "description": "Phase-1 prototype of the wall-into-grid integration: the small/medium HELD things are one curated cluster (cluster:fractal_recursion) raised on a platform at the back; the large + applied WORLDS stand on the open floor among it (furniture sits plinth-free). A walkway ramps up onto the cluster dais.",
     "version": "1.0",
     "format": "json",
-    "dimensions": { "width": 14, "depth": 10, "max_height": 2 }
+    "dimensions": { "width": 14, "depth": 10, "max_height": 3 }
   },
   "utility_definitions": {
     "t": { "type": "teleporter", "name": "Exit", "description": "Return to the lab", "properties": { "action": "next_in_sequence" } }
@@ -21,9 +21,9 @@
   },
   "layers": {
     "structure": [
-      ["1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
+      ["2","2","2","2","2","2","2","1","1","1","1","1","1","1"],
+      ["2","2","2","2","2","2","2","1","1","1","1","1","1","1"],
+      ["2","2","2","2","2","2","2","1","1","1","1","1","1","1"],
       ["1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
       ["1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
       ["1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
@@ -35,8 +35,8 @@
     "utilities": [
       [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," ","wp:180"," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," ","wp:180"," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
