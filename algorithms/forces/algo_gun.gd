@@ -1,6 +1,17 @@
 # algo_gun.gd
 # Evolved Gravity Gun - Captures and directs Grid Agents
 # Extends gravity_gun.gd to add Grid Agent capture/direction capabilities
+# ===========================================================================
+# @identity
+# essence: A gravity gun that has learned to herd — it captures living grid agents, orbits them at the wrist, and dispatches them to tasks
+# desire: To turn raw attraction into command — not just pulling inert objects, but conscripting autonomous agents into orbit and direction
+# critical_parameter: agent_detection_radius — the reach within which an autonomous agent stops being free and becomes capturable
+# triggers: Grip near an agent to capture it; captured agents orbit the wrist; aim and release to direct one toward a target position
+# emerges: Force becomes governance — the same attraction that pulls a box now redirects a population, turning a physics tool into a shepherd
+# needs: parent gravity-gun pull [has], grid-agent detection area [has], orbit-angle bookkeeping [has], directed-task dispatch [has]
+# relationships: subclass of gravity_gun; commands GridAgent instances; the bridge between the forces sequence and autonomous-agent behavior
+# truth: To capture a thing that moves on its own is a different power than to pull a thing that cannot — direction is attraction with a will attached.
+# ===========================================================================
 extends "res://algorithms/forces/gravity_gun.gd"
 
 @export_group("Grid Agent Settings")

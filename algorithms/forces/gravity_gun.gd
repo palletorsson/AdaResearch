@@ -1,6 +1,17 @@
 ﻿# gravity_gun.gd
 # VR Gravity Gun - Ray-based targeting with manual capture
 # Objects must be grabbed and placed into the capture zone
+# ===========================================================================
+# @identity
+# essence: A handheld tool that exerts attraction at a distance — gravity made into something you aim, hold, and release
+# desire: To let the player wield an invisible force directly, pulling objects across a room and catching them in a wrist bracelet zone
+# critical_parameter: attraction_strength — the pull force that decides whether a target drifts in gently or snaps to the hand
+# triggers: Aim the ray at an object and grip to pull; objects stop at pull_stop_distance and orbit the wrist until launched
+# emerges: Force becomes ergonomic — Newton's law of gravitation stops being a field equation and becomes a verb the hand performs
+# needs: VR controller ray and grip [has], physics bodies with restorable gravity [has], wrist capture zone [has], launch impulse [has]
+# relationships: base class extended by algo_gun for grid-agent capture; shares the Mover/RigidBody physics world with all NOC Ch.2 forces artifacts
+# truth: A force you can hold is a force you finally understand — attraction stops being a diagram the moment your hand becomes its source.
+# ===========================================================================
 extends Node3D
 
 const FORCES_UI := preload("res://algorithms/forces/forces_ui.gd")

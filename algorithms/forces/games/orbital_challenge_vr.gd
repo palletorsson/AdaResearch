@@ -2,6 +2,16 @@
 # Orbital Challenge VR - Interactive Game Expansion of Example 2.6: Attraction
 # Navigate satellites through gravitational fields and achieve stable orbits!
 # ===========================================================================
+# @identity
+# essence: A game where you launch satellites and must balance speed against gravity until an orbit holds itself stable
+# desire: To make orbital mechanics felt as a hand-eye skill — too slow and the satellite falls, too fast and it escapes, just right and it circles
+# critical_parameter: launch_velocity — the throw that decides between a crash, an escape, and a captured orbit around the central attractor
+# triggers: Launch a satellite; gravity from the central mass bends its path; hold a near-circular radius for ORBIT_STABLE_TIME to score
+# emerges: Kepler and Newton become reflexes — the abstract balance of centripetal need and gravitational pull becomes a thing you learn in the wrist
+# needs: central attractor mass [has], Mover satellites [has], orbit-radius and stability timing [has], VR launch gesture [has]
+# relationships: game expansion of example_2_6 attraction; shares the Mover physics body and attractor field with all NOC Ch.2 forces artifacts
+# truth: A stable orbit is a fall that keeps missing the ground — you do not escape gravity, you negotiate a truce with it at the right speed.
+# ===========================================================================
 
 extends Node3D
 
