@@ -240,6 +240,8 @@ func _build_ui() -> void:
 		_hud.load_requested.connect(_on_load)
 	if _hud.has_signal("clear_requested"):
 		_hud.clear_requested.connect(_on_clear)
+	if _hud.has_signal("cam_toggle_requested"):
+		_hud.cam_toggle_requested.connect(_toggle_cam)
 	_build_props_bar(layer)
 	_hud_depth()
 	_status("ARTIFACTS left · PROPS bottom · pick one, 0-9 depth, LMB stamp · C = free 3D cam")
@@ -392,6 +394,7 @@ func _grab_piece(n: Node3D) -> void:
 
 
 func _lmb_down() -> void:
+	get_viewport().gui_release_focus()   # a click in the 3D view ends filter typing -> editor shortcuts work again
 	if _held != null and is_instance_valid(_held):
 		_commit()   # holding a palette piece or finishing a move -> stamp / drop
 		_lmb_press_piece = null
@@ -529,6 +532,8 @@ func _unhandled_input(ev: InputEvent) -> void:
 				_grab_piece(_lmb_press_piece)   # drag past threshold -> pick it up
 				_lmb_dragging = true
 	elif ev is InputEventKey and ev.pressed and not ev.echo:
+		if get_viewport().gui_get_focus_owner() is LineEdit:
+			return   # typing in a filter — don't fire editor shortcuts (C/K/P/G/0-9…)
 		var kc: int = (ev as InputEventKey).keycode
 		if kc >= KEY_0 and kc <= KEY_9:
 			_depth_level = kc - KEY_0
@@ -562,6 +567,8 @@ func _pan(dir: float) -> void:
 
 func _toggle_cam() -> void:
 	_free_cam = not _free_cam
+	if _hud != null and _hud.has_method("set_cam_mode"):
+		_hud.set_cam_mode(_free_cam)
 	if _free_cam:
 		_camera.projection = Camera3D.PROJECTION_PERSPECTIVE
 		_camera.fov = 60.0

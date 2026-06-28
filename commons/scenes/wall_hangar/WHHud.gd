@@ -19,6 +19,7 @@ extends Control
 signal save_requested
 signal load_requested
 signal clear_requested
+signal cam_toggle_requested
 
 # ── Dark Braun palette ────────────────────────────────────────────────
 const C_BG := Color(0.11, 0.12, 0.15, 0.97)
@@ -36,6 +37,9 @@ const CONTROLS := [
 	["LMB", "stamp held piece / select a piece when not holding"],
 	["0 - 9", "set depth out from the wall (held or selected piece)"],
 	["G", "grab the selected piece to move it"],
+	["P", "toggle the cluster DAIS (raise onto a 1 m platform)"],
+	["K", "Save as Cluster -> clusters/<map>.json"],
+	["C  /  View button", "toggle Wall <-> Grid 3D camera"],
 	["Del / Backspace", "delete the selected piece"],
 	["RMB", "delete the piece under the mouse"],
 	["A / D", "scroll the wall left / right"],
@@ -47,6 +51,7 @@ const CONTROLS := [
 var _depth_label: Label = null
 var _status_label: Label = null
 var _help_panel: Control = null
+var _cam_btn: Button = null
 
 
 func _ready() -> void:
@@ -113,6 +118,9 @@ func _build_toolbar() -> void:
 	grow.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	row.add_child(grow)
 
+	_cam_btn = _toolbar_button("View: Wall", _on_cam)
+	_cam_btn.custom_minimum_size = Vector2(118, 32)   # wider — holds "View: Grid 3D"
+	row.add_child(_cam_btn)
 	row.add_child(_toolbar_button("Save", _on_save))
 	row.add_child(_toolbar_button("Load", _on_load))
 	row.add_child(_toolbar_button("Clear", _on_clear))
@@ -267,6 +275,14 @@ func set_status(msg: String) -> void:
 		_status_label.text = msg
 
 
+func set_cam_mode(is_free: bool) -> void:
+	# Reflect the host's camera mode on the toolbar toggle so it's always visible + clickable.
+	if _cam_btn == null:
+		return
+	_cam_btn.text = "View: Grid 3D" if is_free else "View: Wall"
+	_cam_btn.add_theme_color_override("font_color", C_ACCENT if is_free else C_TEXT)
+
+
 func toggle_help() -> void:
 	if _help_panel != null:
 		_help_panel.visible = not _help_panel.visible
@@ -283,6 +299,10 @@ func _on_load() -> void:
 
 func _on_clear() -> void:
 	clear_requested.emit()
+
+
+func _on_cam() -> void:
+	cam_toggle_requested.emit()
 
 
 func _on_help_clicked(ev: InputEvent) -> void:
