@@ -7666,23 +7666,9 @@
     }
    },
    {
-    "token": "station_plinth",
-    "x": 4.0,
-    "y": 0.0,
-    "z": 1.7,
-    "wall": false,
-    "config": {
-     "width_cells": 2,
-     "depth_cells": 2,
-     "top_height": 0.95,
-     "cap_inset": 0.22,
-     "caption_text": "Field Bench \u2014 a vector at every point"
-    }
-   },
-   {
     "token": "field_bench",
     "x": 4.0,
-    "y": 0.95,
+    "y": 0.0,
     "z": 1.7,
     "wall": false
    },
@@ -7789,63 +7775,23 @@
     }
    },
    {
-    "token": "station_plinth",
-    "x": 0.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.35,
-     "cap_inset": 0.3,
-     "caption_text": "Transform Composition Workbench"
-    }
-   },
-   {
     "token": "transform_composition_workbench",
     "x": 0.0,
-    "y": 1.35,
+    "y": 0.0,
     "z": 0.8,
     "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 2.5,
-    "y": 0.0,
-    "z": 1.9,
-    "wall": false,
-    "config": {
-     "width_cells": 2,
-     "depth_cells": 2,
-     "top_height": 0.9,
-     "caption_text": "CA Rules Workbench"
-    }
    },
    {
     "token": "ca_rules_workbench",
     "x": 2.5,
-    "y": 0.9,
+    "y": 0.0,
     "z": 1.9,
     "wall": false
    },
    {
-    "token": "station_plinth",
-    "x": 5.0,
-    "y": 0.0,
-    "z": 0.9,
-    "wall": false,
-    "config": {
-     "width_cells": 2,
-     "depth_cells": 2,
-     "top_height": 0.9,
-     "caption_text": "Complexity Dial Workbench"
-    }
-   },
-   {
     "token": "complexity_dial_workbench",
     "x": 5.0,
-    "y": 0.9,
+    "y": 0.0,
     "z": 0.9,
     "wall": false
    },
@@ -7891,43 +7837,16 @@
     }
    },
    {
-    "token": "station_plinth",
-    "x": 7.5,
-    "y": 0.0,
-    "z": 2.4,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.45,
-     "cap_inset": 0.3,
-     "caption_text": "QFEP Balance Workbench"
-    }
-   },
-   {
     "token": "qfep_balance_workbench",
     "x": 7.5,
-    "y": 1.45,
+    "y": 0.0,
     "z": 2.4,
     "wall": false
    },
    {
-    "token": "station_plinth",
-    "x": 10.0,
-    "y": 0.0,
-    "z": 1.9,
-    "wall": false,
-    "config": {
-     "width_cells": 2,
-     "depth_cells": 2,
-     "top_height": 0.9,
-     "caption_text": "Halting Workbench"
-    }
-   },
-   {
     "token": "halting_workbench",
     "x": 10.0,
-    "y": 0.9,
+    "y": 0.0,
     "z": 1.9,
     "wall": false
    },
@@ -7948,22 +7867,9 @@
     }
    },
    {
-    "token": "station_plinth",
-    "x": 12.5,
-    "y": 0.0,
-    "z": 0.85,
-    "wall": false,
-    "config": {
-     "width_cells": 2,
-     "depth_cells": 2,
-     "top_height": 0.9,
-     "caption_text": "Russell's Paradox Workbench"
-    }
-   },
-   {
     "token": "russell_paradox_workbench",
     "x": 12.5,
-    "y": 0.9,
+    "y": 0.0,
     "z": 0.85,
     "wall": false
    }
@@ -8031,23 +7937,9 @@
     "wall": false
    },
    {
-    "token": "station_plinth",
-    "x": 6.0,
-    "y": 0.0,
-    "z": 1.4,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.3,
-     "cap_inset": 0.3,
-     "caption_text": "Stretch Bench"
-    }
-   },
-   {
     "token": "stretch_bench",
     "x": 6.0,
-    "y": 1.3,
+    "y": 0.0,
     "z": 1.4,
     "wall": false
    },
@@ -8825,23 +8717,9 @@
     "wall": false
    },
    {
-    "token": "station_plinth",
-    "x": 14.5,
-    "y": 0.0,
-    "z": 1.25,
-    "wall": false,
-    "config": {
-     "width_cells": 2,
-     "depth_cells": 1,
-     "top_height": 0.85,
-     "caption_text": "Vector Bench",
-     "caption_style": "frame"
-    }
-   },
-   {
     "token": "vector_bench",
     "x": 14.5,
-    "y": 0.85,
+    "y": 0.0,
     "z": 1.25,
     "wall": false
    },
@@ -9364,22 +9242,9 @@
     "wall": false
    },
    {
-    "token": "station_plinth",
-    "x": 38.5,
-    "y": 0.0,
-    "z": 0.7,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 2,
-     "top_height": 0.9,
-     "caption_text": "Stretch Bench"
-    }
-   },
-   {
     "token": "stretch_bench",
     "x": 38.5,
-    "y": 0.9,
+    "y": 0.0,
     "z": 0.7,
     "wall": false
    },
@@ -21661,23 +21526,9 @@
     "wall": false
    },
    {
-    "token": "station_plinth",
-    "x": 13.5,
-    "y": 0.0,
-    "z": 1.6,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.0,
-     "cap_inset": 0.3,
-     "caption_text": "Cube Desk"
-    }
-   },
-   {
     "token": "cube_desk",
     "x": 13.5,
-    "y": 1.0,
+    "y": 0.0,
     "z": 1.6,
     "wall": false
    },
@@ -21793,22 +21644,9 @@
     }
    },
    {
-    "token": "station_plinth",
-    "x": 6.0,
-    "y": 0.0,
-    "z": 0.5,
-    "wall": false,
-    "config": {
-     "width_cells": 2,
-     "depth_cells": 2,
-     "top_height": 0.95,
-     "caption_text": "Cantor Bench"
-    }
-   },
-   {
     "token": "cantor_bench",
     "x": 6.0,
-    "y": 0.95,
+    "y": 0.0,
     "z": 0.5,
     "wall": false
    },
@@ -21915,22 +21753,9 @@
     }
    },
    {
-    "token": "station_plinth",
-    "x": 22.0,
-    "y": 0.0,
-    "z": 0.9,
-    "wall": false,
-    "config": {
-     "width_cells": 2,
-     "depth_cells": 2,
-     "top_height": 0.95,
-     "caption_text": "Cantor Diagonal Workbench"
-    }
-   },
-   {
     "token": "cantor_diagonal_workbench",
     "x": 22.0,
-    "y": 0.95,
+    "y": 0.0,
     "z": 0.9,
     "wall": false
    }
@@ -22190,22 +22015,9 @@
     "wall": false
    },
    {
-    "token": "station_plinth",
-    "x": 3.5,
-    "y": 0.0,
-    "z": 1.6,
-    "wall": false,
-    "config": {
-     "width_cells": 2,
-     "depth_cells": 2,
-     "top_height": 0.95,
-     "caption_text": "Menger Bench (zero volume)"
-    }
-   },
-   {
     "token": "menger_bench",
     "x": 3.5,
-    "y": 0.95,
+    "y": 0.0,
     "z": 1.6,
     "wall": false
    },
@@ -22520,22 +22332,9 @@
     "wall": false
    },
    {
-    "token": "station_plinth",
-    "x": 3.0,
-    "y": 0.0,
-    "z": 1.2,
-    "wall": false,
-    "config": {
-     "width_cells": 2,
-     "depth_cells": 2,
-     "top_height": 0.9,
-     "caption_text": "Julia Bench"
-    }
-   },
-   {
     "token": "julia_bench",
     "x": 3.0,
-    "y": 0.9,
+    "y": 0.0,
     "z": 1.2,
     "wall": false
    },
@@ -22677,22 +22476,9 @@
    {
     "token": "mandelbrot_bench",
     "x": 3.0,
-    "y": 0.9,
-    "z": 1.4,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 3.0,
     "y": 0.0,
     "z": 1.4,
-    "wall": false,
-    "config": {
-     "width_cells": 2,
-     "depth_cells": 2,
-     "top_height": 0.9,
-     "caption_text": "Mandelbrot Bench (z -> z^2 + c)"
-    }
+    "wall": false
    },
    {
     "token": "station_pillar",
