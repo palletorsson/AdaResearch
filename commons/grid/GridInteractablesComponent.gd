@@ -8,6 +8,7 @@ class_name GridInteractablesComponent
 # Path constants
 const REGISTRY_DIR_PATH = "res://commons/artifacts/registry/"
 const ARTIFACT_PLACEHOLDER_SCENE_PATH = "res://commons/artifacts/placeholders/ArtifactPlaceholder.tscn"
+const ClusterResolverScript = preload("res://commons/grid/cluster_resolver.gd")  # expands cluster:<name> tokens
 static var _artifact_registry_cache_by_key: Dictionary = {}
 
 # Known config parameter names (NOT to be treated as tutorial shorthand)
@@ -576,6 +577,20 @@ func generate_interactables(interactable_data):
 						placement_errors.append("Failed to place dialectic panels '%s' at (%d,%d,%d)" % [dialectic_name, x, y_pos, z])
 					continue
 
+				# Multi-piece curated cluster: cluster:<name>:<rotation> — additive, mirrors mc:/gridagent:/criticalinfo:
+				if token.begins_with("cluster:"):
+					var cparts = token.split(":")
+					var cluster_name = cparts[1] if cparts.size() > 1 else ""
+					var cluster_rot = float(cparts[2]) if cparts.size() > 2 else 0.0
+					var cy_pos = structure_component.find_highest_y_at(x, z)
+					if utilities_component and utilities_component.has_utility_at(x, cy_pos, z):
+						cy_pos += 1
+					if _place_cluster(x, cy_pos, z, cluster_name, cluster_rot, total_size):
+						interactable_count += 1
+					else:
+						placement_errors.append("Failed to place cluster '%s' at (%d,%d,%d)" % [cluster_name, x, cy_pos, z])
+					continue
+
 				# Normal artifact handling (parse token for regular artifacts)
 				var parsed = _parse_interactable_token(token)
 				var lookup_name: String = parsed.get("lookup_name", "")
@@ -617,6 +632,21 @@ func generate_interactables(interactable_data):
 	interactables_generation_complete.emit(interactable_count)
 
 # Place a Marching Cubes object using API
+func _place_cluster(x: int, y: int, z: int, cluster_name: String, rotation: float, total_size: float) -> bool:
+	# Expand a curated cluster (commons/data/curated_walls/clusters/<name>.json) at this cell with a
+	# Y-rotation, via a ClusterResolver child. Additive: reached ONLY by the new cluster: token prefix,
+	# so no existing grid behaviour is touched.
+	if cluster_name == "":
+		return false
+	var resolver = ClusterResolverScript.new()
+	parent_node.add_child(resolver)
+	resolver.global_position = Vector3(x, y, z) * total_size
+	resolver.apply_grid_config({"cluster": cluster_name, "rotation": rotation})
+	interactable_objects[Vector3i(x, y, z)] = resolver
+	print("GridInteractablesComponent: ✅ Placed cluster '%s' at (%d,%d,%d)" % [cluster_name, x, y, z])
+	return true
+
+
 func _place_marching_cubes_object(x: int, y: int, z: int, lookup_name: String, total_size: float, overrides: Dictionary = {}, config_data: Dictionary = {}) -> bool:
 	var world_pos = Vector3(x, y, z) * total_size
 	
