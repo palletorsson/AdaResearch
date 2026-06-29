@@ -1,0 +1,110 @@
+[gd_scene format=3 uid="uid://hhrimf4qgdfl"]
+
+[ext_resource type="Script" uid="uid://bwtc0iu7ban5g" path="res://commons/scenes/map_tool_editor.gd" id="1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qas5r"]
+albedo_color = Color(0.3, 0.55, 0.95, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_lik4i"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7fimr"]
+albedo_color = Color(0.3, 0.55, 0.95, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_2k0ra"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qx7p0"]
+albedo_color = Color(0.3, 0.55, 0.95, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_luqhn"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mxd8c"]
+albedo_color = Color(0.3, 0.55, 0.95, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_yc4gl"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6pxr1"]
+albedo_color = Color(0.3, 0.55, 0.95, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_oeyx1"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mtcf0"]
+albedo_color = Color(0.3, 0.55, 0.95, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_tylqi"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7ggit"]
+albedo_color = Color(0.3, 0.55, 0.95, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_pjdte"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r48eb"]
+albedo_color = Color(0.95, 0.55, 0.18, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_p0df3"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[node name="MapToolEditor" type="Node3D" unique_id=2010344205]
+script = ExtResource("1")
+
+[node name="cluster_fractal_recursion" type="MeshInstance3D" parent="." unique_id=1890121051]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.3, 1)
+material_override = SubResource("StandardMaterial3D_qas5r")
+mesh = SubResource("BoxMesh_lik4i")
+metadata/token = "cluster:fractal_recursion"
+metadata/layer = "interactable"
+
+[node name="cube_staircase" type="MeshInstance3D" parent="." unique_id=1398673863]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 1.3, 3)
+material_override = SubResource("StandardMaterial3D_7fimr")
+mesh = SubResource("BoxMesh_2k0ra")
+metadata/token = "cube_staircase"
+metadata/layer = "interactable"
+
+[node name="example_8_3_recursion_circles_vr" type="MeshInstance3D" parent="." unique_id=1333931781]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1.3, 5)
+material_override = SubResource("StandardMaterial3D_qx7p0")
+mesh = SubResource("BoxMesh_luqhn")
+metadata/token = "example_8_3_recursion_circles_vr"
+metadata/layer = "interactable"
+
+[node name="fibonacci_pagoda" type="MeshInstance3D" parent="." unique_id=560748769]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 1.3, 5)
+material_override = SubResource("StandardMaterial3D_mxd8c")
+mesh = SubResource("BoxMesh_yc4gl")
+metadata/token = "fibonacci_pagoda"
+metadata/layer = "interactable"
+
+[node name="recursive_boolean_cube" type="MeshInstance3D" parent="." unique_id=619709267]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 1.3, 7)
+material_override = SubResource("StandardMaterial3D_6pxr1")
+mesh = SubResource("BoxMesh_oeyx1")
+metadata/token = "recursive_boolean_cube"
+metadata/layer = "interactable"
+
+[node name="recursive_chair" type="MeshInstance3D" parent="." unique_id=649940080]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1.3, 8)
+material_override = SubResource("StandardMaterial3D_mtcf0")
+mesh = SubResource("BoxMesh_tylqi")
+metadata/token = "recursive_chair"
+metadata/layer = "interactable"
+
+[node name="recursive_table" type="MeshInstance3D" parent="." unique_id=1090130066]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 1.3, 8)
+material_override = SubResource("StandardMaterial3D_7ggit")
+mesh = SubResource("BoxMesh_pjdte")
+metadata/token = "recursive_table"
+metadata/layer = "interactable"
+
+[node name="t" type="MeshInstance3D" parent="." unique_id=1936850974]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 1.3, 9)
+material_override = SubResource("StandardMaterial3D_r48eb")
+mesh = SubResource("BoxMesh_p0df3")
+metadata/token = "t"
+metadata/layer = "utility"
