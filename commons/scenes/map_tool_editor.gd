@@ -2,9 +2,13 @@
 extends Node3D
 ## MapToolEditor — edit a map's structure + artifacts + props INSIDE the Godot editor (no game run).
 ##
-## INSPECTOR
-##   Map        — pick a map from the dropdown (auto-loads once a map is open) or type a name.
-##   load/save/clear, Navigate (next/prev), Add a marker, Grid (structure), View, Status (read-only).
+## INSPECTOR (real buttons — no tick-boxes)
+##   Map        — pick from the dropdown (or type), then Load map / Save map / Clear view buttons.
+##   Navigate   — Prev / Next map buttons.
+##   Edit layer — Interactables / Utilities / Structure dropdown = the layer Add acts on (Structure
+##                also makes the grid cubes green + selectable). Plus View toggles + Status (read-only).
+##   Add        — set add_token, press "Add to layer". Add a wall — pick wall_cluster, "Add wall".
+##                "Remove selected" deletes the selected marker(s)/cube(s).
 ##
 ## VIEWPORT
 ##   STRUCTURE renders as real center-origin cubes (grey context; green + selectable when edit_grid).
@@ -12,7 +16,7 @@ extends Node3D
 ##   A cluster: token expands into a WALL-SHAPED indicator (the wall hanger) read live from the
 ##   cluster file, with a marker per curated piece.
 ##   MOVE with the gizmo (live_snap keeps things on cells; markers ride the floor). ROTATE a marker
-##   (Y angle saved into the token). DELETE with the editor's Delete key. ADD via add_marker/add_cube.
+##   (Y angle saved into the token). DELETE with the editor's Delete key or "Remove selected".
 ##   save_map writes structure (if edit_grid) + interactables + utilities back to map_data.json.
 ##
 ## NOTE: markers are NAMED BOXES (layout view), not the live procedural art — keeps the editor safe.
@@ -20,6 +24,7 @@ extends Node3D
 
 const MAPS_DIR := "res://commons/maps"
 const CLUSTERS_DIR := "res://commons/data/curated_walls/clusters"
+const REGISTRY_DIR := "res://commons/artifacts/registry"
 
 const COL_ARTIFACT := Color(0.30, 0.55, 0.95)
 const COL_UTILITY := Color(0.95, 0.55, 0.18)
@@ -30,22 +35,32 @@ const COL_GCUBE := Color(0.50, 0.72, 0.58)   # structure cube while edit_grid is
 
 ## Pick a map from the dropdown (or type one). Changing it reloads once a map is open.
 @export var map_name: String = "Proto_Fractal_Recursion": set = _set_map_name
-@export var load_map: bool = false: set = _set_load
-@export var save_map: bool = false: set = _set_save
-@export var clear_view: bool = false: set = _set_clear
+@export_tool_button("Load map") var _b_load: Callable = _load
+@export_tool_button("Save map") var _b_save: Callable = _save
+@export_tool_button("Clear view") var _b_clear: Callable = _clear
+
 @export_group("Navigate")
-@export var next_map: bool = false: set = _set_next
-@export var prev_map: bool = false: set = _set_prev
-@export_group("Add a marker")
-## Token to spawn when you tick add_marker, e.g. "fibonacci_pagoda" (artifact) or "t" (utility).
+@export_tool_button("◀  Prev map") var _b_prev: Callable = _prev
+@export_tool_button("Next map  ▶") var _b_next: Callable = _next
+
+@export_group("Edit layer")
+## One-click layer switch — Add acts on the ACTIVE layer (shown at the top of Status). Structure
+## makes the grid cubes green + selectable; Clusters adds walls.
+@export_tool_button("◆ Interactables") var _b_li: Callable = _layer_interactables
+@export_tool_button("◆ Utilities") var _b_lu: Callable = _layer_utilities
+@export_tool_button("◆ Structure") var _b_ls: Callable = _layer_structure
+@export_tool_button("◆ Clusters") var _b_lc: Callable = _layer_clusters
+
+@export_group("Add")
+## What "Add to active layer" places: Interactables/Utilities use add_token; Clusters use wall_cluster.
 @export var add_token: String = ""
-@export var add_as_utility: bool = false
-@export var add_marker: bool = false: set = _set_add
-@export_group("Grid (structure)")
-## When on, structure cubes turn green and become selectable: drag (snap), delete, or duplicate
-## them, then save rebuilds the structure heights from the cubes. Off = read-only grey context.
-@export var edit_grid: bool = false: set = _set_edit_grid
-@export var add_cube: bool = false: set = _set_add_cube
+## Cluster/wall to add when the Clusters layer is active (from commons/data/curated_walls/clusters/).
+@export var wall_cluster: String = ""
+@export_tool_button("➕  Add to active layer") var _b_add: Callable = _add
+
+@export_group("Selection")
+@export_tool_button("🗑  Remove selected") var _b_remove: Callable = _remove_selected
+
 @export_group("View")
 ## Snap markers/cubes to grid cells while you drag. Off = free placement.
 @export var live_snap: bool = true
@@ -53,6 +68,9 @@ const COL_GCUBE := Color(0.50, 0.72, 0.58)   # structure cube while edit_grid is
 @export var show_legend: bool = true: set = _set_legend
 ## Float a name label over each marker. Off = declutter.
 @export var show_labels: bool = true: set = _set_show_labels
+## EXPERIMENTAL — instance each artifact's REAL scene live instead of a box. Renders for @tool
+## artifacts (e.g. fibonacci_pagoda); non-@tool ones stay an empty box anchor. Heavy; for spot-checks.
+@export var live_preview: bool = false: set = _set_live_preview
 @export_group("Status (read-only)")
 ## Live readout of the loaded map — dimensions, counts, and edit mode.
 @export_multiline var status: String = "(load a map)"
@@ -62,40 +80,32 @@ var _structure: Array = []
 var _total := 1.0
 var _width := 0
 var _depth := 0
+var edit_grid: bool = false   # derived from active_layer == "Structure" — selectable structure cubes
+var active_layer: String = "Interactables"   # Interactables / Utilities / Structure / Clusters
+var _scene_map: Dictionary = {}   # lookup_name -> scene path (lazy from REGISTRY_DIR), for live_preview
 
 
-# ── Inspector buttons (reset to false; Godot does not re-enter a setter on self-assignment) ──
-func _set_load(v: bool) -> void:
-	load_map = false
-	if v and Engine.is_editor_hint(): call_deferred("_load")
+# ── Tool-button actions (real inspector buttons via @export_tool_button) ──
+func _prev() -> void:
+	if Engine.is_editor_hint(): _switch(-1)
 
-func _set_save(v: bool) -> void:
-	save_map = false
-	if v and Engine.is_editor_hint(): call_deferred("_save")
+func _next() -> void:
+	if Engine.is_editor_hint(): _switch(1)
 
-func _set_clear(v: bool) -> void:
-	clear_view = false
-	if v and Engine.is_editor_hint(): call_deferred("_clear")
+func _layer_interactables() -> void: _set_active_layer("Interactables")
+func _layer_utilities() -> void: _set_active_layer("Utilities")
+func _layer_structure() -> void: _set_active_layer("Structure")
+func _layer_clusters() -> void: _set_active_layer("Clusters")
 
-func _set_next(v: bool) -> void:
-	next_map = false
-	if v and Engine.is_editor_hint(): call_deferred("_switch", 1)
-
-func _set_prev(v: bool) -> void:
-	prev_map = false
-	if v and Engine.is_editor_hint(): call_deferred("_switch", -1)
-
-func _set_add(v: bool) -> void:
-	add_marker = false
-	if v and Engine.is_editor_hint(): call_deferred("_add")
-
-func _set_edit_grid(v: bool) -> void:
-	edit_grid = v
-	if Engine.is_editor_hint() and not _map.is_empty(): call_deferred("_load")
-
-func _set_add_cube(v: bool) -> void:
-	add_cube = false
-	if v and Engine.is_editor_hint(): call_deferred("_add_cube")
+func _set_active_layer(v: String) -> void:
+	active_layer = v
+	var want_grid := (v == "Structure")
+	if want_grid != edit_grid:
+		edit_grid = want_grid
+		if Engine.is_editor_hint() and not _map.is_empty():
+			call_deferred("_load")   # recolour/re-own structure cubes for the new mode
+	if Engine.is_editor_hint():
+		status = _status_line()
 
 func _set_legend(v: bool) -> void:
 	show_legend = v
@@ -109,12 +119,19 @@ func _set_show_labels(v: bool) -> void:
 	show_labels = v
 	if Engine.is_editor_hint() and not _map.is_empty(): call_deferred("_load")
 
+func _set_live_preview(v: bool) -> void:
+	live_preview = v
+	if Engine.is_editor_hint() and not _map.is_empty(): call_deferred("_load")
+
 
 # Inspector polish: map_name becomes a dropdown of available maps; status is read-only.
 func _validate_property(property: Dictionary) -> void:
 	if property.name == "map_name":
 		property.hint = PROPERTY_HINT_ENUM_SUGGESTION
 		property.hint_string = ",".join(_list_maps())
+	elif property.name == "wall_cluster":
+		property.hint = PROPERTY_HINT_ENUM_SUGGESTION
+		property.hint_string = ",".join(_list_clusters())
 	elif property.name == "status":
 		property.usage |= PROPERTY_USAGE_READ_ONLY
 
@@ -233,6 +250,8 @@ func _make_marker(token: String, layer: String, x: int, z: int, col: Color, root
 	m.set_meta("layer", layer)
 	m.set_meta("y_lift", 0.3)
 	_label(m, label, col, 0.55)
+	if live_preview and layer != "utility":
+		_attach_live_scene(m, label)
 	if root:
 		m.owner = root
 
@@ -280,18 +299,157 @@ func _spawn_cluster(token: String, x: int, z: int, root: Node) -> void:
 
 
 func _add() -> void:
+	if _map.is_empty():
+		push_warning("MapToolEditor: load a map first")
+		return
+	if active_layer == "Structure":
+		_add_cube()
+		return
+	var cx := int(_width / 2.0)
+	var cz := int(_depth / 2.0)
+	var root := get_tree().edited_scene_root
+	if active_layer == "Clusters":
+		var cname := wall_cluster.strip_edges()
+		if cname == "":
+			push_warning("MapToolEditor: pick a wall_cluster first (commons/data/curated_walls/clusters/)")
+			return
+		_make_marker("cluster:" + cname, "interactable", cx, cz, COL_CLUSTER, root)
+		status = _status_line()
+		print("MapToolEditor: added wall 'cluster:%s' — move it, then Save map" % cname)
+		return
 	var tok := add_token.strip_edges()
 	if tok == "":
 		push_warning("MapToolEditor: set add_token first (e.g. 'fibonacci_pagoda' or 't')")
 		return
-	if _map.is_empty():
-		push_warning("MapToolEditor: load a map first")
-		return
-	var layer := "utility" if add_as_utility else "interactable"
-	var col := COL_UTILITY if add_as_utility else COL_ARTIFACT
-	_make_marker(tok, layer, int(_width / 2.0), int(_depth / 2.0), col, get_tree().edited_scene_root)
+	var as_util := (active_layer == "Utilities")
+	var layer := "utility" if as_util else "interactable"
+	var col := COL_UTILITY if as_util else COL_ARTIFACT
+	_make_marker(tok, layer, cx, cz, col, root)
 	status = _status_line()
-	print("MapToolEditor: added '%s' (%s) at map centre — move it, then save_map" % [tok, layer])
+	print("MapToolEditor: added '%s' (%s) — move it, then Save map" % [tok, layer])
+
+
+func _remove_selected() -> void:
+	if not Engine.is_editor_hint():
+		return
+	var sel: Array = EditorInterface.get_selection().get_selected_nodes()
+	if sel.is_empty():
+		push_warning("MapToolEditor: select a marker or cube in the viewport first")
+		return
+	var n := 0
+	for node in sel:
+		if node != self and is_instance_valid(node) and (node as Node).get_parent() == self:
+			node.queue_free()
+			n += 1
+	status = _status_line()
+	print("MapToolEditor: removed %d selected" % n)
+
+
+# ── Undo inverses (driven by the Map Tool 3D add-on's EditorUndoRedoManager) ──
+func _undo_newest_marker(cx: int, cz: int) -> void:
+	var kids := get_children()
+	for i in range(kids.size() - 1, -1, -1):
+		var c = kids[i]
+		if c is Node3D and c.has_meta("token") and not c.has_meta("gcube"):
+			var p: Vector3 = (c as Node3D).position
+			if int(round(p.x / _total)) == cx and int(round(p.z / _total)) == cz:
+				c.free()
+				if Engine.is_editor_hint(): status = _status_line()
+				return
+
+func _undo_top_cube(cx: int, cz: int) -> void:
+	var best: Node = null
+	var best_y := -1
+	for c in get_children():
+		if c is Node3D and c.has_meta("gcube"):
+			var p: Vector3 = (c as Node3D).position
+			if int(round(p.x / _total)) == cx and int(round(p.z / _total)) == cz:
+				var gy := int(round(p.y / _total))
+				if gy > best_y:
+					best_y = gy
+					best = c
+	if best != null:
+		best.free()
+		if Engine.is_editor_hint(): status = _status_line()
+
+func cell_tokens(cx: int, cz: int) -> Array:
+	var out: Array = []
+	for c in get_children():
+		if c is Node3D and c.has_meta("token") and not c.has_meta("gcube"):
+			var p: Vector3 = (c as Node3D).position
+			if int(round(p.x / _total)) == cx and int(round(p.z / _total)) == cz:
+				out.append({"token": str(c.get_meta("token")), "layer": str(c.get_meta("layer"))})
+	return out
+
+func _restore_tokens(cx: int, cz: int, toks: Array) -> void:
+	var root := get_tree().edited_scene_root
+	for t in toks:
+		if not (t is Dictionary):
+			continue
+		var tok := str(t.get("token", ""))
+		var layer := str(t.get("layer", "interactable"))
+		var col := COL_UTILITY if layer == "utility" else (COL_CLUSTER if tok.begins_with("cluster:") else COL_ARTIFACT)
+		_make_marker(tok, layer, cx, cz, col, root)
+	if Engine.is_editor_hint(): status = _status_line()
+
+
+func _list_clusters() -> Array:
+	var out: Array = []
+	var d := DirAccess.open(CLUSTERS_DIR)
+	if d:
+		for f in d.get_files():
+			if str(f).ends_with(".json"):
+				out.append(str(f).get_basename())
+	out.sort()
+	return out
+
+
+# ── Live preview (experimental) ───────────────────────────────────────────────
+func _build_scene_map() -> void:
+	var dir := DirAccess.open(REGISTRY_DIR)
+	if dir == null:
+		return
+	for f in dir.get_files():
+		if not str(f).ends_with(".json"):
+			continue
+		var d = JSON.parse_string(FileAccess.get_file_as_string("%s/%s" % [REGISTRY_DIR, f]))
+		var table = d
+		if d is Dictionary and d.has("artifacts") and d["artifacts"] is Dictionary:
+			table = d["artifacts"]
+		if table is Dictionary:
+			for k in table.keys():
+				var e = table[k]
+				if e is Dictionary and e.has("scene"):
+					var lookup := str(e.get("lookup_name", k))
+					_scene_map[lookup] = str(e["scene"])
+
+
+func _attach_live_scene(anchor: Node3D, lookup: String) -> void:
+	# Instance the artifact's real scene under the marker anchor. @tool artifacts build their
+	# geometry at edit-time; non-@tool ones render nothing (their _ready only runs at game
+	# runtime), so the box anchor simply stays.
+	if _scene_map.is_empty():
+		_build_scene_map()
+	var base := lookup.split("#")[0].split(":")[0]
+	var path: String = _scene_map.get(base, "")
+	if path == "" or not ResourceLoader.exists(path):
+		return
+	var packed = load(path)
+	if not (packed is PackedScene):
+		return
+	var inst = (packed as PackedScene).instantiate()
+	if inst is Node3D:
+		_suppress_chrome(inst)   # never let a demo scene's Camera3D/CanvasLayer hijack the editor
+		anchor.add_child(inst)   # not owned → rides the marker, not separately selectable
+
+
+func _suppress_chrome(n: Node) -> void:
+	if n is Camera3D:
+		(n as Camera3D).current = false
+	elif n is CanvasLayer:
+		(n as CanvasLayer).visible = false
+	for c in n.get_children():
+		_suppress_chrome(c)
 
 
 func _add_cube() -> void:
@@ -318,6 +476,46 @@ func _add_cube() -> void:
 		cube.owner = root
 	status = _status_line()
 	print("MapToolEditor: added grid cube at (%d,%d) gy=%d — move it, then save_map" % [cx, cz, top])
+
+
+# Called by the Map Tool 3D add-on on a viewport click at grid cell (cx, cz).
+# mode: 0 = place `token` as an artifact, 1 = paint/raise a structure cube, 2 = erase the cell.
+func place_at_cell(cx: int, cz: int, token: String, mode: int) -> void:
+	if _map.is_empty():
+		push_warning("MapToolEditor: load a map first")
+		return
+	if cx < 0 or cx >= _width or cz < 0 or cz >= _depth:
+		return
+	var root := get_tree().edited_scene_root
+	match mode:
+		1:  # paint a structure cube (raise the column by one)
+			if not edit_grid:
+				push_warning("MapToolEditor: turn on edit_grid to paint structure")
+				return
+			var top := 0
+			for c in get_children():
+				if c.has_meta("gcube") and c is Node3D:
+					var cp: Vector3 = (c as Node3D).position
+					if int(round(cp.x / _total)) == cx and int(round(cp.z / _total)) == cz:
+						top = max(top, int(round(cp.y / _total)) + 1)
+			var cube := _box(Vector3(_total * 0.96, 1.0, _total * 0.96), COL_GCUBE)
+			add_child(cube)
+			cube.position = Vector3(cx * _total, top * _total, cz * _total)
+			cube.set_meta("gcube", true)
+			if root:
+				cube.owner = root
+		2:  # erase artifact/utility markers at the cell (structure cubes: edit_grid + Delete)
+			for c in get_children():
+				if c is Node3D and c.has_meta("token"):
+					var cp: Vector3 = (c as Node3D).position
+					if int(round(cp.x / _total)) == cx and int(round(cp.z / _total)) == cz:
+						c.queue_free()
+		_:  # 0 = place an artifact marker
+			if token.strip_edges() == "":
+				push_warning("MapToolEditor: set a token in the Map Tool 3D dock first")
+				return
+			_make_marker(token, "interactable", cx, cz, COL_ARTIFACT, root)
+	status = _status_line()
 
 
 func _save() -> void:
@@ -447,8 +645,8 @@ func _status_line() -> String:
 				utils += 1
 			else:
 				arts += 1
-	return "%s\n%d x %d cells (total_size %.2f)\n%d artifacts · %d utilities · %d clusters\n%d structure cubes\n%s" % [
-		map_name, _width, _depth, _total, arts, utils, clusters, cubes,
+	return "▶ LAYER: %s\n%s\n%d x %d cells (total_size %.2f)\n%d artifacts · %d utilities · %d clusters\n%d structure cubes\n%s" % [
+		active_layer, map_name, _width, _depth, _total, arts, utils, clusters, cubes,
 		"EDIT GRID — cubes selectable" if edit_grid else "place mode — grid is read-only context"]
 
 
