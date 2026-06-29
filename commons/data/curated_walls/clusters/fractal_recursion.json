@@ -2,7 +2,7 @@
   "name": "fractal_recursion",
   "source": "Fractal_Recursion bay 1 — the small/medium HELD things (the large/applied worlds go on the open floor). Coords are LOCAL metres relative to the cluster anchor cell.",
   "pieces": [
-    { "token": "station_wall", "x": 2.5, "y": 0.0, "z": 0.0, "wall": true, "config": { "width_cells": 5 } },
+    { "token": "station_wall", "x": 2.5, "y": 0.0, "z": 0.0, "wall": true, "config": { "width_cells": 8, "height": 4.5 } },
     { "token": "station_panel", "x": 2.5, "y": 2.3, "z": 0.06, "wall": true, "config": { "width_cells": 4, "header": "A FUNCTION THAT CALLS ITSELF", "lines": ["Recursion is not repetition — it is self-reference.", "A square inside a square, with no bottom but the base case."] } },
     { "token": "station_micropod", "x": 1.5, "y": 0.0, "z": 0.5, "wall": false, "config": { "caption_text": "Fractal Recursion 2", "top_height": 1.15, "cap_inset": 0.1, "base_meters": 0.6 } },
     { "token": "fractal_recursion_2", "x": 1.5, "y": 1.15, "z": 0.5, "wall": false },
