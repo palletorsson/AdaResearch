@@ -98,3 +98,16 @@ static func find_highest_y_at(grid: Array, x: int, z: int, grid_y: int) -> int:
 		if grid[x][y][z]:
 			return y + 1  # Return position above the highest occupied space
 	return 0  # Default to ground level if no occupied space found
+
+# World-Y of the TOP surface of the highest cube in a column — where floor-sitting props belong.
+# `y_index` is the value find_highest_y_at() returns: the index ABOVE the highest occupied cube
+# (0 = empty column). Structure cubes are CENTER-ORIGIN 1m boxes placed at grid*total_size, so the
+# highest cube (grid index y_index-1) has its top surface at (y_index-1)*total_size + cube_half.
+# Placing at y_index*total_size — as most call-sites historically did — lands props half a cube
+# (cube_half, default 0.5m) ABOVE that surface; this returns the corrected, on-the-floor Y.
+# Empty columns return 0.0 (the grid plane) so a prop over a void does not sink underground.
+# This matches the perimeter-wall convention (GridUtilitiesComponent: y = 0.5 for a height-1 floor).
+static func surface_world_y(y_index: int, total_size: float, cube_half: float = 0.5) -> float:
+	if y_index <= 0:
+		return 0.0
+	return float(y_index - 1) * total_size + cube_half

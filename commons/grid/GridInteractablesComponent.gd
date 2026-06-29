@@ -568,7 +568,7 @@ func generate_interactables(interactable_data):
 					var scale_factor = float(parts[3]) if parts.size() > 3 else 1.0
 
 					var y_pos = structure_component.find_highest_y_at(x, z)
-					var origin = Vector3(x * total_size, y_pos * total_size, z * total_size)
+					var origin = Vector3(x * total_size, GridCommon.surface_world_y(y_pos, total_size), z * total_size)   # seat on the cube TOP — was y_pos*total_size, half a cube high
 
 					if _place_dialectic_panels(dialectic_name, origin, rotation, scale_factor):
 						interactable_count += 1
@@ -640,7 +640,7 @@ func _place_cluster(x: int, y: int, z: int, cluster_name: String, rotation: floa
 		return false
 	var resolver = ClusterResolverScript.new()
 	parent_node.add_child(resolver)
-	resolver.position = Vector3(x, y, z) * total_size   # LOCAL (under the GridSystem), exactly like _place_artifact — global_position ignored the GridSystem's own y-offset and floated the cluster above the floor
+	resolver.position = Vector3(x * total_size, GridCommon.surface_world_y(y, total_size), z * total_size)   # LOCAL (under the GridSystem), like _place_artifact; surface_world_y seats it on the cube TOP (was y*total_size, half a cube high), and LOCAL avoids the GridSystem's own y-offset that floated it earlier
 	resolver.apply_grid_config({"cluster": cluster_name, "rotation": rotation})
 	interactable_objects[Vector3i(x, y, z)] = resolver
 	print("GridInteractablesComponent: ✅ Placed cluster '%s' at (%d,%d,%d)" % [cluster_name, x, y, z])
@@ -648,7 +648,7 @@ func _place_cluster(x: int, y: int, z: int, cluster_name: String, rotation: floa
 
 
 func _place_marching_cubes_object(x: int, y: int, z: int, lookup_name: String, total_size: float, overrides: Dictionary = {}, config_data: Dictionary = {}) -> bool:
-	var world_pos = Vector3(x, y, z) * total_size
+	var world_pos = Vector3(x * total_size, GridCommon.surface_world_y(y, total_size), z * total_size)   # seat on the cube TOP — was y*total_size, half a cube above the surface (center-origin cubes)
 	
 	# Determine if object should be pickable/grabbable
 	var is_pickable = false
@@ -771,7 +771,7 @@ func _place_grid_agent(x: int, y: int, z: int, lookup_name: String, total_size: 
 	var agent = agent_scene.instantiate()
 	
 	# Position
-	var world_pos = Vector3(x, y, z) * total_size
+	var world_pos = Vector3(x * total_size, GridCommon.surface_world_y(y, total_size), z * total_size)   # seat on the cube TOP — was y*total_size, half a cube above the surface (center-origin cubes)
 	agent.position = world_pos
 	
 	# Apply overrides (rotation, y_offset, scale)
@@ -847,7 +847,7 @@ func _suppress_embedded_chrome(node: Node) -> void:
 
 # Place a single artifact using lookup_name
 func _place_artifact(x: int, y: int, z: int, lookup_name: String, total_size: float, overrides: Dictionary = {}, config_data: Dictionary = {}, tag: String = "", trigger_action: String = "") -> bool:
-	var world_pos = Vector3(x, y, z) * total_size
+	var world_pos = Vector3(x * total_size, GridCommon.surface_world_y(y, total_size), z * total_size)   # seat on the cube TOP — was y*total_size, half a cube above the surface (center-origin cubes)
 	
 	var artifact_info = _get_artifact_info_or_placeholder(lookup_name)
 	if artifact_info.is_empty():
