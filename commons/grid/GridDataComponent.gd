@@ -45,6 +45,27 @@ func load_map_data(target_map_name: String) -> bool:
 		print("GridDataComponent: GDScript format not supported in component version")
 		return false
 
+
+# Android dev loop: prefer an adb-pushed override of this map (no APK rebuild). Returns the override
+# path if one exists for `name`, else the original res:// path. NO-OP on desktop, so the normal
+# editor / PCVR flow is unchanged. Pairs with tools/push_map_to_quest.ps1.
+func _map_override_path(original: String, name: String) -> String:
+	if not OS.has_feature("android"):
+		return original
+	var rel := "override_map/%s/map_data.json" % name
+	var candidates: Array = ["user://" + rel]   # internal files/ (adb run-as writes)
+	var udir := OS.get_user_data_dir().replace("\\", "/")   # /data/user/0/<pkg>/files
+	var segs := udir.split("/", false)
+	var fi := segs.find("files")
+	if fi > 0:
+		# app-private external dir — adb-pushable without root: /sdcard/Android/data/<pkg>/files/...
+		candidates.append("/storage/emulated/0/Android/data/%s/files/%s" % [segs[fi - 1], rel])
+	for c in candidates:
+		if FileAccess.file_exists(c):
+			print("GridDataComponent: PUSHED override map → %s" % c)
+			return c
+	return original
+
 # Load JSON format map data
 func _load_json_map() -> bool:
 	var json_path = ""
@@ -81,6 +102,8 @@ func _load_json_map() -> bool:
 		else:
 			print("GridDataComponent: corridor variant not found, using base map_data.json")
 	
+	# Android: an adb-pushed override of this map wins over the baked res:// copy (no-op on desktop).
+	json_path = _map_override_path(json_path, map_name)
 	print("🔍 DEBUG: Final json_path = '%s'" % json_path)
 	print("🔍 DEBUG: File exists check: %s" % FileAccess.file_exists(json_path))
 	
