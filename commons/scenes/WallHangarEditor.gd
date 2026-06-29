@@ -92,6 +92,8 @@ func _ready() -> void:
 	_build_world()
 	_build_camera()
 	_build_ui()
+	if _consume_cluster_handoff():   # MapToolEditor "Show in wall editor" → edit one cluster
+		return
 	var caps := _capture_targets()
 	if not caps.is_empty():
 		_run_capture(caps)   # headless batch render of curated walls -> user://wall_shots/
@@ -1255,3 +1257,31 @@ func _save_as_cluster() -> void:
 		_status("saved cluster '%s' — %d pieces, dais %.0f m  →  clusters/%s.json" % [cname, arr.size(), _dais_h, cname])
 	else:
 		_status("could not write clusters/%s.json" % cname)
+
+
+# MapToolEditor "Show in wall editor" handoff: a one-shot cluster name in user://wall_editor_cluster.txt.
+# Load that cluster (clusters/<name>.json — same pieces[] format K saves) for front-elevation editing,
+# and set _current_map so a K save writes straight back to the same cluster file.
+func _consume_cluster_handoff() -> bool:
+	var path := "user://wall_editor_cluster.txt"
+	if not FileAccess.file_exists(path):
+		return false
+	var cname := FileAccess.get_file_as_string(path).strip_edges()
+	var f := FileAccess.open(path, FileAccess.WRITE)   # clear (one-shot)
+	if f:
+		f.store_string("")
+		f.close()
+	if cname == "":
+		return false
+	var cpath := "%s/%s.json" % [CLUSTERS_DIR, cname]
+	if not FileAccess.file_exists(cpath):
+		_status("cluster not found: clusters/%s.json" % cname)
+		return false
+	var d = JSON.parse_string(FileAccess.get_file_as_string(cpath))
+	if not (d is Dictionary) or not (d.get("pieces") is Array):
+		_status("bad cluster JSON: %s" % cname)
+		return false
+	_current_map = cname   # K (_save_as_cluster) writes back to clusters/<cname>.json
+	_load_wall(d["pieces"])
+	_status("editing cluster '%s' — %d pieces (K saves back)" % [cname, (d["pieces"] as Array).size()])
+	return true

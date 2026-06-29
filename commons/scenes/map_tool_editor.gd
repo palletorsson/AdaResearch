@@ -39,6 +39,7 @@ const COL_GCUBE := Color(0.50, 0.72, 0.58)   # structure cube while edit_grid is
 @export_tool_button("Save map") var _b_save: Callable = _save
 @export_tool_button("Clear view") var _b_clear: Callable = _clear
 @export_tool_button("🖥 Show in desktop") var _b_desktop: Callable = _show_in_desktop
+@export_tool_button("🧱 Show in wall editor") var _b_walled: Callable = _show_in_wall_editor
 @export_tool_button("📲 Push to Quest") var _b_push: Callable = _push_to_quest
 @export_tool_button("↻ Hot-reload on Quest") var _b_hot: Callable = _hot_reload_quest
 
@@ -172,6 +173,36 @@ func _show_in_desktop() -> void:
 		f.close()
 	print("MapToolEditor: 🖥 opening '%s' in the desktop map tester" % map_name)
 	EditorInterface.play_custom_scene("res://commons/scenes/desktop_map_tester.tscn")
+
+# Open this map's cluster in the WallHangarEditor (front-elevation wall editor): hand off the cluster
+# name, play the wall editor; it loads clusters/<name>.json for editing and K saves straight back.
+func _show_in_wall_editor() -> void:
+	if not Engine.is_editor_hint() or _map.is_empty():
+		push_warning("MapToolEditor: load a map first")
+		return
+	var cname := _first_cluster_name()
+	if cname == "":
+		push_warning("MapToolEditor: no cluster:<name> token in this map to open in the wall editor")
+		return
+	var f := FileAccess.open("user://wall_editor_cluster.txt", FileAccess.WRITE)
+	if f:
+		f.store_string(cname)
+		f.close()
+	print("MapToolEditor: 🧱 opening cluster '%s' in the wall editor" % cname)
+	EditorInterface.play_custom_scene("res://commons/scenes/desktop_wall_hangar_editor.tscn")
+
+func _first_cluster_name() -> String:
+	var inter: Variant = _map.get("layers", {}).get("interactables", [])
+	if inter is Array:
+		for row in inter:
+			if row is Array:
+				for cell in row:
+					var t := str(cell).strip_edges()
+					if t.begins_with("cluster:"):
+						var parts := t.split("#")[0].split(":")
+						if parts.size() > 1:
+							return str(parts[1])
+	return ""
 
 
 # Inspector polish: map_name becomes a dropdown of available maps; status is read-only.
