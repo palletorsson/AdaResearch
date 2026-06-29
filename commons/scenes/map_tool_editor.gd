@@ -38,6 +38,7 @@ const COL_GCUBE := Color(0.50, 0.72, 0.58)   # structure cube while edit_grid is
 @export_tool_button("Load map") var _b_load: Callable = _load
 @export_tool_button("Save map") var _b_save: Callable = _save
 @export_tool_button("Clear view") var _b_clear: Callable = _clear
+@export_tool_button("📲 Push to Quest") var _b_push: Callable = _push_to_quest
 
 @export_group("Navigate")
 @export_tool_button("◀  Prev map") var _b_prev: Callable = _prev
@@ -122,6 +123,24 @@ func _set_show_labels(v: bool) -> void:
 func _set_live_preview(v: bool) -> void:
 	live_preview = v
 	if Engine.is_editor_hint() and not _map.is_empty(): call_deferred("_load")
+
+# Standalone dev loop: save this map and push it to the Quest over USB (adb), which relaunches the
+# app straight into it. Runs tools/push_map_to_quest.ps1. Needs the headset connected + USB-debugging
+# authorized. (Layout only — new artifacts still need a full APK export+install.)
+func _push_to_quest() -> void:
+	if not Engine.is_editor_hint() or _map.is_empty():
+		push_warning("MapToolEditor: load a map first")
+		return
+	_save()
+	var script_path := ProjectSettings.globalize_path("res://tools/push_map_to_quest.ps1")
+	var out: Array = []
+	var code := OS.execute("powershell.exe", ["-ExecutionPolicy", "Bypass", "-File", script_path, "-Map", map_name.strip_edges()], out, true)
+	for line in out:
+		print(line)
+	if code == 0:
+		print("MapToolEditor: 📲 pushed '%s' — the Quest should relaunch into it." % map_name)
+	else:
+		push_warning("MapToolEditor: push failed (exit %d). Is the Quest connected + USB-debugging authorized?" % code)
 
 
 # Inspector polish: map_name becomes a dropdown of available maps; status is read-only.

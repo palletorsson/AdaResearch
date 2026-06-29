@@ -345,6 +345,24 @@ func _show_startup_info():
 	print("Main scene: %s" % main_scene)
 	print("===============================")
 
+# Standalone dev loop: tools/push_map_to_quest.ps1 adb-pushes a map to the headset and writes its
+# name to override_map/_start.txt in the app's files dir. If present, boot straight into that map
+# (the map DATA itself is picked up by GridDataComponent's override). Android only; empty on desktop.
+func _pushed_start_map() -> String:
+	if not OS.has_feature("android"):
+		return ""
+	var rel := "override_map/_start.txt"
+	var candidates := ["user://" + rel]
+	var udir := OS.get_user_data_dir().replace("\\", "/")   # /data/user/0/<pkg>/files
+	var segs := udir.split("/", false)
+	var fi := segs.find("files")
+	if fi > 0:
+		candidates.append("/storage/emulated/0/Android/data/%s/files/%s" % [segs[fi - 1], rel])
+	for c in candidates:
+		if FileAccess.file_exists(c):
+			return FileAccess.get_file_as_string(c).strip_edges()
+	return ""
+
 # FIXED: Event handlers for staging system (connected to signals)
 func _on_scene_loaded_handler(scene, user_data):
 	"""Connected to XRToolsStaging scene_loaded signal"""
@@ -395,6 +413,11 @@ func _setup_scene_systems(scene: Node, user_data: Dictionary):
 	
 	# Configure the grid system to load the specified map
 	var map_name = user_data.get("map_name", "Lab")
+	# Standalone dev loop: an adb-pushed map (push_map_to_quest.ps1) sets the start map.
+	var _pushed := _pushed_start_map()
+	if _pushed != "":
+		map_name = _pushed
+		print("AdaVRStaging: pushed start map → loading '%s'" % map_name)
 	print("AdaVRStaging: Setting grid system map to: %s" % map_name)
 	
 	if grid_system.has_method("load_map"):
