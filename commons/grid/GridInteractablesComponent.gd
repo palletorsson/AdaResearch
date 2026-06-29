@@ -640,7 +640,7 @@ func _place_cluster(x: int, y: int, z: int, cluster_name: String, rotation: floa
 		return false
 	var resolver = ClusterResolverScript.new()
 	parent_node.add_child(resolver)
-	resolver.global_position = Vector3(x, y, z) * total_size
+	resolver.position = Vector3(x, y, z) * total_size   # LOCAL (under the GridSystem), exactly like _place_artifact — global_position ignored the GridSystem's own y-offset and floated the cluster above the floor
 	resolver.apply_grid_config({"cluster": cluster_name, "rotation": rotation})
 	interactable_objects[Vector3i(x, y, z)] = resolver
 	print("GridInteractablesComponent: ✅ Placed cluster '%s' at (%d,%d,%d)" % [cluster_name, x, y, z])
