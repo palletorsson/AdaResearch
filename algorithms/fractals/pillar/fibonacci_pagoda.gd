@@ -6,6 +6,7 @@
 # Each tier's scale follows the inverse Fibonacci sequence for tapering
 # ===========================================================================
 
+@tool
 extends Node3D
 
 ## Fibonacci Pagoda
