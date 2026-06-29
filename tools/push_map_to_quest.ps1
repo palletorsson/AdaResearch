@@ -9,7 +9,10 @@
 #
 # Usage:  powershell -ExecutionPolicy Bypass -File tools\push_map_to_quest.ps1 -Map Proto_Fractal_Recursion
 
-param([Parameter(Mandatory = $true)][string]$Map)
+param(
+    [Parameter(Mandatory = $true)][string]$Map,
+    [switch]$Live   # hot-reload the RUNNING app in place instead of relaunching into the map
+)
 
 $adb = "C:\Users\palle\AppData\Local\Android\Sdk\platform-tools\adb.exe"
 $pkg = "com.example.adaresearchzeroone"          # matches pull_quest_logs.ps1
@@ -42,21 +45,32 @@ if ($LASTEXITCODE -ne 0) { Write-Host "adb push to /data/local/tmp failed." -For
 & $adb shell "run-as $pkg mkdir -p files/override_map/$Map" | Out-Null
 & $adb shell "run-as $pkg cp $tmpMap files/override_map/$Map/map_data.json" | Out-Null
 
-# 2) start marker so the app boots straight into this map (read by vrStaging._pushed_start_map).
-$startLocal = Join-Path $env:TEMP "_ada_start.txt"
-Set-Content -Path $startLocal -Value $Map -NoNewline -Encoding ascii
-$tmpStart = "/data/local/tmp/_ada_start.txt"
-& $adb push "$startLocal" "$tmpStart" | Out-Null
-& $adb shell "run-as $pkg cp $tmpStart files/override_map/_start.txt" | Out-Null
+if ($Live) {
+    # 2a) HOT-RELOAD: signal the RUNNING app to re-read this map in place (no relaunch).
+    #     vrStaging._poll_quest_reload watches files/reload_signal.txt and calls reload_map_setter.
+    $token = [DateTimeOffset]::UtcNow.ToUnixTimeMilliseconds()
+    $sigLocal = Join-Path $env:TEMP "_ada_reload.txt"
+    Set-Content -Path $sigLocal -Value "$Map`n$token" -NoNewline -Encoding ascii
+    $tmpSig = "/data/local/tmp/_ada_reload.txt"
+    & $adb push "$sigLocal" "$tmpSig" | Out-Null
+    & $adb shell "run-as $pkg cp $tmpSig files/reload_signal.txt" | Out-Null
+    & $adb shell "rm -f $tmpMap $tmpSig" | Out-Null
+    Remove-Item $sigLocal -ErrorAction SilentlyContinue
+    Write-Host "Hot-reload signal sent for '$Map' - the running app should reload in ~1s (no relaunch)." -ForegroundColor Green
+}
+else {
+    # 2b) COLD LOAD: set start marker so the app boots into this map, then relaunch.
+    $startLocal = Join-Path $env:TEMP "_ada_start.txt"
+    Set-Content -Path $startLocal -Value $Map -NoNewline -Encoding ascii
+    $tmpStart = "/data/local/tmp/_ada_start.txt"
+    & $adb push "$startLocal" "$tmpStart" | Out-Null
+    & $adb shell "run-as $pkg cp $tmpStart files/override_map/_start.txt" | Out-Null
+    & $adb shell "rm -f $tmpMap $tmpStart" | Out-Null
+    Remove-Item $startLocal -ErrorAction SilentlyContinue
 
-# cleanup transient temps
-& $adb shell "rm -f $tmpMap $tmpStart" | Out-Null
-Remove-Item $startLocal -ErrorAction SilentlyContinue
-
-# 3) relaunch into the map
-Write-Host "Relaunching $pkg ..." -ForegroundColor Cyan
-& $adb shell "am force-stop $pkg" | Out-Null
-& $adb shell "monkey -p $pkg -c android.intent.category.LAUNCHER 1" | Out-Null
-
-Write-Host "Done. The app will relaunch straight into '$Map'." -ForegroundColor Green
-Write-Host "(Back to normal start: adb shell run-as $pkg rm files/override_map/_start.txt)" -ForegroundColor DarkGray
+    Write-Host "Relaunching $pkg ..." -ForegroundColor Cyan
+    & $adb shell "am force-stop $pkg" | Out-Null
+    & $adb shell "monkey -p $pkg -c android.intent.category.LAUNCHER 1" | Out-Null
+    Write-Host "Done. The app will relaunch straight into '$Map'." -ForegroundColor Green
+    Write-Host "(Back to normal start: adb shell run-as $pkg rm files/override_map/_start.txt)" -ForegroundColor DarkGray
+}

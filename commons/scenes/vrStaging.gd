@@ -94,10 +94,11 @@ func _ready() -> void:
 	# Start the game system
 	_start_game()
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	if Engine.is_editor_hint():
 		return
 	_handle_map_loader_spawn_shortcut()
+	_poll_quest_reload(delta)
 
 func _fix_loading_screen_curve():
 	"""Fix the follow_speed curve to prevent the null error"""
@@ -363,6 +364,41 @@ func _pushed_start_map() -> String:
 			return FileAccess.get_file_as_string(c).strip_edges()
 	return ""
 
+
+# Hot-reload hook: push_map_to_quest.ps1 -Live writes user://reload_signal.txt ("<map>\n<token>")
+# into the app's files/ via run-as WHILE the game is running. Poll it ~2x/sec; on a new token,
+# reload that map from disk in place (no relaunch) via the grid's reload_map_setter.
+var _current_grid_system: Node = null
+var _reload_poll_accum: float = 0.0
+var _last_reload_token: String = ""
+
+func _poll_quest_reload(delta: float) -> void:
+	_reload_poll_accum += delta
+	if _reload_poll_accum < 0.5:
+		return
+	_reload_poll_accum = 0.0
+	var path := "user://reload_signal.txt"
+	if not FileAccess.file_exists(path):
+		return
+	var content := FileAccess.get_file_as_string(path)
+	if content == _last_reload_token or content.strip_edges() == "":
+		return
+	_last_reload_token = content
+	var want_map := content.split("\n")[0].strip_edges()
+	if want_map != "":
+		_live_reload(want_map)
+
+func _live_reload(want_map: String) -> void:
+	if _current_grid_system == null or not is_instance_valid(_current_grid_system):
+		return
+	if "map_name" in _current_grid_system and str(_current_grid_system.get("map_name")) != want_map:
+		_current_grid_system.set("map_name", want_map)
+	print("AdaVRStaging: hot-reload -> %s" % want_map)
+	if _current_grid_system.has_method("reload_map_setter"):
+		_current_grid_system.reload_map_setter(true)
+	elif _current_grid_system.has_method("_reload_current_map"):
+		_current_grid_system.call("_reload_current_map")
+
 # FIXED: Event handlers for staging system (connected to signals)
 func _on_scene_loaded_handler(scene, user_data):
 	"""Connected to XRToolsStaging scene_loaded signal"""
@@ -407,6 +443,10 @@ func _setup_scene_systems(scene: Node, user_data: Dictionary):
 		return
 	
 	print("AdaVRStaging: Found grid system: %s" % grid_system.name)
+	_current_grid_system = grid_system
+	# Prime the hot-reload token so we only react to a NEW push, not a stale signal at launch.
+	if FileAccess.file_exists("user://reload_signal.txt"):
+		_last_reload_token = FileAccess.get_file_as_string("user://reload_signal.txt")
 	
 	# Minimal wait - just one frame for node initialization (delay already in load_scene)
 	await get_tree().process_frame

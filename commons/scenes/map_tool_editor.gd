@@ -39,6 +39,7 @@ const COL_GCUBE := Color(0.50, 0.72, 0.58)   # structure cube while edit_grid is
 @export_tool_button("Save map") var _b_save: Callable = _save
 @export_tool_button("Clear view") var _b_clear: Callable = _clear
 @export_tool_button("📲 Push to Quest") var _b_push: Callable = _push_to_quest
+@export_tool_button("↻ Hot-reload on Quest") var _b_hot: Callable = _hot_reload_quest
 
 @export_group("Navigate")
 @export_tool_button("◀  Prev map") var _b_prev: Callable = _prev
@@ -141,6 +142,21 @@ func _push_to_quest() -> void:
 		print("MapToolEditor: 📲 pushed '%s' — the Quest should relaunch into it." % map_name)
 	else:
 		push_warning("MapToolEditor: push failed (exit %d). Is the Quest connected + USB-debugging authorized?" % code)
+
+# Like Push to Quest, but hot-reloads the RUNNING app in place (no relaunch) — passes -Live, which
+# signals vrStaging's poll. Needs an installed APK built with the override + hook code.
+func _hot_reload_quest() -> void:
+	if not Engine.is_editor_hint() or _map.is_empty():
+		push_warning("MapToolEditor: load a map first")
+		return
+	_save()
+	var script_path := ProjectSettings.globalize_path("res://tools/push_map_to_quest.ps1")
+	var out: Array = []
+	var code := OS.execute("powershell.exe", ["-ExecutionPolicy", "Bypass", "-File", script_path, "-Map", map_name.strip_edges(), "-Live"], out, true)
+	for line in out:
+		print(line)
+	if code != 0:
+		push_warning("MapToolEditor: hot-reload failed (exit %d). Quest connected + USB-debugging on?" % code)
 
 
 # Inspector polish: map_name becomes a dropdown of available maps; status is read-only.
