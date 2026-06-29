@@ -38,6 +38,7 @@ const COL_GCUBE := Color(0.50, 0.72, 0.58)   # structure cube while edit_grid is
 @export_tool_button("Load map") var _b_load: Callable = _load
 @export_tool_button("Save map") var _b_save: Callable = _save
 @export_tool_button("Clear view") var _b_clear: Callable = _clear
+@export_tool_button("🖥 Show in desktop") var _b_desktop: Callable = _show_in_desktop
 @export_tool_button("📲 Push to Quest") var _b_push: Callable = _push_to_quest
 @export_tool_button("↻ Hot-reload on Quest") var _b_hot: Callable = _hot_reload_quest
 
@@ -157,6 +158,20 @@ func _hot_reload_quest() -> void:
 		print(line)
 	if code != 0:
 		push_warning("MapToolEditor: hot-reload failed (exit %d). Quest connected + USB-debugging on?" % code)
+
+# Walkable desktop preview: save, hand off this map, and play the desktop map-tester — first-person
+# WASD with the REAL artifacts / clusters / walls (not the box markers). Fast, no headset or APK.
+func _show_in_desktop() -> void:
+	if not Engine.is_editor_hint() or _map.is_empty():
+		push_warning("MapToolEditor: load a map first")
+		return
+	_save()
+	var f := FileAccess.open("user://current_map.txt", FileAccess.WRITE)
+	if f:
+		f.store_string(map_name.strip_edges())
+		f.close()
+	print("MapToolEditor: 🖥 opening '%s' in the desktop map tester" % map_name)
+	EditorInterface.play_custom_scene("res://commons/scenes/desktop_map_tester.tscn")
 
 
 # Inspector polish: map_name becomes a dropdown of available maps; status is read-only.

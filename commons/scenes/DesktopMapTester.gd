@@ -19,6 +19,17 @@ var current_map_index: int = 0
 func _ready() -> void:
 	print("DesktopMapTester: Initializing...")
 
+	# MapToolEditor "Show in desktop" handoff: a one-shot start map in user://current_map.txt.
+	if FileAccess.file_exists("user://current_map.txt"):
+		var handoff := FileAccess.get_file_as_string("user://current_map.txt").strip_edges()
+		if handoff != "":
+			start_map = handoff
+			print("DesktopMapTester: MapToolEditor handoff → '%s'" % start_map)
+			var f := FileAccess.open("user://current_map.txt", FileAccess.WRITE)   # clear (one-shot)
+			if f:
+				f.store_string("")
+				f.close()
+
 	# Connect to AdaSceneManager if available
 	if AdaSceneManager.is_available():
 		AdaSceneManager.get_instance()
