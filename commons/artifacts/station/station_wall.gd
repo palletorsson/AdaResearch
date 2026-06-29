@@ -96,6 +96,7 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 func _read_metadata_overrides() -> void:
 	if has_meta("config_length_cells"): length_cells = int(str(get_meta("config_length_cells")))
+	elif has_meta("config_width_cells"): length_cells = int(str(get_meta("config_width_cells")))   # editor/cluster/WallHangar pass width_cells for the wall's run length
 	if has_meta("config_start_cap"): start_cap = _b(get_meta("config_start_cap"))
 	if has_meta("config_end_cap"): end_cap = _b(get_meta("config_end_cap"))
 	if has_meta("config_height"): height = float(str(get_meta("config_height")))
