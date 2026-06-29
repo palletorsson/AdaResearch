@@ -637,9 +637,12 @@ func _on_save() -> void:
 			var ms := str(m)
 			if ms.begins_with("config_"):
 				cfg[ms.substr(7)] = n.get_meta(m)   # DNA edits (apply_grid_config metas)
+		# Transformless nodes (mutator artifacts like GridColorizer) have no global_position;
+		# fall back to origin so saving a layout that contains one can't crash.
+		var p: Vector3 = (n as Node3D).global_position if n is Node3D else Vector3.ZERO
 		arr.append({
 			"token": str(n.get_meta("token", "")),
-			"x": n.global_position.x, "y": n.global_position.y, "z": n.global_position.z,
+			"x": p.x, "y": p.y, "z": p.z,
 			"wall": bool(n.get_meta("wall_piece", false)),
 			"config": cfg,
 		})
@@ -741,7 +744,11 @@ func _update_selbox() -> void:
 	_sel_box.visible = true
 
 
-func _world_aabb(n: Node3D) -> AABB:
+func _world_aabb(n: Node) -> AABB:
+	# Accept any Node, not just Node3D: mutator artifacts (e.g. GridColorizer) load as a
+	# plain Node with no transform. The stack-walk below only measures VisualInstance3D
+	# children, so a transformless node yields an empty AABB and every caller skips it
+	# via its `box.size.y <= 0.001` guard.
 	var box := AABB()
 	var found := false
 	var stack: Array = [n]
