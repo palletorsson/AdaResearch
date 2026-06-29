@@ -285,7 +285,7 @@ func _parse_big_pipe_utility(cell_value: String, x: int, z: int) -> Dictionary:
 	# Calculate position
 	var y = structure_component.find_highest_y_at(x, z)
 	var total_size = cube_size + gutter
-	var pos = Vector3(x, y, z) * total_size
+	var pos = Vector3(x * total_size, GridCommon.surface_world_y(y, total_size), z * total_size)   # seat on the cube TOP (was y*total_size, half a cube high)
 
 	return {
 		"code": code,
@@ -365,7 +365,7 @@ func _find_safe_adjacent_cell(grid_x: int, grid_z: int) -> Vector2i:
 
 # Place a single utility object
 func _place_utility(x: int, y: int, z: int, utility_type: String, parameters: Array, definition: Dictionary, total_size: float):
-	var position = Vector3(x, y, z) * total_size
+	var position = Vector3(x * total_size, GridCommon.surface_world_y(y, total_size), z * total_size)   # seat on the cube TOP — applies to spawn/teleporter/ramps/transport/labels (was y*total_size, half a cube high)
 
 	var scene_path = UtilityRegistry.get_utility_scene_path(utility_type)
 	if scene_path.is_empty():
@@ -429,7 +429,7 @@ func _place_force_field(cell_value: String, x: int, y: int, z: int, total_size: 
 	var force_field: ForceField = ForceField.new()
 	force_field.force_type = ForceTransmutationConfig.parse_force_type(force_type_str) as ForceField.ForceType
 	force_field.force_intensity = intensity
-	force_field.position = Vector3(x, y, z) * total_size
+	force_field.position = Vector3(x * total_size, GridCommon.surface_world_y(y, total_size), z * total_size)   # seat on the cube TOP (was y*total_size, half a cube high)
 	force_field.add_to_group("utility")
 
 	parent_node.add_child(force_field)
@@ -1403,7 +1403,7 @@ func _generate_info_boards(info_board_data: Array):
 		# Calculate 3D position
 		var total_size = cube_size + gutter
 		var y_pos = structure_component.find_highest_y_at(grid_pos.x, grid_pos.z)
-		var position = Vector3(grid_pos.x, y_pos, grid_pos.z) * total_size
+		var position = Vector3(grid_pos.x * total_size, GridCommon.surface_world_y(y_pos, total_size), grid_pos.z * total_size)   # seat on the cube TOP (was y_pos*total_size, half a cube high)
 
 		# Apply height offset
 		position.y += height_offset
@@ -1572,7 +1572,7 @@ func _generate_tutorial_displays(tutorial_display_data: Array):
 		# Calculate 3D position
 		var total_size = cube_size + gutter
 		var y_pos = structure_component.find_highest_y_at(grid_pos.x, grid_pos.z)
-		var position = Vector3(grid_pos.x, y_pos, grid_pos.z) * total_size
+		var position = Vector3(grid_pos.x * total_size, GridCommon.surface_world_y(y_pos, total_size), grid_pos.z * total_size)   # seat on the cube TOP (was y_pos*total_size, half a cube high)
 
 		# Apply height offset
 		position.y += height_offset
