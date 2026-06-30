@@ -13,7 +13,7 @@ size oracle gives footprints. Spine -> a path spawn->teleport spaced by size; br
 Usage:  python tools/lay_necklace.py <sequence> [--curve] [--max N] [--wp/--wo/--wc W]
 Writes  commons/maps/<Seq>_Necklace/map_data.json
 """
-import json, os, sys, argparse, math
+import json, os, re, sys, argparse, math
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from three_orders import compute
 
@@ -23,6 +23,27 @@ ALCOVE = 4
 MARGIN = 3
 GAP = 2
 TIER_ORDER = {"small": 0, "medium": 1, "large": 2, "applied": 3}
+
+
+def auto_cluster(seq, cname, held):
+    """The wall config: mount a concept's HELD (small/medium) artifacts on a station_wall - each on a
+    plinth in front of a backdrop - and write commons/data/curated_walls/clusters/nk_<seq>_<slug>.json.
+    Returns (slug, wall_width). The map then carries a cluster:<slug> token; cluster_resolver spawns it."""
+    slug = "nk_%s_%s" % (seq, (re.sub(r"[^a-z0-9]+", "_", cname.lower()).strip("_") or "concept"))
+    n = max(1, len(held))
+    wall_w = min(12, max(4, n * 2 + 2))
+    pieces = [{"token": "station_wall", "x": round(wall_w / 2.0, 1), "y": 0.0, "z": 0.0, "wall": True,
+               "config": {"width_cells": wall_w, "height": 4.0, "panel_cells": max(2, wall_w // 4)}}]
+    for i, art in enumerate(held):
+        px = round(1.5 + i * (wall_w - 3) / max(1, n - 1), 1)
+        pieces.append({"token": "station_plinth", "x": px, "y": 0.0, "z": 1.4, "wall": False,
+                       "config": {"top_height": 1.2, "width_cells": 1, "depth_cells": 1, "caption_text": art}})
+        pieces.append({"token": art, "x": px, "y": 1.2, "z": 1.4, "wall": False})
+    cdir = os.path.join(ROOT, "commons", "data", "curated_walls", "clusters")
+    os.makedirs(cdir, exist_ok=True)
+    json.dump({"name": slug, "source": "auto by lay_necklace --concepts", "pieces": pieces},
+              open(os.path.join(cdir, slug + ".json"), "w", encoding="utf-8"), indent=2)
+    return slug, wall_w
 
 
 def load_concept_tiers(seq):
@@ -102,8 +123,6 @@ def main():
         return pts, arc
 
     if a.concepts:
-        import numpy as np
-        import bisect
         a2c = load_concept_tiers(a.seq)
         groups = {}
         for p in d["pearls"]:
@@ -117,35 +136,26 @@ def main():
             rs = [cons[x] for _, _, x in groups[cn] if x in cons]
             return sum(rs) / len(rs) if rs else 1.0
 
-        def centroid(cn):
-            vs = [emb[x] for _, _, x in groups[cn] if x in emb]
-            return np.mean(vs, axis=0) if vs else None
-
         corder = sorted(groups, key=crank)[: a.max]
-        hero = {cn: max(groups[cn], key=lambda t: base(t[2]))[2] for cn in corder}  # top-scale = the hero
-        small = {cn: [x for _, _, x in groups[cn] if x != hero[cn] and base(x) <= 2.0] for cn in corder}
-        cumS = [0.0]
-        for i in range(1, len(corder)):
-            c0, c1 = centroid(corder[i - 1]), centroid(corder[i])
-            if c0 is not None and c1 is not None:
-                dd = max(0.0, 1.0 - float(np.dot(c1, c0) / (np.linalg.norm(c1) * np.linalg.norm(c0) + 1e-9)))
-            else:
-                dd = 0.3
-            dists.append(dd)
-            h0, h1 = hero[corder[i - 1]], hero[corder[i]]
-            cumS.append(cumS[-1] + max(a.dscale * dd, base(h1) / 2 + base(h0) / 2 + GAP + 1))
-        pts, arc = fold_path(cumS[-1] if cumS else 0.0, 9.0, 8.0)
+        # each CONCEPT is a bay: HELD (small/medium) on a wall cluster, WORLDS (large/applied) on the
+        # floor in front. Bays laid out in a serpentine grid.
+        BAY_W, BAY_D, PER_ROW = 14, 9, 3
         n_arts = 0
-        for ci, (cn, s) in enumerate(zip(corder, cumS)):
-            k = min(bisect.bisect_left(arc, s), len(pts) - 1)
-            ox, oz = int(round(pts[k][0])), int(round(pts[k][1]))
-            spine_xz.append(place(ox, oz, hero[cn]))      # the concept's hero on the curve
-            n_arts += 1
-            sd = 1 if ci % 2 == 0 else -1                 # its small tiers tuck in beside it (they're small)
-            for j, art in enumerate(small[cn][:3]):
-                place(ox + sd * (int(round(base(hero[cn]) / 2)) + 1 + j), oz, art)
+        for ci, cn in enumerate(corder):
+            held = [art for _, tier, art in groups[cn] if tier in ("small", "medium")][:4]
+            worlds = [art for _, tier, art in groups[cn] if tier in ("large", "applied")][:2]
+            row, col = ci // PER_ROW, ci % PER_ROW
+            c = (PER_ROW - 1 - col) if (row % 2) else col           # serpentine
+            bx, bz = MARGIN + c * BAY_W, MARGIN + row * BAY_D
+            if held:
+                slug, _ = auto_cluster(a.seq, cn, held)
+                place(bx, bz, "cluster:%s" % slug)                   # HELD -> the wall config
+                n_arts += len(held)
+            spine_xz.append((bx, bz))
+            for wi, w in enumerate(worlds):                          # WORLDS -> the open floor in front
+                place(bx + wi * max(2, int(round(base(w)))), bz + 5, w)
                 n_arts += 1
-        layout_desc = "%d concepts (hero on the curve + small tiers beside; footprint = scale)" % len(corder)
+        layout_desc = "%d concept-bays (HELD small/medium on walls, WORLDS large/applied on the floor)" % len(corder)
     else:
         cx = ALCOVE + MARGIN
         spine = [p for p in pearls if spread[p] < BRANCH]
