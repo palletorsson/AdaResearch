@@ -180,15 +180,14 @@ func _show_in_wall_editor() -> void:
 	if not Engine.is_editor_hint() or _map.is_empty():
 		push_warning("MapToolEditor: load a map first")
 		return
+	# Always open the wall editor; hand off this map's cluster if it has one (else "" → the wall
+	# editor just opens with its own map/cluster browser).
 	var cname := _first_cluster_name()
-	if cname == "":
-		push_warning("MapToolEditor: no cluster:<name> token in this map to open in the wall editor")
-		return
 	var f := FileAccess.open("user://wall_editor_cluster.txt", FileAccess.WRITE)
 	if f:
 		f.store_string(cname)
 		f.close()
-	print("MapToolEditor: 🧱 opening cluster '%s' in the wall editor" % cname)
+	print("MapToolEditor: 🧱 opening wall editor%s" % ((" → cluster '%s'" % cname) if cname != "" else ""))
 	EditorInterface.play_custom_scene("res://commons/scenes/desktop_wall_hangar_editor.tscn")
 
 func _first_cluster_name() -> String:
