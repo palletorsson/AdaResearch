@@ -117,11 +117,19 @@ def main():
         pts.append(("EXIT", exit_[0], exit_[1]))
 
     half = math.radians(a.fov / 2)
-    print("RIDE LOG  (gaze FOV %.0fdeg, facing direction of travel) - what hits the cortex:" % a.fov)
+    print("RIDE LOG  (gaze FOV %.0fdeg) - what hits the cortex (dom = how much it FILLS view):" % a.fov)
     for i in range(len(pts) - 1):
         nm, px, pz = pts[i]
-        _, qx, qz = pts[i + 1]
-        fa = math.atan2(qz - pz, qx - px)
+        if nm == "SPAWN":
+            # entry: face the HERO - the body that towers most (height-angular), not the nearest step
+            cand = [r for r in arts if r[0] != "station_wall"]
+            hero = max(cand, key=lambda r: math.atan((r[4] / 2) / max(math.hypot(r[1] - px, r[2] - pz), 0.3)))
+            fa = math.atan2(hero[2] - pz, hero[1] - px)
+            label = "ENTRY facing hero=%s" % hero[0]
+        else:
+            qx, qz = pts[i + 1][1], pts[i + 1][2]
+            fa = math.atan2(qz - pz, qx - px)
+            label = "-> %s" % pts[i + 1][0]
         hits = []
         for n, wx, wz, b, h, m in arts:
             d = math.hypot(wx - px, wz - pz)
@@ -130,20 +138,21 @@ def main():
             ang = (math.atan2(wz - pz, wx - px) - fa + math.pi) % (2 * math.pi) - math.pi
             if abs(ang) > half:
                 continue
-            angw = math.degrees(2 * math.atan((b / 2) / max(d, 0.3)))
-            hits.append([angw, n, d, math.degrees(ang)])
+            base_w = math.degrees(2 * math.atan((b / 2) / max(d, 0.3)))      # horizontal extent (occlusion)
+            dom = math.degrees(2 * math.atan((max(b, h) / 2) / max(d, 0.3)))  # fills-view (tall counts)
+            hits.append([dom, base_w, n, d, math.degrees(ang)])
         vis = []
-        for angw, n, d, ang in sorted(hits, key=lambda r: r[2]):  # near -> far
-            if not any(abs(ang - a2) < aw2 / 2 for aw2, n2, d2, a2 in vis):
-                vis.append([angw, n, d, ang])
+        for dom, bw, n, d, ang in sorted(hits, key=lambda r: r[3]):  # near -> far
+            if not any(abs(ang - a2) < bw2 / 2 for _, bw2, _, _, a2 in vis):
+                vis.append([dom, bw, n, d, ang])
         vis.sort(reverse=True)
-        print("\n  step %d  @(%.0f,%.0f) -> %-14s facing %+.0fdeg" % (i, px, pz, pts[i + 1][0], math.degrees(fa)))
+        print("\n  step %d  @(%.0f,%.0f) %s  facing %+.0fdeg" % (i, px, pz, label, math.degrees(fa)))
         if not vis:
             print("    (nothing in view - dead step)")
-        for angw, n, d, ang in vis[:5]:
-            sz = "HUGE" if angw > 55 else "big" if angw > 28 else "med" if angw > 12 else "small"
+        for dom, bw, n, d, ang in vis[:5]:
+            sz = "HUGE" if dom > 55 else "big" if dom > 28 else "med" if dom > 12 else "small"
             pos = "left" if ang < -12 else "right" if ang > 12 else "CENTER"
-            print("    %-38s %-5s %3.0fdeg  %-6s %4.1fm" % (n, sz, angw, pos, d))
+            print("    %-38s %-5s %3.0fdeg  %-6s %4.1fm" % (n, sz, dom, pos, d))
 
 
 if __name__ == "__main__":
