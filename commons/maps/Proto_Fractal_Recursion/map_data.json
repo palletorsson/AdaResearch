@@ -1,60 +1,83 @@
 {
-  "map_info": {
-    "name": "Proto Fractal Recursion",
-    "lookup_name": "Proto_Fractal_Recursion",
-    "title": "Recursion — interior",
-    "description": "Phase-1 prototype of the wall-into-grid integration: the small/medium HELD things are one curated cluster (cluster:fractal_recursion) at the back, grounded at grid level behind a tall backdrop wall; the large + applied WORLDS stand on the open floor among it (furniture sits plinth-free).",
-    "version": "1.0",
-    "format": "json",
-    "dimensions": { "width": 14, "depth": 10, "max_height": 3 }
-  },
-  "utility_definitions": {
-    "t": { "type": "teleporter", "name": "Exit", "description": "Return to the lab", "properties": { "action": "next_in_sequence" } }
-  },
-  "settings": {
-    "cube_size": 1, "gutter": 0, "show_grid": true, "enable_physics": true,
-    "background": { "type": "sky", "color": [0.18, 0.2, 0.28] }
-  },
-  "lighting": {
-    "ambient_color": [0.6, 0.62, 0.68], "ambient_energy": 1.2,
-    "directional_light": { "enabled": true, "direction": [-0.4, -0.8, -0.3], "color": [1.0, 0.97, 0.92], "energy": 1.0 }
-  },
-  "layers": {
-    "structure": [
-      ["1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1","1","1","1","1","1"]
-    ],
-    "utilities": [
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," ","t"]
-    ],
-    "interactables": [
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" ","cluster:fractal_recursion"," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," ","cube_staircase"," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," ","example_8_3_recursion_circles_vr"," "," "," "," "," ","fibonacci_pagoda"," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," ","recursive_boolean_cube"," "," "],
-      [" "," "," "," "," ","recursive_chair"," "," ","recursive_table"," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "]
-    ]
-  }
+	"layers": {
+		"interactables": [
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", "cluster:fractal_recursion", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", "fibonacci_pagoda", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "recursive_chair", " ", " "],
+			[" ", " ", "cube_staircase", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "recursive_table", " ", " "],
+			[" ", " ", "example_8_3_recursion_circles_vr", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "recursive_boolean_cube", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
+		],
+		"structure": [
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "0", "1"],
+			["1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"]
+		],
+		"utilities": [
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+			[" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "t", " "],
+			[" ", " ", " ", " ", " ", " ", "s", " ", " ", " ", " ", " ", " ", " "]
+		]
+	},
+	"lighting": {
+		"ambient_color": [0.6, 0.62, 0.68],
+		"ambient_energy": 1.2,
+		"directional_light": {
+			"color": [1.0, 0.97, 0.92],
+			"direction": [-0.4, -0.8, -0.3],
+			"enabled": true,
+			"energy": 1.0
+		}
+	},
+	"map_info": {
+		"description": "Phase-1 wall-into-grid, re-authored as a walk: the curated backdrop cluster (cluster:fractal_recursion) spans the back wall and states the definition ('A function that calls itself'). The player spawns front-centre facing the wall, then walks a horseshoe — up the left column (circles, staircase, pagoda), across the wall with the held definition objects, then down the right column (chair, table, boolean-cube) — exiting front-right through the teleporter void. Floor flattened (stray voids/bump removed); spawn added; exit kept on its void (convention) with floor behind.",
+		"dimensions": {
+			"depth": 10.0,
+			"max_height": 3.0,
+			"width": 14.0
+		},
+		"format": "json",
+		"lookup_name": "Proto_Fractal_Recursion",
+		"name": "Proto Fractal Recursion",
+		"title": "Recursion — interior",
+		"version": "1.1"
+	},
+	"settings": {
+		"background": {
+			"color": [0.18, 0.2, 0.28],
+			"type": "sky"
+		},
+		"cube_size": 1.0,
+		"enable_physics": true,
+		"gutter": 0.0,
+		"show_grid": true
+	},
+	"utility_definitions": {
+		"t": {
+			"description": "Return to the lab",
+			"name": "Exit",
+			"properties": {
+				"action": "next_in_sequence"
+			},
+			"type": "teleporter"
+		}
+	}
 }
