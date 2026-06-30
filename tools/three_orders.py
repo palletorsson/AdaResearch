@@ -19,6 +19,7 @@ Usage:
 """
 import json, os, sys
 import numpy as np
+from qfep_signal import build_critical_index  # tools/ is on sys.path when run as a script
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SEQ_DIR = os.path.join(ROOT, "commons", "maps", "sequences")
@@ -98,7 +99,16 @@ def compute(seq, min_pearls=8):
     _, _, vt = np.linalg.svd(Vc, full_matrices=False)
     onto = Vc @ vt[0]
 
-    texts = [cards.get(a, a.replace("_", " ")) for a in pearls] + [qfep_text]
+    # criticality reads each artifact's OWN @identity theory-claim (critical_parameter+truth+essence+
+    # desire); only where there's no @identity do we fall back to the description card.
+    cidx = build_critical_index()
+
+    def _ctext(a):
+        t = cidx.get(a, {}).get("crit_text", "").strip()
+        return t if t else cards.get(a, a.replace("_", " "))
+
+    texts = [_ctext(a) for a in pearls] + [qfep_text]
+    crit_cov = round(sum(1 for a in pearls if cidx.get(a, {}).get("crit_text", "").strip()) / len(pearls), 2)
     try:
         from sklearn.feature_extraction.text import TfidfVectorizer
         X = TfidfVectorizer(stop_words="english", min_df=1).fit_transform(texts)
@@ -124,7 +134,7 @@ def compute(seq, min_pearls=8):
     branches.sort(key=lambda b: -b["spread"])
 
     return {
-        "seq": seq, "name": sd.get("name", seq), "n": len(pearls),
+        "seq": seq, "name": sd.get("name", seq), "n": len(pearls), "crit_cov": crit_cov,
         "pearls": pearls,
         "ped": [round(float(x), 3) for x in ped_r],
         "onto": [round(float(x), 3) for x in onto_r],
