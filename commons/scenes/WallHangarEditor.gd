@@ -97,6 +97,9 @@ func _ready() -> void:
 	var caps := _capture_targets()
 	if not caps.is_empty():
 		_run_capture(caps)   # headless batch render of curated walls -> user://wall_shots/
+		return
+	if OS.get_cmdline_user_args().has("--validate-props"):
+		_run_validate_props()   # one plinth+artifact per held item -> user://prop_shots/ + verdicts
 
 
 func _load_data() -> void:
@@ -1162,6 +1165,123 @@ func _run_capture(targets: Array) -> void:
 		print("CAPTURE wrote ", path, "  ", W, "x", h)
 	print("CAPTURE done: ", done, "/", targets.size())
 	get_tree().quit()
+
+
+func _run_validate_props() -> void:
+	# One plinth + one artifact, isolated and front-on, so each ATOM can be checked for the
+	# right form: is the artifact present at all, and does it sit ON the cap (not sunk in,
+	# not floating)? Uses the SAME load+settle the walls use, then measures the result —
+	# settle skips artifacts that measure ~0 at frame 40, which is exactly how they end up
+	# missing or embedded. Writes a PNG + a verdict per held artifact.
+	for c in get_children():
+		if c is CanvasLayer:
+			(c as CanvasLayer).visible = false
+	_camera.keep_aspect = Camera3D.KEEP_HEIGHT
+	_camera.rotation_degrees = Vector3(-6, 0, 0)
+	_camera.size = 3.2
+	const W := 900
+	const H := 1100
+	get_window().size = Vector2i(W, H)
+	DirAccess.make_dir_recursive_absolute("user://prop_shots")
+	var pairs := _gather_validation_pairs()
+	var report: Array = []
+	for pair in pairs:
+		var art: String = pair["art"]
+		var top_h: float = float((pair["config"] as Dictionary).get("top_height", 1.2))
+		var pieces: Array = [
+			{"token": pair["plinth_token"], "x": 0.0, "y": 0.0, "z": 0.0, "wall": false, "config": pair["config"]},
+			{"token": art, "x": 0.0, "y": top_h, "z": 0.0, "wall": false},
+		]
+		_load_wall(pieces)
+		for _i in range(56):   # _settle waits 40f then re-seats; measure after it
+			await get_tree().process_frame
+		var art_node: Node3D = null
+		for n in _placed:
+			if is_instance_valid(n) and n is Node3D and not str(n.get_meta("token", "")).begins_with("station_"):
+				art_node = n
+		var present := false
+		var base_y := 0.0
+		var cap_top: float = top_h
+		var art_w := 0.0
+		var cap_w: float = float((pair["config"] as Dictionary).get("cap_meters", 0.0))
+		var verdict := "missing"
+		if art_node != null:
+			var box := _world_aabb(art_node)
+			present = box.size.y > 0.001 and box.size.x > 0.001
+			base_y = box.position.y
+			cap_top = _stack_top(0.0, 0.0, art_node)
+			if present:
+				art_w = maxf(box.size.x, box.size.z)   # the footprint the cap must cover
+				var gap := base_y - cap_top
+				if gap < -0.06:
+					verdict = "embedded"
+				elif gap > 0.08:
+					verdict = "floating"
+				else:
+					verdict = "ok"
+		_camera.position = Vector3(0.0, cap_top + 0.4, 6.0)
+		for _i in range(3):
+			await get_tree().process_frame
+		await RenderingServer.frame_post_draw
+		var img := get_viewport().get_texture().get_image()
+		img.save_png("user://prop_shots/%s.png" % art)
+		var fit := true   # does the footprint fit the cap (horizontal), independent of seating
+		if cap_w > 0.0 and art_w > 0.0:
+			fit = art_w <= cap_w + 0.06
+		report.append({
+			"artifact": art, "plinth": pair["plinth_token"], "present": present,
+			"base_y": snappedf(base_y, 0.01), "cap_top": snappedf(cap_top, 0.01),
+			"gap": snappedf(base_y - cap_top, 0.01), "verdict": verdict,
+			"art_w": snappedf(art_w, 0.01), "cap_w": snappedf(cap_w, 0.01), "fit": fit,
+		})
+		print("VALIDATE ", art, " -> ", verdict, "  gap=", snappedf(base_y - cap_top, 0.01), "  fit=", fit, "  (art ", snappedf(art_w, 0.01), " / cap ", snappedf(cap_w, 0.01), ")")
+	var f := FileAccess.open("user://prop_shots/_report.json", FileAccess.WRITE)
+	if f:
+		f.store_string(JSON.stringify(report, "\t"))
+		f.close()
+	print("VALIDATE done: ", report.size(), " props")
+	get_tree().quit()
+
+
+func _gather_validation_pairs() -> Array:
+	# Each held artifact across the auto-curated clusters, paired with the plinth it rides
+	# (first occurrence wins) — the faithful wall atom: same plinth token + cap config.
+	var pairs: Array = []
+	var seen := {}
+	var dir := DirAccess.open(CLUSTERS_DIR)
+	if dir == null:
+		return pairs
+	var files := dir.get_files()
+	files.sort()
+	for fn in files:
+		if not str(fn).ends_with(".json"):
+			continue
+		var data: Variant = JSON.parse_string(FileAccess.get_file_as_string("%s/%s" % [CLUSTERS_DIR, fn]))
+		if not (data is Dictionary):
+			continue
+		if not ("auto by lay_necklace" in str((data as Dictionary).get("source", ""))):
+			continue
+		var pieces: Array = (data as Dictionary).get("pieces", [])
+		var plinth_at := {}   # "x_z" -> plinth piece
+		for p in pieces:
+			var tok := str((p as Dictionary).get("token", ""))
+			if tok.begins_with("station_plinth") or tok == "station_micropod":
+				plinth_at["%.1f_%.1f" % [float((p as Dictionary).get("x", 0.0)), float((p as Dictionary).get("z", 0.0))]] = p
+		for p in pieces:
+			var tok := str((p as Dictionary).get("token", ""))
+			if tok.begins_with("station_"):
+				continue
+			if seen.has(tok):
+				continue
+			seen[tok] = true
+			var key := "%.1f_%.1f" % [float((p as Dictionary).get("x", 0.0)), float((p as Dictionary).get("z", 0.0))]
+			var plinth: Dictionary = plinth_at.get(key, {})
+			pairs.append({
+				"art": tok,
+				"plinth_token": str(plinth.get("token", "station_plinth")),
+				"config": plinth.get("config", {}),
+			})
+	return pairs
 
 
 func _prop_showcase_pieces() -> Array:
