@@ -1192,49 +1192,53 @@ func _run_validate_props() -> void:
 			{"token": pair["plinth_token"], "x": 0.0, "y": 0.0, "z": 0.0, "wall": false, "config": pair["config"]},
 			{"token": art, "x": 0.0, "y": top_h, "z": 0.0, "wall": false},
 		]
-		_load_wall(pieces)
-		for _i in range(56):   # _settle waits 40f then re-seats; measure after it
+		_load_wall(pieces)   # _settle re-seats at frame 40
+		for _i in range(54):
 			await get_tree().process_frame
 		var art_node: Node3D = null
 		for n in _placed:
 			if is_instance_valid(n) and n is Node3D and not str(n.get_meta("token", "")).begins_with("station_"):
 				art_node = n
-		var present := false
-		var base_y := 0.0
+		var box1: AABB = _world_aabb(art_node) if art_node != null else AABB()
+		var present := box1.size.x > 0.001 or box1.size.y > 0.001 or box1.size.z > 0.001   # flat quads have ~0 height but still render
+		var base_y: float = box1.position.y
 		var cap_top: float = top_h
 		var art_w := 0.0
 		var cap_w: float = float((pair["config"] as Dictionary).get("cap_meters", 0.0))
-		var verdict := "missing"
-		if art_node != null:
-			var box := _world_aabb(art_node)
-			present = box.size.y > 0.001 and box.size.x > 0.001
-			base_y = box.position.y
+		if present and art_node != null:
+			art_w = maxf(box1.size.x, box1.size.z)   # footprint the cap must cover (early, post-settle)
 			cap_top = _stack_top(0.0, 0.0, art_node)
-			if present:
-				art_w = maxf(box.size.x, box.size.z)   # the footprint the cap must cover
-				var gap := base_y - cap_top
-				if gap < -0.06:
-					verdict = "embedded"
-				elif gap > 0.08:
-					verdict = "floating"
-				else:
-					verdict = "ok"
 		_camera.position = Vector3(0.0, cap_top + 0.4, 6.0)
 		for _i in range(3):
 			await get_tree().process_frame
 		await RenderingServer.frame_post_draw
 		var img := get_viewport().get_texture().get_image()
 		img.save_png("user://prop_shots/%s.png" % art)
-		var fit := true   # does the footprint fit the cap (horizontal), independent of seating
+		for _i in range(40):   # measure AGAIN later: an animating artifact (grows over time) can't seat on a static cap
+			await get_tree().process_frame
+		var box2: AABB = _world_aabb(art_node) if art_node != null else AABB()
+		var stable := absf(maxf(box2.size.x, box2.size.z) - maxf(box1.size.x, box1.size.z)) < 0.25 and absf(box2.size.y - box1.size.y) < 0.5
+		var gap := base_y - cap_top
+		var verdict := "missing"
+		if present:
+			if not stable:
+				verdict = "animating"            # grows over time -> no stable form for a static plinth
+			elif gap < -0.06:
+				verdict = "embedded"
+			elif gap > 0.08:
+				verdict = "floating"
+			else:
+				verdict = "ok"
+		var fit := true   # footprint fits the cap (horizontal), independent of seating
 		if cap_w > 0.0 and art_w > 0.0:
 			fit = art_w <= cap_w + 0.06
 		report.append({
-			"artifact": art, "plinth": pair["plinth_token"], "present": present,
+			"artifact": art, "plinth": pair["plinth_token"], "present": present, "stable": stable,
 			"base_y": snappedf(base_y, 0.01), "cap_top": snappedf(cap_top, 0.01),
-			"gap": snappedf(base_y - cap_top, 0.01), "verdict": verdict,
+			"gap": snappedf(gap, 0.01), "verdict": verdict,
 			"art_w": snappedf(art_w, 0.01), "cap_w": snappedf(cap_w, 0.01), "fit": fit,
 		})
-		print("VALIDATE ", art, " -> ", verdict, "  gap=", snappedf(base_y - cap_top, 0.01), "  fit=", fit, "  (art ", snappedf(art_w, 0.01), " / cap ", snappedf(cap_w, 0.01), ")")
+		print("VALIDATE ", art, " -> ", verdict, "  gap=", snappedf(gap, 0.01), "  stable=", stable, "  fit=", fit)
 	var f := FileAccess.open("user://prop_shots/_report.json", FileAccess.WRITE)
 	if f:
 		f.store_string(JSON.stringify(report, "\t"))

@@ -4,24 +4,24 @@
   "pieces": [
     {
       "token": "station_wall",
-      "x": 4.0,
+      "x": 3.5,
       "y": 0.0,
       "z": 0.0,
       "wall": true,
       "config": {
-        "width_cells": 8,
+        "width_cells": 7,
         "height": 4.0,
         "panel_cells": 2
       }
     },
     {
       "token": "station_panel",
-      "x": 4.0,
+      "x": 3.5,
       "y": 2.5,
       "z": 0.13,
       "wall": true,
       "config": {
-        "width_cells": 4,
+        "width_cells": 3,
         "header": "RECURSIVETREES",
         "lines": []
       }
@@ -62,25 +62,6 @@
       "x": 4.54,
       "y": 1.2,
       "z": 1.74,
-      "wall": false
-    },
-    {
-      "token": "station_plinth",
-      "x": 6.43,
-      "y": 0.0,
-      "z": 1.4,
-      "wall": false,
-      "config": {
-        "top_height": 1.2,
-        "cap_meters": 0.3,
-        "caption_text": "small_subdivision_cube"
-      }
-    },
-    {
-      "token": "small_subdivision_cube",
-      "x": 6.43,
-      "y": 1.2,
-      "z": 1.4,
       "wall": false
     }
   ]

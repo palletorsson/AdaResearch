@@ -108,6 +108,16 @@ def main():
         lv = float((live.get(p) or {}).get("base_m", 0.0) or 0.0)
         return max(st, lv)
 
+    # artifacts --validate-props found don't SEAT on a static plinth are kept OFF the walls — the
+    # held-gate routes them to the floor. The test is seating (sunk in, or never renders), NOT
+    # animation: an "animating but seated" artifact (gap ~0) is fine on a wall — it's just alive.
+    nofit = set()
+    vrep = os.path.join(ROOT, "commons", "data", "prop_validation_report.json")
+    if os.path.exists(vrep):
+        for r in json.load(open(vrep, encoding="utf-8")):
+            if (not r.get("present", True)) or float(r.get("gap", 0) or 0) < -0.06:
+                nofit.add(r.get("artifact"))
+
     emb = {}
     if a.curve:
         import numpy as np
@@ -164,7 +174,7 @@ def main():
             for _, tier, art in groups[cn]:
                 # the tier proposes HELD, but the prop must actually FIT: only base <= 3m goes on a
                 # wall; anything bigger (a 40m koch curve tiered "medium") is a WORLD, on the floor.
-                if tier in ("small", "medium") and base(art) <= 3.0:
+                if tier in ("small", "medium") and base(art) <= 3.0 and art not in nofit:
                     held.append(art)
                 else:
                     worlds.append(art)
