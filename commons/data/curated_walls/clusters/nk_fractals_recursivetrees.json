@@ -1,0 +1,87 @@
+{
+  "name": "nk_fractals_recursivetrees",
+  "source": "auto by lay_necklace --concepts (cap-fit + wall-clearance)",
+  "pieces": [
+    {
+      "token": "station_wall",
+      "x": 4.0,
+      "y": 0.0,
+      "z": 0.0,
+      "wall": true,
+      "config": {
+        "width_cells": 8,
+        "height": 4.0,
+        "panel_cells": 2
+      }
+    },
+    {
+      "token": "station_panel",
+      "x": 4.0,
+      "y": 2.5,
+      "z": 0.13,
+      "wall": true,
+      "config": {
+        "width_cells": 4,
+        "header": "RECURSIVETREES",
+        "lines": []
+      }
+    },
+    {
+      "token": "station_plinth",
+      "x": 1.5,
+      "y": 0.0,
+      "z": 1.9,
+      "wall": false,
+      "config": {
+        "top_height": 1.2,
+        "cap_meters": 2.6,
+        "caption_text": "cube_desk"
+      }
+    },
+    {
+      "token": "cube_desk",
+      "x": 1.5,
+      "y": 1.2,
+      "z": 1.9,
+      "wall": false
+    },
+    {
+      "token": "station_plinth",
+      "x": 4.54,
+      "y": 0.0,
+      "z": 1.74,
+      "wall": false,
+      "config": {
+        "top_height": 1.2,
+        "cap_meters": 2.28,
+        "caption_text": "recursive_tree_2"
+      }
+    },
+    {
+      "token": "recursive_tree_2",
+      "x": 4.54,
+      "y": 1.2,
+      "z": 1.74,
+      "wall": false
+    },
+    {
+      "token": "station_plinth",
+      "x": 6.43,
+      "y": 0.0,
+      "z": 1.4,
+      "wall": false,
+      "config": {
+        "top_height": 1.2,
+        "cap_meters": 0.3,
+        "caption_text": "small_subdivision_cube"
+      }
+    },
+    {
+      "token": "small_subdivision_cube",
+      "x": 6.43,
+      "y": 1.2,
+      "z": 1.4,
+      "wall": false
+    }
+  ]
+}

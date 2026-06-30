@@ -98,9 +98,15 @@ def main():
     spread = {d["pearls"][i]: d["spread"][i] for i in range(n)}
 
     sz = json.load(open(os.path.join(ROOT, "commons", "data", "artifact_sizes.json"), encoding="utf-8")).get("sizes", {})
+    live_path = os.path.join(ROOT, "commons", "data", "artifact_sizes_live.json")
+    live = (json.load(open(live_path, encoding="utf-8")).get("sizes", {}) if os.path.exists(live_path) else {})
 
     def base(p):
-        return float((sz.get(p) or {}).get("base_m", 1.0) or 1.0)
+        # live --validate-props footprint only ever GROWS the static size (catches the
+        # under-measurement that fooled the gate); never shrinks, so a broken under-measure is ignored.
+        st = float((sz.get(p) or {}).get("base_m", 1.0) or 1.0)
+        lv = float((live.get(p) or {}).get("base_m", 0.0) or 0.0)
+        return max(st, lv)
 
     emb = {}
     if a.curve:

@@ -1,0 +1,49 @@
+{
+  "name": "nk_fractals_synthesis",
+  "source": "auto by lay_necklace --concepts (cap-fit + wall-clearance)",
+  "pieces": [
+    {
+      "token": "station_wall",
+      "x": 2.0,
+      "y": 0.0,
+      "z": 0.0,
+      "wall": true,
+      "config": {
+        "width_cells": 4,
+        "height": 4.0,
+        "panel_cells": 2
+      }
+    },
+    {
+      "token": "station_panel",
+      "x": 2.0,
+      "y": 2.5,
+      "z": 0.13,
+      "wall": true,
+      "config": {
+        "width_cells": 3,
+        "header": "SYNTHESIS",
+        "lines": []
+      }
+    },
+    {
+      "token": "station_plinth",
+      "x": 1.5,
+      "y": 0.0,
+      "z": 1.4,
+      "wall": false,
+      "config": {
+        "top_height": 1.2,
+        "cap_meters": 0.94,
+        "caption_text": "strange_attractors"
+      }
+    },
+    {
+      "token": "strange_attractors",
+      "x": 1.5,
+      "y": 1.2,
+      "z": 1.4,
+      "wall": false
+    }
+  ]
+}
