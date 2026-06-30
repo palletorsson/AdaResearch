@@ -98,8 +98,8 @@ func _ready() -> void:
 	if not caps.is_empty():
 		_run_capture(caps)   # headless batch render of curated walls -> user://wall_shots/
 		return
-	if OS.get_cmdline_user_args().has("--validate-props"):
-		_run_validate_props()   # one plinth+artifact per held item -> user://prop_shots/ + verdicts
+	if OS.get_cmdline_user_args().has("--validate-props") or OS.get_cmdline_user_args().has("--validate-curated"):
+		_run_validate_props()   # one plinth+artifact per held item -> user://prop_shots[_curated]/ + verdicts
 
 
 func _load_data() -> void:
@@ -1182,8 +1182,10 @@ func _run_validate_props() -> void:
 	const W := 900
 	const H := 1100
 	get_window().size = Vector2i(W, H)
-	DirAccess.make_dir_recursive_absolute("user://prop_shots")
-	var pairs := _gather_validation_pairs()
+	var curated := OS.get_cmdline_user_args().has("--validate-curated")
+	var outdir := "user://prop_shots_curated" if curated else "user://prop_shots"
+	DirAccess.make_dir_recursive_absolute(outdir)
+	var pairs := (_gather_curated_pairs() if curated else _gather_validation_pairs())
 	var report: Array = []
 	for pair in pairs:
 		var art: String = pair["art"]
@@ -1213,7 +1215,7 @@ func _run_validate_props() -> void:
 			await get_tree().process_frame
 		await RenderingServer.frame_post_draw
 		var img := get_viewport().get_texture().get_image()
-		img.save_png("user://prop_shots/%s.png" % art)
+		img.save_png("%s/%s.png" % [outdir, art])
 		for _i in range(40):   # measure AGAIN later: an animating artifact (grows over time) can't seat on a static cap
 			await get_tree().process_frame
 		var box2: AABB = _world_aabb(art_node) if art_node != null else AABB()
@@ -1238,11 +1240,11 @@ func _run_validate_props() -> void:
 			"gap": snappedf(gap, 0.01), "verdict": verdict,
 			"art_w": snappedf(art_w, 0.01), "cap_w": snappedf(cap_w, 0.01), "fit": fit,
 		})
+		var rf := FileAccess.open("%s/_report.json" % outdir, FileAccess.WRITE)   # incremental: crash-safe over a long run
+		if rf:
+			rf.store_string(JSON.stringify(report, "\t"))
+			rf.close()
 		print("VALIDATE ", art, " -> ", verdict, "  gap=", snappedf(gap, 0.01), "  stable=", stable, "  fit=", fit)
-	var f := FileAccess.open("user://prop_shots/_report.json", FileAccess.WRITE)
-	if f:
-		f.store_string(JSON.stringify(report, "\t"))
-		f.close()
 	print("VALIDATE done: ", report.size(), " props")
 	get_tree().quit()
 
@@ -1280,6 +1282,40 @@ func _gather_validation_pairs() -> Array:
 			seen[tok] = true
 			var key := "%.1f_%.1f" % [float((p as Dictionary).get("x", 0.0)), float((p as Dictionary).get("z", 0.0))]
 			var plinth: Dictionary = plinth_at.get(key, {})
+			pairs.append({
+				"art": tok,
+				"plinth_token": str(plinth.get("token", "station_plinth")),
+				"config": plinth.get("config", {}),
+			})
+	return pairs
+
+
+func _gather_curated_pairs() -> Array:
+	# Each plinth/micropod-HELD artifact across the hand-curated forces+fractals spine walls
+	# (first placement wins). Stage-mounted walk-in WORLDS are skipped — seating is a held question.
+	var pairs: Array = []
+	var seen := {}
+	for mapname in _spine_walls.keys():
+		var entry: Dictionary = _spine_walls[mapname]
+		if not (str(entry.get("sequence", "")) in ["forces", "fractals"]):
+			continue
+		var pieces: Array = entry.get("pieces", [])
+		var plinth_at := {}
+		for p in pieces:
+			var tok := str((p as Dictionary).get("token", ""))
+			if tok.begins_with("station_plinth") or tok == "station_micropod":
+				plinth_at["%.1f_%.1f" % [float((p as Dictionary).get("x", 0.0)), float((p as Dictionary).get("z", 0.0))]] = p
+		for p in pieces:
+			var tok := str((p as Dictionary).get("token", ""))
+			if tok.begins_with("station_") or bool((p as Dictionary).get("wall", false)):
+				continue
+			if seen.has(tok):
+				continue
+			var key := "%.1f_%.1f" % [float((p as Dictionary).get("x", 0.0)), float((p as Dictionary).get("z", 0.0))]
+			if not plinth_at.has(key):
+				continue   # not on a plinth/micropod (a stage world, or unmounted) -> not a held seating question
+			seen[tok] = true
+			var plinth: Dictionary = plinth_at[key]
 			pairs.append({
 				"art": tok,
 				"plinth_token": str(plinth.get("token", "station_plinth")),
