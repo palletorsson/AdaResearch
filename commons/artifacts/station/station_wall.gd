@@ -30,6 +30,9 @@ const HangarKit := preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 @export_group("Style")
 ## "panel" (inset plates per cell) | "ribbed" (vertical ribs) | "perforated" (vent hole grid).
 @export var panel_style: String = "panel"
+## Cells per panel face. 1 = a plate every metre (busy on long walls); higher groups cells into
+## fewer, larger plates (seams land on panel boundaries to match).
+@export var panel_cells: int = 1
 ## Embed a small framed readout screen in the upper centre.
 @export var screen_slot: bool = false
 ## Readout header + lines (2D-in-3D screen text). The composer fills these with the curated set.
@@ -101,6 +104,7 @@ func _read_metadata_overrides() -> void:
 	if has_meta("config_end_cap"): end_cap = _b(get_meta("config_end_cap"))
 	if has_meta("config_height"): height = float(str(get_meta("config_height")))
 	if has_meta("config_panel_style"): panel_style = str(get_meta("config_panel_style")).to_lower()
+	if has_meta("config_panel_cells"): panel_cells = maxi(1, int(str(get_meta("config_panel_cells"))))
 	if has_meta("config_screen_slot"): screen_slot = _b(get_meta("config_screen_slot"))
 	if has_meta("config_screen_header"): screen_header = str(get_meta("config_screen_header"))
 	if has_meta("config_screen_lines"):
@@ -248,10 +252,13 @@ func _build_cell_panels(n: int, w: float, h: float, foot: float) -> void:
 	var imat := _mat(panel_color.darkened(0.08))
 	var inset := 0.10
 	var ph: float = h - RAIL_H - foot - inset * 2.0
-	var pw: float = CELL - inset * 2.0
+	# Group cells into fewer, larger plates: count panels by panel_cells, divide w evenly so they fit.
+	var count: int = maxi(1, int(round(w / (float(maxi(panel_cells, 1)) * CELL))))
+	var step: float = w / float(count)
+	var pw: float = step - inset * 2.0
 	var t := 0.03
-	for i in range(n):
-		var cx: float = -w * 0.5 + (float(i) + 0.5) * CELL
+	for i in range(count):
+		var cx: float = -w * 0.5 + (float(i) + 0.5) * step
 		var cy: float = foot + inset + ph * 0.5
 		# the raised plate...
 		add_child(_box(Vector3(cx, cy, FRONT_Z + t * 0.5), Vector3(pw, ph, t), pmat))
@@ -285,8 +292,11 @@ func _build_perforation(n: int, w: float, h: float, foot: float) -> void:
 func _build_seams(n: int, w: float, h: float, foot: float) -> void:
 	var smat := HangarKit.worn_metal(panel_color)
 	var sh: float = h - RAIL_H - foot
-	for i in range(1, n):
-		var sx: float = -w * 0.5 + float(i) * CELL
+	# Seams on panel boundaries (match _build_cell_panels' grouping), not every metre.
+	var count: int = maxi(1, int(round(w / (float(maxi(panel_cells, 1)) * CELL))))
+	var step: float = w / float(count)
+	for i in range(1, count):
+		var sx: float = -w * 0.5 + float(i) * step
 		add_child(_box(Vector3(sx, foot + sh * 0.5, FRONT_Z + 0.03), Vector3(0.04, sh, 0.04), smat))
 
 
