@@ -29,6 +29,11 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.decomposition import TruncatedSVD
 from sklearn.preprocessing import normalize
 
+# @identity carries the artifact's authored CONCEPT (essence, critical_parameter, ...); fold it into
+# the card so ontology embeds what a thing IS, not just its registry shell. tools/ is on sys.path
+# when run as a script.
+from qfep_signal import build_critical_index
+
 REPO = Path(__file__).resolve().parent.parent
 REGISTRY_DIR = REPO / "commons" / "artifacts" / "registry"
 OUT_DIR = REPO / "doc" / "atlas"
@@ -125,6 +130,10 @@ def build_card(entry: dict) -> str:
     tags = entry.get("tags")
     if isinstance(tags, list) and tags:
         chunks.append(f"tags: {' '.join(str(t) for t in tags)}")
+    # the authored concept (what it IS) - folded in once, balanced against the registry shell.
+    ident = (build_critical_index().get(name) or {}).get("crit_text", "").strip()
+    if ident:
+        chunks.append(f"identity: {ident[:800]}")
     return " | ".join(chunks)
 
 
