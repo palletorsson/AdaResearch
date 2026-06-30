@@ -1066,25 +1066,34 @@ func _clean_loaded(n: Node) -> void:
 func _capture_targets() -> Array:
 	var one := ""
 	var all := false
+	var clusters := false
 	for a in OS.get_cmdline_user_args():
 		if a == "--capture-all":
 			all = true
+		elif a == "--capture-clusters":
+			clusters = true   # the auto-curated concept walls under curated_walls/clusters/
 		elif a == "--capture-props":
 			return ["_NewProps"]   # code-built showcase of the new station prop kinds
 		elif a.begins_with("--capture="):
 			one = a.substr(a.find("=") + 1)
 	if one != "":
 		return [one]
+	if clusters:
+		return _list_json_basenames(CLUSTERS_DIR)
 	if all:
-		var out: Array = []
-		var d := DirAccess.open(CURATED_WALLS_DIR)
-		if d:
-			for f in d.get_files():
-				if str(f).ends_with(".json"):
-					out.append(str(f).get_basename())
-		out.sort()
-		return out
+		return _list_json_basenames(CURATED_WALLS_DIR)
 	return []
+
+
+func _list_json_basenames(dir_path: String) -> Array:
+	var out: Array = []
+	var d := DirAccess.open(dir_path)
+	if d:
+		for f in d.get_files():
+			if str(f).ends_with(".json"):
+				out.append(str(f).get_basename())
+	out.sort()
+	return out
 
 
 func _capture_extent(pieces: Array) -> Vector2:
@@ -1121,8 +1130,17 @@ func _run_capture(targets: Array) -> void:
 			pieces = (_spine_walls[mapname] as Dictionary).get("pieces", [])
 			ext = Vector2.ZERO
 		else:
-			print("CAPTURE skip (no wall): ", mapname)
-			continue
+			# Not a spine wall — maybe an auto-curated cluster (curated_walls/clusters/<name>.json).
+			var cpath := "%s/%s.json" % [CLUSTERS_DIR, mapname]
+			if not FileAccess.file_exists(cpath):
+				print("CAPTURE skip (no wall): ", mapname)
+				continue
+			var cd: Variant = JSON.parse_string(FileAccess.get_file_as_string(cpath))
+			if not (cd is Dictionary) or not (cd as Dictionary).has("pieces"):
+				print("CAPTURE skip (bad cluster): ", mapname)
+				continue
+			pieces = (cd as Dictionary)["pieces"]
+			ext = Vector2.ZERO
 		_load_wall(pieces)
 		for _i in range(72):   # deferred geometry + _settle_loaded (40f) + margin
 			await get_tree().process_frame
