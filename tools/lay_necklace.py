@@ -25,24 +25,30 @@ GAP = 2
 TIER_ORDER = {"small": 0, "medium": 1, "large": 2, "applied": 3}
 
 
-def auto_cluster(seq, cname, held):
-    """The wall config: mount a concept's HELD (small/medium) artifacts on a station_wall - each on a
-    plinth in front of a backdrop - and write commons/data/curated_walls/clusters/nk_<seq>_<slug>.json.
-    Returns (slug, wall_width). The map then carries a cluster:<slug> token; cluster_resolver spawns it."""
+def auto_cluster(seq, cname, held, base_of):
+    """The wall config: mount a concept's HELD (small/medium) artifacts on a station_wall, each on its
+    own plinth in front of a backdrop. CORRECTNESS the curator must guarantee: (1) the plinth cap FITS
+    the artifact - cap_meters = its measured base + margin, so nothing overhangs; (2) the artifact never
+    HITS the wall - the plinth sits far enough forward to clear the backdrop by its own half-depth;
+    (3) plinths don't collide - spaced by footprint. Writes clusters/nk_<seq>_<slug>.json."""
     slug = "nk_%s_%s" % (seq, (re.sub(r"[^a-z0-9]+", "_", cname.lower()).strip("_") or "concept"))
-    n = max(1, len(held))
-    wall_w = min(12, max(4, n * 2 + 2))
+    plinths, px, last_b = [], 1.5, 0.0
+    for art in held:
+        b = base_of(art)
+        if last_b:
+            px += last_b / 2 + b / 2 + 0.8                 # (3) space by footprint - no collision
+        zp = round(max(1.4, b / 2 + 0.7), 2)                # (2) clear the backdrop by half-depth + buffer
+        plinths.append({"token": "station_plinth", "x": round(px, 2), "y": 0.0, "z": zp, "wall": False,
+                        "config": {"top_height": 1.2, "cap_meters": round(b + 0.2, 2), "caption_text": art}})
+        plinths.append({"token": art, "x": round(px, 2), "y": 1.2, "z": zp, "wall": False})  # (1) cap fits
+        last_b = b
+    wall_w = max(4, int(math.ceil(px + 1.5)))
     pieces = [{"token": "station_wall", "x": round(wall_w / 2.0, 1), "y": 0.0, "z": 0.0, "wall": True,
-               "config": {"width_cells": wall_w, "height": 4.0, "panel_cells": max(2, wall_w // 4)}}]
-    for i, art in enumerate(held):
-        px = round(1.5 + i * (wall_w - 3) / max(1, n - 1), 1)
-        pieces.append({"token": "station_plinth", "x": px, "y": 0.0, "z": 1.4, "wall": False,
-                       "config": {"top_height": 1.2, "width_cells": 1, "depth_cells": 1, "caption_text": art}})
-        pieces.append({"token": art, "x": px, "y": 1.2, "z": 1.4, "wall": False})
+               "config": {"width_cells": wall_w, "height": 4.0, "panel_cells": max(2, wall_w // 4)}}] + plinths
     cdir = os.path.join(ROOT, "commons", "data", "curated_walls", "clusters")
     os.makedirs(cdir, exist_ok=True)
-    json.dump({"name": slug, "source": "auto by lay_necklace --concepts", "pieces": pieces},
-              open(os.path.join(cdir, slug + ".json"), "w", encoding="utf-8"), indent=2)
+    json.dump({"name": slug, "source": "auto by lay_necklace --concepts (cap-fit + wall-clearance)",
+               "pieces": pieces}, open(os.path.join(cdir, slug + ".json"), "w", encoding="utf-8"), indent=2)
     return slug, wall_w
 
 
@@ -142,13 +148,20 @@ def main():
         BAY_W, BAY_D, PER_ROW = 14, 9, 3
         n_arts = 0
         for ci, cn in enumerate(corder):
-            held = [art for _, tier, art in groups[cn] if tier in ("small", "medium")][:4]
-            worlds = [art for _, tier, art in groups[cn] if tier in ("large", "applied")][:2]
+            held, worlds = [], []
+            for _, tier, art in groups[cn]:
+                # the tier proposes HELD, but the prop must actually FIT: only base <= 3m goes on a
+                # wall; anything bigger (a 40m koch curve tiered "medium") is a WORLD, on the floor.
+                if tier in ("small", "medium") and base(art) <= 3.0:
+                    held.append(art)
+                else:
+                    worlds.append(art)
+            held, worlds = held[:4], worlds[:3]
             row, col = ci // PER_ROW, ci % PER_ROW
             c = (PER_ROW - 1 - col) if (row % 2) else col           # serpentine
             bx, bz = MARGIN + c * BAY_W, MARGIN + row * BAY_D
             if held:
-                slug, _ = auto_cluster(a.seq, cn, held)
+                slug, _ = auto_cluster(a.seq, cn, held, base)
                 place(bx, bz, "cluster:%s" % slug)                   # HELD -> the wall config
                 n_arts += len(held)
             spine_xz.append((bx, bz))
