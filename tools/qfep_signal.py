@@ -17,11 +17,16 @@ PHASES = ["f_order", "oscillation", "e_entropy", "lambda_edge", "integration", "
 _IDENT_FIELDS = ["critical_parameter", "truth", "essence", "desire"]
 # An artifact's ROLE: 'content' (a real pearl) | 'ambient' (decoration, exclude from the order) |
 # 'container' (shows OTHER content - its ontology is its shell, not its content; needs a content tag).
+# Decoration-DESIRE language only (an artifact that wants to be unnoticed). NOT "ambient"/"atmosphere"
+# on their own - those catch real content that merely uses ambient *sound* (ruth_asawa, john_cage).
 _AMBIENT_KW = ("never dominant", "barely notice", "without asserting", "witness to", "marks the inhabited",
-               "always present but never", "set dressing", "atmospher", " ambient")
+               "always present but never", "set dressing")
 _CONTAINER_KW = ("subviewport", "renders the grid-state", "wall-mounted screen", "pixel-map",
                  "flattened beside", "2d representation", "renders nearby", "2d pixel-map")
 _ROLE_OVERRIDE = {"dark_sphere": "ambient", "science_screen": "container", "living_paper": "container"}
+# Confirmed CONTENT that tripped a keyword - the concept lives in their @identity (a curve, a wave,
+# a paradox); they should embed by it, not be excluded.
+_CONTENT_OVERRIDE = {"ruth_asawa_sculpture", "john_cage_tech_noir", "russell_paradox_workbench"}
 _CACHE = None
 
 
@@ -93,6 +98,9 @@ def build_critical_index():
 
     for t, r in _ROLE_OVERRIDE.items():          # curated truth wins
         idx.setdefault(t, {"phase": None, "phase_idx": None, "crit_text": "", "role": None})["role"] = r
+    for t in _CONTENT_OVERRIDE:                   # ...but confirmed content is never excluded
+        if t in idx:
+            idx[t]["role"] = None
 
     _CACHE = idx
     return idx
