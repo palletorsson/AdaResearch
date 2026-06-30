@@ -43,8 +43,14 @@ def auto_cluster(seq, cname, held, base_of):
         plinths.append({"token": art, "x": round(px, 2), "y": 1.2, "z": zp, "wall": False})  # (1) cap fits
         last_b = b
     wall_w = max(4, int(math.ceil(px + 1.5)))
+    # iteration: a concept TITLE on the backdrop (the walls were correct but anonymous - this makes
+    # each one say what concept it presents, the way a curated bay does).
+    title = re.sub(r"[_\s]+", " ", cname).strip().upper()[:42]
+    title_panel = {"token": "station_panel", "x": round(wall_w / 2.0, 1), "y": 2.5, "z": 0.13, "wall": True,
+                   "config": {"width_cells": max(3, wall_w // 2), "header": title, "lines": []}}
     pieces = [{"token": "station_wall", "x": round(wall_w / 2.0, 1), "y": 0.0, "z": 0.0, "wall": True,
-               "config": {"width_cells": wall_w, "height": 4.0, "panel_cells": max(2, wall_w // 4)}}] + plinths
+               "config": {"width_cells": wall_w, "height": 4.0, "panel_cells": max(2, wall_w // 4)}},
+              title_panel] + plinths
     cdir = os.path.join(ROOT, "commons", "data", "curated_walls", "clusters")
     os.makedirs(cdir, exist_ok=True)
     json.dump({"name": slug, "source": "auto by lay_necklace --concepts (cap-fit + wall-clearance)",
