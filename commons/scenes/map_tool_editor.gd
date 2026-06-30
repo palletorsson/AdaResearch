@@ -78,6 +78,9 @@ const COL_GCUBE := Color(0.50, 0.72, 0.58)   # structure cube while edit_grid is
 @export_group("Status (read-only)")
 ## Live readout of the loaded map — dimensions, counts, and edit mode.
 @export_multiline var status: String = "(load a map)"
+## Every artifact name in the loaded map (interactables + cluster wall pieces), one per line.
+## Click into the box, select, and copy. Regenerated on each Load (edits don't persist).
+@export_multiline var artifacts: String = "(load a map)"
 
 var _map: Dictionary = {}
 var _structure: Array = []
@@ -300,6 +303,7 @@ func _load() -> void:
 	_spawn(layers.get("utilities", []), "utility", COL_UTILITY, root)
 	_refresh_legend()
 	status = _status_line()
+	artifacts = _artifact_list_text()
 	notify_property_list_changed()
 	print("MapToolEditor: loaded '%s' (%d x %d)%s" % [map_name, _width, _depth, "  [edit_grid]" if edit_grid else ""])
 
@@ -342,6 +346,8 @@ func _spawn_cluster(token: String, x: int, z: int, root: Node) -> void:
 	var group := _box(Vector3(0.45, 0.45, 0.45), COL_CLUSTER)
 	group.name = "cluster_" + cname
 	add_child(group)
+	if root:
+		group.owner = root   # owned first so the wall pieces below can also be owned (selectable)
 	group.position = Vector3(x * _total, _height_at(x, z) * _total, z * _total)
 	group.rotation_degrees.y = _parse_rot(token, "interactable")
 	group.set_meta("token", token)
@@ -370,12 +376,55 @@ func _spawn_cluster(token: String, x: int, z: int, root: Node) -> void:
 				else:
 					sub = _box(Vector3(0.45, 0.7, 0.45), COL_CLUSTER.lightened(0.25))
 					sub.position = ploc + Vector3(0, 0.35, 0)
-				group.add_child(sub)   # not owned -> rides the anchor, not separately selectable
+				group.add_child(sub)
+				sub.name = (ptok.replace(":", "_") if ptok != "" else "piece")
+				sub.set_meta("token", ptok)
+				if root:
+					sub.owner = root   # selectable: click a wall piece to read its name in the inspector
 				_label(sub, ptok, COL_WALL, 0.32)
 	else:
 		push_warning("MapToolEditor: cluster file not found: " + path)
-	if root:
-		group.owner = root
+
+
+# Read a cluster file's piece tokens (the wall artifacts inside a cluster:<name>).
+func _cluster_piece_tokens(cname: String) -> Array:
+	var out: Array = []
+	var path := "%s/%s.json" % [CLUSTERS_DIR, cname]
+	if FileAccess.file_exists(path):
+		var d = JSON.parse_string(FileAccess.get_file_as_string(path))
+		if d is Dictionary:
+			for piece in d.get("pieces", []):
+				if piece is Dictionary:
+					var t := str(piece.get("token", "")).strip_edges()
+					if t != "":
+						out.append(t)
+	return out
+
+
+# Every artifact name in the loaded map (interactables + cluster pieces), unique + sorted — fills the
+# copyable "artifacts" inspector list. Bare tokens only (drops :rotation:y_offset).
+func _artifact_list_text() -> String:
+	var seen := {}
+	var inter: Variant = _map.get("layers", {}).get("interactables", [])
+	if inter is Array:
+		for row in inter:
+			if not (row is Array):
+				continue
+			for cell in row:
+				var t := str(cell).split("#")[0].strip_edges()
+				if t == "" or t == " ":
+					continue
+				if t.begins_with("cluster:"):
+					var cn := t.split(":")
+					var cname := str(cn[1]) if cn.size() > 1 else ""
+					seen["cluster: " + cname] = true
+					for pt in _cluster_piece_tokens(cname):
+						seen[pt] = true
+				else:
+					seen[t.split(":")[0]] = true   # bare token
+	var arr := seen.keys()
+	arr.sort()
+	return "\n".join(arr) if not arr.is_empty() else "(none)"
 
 
 func _add() -> void:
