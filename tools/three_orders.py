@@ -90,7 +90,19 @@ def compute(seq, min_pearls=8):
                     ped.append(t)
 
     id2vec, cards = _atlas()
-    pearls = [a for a in ped if a in id2vec]
+    cidx = build_critical_index()
+    # drop non-content artifacts: ambient = decoration (not a pearl); container = shows OTHER content,
+    # so its embedding is its shell not its content (a false ontological outlier until content-tagged).
+    excluded = {"ambient": [], "container": []}
+    pearls = []
+    for a in ped:
+        if a not in id2vec:
+            continue
+        role = cidx.get(a, {}).get("role")
+        if role in excluded:
+            excluded[role].append(a)
+        else:
+            pearls.append(a)
     if len(pearls) < min_pearls:
         return None
 
@@ -101,8 +113,6 @@ def compute(seq, min_pearls=8):
 
     # criticality reads each artifact's OWN @identity theory-claim (critical_parameter+truth+essence+
     # desire); only where there's no @identity do we fall back to the description card.
-    cidx = build_critical_index()
-
     def _ctext(a):
         t = cidx.get(a, {}).get("crit_text", "").strip()
         return t if t else cards.get(a, a.replace("_", " "))
@@ -135,7 +145,7 @@ def compute(seq, min_pearls=8):
 
     return {
         "seq": seq, "name": sd.get("name", seq), "n": len(pearls), "crit_cov": crit_cov,
-        "pearls": pearls,
+        "excluded": excluded, "pearls": pearls,
         "ped": [round(float(x), 3) for x in ped_r],
         "onto": [round(float(x), 3) for x in onto_r],
         "crit": [round(float(x), 3) for x in crit_r],

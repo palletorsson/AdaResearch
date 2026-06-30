@@ -15,6 +15,13 @@ import json, os, re, glob
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PHASES = ["f_order", "oscillation", "e_entropy", "lambda_edge", "integration", "relation", "synthesis"]
 _IDENT_FIELDS = ["critical_parameter", "truth", "essence", "desire"]
+# An artifact's ROLE: 'content' (a real pearl) | 'ambient' (decoration, exclude from the order) |
+# 'container' (shows OTHER content - its ontology is its shell, not its content; needs a content tag).
+_AMBIENT_KW = ("never dominant", "barely notice", "without asserting", "witness to", "marks the inhabited",
+               "always present but never", "set dressing", "atmospher", " ambient")
+_CONTAINER_KW = ("subviewport", "renders the grid-state", "wall-mounted screen", "pixel-map",
+                 "flattened beside", "2d representation", "renders nearby", "2d pixel-map")
+_ROLE_OVERRIDE = {"dark_sphere": "ambient", "science_screen": "container", "living_paper": "container"}
 _CACHE = None
 
 
@@ -33,7 +40,7 @@ def build_critical_index():
     idx = {}
 
     def ent(ln):
-        return idx.setdefault(ln, {"phase": None, "phase_idx": None, "crit_text": ""})
+        return idx.setdefault(ln, {"phase": None, "phase_idx": None, "crit_text": "", "role": None})
 
     # 1) registries: per-artifact qfep_connection prefix -> phase (+ its critical prose)
     for p in glob.glob(os.path.join(ROOT, "commons", "artifacts", "registry", "*.json")):
@@ -75,7 +82,17 @@ def build_critical_index():
                     if m:
                         bits.append(m.group(1).strip())
                 if bits:
-                    v["crit_text"] = (v["crit_text"] + " " + " ".join(bits)).strip()
+                    blob = " ".join(bits)
+                    v["crit_text"] = (v["crit_text"] + " " + blob).strip()
+                    low = blob.lower()
+                    if v["role"] is None:
+                        if any(k in low for k in _AMBIENT_KW):
+                            v["role"] = "ambient"
+                        elif any(k in low for k in _CONTAINER_KW):
+                            v["role"] = "container"
+
+    for t, r in _ROLE_OVERRIDE.items():          # curated truth wins
+        idx.setdefault(t, {"phase": None, "phase_idx": None, "crit_text": "", "role": None})["role"] = r
 
     _CACHE = idx
     return idx
