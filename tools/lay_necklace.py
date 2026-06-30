@@ -76,18 +76,30 @@ def main():
 
     if a.curve:
         import numpy as np
-        AMP, WAVELEN, DSCALE = 5, 13.0, a.dscale
-        cx = AMP + ALCOVE + MARGIN
-        s, last = 0.0, None
-        for p in spine:
-            if last is not None:
-                ev, lv = emb.get(p), emb.get(last)
-                dd = max(0.0, 1.0 - float(np.dot(ev, lv))) if (ev is not None and lv is not None) else 0.3
-                dists.append(dd)
-                s += max(DSCALE * dd, base(p) / 2 + base(last) / 2 + GAP)
-            x = cx + int(round(AMP * math.sin(s / WAVELEN * 2 * math.pi)))
-            spine_xz.append(place(x, 3 + int(round(s)), p))
-            last = p
+        import bisect
+        # arc-length between consecutive pearls = concept-distance + footprint clearance
+        cumS = [0.0]
+        for i in range(1, len(spine)):
+            a0, a1 = spine[i - 1], spine[i]
+            ev, lv = emb.get(a1), emb.get(a0)
+            dd = max(0.0, 1.0 - float(np.dot(ev, lv))) if (ev is not None and lv is not None) else 0.3
+            dists.append(dd)
+            cumS.append(cumS[-1] + max(a.dscale * dd, base(a1) / 2 + base(a0) / 2 + GAP))
+        total = cumS[-1] if cumS else 0.0
+        # FOLD: a sine that sweeps the full width and slowly descends - a space-filling serpentine.
+        # Parameterise by arc-length so distant concepts still sit far apart ALONG the folded path.
+        AMP, DROP = 8.0, 7.0
+        cxc = AMP + ALCOVE + MARGIN
+        pts, arc, phi = [(cxc, 3.0)], [0.0], 0.0
+        while arc[-1] < total + 3:
+            x0, z0 = cxc + AMP * math.sin(phi), 3.0 + (phi / (2 * math.pi)) * DROP
+            phi += 0.06
+            x1, z1 = cxc + AMP * math.sin(phi), 3.0 + (phi / (2 * math.pi)) * DROP
+            pts.append((x1, z1))
+            arc.append(arc[-1] + math.hypot(x1 - x0, z1 - z0))
+        for p, S in zip(spine, cumS):
+            k = min(bisect.bisect_left(arc, S), len(pts) - 1)
+            spine_xz.append(place(int(round(pts[k][0])), int(round(pts[k][1])), p))
     else:
         cx = ALCOVE + MARGIN
         z, lb = 2, 0.0
