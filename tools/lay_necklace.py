@@ -1,28 +1,35 @@
 #!/usr/bin/env python3
 """lay_necklace.py - the generator (#4): a sequence's three orders -> a 2D map.
 
-The whole pipeline closes here. three_orders gives the weighted optimized order + which pearls are
-SPINE (the three orders agree) vs BRANCH (they fight). The size oracle (commons/data/artifact_sizes
-.json, the same one gaze_ride uses) gives footprints. We lay the SPINE as a central corridor from
-spawn to teleport, each pearl spaced by its own size; the BRANCHES become ALCOVES flanking the
-corridor at their order position - the side-pools the 1D line couldn't hold. The map is the
-optimized outcome of the pedagogical / ontological / critical orders, passed through the spatial gate.
+three_orders gives the weighted optimized order + SPINE (orders agree) vs BRANCH (orders fight); the
+size oracle gives footprints. Spine -> a path spawn->teleport spaced by size; branches -> alcoves.
 
-Usage:  python tools/lay_necklace.py <sequence> [--max N] [--wp 1 --wo 1 --wc 1]
+  default  : a straight central corridor.
+  --curve  : a SINE-MEANDER where the arc-length between consecutive pearls = their concept-distance
+             (atlas embedding) AND their footprint clearance. The 1D order becomes a 2D curve whose
+             geometry shows where the order strains - two conceptually distant pearls forced adjacent
+             get a long stretch; big pearls (large/applied tier) claim more arc than small ones.
+
+Usage:  python tools/lay_necklace.py <sequence> [--curve] [--max N] [--wp/--wo/--wc W]
 Writes  commons/maps/<Seq>_Necklace/map_data.json
 """
-import json, os, sys, argparse
+import json, os, sys, argparse, math
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from three_orders import compute
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BRANCH = 0.45
+ALCOVE = 4
+MARGIN = 3
+GAP = 2
 
 
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("seq")
-    ap.add_argument("--max", type=int, default=16, help="cap pearls placed (keeps the corridor bounded)")
+    ap.add_argument("--curve", action="store_true", help="sine-meander spaced by concept-distance")
+    ap.add_argument("--dscale", type=float, default=11.0, help="cells per unit concept-distance (stretch)")
+    ap.add_argument("--max", type=int, default=16)
     ap.add_argument("--wp", type=float, default=1.0)
     ap.add_argument("--wo", type=float, default=1.0)
     ap.add_argument("--wc", type=float, default=1.0)
@@ -44,68 +51,93 @@ def main():
     def base(p):
         return float((sz.get(p) or {}).get("base_m", 1.0) or 1.0)
 
-    ALCOVE = 4          # how far an alcove sits off the corridor centre
-    MARGIN = 3          # corridor half-width clearance
-    GAP = 2             # walk gap between spine pearls (cells)
-    cx = ALCOVE + MARGIN
-    W = cx + ALCOVE + MARGIN + 1
+    emb = {}
+    if a.curve:
+        import numpy as np
+        z = np.load(os.path.join(ROOT, "doc", "atlas", "artifact_embeddings.npz"), allow_pickle=True)
+        emb = {str(i): v for i, v in zip(z["ids"], z["vectors"])}
 
     occupied = set()
+    cells = {}
 
-    def place(x, z, grid, token):
-        while (x, z) in occupied:                    # nudge +z until the exact cell is free
+    def place(x, z, tok):
+        x = max(x, 0)
+        z = max(z, 0)
+        while (x, z) in occupied:
             z += 1
         occupied.add((x, z))
-        grid.setdefault(z, {})[x] = token
-        return z
+        cells.setdefault(z, {})[x] = tok
+        return (x, z)
 
-    cells = {}        # z -> {x: token}
-    spine_zs = []
-    z = 2
+    spine = [p for p in pearls if spread[p] < BRANCH]
+    branch = [p for p in pearls if spread[p] >= BRANCH]
+    spine_xz = []
+    dists = []
+
+    if a.curve:
+        import numpy as np
+        AMP, WAVELEN, DSCALE = 5, 13.0, a.dscale
+        cx = AMP + ALCOVE + MARGIN
+        s, last = 0.0, None
+        for p in spine:
+            if last is not None:
+                ev, lv = emb.get(p), emb.get(last)
+                dd = max(0.0, 1.0 - float(np.dot(ev, lv))) if (ev is not None and lv is not None) else 0.3
+                dists.append(dd)
+                s += max(DSCALE * dd, base(p) / 2 + base(last) / 2 + GAP)
+            x = cx + int(round(AMP * math.sin(s / WAVELEN * 2 * math.pi)))
+            spine_xz.append(place(x, 3 + int(round(s)), p))
+            last = p
+    else:
+        cx = ALCOVE + MARGIN
+        z, lb = 2, 0.0
+        for p in spine:
+            z += max(1, int(round(lb / 2 + base(p) / 2))) + GAP
+            spine_xz.append(place(cx, z, p))
+            z = spine_xz[-1][1]
+            lb = base(p)
+
     side = 1
-    last_base = 0.0
-    n_spine = n_branch = 0
-    for p in pearls:
-        if spread[p] < BRANCH:                       # SPINE -> the corridor, spaced by size
-            z += max(1, int(round(last_base / 2 + base(p) / 2))) + GAP
-            z = place(cx, z, cells, p)
-            spine_zs.append(z)
-            last_base = base(p)
-            n_spine += 1
-        else:                                        # BRANCH -> an alcove beside the corridor
-            zz = spine_zs[-1] if spine_zs else z
-            place(cx + side * ALCOVE, zz, cells, p)
-            side = -side
-            n_branch += 1
+    for i, p in enumerate(branch):
+        anchor = spine_xz[min(len(spine_xz) - 1, i * len(spine_xz) // max(1, len(branch)))] if spine_xz else (cx, 3)
+        place(anchor[0] + side * ALCOVE, anchor[1], p)
+        side = -side
 
-    depth = z + 4
+    # size the grid to the bounding box, shift so everything sits inside the margin
+    allx = [x for row in cells.values() for x in row]
+    allz = list(cells)
+    minx, maxx = min(allx), max(allx)
+    shift = MARGIN - minx
+    W = (maxx - minx) + 2 * MARGIN + 1
+    depth = max(allz) + MARGIN + 2
     inter = [[" "] * W for _ in range(depth)]
     struct = [["1"] * W for _ in range(depth)]
     util = [[" "] * W for _ in range(depth)]
-    for zz, row in cells.items():
-        if 0 <= zz < depth:
-            for x, tok in row.items():
-                if 0 <= x < W:
-                    inter[zz][x] = tok
+    for z, row in cells.items():
+        for x, tok in row.items():
+            inter[z][x + shift] = tok
 
-    util[1][cx] = "s"                                # spawn front-centre, facing up the corridor
-    tz = depth - 2
-    util[tz][cx] = "t"                               # teleport at the far end, on a void (convention)
-    struct[tz][cx] = "0"
+    sx = (spine_xz[0][0] + shift) if spine_xz else W // 2
+    ex, ez = (spine_xz[-1][0] + shift, spine_xz[-1][1]) if spine_xz else (W // 2, depth - 3)
+    util[1][min(sx, W - 1)] = "s"
+    tz = min(ez + 1, depth - 2)
+    util[tz][min(ex, W - 1)] = "t"
+    struct[tz][min(ex, W - 1)] = "0"
 
+    stretch = ("  |  curve: arc-length = concept-distance, %.2f..%.2f" % (min(dists), max(dists))) if dists else ""
     md = {
         "layers": {"interactables": inter, "structure": struct, "utilities": util},
         "lighting": {"ambient_color": [0.6, 0.62, 0.68], "ambient_energy": 1.2,
                      "directional_light": {"color": [1.0, 0.97, 0.92], "direction": [-0.4, -0.8, -0.3],
                                            "enabled": True, "energy": 1.0}},
         "map_info": {
-            "description": "Generated by lay_necklace.py from the three orders of '%s' (weights p%.1f o%.1f c%.1f). "
-                           "Spine pearls (the orders agree) form the central corridor spawn->teleport, spaced by size; "
-                           "branch pearls (the orders fight) sit in alcoves flanking it - the side-pools the 1D line "
-                           "couldn't hold." % (a.seq, a.wp, a.wo, a.wc),
+            "description": "Generated by lay_necklace.py --%s from the three orders of '%s'. Spine -> the "
+                           "%s; branches -> alcoves. Pearls sized by footprint (= the small/medium/large tier)."
+                           % ("curve" if a.curve else "corridor", a.seq,
+                              "sine-meander (arc-length = concept-distance + footprint)" if a.curve else "corridor"),
             "dimensions": {"width": float(W), "depth": float(depth), "max_height": 3.0},
             "format": "json", "lookup_name": "%s_Necklace" % a.seq.capitalize(),
-            "name": "%s Necklace" % d.get("name", a.seq), "title": "%s - necklace" % a.seq, "version": "1.0"},
+            "name": "%s Necklace" % d.get("name", a.seq), "title": "%s - necklace" % a.seq, "version": "1.1"},
         "settings": {"background": {"color": [0.18, 0.2, 0.28], "type": "sky"},
                      "cube_size": 1.0, "enable_physics": True, "gutter": 0.0, "show_grid": True},
         "utility_definitions": {"t": {"description": "Return to the lab", "name": "Exit",
@@ -115,8 +147,7 @@ def main():
     out = os.path.join(ROOT, "commons", "maps", name)
     os.makedirs(out, exist_ok=True)
     json.dump(md, open(os.path.join(out, "map_data.json"), "w", encoding="utf-8"), indent="\t")
-    print("wrote %s : %dx%d  |  %d spine (corridor) + %d branch (alcoves)  of %d placed (%d in sequence)"
-          % (name, W, depth, n_spine, n_branch, len(pearls), n))
+    print("wrote %s : %dx%d  |  %d spine + %d alcoves%s" % (name, W, depth, len(spine), len(branch), stretch))
 
 
 if __name__ == "__main__":
