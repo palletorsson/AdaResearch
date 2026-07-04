@@ -1,5 +1,19 @@
 {
-  "_readme": "The human writing pass for the noise tutorial, drafted from rulings R-007 (blob aesthetics — the 2.5 universe, the gauge, the export) and R-011 (P1a spectrum-first, P2c Bernini as knowing performance, P4a spend the threshold, P5c ruled truths — two ghost-proposed truth-sentences await Palle's wording before inscription into the .gd files). Merged over the auto-assembled skeleton by tools/build_critical_tutorial.py (apply_authored) — regeneration never clobbers this file.",
+  "_readme": "The human writing pass for the noise tutorial, drafted from rulings R-007 (blob aesthetics — the 2.5 universe, the gauge, the export), R-011 (P1a spectrum-first, P2c Bernini as knowing performance, P4a spend the threshold, P5c ruled truths — two ghost-proposed truth-sentences await Palle's wording) and R-012 (mc_sculpt_vr promoted cross-domain as the counter to the sculptor; noise_space stepped down, prose kept as orphan). Merged over the auto-assembled skeleton by tools/build_critical_tutorial.py (apply_authored) — regeneration never clobbers this file.",
+
+  "walk": [
+    "NoiseColors3D",
+    "noisetorus",
+    "MeltingBerniniScene",
+    "randompoint",
+    "noisesphere",
+    "noiselayers",
+    "shader_noise_space",
+    "WhiteNoiseGallery",
+    "voxelnoise",
+    "perlin_terrain_sculptor",
+    "mc_sculpt_vr"
+  ],
 
   "question": {
     "formula": "noise(p) = Σᵢ amplitudeⁱ · perlin(frequencyⁱ · p)",
@@ -25,13 +39,14 @@
   },
 
   "walk2": {
-    "lead": "Further in: the machinery under the trick — and then the threshold, where the sheet finally commits.",
+    "lead": "Further in: the machinery under the trick — then the threshold, where the sheet finally commits, and its counter, where commitment is built instead of found.",
     "artifacts": {
       "shader_noise_space": "The room itself runs the noise: walls and sphere computed per fragment, millions of evaluations per frame, animated by a clock. What reads as one continuous field is massively parallel arithmetic — there is no field, there are only samples, so many and so fast that your eye vouches for a continuity the machine never once provided. The ghost's own confession, rendered at ninety frames a second.",
       "WhiteNoiseGallery": "A gallery of pure static, hung like art. After the melting marble and the accidental mountains it reads as brutally honest: no memory, no shape, no trick — the raw material before the dial is turned. Every organic surface in this chapter is this gallery, correlated. Come back to it when the terrain starts to look inevitable.",
       "voxelnoise": "The turn the whole chapter has been building toward. Take a continuous 3D noise field and apply one rule: above the threshold a cube exists; below it, nothing. Matter appears. Walk around what condensed — caves, arches, islands hanging in air — and hold the claim at full strength: solid and void are not properties of the field. They are where you drew the line. The blob is called to account here. Instead of wobbling a surface to signal a depth it does not have, the threshold commits — this is inside, this is outside — and the first honest volume in the book precipitates out of a cloud of numbers.",
-      "noise_space": "The same commitment at walking scale: a procedural environment driven by noise parameters you can change, a rehearsal room for the chapters ahead. What the threshold did for one field, the coming sequences will do for worlds — this is where you first feel that a room can be a parameter setting.",
-      "perlin_terrain_sculptor": "And then sculpting, inverted — the chapter's last word. A grid thresholds a Perlin field; your sliders move octaves, persistence, scale, and the threshold itself. Push it and land rises out of nothing; pull it and mountains drown. You are not adding form and you are not removing it: the entire family of landscapes already exists in the field, and the knob chooses which member becomes matter. Michelangelo said the figure was already in the marble — here that is not mysticism, it is the literal algorithm. The chapter ends where the blob ends: at the edge of the sheet, where signaling depth gives way to committing to it. The export begins."
+      "noise_space": "ORPHAN (stepped down from the walk, R-012 — prose kept): The same commitment at walking scale: a procedural environment driven by noise parameters you can change, a rehearsal room for the chapters ahead. What the threshold did for one field, the coming sequences will do for worlds — this is where you first feel that a room can be a parameter setting.",
+      "perlin_terrain_sculptor": "And then sculpting, inverted. A grid thresholds a Perlin field; your sliders move octaves, persistence, scale, and the threshold itself. Push it and land rises out of nothing; pull it and mountains drown. You are not adding form and you are not removing it: the entire family of landscapes already exists in the field, and the knob chooses which member becomes matter. Michelangelo said the figure was already in the marble — here that is not mysticism, it is the literal algorithm. One way to commit form: reveal it. The artifact facing this one holds the other way.",
+      "mc_sculpt_vr": "The counter — found outside this chapter's own stratum, which is fitting, because it comes from the future. SDF sculpting on the GPU: you ADD spherical blobs, up to five hundred, and smooth union melts them into one continuous body while marching cubes extracts a real mesh in real time. Everything the chapter indicted, redeemed in one object: it is made of blobs — literally, the smooth-union blob of every demo reel — but these blobs commit. They have interiors. They cast a surface you can walk around, extracted rather than faked. Against the sculptor's revealing (the form was always in the field; you chose it), this is building (the form was nowhere; you placed it) — the two ways to make something exist, facing each other at the end of the room. The chapter ends where the blob ends: not banished, but given an inside. The export begins."
     }
   },
 

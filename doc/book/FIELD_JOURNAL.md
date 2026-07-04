@@ -17,3 +17,7 @@ Site surveyed: 22 strata, 208 artifacts walked, 716 pearls known, 3041 artifacts
 
 - **fractals**: capture appeared: box_counting_dimension
 
+## 2026-07-04
+
+- **noise**: walked +mc_sculpt_vr; walked −noise_space
+

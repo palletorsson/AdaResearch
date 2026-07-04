@@ -237,4 +237,24 @@ Confirm or replace these and they go into the code as @identity, credited.
 
 ---
 
-<!-- Next: R-012 — randomness staging forks (env_one room-shell vs hand-cut; rhythm: bench market / dice_rain_room) + randomness dig (entropy_axiom?) + Hangar_Fractals v3 (blind bays, 11m box_counting) -->
+## R-012 · 2026-07-04 · The counter promoted, the plinth that points
+
+**Palle:** "mc_sculpt_vr as the counter, hilbert stays as pointing plinth"
+
+**Ruling:** `mc_sculpt_vr` fills noise's declared blank as the counter to
+`perlin_terrain_sculptor` — the first CROSS-DOMAIN promotion (found registry-wide via
+/api/find, not among the stratum's pearls): additive against revealing, the blob given an
+interior, the export in artifact form. The fractals Hilbert blank RESOLVES BY ADJACENCY:
+the plinth stays empty and POINTS — "the Hilbert curve stands in the next room" — the
+book's first forward sightline between chapters.
+
+**Ghost's marked calls (pending friction pass):** the page grammar holds 11, so
+`noise_space` steps down (its own prose called it "a rehearsal room"; voxelnoise +
+sculptor carry the threshold) — prose kept as visible orphan. Walk order closes on the
+confrontation: … voxelnoise → perlin_terrain_sculptor → **mc_sculpt_vr last** — the
+chapter now ends with the two ways to commit form facing each other (reveal, then add).
+mc_sculpt_vr prose ghost-drafted.
+
+---
+
+<!-- Next: R-013 — randomness staging forks (env_one room-shell vs hand-cut; rhythm: bench market / dice_rain_room) + randomness dig (entropy_axiom?) + randompoints vs randompoint + Hangar_Fractals v3 + noise truths (Palle wording) -->

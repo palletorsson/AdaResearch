@@ -37,3 +37,7 @@
 - 2026-07-04 13:46 · **dig** · dig report noise: LB=WhiteNoiseGallery, perlin_terrain_sculptor; 1 promotions proposed, 1 blanks, 5 buried with reasons
 - 2026-07-04 13:46 · **dig** · dig report lsystems: LB=lsystem_editor, space_filling_curve_gallery; 3 promotions proposed, 0 blanks, 0 buried with reasons
 - 2026-07-04 15:10 · **dig** · anti-threshold blank: /api/find searched the whole corpus — candidates found (mc_sculpt_vr = the blob given an interior, cube_mound_scene, constraint_sculptor, poke_dough_toy); commission may be unnecessary. /api/game/analyze independently confirms Hangar_Fractals (100 pct walkable, all reachable)
+- 2026-07-04 16:38 · **build** · chapter rebuilt: noise
+- 2026-07-04 16:38 · **build** · chapter rebuilt: fractals
+- 2026-07-04 16:38 · **drift** · **noise**: walked +mc_sculpt_vr; walked −noise_space
+- 2026-07-04 16:38 · **stage** · staging brief regenerated: noise — contrast 80%, scale melody: `spark:[3,2,3,1,3,0,3,3,3,0,1]`
