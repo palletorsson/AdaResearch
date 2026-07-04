@@ -1,0 +1,69 @@
+{
+  "_readme": "The human writing pass for the noise tutorial, drafted from rulings R-007 (blob aesthetics — the 2.5 universe, the gauge, the export) and R-011 (P1a spectrum-first, P2c Bernini as knowing performance, P4a spend the threshold, P5c ruled truths — two ghost-proposed truth-sentences await Palle's wording before inscription into the .gd files). Merged over the auto-assembled skeleton by tools/build_critical_tutorial.py (apply_authored) — regeneration never clobbers this file.",
+
+  "question": {
+    "formula": "noise(p) = Σᵢ amplitudeⁱ · perlin(frequencyⁱ · p)",
+    "text": "The last chapter ended with chance counted into shape. This one begins by giving chance a memory. In the first room four fields hang side by side — white, pink, brown, blue: the colors of noise — and the color names a memory span. White remembers nothing; every value is an orphan. Pink remembers a little, and drifts. Brown cannot let go, each step leaning on the last. Blue remembers only what to avoid, spacing itself like trees in a managed forest. One dial — how much of the previous moment survives into this one — and the whole spectrum from television static to mountain range falls out of it. Noise is randomness that remembers its neighbors: entropy with continuity, the λ parameter tuned for coherence, the trick that makes computers look like nature. And this chapter stays honest about the word trick — because between the memory and the mountains there is a cheap move an entire visual culture now makes by default, and before the chapter ends we are going to name it, price it, and decide when it is allowed."
+  },
+
+  "primitive": {
+    "lead": "Every sequence begins with one small thing that already contains the whole idea — here, a wall of four memories.",
+    "artifacts": {
+      "NoiseColors3D": "Four noise fields in 3D, distinguished by nothing but their frequency distributions — which is to say, by how long they remember. Stand between them and compare. White crackles without history. Pink breathes. Brown wanders like a drunk who cannot forget the last step. Blue holds itself apart, anti-clustered, the memory of avoidance. Nothing else differs — same source of chance, same renderer, one parameter. The lesson is severe and it carries the whole chapter: everything you will read as texture, terrain, weather, or mood is a correlation length. Character is memory span."
+    }
+  },
+
+  "walk1": {
+    "lead": "Five artifacts: the ripple, the performance, the orphan, the sky, and the accidental earth.",
+    "artifacts": {
+      "noisetorus": "A torus whose surface ripples with animated noise, hue drifting as it moves. The first application, and the first warning. It reads as alive — breathing, molten, faintly biological — and yet nothing about the torus changed: a displacement runs over the sheet of its surface, one function call deep. Hold the feeling of aliveness in one hand and the size of its cause in the other. That gap is where this chapter does its critical work.",
+      "MeltingBerniniScene": "Baroque columns dissolving under noise-driven vertex displacement — Bernini, melting. Read it carefully, because this artifact knows exactly what it is doing. It performs the cheap trick ON the canon and lets you see the seams: marble that took centuries to learn to tremble in stone now wobbles by shader, and a dissolution that carries the full costume of critique costs one line of noise. This is blob aesthetics exhibited as content — the default gesture of a culture that signals change without knowing where to go, staged deliberately, so you can catch yourself finding it profound. Not always bad; the baroque itself wanted marble to move. But from this room on, you know what the move costs, and you will see it everywhere.",
+      "randompoint": "The orphan, kept for contrast. A single draggable point, equally likely anywhere in its bounds — pure white noise in two dimensions, no memory at all, the null hypothesis of space. Chapter 8 built everything from this atom. Every other artifact in this chapter is this point, plus a memory.",
+      "noisesphere": "A hemisphere deformed by noise into an atmospheric dome — the sky, as correlated randomness. Is it the cheap trick again? Borderline, and the chapter lets you argue it: the dome works because real skies genuinely are noise with memory — turbulence has a spectrum — so here, for once, the shader and the world agree about what they are made of.",
+      "noiselayers": "The mountain. Three noise fields at different frequencies, summed — octaves, fractal Brownian motion — and suddenly: terrain. Two hundred and twenty metres of it, the largest body in the book so far. Its identity line has earned its italics: landscapes are not designed — they are superpositions of independent noise processes operating at different scales, and the earth's surface is an accidental sum. Last chapter's fractals return here as a recipe. Self-similar detail, bought wholesale, one octave per scale of attention."
+    }
+  },
+
+  "walk2": {
+    "lead": "Further in: the machinery under the trick — and then the threshold, where the sheet finally commits.",
+    "artifacts": {
+      "shader_noise_space": "The room itself runs the noise: walls and sphere computed per fragment, millions of evaluations per frame, animated by a clock. What reads as one continuous field is massively parallel arithmetic — there is no field, there are only samples, so many and so fast that your eye vouches for a continuity the machine never once provided. The ghost's own confession, rendered at ninety frames a second.",
+      "WhiteNoiseGallery": "A gallery of pure static, hung like art. After the melting marble and the accidental mountains it reads as brutally honest: no memory, no shape, no trick — the raw material before the dial is turned. Every organic surface in this chapter is this gallery, correlated. Come back to it when the terrain starts to look inevitable.",
+      "voxelnoise": "The turn the whole chapter has been building toward. Take a continuous 3D noise field and apply one rule: above the threshold a cube exists; below it, nothing. Matter appears. Walk around what condensed — caves, arches, islands hanging in air — and hold the claim at full strength: solid and void are not properties of the field. They are where you drew the line. The blob is called to account here. Instead of wobbling a surface to signal a depth it does not have, the threshold commits — this is inside, this is outside — and the first honest volume in the book precipitates out of a cloud of numbers.",
+      "noise_space": "The same commitment at walking scale: a procedural environment driven by noise parameters you can change, a rehearsal room for the chapters ahead. What the threshold did for one field, the coming sequences will do for worlds — this is where you first feel that a room can be a parameter setting.",
+      "perlin_terrain_sculptor": "And then sculpting, inverted — the chapter's last word. A grid thresholds a Perlin field; your sliders move octaves, persistence, scale, and the threshold itself. Push it and land rises out of nothing; pull it and mountains drown. You are not adding form and you are not removing it: the entire family of landscapes already exists in the field, and the knob chooses which member becomes matter. Michelangelo said the figure was already in the marble — here that is not mysticism, it is the literal algorithm. The chapter ends where the blob ends: at the edge of the sheet, where signaling depth gives way to committing to it. The export begins."
+    }
+  },
+
+  "turn": {
+    "text": "Every knob in this chapter is secretly one of three. Frequency decides how fast the world varies — turn it and the same terrain zooms through scales. Octaves and persistence decide how much detail each scale contributes — the fractal recipe, and every octave is a loan taken out for detail, paid in computation. And the threshold decides where the continuous becomes committed — where a field becomes a fact. The first two tune the trick; the third ends it. That asymmetry is the chapter's whole argument in interface form: frequency and octaves decorate a sheet, the threshold declares a world."
+  },
+
+  "critical": {
+    "lead": "Now the reading the melting marble has been implying all along.",
+    "qfep_connection": "Noise is λE(S) tuned for coherence — entropy constrained by smoothness, the edge of chaos made continuous. That is the official story, and it teaches well. The critical story is Perlin's: this mathematics was invented for TRON because computer graphics looked too clean, and it won an Academy Award for making the digital look grown. Noise is the debt's cosmetics — smoothness IS interpolation, the loan serviced so evenly that no one asks about the principal — and it has become the default aesthetic of not knowing where to go: when a work stalls, melt it, particle it, blob it. We call this blob aesthetics, and we keep the diagnosis merciful, because the trick is not always bad — but we also read the gauge inside it. In a 2.5-dimensional universe, where every mesh is all surface and nothing has an interior, the noise blob is the abject on a budget: it signals change, dissolution, becoming — the trace's counterfeit, the in-between at the price of a constant. When the blob appears, the current universe's density is exhausted at that working point, and the honest move is not more noise. It is export: to volume, to body, to world. The threshold is where the counterfeit is retired, and this sequence ends standing on it."
+  },
+
+  "world": {
+    "lead": "Nine rooms, from the spectrum to the threshold: the noise colors compared side by side, columns and walls that wear the field, a room folded inside a room of it, the voxel hall where the field first commits to matter, the Perlin–Simplex comparison lab — and then Lab_Path, five cells by five, footprint under a metre: the smallest room in the sequence, crossed in seconds. After the mountains, the chapter's own architecture makes the point: the honest scale, at the end of all that spectacle, is a path."
+  },
+
+  "seed": {
+    "exercises": [
+      "Stand in NoiseColors3D with the labels out of view and identify the four colors by memory span alone. Then name one thing outside this building you can now read the same way — a coastline, a mood, a market.",
+      "In front of MeltingBerniniScene, time how many seconds the melting stays profound. That number is the half-life of blob aesthetics; carry it into every game trailer you watch this year.",
+      "In noiselayers, walk until you find a place where the terrain looks designed. It is not. Write the one sentence your eye used as evidence of intention.",
+      "In voxelnoise, pick one floating island and answer: did it exist in the field before the threshold? Argue both yes and no; notice which argument needs the word 'decision'.",
+      "In perlin_terrain_sculptor, move only the threshold until the landscape stops being one. Say where the form went — deleted, or returned to the possible?",
+      "Walk Lab_Path last, in both directions, in silence. After a chapter of spectacle, write down what the smallest room knows that the mountain doesn't."
+    ],
+    "coda": "The seed of this sequence fits in a sentence: give chance a memory and it will impersonate the world — until a threshold makes it commit. Carry the threshold into cellular automata, where the field hardens into a grid, the memory becomes a rule, and the neighbors stop being a metaphor."
+  },
+
+  "motifs": {
+    "the debt": "Noise is the loan serviced in public: smoothness is interpolation, and Perlin's Oscar was won for making the payments invisible. Every organic surface in this chapter is the grid wearing makeup — the debt managed, never repaid.",
+    "the trace": "The blob is the trace's counterfeit — it signals the in-between with a one-line seed, dissolution as a shader constant. The 2.5 universe gets named here: every mesh is surface, and nothing has an interior until a threshold grants one.",
+    "the measure": "The threshold is this chapter's real protagonist: the cut that decides solid from void inside a field that offers no such distinction. Matter is a measurement.",
+    "the ghost": "The blob is a gauge on the ghost's own density — where noise gets slabbed on, the current universe is exhausted at that working point, and the honest move is export. shader_noise_space confesses the rest: the continuous field is millions of discrete evaluations, vouched for only by your eye."
+  }
+}

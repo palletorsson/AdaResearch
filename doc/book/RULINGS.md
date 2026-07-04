@@ -214,4 +214,27 @@ evidence. The field journal is the loop's memory.
 
 ---
 
-<!-- Next: R-011 — noise forks P1 / P2(a|b|c) / P4 / P5 + randomness staging forks (env_one, rhythm) + randomness dig (entropy_axiom?) -->
+## R-011 · 2026-07-04 · Noise chapter rulings
+
+**Palle:** "P1a, P2c, P4a, P5c — draft the noise overlay"
+
+**Ruling:** P1a — open with the SPECTRUM (NoiseColors3D; memory as a dial; chapter 8 carried
+the atom). P2c — MeltingBernini as KNOWING PERFORMANCE: blob aesthetics exhibited on the canon
+as content, the cheap trick staged so it can be seen. P4a — SPEND THE THRESHOLD: voxelnoise +
+perlin_terrain_sculptor are the climax; the chapter ends at the export, not in the goo;
+isosurfaces industrializes it later. P5c — Palle rules truths for the artifacts that matter,
+ghost inscribes them credited; the rest stay honestly mute. (P3 was ruled by R-007: noise =
+the debt's cosmetics, held with teeth.)
+
+**Ghost's marked calls (pending friction pass):** overlay drafted from the rulings in the
+voice-bar register. **Two truth-sentences are ghost-PROPOSED and NOT yet inscribed in the
+.gd files — P5c wants Palle's wording first:**
+- NoiseColors3D: *"a noise color is a memory span — character is how long the signal
+  remembers itself."*
+- MeltingBerniniScene: *"the melt is a quotation, not a destruction — blob aesthetics
+  performed knowingly, so the cheap trick can be seen."*
+Confirm or replace these and they go into the code as @identity, credited.
+
+---
+
+<!-- Next: R-012 — randomness staging forks (env_one room-shell vs hand-cut; rhythm: bench market / dice_rain_room) + randomness dig (entropy_axiom?) + Hangar_Fractals v3 (blind bays, 11m box_counting) -->

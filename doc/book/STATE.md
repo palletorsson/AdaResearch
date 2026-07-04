@@ -18,7 +18,7 @@ archive, chapter now 11/11 illustrated, journal recorded "capture appeared". The
   `tools/build_manuscript.py` from `doc/manuscript_frame.json` (six-part arc, 6 motifs,
   excavation note) + `ada_encyclopedia/public/tutorial/<seq>.json` chapters.
 - **Coverage:** 21/22 chapters built (`boolean_surfaces` has no three-orders pearls — stratum
-  unopened). Writing passes: **3/22**.
+  unopened). Writing passes: **4/22** (primitives, randomness, noise, fractals).
 - **Reader artifact:** https://claude.ai/code/artifact/0a58e039-f4df-4214-8a3a-8548559e76d5
 - **Map artifact:** https://claude.ai/code/artifact/5050b8c6-3c07-4c7d-beb3-75e23d397fde
   (also `public/manuscript-map.html`, rebuild: `tools/build_manuscript_map.py`)
@@ -42,11 +42,11 @@ archive, chapter now 11/11 illustrated, journal recorded "capture appeared". The
    to LB/promoted members, read authored-overlay prose (mislabels prose-rich walked
    artifacts "ornament?"), pull truth from tutorial JSON. Next: role overlays + builders
    consume roles.
-1. **noise** — trench report 2026-07-03; P3 ruled by R-007 (blob aesthetics); still open:
-   P1 (spectrum vs baseline start), P2 (Bernini: corrosion / completion / knowing blob),
-   P4 (spend the threshold or hold for isosurfaces), P5 (who speaks for the mute six) → R-009.
-   Plus randomness staging forks: env_one (room-shell vs hand-cut), rhythm (bench market /
-   dice_rain_room from depth).
+1. **noise RULED (R-011: P1a/P2c/P4a/P5c) and drafted** — overlay in, chapter built.
+   PENDING: Palle's friction pass + his wording for the two ghost-proposed truth-sentences
+   (NoiseColors3D, MeltingBerniniScene) before inscription into the .gd @identity.
+   Still open: randomness staging forks (env_one room-shell vs hand-cut; rhythm: bench
+   market / dice_rain_room from depth) + randomness dig (entropy_axiom?) → R-012.
 2. R-003 landing: queerness definition into front matter + trace-motif sharpening (approved
    in principle, not applied).
 3. Friction passes on randomness + primitives (Palle reads in the artifact, marks what isn't his).
