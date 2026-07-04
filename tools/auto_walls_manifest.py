@@ -43,8 +43,11 @@ PRETTY = {
 def entry_for(path: Path) -> dict | None:
     """One gallery entry per auto-curated cluster (None if not auto-curated)."""
     data = json.loads(path.read_text(encoding="utf-8"))
-    if "auto by lay_necklace" not in str(data.get("source", "")):
-        return None  # only the generator's own seeds belong in this section
+    src = str(data.get("source", ""))
+    # two seed origins belong here: the generator's own walls and the
+    # spine_walls auto-seeds exported for review (pw_*)
+    if "auto by lay_necklace" not in src and "auto-seed" not in src:
+        return None
     pieces = data.get("pieces", [])
     header = ""
     artifacts: list[str] = []
@@ -55,7 +58,7 @@ def entry_for(path: Path) -> dict | None:
         elif tok not in STRUCTURE_TOKENS:
             artifacts.append(tok)
     name = str(data.get("name", path.stem))
-    slug = name.replace("nk_fractals_", "").replace("nk_", "")
+    slug = name.replace("nk_fractals_", "").replace("nk_", "").replace("pw_", "")
     title = PRETTY.get(slug) or (header.title() if header else slug.replace("_", " ").title())
     return {
         "map": name,
