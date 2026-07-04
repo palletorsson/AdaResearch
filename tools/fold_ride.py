@@ -97,10 +97,17 @@ def main() -> int:
     print(f"ride log -> doc/book/ride_logs/{seq}.json ({len(lines)} observations)")
     for ln in lines:
         print("  ·", ln)
+    # the ride as a graph: the loudest gaze angle at each station
+    step_maxes = []
+    for block in re.split(r"^  step ", log, flags=re.M)[1:]:
+        degs = [float(d) for d in re.findall(r"(?:HUGE|big|med|small)\s+(\d+)deg", block)]
+        step_maxes.append(max(degs) if degs else 0.0)
     sys.path.insert(0, os.path.join(REPO, "tools"))
     from book_log import log_event
     log_event("ride", f"{map_name} walked and folded into {seq}: {len(lines)} observations"
-                      + (f"; ghosts: {', '.join(ghosts)}" if ghosts else ""))
+                      + (f"; ghosts: {', '.join(ghosts)}" if ghosts else "")
+                      + " — gaze profile per station:",
+              spark=step_maxes)
     return 0
 
 

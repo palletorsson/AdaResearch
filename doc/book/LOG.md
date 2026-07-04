@@ -30,3 +30,7 @@
 - 2026-07-04 05:00 · **build** · committed: AdaResearch c44bbf783 (26 files, the engine) + encyclopedia c0a38d65 (manuscript, tutorial, spine-graph w/ lens)
 - 2026-07-04 05:30 · **note** · blog published: /blog/2026-07-04-the-trench-protocol
 - 2026-07-04 06:00 · **ruling** · R-011 noise ruled (P1a spectrum, P2c knowing Bernini, P4a threshold spent, P5c ruled truths) — overlay drafted, 4/22 passes; two truth-sentences ghost-proposed, awaiting Palle's wording
+- 2026-07-04 13:06 · **room** · Hangar_Fractals captured in Godot — the wall extruded, the tree-cloud hero north, the Hilbert plinth standing empty ![Hangar_Fractals iso](/book-log/hangar_fractals_iso.png)
+- 2026-07-04 13:06 · **capture** · box_counting_dimension render — D = 1.555 measured against the ideal 1.585, the debt photographed ![box counting](/artifact-gallery/captures/box_counting_dimension/front.png)
+- 2026-07-04 13:06 · **stage** · staging brief regenerated: fractals — contrast 80%, scale melody: `spark:[0,1,1,3,2,0,1,0,3,0,0]`
+- 2026-07-04 13:06 · **ride** · Hangar_Fractals walked and folded into fractals: 7 observations — gaze profile per station: `spark:[6,7,29,31,23,31,33,44,44,37,37,41,41,46,46,53,53,60,60,96,9,32,33,40,66,0]`

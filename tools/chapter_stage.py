@@ -198,6 +198,10 @@ def brief(seq: str, dna_types: dict, sizes: dict) -> str | None:
     for b in (t.get("blanks") if isinstance(t.get("blanks"), list) else []):
         L.append(f"7. EMPTY PLINTH — reserved: {b.get('note', '')[:120]}")
     L.append("")
+    sys.path.insert(0, os.path.join(REPO, "tools"))
+    from book_log import log_event
+    log_event("stage", f"staging brief regenerated: {seq} — contrast {contrast:.0%}, "
+                       "scale melody:", spark=[r["rank"] for r in rows])
     return "\n".join(L)
 
 
@@ -220,9 +224,6 @@ def main() -> int:
         print(f"— {seq} -> {path}")
         print("\n".join(b.split("\n")[:6]))
         print()
-        sys.path.insert(0, os.path.join(REPO, "tools"))
-        from book_log import log_event
-        log_event("stage", f"staging brief regenerated: {seq}")
     return 0
 
 
