@@ -2187,255 +2187,130 @@
  "Primitives_Melencolia": {
   "sequence": "primitives",
   "counts": {
-   "small": 7,
+   "small": 2,
    "medium": 0,
-   "large": 3,
+   "large": 1,
    "applied": 1
   },
   "pieces": [
    {
-    "token": "station_plinth",
-    "x": 0.0,
+    "token": "station_wall",
+    "x": 1.0,
     "y": 0.0,
-    "z": 0.8,
-    "wall": false,
+    "z": 0.0,
+    "wall": true,
     "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
+     "width_cells": 6
     }
-   },
-   {
-    "token": "dark_sphere",
-    "x": 0.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 2.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
-    }
-   },
-   {
-    "token": "pyramid",
-    "x": 2.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 4.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
-    }
-   },
-   {
-    "token": "cube_scene",
-    "x": 4.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 6.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
-    }
-   },
-   {
-    "token": "pyramidlong",
-    "x": 6.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 8.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
-    }
-   },
-   {
-    "token": "prism_block",
-    "x": 8.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_stage",
-    "x": 10.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 4,
-     "depth_cells": 4,
-     "step_height": 0.18
-    }
-   },
-   {
-    "token": "diamondtoruscollection",
-    "x": 10.0,
-    "y": 0.18,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 16.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
-    }
-   },
-   {
-    "token": "code_display",
-    "x": 16.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
    },
    {
     "token": "station_panel",
-    "x": 8.0,
-    "y": 1.9,
+    "x": 1.5,
+    "y": 2.4,
     "z": 0.06,
-    "wall": true
-   },
-   {
-    "token": "station_pillar",
-    "x": 18.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 21.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
+    "wall": true,
     "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
+     "width_cells": 5,
+     "header": "MEASUREMENT ALONE DOES NOT MOVE",
+     "lines": [
+      "D\u00fcrer's angel sits among every instrument of measure \u2014 compass, scale, hourglass \u2014 and cannot act.",
+      "The chapter closes on its patron saint: thinking begins with a cut, and the cut has a mood."
+     ]
     }
-   },
-   {
-    "token": "floating_sphere_field",
-    "x": 21.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 23.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
-    }
-   },
-   {
-    "token": "bigframe",
-    "x": 23.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
    },
    {
     "token": "station_stage",
-    "x": 25.0,
+    "x": 3.0,
     "y": 0.0,
-    "z": 0.8,
+    "z": 2.4,
     "wall": false,
     "config": {
      "width_cells": 4,
      "depth_cells": 4,
-     "step_height": 0.18
+     "step_height": 0.18,
+     "name_plate": "Melencolia I (1514) \u2014 walk in; the instruments are all here"
     }
    },
    {
     "token": "durer_scene",
-    "x": 25.0,
+    "x": 3.0,
     "y": 0.18,
-    "z": 0.8,
+    "z": 2.4,
     "wall": false
-   },
-   {
-    "token": "station_panel",
-    "x": 25.5,
-    "y": 1.9,
-    "z": 0.06,
-    "wall": true
    },
    {
     "token": "station_pillar",
-    "x": 32.0,
+    "x": 7.2,
     "y": 0.0,
-    "z": 0.8,
+    "z": 1.6,
     "wall": false
    },
    {
+    "token": "station_wall",
+    "x": 8.0,
+    "y": 0.0,
+    "z": 0.0,
+    "wall": true,
+    "config": {
+     "width_cells": 5
+    }
+   },
+   {
+    "token": "station_panel",
+    "x": 8.5,
+    "y": 2.3,
+    "z": 0.06,
+    "wall": true,
+    "config": {
+     "width_cells": 4,
+     "header": "THE SOLID AT HER FEET",
+     "lines": [
+      "A polyhedron is a decision about which cuts to keep.",
+      "Assembly is the cure for melancholy \u2014 measurement that finally moves."
+     ]
+    }
+   },
+   {
     "token": "station_plinth",
-    "x": 35.0,
+    "x": 9.5,
     "y": 0.0,
     "z": 0.8,
     "wall": false,
     "config": {
      "width_cells": 1,
      "depth_cells": 1,
-     "top_height": 1.2
+     "top_height": 1.1,
+     "cap_inset": 0.1,
+     "caption_text": "Snap Pyramid \u2014 assemble what the angel cannot"
     }
    },
    {
     "token": "snap_pyramid_puzzle",
-    "x": 35.0,
-    "y": 1.2,
+    "x": 9.5,
+    "y": 1.1,
     "z": 0.8,
     "wall": false
    },
    {
-    "token": "station_panel",
-    "x": 35.0,
-    "y": 1.9,
-    "z": 0.06,
-    "wall": true
+    "token": "station_plinth",
+    "x": 11.5,
+    "y": 0.0,
+    "z": 0.8,
+    "wall": false,
+    "config": {
+     "width_cells": 1,
+     "depth_cells": 1,
+     "top_height": 1.2,
+     "cap_inset": 0.1,
+     "caption_text": "Pyramid \u2014 the cut, kept"
+    }
+   },
+   {
+    "token": "pyramid",
+    "x": 11.5,
+    "y": 1.2,
+    "z": 0.8,
+    "wall": false
    }
   ]
  },
