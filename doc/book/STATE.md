@@ -45,11 +45,13 @@ archive, chapter now 11/11 illustrated, journal recorded "capture appeared". The
    to LB/promoted members, read authored-overlay prose (mislabels prose-rich walked
    artifacts "ornament?"), pull truth from tutorial JSON. Next: role overlays + builders
    consume roles.
-1. **noise RULED (R-011: P1a/P2c/P4a/P5c) and drafted** — overlay in, chapter built.
-   PENDING: Palle's friction pass + his wording for the two ghost-proposed truth-sentences
-   (NoiseColors3D, MeltingBerniniScene) before inscription into the .gd @identity.
-   Still open: randomness staging forks (env_one room-shell vs hand-cut; rhythm: bench
-   market / dice_rain_room from depth) + randomness dig (entropy_axiom?) → R-012.
+1. **noise R-011+R-012 applied** — chapter authored; mc_sculpt_vr promoted cross-domain as
+   the counter closing the walk (noise_space stepped down, ghost call); fractals' Hilbert
+   plinth now POINTS ("the Hilbert curve stands in the next room"). PENDING: friction
+   passes; Palle's wording for the two noise truth-sentences; noise staging note — the
+   brief says 8 of 11 walked are LARGE (a chapter of giants; the hangar will need scale
+   discipline). Still open → R-013: randomness staging forks (env_one, rhythm) +
+   randomness dig (entropy_axiom?) + randompoints-vs-randompoint + Hangar v3.
 2. R-003 landing: queerness definition into front matter + trace-motif sharpening (approved
    in principle, not applied).
 3. Friction passes on randomness + primitives (Palle reads in the artifact, marks what isn't his).
