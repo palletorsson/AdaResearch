@@ -80,6 +80,9 @@ def main() -> int:
         f.write("\n")
     print(f"override -> {path}")
     print(f"next: python tools/build_critical_tutorial.py {seq} && python tools/book_drift.py")
+    sys.path.insert(0, os.path.join(REPO, "tools"))
+    from book_log import log_event
+    log_event("draft", f"walk hand-cut from spine-graph: {seq} ({len(walk)} artifacts)")
     return 0
 
 

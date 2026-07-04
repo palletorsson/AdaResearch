@@ -186,6 +186,10 @@ def main() -> int:
     with open(SNAP, "w", encoding="utf-8") as f:
         json.dump(new, f, indent=1)
     print(f"journal -> {JOURNAL}")
+    sys.path.insert(0, os.path.join(REPO, "tools"))
+    from book_log import log_event
+    body = [ln for ln in entry if ln.startswith("-")] or entry[2:3]
+    log_event("drift", "; ".join(ln.lstrip("- ") for ln in body)[:300])
     return 0
 
 

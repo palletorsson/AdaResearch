@@ -304,6 +304,14 @@ def main() -> int:
     with open(os.path.join(OUT_DIR, "index.json"), "w", encoding="utf-8") as f:
         json.dump({"sequences": ordered}, f, indent=1)
     print(f"built {built} tutorial(s) -> {OUT_DIR}")
+    sys.path.insert(0, os.path.join(REPO, "tools"))
+    from book_log import log_event
+    if "--all" in args:
+        log_event("build", f"all tutorial chapters rebuilt ({built})")
+    else:
+        for seq in targets:
+            if seq in have:
+                log_event("build", f"chapter rebuilt: {seq}")
     return 0
 
 

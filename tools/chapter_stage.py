@@ -220,6 +220,9 @@ def main() -> int:
         print(f"— {seq} -> {path}")
         print("\n".join(b.split("\n")[:6]))
         print()
+        sys.path.insert(0, os.path.join(REPO, "tools"))
+        from book_log import log_event
+        log_event("stage", f"staging brief regenerated: {seq}")
     return 0
 
 

@@ -279,6 +279,10 @@ def main() -> int:
             f.write("\n".join(L))
         print(f"— {seq}: LB={load_bearing} · {len(counters)} counter-pairs · "
               f"{len(promote)} promotions · {len(blanks)} blanks -> {path}")
+        from book_log import log_event
+        log_event("dig", f"dig report {seq}: LB={', '.join(load_bearing)}; "
+                         f"{len(promote)} promotions proposed, {len(blanks)} blanks, "
+                         f"{len(bury)} buried with reasons")
     return 0
 
 

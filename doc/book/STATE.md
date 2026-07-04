@@ -3,6 +3,9 @@
 > Read this first, then the newest rulings in [RULINGS.md](RULINGS.md), then the current
 > voice-bar chapter. Ten minutes and both of us are back in the loop — after weeks away,
 > after a model upgrade, after context loss. Updated every session that touches the book.
+> To FOLLOW the process as a feed: [LOG.md](LOG.md) (append-only, every tool writes to it
+> via `tools/book_log.py`) — web face at **localhost:3003/book-log** (filterable timeline
+> + the rulings panel).
 
 **Last updated:** 2026-07-04 — R-009 applied: fractals walk hand-cut (+mandelbrot_dive,
 +box_counting_dimension; −fractal_scene, −recursive_tree_2 [ghost's cuts, pending friction]);

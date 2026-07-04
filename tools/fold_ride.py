@@ -97,6 +97,10 @@ def main() -> int:
     print(f"ride log -> doc/book/ride_logs/{seq}.json ({len(lines)} observations)")
     for ln in lines:
         print("  ·", ln)
+    sys.path.insert(0, os.path.join(REPO, "tools"))
+    from book_log import log_event
+    log_event("ride", f"{map_name} walked and folded into {seq}: {len(lines)} observations"
+                      + (f"; ghosts: {', '.join(ghosts)}" if ghosts else ""))
     return 0
 
 

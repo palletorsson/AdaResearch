@@ -220,6 +220,10 @@ def main() -> int:
     print(f"wrote {out}")
     print(f"next: python tools/compact_map_json.py {map_name} && "
           f"python tools/map_pathfinder.py check {map_name} --verbose")
+    sys.path.insert(0, os.path.join(REPO, "tools"))
+    from book_log import log_event
+    log_event("room", f"{map_name} extruded from {len(chosen)} wall segment(s): "
+                      f"{cols}x{rows}, hero={hero}, {len(blanks)} empty plinth(s)")
     return 0
 
 
