@@ -1,6 +1,11 @@
 {
- "name": "pw_primitives_portals",
- "source": "curated (Primitives_Portals) \u2014 hand-curated 2026-07-04, R-013",
+ "sequence": "primitives",
+ "counts": {
+  "small": 1,
+  "medium": 0,
+  "large": 2,
+  "applied": 0
+ },
  "pieces": [
   {
    "token": "station_wall",
@@ -22,7 +27,7 @@
     "width_cells": 5,
     "header": "ZENO AT THE DOOR",
     "lines": [
-     "To reach the door, first cross half the distance \u2014 and before that, half of the half. The approach subdivides forever.",
+     "To reach the door, first cross half the distance — and before that, half of the half. The approach subdivides forever.",
      "Achilles never catches the tortoise; the series never quite sums to one. You cross anyway."
     ]
    }
@@ -37,7 +42,7 @@
     "width_cells": 4,
     "depth_cells": 4,
     "step_height": 0.18,
-    "name_plate": "Achilles & the Tortoise \u2014 the infinite in-between, walked"
+    "name_plate": "Achilles & the Tortoise — the infinite in-between, walked"
    }
   },
   {
@@ -74,7 +79,7 @@
     "width_cells": 4,
     "header": "THE DOORS THEMSELVES",
     "lines": [
-     "combine_portals measures eighty-six metres \u2014 no wall can hold a door that big.",
+     "combine_portals measures eighty-six metres — no wall can hold a door that big.",
      "Turn around. You are standing inside the exhibit. The room is the door."
     ]
    }
@@ -90,7 +95,7 @@
     "depth_cells": 1,
     "top_height": 1.1,
     "cap_inset": 0.1,
-    "caption_text": "Combine Portals \u2014 86 m. Turn around."
+    "caption_text": "Combine Portals — 86 m. Turn around."
    }
   },
   {
@@ -100,7 +105,7 @@
    "z": 0.5,
    "wall": false,
    "config": {
-    "caption_text": "Capsule \u2014 carried through",
+    "caption_text": "Capsule — carried through",
     "top_height": 1.15,
     "cap_inset": 0.1,
     "base_meters": 0.6,

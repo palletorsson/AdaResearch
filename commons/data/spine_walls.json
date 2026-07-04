@@ -2046,141 +2046,123 @@
  "Primitives_Portals": {
   "sequence": "primitives",
   "counts": {
-   "small": 2,
-   "medium": 1,
+   "small": 1,
+   "medium": 0,
    "large": 2,
    "applied": 0
   },
   "pieces": [
    {
-    "token": "station_plinth",
-    "x": 0.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
-    }
-   },
-   {
-    "token": "dark_sphere",
-    "x": 0.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_stage",
-    "x": 2.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 7,
-     "step_height": 0.18
-    }
-   },
-   {
-    "token": "achilles_tortoise",
-    "x": 2.0,
-    "y": 0.18,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_panel",
+    "token": "station_wall",
     "x": 1.0,
-    "y": 1.9,
-    "z": 0.06,
-    "wall": true
-   },
-   {
-    "token": "station_pillar",
-    "x": 4.0,
     "y": 0.0,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 7.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
+    "z": 0.0,
+    "wall": true,
     "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
+     "width_cells": 6
     }
    },
    {
-    "token": "capsule",
-    "x": 7.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
     "token": "station_panel",
-    "x": 7.0,
-    "y": 1.9,
+    "x": 1.5,
+    "y": 2.4,
     "z": 0.06,
-    "wall": true
-   },
-   {
-    "token": "station_pillar",
-    "x": 9.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false
+    "wall": true,
+    "config": {
+     "width_cells": 5,
+     "header": "ZENO AT THE DOOR",
+     "lines": [
+      "To reach the door, first cross half the distance \u2014 and before that, half of the half. The approach subdivides forever.",
+      "Achilles never catches the tortoise; the series never quite sums to one. You cross anyway."
+     ]
+    }
    },
    {
     "token": "station_stage",
-    "x": 12.0,
+    "x": 3.0,
     "y": 0.0,
-    "z": 0.8,
+    "z": 2.4,
     "wall": false,
     "config": {
      "width_cells": 4,
      "depth_cells": 4,
-     "step_height": 0.18
+     "step_height": 0.18,
+     "name_plate": "Achilles & the Tortoise \u2014 the infinite in-between, walked"
     }
    },
    {
-    "token": "combine_portals",
-    "x": 12.0,
+    "token": "achilles_tortoise",
+    "x": 3.0,
     "y": 0.18,
-    "z": 0.8,
+    "z": 2.4,
     "wall": false
    },
    {
+    "token": "station_pillar",
+    "x": 7.2,
+    "y": 0.0,
+    "z": 1.6,
+    "wall": false
+   },
+   {
+    "token": "station_wall",
+    "x": 8.0,
+    "y": 0.0,
+    "z": 0.0,
+    "wall": true,
+    "config": {
+     "width_cells": 5
+    }
+   },
+   {
+    "token": "station_panel",
+    "x": 8.5,
+    "y": 2.3,
+    "z": 0.06,
+    "wall": true,
+    "config": {
+     "width_cells": 4,
+     "header": "THE DOORS THEMSELVES",
+     "lines": [
+      "combine_portals measures eighty-six metres \u2014 no wall can hold a door that big.",
+      "Turn around. You are standing inside the exhibit. The room is the door."
+     ]
+    }
+   },
+   {
     "token": "station_plinth",
-    "x": 21.0,
+    "x": 9.5,
     "y": 0.0,
     "z": 0.8,
     "wall": false,
     "config": {
      "width_cells": 1,
      "depth_cells": 1,
-     "top_height": 1.2
+     "top_height": 1.1,
+     "cap_inset": 0.1,
+     "caption_text": "Combine Portals \u2014 86 m. Turn around."
     }
    },
    {
-    "token": "floating_sphere_field",
-    "x": 21.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
+    "token": "station_micropod",
+    "x": 11.5,
+    "y": 0.0,
+    "z": 0.5,
+    "wall": false,
+    "config": {
+     "caption_text": "Capsule \u2014 carried through",
+     "top_height": 1.15,
+     "cap_inset": 0.1,
+     "base_meters": 0.6,
+     "cap_meters": 1.16
+    }
    },
    {
-    "token": "station_panel",
-    "x": 16.5,
-    "y": 1.9,
-    "z": 0.06,
-    "wall": true
+    "token": "capsule",
+    "x": 11.5,
+    "y": 1.15,
+    "z": 0.5,
+    "wall": false
    }
   ]
  },
