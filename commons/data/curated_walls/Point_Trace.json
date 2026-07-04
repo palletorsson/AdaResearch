@@ -1,6 +1,11 @@
 {
- "name": "pw_point_trace",
- "source": "curated (Point_Trace) \u2014 hand-curated 2026-07-04, R-013",
+ "sequence": "primitives",
+ "counts": {
+  "small": 2,
+  "medium": 1,
+  "large": 0,
+  "applied": 0
+ },
  "pieces": [
   {
    "token": "station_wall",
@@ -22,7 +27,7 @@
     "width_cells": 4,
     "header": "THE FIRST QUEER ARTIFACT",
     "lines": [
-     "Your movement is analogue \u2014 resolution higher than the screen that shows it.",
+     "Your movement is analogue — resolution higher than the screen that shows it.",
      "The trace is neither gesture nor data: it lives on the crossing. The ledger opens here."
     ]
    }
@@ -37,7 +42,7 @@
     "width_cells": 3,
     "depth_cells": 3,
     "step_height": 0.18,
-    "name_plate": "Player Trace \u2014 walk, and the line is you"
+    "name_plate": "Player Trace — walk, and the line is you"
    }
   },
   {
@@ -54,7 +59,7 @@
    "z": 0.5,
    "wall": false,
    "config": {
-    "caption_text": "Draw Dot \u2014 the hand, sampled",
+    "caption_text": "Draw Dot — the hand, sampled",
     "top_height": 1.15,
     "cap_inset": 0.1,
     "base_meters": 0.6,

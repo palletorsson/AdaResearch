@@ -481,151 +481,148 @@
   "counts": {
    "small": 2,
    "medium": 1,
-   "large": 1,
-   "applied": 1
+   "large": 0,
+   "applied": 0
   },
   "pieces": [
    {
-    "token": "station_plinth",
-    "x": 0.0,
+    "token": "station_wall",
+    "x": 1.0,
     "y": 0.0,
-    "z": 0.8,
-    "wall": false,
+    "z": 0.0,
+    "wall": true,
     "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
+     "width_cells": 5
     }
-   },
-   {
-    "token": "mystic_writing_pad",
-    "x": 0.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 2.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
-    }
-   },
-   {
-    "token": "draw_dot",
-    "x": 2.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
    },
    {
     "token": "station_panel",
     "x": 1.0,
-    "y": 1.9,
+    "y": 2.3,
     "z": 0.06,
-    "wall": true
-   },
-   {
-    "token": "station_pillar",
-    "x": 4.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 7.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
+    "wall": true,
     "config": {
      "width_cells": 4,
-     "depth_cells": 1,
-     "top_height": 0.9
+     "header": "THE FIRST QUEER ARTIFACT",
+     "lines": [
+      "Your movement is analogue \u2014 resolution higher than the screen that shows it.",
+      "The trace is neither gesture nor data: it lives on the crossing. The ledger opens here."
+     ]
     }
    },
    {
-    "token": "science_screen",
-    "x": 7.0,
-    "y": 0.9,
-    "z": 0.8,
+    "token": "station_stage",
+    "x": 2.5,
+    "y": 0.0,
+    "z": 1.8,
+    "wall": false,
+    "config": {
+     "width_cells": 3,
+     "depth_cells": 3,
+     "step_height": 0.18,
+     "name_plate": "Player Trace \u2014 walk, and the line is you"
+    }
+   },
+   {
+    "token": "player_trace",
+    "x": 2.5,
+    "y": 0.18,
+    "z": 1.8,
+    "wall": false
+   },
+   {
+    "token": "station_micropod",
+    "x": 5.5,
+    "y": 0.0,
+    "z": 0.5,
+    "wall": false,
+    "config": {
+     "caption_text": "Draw Dot \u2014 the hand, sampled",
+     "top_height": 1.15,
+     "cap_inset": 0.1,
+     "base_meters": 0.6,
+     "cap_meters": 1.16
+    }
+   },
+   {
+    "token": "draw_dot",
+    "x": 5.5,
+    "y": 1.15,
+    "z": 0.5,
     "wall": false
    },
    {
     "token": "station_panel",
-    "x": 8.5,
+    "x": 5.8,
     "y": 1.9,
     "z": 0.06,
-    "wall": true
+    "wall": true,
+    "config": {
+     "width_cells": 3,
+     "header": "THE HAND, SAMPLED",
+     "lines": [
+      "sample(hand_position): point after point, the hand writes into space.",
+      "Between any two samples, something of the gesture is discarded."
+     ]
+    }
    },
    {
     "token": "station_pillar",
-    "x": 12.0,
+    "x": 7.7,
     "y": 0.0,
-    "z": 0.8,
+    "z": 1.6,
     "wall": false
    },
    {
+    "token": "station_wall",
+    "x": 9.0,
+    "y": 0.0,
+    "z": 0.0,
+    "wall": true,
+    "config": {
+     "width_cells": 5
+    }
+   },
+   {
+    "token": "station_panel",
+    "x": 9.5,
+    "y": 2.3,
+    "z": 0.06,
+    "wall": true,
+    "config": {
+     "width_cells": 4,
+     "header": "THE TRACE'S ANCESTOR",
+     "lines": [
+      "Freud's Wunderblock: a surface that receives without keeping",
+      "and keeps without showing. Every recording since is its child."
+     ]
+    }
+   },
+   {
     "token": "station_plinth",
-    "x": 15.0,
+    "x": 10.5,
     "y": 0.0,
     "z": 0.8,
     "wall": false,
     "config": {
      "width_cells": 1,
      "depth_cells": 1,
-     "top_height": 1.2
+     "top_height": 1.2,
+     "cap_inset": 0.1,
+     "caption_text": "Mystic Writing Pad (Wunderblock)"
     }
    },
    {
-    "token": "floating_sphere_field",
-    "x": 15.0,
+    "token": "mystic_writing_pad",
+    "x": 10.5,
     "y": 1.2,
     "z": 0.8,
     "wall": false
    },
    {
-    "token": "station_panel",
-    "x": 15.0,
-    "y": 1.9,
-    "z": 0.06,
-    "wall": true
-   },
-   {
-    "token": "station_pillar",
-    "x": 17.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_stage",
-    "x": 20.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "step_height": 0.18
-    }
-   },
-   {
-    "token": "lab_room",
-    "x": 20.0,
-    "y": 0.18,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_panel",
-    "x": 20.0,
-    "y": 1.9,
+    "token": "science_screen",
+    "x": 12.5,
+    "y": 1.6,
     "z": 0.06,
     "wall": true
    }
@@ -21143,7 +21140,7 @@
      "top_height": 1.15,
      "cap_inset": 0.1,
      "base_meters": 0.6,
-     "cap_meters": 3.62
+     "cap_meters": 1.16
     }
    },
    {
@@ -21165,7 +21162,7 @@
      "top_height": 1.3,
      "cap_inset": 0.3,
      "caption_text": "Cube Subdivision",
-     "cap_meters": 3.62
+     "cap_meters": 1.1
     }
    },
    {
@@ -21460,7 +21457,7 @@
     "config": {
      "caption_text": "L-System Tree",
      "top_height": 1.2,
-     "cap_meters": 3.62
+     "cap_meters": 0.84
     }
    },
    {
@@ -21613,7 +21610,7 @@
     "config": {
      "caption_text": "Cantor Set (radial)",
      "top_height": 1.3,
-     "cap_meters": 3.62
+     "cap_meters": 0.9
     }
    },
    {
@@ -21814,7 +21811,7 @@
     "config": {
      "caption_text": "Koch Curve",
      "top_height": 1.25,
-     "cap_meters": 3.62
+     "cap_meters": 0.8
     }
    },
    {
