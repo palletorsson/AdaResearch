@@ -1,0 +1,150 @@
+{
+ "name": "pw_point_trace",
+ "source": "spine_walls.json (auto-seed)",
+ "pieces": [
+  {
+   "token": "station_plinth",
+   "x": 0.0,
+   "y": 0.0,
+   "z": 0.8,
+   "wall": false,
+   "config": {
+    "width_cells": 1,
+    "depth_cells": 1,
+    "top_height": 1.2
+   }
+  },
+  {
+   "token": "mystic_writing_pad",
+   "x": 0.0,
+   "y": 1.2,
+   "z": 0.8,
+   "wall": false
+  },
+  {
+   "token": "station_plinth",
+   "x": 2.0,
+   "y": 0.0,
+   "z": 0.8,
+   "wall": false,
+   "config": {
+    "width_cells": 1,
+    "depth_cells": 1,
+    "top_height": 1.2
+   }
+  },
+  {
+   "token": "draw_dot",
+   "x": 2.0,
+   "y": 1.2,
+   "z": 0.8,
+   "wall": false
+  },
+  {
+   "token": "station_panel",
+   "x": 1.0,
+   "y": 1.9,
+   "z": 0.06,
+   "wall": true
+  },
+  {
+   "token": "station_pillar",
+   "x": 4.0,
+   "y": 0.0,
+   "z": 0.8,
+   "wall": false
+  },
+  {
+   "token": "station_plinth",
+   "x": 7.0,
+   "y": 0.0,
+   "z": 0.8,
+   "wall": false,
+   "config": {
+    "width_cells": 4,
+    "depth_cells": 1,
+    "top_height": 0.9
+   }
+  },
+  {
+   "token": "science_screen",
+   "x": 7.0,
+   "y": 0.9,
+   "z": 0.8,
+   "wall": false
+  },
+  {
+   "token": "station_panel",
+   "x": 8.5,
+   "y": 1.9,
+   "z": 0.06,
+   "wall": true
+  },
+  {
+   "token": "station_pillar",
+   "x": 12.0,
+   "y": 0.0,
+   "z": 0.8,
+   "wall": false
+  },
+  {
+   "token": "station_plinth",
+   "x": 15.0,
+   "y": 0.0,
+   "z": 0.8,
+   "wall": false,
+   "config": {
+    "width_cells": 1,
+    "depth_cells": 1,
+    "top_height": 1.2
+   }
+  },
+  {
+   "token": "floating_sphere_field",
+   "x": 15.0,
+   "y": 1.2,
+   "z": 0.8,
+   "wall": false
+  },
+  {
+   "token": "station_panel",
+   "x": 15.0,
+   "y": 1.9,
+   "z": 0.06,
+   "wall": true
+  },
+  {
+   "token": "station_pillar",
+   "x": 17.0,
+   "y": 0.0,
+   "z": 0.8,
+   "wall": false
+  },
+  {
+   "token": "station_stage",
+   "x": 20.0,
+   "y": 0.0,
+   "z": 0.8,
+   "wall": false,
+   "config": {
+    "width_cells": 1,
+    "depth_cells": 1,
+    "step_height": 0.18
+   }
+  },
+  {
+   "token": "lab_room",
+   "x": 20.0,
+   "y": 0.18,
+   "z": 0.8,
+   "wall": false
+  },
+  {
+   "token": "station_panel",
+   "x": 20.0,
+   "y": 1.9,
+   "z": 0.06,
+   "wall": true
+  }
+ ]
+}

@@ -1,0 +1,136 @@
+{
+ "name": "pw_point_line_grid",
+ "source": "spine_walls.json (auto-seed)",
+ "pieces": [
+  {
+   "token": "station_plinth",
+   "x": 0.0,
+   "y": 0.0,
+   "z": 0.8,
+   "wall": false,
+   "config": {
+    "width_cells": 1,
+    "depth_cells": 1,
+    "top_height": 1.2
+   }
+  },
+  {
+   "token": "player_trace",
+   "x": 0.0,
+   "y": 1.2,
+   "z": 0.8,
+   "wall": false
+  },
+  {
+   "token": "station_plinth",
+   "x": 2.0,
+   "y": 0.0,
+   "z": 0.8,
+   "wall": false,
+   "config": {
+    "width_cells": 1,
+    "depth_cells": 1,
+    "top_height": 1.2
+   }
+  },
+  {
+   "token": "room_grammar",
+   "x": 2.0,
+   "y": 1.2,
+   "z": 0.8,
+   "wall": false
+  },
+  {
+   "token": "station_panel",
+   "x": 1.0,
+   "y": 1.9,
+   "z": 0.06,
+   "wall": true
+  },
+  {
+   "token": "station_pillar",
+   "x": 4.0,
+   "y": 0.0,
+   "z": 0.8,
+   "wall": false
+  },
+  {
+   "token": "station_stage",
+   "x": 7.0,
+   "y": 0.0,
+   "z": 0.8,
+   "wall": false,
+   "config": {
+    "width_cells": 4,
+    "depth_cells": 4,
+    "step_height": 0.18
+   }
+  },
+  {
+   "token": "grid_lines",
+   "x": 7.0,
+   "y": 0.18,
+   "z": 0.8,
+   "wall": false
+  },
+  {
+   "token": "station_plinth",
+   "x": 14.0,
+   "y": 0.0,
+   "z": 0.8,
+   "wall": false,
+   "config": {
+    "width_cells": 1,
+    "depth_cells": 1,
+    "top_height": 1.2
+   }
+  },
+  {
+   "token": "floating_sphere_field",
+   "x": 14.0,
+   "y": 1.2,
+   "z": 0.8,
+   "wall": false
+  },
+  {
+   "token": "station_panel",
+   "x": 10.5,
+   "y": 1.9,
+   "z": 0.06,
+   "wall": true
+  },
+  {
+   "token": "station_pillar",
+   "x": 16.0,
+   "y": 0.0,
+   "z": 0.8,
+   "wall": false
+  },
+  {
+   "token": "station_plinth",
+   "x": 19.0,
+   "y": 0.0,
+   "z": 0.8,
+   "wall": false,
+   "config": {
+    "width_cells": 1,
+    "depth_cells": 1,
+    "top_height": 1.2
+   }
+  },
+  {
+   "token": "grab_sphere_point_snap",
+   "x": 19.0,
+   "y": 1.2,
+   "z": 0.8,
+   "wall": false
+  },
+  {
+   "token": "station_panel",
+   "x": 19.0,
+   "y": 1.9,
+   "z": 0.06,
+   "wall": true
+  }
+ ]
+}

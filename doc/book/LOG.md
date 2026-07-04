@@ -41,3 +41,6 @@
 - 2026-07-04 16:38 · **build** · chapter rebuilt: fractals
 - 2026-07-04 16:38 · **drift** · **noise**: walked +mc_sculpt_vr; walked −noise_space
 - 2026-07-04 16:38 · **stage** · staging brief regenerated: noise — contrast 80%, scale melody: `spark:[3,2,3,1,3,0,3,3,3,0,1]`
+- 2026-07-04 16:46 · **dig** · dig report primitives: LB=klee_walking_point, cube_scene; 0 promotions proposed, 0 blanks, 52 buried with reasons
+- 2026-07-04 16:46 · **stage** · staging brief regenerated: primitives — contrast 30%, scale melody: `spark:[0,0,0,0,2,1,0,0,0,0,0]`
+- 2026-07-04 16:52 · **stage** · Walls_Primitives review room built and captured — the ten auto-seeded primitives walls hung in one hall (pw_* clusters exported from spine_walls.json). Verdict: rough seeds — lab_room boxes mounted as props, Portals spills off the floor, the miniatures vanish at distance ![primitives walls review](/book-log/walls_primitives_front.png)

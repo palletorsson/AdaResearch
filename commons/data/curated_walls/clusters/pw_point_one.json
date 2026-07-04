@@ -1,0 +1,32 @@
+{
+ "name": "pw_point_one",
+ "source": "spine_walls.json (auto-seed)",
+ "pieces": [
+  {
+   "token": "station_plinth",
+   "x": 0.0,
+   "y": 0.0,
+   "z": 0.8,
+   "wall": false,
+   "config": {
+    "width_cells": 1,
+    "depth_cells": 1,
+    "top_height": 1.2
+   }
+  },
+  {
+   "token": "fontana_puncture",
+   "x": 0.0,
+   "y": 1.2,
+   "z": 0.8,
+   "wall": false
+  },
+  {
+   "token": "station_panel",
+   "x": 0.0,
+   "y": 1.9,
+   "z": 0.06,
+   "wall": true
+  }
+ ]
+}

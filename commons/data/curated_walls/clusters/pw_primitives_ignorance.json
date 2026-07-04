@@ -1,0 +1,492 @@
+{
+ "name": "pw_primitives_ignorance",
+ "source": "spine_walls.json (auto-seed)",
+ "pieces": [
+  {
+   "token": "station_plinth",
+   "x": 0.0,
+   "y": 0.0,
+   "z": 0.8,
+   "wall": false,
+   "config": {
+    "width_cells": 1,
+    "depth_cells": 1,
+    "top_height": 1.2
+   }
+  },
+  {
+   "token": "dark_sphere",
+   "x": 0.0,
+   "y": 1.2,
+   "z": 0.8,
+   "wall": false
+  },
+  {
+   "token": "station_plinth",
+   "x": 2.0,
+   "y": 0.0,
+   "z": 0.8,
+   "wall": false,
+   "config": {
+    "width_cells": 1,
+    "depth_cells": 1,
+    "top_height": 1.2
+   }
+  },
+  {
+   "token": "cube_scene",
+   "x": 2.0,
+   "y": 1.2,
+   "z": 0.8,
+   "wall": false
+  },
+  {
+   "token": "station_plinth",
+   "x": 4.0,
+   "y": 0.0,
+   "z": 0.8,
+   "wall": false,
+   "config": {
+    "width_cells": 1,
+    "depth_cells": 1,
+    "top_height": 1.2
+   }
+  },
+  {
+   "token": "sphere",
+   "x": 4.0,
+   "y": 1.2,
+   "z": 0.8,
+   "wall": false
+  },
+  {
+   "token": "station_stage",
+   "x": 6.0,
+   "y": 0.0,
+   "z": 0.8,
+   "wall": false,
+   "config": {
+    "width_cells": 4,
+    "depth_cells": 4,
+    "step_height": 0.18
+   }
+  },
+  {
+   "token": "hole_with_cones",
+   "x": 6.0,
+   "y": 0.18,
+   "z": 0.8,
+   "wall": false
+  },
+  {
+   "token": "station_plinth",
+   "x": 11.0,
+   "y": 0.0,
+   "z": 0.8,
+   "wall": false,
+   "config": {
+    "width_cells": 1,
+    "depth_cells": 1,
+    "top_height": 1.2
+   }
+  },
+  {
+   "token": "sphere_high",
+   "x": 11.0,
+   "y": 1.2,
+   "z": 0.8,
+   "wall": false
+  },
+  {
+   "token": "station_plinth",
+   "x": 13.0,
+   "y": 0.0,
+   "z": 0.8,
+   "wall": false,
+   "config": {
+    "width_cells": 1,
+    "depth_cells": 1,
+    "top_height": 1.2
+   }
+  },
+  {
+   "token": "star_primitive",
+   "x": 13.0,
+   "y": 1.2,
+   "z": 0.8,
+   "wall": false
+  },
+  {
+   "token": "station_plinth",
+   "x": 15.0,
+   "y": 0.0,
+   "z": 0.8,
+   "wall": false,
+   "config": {
+    "width_cells": 1,
+    "depth_cells": 1,
+    "top_height": 1.2
+   }
+  },
+  {
+   "token": "righttriangle",
+   "x": 15.0,
+   "y": 1.2,
+   "z": 0.8,
+   "wall": false
+  },
+  {
+   "token": "station_plinth",
+   "x": 17.0,
+   "y": 0.0,
+   "z": 0.8,
+   "wall": false,
+   "config": {
+    "width_cells": 1,
+    "depth_cells": 1,
+    "top_height": 1.2
+   }
+  },
+  {
+   "token": "sphere_mid",
+   "x": 17.0,
+   "y": 1.2,
+   "z": 0.8,
+   "wall": false
+  },
+  {
+   "token": "station_plinth",
+   "x": 19.0,
+   "y": 0.0,
+   "z": 0.8,
+   "wall": false,
+   "config": {
+    "width_cells": 1,
+    "depth_cells": 1,
+    "top_height": 1.2
+   }
+  },
+  {
+   "token": "truncatedtetrahedron",
+   "x": 19.0,
+   "y": 1.2,
+   "z": 0.8,
+   "wall": false
+  },
+  {
+   "token": "station_plinth",
+   "x": 21.0,
+   "y": 0.0,
+   "z": 0.8,
+   "wall": false,
+   "config": {
+    "width_cells": 1,
+    "depth_cells": 1,
+    "top_height": 1.2
+   }
+  },
+  {
+   "token": "roughrock",
+   "x": 21.0,
+   "y": 1.2,
+   "z": 0.8,
+   "wall": false
+  },
+  {
+   "token": "station_plinth",
+   "x": 23.0,
+   "y": 0.0,
+   "z": 0.8,
+   "wall": false,
+   "config": {
+    "width_cells": 1,
+    "depth_cells": 1,
+    "top_height": 1.2
+   }
+  },
+  {
+   "token": "sphere_low",
+   "x": 23.0,
+   "y": 1.2,
+   "z": 0.8,
+   "wall": false
+  },
+  {
+   "token": "station_plinth",
+   "x": 25.0,
+   "y": 0.0,
+   "z": 0.8,
+   "wall": false,
+   "config": {
+    "width_cells": 1,
+    "depth_cells": 1,
+    "top_height": 1.2
+   }
+  },
+  {
+   "token": "grab_octahedron",
+   "x": 25.0,
+   "y": 1.2,
+   "z": 0.8,
+   "wall": false
+  },
+  {
+   "token": "station_plinth",
+   "x": 27.0,
+   "y": 0.0,
+   "z": 0.8,
+   "wall": false,
+   "config": {
+    "width_cells": 2,
+    "depth_cells": 1,
+    "top_height": 0.9
+   }
+  },
+  {
+   "token": "lshape",
+   "x": 27.0,
+   "y": 0.9,
+   "z": 0.8,
+   "wall": false
+  },
+  {
+   "token": "station_plinth",
+   "x": 30.0,
+   "y": 0.0,
+   "z": 0.8,
+   "wall": false,
+   "config": {
+    "width_cells": 1,
+    "depth_cells": 1,
+    "top_height": 1.2
+   }
+  },
+  {
+   "token": "prism_block",
+   "x": 30.0,
+   "y": 1.2,
+   "z": 0.8,
+   "wall": false
+  },
+  {
+   "token": "station_plinth",
+   "x": 32.0,
+   "y": 0.0,
+   "z": 0.8,
+   "wall": false,
+   "config": {
+    "width_cells": 1,
+    "depth_cells": 1,
+    "top_height": 1.2
+   }
+  },
+  {
+   "token": "library_rack",
+   "x": 32.0,
+   "y": 1.2,
+   "z": 0.8,
+   "wall": false
+  },
+  {
+   "token": "station_plinth",
+   "x": 34.0,
+   "y": 0.0,
+   "z": 0.8,
+   "wall": false,
+   "config": {
+    "width_cells": 1,
+    "depth_cells": 1,
+    "top_height": 1.2
+   }
+  },
+  {
+   "token": "torus_radials_rings",
+   "x": 34.0,
+   "y": 1.2,
+   "z": 0.8,
+   "wall": false
+  },
+  {
+   "token": "station_plinth",
+   "x": 36.0,
+   "y": 0.0,
+   "z": 0.8,
+   "wall": false,
+   "config": {
+    "width_cells": 1,
+    "depth_cells": 1,
+    "top_height": 1.2
+   }
+  },
+  {
+   "token": "capsule_radials_rings",
+   "x": 36.0,
+   "y": 1.2,
+   "z": 0.8,
+   "wall": false
+  },
+  {
+   "token": "station_plinth",
+   "x": 38.0,
+   "y": 0.0,
+   "z": 0.8,
+   "wall": false,
+   "config": {
+    "width_cells": 1,
+    "depth_cells": 1,
+    "top_height": 1.2
+   }
+  },
+  {
+   "token": "plus",
+   "x": 38.0,
+   "y": 1.2,
+   "z": 0.8,
+   "wall": false
+  },
+  {
+   "token": "station_stage",
+   "x": 40.0,
+   "y": 0.0,
+   "z": 0.8,
+   "wall": false,
+   "config": {
+    "width_cells": 4,
+    "depth_cells": 4,
+    "step_height": 0.18
+   }
+  },
+  {
+   "token": "diamonds",
+   "x": 40.0,
+   "y": 0.18,
+   "z": 0.8,
+   "wall": false
+  },
+  {
+   "token": "station_panel",
+   "x": 21.5,
+   "y": 1.9,
+   "z": 0.06,
+   "wall": true
+  },
+  {
+   "token": "station_pillar",
+   "x": 45.0,
+   "y": 0.0,
+   "z": 0.8,
+   "wall": false
+  },
+  {
+   "token": "station_plinth",
+   "x": 48.0,
+   "y": 0.0,
+   "z": 0.8,
+   "wall": false,
+   "config": {
+    "width_cells": 1,
+    "depth_cells": 1,
+    "top_height": 1.2
+   }
+  },
+  {
+   "token": "capsule",
+   "x": 48.0,
+   "y": 1.2,
+   "z": 0.8,
+   "wall": false
+  },
+  {
+   "token": "station_panel",
+   "x": 48.0,
+   "y": 1.9,
+   "z": 0.06,
+   "wall": true
+  },
+  {
+   "token": "station_pillar",
+   "x": 50.0,
+   "y": 0.0,
+   "z": 0.8,
+   "wall": false
+  },
+  {
+   "token": "station_stage",
+   "x": 53.0,
+   "y": 0.0,
+   "z": 0.8,
+   "wall": false,
+   "config": {
+    "width_cells": 4,
+    "depth_cells": 4,
+    "step_height": 0.18
+   }
+  },
+  {
+   "token": "platonic_grabbables",
+   "x": 53.0,
+   "y": 0.18,
+   "z": 0.8,
+   "wall": false
+  },
+  {
+   "token": "station_plinth",
+   "x": 61.0,
+   "y": 0.0,
+   "z": 0.8,
+   "wall": false,
+   "config": {
+    "width_cells": 1,
+    "depth_cells": 1,
+    "top_height": 1.2
+   }
+  },
+  {
+   "token": "floating_sphere_field",
+   "x": 61.0,
+   "y": 1.2,
+   "z": 0.8,
+   "wall": false
+  },
+  {
+   "token": "station_panel",
+   "x": 57.0,
+   "y": 1.9,
+   "z": 0.06,
+   "wall": true
+  },
+  {
+   "token": "station_pillar",
+   "x": 63.0,
+   "y": 0.0,
+   "z": 0.8,
+   "wall": false
+  },
+  {
+   "token": "station_plinth",
+   "x": 66.0,
+   "y": 0.0,
+   "z": 0.8,
+   "wall": false,
+   "config": {
+    "width_cells": 1,
+    "depth_cells": 1,
+    "top_height": 1.2
+   }
+  },
+  {
+   "token": "snap_octahedron_puzzle",
+   "x": 66.0,
+   "y": 1.2,
+   "z": 0.8,
+   "wall": false
+  },
+  {
+   "token": "station_panel",
+   "x": 66.0,
+   "y": 1.9,
+   "z": 0.06,
+   "wall": true
+  }
+ ]
+}

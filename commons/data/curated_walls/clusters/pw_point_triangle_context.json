@@ -1,0 +1,321 @@
+{
+ "name": "pw_point_triangle_context",
+ "source": "spine_walls.json (auto-seed)",
+ "pieces": [
+  {
+   "token": "station_plinth",
+   "x": 0.0,
+   "y": 0.0,
+   "z": 0.8,
+   "wall": false,
+   "config": {
+    "width_cells": 1,
+    "depth_cells": 1,
+    "top_height": 1.2
+   }
+  },
+  {
+   "token": "dark_sphere",
+   "x": 0.0,
+   "y": 1.2,
+   "z": 0.8,
+   "wall": false
+  },
+  {
+   "token": "station_stage",
+   "x": 2.0,
+   "y": 0.0,
+   "z": 0.8,
+   "wall": false,
+   "config": {
+    "width_cells": 4,
+    "depth_cells": 4,
+    "step_height": 0.18
+   }
+  },
+  {
+   "token": "triangleprofiles",
+   "x": 2.0,
+   "y": 0.18,
+   "z": 0.8,
+   "wall": false
+  },
+  {
+   "token": "station_stage",
+   "x": 9.0,
+   "y": 0.0,
+   "z": 0.8,
+   "wall": false,
+   "config": {
+    "width_cells": 5,
+    "depth_cells": 1,
+    "step_height": 0.18
+   }
+  },
+  {
+   "token": "folded_strip",
+   "x": 9.0,
+   "y": 0.18,
+   "z": 0.8,
+   "wall": false
+  },
+  {
+   "token": "station_plinth",
+   "x": 15.0,
+   "y": 0.0,
+   "z": 0.8,
+   "wall": false,
+   "config": {
+    "width_cells": 1,
+    "depth_cells": 1,
+    "top_height": 1.2
+   }
+  },
+  {
+   "token": "draw_triangle_faces",
+   "x": 15.0,
+   "y": 1.2,
+   "z": 0.8,
+   "wall": false
+  },
+  {
+   "token": "station_plinth",
+   "x": 17.0,
+   "y": 0.0,
+   "z": 0.8,
+   "wall": false,
+   "config": {
+    "width_cells": 2,
+    "depth_cells": 1,
+    "top_height": 0.9
+   }
+  },
+  {
+   "token": "quad",
+   "x": 17.0,
+   "y": 0.9,
+   "z": 0.8,
+   "wall": false
+  },
+  {
+   "token": "station_panel",
+   "x": 9.0,
+   "y": 1.9,
+   "z": 0.06,
+   "wall": true
+  },
+  {
+   "token": "station_pillar",
+   "x": 20.0,
+   "y": 0.0,
+   "z": 0.8,
+   "wall": false
+  },
+  {
+   "token": "station_plinth",
+   "x": 23.0,
+   "y": 0.0,
+   "z": 0.8,
+   "wall": false,
+   "config": {
+    "width_cells": 1,
+    "depth_cells": 1,
+    "top_height": 1.2
+   }
+  },
+  {
+   "token": "parasol_triangle",
+   "x": 23.0,
+   "y": 1.2,
+   "z": 0.8,
+   "wall": false
+  },
+  {
+   "token": "station_plinth",
+   "x": 25.0,
+   "y": 0.0,
+   "z": 0.8,
+   "wall": false,
+   "config": {
+    "width_cells": 4,
+    "depth_cells": 1,
+    "top_height": 0.9
+   }
+  },
+  {
+   "token": "science_screen",
+   "x": 25.0,
+   "y": 0.9,
+   "z": 0.8,
+   "wall": false
+  },
+  {
+   "token": "station_plinth",
+   "x": 30.0,
+   "y": 0.0,
+   "z": 0.8,
+   "wall": false,
+   "config": {
+    "width_cells": 1,
+    "depth_cells": 1,
+    "top_height": 1.2
+   }
+  },
+  {
+   "token": "triangle",
+   "x": 30.0,
+   "y": 1.2,
+   "z": 0.8,
+   "wall": false
+  },
+  {
+   "token": "station_plinth",
+   "x": 32.0,
+   "y": 0.0,
+   "z": 0.8,
+   "wall": false,
+   "config": {
+    "width_cells": 2,
+    "depth_cells": 1,
+    "top_height": 0.9
+   }
+  },
+  {
+   "token": "interactivetriangle",
+   "x": 32.0,
+   "y": 0.9,
+   "z": 0.8,
+   "wall": false
+  },
+  {
+   "token": "station_panel",
+   "x": 28.0,
+   "y": 1.9,
+   "z": 0.06,
+   "wall": true
+  },
+  {
+   "token": "station_pillar",
+   "x": 35.0,
+   "y": 0.0,
+   "z": 0.8,
+   "wall": false
+  },
+  {
+   "token": "station_plinth",
+   "x": 38.0,
+   "y": 0.0,
+   "z": 0.8,
+   "wall": false,
+   "config": {
+    "width_cells": 1,
+    "depth_cells": 1,
+    "top_height": 1.2
+   }
+  },
+  {
+   "token": "floating_sphere_field",
+   "x": 38.0,
+   "y": 1.2,
+   "z": 0.8,
+   "wall": false
+  },
+  {
+   "token": "station_plinth",
+   "x": 40.0,
+   "y": 0.0,
+   "z": 0.8,
+   "wall": false,
+   "config": {
+    "width_cells": 3,
+    "depth_cells": 1,
+    "top_height": 0.9
+   }
+  },
+  {
+   "token": "pythagorean_triangle_angles",
+   "x": 40.0,
+   "y": 0.9,
+   "z": 0.8,
+   "wall": false
+  },
+  {
+   "token": "station_panel",
+   "x": 40.0,
+   "y": 1.9,
+   "z": 0.06,
+   "wall": true
+  },
+  {
+   "token": "station_pillar",
+   "x": 44.0,
+   "y": 0.0,
+   "z": 0.8,
+   "wall": false
+  },
+  {
+   "token": "station_stage",
+   "x": 47.0,
+   "y": 0.0,
+   "z": 0.8,
+   "wall": false,
+   "config": {
+    "width_cells": 1,
+    "depth_cells": 1,
+    "step_height": 0.18
+   }
+  },
+  {
+   "token": "lab_room",
+   "x": 47.0,
+   "y": 0.18,
+   "z": 0.8,
+   "wall": false
+  },
+  {
+   "token": "station_plinth",
+   "x": 49.0,
+   "y": 0.0,
+   "z": 0.8,
+   "wall": false,
+   "config": {
+    "width_cells": 1,
+    "depth_cells": 1,
+    "top_height": 1.2
+   }
+  },
+  {
+   "token": "triangle_line_puzzle",
+   "x": 49.0,
+   "y": 1.2,
+   "z": 0.8,
+   "wall": false
+  },
+  {
+   "token": "station_plinth",
+   "x": 51.0,
+   "y": 0.0,
+   "z": 0.8,
+   "wall": false,
+   "config": {
+    "width_cells": 1,
+    "depth_cells": 1,
+    "top_height": 1.2
+   }
+  },
+  {
+   "token": "quad_line_puzzle",
+   "x": 51.0,
+   "y": 1.2,
+   "z": 0.8,
+   "wall": false
+  },
+  {
+   "token": "station_panel",
+   "x": 49.0,
+   "y": 1.9,
+   "z": 0.06,
+   "wall": true
+  }
+ ]
+}
