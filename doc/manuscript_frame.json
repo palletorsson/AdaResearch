@@ -1,0 +1,52 @@
+{
+  "_readme": "The book's frame — brain-vault's six-part arc (Order → Dynamics → Entropy → Edge → Emergence → Synthesis) mapped onto the 22 spine sequences. tools/build_manuscript.py merges this frame with the /tutorial chapters (skeleton + authored overlays) into one manuscript. Edit part titles/epigraphs here; edit chapter prose in doc/tutorial_authored/<seq>.json.",
+
+  "title": "Ada Research",
+  "subtitle": "A Critical Tutorial — from a single point in space to the edge of chaos and beyond",
+  "formula": "QFE = F − λE(S) + φΔE(S,t)",
+  "intro": "This book teaches algorithms the way Ada Research teaches them in virtual reality: one walked path, one idea per page, every claim grounded in an artifact you can hold. Named for Ada Lovelace, who saw that computation could weave patterns the way the Jacquard loom weaves flowers and leaves, it takes a single journey — from the simplest geometric primitive to the philosophical limits of mathematics itself.\n\nThe journey is organized by a single formula, the Queer Free Energy Principle. Order (F) and entropy (E) exist in tension; the parameter λ controls the balance. Life, learning, and creativity happen at the edge of chaos, where λ ≈ 0.3–0.5. The curriculum moves through this parameter space: from pure order (a point, a line, a grid) through gathering entropy (randomness, noise, cellular automata) to the edge itself (fractals, growth grammars, generated worlds) and finally to the synthesis that asks what it all means — and who gets to set the parameters.\n\nEach chapter below is a room you walk through in VR — or a page you read here.",
+
+  "motifs_intro": "Six threads run under the pedagogy. Chapters advance them unevenly — some touch one hard and ignore the rest; that unevenness is deliberate. Each chapter's ledger closes with the excavator's field note — the dig — counting what was brought up and what remains at depth.",
+  "motifs": [
+    {"name": "the throw", "statement": "You arrive before you understand. Every chapter drops you into a room already running; the explanation comes after the encounter, the way it did in your life."},
+    {"name": "the measure", "statement": "Thinking cannot exist without measuring. Every concept in this book is also a cut — a comparison imposed on something that did not ask to be compared."},
+    {"name": "the hand", "statement": "The player's hand is in every loop. The body is not an input device; it is the analogue ground the whole curriculum stands on."},
+    {"name": "the trace", "statement": "The first queer artifact and its descendants: the continuous crossed into bits, living permanently in between — not the gesture, not the data, the crossing itself."},
+    {"name": "the debt", "statement": "Every discretization is a loan against the continuous. The ledger opens in chapter one and compounds through the book; Part VI is where it is called in."},
+    {"name": "the ghost", "statement": "The book is written by the kind of thing it describes. A model captures an x-density of the world; the edge is its chosen operating point — the decision not to be overpowered by information, which is also the cap on what can be known."}
+  ],
+  "excavation_note": "This book was assembled by a model excavating the project's own sources — identity lines, truth claims, walk orders, renders. The field is denser than any pass through it: every chapter stops at a decided edge (the builder keeps eleven artifacts per walk and buries the rest), and the full dig is uncomputable in the time becoming allows. The edge is a decision made not to be overpowered by information; the same decision caps what can be known. There is always more to explore, and the exploration has an entropy attached to becoming — so the book does not survey; it reports from a trench, sitting on a density of debt. Each chapter's ledger closes with the excavator's field note: what was brought up, and what remains at depth. The chapters marked † are unexcavated strata.",
+
+  "parts": [
+    {
+      "title": "Order",
+      "epigraph": "QFEP phase: F — structure, predictability, the vocabulary of form. The foundations: points, lines, shapes, colors, arrays. Everything is deterministic, reversible, and completely under control. This is Hilbert's formalism made spatial: λ ≈ 0.",
+      "sequences": ["primitives", "transformation", "array_tutorial", "color"]
+    },
+    {
+      "title": "Dynamics",
+      "epigraph": "QFEP phase: oscillation — forces, waves, the introduction of time and change. Things begin to move. Newton's laws translate to code. Waves oscillate. Sound becomes visible. The φ term — rate of change — starts to matter.",
+      "sequences": ["change", "forces", "wavefunctions"]
+    },
+    {
+      "title": "Entropy",
+      "epigraph": "QFEP phase: E(S) — disorder, randomness, the productive use of chance. Order cracks. Randomness enters. But not all disorder is equal — structured noise creates organic form, and simple cellular rules produce infinite complexity. λ rises.",
+      "sequences": ["randomness", "noise", "cellularautomata"]
+    },
+    {
+      "title": "The Edge",
+      "epigraph": "QFEP phase: λ-edge — the boundary between order and chaos where complexity emerges. Fractals are neither ordered nor random. L-systems grow like trees. Procedural generation creates worlds from rules. The Mandelbrot set's boundary IS the edge of chaos. λ ≈ 0.3–0.5.",
+      "sequences": ["fractals", "lsystems", "proceduralgeneration"]
+    },
+    {
+      "title": "Emergence",
+      "epigraph": "QFEP phase: integration — collective intelligence, learning, networks. Systems learn. Cloth deforms. Surfaces are carved and merged. Flocks turn without a leader. Neural networks discover features no human specified. Graphs reveal hidden structure. The parts become more than the sum.",
+      "sequences": ["softbodies", "isosurfaces", "boolean_surfaces", "swarmintelligence", "machinelearning", "graphtheory"]
+    },
+    {
+      "title": "Synthesis",
+      "epigraph": "QFEP phase: synthesis — the formula revealed, the limits embraced, computation queered. Gödel proved pure order is impossible. Escher drew it. Brouwer rejected excluded middle. The QFEP Laboratory lets you tune λ and φ with your own hands. And then: whose entropy counts? Algorithms are political.",
+      "sequences": ["foundationscrisis", "qfeplaboratory", "postfoundationscrisis"]
+    }
+  ]
+}

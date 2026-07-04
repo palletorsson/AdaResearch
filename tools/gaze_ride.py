@@ -70,7 +70,7 @@ def main():
     for z in range(len(util)):
         for x in range(len(util[z])):
             c = str(util[z][x]).strip()
-            if c == "s":
+            if c in ("s", "sp"):   # both spawn codes exist in the wild; "sp" is the documented one
                 spawn = (x * cube, z * cube)
             elif c == "t":
                 exit_ = (x * cube, z * cube)

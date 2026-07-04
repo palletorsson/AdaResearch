@@ -1,0 +1,72 @@
+{
+  "_readme": "The human writing pass for the primitives tutorial — the opening chapter, and the proof of the ledger principle: point = awe/thrownness, line = measurement as the condition of thought, the hand enters, the trace crosses analogue into bits and opens the debt. Merged over the skeleton by tools/build_critical_tutorial.py (apply_authored); regeneration never clobbers this file.",
+
+  "truth": "A point is position without extension. Everything is built from nothing.",
+
+  "question": {
+    "text": "Before the first shape, there is a dark room and one luminous point. Stand with it a moment. It has no size — no width to inspect, no surface to touch — only position, the pure fact of being here rather than anywhere else. Everything this book will build — forests, storms, minds — is made of nothing but these. The weight of that is worth feeling before it becomes technique: geometry begins with something that, strictly speaking, isn't there. And notice how you got here: dropped in. You did not watch the world boot; you arrived mid-scene, in a body, facing a point, the way you arrived the first time. The curriculum honors that thrownness by starting not with a definition but with an encounter. The definitions come — Vector3(x, y, z), three numbers naming a place — but the numbers are the second thing. The first thing is awe at how little it takes: position without extension. Nothing, with an address. And from here, the whole world."
+  },
+
+  "primitive": {
+    "lead": "Every sequence begins with one small thing that already contains the whole idea — here, the point that would not stay still.",
+    "artifacts": {
+      "klee_walking_point": "Page one of Klee's Pedagogical Sketchbook, built: 'an active line on a walk, moving freely, without a goal. A walk for a walk's sake.' A luminous point sets itself in motion and leaves a trail of points behind it — and the trail IS the line. Watch the whole ceremony: the point crosses its invisible sheet, draws the line out of nothing, holds it for a beat, dims, and walks again. The line is never given; it is always the record of a point that moved. Drawing is time made visible — and the artifact's two walk styles are already an ethics: 'meander', the queer wander, against 'straight', the collapsed shortest path. The straightest move is the one that learned the least."
+    }
+  },
+
+  "walk1": {
+    "lead": "Five artifacts: the void, the given, the crossing, the agreement, and the room that frames them all.",
+    "artifacts": {
+      "fontana_puncture": "Fontana's Concetto Spaziale carried into three dimensions: a solid cube with a sphere subtracted — and the sphere is bigger than the cube, so the void breaches every face and hollows the matter from inside. At dead centre, suspended in the absence it made, floats a single luminous point: the zero-dimensional origin of the cut. This is the weight of nothing made architectural. Fontana slashed canvas to let the infinite in; here the infinite is literally larger than the object that holds it, and the cube survives only as the frame that proves there was something for the void to take. A point, given a radius and an appetite, is the most consequential thing in the room.",
+      "cube_scene": "The given. A cube that will follow you through the whole book — grabbed, scaled, subdivided, snapped, augmented — while remaining recognisably itself. It earns its plainness: every later sequence needs a stable form against which change can be read, and this is that form. In a curriculum about becoming, the cube is the thing that merely, stubbornly, is.",
+      "player_trace": "The first really queer artifact in the book. A recorder turns your motion through the room into a visible line: every step writes another point, and your walk becomes geometry instead of a forgotten action. Now look closely at what just happened. Your movement was analogue — continuous, at a resolution higher than the already-pixelated screen showing it back to you; no sample rate can hold all of it. The recorded trace is digital: the gesture broken into bits, position by position. And the line hanging in the room is neither. Not the gesture — that is gone; not the data — data has no glow. It lives in between, on the crossing itself, which is exactly where this book locates the queer: the irreducible remainder the grid cannot fully hold. Every discretization from here on repeats this crossing. This is where the ledger opens.",
+      "grid_lines": "The lattice arrives, and with it the first act of measurement. The XZ plane made legible: x = i·step, z = j·step, a mesh of lines laid across the floor. It looks like a fact about space. It is not — it is a social agreement we project onto space, the shared fiction that lets two people mean the same thing by 'here'. Thinking that compares, that ranks, that navigates — thinking at all, this sequence argues — cannot exist without some grid. The critical move is not to refuse it but to remember, every single time, that you put it there.",
+      "lab_room": "And the room itself, procedurally generated: white tile, observation glass, an accent strip naming the QFEP phase, signage reading TEST CHAMBER λ-S. The room is not the experiment — the room is the signal that an experiment is about to happen. Which makes it the architecture of thrownness: you are always already inside one of these before anyone explains it, reading the walls for what kind of place this is. Same script, different DNA, different chamber — the frame is as authored as anything it frames."
+    }
+  },
+
+  "walk2": {
+    "lead": "Further in: the hand starts writing, and measurement gets a body.",
+    "artifacts": {
+      "draw_dot": "Your hand, sampled. Move it and a trail follows: sample(hand_position), point after point, the hand writing directly into space. Draw slowly and the curve is smooth; whip your wrist and you can outrun the sampler — the line goes faceted, and you are watching the debt accrue in real time. The artifact's claim is severe: a curve has no intrinsic form; it is only the limit of increasingly dense point samples. Between any two samples, something of your gesture is discarded. The drawing is beautiful. It is also a receipt.",
+      "laser_measure": "A handheld laser measure with an LCD readout — the most ordinary object in the sequence, and among the most loaded. Point it and a number appears: distance, the primal measurement, the act the line made thinkable. Every measurement is a question forced onto the world in units the world did not choose. The tool fits in your hand because measuring was never neutral or disembodied — someone aims it.",
+      "pyramid_edit": "A pyramid with five grab handles — apex and four base corners, all movable. Drag the apex sideways and somewhere along the way it stops being a pyramid; no alarm sounds, because nothing in the geometry knows the word. 'Pyramid' is a parameterisation plus a habit of naming. The handles teach what the definition hides: categories have interiors and edges, and you can feel for them with your hand.",
+      "grabbable_line": "A line segment you grab as one object — anywhere along its length — and carry through space. The lesson is in what you didn't need: you can hold a line before you know it has endpoints. Wholes are graspable before parts are nameable; the body understands before analysis arrives. It also resists snapping to integers, slightly — a small built-in glitch to remind you the grid is always pulling.",
+      "triangle": "Three points, and suddenly there is surface — the minimal agreement that defines a plane and encloses area. Drag its vertices through the presets: equilateral, right-angled, isosceles — the family of shapes one contract can take. Every surface you will see in this book, every creature and cave and cathedral, is triangles and nothing else. The GPU's atomic unit is not the pixel; it is this pact among three points. Here the trace's private crossing becomes industry: the whole rendered world is discretization at scale."
+    }
+  },
+
+  "turn": {
+    "text": "The knobs of this sequence are quieter than later ones, and more fundamental. klee_walking_point exposes trail_points — 48 by default — and that number is the book's first sample rate: lower it and the walk becomes a polygon; raise it and the line approaches, without ever reaching, the gesture. The debt made adjustable — pay more memory, owe less form. walk_style toggles meander against straight: the same journey, with and without a goal. And fontana's sphere_radius decides how much void a form can carry before it stops being a form at all. Three knobs: how finely to sample, whether to wander, how much nothing to admit. Most of the book's later machinery is these three questions wearing costumes."
+  },
+
+  "critical": {
+    "lead": "Now the reading the dark room has been implying all along.",
+    "qfep_connection": "Primitives are the F term — pure order, stable foundations before entropy enters, the deterministic base from which complexity will grow. That is the official story, and it is true enough to teach. But the trace has already broken it. The player's hand entered early, analogue and unrepeatable, and every artifact that recorded it took out a loan against the continuous. Order, it turns out, is not the absence of entropy — it is entropy deferred: sampled, gridded, agreed upon. The F term is what E(S) looks like after the first measurement. Which means the queer remainder is not a late guest arriving with the randomness sequence: it was here before the grid was, and the grid was built to manage it."
+  },
+
+  "world": {
+    "lead": "Ten rooms that begin with almost nothing and end with an angel. Point_One holds a single artifact and a footprint of zero square metres — the emptiest room in the game, on purpose; awe needs a vacuum. Then lines accumulate, the trace gets a room of its own, the grid arrives, triangles bring surface, polyhedra bring bodies. Primitives_Ignorance packs forty artifacts into the sequence's densest room — everything you do not know yet, staged — and Portals throws open the largest footprint in the spine, doors before you know what doors are. It ends in Melencolia: Dürer's angel surrounded by every instrument of measurement, polyhedron at her feet, unable to act. The sequence's closing argument in a single image — measurement alone does not move."
+  },
+
+  "seed": {
+    "truth": "A point is position without extension. Everything is built from nothing.",
+    "exercises": [
+      "Stand in Point_One for a full minute without touching anything. Write down what the empty room is doing to you. That is what 'position without extension' feels like from inside.",
+      "Set klee_walking_point to 'straight' and watch a few walks; set it to 'meander' and watch again. Say which line knows more, and defend your answer to a mathematician.",
+      "In draw_dot, draw the slowest curve you can, then the fastest. Find the speed at which your hand outruns the sampler — that threshold is the resolution of your world here. Write the number down; the book will raise it and raise it and never reach you.",
+      "With laser_measure, measure the distance to the point at the centre of fontana_puncture's hollow. Then say what exactly you measured to: matter, void, or agreement.",
+      "Drag pyramid_edit's apex until, for you, it stops being a pyramid. Mark the spot. Ask someone else to do the same. The distance between your two marks is what a category is.",
+      "In player_trace, walk a word — your name — and look at the line. What did the recording keep, and what did it discard? The discarded part is the debt; remember its face."
+    ],
+    "coda": "The seed of this sequence fits in a sentence: from a point that isn't there, and a hand that can't be held, the whole world will be built on credit. Carry it into transformation, where the shapes learn to move — and the moves, not the shapes, turn out to be the geometry."
+  },
+
+  "motifs": {
+    "the throw": "Opened. You are dropped into a dark room with one luminous point — arrival before explanation, the spawn as thrownness. Every chapter after this begins the same way, and owes this one the honesty of admitting it.",
+    "the measure": "Opened. The grid is confessed as a social agreement, the laser puts measurement into a hand, and Melencolia closes the sequence with measurement's patron saint, unable to act. Thinking begins with a cut.",
+    "the hand": "Opened. draw_dot and player_trace put the body in the loop on day one — the hand as the analogue ground every later system will sample.",
+    "the trace": "Opened — the first queer artifact. A continuous gesture crossed into bits and back into light; the line in the room is neither gesture nor data but the crossing itself, the in-between the grid cannot hold.",
+    "the debt": "The ledger opens at trail_points = 48: forty-eight samples borrowed against a continuous walk. Everything discarded between samples is the first entry. Balance: small, and already compounding."
+  }
+}

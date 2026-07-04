@@ -1,0 +1,72 @@
+{
+  "_readme": "The human writing pass for the randomness tutorial. Merged over the auto-assembled skeleton by tools/build_critical_tutorial.py (apply_authored) — regeneration never clobbers this file. Voice: NOC directness + this project's critical reading. One idea per page; the renders carry the rest.",
+
+  "truth": "Entropy is not decay — it is the size of the possible.",
+
+  "question": {
+    "truth": "Entropy is not decay — it is the size of the possible.",
+    "formula": "H = −Σ pᵢ log pᵢ   ·   xₙ₊₁ = (a·xₙ + c) mod m",
+    "text": "Flip a coin. Not the idea of a coin — this sequence hands you one, gold on one side, silver on the other, above a counter that will spend the rest of the hour converging on 0.5. The flip is lawless; the count is law. That is the whole paradox of randomness, and it is stranger than it looks, because the machine you are standing in cannot actually do it: a computer is a device built to be predictable, and when it needs chance it fakes it, with arithmetic whose origin it agrees to forget. This sequence walks the distance between the fake and the real — from a crank that shows determinism impersonating chance, to your own body leaking true entropy into the simulation, to jars, dice, and distributions where disorder shows its shapes. Entropy here is not decay, and it is not noise to be filtered out. It is the size of the possible — the wilderness every later pattern will be drawn from."
+  },
+
+  "primitive": {
+    "lead": "Every sequence begins with one small thing that already contains the whole idea.",
+    "artifacts": {
+      "slot_machine": "Three reels, one lever, and the oldest honest demonstration of independence in the building. Pull: the reels stop one by one, left to right, and no reel's symbol tells you anything about the next — P(A∩B∩C) = P(A)·P(B)·P(C), the multiplication that makes triple matches rare and casinos rich. The histogram beside it counts every symbol and slowly flattens toward uniform. Hold both facts at once: each pull is unknowable, the long run is guaranteed. Everything else in this sequence lives in the gap between those two sentences."
+    }
+  },
+
+  "walk1": {
+    "lead": "Five artifacts, in the order the sequence itself proposes — where chance comes from, and what it builds.",
+    "artifacts": {
+      "prng_crank_machine": "The confession at the start of the walk: computers cannot flip coins. Press the crank and watch state = state × 1664525 + 1013904223 mod 2³² execute in stages — multiply, add, wrap. Nothing here is random; the entire future of the sequence is fixed by its seed. It merely scrambles so thoroughly that no test you can afford will catch the pattern. Determinism with a forgotten origin — keep the phrase, because every 'random' room after this one is running on some version of this crank.",
+      "hardware_entropy_decay": "Where the real entropy comes from: you. Controller velocity becomes scratches, grip pressure becomes grime, head rotation drives the weathering rate — three clean surfaces decay in real time from nothing but your body's noise. Try to stop feeding it. Stand perfectly still. You cannot: tremor, drift, and heartbeat leak through the sensors regardless. The artifact makes the measurement problem physical — the observer is not outside the system; the observer is the entropy source.",
+      "env_one": "The first payoff: randomness as a builder. A kitbashing algorithm assembles an environment from parts, and chance decides which part lands where — the same move game worlds and film sets use to look grown rather than authored. After two machines about where randomness comes from, this one is about what it is for: variety no one had to design piece by piece.",
+      "random_walk_terrarium": "Put walkers in a jar and let them wander: step, turn, step, no destination. Their trails accumulate into terrain, crossings thicken into structures, and the terrarium slowly fills with geography nobody planned. The mathematics is mean squared displacement — E[|r|²] = n·d·σ², spread grows with the square root of time — but the lesson is softer: exploration without a goal still covers the space. Covers it, in fact, more honestly.",
+      "coin_toss": "And then back to the atom. Grab a coin, toss it: Bernoulli(0.5), the simplest random thing there is. The counter tracks heads against tails, wandering, overshooting, slowly forgetting its own excursions on the way to one half. Every distribution in the rooms ahead is built from stacks of this — binary choice repeated until shape appears. The hydrogen atom of randomness; and as with hydrogen, most of the universe turns out to be made of it."
+    }
+  },
+
+  "walk2": {
+    "lead": "Further in: randomness you can feel, and the shapes it is allowed to take.",
+    "artifacts": {
+      "random_walk_leash": "The terrarium, transposed into your arm. The orb on the leash tugs in a random direction with every impulse, and you hold on. Statistically it is the same walk — drift scaling with √N — but the transmission line is different: unpredictability arrives as force, through your wrist. You know the next tug is coming; you cannot know which way. That helpless half-knowledge is what a distribution feels like from inside.",
+      "entropy_jar": "Red particles, blue particles, one jar, your hand. Shake: they mix. Shake again, cleverer this time: they mix more. The Shannon readout climbs and does not come back — not because unmixing is forbidden, but because mixed arrangements outnumber sorted ones so astronomically that waiting for order is not a plan. The second law as a toy, and the first place in the sequence where time acquires a direction.",
+      "distribution_sampler": "The zoo. Uniform, Gaussian, Poisson, exponential — pick one and watch samples fall into a histogram until the empirical shape finds the theoretical curve underneath it. The move to hold onto: a distribution is not randomness; it is a constraint on randomness — the shape of what remains possible. Chance supplies the events, the distribution decides their silhouette. Switching between them changes nothing about the dice and everything about the world.",
+      "dice_throw": "Six outcomes on green felt, with consequences: roll a six and a hundred balls rain from the sky; roll a one and a single ball drops. The payoff is wildly unequal; the process is perfectly fair — P = 1/6 each, expected value 3.5, and the statistics converge to say so. Fairness, the artifact insists, is not a property of any outcome you receive. It is a symmetry of the generating process. Politics has struggled with the difference ever since.",
+      "clipboard": "The sequence's reading surface, and quietly its most honest object: a document you must pick up to read. Pages of code and tutorial fragments stay coherent in your hands while everything around them scatters and decays — but the text yields nothing to a glance across the room. In a curriculum about embodiment, even reading has weight, position, and a grip."
+    }
+  },
+
+  "turn": {
+    "text": "Every machine in this walk exposes the same two knobs, whatever it calls them. The first is N, the sample count — the only knob that buys truth. At ten samples the histograms are noise; at ten thousand they are geometry; the law of large numbers is a slope you can set. The second is the seed. Change it and every particular history changes — different tosses, different trails — while every statistic stays identical. Turn both and you are holding the sequence's entire epistemology: individual events are lawless and unownable; ensembles are lawful and knowable. Everything else on the panels — distribution pickers, impulse strengths, decay rates — just chooses which lawful shape the lawlessness must fill."
+  },
+
+  "critical": {
+    "lead": "Now the reading the reels and jars have been implying all along.",
+    "qfep_connection": "Randomness is the E(S) term in its purest form — the sequence where the formula's second half stops being an abstraction. F, the model, meets events it cannot compress: prediction fails, indices break, normalization is refused. The critical claim is that this is not damage. Entropy here is possibility space — the high-dimensional wilderness from which every pattern in the later sequences will be drawn. And the random walk is its queer figure: motion without telos, navigation that refuses the straight line and the destination, and still — measurably, E[|r|²] = n·σ² — gets everywhere. What the straight path calls lost, the walk calls coverage."
+  },
+
+  "world": {
+    "lead": "Thirteen rooms, ordered from definition to play: first randomness defined and subtracted — what remains when you remove pattern? — then the classic 10 PRINT maze, one random choice repeated until it becomes architecture; then chance let loose on cubes, rotations, and walks; a Gaussian room where disorder acquires its famous bell; mushrooms and pheromones where biology borrows it; and finally a game, because play is what randomness is for."
+  },
+
+  "seed": {
+    "truth": "Entropy is not decay — it is the size of the possible.",
+    "exercises": [
+      "Crank prng_crank_machine ten times and write down the outputs. Reset it with the same seed and crank ten more. Explain, in one sentence, why the machine is still allowed to call itself random.",
+      "In coin_toss, throw until the ratio reads exactly 0.50 — count your throws. Then throw ten more and watch it leave. The law of large numbers is a promise about the limit, not about you.",
+      "Shake entropy_jar until red and blue are perfectly mixed, then try to unshake it. Describe the difference between the two directions using only the word 'count'.",
+      "Stand completely still inside hardware_entropy_decay for one minute. The surfaces keep weathering. Where is the entropy coming from now, and what does that say about measurement?",
+      "In distribution_sampler, switch from uniform to Gaussian and name one thing that stayed the same. That thing is what this sequence means by randomness; everything that changed is what it means by distribution.",
+      "Walk Random_Walk deciding every junction by an imagined coin flip — no destination allowed. Afterwards, defend the path you took to someone who asks where you were trying to go."
+    ],
+    "coda": "The seed of this sequence fits in a sentence: chance, counted, becomes shape. Carry it into noise, where randomness is given a memory — and starts to look like landscape."
+  },
+
+  "motifs": {
+    "the throw": "The throw goes literal: coins, dice, reels — thrownness formalized as Bernoulli(0.5), and made fair by symmetry of process rather than kindness of outcome.",
+    "the hand": "hardware_entropy_decay names the body as the only true entropy source in the building — tremor, drift, and heartbeat leaking through the sensors even when you stand perfectly still.",
+    "the debt": "The PRNG is a loan of a second kind: the crank borrows unpredictability from a seed and never repays it — determinism deferring its pattern past the horizon of any test you can afford."
+  }
+}
