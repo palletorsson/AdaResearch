@@ -143,10 +143,21 @@ def main() -> int:
             print(f"!! missing tutorial or pearls for {seq}")
             continue
         sd = seq_def(seq)
-        seq_text = " ".join(str(sd.get(k, "")) for k in ("truth", "formula", "description",
-                                                         "qfep_connection", "qfep_term"))
+        # sequence truth from the TUTORIAL (carries the authored override; some
+        # sequence JSONs have an empty truth field) + the sequence definition
+        seq_text = " ".join([str(t.get("truth", "")), str(t.get("name", ""))] +
+                            [str(sd.get(k, "")) for k in ("truth", "formula", "description",
+                                                          "qfep_connection", "qfep_term")])
         seq_tok = tokens(seq_text)
         concepts = ladder_concepts(seq)
+        # authored overlay prose — a walked artifact with a written paragraph is
+        # not mute, even when its .gd carries no @identity yet
+        overlay = load_json(os.path.join(REPO, "doc", "tutorial_authored", f"{seq}.json")) or {}
+        prose_map: dict[str, str] = {}
+        for key in ("primitive", "walk1", "walk2"):
+            arts_d = (overlay.get(key) or {}).get("artifacts")
+            if isinstance(arts_d, dict):
+                prose_map.update(arts_d)
 
         walked = []
         for p in t.get("pages", []):
@@ -160,27 +171,31 @@ def main() -> int:
         def record(name: str) -> dict:
             reg = registry.get(name, {})
             c = crit.get(name, {})
+            prose = str(prose_map.get(name, ""))
             text = " ".join([str(reg.get("description", "")), str(reg.get("qfep_connection", "")),
-                             c.get("crit_text") or ""])
+                             c.get("crit_text") or "", prose])
             tok = tokens(text) | tokens(name.replace("_", " "))
             overlap = len(tok & seq_tok)
             claim = len(c.get("crit_text") or "")
+            voice = max(claim, len(prose))   # a written paragraph counts as a voice
             cap = os.path.exists(os.path.join(CAPTURES, name, "front.png"))
             sz = sizes.get(name) or {}
             base = sz.get("base_m") if isinstance(sz, dict) else None
-            lb = min(3, overlap // 3) + (2 if claim > 120 else 1 if claim > 40 else 0) \
+            lb = min(3, overlap // 3) + (2 if voice > 120 else 1 if voice > 40 else 0) \
                 + (1 if name in concepts else 0)
             reasons = []
             if overlap >= 3:
                 reasons.append(f"echoes the sequence truth ({overlap} shared terms)")
             if claim > 120:
                 reasons.append("strong @identity theory-claim")
+            elif prose:
+                reasons.append("authored prose carries it (no @identity in the .gd yet)")
             elif claim == 0:
                 reasons.append("mute (no @identity)")
             if not cap:
                 reasons.append("no capture — invisible to the book")
-            return {"name": name, "lb": lb, "reasons": reasons, "claim": claim, "cap": cap,
-                    "concept": concepts.get(name), "pol": polarity(text), "tok": tok,
+            return {"name": name, "lb": lb, "reasons": reasons, "claim": claim, "voice": voice,
+                    "cap": cap, "concept": concepts.get(name), "pol": polarity(text), "tok": tok,
                     "base": base, "role_hint": (c.get("role") or "content")}
 
         W = [record(n) for n in walked]
@@ -194,12 +209,13 @@ def main() -> int:
                 r["role"] = "load-bearing"
             elif r["role_hint"] == "ambient":
                 r["role"] = "ornament"
-            elif r["claim"] == 0 and r["lb"] <= 1:
+            elif r["voice"] == 0 and r["lb"] <= 1:
                 r["role"] = "ornament?"
             else:
                 r["role"] = "side"
 
-        # counters: kin (shared concept or >=4 shared tokens) + opposed on >=1 axis
+        # counters: kin (shared concept or >=4 shared tokens) + opposed on >=1 axis;
+        # only pairs anchored by a load-bearing or high-signal member (else spam)
         def opposed(a, b):
             axes = [ax for ax in a["pol"] if ax in b["pol"] and a["pol"][ax] * b["pol"][ax] < 0]
             kin = (a["concept"] and a["concept"] == b["concept"]) or len(a["tok"] & b["tok"]) >= 4
@@ -209,6 +225,9 @@ def main() -> int:
         pool = W + [d for d in D if d["lb"] >= 3]
         for i, a in enumerate(pool):
             for b in pool[i + 1:]:
+                if not (a["name"] in load_bearing or b["name"] in load_bearing
+                        or a["lb"] >= 5 or b["lb"] >= 5):
+                    continue
                 axes = opposed(a, b)
                 if axes:
                     counters.append((a["name"], b["name"], axes,

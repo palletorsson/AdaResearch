@@ -126,6 +126,26 @@ correction: from the south door the ENTRY hero by angular height is fibonacci_pa
 the tree-cloud. Still queued (v3): blind bays (8/11 arrival-only — angle the bays or open
 sightlines), tame/crown the 11 m box_counting, respace lane + proto bay interior overlaps.
 
+## The encyclopedia API toolbox (harvested from /sitemap, 2026-07-04 — use before building)
+
+- **`GET /api/find?q=&kind=content&format=markdown`** — corpus-wide search (registry +
+  algorithms + maps + pages). USE BEFORE COMMISSIONING a blank — it found the
+  anti-threshold candidates (mc_sculpt_vr et al.) that noise's pearls could not.
+  Single terms work best; multi-word queries AND together.
+- **`GET /api/game/analyze?name=<Map>`** — independent map validator (walkability %,
+  reachability, longest shortest path, per-artifact distance from spawn). Second
+  opinion to map_pathfinder; verified on Hangar_Fractals (100%, all reachable).
+- **`POST /api/captures/generate` {map}** — runs the Godot map capture headlessly via
+  the web. (Artifact captures stay CLI: capture_multi_angle --mode=artifact; then
+  tools/sync_artifact_captures.py refreshes the manifest /api/artifact-captures reads.)
+- **`POST /api/artifact-pairs` {ids}** — pairwise embedding cosine within a set —
+  upgrade path for dig_report kin detection (token overlap is the current proxy).
+- **`POST /api/fold-neighbors` {ids, topn}** / **`GET /api/concept-ladder?id=`** —
+  semantic kin / tier ladders (chapter_stage currently reads doc files directly).
+- **`POST /api/game/simulate`** — AI pathfinding walk; complement to gaze_ride.
+- **`GET /api/final-lap?format=markdown`** — Part VI context for the last three passes.
+- **`GET /api/scenes/footprint` / `/api/scenes/enriched`** — footprints for staging.
+
 ## Standing constitution
 
 - Rulings are the source; prose is compiled output. Unruled calls in drafts get marked, not hidden.

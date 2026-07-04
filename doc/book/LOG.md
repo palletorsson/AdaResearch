@@ -34,3 +34,6 @@
 - 2026-07-04 13:06 · **capture** · box_counting_dimension render — D = 1.555 measured against the ideal 1.585, the debt photographed ![box counting](/artifact-gallery/captures/box_counting_dimension/front.png)
 - 2026-07-04 13:06 · **stage** · staging brief regenerated: fractals — contrast 80%, scale melody: `spark:[0,1,1,3,2,0,1,0,3,0,0]`
 - 2026-07-04 13:06 · **ride** · Hangar_Fractals walked and folded into fractals: 7 observations — gaze profile per station: `spark:[6,7,29,31,23,31,33,44,44,37,37,41,41,46,46,53,53,60,60,96,9,32,33,40,66,0]`
+- 2026-07-04 13:46 · **dig** · dig report noise: LB=WhiteNoiseGallery, perlin_terrain_sculptor; 1 promotions proposed, 1 blanks, 5 buried with reasons
+- 2026-07-04 13:46 · **dig** · dig report lsystems: LB=lsystem_editor, space_filling_curve_gallery; 3 promotions proposed, 0 blanks, 0 buried with reasons
+- 2026-07-04 15:10 · **dig** · anti-threshold blank: /api/find searched the whole corpus — candidates found (mc_sculpt_vr = the blob given an interior, cube_mound_scene, constraint_sculptor, poke_dough_toy); commission may be unnecessary. /api/game/analyze independently confirms Hangar_Fractals (100 pct walkable, all reachable)
