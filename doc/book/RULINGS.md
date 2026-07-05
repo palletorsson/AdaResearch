@@ -310,4 +310,30 @@ the cable layer is the volume's occupant.
 
 ---
 
-<!-- Next: R-015 — randomness staging forks + noise truths (Palle wording) + Ignorance settle ruling + refit pythagorean/folded_strip + Hangar_Primitives regen w/ 10 walls -->
+## R-015 · 2026-07-05 · The room is the map, not the chapter
+
+**Palle:** "make the room the map, not the chapter"
+
+**Ruling:** the unit of a room is the MAP, not the chapter. The doll-house study proved
+map-scale coheres as "one thing" where the 182-cell chapter corridor could not. So:
+- The chapter-hangar (creator_walk's single mega-corridor) is RETIRED as the room. A chapter
+  is now a NECKLACE OF ROOMS — the sequence's ~13 maps, each its own composed room, chained by
+  the teleporters the real maps already carry.
+- The production room composer works at map grain, branching on the hero:roster ratio into the
+  three modes the pilot found: MONUMENT (one giant hero = the room is the concept-object),
+  SPECIMEN (small roster = tight cluster), CABINET (many small = packed shelves, kill the void).
+- Composition is NON-DESTRUCTIVE: composed rooms are Room_<Map> beside the hand-built maps;
+  the glue (rigger) and walls apply per room.
+- creator_walk / chapter_stage keep their value as the SEQUENCE lens (the necklace order, the
+  transitions), not the room. The dig/ledger/walk still run at chapter grain; only the ROOM
+  descends to the map.
+
+**Foreclosed:** the chapter-as-one-room corridor (too long to read, too coarse to compose);
+one-size composition (heroes and rosters vary too much).
+
+**Landed:** dollhouse.py promoted to the map-room composer (3 modes + --seq); piloted on
+randomness (13 maps). Related: [[project_manuscript_synthesis]] doll-house study.
+
+---
+
+<!-- Next: R-016 — randomness staging forks + noise truths (Palle wording) + Ignorance settle + refits + rate-gallery/distil loop -->
