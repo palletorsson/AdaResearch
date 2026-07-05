@@ -53,6 +53,18 @@ var _static_camera_rotation: Vector3 = Vector3(-0.2618, 0.0, 0.0)  # ~-15° pitc
 const GRID_SYSTEM_SCENE_PATH := "res://commons/grid/grid_system.tscn"
 var _grid_system: Node3D = null
 
+# ── Map-simulator live bridge (dormant unless launched with --mapsim-bridge) ──
+# Same file-bridge pattern as the dressing-room viewer: the web /map-simulator
+# page writes ms_control.json (which map to show), we poll it and load_map_fresh,
+# and write ms_viewer_state.json back so the web knows a window is alive.
+const MAPSIM_CONTROL := "res://ada_run/mapsim_control.json"
+const MAPSIM_STATE := "res://ada_run/mapsim_viewer_state.json"
+var _mapsim_bridge_on: bool = false
+var _mapsim_float: bool = false
+var _mapsim_timer: Timer = null
+var _mapsim_last_ctl: float = 0.0
+var _mapsim_current_map: String = ""
+
 # Layer editor panel (right-side artifact/utility picker)
 var _layer_editor_panel: MapLayerEditorPanel = null
 
@@ -109,6 +121,262 @@ func _ready() -> void:
 	_apply_capture_environment_if_active()
 
 	_set_status("Loaded sequence registry catalog")
+
+	# Live map-simulator bridge — only if launched with --mapsim-bridge.
+	_mapsim_bridge_setup()
+
+
+# ── Map-simulator live bridge ─────────────────────────────────────────
+func _mapsim_bridge_setup() -> void:
+	var initial_map := ""
+	for a in OS.get_cmdline_user_args():
+		if a == "--mapsim-bridge":
+			_mapsim_bridge_on = true
+		elif a == "--float":
+			_mapsim_float = true
+		elif a.begins_with("--map="):
+			initial_map = a.substr(6)
+	if not _mapsim_bridge_on:
+		return
+	# This version's defaults: NO WORLD (near-black, no sky/glow/fog) and NO
+	# camera rotation (freeze the spin — the map holds still while you edit).
+	_spin_speed = 0.0
+	_mapsim_clean_world()
+	# Ignore any pre-existing control message so we don't replay a stale one.
+	var existing = _mapsim_read_json(MAPSIM_CONTROL)
+	if existing is Dictionary:
+		_mapsim_last_ctl = float(existing.get("ts", 0))
+	_mapsim_timer = Timer.new()
+	_mapsim_timer.wait_time = 0.5
+	_mapsim_timer.autostart = true
+	_mapsim_timer.timeout.connect(_mapsim_bridge_poll)
+	add_child(_mapsim_timer)
+	if initial_map != "":
+		load_map_fresh(initial_map)
+		_mapsim_current_map = initial_map
+		_mapsim_lift_grid()
+		_mapsim_schedule_stage()
+	if _mapsim_float:
+		call_deferred("_mapsim_apply_window", "float")
+	_set_status("map-sim bridge live")
+
+
+## No world: a clean near-black environment (no sky gradient, glow or fog) + the
+## catalog's grey Floor plate hidden, so only the map grid reads.
+func _mapsim_clean_world() -> void:
+	if _world_environment:
+		var env := Environment.new()
+		env.background_mode = Environment.BG_COLOR
+		env.background_color = Color(0.06, 0.07, 0.10)
+		env.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
+		env.ambient_light_color = Color(0.55, 0.58, 0.65)
+		env.ambient_light_energy = 1.0
+		env.glow_enabled = false
+		env.fog_enabled = false
+		_world_environment.environment = env
+	var floor_node := get_node_or_null("Floor")
+	if floor_node and "visible" in floor_node:
+		floor_node.visible = false
+
+
+## Grid at level 1: raise the map one grid cube so all footprints sit one level
+## up (load_map_fresh seats the grid at y=-0.5; +0.5 lifts the floor tops up one).
+func _mapsim_lift_grid() -> void:
+	if _grid_system and is_instance_valid(_grid_system):
+		_grid_system.transform.origin.y = 0.5
+
+
+# ── Staged artifacts: each map artifact shown WITH its dressing-room prop ──
+const DressingRoomBuilderLib = preload("res://commons/artifacts/catalog/DressingRoomBuilder.gd")
+var _mapsim_staged: bool = true
+
+## After a map builds, wait for the interactables to place, then stage each.
+func _mapsim_schedule_stage() -> void:
+	if not _mapsim_staged:
+		return
+	await get_tree().create_timer(1.3).timeout
+	_mapsim_stage_artifacts()
+
+## For every placed artifact, build its dressing-room staging (support prop +
+## the artifact seated on it, from staging DNA) at the artifact's cell and hide
+## the bare grid artifact — so the map reads as staged, not a floor of objects.
+func _mapsim_stage_artifacts() -> void:
+	if not (_grid_system and is_instance_valid(_grid_system)):
+		return
+	var host := get_node_or_null("MapSimStaging")
+	if host:
+		host.queue_free()
+	host = Node3D.new()
+	host.name = "MapSimStaging"
+	add_child(host)
+	var lookup_cb := Callable(self, "_lookup_artifact_info")
+	var arts: Array = []
+	_collect_artifacts(_grid_system, arts)
+	for node in arts:
+		if not (node is Node3D):
+			continue
+		var lookup := str(node.get_meta("artifact_lookup_name", ""))
+		if lookup == "":
+			continue
+		var room = DressingRoomBuilderLib.load_dressing_room(lookup)
+		if not (room is Dictionary):
+			continue
+		var staging: Node3D = DressingRoomBuilderLib.build(room, 0, lookup_cb, true)
+		if staging == null:
+			continue
+		# Seat the staging where the artifact stood: its footing (local y=0) lands
+		# on the map floor, the prop rises, its own artifact copy sits on top.
+		# Must add to the tree BEFORE setting global_position — a node not yet
+		# inside the tree can't resolve its global transform (it silently collapses
+		# to the origin, piling every staged artifact at 0,0,0).
+		host.add_child(staging)
+		staging.global_position = (node as Node3D).global_position
+		# Hide the bare grid artifact (the staging carries its own copy).
+		(node as Node3D).visible = false
+
+func _collect_artifacts(n: Node, out: Array) -> void:
+	if n.has_meta("artifact_lookup_name"):
+		out.append(n)
+		return  # don't descend into an artifact's own subtree
+	for c in n.get_children():
+		_collect_artifacts(c, out)
+
+func _collect_all_artifacts() -> Array:
+	var out: Array = []
+	if _grid_system and is_instance_valid(_grid_system):
+		_collect_artifacts(_grid_system, out)
+	return out
+
+## Registry lookup for DressingRoomBuilder — scan registry/*.json for a scene path.
+func _lookup_artifact_info(lookup: String) -> Dictionary:
+	var registry_dir := "res://commons/artifacts/registry/"
+	var dir := DirAccess.open(registry_dir)
+	if dir == null:
+		return {}
+	dir.list_dir_begin()
+	var fname := dir.get_next()
+	while fname != "":
+		if fname.ends_with(".json"):
+			var parsed = JSON.parse_string(FileAccess.get_file_as_string(registry_dir + fname))
+			if parsed is Dictionary:
+				var arts: Variant = parsed.get("artifacts")
+				if not (arts is Dictionary):
+					arts = parsed
+				if arts is Dictionary and arts.has(lookup):
+					var entry = arts[lookup]
+					if entry is Dictionary:
+						dir.list_dir_end()
+						return entry
+		fname = dir.get_next()
+	dir.list_dir_end()
+	return {}
+
+
+func _mapsim_bridge_poll() -> void:
+	# Heartbeat + state write-back (the web reads this for aliveness + current map).
+	var st := FileAccess.open(MAPSIM_STATE, FileAccess.WRITE)
+	if st:
+		st.store_string(JSON.stringify({
+			"ts": Time.get_unix_time_from_system(),
+			"pid": OS.get_process_id(),
+			"map": _mapsim_current_map,
+			"float": _mapsim_float,
+		}))
+		st.close()
+	var ctl = _mapsim_read_json(MAPSIM_CONTROL)
+	if ctl is Dictionary:
+		var cts := float(ctl.get("ts", 0))
+		if cts > _mapsim_last_ctl:
+			_mapsim_last_ctl = cts
+			_mapsim_apply_control(ctl)
+
+
+func _mapsim_apply_control(msg: Dictionary) -> void:
+	# {map} → (re)load that map fresh. The web writes the simulated map to a
+	# scratch map dir and sends its name; a real map is sent by its own name.
+	var m := str(msg.get("map", ""))
+	if m != "":
+		load_map_fresh(m)
+		_mapsim_current_map = m
+		_mapsim_lift_grid()
+		_mapsim_schedule_stage()
+		_set_status("map-sim: " + m)
+	# Toggle staged props from the web ({staged:false} = bare map artifacts).
+	if msg.has("staged"):
+		_mapsim_staged = bool(msg["staged"])
+		if _mapsim_staged:
+			_mapsim_schedule_stage()
+		else:
+			var host := get_node_or_null("MapSimStaging")
+			if host: host.queue_free()
+			for node in _collect_all_artifacts():
+				if node is Node3D: (node as Node3D).visible = true
+	var wm := str(msg.get("window", ""))
+	if wm != "":
+		_mapsim_apply_window(wm)
+
+
+func _mapsim_apply_window(mode: String) -> void:
+	var w: Window = get_window()
+	var embedded: bool = w != null and w.is_embedded()
+	if mode == "float":
+		_mapsim_float = true
+		if not embedded:
+			DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_ALWAYS_ON_TOP, true)
+			DisplayServer.window_set_size(Vector2i(760, 560))
+			DisplayServer.window_set_position(Vector2i(60, 60))
+		_mapsim_set_ui_visible(false)
+	elif mode == "normal":
+		_mapsim_float = false
+		if not embedded:
+			DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_ALWAYS_ON_TOP, false)
+		_mapsim_set_ui_visible(true)
+
+
+## Hide the catalog's overlays/panels so the float window shows only the map.
+func _mapsim_set_ui_visible(v: bool) -> void:
+	for n in [_status_label, _overlay, _map_data_editor, _layer_editor_panel, _map_browser]:
+		if n != null and is_instance_valid(n) and "visible" in n:
+			n.visible = v
+
+
+func _mapsim_read_json(path: String) -> Variant:
+	if not FileAccess.file_exists(path):
+		return null
+	var f := FileAccess.open(path, FileAccess.READ)
+	if not f:
+		return null
+	var txt := f.get_as_text()
+	f.close()
+	return JSON.parse_string(txt)
+
+
+## Viewer camera: scroll = zoom, left-drag = orbit, right/middle-drag = pan
+## across the map plane. Modifies the orbit params; SPIN's _physics_process
+## (spin_speed 0) re-reads them each frame and re-seats the camera.
+func _mapsim_camera_input(event: InputEvent) -> void:
+	if not _preview_camera:
+		return
+	if event is InputEventMouseButton:
+		var mb := event as InputEventMouseButton
+		if mb.pressed and mb.button_index == MOUSE_BUTTON_WHEEL_UP:
+			_orbit_radius = maxf(_orbit_radius * 0.88, 1.5)
+		elif mb.pressed and mb.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+			_orbit_radius = minf(_orbit_radius * 1.14, 600.0)
+	elif event is InputEventMouseMotion:
+		var mm := event as InputEventMouseMotion
+		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+			_spin_angle -= mm.relative.x * 0.006
+			_orbit_height = clampf(_orbit_height + mm.relative.y * 0.06, 0.5, 300.0)
+		elif Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT) or Input.is_mouse_button_pressed(MOUSE_BUTTON_MIDDLE):
+			var right: Vector3 = _preview_camera.global_transform.basis.x
+			var fwd: Vector3 = _preview_camera.global_transform.basis.z
+			var fwd_flat: Vector3 = Vector3(fwd.x, 0.0, fwd.z)
+			if fwd_flat.length() > 0.001:
+				fwd_flat = fwd_flat.normalized()
+			var pan: float = _orbit_radius * 0.0016
+			_orbit_center -= right * mm.relative.x * pan
+			_orbit_center += fwd_flat * mm.relative.y * pan
 
 
 ## Read runtime flag for capture-active. Mirrors GridSystem's helper.
@@ -173,6 +441,10 @@ func load_map_fresh(map_name: String) -> bool:
 	# Set map_name BEFORE adding to tree so it loads on _ready()
 	if "map_name" in _grid_system:
 		_grid_system.map_name = map_name
+
+	# Map-simulator bridge: no world (skip ecosystem / biome / nature sky).
+	if _mapsim_bridge_on and "bare_world" in _grid_system:
+		_grid_system.bare_world = true
 
 	_grid_system.transform.origin = Vector3(0.0, -0.5, 0.0)
 	add_child(_grid_system)
@@ -301,6 +573,12 @@ func _compute_scene_aabb(root: Node3D) -> AABB:
 	return merged
 
 func _unhandled_input(event: InputEvent) -> void:
+	# Map-simulator bridge: a plain viewer — orbit / pan / zoom only, no editing
+	# and no fly. (SPIN mode's _physics_process re-reads the orbit params below.)
+	if _mapsim_bridge_on:
+		_mapsim_camera_input(event)
+		return
+
 	# E key toggles edit mode
 	if event is InputEventKey:
 		var key := event as InputEventKey
