@@ -336,4 +336,22 @@ randomness (13 maps). Related: [[project_manuscript_synthesis]] doll-house study
 
 ---
 
-<!-- Next: R-016 — randomness staging forks + noise truths (Palle wording) + Ignorance settle + refits + rate-gallery/distil loop -->
+## R-016 · 2026-07-05 · Fuse the tools — the room is a hall of workstations
+
+**Palle:** "fuse the tools, make the room a hall of workstations"
+
+**Ruling:** the three tools fuse into one production composer. `tools/hall.py`:
+dollhouse (room = the map) + workstation (hero = a cluster of ladder children +
+lab-prop cast) + rigger (relations under the floor). A map's roster is grouped
+into workstations; each is staged as a TIGHT lab bench (hero on a stage under a
+task light, children on flanking plinths, the cast — cylinder/crates/stool/
+monitor-shelf/extinguisher — packed at the edges) flanking a walked central
+aisle. Floor stays height 1 (walkable, no dais-ramp problem — zero pathfinder
+warnings). Piloted: Hall_Random_Cubes (1 workstation), Hall_Random_Definition
+(2 workstations flanking the aisle). Tuning queued: hall size should hug the
+workstations tighter; rigger needs a --roster mode to glue map-halls (currently
+walk-based); lighting/DNA polish toward the reference renders.
+
+---
+
+<!-- Next: R-017 — randomness staging forks + noise truths (Palle wording) + Ignorance settle + refits + rate-gallery/distil loop -->
