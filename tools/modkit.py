@@ -85,12 +85,18 @@ def seed_station(hero, template, spec, sizes, seed):
             p["config"] = cfg
         P.append(p)
 
+    junctions = spec.get("junctions", {})
+
     def seat(cls_name, x, z, caption, low=False):
         c = classes[cls_name]
         cfg = dict(c["footing_config"])
         if low:
             cfg["top_height"] = 0.5
         cfg["caption_text"] = caption
+        # R-018 artifact_on_footing: the REVEAL — every exhibit ends before its cap edge
+        rev = junctions.get("artifact_on_footing", {})
+        if rev.get("treatment") == "reveal" and "cap_inset" not in cfg:
+            cfg["cap_inset"] = rev.get("cap_inset", 0.1)
         add(c["footing"], x, 0.0, z, **cfg)
         return 0.5 if low else c["seat_y"]
 
@@ -132,6 +138,30 @@ def seed_station(hero, template, spec, sizes, seed):
                 add(token, x, y, z)
             else:
                 add(token, x, slot.get("y", 0.0), z, wall=bool(slot.get("wall")))
+
+    # ── R-018: the meeting layer — treatments where classes touch ──────────────
+    walls = [p for p in P if p["token"] == "station_wall"]
+    # wall_on_floor: the SKIRTING line along each wall's base
+    sk = junctions.get("wall_on_floor", {})
+    if sk.get("treatment") == "skirting":
+        for w in walls:
+            wid = (w.get("config") or {}).get("width_cells", 5)
+            add(f"{sk['piece']}#length_cells:{wid}#style:{sk.get('style', 'threshold')}",
+                w["x"] + wid / 2.0 - 0.5, 0.0, w["z"] + 0.18)
+    # station_on_aisle: the ZONE EDGE — the lit line where the station ends
+    ze = junctions.get("station_on_aisle", {})
+    if ze.get("treatment") == "zone_edge" and P:
+        xs = [p["x"] for p in P]
+        span = max(2, int(max(xs) - min(xs)))
+        add(f"{ze['piece']}#length_cells:{span}#style:{ze.get('style', 'line')}",
+            (max(xs) + min(xs)) / 2.0, 0.0, ze.get("z", 2.8))
+    # wall_on_wall: the SEAM pillar between adjacent wall plates
+    sp = junctions.get("wall_on_wall", {})
+    if sp.get("treatment") == "seam_pillar" and len(walls) >= 2:
+        ws = sorted(walls, key=lambda w: w["x"])
+        for a, b in zip(ws, ws[1:]):
+            seam_x = a["x"] + (a.get("config") or {}).get("width_cells", 5) - 0.5
+            add(sp["piece"], seam_x, 0.0, 0.4)
     return P
 
 

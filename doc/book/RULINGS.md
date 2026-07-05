@@ -374,4 +374,28 @@ island, vitrine).
 
 ---
 
-<!-- Next: R-018 — randomness staging forks + noise truths (Palle wording) + Ignorance settle + refits + rate-gallery/distil loop -->
+## R-018 · 2026-07-05 · The meeting (junctions as a curated layer)
+
+**Palle:** "The world is all about how objects and material meet, how they end before they
+stop to exist … A wall meets the floor, a wall meets another floor, a table meets the floor,
+a jar meets the table — it endless but so much happens in that meeting, and it can inform the
+way we design, we can curate the meeting to make something beautiful. Can we think about that
+in the modular design — how things meet and end, to feel natural and beautiful?"
+
+**Ruling:** MEETINGS become a first-class layer of the modular system — a junction taxonomy
+with declared treatments, applied automatically wherever two classes touch:
+- artifact meets footing  -> the REVEAL (cap_inset — the shadow gap under every exhibit)
+- footing meets floor     -> the BASE SKIRT (the stepped foot; stages keep their hazard tape)
+- wall meets floor        -> the SKIRTING LINE (floorline#threshold run along the wall base)
+- station meets aisle     -> the ZONE EDGE (a lit floorline marking where the station ENDS
+                             before it stops existing — the ending made visible)
+- wall meets wall         -> the SEAM PILLAR (the reveal between plates)
+The kit already knew this in fragments (cap_inset, step tape, the floorline "about between,
+not on", grime bands); R-018 declares it as data in station_modules.json so every seeded
+station gets curated endings for free. Scarpa's rule adopted: the joint is the generator of
+form. NOTE for the book: "the meeting" is a motif candidate — the trace, the threshold, the
+spark gap, and the pointing plinth are all meetings; awaiting Palle's ruling to add it.
+
+---
+
+<!-- Next: R-019 — randomness staging forks + noise truths (Palle wording) + Ignorance settle + refits + rate-gallery/distil loop -->

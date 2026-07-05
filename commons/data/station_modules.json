@@ -31,6 +31,20 @@
   "safety":     ["fire_extinguisher"]
  },
 
+ "junctions": {
+  "_note": "R-018: meetings as a curated layer. Treatments applied automatically wherever two classes touch — the joint is the generator of form.",
+  "artifact_on_footing": {"treatment": "reveal", "cap_inset": 0.1,
+                          "_why": "the shadow gap — the exhibit ends 10cm before its cap edge"},
+  "wall_on_floor":       {"treatment": "skirting", "piece": "station_floorline",
+                          "style": "threshold",
+                          "_why": "the skirting line — the wall's ending read at the floor"},
+  "station_on_aisle":    {"treatment": "zone_edge", "piece": "station_floorline",
+                          "style": "line", "z": 2.8,
+                          "_why": "the lit line where the station ENDS before it stops existing"},
+  "wall_on_wall":        {"treatment": "seam_pillar", "piece": "station_pillar",
+                          "_why": "the reveal between plates"}
+ },
+
  "templates": {
   "bench_v1": {
    "_note": "the reference lab bench — hero centre, children flanking, cast at the edges",

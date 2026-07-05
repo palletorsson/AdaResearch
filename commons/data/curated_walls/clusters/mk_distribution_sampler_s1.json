@@ -51,7 +51,8 @@
     "base_meters": 0.6,
     "cap_meters": 1.16,
     "top_height": 1.15,
-    "caption_text": "distribution sampler"
+    "caption_text": "distribution sampler",
+    "cap_inset": 0.1
    }
   },
   {
@@ -120,7 +121,8 @@
     "base_meters": 0.6,
     "cap_meters": 1.16,
     "top_height": 1.15,
-    "caption_text": "distribution bench"
+    "caption_text": "distribution bench",
+    "cap_inset": 0.1
    }
   },
   {
@@ -205,6 +207,20 @@
    "x": 6.8,
    "y": 0.0,
    "z": 0.3,
+   "wall": false
+  },
+  {
+   "token": "station_floorline#length_cells:6#style:threshold",
+   "x": 3.5,
+   "y": 0.0,
+   "z": 0.18,
+   "wall": false
+  },
+  {
+   "token": "station_floorline#length_cells:7#style:line",
+   "x": 3.9,
+   "y": 0.0,
+   "z": 2.8,
    "wall": false
   }
  ]
