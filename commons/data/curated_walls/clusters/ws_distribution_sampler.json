@@ -157,6 +157,34 @@
    "y": 0.0,
    "z": 0.3,
    "wall": false
+  },
+  {
+   "token": "station_plinth",
+   "x": 7.6,
+   "y": 0.0,
+   "z": 1.2,
+   "wall": false,
+   "config": {
+    "width_cells": 1,
+    "depth_cells": 1,
+    "top_height": 0.5,
+    "cap_inset": 0.1,
+    "caption_text": "surreal scanner"
+   }
+  },
+  {
+   "token": "surreal_lab#mode:scanner#seed:7",
+   "x": 7.6,
+   "y": 0.5,
+   "z": 1.2,
+   "wall": false
+  },
+  {
+   "token": "dna_modern_art_albers_homage_warm",
+   "x": 0.2,
+   "y": 1.5,
+   "z": 0.12,
+   "wall": true
   }
  ]
 }

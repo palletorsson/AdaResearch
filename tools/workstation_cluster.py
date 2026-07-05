@@ -28,6 +28,19 @@ REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CLUSTERS = os.path.join(REPO, "commons", "data", "curated_walls", "clusters")
 LADDER = "http://localhost:3003/api/concept-ladder?id="
 
+# the DNA layer (from /surreal-lab-gallery + the dna_* families):
+# each station gets a THEMED surreal instrument + one modern-art wall piece.
+SURREAL_MODE = {
+    "distribution_sampler": "scanner",      # analysis arm over a lit sample
+    "slot_machine": "gravgun",              # the chance manipulator
+    "perlin_terrain_sculptor": "reactor",   # the field, caged
+    "mc_sculpt_vr": "specimen",             # the blob, in the tank
+    "klee_walking_point": "teleporter",     # the walk's portal pad
+    "lsystem_editor": "chemrig",            # growth as alien glassware
+}
+WALL_ART = ["dna_modern_art_rothko_chromatic_field", "dna_modern_art_mondrian_de_stijl",
+            "dna_modern_art_kandinsky_bauhaus_triad", "dna_modern_art_albers_homage_warm"]
+
 if sys.stdout.encoding and sys.stdout.encoding.lower() != "utf-8":
     try:
         sys.stdout.reconfigure(encoding="utf-8")  # type: ignore[attr-defined]
@@ -48,7 +61,7 @@ def children_of(hero):
     return {"medium": pick("medium"), "applied": pick("applied"), "small": small}
 
 
-def pieces_for(hero, kids):
+def pieces_for(hero, kids, seed=7):
     P = []
     def add(token, x, y, z, wall=False, **cfg):
         p = {"token": token, "x": x, "y": y, "z": z, "wall": wall}
@@ -91,6 +104,15 @@ def pieces_for(hero, kids):
     add("tech_crate", 6.6, 0.0, 1.9)            # crate stack, right
     add("cardboard_box", 6.6, 0.55, 1.9)
     add("fire_extinguisher", 6.8, 0.0, 0.3)     # at the wall end
+
+    # THE DNA LAYER — the uncanny instrument (surreal_lab, themed mode) at the
+    # far end, and one modern-art DNA piece hung on the wall (the lab has art).
+    mode = SURREAL_MODE.get(hero, "spectrometer")
+    add("station_plinth", 7.6, 0.0, 1.2, width_cells=1, depth_cells=1,
+        top_height=0.5, cap_inset=0.1, caption_text=f"surreal {mode}")
+    add(f"surreal_lab#mode:{mode}#seed:{seed}", 7.6, 0.5, 1.2)
+    art = WALL_ART[seed % len(WALL_ART)]
+    add(art, 0.2, 1.5, 0.12, wall=True)
     return P
 
 
@@ -103,9 +125,9 @@ def main():
         print(__doc__)
         return 1
     made = []
-    for h in hs:
+    for i, h in enumerate(hs):
         kids = children_of(h)
-        P = pieces_for(h, kids)
+        P = pieces_for(h, kids, seed=7 + i)
         n_kids = sum(1 for k in ("medium", "applied") if kids.get(k)) + len(kids.get("small") or [])
         print(f"  ws_{h}: {len(P)} pieces, {n_kids} children "
               f"({kids.get('medium')}, {kids.get('applied')}, {kids.get('small')})")
