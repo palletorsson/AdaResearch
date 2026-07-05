@@ -354,4 +354,24 @@ walk-based); lighting/DNA polish toward the reference renders.
 
 ---
 
-<!-- Next: R-017 — randomness staging forks + noise truths (Palle wording) + Ignorance settle + refits + rate-gallery/distil loop -->
+## R-017 · 2026-07-05 · The modular staging system (slots, size contracts, seeded fills)
+
+**Palle:** "the question is if we can make a modular system we all prop fit in size and we can
+seed different object and configuration in to the wall and their surroundings"
+
+**Ruling:** YES — formalized as data + a seeder. `commons/data/station_modules.json` declares
+SIZE CLASSES (S/M/L/XL with max base_m + a footing that normalizes the seat), POOLS (instrument
+/ art / bench_tool / cylinder / storage / seat / light / screen / safety — the DNA families and
+lab cast), and TEMPLATES (named slot layouts; bench_v1 = the reference bench). `tools/modkit.py`
+fills a template deterministically per seed: HERO/CHILD slots from the artifact's own
+concept-ladder family (classed by measured size), POOL slots drawn per-seed. Every prop fits —
+the fit rule routes it to a compatible class and the class's footing seats it. Output is
+wall-cluster format, so capture/review/place apply unchanged. PROOF: mk_distribution_sampler
+s1/s2/s3 — same slots, three visibly different stations (histogram + green grid-screen + test
+tubes vs computer desk + codex glow + crates). Punch: pool items need mount-type checks
+(monitor_setup is a desk, not a wall screen); template library wants more layouts (corner,
+island, vitrine).
+
+---
+
+<!-- Next: R-018 — randomness staging forks + noise truths (Palle wording) + Ignorance settle + refits + rate-gallery/distil loop -->
