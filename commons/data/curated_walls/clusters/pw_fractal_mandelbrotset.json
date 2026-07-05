@@ -1,0 +1,130 @@
+{
+ "name": "pw_fractal_mandelbrotset",
+ "source": "curated (Fractal_MandelbrotSet) \u2014 auto-export by creator_walk",
+ "pieces": [
+  {
+   "token": "station_panel",
+   "x": 0.5,
+   "y": 2.0,
+   "z": 0.06,
+   "wall": true,
+   "config": {
+    "width_cells": 3,
+    "header": "THE MASTER FRACTAL",
+    "lines": [
+     "z -> z^2 + c",
+     "FIVE CHARACTERS"
+    ]
+   }
+  },
+  {
+   "token": "station_micropod",
+   "x": 0.0,
+   "y": 0.0,
+   "z": 2.0,
+   "wall": false,
+   "config": {
+    "caption_text": "Living Paper - Mandelbrot Set",
+    "top_height": 1.15,
+    "base_meters": 0.6,
+    "cap_inset": 0.1
+   }
+  },
+  {
+   "token": "living_paper_mandelbrot",
+   "x": 0.0,
+   "y": 1.15,
+   "z": 2.0,
+   "wall": false
+  },
+  {
+   "token": "mandelbrot_bench",
+   "x": 3.0,
+   "y": 0.0,
+   "z": 1.4,
+   "wall": false
+  },
+  {
+   "token": "station_pillar",
+   "x": 6.0,
+   "y": 0.0,
+   "z": 2.6,
+   "wall": false,
+   "config": {
+    "height": 3.0
+   }
+  },
+  {
+   "token": "station_pillar",
+   "x": 10.0,
+   "y": 0.0,
+   "z": 2.6,
+   "wall": false,
+   "config": {
+    "height": 3.0
+   }
+  },
+  {
+   "token": "dark_sphere",
+   "x": 8.0,
+   "y": 3.2,
+   "z": 2.4,
+   "wall": false
+  },
+  {
+   "token": "station_stage",
+   "x": 8.0,
+   "y": 0.0,
+   "z": 0.4,
+   "wall": false,
+   "config": {
+    "width_cells": 4,
+    "depth_cells": 4,
+    "step_height": 0.18,
+    "name_plate": "Mandelbrot Set"
+   }
+  },
+  {
+   "token": "mandelbrot_set",
+   "x": 8.0,
+   "y": 0.18,
+   "z": 0.4,
+   "wall": false
+  },
+  {
+   "token": "station_panel",
+   "x": 14.0,
+   "y": 2.0,
+   "z": 0.06,
+   "wall": true,
+   "config": {
+    "width_cells": 3,
+    "header": "THE EDGE NEVER RESOLVES",
+    "lines": [
+     "INFINITE BOUNDARY",
+     "ZOOM FOREVER"
+    ]
+   }
+  },
+  {
+   "token": "station_plinth",
+   "x": 14.0,
+   "y": 0.0,
+   "z": 1.2,
+   "wall": false,
+   "config": {
+    "width_cells": 2,
+    "depth_cells": 2,
+    "top_height": 0.9,
+    "caption_text": "Mandelbrot Dive"
+   }
+  },
+  {
+   "token": "mandelbrot_dive",
+   "x": 14.0,
+   "y": 0.9,
+   "z": 1.2,
+   "wall": false
+  }
+ ]
+}

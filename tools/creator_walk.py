@@ -94,6 +94,7 @@ def main() -> int:
         return float(e.get("base_m", 1.0)) if isinstance(e, dict) else 1.0
 
     # ── the tray: curated wall works anchored into the necklace ────────────────
+    walls_mode = next((a.split("=", 1)[1] for a in args if a.startswith("--walls=")), "all")
     walls = []
     for f in sorted(os.listdir(CURATED_DIR)):
         if not f.endswith(".json"):
@@ -103,14 +104,21 @@ def main() -> int:
             continue
         wmap = f[:-5]
         cname = "pw_" + wmap.lower()
-        if not os.path.exists(os.path.join(CLUSTERS_DIR, cname + ".json")):
-            continue
+        cpath = os.path.join(CLUSTERS_DIR, cname + ".json")
+        if not os.path.exists(cpath):
+            # curated wall without a resolver cluster — export it on the fly
+            with open(cpath, "w", encoding="utf-8") as cf:
+                json.dump({"name": cname,
+                           "source": f"curated ({wmap}) — auto-export by creator_walk",
+                           "pieces": d.get("pieces", [])}, cf, indent=1)
         pieces = d.get("pieces", [])
         held = [p["token"] for p in pieces
                 if not str(p["token"]).startswith(("station_", "science_", "hangar_"))]
         length = int(math.ceil(max(float(p.get("x", 0)) for p in pieces))) + 2
         depth = int(math.ceil(max(float(p.get("z", 0)) for p in pieces))) + 1
         overlap = [walk.index(h) for h in held if h in walk]
+        if walls_mode == "overlap" and not overlap:
+            continue  # only walls that argue walked artifacts come on the tray
         anchor = min(overlap) if overlap else \
             int((maps_order.index(wmap) / max(len(maps_order), 1)) * len(walk)
                 if wmap in maps_order else len(walk) - 1)
@@ -129,6 +137,9 @@ def main() -> int:
     tray += [("blank", b) for b in blanks]
 
     # ── phase 1: the walk — place and stamp ────────────────────────────────────
+    global CX
+    max_fp = max(max(1, int(math.ceil(min(base_of(a), 9.0)))) for a in walk)
+    CX = max(CX, max_fp + 5)          # adaptive corridor: the giants need shoulder room
     cols = 2 * CX + 1
     occupied: set[tuple[int, int]] = set()
     placements = []      # (kind, token/cluster, row, col, extra)

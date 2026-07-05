@@ -1,0 +1,194 @@
+{
+ "name": "pw_fractal_kochsierpinski",
+ "source": "curated (Fractal_KochSierpinski) \u2014 auto-export by creator_walk",
+ "pieces": [
+  {
+   "token": "station_panel",
+   "x": 1.0,
+   "y": 2.4,
+   "z": 0.06,
+   "wall": true,
+   "config": {
+    "header": "INFINITE PERIMETER",
+    "lines": [
+     "A line that wants",
+     "to be a plane \u00b7 D 1.26"
+    ],
+    "width_cells": 3
+   }
+  },
+  {
+   "token": "station_micropod",
+   "x": 1.0,
+   "y": 0.0,
+   "z": 0.9,
+   "wall": false,
+   "config": {
+    "base_meters": 0.6,
+    "top_height": 1.15,
+    "caption_text": "Box Counting Dimension",
+    "caption_style": "frame"
+   }
+  },
+  {
+   "token": "box_counting_dimension",
+   "x": 1.0,
+   "y": 1.15,
+   "z": 0.9,
+   "wall": false
+  },
+  {
+   "token": "station_micropod",
+   "x": 4.0,
+   "y": 0.0,
+   "z": 2.4,
+   "wall": false,
+   "config": {
+    "caption_text": "Koch Curve",
+    "top_height": 1.25,
+    "cap_meters": 0.8
+   }
+  },
+  {
+   "token": "fractal_koch_curve",
+   "x": 4.0,
+   "y": 1.25,
+   "z": 2.4,
+   "wall": false
+  },
+  {
+   "token": "station_stage",
+   "x": 7.0,
+   "y": 0.0,
+   "z": 1.0,
+   "wall": false,
+   "config": {
+    "width_cells": 4,
+    "depth_cells": 2,
+    "step_height": 0.18,
+    "name_plate": "3D Koch Curve"
+   }
+  },
+  {
+   "token": "koch_curve_3d",
+   "x": 7.0,
+   "y": 0.18,
+   "z": 1.0,
+   "wall": false
+  },
+  {
+   "token": "station_panel",
+   "x": 10.5,
+   "y": 2.5,
+   "z": 0.06,
+   "wall": true,
+   "config": {
+    "header": "THE SAME HOLE",
+    "lines": [
+     "Zero area, infinite",
+     "structure \u00b7 D 1.585"
+    ],
+    "width_cells": 3
+   }
+  },
+  {
+   "token": "station_stage",
+   "x": 11.5,
+   "y": 0.0,
+   "z": 2.4,
+   "wall": false,
+   "config": {
+    "width_cells": 3,
+    "depth_cells": 3,
+    "step_height": 0.18,
+    "name_plate": "Sierpinski Triangle"
+   }
+  },
+  {
+   "token": "sierpinski_triangle",
+   "x": 11.5,
+   "y": 0.18,
+   "z": 2.4,
+   "wall": false
+  },
+  {
+   "token": "station_stage",
+   "x": 15.5,
+   "y": 0.0,
+   "z": 2.4,
+   "wall": false,
+   "config": {
+    "width_cells": 3,
+    "depth_cells": 3,
+    "step_height": 0.18,
+    "name_plate": "Sierpinski Pyramid"
+   }
+  },
+  {
+   "token": "sierpinski_pyramid",
+   "x": 15.5,
+   "y": 0.18,
+   "z": 2.4,
+   "wall": false
+  },
+  {
+   "token": "station_panel",
+   "x": 19.5,
+   "y": 2.35,
+   "z": 0.06,
+   "wall": true,
+   "config": {
+    "header": "FRACTAL TO FORM",
+    "lines": [
+     "Recurse a strut and",
+     "you get a place to live"
+    ],
+    "width_cells": 3
+   }
+  },
+  {
+   "token": "station_plinth",
+   "x": 19.0,
+   "y": 0.0,
+   "z": 0.7,
+   "wall": false,
+   "config": {
+    "width_cells": 1,
+    "depth_cells": 1,
+    "top_height": 1.0,
+    "cap_inset": 0.3,
+    "caption_text": "Cube Cabin",
+    "caption_style": "frame"
+   }
+  },
+  {
+   "token": "cube_cabin",
+   "x": 19.0,
+   "y": 1.0,
+   "z": 0.7,
+   "wall": false
+  },
+  {
+   "token": "station_plinth",
+   "x": 21.5,
+   "y": 0.0,
+   "z": 1.35,
+   "wall": false,
+   "config": {
+    "width_cells": 1,
+    "depth_cells": 1,
+    "top_height": 1.15,
+    "cap_inset": 0.3,
+    "caption_text": "Cube Bookshelf",
+    "caption_style": "frame"
+   }
+  },
+  {
+   "token": "cube_bookshelf",
+   "x": 21.5,
+   "y": 1.15,
+   "z": 1.35,
+   "wall": false
+  }
+ ]
+}

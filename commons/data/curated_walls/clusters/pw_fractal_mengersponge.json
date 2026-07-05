@@ -1,0 +1,203 @@
+{
+ "name": "pw_fractal_mengersponge",
+ "source": "curated (Fractal_MengerSponge) \u2014 auto-export by creator_walk",
+ "pieces": [
+  {
+   "token": "station_wall",
+   "x": 2.0,
+   "y": 0.0,
+   "z": 0.0,
+   "wall": true,
+   "config": {
+    "width_cells": 5
+   }
+  },
+  {
+   "token": "station_panel",
+   "x": 2.0,
+   "y": 2.3,
+   "z": 0.06,
+   "wall": true,
+   "config": {
+    "width_cells": 4,
+    "header": "THE SAME HOLE, EVERY SCALE",
+    "lines": [
+     "Carve out the middle. Recurse.",
+     "The rule never changes \u2014 only the scale."
+    ]
+   }
+  },
+  {
+   "token": "station_micropod",
+   "x": 1.0,
+   "y": 0.0,
+   "z": 0.6,
+   "wall": false,
+   "config": {
+    "caption_text": "Menger Toy (held sponge)",
+    "top_height": 1.1,
+    "cap_inset": 0.1,
+    "base_meters": 0.6
+   }
+  },
+  {
+   "token": "menger_toy",
+   "x": 1.0,
+   "y": 1.1,
+   "z": 0.6,
+   "wall": false
+  },
+  {
+   "token": "menger_bench",
+   "x": 3.5,
+   "y": 0.0,
+   "z": 1.6,
+   "wall": false
+  },
+  {
+   "token": "station_wall",
+   "x": 8.0,
+   "y": 0.0,
+   "z": 0.0,
+   "wall": true,
+   "config": {
+    "width_cells": 5
+   }
+  },
+  {
+   "token": "station_panel",
+   "x": 8.0,
+   "y": 2.6,
+   "z": 0.06,
+   "wall": true,
+   "config": {
+    "width_cells": 5,
+    "header": "INFINITE SURFACE, ZERO VOLUME",
+    "lines": [
+     "D \u2248 2.727 \u2014 between a surface and a solid.",
+     "A solid made entirely of holes. Walk inside."
+    ]
+   }
+  },
+  {
+   "token": "station_stage",
+   "x": 8.0,
+   "y": 0.0,
+   "z": 2.4,
+   "wall": false,
+   "config": {
+    "width_cells": 4,
+    "depth_cells": 4,
+    "step_height": 0.2,
+    "name_plate": "MENGER SPONGE \u2014 walk inside (D \u2248 2.727)"
+   }
+  },
+  {
+   "token": "menger_sponge",
+   "x": 8.0,
+   "y": 0.2,
+   "z": 2.4,
+   "wall": false
+  },
+  {
+   "token": "station_wall",
+   "x": 14.0,
+   "y": 0.0,
+   "z": 0.0,
+   "wall": true,
+   "config": {
+    "width_cells": 5
+   }
+  },
+  {
+   "token": "station_panel",
+   "x": 14.0,
+   "y": 2.3,
+   "z": 0.06,
+   "wall": true,
+   "config": {
+    "width_cells": 4,
+    "header": "ALL SURFACE, PUT TO WORK",
+    "lines": [
+     "The same carve, used: a filter that is all wall.",
+     "And the boolean cut that makes it."
+    ]
+   }
+  },
+  {
+   "token": "station_plinth",
+   "x": 13.0,
+   "y": 0.0,
+   "z": 1.2,
+   "wall": false,
+   "config": {
+    "width_cells": 2,
+    "depth_cells": 2,
+    "top_height": 1.1,
+    "caption_text": "Menger Filter (all surface)"
+   }
+  },
+  {
+   "token": "menger_filter",
+   "x": 13.0,
+   "y": 1.1,
+   "z": 1.2,
+   "wall": false
+  },
+  {
+   "token": "station_plinth",
+   "x": 15.5,
+   "y": 0.0,
+   "z": 2.0,
+   "wall": false,
+   "config": {
+    "width_cells": 2,
+    "depth_cells": 2,
+    "top_height": 0.85,
+    "caption_text": "Recursive Boolean Cube (the carve)"
+   }
+  },
+  {
+   "token": "recursive_boolean_cube",
+   "x": 15.5,
+   "y": 0.85,
+   "z": 2.0,
+   "wall": false
+  },
+  {
+   "token": "station_panel",
+   "x": 11.0,
+   "y": 2.0,
+   "z": 0.06,
+   "wall": true,
+   "config": {
+    "width_cells": 3,
+    "header": "GROWN, NOT CARVED",
+    "lines": [
+     "DLA: random walkers stick where they land.",
+     "The other way to a fractal \u2014 chance, not a rule."
+    ]
+   }
+  },
+  {
+   "token": "station_stage",
+   "x": 11.0,
+   "y": 0.0,
+   "z": 0.4,
+   "wall": false,
+   "config": {
+    "width_cells": 3,
+    "depth_cells": 3,
+    "step_height": 0.18,
+    "name_plate": "Diffusion-Limited Aggregation"
+   }
+  },
+  {
+   "token": "diffusion_limited_aggregation",
+   "x": 11.0,
+   "y": 0.18,
+   "z": 0.4,
+   "wall": false
+  }
+ ]
+}

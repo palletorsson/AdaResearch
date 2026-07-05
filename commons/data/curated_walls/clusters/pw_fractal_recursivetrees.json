@@ -1,0 +1,190 @@
+{
+ "name": "pw_fractal_recursivetrees",
+ "source": "curated (Fractal_RecursiveTrees) \u2014 auto-export by creator_walk",
+ "pieces": [
+  {
+   "token": "station_panel",
+   "x": 2.5,
+   "y": 2.05,
+   "z": 0.06,
+   "wall": true,
+   "config": {
+    "width_cells": 3,
+    "header": "BRANCHING WITHOUT BLUEPRINTS",
+    "lines": [
+     "SPLIT  ROTATE  RECURSE",
+     "TWO SMALLER TREES, FOREVER"
+    ]
+   }
+  },
+  {
+   "token": "station_micropod",
+   "x": 0.0,
+   "y": 0.0,
+   "z": 2.3,
+   "wall": false,
+   "config": {
+    "caption_text": "small_subdivision_cube",
+    "top_height": 1.15
+   }
+  },
+  {
+   "token": "station_micropod",
+   "x": 1.2,
+   "y": 0.0,
+   "z": 0.5,
+   "wall": false,
+   "config": {
+    "caption_text": "Living Paper \u2014 Mandelbrot",
+    "top_height": 1.0
+   }
+  },
+  {
+   "token": "living_paper",
+   "x": 1.2,
+   "y": 1.0,
+   "z": 0.5,
+   "wall": false
+  },
+  {
+   "token": "station_micropod",
+   "x": 2.5,
+   "y": 0.0,
+   "z": 1.1,
+   "wall": false,
+   "config": {
+    "caption_text": "recursive_tree_2",
+    "top_height": 1.3
+   }
+  },
+  {
+   "token": "recursive_tree_2",
+   "x": 2.5,
+   "y": 1.3,
+   "z": 1.1,
+   "wall": false
+  },
+  {
+   "token": "station_micropod",
+   "x": 4.0,
+   "y": 0.0,
+   "z": 0.4,
+   "wall": false,
+   "config": {
+    "caption_text": "L-System Tree",
+    "top_height": 1.2,
+    "cap_meters": 0.84
+   }
+  },
+  {
+   "token": "fractal_lsystem_tree",
+   "x": 4.0,
+   "y": 1.2,
+   "z": 0.4,
+   "wall": false
+  },
+  {
+   "token": "station_stage",
+   "x": 6.5,
+   "y": 0.0,
+   "z": 2.5,
+   "wall": false,
+   "config": {
+    "width_cells": 4,
+    "depth_cells": 4,
+    "step_height": 0.18,
+    "name_plate": "recursive_tree"
+   }
+  },
+  {
+   "token": "recursive_tree",
+   "x": 6.5,
+   "y": 0.18,
+   "z": 2.5,
+   "wall": false
+  },
+  {
+   "token": "station_panel",
+   "x": 10.5,
+   "y": 2.25,
+   "z": 0.06,
+   "wall": true,
+   "config": {
+    "width_cells": 3,
+    "header": "A LIST THAT LEARNED TO DECIDE",
+    "lines": [
+     "LEFT OR RIGHT  LESS OR GREATER",
+     "ROOTS DO THE REAL COMPUTATION"
+    ]
+   }
+  },
+  {
+   "token": "station_stage",
+   "x": 10.5,
+   "y": 0.0,
+   "z": 0.3,
+   "wall": false,
+   "config": {
+    "width_cells": 4,
+    "depth_cells": 4,
+    "step_height": 0.18,
+    "name_plate": "inverted_tree_cloud"
+   }
+  },
+  {
+   "token": "inverted_tree_cloud",
+   "x": 10.5,
+   "y": 0.18,
+   "z": 0.3,
+   "wall": false
+  },
+  {
+   "token": "cube_desk",
+   "x": 13.5,
+   "y": 0.0,
+   "z": 1.6,
+   "wall": false
+  },
+  {
+   "token": "station_plinth",
+   "x": 15.0,
+   "y": 0.0,
+   "z": 0.7,
+   "wall": false,
+   "config": {
+    "width_cells": 1,
+    "depth_cells": 1,
+    "top_height": 1.2,
+    "cap_inset": 0.3,
+    "caption_text": "fractal_scene"
+   }
+  },
+  {
+   "token": "fractal_scene",
+   "x": 15.0,
+   "y": 1.2,
+   "z": 0.7,
+   "wall": false
+  },
+  {
+   "token": "station_stage",
+   "x": 17.5,
+   "y": 0.0,
+   "z": 1.8,
+   "wall": false,
+   "config": {
+    "width_cells": 3,
+    "depth_cells": 3,
+    "step_height": 0.18,
+    "name_plate": "Mobius World"
+   }
+  },
+  {
+   "token": "mobius_world",
+   "x": 17.5,
+   "y": 0.18,
+   "z": 1.8,
+   "wall": false
+  }
+ ]
+}
