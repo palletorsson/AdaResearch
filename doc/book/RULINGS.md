@@ -286,4 +286,28 @@ The room = the concept's imaginative science laboratory; the generator enacts th
 
 ---
 
-<!-- Next: R-014 — randomness staging forks + randomness dig (entropy_axiom?) + randompoints vs randompoint + Hangar_Fractals v3 + noise truths (Palle wording) + remaining 6 primitives walls -->
+## R-014 · 2026-07-04 · The glue (the room as one thing; agents and a protocol)
+
+**Palle:** "The creator also has to walk the 3d grid space in the same way. Is it good to do
+that with agents and a protocol? the grid is really a room. Look at the complexity of these
+specimens /surreal-lab-gallery. I think you could do it. The question is really what is the
+glue. an object, even a complex one has relation brigades that make it logical to add mesh
+together. In one way we want to feel like and think of the room as one thing, grid space held
+together by their relation. like imagined cables running between objects like pylons."
+
+**Ruling:** the room is ONE THING, held together by its relations made visible. The glue has
+three registers: (1) SEMANTIC — the relation graph already in data (fold-neighbors cosine,
+counter-pairs, ladder tiers) decides adjacency; (2) PHYSICAL — the graph rendered as
+infrastructure: cables/conduits routed between kin exhibits, pylon chains, SPARK GAPS where
+counter-pairs face each other, all power topologically flowing from the load-bearing artifact
+(the hero is the room's reactor); (3) the WALK as the spine cable — the corridor is the bus.
+The room becomes one apparatus: the surreal lab's ninth mode, at architectural scale.
+METHOD: yes to agents + protocol — the surreal_lab recipe lifted a level (fan-out agents each
+solving a region/register, distilled into room-DNA), with the trench constitution as the gate:
+deterministic where structural (stamping, validation), agentic where aesthetic (composition
+search, judged), rulings deciding. The creator walks the 3D grid: floor, walls, and the air —
+the cable layer is the volume's occupant.
+
+---
+
+<!-- Next: R-015 — randomness staging forks + noise truths (Palle wording) + Ignorance settle ruling + refit pythagorean/folded_strip + Hangar_Primitives regen w/ 10 walls -->
