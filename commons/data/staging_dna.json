@@ -1,0 +1,330 @@
+{
+ "_readme": "STAGING DNA \u2014 the small set of artifact TYPES, each defined as the full environment it needs: staging (footing that grows the grid) + support (the station prop it stands on/against) + dressing (light, caption, cordon that make it read). Promoted from the Element Catalog (posture_to_station.json): that file names the correspondence, THIS file is the buildable template. Keyed by posture id (what tools/classify_postures.py assigns). Rendered by DressingRoomBuilder staged mode. Offsets are [rows_south, cols_east, y_metres] relative to the ANCHOR cell, rotated with the room. cfg values may substitute {height_m} (raised-region top), {raised_w}/{raised_d} (its extent in cells).",
+ "_text_model": "TWO text slots per artifact, filled from the registry automatically in the SUPPORT's cfg: {artifact} = the TITLE (short name) \u2192 the support's own SCREEN HEADER (info_header / screen_header); {info_lines} = the SIMULATION INFO (registry description wrapped to short lines) \u2192 the support's own INTEGRATED SCREEN (info_lines / screen_lines). ONE BODY principle: text is set INTO the prop (a lit console readout that is part of the plinth / bench / wall), never a floating plate or a separate panel beside it. No lamps \u2014 the light is integrated (plinth cap glow). Props without a screen surface yet (stage/skydome/barrier) carry no text until their own console lands.",
+ "_edge_cases": "Deferred, deliberately: SUPER-LARGE artifacts (base > ~8m \u2014 koch_curve, shader galleries) need a 'monument' type where the environment recedes entirely; KINETIC artifacts that sweep a volume need clearance the AABB alone can't predict; MULTI-artifact bays are curation_station's job, not a single-room template.",
+ "templates": {
+  "specimen": {
+   "posture": "pedestal",
+   "essence": "A small thing held up to the eye. The museum pose: one object on ONE BODY \u2014 a column that is its own mount, its own lit screen (title + info), its own light, wired together. Nothing floats beside it.",
+   "footing": {
+    "pad": [
+     3,
+     3
+    ],
+    "raised": {
+     "extent": [
+      1,
+      1
+     ],
+     "height_units": 3
+    }
+   },
+   "support": {
+    "prop": "station_plinth",
+    "cfg": {
+     "width_cells": "{raised_w}",
+     "depth_cells": "{raised_d}",
+     "top_height": "{height_m}",
+     "info_header": "{artifact}",
+     "info_lines": "{info_lines}",
+     "glow_light": true,
+     "three_bar": false,
+     "grime": false,
+     "dust": false,
+     "cap_inset": 0.12
+    },
+    "note": "ONE BODY: the TITLE is the screen header, the INFO is the lit screen set into the front face, the LIGHT is the cap glow, and a lit conduit wires cap\u2192screen. No lamp, no floating plate. Minimal finish (grime/dust/three_bar off)."
+   },
+   "dressing": [],
+   "clearance": [
+    3,
+    3,
+    3
+   ]
+  },
+  "instrument": {
+   "posture": "table",
+   "essence": "A thing you operate with your hands. Worktop height, light on the controls, room to stand square in front of it.",
+   "footing": {
+    "pad": [
+     5,
+     5
+    ],
+    "raised": {
+     "extent": [
+      3,
+      3
+     ],
+     "height_units": 2
+    }
+   },
+   "support": {
+    "prop": "station_bench",
+    "cfg": {
+     "length_cells": "{raised_w}",
+     "depth_cells": "{raised_d}",
+     "top_height": "{height_m}",
+     "info_header": "{artifact}",
+     "info_lines": "{info_lines}",
+     "three_bar": false,
+     "grime": false
+    },
+    "note": "ONE BODY: the info reads on the bench's own back-standing console (built in, on a strut) \u2014 no lamp, no floating plate"
+   },
+   "dressing": [
+    {
+     "prop": "station_floorline",
+     "offset": [
+      2,
+      0,
+      0.0
+     ],
+     "cfg": {
+      "length_cells": 3,
+      "style": "line"
+     },
+     "why": "zone edge - the lit line where the instrument's station ENDS (R-019 station_on_aisle)"
+    }
+   ],
+   "clearance": [
+    3,
+    3,
+    3
+   ]
+  },
+  "performer": {
+   "posture": "platform",
+   "essence": "A body that commands a stage. Raised so the whole form reads at distance; a lip that says LOOK, don't touch.",
+   "footing": {
+    "pad": [
+     7,
+     7
+    ],
+    "raised": {
+     "extent": [
+      5,
+      5
+     ],
+     "height_units": 2
+    }
+   },
+   "support": {
+    "prop": "station_stage",
+    "cfg": {
+     "width_cells": "{raised_w}",
+     "depth_cells": "{raised_d}",
+     "step_height": 0.35
+    },
+    "top_m": 0.35,
+    "note": "station_stage clamps to 0.35 \u2014 a dais is LOW by identity; top_m reseats the artifact on the real deck, not the blockout height"
+   },
+   "dressing": [
+    {
+     "prop": "station_barrier",
+     "offset": [
+      3,
+      0,
+      0.0
+     ],
+     "cfg": {
+      "length_cells": 3
+     },
+     "why": "front lip cordon"
+    }
+   ],
+   "clearance": [
+    4,
+    4,
+    4
+   ]
+  },
+  "terrain": {
+   "posture": "floor",
+   "essence": "The artifact IS the ground. Nothing under it, nothing on it \u2014 a flush pad, an edge that marks where it begins, and sightlines from above.",
+   "footing": {
+    "pad": [
+     5,
+     5
+    ],
+    "raised": null
+   },
+   "support": null,
+   "dressing": [
+    {
+     "prop": "station_floorline",
+     "offset": [
+      2,
+      0,
+      0.0
+     ],
+     "cfg": {
+      "style": "threshold"
+     },
+     "why": "threshold strip where the walkway meets the work"
+    }
+   ],
+   "clearance": [
+    2,
+    2,
+    3
+   ]
+  },
+  "apparition": {
+   "posture": "float",
+   "essence": "A hovering field with no base. Air gap instead of a plinth; a void behind it so the edgeless thing has nothing to be measured against.",
+   "footing": {
+    "pad": [
+     3,
+     3
+    ],
+    "raised": null,
+    "artifact_lift_m": 1.5
+   },
+   "support": null,
+   "support_gap": "no suspension prop exists yet (gantry-hoist / ceiling point) \u2014 the lift is bare artifact_offset",
+   "dressing": [
+    {
+     "prop": "station_skydome",
+     "offset": [
+      -2,
+      0,
+      0.0
+     ],
+     "cfg": {},
+     "why": "void backdrop behind the hover"
+    },
+    {
+     "prop": "station_floorline",
+     "offset": [
+      0,
+      0,
+      0.0
+     ],
+     "cfg": {
+      "length_cells": 2,
+      "style": "threshold"
+     },
+     "why": "the shadow line - the hover meets the floor by LIGHT, not contact (R-019 pole_on_floor's cousin)"
+    }
+   ],
+   "clearance": [
+    3,
+    3,
+    4
+   ]
+  },
+  "well": {
+   "posture": "pit",
+   "essence": "A thing you look down into. The rim does the staging: raise the viewer, sink the subject, guard the edge.",
+   "footing": {
+    "pad": [
+     5,
+     5
+    ],
+    "raised": {
+     "ring": true,
+     "height_units": 3
+    }
+   },
+   "support": null,
+   "dressing": [
+    {
+     "prop": "station_barrier",
+     "offset": [
+      2,
+      0,
+      0.0
+     ],
+     "cfg": {
+      "length_cells": 3
+     },
+     "why": "guard the approach edge, standing on the rim"
+    }
+   ],
+   "clearance": [
+    2,
+    2,
+    2
+   ]
+  },
+  "tableau": {
+   "posture": "wall",
+   "essence": "A flat thing read frontally. A face to hang on, light raking the surface, a caption at reading height.",
+   "footing": {
+    "pad": [
+     3,
+     3
+    ],
+    "raised": {
+     "back_row": true,
+     "height_units": 4
+    }
+   },
+   "support": {
+    "prop": "station_wall",
+    "cfg": {
+     "length_cells": "{raised_w}",
+     "height": "{height_m}",
+     "screen_slot": true,
+     "screen_header": "{artifact}",
+     "screen_lines": "{info_lines}"
+    },
+    "note": "ONE BODY: the info reads on the wall's built-in screen slot \u2014 no lamp, no floating plate"
+   },
+   "dressing": [
+    {
+     "prop": "station_floorline",
+     "offset": [
+      1,
+      0,
+      0.0
+     ],
+     "cfg": {
+      "length_cells": 4,
+      "style": "threshold"
+     },
+     "why": "skirting - the wall's ending read at the floor (R-018 wall_on_floor)"
+    }
+   ],
+   "clearance": [
+    3,
+    2,
+    3
+   ]
+  },
+  "monument": {
+   "posture": "monument",
+   "essence": "Too big to be an object. A super-large or very-long artifact (an 86 m portal corridor, a field, a tower) shown at TRUE SCALE \u2014 the environment recedes: no plinth, no props, no lamp. Just the thing, a frame marking its REAL extent, and a human-scale post. It is a SPACE, reviewed as one.",
+   "footing": {
+    "pad": [
+     3,
+     3
+    ],
+    "raised": null
+   },
+   "support": null,
+   "dressing": [
+    {
+     "prop": "station_floorline",
+     "offset": [
+      3,
+      0,
+      0.0
+     ],
+     "cfg": {
+      "length_cells": 4,
+      "style": "line"
+     },
+     "why": "the ground line - where the monument's ground ends before it stops existing (R-019)"
+    }
+   ],
+   "clearance": [
+    4,
+    4,
+    4
+   ],
+   "note": "Auto-assigned by classify_postures when the size oracle's max_dimension_m > ~12 m (and it isn't flat). Rendered like the floor type (flush at y=0, no props/pillar) PLUS the builder draws an ACCENT footprint frame at the artifact's true grid_cells extent (from artifact_sizes.json) + a 1.8 m scale post. These belong in the spine / generative-corridor map pipeline \u2014 walked, not staged as an object."
+  }
+ },
+ "_meets": "R-019 DNA PUSH: every type declares HOW IT MEETS. The reveal (cap_inset) is explicit data, not a silent prop default; types with no articulated meet get one: the instrument's zone edge, the apparition's shadow line (it meets the floor by LIGHT, not contact), the tableau's skirting, the monument's ground line. The joint is the generator of form \u2014 see station_modules.json junctions + doc/book/RULINGS.md R-018/R-019."
+}
