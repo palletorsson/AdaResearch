@@ -1,0 +1,162 @@
+{
+ "name": "ws_distribution_sampler",
+ "source": "workstation auto-seed (workstation_cluster.py)",
+ "pieces": [
+  {
+   "token": "station_wall",
+   "x": 1.0,
+   "y": 0.0,
+   "z": 0.0,
+   "wall": true,
+   "config": {
+    "width_cells": 6
+   }
+  },
+  {
+   "token": "station_panel",
+   "x": 1.5,
+   "y": 2.3,
+   "z": 0.06,
+   "wall": true,
+   "config": {
+    "width_cells": 5,
+    "header": "DISTRIBUTION SAMPLER",
+    "lines": [
+     "One workstation: the apparatus, its ladder of variants, its lab cast.",
+     "A node of the research, staged as a working bench."
+    ]
+   }
+  },
+  {
+   "token": "station_multiscreen",
+   "x": 5.8,
+   "y": 1.5,
+   "z": 0.12,
+   "wall": true
+  },
+  {
+   "token": "station_stage",
+   "x": 3.2,
+   "y": 0.0,
+   "z": 1.5,
+   "wall": false,
+   "config": {
+    "width_cells": 2,
+    "depth_cells": 2,
+    "step_height": 0.18,
+    "name_plate": "distribution sampler"
+   }
+  },
+  {
+   "token": "distribution_sampler",
+   "x": 3.2,
+   "y": 0.18,
+   "z": 1.5,
+   "wall": false
+  },
+  {
+   "token": "station_luminaire",
+   "x": 3.2,
+   "y": 0.0,
+   "z": 0.35,
+   "wall": false
+  },
+  {
+   "token": "station_plinth",
+   "x": 1.2,
+   "y": 0.0,
+   "z": 1.0,
+   "wall": false,
+   "config": {
+    "width_cells": 1,
+    "depth_cells": 1,
+    "top_height": 1.0,
+    "cap_inset": 0.1,
+    "caption_text": "distribution bench"
+   }
+  },
+  {
+   "token": "distribution_bench",
+   "x": 1.2,
+   "y": 1.0,
+   "z": 1.0,
+   "wall": false
+  },
+  {
+   "token": "station_plinth",
+   "x": 5.2,
+   "y": 0.0,
+   "z": 1.0,
+   "wall": false,
+   "config": {
+    "width_cells": 1,
+    "depth_cells": 1,
+    "top_height": 1.1,
+    "cap_inset": 0.1,
+    "caption_text": "distribution comparator"
+   }
+  },
+  {
+   "token": "distribution_comparator",
+   "x": 5.2,
+   "y": 1.1,
+   "z": 1.0,
+   "wall": false
+  },
+  {
+   "token": "station_micropod",
+   "x": 2.2,
+   "y": 0.0,
+   "z": 2.3,
+   "wall": false,
+   "config": {
+    "base_meters": 0.6,
+    "cap_meters": 1.16,
+    "top_height": 1.15,
+    "caption_text": "height random"
+   }
+  },
+  {
+   "token": "height_random",
+   "x": 2.2,
+   "y": 1.15,
+   "z": 2.3,
+   "wall": false
+  },
+  {
+   "token": "gas_canister",
+   "x": 0.2,
+   "y": 0.0,
+   "z": 2.0,
+   "wall": false
+  },
+  {
+   "token": "lab_stool",
+   "x": 4.3,
+   "y": 0.0,
+   "z": 2.4,
+   "wall": false
+  },
+  {
+   "token": "tech_crate",
+   "x": 6.6,
+   "y": 0.0,
+   "z": 1.9,
+   "wall": false
+  },
+  {
+   "token": "cardboard_box",
+   "x": 6.6,
+   "y": 0.55,
+   "z": 1.9,
+   "wall": false
+  },
+  {
+   "token": "fire_extinguisher",
+   "x": 6.8,
+   "y": 0.0,
+   "z": 0.3,
+   "wall": false
+  }
+ ]
+}
