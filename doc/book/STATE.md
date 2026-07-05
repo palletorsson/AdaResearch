@@ -160,6 +160,20 @@ chapter grain. Piloted: `python tools/dollhouse.py --seq=randomness --write` →
 rooms, modes 11 monument / 1 specimen / 1 cabinet (randomness = the environment sequence).
 Next: apply rigger glue per room; the rate-gallery + distil loop; run other sequences.
 
+## The room is a hall of workstations (R-016, 2026-07-05 — the fused composer)
+
+`tools/hall.py` fuses dollhouse (room=map) + workstation (hero=cluster) + rigger (glue).
+A map's roster groups into workstations; each is a TIGHT lab bench — hero on a stage under a
+`station_luminaire` task light, ladder children on flanking plinths/micropods, the lab cast
+(`gas_canister`/`tech_crate`/`cardboard_box`/`lab_stool`/`station_multiscreen`/
+`fire_extinguisher`) packed at the edges — flanking a walked central aisle. Floor height 1
+(walkable, ZERO pathfinder warnings). `python tools/hall.py --seq=<s> --write`. The MODEL
+(R-015→R-016): spine (1D index) → cluster (mindmap node = hero+children+props) → workstation
+(the node staged) → hall (map-room) → necklace (sequence). This IS spine-graph's Clusters
+layout built in 3D. Pilot: Hall_Random_Cubes (1 ws), Hall_Random_Definition (2 ws).
+Tuning: hall size should hug workstations tighter; rigger needs `--roster` mode for map-halls
+(currently walk-based); lighting/DNA polish toward the reference renders.
+
 ## Standing constitution
 
 - Rulings are the source; prose is compiled output. Unruled calls in drafts get marked, not hidden.
