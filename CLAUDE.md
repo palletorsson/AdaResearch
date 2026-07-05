@@ -102,6 +102,18 @@ Run from repo root:
 | **Workbench** | `python tools/spine_map_workbench.py status` | Sequence contracts, scaffolding |
 | **Release Gates** | `python tools/run_release_gates.py --max-grade-c -1 --gate-toggles doc/reports/RELEASE_GATES_TOGGLES.json` | Launch-quality checks |
 
+### Placement (2026-05-15 — auto-research output)
+| Tool | Command | Purpose |
+|------|---------|---------|
+| **Place (ship)** | `python tools/place.py --map=<Name> [--engine=...] [--in-place] [--only-improve]` | Auto-selects engine (humanoid_walker / hybrid / sim_annealing) and applies it |
+| **Place Research** | `python tools/placement_research.py --seeds=N` | Compare 11 placement strategies on toy scenario |
+| **Place + Score** | `python tools/place_artifacts.py --map=<Name> --strategy=<name>` | Apply specific strategy, write sibling map |
+| **Sync Footprints** | `python tools/sync_footprints.py --apply --cap=9` | Sync measured AABB → spatial_needs.footprint_cells |
+| **Walk Evaluator** | `python tools/walk_evaluator.py [--map=<Name>]` | Score placement on walkability (detour, encounter order, backtrack) |
+| **Trajectory Viz** | `python tools/placement_trajectory.py [--map=<Name>]` | Render humanoid_walker's walk path as SVG |
+
+Auto-research findings: hybrid wins constraint score (deterministic, +0.04 mean on real maps); humanoid_walker wins walkability on real maps (perfect detour ratio + encounter order); simulated_annealing wins combined when compute budget allows. `place.py` picks the right one per map automatically. See `/blog/2026-05-15-no-base-algorithm-wins`.
+
 ### Content & Identity
 | Tool | Command | Purpose |
 |------|---------|---------|
@@ -131,9 +143,21 @@ HEAD = lowest incomplete stage. Work at the head. Move it forward.
 
 ## Godot Capture Pipeline
 
-Godot exe: `C:/Users/palle/Desktop/Godot_v4.6-stable_win64_console.exe`
+Godot exe: `C:/Users/palle/Desktop/Godot_v4.6-stable_win64.exe` (non-console — captures fine headless). The `_console.exe` variant is no longer on the Desktop; use the non-console v4.6 exe, or `Godot_v4.3-stable_win64_console.exe` if you need console stdout.
+
+Note: captures land in `%APPDATA%/Godot/app_userdata/Ada Research Zero One/multi_shots/<target>/` (Roaming, **not** Local).
 
 Always use `--xr-mode off` to suppress OpenXR popup. Add `--no-window` for headless.
+
+**No capture may halt the pipeline (the 16-second rule).** Wrap headless Godot runs in the
+watchdog — it kills the process tree if no result appears (grace 45s boot) or output stalls 16s:
+
+```powershell
+python tools/godot_watchdog.py --expect=<output-file-or-dir> -- <godot exe + args>
+```
+
+Known hang class: simulation artifacts (e.g. `boid_flocking`) never yield headless. Also: never
+run two Godot instances at once — the second dies silently on the user:// lock; serialize runs.
 
 ```powershell
 # Single artifact (4 angles)
@@ -168,6 +192,7 @@ The Ada Encyclopedia (`ada_encyclopedia/`) is a Next.js web app providing visual
 - `POST /api/game/simulate` — AI pathfinding simulation
 - `GET /api/maps?name=<Name>` — Map data retrieval
 - `GET /api/artifacts` — Artifact registry
+- `GET /api/find?q=<query>&format=markdown` — **Agent search**: one call over every page/API URL (Slash Map) + full-text content (algorithms/artifacts/sequences/maps/shaders). The server-side twin of the nav search bar. `kind=all|routes|pages|api|content`, `limit=N`. Curl this to locate anything fast.
 
 ## Desktop ↔ AI Feedback Bridge
 
