@@ -1,0 +1,29 @@
+{
+ "sequence": "primitives",
+ "counts": {"small": 2, "medium": 0, "large": 1, "applied": 0},
+ "pieces": [
+  {"token": "station_wall", "x": 1.0, "y": 0.0, "z": 0.0, "wall": true, "config": {"width_cells": 6}},
+  {"token": "station_panel", "x": 1.5, "y": 2.4, "z": 0.06, "wall": true, "config": {
+    "width_cells": 5, "header": "THE FIRST SURFACE",
+    "lines": ["Three points, and suddenly there is surface — the minimal agreement that encloses area.",
+              "Every creature, cave, and cathedral in this book is triangles and nothing else."]}},
+  {"token": "station_stage", "x": 3.0, "y": 0.0, "z": 2.2, "wall": false, "config": {
+    "width_cells": 3, "depth_cells": 3, "step_height": 0.18,
+    "name_plate": "Triangle — drag the vertices; the pact holds"}},
+  {"token": "triangle", "x": 3.0, "y": 0.18, "z": 2.2, "wall": false},
+  {"token": "station_pillar", "x": 6.8, "y": 0.0, "z": 1.6, "wall": false},
+  {"token": "station_wall", "x": 7.5, "y": 0.0, "z": 0.0, "wall": true, "config": {"width_cells": 5}},
+  {"token": "station_panel", "x": 8.0, "y": 2.3, "z": 0.06, "wall": true, "config": {
+    "width_cells": 4, "header": "PROOF ON THE WALL",
+    "lines": ["The Pythagorean angles, hung like a diploma — the triangle's oldest contract.",
+              "A folded strip shows the other secret: every surface is a folded line."]}},
+  {"token": "station_plinth", "x": 8.8, "y": 0.0, "z": 0.8, "wall": false, "config": {
+    "width_cells": 1, "depth_cells": 1, "top_height": 1.1, "cap_inset": 0.1,
+    "caption_text": "Pythagorean Angles"}},
+  {"token": "pythagorean_triangle_angles", "x": 8.8, "y": 1.1, "z": 0.8, "wall": false},
+  {"token": "station_micropod", "x": 10.8, "y": 0.0, "z": 0.5, "wall": false, "config": {
+    "caption_text": "Folded Strip — a surface is a folded line",
+    "top_height": 1.15, "cap_inset": 0.1, "base_meters": 0.6, "cap_meters": 1.16}},
+  {"token": "folded_strip", "x": 10.8, "y": 1.15, "z": 0.5, "wall": false}
+ ]
+}

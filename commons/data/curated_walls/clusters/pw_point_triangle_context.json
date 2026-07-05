@@ -1,321 +1,125 @@
 {
  "name": "pw_point_triangle_context",
- "source": "spine_walls.json (auto-seed)",
+ "source": "curated (Point_Triangle_Context) \u2014 hand-curated 2026-07-04, R-013",
  "pieces": [
   {
-   "token": "station_plinth",
-   "x": 0.0,
+   "token": "station_wall",
+   "x": 1.0,
    "y": 0.0,
-   "z": 0.8,
-   "wall": false,
+   "z": 0.0,
+   "wall": true,
    "config": {
-    "width_cells": 1,
-    "depth_cells": 1,
-    "top_height": 1.2
+    "width_cells": 6
    }
-  },
-  {
-   "token": "dark_sphere",
-   "x": 0.0,
-   "y": 1.2,
-   "z": 0.8,
-   "wall": false
-  },
-  {
-   "token": "station_stage",
-   "x": 2.0,
-   "y": 0.0,
-   "z": 0.8,
-   "wall": false,
-   "config": {
-    "width_cells": 4,
-    "depth_cells": 4,
-    "step_height": 0.18
-   }
-  },
-  {
-   "token": "triangleprofiles",
-   "x": 2.0,
-   "y": 0.18,
-   "z": 0.8,
-   "wall": false
-  },
-  {
-   "token": "station_stage",
-   "x": 9.0,
-   "y": 0.0,
-   "z": 0.8,
-   "wall": false,
-   "config": {
-    "width_cells": 5,
-    "depth_cells": 1,
-    "step_height": 0.18
-   }
-  },
-  {
-   "token": "folded_strip",
-   "x": 9.0,
-   "y": 0.18,
-   "z": 0.8,
-   "wall": false
-  },
-  {
-   "token": "station_plinth",
-   "x": 15.0,
-   "y": 0.0,
-   "z": 0.8,
-   "wall": false,
-   "config": {
-    "width_cells": 1,
-    "depth_cells": 1,
-    "top_height": 1.2
-   }
-  },
-  {
-   "token": "draw_triangle_faces",
-   "x": 15.0,
-   "y": 1.2,
-   "z": 0.8,
-   "wall": false
-  },
-  {
-   "token": "station_plinth",
-   "x": 17.0,
-   "y": 0.0,
-   "z": 0.8,
-   "wall": false,
-   "config": {
-    "width_cells": 2,
-    "depth_cells": 1,
-    "top_height": 0.9
-   }
-  },
-  {
-   "token": "quad",
-   "x": 17.0,
-   "y": 0.9,
-   "z": 0.8,
-   "wall": false
   },
   {
    "token": "station_panel",
-   "x": 9.0,
-   "y": 1.9,
+   "x": 1.5,
+   "y": 2.4,
    "z": 0.06,
-   "wall": true
-  },
-  {
-   "token": "station_pillar",
-   "x": 20.0,
-   "y": 0.0,
-   "z": 0.8,
-   "wall": false
-  },
-  {
-   "token": "station_plinth",
-   "x": 23.0,
-   "y": 0.0,
-   "z": 0.8,
-   "wall": false,
+   "wall": true,
    "config": {
-    "width_cells": 1,
-    "depth_cells": 1,
-    "top_height": 1.2
+    "width_cells": 5,
+    "header": "THE FIRST SURFACE",
+    "lines": [
+     "Three points, and suddenly there is surface \u2014 the minimal agreement that encloses area.",
+     "Every creature, cave, and cathedral in this book is triangles and nothing else."
+    ]
    }
   },
   {
-   "token": "parasol_triangle",
-   "x": 23.0,
-   "y": 1.2,
-   "z": 0.8,
-   "wall": false
-  },
-  {
-   "token": "station_plinth",
-   "x": 25.0,
+   "token": "station_stage",
+   "x": 3.0,
    "y": 0.0,
-   "z": 0.8,
+   "z": 2.2,
    "wall": false,
    "config": {
-    "width_cells": 4,
-    "depth_cells": 1,
-    "top_height": 0.9
-   }
-  },
-  {
-   "token": "science_screen",
-   "x": 25.0,
-   "y": 0.9,
-   "z": 0.8,
-   "wall": false
-  },
-  {
-   "token": "station_plinth",
-   "x": 30.0,
-   "y": 0.0,
-   "z": 0.8,
-   "wall": false,
-   "config": {
-    "width_cells": 1,
-    "depth_cells": 1,
-    "top_height": 1.2
+    "width_cells": 3,
+    "depth_cells": 3,
+    "step_height": 0.18,
+    "name_plate": "Triangle \u2014 drag the vertices; the pact holds"
    }
   },
   {
    "token": "triangle",
-   "x": 30.0,
-   "y": 1.2,
-   "z": 0.8,
+   "x": 3.0,
+   "y": 0.18,
+   "z": 2.2,
    "wall": false
-  },
-  {
-   "token": "station_plinth",
-   "x": 32.0,
-   "y": 0.0,
-   "z": 0.8,
-   "wall": false,
-   "config": {
-    "width_cells": 2,
-    "depth_cells": 1,
-    "top_height": 0.9
-   }
-  },
-  {
-   "token": "interactivetriangle",
-   "x": 32.0,
-   "y": 0.9,
-   "z": 0.8,
-   "wall": false
-  },
-  {
-   "token": "station_panel",
-   "x": 28.0,
-   "y": 1.9,
-   "z": 0.06,
-   "wall": true
   },
   {
    "token": "station_pillar",
-   "x": 35.0,
+   "x": 6.8,
    "y": 0.0,
-   "z": 0.8,
+   "z": 1.6,
    "wall": false
   },
   {
+   "token": "station_wall",
+   "x": 7.5,
+   "y": 0.0,
+   "z": 0.0,
+   "wall": true,
+   "config": {
+    "width_cells": 5
+   }
+  },
+  {
+   "token": "station_panel",
+   "x": 8.0,
+   "y": 2.3,
+   "z": 0.06,
+   "wall": true,
+   "config": {
+    "width_cells": 4,
+    "header": "PROOF ON THE WALL",
+    "lines": [
+     "The Pythagorean angles, hung like a diploma \u2014 the triangle's oldest contract.",
+     "A folded strip shows the other secret: every surface is a folded line."
+    ]
+   }
+  },
+  {
    "token": "station_plinth",
-   "x": 38.0,
+   "x": 8.8,
    "y": 0.0,
    "z": 0.8,
    "wall": false,
    "config": {
     "width_cells": 1,
     "depth_cells": 1,
-    "top_height": 1.2
-   }
-  },
-  {
-   "token": "floating_sphere_field",
-   "x": 38.0,
-   "y": 1.2,
-   "z": 0.8,
-   "wall": false
-  },
-  {
-   "token": "station_plinth",
-   "x": 40.0,
-   "y": 0.0,
-   "z": 0.8,
-   "wall": false,
-   "config": {
-    "width_cells": 3,
-    "depth_cells": 1,
-    "top_height": 0.9
+    "top_height": 1.1,
+    "cap_inset": 0.1,
+    "caption_text": "Pythagorean Angles"
    }
   },
   {
    "token": "pythagorean_triangle_angles",
-   "x": 40.0,
-   "y": 0.9,
+   "x": 8.8,
+   "y": 1.1,
    "z": 0.8,
    "wall": false
   },
   {
-   "token": "station_panel",
-   "x": 40.0,
-   "y": 1.9,
-   "z": 0.06,
-   "wall": true
-  },
-  {
-   "token": "station_pillar",
-   "x": 44.0,
+   "token": "station_micropod",
+   "x": 10.8,
    "y": 0.0,
-   "z": 0.8,
-   "wall": false
-  },
-  {
-   "token": "station_stage",
-   "x": 47.0,
-   "y": 0.0,
-   "z": 0.8,
+   "z": 0.5,
    "wall": false,
    "config": {
-    "width_cells": 1,
-    "depth_cells": 1,
-    "step_height": 0.18
+    "caption_text": "Folded Strip \u2014 a surface is a folded line",
+    "top_height": 1.15,
+    "cap_inset": 0.1,
+    "base_meters": 0.6,
+    "cap_meters": 1.16
    }
   },
   {
-   "token": "lab_room",
-   "x": 47.0,
-   "y": 0.18,
-   "z": 0.8,
+   "token": "folded_strip",
+   "x": 10.8,
+   "y": 1.15,
+   "z": 0.5,
    "wall": false
-  },
-  {
-   "token": "station_plinth",
-   "x": 49.0,
-   "y": 0.0,
-   "z": 0.8,
-   "wall": false,
-   "config": {
-    "width_cells": 1,
-    "depth_cells": 1,
-    "top_height": 1.2
-   }
-  },
-  {
-   "token": "triangle_line_puzzle",
-   "x": 49.0,
-   "y": 1.2,
-   "z": 0.8,
-   "wall": false
-  },
-  {
-   "token": "station_plinth",
-   "x": 51.0,
-   "y": 0.0,
-   "z": 0.8,
-   "wall": false,
-   "config": {
-    "width_cells": 1,
-    "depth_cells": 1,
-    "top_height": 1.2
-   }
-  },
-  {
-   "token": "quad_line_puzzle",
-   "x": 51.0,
-   "y": 1.2,
-   "z": 0.8,
-   "wall": false
-  },
-  {
-   "token": "station_panel",
-   "x": 49.0,
-   "y": 1.9,
-   "z": 0.06,
-   "wall": true
   }
  ]
 }

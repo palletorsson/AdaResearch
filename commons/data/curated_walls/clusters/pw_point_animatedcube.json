@@ -1,150 +1,79 @@
 {
  "name": "pw_point_animatedcube",
- "source": "spine_walls.json (auto-seed)",
+ "source": "curated (Point_Animatedcube) \u2014 hand-curated 2026-07-04, R-013",
  "pieces": [
   {
-   "token": "station_plinth",
-   "x": 0.0,
+   "token": "station_wall",
+   "x": 1.0,
    "y": 0.0,
-   "z": 0.8,
-   "wall": false,
+   "z": 0.0,
+   "wall": true,
    "config": {
-    "width_cells": 1,
-    "depth_cells": 1,
-    "top_height": 1.2
+    "width_cells": 6
    }
-  },
-  {
-   "token": "dark_sphere",
-   "x": 0.0,
-   "y": 1.2,
-   "z": 0.8,
-   "wall": false
-  },
-  {
-   "token": "station_plinth",
-   "x": 2.0,
-   "y": 0.0,
-   "z": 0.8,
-   "wall": false,
-   "config": {
-    "width_cells": 2,
-    "depth_cells": 2,
-    "top_height": 0.9
-   }
-  },
-  {
-   "token": "polyhedron_nets_cube",
-   "x": 2.0,
-   "y": 0.9,
-   "z": 0.8,
-   "wall": false
   },
   {
    "token": "station_panel",
    "x": 1.5,
-   "y": 1.9,
+   "y": 2.4,
    "z": 0.06,
-   "wall": true
+   "wall": true,
+   "config": {
+    "width_cells": 5,
+    "header": "BUILT BEFORE YOUR EYES",
+    "lines": [
+     "A cube is not a thing but a procedure \u2014 watch it assemble, face by face.",
+     "The net is the solid's confession: every volume is a folded plane."
+    ]
+   }
+  },
+  {
+   "token": "station_stage",
+   "x": 3.0,
+   "y": 0.0,
+   "z": 2.0,
+   "wall": false,
+   "config": {
+    "width_cells": 3,
+    "depth_cells": 3,
+    "step_height": 0.18,
+    "name_plate": "Animated Cube Builder \u2014 construction as performance"
+   }
+  },
+  {
+   "token": "animatedcubebuilder",
+   "x": 3.0,
+   "y": 0.18,
+   "z": 2.0,
+   "wall": false
   },
   {
    "token": "station_pillar",
-   "x": 5.0,
+   "x": 6.6,
    "y": 0.0,
-   "z": 0.8,
+   "z": 1.6,
    "wall": false
   },
   {
    "token": "station_plinth",
    "x": 8.0,
-   "y": 0.0,
-   "z": 0.8,
-   "wall": false,
-   "config": {
-    "width_cells": 4,
-    "depth_cells": 1,
-    "top_height": 0.9
-   }
-  },
-  {
-   "token": "science_screen",
-   "x": 8.0,
-   "y": 0.9,
-   "z": 0.8,
-   "wall": false
-  },
-  {
-   "token": "station_panel",
-   "x": 9.5,
-   "y": 1.9,
-   "z": 0.06,
-   "wall": true
-  },
-  {
-   "token": "station_pillar",
-   "x": 13.0,
-   "y": 0.0,
-   "z": 0.8,
-   "wall": false
-  },
-  {
-   "token": "station_plinth",
-   "x": 16.0,
-   "y": 0.0,
-   "z": 0.8,
-   "wall": false,
-   "config": {
-    "width_cells": 1,
-    "depth_cells": 1,
-    "top_height": 1.2
-   }
-  },
-  {
-   "token": "floating_sphere_field",
-   "x": 16.0,
-   "y": 1.2,
-   "z": 0.8,
-   "wall": false
-  },
-  {
-   "token": "station_panel",
-   "x": 16.0,
-   "y": 1.9,
-   "z": 0.06,
-   "wall": true
-  },
-  {
-   "token": "station_pillar",
-   "x": 18.0,
-   "y": 0.0,
-   "z": 0.8,
-   "wall": false
-  },
-  {
-   "token": "station_plinth",
-   "x": 21.0,
    "y": 0.0,
    "z": 0.8,
    "wall": false,
    "config": {
     "width_cells": 2,
-    "depth_cells": 2,
-    "top_height": 0.9
+    "depth_cells": 1,
+    "top_height": 1.0,
+    "cap_inset": 0.1,
+    "caption_text": "Polyhedron Nets \u2014 the cube, unfolded"
    }
   },
   {
-   "token": "animatedcubebuilder",
-   "x": 21.0,
-   "y": 0.9,
+   "token": "polyhedron_nets_cube",
+   "x": 8.0,
+   "y": 1.0,
    "z": 0.8,
    "wall": false
-  },
-  {
-   "token": "station_panel",
-   "x": 21.5,
-   "y": 1.9,
-   "z": 0.06,
-   "wall": true
   }
  ]
 }

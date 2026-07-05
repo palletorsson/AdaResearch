@@ -1,0 +1,27 @@
+{
+ "sequence": "primitives",
+ "counts": {"small": 6, "medium": 1, "large": 0, "applied": 0},
+ "pieces": [
+  {"token": "station_wall", "x": 1.0, "y": 0.0, "z": 0.0, "wall": true, "config": {"width_cells": 6}},
+  {"token": "station_panel", "x": 1.5, "y": 2.4, "z": 0.06, "wall": true, "config": {
+    "width_cells": 5, "header": "EVERYTHING YOU DO NOT KNOW YET",
+    "lines": ["Forty shapes are staged in this room; the ones you cannot name are the curriculum.",
+              "Ignorance, exhibited — the cabinet fills with meaning as you learn to see it."]}},
+  {"token": "station_plinth", "x": 2.5, "y": 0.0, "z": 0.8, "wall": false, "config": {
+    "width_cells": 4, "depth_cells": 1, "top_height": 1.0,
+    "caption_text": "The shelf of the not-yet-named"}},
+  {"token": "platonic_grabbables", "x": 1.5, "y": 1.0, "z": 0.8, "wall": false},
+  {"token": "star_primitive", "x": 2.5, "y": 1.0, "z": 0.8, "wall": false},
+  {"token": "roughrock", "x": 3.5, "y": 1.0, "z": 0.8, "wall": false},
+  {"token": "truncatedtetrahedron", "x": 4.5, "y": 1.0, "z": 0.8, "wall": false},
+  {"token": "station_pillar", "x": 6.4, "y": 0.0, "z": 1.6, "wall": false},
+  {"token": "station_wall", "x": 7.0, "y": 0.0, "z": 0.0, "wall": true, "config": {"width_cells": 5}},
+  {"token": "station_plinth", "x": 8.0, "y": 0.0, "z": 0.8, "wall": false, "config": {
+    "width_cells": 3, "depth_cells": 1, "top_height": 1.0,
+    "caption_text": "Second shelf — stranger still"}},
+  {"token": "hole_with_cones", "x": 7.5, "y": 1.0, "z": 0.8, "wall": false},
+  {"token": "lshape", "x": 8.5, "y": 1.0, "z": 0.8, "wall": false},
+  {"token": "diamonds", "x": 9.5, "y": 1.0, "z": 0.8, "wall": false},
+  {"token": "library_rack", "x": 11.2, "y": 0.0, "z": 0.6, "wall": false}
+ ]
+}

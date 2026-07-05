@@ -1,136 +1,79 @@
 {
  "name": "pw_point_line_grid",
- "source": "spine_walls.json (auto-seed)",
+ "source": "curated (Point_Line_Grid) \u2014 hand-curated 2026-07-04, R-013",
  "pieces": [
   {
-   "token": "station_plinth",
-   "x": 0.0,
+   "token": "station_wall",
+   "x": 1.0,
    "y": 0.0,
-   "z": 0.8,
-   "wall": false,
+   "z": 0.0,
+   "wall": true,
    "config": {
-    "width_cells": 1,
-    "depth_cells": 1,
-    "top_height": 1.2
+    "width_cells": 6
    }
-  },
-  {
-   "token": "player_trace",
-   "x": 0.0,
-   "y": 1.2,
-   "z": 0.8,
-   "wall": false
-  },
-  {
-   "token": "station_plinth",
-   "x": 2.0,
-   "y": 0.0,
-   "z": 0.8,
-   "wall": false,
-   "config": {
-    "width_cells": 1,
-    "depth_cells": 1,
-    "top_height": 1.2
-   }
-  },
-  {
-   "token": "room_grammar",
-   "x": 2.0,
-   "y": 1.2,
-   "z": 0.8,
-   "wall": false
   },
   {
    "token": "station_panel",
-   "x": 1.0,
-   "y": 1.9,
+   "x": 1.5,
+   "y": 2.4,
    "z": 0.06,
-   "wall": true
-  },
-  {
-   "token": "station_pillar",
-   "x": 4.0,
-   "y": 0.0,
-   "z": 0.8,
-   "wall": false
+   "wall": true,
+   "config": {
+    "width_cells": 5,
+    "header": "THE GRID IS AN AGREEMENT",
+    "lines": [
+     "A coordinate grid does not exist in space \u2014 it is a social agreement we project onto it.",
+     "The shared fiction that lets two people mean the same thing by 'here'. You put it there."
+    ]
+   }
   },
   {
    "token": "station_stage",
-   "x": 7.0,
+   "x": 3.0,
    "y": 0.0,
-   "z": 0.8,
+   "z": 2.2,
    "wall": false,
    "config": {
     "width_cells": 4,
     "depth_cells": 4,
-    "step_height": 0.18
+    "step_height": 0.18,
+    "name_plate": "Grid Lines \u2014 the lattice, walked"
    }
   },
   {
    "token": "grid_lines",
-   "x": 7.0,
+   "x": 3.0,
    "y": 0.18,
-   "z": 0.8,
+   "z": 2.2,
    "wall": false
-  },
-  {
-   "token": "station_plinth",
-   "x": 14.0,
-   "y": 0.0,
-   "z": 0.8,
-   "wall": false,
-   "config": {
-    "width_cells": 1,
-    "depth_cells": 1,
-    "top_height": 1.2
-   }
-  },
-  {
-   "token": "floating_sphere_field",
-   "x": 14.0,
-   "y": 1.2,
-   "z": 0.8,
-   "wall": false
-  },
-  {
-   "token": "station_panel",
-   "x": 10.5,
-   "y": 1.9,
-   "z": 0.06,
-   "wall": true
   },
   {
    "token": "station_pillar",
-   "x": 16.0,
+   "x": 7.0,
    "y": 0.0,
-   "z": 0.8,
+   "z": 1.6,
    "wall": false
   },
   {
-   "token": "station_plinth",
-   "x": 19.0,
+   "token": "station_micropod",
+   "x": 8.2,
    "y": 0.0,
-   "z": 0.8,
+   "z": 0.5,
    "wall": false,
    "config": {
-    "width_cells": 1,
-    "depth_cells": 1,
-    "top_height": 1.2
+    "caption_text": "Point Snap \u2014 the point accepts the agreement",
+    "top_height": 1.15,
+    "cap_inset": 0.1,
+    "base_meters": 0.6,
+    "cap_meters": 1.16
    }
   },
   {
    "token": "grab_sphere_point_snap",
-   "x": 19.0,
-   "y": 1.2,
-   "z": 0.8,
+   "x": 8.2,
+   "y": 1.15,
+   "z": 0.5,
    "wall": false
-  },
-  {
-   "token": "station_panel",
-   "x": 19.0,
-   "y": 1.9,
-   "z": 0.06,
-   "wall": true
   }
  ]
 }

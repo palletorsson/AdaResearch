@@ -1,0 +1,20 @@
+{
+ "sequence": "primitives",
+ "counts": {"small": 1, "medium": 1, "large": 0, "applied": 1},
+ "pieces": [
+  {"token": "station_wall", "x": 1.0, "y": 0.0, "z": 0.0, "wall": true, "config": {"width_cells": 6}},
+  {"token": "station_panel", "x": 1.5, "y": 2.4, "z": 0.06, "wall": true, "config": {
+    "width_cells": 5, "header": "BUILT BEFORE YOUR EYES",
+    "lines": ["A cube is not a thing but a procedure — watch it assemble, face by face.",
+              "The net is the solid's confession: every volume is a folded plane."]}},
+  {"token": "station_stage", "x": 3.0, "y": 0.0, "z": 2.0, "wall": false, "config": {
+    "width_cells": 3, "depth_cells": 3, "step_height": 0.18,
+    "name_plate": "Animated Cube Builder — construction as performance"}},
+  {"token": "animatedcubebuilder", "x": 3.0, "y": 0.18, "z": 2.0, "wall": false},
+  {"token": "station_pillar", "x": 6.6, "y": 0.0, "z": 1.6, "wall": false},
+  {"token": "station_plinth", "x": 8.0, "y": 0.0, "z": 0.8, "wall": false, "config": {
+    "width_cells": 2, "depth_cells": 1, "top_height": 1.0, "cap_inset": 0.1,
+    "caption_text": "Polyhedron Nets — the cube, unfolded"}},
+  {"token": "polyhedron_nets_cube", "x": 8.0, "y": 1.0, "z": 0.8, "wall": false}
+ ]
+}

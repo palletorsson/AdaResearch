@@ -1,0 +1,29 @@
+{
+ "sequence": "primitives",
+ "counts": {"small": 2, "medium": 1, "large": 0, "applied": 1},
+ "pieces": [
+  {"token": "station_wall", "x": 1.0, "y": 0.0, "z": 0.0, "wall": true, "config": {"width_cells": 5}},
+  {"token": "station_panel", "x": 1.0, "y": 2.3, "z": 0.06, "wall": true, "config": {
+    "width_cells": 4, "header": "CATEGORIES HAVE EDGES",
+    "lines": ["Drag the apex sideways: somewhere it stops being a pyramid. No alarm sounds.",
+              "The handles teach what the definition hides — you can feel for the edge of a category."]}},
+  {"token": "station_plinth", "x": 2.5, "y": 0.0, "z": 0.8, "wall": false, "config": {
+    "width_cells": 1, "depth_cells": 1, "top_height": 1.1, "cap_inset": 0.1,
+    "caption_text": "Pyramid Edit — five handles, one habit of naming"}},
+  {"token": "pyramid_edit", "x": 2.5, "y": 1.1, "z": 0.8, "wall": false},
+  {"token": "station_micropod", "x": 4.5, "y": 0.0, "z": 0.5, "wall": false, "config": {
+    "caption_text": "Snap Tetrahedron — the simplest solid, assembled",
+    "top_height": 1.15, "cap_inset": 0.1, "base_meters": 0.6, "cap_meters": 1.16}},
+  {"token": "snap_tetrahedron_puzzle", "x": 4.5, "y": 1.15, "z": 0.5, "wall": false},
+  {"token": "station_pillar", "x": 6.2, "y": 0.0, "z": 1.6, "wall": false},
+  {"token": "station_wall", "x": 7.0, "y": 0.0, "z": 0.0, "wall": true, "config": {"width_cells": 5}},
+  {"token": "station_panel", "x": 7.5, "y": 2.3, "z": 0.06, "wall": true, "config": {
+    "width_cells": 4, "header": "THE HAND, ARMED",
+    "lines": ["Three stones on a bracelet: cube, wedge, off. The hand stops pointing and starts placing.",
+              "The world becomes editable — the trace's descendant, given teeth."]}},
+  {"token": "station_plinth", "x": 8.5, "y": 0.0, "z": 0.8, "wall": false, "config": {
+    "width_cells": 1, "depth_cells": 1, "top_height": 1.2, "cap_inset": 0.1,
+    "caption_text": "Becoming Catalyst — the hand that places worlds"}},
+  {"token": "becoming_catalyst", "x": 8.5, "y": 1.2, "z": 0.8, "wall": false}
+ ]
+}

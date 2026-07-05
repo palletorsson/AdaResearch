@@ -1,250 +1,126 @@
 {
  "name": "pw_primitives_polythedra",
- "source": "spine_walls.json (auto-seed)",
+ "source": "curated (Primitives_Polythedra) \u2014 hand-curated 2026-07-04, R-013",
  "pieces": [
   {
-   "token": "station_plinth",
-   "x": 0.0,
+   "token": "station_wall",
+   "x": 1.0,
    "y": 0.0,
-   "z": 0.8,
-   "wall": false,
+   "z": 0.0,
+   "wall": true,
    "config": {
-    "width_cells": 1,
-    "depth_cells": 1,
-    "top_height": 1.2
+    "width_cells": 5
    }
-  },
-  {
-   "token": "path_watchdog",
-   "x": 0.0,
-   "y": 1.2,
-   "z": 0.8,
-   "wall": false
-  },
-  {
-   "token": "station_plinth",
-   "x": 2.0,
-   "y": 0.0,
-   "z": 0.8,
-   "wall": false,
-   "config": {
-    "width_cells": 1,
-    "depth_cells": 1,
-    "top_height": 1.2
-   }
-  },
-  {
-   "token": "path_game_controller",
-   "x": 2.0,
-   "y": 1.2,
-   "z": 0.8,
-   "wall": false
-  },
-  {
-   "token": "station_plinth",
-   "x": 4.0,
-   "y": 0.0,
-   "z": 0.8,
-   "wall": false,
-   "config": {
-    "width_cells": 1,
-    "depth_cells": 1,
-    "top_height": 1.2
-   }
-  },
-  {
-   "token": "interactive_point_origin_force",
-   "x": 4.0,
-   "y": 1.2,
-   "z": 0.8,
-   "wall": false
-  },
-  {
-   "token": "station_plinth",
-   "x": 6.0,
-   "y": 0.0,
-   "z": 0.8,
-   "wall": false,
-   "config": {
-    "width_cells": 1,
-    "depth_cells": 1,
-    "top_height": 1.2
-   }
-  },
-  {
-   "token": "becoming_catalyst",
-   "x": 6.0,
-   "y": 1.2,
-   "z": 0.8,
-   "wall": false
-  },
-  {
-   "token": "station_plinth",
-   "x": 8.0,
-   "y": 0.0,
-   "z": 0.8,
-   "wall": false,
-   "config": {
-    "width_cells": 2,
-    "depth_cells": 2,
-    "top_height": 0.9
-   }
-  },
-  {
-   "token": "grab_trihedron",
-   "x": 8.0,
-   "y": 0.9,
-   "z": 0.8,
-   "wall": false
-  },
-  {
-   "token": "station_plinth",
-   "x": 11.0,
-   "y": 0.0,
-   "z": 0.8,
-   "wall": false,
-   "config": {
-    "width_cells": 1,
-    "depth_cells": 1,
-    "top_height": 1.2
-   }
-  },
-  {
-   "token": "cube_scene",
-   "x": 11.0,
-   "y": 1.2,
-   "z": 0.8,
-   "wall": false
   },
   {
    "token": "station_panel",
-   "x": 5.5,
-   "y": 1.9,
+   "x": 1.0,
+   "y": 2.3,
    "z": 0.06,
-   "wall": true
-  },
-  {
-   "token": "station_pillar",
-   "x": 13.0,
-   "y": 0.0,
-   "z": 0.8,
-   "wall": false
-  },
-  {
-   "token": "station_plinth",
-   "x": 16.0,
-   "y": 0.0,
-   "z": 0.8,
-   "wall": false,
+   "wall": true,
    "config": {
-    "width_cells": 1,
-    "depth_cells": 1,
-    "top_height": 1.2
+    "width_cells": 4,
+    "header": "CATEGORIES HAVE EDGES",
+    "lines": [
+     "Drag the apex sideways: somewhere it stops being a pyramid. No alarm sounds.",
+     "The handles teach what the definition hides \u2014 you can feel for the edge of a category."
+    ]
    }
   },
   {
-   "token": "floating_sphere_field",
-   "x": 16.0,
-   "y": 1.2,
-   "z": 0.8,
-   "wall": false
-  },
-  {
-   "token": "station_panel",
-   "x": 16.0,
-   "y": 1.9,
-   "z": 0.06,
-   "wall": true
-  },
-  {
-   "token": "station_pillar",
-   "x": 18.0,
-   "y": 0.0,
-   "z": 0.8,
-   "wall": false
-  },
-  {
-   "token": "station_stage",
-   "x": 21.0,
-   "y": 0.0,
-   "z": 0.8,
-   "wall": false,
-   "config": {
-    "width_cells": 1,
-    "depth_cells": 1,
-    "step_height": 0.18
-   }
-  },
-  {
-   "token": "lab_room",
-   "x": 21.0,
-   "y": 0.18,
-   "z": 0.8,
-   "wall": false
-  },
-  {
    "token": "station_plinth",
-   "x": 23.0,
+   "x": 2.5,
    "y": 0.0,
    "z": 0.8,
    "wall": false,
    "config": {
     "width_cells": 1,
     "depth_cells": 1,
-    "top_height": 1.2
-   }
-  },
-  {
-   "token": "snap_tetrahedron_puzzle",
-   "x": 23.0,
-   "y": 1.2,
-   "z": 0.8,
-   "wall": false
-  },
-  {
-   "token": "station_plinth",
-   "x": 25.0,
-   "y": 0.0,
-   "z": 0.8,
-   "wall": false,
-   "config": {
-    "width_cells": 1,
-    "depth_cells": 1,
-    "top_height": 1.2
-   }
-  },
-  {
-   "token": "tentacle_placer",
-   "x": 25.0,
-   "y": 1.2,
-   "z": 0.8,
-   "wall": false
-  },
-  {
-   "token": "station_plinth",
-   "x": 27.0,
-   "y": 0.0,
-   "z": 0.8,
-   "wall": false,
-   "config": {
-    "width_cells": 1,
-    "depth_cells": 1,
-    "top_height": 1.2
+    "top_height": 1.1,
+    "cap_inset": 0.1,
+    "caption_text": "Pyramid Edit \u2014 five handles, one habit of naming"
    }
   },
   {
    "token": "pyramid_edit",
-   "x": 27.0,
-   "y": 1.2,
+   "x": 2.5,
+   "y": 1.1,
    "z": 0.8,
    "wall": false
   },
   {
+   "token": "station_micropod",
+   "x": 4.5,
+   "y": 0.0,
+   "z": 0.5,
+   "wall": false,
+   "config": {
+    "caption_text": "Snap Tetrahedron \u2014 the simplest solid, assembled",
+    "top_height": 1.15,
+    "cap_inset": 0.1,
+    "base_meters": 0.6,
+    "cap_meters": 1.16
+   }
+  },
+  {
+   "token": "snap_tetrahedron_puzzle",
+   "x": 4.5,
+   "y": 1.15,
+   "z": 0.5,
+   "wall": false
+  },
+  {
+   "token": "station_pillar",
+   "x": 6.2,
+   "y": 0.0,
+   "z": 1.6,
+   "wall": false
+  },
+  {
+   "token": "station_wall",
+   "x": 7.0,
+   "y": 0.0,
+   "z": 0.0,
+   "wall": true,
+   "config": {
+    "width_cells": 5
+   }
+  },
+  {
    "token": "station_panel",
-   "x": 24.0,
-   "y": 1.9,
+   "x": 7.5,
+   "y": 2.3,
    "z": 0.06,
-   "wall": true
+   "wall": true,
+   "config": {
+    "width_cells": 4,
+    "header": "THE HAND, ARMED",
+    "lines": [
+     "Three stones on a bracelet: cube, wedge, off. The hand stops pointing and starts placing.",
+     "The world becomes editable \u2014 the trace's descendant, given teeth."
+    ]
+   }
+  },
+  {
+   "token": "station_plinth",
+   "x": 8.5,
+   "y": 0.0,
+   "z": 0.8,
+   "wall": false,
+   "config": {
+    "width_cells": 1,
+    "depth_cells": 1,
+    "top_height": 1.2,
+    "cap_inset": 0.1,
+    "caption_text": "Becoming Catalyst \u2014 the hand that places worlds"
+   }
+  },
+  {
+   "token": "becoming_catalyst",
+   "x": 8.5,
+   "y": 1.2,
+   "z": 0.8,
+   "wall": false
   }
  ]
 }

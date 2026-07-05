@@ -1,435 +1,125 @@
 {
  "name": "pw_point_lines",
- "source": "spine_walls.json (auto-seed)",
+ "source": "curated (Point_Lines) \u2014 hand-curated 2026-07-04, R-013",
  "pieces": [
   {
-   "token": "station_plinth",
-   "x": 0.0,
+   "token": "station_wall",
+   "x": 1.0,
    "y": 0.0,
-   "z": 0.8,
-   "wall": false,
+   "z": 0.0,
+   "wall": true,
    "config": {
-    "width_cells": 1,
-    "depth_cells": 1,
-    "top_height": 1.2
+    "width_cells": 5
    }
   },
   {
-   "token": "dark_sphere",
-   "x": 0.0,
-   "y": 1.2,
-   "z": 0.8,
-   "wall": false
-  },
-  {
-   "token": "station_plinth",
-   "x": 2.0,
-   "y": 0.0,
-   "z": 0.8,
-   "wall": false,
+   "token": "station_panel",
+   "x": 1.0,
+   "y": 2.3,
+   "z": 0.06,
+   "wall": true,
    "config": {
-    "width_cells": 1,
-    "depth_cells": 1,
-    "top_height": 1.2
+    "width_cells": 4,
+    "header": "AN ACTIVE LINE ON A WALK",
+    "lines": [
+     "Klee, page one: a point sets itself in motion \u2014 a walk for a walk's sake.",
+     "The line is never given; it is the record of a point that moved. Meander beats straight."
+    ]
    }
   },
   {
-   "token": "line",
-   "x": 2.0,
-   "y": 1.2,
-   "z": 0.8,
-   "wall": false
-  },
-  {
-   "token": "station_plinth",
-   "x": 4.0,
+   "token": "station_stage",
+   "x": 2.5,
    "y": 0.0,
-   "z": 0.8,
+   "z": 1.8,
    "wall": false,
    "config": {
-    "width_cells": 1,
-    "depth_cells": 1,
-    "top_height": 1.2
-   }
-  },
-  {
-   "token": "cube_scene",
-   "x": 4.0,
-   "y": 1.2,
-   "z": 0.8,
-   "wall": false
-  },
-  {
-   "token": "station_plinth",
-   "x": 6.0,
-   "y": 0.0,
-   "z": 0.8,
-   "wall": false,
-   "config": {
-    "width_cells": 1,
-    "depth_cells": 1,
-    "top_height": 1.2
-   }
-  },
-  {
-   "token": "laser_measure",
-   "x": 6.0,
-   "y": 1.2,
-   "z": 0.8,
-   "wall": false
-  },
-  {
-   "token": "station_plinth",
-   "x": 8.0,
-   "y": 0.0,
-   "z": 0.8,
-   "wall": false,
-   "config": {
-    "width_cells": 1,
-    "depth_cells": 1,
-    "top_height": 1.2
-   }
-  },
-  {
-   "token": "grabbable_line",
-   "x": 8.0,
-   "y": 1.2,
-   "z": 0.8,
-   "wall": false
-  },
-  {
-   "token": "station_plinth",
-   "x": 10.0,
-   "y": 0.0,
-   "z": 0.8,
-   "wall": false,
-   "config": {
-    "width_cells": 1,
-    "depth_cells": 1,
-    "top_height": 1.2
-   }
-  },
-  {
-   "token": "lightrod",
-   "x": 10.0,
-   "y": 1.2,
-   "z": 0.8,
-   "wall": false
-  },
-  {
-   "token": "station_plinth",
-   "x": 12.0,
-   "y": 0.0,
-   "z": 0.8,
-   "wall": false,
-   "config": {
-    "width_cells": 1,
-    "depth_cells": 1,
-    "top_height": 1.2
-   }
-  },
-  {
-   "token": "fontana_puncture",
-   "x": 12.0,
-   "y": 1.2,
-   "z": 0.8,
-   "wall": false
-  },
-  {
-   "token": "station_plinth",
-   "x": 14.0,
-   "y": 0.0,
-   "z": 0.8,
-   "wall": false,
-   "config": {
-    "width_cells": 1,
-    "depth_cells": 1,
-    "top_height": 1.2
+    "width_cells": 2,
+    "depth_cells": 2,
+    "step_height": 0.18,
+    "name_plate": "Klee Walking Point \u2014 drawing is time made visible"
    }
   },
   {
    "token": "klee_walking_point",
-   "x": 14.0,
-   "y": 1.2,
-   "z": 0.8,
+   "x": 2.5,
+   "y": 0.18,
+   "z": 1.8,
    "wall": false
   },
   {
+   "token": "station_micropod",
+   "x": 5.0,
+   "y": 0.0,
+   "z": 0.5,
+   "wall": false,
+   "config": {
+    "caption_text": "Grabbable Line \u2014 held before it has endpoints",
+    "top_height": 1.15,
+    "cap_inset": 0.1,
+    "base_meters": 0.6,
+    "cap_meters": 1.16
+   }
+  },
+  {
+   "token": "grabbable_line",
+   "x": 5.0,
+   "y": 1.15,
+   "z": 0.5,
+   "wall": false
+  },
+  {
+   "token": "station_pillar",
+   "x": 6.7,
+   "y": 0.0,
+   "z": 1.6,
+   "wall": false
+  },
+  {
+   "token": "station_wall",
+   "x": 7.5,
+   "y": 0.0,
+   "z": 0.0,
+   "wall": true,
+   "config": {
+    "width_cells": 4
+   }
+  },
+  {
+   "token": "station_panel",
+   "x": 7.8,
+   "y": 2.3,
+   "z": 0.06,
+   "wall": true,
+   "config": {
+    "width_cells": 3,
+    "header": "THE LINE, HELD",
+    "lines": [
+     "You can hold a line before you know it has endpoints.",
+     "The whole precedes its parts; the body understands before analysis arrives."
+    ]
+   }
+  },
+  {
    "token": "station_plinth",
-   "x": 16.0,
+   "x": 8.8,
    "y": 0.0,
    "z": 0.8,
    "wall": false,
    "config": {
     "width_cells": 2,
     "depth_cells": 1,
-    "top_height": 0.9
-   }
-  },
-  {
-   "token": "dgrid",
-   "x": 16.0,
-   "y": 0.9,
-   "z": 0.8,
-   "wall": false
-  },
-  {
-   "token": "station_panel",
-   "x": 8.5,
-   "y": 1.9,
-   "z": 0.06,
-   "wall": true
-  },
-  {
-   "token": "station_pillar",
-   "x": 19.0,
-   "y": 0.0,
-   "z": 0.8,
-   "wall": false
-  },
-  {
-   "token": "station_plinth",
-   "x": 22.0,
-   "y": 0.0,
-   "z": 0.8,
-   "wall": false,
-   "config": {
-    "width_cells": 1,
-    "depth_cells": 1,
-    "top_height": 1.2
-   }
-  },
-  {
-   "token": "modulor_man_demo",
-   "x": 22.0,
-   "y": 1.2,
-   "z": 0.8,
-   "wall": false
-  },
-  {
-   "token": "station_plinth",
-   "x": 24.0,
-   "y": 0.0,
-   "z": 0.8,
-   "wall": false,
-   "config": {
-    "width_cells": 4,
-    "depth_cells": 1,
-    "top_height": 0.9
+    "top_height": 1.0,
+    "cap_inset": 0.1,
+    "caption_text": "Line Builder \u2014 lines by hand"
    }
   },
   {
    "token": "line_builder_3d",
-   "x": 24.0,
-   "y": 0.9,
+   "x": 8.8,
+   "y": 1.0,
    "z": 0.8,
    "wall": false
-  },
-  {
-   "token": "station_plinth",
-   "x": 29.0,
-   "y": 0.0,
-   "z": 0.8,
-   "wall": false,
-   "config": {
-    "width_cells": 4,
-    "depth_cells": 1,
-    "top_height": 0.9
-   }
-  },
-  {
-   "token": "science_screen",
-   "x": 29.0,
-   "y": 0.9,
-   "z": 0.8,
-   "wall": false
-  },
-  {
-   "token": "station_plinth",
-   "x": 34.0,
-   "y": 0.0,
-   "z": 0.8,
-   "wall": false,
-   "config": {
-    "width_cells": 1,
-    "depth_cells": 1,
-    "top_height": 1.2
-   }
-  },
-  {
-   "token": "laser_exploding_sphere",
-   "x": 34.0,
-   "y": 1.2,
-   "z": 0.8,
-   "wall": false
-  },
-  {
-   "token": "station_stage",
-   "x": 36.0,
-   "y": 0.0,
-   "z": 0.8,
-   "wall": false,
-   "config": {
-    "width_cells": 2,
-    "depth_cells": 3,
-    "step_height": 0.18
-   }
-  },
-  {
-   "token": "perspective_lines",
-   "x": 36.0,
-   "y": 0.18,
-   "z": 0.8,
-   "wall": false
-  },
-  {
-   "token": "station_panel",
-   "x": 29.5,
-   "y": 1.9,
-   "z": 0.06,
-   "wall": true
-  },
-  {
-   "token": "station_pillar",
-   "x": 39.0,
-   "y": 0.0,
-   "z": 0.8,
-   "wall": false
-  },
-  {
-   "token": "station_plinth",
-   "x": 42.0,
-   "y": 0.0,
-   "z": 0.8,
-   "wall": false,
-   "config": {
-    "width_cells": 1,
-    "depth_cells": 1,
-    "top_height": 1.2
-   }
-  },
-  {
-   "token": "floating_sphere_field",
-   "x": 42.0,
-   "y": 1.2,
-   "z": 0.8,
-   "wall": false
-  },
-  {
-   "token": "station_plinth",
-   "x": 44.0,
-   "y": 0.0,
-   "z": 0.8,
-   "wall": false,
-   "config": {
-    "width_cells": 1,
-    "depth_cells": 1,
-    "top_height": 1.2
-   }
-  },
-  {
-   "token": "scale_lines",
-   "x": 44.0,
-   "y": 1.2,
-   "z": 0.8,
-   "wall": false
-  },
-  {
-   "token": "station_panel",
-   "x": 43.0,
-   "y": 1.9,
-   "z": 0.06,
-   "wall": true
-  },
-  {
-   "token": "station_pillar",
-   "x": 46.0,
-   "y": 0.0,
-   "z": 0.8,
-   "wall": false
-  },
-  {
-   "token": "station_stage",
-   "x": 49.0,
-   "y": 0.0,
-   "z": 0.8,
-   "wall": false,
-   "config": {
-    "width_cells": 1,
-    "depth_cells": 1,
-    "step_height": 0.18
-   }
-  },
-  {
-   "token": "lab_room",
-   "x": 49.0,
-   "y": 0.18,
-   "z": 0.8,
-   "wall": false
-  },
-  {
-   "token": "station_plinth",
-   "x": 51.0,
-   "y": 0.0,
-   "z": 0.8,
-   "wall": false,
-   "config": {
-    "width_cells": 1,
-    "depth_cells": 1,
-    "top_height": 1.2
-   }
-  },
-  {
-   "token": "plus_line_puzzle",
-   "x": 51.0,
-   "y": 1.2,
-   "z": 0.8,
-   "wall": false
-  },
-  {
-   "token": "station_plinth",
-   "x": 53.0,
-   "y": 0.0,
-   "z": 0.8,
-   "wall": false,
-   "config": {
-    "width_cells": 1,
-    "depth_cells": 1,
-    "top_height": 1.2
-   }
-  },
-  {
-   "token": "parallel_line_puzzle",
-   "x": 53.0,
-   "y": 1.2,
-   "z": 0.8,
-   "wall": false
-  },
-  {
-   "token": "station_plinth",
-   "x": 55.0,
-   "y": 0.0,
-   "z": 0.8,
-   "wall": false,
-   "config": {
-    "width_cells": 1,
-    "depth_cells": 1,
-    "top_height": 1.2
-   }
-  },
-  {
-   "token": "laser_sword",
-   "x": 55.0,
-   "y": 1.2,
-   "z": 0.8,
-   "wall": false
-  },
-  {
-   "token": "station_panel",
-   "x": 52.0,
-   "y": 1.9,
-   "z": 0.06,
-   "wall": true
   }
  ]
 }

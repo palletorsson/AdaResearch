@@ -80,440 +80,130 @@
  "Point_Lines": {
   "sequence": "primitives",
   "counts": {
-   "small": 9,
-   "medium": 5,
-   "large": 2,
-   "applied": 4
+   "small": 2,
+   "medium": 1,
+   "large": 0,
+   "applied": 1
   },
   "pieces": [
    {
-    "token": "station_plinth",
-    "x": 0.0,
+    "token": "station_wall",
+    "x": 1.0,
     "y": 0.0,
-    "z": 0.8,
-    "wall": false,
+    "z": 0.0,
+    "wall": true,
     "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
+     "width_cells": 5
     }
    },
    {
-    "token": "dark_sphere",
-    "x": 0.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 2.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
+    "token": "station_panel",
+    "x": 1.0,
+    "y": 2.3,
+    "z": 0.06,
+    "wall": true,
     "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
+     "width_cells": 4,
+     "header": "AN ACTIVE LINE ON A WALK",
+     "lines": [
+      "Klee, page one: a point sets itself in motion \u2014 a walk for a walk's sake.",
+      "The line is never given; it is the record of a point that moved. Meander beats straight."
+     ]
     }
    },
    {
-    "token": "line",
-    "x": 2.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 4.0,
+    "token": "station_stage",
+    "x": 2.5,
     "y": 0.0,
-    "z": 0.8,
+    "z": 1.8,
     "wall": false,
     "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
-    }
-   },
-   {
-    "token": "cube_scene",
-    "x": 4.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 6.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
-    }
-   },
-   {
-    "token": "laser_measure",
-    "x": 6.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 8.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
-    }
-   },
-   {
-    "token": "grabbable_line",
-    "x": 8.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 10.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
-    }
-   },
-   {
-    "token": "lightrod",
-    "x": 10.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 12.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
-    }
-   },
-   {
-    "token": "fontana_puncture",
-    "x": 12.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 14.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
+     "width_cells": 2,
+     "depth_cells": 2,
+     "step_height": 0.18,
+     "name_plate": "Klee Walking Point \u2014 drawing is time made visible"
     }
    },
    {
     "token": "klee_walking_point",
-    "x": 14.0,
-    "y": 1.2,
-    "z": 0.8,
+    "x": 2.5,
+    "y": 0.18,
+    "z": 1.8,
     "wall": false
    },
    {
+    "token": "station_micropod",
+    "x": 5.0,
+    "y": 0.0,
+    "z": 0.5,
+    "wall": false,
+    "config": {
+     "caption_text": "Grabbable Line \u2014 held before it has endpoints",
+     "top_height": 1.15,
+     "cap_inset": 0.1,
+     "base_meters": 0.6,
+     "cap_meters": 1.16
+    }
+   },
+   {
+    "token": "grabbable_line",
+    "x": 5.0,
+    "y": 1.15,
+    "z": 0.5,
+    "wall": false
+   },
+   {
+    "token": "station_pillar",
+    "x": 6.7,
+    "y": 0.0,
+    "z": 1.6,
+    "wall": false
+   },
+   {
+    "token": "station_wall",
+    "x": 7.5,
+    "y": 0.0,
+    "z": 0.0,
+    "wall": true,
+    "config": {
+     "width_cells": 4
+    }
+   },
+   {
+    "token": "station_panel",
+    "x": 7.8,
+    "y": 2.3,
+    "z": 0.06,
+    "wall": true,
+    "config": {
+     "width_cells": 3,
+     "header": "THE LINE, HELD",
+     "lines": [
+      "You can hold a line before you know it has endpoints.",
+      "The whole precedes its parts; the body understands before analysis arrives."
+     ]
+    }
+   },
+   {
     "token": "station_plinth",
-    "x": 16.0,
+    "x": 8.8,
     "y": 0.0,
     "z": 0.8,
     "wall": false,
     "config": {
      "width_cells": 2,
      "depth_cells": 1,
-     "top_height": 0.9
-    }
-   },
-   {
-    "token": "dgrid",
-    "x": 16.0,
-    "y": 0.9,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_panel",
-    "x": 8.5,
-    "y": 1.9,
-    "z": 0.06,
-    "wall": true
-   },
-   {
-    "token": "station_pillar",
-    "x": 19.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 22.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
-    }
-   },
-   {
-    "token": "modulor_man_demo",
-    "x": 22.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 24.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 4,
-     "depth_cells": 1,
-     "top_height": 0.9
+     "top_height": 1.0,
+     "cap_inset": 0.1,
+     "caption_text": "Line Builder \u2014 lines by hand"
     }
    },
    {
     "token": "line_builder_3d",
-    "x": 24.0,
-    "y": 0.9,
+    "x": 8.8,
+    "y": 1.0,
     "z": 0.8,
     "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 29.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 4,
-     "depth_cells": 1,
-     "top_height": 0.9
-    }
-   },
-   {
-    "token": "science_screen",
-    "x": 29.0,
-    "y": 0.9,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 34.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
-    }
-   },
-   {
-    "token": "laser_exploding_sphere",
-    "x": 34.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_stage",
-    "x": 36.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 2,
-     "depth_cells": 3,
-     "step_height": 0.18
-    }
-   },
-   {
-    "token": "perspective_lines",
-    "x": 36.0,
-    "y": 0.18,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_panel",
-    "x": 29.5,
-    "y": 1.9,
-    "z": 0.06,
-    "wall": true
-   },
-   {
-    "token": "station_pillar",
-    "x": 39.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 42.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
-    }
-   },
-   {
-    "token": "floating_sphere_field",
-    "x": 42.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 44.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
-    }
-   },
-   {
-    "token": "scale_lines",
-    "x": 44.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_panel",
-    "x": 43.0,
-    "y": 1.9,
-    "z": 0.06,
-    "wall": true
-   },
-   {
-    "token": "station_pillar",
-    "x": 46.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_stage",
-    "x": 49.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "step_height": 0.18
-    }
-   },
-   {
-    "token": "lab_room",
-    "x": 49.0,
-    "y": 0.18,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 51.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
-    }
-   },
-   {
-    "token": "plus_line_puzzle",
-    "x": 51.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 53.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
-    }
-   },
-   {
-    "token": "parallel_line_puzzle",
-    "x": 53.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 55.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
-    }
-   },
-   {
-    "token": "laser_sword",
-    "x": 55.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_panel",
-    "x": 52.0,
-    "y": 1.9,
-    "z": 0.06,
-    "wall": true
    }
   ]
  },
@@ -672,1374 +362,564 @@
  "Point_Line_Grid": {
   "sequence": "primitives",
   "counts": {
-   "small": 2,
+   "small": 1,
    "medium": 0,
-   "large": 2,
-   "applied": 1
+   "large": 1,
+   "applied": 0
   },
   "pieces": [
    {
-    "token": "station_plinth",
-    "x": 0.0,
+    "token": "station_wall",
+    "x": 1.0,
     "y": 0.0,
-    "z": 0.8,
-    "wall": false,
+    "z": 0.0,
+    "wall": true,
     "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
+     "width_cells": 6
     }
-   },
-   {
-    "token": "player_trace",
-    "x": 0.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 2.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
-    }
-   },
-   {
-    "token": "room_grammar",
-    "x": 2.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
    },
    {
     "token": "station_panel",
-    "x": 1.0,
-    "y": 1.9,
+    "x": 1.5,
+    "y": 2.4,
     "z": 0.06,
-    "wall": true
-   },
-   {
-    "token": "station_pillar",
-    "x": 4.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false
+    "wall": true,
+    "config": {
+     "width_cells": 5,
+     "header": "THE GRID IS AN AGREEMENT",
+     "lines": [
+      "A coordinate grid does not exist in space \u2014 it is a social agreement we project onto it.",
+      "The shared fiction that lets two people mean the same thing by 'here'. You put it there."
+     ]
+    }
    },
    {
     "token": "station_stage",
-    "x": 7.0,
+    "x": 3.0,
     "y": 0.0,
-    "z": 0.8,
+    "z": 2.2,
     "wall": false,
     "config": {
      "width_cells": 4,
      "depth_cells": 4,
-     "step_height": 0.18
+     "step_height": 0.18,
+     "name_plate": "Grid Lines \u2014 the lattice, walked"
     }
    },
    {
     "token": "grid_lines",
-    "x": 7.0,
+    "x": 3.0,
     "y": 0.18,
-    "z": 0.8,
+    "z": 2.2,
     "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 14.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
-    }
-   },
-   {
-    "token": "floating_sphere_field",
-    "x": 14.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_panel",
-    "x": 10.5,
-    "y": 1.9,
-    "z": 0.06,
-    "wall": true
    },
    {
     "token": "station_pillar",
-    "x": 16.0,
+    "x": 7.0,
     "y": 0.0,
-    "z": 0.8,
+    "z": 1.6,
     "wall": false
    },
    {
-    "token": "station_plinth",
-    "x": 19.0,
+    "token": "station_micropod",
+    "x": 8.2,
     "y": 0.0,
-    "z": 0.8,
+    "z": 0.5,
     "wall": false,
     "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
+     "caption_text": "Point Snap \u2014 the point accepts the agreement",
+     "top_height": 1.15,
+     "cap_inset": 0.1,
+     "base_meters": 0.6,
+     "cap_meters": 1.16
     }
    },
    {
     "token": "grab_sphere_point_snap",
-    "x": 19.0,
-    "y": 1.2,
-    "z": 0.8,
+    "x": 8.2,
+    "y": 1.15,
+    "z": 0.5,
     "wall": false
-   },
-   {
-    "token": "station_panel",
-    "x": 19.0,
-    "y": 1.9,
-    "z": 0.06,
-    "wall": true
    }
   ]
  },
  "Point_Triangle_Context": {
   "sequence": "primitives",
   "counts": {
-   "small": 5,
-   "medium": 4,
-   "large": 2,
-   "applied": 3
+   "small": 2,
+   "medium": 0,
+   "large": 1,
+   "applied": 0
   },
   "pieces": [
    {
-    "token": "station_plinth",
-    "x": 0.0,
+    "token": "station_wall",
+    "x": 1.0,
     "y": 0.0,
-    "z": 0.8,
-    "wall": false,
+    "z": 0.0,
+    "wall": true,
     "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
+     "width_cells": 6
     }
-   },
-   {
-    "token": "dark_sphere",
-    "x": 0.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_stage",
-    "x": 2.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 4,
-     "depth_cells": 4,
-     "step_height": 0.18
-    }
-   },
-   {
-    "token": "triangleprofiles",
-    "x": 2.0,
-    "y": 0.18,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_stage",
-    "x": 9.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 5,
-     "depth_cells": 1,
-     "step_height": 0.18
-    }
-   },
-   {
-    "token": "folded_strip",
-    "x": 9.0,
-    "y": 0.18,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 15.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
-    }
-   },
-   {
-    "token": "draw_triangle_faces",
-    "x": 15.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 17.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 2,
-     "depth_cells": 1,
-     "top_height": 0.9
-    }
-   },
-   {
-    "token": "quad",
-    "x": 17.0,
-    "y": 0.9,
-    "z": 0.8,
-    "wall": false
    },
    {
     "token": "station_panel",
-    "x": 9.0,
-    "y": 1.9,
+    "x": 1.5,
+    "y": 2.4,
     "z": 0.06,
-    "wall": true
-   },
-   {
-    "token": "station_pillar",
-    "x": 20.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 23.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
+    "wall": true,
     "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
+     "width_cells": 5,
+     "header": "THE FIRST SURFACE",
+     "lines": [
+      "Three points, and suddenly there is surface \u2014 the minimal agreement that encloses area.",
+      "Every creature, cave, and cathedral in this book is triangles and nothing else."
+     ]
     }
    },
    {
-    "token": "parasol_triangle",
-    "x": 23.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 25.0,
+    "token": "station_stage",
+    "x": 3.0,
     "y": 0.0,
-    "z": 0.8,
+    "z": 2.2,
     "wall": false,
     "config": {
-     "width_cells": 4,
-     "depth_cells": 1,
-     "top_height": 0.9
-    }
-   },
-   {
-    "token": "science_screen",
-    "x": 25.0,
-    "y": 0.9,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 30.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
+     "width_cells": 3,
+     "depth_cells": 3,
+     "step_height": 0.18,
+     "name_plate": "Triangle \u2014 drag the vertices; the pact holds"
     }
    },
    {
     "token": "triangle",
-    "x": 30.0,
-    "y": 1.2,
-    "z": 0.8,
+    "x": 3.0,
+    "y": 0.18,
+    "z": 2.2,
     "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 32.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 2,
-     "depth_cells": 1,
-     "top_height": 0.9
-    }
-   },
-   {
-    "token": "interactivetriangle",
-    "x": 32.0,
-    "y": 0.9,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_panel",
-    "x": 28.0,
-    "y": 1.9,
-    "z": 0.06,
-    "wall": true
    },
    {
     "token": "station_pillar",
-    "x": 35.0,
+    "x": 6.8,
     "y": 0.0,
-    "z": 0.8,
+    "z": 1.6,
     "wall": false
    },
    {
+    "token": "station_wall",
+    "x": 7.5,
+    "y": 0.0,
+    "z": 0.0,
+    "wall": true,
+    "config": {
+     "width_cells": 5
+    }
+   },
+   {
+    "token": "station_panel",
+    "x": 8.0,
+    "y": 2.3,
+    "z": 0.06,
+    "wall": true,
+    "config": {
+     "width_cells": 4,
+     "header": "PROOF ON THE WALL",
+     "lines": [
+      "The Pythagorean angles, hung like a diploma \u2014 the triangle's oldest contract.",
+      "A folded strip shows the other secret: every surface is a folded line."
+     ]
+    }
+   },
+   {
     "token": "station_plinth",
-    "x": 38.0,
+    "x": 8.8,
     "y": 0.0,
     "z": 0.8,
     "wall": false,
     "config": {
      "width_cells": 1,
      "depth_cells": 1,
-     "top_height": 1.2
-    }
-   },
-   {
-    "token": "floating_sphere_field",
-    "x": 38.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 40.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 3,
-     "depth_cells": 1,
-     "top_height": 0.9
+     "top_height": 1.1,
+     "cap_inset": 0.1,
+     "caption_text": "Pythagorean Angles"
     }
    },
    {
     "token": "pythagorean_triangle_angles",
-    "x": 40.0,
-    "y": 0.9,
+    "x": 8.8,
+    "y": 1.1,
     "z": 0.8,
     "wall": false
    },
    {
-    "token": "station_panel",
-    "x": 40.0,
-    "y": 1.9,
-    "z": 0.06,
-    "wall": true
-   },
-   {
-    "token": "station_pillar",
-    "x": 44.0,
+    "token": "station_micropod",
+    "x": 10.8,
     "y": 0.0,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_stage",
-    "x": 47.0,
-    "y": 0.0,
-    "z": 0.8,
+    "z": 0.5,
     "wall": false,
     "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "step_height": 0.18
+     "caption_text": "Folded Strip \u2014 a surface is a folded line",
+     "top_height": 1.15,
+     "cap_inset": 0.1,
+     "base_meters": 0.6,
+     "cap_meters": 1.16
     }
    },
    {
-    "token": "lab_room",
-    "x": 47.0,
-    "y": 0.18,
-    "z": 0.8,
+    "token": "folded_strip",
+    "x": 10.8,
+    "y": 1.15,
+    "z": 0.5,
     "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 49.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
-    }
-   },
-   {
-    "token": "triangle_line_puzzle",
-    "x": 49.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 51.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
-    }
-   },
-   {
-    "token": "quad_line_puzzle",
-    "x": 51.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_panel",
-    "x": 49.0,
-    "y": 1.9,
-    "z": 0.06,
-    "wall": true
    }
   ]
  },
  "Primitives_Polythedra": {
   "sequence": "primitives",
   "counts": {
-   "small": 6,
-   "medium": 0,
-   "large": 1,
-   "applied": 4
+   "small": 2,
+   "medium": 1,
+   "large": 0,
+   "applied": 1
   },
   "pieces": [
    {
-    "token": "station_plinth",
-    "x": 0.0,
+    "token": "station_wall",
+    "x": 1.0,
     "y": 0.0,
-    "z": 0.8,
-    "wall": false,
+    "z": 0.0,
+    "wall": true,
     "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
+     "width_cells": 5
     }
-   },
-   {
-    "token": "path_watchdog",
-    "x": 0.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 2.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
-    }
-   },
-   {
-    "token": "path_game_controller",
-    "x": 2.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 4.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
-    }
-   },
-   {
-    "token": "interactive_point_origin_force",
-    "x": 4.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 6.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
-    }
-   },
-   {
-    "token": "becoming_catalyst",
-    "x": 6.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 8.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 2,
-     "depth_cells": 2,
-     "top_height": 0.9
-    }
-   },
-   {
-    "token": "grab_trihedron",
-    "x": 8.0,
-    "y": 0.9,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 11.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
-    }
-   },
-   {
-    "token": "cube_scene",
-    "x": 11.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
    },
    {
     "token": "station_panel",
-    "x": 5.5,
-    "y": 1.9,
+    "x": 1.0,
+    "y": 2.3,
     "z": 0.06,
-    "wall": true
-   },
-   {
-    "token": "station_pillar",
-    "x": 13.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 16.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
+    "wall": true,
     "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
+     "width_cells": 4,
+     "header": "CATEGORIES HAVE EDGES",
+     "lines": [
+      "Drag the apex sideways: somewhere it stops being a pyramid. No alarm sounds.",
+      "The handles teach what the definition hides \u2014 you can feel for the edge of a category."
+     ]
     }
    },
    {
-    "token": "floating_sphere_field",
-    "x": 16.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_panel",
-    "x": 16.0,
-    "y": 1.9,
-    "z": 0.06,
-    "wall": true
-   },
-   {
-    "token": "station_pillar",
-    "x": 18.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_stage",
-    "x": 21.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "step_height": 0.18
-    }
-   },
-   {
-    "token": "lab_room",
-    "x": 21.0,
-    "y": 0.18,
-    "z": 0.8,
-    "wall": false
-   },
-   {
     "token": "station_plinth",
-    "x": 23.0,
+    "x": 2.5,
     "y": 0.0,
     "z": 0.8,
     "wall": false,
     "config": {
      "width_cells": 1,
      "depth_cells": 1,
-     "top_height": 1.2
-    }
-   },
-   {
-    "token": "snap_tetrahedron_puzzle",
-    "x": 23.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 25.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
-    }
-   },
-   {
-    "token": "tentacle_placer",
-    "x": 25.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 27.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
+     "top_height": 1.1,
+     "cap_inset": 0.1,
+     "caption_text": "Pyramid Edit \u2014 five handles, one habit of naming"
     }
    },
    {
     "token": "pyramid_edit",
-    "x": 27.0,
-    "y": 1.2,
+    "x": 2.5,
+    "y": 1.1,
     "z": 0.8,
     "wall": false
    },
    {
+    "token": "station_micropod",
+    "x": 4.5,
+    "y": 0.0,
+    "z": 0.5,
+    "wall": false,
+    "config": {
+     "caption_text": "Snap Tetrahedron \u2014 the simplest solid, assembled",
+     "top_height": 1.15,
+     "cap_inset": 0.1,
+     "base_meters": 0.6,
+     "cap_meters": 1.16
+    }
+   },
+   {
+    "token": "snap_tetrahedron_puzzle",
+    "x": 4.5,
+    "y": 1.15,
+    "z": 0.5,
+    "wall": false
+   },
+   {
+    "token": "station_pillar",
+    "x": 6.2,
+    "y": 0.0,
+    "z": 1.6,
+    "wall": false
+   },
+   {
+    "token": "station_wall",
+    "x": 7.0,
+    "y": 0.0,
+    "z": 0.0,
+    "wall": true,
+    "config": {
+     "width_cells": 5
+    }
+   },
+   {
     "token": "station_panel",
-    "x": 24.0,
-    "y": 1.9,
+    "x": 7.5,
+    "y": 2.3,
     "z": 0.06,
-    "wall": true
+    "wall": true,
+    "config": {
+     "width_cells": 4,
+     "header": "THE HAND, ARMED",
+     "lines": [
+      "Three stones on a bracelet: cube, wedge, off. The hand stops pointing and starts placing.",
+      "The world becomes editable \u2014 the trace's descendant, given teeth."
+     ]
+    }
+   },
+   {
+    "token": "station_plinth",
+    "x": 8.5,
+    "y": 0.0,
+    "z": 0.8,
+    "wall": false,
+    "config": {
+     "width_cells": 1,
+     "depth_cells": 1,
+     "top_height": 1.2,
+     "cap_inset": 0.1,
+     "caption_text": "Becoming Catalyst \u2014 the hand that places worlds"
+    }
+   },
+   {
+    "token": "becoming_catalyst",
+    "x": 8.5,
+    "y": 1.2,
+    "z": 0.8,
+    "wall": false
    }
   ]
  },
  "Point_Animatedcube": {
   "sequence": "primitives",
   "counts": {
-   "small": 2,
+   "small": 1,
    "medium": 1,
-   "large": 1,
+   "large": 0,
    "applied": 1
   },
   "pieces": [
    {
-    "token": "station_plinth",
-    "x": 0.0,
+    "token": "station_wall",
+    "x": 1.0,
     "y": 0.0,
-    "z": 0.8,
-    "wall": false,
+    "z": 0.0,
+    "wall": true,
     "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
+     "width_cells": 6
     }
-   },
-   {
-    "token": "dark_sphere",
-    "x": 0.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 2.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 2,
-     "depth_cells": 2,
-     "top_height": 0.9
-    }
-   },
-   {
-    "token": "polyhedron_nets_cube",
-    "x": 2.0,
-    "y": 0.9,
-    "z": 0.8,
-    "wall": false
    },
    {
     "token": "station_panel",
     "x": 1.5,
-    "y": 1.9,
+    "y": 2.4,
     "z": 0.06,
-    "wall": true
+    "wall": true,
+    "config": {
+     "width_cells": 5,
+     "header": "BUILT BEFORE YOUR EYES",
+     "lines": [
+      "A cube is not a thing but a procedure \u2014 watch it assemble, face by face.",
+      "The net is the solid's confession: every volume is a folded plane."
+     ]
+    }
+   },
+   {
+    "token": "station_stage",
+    "x": 3.0,
+    "y": 0.0,
+    "z": 2.0,
+    "wall": false,
+    "config": {
+     "width_cells": 3,
+     "depth_cells": 3,
+     "step_height": 0.18,
+     "name_plate": "Animated Cube Builder \u2014 construction as performance"
+    }
+   },
+   {
+    "token": "animatedcubebuilder",
+    "x": 3.0,
+    "y": 0.18,
+    "z": 2.0,
+    "wall": false
    },
    {
     "token": "station_pillar",
-    "x": 5.0,
+    "x": 6.6,
     "y": 0.0,
-    "z": 0.8,
+    "z": 1.6,
     "wall": false
    },
    {
     "token": "station_plinth",
     "x": 8.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 4,
-     "depth_cells": 1,
-     "top_height": 0.9
-    }
-   },
-   {
-    "token": "science_screen",
-    "x": 8.0,
-    "y": 0.9,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_panel",
-    "x": 9.5,
-    "y": 1.9,
-    "z": 0.06,
-    "wall": true
-   },
-   {
-    "token": "station_pillar",
-    "x": 13.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 16.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
-    }
-   },
-   {
-    "token": "floating_sphere_field",
-    "x": 16.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_panel",
-    "x": 16.0,
-    "y": 1.9,
-    "z": 0.06,
-    "wall": true
-   },
-   {
-    "token": "station_pillar",
-    "x": 18.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 21.0,
     "y": 0.0,
     "z": 0.8,
     "wall": false,
     "config": {
      "width_cells": 2,
-     "depth_cells": 2,
-     "top_height": 0.9
+     "depth_cells": 1,
+     "top_height": 1.0,
+     "cap_inset": 0.1,
+     "caption_text": "Polyhedron Nets \u2014 the cube, unfolded"
     }
    },
    {
-    "token": "animatedcubebuilder",
-    "x": 21.0,
-    "y": 0.9,
+    "token": "polyhedron_nets_cube",
+    "x": 8.0,
+    "y": 1.0,
     "z": 0.8,
     "wall": false
-   },
-   {
-    "token": "station_panel",
-    "x": 21.5,
-    "y": 1.9,
-    "z": 0.06,
-    "wall": true
    }
   ]
  },
  "Primitives_Ignorance": {
   "sequence": "primitives",
   "counts": {
-   "small": 19,
+   "small": 6,
    "medium": 1,
-   "large": 2,
-   "applied": 1
+   "large": 0,
+   "applied": 0
   },
   "pieces": [
    {
-    "token": "station_plinth",
-    "x": 0.0,
+    "token": "station_wall",
+    "x": 1.0,
     "y": 0.0,
-    "z": 0.8,
-    "wall": false,
+    "z": 0.0,
+    "wall": true,
     "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
+     "width_cells": 6
     }
-   },
-   {
-    "token": "dark_sphere",
-    "x": 0.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 2.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
-    }
-   },
-   {
-    "token": "cube_scene",
-    "x": 2.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 4.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
-    }
-   },
-   {
-    "token": "sphere",
-    "x": 4.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_stage",
-    "x": 6.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 4,
-     "depth_cells": 4,
-     "step_height": 0.18
-    }
-   },
-   {
-    "token": "hole_with_cones",
-    "x": 6.0,
-    "y": 0.18,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 11.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
-    }
-   },
-   {
-    "token": "sphere_high",
-    "x": 11.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 13.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
-    }
-   },
-   {
-    "token": "star_primitive",
-    "x": 13.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 15.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
-    }
-   },
-   {
-    "token": "righttriangle",
-    "x": 15.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 17.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
-    }
-   },
-   {
-    "token": "sphere_mid",
-    "x": 17.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 19.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
-    }
-   },
-   {
-    "token": "truncatedtetrahedron",
-    "x": 19.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 21.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
-    }
-   },
-   {
-    "token": "roughrock",
-    "x": 21.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 23.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
-    }
-   },
-   {
-    "token": "sphere_low",
-    "x": 23.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 25.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
-    }
-   },
-   {
-    "token": "grab_octahedron",
-    "x": 25.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 27.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 2,
-     "depth_cells": 1,
-     "top_height": 0.9
-    }
-   },
-   {
-    "token": "lshape",
-    "x": 27.0,
-    "y": 0.9,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 30.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
-    }
-   },
-   {
-    "token": "prism_block",
-    "x": 30.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 32.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
-    }
-   },
-   {
-    "token": "library_rack",
-    "x": 32.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 34.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
-    }
-   },
-   {
-    "token": "torus_radials_rings",
-    "x": 34.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 36.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
-    }
-   },
-   {
-    "token": "capsule_radials_rings",
-    "x": 36.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 38.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
-    }
-   },
-   {
-    "token": "plus",
-    "x": 38.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_stage",
-    "x": 40.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 4,
-     "depth_cells": 4,
-     "step_height": 0.18
-    }
-   },
-   {
-    "token": "diamonds",
-    "x": 40.0,
-    "y": 0.18,
-    "z": 0.8,
-    "wall": false
    },
    {
     "token": "station_panel",
-    "x": 21.5,
-    "y": 1.9,
+    "x": 1.5,
+    "y": 2.4,
     "z": 0.06,
-    "wall": true
-   },
-   {
-    "token": "station_pillar",
-    "x": 45.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_plinth",
-    "x": 48.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
+    "wall": true,
     "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
+     "width_cells": 5,
+     "header": "EVERYTHING YOU DO NOT KNOW YET",
+     "lines": [
+      "Forty shapes are staged in this room; the ones you cannot name are the curriculum.",
+      "Ignorance, exhibited \u2014 the cabinet fills with meaning as you learn to see it."
+     ]
     }
    },
    {
-    "token": "capsule",
-    "x": 48.0,
-    "y": 1.2,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_panel",
-    "x": 48.0,
-    "y": 1.9,
-    "z": 0.06,
-    "wall": true
-   },
-   {
-    "token": "station_pillar",
-    "x": 50.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false
-   },
-   {
-    "token": "station_stage",
-    "x": 53.0,
+    "token": "station_plinth",
+    "x": 2.5,
     "y": 0.0,
     "z": 0.8,
     "wall": false,
     "config": {
      "width_cells": 4,
-     "depth_cells": 4,
-     "step_height": 0.18
+     "depth_cells": 1,
+     "top_height": 1.0,
+     "caption_text": "The shelf of the not-yet-named"
     }
    },
    {
     "token": "platonic_grabbables",
-    "x": 53.0,
-    "y": 0.18,
+    "x": 1.5,
+    "y": 1.0,
     "z": 0.8,
     "wall": false
    },
    {
-    "token": "station_plinth",
-    "x": 61.0,
-    "y": 0.0,
-    "z": 0.8,
-    "wall": false,
-    "config": {
-     "width_cells": 1,
-     "depth_cells": 1,
-     "top_height": 1.2
-    }
-   },
-   {
-    "token": "floating_sphere_field",
-    "x": 61.0,
-    "y": 1.2,
+    "token": "star_primitive",
+    "x": 2.5,
+    "y": 1.0,
     "z": 0.8,
     "wall": false
    },
    {
-    "token": "station_panel",
-    "x": 57.0,
-    "y": 1.9,
-    "z": 0.06,
-    "wall": true
+    "token": "roughrock",
+    "x": 3.5,
+    "y": 1.0,
+    "z": 0.8,
+    "wall": false
+   },
+   {
+    "token": "truncatedtetrahedron",
+    "x": 4.5,
+    "y": 1.0,
+    "z": 0.8,
+    "wall": false
    },
    {
     "token": "station_pillar",
-    "x": 63.0,
+    "x": 6.4,
     "y": 0.0,
-    "z": 0.8,
+    "z": 1.6,
     "wall": false
    },
    {
+    "token": "station_wall",
+    "x": 7.0,
+    "y": 0.0,
+    "z": 0.0,
+    "wall": true,
+    "config": {
+     "width_cells": 5
+    }
+   },
+   {
     "token": "station_plinth",
-    "x": 66.0,
+    "x": 8.0,
     "y": 0.0,
     "z": 0.8,
     "wall": false,
     "config": {
-     "width_cells": 1,
+     "width_cells": 3,
      "depth_cells": 1,
-     "top_height": 1.2
+     "top_height": 1.0,
+     "caption_text": "Second shelf \u2014 stranger still"
     }
    },
    {
-    "token": "snap_octahedron_puzzle",
-    "x": 66.0,
-    "y": 1.2,
+    "token": "hole_with_cones",
+    "x": 7.5,
+    "y": 1.0,
     "z": 0.8,
     "wall": false
    },
    {
-    "token": "station_panel",
-    "x": 66.0,
-    "y": 1.9,
-    "z": 0.06,
-    "wall": true
+    "token": "lshape",
+    "x": 8.5,
+    "y": 1.0,
+    "z": 0.8,
+    "wall": false
+   },
+   {
+    "token": "diamonds",
+    "x": 9.5,
+    "y": 1.0,
+    "z": 0.8,
+    "wall": false
+   },
+   {
+    "token": "library_rack",
+    "x": 11.2,
+    "y": 0.0,
+    "z": 0.6,
+    "wall": false
    }
   ]
  },

@@ -1,0 +1,29 @@
+{
+ "sequence": "primitives",
+ "counts": {"small": 2, "medium": 1, "large": 0, "applied": 1},
+ "pieces": [
+  {"token": "station_wall", "x": 1.0, "y": 0.0, "z": 0.0, "wall": true, "config": {"width_cells": 5}},
+  {"token": "station_panel", "x": 1.0, "y": 2.3, "z": 0.06, "wall": true, "config": {
+    "width_cells": 4, "header": "AN ACTIVE LINE ON A WALK",
+    "lines": ["Klee, page one: a point sets itself in motion — a walk for a walk's sake.",
+              "The line is never given; it is the record of a point that moved. Meander beats straight."]}},
+  {"token": "station_stage", "x": 2.5, "y": 0.0, "z": 1.8, "wall": false, "config": {
+    "width_cells": 2, "depth_cells": 2, "step_height": 0.18,
+    "name_plate": "Klee Walking Point — drawing is time made visible"}},
+  {"token": "klee_walking_point", "x": 2.5, "y": 0.18, "z": 1.8, "wall": false},
+  {"token": "station_micropod", "x": 5.0, "y": 0.0, "z": 0.5, "wall": false, "config": {
+    "caption_text": "Grabbable Line — held before it has endpoints",
+    "top_height": 1.15, "cap_inset": 0.1, "base_meters": 0.6, "cap_meters": 1.16}},
+  {"token": "grabbable_line", "x": 5.0, "y": 1.15, "z": 0.5, "wall": false},
+  {"token": "station_pillar", "x": 6.7, "y": 0.0, "z": 1.6, "wall": false},
+  {"token": "station_wall", "x": 7.5, "y": 0.0, "z": 0.0, "wall": true, "config": {"width_cells": 4}},
+  {"token": "station_panel", "x": 7.8, "y": 2.3, "z": 0.06, "wall": true, "config": {
+    "width_cells": 3, "header": "THE LINE, HELD",
+    "lines": ["You can hold a line before you know it has endpoints.",
+              "The whole precedes its parts; the body understands before analysis arrives."]}},
+  {"token": "station_plinth", "x": 8.8, "y": 0.0, "z": 0.8, "wall": false, "config": {
+    "width_cells": 2, "depth_cells": 1, "top_height": 1.0, "cap_inset": 0.1,
+    "caption_text": "Line Builder — lines by hand"}},
+  {"token": "line_builder_3d", "x": 8.8, "y": 1.0, "z": 0.8, "wall": false}
+ ]
+}
