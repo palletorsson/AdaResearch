@@ -398,4 +398,28 @@ spark gap, and the pointing plinth are all meetings; awaiting Palle's ruling to 
 
 ---
 
-<!-- Next: R-019 — randomness staging forks + noise truths (Palle wording) + Ignorance settle + refits + rate-gallery/distil loop -->
+## R-019 · 2026-07-05 · The meeting audit (every part must answer)
+
+**Palle:** "For each part of each object we can ask how it meets the object, for each
+object we can ask how does it touch its surroundings and how does this meet look like,
+can it be improved. I mean for instance the lamp does not have a foot. … most of the
+artifacts are not perfectly aligned. That is a good general rule."
+
+**Ruling:** R-018 curated the meetings we DECLARED; R-019 generalizes it into an audit
+question asked at every scale: part→object, object→footing, object→surroundings. Two
+standing rules extracted from the named defects:
+- **body_on_cell** — artifacts seat by their measured BODY (live AABB centre), never by
+  their code origin. The meet is between the thing you SEE and the cap that holds it.
+  Implemented in WallHangarEditor `_settle_loaded` (horizontal centring before the
+  vertical seat) — every capture and every staged wall gets it for free.
+- **pole_on_floor** — no pole enters the floor bare, and a foot that exists but cannot
+  be SEEN has not met the floor. The luminaire's flat plate became a stepped pedestal
+  with a collar (reads above stage lips and plinth bases).
+Both are declared in station_modules.json `junctions` alongside R-018's treatments.
+The audit is open-ended: next parts to answer — gooseneck→head knuckle, crate stacks
+(box_on_box), screen→wall mounts, seat→floor (stool feet), grime as the record of a
+long meeting.
+
+---
+
+<!-- Next: R-020 — randomness staging forks + noise truths (Palle wording) + Ignorance settle + refits + rate-gallery/distil loop + "the meeting" as book motif -->

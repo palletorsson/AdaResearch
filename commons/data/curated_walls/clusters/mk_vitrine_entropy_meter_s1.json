@@ -1,0 +1,185 @@
+{
+ "name": "mk_vitrine_entropy_meter_s1",
+ "source": "modkit auto-seed (station_modules.json)",
+ "pieces": [
+  {
+   "token": "station_wall",
+   "x": 1.0,
+   "y": 0.0,
+   "z": 0.0,
+   "wall": true,
+   "config": {
+    "width_cells": 8
+   }
+  },
+  {
+   "token": "station_panel",
+   "x": 2.0,
+   "y": 2.3,
+   "z": 0.06,
+   "wall": true,
+   "config": {
+    "width_cells": 6,
+    "header": "ENTROPY METER",
+    "lines": [
+     "Modular station, seed 1 \u2014 same slots, different fill.",
+     "Every prop fits its size class; the seed picks the cast."
+    ]
+   }
+  },
+  {
+   "token": "dna_modern_art_albers_homage_warm",
+   "x": 0.4,
+   "y": 1.5,
+   "z": 0.12,
+   "wall": true
+  },
+  {
+   "token": "science_screen",
+   "x": 7.6,
+   "y": 1.5,
+   "z": 0.12,
+   "wall": true
+  },
+  {
+   "token": "station_micropod",
+   "x": 4.0,
+   "y": 0.0,
+   "z": 1.0,
+   "wall": false,
+   "config": {
+    "base_meters": 0.6,
+    "cap_meters": 1.16,
+    "top_height": 1.15,
+    "caption_text": "entropy meter",
+    "cap_inset": 0.1
+   }
+  },
+  {
+   "token": "entropy_meter",
+   "x": 4.0,
+   "y": 1.15,
+   "z": 1.0,
+   "wall": false
+  },
+  {
+   "token": "station_micropod",
+   "x": 1.6,
+   "y": 0.0,
+   "z": 0.7,
+   "wall": false,
+   "config": {
+    "base_meters": 0.6,
+    "cap_meters": 1.16,
+    "top_height": 1.15,
+    "caption_text": "grid3d entropy",
+    "cap_inset": 0.1
+   }
+  },
+  {
+   "token": "grid3d_entropy",
+   "x": 1.6,
+   "y": 1.15,
+   "z": 0.7,
+   "wall": false
+  },
+  {
+   "token": "station_micropod",
+   "x": 2.8,
+   "y": 0.0,
+   "z": 0.7,
+   "wall": false,
+   "config": {
+    "base_meters": 0.6,
+    "cap_meters": 1.16,
+    "top_height": 1.15,
+    "caption_text": "grab sphere E",
+    "cap_inset": 0.1
+   }
+  },
+  {
+   "token": "grab_sphere_E",
+   "x": 2.8,
+   "y": 1.15,
+   "z": 0.7,
+   "wall": false
+  },
+  {
+   "token": "station_micropod",
+   "x": 5.2,
+   "y": 0.0,
+   "z": 0.7,
+   "wall": false,
+   "config": {
+    "base_meters": 0.6,
+    "cap_meters": 1.16,
+    "top_height": 1.15,
+    "caption_text": "entropy jar",
+    "cap_inset": 0.1
+   }
+  },
+  {
+   "token": "entropy_jar",
+   "x": 5.2,
+   "y": 1.15,
+   "z": 0.7,
+   "wall": false
+  },
+  {
+   "token": "station_micropod",
+   "x": 6.4,
+   "y": 0.0,
+   "z": 0.7,
+   "wall": false,
+   "config": {
+    "base_meters": 0.6,
+    "cap_meters": 1.16,
+    "top_height": 1.15,
+    "caption_text": "entropy visualization",
+    "cap_inset": 0.1
+   }
+  },
+  {
+   "token": "entropy_visualization",
+   "x": 6.4,
+   "y": 1.15,
+   "z": 0.7,
+   "wall": false
+  },
+  {
+   "token": "station_luminaire",
+   "x": 0.9,
+   "y": 0.0,
+   "z": 1.6,
+   "wall": false
+  },
+  {
+   "token": "lab_stool",
+   "x": 6.8,
+   "y": 0.0,
+   "z": 2.2,
+   "wall": false
+  },
+  {
+   "token": "fire_extinguisher",
+   "x": 0.2,
+   "y": 0.0,
+   "z": 0.3,
+   "wall": false
+  },
+  {
+   "token": "station_floorline#length_cells:8#style:threshold",
+   "x": 4.5,
+   "y": 0.0,
+   "z": 0.18,
+   "wall": false
+  },
+  {
+   "token": "station_floorline#length_cells:7#style:line",
+   "x": 3.9,
+   "y": 0.0,
+   "z": 2.8,
+   "wall": false
+  }
+ ]
+}

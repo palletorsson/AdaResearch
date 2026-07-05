@@ -128,16 +128,21 @@ func _build_task(bcol: Color, pcol: Color, acol: Color, ewear: float, lit_col: C
 	var h: float = maxf(height, 0.4)
 	var reach: float = clampf(arm_reach, 0.0, 1.4)
 
-	# Weighted foot plate on the floor (origin y=0 sits the base flat on the ground).
-	add_child(HangarKit.box(Vector3(0, 0.03, 0), Vector3(0.42, 0.06, 0.42), trim_mat))
-	add_child(HangarKit.box(Vector3(0, 0.085, 0), Vector3(0.30, 0.05, 0.30), body_mat))
+	# Weighted foot on the floor (origin y=0 sits the base flat on the ground).
+	# R-019 pole_on_floor: the foot must READ — a pedestal that stays visible above
+	# stage lips and plinth bases, not a flat plate the furniture swallows.
+	add_child(HangarKit.box(Vector3(0, 0.035, 0), Vector3(0.50, 0.07, 0.50), trim_mat))
+	add_child(HangarKit.box(Vector3(0, 0.115, 0), Vector3(0.36, 0.09, 0.36), body_mat))
+	# Collar column stepping the plate into the post — the articulated meet.
+	add_child(_cyl_local(Vector3(0, 0.235, 0), 0.075, 0.15, body_mat))
+	add_child(_cyl_local(Vector3(0, 0.315, 0), 0.048, 0.02, HangarKit.worn_metal(acol.darkened(0.05))))
 	if bolts:
-		add_child(HangarKit.bolts(Vector3(-0.13, 0.064, 0.13), Vector3(0.13, 0.064, 0.13), 2, 0.014, HangarKit.worn_metal(pcol.darkened(0.2))))
-		add_child(HangarKit.bolts(Vector3(-0.13, 0.064, -0.13), Vector3(0.13, 0.064, -0.13), 2, 0.014, HangarKit.worn_metal(pcol.darkened(0.2))))
+		add_child(HangarKit.bolts(Vector3(-0.16, 0.074, 0.16), Vector3(0.16, 0.074, 0.16), 2, 0.014, HangarKit.worn_metal(pcol.darkened(0.2))))
+		add_child(HangarKit.bolts(Vector3(-0.16, 0.074, -0.16), Vector3(0.16, 0.074, -0.16), 2, 0.014, HangarKit.worn_metal(pcol.darkened(0.2))))
 
-	# Vertical post from the foot up to the gooseneck top.
+	# Vertical post from the collar up to the gooseneck top.
 	var post_top: float = h
-	add_child(_pipe(Vector3(0, 0.11, 0), Vector3(0, post_top, 0), 0.034, body_mat))
+	add_child(_pipe(Vector3(0, 0.31, 0), Vector3(0, post_top, 0), 0.034, body_mat))
 
 	# Gooseneck arc: from the post top, arc out +X and gently down to the head mount over the bay.
 	var head_mount: Vector3 = Vector3(reach, post_top - 0.18, 0)
@@ -157,14 +162,14 @@ func _build_task(bcol: Color, pcol: Color, acol: Color, ewear: float, lit_col: C
 	# Rams bar + grime + stencil on the foot.
 	if three_bar:
 		var bar: Node3D = HangarKit.three_color_bar(0.22, 0.026, [acol, HangarKit.DISPLAY_DARK, pcol])
-		bar.position = Vector3(0, 0.10, 0.155)
+		bar.position = Vector3(0, 0.13, 0.185)
 		add_child(bar)
 	if grime:
-		add_child(HangarKit.grime_band(0.34, 0.04, 0.21, bcol))
+		add_child(HangarKit.grime_band(0.40, 0.05, 0.25, bcol))
 	if stencil_text.strip_edges() != "":
 		var q: MeshInstance3D = HangarKit.stencil(stencil_text, Vector2(0.20, 0.05))
 		if q:
-			q.position = Vector3(0, 0.10, 0.155)
+			q.position = Vector3(0, 0.13, 0.185)
 			add_child(q)
 
 

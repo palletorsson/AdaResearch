@@ -1,0 +1,55 @@
+{
+ "name": "mk_monolith_transform_staircase_spiral_s1",
+ "source": "modkit auto-seed (station_modules.json)",
+ "pieces": [
+  {
+   "token": "station_plinth",
+   "x": 2.5,
+   "y": 0.0,
+   "z": 1.4,
+   "wall": false,
+   "config": {
+    "width_cells": 1,
+    "depth_cells": 1,
+    "top_height": 1.05,
+    "cap_inset": 0.1,
+    "caption_text": "transform staircase spiral"
+   }
+  },
+  {
+   "token": "transform_staircase_spiral",
+   "x": 2.5,
+   "y": 1.05,
+   "z": 1.4,
+   "wall": false
+  },
+  {
+   "token": "station_luminaire",
+   "x": 1.5,
+   "y": 0.0,
+   "z": 2.2,
+   "wall": false
+  },
+  {
+   "token": "station_pillar",
+   "x": 0.6,
+   "y": 0.0,
+   "z": 1.4,
+   "wall": false
+  },
+  {
+   "token": "station_pillar",
+   "x": 4.4,
+   "y": 0.0,
+   "z": 1.4,
+   "wall": false
+  },
+  {
+   "token": "station_floorline#length_cells:3#style:line",
+   "x": 2.5,
+   "y": 0.0,
+   "z": 2.8,
+   "wall": false
+  }
+ ]
+}

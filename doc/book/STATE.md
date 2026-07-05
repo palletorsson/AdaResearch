@@ -174,6 +174,41 @@ layout built in 3D. Pilot: Hall_Random_Cubes (1 ws), Hall_Random_Definition (2 w
 Tuning: hall size should hug workstations tighter; rigger needs `--roster` mode for map-halls
 (currently walk-based); lighting/DNA polish toward the reference renders.
 
+## Modkit + the meeting layer (R-017/R-018, 2026-07-05)
+
+`commons/data/station_modules.json` is the modular spec: size classes S/M/L/XL with
+footing contracts (micropod/plinth/stage normalize the seat), prop POOLS (instrument/
+art/bench_tool/…), and named slot TEMPLATES. `tools/modkit.py --hero=X --template=T
+--seeds=1,2 --write` fills a template deterministically — same slots, different cast →
+`clusters/mk_*.json`, straight into the capture/review/place pipeline. R-018 adds the
+JUNCTION layer: treatments applied wherever classes touch (reveal cap-inset on every
+seat, skirting floorline under walls, zone-edge line where station meets aisle, seam
+pillars between wall plates). The joint is the generator of form.
+
+## The station-model library (/station-gallery, 2026-07-05)
+
+Four templates: BENCH (reference wall bench), ISLAND (freestanding, read from all
+sides), VITRINE (8-cell wall + micropod row — the miniatures cabinet), MONOLITH
+(hero + two pillars + one light, Point_One energy). Fleet seeded across heroes,
+captured via wall-hangar `--capture-clusters`, browsed at `localhost:3003/station-gallery`
+(manifest: `python tools/station_gallery_manifest.py`). Learned: heroes that GROW over
+time (fibonacci_pagoda, stochastic_tree) render empty at capture — monoliths need
+instant-mesh heroes; shader/texture family members render as floating quads — modkit now
+filters them from CHILD slots and prefers measured bodies. Place any station in a map
+with `cluster:mk_<name>:<rot>`.
+
+## The meeting audit (R-019, 2026-07-05)
+
+Generalizes R-018 from declared junctions to an AUDIT QUESTION at every scale: for each
+part of each object — how does it meet the object? For each object — how does it touch
+its surroundings, and can the meet be improved? Standing rules from the first audit:
+**body_on_cell** (artifacts seat by measured live-AABB centre, not code origin —
+WallHangarEditor `_settle_loaded` centres horizontally before the vertical seat) and
+**pole_on_floor** (the luminaire's flat foot became a stepped pedestal + collar; a foot
+that cannot be SEEN has not met the floor). Declared in station_modules.json `junctions`.
+Open audit queue: box_on_box crate stacks, screen→wall mounts, stool feet, grime as the
+record of a long meeting.
+
 ## Standing constitution
 
 - Rulings are the source; prose is compiled output. Unruled calls in drafts get marked, not hidden.

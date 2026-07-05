@@ -1,5 +1,5 @@
 {
- "name": "mk_distribution_sampler_s3",
+ "name": "mk_galton_board_s4",
  "source": "modkit auto-seed (station_modules.json)",
  "pieces": [
   {
@@ -20,22 +20,22 @@
    "wall": true,
    "config": {
     "width_cells": 5,
-    "header": "DISTRIBUTION SAMPLER",
+    "header": "GALTON BOARD",
     "lines": [
-     "Modular station, seed 3 \u2014 same slots, different fill.",
+     "Modular station, seed 4 \u2014 same slots, different fill.",
      "Every prop fits its size class; the seed picks the cast."
     ]
    }
   },
   {
-   "token": "monitor_setup",
+   "token": "station_multiscreen",
    "x": 5.8,
    "y": 1.5,
    "z": 0.12,
    "wall": true
   },
   {
-   "token": "codex_glyph",
+   "token": "dna_modern_art_rothko_chromatic_field",
    "x": 0.2,
    "y": 1.5,
    "z": 0.12,
@@ -51,19 +51,19 @@
     "base_meters": 0.6,
     "cap_meters": 1.16,
     "top_height": 1.15,
-    "caption_text": "distribution sampler",
+    "caption_text": "galton board",
     "cap_inset": 0.1
    }
   },
   {
-   "token": "distribution_sampler",
+   "token": "galton_board",
    "x": 3.2,
    "y": 1.15,
    "z": 1.5,
    "wall": false
   },
   {
-   "token": "station_luminaire",
+   "token": "dna_color_furniture_furniture_lamp_warm_glow",
    "x": 3.2,
    "y": 0.0,
    "z": 2.0,
@@ -80,56 +80,14 @@
     "depth_cells": 1,
     "top_height": 1.05,
     "cap_inset": 0.1,
-    "caption_text": "height random"
+    "caption_text": "gaussian random"
    }
   },
   {
-   "token": "height_random",
+   "token": "gaussian_random",
    "x": 1.2,
    "y": 1.05,
    "z": 1.0,
-   "wall": false
-  },
-  {
-   "token": "station_plinth",
-   "x": 5.2,
-   "y": 0.0,
-   "z": 1.0,
-   "wall": false,
-   "config": {
-    "width_cells": 1,
-    "depth_cells": 1,
-    "top_height": 1.05,
-    "cap_inset": 0.1,
-    "caption_text": "distribution comparator"
-   }
-  },
-  {
-   "token": "distribution_comparator",
-   "x": 5.2,
-   "y": 1.05,
-   "z": 1.0,
-   "wall": false
-  },
-  {
-   "token": "station_micropod",
-   "x": 2.2,
-   "y": 0.0,
-   "z": 2.3,
-   "wall": false,
-   "config": {
-    "base_meters": 0.6,
-    "cap_meters": 1.16,
-    "top_height": 1.15,
-    "caption_text": "distribution bench",
-    "cap_inset": 0.1
-   }
-  },
-  {
-   "token": "distribution_bench",
-   "x": 2.2,
-   "y": 1.15,
-   "z": 2.3,
    "wall": false
   },
   {
@@ -168,7 +126,7 @@
    }
   },
   {
-   "token": "surreal_lab#mode:specimen#seed:3",
+   "token": "surreal_lab#mode:spectrometer#seed:4",
    "x": 7.6,
    "y": 0.5,
    "z": 1.2,
@@ -196,7 +154,7 @@
    "wall": false
   },
   {
-   "token": "cardboard_box",
+   "token": "crate",
    "x": 6.6,
    "y": 0.55,
    "z": 1.9,

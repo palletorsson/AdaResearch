@@ -1,71 +1,446 @@
 {
- "_readme": "The modular staging system (R-017): named SLOTS with size contracts. Any prop fits a slot by measured base_m (the sizes oracle) + class; the seeder fills a template's slots from pools, so different objects and configurations can be seeded into the same wall and surroundings. Edit slots/classes here — tools/modkit.py reads this.",
-
+ "_readme": "The modular staging system (R-017): named SLOTS with size contracts. Any prop fits a slot by measured base_m (the sizes oracle) + class; the seeder fills a template's slots from pools, so different objects and configurations can be seeded into the same wall and surroundings. Edit slots/classes here \u2014 tools/modkit.py reads this.",
  "classes": {
-  "S":  {"max_base": 1.2, "footing": "station_micropod",
-         "footing_config": {"base_meters": 0.6, "cap_meters": 1.16, "top_height": 1.15},
-         "seat_y": 1.15},
-  "M":  {"max_base": 3.0, "footing": "station_plinth",
-         "footing_config": {"width_cells": 1, "depth_cells": 1, "top_height": 1.05, "cap_inset": 0.1},
-         "seat_y": 1.05},
-  "L":  {"max_base": 6.0, "footing": "station_stage",
-         "footing_config": {"width_cells": 2, "depth_cells": 2, "step_height": 0.18},
-         "seat_y": 0.18},
-  "XL": {"max_base": 999, "footing": null, "seat_y": 0.0,
-         "_note": "environment-scale; belongs to a monument room, not a bench slot"}
+  "S": {
+   "max_base": 1.2,
+   "footing": "station_micropod",
+   "footing_config": {
+    "base_meters": 0.6,
+    "cap_meters": 1.16,
+    "top_height": 1.15
+   },
+   "seat_y": 1.15
+  },
+  "M": {
+   "max_base": 3.0,
+   "footing": "station_plinth",
+   "footing_config": {
+    "width_cells": 1,
+    "depth_cells": 1,
+    "top_height": 1.05,
+    "cap_inset": 0.1
+   },
+   "seat_y": 1.05
+  },
+  "L": {
+   "max_base": 6.0,
+   "footing": "station_stage",
+   "footing_config": {
+    "width_cells": 2,
+    "depth_cells": 2,
+    "step_height": 0.18
+   },
+   "seat_y": 0.18
+  },
+  "XL": {
+   "max_base": 999,
+   "footing": null,
+   "seat_y": 0.0,
+   "_note": "environment-scale; belongs to a monument room, not a bench slot"
+  }
  },
-
  "pools": {
-  "instrument": ["surreal_lab#mode:specimen", "surreal_lab#mode:reactor", "surreal_lab#mode:scanner",
-                 "surreal_lab#mode:chemrig", "surreal_lab#mode:spectrometer", "surreal_lab#mode:gravgun",
-                 "surreal_lab#mode:teleporter", "surreal_lab#mode:darkreactor"],
-  "art":        ["dna_modern_art_rothko_chromatic_field", "dna_modern_art_mondrian_de_stijl",
-                 "dna_modern_art_kandinsky_bauhaus_triad", "dna_modern_art_albers_homage_warm",
-                 "codex_glyph"],
-  "bench_tool": ["microscope", "oscilloscope", "chemistry_flask", "test_tube_rack", "dna_specimen"],
-  "cylinder":   ["gas_canister"],
-  "storage":    ["tech_crate", "cardboard_box", "wooden_pallet", "metal_storage_cabinet", "crate"],
-  "seat":       ["lab_stool"],
-  "light":      ["station_luminaire", "dna_color_furniture_furniture_lamp_warm_glow"],
-  "screen":     ["station_multiscreen", "science_screen", "monitor_setup"],
-  "safety":     ["fire_extinguisher"]
+  "instrument": [
+   "surreal_lab#mode:specimen",
+   "surreal_lab#mode:reactor",
+   "surreal_lab#mode:scanner",
+   "surreal_lab#mode:chemrig",
+   "surreal_lab#mode:spectrometer",
+   "surreal_lab#mode:gravgun",
+   "surreal_lab#mode:teleporter",
+   "surreal_lab#mode:darkreactor"
+  ],
+  "art": [
+   "dna_modern_art_rothko_chromatic_field",
+   "dna_modern_art_mondrian_de_stijl",
+   "dna_modern_art_kandinsky_bauhaus_triad",
+   "dna_modern_art_albers_homage_warm",
+   "codex_glyph"
+  ],
+  "bench_tool": [
+   "microscope",
+   "oscilloscope",
+   "chemistry_flask",
+   "test_tube_rack",
+   "dna_specimen"
+  ],
+  "cylinder": [
+   "gas_canister"
+  ],
+  "storage": [
+   "tech_crate",
+   "cardboard_box",
+   "wooden_pallet",
+   "metal_storage_cabinet",
+   "crate"
+  ],
+  "seat": [
+   "lab_stool"
+  ],
+  "light": [
+   "station_luminaire",
+   "dna_color_furniture_furniture_lamp_warm_glow"
+  ],
+  "screen": [
+   "station_multiscreen",
+   "science_screen",
+   "monitor_setup"
+  ],
+  "safety": [
+   "fire_extinguisher"
+  ]
  },
-
  "junctions": {
-  "_note": "R-018: meetings as a curated layer. Treatments applied automatically wherever two classes touch — the joint is the generator of form.",
-  "artifact_on_footing": {"treatment": "reveal", "cap_inset": 0.1,
-                          "_why": "the shadow gap — the exhibit ends 10cm before its cap edge"},
-  "wall_on_floor":       {"treatment": "skirting", "piece": "station_floorline",
-                          "style": "threshold",
-                          "_why": "the skirting line — the wall's ending read at the floor"},
-  "station_on_aisle":    {"treatment": "zone_edge", "piece": "station_floorline",
-                          "style": "line", "z": 2.8,
-                          "_why": "the lit line where the station ENDS before it stops existing"},
-  "wall_on_wall":        {"treatment": "seam_pillar", "piece": "station_pillar",
-                          "_why": "the reveal between plates"}
+  "_note": "R-018: meetings as a curated layer. Treatments applied automatically wherever two classes touch \u2014 the joint is the generator of form.",
+  "artifact_on_footing": {
+   "treatment": "reveal",
+   "cap_inset": 0.1,
+   "_why": "the shadow gap \u2014 the exhibit ends 10cm before its cap edge"
+  },
+  "wall_on_floor": {
+   "treatment": "skirting",
+   "piece": "station_floorline",
+   "style": "threshold",
+   "_why": "the skirting line \u2014 the wall's ending read at the floor"
+  },
+  "station_on_aisle": {
+   "treatment": "zone_edge",
+   "piece": "station_floorline",
+   "style": "line",
+   "z": 2.8,
+   "_why": "the lit line where the station ENDS before it stops existing"
+  },
+  "wall_on_wall": {
+   "treatment": "seam_pillar",
+   "piece": "station_pillar",
+   "_why": "the reveal between plates"
+  },
+  "body_on_cell": {
+   "treatment": "center",
+   "_why": "R-019: artifacts seat by measured BODY centre, not code origin \u2014 the meet is between the thing you SEE and the cap it stands on"
+  },
+  "pole_on_floor": {
+   "treatment": "foot",
+   "_why": "R-019: no pole enters the floor bare \u2014 a foot articulates the meet, and it must READ above stage lips and plinth bases"
+  }
  },
-
  "templates": {
   "bench_v1": {
-   "_note": "the reference lab bench — hero centre, children flanking, cast at the edges",
+   "_note": "the reference lab bench \u2014 hero centre, children flanking, cast at the edges",
    "slots": [
-    {"id": "backwall",   "kind": "WALL",   "x": 1.0, "y": 0.0, "z": 0.0,  "width_cells": 6},
-    {"id": "panel",      "kind": "PANEL",  "x": 1.5, "y": 2.3, "z": 0.06, "width_cells": 5},
-    {"id": "screen",     "kind": "POOL:screen", "x": 5.8, "y": 1.5, "z": 0.12, "wall": true},
-    {"id": "art",        "kind": "POOL:art",    "x": 0.2, "y": 1.5, "z": 0.12, "wall": true},
-    {"id": "hero",       "kind": "HERO",   "x": 3.2, "z": 1.5},
-    {"id": "light",      "kind": "POOL:light",  "x": 3.2, "y": 0.0, "z": 0.35},
-    {"id": "flank_a",    "kind": "CHILD:M", "x": 1.2, "z": 1.0},
-    {"id": "flank_b",    "kind": "CHILD:M", "x": 5.2, "z": 1.0},
-    {"id": "front_a",    "kind": "CHILD:S", "x": 2.2, "z": 2.3},
-    {"id": "front_b",    "kind": "CHILD:S", "x": 4.2, "z": 2.3},
-    {"id": "tool",       "kind": "POOL:bench_tool", "x": 6.3, "y": 0.0, "z": 1.0, "seat": "M"},
-    {"id": "instrument", "kind": "POOL:instrument", "x": 7.6, "y": 0.0, "z": 1.2, "seat": "M_low"},
-    {"id": "cyl",        "kind": "POOL:cylinder",  "x": 0.2, "y": 0.0, "z": 2.0},
-    {"id": "seat",       "kind": "POOL:seat",      "x": 4.3, "y": 0.0, "z": 2.4},
-    {"id": "store_a",    "kind": "POOL:storage",   "x": 6.6, "y": 0.0, "z": 1.9},
-    {"id": "store_b",    "kind": "POOL:storage",   "x": 6.6, "y": 0.55, "z": 1.9},
-    {"id": "safety",     "kind": "POOL:safety",    "x": 6.8, "y": 0.0, "z": 0.3}
+    {
+     "id": "backwall",
+     "kind": "WALL",
+     "x": 1.0,
+     "y": 0.0,
+     "z": 0.0,
+     "width_cells": 6
+    },
+    {
+     "id": "panel",
+     "kind": "PANEL",
+     "x": 1.5,
+     "y": 2.3,
+     "z": 0.06,
+     "width_cells": 5
+    },
+    {
+     "id": "screen",
+     "kind": "POOL:screen",
+     "x": 5.8,
+     "y": 1.5,
+     "z": 0.12,
+     "wall": true
+    },
+    {
+     "id": "art",
+     "kind": "POOL:art",
+     "x": 0.2,
+     "y": 1.5,
+     "z": 0.12,
+     "wall": true
+    },
+    {
+     "id": "hero",
+     "kind": "HERO",
+     "x": 3.2,
+     "z": 1.5
+    },
+    {
+     "id": "light",
+     "kind": "POOL:light",
+     "x": 3.2,
+     "y": 0.0,
+     "z": 2.0
+    },
+    {
+     "id": "flank_a",
+     "kind": "CHILD:M",
+     "x": 1.2,
+     "z": 1.0
+    },
+    {
+     "id": "flank_b",
+     "kind": "CHILD:M",
+     "x": 5.2,
+     "z": 1.0
+    },
+    {
+     "id": "front_a",
+     "kind": "CHILD:S",
+     "x": 2.2,
+     "z": 2.3
+    },
+    {
+     "id": "front_b",
+     "kind": "CHILD:S",
+     "x": 4.2,
+     "z": 2.3
+    },
+    {
+     "id": "tool",
+     "kind": "POOL:bench_tool",
+     "x": 6.3,
+     "y": 0.0,
+     "z": 1.0,
+     "seat": "M"
+    },
+    {
+     "id": "instrument",
+     "kind": "POOL:instrument",
+     "x": 7.6,
+     "y": 0.0,
+     "z": 1.2,
+     "seat": "M_low"
+    },
+    {
+     "id": "cyl",
+     "kind": "POOL:cylinder",
+     "x": 0.2,
+     "y": 0.0,
+     "z": 2.0
+    },
+    {
+     "id": "seat",
+     "kind": "POOL:seat",
+     "x": 4.3,
+     "y": 0.0,
+     "z": 2.4
+    },
+    {
+     "id": "store_a",
+     "kind": "POOL:storage",
+     "x": 6.6,
+     "y": 0.0,
+     "z": 1.9
+    },
+    {
+     "id": "store_b",
+     "kind": "POOL:storage",
+     "x": 6.6,
+     "y": 0.55,
+     "z": 1.9
+    },
+    {
+     "id": "safety",
+     "kind": "POOL:safety",
+     "x": 6.8,
+     "y": 0.0,
+     "z": 0.3
+    }
+   ]
+  },
+  "island_v1": {
+   "_note": "freestanding double-sided station \u2014 no backwall; readable from all sides",
+   "slots": [
+    {
+     "id": "hero",
+     "kind": "HERO",
+     "x": 3.5,
+     "z": 1.5
+    },
+    {
+     "id": "light",
+     "kind": "POOL:light",
+     "x": 2.5,
+     "y": 0.0,
+     "z": 2.4
+    },
+    {
+     "id": "n_child",
+     "kind": "CHILD:M",
+     "x": 3.5,
+     "z": 0.2
+    },
+    {
+     "id": "s_child",
+     "kind": "CHILD:M",
+     "x": 3.5,
+     "z": 2.8
+    },
+    {
+     "id": "w_child",
+     "kind": "CHILD:S",
+     "x": 1.5,
+     "z": 1.5
+    },
+    {
+     "id": "e_child",
+     "kind": "CHILD:S",
+     "x": 5.5,
+     "z": 1.5
+    },
+    {
+     "id": "tool",
+     "kind": "POOL:bench_tool",
+     "x": 5.5,
+     "y": 0.0,
+     "z": 0.4,
+     "seat": "M"
+    },
+    {
+     "id": "cyl",
+     "kind": "POOL:cylinder",
+     "x": 1.2,
+     "y": 0.0,
+     "z": 2.6
+    },
+    {
+     "id": "seat",
+     "kind": "POOL:seat",
+     "x": 5.8,
+     "y": 0.0,
+     "z": 2.6
+    },
+    {
+     "id": "store",
+     "kind": "POOL:storage",
+     "x": 1.2,
+     "y": 0.0,
+     "z": 0.4
+    }
+   ]
+  },
+  "vitrine_v1": {
+   "_note": "wall-dominant display case for the miniatures \u2014 micropod row close to the glassline",
+   "slots": [
+    {
+     "id": "backwall",
+     "kind": "WALL",
+     "x": 1.0,
+     "y": 0.0,
+     "z": 0.0,
+     "width_cells": 8
+    },
+    {
+     "id": "panel",
+     "kind": "PANEL",
+     "x": 2.0,
+     "y": 2.3,
+     "z": 0.06,
+     "width_cells": 6
+    },
+    {
+     "id": "art_a",
+     "kind": "POOL:art",
+     "x": 0.4,
+     "y": 1.5,
+     "z": 0.12,
+     "wall": true
+    },
+    {
+     "id": "screen",
+     "kind": "POOL:screen",
+     "x": 7.6,
+     "y": 1.5,
+     "z": 0.12,
+     "wall": true
+    },
+    {
+     "id": "hero",
+     "kind": "HERO",
+     "x": 4.0,
+     "z": 1.0
+    },
+    {
+     "id": "row_a",
+     "kind": "CHILD:S",
+     "x": 1.6,
+     "z": 0.7
+    },
+    {
+     "id": "row_b",
+     "kind": "CHILD:S",
+     "x": 2.8,
+     "z": 0.7
+    },
+    {
+     "id": "row_c",
+     "kind": "CHILD:S",
+     "x": 5.2,
+     "z": 0.7
+    },
+    {
+     "id": "row_d",
+     "kind": "CHILD:S",
+     "x": 6.4,
+     "z": 0.7
+    },
+    {
+     "id": "light",
+     "kind": "POOL:light",
+     "x": 0.9,
+     "y": 0.0,
+     "z": 1.6
+    },
+    {
+     "id": "seat",
+     "kind": "POOL:seat",
+     "x": 6.8,
+     "y": 0.0,
+     "z": 2.2
+    },
+    {
+     "id": "safety",
+     "kind": "POOL:safety",
+     "x": 0.2,
+     "y": 0.0,
+     "z": 0.3
+    }
+   ]
+  },
+  "monolith_v1": {
+   "_note": "the ceremonial minimum \u2014 one hero, two pillars, one light; Point_One energy",
+   "slots": [
+    {
+     "id": "hero",
+     "kind": "HERO",
+     "x": 2.5,
+     "z": 1.4
+    },
+    {
+     "id": "light",
+     "kind": "POOL:light",
+     "x": 1.5,
+     "y": 0.0,
+     "z": 2.2
+    },
+    {
+     "id": "pillar_w",
+     "kind": "PIECE",
+     "token": "station_pillar",
+     "x": 0.6,
+     "y": 0.0,
+     "z": 1.4
+    },
+    {
+     "id": "pillar_e",
+     "kind": "PIECE",
+     "token": "station_pillar",
+     "x": 4.4,
+     "y": 0.0,
+     "z": 1.4
+    }
    ]
   }
  }

@@ -51,7 +51,8 @@
     "base_meters": 0.6,
     "cap_meters": 1.16,
     "top_height": 1.15,
-    "caption_text": "distribution sampler"
+    "caption_text": "distribution sampler",
+    "cap_inset": 0.1
    }
   },
   {
@@ -65,7 +66,7 @@
    "token": "dna_color_furniture_furniture_lamp_warm_glow",
    "x": 3.2,
    "y": 0.0,
-   "z": 0.35,
+   "z": 2.0,
    "wall": false
   },
   {
@@ -79,11 +80,11 @@
     "depth_cells": 1,
     "top_height": 1.05,
     "cap_inset": 0.1,
-    "caption_text": "distribution bench"
+    "caption_text": "distribution comparator"
    }
   },
   {
-   "token": "distribution_bench",
+   "token": "distribution_comparator",
    "x": 1.2,
    "y": 1.05,
    "z": 1.0,
@@ -100,11 +101,11 @@
     "depth_cells": 1,
     "top_height": 1.05,
     "cap_inset": 0.1,
-    "caption_text": "distribution comparator"
+    "caption_text": "height random"
    }
   },
   {
-   "token": "distribution_comparator",
+   "token": "height_random",
    "x": 5.2,
    "y": 1.05,
    "z": 1.0,
@@ -120,11 +121,12 @@
     "base_meters": 0.6,
     "cap_meters": 1.16,
     "top_height": 1.15,
-    "caption_text": "height random"
+    "caption_text": "distribution bench",
+    "cap_inset": 0.1
    }
   },
   {
-   "token": "height_random",
+   "token": "distribution_bench",
    "x": 2.2,
    "y": 1.15,
    "z": 2.3,
@@ -205,6 +207,20 @@
    "x": 6.8,
    "y": 0.0,
    "z": 0.3,
+   "wall": false
+  },
+  {
+   "token": "station_floorline#length_cells:6#style:threshold",
+   "x": 3.5,
+   "y": 0.0,
+   "z": 0.18,
+   "wall": false
+  },
+  {
+   "token": "station_floorline#length_cells:7#style:line",
+   "x": 3.9,
+   "y": 0.0,
+   "z": 2.8,
    "wall": false
   }
  ]

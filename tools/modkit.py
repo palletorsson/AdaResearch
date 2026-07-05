@@ -20,6 +20,7 @@ from __future__ import annotations
 import json
 import os
 import random
+import re
 import sys
 import urllib.request
 
@@ -71,6 +72,10 @@ def seed_station(hero, template, spec, sizes, seed):
     pools = spec["pools"]
     fam = family_of(hero)
     rng.shuffle(fam)
+    # measured bodies first: unmeasured tokens are often shaders/textures that
+    # render as floating quads — they make bad bench company (pool mount check)
+    fam = [f for f in fam if not re.search(r"shader|texture", f, re.IGNORECASE)]
+    fam.sort(key=lambda f: f.split("#")[0] not in sizes)
     # class the family for CHILD slots
     fam_by = {"S": [], "M": [], "L": []}
     for f in fam:
@@ -123,6 +128,9 @@ def seed_station(hero, template, spec, sizes, seed):
             if name:
                 y = seat(want, x, z, name.replace("_", " "))
                 add(name, x, y, z)
+        elif kind == "PIECE":
+            add(slot["token"], x, slot.get("y", 0.0), z, wall=bool(slot.get("wall")),
+                **(slot.get("config") or {}))
         elif kind.startswith("POOL:"):
             pool = pools.get(kind.split(":")[1], [])
             if not pool:
@@ -180,7 +188,8 @@ def main():
     made = []
     for s in [int(x) for x in seeds.split(",") if x.strip()]:
         P = seed_station(hero, template, spec, sizes, s)
-        name = f"mk_{hero}_s{s}"
+        stem = "" if tname == "bench_v1" else tname.split("_")[0] + "_"
+        name = f"mk_{stem}{hero}_s{s}"
         print(f"  {name}: {len(P)} pieces "
               f"({', '.join(p['token'].split('#')[0] for p in P if not p['token'].startswith('station_'))})")
         if write:

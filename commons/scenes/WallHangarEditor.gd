@@ -1041,10 +1041,22 @@ func _settle_loaded() -> void:
 		var box := _world_aabb(n)
 		if box.size.y <= 0.001:
 			continue
+		# R-019 body_on_cell: seat by the measured BODY, not the code origin — centre the
+		# visible AABB on the requested cell before the vertical seat, so every artifact
+		# lands centred on its cap. (The meet is between what you SEE and what holds it.)
+		var gp: Vector3 = n.global_position
+		var dx: float = gp.x - (box.position.x + box.size.x * 0.5)
+		var dz: float = gp.z - (box.position.z + box.size.z * 0.5)
+		if absf(dx) > 0.003 and absf(dx) < 3.0:
+			gp.x += dx
+		if absf(dz) > 0.003 and absf(dz) < 3.0:
+			gp.z += dz
+		n.global_position = gp
+		box = _world_aabb(n)
 		var target := _stack_top(n.global_position.x, n.global_position.z, n)
 		var shift := target - box.position.y
 		if absf(shift) > 0.003 and absf(shift) < 6.0:
-			var gp: Vector3 = n.global_position
+			gp = n.global_position
 			gp.y += shift
 			n.global_position = gp
 

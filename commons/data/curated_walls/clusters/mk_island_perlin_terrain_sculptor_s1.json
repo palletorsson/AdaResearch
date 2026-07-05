@@ -1,0 +1,167 @@
+{
+ "name": "mk_island_perlin_terrain_sculptor_s1",
+ "source": "modkit auto-seed (station_modules.json)",
+ "pieces": [
+  {
+   "token": "station_plinth",
+   "x": 3.5,
+   "y": 0.0,
+   "z": 1.5,
+   "wall": false,
+   "config": {
+    "width_cells": 1,
+    "depth_cells": 1,
+    "top_height": 1.05,
+    "cap_inset": 0.1,
+    "caption_text": "perlin terrain sculptor"
+   }
+  },
+  {
+   "token": "perlin_terrain_sculptor",
+   "x": 3.5,
+   "y": 1.05,
+   "z": 1.5,
+   "wall": false
+  },
+  {
+   "token": "dna_color_furniture_furniture_lamp_warm_glow",
+   "x": 2.5,
+   "y": 0.0,
+   "z": 2.4,
+   "wall": false
+  },
+  {
+   "token": "station_plinth",
+   "x": 3.5,
+   "y": 0.0,
+   "z": 0.2,
+   "wall": false,
+   "config": {
+    "width_cells": 1,
+    "depth_cells": 1,
+    "top_height": 1.05,
+    "cap_inset": 0.1,
+    "caption_text": "perlin noise bridge"
+   }
+  },
+  {
+   "token": "perlin_noise_bridge",
+   "x": 3.5,
+   "y": 1.05,
+   "z": 0.2,
+   "wall": false
+  },
+  {
+   "token": "station_plinth",
+   "x": 3.5,
+   "y": 0.0,
+   "z": 2.8,
+   "wall": false,
+   "config": {
+    "width_cells": 1,
+    "depth_cells": 1,
+    "top_height": 1.05,
+    "cap_inset": 0.1,
+    "caption_text": "perlin noise clouds"
+   }
+  },
+  {
+   "token": "perlin_noise_clouds",
+   "x": 3.5,
+   "y": 1.05,
+   "z": 2.8,
+   "wall": false
+  },
+  {
+   "token": "station_micropod",
+   "x": 1.5,
+   "y": 0.0,
+   "z": 1.5,
+   "wall": false,
+   "config": {
+    "base_meters": 0.6,
+    "cap_meters": 1.16,
+    "top_height": 1.15,
+    "caption_text": "profile noise octaves",
+    "cap_inset": 0.1
+   }
+  },
+  {
+   "token": "profile_noise_octaves",
+   "x": 1.5,
+   "y": 1.15,
+   "z": 1.5,
+   "wall": false
+  },
+  {
+   "token": "station_micropod",
+   "x": 5.5,
+   "y": 0.0,
+   "z": 1.5,
+   "wall": false,
+   "config": {
+    "base_meters": 0.6,
+    "cap_meters": 1.16,
+    "top_height": 1.15,
+    "caption_text": "perlin noise terrain",
+    "cap_inset": 0.1
+   }
+  },
+  {
+   "token": "perlin_noise_terrain",
+   "x": 5.5,
+   "y": 1.15,
+   "z": 1.5,
+   "wall": false
+  },
+  {
+   "token": "station_plinth",
+   "x": 5.5,
+   "y": 0.0,
+   "z": 0.4,
+   "wall": false,
+   "config": {
+    "width_cells": 1,
+    "depth_cells": 1,
+    "top_height": 1.05,
+    "cap_inset": 0.1,
+    "caption_text": "microscope"
+   }
+  },
+  {
+   "token": "microscope",
+   "x": 5.5,
+   "y": 1.05,
+   "z": 0.4,
+   "wall": false
+  },
+  {
+   "token": "gas_canister",
+   "x": 1.2,
+   "y": 0.0,
+   "z": 2.6,
+   "wall": false
+  },
+  {
+   "token": "lab_stool",
+   "x": 5.8,
+   "y": 0.0,
+   "z": 2.6,
+   "wall": false
+  },
+  {
+   "token": "crate",
+   "x": 1.2,
+   "y": 0.0,
+   "z": 0.4,
+   "wall": false
+  },
+  {
+   "token": "station_floorline#length_cells:4#style:line",
+   "x": 3.5,
+   "y": 0.0,
+   "z": 2.8,
+   "wall": false
+  }
+ ]
+}
