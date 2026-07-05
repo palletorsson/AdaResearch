@@ -257,4 +257,33 @@ mc_sculpt_vr prose ghost-drafted.
 
 ---
 
-<!-- Next: R-013 — randomness staging forks (env_one room-shell vs hand-cut; rhythm: bench market / dice_rain_room) + randomness dig (entropy_axiom?) + randompoints vs randompoint + Hangar_Fractals v3 + noise truths (Palle wording) -->
+## R-013 · 2026-07-04 · The creator's walk (the final map-space generator)
+
+**Palle:** "imagine you start at 0,0 you are the creator of the fantasy space. You have all the
+artifacts and the wall works on a rolling tray, like a librarian with necklace order. As you
+walk the rolling tray lives 3 by grid and you place the artifact one by one … it stamps the
+grid with its footprint so you can continue … you place the wall work on your left or right.
+You place it inwards so you can see from your position along z … perfect spacing. When you are
+done you walk around in the level and think of the work — do I need to add other stuff here, a
+text plate, other props to make it more interesting. Think like this is the perfect room to
+describe the concept — an imaginative science lab of the concept, to make it flow of knowledge.
+… the walls will be intelligent and we will seed other props — fire extinguishers, info plates,
+whiteboards or blackboards, shelves. The floor will likewise be more intelligent with raised
+void level for the hero and larger or applied artifacts. Different levels and extra props like
+crates or other science props."
+
+**Ruling:** the room generator is a FIRST-PERSON CREATOR WALK, three phases:
+(1) THE WALK — start 0,0, advance along z in ~3-cell strides (the corridor stays 3 wide);
+the tray holds the walk + curated wall works in necklace order; each placement STAMPS its
+footprint into the occupancy grid; wall works go left/right FACING INWARD (visible along z);
+spacing derives from footprint + the gaze law; heroes and large/applied get RAISED platforms
+(structure levels, void moats — the intelligent floor).
+(2) THE WALK-BACK — re-walk and enrich: intelligent walls seeded with the lab vernacular
+(fire extinguishers, info plates carrying the chapter's prose, whiteboards/blackboards,
+shelves), crates and science props in the empty beats, luminaires over the heroes.
+(3) THE READING — pathfinder + gaze_ride fold-back; the ride log judges the flow of knowledge.
+The room = the concept's imaginative science laboratory; the generator enacts the librarian.
+
+---
+
+<!-- Next: R-014 — randomness staging forks + randomness dig (entropy_axiom?) + randompoints vs randompoint + Hangar_Fractals v3 + noise truths (Palle wording) + remaining 6 primitives walls -->
