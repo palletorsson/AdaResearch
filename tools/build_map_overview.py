@@ -94,6 +94,16 @@ def main():
             "seq": seq, "phase": q.get("phase", ""), "role": q.get("qfep_role", ""),
             "n_maps": len(mlist), "maps": mlist,
         })
+    # The book's generated rooms (creator_walk / wall_extrude / wall review) belong to
+    # no sequence but must be findable — a synthetic, view-only section at the end.
+    maps_dir = os.path.join(ROOT, "commons", "maps")
+    hangars = sorted(n for n in os.listdir(maps_dir)
+                     if n.startswith(("Hangar_", "Walls_"))
+                     and os.path.isdir(os.path.join(maps_dir, n)))
+    hlist = [m for m in (map_data(mn) for mn in hangars) if m]
+    if hlist:
+        out.append({"seq": "book_hangars", "phase": "book", "role": "the book's rooms",
+                    "n_maps": len(hlist), "maps": hlist})
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     json.dump(out, open(OUT, "w", encoding="utf-8"), separators=(",", ":"))
     sz = os.path.getsize(OUT)
