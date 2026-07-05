@@ -148,6 +148,18 @@ sightlines), tame/crown the 11 m box_counting, respace lane + proto bay interior
 - **`GET /api/final-lap?format=markdown`** — Part VI context for the last three passes.
 - **`GET /api/scenes/footprint` / `/api/scenes/enriched`** — footprints for staging.
 
+## The room is the map (R-015, 2026-07-05 — architectural pivot)
+
+The room descends from the CHAPTER to the MAP. `tools/dollhouse.py` is the production
+map-room composer: branches on hero:roster into MONUMENT (giant hero = the room) /
+SPECIMEN (small = tight cluster) / CABINET (many = packed shelves); floating-diorama dais
+(height-2 + void surround); non-destructive `Room_<Map>`. A chapter = a NECKLACE of these
+rooms, chained by real maps' teleporters. `creator_walk`/`chapter_stage` keep value as the
+SEQUENCE lens (necklace order, transitions), NOT the room; the dig/ledger/walk stay at
+chapter grain. Piloted: `python tools/dollhouse.py --seq=randomness --write` → 13 valid
+rooms, modes 11 monument / 1 specimen / 1 cabinet (randomness = the environment sequence).
+Next: apply rigger glue per room; the rate-gallery + distil loop; run other sequences.
+
 ## Standing constitution
 
 - Rulings are the source; prose is compiled output. Unruled calls in drafts get marked, not hidden.
