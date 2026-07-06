@@ -1,0 +1,146 @@
+{
+ "_note": "the dialectic list — hero ⟷ anti-hero per map; built in conversation (tools/heroes.py). HERO = what the walk champions; ANTI = what the turn raises against it; TENSION = the map's dialectic in one line.",
+ "sequences": {
+  "primitives": {
+   "Point_One": {
+    "hero": "the point — the first mark placed",
+    "anti": "the frame-counter — the loop already running",
+    "tension": "individuation ⟷ arriving late into someone else's clock (thrownness)"
+   },
+   "Point_Lines": {
+    "hero": "Klee's walking line — drawing as gesture and time",
+    "anti": "Le Corbusier's Modulor — the body made a standard ruler",
+    "tension": "the line as walk ⟷ the line as measure (pleasure that is also violence)"
+   },
+   "Point_Trace": {
+    "hero": "the trace — the hand's residue (Derrida)",
+    "anti": "the line — that compresses it to two endpoints",
+    "tension": "what the body leaves ⟷ what the symbol keeps"
+   },
+   "Point_Line_Grid": {
+    "hero": "the continuous body's path",
+    "anti": "the grid — Foucault's quantizing frame",
+    "tension": "the fluid self ⟷ the shareable record (the snap)"
+   },
+   "Point_Triangle_Context": {
+    "hero": "the rigid triangle — no deformation without rupture",
+    "anti": "the flexible quad — that bends rather than break",
+    "tension": "rigidity ⟷ flexibility (two spatial ethics)"
+   },
+   "Primitives_Polythedra": {
+    "hero": "the trihedron — volume as junction",
+    "anti": "becoming_catalyst — the primitive that acts back on you",
+    "tension": "the inert building block ⟷ the block that changes the knower"
+   },
+   "Point_Animatedcube": {
+    "hero": "the cube — the first sealed interior",
+    "anti": "the corner-drag — stability revealed as convention",
+    "tension": "enclosure as achievement ⟷ enclosure as confinement"
+   },
+   "Primitives_Ignorance": {
+    "hero": "the Platonic solid — the 'given' perfect form",
+    "anti": "the resolution dial (sphere low/mid/high), the unnameable roughrock",
+    "tension": "the primitive as given ⟷ the primitive as a move in a language game (Wittgenstein)"
+   },
+   "Primitives_Portals": {
+    "hero": "the ring approaching the circle",
+    "anti": "Achilles & the tortoise — Zeno, never arriving",
+    "tension": "the continuum ⟷ the discrete that cannot reach it (π, the uncomputable)"
+   },
+   "Primitives_Melencolia": {
+    "hero": "the accumulated tools — total mastery",
+    "anti": "Dürer's angel — immobilized by knowing (code_display at exhaustion)",
+    "tension": "mastery ⟷ the melancholy of finitude (completion as mourning)"
+   }
+  },
+  "array_tutorial": {
+   "Array_Patterns": {
+    "hero": "the tile — one cell that becomes a floor",
+    "anti": "the loom / Jacquard's card — the array as inherited labor and imposition",
+    "tension": "carpet ⟷ algorithm (the handmade is already computation)"
+   },
+   "Tutorial_Single": {
+    "hero": "the single cube — index zero, the atom",
+    "anti": "its own smallness — one is not yet a pattern",
+    "tension": "interaction ⟷ structure (the scalar before the array)"
+   },
+   "Tutorial_Row": {
+    "hero": "the corridor — the 1D array walked",
+    "anti": "the buffer lanes you can see but not enter",
+    "tension": "order ⟷ the axis privileged, all else held as context"
+   },
+   "Tutorial_2D_Build": {
+    "hero": "the coordinate pair — where-in-relation-to-what",
+    "anti": "the grid agent — the first thing that navigates",
+    "tension": "sequence ⟷ territory (8 becomes 16, not 8+8)"
+   },
+   "Tutorial_3D": {
+    "hero": "grid[x][y][z] — the volume you climb",
+    "anti": "the body ascending the Z-index with its legs",
+    "tension": "the array as abstraction ⟷ the array as a room you inhabit"
+   },
+   "Tutorial_Pattern": {
+    "hero": "the rule run across indices — (x+y)%2",
+    "anti": "the eye that solves the pattern before the mind derives it",
+    "tension": "the machine derives from rule ⟷ the human perceives the rule"
+   },
+   "Tutorial_Disco": {
+    "hero": "the 17×17 dance floor — the array as environment",
+    "anti": "the step sequencer — time entering the grid",
+    "tension": "spatial ⟷ spatiotemporal (getting lost in a data structure)"
+   }
+  },
+  "softbodies": {
+   "SoftBodies_Soft_Body_Deformation": {
+    "hero": "the jelly cube — matter at λ=0.5",
+    "anti": "the rigid solid it refutes (Primitives' trustworthy cube)",
+    "tension": "form as a static property ⟷ form as a dynamic equilibrium"
+   },
+   "SoftBodies_Carusell": {
+    "hero": "the soft body as distributed instrument",
+    "anti": "the rigid pendulum that hides the force gradient",
+    "tension": "a force reported as one number ⟷ a force read across a whole surface"
+   },
+   "SoftBodies_Obsticals": {
+    "hero": "the negotiating soft body",
+    "anti": "the breathing walls — the environment that keeps changing",
+    "tension": "collision as instant resolution ⟷ collision as negotiation over time (who yields?)"
+   },
+   "SoftBodies_Obsticals_Part2": {
+    "hero": "the twelve tests — empirical investigation",
+    "anti": "first-principles prediction that fails",
+    "tension": "deduce ⟷ observe (the gallery as methodology)"
+   },
+   "SoftBodies_Cloth_Physics": {
+    "hero": "the spring topology — structural/shear/bending",
+    "anti": "the identical mass points (silk or rubber by wiring alone)",
+    "tension": "material as physical ⟷ material as topological (relations, not elements)"
+   },
+   "SoftBodies_Playground_of_Joy": {
+    "hero": "free play — haptic intuition before formal understanding",
+    "anti": "the branching growth algorithm — growth = deformation at another timescale",
+    "tension": "physics ⟷ biology (the pivot the map hides)"
+   },
+   "SoftBodies_Affect_Theory_Visualization": {
+    "hero": "the radiolarian — form the material grew, no designer",
+    "anti": "Haeckel's gaze — beauty seen in a thing with no concept of it",
+    "tension": "simulation technique ⟷ ontology (softness = the capacity to be affected)"
+   },
+   "ProceduralGeneration_Reaction_Diffusion_Systems": {
+    "hero": "two chemicals — the leopard computing its spots",
+    "anti": "the blueprint that pattern doesn't need",
+    "tension": "form designed ⟷ form computed by matter (Turing's tender last gift)"
+   },
+   "Topology_Entropy_Morphogenesis": {
+    "hero": "maximum matching — form from constraint",
+    "anti": "the odd cycle — the local impossibility",
+    "tension": "solve on its own terms ⟷ resolve by changing the level (blossom contraction)"
+   },
+   "Chamber_SoftBodies": {
+    "hero": "the shared elastic medium",
+    "anti": "the actor/receiver boundary that dissolves",
+    "tension": "rigidity as fact ⟷ rigidity as a design choice (who pushed whom?)"
+   }
+  }
+ }
+}
