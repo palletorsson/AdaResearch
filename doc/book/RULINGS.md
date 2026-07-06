@@ -619,4 +619,25 @@ recompose. "Which artifacts to improve?" is now answered: the key ones, in book-
 
 ---
 
-<!-- Next: R-027 — improve the top-weight + weak key artifacts (worklist); concept_exit_test family; walk primitives, LOCK ch.1 -->
+## R-027 · 2026-07-06 · All text on integrated boards (2D-in-3D)
+
+**Palle:** "All text should have integrated plates, 2d in 3d display boards to look good."
+
+**Ruling:** Bare floating `Label3D` glyphs are banned from key artifacts — text lives on a
+real surface. The canonical helper already existed (`BakedText.make_tag` / `make_panel_mesh`
+/ `make_text_block`, and `TextScreen`); the gap was ADOPTION — 121 key artifacts still used
+bare Label3D.
+- **Enhanced `make_tag`** into a framed 2D-in-3D display BOARD: bezel frame + dark glass face +
+  lit accent edge + baked text, billboarded. Backward-compatible (optional accent). One change
+  upgrades every current + future tag.
+- **Migration pass** (fan-out, all verified headless): invariants_demo, godel_sentence_machine,
+  box_counting_dimension, russell_set_box, shannon_entropy_meter, gradient_descent_visualization
+  — ~35 floating labels → boards. Runtime-updated readouts rebuild the board (baked text can't
+  mutate in place). invariants_demo before/after is the proof: floating green glyphs → framed
+  instrument readouts.
+- The doctrine matches staging_dna's ONE BODY principle: text is set INTO a lit surface, never a
+  floating plate beside it. ~115 key artifacts remain to migrate (the ongoing worklist).
+
+---
+
+<!-- Next: R-028 — continue the text-board migration across remaining key artifacts; concept_exit_test; walk primitives, LOCK ch.1 -->
