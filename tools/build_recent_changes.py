@@ -87,6 +87,7 @@ def map_changes(limit: int = 60) -> list:
 
 # Curated navigation index — the book/tooling pages built for the project.
 PAGES = [
+    {"label": "Read the Book", "route": "/chapter", "note": "the developed chapters — walk + turn"},
     {"label": "Composition", "route": "/composition", "note": "need · potential · actual"},
     {"label": "Key Artifacts", "route": "/key-artifacts", "note": "the book's DNA"},
     {"label": "Station Gallery", "route": "/station-gallery", "note": "the lab benches"},
