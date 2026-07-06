@@ -478,4 +478,34 @@ So this is another scope. We already have the in for instance primitives."
 
 ---
 
-<!-- Next: R-022 — noise truths (Palle wording) + Ignorance settle + "the meeting" as book motif + per-map rulings as the walks run -->
+## R-022 · 2026-07-06 · The compositor (text sets the map)
+
+**Palle:** "walk.md is a way to create the maps too … use the book to auto research the
+maps. The book as a tool is to figure out the spine order and order the artifacts in the
+maps while making the text beautiful and critical tutorials. Think of NOC — we have the
+explaining text and the code. Vectors are ontology, but in Ada Research there is a
+critical element, like Alan Turing thinking with qfep."
+
+**Ruling:** The text↔map relation is BIDIRECTIONAL and the text leads. NOC pairs prose
+with code; Ada pairs prose with MAPS — the map is the code. walked.md is source: writing
+the tutorial well FORCES an order, and the maps compile to it.
+- **tools/compositor.py** (freeze-legal: the pass requires it): reads a chapter's text
+  (overlay + built tutorial + walked.md), extracts PROSE ORDER (first mention), walks
+  the sequence's maps for BODY ORDER (encounter), reports divergences + silences.
+  Report-only. Every divergence is a ruling: re-lay the map (creator_walk, tray = prose
+  order) or rewrite the text. --spine compares curriculum order against the manuscript
+  frame's telling.
+- The critical element rides the prose: each concept carries its thinker-figure thought
+  WITH QFEP (the vector comes with its Turing) — content for the considered pass, no
+  tool needed.
+- First run (primitives, 10 maps, 80 artifacts, 0 silent): the prose teaches
+  point→trace→drawing→measure early (laser_measure #4, klee_walking_point #8, draw_dot
+  #9) while the body holds them to mid-walk (#18/#25/#28); the body front-loads Point_One
+  context props (folding_past #3, frame_counter #4, you_are_here #5) that the prose
+  treats as asides. CAVEAT: generic-named artifacts (line, sphere, plus, pyramid,
+  triangle, origin) collide with ordinary prose words — read their rows with salt;
+  specific tokens are the trustworthy signal.
+
+---
+
+<!-- Next: R-023 — primitives prose-vs-body rulings (re-lay or rewrite, per divergence) + noise truths + Ignorance settle + "the meeting" motif -->
