@@ -88,6 +88,25 @@
   ],
   "safety": [
    "fire_extinguisher"
+  ],
+  "wallwork": [
+   "station_wall_module#kind:whiteboard",
+   "station_wall_module#kind:display",
+   "station_wall_module#kind:vent",
+   "station_wall_module#kind:pipes",
+   "station_wall_module#kind:cabletray",
+   "station_wall_module#kind:chevron"
+  ],
+  "ceilingwork": [
+   "station_ceiling#kind:tiles",
+   "station_ceiling#kind:tray",
+   "station_ceiling#kind:duct",
+   "station_ceiling#kind:beam"
+  ],
+  "floorwork": [
+   "station_floor_module#kind:grate",
+   "station_floor_module#kind:channel",
+   "station_floor_module#kind:hatch"
   ]
  },
  "junctions": {
@@ -440,6 +459,210 @@
      "x": 4.4,
      "y": 0.0,
      "z": 1.4
+    }
+   ]
+  },
+  "labwall_v1": {
+   "_note": "the combined working wall - a full segment run closed by endcaps, services continuing overhead and underfoot; the Black Mesa read",
+   "slots": [
+    {
+     "id": "cap_w",
+     "kind": "PIECE",
+     "token": "station_wall_module",
+     "x": -0.15,
+     "y": 0.0,
+     "z": 0.0,
+     "wall": true,
+     "config": {
+      "kind": "endcap",
+      "flip": true
+     }
+    },
+    {
+     "id": "board",
+     "kind": "PIECE",
+     "token": "station_wall_module",
+     "x": 1.0,
+     "y": 0.0,
+     "z": 0.0,
+     "wall": true,
+     "config": {
+      "kind": "whiteboard",
+      "length_cells": 2,
+      "seed": 3
+     }
+    },
+    {
+     "id": "disp",
+     "kind": "PIECE",
+     "token": "station_wall_module",
+     "x": 2.5,
+     "y": 0.0,
+     "z": 0.0,
+     "wall": true,
+     "config": {
+      "kind": "display"
+     }
+    },
+    {
+     "id": "vent",
+     "kind": "PIECE",
+     "token": "station_wall_module",
+     "x": 3.5,
+     "y": 0.0,
+     "z": 0.0,
+     "wall": true,
+     "config": {
+      "kind": "vent"
+     }
+    },
+    {
+     "id": "glass",
+     "kind": "PIECE",
+     "token": "station_wall_module",
+     "x": 5.0,
+     "y": 0.0,
+     "z": 0.0,
+     "wall": true,
+     "config": {
+      "kind": "glass",
+      "length_cells": 2
+     }
+    },
+    {
+     "id": "pipes",
+     "kind": "PIECE",
+     "token": "station_wall_module",
+     "x": 6.5,
+     "y": 0.0,
+     "z": 0.0,
+     "wall": true,
+     "config": {
+      "kind": "pipes"
+     }
+    },
+    {
+     "id": "tray",
+     "kind": "PIECE",
+     "token": "station_wall_module",
+     "x": 8.0,
+     "y": 0.0,
+     "z": 0.0,
+     "wall": true,
+     "config": {
+      "kind": "cabletray",
+      "length_cells": 2,
+      "seed": 5
+     }
+    },
+    {
+     "id": "cap_e",
+     "kind": "PIECE",
+     "token": "station_wall_module",
+     "x": 9.15,
+     "y": 0.0,
+     "z": 0.0,
+     "wall": true,
+     "config": {
+      "kind": "endcap"
+     }
+    },
+    {
+     "id": "ceil_a",
+     "kind": "PIECE",
+     "token": "station_ceiling",
+     "x": 2.0,
+     "y": 0.0,
+     "z": 0.8,
+     "config": {
+      "kind": "tiles",
+      "length_cells": 4
+     }
+    },
+    {
+     "id": "ceil_b",
+     "kind": "PIECE",
+     "token": "station_ceiling",
+     "x": 6.5,
+     "y": 0.0,
+     "z": 0.8,
+     "config": {
+      "kind": "tray",
+      "length_cells": 4
+     }
+    },
+    {
+     "id": "ceil_c",
+     "kind": "PIECE",
+     "token": "station_ceiling",
+     "x": 4.5,
+     "y": 0.0,
+     "z": 1.8,
+     "config": {
+      "kind": "duct",
+      "length_cells": 3
+     }
+    },
+    {
+     "id": "fl_ch",
+     "kind": "PIECE",
+     "token": "station_floor_module",
+     "x": 4.0,
+     "y": 0.0,
+     "z": 1.2,
+     "config": {
+      "kind": "channel",
+      "length_cells": 5
+     }
+    },
+    {
+     "id": "fl_gr",
+     "kind": "PIECE",
+     "token": "station_floor_module",
+     "x": 8.0,
+     "y": 0.0,
+     "z": 1.5,
+     "config": {
+      "kind": "grate",
+      "length_cells": 2
+     }
+    },
+    {
+     "id": "fl_ha",
+     "kind": "PIECE",
+     "token": "station_floor_module",
+     "x": 1.0,
+     "y": 0.0,
+     "z": 2.2,
+     "config": {
+      "kind": "hatch"
+     }
+    },
+    {
+     "id": "hero",
+     "kind": "HERO",
+     "x": 4.5,
+     "z": 1.7
+    },
+    {
+     "id": "child",
+     "kind": "CHILD:M",
+     "x": 6.8,
+     "z": 1.6
+    },
+    {
+     "id": "light",
+     "kind": "POOL:light",
+     "x": 2.8,
+     "y": 0.0,
+     "z": 2.3
+    },
+    {
+     "id": "seat",
+     "kind": "POOL:seat",
+     "x": 5.8,
+     "y": 0.0,
+     "z": 2.5
     }
    ]
   }

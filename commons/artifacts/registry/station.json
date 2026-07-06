@@ -1,549 +1,637 @@
 {
-  "category": "station",
-  "description": "Modular grid-snapping curation-station kit \u2014 tiling walls, step-stages, plinths, pillars, and a composer that stages 1-5 artifacts on the 1 m grid. Shares the HangarKit sci-fi-lab look.",
-  "artifacts": {
-    "station_wall": {
-      "lookup_name": "station_wall",
-      "scene": "res://commons/artifacts/station/station_wall.tscn",
-      "class_name": "StationWall",
-      "name": "Station Wall (modular)",
-      "description": "A grid-modular backing wall exactly length_cells metres wide (1 m per cell) with optional start/end caps, so sections butt edge-to-edge on the grid and read as one continuous wall.",
-      "category": "station",
-      "complexity": "intermediate",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "tags": [
-        "station",
-        "modular",
-        "wall",
-        "grid",
-        "sci-fi",
-        "lab"
-      ],
-      "parameters": {
-        "length_cells": "Wall length in 1 m grid cells (int, default 2)",
-        "start_cap": "End-cap post at the -X face (bool)",
-        "end_cap": "End-cap post at the +X face (bool)",
-        "height": "Wall height in metres (default 2.5)",
-        "panel_style": "panel | ribbed | perforated",
-        "screen_slot": "Embed a framed readout (bool)",
-        "lit_seam": "Emissive seam line along the top (bool)",
-        "accent_color": "Braun-orange accent by default"
-      },
-      "spatial_needs": {
-        "footprint_cells": 2,
-        "wall_backing": true
-      }
-    },
-    "station_stage": {
-      "lookup_name": "station_stage",
-      "scene": "res://commons/artifacts/station/station_stage.tscn",
-      "class_name": "StationStage",
-      "name": "Station Stage (step deck)",
-      "description": "A grid-modular raised deck exactly width_cells x depth_cells metres, with a panelled skirt and caution-striped front lip \u2014 the platform a curated set stands on.",
-      "category": "station",
-      "complexity": "intermediate",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "tags": [
-        "station",
-        "modular",
-        "stage",
-        "step",
-        "platform",
-        "grid"
-      ],
-      "parameters": {
-        "width_cells": "Stage width in 1 m cells (int, default 5)",
-        "depth_cells": "Stage depth in 1 m cells (int, default 3)",
-        "step_height": "Deck height above floor, <= 0.35 m (default 0.22)",
-        "top_style": "solid | grate",
-        "hazard_edge": "Caution stripe on the front lip (bool)"
-      },
-      "spatial_needs": {
-        "footprint_cells": 15,
-        "platform": "step"
-      }
-    },
-    "station_plinth": {
-      "lookup_name": "station_plinth",
-      "scene": "res://commons/artifacts/station/station_plinth.tscn",
-      "class_name": "StationPlinth",
-      "name": "Station Plinth (display column)",
-      "description": "A grid-modular display plinth at ANY footprint \u2014 width_cells x depth_cells (1x1, 1x2, 1x3, 2x2, 3x3, 4x4 \u2026) with per-cell panels and a tray cap. Tall+narrow for small things, low+broad for big ones; one artifact stands on each.",
-      "category": "station",
-      "complexity": "beginner",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "tags": [
-        "station",
-        "modular",
-        "plinth",
-        "podium",
-        "display",
-        "grid"
-      ],
-      "parameters": {
-        "width_cells": "Footprint width in 1 m cells (X)",
-        "depth_cells": "Footprint depth in 1 m cells (Z) \u2014 any combo, e.g. 1x2, 2x3, 4x4",
-        "footprint_cells": "Convenience: square footprint (sets width = depth)",
-        "top_height": "Cap-top height where the artifact sits (\u22481.0 m for small, lower for big plinths)",
-        "top_style": "tray | flat | grate"
-      },
-      "spatial_needs": {
-        "footprint_cells": 1,
-        "platform": "pedestal"
-      }
-    },
-    "station_micropod": {
-      "lookup_name": "station_micropod",
-      "scene": "res://commons/artifacts/station/station_micropod.tscn",
-      "class_name": "StationPlinth",
-      "name": "Station Micro-Pedestal (sub-1 m post)",
-      "description": "A slim sub-grid pedestal (~0.6 m foot) for genuinely sub-1 m precious things \u2014 a held instrument, a thin readout \u2014 so the base no longer over-claims a full 1 m cell. Still snaps to one cell; same surface-pinned caption plate + detailing as station_plinth, built small via base_meters.",
-      "category": "station",
-      "complexity": "beginner",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "tags": [
-        "station",
-        "modular",
-        "plinth",
-        "micropod",
-        "pedestal",
-        "display",
-        "grid"
-      ],
-      "parameters": {
-        "base_meters": "Sub-grid foot width in metres (default 0.6) \u2014 the micro-pedestal size",
-        "top_height": "Cap-top height where the artifact sits (\u22481.1 m, eye level for a small thing)",
-        "caption_text": "The artifact's display name on the surface-pinned 2D-in-3D plate"
-      },
-      "spatial_needs": {
-        "footprint_cells": 1,
-        "platform": "pedestal"
-      }
-    },
-    "station_plinth_wide": {
-      "lookup_name": "station_plinth_wide",
-      "scene": "res://commons/artifacts/station/station_plinth_wide.tscn",
-      "class_name": "StationPlinth",
-      "name": "Station Plinth (wide cap, ~1 m)",
-      "description": "A 1-cell display plinth whose CAP fills the full ~1 m cell (cap_meters), not the tapered ~0.68 m of the default plinth — so a 1 m-base artifact sits FLUSH instead of overhanging. Same detailing + surface-pinned caption as station_plinth; for things measured ~0.7-1.1 m across.",
-      "category": "station",
-      "complexity": "beginner",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "tags": [
-        "station",
-        "modular",
-        "plinth",
-        "wide",
-        "pedestal",
-        "display",
-        "grid"
-      ],
-      "parameters": {
-        "cap_meters": "Fixed cap width in metres (default 1.05) — the full-cell top a 1 m artifact sits flush on",
-        "top_height": "Cap-top height where the artifact sits (default 0.9 m, lower since these are bigger things)",
-        "caption_text": "The artifact's display name on the surface-pinned 2D-in-3D plate"
-      },
-      "spatial_needs": {
-        "footprint_cells": 1,
-        "platform": "pedestal"
-      }
-    },
-    "station_pillar": {
-      "lookup_name": "station_pillar",
-      "scene": "res://commons/artifacts/station/station_pillar.tscn",
-      "class_name": "StationPillar",
-      "name": "Station Pillar (corner column)",
-      "description": "A grid-modular square column claiming one cell, with a lit accent groove and base/capital \u2014 frames a station's corners.",
-      "category": "station",
-      "complexity": "beginner",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "tags": [
-        "station",
-        "modular",
-        "pillar",
-        "column",
-        "corner",
-        "grid"
-      ],
-      "parameters": {
-        "height": "Pillar height in metres (default 2.5)",
-        "post_width": "Shaft width, fits inside a 1 m cell (default 0.42)",
-        "chamfer": "Chamfer on base + capital edges (0 = square, larger = tapered)",
-        "lit_groove": "Vertical lit accent groove (bool)",
-        "readout_face": "Small framed readout on the +Z face (bool)",
-        "cap_style": "plate | stepped | bevel \u2014 capital + base crown style",
-        "flute_count": "Vertical flutes per face (0 = single inset panel)",
-        "finish": "rams (light Braun) | terminal (dark charcoal console)",
-        "three_bar": "Dieter-Rams three-colour accent bar (bool)",
-        "bolts": "Bolt rows on foot corners + capital underside (bool)",
-        "caution_stripe": "Diagonal caution-stripe kick band at the base (bool)",
-        "dust": "Faint vertical dust streaks down the front face (bool)",
-        "signage_text": "Surface-pinned bracketed signage header (empty = none)",
-        "stencil_text": "Painted stencil text on the shaft (empty = none)"
-      },
-      "spatial_needs": {
-        "footprint_cells": 1
-      }
-    },
-    "curation_station": {
-      "lookup_name": "curation_station",
-      "scene": "res://commons/artifacts/station/curation_station.tscn",
-      "class_name": "CurationStation",
-      "name": "Curation Station (composer)",
-      "description": "The composer: give it 1-5 artifact lookup-names and it assembles a whole curation bay on the 1 m grid \u2014 step-stage, a plinth per item, a tiling backing wall with caps, framing pillars, and each artifact grounded inert on its plinth.",
-      "category": "station",
-      "complexity": "advanced",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "tags": [
-        "station",
-        "modular",
-        "curation",
-        "composer",
-        "gallery",
-        "grid"
-      ],
-      "parameters": {
-        "artifacts": "Array of 1-5 artifact lookup-names to curate",
-        "plinth_spacing_cells": "Cells between plinth centres (default 2)",
-        "stage_depth_cells": "Stage depth in cells (default 3)",
-        "with_wall": "Build the backing wall (bool)",
-        "with_pillars": "Build framing pillars (bool)",
-        "layout": "Bay shape: row (default, a front-facing line) | corner (an L \u2014 two walls, plinths along both legs)"
-      },
-      "spatial_needs": {
-        "footprint_cells": 33
-      },
-      "auto_ground": false
-    },
-    "station_cabinet": {
-      "lookup_name": "station_cabinet",
-      "scene": "res://commons/artifacts/station/station_cabinet.tscn",
-      "class_name": "StationCabinet",
-      "name": "Station Cabinet (storage / display)",
-      "description": "A grid-modular display/storage cabinet (width_cells x 1 m) with a tinted glass front and lit internal shelves \u2014 cabinets line up cell-to-cell as a glowing back wall of stored specimens.",
-      "category": "station",
-      "complexity": "intermediate",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "tags": [
-        "station",
-        "modular",
-        "cabinet",
-        "storage",
-        "display",
-        "glass",
-        "grid"
-      ],
-      "parameters": {
-        "width_cells": "Cabinet width in 1 m cells (int, default 2)",
-        "height": "Height in metres (default 1.9)",
-        "shelf_count": "Lit shelves per cell (default 4)",
-        "front_style": "glass | solid",
-        "glow_color": "Interior shelf glow colour",
-        "top_readout": "Framed readout on top (bool)"
-      },
-      "spatial_needs": {
-        "footprint_cells": 2,
-        "wall_backing": true
-      }
-    },
-    "station_barrier": {
-      "lookup_name": "station_barrier",
-      "scene": "res://commons/artifacts/station/station_barrier.tscn",
-      "class_name": "StationBarrier",
-      "name": "Station Barrier (front rail)",
-      "description": "A grid-modular front barrier (length_cells x 1 m) of posts with a low panel or rail and a caution base \u2014 marks the front edge of the stage: stand back, look, do not cross.",
-      "category": "station",
-      "complexity": "beginner",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "tags": [
-        "station",
-        "modular",
-        "barrier",
-        "rail",
-        "threshold",
-        "grid"
-      ],
-      "parameters": {
-        "length_cells": "Run length in 1 m cells (int, default 4)",
-        "height": "Barrier height in metres (default 1.0)",
-        "style": "panel | rail",
-        "brand_text": "2D-in-3D brand text across the front",
-        "hazard_base": "Caution stripe at the base (bool)"
-      },
-      "spatial_needs": {
-        "footprint_cells": 4
-      }
-    },
-    "station_panel": {
-      "lookup_name": "station_panel",
-      "scene": "res://commons/artifacts/station/station_panel.tscn",
-      "class_name": "StationPanel",
-      "name": "Station Panel (wall info screen)",
-      "description": "A grid-modular wall-mounted info panel (width_cells x 1 m) showing crisp 2D-in-3D text (a title + lines) on a dark face \u2014 mounts flat on a station_wall to caption the bay.",
-      "category": "station",
-      "complexity": "beginner",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "tags": [
-        "station",
-        "modular",
-        "panel",
-        "screen",
-        "info",
-        "2d-in-3d",
-        "grid"
-      ],
-      "parameters": {
-        "width_cells": "Panel width in 1 m cells (int, default 2)",
-        "height": "Panel height in metres (default 0.6)",
-        "header": "Title line",
-        "lines": "Array of body text lines",
-        "header_color": "Header colour (amber by default)"
-      },
-      "spatial_needs": {
-        "footprint_cells": 2,
-        "wall_backing": true
-      }
-    },
-    "station_bench": {
-      "lookup_name": "station_bench",
-      "scene": "res://commons/artifacts/station/station_bench.tscn",
-      "class_name": "StationBench",
-      "name": "Station Bench (workbench)",
-      "description": "A grid-modular worktable (length_cells x depth_cells) with a top at working height, apron, legs, and optional drawers \u2014 the flat way to present a set, laid out rather than raised on plinths.",
-      "category": "station",
-      "complexity": "beginner",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "tags": [
-        "station",
-        "modular",
-        "bench",
-        "workbench",
-        "table",
-        "grid"
-      ],
-      "parameters": {
-        "length_cells": "Bench length in 1 m cells (int, default 2)",
-        "depth_cells": "Bench depth in 1 m cells (int, default 1)",
-        "top_height": "Work-surface height in metres (default 0.92)",
-        "drawers": "Drawer block under one end (bool)"
-      },
-      "spatial_needs": {
-        "footprint_cells": 2,
-        "platform": "table"
-      }
-    },
-    "station_crates": {
-      "lookup_name": "station_crates",
-      "scene": "res://commons/artifacts/station/station_crates.tscn",
-      "class_name": "StationCrates",
-      "name": "Station Crates (supply stack)",
-      "description": "A grid-modular cluster of stacked crates and a canister with hazard labels, filling one cell \u2014 the lived-in back-of-house clutter that makes a clean stage believable.",
-      "category": "station",
-      "complexity": "beginner",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "tags": [
-        "station",
-        "modular",
-        "crates",
-        "boxes",
-        "supply",
-        "props",
-        "grid"
-      ],
-      "parameters": {
-        "footprint_cells": "Square footprint in cells (default 1)",
-        "crate_count": "Number of crates 1-6 (default 4)",
-        "palette": "cardboard | wood | metal",
-        "with_canister": "Add a gas canister (bool)"
-      },
-      "spatial_needs": {
-        "footprint_cells": 1
-      }
-    },
-    "station_ascent": {
-      "lookup_name": "station_ascent",
-      "scene": "res://commons/artifacts/station/station_ascent.tscn",
-      "class_name": "StationAscent",
-      "name": "Station Ascent (passage up)",
-      "description": "The station kit's PASSAGE piece \u2014 a painted-metal way up onto a tall stage or between heights, built as a flight of treads (stair), two stiles + rungs (ladder), or an inclined deck (ramp) sized to rise. Worn treads, an emissive nosing line per step edge, an optional handrail. Origin at the foot; the top of the run lands at rise.",
-      "category": "station",
-      "complexity": "beginner",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "tags": [
-        "station",
-        "modular",
-        "ascent",
-        "stair",
-        "ladder",
-        "ramp",
-        "passage",
-        "grid"
-      ],
-      "parameters": {
-        "rise": "Total height to climb in metres \u2014 the top of the run lands here (default 1.0)",
-        "style": "stair (flight of treads) | ladder (stiles + rungs) | ramp (inclined deck)",
-        "width": "Clear width of the climb in metres \u2014 tread width / rung span / ramp deck width (default 1.0)",
-        "handrail": "A handrail (posts + top rail) running up the climb (bool, default true)",
-        "stringers": "Worn-metal side stringers / rails framing the run (bool)",
-        "nosing_light": "Emissive nosing line on each step edge / rung / ramp lip (bool)",
-        "hazard_foot": "Diagonal caution-stripe kick band on the foot landing (bool)",
-        "body_color": "Painted-metal body colour as r,g,b,a string",
-        "tread_color": "Worn-metal tread / rung / deck colour as r,g,b,a string",
-        "accent_color": "Emissive nosing accent as r,g,b,a string (Braun-orange by default)"
-      },
-      "spatial_needs": {
-        "footprint_cells": 2,
-        "platform": "step"
-      }
-    },
-    "station_floorline": {
-      "lookup_name": "station_floorline",
-      "scene": "res://commons/artifacts/station/station_floorline.tscn",
-      "class_name": "StationFloorline",
-      "name": "Station Floorline (processional strip)",
-      "description": "A flush floor element (~2 cm proud) that connects rather than isolates \u2014 a lit strip you read with your feet. Three styles: 'line' (a single lit groove joining two bays), 'path' (a dashed runner with directional chevrons), 'threshold' (a wider crossing bar with end ticks). direction points the chevrons along +X / none / -X. The kit's first piece about between, not on \u2014 laid between two curated bays to make the walk legible.",
-      "category": "station",
-      "complexity": "beginner",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "tags": [
-        "station",
-        "floorline",
-        "floor",
-        "path",
-        "threshold",
-        "processional",
-        "relation",
-        "flush"
-      ],
-      "parameters": {
-        "length_cells": "Length of the run in 1 m cells along +X (joins one bay to the next)",
-        "width": "Strip width across Z in metres (~0.2 broad-line to ~0.6 processional bar)",
-        "style": "line | path | threshold",
-        "direction": "Chevron direction: 1 = toward +X, -1 = toward -X, 0 = no chevrons",
-        "accent_color": "Lit accent colour as an 'r,g,b,a' string"
-      },
-      "spatial_needs": {
-        "footprint_cells": 3,
-        "platform": "floor"
-      }
-    },
-    "station_luminaire": {
-      "lookup_name": "station_luminaire",
-      "scene": "res://commons/artifacts/station/station_luminaire.tscn",
-      "class_name": "StationLuminaire",
-      "name": "Station Luminaire (light fixture)",
-      "description": "The station kit's only source of light \u2014 a painted-metal Dieter-Rams fixture carrying a REAL Godot light. mode=task is an aimed SpotLight3D on a gooseneck arm leaning over one focal bay; mode=area is a soft OmniLight3D in a hung housing dropped on a thin rod over a whole bay. Origin at the floor; it acts ON the other props by lighting them, not beside them.",
-      "category": "station",
-      "complexity": "beginner",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "tags": [
-        "station",
-        "light",
-        "luminaire",
-        "fixture",
-        "spotlight",
-        "lighting"
-      ],
-      "parameters": {
-        "mode": "task (aimed SpotLight on a gooseneck over a focal bay) | area (soft OmniLight in a hung housing)",
-        "height": "Mount height in metres \u2014 gooseneck post top (task) or ceiling plane the housing hangs from (area)",
-        "intensity": "Real light energy (SpotLight3D / OmniLight3D light_energy)",
-        "light_color": "Light + lens colour as a string 'r,g,b,a'",
-        "warm": "true = warm tungsten bias, false = cool clinical white",
-        "arm_reach": "How far the gooseneck arm reaches out over the work in metres (task mode)"
-      },
-      "spatial_needs": {
-        "footprint_cells": 1,
-        "platform": "floor"
-      }
-    },
-    "station_multiscreen": {
-      "lookup_name": "station_multiscreen",
-      "scene": "res://commons/artifacts/station/station_multiscreen.tscn",
-      "class_name": "StationMultiscreen",
-      "name": "Station Multiscreen (convergence panel)",
-      "description": "A wall-mounted painted-metal panel divided into an R x C grid of 2D-in-3D readout cells, each its own captioned face, behind one shared bezel and header strip \u2014 for the four-views / convergence capstones a single station_panel can't hold. 1x2 = before/after, 2x2 = four views, 1xN = a filmstrip of stages. Mounts flat on a station_wall (front face +Z, wall:true when placed).",
-      "category": "station",
-      "complexity": "beginner",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "tags": [
-        "station",
-        "modular",
-        "multiscreen",
-        "panel",
-        "convergence",
-        "display",
-        "wall",
-        "grid"
-      ],
-      "parameters": {
-        "rows": "Number of cell rows (top to bottom)",
-        "cols": "Number of cell columns (left to right)",
-        "cell_labels": "Array of short captions, ROW-MAJOR (one per cell, left-to-right then top-to-bottom)",
-        "header": "Title shown on the header strip across the whole lattice",
-        "panel_w": "Overall panel width in metres",
-        "panel_h": "Overall panel height in metres",
-        "accent_color": "Header accent line + title tint (\"r,g,b,a\" string)"
-      },
-      "spatial_needs": {
-        "footprint_cells": 2,
-        "platform": "wall"
-      }
-    },
-    "station_skydome": {
-      "lookup_name": "station_skydome",
-      "scene": "res://commons/artifacts/station/station_skydome.tscn",
-      "class_name": "StationSkydome",
-      "name": "Station Skydome (atmosphere backdrop)",
-      "description": "A large UNLIT/emissive backdrop \u2014 an inward-facing bowed shell set BEHIND a bay as void or sky \u2014 for artifacts that have no scale (the dark_sphere / fractal clouds the curators had to float base-free). A vertical top_color\u2192bottom_color gradient that reads as air, never a surface; stands depth_offset back along -Z. Where a plinth says 'this one, here', the skydome gives a thing with no edge a sky to hang in.",
-      "category": "station",
-      "complexity": "beginner",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "tags": [
-        "station",
-        "modular",
-        "skydome",
-        "backdrop",
-        "atmosphere",
-        "void",
-        "sky",
-        "gradient",
-        "unlit",
-        "grid"
-      ],
-      "parameters": {
-        "width_cells": "Backdrop width in 1 m grid cells (int, default 8)",
-        "height": "Backdrop height in metres \u2014 top of the shell above the floor (default 6.0)",
-        "mode": "void (flat dark field) | sky (two stacked bands + soft seam) | gradient (smooth vertical fade)",
-        "top_color": "Top of the vertical gradient as 'r,g,b,a' (default 0.05,0.07,0.12)",
-        "bottom_color": "Bottom of the vertical gradient as 'r,g,b,a' (default 0.02,0.02,0.03)",
-        "depth_offset": "How far back the shell stands along -Z in metres (default 4.0)",
-        "curve": "How much the shell bows toward the viewer at its edges, metres (0 = flat plane, default 1.6)",
-        "segments": "Vertical strips across the width \u2014 more = smoother curve + gradient (default 14)",
-        "glow": "Emissive energy \u2014 how brightly the backdrop self-lights (default 0.85)"
-      },
-      "spatial_needs": {
-        "footprint_cells": 0,
-        "platform": "backdrop"
-      },
-      "auto_ground": false
-    }
+ "category": "station",
+ "description": "Modular grid-snapping curation-station kit \u2014 tiling walls, step-stages, plinths, pillars, and a composer that stages 1-5 artifacts on the 1 m grid. Shares the HangarKit sci-fi-lab look.",
+ "artifacts": {
+  "station_wall": {
+   "lookup_name": "station_wall",
+   "scene": "res://commons/artifacts/station/station_wall.tscn",
+   "class_name": "StationWall",
+   "name": "Station Wall (modular)",
+   "description": "A grid-modular backing wall exactly length_cells metres wide (1 m per cell) with optional start/end caps, so sections butt edge-to-edge on the grid and read as one continuous wall.",
+   "category": "station",
+   "complexity": "intermediate",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "tags": [
+    "station",
+    "modular",
+    "wall",
+    "grid",
+    "sci-fi",
+    "lab"
+   ],
+   "parameters": {
+    "length_cells": "Wall length in 1 m grid cells (int, default 2)",
+    "start_cap": "End-cap post at the -X face (bool)",
+    "end_cap": "End-cap post at the +X face (bool)",
+    "height": "Wall height in metres (default 2.5)",
+    "panel_style": "panel | ribbed | perforated",
+    "screen_slot": "Embed a framed readout (bool)",
+    "lit_seam": "Emissive seam line along the top (bool)",
+    "accent_color": "Braun-orange accent by default"
+   },
+   "spatial_needs": {
+    "footprint_cells": 2,
+    "wall_backing": true
+   }
+  },
+  "station_stage": {
+   "lookup_name": "station_stage",
+   "scene": "res://commons/artifacts/station/station_stage.tscn",
+   "class_name": "StationStage",
+   "name": "Station Stage (step deck)",
+   "description": "A grid-modular raised deck exactly width_cells x depth_cells metres, with a panelled skirt and caution-striped front lip \u2014 the platform a curated set stands on.",
+   "category": "station",
+   "complexity": "intermediate",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "tags": [
+    "station",
+    "modular",
+    "stage",
+    "step",
+    "platform",
+    "grid"
+   ],
+   "parameters": {
+    "width_cells": "Stage width in 1 m cells (int, default 5)",
+    "depth_cells": "Stage depth in 1 m cells (int, default 3)",
+    "step_height": "Deck height above floor, <= 0.35 m (default 0.22)",
+    "top_style": "solid | grate",
+    "hazard_edge": "Caution stripe on the front lip (bool)"
+   },
+   "spatial_needs": {
+    "footprint_cells": 15,
+    "platform": "step"
+   }
+  },
+  "station_plinth": {
+   "lookup_name": "station_plinth",
+   "scene": "res://commons/artifacts/station/station_plinth.tscn",
+   "class_name": "StationPlinth",
+   "name": "Station Plinth (display column)",
+   "description": "A grid-modular display plinth at ANY footprint \u2014 width_cells x depth_cells (1x1, 1x2, 1x3, 2x2, 3x3, 4x4 \u2026) with per-cell panels and a tray cap. Tall+narrow for small things, low+broad for big ones; one artifact stands on each.",
+   "category": "station",
+   "complexity": "beginner",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "tags": [
+    "station",
+    "modular",
+    "plinth",
+    "podium",
+    "display",
+    "grid"
+   ],
+   "parameters": {
+    "width_cells": "Footprint width in 1 m cells (X)",
+    "depth_cells": "Footprint depth in 1 m cells (Z) \u2014 any combo, e.g. 1x2, 2x3, 4x4",
+    "footprint_cells": "Convenience: square footprint (sets width = depth)",
+    "top_height": "Cap-top height where the artifact sits (\u22481.0 m for small, lower for big plinths)",
+    "top_style": "tray | flat | grate"
+   },
+   "spatial_needs": {
+    "footprint_cells": 1,
+    "platform": "pedestal"
+   }
+  },
+  "station_micropod": {
+   "lookup_name": "station_micropod",
+   "scene": "res://commons/artifacts/station/station_micropod.tscn",
+   "class_name": "StationPlinth",
+   "name": "Station Micro-Pedestal (sub-1 m post)",
+   "description": "A slim sub-grid pedestal (~0.6 m foot) for genuinely sub-1 m precious things \u2014 a held instrument, a thin readout \u2014 so the base no longer over-claims a full 1 m cell. Still snaps to one cell; same surface-pinned caption plate + detailing as station_plinth, built small via base_meters.",
+   "category": "station",
+   "complexity": "beginner",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "tags": [
+    "station",
+    "modular",
+    "plinth",
+    "micropod",
+    "pedestal",
+    "display",
+    "grid"
+   ],
+   "parameters": {
+    "base_meters": "Sub-grid foot width in metres (default 0.6) \u2014 the micro-pedestal size",
+    "top_height": "Cap-top height where the artifact sits (\u22481.1 m, eye level for a small thing)",
+    "caption_text": "The artifact's display name on the surface-pinned 2D-in-3D plate"
+   },
+   "spatial_needs": {
+    "footprint_cells": 1,
+    "platform": "pedestal"
+   }
+  },
+  "station_plinth_wide": {
+   "lookup_name": "station_plinth_wide",
+   "scene": "res://commons/artifacts/station/station_plinth_wide.tscn",
+   "class_name": "StationPlinth",
+   "name": "Station Plinth (wide cap, ~1 m)",
+   "description": "A 1-cell display plinth whose CAP fills the full ~1 m cell (cap_meters), not the tapered ~0.68 m of the default plinth \u2014 so a 1 m-base artifact sits FLUSH instead of overhanging. Same detailing + surface-pinned caption as station_plinth; for things measured ~0.7-1.1 m across.",
+   "category": "station",
+   "complexity": "beginner",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "tags": [
+    "station",
+    "modular",
+    "plinth",
+    "wide",
+    "pedestal",
+    "display",
+    "grid"
+   ],
+   "parameters": {
+    "cap_meters": "Fixed cap width in metres (default 1.05) \u2014 the full-cell top a 1 m artifact sits flush on",
+    "top_height": "Cap-top height where the artifact sits (default 0.9 m, lower since these are bigger things)",
+    "caption_text": "The artifact's display name on the surface-pinned 2D-in-3D plate"
+   },
+   "spatial_needs": {
+    "footprint_cells": 1,
+    "platform": "pedestal"
+   }
+  },
+  "station_pillar": {
+   "lookup_name": "station_pillar",
+   "scene": "res://commons/artifacts/station/station_pillar.tscn",
+   "class_name": "StationPillar",
+   "name": "Station Pillar (corner column)",
+   "description": "A grid-modular square column claiming one cell, with a lit accent groove and base/capital \u2014 frames a station's corners.",
+   "category": "station",
+   "complexity": "beginner",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "tags": [
+    "station",
+    "modular",
+    "pillar",
+    "column",
+    "corner",
+    "grid"
+   ],
+   "parameters": {
+    "height": "Pillar height in metres (default 2.5)",
+    "post_width": "Shaft width, fits inside a 1 m cell (default 0.42)",
+    "chamfer": "Chamfer on base + capital edges (0 = square, larger = tapered)",
+    "lit_groove": "Vertical lit accent groove (bool)",
+    "readout_face": "Small framed readout on the +Z face (bool)",
+    "cap_style": "plate | stepped | bevel \u2014 capital + base crown style",
+    "flute_count": "Vertical flutes per face (0 = single inset panel)",
+    "finish": "rams (light Braun) | terminal (dark charcoal console)",
+    "three_bar": "Dieter-Rams three-colour accent bar (bool)",
+    "bolts": "Bolt rows on foot corners + capital underside (bool)",
+    "caution_stripe": "Diagonal caution-stripe kick band at the base (bool)",
+    "dust": "Faint vertical dust streaks down the front face (bool)",
+    "signage_text": "Surface-pinned bracketed signage header (empty = none)",
+    "stencil_text": "Painted stencil text on the shaft (empty = none)"
+   },
+   "spatial_needs": {
+    "footprint_cells": 1
+   }
+  },
+  "curation_station": {
+   "lookup_name": "curation_station",
+   "scene": "res://commons/artifacts/station/curation_station.tscn",
+   "class_name": "CurationStation",
+   "name": "Curation Station (composer)",
+   "description": "The composer: give it 1-5 artifact lookup-names and it assembles a whole curation bay on the 1 m grid \u2014 step-stage, a plinth per item, a tiling backing wall with caps, framing pillars, and each artifact grounded inert on its plinth.",
+   "category": "station",
+   "complexity": "advanced",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "tags": [
+    "station",
+    "modular",
+    "curation",
+    "composer",
+    "gallery",
+    "grid"
+   ],
+   "parameters": {
+    "artifacts": "Array of 1-5 artifact lookup-names to curate",
+    "plinth_spacing_cells": "Cells between plinth centres (default 2)",
+    "stage_depth_cells": "Stage depth in cells (default 3)",
+    "with_wall": "Build the backing wall (bool)",
+    "with_pillars": "Build framing pillars (bool)",
+    "layout": "Bay shape: row (default, a front-facing line) | corner (an L \u2014 two walls, plinths along both legs)"
+   },
+   "spatial_needs": {
+    "footprint_cells": 33
+   },
+   "auto_ground": false
+  },
+  "station_cabinet": {
+   "lookup_name": "station_cabinet",
+   "scene": "res://commons/artifacts/station/station_cabinet.tscn",
+   "class_name": "StationCabinet",
+   "name": "Station Cabinet (storage / display)",
+   "description": "A grid-modular display/storage cabinet (width_cells x 1 m) with a tinted glass front and lit internal shelves \u2014 cabinets line up cell-to-cell as a glowing back wall of stored specimens.",
+   "category": "station",
+   "complexity": "intermediate",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "tags": [
+    "station",
+    "modular",
+    "cabinet",
+    "storage",
+    "display",
+    "glass",
+    "grid"
+   ],
+   "parameters": {
+    "width_cells": "Cabinet width in 1 m cells (int, default 2)",
+    "height": "Height in metres (default 1.9)",
+    "shelf_count": "Lit shelves per cell (default 4)",
+    "front_style": "glass | solid",
+    "glow_color": "Interior shelf glow colour",
+    "top_readout": "Framed readout on top (bool)"
+   },
+   "spatial_needs": {
+    "footprint_cells": 2,
+    "wall_backing": true
+   }
+  },
+  "station_barrier": {
+   "lookup_name": "station_barrier",
+   "scene": "res://commons/artifacts/station/station_barrier.tscn",
+   "class_name": "StationBarrier",
+   "name": "Station Barrier (front rail)",
+   "description": "A grid-modular front barrier (length_cells x 1 m) of posts with a low panel or rail and a caution base \u2014 marks the front edge of the stage: stand back, look, do not cross.",
+   "category": "station",
+   "complexity": "beginner",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "tags": [
+    "station",
+    "modular",
+    "barrier",
+    "rail",
+    "threshold",
+    "grid"
+   ],
+   "parameters": {
+    "length_cells": "Run length in 1 m cells (int, default 4)",
+    "height": "Barrier height in metres (default 1.0)",
+    "style": "panel | rail",
+    "brand_text": "2D-in-3D brand text across the front",
+    "hazard_base": "Caution stripe at the base (bool)"
+   },
+   "spatial_needs": {
+    "footprint_cells": 4
+   }
+  },
+  "station_panel": {
+   "lookup_name": "station_panel",
+   "scene": "res://commons/artifacts/station/station_panel.tscn",
+   "class_name": "StationPanel",
+   "name": "Station Panel (wall info screen)",
+   "description": "A grid-modular wall-mounted info panel (width_cells x 1 m) showing crisp 2D-in-3D text (a title + lines) on a dark face \u2014 mounts flat on a station_wall to caption the bay.",
+   "category": "station",
+   "complexity": "beginner",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "tags": [
+    "station",
+    "modular",
+    "panel",
+    "screen",
+    "info",
+    "2d-in-3d",
+    "grid"
+   ],
+   "parameters": {
+    "width_cells": "Panel width in 1 m cells (int, default 2)",
+    "height": "Panel height in metres (default 0.6)",
+    "header": "Title line",
+    "lines": "Array of body text lines",
+    "header_color": "Header colour (amber by default)"
+   },
+   "spatial_needs": {
+    "footprint_cells": 2,
+    "wall_backing": true
+   }
+  },
+  "station_bench": {
+   "lookup_name": "station_bench",
+   "scene": "res://commons/artifacts/station/station_bench.tscn",
+   "class_name": "StationBench",
+   "name": "Station Bench (workbench)",
+   "description": "A grid-modular worktable (length_cells x depth_cells) with a top at working height, apron, legs, and optional drawers \u2014 the flat way to present a set, laid out rather than raised on plinths.",
+   "category": "station",
+   "complexity": "beginner",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "tags": [
+    "station",
+    "modular",
+    "bench",
+    "workbench",
+    "table",
+    "grid"
+   ],
+   "parameters": {
+    "length_cells": "Bench length in 1 m cells (int, default 2)",
+    "depth_cells": "Bench depth in 1 m cells (int, default 1)",
+    "top_height": "Work-surface height in metres (default 0.92)",
+    "drawers": "Drawer block under one end (bool)"
+   },
+   "spatial_needs": {
+    "footprint_cells": 2,
+    "platform": "table"
+   }
+  },
+  "station_crates": {
+   "lookup_name": "station_crates",
+   "scene": "res://commons/artifacts/station/station_crates.tscn",
+   "class_name": "StationCrates",
+   "name": "Station Crates (supply stack)",
+   "description": "A grid-modular cluster of stacked crates and a canister with hazard labels, filling one cell \u2014 the lived-in back-of-house clutter that makes a clean stage believable.",
+   "category": "station",
+   "complexity": "beginner",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "tags": [
+    "station",
+    "modular",
+    "crates",
+    "boxes",
+    "supply",
+    "props",
+    "grid"
+   ],
+   "parameters": {
+    "footprint_cells": "Square footprint in cells (default 1)",
+    "crate_count": "Number of crates 1-6 (default 4)",
+    "palette": "cardboard | wood | metal",
+    "with_canister": "Add a gas canister (bool)"
+   },
+   "spatial_needs": {
+    "footprint_cells": 1
+   }
+  },
+  "station_ascent": {
+   "lookup_name": "station_ascent",
+   "scene": "res://commons/artifacts/station/station_ascent.tscn",
+   "class_name": "StationAscent",
+   "name": "Station Ascent (passage up)",
+   "description": "The station kit's PASSAGE piece \u2014 a painted-metal way up onto a tall stage or between heights, built as a flight of treads (stair), two stiles + rungs (ladder), or an inclined deck (ramp) sized to rise. Worn treads, an emissive nosing line per step edge, an optional handrail. Origin at the foot; the top of the run lands at rise.",
+   "category": "station",
+   "complexity": "beginner",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "tags": [
+    "station",
+    "modular",
+    "ascent",
+    "stair",
+    "ladder",
+    "ramp",
+    "passage",
+    "grid"
+   ],
+   "parameters": {
+    "rise": "Total height to climb in metres \u2014 the top of the run lands here (default 1.0)",
+    "style": "stair (flight of treads) | ladder (stiles + rungs) | ramp (inclined deck)",
+    "width": "Clear width of the climb in metres \u2014 tread width / rung span / ramp deck width (default 1.0)",
+    "handrail": "A handrail (posts + top rail) running up the climb (bool, default true)",
+    "stringers": "Worn-metal side stringers / rails framing the run (bool)",
+    "nosing_light": "Emissive nosing line on each step edge / rung / ramp lip (bool)",
+    "hazard_foot": "Diagonal caution-stripe kick band on the foot landing (bool)",
+    "body_color": "Painted-metal body colour as r,g,b,a string",
+    "tread_color": "Worn-metal tread / rung / deck colour as r,g,b,a string",
+    "accent_color": "Emissive nosing accent as r,g,b,a string (Braun-orange by default)"
+   },
+   "spatial_needs": {
+    "footprint_cells": 2,
+    "platform": "step"
+   }
+  },
+  "station_floorline": {
+   "lookup_name": "station_floorline",
+   "scene": "res://commons/artifacts/station/station_floorline.tscn",
+   "class_name": "StationFloorline",
+   "name": "Station Floorline (processional strip)",
+   "description": "A flush floor element (~2 cm proud) that connects rather than isolates \u2014 a lit strip you read with your feet. Three styles: 'line' (a single lit groove joining two bays), 'path' (a dashed runner with directional chevrons), 'threshold' (a wider crossing bar with end ticks). direction points the chevrons along +X / none / -X. The kit's first piece about between, not on \u2014 laid between two curated bays to make the walk legible.",
+   "category": "station",
+   "complexity": "beginner",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "tags": [
+    "station",
+    "floorline",
+    "floor",
+    "path",
+    "threshold",
+    "processional",
+    "relation",
+    "flush"
+   ],
+   "parameters": {
+    "length_cells": "Length of the run in 1 m cells along +X (joins one bay to the next)",
+    "width": "Strip width across Z in metres (~0.2 broad-line to ~0.6 processional bar)",
+    "style": "line | path | threshold",
+    "direction": "Chevron direction: 1 = toward +X, -1 = toward -X, 0 = no chevrons",
+    "accent_color": "Lit accent colour as an 'r,g,b,a' string"
+   },
+   "spatial_needs": {
+    "footprint_cells": 3,
+    "platform": "floor"
+   }
+  },
+  "station_luminaire": {
+   "lookup_name": "station_luminaire",
+   "scene": "res://commons/artifacts/station/station_luminaire.tscn",
+   "class_name": "StationLuminaire",
+   "name": "Station Luminaire (light fixture)",
+   "description": "The station kit's only source of light \u2014 a painted-metal Dieter-Rams fixture carrying a REAL Godot light. mode=task is an aimed SpotLight3D on a gooseneck arm leaning over one focal bay; mode=area is a soft OmniLight3D in a hung housing dropped on a thin rod over a whole bay. Origin at the floor; it acts ON the other props by lighting them, not beside them.",
+   "category": "station",
+   "complexity": "beginner",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "tags": [
+    "station",
+    "light",
+    "luminaire",
+    "fixture",
+    "spotlight",
+    "lighting"
+   ],
+   "parameters": {
+    "mode": "task (aimed SpotLight on a gooseneck over a focal bay) | area (soft OmniLight in a hung housing)",
+    "height": "Mount height in metres \u2014 gooseneck post top (task) or ceiling plane the housing hangs from (area)",
+    "intensity": "Real light energy (SpotLight3D / OmniLight3D light_energy)",
+    "light_color": "Light + lens colour as a string 'r,g,b,a'",
+    "warm": "true = warm tungsten bias, false = cool clinical white",
+    "arm_reach": "How far the gooseneck arm reaches out over the work in metres (task mode)"
+   },
+   "spatial_needs": {
+    "footprint_cells": 1,
+    "platform": "floor"
+   }
+  },
+  "station_task_light": {
+   "lookup_name": "station_task_light",
+   "scene": "res://commons/artifacts/station/station_task_light.tscn",
+   "class_name": "StationTaskLight",
+   "name": "Station Task Light (clamp / pole lamp)",
+   "description": "A painted-metal task lamp: a C-clamp or weighted base_plate foot, a jointed counter-balanced arm, and a shade head (bell / softbox / tube) carrying a REAL SpotLight3D. head_style=softbox + clamp_style=base_plate = a floor-standing gallery softbox on a stand \u2014 the staging's optional POLE LIGHT (vs the plinth's integrated cap glow).",
+   "category": "station",
+   "complexity": "beginner",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "tags": [
+    "station",
+    "light",
+    "task",
+    "lamp",
+    "softbox",
+    "lighting"
+   ],
+   "spatial_needs": {
+    "footprint_cells": 1,
+    "platform": "floor"
+   }
+  },
+  "station_multiscreen": {
+   "lookup_name": "station_multiscreen",
+   "scene": "res://commons/artifacts/station/station_multiscreen.tscn",
+   "class_name": "StationMultiscreen",
+   "name": "Station Multiscreen (convergence panel)",
+   "description": "A wall-mounted painted-metal panel divided into an R x C grid of 2D-in-3D readout cells, each its own captioned face, behind one shared bezel and header strip \u2014 for the four-views / convergence capstones a single station_panel can't hold. 1x2 = before/after, 2x2 = four views, 1xN = a filmstrip of stages. Mounts flat on a station_wall (front face +Z, wall:true when placed).",
+   "category": "station",
+   "complexity": "beginner",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "tags": [
+    "station",
+    "modular",
+    "multiscreen",
+    "panel",
+    "convergence",
+    "display",
+    "wall",
+    "grid"
+   ],
+   "parameters": {
+    "rows": "Number of cell rows (top to bottom)",
+    "cols": "Number of cell columns (left to right)",
+    "cell_labels": "Array of short captions, ROW-MAJOR (one per cell, left-to-right then top-to-bottom)",
+    "header": "Title shown on the header strip across the whole lattice",
+    "panel_w": "Overall panel width in metres",
+    "panel_h": "Overall panel height in metres",
+    "accent_color": "Header accent line + title tint (\"r,g,b,a\" string)"
+   },
+   "spatial_needs": {
+    "footprint_cells": 2,
+    "platform": "wall"
+   }
+  },
+  "station_skydome": {
+   "lookup_name": "station_skydome",
+   "scene": "res://commons/artifacts/station/station_skydome.tscn",
+   "class_name": "StationSkydome",
+   "name": "Station Skydome (atmosphere backdrop)",
+   "description": "A large UNLIT/emissive backdrop \u2014 an inward-facing bowed shell set BEHIND a bay as void or sky \u2014 for artifacts that have no scale (the dark_sphere / fractal clouds the curators had to float base-free). A vertical top_color\u2192bottom_color gradient that reads as air, never a surface; stands depth_offset back along -Z. Where a plinth says 'this one, here', the skydome gives a thing with no edge a sky to hang in.",
+   "category": "station",
+   "complexity": "beginner",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "tags": [
+    "station",
+    "modular",
+    "skydome",
+    "backdrop",
+    "atmosphere",
+    "void",
+    "sky",
+    "gradient",
+    "unlit",
+    "grid"
+   ],
+   "parameters": {
+    "width_cells": "Backdrop width in 1 m grid cells (int, default 8)",
+    "height": "Backdrop height in metres \u2014 top of the shell above the floor (default 6.0)",
+    "mode": "void (flat dark field) | sky (two stacked bands + soft seam) | gradient (smooth vertical fade)",
+    "top_color": "Top of the vertical gradient as 'r,g,b,a' (default 0.05,0.07,0.12)",
+    "bottom_color": "Bottom of the vertical gradient as 'r,g,b,a' (default 0.02,0.02,0.03)",
+    "depth_offset": "How far back the shell stands along -Z in metres (default 4.0)",
+    "curve": "How much the shell bows toward the viewer at its edges, metres (0 = flat plane, default 1.6)",
+    "segments": "Vertical strips across the width \u2014 more = smoother curve + gradient (default 14)",
+    "glow": "Emissive energy \u2014 how brightly the backdrop self-lights (default 0.85)"
+   },
+   "spatial_needs": {
+    "footprint_cells": 0,
+    "platform": "backdrop"
+   },
+   "auto_ground": false
+  },
+  "station_wall_module": {
+   "lookup_name": "station_wall_module",
+   "scene": "res://commons/artifacts/station/station_wall_module.tscn",
+   "class_name": "StationWallModule",
+   "name": "Station Wall Module (working segment)",
+   "description": "A combinable wall SEGMENT (1 m/cell) carrying one kind of wall work: whiteboard, small display, glass bay, vertical pipe drops, cable tray with conduit drop, louvred vent, hazard chevron, or the endcap - the short ending that closes a run on purpose.",
+   "category": "station",
+   "complexity": "beginner",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "tags": [
+    "station",
+    "modular",
+    "wall",
+    "segment",
+    "whiteboard",
+    "display",
+    "glass",
+    "pipes",
+    "vent",
+    "endcap",
+    "grid"
+   ]
+  },
+  "station_ceiling": {
+   "lookup_name": "station_ceiling",
+   "scene": "res://commons/artifacts/station/station_ceiling.tscn",
+   "class_name": "StationCeiling",
+   "name": "Station Ceiling (overhead run)",
+   "description": "The kit's overhead member - a grid-modular ceiling run at mount_height in four kinds: coffered tiles (one lit), hung cable tray, vent duct with diffuser, painted I-beam. Origin at the floor centre; builds upward.",
+   "category": "station",
+   "complexity": "beginner",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "tags": [
+    "station",
+    "modular",
+    "ceiling",
+    "overhead",
+    "tray",
+    "duct",
+    "beam",
+    "grid"
+   ]
+  },
+  "station_floor_module": {
+   "lookup_name": "station_floor_module",
+   "scene": "res://commons/artifacts/station/station_floor_module.tscn",
+   "class_name": "StationFloorModule",
+   "name": "Station Floor Module (working floor)",
+   "description": "Floor that DOES something: walkable grate over a dark cavity, recessed cable channel with cover plates and a lit slit, or a bolted access hatch. Flush-proud like the floorline, read with the feet.",
+   "category": "station",
+   "complexity": "beginner",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "tags": [
+    "station",
+    "modular",
+    "floor",
+    "grate",
+    "channel",
+    "hatch",
+    "grid"
+   ]
   }
+ }
 }

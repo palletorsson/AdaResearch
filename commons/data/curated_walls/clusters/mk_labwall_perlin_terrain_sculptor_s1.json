@@ -1,0 +1,220 @@
+{
+ "name": "mk_labwall_perlin_terrain_sculptor_s1",
+ "source": "modkit auto-seed (station_modules.json)",
+ "pieces": [
+  {
+   "token": "station_wall_module",
+   "x": -0.15,
+   "y": 0.0,
+   "z": 0.0,
+   "wall": true,
+   "config": {
+    "kind": "endcap",
+    "flip": true
+   }
+  },
+  {
+   "token": "station_wall_module",
+   "x": 1.0,
+   "y": 0.0,
+   "z": 0.0,
+   "wall": true,
+   "config": {
+    "kind": "whiteboard",
+    "length_cells": 2,
+    "seed": 3
+   }
+  },
+  {
+   "token": "station_wall_module",
+   "x": 2.5,
+   "y": 0.0,
+   "z": 0.0,
+   "wall": true,
+   "config": {
+    "kind": "display"
+   }
+  },
+  {
+   "token": "station_wall_module",
+   "x": 3.5,
+   "y": 0.0,
+   "z": 0.0,
+   "wall": true,
+   "config": {
+    "kind": "vent"
+   }
+  },
+  {
+   "token": "station_wall_module",
+   "x": 5.0,
+   "y": 0.0,
+   "z": 0.0,
+   "wall": true,
+   "config": {
+    "kind": "glass",
+    "length_cells": 2
+   }
+  },
+  {
+   "token": "station_wall_module",
+   "x": 6.5,
+   "y": 0.0,
+   "z": 0.0,
+   "wall": true,
+   "config": {
+    "kind": "pipes"
+   }
+  },
+  {
+   "token": "station_wall_module",
+   "x": 8.0,
+   "y": 0.0,
+   "z": 0.0,
+   "wall": true,
+   "config": {
+    "kind": "cabletray",
+    "length_cells": 2,
+    "seed": 5
+   }
+  },
+  {
+   "token": "station_wall_module",
+   "x": 9.15,
+   "y": 0.0,
+   "z": 0.0,
+   "wall": true,
+   "config": {
+    "kind": "endcap"
+   }
+  },
+  {
+   "token": "station_ceiling",
+   "x": 2.0,
+   "y": 0.0,
+   "z": 0.8,
+   "wall": false,
+   "config": {
+    "kind": "tiles",
+    "length_cells": 4
+   }
+  },
+  {
+   "token": "station_ceiling",
+   "x": 6.5,
+   "y": 0.0,
+   "z": 0.8,
+   "wall": false,
+   "config": {
+    "kind": "tray",
+    "length_cells": 4
+   }
+  },
+  {
+   "token": "station_ceiling",
+   "x": 4.5,
+   "y": 0.0,
+   "z": 1.8,
+   "wall": false,
+   "config": {
+    "kind": "duct",
+    "length_cells": 3
+   }
+  },
+  {
+   "token": "station_floor_module",
+   "x": 4.0,
+   "y": 0.0,
+   "z": 1.2,
+   "wall": false,
+   "config": {
+    "kind": "channel",
+    "length_cells": 5
+   }
+  },
+  {
+   "token": "station_floor_module",
+   "x": 8.0,
+   "y": 0.0,
+   "z": 1.5,
+   "wall": false,
+   "config": {
+    "kind": "grate",
+    "length_cells": 2
+   }
+  },
+  {
+   "token": "station_floor_module",
+   "x": 1.0,
+   "y": 0.0,
+   "z": 2.2,
+   "wall": false,
+   "config": {
+    "kind": "hatch"
+   }
+  },
+  {
+   "token": "station_plinth",
+   "x": 4.5,
+   "y": 0.0,
+   "z": 1.7,
+   "wall": false,
+   "config": {
+    "width_cells": 1,
+    "depth_cells": 1,
+    "top_height": 1.05,
+    "cap_inset": 0.1,
+    "caption_text": "perlin terrain sculptor"
+   }
+  },
+  {
+   "token": "perlin_terrain_sculptor",
+   "x": 4.5,
+   "y": 1.05,
+   "z": 1.7,
+   "wall": false
+  },
+  {
+   "token": "station_plinth",
+   "x": 6.8,
+   "y": 0.0,
+   "z": 1.6,
+   "wall": false,
+   "config": {
+    "width_cells": 1,
+    "depth_cells": 1,
+    "top_height": 1.05,
+    "cap_inset": 0.1,
+    "caption_text": "perlin noise bridge"
+   }
+  },
+  {
+   "token": "perlin_noise_bridge",
+   "x": 6.8,
+   "y": 1.05,
+   "z": 1.6,
+   "wall": false
+  },
+  {
+   "token": "dna_color_furniture_furniture_lamp_warm_glow",
+   "x": 2.8,
+   "y": 0.0,
+   "z": 2.3,
+   "wall": false
+  },
+  {
+   "token": "lab_stool",
+   "x": 5.8,
+   "y": 0.0,
+   "z": 2.5,
+   "wall": false
+  },
+  {
+   "token": "station_floorline#length_cells:9#style:line",
+   "x": 4.5,
+   "y": 0.0,
+   "z": 2.8,
+   "wall": false
+  }
+ ]
+}
