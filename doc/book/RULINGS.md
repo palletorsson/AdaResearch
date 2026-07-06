@@ -559,4 +559,43 @@ DISTINCT artifacts, agreeing with baseline.py (primitives: 49).
 
 ---
 
-<!-- Next: R-025 — walk primitives to confirm beats in the body, LOCK ch.1; draft color + forces baselines; noise truths; Ignorance settle -->
+## R-025 · 2026-07-06 · The tutorial arc, cast (all 22 baselines)
+
+**Palle:** "Let's write the book and bases as a full tutorial baseline, like NOC for Godot
+3D with all sequences. Pedagogically sound, building on previous chapters."
+
+**Ruling:** The full spine is authored and cast.
+- **doc/book/arc.json** — the pedagogical backbone: every chapter's concept, `builds_on`
+  dependencies, and beat-role skeleton, authored so each chapter builds on prior vocabulary
+  (forces builds on change builds on transformation builds on primitives). ARC.md = the
+  readable table of contents. The dependency chain is acyclic and spine-ordered.
+- **doc/book/baselines/<seq>.json × 22** — each chapter's beats cast against its REAL map
+  inventory + critical voltage, fanned out per-sequence (closed-inventory casting, validated
+  in-inventory). 189 beats + 96 voltage. 21/22 meet baseline; boolean_surfaces honestly short
+  (the thin chapter, uncast "two solids").
+- **The at-depth reserves answer "too many artifacts":** forces keeps 131, wavefunctions 63,
+  primitives 49, randomness 45 — the book uses ~15/chapter, the rest kept and dig-honored.
+
+**Cross-chapter findings (the audit surfaced structural gaps):**
+1. The **"prove it" exit-test beat is weak across most chapters** — only primitives, arrays,
+   randomness, forces, qfep have real snap/puzzle artifacts; the rest lack an exit test. A
+   small per-chapter exit-puzzle family is the highest-leverage authoring gap.
+2. **Artifacts live in the wrong sequence's inventory:** noise's flow-field pieces sit in
+   forces/randomness; softbodies' mass-spring pieces sit in forces; halting-problem pieces
+   sit outside foundationscrisis. Cross-sequence casting is blocked by inventory boundaries.
+3. **cellularautomata and proceduralgeneration** are all-whole-simulation, no teaching
+   primitives (cell, neighborhood, tile, WFC-proper) — 4-5 weak each.
+
+**The voltage IS the book's critical spine** (a sample): Calder's mass-as-political-balance,
+RAND's 1955 book of frozen chance, the Chladni nodal plate, Physarum trace-as-cognition,
+reaction-diffusion as Turing's last work, Königsberg's foreclosed crossings, gradient descent
+as the forces chapter returning, the QFEP hand-spheres, Florensky's paraconsistency, the
+archive-not-the-exit. Turing thinking with QFEP, per chapter.
+
+Note: postfoundationscrisis enriched its roles beyond the arc skeleton (8 vs 6, richer); kept
+as cast, arc.json to be reconciled. Selection is now SOLVED for all 22 — the remaining work is
+walks (walked.md) + considered passes + rooms + Palle's hand on the locks.
+
+---
+
+<!-- Next: R-026 — walk primitives, LOCK ch.1; author the exit-test family (the cross-chapter gap); reconcile arc roles; noise truths -->

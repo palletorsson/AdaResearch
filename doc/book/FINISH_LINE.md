@@ -17,28 +17,28 @@ finished when its beats are cast, not when the inventory is exhausted (R-023).
 
 | # | chapter | baseline | walked.md | considered pass | chapter room (candidate) | LOCKED |
 |---|---------|----------|-----------|-----------------|--------------------------|--------|
-| 1 | primitives | ✅ MET 10+5 (49 at depth) | 0/10 seeded ✳ | ✅ pass exists → re-curate from walks | Walls_Primitives / Hangar_Primitives | ☐ |
-| 2 | transformation | — | — | — | (staircase monolith exists) | ☐ |
-| 3 | array_tutorial | — | — | — | — | ☐ |
-| 4 | color | — | — | — | — | ☐ |
-| 5 | change | — | — | — | — | ☐ |
-| 6 | isosurfaces | — | — | — | (mc_sculpt island exists) | ☐ |
-| 7 | boolean_surfaces | — | — | — | — (thin chapter, pearls missing too) | ☐ |
-| 8 | forces | — | — | — | (Vectors_Act rooms + curated walls) | ☐ |
-| 9 | wavefunctions | — | — | — | — | ☐ |
-| 10 | randomness | — | — | ✅ pass exists | 13× Room_Random_* — choose | ☐ |
-| 11 | noise | — | — | ✅ pass exists | (perlin island + labwall) | ☐ |
-| 12 | cellularautomata | — | — | — | /ca-map ladder | ☐ |
-| 13 | fractals | — | — | ✅ pass exists | Hangar_Fractals_Walk | ☐ |
-| 14 | lsystems | — | — | — | /lsystem-map ladder | ☐ |
-| 15 | proceduralgeneration | — | — | — | /procgen-map ladder | ☐ |
-| 16 | swarmintelligence | — | — | — | (boids headless-hostile; care) | ☐ |
-| 17 | softbodies | — | — | — | /softbody-map ladder | ☐ |
-| 18 | machinelearning | — | — | — | (51m CNN worlds — monument chapter) | ☐ |
-| 19 | graphtheory | — | — | — | — | ☐ |
-| 20 | foundationscrisis | — | — | — | QFEP lab maps — choose | ☐ |
-| 21 | qfeplaboratory | — | — | — | QFEP lab maps — choose | ☐ |
-| 22 | postfoundationscrisis | — | — | — | QFEP lab maps — choose | ☐ |
+| 1 | primitives | ✅ MET 10+5 (49 deep) | 0/10 seeded ✳ | ✅ pass exists → re-curate from walks | Walls_Primitives / Hangar_Primitives | ☐ |
+| 2 | transformation | ✅ MET 10+5 (5 deep) | — | — | (staircase monolith exists) | ☐ |
+| 3 | array_tutorial | ✅ MET 9+4 (10 deep) | — | — | — | ☐ |
+| 4 | color | ✅ MET 9+5 (32 deep) | — | — | — | ☐ |
+| 5 | change | ✅ MET 9+4 (0 deep) | — | — | — | ☐ |
+| 6 | isosurfaces | ✅ MET 9+3 (11 deep) | — | — | (mc_sculpt island exists) | ☐ |
+| 7 | boolean_surfaces | ◐ 4/5b 1/1v (thin) | — | — | — (thin chapter, pearls missing too) | ☐ |
+| 8 | forces | ✅ MET 10+5 (131 deep) | — | — | (Vectors_Act rooms + curated walls) | ☐ |
+| 9 | wavefunctions | ✅ MET 10+5 (63 deep) | — | — | — | ☐ |
+| 10 | randomness | ✅ MET 9+5 (45 deep) | — | ✅ pass exists | 13× Room_Random_* — choose | ☐ |
+| 11 | noise | ✅ MET 9+4 (3 deep) | — | ✅ pass exists | (perlin island + labwall) | ☐ |
+| 12 | cellularautomata | ✅ MET 9+5 (7 deep) | — | — | /ca-map ladder | ☐ |
+| 13 | fractals | ✅ MET 8+5 (27 deep) | — | ✅ pass exists | Hangar_Fractals_Walk | ☐ |
+| 14 | lsystems | ✅ MET 8+4 (1 deep) | — | — | /lsystem-map ladder | ☐ |
+| 15 | proceduralgeneration | ✅ MET 8+4 (2 deep) | — | — | /procgen-map ladder | ☐ |
+| 16 | swarmintelligence | ✅ MET 8+4 (1 deep) | — | — | (boids headless-hostile; care) | ☐ |
+| 17 | softbodies | ✅ MET 9+5 (5 deep) | — | — | /softbody-map ladder | ☐ |
+| 18 | machinelearning | ✅ MET 9+5 (4 deep) | — | — | (51m CNN worlds — monument chapter) | ☐ |
+| 19 | graphtheory | ✅ MET 7+4 (0 deep) | — | — | — | ☐ |
+| 20 | foundationscrisis | ✅ MET 8+5 (13 deep) | — | — | QFEP lab maps — choose | ☐ |
+| 21 | qfeplaboratory | ✅ MET 8+5 (17 deep) | — | — | QFEP lab maps — choose | ☐ |
+| 22 | postfoundationscrisis | ✅ MET 8+4 (3 deep) | — | — | QFEP lab maps — choose | ☐ |
 
 ✳ primitives' ten `walked.md` pages are seeded (ghost, from blurb+intent) and
 await their walks: Point_One, Point_Lines, Point_Trace, Point_Line_Grid,
