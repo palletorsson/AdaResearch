@@ -31,6 +31,9 @@ const SPINE_WALLS_PATH := "res://commons/data/spine_walls.json"
 const DNA_PROPS_PATH := "res://commons/data/dna_props.json"
 const CURATED_WALLS_DIR := "res://commons/data/curated_walls"
 const CLUSTERS_DIR := "res://commons/data/curated_walls/clusters"
+# Interactive start scene — the Lab Wall (combined segments) opens ready to edit.
+# Override with `--cluster=<name>` in user args.
+const START_CLUSTER := "mk_labwall_perlin_terrain_sculptor_s1"
 # Lookup-names that mount on the wall (everything else falls to the floor + stacks).
 const WALL_SET := ["station_panel", "station_frame", "framed_readout_screen"]
 # Registries treated as staging PROPS (bottom bar); everything else = artifacts (left).
@@ -100,6 +103,13 @@ func _ready() -> void:
 		return
 	if OS.get_cmdline_user_args().has("--validate-props") or OS.get_cmdline_user_args().has("--validate-curated"):
 		_run_validate_props()   # one plinth+artifact per held item -> user://prop_shots[_curated]/ + verdicts
+		return
+	# Interactive: open on the start scene (Lab Wall), or --cluster=<name>.
+	var want := START_CLUSTER
+	for a in OS.get_cmdline_user_args():
+		if str(a).begins_with("--cluster="):
+			want = str(a).substr(10)
+	_load_cluster_by_name(want)
 
 
 func _load_data() -> void:
@@ -1463,6 +1473,11 @@ func _consume_cluster_handoff() -> bool:
 		f.close()
 	if cname == "":
 		return false
+	return _load_cluster_by_name(cname)
+
+
+## Load a curated cluster by name as the editable scene. K saves back to it.
+func _load_cluster_by_name(cname: String) -> bool:
 	var cpath := "%s/%s.json" % [CLUSTERS_DIR, cname]
 	if not FileAccess.file_exists(cpath):
 		_status("cluster not found: clusters/%s.json" % cname)
