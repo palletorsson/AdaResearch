@@ -1,0 +1,1 @@
+The wall vocabulary hung in one walkable room. Whiteboard, small display, vent, glass bay, pipe drops, cable tray, and the two endcaps that close the run on purpose — with services continuing overhead (tiles, tray, duct) and underfoot (channel, grate, hatch). Walk the run and read the meets.
