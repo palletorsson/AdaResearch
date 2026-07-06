@@ -51,27 +51,36 @@ def build_registry() -> dict:
     return m
 
 
-def essence_of(name: str, scene: str) -> str:
-    """the code DNA — the @identity essence line from the artifact's .gd."""
+def gd_path(name: str, scene: str) -> str:
+    """resolve an artifact's .gd file path from its scene, or '' if not found."""
     if not scene:
         return ""
     gd = scene.replace("res://", REPO + os.sep).replace("/", os.sep)
     gd = re.sub(r"\.tscn$", ".gd", gd)
     if not os.path.exists(gd):
-        # try same-dir <name>.gd
-        d = os.path.dirname(gd)
-        alt = os.path.join(d, name + ".gd")
+        alt = os.path.join(os.path.dirname(gd), name + ".gd")
         gd = alt if os.path.exists(alt) else gd
-    if not os.path.exists(gd):
+    return gd if os.path.exists(gd) else ""
+
+
+def essence_of(gd: str) -> str:
+    """the code DNA — the @identity essence line from the artifact's .gd."""
+    if not gd:
         return ""
     try:
         txt = open(gd, encoding="utf-8", errors="ignore").read()
     except Exception:
         return ""
     m = re.search(r"#\s*essence:\s*(.+)", txt)
-    if m:
-        return m.group(1).strip()
-    return ""
+    return m.group(1).strip() if m else ""
+
+
+def mtime_of(gd: str) -> float:
+    """the .gd's last-modified unix timestamp (0 if unknown) — the 'last changed' key."""
+    try:
+        return os.path.getmtime(gd) if gd else 0.0
+    except OSError:
+        return 0.0
 
 
 def capture_of(name: str) -> str:
@@ -123,6 +132,7 @@ def main() -> int:
     entries = []
     for name, e in key.items():
         scene = reg.get(name, "")
+        gd = gd_path(name, scene)
         is_hero = bool(e["beats"])
         is_volt = bool(e["voltage"])
         tier = ("hero_voltage" if is_hero and is_volt
@@ -139,9 +149,10 @@ def main() -> int:
             "beats": e["beats"],
             "voltage": e["voltage"],
             "alts": e["alts"],
-            "essence": essence_of(name, scene),
+            "essence": essence_of(gd),
             "capture": capture_of(name),
             "scene": scene,
+            "mtime": round(mtime_of(gd)),
             "has_md": os.path.exists(os.path.join(PUB, "artifact-md", name + ".md")),
         })
 
