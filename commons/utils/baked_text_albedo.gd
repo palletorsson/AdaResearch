@@ -232,7 +232,7 @@ static func make_tag(text: String, text_color: Color = Color(0.9, 0.95, 1.0),
 		billboard: bool = true, accent: Color = Color(0.86, 0.40, 0.16)) -> Node3D:
 	if text.is_empty():
 		return null
-	var w: float = world_h * (0.5 + 0.62 * float(text.length()))   # auto-fit width to text
+	var w: float = world_h * (0.9 + 0.66 * float(text.length()))   # auto-fit width to text (+margin so nothing clips)
 	var root := Node3D.new()
 	root.name = "Tag"
 	var bb := BaseMaterial3D.BILLBOARD_ENABLED if billboard else BaseMaterial3D.BILLBOARD_DISABLED
@@ -277,8 +277,8 @@ static func make_tag(text: String, text_color: Color = Color(0.9, 0.95, 1.0),
 		edge.material_override = emat
 		edge.position = Vector3(0, -world_h * 0.44, 0.004)
 		root.add_child(edge)
-	# Baked text on the face.
-	var label := make_label_mesh(text, text_color, Vector2(w * 0.88, world_h * 0.66), 1400, true)
+	# Baked text on the face — sized with margin inside the board so glyphs never touch the bezel.
+	var label := make_label_mesh(text, text_color, Vector2(w * 0.86, world_h * 0.6), 1400, true)
 	if label:
 		label.position.z = 0.005
 		if billboard:
