@@ -537,4 +537,26 @@ Palle's walk + hand.
 
 ---
 
-<!-- Next: R-024 — walk primitives to confirm the baseline in the body, then LOCK ch.1; draft color + vectors baselines; noise truths; Ignorance settle -->
+## R-024 · 2026-07-06 · The composition view (need · potential · actual)
+
+**Palle:** "A three split interface: first the baseline order for each sequence; then the
+potential — baseline plus divergence based on critical thinking; then the difference —
+how the actual maps look. Could this work?"
+
+**Ruling:** Yes — it is the cockpit for the chapter loop, and freeze-legal because it is
+the READING FACE of baseline.py + compositor.py, not new machinery. `/composition` shows
+three orders per sequence:
+- **NEED** — the baseline beats (plain tutorial, concept order); each cast tagged
+  present / understudy / uncast.
+- **POTENTIAL** — the beats with the critical VOLTAGE woven in at its anchor (voltage
+  gains an `after: <beat role>` field); the Ada version, where the criticism enters.
+- **ACTUAL** — the maps as they walk, every artifact tagged beat / understudy / voltage
+  / at-depth.
+Hovering an artifact traces it across all three columns; the gaps NEED→POTENTIAL (the
+criticism) and POTENTIAL→ACTUAL (the compositor's divergence) are the visible work.
+Built by tools/build_composition_view.py → composition-view.json. The depth count is
+DISTINCT artifacts, agreeing with baseline.py (primitives: 49).
+
+---
+
+<!-- Next: R-025 — walk primitives to confirm beats in the body, LOCK ch.1; draft color + forces baselines; noise truths; Ignorance settle -->

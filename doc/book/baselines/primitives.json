@@ -3,7 +3,7 @@
  "sequence": "primitives",
  "beats": [
   {
-   "role": "arrive \u2014 you are here",
+   "role": "arrive — you are here",
    "cast": "you_are_here",
    "alts": [
     "origin",
@@ -19,14 +19,14 @@
    ]
   },
   {
-   "role": "the point moves \u2014 the trace",
+   "role": "the point moves — the trace",
    "cast": "player_trace",
    "alts": [
     "mystic_writing_pad"
    ]
   },
   {
-   "role": "two points \u2014 the line",
+   "role": "two points — the line",
    "cast": "line_builder_3d",
    "alts": [
     "grabbable_line",
@@ -41,14 +41,14 @@
    ]
   },
   {
-   "role": "lines repeat \u2014 the grid",
+   "role": "lines repeat — the grid",
    "cast": "dgrid",
    "alts": [
     "grid_lines"
    ]
   },
   {
-   "role": "three points \u2014 the plane",
+   "role": "three points — the plane",
    "cast": "interactivetriangle",
    "alts": [
     "draw_triangle_faces",
@@ -56,7 +56,7 @@
    ]
   },
   {
-   "role": "planes close \u2014 the solid",
+   "role": "planes close — the solid",
    "cast": "platonic_grabbables",
    "alts": [
     "grab_trihedron",
@@ -71,7 +71,7 @@
    ]
   },
   {
-   "role": "prove it \u2014 the exit test",
+   "role": "prove it — the exit test",
    "cast": "snap_tetrahedron_puzzle",
    "alts": [
     "snap_pyramid_puzzle",
@@ -81,24 +81,29 @@
  ],
  "voltage": [
   {
+   "piece": "folding_past",
+   "why": "memory in the room — the map remembers being walked",
+   "after": "arrive — you are here"
+  },
+  {
    "piece": "fontana_puncture",
-   "why": "the point as WOUND \u2014 Fontana's cut; the primitive arrives as violence to the plane"
+   "why": "the point as WOUND — Fontana's cut; the primitive arrives as violence to the plane",
+   "after": "meet the point"
   },
   {
    "piece": "klee_walking_point",
-   "why": "the line as a WALK \u2014 Klee; drawing as time, the trace as biography"
-  },
-  {
-   "piece": "folding_past",
-   "why": "memory in the room \u2014 the map remembers being walked"
-  },
-  {
-   "piece": "becoming_catalyst",
-   "why": "the primitive that changes YOU \u2014 QFEP becoming, the queer turn on 'building blocks'"
+   "why": "the line as a WALK — Klee; drawing as time, the trace as biography",
+   "after": "two points — the line"
   },
   {
    "piece": "durer_scene",
-   "why": "Melencolia \u2014 the polyhedron with a biography; geometry carries grief (the Turing move)"
+   "why": "Melencolia — the polyhedron with a biography; geometry carries grief (the Turing move)",
+   "after": "planes close — the solid"
+  },
+  {
+   "piece": "becoming_catalyst",
+   "why": "the primitive that changes YOU — QFEP becoming, the queer turn on 'building blocks'",
+   "after": "build one yourself"
   }
  ]
 }
