@@ -451,4 +451,31 @@ Status at ratification: 4/22 passes exist (primitives, randomness, noise, fracta
 
 ---
 
-<!-- Next: R-021 — noise truths (Palle wording) + Ignorance settle + "the meeting" as book motif + per-chapter rulings as the loop runs -->
+## R-021 · 2026-07-06 · The walking scope (amendment to R-020)
+
+**Palle:** "We should and could push the scope and that is what we've been working on.
+The archaeology should not be based on the sequence. The sequence is the excavation of
+the world ontology of the algorithms with a qfep context. I want to push the book to be
+a considered critical tutorial where we walk with the maps and work to develop the .md.
+So this is another scope. We already have the in for instance primitives."
+
+**Ruling:** R-020's countdown stands, but the GRAIN moves down and the frame turns:
+- **The sequence is the INSTRUMENT, not the table of contents.** It is how the dig
+  happens — the excavation of the algorithms' world-ontology under QFEP. The book does
+  not report on sequences; it reports on WALKS.
+- **The unit of work is the MAP-WALK; the unit of writing is the map's `walked.md`.**
+  Walk a map (VR; bridge notes are the pen), and the walk develops that map's page —
+  considered, critical, Palle's voice leading, the ghost working the notes in. blurb.md
+  says what it is; intent.md says why it was built; **walked.md says what walking it
+  taught** — the tutorial and the critique in one page.
+- **The book = the considered assembly of walked.md pages.** Chapters remain the
+  binding (spine order), but their content GROWS from walked maps — the chapter pass
+  becomes curation of its walked pages, not prose written above them.
+- **Chapter lock (amended):** its spine maps walked + walked.md developed + the
+  considered pass over them. The FINISH_LINE scoreboard gains a walked column.
+- The tool freeze stands. The bridge, the rides, the rooms — the apparatus was for
+  THIS. Primitives is the in: ten maps, texts in place, walls curated from walks.
+
+---
+
+<!-- Next: R-022 — noise truths (Palle wording) + Ignorance settle + "the meeting" as book motif + per-map rulings as the walks run -->
