@@ -20,6 +20,8 @@ extends Node3D
 
 class_name GaltonBoard
 
+const BakedText = preload("res://commons/utils/baked_text_albedo.gd")
+
 # ── Board Frame ──────────────────────────────────────────────────────────────
 @export var board_width: float = 0.5
 @export var board_height: float = 0.55
@@ -66,8 +68,10 @@ var _bin_divider_positions: Array[float] = []
 var _bin_sensor_areas: Array[Area3D] = []
 var _ball_bin_assigned: Dictionary = {}  # ball instance_id → bin_index
 
-var _stats_label: Label3D
-var _title_label: Label3D
+var _stats_tag: Node3D
+var _stats_tag_pos: Vector3 = Vector3.ZERO
+var _stats_last_text: String = ""
+var _title_tag: Node3D
 var _bell_curve_mesh: MeshInstance3D
 var _control_panel: Node3D
 
@@ -683,11 +687,8 @@ func _update_bell_curve() -> void:
 
 
 func _update_stats() -> void:
-	if not _stats_label:
-		return
-
 	if _total_dropped == 0:
-		_stats_label.text = "n = 0\nDrop balls!"
+		_refresh_stats_tag("n = 0\nDrop balls!")
 		return
 
 	# Calculate mean and std
@@ -706,9 +707,9 @@ func _update_stats() -> void:
 	var theo_mean := float(peg_rows) / 2.0
 	var theo_std := sqrt(float(peg_rows) * 0.25)
 
-	_stats_label.text = "n = %d\n\nmean = %.2f\nstd = %.2f\n\ntheory:\nmean = %.1f\nstd = %.2f" % [
+	_refresh_stats_tag("n = %d\n\nmean = %.2f\nstd = %.2f\n\ntheory:\nmean = %.1f\nstd = %.2f" % [
 		_total_dropped, mean, sqrt(variance), theo_mean, theo_std
-	]
+	])
 
 
 # ═════════════════════════════════════════════════════════════════════════════
@@ -716,50 +717,73 @@ func _update_stats() -> void:
 # ═════════════════════════════════════════════════════════════════════════════
 
 func _create_labels() -> void:
-	# Title
-	_title_label = Label3D.new()
-	_title_label.name = "TitleLabel"
-	_title_label.text = "GALTON BOARD"
-	_title_label.pixel_size = 0.002
-	_title_label.font_size = 18
-	_title_label.modulate = Color(0.9, 0.9, 0.95)
-	_title_label.position = Vector3(0, board_height + bin_height + 0.06, 0)
-	_title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	add_child(_title_label)
+	# Title — integrated board tag
+	_title_tag = BakedText.make_tag(
+		"GALTON BOARD", Color(0.9, 0.9, 0.95), 0.045,
+		Color(0.08, 0.09, 0.11), true, Color(0.86, 0.40, 0.16))
+	if _title_tag:
+		_title_tag.name = "TitleTag"
+		_title_tag.position = Vector3(0, board_height + bin_height + 0.06, 0)
+		add_child(_title_tag)
 
-	# Subtitle
-	var sub_label := Label3D.new()
-	sub_label.name = "SubtitleLabel"
-	sub_label.text = "Central Limit Theorem"
-	sub_label.pixel_size = 0.0015
-	sub_label.font_size = 12
-	sub_label.modulate = Color(0.6, 0.6, 0.7)
-	sub_label.position = Vector3(0, board_height + bin_height + 0.035, 0)
-	sub_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	add_child(sub_label)
+	# Subtitle — integrated board tag
+	var sub_tag: Node3D = BakedText.make_tag(
+		"Central Limit Theorem", Color(0.6, 0.6, 0.7), 0.028,
+		Color(0.08, 0.09, 0.11), true, Color(0, 0, 0, 0))
+	if sub_tag:
+		sub_tag.name = "SubtitleTag"
+		sub_tag.position = Vector3(0, board_height + bin_height + 0.03, 0)
+		add_child(sub_tag)
 
-	# Stats panel — right side
-	_stats_label = Label3D.new()
-	_stats_label.name = "StatsLabel"
-	_stats_label.text = "n = 0\nDrop balls!"
-	_stats_label.pixel_size = 0.0012
-	_stats_label.font_size = 11
-	_stats_label.modulate = Color(0.8, 0.85, 0.9)
-	_stats_label.position = Vector3(board_width / 2.0 + 0.08, board_height * 0.5, 0)
-	_stats_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
-	add_child(_stats_label)
+	# Stats panel — right side. Rebuilt on change via _refresh_stats_tag().
+	_stats_tag_pos = Vector3(board_width / 2.0 + 0.12, board_height * 0.5, 0)
+	_refresh_stats_tag("n = 0\nDrop balls!")
 
-	# Bin number labels
+	# Bin number labels — integrated board tags
 	for i in range(num_bins):
 		var x := (_bin_divider_positions[i] + _bin_divider_positions[i + 1]) / 2.0
-		var lbl := Label3D.new()
-		lbl.text = str(i)
-		lbl.pixel_size = 0.001
-		lbl.font_size = 18
-		lbl.modulate = Color(0.5, 0.5, 0.6)
-		lbl.position = Vector3(x, -0.015, board_depth * 0.35)
-		lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		add_child(lbl)
+		var bin_tag: Node3D = BakedText.make_tag(
+			str(i), Color(0.5, 0.5, 0.6), 0.02,
+			Color(0.08, 0.09, 0.11), true, Color(0, 0, 0, 0))
+		if bin_tag:
+			bin_tag.name = "BinTag_%d" % i
+			bin_tag.position = Vector3(x, -0.02, board_depth * 0.35)
+			add_child(bin_tag)
+
+
+## Rebuild the stats readout with fresh text (baked text is fixed at build time,
+## so the running readout must be regenerated whenever its content changes — the
+## bin counts change as beads fall). Multi-line, so each line is a stacked baked
+## tag: one integrated board per line, framed to match the make_tag aesthetic.
+func _refresh_stats_tag(text: String) -> void:
+	if text == _stats_last_text and _stats_tag != null:
+		return
+	_stats_last_text = text
+	if _stats_tag != null and is_instance_valid(_stats_tag):
+		_stats_tag.queue_free()
+		_stats_tag = null
+
+	var lines := text.split("\n")
+	var line_h: float = 0.03
+	var pitch: float = line_h * 1.1
+	var count: int = lines.size()
+	var top: float = (float(count) - 1.0) * 0.5 * pitch
+
+	_stats_tag = Node3D.new()
+	_stats_tag.name = "StatsTag"
+	_stats_tag.position = _stats_tag_pos
+	for i in range(count):
+		var line := str(lines[i]).strip_edges()
+		if line == "":
+			continue
+		# Each non-empty line becomes an integrated board tag (make_tag).
+		var line_tag: Node3D = BakedText.make_tag(
+			line, Color(0.8, 0.85, 0.9), line_h,
+			Color(0.08, 0.09, 0.11), true, Color(0, 0, 0, 0))
+		if line_tag:
+			line_tag.position = Vector3(0, top - float(i) * pitch, 0)
+			_stats_tag.add_child(line_tag)
+	add_child(_stats_tag)
 
 
 # ═════════════════════════════════════════════════════════════════════════════

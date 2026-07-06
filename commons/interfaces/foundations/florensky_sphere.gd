@@ -13,6 +13,8 @@ extends Node3D
 
 class_name FlorenskySphere
 
+const BakedText = preload("res://commons/utils/baked_text_albedo.gd")
+
 # @identity
 # essence: A ∧ ¬A held on one surface without collapse — Pavel Florensky's PARACONSISTENCY made a body. A double-faced sphere whose skin reads from both sides at once (blue assertion A oscillating into red negation ¬A), the limit turned from a wall you hit into a habitat you can stand inside. Origin at the sphere's centre; the boundary is the whole point — it is livable both ways.
 # desire: to be looked at until the looker stops needing the contradiction resolved. To oscillate as BOTH, to be observed and collapse to a single face for a breath, and to return — teaching that the settled answer is the temporary state and the held tension is home.
@@ -51,8 +53,11 @@ enum LogicState { A, NOT_A, BOTH, NEITHER }
 var _sphere: MeshInstance3D
 var _inner_sphere: MeshInstance3D
 var _glow: OmniLight3D
-var _label: Label3D
-var _state_label: Label3D
+var _label: Node3D
+var _state_label: Node3D
+var _state_label_pos: Vector3 = Vector3.ZERO
+var _state_text: String = ""
+var _state_color: Color = Color.WHITE
 var _animation_time: float = 0.0
 var _is_observed: bool = false
 var _observation_timer: float = 0.0
@@ -127,39 +132,44 @@ func _create_glow() -> void:
 	add_child(_glow)
 
 func _create_labels() -> void:
-	# Title
-	_label = Label3D.new()
-	_label.text = "Florensky Sphere"
-	_label.font_size = 24
-	_label.position = Vector3(0, radius + 0.3, 0)
-	_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	_label.modulate = Color.WHITE
-	_label.outline_size = 4
-	_label.outline_modulate = Color.BLACK
-	add_child(_label)
-	
-	# State display
-	_state_label = Label3D.new()
-	_state_label.text = "A ∧ ¬A"
-	_state_label.font_size = 36
-	_state_label.position = Vector3(0, 0, radius + 0.1)
-	_state_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	_state_label.modulate = Color.WHITE
-	_state_label.outline_size = 5
-	_state_label.outline_modulate = Color.BLACK
-	add_child(_state_label)
-	
+	# Title — integrated 2D-in-3D board
+	_label = BakedText.make_tag("Florensky Sphere", Color.WHITE, 0.07, Color(0.08, 0.09, 0.11), true)
+	if _label:
+		_label.position = Vector3(0, radius + 0.3, 0)
+		add_child(_label)
+
+	# State display — rebuilt on every state/symbol change (baked text is static)
+	_state_label_pos = Vector3(0, 0, radius + 0.1)
+	_state_text = "A ∧ ¬A"
+	_state_color = color_both
+	_rebuild_state_label()
+
 	# Explanation
-	var explanation = Label3D.new()
-	explanation.text = "Paraconsistent Logic\n'Truth that holds contradiction'"
-	explanation.font_size = 14
-	explanation.position = Vector3(0, -radius - 0.2, 0)
-	explanation.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	explanation.modulate = Color(0.7, 0.7, 0.7, 0.9)
-	explanation.outline_size = 3
-	explanation.outline_modulate = Color.BLACK
-	explanation.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	add_child(explanation)
+	var explanation = BakedText.make_tag(
+		"Paraconsistent Logic — Truth that holds contradiction",
+		Color(0.7, 0.7, 0.7), 0.04, Color(0.08, 0.09, 0.11), true)
+	if explanation:
+		explanation.position = Vector3(0, -radius - 0.2, 0)
+		add_child(explanation)
+
+## Rebuild the state board when its text or color changes (baked text is
+## static, so a runtime symbol/state swap means a fresh tag). No-op unless
+## the text/color actually differs from what's on screen.
+func _rebuild_state_label() -> void:
+	if _state_label and is_instance_valid(_state_label):
+		_state_label.queue_free()
+	_state_label = BakedText.make_tag(_state_text, _state_color, 0.09, Color(0.08, 0.09, 0.11), true)
+	if _state_label:
+		_state_label.position = _state_label_pos
+		add_child(_state_label)
+
+## Set the state board's text/color; rebuilds only if something changed.
+func _set_state_label(text: String, color: Color) -> void:
+	if text == _state_text and color == _state_color:
+		return
+	_state_text = text
+	_state_color = color
+	_rebuild_state_label()
 
 func _create_interactable() -> void:
 	var area = Area3D.new()
@@ -229,11 +239,11 @@ func _animate_superposition() -> void:
 		var pulse = sin(_animation_time * 4.0) * 0.5 + 0.5
 		inner_mat.emission_energy_multiplier = 0.3 + pulse * 0.7
 	
-	# State label flickers between symbols
+	# State label flickers between symbols (rebuilds the baked board on change)
 	if fmod(_animation_time, 0.5) < 0.25:
-		_state_label.text = "A ∧ ¬A"
+		_set_state_label("A ∧ ¬A", color_both)
 	else:
-		_state_label.text = "¬(A ∨ ¬A)"
+		_set_state_label("¬(A ∨ ¬A)", color_both)
 
 func _animate_collapsed() -> void:
 	var target_color = color_A if current_state == LogicState.A else color_not_A
@@ -254,17 +264,13 @@ func _animate_void() -> void:
 func _update_visual_state() -> void:
 	match current_state:
 		LogicState.A:
-			_state_label.text = "A"
-			_state_label.modulate = color_A
+			_set_state_label("A", color_A)
 		LogicState.NOT_A:
-			_state_label.text = "¬A"
-			_state_label.modulate = color_not_A
+			_set_state_label("¬A", color_not_A)
 		LogicState.BOTH:
-			_state_label.text = "A ∧ ¬A"
-			_state_label.modulate = color_both
+			_set_state_label("A ∧ ¬A", color_both)
 		LogicState.NEITHER:
-			_state_label.text = "¬A ∧ ¬(¬A)"
-			_state_label.modulate = Color(0.5, 0.5, 0.5)
+			_set_state_label("¬A ∧ ¬(¬A)", Color(0.5, 0.5, 0.5))
 
 func observe() -> void:
 	if not allow_observation:

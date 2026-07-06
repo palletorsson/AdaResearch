@@ -55,9 +55,13 @@ var _trail_mesh: MeshInstance3D
 var _trail_material: StandardMaterial3D
 const MAX_TRAIL: int = 200
 
-var _stats_label: Label3D
-var _direction_label: Label3D
+# Integrated 2D-in-3D display boards (replace floating Label3Ds).
+var _stats_tag: Node3D
+var _direction_tag: Node3D
+var _stats_text: String = ""
+var _direction_text: String = ""
 
+const BakedText = preload("res://commons/utils/baked_text_albedo.gd")
 const PICKABLE_SCENE = preload("res://addons/godot-xr-tools/objects/pickable.tscn")
 const HIGHLIGHT_RING_SCENE = preload("res://addons/godot-xr-tools/objects/highlight/highlight_ring.tscn")
 
@@ -354,47 +358,54 @@ func _update_trail() -> void:
 # ═════════════════════════════════════════════════════════════════════════════
 
 func _create_labels() -> void:
-	# Title
-	var title := Label3D.new()
-	title.name = "TitleLabel"
-	title.text = "RANDOM WALK LEASH"
-	title.pixel_size = 0.002
-	title.font_size = 14
-	title.modulate = Color(0.9, 0.9, 0.95)
-	title.position = Vector3(0, pedestal_height + 0.35, -0.15)
-	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	add_child(title)
+	# Title — integrated board (was a floating Label3D).
+	var title := BakedText.make_tag("RANDOM WALK LEASH", Color(0.9, 0.9, 0.95), 0.055,
+		Color(0.08, 0.09, 0.11), true, Color(0.4, 0.6, 0.9))
+	if title:
+		title.name = "TitleTag"
+		title.position = Vector3(0, pedestal_height + 0.35, -0.15)
+		add_child(title)
 
-	var sub := Label3D.new()
-	sub.text = "Feel the Random Walk"
-	sub.pixel_size = 0.0014
-	sub.font_size = 10
-	sub.modulate = Color(0.6, 0.7, 0.8)
-	sub.position = Vector3(0, pedestal_height + 0.31, -0.15)
-	sub.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	add_child(sub)
+	var sub := BakedText.make_tag("Feel the Random Walk", Color(0.6, 0.7, 0.8), 0.038,
+		Color(0.08, 0.09, 0.11), true, Color(0, 0, 0, 0))
+	if sub:
+		sub.name = "SubTag"
+		sub.position = Vector3(0, pedestal_height + 0.29, -0.15)
+		add_child(sub)
 
-	# Direction indicator
-	_direction_label = Label3D.new()
-	_direction_label.name = "DirectionLabel"
-	_direction_label.text = ""
-	_direction_label.pixel_size = 0.004
-	_direction_label.font_size = 20
-	_direction_label.modulate = orb_color
-	_direction_label.position = Vector3(0.18, pedestal_height + 0.25, 0)
-	_direction_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	add_child(_direction_label)
+	# Direction indicator — rebuilt on change in _rebuild_direction_tag().
+	_direction_text = ""
+	# Stats — rebuilt on change in _rebuild_stats_tag().
+	_stats_text = "Tugs: 0    Grab the orb!"
+	_rebuild_stats_tag()
 
-	# Stats
-	_stats_label = Label3D.new()
-	_stats_label.name = "StatsLabel"
-	_stats_label.text = "Tugs: 0\n\nGrab the orb!"
-	_stats_label.pixel_size = 0.0012
-	_stats_label.font_size = 10
-	_stats_label.modulate = Color(0.8, 0.8, 0.85)
-	_stats_label.position = Vector3(0.18, pedestal_height + 0.1, 0)
-	_stats_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
-	add_child(_stats_label)
+
+## (Re)build the stats board as an integrated tag, replacing any existing one.
+func _rebuild_stats_tag() -> void:
+	if _stats_tag and is_instance_valid(_stats_tag):
+		_stats_tag.queue_free()
+		_stats_tag = null
+	_stats_tag = BakedText.make_tag(_stats_text, Color(0.8, 0.8, 0.85), 0.045,
+		Color(0.08, 0.09, 0.11), true, Color(0.4, 0.6, 0.9))
+	if _stats_tag:
+		_stats_tag.name = "StatsTag"
+		_stats_tag.position = Vector3(0.18, pedestal_height + 0.1, 0)
+		add_child(_stats_tag)
+
+
+## (Re)build the direction board as an integrated tag, replacing any existing one.
+func _rebuild_direction_tag() -> void:
+	if _direction_tag and is_instance_valid(_direction_tag):
+		_direction_tag.queue_free()
+		_direction_tag = null
+	if _direction_text.is_empty():
+		return
+	_direction_tag = BakedText.make_tag(_direction_text, orb_color, 0.06,
+		Color(0.08, 0.09, 0.11), true, Color(0.4, 0.6, 0.9))
+	if _direction_tag:
+		_direction_tag.name = "DirectionTag"
+		_direction_tag.position = Vector3(0.18, pedestal_height + 0.25, 0)
+		add_child(_direction_tag)
 
 
 func _update_display() -> void:
@@ -404,11 +415,12 @@ func _update_display() -> void:
 	# RMS displacement
 	var rms := _displacement_sum.length() / sqrt(float(_total_tugs)) if _total_tugs > 0 else 0.0
 
-	var lines := "Tugs: %d\n" % _total_tugs
-	lines += "Drift: %.2f\n" % _displacement_sum.length()
-	lines += "RMS: %.2f\n" % rms
-	lines += "\nTheory: drift ~ sqrt(N)"
-	_stats_label.text = lines
+	# One line for the baked tag (make_tag renders a single line).
+	var text := "N=%d  Drift %.2f  RMS %.2f  (~sqrt N)" % [
+		_total_tugs, _displacement_sum.length(), rms]
+	if text != _stats_text:
+		_stats_text = text
+		_rebuild_stats_tag()
 
 
 # ═════════════════════════════════════════════════════════════════════════════
@@ -453,7 +465,10 @@ func _reset() -> void:
 	_impulse_timer = 0.0
 	_trail_points.clear()
 	_is_held = false
-	_stats_label.text = "Tugs: 0\n\nGrab the orb!"
+	_stats_text = "Tugs: 0    Grab the orb!"
+	_rebuild_stats_tag()
+	_direction_text = ""
+	_rebuild_direction_tag()
 
 func _exit_tree() -> void:
 	for child in get_children():

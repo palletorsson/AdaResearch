@@ -30,6 +30,10 @@
 extends Node3D
 class_name ScienceScreen
 
+## Integrated 2D-in-3D text helper — replaces floating Label3D signage with a
+## framed dark board (baked, billboarded, lit accent edge). Drop-in for Label3D.
+const BakedText = preload("res://commons/utils/baked_text_albedo.gd")
+
 
 # Spine-corridor contract — see doc/SPINE_HINTS_CONTRACT.md
 func spine_hints() -> Dictionary:
@@ -542,15 +546,28 @@ func _build_screen() -> void:
 	led_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	led.material_override = led_mat
 
-	# ── "ADA RESEARCH" label (bottom-left of border, 3D text via Label3D) ──
-	var brand_label: Label3D = Label3D.new()
-	brand_label.text = "ADA RESEARCH"
-	brand_label.font_size = 28
-	brand_label.modulate = Color(0.35, 0.35, 0.4)
-	brand_label.position = Vector3(-screen_width * 0.5 + 0.15, screen_y - screen_height * 0.5 - border_margin - 0.015, 0.002)
-	brand_label.pixel_size = 0.001
-	brand_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
-	add_child(brand_label)
+	# ── "ADA RESEARCH" brand mark (bottom-left of border) ──
+	# Integrated 2D-in-3D board baked onto the bezel, replacing a floating Label3D.
+	# Fixed orientation (billboard=false) so it reads as a printed mark on the frame.
+	var brand_h: float = 0.048
+	var brand_tag: Node3D = BakedText.make_tag(
+		"ADA RESEARCH",
+		Color(0.35, 0.35, 0.4),          # same dim text tone as the old modulate
+		brand_h,
+		Color(0.08, 0.08, 0.1),          # matches the outer bezel dark
+		false,                            # fixed-orientation, not billboarded
+		Color(0.2, 1.0, 0.3, 1.0)         # green accent edge, echoes the screen glow
+	)
+	if brand_tag:
+		# make_tag auto-fits width ≈ world_h * (0.9 + 0.66*len); left-align the
+		# board where the old Label3D's left edge sat.
+		var brand_w: float = brand_h * (0.9 + 0.66 * float("ADA RESEARCH".length()))
+		brand_tag.position = Vector3(
+			-screen_width * 0.5 + 0.15 + brand_w * 0.5,
+			screen_y - screen_height * 0.5 - border_margin - 0.015,
+			0.006
+		)
+		add_child(brand_tag)
 
 	# ── Stand pole ──
 	_stand_mesh = MeshInstance3D.new()

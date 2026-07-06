@@ -6,6 +6,8 @@ extends Node3D
 
 class_name EuclidPostulatesPlaque
 
+const BakedText = preload("res://commons/utils/baked_text_albedo.gd")
+
 # @identity
 # essence: five axioms; four self-evident, the fifth (parallel postulate) independent and contingent
 # desire: cycle through the postulates and feel the fifth one glow differently — it was always the odd one out
@@ -29,10 +31,13 @@ signal parallel_highlighted
 
 var _xr_active: bool = false
 var _plaque_mesh: MeshInstance3D
-var _title_label: Label3D
-var _text_label: Label3D
-var _postulate_labels: Array[Label3D] = []
+# Integrated 2D-in-3D text boards (baked albedo) replacing floating Label3D.
+var _title_board: MeshInstance3D          # single-line title, baked text quad
+var _text_board: Node3D                   # multi-line postulate body, stacked block
+var _indicator_boards: Array[Node3D] = [] # I..V tag boards
 var _highlight_mesh: MeshInstance3D
+
+const INDICATOR_GLYPHS := ["I", "II", "III", "IV", "V"]
 
 const POSTULATES = [
 	"I. A straight line can be drawn\nfrom any point to any point.",
@@ -85,33 +90,11 @@ func _create_plaque():
 	add_child(frame)
 
 func _create_labels():
-	_title_label = Label3D.new()
-	_title_label.name = "TitleLabel"
-	_title_label.pixel_size = 0.001
-	_title_label.font_size = 24
-	_title_label.position = Vector3(0, plaque_size.y * 0.38, plaque_size.z * 0.51)
-	_title_label.modulate = Color(0.9, 0.85, 0.7)
-	add_child(_title_label)
-	
-	_text_label = Label3D.new()
-	_text_label.name = "TextLabel"
-	_text_label.pixel_size = 0.001
-	_text_label.font_size = 18
-	_text_label.position = Vector3(0, 0, plaque_size.z * 0.51)
-	_text_label.modulate = Color(0.85, 0.82, 0.75)
-	add_child(_text_label)
-	
-	# Postulate indicators (I II III IV V)
-	var indicator_y = -plaque_size.y * 0.35
-	for i in range(5):
-		var lbl = Label3D.new()
-		lbl.pixel_size = 0.001
-		lbl.font_size = 16
-		lbl.text = ["I", "II", "III", "IV", "V"][i]
-		lbl.position = Vector3(-0.3 + i * 0.15, indicator_y, plaque_size.z * 0.51)
-		lbl.modulate = Color(0.5, 0.5, 0.5)
-		add_child(lbl)
-		_postulate_labels.append(lbl)
+	# The title board, multi-line body board, and the I..V indicator tags are
+	# all baked-text boards whose text/colour change with the selected
+	# postulate, so they are (re)built in _update_display() / _rebuild_indicators().
+	# Nothing persistent to create here.
+	pass
 
 func _create_highlight():
 	_highlight_mesh = MeshInstance3D.new()
@@ -133,39 +116,88 @@ func _create_highlight():
 func _update_display():
 	if not is_inside_tree():
 		return
-	
-	_title_label.text = POSTULATE_TITLES[current_postulate]
-	_text_label.text = POSTULATES[current_postulate]
-	
-	# Update highlight position
-	_highlight_mesh.position.x = -0.3 + current_postulate * 0.15
-	
+
 	# Color the fifth postulate differently
 	var is_fifth = current_postulate == 4
+	var title_color: Color
+	var text_color: Color
 	if is_fifth and highlight_fifth:
-		_title_label.modulate = Color(1.0, 0.7, 0.3)
-		_text_label.modulate = Color(1.0, 0.9, 0.7)
-		var mat = _highlight_mesh.material_override as StandardMaterial3D
-		mat.albedo_color = Color(1.0, 0.4, 0.2, 0.9)
-		mat.emission = Color(1.0, 0.4, 0.2)
+		title_color = Color(1.0, 0.7, 0.3)
+		text_color = Color(1.0, 0.9, 0.7)
+	else:
+		title_color = Color(0.9, 0.85, 0.7)
+		text_color = Color(0.85, 0.82, 0.75)
+
+	# Rebuild the baked title board (single line, painted onto the plaque face).
+	if _title_board and is_instance_valid(_title_board):
+		_title_board.queue_free()
+	_title_board = BakedText.make_label_mesh(
+		POSTULATE_TITLES[current_postulate],
+		title_color,
+		Vector2(plaque_size.x * 0.9, 0.05),   # roughly where the old title Label3D sat
+		1400, true)                            # unshaded — reads as a crisp engraving
+	if _title_board:
+		_title_board.name = "TitleBoard"
+		_title_board.position = Vector3(0, plaque_size.y * 0.38, plaque_size.z * 0.51)
+		add_child(_title_board)
+
+	# Rebuild the baked body board — one consolidated multi-line panel of the
+	# postulate's lines (a plaque reads as ONE block of lines, not N floats).
+	if _text_board and is_instance_valid(_text_board):
+		_text_board.queue_free()
+	var body_lines: Array = POSTULATES[current_postulate].split("\n")
+	_text_board = BakedText.make_text_block(
+		body_lines,
+		text_color,
+		0.035,                                 # per-line height (~ old font_size 18)
+		plaque_size.x * 0.9,                   # block width fits inside the plaque face
+		0.006, true)                           # small line gap, unshaded
+	if _text_board:
+		_text_board.name = "TextBoard"
+		_text_board.position = Vector3(0, 0, plaque_size.z * 0.51)
+		add_child(_text_board)
+
+	# Update highlight position
+	_highlight_mesh.position.x = -0.3 + current_postulate * 0.15
+	var hmat = _highlight_mesh.material_override as StandardMaterial3D
+	if is_fifth and highlight_fifth:
+		hmat.albedo_color = Color(1.0, 0.4, 0.2, 0.9)
+		hmat.emission = Color(1.0, 0.4, 0.2)
 		parallel_highlighted.emit()
 	else:
-		_title_label.modulate = Color(0.9, 0.85, 0.7)
-		_text_label.modulate = Color(0.85, 0.82, 0.75)
-		var mat = _highlight_mesh.material_override as StandardMaterial3D
-		mat.albedo_color = Color(1.0, 0.8, 0.2, 0.8)
-		mat.emission = Color(1.0, 0.8, 0.2)
-	
-	# Update indicator colors
-	for i in range(5):
-		if i == current_postulate:
-			_postulate_labels[i].modulate = Color(1.0, 1.0, 1.0)
-		elif i == 4 and highlight_fifth:
-			_postulate_labels[i].modulate = Color(1.0, 0.5, 0.3)
-		else:
-			_postulate_labels[i].modulate = Color(0.5, 0.5, 0.5)
-	
+		hmat.albedo_color = Color(1.0, 0.8, 0.2, 0.8)
+		hmat.emission = Color(1.0, 0.8, 0.2)
+
+	# Rebuild indicator tags with their state colour (baked text — colour is
+	# painted in, so a colour change means a fresh board; the texture cache
+	# keeps repeats cheap).
+	_rebuild_indicators()
+
 	postulate_selected.emit(current_postulate)
+
+func _rebuild_indicators():
+	for tag in _indicator_boards:
+		if is_instance_valid(tag):
+			tag.queue_free()
+	_indicator_boards.clear()
+	var indicator_y = -plaque_size.y * 0.35
+	for i in range(5):
+		var glyph_color: Color
+		if i == current_postulate:
+			glyph_color = Color(1.0, 1.0, 1.0)
+		elif i == 4 and highlight_fifth:
+			glyph_color = Color(1.0, 0.5, 0.3)
+		else:
+			glyph_color = Color(0.5, 0.5, 0.5)
+		var tag: Node3D = BakedText.make_tag(
+			INDICATOR_GLYPHS[i], glyph_color, 0.045,
+			Color(0.12, 0.1, 0.08), false, Color(0, 0, 0, 0))
+		if tag == null:
+			continue
+		tag.name = "Indicator_%d" % i
+		tag.position = Vector3(-0.3 + i * 0.15, indicator_y, plaque_size.z * 0.51)
+		add_child(tag)
+		_indicator_boards.append(tag)
 
 func next_postulate():
 	current_postulate = (current_postulate + 1) % 5

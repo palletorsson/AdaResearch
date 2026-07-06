@@ -1,5 +1,7 @@
 extends Node3D
 
+const BakedText = preload("res://commons/utils/baked_text_albedo.gd")
+
 ## Sine Oscillation — Expressive 3D VR Visualization
 ## Unit circle with rotating point, sine + cosine waves along X axis,
 ## projection lines, phase trail, and interactive VR controls.
@@ -69,10 +71,24 @@ var _cosine_point: MeshInstance3D
 var _radius_mesh_inst: MeshInstance3D
 var _radius_mesh: ImmediateMesh
 
-# UI
-var _info_label: Label3D
-var _metrics_label: Label3D
-var _phase_label: Label3D
+# UI — integrated 2D-in-3D display boards (BakedText tags) replacing floating Label3D.
+# Each tag is a framed dark board with baked billboarded text; regenerated when its
+# text changes (runtime readouts update per frame).
+var _info_tag: Node3D
+var _metrics_tag: Node3D
+var _phase_tag: Node3D
+
+var _info_text: String = ""
+var _metrics_text: String = ""
+var _phase_text: String = ""
+
+const INFO_COLOR := Color(1.0, 0.95, 1.0)
+const METRICS_COLOR := Color(0.85, 0.9, 1.0)
+const PHASE_COLOR := Color(0.9, 0.85, 1.0)
+
+const INFO_POS := Vector3(0.15, 0.35, 0)
+const METRICS_POS := Vector3(0.15, 0.28, 0)
+# Phase tag y depends on amplitude — recomputed each pass in _update_labels().
 
 # Controllers
 var _speed_controller: ParameterController3D
@@ -430,46 +446,44 @@ func _update_points() -> void:
 # ---------------------------------------------------------------------------
 
 func _create_ui() -> void:
-	_info_label = Label3D.new()
-	_info_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	_info_label.font_size = 28
-	_info_label.outline_size = 4
-	_info_label.modulate = Color(1.0, 0.95, 1.0)
-	_info_label.position = Vector3(0.15, 0.35, 0)
-	add_child(_info_label)
+	# Tags are built lazily in _update_labels() once their text is known.
+	# Set initial text so the first _update_labels() pass materialises them.
+	_update_labels()
 
-	_metrics_label = Label3D.new()
-	_metrics_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	_metrics_label.font_size = 20
-	_metrics_label.outline_size = 3
-	_metrics_label.modulate = Color(0.85, 0.9, 1.0)
-	_metrics_label.position = Vector3(0.15, 0.28, 0)
-	add_child(_metrics_label)
-
-	_phase_label = Label3D.new()
-	_phase_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	_phase_label.font_size = 18
-	_phase_label.outline_size = 3
-	_phase_label.modulate = Color(0.9, 0.85, 1.0)
-	_phase_label.position = Vector3(CIRCLE_X, -amplitude - 0.06, 0)
-	add_child(_phase_label)
+## Rebuild a billboarded BakedText board and reparent it at `pos`. Frees the old one.
+func _set_tag(current: Node3D, text: String, color: Color, world_h: float, pos: Vector3) -> Node3D:
+	if current and is_instance_valid(current):
+		current.queue_free()
+	var tag := BakedText.make_tag(text, color, world_h, Color(0.08, 0.09, 0.11), true)
+	if tag:
+		tag.position = pos
+		add_child(tag)
+	return tag
 
 func _update_labels() -> void:
-	if _info_label:
-		var type_str := "Sine" if wave_type == WaveType.SINE else ("Cosine" if wave_type == WaveType.COSINE else "Sine + Cosine")
-		_info_label.text = "Sine Oscillation | %s" % type_str
+	var type_str := "Sine" if wave_type == WaveType.SINE else ("Cosine" if wave_type == WaveType.COSINE else "Sine + Cosine")
+	var info := "Sine Oscillation | %s" % type_str
+	if info != _info_text or _info_tag == null:
+		_info_text = info
+		_info_tag = _set_tag(_info_tag, info, INFO_COLOR, 0.05, INFO_POS)
 
-	if _metrics_label:
-		var wavelength := (WAVE_X_END - WAVE_X_START) / frequency
-		var period := TAU / (angular_velocity * speed) if angular_velocity * speed > 0 else INF
-		_metrics_label.text = "A: %.2f | f: %.1f | T: %.2fs | lambda: %.3f | Cycles: %d" % [
-			amplitude, frequency, period, wavelength, _total_cycles
-		]
+	var wavelength := (WAVE_X_END - WAVE_X_START) / frequency
+	var period := TAU / (angular_velocity * speed) if angular_velocity * speed > 0 else INF
+	var metrics := "A: %.2f | f: %.1f | T: %.2fs | lambda: %.3f | Cycles: %d" % [
+		amplitude, frequency, period, wavelength, _total_cycles
+	]
+	if metrics != _metrics_text or _metrics_tag == null:
+		_metrics_text = metrics
+		_metrics_tag = _set_tag(_metrics_tag, metrics, METRICS_COLOR, 0.035, METRICS_POS)
 
-	if _phase_label:
-		var deg := rad_to_deg(_angle)
-		_phase_label.text = "Phase: %.0f deg (%.2f rad)" % [deg, _angle]
-		_phase_label.position = Vector3(CIRCLE_X, -amplitude - 0.06, 0)
+	var deg := rad_to_deg(_angle)
+	var phase := "Phase: %.0f deg (%.2f rad)" % [deg, _angle]
+	var phase_pos := Vector3(CIRCLE_X, -amplitude - 0.06, 0)
+	if phase != _phase_text or _phase_tag == null:
+		_phase_text = phase
+		_phase_tag = _set_tag(_phase_tag, phase, PHASE_COLOR, 0.03, phase_pos)
+	elif _phase_tag and is_instance_valid(_phase_tag):
+		_phase_tag.position = phase_pos
 
 
 # ---------------------------------------------------------------------------

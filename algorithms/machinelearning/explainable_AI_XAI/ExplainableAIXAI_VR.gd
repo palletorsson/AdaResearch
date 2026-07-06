@@ -1,5 +1,7 @@
 extends Node3D
 
+const BakedText = preload("res://commons/utils/baked_text_albedo.gd")
+
 # @identity
 # essence: explanation(model, input) → feature importance; three methods: SHAP (game theory), LIME (local surrogate), Grad-CAM (gradient attention)
 # desire: see WHY a model decided — grab feature bars, walk through perturbation clouds, read attention heatmaps
@@ -54,6 +56,10 @@ var perturbation_spheres: Array = []
 var heatmap_points: Array = []
 var counterfactual_path: Array = []
 
+# Integrated-board holders for runtime-updated readouts
+var _prediction_holder: Node3D
+var _control_holder: Node3D
+
 func _ready() -> void:
 	print("[XAI_VR] Initializing explainable AI workspace")
 	_initialize_model_data()
@@ -63,7 +69,6 @@ func _ready() -> void:
 	_create_grad_cam_zone()
 	_create_counterfactual_explorer()
 	_create_control_panel()
-	_create_info_panels()
 
 func _process(delta: float) -> void:
 	time += delta
@@ -110,16 +115,14 @@ func _create_prediction_display() -> void:
 	sphere.material_override = mat
 	prediction_container.add_child(sphere)
 
-	# Prediction label
-	var label = Label3D.new()
-	label.name = "PredictionLabel"
-	label.text = "PREDICTION: %s\n%.0f%% confident" % [current_prediction, prediction_confidence * 100]
-	label.font_size = 64
-	label.outline_size = 14
-	label.modulate = Color(0.3, 0.9, 0.9)
-	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	label.position = Vector3(0, 1.8, 0)
-	prediction_container.add_child(label)
+	# Prediction readout — one integrated board on a surface (no floating label).
+	# Two lines consolidated onto a single billboarded tag stack; rebuilt on
+	# confidence change via _rebuild_prediction_board().
+	_prediction_holder = Node3D.new()
+	_prediction_holder.name = "PredictionBoard"
+	_prediction_holder.position = Vector3(0, 2.0, 0)
+	prediction_container.add_child(_prediction_holder)
+	_rebuild_prediction_board()
 
 func _create_shap_zone() -> void:
 	"""Create SHAP values visualization zone"""
@@ -131,15 +134,12 @@ func _create_shap_zone() -> void:
 	shap_zone.position = Vector3(-zone_spacing, 0, 0)
 	add_child(shap_zone)
 
-	# Zone label
-	var label = Label3D.new()
-	label.text = "SHAP VALUES\nFeature Importance"
-	label.font_size = 56
-	label.outline_size = 14
-	label.modulate = Color(0.9, 0.3, 0.5)
-	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	label.position = Vector3(0, 4.0, 0)
-	shap_zone.add_child(label)
+	# Zone header — one integrated board (title + method info consolidated).
+	_add_zone_header(
+		shap_zone, Vector3(0, 5.2, 0),
+		"SHAP VALUES",
+		["Feature Importance", "Game theory approach", "Global + additive"],
+		Color(0.95, 0.55, 0.72))
 
 	# Create feature importance bars
 	var feature_names = ["Whiskers", "Ears", "Tail", "Fur", "Eyes", "Paws", "Nose", "Size", "Color", "Shape"]
@@ -218,23 +218,25 @@ func _create_importance_bar(index: int, feature_name: String, importance: float)
 
 	container.add_child(bar_body)
 
-	# Feature label
-	var label = Label3D.new()
-	label.text = feature_name
-	label.font_size = 28
-	label.outline_size = 8
-	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	label.position = Vector3(-1.5, 0, 0)
-	container.add_child(label)
+	# Feature name tag — a small integrated board to the LEFT of the baseline,
+	# clear of the bar which extends the other way (no overlap with the value tag).
+	var name_tag: Node3D = BakedText.make_tag(
+		feature_name, Color(0.92, 0.94, 1.0), 0.34,
+		Color(0.08, 0.09, 0.12), true, Color(0.55, 0.55, 0.6))
+	if name_tag:
+		name_tag.position = Vector3(-1.6, 0, 0)
+		container.add_child(name_tag)
 
-	# Value label
-	var value_label = Label3D.new()
-	value_label.text = "%.2f" % importance
-	value_label.font_size = 24
-	value_label.outline_size = 6
-	value_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	value_label.position = Vector3(importance * importance_scale + 0.5, 0, 0)
-	container.add_child(value_label)
+	# Value tag — sits just past the bar's tip, on the same side it extends,
+	# so name (left) and value (right of tip) never collide.
+	var accent := Color(0.3, 0.9, 0.3) if importance > 0 else Color(0.9, 0.3, 0.3)
+	var value_tag: Node3D = BakedText.make_tag(
+		"%.2f" % importance, Color(0.95, 0.97, 1.0), 0.30,
+		Color(0.08, 0.09, 0.12), true, accent)
+	if value_tag:
+		value_tag.name = "ValueTag"
+		value_tag.position = Vector3(importance * importance_scale + 0.55, 0, 0)
+		container.add_child(value_tag)
 
 	return container
 
@@ -248,15 +250,12 @@ func _create_lime_zone() -> void:
 	lime_zone.position = Vector3(0, 0, 0)
 	add_child(lime_zone)
 
-	# Zone label
-	var label = Label3D.new()
-	label.text = "LIME\nLocal Perturbations"
-	label.font_size = 56
-	label.outline_size = 14
-	label.modulate = Color(0.3, 0.9, 0.3)
-	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	label.position = Vector3(0, 4.0, 0)
-	lime_zone.add_child(label)
+	# Zone header — one integrated board (title + method info consolidated).
+	_add_zone_header(
+		lime_zone, Vector3(0, 5.2, 0),
+		"LIME",
+		["Local Perturbations", "Local surrogate model", "Interpretable locally"],
+		Color(0.4, 0.92, 0.45))
 
 	# Central data point (the instance being explained)
 	var center_point = MeshInstance3D.new()
@@ -345,14 +344,13 @@ func _create_decision_boundary(parent: Node3D) -> void:
 	boundary.rotation.z = PI / 6.0
 	parent.add_child(boundary)
 
-	# Boundary label
-	var label = Label3D.new()
-	label.text = "Decision Boundary"
-	label.font_size = 32
-	label.outline_size = 8
-	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	label.position = Vector3(0, 0, 3.5)
-	parent.add_child(label)
+	# Boundary tag — integrated board clear of the tilted plane.
+	var tag: Node3D = BakedText.make_tag(
+		"Decision Boundary", Color(0.7, 0.75, 1.0), 0.4,
+		Color(0.08, 0.09, 0.14), true, Color(0.5, 0.5, 0.9))
+	if tag:
+		tag.position = Vector3(0, 0, 3.6)
+		parent.add_child(tag)
 
 func _create_grad_cam_zone() -> void:
 	"""Create Grad-CAM attention heatmap zone"""
@@ -364,15 +362,12 @@ func _create_grad_cam_zone() -> void:
 	grad_cam_zone.position = Vector3(zone_spacing, 0, 0)
 	add_child(grad_cam_zone)
 
-	# Zone label
-	var label = Label3D.new()
-	label.text = "GRAD-CAM\nAttention Heatmap"
-	label.font_size = 56
-	label.outline_size = 14
-	label.modulate = Color(0.9, 0.5, 0.3)
-	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	label.position = Vector3(0, 4.0, 0)
-	grad_cam_zone.add_child(label)
+	# Zone header — one integrated board (title + method info consolidated).
+	_add_zone_header(
+		grad_cam_zone, Vector3(0, 5.2, 0),
+		"GRAD-CAM",
+		["Attention Heatmap", "Gradient-based attention", "Class activation maps"],
+		Color(0.95, 0.6, 0.4))
 
 	# Create 3D heatmap (heightmap based on attention)
 	for y in range(num_attention_points):
@@ -423,15 +418,12 @@ func _create_counterfactual_explorer() -> void:
 	cf_container.position = Vector3(0, -4.0, 0)
 	add_child(cf_container)
 
-	# Label
-	var label = Label3D.new()
-	label.text = "COUNTERFACTUALS\nWhat if...?"
-	label.font_size = 48
-	label.outline_size = 12
-	label.modulate = Color(0.9, 0.9, 0.3)
-	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	label.position = Vector3(0, 1.5, 0)
-	cf_container.add_child(label)
+	# Header — one integrated board above the path.
+	_add_zone_header(
+		cf_container, Vector3(0, 1.8, 0),
+		"COUNTERFACTUALS",
+		["What if...?"],
+		Color(0.95, 0.9, 0.4))
 
 	# Create path from current to counterfactual
 	var num_steps = 5
@@ -456,23 +448,19 @@ func _create_counterfactual_explorer() -> void:
 		cf_container.add_child(sphere)
 		counterfactual_path.append(sphere)
 
-		# Step label
+		# Step tag — integrated board below each endpoint of the path.
+		var step_text := ""
 		if i == 0:
-			var step_label = Label3D.new()
-			step_label.text = "Current"
-			step_label.font_size = 24
-			step_label.outline_size = 6
-			step_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-			step_label.position = Vector3(i * 1.0 - 2.0, -0.5, 0)
-			cf_container.add_child(step_label)
+			step_text = "Current"
 		elif i == num_steps - 1:
-			var step_label = Label3D.new()
-			step_label.text = "Different\nPrediction"
-			step_label.font_size = 24
-			step_label.outline_size = 6
-			step_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-			step_label.position = Vector3(i * 1.0 - 2.0, -0.5, 0)
-			cf_container.add_child(step_label)
+			step_text = "Different Prediction"
+		if step_text != "":
+			var step_tag: Node3D = BakedText.make_tag(
+				step_text, Color(0.92, 0.94, 1.0), 0.3,
+				Color(0.08, 0.09, 0.12), true, Color(1.0 - t, 0.5, t))
+			if step_tag:
+				step_tag.position = Vector3(i * 1.0 - 2.0, -0.6, 0)
+				cf_container.add_child(step_tag)
 
 func _create_control_panel() -> void:
 	"""Create VR control panel"""
@@ -495,73 +483,101 @@ func _create_control_panel() -> void:
 	panel.material_override = mat
 	controls.add_child(panel)
 
-	# Title
-	var title = Label3D.new()
-	title.text = "EXPLAINABLE AI\nMETHODS"
-	title.font_size = 56
-	title.outline_size = 12
-	title.position = Vector3(0, 1.6, 0.1)
-	controls.add_child(title)
+	# One integrated readout ONTO the panel face — title, method states and the
+	# runtime confidence consolidated into a single spaced text block (was 3
+	# overlapping Label3Ds). Rebuilt in place when confidence changes.
+	_control_holder = Node3D.new()
+	_control_holder.name = "ControlReadout"
+	_control_holder.position = Vector3(0, 0, 0.06)
+	controls.add_child(_control_holder)
+	_rebuild_control_board()
 
-	# Methods enabled
-	var methods = "SHAP: %s\nLIME: %s\nGrad-CAM: %s" % [
-		"ON" if show_shap else "OFF",
-		"ON" if show_lime else "OFF",
-		"ON" if show_grad_cam else "OFF"
+# ── Integrated-board builders (the fire_extinguisher / one-body principle) ──
+
+## A zone header: a framed title tag with a spaced multi-line info block on an
+## opaque plate below it. Consolidates the old floating zone-label + separate
+## info-panel into one non-overlapping unit anchored at `pos`.
+func _add_zone_header(parent: Node3D, pos: Vector3, title: String,
+		info_lines: Array, color: Color) -> void:
+	var header := Node3D.new()
+	header.name = "ZoneHeader"
+	header.position = pos
+	parent.add_child(header)
+
+	# Title board.
+	var title_tag: Node3D = BakedText.make_tag(
+		title, Color(1.0, 1.0, 1.0), 0.7,
+		Color(0.09, 0.10, 0.14), true, color)
+	if title_tag:
+		title_tag.position = Vector3(0, 0, 0)
+		header.add_child(title_tag)
+
+	# Info block on an opaque plate below the title — spaced lines, no overlap.
+	if info_lines.size() > 0:
+		var line_h := 0.34
+		var gap := 0.14
+		var block_w := 3.4
+		var n := info_lines.size()
+		var block_h: float = (line_h + gap) * n + 0.28
+
+		var plate: MeshInstance3D = BakedText.make_panel_mesh(
+			"", Color(0.06, 0.07, 0.10, 0.92), color,
+			Vector2(block_w, block_h), 1400, false)
+		if plate:
+			plate.name = "InfoPlate"
+			plate.position = Vector3(0, -0.55 - block_h * 0.5, -0.01)
+			var pm = plate.material_override
+			if pm is StandardMaterial3D:
+				pm.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+				pm.billboard_mode = BaseMaterial3D.BILLBOARD_ENABLED
+			header.add_child(plate)
+
+		var block: Node3D = BakedText.make_text_block(
+			info_lines, color, line_h, block_w * 0.9, gap, false)
+		block.position = Vector3(0, -0.55 - block_h * 0.5, 0.01)
+		for c in block.get_children():
+			if c is MeshInstance3D and c.material_override is StandardMaterial3D:
+				c.material_override.billboard_mode = BaseMaterial3D.BILLBOARD_ENABLED
+		header.add_child(block)
+
+## Central prediction readout — a single two-line integrated board, rebuilt when
+## the prediction/confidence changes (replaces the floating Label3D).
+func _rebuild_prediction_board() -> void:
+	if not is_instance_valid(_prediction_holder):
+		return
+	for c in _prediction_holder.get_children():
+		c.queue_free()
+	var lines := [
+		"PREDICTION: %s" % current_prediction,
+		"%.0f%% confident" % (prediction_confidence * 100.0),
 	]
-	var methods_label = Label3D.new()
-	methods_label.text = methods
-	methods_label.font_size = 32
-	methods_label.outline_size = 8
-	methods_label.position = Vector3(0, 0.2, 0.1)
-	controls.add_child(methods_label)
+	var block: Node3D = BakedText.make_text_block(
+		lines, Color(0.35, 0.95, 0.95), 0.5, 3.6, 0.14, true)
+	for c in block.get_children():
+		if c is MeshInstance3D and c.material_override is StandardMaterial3D:
+			c.material_override.billboard_mode = BaseMaterial3D.BILLBOARD_ENABLED
+	_prediction_holder.add_child(block)
 
-	# Confidence display
-	var confidence = Label3D.new()
-	confidence.name = "ConfidenceLabel"
-	confidence.text = "Confidence: %.0f%%" % (prediction_confidence * 100)
-	confidence.font_size = 36
-	confidence.outline_size = 8
-	confidence.position = Vector3(0, -1.0, 0.1)
-	controls.add_child(confidence)
-
-func _create_info_panels() -> void:
-	"""Create educational info panels"""
-	# SHAP explanation
-	if show_shap:
-		_create_info_panel(
-			Vector3(-zone_spacing, 5.5, -3.0),
-			"SHAP VALUES\nGame theory approach\nGlobal feature importance\nAdditive explanations",
-			Color(0.9, 0.3, 0.5)
-		)
-
-	# LIME explanation
-	if show_lime:
-		_create_info_panel(
-			Vector3(0, 5.5, -3.0),
-			"LIME\nLocal surrogate model\nPerturbation-based\nInterpretable locally",
-			Color(0.3, 0.9, 0.3)
-		)
-
-	# Grad-CAM explanation
-	if show_grad_cam:
-		_create_info_panel(
-			Vector3(zone_spacing, 5.5, -3.0),
-			"GRAD-CAM\nGradient-based attention\nVisual explanations\nClass activation maps",
-			Color(0.9, 0.5, 0.3)
-		)
-
-func _create_info_panel(pos: Vector3, text: String, color: Color) -> void:
-	"""Create floating info panel"""
-	var label = Label3D.new()
-	label.text = text
-	label.font_size = 32
-	label.outline_size = 8
-	label.outline_modulate = Color.BLACK
-	label.modulate = color
-	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	label.position = pos
-	add_child(label)
+## Control-panel readout — title + method states + confidence consolidated onto
+## ONE spaced text block on the panel face. Rebuilt when confidence changes.
+func _rebuild_control_board() -> void:
+	if not is_instance_valid(_control_holder):
+		return
+	for c in _control_holder.get_children():
+		c.queue_free()
+	var lines := [
+		"EXPLAINABLE AI",
+		"METHODS",
+		"",
+		"SHAP:     %s" % ("ON" if show_shap else "OFF"),
+		"LIME:     %s" % ("ON" if show_lime else "OFF"),
+		"Grad-CAM: %s" % ("ON" if show_grad_cam else "OFF"),
+		"",
+		"Confidence: %.0f%%" % (prediction_confidence * 100.0),
+	]
+	var block: Node3D = BakedText.make_text_block(
+		lines, Color(0.9, 0.94, 1.0), 0.3, 2.7, 0.1, true)
+	_control_holder.add_child(block)
 
 func _animate_shap_values(_delta) -> void:
 	"""Animate SHAP feature bars"""
@@ -582,15 +598,15 @@ func _animate_heatmap(_delta) -> void:
 		var pulse = 1.0 + sin(time * 2.0 + point.position.x + point.position.z) * 0.1
 		point.scale = Vector3(pulse, 1.0, pulse)
 
-func _update_confidence_display(_delta) -> void:
-	"""Update confidence meter"""
-	var controls = get_node_or_null("ControlPanel")
-	if not controls:
-		return
+var _last_shown_confidence: float = -1.0
 
-	var confidence_label = controls.get_node_or_null("ConfidenceLabel")
-	if confidence_label:
-		confidence_label.text = "Confidence: %.0f%%" % (prediction_confidence * 100)
+func _update_confidence_display(_delta) -> void:
+	"""Rebuild the integrated confidence readouts only when the value changes."""
+	if abs(prediction_confidence - _last_shown_confidence) < 0.005:
+		return
+	_last_shown_confidence = prediction_confidence
+	_rebuild_control_board()
+	_rebuild_prediction_board()
 
 # Public API
 func set_feature_importance(feature_idx: int, importance: float) -> void:

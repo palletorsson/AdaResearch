@@ -20,6 +20,8 @@ extends Node3D
 
 class_name PrngCrankMachine
 
+const BakedText = preload("res://commons/utils/baked_text_albedo.gd")
+
 # ── Machine Body ─────────────────────────────────────────────────────────────
 @export var body_width: float = 0.4
 @export var body_height: float = 0.5
@@ -44,18 +46,27 @@ var _state: int = 42
 var _step_count: int = 0
 var _history: Array[int] = []
 
-var _display_label: Label3D
-var _formula_label: Label3D
-var _step_label: Label3D
-var _state_label: Label3D
-var _history_label: Label3D
-var _seed_label: Label3D
+# Board containers — each holds a baked-text block that is rebuilt when its
+# values change. ONE BODY: one panel per role, never two boards overlapping.
+var _readout_board: Node3D    # main number + normalized + step + seed
+var _formula_board: Node3D    # formula line + live computation + params
+var _history_board: Node3D    # sequence header + numbers
+
+# Board face geometry (metres) reused by the rebuild helpers.
+var _readout_width: float = 0.34
+var _formula_width: float = 0.34
+var _history_width: float = 0.34
 
 # Animation state
 var _is_animating: bool = false
 var _anim_phase: int = 0  # 0=idle, 1=multiply, 2=add, 3=mod, 4=done
 var _anim_timer: float = 0.0
 var _anim_intermediate: int = 0
+
+# Current text lines for the animated formula board (phase transitions edit these).
+var _formula_line: String = "state = (state x a + c) mod m"
+var _compute_line: String = ""
+var _compute_color: Color = Color(0.7, 0.7, 0.75)
 
 const MAX_HISTORY := 12
 const PHASE_DURATION := 0.6  # Seconds per animation phase
@@ -110,9 +121,10 @@ func _crank() -> void:
 	_anim_intermediate = _state
 
 	# Phase 1: Show multiplication
-	_formula_label.text = "state × %d" % lcg_multiplier
-	_state_label.text = "%d × %d" % [_state, lcg_multiplier]
-	_state_label.modulate = Color(1.0, 0.7, 0.3)
+	_formula_line = "state × %d" % lcg_multiplier
+	_compute_line = "%d × %d" % [_state, lcg_multiplier]
+	_compute_color = Color(1.0, 0.7, 0.3)
+	_rebuild_formula_board()
 
 
 func _advance_animation() -> void:
@@ -121,17 +133,19 @@ func _advance_animation() -> void:
 			# Multiply done → show result, start add
 			_anim_intermediate = _state * lcg_multiplier
 			_anim_phase = 2
-			_formula_label.text = "... + %d" % lcg_increment
-			_state_label.text = "%d + %d" % [_anim_intermediate, lcg_increment]
-			_state_label.modulate = Color(0.3, 0.8, 1.0)
+			_formula_line = "... + %d" % lcg_increment
+			_compute_line = "%d + %d" % [_anim_intermediate, lcg_increment]
+			_compute_color = Color(0.3, 0.8, 1.0)
+			_rebuild_formula_board()
 
 		2:
 			# Add done → show result, start mod
 			_anim_intermediate = _anim_intermediate + lcg_increment
 			_anim_phase = 3
-			_formula_label.text = "... mod 2^32"
-			_state_label.text = "%d mod 4294967296" % _anim_intermediate
-			_state_label.modulate = Color(1.0, 0.5, 0.8)
+			_formula_line = "... mod 2^32"
+			_compute_line = "%d mod 4294967296" % _anim_intermediate
+			_compute_color = Color(1.0, 0.5, 0.8)
+			_rebuild_formula_board()
 
 		3:
 			# Mod done → final result
@@ -148,9 +162,10 @@ func _advance_animation() -> void:
 				_history.pop_front()
 
 			_anim_phase = 4
-			_formula_label.text = "state = (state × a + c) mod m"
-			_state_label.text = "→ %d" % _state
-			_state_label.modulate = color_display_text
+			_formula_line = "state = (state × a + c) mod m"
+			_compute_line = "→ %d" % _state
+			_compute_color = color_display_text
+			_rebuild_formula_board()
 
 		4:
 			# Animation complete
@@ -235,25 +250,21 @@ func _create_machine_body() -> void:
 			)
 			body.add_child(bolt)
 
-	# Nameplate
-	var nameplate := Label3D.new()
-	nameplate.text = "LCG-32"
-	nameplate.pixel_size = 0.001
-	nameplate.font_size = 14
-	nameplate.modulate = color_accent
-	nameplate.position = Vector3(0, body_height + 0.02, body_depth / 2.0 + 0.001)
-	nameplate.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	body.add_child(nameplate)
+	# Nameplate — a brass tag riveted to the front lip, just above the body.
+	var nameplate := BakedText.make_tag(
+		"LCG-32", color_accent, 0.028,
+		Color(0.10, 0.09, 0.06), false, color_accent)
+	if nameplate:
+		nameplate.position = Vector3(0, body_height + 0.03, body_depth / 2.0 + 0.004)
+		body.add_child(nameplate)
 
-	# Title above
-	var title := Label3D.new()
-	title.text = "PSEUDO-RANDOM\nNUMBER GENERATOR"
-	title.pixel_size = 0.0015
-	title.font_size = 14
-	title.modulate = Color(0.85, 0.85, 0.9)
-	title.position = Vector3(0, body_height + 0.1, 0)
-	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	body.add_child(title)
+	# Title above — two spaced lines on one board, clear of the nameplate below.
+	var title := BakedText.make_text_block(
+		["PSEUDO-RANDOM", "NUMBER GENERATOR"],
+		Color(0.85, 0.85, 0.9), 0.032, body_width * 1.15, 0.008, false)
+	if title:
+		title.position = Vector3(0, body_height + 0.13, 0.0)
+		body.add_child(title)
 
 
 # ═════════════════════════════════════════════════════════════════════════════
@@ -261,141 +272,151 @@ func _create_machine_body() -> void:
 # ═════════════════════════════════════════════════════════════════════════════
 
 func _create_display_panel() -> void:
-	var panel_y := pedestal_height + body_height * 0.65
+	# READOUT board — one screen carrying the whole instrument readout:
+	# seed + step on the header row, the current number + its 0-1 float below.
+	# Previously four separate Label3D nodes; now one rebuilt text block.
+	var panel_y := pedestal_height + body_height * 0.66
 	var panel_z := body_depth / 2.0 + 0.002
+	_readout_width = body_width * 0.82
 
-	# Display background (dark screen)
-	var screen := MeshInstance3D.new()
-	var screen_box := BoxMesh.new()
-	screen_box.size = Vector3(body_width * 0.85, 0.08, 0.003)
-	screen.mesh = screen_box
+	_make_screen(Vector3(_readout_width, 0.11, 0.003),
+		color_display_bg, Vector3(0, panel_y, panel_z), 0.05)
 
-	var screen_mat := StandardMaterial3D.new()
-	screen_mat.albedo_color = color_display_bg
-	screen_mat.emission_enabled = true
-	screen_mat.emission = color_display_bg
-	screen_mat.emission_energy_multiplier = 0.05
-	screen.material_override = screen_mat
-	screen.position = Vector3(0, panel_y, panel_z)
-	add_child(screen)
-
-	# Main number display
-	_display_label = Label3D.new()
-	_display_label.name = "NumberDisplay"
-	_display_label.text = "42"
-	_display_label.pixel_size = 0.002
-	_display_label.font_size = 28
-	_display_label.modulate = color_display_text
-	_display_label.position = Vector3(0, panel_y, panel_z + 0.003)
-	_display_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	add_child(_display_label)
-
-	# Step counter
-	_step_label = Label3D.new()
-	_step_label.name = "StepLabel"
-	_step_label.text = "step: 0"
-	_step_label.pixel_size = 0.001
-	_step_label.font_size = 16
-	_step_label.modulate = Color(0.5, 0.8, 0.5)
-	_step_label.position = Vector3(body_width * 0.35, panel_y + 0.045, panel_z + 0.003)
-	_step_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
-	add_child(_step_label)
-
-	# Seed display
-	_seed_label = Label3D.new()
-	_seed_label.name = "SeedLabel"
-	_seed_label.text = "seed: %d" % initial_seed
-	_seed_label.pixel_size = 0.001
-	_seed_label.font_size = 16
-	_seed_label.modulate = Color(0.6, 0.6, 0.5)
-	_seed_label.position = Vector3(-body_width * 0.35, panel_y + 0.045, panel_z + 0.003)
-	_seed_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
-	add_child(_seed_label)
+	_readout_board = Node3D.new()
+	_readout_board.name = "ReadoutBoard"
+	_readout_board.position = Vector3(0, panel_y, panel_z + 0.004)
+	add_child(_readout_board)
+	_rebuild_readout_board()
 
 
 func _create_formula_display() -> void:
+	# FORMULA board — the arithmetic. One screen: the formula line, the live
+	# per-phase computation (colour-coded via the compute line), and the LCG
+	# parameters. Rebuilt each animation phase so the crank drives the numbers.
 	var formula_y := pedestal_height + body_height * 0.42
 	var panel_z := body_depth / 2.0 + 0.002
+	_formula_width = body_width * 0.82
 
-	# Formula background
-	var bg := MeshInstance3D.new()
-	var bg_box := BoxMesh.new()
-	bg_box.size = Vector3(body_width * 0.85, 0.065, 0.003)
-	bg.mesh = bg_box
-	var bg_mat := StandardMaterial3D.new()
-	bg_mat.albedo_color = Color(0.04, 0.04, 0.06)
-	bg.material_override = bg_mat
-	bg.position = Vector3(0, formula_y, panel_z)
-	add_child(bg)
+	_make_screen(Vector3(_formula_width, 0.10, 0.003),
+		Color(0.04, 0.04, 0.06), Vector3(0, formula_y, panel_z), 0.0)
 
-	# Formula text
-	_formula_label = Label3D.new()
-	_formula_label.name = "FormulaLabel"
-	_formula_label.text = "state = (state × a + c) mod m"
-	_formula_label.pixel_size = 0.001
-	_formula_label.font_size = 16
-	_formula_label.modulate = color_formula
-	_formula_label.position = Vector3(0, formula_y + 0.015, panel_z + 0.003)
-	_formula_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	add_child(_formula_label)
-
-	# Animated state computation label
-	_state_label = Label3D.new()
-	_state_label.name = "StateLabel"
-	_state_label.text = ""
-	_state_label.pixel_size = 0.001
-	_state_label.font_size = 14
-	_state_label.modulate = Color(0.7, 0.7, 0.75)
-	_state_label.position = Vector3(0, formula_y - 0.015, panel_z + 0.003)
-	_state_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	add_child(_state_label)
-
-	# Parameters label below
-	var params := Label3D.new()
-	params.text = "a = %d    c = %d    m = 2^32" % [lcg_multiplier, lcg_increment]
-	params.pixel_size = 0.0008
-	params.font_size = 14
-	params.modulate = Color(0.45, 0.45, 0.5)
-	params.position = Vector3(0, formula_y - 0.045, panel_z + 0.003)
-	params.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	add_child(params)
+	_formula_board = Node3D.new()
+	_formula_board.name = "FormulaBoard"
+	_formula_board.position = Vector3(0, formula_y, panel_z + 0.004)
+	add_child(_formula_board)
+	_rebuild_formula_board()
 
 
 func _create_history_panel() -> void:
-	var hist_y := pedestal_height + body_height * 0.15
+	# HISTORY board — the emitted sequence. Header + numbers on one screen.
+	var hist_y := pedestal_height + body_height * 0.16
 	var panel_z := body_depth / 2.0 + 0.002
+	_history_width = body_width * 0.82
 
-	# History background
-	var bg := MeshInstance3D.new()
-	var bg_box := BoxMesh.new()
-	bg_box.size = Vector3(body_width * 0.85, 0.08, 0.003)
-	bg.mesh = bg_box
-	var bg_mat := StandardMaterial3D.new()
-	bg_mat.albedo_color = Color(0.03, 0.03, 0.05)
-	bg.material_override = bg_mat
-	bg.position = Vector3(0, hist_y, panel_z)
-	add_child(bg)
+	_make_screen(Vector3(_history_width, 0.10, 0.003),
+		Color(0.03, 0.03, 0.05), Vector3(0, hist_y, panel_z), 0.0)
 
-	# History label header
-	var header := Label3D.new()
-	header.text = "sequence:"
-	header.pixel_size = 0.0008
-	header.font_size = 16
-	header.modulate = Color(0.5, 0.5, 0.55)
-	header.position = Vector3(-body_width * 0.38, hist_y + 0.032, panel_z + 0.003)
-	header.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
-	add_child(header)
+	_history_board = Node3D.new()
+	_history_board.name = "HistoryBoard"
+	_history_board.position = Vector3(0, hist_y, panel_z + 0.004)
+	add_child(_history_board)
+	_rebuild_history_board()
 
-	# History numbers
-	_history_label = Label3D.new()
-	_history_label.name = "HistoryLabel"
-	_history_label.text = ""
-	_history_label.pixel_size = 0.0007
-	_history_label.font_size = 16
-	_history_label.modulate = Color(0.4, 0.7, 0.4)
-	_history_label.position = Vector3(0, hist_y - 0.005, panel_z + 0.003)
-	_history_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	add_child(_history_label)
+
+## Opaque backing screen behind a board (the dark LCD plate).
+func _make_screen(size: Vector3, bg: Color, pos: Vector3, emit_energy: float) -> void:
+	var screen := MeshInstance3D.new()
+	var screen_box := BoxMesh.new()
+	screen_box.size = size
+	screen.mesh = screen_box
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = bg
+	if emit_energy > 0.0:
+		mat.emission_enabled = true
+		mat.emission = bg
+		mat.emission_energy_multiplier = emit_energy
+	screen.material_override = mat
+	screen.position = pos
+	add_child(screen)
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# BOARD REBUILDS — clear the container, repaint one baked-text block onto it
+# ═════════════════════════════════════════════════════════════════════════════
+
+func _clear_board(board: Node3D) -> void:
+	if board == null:
+		return
+	for c in board.get_children():
+		c.queue_free()
+
+
+func _rebuild_readout_board() -> void:
+	if _readout_board == null:
+		return
+	_clear_board(_readout_board)
+	var normalized := float(_state & 0xFFFFFFFF) / 4294967296.0
+	var header := "seed: %d      step: %d" % [initial_seed, _step_count]
+	var lines := [
+		header,
+		"%d" % (_state & 0xFFFFFFFF),
+		"%.6f" % normalized,
+	]
+	var block := BakedText.make_text_block(
+		lines, color_display_text, 0.03, _readout_width * 0.94, 0.006, true)
+	if block:
+		_readout_board.add_child(block)
+
+
+func _rebuild_formula_board() -> void:
+	if _formula_board == null:
+		return
+	_clear_board(_formula_board)
+	# Formula + live computation share the same board; the compute line is
+	# coloured by the current phase, the surrounding lines stay muted.
+	var params := "a = %d    c = %d    m = 2^32" % [lcg_multiplier, lcg_increment]
+	# Formula line (top), muted.
+	var top := BakedText.make_text_block(
+		[_formula_line], color_formula, 0.024, _formula_width * 0.94, 0.0, true)
+	if top:
+		top.position = Vector3(0, 0.03, 0.0)
+		_formula_board.add_child(top)
+	# Live computation line (middle), phase-coloured.
+	if _compute_line != "":
+		var mid := BakedText.make_text_block(
+			[_compute_line], _compute_color, 0.022, _formula_width * 0.94, 0.0, true)
+		if mid:
+			mid.position = Vector3(0, 0.0, 0.0)
+			_formula_board.add_child(mid)
+	# Parameters line (bottom), dim.
+	var bot := BakedText.make_text_block(
+		[params], Color(0.45, 0.45, 0.5), 0.02, _formula_width * 0.94, 0.0, true)
+	if bot:
+		bot.position = Vector3(0, -0.03, 0.0)
+		_formula_board.add_child(bot)
+
+
+func _rebuild_history_board() -> void:
+	if _history_board == null:
+		return
+	_clear_board(_history_board)
+	var lines: Array = ["sequence:"]
+	if _history.is_empty():
+		lines.append(str(initial_seed))
+	else:
+		var row := ""
+		var per_line := 4
+		for i in range(_history.size()):
+			if i > 0 and i % per_line == 0:
+				lines.append(row.strip_edges())
+				row = ""
+			row += "%d  " % (_history[i] & 0xFFFFFFFF)
+		if row.strip_edges() != "":
+			lines.append(row.strip_edges())
+	var block := BakedText.make_text_block(
+		lines, Color(0.42, 0.72, 0.42), 0.02, _history_width * 0.94, 0.004, true)
+	if block:
+		_history_board.add_child(block)
 
 
 # ═════════════════════════════════════════════════════════════════════════════
@@ -403,24 +424,12 @@ func _create_history_panel() -> void:
 # ═════════════════════════════════════════════════════════════════════════════
 
 func _update_display() -> void:
-	# Number display — show as both decimal and 0-1 float
-	var normalized := float(_state & 0xFFFFFFFF) / 4294967296.0
-	_display_label.text = "%d\n%.6f" % [_state & 0xFFFFFFFF, normalized]
-
-	_step_label.text = "step: %d" % _step_count
-	_state_label.text = ""
-
-	# History
-	if _history.is_empty():
-		_history_label.text = str(initial_seed)
-	else:
-		var lines := ""
-		var per_line := 4
-		for i in range(_history.size()):
-			if i > 0 and i % per_line == 0:
-				lines += "\n"
-			lines += "%d  " % (_history[i] & 0xFFFFFFFF)
-		_history_label.text = lines
+	# Idle state — clear the live computation line and repaint all boards.
+	_compute_line = ""
+	_formula_line = "state = (state × a + c) mod m"
+	_rebuild_readout_board()
+	_rebuild_formula_board()
+	_rebuild_history_board()
 
 
 # ═════════════════════════════════════════════════════════════════════════════
@@ -472,7 +481,6 @@ func _reset() -> void:
 	_history.clear()
 	_is_animating = false
 	_anim_phase = 0
-	_seed_label.text = "seed: %d" % initial_seed
 	_update_display()
 
 
@@ -483,7 +491,6 @@ func _randomize_seed() -> void:
 	_history.clear()
 	_is_animating = false
 	_anim_phase = 0
-	_seed_label.text = "seed: %d" % initial_seed
 	_update_display()
 
 func _exit_tree() -> void:
