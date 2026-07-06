@@ -89,6 +89,7 @@ def map_changes(limit: int = 60) -> list:
 PAGES = [
     {"label": "Read the Book", "route": "/chapter", "note": "the developed chapters — walk + turn"},
     {"label": "Heroes ⟷ Anti-Heroes", "route": "/heroes", "note": "the dialectic list, editable"},
+    {"label": "Heroes Timeline", "route": "/heroes-timeline", "note": "the dialectic as a timeline mind map"},
     {"label": "Composition", "route": "/composition", "note": "need · potential · actual"},
     {"label": "Key Artifacts", "route": "/key-artifacts", "note": "the book's DNA"},
     {"label": "Station Gallery", "route": "/station-gallery", "note": "the lab benches"},
