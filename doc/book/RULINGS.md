@@ -598,4 +598,25 @@ walks (walked.md) + considered passes + rooms + Palle's hand on the locks.
 
 ---
 
-<!-- Next: R-026 — walk primitives, LOCK ch.1; author the exit-test family (the cross-chapter gap); reconcile arc roles; noise truths -->
+## R-026 · 2026-07-06 · Key artifacts, promoted to DNA (the improvement gallery)
+
+**Palle:** "Define key artifacts and promote them to dna in a gallery to improve."
+
+**Ruling:** The baselines already defined "key" — the artifacts cast as a BEAT or chosen
+as VOLTAGE across the 22 chapters. `tools/build_key_artifacts.py` collects that set and
+PROMOTES each to a DNA entry: its book-role (beats taught, critical charge carried, chapters
+that lean on it) fused with its code @identity essence and a capture. `/key-artifacts` is the
+gallery, ranked by BOOK-WEIGHT (how many chapters depend on it) — and that ranking IS the
+improvement worklist: harden the load-bearing artifacts first, weak-cast ones flagged amber
+with an `improve →` into artifact-md / the chamber loop.
+- 403 promoted → 243 KEY (33 hero+voltage, 149 hero, 61 voltage) + 160 understudies.
+- 394 captured, 293 carry DNA essence, 28 weak-cast (the soft spots).
+- Load-bearing top: science_screen (5 ch), player_trace (3), qfep_formula_3d (3).
+- Freeze-legal: the reading/improvement face of the baselines (like /composition,
+  /station-gallery), directed by Palle — not new generative machinery.
+The gallery closes the improvement loop: SEE the key set → improve the weak/load-bearing →
+recompose. "Which artifacts to improve?" is now answered: the key ones, in book-priority order.
+
+---
+
+<!-- Next: R-027 — improve the top-weight + weak key artifacts (worklist); concept_exit_test family; walk primitives, LOCK ch.1 -->
