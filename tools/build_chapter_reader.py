@@ -42,8 +42,11 @@ def load_json(p):
 
 
 def developed(md: str) -> bool:
-    return ("not yet walked under R-021" not in md
-            and "## The walk" in md and len(md) > 1800)
+    # a developed page has a real (non-placeholder) walk section
+    if "## The walk" not in md:
+        return False
+    walk = section(md, "The walk")
+    return "not yet walked" not in walk and len(walk) > 300
 
 
 def section(md: str, header: str) -> str:
