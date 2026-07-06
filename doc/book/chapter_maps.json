@@ -1,0 +1,380 @@
+{
+ "generated_by": "tools/chapter_maps.py",
+ "cap": 10,
+ "chapters": {
+  "primitives": {
+   "keep": [
+    "Point_One",
+    "Point_Lines",
+    "Point_Trace",
+    "Point_Line_Grid",
+    "Point_Triangle_Context",
+    "Primitives_Polythedra",
+    "Point_Animatedcube",
+    "Primitives_Ignorance",
+    "Primitives_Melencolia"
+   ],
+   "drop": [
+    "Primitives_Portals"
+   ],
+   "total_maps": 10
+  },
+  "transformation": {
+   "keep": [
+    "Trans_Introduction",
+    "Trans_Translation",
+    "Trans_AxisDecomposition",
+    "Trans_Rotation",
+    "Trans_RotationSpectacle",
+    "Trans_Scale",
+    "Trans_Pit"
+   ],
+   "drop": [],
+   "total_maps": 7
+  },
+  "array_tutorial": {
+   "keep": [
+    "Tutorial_Single",
+    "Tutorial_Pattern",
+    "Array_Patterns",
+    "Tutorial_Row",
+    "Tutorial_2D_Build",
+    "Tutorial_3D",
+    "Tutorial_Disco"
+   ],
+   "drop": [],
+   "total_maps": 7
+  },
+  "color": {
+   "keep": [
+    "Pattern_Foundry",
+    "Color_Context_Placed",
+    "Color_Nails",
+    "Color_Grid_Pallet",
+    "Color_Rainbow",
+    "Color_Pillar",
+    "Color_Walls"
+   ],
+   "drop": [
+    "Color_Paint",
+    "Color_Flashlight"
+   ],
+   "total_maps": 9
+  },
+  "change": {
+   "keep": [
+    "Change_Intro",
+    "Change_Velocity",
+    "Change_Slope_Surface",
+    "Accumulation_Area",
+    "Accumulation_Riemann",
+    "Flow_Field",
+    "Flow_Particle_Pulse",
+    "Change_Reconciliation"
+   ],
+   "drop": [],
+   "total_maps": 8
+  },
+  "isosurfaces": {
+   "keep": [
+    "ISO_Introduction",
+    "ISO_LookupTable",
+    "ISO_ShapesGallery",
+    "ISO_TorusGyroid",
+    "ISO_Sculpting",
+    "ISO_FlatTerrain",
+    "ISO_Caves",
+    "ISO_AnimatedNoise",
+    "ISO_Metaballs",
+    "ISO_ImplicitModeling"
+   ],
+   "drop": [
+    "ISO_PortalLandscape",
+    "ISO_CaveGeneration"
+   ],
+   "total_maps": 12
+  },
+  "boolean_surfaces": {
+   "keep": [
+    "Boolean_Union",
+    "Boolean_Intersection",
+    "Boolean_Difference",
+    "Boolean_Compose_Workbench",
+    "Boolean_Architecture_Cavity"
+   ],
+   "drop": [],
+   "total_maps": 5
+  },
+  "forces": {
+   "keep": [
+    "Void_Crossing",
+    "Force_Preview",
+    "VFM_01_Foundations",
+    "VFM_03_Motion",
+    "Vectors_Act5_ForceAsPlace",
+    "ForcesFoundations",
+    "ForcesComposition",
+    "VFM_05_Launch",
+    "ForcesChaos",
+    "VFM_07_Gravity"
+   ],
+   "drop": [
+    "Sky_Climb",
+    "Reformed_Instruments",
+    "Console_Test",
+    "Force_Props_Sandbox",
+    "VectorFoundations",
+    "Vectors_Act1_WhatAVectorIs",
+    "VectorOperations",
+    "Vectors_Act2_VectorArithmetic",
+    "VFM_02_Operations",
+    "VectorAdvanced",
+    "Vectors_Act3_FieldsAndMotion",
+    "Vectors_Act4a_KineticForces",
+    "Vectors_Act4b_Oscillation",
+    "VectorApplied",
+    "VFM_04_Fields",
+    "ForcesSystems",
+    "VFM_06_Springs",
+    "VFM_08_Arena",
+    "ForcesArena"
+   ],
+   "total_maps": 29
+  },
+  "wavefunctions": {
+   "keep": [
+    "WaveFunctions_Intro",
+    "WaveFunctions_Pendulum",
+    "WaveFunctions_Unit_Circle",
+    "WaveFunctions_Sine_Space",
+    "WaveFunctions_3D_Wave_Propagation",
+    "WaveFunctions_Effect_Sound",
+    "WaveFunctions_AirMusic",
+    "WaveFunctions_TrigWalkingPath",
+    "WaveFunctions_Synthesis_Lab"
+   ],
+   "drop": [
+    "Wavefunctions_Bernini",
+    "WaveFunctions_John_Cage",
+    "Wavefunctions_Sky_Stairs"
+   ],
+   "total_maps": 12
+  },
+  "randomness": {
+   "keep": [
+    "Random_Definition",
+    "Random_Cubes",
+    "Random_Rotate_Random_XYZ",
+    "Random_Walk",
+    "Random_Gaussian",
+    "Randomness_Examples_of_Randomness",
+    "Random_Space"
+   ],
+   "drop": [
+    "Random_Remove",
+    "Randomness_10_PRINT_Algorithm",
+    "Random_Mushrooms",
+    "Random_Space_Geometry",
+    "Random_Pheromone",
+    "Random_Game"
+   ],
+   "total_maps": 13
+  },
+  "noise": {
+   "keep": [
+    "Random_Noise_Types",
+    "Noise_Columns",
+    "Noise_One",
+    "Noise_Voxel",
+    "Noise_6_Wall",
+    "Noise_Inside_Noise",
+    "Noise_Space_10",
+    "Noise_Perlin_Simplex"
+   ],
+   "drop": [
+    "Lab_Path"
+   ],
+   "total_maps": 9
+  },
+  "cellularautomata": {
+   "keep": [
+    "CA_Introduction",
+    "CA_ElementaryRules",
+    "CA_GameOfLife",
+    "CA_BeyondBinary",
+    "CA_ExpandingSpace",
+    "CA_SoftRules",
+    "CA_AgentsCircuits",
+    "CA_EdgeOfChaos"
+   ],
+   "drop": [],
+   "total_maps": 8
+  },
+  "fractals": {
+   "keep": [
+    "Fractal_Recursion",
+    "Fractal_RecursiveTrees",
+    "Fractal_CantorSet",
+    "Fractal_KochSierpinski",
+    "Fractal_MengerSponge",
+    "Fractal_GoldenSpiral",
+    "Fractal_JuliaSet",
+    "Fractal_MandelbrotSet",
+    "Fractal_Synthesis",
+    "Fractal_CrossSequence"
+   ],
+   "drop": [],
+   "total_maps": 10
+  },
+  "lsystems": {
+   "keep": [
+    "LSystems_Grammar_Lab",
+    "LSystems_Growth",
+    "LSystems_Grammars_And_Curves",
+    "LSystems_Architecture",
+    "LSystems_Competition",
+    "LSystems_Living"
+   ],
+   "drop": [],
+   "total_maps": 6
+  },
+  "proceduralgeneration": {
+   "keep": [
+    "PG_Genetic_Evolution",
+    "PG_Space_Colonization",
+    "PG_Percolation_Network",
+    "PG_Branching_Growth",
+    "PG_Caves_Mazes",
+    "PG_Sculpted_Forms",
+    "PG_Mirrored_Patterns"
+   ],
+   "drop": [],
+   "total_maps": 7
+  },
+  "swarmintelligence": {
+   "keep": [
+    "SwarmIntelligence_PhysarumColony",
+    "SwarmIntelligence_FlowFields",
+    "SwarmIntelligence_Boids_Algorithm",
+    "SwarmIntelligence_Agent_Based_Modeling_ABM",
+    "SwarmIntelligence_Ant_Colony_Optimization",
+    "SwarmIntelligence_Particle_Swarm_Optimization",
+    "SwarmIntelligence_Swarm_Intelligence_Algorithms"
+   ],
+   "drop": [],
+   "total_maps": 7
+  },
+  "softbodies": {
+   "keep": [
+    "SoftBodies_Soft_Body_Deformation",
+    "SoftBodies_Carusell",
+    "SoftBodies_Obsticals",
+    "SoftBodies_Obsticals_Part2",
+    "SoftBodies_Cloth_Physics",
+    "SoftBodies_Playground_of_Joy",
+    "SoftBodies_Affect_Theory_Visualization",
+    "ProceduralGeneration_Reaction_Diffusion_Systems",
+    "Topology_Entropy_Morphogenesis",
+    "Chamber_SoftBodies"
+   ],
+   "drop": [
+    "SoftBody_sb01_cloth_drape_corners",
+    "SoftBody_sb02_cloth_drape_top_row",
+    "SoftBody_sb03_cloth_flag_sideways",
+    "SoftBody_sb04_cloth_tablecloth",
+    "SoftBody_sb05_jelly_box_bounce",
+    "SoftBody_sb06_jelly_grid_settle",
+    "SoftBody_sb07_jelly_grid_tall_stiff",
+    "SoftBody_sb08_jelly_grid_floppy",
+    "SoftBody_sb_ls01_plant_skeleton",
+    "SoftBody_sb_ls02_plant_wind_collapse",
+    "SoftBody_sb_ca01_conway_cloth",
+    "SoftBody_sb_ca02_life_without_death_cloth",
+    "SoftBody_sb_noise01_jelly_crystal",
+    "SoftBody_sb_rd01_coral_cloth",
+    "SoftBody_sb_rd02_stripes_flag",
+    "SoftBody_gl01_classic_bulb",
+    "SoftBody_gl02_long_bottle",
+    "SoftBody_gl03_wide_bowl",
+    "SoftBody_gl04_lopsided_vase",
+    "SoftBody_gl05_collapsed_sag",
+    "SoftBody_gm01_bottle_in_cylinder_mould",
+    "SoftBody_gm02_vase_in_tapered_mould",
+    "SoftBody_gm03_box_in_cube_mould",
+    "SoftBody_gm04_pressed_onto_sphere"
+   ],
+   "total_maps": 34
+  },
+  "machinelearning": {
+   "keep": [
+    "ML_Evolution",
+    "ML_Gradient_Landscape",
+    "ML_Classification",
+    "ML_Neural_Networks",
+    "ML_Perception",
+    "ML_Sequence_Memory",
+    "ML_Synthesis"
+   ],
+   "drop": [
+    "ML_Generative"
+   ],
+   "total_maps": 8
+  },
+  "graphtheory": {
+   "keep": [
+    "GT_Foundations",
+    "GT_Layout",
+    "GT_Pathfinding",
+    "GT_Network_Analysis",
+    "GT_Connectivity",
+    "GT_Spanning_Trees",
+    "GT_Flow",
+    "GT_Matching"
+   ],
+   "drop": [],
+   "total_maps": 8
+  },
+  "foundationscrisis": {
+   "keep": [
+    "Euclid_Parallel",
+    "NonEuclidean_Spaces",
+    "Russell_Paradox",
+    "Godel_Incompleteness",
+    "Escher_Impossible",
+    "Brouwer_Intuitionism",
+    "Florensky_Paraconsistent",
+    "Crisis_Synthesis"
+   ],
+   "drop": [],
+   "total_maps": 8
+  },
+  "qfeplaboratory": {
+   "keep": [
+    "QFEP_Introduction",
+    "QFEP_F_Term",
+    "QFEP_E_Term",
+    "QFEP_Lambda_Spectrum",
+    "QFEP_Phi_Term",
+    "QFEP_Edge_Of_Chaos",
+    "QFEP_Sandbox",
+    "QFEP_Synthesis"
+   ],
+   "drop": [],
+   "total_maps": 8
+  },
+  "postfoundationscrisis": {
+   "keep": [
+    "CriticalAlgorithms_Algorithmic_Bias_Visualization",
+    "CriticalAlgorithms_Applied_Ethics",
+    "SpeculativeComputation_Paraconsistent_Engineering",
+    "SpeculativeComputation_Situated_Computation",
+    "SpeculativeComputation_Collective_Knowledge",
+    "SpeculativeComputation_Rhizome_Network",
+    "AdvancedLaboratory_Lab_Equipment_Simulation",
+    "PostCrisis_Synthesis"
+   ],
+   "drop": [],
+   "total_maps": 8
+  }
+ }
+}

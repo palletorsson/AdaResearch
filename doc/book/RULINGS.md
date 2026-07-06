@@ -640,4 +640,26 @@ bare Label3D.
 
 ---
 
-<!-- Next: R-028 — continue the text-board migration across remaining key artifacts; concept_exit_test; walk primitives, LOCK ch.1 -->
+## R-028 · 2026-07-06 · Load-bearing maps (the sequence prunes too)
+
+**Palle:** "Since we have been researching there are many unneeded maps in the sequences.
+We should not have more than 10 per sequence, only the load-bearing ones in tutorial order —
+that is a good thing. Randomness and noise have much of their form, others do not. Key map +
+a sequence synthesis."
+
+**Ruling:** The baseline's load-bearing logic applies UP a level — from "which artifacts" to
+"which maps." A map earns its place in the book if it hosts a beat's cast (or an alt) or a
+voltage piece; a map that hosts none is a tutorial passenger and drops to DEPTH (kept in the
+game, not in the book). Per sequence: load-bearing maps in TUTORIAL order, capped at 10; if
+more than 10 are load-bearing, keep the highest-scoring 10 (beats weigh double). tools/
+chapter_maps.py -> doc/book/chapter_maps.json = the chapter structure the writing follows.
+- 233 spine maps -> 174 kept (59 to depth) + 22 syntheses = 196 pages (was per-map 1:1).
+- Biggest prunes: forces 29->10, softbodies 34->10, randomness 13->7 (its form confirmed
+  tight, as Palle said). No sequence now exceeds 10.
+- The BOOK unit is now: key-map page x N (<=10) + one sequence synthesis per chapter.
+Knob: tighten "load-bearing" to beats-only (drop voltage-only/alt-only maps) for a smaller
+book if wanted. This is R-023 (artifact baseline) and R-020 (the at-depth reserve) at map scale.
+
+---
+
+<!-- Next: R-029 — write chapter 2 (transformation) key-maps + synthesis holding voice; per-chapter as the engine turns -->
