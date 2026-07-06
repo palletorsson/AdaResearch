@@ -1,8 +1,8 @@
 # Point_Lines — walked
 
-> R-021: this page is developed by WALKING. Bridge notes are the pen; the ghost
-> works them in; Palle's voice leads. Ghost-seeded from blurb + intent — every
-> section below the seed is written by walks, not before them.
+> R-021, amended: the considered critical tutorial for a walked, working map.
+> The ghost drafts from what the map IS; Palle rules the voice. Two trajectories
+> woven: the walk (tutorial) and the turn (critical).
 
 ## What this map holds (seed)
 
@@ -11,21 +11,26 @@ A line connects two points. Two lines cross — the X marks intersection. Parall
 ## Why it was built (seed)
 
 Concept: Multiplication of lines into relational systems — parallels produce direction, crossings produce intersection, grids produce metric frameworks. Discrete relations begin behaving as networks.
-Sequence role: Second map. Extends Point_One's single mark into connection and multiplicity. The point gains companions; relation replaces isolation. Prepares Point_Trace by establishing the static scaffolding that trace will temporalize.
-Technical angle: Line drawing between two Vector3 positions, parametric line equations, grid construction from parallel/perpendicular sets, perspective projection and vanishing points, scale and measurement via laser_measure.
-Critical angle: The politics of the grid — who decides which lines are parallel, which directions are privileged. Le Corbusier's Modulor (modulor_man_demo) as ideological measurement system. Perspective as Renaissance power geometry.
-Key artifacts: line_builder_3d for constructing lines in space; plus_line_puzzle and parallel_line_puzzle for interactive constraint discovery; perspective_lines and scale_lines for measurement systems; dgrid for the emergent network; modulor_man_demo for the human body as metric unit.
-
-Gap: No gap identified.
+Sequence role: Second map. Extends Point_One's single mark into connection and multiplicity. Relation replaces isolation.
+Critical angle: The politics of the grid — who decides which lines are parallel, which directions are privileged. Le Corbusier's Modulor as ideological measurement system; perspective as Renaissance power geometry.
 
 ## The cast
 
-dark_sphere, lab_room, line, modulor_man_demo, line_builder_3d, science_screen, plus_line_puzzle, parallel_line_puzzle, cube_scene, floating_sphere_field, laser_measure, laser_exploding_sphere, grabbable_line, lightrod, fontana_puncture, laser_sword, perspective_lines, scale_lines, klee_walking_point, dgrid
+line · line_builder_3d · grabbable_line · plus_line_puzzle · parallel_line_puzzle · perspective_lines · scale_lines · laser_measure · modulor_man_demo · klee_walking_point · dgrid · fontana_puncture
 
 ## The walk
 
-*(not yet walked under R-021 — bridge notes land here)*
+Point_One gave you one mark. Now the map gives it a companion and everything changes: with `line_builder_3d` you join two points, and the instant you do you have made the first *relation* — not a thing but a between. Grab the `grabbable_line`, cross it with another, and the `plus_line_puzzle` names what appears at the meeting: an intersection, a place that belongs to both lines and neither. `parallel_line_puzzle` teaches the opposite move — lines that agree never to meet, and in agreeing, produce **direction**. Then the map tilts toward measure: `perspective_lines` bends the parallels toward a vanishing point, `scale_lines` and `laser_measure` turn the space into distances you can read, and `dgrid` lets the whole thing settle into a network — the point's descendants, organized.
+
+Two figures stand in the room as the map's arguments, not its furniture. `modulor_man_demo` is Le Corbusier's Modulor — a human body redrawn as a ruler, proportion made into a man made into a standard. And `klee_walking_point` is Klee's line "a dot that went for a walk" — drawing as *time and movement*, the line remembering it was once a gesture. The map lets you feel both readings of the same stroke at once: the line as measure, and the line as walk.
 
 ## The turn (critical)
 
-*(what the walk taught, against the QFEP grain — to develop)*
+The line is where geometry first becomes **pleasurable and dangerous in the same gesture.** The blurb says it exactly: measure becomes pleasure — the elegance of proportion, the satisfaction of knowing a distance — and measure is also violence, because every metric frame decides what counts and consigns the rest to remainder. `modulor_man_demo` is the map's evidence: Le Corbusier took a body and made it a standard, and a standard body is a machine for producing non-standard ones — the too-tall, the too-short, the wrong-shaped, all of it now *error* against a grid that presents itself as natural. Perspective is the same move at Renaissance scale, a geometry of a single privileged eye that the culture then called "realistic." Whose parallel? Whose vanishing point? Whose body is the unit?
+
+And this is why `klee_walking_point` is set against the Modulor in the same room, because the map is not just diagnosing the line's violence — it is holding out the alternative the line tried to forget. Klee's walking point keeps the trace's insight (the line was a movement, it had a body and a duration) alive *inside* the measuring apparatus, as a refusal to let the stroke collapse fully into its two endpoints. The book's position lives in that tension: measure is real and useful and beautiful, and it is never innocent, and the walk is what it costs. `fontana_puncture` sits here too — the cut has not gone away; the line is just the wound extended.
+
+## Room for improvement
+
+*(Palle: two strong figures share this room — Modulor and Klee. Note whether the
+walk lets a body feel both readings of one stroke, or whether one drowns the other.)*
