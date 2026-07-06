@@ -10,30 +10,35 @@
 
 **LOCKED: 0 / 22**
 
-| # | chapter | walked.md | considered pass | chapter room (candidate) | LOCKED |
-|---|---------|-----------|-----------------|--------------------------|--------|
-| 1 | primitives | 0/10 seeded ✳ | ✅ pass exists → re-curate from walks | Walls_Primitives / Hangar_Primitives | ☐ |
-| 2 | transformation | — | — | (staircase monolith exists) | ☐ |
-| 3 | array_tutorial | — | — | — | ☐ |
-| 4 | color | — | — | — | ☐ |
-| 5 | change | — | — | — | ☐ |
-| 6 | isosurfaces | — | — | (mc_sculpt island exists) | ☐ |
-| 7 | boolean_surfaces | — | — | — (thin chapter, pearls missing too) | ☐ |
-| 8 | forces | — | — | (Vectors_Act rooms + curated walls) | ☐ |
-| 9 | wavefunctions | — | — | — | ☐ |
-| 10 | randomness | — | ✅ pass exists | 13× Room_Random_* — choose | ☐ |
-| 11 | noise | — | ✅ pass exists | (perlin island + labwall) | ☐ |
-| 12 | cellularautomata | — | — | /ca-map ladder | ☐ |
-| 13 | fractals | — | ✅ pass exists | Hangar_Fractals_Walk | ☐ |
-| 14 | lsystems | — | — | /lsystem-map ladder | ☐ |
-| 15 | proceduralgeneration | — | — | /procgen-map ladder | ☐ |
-| 16 | swarmintelligence | — | — | (boids headless-hostile; care) | ☐ |
-| 17 | softbodies | — | — | /softbody-map ladder | ☐ |
-| 18 | machinelearning | — | — | (51m CNN worlds — monument chapter) | ☐ |
-| 19 | graphtheory | — | — | — | ☐ |
-| 20 | foundationscrisis | — | — | QFEP lab maps — choose | ☐ |
-| 21 | qfeplaboratory | — | — | QFEP lab maps — choose | ☐ |
-| 22 | postfoundationscrisis | — | — | QFEP lab maps — choose | ☐ |
+A chapter LOCKS when: **baseline met** (`baseline.py` — beats cast & walkable,
+voltage present) + **maps walked** (walked.md developed) + **considered pass** +
+**one chapter room**. The baseline is the definition of "done" — a map is
+finished when its beats are cast, not when the inventory is exhausted (R-023).
+
+| # | chapter | baseline | walked.md | considered pass | chapter room (candidate) | LOCKED |
+|---|---------|----------|-----------|-----------------|--------------------------|--------|
+| 1 | primitives | ✅ MET 10+5 (49 at depth) | 0/10 seeded ✳ | ✅ pass exists → re-curate from walks | Walls_Primitives / Hangar_Primitives | ☐ |
+| 2 | transformation | — | — | — | (staircase monolith exists) | ☐ |
+| 3 | array_tutorial | — | — | — | — | ☐ |
+| 4 | color | — | — | — | — | ☐ |
+| 5 | change | — | — | — | — | ☐ |
+| 6 | isosurfaces | — | — | — | (mc_sculpt island exists) | ☐ |
+| 7 | boolean_surfaces | — | — | — | — (thin chapter, pearls missing too) | ☐ |
+| 8 | forces | — | — | — | (Vectors_Act rooms + curated walls) | ☐ |
+| 9 | wavefunctions | — | — | — | — | ☐ |
+| 10 | randomness | — | — | ✅ pass exists | 13× Room_Random_* — choose | ☐ |
+| 11 | noise | — | — | ✅ pass exists | (perlin island + labwall) | ☐ |
+| 12 | cellularautomata | — | — | — | /ca-map ladder | ☐ |
+| 13 | fractals | — | — | ✅ pass exists | Hangar_Fractals_Walk | ☐ |
+| 14 | lsystems | — | — | — | /lsystem-map ladder | ☐ |
+| 15 | proceduralgeneration | — | — | — | /procgen-map ladder | ☐ |
+| 16 | swarmintelligence | — | — | — | (boids headless-hostile; care) | ☐ |
+| 17 | softbodies | — | — | — | /softbody-map ladder | ☐ |
+| 18 | machinelearning | — | — | — | (51m CNN worlds — monument chapter) | ☐ |
+| 19 | graphtheory | — | — | — | — | ☐ |
+| 20 | foundationscrisis | — | — | — | QFEP lab maps — choose | ☐ |
+| 21 | qfeplaboratory | — | — | — | QFEP lab maps — choose | ☐ |
+| 22 | postfoundationscrisis | — | — | — | QFEP lab maps — choose | ☐ |
 
 ✳ primitives' ten `walked.md` pages are seeded (ghost, from blurb+intent) and
 await their walks: Point_One, Point_Lines, Point_Trace, Point_Line_Grid,

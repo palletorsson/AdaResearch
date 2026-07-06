@@ -508,4 +508,33 @@ the tutorial well FORCES an order, and the maps compile to it.
 
 ---
 
-<!-- Next: R-023 — primitives prose-vs-body rulings (re-lay or rewrite, per divergence) + noise truths + Ignorance settle + "the meeting" motif -->
+## R-023 · 2026-07-06 · The baseline contract (the missing layer)
+
+**Palle:** "The maps are half finished, there are other artifacts that could be included
+but how do we know which? Say the VR game was just a tutorial on primitives, color, vector
+— it would be easy. We could ask what would be NEEDED in such a context. What is the
+baseline. Then there is the critical potential that can turn this into something
+interesting."
+
+**Ruling:** Selection was running backwards — "which of 752 deserve in?" has no answer.
+FLIP IT. Per chapter, a BASELINE CONTRACT (doc/book/baselines/<seq>.json):
+- **Deck 1 — BEATS.** What a PLAIN tutorial on this concept would minimally need,
+  derived from the CONCEPT not the inventory (meet the point → it moves → the trace →
+  the line → measure → grid → plane → solid → build → prove). Each beat is a ROLE,
+  cast with ONE artifact; alts are understudies.
+- **Deck 2 — VOLTAGE.** The few pieces a plain tutorial would NEVER include — the
+  critical script, the thinker with QFEP (the point as Fontana's cut, the line as
+  Klee's walk, Dürer's melancholy solid, the becoming-catalyst). The baseline makes it
+  teachable; the voltage makes it Ada.
+- **Everything uncast is AT DEPTH:** kept, honored by the dig line, not needed.
+- **tools/baseline.py** (freeze-legal) audits: each beat cast & walkable? voltage
+  present? — and a chapter is FINISHED when its baseline is met, NOT when the inventory
+  is exhausted. This is the definition of "done" the finish line lacked.
+
+First contract (primitives): 10 beats + 5 voltage → 15 in, 49 at depth; auditor reports
+10/10 cast & walkable, 5/5 voltage present → **baseline MET.** The chapter can lock on
+Palle's walk + hand.
+
+---
+
+<!-- Next: R-024 — walk primitives to confirm the baseline in the body, then LOCK ch.1; draft color + vectors baselines; noise truths; Ignorance settle -->
