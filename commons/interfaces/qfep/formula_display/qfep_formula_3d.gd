@@ -1,19 +1,20 @@
 ﻿# qfep_formula_3d.gd
 # 3D visualization of the QFEP formula using TextMesh
-# QFE = F âˆ’ Î»E(S) + Ï†Î”E(S,t)
+# QFE = F − λE(S) + φΔE(S,t)
 
 extends Node3D
 class_name QFEPFormula3D
 
 # @identity
-# essence: TextMesh("QFE = F - lambda*E(S) + phi*delta_E(S,t)") with per-term color and pulse animation
-# desire: see the formula floating in space — each symbol glowing with its own color, alive with meaning
-# critical_parameter: highlighted_term — which term pulses brightest, drawing attention to one piece of the whole
-# triggers: highlight_term() intensifies one symbol; on_lambda_changed/on_phi_changed shift term colors to match system state
-# emerges: the formula reads differently depending on which term is highlighted — the whole changes meaning with focus
+# essence: the THESIS ARTIFACT — the whole book compressed to one line of floating TextMesh, QFE = F − λE(S) + φΔE(S,t), each term glowing in its own colour and breathing on its own pulse. It is the book's method turned into a room: every sequence the reader has walked resolves here into one assembled equation.
+# desire: to be read, not solved — to hang in space so that a reader can walk up to any single term, watch it brighten, and feel the whole sentence tilt around that emphasis, the way a lens tilts to bring one plane into focus.
+# critical_parameter: highlighted_term — which term pulses brightest. The book-role privileges φΔE(S,t): it is the queer generative term, the OPEN one, the part of the equation that is never closed off. Highlighting it is highlighting the dark spot the formula deliberately leaves un-sealed.
+# triggers: highlight_term() intensifies one symbol; on_lambda_changed/on_phi_changed shift term colours to match live system state — the formula re-reads itself as the sliders move, order↔edge↔chaos and resist↔embrace.
+# emerges: the formula reads differently depending on which term is lit — the whole changes meaning with focus. Under φΔE it stops being a static balance sheet (F minus its entropy cost) and becomes a becoming: entropy as a function of time, the rate of change welcomed rather than penalised.
 # needs: VR term touch selection [missing], slider connections [missing]
-# relationships: central display in QFEP_Introduction and QFEP_Sandbox; depends on lambda_slider, phi_slider; references all QFEP terms
-# truth: QFE = F - lambda*E(S) + phi*delta_E(S,t) is not an equation to solve but a lens through which to see every system
+# relationships: the assembled centrepiece of [[qfeplaboratory]] ("the formula assembled") and the closing figure of [[postfoundationscrisis]] ("the closing") — load-bearing across three book chapters; depends on [[lambda_slider]], [[phi_slider]]; gathers every QFEP term the curriculum has taught into one place.
+# book_role: thesis artifact. QFE = F − λE(S) + φΔE(S,t) is the book's own argument made walkable — F is the order the reader has been building, λE(S) is what that order costs in foreclosed possibility, and φΔE(S,t) is the term that refuses to close: the generative dark spot, the queer surplus, entropy still in motion.
+# truth: the formula is not an equation to solve but a lens to see every system through — and it stays deliberately open. φΔE(S,t) is the dark spot left un-sealed on purpose: the place where change is not a cost to minimise but a generativity to keep. A closed formula would foreclose; this one is written to stay breathing.
 
 # Term colors
 const COLOR_QFE := Color(1.0, 1.0, 1.0)       # White - result
@@ -22,6 +23,12 @@ const COLOR_LAMBDA := Color(0.3, 1.0, 0.5)    # Green - entropy drive
 const COLOR_E := Color(1.0, 0.4, 0.4)         # Red - entropy
 const COLOR_PHI := Color(1.0, 0.5, 1.0)       # Magenta - rate term
 const COLOR_OPERATOR := Color(0.7, 0.7, 0.7)  # Gray - operators
+
+# The generative "dark spot" term φΔE(S,t) — the open part of the formula.
+# These term ids idle a touch brighter so the equation reads as un-sealed even
+# when nothing is highlighted: change welcomed, not penalised.
+const GENERATIVE_TERMS := ["phi", "delta", "E_rate"]
+const GENERATIVE_IDLE_BONUS := 0.25
 
 # Animation settings
 @export var animate := true
@@ -52,7 +59,7 @@ func _ready():
 	add_to_group("qfep_display")
 
 func _create_formula():
-	# Create the formula: QFE = F âˆ’ Î»E(S) + Ï†Î”E(S,t)
+	# Create the formula: QFE = F − λE(S) + φΔE(S,t)
 	# Position each term horizontally
 	
 	var x_offset: float = 0.0
@@ -70,12 +77,12 @@ func _create_formula():
 	x_offset = _add_term("F", "F", x_offset, COLOR_F)
 	x_offset += spacing
 	
-	# âˆ’
-	x_offset = _add_term("minus1", "âˆ’", x_offset, COLOR_OPERATOR)
+	# −
+	x_offset = _add_term("minus1", "−", x_offset, COLOR_OPERATOR)
 	x_offset += spacing
 	
-	# Î»
-	x_offset = _add_term("lambda", "Î»", x_offset, COLOR_LAMBDA)
+	# λ
+	x_offset = _add_term("lambda", "λ", x_offset, COLOR_LAMBDA)
 	
 	# E(S)
 	x_offset = _add_term("E", "E(S)", x_offset, COLOR_E)
@@ -85,11 +92,11 @@ func _create_formula():
 	x_offset = _add_term("plus", "+", x_offset, COLOR_OPERATOR)
 	x_offset += spacing
 	
-	# Ï†
-	x_offset = _add_term("phi", "Ï†", x_offset, COLOR_PHI)
+	# φ
+	x_offset = _add_term("phi", "φ", x_offset, COLOR_PHI)
 	
-	# Î”
-	x_offset = _add_term("delta", "Î”", x_offset, COLOR_PHI)
+	# Δ
+	x_offset = _add_term("delta", "Δ", x_offset, COLOR_PHI)
 	
 	# E(S,t)
 	x_offset = _add_term("E_rate", "E(S,t)", x_offset, COLOR_E)
@@ -152,7 +159,11 @@ func _process(_delta):
 			base_energy = 1.0 + sin(time * pulse_speed * 2) * 0.5
 		else:
 			base_energy = 0.3 + sin(time * pulse_speed + hash(term_id) % 10) * glow_intensity
-		
+			# The generative term φΔE(S,t) never fully dims — the open/dark-spot
+			# part of the formula keeps a warmer idle glow than the closed terms.
+			if term_id in GENERATIVE_TERMS:
+				base_energy += GENERATIVE_IDLE_BONUS
+
 		mat.emission_energy_multiplier = base_energy
 
 # Highlight a specific term
@@ -179,7 +190,7 @@ func get_term_info(term_name: String) -> Dictionary:
 			}
 		"lambda":
 			return {
-				"name": "Lambda (Î»)",
+				"name": "Lambda (λ)",
 				"description": "Entropy drive. 0=order, 0.4=edge, 1=chaos"
 			}
 		"E":
@@ -189,12 +200,12 @@ func get_term_info(term_name: String) -> Dictionary:
 			}
 		"phi":
 			return {
-				"name": "Phi (Ï†)",
+				"name": "Phi (φ)",
 				"description": "Rate sensitivity. Positive = embrace change."
 			}
 		"delta":
 			return {
-				"name": "Delta (Î”)",
+				"name": "Delta (Δ)",
 				"description": "Rate of change in entropy over time."
 			}
 		"E_rate":

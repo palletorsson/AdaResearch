@@ -4,14 +4,14 @@
 # Preserved properties glow green; changed properties glow red.
 #
 # @identity
-# essence: invariants are the fingerprint of a transformation — what survives tells you what the transform truly is
-# desire: press a button, watch measurements change or hold, learn which transforms respect which properties
-# critical_parameter: shear — the only transform here that changes every measurement
-# triggers: TRANSLATE/ROTATE/SCALE/SHEAR/RESET buttons each apply a fixed transform to the triangle
-# emerges: translation and rotation preserve everything; uniform scale preserves angles; shear preserves nothing
-# needs: RackTemplates panel with 5 buttons [has]; CylinderMesh edges [has]; SphereMesh vertices [has]; Label3D measurements [has]
-# relationships: builds on matrix_4x4_viewer (raw numbers); feeds group_theory (invariance as symmetry)
-# truth: The properties a transformation cannot touch define the transformation more than the properties it changes.
+# essence: an invariant is identity-under-motion — the property a transformation cannot touch. What SURVIVES the move tells you what the move truly is; the thing that holds while everything shifts is where the object keeps its name. This is the QFEP core of transformation: identity is not the frozen shape but the pattern that persists across the whole orbit of a transform.
+# desire: press a button, watch measurements change or hold, and read which transforms respect which properties; then PROJECT one edge onto another and watch the shadow shrink as the angle opens — see the dot product become the length that survives.
+# critical_parameter: shear — the only transform here that changes every measurement (the transform with no invariant, identity fully dissolved); and the angle between two edges — the parameter the PROJECT read makes visible as cos θ.
+# triggers: TRANSLATE/ROTATE/SCALE/SHEAR/RESET buttons each apply a fixed transform to the triangle; PROJECT casts edge C's shadow onto edge A and reports |A|·cos θ.
+# emerges: translation and rotation preserve everything; uniform scale preserves angles; shear preserves nothing; and projection makes ALIGNMENT legible — the dot product is the projected length, cos θ is how much of one vector points along another, 1.0 when parallel, 0 when perpendicular.
+# needs: RackTemplates panel with 6 buttons [has]; CylinderMesh edges [has]; SphereMesh vertices [has]; Label3D measurements [has]; projection shadow cylinder + dot-product/cos-angle label [has]
+# relationships: builds on matrix_4x4_viewer (raw numbers); feeds group_theory (invariance as symmetry). DOUBLE-DUTY: this artifact currently also stands in for "the dot product — projection, how aligned" in the transformation chapter; the PROJECT mode is a partial fill, but per doc/book/GAPS.md § C the transformation sequence still lacks a DEDICATED projection artifact — a single two-vector shadow piece is the real gap this one is covering.
+# truth: The properties a transformation cannot touch define the transformation more than the properties it changes; and the dot product is that survival made a number — how much of one thing points along another.
 
 extends Node3D
 
@@ -24,6 +24,8 @@ const GREEN := Color(0.2, 0.95, 0.3)
 const RED := Color(0.95, 0.25, 0.2)
 const CYAN := Color(0.3, 0.85, 0.95)
 const DIM_WHITE := Color(0.85, 0.85, 0.85)
+const AMBER := Color(1.0, 0.75, 0.25)  # projection shadow — the length that survives
+const SHADOW_RADIUS: float = 0.006
 
 # ── Original triangle (equilateral, ~0.3m side) ─────────────────────
 var _orig_verts: Array[Vector3] = [
@@ -47,12 +49,19 @@ var _area_label: Label3D
 var _title_label: Label3D
 var _active_transform: String = "NONE"
 
+# ── Projection / dot-product read (fills the "how aligned" role) ──────
+var _projection_active: bool = false
+var _shadow_mesh: MeshInstance3D      # edge C's shadow projected onto edge A
+var _drop_mesh: MeshInstance3D        # the perpendicular drop line (C's tip → its foot on A)
+var _projection_label: Label3D        # reports dot product and cos θ
+
 
 func _ready() -> void:
 	_current_verts = _orig_verts.duplicate()
 	_compute_original_measurements()
 	_build_triangle()
 	_build_labels()
+	_build_projection()
 	_build_panel()
 	_update_display()
 
@@ -205,6 +214,90 @@ func _build_labels() -> void:
 
 
 # ═════════════════════════════════════════════════════════════════════
+# PROJECTION (the dot-product read — how aligned is edge C with edge A?)
+# ═════════════════════════════════════════════════════════════════════
+
+func _build_projection() -> void:
+	# The shadow: how far edge C reaches along edge A. This length IS the dot
+	# product |A|·cos θ — the projection made visible.
+	_shadow_mesh = MeshInstance3D.new()
+	_shadow_mesh.name = "ProjectionShadow"
+	var shadow_cyl := CylinderMesh.new()
+	shadow_cyl.top_radius = SHADOW_RADIUS
+	shadow_cyl.bottom_radius = SHADOW_RADIUS
+	shadow_cyl.height = 0.1  # placeholder — set in _update_projection
+	_shadow_mesh.mesh = shadow_cyl
+	var shadow_mat := StandardMaterial3D.new()
+	shadow_mat.albedo_color = AMBER
+	shadow_mat.emission = AMBER
+	shadow_mat.emission_energy_multiplier = 0.7
+	_shadow_mesh.material_override = shadow_mat
+	_shadow_mesh.visible = false
+	add_child(_shadow_mesh)
+
+	# The drop: the perpendicular from edge C's tip down to its foot on edge A.
+	# When this is short, the vectors are aligned; when long, they diverge.
+	_drop_mesh = MeshInstance3D.new()
+	_drop_mesh.name = "ProjectionDrop"
+	var drop_cyl := CylinderMesh.new()
+	drop_cyl.top_radius = EDGE_RADIUS
+	drop_cyl.bottom_radius = EDGE_RADIUS
+	drop_cyl.height = 0.1
+	_drop_mesh.mesh = drop_cyl
+	var drop_mat := StandardMaterial3D.new()
+	drop_mat.albedo_color = DIM_WHITE
+	drop_mat.emission = DIM_WHITE
+	drop_mat.emission_energy_multiplier = 0.25
+	_drop_mesh.material_override = drop_mat
+	_drop_mesh.visible = false
+	add_child(_drop_mesh)
+
+	# The readout: dot product and cos θ.
+	_projection_label = Label3D.new()
+	_projection_label.name = "ProjectionLabel"
+	_projection_label.text = ""
+	_projection_label.pixel_size = 0.0015
+	_projection_label.font_size = 16
+	_projection_label.modulate = AMBER
+	_projection_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_projection_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	_projection_label.visible = false
+	add_child(_projection_label)
+
+
+func _update_projection() -> void:
+	# Edge A (the "onto" vector) runs vert0 → vert1.
+	# Edge C (the projected vector) runs vert0 → vert2 (shares the origin vert0).
+	var origin: Vector3 = _current_verts[0]
+	var a_vec: Vector3 = _current_verts[1] - origin
+	var c_vec: Vector3 = _current_verts[2] - origin
+
+	var a_len: float = a_vec.length()
+	var c_len: float = c_vec.length()
+	if a_len < 0.0001 or c_len < 0.0001:
+		return
+
+	var a_dir: Vector3 = a_vec / a_len
+	# Dot product = how much of C points along A = |A|·|C|·cos θ.
+	var dot_val: float = c_vec.dot(a_vec)
+	var cos_theta: float = c_vec.dot(a_vec) / (a_len * c_len)
+	cos_theta = clampf(cos_theta, -1.0, 1.0)
+	# Scalar projection: the signed length of C's shadow on A's direction.
+	var scalar_proj: float = c_vec.dot(a_dir)
+	var foot: Vector3 = origin + a_dir * scalar_proj  # C's tip dropped onto line A
+
+	# Shadow cylinder: from origin to foot (the projected length along A).
+	_orient_cylinder_between(_shadow_mesh, origin, foot)
+
+	# Drop cylinder: from C's tip (vert2) down to its foot on A.
+	_orient_cylinder_between(_drop_mesh, _current_verts[2], foot)
+
+	# Readout near the foot of the projection.
+	_projection_label.position = foot + Vector3(0.0, -0.04, 0.0)
+	_projection_label.text = "A·C = %.3f\ncos θ = %.2f" % [dot_val, cos_theta]
+
+
+# ═════════════════════════════════════════════════════════════════════
 # PANEL
 # ═════════════════════════════════════════════════════════════════════
 
@@ -215,15 +308,16 @@ func _build_panel() -> void:
 		 {"type": "button", "label": "ROTATE"}],
 		[{"type": "button", "label": "SCALE"},
 		 {"type": "button", "label": "SHEAR"}],
-		[{"type": "button", "label": "RESET"}],
+		[{"type": "button", "label": "PROJECT"},
+		 {"type": "button", "label": "RESET"}],
 	])
 	panel.position = Vector3(0, 0.05, 0.12)
 	panel.rotation_degrees = Vector3(-25, 0, 0)
 	add_child(panel)
 
 	# Connect buttons
-	var labels := ["TRANSLATE", "ROTATE", "SCALE", "SHEAR", "RESET"]
-	for i in 5:
+	var labels := ["TRANSLATE", "ROTATE", "SCALE", "SHEAR", "PROJECT", "RESET"]
+	for i in 6:
 		var btn = panel.find_child("Btn_%d" % i, true, false)
 		if btn:
 			var area = btn.get_node_or_null("InteractableAreaButton")
@@ -237,7 +331,18 @@ func _build_panel() -> void:
 # ═════════════════════════════════════════════════════════════════════
 
 func _apply_transform(which: String) -> void:
+	# PROJECT is a READ, not a transform: it reveals the dot product / cos θ
+	# between two edges of whatever triangle is currently shown. It leaves the
+	# vertices untouched so you can project the original OR a transformed shape.
+	if which == "PROJECT":
+		_projection_active = not _projection_active
+		_update_display()
+		return
+
 	_active_transform = which
+
+	# A new transform clears the projection read; RESET does too.
+	_projection_active = false
 
 	# Always start from original
 	_current_verts = _orig_verts.duplicate()
@@ -328,8 +433,18 @@ func _update_display() -> void:
 	_area_label.text = "A=%.3f" % cur_area
 	_color_label(_area_label, cur_area, _orig_area)
 
+	# Update projection read (the dot-product / alignment shadow)
+	_shadow_mesh.visible = _projection_active
+	_drop_mesh.visible = _projection_active
+	_projection_label.visible = _projection_active
+	if _projection_active:
+		_update_projection()
+
 	# Update title
-	if _active_transform == "NONE":
+	if _projection_active:
+		_title_label.text = "PROJECT — A·C"
+		_title_label.modulate = AMBER
+	elif _active_transform == "NONE":
 		_title_label.text = "INVARIANTS"
 		_title_label.modulate = CYAN
 	else:

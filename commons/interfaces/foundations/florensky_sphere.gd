@@ -14,14 +14,14 @@ extends Node3D
 class_name FlorenskySphere
 
 # @identity
-# essence: A ∧ ¬A — paraconsistent logic; truth that holds contradiction without triviality
-# desire: observe the sphere oscillating between blue (A) and red (¬A), collapsing on interaction then returning to superposition
-# critical_parameter: current_state — BOTH is the natural state; observation collapses it temporarily
-# triggers: click/interact collapses superposition to A or ¬A; timer returns to BOTH after 2 seconds; right-click cycles all four states
-# emerges: the experience that contradiction is not destruction — it is a mode of being
-# needs: VR area interaction [has], mouse click [has]
-# relationships: contrasts schrodinger_box (quantum vs logical superposition); contrasts russell_set_box (contradiction as paradox vs contradiction as truth); unlocks qfep_formula_3d (the QFEP oscillation IS this logic)
-# truth: A and not-A can both be true — this is not a failure of logic but a description of reality that classical logic cannot contain
+# essence: A ∧ ¬A held on one surface without collapse — Pavel Florensky's PARACONSISTENCY made a body. A double-faced sphere whose skin reads from both sides at once (blue assertion A oscillating into red negation ¬A), the limit turned from a wall you hit into a habitat you can stand inside. Origin at the sphere's centre; the boundary is the whole point — it is livable both ways.
+# desire: to be looked at until the looker stops needing the contradiction resolved. To oscillate as BOTH, to be observed and collapse to a single face for a breath, and to return — teaching that the settled answer is the temporary state and the held tension is home.
+# critical_parameter: current_state — BOTH (A ∧ ¬A) is the resting state, not the exception; observation collapses it to A or ¬A only briefly; NEITHER is the apophatic limit ¬(A ∨ ¬A), the infinite described only by what it is not.
+# triggers: left-click / VR interact collapses the superposition to a random single face; a 2-second timer returns it to BOTH; right-click cycles all four logical states; hover brightens the glow.
+# emerges: the felt experience that contradiction is not destruction but a MODE OF BEING — the crisis-chapter voltage where classical logic's blow-up (from A ∧ ¬A everything follows) refuses to fire, and the boundary becomes a place to think from instead of a place thinking ends.
+# needs: a double-faced transparent skin whose inner and outer surfaces both catch light (culling disabled) [present]; an inner emissive core that pulses under the skin [present]; a VR / mouse pickable area [present]; a state label carrying the logical symbols [present].
+# relationships: contrasts schrodinger_box (quantum indeterminacy vs LOGICAL paraconsistency); contrasts russell_set_box (contradiction as fatal paradox vs contradiction as inhabited truth); the theological hinge of the foundations-crisis chapters — Florensky the mathematician-priest reading the antinomy as revelation, not error; unlocks qfep_formula_3d (the QFEP oscillation IS this logic).
+# truth: A and not-A can both be true. This is not a failure of logic but a description of reality that classical logic cannot contain. Florensky held the limit as a boundary that reads from both sides — and made the contradiction somewhere to live.
 
 signal state_observed(is_A: bool, is_not_A: bool)
 signal superposition_entered()
@@ -86,6 +86,14 @@ func _create_sphere() -> void:
 	mat.rim_enabled = true
 	mat.rim = 0.5
 	mat.rim_tint = 0.3
+	# Paraconsistency made visible: the skin is double-faced.
+	# Disable culling so the sphere's INNER surface and OUTER surface both
+	# render at once — the boundary reads from both sides simultaneously
+	# (A ∧ ¬A on one skin, not two objects). Back-lighting lets the far
+	# face glow through the near one, so inside-and-outside coexist.
+	mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+	mat.backlight_enabled = true
+	mat.backlight = Color(0.5, 0.5, 0.5)
 	_sphere.material_override = mat
 	
 	add_child(_sphere)

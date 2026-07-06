@@ -1,18 +1,15 @@
 extends "res://commons/artifacts/_embodied/embodied_prop.gd"
 class_name GodelSentenceMachine
 
-## @identity
-## name: Godel Sentence Machine
-## lineage: Godel's first incompleteness theorem, staged as a machine. The
-##   sentence G says of itself "G IS NOT PROVABLE" — a fixed point of the
-##   provability predicate built by the diagonal lemma.
-## essence: a panel displays G with a self-reference arrow looping G back onto
-##   itself. A prover arm reaches in to PROVE G, jams (flares red), retracts —
-##   then the verdict resolves to a gold "TRUE — BUT UNPROVABLE". Forever:
-##   attempt -> jam -> conclude.
-## truth: if G were provable it would be false (it asserts its own
-##   unprovability); a sound system proves no falsehoods, so G is not provable —
-##   and therefore G is true. True, and out of reach of proof.
+# @identity
+# essence: Godel's first incompleteness theorem, staged as a machine. A panel prints the sentence G, whose whole content is a claim ABOUT ITSELF — "G IS NOT PROVABLE" — a fixed point of the provability predicate built by the diagonal lemma. A self-reference arrow loops G's name back onto the sentence that names it, closing the circle. A prover arm reaches in to PROVE G, seizes (flares red), retracts; the verdict then resolves gold: TRUE — BUT UNPROVABLE. Forever: attempt -> jam -> conclude.
+# desire: to make the self-reference LEGIBLE, not stated — to let the eye follow G's name looping back onto the sentence and feel the sentence talk about itself, so the crack is watched being built rather than asserted.
+# critical_parameter: cycle_period — the pace of attempt -> jam -> conclude; slower reads as a solemn machine failing to prove, faster as a nervous loop that never settles.
+# triggers: _ready -> _build (procedural, no scene deps); _process drives the arm swing, the jam flare, the spinning self-reference loop, and the gold verdict; apply_grid_config rebuilds and honours the emissive flag.
+# emerges: the arm always jams and always retracts, and the verdict is always the same gold sentence — so incompleteness reads not as a bug the machine will fix next cycle but as the honest, permanent limit of the wall the whole book has been building.
+# needs: the panel + G sentence [present]; the self-reference loop + arrowhead biting back into G [present]; the prover arm + PROVE clamp [present]; the jam spark [present]; the gold verdict [present].
+# relationships: the keystone of foundationscrisis — the crack in every formal wall. Its TWIN limit, the halting problem (Turing — no machine decides whether an arbitrary program stops), is a SEPARATE artifact; this machine focuses purely on GODEL (a true sentence no proof reaches), leaving the un-decidable-run limit to that sibling. Kin to any fixed-point / self-reference artifact (the diagonal lemma is the same trick as Cantor's diagonal and the liar paradox made rigorous).
+# truth: if G were provable it would be false (it asserts its own unprovability); a sound system proves no falsehoods, so G is not provable — and therefore G is true. True, and out of reach of proof. Every system strong enough to count is either unsound or incomplete; this machine chooses to stay honest, and so stays incomplete.
 
 # NOTE: `emissive` is declared by the parent (embodied_prop.gd) — do not redeclare.
 @export var cool_white: Color = Color(0.90, 0.93, 1.0)
@@ -76,20 +73,21 @@ func _build() -> void:
 	# --- the sentence G, printed on the panel ---
 	add_child(_billboard_label("G:", Vector3(-0.30, py + 0.12, 0.05), 26, cool_white))
 	add_child(_billboard_label("\"G IS NOT PROVABLE\"", Vector3(0.04, py + 0.12, 0.05), 22, cool_white))
-	# the named token of G the loop arrow points at
+	# the named token of G the loop arrow points at — the "G" INSIDE the sentence
 	var g_dot_mat := _glow_mat(true_gold, 1.0)
 	add_child(_sphere(Vector3(-0.30, py - 0.04, 0.06), 0.028, g_dot_mat))
-	add_child(_billboard_label("this sentence", Vector3(-0.04, py - 0.06, 0.05), 13, wire_purple))
+	add_child(_billboard_label("= this very sentence", Vector3(0.02, py - 0.06, 0.05), 13, wire_purple))
 
-	# --- the self-reference loop: G points back at itself ---
-	# A torus tilted to read as an arrow looping out of G and back onto G.
+	# --- the self-reference loop: the name G points back at the sentence G names ---
+	# A torus tilted to read as an arrow looping out of the "G" token and back onto
+	# the whole sentence — the diagonal lemma's fixed point, drawn.
 	_loop_mat = _glow_mat(wire_purple, 1.1)
 	_loop_mi = _torus(Vector3(-0.30, py + 0.04, 0.16), 0.11, 0.010, _loop_mat)
 	_loop_mi.rotation = Vector3(PI * 0.5, 0.0, 0.0)
 	add_child(_loop_mi)
 	# little arrowhead biting back into the G dot — the self-reference closing
 	add_child(_arrow(Vector3(-0.30, py + 0.13, 0.20), Vector3(-0.30, py + 0.02, 0.09), 0.010, _loop_mat))
-	add_child(_billboard_label("refers to itself", Vector3(-0.30, py + 0.20, 0.16), 12, wire_purple))
+	add_child(_billboard_label("G names itself", Vector3(-0.30, py + 0.20, 0.16), 12, wire_purple))
 
 	# --- the prover arm: reaches from the right edge toward G to PROVE it ---
 	_arm = Node3D.new()
