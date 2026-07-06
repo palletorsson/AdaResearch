@@ -422,4 +422,33 @@ long meeting.
 
 ---
 
-<!-- Next: R-020 — randomness staging forks + noise truths (Palle wording) + Ignorance settle + refits + rate-gallery/distil loop + "the meeting" as book motif -->
+## R-020 · 2026-07-06 · The Closing Protocol (the finish line)
+
+**Palle:** "I feel I have too many artifacts and I can not finish what I started. I keep
+circling around improving the editor feature … If the book only could be the mixture of
+tutorial and critical thinking and the example scene could work as beautiful learning and
+explore examples. Can you help me get there? … I think I have all the elements." And, on
+scope: "spine has a lot more maps … the book has a lot less content than the spine maps
+in the primitive sequence."
+
+**Ruling:** The missing piece is not a feature — it is a stop rule and a countdown.
+- **Two objects.** The SEQUENCE (many maps) is the SITE — the game, governed by its own
+  7-stage pipeline, alive after the book ships. The CHAPTER ROOM (one room) is the
+  EXHIBITION — the dig's pearls staged walkable. The book being smaller than the spine is
+  BY DESIGN: a report on a dense site, not a mirror of it. The dig line extends to maps:
+  the room shows the excavation; the sequence remains at depth.
+- **Chapter lock = writing pass + one room.** Never sequence completion.
+- **Scope lock.** The book = 22 chapters x (tutorial + critical pass + one walk-room).
+  Everything else is archive — real, kept, at depth.
+- **Tool freeze.** No new editors/generators/galleries/templates until 22/22 locked.
+  Only tool work a chapter pass actually requires.
+- **The chapter loop**, one session each, spine order at the head:
+  dig -> walk -> rule -> write -> room (choose or stage) -> LOCK + rebuild.
+- **The scoreboard** is doc/book/FINISH_LINE.md — one number, ticked by Palle's hand only.
+- **The end object is the PDF** (auto-InDesign) — last, as the reward, not another detour.
+Status at ratification: 4/22 passes exist (primitives, randomness, noise, fractals),
+0/22 locked. Primitives' room candidates already exist (Walls_Primitives / Hangar_Primitives).
+
+---
+
+<!-- Next: R-021 — noise truths (Palle wording) + Ignorance settle + "the meeting" as book motif + per-chapter rulings as the loop runs -->
