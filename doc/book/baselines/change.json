@@ -1,0 +1,82 @@
+{
+ "_doctrine": "R-023: the baseline contract. Deck 1 BEATS = what a PLAIN tutorial on this concept would minimally need (derived from the concept, not the inventory); each beat is a ROLE cast with one artifact (alts = understudies). Deck 2 VOLTAGE = the few pieces a plain tutorial would never include -- the critical script, the thinker with QFEP. Everything uncast is AT DEPTH: kept, honored by the dig line, not needed by the book or the walk.",
+ "sequence": "change",
+ "beats": [
+  {
+   "role": "the slope at a point — the tangent",
+   "cast": "slope_tangent_demo",
+   "alts": []
+  },
+  {
+   "role": "the derivative pair — function and its rate",
+   "cast": "derivative_pair",
+   "alts": []
+  },
+  {
+   "role": "velocity as the derivative of position",
+   "cast": "velocity_arrow",
+   "alts": [
+    "player_trace"
+   ]
+  },
+  {
+   "role": "the integral as area — Riemann",
+   "cast": "integral_area",
+   "alts": [
+    "riemann_pi"
+   ]
+  },
+  {
+   "role": "accumulation — the pump",
+   "cast": "riemann_pump",
+   "alts": [
+    "riemann_pi"
+   ]
+  },
+  {
+   "role": "the vector field — flow at every point",
+   "cast": "vector_field_grid",
+   "alts": [
+    "particle_flow_swarm"
+   ]
+  },
+  {
+   "role": "partial derivative — rate along one axis",
+   "cast": "partial_derivative_terrain",
+   "alts": []
+  },
+  {
+   "role": "the FTC bridge — derivative and integral",
+   "cast": "ftc_bridge",
+   "alts": []
+  },
+  {
+   "role": "prove it",
+   "cast": "riemann_pi",
+   "alts": [],
+   "weak": true
+  }
+ ],
+ "voltage": [
+  {
+   "piece": "science_screen",
+   "after": "the slope at a point — the tangent",
+   "why": "the projector that flattens a 3D artifact into 2D abstraction — makes VISIBLE the representational choice a plain tangent-plot hides, the derivative is a picture we agree to draw."
+  },
+  {
+   "piece": "code_display",
+   "after": "the derivative pair — function and its rate",
+   "why": "the rule f -> f' shown as CODE beside the curve — the derivative as an executable operator, notation and machine as one substrate."
+  },
+  {
+   "piece": "particle_flow_swarm",
+   "after": "the vector field — flow at every point",
+   "why": "bodies dragged by the field before any force is named — flow-before-force, the QFEP move that the field is prior to the object it carries."
+  },
+  {
+   "piece": "player_trace",
+   "after": "velocity as the derivative of position",
+   "why": "the player's own walk written as a line — velocity as biography, the derivative of a body that is YOU, not a puck on a track."
+  }
+ ]
+}

@@ -1,0 +1,100 @@
+{
+ "_doctrine": "R-023: the baseline contract. Deck 1 BEATS = what a PLAIN tutorial on this concept would minimally need (derived from the concept, not the inventory); each beat is a ROLE cast with one artifact (alts = understudies). Deck 2 VOLTAGE = the few pieces a plain tutorial would never include -- the critical script, the thinker with QFEP. Everything uncast is AT DEPTH: kept, honored by the dig line, not needed by the book or the walk.",
+ "sequence": "array_tutorial",
+ "beats": [
+  {
+   "role": "the grid appears",
+   "cast": "grid_model",
+   "alts": [
+    "grid_2d_4x4",
+    "grid3d"
+   ]
+  },
+  {
+   "role": "one cell, addressed — index to position",
+   "cast": "xyz_coordinates",
+   "alts": [
+    "grid_model",
+    "pick_up_cube"
+   ]
+  },
+  {
+   "role": "fill a row",
+   "cast": "row_3_x",
+   "alts": [
+    "bar_array",
+    "column_3_z"
+   ]
+  },
+  {
+   "role": "fill 2D — the nested index",
+   "cast": "grid_2d_4x4",
+   "alts": [
+    "grid_3d_4x4x4",
+    "grid3d"
+   ]
+  },
+  {
+   "role": "the tile repeats — pattern",
+   "cast": "pattern_tile_puzzle",
+   "alts": [
+    "pattern_tile_4x4",
+    "tiling_demo"
+   ]
+  },
+  {
+   "role": "mirror and symmetry on the grid",
+   "cast": "pattern_tile_mirror",
+   "alts": [
+    "vr_tile_editor_mirror",
+    "pattern_maker_station"
+   ]
+  },
+  {
+   "role": "edit the grid live",
+   "cast": "pattern_maker_station",
+   "alts": [
+    "pattern_studio_plate",
+    "vr_tile_editor_mirror"
+   ]
+  },
+  {
+   "role": "a pattern from a rule",
+   "cast": "facade_grammar_demo",
+   "alts": [
+    "script_runner",
+    "pattern_studio_plate"
+   ]
+  },
+  {
+   "role": "prove it — reproduce a target pattern",
+   "cast": "pattern_tile_puzzle",
+   "alts": [
+    "pattern_tile_4x4",
+    "tiling_demo"
+   ]
+  }
+ ],
+ "voltage": [
+  {
+   "piece": "panel_bridge_loom",
+   "after": "fill 2D — the nested index",
+   "why": "the grid as the WEAVE — threading, tie-up, treadling; the addressable array is centuries-old textile labor, mostly women's, that computation quietly inherited and renamed."
+  },
+  {
+   "piece": "step_sequencer",
+   "after": "fill a row",
+   "why": "the array read as TIME, not space — a playhead sweeping indices turns the row into rhythm; index is not neutral coordinate but sequence, order, before-and-after."
+  },
+  {
+   "piece": "pattern_tunnel_machine",
+   "after": "edit the grid live",
+   "why": "the pattern becomes ARCHITECTURE you stand inside — the grid stops being a diagram you look at and becomes a room that surrounds you, the tiling as inhabited ideology."
+  },
+  {
+   "piece": "pulsar_visualizer",
+   "after": "the tile repeats — pattern",
+   "why": "the grid as a DATA IMAGE with a history — stacked pulsar sweeps (1967) became Joy Division's cover; repetition on a grid is never innocent formatting, it is how we choose to see a signal."
+  }
+ ]
+}

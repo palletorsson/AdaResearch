@@ -1,0 +1,86 @@
+{
+ "_doctrine": "R-023: the baseline contract. Deck 1 BEATS = what a PLAIN tutorial on this concept would minimally need (derived from the concept, not the inventory); each beat is a ROLE cast with one artifact (alts = understudies). Deck 2 VOLTAGE = the few pieces a plain tutorial would never include -- the critical script, the thinker with QFEP. Everything uncast is AT DEPTH: kept, honored by the dig line, not needed by the book or the walk.",
+ "sequence": "isosurfaces",
+ "beats": [
+  {
+   "role": "the scalar field — a value at every point",
+   "cast": "voxel_noise_demo",
+   "alts": [
+    "animated_noise_explorer"
+   ]
+  },
+  {
+   "role": "the isovalue — the threshold is a surface",
+   "cast": "mc_shapes_gallery",
+   "alts": [
+    "gyroid_demo"
+   ]
+  },
+  {
+   "role": "sample on a grid",
+   "cast": "mc_base",
+   "alts": [
+    "mc_terrain_demo"
+   ]
+  },
+  {
+   "role": "one cube's cases — marching",
+   "cast": "fifteen_cases_demo",
+   "alts": []
+  },
+  {
+   "role": "the surface emerges",
+   "cast": "mc_cave",
+   "alts": [
+    "metaball_world",
+    "mc_torus_sculpture"
+   ]
+  },
+  {
+   "role": "sculpt the field — add and subtract",
+   "cast": "metaball_world",
+   "alts": [
+    "metaballs"
+   ]
+  },
+  {
+   "role": "resolution — the grid density",
+   "cast": "mc_terrain_demo",
+   "alts": [
+    "animated_noise_explorer"
+   ]
+  },
+  {
+   "role": "build a surface yourself",
+   "cast": "mc_sculpt_vr",
+   "alts": [
+    "implicit_surface_modeling"
+   ]
+  },
+  {
+   "role": "prove it",
+   "cast": "mc_shapes_gallery",
+   "weak": true,
+   "alts": [
+    "mc_torus_sculpture"
+   ]
+  }
+ ],
+ "voltage": [
+  {
+   "piece": "gyroid_demo",
+   "after": "the isovalue — the threshold is a surface",
+   "why": "the triply-periodic minimal surface has no vertices until the threshold is chosen — the field is the thing that is real; the surface is only a decision about where to cut it."
+  },
+  {
+   "piece": "raymarched_metaballs",
+   "after": "the surface emerges",
+   "why": "the SDF is rendered straight to the eye without ever becoming a mesh — sculpting-by-function as anti-mesh, the surface refused, the field kept continuous."
+  },
+  {
+   "piece": "queer_marching_cave",
+   "after": "sculpt the field — add and subtract",
+   "why": "the cave as queer spatial topology — the walkable interior is a negative shaped by subtraction, space defined by what the field withholds rather than what it asserts."
+  }
+ ]
+}

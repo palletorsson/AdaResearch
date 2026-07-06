@@ -1,0 +1,41 @@
+{
+ "_doctrine": "R-023: the baseline contract. Deck 1 BEATS = what a PLAIN tutorial on this concept would minimally need (derived from the concept, not the inventory); each beat is a ROLE cast with one artifact (alts = understudies). Deck 2 VOLTAGE = the few pieces a plain tutorial would never include -- the critical script, the thinker with QFEP. Everything uncast is AT DEPTH: kept, honored by the dig line, not needed by the book or the walk.",
+ "sequence": "boolean_surfaces",
+ "_note": "thin chapter — pearls missing; beats intentionally show uncast roles",
+ "beats": [
+  {
+   "role": "two solids",
+   "cast": "two_solids",
+   "alts": [],
+   "weak": true,
+   "missing": true
+  },
+  {
+   "role": "union",
+   "cast": "csg_union_demo",
+   "alts": []
+  },
+  {
+   "role": "intersection",
+   "cast": "csg_intersection_demo",
+   "alts": []
+  },
+  {
+   "role": "difference",
+   "cast": "csg_difference_demo",
+   "alts": []
+  },
+  {
+   "role": "compose a boolean tree yourself",
+   "cast": "csg_compose_workbench",
+   "alts": []
+  }
+ ],
+ "voltage": [
+  {
+   "piece": "csg_architecture_cavity",
+   "why": "architecture as Boolean composition — the wall is nothing but difference; the opening is the operator made inhabitable (the critical turn on 'subtract')",
+   "after": "difference"
+  }
+ ]
+}

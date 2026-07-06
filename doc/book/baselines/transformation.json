@@ -1,0 +1,115 @@
+{
+ "_doctrine": "R-023: the baseline contract. Deck 1 BEATS = what a PLAIN tutorial on this concept would minimally need (derived from the concept, not the inventory); each beat is a ROLE cast with one artifact (alts = understudies). Deck 2 VOLTAGE = the few pieces a plain tutorial would never include -- the critical script, the thinker with QFEP. Everything uncast is AT DEPTH: kept, honored by the dig line, not needed by the book or the walk.",
+ "sequence": "transformation",
+ "beats": [
+  {
+   "role": "arrive in transformed space",
+   "cast": "science_screen",
+   "alts": [
+    "dark_sphere",
+    "player_trace"
+   ]
+  },
+  {
+   "role": "translate a solid",
+   "cast": "translation_cube_demo",
+   "alts": [
+    "x_translation_cube",
+    "pick_up_cube"
+   ]
+  },
+  {
+   "role": "rotate it — the gimbal",
+   "cast": "rotation_gimbal",
+   "alts": [
+    "spin",
+    "rotate_grid_cubes"
+   ]
+  },
+  {
+   "role": "scale it",
+   "cast": "scale_me",
+   "alts": [
+    "grower_block",
+    "cube_scene"
+   ]
+  },
+  {
+   "role": "the dot product — projection, how aligned",
+   "cast": "invariants_demo",
+   "alts": [
+    "righttriangle",
+    "science_screen"
+   ],
+   "weak": true
+  },
+  {
+   "role": "the cross product — the perpendicular",
+   "cast": "righttriangle",
+   "alts": [
+    "toruscylinder",
+    "prism_block"
+   ],
+   "weak": true
+  },
+  {
+   "role": "compose transforms — the matrix",
+   "cast": "matrix_4x4_viewer",
+   "alts": [
+    "transform_composition",
+    "homogeneous_coordinates"
+   ]
+  },
+  {
+   "role": "the invariant — what survives",
+   "cast": "invariants_demo",
+   "alts": [
+    "balance_puzzle",
+    "player_trace"
+   ]
+  },
+  {
+   "role": "compose a transform yourself",
+   "cast": "transform_composition_workbench",
+   "alts": [
+    "chair_assembly_puzzle",
+    "transform_composition"
+   ]
+  },
+  {
+   "role": "prove it — match a target pose",
+   "cast": "chair_assembly_puzzle",
+   "alts": [
+    "balance_puzzle",
+    "translation_cube_demo"
+   ]
+  }
+ ],
+ "voltage": [
+  {
+   "piece": "carousel_cake",
+   "after": "rotate it — the gimbal",
+   "why": "the same rotation rule per layer yet exponential divergence — the birthday cake as a lesson in how uniform law breeds unequal motion, celebration turned unstable."
+  },
+  {
+   "piece": "transform_composition_workbench",
+   "after": "compose transforms — the matrix",
+   "why": "order matters — T1∘T2 ≠ T2∘T1 made walkable; non-commutativity as the political fact that sequence is not neutral, that who-acts-first changes the world."
+  },
+  {
+   "piece": "boolean_tunnel",
+   "after": "compose transforms — the matrix",
+   "why": "walk a corridor where each segment rotates a little more — local repetition accumulating into a global twist you inhabit rather than observe, transformation as architecture around the body."
+  },
+  {
+   "piece": "invariants_demo",
+   "after": "the invariant — what survives",
+   "why": "the QFEP core — move a thing without changing what it IS; the invariant is the queer question of identity under transformation, what persists when everything measurable shifts."
+  },
+  {
+   "piece": "balance_puzzle",
+   "after": "prove it — match a target pose",
+   "why": "the goal is not motion but stillness — mastery proven by the system coming to rest, transformation judged by the invariant it finally leaves standing."
+  }
+ ]
+}

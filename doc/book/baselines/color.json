@@ -1,0 +1,105 @@
+{
+ "_doctrine": "R-023: the baseline contract. Deck 1 BEATS = what a PLAIN tutorial on this concept would minimally need (derived from the concept, not the inventory); each beat is a ROLE cast with one artifact (alts = understudies). Deck 2 VOLTAGE = the few pieces a plain tutorial would never include -- the critical script, the thinker with QFEP. Everything uncast is AT DEPTH: kept, honored by the dig line, not needed by the book or the walk.",
+ "sequence": "color",
+ "beats": [
+  {
+   "role": "a single hue",
+   "cast": "SpectrumVisualizer",
+   "alts": [
+    "spectrum_forest",
+    "rainbow"
+   ]
+  },
+  {
+   "role": "value and saturation — the axes",
+   "cast": "color_space_navigator",
+   "alts": [
+    "dna_color_stacks_stack_value_steps_warm",
+    "gradient_interpolator"
+   ]
+  },
+  {
+   "role": "the palette — a set",
+   "cast": "color_sets_overview",
+   "alts": [
+    "colorballs",
+    "pillarcolorcollection"
+   ]
+  },
+  {
+   "role": "contrast — simultaneous",
+   "cast": "dna_color_stacks_stack_simultaneous_contrast",
+   "alts": [
+    "subpixel_display",
+    "visual_color_mixing"
+   ]
+  },
+  {
+   "role": "color the grid — composition",
+   "cast": "gridcolorizer",
+   "alts": [
+    "pillarcolorcollection",
+    "pattern_machine_c"
+   ]
+  },
+  {
+   "role": "a color rule — harmony",
+   "cast": "dna_color_stacks_stack_complementary_red_green",
+   "alts": [
+    "dna_color_stacks_stack_triadic_primary",
+    "dna_color_stacks_stack_monochrome_blue"
+   ]
+  },
+  {
+   "role": "the artists' systems — Albers, Mondrian, Rothko",
+   "cast": "dna_modern_art_albers_homage_warm",
+   "alts": [
+    "dna_modern_art_mondrian_de_stijl",
+    "dna_modern_art_rothko_chromatic_field"
+   ]
+  },
+  {
+   "role": "compose a palette yourself",
+   "cast": "visual_color_mixing",
+   "alts": [
+    "constraint_sculptor",
+    "hand_color_controller"
+   ]
+  },
+  {
+   "role": "prove it — match a target composition",
+   "cast": "primitive_combo_puzzle",
+   "alts": [
+    "primitive_assembler",
+    "dress_selector"
+   ]
+  }
+ ],
+ "voltage": [
+  {
+   "piece": "dna_modern_art_albers_homage_warm",
+   "after": "the artists' systems — Albers, Mondrian, Rothko",
+   "why": "Albers' Homage to the Square proves color is relational, not absolute — the same swatch reads differently against its neighbor; perception as the queer refusal of a fixed identity."
+  },
+  {
+   "piece": "dna_modern_art_mondrian_de_stijl",
+   "after": "the artists' systems — Albers, Mondrian, Rothko",
+   "why": "Mondrian's De Stijl grid is the ideological claim that primary color plus orthogonal line is a universal moral order — composition as dogma, the grid asking to be obeyed."
+  },
+  {
+   "piece": "dna_modern_art_rothko_chromatic_field",
+   "after": "the artists' systems — Albers, Mondrian, Rothko",
+   "why": "Rothko's chromatic field turns hue into grief and immersion — color as affect and threshold, geometry that carries mourning rather than measurement (the Turing move)."
+  },
+  {
+   "piece": "dna_modern_art_kandinsky_bauhaus_triad",
+   "after": "a color rule — harmony",
+   "why": "Kandinsky's Bauhaus triad legislates a synesthetic correspondence — yellow=triangle, red=square, blue=circle — exposing 'harmony' as a taught rule, not a fact of the eye."
+  },
+  {
+   "piece": "dna_color_stacks_stack_simultaneous_contrast",
+   "after": "contrast — simultaneous",
+   "why": "simultaneous contrast makes a color literally change under its neighbor — the QFEP proof that value is contextual and boundaries between hues are negotiated, not given."
+  }
+ ]
+}
