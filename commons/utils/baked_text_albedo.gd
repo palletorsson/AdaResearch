@@ -220,6 +220,75 @@ static func make_label_mesh(text: String, text_color: Color, world_size: Vector2
 	return _text_quad(tex, world_size, true, unshaded)
 
 
+## A small floating TAG — an integrated 2D-in-3D display board: a framed dark
+## face with a thin lit accent edge and text baked onto it, billboarded to face
+## the viewer. The canonical "nice display" for short scene annotations (a value,
+## an axis name) that would otherwise be a bare floating Label3D. Returns a Node3D
+## (frame + face + accent + text). `world_h` is the board height in metres; width
+## auto-fits the text. Set billboard=false for a fixed-orientation board.
+## `accent` colours the lit edge strip; pass Color(0,0,0,0) for no accent.
+static func make_tag(text: String, text_color: Color = Color(0.9, 0.95, 1.0),
+		world_h: float = 0.06, bg_color: Color = Color(0.08, 0.09, 0.11),
+		billboard: bool = true, accent: Color = Color(0.86, 0.40, 0.16)) -> Node3D:
+	if text.is_empty():
+		return null
+	var w: float = world_h * (0.5 + 0.62 * float(text.length()))   # auto-fit width to text
+	var root := Node3D.new()
+	root.name = "Tag"
+	var bb := BaseMaterial3D.BILLBOARD_ENABLED if billboard else BaseMaterial3D.BILLBOARD_DISABLED
+	# Frame plate — a slightly larger lighter border behind the face (the bezel).
+	var frame := MeshInstance3D.new()
+	var fbox := BoxMesh.new()
+	fbox.size = Vector3(w + world_h * 0.16, world_h * 1.18, 0.004)
+	frame.mesh = fbox
+	var fmat := StandardMaterial3D.new()
+	fmat.albedo_color = bg_color.lightened(0.22)
+	fmat.roughness = 0.45
+	fmat.metallic = 0.2
+	fmat.billboard_mode = bb
+	frame.material_override = fmat
+	frame.position.z = -0.002
+	root.add_child(frame)
+	# Dark glass face.
+	var plate := MeshInstance3D.new()
+	var pbox := BoxMesh.new()
+	pbox.size = Vector3(w, world_h, 0.006)
+	plate.mesh = pbox
+	var pmat := StandardMaterial3D.new()
+	pmat.albedo_color = bg_color
+	pmat.roughness = 0.35
+	pmat.metallic = 0.1
+	pmat.billboard_mode = bb
+	plate.material_override = pmat
+	root.add_child(plate)
+	# Thin lit accent edge along the bottom — the "powered board" read.
+	if accent.a > 0.0:
+		var edge := MeshInstance3D.new()
+		var ebox := BoxMesh.new()
+		ebox.size = Vector3(w * 0.9, world_h * 0.09, 0.008)
+		edge.mesh = ebox
+		var emat := StandardMaterial3D.new()
+		emat.albedo_color = accent
+		emat.emission_enabled = true
+		emat.emission = accent
+		emat.emission_energy_multiplier = 1.4
+		emat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+		emat.billboard_mode = bb
+		edge.material_override = emat
+		edge.position = Vector3(0, -world_h * 0.44, 0.004)
+		root.add_child(edge)
+	# Baked text on the face.
+	var label := make_label_mesh(text, text_color, Vector2(w * 0.88, world_h * 0.66), 1400, true)
+	if label:
+		label.position.z = 0.005
+		if billboard:
+			var lm = label.material_override
+			if lm is StandardMaterial3D:
+				lm.billboard_mode = BaseMaterial3D.BILLBOARD_ENABLED
+		root.add_child(label)
+	return root
+
+
 ## An opaque label PLATE — background colour everywhere + text on top (the
 ## EMPLOYEES-ONLY / printed-patch case). Replaces a coloured BoxMesh plate plus its
 ## Label3D with one textured quad. `band` is forwarded to generate_panel_image.
@@ -270,3 +339,28 @@ static func _text_quad(tex: ImageTexture, world_size: Vector2, transparent: bool
 	mi.material_override = mat
 	mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	return mi
+
+
+## A stacked block of baked text lines — for boards/screens that show several lines
+## (whiteboard, info_screen, slide_projector). Returns a Node3D centred on its origin
+## (+Z normal) holding one baked label quad per non-empty line, top line first. Each
+## line quad is `max_width` wide × `line_height` tall; `gap` adds vertical spacing.
+static func make_text_block(lines: Array, text_color: Color, line_height: float,
+		max_width: float, gap: float = 0.0, unshaded: bool = false) -> Node3D:
+	var root := Node3D.new()
+	var n: int = lines.size()
+	if n == 0:
+		return root
+	var pitch: float = line_height + gap
+	var total: float = pitch * float(n)
+	for i in range(n):
+		var line := str(lines[i])
+		if line.strip_edges() == "":
+			continue
+		var q: MeshInstance3D = make_label_mesh(line, text_color, Vector2(max_width, line_height), 1400, unshaded)
+		if q == null:
+			continue
+		# Top line at the top of the block; block centred on the root origin.
+		q.position = Vector3(0.0, total * 0.5 - line_height * 0.5 - pitch * float(i), 0.0)
+		root.add_child(q)
+	return root
