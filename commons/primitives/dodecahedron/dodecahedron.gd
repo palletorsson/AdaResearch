@@ -1,5 +1,15 @@
 # Dodecahedron.gd - Fixed Regular dodecahedron (12 pentagonal faces)
 extends Node3D
+
+# @identity
+# essence: the regular dodecahedron — 20 vertices, 12 pentagonal faces — the solid Plato assigned to the cosmos itself
+# desire: the learner meets the pentagon in three dimensions and feels why the ancients read this shape as the whole sky
+# critical_parameter: the golden ratio PHI — its vertices mix (±1,±1,±1) cube corners with (0,±1/PHI,±PHI) golden points
+# triggers: builds on ready; pentagons are fan-triangulated into faces; cyan edges glow via emission
+# emerges: that the pentagon — impossible to tile a plane — closes perfectly into a solid, and the golden ratio is why
+# needs: [has fan-triangulated pentagons + glowing edges [has], missing per-face highlight to count the twelve pentagons]
+# relationships: dual of the icosahedron (12 faces ↔ 12 vertices); the fifth and last Platonic solid
+# truth: five-fold symmetry cannot fill a plane but can close a solid — the forbidden tiling becomes a perfect world
 const GridMaterialFactory: GDScript = preload("res://commons/primitives/shared/grid_material_factory.gd")
 const PrimitiveMeshBuilder: GDScript = preload("res://commons/primitives/shared/primitive_mesh_builder.gd")
 

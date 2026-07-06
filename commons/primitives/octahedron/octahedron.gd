@@ -1,5 +1,15 @@
 # Octahedron.gd - Regular octahedron primitive (8 faces, 6 vertices, 12 edges)
 extends Node3D
+
+# @identity
+# essence: the regular octahedron — 6 vertices sitting on the ±axes, 8 triangular faces — the cube's dual
+# desire: the learner reads it as two square pyramids joined base to base, and sees the cube hiding inside as its dual
+# critical_parameter: the six axis-aligned vertices at ±0.5 on x, y, z — swap them for face centers and a cube appears
+# triggers: builds on ready; set_base_color recolors the grid-shaded faces
+# emerges: that the Platonic solids are a finite family — only five shapes give every face, edge, and angle the same measure
+# needs: [has grid-shaded faces [has], missing grab/rotate handles to inspect the symmetry by hand]
+# relationships: dual of the cube (faces↔vertices); sibling to icosahedron, dodecahedron, tetrahedron
+# truth: perfect symmetry is rare — only five solids treat every part alike
 const GridMaterialFactory: GDScript = preload("res://commons/primitives/shared/grid_material_factory.gd")
 const PrimitiveMeshBuilder: GDScript = preload("res://commons/primitives/shared/primitive_mesh_builder.gd")
 

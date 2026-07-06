@@ -2,6 +2,16 @@
 # Label follows the point and appears underneath it in the scene tree
 extends Node3D
 
+# @identity
+# essence: a single grabbable point that reports its own (x,y,z) — position without extension, made visible
+# desire: the learner picks up a point, moves it, and watches its coordinates update — feeling location as three numbers
+# critical_parameter: the global position of the grab sphere — the live label reads from it every frame
+# triggers: grab the sphere and move it; _process recomputes the position text continuously
+# emerges: the realization that a "point" is nothing but an address — a dimensionless triple in space
+# needs: [has grabbable sphere + live position label [has], missing a snap-to-grid mode to feel quantization]
+# relationships: the seed of the whole primitives sequence — a line joins two points, a triangle closes three, a cube stacks eight
+# truth: a point is position without extension — everything is built from nothing
+
 var position_label: Label3D
 var grab_sphere: Node3D
 var point_sphere: MeshInstance3D

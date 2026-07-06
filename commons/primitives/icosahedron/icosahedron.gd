@@ -1,5 +1,15 @@
 # Icosahedron.gd - Regular icosahedron (20 triangular faces)
 extends Node3D
+
+# @identity
+# essence: the regular icosahedron — 12 vertices, 30 edges, 20 triangular faces — the most spherical Platonic solid
+# desire: the learner sees that maximum symmetry with triangles approaches the roundness of a sphere without ever reaching it
+# critical_parameter: the golden ratio PHI — the vertices are the corners of three orthogonal golden rectangles
+# triggers: builds on ready; set_base_color recolors; faces are double-sided to close any winding gaps
+# emerges: that beauty and roundness fall out of one irrational number — the golden ratio built into the vertex coordinates
+# needs: [has verified geometry (Euler V-E+F=2) [has], missing an unfold/net animation to show its 20 faces flat]
+# relationships: dual of the dodecahedron (20 faces ↔ 20 vertices); sibling to octahedron and tetrahedron
+# truth: a polyhedron reaches for the sphere and stops at twenty faces — the round is approached, never touched
 const GridMaterialFactory: GDScript = preload("res://commons/primitives/shared/grid_material_factory.gd")
 const PrimitiveMeshBuilder: GDScript = preload("res://commons/primitives/shared/primitive_mesh_builder.gd")
 

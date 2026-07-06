@@ -1,5 +1,15 @@
 # Bipyramid.gd - Double pyramid (square base with top and bottom apex)
 extends Node3D
+
+# @identity
+# essence: a square bipyramid — a four-sided ring with an apex above and below — two pyramids fused at their base
+# desire: the learner sees a solid built by mirroring: take one pyramid, reflect it, and the base vanishes into an interior seam
+# critical_parameter: the two apex points at (0,±0.4,0) and the square ring between them — stretch the apexes and it elongates toward the octahedron
+# triggers: builds on ready; set_base_color recolors the grid-shaded faces
+# emerges: that reflection is a construction operator — a whole new solid is made by mirroring a simpler one across a plane
+# needs: [has grid-shaded faces [has], missing an apex-height slider to morph between flat, octahedral, and spindle forms]
+# relationships: a near-cousin of the octahedron (which is the special case where all edges are equal); built from the same triangle-fan logic as the pyramid
+# truth: mirror a shape across its base and the base disappears — reflection makes a whole from a half
 const GridMaterialFactory: GDScript = preload("res://commons/primitives/shared/grid_material_factory.gd")
 const PrimitiveMeshBuilder: GDScript = preload("res://commons/primitives/shared/primitive_mesh_builder.gd")
 
