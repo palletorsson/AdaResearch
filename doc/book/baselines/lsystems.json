@@ -1,0 +1,89 @@
+{
+ "_doctrine": "R-023: the baseline contract. Deck 1 BEATS = what a PLAIN tutorial on this concept would minimally need (derived from the concept, not the inventory); each beat is a ROLE cast with one artifact (alts = understudies). Deck 2 VOLTAGE = the few pieces a plain tutorial would never include -- the critical script, the thinker with QFEP. Everything uncast is AT DEPTH: kept, honored by the dig line, not needed by the book or the walk.",
+ "sequence": "lsystems",
+ "beats": [
+  {
+   "role": "the alphabet — symbols",
+   "cast": "ContextFreeGrammars",
+   "alts": [
+    "lsystem_editor",
+    "science_screen"
+   ]
+  },
+  {
+   "role": "a rule — rewriting",
+   "cast": "fractal_lsystem_string",
+   "alts": [
+    "lsystem_editor"
+   ]
+  },
+  {
+   "role": "the turtle — symbol becomes move",
+   "cast": "space_filling_curve_gallery",
+   "alts": [
+    "Hilbert3D"
+   ]
+  },
+  {
+   "role": "iterate the grammar",
+   "cast": "AnimatedTree",
+   "alts": [
+    "parametric_lsystem",
+    "lsystem_tree"
+   ]
+  },
+  {
+   "role": "branching — the tree",
+   "cast": "lsystem_tree",
+   "alts": [
+    "branching_coral",
+    "parametric_lsystem"
+   ]
+  },
+  {
+   "role": "stochastic rules",
+   "cast": "ContextSensitiveTree",
+   "weak": true,
+   "alts": [
+    "ForestCompetition"
+   ]
+  },
+  {
+   "role": "design a grammar yourself",
+   "cast": "lsystem_editor",
+   "alts": [
+    "genetic_tree_sculptor"
+   ]
+  },
+  {
+   "role": "prove it",
+   "cast": "lsystem_dungeon",
+   "weak": true,
+   "alts": [
+    "CityGenerator"
+   ]
+  }
+ ],
+ "voltage": [
+  {
+   "piece": "grammar_provenance",
+   "why": "the grammar as INHERITED LANGUAGE — Lindenmayer, Islamic subdivision, Aboriginal kinship: same engine, different worlds. Whose rules got called universal? The alphabet is never neutral.",
+   "after": "the alphabet — symbols"
+  },
+  {
+   "piece": "branching_coral",
+   "why": "branching as GROWTH-AS-WRITING — the reef writes itself in F[+F][-F]; morphology is a sentence the organism keeps rewriting, not a plan it obeys",
+   "after": "branching — the tree"
+  },
+  {
+   "piece": "ContextSensitiveTree",
+   "why": "the stochastic/context rule as the MUTATION — deviation is where the grammar bends to its world; the pruned branch is the rule that refused to repeat itself (the queer turn on inheritance)",
+   "after": "stochastic rules"
+  },
+  {
+   "piece": "CityGenerator",
+   "why": "rewriting as THE CODE THAT GROWS ITSELF — the grammar leaves the plant and lays a city; a rule set becomes infrastructure, structure authored by iteration not decree",
+   "after": "design a grammar yourself"
+  }
+ ]
+}

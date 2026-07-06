@@ -1,0 +1,90 @@
+{
+ "_doctrine": "R-023: the baseline contract. Deck 1 BEATS = what a PLAIN tutorial on this concept would minimally need (derived from the concept, not the inventory); each beat is a ROLE cast with one artifact (alts = understudies). Deck 2 VOLTAGE = the few pieces a plain tutorial would never include -- the critical script, the thinker with QFEP. Everything uncast is AT DEPTH: kept, honored by the dig line, not needed by the book or the walk.",
+ "sequence": "proceduralgeneration",
+ "beats": [
+  {
+   "role": "the tile set",
+   "cast": "cube_mound_scene",
+   "alts": [
+    "dome"
+   ],
+   "weak": true
+  },
+  {
+   "role": "adjacency rules — what fits what",
+   "cast": "mirror_cellular_texture_for_3d",
+   "alts": [
+    "layered_membrane"
+   ],
+   "weak": true
+  },
+  {
+   "role": "constraint propagation",
+   "cast": "percolationnetwork_ca",
+   "alts": [
+    "caverandomwalk"
+   ]
+  },
+  {
+   "role": "wave function collapse",
+   "cast": "maze_generation",
+   "alts": [
+    "caverandomwalk"
+   ],
+   "weak": true
+  },
+  {
+   "role": "Markov — next from current",
+   "cast": "caverandomwalk",
+   "alts": [
+    "space_colonization_algorithm"
+   ]
+  },
+  {
+   "role": "seeds and variation",
+   "cast": "branching_growth_algorithm",
+   "alts": [
+    "space_colonization_algorithm",
+    "organic_space"
+   ]
+  },
+  {
+   "role": "generate a world yourself",
+   "cast": "rhizomatic_maze_space",
+   "alts": [
+    "organic_space",
+    "layered_membrane"
+   ]
+  },
+  {
+   "role": "prove it",
+   "cast": "GeneticProgramming",
+   "alts": [
+    "space_colonization_algorithm"
+   ],
+   "weak": true
+  }
+ ],
+ "voltage": [
+  {
+   "piece": "percolationnetwork_ca",
+   "after": "constraint propagation",
+   "why": "constraint as the given world you did not choose — the lattice's occupancy threshold is set before you arrive; you inhabit whether it percolates, you did not decide it"
+  },
+  {
+   "piece": "caverandomwalk",
+   "after": "Markov — next from current",
+   "why": "the past determines the next — each carved cell is chosen only from the current state; the walk has no plan, only history, and the cave is what history leaves behind"
+  },
+  {
+   "piece": "rhizomatic_maze_space",
+   "after": "generate a world yourself",
+   "why": "Deleuze's rhizome — non-hierarchical growth with no center and no author; the space assembles itself from local connection, authorship-without-an-author made walkable"
+  },
+  {
+   "piece": "GeneticProgramming",
+   "after": "prove it",
+   "why": "generation as authorship-without-an-author — creatures evolve toward a fitness goal no individual understands; the proof is that structure arrives without a designer, the QFEP potential realizing itself"
+  }
+ ]
+}

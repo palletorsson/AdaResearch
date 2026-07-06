@@ -1,0 +1,102 @@
+{
+ "_doctrine": "R-023: the baseline contract. Deck 1 BEATS = what a PLAIN tutorial on this concept would minimally need (derived from the concept, not the inventory); each beat is a ROLE cast with one artifact (alts = understudies). Deck 2 VOLTAGE = the few pieces a plain tutorial would never include -- the critical script, the thinker with QFEP. Everything uncast is AT DEPTH: kept, honored by the dig line, not needed by the book or the walk.",
+ "sequence": "randomness",
+ "beats": [
+  {
+   "role": "the coin flip — uniform",
+   "cast": "coin_toss",
+   "alts": [
+    "dice_throw",
+    "slot_machine"
+   ]
+  },
+  {
+   "role": "the random walk",
+   "cast": "random_walk_leash",
+   "alts": [
+    "random_walk_terrarium",
+    "pixel_cloud"
+   ]
+  },
+  {
+   "role": "distributions — not all randomness is flat",
+   "cast": "distribution_comparator",
+   "alts": [
+    "distribution_sampler"
+   ]
+  },
+  {
+   "role": "the Gaussian — the bell",
+   "cast": "galton_board",
+   "alts": [
+    "random_bell_curve",
+    "gaussian_random"
+   ]
+  },
+  {
+   "role": "entropy — the measure of disorder",
+   "cast": "shannon_entropy_meter",
+   "alts": [
+    "entropy_jar",
+    "entropy_axiom"
+   ]
+  },
+  {
+   "role": "the seed — determinism inside chance",
+   "cast": "seed_replay_demo",
+   "alts": [
+    "prng_crank_machine"
+   ]
+  },
+  {
+   "role": "random versus pseudo-random",
+   "cast": "trng_vs_prng",
+   "alts": [
+    "prng_crank_machine",
+    "hardware_entropy_decay"
+   ]
+  },
+  {
+   "role": "paint with randomness",
+   "cast": "pollock_painting_in_3d",
+   "alts": [
+    "GaussianPaintSplatter",
+    "random_object_spawner"
+   ]
+  },
+  {
+   "role": "prove it",
+   "cast": "monte_carlo_dartboard",
+   "alts": [
+    "galton_board"
+   ]
+  }
+ ],
+ "voltage": [
+  {
+   "piece": "shannon_entropy_meter",
+   "why": "entropy as the MEASURE of disorder — H = -Σ p log p turns chaos into a number in bits; disorder becomes quantity, the thing you can read off a gauge",
+   "after": "entropy — the measure of disorder"
+  },
+  {
+   "piece": "seed_replay_demo",
+   "why": "the seed as determinism-inside-chance — same seed, same 'random' world, always; fate wearing the mask of freedom, the fork where chance is exposed as scripted",
+   "after": "the seed — determinism inside chance"
+  },
+  {
+   "piece": "prng_crank_machine",
+   "why": "pseudo-random as the machine's honesty about its own fakery — crank the LCG by hand and watch 'randomness' fall out of pure arithmetic; the machine confesses it cannot flip a real coin",
+   "after": "random versus pseudo-random"
+  },
+  {
+   "piece": "hardware_entropy_decay",
+   "why": "the irreducible enters through the BODY — your controller jitter, grip, head-turn become the only true noise; randomness as the uncomputable remainder the machine must borrow from the world",
+   "after": "random versus pseudo-random"
+  },
+  {
+   "piece": "random_number_book_page_1955",
+   "why": "the queer core made archive — RAND's 1955 table of a million 'random' digits, chance frozen into a printed book; the irreducible captured, bound, and sold, and still it never repeats",
+   "after": "paint with randomness"
+  }
+ ]
+}

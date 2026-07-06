@@ -1,0 +1,97 @@
+{
+ "_doctrine": "R-023: the baseline contract. Deck 1 BEATS = what a PLAIN tutorial on this concept would minimally need (derived from the concept, not the inventory); each beat is a ROLE cast with one artifact (alts = understudies). Deck 2 VOLTAGE = the few pieces a plain tutorial would never include -- the critical script, the thinker with QFEP. Everything uncast is AT DEPTH: kept, honored by the dig line, not needed by the book or the walk.",
+ "sequence": "foundationscrisis",
+ "beats": [
+  {
+   "role": "the axioms — the ground",
+   "cast": "euclid_postulates_plaque",
+   "alts": [
+    "parallel_lines",
+    "angle_sum_triangle"
+   ]
+  },
+  {
+   "role": "the paradox — Russell's set",
+   "cast": "russell_set_box",
+   "alts": [
+    "barber_paradox",
+    "self_membership_set"
+   ]
+  },
+  {
+   "role": "self-reference",
+   "cast": "liar_loop",
+   "alts": [
+    "godel_statement_plaque"
+   ]
+  },
+  {
+   "role": "Gödel — unprovable truths",
+   "cast": "godel_sentence_machine",
+   "alts": [
+    "provability_sorter",
+    "incompleteness_tower"
+   ]
+  },
+  {
+   "role": "the halting problem — Turing",
+   "cast": "godel_sentence_machine",
+   "weak": true,
+   "alts": [
+    "provability_sorter"
+   ]
+  },
+  {
+   "role": "the limit made walkable",
+   "cast": "incompleteness_tower",
+   "alts": [
+    "escher_staircase",
+    "penrose_triangle"
+   ]
+  },
+  {
+   "role": "sit with the incompleteness",
+   "cast": "poincare_disk",
+   "alts": [
+    "riemann_sphere",
+    "hyperbolic_surface"
+   ]
+  },
+  {
+   "role": "prove it — or fail to, which is the point",
+   "cast": "provability_sorter",
+   "weak": true,
+   "alts": [
+    "excluded_middle_demo",
+    "constructive_proof"
+   ]
+  }
+ ],
+ "voltage": [
+  {
+   "piece": "godel_sentence_machine",
+   "after": "Gödel — unprovable truths",
+   "why": "G says 'G is not provable' — if the system could prove it, it would be false; so it is true AND unprovable. The truth the edifice cannot reach: the crack in every formal wall the whole book has been building."
+  },
+  {
+   "piece": "provability_sorter",
+   "after": "Gödel — unprovable truths",
+   "why": "the provable is a PROPER subset of the true — statements fall into a gap that never closes. The uncomputable / unprovable = the queer irreducible: what is real but outside the reach of any rule."
+  },
+  {
+   "piece": "russell_set_box",
+   "after": "the paradox — Russell's set",
+   "why": "R = {x : x not-in x}, is R in R? The set that breaks itself the instant it is defined — self-reference opens an edge in the formal ground; the rule that eats its own tail."
+  },
+  {
+   "piece": "florensky_sphere",
+   "after": "sit with the incompleteness",
+   "why": "paraconsistency: hold A and not-A at once and the world does NOT end. Florensky's supralogic is the QFEP answer to the crisis — the limit is not catastrophe but habitat; contradiction as a place you can stand."
+  },
+  {
+   "piece": "qfep_formula_3d",
+   "after": "prove it — or fail to, which is the point",
+   "why": "QFE = F − λE(S) + φΔE(S,t) assembled: the honest limit named as structure, not failure. Incompleteness is where the book was walking all along — every formal system has an outside, and φ>0 is the queer signature that values that outside."
+  }
+ ]
+}

@@ -1,0 +1,96 @@
+{
+ "_doctrine": "R-023: the baseline contract. Deck 1 BEATS = what a PLAIN tutorial on this concept would minimally need (derived from the concept, not the inventory); each beat is a ROLE cast with one artifact (alts = understudies). Deck 2 VOLTAGE = the few pieces a plain tutorial would never include -- the critical script, the thinker with QFEP. Everything uncast is AT DEPTH: kept, honored by the dig line, not needed by the book or the walk.",
+ "sequence": "noise",
+ "beats": [
+  {
+   "role": "white noise — the raw",
+   "cast": "WhiteNoiseGallery",
+   "alts": [
+    "randompoints",
+    "NoiseColors3D"
+   ]
+  },
+  {
+   "role": "smooth it — value noise",
+   "cast": "simplex_noise",
+   "alts": [
+    "noise_space"
+   ],
+   "weak": true
+  },
+  {
+   "role": "Perlin — gradient noise",
+   "cast": "perlin_noise",
+   "alts": [
+    "shader_noise_space",
+    "noisesphere"
+   ]
+  },
+  {
+   "role": "octaves — fBm, layers of detail",
+   "cast": "noiselayers",
+   "alts": [
+    "voxelnoise"
+   ]
+  },
+  {
+   "role": "noise as terrain",
+   "cast": "perlin_noise_terrain",
+   "alts": [
+    "noise_terrain",
+    "perlin_terrain_sculptor"
+   ]
+  },
+  {
+   "role": "the flow field — noise becomes direction",
+   "cast": "noise_space",
+   "alts": [
+    "noisetorus"
+   ],
+   "weak": true
+  },
+  {
+   "role": "steer with the field",
+   "cast": "voxelnoise",
+   "alts": [],
+   "weak": true
+  },
+  {
+   "role": "sculpt with noise",
+   "cast": "perlin_terrain_sculptor",
+   "alts": [
+    "noise_terrain"
+   ]
+  },
+  {
+   "role": "prove it",
+   "cast": "configurable_portal",
+   "alts": [
+    "noise_space"
+   ],
+   "weak": true
+  }
+ ],
+ "voltage": [
+  {
+   "piece": "MeltingBerniniScene",
+   "why": "the manufactured organic — Bernini's baroque marble DISSOLVED by procedural noise; the classical ideal melted by the aesthetic of natural-looking-fake",
+   "after": "Perlin — gradient noise"
+  },
+  {
+   "piece": "noiselayers",
+   "why": "the fractal hiding inside the smooth — fBm is self-similarity smuggled into what looks continuous; the octave stack is recursion wearing a soft face",
+   "after": "octaves — fBm, layers of detail"
+  },
+  {
+   "piece": "perlin_terrain_sculptor",
+   "why": "noise as invisible authorship — the sliders (octaves, persistence, lacunarity) are the hand that manufactures 'nature'; terrain that looks found is entirely dialed",
+   "after": "sculpt with noise"
+  },
+  {
+   "piece": "NoiseColors3D",
+   "why": "there is no neutral noise — white/pink/brown/blue are ideologies of disorder; every 'random' field is already a shaped distribution, a choice pretending to be chance",
+   "after": "white noise — the raw"
+  }
+ ]
+}

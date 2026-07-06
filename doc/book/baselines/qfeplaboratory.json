@@ -1,0 +1,95 @@
+{
+ "_doctrine": "R-023: the baseline contract. Deck 1 BEATS = what a PLAIN tutorial on this concept would minimally need (derived from the concept, not the inventory); each beat is a ROLE cast with one artifact (alts = understudies). Deck 2 VOLTAGE = the few pieces a plain tutorial would never include -- the critical script, the thinker with QFEP. Everything uncast is AT DEPTH: kept, honored by the dig line, not needed by the book or the walk.",
+ "sequence": "qfeplaboratory",
+ "beats": [
+  {
+   "role": "Question — the opening move",
+   "cast": "qfep_balance_workbench",
+   "alts": [
+    "qfep_formula_3d",
+    "science_screen"
+   ]
+  },
+  {
+   "role": "Field — the space of possibility",
+   "cast": "possibility_space_cloud",
+   "alts": [
+    "emergence_zone",
+    "entropy_fan"
+   ]
+  },
+  {
+   "role": "Entropy — the measure",
+   "cast": "shannon_workbench",
+   "alts": [
+    "microstate_counter",
+    "entropy_fan"
+   ]
+  },
+  {
+   "role": "Potential — what could become",
+   "cast": "fluid_form",
+   "alts": [
+    "transforming_pattern",
+    "edge_core"
+   ]
+  },
+  {
+   "role": "the formula assembled",
+   "cast": "qfep_formula_3d",
+   "alts": [
+    "qfep_reactor"
+   ]
+  },
+  {
+   "role": "the lab — all together",
+   "cast": "qfep_reactor",
+   "alts": [
+    "edge_of_chaos_unlocked",
+    "emergence_zone"
+   ]
+  },
+  {
+   "role": "run the QFEP loop yourself",
+   "cast": "bifurcation_walkway",
+   "alts": [
+    "edge_of_chaos_unlocked",
+    "lambda_slider"
+   ]
+  },
+  {
+   "role": "prove it",
+   "cast": "snap_tetra_puzzle",
+   "alts": [
+    "snap_cube_puzzle"
+   ]
+  }
+ ],
+ "voltage": [
+  {
+   "piece": "grab_sphere_F",
+   "after": "Question — the opening move",
+   "why": "F is not a variable to read but a drive to HOLD — Free Energy, the order-seeking hand; the reader grasps the first term of the thesis and the term grasps back"
+  },
+  {
+   "piece": "grab_sphere_E",
+   "after": "Entropy — the measure",
+   "why": "E(S) made grabbable — entropy as freedom, the possibility-space you can weigh in the palm; the measure is not neutral, it is the field of what escapes order"
+  },
+  {
+   "piece": "grab_sphere_phi",
+   "after": "Potential — what could become",
+   "why": "φ is the queer signature — the rate-of-becoming term; holding it is the whole book's turn on 'building blocks': the primitive that embraces change rather than freezing it"
+  },
+  {
+   "piece": "qfep_formula_3d",
+   "after": "the formula assembled",
+   "why": "the book's own METHOD turned into a room — QFE = F − λE(S) + φΔE(S,t) standing in space; the reader walks inside the sentence the whole project was written from"
+  },
+  {
+   "piece": "queer_morphology_specimen",
+   "after": "run the QFEP loop yourself",
+   "why": "the lab's living proof — a specimen that refuses stable taxonomy, form shifting by λ and φ; the QFEP loop run to its end is a thing that will not be classified, the researcher becomes the researched"
+  }
+ ]
+}

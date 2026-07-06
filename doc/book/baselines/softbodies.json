@@ -1,0 +1,103 @@
+{
+ "_doctrine": "R-023: the baseline contract. Deck 1 BEATS = what a PLAIN tutorial on this concept would minimally need (derived from the concept, not the inventory); each beat is a ROLE cast with one artifact (alts = understudies). Deck 2 VOLTAGE = the few pieces a plain tutorial would never include -- the critical script, the thinker with QFEP. Everything uncast is AT DEPTH: kept, honored by the dig line, not needed by the book or the walk.",
+ "sequence": "softbodies",
+ "beats": [
+  {
+   "role": "two masses and a spring",
+   "cast": "jelly_cube",
+   "alts": [
+    "rounded_softbody_test",
+    "softmill"
+   ]
+  },
+  {
+   "role": "a chain",
+   "cast": "softmill",
+   "alts": [
+    "grab_long_stick",
+    "revolving_joy_ride"
+   ]
+  },
+  {
+   "role": "the cloth — a 2D spring mesh",
+   "cast": "cloth_straps",
+   "alts": [
+    "flagdancer"
+   ]
+  },
+  {
+   "role": "gravity and pinning",
+   "cast": "flagdancer",
+   "alts": [
+    "cloth_straps"
+   ]
+  },
+  {
+   "role": "damping — energy loss",
+   "cast": "softstopscene",
+   "alts": [
+    "rounded_softbody_test",
+    "breathing_room"
+   ]
+  },
+  {
+   "role": "collision",
+   "cast": "revolving_joy_ride",
+   "alts": [
+    "soft_mushroom",
+    "softbody_gallery_part2"
+   ]
+  },
+  {
+   "role": "morphogenesis — the Turing pattern",
+   "cast": "turing_pattern_generator",
+   "alts": [
+    "reaction_diffusion",
+    "entropy_morphogenesis"
+   ]
+  },
+  {
+   "role": "build a soft body yourself",
+   "cast": "softbody_gallery_part2",
+   "alts": [
+    "soft_mushroom"
+   ],
+   "weak": true
+  },
+  {
+   "role": "prove it",
+   "cast": "catalyst_target",
+   "alts": [
+    "proximity_spawner"
+   ],
+   "weak": true
+  }
+ ],
+ "voltage": [
+  {
+   "piece": "reaction_diffusion",
+   "why": "the ACTUAL Turing — Gray-Scott reaction-diffusion, the morphogenesis of his last work; the pattern that decides where the body's spots and stripes go, chemistry writing form before the form exists",
+   "after": "morphogenesis — the Turing pattern"
+  },
+  {
+   "piece": "cloth_straps",
+   "why": "the draped, vulnerable body — cloth as skin you walk THROUGH; matter that hangs, yields, and lets you pass, the soft body as the un-armored one",
+   "after": "the cloth — a 2D spring mesh"
+  },
+  {
+   "piece": "breathing_room",
+   "why": "settling, rest, exhaustion — walls that expand and contract; the room itself descends an energy landscape and breathes, soft matter as a body at rest rather than at work",
+   "after": "damping — energy loss"
+  },
+  {
+   "piece": "rounded_softbody_test",
+   "why": "the matter that remembers force — strain-energy heatmap where displacement stays visible; deformation as a record, the body carrying the history of every push (the Turing move: geometry with a biography)",
+   "after": "collision"
+  },
+  {
+   "piece": "radiolaria",
+   "why": "morphogenesis made mineral — the impossibly intricate silica skeleton a single cell grows; soft process, hard result; QFEP form emerging from local rule into an object no designer drew",
+   "after": "morphogenesis — the Turing pattern"
+  }
+ ]
+}

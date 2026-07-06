@@ -1,0 +1,107 @@
+{
+ "_doctrine": "R-023: the baseline contract. Deck 1 BEATS = what a PLAIN tutorial on this concept would minimally need (derived from the concept, not the inventory); each beat is a ROLE cast with one artifact (alts = understudies). Deck 2 VOLTAGE = the few pieces a plain tutorial would never include -- the critical script, the thinker with QFEP. Everything uncast is AT DEPTH: kept, honored by the dig line, not needed by the book or the walk.",
+ "sequence": "cellularautomata",
+ "beats": [
+  {
+   "role": "the cell — on or off",
+   "cast": "grid_substrate_runner",
+   "alts": [
+    "ca_screen",
+    "persian_rug"
+   ],
+   "weak": true
+  },
+  {
+   "role": "the neighborhood",
+   "cast": "hexagon_ca_vr",
+   "alts": [
+    "mirrored_cellular_automata",
+    "crossway_ca"
+   ],
+   "weak": true
+  },
+  {
+   "role": "one rule, one step",
+   "cast": "ca_screen",
+   "alts": [
+    "line_network_ca",
+    "ca_columns"
+   ],
+   "weak": true
+  },
+  {
+   "role": "iterate — the Game of Life",
+   "cast": "game_of_life_petri",
+   "alts": [
+    "self_organization_ca"
+   ]
+  },
+  {
+   "role": "the edge of chaos — lambda",
+   "cast": "self_organization_ca",
+   "alts": [
+    "ca_growth_network",
+    "structure_growth"
+   ],
+   "weak": true
+  },
+  {
+   "role": "Rule 110 — universal",
+   "cast": "rule_30_110_gravity",
+   "alts": [
+    "ca_rule_explorer"
+   ]
+  },
+  {
+   "role": "seed and watch",
+   "cast": "structure_growth",
+   "alts": [
+    "ca_growth_network",
+    "cellular_automata_3d_tree"
+   ]
+  },
+  {
+   "role": "design a rule yourself",
+   "cast": "ca_rule_explorer",
+   "alts": [
+    "mirrored_cellular_automata"
+   ]
+  },
+  {
+   "role": "prove it",
+   "cast": "ca_chair_test",
+   "alts": [
+    "ca_bridge",
+    "sierpinski_pyramid"
+   ],
+   "weak": true
+  }
+ ],
+ "voltage": [
+  {
+   "piece": "rule_30_110_gravity",
+   "why": "Rule 110 is Turing-complete — universal computation falls out of one local rule on a strip of cells; the actual Turing move, computation from nothing",
+   "after": "Rule 110 — universal"
+  },
+  {
+   "piece": "self_organization_ca",
+   "why": "the edge of chaos (lambda) as the queer between-state — neither frozen order nor dissolved noise; complexity lives only in the narrow band that refuses both poles",
+   "after": "the edge of chaos — lambda"
+  },
+  {
+   "piece": "game_of_life_petri",
+   "why": "Conway's Life as emergence-without-designer — gliders and guns nobody drew; B3/S23 has no author of its forms, order arrives unauthored",
+   "after": "iterate — the Game of Life"
+  },
+  {
+   "piece": "disease_spread_ca",
+   "why": "the local rule as the political-from-the-small — an SIR contagion shows a global fate written entirely by each cell's nearest neighbors; power is a neighborhood relation",
+   "after": "the neighborhood"
+  },
+  {
+   "piece": "mold_network",
+   "why": "slime-mold computation — cognition without a brain; the substrate itself thinks, decentring the mind as the seat of intelligence",
+   "after": "seed and watch"
+  }
+ ]
+}

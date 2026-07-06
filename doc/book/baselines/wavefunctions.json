@@ -1,0 +1,114 @@
+{
+ "_doctrine": "R-023: the baseline contract. Deck 1 BEATS = what a PLAIN tutorial on this concept would minimally need (derived from the concept, not the inventory); each beat is a ROLE cast with one artifact (alts = understudies). Deck 2 VOLTAGE = the few pieces a plain tutorial would never include -- the critical script, the thinker with QFEP. Everything uncast is AT DEPTH: kept, honored by the dig line, not needed by the book or the walk.",
+ "sequence": "wavefunctions",
+ "beats": [
+  {
+   "role": "the oscillator — back and forth",
+   "cast": "sine_oscillation",
+   "alts": [
+    "y_oscillation_cube",
+    "oscillation_controlled_cube"
+   ]
+  },
+  {
+   "role": "amplitude",
+   "cast": "y_oscillation_cube",
+   "alts": [
+    "OscillationCurve",
+    "SimpleOscillatingBridge"
+   ]
+  },
+  {
+   "role": "frequency",
+   "cast": "RackSineBasic",
+   "alts": [
+    "OscillationCurve",
+    "resonating_metallophone"
+   ]
+  },
+  {
+   "role": "phase",
+   "cast": "OscillationCurve",
+   "alts": [
+    "unit_circle_advanced",
+    "lissajous_curves"
+   ]
+  },
+  {
+   "role": "sine as circular motion",
+   "cast": "unit_circle_advanced",
+   "alts": [
+    "UnitCircleTrig",
+    "TrigWalkingPath"
+   ]
+  },
+  {
+   "role": "the spring — force-energy exchange",
+   "cast": "spring_demo",
+   "alts": [
+    "control_pendulum",
+    "chord_tension_spring"
+   ]
+  },
+  {
+   "role": "waves add — superposition",
+   "cast": "wave_interference_3d",
+   "alts": [
+    "wave_interference",
+    "beat_frequency_demo"
+   ]
+  },
+  {
+   "role": "standing waves",
+   "cast": "chladni_plate",
+   "alts": [
+    "wave_propagation_3d",
+    "coupled_oscillator_lattice"
+   ]
+  },
+  {
+   "role": "compose a waveform yourself",
+   "cast": "timbre_sculptor",
+   "alts": [
+    "additive_wave_demo",
+    "WavePaintings"
+   ]
+  },
+  {
+   "role": "prove it",
+   "cast": "lissajous_curves",
+   "alts": [
+    "beat_frequency_demo",
+    "additive_wave_demo"
+   ],
+   "weak": true
+  }
+ ],
+ "voltage": [
+  {
+   "piece": "foucault_pendulum",
+   "why": "oscillation as the body's rhythm — the swing that never stops, the room turning under a fixed plane; motion as the ground's own pulse",
+   "after": "the oscillator — back and forth"
+  },
+  {
+   "piece": "chord_tension_spring",
+   "why": "F <-> E as the queer exchange — force and energy trading places forever, tension that resolves only by relaxing; consonance as bodies finding rest in each other",
+   "after": "the spring — force-energy exchange"
+  },
+  {
+   "piece": "wave_interference",
+   "why": "interference as the meeting of two histories — where two waves cross, addition writes a third pattern neither carried alone; the meeting is the message",
+   "after": "waves add — superposition"
+  },
+  {
+   "piece": "sine_wall_corridor",
+   "why": "standing wave as fixed identity — the frozen wave you walk through, wavelength made architecture; the pattern that holds still while you move",
+   "after": "standing waves"
+  },
+  {
+   "piece": "WavePaintings",
+   "why": "oscillation become visible trace — the pendulum paints its own decay, motion leaving a biography; the swing that writes itself down",
+   "after": "compose a waveform yourself"
+  }
+ ]
+}

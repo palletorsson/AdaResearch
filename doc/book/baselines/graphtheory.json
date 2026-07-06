@@ -1,0 +1,82 @@
+{
+ "_doctrine": "R-023: the baseline contract. Deck 1 BEATS = what a PLAIN tutorial on this concept would minimally need (derived from the concept, not the inventory); each beat is a ROLE cast with one artifact (alts = understudies). Deck 2 VOLTAGE = the few pieces a plain tutorial would never include -- the critical script, the thinker with QFEP. Everything uncast is AT DEPTH: kept, honored by the dig line, not needed by the book or the walk.",
+ "sequence": "graphtheory",
+ "beats": [
+  {
+   "role": "nodes and edges",
+   "cast": "graphspace",
+   "alts": [
+    "force_directed_layout",
+    "KonigsbergBridge"
+   ]
+  },
+  {
+   "role": "adjacency — who connects to whom",
+   "cast": "network_analysis",
+   "alts": [
+    "KonigsbergBridge"
+   ]
+  },
+  {
+   "role": "traversal — BFS and DFS",
+   "cast": "tarjan_algorithm",
+   "alts": [
+    "kosaraju_algorithm",
+    "topological_sort"
+   ]
+  },
+  {
+   "role": "shortest path",
+   "cast": "pathfinding3d",
+   "alts": [
+    "mst_visualization",
+    "networkflow3d"
+   ]
+  },
+  {
+   "role": "the graph under the maps — the substrate",
+   "cast": "rhizomatic_structure",
+   "alts": [
+    "force_directed_layout"
+   ]
+  },
+  {
+   "role": "build a graph yourself",
+   "cast": "force_directed_layout",
+   "alts": [
+    "graphspace"
+   ]
+  },
+  {
+   "role": "prove it",
+   "cast": "networkflow3d",
+   "alts": [
+    "push_relabel_algorithm",
+    "karger_algorithm"
+   ],
+   "weak": true
+  }
+ ],
+ "voltage": [
+  {
+   "piece": "rhizomatic_structure",
+   "after": "the graph under the maps — the substrate",
+   "why": "Deleuze-Guattari's rhizome — the network that refuses root, trunk, leaf; the substrate that was always under every map, non-hierarchical, entering from anywhere (the QFEP turn on 'structure')"
+  },
+  {
+   "piece": "KonigsbergBridge",
+   "after": "nodes and edges",
+   "why": "the network as power and passage — Euler's seven bridges; who may cross to whom, the city as a walkable proof that some routes are foreclosed by structure itself"
+  },
+  {
+   "piece": "pathfinding3d",
+   "after": "shortest path",
+   "why": "the optimized route as ideology — the fastest path is a choice about what to skip; the efficiency critique, what the shortest path forecloses (every node it never visits)"
+  },
+  {
+   "piece": "edmonds_algorithm",
+   "after": "adjacency — who connects to whom",
+   "why": "maximum matching as who-gets-to-touch-whom — pairing as a contested allocation; adjacency is never neutral, the graph decides who may be joined"
+  }
+ ]
+}

@@ -1,0 +1,113 @@
+{
+ "_doctrine": "R-023: the baseline contract. Deck 1 BEATS = what a PLAIN tutorial on this concept would minimally need (derived from the concept, not the inventory); each beat is a ROLE cast with one artifact (alts = understudies). Deck 2 VOLTAGE = the few pieces a plain tutorial would never include -- the critical script, the thinker with QFEP. Everything uncast is AT DEPTH: kept, honored by the dig line, not needed by the book or the walk.",
+ "sequence": "forces",
+ "beats": [
+  {
+   "role": "a vector — magnitude and direction",
+   "cast": "VectorBasics",
+   "alts": [
+    "vector_arena",
+    "force_cube"
+   ]
+  },
+  {
+   "role": "apply a force — acceleration",
+   "cast": "example_2_1_forces_vr",
+   "alts": [
+    "force_pad",
+    "combined_forces_demo"
+   ]
+  },
+  {
+   "role": "mass — F equals m a",
+   "cast": "newtons_laws",
+   "alts": [
+    "ForceMagnitudeDemo",
+    "example_2_3_gravity_scaled_by_mass_vr"
+   ]
+  },
+  {
+   "role": "gravity — a constant force",
+   "cast": "example_2_3_gravity_scaled_by_mass_vr",
+   "alts": [
+    "bouncing_ball",
+    "gravity_well"
+   ]
+  },
+  {
+   "role": "friction and drag — opposing",
+   "cast": "drag_corridor",
+   "alts": [
+    "friction_ramp",
+    "example_2_5_fluid_resistance_vr"
+   ]
+  },
+  {
+   "role": "the attractor — force toward a point",
+   "cast": "gravity_well",
+   "alts": [
+    "orbit_pair",
+    "example_2_8_two_body_attraction_vr"
+   ]
+  },
+  {
+   "role": "many attractors — superposition",
+   "cast": "nbody_simulation",
+   "alts": [
+    "example_2_9_n_body_attraction_vr",
+    "three_body_problem"
+   ]
+  },
+  {
+   "role": "bounded space — the edges",
+   "cast": "force_field_zone",
+   "alts": [
+    "reflection_hall",
+    "vector_arena"
+   ]
+  },
+  {
+   "role": "build a force field yourself",
+   "cast": "vector_machine",
+   "alts": [
+    "force_field_visualizer",
+    "flow_field_painter"
+   ]
+  },
+  {
+   "role": "prove it — hit a target",
+   "cast": "catapult",
+   "alts": [
+    "mortar_vector_siege",
+    "hl_turret_vectors"
+   ]
+  }
+ ],
+ "voltage": [
+  {
+   "piece": "magnetic_simulation",
+   "after": "a vector — magnitude and direction",
+   "why": "force as the invisible made felt — the field is fully real before any arrow reveals it; iron filings only expose a power that was always there."
+  },
+  {
+   "piece": "calder_mobile",
+   "after": "mass — F equals m a",
+   "why": "mass as a political negotiation — τ = w·d places the heavier body closer to the pivot; weight buys position, and balance is a settlement not a neutrality."
+  },
+  {
+   "piece": "force_vortex",
+   "after": "the attractor — force toward a point",
+   "why": "the attractor as desire that seizes the subject — it overwrites your own velocity and spirals YOU inward; gravity-as-power, the pull that becomes coercion."
+  },
+  {
+   "piece": "chaos_attractor",
+   "after": "many attractors — superposition",
+   "why": "the many pulling the one, and the one never arriving — a strange attractor stays bounded yet never repeats; superposition that refuses to resolve into a single fate."
+  },
+  {
+   "piece": "force_field_zone",
+   "after": "bounded space — the edges",
+   "why": "the wall as law — inside the cube one imposed vector replaces gravity itself; the border does not merely enclose, it rewrites the physics of who is caught within it."
+  }
+ ]
+}

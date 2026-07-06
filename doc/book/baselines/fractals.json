@@ -1,0 +1,96 @@
+{
+ "_doctrine": "R-023: the baseline contract. Deck 1 BEATS = what a PLAIN tutorial on this concept would minimally need (derived from the concept, not the inventory); each beat is a ROLE cast with one artifact (alts = understudies). Deck 2 VOLTAGE = the few pieces a plain tutorial would never include -- the critical script, the thinker with QFEP. Everything uncast is AT DEPTH: kept, honored by the dig line, not needed by the book or the walk.",
+ "sequence": "fractals",
+ "beats": [
+  {
+   "role": "recursion — a thing inside itself",
+   "cast": "fractal_recursion_1",
+   "alts": [
+    "recursive_tree",
+    "fractal_recursion_2"
+   ]
+  },
+  {
+   "role": "self-similarity — the Koch curve",
+   "cast": "fractal_koch_curve",
+   "alts": [
+    "koch_curve_3d",
+    "koch_curve"
+   ]
+  },
+  {
+   "role": "the recursion depth",
+   "cast": "menger_sponge",
+   "alts": [
+    "cube_subdivision",
+    "sierpinski_pyramid"
+   ]
+  },
+  {
+   "role": "IFS — iterated function systems",
+   "cast": "sierpinski_triangle",
+   "alts": [
+    "diffusion_limited_aggregation",
+    "fractal_stochastic_tree"
+   ]
+  },
+  {
+   "role": "the Mandelbrot — escape",
+   "cast": "mandelbrot_set",
+   "alts": [
+    "mandelbrot_dive",
+    "julia_set"
+   ]
+  },
+  {
+   "role": "dimension — box-counting",
+   "cast": "box_counting_dimension",
+   "alts": [
+    "menger_sponge"
+   ]
+  },
+  {
+   "role": "build a fractal yourself",
+   "cast": "fractal_lsystem_tree",
+   "alts": [
+    "recursive_tree_2",
+    "fractal_scene"
+   ]
+  },
+  {
+   "role": "prove it",
+   "cast": "julia_set_explorer",
+   "alts": [
+    "mandelbrot_dive"
+   ],
+   "weak": true
+  }
+ ],
+ "voltage": [
+  {
+   "piece": "cantor_set",
+   "after": "self-similarity — the Koch curve",
+   "why": "infinite detail as the uncomputable — the middle-third removed forever yields an infinite set of measure zero: a short seed whose full run never halts, more points than the integers in less than no length"
+  },
+  {
+   "piece": "box_counting_dimension",
+   "after": "dimension — box-counting",
+   "why": "the fractional/non-integer identity — dimension refuses to be a whole number; log(3)/log(2) = 1.585 names a thing that is neither line nor plane, an identity that lives BETWEEN the categories the ruler was built to enforce"
+  },
+  {
+   "piece": "mandelbrot_dive",
+   "after": "the Mandelbrot — escape",
+   "why": "the Mandelbrot boundary as the infinitely-queer edge — the set is trivial to state (does z=z^2+c escape?) and infinitely costly to bound; the coastline never resolves, forever generative under any zoom, the uncomputable made walkable"
+  },
+  {
+   "piece": "romanesco",
+   "after": "IFS — iterated function systems",
+   "why": "self-similarity as the recursion of the self — the golden-angle spiral grows the whole out of copies of itself; the organism IS its own generating rule, morphology as fixed point of a map (the Turing move: the living form carries its recursion)"
+  },
+  {
+   "piece": "lyapunov_fractal",
+   "after": "prove it",
+   "why": "the edge between order and chaos rendered as terrain — each point in parameter space colored by whether nearby paths converge or diverge; stability and sensitivity woven at every scale, the lambda-edge thesis drawn as a place"
+  }
+ ]
+}

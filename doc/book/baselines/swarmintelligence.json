@@ -1,0 +1,88 @@
+{
+ "_doctrine": "R-023: the baseline contract. Deck 1 BEATS = what a PLAIN tutorial on this concept would minimally need (derived from the concept, not the inventory); each beat is a ROLE cast with one artifact (alts = understudies). Deck 2 VOLTAGE = the few pieces a plain tutorial would never include -- the critical script, the thinker with QFEP. Everything uncast is AT DEPTH: kept, honored by the dig line, not needed by the book or the walk.",
+ "sequence": "swarmintelligence",
+ "beats": [
+  {
+   "role": "one agent — a body with velocity",
+   "cast": "boids_2d_in_3d",
+   "alts": [
+    "boid_manager",
+    "boid_flocking"
+   ]
+  },
+  {
+   "role": "steering — desired minus current",
+   "cast": "boid_manager",
+   "alts": [
+    "boid_flocking"
+   ]
+  },
+  {
+   "role": "separation",
+   "cast": "boids_aquarium",
+   "alts": [
+    "boid_flocking"
+   ]
+  },
+  {
+   "role": "alignment",
+   "cast": "boid_flocking",
+   "alts": [
+    "boids_aquarium"
+   ],
+   "weak": true
+  },
+  {
+   "role": "cohesion — the flock emerges",
+   "cast": "boids_aquarium",
+   "alts": [
+    "boid_flocking",
+    "FlowFieldMain"
+   ]
+  },
+  {
+   "role": "stigmergy — memory in the environment",
+   "cast": "AntColonyV2",
+   "alts": [
+    "PhysarumColony",
+    "self_organizing_patterns"
+   ]
+  },
+  {
+   "role": "tune the swarm yourself",
+   "cast": "fitness_landscape_politics",
+   "alts": [
+    "ant_colony_optimization"
+   ]
+  },
+  {
+   "role": "prove it",
+   "cast": "ecosystem_simulation",
+   "alts": [
+    "self_organizing_patterns"
+   ]
+  }
+ ],
+ "voltage": [
+  {
+   "piece": "PhysarumColony",
+   "after": "stigmergy — memory in the environment",
+   "why": "stigmergy as memory-in-the-environment — no neurons, no memory, just a chemical trace others read and rewrite; cognition offloaded to the world's surface"
+  },
+  {
+   "piece": "ant_colony_optimization",
+   "after": "stigmergy — memory in the environment",
+   "why": "the flock as collective-without-leader — pheromone gradients coordinate foraging with no central plan; the optimum is a residue of many local rewrites, not a decision"
+  },
+  {
+   "piece": "fitness_landscape_politics",
+   "after": "tune the swarm yourself",
+   "why": "emergence as the political — same 30 agents, three power structures (corporate convergence / ecological spread / artistic novelty); the landscape you impose is the politics the swarm obeys"
+  },
+  {
+   "piece": "self_organizing_patterns",
+   "after": "prove it",
+   "why": "separation vs cohesion as social tension made visible — belong-or-individuate crossing a phase transition; order emerges from local rules with no author (the political from the neighborhood)"
+  }
+ ]
+}

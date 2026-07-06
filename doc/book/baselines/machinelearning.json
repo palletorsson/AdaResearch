@@ -1,0 +1,100 @@
+{
+ "_doctrine": "R-023: the baseline contract. Deck 1 BEATS = what a PLAIN tutorial on this concept would minimally need (derived from the concept, not the inventory); each beat is a ROLE cast with one artifact (alts = understudies). Deck 2 VOLTAGE = the few pieces a plain tutorial would never include -- the critical script, the thinker with QFEP. Everything uncast is AT DEPTH: kept, honored by the dig line, not needed by the book or the walk.",
+ "sequence": "machinelearning",
+ "beats": [
+  {
+   "role": "the data — points to fit",
+   "cast": "enhanced_kmeans",
+   "alts": [
+    "pca_visualization",
+    "svm_visualization"
+   ]
+  },
+  {
+   "role": "the neuron — a weighted sum",
+   "cast": "neural_network_visualization",
+   "alts": [
+    "neural_networks_vr"
+   ]
+  },
+  {
+   "role": "the loss — how wrong",
+   "cast": "loss_function_comparator",
+   "alts": [
+    "anomaly_detection"
+   ]
+  },
+  {
+   "role": "gradient descent — roll downhill",
+   "cast": "gradient_descent_visualization",
+   "alts": [
+    "joint_learn_walk"
+   ]
+  },
+  {
+   "role": "the network — layers",
+   "cast": "neural_networks_vr",
+   "alts": [
+    "convolutional_neural_networks_cnns_vr",
+    "neural_network_visualization"
+   ]
+  },
+  {
+   "role": "training — iterate",
+   "cast": "9_3_smart_rockets_vr",
+   "alts": [
+    "learn_world_stacked",
+    "9_5_evolving_bloops_vr"
+   ]
+  },
+  {
+   "role": "overfitting",
+   "cast": "random_forest_visualization",
+   "alts": [
+    "svm_visualization"
+   ],
+   "weak": true
+  },
+  {
+   "role": "train one yourself",
+   "cast": "joint_learn_walk",
+   "alts": [
+    "evolved_creatures"
+   ]
+  },
+  {
+   "role": "prove it",
+   "cast": "anomaly_detection",
+   "alts": [
+    "computer_vision_vr"
+   ]
+  }
+ ],
+ "voltage": [
+  {
+   "piece": "gradient_descent_visualization",
+   "why": "the force downhill returning — the forces chapter under a new name; learning IS a body sliding steepest-descent on a landscape, gravity re-cast as optimization",
+   "after": "gradient descent — roll downhill"
+  },
+  {
+   "piece": "loss_function_comparator",
+   "why": "the loss is the trained-in value — three losses on one dataset means three different 'wrongs'; who chose the objective? the bias is authored before a single step is taken",
+   "after": "the loss — how wrong"
+  },
+  {
+   "piece": "transformers_vr",
+   "why": "learning as compression — the thesis: inference = compression = entropy; attention squeezes the world into a shorter code, the network is a seed that costs to run",
+   "after": "the network — layers"
+  },
+  {
+   "piece": "non_teleological_evolution",
+   "why": "learning with NO fitness function — the QFEP turn on 'training toward a goal'; bodies that reproduce without an objective, the queer refusal of the optimized scoreboard",
+   "after": "training — iterate"
+  },
+  {
+   "piece": "explainable_ai_xai_vr",
+   "why": "overfitting as memorization-vs-understanding made visible — SHAP/LIME open the black box to ask whether it learned the world or memorized the test; the dark spot inside the trained model",
+   "after": "overfitting"
+  }
+ ]
+}
