@@ -1,0 +1,70 @@
+{
+ "_doctrine": "R-025: the tutorial arc. NOC-for-Godot-3D across all 22 spine chapters. Each chapter's beats are authored to BUILD ON the vocabulary of prior chapters (builds_on names them). roles = the beat skeleton; casting (role -> real artifact) happens per-sequence against the map inventory. Voltage (the critical script) is chosen per chapter from its charged artifacts.",
+ "chapters": [
+  {"seq": "primitives", "builds_on": [], "teaches": "the vocabulary of space itself — point, line, plane, solid, coordinate frame",
+   "roles": ["arrive — you are here", "meet the point", "the point moves — the trace", "two points — the line", "measure the line", "lines repeat — the grid", "three points — the plane", "planes close — the solid", "build one yourself", "prove it — the exit test"]},
+
+  {"seq": "transformation", "builds_on": ["primitives"], "teaches": "move a thing without changing what it IS — translate, rotate, scale; dot/cross products; matrices compose motion; the invariant under motion",
+   "roles": ["arrive in transformed space", "translate a solid", "rotate it — the gimbal", "scale it", "the dot product — projection, how aligned", "the cross product — the perpendicular", "compose transforms — the matrix", "the invariant — what survives", "compose a transform yourself", "prove it — match a target pose"]},
+
+  {"seq": "array_tutorial", "builds_on": ["primitives", "transformation"], "teaches": "the grid as an addressable structure — index to position, repetition as a first-class move",
+   "roles": ["the grid appears", "one cell, addressed — index to position", "fill a row", "fill 2D — the nested index", "the tile repeats — pattern", "mirror and symmetry on the grid", "edit the grid live", "a pattern from a rule", "prove it — reproduce a target pattern"]},
+
+  {"seq": "color", "builds_on": ["primitives", "array_tutorial"], "teaches": "color as a system — hue, value, saturation — and how color becomes composition",
+   "roles": ["a single hue", "value and saturation — the axes", "the palette — a set", "contrast — simultaneous", "color the grid — composition", "a color rule — harmony", "the artists' systems — Albers, Mondrian, Rothko", "compose a palette yourself", "prove it — match a target composition"]},
+
+  {"seq": "change", "builds_on": ["primitives", "transformation"], "teaches": "the calculus substrate — derivative as instantaneous rate, integral as accumulation, vector field as flow; the vocabulary forces/waves/randomness/noise all use",
+   "roles": ["the slope at a point — the tangent", "the derivative pair — function and its rate", "velocity as the derivative of position", "the integral as area — Riemann", "accumulation — the pump", "the vector field — flow at every point", "partial derivative — rate along one axis", "the FTC bridge — derivative and integral", "prove it"]},
+
+  {"seq": "isosurfaces", "builds_on": ["change", "array_tutorial", "primitives"], "teaches": "implicit field to explicit surface — marching cubes as the bridge from continuous to mesh",
+   "roles": ["the scalar field — a value at every point", "the isovalue — the threshold is a surface", "sample on a grid", "one cube's cases — marching", "the surface emerges", "sculpt the field — add and subtract", "resolution — the grid density", "build a surface yourself", "prove it"]},
+
+  {"seq": "boolean_surfaces", "builds_on": ["isosurfaces", "primitives"], "teaches": "CSG — union, intersection, difference as composition logic on solids",
+   "roles": ["two solids", "union", "intersection", "difference", "compose a boolean tree yourself"]},
+
+  {"seq": "forces", "builds_on": ["change", "transformation", "primitives"], "teaches": "Newton — vectors become physics; force, mass, acceleration, friction, attraction",
+   "roles": ["a vector — magnitude and direction", "apply a force — acceleration", "mass — F equals m a", "gravity — a constant force", "friction and drag — opposing", "the attractor — force toward a point", "many attractors — superposition", "bounded space — the edges", "build a force field yourself", "prove it — hit a target"]},
+
+  {"seq": "wavefunctions", "builds_on": ["forces", "change"], "teaches": "oscillation — force and energy exchange; sine creates curves; amplitude, frequency, phase",
+   "roles": ["the oscillator — back and forth", "amplitude", "frequency", "phase", "sine as circular motion", "the spring — force-energy exchange", "waves add — superposition", "standing waves", "compose a waveform yourself", "prove it"]},
+
+  {"seq": "randomness", "builds_on": ["primitives", "array_tutorial"], "teaches": "disorder as creative force — distributions, entropy, the seed",
+   "roles": ["the coin flip — uniform", "the random walk", "distributions — not all randomness is flat", "the Gaussian — the bell", "entropy — the measure of disorder", "the seed — determinism inside chance", "random versus pseudo-random", "paint with randomness", "prove it"]},
+
+  {"seq": "noise", "builds_on": ["randomness", "change", "forces"], "teaches": "structured randomness — Perlin, octaves, flow fields",
+   "roles": ["white noise — the raw", "smooth it — value noise", "Perlin — gradient noise", "octaves — fBm, layers of detail", "noise as terrain", "the flow field — noise becomes direction", "steer with the field", "sculpt with noise", "prove it"]},
+
+  {"seq": "cellularautomata", "builds_on": ["array_tutorial", "randomness"], "teaches": "simple rules to complex behavior — Rule 110 is Turing complete, the edge of chaos",
+   "roles": ["the cell — on or off", "the neighborhood", "one rule, one step", "iterate — the Game of Life", "the edge of chaos — lambda", "Rule 110 — universal", "seed and watch", "design a rule yourself", "prove it"]},
+
+  {"seq": "fractals", "builds_on": ["transformation", "primitives"], "teaches": "self-similarity, recursion, infinite detail",
+   "roles": ["recursion — a thing inside itself", "self-similarity — the Koch curve", "the recursion depth", "IFS — iterated function systems", "the Mandelbrot — escape", "dimension — box-counting", "build a fractal yourself", "prove it"]},
+
+  {"seq": "lsystems", "builds_on": ["fractals", "transformation"], "teaches": "generative grammars — symbols rewritten into structure",
+   "roles": ["the alphabet — symbols", "a rule — rewriting", "the turtle — symbol becomes move", "iterate the grammar", "branching — the tree", "stochastic rules", "design a grammar yourself", "prove it"]},
+
+  {"seq": "proceduralgeneration", "builds_on": ["array_tutorial", "cellularautomata", "randomness"], "teaches": "emergence from constraint — WFC, Markov, adjacency",
+   "roles": ["the tile set", "adjacency rules — what fits what", "constraint propagation", "wave function collapse", "Markov — next from current", "seeds and variation", "generate a world yourself", "prove it"]},
+
+  {"seq": "swarmintelligence", "builds_on": ["forces", "noise", "change"], "teaches": "collective behavior — steering, the three boid rules, stigmergy",
+   "roles": ["one agent — a body with velocity", "steering — desired minus current", "separation", "alignment", "cohesion — the flock emerges", "stigmergy — memory in the environment", "tune the swarm yourself", "prove it"]},
+
+  {"seq": "softbodies", "builds_on": ["forces", "wavefunctions", "change"], "teaches": "deformable matter — springs, cloth, damping, energy descent, morphogenesis",
+   "roles": ["two masses and a spring", "a chain", "the cloth — a 2D spring mesh", "gravity and pinning", "damping — energy loss", "collision", "morphogenesis — the Turing pattern", "build a soft body yourself", "prove it"]},
+
+  {"seq": "machinelearning", "builds_on": ["forces", "change", "randomness"], "teaches": "learning systems — the neuron, loss, gradient descent as a force downhill",
+   "roles": ["the data — points to fit", "the neuron — a weighted sum", "the loss — how wrong", "gradient descent — roll downhill", "the network — layers", "training — iterate", "overfitting", "train one yourself", "prove it"]},
+
+  {"seq": "graphtheory", "builds_on": ["array_tutorial", "primitives"], "teaches": "connections define structure — the substrate under every map",
+   "roles": ["nodes and edges", "adjacency — who connects to whom", "traversal — BFS and DFS", "shortest path", "the graph under the maps — the substrate", "build a graph yourself", "prove it"]},
+
+  {"seq": "foundationscrisis", "builds_on": ["graphtheory", "machinelearning", "cellularautomata"], "teaches": "the limits of formal systems — Russell, Gödel, Turing's halting problem",
+   "roles": ["the axioms — the ground", "the paradox — Russell's set", "self-reference", "Gödel — unprovable truths", "the halting problem — Turing", "the limit made walkable", "sit with the incompleteness", "prove it — or fail to, which is the point"]},
+
+  {"seq": "qfeplaboratory", "builds_on": ["foundationscrisis"], "teaches": "the complete QFEP formula embodied — Question, Field, Entropy, Potential",
+   "roles": ["Question — the opening move", "Field — the space of possibility", "Entropy — the measure", "Potential — what could become", "the formula assembled", "the lab — all together", "run the QFEP loop yourself", "prove it"]},
+
+  {"seq": "postfoundationscrisis", "builds_on": ["foundationscrisis", "qfeplaboratory"], "teaches": "practice after the crisis — bias, rhizomes, molecular design, the self-made archive",
+   "roles": ["bias — the trained-in limit", "the rhizome — non-hierarchical", "molecular design — bottom-up", "the archive — create our own", "practice after the crisis", "the closing"]}
+ ]
+}
