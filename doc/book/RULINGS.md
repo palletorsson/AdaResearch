@@ -636,7 +636,7 @@ bare Label3D.
   mutate in place). invariants_demo before/after is the proof: floating green glyphs → framed
   instrument readouts.
 - The doctrine matches staging_dna's ONE BODY principle: text is set INTO a lit surface, never a
-  floating plate beside it. ~115 key artifacts remain to migrate (the ongoing worklist).
+  floating plate beside it. ~115 key artifacts remain to migrate (the ongoing worklist). **Wave 2 (16 artifacts total now on boards):** 6 clean migrations + 4 DENSE-READOUT reworks proving the ONE BODY consolidation — qfep_balance_workbench 19 labels→1 panel+4 tags, prng_crank_machine 16→3 LCD screens, transform_composition_workbench 8→1 panel, explainable_ai_xai_vr 14→0 floating. Two layout laws confirmed: (1) related readouts CONSOLIDATE onto one make_text_block panel (overlap becomes impossible); (2) separate tags get SPACED past their anchors. Per-frame readouts gated to rebuild only on value-change (no texture churn). ~105 remain.
 
 ---
 
