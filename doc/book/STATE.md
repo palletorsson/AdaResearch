@@ -209,6 +209,19 @@ that cannot be SEEN has not met the floor). Declared in station_modules.json `ju
 Open audit queue: box_on_box crate stacks, screen→wall mounts, stool feet, grime as the
 record of a long meeting.
 
+## Ada and its ancestors (lineage, 2026-07-06)
+
+The book names its parents in the front matter (doc/book/LINEAGE.md, rendered into
+the manuscript): **Learning Processing** (Shiffman — Ch.1 "Pixels" = coordinate
+system + point + primitives; the minimal runnable one-step progression we keep),
+**The Nature of Code** (build-from-the-primitive-outward, our spine), and the
+THIRD STRAND neither carried — the critical trajectory (thinking with Turing). All
+re-staged from the flat VIEWED screen to inhabited, embodied 3D. The five shifts
+that make 3D algorithm thinking its own: frame inhabited not viewed · atom inverts
+(pixel->Vector3, discrete/continuous swap) · loop is presence not animation ·
+input is the body not the mouse · reading is a walk not a glance. Keep Shiffman's
+restraint; resist 3D's spectacle; add body, depth, critique.
+
 ## Standing constitution
 
 - Rulings are the source; prose is compiled output. Unruled calls in drafts get marked, not hidden.

@@ -24,6 +24,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import sys
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -290,6 +291,15 @@ def main() -> int:
     # The dig, declared: the book as excavation report, not survey.
     if frame.get("excavation_note"):
         lines += ["## The Dig", "", frame["excavation_note"], ""]
+
+    # The lineage: Ada and its ancestors (Learning Processing, Nature of Code,
+    # and the critical strand). Read from doc/book/LINEAGE.md if present.
+    lineage_path = os.path.join(REPO, "doc", "book", "LINEAGE.md")
+    if os.path.exists(lineage_path):
+        body = open(lineage_path, encoding="utf-8").read()
+        # drop the H1 and the front-matter parenthetical; keep from the first paragraph
+        body = re.sub(r"^#\s*Ada and its ancestors\s*\n+(\*\(.*?\)\*\s*\n+)?", "", body, flags=re.S)
+        lines += ["## Ada and its ancestors", "", body.strip(), ""]
 
     # Table of contents.
     lines += ["## Contents", ""]
