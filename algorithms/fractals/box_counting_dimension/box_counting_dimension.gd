@@ -1,5 +1,7 @@
 extends Node3D
 
+const BakedText = preload("res://commons/utils/baked_text_albedo.gd")
+
 # @identity
 # essence: D = lim(log N(e) / log(1/e)). Cover the shape with boxes. Count. Shrink. Count again. The slope IS the dimension.
 # desire: To measure. To show that fractals live between integer dimensions. Sierpinski is not 1D or 2D — it's 1.585D.
@@ -29,8 +31,12 @@ var _plot_instance: MeshInstance3D
 var _point_cloud: MultiMeshInstance3D
 var _grid_instance: MeshInstance3D
 var _grid_mesh: ImmediateMesh
-var _scale_label: Label3D
-var _dimension_label: Label3D
+var _scale_tag: Node3D
+var _dimension_tag: Node3D
+const _SCALE_TAG_POS := Vector3(0.0, 4.8, 3.0)
+const _SCALE_TAG_COLOR := Color(1.0, 0.9, 0.3)
+const _DIMENSION_TAG_POS := Vector3(5.0, 5.5, 0.0)
+const _DIMENSION_TAG_COLOR := Color(0.4, 1.0, 0.6)
 
 
 func _ready() -> void:
@@ -118,45 +124,50 @@ func _setup_plot() -> void:
 	add_child(_plot_instance)
 
 	# Plot axes labels
-	var x_label := Label3D.new()
-	x_label.text = "log(1/box_size)"
-	x_label.font_size = 12
-	x_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	x_label.position = Vector3(5.0, 2.2, 0.0)
-	x_label.modulate = Color(1, 1, 1, 0.6)
-	add_child(x_label)
+	var x_label := BakedText.make_tag("log(1/box_size)", Color(0.9, 0.92, 0.95), 0.22)
+	if x_label:
+		x_label.position = Vector3(5.0, 2.2, 0.0)
+		add_child(x_label)
 
-	var y_label := Label3D.new()
-	y_label.text = "log(count)"
-	y_label.font_size = 12
-	y_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	y_label.position = Vector3(3.5, 4.5, 0.0)
-	y_label.modulate = Color(1, 1, 1, 0.6)
-	add_child(y_label)
+	var y_label := BakedText.make_tag("log(count)", Color(0.9, 0.92, 0.95), 0.22)
+	if y_label:
+		y_label.position = Vector3(3.5, 4.5, 0.0)
+		add_child(y_label)
 
 
 func _setup_labels() -> void:
-	var title := Label3D.new()
-	title.text = "Box-Counting Dimension"
-	title.font_size = 22
-	title.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	title.position = Vector3(0.0, 5.5, 3.0)
-	title.modulate = Color(1, 1, 1, 0.9)
-	add_child(title)
+	var title := BakedText.make_tag("Box-Counting Dimension", Color(0.95, 0.97, 1.0), 0.32)
+	if title:
+		title.position = Vector3(0.0, 5.5, 3.0)
+		add_child(title)
 
-	_scale_label = Label3D.new()
-	_scale_label.font_size = 16
-	_scale_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	_scale_label.position = Vector3(0.0, 4.8, 3.0)
-	_scale_label.modulate = Color(1.0, 0.9, 0.3, 0.8)
-	add_child(_scale_label)
+	# Scale + dimension boards are rebuilt each time their text changes.
+	_rebuild_scale_tag("")
+	_rebuild_dimension_tag("")
 
-	_dimension_label = Label3D.new()
-	_dimension_label.font_size = 18
-	_dimension_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	_dimension_label.position = Vector3(5.0, 5.5, 0.0)
-	_dimension_label.modulate = Color(0.3, 1.0, 0.5, 0.9)
-	add_child(_dimension_label)
+
+func _rebuild_scale_tag(text: String) -> void:
+	if _scale_tag and is_instance_valid(_scale_tag):
+		_scale_tag.queue_free()
+		_scale_tag = null
+	if text.is_empty():
+		return
+	_scale_tag = BakedText.make_tag(text, _SCALE_TAG_COLOR, 0.24)
+	if _scale_tag:
+		_scale_tag.position = _SCALE_TAG_POS
+		add_child(_scale_tag)
+
+
+func _rebuild_dimension_tag(text: String) -> void:
+	if _dimension_tag and is_instance_valid(_dimension_tag):
+		_dimension_tag.queue_free()
+		_dimension_tag = null
+	if text.is_empty():
+		return
+	_dimension_tag = BakedText.make_tag(text, _DIMENSION_TAG_COLOR, 0.28)
+	if _dimension_tag:
+		_dimension_tag.position = _DIMENSION_TAG_POS
+		add_child(_dimension_tag)
 
 
 func _process(delta: float) -> void:
@@ -188,7 +199,7 @@ func _update_grid_display() -> void:
 	var box_size := SHAPE_SIZE / float(divisions)
 	var count: int = _counts[_current_scale_idx]
 
-	_scale_label.text = "%d boxes, %d occupied" % [divisions * divisions, count]
+	_rebuild_scale_tag("%d boxes, %d occupied" % [divisions * divisions, count])
 
 	var mat := StandardMaterial3D.new()
 	mat.albedo_color = Color(1.0, 1.0, 1.0, 0.12)
@@ -249,7 +260,7 @@ func _update_plot() -> void:
 		sum_xy += pt.x * pt.y
 		sum_xx += pt.x * pt.x
 	var slope := (n * sum_xy - sum_x * sum_y) / maxf(n * sum_xx - sum_x * sum_x, 0.001)
-	_dimension_label.text = "D = %.3f" % slope
+	_rebuild_dimension_tag("D = %.3f" % slope)
 
 	# Draw axes
 	var axis_mat := StandardMaterial3D.new()

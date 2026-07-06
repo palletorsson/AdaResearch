@@ -9,13 +9,15 @@
 # critical_parameter: shear — the only transform here that changes every measurement (the transform with no invariant, identity fully dissolved); and the angle between two edges — the parameter the PROJECT read makes visible as cos θ.
 # triggers: TRANSLATE/ROTATE/SCALE/SHEAR/RESET buttons each apply a fixed transform to the triangle; PROJECT casts edge C's shadow onto edge A and reports |A|·cos θ.
 # emerges: translation and rotation preserve everything; uniform scale preserves angles; shear preserves nothing; and projection makes ALIGNMENT legible — the dot product is the projected length, cos θ is how much of one vector points along another, 1.0 when parallel, 0 when perpendicular.
-# needs: RackTemplates panel with 6 buttons [has]; CylinderMesh edges [has]; SphereMesh vertices [has]; Label3D measurements [has]; projection shadow cylinder + dot-product/cos-angle label [has]
+# needs: RackTemplates panel with 6 buttons [has]; CylinderMesh edges [has]; SphereMesh vertices [has]; integrated BakedText tag boards for measurements [has]; projection shadow cylinder + dot-product/cos-angle tag [has]
 # relationships: builds on matrix_4x4_viewer (raw numbers); feeds group_theory (invariance as symmetry). DOUBLE-DUTY: this artifact currently also stands in for "the dot product — projection, how aligned" in the transformation chapter; the PROJECT mode is a partial fill, but per doc/book/GAPS.md § C the transformation sequence still lacks a DEDICATED projection artifact — a single two-vector shadow piece is the real gap this one is covering.
 # truth: The properties a transformation cannot touch define the transformation more than the properties it changes; and the dot product is that survival made a number — how much of one thing points along another.
 
 extends Node3D
 
 class_name InvariantsDemo
+
+const BakedText = preload("res://commons/utils/baked_text_albedo.gd")
 
 # ── Constants ────────────────────────────────────────────────────────
 const EDGE_RADIUS: float = 0.003
@@ -43,17 +45,20 @@ var _orig_area: float = 0.0
 var _tri_root: Node3D
 var _edge_meshes: Array[MeshInstance3D] = []
 var _vertex_meshes: Array[MeshInstance3D] = []
-var _length_labels: Array[Label3D] = []
-var _angle_labels: Array[Label3D] = []
-var _area_label: Label3D
-var _title_label: Label3D
+# Integrated 2D-in-3D tag boards (BakedText.make_tag) — rebuilt on update.
+var _length_tags: Array[Node3D] = [null, null, null]
+var _angle_tags: Array[Node3D] = [null, null, null]
+var _area_tag: Node3D
+var _title_tag: Node3D
+var _title_text: String = "INVARIANTS"
+var _title_color: Color = CYAN
 var _active_transform: String = "NONE"
 
 # ── Projection / dot-product read (fills the "how aligned" role) ──────
 var _projection_active: bool = false
 var _shadow_mesh: MeshInstance3D      # edge C's shadow projected onto edge A
 var _drop_mesh: MeshInstance3D        # the perpendicular drop line (C's tip → its foot on A)
-var _projection_label: Label3D        # reports dot product and cos θ
+var _projection_tag: Node3D           # reports dot product and cos θ
 
 
 func _ready() -> void:
@@ -163,54 +168,37 @@ func _orient_cylinder_between(mi: MeshInstance3D, a: Vector3, b: Vector3) -> voi
 # ═════════════════════════════════════════════════════════════════════
 
 func _build_labels() -> void:
-	# Edge length labels
-	for i in 3:
-		var lbl := Label3D.new()
-		lbl.name = "LengthLabel_%d" % i
-		lbl.text = "0.00"
-		lbl.pixel_size = 0.0015
-		lbl.font_size = 18
-		lbl.modulate = DIM_WHITE
-		lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		lbl.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-		add_child(lbl)
-		_length_labels.append(lbl)
+	# All floating annotations are integrated 2D-in-3D tag boards
+	# (BakedText.make_tag): a framed dark face with a lit accent edge and text
+	# baked on, billboarded to the viewer. Dynamic tags (lengths/angles/area/
+	# projection) are (re)built in _update_display since make_tag bakes text at
+	# creation; the title is (re)built via _set_title_tag on state change.
+	_set_title_tag("INVARIANTS", CYAN)
 
-	# Angle labels at vertices
-	for i in 3:
-		var lbl := Label3D.new()
-		lbl.name = "AngleLabel_%d" % i
-		lbl.text = "0°"
-		lbl.pixel_size = 0.0015
-		lbl.font_size = 16
-		lbl.modulate = DIM_WHITE
-		lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		lbl.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-		add_child(lbl)
-		_angle_labels.append(lbl)
 
-	# Area label at centroid
-	_area_label = Label3D.new()
-	_area_label.name = "AreaLabel"
-	_area_label.text = "A=0.00"
-	_area_label.pixel_size = 0.0015
-	_area_label.font_size = 18
-	_area_label.modulate = DIM_WHITE
-	_area_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	_area_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	add_child(_area_label)
+# Build (or rebuild) a billboarded tag board at `pos`. Frees any existing node
+# passed in and returns the fresh one. text_color tints the baked glyphs; the
+# accent edge is left at the make_tag default (a lit strip) for a "powered board".
+func _make_annotation_tag(existing: Node3D, text: String, pos: Vector3,
+		text_color: Color, world_h: float) -> Node3D:
+	if existing != null and is_instance_valid(existing):
+		existing.queue_free()
+	var tag: Node3D = BakedText.make_tag(text, text_color, world_h)
+	if tag == null:
+		return null
+	tag.position = pos
+	add_child(tag)
+	return tag
 
-	# Title label
-	_title_label = Label3D.new()
-	_title_label.name = "TransformTitle"
-	_title_label.text = "INVARIANTS"
-	_title_label.pixel_size = 0.002
-	_title_label.font_size = 20
-	_title_label.modulate = CYAN
-	_title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	_title_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	_title_label.position = Vector3(0.0, 0.72, 0.0)
-	add_child(_title_label)
+
+# Title board — rebuilt only when the title text or colour changes.
+func _set_title_tag(text: String, col: Color) -> void:
+	if _title_tag != null and is_instance_valid(_title_tag) \
+			and _title_text == text and _title_color == col:
+		return
+	_title_text = text
+	_title_color = col
+	_title_tag = _make_annotation_tag(_title_tag, text, Vector3(0.0, 0.72, 0.0), col, 0.08)
 
 
 # ═════════════════════════════════════════════════════════════════════
@@ -252,17 +240,8 @@ func _build_projection() -> void:
 	_drop_mesh.visible = false
 	add_child(_drop_mesh)
 
-	# The readout: dot product and cos θ.
-	_projection_label = Label3D.new()
-	_projection_label.name = "ProjectionLabel"
-	_projection_label.text = ""
-	_projection_label.pixel_size = 0.0015
-	_projection_label.font_size = 16
-	_projection_label.modulate = AMBER
-	_projection_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	_projection_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	_projection_label.visible = false
-	add_child(_projection_label)
+	# The readout (dot product and cos θ) is an integrated tag board, built on
+	# demand in _update_projection and torn down when projection is inactive.
 
 
 func _update_projection() -> void:
@@ -292,9 +271,10 @@ func _update_projection() -> void:
 	# Drop cylinder: from C's tip (vert2) down to its foot on A.
 	_orient_cylinder_between(_drop_mesh, _current_verts[2], foot)
 
-	# Readout near the foot of the projection.
-	_projection_label.position = foot + Vector3(0.0, -0.04, 0.0)
-	_projection_label.text = "A·C = %.3f\ncos θ = %.2f" % [dot_val, cos_theta]
+	# Readout near the foot of the projection (integrated tag board).
+	var readout: String = "A·C = %.3f  cos θ = %.2f" % [dot_val, cos_theta]
+	_projection_tag = _make_annotation_tag(
+		_projection_tag, readout, foot + Vector3(0.0, -0.05, 0.0), AMBER, 0.06)
 
 
 # ═════════════════════════════════════════════════════════════════════
@@ -408,56 +388,53 @@ func _update_display() -> void:
 
 	var cur_area: float = _triangle_area(_current_verts)
 
-	# Update length labels — position at edge midpoints, offset outward
+	# Update length tags — position at edge midpoints, offset outward
 	for i in 3:
 		var a: Vector3 = _current_verts[i]
 		var b: Vector3 = _current_verts[(i + 1) % 3]
 		var mid: Vector3 = (a + b) / 2.0
-		var centroid: Vector3 = (_current_verts[0] + _current_verts[1] + _current_verts[2]) / 3.0
-		var outward: Vector3 = (mid - centroid).normalized() * 0.03
-		_length_labels[i].position = mid + outward
-		_length_labels[i].text = "%.2f" % cur_lengths[i]
-		_color_label(_length_labels[i], cur_lengths[i], _orig_lengths[i])
+		var centroid_l: Vector3 = (_current_verts[0] + _current_verts[1] + _current_verts[2]) / 3.0
+		var outward: Vector3 = (mid - centroid_l).normalized() * 0.04
+		_length_tags[i] = _make_annotation_tag(
+			_length_tags[i], "%.2f" % cur_lengths[i], mid + outward,
+			_invariant_color(cur_lengths[i], _orig_lengths[i]), 0.05)
 
-	# Update angle labels — position at vertices, offset outward
+	# Update angle tags — position at vertices, offset outward
 	for i in 3:
-		var centroid: Vector3 = (_current_verts[0] + _current_verts[1] + _current_verts[2]) / 3.0
-		var outward: Vector3 = (_current_verts[i] - centroid).normalized() * 0.04
-		_angle_labels[i].position = _current_verts[i] + outward
-		_angle_labels[i].text = "%.0f°" % cur_angles[i]
-		_color_label(_angle_labels[i], cur_angles[i], _orig_angles[i])
+		var centroid_a: Vector3 = (_current_verts[0] + _current_verts[1] + _current_verts[2]) / 3.0
+		var outward: Vector3 = (_current_verts[i] - centroid_a).normalized() * 0.05
+		_angle_tags[i] = _make_annotation_tag(
+			_angle_tags[i], "%.0f°" % cur_angles[i], _current_verts[i] + outward,
+			_invariant_color(cur_angles[i], _orig_angles[i]), 0.05)
 
-	# Update area label at centroid
+	# Update area tag at centroid
 	var centroid: Vector3 = (_current_verts[0] + _current_verts[1] + _current_verts[2]) / 3.0
-	_area_label.position = centroid
-	_area_label.text = "A=%.3f" % cur_area
-	_color_label(_area_label, cur_area, _orig_area)
+	_area_tag = _make_annotation_tag(
+		_area_tag, "A=%.3f" % cur_area, centroid,
+		_invariant_color(cur_area, _orig_area), 0.055)
 
 	# Update projection read (the dot-product / alignment shadow)
 	_shadow_mesh.visible = _projection_active
 	_drop_mesh.visible = _projection_active
-	_projection_label.visible = _projection_active
 	if _projection_active:
 		_update_projection()
+	elif _projection_tag != null and is_instance_valid(_projection_tag):
+		_projection_tag.queue_free()
+		_projection_tag = null
 
 	# Update title
 	if _projection_active:
-		_title_label.text = "PROJECT — A·C"
-		_title_label.modulate = AMBER
+		_set_title_tag("PROJECT — A·C", AMBER)
 	elif _active_transform == "NONE":
-		_title_label.text = "INVARIANTS"
-		_title_label.modulate = CYAN
+		_set_title_tag("INVARIANTS", CYAN)
 	else:
-		_title_label.text = _active_transform
-		_title_label.modulate = Color(1.0, 0.9, 0.4)
+		_set_title_tag(_active_transform, Color(1.0, 0.9, 0.4))
 
 
-func _color_label(lbl: Label3D, current_val: float, orig_val: float) -> void:
+# Green when the measurement held (invariant), red when the transform changed it.
+func _invariant_color(current_val: float, orig_val: float) -> Color:
 	var tolerance: float = 0.01
-	if abs(current_val - orig_val) < tolerance:
-		lbl.modulate = GREEN
-	else:
-		lbl.modulate = RED
+	return GREEN if abs(current_val - orig_val) < tolerance else RED
 
 
 # ═════════════════════════════════════════════════════════════════════

@@ -14,6 +14,8 @@ extends Node3D
 # Compares SGD, Momentum, Nesterov, Adam on 3D loss surfaces
 # Shows convergence behavior, learning rate sensitivity, Hessian structure
 
+const BakedText = preload("res://commons/utils/baked_text_albedo.gd")
+
 enum Mode { OPTIMIZERS, CONVERGENCE, HESSIAN }
 
 # ── constants ──────────────────────────────────────────────────────────
@@ -80,10 +82,20 @@ var _markers_mi: MeshInstance3D
 var _mat_unshaded: StandardMaterial3D
 var _mat_alpha: StandardMaterial3D
 
-# ── labels ─────────────────────────────────────────────────────────────
-var _title_label: Label3D
-var _info_label: Label3D
-var _legend_label: Label3D
+# ── labels (integrated 2D-in-3D baked boards) ────────────────────────────
+var _title_root: Node3D     # anchor for the billboarded title tag
+var _info_root: Node3D      # anchor for the multi-line info board
+var _legend_root: Node3D    # anchor for the multi-line legend board
+var _title_node: Node3D     # current baked title tag (regenerated on change)
+var _info_node: Node3D      # current baked info block
+var _legend_node: Node3D    # current baked legend block
+var _title_cache: String = ""
+var _info_cache: String = ""
+var _legend_cache: String = ""
+
+const TITLE_COLOR  := Color(0.95, 0.97, 1.0)
+const INFO_COLOR   := Color(0.8, 0.8, 0.9)
+const LEGEND_COLOR := Color(0.7, 0.7, 0.8)
 
 # ── controls ───────────────────────────────────────────────────────────
 var _mode_button: Node3D
@@ -169,26 +181,19 @@ func _create_mesh_instances() -> void:
 # ════════════════════════════════════════════════════════════════════════
 
 func _create_labels() -> void:
-	_title_label = Label3D.new()
-	_title_label.font_size = 28
-	_title_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	_title_label.position = Vector3(0, 3.2, 0)
-	_title_label.modulate = Color.WHITE
-	add_child(_title_label)
+	# Anchors hold the baked boards; the boards themselves are (re)generated
+	# in _update_labels() whenever their text content changes.
+	_title_root = Node3D.new()
+	_title_root.position = Vector3(0, 3.2, 0)
+	add_child(_title_root)
 
-	_info_label = Label3D.new()
-	_info_label.font_size = 18
-	_info_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	_info_label.position = Vector3(0, 2.8, 0)
-	_info_label.modulate = Color(0.8, 0.8, 0.9)
-	add_child(_info_label)
+	_info_root = Node3D.new()
+	_info_root.position = Vector3(0, 2.5, 0)
+	add_child(_info_root)
 
-	_legend_label = Label3D.new()
-	_legend_label.font_size = 16
-	_legend_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	_legend_label.position = Vector3(0, -1.6, 0)
-	_legend_label.modulate = Color(0.7, 0.7, 0.8)
-	add_child(_legend_label)
+	_legend_root = Node3D.new()
+	_legend_root.position = Vector3(0, -1.6, 0)
+	add_child(_legend_root)
 
 # ════════════════════════════════════════════════════════════════════════
 #  CONTROLS
@@ -879,28 +884,85 @@ func _im_diamond(im: ImmediateMesh, center: Vector3, size: float, col: Color) ->
 
 func _update_labels() -> void:
 	var mode_names := ["Optimizer Variants", "Convergence Analysis", "Hessian Eigenvalues"]
-	_title_label.text = "Gradient Descent — " + mode_names[_mode]
+	var title_text: String = "Gradient Descent — " + str(mode_names[_mode])
+	var info_text: String = ""
+	var legend_text: String = ""
 
 	match _mode:
 		Mode.OPTIMIZERS:
-			var lines := "f(x,y) = %s  |  lr=%.4f  β=%.2f  step=%d" % [_fn_name(), learning_rate, momentum_beta, _step_count]
+			info_text = "f(x,y) = %s  |  lr=%.4f  b=%.2f  step=%d" % [_fn_name(), learning_rate, momentum_beta, _step_count]
 			for opt in _optimizers:
 				var status := "converged" if opt.converged else "f=%.4f" % [opt.value as float]
-				lines += "\n%s: (%.2f, %.2f) %s" % [opt.name, (opt.pos as Vector2).x, (opt.pos as Vector2).y, status]
-			_info_label.text = lines
-			_legend_label.text = "Red=SGD  Green=Momentum  Blue=Nesterov  Gold=Adam"
+				info_text += "\n%s: (%.2f, %.2f) %s" % [opt.name, (opt.pos as Vector2).x, (opt.pos as Vector2).y, status]
+			legend_text = "Red=SGD  Green=Momentum  Blue=Nesterov  Gold=Adam"
 
 		Mode.CONVERGENCE:
-			var lines := "Adam on %s  |  β₁=%.2f  β₂=%.3f  step=%d" % [_fn_name(), adam_beta1, adam_beta2, _step_count]
+			info_text = "Adam on %s  |  b1=%.2f  b2=%.3f  step=%d" % [_fn_name(), adam_beta1, adam_beta2, _step_count]
 			for run in _conv_runs:
 				var val := _eval(run.pos as Vector2)
-				lines += "\nlr=%.3f: f=%.4f%s" % [run.lr as float, val, " ✓" if run.converged else ""]
-			_info_label.text = lines
-			_legend_label.text = "5 learning rates compared — log(f) chart on right"
+				info_text += "\nlr=%.3f: f=%.4f%s" % [run.lr as float, val, " *" if run.converged else ""]
+			legend_text = "5 learning rates compared — log(f) chart on right"
 
 		Mode.HESSIAN:
-			_info_label.text = "f(x,y) = %s  |  Hessian at %d×%d grid points\nBlue=positive definite  Red=negative  Yellow=saddle" % [_fn_name(), 9, 9]
-			_legend_label.text = "Line length ~ |eigenvalue|  Direction = eigenvector"
+			info_text = "f(x,y) = %s  |  Hessian at %d x %d grid points\nBlue=positive definite  Red=negative  Yellow=saddle" % [_fn_name(), 9, 9]
+			legend_text = "Line length ~ |eigenvalue|  Direction = eigenvector"
+
+	_rebuild_title(title_text)
+	_rebuild_info(info_text)
+	_rebuild_legend(legend_text)
+
+## Regenerate the billboarded title tag when its text changes.
+func _rebuild_title(text: String) -> void:
+	if text == _title_cache and _title_node != null:
+		return
+	_title_cache = text
+	if _title_node != null:
+		_title_node.queue_free()
+		_title_node = null
+	var tag: Node3D = BakedText.make_tag(text, TITLE_COLOR, 0.32, Color(0.08, 0.09, 0.11), true, Color(0.86, 0.40, 0.16))
+	if tag:
+		_title_node = tag
+		_title_root.add_child(tag)
+
+## Regenerate the multi-line info board when its text changes.
+func _rebuild_info(text: String) -> void:
+	if text == _info_cache and _info_node != null:
+		return
+	_info_cache = text
+	if _info_node != null:
+		_info_node.queue_free()
+		_info_node = null
+	var block: Node3D = _make_billboard_block(text, INFO_COLOR, 0.18, 4.4)
+	if block:
+		_info_node = block
+		_info_root.add_child(block)
+
+## Regenerate the legend board when its text changes.
+func _rebuild_legend(text: String) -> void:
+	if text == _legend_cache and _legend_node != null:
+		return
+	_legend_cache = text
+	if _legend_node != null:
+		_legend_node.queue_free()
+		_legend_node = null
+	var block: Node3D = _make_billboard_block(text, LEGEND_COLOR, 0.15, 4.4)
+	if block:
+		_legend_node = block
+		_legend_root.add_child(block)
+
+## Build a multi-line baked text block and billboard every line quad so the
+## readout always faces the viewer (the make_text_block quads face +Z).
+func _make_billboard_block(text: String, color: Color, line_h: float, max_w: float) -> Node3D:
+	var lines: Array = Array(text.split("\n"))
+	var block: Node3D = BakedText.make_text_block(lines, color, line_h, max_w, line_h * 0.35, true)
+	if block == null:
+		return null
+	for child in block.get_children():
+		if child is MeshInstance3D:
+			var m = child.material_override
+			if m is StandardMaterial3D:
+				m.billboard_mode = BaseMaterial3D.BILLBOARD_ENABLED
+	return block
 
 # ════════════════════════════════════════════════════════════════════════
 #  GRID CONFIG

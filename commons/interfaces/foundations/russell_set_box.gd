@@ -10,6 +10,8 @@ extends Node3D
 
 class_name RussellSetBox
 
+const BakedText = preload("res://commons/utils/baked_text_albedo.gd")
+
 # @identity
 # essence: S = { x | x ∉ x }; S ∈ S ↔ S ∉ S — Russell's paradox as infinite regress
 # desire: open the box and find another box inside, and another, forever — feel the paradox as infinite nesting
@@ -44,8 +46,10 @@ var _current_depth: int = 0
 var _is_open: Array[bool] = []
 var _animation_time: float = 0.0
 var _lid_rotations: Array[float] = []
-var _main_label: Label3D
-var _paradox_label: Label3D
+var _main_label: Node3D
+var _paradox_label: Node3D
+var _paradox_label_pos: Vector3 = Vector3.ZERO
+var _paradox_label_color: Color = Color(0.7, 0.7, 0.6, 0.8)
 var _interactable: Area3D
 
 func _ready() -> void:
@@ -53,6 +57,29 @@ func _ready() -> void:
 	_create_labels()
 	_create_interactable()
 	print("RussellSetBox: Ready — 'Does this set contain itself?'")
+
+func apply_grid_config(config: Dictionary) -> void:
+	if config.has("size"):
+		size = float(config["size"])
+	if config.has("max_visible_depth"):
+		max_visible_depth = int(config["max_visible_depth"])
+	if config.has("show_label"):
+		show_label = bool(config["show_label"])
+	if config.has("outer_color"):
+		outer_color = Color(config["outer_color"])
+	if config.has("inner_color"):
+		inner_color = Color(config["inner_color"])
+	# Rebuild from scratch with the new configuration.
+	_boxes.clear()
+	_is_open.clear()
+	_lid_rotations.clear()
+	_current_depth = 0
+	for c in get_children():
+		remove_child(c)
+		c.queue_free()
+	_create_nested_boxes()
+	_create_labels()
+	_create_interactable()
 
 func _create_nested_boxes() -> void:
 	for i in range(max_visible_depth):
@@ -88,15 +115,12 @@ func _create_nested_boxes() -> void:
 		# Create lid for each box
 		_create_lid(i, box_size, scale_factor)
 	
-	# Infinite regress indicator (innermost)
-	var infinite_indicator = Label3D.new()
+	# Infinite regress indicator (innermost) — integrated 2D-in-3D board
+	var infinite_indicator = BakedText.make_text_block(
+		["∞", "...", "{ S | S ∉ S }"],
+		Color(0.85, 0.7, 1.0), 0.05, 0.34, 0.014, false)
 	infinite_indicator.name = "InfiniteIndicator"
-	infinite_indicator.text = "∞\n...\n{ S | S ∉ S }"
-	infinite_indicator.font_size = 24
 	infinite_indicator.position = Vector3(0, size * 0.1, 0)
-	infinite_indicator.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	infinite_indicator.modulate = Color(0.8, 0.6, 1.0, 0.8)
-	infinite_indicator.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	infinite_indicator.visible = false
 	add_child(infinite_indicator)
 
@@ -131,27 +155,17 @@ func _create_labels() -> void:
 	if not show_label:
 		return
 	
-	# Main label on box
-	_main_label = Label3D.new()
-	_main_label.text = "S = { x | x ∉ x }"
-	_main_label.font_size = 32
+	# Main label on box — the paradox statement, as an integrated display board
+	_main_label = BakedText.make_tag(
+		"S = { x | x ∉ x }", Color(0.95, 0.88, 0.78), 0.06,
+		Color(0.08, 0.09, 0.11), true, Color(0.86, 0.40, 0.16))
+	_main_label.name = "MainLabel"
 	_main_label.position = Vector3(0, size * 0.5 + 0.1, size * 0.5 + 0.02)
-	_main_label.pixel_size = 0.001
-	_main_label.modulate = Color(0.9, 0.8, 0.7)
-	_main_label.outline_size = 4
-	_main_label.outline_modulate = Color.BLACK
 	add_child(_main_label)
-	
-	# Paradox explanation
-	_paradox_label = Label3D.new()
-	_paradox_label.text = "Does S contain itself?"
-	_paradox_label.font_size = 20
-	_paradox_label.position = Vector3(0, -size * 0.4, size * 0.5 + 0.02)
-	_paradox_label.pixel_size = 0.001
-	_paradox_label.modulate = Color(0.7, 0.7, 0.6, 0.8)
-	_paradox_label.outline_size = 3
-	_paradox_label.outline_modulate = Color.BLACK
-	add_child(_paradox_label)
+
+	# Paradox explanation — rebuilt on each depth change (see _update_paradox_text)
+	_paradox_label_pos = Vector3(0, -size * 0.4, size * 0.5 + 0.02)
+	_rebuild_paradox_label("Does S contain itself?")
 
 func _create_interactable() -> void:
 	_interactable = Area3D.new()
@@ -216,23 +230,38 @@ func open_next_layer() -> void:
 	
 	print("RussellSetBox: Opened layer %d — another box inside!" % _current_depth)
 
+func _rebuild_paradox_label(text: String) -> void:
+	# Rebuild the paradox display board with new text (baked, so it can't
+	# mutate in place like a Label3D — swap the whole tag).
+	if _paradox_label and is_instance_valid(_paradox_label):
+		_paradox_label.queue_free()
+	_paradox_label = BakedText.make_tag(
+		text, _paradox_label_color, 0.045,
+		Color(0.08, 0.09, 0.11), true, Color(0.55, 0.30, 0.60))
+	if _paradox_label:
+		_paradox_label.name = "ParadoxLabel"
+		_paradox_label.position = _paradox_label_pos
+		add_child(_paradox_label)
+
 func _update_paradox_text() -> void:
-	if not _paradox_label:
+	if not show_label:
 		return
-	
+
+	var text: String
 	match _current_depth:
 		0:
-			_paradox_label.text = "Does S contain itself?"
+			text = "Does S contain itself?"
 		1:
-			_paradox_label.text = "If S ∈ S, then S ∉ S (by definition)"
+			text = "If S ∈ S, then S ∉ S (by definition)"
 		2:
-			_paradox_label.text = "If S ∉ S, then S ∈ S (by definition)"
+			text = "If S ∉ S, then S ∈ S (by definition)"
 		3:
-			_paradox_label.text = "Therefore S ∈ S ↔ S ∉ S"
+			text = "Therefore S ∈ S ↔ S ∉ S"
 		4:
-			_paradox_label.text = "CONTRADICTION"
+			text = "CONTRADICTION"
 		_:
-			_paradox_label.text = "The paradox has no resolution.\nEvery formal system has an outside."
+			text = "The paradox has no resolution. Every formal system has an outside."
+	_rebuild_paradox_label(text)
 
 func reset() -> void:
 	_current_depth = 0

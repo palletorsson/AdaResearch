@@ -4,6 +4,8 @@ class_name ShannonEntropyMeter
 ## Wall-mounted Shannon entropy gauge — generates random sequences,
 ## computes symbol frequencies, and displays H = -Σ p(x) log₂ p(x).
 
+const BakedText = preload("res://commons/utils/baked_text_albedo.gd")
+
 # @identity
 # essence: a wall gauge that turns a random sequence into a number — the average information per symbol, in bits
 # desire: to make the abstract "amount of randomness" a thing on a wall the player can read like a thermometer
@@ -26,13 +28,19 @@ var _rng := RandomNumberGenerator.new()
 var _panel_mesh: MeshInstance3D
 var _bar_mesh: MeshInstance3D
 var _bar_material: StandardMaterial3D
-var _entropy_label: Label3D
-var _formula_label: Label3D
-var _title_label: Label3D
-var _max_label: Label3D
-var _sequence_label: Label3D
+var _entropy_label: Node3D
+var _formula_label: Node3D
+var _title_label: Node3D
+var _max_label: Node3D
+var _sequence_label: Node3D
 var _freq_bars: Array[MeshInstance3D] = []
-var _freq_labels: Array[Label3D] = []
+var _freq_labels: Array[Node3D] = []
+
+# Cached positions/colors for boards rebuilt on runtime .text updates.
+const ENTROPY_COLOR := Color(1.0, 1.0, 0.6)
+const SEQUENCE_COLOR := Color(0.55, 0.6, 0.7)
+var _entropy_pos: Vector3
+var _sequence_pos: Vector3
 
 # Gauge layout — top section is the entropy bar, bottom section is the histogram
 const BAR_REGION_LEFT := -0.28
@@ -137,15 +145,14 @@ func _build_gauge() -> void:
 		tick_mat.albedo_color = Color(0.25, 0.25, 0.3)
 		tick.material_override = tick_mat
 		add_child(tick)
-		# Tick label
-		var tick_lbl := Label3D.new()
-		tick_lbl.pixel_size = 0.001
-		tick_lbl.font_size = 20
-		tick_lbl.text = "%.1f" % val if val != max_h else "%.2f" % val
-		tick_lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		tick_lbl.position = Vector3(x_pos, BAR_REGION_BOTTOM - 0.02, 0.003)
-		tick_lbl.modulate = Color(0.5, 0.5, 0.6)
-		add_child(tick_lbl)
+		# Tick label — integrated board
+		var tick_text: String = "%.1f" % val if val != max_h else "%.2f" % val
+		var tick_lbl: Node3D = BakedText.make_tag(
+			tick_text, Color(0.6, 0.6, 0.7), 0.022,
+			Color(0.05, 0.05, 0.08), true, Color(0, 0, 0, 0))
+		if tick_lbl:
+			tick_lbl.position = Vector3(x_pos, BAR_REGION_BOTTOM - 0.02, 0.003)
+			add_child(tick_lbl)
 
 
 func _build_frequency_bars() -> void:
@@ -170,74 +177,76 @@ func _build_frequency_bars() -> void:
 		add_child(bar)
 		_freq_bars.append(bar)
 
-		# Symbol label beneath
-		var lbl := Label3D.new()
-		lbl.pixel_size = 0.001
-		lbl.font_size = 16
-		lbl.text = str(i)
-		lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		lbl.position = Vector3(x_pos, FREQ_REGION_BOTTOM + FREQ_BAR_HEIGHT + 0.015, 0.003)
-		lbl.modulate = Color(0.45, 0.45, 0.5)
-		add_child(lbl)
+		# Symbol label beneath — integrated board
+		var lbl: Node3D = BakedText.make_tag(
+			str(i), Color(0.55, 0.55, 0.6), 0.02,
+			Color(0.05, 0.05, 0.08), true, Color(0, 0, 0, 0))
+		if lbl:
+			lbl.position = Vector3(x_pos, FREQ_REGION_BOTTOM + FREQ_BAR_HEIGHT + 0.015, 0.003)
+			add_child(lbl)
 		_freq_labels.append(lbl)
 
 
 func _build_labels() -> void:
 	# Title
-	_title_label = Label3D.new()
-	_title_label.pixel_size = 0.001
-	_title_label.font_size = 42
-	_title_label.outline_size = 5
-	_title_label.text = "Shannon Entropy"
-	_title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	_title_label.position = Vector3(0, panel_size.y / 2.0 - 0.04, 0.003)
-	_title_label.modulate = Color(0.85, 0.9, 1.0)
-	add_child(_title_label)
+	_title_label = BakedText.make_tag(
+		"Shannon Entropy", Color(0.85, 0.9, 1.0), 0.05,
+		Color(0.07, 0.08, 0.12), true, Color(0.42, 0.6, 0.95))
+	if _title_label:
+		_title_label.position = Vector3(0, panel_size.y / 2.0 - 0.045, 0.003)
+		add_child(_title_label)
 
 	# Formula
-	_formula_label = Label3D.new()
-	_formula_label.pixel_size = 0.001
-	_formula_label.font_size = 28
-	_formula_label.outline_size = 4
-	_formula_label.text = "H = -\u03a3 p(x) log\u2082 p(x)"
-	_formula_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	_formula_label.position = Vector3(0, panel_size.y / 2.0 - 0.09, 0.003)
-	_formula_label.modulate = Color(0.6, 0.75, 0.95)
-	add_child(_formula_label)
+	_formula_label = BakedText.make_tag(
+		"H = -\u03a3 p(x) log\u2082 p(x)", Color(0.6, 0.75, 0.95), 0.035,
+		Color(0.06, 0.07, 0.11), true, Color(0, 0, 0, 0))
+	if _formula_label:
+		_formula_label.position = Vector3(0, panel_size.y / 2.0 - 0.10, 0.003)
+		add_child(_formula_label)
 
 	# Entropy value — large, glowing
-	_entropy_label = Label3D.new()
-	_entropy_label.pixel_size = 0.001
-	_entropy_label.font_size = 56
-	_entropy_label.outline_size = 6
-	_entropy_label.text = "H = 0.000"
-	_entropy_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	_entropy_label.position = Vector3(0.06, BAR_REGION_BOTTOM + BAR_REGION_HEIGHT + 0.035, 0.003)
-	_entropy_label.modulate = Color(1.0, 1.0, 0.6)
-	add_child(_entropy_label)
+	_entropy_pos = Vector3(0.06, BAR_REGION_BOTTOM + BAR_REGION_HEIGHT + 0.035, 0.003)
+	_rebuild_entropy_board("H = 0.000")
 
 	# Max entropy label
 	var max_h := log(num_symbols) / log(2.0)
-	_max_label = Label3D.new()
-	_max_label.pixel_size = 0.001
-	_max_label.font_size = 22
-	_max_label.outline_size = 3
-	_max_label.text = "max = %.2f bits (%d symbols)" % [max_h, num_symbols]
-	_max_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	_max_label.position = Vector3(0, BAR_REGION_BOTTOM - 0.04, 0.003)
-	_max_label.modulate = Color(0.4, 0.5, 0.65)
-	add_child(_max_label)
+	_max_label = BakedText.make_tag(
+		"max = %.2f bits (%d symbols)" % [max_h, num_symbols],
+		Color(0.5, 0.6, 0.75), 0.028,
+		Color(0.05, 0.06, 0.09), true, Color(0, 0, 0, 0))
+	if _max_label:
+		_max_label.position = Vector3(0, BAR_REGION_BOTTOM - 0.045, 0.003)
+		add_child(_max_label)
 
-	# Sequence sample label
-	_sequence_label = Label3D.new()
-	_sequence_label.pixel_size = 0.001
-	_sequence_label.font_size = 18
-	_sequence_label.outline_size = 2
-	_sequence_label.text = ""
-	_sequence_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	_sequence_label.position = Vector3(0, -panel_size.y / 2.0 + 0.03, 0.003)
-	_sequence_label.modulate = Color(0.35, 0.4, 0.5)
-	add_child(_sequence_label)
+	# Sequence sample board (rebuilt on runtime updates)
+	_sequence_pos = Vector3(0, -panel_size.y / 2.0 + 0.03, 0.003)
+
+
+## Rebuild the entropy value board (baked text can't be edited in place).
+func _rebuild_entropy_board(text: String) -> void:
+	if _entropy_label and is_instance_valid(_entropy_label):
+		_entropy_label.queue_free()
+	_entropy_label = BakedText.make_tag(
+		text, ENTROPY_COLOR, 0.06,
+		Color(0.09, 0.09, 0.05), true, Color(0.86, 0.72, 0.20))
+	if _entropy_label:
+		_entropy_label.position = _entropy_pos
+		add_child(_entropy_label)
+
+
+## Rebuild the sequence-sample board with fresh text.
+func _rebuild_sequence_board(text: String) -> void:
+	if _sequence_label and is_instance_valid(_sequence_label):
+		_sequence_label.queue_free()
+	if text.is_empty():
+		_sequence_label = null
+		return
+	_sequence_label = BakedText.make_tag(
+		text, SEQUENCE_COLOR, 0.02,
+		Color(0.05, 0.06, 0.08), true, Color(0, 0, 0, 0))
+	if _sequence_label:
+		_sequence_label.position = _sequence_pos
+		add_child(_sequence_label)
 
 
 func _run_measurement() -> void:
@@ -263,8 +272,8 @@ func _run_measurement() -> void:
 	var max_h: float = log(num_symbols) / log(2.0)
 	var frac: float = entropy / max_h if max_h > 0.0 else 0.0
 
-	# Update entropy value label
-	_entropy_label.text = "H = %.3f bits" % entropy
+	# Update entropy value board (rebuild baked text)
+	_rebuild_entropy_board("H = %.3f bits" % entropy)
 
 	# Update gauge bar
 	var bar_width: float = frac * BAR_REGION_WIDTH
@@ -298,7 +307,7 @@ func _run_measurement() -> void:
 			sample_str += " "
 	if sequence_length > show_count:
 		sample_str += " ..."
-	_sequence_label.text = sample_str
+	_rebuild_sequence_board(sample_str)
 
 
 func _symbol_color(index: int) -> Color:

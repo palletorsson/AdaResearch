@@ -1,6 +1,8 @@
 extends "res://commons/artifacts/_embodied/embodied_prop.gd"
 class_name GodelSentenceMachine
 
+const BakedText = preload("res://commons/utils/baked_text_albedo.gd")
+
 # @identity
 # essence: Godel's first incompleteness theorem, staged as a machine. A panel prints the sentence G, whose whole content is a claim ABOUT ITSELF — "G IS NOT PROVABLE" — a fixed point of the provability predicate built by the diagonal lemma. A self-reference arrow loops G's name back onto the sentence that names it, closing the circle. A prover arm reaches in to PROVE G, seizes (flares red), retracts; the verdict then resolves gold: TRUE — BUT UNPROVABLE. Forever: attempt -> jam -> conclude.
 # desire: to make the self-reference LEGIBLE, not stated — to let the eye follow G's name looping back onto the sentence and feel the sentence talk about itself, so the crack is watched being built rather than asserted.
@@ -26,8 +28,9 @@ var _g_panel: MeshInstance3D
 var _g_panel_mat: StandardMaterial3D
 var _loop_mi: MeshInstance3D
 var _loop_mat: StandardMaterial3D
-var _verdict: Label3D
-var _jam_spark: Label3D
+var _verdict: MeshInstance3D
+var _verdict_mat: StandardMaterial3D
+var _jam_spark: Node3D
 var _spark_pos: Vector3 = Vector3(-0.30, 0.92, 0.07)
 
 
@@ -70,13 +73,13 @@ func _build() -> void:
 	add_child(_cylinder(Vector3(-pw * 0.34, py * 0.5 - 0.12, 0.0), 0.018, py - 0.24, frame_mat))
 	add_child(_cylinder(Vector3(pw * 0.34, py * 0.5 - 0.12, 0.0), 0.018, py - 0.24, frame_mat))
 
-	# --- the sentence G, printed on the panel ---
-	add_child(_billboard_label("G:", Vector3(-0.30, py + 0.12, 0.05), 26, cool_white))
-	add_child(_billboard_label("\"G IS NOT PROVABLE\"", Vector3(0.04, py + 0.12, 0.05), 22, cool_white))
+	# --- the sentence G, printed on the panel (integrated display boards) ---
+	_add_tag("G:", Vector3(-0.30, py + 0.12, 0.05), 0.075, cool_white)
+	_add_tag("\"G IS NOT PROVABLE\"", Vector3(0.04, py + 0.12, 0.05), 0.065, cool_white)
 	# the named token of G the loop arrow points at — the "G" INSIDE the sentence
 	var g_dot_mat := _glow_mat(true_gold, 1.0)
 	add_child(_sphere(Vector3(-0.30, py - 0.04, 0.06), 0.028, g_dot_mat))
-	add_child(_billboard_label("= this very sentence", Vector3(0.02, py - 0.06, 0.05), 13, wire_purple))
+	_add_tag("= this very sentence", Vector3(0.02, py - 0.06, 0.05), 0.042, wire_purple, Color(0.42, 0.32, 0.62))
 
 	# --- the self-reference loop: the name G points back at the sentence G names ---
 	# A torus tilted to read as an arrow looping out of the "G" token and back onto
@@ -87,7 +90,7 @@ func _build() -> void:
 	add_child(_loop_mi)
 	# little arrowhead biting back into the G dot — the self-reference closing
 	add_child(_arrow(Vector3(-0.30, py + 0.13, 0.20), Vector3(-0.30, py + 0.02, 0.09), 0.010, _loop_mat))
-	add_child(_billboard_label("G names itself", Vector3(-0.30, py + 0.20, 0.16), 12, wire_purple))
+	_add_tag("G names itself", Vector3(-0.30, py + 0.20, 0.16), 0.040, wire_purple, Color(0.42, 0.32, 0.62))
 
 	# --- the prover arm: reaches from the right edge toward G to PROVE it ---
 	_arm = Node3D.new()
@@ -103,20 +106,29 @@ func _build() -> void:
 	clamp.add_child(_box(Vector3(0.0, -0.04, 0.0), Vector3(0.10, 0.012, 0.05), clamp_mat))
 	_arm.add_child(clamp)
 	_arm.position = _arm_pivot
-	add_child(_billboard_label("PROVE", Vector3(0.40, 1.10, 0.0), 14, panel_blue))
+	_add_tag("PROVE", Vector3(0.40, 1.10, 0.0), 0.050, panel_blue, panel_blue)
 
 	# --- the jam spark (red flare when the prover seizes), hidden between attempts ---
-	_jam_spark = _billboard_label("JAM", _spark_pos + Vector3(0.0, 0.10, 0.0), 26, jam_red)
-	_jam_spark.modulate = Color(jam_red.r, jam_red.g, jam_red.b, 0.0)
+	_jam_spark = BakedText.make_tag("JAM", jam_red, 0.075, Color(0.10, 0.03, 0.04), true, jam_red)
+	_jam_spark.position = _spark_pos + Vector3(0.0, 0.10, 0.0)
+	_jam_spark.visible = false
 	add_child(_jam_spark)
 
-	# --- the verdict that finally resolves: TRUE BUT UNPROVABLE (gold) ---
-	_verdict = _billboard_label("TRUE — BUT UNPROVABLE", Vector3(0.0, 1.30, 0.0), 24, true_gold)
-	_verdict.modulate = Color(true_gold.r, true_gold.g, true_gold.b, 0.0)
-	add_child(_verdict)
+	# --- the verdict that finally resolves: TRUE BUT UNPROVABLE (gold plate) ---
+	# Opaque printed plate rather than a floating label — the honest final read.
+	_verdict = BakedText.make_panel_mesh(
+		"TRUE — BUT UNPROVABLE", Color(0.10, 0.08, 0.03), true_gold, Vector2(0.86, 0.13))
+	if _verdict != null:
+		_verdict.position = Vector3(0.0, 1.30, 0.0)
+		_verdict_mat = _verdict.material_override as StandardMaterial3D
+		if _verdict_mat != null:
+			_verdict_mat.billboard_mode = BaseMaterial3D.BILLBOARD_ENABLED
+			_verdict_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+			_verdict_mat.albedo_color = Color(1, 1, 1, 0.0)
+		add_child(_verdict)
 
 	# --- title ---
-	add_child(_billboard_label("GODEL SENTENCE MACHINE", Vector3(0.0, 1.5, 0.0), 30, cool_white))
+	_add_tag("GODEL SENTENCE MACHINE", Vector3(0.0, 1.5, 0.0), 0.088, cool_white)
 
 
 func _process(delta: float) -> void:
@@ -156,12 +168,12 @@ func _process(delta: float) -> void:
 	if _loop_mat != null:
 		_loop_mat.emission_energy_multiplier = (0.9 + 0.4 * sin(_t * 3.0)) if emissive else 0.0
 
-	# jam spark: red flare during the jam window
+	# jam spark: red flare during the jam window (board shown + pulsed while jammed)
 	if is_instance_valid(_jam_spark):
 		var a: float = 0.0
 		if jam > 0.0:
 			a = sin(jam * PI)  # 0..1..0 across the jam window
-		_jam_spark.modulate = Color(jam_red.r, jam_red.g, jam_red.b, a)
+		_jam_spark.visible = a > 0.01
 		_jam_spark.scale = Vector3.ONE * (1.0 + a * 0.5 + 0.1 * sin(_t * 50.0) * a)
 	# panel flushes red at the jam, cools otherwise
 	if _g_panel_mat != null:
@@ -171,11 +183,22 @@ func _process(delta: float) -> void:
 		_g_panel_mat.emission = panel_blue.lerp(jam_red, heat)
 		_g_panel_mat.emission_energy_multiplier = (0.35 + heat * 0.9) if emissive else 0.0
 
-	# verdict: gold conclusion, eased in over the conclude window, breathing
+	# verdict: gold conclusion plate, eased in over the conclude window, breathing
 	if is_instance_valid(_verdict):
 		var va: float = _smooth(clampf(conclude * 2.0, 0.0, 1.0))
-		_verdict.modulate = Color(true_gold.r, true_gold.g, true_gold.b, va)
+		_verdict.visible = va > 0.001
 		_verdict.scale = Vector3.ONE * (1.0 + 0.06 * sin(_t * 2.5) * va)
+		if _verdict_mat != null:
+			_verdict_mat.albedo_color = Color(1, 1, 1, va)
+
+
+func _add_tag(text: String, pos: Vector3, world_h: float, color: Color,
+		accent: Color = Color(0.86, 0.40, 0.16)) -> void:
+	var tag: Node3D = BakedText.make_tag(text, color, world_h, Color(0.08, 0.09, 0.11), true, accent)
+	if tag == null:
+		return
+	tag.position = pos
+	add_child(tag)
 
 
 func _smooth(x: float) -> float:
