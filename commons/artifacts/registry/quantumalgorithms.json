@@ -62,7 +62,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 5,
+				"footprint_cells": 1,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -74,7 +74,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -196,7 +198,9 @@
 					"physical",
 					"superposition"
 				],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [

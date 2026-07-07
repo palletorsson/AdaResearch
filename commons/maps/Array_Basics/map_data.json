@@ -15,12 +15,7 @@
       "difficulty": "beginner",
       "category": "learning",
       "estimated_time": "3-5 minutes",
-      "learning_objectives": [
-        "Array Indexing",
-        "Zero-Indexing",
-        "Row vs Column",
-        "Sequential Traversal"
-      ]
+      "learning_objectives": ["Array Indexing","Zero-Indexing","Row vs Column","Sequential Traversal"]
     }
   },
   "utility_definitions": {
@@ -46,41 +41,22 @@
     "summary": "Walk the Index.",
     "layout": "A guided path that transitions from a single point (Index 0) to a Row (1D Array) and then a Column.",
     "objective": "Follow the path. Watch the Index Visualizer track your position in the array.",
-    "key_elements": [
-      "`IndexVisualizer` artifact (global)",
-      "Sequential path of `pick_up_cube` items"
-    ]
+    "key_elements": ["`IndexVisualizer` artifact (global)","Sequential path of `pick_up_cube` items"]
   },
   "lighting": {
-    "ambient_color": [
-      0.2,
-      0.2,
-      0.3
-    ],
+    "ambient_color": [0.2,0.2,0.3],
     "ambient_energy": 1,
     "directional_light": {
       "enabled": true,
-      "direction": [
-        -0.5,
-        -1,
-        -0.5
-      ],
-      "color": [
-        1,
-        1,
-        1
-      ],
+      "direction": [-0.5,-1,-0.5],
+      "color": [1,1,1],
       "energy": 0.8
     }
   },
   "settings": {
     "background": {
       "type": "sky",
-      "color": [
-        0.1,
-        0.1,
-        0.2
-      ]
+      "color": [0.1,0.1,0.2]
     },
     "show_grid": true
   },

@@ -2,13 +2,13 @@
   "sequences": {
 	"cellularautomata": {
 	  "name": "Cellular Automata: Local Rules, Global Patterns",
-	  "truth": "Local rules, global patterns. Each cell knows only its neighbors, yet worlds emerge. Rule 110 is Turing completeâ€”simple rules can compute anything.",
-	  "qfep_term": "E(S)",
-	  "qfep_connection": "Cellular automata demonstrate emergenceâ€”the E(S) term manifesting as complex global behavior from simple local entropy. They are laboratories for studying how order and chaos interact at the edge of computation.",
+	  "truth": "Local rules, global patterns. Each cell knows only its neighbors, yet worlds emerge. Rule 110 is Turing complete\u00e2\u20ac\u201dsimple rules can compute anything.",
+	  "qfep_term": "\u03bb",
+	  "qfep_connection": "Cellular automata demonstrate emergence\u00e2\u20ac\u201dthe E(S) term manifesting as complex global behavior from simple local entropy. They are laboratories for studying how order and chaos interact at the edge of computation.",
 	  "formula": "cell(t+1) = rule(cell(t), neighbors(t))",
 	  "demonstration": "Watch Game of Life emerge from four rules. See Rule 30 generate randomness from simplicity. Build patterns that compute.",
-	  "description": "Emergent complexity from local rules. Each cell updates based only on its immediate neighbors, yet global structuresâ€”gliders, oscillators, even computersâ€”emerge. This is computation at the edge of chaos.",
-	  "layer": "emergence",
+	  "description": "Emergent complexity from local rules. Each cell updates based only on its immediate neighbors, yet global structures\u00e2\u20ac\u201dgliders, oscillators, even computers\u00e2\u20ac\u201demerge. This is computation at the edge of chaos.",
+	  "layer": "lambda_edge",
 	  "prerequisites": [
 		"primitives",
         "randomness"
@@ -22,7 +22,7 @@
 	  "learning_objectives": [
 		"Cellular automata basics: cells, states, neighborhoods, rules",
 		"1D automata: Wolfram's 256 rules, Rule 30, Rule 110",
-		"2D automata: Conway's Game of Lifeâ€”birth, survival, death",
+		"2D automata: Conway's Game of Life\u00e2\u20ac\u201dbirth, survival, death",
 		"Emergent structures: gliders, oscillators, still lifes",
 		"Computational universality: Rule 110 is Turing complete",
         "Edge of chaos: where complex behavior emerges"
@@ -45,8 +45,7 @@
 		"CA_ExpandingSpace",
 		"CA_SoftRules",
 		"CA_AgentsCircuits",
-		"CA_EdgeOfChaos",
-        "Chamber_CA"
+        "CA_EdgeOfChaos"
 	  ],
 	  "axiom_files": [
 		"res://commons/context/clipboard/tutorial_text/cellularautomata_axioms.md",

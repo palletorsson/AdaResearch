@@ -1,0 +1,69 @@
+{
+  "timestamp": "2026-05-11T10:26:00",
+  "phase": "baseline",
+  "trigger": "scheduled-task: ada-weekly-audit (dry-run)",
+  "mode": "dry-run",
+  "pipeline_summary": {
+    "global_avg_pipeline": 5.43,
+    "sequences_scored": 21,
+    "stage_7_polish": ["randomness"],
+    "stage_6_vr_testing": [
+      "primitives", "transformation", "color", "forces", "wavefunctions",
+      "noise", "cellularautomata", "fractals", "lsystems", "proceduralgeneration",
+      "isosurfaces", "swarmintelligence", "machinelearning", "foundationscrisis",
+      "qfeplaboratory", "postfoundationscrisis", "graphtheory"
+    ],
+    "stage_2_documentation": [
+      "array_tutorial (18% doc, 60% art)",
+      "softbodies (29% doc, 64% art)"
+    ],
+    "stage_1_structure": ["boolean_surfaces"],
+    "spine_sequences_total": 19,
+    "spine_sequences_at_or_past_stage_6": 18,
+    "spine_sequences_at_stage_7": 1
+  },
+  "heat_map_top_5": [
+    {"item": "capture", "temperature": 80, "reason": "active (5 recent commits)"},
+    {"item": "floor", "temperature": 80, "reason": "active (4 recent commits)"},
+    {"item": "primitive", "temperature": 65, "reason": "active (1 recent commits)"},
+    {"item": "pattern", "temperature": 65, "reason": "active (1 recent commits)"},
+    {"item": "garden_voicing_targeting", "temperature": 60, "reason": "deep discovery: voicing artifacts in wrong sequence (prop-001)"}
+  ],
+  "heat_map_total_items": 9,
+  "garden_health": {
+    "total_artifacts": 2106,
+    "voiced": 953,
+    "voice_coverage_pct": 45,
+    "embodied": 330,
+    "embodiment_rate_pct": 34,
+    "phantom_limbs": 789,
+    "state_distribution": {
+      "DORMANT": 13,
+      "SCATTERED": 16,
+      "REACHING": 10,
+      "GROWING": 10,
+      "LIVING": 5
+    },
+    "newly_LIVING_since_baseline": ["forces", "flowers", "joints", "vectors", "grammar_gallery"]
+  },
+  "release_gates": {
+    "all_passing": false,
+    "passing_count": 3,
+    "total_count": 4,
+    "A_sequence_contract": "PASS",
+    "B_artifact_registry": "FAIL",
+    "B_failure_shape": "unresolved_scene_files: 14 (NEW shape — different from Apr-16/May-04 missing_scene_path/map_ready/include_in_map_data regressions)",
+    "C_map_validation": "PASS",
+    "C_grade_A": 810,
+    "C_grade_B": 127,
+    "C_grade_C": 158,
+    "C_grade_F": 0,
+    "C_grade_A_delta_vs_May_06_cached": "810 vs cached 1862 (-1052) — validator counting differs from cached run; investigate baseline drift",
+    "D_lab_progression": "PASS"
+  },
+  "notes": [
+    "Cached RELEASE_GATES.json on disk dates from 2026-05-06 with all gates PASS. Live run today shows Gate B regression (unresolved_scene_files: 14).",
+    "Grade-A map count dropped 1862 -> 810 between 2026-05-06 cached run and 2026-05-11 live run. Likely validator-counting change rather than 1052 maps degrading. Recommends investigation.",
+    "undeclared_map_folders also dropped 2253 -> 490 over the same period."
+  ]
+}

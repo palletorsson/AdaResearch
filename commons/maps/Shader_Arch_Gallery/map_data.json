@@ -11,11 +11,7 @@
 	  "max_height": 1
 	},
 	"metadata": {
-	  "learning_goals": [
-		"See 20 different GPU shaders applied to curved geometry",
-		"Compare shader techniques side by side in one walk-through",
-        "Understand how shaders transform surfaces"
-	  ]
+	  "learning_goals": ["See 20 different GPU shaders applied to curved geometry","Compare shader techniques side by side in one walk-through","Understand how shaders transform surfaces"]
 	},
 	"title": "Patchwork Light Tunnel"
   },
@@ -39,11 +35,7 @@
 	"summary": "Shader_Arch_Gallery — 20 GPU shaders on a barrel-vault arch tunnel",
 	"layout": "Long corridor with a shader_arch_gallery artifact creating a curved tunnel. Walk through to see each shader section.",
 	"objective": "Walk through comparing 20 different GPU shader techniques on curved surfaces.",
-	"key_elements": [
-	  "shader_arch_gallery artifact with 20 segments",
-	  "Each segment: different shader on arch walls + ceiling + floor",
-      "OmniLights for shader visibility"
-	]
+	"key_elements": ["shader_arch_gallery artifact with 20 segments","Each segment: different shader on arch walls + ceiling + floor","OmniLights for shader visibility"]
   },
   "settings": {
 	"auto_reveal_on_entry": true,

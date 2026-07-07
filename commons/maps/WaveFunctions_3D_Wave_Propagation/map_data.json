@@ -15,13 +15,7 @@
 	  "difficulty": "intermediate",
 	  "category": "wavefunctions",
 	  "estimated_time": "5-7 minutes",
-	  "learning_objectives": [
-		"Distance fields: calculating propagation from source to every point",
-		"Wave function: sin(time * speed - dist * frequency)",
-		"Attenuation: inverse square law (energy = 1 / (1 + dist²))",
-		"Interference: wave summation creates peaks and cancellation",
-        "Critical: Identity is permeable—to exist in a medium is to be distorted by it"
-	  ]
+	  "learning_objectives": ["Distance fields: calculating propagation from source to every point","Wave function: sin(time * speed - dist * frequency)","Attenuation: inverse square law (energy = 1 / (1 + dist²))","Interference: wave summation creates peaks and cancellation","Critical: Identity is permeable—to exist in a medium is to be distorted by it"]
 	}
   },
   "utility_definitions": {
@@ -43,32 +37,15 @@
 	"summary": "WaveFunctions 3D Wave Propagation",
 	"layout": "13x14 arena carved around an 8x8 sunken stage for volumetric wave demonstrations.",
 	"objective": "Visualize a propagating 3D waveform from a safe overlook before advancing to the next study.",
-	"key_elements": [
-	  "Spawn `s` at the north-west entry platform",
-	  "`wave_propagation_3d` simulator centered at (5,5)",
-	  "`dark_sphere` canopy providing contrast over the waveform",
-      "Teleporter `t` at the south-east promenade"
-	]
+	"key_elements": ["Spawn `s` at the north-west entry platform","`wave_propagation_3d` simulator centered at (5,5)","`dark_sphere` canopy providing contrast over the waveform","Teleporter `t` at the south-east promenade"]
   },
   "lighting": {
-	"ambient_color": [
-	  0.4,
-	  0.4,
-	  0.5
-	],
+	"ambient_color": [0.4,0.4,0.5],
 	"ambient_energy": 0.6,
 	"directional_light": {
 	  "enabled": true,
-	  "direction": [
-		-0.4,
-		-0.7,
-		-0.4
-	  ],
-	  "color": [
-		1,
-		0.9,
-		0.8
-	  ],
+	  "direction": [-0.4,-0.7,-0.4],
+	  "color": [1,0.9,0.8],
 	  "energy": 1.2
 	}
   },
@@ -81,11 +58,7 @@
 	"initial_tile_visibility": "hidden_except_corners",
 	"background": {
 	  "type": "sky",
-	  "color": [
-		0.2,
-		0.3,
-		0.7
-	  ]
+	  "color": [0.2,0.3,0.7]
 	}
   },
   "layers": {

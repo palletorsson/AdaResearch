@@ -23,8 +23,9 @@ radial_segments = 3
 shader = ExtResource("1_shader")
 shader_parameter/modelColor = Color(1.0, 0.0, 1.0, 1.0)
 shader_parameter/wireframeColor = Color(1, 1, 1, 1)
-shader_parameter/width = 2.0
-shader_parameter/emission_strength = 2.0
+shader_parameter/emissionColor = Color(1.0, 0.0, 1.0, 1.0)
+shader_parameter/width = 1.0
+shader_parameter/emission_strength = 1.0
 shader_parameter/show_interior = true
 
 [node name="TetrahedronV2" type="Node3D"]

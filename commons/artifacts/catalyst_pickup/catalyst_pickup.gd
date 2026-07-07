@@ -108,25 +108,25 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 func _read_metadata_overrides() -> void:
 	if has_meta("config_sequence_name"):
-		sequence_name = String(get_meta("config_sequence_name"))
+		sequence_name = str(get_meta("config_sequence_name"))
 	if has_meta("config_label_text"):
-		label_text = String(get_meta("config_label_text"))
+		label_text = str(get_meta("config_label_text"))
 	if has_meta("config_orb_color"):
-		orb_color = _parse_color(String(get_meta("config_orb_color")), orb_color)
+		orb_color = _parse_color(str(get_meta("config_orb_color")), orb_color)
 	if has_meta("config_pedestal_color"):
-		pedestal_color = _parse_color(String(get_meta("config_pedestal_color")), pedestal_color)
+		pedestal_color = _parse_color(str(get_meta("config_pedestal_color")), pedestal_color)
 	if has_meta("config_accent_color"):
-		accent_color = _parse_color(String(get_meta("config_accent_color")), accent_color)
+		accent_color = _parse_color(str(get_meta("config_accent_color")), accent_color)
 	if has_meta("config_claimed"):
-		var v: String = String(get_meta("config_claimed")).to_lower()
+		var v: String = str(get_meta("config_claimed")).to_lower()
 		claimed = (v == "true" or v == "1" or v == "yes")
 	if has_meta("config_pulsing"):
-		var v2: String = String(get_meta("config_pulsing")).to_lower()
+		var v2: String = str(get_meta("config_pulsing")).to_lower()
 		pulsing = (v2 == "true" or v2 == "1" or v2 == "yes")
 	if has_meta("config_pedestal_height"):
-		pedestal_height = float(String(get_meta("config_pedestal_height")))
+		pedestal_height = float(str(get_meta("config_pedestal_height")))
 	if has_meta("config_orb_radius"):
-		orb_radius = float(String(get_meta("config_orb_radius")))
+		orb_radius = float(str(get_meta("config_orb_radius")))
 
 
 func _parse_color(s: String, fallback: Color) -> Color:

@@ -1,4 +1,5 @@
 # ChromaticProjectile.gd
+# verb: paint
 # Rainbow sphere that permanently colors whatever grid cubes it hits.
 # Colors + transforms + fractal-spawns cubes on impact.
 extends CatalystProjectile

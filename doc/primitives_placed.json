@@ -680,45 +680,45 @@
       0.0
     ]
   ],
-  "conceptual_corr": -0.043,
+  "conceptual_corr": 1.0,
   "pulled_apart": [
     {
+      "a": "Point",
+      "b": "Other primitives",
+      "placed": 1.0,
+      "conceptual": 0.95
+    },
+    {
       "a": "Line / edge",
-      "b": "Interactive tool",
-      "placed": 0.9,
-      "conceptual": 0.36
+      "b": "Other primitives",
+      "placed": 0.95,
+      "conceptual": 0.9
     },
     {
       "a": "Point",
-      "b": "Text / glyph",
-      "placed": 0.85,
-      "conceptual": 0.35
-    },
-    {
-      "a": "Plane / quad",
       "b": "Interactive tool",
-      "placed": 0.75,
-      "conceptual": 0.32
+      "placed": 0.95,
+      "conceptual": 0.9
     }
   ],
   "jammed_together": [
     {
-      "a": "Arch / structure",
-      "b": "Curve / organic",
+      "a": "Point",
+      "b": "Line / edge",
       "placed": 0.05,
-      "conceptual": 0.98
+      "conceptual": 0.05
     },
     {
-      "a": "Helix / spiral",
-      "b": "Arch / structure",
+      "a": "Line / edge",
+      "b": "Arrow / vector",
       "placed": 0.05,
-      "conceptual": 0.97
+      "conceptual": 0.05
     },
     {
-      "a": "Prism / extrusion",
-      "b": "Helix / spiral",
+      "a": "Arrow / vector",
+      "b": "Triangle",
       "placed": 0.05,
-      "conceptual": 0.96
+      "conceptual": 0.05
     }
   ]
 }

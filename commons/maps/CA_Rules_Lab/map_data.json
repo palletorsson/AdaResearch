@@ -1,0 +1,67 @@
+{
+  "map_info": {
+    "name": "CA Rules Lab",
+    "lookup_name": "CA_Rules_Lab",
+    "description": "The 1D-cellular-automata lab. A single instrument — ca_rules_workbench — sits at the north end of the room. One slider scrubs Wolfram rule R in [0,255]; the 256x256 evolution panel redraws live; the class indicator lamp shifts QFEP phase color (Class 1 blue / 2 green / 3 orange / 4 red). At rule 30 the lamp glows orange and a cross-reference points back to shannon_workbench. At rule 110 it goes red and points to halting_workbench (Cook's 2004 universality proof). At rule 90 the panel draws Sierpinski. The dial makes Wolfram's four-class landscape walkable: a single integer step can sit you across a class boundary. Built 2026-05-20 as a centerpiece map paired with /ca-rules-gallery.",
+    "manual_file": "",
+    "version": "1.0",
+    "format": "json",
+    "dimensions": {
+      "width": 7,
+      "depth": 7,
+      "max_height": 2
+    },
+    "metadata": {
+      "difficulty": "intermediate",
+      "category": "cellularautomata",
+      "estimated_time": "3-5 minutes",
+      "learning_objectives": ["1D Wolfram CA: 8 transition bits per rule, 256 rules total","Four classes (uniform/periodic/chaotic/edge-of-chaos) map to QFEP phases","Class boundaries can be one-bit flips apart in rule space (e.g. 30 -> 31, 110 -> 111)","Rule 110 is Turing-complete (Cook 2004)"]
+    }
+  },
+  "utility_definitions": {
+    "t": "Next",
+    "s": "Spawn Point"
+  },
+  "spawn_points": {
+    "default": {
+      "position": [3.5,1.2,5.5],
+      "rotation": [0,0,0]
+    }
+  },
+  "lighting": {
+    "ambient_color": [0.4,0.4,0.5],
+    "ambient_energy": 0.55
+  },
+  "settings": {
+    "ambient_preset": "calc_lab"
+  },
+  "layers": {
+    "structure": [
+      ["1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1"],
+      ["1","1","1","0","1","1","1"]
+    ],
+    "utilities": [
+      [" "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "],
+      [" "," "," ","t"," "," "," "]
+    ],
+    "interactables": [
+      [" "," "," "," "," "," "," "],
+      [" "," "," ","ca_rules_workbench:0:0"," "," "," "],
+      [" "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "]
+    ]
+  }
+}

@@ -6,6 +6,8 @@ extends Node3D
 
 class_name BifurcationWalkway
 
+const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
+
 # @identity
 # essence: x_n+1 = r * x_n * (1 - x_n), iterated across r -> period-doubling cascade
 # desire: walk along the r axis and feel order shatter into chaos
@@ -45,7 +47,10 @@ class_name BifurcationWalkway
 
 var _multimesh: MultiMesh
 var _multimesh_instance: MultiMeshInstance3D
-var _info_label: Label3D
+var _info_root: Node3D
+var _info_cache := ""
+var _r_tag_min: Node3D
+var _r_tag_max: Node3D
 var _active_points: int = 0
 
 # VR Controls
@@ -133,44 +138,80 @@ func _create_multimesh():
 	add_child(_multimesh_instance)
 
 func _create_labels():
-	_info_label = Label3D.new()
-	_info_label.name = "InfoLabel"
-	_info_label.pixel_size = 0.003
-	_info_label.font_size = 24
-	_info_label.position = Vector3(0, display_height + 0.15, 0)
-	add_child(_info_label)
-	
-	# R axis labels
-	var r_label_min = Label3D.new()
-	r_label_min.pixel_size = 0.002
-	r_label_min.font_size = 16
-	r_label_min.position = Vector3(-display_width/2, -0.08, 0)
-	r_label_min.modulate = Color(0.6, 0.6, 0.6)
-	add_child(r_label_min)
-	
-	var r_label_max = Label3D.new()
-	r_label_max.pixel_size = 0.002
-	r_label_max.font_size = 16
-	r_label_max.position = Vector3(display_width/2, -0.08, 0)
-	r_label_max.modulate = Color(0.6, 0.6, 0.6)
-	add_child(r_label_max)
-	
-	# X axis labels
-	var x_label_0 = Label3D.new()
-	x_label_0.text = "0"
-	x_label_0.pixel_size = 0.002
-	x_label_0.font_size = 14
-	x_label_0.position = Vector3(-display_width/2 - 0.06, 0, 0)
-	x_label_0.modulate = Color(0.5, 0.5, 0.5)
-	add_child(x_label_0)
-	
-	var x_label_1 = Label3D.new()
-	x_label_1.text = "1"
-	x_label_1.pixel_size = 0.002
-	x_label_1.font_size = 14
-	x_label_1.position = Vector3(-display_width/2 - 0.06, display_height, 0)
-	x_label_1.modulate = Color(0.5, 0.5, 0.5)
-	add_child(x_label_1)
+	# Header + r-axis readouts live on framed 2D-in-3D boards (R-027);
+	# their content is rebuilt by _rebuild_info() whenever the range changes.
+	# X axis marks — framed tags, not bare Label3D
+	var x_tag_0: Node3D = BakedText.make_tag("0", Color(0.5, 0.5, 0.5), 0.035)
+	if x_tag_0:
+		x_tag_0.position = Vector3(-display_width/2 - 0.06, 0, 0)
+		add_child(x_tag_0)
+
+	var x_tag_1: Node3D = BakedText.make_tag("1", Color(0.5, 0.5, 0.5), 0.035)
+	if x_tag_1:
+		x_tag_1.position = Vector3(-display_width/2 - 0.06, display_height, 0)
+		add_child(x_tag_1)
+
+func _rebuild_info() -> void:
+	var range_text := "r ∈ [%.2f, %.2f]" % [r_min, r_max]
+	if range_text == _info_cache:
+		return
+	_info_cache = range_text
+	if is_instance_valid(_info_root):
+		_info_root.queue_free()
+
+	# Header board: title + current r range on one framed dark panel
+	_info_root = Node3D.new()
+	_info_root.name = "InfoBoard"
+	_info_root.position = Vector3(0, display_height + 0.15, 0)
+	add_child(_info_root)
+	_info_root.add_child(_plate(Vector3(0.9, 0.22, 0.035)))
+	var t: MeshInstance3D = BakedText.make_label_mesh("BIFURCATION DIAGRAM", Color(0.92, 0.95, 1.0), Vector2(0.8, 0.07), 1300, true)
+	if t:
+		t.position = Vector3(0, 0.045, 0.024)
+		_info_root.add_child(t)
+	var rr: MeshInstance3D = BakedText.make_label_mesh(range_text, Color(0.9, 0.9, 0.5), Vector2(0.7, 0.06), 1300, true)
+	if rr:
+		rr.position = Vector3(0, -0.045, 0.024)
+		_info_root.add_child(rr)
+
+	# R axis value tags at the diagram's bottom corners
+	if is_instance_valid(_r_tag_min):
+		_r_tag_min.queue_free()
+	_r_tag_min = BakedText.make_tag("%.2f" % r_min, Color(0.6, 0.6, 0.6), 0.035)
+	if _r_tag_min:
+		_r_tag_min.position = Vector3(-display_width/2, -0.08, 0)
+		add_child(_r_tag_min)
+	if is_instance_valid(_r_tag_max):
+		_r_tag_max.queue_free()
+	_r_tag_max = BakedText.make_tag("%.2f" % r_max, Color(0.6, 0.6, 0.6), 0.035)
+	if _r_tag_max:
+		_r_tag_max.position = Vector3(display_width/2, -0.08, 0)
+		add_child(_r_tag_max)
+
+func _plate(size: Vector3) -> Node3D:
+	var g := Node3D.new()
+	var frame := MeshInstance3D.new()
+	var fm := BoxMesh.new()
+	fm.size = size + Vector3(0.05, 0.05, -0.01)
+	frame.mesh = fm
+	var fmat := StandardMaterial3D.new()
+	fmat.albedo_color = Color(0.62, 0.60, 0.56)
+	fmat.roughness = 0.7
+	frame.material_override = fmat
+	frame.position = Vector3(0, 0, -0.006)
+	g.add_child(frame)
+	var face := MeshInstance3D.new()
+	var bm := BoxMesh.new()
+	bm.size = size
+	face.mesh = bm
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color(0.10, 0.11, 0.14)
+	mat.emission_enabled = true
+	mat.emission = Color(0.10, 0.11, 0.14)
+	mat.emission_energy_multiplier = 0.25
+	face.material_override = mat
+	g.add_child(face)
+	return g
 
 func _create_vr_controls():
 	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
@@ -250,8 +291,8 @@ func _set_r_range(new_min: float, new_max: float):
 func _generate_diagram():
 	var idx = 0
 	var half_w = display_width / 2.0
-	
-	_info_label.text = "BIFURCATION DIAGRAM\nr ∈ [%.2f, %.2f]" % [r_min, r_max]
+
+	_rebuild_info()
 	
 	for i in range(r_steps):
 		var r = r_min + (r_max - r_min) * (float(i) / r_steps)

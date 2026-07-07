@@ -1,0 +1,86 @@
+{
+  "map_info": {
+    "name": "Facade_Critique",
+    "lookup_name": "Facade_Critique",
+    "description": "The refused actualization. Where the previous five expression maps applied the principle in different modes (canonical, dramatized, hybridized, surfaced, modularized), this map *refuses* the principle and that refusal is the synthesis. Two facades stand opposite each other: Superstudio's Continuous Monument on one wall (refuses bay rhythm by being a single infinite slab) and a Memphis-Group totem on the other (refuses hierarchy by stacking glyphs as if vertical order does not exist). The room itself is asymmetric — refusal is also a position.",
+    "version": "0.2-pass4",
+    "format": "json",
+    "created_from": "facade_assembly proposal 2026-05-13; pass-4 fresh build 2026-05-14",
+    "dimensions": {
+      "width": 12,
+      "depth": 7,
+      "max_height": 4
+    },
+    "metadata": {
+      "difficulty": "intermediate-advanced",
+      "category": "expression_map",
+      "actualization_tag": "refused",
+      "estimated_time": "4-5 minutes",
+      "learning_objectives": ["Recognise refusal as a compositional move that requires the rule to be installed first","Read Superstudio's continuous monument as a refusal of bay rhythm specifically","Read Memphis Group totem-stacking as a refusal of hierarchy specifically","Understand that the principle's legibility makes the refusal legible"]
+    },
+    "title": "The Principle Refused"
+  },
+  "utility_definitions": {
+    "sp": {
+      "name": "Spawn",
+      "description": "Player spawn point — between the two refusals",
+      "type": "spawn"
+    },
+    "t": {
+      "name": "Exit Portal",
+      "description": "Continue to Chamber_Facade — the synthesis closing",
+      "type": "teleporter",
+      "properties": {
+        "action": "next_in_sequence"
+      }
+    }
+  },
+  "documentation": {
+    "summary": "Facade_Critique — the principle refused. Two facades face each other: Superstudio's continuous monument (refuses bay rhythm) and a Memphis totem stack (refuses hierarchy). The room is asymmetric on purpose.",
+    "layout": "12x7 walkable space, asymmetric. Spawn at centre, facing neither wall — the player must choose which refusal to read first. Teleporter at the far end. The room's deliberate asymmetry mirrors the maps' deliberate refusal of compositional symmetry.",
+    "objective": "Synthesise the principle by showing what cannot be read without it. Memphis Totem refuses hierarchy intelligibly because hierarchy is the legible default. Superstudio's continuous monument refuses bay rhythm intelligibly because bay rhythm is the legible default. Refusal requires the rule.",
+    "key_elements": ["Spawn at (6, 3) — centre, between the two refusals","Teleporter at (11, 6) — far corner exit, breaking the symmetry the previous maps maintained","Wall A (north, row 0): Superstudio's continuous monument — a single infinite slab (artifacts queued)","Wall B (south, row 6): a Memphis totem — vertical stack of glyphs (artifacts queued)"]
+  },
+  "lighting": {
+    "ambient_color": [0.38,0.34,0.4],
+    "ambient_energy": 0.8,
+    "directional_light": {
+      "enabled": true,
+      "direction": [-0.4,-1.0,-0.1],
+      "energy": 0.85
+    }
+  },
+  "settings": {
+    "player_spawn_height": 0.5,
+    "floor_tile_size": 1.0
+  },
+  "layers": {
+    "structure": [
+      ["3","3","3","3","3","3","3","3","3","3","3","3"],
+      ["2","2","2","2","2","2","2","2","2","2","2","2"],
+      ["2","2","2","2","2","2","2","2","2","2","2","2"],
+      ["2","2","2","2","2","2","2","2","2","2","2","2"],
+      ["2","2","2","2","2","2","2","2","2","2","2","2"],
+      ["2","2","2","2","2","2","2","2","2","2","2","2"],
+      ["3","3","3","3","3","3","3","3","3","3","3","3"]
+    ],
+    "utilities": [
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," ","sp"," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," ","t"]
+    ],
+    "interactables": [
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," ","facade_builder:180:1.0#plan_path:res://commons/facade_parts/presets/superstudio_grid.json"," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" ","science_screen:180:1.2"," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," ","facade_builder:0:1.0#plan_path:res://commons/facade_parts/presets/memphis_totem.json"," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "]
+    ]
+  }
+}

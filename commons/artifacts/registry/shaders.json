@@ -36,7 +36,7 @@
 			],
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 5,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -48,7 +48,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 9,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -145,7 +147,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 1,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -157,7 +159,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 506,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -246,7 +250,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 2,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -258,7 +262,9 @@
 				"orientation": "face_approach",
 				"isolation": 1,
 				"cluster_with": [],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 608,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -347,7 +353,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 2,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -359,7 +365,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 2499,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -460,7 +468,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 1,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -472,7 +480,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 2550,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -559,7 +569,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 2,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -571,7 +581,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 390,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -654,7 +666,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -725,7 +739,7 @@
 			},
 			"spatial_needs": {
 				"platform": "sunken",
-				"footprint_cells": 2,
+				"footprint_cells": 4,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -737,7 +751,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 4,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -806,7 +822,7 @@
 			],
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 5,
+				"footprint_cells": 1,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -818,7 +834,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -909,7 +927,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 2,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -921,7 +939,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1073,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -1022,7 +1042,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 3,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -1034,7 +1054,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1073,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -1134,7 +1156,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 1,
+				"footprint_cells": 3,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -1146,7 +1168,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 3,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -1217,7 +1241,7 @@
 			],
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 1,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -1229,7 +1253,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 36,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -1318,7 +1344,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 2,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -1330,7 +1356,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 210,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -1434,7 +1462,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 1,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -1446,7 +1474,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 210,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -1536,7 +1566,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 2,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -1548,7 +1578,9 @@
 				"orientation": "face_approach",
 				"isolation": 1,
 				"cluster_with": [],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 100,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -1640,7 +1672,7 @@
 			},
 			"spatial_needs": {
 				"platform": "sunken",
-				"footprint_cells": 2,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -1652,7 +1684,9 @@
 				"orientation": "face_approach",
 				"isolation": 1,
 				"cluster_with": [],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 288,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -1761,7 +1795,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 1,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -1773,7 +1807,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 900,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -1837,7 +1873,7 @@
 			],
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 5,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -1849,7 +1885,9 @@
 				"orientation": "face_approach",
 				"isolation": 1,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 9,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -1970,7 +2008,7 @@
 			},
 			"spatial_needs": {
 				"platform": "table",
-				"footprint_cells": 3,
+				"footprint_cells": 4,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -1982,7 +2020,9 @@
 				"orientation": "face_approach",
 				"isolation": 1,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 4,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -2068,7 +2108,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 2,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -2086,7 +2126,9 @@
 					"colors",
 					"shapes"
 				],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 28,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -2176,7 +2218,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 2,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -2194,7 +2236,9 @@
 					"feeds",
 					"shader_03_shapes"
 				],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 22,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -2284,7 +2328,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 2,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -2302,7 +2346,9 @@
 					"aliasing",
 					"feeds"
 				],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 22,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -2392,7 +2438,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 2,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -2410,7 +2456,9 @@
 					"applied",
 					"shapes"
 				],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 22,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -2506,7 +2554,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 2,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -2524,7 +2572,9 @@
 					"shader_04",
 					"gateway"
 				],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 22,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -2616,7 +2666,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 2,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -2634,7 +2684,9 @@
 					"shader_08_cellularnoise",
 					"procedural"
 				],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 16,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -2724,7 +2776,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 2,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -2742,7 +2794,9 @@
 					"feeds",
 					"shader_09_fbm"
 				],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 22,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -2833,7 +2887,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 2,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -2851,7 +2905,9 @@
 					"partitioning",
 					"connects"
 				],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 16,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -2942,7 +2998,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 2,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -2960,7 +3016,9 @@
 					"every",
 					"procedural"
 				],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 22,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -3050,7 +3108,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 2,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -3068,7 +3126,9 @@
 					"shader_09",
 					"noise"
 				],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 12,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -3164,7 +3224,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 2,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -3182,7 +3242,9 @@
 					"question",
 					"surface"
 				],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 55,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -3276,7 +3338,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 2,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -3294,7 +3356,9 @@
 					"sequence",
 					"stacks"
 				],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 100,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -3387,7 +3451,7 @@
 			},
 			"spatial_needs": {
 				"platform": "sunken",
-				"footprint_cells": 2,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -3405,7 +3469,9 @@
 					"synthesizes",
 					"wallpaper"
 				],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 175,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -3510,7 +3576,7 @@
 			},
 			"spatial_needs": {
 				"platform": "pedestal",
-				"footprint_cells": 2,
+				"footprint_cells": 5,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -3528,7 +3594,9 @@
 					"dictionary",
 					"indexes"
 				],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 5,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -3595,7 +3663,7 @@
 			],
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 5,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -3607,7 +3675,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 9,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -3703,7 +3773,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 3,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -3715,7 +3785,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 14,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -3803,7 +3875,7 @@
 			},
 			"spatial_needs": {
 				"platform": "sunken",
-				"footprint_cells": 2,
+				"footprint_cells": 1,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -3815,7 +3887,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -3906,7 +3980,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 2,
+				"footprint_cells": 1,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -3918,7 +3992,9 @@
 				"orientation": "face_approach",
 				"isolation": 1,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -4002,7 +4078,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 2,
+				"footprint_cells": 1,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -4020,7 +4096,9 @@
 					"pattern_maker_station",
 					"interactive"
 				],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -4101,7 +4179,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 2,
+				"footprint_cells": 1,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -4113,7 +4191,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [

@@ -41,8 +41,8 @@ var slider_max_mag: float = 2.5
 # ── Node references ──────────────────────────────────────────────────────────
 var vector_a: Node3D
 var vector_b: Node3D
-var info_label: Label3D            # live three-line substitution (left column)
-var readout_label: Label3D         # billboarded headline "a.b = ... theta = ..."
+var info_label: Label            # live three-line substitution (left column)
+var readout_label: Label           # 2D headline on the plate's 2D-in-3D display
 var arc_label: Label3D             # theta at the arc midpoint
 var bar_caption_label: Label3D     # "alignment = cos theta = +0.79"
 var _angle_arc: MultiMeshInstance3D
@@ -70,6 +70,8 @@ var _puck_pulse: float = 0.0       # decays 1 -> 0 after a zero crossing
 const SLIDER_SCENE_LOCAL := preload("res://commons/interactables/slider_horizontal.tscn")
 const DIAL_SCENE := preload("res://commons/interactables/dial_smooth.tscn")
 const BUTTON_SCENE := preload("res://commons/interactables/push_button.tscn")
+const ControlPanelScript = preload("res://commons/ui/control_panel.gd")
+var _control_panel: Node3D
 
 
 func _ready() -> void:
@@ -108,9 +110,6 @@ func build_scene() -> void:
 		"a.b is one number:\nhow much two\ndirections agree.")
 	_build_literal_form_tokens()
 
-	# Billboarded headline above the arrows.
-	readout_label = create_readout(Vector3(0.0, 1.75, 0.0), COLOR_DERIVED)
-
 	# Agreement rail + sliding puck (the only animated indicator).
 	_build_agreement_bar()
 
@@ -119,6 +118,10 @@ func build_scene() -> void:
 
 	# SNAP 90 deg button: park b perpendicular to a.
 	_build_snap_button()
+
+	# Readout display integrated into the top of the plate (built after the panel).
+	if _control_panel:
+		readout_label = _control_panel.add_readout("")
 
 
 # ═════════════════════════════════════════════════════════════════════════════
@@ -390,14 +393,14 @@ func _haptic_tick() -> void:
 # ═════════════════════════════════════════════════════════════════════════════
 
 func _build_magnitude_dial() -> void:
-	_mag_dial = DIAL_SCENE.instantiate()
-	_mag_dial.name = "MagnitudeDial"
-	# Front-left lip of the plinth.
-	_mag_dial.position = Vector3(-0.3, 0.16, 0.85) * SCENE_SCALE
-	_mag_dial.rotation_degrees = Vector3(-30.0, 0.0, 0.0)
-	add_child(_mag_dial)
-	if _mag_dial.has_method("set_param_name"):
-		_mag_dial.call("set_param_name", "|b|")
+	# Build the shared Braun ControlPanel (dial first, SNAP added next) at the
+	# front lip of the plinth — standard spacing + orientation + baked labels.
+	_control_panel = ControlPanelScript.new()
+	_control_panel.name = "ControlPlate"
+	_control_panel.position = Vector3(0.0, 0.16, 0.85) * SCENE_SCALE
+	add_child(_control_panel)
+
+	_mag_dial = _control_panel.add_dial("|b|", "|b|")
 	if _mag_dial.has_method("set_range"):
 		_mag_dial.call("set_range", slider_min_mag, slider_max_mag)
 	if _mag_dial.has_method("set_normalized_value"):
@@ -427,13 +430,12 @@ func _on_mag_dial_moved(_angle) -> void:
 # ═════════════════════════════════════════════════════════════════════════════
 
 func _build_snap_button() -> void:
-	_snap_button = BUTTON_SCENE.instantiate()
-	_snap_button.name = "Snap90Button"
-	_snap_button.position = Vector3(0.3, 0.16, 0.85) * SCENE_SCALE
-	_snap_button.rotation_degrees = Vector3(-30.0, 0.0, 0.0)
+	# Add SNAP to the shared ControlPanel built in _build_magnitude_dial.
+	if _control_panel == null:
+		return
+	_snap_button = _control_panel.add_button("SNAP 90")
 	_snap_button.set("pressed_color", COLOR_GREY)
 	_snap_button.set("released_color", Color(0.9, 0.9, 0.93))
-	add_child(_snap_button)
 	if _snap_button.has_signal("pressed"):
 		_snap_button.connect("pressed", Callable(self, "_on_snap_pressed"))
 	else:
@@ -442,10 +444,6 @@ func _build_snap_button() -> void:
 			inner.connect("button_pressed", Callable(self, "_on_snap_inner"))
 	if _snap_button.has_method("update_colors"):
 		_snap_button.call_deferred("update_colors")
-
-	var snap_lbl := _make_label("SNAP 90", COLOR_GREY, 16)
-	snap_lbl.position = Vector3(0.3, 0.27, 0.85) * SCENE_SCALE
-	add_child(snap_lbl)
 
 
 func _on_snap_pressed() -> void:

@@ -74,23 +74,23 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 func _read_metadata_overrides() -> void:
 	if has_meta("config_belt_length"):
-		belt_length = float(String(get_meta("config_belt_length")))
+		belt_length = float(str(get_meta("config_belt_length")))
 	if has_meta("config_belt_width"):
-		belt_width = float(String(get_meta("config_belt_width")))
+		belt_width = float(str(get_meta("config_belt_width")))
 	if has_meta("config_belt_height"):
-		belt_height = float(String(get_meta("config_belt_height")))
+		belt_height = float(str(get_meta("config_belt_height")))
 	if has_meta("config_direction_arrow_count"):
-		direction_arrow_count = int(String(get_meta("config_direction_arrow_count")))
+		direction_arrow_count = int(str(get_meta("config_direction_arrow_count")))
 	if has_meta("config_belt_color"):
-		belt_color = _parse_color(String(get_meta("config_belt_color")), belt_color)
+		belt_color = _parse_color(str(get_meta("config_belt_color")), belt_color)
 	if has_meta("config_support_color"):
-		support_color = _parse_color(String(get_meta("config_support_color")), support_color)
+		support_color = _parse_color(str(get_meta("config_support_color")), support_color)
 	if has_meta("config_accent_color"):
-		accent_color = _parse_color(String(get_meta("config_accent_color")), accent_color)
+		accent_color = _parse_color(str(get_meta("config_accent_color")), accent_color)
 	if has_meta("config_arrow_color"):
-		arrow_color = _parse_color(String(get_meta("config_arrow_color")), arrow_color)
+		arrow_color = _parse_color(str(get_meta("config_arrow_color")), arrow_color)
 	if has_meta("config_support_legs"):
-		support_legs = int(String(get_meta("config_support_legs")))
+		support_legs = int(str(get_meta("config_support_legs")))
 
 
 func _clear_built_children() -> void:

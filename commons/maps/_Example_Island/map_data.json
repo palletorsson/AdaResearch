@@ -14,9 +14,7 @@
       "difficulty": "beginner",
       "category": "example",
       "estimated_time": "2-3 minutes",
-      "learning_objectives": [
-        "Example map — test only"
-      ]
+      "learning_objectives": ["Example map — test only"]
     },
     "title": "What You Cannot Reach"
   },
@@ -34,37 +32,18 @@
     "summary": "_Example_Island - Main platform + unreachable island",
     "layout": "9x7 grid. Main platform cols 0-4 (rows 0-5). Island cols 7-8 (rows 2-4). Void gap at cols 5-6.",
     "objective": "Demonstrate intentional unreachability as narrative device.",
-    "key_elements": [
-      "Spawn at (1,0) facing south",
-      "origin at (2,2) — teaching on main platform",
-      "line at (1,4), cube_scene at (3,4) — exploration",
-      "dark_sphere at (2,5), ds utility — reflection",
-      "sphere on island at (8,3) — visible but unreachable",
-      "Teleporter at (2,6) on void"
-    ]
+    "key_elements": ["Spawn at (1,0) facing south","origin at (2,2) — teaching on main platform","line at (1,4), cube_scene at (3,4) — exploration","dark_sphere at (2,5), ds utility — reflection","sphere on island at (8,3) — visible but unreachable","Teleporter at (2,6) on void"]
   },
   "subtitles": {
     "island": "Some things exist only to be seen from a distance."
   },
   "lighting": {
-    "ambient_color": [
-      0.3,
-      0.3,
-      0.4
-    ],
+    "ambient_color": [0.3,0.3,0.4],
     "ambient_energy": 0.5,
     "directional_light": {
       "enabled": true,
-      "direction": [
-        -0.4,
-        -0.7,
-        -0.4
-      ],
-      "color": [
-        1.0,
-        0.9,
-        0.8
-      ],
+      "direction": [-0.4,-0.7,-0.4],
+      "color": [1.0,0.9,0.8],
       "energy": 1.0
     }
   },
@@ -78,11 +57,7 @@
     "initial_tile_visibility": "hidden_except_corners",
     "background": {
       "type": "sky",
-      "color": [
-        0.1,
-        0.15,
-        0.4
-      ]
+      "color": [0.1,0.15,0.4]
     }
   },
   "layers": {

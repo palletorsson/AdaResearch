@@ -82,29 +82,31 @@
     {
       "id": "scaffold_exit_sign",
       "lookup_name": "exit_sign",
+      "lookupName": "exit_sign",
+      "displayName": "EXIT (above door)",
+      "display_name": "EXIT (above door)",
       "position": [
         2.75,
         0.45,
         3.5
       ],
       "rotation_y": 180,
-      "config": {},
-      "lookupName": "exit_sign",
       "rotationY": 180,
-      "displayName": "EXIT (above door)"
+      "config": {}
     },
     {
       "id": "scaffold_placard",
       "lookup_name": "wall_placard",
       "lookupName": "wall_placard",
       "displayName": "Wall placard (curatorial caption)",
+      "display_name": "Wall placard (curatorial caption)",
       "position": [
-        3.92,
-        1.9395274470779431,
-        2.139437066008143
+        3.96500015258789,
+        1.79999995231628,
+        1.89999997615814
       ],
-      "rotation_y": -90,
-      "rotationY": -90,
+      "rotation_y": 270.000000683245,
+      "rotationY": 270.000000683245,
       "config": {
         "title": "THE TRACE",
         "meta": "PRIMITIVES · 03 · 2036",
@@ -114,15 +116,17 @@
     },
     {
       "id": "fire_extinguisher_dx366c",
+      "lookup_name": "fire_extinguisher",
       "lookupName": "fire_extinguisher",
       "displayName": "Fire Extinguisher",
+      "display_name": "Fire Extinguisher",
       "position": [
         3.6507272824504993,
         0.35,
         3.33
       ],
-      "rotationY": 180,
       "rotation_y": 180,
+      "rotationY": 180,
       "config": {}
     },
     {
@@ -130,6 +134,7 @@
       "lookup_name": "palm_scanner",
       "lookupName": "palm_scanner",
       "displayName": "Palm Scanner (door entry)",
+      "display_name": "Palm Scanner (door entry)",
       "position": [
         0.8,
         0,
@@ -149,10 +154,11 @@
       "lookup_name": "trace_chalkboard",
       "lookupName": "trace_chalkboard",
       "displayName": "Trace Chalkboard",
+      "display_name": "Trace Chalkboard",
       "position": [
         -3.9,
-        2.15,
-        1
+        3.0166666666666666,
+        0.9666666666666668
       ],
       "rotation_y": 90,
       "rotationY": 90,
@@ -165,6 +171,7 @@
       "lookup_name": "hand_telemetry_diptych",
       "lookupName": "hand_telemetry_diptych",
       "displayName": "Hand telemetry diptych (left + right)",
+      "display_name": "Hand telemetry diptych (left + right)",
       "position": [
         0,
         0.7,
@@ -181,6 +188,7 @@
       "lookup_name": "automatic_writing_desk",
       "lookupName": "automatic_writing_desk",
       "displayName": "Automatic writing desk (head-driven)",
+      "display_name": "Automatic writing desk (head-driven)",
       "position": [
         -1.4,
         0,

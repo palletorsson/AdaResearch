@@ -1,0 +1,59 @@
+{
+  "timestamp": "2026-05-05T07:30:00Z",
+  "phase": "baseline",
+  "mode": "full",
+  "scheduled_task": "ada-morning-breath",
+  "pipeline_summary": {
+    "scoring_status": "OK",
+    "all_19_spine_at_least_stage_5": true,
+    "stage_7_polish": ["randomness"],
+    "stage_6_vr_testing": [
+      "primitives", "transformation", "color", "forces", "wavefunctions",
+      "noise", "cellularautomata", "fractals", "lsystems", "proceduralgeneration",
+      "isosurfaces", "swarmintelligence", "machinelearning", "foundationscrisis",
+      "qfeplaboratory", "postfoundationscrisis", "graphtheory"
+    ],
+    "stage_2_documentation": [
+      {"id": "array_tutorial", "doc_pct": 18, "art_pct": 60},
+      {"id": "softbodies", "doc_pct": 29, "art_pct": 64}
+    ],
+    "stage_1_structure": ["boolean_surfaces"],
+    "global_avg_pipeline": 5.43
+  },
+  "heat_map_top_5": [
+    {"item": "encyclopedia", "temp": 65, "reason": "active (1 recent commits)"},
+    {"item": "command", "temp": 65, "reason": "active (1 recent commits)"},
+    {"item": "pipeline_scorer_token_parsing", "temp": 60, "reason": "deep discovery (logged)"},
+    {"item": "pipeline_scorer_empty_sequence_schema", "temp": 60, "reason": "deep discovery (resolved 2026-05-03)"},
+    {"item": "tscn uid path drift", "temp": 60, "reason": "deep discovery (resolved 2026-05-03)"}
+  ],
+  "garden_health": {
+    "total_artifacts": 2103,
+    "voiced": 923,
+    "embodied": 324,
+    "reaching": 489,
+    "phantom_limbs": 736,
+    "voice_coverage_pct": 43,
+    "embodiment_rate_pct": 35,
+    "scattered_at_threshold": [
+      {"id": "wavefunctions", "voiced": 64, "total": 105, "pct": 61.0},
+      {"id": "randomness", "voiced": 36, "total": 73, "pct": 49.3}
+    ]
+  },
+  "release_gates": {
+    "overall": "FAIL",
+    "passing_count": 3,
+    "A_sequence_contract": "PASS",
+    "B_artifact_registry_integrity": "FAIL",
+    "B_blocking_metric": "missing_scene_path == 2",
+    "B_sub_issues": {
+      "missing_scene_path": ["dna_facade_classical", "dna_mesh_grammar_gen00_petals"],
+      "missing_include_in_map_data": ["spine_portal"],
+      "missing_map_ready": ["spine_portal"],
+      "disallowed_scene_prefix": ["VRBrush"]
+    },
+    "C_map_validation": "PASS",
+    "D_lab_progression_continuity": "PASS"
+  },
+  "trajectory_note": "global_avg flat at 5.43 since 2026-04-30. Pipeline VR-bottlenecked. Gate B regressed 2026-05-04 — 3 entries to repair. Garden randomness at 49.3% (1 voice from 50% threshold). wavefunctions at 61% has headroom toward 70%."
+}

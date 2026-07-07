@@ -15,11 +15,7 @@
       "difficulty": "beginner",
       "category": "bricolage",
       "estimated_time": "5-6 minutes",
-      "learning_objectives": [
-        "Affordance thinking",
-        "Parts defined by what they do",
-        "Context activates affordance"
-      ]
+      "learning_objectives": ["Affordance thinking","Parts defined by what they do","Context activates affordance"]
     }
   },
   "utility_definitions": {
@@ -41,31 +37,15 @@
     "summary": "Bricolage_Affordances - What Parts Can Do",
     "layout": "13Ã—15 demonstration space with affordance stations",
     "objective": "Shift from naming parts to understanding what they afford",
-    "key_elements": [
-      "Cylinder affordance station (column, beam, axle)",
-      "Plane affordance station (seat, wall, shelf)",
-      "Sphere affordance station (joint, node, hub)"
-    ]
+    "key_elements": ["Cylinder affordance station (column, beam, axle)","Plane affordance station (seat, wall, shelf)","Sphere affordance station (joint, node, hub)"]
   },
   "lighting": {
-    "ambient_color": [
-      0.5,
-      0.45,
-      0.4
-    ],
+    "ambient_color": [0.5,0.45,0.4],
     "ambient_energy": 0.7,
     "directional_light": {
       "enabled": true,
-      "direction": [
-        -0.3,
-        -0.8,
-        -0.3
-      ],
-      "color": [
-        1.0,
-        0.95,
-        0.85
-      ],
+      "direction": [-0.3,-0.8,-0.3],
+      "color": [1.0,0.95,0.85],
       "energy": 1.1
     }
   },
@@ -78,11 +58,7 @@
     "initial_tile_visibility": "visible",
     "background": {
       "type": "sky",
-      "color": [
-        0.25,
-        0.22,
-        0.2
-      ]
+      "color": [0.25,0.22,0.2]
     }
   },
   "layers": {

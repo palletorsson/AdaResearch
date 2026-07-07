@@ -19,6 +19,8 @@
 extends Node3D
 class_name BiasFromInside
 
+const BakedText = preload("res://commons/utils/baked_text_albedo.gd")
+
 # --- Terms ---
 # Marginalized terms cluster tightly in compressed space
 var _marginalized_terms: Array[String] = [
@@ -51,10 +53,13 @@ var _default_positions_compressed: Array[Vector3] = []
 
 var _marginalized_multimesh: MultiMeshInstance3D
 var _default_multimesh: MultiMeshInstance3D
-var _marginalized_labels: Array[Label3D] = []
-var _default_labels: Array[Label3D] = []
-var _title_label: Label3D
-var _perspective_label: Label3D
+# Per-term tags: integrated 2D-in-3D display boards (baked text), one per sphere,
+# spaced by their sphere positions — replaces 24 bare floating Label3D nodes.
+var _marginalized_tags: Array[Node3D] = []
+var _default_tags: Array[Node3D] = []
+# Consolidated header: title + live perspective readout on ONE baked panel.
+var _header: Node3D
+var _header_cache: String = ""
 var _controls: Node
 
 # Materials
@@ -180,47 +185,73 @@ func _create_multimeshes() -> void:
 # ------------------------------------------------------------------
 
 func _create_labels() -> void:
+	# Per-term tags — each a small integrated display board (baked text on a
+	# framed face, billboarded). Warm-pink for marginalized, cool-grey for default.
+	# Positions are driven by their sphere in _apply_perspective, so they stay
+	# spaced with the data and never overlap the header.
 	for i in range(_marginalized_terms.size()):
-		var lbl := Label3D.new()
-		lbl.text = _marginalized_terms[i]
-		lbl.font_size = label_font_size
-		lbl.modulate = Color(1, 0.6, 0.8)
-		lbl.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-		lbl.no_depth_test = true
-		lbl.pixel_size = 0.001
-		add_child(lbl)
-		_marginalized_labels.append(lbl)
+		var tag := BakedText.make_tag(
+			_marginalized_terms[i], Color(1, 0.7, 0.85), 0.035,
+			Color(0.14, 0.05, 0.10), true, Color(0.85, 0.30, 0.55))
+		if tag:
+			add_child(tag)
+			_marginalized_tags.append(tag)
 
 	for i in range(_default_terms.size()):
-		var lbl := Label3D.new()
-		lbl.text = _default_terms[i]
-		lbl.font_size = label_font_size
-		lbl.modulate = Color(0.75, 0.8, 0.85)
-		lbl.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-		lbl.no_depth_test = true
-		lbl.pixel_size = 0.001
-		add_child(lbl)
-		_default_labels.append(lbl)
+		var tag := BakedText.make_tag(
+			_default_terms[i], Color(0.82, 0.86, 0.9), 0.035,
+			Color(0.07, 0.08, 0.10), true, Color(0.4, 0.46, 0.55))
+		if tag:
+			add_child(tag)
+			_default_tags.append(tag)
 
 
+# The title + live perspective readout consolidated onto ONE baked text-block
+# panel at the top — the header. Rebuilt only when the readout line changes
+# (cache-guarded via _header_cache), so per-frame slider drags don't re-bake.
 func _create_title() -> void:
-	_title_label = Label3D.new()
-	_title_label.text = "Embedding Space: View From Inside"
-	_title_label.font_size = 20
-	_title_label.modulate = Color(1, 1, 1, 0.9)
-	_title_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	_title_label.position = Vector3(0, 0.55, 0)
-	_title_label.pixel_size = 0.001
-	add_child(_title_label)
+	_header = Node3D.new()
+	_header.name = "Header"
+	_header.position = Vector3(0, 0.52, 0)
+	add_child(_header)
+	_rebuild_header("DEFAULT PERSPECTIVE — everything looks fair", Color(0.7, 0.75, 0.8))
 
-	_perspective_label = Label3D.new()
-	_perspective_label.text = "DEFAULT PERSPECTIVE"
-	_perspective_label.font_size = 16
-	_perspective_label.modulate = Color(0.7, 0.75, 0.8, 0.8)
-	_perspective_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	_perspective_label.position = Vector3(0, 0.48, 0)
-	_perspective_label.pixel_size = 0.001
-	add_child(_perspective_label)
+
+func _rebuild_header(readout: String, readout_color: Color) -> void:
+	if readout == _header_cache:
+		return
+	_header_cache = readout
+	for child in _header.get_children():
+		child.queue_free()
+
+	# Opaque backing plate so the two lines read as one board. A single space
+	# gives the panel content (empty text returns null from the helper).
+	var plate := BakedText.make_panel_mesh(
+		" ", Color(0.05, 0.06, 0.08, 0.92), Color(0.05, 0.06, 0.08),
+		Vector2(0.62, 0.14), 900, false)
+	if plate:
+		plate.position.z = -0.004
+		var pm = plate.material_override
+		if pm is StandardMaterial3D:
+			pm.billboard_mode = BaseMaterial3D.BILLBOARD_ENABLED
+		_header.add_child(plate)
+
+	# Two stacked lines on the one surface: title, then the live readout.
+	var block := BakedText.make_text_block(
+		["Embedding Space: View From Inside", readout],
+		Color(1, 1, 1), 0.05, 0.58, 0.012, true)
+	# Tint only the readout (second child) with the perspective colour.
+	var lines := block.get_children()
+	if lines.size() >= 2 and lines[1] is MeshInstance3D:
+		var lm = lines[1].material_override
+		if lm is StandardMaterial3D:
+			lm.albedo_color = readout_color
+	for line in block.get_children():
+		if line is MeshInstance3D:
+			var lm2 = line.material_override
+			if lm2 is StandardMaterial3D:
+				lm2.billboard_mode = BaseMaterial3D.BILLBOARD_ENABLED
+	_header.add_child(block)
 
 
 # ------------------------------------------------------------------
@@ -267,8 +298,8 @@ func _apply_perspective(blend: float) -> void:
 		var xf := Transform3D.IDENTITY
 		xf.origin = pos
 		_marginalized_multimesh.multimesh.set_instance_transform(i, xf)
-		if i < _marginalized_labels.size():
-			_marginalized_labels[i].position = pos + Vector3(0, sphere_radius + 0.015, 0)
+		if i < _marginalized_tags.size():
+			_marginalized_tags[i].position = pos + Vector3(0, sphere_radius + 0.03, 0)
 
 	# Lerp default term positions
 	for i in range(_default_terms.size()):
@@ -278,19 +309,17 @@ func _apply_perspective(blend: float) -> void:
 		var xf := Transform3D.IDENTITY
 		xf.origin = pos
 		_default_multimesh.multimesh.set_instance_transform(i, xf)
-		if i < _default_labels.size():
-			_default_labels[i].position = pos + Vector3(0, sphere_radius + 0.015, 0)
+		if i < _default_tags.size():
+			_default_tags[i].position = pos + Vector3(0, sphere_radius + 0.03, 0)
 
-	# Update perspective label and colors
+	# Update the consolidated header readout — rebuilt only when the line text
+	# actually changes (cache-guarded inside _rebuild_header).
 	if blend < 0.3:
-		_perspective_label.text = "DEFAULT PERSPECTIVE — everything looks fair"
-		_perspective_label.modulate = Color(0.7, 0.75, 0.8, 0.8)
+		_rebuild_header("DEFAULT PERSPECTIVE — everything looks fair", Color(0.7, 0.75, 0.8))
 	elif blend < 0.7:
-		_perspective_label.text = "SHIFTING... space is warping"
-		_perspective_label.modulate = Color(0.9, 0.7, 0.5, 0.9)
+		_rebuild_header("SHIFTING... space is warping", Color(0.9, 0.7, 0.5))
 	else:
-		_perspective_label.text = "COMPRESSED PERSPECTIVE — feel the crowding"
-		_perspective_label.modulate = Color(1.0, 0.4, 0.6, 1.0)
+		_rebuild_header("COMPRESSED PERSPECTIVE — feel the crowding", Color(1.0, 0.4, 0.6))
 
 	# Marginalized spheres glow more as compression increases
 	_marginalized_mat.emission_energy_multiplier = 0.4 + blend * 0.8

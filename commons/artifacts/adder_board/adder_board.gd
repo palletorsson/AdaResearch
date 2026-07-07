@@ -51,6 +51,7 @@ const ORIGIN_MARGIN_Y: float = 0.16
 
 # Preloaded interactable (toggle button); the slider scene comes from the base.
 const BUTTON_SCENE := preload("res://commons/interactables/push_button.tscn")
+const ControlPanelScript = preload("res://commons/ui/control_panel.gd")
 
 # ── Tunable DNA (overridable via apply_grid_config) ───────────────────────────
 var a_start: Vector2 = Vector2(3.0, 2.0)   # initial a in grid cells
@@ -76,7 +77,7 @@ var _label_b: Label3D = null
 var _label_result: Label3D = null
 var _inequality_needle: Node3D = null       # brass needle: pegs at |a+b| == |a|+|b|
 
-var _info_label: Label3D = null             # left column, live numbers
+var _info_label: Label = null             # left column, live numbers
 var _readout_label: Label3D = null          # billboarded headline above the action
 var _inequality_label: Label3D = null       # billboarded |a+b| <= |a|+|b| readout
 
@@ -510,34 +511,38 @@ func _build_controls() -> void:
 	var rail_y: float = pedestal_height - 0.18
 	var rail_z: float = 0.45
 
-	# |a| slider (left).
-	_slider_a = create_magnitude_slider(
-		Vector3(-0.45, rail_y, rail_z), "|a|", SLIDER_MIN_MAG, SLIDER_MAX_MAG,
-		inverse_lerp(SLIDER_MIN_MAG, SLIDER_MAX_MAG, a_start.length()))
-	if _slider_a and _slider_a.has_signal("slider_moved"):
-		_slider_a.connect("slider_moved", Callable(self, "_on_slider_a_moved"))
+	# Seat |a|, |b| sliders + the toggle on the canonical Braun ControlPanel.
+	var panel = ControlPanelScript.new()
+	panel.name = "ControlPlate"
+	panel.position = Vector3(0.0, rail_y, rail_z) * SCENE_SCALE
+	add_child(panel)
 
-	# |b| slider (right).
-	_slider_b = create_magnitude_slider(
-		Vector3(0.45, rail_y, rail_z), "|b|", SLIDER_MIN_MAG, SLIDER_MAX_MAG,
-		inverse_lerp(SLIDER_MIN_MAG, SLIDER_MAX_MAG, b_start.length()))
-	if _slider_b and _slider_b.has_signal("slider_moved"):
-		_slider_b.connect("slider_moved", Callable(self, "_on_slider_b_moved"))
+	_slider_a = panel.add_slider("|a|", "|a|")
+	_config_mag_slider(_slider_a, a_start.length(), "_on_slider_a_moved")
 
-	# Chain / parallelogram toggle button (centre rail).
-	_toggle_button = BUTTON_SCENE.instantiate()
-	_toggle_button.position = Vector3(0.0, rail_y + 0.02, rail_z) * SCENE_SCALE
+	# Toggle in the middle: CHAIN / PARALLELOGRAM.
+	_toggle_button = panel.add_button("CHAIN / PARA")
 	_toggle_button.set("pressed_color", COLOR_RESULT)
 	_toggle_button.set("released_color", COLOR_A)
-	add_child(_toggle_button)
 	if _toggle_button.has_signal("pressed"):
 		_toggle_button.connect("pressed", Callable(self, "_on_toggle_pressed"))
 	if _toggle_button.has_method("update_colors"):
 		_toggle_button.call_deferred("update_colors")
 
-	var toggle_lbl: Label3D = _make_label("CHAIN / PARALLELOGRAM", Color(0.8, 0.88, 1.0), 16)
-	toggle_lbl.position = Vector3(0.0, rail_y + 0.14, rail_z) * SCENE_SCALE
-	add_child(toggle_lbl)
+	_slider_b = panel.add_slider("|b|", "|b|")
+	_config_mag_slider(_slider_b, b_start.length(), "_on_slider_b_moved")
+
+
+## Wire a magnitude slider to SLIDER_MIN_MAG..MAX_MAG with its start length + handler.
+func _config_mag_slider(slider: Node3D, mag_length: float, handler: String) -> void:
+	if slider == null:
+		return
+	if slider.has_method("set_range"):
+		slider.call("set_range", SLIDER_MIN_MAG, SLIDER_MAX_MAG)
+	if slider.has_method("set_normalized_value"):
+		slider.call("set_normalized_value", inverse_lerp(SLIDER_MIN_MAG, SLIDER_MAX_MAG, mag_length))
+	if slider.has_signal("slider_moved"):
+		slider.connect("slider_moved", Callable(self, handler))
 
 
 func _on_slider_a_moved(_v) -> void:

@@ -14,12 +14,7 @@
       "difficulty": "intermediate",
       "category": "shaders",
       "estimated_time": "5-8 minutes",
-      "learning_objectives": [
-        "Basic FBM",
-        "Ridged multifractal",
-        "Turbulence",
-        "FBM domain warping"
-      ]
+      "learning_objectives": ["Basic FBM","Ridged multifractal","Turbulence","FBM domain warping"]
     },
     "title": "Layered Noise Landscapes"
   },
@@ -39,24 +34,12 @@
     }
   },
   "lighting": {
-    "ambient_color": [
-      0.5,
-      0.5,
-      0.55
-    ],
+    "ambient_color": [0.5,0.5,0.55],
     "ambient_energy": 0.8,
     "directional_light": {
       "enabled": true,
-      "direction": [
-        -0.3,
-        -0.8,
-        -0.3
-      ],
-      "color": [
-        1.0,
-        0.98,
-        0.95
-      ],
+      "direction": [-0.3,-0.8,-0.3],
+      "color": [1.0,0.98,0.95],
       "energy": 1.0
     }
   },
@@ -67,11 +50,7 @@
     "enable_physics": true,
     "background": {
       "type": "sky",
-      "color": [
-        0.15,
-        0.15,
-        0.2
-      ]
+      "color": [0.15,0.15,0.2]
     }
   },
   "layers": {

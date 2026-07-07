@@ -19,6 +19,7 @@ const ARTIFACT_ANGLES: Array[Dictionary] = [
 	{ "name": "front",  "yaw": 0.0,    "pitch": 0.1   },  # nearly head-on, slight downward
 	{ "name": "left",   "yaw": 0.6,    "pitch": 0.2   },  # 3/4 from left
 	{ "name": "right",  "yaw": -0.6,   "pitch": 0.2   },  # 3/4 from right
+	{ "name": "side",   "yaw": 1.5708, "pitch": 0.06  },  # true left profile — reads depth/height
 	{ "name": "top",    "yaw": 0.001,  "pitch": 1.2   },  # mostly down, not straight
 ]
 

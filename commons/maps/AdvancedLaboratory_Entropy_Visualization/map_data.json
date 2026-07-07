@@ -14,10 +14,7 @@
       "difficulty": "advanced",
       "category": "advancedlaboratory",
       "estimated_time": "5-7 minutes",
-      "learning_objectives": [
-        "Entropy visualization",
-        "Thermodynamic concepts"
-      ]
+      "learning_objectives": ["Entropy visualization","Thermodynamic concepts"]
     }
   },
   "utility_definitions": {
@@ -43,24 +40,12 @@
     "key_elements": []
   },
   "lighting": {
-    "ambient_color": [
-      0.3,
-      0.3,
-      0.4
-    ],
+    "ambient_color": [0.3,0.3,0.4],
     "ambient_energy": 0.5,
     "directional_light": {
       "enabled": true,
-      "direction": [
-        0.0,
-        -1.0,
-        -0.3
-      ],
-      "color": [
-        1.0,
-        0.95,
-        0.9
-      ],
+      "direction": [0.0,-1.0,-0.3],
+      "color": [1.0,0.95,0.9],
       "energy": 0.8
     }
   },
@@ -71,11 +56,7 @@
     "enable_physics": true,
     "background": {
       "type": "sky",
-      "color": [
-        0.15,
-        0.2,
-        0.3
-      ]
+      "color": [0.15,0.2,0.3]
     }
   },
   "layers": {

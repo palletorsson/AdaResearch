@@ -54,7 +54,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 2,
+				"footprint_cells": 1,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -66,7 +66,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -169,7 +171,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 2,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -290,7 +294,9 @@
 					"gradient",
 					"depends"
 				],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 2,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -393,7 +399,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 2,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -511,7 +519,9 @@
 					"unlocks",
 					"evolved_creatures"
 				],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 2,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -596,7 +606,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 2,
+				"footprint_cells": 1,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -608,7 +618,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -715,7 +727,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 5,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -727,7 +739,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 324,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -824,7 +838,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 5,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -836,7 +850,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 232,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -932,7 +948,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 5,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -944,7 +960,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 9,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -1045,7 +1063,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 5,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -1057,7 +1075,9 @@
 				"orientation": "face_approach",
 				"isolation": 1,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 324,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -1162,7 +1182,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 5,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -1174,7 +1194,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 57,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -1279,7 +1301,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 4,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -1297,7 +1319,9 @@
 					"kernels",
 					"designed"
 				],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 50,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -1397,7 +1421,7 @@
 			},
 			"spatial_needs": {
 				"platform": "sunken",
-				"footprint_cells": 5,
+				"footprint_cells": 1,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -1409,7 +1433,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -1505,7 +1531,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 5,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -1523,7 +1549,9 @@
 					"learned",
 					"kernels"
 				],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 102,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -1607,7 +1635,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 2,
+				"footprint_cells": 1,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -1619,7 +1647,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -1722,7 +1752,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 5,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -1734,7 +1764,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 80,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -1847,7 +1879,7 @@
 			},
 			"spatial_needs": {
 				"platform": "table",
-				"footprint_cells": 5,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -1865,7 +1897,9 @@
 					"boundaries",
 					"unsupervised"
 				],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 2500,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -1965,7 +1999,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 5,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -1977,7 +2011,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 57,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -2087,7 +2123,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 5,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -2099,7 +2135,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 1600,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -2187,7 +2225,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 2,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -2199,7 +2237,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 2500,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -2295,7 +2335,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 2,
+				"footprint_cells": 1,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -2307,7 +2347,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -2396,7 +2438,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 2,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 1,
@@ -2414,7 +2456,9 @@
 					"unlocks",
 					"evolved_creatures"
 				],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 400,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -2520,7 +2564,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 5,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -2538,7 +2582,9 @@
 					"unlocks",
 					"evolved_creatures"
 				],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 400,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -2636,7 +2682,7 @@
 			},
 			"spatial_needs": {
 				"platform": "table",
-				"footprint_cells": 5,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -2648,7 +2694,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 72,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -2752,7 +2800,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 5,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -2770,7 +2818,9 @@
 					"explain",
 					"contrasts"
 				],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 189,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -2867,7 +2917,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 5,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -2879,7 +2929,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 57,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -2976,7 +3028,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 2,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -2988,7 +3040,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 33,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -3092,7 +3146,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 3,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -3104,7 +3158,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 33,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -3203,7 +3259,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 5,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -3215,7 +3271,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 198,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -3317,7 +3375,7 @@
 			},
 			"spatial_needs": {
 				"platform": "sunken",
-				"footprint_cells": 5,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -3335,7 +3393,9 @@
 					"generative",
 					"depends"
 				],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 198,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -3437,7 +3497,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 5,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -3449,7 +3509,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 900,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -3547,7 +3609,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 5,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -3559,7 +3621,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 400,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -3655,7 +3719,7 @@
 			},
 			"spatial_needs": {
 				"platform": "table",
-				"footprint_cells": 2,
+				"footprint_cells": 1,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -3667,7 +3731,9 @@
 				"orientation": "face_approach",
 				"isolation": 1,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -3770,7 +3836,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 2,
+				"footprint_cells": 1,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -3788,7 +3854,9 @@
 					"behavior",
 					"adapts"
 				],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -3843,7 +3911,7 @@
 			],
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 5,
+				"footprint_cells": 1,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -3855,7 +3923,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -3953,7 +4023,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 5,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -3965,7 +4035,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 400,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -4090,7 +4162,9 @@
 					"optimizer",
 					"comparison"
 				],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 2,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -4189,7 +4263,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 5,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -4201,7 +4275,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 261,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -4308,7 +4384,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 5,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -4326,7 +4402,9 @@
 					"replaces",
 					"recurrence"
 				],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 121,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -4423,7 +4501,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 2,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -4441,7 +4519,9 @@
 					"gradient",
 					"descent"
 				],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 10,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -4540,7 +4620,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 5,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -4552,7 +4632,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 17,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -4655,7 +4737,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 5,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -4673,7 +4755,9 @@
 					"optimization",
 					"unlocks"
 				],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 224,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -4771,7 +4855,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 5,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -4783,7 +4867,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 57,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -4896,7 +4982,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 2,
+				"footprint_cells": 1,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -4914,7 +5000,9 @@
 					"counterpart",
 					"similar"
 				],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -5004,7 +5092,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 5,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -5016,7 +5104,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 80,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -5124,7 +5214,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 5,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -5142,7 +5232,9 @@
 					"without",
 					"gradient"
 				],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 144,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -5237,7 +5329,7 @@
 			},
 			"spatial_needs": {
 				"platform": "table",
-				"footprint_cells": 1,
+				"footprint_cells": 2,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -5249,7 +5341,9 @@
 				"orientation": "face_approach",
 				"isolation": 2,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 2,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -5355,7 +5449,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 5,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -5373,7 +5467,9 @@
 					"split",
 					"clustering"
 				],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 400,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -5469,7 +5565,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 5,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -5481,7 +5577,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 441,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -5582,7 +5680,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 5,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -5594,7 +5692,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 80,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -5697,7 +5797,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 5,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -5709,7 +5809,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 80,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -5801,7 +5903,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 2,
+				"footprint_cells": 1,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -5813,7 +5915,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -5896,7 +6000,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 2,
+				"footprint_cells": 1,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -5908,7 +6012,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -5997,7 +6103,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 5,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -6009,7 +6115,9 @@
 				"orientation": "face_approach",
 				"isolation": 2,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 441,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -6118,7 +6226,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 5,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -6136,7 +6244,9 @@
 					"unsupervised",
 					"contrasts"
 				],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 100,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -6222,7 +6332,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 2,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -6234,7 +6344,9 @@
 				"orientation": "face_approach",
 				"isolation": 2,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 11,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -6337,7 +6449,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 5,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -6349,7 +6461,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 60,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -6453,7 +6567,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 5,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -6465,7 +6579,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 56,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -6569,7 +6685,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 5,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -6587,7 +6703,9 @@
 					"replaces",
 					"recurrence"
 				],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 165,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -6687,7 +6805,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 5,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -6699,7 +6817,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 60,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -6804,7 +6924,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 3,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -6816,7 +6936,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 420,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -6929,7 +7051,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 5,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -6947,7 +7069,9 @@
 					"methods",
 					"opposite"
 				],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 81,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -7061,7 +7185,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 5,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -7079,7 +7203,9 @@
 					"bagging",
 					"feature"
 				],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 90,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -7108,6 +7234,42 @@
 				"approach_dir": "any",
 				"derived_at": "2026-04-29T09:39:46.152793Z",
 				"derived_from": "aabb_size + category"
+			}
+		},
+		"learn_input_pair_stand": {
+			"name": "Learn Input-Pair Stand",
+			"lookup_name": "learn_input_pair_stand",
+			"description": "Two pillars input and output with paired tokens connected by glowing threads. A glyph drifts toward the mean output. The ML learn affordance demo.",
+			"scene": "res://algorithms/machinelearning/affordance_demos/learn_input_pair_stand.tscn",
+			"category": "machinelearning",
+			"sequence": "machinelearning",
+			"artifact_type": "machinelearning",
+			"qfep_term": "Integration",
+			"capacity": "LEARN a mapping",
+			"dev_themes": [
+				"machinelearning",
+				"sieve_2026_05_13"
+			],
+			"dev_category": "machinelearning",
+			"complexity": "intermediate",
+			"tags": [
+				"catalyst_affordance",
+				"machine_learning",
+				"gradient_descent",
+				"integration"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"machinelearning"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
 			}
 		}
 	}

@@ -1,0 +1,5 @@
+A pointed-arch arcade at street level. Above it, a piano nobile of paired Gothic windows separated by lacy stone tracery — quatrefoils punched through the spandrels, foliated capitals on the colonnettes between lights. A third storey above the lot, lighter, crenellated. The whole composition symmetrical, bay-rhythmic, Italian.
+
+This is the principle hybridized. Ca' d'Oro on the Grand Canal, the Palazzo Ducale — Venice spoke two grammars at once and the buildings hold both. The Italian-Renaissance spatial structure (regular rhythm, hierarchy, cornice frame) is the *armature*. The Gothic ornamental vocabulary (pointed arches, tracery, quatrefoils) is the *vocabulary*. Substitute the column order with another tradition's grammar and the assembly principle still composes.
+
+The deeper lesson the room carries: pure styles are an invention. Living building traditions hybridize by default. The Renaissance fantasy of stylistic purity was itself an ideological choice — *this* facade is what most of the world's architecture actually looks like. Two grammars compounded, neither dissolved, both legible.

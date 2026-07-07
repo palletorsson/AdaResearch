@@ -12,10 +12,7 @@
       "category": "test",
       "difficulty": "advanced",
       "estimated_time": "2-3 minutes",
-      "learning_objectives": [
-        "Disposition pipeline testing",
-        "Archetype-aware placement"
-      ]
+      "learning_objectives": ["Disposition pipeline testing","Archetype-aware placement"]
     },
     "name": "Disposition_Test_Maze",
     "version": "1.0"
@@ -36,23 +33,11 @@
     }
   },
   "lighting": {
-    "ambient_color": [
-      0.4,
-      0.4,
-      0.5
-    ],
+    "ambient_color": [0.4,0.4,0.5],
     "ambient_energy": 0.6,
     "directional_light": {
-      "color": [
-        1.0,
-        0.9,
-        0.8
-      ],
-      "direction": [
-        -0.4,
-        -0.7,
-        -0.4
-      ],
+      "color": [1.0,0.9,0.8],
+      "direction": [-0.4,-0.7,-0.4],
       "enabled": true,
       "energy": 1.2
     }
@@ -60,11 +45,7 @@
   "settings": {
     "auto_reveal_on_entry": true,
     "background": {
-      "color": [
-        0.15,
-        0.15,
-        0.25
-      ],
+      "color": [0.15,0.15,0.25],
       "type": "sky"
     },
     "cube_size": 1.0,

@@ -15,24 +15,13 @@
 	  "difficulty": "exhibition",
 	  "category": "hazards",
 	  "estimated_time": "exploration based",
-	  "learning_objectives": [
-		"Meet pickups, systems, and relational partners",
-        "See algorithms made physical — array traversal, binary search trees, graph theory, convex geometry"
-	  ]
+	  "learning_objectives": ["Meet pickups, systems, and relational partners","See algorithms made physical — array traversal, binary search trees, graph theory, convex geometry"]
 	}
   },
   "spawn_points": {
 	"default": {
-	  "position": [
-		0.5,
-		1.8,
-		0.5
-	  ],
-	  "rotation": [
-		0.0,
-		180.0,
-		0.0
-	  ],
+	  "position": [0.5,1.8,0.5],
+	  "rotation": [0.0,180.0,0.0],
 	  "description": "Entrance — facing the zoo rows"
 	}
   },
@@ -47,24 +36,12 @@
 	}
   },
   "lighting": {
-	"ambient_color": [
-	  0.7,
-	  0.7,
-	  0.85
-	],
+	"ambient_color": [0.7,0.7,0.85],
 	"ambient_energy": 0.4,
 	"directional_light": {
 	  "enabled": true,
-	  "direction": [
-		-0.3,
-		-0.8,
-		-0.2
-	  ],
-	  "color": [
-		1.0,
-		0.98,
-		0.95
-	  ],
+	  "direction": [-0.3,-0.8,-0.2],
+	  "color": [1.0,0.98,0.95],
 	  "energy": 0.8
 	}
   },
@@ -75,11 +52,7 @@
 	"enable_physics": true,
 	"background": {
 	  "type": "sky",
-	  "color": [
-		0.08,
-		0.1,
-		0.18
-	  ]
+	  "color": [0.08,0.1,0.18]
 	}
   },
   "layers": {

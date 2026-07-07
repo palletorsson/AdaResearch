@@ -64,7 +64,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 1,
+				"footprint_cells": 5,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -76,7 +76,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 5,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -178,7 +180,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 1,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -190,7 +192,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 105,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -285,7 +289,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 3,
+				"footprint_cells": 7,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -297,7 +301,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 7,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -329,10 +335,10 @@
 			}
 		},
 		"SpectrumVisualizer": {
-			"capacity": "SEE that the color wheel is a perceptual invention — magenta is the seam where the brain closes what physics leaves open",
+			"capacity": "SEE that the color wheel is a perceptual invention \u2014 magenta is the seam where the brain closes what physics leaves open",
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "The visible spectrum bends from a line into a circle. Wavelength-to-color animation phases between linear layout (physics) and circular layout (perception). Magenta dots fill the gap that physics leaves empty — magenta is not a spectral color, it is the brain's invention to close the loop. The color wheel is a lie the brain tells to make the spectrum feel complete.",
+			"description": "The visible spectrum bends from a line into a circle. Wavelength-to-color animation phases between linear layout (physics) and circular layout (perception). Magenta dots fill the gap that physics leaves empty \u2014 magenta is not a spectral color, it is the brain's invention to close the loop. The color wheel is a lie the brain tells to make the spectrum feel complete.",
 			"dev_themes": [
 				"color",
 				"perception"
@@ -362,7 +368,7 @@
 				],
 				"size_group": "compact"
 			},
-			"qfep_connection": "Lambda between physics and perception — the linear spectrum is pure F (physics, ordered by wavelength). The circular wheel is F + E (perception, with magenta invented to fill the gap). The animation IS the lambda sweep from one to the other.",
+			"qfep_connection": "Lambda between physics and perception \u2014 the linear spectrum is pure F (physics, ordered by wavelength). The circular wheel is F + E (perception, with magenta invented to fill the gap). The animation IS the lambda sweep from one to the other.",
 			"scene": "res://algorithms/color/spectrum_visualizer/SpectrumVisualizer.tscn",
 			"size_group": "compact",
 			"tags": [
@@ -423,7 +429,9 @@
 					"temporal",
 					"spectrum"
 				],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -518,7 +526,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 1,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -530,7 +538,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 10,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -564,7 +574,7 @@
 		"brick_wall_factory": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "grid(width, height) of BoxMesh bricks colored sequentially from a named palette — running bond pattern",
+			"description": "grid(width, height) of BoxMesh bricks colored sequentially from a named palette \u2014 running bond pattern",
 			"dev_themes": [
 				"color",
 				"perception"
@@ -624,7 +634,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 1,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -642,7 +652,9 @@
 					"pillarcolorcollection",
 					"vertical"
 				],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 9,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -739,7 +751,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 1,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -757,7 +769,9 @@
 					"paint",
 					"additive"
 				],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 88,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -791,7 +805,7 @@
 		"color_mixing": {
 			"category": "color",
 			"complexity": "beginner",
-			"description": "Interactive color mixing — combine colors and see the result in different color spaces. Additive (light) vs subtractive (pigment) mixing made visible.",
+			"description": "Interactive color mixing \u2014 combine colors and see the result in different color spaces. Additive (light) vs subtractive (pigment) mixing made visible.",
 			"dev_themes": [
 				"color",
 				"perception"
@@ -850,7 +864,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 1,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -862,7 +876,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 12,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -965,7 +981,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 5,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -977,7 +993,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 204,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -1016,7 +1034,7 @@
 		"color_space_navigator": {
 			"category": "color",
 			"complexity": "intermediate",
-			"description": "3D RGB color cube with HSV cylinder — visualize color as a navigable 3D space. Eight corner spheres mark primary and secondary colors, 500 sample points fill the interior, and a companion HSV cylinder shows the same colors in cylindrical coordinates.",
+			"description": "3D RGB color cube with HSV cylinder \u2014 visualize color as a navigable 3D space. Eight corner spheres mark primary and secondary colors, 500 sample points fill the interior, and a companion HSV cylinder shows the same colors in cylindrical coordinates.",
 			"dev_themes": [
 				"color",
 				"perception"
@@ -1075,7 +1093,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 2,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -1114,7 +1134,7 @@
 		"colorballs": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "N rigid spheres sampled from named color palettes — physics + palette = chromatic rain",
+			"description": "N rigid spheres sampled from named color palettes \u2014 physics + palette = chromatic rain",
 			"dev_themes": [
 				"color",
 				"perception"
@@ -1179,7 +1199,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 3,
+				"footprint_cells": 1,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -1197,7 +1217,9 @@
 					"turret",
 					"shoot"
 				],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -1285,7 +1307,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 5,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -1303,7 +1325,9 @@
 					"hallway_scene",
 					"color"
 				],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 552,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -1337,7 +1361,7 @@
 		"colorsheets": {
 			"category": "color",
 			"complexity": "beginner",
-			"description": "Color reference sheets showing systematic color relationships — hue wheels, value scales, saturation gradients. A visual periodic table of color.",
+			"description": "Color reference sheets showing systematic color relationships \u2014 hue wheels, value scales, saturation gradients. A visual periodic table of color.",
 			"dev_themes": [
 				"color",
 				"perception"
@@ -1386,7 +1410,7 @@
 			},
 			"spatial_needs": {
 				"platform": "table",
-				"footprint_cells": 2,
+				"footprint_cells": 1,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -1398,7 +1422,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -1501,7 +1527,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -1525,7 +1553,7 @@
 		"dark_side_prism": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "Snell's law visualized — white beam enters prism, refracts into 7-color fan by wavelength-dependent angle",
+			"description": "Snell's law visualized \u2014 white beam enters prism, refracts into 7-color fan by wavelength-dependent angle",
 			"dev_themes": [
 				"color",
 				"perception"
@@ -1588,7 +1616,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 1,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -1606,7 +1634,9 @@
 					"split",
 					"precedes"
 				],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 10,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -1684,7 +1714,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -1718,7 +1750,7 @@
 		"glitchcolor": {
 			"category": "color",
 			"complexity": "intermediate",
-			"description": "Color glitch effects — channel shifting, bit corruption, and chromatic aberration. What happens when color data breaks in beautiful ways.",
+			"description": "Color glitch effects \u2014 channel shifting, bit corruption, and chromatic aberration. What happens when color data breaks in beautiful ways.",
 			"dev_themes": [
 				"color",
 				"perception"
@@ -1769,7 +1801,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 2,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -1781,7 +1813,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 9,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -1888,7 +1922,7 @@
 			},
 			"spatial_needs": {
 				"platform": "pedestal",
-				"footprint_cells": 1,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -1900,7 +1934,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 16,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -1934,7 +1970,7 @@
 		"grab_stick_scanner": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "Grabbable stick with a UV-based texture-pixel scanner — samples the hit-point colour from any surface the tip touches, displaying the RGB value live.",
+			"description": "Grabbable stick with a UV-based texture-pixel scanner \u2014 samples the hit-point colour from any surface the tip touches, displaying the RGB value live.",
 			"dev_themes": [
 				"color",
 				"perception"
@@ -2000,7 +2036,7 @@
 			},
 			"spatial_needs": {
 				"platform": "pedestal",
-				"footprint_cells": 5,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -2012,7 +2048,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 15,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -2106,7 +2144,7 @@
 			},
 			"spatial_needs": {
 				"platform": "pedestal",
-				"footprint_cells": 1,
+				"footprint_cells": 2,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -2118,7 +2156,9 @@
 				"orientation": "face_approach",
 				"isolation": 1,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 2,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -2236,7 +2276,7 @@
 		"k_means_color": {
 			"category": "color",
 			"complexity": "intermediate",
-			"description": "Extract dominant colors from images using k-means clustering in color space. Machine learning meets aesthetics — the algorithm behind every 'color palette from image' tool.",
+			"description": "Extract dominant colors from images using k-means clustering in color space. Machine learning meets aesthetics \u2014 the algorithm behind every 'color palette from image' tool.",
 			"dev_themes": [
 				"art",
 				"color",
@@ -2287,7 +2327,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 2,
+				"footprint_cells": 1,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -2299,7 +2339,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -2328,7 +2370,7 @@
 		"minimalglitch": {
 			"category": "color",
 			"complexity": "beginner",
-			"description": "Minimal glitch aesthetics — subtle data corruption effects that reveal the digital substrate beneath visual representation.",
+			"description": "Minimal glitch aesthetics \u2014 subtle data corruption effects that reveal the digital substrate beneath visual representation.",
 			"dev_themes": [
 				"art",
 				"color",
@@ -2380,7 +2422,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 2,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -2392,7 +2434,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 11,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -2492,7 +2536,7 @@
 			},
 			"spatial_needs": {
 				"platform": "pedestal",
-				"footprint_cells": 1,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -2510,7 +2554,9 @@
 					"contrasts",
 					"brick_wall_factory"
 				],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 135,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -2619,7 +2665,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -2728,7 +2776,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -2762,7 +2812,7 @@
 		"spectrum_forest": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "hue(x) = remap(x, bounds) — 5000 vertical lines colored by x-position across the visible spectrum",
+			"description": "hue(x) = remap(x, bounds) \u2014 5000 vertical lines colored by x-position across the visible spectrum",
 			"dev_themes": [
 				"color",
 				"perception"
@@ -2821,7 +2871,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 5,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -2839,7 +2889,9 @@
 					"spectrum",
 					"spatial"
 				],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 400,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -2935,7 +2987,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 1,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -2947,7 +2999,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 16,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -3055,7 +3109,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -3150,7 +3206,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 1,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -3162,7 +3218,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 15,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -3258,7 +3316,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 3,
+				"footprint_cells": 6,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -3270,7 +3328,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 6,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -3304,7 +3364,7 @@
 		"color_sets_overview": {
 			"name": "Color Sets Overview",
 			"lookup_name": "color_sets_overview",
-			"description": "Interactive color set grabber — explore color families, hue relationships, and palette structures through physical manipulation.",
+			"description": "Interactive color set grabber \u2014 explore color families, hue relationships, and palette structures through physical manipulation.",
 			"scene": "res://algorithms/color/grabcolor/color_sets_overview.tscn",
 			"category": "color",
 			"interaction": "grab",
@@ -3314,7 +3374,7 @@
 			"include_in_map_data": false,
 			"spatial_needs": {
 				"platform": "pedestal",
-				"footprint_cells": 2,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -3332,7 +3392,9 @@
 					"pillarcolorcollection",
 					"viewing"
 				],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 12,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -3385,7 +3447,7 @@
 			"include_in_map_data": true,
 			"spatial_needs": {
 				"platform": "pedestal",
-				"footprint_cells": 2,
+				"footprint_cells": 1,
 				"clearance": {
 					"front": 2,
 					"back": 1,
@@ -3394,7 +3456,9 @@
 				},
 				"wall_backing": false,
 				"isolation": 0,
-				"preferred_zone": "teaching"
+				"preferred_zone": "teaching",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -3448,7 +3512,7 @@
 			"include_in_map_data": true,
 			"spatial_needs": {
 				"platform": "pedestal",
-				"footprint_cells": 2,
+				"footprint_cells": 1,
 				"clearance": {
 					"front": 2,
 					"back": 1,
@@ -3457,7 +3521,9 @@
 				},
 				"wall_backing": false,
 				"isolation": 0,
-				"preferred_zone": "exploration"
+				"preferred_zone": "exploration",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -3496,7 +3562,7 @@
 	},
 	"registry_info": {
 		"category": "color",
-		"description": "Color theory and manipulation artifacts — mixing, scanning, clustering, and glitch aesthetics. Exploring color as data, perception, and creative material.",
+		"description": "Color theory and manipulation artifacts \u2014 mixing, scanning, clustering, and glitch aesthetics. Exploring color as data, perception, and creative material.",
 		"name": "color",
 		"theoretical_grounding": "Color spaces (RGB, HSV, Lab), perceptual color science, k-means clustering for palette extraction, color mixing models (additive, subtractive)"
 	}

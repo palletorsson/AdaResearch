@@ -1,0 +1,45 @@
+{
+  "timestamp": "2026-05-13T11:48:00",
+  "phase": "baseline",
+  "scheduled_task": "ada-morning-breath",
+  "pipeline_summary": {
+    "global_avg_pipeline": 5.43,
+    "sequences_at_stage_7_polish": ["randomness"],
+    "sequences_at_stage_6_vr_testing": [
+      "primitives", "transformation", "color", "forces", "wavefunctions",
+      "noise", "cellularautomata", "fractals", "lsystems", "proceduralgeneration",
+      "isosurfaces", "swarmintelligence", "machinelearning", "foundationscrisis",
+      "qfeplaboratory", "postfoundationscrisis", "graphtheory"
+    ],
+    "sequences_at_stage_2_documentation": [
+      "array_tutorial (18% doc, 60% art)",
+      "softbodies (29% doc, 64% art)",
+      "change (0% doc, 0% art, 0% map)",
+      "boolean_surfaces (0% doc, 0% art, 0% map)"
+    ],
+    "consecutive_flat_breaths_at_5_43": 8
+  },
+  "heat_map_top_5": [
+    {"item": "capture", "temperature": 80, "reason": "active (7 recent commits)"},
+    {"item": "shader", "temperature": 65, "reason": "active (1 recent commits)"},
+    {"item": "pattern", "temperature": 65, "reason": "active (1 recent commits)"},
+    {"item": "pipeline_scorer_token_parsing", "temperature": 60, "reason": "deep discovery"},
+    {"item": "garden_voicing_targeting", "temperature": 60, "reason": "deep discovery (playbook)"}
+  ],
+  "garden_health": {
+    "total_artifacts": 2106,
+    "voiced": 971,
+    "voice_coverage_pct": 46,
+    "embodied": 337,
+    "embodiment_rate_pct": 34,
+    "phantom_limbs": 799
+  },
+  "release_gates": {
+    "A_sequence_contract": {"pass": false, "missing_declared_maps": 14, "duplicate_entries_within_sequence": 0, "undeclared_map_folders": 491},
+    "B_artifact_registry": {"pass": true, "unresolved_scene_files": 0, "missing_scene_path": 0, "missing_map_ready": 0, "missing_include_in_map_data": 0},
+    "C_map_validation": {"pass": true, "grade_A": 811, "grade_B": 127, "grade_C": 158, "grade_F": 0},
+    "D_lab_progression": {"pass": true, "lost_count": 0, "changed_count": 12, "total_issues": 39},
+    "passing_count": 3,
+    "enabled_count": 4
+  }
+}

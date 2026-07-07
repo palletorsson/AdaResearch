@@ -10,6 +10,8 @@
 
 extends Node3D
 
+const BakedText = preload("res://commons/utils/baked_text_albedo.gd")
+
 @export_category("Measurement Settings")
 @export var max_range: float = 50.0
 @export var scan_frequency: float = 30.0
@@ -63,9 +65,13 @@ var laser_material: StandardMaterial3D
 var hit_dot: MeshInstance3D
 var hit_dot_material: StandardMaterial3D
 var body_mesh: MeshInstance3D
-var distance_label: Label3D
-var target_label: Label3D
-var inline_readout: Label3D            # numeric label at the hit point
+# Integrated 2D-in-3D boards (baked text) — replace bare floating Label3D.
+var lcd_board: Node3D                   # multi-line readout block ON the LCD screen surface
+var _lcd_board_holder: Node3D           # container we can clear/rebuild on text change
+var _lcd_cache_key: String = ""         # cache guard — rebuild the LCD board only when the text changes
+var inline_board: Node3D                # numeric tag AT the hit point (billboarded)
+var _inline_board_holder: Node3D        # container for the inline tag
+var _inline_cache_key: String = ""      # cache guard for the inline tag
 var tick_root: Node3D                  # parent for tick mesh instances
 var _tick_meshes: Array[MeshInstance3D] = []
 # New body geometry built in code (laser-sword-style handle)
@@ -203,8 +209,8 @@ func setup_body_geometry():
 func setup_lcd_screen():
 	# A small, screen-shaped LCD panel mounted on the handle's "top" surface,
 	# facing roughly toward the operator. Frame around a dark-green panel; the
-	# distance_label gets parented to this frame so the text reads as a real
-	# digital readout, not a floating Label3D.
+	# consolidated readout board (distance + target as one baked-text block) gets
+	# parented to this screen so the text reads as a real digital readout.
 	#
 	# Local convention: handle is along Z; mount the panel on +Y face (top of
 	# the handle when held horizontally), inset slightly along the length.
@@ -270,27 +276,33 @@ func setup_tick_marks():
 		_tick_meshes.append(tm)
 
 func setup_inline_readout():
-	# Numeric label at the hit point — the truth says "the pairing is the primitive".
-	# Body LCD is the formal readout; this is the inline glance at the probe.
+	# Numeric tag at the hit point — the truth says "the pairing is the primitive".
+	# Body LCD is the formal readout; this is the inline glance at the probe. Now an
+	# integrated 2D-in-3D board (make_tag) instead of a bare floating Label3D: a
+	# framed billboarded plate that rides the beam-tip. Its holder rebuilds on text
+	# change only (cache-guarded) since the value changes as the laser moves.
 	if not show_inline_readout:
 		return
-	inline_readout = Label3D.new()
-	inline_readout.name = "InlineReadout"
-	inline_readout.font_size = 56
-	inline_readout.outline_size = 6
-	inline_readout.pixel_size = 0.0015
-	inline_readout.modulate = laser_hit_color
-	inline_readout.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	inline_readout.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	inline_readout.no_depth_test = true   # always visible above geometry
-	inline_readout.visible = false
-	add_child(inline_readout)
+	_inline_board_holder = Node3D.new()
+	_inline_board_holder.name = "InlineReadout"
+	_inline_board_holder.visible = false
+	add_child(_inline_board_holder)
 
 func setup_display():
-	# Preferred: mount the labels on the new LCD screen panel built in code.
-	# Fallback: look for the legacy LaserMeasure#Body from grab_laser_measure.tscn.
+	# ONE consolidated readout board — distance + target name share a single lit
+	# surface (make_text_block), so the two readouts can never overlap on the small
+	# LCD. Preferred mount: on the code-built LCD screen. Fallback: on the legacy
+	# LaserMeasure#Body from grab_laser_measure.tscn.
 	if _lcd_screen:
-		setup_lcd_labels()
+		# A holder parented to the screen, oriented to face +Y (up out of the panel,
+		# toward the operator). The board mesh block is rebuilt into it on text change.
+		_lcd_board_holder = Node3D.new()
+		_lcd_board_holder.name = "LCDReadoutBoard"
+		_lcd_screen.add_child(_lcd_board_holder)
+		# make_text_block faces +Z; rotate so it faces +Y (out of the screen face),
+		# and lift it just above the emissive surface so it reads as printed digits.
+		_lcd_board_holder.rotation_degrees = Vector3(-90, 0, 0)
+		_lcd_board_holder.position = Vector3(0, 0.0009, 0)
 		return
 	body_mesh = get_node_or_null("../LaserMeasure#Body")
 	if not body_mesh:
@@ -298,76 +310,12 @@ func setup_display():
 		if parent:
 			body_mesh = parent.get_node_or_null("LaserMeasure#Body")
 	if body_mesh:
-		setup_labels()
-
-
-func setup_lcd_labels():
-	# Mount distance text on the lit LCD surface — child of _lcd_screen so it
-	# rides with the panel. Local Y points up (out of the screen face).
-	distance_label = Label3D.new()
-	distance_label.name = "DistanceLabel"
-	_lcd_screen.add_child(distance_label)
-	# Just above the screen surface, facing +Y (up, toward the operator).
-	distance_label.position = Vector3(0, 0.0008, -0.002)
-	distance_label.rotation_degrees = Vector3(-90, 0, 0)   # face +Y
-	distance_label.font_size = 64
-	distance_label.outline_size = 0
-	distance_label.pixel_size = 0.00018
-	distance_label.modulate = lcd_text_color
-	distance_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	distance_label.no_depth_test = true   # always visible above screen plane
-
-	if show_target_name:
-		target_label = Label3D.new()
-		target_label.name = "TargetLabel"
-		_lcd_screen.add_child(target_label)
-		target_label.position = Vector3(0, 0.0008, 0.006)
-		target_label.rotation_degrees = Vector3(-90, 0, 0)
-		target_label.font_size = 28
-		target_label.outline_size = 0
-		target_label.pixel_size = 0.00018
-		target_label.modulate = lcd_text_color.darkened(0.35)
-		target_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		target_label.no_depth_test = true
-
-
-func setup_labels():
-	# Legacy path — used when build_lcd_screen=false and the .tscn body exists.
-	if not body_mesh:
-		return
-
-	# Main distance label on the back of the body (facing user when holding)
-	# Body size is 0.04 x 0.025 x 0.12, back face is at +Z = 0.06 local
-	distance_label = body_mesh.find_child("DistanceLabel", false, false)
-	if not distance_label:
-		distance_label = Label3D.new()
-		distance_label.name = "DistanceLabel"
-		body_mesh.add_child(distance_label)
-
-	# Position on back face of body, facing +Z (toward user)
-	distance_label.position = Vector3(0, 0, 0.061)  # Just past back surface
-	distance_label.rotation_degrees = Vector3(0, 0, 0)  # Face backward (+Z)
-	distance_label.font_size = 72
-	distance_label.outline_size = 4
-	distance_label.pixel_size = 0.001
-	distance_label.modulate = text_color
-	distance_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-
-	# Target name label (smaller, below distance)
-	if show_target_name:
-		target_label = body_mesh.find_child("TargetLabel", false, false)
-		if not target_label:
-			target_label = Label3D.new()
-			target_label.name = "TargetLabel"
-			body_mesh.add_child(target_label)
-
-		target_label.position = Vector3(0, -0.008, 0.061)
-		target_label.rotation_degrees = Vector3(0, 0, 0)
-		target_label.font_size = 36
-		target_label.outline_size = 2
-		target_label.pixel_size = 0.001
-		target_label.modulate = text_color.darkened(0.3)
-		target_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		# Legacy body — same consolidated board, mounted on the +Z back face facing
+		# the user (Body size 0.04 x 0.025 x 0.12, back face at +Z = 0.06 local).
+		_lcd_board_holder = Node3D.new()
+		_lcd_board_holder.name = "ReadoutBoard"
+		body_mesh.add_child(_lcd_board_holder)
+		_lcd_board_holder.position = Vector3(0, 0, 0.061)   # just past the back surface, facing +Z
 
 func _process(delta):
 	scan_timer += delta
@@ -492,61 +440,89 @@ func hide_tick_marks():
 		tm.visible = true   # passive ruler when not pointed at anything
 
 func update_inline_readout(world_position: Vector3, distance: float):
-	# The numeric label rides at the hit-point — the readout follows the probe.
-	if not show_inline_readout or not inline_readout:
+	# The numeric tag rides at the hit-point — the readout follows the probe. It is
+	# an integrated 2D-in-3D board (make_tag). The board mesh is only rebuilt when the
+	# displayed string changes (cache-guarded) — every frame we just move the holder,
+	# which is cheap. This keeps the per-frame cost low while the value updates live.
+	if not show_inline_readout or not _inline_board_holder:
 		return
-	inline_readout.global_position = world_position + Vector3(0, 0.08, 0)
-	inline_readout.visible = true
+	_inline_board_holder.global_position = world_position + Vector3(0, 0.08, 0)
+	_inline_board_holder.visible = true
 	var unit_suffix = unit
 	var display_value = distance
 	match unit:
 		"cm": display_value = distance * 100.0
 		"units": unit_suffix = ""
-	inline_readout.text = "%.*f%s" % [decimal_places, display_value, unit_suffix]
+	var txt := "%.*f%s" % [decimal_places, display_value, unit_suffix]
+	if txt == _inline_cache_key:
+		return   # same text — reuse existing board, no rebuild
+	_inline_cache_key = txt
+	if inline_board and is_instance_valid(inline_board):
+		inline_board.queue_free()
+	inline_board = BakedText.make_tag(txt, laser_hit_color, 0.05,
+		Color(0.03, 0.06, 0.04), true, laser_hit_color)
+	if inline_board:
+		_inline_board_holder.add_child(inline_board)
 
 func hide_inline_readout():
-	if inline_readout:
-		inline_readout.visible = false
+	if _inline_board_holder:
+		_inline_board_holder.visible = false
 
 func update_display(distance: float, target: String, is_active: bool):
-	if not distance_label:
+	if not _lcd_board_holder:
 		return
 
-	# Pick text colour based on which display mode is active. The LCD-screen
-	# path uses lcd_text_color (bright lime green) on a dark-green emissive
-	# panel — high contrast, reads like a real instrument. The legacy
-	# floating-Label3D path uses the original text_color.
+	# Pick text colour based on which mount is active. The LCD-screen path uses
+	# lcd_text_color (bright lime green) on the dark-green emissive panel — high
+	# contrast, reads like a real instrument. The legacy body mount uses text_color.
 	var active_color: Color = lcd_text_color if _lcd_screen else text_color
 
+	# Compose the two readouts (distance, target) as lines of ONE board so they
+	# share the surface and can never overlap.
+	var distance_line: String
 	if is_active:
 		var display_value = distance
 		var unit_suffix = unit
-
-		# Convert units if needed
 		match unit:
 			"cm":
 				display_value = distance * 100.0
 			"units":
 				unit_suffix = "u"
-
-		# Format with specified decimal places
-		var format_str = "%." + str(decimal_places) + "f %s"
-		distance_label.text = format_str % [display_value, unit_suffix]
-		distance_label.modulate = active_color
-
-		if target_label and show_target_name:
-			target_label.text = target if target != "" else "---"
-			target_label.modulate = active_color.darkened(0.3)
+		distance_line = ("%." + str(decimal_places) + "f %s") % [display_value, unit_suffix]
 	else:
-		# Idle state — keep the digits visible (not darkened to near-invisible),
-		# matching how real LCD instruments look when not measuring.
-		distance_label.text = "--- %s" % unit
-		# Only mild dim — keep readable contrast on the screen
-		distance_label.modulate = active_color.darkened(0.15) if _lcd_screen else active_color.darkened(0.5)
+		# Idle — keep the digits visible, like a real LCD when not measuring.
+		distance_line = "--- %s" % unit
 
-		if target_label:
-			target_label.text = "No target"
-			target_label.modulate = active_color.darkened(0.3) if _lcd_screen else active_color.darkened(0.6)
+	var lines: Array = [distance_line]
+	if show_target_name:
+		if is_active:
+			lines.append(target if target != "" else "---")
+		else:
+			lines.append("No target")
+
+	# Cache guard — rebuild the board mesh only when the text (or active state) changes.
+	var key := "%s|%s|%d" % ["\n".join(PackedStringArray(lines)), active_color, int(is_active)]
+	if key == _lcd_cache_key:
+		return
+	_lcd_cache_key = key
+
+	if lcd_board and is_instance_valid(lcd_board):
+		lcd_board.queue_free()
+
+	# Sizing: fit the block inside the LCD surface (lcd_size) when on-screen; use a
+	# larger board on the legacy body. Idle text sits slightly dimmed but readable.
+	var col: Color = active_color if is_active else active_color.darkened(0.15 if _lcd_screen else 0.5)
+	var line_h: float
+	var max_w: float
+	if _lcd_screen:
+		max_w = lcd_size.x * 0.92
+		line_h = lcd_size.y * 0.42   # two lines fit within the panel height with a gap
+	else:
+		max_w = 0.03
+		line_h = 0.012
+	lcd_board = BakedText.make_text_block(lines, col, line_h, max_w, line_h * 0.3, true)
+	if lcd_board:
+		_lcd_board_holder.add_child(lcd_board)
 
 # Public API
 func get_distance() -> float:

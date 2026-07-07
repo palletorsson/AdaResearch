@@ -1,0 +1,42 @@
+{
+  "map_info": {
+    "name": "MiniScene_vector_magnitude_demo",
+    "lookup_name": "MiniScene_vector_magnitude_demo",
+    "title": "Mini scene: vector magnitude demo",
+    "description": "A mini scene grown by tools/grow_scene.py — vector_magnitude_demo staged by footprint rule (table). One concept, one bead; maps are necklaces of these.",
+    "version": "0.1-grow-scene",
+    "format": "json",
+    "created_from": "tools/grow_scene.py",
+    "dimensions": {
+      "width": 3,
+      "depth": 3,
+      "max_height": 3
+    },
+    "metadata": {
+      "category": "bead",
+      "estimated_time": "0 minutes"
+    }
+  },
+  "utility_definitions": {},
+  "settings": {
+    "floor_tile_size": 1.0,
+    "disable_biome": true
+  },
+  "layers": {
+    "structure": [
+      ["1","1","1"],
+      ["1","2","1"],
+      ["1","1","1"]
+    ],
+    "utilities": [
+      [" "," "," "],
+      [" "," "," "],
+      [" "," "," "]
+    ],
+    "interactables": [
+      [" "," "," "],
+      [" ","vector_magnitude_demo:180:1.0"," "],
+      [" "," "," "]
+    ]
+  }
+}

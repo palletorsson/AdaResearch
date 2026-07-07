@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bcodexfood01food"]
+
+[ext_resource type="Script" path="res://commons/artifacts/codex_food/codex_food.gd" id="1_codexfood"]
+
+[node name="CodexFood" type="Node3D"]
+script = ExtResource("1_codexfood")

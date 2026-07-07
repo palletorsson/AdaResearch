@@ -36,6 +36,7 @@ class_name TimbreSculptor
 # truth: Timbre is the harmonic fingerprint of a sound — the same note on different instruments differs only in overtone amplitudes.
 
 const _P = preload("res://commons/ui/ada_palette.gd")
+const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
 
 # ── Preloads for VR components ──
 const SLIDER_V_SCENE = preload("res://commons/audio/interfaces/VRAudioControlSliderVertical.tscn")
@@ -163,43 +164,56 @@ func _build_panel() -> void:
 	_panel_mesh.position = Vector3(0, 0, -0.008)
 	_components.add_child(_panel_mesh)
 	
-	# Title
-	var title = Label3D.new()
-	title.text = "TIMBRE SCULPTOR"
-	title.font_size = 28
-	title.pixel_size = 0.0005
-	title.modulate = _P.TEXT_PRIMARY
-	title.outline_size = 0
-	title.position = Vector3(0, 0.26, 0.005)
-	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	_components.add_child(title)
-	
-	# Subtitle
-	var subtitle = Label3D.new()
-	subtitle.text = "Additive Synthesis — Build timbre with harmonics"
-	subtitle.font_size = 14
-	subtitle.pixel_size = 0.0005
-	subtitle.modulate = _P.TEXT_SECONDARY
-	subtitle.outline_size = 0
-	subtitle.position = Vector3(0, 0.235, 0.005)
-	subtitle.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	_components.add_child(subtitle)
-	
+	# Title + subtitle consolidated onto one framed dark header panel (R-027)
+	var header := Node3D.new()
+	header.name = "HeaderBoard"
+	header.position = Vector3(0, 0.2475, 0.002)
+	_components.add_child(header)
+	header.add_child(_plate(Vector3(0.64, 0.075, 0.02)))
+	var title: MeshInstance3D = BakedText.make_label_mesh("TIMBRE SCULPTOR", _P.TEXT_ON_DARK, Vector2(0.40, 0.030), 1400, true)
+	if title:
+		title.position = Vector3(0, 0.014, 0.012)
+		header.add_child(title)
+	var subtitle: MeshInstance3D = BakedText.make_label_mesh("Additive Synthesis — Build timbre with harmonics", Color(0.70, 0.70, 0.74), Vector2(0.56, 0.020), 1400, true)
+	if subtitle:
+		subtitle.position = Vector3(0, -0.017, 0.012)
+		header.add_child(subtitle)
+
 	# Section labels
 	_add_section_label("HARMONICS", Vector3(SLIDER_START_X, 0.18, 0.005))
 	_add_section_label("PRESETS", Vector3(-0.24, BUTTON_ROW_Y + 0.06, 0.005))
 
-# Adds a small section header label at the given position.
+# Adds a small section header tag at the given position (framed board, R-027).
 func _add_section_label(text: String, pos: Vector3) -> void:
-	var lbl = Label3D.new()
-	lbl.text = text
-	lbl.font_size = 16
-	lbl.pixel_size = 0.0005
-	lbl.modulate = _P.TEXT_SECONDARY
-	lbl.outline_size = 0
-	lbl.position = pos
-	lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
-	_components.add_child(lbl)
+	var lbl: Node3D = BakedText.make_tag(text, Color(0.72, 0.72, 0.76), 0.02)
+	if lbl:
+		lbl.position = pos
+		_components.add_child(lbl)
+
+func _plate(size: Vector3) -> Node3D:
+	var g := Node3D.new()
+	var frame := MeshInstance3D.new()
+	var fm := BoxMesh.new()
+	fm.size = size + Vector3(0.05, 0.05, -0.01)
+	frame.mesh = fm
+	var fmat := StandardMaterial3D.new()
+	fmat.albedo_color = Color(0.62, 0.60, 0.56)
+	fmat.roughness = 0.7
+	frame.material_override = fmat
+	frame.position = Vector3(0, 0, -0.006)
+	g.add_child(frame)
+	var face := MeshInstance3D.new()
+	var bm := BoxMesh.new()
+	bm.size = size
+	face.mesh = bm
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color(0.10, 0.11, 0.14)
+	mat.emission_enabled = true
+	mat.emission = Color(0.10, 0.11, 0.14)
+	mat.emission_energy_multiplier = 0.25
+	face.material_override = mat
+	g.add_child(face)
+	return g
 
 # Creates NUM_HARMONICS vertical sliders with frequency labels.
 func _build_sliders() -> void:
@@ -223,17 +237,12 @@ func _build_sliders() -> void:
 
 		sliders[i] = slider
 		
-		# Frequency label below each slider
-		var freq_label = Label3D.new()
+		# Frequency tag below each slider (framed board, R-027)
 		var freq = fundamental_freq * harmonic_num
-		freq_label.text = "%d Hz" % int(freq)
-		freq_label.font_size = 10
-		freq_label.pixel_size = 0.0005
-		freq_label.modulate = _P.TEXT_SECONDARY
-		freq_label.outline_size = 0
-		freq_label.position = Vector3(x_pos, -0.17, 0.005)
-		freq_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		_components.add_child(freq_label)
+		var freq_label: Node3D = BakedText.make_tag("%d Hz" % int(freq), Color(0.72, 0.72, 0.76), 0.015)
+		if freq_label:
+			freq_label.position = Vector3(x_pos, -0.17, 0.008)
+			_components.add_child(freq_label)
 
 # Lays out the row of preset buttons with color coding and labels.
 func _build_preset_buttons() -> void:
@@ -262,16 +271,11 @@ func _build_preset_buttons() -> void:
 		
 		buttons[preset_name] = btn
 		
-		# Label below button
-		var label = Label3D.new()
-		label.text = preset_name
-		label.font_size = 12
-		label.pixel_size = 0.0005
-		label.modulate = _P.TEXT_PRIMARY
-		label.outline_size = 0
-		label.position = Vector3(x_pos, BUTTON_ROW_Y - 0.035, 0.005)
-		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		_components.add_child(label)
+		# Tag below button (framed board, R-027)
+		var label: Node3D = BakedText.make_tag(preset_name, _P.TEXT_ON_DARK, 0.016)
+		if label:
+			label.position = Vector3(x_pos, BUTTON_ROW_Y - 0.038, 0.008)
+			_components.add_child(label)
 
 # Instantiates the waveform and spectrum display panels.
 func _build_displays() -> void:

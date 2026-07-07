@@ -1,4 +1,5 @@
 # PrimitivesProjectile.gd
+# verb: bounce-and-tint
 # A glowing sphere that bounces off walls and slowly shrinks to nothing.
 # The most basic expression — geometry finding its voice, then fading.
 extends CatalystProjectile

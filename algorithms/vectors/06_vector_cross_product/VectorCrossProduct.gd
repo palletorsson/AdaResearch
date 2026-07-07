@@ -16,7 +16,7 @@ var vector_a: Node3D
 var vector_b: Node3D
 var cross_vector: Node3D
 var parallelogram: MeshInstance3D
-var info_label: Label3D
+var info_label: Label
 var readout_label: Label3D
 var magnitude_slider: Node3D
 var paddle_gadget: Node3D

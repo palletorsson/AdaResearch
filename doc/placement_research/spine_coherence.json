@@ -1,0 +1,2014 @@
+{
+  "primitives": {
+    "n_artifacts": 73,
+    "n_with_text": 73,
+    "n_core": 70,
+    "n_infrastructure": 3,
+    "intra_similarity": 0.044,
+    "null_mean": 0.0124,
+    "null_std": 0.0015,
+    "calibrated_coherence": 20.878,
+    "mean_centroid_distance": 0.2387,
+    "centroid_top_terms": [
+      [
+        "core",
+        0.17821402716564005
+      ],
+      [
+        "primitives",
+        0.170787311894349
+      ],
+      [
+        "primitive",
+        0.1455940842755793
+      ],
+      [
+        "line",
+        0.08263088561793104
+      ],
+      [
+        "puzzle",
+        0.06098038190880709
+      ],
+      [
+        "triangle",
+        0.05164835706692166
+      ],
+      [
+        "rings",
+        0.04638954077685015
+      ],
+      [
+        "interactive",
+        0.04544660215796861
+      ]
+    ],
+    "outliers": [
+      [
+        "CoordinateSystem3M",
+        0.062
+      ],
+      [
+        "modulor_man_demo",
+        0.082
+      ],
+      [
+        "frame_counter_display",
+        0.09
+      ],
+      [
+        "polyhedron_nets_cube",
+        0.097
+      ],
+      [
+        "durer_scene",
+        0.102
+      ]
+    ],
+    "members": [
+      "diamondtoruscollection",
+      "code_display",
+      "durer_scene",
+      "frame_counter_display",
+      "polyhedron_nets_cube",
+      "laser_exploding_sphere",
+      "xyz_slider_plate",
+      "laser_sword",
+      "grabbable_line",
+      "code_evolution_screen",
+      "animatedcubebuilder",
+      "bigframe",
+      "capsule",
+      "capsule_radials_rings",
+      "combine_portals",
+      "dgrid",
+      "diamonds",
+      "draw_dot",
+      "draw_triangle_faces",
+      "folded_strip",
+      "folding_past",
+      "grab_octahedron",
+      "grab_sphere_point_snap",
+      "grab_trihedron",
+      "grid_lines",
+      "hole_with_cones",
+      "interactive_point_origin",
+      "interactivetriangle",
+      "laser_measure",
+      "lightrod"
+    ],
+    "infrastructure_members": [
+      "catalyst_foe",
+      "catalyst_vent",
+      "cube_scene"
+    ]
+  },
+  "transformation": {
+    "n_artifacts": 29,
+    "n_with_text": 29,
+    "n_core": 29,
+    "n_infrastructure": 0,
+    "intra_similarity": 0.0724,
+    "null_mean": 0.0128,
+    "null_std": 0.0028,
+    "calibrated_coherence": 21.224,
+    "mean_centroid_distance": 0.3108,
+    "centroid_top_terms": [
+      [
+        "vector",
+        0.15297617704686017
+      ],
+      [
+        "linear_algebra",
+        0.1502967479238306
+      ],
+      [
+        "math",
+        0.11697803355389869
+      ],
+      [
+        "demonstration",
+        0.1130584967401794
+      ],
+      [
+        "transforms",
+        0.08997623475206529
+      ],
+      [
+        "vectors",
+        0.08198350662104141
+      ],
+      [
+        "translation",
+        0.07653471967450999
+      ],
+      [
+        "transformation",
+        0.07604813321537388
+      ]
+    ],
+    "outliers": [
+      [
+        "attractorsphere",
+        0.13
+      ],
+      [
+        "balance_puzzle",
+        0.161
+      ],
+      [
+        "rotate_grid_cubes",
+        0.171
+      ],
+      [
+        "scale_me",
+        0.174
+      ],
+      [
+        "grower_block",
+        0.175
+      ]
+    ],
+    "members": [
+      "scale_me",
+      "pickup_gate",
+      "attractorsphere",
+      "balance_puzzle",
+      "chair_assembly_puzzle",
+      "pusher_block",
+      "grower_block",
+      "example_2_7_multiple_attractors_vr",
+      "rotate_grid_cubes",
+      "boolean_tunnel",
+      "carousel_cake",
+      "homogeneous_coordinates",
+      "rotation_gimbal",
+      "spin",
+      "toruscylinder",
+      "transform_composition",
+      "translation_cube_demo",
+      "x_translation_cube",
+      "y_translation_cube",
+      "z_translation_cube",
+      "matrix_4x4_viewer",
+      "invariants_demo",
+      "example_1_1_bouncing_ball_with_no_vectors_vr",
+      "example_1_3_vector_subtraction_vr",
+      "example_1_4_vector_multiplication_vr",
+      "example_1_5_vector_magnitude_vr",
+      "example_1_6_vector_normalize_vr",
+      "example_1_7_motion_101_velocity_vr",
+      "example_1_8_motion_101_velocity_and_constant_acceleration_vr"
+    ],
+    "infrastructure_members": []
+  },
+  "array_tutorial": {
+    "n_artifacts": 52,
+    "n_with_text": 52,
+    "n_core": 46,
+    "n_infrastructure": 6,
+    "intra_similarity": 0.1419,
+    "null_mean": 0.013,
+    "null_std": 0.0022,
+    "calibrated_coherence": 57.552,
+    "mean_centroid_distance": 0.3992,
+    "centroid_top_terms": [
+      [
+        "vertical_stack",
+        0.18744531794048538
+      ],
+      [
+        "primitive_stack",
+        0.18744531794048538
+      ],
+      [
+        "buren",
+        0.18744531794048538
+      ],
+      [
+        "column",
+        0.18289331656246088
+      ],
+      [
+        "array",
+        0.15333545374243
+      ],
+      [
+        "arrays",
+        0.1276455578299564
+      ],
+      [
+        "pattern",
+        0.11887681144543878
+      ],
+      [
+        "data_structures",
+        0.11029241009543013
+      ]
+    ],
+    "outliers": [
+      [
+        "panel_bridge_loom",
+        0.068
+      ],
+      [
+        "xyz_coordinates",
+        0.072
+      ],
+      [
+        "facade_grammar_demo",
+        0.102
+      ],
+      [
+        "sorting_algorithm_race",
+        0.108
+      ],
+      [
+        "script_runner",
+        0.126
+      ]
+    ],
+    "members": [
+      "pattern_tile_puzzle",
+      "pattern_tile_4x4",
+      "pattern_tile_mirror",
+      "pattern_tile_brick",
+      "pattern_tile_herringbone",
+      "step_sequencer",
+      "pulsar_visualizer",
+      "pulsar_compact",
+      "tiling_demo",
+      "facade_grammar_demo",
+      "vr_tile_editor_mirror",
+      "pattern_maker_station",
+      "row_3_x",
+      "column_3_z",
+      "grid_2d_4x4",
+      "grid_3d_4x4x4",
+      "grid_model",
+      "pattern_tile_plate",
+      "pattern_studio_plate",
+      "sorting_algorithm_race",
+      "array_disco_substrate",
+      "array_slow_substrate",
+      "array_random_substrate",
+      "bar_array",
+      "bar_array_bubble_sort",
+      "buren_col_01_01",
+      "buren_col_01_04",
+      "buren_col_01_07",
+      "buren_col_01_10",
+      "buren_col_04_01"
+    ],
+    "infrastructure_members": [
+      "pick_up_cube",
+      "catalyst_target",
+      "gridagent",
+      "proximity_spawner",
+      "dark_sphere",
+      "science_screen"
+    ]
+  },
+  "color": {
+    "n_artifacts": 43,
+    "n_with_text": 43,
+    "n_core": 43,
+    "n_infrastructure": 0,
+    "intra_similarity": 0.0804,
+    "null_mean": 0.012,
+    "null_std": 0.0027,
+    "calibrated_coherence": 25.744,
+    "mean_centroid_distance": 0.3109,
+    "centroid_top_terms": [
+      [
+        "color",
+        0.576754155672202
+      ],
+      [
+        "perception",
+        0.26540583841610227
+      ],
+      [
+        "metamerismlab",
+        0.08863646888313767
+      ],
+      [
+        "rotatinglaser",
+        0.08863646888313767
+      ],
+      [
+        "simultaneouscontrast",
+        0.08863646888313767
+      ],
+      [
+        "grabcolorcollection",
+        0.08863646888313767
+      ],
+      [
+        "shelf",
+        0.08863646888313767
+      ],
+      [
+        "shelf_with_stickers",
+        0.08863646888313767
+      ]
+    ],
+    "outliers": [
+      [
+        "laser_turret",
+        0.041
+      ],
+      [
+        "rainbow_hallway",
+        0.07
+      ],
+      [
+        "mario_cube",
+        0.071
+      ],
+      [
+        "albers_wall_gallery",
+        0.073
+      ],
+      [
+        "hand_model",
+        0.08
+      ]
+    ],
+    "members": [
+      "albers_wall_gallery",
+      "rainbow",
+      "MetamerismLab",
+      "RotatingLaser",
+      "SimultaneousContrast",
+      "SpectrumVisualizer",
+      "advancedglitch",
+      "brick_wall_factory",
+      "color_constellation_office",
+      "color_mixing",
+      "color_scanner",
+      "color_space_navigator",
+      "colorballs",
+      "colorsheets",
+      "dark_side_prism",
+      "disco_lights",
+      "glitchcolor",
+      "grab_stick_scanner",
+      "grabcolorcollection",
+      "gridcolorizer",
+      "k_means_color",
+      "minimalglitch",
+      "pillarcolorcollection",
+      "shelf",
+      "shelf_with_stickers",
+      "spectrum_forest",
+      "spherecolors",
+      "strobe_lasers",
+      "textureglitch",
+      "visual_color_mixing"
+    ],
+    "infrastructure_members": []
+  },
+  "change": {
+    "n_artifacts": 10,
+    "n_with_text": 10,
+    "n_core": 9,
+    "n_infrastructure": 1,
+    "intra_similarity": 0.0973,
+    "null_mean": 0.0147,
+    "null_std": 0.0104,
+    "calibrated_coherence": 7.964,
+    "mean_centroid_distance": 0.4437,
+    "centroid_top_terms": [
+      [
+        "derivative",
+        0.2117972416677001
+      ],
+      [
+        "change",
+        0.20754017026652724
+      ],
+      [
+        "sieve_2026_05_13",
+        0.17578137186895024
+      ],
+      [
+        "tangent",
+        0.11680017454468568
+      ],
+      [
+        "calculus",
+        0.10934625284298062
+      ],
+      [
+        "right",
+        0.10726414866172759
+      ],
+      [
+        "accumulation",
+        0.10207728115262892
+      ],
+      [
+        "flow",
+        0.09888251972886072
+      ]
+    ],
+    "outliers": [
+      [
+        "riemann_pump",
+        0.41
+      ],
+      [
+        "ftc_bridge",
+        0.411
+      ],
+      [
+        "particle_flow_swarm",
+        0.415
+      ]
+    ],
+    "members": [
+      "slope_tangent_demo",
+      "integral_area",
+      "derivative_pair",
+      "velocity_arrow",
+      "partial_derivative_terrain",
+      "riemann_pump",
+      "vector_field_grid",
+      "particle_flow_swarm",
+      "ftc_bridge"
+    ],
+    "infrastructure_members": [
+      "catalyst_sustain_demo"
+    ]
+  },
+  "forces": {
+    "n_artifacts": 65,
+    "n_with_text": 65,
+    "n_core": 63,
+    "n_infrastructure": 2,
+    "intra_similarity": 0.0444,
+    "null_mean": 0.0125,
+    "null_std": 0.002,
+    "calibrated_coherence": 16.284,
+    "mean_centroid_distance": 0.2355,
+    "centroid_top_terms": [
+      [
+        "vector",
+        0.1600323684449864
+      ],
+      [
+        "vectors",
+        0.15984195510348606
+      ],
+      [
+        "linear_algebra",
+        0.08989761347024566
+      ],
+      [
+        "math",
+        0.07599324214630493
+      ],
+      [
+        "physics",
+        0.07042000592467969
+      ],
+      [
+        "force",
+        0.06733679336577943
+      ],
+      [
+        "queer_cylinder_target",
+        0.06049790733293524
+      ],
+      [
+        "vectorforces",
+        0.05185534914251592
+      ]
+    ],
+    "outliers": [
+      [
+        "forcedirected3d",
+        0.068
+      ],
+      [
+        "hits_reset_display",
+        0.072
+      ],
+      [
+        "three_body_problem",
+        0.078
+      ],
+      [
+        "spring_system",
+        0.088
+      ],
+      [
+        "grab_sphere_point",
+        0.092
+      ]
+    ],
+    "members": [
+      "forcedirected3d",
+      "force_field_visualizer",
+      "hits_reset_display",
+      "bouncing_ball",
+      "example_2_1_forces_vr",
+      "example_2_2_forces_mass_variation_vr",
+      "example_2_3_gravity_scaled_by_mass_vr",
+      "example_2_5_fluid_resistance_vr",
+      "example_2_8_two_body_attraction_vr",
+      "example_2_9_n_body_attraction_vr",
+      "example_3_2_forces_with_arbitrary_angular_motion_vr",
+      "example_3_3_pointing_in_the_direction_of_motion_vr",
+      "firework_launcher",
+      "force_fields",
+      "friction_ramp",
+      "mass_spring_damper",
+      "momentum_collision",
+      "nbody_simulation",
+      "newtons_laws",
+      "particle_systems",
+      "spring_system",
+      "three_body_problem",
+      "vector_fields",
+      "chaos_attractor",
+      "grab_sphere_point",
+      "queer_cylinder_target",
+      "ForceMagnitudeDemo",
+      "VectorAddition",
+      "VectorBasics",
+      "VectorCrossProduct"
+    ],
+    "infrastructure_members": [
+      "health_display",
+      "library_rack"
+    ]
+  },
+  "wavefunctions": {
+    "n_artifacts": 91,
+    "n_with_text": 91,
+    "n_core": 91,
+    "n_infrastructure": 0,
+    "intra_similarity": 0.0569,
+    "null_mean": 0.0125,
+    "null_std": 0.0016,
+    "calibrated_coherence": 27.784,
+    "mean_centroid_distance": 0.2502,
+    "centroid_top_terms": [
+      [
+        "waves",
+        0.18113254848767701
+      ],
+      [
+        "oscillation",
+        0.13103801011945657
+      ],
+      [
+        "wave",
+        0.11815767991467083
+      ],
+      [
+        "physics",
+        0.09927884565445756
+      ],
+      [
+        "demo_singles",
+        0.07179971419732974
+      ],
+      [
+        "demo_passive",
+        0.07179971419732974
+      ],
+      [
+        "demo_compounds",
+        0.07179971419732974
+      ],
+      [
+        "sine",
+        0.06596075070595286
+      ]
+    ],
+    "outliers": [
+      [
+        "petri_dish_worms",
+        0.069
+      ],
+      [
+        "coloredlines",
+        0.069
+      ],
+      [
+        "chord_tension_spring",
+        0.071
+      ],
+      [
+        "interactable_demo",
+        0.093
+      ],
+      [
+        "vowel_sound_board",
+        0.093
+      ]
+    ],
+    "members": [
+      "coloredlines",
+      "AudioContr",
+      "additive_wave_demo",
+      "control_pendulum",
+      "dna_specimen",
+      "interactable_demo",
+      "mario_cube_time_trace",
+      "oscilloscope",
+      "petri_dish_worms",
+      "spring_demo",
+      "demo_singles",
+      "demo_passive",
+      "demo_compounds",
+      "audio_catalog_tablet",
+      "draw_dot_time_domain",
+      "pickup_cube_rotating",
+      "pickup_cube_static",
+      "pickup_cube_transforming",
+      "rotating_cube",
+      "transformation_cube",
+      "vowel_sound_board",
+      "rotatescalecubes",
+      "BigPipeSystem",
+      "DualBallFMController",
+      "ElphabaDress",
+      "GlassRack",
+      "MarioSoundController",
+      "MelodyChaser3D",
+      "OscillationCurve",
+      "PendulumWave"
+    ],
+    "infrastructure_members": []
+  },
+  "randomness": {
+    "n_artifacts": 91,
+    "n_with_text": 91,
+    "n_core": 90,
+    "n_infrastructure": 1,
+    "intra_similarity": 0.0654,
+    "null_mean": 0.0124,
+    "null_std": 0.0017,
+    "calibrated_coherence": 31.071,
+    "mean_centroid_distance": 0.2733,
+    "centroid_top_terms": [
+      [
+        "probability",
+        0.18286019617108581
+      ],
+      [
+        "randomness",
+        0.1496326708026294
+      ],
+      [
+        "procedural",
+        0.13735596643532086
+      ],
+      [
+        "random",
+        0.10985730965886695
+      ],
+      [
+        "emergence",
+        0.08344086623905196
+      ],
+      [
+        "particle",
+        0.042299589514361746
+      ],
+      [
+        "interactive",
+        0.04126015783505193
+      ],
+      [
+        "gaussian",
+        0.03539430812970831
+      ]
+    ],
+    "outliers": [
+      [
+        "nature_system_demo",
+        0.063
+      ],
+      [
+        "miura_crawler",
+        0.07
+      ],
+      [
+        "scissor_stalker",
+        0.07
+      ],
+      [
+        "kaleidocycle_enemy",
+        0.078
+      ],
+      [
+        "random_space",
+        0.082
+      ]
+    ],
+    "members": [
+      "entropy_axiom",
+      "distribution_sampler",
+      "random_space",
+      "random_walk_terrarium",
+      "armadillo_eggling",
+      "hazards_demo",
+      "kaleidocycle_enemy",
+      "kresling_spire",
+      "miura_crawler",
+      "origami_droideka",
+      "scissor_stalker",
+      "nature_system_demo",
+      "cube_projectile_spawner",
+      "random_object_spawner",
+      "mushrooms",
+      "2d_in_3d_randomness_vis",
+      "GaussianBlurCircle",
+      "GaussianBlurShader",
+      "GaussianPaintSplatter",
+      "Random_Rotate_Random_XYZ",
+      "RotateGridCubes",
+      "bell_alley",
+      "bubble_particles",
+      "bubbles_random",
+      "coin_toss",
+      "curl_noise_particles",
+      "dice_throw",
+      "digital_materiality_glitch",
+      "distribution_visualization",
+      "entropy_axiom"
+    ],
+    "infrastructure_members": [
+      "clipboard"
+    ]
+  },
+  "noise": {
+    "n_artifacts": 27,
+    "n_with_text": 27,
+    "n_core": 26,
+    "n_infrastructure": 1,
+    "intra_similarity": 0.2049,
+    "null_mean": 0.0121,
+    "null_std": 0.0028,
+    "calibrated_coherence": 68.811,
+    "mean_centroid_distance": 0.4845,
+    "centroid_top_terms": [
+      [
+        "noise",
+        0.4367815238345181
+      ],
+      [
+        "procedural",
+        0.28305825724142036
+      ],
+      [
+        "probability",
+        0.1838483670326763
+      ],
+      [
+        "randomness",
+        0.17478241546532283
+      ],
+      [
+        "perlin",
+        0.1242027949986843
+      ],
+      [
+        "terrain",
+        0.10394086119891817
+      ],
+      [
+        "interactive",
+        0.0679190950261561
+      ],
+      [
+        "generation",
+        0.0652364410623003
+      ]
+    ],
+    "outliers": [
+      [
+        "randompoint",
+        0.16
+      ],
+      [
+        "noisesphere",
+        0.278
+      ],
+      [
+        "neon_wave_grid",
+        0.284
+      ],
+      [
+        "RandomGaussianTexture",
+        0.334
+      ],
+      [
+        "MeltingBerniniScene",
+        0.342
+      ]
+    ],
+    "members": [
+      "perlin_terrain_sculptor",
+      "MeltingBerniniScene",
+      "NoiseColors3D",
+      "RandomGaussianTexture",
+      "WhiteNoiseGallery",
+      "blue_noise",
+      "neon_wave_grid",
+      "noise_space",
+      "noise_terrain",
+      "noise_terrain_with_blobs",
+      "noiselayers",
+      "noisesphere",
+      "noisetext",
+      "noisetorus",
+      "particle_randomness_perlin",
+      "perlin_noise",
+      "perlin_noise_clouds",
+      "perlin_noise_terrain",
+      "pool_hole_noise",
+      "random_transformations_noise",
+      "randompoint",
+      "randompoints",
+      "shader_noise_space",
+      "simplex_noise",
+      "value_noise",
+      "voxelnoise"
+    ],
+    "infrastructure_members": [
+      "configurable_portal"
+    ]
+  },
+  "cellularautomata": {
+    "n_artifacts": 27,
+    "n_with_text": 27,
+    "n_core": 26,
+    "n_infrastructure": 1,
+    "intra_similarity": 0.2175,
+    "null_mean": 0.0121,
+    "null_std": 0.0028,
+    "calibrated_coherence": 73.318,
+    "mean_centroid_distance": 0.4958,
+    "centroid_top_terms": [
+      [
+        "cellular_automata",
+        0.4685335503702308
+      ],
+      [
+        "emergence",
+        0.42571149393791696
+      ],
+      [
+        "computation",
+        0.2808787937395406
+      ],
+      [
+        "automata",
+        0.187144225352781
+      ],
+      [
+        "cellular",
+        0.18104824327844687
+      ],
+      [
+        "biology",
+        0.15654525510402936
+      ],
+      [
+        "bridge",
+        0.07752859835342663
+      ],
+      [
+        "rule",
+        0.06930940982845207
+      ]
+    ],
+    "outliers": [
+      [
+        "grid_substrate_runner",
+        0.177
+      ],
+      [
+        "ca_rule_comparison",
+        0.212
+      ],
+      [
+        "ca_conway_city",
+        0.234
+      ],
+      [
+        "game_of_life_petri",
+        0.272
+      ],
+      [
+        "ca_rule_explorer",
+        0.297
+      ]
+    ],
+    "members": [
+      "CellularAutomata3DStacked",
+      "ca_bridge",
+      "ca_chair_test",
+      "ca_columns",
+      "ca_growth_network",
+      "ca_screen",
+      "ca_sphere",
+      "cellular_automata_3d_tree",
+      "crossway_ca",
+      "decaying_bridge",
+      "disease_spread_ca",
+      "hexagon_ca_vr",
+      "line_network_ca",
+      "mirrored_cellular_automata",
+      "mold_network",
+      "persian_rug",
+      "rule_30_110_gravity",
+      "self_organization_ca",
+      "sierpinski_pyramid",
+      "grid_substrate_runner",
+      "structure_growth",
+      "volumetric_fog_ca",
+      "ca_conway_city",
+      "ca_rule_comparison",
+      "ca_rule_explorer",
+      "game_of_life_petri"
+    ],
+    "infrastructure_members": [
+      "becoming_catalyst"
+    ]
+  },
+  "fractals": {
+    "n_artifacts": 47,
+    "n_with_text": 47,
+    "n_core": 47,
+    "n_infrastructure": 0,
+    "intra_similarity": 0.049,
+    "null_mean": 0.0116,
+    "null_std": 0.0023,
+    "calibrated_coherence": 16.56,
+    "mean_centroid_distance": 0.2568,
+    "centroid_top_terms": [
+      [
+        "procedural",
+        0.22889222617654792
+      ],
+      [
+        "generation",
+        0.2116645613046352
+      ],
+      [
+        "fractal",
+        0.1816816260178661
+      ],
+      [
+        "tree",
+        0.0969143217577251
+      ],
+      [
+        "small_subdivision_cube",
+        0.08109293961648766
+      ],
+      [
+        "diffusion_limited_aggregation",
+        0.08109293961648766
+      ],
+      [
+        "fractal_scene",
+        0.08109293961648766
+      ],
+      [
+        "recursive_tree_2",
+        0.08109293961648766
+      ]
+    ],
+    "outliers": [
+      [
+        "evolutionary_algorithms",
+        0.066
+      ],
+      [
+        "mobius_world",
+        0.067
+      ],
+      [
+        "cellular_automata_3d_stacked",
+        0.078
+      ],
+      [
+        "living_paper",
+        0.085
+      ],
+      [
+        "strange_attractors",
+        0.148
+      ]
+    ],
+    "members": [
+      "fibonacci_sequences",
+      "koch_curve",
+      "mobius_world",
+      "cellular_automata_3d_stacked",
+      "lyapunov_fractal",
+      "mandelbrot_dive",
+      "strange_attractors",
+      "box_counting_dimension",
+      "julia_set_explorer",
+      "living_paper",
+      "Hilbert3D",
+      "space_filling_curve_gallery",
+      "small_subdivision_cube",
+      "cantor_set",
+      "cube_bookshelf",
+      "cube_cabin",
+      "cube_desk",
+      "cube_staircase",
+      "cube_subdivision",
+      "diffusion_limited_aggregation",
+      "example_8_3_recursion_circles_vr",
+      "example_8_4_cantor_pagoda_vr",
+      "example_8_4_cantor_set_vr",
+      "fibonacci_pagoda",
+      "fibonacci_terrain",
+      "fractal_clouds",
+      "fractal_koch_curve",
+      "fractal_lsystem_tree",
+      "fractal_recursion_1",
+      "fractal_recursion_2"
+    ],
+    "infrastructure_members": []
+  },
+  "lsystems": {
+    "n_artifacts": 16,
+    "n_with_text": 16,
+    "n_core": 16,
+    "n_infrastructure": 0,
+    "intra_similarity": 0.1795,
+    "null_mean": 0.0142,
+    "null_std": 0.0064,
+    "calibrated_coherence": 25.686,
+    "mean_centroid_distance": 0.4795,
+    "centroid_top_terms": [
+      [
+        "tree",
+        0.2604057304628572
+      ],
+      [
+        "l-system",
+        0.23929996834956224
+      ],
+      [
+        "grammar",
+        0.2226572521951294
+      ],
+      [
+        "procedural",
+        0.2071829038229668
+      ],
+      [
+        "l_system",
+        0.16856303619665797
+      ],
+      [
+        "l_systems",
+        0.1486807745726063
+      ],
+      [
+        "simulation",
+        0.11855684076123346
+      ],
+      [
+        "string",
+        0.07072758962671793
+      ]
+    ],
+    "outliers": [
+      [
+        "modulor_cypress",
+        0.224
+      ],
+      [
+        "ContextFreeGrammars",
+        0.273
+      ],
+      [
+        "lindenmayer_tube_tree",
+        0.335
+      ],
+      [
+        "branching_coral",
+        0.343
+      ],
+      [
+        "lsystem_editor",
+        0.352
+      ]
+    ],
+    "members": [
+      "tree_generation",
+      "lsystem_editor",
+      "ContextFreeGrammars",
+      "AnimatedTree",
+      "CityGenerator",
+      "ContextSensitiveTree",
+      "ForestCompetition",
+      "branching_coral",
+      "fractal_lsystem_string",
+      "genetic_tree_sculptor",
+      "grammar_provenance",
+      "lsystem_dungeon",
+      "lsystem_tree",
+      "parametric_lsystem",
+      "lindenmayer_tube_tree",
+      "modulor_cypress"
+    ],
+    "infrastructure_members": []
+  },
+  "proceduralgeneration": {
+    "n_artifacts": 13,
+    "n_with_text": 13,
+    "n_core": 13,
+    "n_infrastructure": 0,
+    "intra_similarity": 0.0538,
+    "null_mean": 0.0103,
+    "null_std": 0.0038,
+    "calibrated_coherence": 11.408,
+    "mean_centroid_distance": 0.3519,
+    "centroid_top_terms": [
+      [
+        "generation",
+        0.2525357496980386
+      ],
+      [
+        "procedural",
+        0.20985218613554613
+      ],
+      [
+        "membrane",
+        0.10661169683845931
+      ],
+      [
+        "maze",
+        0.10337546803013654
+      ],
+      [
+        "layered",
+        0.09838221099695593
+      ],
+      [
+        "growth",
+        0.09091926030925647
+      ],
+      [
+        "percolationnetwork_ca",
+        0.08376633323021802
+      ],
+      [
+        "branching",
+        0.07303573505056796
+      ]
+    ],
+    "outliers": [
+      [
+        "seed_orb",
+        0.215
+      ],
+      [
+        "dome",
+        0.252
+      ],
+      [
+        "organic_space",
+        0.255
+      ],
+      [
+        "GeneticProgramming",
+        0.268
+      ]
+    ],
+    "members": [
+      "organic_space",
+      "rhizomatic_maze_space",
+      "dome",
+      "GeneticProgramming",
+      "branching_growth_algorithm",
+      "caverandomwalk",
+      "cube_mound_scene",
+      "layered_membrane",
+      "maze_generation",
+      "mirror_cellular_texture_for_3d",
+      "percolationnetwork_ca",
+      "space_colonization_algorithm",
+      "seed_orb"
+    ],
+    "infrastructure_members": []
+  },
+  "softbodies": {
+    "n_artifacts": 18,
+    "n_with_text": 18,
+    "n_core": 18,
+    "n_infrastructure": 0,
+    "intra_similarity": 0.0826,
+    "null_mean": 0.0103,
+    "null_std": 0.0035,
+    "calibrated_coherence": 20.39,
+    "mean_centroid_distance": 0.3468,
+    "centroid_top_terms": [
+      [
+        "physics",
+        0.3035592922566421
+      ],
+      [
+        "soft_body",
+        0.2724603590706724
+      ],
+      [
+        "entropy_morphogenesis",
+        0.21174267566527333
+      ],
+      [
+        "grab_long_stick",
+        0.21174267566527333
+      ],
+      [
+        "soft_mushroom",
+        0.21174267566527333
+      ],
+      [
+        "soft",
+        0.20086853879404457
+      ],
+      [
+        "body",
+        0.1489421929788638
+      ],
+      [
+        "cloth",
+        0.12698637480875463
+      ]
+    ],
+    "outliers": [
+      [
+        "turing_pattern_generator",
+        0.135
+      ],
+      [
+        "reaction_diffusion",
+        0.136
+      ],
+      [
+        "radiolaria",
+        0.148
+      ],
+      [
+        "flex_cloth_pad",
+        0.241
+      ],
+      [
+        "frozen_glass_vessel",
+        0.244
+      ]
+    ],
+    "members": [
+      "entropy_morphogenesis",
+      "turing_pattern_generator",
+      "radiolaria",
+      "softmill",
+      "softstopscene",
+      "grab_long_stick",
+      "reaction_diffusion",
+      "flex_cloth_pad",
+      "flagdancer",
+      "breathing_room",
+      "cloth_straps",
+      "revolving_joy_ride",
+      "softbody_gallery_part2",
+      "softbody_gallery_part3",
+      "rounded_softbody_test",
+      "jelly_cube",
+      "soft_mushroom",
+      "frozen_glass_vessel"
+    ],
+    "infrastructure_members": []
+  },
+  "isosurfaces": {
+    "n_artifacts": 25,
+    "n_with_text": 25,
+    "n_core": 25,
+    "n_infrastructure": 0,
+    "intra_similarity": 0.104,
+    "null_mean": 0.0119,
+    "null_std": 0.0025,
+    "calibrated_coherence": 37.251,
+    "mean_centroid_distance": 0.3574,
+    "centroid_top_terms": [
+      [
+        "gpu",
+        0.2471707372330236
+      ],
+      [
+        "working",
+        0.18955788162481468
+      ],
+      [
+        "isosurfaces",
+        0.1807445405764416
+      ],
+      [
+        "marching_cubes",
+        0.16874276217589546
+      ],
+      [
+        "procedural",
+        0.1573469373323574
+      ],
+      [
+        "gyroiddemo",
+        0.1524547264789968
+      ],
+      [
+        "marchingcave",
+        0.1524547264789968
+      ],
+      [
+        "marchingcubes_cave",
+        0.1524547264789968
+      ]
+    ],
+    "outliers": [
+      [
+        "fifteen_cases_demo",
+        0.259
+      ],
+      [
+        "nakama_metaballs",
+        0.274
+      ],
+      [
+        "implicit_surface_modeling",
+        0.282
+      ],
+      [
+        "GyroidDemo",
+        0.289
+      ],
+      [
+        "marchingcave",
+        0.289
+      ]
+    ],
+    "members": [
+      "voxel_noise_demo",
+      "gyroid_demo",
+      "fountain_demo",
+      "mc_sculpt_vr",
+      "mc_portal_landscape",
+      "mc_cave",
+      "mc_torus_sculpture",
+      "mc_shapes_gallery",
+      "mc_inside_cave",
+      "mc_flat_landscape",
+      "mc_overhang_landscape",
+      "animated_noise_explorer",
+      "mc_base",
+      "nakama_metaballs",
+      "raymarched_metaballs",
+      "metaball_world",
+      "fifteen_cases_demo",
+      "mc_terrain_demo",
+      "queer_marching_cave",
+      "GyroidDemo",
+      "implicit_surface_modeling",
+      "marchingcave",
+      "marchingcubes_cave",
+      "marchingcubes_portal_landscape",
+      "metaballs"
+    ],
+    "infrastructure_members": []
+  },
+  "boolean_surfaces": {
+    "n_artifacts": 5,
+    "n_with_text": 5,
+    "n_core": 5,
+    "n_infrastructure": 0,
+    "intra_similarity": 0.3066,
+    "null_mean": 0.0119,
+    "null_std": 0.0107,
+    "calibrated_coherence": 27.49,
+    "mean_centroid_distance": 0.6667,
+    "centroid_top_terms": [
+      [
+        "csg",
+        0.8206353132237234
+      ],
+      [
+        "boolean_surfaces",
+        0.33692157276286716
+      ],
+      [
+        "boolean",
+        0.3280871598137572
+      ],
+      [
+        "union",
+        0.27718356573559577
+      ],
+      [
+        "intersection",
+        0.25985959287712107
+      ],
+      [
+        "sieve_2026_05_13",
+        0.2346931491935365
+      ],
+      [
+        "operator",
+        0.2235471912089181
+      ],
+      [
+        "f_order",
+        0.2235471912089181
+      ]
+    ],
+    "outliers": [
+      [
+        "csg_compose_workbench",
+        0.592
+      ]
+    ],
+    "members": [
+      "csg_union_demo",
+      "csg_intersection_demo",
+      "csg_difference_demo",
+      "csg_compose_workbench",
+      "csg_architecture_cavity"
+    ],
+    "infrastructure_members": []
+  },
+  "swarmintelligence": {
+    "n_artifacts": 11,
+    "n_with_text": 11,
+    "n_core": 11,
+    "n_infrastructure": 0,
+    "intra_similarity": 0.0569,
+    "null_mean": 0.0124,
+    "null_std": 0.0067,
+    "calibrated_coherence": 6.672,
+    "mean_centroid_distance": 0.361,
+    "centroid_top_terms": [
+      [
+        "boids_2d_in_3d",
+        0.34648801472499274
+      ],
+      [
+        "swarm",
+        0.2383913683414993
+      ],
+      [
+        "misc",
+        0.17373156914478188
+      ],
+      [
+        "algorithms",
+        0.16438695940821513
+      ],
+      [
+        "collective",
+        0.1352764337591149
+      ],
+      [
+        "algorithm",
+        0.13474770735202402
+      ],
+      [
+        "flocking",
+        0.12599252987981624
+      ],
+      [
+        "boid",
+        0.12336768550732008
+      ]
+    ],
+    "outliers": [
+      [
+        "self_organizing_patterns",
+        0.223
+      ],
+      [
+        "fitness_landscape_politics",
+        0.254
+      ]
+    ],
+    "members": [
+      "FlowFieldMain",
+      "boid_flocking",
+      "boid_manager",
+      "boids_2d_in_3d",
+      "ecosystem_simulation",
+      "self_organizing_patterns",
+      "ant_colony_optimization",
+      "boids_aquarium",
+      "AntColonyV2",
+      "fitness_landscape_politics",
+      "PhysarumColony"
+    ],
+    "infrastructure_members": []
+  },
+  "machinelearning": {
+    "n_artifacts": 29,
+    "n_with_text": 29,
+    "n_core": 29,
+    "n_infrastructure": 0,
+    "intra_similarity": 0.0558,
+    "null_mean": 0.0128,
+    "null_std": 0.0028,
+    "calibrated_coherence": 15.291,
+    "mean_centroid_distance": 0.293,
+    "centroid_top_terms": [
+      [
+        "machine_learning",
+        0.3316107304240873
+      ],
+      [
+        "interactive",
+        0.0604657221188069
+      ],
+      [
+        "transformers_vr",
+        0.05841177259731678
+      ],
+      [
+        "selection",
+        0.057831051224149416
+      ],
+      [
+        "shakespeare",
+        0.0562454715617323
+      ],
+      [
+        "genetic_algorithm",
+        0.05141633553813955
+      ],
+      [
+        "neural",
+        0.05128422076680102
+      ],
+      [
+        "rockets",
+        0.050954697004116076
+      ]
+    ],
+    "outliers": [
+      [
+        "gradient_descent_visualization",
+        0.161
+      ],
+      [
+        "loss_function_comparator",
+        0.179
+      ],
+      [
+        "random_walker_machine",
+        0.196
+      ],
+      [
+        "anomaly_detection",
+        0.206
+      ],
+      [
+        "pca_visualization",
+        0.207
+      ]
+    ],
+    "members": [
+      "gradient_descent_visualization",
+      "9_1_ga_shakespeare_vr",
+      "9_2_smart_rockets_basic_vr",
+      "9_3_smart_rockets_vr",
+      "9_4_interactive_selection_vr",
+      "9_5_evolving_bloops_vr",
+      "9_6_ga_shakespeare_annotated_vr",
+      "anomaly_detection",
+      "computer_vision_vr",
+      "convolutional_neural_networks",
+      "convolutional_neural_networks_cnns_vr",
+      "enhanced_kmeans",
+      "evolved_creatures",
+      "evolvingflowers",
+      "explainable_ai_xai_vr",
+      "generative_adversarial_networks_gans_vr",
+      "joint_learn_walk",
+      "learn_world_stacked",
+      "loss_function_comparator",
+      "lstms_vr",
+      "neural_network_visualization",
+      "neural_networks_vr",
+      "non_teleological_evolution",
+      "pca_visualization",
+      "random_forest_visualization",
+      "random_walker_machine",
+      "svm_visualization",
+      "transformers_vr",
+      "learn_input_pair_stand"
+    ],
+    "infrastructure_members": []
+  },
+  "graphtheory": {
+    "n_artifacts": 14,
+    "n_with_text": 14,
+    "n_core": 14,
+    "n_infrastructure": 0,
+    "intra_similarity": 0.0807,
+    "null_mean": 0.0111,
+    "null_std": 0.0049,
+    "calibrated_coherence": 14.177,
+    "mean_centroid_distance": 0.3706,
+    "centroid_top_terms": [
+      [
+        "algorithm",
+        0.13433135641146102
+      ],
+      [
+        "graph",
+        0.11386931401613822
+      ],
+      [
+        "misc",
+        0.08533227698752774
+      ],
+      [
+        "algorithms",
+        0.08027100201063646
+      ],
+      [
+        "graph_theory",
+        0.07953346122771818
+      ],
+      [
+        "directed",
+        0.06601675765205696
+      ],
+      [
+        "topological",
+        0.06368043490166152
+      ],
+      [
+        "topological_sort",
+        0.06049790733293524
+      ]
+    ],
+    "outliers": [
+      [
+        "rhizomatic_structure",
+        0.277
+      ],
+      [
+        "pathfinding3d",
+        0.325
+      ]
+    ],
+    "members": [
+      "KonigsbergBridge",
+      "edmonds_algorithm",
+      "force_directed_layout",
+      "graphspace",
+      "karger_algorithm",
+      "kosaraju_algorithm",
+      "mst_visualization",
+      "network_analysis",
+      "networkflow3d",
+      "pathfinding3d",
+      "push_relabel_algorithm",
+      "tarjan_algorithm",
+      "topological_sort",
+      "rhizomatic_structure"
+    ],
+    "infrastructure_members": []
+  },
+  "foundationscrisis": {
+    "n_artifacts": 23,
+    "n_with_text": 23,
+    "n_core": 23,
+    "n_infrastructure": 0,
+    "intra_similarity": 0.0477,
+    "null_mean": 0.0146,
+    "null_std": 0.0048,
+    "calibrated_coherence": 6.868,
+    "mean_centroid_distance": 0.2964,
+    "centroid_top_terms": [
+      [
+        "philosophy",
+        0.13561812885923788
+      ],
+      [
+        "qfep",
+        0.11034031622908828
+      ],
+      [
+        "interactive",
+        0.11013734720053442
+      ],
+      [
+        "impossible",
+        0.09603216790589596
+      ],
+      [
+        "slider",
+        0.09333362196341023
+      ],
+      [
+        "geometry",
+        0.08791504538306964
+      ],
+      [
+        "non_euclidean",
+        0.07384156390791487
+      ],
+      [
+        "quantum",
+        0.06790168877300182
+      ]
+    ],
+    "outliers": [
+      [
+        "parallel_lines",
+        0.217
+      ],
+      [
+        "riemann_sphere",
+        0.22
+      ],
+      [
+        "magritte_pipe",
+        0.228
+      ],
+      [
+        "brouwer_choice_sequence",
+        0.239
+      ],
+      [
+        "constructive_proof",
+        0.25
+      ]
+    ],
+    "members": [
+      "curvature_slider",
+      "elliptic_surface",
+      "hyperbolic_surface",
+      "riemann_sphere",
+      "godel_statement_plaque",
+      "russell_set_box",
+      "magritte_pipe",
+      "escher_staircase",
+      "florensky_sphere",
+      "bifurcation_diagram",
+      "euclid_postulates_plaque",
+      "penrose_triangle",
+      "poincare_disk",
+      "schrodinger_box",
+      "angle_sum_triangle",
+      "constructive_proof",
+      "brouwer_choice_sequence",
+      "excluded_middle_demo",
+      "parallel_lines",
+      "lambda_slider",
+      "phi_slider",
+      "qfep_formula_3d",
+      "superposition_display"
+    ],
+    "infrastructure_members": []
+  },
+  "qfeplaboratory": {
+    "n_artifacts": 29,
+    "n_with_text": 29,
+    "n_core": 29,
+    "n_infrastructure": 0,
+    "intra_similarity": 0.1545,
+    "null_mean": 0.0128,
+    "null_std": 0.0028,
+    "calibrated_coherence": 50.405,
+    "mean_centroid_distance": 0.4276,
+    "centroid_top_terms": [
+      [
+        "qfep",
+        0.40405954140096767
+      ],
+      [
+        "theory",
+        0.2048320144627842
+      ],
+      [
+        "philosophy",
+        0.18568663718510187
+      ],
+      [
+        "chaos",
+        0.13292022310686857
+      ],
+      [
+        "pattern",
+        0.12517091382358933
+      ],
+      [
+        "zone",
+        0.07692070484160277
+      ],
+      [
+        "particles",
+        0.07372547885388964
+      ],
+      [
+        "representing",
+        0.07354878340656126
+      ]
+    ],
+    "outliers": [
+      [
+        "snap_tetra_puzzle",
+        0.134
+      ],
+      [
+        "snap_cube_puzzle",
+        0.157
+      ],
+      [
+        "fold_theatre_runner",
+        0.175
+      ],
+      [
+        "bifurcation_walkway",
+        0.212
+      ],
+      [
+        "qfep_term_compass",
+        0.227
+      ]
+    ],
+    "members": [
+      "fold_theatre_runner",
+      "queer_morphology_specimen",
+      "bifurcation_walkway",
+      "grab_sphere_F",
+      "grab_sphere_E",
+      "grab_sphere_lambda",
+      "grab_sphere_phi",
+      "qfep_reactor",
+      "crystal_cluster",
+      "reactive_particles",
+      "crystal_formation",
+      "edge_particles",
+      "emergence_zone",
+      "random_cubes",
+      "particle_chaos",
+      "ordered_grid",
+      "chaos_particles",
+      "dissolving_form",
+      "complexity_pattern",
+      "turing_pattern",
+      "edge_core",
+      "rigid_sculpture",
+      "fluid_form",
+      "preserved_pattern",
+      "transforming_pattern",
+      "edge_of_chaos_unlocked",
+      "snap_tetra_puzzle",
+      "snap_cube_puzzle",
+      "qfep_term_compass"
+    ],
+    "infrastructure_members": []
+  },
+  "postfoundationscrisis": {
+    "n_artifacts": 19,
+    "n_with_text": 19,
+    "n_core": 19,
+    "n_infrastructure": 0,
+    "intra_similarity": 0.0384,
+    "null_mean": 0.0127,
+    "null_std": 0.003,
+    "calibrated_coherence": 8.675,
+    "mean_centroid_distance": 0.296,
+    "centroid_top_terms": [
+      [
+        "postfoundationscrisis",
+        0.1613560999973729
+      ],
+      [
+        "sieve_2026_05_13",
+        0.13154975245350317
+      ],
+      [
+        "applied",
+        0.11548615438502646
+      ],
+      [
+        "claim",
+        0.08511262005273784
+      ],
+      [
+        "paraconsistent",
+        0.07048222641994113
+      ],
+      [
+        "bias",
+        0.06403091674316674
+      ],
+      [
+        "clipboard",
+        0.054707282710972846
+      ],
+      [
+        "wiki",
+        0.053599362918796606
+      ]
+    ],
+    "outliers": [
+      [
+        "MolecularDesigner",
+        0.178
+      ],
+      [
+        "bias_from_inside",
+        0.18
+      ],
+      [
+        "bias_visualizer",
+        0.188
+      ],
+      [
+        "rhizome_cave_demo",
+        0.192
+      ],
+      [
+        "tt",
+        0.207
+      ]
+    ],
+    "members": [
+      "bias_from_inside",
+      "wiki_fragment",
+      "situated_readout",
+      "bias_visualizer",
+      "tt",
+      "MolecularDesigner",
+      "rhizome_cave_demo",
+      "ethical_design_clipboard",
+      "excluded_class_visualizer",
+      "room_shape_demonstrator",
+      "merge_conflict_visualizer",
+      "cap_theorem_walk",
+      "florensky_in_production",
+      "situated_sensor",
+      "locatable_knowledge_station",
+      "wiki_fragment_station",
+      "peer_edit_ledger",
+      "citation_graph_node",
+      "edge_as_ground_capstone"
+    ],
+    "infrastructure_members": []
+  }
+}

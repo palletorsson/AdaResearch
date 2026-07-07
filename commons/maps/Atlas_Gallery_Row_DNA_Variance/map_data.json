@@ -4,11 +4,7 @@
     "summary": "Atlas Gallery · Row F · DNA Variance",
     "layout": "18×16 open floor. Subject artifact sits dead-center; spawn at south edge, teleporter at north edge.",
     "objective": "Study one row of the SDF morphology gallery in isolation — one recipe, five gene sets. Walk around the artifact to view from every angle.",
-    "key_elements": [
-      "`sdf_gallery_row_dna_variance` at center cell (9, 8)",
-      "Spawn `s` south edge",
-      "Teleporter `t` north edge"
-    ]
+    "key_elements": ["`sdf_gallery_row_dna_variance` at center cell (9, 8)","Spawn `s` south edge","Teleporter `t` north edge"]
   },
   "subtitles": {},
   "map_info": {
@@ -24,11 +20,7 @@
       "category": "atlas",
       "difficulty": "reference",
       "estimated_time": "3-5 minutes",
-      "learning_objectives": [
-        "See row f · dna variance rendered in isolation",
-        "Walk around to observe from multiple angles",
-        "Note VR frame timing for this row alone"
-      ]
+      "learning_objectives": ["See row f · dna variance rendered in isolation","Walk around to observe from multiple angles","Note VR frame timing for this row alone"]
     },
     "name": "Gallery · Row F · DNA Variance",
     "version": "1.2",
@@ -50,23 +42,11 @@
     }
   },
   "lighting": {
-    "ambient_color": [
-      0.5,
-      0.5,
-      0.55
-    ],
+    "ambient_color": [0.5,0.5,0.55],
     "ambient_energy": 0.55,
     "directional_light": {
-      "color": [
-        1.0,
-        0.95,
-        0.88
-      ],
-      "direction": [
-        -0.35,
-        -0.8,
-        -0.3
-      ],
+      "color": [1.0,0.95,0.88],
+      "direction": [-0.35,-0.8,-0.3],
       "enabled": true,
       "energy": 1.2
     }
@@ -74,11 +54,7 @@
   "settings": {
     "auto_reveal_on_entry": true,
     "background": {
-      "color": [
-        0.08,
-        0.09,
-        0.12
-      ],
+      "color": [0.08,0.09,0.12],
       "type": "sky"
     },
     "cube_size": 1.0,

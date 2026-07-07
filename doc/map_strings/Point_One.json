@@ -1,12 +1,23 @@
 {
  "map": "Point_One",
  "sequence": "primitives",
- "counts": {
-  "existing": 12,
-  "added": 6,
-  "large": 4
- },
  "pearls": [
+  {
+   "id": "folding_past",
+   "name": "Folding Past",
+   "size": "large",
+   "source": "existing",
+   "role": "grid",
+   "register": "formal",
+   "edge": "F",
+   "edge_name": "Folding",
+   "concept": "Other primitives",
+   "footprint": [
+    6,
+    5
+   ],
+   "include": true
+  },
   {
    "id": "origin",
    "name": "Point Zero",
@@ -18,9 +29,10 @@
    "edge_name": "Tractability cliff",
    "concept": "Point",
    "footprint": [
-    2.0,
-    2.0
-   ]
+    2,
+    2
+   ],
+   "include": true
   },
   {
    "id": "lab_room",
@@ -33,39 +45,10 @@
    "edge_name": "Cosmotechnics",
    "concept": "",
    "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "folding_past",
-   "name": "Folding Past",
-   "size": "large",
-   "source": "existing",
-   "role": "grid",
-   "register": "formal",
-   "edge": "F",
-   "edge_name": "Folding",
-   "concept": "Other primitives",
-   "footprint": [
-    6.0,
-    5.0
-   ]
-  },
-  {
-   "id": "draw_dot_time_domain",
-   "name": "draw_dot_time_domain",
-   "size": "small",
-   "source": "added",
-   "role": "wall",
-   "register": "critical",
-   "edge": "H",
-   "edge_name": "Apparatus-as-phenomenon",
-   "concept": "Point",
-   "footprint": [
-    1.0,
-    1.0
-   ]
+    1,
+    1
+   ],
+   "include": true
   },
   {
    "id": "grid_lines",
@@ -78,9 +61,10 @@
    "edge_name": "Embodiment",
    "concept": "Line / edge",
    "footprint": [
-    6.0,
-    6.0
-   ]
+    6,
+    6
+   ],
+   "include": true
   },
   {
    "id": "frame_counter_display",
@@ -93,9 +77,10 @@
    "edge_name": "Authenticity collapse",
    "concept": "· palette (unplaced)",
    "footprint": [
-    1.0,
-    1.0
-   ]
+    1,
+    1
+   ],
+   "include": true
   },
   {
    "id": "you_are_here",
@@ -108,39 +93,10 @@
    "edge_name": "Authenticity collapse",
    "concept": "Point",
    "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "automatic_writing_desk",
-   "name": "Automatic Writing Desk",
-   "size": "small",
-   "source": "added",
-   "role": "wall",
-   "register": "critical",
-   "edge": "H",
-   "edge_name": "Apparatus-as-phenomenon",
-   "concept": "Point",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "hand_telemetry_display",
-   "name": "Hand Telemetry Display",
-   "size": "small",
-   "source": "added",
-   "role": "wall",
-   "register": "critical",
-   "edge": "M",
-   "edge_name": "Authenticity collapse",
-   "concept": "Point",
-   "footprint": [
-    1.0,
-    1.0
-   ]
+    1,
+    1
+   ],
+   "include": true
   },
   {
    "id": "fontana_puncture",
@@ -153,9 +109,10 @@
    "edge_name": "Apparatus-as-phenomenon",
    "concept": "Assembly / SDF / boolean",
    "footprint": [
-    1.0,
-    1.0
-   ]
+    1,
+    1
+   ],
+   "include": true
   },
   {
    "id": "floating_sphere_field",
@@ -168,9 +125,10 @@
    "edge_name": "Entropy debt",
    "concept": "Sphere / ball",
    "footprint": [
-    1.0,
-    1.0
-   ]
+    1,
+    1
+   ],
+   "include": true
   },
   {
    "id": "CoordinateSystem3M",
@@ -183,9 +141,10 @@
    "edge_name": "",
    "concept": "· palette (unplaced)",
    "footprint": [
-    5.0,
-    4.0
-   ]
+    5,
+    4
+   ],
+   "include": true
   },
   {
    "id": "static_point",
@@ -198,24 +157,10 @@
    "edge_name": "Tractability cliff",
    "concept": "Point",
    "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "sliding_door",
-   "name": "Sliding Door",
-   "size": "large",
-   "source": "added",
-   "role": "grid",
-   "register": "formal",
-   "edge": "C",
-   "edge_name": "Local-vs-global",
-   "concept": "Point",
-   "footprint": [
-    4.0,
-    1.0
-   ]
+    1,
+    1
+   ],
+   "include": true
   },
   {
    "id": "interactive_point_origin",
@@ -228,39 +173,10 @@
    "edge_name": "Opacity refusal",
    "concept": "Point",
    "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "xyz_slider_plate",
-   "name": "XYZ Slider Plate",
-   "size": "small",
-   "source": "added",
-   "role": "wall",
-   "register": "critical",
-   "edge": "G",
-   "edge_name": "Opacity refusal",
-   "concept": "Interactive tool",
-   "footprint": [
-    1.0,
-    1.0
-   ]
-  },
-  {
-   "id": "point",
-   "name": "1.0 A Point",
-   "size": "small",
-   "source": "added",
-   "role": "wall",
-   "register": "critical",
-   "edge": "M",
-   "edge_name": "Authenticity collapse",
-   "concept": "Sphere / ball",
-   "footprint": [
-    1.0,
-    1.0
-   ]
+    1,
+    1
+   ],
+   "include": true
   },
   {
    "id": "script_runner",
@@ -273,9 +189,112 @@
    "edge_name": "Authenticity collapse",
    "concept": "",
    "footprint": [
-    1.0,
-    1.0
-   ]
+    1,
+    1
+   ],
+   "include": true
+  },
+  {
+   "id": "draw_dot_time_domain",
+   "name": "draw_dot_time_domain",
+   "size": "small",
+   "source": "added",
+   "role": "wall",
+   "register": "critical",
+   "edge": "H",
+   "edge_name": "Apparatus-as-phenomenon",
+   "concept": "Point",
+   "footprint": [
+    1,
+    1
+   ],
+   "after": "folding_past",
+   "include": false
+  },
+  {
+   "id": "automatic_writing_desk",
+   "name": "Automatic Writing Desk",
+   "size": "small",
+   "source": "added",
+   "role": "wall",
+   "register": "critical",
+   "edge": "H",
+   "edge_name": "Apparatus-as-phenomenon",
+   "concept": "Point",
+   "footprint": [
+    1,
+    1
+   ],
+   "after": "you_are_here",
+   "include": false
+  },
+  {
+   "id": "hand_telemetry_display",
+   "name": "Hand Telemetry Display",
+   "size": "small",
+   "source": "added",
+   "role": "wall",
+   "register": "critical",
+   "edge": "M",
+   "edge_name": "Authenticity collapse",
+   "concept": "Point",
+   "footprint": [
+    1,
+    1
+   ],
+   "after": "you_are_here",
+   "include": false
+  },
+  {
+   "id": "sliding_door",
+   "name": "Sliding Door",
+   "size": "large",
+   "source": "added",
+   "role": "grid",
+   "register": "formal",
+   "edge": "C",
+   "edge_name": "Local-vs-global",
+   "concept": "Point",
+   "footprint": [
+    4,
+    1
+   ],
+   "after": "static_point",
+   "include": false
+  },
+  {
+   "id": "xyz_slider_plate",
+   "name": "XYZ Slider Plate",
+   "size": "small",
+   "source": "added",
+   "role": "wall",
+   "register": "critical",
+   "edge": "G",
+   "edge_name": "Opacity refusal",
+   "concept": "Interactive tool",
+   "footprint": [
+    1,
+    1
+   ],
+   "after": "interactive_point_origin",
+   "include": false
+  },
+  {
+   "id": "point",
+   "name": "1.0 A Point",
+   "size": "small",
+   "source": "added",
+   "role": "wall",
+   "register": "critical",
+   "edge": "M",
+   "edge_name": "Authenticity collapse",
+   "concept": "Sphere / ball",
+   "footprint": [
+    1,
+    1
+   ],
+   "after": "interactive_point_origin",
+   "include": false
   }
  ]
 }

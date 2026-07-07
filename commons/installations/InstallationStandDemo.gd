@@ -22,6 +22,12 @@ var speakers: Array = []
 var lights: Array = []
 var panels: Array = []
 var boxes: Array = []
+# Additive part types (utility / telecom vocabulary). All optional — a
+# config that omits them behaves exactly as before.
+var posts: Array = []        # round vertical poles (legs, masts)
+var pipes: Array = []        # cylinders between two points (conduit, cables)
+var dials: Array = []        # knobs / buttons protruding from a face
+var antennas: Array = []     # outward-facing sector-antenna rings
 
 
 func _ready() -> void:
@@ -44,6 +50,10 @@ func load_installation_config_from_dict(data: Dictionary) -> void:
 	lights = (data.get("lights", []) as Array).duplicate(true)
 	panels = (data.get("panels", []) as Array).duplicate(true)
 	boxes = (data.get("boxes", []) as Array).duplicate(true)
+	posts = (data.get("posts", []) as Array).duplicate(true)
+	pipes = (data.get("pipes", []) as Array).duplicate(true)
+	dials = (data.get("dials", []) as Array).duplicate(true)
+	antennas = (data.get("antennas", []) as Array).duplicate(true)
 
 
 func _build() -> void:
@@ -55,6 +65,10 @@ func _build() -> void:
 	_build_lights()
 	_build_panels()
 	_build_boxes()
+	_build_posts()
+	_build_pipes()
+	_build_dials()
+	_build_antennas()
 
 
 func _build_platform() -> void:
@@ -273,6 +287,127 @@ func _build_boxes() -> void:
 		node.material_override = metal
 		node.position = Vector3(float(box_def.get("x", 0.0)), float(box_def.get("y", 0.5)), float(box_def.get("z", 0.0)))
 		add_child(node)
+
+
+# Round vertical poles — legs and masts. y is the post CENTRE (matches uprights).
+func _build_posts() -> void:
+	var metal := _metal_material()
+	for i in range(posts.size()):
+		var p: Dictionary = posts[i]
+		var height: float = float(p.get("height", 2.0))
+		var radius: float = float(p.get("radius", 0.06))
+		var node := MeshInstance3D.new()
+		node.name = "Post_%d" % i
+		var mesh := CylinderMesh.new()
+		mesh.top_radius = float(p.get("top_radius", radius))
+		mesh.bottom_radius = radius
+		mesh.height = height
+		mesh.radial_segments = 16
+		node.mesh = mesh
+		node.material_override = metal
+		node.position = Vector3(float(p.get("x", 0.0)), float(p.get("y", height * 0.5)), float(p.get("z", 0.0)))
+		add_child(node)
+
+
+# Cylinders running between two points — conduit, risers, hanging cables.
+# Each pipe: {"from":[x,y,z], "to":[x,y,z], "radius":r, "dark":bool}.
+func _build_pipes() -> void:
+	for i in range(pipes.size()):
+		var pipe: Dictionary = pipes[i]
+		var a_arr: Array = pipe.get("from", [0.0, 0.0, 0.0])
+		var b_arr: Array = pipe.get("to", [0.0, 1.0, 0.0])
+		if a_arr.size() < 3 or b_arr.size() < 3:
+			continue
+		var a := Vector3(float(a_arr[0]), float(a_arr[1]), float(a_arr[2]))
+		var b := Vector3(float(b_arr[0]), float(b_arr[1]), float(b_arr[2]))
+		var delta := b - a
+		var length: float = delta.length()
+		if length < 0.001:
+			continue
+		var radius: float = float(pipe.get("radius", 0.03))
+		var node := MeshInstance3D.new()
+		node.name = "Pipe_%d" % i
+		var mesh := CylinderMesh.new()
+		mesh.top_radius = radius
+		mesh.bottom_radius = radius
+		mesh.height = length
+		mesh.radial_segments = 12
+		node.mesh = mesh
+		node.material_override = _dark_material() if bool(pipe.get("dark", false)) else _metal_material()
+		# Orient local +Y along the A->B direction.
+		var up: Vector3 = delta / length
+		var ref := Vector3(0.0, 0.0, 1.0)
+		if absf(up.dot(ref)) > 0.95:
+			ref = Vector3(1.0, 0.0, 0.0)
+		var side: Vector3 = up.cross(ref).normalized()
+		var fwd: Vector3 = side.cross(up).normalized()
+		node.transform.basis = Basis(side, up, fwd)
+		node.position = a + up * (length * 0.5)
+		add_child(node)
+
+
+# Knobs / buttons protruding from a face along +Z. {"x","y","z","radius","depth"}.
+func _build_dials() -> void:
+	var metal := _metal_material()
+	var dark := _dark_material()
+	for i in range(dials.size()):
+		var d: Dictionary = dials[i]
+		var radius: float = float(d.get("radius", 0.05))
+		var depth: float = float(d.get("depth", 0.06))
+		var pos := Vector3(float(d.get("x", 0.0)), float(d.get("y", 1.0)), float(d.get("z", 0.0)))
+		var knob := MeshInstance3D.new()
+		knob.name = "Dial_%d" % i
+		var mesh := CylinderMesh.new()
+		mesh.top_radius = radius
+		mesh.bottom_radius = radius * 1.1
+		mesh.height = depth
+		mesh.radial_segments = 16
+		knob.mesh = mesh
+		knob.material_override = metal
+		knob.rotation_degrees = Vector3(90.0, 0.0, 0.0)   # axis -> +Z
+		knob.position = pos + Vector3(0.0, 0.0, depth * 0.5)
+		add_child(knob)
+		var cap := MeshInstance3D.new()
+		cap.name = "DialCap_%d" % i
+		var cmesh := CylinderMesh.new()
+		cmesh.top_radius = radius * 0.5
+		cmesh.bottom_radius = radius * 0.5
+		cmesh.height = depth * 0.5
+		cmesh.radial_segments = 12
+		cap.mesh = cmesh
+		cap.material_override = dark
+		cap.rotation_degrees = Vector3(90.0, 0.0, 0.0)
+		cap.position = pos + Vector3(0.0, 0.0, depth + depth * 0.2)
+		add_child(cap)
+
+
+# Outward-facing sector-antenna ring. {"x","y","z","count","radius",
+# "width","height","depth","tilt"}. Panels face radially outward.
+func _build_antennas() -> void:
+	var mat := _metal_material()
+	for i in range(antennas.size()):
+		var a: Dictionary = antennas[i]
+		var count: int = maxi(1, int(a.get("count", 3)))
+		var radius: float = float(a.get("radius", 0.28))
+		var w: float = float(a.get("width", 0.16))
+		var h: float = float(a.get("height", 0.7))
+		var d: float = float(a.get("depth", 0.08))
+		var cx: float = float(a.get("x", 0.0))
+		var cy: float = float(a.get("y", 3.0))
+		var cz: float = float(a.get("z", 0.0))
+		var tilt: float = float(a.get("tilt", 0.0))
+		for j in range(count):
+			var ang: float = TAU * float(j) / float(count)
+			var node := MeshInstance3D.new()
+			node.name = "Antenna_%d_%d" % [i, j]
+			var mesh := BoxMesh.new()
+			mesh.size = Vector3(w, h, d)
+			node.mesh = mesh
+			node.material_override = mat
+			node.position = Vector3(cx + radius * cos(ang), cy, cz + radius * sin(ang))
+			# Yaw so the panel's +Z (depth) points radially outward; tilt is downtilt.
+			node.rotation = Vector3(deg_to_rad(tilt), atan2(cos(ang), sin(ang)), 0.0)
+			add_child(node)
 
 
 func _add_box(name: String, size: Vector3, center: Vector3, color: Color) -> void:

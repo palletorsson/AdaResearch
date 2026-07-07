@@ -47,6 +47,16 @@ class_name Crate
 @export var stamp_color: Color = Color(0.08, 0.07, 0.06)
 @export var brace_color: Color = Color(0.38, 0.26, 0.18)
 
+@export_group("Bands & Tape")
+## Horizontal batten straps wrapping the crate (0 = none). Reads as a
+## reinforced / strapped shipping crate.
+@export var band_count: int = 0
+@export var band_color: Color = Color(0.12, 0.12, 0.13)
+## Diagonal red/white hazard tape across the front face.
+@export var hazard_tape: bool = false
+@export var tape_color_a: Color = Color(0.74, 0.12, 0.12)
+@export var tape_color_b: Color = Color(0.92, 0.92, 0.88)
+
 # ── State ─────────────────────────────────────────────────────────────
 
 var _built: bool = false
@@ -87,6 +97,20 @@ func _read_metadata_overrides() -> void:
 		stamp_label = str(get_meta("config_stamp_label"))
 	if has_meta("config_plank_color"):
 		plank_color = _parse_color(str(get_meta("config_plank_color")), plank_color)
+	if has_meta("config_plank_color_alt"):
+		plank_color_alt = _parse_color(str(get_meta("config_plank_color_alt")), plank_color_alt)
+	if has_meta("config_strip_color"):
+		strip_color = _parse_color(str(get_meta("config_strip_color")), strip_color)
+	if has_meta("config_band_count"):
+		band_count = int(str(get_meta("config_band_count")))
+	if has_meta("config_band_color"):
+		band_color = _parse_color(str(get_meta("config_band_color")), band_color)
+	if has_meta("config_hazard_tape"):
+		hazard_tape = str(get_meta("config_hazard_tape")).to_lower() in ["true", "1", "yes", "on"]
+	if has_meta("config_tape_color_a"):
+		tape_color_a = _parse_color(str(get_meta("config_tape_color_a")), tape_color_a)
+	if has_meta("config_tape_color_b"):
+		tape_color_b = _parse_color(str(get_meta("config_tape_color_b")), tape_color_b)
 
 
 func _parse_color(raw: String, fallback: Color) -> Color:
@@ -105,6 +129,12 @@ func _build() -> void:
 	var hw := crate_width * 0.5
 	var hd := crate_depth * 0.5
 	var ch := crate_height
+
+	# Additive shipping detail: batten bands + diagonal hazard tape.
+	if band_count > 0:
+		_build_bands()
+	if hazard_tape:
+		_build_hazard_tape()
 
 	# Materials reused across the build.
 	var plank_mat_a := _make_wood_mat(plank_color)
@@ -257,6 +287,71 @@ func _build() -> void:
 				ch * 0.30, hd + plank_thickness * 0.5 + 0.008)
 			arrow_lbl.billboard = BaseMaterial3D.BILLBOARD_DISABLED
 			add_child(arrow_lbl)
+
+
+func _build_bands() -> void:
+	var hw := crate_width * 0.5
+	var hd := crate_depth * 0.5
+	var ch := crate_height
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = band_color
+	mat.roughness = 0.5
+	mat.metallic = 0.45
+	var band_h := 0.05
+	var proud := plank_thickness * 0.5 + 0.006
+	for i in range(band_count):
+		var y: float = ch * float(i + 1) / float(band_count + 1)
+		for sz in [hd + proud, -(hd + proud)]:
+			var b := MeshInstance3D.new()
+			b.name = "Band"
+			var bm := BoxMesh.new()
+			bm.size = Vector3(crate_width * 1.01, band_h, 0.012)
+			b.mesh = bm
+			b.material_override = mat
+			b.position = Vector3(0.0, y, sz)
+			add_child(b)
+		for sx in [hw + proud, -(hw + proud)]:
+			var b2 := MeshInstance3D.new()
+			b2.name = "Band"
+			var bm2 := BoxMesh.new()
+			bm2.size = Vector3(0.012, band_h, crate_depth * 1.01)
+			b2.mesh = bm2
+			b2.material_override = mat
+			b2.position = Vector3(sx, y, 0.0)
+			add_child(b2)
+
+
+func _build_hazard_tape() -> void:
+	var hd := crate_depth * 0.5
+	var ch := crate_height
+	var mat := StandardMaterial3D.new()
+	mat.albedo_texture = _make_tape_texture()
+	mat.texture_filter = BaseMaterial3D.TEXTURE_FILTER_LINEAR
+	mat.uv1_scale = Vector3(4.0, 1.0, 1.0)
+	mat.roughness = 0.6
+	mat.metallic = 0.0
+	var strip := MeshInstance3D.new()
+	strip.name = "HazardTape"
+	var sm := BoxMesh.new()
+	sm.size = Vector3(crate_width * 1.18, ch * 0.16, 0.012)
+	strip.mesh = sm
+	strip.material_override = mat
+	strip.rotation = Vector3(0.0, 0.0, deg_to_rad(-28.0))
+	strip.position = Vector3(0.0, ch * 0.6, hd + plank_thickness * 0.5 + 0.012)
+	add_child(strip)
+
+
+func _make_tape_texture() -> ImageTexture:
+	var w := 64
+	var h := 16
+	var img := Image.create(w, h, false, Image.FORMAT_RGBA8)
+	for x in range(w):
+		for y in range(h):
+			var diag: float = (float(x) / float(w) - float(y) / float(h)) * 6.0
+			var band: int = int(floor(diag))
+			var idx: int = ((band % 2) + 2) % 2
+			img.set_pixel(x, y, tape_color_a if idx == 0 else tape_color_b)
+	return ImageTexture.create_from_image(img)
 
 
 func _make_wood_mat(c: Color) -> StandardMaterial3D:

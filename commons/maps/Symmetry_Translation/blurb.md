@@ -1,0 +1,1 @@
+The tile repeats. Shift the motif by one cell-width and lay it down again — that single move, iterated, is the lattice under every wallpaper, carpet and brick wall. A loom performs it as labor; a 10 PRINT textile shows one random bit inside the symmetry machine weaving an endless bolt.

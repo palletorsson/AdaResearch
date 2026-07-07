@@ -12,11 +12,7 @@
       "category": "gallery",
       "difficulty": "gallery",
       "estimated_time": "12-18 minutes",
-      "learning_objectives": [
-        "Browse 37 WaveFunctions artifacts",
-        "Identify artifacts for placement in curriculum maps",
-        "Observe artifact visual and interaction patterns"
-      ]
+      "learning_objectives": ["Browse 37 WaveFunctions artifacts","Identify artifacts for placement in curriculum maps","Observe artifact visual and interaction patterns"]
     },
     "name": "Gallery: WaveFunctions",
     "title": "WaveFunctions Artifact Gallery",
@@ -40,11 +36,7 @@
   },
   "settings": {
     "background": {
-      "color": [
-        0.3,
-        0.3,
-        0.35
-      ],
+      "color": [0.3,0.3,0.35],
       "type": "sky"
     },
     "cube_size": 1.0,
@@ -53,23 +45,11 @@
     "show_grid": true
   },
   "lighting": {
-    "ambient_color": [
-      0.5,
-      0.5,
-      0.55
-    ],
+    "ambient_color": [0.5,0.5,0.55],
     "ambient_energy": 0.7,
     "directional_light": {
-      "color": [
-        1.0,
-        0.95,
-        0.9
-      ],
-      "direction": [
-        -0.3,
-        -0.8,
-        -0.3
-      ],
+      "color": [1.0,0.95,0.9],
+      "direction": [-0.3,-0.8,-0.3],
       "enabled": true,
       "energy": 0.8
     }

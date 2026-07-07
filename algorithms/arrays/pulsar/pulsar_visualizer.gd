@@ -7,12 +7,14 @@
 # critical_parameter: the threshold (0.25 in PulsarData.get_binary_pulsar_sample) — above this value the signal is 1, below it is 0; changing it would alter what counts as a "pulse" and reveals that binary representation requires a decision about where to draw the line
 # triggers: the glass tubes in pulsar_glass_tubes render signal amplitude as height — a tall tube means strong radio signal at that moment; the binary table beside it shows the same data after thresholding, making information loss from digitization visible
 # emerges: students realize that the same phenomenon (pulsing neutron star) looks completely different in analogue (tube heights) vs digital (binary table) representation — and that arrays are always a choice about which values to keep
-# needs: BinaryTableDisplay [has]; PulsarGlassTubes [has]; info panel with Label3D [has]; no VR interactive controls [missing]; apply_grid_config supports table_rows/cols/show_info [has]
+# needs: BinaryTableDisplay [has]; PulsarGlassTubes [has]; framed info board [has]; no VR interactive controls [missing]; apply_grid_config supports table_rows/cols/show_info [has]
 # relationships: uses PulsarData static class for signal generation; pairs with pulsar_compact (glass tubes only, compact form); appears in Tutorial_2D_Build alongside grid_2d_4x4 to show arrays as measurement
 # truth: the first discovered pulsar was initially called LGM-1 (Little Green Men) because the signal's regularity seemed artificial — arrays make the cosmic seem engineered, and engineered arrays can make data seem natural
 
 extends Node3D
 class_name PulsarVisualizer
+
+const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
 
 @export var table_rows: int = 16
 @export var table_cols: int = 20
@@ -22,33 +24,26 @@ class_name PulsarVisualizer
 var _binary_table: Node3D
 var _glass_tubes: Node3D
 var _info_panel: Node3D
-var _title_label: Label3D
+var _title_board: Node3D
 
 func _ready() -> void:
 	_create_visualization()
 
 func _create_visualization() -> void:
-	# Create title
-	_title_label = Label3D.new()
-	_title_label.name = "TitleLabel"
-	_title_label.text = "PULSAR B1919+21"
-	_title_label.font_size = 64
-	_title_label.pixel_size = 0.002
-	_title_label.position = Vector3(0, 0.5, -0.5)
-	_title_label.modulate = Color(0.9, 0.95, 1.0)
-	_title_label.outline_size = 0
-	add_child(_title_label)
-
-	# Subtitle
-	var subtitle = Label3D.new()
-	subtitle.name = "SubtitleLabel"
-	subtitle.text = "Arrays as Radio Waves"
-	subtitle.font_size = 32
-	subtitle.pixel_size = 0.002
-	subtitle.position = Vector3(0, 0.42, -0.5)
-	subtitle.modulate = Color(0.7, 0.75, 0.85)
-	subtitle.outline_size = 0
-	add_child(subtitle)
+	# Title + subtitle consolidated on one framed dark header panel (R-027)
+	_title_board = Node3D.new()
+	_title_board.name = "TitleBoard"
+	_title_board.position = Vector3(0, 0.46, -0.5)
+	add_child(_title_board)
+	_title_board.add_child(_plate(Vector3(0.85, 0.2, 0.025)))
+	var title_mesh: MeshInstance3D = BakedText.make_label_mesh("PULSAR B1919+21", Color(0.9, 0.95, 1.0), Vector2(0.72, 0.08), 1400, true)
+	if title_mesh:
+		title_mesh.position = Vector3(0, 0.04, 0.018)
+		_title_board.add_child(title_mesh)
+	var subtitle_mesh: MeshInstance3D = BakedText.make_label_mesh("Arrays as Radio Waves", Color(0.7, 0.75, 0.85), Vector2(0.6, 0.045), 1400, true)
+	if subtitle_mesh:
+		subtitle_mesh.position = Vector3(0, -0.055, 0.018)
+		_title_board.add_child(subtitle_mesh)
 
 	# Create binary table (left side)
 	_create_binary_table()
@@ -101,43 +96,53 @@ func _create_info_panel() -> void:
 
 	var info = PulsarData.get_pulsar_info()
 
-	# Background
-	var bg = MeshInstance3D.new()
-	var quad = QuadMesh.new()
-	quad.size = Vector2(1.2, 0.25)
-	bg.mesh = quad
-	var mat = StandardMaterial3D.new()
-	mat.albedo_color = Color(0.05, 0.05, 0.08, 0.8)
-	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-	mat.cull_mode = BaseMaterial3D.CULL_DISABLED
-	bg.material_override = mat
-	_info_panel.add_child(bg)
+	# Framed dark info board (R-027) — both text lines baked on one panel
+	_info_panel.add_child(_plate(Vector3(1.2, 0.25, 0.025)))
 
 	# Info text
-	var info_text = Label3D.new()
-	info_text.name = "InfoText"
-	info_text.text = "Discovered: %s by %s | Period: %s | Distance: %s" % [
-		info["discovered"], info["discoverer"], info["period"], info["distance"]
-	]
-	info_text.font_size = 20
-	info_text.pixel_size = 0.002
-	info_text.position = Vector3(0, 0.04, 0.01)
-	info_text.modulate = Color(0.8, 0.85, 0.9)
-	info_text.outline_size = 0
-	_info_panel.add_child(info_text)
+	var info_text: MeshInstance3D = BakedText.make_label_mesh(
+		"Discovered: %s by %s | Period: %s | Distance: %s" % [
+			info["discovered"], info["discoverer"], info["period"], info["distance"]
+		], Color(0.8, 0.85, 0.9), Vector2(1.1, 0.042), 1600, true)
+	if info_text:
+		info_text.name = "InfoText"
+		info_text.position = Vector3(0, 0.04, 0.018)
+		_info_panel.add_child(info_text)
 
 	# Cultural note
-	var cultural_text = Label3D.new()
-	cultural_text.name = "CulturalText"
-	cultural_text.text = info["cultural_note"]
-	cultural_text.font_size = 16
-	cultural_text.pixel_size = 0.002
-	cultural_text.position = Vector3(0, -0.04, 0.01)
-	cultural_text.modulate = Color(0.6, 0.65, 0.75)
-	cultural_text.outline_size = 0
-	_info_panel.add_child(cultural_text)
+	var cultural_text: MeshInstance3D = BakedText.make_label_mesh(
+		str(info["cultural_note"]), Color(0.6, 0.65, 0.75), Vector2(1.1, 0.036), 1600, true)
+	if cultural_text:
+		cultural_text.name = "CulturalText"
+		cultural_text.position = Vector3(0, -0.04, 0.018)
+		_info_panel.add_child(cultural_text)
 
 	add_child(_info_panel)
+
+func _plate(size: Vector3) -> Node3D:
+	var g := Node3D.new()
+	var frame := MeshInstance3D.new()
+	var fm := BoxMesh.new()
+	fm.size = size + Vector3(0.05, 0.05, -0.01)
+	frame.mesh = fm
+	var fmat := StandardMaterial3D.new()
+	fmat.albedo_color = Color(0.62, 0.60, 0.56)
+	fmat.roughness = 0.7
+	frame.material_override = fmat
+	frame.position = Vector3(0, 0, -0.006)
+	g.add_child(frame)
+	var face := MeshInstance3D.new()
+	var bm := BoxMesh.new()
+	bm.size = size
+	face.mesh = bm
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color(0.10, 0.11, 0.14)
+	mat.emission_enabled = true
+	mat.emission = Color(0.10, 0.11, 0.14)
+	mat.emission_energy_multiplier = 0.25
+	face.material_override = mat
+	g.add_child(face)
+	return g
 
 # =============================================================================
 # GRID SYSTEM INTEGRATION

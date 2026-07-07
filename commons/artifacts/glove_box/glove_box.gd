@@ -79,35 +79,35 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 func _read_metadata_overrides() -> void:
 	if has_meta("config_box_width"):
-		box_width = float(String(get_meta("config_box_width")))
+		box_width = float(str(get_meta("config_box_width")))
 	if has_meta("config_box_height"):
-		box_height = float(String(get_meta("config_box_height")))
+		box_height = float(str(get_meta("config_box_height")))
 	if has_meta("config_box_depth"):
-		box_depth = float(String(get_meta("config_box_depth")))
+		box_depth = float(str(get_meta("config_box_depth")))
 	if has_meta("config_body_color"):
-		body_color = _parse_color(String(get_meta("config_body_color")), body_color)
+		body_color = _parse_color(str(get_meta("config_body_color")), body_color)
 	if has_meta("config_glass_color"):
-		glass_color = _parse_color(String(get_meta("config_glass_color")), glass_color)
+		glass_color = _parse_color(str(get_meta("config_glass_color")), glass_color)
 	if has_meta("config_frame_color"):
-		frame_color = _parse_color(String(get_meta("config_frame_color")), frame_color)
+		frame_color = _parse_color(str(get_meta("config_frame_color")), frame_color)
 	if has_meta("config_accent_color"):
-		accent_color = _parse_color(String(get_meta("config_accent_color")), accent_color)
+		accent_color = _parse_color(str(get_meta("config_accent_color")), accent_color)
 	if has_meta("config_glove_color"):
-		glove_color = _parse_color(String(get_meta("config_glove_color")), glove_color)
+		glove_color = _parse_color(str(get_meta("config_glove_color")), glove_color)
 	if has_meta("config_light_color"):
-		light_color = _parse_color(String(get_meta("config_light_color")), light_color)
+		light_color = _parse_color(str(get_meta("config_light_color")), light_color)
 	if has_meta("config_glove_count"):
-		glove_count = int(String(get_meta("config_glove_count")))
+		glove_count = int(str(get_meta("config_glove_count")))
 	if has_meta("config_glove_radius"):
-		glove_radius = float(String(get_meta("config_glove_radius")))
+		glove_radius = float(str(get_meta("config_glove_radius")))
 	if has_meta("config_interior_light"):
-		var vl := String(get_meta("config_interior_light")).to_lower()
+		var vl := str(get_meta("config_interior_light")).to_lower()
 		interior_light = vl in ["true", "1", "yes", "on"]
 	if has_meta("config_legs_visible"):
-		var vleg := String(get_meta("config_legs_visible")).to_lower()
+		var vleg := str(get_meta("config_legs_visible")).to_lower()
 		legs_visible = vleg in ["true", "1", "yes", "on"]
 	if has_meta("config_leg_height"):
-		leg_height = float(String(get_meta("config_leg_height")))
+		leg_height = float(str(get_meta("config_leg_height")))
 
 
 func _clear_built_children() -> void:

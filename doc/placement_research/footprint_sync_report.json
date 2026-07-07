@@ -1,0 +1,22 @@
+{
+  "applied": false,
+  "cap": 9,
+  "total_changes": 1,
+  "total_capped": 1,
+  "swarm_flags": [
+    "weather_vector_field"
+  ],
+  "changes": [
+    {
+      "lookup_name": "weather_vector_field",
+      "old": 36,
+      "new": 9,
+      "measured_area": 36,
+      "grid_cells": [
+        6.0,
+        6.0
+      ],
+      "capped": true
+    }
+  ]
+}

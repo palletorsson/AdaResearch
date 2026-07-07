@@ -1,0 +1,61 @@
+{
+	"pass_id": "2026-05-13T12-00-00_meta-sieve-pass-format",
+	"proposals": [
+		{
+			"pass_id": "2026-05-13T12-00-00_meta-sieve-pass-format",
+			"move_id": "sieve_proposals.py-parser-0",
+			"change": "sieve_proposals.py parser",
+			"from_state": "hard-coded \"Reorder candidates\" header",
+			"to_state": "accept aliases (Reorder summary, Structural moves, Apply set)",
+			"impact": "low — parser-only change",
+			"rationale_excerpt": "/ from / to / impact) under-reports. Add `files` column listing the JSON files the move will edit. The apply script then doesn't have to infer.\n\n### 6d. Distinguish three move classes in the schema\n\nMove \"kind\" column: `phase` | `order` | `layer` | `unlock` | `truth_write` | `new_phase` | `manual`. Lets the chip UI show the right action set and lets the apply script dispatch correctly.\n\n### 6e. Track conditional dependencies\n\nOptional `depends_on: [other-move-id]` column. If `graphtheory-1` depends on `swarmintelligence-0`, the UI greys out graphtheory's apply button until swarm is applied.\n\n## 7. Reorder candidates\n\nThese are recommendations about the *document format*, not about the curriculum. The chip UI will surface them as actionable proposals; Palle decides whether to commit each.\n\n| change | from | to | impact |\n|---|---|---|---|\n| **sieve_proposals.py parser** | hard-coded \"Reorder candidates\" header | accept aliases (Reorder summary, Structural moves, Apply set) | low — parser-only change |\n| **macro-qfep-arc sieve** | section 6a as numbered bullet list | rewrite as canonical Reorder candidates table | medium — historical doc edit, plus parser re-run picks up 7 new chips",
+			"status": "deferred",
+			"applied_at": "2026-05-13T11:01:23",
+			"applied_by": "ui /sieve-proposals",
+			"pre_existing": false,
+			"notes": ""
+		},
+		{
+			"pass_id": "2026-05-13T12-00-00_meta-sieve-pass-format",
+			"move_id": "macro-qfep-arc-sieve-1",
+			"change": "macro-qfep-arc sieve",
+			"from_state": "section 6a as numbered bullet list",
+			"to_state": "rewrite as canonical Reorder candidates table",
+			"impact": "medium — historical doc edit, plus parser re-run picks up 7 new chips",
+			"rationale_excerpt": "/ from / to / impact) under-reports. Add `files` column listing the JSON files the move will edit. The apply script then doesn't have to infer.\n\n### 6d. Distinguish three move classes in the schema\n\nMove \"kind\" column: `phase` | `order` | `layer` | `unlock` | `truth_write` | `new_phase` | `manual`. Lets the chip UI show the right action set and lets the apply script dispatch correctly.\n\n### 6e. Track conditional dependencies\n\nOptional `depends_on: [other-move-id]` column. If `graphtheory-1` depends on `swarmintelligence-0`, the UI greys out graphtheory's apply button until swarm is applied.\n\n## 7. Reorder candidates\n\nThese are recommendations about the *document format*, not about the curriculum. The chip UI will surface them as actionable proposals; Palle decides whether to commit each.\n\n| change | from | to | impact |\n|---|---|---|---|\n| **sieve_proposals.py parser** | hard-coded \"Reorder candidates\" header | accept aliases (Reorder summary, Structural moves, Apply set) | low — parser-only change |\n| **macro-qfep-arc sieve** | section 6a as numbered bullet list | rewrite as canonical Reorder candidates table | medium — historical doc edit, plus parser re-run picks up 7 new chips",
+			"status": "deferred",
+			"applied_at": "2026-05-13T11:01:23",
+			"applied_by": "ui /sieve-proposals",
+			"pre_existing": false,
+			"notes": ""
+		},
+		{
+			"pass_id": "2026-05-13T12-00-00_meta-sieve-pass-format",
+			"move_id": "table-schema-2",
+			"change": "table schema",
+			"from_state": "change / from / to / impact",
+			"to_state": "add files (listing affected JSON paths) and kind (phase/order/layer/unlock/truth_write/new_phase/manual)",
+			"impact": "medium — schema change, requires parser update",
+			"rationale_excerpt": "/ from / to / impact) under-reports. Add `files` column listing the JSON files the move will edit. The apply script then doesn't have to infer.\n\n### 6d. Distinguish three move classes in the schema\n\nMove \"kind\" column: `phase` | `order` | `layer` | `unlock` | `truth_write` | `new_phase` | `manual`. Lets the chip UI show the right action set and lets the apply script dispatch correctly.\n\n### 6e. Track conditional dependencies\n\nOptional `depends_on: [other-move-id]` column. If `graphtheory-1` depends on `swarmintelligence-0`, the UI greys out graphtheory's apply button until swarm is applied.\n\n## 7. Reorder candidates\n\nThese are recommendations about the *document format*, not about the curriculum. The chip UI will surface them as actionable proposals; Palle decides whether to commit each.\n\n| change | from | to | impact |\n|---|---|---|---|\n| **sieve_proposals.py parser** | hard-coded \"Reorder candidates\" header | accept aliases (Reorder summary, Structural moves, Apply set) | low — parser-only change |\n| **macro-qfep-arc sieve** | section 6a as numbered bullet list | rewrite as canonical Reorder candidates table | medium — historical doc edit, plus parser re-run picks up 7 new chips",
+			"status": "deferred",
+			"applied_at": "2026-05-13T11:01:24",
+			"applied_by": "ui /sieve-proposals",
+			"pre_existing": false,
+			"notes": ""
+		},
+		{
+			"pass_id": "2026-05-13T12-00-00_meta-sieve-pass-format",
+			"move_id": "morning-sieve-recommendations-3",
+			"change": "morning sieve recommendations",
+			"from_state": "prose-only",
+			"to_state": "add Reorder candidates table where appropriate",
+			"impact": "low — backfill cosmetic, no behaviour change",
+			"rationale_excerpt": "/ from / to / impact) under-reports. Add `files` column listing the JSON files the move will edit. The apply script then doesn't have to infer.\n\n### 6d. Distinguish three move classes in the schema\n\nMove \"kind\" column: `phase` | `order` | `layer` | `unlock` | `truth_write` | `new_phase` | `manual`. Lets the chip UI show the right action set and lets the apply script dispatch correctly.\n\n### 6e. Track conditional dependencies\n\nOptional `depends_on: [other-move-id]` column. If `graphtheory-1` depends on `swarmintelligence-0`, the UI greys out graphtheory's apply button until swarm is applied.\n\n## 7. Reorder candidates\n\nThese are recommendations about the *document format*, not about the curriculum. The chip UI will surface them as actionable proposals; Palle decides whether to commit each.\n\n| change | from | to | impact |\n|---|---|---|---|\n| **sieve_proposals.py parser** | hard-coded \"Reorder candidates\" header | accept aliases (Reorder summary, Structural moves, Apply set) | low — parser-only change |\n| **macro-qfep-arc sieve** | section 6a as numbered bullet list | rewrite as canonical Reorder candidates table | medium — historical doc edit, plus parser re-run picks up 7 new chips",
+			"status": "deferred",
+			"applied_at": "2026-05-13T11:01:24",
+			"applied_by": "ui /sieve-proposals",
+			"pre_existing": false,
+			"notes": ""
+		}
+	]
+}

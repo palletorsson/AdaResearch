@@ -33,6 +33,12 @@ var _runtime_paint_layers: Array = []
 ## the substrate + scatter span grid+2*margin and are offset by -margin cells (foliage/
 ## ground wrap the grid). 0 = the normal game biome, sized to the grid exactly (unchanged).
 var _runtime_biome_margin: int = 0
+
+## Opt-in "no world" mode: skip ecosystem creatures, biome-ring foliage, and the
+## NatureRenderer sky/fog so a viewer shows only the map grid. Default false —
+## the game and every existing caller behave exactly as before. Set true BEFORE
+## adding the GridSystem to the tree (like map_name).
+var bare_world: bool = false
 @export var gutter: float = 0.0
 @export var map_name: String = "Tutorial_Start"
 # Spine-corridor mode: when set, prefer map_data.corridor.json over map_data.json
@@ -619,17 +625,23 @@ func _handle_player_spawn():
 func _on_spawn_complete(spawn_position: Vector3):
 	print("GridSystem: Spawn positioning complete at %s" % spawn_position)
 
-	# Spawn ecosystem organisms if configured (after terrain is built)
-	call_deferred("_handle_ecosystem_spawn")
+	# bare_world (opt-in, default off): skip ALL the decorative world — ecosystem
+	# creatures, biome ring foliage, and the NatureRenderer sky/fog — so a viewer
+	# (e.g. the map-simulator bridge) shows just the map grid. Additive; the normal
+	# game path leaves bare_world false and behaves exactly as before.
+	if not bare_world:
+		# Spawn ecosystem organisms if configured (after terrain is built)
+		call_deferred("_handle_ecosystem_spawn")
 
 	# Start ambient audio after everything is set up
 	call_deferred("_handle_audio_start")
 
-	# Generate biome ring around grid (natural landscape surrounding the map)
-	call_deferred("_handle_biome_ring")
+	if not bare_world:
+		# Generate biome ring around grid (natural landscape surrounding the map)
+		call_deferred("_handle_biome_ring")
 
-	# Notify NatureRenderer of per-map environment overrides
-	call_deferred("_notify_nature_renderer")
+		# Notify NatureRenderer of per-map environment overrides
+		call_deferred("_notify_nature_renderer")
 
 	generation_in_progress = false
 	print("GridSystem: ✅ Grid generation completed successfully")

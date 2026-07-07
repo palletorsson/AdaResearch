@@ -100,29 +100,29 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 func _read_metadata_overrides() -> void:
 	if has_meta("config_frame_width"):
-		frame_width = float(String(get_meta("config_frame_width")))
+		frame_width = float(str(get_meta("config_frame_width")))
 	if has_meta("config_frame_height"):
-		frame_height = float(String(get_meta("config_frame_height")))
+		frame_height = float(str(get_meta("config_frame_height")))
 	if has_meta("config_frame_depth"):
-		frame_depth = float(String(get_meta("config_frame_depth")))
+		frame_depth = float(str(get_meta("config_frame_depth")))
 	if has_meta("config_frame_color"):
-		frame_color = _parse_color(String(get_meta("config_frame_color")), frame_color)
+		frame_color = _parse_color(str(get_meta("config_frame_color")), frame_color)
 	if has_meta("config_rod_count"):
-		rod_count = int(String(get_meta("config_rod_count")))
+		rod_count = int(str(get_meta("config_rod_count")))
 	if has_meta("config_rod_color"):
-		rod_color = _parse_color(String(get_meta("config_rod_color")), rod_color)
+		rod_color = _parse_color(str(get_meta("config_rod_color")), rod_color)
 	if has_meta("config_beads_per_rod"):
-		beads_per_rod = int(String(get_meta("config_beads_per_rod")))
+		beads_per_rod = int(str(get_meta("config_beads_per_rod")))
 	if has_meta("config_bead_radius"):
-		bead_radius = float(String(get_meta("config_bead_radius")))
+		bead_radius = float(str(get_meta("config_bead_radius")))
 	if has_meta("config_bead_color_low"):
-		bead_color_low = _parse_color(String(get_meta("config_bead_color_low")), bead_color_low)
+		bead_color_low = _parse_color(str(get_meta("config_bead_color_low")), bead_color_low)
 	if has_meta("config_bead_color_high"):
-		bead_color_high = _parse_color(String(get_meta("config_bead_color_high")), bead_color_high)
+		bead_color_high = _parse_color(str(get_meta("config_bead_color_high")), bead_color_high)
 	if has_meta("config_bead_positions"):
-		bead_positions = _parse_int_array(String(get_meta("config_bead_positions")), bead_positions)
+		bead_positions = _parse_int_array(str(get_meta("config_bead_positions")), bead_positions)
 	if has_meta("config_accent_color"):
-		accent_color = _parse_color(String(get_meta("config_accent_color")), accent_color)
+		accent_color = _parse_color(str(get_meta("config_accent_color")), accent_color)
 
 
 func _clear_built_children() -> void:

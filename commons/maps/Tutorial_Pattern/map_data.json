@@ -12,12 +12,7 @@
 	  "category": "tutorial",
 	  "difficulty": "beginner",
 	  "estimated_time": "3-4 minutes",
-	  "learning_objectives": [
-		"Pattern recognition in arrays",
-		"Checkerboard indexing",
-		"Wave patterns",
-        "Visual array relationships"
-	  ]
+	  "learning_objectives": ["Pattern recognition in arrays","Checkerboard indexing","Wave patterns","Visual array relationships"]
 	},
 	"name": "Tutorial_Pattern",
 	"title": "Patterns as Array Equations",
@@ -39,36 +34,17 @@
 	}
   },
   "documentation": {
-	"key_elements": [
-	  "Spawn at north edge with overview of pattern displays",
-	  "`pattern_tile_puzzle#cursor` - create patterns with live index math visualization",
-	  "`pattern_tile_mirror` - kaleidoscope symmetry from array reflections",
-	  "`index_visualizer` - shows position as [row, col] indices",
-	  "`pattern_tile_puzzle#p4m#cursor` - square lattice wallpaper group with cursor",
-      "`pulsar_compact` - Joy Division's Unknown Pleasures - arrays as art"
-	],
+	"key_elements": ["Spawn at north edge with overview of pattern displays","`pattern_tile_puzzle#cursor` - create patterns with live index math visualization","`pattern_tile_mirror` - kaleidoscope symmetry from array reflections","`index_visualizer` - shows position as [row, col] indices","`pattern_tile_puzzle#p4m#cursor` - square lattice wallpaper group with cursor","`pulsar_compact` - Joy Division's Unknown Pleasures - arrays as art"],
 	"layout": "10x10 observation platform with pattern visualization grids",
 	"objective": "Teach players to recognize patterns in array data before encountering the reactive disco floor",
 	"summary": "Tutorial_Pattern - Array Patterns"
   },
   "lighting": {
-	"ambient_color": [
-	  0.35,
-	  0.35,
-	  0.45
-	],
+	"ambient_color": [0.35,0.35,0.45],
 	"ambient_energy": 0.7,
 	"directional_light": {
-	  "color": [
-		1.0,
-		0.95,
-		0.9
-	  ],
-	  "direction": [
-		-0.3,
-		-0.7,
-		-0.3
-	  ],
+	  "color": [1.0,0.95,0.9],
+	  "direction": [-0.3,-0.7,-0.3],
 	  "enabled": true,
 	  "energy": 1.0
 	}
@@ -76,11 +52,7 @@
   "settings": {
 	"auto_reveal_on_entry": false,
 	"background": {
-	  "color": [
-		0.25,
-		0.3,
-		0.5
-	  ],
+	  "color": [0.25,0.3,0.5],
 	  "type": "sky"
 	},
 	"cube_size": 1.0,

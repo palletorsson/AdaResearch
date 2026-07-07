@@ -15,11 +15,7 @@
       "difficulty": "intermediate",
       "category": "bricolage",
       "estimated_time": "6-7 minutes",
-      "learning_objectives": [
-        "Applied bricolage",
-        "Chair as frozen constraint satisfaction",
-        "Joint logic over form logic"
-      ]
+      "learning_objectives": ["Applied bricolage","Chair as frozen constraint satisfaction","Joint logic over form logic"]
     }
   },
   "utility_definitions": {
@@ -41,31 +37,15 @@
     "summary": "Bricolage_Chair - Vernacular Assembly",
     "layout": "11Ã—13 assembly space with chair component demonstration",
     "objective": "Discover the chair through bricolageâ€”not designing but finding what satisfies sit-ability constraints",
-    "key_elements": [
-      "Chair parts inventory (seat plane, back plane, leg cylinders)",
-      "Chair assembly demonstration",
-      "Interactive chair builder"
-    ]
+    "key_elements": ["Chair parts inventory (seat plane, back plane, leg cylinders)","Chair assembly demonstration","Interactive chair builder"]
   },
   "lighting": {
-    "ambient_color": [
-      0.5,
-      0.45,
-      0.4
-    ],
+    "ambient_color": [0.5,0.45,0.4],
     "ambient_energy": 0.7,
     "directional_light": {
       "enabled": true,
-      "direction": [
-        -0.3,
-        -0.8,
-        -0.3
-      ],
-      "color": [
-        1.0,
-        0.95,
-        0.85
-      ],
+      "direction": [-0.3,-0.8,-0.3],
+      "color": [1.0,0.95,0.85],
       "energy": 1.1
     }
   },
@@ -78,11 +58,7 @@
     "initial_tile_visibility": "visible",
     "background": {
       "type": "sky",
-      "color": [
-        0.25,
-        0.22,
-        0.2
-      ]
+      "color": [0.25,0.22,0.2]
     }
   },
   "layers": {

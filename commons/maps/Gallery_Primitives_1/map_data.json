@@ -14,11 +14,7 @@
       "difficulty": "gallery",
       "category": "gallery",
       "estimated_time": "10-15 minutes",
-      "learning_objectives": [
-        "Browse 30 Primitives_1 artifacts",
-        "Identify artifacts for placement in curriculum maps",
-        "Observe artifact visual and interaction patterns"
-      ]
+      "learning_objectives": ["Browse 30 Primitives_1 artifacts","Identify artifacts for placement in curriculum maps","Observe artifact visual and interaction patterns"]
     },
     "title": "Primitives_1 Artifact Gallery"
   },
@@ -45,32 +41,16 @@
     "enable_physics": true,
     "background": {
       "type": "sky",
-      "color": [
-        0.3,
-        0.3,
-        0.35
-      ]
+      "color": [0.3,0.3,0.35]
     }
   },
   "lighting": {
-    "ambient_color": [
-      0.5,
-      0.5,
-      0.55
-    ],
+    "ambient_color": [0.5,0.5,0.55],
     "ambient_energy": 0.7,
     "directional_light": {
       "enabled": true,
-      "direction": [
-        -0.3,
-        -0.8,
-        -0.3
-      ],
-      "color": [
-        1.0,
-        0.95,
-        0.9
-      ],
+      "direction": [-0.3,-0.8,-0.3],
+      "color": [1.0,0.95,0.9],
       "energy": 0.8
     }
   },
@@ -137,7 +117,7 @@
       [" "," ","editable_catmull_rom:0:-0.5"," ","editable_curve:0:-0.5"," ","elevator_platform:0:-0.5"," ","falling_cube:0:-0.5"," "," "],
       [" "," ","request_note:0:1.5#text:foldedpaper"," ","request_note:0:1.5#text:folding cube"," "," "," "," "," "," "],
       [" "," ","foldedpaper:0:-0.5"," ","folding_cube:0:-0.5"," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," ","parametric-mesh-gallery__cylinder_r16:0:0"," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "]
     ]

@@ -27,7 +27,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 8,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 3,
 					"back": 2,
@@ -39,7 +39,9 @@
 				"orientation": "face_approach",
 				"isolation": 1,
 				"cluster_with": [],
-				"preferred_zone": "center"
+				"preferred_zone": "center",
+				"measured_footprint_cells": 120,
+				"footprint_source": "measured_capped"
 			},
 			"geometry_spec": {
 				"mesh_type": "composed_primitives",
@@ -106,7 +108,7 @@
 		"composition_platform": {
 			"name": "Composition Platform",
 			"lookup_name": "composition_platform",
-			"description": "Pedestal that captures the player-stacked composition into a primitive_stack JSON config — closes the loop from upgraded conveyor (vocabulary feeder) to the gallery pipeline.",
+			"description": "Pedestal that captures the player-stacked composition into a primitive_stack JSON config \u2014 closes the loop from upgraded conveyor (vocabulary feeder) to the gallery pipeline.",
 			"scene": "res://commons/artifacts/composition_platform/composition_platform.tscn",
 			"category": "gallery",
 			"artifact_type": "capture",

@@ -1,0 +1,1 @@
+A test lab for the console work — the Shannon desktop console, the standalone control console, and the migrated workbenches gathered in one room so the new interface can be walked in VR. Cantor's diagonal, a Riemann sum, a tangent slope, a triangle's curvature: each rides the same control surface. This is the room where the UI gets checked before it ships to the teaching maps.

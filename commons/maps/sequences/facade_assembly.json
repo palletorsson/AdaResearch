@@ -1,0 +1,130 @@
+{
+  "sequences": {
+    "facade_assembly": {
+      "name": "Facade Assembly: Composition Grammar at Architectural Scale",
+      "truth": "Facades are assembly. Column orders, rhythm, hierarchy, fenestration, rustication \u2014 the vertical and horizontal syntax of architectural form. Where mosaics are arrays in stone, facades are CSG composition pointed at building parts.",
+      "qfep_term": "F",
+      "qfep_connection": "Pure F: deterministic composition grammar. The principle taught by boolean_surfaces (union, intersection, difference) pointed at architectural primitives \u2014 column orders, bays, cornices, rustication. Six expression maps demonstrate what the assembly grammar does that a single rule cannot say in isolation.",
+      "layer": "F_order",
+      "branch_status": "branch",
+      "parent_sequence": "boolean_surfaces",
+      "prerequisites": [
+        "primitives",
+        "transformation",
+        "array_tutorial",
+        "boolean_surfaces"
+      ],
+      "unlocks": [],
+      "difficulty": "intermediate",
+      "estimated_time": "20-25 minutes",
+      "learning_objectives": [
+        "Column orders as compositional primitives: Doric, Ionic, Corinthian",
+        "Bay rhythm: regular vs syncopated; the horizontal syntax",
+        "Hierarchy: base / piano nobile / attic; the vertical syntax",
+        "Fenestration: window types and their semantic",
+        "Rustication as surface voice: smooth marble vs diamond bossing",
+        "Critique: when the principle is refused (Memphis, Superstudio), the refusal is legible only because the principle is"
+      ],
+      "content": [
+        "Facade_Assembly_Principle: The rulebook \u2014 column orders, rhythm, hierarchy, fenestration, rustication",
+        "Facade_Classical: The principle clean \u2014 symmetry, hierarchy, full column order",
+        "Facade_Baroque: The principle dramatized \u2014 rhythm becoming syncopation",
+        "Facade_Venetian_Gothic: The principle hybridized \u2014 Gothic vocabulary inside Italian rhythm",
+        "Facade_Rustication: The principle's surface \u2014 Naples diamond bossing",
+        "Facade_Florence_Marble: The principle surfaced \u2014 smooth Florentine marble (sibling of Naples diamond rustication; demonstrates surfaced-tag range)",
+        "Facade_NYC_Tenement: The principle modularized \u2014 same bay stacked",
+        "Facade_Critique: The principle refused \u2014 Superstudio + Memphis as anti-grammar",
+        "Chamber_Facade: Synthesis"
+      ],
+      "maps": [
+        "Facade_Assembly_Principle",
+        "Facade_Classical",
+        "Facade_Baroque",
+        "Facade_Venetian_Gothic",
+        "Facade_Rustication",
+        "Facade_Florence_Marble",
+        "Facade_NYC_Tenement",
+        "Facade_Critique"
+      ],
+      "artifact_groups": [
+        {
+          "map": "Facade_Assembly_Principle",
+          "position": "intro",
+          "artifacts": [],
+          "size_budget": "compact_only",
+          "rationale": "The principle map. Small dense room in the spirit of Geometric_1 \u2014 labeled exemplars of column orders, bay rhythm, hierarchy, fenestration, rustication arranged so the player walks each principle move once. Pass-1 scaffold; artifacts to be authored next pass."
+        },
+        {
+          "map": "Facade_Classical",
+          "position": "foundation",
+          "artifacts": [],
+          "size_budget": "environment",
+          "rationale": "The canonical case. Symmetry, hierarchy, full column order. Pass-2 build."
+        },
+        {
+          "map": "Facade_Baroque",
+          "position": "exploration",
+          "artifacts": [],
+          "size_budget": "environment",
+          "rationale": "The principle dramatized: Bernini-style colonnade, syncopated rhythm, dynamic ornament without losing hierarchy. Pass-3 build."
+        },
+        {
+          "map": "Facade_Venetian_Gothic",
+          "position": "exploration",
+          "artifacts": [],
+          "size_budget": "environment",
+          "rationale": "The principle hybridized: Gothic vocabulary (pointed arches, tracery) inside Italian bay rhythm. Two grammars compounding. Pass-3 build."
+        },
+        {
+          "map": "Facade_Rustication",
+          "position": "exploration",
+          "artifacts": [],
+          "size_budget": "environment",
+          "rationale": "The principle's surface, voiced as Naples-style diamond rustication. Hierarchy preserved; texture carries the argument. Pass-3 build."
+        },
+        {
+          "map": "Facade_Florence_Marble",
+          "position": "exploration",
+          "artifacts": [
+            "facade_builder"
+          ],
+          "size_budget": "environment",
+          "rationale": "Surfaced-tag sibling of Naples diamond rustication. Demonstrates that the surfaced actualization has a vocabulary range \u2014 same axis-position, opposite material strategy (flatness/polish vs density/projection). Stamped 2026-05-14 from facade_placement.md rules.",
+          "stamp_meta": {
+            "rule_file": "commons/maps/rules/facade_placement.md",
+            "actualization_tag": "surfaced",
+            "preset": "florence_marble.json",
+            "relationship": "append"
+          }
+        },
+        {
+          "map": "Facade_NYC_Tenement",
+          "position": "exploration",
+          "artifacts": [],
+          "size_budget": "environment",
+          "rationale": "The principle modularized: one bay design stacked five floors. Repetition without ornament. The grammar reduced to its skeleton. Pass-2 build (paired with Classical as opposite-pole expressions)."
+        },
+        {
+          "map": "Facade_Critique",
+          "position": "integration",
+          "artifacts": [],
+          "size_budget": "environment",
+          "rationale": "The principle refused: Superstudio's continuous monument and Memphis Group's totem-as-glyph. Anti-grammar legible only because the grammar is. Pass-4 build."
+        },
+        {
+          "map": "Chamber_Facade",
+          "position": "synthesis",
+          "artifacts": [],
+          "size_budget": "compact_only",
+          "rationale": "Synthesis chamber closing the sequence. Pass-1 scaffold."
+        }
+      ],
+      "return_to": "lab",
+      "completion_rewards": [
+        "facade_assembly_badge"
+      ],
+      "note": "2026-05-13: new sequence created as a branch off boolean_surfaces. See doc/proposals/2026-05-13_facade-assembly-sequence.md and blog 2026-05-13-the-sequence-visits.md. Replaces 16 stub Facade_* folders previously misfiled under array_tutorial \u2014 those are discarded; this sequence is rebuilt from scratch."
+    }
+  },
+  "world_phase": "F_order"
+}

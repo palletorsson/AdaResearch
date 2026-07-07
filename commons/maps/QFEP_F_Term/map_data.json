@@ -14,12 +14,7 @@
       "difficulty": "advanced",
       "category": "qfep",
       "estimated_time": "4-5 minutes",
-      "learning_objectives": [
-        "F = prediction error, surprise",
-        "Systems seek to minimize F",
-        "Order, pattern, crystallization",
-        "The dark room problem: pure F-minimization fails"
-      ]
+      "learning_objectives": ["F = prediction error, surprise","Systems seek to minimize F","Order, pattern, crystallization","The dark room problem: pure F-minimization fails"]
     },
     "title": "Free Energy and Order"
   },
@@ -41,32 +36,15 @@
     "summary": "QFEP_F_Term - Understanding Order",
     "layout": "Ordered grid space with crystalline structures. Snap puzzles demonstrate pattern-seeking.",
     "objective": "Experience F as the drive toward order. Use snap puzzles to feel pattern-completion. Then encounter the dark room.",
-    "key_elements": [
-      "Crystal formations (ordered)",
-      "Snap puzzles — completing patterns feels good",
-      "Lambda slider locked at λ=0 (pure order mode)",
-      "Dark sphere at end — the trap of pure order"
-    ]
+    "key_elements": ["Crystal formations (ordered)","Snap puzzles — completing patterns feels good","Lambda slider locked at λ=0 (pure order mode)","Dark sphere at end — the trap of pure order"]
   },
   "lighting": {
-    "ambient_color": [
-      0.2,
-      0.25,
-      0.4
-    ],
+    "ambient_color": [0.2,0.25,0.4],
     "ambient_energy": 0.4,
     "directional_light": {
       "enabled": true,
-      "direction": [
-        -0.2,
-        -0.9,
-        -0.2
-      ],
-      "color": [
-        0.8,
-        0.85,
-        1.0
-      ],
+      "direction": [-0.2,-0.9,-0.2],
+      "color": [0.8,0.85,1.0],
       "energy": 1.0
     }
   },
@@ -77,11 +55,7 @@
     "enable_physics": true,
     "background": {
       "type": "sky",
-      "color": [
-        0.1,
-        0.1,
-        0.2
-      ]
+      "color": [0.1,0.1,0.2]
     }
   },
   "layers": {
@@ -103,18 +77,18 @@
       [" "," "," "," "," "," "," "," "," "," "],
       [" ","s"," "," ","sub:map"," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "],
-      [" ","3t:F \u2014 FREE ENERGY"," "," "," "," "," "," "," "," "],
+      [" ","3t:F — FREE ENERGY"," "," "," "," "," "," "," "," "],
       [" "," "," "," ","el:3"," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "],
       [" ","3t:PATTERNS SATISFY"," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "],
-      [" ","3t:\u03bb=0 PURE ORDER"," "," "," "," "," "," "," "," "],
+      [" ","3t:λ=0 PURE ORDER"," "," "," "," "," "," "," "," "],
       [" "," "," "," ","t"," "," "," "," "," "]
     ],
     "interactables": [
-      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," ","shannon_workbench:0:0"," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "],
       [" "," ","snap_cube_puzzle:0:0.3"," "," "," "," ","snap_tetra_puzzle:0:0.3","science_screen:180:1.5#mode:scatter"," "],
       [" "," "," "," "," "," "," "," "," "," "],

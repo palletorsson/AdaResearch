@@ -1,0 +1,1291 @@
+{
+  "seeds_per_strategy": 20,
+  "room": {
+    "width": 12,
+    "depth": 8,
+    "spawn_row": 7,
+    "spawn_col": 6,
+    "teleporter_row": 0,
+    "teleporter_col": 6
+  },
+  "artifacts": [
+    {
+      "lookup_name": "GaussianBlurCircle",
+      "footprint_cells": 1,
+      "clearance_front": 1,
+      "clearance_back": 1,
+      "clearance_left": 1,
+      "clearance_right": 1,
+      "player_position": "front",
+      "wall_backing": false,
+      "orientation": "face_approach",
+      "isolation": 0,
+      "cluster_with": [],
+      "preferred_zone": "any"
+    },
+    {
+      "lookup_name": "2d_in_3d_randomness_vis",
+      "footprint_cells": 3,
+      "clearance_front": 1,
+      "clearance_back": 1,
+      "clearance_left": 1,
+      "clearance_right": 1,
+      "player_position": "front",
+      "wall_backing": true,
+      "orientation": "face_approach",
+      "isolation": 0,
+      "cluster_with": [],
+      "preferred_zone": "entry"
+    },
+    {
+      "lookup_name": "gallery_winner_showcase",
+      "footprint_cells": 8,
+      "clearance_front": 3,
+      "clearance_back": 2,
+      "clearance_left": 2,
+      "clearance_right": 2,
+      "player_position": "front",
+      "wall_backing": false,
+      "orientation": "face_approach",
+      "isolation": 1,
+      "cluster_with": [],
+      "preferred_zone": "center"
+    },
+    {
+      "lookup_name": "FlowFieldMain",
+      "footprint_cells": 5,
+      "clearance_front": 2,
+      "clearance_back": 2,
+      "clearance_left": 2,
+      "clearance_right": 2,
+      "player_position": "front",
+      "wall_backing": false,
+      "orientation": "face_approach",
+      "isolation": 0,
+      "cluster_with": [
+        "GaussianBlurCircle",
+        "neon_wave_grid"
+      ],
+      "preferred_zone": "entry"
+    },
+    {
+      "lookup_name": "affect_theory_visualization",
+      "footprint_cells": 2,
+      "clearance_front": 1,
+      "clearance_back": 0,
+      "clearance_left": 1,
+      "clearance_right": 1,
+      "player_position": "front",
+      "wall_backing": true,
+      "orientation": "face_approach",
+      "isolation": 0,
+      "cluster_with": [],
+      "preferred_zone": "back"
+    },
+    {
+      "lookup_name": "neon_wave_grid",
+      "footprint_cells": 4,
+      "clearance_front": 2,
+      "clearance_back": 1,
+      "clearance_left": 1,
+      "clearance_right": 1,
+      "player_position": "front",
+      "wall_backing": false,
+      "orientation": "face_approach",
+      "isolation": 0,
+      "cluster_with": [],
+      "preferred_zone": "center"
+    },
+    {
+      "lookup_name": "point",
+      "footprint_cells": 1,
+      "clearance_front": 1,
+      "clearance_back": 1,
+      "clearance_left": 1,
+      "clearance_right": 1,
+      "player_position": "front",
+      "wall_backing": false,
+      "orientation": "face_approach",
+      "isolation": 0,
+      "cluster_with": [],
+      "preferred_zone": "any"
+    }
+  ],
+  "summary": {
+    "random": {
+      "n": 20,
+      "mean": 0.8605,
+      "best": 0.9463,
+      "worst": 0.7837,
+      "std": 0.05,
+      "per_metric": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.705,
+        "wall_backing_satisfied": 0.525,
+        "isolation_satisfied": 0.64,
+        "cluster_satisfied": 0.659,
+        "preferred_zone_match": 0.496,
+        "reachability": 0.993,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      }
+    },
+    "rule_based": {
+      "n": 20,
+      "mean": 0.897,
+      "best": 0.9234,
+      "worst": 0.8725,
+      "std": 0.0158,
+      "per_metric": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.72,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 0.345,
+        "cluster_satisfied": 0.809,
+        "preferred_zone_match": 0.72,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      }
+    },
+    "sdf": {
+      "n": 20,
+      "mean": 0.9204,
+      "best": 0.9523,
+      "worst": 0.8163,
+      "std": 0.032,
+      "per_metric": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.762,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 1.0,
+        "cluster_satisfied": 0.51,
+        "preferred_zone_match": 0.72,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 0.9
+      }
+    },
+    "fold": {
+      "n": 20,
+      "mean": 0.9346,
+      "best": 0.963,
+      "worst": 0.85,
+      "std": 0.028,
+      "per_metric": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.788,
+        "wall_backing_satisfied": 0.825,
+        "isolation_satisfied": 0.965,
+        "cluster_satisfied": 0.872,
+        "preferred_zone_match": 0.636,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      }
+    },
+    "paradoxical": {
+      "n": 20,
+      "mean": 0.9171,
+      "best": 0.9171,
+      "worst": 0.9171,
+      "std": 0.0,
+      "per_metric": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.712,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 0.9,
+        "cluster_satisfied": 0.624,
+        "preferred_zone_match": 0.58,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      }
+    },
+    "hybrid": {
+      "n": 20,
+      "mean": 0.9666,
+      "best": 0.9671,
+      "worst": 0.9662,
+      "std": 0.0004,
+      "per_metric": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.829,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 1.0,
+        "cluster_satisfied": 0.73,
+        "preferred_zone_match": 1.0,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      }
+    },
+    "circle_packing": {
+      "n": 20,
+      "mean": 0.9405,
+      "best": 0.9405,
+      "worst": 0.9405,
+      "std": 0.0,
+      "per_metric": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.78,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 0.9,
+        "cluster_satisfied": 0.49,
+        "preferred_zone_match": 1.0,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      }
+    },
+    "warehouse": {
+      "n": 20,
+      "mean": 0.7815,
+      "best": 0.7868,
+      "worst": 0.7787,
+      "std": 0.0039,
+      "per_metric": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.466,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 0.0,
+        "cluster_satisfied": 0.92,
+        "preferred_zone_match": 0.909,
+        "reachability": 0.429,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      }
+    },
+    "simulated_annealing": {
+      "n": 20,
+      "mean": 0.9348,
+      "best": 0.9657,
+      "worst": 0.904,
+      "std": 0.0169,
+      "per_metric": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.774,
+        "wall_backing_satisfied": 0.925,
+        "isolation_satisfied": 0.915,
+        "cluster_satisfied": 0.853,
+        "preferred_zone_match": 0.622,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      }
+    },
+    "voronoi": {
+      "n": 20,
+      "mean": 0.8944,
+      "best": 0.9767,
+      "worst": 0.7705,
+      "std": 0.0608,
+      "per_metric": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.811,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 0.95,
+        "cluster_satisfied": 0.653,
+        "preferred_zone_match": 0.559,
+        "reachability": 1.0,
+        "spawn_walkable": 0.95,
+        "teleporter_walkable": 0.7
+      }
+    },
+    "humanoid_walker": {
+      "n": 20,
+      "mean": 0.9021,
+      "best": 0.9021,
+      "worst": 0.9021,
+      "std": 0.0,
+      "per_metric": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.733,
+        "wall_backing_satisfied": 0.5,
+        "isolation_satisfied": 0.7,
+        "cluster_satisfied": 0.775,
+        "preferred_zone_match": 1.0,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      }
+    },
+    "grow_walker": {
+      "n": 20,
+      "mean": 0.7314,
+      "best": 0.7971,
+      "worst": 0.6512,
+      "std": 0.0726,
+      "per_metric": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.598,
+        "wall_backing_satisfied": 0.0,
+        "isolation_satisfied": 0.275,
+        "cluster_satisfied": 0.58,
+        "preferred_zone_match": 0.44,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 0.55
+      }
+    },
+    "focal_composition": {
+      "n": 20,
+      "mean": 0.8721,
+      "best": 0.8735,
+      "worst": 0.87,
+      "std": 0.0017,
+      "per_metric": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.736,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 0.46,
+        "cluster_satisfied": 0.196,
+        "preferred_zone_match": 0.72,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      }
+    },
+    "pacing_arc": {
+      "n": 20,
+      "mean": 0.9256,
+      "best": 0.9256,
+      "worst": 0.9256,
+      "std": 0.0,
+      "per_metric": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.685,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 0.9,
+        "cluster_satisfied": 0.825,
+        "preferred_zone_match": 0.58,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      }
+    },
+    "alexander": {
+      "n": 20,
+      "mean": 0.8898,
+      "best": 0.8898,
+      "worst": 0.8898,
+      "std": 0.0,
+      "per_metric": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.722,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 0.2,
+        "cluster_satisfied": 1.0,
+        "preferred_zone_match": 0.58,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      }
+    },
+    "promenade": {
+      "n": 20,
+      "mean": 0.7971,
+      "best": 0.7971,
+      "worst": 0.7971,
+      "std": 0.0,
+      "per_metric": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.683,
+        "wall_backing_satisfied": 0.0,
+        "isolation_satisfied": 0.2,
+        "cluster_satisfied": 0.829,
+        "preferred_zone_match": 0.44,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      }
+    },
+    "tile_wfc": {
+      "n": 20,
+      "mean": 0.8531,
+      "best": 0.8531,
+      "worst": 0.8531,
+      "std": 0.0,
+      "per_metric": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.385,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 0.5,
+        "cluster_satisfied": 0.75,
+        "preferred_zone_match": 0.44,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      }
+    }
+  },
+  "best_placements": {
+    "random": {
+      "score": 0.9463,
+      "placements": [
+        {
+          "artifact": "GaussianBlurCircle",
+          "row": 2,
+          "col": 9
+        },
+        {
+          "artifact": "2d_in_3d_randomness_vis",
+          "row": 6,
+          "col": 1
+        },
+        {
+          "artifact": "gallery_winner_showcase",
+          "row": 2,
+          "col": 1
+        },
+        {
+          "artifact": "FlowFieldMain",
+          "row": 3,
+          "col": 7
+        },
+        {
+          "artifact": "affect_theory_visualization",
+          "row": 7,
+          "col": 10
+        },
+        {
+          "artifact": "neon_wave_grid",
+          "row": 0,
+          "col": 7
+        },
+        {
+          "artifact": "point",
+          "row": 6,
+          "col": 9
+        }
+      ],
+      "ascii": [
+        "......T66...",
+        ".......66...",
+        ".333.....1..",
+        ".333...44...",
+        ".333...44...",
+        "............",
+        ".22......7..",
+        ".22...S...5."
+      ]
+    },
+    "rule_based": {
+      "score": 0.9234,
+      "placements": [
+        {
+          "artifact": "2d_in_3d_randomness_vis",
+          "row": 0,
+          "col": 7
+        },
+        {
+          "artifact": "affect_theory_visualization",
+          "row": 0,
+          "col": 10
+        },
+        {
+          "artifact": "gallery_winner_showcase",
+          "row": 3,
+          "col": 5
+        },
+        {
+          "artifact": "neon_wave_grid",
+          "row": 3,
+          "col": 3
+        },
+        {
+          "artifact": "FlowFieldMain",
+          "row": 1,
+          "col": 1
+        },
+        {
+          "artifact": "GaussianBlurCircle",
+          "row": 3,
+          "col": 2
+        },
+        {
+          "artifact": "point",
+          "row": 5,
+          "col": 10
+        }
+      ],
+      "ascii": [
+        "......T11.2.",
+        ".55....11...",
+        ".55.........",
+        "..644333....",
+        "...44333....",
+        ".....333..7.",
+        "............",
+        "......S....."
+      ]
+    },
+    "sdf": {
+      "score": 0.9523,
+      "placements": [
+        {
+          "artifact": "gallery_winner_showcase",
+          "row": 3,
+          "col": 2
+        },
+        {
+          "artifact": "FlowFieldMain",
+          "row": 5,
+          "col": 9
+        },
+        {
+          "artifact": "neon_wave_grid",
+          "row": 1,
+          "col": 9
+        },
+        {
+          "artifact": "2d_in_3d_randomness_vis",
+          "row": 0,
+          "col": 0
+        },
+        {
+          "artifact": "affect_theory_visualization",
+          "row": 0,
+          "col": 5
+        },
+        {
+          "artifact": "GaussianBlurCircle",
+          "row": 1,
+          "col": 7
+        },
+        {
+          "artifact": "point",
+          "row": 0,
+          "col": 3
+        }
+      ],
+      "ascii": [
+        "44.7.5T.....",
+        "44.....6.33.",
+        ".........33.",
+        "..111.......",
+        "..111.......",
+        "..111....22.",
+        ".........22.",
+        "......S....."
+      ]
+    },
+    "fold": {
+      "score": 0.963,
+      "placements": [
+        {
+          "artifact": "GaussianBlurCircle",
+          "row": 7,
+          "col": 7
+        },
+        {
+          "artifact": "2d_in_3d_randomness_vis",
+          "row": 0,
+          "col": 4
+        },
+        {
+          "artifact": "gallery_winner_showcase",
+          "row": 3,
+          "col": 6
+        },
+        {
+          "artifact": "FlowFieldMain",
+          "row": 6,
+          "col": 3
+        },
+        {
+          "artifact": "affect_theory_visualization",
+          "row": 0,
+          "col": 0
+        },
+        {
+          "artifact": "neon_wave_grid",
+          "row": 3,
+          "col": 1
+        },
+        {
+          "artifact": "point",
+          "row": 3,
+          "col": 11
+        }
+      ],
+      "ascii": [
+        "5...22T.....",
+        "....22......",
+        "............",
+        ".66...333..7",
+        ".66...333...",
+        "......333...",
+        "...44.......",
+        "...44.S1...."
+      ]
+    },
+    "paradoxical": {
+      "score": 0.9171,
+      "placements": [
+        {
+          "artifact": "2d_in_3d_randomness_vis",
+          "row": 0,
+          "col": 0
+        },
+        {
+          "artifact": "affect_theory_visualization",
+          "row": 0,
+          "col": 2
+        },
+        {
+          "artifact": "gallery_winner_showcase",
+          "row": 4,
+          "col": 6
+        },
+        {
+          "artifact": "neon_wave_grid",
+          "row": 2,
+          "col": 4
+        },
+        {
+          "artifact": "FlowFieldMain",
+          "row": 1,
+          "col": 2
+        },
+        {
+          "artifact": "GaussianBlurCircle",
+          "row": 1,
+          "col": 10
+        },
+        {
+          "artifact": "point",
+          "row": 6,
+          "col": 1
+        }
+      ],
+      "ascii": [
+        "112...T.....",
+        "1155......6.",
+        "..5544......",
+        "....44......",
+        "......333...",
+        "......333...",
+        ".7....333...",
+        "......S....."
+      ]
+    },
+    "hybrid": {
+      "score": 0.9671,
+      "placements": [
+        {
+          "artifact": "2d_in_3d_randomness_vis",
+          "row": 6,
+          "col": 0
+        },
+        {
+          "artifact": "affect_theory_visualization",
+          "row": 0,
+          "col": 0
+        },
+        {
+          "artifact": "gallery_winner_showcase",
+          "row": 3,
+          "col": 7
+        },
+        {
+          "artifact": "neon_wave_grid",
+          "row": 3,
+          "col": 2
+        },
+        {
+          "artifact": "FlowFieldMain",
+          "row": 6,
+          "col": 4
+        },
+        {
+          "artifact": "GaussianBlurCircle",
+          "row": 1,
+          "col": 4
+        },
+        {
+          "artifact": "point",
+          "row": 1,
+          "col": 10
+        }
+      ],
+      "ascii": [
+        "2.....T.....",
+        "....6.....7.",
+        "............",
+        "..44...333..",
+        "..44...333..",
+        ".......333..",
+        "11..55......",
+        "11..55S....."
+      ]
+    },
+    "circle_packing": {
+      "score": 0.9405,
+      "placements": [
+        {
+          "artifact": "gallery_winner_showcase",
+          "row": 3,
+          "col": 0
+        },
+        {
+          "artifact": "FlowFieldMain",
+          "row": 5,
+          "col": 8
+        },
+        {
+          "artifact": "neon_wave_grid",
+          "row": 3,
+          "col": 5
+        },
+        {
+          "artifact": "2d_in_3d_randomness_vis",
+          "row": 6,
+          "col": 3
+        },
+        {
+          "artifact": "affect_theory_visualization",
+          "row": 0,
+          "col": 0
+        },
+        {
+          "artifact": "GaussianBlurCircle",
+          "row": 0,
+          "col": 2
+        },
+        {
+          "artifact": "point",
+          "row": 0,
+          "col": 4
+        }
+      ],
+      "ascii": [
+        "5.6.7.T.....",
+        "............",
+        "............",
+        "111..33.....",
+        "111..33.....",
+        "111.....22..",
+        "...44...22..",
+        "...44.S....."
+      ]
+    },
+    "warehouse": {
+      "score": 0.7868,
+      "placements": [
+        {
+          "artifact": "gallery_winner_showcase",
+          "row": 4,
+          "col": 6
+        },
+        {
+          "artifact": "FlowFieldMain",
+          "row": 6,
+          "col": 4
+        },
+        {
+          "artifact": "neon_wave_grid",
+          "row": 4,
+          "col": 4
+        },
+        {
+          "artifact": "2d_in_3d_randomness_vis",
+          "row": 6,
+          "col": 9
+        },
+        {
+          "artifact": "affect_theory_visualization",
+          "row": 0,
+          "col": 5
+        },
+        {
+          "artifact": "GaussianBlurCircle",
+          "row": 7,
+          "col": 7
+        },
+        {
+          "artifact": "point",
+          "row": 7,
+          "col": 8
+        }
+      ],
+      "ascii": [
+        ".....5T.....",
+        "............",
+        "............",
+        "............",
+        "....33111...",
+        "....33111...",
+        "....2211144.",
+        "....22S6744."
+      ]
+    },
+    "simulated_annealing": {
+      "score": 0.9657,
+      "placements": [
+        {
+          "artifact": "2d_in_3d_randomness_vis",
+          "row": 5,
+          "col": 10
+        },
+        {
+          "artifact": "affect_theory_visualization",
+          "row": 1,
+          "col": 11
+        },
+        {
+          "artifact": "gallery_winner_showcase",
+          "row": 2,
+          "col": 1
+        },
+        {
+          "artifact": "neon_wave_grid",
+          "row": 4,
+          "col": 5
+        },
+        {
+          "artifact": "FlowFieldMain",
+          "row": 6,
+          "col": 7
+        },
+        {
+          "artifact": "GaussianBlurCircle",
+          "row": 2,
+          "col": 9
+        },
+        {
+          "artifact": "point",
+          "row": 0,
+          "col": 4
+        }
+      ],
+      "ascii": [
+        "....7.T.....",
+        "...........2",
+        ".333.....6..",
+        ".333........",
+        ".333.44.....",
+        ".....44...11",
+        ".......55.11",
+        "......S55..."
+      ]
+    },
+    "voronoi": {
+      "score": 0.9767,
+      "placements": [
+        {
+          "artifact": "GaussianBlurCircle",
+          "row": 5,
+          "col": 10
+        },
+        {
+          "artifact": "2d_in_3d_randomness_vis",
+          "row": 2,
+          "col": 10
+        },
+        {
+          "artifact": "gallery_winner_showcase",
+          "row": 4,
+          "col": 0
+        },
+        {
+          "artifact": "FlowFieldMain",
+          "row": 5,
+          "col": 7
+        },
+        {
+          "artifact": "affect_theory_visualization",
+          "row": 0,
+          "col": 2
+        },
+        {
+          "artifact": "neon_wave_grid",
+          "row": 3,
+          "col": 4
+        },
+        {
+          "artifact": "point",
+          "row": 1,
+          "col": 8
+        }
+      ],
+      "ascii": [
+        "..5...T.....",
+        "........7...",
+        "..........22",
+        "....66....22",
+        "333.66......",
+        "333....44.1.",
+        "333....44...",
+        "......S....."
+      ]
+    },
+    "humanoid_walker": {
+      "score": 0.9021,
+      "placements": [
+        {
+          "artifact": "2d_in_3d_randomness_vis",
+          "row": 6,
+          "col": 7
+        },
+        {
+          "artifact": "affect_theory_visualization",
+          "row": 2,
+          "col": 6
+        },
+        {
+          "artifact": "gallery_winner_showcase",
+          "row": 3,
+          "col": 1
+        },
+        {
+          "artifact": "neon_wave_grid",
+          "row": 3,
+          "col": 6
+        },
+        {
+          "artifact": "FlowFieldMain",
+          "row": 5,
+          "col": 4
+        },
+        {
+          "artifact": "GaussianBlurCircle",
+          "row": 1,
+          "col": 1
+        },
+        {
+          "artifact": "point",
+          "row": 1,
+          "col": 2
+        }
+      ],
+      "ascii": [
+        "......T.....",
+        ".67.........",
+        "......2.....",
+        ".333..44....",
+        ".333..44....",
+        ".33355......",
+        "....55.11...",
+        "......S11..."
+      ]
+    },
+    "grow_walker": {
+      "score": 0.7971,
+      "placements": [
+        {
+          "artifact": "2d_in_3d_randomness_vis",
+          "row": 5,
+          "col": 6
+        },
+        {
+          "artifact": "affect_theory_visualization",
+          "row": 4,
+          "col": 6
+        },
+        {
+          "artifact": "FlowFieldMain",
+          "row": 2,
+          "col": 6
+        },
+        {
+          "artifact": "gallery_winner_showcase",
+          "row": 0,
+          "col": 9
+        },
+        {
+          "artifact": "neon_wave_grid",
+          "row": 0,
+          "col": 7
+        },
+        {
+          "artifact": "GaussianBlurCircle",
+          "row": 0,
+          "col": 0
+        },
+        {
+          "artifact": "point",
+          "row": 0,
+          "col": 1
+        }
+      ],
+      "ascii": [
+        "67....T55444",
+        ".......55444",
+        "......33.444",
+        "......33....",
+        "......2.....",
+        "......11....",
+        "......11....",
+        "......S....."
+      ]
+    },
+    "focal_composition": {
+      "score": 0.8735,
+      "placements": [
+        {
+          "artifact": "gallery_winner_showcase",
+          "row": 1,
+          "col": 6
+        },
+        {
+          "artifact": "2d_in_3d_randomness_vis",
+          "row": 6,
+          "col": 2
+        },
+        {
+          "artifact": "affect_theory_visualization",
+          "row": 0,
+          "col": 8
+        },
+        {
+          "artifact": "neon_wave_grid",
+          "row": 4,
+          "col": 9
+        },
+        {
+          "artifact": "FlowFieldMain",
+          "row": 4,
+          "col": 1
+        },
+        {
+          "artifact": "GaussianBlurCircle",
+          "row": 3,
+          "col": 9
+        },
+        {
+          "artifact": "point",
+          "row": 3,
+          "col": 2
+        }
+      ],
+      "ascii": [
+        "......T.3...",
+        "......111...",
+        "......111...",
+        "..7...1116..",
+        ".55......44.",
+        ".55......44.",
+        "..22........",
+        "..22..S....."
+      ]
+    },
+    "pacing_arc": {
+      "score": 0.9256,
+      "placements": [
+        {
+          "artifact": "gallery_winner_showcase",
+          "row": 4,
+          "col": 4
+        },
+        {
+          "artifact": "FlowFieldMain",
+          "row": 2,
+          "col": 2
+        },
+        {
+          "artifact": "neon_wave_grid",
+          "row": 1,
+          "col": 7
+        },
+        {
+          "artifact": "2d_in_3d_randomness_vis",
+          "row": 0,
+          "col": 3
+        },
+        {
+          "artifact": "affect_theory_visualization",
+          "row": 0,
+          "col": 8
+        },
+        {
+          "artifact": "GaussianBlurCircle",
+          "row": 0,
+          "col": 2
+        },
+        {
+          "artifact": "point",
+          "row": 3,
+          "col": 8
+        }
+      ],
+      "ascii": [
+        "..644.T.5...",
+        "...44..33...",
+        "..22...33...",
+        "..22....7...",
+        "....111.....",
+        "....111.....",
+        "....111.....",
+        "......S....."
+      ]
+    },
+    "alexander": {
+      "score": 0.8898,
+      "placements": [
+        {
+          "artifact": "GaussianBlurCircle",
+          "row": 6,
+          "col": 8
+        },
+        {
+          "artifact": "2d_in_3d_randomness_vis",
+          "row": 6,
+          "col": 1
+        },
+        {
+          "artifact": "gallery_winner_showcase",
+          "row": 2,
+          "col": 4
+        },
+        {
+          "artifact": "FlowFieldMain",
+          "row": 3,
+          "col": 7
+        },
+        {
+          "artifact": "affect_theory_visualization",
+          "row": 0,
+          "col": 2
+        },
+        {
+          "artifact": "neon_wave_grid",
+          "row": 1,
+          "col": 7
+        },
+        {
+          "artifact": "point",
+          "row": 0,
+          "col": 4
+        }
+      ],
+      "ascii": [
+        "..5.7.T.....",
+        ".......66...",
+        "....33366...",
+        "....33344...",
+        "....33344...",
+        "............",
+        ".22.....1...",
+        ".22...S....."
+      ]
+    },
+    "promenade": {
+      "score": 0.7971,
+      "placements": [
+        {
+          "artifact": "gallery_winner_showcase",
+          "row": 2,
+          "col": 5
+        },
+        {
+          "artifact": "neon_wave_grid",
+          "row": 5,
+          "col": 5
+        },
+        {
+          "artifact": "GaussianBlurCircle",
+          "row": 1,
+          "col": 6
+        },
+        {
+          "artifact": "2d_in_3d_randomness_vis",
+          "row": 4,
+          "col": 2
+        },
+        {
+          "artifact": "affect_theory_visualization",
+          "row": 2,
+          "col": 9
+        },
+        {
+          "artifact": "FlowFieldMain",
+          "row": 2,
+          "col": 2
+        },
+        {
+          "artifact": "point",
+          "row": 6,
+          "col": 3
+        }
+      ],
+      "ascii": [
+        "......T.....",
+        "......3.....",
+        "..66.111.5..",
+        "..66.111....",
+        "..44.111....",
+        "..44.22.....",
+        "...7.22.....",
+        "......S....."
+      ]
+    },
+    "tile_wfc": {
+      "score": 0.8531,
+      "placements": [
+        {
+          "artifact": "gallery_winner_showcase",
+          "row": 0,
+          "col": 0
+        },
+        {
+          "artifact": "neon_wave_grid",
+          "row": 0,
+          "col": 3
+        },
+        {
+          "artifact": "2d_in_3d_randomness_vis",
+          "row": 0,
+          "col": 7
+        },
+        {
+          "artifact": "affect_theory_visualization",
+          "row": 0,
+          "col": 5
+        },
+        {
+          "artifact": "FlowFieldMain",
+          "row": 0,
+          "col": 9
+        },
+        {
+          "artifact": "GaussianBlurCircle",
+          "row": 0,
+          "col": 11
+        },
+        {
+          "artifact": "point",
+          "row": 1,
+          "col": 5
+        }
+      ],
+      "ascii": [
+        "111224T33556",
+        "111227.3355.",
+        "111.........",
+        "............",
+        "............",
+        "............",
+        "............",
+        "......S....."
+      ]
+    }
+  }
+}

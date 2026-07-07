@@ -1,0 +1,39 @@
+{
+  "map_info": {
+    "name": "MiniScene_basis_vectors_rig",
+    "lookup_name": "MiniScene_basis_vectors_rig",
+    "title": "Mini scene: basis vectors rig",
+    "description": "A mini scene grown by tools/grow_scene.py — basis_vectors_rig staged by footprint rule (large). One concept, one bead; maps are necklaces of these.",
+    "version": "0.1-grow-scene",
+    "format": "json",
+    "created_from": "tools/grow_scene.py",
+    "dimensions": {
+      "width": 2,
+      "depth": 2,
+      "max_height": 3
+    },
+    "metadata": {
+      "category": "bead",
+      "estimated_time": "0 minutes"
+    }
+  },
+  "utility_definitions": {},
+  "settings": {
+    "floor_tile_size": 1.0,
+    "disable_biome": true
+  },
+  "layers": {
+    "structure": [
+      ["1","1"],
+      ["1","1"]
+    ],
+    "utilities": [
+      [" "," "],
+      [" "," "]
+    ],
+    "interactables": [
+      [" "," "],
+      [" ","basis_vectors_rig:0:0.0"]
+    ]
+  }
+}

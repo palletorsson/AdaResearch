@@ -35,6 +35,18 @@ var light_pattern: String = "sparse"  # Pattern type: sparse, random, sine, grow
 # State
 var ceiling_tiles: Array[Node3D] = []
 var ceiling_lights: Array[Node3D] = []
+var ceiling_fixtures: Array[Node3D] = []
+
+# Ceiling fixtures — procedural overhead props (vents, sprinklers,
+# sensors, speakers, extra light panels) distributed deterministically
+# across the ceiling. Each type's count is independent. Driven by the
+# map's settings.ceiling.fixtures config block.
+var fixtures_seed: int = 42
+var fixture_vent_count: int = 0
+var fixture_sprinkler_count: int = 0
+var fixture_sensor_count: int = 0
+var fixture_speaker_count: int = 0
+var fixture_panel_count: int = 0     # extra recessed light panels (decor, no Light3D)
 
 # Grid dimensions in cells (stored after generation)
 var grid_width_cells: int = 0
@@ -189,7 +201,10 @@ func generate_ceiling(ceiling_config: Dictionary = {}):
 	# Generate integrated light panels
 	var light_count = _generate_light_panels(width, depth)
 
-	print("GridCeilingComponent: ✅ Ceiling complete - %d tiles, %d lights" % [tile_count, light_count])
+	# Generate procedural ceiling fixtures (vents/sprinklers/sensors/speakers/panels)
+	var fixture_count = _generate_ceiling_fixtures(width, depth)
+
+	print("GridCeilingComponent: ✅ Ceiling complete - %d tiles, %d lights, %d fixtures" % [tile_count, light_count, fixture_count])
 	ceiling_generation_complete.emit(tile_count, light_count)
 
 # Parse ceiling configuration from map data
@@ -262,6 +277,54 @@ func _parse_ceiling_config(config: Dictionary):
 	if config.has("array_learning") and config.get("array_learning"):
 		# Auto-start array learning (deferred to ensure generation is complete)
 		call_deferred("start_array_learning")
+
+	# Fixtures (vents / sprinklers / sensors / speakers / extra panels)
+	# A "fixtures" sub-block keeps the config cleanly grouped:
+	#   "ceiling": { "preset": "laboratory", "fixtures": {
+	#       "seed": 7, "vents": 3, "sprinklers": 5, "sensors": 4,
+	#       "speakers": 2, "panels": 0
+	#   }}
+	# Or use a preset name to load a curated config:
+	#   "ceiling": { "fixtures": "research" }
+	if config.has("fixtures"):
+		var f = config.get("fixtures")
+		if typeof(f) == TYPE_STRING:
+			_apply_fixture_preset(String(f))
+		elif typeof(f) == TYPE_DICTIONARY:
+			fixtures_seed = int(f.get("seed", fixtures_seed))
+			fixture_vent_count = int(f.get("vents", fixture_vent_count))
+			fixture_sprinkler_count = int(f.get("sprinklers", fixture_sprinkler_count))
+			fixture_sensor_count = int(f.get("sensors", fixture_sensor_count))
+			fixture_speaker_count = int(f.get("speakers", fixture_speaker_count))
+			fixture_panel_count = int(f.get("panels", fixture_panel_count))
+
+
+# Named fixture-mix presets — pick by string instead of authoring counts
+# per map. Combine with `preset` for the underlying tile/light spacing.
+func _apply_fixture_preset(name: String) -> void:
+	match name:
+		"minimal":
+			fixture_vent_count = 1; fixture_sprinkler_count = 0
+			fixture_sensor_count = 1; fixture_speaker_count = 0
+			fixture_panel_count = 0
+		"research":
+			fixture_vent_count = 2; fixture_sprinkler_count = 3
+			fixture_sensor_count = 2; fixture_speaker_count = 1
+			fixture_panel_count = 2
+		"industrial":
+			fixture_vent_count = 6; fixture_sprinkler_count = 4
+			fixture_sensor_count = 1; fixture_speaker_count = 0
+			fixture_panel_count = 0
+		"med_lab":
+			fixture_vent_count = 1; fixture_sprinkler_count = 5
+			fixture_sensor_count = 4; fixture_speaker_count = 3
+			fixture_panel_count = 2
+		"datacenter":
+			fixture_vent_count = 4; fixture_sprinkler_count = 6
+			fixture_sensor_count = 3; fixture_speaker_count = 0
+			fixture_panel_count = 0
+		_:
+			push_warning("GridCeilingComponent: unknown fixture preset '%s'" % name)
 
 # Generate T-grid structure
 func _generate_grid_structure(width: int, depth: int):
@@ -476,6 +539,194 @@ func _create_light_panel() -> Node3D:
 
 	return light_panel
 
+
+# ── Procedural ceiling fixtures ───────────────────────────────────────
+# Distribute vents/sprinklers/sensors/speakers/extra-panels across the
+# ceiling deterministically using fixtures_seed. Picks positions from a
+# candidate-cell grid scaled to ceiling coverage; seeded shuffle keeps
+# the layout reproducible. Fixtures hang BELOW the ceiling plane as
+# small protrusions so they read as ceiling-mounted equipment.
+func _generate_ceiling_fixtures(width: int, depth: int) -> int:
+	# If no fixtures requested, skip — most existing maps won't have
+	# the `fixtures` config block at all and shouldn't get spammed.
+	var total: int = fixture_vent_count + fixture_sprinkler_count \
+		+ fixture_sensor_count + fixture_speaker_count + fixture_panel_count
+	if total <= 0:
+		return 0
+
+	var container := Node3D.new()
+	container.name = "CeilingFixtures"
+	grid_system.add_child(container)
+
+	# Candidate grid in METRES along the ceiling coverage. We sample
+	# every ~1m so fixtures don't crowd against the T-grid metal.
+	var cell_m: float = 1.0
+	var cols: int = max(1, int((width * tile_size) / cell_m))
+	var rows: int = max(1, int((depth * tile_size) / cell_m))
+	var step_x: float = (width * tile_size) / float(cols)
+	var step_z: float = (depth * tile_size) / float(rows)
+
+	var rng := RandomNumberGenerator.new()
+	rng.seed = fixtures_seed
+
+	var positions: Array = []
+	for ix in range(cols):
+		for iz in range(rows):
+			var x: float = ceiling_offset_x + step_x * (ix + 0.5)
+			var z: float = ceiling_offset_z + step_z * (iz + 0.5)
+			# Small jitter so the layout doesn't look mechanically gridded.
+			x += rng.randf_range(-step_x * 0.15, step_x * 0.15)
+			z += rng.randf_range(-step_z * 0.15, step_z * 0.15)
+			positions.append(Vector3(x, ceiling_height, z))
+
+	# Seeded shuffle.
+	for i in range(positions.size() - 1, 0, -1):
+		var j: int = rng.randi_range(0, i)
+		var tmp = positions[i]; positions[i] = positions[j]; positions[j] = tmp
+
+	# Consume positions in fixed order so tweaking one count doesn't
+	# reshuffle the others.
+	var idx: int = 0
+	var placed: int = 0
+	for _i in range(fixture_vent_count):
+		if idx >= positions.size(): break
+		_add_grid_vent_fixture(container, positions[idx]); idx += 1; placed += 1
+	for _i in range(fixture_sprinkler_count):
+		if idx >= positions.size(): break
+		_add_grid_sprinkler_fixture(container, positions[idx]); idx += 1; placed += 1
+	for _i in range(fixture_sensor_count):
+		if idx >= positions.size(): break
+		_add_grid_sensor_fixture(container, positions[idx]); idx += 1; placed += 1
+	for _i in range(fixture_speaker_count):
+		if idx >= positions.size(): break
+		_add_grid_speaker_fixture(container, positions[idx]); idx += 1; placed += 1
+	for _i in range(fixture_panel_count):
+		if idx >= positions.size(): break
+		_add_grid_panel_fixture(container, positions[idx]); idx += 1; placed += 1
+	return placed
+
+
+func _add_grid_vent_fixture(parent: Node3D, anchor: Vector3) -> void:
+	var n := MeshInstance3D.new()
+	n.name = "Vent"
+	var bm := BoxMesh.new()
+	bm.size = Vector3(0.40, 0.04, 0.40)
+	n.mesh = bm
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color(0.18, 0.20, 0.22)
+	mat.roughness = 0.55
+	mat.metallic = 0.5
+	n.material_override = mat
+	n.position = Vector3(anchor.x, anchor.y - 0.02, anchor.z)
+	parent.add_child(n)
+	ceiling_fixtures.append(n)
+
+
+func _add_grid_sprinkler_fixture(parent: Node3D, anchor: Vector3) -> void:
+	var disc := MeshInstance3D.new()
+	disc.name = "SprinklerDisc"
+	var dm := CylinderMesh.new()
+	dm.top_radius = 0.06; dm.bottom_radius = 0.06; dm.height = 0.012
+	disc.mesh = dm
+	var dmat := StandardMaterial3D.new()
+	dmat.albedo_color = Color(0.85, 0.85, 0.88)
+	dmat.roughness = 0.45; dmat.metallic = 0.3
+	disc.material_override = dmat
+	disc.position = Vector3(anchor.x, anchor.y - 0.006, anchor.z)
+	parent.add_child(disc)
+	ceiling_fixtures.append(disc)
+	var nozzle := MeshInstance3D.new()
+	nozzle.name = "SprinklerNozzle"
+	var nm := CylinderMesh.new()
+	nm.top_radius = 0.022; nm.bottom_radius = 0.012; nm.height = 0.06
+	nozzle.mesh = nm
+	var nmat := StandardMaterial3D.new()
+	nmat.albedo_color = Color(0.82, 0.58, 0.22)  # brass
+	nmat.roughness = 0.35; nmat.metallic = 0.75
+	nozzle.material_override = nmat
+	nozzle.position = Vector3(anchor.x, anchor.y - 0.04, anchor.z)
+	parent.add_child(nozzle)
+	ceiling_fixtures.append(nozzle)
+
+
+func _add_grid_sensor_fixture(parent: Node3D, anchor: Vector3) -> void:
+	var disc := MeshInstance3D.new()
+	disc.name = "SmokeDetector"
+	var dm := CylinderMesh.new()
+	dm.top_radius = 0.075; dm.bottom_radius = 0.075; dm.height = 0.025
+	disc.mesh = dm
+	var dmat := StandardMaterial3D.new()
+	dmat.albedo_color = Color(0.94, 0.94, 0.95)
+	dmat.roughness = 0.45
+	disc.material_override = dmat
+	disc.position = Vector3(anchor.x, anchor.y - 0.012, anchor.z)
+	parent.add_child(disc)
+	ceiling_fixtures.append(disc)
+	var led := MeshInstance3D.new()
+	led.name = "SensorLED"
+	var lm := SphereMesh.new()
+	lm.radius = 0.008; lm.height = 0.016
+	led.mesh = lm
+	var lmat := StandardMaterial3D.new()
+	lmat.albedo_color = Color(0.95, 0.20, 0.22)
+	lmat.emission_enabled = true
+	lmat.emission = Color(0.95, 0.20, 0.22)
+	lmat.emission_energy_multiplier = 2.2
+	lmat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	led.material_override = lmat
+	led.position = Vector3(anchor.x + 0.03, anchor.y - 0.025, anchor.z + 0.02)
+	parent.add_child(led)
+	ceiling_fixtures.append(led)
+
+
+func _add_grid_speaker_fixture(parent: Node3D, anchor: Vector3) -> void:
+	var ring := MeshInstance3D.new()
+	ring.name = "SpeakerRim"
+	var rm := CylinderMesh.new()
+	rm.top_radius = 0.10; rm.bottom_radius = 0.10; rm.height = 0.015
+	ring.mesh = rm
+	var rmat := StandardMaterial3D.new()
+	rmat.albedo_color = Color(0.25, 0.26, 0.30)
+	rmat.roughness = 0.55; rmat.metallic = 0.35
+	ring.material_override = rmat
+	ring.position = Vector3(anchor.x, anchor.y - 0.007, anchor.z)
+	parent.add_child(ring)
+	ceiling_fixtures.append(ring)
+	var cone := MeshInstance3D.new()
+	cone.name = "SpeakerCone"
+	var cm := CylinderMesh.new()
+	cm.top_radius = 0.075; cm.bottom_radius = 0.075; cm.height = 0.005
+	cone.mesh = cm
+	var cmat := StandardMaterial3D.new()
+	cmat.albedo_color = Color(0.08, 0.09, 0.11)
+	cmat.roughness = 0.85
+	cone.material_override = cmat
+	cone.position = Vector3(anchor.x, anchor.y - 0.018, anchor.z)
+	parent.add_child(cone)
+	ceiling_fixtures.append(cone)
+
+
+func _add_grid_panel_fixture(parent: Node3D, anchor: Vector3) -> void:
+	# Extra recessed light panel — same look as the integrated panels
+	# but without an OmniLight3D, so you can decorate density without
+	# adding more dynamic lights.
+	var p := MeshInstance3D.new()
+	p.name = "AccentPanel"
+	var pm := BoxMesh.new()
+	pm.size = Vector3(0.9, 0.03, 0.3)
+	p.mesh = pm
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color(0.96, 0.97, 1.00)
+	mat.emission_enabled = true
+	mat.emission = Color(1.0, 0.98, 0.92)
+	mat.emission_energy_multiplier = 0.9
+	mat.roughness = 0.25
+	p.material_override = mat
+	p.position = Vector3(anchor.x, anchor.y - 0.014, anchor.z)
+	parent.add_child(p)
+	ceiling_fixtures.append(p)
+
+
 # Add subtle flicker effect to simulate fluorescent behavior
 func _add_subtle_flicker(light: OmniLight3D):
 	var timer = Timer.new()
@@ -504,6 +755,16 @@ func clear_ceiling():
 			light.queue_free()
 	ceiling_lights.clear()
 	light_map.clear()
+
+	# Clear fixtures (vents/sprinklers/sensors/speakers/extra panels)
+	for fx in ceiling_fixtures:
+		if fx and is_instance_valid(fx):
+			fx.queue_free()
+	ceiling_fixtures.clear()
+	if grid_system:
+		var fx_node = grid_system.find_child("CeilingFixtures", false, false)
+		if fx_node:
+			fx_node.queue_free()
 
 	# Clear container nodes
 	if grid_system:

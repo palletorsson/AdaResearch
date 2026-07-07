@@ -1,0 +1,54 @@
+{
+  "timestamp": "2026-05-12T08:20:36",
+  "phase": "baseline",
+  "pipeline_summary": {
+    "spine_count": 19,
+    "vr_testing_blocked": 17,
+    "polish_blocked": 1,
+    "doc_blocked": [
+      "array_tutorial(stage2 18%doc 60%art)",
+      "softbodies(stage2 29%doc 64%art)"
+    ],
+    "structure_blocked": [
+      "boolean_surfaces(empty)"
+    ]
+  },
+  "heat_map_top_5": [
+    {
+      "item": "capture",
+      "temp": 80,
+      "reason": "active (7 recent commits)"
+    },
+    {
+      "item": "shader",
+      "temp": 65,
+      "reason": "active (1 recent commits)"
+    },
+    {
+      "item": "pattern",
+      "temp": 65,
+      "reason": "active (1 recent commits)"
+    },
+    {
+      "item": "garden_voicing_targeting",
+      "temp": 60,
+      "reason": "voicing artifact"
+    },
+    {
+      "item": "sequence:boolean_surfaces",
+      "temp": 50,
+      "reason": "empty sequence"
+    }
+  ],
+  "garden_health": {
+    "voice_coverage_pct": 45,
+    "embodiment_rate_pct": 34,
+    "phantom_limbs": 789
+  },
+  "release_gates": {
+    "A": "PASS",
+    "B": "FAIL: 14 unresolved scene files",
+    "C": "PASS",
+    "D": "PASS"
+  }
+}

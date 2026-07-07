@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bgreatwave01hk"]
+
+[ext_resource type="Script" path="res://commons/artifacts/great_wave/great_wave.gd" id="1_greatwave"]
+
+[node name="GreatWave" type="Node3D"]
+script = ExtResource("1_greatwave")

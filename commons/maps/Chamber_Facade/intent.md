@@ -1,0 +1,15 @@
+Concept: Chamber_Facade is the synthesis closing of the facade_assembly branch. The player arrives carrying the six compositional moves walked across the sequence — column orders, bay rhythm, hierarchy, fenestration, rustication, cornice/base — plus the lived experience of seeing those moves applied (Classical), dramatized (Baroque), hybridized (Venetian Gothic), surfaced (Naples diamond), modularized (NYC tenement), and refused (Critique). This chamber gives them a small open space to compose their own facade from the grammar they have inherited and to read what the grammar lets them say.
+
+Actualizes: Facade_Assembly_Principle, in the *synthesis* mode. Where the six expression maps each take one position in the virtual field, the chamber gives the player the means to take their own position — actualization-as-composition, in the player's hand. The chamber is the moment the virtual field becomes a vocabulary they can fire from.
+
+Sequence role: Final map of the facade_assembly branch. Closes the principle → six expressions arc with a small synthesis space. Returns the player to the lab; does not unlock further sequences (the branch is terminal in its own arm of the spine; the player continues from the lab into whatever the next main-spine slot is).
+
+Technical angle: The chamber holds the facade_synthesis_workbench artifact (pass-2 build) — a CSG-driven composition surface where the player selects column order, bay count, hierarchy proportions, fenestration type, rustication style, and cornice/base treatment, and watches the facade assemble in real time from those parameter choices. The synthesis is the act of holding all six moves in one composition and observing what is consistent (the grammar still legible), what is dissonant (a Doric-with-diamond-rustication that reads as wrong because the rule is broken), and what is critical (the same Doric-with-diamond-rustication that reads as wrong might be a *deliberate* refusal in the spirit of Memphis Totem).
+
+Critical angle: The chamber is the place where the grammar becomes a vocabulary in the player's hand. Walking the six expression maps shows what other authors have done with the grammar. Composing in the chamber asks what the player does. The chamber's lesson is that a facade is not a single object — it is a position in a space of possible composition, defined by the rules walked. Every choice is read against the rules. Even refusal is composition.
+
+Key artifacts:
+- facade_builder dispatching to built-in classical preset (no plan_path; player-composable via web sync to user://facade_plan.json)
+- science_screen for orientation text
+
+Gap: none. The facade is composed by the existing FacadeComposer system from commons/facade_parts/; the room walks; the text describes what is actually placed. Earlier drafts referenced architectural primitive artifacts that were never needed (the 42-part library already covered them) — those references have been removed.

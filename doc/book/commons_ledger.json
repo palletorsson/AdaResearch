@@ -1,0 +1,3853 @@
+{
+ "generated_by": "tools/build_commons_ledger.py",
+ "question": "whose knowledge is this pressed from, and does the walk return it or enclose it?",
+ "totals": {
+  "registry_artifacts": 2580,
+  "attributed_artifacts": 636,
+  "unattributed_artifacts": 1944,
+  "sources_drawn_on": 71,
+  "by_kind": {
+   "nature": 14,
+   "named": 545,
+   "mathematical": 84,
+   "collective": 226,
+   "institutional": 4
+  },
+  "by_return": {
+   "commons": 98,
+   "credited": 775
+  }
+ },
+ "return_line": {
+  "credited": 775,
+  "commons": 98,
+  "anonymous": 0,
+  "reading": "credited = the walk names the source; commons = already common by nature; anonymous = the form is used but its makers stay nameless — the debt this ledger surfaces"
+ },
+ "sources": {
+  "textile_weavers_loom": {
+   "kind": "collective",
+   "tradition": "weaving (largely women's labor)",
+   "era": "prehistoric–present",
+   "pressed": "the addressable grid — the loom as the first computer; the array before the array",
+   "return": "credited",
+   "credited_in": [
+    "Array_Patterns",
+    "Symmetry_Translation",
+    "SoftBodies_Cloth_Physics"
+   ],
+   "artifacts": [
+    "array_carpet",
+    "art_history_gallery",
+    "attention_loom",
+    "basket_weave_floor",
+    "bulging_tunnel",
+    "ca_rules_workbench",
+    "ca_texture_bench",
+    "ca_texture_wall",
+    "cardboard_box",
+    "carpet_cove_gallery",
+    "cloth_loom",
+    "codex_arch",
+    "codex_flora",
+    "codex_loom",
+    "codex_swarm",
+    "crackpropagation_ca",
+    "dense_carpet_floor",
+    "firework_burst",
+    "grammar_tessellation_field_alhambra_basket_weave",
+    "graph_weaver",
+    "gravity_well",
+    "great_wave",
+    "gyroid_demo",
+    "herringbone_floor",
+    "interlocking_t_floor",
+    "julia_set_explorer",
+    "koch_loom",
+    "loom_alhambra_p6m",
+    "loom_bauhaus_p4m",
+    "loom_bolt_escher_pmm",
+    "loom_bolt_memphis_p4g",
+    "loom_drum_bauhaus_p4m",
+    "loom_drum_persian_p6",
+    "loom_escher_mirror",
+    "loom_fountain_alhambra_p6m",
+    "loom_fountain_pastel_p4",
+    "loom_memphis_mirror",
+    "loom_persian_warp",
+    "loom_tatami_warp",
+    "mamma_monster_gallery",
+    "mesh_grammar_blooming_bulge",
+    "multi_zone_carpet_floor",
+    "noise_terrain",
+    "order_loom",
+    "panel_bridge_loom",
+    "pattern_atlas_gallery",
+    "pattern_compositor",
+    "pattern_loom",
+    "pattern_machine_a",
+    "pattern_machine_b",
+    "pattern_machine_c",
+    "pattern_machine_d",
+    "pattern_maker_station",
+    "pattern_mill",
+    "pattern_studio_plate",
+    "pattern_tile_4x4",
+    "pattern_tile_8x8",
+    "pattern_tile_brick",
+    "pattern_tile_cube",
+    "pattern_tile_herringbone",
+    "pattern_tile_mirror",
+    "pattern_tile_plate",
+    "pattern_tile_puzzle",
+    "perception_altering",
+    "pixel_carpet_gallery",
+    "pixel_cross_floor",
+    "postprocessing_bloom",
+    "rainbow",
+    "random_fireworks",
+    "rule110_bench",
+    "rule90_loom",
+    "shader_05_patterns",
+    "shader_09_fbm",
+    "solomons_knot_floor",
+    "surreal_kinetic_sculpture",
+    "ten_print_textile",
+    "vr_tile_editor",
+    "vr_tile_editor_mirror",
+    "water_flowers",
+    "waterbomb_enemy",
+    "waterbomb_hopper",
+    "wfc_tile_mosaic"
+   ],
+   "count": 82
+  },
+  "lindenmayer": {
+   "kind": "named",
+   "tradition": "theoretical biology",
+   "era": "1925–1989",
+   "pressed": "the rewriting grammar — growth as writing",
+   "return": "credited",
+   "artifacts": [
+    "AnimatedTree",
+    "CityGenerator",
+    "ContextSensitiveTree",
+    "ForestCompetition",
+    "GeneticProgramming",
+    "axiom_bench",
+    "axiom_garden",
+    "axiom_room",
+    "bracket_bench",
+    "bracket_room",
+    "branching_coral",
+    "branching_vine",
+    "city_bench",
+    "city_room",
+    "city_toy",
+    "codex_flora",
+    "codex_glyph",
+    "colonization_room",
+    "context_free_grammars",
+    "dna_sprout",
+    "dna_workstation",
+    "evolving_flowers",
+    "evolvingflowers",
+    "fern_bench",
+    "forest_bench",
+    "fractal_lsystem_string",
+    "fractal_lsystem_tree",
+    "generations_bench",
+    "generations_room",
+    "genetic_programming",
+    "genetic_tree_sculptor",
+    "grammar_bench",
+    "grammar_provenance",
+    "grove_room",
+    "growth_animator",
+    "klee_walking_point",
+    "lindenmayer_tube_tree",
+    "living_paper_dragon",
+    "living_paper_fern",
+    "living_paper_tree",
+    "lsystem_artifact",
+    "lsystem_dungeon",
+    "lsystem_editor",
+    "lsystem_tree",
+    "lsystem_tree_room",
+    "markov_chains_tree",
+    "mesh_grammar_artifact",
+    "mesh_grammar_lsystem_tree",
+    "modulor_cypress",
+    "parametric_lsystem",
+    "room_grammar",
+    "sapling_toy",
+    "seed_orb",
+    "space_filling_curve_gallery",
+    "stochastic_bench",
+    "stochastic_room",
+    "stochastic_seeder",
+    "stochastic_toy",
+    "substrate_bench",
+    "tree_generation",
+    "tree_nursery",
+    "turtle_plotter",
+    "turtle_room",
+    "vine_grower"
+   ],
+   "count": 64
+  },
+  "wolfram": {
+   "kind": "named",
+   "tradition": "complexity science",
+   "era": "b.1959",
+   "pressed": "elementary CA, Rule 110 universality, Rule 90 = Sierpinski",
+   "return": "credited",
+   "artifacts": [
+    "ChainSwing",
+    "CrosswayCA",
+    "PendulumPin",
+    "biomech_ng",
+    "breathing_toy",
+    "bunsen_burner",
+    "ca_bridge",
+    "ca_rule_explorer",
+    "ca_rules_workbench",
+    "crate",
+    "crossway_ca",
+    "death_pylon",
+    "dimension_bench",
+    "elementary_ca_bench",
+    "elementary_ca_vr",
+    "force_field_visualizer",
+    "force_mower",
+    "four_classes_bench",
+    "four_classes_room",
+    "four_classes_toy",
+    "grid2d_rule110",
+    "grid2d_rule30",
+    "grid2d_rule90",
+    "grid_substrate_runner",
+    "hull_crusher",
+    "industrial_robot_arm",
+    "lattice_gas_bench",
+    "lava_lamp_tool",
+    "living_paper_rule110",
+    "living_paper_rule30",
+    "mesh_grammar_inset_pattern",
+    "mold_network",
+    "mst_visualization",
+    "mystic_writing_pad",
+    "network_analysis",
+    "network_chalkboard",
+    "octopus_bench",
+    "pattern_machine_a",
+    "pattern_machine_b",
+    "pattern_mill",
+    "r_c",
+    "redline",
+    "riemann_sum_workbench",
+    "rule110_bench",
+    "rule110_computer",
+    "rule30_bench",
+    "rule30_rng",
+    "rule90_bench",
+    "rule90_loom",
+    "rule90_toy",
+    "rule_30_110",
+    "rule_30_110_gravity",
+    "russell_paradox_workbench",
+    "scaling_bench",
+    "sierpinski_bench",
+    "soft_stage_dashboard",
+    "station_cabinet",
+    "torus_knot",
+    "vector_fields",
+    "wood_pallet"
+   ],
+   "count": 60
+  },
+  "turing": {
+   "kind": "named",
+   "tradition": "mathematics / computation",
+   "era": "1912–1954",
+   "pressed": "the halting limit AND reaction-diffusion morphogenesis — the two Turings the book meets",
+   "return": "credited",
+   "artifacts": [
+    "apple_cell",
+    "attractorsphere",
+    "ca_rules_workbench",
+    "ca_texture_bench",
+    "ca_texture_toy",
+    "cantor_diagonal_workbench",
+    "chalkboard",
+    "codex_morph",
+    "complexity_dial_workbench",
+    "critter_placer",
+    "dna_modern_art_rothko_chromatic_field",
+    "durer_scene",
+    "edge_of_chaos_unlocked",
+    "enigma_rotor_stack",
+    "entropy_morphogenesis",
+    "flower_lab",
+    "game_of_life_petri",
+    "godel_sentence_machine",
+    "gray_scott_comparison",
+    "grid2d_rule110",
+    "half_life_manometer",
+    "halting_bench",
+    "halting_lantern",
+    "halting_workbench",
+    "hilbert_hotel",
+    "horizon_line",
+    "lenia_continuous",
+    "living_paper_reaction_diffusion",
+    "living_paper_rule110",
+    "morpho_egg",
+    "morpho_menagerie",
+    "morphobody",
+    "morphogen_tide_pool",
+    "morphogenesis_bench",
+    "point_chalkboard",
+    "qfep_chalkboard",
+    "quad_chalkboard",
+    "radiolaria",
+    "rd_artifact",
+    "rd_coral_garden",
+    "reaction_diffusion",
+    "reaction_diffusion_bench",
+    "reaction_diffusion_intro",
+    "reaction_diffusion_vr",
+    "romanesco",
+    "rounded_softbody_test",
+    "rule110_bench",
+    "rule_30_110_gravity",
+    "shader_10_reactiondiffusion",
+    "shannon_workbench",
+    "triangle_chalkboard",
+    "turing_pattern",
+    "turing_pattern_generator",
+    "zigzagprofile"
+   ],
+   "count": 54
+  },
+  "langton": {
+   "kind": "named",
+   "tradition": "artificial life",
+   "era": "b.1948",
+   "pressed": "the edge of chaos, lambda parameter",
+   "return": "credited",
+   "artifacts": [
+    "SpectrumVisualizer",
+    "bifurcation_diagram",
+    "ca_rules_workbench",
+    "chaos_particles",
+    "complexity_pattern",
+    "edge_core",
+    "edge_detector",
+    "edge_of_chaos_bench",
+    "edge_of_chaos_orb",
+    "edge_of_chaos_unlocked",
+    "edge_particles",
+    "edge_zone_crystal",
+    "edge_zone_dissolve",
+    "emergence_zone",
+    "entropy_meter",
+    "escape_time_room",
+    "grab_sphere_lambda",
+    "grid2d_langtons_ant",
+    "lambda_dial_bench",
+    "lambda_edge_room",
+    "lambda_hall",
+    "lambda_organ",
+    "lambda_slider",
+    "langton_bench",
+    "langton_swarm",
+    "langton_toy",
+    "lenia_room",
+    "lyapunov_fractal",
+    "ordered_grid",
+    "particle_chaos",
+    "phi_slider",
+    "qfep_balance_workbench",
+    "qfep_chalkboard",
+    "qfep_formula_3d",
+    "qfep_formula_toy",
+    "qfep_reactor",
+    "qfep_reactor_bench",
+    "qfep_reactor_toy",
+    "qfep_sandbox_console",
+    "queer_morphology_specimen",
+    "random_cubes",
+    "reactive_particle_field",
+    "self_organization_ca",
+    "shannon_workbench"
+   ],
+   "count": 44
+  },
+  "islamic_alhambra_artisans": {
+   "kind": "collective",
+   "tradition": "Islamic geometric ornament",
+   "era": "8th–15th c.",
+   "pressed": "the seventeen wallpaper groups — the plane-symmetry census completed by hand under an aniconic constraint, centuries before group theory",
+   "return": "credited",
+   "credited_in": [
+    "Symmetry_Seventeen",
+    "Symmetry_Glide"
+   ],
+   "artifacts": [
+    "art_history_gallery",
+    "grammar_provenance",
+    "grammar_tessellation_field_alhambra_basket_weave",
+    "grammar_tessellation_field_alhambra_chinese_lattice",
+    "grammar_tessellation_field_alhambra_girih_10_star",
+    "grammar_tessellation_field_alhambra_girih_pentagonal_rosette",
+    "grammar_tessellation_field_alhambra_hex_square_triangle_lattice",
+    "grammar_tessellation_field_alhambra_interlace_lattice",
+    "grammar_tessellation_field_alhambra_muqarnas",
+    "grammar_tessellation_field_alhambra_nested_concentric",
+    "grammar_tessellation_field_alhambra_penrose_d_vertex",
+    "grammar_tessellation_field_alhambra_penrose_decagon_patch",
+    "grammar_tessellation_field_alhambra_penrose_sun",
+    "grammar_tessellation_field_alhambra_rosette_field",
+    "grammar_tessellation_field_alhambra_running_bond_brick",
+    "grammar_tessellation_field_alhambra_square_bullseye_floor",
+    "grammar_tessellation_field_alhambra_square_pinwheel_rings",
+    "grammar_tessellation_field_alhambra_star_and_cross",
+    "grammar_tessellation_field_alhambra_stepped_pyramid_3d",
+    "grammar_tessellation_field_alhambra_torus_3_triangular",
+    "grammar_tessellation_field_alhambra_torus_4_diamond",
+    "grammar_tessellation_field_alhambra_torus_5_flower",
+    "grammar_tessellation_field_alhambra_torus_8_truncated_square",
+    "grammar_tessellation_field_alhambra_truchet_diagonal",
+    "grammar_tessellation_field_alhambra_truncated_square_488",
+    "loom_alhambra_p6m",
+    "loom_escher_mirror",
+    "loom_fountain_alhambra_p6m",
+    "mill_alhambra_p6m",
+    "pattern_loom",
+    "pattern_machine_a",
+    "pattern_machine_b",
+    "pattern_machine_c",
+    "pattern_machine_d",
+    "pattern_mill",
+    "pattern_tile_4x4",
+    "pattern_tile_8x8",
+    "pattern_tile_brick",
+    "pattern_tile_herringbone",
+    "pattern_tile_mirror",
+    "pattern_tile_puzzle",
+    "printer_alhambra_p6m"
+   ],
+   "count": 42
+  },
+  "pompeii_mosaicists": {
+   "kind": "collective",
+   "tradition": "Roman floor mosaic",
+   "era": "1st c. BCE – 1st c. CE",
+   "pressed": "meander, basket-weave, windmill, chain-link tiling — pattern algorithms run in cut stone by workshop labor",
+   "return": "credited",
+   "credited_in": [
+    "Symmetry_Motif"
+   ],
+   "artifacts": [
+    "basket_weave_floor",
+    "chain_link_floor",
+    "compass_rose_floor",
+    "dense_carpet_floor",
+    "diamond_lattice_floor",
+    "diamonds_squares_floor",
+    "exact_meander_floor",
+    "floor_plan_space",
+    "flower_of_life_floor",
+    "guilloche_border_floor",
+    "herringbone_floor",
+    "honeycomb_hex_floor",
+    "interlocking_t_floor",
+    "labyrinth_floor",
+    "meander_threshold_floor",
+    "mirror_snake_meander",
+    "multi_zone_carpet_floor",
+    "nested_diamonds_floor",
+    "octagon_square_floor",
+    "opus_sectile_floor",
+    "pattern_atlas_gallery",
+    "pelta_shield_floor",
+    "perspective_cubes_floor",
+    "pixel_invader_floor",
+    "polka_dot_field_floor",
+    "pompeii_meander_floor",
+    "pompeii_mosaic_floor",
+    "radial_mandala_floor",
+    "san_michele_mosaic_floor",
+    "solomons_knot_floor",
+    "space_filling_floor",
+    "spiral_mosaic_floor",
+    "star_rosette_floor",
+    "stepped_zigzag_floor",
+    "swastika_meander_floor",
+    "tile_meander_floor",
+    "tumbling_blocks_floor",
+    "turtle_meander_floor",
+    "wave_scale_floor",
+    "windmill_floor"
+   ],
+   "count": 40
+  },
+  "fibonacci_golden": {
+   "kind": "mathematical",
+   "tradition": "the mathematical commons",
+   "era": "timeless (Leonardo of Pisa c.1170–1250 named the sequence Indian mathematicians knew earlier)",
+   "pressed": "the sequence and the golden angle — older than its European name",
+   "return": "commons",
+   "artifacts": [
+    "bar_array_fibonacci",
+    "biomagneticresonator",
+    "cantor_pagoda_vr",
+    "codex_flora",
+    "coordinate_system_switcher",
+    "critter_placer",
+    "edge_of_chaos_orb",
+    "example_8_4_cantor_pagoda_vr",
+    "fibonacci_pagoda",
+    "fibonacci_sequences",
+    "fibonacci_snake",
+    "fibonacci_snake_stages",
+    "fibonacci_terrain",
+    "flower_lab",
+    "fluid_form",
+    "golden_rectangle",
+    "golden_spiral_bench",
+    "grab_sphere_phi",
+    "half_life_manometer",
+    "harmonic_motion_demo",
+    "modulor_man",
+    "phi_slider",
+    "preserved_pattern",
+    "qfep_balance_workbench",
+    "qfep_chalkboard",
+    "qfep_formula_3d",
+    "qfep_formula_toy",
+    "qfep_reactor_bench",
+    "qfep_term_compass",
+    "quantum_field",
+    "queer_morphology_specimen",
+    "reactive_particles",
+    "recursion_spiral",
+    "rigid_sculpture",
+    "romanesco",
+    "sdf_gallery_row_modulor",
+    "transform_staircase_fibonacci",
+    "transform_staircase_showcase",
+    "transforming_pattern"
+   ],
+   "count": 39
+  },
+  "shannon": {
+   "kind": "named",
+   "tradition": "information theory",
+   "era": "1916–2001",
+   "pressed": "entropy as a measure in bits",
+   "return": "credited",
+   "artifacts": [
+    "autoclave",
+    "ca_rules_workbench",
+    "chemistry_flask",
+    "digital_display_array",
+    "entropy_axiom",
+    "entropy_bench",
+    "entropy_jar",
+    "entropy_meter",
+    "fire_extinguisher",
+    "gas_canister",
+    "halting_workbench",
+    "iv_stand",
+    "koch_curve_3d",
+    "line",
+    "line_chalkboard",
+    "qfep_balance_workbench",
+    "quantum_dice",
+    "russell_paradox_workbench",
+    "security_camera",
+    "shannon_entropy_meter",
+    "shannon_workbench",
+    "steel_barricade",
+    "street_sign",
+    "transformer",
+    "velocity_arrow",
+    "window_ac_unit"
+   ],
+   "count": 26
+  },
+  "sierpinski": {
+   "kind": "named",
+   "tradition": "mathematics",
+   "era": "1882–1969",
+   "pressed": "the gasket / triangle, the deletion fractal",
+   "return": "credited",
+   "artifacts": [
+    "SierpinskiPyramid",
+    "box_counting_dimension",
+    "ca_rules_workbench",
+    "cantor_set",
+    "cube_subdivision",
+    "dimension_meter",
+    "example_8_3_recursion_circles_vr",
+    "fold_theatre_runner",
+    "fractal_antenna",
+    "fractal_antenna_toy",
+    "fractal_recursion_2",
+    "fractal_recursion_circles",
+    "grid2d_rule90",
+    "ifs_room",
+    "living_paper_sierpinski",
+    "menger_sponge",
+    "rule90_bench",
+    "rule90_loom",
+    "rule90_toy",
+    "sierpinski_bench",
+    "sierpinski_pyramid",
+    "sierpinski_stamp",
+    "sierpinski_triangle"
+   ],
+   "count": 23
+  },
+  "anonymous_folk_pattern": {
+   "kind": "collective",
+   "tradition": "vernacular building & craft",
+   "era": "deep time",
+   "pressed": "glide symmetry carried in brickwork and parquet by builders who never named it",
+   "return": "credited",
+   "credited_in": [
+    "Symmetry_Glide"
+   ],
+   "artifacts": [
+    "basket_weave_floor",
+    "brick_wall_factory",
+    "codex_arch",
+    "colorballs",
+    "diamond_lattice_floor",
+    "grammar_tessellation_field_alhambra_running_bond_brick",
+    "herringbone_floor",
+    "path_builder_foe",
+    "path_cube",
+    "path_pyramid",
+    "path_wedge",
+    "pattern_tile_4x4",
+    "pattern_tile_8x8",
+    "pattern_tile_brick",
+    "pattern_tile_herringbone",
+    "pattern_tile_mirror",
+    "pattern_tile_puzzle",
+    "pillarcolorcollection",
+    "shader_05_patterns",
+    "window_ac_unit"
+   ],
+   "count": 20
+  },
+  "the_variational_principle": {
+   "kind": "mathematical",
+   "tradition": "the mathematical commons",
+   "era": "timeless",
+   "pressed": "form as what minimizes — nature is lazy",
+   "return": "commons",
+   "artifacts": [
+    "breathing_room",
+    "catenoid",
+    "descent_marble_toy",
+    "energy_landscape_bench",
+    "gradient_descent",
+    "gradient_descent_landscape",
+    "gradient_descent_optimizer",
+    "gradient_descent_visualization",
+    "gradient_descent_well",
+    "gradient_hunter",
+    "loss_function_comparator",
+    "neural_network_visualization",
+    "profile_gradient_descent",
+    "self_organizing_patterns",
+    "self_shaping_forge",
+    "simulated_annealing",
+    "snap_tetra_puzzle",
+    "vaes",
+    "variational_autoencoders_vaes_vr"
+   ],
+   "count": 19
+  },
+  "conway": {
+   "kind": "named",
+   "tradition": "mathematics",
+   "era": "1937–2020",
+   "pressed": "the Game of Life — emergence without a designer",
+   "return": "credited",
+   "artifacts": [
+    "ca_columns",
+    "ca_conway_city",
+    "ca_rule_comparison",
+    "codex_morph",
+    "complexity_pattern",
+    "game_of_life_oop_vr",
+    "game_of_life_petri",
+    "game_of_life_vr",
+    "grid2d",
+    "grid2d_life",
+    "lenia_continuous",
+    "lenia_room",
+    "life_bench",
+    "life_rules_room",
+    "life_zoo_bench",
+    "lifeform_walker",
+    "living_paper_life",
+    "petri_dish"
+   ],
+   "count": 18
+  },
+  "cantor": {
+   "kind": "named",
+   "tradition": "set theory",
+   "era": "1845–1918",
+   "pressed": "the middle-third set, the uncountable, dimension between integers",
+   "return": "credited",
+   "artifacts": [
+    "ca_rules_workbench",
+    "cantor_bench",
+    "cantor_diagonal_workbench",
+    "cantor_pagoda_vr",
+    "cantor_set",
+    "destructibles_test_scene",
+    "endlessness_chalkboard",
+    "example_8_4_cantor_pagoda_vr",
+    "example_8_4_cantor_set_vr",
+    "fractal_cantor_set",
+    "godel_sentence_machine",
+    "halting_workbench",
+    "hilbert_hotel",
+    "lyapunov_fractal",
+    "menger_sponge",
+    "russell_paradox_workbench",
+    "shannon_workbench",
+    "test_scene_3"
+   ],
+   "count": 18
+  },
+  "godel": {
+   "kind": "named",
+   "tradition": "logic",
+   "era": "1906–1978",
+   "pressed": "the unprovable truth, the limit of formal systems",
+   "return": "credited",
+   "artifacts": [
+    "bias_visualizer",
+    "constructive_proof",
+    "edge_ground_synthesis",
+    "escher_staircase",
+    "excluded_class_visualizer",
+    "excluded_middle_demo",
+    "godel_incompleteness_room",
+    "godel_sentence_machine",
+    "godel_statement_plaque",
+    "goedel_atrium",
+    "incompleteness_scale",
+    "incompleteness_tower",
+    "loom_alhambra_p6m",
+    "penrose_triangle",
+    "provability_sorter",
+    "qfep_formula_3d",
+    "russell_set_box",
+    "wiki_fragment"
+   ],
+   "count": 18
+  },
+  "the_seventeen_groups": {
+   "kind": "mathematical",
+   "tradition": "the mathematical commons",
+   "era": "timeless",
+   "pressed": "the census that closes — belongs to no one",
+   "return": "commons",
+   "artifacts": [
+    "loom_drum_bauhaus_p4m",
+    "pattern_compositor",
+    "pattern_loom",
+    "pattern_machine_b",
+    "pattern_machine_c",
+    "pattern_maker_station",
+    "pattern_tile_4x4",
+    "pattern_tile_8x8",
+    "pattern_tile_brick",
+    "pattern_tile_herringbone",
+    "pattern_tile_mirror",
+    "pattern_tile_puzzle",
+    "pompeii_mosaic_floor",
+    "shader_arch_gallery",
+    "tiling_demo",
+    "vr_tile_editor",
+    "wall_pattern_colorizer",
+    "wall_pattern_gallery"
+   ],
+   "count": 18
+  },
+  "koch_helge": {
+   "kind": "named",
+   "tradition": "mathematics",
+   "era": "1870–1924",
+   "pressed": "the Koch curve — infinite length, finite area",
+   "return": "credited",
+   "artifacts": [
+    "box_counting_dimension",
+    "codex_flora",
+    "dimension_bench",
+    "dimension_meter",
+    "example_8_3_recursion_circles_vr",
+    "fractal_antenna",
+    "fractal_koch_curve",
+    "fractal_recursion_2",
+    "fractal_recursion_circles",
+    "koch_curve",
+    "koch_curve_1",
+    "koch_curve_3d",
+    "koch_loom",
+    "koch_snowflake_press",
+    "kochsnowflake",
+    "living_paper_koch",
+    "test_scene_4"
+   ],
+   "count": 17
+  },
+  "euclid": {
+   "kind": "named",
+   "tradition": "geometry",
+   "era": "c.300 BCE",
+   "pressed": "the axioms — the ground and its parallel crack",
+   "return": "credited",
+   "artifacts": [
+    "angle_sum_triangle",
+    "crisis_synthesis_bench",
+    "curvature_bench",
+    "curvature_slider",
+    "euclid_parallel_bench",
+    "euclid_postulates_plaque",
+    "flatland_room",
+    "hyperbolic_surface",
+    "mobius_world",
+    "non_euclidean_space",
+    "organic_space",
+    "pathfinding3d",
+    "poincare_disk",
+    "triangle_curvature_workbench",
+    "two_points_line"
+   ],
+   "count": 15
+  },
+  "escher": {
+   "kind": "named",
+   "tradition": "graphic art",
+   "era": "1898–1972",
+   "pressed": "the glide made visible — the artist who taught the group theorists to see",
+   "return": "credited",
+   "artifacts": [
+    "escher_room",
+    "escher_staircase",
+    "escher_stairwalker",
+    "godel_statement_plaque",
+    "loom_bolt_escher_pmm",
+    "loom_escher_mirror",
+    "mill_escher_p4g",
+    "paradox_stalker",
+    "pattern_mill",
+    "penrose_triangle",
+    "russell_set_box",
+    "stepped_zigzag_floor"
+   ],
+   "count": 12
+  },
+  "bauhaus_school": {
+   "kind": "collective",
+   "tradition": "design school",
+   "era": "1919–1933",
+   "pressed": "the discipline half of the same-group / opposed-ideology pair",
+   "return": "credited",
+   "artifacts": [
+    "art_history_gallery",
+    "dna_color_furniture_furniture_becker_utensilo_bauhaus",
+    "dna_modern_art_kandinsky_bauhaus_triad",
+    "dna_primitive_stack_ps01_bauhaus_totem_green",
+    "grammar_totem_pole_bauhaus_pinch",
+    "lindenmayer_tube_tree",
+    "loom_bauhaus_p4m",
+    "loom_bolt_memphis_p4g",
+    "loom_drum_bauhaus_p4m",
+    "mill_bauhaus_p4m",
+    "pattern_mill",
+    "printer_bauhaus_p4m"
+   ],
+   "count": 12
+  },
+  "russell": {
+   "kind": "named",
+   "tradition": "logic",
+   "era": "1872–1970",
+   "pressed": "the set that breaks itself",
+   "return": "credited",
+   "artifacts": [
+    "barber_paradox",
+    "ca_rules_workbench",
+    "cantor_diagonal_workbench",
+    "escher_staircase",
+    "florensky_sphere",
+    "godel_statement_plaque",
+    "halting_workbench",
+    "hilbert_hotel",
+    "russell_paradox_room",
+    "russell_paradox_workbench",
+    "russell_set_box",
+    "self_membership_set"
+   ],
+   "count": 12
+  },
+  "mandelbrot": {
+   "kind": "named",
+   "tradition": "fractal geometry",
+   "era": "1924–2010",
+   "pressed": "the Mandelbrot set, fractal dimension, the coastline",
+   "return": "credited",
+   "artifacts": [
+    "dimension_bench",
+    "escape_time_room",
+    "fractal_antenna_toy",
+    "julia_set_explorer",
+    "living_paper_mandelbrot",
+    "mandelbrot_bench",
+    "mandelbrot_dive",
+    "mandelbrot_set",
+    "terrain_bench",
+    "terrain_toy"
+   ],
+   "count": 10
+  },
+  "menger": {
+   "kind": "named",
+   "tradition": "topology",
+   "era": "1902–1985",
+   "pressed": "the universal curve — all boundary, no interior",
+   "return": "credited",
+   "artifacts": [
+    "cantor_set",
+    "cube_subdivision",
+    "fold_theatre_runner",
+    "menger_bench",
+    "menger_filter",
+    "menger_sponge",
+    "menger_toy",
+    "mengersponge",
+    "recursive_boolean_cube",
+    "sierpinski_triangle"
+   ],
+   "count": 10
+  },
+  "deleuze_guattari": {
+   "kind": "named",
+   "tradition": "philosophy",
+   "era": "20th c.",
+   "pressed": "the rhizome — structure with no root",
+   "return": "credited",
+   "artifacts": [
+    "affect_theory_visualization",
+    "edge_ground_synthesis",
+    "rhizomatic_maze_space",
+    "rhizomatic_structure",
+    "rhizome_bench",
+    "rhizome_cave_demo",
+    "rhizome_grower",
+    "rhizome_navigator",
+    "rhizome_toy",
+    "rhizome_vault"
+   ],
+   "count": 10
+  },
+  "florensky": {
+   "kind": "named",
+   "tradition": "theology / mathematics",
+   "era": "1882–1937",
+   "pressed": "A-and-not-A held without collapse",
+   "return": "credited",
+   "artifacts": [
+    "bifurcation_diagram",
+    "both_true_gate",
+    "contradiction_engine",
+    "florensky_in_production",
+    "florensky_sphere",
+    "merge_conflict_visualizer",
+    "paraconsistent_room",
+    "russell_set_box",
+    "schrodinger_box",
+    "superposition_display"
+   ],
+   "count": 10
+  },
+  "persian_weavers": {
+   "kind": "collective",
+   "tradition": "Persian carpet & tapestry",
+   "era": "ancient–present",
+   "pressed": "warp/weft symmetry programs (p3, p4, p6) carried in loom labor",
+   "return": "credited",
+   "credited_in": [
+    "Symmetry_Translation"
+   ],
+   "artifacts": [
+    "art_history_gallery",
+    "ca_texture_wall",
+    "loom_drum_persian_p6",
+    "loom_persian_warp",
+    "mill_persian_p3",
+    "mill_persian_p4",
+    "mill_persian_p6",
+    "pattern_mill",
+    "persian_rug"
+   ],
+   "count": 9
+  },
+  "memphis_group": {
+   "kind": "collective",
+   "tradition": "design collective",
+   "era": "1980s",
+   "pressed": "the refusal half of the same-group pair",
+   "return": "credited",
+   "artifacts": [
+    "glitch_grid_floor",
+    "grammar_totem_pole_memphis_bulge",
+    "loom_bolt_memphis_p4g",
+    "loom_memphis_mirror",
+    "memphis_floor",
+    "mill_memphis_p3",
+    "mill_memphis_pgg",
+    "pattern_mill",
+    "printer_memphis_pgg"
+   ],
+   "count": 9
+  },
+  "penrose": {
+   "kind": "named",
+   "tradition": "mathematics",
+   "era": "b.1931",
+   "pressed": "aperiodic tiling — fivefold that cannot repeat",
+   "return": "credited",
+   "artifacts": [
+    "escher_staircase",
+    "grammar_tessellation_field_alhambra_penrose_d_vertex",
+    "grammar_tessellation_field_alhambra_penrose_decagon_patch",
+    "grammar_tessellation_field_alhambra_penrose_sun",
+    "impossible_object_press",
+    "penrose_tilings",
+    "shader_05_patterns",
+    "shader_08_cellularnoise",
+    "space_filling_floor"
+   ],
+   "count": 9
+  },
+  "markov": {
+   "kind": "named",
+   "tradition": "probability",
+   "era": "1856–1922",
+   "pressed": "the chain — next from current, memoryless",
+   "return": "credited",
+   "artifacts": [
+    "gradient_hunter",
+    "grammar_markov",
+    "markov_chain",
+    "markov_chains",
+    "markov_chains_tree",
+    "markov_generator",
+    "markov_melody",
+    "membrane_bench",
+    "puls_markov"
+   ],
+   "count": 9
+  },
+  "mondrian": {
+   "kind": "named",
+   "tradition": "art (De Stijl)",
+   "era": "1872–1944",
+   "pressed": "primary + orthogonal as ideology",
+   "return": "credited",
+   "artifacts": [
+    "art_history_gallery",
+    "dna_modern_art_mondrian_de_stijl",
+    "grabable_mondrian",
+    "grammar_totem_pole_mondrian_cubes",
+    "mondrian_2d",
+    "mondrian_3d_display",
+    "mondrian_relief",
+    "mondrian_run"
+   ],
+   "count": 8
+  },
+  "reynolds": {
+   "kind": "named",
+   "tradition": "computer graphics",
+   "era": "b.1953",
+   "pressed": "boids — three rules make a flock",
+   "return": "credited",
+   "artifacts": [
+    "boid_flocking",
+    "boid_manager",
+    "boids_2d_in_3d",
+    "boids_aquarium",
+    "codex_swarm",
+    "ecosystem_simulation",
+    "example_5_9_flocking",
+    "inflate_flock"
+   ],
+   "count": 8
+  },
+  "the_catenary": {
+   "kind": "mathematical",
+   "tradition": "the mathematical commons",
+   "era": "timeless",
+   "pressed": "the least-energy curve / least-area surface — solved by every chain and film",
+   "return": "commons",
+   "artifacts": [
+    "SplineCables",
+    "cable_builder",
+    "catenoid",
+    "double_enneper",
+    "enneper_order3",
+    "gyroid_demo",
+    "helicoid",
+    "triangle"
+   ],
+   "count": 8
+  },
+  "klee": {
+   "kind": "named",
+   "tradition": "art (Bauhaus)",
+   "era": "1879–1940",
+   "pressed": "the line as a walk — drawing as time",
+   "return": "credited",
+   "artifacts": [
+    "fontana_puncture",
+    "horizon_line",
+    "klee_walking_point",
+    "mystic_writing_pad",
+    "point_chalkboard",
+    "two_points_line",
+    "you_are_here"
+   ],
+   "count": 7
+  },
+  "serafini": {
+   "kind": "named",
+   "tradition": "art / artists' book",
+   "era": "b.1949",
+   "pressed": "the uncanny-functional, the surreal specimen",
+   "return": "credited",
+   "artifacts": [
+    "codex_arch",
+    "codex_flora",
+    "codex_food",
+    "codex_glyph",
+    "codex_loom",
+    "codex_morph",
+    "codex_swarm"
+   ],
+   "count": 7
+  },
+  "le_corbusier": {
+   "kind": "named",
+   "tradition": "architecture",
+   "era": "1887–1965",
+   "pressed": "the Modulor — measure as the body legislated",
+   "return": "credited",
+   "artifacts": [
+    "form_studio_station",
+    "modulor_cypress",
+    "modulor_man",
+    "modulor_man_demo",
+    "modulor_man_interactive",
+    "sdf_gallery_room",
+    "sdf_gallery_row_modulor"
+   ],
+   "count": 7
+  },
+  "slime_mold": {
+   "kind": "nature",
+   "tradition": "the living world",
+   "era": "biological deep time",
+   "pressed": "computation without a brain — stigmergy, the substrate thinks",
+   "return": "commons",
+   "artifacts": [
+    "FlowFieldMain",
+    "PhysarumColony",
+    "mold_network",
+    "physarum_colony",
+    "slime_bench",
+    "slime_mold",
+    "stigmergy_room"
+   ],
+   "count": 7
+  },
+  "albers": {
+   "kind": "named",
+   "tradition": "art / color theory",
+   "era": "1888–1976",
+   "pressed": "color is relational, not absolute",
+   "return": "credited",
+   "artifacts": [
+    "albers_relief",
+    "albers_wall_gallery",
+    "color_constellation_office",
+    "dna_modern_art_albers_homage_warm",
+    "homagetothesquare",
+    "pattern_atlas_gallery"
+   ],
+   "count": 6
+  },
+  "haraway": {
+   "kind": "named",
+   "tradition": "feminist STS",
+   "era": "b.1944",
+   "pressed": "situated knowledge — objectivity as accounting for standpoint",
+   "return": "credited",
+   "artifacts": [
+    "gradient_descent_landscape",
+    "situated_bench",
+    "situated_readout",
+    "situated_sensor",
+    "standpoint_room",
+    "wiki_fragment"
+   ],
+   "count": 6
+  },
+  "foucault_michel": {
+   "kind": "named",
+   "tradition": "philosophy / physics (both Foucaults)",
+   "era": "20th c. / 1819–1868",
+   "pressed": "the grid's quantization (Michel) and the pendulum that shows the planet turn (Léon)",
+   "return": "credited",
+   "artifacts": [
+    "WavePaintings",
+    "foucault_pendulum",
+    "grab_sphere_point_snap",
+    "grid_chalkboard",
+    "room_grammar",
+    "surveillance_panopticon"
+   ],
+   "count": 6
+  },
+  "verlet": {
+   "kind": "named",
+   "tradition": "computational physics",
+   "era": "b.1931",
+   "pressed": "the integrator every cloth relaxes under",
+   "return": "credited",
+   "artifacts": [
+    "jelly_room",
+    "simulation_instability",
+    "spring_network",
+    "verlet_integration",
+    "verlet_workbench",
+    "viscous_bench"
+   ],
+   "count": 6
+  },
+  "haeckel": {
+   "kind": "named",
+   "tradition": "biology / illustration",
+   "era": "1834–1919",
+   "pressed": "the radiolarian's silica geometry — nature's form drawn as art",
+   "return": "credited",
+   "artifacts": [
+    "codex_arch",
+    "codex_flora",
+    "codex_food",
+    "haeckel",
+    "radiolaria"
+   ],
+   "count": 5
+  },
+  "fontana": {
+   "kind": "named",
+   "tradition": "art (Spatialism)",
+   "era": "1899–1968",
+   "pressed": "the cut — the point as a wound to the plane",
+   "return": "credited",
+   "artifacts": [
+    "fontana_puncture",
+    "mystic_writing_pad",
+    "point_chalkboard",
+    "redline",
+    "you_are_here"
+   ],
+   "count": 5
+  },
+  "romanesco_nature": {
+   "kind": "nature",
+   "tradition": "the living world",
+   "era": "biological deep time",
+   "pressed": "phyllotaxis — the plant computes phi with no brain",
+   "return": "commons",
+   "artifacts": [
+    "codex_flora",
+    "fibonacci_pagoda",
+    "golden_spiral_bench",
+    "recursion_spiral",
+    "romanesco"
+   ],
+   "count": 5
+  },
+  "pollock": {
+   "kind": "named",
+   "tradition": "art (Abstract Expressionism)",
+   "era": "1912–1956",
+   "pressed": "the drip — chance as painting",
+   "return": "credited",
+   "artifacts": [
+    "pollock_3d",
+    "pollock_painting_in_3d",
+    "scatter_bench",
+    "spawn_randomcubes"
+   ],
+   "count": 4
+  },
+  "poincare": {
+   "kind": "named",
+   "tradition": "mathematics",
+   "era": "1854–1912",
+   "pressed": "the disk — the limit made walkable",
+   "return": "credited",
+   "artifacts": [
+    "hyperbolic_surface",
+    "poincare_disk",
+    "riemann_sphere",
+    "triangle_curvature_workbench"
+   ],
+   "count": 4
+  },
+  "rand_corp": {
+   "kind": "institutional",
+   "tradition": "think tank",
+   "era": "1955",
+   "pressed": "A Million Random Digits — chance frozen into a table",
+   "return": "credited",
+   "artifacts": [
+    "edible_mushroom",
+    "mushrooms",
+    "random_number_book_page_1955",
+    "random_number_book_page_collection"
+   ],
+   "count": 4
+  },
+  "japanese_tatami_makers": {
+   "kind": "collective",
+   "tradition": "tatami tiling",
+   "era": "traditional",
+   "pressed": "p3m1 packing constraint as domestic floor grammar",
+   "return": "credited",
+   "credited_in": [
+    "Symmetry_Group"
+   ],
+   "artifacts": [
+    "loom_tatami_warp",
+    "mill_tatami_p3m1",
+    "pattern_mill"
+   ],
+   "count": 3
+  },
+  "durer": {
+   "kind": "named",
+   "tradition": "art",
+   "era": "1471–1528",
+   "pressed": "Melencolia's polyhedron — completion as mourning",
+   "return": "credited",
+   "artifacts": [
+    "dgrid",
+    "durer_scene",
+    "melencolia_chalkboard"
+   ],
+   "count": 3
+  },
+  "bernini": {
+   "kind": "named",
+   "tradition": "Baroque sculpture",
+   "era": "1598–1680",
+   "pressed": "the marble the noise chapter dissolves — the classical against the procedural",
+   "return": "credited",
+   "artifacts": [
+    "MeltingBerniniScene",
+    "bernini_columns",
+    "sine_cylinder_staircase"
+   ],
+   "count": 3
+  },
+  "rothko": {
+   "kind": "named",
+   "tradition": "art (Color Field)",
+   "era": "1903–1970",
+   "pressed": "hue as grief and immersion",
+   "return": "credited",
+   "artifacts": [
+    "dna_modern_art_rothko_chromatic_field",
+    "horizon_line",
+    "wall_shader_showcase"
+   ],
+   "count": 3
+  },
+  "sonia_delaunay": {
+   "kind": "named",
+   "tradition": "Orphism (textile + paint)",
+   "era": "1885–1979",
+   "pressed": "simultaneous colour, rhythmic geometric repeats",
+   "return": "credited",
+   "credited_in": [
+    "/pattern-atlas (procedural reproduction, makers named)"
+   ],
+   "artifacts": [
+    "example_4_4_multiple_emitters_vr",
+    "example_4_5_inheritance_polymorphism_vr",
+    "pattern_atlas_gallery"
+   ],
+   "count": 3
+  },
+  "calder": {
+   "kind": "named",
+   "tradition": "sculpture",
+   "era": "1898–1976",
+   "pressed": "the balanced mobile — equilibrium as art, tau = w*d",
+   "return": "credited",
+   "artifacts": [
+    "calder_mobile",
+    "calder_object_mobile"
+   ],
+   "count": 2
+  },
+  "chladni": {
+   "kind": "named",
+   "tradition": "acoustics",
+   "era": "1756–1827",
+   "pressed": "standing-wave figures on a plate",
+   "return": "credited",
+   "artifacts": [
+    "chladni_plate",
+    "samplevialrack"
+   ],
+   "count": 2
+  },
+  "honeycomb_nature": {
+   "kind": "nature",
+   "tradition": "the living world",
+   "era": "biological deep time",
+   "pressed": "the hexagon — least wall for most cells, packing solved by bees",
+   "return": "commons",
+   "artifacts": [
+    "grammar_tessellation_field_k06_honeycomb",
+    "honeycomb_hex_floor"
+   ],
+   "count": 2
+  },
+  "kente_weavers": {
+   "kind": "collective",
+   "tradition": "Kente strip-weaving (Ghana)",
+   "era": "17c–present",
+   "pressed": "narrow woven strips sewn edge-to-edge, each cloth a named proverb-pattern; block-and-stripe symmetry",
+   "return": "credited",
+   "credited_in": [
+    "/pattern-atlas (procedural reproduction, makers named)"
+   ],
+   "artifacts": [
+    "art_history_gallery",
+    "pattern_atlas_gallery"
+   ],
+   "count": 2
+  },
+  "ruth_asawa": {
+   "kind": "named",
+   "tradition": "looped-wire sculpture",
+   "era": "1926–2013",
+   "pressed": "a single continuous crochet of wire finding nested minimal volumes",
+   "return": "credited",
+   "credited_in": [
+    "(artifact ruth_asawa_sculpture)"
+   ],
+   "artifacts": [
+    "ElphabaDress",
+    "ruth_asawa_sculpture"
+   ],
+   "count": 2
+  },
+  "bridget_riley": {
+   "kind": "named",
+   "tradition": "Op art",
+   "era": "b.1931",
+   "pressed": "perceptual pattern — the eye made to move by pure periodic modulation",
+   "return": "credited",
+   "credited_in": [
+    "(artifact bridget_riley_op_art)"
+   ],
+   "artifacts": [
+    "bridget_riley_op_art",
+    "pattern_atlas_gallery"
+   ],
+   "count": 2
+  },
+  "gaudi": {
+   "kind": "named",
+   "tradition": "architecture",
+   "era": "1852–1926",
+   "pressed": "form-finding by inverted hung chains — the catenary arch",
+   "return": "credited",
+   "artifacts": [
+    "fractal_truss_tower"
+   ],
+   "count": 1
+  },
+  "frei_otto": {
+   "kind": "named",
+   "tradition": "architecture",
+   "era": "1925–2015",
+   "pressed": "minimal-surface roofs found by soap film",
+   "return": "credited",
+   "artifacts": [
+    "fractal_truss_tower"
+   ],
+   "count": 1
+  },
+  "darcy_thompson": {
+   "kind": "named",
+   "tradition": "mathematical biology",
+   "era": "1860–1948",
+   "pressed": "form as a fossil of forces — biology's shapes as physics",
+   "return": "credited",
+   "artifacts": [
+    "frozen_glass_vessel"
+   ],
+   "count": 1
+  },
+  "kandinsky": {
+   "kind": "named",
+   "tradition": "art (Bauhaus)",
+   "era": "1866–1944",
+   "pressed": "the synesthetic triad — yellow=triangle",
+   "return": "credited",
+   "artifacts": [
+    "dna_modern_art_kandinsky_bauhaus_triad"
+   ],
+   "count": 1
+  },
+  "ikat_dyers": {
+   "kind": "collective",
+   "tradition": "Ikat resist-dye weaving (Indonesia / Central Asia / Japan / India)",
+   "era": "ancient–present",
+   "pressed": "pattern dyed into the threads BEFORE weaving — the seed encodes the cloth; the blur is the signature",
+   "return": "credited",
+   "credited_in": [
+    "/pattern-atlas (procedural reproduction, makers named)"
+   ],
+   "artifacts": [
+    "pattern_atlas_gallery"
+   ],
+   "count": 1
+  },
+  "bingata_dyers": {
+   "kind": "collective",
+   "tradition": "Bingata stencil-dyeing (Ryukyu / Okinawa)",
+   "era": "14c–present",
+   "pressed": "stencil-and-paste resist dyeing, bright repeats",
+   "return": "credited",
+   "credited_in": [
+    "/pattern-atlas (procedural reproduction, makers named)"
+   ],
+   "artifacts": [
+    "pattern_atlas_gallery"
+   ],
+   "count": 1
+  },
+  "kanga_printers": {
+   "kind": "collective",
+   "tradition": "Kanga printing (Swahili coast, East Africa)",
+   "era": "19c–present",
+   "pressed": "printed cotton: border + central motif + a jina (proverb) — text woven into pattern",
+   "return": "credited",
+   "credited_in": [
+    "/pattern-atlas (procedural reproduction, makers named)"
+   ],
+   "artifacts": [
+    "pattern_atlas_gallery"
+   ],
+   "count": 1
+  },
+  "indigo_dyers": {
+   "kind": "collective",
+   "tradition": "Indigo resist-dyeing (Japan / Yoruba Nigeria / worldwide)",
+   "era": "ancient–present",
+   "pressed": "fold/bind/stitch determines the symmetry of the resist",
+   "return": "credited",
+   "credited_in": [
+    "/pattern-atlas (procedural reproduction, makers named)"
+   ],
+   "artifacts": [
+    "pattern_atlas_gallery"
+   ],
+   "count": 1
+  },
+  "tibetan_carpet_knotters": {
+   "kind": "collective",
+   "tradition": "Tibetan tiger-rug knotting",
+   "era": "traditional",
+   "pressed": "the tiger pelt abstracted to stripe fields — asymmetry inside a grid",
+   "return": "credited",
+   "credited_in": [
+    "/pattern-atlas (procedural reproduction, makers named)"
+   ],
+   "artifacts": [
+    "pattern_atlas_gallery"
+   ],
+   "count": 1
+  },
+  "iznik_potters": {
+   "kind": "collective",
+   "tradition": "Iznik tilework (Ottoman Turkey)",
+   "era": "16–17c",
+   "pressed": "fritware tiles, floral-geometric near-p4m/p6m repeats",
+   "return": "credited",
+   "credited_in": [
+    "/pattern-atlas (procedural reproduction, makers named)"
+   ],
+   "artifacts": [
+    "pattern_atlas_gallery"
+   ],
+   "count": 1
+  },
+  "anni_albers": {
+   "kind": "named",
+   "tradition": "Bauhaus / Black Mountain weaving",
+   "era": "1899–1994",
+   "pressed": "tessellation and thread as a formal grammar — the theory the weavers embodied",
+   "return": "credited",
+   "credited_in": [
+    "/pattern-atlas (procedural reproduction, makers named)"
+   ],
+   "artifacts": [
+    "pattern_atlas_gallery"
+   ],
+   "count": 1
+  },
+  "vasarely": {
+   "kind": "named",
+   "tradition": "Op art",
+   "era": "1906–1997",
+   "pressed": "the deformed grid — figure emerging from pure periodic modulation",
+   "return": "credited",
+   "credited_in": [
+    "/pattern-atlas (procedural reproduction, makers named)"
+   ],
+   "artifacts": [
+    "pattern_atlas_gallery"
+   ],
+   "count": 1
+  },
+  "kristina_torsson": {
+   "kind": "named",
+   "tradition": "Swedish textile & fashion design (Mah-Jong, Vamlingbolaget)",
+   "era": "1966–present",
+   "pressed": "the winding organic line that suspends the grid's order; pattern as dream-catching ('att skapa monster ar som att forsoka fanga en drom'); the repeat as rhythm over cloth without visible seams",
+   "return": "credited",
+   "credited_in": [
+    "(artifact mamma_monster_gallery)",
+    "Mothers Dream (2023)"
+   ],
+   "artifacts": [
+    "mamma_monster_gallery"
+   ],
+   "count": 1
+  },
+  "mah_jong_collective": {
+   "kind": "collective",
+   "tradition": "Mah-Jong (Swedish fashion collective: Kristina Torsson, Helena Henschen, Veronika Nygren)",
+   "era": "1966–",
+   "pressed": "design fused with ideology — soft colorful clothes meant to change people; the stripe as program",
+   "return": "credited",
+   "credited_in": [
+    "(artifact mamma_monster_gallery)"
+   ],
+   "artifacts": [
+    "mamma_monster_gallery"
+   ],
+   "count": 1
+  },
+  "kauffman": {
+   "kind": "named",
+   "tradition": "complexity biology",
+   "era": "b.1939",
+   "pressed": "self-organization at criticality",
+   "return": "credited",
+   "artifacts": [],
+   "count": 0
+  },
+  "reiko_sudo_nuno": {
+   "kind": "named",
+   "tradition": "contemporary Japanese textile",
+   "era": "b.1953",
+   "pressed": "engineered cloth, weave-as-material-computation",
+   "return": "candidate",
+   "artifacts": [],
+   "count": 0
+  },
+  "maria_sibylla_merian": {
+   "kind": "named",
+   "tradition": "naturalist illustration",
+   "era": "1647–1717",
+   "pressed": "metamorphosis drawn from life — caterpillar/chrysalis/moth on its host plant as one system",
+   "return": "credited",
+   "credited_in": [
+    "/pattern-atlas (procedural reproduction, makers named)"
+   ],
+   "artifacts": [],
+   "count": 0
+  }
+ },
+ "artifacts": {
+  "AnimatedTree": [
+   "lindenmayer"
+  ],
+  "ChainSwing": [
+   "wolfram"
+  ],
+  "CityGenerator": [
+   "lindenmayer"
+  ],
+  "ContextSensitiveTree": [
+   "lindenmayer"
+  ],
+  "CrosswayCA": [
+   "wolfram"
+  ],
+  "ElphabaDress": [
+   "ruth_asawa"
+  ],
+  "FlowFieldMain": [
+   "slime_mold"
+  ],
+  "ForestCompetition": [
+   "lindenmayer"
+  ],
+  "GeneticProgramming": [
+   "lindenmayer"
+  ],
+  "MeltingBerniniScene": [
+   "bernini"
+  ],
+  "PendulumPin": [
+   "wolfram"
+  ],
+  "PhysarumColony": [
+   "slime_mold"
+  ],
+  "SierpinskiPyramid": [
+   "sierpinski"
+  ],
+  "SpectrumVisualizer": [
+   "langton"
+  ],
+  "SplineCables": [
+   "the_catenary"
+  ],
+  "WavePaintings": [
+   "foucault_michel"
+  ],
+  "affect_theory_visualization": [
+   "deleuze_guattari"
+  ],
+  "albers_relief": [
+   "albers"
+  ],
+  "albers_wall_gallery": [
+   "albers"
+  ],
+  "angle_sum_triangle": [
+   "euclid"
+  ],
+  "apple_cell": [
+   "turing"
+  ],
+  "array_carpet": [
+   "textile_weavers_loom"
+  ],
+  "art_history_gallery": [
+   "bauhaus_school",
+   "islamic_alhambra_artisans",
+   "kente_weavers",
+   "mondrian",
+   "persian_weavers",
+   "textile_weavers_loom"
+  ],
+  "attention_loom": [
+   "textile_weavers_loom"
+  ],
+  "attractorsphere": [
+   "turing"
+  ],
+  "autoclave": [
+   "shannon"
+  ],
+  "axiom_bench": [
+   "lindenmayer"
+  ],
+  "axiom_garden": [
+   "lindenmayer"
+  ],
+  "axiom_room": [
+   "lindenmayer"
+  ],
+  "bar_array_fibonacci": [
+   "fibonacci_golden"
+  ],
+  "barber_paradox": [
+   "russell"
+  ],
+  "basket_weave_floor": [
+   "anonymous_folk_pattern",
+   "pompeii_mosaicists",
+   "textile_weavers_loom"
+  ],
+  "bernini_columns": [
+   "bernini"
+  ],
+  "bias_visualizer": [
+   "godel"
+  ],
+  "bifurcation_diagram": [
+   "florensky",
+   "langton"
+  ],
+  "biomagneticresonator": [
+   "fibonacci_golden"
+  ],
+  "biomech_ng": [
+   "wolfram"
+  ],
+  "boid_flocking": [
+   "reynolds"
+  ],
+  "boid_manager": [
+   "reynolds"
+  ],
+  "boids_2d_in_3d": [
+   "reynolds"
+  ],
+  "boids_aquarium": [
+   "reynolds"
+  ],
+  "both_true_gate": [
+   "florensky"
+  ],
+  "box_counting_dimension": [
+   "koch_helge",
+   "sierpinski"
+  ],
+  "bracket_bench": [
+   "lindenmayer"
+  ],
+  "bracket_room": [
+   "lindenmayer"
+  ],
+  "branching_coral": [
+   "lindenmayer"
+  ],
+  "branching_vine": [
+   "lindenmayer"
+  ],
+  "breathing_room": [
+   "the_variational_principle"
+  ],
+  "breathing_toy": [
+   "wolfram"
+  ],
+  "brick_wall_factory": [
+   "anonymous_folk_pattern"
+  ],
+  "bridget_riley_op_art": [
+   "bridget_riley"
+  ],
+  "bulging_tunnel": [
+   "textile_weavers_loom"
+  ],
+  "bunsen_burner": [
+   "wolfram"
+  ],
+  "ca_bridge": [
+   "wolfram"
+  ],
+  "ca_columns": [
+   "conway"
+  ],
+  "ca_conway_city": [
+   "conway"
+  ],
+  "ca_rule_comparison": [
+   "conway"
+  ],
+  "ca_rule_explorer": [
+   "wolfram"
+  ],
+  "ca_rules_workbench": [
+   "cantor",
+   "langton",
+   "russell",
+   "shannon",
+   "sierpinski",
+   "textile_weavers_loom",
+   "turing",
+   "wolfram"
+  ],
+  "ca_texture_bench": [
+   "textile_weavers_loom",
+   "turing"
+  ],
+  "ca_texture_toy": [
+   "turing"
+  ],
+  "ca_texture_wall": [
+   "persian_weavers",
+   "textile_weavers_loom"
+  ],
+  "cable_builder": [
+   "the_catenary"
+  ],
+  "calder_mobile": [
+   "calder"
+  ],
+  "calder_object_mobile": [
+   "calder"
+  ],
+  "cantor_bench": [
+   "cantor"
+  ],
+  "cantor_diagonal_workbench": [
+   "cantor",
+   "russell",
+   "turing"
+  ],
+  "cantor_pagoda_vr": [
+   "cantor",
+   "fibonacci_golden"
+  ],
+  "cantor_set": [
+   "cantor",
+   "menger",
+   "sierpinski"
+  ],
+  "cardboard_box": [
+   "textile_weavers_loom"
+  ],
+  "carpet_cove_gallery": [
+   "textile_weavers_loom"
+  ],
+  "catenoid": [
+   "the_catenary",
+   "the_variational_principle"
+  ],
+  "chain_link_floor": [
+   "pompeii_mosaicists"
+  ],
+  "chalkboard": [
+   "turing"
+  ],
+  "chaos_particles": [
+   "langton"
+  ],
+  "chemistry_flask": [
+   "shannon"
+  ],
+  "chladni_plate": [
+   "chladni"
+  ],
+  "city_bench": [
+   "lindenmayer"
+  ],
+  "city_room": [
+   "lindenmayer"
+  ],
+  "city_toy": [
+   "lindenmayer"
+  ],
+  "cloth_loom": [
+   "textile_weavers_loom"
+  ],
+  "codex_arch": [
+   "anonymous_folk_pattern",
+   "haeckel",
+   "serafini",
+   "textile_weavers_loom"
+  ],
+  "codex_flora": [
+   "fibonacci_golden",
+   "haeckel",
+   "koch_helge",
+   "lindenmayer",
+   "romanesco_nature",
+   "serafini",
+   "textile_weavers_loom"
+  ],
+  "codex_food": [
+   "haeckel",
+   "serafini"
+  ],
+  "codex_glyph": [
+   "lindenmayer",
+   "serafini"
+  ],
+  "codex_loom": [
+   "serafini",
+   "textile_weavers_loom"
+  ],
+  "codex_morph": [
+   "conway",
+   "serafini",
+   "turing"
+  ],
+  "codex_swarm": [
+   "reynolds",
+   "serafini",
+   "textile_weavers_loom"
+  ],
+  "colonization_room": [
+   "lindenmayer"
+  ],
+  "color_constellation_office": [
+   "albers"
+  ],
+  "colorballs": [
+   "anonymous_folk_pattern"
+  ],
+  "compass_rose_floor": [
+   "pompeii_mosaicists"
+  ],
+  "complexity_dial_workbench": [
+   "turing"
+  ],
+  "complexity_pattern": [
+   "conway",
+   "langton"
+  ],
+  "constructive_proof": [
+   "godel"
+  ],
+  "context_free_grammars": [
+   "lindenmayer"
+  ],
+  "contradiction_engine": [
+   "florensky"
+  ],
+  "coordinate_system_switcher": [
+   "fibonacci_golden"
+  ],
+  "crackpropagation_ca": [
+   "textile_weavers_loom"
+  ],
+  "crate": [
+   "wolfram"
+  ],
+  "crisis_synthesis_bench": [
+   "euclid"
+  ],
+  "critter_placer": [
+   "fibonacci_golden",
+   "turing"
+  ],
+  "crossway_ca": [
+   "wolfram"
+  ],
+  "cube_subdivision": [
+   "menger",
+   "sierpinski"
+  ],
+  "curvature_bench": [
+   "euclid"
+  ],
+  "curvature_slider": [
+   "euclid"
+  ],
+  "death_pylon": [
+   "wolfram"
+  ],
+  "dense_carpet_floor": [
+   "pompeii_mosaicists",
+   "textile_weavers_loom"
+  ],
+  "descent_marble_toy": [
+   "the_variational_principle"
+  ],
+  "destructibles_test_scene": [
+   "cantor"
+  ],
+  "dgrid": [
+   "durer"
+  ],
+  "diamond_lattice_floor": [
+   "anonymous_folk_pattern",
+   "pompeii_mosaicists"
+  ],
+  "diamonds_squares_floor": [
+   "pompeii_mosaicists"
+  ],
+  "digital_display_array": [
+   "shannon"
+  ],
+  "dimension_bench": [
+   "koch_helge",
+   "mandelbrot",
+   "wolfram"
+  ],
+  "dimension_meter": [
+   "koch_helge",
+   "sierpinski"
+  ],
+  "dna_color_furniture_furniture_becker_utensilo_bauhaus": [
+   "bauhaus_school"
+  ],
+  "dna_modern_art_albers_homage_warm": [
+   "albers"
+  ],
+  "dna_modern_art_kandinsky_bauhaus_triad": [
+   "bauhaus_school",
+   "kandinsky"
+  ],
+  "dna_modern_art_mondrian_de_stijl": [
+   "mondrian"
+  ],
+  "dna_modern_art_rothko_chromatic_field": [
+   "rothko",
+   "turing"
+  ],
+  "dna_primitive_stack_ps01_bauhaus_totem_green": [
+   "bauhaus_school"
+  ],
+  "dna_sprout": [
+   "lindenmayer"
+  ],
+  "dna_workstation": [
+   "lindenmayer"
+  ],
+  "double_enneper": [
+   "the_catenary"
+  ],
+  "durer_scene": [
+   "durer",
+   "turing"
+  ],
+  "ecosystem_simulation": [
+   "reynolds"
+  ],
+  "edge_core": [
+   "langton"
+  ],
+  "edge_detector": [
+   "langton"
+  ],
+  "edge_ground_synthesis": [
+   "deleuze_guattari",
+   "godel"
+  ],
+  "edge_of_chaos_bench": [
+   "langton"
+  ],
+  "edge_of_chaos_orb": [
+   "fibonacci_golden",
+   "langton"
+  ],
+  "edge_of_chaos_unlocked": [
+   "langton",
+   "turing"
+  ],
+  "edge_particles": [
+   "langton"
+  ],
+  "edge_zone_crystal": [
+   "langton"
+  ],
+  "edge_zone_dissolve": [
+   "langton"
+  ],
+  "edible_mushroom": [
+   "rand_corp"
+  ],
+  "elementary_ca_bench": [
+   "wolfram"
+  ],
+  "elementary_ca_vr": [
+   "wolfram"
+  ],
+  "emergence_zone": [
+   "langton"
+  ],
+  "endlessness_chalkboard": [
+   "cantor"
+  ],
+  "energy_landscape_bench": [
+   "the_variational_principle"
+  ],
+  "enigma_rotor_stack": [
+   "turing"
+  ],
+  "enneper_order3": [
+   "the_catenary"
+  ],
+  "entropy_axiom": [
+   "shannon"
+  ],
+  "entropy_bench": [
+   "shannon"
+  ],
+  "entropy_jar": [
+   "shannon"
+  ],
+  "entropy_meter": [
+   "langton",
+   "shannon"
+  ],
+  "entropy_morphogenesis": [
+   "turing"
+  ],
+  "escape_time_room": [
+   "langton",
+   "mandelbrot"
+  ],
+  "escher_room": [
+   "escher"
+  ],
+  "escher_staircase": [
+   "escher",
+   "godel",
+   "penrose",
+   "russell"
+  ],
+  "escher_stairwalker": [
+   "escher"
+  ],
+  "euclid_parallel_bench": [
+   "euclid"
+  ],
+  "euclid_postulates_plaque": [
+   "euclid"
+  ],
+  "evolving_flowers": [
+   "lindenmayer"
+  ],
+  "evolvingflowers": [
+   "lindenmayer"
+  ],
+  "exact_meander_floor": [
+   "pompeii_mosaicists"
+  ],
+  "example_4_4_multiple_emitters_vr": [
+   "sonia_delaunay"
+  ],
+  "example_4_5_inheritance_polymorphism_vr": [
+   "sonia_delaunay"
+  ],
+  "example_5_9_flocking": [
+   "reynolds"
+  ],
+  "example_8_3_recursion_circles_vr": [
+   "koch_helge",
+   "sierpinski"
+  ],
+  "example_8_4_cantor_pagoda_vr": [
+   "cantor",
+   "fibonacci_golden"
+  ],
+  "example_8_4_cantor_set_vr": [
+   "cantor"
+  ],
+  "excluded_class_visualizer": [
+   "godel"
+  ],
+  "excluded_middle_demo": [
+   "godel"
+  ],
+  "fern_bench": [
+   "lindenmayer"
+  ],
+  "fibonacci_pagoda": [
+   "fibonacci_golden",
+   "romanesco_nature"
+  ],
+  "fibonacci_sequences": [
+   "fibonacci_golden"
+  ],
+  "fibonacci_snake": [
+   "fibonacci_golden"
+  ],
+  "fibonacci_snake_stages": [
+   "fibonacci_golden"
+  ],
+  "fibonacci_terrain": [
+   "fibonacci_golden"
+  ],
+  "fire_extinguisher": [
+   "shannon"
+  ],
+  "firework_burst": [
+   "textile_weavers_loom"
+  ],
+  "flatland_room": [
+   "euclid"
+  ],
+  "floor_plan_space": [
+   "pompeii_mosaicists"
+  ],
+  "florensky_in_production": [
+   "florensky"
+  ],
+  "florensky_sphere": [
+   "florensky",
+   "russell"
+  ],
+  "flower_lab": [
+   "fibonacci_golden",
+   "turing"
+  ],
+  "flower_of_life_floor": [
+   "pompeii_mosaicists"
+  ],
+  "fluid_form": [
+   "fibonacci_golden"
+  ],
+  "fold_theatre_runner": [
+   "menger",
+   "sierpinski"
+  ],
+  "fontana_puncture": [
+   "fontana",
+   "klee"
+  ],
+  "force_field_visualizer": [
+   "wolfram"
+  ],
+  "force_mower": [
+   "wolfram"
+  ],
+  "forest_bench": [
+   "lindenmayer"
+  ],
+  "form_studio_station": [
+   "le_corbusier"
+  ],
+  "foucault_pendulum": [
+   "foucault_michel"
+  ],
+  "four_classes_bench": [
+   "wolfram"
+  ],
+  "four_classes_room": [
+   "wolfram"
+  ],
+  "four_classes_toy": [
+   "wolfram"
+  ],
+  "fractal_antenna": [
+   "koch_helge",
+   "sierpinski"
+  ],
+  "fractal_antenna_toy": [
+   "mandelbrot",
+   "sierpinski"
+  ],
+  "fractal_cantor_set": [
+   "cantor"
+  ],
+  "fractal_koch_curve": [
+   "koch_helge"
+  ],
+  "fractal_lsystem_string": [
+   "lindenmayer"
+  ],
+  "fractal_lsystem_tree": [
+   "lindenmayer"
+  ],
+  "fractal_recursion_2": [
+   "koch_helge",
+   "sierpinski"
+  ],
+  "fractal_recursion_circles": [
+   "koch_helge",
+   "sierpinski"
+  ],
+  "fractal_truss_tower": [
+   "frei_otto",
+   "gaudi"
+  ],
+  "frozen_glass_vessel": [
+   "darcy_thompson"
+  ],
+  "game_of_life_oop_vr": [
+   "conway"
+  ],
+  "game_of_life_petri": [
+   "conway",
+   "turing"
+  ],
+  "game_of_life_vr": [
+   "conway"
+  ],
+  "gas_canister": [
+   "shannon"
+  ],
+  "generations_bench": [
+   "lindenmayer"
+  ],
+  "generations_room": [
+   "lindenmayer"
+  ],
+  "genetic_programming": [
+   "lindenmayer"
+  ],
+  "genetic_tree_sculptor": [
+   "lindenmayer"
+  ],
+  "glitch_grid_floor": [
+   "memphis_group"
+  ],
+  "godel_incompleteness_room": [
+   "godel"
+  ],
+  "godel_sentence_machine": [
+   "cantor",
+   "godel",
+   "turing"
+  ],
+  "godel_statement_plaque": [
+   "escher",
+   "godel",
+   "russell"
+  ],
+  "goedel_atrium": [
+   "godel"
+  ],
+  "golden_rectangle": [
+   "fibonacci_golden"
+  ],
+  "golden_spiral_bench": [
+   "fibonacci_golden",
+   "romanesco_nature"
+  ],
+  "grab_sphere_lambda": [
+   "langton"
+  ],
+  "grab_sphere_phi": [
+   "fibonacci_golden"
+  ],
+  "grab_sphere_point_snap": [
+   "foucault_michel"
+  ],
+  "grabable_mondrian": [
+   "mondrian"
+  ],
+  "gradient_descent": [
+   "the_variational_principle"
+  ],
+  "gradient_descent_landscape": [
+   "haraway",
+   "the_variational_principle"
+  ],
+  "gradient_descent_optimizer": [
+   "the_variational_principle"
+  ],
+  "gradient_descent_visualization": [
+   "the_variational_principle"
+  ],
+  "gradient_descent_well": [
+   "the_variational_principle"
+  ],
+  "gradient_hunter": [
+   "markov",
+   "the_variational_principle"
+  ],
+  "grammar_bench": [
+   "lindenmayer"
+  ],
+  "grammar_markov": [
+   "markov"
+  ],
+  "grammar_provenance": [
+   "islamic_alhambra_artisans",
+   "lindenmayer"
+  ],
+  "grammar_tessellation_field_alhambra_basket_weave": [
+   "islamic_alhambra_artisans",
+   "textile_weavers_loom"
+  ],
+  "grammar_tessellation_field_alhambra_chinese_lattice": [
+   "islamic_alhambra_artisans"
+  ],
+  "grammar_tessellation_field_alhambra_girih_10_star": [
+   "islamic_alhambra_artisans"
+  ],
+  "grammar_tessellation_field_alhambra_girih_pentagonal_rosette": [
+   "islamic_alhambra_artisans"
+  ],
+  "grammar_tessellation_field_alhambra_hex_square_triangle_lattice": [
+   "islamic_alhambra_artisans"
+  ],
+  "grammar_tessellation_field_alhambra_interlace_lattice": [
+   "islamic_alhambra_artisans"
+  ],
+  "grammar_tessellation_field_alhambra_muqarnas": [
+   "islamic_alhambra_artisans"
+  ],
+  "grammar_tessellation_field_alhambra_nested_concentric": [
+   "islamic_alhambra_artisans"
+  ],
+  "grammar_tessellation_field_alhambra_penrose_d_vertex": [
+   "islamic_alhambra_artisans",
+   "penrose"
+  ],
+  "grammar_tessellation_field_alhambra_penrose_decagon_patch": [
+   "islamic_alhambra_artisans",
+   "penrose"
+  ],
+  "grammar_tessellation_field_alhambra_penrose_sun": [
+   "islamic_alhambra_artisans",
+   "penrose"
+  ],
+  "grammar_tessellation_field_alhambra_rosette_field": [
+   "islamic_alhambra_artisans"
+  ],
+  "grammar_tessellation_field_alhambra_running_bond_brick": [
+   "anonymous_folk_pattern",
+   "islamic_alhambra_artisans"
+  ],
+  "grammar_tessellation_field_alhambra_square_bullseye_floor": [
+   "islamic_alhambra_artisans"
+  ],
+  "grammar_tessellation_field_alhambra_square_pinwheel_rings": [
+   "islamic_alhambra_artisans"
+  ],
+  "grammar_tessellation_field_alhambra_star_and_cross": [
+   "islamic_alhambra_artisans"
+  ],
+  "grammar_tessellation_field_alhambra_stepped_pyramid_3d": [
+   "islamic_alhambra_artisans"
+  ],
+  "grammar_tessellation_field_alhambra_torus_3_triangular": [
+   "islamic_alhambra_artisans"
+  ],
+  "grammar_tessellation_field_alhambra_torus_4_diamond": [
+   "islamic_alhambra_artisans"
+  ],
+  "grammar_tessellation_field_alhambra_torus_5_flower": [
+   "islamic_alhambra_artisans"
+  ],
+  "grammar_tessellation_field_alhambra_torus_8_truncated_square": [
+   "islamic_alhambra_artisans"
+  ],
+  "grammar_tessellation_field_alhambra_truchet_diagonal": [
+   "islamic_alhambra_artisans"
+  ],
+  "grammar_tessellation_field_alhambra_truncated_square_488": [
+   "islamic_alhambra_artisans"
+  ],
+  "grammar_tessellation_field_k06_honeycomb": [
+   "honeycomb_nature"
+  ],
+  "grammar_totem_pole_bauhaus_pinch": [
+   "bauhaus_school"
+  ],
+  "grammar_totem_pole_memphis_bulge": [
+   "memphis_group"
+  ],
+  "grammar_totem_pole_mondrian_cubes": [
+   "mondrian"
+  ],
+  "graph_weaver": [
+   "textile_weavers_loom"
+  ],
+  "gravity_well": [
+   "textile_weavers_loom"
+  ],
+  "gray_scott_comparison": [
+   "turing"
+  ],
+  "great_wave": [
+   "textile_weavers_loom"
+  ],
+  "grid2d": [
+   "conway"
+  ],
+  "grid2d_langtons_ant": [
+   "langton"
+  ],
+  "grid2d_life": [
+   "conway"
+  ],
+  "grid2d_rule110": [
+   "turing",
+   "wolfram"
+  ],
+  "grid2d_rule30": [
+   "wolfram"
+  ],
+  "grid2d_rule90": [
+   "sierpinski",
+   "wolfram"
+  ],
+  "grid_chalkboard": [
+   "foucault_michel"
+  ],
+  "grid_substrate_runner": [
+   "wolfram"
+  ],
+  "grove_room": [
+   "lindenmayer"
+  ],
+  "growth_animator": [
+   "lindenmayer"
+  ],
+  "guilloche_border_floor": [
+   "pompeii_mosaicists"
+  ],
+  "gyroid_demo": [
+   "textile_weavers_loom",
+   "the_catenary"
+  ],
+  "haeckel": [
+   "haeckel"
+  ],
+  "half_life_manometer": [
+   "fibonacci_golden",
+   "turing"
+  ],
+  "halting_bench": [
+   "turing"
+  ],
+  "halting_lantern": [
+   "turing"
+  ],
+  "halting_workbench": [
+   "cantor",
+   "russell",
+   "shannon",
+   "turing"
+  ],
+  "harmonic_motion_demo": [
+   "fibonacci_golden"
+  ],
+  "helicoid": [
+   "the_catenary"
+  ],
+  "herringbone_floor": [
+   "anonymous_folk_pattern",
+   "pompeii_mosaicists",
+   "textile_weavers_loom"
+  ],
+  "hilbert_hotel": [
+   "cantor",
+   "russell",
+   "turing"
+  ],
+  "homagetothesquare": [
+   "albers"
+  ],
+  "honeycomb_hex_floor": [
+   "honeycomb_nature",
+   "pompeii_mosaicists"
+  ],
+  "horizon_line": [
+   "klee",
+   "rothko",
+   "turing"
+  ],
+  "hull_crusher": [
+   "wolfram"
+  ],
+  "hyperbolic_surface": [
+   "euclid",
+   "poincare"
+  ],
+  "ifs_room": [
+   "sierpinski"
+  ],
+  "impossible_object_press": [
+   "penrose"
+  ],
+  "incompleteness_scale": [
+   "godel"
+  ],
+  "incompleteness_tower": [
+   "godel"
+  ],
+  "industrial_robot_arm": [
+   "wolfram"
+  ],
+  "inflate_flock": [
+   "reynolds"
+  ],
+  "interlocking_t_floor": [
+   "pompeii_mosaicists",
+   "textile_weavers_loom"
+  ],
+  "iv_stand": [
+   "shannon"
+  ],
+  "jelly_room": [
+   "verlet"
+  ],
+  "julia_set_explorer": [
+   "mandelbrot",
+   "textile_weavers_loom"
+  ],
+  "klee_walking_point": [
+   "klee",
+   "lindenmayer"
+  ],
+  "koch_curve": [
+   "koch_helge"
+  ],
+  "koch_curve_1": [
+   "koch_helge"
+  ],
+  "koch_curve_3d": [
+   "koch_helge",
+   "shannon"
+  ],
+  "koch_loom": [
+   "koch_helge",
+   "textile_weavers_loom"
+  ],
+  "koch_snowflake_press": [
+   "koch_helge"
+  ],
+  "kochsnowflake": [
+   "koch_helge"
+  ],
+  "labyrinth_floor": [
+   "pompeii_mosaicists"
+  ],
+  "lambda_dial_bench": [
+   "langton"
+  ],
+  "lambda_edge_room": [
+   "langton"
+  ],
+  "lambda_hall": [
+   "langton"
+  ],
+  "lambda_organ": [
+   "langton"
+  ],
+  "lambda_slider": [
+   "langton"
+  ],
+  "langton_bench": [
+   "langton"
+  ],
+  "langton_swarm": [
+   "langton"
+  ],
+  "langton_toy": [
+   "langton"
+  ],
+  "lattice_gas_bench": [
+   "wolfram"
+  ],
+  "lava_lamp_tool": [
+   "wolfram"
+  ],
+  "lenia_continuous": [
+   "conway",
+   "turing"
+  ],
+  "lenia_room": [
+   "conway",
+   "langton"
+  ],
+  "life_bench": [
+   "conway"
+  ],
+  "life_rules_room": [
+   "conway"
+  ],
+  "life_zoo_bench": [
+   "conway"
+  ],
+  "lifeform_walker": [
+   "conway"
+  ],
+  "lindenmayer_tube_tree": [
+   "bauhaus_school",
+   "lindenmayer"
+  ],
+  "line": [
+   "shannon"
+  ],
+  "line_chalkboard": [
+   "shannon"
+  ],
+  "living_paper_dragon": [
+   "lindenmayer"
+  ],
+  "living_paper_fern": [
+   "lindenmayer"
+  ],
+  "living_paper_koch": [
+   "koch_helge"
+  ],
+  "living_paper_life": [
+   "conway"
+  ],
+  "living_paper_mandelbrot": [
+   "mandelbrot"
+  ],
+  "living_paper_reaction_diffusion": [
+   "turing"
+  ],
+  "living_paper_rule110": [
+   "turing",
+   "wolfram"
+  ],
+  "living_paper_rule30": [
+   "wolfram"
+  ],
+  "living_paper_sierpinski": [
+   "sierpinski"
+  ],
+  "living_paper_tree": [
+   "lindenmayer"
+  ],
+  "loom_alhambra_p6m": [
+   "godel",
+   "islamic_alhambra_artisans",
+   "textile_weavers_loom"
+  ],
+  "loom_bauhaus_p4m": [
+   "bauhaus_school",
+   "textile_weavers_loom"
+  ],
+  "loom_bolt_escher_pmm": [
+   "escher",
+   "textile_weavers_loom"
+  ],
+  "loom_bolt_memphis_p4g": [
+   "bauhaus_school",
+   "memphis_group",
+   "textile_weavers_loom"
+  ],
+  "loom_drum_bauhaus_p4m": [
+   "bauhaus_school",
+   "textile_weavers_loom",
+   "the_seventeen_groups"
+  ],
+  "loom_drum_persian_p6": [
+   "persian_weavers",
+   "textile_weavers_loom"
+  ],
+  "loom_escher_mirror": [
+   "escher",
+   "islamic_alhambra_artisans",
+   "textile_weavers_loom"
+  ],
+  "loom_fountain_alhambra_p6m": [
+   "islamic_alhambra_artisans",
+   "textile_weavers_loom"
+  ],
+  "loom_fountain_pastel_p4": [
+   "textile_weavers_loom"
+  ],
+  "loom_memphis_mirror": [
+   "memphis_group",
+   "textile_weavers_loom"
+  ],
+  "loom_persian_warp": [
+   "persian_weavers",
+   "textile_weavers_loom"
+  ],
+  "loom_tatami_warp": [
+   "japanese_tatami_makers",
+   "textile_weavers_loom"
+  ],
+  "loss_function_comparator": [
+   "the_variational_principle"
+  ],
+  "lsystem_artifact": [
+   "lindenmayer"
+  ],
+  "lsystem_dungeon": [
+   "lindenmayer"
+  ],
+  "lsystem_editor": [
+   "lindenmayer"
+  ],
+  "lsystem_tree": [
+   "lindenmayer"
+  ],
+  "lsystem_tree_room": [
+   "lindenmayer"
+  ],
+  "lyapunov_fractal": [
+   "cantor",
+   "langton"
+  ],
+  "mamma_monster_gallery": [
+   "kristina_torsson",
+   "mah_jong_collective",
+   "textile_weavers_loom"
+  ],
+  "mandelbrot_bench": [
+   "mandelbrot"
+  ],
+  "mandelbrot_dive": [
+   "mandelbrot"
+  ],
+  "mandelbrot_set": [
+   "mandelbrot"
+  ],
+  "markov_chain": [
+   "markov"
+  ],
+  "markov_chains": [
+   "markov"
+  ],
+  "markov_chains_tree": [
+   "lindenmayer",
+   "markov"
+  ],
+  "markov_generator": [
+   "markov"
+  ],
+  "markov_melody": [
+   "markov"
+  ],
+  "meander_threshold_floor": [
+   "pompeii_mosaicists"
+  ],
+  "melencolia_chalkboard": [
+   "durer"
+  ],
+  "membrane_bench": [
+   "markov"
+  ],
+  "memphis_floor": [
+   "memphis_group"
+  ],
+  "menger_bench": [
+   "menger"
+  ],
+  "menger_filter": [
+   "menger"
+  ],
+  "menger_sponge": [
+   "cantor",
+   "menger",
+   "sierpinski"
+  ],
+  "menger_toy": [
+   "menger"
+  ],
+  "mengersponge": [
+   "menger"
+  ],
+  "merge_conflict_visualizer": [
+   "florensky"
+  ],
+  "mesh_grammar_artifact": [
+   "lindenmayer"
+  ],
+  "mesh_grammar_blooming_bulge": [
+   "textile_weavers_loom"
+  ],
+  "mesh_grammar_inset_pattern": [
+   "wolfram"
+  ],
+  "mesh_grammar_lsystem_tree": [
+   "lindenmayer"
+  ],
+  "mill_alhambra_p6m": [
+   "islamic_alhambra_artisans"
+  ],
+  "mill_bauhaus_p4m": [
+   "bauhaus_school"
+  ],
+  "mill_escher_p4g": [
+   "escher"
+  ],
+  "mill_memphis_p3": [
+   "memphis_group"
+  ],
+  "mill_memphis_pgg": [
+   "memphis_group"
+  ],
+  "mill_persian_p3": [
+   "persian_weavers"
+  ],
+  "mill_persian_p4": [
+   "persian_weavers"
+  ],
+  "mill_persian_p6": [
+   "persian_weavers"
+  ],
+  "mill_tatami_p3m1": [
+   "japanese_tatami_makers"
+  ],
+  "mirror_snake_meander": [
+   "pompeii_mosaicists"
+  ],
+  "mobius_world": [
+   "euclid"
+  ],
+  "modulor_cypress": [
+   "le_corbusier",
+   "lindenmayer"
+  ],
+  "modulor_man": [
+   "fibonacci_golden",
+   "le_corbusier"
+  ],
+  "modulor_man_demo": [
+   "le_corbusier"
+  ],
+  "modulor_man_interactive": [
+   "le_corbusier"
+  ],
+  "mold_network": [
+   "slime_mold",
+   "wolfram"
+  ],
+  "mondrian_2d": [
+   "mondrian"
+  ],
+  "mondrian_3d_display": [
+   "mondrian"
+  ],
+  "mondrian_relief": [
+   "mondrian"
+  ],
+  "mondrian_run": [
+   "mondrian"
+  ],
+  "morpho_egg": [
+   "turing"
+  ],
+  "morpho_menagerie": [
+   "turing"
+  ],
+  "morphobody": [
+   "turing"
+  ],
+  "morphogen_tide_pool": [
+   "turing"
+  ],
+  "morphogenesis_bench": [
+   "turing"
+  ],
+  "mst_visualization": [
+   "wolfram"
+  ],
+  "multi_zone_carpet_floor": [
+   "pompeii_mosaicists",
+   "textile_weavers_loom"
+  ],
+  "mushrooms": [
+   "rand_corp"
+  ],
+  "mystic_writing_pad": [
+   "fontana",
+   "klee",
+   "wolfram"
+  ],
+  "nested_diamonds_floor": [
+   "pompeii_mosaicists"
+  ],
+  "network_analysis": [
+   "wolfram"
+  ],
+  "network_chalkboard": [
+   "wolfram"
+  ],
+  "neural_network_visualization": [
+   "the_variational_principle"
+  ],
+  "noise_terrain": [
+   "textile_weavers_loom"
+  ],
+  "non_euclidean_space": [
+   "euclid"
+  ],
+  "octagon_square_floor": [
+   "pompeii_mosaicists"
+  ],
+  "octopus_bench": [
+   "wolfram"
+  ],
+  "opus_sectile_floor": [
+   "pompeii_mosaicists"
+  ],
+  "order_loom": [
+   "textile_weavers_loom"
+  ],
+  "ordered_grid": [
+   "langton"
+  ],
+  "organic_space": [
+   "euclid"
+  ],
+  "panel_bridge_loom": [
+   "textile_weavers_loom"
+  ],
+  "paraconsistent_room": [
+   "florensky"
+  ],
+  "paradox_stalker": [
+   "escher"
+  ],
+  "parametric_lsystem": [
+   "lindenmayer"
+  ],
+  "particle_chaos": [
+   "langton"
+  ],
+  "path_builder_foe": [
+   "anonymous_folk_pattern"
+  ],
+  "path_cube": [
+   "anonymous_folk_pattern"
+  ],
+  "path_pyramid": [
+   "anonymous_folk_pattern"
+  ],
+  "path_wedge": [
+   "anonymous_folk_pattern"
+  ],
+  "pathfinding3d": [
+   "euclid"
+  ],
+  "pattern_atlas_gallery": [
+   "albers",
+   "anni_albers",
+   "bingata_dyers",
+   "bridget_riley",
+   "ikat_dyers",
+   "indigo_dyers",
+   "iznik_potters",
+   "kanga_printers",
+   "kente_weavers",
+   "pompeii_mosaicists",
+   "sonia_delaunay",
+   "textile_weavers_loom",
+   "tibetan_carpet_knotters",
+   "vasarely"
+  ],
+  "pattern_compositor": [
+   "textile_weavers_loom",
+   "the_seventeen_groups"
+  ],
+  "pattern_loom": [
+   "islamic_alhambra_artisans",
+   "textile_weavers_loom",
+   "the_seventeen_groups"
+  ],
+  "pattern_machine_a": [
+   "islamic_alhambra_artisans",
+   "textile_weavers_loom",
+   "wolfram"
+  ],
+  "pattern_machine_b": [
+   "islamic_alhambra_artisans",
+   "textile_weavers_loom",
+   "the_seventeen_groups",
+   "wolfram"
+  ],
+  "pattern_machine_c": [
+   "islamic_alhambra_artisans",
+   "textile_weavers_loom",
+   "the_seventeen_groups"
+  ],
+  "pattern_machine_d": [
+   "islamic_alhambra_artisans",
+   "textile_weavers_loom"
+  ],
+  "pattern_maker_station": [
+   "textile_weavers_loom",
+   "the_seventeen_groups"
+  ],
+  "pattern_mill": [
+   "bauhaus_school",
+   "escher",
+   "islamic_alhambra_artisans",
+   "japanese_tatami_makers",
+   "memphis_group",
+   "persian_weavers",
+   "textile_weavers_loom",
+   "wolfram"
+  ],
+  "pattern_studio_plate": [
+   "textile_weavers_loom"
+  ],
+  "pattern_tile_4x4": [
+   "anonymous_folk_pattern",
+   "islamic_alhambra_artisans",
+   "textile_weavers_loom",
+   "the_seventeen_groups"
+  ],
+  "pattern_tile_8x8": [
+   "anonymous_folk_pattern",
+   "islamic_alhambra_artisans",
+   "textile_weavers_loom",
+   "the_seventeen_groups"
+  ],
+  "pattern_tile_brick": [
+   "anonymous_folk_pattern",
+   "islamic_alhambra_artisans",
+   "textile_weavers_loom",
+   "the_seventeen_groups"
+  ],
+  "pattern_tile_cube": [
+   "textile_weavers_loom"
+  ],
+  "pattern_tile_herringbone": [
+   "anonymous_folk_pattern",
+   "islamic_alhambra_artisans",
+   "textile_weavers_loom",
+   "the_seventeen_groups"
+  ],
+  "pattern_tile_mirror": [
+   "anonymous_folk_pattern",
+   "islamic_alhambra_artisans",
+   "textile_weavers_loom",
+   "the_seventeen_groups"
+  ],
+  "pattern_tile_plate": [
+   "textile_weavers_loom"
+  ],
+  "pattern_tile_puzzle": [
+   "anonymous_folk_pattern",
+   "islamic_alhambra_artisans",
+   "textile_weavers_loom",
+   "the_seventeen_groups"
+  ],
+  "pelta_shield_floor": [
+   "pompeii_mosaicists"
+  ],
+  "penrose_tilings": [
+   "penrose"
+  ],
+  "penrose_triangle": [
+   "escher",
+   "godel"
+  ],
+  "perception_altering": [
+   "textile_weavers_loom"
+  ],
+  "persian_rug": [
+   "persian_weavers"
+  ],
+  "perspective_cubes_floor": [
+   "pompeii_mosaicists"
+  ],
+  "petri_dish": [
+   "conway"
+  ],
+  "phi_slider": [
+   "fibonacci_golden",
+   "langton"
+  ],
+  "physarum_colony": [
+   "slime_mold"
+  ],
+  "pillarcolorcollection": [
+   "anonymous_folk_pattern"
+  ],
+  "pixel_carpet_gallery": [
+   "textile_weavers_loom"
+  ],
+  "pixel_cross_floor": [
+   "textile_weavers_loom"
+  ],
+  "pixel_invader_floor": [
+   "pompeii_mosaicists"
+  ],
+  "poincare_disk": [
+   "euclid",
+   "poincare"
+  ],
+  "point_chalkboard": [
+   "fontana",
+   "klee",
+   "turing"
+  ],
+  "polka_dot_field_floor": [
+   "pompeii_mosaicists"
+  ],
+  "pollock_3d": [
+   "pollock"
+  ],
+  "pollock_painting_in_3d": [
+   "pollock"
+  ],
+  "pompeii_meander_floor": [
+   "pompeii_mosaicists"
+  ],
+  "pompeii_mosaic_floor": [
+   "pompeii_mosaicists",
+   "the_seventeen_groups"
+  ],
+  "postprocessing_bloom": [
+   "textile_weavers_loom"
+  ],
+  "preserved_pattern": [
+   "fibonacci_golden"
+  ],
+  "printer_alhambra_p6m": [
+   "islamic_alhambra_artisans"
+  ],
+  "printer_bauhaus_p4m": [
+   "bauhaus_school"
+  ],
+  "printer_memphis_pgg": [
+   "memphis_group"
+  ],
+  "profile_gradient_descent": [
+   "the_variational_principle"
+  ],
+  "provability_sorter": [
+   "godel"
+  ],
+  "puls_markov": [
+   "markov"
+  ],
+  "qfep_balance_workbench": [
+   "fibonacci_golden",
+   "langton",
+   "shannon"
+  ],
+  "qfep_chalkboard": [
+   "fibonacci_golden",
+   "langton",
+   "turing"
+  ],
+  "qfep_formula_3d": [
+   "fibonacci_golden",
+   "godel",
+   "langton"
+  ],
+  "qfep_formula_toy": [
+   "fibonacci_golden",
+   "langton"
+  ],
+  "qfep_reactor": [
+   "langton"
+  ],
+  "qfep_reactor_bench": [
+   "fibonacci_golden",
+   "langton"
+  ],
+  "qfep_reactor_toy": [
+   "langton"
+  ],
+  "qfep_sandbox_console": [
+   "langton"
+  ],
+  "qfep_term_compass": [
+   "fibonacci_golden"
+  ],
+  "quad_chalkboard": [
+   "turing"
+  ],
+  "quantum_dice": [
+   "shannon"
+  ],
+  "quantum_field": [
+   "fibonacci_golden"
+  ],
+  "queer_morphology_specimen": [
+   "fibonacci_golden",
+   "langton"
+  ],
+  "r_c": [
+   "wolfram"
+  ],
+  "radial_mandala_floor": [
+   "pompeii_mosaicists"
+  ],
+  "radiolaria": [
+   "haeckel",
+   "turing"
+  ],
+  "rainbow": [
+   "textile_weavers_loom"
+  ],
+  "random_cubes": [
+   "langton"
+  ],
+  "random_fireworks": [
+   "textile_weavers_loom"
+  ],
+  "random_number_book_page_1955": [
+   "rand_corp"
+  ],
+  "random_number_book_page_collection": [
+   "rand_corp"
+  ],
+  "rd_artifact": [
+   "turing"
+  ],
+  "rd_coral_garden": [
+   "turing"
+  ],
+  "reaction_diffusion": [
+   "turing"
+  ],
+  "reaction_diffusion_bench": [
+   "turing"
+  ],
+  "reaction_diffusion_intro": [
+   "turing"
+  ],
+  "reaction_diffusion_vr": [
+   "turing"
+  ],
+  "reactive_particle_field": [
+   "langton"
+  ],
+  "reactive_particles": [
+   "fibonacci_golden"
+  ],
+  "recursion_spiral": [
+   "fibonacci_golden",
+   "romanesco_nature"
+  ],
+  "recursive_boolean_cube": [
+   "menger"
+  ],
+  "redline": [
+   "fontana",
+   "wolfram"
+  ],
+  "rhizomatic_maze_space": [
+   "deleuze_guattari"
+  ],
+  "rhizomatic_structure": [
+   "deleuze_guattari"
+  ],
+  "rhizome_bench": [
+   "deleuze_guattari"
+  ],
+  "rhizome_cave_demo": [
+   "deleuze_guattari"
+  ],
+  "rhizome_grower": [
+   "deleuze_guattari"
+  ],
+  "rhizome_navigator": [
+   "deleuze_guattari"
+  ],
+  "rhizome_toy": [
+   "deleuze_guattari"
+  ],
+  "rhizome_vault": [
+   "deleuze_guattari"
+  ],
+  "riemann_sphere": [
+   "poincare"
+  ],
+  "riemann_sum_workbench": [
+   "wolfram"
+  ],
+  "rigid_sculpture": [
+   "fibonacci_golden"
+  ],
+  "romanesco": [
+   "fibonacci_golden",
+   "romanesco_nature",
+   "turing"
+  ],
+  "room_grammar": [
+   "foucault_michel",
+   "lindenmayer"
+  ],
+  "rounded_softbody_test": [
+   "turing"
+  ],
+  "rule110_bench": [
+   "textile_weavers_loom",
+   "turing",
+   "wolfram"
+  ],
+  "rule110_computer": [
+   "wolfram"
+  ],
+  "rule30_bench": [
+   "wolfram"
+  ],
+  "rule30_rng": [
+   "wolfram"
+  ],
+  "rule90_bench": [
+   "sierpinski",
+   "wolfram"
+  ],
+  "rule90_loom": [
+   "sierpinski",
+   "textile_weavers_loom",
+   "wolfram"
+  ],
+  "rule90_toy": [
+   "sierpinski",
+   "wolfram"
+  ],
+  "rule_30_110": [
+   "wolfram"
+  ],
+  "rule_30_110_gravity": [
+   "turing",
+   "wolfram"
+  ],
+  "russell_paradox_room": [
+   "russell"
+  ],
+  "russell_paradox_workbench": [
+   "cantor",
+   "russell",
+   "shannon",
+   "wolfram"
+  ],
+  "russell_set_box": [
+   "escher",
+   "florensky",
+   "godel",
+   "russell"
+  ],
+  "ruth_asawa_sculpture": [
+   "ruth_asawa"
+  ],
+  "samplevialrack": [
+   "chladni"
+  ],
+  "san_michele_mosaic_floor": [
+   "pompeii_mosaicists"
+  ],
+  "sapling_toy": [
+   "lindenmayer"
+  ],
+  "scaling_bench": [
+   "wolfram"
+  ],
+  "scatter_bench": [
+   "pollock"
+  ],
+  "schrodinger_box": [
+   "florensky"
+  ],
+  "sdf_gallery_room": [
+   "le_corbusier"
+  ],
+  "sdf_gallery_row_modulor": [
+   "fibonacci_golden",
+   "le_corbusier"
+  ],
+  "security_camera": [
+   "shannon"
+  ],
+  "seed_orb": [
+   "lindenmayer"
+  ],
+  "self_membership_set": [
+   "russell"
+  ],
+  "self_organization_ca": [
+   "langton"
+  ],
+  "self_organizing_patterns": [
+   "the_variational_principle"
+  ],
+  "self_shaping_forge": [
+   "the_variational_principle"
+  ],
+  "shader_05_patterns": [
+   "anonymous_folk_pattern",
+   "penrose",
+   "textile_weavers_loom"
+  ],
+  "shader_08_cellularnoise": [
+   "penrose"
+  ],
+  "shader_09_fbm": [
+   "textile_weavers_loom"
+  ],
+  "shader_10_reactiondiffusion": [
+   "turing"
+  ],
+  "shader_arch_gallery": [
+   "the_seventeen_groups"
+  ],
+  "shannon_entropy_meter": [
+   "shannon"
+  ],
+  "shannon_workbench": [
+   "cantor",
+   "langton",
+   "shannon",
+   "turing"
+  ],
+  "sierpinski_bench": [
+   "sierpinski",
+   "wolfram"
+  ],
+  "sierpinski_pyramid": [
+   "sierpinski"
+  ],
+  "sierpinski_stamp": [
+   "sierpinski"
+  ],
+  "sierpinski_triangle": [
+   "menger",
+   "sierpinski"
+  ],
+  "simulated_annealing": [
+   "the_variational_principle"
+  ],
+  "simulation_instability": [
+   "verlet"
+  ],
+  "sine_cylinder_staircase": [
+   "bernini"
+  ],
+  "situated_bench": [
+   "haraway"
+  ],
+  "situated_readout": [
+   "haraway"
+  ],
+  "situated_sensor": [
+   "haraway"
+  ],
+  "slime_bench": [
+   "slime_mold"
+  ],
+  "slime_mold": [
+   "slime_mold"
+  ],
+  "snap_tetra_puzzle": [
+   "the_variational_principle"
+  ],
+  "soft_stage_dashboard": [
+   "wolfram"
+  ],
+  "solomons_knot_floor": [
+   "pompeii_mosaicists",
+   "textile_weavers_loom"
+  ],
+  "space_filling_curve_gallery": [
+   "lindenmayer"
+  ],
+  "space_filling_floor": [
+   "penrose",
+   "pompeii_mosaicists"
+  ],
+  "spawn_randomcubes": [
+   "pollock"
+  ],
+  "spiral_mosaic_floor": [
+   "pompeii_mosaicists"
+  ],
+  "spring_network": [
+   "verlet"
+  ],
+  "standpoint_room": [
+   "haraway"
+  ],
+  "star_rosette_floor": [
+   "pompeii_mosaicists"
+  ],
+  "station_cabinet": [
+   "wolfram"
+  ],
+  "steel_barricade": [
+   "shannon"
+  ],
+  "stepped_zigzag_floor": [
+   "escher",
+   "pompeii_mosaicists"
+  ],
+  "stigmergy_room": [
+   "slime_mold"
+  ],
+  "stochastic_bench": [
+   "lindenmayer"
+  ],
+  "stochastic_room": [
+   "lindenmayer"
+  ],
+  "stochastic_seeder": [
+   "lindenmayer"
+  ],
+  "stochastic_toy": [
+   "lindenmayer"
+  ],
+  "street_sign": [
+   "shannon"
+  ],
+  "substrate_bench": [
+   "lindenmayer"
+  ],
+  "superposition_display": [
+   "florensky"
+  ],
+  "surreal_kinetic_sculpture": [
+   "textile_weavers_loom"
+  ],
+  "surveillance_panopticon": [
+   "foucault_michel"
+  ],
+  "swastika_meander_floor": [
+   "pompeii_mosaicists"
+  ],
+  "ten_print_textile": [
+   "textile_weavers_loom"
+  ],
+  "terrain_bench": [
+   "mandelbrot"
+  ],
+  "terrain_toy": [
+   "mandelbrot"
+  ],
+  "test_scene_3": [
+   "cantor"
+  ],
+  "test_scene_4": [
+   "koch_helge"
+  ],
+  "tile_meander_floor": [
+   "pompeii_mosaicists"
+  ],
+  "tiling_demo": [
+   "the_seventeen_groups"
+  ],
+  "torus_knot": [
+   "wolfram"
+  ],
+  "transform_staircase_fibonacci": [
+   "fibonacci_golden"
+  ],
+  "transform_staircase_showcase": [
+   "fibonacci_golden"
+  ],
+  "transformer": [
+   "shannon"
+  ],
+  "transforming_pattern": [
+   "fibonacci_golden"
+  ],
+  "tree_generation": [
+   "lindenmayer"
+  ],
+  "tree_nursery": [
+   "lindenmayer"
+  ],
+  "triangle": [
+   "the_catenary"
+  ],
+  "triangle_chalkboard": [
+   "turing"
+  ],
+  "triangle_curvature_workbench": [
+   "euclid",
+   "poincare"
+  ],
+  "tumbling_blocks_floor": [
+   "pompeii_mosaicists"
+  ],
+  "turing_pattern": [
+   "turing"
+  ],
+  "turing_pattern_generator": [
+   "turing"
+  ],
+  "turtle_meander_floor": [
+   "pompeii_mosaicists"
+  ],
+  "turtle_plotter": [
+   "lindenmayer"
+  ],
+  "turtle_room": [
+   "lindenmayer"
+  ],
+  "two_points_line": [
+   "euclid",
+   "klee"
+  ],
+  "vaes": [
+   "the_variational_principle"
+  ],
+  "variational_autoencoders_vaes_vr": [
+   "the_variational_principle"
+  ],
+  "vector_fields": [
+   "wolfram"
+  ],
+  "velocity_arrow": [
+   "shannon"
+  ],
+  "verlet_integration": [
+   "verlet"
+  ],
+  "verlet_workbench": [
+   "verlet"
+  ],
+  "vine_grower": [
+   "lindenmayer"
+  ],
+  "viscous_bench": [
+   "verlet"
+  ],
+  "vr_tile_editor": [
+   "textile_weavers_loom",
+   "the_seventeen_groups"
+  ],
+  "vr_tile_editor_mirror": [
+   "textile_weavers_loom"
+  ],
+  "wall_pattern_colorizer": [
+   "the_seventeen_groups"
+  ],
+  "wall_pattern_gallery": [
+   "the_seventeen_groups"
+  ],
+  "wall_shader_showcase": [
+   "rothko"
+  ],
+  "water_flowers": [
+   "textile_weavers_loom"
+  ],
+  "waterbomb_enemy": [
+   "textile_weavers_loom"
+  ],
+  "waterbomb_hopper": [
+   "textile_weavers_loom"
+  ],
+  "wave_scale_floor": [
+   "pompeii_mosaicists"
+  ],
+  "wfc_tile_mosaic": [
+   "textile_weavers_loom"
+  ],
+  "wiki_fragment": [
+   "godel",
+   "haraway"
+  ],
+  "windmill_floor": [
+   "pompeii_mosaicists"
+  ],
+  "window_ac_unit": [
+   "anonymous_folk_pattern",
+   "shannon"
+  ],
+  "wood_pallet": [
+   "wolfram"
+  ],
+  "you_are_here": [
+   "fontana",
+   "klee"
+  ],
+  "zigzagprofile": [
+   "turing"
+  ]
+ }
+}

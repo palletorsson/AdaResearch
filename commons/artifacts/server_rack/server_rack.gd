@@ -75,23 +75,23 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 func _read_metadata_overrides() -> void:
 	if has_meta("config_rack_height_u"):
-		rack_height_u = int(String(get_meta("config_rack_height_u")))
+		rack_height_u = int(str(get_meta("config_rack_height_u")))
 	if has_meta("config_rack_width"):
-		rack_width = float(String(get_meta("config_rack_width")))
+		rack_width = float(str(get_meta("config_rack_width")))
 	if has_meta("config_rack_depth"):
-		rack_depth = float(String(get_meta("config_rack_depth")))
+		rack_depth = float(str(get_meta("config_rack_depth")))
 	if has_meta("config_server_count"):
-		server_count = int(String(get_meta("config_server_count")))
+		server_count = int(str(get_meta("config_server_count")))
 	if has_meta("config_led_density"):
-		led_density = int(String(get_meta("config_led_density")))
+		led_density = int(str(get_meta("config_led_density")))
 	if has_meta("config_led_color"):
-		led_color = _parse_color(String(get_meta("config_led_color")), led_color)
+		led_color = _parse_color(str(get_meta("config_led_color")), led_color)
 	if has_meta("config_frame_color"):
-		frame_color = _parse_color(String(get_meta("config_frame_color")), frame_color)
+		frame_color = _parse_color(str(get_meta("config_frame_color")), frame_color)
 	if has_meta("config_accent_color"):
-		accent_color = _parse_color(String(get_meta("config_accent_color")), accent_color)
+		accent_color = _parse_color(str(get_meta("config_accent_color")), accent_color)
 	if has_meta("config_door_open"):
-		var v := String(get_meta("config_door_open")).to_lower()
+		var v := str(get_meta("config_door_open")).to_lower()
 		door_open = v in ["true", "1", "yes", "on"]
 
 

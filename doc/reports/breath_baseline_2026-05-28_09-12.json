@@ -1,0 +1,46 @@
+{
+  "timestamp": "2026-05-28T09:12",
+  "phase": "baseline",
+  "mode": "full",
+  "scheduled_task": "ada-morning-breath",
+  "pipeline_summary": {
+    "sequences_scored": 22,
+    "head_distribution_pre_fix": {
+      "stage_2_documentation": ["change"],
+      "stage_3_artifacts": ["primitives (98%)"],
+      "stage_6_vr_testing": [
+        "transformation", "array_tutorial", "color", "isosurfaces",
+        "boolean_surfaces", "forces", "wavefunctions", "noise",
+        "cellularautomata", "fractals", "lsystems", "proceduralgeneration",
+        "swarmintelligence", "softbodies", "machinelearning", "graphtheory",
+        "foundationscrisis", "qfeplaboratory", "postfoundationscrisis"
+      ],
+      "stage_7_polish": ["randomness"]
+    },
+    "head_sum_avg_pre": 5.727,
+    "trajectory_ledger_avg": 5.59
+  },
+  "heat_map_top_5": [
+    {"item": "capture", "temperature": 70, "reason": "active (2 recent commits)"},
+    {"item": "floor", "temperature": 65, "reason": "active (1 recent commits)"},
+    {"item": "encyclopedia", "temperature": 65, "reason": "active (1 recent commits)"},
+    {"item": "softbodies_documentation_pipeline", "temperature": 60, "reason": "deep discovery"},
+    {"item": "gallery_marker_<sequence>", "temperature": 60, "reason": "deep discovery: Project-wide pattern"}
+  ],
+  "garden_health": {
+    "voiced": 1007,
+    "total": 2057,
+    "voice_coverage_pct": 48,
+    "embodiment_rate_pct": 32,
+    "phantom_limbs": 816
+  },
+  "release_gates_pre": {
+    "overall": "FAIL",
+    "passing": 3,
+    "total_enabled": 4,
+    "gate_a_sequence_contract": "FAIL (8 missing declared maps)",
+    "gate_b_artifact_registry": "PASS",
+    "gate_c_map_validation": "PASS (grade_A 880, grade_B 144, grade_C 160, grade_F 0)",
+    "gate_d_lab_progression": "PASS"
+  }
+}

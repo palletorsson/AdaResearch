@@ -1,4 +1,5 @@
 # FractalProjectile.gd
+# verb: split
 # Sphere that splits into 3 smaller copies at a timer or on hit.
 # Recursion depth 2 max → up to 9 sub-projectiles.
 # One becomes many — self-similarity across scale.

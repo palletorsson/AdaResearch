@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bcodexflora01ls"]
+
+[ext_resource type="Script" path="res://commons/artifacts/codex_flora/codex_flora.gd" id="1_codexflora"]
+
+[node name="CodexFlora" type="Node3D"]
+script = ExtResource("1_codexflora")

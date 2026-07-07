@@ -1,50 +1,76 @@
 {
-	"approach": "south",
-	"artifact_offset": [
-		0.0,
-		0.100000001490116,
-		0.0
-	],
-	"clearance": [
-		3.0,
-		3.0,
-		3.0
-	],
-	"exit": "north",
-	"extras": [],
-	"footing": {
-		"anchor": [
-			1.0,
-			1.0
-		],
-		"tiles": [
-			[
-				1.0,
-				1.0,
-				1.0
-			],
-			[
-				1.0,
-				3.0,
-				1.0
-			],
-			[
-				1.0,
-				1.0,
-				1.0
-			]
-		]
-	},
-	"footprint": [
-		6,
-		2,
-		1
-	],
-	"lookup_name": "monitorsystem",
-	"rotations": [
-		"0",
-		"90",
-		"180",
-		"270"
-	]
+  "approach": "south",
+  "artifact_offset": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "clearance": [
+    3.0,
+    3.0,
+    3.0
+  ],
+  "exit": "north",
+  "extras": [],
+  "footing": {
+    "anchor": [
+      2,
+      4
+    ],
+    "tiles": [
+      [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    ]
+  },
+  "footprint": [
+    6,
+    2,
+    1
+  ],
+  "lookup_name": "monitorsystem",
+  "rotations": [
+    "0",
+    "90",
+    "180",
+    "270"
+  ],
+  "posture": "floor"
 }

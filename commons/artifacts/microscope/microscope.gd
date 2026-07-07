@@ -85,24 +85,24 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 func _read_metadata_overrides() -> void:
 	if has_meta("config_body_height"):
-		body_height = float(String(get_meta("config_body_height")))
+		body_height = float(str(get_meta("config_body_height")))
 	if has_meta("config_base_width"):
-		base_width = float(String(get_meta("config_base_width")))
+		base_width = float(str(get_meta("config_base_width")))
 	if has_meta("config_body_color"):
-		body_color = _parse_color(String(get_meta("config_body_color")), body_color)
+		body_color = _parse_color(str(get_meta("config_body_color")), body_color)
 	if has_meta("config_stage_color"):
-		stage_color = _parse_color(String(get_meta("config_stage_color")), stage_color)
+		stage_color = _parse_color(str(get_meta("config_stage_color")), stage_color)
 	if has_meta("config_accent_color"):
-		accent_color = _parse_color(String(get_meta("config_accent_color")), accent_color)
+		accent_color = _parse_color(str(get_meta("config_accent_color")), accent_color)
 	if has_meta("config_eyepiece_count"):
-		eyepiece_count = int(String(get_meta("config_eyepiece_count")))
+		eyepiece_count = int(str(get_meta("config_eyepiece_count")))
 	if has_meta("config_objective_count"):
-		objective_count = int(String(get_meta("config_objective_count")))
+		objective_count = int(str(get_meta("config_objective_count")))
 	if has_meta("config_light_on"):
-		var v := String(get_meta("config_light_on")).to_lower()
+		var v := str(get_meta("config_light_on")).to_lower()
 		light_on = v in ["true", "1", "yes", "on"]
 	if has_meta("config_light_color"):
-		light_color = _parse_color(String(get_meta("config_light_color")), light_color)
+		light_color = _parse_color(str(get_meta("config_light_color")), light_color)
 
 
 func _clear_built_children() -> void:

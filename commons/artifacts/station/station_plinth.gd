@@ -35,6 +35,9 @@ const HangarKit := preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 @export_group("Style")
 ## "tray" (rimmed dish) | "flat" | "grate" cap.
 @export var top_style: String = "tray"
+## A REAL light integrated into the plinth: a warm OmniLight3D rising from the
+## cap, lighting the artifact from its own base — no external lamp needed.
+@export var glow_light: bool = false
 ## A slim emissive accent line under the cap rim (front face).
 @export var edge_light: bool = true
 ## Run the lit accent as a continuous groove all the way around the cap rim (not just the front).
@@ -59,6 +62,12 @@ const HangarKit := preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 @export var caption_text: String = ""
 ## Caption mounts as: "frame" (a flat printed label on the front face) | "signage" (a framed plate on a small bracket).
 @export var caption_style: String = "frame"
+## The integrated INFO SCREEN — the artifact's simulation info as a lit console
+## readout SET INTO the plinth's own front face (the board IS part of the body,
+## not a plate floating beside it). A lit conduit wires it up to the cap.
+@export var info_lines: Array = []
+## Header shown at the top of the info screen (usually the artifact's title).
+@export var info_header: String = ""
 
 @export_group("Color")
 @export var body_color: Color = Color(0.81, 0.79, 0.75)
@@ -103,6 +112,7 @@ func _read_metadata_overrides() -> void:
 	if has_meta("config_base_meters"): base_meters = float(str(get_meta("config_base_meters")))
 	if has_meta("config_cap_meters"): cap_meters = float(str(get_meta("config_cap_meters")))
 	if has_meta("config_top_style"): top_style = str(get_meta("config_top_style")).to_lower()
+	if has_meta("config_glow_light"): glow_light = _b(get_meta("config_glow_light"))
 	if has_meta("config_edge_light"): edge_light = _b(get_meta("config_edge_light"))
 	if has_meta("config_edge_light_wrap"): edge_light_wrap = _b(get_meta("config_edge_light_wrap"))
 	if has_meta("config_chamfer_cap"): chamfer_cap = _b(get_meta("config_chamfer_cap"))
@@ -115,6 +125,11 @@ func _read_metadata_overrides() -> void:
 	if has_meta("config_dust"): dust = _b(get_meta("config_dust"))
 	if has_meta("config_caption_text"): caption_text = str(get_meta("config_caption_text"))
 	if has_meta("config_caption_style"): caption_style = str(get_meta("config_caption_style")).to_lower()
+	if has_meta("config_info_lines"):
+		var il = get_meta("config_info_lines")
+		if il is Array: info_lines = il
+		elif il is String and str(il).strip_edges() != "": info_lines = [str(il)]
+	if has_meta("config_info_header"): info_header = str(get_meta("config_info_header"))
 	if has_meta("config_body_color"): body_color = _pc(str(get_meta("config_body_color")), body_color)
 	if has_meta("config_panel_color"): panel_color = _pc(str(get_meta("config_panel_color")), panel_color)
 	if has_meta("config_accent_color"): accent_color = _pc(str(get_meta("config_accent_color")), accent_color)
@@ -188,6 +203,16 @@ func _build() -> void:
 		"grate": _build_grate(cap_w, cap_d, th)
 		_: pass
 
+	# Integrated glow — the plinth lights its own artifact from the cap
+	# (replaces any external lamp; the light source IS the pedestal).
+	if glow_light:
+		var gl := OmniLight3D.new()
+		gl.light_color = Color(1.0, 0.95, 0.85)
+		gl.light_energy = 1.1
+		gl.omni_range = 2.6
+		gl.position = Vector3(0, th + 0.55, 0)
+		add_child(gl)
+
 	# Front face is +Z (toward the viewer): dressing sits there.
 	# Lit accent groove under the cap rim — front only, or wrapped continuously around all four edges.
 	if edge_light:
@@ -217,6 +242,15 @@ func _build() -> void:
 	# Caption — harvested onto a framed, surface-pinned plate on the front face (the curation text rule).
 	if caption_text.strip_edges() != "":
 		_build_caption(body_w, body_d, body_bottom, body_h)
+
+	# Integrated info screen — the artifact's simulation info as a lit console
+	# readout set INTO the front face, wired to the cap by a conduit so the
+	# whole plinth reads as one connected body (mount + display + light).
+	if info_lines.size() > 0:
+		_build_info_screen(body_w, body_d, body_bottom, body_h, th - CAP_THICK - 0.018)
+
+	# Solid in-game: a body collider covering the plinth column (foot → cap).
+	add_child(HangarKit.box_collider(Vector3(cap_w, th, cap_d), Vector3(0, th * 0.5, 0)))
 
 
 func _build_panels(body_w: float, body_d: float, body_bottom: float, body_h: float, wcells: int, dcells: int) -> void:
@@ -299,6 +333,32 @@ func _build_caption(body_w: float, body_d: float, body_bottom: float, body_h: fl
 		if plate:
 			plate.position = Vector3(0, cy, body_d * 0.5 + 0.030)
 			add_child(plate)
+
+
+func _build_info_screen(body_w: float, body_d: float, body_bottom: float, body_h: float, groove_y: float) -> void:
+	# A lit console readout inset on the upper front (+Z) face. Dark screen_bg →
+	# HangarKit.readout renders it as a softly-lit screen (not a matte label).
+	var sw: float = clampf(body_w * 0.84, 0.14, 0.92)
+	var sh: float = clampf(body_h * 0.42, 0.10, 0.55)
+	var scy: float = body_bottom + body_h * 0.66
+	var fz: float = body_d * 0.5 + 0.02
+	var screen: Node3D = HangarKit.readout(info_header, info_lines, Vector2(sw, sh),
+		Color(0.06, 0.07, 0.09), Color(0.82, 0.88, 0.94), accent_color)
+	screen.position = Vector3(0, scy, fz)
+	add_child(screen)
+	# Connection — a lit conduit from the cap groove down to the screen's top
+	# corner, plus a small junction box: the cap (mount + light) and the screen
+	# (display) read as one wired system, an electronic installation.
+	var bezel: float = maxf(sw, sh) * 0.06
+	var screen_top: float = scy + sh * 0.5 + bezel
+	var x_off: float = -(sw * 0.5 + bezel + 0.03)
+	if groove_y > screen_top + 0.02:
+		var lit := _emi(accent_color, 0.95)
+		add_child(_box(Vector3(x_off, (groove_y + screen_top) * 0.5, fz - 0.006),
+			Vector3(0.016, groove_y - screen_top, 0.014), lit))
+		# junction box where the conduit meets the screen bezel
+		add_child(_box(Vector3(x_off, screen_top, fz - 0.002),
+			Vector3(0.05, 0.035, 0.024), _mat(panel_color.darkened(0.22))))
 
 
 func _build_tray(cap_w: float, cap_d: float, th: float) -> void:

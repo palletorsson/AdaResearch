@@ -1,0 +1,82 @@
+{
+  "map_info": {
+    "name": "Grown_primitives_w2",
+    "lookup_name": "Grown_primitives_w2",
+    "description": "A map grown by the walker laying floor as it placed artifacts. Started at spawn with no structure; the floor and tables emerged as a byproduct of the walk. Constraint score: 0.840, placed: 6/6 artifacts, laid: 31 floor cells + 2 table cells.",
+    "version": "grown-0.1",
+    "format": "json",
+    "created_from": "tools/grow_map.py 2026-05-15",
+    "dimensions": {
+      "width": 8,
+      "depth": 5,
+      "max_height": 3
+    },
+    "metadata": {
+      "category": "grown_map",
+      "estimated_time": "1 minute",
+      "auto_research_strategy": "grow_walker",
+      "artifacts_placed": ["laser_measure","code_display","player_trace","pyramid_edit","draw_triangle_faces","parasol_triangle"],
+      "laid_floor_cells": 31,
+      "table_cells": 2,
+      "constraint_score": 0.84
+    },
+    "title": "Grown: primitives_w2"
+  },
+  "utility_definitions": {
+    "sp": {
+      "name": "Spawn",
+      "description": "Player spawn point",
+      "type": "spawn"
+    },
+    "t": {
+      "name": "Exit Portal",
+      "description": "Step here to leave",
+      "type": "teleporter",
+      "properties": {
+        "action": "next_in_sequence"
+      }
+    }
+  },
+  "documentation": {
+    "summary": "Grown_primitives_w2 — map emerged from walker's path",
+    "layout": "8×5 bounding box. The walker entered at spawn and laid 31 floor cells + 2 table cells as it placed 6 artifacts. The teleporter is where the walk ended.",
+    "objective": "Walk the map. The map IS the walk's record.",
+    "key_elements": ["Spawn at (4, 4)","Teleporter at (1, 7)","laser_measure at (3, 4)","code_display at (2, 4)","player_trace at (1, 4)","pyramid_edit at (0, 4)","draw_triangle_faces at (4, 3)","parasol_triangle at (0, 2)"]
+  },
+  "lighting": {
+    "ambient_color": [0.32,0.34,0.4],
+    "ambient_energy": 0.9,
+    "directional_light": {
+      "enabled": true,
+      "direction": [-0.3,-1.0,-0.2],
+      "energy": 0.7
+    }
+  },
+  "settings": {
+    "player_spawn_height": 0.5,
+    "floor_tile_size": 1.0
+  },
+  "layers": {
+    "structure": [
+      ["0","2","2","2","3","2","2","2"],
+      ["0","2","2","2","3","2","2","2"],
+      ["0","0","2","2","2","2","2","2"],
+      ["0","0","2","2","2","2","2","2"],
+      ["0","0","2","2","2","2","2","0"]
+    ],
+    "utilities": [
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," ","t"],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," ","sp"," "," "," "]
+    ],
+    "interactables": [
+      [" "," ","parasol_triangle:180:0.0"," ","pyramid_edit:180:0.0"," "," "," "],
+      [" "," "," "," ","player_trace:180:0.0"," "," "," "],
+      [" "," "," "," ","code_display:180:0.0"," "," "," "],
+      [" "," "," "," ","laser_measure:180:0.0"," "," "," "],
+      [" "," "," ","draw_triangle_faces:180:0.0"," "," "," "," "]
+    ]
+  }
+}

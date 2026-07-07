@@ -1,6 +1,16 @@
 # ===========================================================================
 # Friction Racer VR - Interactive Game Expansion of Example 2.4: Friction
 # Race through surfaces with different friction coefficients!
+#
+# @identity
+# essence: A racing game across track segments of varying friction — ice, smooth, rough, sand — where surface choice is the strategy
+# desire: To turn friction from a brake into a tactic — carry speed across ice, fight for grip on sand, time the boost
+# critical_parameter: segment friction coefficient — from 0.05 ice to 0.35 rough, the value that rewards or punishes carried momentum
+# triggers: Hitting ice preserves speed but kills control; rough sand drains velocity; the boost briefly overcomes high friction
+# emerges: Friction as level design — the same opposing-force law of example 2.4 becomes a course whose difficulty IS its coefficients
+# needs: per-segment friction [has], force opposite to motion [has], boost mechanic [has], VR racer control [has]
+# relationships: game expansion of example_2_4 friction; sibling game to force_bowling_vr and wind_soccer_vr
+# truth: Speed is free on ice and earned on sand — the track is nothing but friction made into terrain.
 # ===========================================================================
 
 extends Node3D

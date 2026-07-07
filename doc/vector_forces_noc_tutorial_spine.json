@@ -1,0 +1,136 @@
+{
+  "id": "noc",
+  "title": "Vectors & Forces - the short (Nature of Code) order",
+  "subtitle": "Motion-first: the Vectors + Forces chapters, no dot/cross/projection detour",
+  "source": "doc/vector_forces_tutorial_scripts.md + Nature of Code ch.1 (Vectors) & ch.2 (Forces)",
+  "note": "The shorter, canonical order. Read by /api/scrabble-gen?order=tutorial&spine=noc and the scrabble-maps star-tutorial button. One best artifact per concept, in Nature of Code order.",
+  "concept_count": 18,
+  "concepts": [
+    {
+      "n": 0,
+      "act": "Vectors",
+      "concept": "axes & origin",
+      "artifact": "CoordinateSystem3M",
+      "truth": "Before a vector, a where: three axes, an origin, an agreed order (x, y, z)."
+    },
+    {
+      "n": 1,
+      "act": "Vectors",
+      "concept": "what is a vector",
+      "artifact": "VectorBasics",
+      "truth": "A vector is a step, not a place - a direction and a length you can carry anywhere."
+    },
+    {
+      "n": 2,
+      "act": "Vectors",
+      "concept": "addition",
+      "artifact": "vector_add",
+      "truth": "a + b is where you land if you walk a then b - tip to tail."
+    },
+    {
+      "n": 3,
+      "act": "Vectors",
+      "concept": "subtraction",
+      "artifact": "vector_sub",
+      "truth": "b - a is the arrow of the gap, pointing from here to there."
+    },
+    {
+      "n": 4,
+      "act": "Vectors",
+      "concept": "multiplication",
+      "artifact": "example_2_3_gravity_scaled_by_mass_vr",
+      "truth": "A scalar is a volume knob for a direction - same line, new length."
+    },
+    {
+      "n": 5,
+      "act": "Vectors",
+      "concept": "magnitude",
+      "artifact": "length_lantern",
+      "truth": "Magnitude is the arrow's length - the Pythagorean diagonal."
+    },
+    {
+      "n": 6,
+      "act": "Vectors",
+      "concept": "normalize",
+      "artifact": "vector_normalize_demo",
+      "truth": "Divide by length and every direction gets a unit twin."
+    },
+    {
+      "n": 7,
+      "act": "Vectors",
+      "concept": "velocity",
+      "artifact": "VectorMotion",
+      "truth": "Velocity is the vector that edits position each tick."
+    },
+    {
+      "n": 8,
+      "act": "Vectors",
+      "concept": "velocity, embodied",
+      "artifact": "bubble_blaster",
+      "truth": "Every bubble leaves along the vector you point."
+    },
+    {
+      "n": 9,
+      "act": "Vectors",
+      "concept": "acceleration",
+      "artifact": "launch_arc",
+      "truth": "Gravity applied each frame bends a straight launch into a parabola."
+    },
+    {
+      "n": 10,
+      "act": "Forces",
+      "concept": "force = m*a",
+      "artifact": "force_cube",
+      "truth": "A force is a vector on a mass: F = m*a."
+    },
+    {
+      "n": 11,
+      "act": "Forces",
+      "concept": "net force",
+      "artifact": "force_pad",
+      "truth": "Sum every push into one net vector, then divide by mass."
+    },
+    {
+      "n": 12,
+      "act": "Forces",
+      "concept": "work",
+      "artifact": "force_mower",
+      "truth": "Only the part along the motion does work: W = F*d*cos(t)."
+    },
+    {
+      "n": 13,
+      "act": "Forces",
+      "concept": "friction",
+      "artifact": "drag_lane",
+      "truth": "Friction is a constant scuff against the direction of travel."
+    },
+    {
+      "n": 14,
+      "act": "Forces",
+      "concept": "fluid resistance",
+      "artifact": "drag_corridor",
+      "truth": "Resistance grows with speed: F = -b*v."
+    },
+    {
+      "n": 15,
+      "act": "Forces",
+      "concept": "gravity",
+      "artifact": "orbit_pair",
+      "truth": "Every mass pulls every other: F = G*m1*m2/r2."
+    },
+    {
+      "n": 16,
+      "act": "Forces",
+      "concept": "n-body",
+      "artifact": "orbit_walk",
+      "truth": "Two bodies fall around a barycenter forever."
+    },
+    {
+      "n": 17,
+      "act": "Forces",
+      "concept": "circular motion",
+      "artifact": "centrifuge_ring",
+      "truth": "Constant acceleration toward a centre you never reach: a = v2/r."
+    }
+  ]
+}

@@ -224,6 +224,9 @@ func _build() -> void:
 		sign.position = Vector3(0, h * 0.40, FRONT_Z + 0.02)
 		add_child(sign)
 
+	# Solid in-game: a body collider covering the wall slab.
+	add_child(HangarKit.box_collider(Vector3(w, h, SLAB_DEPTH), Vector3(0, h * 0.5, 0)))
+
 
 # A thin recessed bevel border framing the slab face — four worn-metal trim bars set just inside
 # the edges, reading as a machined inset around the negative space of the panel field.

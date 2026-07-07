@@ -11,8 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://b4ysuy43poobf" path="res://addons/godot-xr-tools/functions/function_pickup.tscn" id="8_5nlub"]
 [ext_resource type="PackedScene" uid="uid://kyhaogt0a4q8" path="res://addons/godot-xr-tools/functions/movement_flight.tscn" id="10_5sk3y"]
 [ext_resource type="PackedScene" uid="uid://b6bk2pj8vbj28" path="res://addons/godot-xr-tools/functions/movement_turn.tscn" id="12_26qpu"]
-[ext_resource type="PackedScene" uid="uid://c2q5phg8w08o" path="res://addons/godot-xr-tools/functions/movement_jump.tscn" id="12_jump"]
 [ext_resource type="PackedScene" uid="uid://b48aivfdv6q8h" path="res://commons/body/hands/right_hand.tscn" id="12_cwrn5"]
+[ext_resource type="PackedScene" uid="uid://c2q5phg8w08o" path="res://addons/godot-xr-tools/functions/movement_jump.tscn" id="12_jump"]
 [ext_resource type="Script" uid="uid://y3rpk7jjrg4x" path="res://commons/scenes/BaseSceneAddon.gd" id="12_qiixw"]
 [ext_resource type="PackedScene" uid="uid://cqhw276realc" path="res://addons/godot-xr-tools/functions/function_pointer.tscn" id="13_c1k2x"]
 [ext_resource type="Script" uid="uid://cnwtovj4mqc45" path="res://addons/godot-xr-tools/hands/hand.gd" id="13_j7xni"]
@@ -30,8 +30,8 @@
 [ext_resource type="Script" uid="uid://d31t45rigq080" path="res://commons/scenes/mapobjects/MapInfoLabel.gd" id="25_mapinfo"]
 [ext_resource type="PackedScene" uid="uid://bk6ban0hctyym" path="res://addons/godot-xr-tools/functions/movement_wall_walk.tscn" id="30_wall_walk"]
 [ext_resource type="Script" uid="uid://qlvmq6ji5udp" path="res://commons/player/WristStatsDisplay.gd" id="31_wrist_stats"]
-[ext_resource type="Script" path="res://commons/tools/OversightVoiceBridge.gd" id="32_voice_bridge"]
-[ext_resource type="Script" uid="uid://movecapgate01" path="res://commons/managers/MovementCapabilityGate.gd" id="33_move_cap_gate"]
+[ext_resource type="Script" uid="uid://cb6ip8nxoqb78" path="res://commons/tools/OversightVoiceBridge.gd" id="32_voice_bridge"]
+[ext_resource type="Script" uid="uid://bd3rk0iph2m2k" path="res://commons/managers/MovementCapabilityGate.gd" id="33_move_cap_gate"]
 [ext_resource type="PackedScene" path="res://commons/artifacts/workstation/HandWorkstationVR.tscn" id="34_hand_ws"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_upvej"]
@@ -78,15 +78,13 @@ mode = 1
 strafe = true
 
 [node name="FunctionPickup" parent="XROrigin3D/LeftHand/XRToolsCollisionHand" index="1" unique_id=1366509493 instance=ExtResource("8_5nlub")]
-grab_distance = 0.3
-ranged_distance = 5.0
-ranged_angle = 5.0
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02, -0.05, 0.1)
 
 [node name="FunctionPointer" parent="XROrigin3D/LeftHand/XRToolsCollisionHand" index="2" unique_id=391032211 instance=ExtResource("13_c1k2x")]
 show_laser = 2
 laser_length = 1
-suppress_radius = 0.05
 collide_with_areas = true
+suppress_radius = 0.05
 
 [node name="LeftHand" parent="XROrigin3D/LeftHand/XRToolsCollisionHand" index="3" unique_id=114405825 instance=ExtResource("6_f3jjl")]
 
@@ -109,7 +107,7 @@ visible = false
 light_color = Color(0, 1, 0, 1)
 light_energy = 1.5
 
-[node name="HandWorkstationVR" parent="XROrigin3D/LeftHand" index="5" instance=ExtResource("34_hand_ws")]
+[node name="HandWorkstationVR" parent="XROrigin3D/LeftHand" index="5" unique_id=1738547464 instance=ExtResource("34_hand_ws")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0.07)
 
 [node name="XRToolsCollisionHand" parent="XROrigin3D/RightHand" index="0" unique_id=1055388144 instance=ExtResource("4_q0s61")]
@@ -123,21 +121,16 @@ mode = 1
 jump_button_action = "_disabled"
 
 [node name="FunctionPickup" parent="XROrigin3D/RightHand/XRToolsCollisionHand" index="3" unique_id=1831217974 instance=ExtResource("8_5nlub")]
-grab_distance = 0.3
-ranged_distance = 5.0
-ranged_angle = 5.0
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.02, -0.05, 0.1)
 
 [node name="FunctionPointer" parent="XROrigin3D/RightHand/XRToolsCollisionHand" index="4" unique_id=339200772 instance=ExtResource("13_c1k2x")]
 show_laser = 2
 laser_length = 1
-suppress_radius = 0.05
 collide_with_areas = true
+suppress_radius = 0.05
 
 [node name="MovementFlight" parent="XROrigin3D/RightHand/XRToolsCollisionHand" index="5" unique_id=1844701323 instance=ExtResource("10_5sk3y")]
-enabled = true
-controller = 0
 flight_button = "ax_button"
-is_active = true
 
 [node name="RightHand" parent="XROrigin3D/RightHand/XRToolsCollisionHand" index="6" unique_id=1913051319 instance=ExtResource("12_cwrn5")]
 script = ExtResource("13_j7xni")
@@ -195,7 +188,7 @@ debug_mode = true
 
 [node name="Node3D" type="Node3D" parent="XROrigin3D" index="9" unique_id=1752910990]
 
-[node name="MovementCapabilityGate" type="Node" parent="XROrigin3D" index="10"]
+[node name="MovementCapabilityGate" type="Node" parent="XROrigin3D" index="10" unique_id=1874132729]
 script = ExtResource("33_move_cap_gate")
 
 [node name="Label3D" type="Label3D" parent="." index="2" unique_id=645111340]
@@ -217,9 +210,7 @@ script = ExtResource("19_bounds")
 
 [node name="EntryZone" type="Node3D" parent="." index="7" unique_id=2098305078]
 
-[node name="OversightVoiceBridge" type="Node" parent="." index="8"]
+[node name="OversightVoiceBridge" type="Node" parent="." index="8" unique_id=2122096429]
 script = ExtResource("32_voice_bridge")
-enabled = false
 secondary_push_to_talk_action = &""
-controller_push_to_talk_button = &"by_button"
 controller_push_to_talk_tracker = &"left_hand"

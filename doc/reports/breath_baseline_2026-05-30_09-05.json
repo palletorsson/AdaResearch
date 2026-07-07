@@ -1,0 +1,29 @@
+{
+  "timestamp": "2026-05-30T09:05:00",
+  "phase": "baseline",
+  "pipeline_summary": {
+    "spine_sequences_scored": 22,
+    "head_distribution_before": {"stage_3_artifacts": 1, "stage_6_vr_testing": 20, "stage_7_polish": 1},
+    "lone_laggard": "change at HEAD=3 (artifacts, 0%) — only programmatically-actionable head on the spine",
+    "honest_head_sum_avg": 5.909
+  },
+  "heat_map_top_5": [
+    {"item": "primitive", "temperature": 70, "reason": "active (2 recent commits)"},
+    {"item": "floor", "temperature": 65, "reason": "active (1 recent commits)"},
+    {"item": "gallery_marker_<sequence>", "temperature": 60, "reason": "phantom artifact pattern"},
+    {"item": "scorer_comment_prefix", "temperature": 60, "reason": "grid # comment-out convention"},
+    {"item": "change sequence documentation", "temperature": 60, "reason": "pipeline scorer stage 2"}
+  ],
+  "garden_health": {
+    "note": "Project-wide. Largest dormant: gallery(722), softbodies(46). Largest scattered: wavefunctions(102), randomness(73). Growing: primitives(95), hazards(84).",
+    "voiced_total": 1008
+  },
+  "release_gates": {
+    "overall": "FAIL",
+    "passing": "3/4",
+    "A_sequence_contract": "FAIL (missing_declared_maps: 8 — the change maps)",
+    "B_artifact_registry": "PASS",
+    "C_map_validation": "PASS (grade_A 903, grade_B 144, grade_C 139, grade_F 0)",
+    "D_lab_progression": "PASS"
+  }
+}

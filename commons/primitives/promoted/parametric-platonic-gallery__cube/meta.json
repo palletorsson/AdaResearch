@@ -1,0 +1,30 @@
+{
+  "source_gallery": "parametric-platonic-gallery",
+  "source_entry": "cube",
+  "params": {
+    "dual": "octahedron",
+    "edges": 12,
+    "face_polygon": "square (4 sides)",
+    "faces": 6,
+    "name": "cube",
+    "notes": "Six square faces, eight vertices, twelve edges. The grid cell, the unit measure. Its dual is the octahedron — put a vertex at the center of each face and you get one.",
+    "primitive": "platonic",
+    "schlafli": "{4,3}",
+    "vertices": 8
+  },
+  "base_scene": "res://commons/primitives/cube/cube.tscn",
+  "base_script": "res://commons/primitives/cube/cube.gd",
+  "overrides": {},
+  "rating": 5,
+  "verdict": "crown_jewel",
+  "eval": {
+    "stars": 5,
+    "verdict": "crown_jewel",
+    "notes": "the canonical cell",
+    "next_gen_hints": [],
+    "evaluated_by": "smoke",
+    "date": "2026-05-20T09:00:00.000Z"
+  },
+  "promoted_at": "2026-05-20T09:10:07.624Z",
+  "lookup_name": "parametric-platonic-gallery__cube"
+}

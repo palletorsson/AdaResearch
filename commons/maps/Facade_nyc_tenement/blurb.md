@@ -1,0 +1,5 @@
+Five storeys, four bays, twenty identical windows. A black iron fire-escape clinging to the front like a structural confession. No piano nobile. No column order. No cornice waterfall. Just rhythm — one beat per window, twenty beats — and the building's frank admission that vertical repetition costs you something and the admission can be load-bearing.
+
+This is the principle modularized. Where Classical applied the grammar with its full aristocratic vocabulary — Doric columns, piano nobile, framing cornice — Tenement strips the grammar to its minimum: rhythm and the structural cost of repetition. Every storey the same as every other storey. Nineteenth-century New York. Buildings for living, not for impressing.
+
+The lesson is not that this facade is humbler. It is that *the grammar survives the strip*. Take the column order away, refuse the hierarchy, omit the ornament — and the bay × storey rhythm still composes a legible facade. The rule is durable at both extremes. That durability is what makes the Memphis refusal, two maps later, legible at all.

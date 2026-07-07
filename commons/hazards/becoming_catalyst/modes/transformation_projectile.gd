@@ -1,4 +1,5 @@
 # TransformationProjectile.gd
+# verb: shrink
 # Purple sphere that shrinks targets on hit.
 # Metamorphosis, not destruction — what you touch becomes different.
 extends CatalystProjectile

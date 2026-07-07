@@ -105,31 +105,31 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 func _read_metadata_overrides() -> void:
 	if has_meta("config_tube_length"):
-		tube_length = float(String(get_meta("config_tube_length")))
+		tube_length = float(str(get_meta("config_tube_length")))
 	if has_meta("config_tube_radius"):
-		tube_radius = float(String(get_meta("config_tube_radius")))
+		tube_radius = float(str(get_meta("config_tube_radius")))
 	if has_meta("config_tube_color"):
-		tube_color = _parse_color(String(get_meta("config_tube_color")), tube_color)
+		tube_color = _parse_color(str(get_meta("config_tube_color")), tube_color)
 	if has_meta("config_eyepiece_visible"):
-		eyepiece_visible = _parse_bool(String(get_meta("config_eyepiece_visible")), eyepiece_visible)
+		eyepiece_visible = _parse_bool(str(get_meta("config_eyepiece_visible")), eyepiece_visible)
 	if has_meta("config_eyepiece_color"):
-		eyepiece_color = _parse_color(String(get_meta("config_eyepiece_color")), eyepiece_color)
+		eyepiece_color = _parse_color(str(get_meta("config_eyepiece_color")), eyepiece_color)
 	if has_meta("config_mirror_count"):
-		mirror_count = int(String(get_meta("config_mirror_count")))
+		mirror_count = int(str(get_meta("config_mirror_count")))
 	if has_meta("config_pattern_radius"):
-		pattern_radius = float(String(get_meta("config_pattern_radius")))
+		pattern_radius = float(str(get_meta("config_pattern_radius")))
 	if has_meta("config_pattern_segments"):
-		pattern_segments = int(String(get_meta("config_pattern_segments")))
+		pattern_segments = int(str(get_meta("config_pattern_segments")))
 	if has_meta("config_pattern_color_a"):
-		pattern_color_a = _parse_color(String(get_meta("config_pattern_color_a")), pattern_color_a)
+		pattern_color_a = _parse_color(str(get_meta("config_pattern_color_a")), pattern_color_a)
 	if has_meta("config_pattern_color_b"):
-		pattern_color_b = _parse_color(String(get_meta("config_pattern_color_b")), pattern_color_b)
+		pattern_color_b = _parse_color(str(get_meta("config_pattern_color_b")), pattern_color_b)
 	if has_meta("config_pattern_color_c"):
-		pattern_color_c = _parse_color(String(get_meta("config_pattern_color_c")), pattern_color_c)
+		pattern_color_c = _parse_color(str(get_meta("config_pattern_color_c")), pattern_color_c)
 	if has_meta("config_pattern_emission"):
-		pattern_emission = float(String(get_meta("config_pattern_emission")))
+		pattern_emission = float(str(get_meta("config_pattern_emission")))
 	if has_meta("config_accent_color"):
-		accent_color = _parse_color(String(get_meta("config_accent_color")), accent_color)
+		accent_color = _parse_color(str(get_meta("config_accent_color")), accent_color)
 
 
 func _clear_built_children() -> void:

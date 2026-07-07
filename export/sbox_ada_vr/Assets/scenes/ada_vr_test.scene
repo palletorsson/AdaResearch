@@ -1,0 +1,220 @@
+{
+  "__guid": "7a1c9e2f-4b3d-4c8a-9f61-ada000000001",
+  "GameObjects": [
+    {
+      "__guid": "7a1c9e2f-4b3d-4c8a-9f61-ada000000002",
+      "__version": 1,
+      "Flags": 0,
+      "Name": "Scene Information",
+      "Position": "0,0,0",
+      "Rotation": "0,0,0,1",
+      "Scale": "1,1,1",
+      "Tags": "",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkInterpolation": true,
+      "NetworkOrphaned": 0,
+      "NetworkTransmit": true,
+      "OwnerTransfer": 1,
+      "Components": [
+        {
+          "__type": "Sandbox.SceneInformation",
+          "__guid": "7a1c9e2f-4b3d-4c8a-9f61-ada000000003",
+          "__enabled": true,
+          "Author": "ada research",
+          "Changes": null,
+          "Description": "Ada Research Tutorial_Start rebuilt from map_data.json for VR",
+          "Group": null,
+          "SceneTags": "",
+          "Title": "Ada VR Test",
+          "Version": null
+        }
+      ],
+      "Children": []
+    },
+    {
+      "__guid": "7a1c9e2f-4b3d-4c8a-9f61-ada000000004",
+      "__version": 1,
+      "Flags": 0,
+      "Name": "Ada Map",
+      "Position": "0,0,0",
+      "Rotation": "0,0,0,1",
+      "Scale": "1,1,1",
+      "Tags": "",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkInterpolation": true,
+      "NetworkOrphaned": 0,
+      "NetworkTransmit": true,
+      "OwnerTransfer": 1,
+      "Components": [
+        {
+          "__type": "AdaMapBuilder",
+          "__guid": "7a1c9e2f-4b3d-4c8a-9f61-ada000000005",
+          "__enabled": true,
+          "MapFile": "maps/tutorial_start.map_data.json"
+        }
+      ],
+      "Children": []
+    },
+    {
+      "__guid": "7a1c9e2f-4b3d-4c8a-9f61-ada000000006",
+      "__version": 1,
+      "Flags": 0,
+      "Name": "Player",
+      "Position": "0,0,10",
+      "Rotation": "0,0,0,1",
+      "Scale": "1,1,1",
+      "Tags": "player",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkInterpolation": true,
+      "NetworkOrphaned": 0,
+      "NetworkTransmit": true,
+      "OwnerTransfer": 1,
+      "Components": [
+        {
+          "__type": "Sandbox.VR.VRAnchor",
+          "__guid": "7a1c9e2f-4b3d-4c8a-9f61-ada000000007",
+          "__enabled": true
+        },
+        {
+          "__type": "AdaVRPlayer",
+          "__guid": "7a1c9e2f-4b3d-4c8a-9f61-ada000000008",
+          "__enabled": true
+        }
+      ],
+      "Children": [
+        {
+          "__guid": "7a1c9e2f-4b3d-4c8a-9f61-ada000000009",
+          "__version": 1,
+          "Flags": 0,
+          "Name": "Camera",
+          "Position": "0,0,64",
+          "Rotation": "0,0,0,1",
+          "Scale": "1,1,1",
+          "Tags": "maincamera",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkInterpolation": true,
+          "NetworkOrphaned": 0,
+          "NetworkTransmit": true,
+          "OwnerTransfer": 1,
+          "Components": [
+            {
+              "__type": "Sandbox.CameraComponent",
+              "__guid": "7a1c9e2f-4b3d-4c8a-9f61-ada00000000a",
+              "__enabled": true,
+              "BackgroundColor": "0.2,0.3,0.5,1",
+              "ClearFlags": "All",
+              "EnablePostProcessing": true,
+              "FieldOfView": 90,
+              "FovAxis": "Horizontal",
+              "IsMainCamera": true,
+              "Orthographic": false,
+              "OrthographicHeight": 1204,
+              "PostProcessAnchor": null,
+              "Priority": 1,
+              "RenderExcludeTags": "",
+              "RenderTags": "",
+              "RenderTexture": null,
+              "TargetEye": "Both",
+              "Viewport": "0,0,1,1",
+              "ZFar": 5000,
+              "ZNear": 1
+            },
+            {
+              "__type": "Sandbox.VR.VRTrackedObject",
+              "__guid": "7a1c9e2f-4b3d-4c8a-9f61-ada00000000b",
+              "__enabled": true,
+              "PoseSource": "Head",
+              "TrackingType": "All",
+              "UseRelativeTransform": false
+            }
+          ],
+          "Children": []
+        },
+        {
+          "__guid": "7a1c9e2f-4b3d-4c8a-9f61-ada00000000c",
+          "__version": 1,
+          "Flags": 0,
+          "Name": "Left Hand",
+          "Position": "0,5,0",
+          "Rotation": "0,0,0,1",
+          "Scale": "1,1,1",
+          "Tags": "",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkInterpolation": true,
+          "NetworkOrphaned": 0,
+          "NetworkTransmit": true,
+          "OwnerTransfer": 1,
+          "Components": [
+            {
+              "__type": "Sandbox.VR.VRTrackedObject",
+              "__guid": "7a1c9e2f-4b3d-4c8a-9f61-ada00000000d",
+              "__enabled": true,
+              "PoseSource": "LeftHand",
+              "TrackingType": "All",
+              "UseRelativeTransform": false
+            }
+          ],
+          "Children": []
+        },
+        {
+          "__guid": "7a1c9e2f-4b3d-4c8a-9f61-ada00000000e",
+          "__version": 1,
+          "Flags": 0,
+          "Name": "Right Hand",
+          "Position": "0,-5,0",
+          "Rotation": "0,0,0,1",
+          "Scale": "1,1,1",
+          "Tags": "",
+          "Enabled": true,
+          "NetworkMode": 2,
+          "NetworkInterpolation": true,
+          "NetworkOrphaned": 0,
+          "NetworkTransmit": true,
+          "OwnerTransfer": 1,
+          "Components": [
+            {
+              "__type": "Sandbox.VR.VRTrackedObject",
+              "__guid": "7a1c9e2f-4b3d-4c8a-9f61-ada00000000f",
+              "__enabled": true,
+              "PoseSource": "RightHand",
+              "TrackingType": "All",
+              "UseRelativeTransform": false
+            }
+          ],
+          "Children": []
+        }
+      ]
+    }
+  ],
+  "SceneProperties": {
+    "NetworkInterpolation": true,
+    "TimeScale": 1,
+    "WantsSystemScene": true,
+    "Metadata": {
+      "Title": "Ada VR Test",
+      "Description": "Ada Research Tutorial_Start rebuilt from map_data.json for VR"
+    },
+    "NavMesh": {
+      "Enabled": false,
+      "IncludeStaticBodies": true,
+      "IncludeKeyframedBodies": true,
+      "EditorAutoUpdate": true,
+      "AgentHeight": 64,
+      "AgentRadius": 16,
+      "AgentStepSize": 18,
+      "AgentMaxSlope": 40,
+      "ExcludedBodies": "",
+      "IncludedBodies": ""
+    }
+  },
+  "ResourceVersion": 3,
+  "Title": "Ada VR Test",
+  "Description": "Ada Research Tutorial_Start rebuilt from map_data.json for VR",
+  "__references": [],
+  "__version": 3
+}

@@ -1,0 +1,309 @@
+{
+	"pass_id": "coherence-facade_assembly-20260513T223047",
+	"kind": "coherence",
+	"sequence_id": "facade_assembly",
+	"threshold": 80,
+	"ran_at": "2026-05-13T22:30:47",
+	"stats": {
+		"maps_analysed": 8,
+		"chips_emitted": 14,
+		"maps_skipped": 0,
+		"maps_failed": 2
+	},
+	"proposals": [
+		{
+			"pass_id": "coherence-facade_assembly-20260513T223047",
+			"move_id": "Facade_Assembly_Principle-stubs",
+			"change": "Facade_Assembly_Principle · stub text",
+			"from_state": "stub-flagged file(s): blurb, summary, technical, critical, intent",
+			"to_state": "expand each stub to a real first draft (or remove if not yet warranted)",
+			"impact": "low",
+			"rationale_excerpt": "Stub detection flags files below file-type word-count thresholds. A 30-word summary is not a real summary; it's a placeholder.",
+			"kind": "coherence",
+			"severity": "low",
+			"deep_links": {
+				"map_builder": "http://localhost:3003/map-builder?name=Facade_Assembly_Principle",
+				"text_map_coherence": "http://localhost:3003/text-map-coherence?map=Facade_Assembly_Principle",
+				"ada_writer": "http://localhost:3002/editor?map=Facade_Assembly_Principle"
+			},
+			"status": "pending",
+			"applied_at": null,
+			"applied_by": null,
+			"pre_existing": false,
+			"notes": ""
+		},
+		{
+			"pass_id": "coherence-facade_assembly-20260513T223047",
+			"move_id": "Facade_Classical-text-drift",
+			"change": "Facade_Classical · text drift",
+			"from_state": "1 artifact(s) placed but unmentioned in any .md: gallery_marker_facade",
+			"to_state": "mention each in summary.md or technical.md, or remove from grid if no longer pedagogically central",
+			"impact": "high",
+			"rationale_excerpt": "Map score: 8. The map is doing more than its text reports. Either the text needs to catch up, or the placed artifacts are supporting cast rather than leads.",
+			"kind": "coherence",
+			"severity": "high",
+			"deep_links": {
+				"map_builder": "http://localhost:3003/map-builder?name=Facade_Classical",
+				"text_map_coherence": "http://localhost:3003/text-map-coherence?map=Facade_Classical",
+				"ada_writer": "http://localhost:3002/editor?map=Facade_Classical"
+			},
+			"status": "pending",
+			"applied_at": null,
+			"applied_by": null,
+			"pre_existing": false,
+			"notes": ""
+		},
+		{
+			"pass_id": "coherence-facade_assembly-20260513T223047",
+			"move_id": "Facade_Classical-intent-missing",
+			"change": "Facade_Classical · intent missing",
+			"from_state": "intent.md does not exist",
+			"to_state": "write the five-line pedagogical contract (concept, sequence role, technical angle, critical angle, key artifacts)",
+			"impact": "medium",
+			"rationale_excerpt": "Without intent.md, the map has no explicit pedagogical claim. Intent alignment scoring is excluded; coherence becomes uncheckable.",
+			"kind": "coherence",
+			"severity": "medium",
+			"deep_links": {
+				"map_builder": "http://localhost:3003/map-builder?name=Facade_Classical",
+				"text_map_coherence": "http://localhost:3003/text-map-coherence?map=Facade_Classical",
+				"ada_writer": "http://localhost:3002/editor?map=Facade_Classical"
+			},
+			"status": "pending",
+			"applied_at": null,
+			"applied_by": null,
+			"pre_existing": false,
+			"notes": ""
+		},
+		{
+			"pass_id": "coherence-facade_assembly-20260513T223047",
+			"move_id": "Facade_Classical-stubs",
+			"change": "Facade_Classical · stub text",
+			"from_state": "stub-flagged file(s): blurb, summary, technical, critical, intent",
+			"to_state": "expand each stub to a real first draft (or remove if not yet warranted)",
+			"impact": "low",
+			"rationale_excerpt": "Stub detection flags files below file-type word-count thresholds. A 30-word summary is not a real summary; it's a placeholder.",
+			"kind": "coherence",
+			"severity": "low",
+			"deep_links": {
+				"map_builder": "http://localhost:3003/map-builder?name=Facade_Classical",
+				"text_map_coherence": "http://localhost:3003/text-map-coherence?map=Facade_Classical",
+				"ada_writer": "http://localhost:3002/editor?map=Facade_Classical"
+			},
+			"status": "pending",
+			"applied_at": null,
+			"applied_by": null,
+			"pre_existing": false,
+			"notes": ""
+		},
+		{
+			"pass_id": "coherence-facade_assembly-20260513T223047",
+			"move_id": "Facade_Baroque-text-drift",
+			"change": "Facade_Baroque · text drift",
+			"from_state": "1 artifact(s) placed but unmentioned in any .md: gallery_marker_facade",
+			"to_state": "mention each in summary.md or technical.md, or remove from grid if no longer pedagogically central",
+			"impact": "high",
+			"rationale_excerpt": "Map score: 8. The map is doing more than its text reports. Either the text needs to catch up, or the placed artifacts are supporting cast rather than leads.",
+			"kind": "coherence",
+			"severity": "high",
+			"deep_links": {
+				"map_builder": "http://localhost:3003/map-builder?name=Facade_Baroque",
+				"text_map_coherence": "http://localhost:3003/text-map-coherence?map=Facade_Baroque",
+				"ada_writer": "http://localhost:3002/editor?map=Facade_Baroque"
+			},
+			"status": "pending",
+			"applied_at": null,
+			"applied_by": null,
+			"pre_existing": false,
+			"notes": ""
+		},
+		{
+			"pass_id": "coherence-facade_assembly-20260513T223047",
+			"move_id": "Facade_Baroque-intent-missing",
+			"change": "Facade_Baroque · intent missing",
+			"from_state": "intent.md does not exist",
+			"to_state": "write the five-line pedagogical contract (concept, sequence role, technical angle, critical angle, key artifacts)",
+			"impact": "medium",
+			"rationale_excerpt": "Without intent.md, the map has no explicit pedagogical claim. Intent alignment scoring is excluded; coherence becomes uncheckable.",
+			"kind": "coherence",
+			"severity": "medium",
+			"deep_links": {
+				"map_builder": "http://localhost:3003/map-builder?name=Facade_Baroque",
+				"text_map_coherence": "http://localhost:3003/text-map-coherence?map=Facade_Baroque",
+				"ada_writer": "http://localhost:3002/editor?map=Facade_Baroque"
+			},
+			"status": "pending",
+			"applied_at": null,
+			"applied_by": null,
+			"pre_existing": false,
+			"notes": ""
+		},
+		{
+			"pass_id": "coherence-facade_assembly-20260513T223047",
+			"move_id": "Facade_Baroque-stubs",
+			"change": "Facade_Baroque · stub text",
+			"from_state": "stub-flagged file(s): blurb, summary, technical, critical, intent",
+			"to_state": "expand each stub to a real first draft (or remove if not yet warranted)",
+			"impact": "low",
+			"rationale_excerpt": "Stub detection flags files below file-type word-count thresholds. A 30-word summary is not a real summary; it's a placeholder.",
+			"kind": "coherence",
+			"severity": "low",
+			"deep_links": {
+				"map_builder": "http://localhost:3003/map-builder?name=Facade_Baroque",
+				"text_map_coherence": "http://localhost:3003/text-map-coherence?map=Facade_Baroque",
+				"ada_writer": "http://localhost:3002/editor?map=Facade_Baroque"
+			},
+			"status": "pending",
+			"applied_at": null,
+			"applied_by": null,
+			"pre_existing": false,
+			"notes": ""
+		},
+		{
+			"pass_id": "coherence-facade_assembly-20260513T223047",
+			"move_id": "Facade_Venetian_Gothic-text-drift",
+			"change": "Facade_Venetian_Gothic · text drift",
+			"from_state": "1 artifact(s) placed but unmentioned in any .md: gallery_marker_facade",
+			"to_state": "mention each in summary.md or technical.md, or remove from grid if no longer pedagogically central",
+			"impact": "high",
+			"rationale_excerpt": "Map score: 8. The map is doing more than its text reports. Either the text needs to catch up, or the placed artifacts are supporting cast rather than leads.",
+			"kind": "coherence",
+			"severity": "high",
+			"deep_links": {
+				"map_builder": "http://localhost:3003/map-builder?name=Facade_Venetian_Gothic",
+				"text_map_coherence": "http://localhost:3003/text-map-coherence?map=Facade_Venetian_Gothic",
+				"ada_writer": "http://localhost:3002/editor?map=Facade_Venetian_Gothic"
+			},
+			"status": "pending",
+			"applied_at": null,
+			"applied_by": null,
+			"pre_existing": false,
+			"notes": ""
+		},
+		{
+			"pass_id": "coherence-facade_assembly-20260513T223047",
+			"move_id": "Facade_Venetian_Gothic-intent-missing",
+			"change": "Facade_Venetian_Gothic · intent missing",
+			"from_state": "intent.md does not exist",
+			"to_state": "write the five-line pedagogical contract (concept, sequence role, technical angle, critical angle, key artifacts)",
+			"impact": "medium",
+			"rationale_excerpt": "Without intent.md, the map has no explicit pedagogical claim. Intent alignment scoring is excluded; coherence becomes uncheckable.",
+			"kind": "coherence",
+			"severity": "medium",
+			"deep_links": {
+				"map_builder": "http://localhost:3003/map-builder?name=Facade_Venetian_Gothic",
+				"text_map_coherence": "http://localhost:3003/text-map-coherence?map=Facade_Venetian_Gothic",
+				"ada_writer": "http://localhost:3002/editor?map=Facade_Venetian_Gothic"
+			},
+			"status": "pending",
+			"applied_at": null,
+			"applied_by": null,
+			"pre_existing": false,
+			"notes": ""
+		},
+		{
+			"pass_id": "coherence-facade_assembly-20260513T223047",
+			"move_id": "Facade_Venetian_Gothic-stubs",
+			"change": "Facade_Venetian_Gothic · stub text",
+			"from_state": "stub-flagged file(s): blurb, summary, technical, critical, intent",
+			"to_state": "expand each stub to a real first draft (or remove if not yet warranted)",
+			"impact": "low",
+			"rationale_excerpt": "Stub detection flags files below file-type word-count thresholds. A 30-word summary is not a real summary; it's a placeholder.",
+			"kind": "coherence",
+			"severity": "low",
+			"deep_links": {
+				"map_builder": "http://localhost:3003/map-builder?name=Facade_Venetian_Gothic",
+				"text_map_coherence": "http://localhost:3003/text-map-coherence?map=Facade_Venetian_Gothic",
+				"ada_writer": "http://localhost:3002/editor?map=Facade_Venetian_Gothic"
+			},
+			"status": "pending",
+			"applied_at": null,
+			"applied_by": null,
+			"pre_existing": false,
+			"notes": ""
+		},
+		{
+			"pass_id": "coherence-facade_assembly-20260513T223047",
+			"move_id": "Facade_NYC_Tenement-text-drift",
+			"change": "Facade_NYC_Tenement · text drift",
+			"from_state": "1 artifact(s) placed but unmentioned in any .md: gallery_marker_facade",
+			"to_state": "mention each in summary.md or technical.md, or remove from grid if no longer pedagogically central",
+			"impact": "high",
+			"rationale_excerpt": "Map score: 8. The map is doing more than its text reports. Either the text needs to catch up, or the placed artifacts are supporting cast rather than leads.",
+			"kind": "coherence",
+			"severity": "high",
+			"deep_links": {
+				"map_builder": "http://localhost:3003/map-builder?name=Facade_NYC_Tenement",
+				"text_map_coherence": "http://localhost:3003/text-map-coherence?map=Facade_NYC_Tenement",
+				"ada_writer": "http://localhost:3002/editor?map=Facade_NYC_Tenement"
+			},
+			"status": "pending",
+			"applied_at": null,
+			"applied_by": null,
+			"pre_existing": false,
+			"notes": ""
+		},
+		{
+			"pass_id": "coherence-facade_assembly-20260513T223047",
+			"move_id": "Facade_NYC_Tenement-intent-missing",
+			"change": "Facade_NYC_Tenement · intent missing",
+			"from_state": "intent.md does not exist",
+			"to_state": "write the five-line pedagogical contract (concept, sequence role, technical angle, critical angle, key artifacts)",
+			"impact": "medium",
+			"rationale_excerpt": "Without intent.md, the map has no explicit pedagogical claim. Intent alignment scoring is excluded; coherence becomes uncheckable.",
+			"kind": "coherence",
+			"severity": "medium",
+			"deep_links": {
+				"map_builder": "http://localhost:3003/map-builder?name=Facade_NYC_Tenement",
+				"text_map_coherence": "http://localhost:3003/text-map-coherence?map=Facade_NYC_Tenement",
+				"ada_writer": "http://localhost:3002/editor?map=Facade_NYC_Tenement"
+			},
+			"status": "pending",
+			"applied_at": null,
+			"applied_by": null,
+			"pre_existing": false,
+			"notes": ""
+		},
+		{
+			"pass_id": "coherence-facade_assembly-20260513T223047",
+			"move_id": "Facade_NYC_Tenement-stubs",
+			"change": "Facade_NYC_Tenement · stub text",
+			"from_state": "stub-flagged file(s): blurb, summary, technical, critical, intent",
+			"to_state": "expand each stub to a real first draft (or remove if not yet warranted)",
+			"impact": "low",
+			"rationale_excerpt": "Stub detection flags files below file-type word-count thresholds. A 30-word summary is not a real summary; it's a placeholder.",
+			"kind": "coherence",
+			"severity": "low",
+			"deep_links": {
+				"map_builder": "http://localhost:3003/map-builder?name=Facade_NYC_Tenement",
+				"text_map_coherence": "http://localhost:3003/text-map-coherence?map=Facade_NYC_Tenement",
+				"ada_writer": "http://localhost:3002/editor?map=Facade_NYC_Tenement"
+			},
+			"status": "pending",
+			"applied_at": null,
+			"applied_by": null,
+			"pre_existing": false,
+			"notes": ""
+		},
+		{
+			"pass_id": "coherence-facade_assembly-20260513T223047",
+			"move_id": "Chamber_Facade-stubs",
+			"change": "Chamber_Facade · stub text",
+			"from_state": "stub-flagged file(s): blurb, summary, technical, critical, intent",
+			"to_state": "expand each stub to a real first draft (or remove if not yet warranted)",
+			"impact": "low",
+			"rationale_excerpt": "Stub detection flags files below file-type word-count thresholds. A 30-word summary is not a real summary; it's a placeholder.",
+			"kind": "coherence",
+			"severity": "low",
+			"deep_links": {
+				"map_builder": "http://localhost:3003/map-builder?name=Chamber_Facade",
+				"text_map_coherence": "http://localhost:3003/text-map-coherence?map=Chamber_Facade",
+				"ada_writer": "http://localhost:3002/editor?map=Chamber_Facade"
+			},
+			"status": "pending",
+			"applied_at": null,
+			"applied_by": null,
+			"pre_existing": false,
+			"notes": ""
+		}
+	]
+}

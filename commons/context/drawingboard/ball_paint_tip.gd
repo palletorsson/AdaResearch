@@ -63,6 +63,13 @@ func _process(_delta):
 	if raycast.is_colliding():
 		var collider = raycast.get_collider()
 		if collider and collider.is_in_group("drawing_area"):
+			# The drawing surface can be freed on map reload — re-acquire or bail
+			# so we never call into a previously freed instance.
+			if not is_instance_valid(paper_surface):
+				paper_surface = get_tree().get_first_node_in_group("drawing_surface")
+				if not is_instance_valid(paper_surface):
+					return
+
 			if not is_painting:
 				is_painting = true
 				reset_positions()

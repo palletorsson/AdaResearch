@@ -1,0 +1,2174 @@
+{
+  "room": {
+    "width": 20,
+    "depth": 20,
+    "spawn_row": 19,
+    "spawn_col": 10,
+    "teleporter_row": 6,
+    "teleporter_col": 5
+  },
+  "artifacts": [
+    {
+      "lookup_name": "combine_capsule",
+      "footprint_cells": 9,
+      "clearance_front": 1,
+      "clearance_back": 1,
+      "clearance_left": 1,
+      "clearance_right": 1,
+      "player_position": "front",
+      "wall_backing": false,
+      "orientation": "face_approach",
+      "isolation": 0,
+      "cluster_with": [],
+      "preferred_zone": "any"
+    },
+    {
+      "lookup_name": "doublestick",
+      "footprint_cells": 2,
+      "clearance_front": 1,
+      "clearance_back": 1,
+      "clearance_left": 1,
+      "clearance_right": 1,
+      "player_position": "front",
+      "wall_backing": false,
+      "orientation": "face_approach",
+      "isolation": 0,
+      "cluster_with": [],
+      "preferred_zone": "entry"
+    },
+    {
+      "lookup_name": "cube_scene_drag_points",
+      "footprint_cells": 4,
+      "clearance_front": 1,
+      "clearance_back": 1,
+      "clearance_left": 1,
+      "clearance_right": 1,
+      "player_position": "front",
+      "wall_backing": false,
+      "orientation": "face_approach",
+      "isolation": 0,
+      "cluster_with": [],
+      "preferred_zone": "entry"
+    },
+    {
+      "lookup_name": "combine_sphere",
+      "footprint_cells": 9,
+      "clearance_front": 1,
+      "clearance_back": 1,
+      "clearance_left": 1,
+      "clearance_right": 1,
+      "player_position": "front",
+      "wall_backing": false,
+      "orientation": "face_approach",
+      "isolation": 1,
+      "cluster_with": [],
+      "preferred_zone": "entry"
+    }
+  ],
+  "results": {
+    "random": {
+      "constraint_score": 0.9735,
+      "walkability": 0.712,
+      "combined": 0.869,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 1.0,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 1.0,
+        "cluster_satisfied": 1.0,
+        "preferred_zone_match": 0.533,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 36,
+        "detour_ratio": 2.0,
+        "backtrack_rate": 0.083,
+        "encounter_order": 0.5,
+        "centerpiece_proximity": 0.745,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "combine_sphere",
+          "combine_capsule",
+          "cube_scene_drag_points",
+          "doublestick"
+        ]
+      },
+      "full_path": [
+        [
+          19,
+          10
+        ],
+        [
+          18,
+          10
+        ],
+        [
+          17,
+          10
+        ],
+        [
+          16,
+          10
+        ],
+        [
+          15,
+          10
+        ],
+        [
+          15,
+          11
+        ],
+        [
+          15,
+          12
+        ],
+        [
+          15,
+          13
+        ],
+        [
+          15,
+          14
+        ],
+        [
+          15,
+          15
+        ],
+        [
+          15,
+          14
+        ],
+        [
+          15,
+          13
+        ],
+        [
+          15,
+          12
+        ],
+        [
+          14,
+          12
+        ],
+        [
+          13,
+          12
+        ],
+        [
+          12,
+          12
+        ],
+        [
+          11,
+          12
+        ],
+        [
+          10,
+          12
+        ],
+        [
+          9,
+          12
+        ],
+        [
+          8,
+          12
+        ],
+        [
+          7,
+          12
+        ],
+        [
+          6,
+          12
+        ],
+        [
+          5,
+          12
+        ],
+        [
+          4,
+          12
+        ],
+        [
+          3,
+          12
+        ],
+        [
+          2,
+          12
+        ],
+        [
+          2,
+          11
+        ],
+        [
+          2,
+          10
+        ],
+        [
+          2,
+          9
+        ],
+        [
+          2,
+          8
+        ],
+        [
+          3,
+          8
+        ],
+        [
+          4,
+          8
+        ],
+        [
+          5,
+          8
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          6,
+          6
+        ],
+        [
+          6,
+          5
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "combine_capsule",
+          "row": 12,
+          "col": 13
+        },
+        {
+          "artifact": "doublestick",
+          "row": 1,
+          "col": 8
+        },
+        {
+          "artifact": "cube_scene_drag_points",
+          "row": 16,
+          "col": 15
+        },
+        {
+          "artifact": "combine_sphere",
+          "row": 12,
+          "col": 9
+        }
+      ]
+    },
+    "rule_based": {
+      "constraint_score": 0.9588,
+      "walkability": 0.788,
+      "combined": 0.89,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.812,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 0.7,
+        "cluster_satisfied": 1.0,
+        "preferred_zone_match": 1.0,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 32,
+        "detour_ratio": 1.778,
+        "backtrack_rate": 0.094,
+        "encounter_order": 0.75,
+        "centerpiece_proximity": 0.684,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "combine_sphere",
+          "doublestick",
+          "cube_scene_drag_points",
+          "combine_capsule"
+        ]
+      },
+      "full_path": [
+        [
+          19,
+          10
+        ],
+        [
+          19,
+          9
+        ],
+        [
+          19,
+          8
+        ],
+        [
+          18,
+          8
+        ],
+        [
+          19,
+          8
+        ],
+        [
+          19,
+          9
+        ],
+        [
+          19,
+          10
+        ],
+        [
+          19,
+          11
+        ],
+        [
+          19,
+          12
+        ],
+        [
+          19,
+          13
+        ],
+        [
+          19,
+          14
+        ],
+        [
+          18,
+          14
+        ],
+        [
+          17,
+          14
+        ],
+        [
+          16,
+          14
+        ],
+        [
+          15,
+          14
+        ],
+        [
+          14,
+          14
+        ],
+        [
+          13,
+          14
+        ],
+        [
+          13,
+          13
+        ],
+        [
+          13,
+          12
+        ],
+        [
+          12,
+          12
+        ],
+        [
+          11,
+          12
+        ],
+        [
+          10,
+          12
+        ],
+        [
+          9,
+          12
+        ],
+        [
+          8,
+          12
+        ],
+        [
+          7,
+          12
+        ],
+        [
+          6,
+          12
+        ],
+        [
+          6,
+          11
+        ],
+        [
+          6,
+          10
+        ],
+        [
+          6,
+          9
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          6,
+          6
+        ],
+        [
+          6,
+          5
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "combine_capsule",
+          "row": 10,
+          "col": 13
+        },
+        {
+          "artifact": "doublestick",
+          "row": 17,
+          "col": 8
+        },
+        {
+          "artifact": "cube_scene_drag_points",
+          "row": 18,
+          "col": 15
+        },
+        {
+          "artifact": "combine_sphere",
+          "row": 16,
+          "col": 9
+        }
+      ]
+    },
+    "sdf": {
+      "constraint_score": 0.9868,
+      "walkability": 0.654,
+      "combined": 0.854,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 1.0,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 1.0,
+        "cluster_satisfied": 1.0,
+        "preferred_zone_match": 0.767,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 36,
+        "detour_ratio": 2.0,
+        "backtrack_rate": 0.028,
+        "encounter_order": 0.25,
+        "centerpiece_proximity": 0.715,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "combine_capsule",
+          "combine_sphere",
+          "cube_scene_drag_points",
+          "doublestick"
+        ]
+      },
+      "full_path": [
+        [
+          19,
+          10
+        ],
+        [
+          18,
+          10
+        ],
+        [
+          17,
+          10
+        ],
+        [
+          16,
+          10
+        ],
+        [
+          15,
+          10
+        ],
+        [
+          14,
+          10
+        ],
+        [
+          13,
+          10
+        ],
+        [
+          13,
+          9
+        ],
+        [
+          13,
+          8
+        ],
+        [
+          13,
+          7
+        ],
+        [
+          14,
+          7
+        ],
+        [
+          14,
+          8
+        ],
+        [
+          14,
+          9
+        ],
+        [
+          14,
+          10
+        ],
+        [
+          14,
+          11
+        ],
+        [
+          14,
+          12
+        ],
+        [
+          14,
+          13
+        ],
+        [
+          14,
+          14
+        ],
+        [
+          14,
+          15
+        ],
+        [
+          13,
+          15
+        ],
+        [
+          12,
+          15
+        ],
+        [
+          11,
+          15
+        ],
+        [
+          10,
+          15
+        ],
+        [
+          9,
+          15
+        ],
+        [
+          8,
+          15
+        ],
+        [
+          7,
+          15
+        ],
+        [
+          6,
+          15
+        ],
+        [
+          6,
+          14
+        ],
+        [
+          6,
+          13
+        ],
+        [
+          6,
+          12
+        ],
+        [
+          6,
+          11
+        ],
+        [
+          6,
+          10
+        ],
+        [
+          6,
+          9
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          6,
+          6
+        ],
+        [
+          6,
+          5
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "combine_capsule",
+          "row": 10,
+          "col": 10
+        },
+        {
+          "artifact": "combine_sphere",
+          "row": 13,
+          "col": 4
+        },
+        {
+          "artifact": "cube_scene_drag_points",
+          "row": 15,
+          "col": 15
+        },
+        {
+          "artifact": "doublestick",
+          "row": 5,
+          "col": 14
+        }
+      ]
+    },
+    "fold": {
+      "constraint_score": 0.9868,
+      "walkability": 0.82,
+      "combined": 0.92,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 1.0,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 1.0,
+        "cluster_satisfied": 1.0,
+        "preferred_zone_match": 0.767,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 34,
+        "detour_ratio": 1.889,
+        "backtrack_rate": 0.0,
+        "encounter_order": 0.75,
+        "centerpiece_proximity": 0.696,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "combine_sphere",
+          "cube_scene_drag_points",
+          "combine_capsule",
+          "doublestick"
+        ]
+      },
+      "full_path": [
+        [
+          19,
+          10
+        ],
+        [
+          18,
+          10
+        ],
+        [
+          17,
+          10
+        ],
+        [
+          16,
+          10
+        ],
+        [
+          16,
+          11
+        ],
+        [
+          16,
+          12
+        ],
+        [
+          16,
+          13
+        ],
+        [
+          16,
+          14
+        ],
+        [
+          15,
+          14
+        ],
+        [
+          14,
+          14
+        ],
+        [
+          14,
+          13
+        ],
+        [
+          13,
+          13
+        ],
+        [
+          12,
+          13
+        ],
+        [
+          11,
+          13
+        ],
+        [
+          10,
+          13
+        ],
+        [
+          9,
+          13
+        ],
+        [
+          8,
+          13
+        ],
+        [
+          7,
+          13
+        ],
+        [
+          6,
+          13
+        ],
+        [
+          5,
+          13
+        ],
+        [
+          4,
+          13
+        ],
+        [
+          3,
+          13
+        ],
+        [
+          2,
+          13
+        ],
+        [
+          2,
+          12
+        ],
+        [
+          2,
+          11
+        ],
+        [
+          2,
+          10
+        ],
+        [
+          2,
+          9
+        ],
+        [
+          2,
+          8
+        ],
+        [
+          3,
+          8
+        ],
+        [
+          4,
+          8
+        ],
+        [
+          5,
+          8
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          6,
+          6
+        ],
+        [
+          6,
+          5
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "combine_capsule",
+          "row": 11,
+          "col": 14
+        },
+        {
+          "artifact": "doublestick",
+          "row": 1,
+          "col": 8
+        },
+        {
+          "artifact": "cube_scene_drag_points",
+          "row": 16,
+          "col": 15
+        },
+        {
+          "artifact": "combine_sphere",
+          "row": 13,
+          "col": 8
+        }
+      ]
+    },
+    "paradoxical": {
+      "constraint_score": 0.9735,
+      "walkability": 0.47,
+      "combined": 0.772,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.875,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 1.0,
+        "cluster_satisfied": 1.0,
+        "preferred_zone_match": 0.767,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 74,
+        "detour_ratio": 4.111,
+        "backtrack_rate": 0.014,
+        "encounter_order": 0.25,
+        "centerpiece_proximity": 0.336,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "cube_scene_drag_points",
+          "combine_capsule",
+          "combine_sphere",
+          "doublestick"
+        ]
+      },
+      "full_path": [
+        [
+          19,
+          10
+        ],
+        [
+          19,
+          9
+        ],
+        [
+          19,
+          8
+        ],
+        [
+          19,
+          7
+        ],
+        [
+          19,
+          6
+        ],
+        [
+          19,
+          5
+        ],
+        [
+          19,
+          4
+        ],
+        [
+          19,
+          3
+        ],
+        [
+          18,
+          3
+        ],
+        [
+          17,
+          3
+        ],
+        [
+          16,
+          3
+        ],
+        [
+          15,
+          3
+        ],
+        [
+          14,
+          3
+        ],
+        [
+          13,
+          3
+        ],
+        [
+          12,
+          3
+        ],
+        [
+          11,
+          3
+        ],
+        [
+          10,
+          3
+        ],
+        [
+          9,
+          3
+        ],
+        [
+          8,
+          3
+        ],
+        [
+          7,
+          3
+        ],
+        [
+          6,
+          3
+        ],
+        [
+          5,
+          3
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          6
+        ],
+        [
+          4,
+          7
+        ],
+        [
+          4,
+          8
+        ],
+        [
+          4,
+          9
+        ],
+        [
+          4,
+          10
+        ],
+        [
+          4,
+          11
+        ],
+        [
+          4,
+          12
+        ],
+        [
+          4,
+          13
+        ],
+        [
+          4,
+          14
+        ],
+        [
+          4,
+          15
+        ],
+        [
+          4,
+          16
+        ],
+        [
+          4,
+          17
+        ],
+        [
+          5,
+          17
+        ],
+        [
+          6,
+          17
+        ],
+        [
+          7,
+          17
+        ],
+        [
+          8,
+          17
+        ],
+        [
+          9,
+          17
+        ],
+        [
+          10,
+          17
+        ],
+        [
+          11,
+          17
+        ],
+        [
+          12,
+          17
+        ],
+        [
+          13,
+          17
+        ],
+        [
+          14,
+          17
+        ],
+        [
+          15,
+          17
+        ],
+        [
+          16,
+          17
+        ],
+        [
+          17,
+          17
+        ],
+        [
+          17,
+          18
+        ],
+        [
+          16,
+          18
+        ],
+        [
+          15,
+          18
+        ],
+        [
+          14,
+          18
+        ],
+        [
+          13,
+          18
+        ],
+        [
+          12,
+          18
+        ],
+        [
+          11,
+          18
+        ],
+        [
+          10,
+          18
+        ],
+        [
+          9,
+          18
+        ],
+        [
+          8,
+          18
+        ],
+        [
+          7,
+          18
+        ],
+        [
+          6,
+          18
+        ],
+        [
+          6,
+          17
+        ],
+        [
+          6,
+          16
+        ],
+        [
+          6,
+          15
+        ],
+        [
+          6,
+          14
+        ],
+        [
+          6,
+          13
+        ],
+        [
+          6,
+          12
+        ],
+        [
+          6,
+          11
+        ],
+        [
+          6,
+          10
+        ],
+        [
+          6,
+          9
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          6,
+          6
+        ],
+        [
+          6,
+          5
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "combine_capsule",
+          "row": 1,
+          "col": 1
+        },
+        {
+          "artifact": "combine_sphere",
+          "row": 1,
+          "col": 17
+        },
+        {
+          "artifact": "cube_scene_drag_points",
+          "row": 18,
+          "col": 1
+        },
+        {
+          "artifact": "doublestick",
+          "row": 18,
+          "col": 18
+        }
+      ]
+    },
+    "hybrid": {
+      "constraint_score": 1.0,
+      "walkability": 0.681,
+      "combined": 0.872,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 1.0,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 1.0,
+        "cluster_satisfied": 1.0,
+        "preferred_zone_match": 1.0,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 28,
+        "detour_ratio": 1.556,
+        "backtrack_rate": 0.036,
+        "encounter_order": 0.25,
+        "centerpiece_proximity": 0.715,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "doublestick",
+          "cube_scene_drag_points",
+          "combine_capsule",
+          "combine_sphere"
+        ]
+      },
+      "full_path": [
+        [
+          19,
+          10
+        ],
+        [
+          18,
+          10
+        ],
+        [
+          17,
+          10
+        ],
+        [
+          17,
+          11
+        ],
+        [
+          17,
+          12
+        ],
+        [
+          17,
+          13
+        ],
+        [
+          17,
+          14
+        ],
+        [
+          17,
+          15
+        ],
+        [
+          17,
+          14
+        ],
+        [
+          16,
+          14
+        ],
+        [
+          15,
+          14
+        ],
+        [
+          14,
+          14
+        ],
+        [
+          13,
+          14
+        ],
+        [
+          13,
+          13
+        ],
+        [
+          13,
+          12
+        ],
+        [
+          13,
+          11
+        ],
+        [
+          13,
+          10
+        ],
+        [
+          13,
+          9
+        ],
+        [
+          13,
+          8
+        ],
+        [
+          13,
+          7
+        ],
+        [
+          12,
+          7
+        ],
+        [
+          11,
+          7
+        ],
+        [
+          10,
+          7
+        ],
+        [
+          9,
+          7
+        ],
+        [
+          8,
+          7
+        ],
+        [
+          7,
+          7
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          6,
+          6
+        ],
+        [
+          6,
+          5
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "combine_capsule",
+          "row": 10,
+          "col": 10
+        },
+        {
+          "artifact": "combine_sphere",
+          "row": 13,
+          "col": 4
+        },
+        {
+          "artifact": "cube_scene_drag_points",
+          "row": 15,
+          "col": 15
+        },
+        {
+          "artifact": "doublestick",
+          "row": 16,
+          "col": 12
+        }
+      ]
+    },
+    "circle_packing": {
+      "constraint_score": 0.9801,
+      "walkability": 0.679,
+      "combined": 0.86,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.812,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 1.0,
+        "cluster_satisfied": 1.0,
+        "preferred_zone_match": 1.0,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 32,
+        "detour_ratio": 1.778,
+        "backtrack_rate": 0.031,
+        "encounter_order": 0.5,
+        "centerpiece_proximity": 0.288,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "doublestick",
+          "cube_scene_drag_points",
+          "combine_sphere",
+          "combine_capsule"
+        ]
+      },
+      "full_path": [
+        [
+          19,
+          10
+        ],
+        [
+          18,
+          10
+        ],
+        [
+          17,
+          10
+        ],
+        [
+          16,
+          10
+        ],
+        [
+          15,
+          10
+        ],
+        [
+          14,
+          10
+        ],
+        [
+          14,
+          9
+        ],
+        [
+          14,
+          8
+        ],
+        [
+          14,
+          7
+        ],
+        [
+          14,
+          6
+        ],
+        [
+          15,
+          6
+        ],
+        [
+          15,
+          5
+        ],
+        [
+          15,
+          4
+        ],
+        [
+          15,
+          3
+        ],
+        [
+          14,
+          3
+        ],
+        [
+          13,
+          3
+        ],
+        [
+          12,
+          3
+        ],
+        [
+          11,
+          3
+        ],
+        [
+          10,
+          3
+        ],
+        [
+          9,
+          3
+        ],
+        [
+          8,
+          3
+        ],
+        [
+          7,
+          3
+        ],
+        [
+          6,
+          3
+        ],
+        [
+          5,
+          3
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          3,
+          3
+        ],
+        [
+          3,
+          2
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          5,
+          2
+        ],
+        [
+          6,
+          2
+        ],
+        [
+          6,
+          3
+        ],
+        [
+          6,
+          4
+        ],
+        [
+          6,
+          5
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "combine_capsule",
+          "row": 0,
+          "col": 0
+        },
+        {
+          "artifact": "combine_sphere",
+          "row": 13,
+          "col": 0
+        },
+        {
+          "artifact": "cube_scene_drag_points",
+          "row": 13,
+          "col": 4
+        },
+        {
+          "artifact": "doublestick",
+          "row": 13,
+          "col": 7
+        }
+      ]
+    },
+    "warehouse": {
+      "constraint_score": 0.8754,
+      "walkability": 0.801,
+      "combined": 0.846,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.562,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 0.4,
+        "cluster_satisfied": 1.0,
+        "preferred_zone_match": 1.0,
+        "reachability": 0.75,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 0,
+        "detour_ratio": 0.0,
+        "backtrack_rate": 0.0,
+        "encounter_order": 0.5,
+        "centerpiece_proximity": 0.921,
+        "coverage": 0.75,
+        "visit_order_names": [
+          "combine_capsule",
+          "cube_scene_drag_points",
+          "doublestick"
+        ]
+      },
+      "full_path": [
+        [
+          19,
+          10
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "combine_capsule",
+          "row": 16,
+          "col": 10
+        },
+        {
+          "artifact": "combine_sphere",
+          "row": 17,
+          "col": 13
+        },
+        {
+          "artifact": "cube_scene_drag_points",
+          "row": 18,
+          "col": 8
+        },
+        {
+          "artifact": "doublestick",
+          "row": 19,
+          "col": 11
+        }
+      ]
+    },
+    "simulated_annealing": {
+      "constraint_score": 1.0,
+      "walkability": 0.818,
+      "combined": 0.927,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 1.0,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 1.0,
+        "cluster_satisfied": 1.0,
+        "preferred_zone_match": 1.0,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 32,
+        "detour_ratio": 1.778,
+        "backtrack_rate": 0.031,
+        "encounter_order": 0.75,
+        "centerpiece_proximity": 0.715,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "combine_sphere",
+          "doublestick",
+          "cube_scene_drag_points",
+          "combine_capsule"
+        ]
+      },
+      "full_path": [
+        [
+          19,
+          10
+        ],
+        [
+          19,
+          11
+        ],
+        [
+          18,
+          11
+        ],
+        [
+          18,
+          12
+        ],
+        [
+          18,
+          13
+        ],
+        [
+          18,
+          14
+        ],
+        [
+          18,
+          15
+        ],
+        [
+          18,
+          16
+        ],
+        [
+          17,
+          16
+        ],
+        [
+          17,
+          17
+        ],
+        [
+          17,
+          16
+        ],
+        [
+          16,
+          16
+        ],
+        [
+          15,
+          16
+        ],
+        [
+          14,
+          16
+        ],
+        [
+          14,
+          15
+        ],
+        [
+          14,
+          14
+        ],
+        [
+          14,
+          13
+        ],
+        [
+          14,
+          12
+        ],
+        [
+          13,
+          12
+        ],
+        [
+          12,
+          12
+        ],
+        [
+          11,
+          12
+        ],
+        [
+          10,
+          12
+        ],
+        [
+          9,
+          12
+        ],
+        [
+          8,
+          12
+        ],
+        [
+          7,
+          12
+        ],
+        [
+          6,
+          12
+        ],
+        [
+          6,
+          11
+        ],
+        [
+          6,
+          10
+        ],
+        [
+          6,
+          9
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          6,
+          6
+        ],
+        [
+          6,
+          5
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "combine_capsule",
+          "row": 11,
+          "col": 13
+        },
+        {
+          "artifact": "doublestick",
+          "row": 17,
+          "col": 15
+        },
+        {
+          "artifact": "cube_scene_drag_points",
+          "row": 15,
+          "col": 17
+        },
+        {
+          "artifact": "combine_sphere",
+          "row": 16,
+          "col": 8
+        }
+      ]
+    },
+    "voronoi": {
+      "constraint_score": 0.9735,
+      "walkability": 0.552,
+      "combined": 0.805,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 1.0,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 1.0,
+        "cluster_satisfied": 1.0,
+        "preferred_zone_match": 0.533,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 42,
+        "detour_ratio": 2.333,
+        "backtrack_rate": 0.143,
+        "encounter_order": 0.25,
+        "centerpiece_proximity": 0.485,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "cube_scene_drag_points",
+          "combine_capsule",
+          "doublestick",
+          "combine_sphere"
+        ]
+      },
+      "full_path": [
+        [
+          19,
+          10
+        ],
+        [
+          18,
+          10
+        ],
+        [
+          17,
+          10
+        ],
+        [
+          16,
+          10
+        ],
+        [
+          16,
+          11
+        ],
+        [
+          16,
+          12
+        ],
+        [
+          16,
+          13
+        ],
+        [
+          16,
+          14
+        ],
+        [
+          16,
+          13
+        ],
+        [
+          15,
+          13
+        ],
+        [
+          14,
+          13
+        ],
+        [
+          13,
+          13
+        ],
+        [
+          12,
+          13
+        ],
+        [
+          11,
+          13
+        ],
+        [
+          10,
+          13
+        ],
+        [
+          9,
+          13
+        ],
+        [
+          8,
+          13
+        ],
+        [
+          7,
+          13
+        ],
+        [
+          7,
+          12
+        ],
+        [
+          6,
+          12
+        ],
+        [
+          5,
+          12
+        ],
+        [
+          4,
+          12
+        ],
+        [
+          4,
+          11
+        ],
+        [
+          4,
+          10
+        ],
+        [
+          4,
+          9
+        ],
+        [
+          4,
+          8
+        ],
+        [
+          4,
+          7
+        ],
+        [
+          4,
+          6
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          6,
+          4
+        ],
+        [
+          7,
+          4
+        ],
+        [
+          8,
+          4
+        ],
+        [
+          9,
+          4
+        ],
+        [
+          10,
+          4
+        ],
+        [
+          11,
+          4
+        ],
+        [
+          10,
+          4
+        ],
+        [
+          9,
+          4
+        ],
+        [
+          8,
+          4
+        ],
+        [
+          7,
+          4
+        ],
+        [
+          6,
+          4
+        ],
+        [
+          6,
+          5
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "combine_capsule",
+          "row": 4,
+          "col": 13
+        },
+        {
+          "artifact": "doublestick",
+          "row": 3,
+          "col": 4
+        },
+        {
+          "artifact": "cube_scene_drag_points",
+          "row": 14,
+          "col": 14
+        },
+        {
+          "artifact": "combine_sphere",
+          "row": 12,
+          "col": 3
+        }
+      ]
+    },
+    "humanoid_walker": {
+      "constraint_score": 0.9379,
+      "walkability": 0.988,
+      "combined": 0.958,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.75,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 0.5,
+        "cluster_satisfied": 1.0,
+        "preferred_zone_match": 1.0,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 18,
+        "detour_ratio": 1.0,
+        "backtrack_rate": 0.0,
+        "encounter_order": 1.0,
+        "centerpiece_proximity": 0.921,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "combine_sphere",
+          "cube_scene_drag_points",
+          "doublestick",
+          "combine_capsule"
+        ]
+      },
+      "full_path": [
+        [
+          19,
+          10
+        ],
+        [
+          19,
+          9
+        ],
+        [
+          18,
+          9
+        ],
+        [
+          17,
+          9
+        ],
+        [
+          16,
+          9
+        ],
+        [
+          15,
+          9
+        ],
+        [
+          14,
+          9
+        ],
+        [
+          13,
+          9
+        ],
+        [
+          12,
+          9
+        ],
+        [
+          11,
+          9
+        ],
+        [
+          10,
+          9
+        ],
+        [
+          9,
+          9
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          7,
+          9
+        ],
+        [
+          6,
+          9
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          6,
+          6
+        ],
+        [
+          6,
+          5
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "combine_sphere",
+          "row": 16,
+          "col": 10
+        },
+        {
+          "artifact": "cube_scene_drag_points",
+          "row": 14,
+          "col": 10
+        },
+        {
+          "artifact": "doublestick",
+          "row": 13,
+          "col": 10
+        },
+        {
+          "artifact": "combine_capsule",
+          "row": 10,
+          "col": 10
+        }
+      ]
+    }
+  }
+}

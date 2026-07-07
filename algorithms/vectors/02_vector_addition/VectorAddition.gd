@@ -15,7 +15,7 @@ const PistonGadgetScript = preload("res://algorithms/vectors/shared/gadgets/pist
 var vector_a: Node3D
 var vector_b: Node3D
 var sum_vector: Node3D
-var info_label: Label3D
+var info_label: Label
 var readout_label: Label3D
 var magnitude_slider: Node3D
 var dotted_line_a: MultiMeshInstance3D
@@ -59,10 +59,15 @@ func build_scene() -> void:
 	vector_b = spawn_vector(Vector3.ZERO, Vector3(0.4, 1.6, 0.9), Color(0.3, 0.8, 0.9, 1.0), "Vector b")
 	sum_vector = spawn_vector(Vector3.ZERO, Vector3.ZERO, Color(0.55, 1.0, 0.4, 1.0), "a + b", false)
 
-	# Piston gadget
-	piston_gadget = PistonGadgetScript.new()
-	piston_gadget.position = Vector3(-0.6, 0, 0)
-	add_child(piston_gadget)
+	# Piston gadget — a small physics mechanism (RigidBody3D + SliderJoint3D).
+	# Physics bodies emit non-finite (NaN) transforms under a scaled parent, so
+	# only include it at desktop scale; the walk-inside / XL exhibits omit this
+	# tiny origin gadget (it's invisible at room scale anyway). _process guards
+	# `if piston_gadget`.
+	if scale_multiplier <= 2.0:
+		piston_gadget = PistonGadgetScript.new()
+		piston_gadget.position = Vector3(-0.6, 0, 0)
+		add_child(piston_gadget)
 
 	# Cache nodes
 	_cache_vector_nodes(vector_a, _cached_vector_a_nodes)

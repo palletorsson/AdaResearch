@@ -1,0 +1,5 @@
+A pressurized sphere is dropped into a cylindrical mould — open at the top, closed at the bottom, radius held constant from rim to base. The internal pressure wants to push every vertex outward. The mould says: not past my wall. Where the sphere meets the cylinder, contact forces push it back. The body finds equilibrium pressed against the wall everywhere it can reach, and the result is no longer a sphere or a teardrop but a bottle — uniform radius throughout, because the cavity radius was uniform throughout.
+
+This is the industrial glass-blowing process, almost literally. The glassblower's mould determines the outer shape; the breath determines that the glass reaches the mould; the cooling determines that the shape sets. The simulation has the same three parts in different vocabulary: pressure (the breath), contact constraints (the mould), and the verlet loop converging (the cooling).
+
+The gl-family relied on what gravity and the pin together leave behind. The gm-family relies on what the mould has already decided.

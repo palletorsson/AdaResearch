@@ -51,7 +51,7 @@ func _ready() -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
-	if config.has("image_path"):       image_path = String(config["image_path"])
+	if config.has("image_path"):       image_path = str(config["image_path"])
 	if config.has("plane_size"):       plane_size = float(config["plane_size"])
 	if config.has("y_offset"):         y_offset   = float(config["y_offset"])
 	if config.has("billboard_enabled"): billboard_enabled = bool(config["billboard_enabled"])

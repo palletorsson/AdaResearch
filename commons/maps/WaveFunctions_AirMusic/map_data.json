@@ -15,9 +15,7 @@
 	  "difficulty": "beginner",
 	  "category": "algorithms",
 	  "estimated_time": "5 minutes",
-	  "learning_objectives": [
-        "Wavefunctions"
-	  ]
+	  "learning_objectives": ["Wavefunctions"]
 	}
   },
   "utility_definitions": {
@@ -39,35 +37,15 @@
 	"summary": "Basic Oscillation",
 	"layout": "Standard layout",
 	"objective": "Observe the wave function",
-	"key_elements": [
-	  "SystemsMusicTest - Spatial audio triggered by movement through space",
-	  "GlassRack - Spiral tube and fractional distillation on lab tables",
-	  "lab_table - Workbenches flanking the entrance",
-	  "RackAmbientDrone - Ambient drone synthesizer with lissajous display",
-	  "BigPipeSystem - Pipe run with vertical bypass along south wall",
-	  "air_music_display_case - Air Music spatial audio in glass display case",
-      "resonating_metallophone - Metal bars tuned to different pitches"
-	]
+	"key_elements": ["SystemsMusicTest - Spatial audio triggered by movement through space","GlassRack - Spiral tube and fractional distillation on lab tables","lab_table - Workbenches flanking the entrance","RackAmbientDrone - Ambient drone synthesizer with lissajous display","BigPipeSystem - Pipe run with vertical bypass along south wall","air_music_display_case - Air Music spatial audio in glass display case","resonating_metallophone - Metal bars tuned to different pitches"]
   },
   "lighting": {
-	"ambient_color": [
-	  0.4,
-	  0.4,
-	  0.5
-	],
+	"ambient_color": [0.4,0.4,0.5],
 	"ambient_energy": 0.6,
 	"directional_light": {
 	  "enabled": true,
-	  "direction": [
-		-0.4,
-		-0.7,
-		-0.4
-	  ],
-	  "color": [
-		1,
-		0.9,
-		0.8
-	  ],
+	  "direction": [-0.4,-0.7,-0.4],
+	  "color": [1,0.9,0.8],
 	  "energy": 1.2
 	}
   },
@@ -80,11 +58,7 @@
 	"initial_tile_visibility": "hidden_except_corners",
 	"background": {
 	  "type": "sky",
-	  "color": [
-		0.2,
-		0.2,
-		0.7
-	  ]
+	  "color": [0.2,0.2,0.7]
 	}
   },
   "layers": {

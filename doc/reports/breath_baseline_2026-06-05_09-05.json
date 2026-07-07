@@ -1,0 +1,39 @@
+{
+  "timestamp": "2026-06-05T09:05:00",
+  "phase": "baseline",
+  "mode": "full",
+  "scheduled_task": "ada-morning-breath",
+  "pipeline_summary": {
+    "sequences_scored": 22,
+    "head_sum": 134,
+    "head_avg": 6.0455,
+    "completed_stages_sum": 117,
+    "distribution": "randomness HEAD 8 (COMPLETE); 21 sequences HEAD 6 (vr_testing, user-blocked)",
+    "primitives": "HEAD 6 vr_testing, polish 60% (6/10 maps captured)",
+    "near_complete_polish": {
+      "forces": "89% (8/9)",
+      "noise": "89% (8/9)",
+      "swarmintelligence": "86% (6/7)",
+      "foundationscrisis": "88% (7/8)"
+    }
+  },
+  "heat_map_top_5": [
+    {"item": "floor", "temperature": 65, "reason": "active (1 recent commits)"},
+    {"item": "boolean_surfaces", "temperature": 60, "reason": "deep discovery: informal @identity headers"},
+    {"item": "stage7 polish captures", "temperature": 60, "reason": "deep discovery: scorer CAPTURES_DIR"},
+    {"item": "biome_contributions reorder", "temperature": 60, "reason": "spine v1.4 order"},
+    {"item": "sequence:resourcemanagement", "temperature": 50, "reason": "empty sequence"}
+  ],
+  "garden_health": {
+    "dormant": ["gallery(722)", "softbodies(46)", "bricolage(43)", "isosurfaces(27)", "atlas(9)"],
+    "scattered": ["primitives(106)", "wavefunctions(102)", "randomness(73)", "qfeplaboratory(52)"],
+    "reaching": ["fractals(55)", "patterngeneration(53)", "mosaicanalysis(43)", "color(27)"]
+  },
+  "release_gates": {
+    "overall": "PASS",
+    "A_sequence_contract": "PASS",
+    "B_artifact_registry": "PASS",
+    "C_map_validation": "PASS (grade_A 910, B 144, C 140, F 0)",
+    "D_lab_progression": "PASS"
+  }
+}

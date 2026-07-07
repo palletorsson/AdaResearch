@@ -2,32 +2,57 @@ extends Node3D
 class_name XYZSliderPlate
 
 # @identity
-# essence: three sliders (X, Y, Z) that move a point through space — coordinates made tangible
-# desire: learner builds the intuition that position = three independent numbers by moving each axis alone
-# critical_parameter: the live coordinate display — numbers change as sliders move, connecting gesture to math
-# triggers: each slider controls one axis; the point moves in real-time; label updates continuously
-# emerges: axis independence — moving X doesn't change Y; the three dimensions are orthogonal
-# needs: slider_horizontal [has]; Label3D [has]; target point [has]
-# relationships: complements interactive_point_origin (grab = all axes at once); this separates them
-# truth: a coordinate is three independent measurements — the slider plate makes independence visible
+# essence: three sliders (X, Y, Z) that move a point through a visible coordinate frame — coordinates made tangible, and the axes the point moves along made literal
+# desire: learner builds the intuition that position = three independent numbers by moving each axis alone, AND sees the geometric coordinate frame the numbers refer to
+# critical_parameter: the live coordinate display — numbers change as sliders move, connecting gesture to math; panel_scale sizes the controls for VR-hand comfort
+# triggers: each slider controls one axis; the point moves in real-time inside the embedded CoordinateSystem3M frame; label updates continuously
+# emerges: axis independence — moving X doesn't change Y; the three dimensions are orthogonal AND visually distinct (X red, Y green, Z blue)
+# needs: slider_horizontal [has]; Label3D [has]; target point [has]; CoordinateSystem3M embedded for visible axes [present, 2026-05-19]; VR-hand-sized controls [present, 2026-05-19]
+# relationships: complements interactive_point_origin (grab = all axes at once); embeds CoordinateSystem3M as visual reference frame; this separates the three independent measurements while still showing them in their shared frame
+# truth: a coordinate is three independent measurements — the slider plate makes independence visible AND the frame they measure in geometric
 
 ## Dieter Rams plate with X, Y, Z sliders that drive a visible point.
 ## The point is a glowing sphere that moves in world space as you adjust sliders.
 ## Coordinate label updates live. Uses RackTemplates for the Rams aesthetic.
 
 @export_group("Range")
-@export var min_value: float = -1.0
-@export var max_value: float = 1.0
-@export var start_position: Vector3 = Vector3(0.0, 0.5, 0.0)
+## Workspace coordinate range. Default 0..4 aligns with CoordinateSystem3M's
+## one-sided axes (+X +Y +Z from origin), so the point moves in a 4m cube
+## that is exactly bounded by the visible axes. Each axis becomes the
+## boundary of its slider's range.
+@export var min_value: float = 0.0
+@export var max_value: float = 4.0
+## Where the point first appears. Default puts it in the visible positive
+## octant, well away from the panel where the player's hands are.
+@export var start_position: Vector3 = Vector3(1.5, 1.5, 1.5)
 
 @export_group("Point Appearance")
-@export var point_radius: float = 0.025
+## Larger radius — at 4m range the point can be 2-3m from the player, so it
+## must be visible at distance. ~5cm sphere reads cleanly across the workspace.
+@export var point_radius: float = 0.06
 @export var point_color: Color = Color(0.3, 0.8, 1.0)  # cyan
 @export var line_to_origin: bool = true
 
 @export_group("Display")
 @export var panel_tilt: float = -25.0  # degrees, angled toward player
-@export var panel_offset: Vector3 = Vector3(0, 0, 0.25)  # in front of point
+## Default puts the panel at waist height (1.0m) just outside the +Z corner
+## of the 4m workspace cube — the player stands further out, reaching toward
+## the panel while looking past it into the coordinate frame.
+@export var panel_offset: Vector3 = Vector3(0, 1.0, 4.5)
+## VR-hand-size scale for the slider panel. 1.0 = standard rack-panel size
+## (~4cm controls). 2.0 = chunky for VR hands AND legible against the 4m axes.
+@export var panel_scale: float = 2.0
+
+@export_group("Coordinate System")
+## Embed a CoordinateSystem3M (X red / Y green / Z blue axes) inside the
+## workspace so the point can be seen moving through a visible coordinate frame.
+@export var show_coordinate_system: bool = true
+## Scale applied to the embedded coordinate system. CoordinateSystem3M is 3m
+## native × 0.5 self-scale = 1.5m effective. coord_system_scale = 2.67 gives
+## ≈ 4m axes — matching the default workspace range, so each axis is exactly
+## the boundary of its slider. The whole frame stands on the ground (artifact
+## root at y=0) with the Y axis rising 4m straight up.
+@export var coord_system_scale: float = 2.67
 
 # Internal
 var _panel: Node3D
@@ -42,6 +67,7 @@ var _display_container: Node3D
 var _origin_line: MeshInstance3D
 var _origin_cylinder: CylinderMesh
 var _origin_line_mat: StandardMaterial3D
+var _coord_system: Node3D    # embedded CoordinateSystem3M (visual axis frame)
 var _current_pos: Vector3
 
 
@@ -51,6 +77,8 @@ func _ready() -> void:
 	_build_coord_label()
 	if line_to_origin:
 		_build_origin_line()
+	if show_coordinate_system:
+		_build_coordinate_system()    # embed CoordinateSystem3M visual axes
 	_build_panel()
 	_update_point()
 
@@ -100,9 +128,11 @@ func _build_origin_line() -> void:
 	_origin_line.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 
 	_origin_cylinder = CylinderMesh.new()
-	_origin_cylinder.top_radius = 0.002
-	_origin_cylinder.bottom_radius = 0.002
-	_origin_cylinder.radial_segments = 6
+	# Thicker line — the workspace is now up to 4m across, a hairline
+	# wouldn't be visible at distance.
+	_origin_cylinder.top_radius = 0.012
+	_origin_cylinder.bottom_radius = 0.012
+	_origin_cylinder.radial_segments = 8
 	_origin_cylinder.rings = 1
 	_origin_line.mesh = _origin_cylinder
 
@@ -115,6 +145,26 @@ func _build_origin_line() -> void:
 	_origin_line_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	_origin_line.material_override = _origin_line_mat
 	add_child(_origin_line)
+
+
+# ── Coordinate system embed ──────────────────────────────────────────
+
+func _build_coordinate_system() -> void:
+	# Load CoordinateSystem3M scene and add it as a child of XYZSliderPlate.
+	# It self-scales to 0.5 in its own _ready() — we wrap it in a Node3D so
+	# we can apply an additional scale (coord_system_scale) without fighting
+	# its self-scale logic.
+	var scene := load("res://algorithms/vectors/00_coordinates/CoordinateSystem3M.tscn")
+	if not scene:
+		push_warning("XYZSliderPlate: CoordinateSystem3M.tscn missing")
+		return
+	var wrapper := Node3D.new()
+	wrapper.name = "CoordinateAxes"
+	wrapper.scale = Vector3.ONE * coord_system_scale
+	add_child(wrapper)
+	_coord_system = scene.instantiate()
+	if _coord_system:
+		wrapper.add_child(_coord_system)
 
 
 # ── Panel ────────────────────────────────────────────────────────────
@@ -133,6 +183,8 @@ func _build_panel() -> void:
 	])
 	_panel.position = panel_offset
 	_panel.rotation_degrees.x = panel_tilt
+	# Scale up for VR-hand-comfortable controls
+	_panel.scale = Vector3.ONE * panel_scale
 	add_child(_panel)
 
 	# Add Rams text display above the panel for coordinate readout
@@ -243,3 +295,9 @@ func apply_grid_config(config_data: Dictionary) -> void:
 			start_position = Vector3(sp[0], sp[1], sp[2])
 	if config_data.has("line_to_origin"):
 		line_to_origin = config_data["line_to_origin"]
+	if config_data.has("panel_scale"):
+		panel_scale = float(config_data["panel_scale"])
+	if config_data.has("show_coordinate_system"):
+		show_coordinate_system = bool(config_data["show_coordinate_system"])
+	if config_data.has("coord_system_scale"):
+		coord_system_scale = float(config_data["coord_system_scale"])

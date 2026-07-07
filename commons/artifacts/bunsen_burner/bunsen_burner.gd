@@ -72,31 +72,31 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 func _read_metadata_overrides() -> void:
 	if has_meta("config_base_radius"):
-		base_radius = float(String(get_meta("config_base_radius")))
+		base_radius = float(str(get_meta("config_base_radius")))
 	if has_meta("config_base_height"):
-		base_height = float(String(get_meta("config_base_height")))
+		base_height = float(str(get_meta("config_base_height")))
 	if has_meta("config_tube_height"):
-		tube_height = float(String(get_meta("config_tube_height")))
+		tube_height = float(str(get_meta("config_tube_height")))
 	if has_meta("config_tube_radius"):
-		tube_radius = float(String(get_meta("config_tube_radius")))
+		tube_radius = float(str(get_meta("config_tube_radius")))
 	if has_meta("config_flame_visible"):
-		var fv := String(get_meta("config_flame_visible")).to_lower()
+		var fv := str(get_meta("config_flame_visible")).to_lower()
 		flame_visible = fv in ["true", "1", "yes", "on"]
 	if has_meta("config_flame_height"):
-		flame_height = float(String(get_meta("config_flame_height")))
+		flame_height = float(str(get_meta("config_flame_height")))
 	if has_meta("config_flame_width"):
-		flame_width = float(String(get_meta("config_flame_width")))
+		flame_width = float(str(get_meta("config_flame_width")))
 	if has_meta("config_flame_color"):
-		flame_color = _parse_color(String(get_meta("config_flame_color")), flame_color)
+		flame_color = _parse_color(str(get_meta("config_flame_color")), flame_color)
 	if has_meta("config_body_color"):
-		body_color = _parse_color(String(get_meta("config_body_color")), body_color)
+		body_color = _parse_color(str(get_meta("config_body_color")), body_color)
 	if has_meta("config_gas_line_visible"):
-		var gv := String(get_meta("config_gas_line_visible")).to_lower()
+		var gv := str(get_meta("config_gas_line_visible")).to_lower()
 		gas_line_visible = gv in ["true", "1", "yes", "on"]
 	if has_meta("config_valve_position"):
-		valve_position = String(get_meta("config_valve_position")).to_lower()
+		valve_position = str(get_meta("config_valve_position")).to_lower()
 	if has_meta("config_accent_color"):
-		accent_color = _parse_color(String(get_meta("config_accent_color")), accent_color)
+		accent_color = _parse_color(str(get_meta("config_accent_color")), accent_color)
 
 
 func _clear_built_children() -> void:

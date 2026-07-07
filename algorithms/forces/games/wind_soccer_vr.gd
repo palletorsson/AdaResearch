@@ -1,6 +1,16 @@
 # ===========================================================================
 # Wind Soccer VR - Interactive Game Expansion of Example 2.1: Forces
 # This expands on basic wind/gravity forces with VR gameplay
+#
+# @identity
+# essence: A soccer game where wind zones and gravity are continuous forces the players steer the ball through to score
+# desire: To make an invisible force playable — push the ball with gusts of wind, fight gravity, aim for the opponent's goal
+# critical_parameter: wind impulse strength — the force magnitude each player injects to redirect the ball in mid-flight
+# triggers: A timed gust curves the ball toward goal; gravity constantly pulls it down; opposing winds become a tug-of-war
+# emerges: Forces as competition — the abstract "apply a force each frame" of example 2.1 becomes a contest of pushes
+# needs: wind force zones [has], continuous gravity [has], goal detection [has], VR wind impulse control [has]
+# relationships: game expansion of example_2_1 forces; sibling game to force_bowling_vr and friction_racer_vr
+# truth: No one touches the ball — they only touch the air, and the air touches the ball.
 # ===========================================================================
 
 extends Node3D

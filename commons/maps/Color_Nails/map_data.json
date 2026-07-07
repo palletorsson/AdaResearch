@@ -1,11 +1,6 @@
 {
   "documentation": {
-	"key_elements": [
-	  "`nail_color_controller:180:1.0` console at (2,3)",
-	  "`colorballs` accessory rack at (2,4)",
-	  "`dark_sphere` dome creating the studio ambiance",
-      "Ring of extra lights `el` and teleporter `t` at (3,6)"
-	],
+	"key_elements": ["`nail_color_controller:180:1.0` console at (2,3)","`colorballs` accessory rack at (2,4)","`dark_sphere` dome creating the studio ambiance","Ring of extra lights `el` and teleporter `t` at (3,6)"],
 	"layout": "6x7 salon bay with concentric lighting and nail interaction stations.",
 	"objective": "Use the nail color controller and color balls to practice precise color selection.",
 	"summary": "Color_Nails - Nail Polish Studio"
@@ -58,23 +53,11 @@
 	]
   },
   "lighting": {
-	"ambient_color": [
-	  0.4,
-	  0.4,
-	  0.5
-	],
+	"ambient_color": [0.4,0.4,0.5],
 	"ambient_energy": 0.6,
 	"directional_light": {
-	  "color": [
-		1.0,
-		0.9,
-		0.8
-	  ],
-	  "direction": [
-		-0.4,
-		-0.7,
-		-0.4
-	  ],
+	  "color": [1.0,0.9,0.8],
+	  "direction": [-0.4,-0.7,-0.4],
 	  "enabled": true,
 	  "energy": 1.2
 	}
@@ -92,11 +75,7 @@
 	  "category": "color",
 	  "difficulty": "beginner",
 	  "estimated_time": "3-4 minutes",
-	  "learning_objectives": [
-		"Color selection",
-		"Precise hue control",
-        "Digital materiality"
-	  ]
+	  "learning_objectives": ["Color selection","Precise hue control","Digital materiality"]
 	},
 	"name": "Color Nails",
 	"title": "Nail Salon Color Selection",
@@ -105,11 +84,7 @@
   "settings": {
 	"auto_reveal_on_entry": false,
 	"background": {
-	  "color": [
-		0.2,
-		0.3,
-		0.7
-	  ],
+	  "color": [0.2,0.3,0.7],
 	  "type": "sky"
 	},
 	"cube_size": 1.0,

@@ -1,0 +1,61 @@
+{
+  "map_info": {
+    "name": "Change Bench",
+    "lookup_name": "Change_Bench",
+    "description": "The calculus lab. A small room with three artifacts: tangent_slope_workbench on the left, ftc_bridge in the middle, riemann_sum_workbench on the right. Same curve f(x), three probes. Derivative as local slope, integral as accumulated area, Fundamental Theorem of Calculus as the geometric bridge between them. The lab makes the FTC tactile: slide the tangent at point x; the integral up to that x is reachable from the same f. Built 2026-05-21 as a centerpiece map paired with /riemann-sum-gallery and /tangent-slope-gallery.",
+    "manual_file": "",
+    "version": "1.0",
+    "format": "json",
+    "dimensions": {
+      "width": 7,
+      "depth": 5,
+      "max_height": 2
+    },
+    "metadata": {
+      "difficulty": "intermediate",
+      "category": "change",
+      "estimated_time": "3-5 minutes",
+      "learning_objectives": ["Derivative = slope of tangent at a point","Integral = limit of Riemann sum as N→∞","Fundamental Theorem of Calculus geometric reading"]
+    }
+  },
+  "utility_definitions": {
+    "t": "Next",
+    "s": "Spawn Point"
+  },
+  "spawn_points": {
+    "default": {
+      "position": [3.5,1.2,4.5],
+      "rotation": [0,0,0]
+    }
+  },
+  "lighting": {
+    "ambient_color": [0.4,0.4,0.5],
+    "ambient_energy": 0.6
+  },
+  "settings": {
+    "ambient_preset": "calc_lab"
+  },
+  "layers": {
+    "structure": [
+      ["1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1"],
+      ["1","1","1","0","1","1","1"]
+    ],
+    "utilities": [
+      [" "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "],
+      [" "," "," ","t"," "," "," "]
+    ],
+    "interactables": [
+      [" "," "," "," "," "," "," "],
+      [" ","tangent_slope_workbench:0:0"," ","ftc_bridge:0:0"," ","riemann_sum_workbench:0:0"," "],
+      [" "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "]
+    ]
+  }
+}

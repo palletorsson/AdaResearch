@@ -1,0 +1,461 @@
+{
+  "_meta": {
+    "schema_version": "beats/0.1",
+    "schema_doc": "doc/beats/schema.md",
+    "sequence": "softbodies",
+    "phase": "integration",
+    "description": "From cloth draping to Turing patterns  --  matter that deforms, bounces, and self-organizes. Starts with soft body physics (jelly, cloth, obstacles), then expands into morphogenesis: how biological fo…",
+    "_draft": true,
+    "_draft_origin": "tools/draft_beats.py — refine via /beats editor"
+  },
+  "beats": [
+    {
+      "id": "S0",
+      "role": "GATEWAY",
+      "concept": "entering softbodies — the substrate shifts",
+      "register": "structural",
+      "intensity": "low",
+      "maps": [],
+      "stage": "draft",
+      "next": "S1"
+    },
+    {
+      "id": "S1",
+      "role": "INTRODUCE",
+      "concept": "A cube that won't hold its shape. Press it, drop it, watch it recover — or not. The jelly cube is a spring-mass system: particles connected by elastic constraints, each one pulling its neighbors back toward rest.",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "SoftBodies_Soft_Body_Deformation"
+      ],
+      "stage": "draft",
+      "bleed_from": [
+        "morphogenesis"
+      ],
+      "note": "auto-detected from description; refine via editor",
+      "next": "S2",
+      "_concept_origin": "blurb"
+    },
+    {
+      "id": "S2",
+      "role": "DEMONSTRATE",
+      "concept": "Cloth hangs from a spinning carousel. Soft mushroom bodies dangle from arms, swinging outward as the ride turns — then slamming into obstacles. Walk through the straps. Feel them part around you.",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "SoftBodies_Carusell"
+      ],
+      "stage": "draft",
+      "next": "S3",
+      "_concept_origin": "blurb"
+    },
+    {
+      "id": "S3",
+      "role": "DEMONSTRATE",
+      "concept": "Walls breathe. Flags dance. A trampoline catches what falls. Soft bodies don't just exist in space — they negotiate it. Every surface here pushes back, deforms, recovers, or doesn't.",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "SoftBodies_Obsticals"
+      ],
+      "stage": "draft",
+      "next": "S4",
+      "_concept_origin": "blurb"
+    },
+    {
+      "id": "S4",
+      "role": "DEMONSTRATE",
+      "concept": "Twelve more tests. Twelve more ways matter refuses to behave.",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "SoftBodies_Obsticals_Part2"
+      ],
+      "stage": "draft",
+      "next": "S5",
+      "_concept_origin": "blurb"
+    },
+    {
+      "id": "S5",
+      "role": "DEMONSTRATE",
+      "concept": "A surface made of springs. Each vertex connected to its neighbors by elastic constraints — stretch, shear, structural. The mesh holds shape not through rigidity but through thousands of tiny negotiations. Gravity pulls.",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "SoftBodies_Cloth_Physics"
+      ],
+      "stage": "draft",
+      "next": "S6",
+      "_concept_origin": "blurb"
+    },
+    {
+      "id": "S6",
+      "role": "DEMONSTRATE",
+      "concept": "No instructions. No objectives. Just a field of soft things waiting to be touched.",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "SoftBodies_Playground_of_Joy"
+      ],
+      "stage": "draft",
+      "next": "S7",
+      "_concept_origin": "blurb"
+    },
+    {
+      "id": "S7",
+      "role": "DEMONSTRATE",
+      "concept": "A single radiolarian floats in a display case. One cell, no brain, no intention — yet its silica skeleton is geometry so precise that Ernst Haeckel drew it as art. Spikes radiate at computed angles.",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "SoftBodies_Affect_Theory_Visualization"
+      ],
+      "stage": "draft",
+      "next": "S8",
+      "_concept_origin": "blurb"
+    },
+    {
+      "id": "S8",
+      "role": "DEMONSTRATE",
+      "concept": "Two chemicals. One miracle.",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "ProceduralGeneration_Reaction_Diffusion_Systems"
+      ],
+      "stage": "draft",
+      "next": "S9",
+      "_concept_origin": "blurb"
+    },
+    {
+      "id": "S9",
+      "role": "DEMONSTRATE",
+      "concept": "Matching pairs nodes. Given a graph, find the largest set of edges where no vertex appears twice — every node matched at most once. In bipartite graphs this is straightforward.",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "Topology_Entropy_Morphogenesis"
+      ],
+      "stage": "draft",
+      "next": "S10",
+      "_concept_origin": "blurb"
+    },
+    {
+      "id": "S10",
+      "role": "CHAMBER",
+      "concept": "The hopper bounces softly. Spring physics. Deformable matter in deformable space. Everything gives when you push it.",
+      "register": "synthesizing",
+      "intensity": "high",
+      "maps": [
+        "Chamber_SoftBodies"
+      ],
+      "stage": "draft",
+      "next": "S11",
+      "bleed_to": [
+        "randomness",
+        "wavefunctions"
+      ],
+      "note": "auto-reciprocates inbound bleed_from references",
+      "_concept_origin": "blurb"
+    },
+    {
+      "id": "S11",
+      "role": "DEMONSTRATE",
+      "concept": "softbody sb01 cloth drape corners — to be authored",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "SoftBody_sb01_cloth_drape_corners"
+      ],
+      "stage": "draft",
+      "next": "S12"
+    },
+    {
+      "id": "S12",
+      "role": "DEMONSTRATE",
+      "concept": "softbody sb02 cloth drape top row — to be authored",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "SoftBody_sb02_cloth_drape_top_row"
+      ],
+      "stage": "draft",
+      "next": "S13"
+    },
+    {
+      "id": "S13",
+      "role": "DEMONSTRATE",
+      "concept": "softbody sb03 cloth flag sideways — to be authored",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "SoftBody_sb03_cloth_flag_sideways"
+      ],
+      "stage": "draft",
+      "next": "S14"
+    },
+    {
+      "id": "S14",
+      "role": "DEMONSTRATE",
+      "concept": "softbody sb04 cloth tablecloth — to be authored",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "SoftBody_sb04_cloth_tablecloth"
+      ],
+      "stage": "draft",
+      "next": "S15"
+    },
+    {
+      "id": "S15",
+      "role": "DEMONSTRATE",
+      "concept": "softbody sb05 jelly box bounce — to be authored",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "SoftBody_sb05_jelly_box_bounce"
+      ],
+      "stage": "draft",
+      "next": "S16"
+    },
+    {
+      "id": "S16",
+      "role": "DEMONSTRATE",
+      "concept": "softbody sb06 jelly grid settle — to be authored",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "SoftBody_sb06_jelly_grid_settle"
+      ],
+      "stage": "draft",
+      "next": "S17"
+    },
+    {
+      "id": "S17",
+      "role": "DEMONSTRATE",
+      "concept": "softbody sb07 jelly grid tall stiff — to be authored",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "SoftBody_sb07_jelly_grid_tall_stiff"
+      ],
+      "stage": "draft",
+      "next": "S18"
+    },
+    {
+      "id": "S18",
+      "role": "DEMONSTRATE",
+      "concept": "softbody sb08 jelly grid floppy — to be authored",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "SoftBody_sb08_jelly_grid_floppy"
+      ],
+      "stage": "draft",
+      "next": "S19"
+    },
+    {
+      "id": "S19",
+      "role": "DEMONSTRATE",
+      "concept": "softbody sb ls01 plant skeleton — to be authored",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "SoftBody_sb_ls01_plant_skeleton"
+      ],
+      "stage": "draft",
+      "next": "S20"
+    },
+    {
+      "id": "S20",
+      "role": "DEMONSTRATE",
+      "concept": "softbody sb ls02 plant wind collapse — to be authored",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "SoftBody_sb_ls02_plant_wind_collapse"
+      ],
+      "stage": "draft",
+      "next": "S21"
+    },
+    {
+      "id": "S21",
+      "role": "DEMONSTRATE",
+      "concept": "softbody sb ca01 conway cloth — to be authored",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "SoftBody_sb_ca01_conway_cloth"
+      ],
+      "stage": "draft",
+      "next": "S22"
+    },
+    {
+      "id": "S22",
+      "role": "DEMONSTRATE",
+      "concept": "softbody sb ca02 life without death cloth — to be authored",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "SoftBody_sb_ca02_life_without_death_cloth"
+      ],
+      "stage": "draft",
+      "next": "S23"
+    },
+    {
+      "id": "S23",
+      "role": "DEMONSTRATE",
+      "concept": "softbody sb noise01 jelly crystal — to be authored",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "SoftBody_sb_noise01_jelly_crystal"
+      ],
+      "stage": "draft",
+      "next": "S24"
+    },
+    {
+      "id": "S24",
+      "role": "DEMONSTRATE",
+      "concept": "softbody sb rd01 coral cloth — to be authored",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "SoftBody_sb_rd01_coral_cloth"
+      ],
+      "stage": "draft",
+      "next": "S25"
+    },
+    {
+      "id": "S25",
+      "role": "DEMONSTRATE",
+      "concept": "softbody sb rd02 stripes flag — to be authored",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "SoftBody_sb_rd02_stripes_flag"
+      ],
+      "stage": "draft",
+      "next": "S26"
+    },
+    {
+      "id": "S26",
+      "role": "DEMONSTRATE",
+      "concept": "softbody gl01 classic bulb — to be authored",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "SoftBody_gl01_classic_bulb"
+      ],
+      "stage": "draft",
+      "next": "S27"
+    },
+    {
+      "id": "S27",
+      "role": "DEMONSTRATE",
+      "concept": "softbody gl02 long bottle — to be authored",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "SoftBody_gl02_long_bottle"
+      ],
+      "stage": "draft",
+      "next": "S28"
+    },
+    {
+      "id": "S28",
+      "role": "DEMONSTRATE",
+      "concept": "softbody gl03 wide bowl — to be authored",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "SoftBody_gl03_wide_bowl"
+      ],
+      "stage": "draft",
+      "next": "S29"
+    },
+    {
+      "id": "S29",
+      "role": "DEMONSTRATE",
+      "concept": "softbody gl04 lopsided vase — to be authored",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "SoftBody_gl04_lopsided_vase"
+      ],
+      "stage": "draft",
+      "next": "S30"
+    },
+    {
+      "id": "S30",
+      "role": "DEMONSTRATE",
+      "concept": "softbody gl05 collapsed sag — to be authored",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "SoftBody_gl05_collapsed_sag"
+      ],
+      "stage": "draft",
+      "next": "S31"
+    },
+    {
+      "id": "S31",
+      "role": "DEMONSTRATE",
+      "concept": "softbody gm01 bottle in cylinder mould — to be authored",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "SoftBody_gm01_bottle_in_cylinder_mould"
+      ],
+      "stage": "draft",
+      "next": "S32"
+    },
+    {
+      "id": "S32",
+      "role": "DEMONSTRATE",
+      "concept": "softbody gm02 vase in tapered mould — to be authored",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "SoftBody_gm02_vase_in_tapered_mould"
+      ],
+      "stage": "draft",
+      "next": "S33"
+    },
+    {
+      "id": "S33",
+      "role": "DEMONSTRATE",
+      "concept": "softbody gm03 box in cube mould — to be authored",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "SoftBody_gm03_box_in_cube_mould"
+      ],
+      "stage": "draft",
+      "next": "S34"
+    },
+    {
+      "id": "S34",
+      "role": "SYNTHESIZE",
+      "concept": "softbody gm04 pressed onto sphere — to be authored",
+      "register": "synthesizing",
+      "intensity": "high",
+      "maps": [
+        "SoftBody_gm04_pressed_onto_sphere"
+      ],
+      "stage": "draft",
+      "next": "S35"
+    },
+    {
+      "id": "S35",
+      "role": "CHAMBER",
+      "concept": "the softbodies principle held — carried forward",
+      "register": "synthesizing",
+      "intensity": "high",
+      "maps": [],
+      "stage": "draft",
+      "note": "no map yet — assign a Chamber_<seq> map or absorb into the last map-beat",
+      "next": null
+    }
+  ]
+}

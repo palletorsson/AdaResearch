@@ -1,0 +1,1677 @@
+{
+  "spine": [
+    "primitives",
+    "transformation",
+    "array_tutorial",
+    "color",
+    "change",
+    "forces",
+    "wavefunctions",
+    "randomness",
+    "noise",
+    "cellularautomata",
+    "fractals",
+    "lsystems",
+    "proceduralgeneration",
+    "softbodies",
+    "isosurfaces",
+    "boolean_surfaces",
+    "swarmintelligence",
+    "machinelearning",
+    "graphtheory",
+    "foundationscrisis",
+    "qfeplaboratory",
+    "postfoundationscrisis"
+  ],
+  "punctum": {
+    "biome_kingdom_first": [
+      {
+        "spine_pos": 2,
+        "sequence": "array_tutorial",
+        "kingdom": "flower"
+      },
+      {
+        "spine_pos": 2,
+        "sequence": "array_tutorial",
+        "kingdom": "tree"
+      },
+      {
+        "spine_pos": 7,
+        "sequence": "randomness",
+        "kingdom": "fungus"
+      },
+      {
+        "spine_pos": 11,
+        "sequence": "lsystems",
+        "kingdom": "creature"
+      }
+    ],
+    "vegetation_density_jumps": [
+      {
+        "spine_pos": 2,
+        "sequence": "array_tutorial",
+        "from": 0.0,
+        "to": 0.2
+      },
+      {
+        "spine_pos": 3,
+        "sequence": "color",
+        "from": 0.2,
+        "to": 0.1
+      },
+      {
+        "spine_pos": 6,
+        "sequence": "wavefunctions",
+        "from": 0.15,
+        "to": 0.25
+      },
+      {
+        "spine_pos": 8,
+        "sequence": "noise",
+        "from": 0.3,
+        "to": 0.4
+      },
+      {
+        "spine_pos": 12,
+        "sequence": "proceduralgeneration",
+        "from": 0.7,
+        "to": 0.8
+      },
+      {
+        "spine_pos": 14,
+        "sequence": "isosurfaces",
+        "from": 0.85,
+        "to": 0.0
+      },
+      {
+        "spine_pos": 16,
+        "sequence": "swarmintelligence",
+        "from": 0.0,
+        "to": 0.9
+      }
+    ],
+    "terrain_shifts": [
+      {
+        "spine_pos": 0,
+        "sequence": "primitives",
+        "from": null,
+        "to": "flat"
+      },
+      {
+        "spine_pos": 8,
+        "sequence": "noise",
+        "from": "flat",
+        "to": "noise"
+      },
+      {
+        "spine_pos": 9,
+        "sequence": "cellularautomata",
+        "from": "noise",
+        "to": "growth"
+      },
+      {
+        "spine_pos": 12,
+        "sequence": "proceduralgeneration",
+        "from": "growth",
+        "to": "self_generating"
+      },
+      {
+        "spine_pos": 14,
+        "sequence": "isosurfaces",
+        "from": "self_generating",
+        "to": "voxel_marched"
+      },
+      {
+        "spine_pos": 15,
+        "sequence": "boolean_surfaces",
+        "from": "voxel_marched",
+        "to": "flat"
+      },
+      {
+        "spine_pos": 16,
+        "sequence": "swarmintelligence",
+        "from": "flat",
+        "to": "self_generating"
+      }
+    ],
+    "ambient_shifts": [
+      {
+        "spine_pos": 0,
+        "sequence": "primitives",
+        "from": null,
+        "to": "empty_lab"
+      },
+      {
+        "spine_pos": 2,
+        "sequence": "array_tutorial",
+        "from": "empty_lab",
+        "to": "perception_shift"
+      },
+      {
+        "spine_pos": 4,
+        "sequence": "change",
+        "from": "perception_shift",
+        "to": "calc_lab"
+      },
+      {
+        "spine_pos": 5,
+        "sequence": "forces",
+        "from": "calc_lab",
+        "to": "perception_shift"
+      },
+      {
+        "spine_pos": 7,
+        "sequence": "randomness",
+        "from": "perception_shift",
+        "to": "environmental_entropy"
+      },
+      {
+        "spine_pos": 9,
+        "sequence": "cellularautomata",
+        "from": "environmental_entropy",
+        "to": "ecology_emerges"
+      },
+      {
+        "spine_pos": 10,
+        "sequence": "fractals",
+        "from": "ecology_emerges",
+        "to": "recursive_world"
+      },
+      {
+        "spine_pos": 13,
+        "sequence": "softbodies",
+        "from": "recursive_world",
+        "to": "living_matter"
+      },
+      {
+        "spine_pos": 14,
+        "sequence": "isosurfaces",
+        "from": "living_matter",
+        "to": "empty_lab"
+      },
+      {
+        "spine_pos": 16,
+        "sequence": "swarmintelligence",
+        "from": "empty_lab",
+        "to": "collective_creatures"
+      },
+      {
+        "spine_pos": 17,
+        "sequence": "machinelearning",
+        "from": "collective_creatures",
+        "to": "adaptive_world"
+      },
+      {
+        "spine_pos": 18,
+        "sequence": "graphtheory",
+        "from": "adaptive_world",
+        "to": "tunable_becoming"
+      },
+      {
+        "spine_pos": 19,
+        "sequence": "foundationscrisis",
+        "from": "tunable_becoming",
+        "to": "contradictory_world"
+      },
+      {
+        "spine_pos": 20,
+        "sequence": "qfeplaboratory",
+        "from": "contradictory_world",
+        "to": "tunable_becoming"
+      }
+    ],
+    "capacity_jumps": [
+      {
+        "spine_pos": 0,
+        "sequence": "primitives",
+        "from": 0,
+        "to": 1
+      },
+      {
+        "spine_pos": 1,
+        "sequence": "transformation",
+        "from": 1,
+        "to": 2
+      },
+      {
+        "spine_pos": 2,
+        "sequence": "array_tutorial",
+        "from": 2,
+        "to": 3
+      },
+      {
+        "spine_pos": 4,
+        "sequence": "change",
+        "from": 3,
+        "to": 4
+      },
+      {
+        "spine_pos": 10,
+        "sequence": "fractals",
+        "from": 4,
+        "to": 5
+      },
+      {
+        "spine_pos": 16,
+        "sequence": "swarmintelligence",
+        "from": 5,
+        "to": 6
+      }
+    ],
+    "verbs_added": [
+      {
+        "spine_pos": 0,
+        "sequence": "primitives",
+        "verb": "observe"
+      },
+      {
+        "spine_pos": 0,
+        "sequence": "primitives",
+        "verb": "grab"
+      },
+      {
+        "spine_pos": 0,
+        "sequence": "primitives",
+        "verb": "snap"
+      },
+      {
+        "spine_pos": 1,
+        "sequence": "transformation",
+        "verb": "rotate_object"
+      },
+      {
+        "spine_pos": 1,
+        "sequence": "transformation",
+        "verb": "translate_object"
+      },
+      {
+        "spine_pos": 2,
+        "sequence": "array_tutorial",
+        "verb": "snap_place"
+      },
+      {
+        "spine_pos": 2,
+        "sequence": "array_tutorial",
+        "verb": "reorder"
+      },
+      {
+        "spine_pos": 3,
+        "sequence": "color",
+        "verb": "paint"
+      },
+      {
+        "spine_pos": 3,
+        "sequence": "color",
+        "verb": "shoot_color"
+      },
+      {
+        "spine_pos": 4,
+        "sequence": "change",
+        "verb": "trace"
+      },
+      {
+        "spine_pos": 4,
+        "sequence": "change",
+        "verb": "sustain"
+      },
+      {
+        "spine_pos": 5,
+        "sequence": "forces",
+        "verb": "push"
+      },
+      {
+        "spine_pos": 5,
+        "sequence": "forces",
+        "verb": "pull"
+      },
+      {
+        "spine_pos": 5,
+        "sequence": "forces",
+        "verb": "force_shield"
+      },
+      {
+        "spine_pos": 6,
+        "sequence": "wavefunctions",
+        "verb": "oscillate"
+      },
+      {
+        "spine_pos": 6,
+        "sequence": "wavefunctions",
+        "verb": "tune_frequency"
+      },
+      {
+        "spine_pos": 7,
+        "sequence": "randomness",
+        "verb": "randomize"
+      },
+      {
+        "spine_pos": 7,
+        "sequence": "randomness",
+        "verb": "entropy_trigger"
+      },
+      {
+        "spine_pos": 8,
+        "sequence": "noise",
+        "verb": "sculpt_terrain"
+      },
+      {
+        "spine_pos": 9,
+        "sequence": "cellularautomata",
+        "verb": "seed_life"
+      },
+      {
+        "spine_pos": 9,
+        "sequence": "cellularautomata",
+        "verb": "edit_rules"
+      },
+      {
+        "spine_pos": 10,
+        "sequence": "fractals",
+        "verb": "zoom_fractal"
+      },
+      {
+        "spine_pos": 10,
+        "sequence": "fractals",
+        "verb": "iterate"
+      },
+      {
+        "spine_pos": 11,
+        "sequence": "lsystems",
+        "verb": "write_rule"
+      },
+      {
+        "spine_pos": 11,
+        "sequence": "lsystems",
+        "verb": "branch_grow"
+      },
+      {
+        "spine_pos": 12,
+        "sequence": "proceduralgeneration",
+        "verb": "generate_world"
+      },
+      {
+        "spine_pos": 12,
+        "sequence": "proceduralgeneration",
+        "verb": "parameter_tune"
+      },
+      {
+        "spine_pos": 13,
+        "sequence": "softbodies",
+        "verb": "deform"
+      },
+      {
+        "spine_pos": 13,
+        "sequence": "softbodies",
+        "verb": "tune_lambda"
+      },
+      {
+        "spine_pos": 16,
+        "sequence": "swarmintelligence",
+        "verb": "swarm_command"
+      },
+      {
+        "spine_pos": 16,
+        "sequence": "swarmintelligence",
+        "verb": "embody_flock"
+      },
+      {
+        "spine_pos": 17,
+        "sequence": "machinelearning",
+        "verb": "train"
+      },
+      {
+        "spine_pos": 17,
+        "sequence": "machinelearning",
+        "verb": "evolve"
+      },
+      {
+        "spine_pos": 18,
+        "sequence": "graphtheory",
+        "verb": "connect_nodes"
+      },
+      {
+        "spine_pos": 18,
+        "sequence": "graphtheory",
+        "verb": "traverse_graph"
+      },
+      {
+        "spine_pos": 19,
+        "sequence": "foundationscrisis",
+        "verb": "hold_paradox"
+      },
+      {
+        "spine_pos": 19,
+        "sequence": "foundationscrisis",
+        "verb": "walk_impossible"
+      },
+      {
+        "spine_pos": 20,
+        "sequence": "qfeplaboratory",
+        "verb": "tune_phi"
+      },
+      {
+        "spine_pos": 20,
+        "sequence": "qfeplaboratory",
+        "verb": "tune_delta_e"
+      },
+      {
+        "spine_pos": 20,
+        "sequence": "qfeplaboratory",
+        "verb": "full_parameter_control"
+      },
+      {
+        "spine_pos": 21,
+        "sequence": "postfoundationscrisis",
+        "verb": "apply_limits"
+      }
+    ],
+    "hazard_unlocks": [
+      {
+        "spine_pos": 1,
+        "sequence": "transformation",
+        "hazard": "miura_crawler"
+      },
+      {
+        "spine_pos": 2,
+        "sequence": "array_tutorial",
+        "hazard": "gridagent"
+      },
+      {
+        "spine_pos": 3,
+        "sequence": "color",
+        "hazard": "kaleidocycle_enemy"
+      },
+      {
+        "spine_pos": 5,
+        "sequence": "forces",
+        "hazard": "kresling_spire"
+      },
+      {
+        "spine_pos": 5,
+        "sequence": "forces",
+        "hazard": "force_field"
+      },
+      {
+        "spine_pos": 5,
+        "sequence": "forces",
+        "hazard": "goomba_box"
+      },
+      {
+        "spine_pos": 5,
+        "sequence": "forces",
+        "hazard": "shell_roller"
+      },
+      {
+        "spine_pos": 5,
+        "sequence": "forces",
+        "hazard": "spring_hopper"
+      },
+      {
+        "spine_pos": 6,
+        "sequence": "wavefunctions",
+        "hazard": "waterbomb_enemy"
+      },
+      {
+        "spine_pos": 7,
+        "sequence": "randomness",
+        "hazard": "octapod_crawler"
+      },
+      {
+        "spine_pos": 7,
+        "sequence": "randomness",
+        "hazard": "plasma_critter"
+      },
+      {
+        "spine_pos": 9,
+        "sequence": "cellularautomata",
+        "hazard": "armadillo_droideka"
+      },
+      {
+        "spine_pos": 10,
+        "sequence": "fractals",
+        "hazard": "origami_droideka"
+      },
+      {
+        "spine_pos": 11,
+        "sequence": "lsystems",
+        "hazard": "scissor_stalker"
+      },
+      {
+        "spine_pos": 12,
+        "sequence": "proceduralgeneration",
+        "hazard": "sphere_droideka"
+      },
+      {
+        "spine_pos": 13,
+        "sequence": "softbodies",
+        "hazard": "waterbomb_hopper"
+      }
+    ],
+    "personality_shifts": [
+      {
+        "spine_pos": 3,
+        "sequence": "color",
+        "foe": "miura_crawler",
+        "from": "foe",
+        "to": "wary"
+      },
+      {
+        "spine_pos": 5,
+        "sequence": "forces",
+        "foe": "miura_crawler",
+        "from": "wary",
+        "to": "neutral"
+      },
+      {
+        "spine_pos": 5,
+        "sequence": "forces",
+        "foe": "kaleidocycle_enemy",
+        "from": "foe",
+        "to": "wary"
+      },
+      {
+        "spine_pos": 6,
+        "sequence": "wavefunctions",
+        "foe": "kresling_spire",
+        "from": "foe",
+        "to": "wary"
+      },
+      {
+        "spine_pos": 7,
+        "sequence": "randomness",
+        "foe": "kaleidocycle_enemy",
+        "from": "wary",
+        "to": "neutral"
+      },
+      {
+        "spine_pos": 7,
+        "sequence": "randomness",
+        "foe": "waterbomb_enemy",
+        "from": "foe",
+        "to": "wary"
+      },
+      {
+        "spine_pos": 8,
+        "sequence": "noise",
+        "foe": "octapod_crawler",
+        "from": "foe",
+        "to": "wary"
+      },
+      {
+        "spine_pos": 9,
+        "sequence": "cellularautomata",
+        "foe": "miura_crawler",
+        "from": "neutral",
+        "to": "curious"
+      },
+      {
+        "spine_pos": 9,
+        "sequence": "cellularautomata",
+        "foe": "kresling_spire",
+        "from": "wary",
+        "to": "neutral"
+      },
+      {
+        "spine_pos": 9,
+        "sequence": "cellularautomata",
+        "foe": "octapod_crawler",
+        "from": "wary",
+        "to": "neutral"
+      },
+      {
+        "spine_pos": 10,
+        "sequence": "fractals",
+        "foe": "waterbomb_enemy",
+        "from": "wary",
+        "to": "neutral"
+      },
+      {
+        "spine_pos": 10,
+        "sequence": "fractals",
+        "foe": "armadillo_droideka",
+        "from": "foe",
+        "to": "wary"
+      },
+      {
+        "spine_pos": 11,
+        "sequence": "lsystems",
+        "foe": "plasma_critter",
+        "from": "foe",
+        "to": "neutral"
+      },
+      {
+        "spine_pos": 11,
+        "sequence": "lsystems",
+        "foe": "origami_droideka",
+        "from": "foe",
+        "to": "wary"
+      },
+      {
+        "spine_pos": 12,
+        "sequence": "proceduralgeneration",
+        "foe": "scissor_stalker",
+        "from": "foe",
+        "to": "wary"
+      },
+      {
+        "spine_pos": 12,
+        "sequence": "proceduralgeneration",
+        "foe": "armadillo_droideka",
+        "from": "wary",
+        "to": "neutral"
+      },
+      {
+        "spine_pos": 13,
+        "sequence": "softbodies",
+        "foe": "origami_droideka",
+        "from": "wary",
+        "to": "neutral"
+      },
+      {
+        "spine_pos": 13,
+        "sequence": "softbodies",
+        "foe": "sphere_droideka",
+        "from": "foe",
+        "to": "wary"
+      },
+      {
+        "spine_pos": 16,
+        "sequence": "swarmintelligence",
+        "foe": "miura_crawler",
+        "from": "curious",
+        "to": "friend"
+      },
+      {
+        "spine_pos": 16,
+        "sequence": "swarmintelligence",
+        "foe": "kaleidocycle_enemy",
+        "from": "neutral",
+        "to": "curious"
+      },
+      {
+        "spine_pos": 16,
+        "sequence": "swarmintelligence",
+        "foe": "octapod_crawler",
+        "from": "neutral",
+        "to": "curious"
+      },
+      {
+        "spine_pos": 17,
+        "sequence": "machinelearning",
+        "foe": "kresling_spire",
+        "from": "neutral",
+        "to": "curious"
+      },
+      {
+        "spine_pos": 17,
+        "sequence": "machinelearning",
+        "foe": "waterbomb_enemy",
+        "from": "neutral",
+        "to": "curious"
+      },
+      {
+        "spine_pos": 17,
+        "sequence": "machinelearning",
+        "foe": "armadillo_droideka",
+        "from": "neutral",
+        "to": "curious"
+      },
+      {
+        "spine_pos": 18,
+        "sequence": "graphtheory",
+        "foe": "waterbomb_hopper",
+        "from": "foe",
+        "to": "friend"
+      },
+      {
+        "spine_pos": 18,
+        "sequence": "graphtheory",
+        "foe": "sphere_droideka",
+        "from": "wary",
+        "to": "friend"
+      },
+      {
+        "spine_pos": 18,
+        "sequence": "graphtheory",
+        "foe": "scissor_stalker",
+        "from": "wary",
+        "to": "friend"
+      },
+      {
+        "spine_pos": 18,
+        "sequence": "graphtheory",
+        "foe": "origami_droideka",
+        "from": "neutral",
+        "to": "friend"
+      },
+      {
+        "spine_pos": 18,
+        "sequence": "graphtheory",
+        "foe": "plasma_critter",
+        "from": "neutral",
+        "to": "friend"
+      },
+      {
+        "spine_pos": 19,
+        "sequence": "foundationscrisis",
+        "foe": "plasma_critter",
+        "from": "friend",
+        "to": "curious"
+      },
+      {
+        "spine_pos": 19,
+        "sequence": "foundationscrisis",
+        "foe": "scissor_stalker",
+        "from": "friend",
+        "to": "neutral"
+      },
+      {
+        "spine_pos": 19,
+        "sequence": "foundationscrisis",
+        "foe": "origami_droideka",
+        "from": "friend",
+        "to": "curious"
+      },
+      {
+        "spine_pos": 20,
+        "sequence": "qfeplaboratory",
+        "foe": "waterbomb_hopper",
+        "from": "friend",
+        "to": "curious"
+      },
+      {
+        "spine_pos": 20,
+        "sequence": "qfeplaboratory",
+        "foe": "sphere_droideka",
+        "from": "friend",
+        "to": "neutral"
+      },
+      {
+        "spine_pos": 21,
+        "sequence": "postfoundationscrisis",
+        "foe": "scissor_stalker",
+        "from": "neutral",
+        "to": "curious"
+      },
+      {
+        "spine_pos": 21,
+        "sequence": "postfoundationscrisis",
+        "foe": "sphere_droideka",
+        "from": "neutral",
+        "to": "curious"
+      }
+    ],
+    "catalyst_mode_shifts": [
+      {
+        "spine_pos": 0,
+        "sequence": "primitives",
+        "from": null,
+        "to": "primitives"
+      },
+      {
+        "spine_pos": 1,
+        "sequence": "transformation",
+        "from": "primitives",
+        "to": "transformation"
+      },
+      {
+        "spine_pos": 2,
+        "sequence": "array_tutorial",
+        "from": "transformation",
+        "to": "array"
+      },
+      {
+        "spine_pos": 3,
+        "sequence": "color",
+        "from": "array",
+        "to": "chromatic"
+      },
+      {
+        "spine_pos": 4,
+        "sequence": "change",
+        "from": "chromatic",
+        "to": "change"
+      },
+      {
+        "spine_pos": 5,
+        "sequence": "forces",
+        "from": "change",
+        "to": "forces"
+      },
+      {
+        "spine_pos": 6,
+        "sequence": "wavefunctions",
+        "from": "forces",
+        "to": "waveform"
+      },
+      {
+        "spine_pos": 7,
+        "sequence": "randomness",
+        "from": "waveform",
+        "to": "chaos"
+      },
+      {
+        "spine_pos": 9,
+        "sequence": "cellularautomata",
+        "from": "chaos",
+        "to": "cellular"
+      },
+      {
+        "spine_pos": 10,
+        "sequence": "fractals",
+        "from": "cellular",
+        "to": "fractal"
+      },
+      {
+        "spine_pos": 11,
+        "sequence": "lsystems",
+        "from": "fractal",
+        "to": "branching"
+      },
+      {
+        "spine_pos": 14,
+        "sequence": "isosurfaces",
+        "from": "branching",
+        "to": "isosurface"
+      },
+      {
+        "spine_pos": 15,
+        "sequence": "boolean_surfaces",
+        "from": "isosurface",
+        "to": "csg"
+      },
+      {
+        "spine_pos": 16,
+        "sequence": "swarmintelligence",
+        "from": "csg",
+        "to": "swarm"
+      }
+    ],
+    "spawner_behavior_shifts": [
+      {
+        "spine_pos": 0,
+        "sequence": "primitives",
+        "from": null,
+        "to": "dormant"
+      },
+      {
+        "spine_pos": 2,
+        "sequence": "array_tutorial",
+        "from": "dormant",
+        "to": "active"
+      },
+      {
+        "spine_pos": 4,
+        "sequence": "change",
+        "from": "active",
+        "to": "dormant"
+      },
+      {
+        "spine_pos": 5,
+        "sequence": "forces",
+        "from": "dormant",
+        "to": "active"
+      },
+      {
+        "spine_pos": 9,
+        "sequence": "cellularautomata",
+        "from": "active",
+        "to": "aggressive"
+      },
+      {
+        "spine_pos": 14,
+        "sequence": "isosurfaces",
+        "from": "aggressive",
+        "to": "dormant"
+      },
+      {
+        "spine_pos": 16,
+        "sequence": "swarmintelligence",
+        "from": "dormant",
+        "to": "aggressive"
+      }
+    ]
+  },
+  "creatures": {
+    "miura_crawler": {
+      "first_appearance": 1,
+      "transitions": [
+        {
+          "pos": 1,
+          "from": null,
+          "to": "foe"
+        },
+        {
+          "pos": 3,
+          "from": "foe",
+          "to": "wary"
+        },
+        {
+          "pos": 5,
+          "from": "wary",
+          "to": "neutral"
+        },
+        {
+          "pos": 9,
+          "from": "neutral",
+          "to": "curious"
+        },
+        {
+          "pos": 16,
+          "from": "curious",
+          "to": "friend"
+        }
+      ],
+      "state_at_pos": [
+        "absent",
+        "foe",
+        "foe",
+        "wary",
+        "wary",
+        "neutral",
+        "neutral",
+        "neutral",
+        "neutral",
+        "curious",
+        "curious",
+        "curious",
+        "curious",
+        "curious",
+        "curious",
+        "curious",
+        "friend",
+        "friend",
+        "friend",
+        "friend",
+        "friend",
+        "friend"
+      ],
+      "final_state": "friend"
+    },
+    "gridagent": {
+      "first_appearance": 2,
+      "transitions": [
+        {
+          "pos": 2,
+          "from": null,
+          "to": "foe"
+        }
+      ],
+      "state_at_pos": [
+        "absent",
+        "absent",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "foe"
+      ],
+      "final_state": "foe"
+    },
+    "kaleidocycle_enemy": {
+      "first_appearance": 3,
+      "transitions": [
+        {
+          "pos": 3,
+          "from": null,
+          "to": "foe"
+        },
+        {
+          "pos": 5,
+          "from": "foe",
+          "to": "wary"
+        },
+        {
+          "pos": 7,
+          "from": "wary",
+          "to": "neutral"
+        },
+        {
+          "pos": 16,
+          "from": "neutral",
+          "to": "curious"
+        }
+      ],
+      "state_at_pos": [
+        "absent",
+        "absent",
+        "absent",
+        "foe",
+        "foe",
+        "wary",
+        "wary",
+        "neutral",
+        "neutral",
+        "neutral",
+        "neutral",
+        "neutral",
+        "neutral",
+        "neutral",
+        "neutral",
+        "neutral",
+        "curious",
+        "curious",
+        "curious",
+        "curious",
+        "curious",
+        "curious"
+      ],
+      "final_state": "curious"
+    },
+    "kresling_spire": {
+      "first_appearance": 5,
+      "transitions": [
+        {
+          "pos": 5,
+          "from": null,
+          "to": "foe"
+        },
+        {
+          "pos": 6,
+          "from": "foe",
+          "to": "wary"
+        },
+        {
+          "pos": 9,
+          "from": "wary",
+          "to": "neutral"
+        },
+        {
+          "pos": 17,
+          "from": "neutral",
+          "to": "curious"
+        }
+      ],
+      "state_at_pos": [
+        "absent",
+        "absent",
+        "absent",
+        "absent",
+        "absent",
+        "foe",
+        "wary",
+        "wary",
+        "wary",
+        "neutral",
+        "neutral",
+        "neutral",
+        "neutral",
+        "neutral",
+        "neutral",
+        "neutral",
+        "neutral",
+        "curious",
+        "curious",
+        "curious",
+        "curious",
+        "curious"
+      ],
+      "final_state": "curious"
+    },
+    "force_field": {
+      "first_appearance": 5,
+      "transitions": [
+        {
+          "pos": 5,
+          "from": null,
+          "to": "foe"
+        }
+      ],
+      "state_at_pos": [
+        "absent",
+        "absent",
+        "absent",
+        "absent",
+        "absent",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "foe"
+      ],
+      "final_state": "foe"
+    },
+    "goomba_box": {
+      "first_appearance": 5,
+      "transitions": [
+        {
+          "pos": 5,
+          "from": null,
+          "to": "foe"
+        }
+      ],
+      "state_at_pos": [
+        "absent",
+        "absent",
+        "absent",
+        "absent",
+        "absent",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "foe"
+      ],
+      "final_state": "foe"
+    },
+    "shell_roller": {
+      "first_appearance": 5,
+      "transitions": [
+        {
+          "pos": 5,
+          "from": null,
+          "to": "foe"
+        }
+      ],
+      "state_at_pos": [
+        "absent",
+        "absent",
+        "absent",
+        "absent",
+        "absent",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "foe"
+      ],
+      "final_state": "foe"
+    },
+    "spring_hopper": {
+      "first_appearance": 5,
+      "transitions": [
+        {
+          "pos": 5,
+          "from": null,
+          "to": "foe"
+        }
+      ],
+      "state_at_pos": [
+        "absent",
+        "absent",
+        "absent",
+        "absent",
+        "absent",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "foe"
+      ],
+      "final_state": "foe"
+    },
+    "waterbomb_enemy": {
+      "first_appearance": 6,
+      "transitions": [
+        {
+          "pos": 6,
+          "from": null,
+          "to": "foe"
+        },
+        {
+          "pos": 7,
+          "from": "foe",
+          "to": "wary"
+        },
+        {
+          "pos": 10,
+          "from": "wary",
+          "to": "neutral"
+        },
+        {
+          "pos": 17,
+          "from": "neutral",
+          "to": "curious"
+        }
+      ],
+      "state_at_pos": [
+        "absent",
+        "absent",
+        "absent",
+        "absent",
+        "absent",
+        "absent",
+        "foe",
+        "wary",
+        "wary",
+        "wary",
+        "neutral",
+        "neutral",
+        "neutral",
+        "neutral",
+        "neutral",
+        "neutral",
+        "neutral",
+        "curious",
+        "curious",
+        "curious",
+        "curious",
+        "curious"
+      ],
+      "final_state": "curious"
+    },
+    "octapod_crawler": {
+      "first_appearance": 7,
+      "transitions": [
+        {
+          "pos": 7,
+          "from": null,
+          "to": "foe"
+        },
+        {
+          "pos": 8,
+          "from": "foe",
+          "to": "wary"
+        },
+        {
+          "pos": 9,
+          "from": "wary",
+          "to": "neutral"
+        },
+        {
+          "pos": 16,
+          "from": "neutral",
+          "to": "curious"
+        }
+      ],
+      "state_at_pos": [
+        "absent",
+        "absent",
+        "absent",
+        "absent",
+        "absent",
+        "absent",
+        "absent",
+        "foe",
+        "wary",
+        "neutral",
+        "neutral",
+        "neutral",
+        "neutral",
+        "neutral",
+        "neutral",
+        "neutral",
+        "curious",
+        "curious",
+        "curious",
+        "curious",
+        "curious",
+        "curious"
+      ],
+      "final_state": "curious"
+    },
+    "plasma_critter": {
+      "first_appearance": 7,
+      "transitions": [
+        {
+          "pos": 7,
+          "from": null,
+          "to": "foe"
+        },
+        {
+          "pos": 11,
+          "from": "foe",
+          "to": "neutral"
+        },
+        {
+          "pos": 18,
+          "from": "neutral",
+          "to": "friend"
+        },
+        {
+          "pos": 19,
+          "from": "friend",
+          "to": "curious"
+        }
+      ],
+      "state_at_pos": [
+        "absent",
+        "absent",
+        "absent",
+        "absent",
+        "absent",
+        "absent",
+        "absent",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "neutral",
+        "neutral",
+        "neutral",
+        "neutral",
+        "neutral",
+        "neutral",
+        "neutral",
+        "friend",
+        "curious",
+        "curious",
+        "curious"
+      ],
+      "final_state": "curious"
+    },
+    "armadillo_droideka": {
+      "first_appearance": 9,
+      "transitions": [
+        {
+          "pos": 9,
+          "from": null,
+          "to": "foe"
+        },
+        {
+          "pos": 10,
+          "from": "foe",
+          "to": "wary"
+        },
+        {
+          "pos": 12,
+          "from": "wary",
+          "to": "neutral"
+        },
+        {
+          "pos": 17,
+          "from": "neutral",
+          "to": "curious"
+        }
+      ],
+      "state_at_pos": [
+        "absent",
+        "absent",
+        "absent",
+        "absent",
+        "absent",
+        "absent",
+        "absent",
+        "absent",
+        "absent",
+        "foe",
+        "wary",
+        "wary",
+        "neutral",
+        "neutral",
+        "neutral",
+        "neutral",
+        "neutral",
+        "curious",
+        "curious",
+        "curious",
+        "curious",
+        "curious"
+      ],
+      "final_state": "curious"
+    },
+    "origami_droideka": {
+      "first_appearance": 10,
+      "transitions": [
+        {
+          "pos": 10,
+          "from": null,
+          "to": "foe"
+        },
+        {
+          "pos": 11,
+          "from": "foe",
+          "to": "wary"
+        },
+        {
+          "pos": 13,
+          "from": "wary",
+          "to": "neutral"
+        },
+        {
+          "pos": 18,
+          "from": "neutral",
+          "to": "friend"
+        },
+        {
+          "pos": 19,
+          "from": "friend",
+          "to": "curious"
+        }
+      ],
+      "state_at_pos": [
+        "absent",
+        "absent",
+        "absent",
+        "absent",
+        "absent",
+        "absent",
+        "absent",
+        "absent",
+        "absent",
+        "absent",
+        "foe",
+        "wary",
+        "wary",
+        "neutral",
+        "neutral",
+        "neutral",
+        "neutral",
+        "neutral",
+        "friend",
+        "curious",
+        "curious",
+        "curious"
+      ],
+      "final_state": "curious"
+    },
+    "scissor_stalker": {
+      "first_appearance": 11,
+      "transitions": [
+        {
+          "pos": 11,
+          "from": null,
+          "to": "foe"
+        },
+        {
+          "pos": 12,
+          "from": "foe",
+          "to": "wary"
+        },
+        {
+          "pos": 18,
+          "from": "wary",
+          "to": "friend"
+        },
+        {
+          "pos": 19,
+          "from": "friend",
+          "to": "neutral"
+        },
+        {
+          "pos": 21,
+          "from": "neutral",
+          "to": "curious"
+        }
+      ],
+      "state_at_pos": [
+        "absent",
+        "absent",
+        "absent",
+        "absent",
+        "absent",
+        "absent",
+        "absent",
+        "absent",
+        "absent",
+        "absent",
+        "absent",
+        "foe",
+        "wary",
+        "wary",
+        "wary",
+        "wary",
+        "wary",
+        "wary",
+        "friend",
+        "neutral",
+        "neutral",
+        "curious"
+      ],
+      "final_state": "curious"
+    },
+    "sphere_droideka": {
+      "first_appearance": 12,
+      "transitions": [
+        {
+          "pos": 12,
+          "from": null,
+          "to": "foe"
+        },
+        {
+          "pos": 13,
+          "from": "foe",
+          "to": "wary"
+        },
+        {
+          "pos": 18,
+          "from": "wary",
+          "to": "friend"
+        },
+        {
+          "pos": 20,
+          "from": "friend",
+          "to": "neutral"
+        },
+        {
+          "pos": 21,
+          "from": "neutral",
+          "to": "curious"
+        }
+      ],
+      "state_at_pos": [
+        "absent",
+        "absent",
+        "absent",
+        "absent",
+        "absent",
+        "absent",
+        "absent",
+        "absent",
+        "absent",
+        "absent",
+        "absent",
+        "absent",
+        "foe",
+        "wary",
+        "wary",
+        "wary",
+        "wary",
+        "wary",
+        "friend",
+        "friend",
+        "neutral",
+        "curious"
+      ],
+      "final_state": "curious"
+    },
+    "waterbomb_hopper": {
+      "first_appearance": 13,
+      "transitions": [
+        {
+          "pos": 13,
+          "from": null,
+          "to": "foe"
+        },
+        {
+          "pos": 18,
+          "from": "foe",
+          "to": "friend"
+        },
+        {
+          "pos": 20,
+          "from": "friend",
+          "to": "curious"
+        }
+      ],
+      "state_at_pos": [
+        "absent",
+        "absent",
+        "absent",
+        "absent",
+        "absent",
+        "absent",
+        "absent",
+        "absent",
+        "absent",
+        "absent",
+        "absent",
+        "absent",
+        "absent",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "foe",
+        "friend",
+        "friend",
+        "curious",
+        "curious"
+      ],
+      "final_state": "curious"
+    }
+  }
+}

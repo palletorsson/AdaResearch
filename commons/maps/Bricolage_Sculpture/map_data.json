@@ -15,11 +15,7 @@
       "difficulty": "intermediate",
       "category": "bricolage",
       "estimated_time": "6-7 minutes",
-      "learning_objectives": [
-        "Sculpture as balance discovery",
-        "Counterweight and tension",
-        "Meaning through relation"
-      ]
+      "learning_objectives": ["Sculpture as balance discovery","Counterweight and tension","Meaning through relation"]
     }
   },
   "utility_definitions": {
@@ -41,31 +37,15 @@
     "summary": "Bricolage_Sculpture - Balance Without Blueprint",
     "layout": "13Ã—13 gallery space with sculpture demonstrations",
     "objective": "Discover sculpture through balanceâ€”no function except standing, meaning emerges from relations",
-    "key_elements": [
-      "Balanced sculpture examples",
-      "Counterweight demonstration",
-      "Interactive balance builder"
-    ]
+    "key_elements": ["Balanced sculpture examples","Counterweight demonstration","Interactive balance builder"]
   },
   "lighting": {
-    "ambient_color": [
-      0.4,
-      0.4,
-      0.45
-    ],
+    "ambient_color": [0.4,0.4,0.45],
     "ambient_energy": 0.6,
     "directional_light": {
       "enabled": true,
-      "direction": [
-        -0.4,
-        -0.7,
-        -0.4
-      ],
-      "color": [
-        1.0,
-        0.95,
-        0.9
-      ],
+      "direction": [-0.4,-0.7,-0.4],
+      "color": [1.0,0.95,0.9],
       "energy": 1.2
     }
   },
@@ -78,11 +58,7 @@
     "initial_tile_visibility": "visible",
     "background": {
       "type": "sky",
-      "color": [
-        0.2,
-        0.2,
-        0.25
-      ]
+      "color": [0.2,0.2,0.25]
     }
   },
   "layers": {

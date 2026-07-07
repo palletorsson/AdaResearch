@@ -132,7 +132,7 @@ var decomp_label: Label3D
 var decomp_root: Node3D
 
 # ── Info panel ──
-var info_label: Label3D
+var info_label: Label
 
 # ── Ground (kept for temperature tinting) ──
 var ground_mesh: MeshInstance3D

@@ -1,0 +1,89 @@
+{
+	"pass_id": "2026-05-13T10-50-00_phase-synthesis",
+	"proposals": [
+		{
+			"pass_id": "2026-05-13T10-50-00_phase-synthesis",
+			"move_id": "qfeplaboratory.unlocks-0",
+			"change": "qfeplaboratory.unlocks",
+			"from_state": "add postfoundationscrisis",
+			"to_state": "(same)",
+			"impact": "bug-fix on unlock graph",
+			"rationale_excerpt": "spell, agent, shift, rotate, shrink, paint, rainbow-arc, context-tint, grid-stamp, pattern, sustain (from change)\n- oscillation: drive (forces), oscillate (waves)\n- E_entropy: scatter (random), flow (noise)\n- λ_edge: evolve (CA), split (fractals), grow (lsystems), seed (procgen), flock (swarm)\n- integration: flex (softbody), learn (ML)\n- relation (graphtheory hinge): connect\n\nAt synthesis, **no new affordance**. Instead, the bracelet **gains a synthesis mode** where the player can combine ANY two affordances. The catalyst now does composition — the player builds their own gesture vocabulary.\n\n## 7. Reorder candidates\n\n| change | from | to | impact |\n|---|---|---|---|\n| **qfeplaboratory.unlocks** | add postfoundationscrisis | (same) | bug-fix on unlock graph |\n| **postfoundationscrisis.unlocks** | `[\"qfeplaboratory\"]` (backward) | `[]` (terminal in thesis arc) | bug-fix |\n| **Synthesis phase truth** | unwritten | written (6c above) | additive |\n| **PostCrisis_Synthesis artifact** | empty | edge_as_ground_capstone | structural — fills the spine's *literal* last map |\n| **5 SCAFFOLD maps in post** | empty | populated with 3 artifacts each ≈ 14 new artifacts | structural — phase 2 buil",
+			"status": "applied",
+			"applied_at": "2026-05-13T10:55:48",
+			"applied_by": "backfill (tonight session, pre-substrate)",
+			"pre_existing": true,
+			"notes": "qfeplaboratory.unlocks gained postfoundationscrisis"
+		},
+		{
+			"pass_id": "2026-05-13T10-50-00_phase-synthesis",
+			"move_id": "postfoundationscrisis.unlocks-1",
+			"change": "postfoundationscrisis.unlocks",
+			"from_state": "`[\"qfeplaboratory\"]` (backward)",
+			"to_state": "`[]` (terminal in thesis arc)",
+			"impact": "bug-fix",
+			"rationale_excerpt": "spell, agent, shift, rotate, shrink, paint, rainbow-arc, context-tint, grid-stamp, pattern, sustain (from change)\n- oscillation: drive (forces), oscillate (waves)\n- E_entropy: scatter (random), flow (noise)\n- λ_edge: evolve (CA), split (fractals), grow (lsystems), seed (procgen), flock (swarm)\n- integration: flex (softbody), learn (ML)\n- relation (graphtheory hinge): connect\n\nAt synthesis, **no new affordance**. Instead, the bracelet **gains a synthesis mode** where the player can combine ANY two affordances. The catalyst now does composition — the player builds their own gesture vocabulary.\n\n## 7. Reorder candidates\n\n| change | from | to | impact |\n|---|---|---|---|\n| **qfeplaboratory.unlocks** | add postfoundationscrisis | (same) | bug-fix on unlock graph |\n| **postfoundationscrisis.unlocks** | `[\"qfeplaboratory\"]` (backward) | `[]` (terminal in thesis arc) | bug-fix |\n| **Synthesis phase truth** | unwritten | written (6c above) | additive |\n| **PostCrisis_Synthesis artifact** | empty | edge_as_ground_capstone | structural — fills the spine's *literal* last map |\n| **5 SCAFFOLD maps in post** | empty | populated with 3 artifacts each ≈ 14 new artifacts | structural — phase 2 buil",
+			"status": "applied",
+			"applied_at": "2026-05-13T10:55:48",
+			"applied_by": "backfill (tonight session, pre-substrate)",
+			"pre_existing": true,
+			"notes": "postfoundationscrisis.unlocks set to [] (terminal)"
+		},
+		{
+			"pass_id": "2026-05-13T10-50-00_phase-synthesis",
+			"move_id": "synthesis-phase-truth-2",
+			"change": "Synthesis phase truth",
+			"from_state": "unwritten",
+			"to_state": "written (6c above)",
+			"impact": "additive",
+			"rationale_excerpt": "spell, agent, shift, rotate, shrink, paint, rainbow-arc, context-tint, grid-stamp, pattern, sustain (from change)\n- oscillation: drive (forces), oscillate (waves)\n- E_entropy: scatter (random), flow (noise)\n- λ_edge: evolve (CA), split (fractals), grow (lsystems), seed (procgen), flock (swarm)\n- integration: flex (softbody), learn (ML)\n- relation (graphtheory hinge): connect\n\nAt synthesis, **no new affordance**. Instead, the bracelet **gains a synthesis mode** where the player can combine ANY two affordances. The catalyst now does composition — the player builds their own gesture vocabulary.\n\n## 7. Reorder candidates\n\n| change | from | to | impact |\n|---|---|---|---|\n| **qfeplaboratory.unlocks** | add postfoundationscrisis | (same) | bug-fix on unlock graph |\n| **postfoundationscrisis.unlocks** | `[\"qfeplaboratory\"]` (backward) | `[]` (terminal in thesis arc) | bug-fix |\n| **Synthesis phase truth** | unwritten | written (6c above) | additive |\n| **PostCrisis_Synthesis artifact** | empty | edge_as_ground_capstone | structural — fills the spine's *literal* last map |\n| **5 SCAFFOLD maps in post** | empty | populated with 3 artifacts each ≈ 14 new artifacts | structural — phase 2 buil",
+			"status": "applied",
+			"applied_at": "2026-05-13T10:55:48",
+			"applied_by": "backfill (tonight session, pre-substrate)",
+			"pre_existing": true,
+			"notes": "all 7 phase truth statements written into curriculum_spine.phases"
+		},
+		{
+			"pass_id": "2026-05-13T10-50-00_phase-synthesis",
+			"move_id": "postcrisis_synthesis-artifact-3",
+			"change": "PostCrisis_Synthesis artifact",
+			"from_state": "empty",
+			"to_state": "edge_as_ground_capstone",
+			"impact": "structural — fills the spine's *literal* last map",
+			"rationale_excerpt": "spell, agent, shift, rotate, shrink, paint, rainbow-arc, context-tint, grid-stamp, pattern, sustain (from change)\n- oscillation: drive (forces), oscillate (waves)\n- E_entropy: scatter (random), flow (noise)\n- λ_edge: evolve (CA), split (fractals), grow (lsystems), seed (procgen), flock (swarm)\n- integration: flex (softbody), learn (ML)\n- relation (graphtheory hinge): connect\n\nAt synthesis, **no new affordance**. Instead, the bracelet **gains a synthesis mode** where the player can combine ANY two affordances. The catalyst now does composition — the player builds their own gesture vocabulary.\n\n## 7. Reorder candidates\n\n| change | from | to | impact |\n|---|---|---|---|\n| **qfeplaboratory.unlocks** | add postfoundationscrisis | (same) | bug-fix on unlock graph |\n| **postfoundationscrisis.unlocks** | `[\"qfeplaboratory\"]` (backward) | `[]` (terminal in thesis arc) | bug-fix |\n| **Synthesis phase truth** | unwritten | written (6c above) | additive |\n| **PostCrisis_Synthesis artifact** | empty | edge_as_ground_capstone | structural — fills the spine's *literal* last map |\n| **5 SCAFFOLD maps in post** | empty | populated with 3 artifacts each ≈ 14 new artifacts | structural — phase 2 buil",
+			"status": "applied",
+			"applied_at": "2026-05-13T10:55:48",
+			"applied_by": "backfill (tonight session, pre-substrate)",
+			"pre_existing": true,
+			"notes": "edge_as_ground_capstone built and wired into PostCrisis_Synthesis map"
+		},
+		{
+			"pass_id": "2026-05-13T10-50-00_phase-synthesis",
+			"move_id": "5-scaffold-maps-in-post-4",
+			"change": "5 SCAFFOLD maps in post",
+			"from_state": "empty",
+			"to_state": "populated with 3 artifacts each ≈ 14 new artifacts",
+			"impact": "structural — phase 2 build",
+			"rationale_excerpt": "spell, agent, shift, rotate, shrink, paint, rainbow-arc, context-tint, grid-stamp, pattern, sustain (from change)\n- oscillation: drive (forces), oscillate (waves)\n- E_entropy: scatter (random), flow (noise)\n- λ_edge: evolve (CA), split (fractals), grow (lsystems), seed (procgen), flock (swarm)\n- integration: flex (softbody), learn (ML)\n- relation (graphtheory hinge): connect\n\nAt synthesis, **no new affordance**. Instead, the bracelet **gains a synthesis mode** where the player can combine ANY two affordances. The catalyst now does composition — the player builds their own gesture vocabulary.\n\n## 7. Reorder candidates\n\n| change | from | to | impact |\n|---|---|---|---|\n| **qfeplaboratory.unlocks** | add postfoundationscrisis | (same) | bug-fix on unlock graph |\n| **postfoundationscrisis.unlocks** | `[\"qfeplaboratory\"]` (backward) | `[]` (terminal in thesis arc) | bug-fix |\n| **Synthesis phase truth** | unwritten | written (6c above) | additive |\n| **PostCrisis_Synthesis artifact** | empty | edge_as_ground_capstone | structural — fills the spine's *literal* last map |\n| **5 SCAFFOLD maps in post** | empty | populated with 3 artifacts each ≈ 14 new artifacts | structural — phase 2 buil",
+			"status": "applied",
+			"applied_at": "2026-05-13T10:55:48",
+			"applied_by": "backfill (tonight session, pre-substrate)",
+			"pre_existing": true,
+			"notes": "12 new artifacts built across the 5 SCAFFOLD maps in postfoundationscrisis"
+		},
+		{
+			"pass_id": "2026-05-13T10-50-00_phase-synthesis",
+			"move_id": "qfep_term_compass-5",
+			"change": "qfep_term_compass",
+			"from_state": "absent",
+			"to_state": "added at QFEP_Synthesis",
+			"impact": "retroactive recognition",
+			"rationale_excerpt": "spell, agent, shift, rotate, shrink, paint, rainbow-arc, context-tint, grid-stamp, pattern, sustain (from change)\n- oscillation: drive (forces), oscillate (waves)\n- E_entropy: scatter (random), flow (noise)\n- λ_edge: evolve (CA), split (fractals), grow (lsystems), seed (procgen), flock (swarm)\n- integration: flex (softbody), learn (ML)\n- relation (graphtheory hinge): connect\n\nAt synthesis, **no new affordance**. Instead, the bracelet **gains a synthesis mode** where the player can combine ANY two affordances. The catalyst now does composition — the player builds their own gesture vocabulary.\n\n## 7. Reorder candidates\n\n| change | from | to | impact |\n|---|---|---|---|\n| **qfeplaboratory.unlocks** | add postfoundationscrisis | (same) | bug-fix on unlock graph |\n| **postfoundationscrisis.unlocks** | `[\"qfeplaboratory\"]` (backward) | `[]` (terminal in thesis arc) | bug-fix |\n| **Synthesis phase truth** | unwritten | written (6c above) | additive |\n| **PostCrisis_Synthesis artifact** | empty | edge_as_ground_capstone | structural — fills the spine's *literal* last map |\n| **5 SCAFFOLD maps in post** | empty | populated with 3 artifacts each ≈ 14 new artifacts | structural — phase 2 buil",
+			"status": "applied",
+			"applied_at": "2026-05-13T10:55:48",
+			"applied_by": "backfill (tonight session, pre-substrate)",
+			"pre_existing": true,
+			"notes": "qfep_term_compass built and added to QFEP_Synthesis artifact_groups"
+		}
+	]
+}

@@ -1,0 +1,304 @@
+{
+  "report_date": "2026-05-11",
+  "generated": "2026-05-11T10:26:00",
+  "period": "2026-05-04 to 2026-05-11",
+  "trigger": "scheduled-task: ada-weekly-audit",
+  "previous_report": "doc/reports/weekly_breath_report_2026-05-04.json",
+  "total_breaths_in_period": 3,
+  "breaths_in_period": [
+    "2026-05-05T07:30",
+    "2026-05-06T07:04",
+    "2026-05-09T08:25"
+  ],
+  "note": "Three breaths this week, same cadence as last week (Apr-28/Apr-30/May-03). Pipeline_avg flat at 5.43 across all three — sixth, seventh, and eighth consecutive flat breaths since 2026-04-30. STALL CONDITION TRIGGERED: global_avg has not improved in 7 days.",
+
+  "pipeline_snapshot": {
+    "global_avg_pipeline": 5.43,
+    "global_avg_pipeline_last_week": 5.43,
+    "global_avg_pipeline_delta": 0.0,
+    "stall_period_status": "STALLED — pipeline_avg flat at 5.43 for 11 days (since 2026-04-30T07:18). 8 consecutive flat breaths logged.",
+    "sequences_at_stage_7_polish": ["randomness"],
+    "sequences_at_stage_6_vr_testing": [
+      "primitives", "transformation", "color", "forces", "wavefunctions",
+      "noise", "cellularautomata", "fractals", "lsystems", "proceduralgeneration",
+      "isosurfaces", "swarmintelligence", "machinelearning", "foundationscrisis",
+      "qfeplaboratory", "postfoundationscrisis", "graphtheory"
+    ],
+    "sequences_at_stage_2_documentation": [
+      "array_tutorial (18% doc, 60% art)",
+      "softbodies (29% doc, 64% art)"
+    ],
+    "sequences_at_stage_1_structure": ["boolean_surfaces"],
+    "advancement_this_week": [],
+    "advancement_this_week_note": "No pipeline-stage advances this week. Last advancement was 2026-04-30 (isosurfaces 3->6, color 2->6). All 17 stage-6 sequences require VR testing to advance; this is the structural ceiling."
+  },
+
+  "release_gates": {
+    "A_sequence_contract": "PASS",
+    "B_artifact_registry": "FAIL",
+    "C_map_validation": "PASS",
+    "D_lab_progression": "PASS",
+    "all_passing": false,
+    "passing_count": 3,
+    "passing_count_last_week": 3,
+    "regression_detected": true,
+    "regression_details": {
+      "gate": "B (Artifact Registry Integrity)",
+      "unresolved_scene_files": 14,
+      "missing_scene_path": 0,
+      "missing_map_ready": 0,
+      "missing_include_in_map_data": 0,
+      "interpretation": "NEW failure shape — 14 unresolved_scene_files. Different from the Apr-16 / May-04 missing_scene_path family. Suggests scene files were renamed or moved without registry update. Gate B passed 2026-05-05 through 2026-05-09 (4/4) and now fails again — third Gate B regression in five weeks (Apr-16, May-04, May-11).",
+      "third_recurrence": true,
+      "evidence_for_preventive_tooling": "Pattern under 2-evidence watch in 2026-05-05 evening harvest now crosses the 3-evidence threshold. A registry-add helper or pre-commit guard becomes a higher-priority skill_evolution proposal."
+    },
+    "grade_A_maps": 810,
+    "grade_B_maps": 127,
+    "grade_C_maps": 583,
+    "grade_F_maps": 0,
+    "grade_A_delta_vs_last_week": "-1050 (1860 -> 810). Likely a validator counting change rather than 1050 maps degrading. Cached RELEASE_GATES.json from 2026-05-06 still shows grade_A=1862; live run today shows 810. Reconcile before reading deltas.",
+    "undeclared_map_folders_delta": "Dropped from 2253 cached to 490 live — same investigation needed.",
+    "week_delta": "FLAT 3/4 -> 3/4 (Gate B regressed twice within the week: was 4/4 on May-05/06/09, now 3/4 on May-11)"
+  },
+
+  "garden_health": {
+    "total_artifacts": 2106,
+    "voiced": 953,
+    "voice_coverage_pct": 45,
+    "embodied": 330,
+    "embodiment_rate_pct": 34,
+    "phantom_limbs": 789,
+    "voiced_last_week": 923,
+    "voiced_delta": 30,
+    "voice_coverage_pct_last_week": 43,
+    "voice_coverage_pct_delta": 2,
+    "state_transitions_this_week": [
+      "randomness: SCATTERED -> GROWING (2026-05-09, two-state jump — 71.2% voiced + 46% embodied)"
+    ],
+    "scattered_count_change_note": "wavefunctions still SCATTERED but climbing (now ~70/105 voiced, +6 over week). randomness moved up out of SCATTERED.",
+    "growth_quality": "Steady. +30 voices via map-presence-targeting flow (validated 20/20 across 2026-05-06 and 2026-05-09). Sustainable cadence."
+  },
+
+  "sequences_improved": [
+    {
+      "id": "randomness",
+      "garden_delta": "SCATTERED -> GROWING (52/73 voiced, 46% embodied)",
+      "mechanism": "11 map-presence-targeted @identity adds + 3 cascade reveals",
+      "breath_refs": ["2026-05-09T08:25"]
+    },
+    {
+      "id": "wavefunctions",
+      "garden_delta": "+6 voices (still SCATTERED, but closer to threshold)",
+      "mechanism": "Map-presence targeting on artifacts placed in WaveFunctions_* maps",
+      "breath_refs": ["2026-05-06T07:04", "2026-05-09T08:25"]
+    }
+  ],
+
+  "total_delta": {
+    "pipeline_avg_start": 5.43,
+    "pipeline_avg_end": 5.43,
+    "pipeline_delta": 0.0,
+    "pipeline_delta_note": "FLAT WEEK. 11 days since last advance. All 17 stage-6 spine sequences require VR testing — AI cannot advance them further. Only randomness sits at stage 7 (polish). Two off-spine sequences (array_tutorial, softbodies) sit at stage 2 with documentation gaps — AI-actionable but not on the spine.",
+    "release_gates_start": "3/4 passing",
+    "release_gates_end": "3/4 passing",
+    "release_gates_delta": "0 net (regressed-recovered-regressed cycle within week)",
+    "garden_voiced_start": 923,
+    "garden_voiced_end": 953,
+    "garden_voiced_delta": 30,
+    "garden_state_transitions": 1,
+    "biggest_single_advance": "+15 voices in one breath (2026-05-09T08:25), randomness SCATTERED -> GROWING"
+  },
+
+  "week_over_week_comparison": {
+    "last_week_period": "2026-04-27 to 2026-05-04",
+    "this_week_period": "2026-05-04 to 2026-05-11",
+    "pipeline_avg": {
+      "last_week_delta": 0.38,
+      "this_week_delta": 0.0,
+      "interpretation": "Last week broke a 10-breath plateau via scoped sub-stage-6 fixes. This week shows the VR ceiling reasserting at 5.43 — the predicted outcome from the 2026-05-04 audit (`expected_next_stall_avg: 5.5-5.7 hard ceiling near 6.0 until VR testing happens`). Forecast was accurate."
+    },
+    "release_gates": {
+      "last_week_delta": "-1 (4/4 -> 3/4)",
+      "this_week_delta": "0 net (3/4 -> 4/4 mid-week -> 3/4 end-of-week)",
+      "interpretation": "Gate B is now in a regress-fix-regress cycle. Third Gate B regression in ~5 weeks (Apr-16, May-04, May-11). Different sub-metric this time (unresolved_scene_files=14 vs missing_scene_path/map_ready family). Suggests broader Gate B health issue, not a single failure mode."
+    },
+    "garden_health": {
+      "last_week_voiced_delta": 36,
+      "this_week_voiced_delta": 30,
+      "interpretation": "Slight slowdown (+36 -> +30) but consistent. Map-presence-targeting flow holding 100% in identity_writing. Diminishing returns from low-hanging voicing work — most cheap wins are taken; future gains need cascade events or new GDScript files."
+    },
+    "state_transitions": {
+      "last_week": 2,
+      "this_week": 1,
+      "interpretation": "Down from 2 to 1. randomness's two-state jump (SCATTERED -> GROWING) was the only transition this week. Pattern matches last week's exhaustion of cheap state transitions."
+    }
+  },
+
+  "skill_effectiveness_changes": {
+    "direct_file_edit": {
+      "total_calls_cumulative": "from 75 last week, growing",
+      "success_rate": 1.0,
+      "status": "Still primary tool."
+    },
+    "registry_repair": {
+      "total_calls_cumulative": 21,
+      "success_rate": 1.0,
+      "week_calls": "Gate B fix on 2026-05-05",
+      "status": "Effective when applied; recurrence suggests upstream guard needed."
+    },
+    "identity_writing": {
+      "total_calls_cumulative": 49,
+      "success_rate": 0.959,
+      "week_calls": "20 (6 on 2026-05-06 + 14 on 2026-05-09)",
+      "status": "Map-presence-targeting flow has been 20/20 across 2026-05-06 and 2026-05-09. The flow IS the fix for prop-001."
+    },
+    "scene_repair": {
+      "total_calls_cumulative": 1,
+      "success_rate": 1.0,
+      "week_calls": 0,
+      "status": "Not called this week. May need second invocation for Gate B unresolved_scene_files."
+    },
+    "ada-breather": {
+      "total_calls_cumulative": "still 2 full breaths logged in cumulative; evolve-only mode used 2026-05-05 evening",
+      "success_rate": 1.0,
+      "week_calls": "3 full breaths + 1 evolve-only",
+      "status": "Cadence stable. Dry-run mode (today) confirms VR-bottleneck diagnosis."
+    },
+    "emerging_pattern": "Gate B is regress-prone (3 occurrences in 5 weeks, two different failure shapes). The map-presence-targeting flow has hardened (20/20). Pipeline ceiling at 5.43 is now confirmed structural — only stage-7 polish on randomness or VR testing can advance it.",
+    "new_skill_promotion_threshold_crossed": "Preventive tooling pattern (Gate B regression watch) crossed 3-evidence threshold this week. Prior occurrences: 2026-04-16, 2026-05-04. Today's 2026-05-11 unresolved_scene_files regression is the third confirmed instance."
+  },
+
+  "proposals_pending_review": [
+    {
+      "id": "prop-001",
+      "skill": "ada-breather",
+      "status": "proposed (likely retire)",
+      "tldr": "Garden identity targeting must verify artifact placement in TARGET sequence maps, not gallery maps.",
+      "age_days": 21,
+      "urgency": "low — map-presence-targeting flow (.claude/flows/garden-multiplier-triage.json or successor) has 20/20 success across 2026-05-06 and 2026-05-09. Recommend RETIRE/CLOSE on next session: the flow IS the fix.",
+      "file": "doc/reports/skill_evolution_proposals.json"
+    },
+    {
+      "id": "prop-002 (proposed by this audit)",
+      "skill": "ada-breather + registry tools",
+      "status": "should-be-created",
+      "tldr": "Add a Gate B pre-commit guard or registry-add helper that injects map_ready/include_in_map_data defaults AND validates scene_path resolution before commit.",
+      "evidence": "3 Gate B regressions in 5 weeks (2026-04-16, 2026-05-04, 2026-05-11) on different sub-metrics. Pattern crossed 3-evidence threshold this week.",
+      "expected_improvement": "Reduce Gate B regression rate from once-per-1.7-weeks to near-zero. Recover ~1 breath of effort per regression cycle.",
+      "next_step": "Human reviewer should consider running /ada-skill-updater to formalize."
+    }
+  ],
+
+  "stall_analysis": {
+    "stall_detected": true,
+    "stall_condition": "global_avg improvement (pipeline) over 7 days",
+    "7_day_pipeline_delta": 0.0,
+    "7_day_pipeline_window": "2026-05-04 (5.43) -> 2026-05-11 (5.43)",
+    "verdict": "STALL CONFIRMED. Pipeline_avg has been flat at 5.43 for 11 days and 8 consecutive logged breaths since 2026-04-30T07:18. This is the structural VR-testing ceiling that was predicted in last week's audit.",
+    "root_cause_analysis": {
+      "primary_cause": "VR-testing bottleneck. 17 of 19 spine sequences sit at stage 6 (vr_testing). Stage 6 cannot be advanced by AI work alone — it requires a human-in-headset session with desktop_feedback bridge entries.",
+      "secondary_cause": "Of the 2 remaining sequences, randomness is already at stage 7 (polish) and incremental polish work doesn't advance global_avg further. boolean_surfaces is empty (stage 1) — creating starter maps WOULD raise global_avg slightly but the scorer averages 21 sequences so the lever is small.",
+      "tertiary_cause": "Two off-spine sequences (array_tutorial, softbodies) sit at stage 2. Advancing them through stage 3 would raise the 21-sequence global_avg by ~0.10. AI-actionable.",
+      "non_cause": "Not a tooling failure. Not a skill failure. Not a cadence failure (3 breaths this week is healthy). The scorer is honest."
+    },
+    "stall_history_update": {
+      "previous_stall": "5.05 for 10 breaths (Apr-18 to Apr-28)",
+      "previous_stall_broken_at": "2026-04-30T07:18",
+      "previous_stall_break_method": "scoped registry/doc fixes on the only 2 sub-stage-6 spine sequences (color, isosurfaces)",
+      "current_stall_start": "2026-04-30T07:18 (no further advance after this peak)",
+      "current_stall_duration_days": 11,
+      "current_stall_duration_breaths": 8,
+      "current_stall_value": 5.43,
+      "current_stall_break_path_options": [
+        "OPTION A (HUMAN VR): Walk one spine sequence in headset, write feedback via desktop bridge, mark stage 7 advance on that sequence. Estimated lift: +0.05 per sequence walked.",
+        "OPTION B (AI, EXPAND DENOMINATOR): Advance array_tutorial and softbodies through stage 3-6 via documentation + artifact work. Estimated lift: +0.10-0.20 on 21-sequence global_avg.",
+        "OPTION C (AI, FILL EMPTY): Create starter map_data.json files for boolean_surfaces (still stage 1) and resourcemanagement (empty in heat map). Estimated lift: +0.05.",
+        "OPTION D (AI, POLISH RANDOMNESS): Advance randomness from stage 7 (0% polish) toward 100% polish via fresh captures, doc updates. Estimated lift: marginal until other sequences also reach stage 7."
+      ],
+      "recommended_break_path": "OPTION A is the structurally correct fix (the bottleneck is VR-testing). OPTION B is the cheapest AI-only fallback if VR session is not available this week."
+    },
+    "is_stall_worth_alarm": "YES, per scheduled-task definition. Pipeline_avg has not improved in 7 days. But context: this is an EXPECTED stall — predicted in the 2026-05-04 audit (`If pipeline_avg stays at 5.43 for another 5 days, escalate to actual stall analysis. Likely cause will be: no remaining non-VR levers.`). The forecast was correct."
+  },
+
+  "key_discoveries_this_week": [
+    "Map-presence-targeting flow validated at 20/20 success across two consecutive breaths (2026-05-06: 6/6, 2026-05-09: 14/14). prop-001's gallery-mistargeting pattern is now reliably prevented by the flow — the proposal is effectively retired.",
+    "randomness made a two-state jump (SCATTERED -> GROWING) without passing through REACHING, because embodiment was already > 20% when the voicing threshold was crossed. State transitions are gated by both metrics independently.",
+    "Heat map decay implementation (2026-05-09): heat_map_generator now filters status==resolved discoveries. 3 entries marked resolved in LOD_DISCOVERIES. Heat map total dropped from ~12-15 items to 9 stable items.",
+    "Gate B regression crossed the 3-evidence threshold this week (Apr-16, May-04, May-11). The third instance uses a new sub-metric (unresolved_scene_files=14) rather than the missing_scene_path family — suggesting the underlying issue is registry/scene-file drift broadly, not a single specific check.",
+    "Pipeline ceiling at 5.43 is confirmed structural. 11 days flat. Forecast from 2026-05-04 audit was accurate. The path forward is human VR testing (Option A) or expanding the scored denominator by advancing the two off-spine stage-2 sequences (Option B)."
+  ],
+
+  "recommendations_for_next_week": [
+    "ESCALATE: Schedule a VR session (Option A) to walk at least one spine sequence end-to-end with desktop_feedback bridge active. This is the only path to break the 5.43 ceiling.",
+    "FALLBACK (AI-only): Push array_tutorial or softbodies through stage 3 by writing missing documentation. Both are at stage 2 with doc% in the 18-29% range — 5-10 doc files would advance one or both sequences. Estimated lift: +0.10 on global_avg.",
+    "RESTORE Gate B: 14 unresolved_scene_files needs investigation. Check whether scenes were renamed/moved without registry update. Apply scene_repair pattern (success rate 1.0) to each entry.",
+    "PROMOTE preventive tooling: Gate B regression hit 3-evidence threshold. Open a formal proposal (or apply directly) for a registry-add helper or pre-commit guard that injects defaults and validates scene_path resolution.",
+    "RETIRE prop-001: Map-presence-targeting flow has 20/20 success across two breaths. Close prop-001 as superseded by the flow.",
+    "Investigate validator counting change: grade_A jumped from 1862 (May-06 cached) to 810 (May-11 live). undeclared_map_folders jumped from 2253 to 490. Either a counting fix or a baseline drift. Either way, Gate C numbers need reconciliation before week-over-week reading.",
+    "Continue garden push on wavefunctions (still SCATTERED at ~70/105) — one map-presence breath could push it through the GROWING threshold."
+  ],
+
+  "breather_dry_run_work_plan": {
+    "mode": "dry-run",
+    "trajectory": "STALLED (pipeline flat 5.43 for 11 days) / FLAT (release gates 3/4 net unchanged but cycling) / SLOWING (garden +30 vs +36 last week)",
+    "focus": "auto-selected (FOCUS_VECTOR primary unknown — assuming gate-recovery + stall-mitigation + garden continuation)",
+    "cooling_filter": "Gate B repair pattern attempted 2026-05-05 (succeeded then regressed). Same registry_repair skill applies but to a different sub-metric this time — NOT cooled. tscn uid path drift (60° heat) already addressed 2026-05-03 — cooled for branchinggrowthalgorithmcontinued but the broader 14 unresolved_scene_files may include new cases.",
+    "items_selected": [
+      {
+        "rank": 1,
+        "item": "gate_b_unresolved_scene_files_fix",
+        "temperature": 80,
+        "reason": "Gate B regressed AGAIN with a new sub-metric (unresolved_scene_files: 14). Third Gate B regression in 5 weeks. The 4/4 -> 3/4 backslide undoes 2026-05-05 morning's repair work. High-confidence repair pattern (scene_repair has 100% success rate on 1 prior call; registry_repair has 100% across 21 calls).",
+        "action": "Enumerate the 14 unresolved scene files via verbose run_release_gates output. For each: verify scene file exists at the registered path; if not, locate the renamed/moved file and update the registry; if scene was deleted, remove the registry entry. Then re-run gates to confirm.",
+        "dispatch": "registry_repair + scene_repair + direct_file_edit",
+        "expected_outcome": "Gate B -> PASS, all 4 release gates passing again. Cumulative scene_repair count: 1 -> ~15."
+      },
+      {
+        "rank": 2,
+        "item": "array_tutorial_documentation_push",
+        "temperature": 70,
+        "reason": "Stall-mitigation path (Option B). array_tutorial sits at stage 2 with 18% doc, 60% art across 44 maps. Writing 5-10 missing blurb/intent files would advance it to stage 3, lifting global_avg by ~0.05 on the 21-sequence denominator. This is the cheapest AI-only stall-break lever available.",
+        "action": "Run a coverage check on commons/maps/Array_*/ for missing blurb.md and intent.md. Write 5-10 doc files for the most under-documented maps. Re-run pipeline scorer.",
+        "dispatch": "documentation_writing + direct_file_edit",
+        "expected_outcome": "array_tutorial: stage 2 -> 3 (doc % crosses 50% threshold). global_avg: 5.43 -> ~5.48."
+      },
+      {
+        "rank": 3,
+        "item": "wavefunctions_garden_voicing_continued",
+        "temperature": 60,
+        "reason": "Garden push on the largest remaining SCATTERED sequence with .gd files available. ~70/105 voiced now (was ~64 two weeks ago). One more map-presence batch (5-10 voices) could push past 70% threshold into GROWING. Flow has 20/20 success across two recent breaths.",
+        "action": "Run garden_listener with map-presence filter for wavefunctions. Apply @identity to 5-10 voiceless artifacts that appear in WaveFunctions_* map interactables layers AND have apply_grid_config (cascade trigger).",
+        "dispatch": "identity_writing + direct_file_edit",
+        "expected_outcome": "wavefunctions: SCATTERED -> GROWING (or higher if cascade fires). Garden voiced: 953 -> ~963."
+      },
+      {
+        "rank": 4,
+        "item": "softbodies_documentation_push",
+        "temperature": 55,
+        "reason": "Second stall-mitigation lever (Option B). softbodies at stage 2 with 29% doc, 64% art across 34 maps. Less urgent than array_tutorial but same pattern — doc gap is the only blocker. Defer if rank-1 takes longer than expected.",
+        "action": "Same as rank 2 but for commons/maps/Softbodies_*/ (or sequence-defined map names).",
+        "dispatch": "documentation_writing + direct_file_edit",
+        "expected_outcome": "softbodies: stage 2 -> 3 contingent on doc% crossing threshold. global_avg: +~0.05 cumulative with rank 2."
+      },
+      {
+        "rank": 5,
+        "item": "validator_counting_reconciliation",
+        "temperature": 50,
+        "reason": "Grade-A maps dropped 1862 -> 810 and undeclared_map_folders dropped 2253 -> 490 between cached and live release gates. Either a counting fix or a baseline drift. Until this is resolved, week-over-week Gate C numbers are unreliable. Tooling investigation.",
+        "action": "git log on validate_map_all.py and audit_sequence_contract.py since 2026-05-06. Identify any counting changes. Document in a brief reconciliation note.",
+        "dispatch": "tool_bug_fix + verify",
+        "expected_outcome": "Confidence in Gate C deltas restored. Pre/post-change counts documented for future audits."
+      }
+    ],
+    "cooled_items": [
+      {"item": "isosurfaces / color stage advance", "reason": "Already advanced 2026-04-30. No further AI lever — at stage 6 awaiting VR testing."},
+      {"item": "tscn uid path drift (single case)", "reason": "branchinggrowthalgorithmcontinued/.tscn fixed 2026-05-03. May overlap with rank-1 unresolved_scene_files — handle as part of that batch, not as a separate item."}
+    ],
+    "skipped_due_to_5_item_cap": [
+      {"item": "boolean_surfaces_starter_structure", "reason": "Carried over from last week (rank 5 in 2026-05-04 plan, not executed). Still 50° heat. Lower lift than array_tutorial/softbodies because it's an empty sequence — needs maps, docs, AND artifacts."},
+      {"item": "randomness_polish_capture", "reason": "Randomness is at stage 7 but polish % is 0. Fresh captures + doc updates would advance polish but lift on global_avg is tiny (1/21 of any sub-progress). Defer until other sequences reach stage 7."},
+      {"item": "prop-001_retirement", "reason": "Non-code housekeeping. Map-presence flow has 20/20 success. Update skill_evolution_proposals.json next session, not in a breath."}
+    ],
+    "dispatch_summary": "If full breath executed: 5 items, 3 dispatching to AI skills, 1 to investigation, 1 to documentation. Projected outcome: Gate B 4/4, global_avg 5.43 -> ~5.50, garden voiced 953 -> ~963, one wavefunctions state transition."
+  }
+}

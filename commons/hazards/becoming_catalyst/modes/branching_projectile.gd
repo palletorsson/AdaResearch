@@ -1,4 +1,5 @@
 # BranchingProjectile.gd
+# verb: grow
 # L-system seed that branches repeatedly as it flies forward.
 # Each segment branches into 2-3 children at narrow angles — a growing tree.
 # At terminal depth or on hit, grows a real DNA-based tree via TreeMorphology.

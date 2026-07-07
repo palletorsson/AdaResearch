@@ -1,4 +1,14 @@
 # BoxBeam.gd - Hollow rectangular beam/tube
+#
+# @identity
+# essence: a hollow rectangular beam — a portal frame whose walkable opening is defined by its wall thickness
+# desire: learner reads the frame as a boundary they can pass through, where the emptiness is the whole point
+# critical_parameter: thickness against width/height — how much solid remains once the opening is subtracted
+# triggers: builds its beam mesh + collision on ready; rebuilds via update_beam when dimensions change
+# emerges: the understanding that a frame is defined by what it removes — the hole is designed, not left over
+# needs: [builds hollow beam + collision [has], missing a live handle to resize the opening in place]
+# relationships: a thickened line bent into a closed loop; kin to the portal/limit motifs and boxframe
+# truth: a frame is a boundary you can pass through — the hollow is the point, the solid only holds it open
 extends MeshInstance3D
 
 @export_group("Box Profile Dimensions")

@@ -7,12 +7,12 @@
 </style>
 <rect width="366" height="226" fill="#1a1a1f"/>
 <text class="title" x="14" y="20">lambda_slider — dressing room (plan)</text>
-<text class="subtitle" x="14" y="36">3×3 footing, anchor=[1,1]</text>
+<text class="subtitle" x="14" y="36">3×3 footing, anchor=[1.0,1.0]</text>
 <rect x="50" y="50" width="22" height="22" fill="#4a4a52" stroke="#0d0d12" stroke-width="0.4"/>
 <rect x="72" y="50" width="22" height="22" fill="#4a4a52" stroke="#0d0d12" stroke-width="0.4"/>
 <rect x="94" y="50" width="22" height="22" fill="#4a4a52" stroke="#0d0d12" stroke-width="0.4"/>
 <rect x="50" y="72" width="22" height="22" fill="#4a4a52" stroke="#0d0d12" stroke-width="0.4"/>
-<rect x="72" y="72" width="22" height="22" fill="#2a2a32" stroke="#0d0d12" stroke-width="0.4"/>
+<rect x="72" y="72" width="22" height="22" fill="#3a3a42" stroke="#0d0d12" stroke-width="0.4"/>
 <rect x="94" y="72" width="22" height="22" fill="#4a4a52" stroke="#0d0d12" stroke-width="0.4"/>
 <rect x="50" y="94" width="22" height="22" fill="#4a4a52" stroke="#0d0d12" stroke-width="0.4"/>
 <rect x="72" y="94" width="22" height="22" fill="#4a4a52" stroke="#0d0d12" stroke-width="0.4"/>
@@ -21,10 +21,10 @@
 <text x="83.0" y="95.1" class="label">lambda_slider</text>
 <text class="subtitle" x="140" y="50">approach: south  exit: north</text>
 <text class="subtitle" x="140" y="64">rotations: 0, 90, 180, 270</text>
-<text class="subtitle" x="140" y="78">footprint: [1, 1, 2.5]</text>
+<text class="subtitle" x="140" y="78">footprint: [1.0, 1.0, 2.5]</text>
 <text class="subtitle" x="140" y="100">extras:</text>
-<text class="legend" x="140" y="114">  3t @ (-1, 0, 0) "λ"</text>
-<text class="legend" x="140" y="126">  tt @ (0, 1, 0) [lambda_explain]</text>
+<text class="legend" x="140" y="114">  3t @ (-1.0, 0.0, 0.0) "λ"</text>
+<text class="legend" x="140" y="126">  tt @ (0.0, 1.0, 0.0) [lambda_explain]</text>
 <circle cx="83.0" cy="61.0" r="3.5" fill="#d8a04b" stroke="#fff" stroke-width="0.5"/>
 <text x="83.0" y="55.0" class="label">3t</text>
 <circle cx="105.0" cy="83.0" r="3.5" fill="#3b6cb0" stroke="#fff" stroke-width="0.5"/>

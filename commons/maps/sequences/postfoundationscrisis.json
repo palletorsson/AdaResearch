@@ -7,13 +7,11 @@
 	  "qfep_connection": "After the foundations crisis, these maps explore what happens when incompleteness, bias, and rhizomatic thinking become design materials rather than problems to solve.",
 	  "formula": "limits → critical practice → new structures",
 	  "description": "The sequence that lands the thesis. The foundations crisis showed that every formal system has an outside. These maps walk what becomes possible once you stop demanding completeness: ethics as architecture, paraconsistent engineering, situated computation, the commons as a response to incompleteness, rhizomatic networks, molecular design, and a synthesis that treats the edge as ground rather than limit.",
-	  "layer": "integration",
+	  "layer": "synthesis",
 	  "prerequisites": [
         "foundationscrisis"
 	  ],
-	  "unlocks": [
-        "qfeplaboratory"
-	  ],
+	  "unlocks": [],
 	  "difficulty": "advanced",
 	  "estimated_time": "30-40 minutes",
 	  "learning_objectives": [
@@ -65,30 +63,30 @@
 		{
 		  "map": "CriticalAlgorithms_Applied_Ethics",
 		  "position": "response",
-		  "artifacts": [],
-		  "size_budget": "compact_only",
-		  "rationale": "SCAFFOLD — phase 2 will add ethics-after-Gödel artifacts (ethical-design clipboard, excluded-class visualizer, room-shape demonstrator)"
+		  "artifacts": ["ethical_design_clipboard", "excluded_class_visualizer", "room_shape_demonstrator"],
+		  "size_budget": "mixed",
+		  "rationale": "Three ethics-after-Gödel artifacts: the clipboard names the principles, the visualizer shows what classifiers miss, the room demonstrator shows that furniture layout is moral."
 		},
 		{
 		  "map": "SpeculativeComputation_Paraconsistent_Engineering",
 		  "position": "principle",
-		  "artifacts": [],
+		  "artifacts": ["merge_conflict_visualizer", "cap_theorem_walk", "florensky_in_production"],
 		  "size_budget": "compact_only",
-		  "rationale": "SCAFFOLD — phase 2 will add paraconsistent-logic artifacts (merge-conflict visualizer, CAP-theorem walk, Florensky-in-production demonstrator)"
+		  "rationale": "Paraconsistent logic as architecture: the merge-conflict junction holds two branches, the CAP triangle cycles trade-offs, Florensky's triptych refuses to resolve."
 		},
 		{
 		  "map": "SpeculativeComputation_Situated_Computation",
 		  "position": "principle",
-		  "artifacts": [],
+		  "artifacts": ["situated_sensor", "locatable_knowledge_station"],
 		  "size_budget": "compact_only",
-		  "rationale": "SCAFFOLD — phase 2 will add position-dependent computation artifacts (situated-sensor demo, locatable-knowledge station)"
+		  "rationale": "Two artifacts for placed knowledge: the sensor reports its own coordinates, the desk tags each claim with its source."
 		},
 		{
 		  "map": "SpeculativeComputation_Collective_Knowledge",
 		  "position": "principle",
-		  "artifacts": [],
-		  "size_budget": "compact_only",
-		  "rationale": "SCAFFOLD — phase 2 will add commons/distributed-cognition artifacts (wiki-fragment station, peer-edit ledger, citation-graph node)"
+		  "artifacts": ["wiki_fragment_station", "peer_edit_ledger", "citation_graph_node"],
+		  "size_budget": "mixed",
+		  "rationale": "Three commons artifacts: the wiki gathers fragments, the ledger accumulates edits without overwriting, the citation graph shows that a claim's truth lives in its relations."
 		},
 		{
 		  "map": "SpeculativeComputation_Rhizome_Network",
@@ -107,9 +105,9 @@
 		{
 		  "map": "PostCrisis_Synthesis",
 		  "position": "synthesis",
-		  "artifacts": [],
-		  "size_budget": "compact_only",
-		  "rationale": "SCAFFOLD — phase 2 will add the capstone: central raised platform with 7 stations ringing it, each recalling one prior map; the edge-as-ground artifact"
+		  "artifacts": ["edge_as_ground_capstone"],
+		  "size_budget": "environment",
+		  "rationale": "The spine's literal final artifact: raised central platform with rotating glass disc 'The edge is the ground' surrounded by seven stations, each recalling one prior map of the postfoundation arc. Thesis-landing closes here."
 		}
 	  ]
 	}

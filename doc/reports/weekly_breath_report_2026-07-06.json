@@ -1,0 +1,161 @@
+{
+  "report_date": "2026-07-06",
+  "generated": "2026-07-06T09:00:00",
+  "period": "2026-06-29 to 2026-07-06",
+  "trigger": "scheduled-task: ada-weekly-audit",
+  "previous_report": "doc/reports/weekly_breath_report_2026-06-29.json",
+  "mode": "audit (dry-run breather + release gates + trajectory diff)",
+
+  "headline": "SEVENTH CONSECUTIVE FLAT WEEK AT THE STRUCTURAL CEILING, but the biggest visible-content jump in a month. Head-sum did not move (6.0909 last week -> 6.0909 this week, delta 0.000) and the literal 'global_avg has not improved in 7 days' criterion is TRIGGERED again; trajectory stall_detected=True is correctly set. The binding constraint is unchanged: all 21 non-complete spine sequences sit at HEAD 6 (vr_testing), advanceable ONLY by a human VR walk. What DID move this week is voice coverage, which jumped +7 percentage points (54% -> 61%) — the largest weekly voice gain in the recent record. That jump is mostly a MEASUREMENT-HONESTY correction, not new bodies: the 07-04 breath fixed garden_listener.find_gd to resolve lookup-name -> registry scene_path -> .tscn script -> .gd (instead of stem-only matching), surfacing +161 artifacts that always carried @identity but were under-counted. The primitives voice lever, extended from sibling to non-sibling/shared scripts across 07-04/07-05, is now near-exhausted (1 scriptless scene-only tail remains). Gates hold green (4/4 PASS); the breath engine stayed 100% healthy (0 failures across the period).",
+
+  "total_breaths_in_period": 6,
+  "breaths_in_period": [
+    "2026-07-01T09:10",
+    "2026-07-02T09:05",
+    "2026-07-03T09:12",
+    "2026-07-04T09:00",
+    "2026-07-05T09:00",
+    "2026-07-06T09:00"
+  ],
+  "note_breath_count": "6 logged morning breaths (vs 5 last period). Every one posted delta 0.0 on head-sum and 0 failures. All energy went to the primitives subtitle/truth-beat layer (07-01/07-02/07-03, sweep completed 10/10) and then the voice-fill lever + its measurement-honesty fix (07-04/07-05). 2026-07-06 is the audit-day recompute.",
+
+  "pipeline_snapshot": {
+    "global_avg_pipeline_head_sum_now": 6.0909,
+    "global_avg_pipeline_head_sum_last_week": 6.0909,
+    "global_avg_pipeline_delta_week_over_week": 0.0,
+    "computation_now": "(21 spine sequences at stage 6 * 6) + (randomness at stage 7 * 7) = 126 + 7 = 133; 133 / 22 = 6.0909",
+    "sequences_at_stage_7_polish": ["randomness"],
+    "sequences_below_stage_6": [],
+    "all_22_sequences_pass_str_doc_art_map_val": true,
+    "regression_status": "CLEAN. No tracked spine sequence regressed this week. All 22 sequences pass Structure/Doc/Artifacts/Maps/Validation; 21 held at stage-6 vr_testing, randomness at stage-7.",
+    "all_spine_at_head_6_vr_testing": true
+  },
+
+  "trajectory_diff_vs_last_week": {
+    "this_week_last_updated": "2026-07-06T09:00",
+    "total_breaths_cumulative": 53,
+    "total_breaths_cumulative_last_week": 47,
+    "trajectory_history_tail": [
+      {"date": "2026-07-01", "avg": 6.0909, "voice_coverage": 0.54, "note": "3 primitives maps gained a blurb-grounded in-VR subtitle beat"},
+      {"date": "2026-07-02", "avg": 6.0909, "voice_coverage": 0.54, "note": "+5 primitives maps -> 10/12 carry an in-VR beat"},
+      {"date": "2026-07-03", "avg": 6.0909, "note": "primitives subtitle sweep 10/10 completed; transient scorer read-glitch logged 0.0, corrected to 6.0909"},
+      {"date": "2026-07-04", "avg": 6.0909, "voice_coverage": 0.6, "note": "voice-fill 4 scripted primitives artifacts + garden_listener.find_gd registry-resolver fix; voice coverage 54%->60% (+161 surfaced)"},
+      {"date": "2026-07-05", "avg": 6.0909, "voice_coverage": 0.6, "note": "voice lever extended to non-sibling/shared scripts; 4 more primitives behavior scripts voiced; 1 scene-only tail remains"},
+      {"date": "2026-07-06", "avg": 6.0909, "note": "audit-day recompute from sequence_pipeline_scorer; garden voice reads 61%"}
+    ],
+    "interpretation": "Dead flat at the ceiling across the full window (delta exactly 0.000 — neither regression nor gain). Cumulative breaths 47 -> 53 (+6). The metric is saturated, not dipping. The 07-03 scorer read-glitch (0.0) did NOT recur on 07-04/07-06 — stays a single sub-threshold occurrence, on watch."
+  },
+
+  "sequences_improved_this_period": [
+    "NONE on the pipeline-head metric — all 21 spine sequences held at HEAD 6 (vr_testing); randomness held at HEAD 7. Head-sum is structurally pinned at 6.0909.",
+    "primitives (FOCUS_VECTOR primary) — subtitle/truth-beat teaching layer COMPLETED to 10/10 maps (Point_One origin + Primitives_Melencolia finitude were the final two, closed 07-03); then voice-fill of 8 genuinely-voiceless scripted primitives artifacts (07-04 folding_past/dgrid/star_primitive/bigframe; 07-05 rotation/durer/interactive_line/polyhedron_nets). Measured by subtitle coverage and voice coverage, not pipeline_avg.",
+    "Voice coverage (project-wide, orthogonal to head-sum): 54% -> 61% (+7pt), the largest weekly voice gain in the recent record — mostly a measurement-honesty correction (find_gd resolver fix surfaced +161 already-@identity artifacts).",
+    "Map validation quality (Gate C): grade_A maps 1347 -> 1370 (+23), zero grade_F maintained."
+  ],
+
+  "total_delta": {
+    "week_over_week_head_sum": 0.0,
+    "interpretation": "Zero net pipeline movement — the expected steady state for a ceiling-bound spine where every sequence sits at human-gated vr_testing. The real work this week (subtitle sweep completed, 8 artifacts voiced, a metric under-count fixed) is genuine but invisible to the head-sum metric by design.",
+    "voice_coverage_delta": "+7 percentage points (54% -> 61%), of which the bulk is the find_gd measurement-honesty correction rather than newly-created bodies",
+    "grade_A_maps_delta": "+23 (1347 -> 1370)",
+    "phantom_limbs_delta": "+123 (846 -> 969) — a measurement effect: the same find_gd resolver fix surfaced many previously-invisible reaching artifacts (body 437->482, reach 549->637); not a real regression in embodiment"
+  },
+
+  "skill_effectiveness_changes": {
+    "summary": "No effectiveness regressions and no new failure patterns. Every one of the 6 period breaths succeeded on all attempted items (0 failures). documentation_writing / identity_writing / ada-map-expert remain at 100% cumulative success.",
+    "families_exercised_this_period": {
+      "subtitle / truth-beat authoring (ada-map-expert)": "07-01/07-02/07-03 completed the primitives in-VR subtitle sweep to 10/10 maps at 100% success. Lever now EXHAUSTED for primitives (tier-5 in-VR subtitle).",
+      "identity_writing / voicing (ada-breather)": "07-04/07-05 voiced 8 genuinely-voiceless scripted primitives artifacts with grounded 8-field @identity at 100% success. Voice lever extended from sibling to non-sibling/shared scripts; now near-exhausted in primitives (1 scriptless scene-only tail).",
+      "tooling / measurement-honesty (self-fix)": "07-04 fixed garden_listener.find_gd (lookup-name -> scene_path -> .tscn -> .gd resolution) — a false-negative source flagged as a known gap since 2026-06-20, now closed. Project voice coverage jumped 54%->60% from this single fix."
+    },
+    "cumulative_success_rates_unchanged": true,
+    "new_3plus_failure_pattern": "none — no new effectiveness-grounded proposal warranted this week (0 failures all period; Level-3 evolution did not fire)"
+  },
+
+  "proposals_pending_review": {
+    "count": 8,
+    "count_last_week": 7,
+    "all_status": "proposed (none applied)",
+    "file": "doc/reports/skill_evolution_proposals.json",
+    "change_since_last_week": "One NEW proposal added this period — prop-009 ('metric-observability pre-check' in the Evaluate phase), bringing the total 7 -> 8. It is directly grounded in this week's find_gd discovery: before committing to a voice/enrichment lever, the engine should confirm the chosen metric can actually SEE the work (the find_gd stem-match bug hid ~12% of voiced artifacts). All eight remain status=proposed; NONE has been applied via /ada-skill-updater. The standing apply-recommendations (prop-002/004/005/006) are now overdue across 5+ consecutive weekly audits.",
+    "items": [
+      {"id": "prop-001", "skill": "ada-breather", "gist": "garden_identity_leverage pre-check in Evaluate"},
+      {"id": "prop-002", "skill": "ada-breather", "gist": "deferral re-validation step in Read/Evaluate — STRONG apply recommendation (standing 5+ audits)"},
+      {"id": "prop-003", "skill": "ada-breather", "gist": "wall-detection / stage-6-ceiling auto-retarget pre-check"},
+      {"id": "prop-004", "skill": "ada-breather", "gist": "crash-safe-write rule in Harvest — STRONG apply recommendation"},
+      {"id": "prop-005", "skill": "ada-breather", "gist": "convention-drift cross-check in Read/Evaluate — STRONG apply recommendation"},
+      {"id": "prop-006", "skill": "ada-breather", "gist": "recent-commit regression re-scan in Read — MOST-EVIDENCED"},
+      {"id": "prop-008", "skill": "ada-breather", "gist": "lever-rotation step in Evaluate — rotate among voice/subtitle/doc/grade levers as each saturates"},
+      {"id": "prop-009", "skill": "ada-breather", "gist": "metric-observability pre-check in Evaluate (NEW this period) — confirm the chosen metric can SEE the work before committing a lever; grounded in the find_gd under-count"}
+    ],
+    "recommendation": "OVERDUE: apply prop-002, prop-004, prop-005, prop-006 via /ada-skill-updater (5+ audits outstanding). prop-008 (lever rotation) and prop-009 (metric observability) are the two most relevant to the current phase — this week directly demonstrated both patterns (levers saturating in the focus sequence, and a metric blind to real work). prop-001/prop-003 remain lower priority / dependent."
+  },
+
+  "stall_analysis": {
+    "stall_flagged_in_trajectory_file": true,
+    "literal_7day_criterion_triggered": true,
+    "stall_type": "structural-ceiling, with first-tier autonomous levers now near-exhausted in the focus sequence",
+    "literal_7day_finding": "global_avg held at 6.0909 for the full window (06-29 6.0909 -> 07-06 6.0909, delta 0.000). By the strict 'has not improved in 7 days' test, this week registers a stall. There was no regression trough to recover from, so the flat is a true plateau — the seventh consecutive such week.",
+    "trajectory_file_stall_reason": "Pipeline mean-head structurally frozen 15+ breaths (stage-6 vr_testing headset-gated). Fallback garden-voice metric ALSO blind to commons/primitives/*/ folder scripts (resolves 105 of 252 primitives) — see prop-009. Both scorers under-observe autonomous voice work.",
+    "diagnosis": [
+      "1. STRUCTURAL CEILING (known, 50+ breaths): all 21 non-complete spine sequences sit at HEAD 6 (vr_testing). Stage 6 advances ONLY via a human VR walk session with bridge feedback. No autonomous breath can lift it; head-sum is mathematically capped at 6.0909 (randomness already at 7). Unchanged hard ceiling since 2026-06-05.",
+      "2. FOCUS-SEQUENCE LEVER EXHAUSTION (tightening): in primitives (the FOCUS_VECTOR primary), the two first-tier autonomous levers are now spent — the in-VR subtitle sweep hit 10/10 maps (07-03) and the voice-fill lever reached its floor (only a scriptless scene-only tail remains after 07-05). The engine correctly extended voicing from sibling to non-sibling scripts before hitting that floor. This is healthy adaptation but confirms the primitives sequence has little autonomous headroom left.",
+      "3. METRIC OBSERVABILITY (new, self-corrected): the 07-04 find_gd fix revealed that ~12% of voiced artifacts were invisible to the voice metric (name!=stem false negatives). A residual gap remains — garden_listener.find_gd resolves scene->sibling .gd only, so non-sibling ext_resource scripts (like the 07-05 additions) may still not be credited numerically. This is the direct basis for prop-009. The metric under-observes the very work the engine is doing while ceiling-bound.",
+      "4. The breath ENGINE itself is healthy: 6/6 breaths succeeded, 0 failures, gates green (4/4), no regression. The engine is not out of ideas — it is out of head-moving moves until a human walks the spine, and its first-tier orthogonal levers are now saturating in the focus sequence."
+    ],
+    "why_flat_not_decline": "A flat at the ceiling is the structurally correct steady state for a fully-built, human-gated spine. It is NOT an engine failure and NOT a regression. The narrowing concern, now sharper than last week: the autonomous levers producing visible content progress have reached their floor in the FOCUS sequence (primitives) specifically — so future autonomous gains must come from off-focus tiers (GROWING/LIVING) or from fixing the metric's blind spots, not from more primitives work.",
+    "recommended_remediation": [
+      "HUMAN LEVER (only ceiling-breaker, standing #1 since 2026-05-30, now 5+ weeks outstanding): schedule a VR walk session to take any spine sequence from stage 6 -> stage 7. This is the sole path above 6.0909.",
+      "META (overdue 5+ audits): apply prop-002/004/005/006 via /ada-skill-updater — AND prioritize prop-008 (lever rotation) and prop-009 (metric observability), the two proposals this week's evidence most directly supports.",
+      "AUTONOMOUS — ROTATE OFF FOCUS: primitives first-tier levers are exhausted. Rotate voicing to the GROWING/LIVING tiers where the 969 phantom limbs now live (hazards 40, graphtheory 32, cellularautomata 32, qfeplaboratory 32 phantom limbs). Update or retire the stale FOCUS_VECTOR (dated 2026-03-28) so the engine stops re-selecting the saturated primitives sequence each breath.",
+      "GRADE LEVER (still live): grade_A maps +23 this week; pushing the 147 grade_B and 171 grade_C maps toward grade_A is an autonomous Gate-C lever that needs no VR walk.",
+      "METRIC FIX: extend garden_listener.find_gd to resolve non-sibling ext_resource scripts, so autonomous voice work in behavior-script artifacts is credited — otherwise the engine's own progress stays partly invisible (prop-009)."
+    ]
+  },
+
+  "release_gates": {
+    "overall": "PASS",
+    "enabled_passing": "4/4",
+    "change_since_last_week": "Held PASS (4/4) -> PASS (4/4). No gate flipped. Gate C grade quality continued to improve (grade_A +23).",
+    "gate_A_sequence_contract": {"status": "PASS", "missing_declared_maps": 0, "duplicate_entries_within_sequence": 0, "undeclared_map_folders": 1093, "note": "undeclared_map_folders rose 1062 -> 1093 (+31; informational / non-blocking under current gate logic; continued accumulation of generator + concept-map folders not attached to a declared sequence)."},
+    "gate_B_artifact_registry": {"status": "PASS", "unresolved_scene_files": 0, "missing_scene_path": 0, "unsupported_scene_path": 0, "missing_map_ready": 0, "missing_include_in_map_data": 0, "note": "Fully clean, held from last week."},
+    "gate_C_map_validation": {"status": "PASS", "grade_A": 1370, "grade_B": 147, "grade_C": 171, "grade_F": 0, "note": "grade_A 1347 -> 1370 (+23); grade_B 147 -> 147 (flat); grade_C 163 -> 171 (+8); still zero F."},
+    "gate_D_lab_progression": {"status": "PASS", "lost_count": 0, "changed_count": 12, "total_issues": 39, "ok_superset_pairs": 5, "note": "Unchanged from last week."}
+  },
+
+  "garden_health": {
+    "voice_coverage": "61%",
+    "voice_coverage_last_week": "54%",
+    "embodiment_rate": "33% of voiced artifacts have full bodies",
+    "phantom_limbs": 969,
+    "phantom_limbs_last_week": 846,
+    "total_artifacts": 2407,
+    "total_artifacts_last_week": 2395,
+    "note": "Voice coverage +7pt (54% -> 61%) — the largest weekly jump in the record, but MOSTLY the find_gd measurement-honesty correction (07-04) surfacing +161 already-@identity artifacts, plus 8 genuinely-voiced primitives scripts (07-04/07-05). Phantom limbs rose 846 -> 969 (+123) as the SAME resolver fix surfaced previously-invisible reaching artifacts (body 437->482, reach 549->637) — a measurement effect, not an embodiment regression. Voicing remains a real lever but is near-exhausted in the FOCUS sequence (primitives); future voice gains must come from the GROWING/LIVING tiers."
+  },
+
+  "dry_run_work_plan": {
+    "focus": "auto-selected (FOCUS_VECTOR primary = primitives rebuild, dated 2026-03-28 and stale AND now lever-exhausted; live signal = ceiling-saturation + first-tier levers spent in the focus sequence)",
+    "trajectory": "FLAT at structural ceiling (delta 0.000 w/w; stall_detected=True, literal 7-day criterion triggered — 7th consecutive week)",
+    "items": [
+      {"rank": 1, "item": "primitives in-VR truth-beat / subtitle tail + any remaining teaching-layer polish", "temperature": "60 (subtitles / primitives in-VR)", "reason": "Sweep hit 10/10 (07-03); only scattered teaching-layer polish remains — the last near-live lever inside the focus sequence.", "dispatch": "ada-map-expert (subtitle/truth-beat patterns)", "expected": "Minor teaching-layer gains; moves subtitle/dead-key metric, not head-sum. Flags the focus sequence as effectively done for autonomous work."},
+      {"rank": 2, "item": "rotate voicing OUT of primitives -> GROWING/LIVING tiers (hazards 40, graphtheory 32, cellularautomata 32, qfeplaboratory 32 phantom limbs)", "temperature": "55 (voice_coverage, off-focus)", "reason": "Voice-fill exhausted in forces/primitives; the 969 phantom limbs now live in GROWING/LIVING tiers.", "dispatch": "identity_writing", "expected": "+5 voiced artifacts in a non-saturated tier; voice coverage 61% -> ~62%."},
+      {"rank": 3, "item": "grade-B/C -> grade-A map promotion batch (147 grade_B + 171 grade_C)", "temperature": "50 (Gate C quality)", "reason": "grade_A +23 this week — a live autonomous lever that improves Gate C without a VR walk.", "dispatch": "ada-map-expert + map_pathfinder", "expected": "Several grade_B/C maps promoted; Gate C quality up."},
+      {"rank": 4, "item": "apply standing skill_evolution proposals prop-002/004/005/006 + prioritize prop-008/prop-009", "temperature": "META", "reason": "Overdue 5+ audits; prop-008 (lever rotation) and prop-009 (metric observability) directly match this week's saturation + under-count signals.", "dispatch": "/ada-skill-updater (HUMAN review required)", "expected": "Engine stops re-discovering saturation/blind-spots and gains explicit lever-rotation + metric-observability rules."},
+      {"rank": 5, "item": "extend garden_listener.find_gd to resolve non-sibling ext_resource scripts + refresh/retire stale FOCUS_VECTOR", "temperature": "40 (metric + steering)", "reason": "07-05 voice adds on non-sibling scripts stay numerically uncredited; FOCUS_VECTOR (2026-03-28) points at the now-exhausted primitives sequence.", "dispatch": "ada-breather (metric) + human (FOCUS_VECTOR is read-only to the engine)", "expected": "Autonomous voice work becomes fully observable; engine stops re-selecting a saturated focus."}
+    ],
+    "cooled_skipped": "none (no items in last-2-breath items_failed — all 6 period breaths had zero failures)",
+    "human_only_item_not_in_autonomous_plan": "VR walk session to lift any spine sequence stage 6 -> 7 — the sole ceiling-breaker; cannot be done by a breath. FOCUS_VECTOR refresh is also human-only (read-only to the engine)."
+  },
+
+  "next_actions": [
+    "HUMAN: schedule a VR walk session — the only lever that moves head-sum above 6.0909 (standing since 2026-05-30; now 5+ weeks outstanding).",
+    "HUMAN: refresh or retire FOCUS_VECTOR.json — its primary (primitives rebuild, 2026-03-28) is now both stale AND lever-exhausted, so the engine keeps auto-selecting a saturated sequence.",
+    "Apply skill_evolution proposals prop-002/004/005/006 via /ada-skill-updater (overdue 5+ audits); prioritize the two this week most supports — prop-008 (lever rotation) and prop-009 (metric observability).",
+    "Autonomous next full breath: rotate voicing OUT of the now-saturated primitives into GROWING/LIVING-tier sequences (hazards, graphtheory, cellularautomata, qfeplaboratory).",
+    "Extend garden_listener.find_gd to credit non-sibling ext_resource scripts, and continue the grade-B/C -> grade-A promotion lever (318 non-A maps) while the pipeline is ceiling-bound.",
+    "Watch undeclared_map_folders (1062 -> 1093) and the single 07-03 scorer read-glitch (non-recurring so far): both sub-threshold, on watch."
+  ],
+
+  "audit_status": "PASS with STALL flagged — gates green (4/4), engine 100% healthy (6/6 breaths, 0 failures), no regression, but head-sum dead flat at the 6.0909 ceiling (delta 0.000 w/w, literal 7-day stall criterion TRIGGERED for the 7th consecutive week). The stall is structural (human-gated vr_testing), now compounded by the FOCUS sequence's first-tier autonomous levers (subtitle sweep, voice-fill) reaching their floor. Notable positive: voice coverage +7pt (54%->61%) and a self-corrected metric blind spot (find_gd). The binding constraint remains a human VR walk; secondary autonomous levers (off-focus voicing, grade promotion, metric fix) are available and should be rotated to — the FOCUS_VECTOR needs a human refresh so the engine stops re-selecting the exhausted primitives sequence."
+}

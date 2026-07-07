@@ -1,0 +1,1476 @@
+{
+  "primitives": {
+    "sequence": "primitives",
+    "n_maps": 12,
+    "ready_maps": [
+      {
+        "position": 0,
+        "map": "Point_One",
+        "score": 11,
+        "hits": {
+          "catalyst_vent": 1,
+          "vent": 1
+        }
+      },
+      {
+        "position": 1,
+        "map": "Point_Line",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 2,
+        "map": "Point_Lines",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 3,
+        "map": "Point_Trace",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 4,
+        "map": "Point_Line_Grid",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 5,
+        "map": "Point_Triangle",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 6,
+        "map": "Point_Triangle_Context",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 7,
+        "map": "Primitives_Polythedra",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 8,
+        "map": "Point_Animatedcube",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 9,
+        "map": "Primitives_Ignorance",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 10,
+        "map": "Primitives_Portals",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 11,
+        "map": "Primitives_Melencolia",
+        "score": 0,
+        "hits": {}
+      }
+    ]
+  },
+  "transformation": {
+    "sequence": "transformation",
+    "n_maps": 7,
+    "ready_maps": [
+      {
+        "position": 0,
+        "map": "Trans_Introduction",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 1,
+        "map": "Trans_Translation",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 2,
+        "map": "Trans_AxisDecomposition",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 3,
+        "map": "Trans_Rotation",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 4,
+        "map": "Trans_RotationSpectacle",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 5,
+        "map": "Trans_Scale",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 6,
+        "map": "Trans_Pit",
+        "score": 0,
+        "hits": {}
+      }
+    ]
+  },
+  "array_tutorial": {
+    "sequence": "array_tutorial",
+    "n_maps": 7,
+    "ready_maps": [
+      {
+        "position": 0,
+        "map": "Tutorial_Pattern",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 1,
+        "map": "Array_Patterns",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 2,
+        "map": "Tutorial_Single",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 3,
+        "map": "Tutorial_Row",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 4,
+        "map": "Tutorial_2D_Build",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 5,
+        "map": "Tutorial_3D",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 6,
+        "map": "Tutorial_Disco",
+        "score": 0,
+        "hits": {}
+      }
+    ]
+  },
+  "color": {
+    "sequence": "color",
+    "n_maps": 7,
+    "ready_maps": [
+      {
+        "position": 0,
+        "map": "Color_Nails",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 1,
+        "map": "Color_Grid_Pallet",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 2,
+        "map": "Color_Rainbow",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 3,
+        "map": "Color_Pillar",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 4,
+        "map": "Color_Paint",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 5,
+        "map": "Color_Walls",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 6,
+        "map": "Color_Flashlight",
+        "score": 0,
+        "hits": {}
+      }
+    ]
+  },
+  "change": {
+    "sequence": "change",
+    "n_maps": 8,
+    "ready_maps": [
+      {
+        "position": 0,
+        "map": "Change_Intro",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 1,
+        "map": "Change_Velocity",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 2,
+        "map": "Change_Slope_Surface",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 3,
+        "map": "Accumulation_Area",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 4,
+        "map": "Accumulation_Riemann",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 5,
+        "map": "Flow_Field",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 6,
+        "map": "Flow_Particle_Pulse",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 7,
+        "map": "Change_Reconciliation",
+        "score": 0,
+        "hits": {}
+      }
+    ]
+  },
+  "forces": {
+    "sequence": "forces",
+    "n_maps": 9,
+    "ready_maps": [
+      {
+        "position": 0,
+        "map": "VectorFoundations",
+        "score": 8,
+        "hits": {
+          "becoming_catalyst": 1
+        }
+      },
+      {
+        "position": 1,
+        "map": "VectorOperations",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 2,
+        "map": "VectorApplied",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 3,
+        "map": "VectorAdvanced",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 4,
+        "map": "ForcesFoundations",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 5,
+        "map": "ForcesComposition",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 6,
+        "map": "ForcesSystems",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 7,
+        "map": "ForcesChaos",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 8,
+        "map": "ForcesArena",
+        "score": 0,
+        "hits": {}
+      }
+    ]
+  },
+  "wavefunctions": {
+    "sequence": "wavefunctions",
+    "n_maps": 12,
+    "ready_maps": [
+      {
+        "position": 7,
+        "map": "WaveFunctions_John_Cage",
+        "score": 7,
+        "hits": {
+          "pylon": 1,
+          "vent": 2
+        }
+      },
+      {
+        "position": 0,
+        "map": "WaveFunctions_Intro",
+        "score": 1,
+        "hits": {
+          "vent": 1
+        }
+      },
+      {
+        "position": 1,
+        "map": "WaveFunctions_Pendulum",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 2,
+        "map": "WaveFunctions_Unit_Circle",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 3,
+        "map": "WaveFunctions_Sine_Space",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 4,
+        "map": "WaveFunctions_3D_Wave_Propagation",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 5,
+        "map": "WaveFunctions_Effect_Sound",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 6,
+        "map": "Wavefunctions_Bernini",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 8,
+        "map": "WaveFunctions_AirMusic",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 9,
+        "map": "Wavefunctions_Sky_Stairs",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 10,
+        "map": "WaveFunctions_TrigWalkingPath",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 11,
+        "map": "WaveFunctions_Synthesis_Lab",
+        "score": 0,
+        "hits": {}
+      }
+    ]
+  },
+  "randomness": {
+    "sequence": "randomness",
+    "n_maps": 13,
+    "ready_maps": [
+      {
+        "position": 0,
+        "map": "Random_Definition",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 1,
+        "map": "Random_Remove",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 2,
+        "map": "Randomness_10_PRINT_Algorithm",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 3,
+        "map": "Random_Cubes",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 4,
+        "map": "Random_Rotate_Random_XYZ",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 5,
+        "map": "Random_Walk",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 6,
+        "map": "Random_Gaussian",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 7,
+        "map": "Random_Mushrooms",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 8,
+        "map": "Random_Space_Geometry",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 9,
+        "map": "Randomness_Examples_of_Randomness",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 10,
+        "map": "Random_Pheromone",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 11,
+        "map": "Random_Space",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 12,
+        "map": "Random_Game",
+        "score": 0,
+        "hits": {}
+      }
+    ]
+  },
+  "noise": {
+    "sequence": "noise",
+    "n_maps": 9,
+    "ready_maps": [
+      {
+        "position": 0,
+        "map": "Random_Noise_Types",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 1,
+        "map": "Noise_Columns",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 2,
+        "map": "Noise_One",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 3,
+        "map": "Noise_Voxel",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 4,
+        "map": "Noise_6_Wall",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 5,
+        "map": "Noise_Inside_Noise",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 6,
+        "map": "Noise_Space_10",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 7,
+        "map": "Noise_Perlin_Simplex",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 8,
+        "map": "Lab_Path",
+        "score": 0,
+        "hits": {}
+      }
+    ]
+  },
+  "cellularautomata": {
+    "sequence": "cellularautomata",
+    "n_maps": 8,
+    "ready_maps": [
+      {
+        "position": 0,
+        "map": "CA_Introduction",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 1,
+        "map": "CA_ElementaryRules",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 2,
+        "map": "CA_GameOfLife",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 3,
+        "map": "CA_BeyondBinary",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 4,
+        "map": "CA_ExpandingSpace",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 5,
+        "map": "CA_SoftRules",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 6,
+        "map": "CA_AgentsCircuits",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 7,
+        "map": "CA_EdgeOfChaos",
+        "score": 0,
+        "hits": {}
+      }
+    ]
+  },
+  "fractals": {
+    "sequence": "fractals",
+    "n_maps": 10,
+    "ready_maps": [
+      {
+        "position": 0,
+        "map": "Fractal_Recursion",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 1,
+        "map": "Fractal_RecursiveTrees",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 2,
+        "map": "Fractal_CantorSet",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 3,
+        "map": "Fractal_KochSierpinski",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 4,
+        "map": "Fractal_MengerSponge",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 5,
+        "map": "Fractal_GoldenSpiral",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 6,
+        "map": "Fractal_JuliaSet",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 7,
+        "map": "Fractal_MandelbrotSet",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 8,
+        "map": "Fractal_Synthesis",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 9,
+        "map": "Fractal_CrossSequence",
+        "score": 0,
+        "hits": {}
+      }
+    ]
+  },
+  "lsystems": {
+    "sequence": "lsystems",
+    "n_maps": 6,
+    "ready_maps": [
+      {
+        "position": 0,
+        "map": "LSystems_Grammar_Lab",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 1,
+        "map": "LSystems_Growth",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 2,
+        "map": "LSystems_Grammars_And_Curves",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 3,
+        "map": "LSystems_Architecture",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 4,
+        "map": "LSystems_Competition",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 5,
+        "map": "LSystems_Living",
+        "score": 0,
+        "hits": {}
+      }
+    ]
+  },
+  "proceduralgeneration": {
+    "sequence": "proceduralgeneration",
+    "n_maps": 7,
+    "ready_maps": [
+      {
+        "position": 0,
+        "map": "PG_Genetic_Evolution",
+        "score": 6,
+        "hits": {
+          "creature": 3
+        }
+      },
+      {
+        "position": 1,
+        "map": "PG_Space_Colonization",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 2,
+        "map": "PG_Percolation_Network",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 3,
+        "map": "PG_Branching_Growth",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 4,
+        "map": "PG_Caves_Mazes",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 5,
+        "map": "PG_Sculpted_Forms",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 6,
+        "map": "PG_Mirrored_Patterns",
+        "score": 0,
+        "hits": {}
+      }
+    ]
+  },
+  "softbodies": {
+    "sequence": "softbodies",
+    "n_maps": 34,
+    "ready_maps": [
+      {
+        "position": 10,
+        "map": "SoftBody_sb01_cloth_drape_corners",
+        "score": 2,
+        "hits": {
+          "creature": 1
+        }
+      },
+      {
+        "position": 11,
+        "map": "SoftBody_sb02_cloth_drape_top_row",
+        "score": 2,
+        "hits": {
+          "creature": 1
+        }
+      },
+      {
+        "position": 12,
+        "map": "SoftBody_sb03_cloth_flag_sideways",
+        "score": 2,
+        "hits": {
+          "creature": 1
+        }
+      },
+      {
+        "position": 13,
+        "map": "SoftBody_sb04_cloth_tablecloth",
+        "score": 2,
+        "hits": {
+          "creature": 1
+        }
+      },
+      {
+        "position": 14,
+        "map": "SoftBody_sb05_jelly_box_bounce",
+        "score": 2,
+        "hits": {
+          "creature": 1
+        }
+      },
+      {
+        "position": 15,
+        "map": "SoftBody_sb06_jelly_grid_settle",
+        "score": 2,
+        "hits": {
+          "creature": 1
+        }
+      },
+      {
+        "position": 16,
+        "map": "SoftBody_sb07_jelly_grid_tall_stiff",
+        "score": 2,
+        "hits": {
+          "creature": 1
+        }
+      },
+      {
+        "position": 17,
+        "map": "SoftBody_sb08_jelly_grid_floppy",
+        "score": 2,
+        "hits": {
+          "creature": 1
+        }
+      },
+      {
+        "position": 18,
+        "map": "SoftBody_sb_ls01_plant_skeleton",
+        "score": 2,
+        "hits": {
+          "creature": 1
+        }
+      },
+      {
+        "position": 19,
+        "map": "SoftBody_sb_ls02_plant_wind_collapse",
+        "score": 2,
+        "hits": {
+          "creature": 1
+        }
+      },
+      {
+        "position": 20,
+        "map": "SoftBody_sb_ca01_conway_cloth",
+        "score": 2,
+        "hits": {
+          "creature": 1
+        }
+      },
+      {
+        "position": 21,
+        "map": "SoftBody_sb_ca02_life_without_death_cloth",
+        "score": 2,
+        "hits": {
+          "creature": 1
+        }
+      },
+      {
+        "position": 22,
+        "map": "SoftBody_sb_noise01_jelly_crystal",
+        "score": 2,
+        "hits": {
+          "creature": 1
+        }
+      },
+      {
+        "position": 23,
+        "map": "SoftBody_sb_rd01_coral_cloth",
+        "score": 2,
+        "hits": {
+          "creature": 1
+        }
+      },
+      {
+        "position": 24,
+        "map": "SoftBody_sb_rd02_stripes_flag",
+        "score": 2,
+        "hits": {
+          "creature": 1
+        }
+      },
+      {
+        "position": 25,
+        "map": "SoftBody_gl01_classic_bulb",
+        "score": 2,
+        "hits": {
+          "creature": 1
+        }
+      },
+      {
+        "position": 26,
+        "map": "SoftBody_gl02_long_bottle",
+        "score": 2,
+        "hits": {
+          "creature": 1
+        }
+      },
+      {
+        "position": 27,
+        "map": "SoftBody_gl03_wide_bowl",
+        "score": 2,
+        "hits": {
+          "creature": 1
+        }
+      },
+      {
+        "position": 28,
+        "map": "SoftBody_gl04_lopsided_vase",
+        "score": 2,
+        "hits": {
+          "creature": 1
+        }
+      },
+      {
+        "position": 29,
+        "map": "SoftBody_gl05_collapsed_sag",
+        "score": 2,
+        "hits": {
+          "creature": 1
+        }
+      },
+      {
+        "position": 30,
+        "map": "SoftBody_gm01_bottle_in_cylinder_mould",
+        "score": 2,
+        "hits": {
+          "creature": 1
+        }
+      },
+      {
+        "position": 31,
+        "map": "SoftBody_gm02_vase_in_tapered_mould",
+        "score": 2,
+        "hits": {
+          "creature": 1
+        }
+      },
+      {
+        "position": 32,
+        "map": "SoftBody_gm03_box_in_cube_mould",
+        "score": 2,
+        "hits": {
+          "creature": 1
+        }
+      },
+      {
+        "position": 33,
+        "map": "SoftBody_gm04_pressed_onto_sphere",
+        "score": 2,
+        "hits": {
+          "creature": 1
+        }
+      },
+      {
+        "position": 0,
+        "map": "SoftBodies_Soft_Body_Deformation",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 1,
+        "map": "SoftBodies_Carusell",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 2,
+        "map": "SoftBodies_Obsticals",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 3,
+        "map": "SoftBodies_Obsticals_Part2",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 4,
+        "map": "SoftBodies_Cloth_Physics",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 5,
+        "map": "SoftBodies_Playground_of_Joy",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 6,
+        "map": "SoftBodies_Affect_Theory_Visualization",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 7,
+        "map": "ProceduralGeneration_Reaction_Diffusion_Systems",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 8,
+        "map": "Topology_Entropy_Morphogenesis",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 9,
+        "map": "Chamber_SoftBodies",
+        "score": 0,
+        "hits": {}
+      }
+    ]
+  },
+  "isosurfaces": {
+    "sequence": "isosurfaces",
+    "n_maps": 12,
+    "ready_maps": [
+      {
+        "position": 0,
+        "map": "ISO_Introduction",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 1,
+        "map": "ISO_LookupTable",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 2,
+        "map": "ISO_ShapesGallery",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 3,
+        "map": "ISO_TorusGyroid",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 4,
+        "map": "ISO_Sculpting",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 5,
+        "map": "ISO_FlatTerrain",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 6,
+        "map": "ISO_PortalLandscape",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 7,
+        "map": "ISO_Caves",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 8,
+        "map": "ISO_CaveGeneration",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 9,
+        "map": "ISO_AnimatedNoise",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 10,
+        "map": "ISO_Metaballs",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 11,
+        "map": "ISO_ImplicitModeling",
+        "score": 0,
+        "hits": {}
+      }
+    ]
+  },
+  "boolean_surfaces": {
+    "sequence": "boolean_surfaces",
+    "n_maps": 5,
+    "ready_maps": [
+      {
+        "position": 0,
+        "map": "Boolean_Union",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 1,
+        "map": "Boolean_Intersection",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 2,
+        "map": "Boolean_Difference",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 3,
+        "map": "Boolean_Compose_Workbench",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 4,
+        "map": "Boolean_Architecture_Cavity",
+        "score": 0,
+        "hits": {}
+      }
+    ]
+  },
+  "swarmintelligence": {
+    "sequence": "swarmintelligence",
+    "n_maps": 7,
+    "ready_maps": [
+      {
+        "position": 0,
+        "map": "SwarmIntelligence_PhysarumColony",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 1,
+        "map": "SwarmIntelligence_FlowFields",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 2,
+        "map": "SwarmIntelligence_Boids_Algorithm",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 3,
+        "map": "SwarmIntelligence_Agent_Based_Modeling_ABM",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 4,
+        "map": "SwarmIntelligence_Ant_Colony_Optimization",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 5,
+        "map": "SwarmIntelligence_Particle_Swarm_Optimization",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 6,
+        "map": "SwarmIntelligence_Swarm_Intelligence_Algorithms",
+        "score": 0,
+        "hits": {}
+      }
+    ]
+  },
+  "machinelearning": {
+    "sequence": "machinelearning",
+    "n_maps": 8,
+    "ready_maps": [
+      {
+        "position": 0,
+        "map": "ML_Evolution",
+        "score": 4,
+        "hits": {
+          "creature": 2
+        }
+      },
+      {
+        "position": 1,
+        "map": "ML_Gradient_Landscape",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 2,
+        "map": "ML_Classification",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 3,
+        "map": "ML_Neural_Networks",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 4,
+        "map": "ML_Perception",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 5,
+        "map": "ML_Sequence_Memory",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 6,
+        "map": "ML_Generative",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 7,
+        "map": "ML_Synthesis",
+        "score": 0,
+        "hits": {}
+      }
+    ]
+  },
+  "graphtheory": {
+    "sequence": "graphtheory",
+    "n_maps": 8,
+    "ready_maps": [
+      {
+        "position": 0,
+        "map": "GT_Foundations",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 1,
+        "map": "GT_Layout",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 2,
+        "map": "GT_Pathfinding",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 3,
+        "map": "GT_Network_Analysis",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 4,
+        "map": "GT_Connectivity",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 5,
+        "map": "GT_Spanning_Trees",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 6,
+        "map": "GT_Flow",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 7,
+        "map": "GT_Matching",
+        "score": 0,
+        "hits": {}
+      }
+    ]
+  },
+  "foundationscrisis": {
+    "sequence": "foundationscrisis",
+    "n_maps": 8,
+    "ready_maps": [
+      {
+        "position": 0,
+        "map": "Euclid_Parallel",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 1,
+        "map": "NonEuclidean_Spaces",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 2,
+        "map": "Russell_Paradox",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 3,
+        "map": "Godel_Incompleteness",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 4,
+        "map": "Escher_Impossible",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 5,
+        "map": "Brouwer_Intuitionism",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 6,
+        "map": "Florensky_Paraconsistent",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 7,
+        "map": "Crisis_Synthesis",
+        "score": 0,
+        "hits": {}
+      }
+    ]
+  },
+  "qfeplaboratory": {
+    "sequence": "qfeplaboratory",
+    "n_maps": 8,
+    "ready_maps": [
+      {
+        "position": 0,
+        "map": "QFEP_Introduction",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 1,
+        "map": "QFEP_F_Term",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 2,
+        "map": "QFEP_E_Term",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 3,
+        "map": "QFEP_Lambda_Spectrum",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 4,
+        "map": "QFEP_Phi_Term",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 5,
+        "map": "QFEP_Edge_Of_Chaos",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 6,
+        "map": "QFEP_Sandbox",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 7,
+        "map": "QFEP_Synthesis",
+        "score": 0,
+        "hits": {}
+      }
+    ]
+  },
+  "postfoundationscrisis": {
+    "sequence": "postfoundationscrisis",
+    "n_maps": 8,
+    "ready_maps": [
+      {
+        "position": 2,
+        "map": "SpeculativeComputation_Paraconsistent_Engineering",
+        "score": 1,
+        "hits": {
+          "vent": 1
+        }
+      },
+      {
+        "position": 0,
+        "map": "CriticalAlgorithms_Algorithmic_Bias_Visualization",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 1,
+        "map": "CriticalAlgorithms_Applied_Ethics",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 3,
+        "map": "SpeculativeComputation_Situated_Computation",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 4,
+        "map": "SpeculativeComputation_Collective_Knowledge",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 5,
+        "map": "SpeculativeComputation_Rhizome_Network",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 6,
+        "map": "AdvancedLaboratory_Lab_Equipment_Simulation",
+        "score": 0,
+        "hits": {}
+      },
+      {
+        "position": 7,
+        "map": "PostCrisis_Synthesis",
+        "score": 0,
+        "hits": {}
+      }
+    ]
+  }
+}

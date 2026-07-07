@@ -2,12 +2,12 @@
   "sequences": {
     "qfeplaboratory": {
       "name": "QFEP Laboratory: The Formula Made Interactive",
-      "truth": "QFE = F âˆ’ Î»E(S) + Ï†Î”E(S,t). Life exists at Î» â‰ˆ 0.3-0.5.",
+      "truth": "QFE = F \u00e2\u02c6\u2019 \u00ce\u00bbE(S) + \u00cf\u2020\u00ce\u201dE(S,t). Life exists at \u00ce\u00bb \u00e2\u2030\u02c6 0.3-0.5.",
       "qfep_term": "All",
-      "qfep_connection": "The complete QFEP framework made tangible. Interactive sliders for Î» (entropy drive) and Ï† (rate sensitivity). Visualize the oscillation between order and chaos. Find your edge of chaos.",
-      "formula": "QFE = F âˆ’ Î»E(S) + Ï†Î”E(S,t)",
-      "description": "The theoretical core of Ada Research made interactive. Manipulate the QFEP parameters directly. See how F, Î», and Ï† create different system behaviors. Understand why life exists at the edge of chaos.",
-      "layer": "integration",
+      "qfep_connection": "The complete QFEP framework made tangible. Interactive sliders for \u00ce\u00bb (entropy drive) and \u00cf\u2020 (rate sensitivity). Visualize the oscillation between order and chaos. Find your edge of chaos.",
+      "formula": "QFE = F \u00e2\u02c6\u2019 \u00ce\u00bbE(S) + \u00cf\u2020\u00ce\u201dE(S,t)",
+      "description": "The theoretical core of Ada Research made interactive. Manipulate the QFEP parameters directly. See how F, \u00ce\u00bb, and \u00cf\u2020 create different system behaviors. Understand why life exists at the edge of chaos.",
+      "layer": "synthesis",
       "prerequisites": [
         "primitives",
         "randomness",
@@ -15,6 +15,7 @@
         "foundationscrisis"
       ],
       "unlocks": [
+        "postfoundationscrisis",
         "recursiveemergence",
         "speculativecomputation"
       ],
@@ -23,9 +24,9 @@
       "learning_objectives": [
         "F (Free Energy): prediction error, order-seeking, surprise minimization",
         "E(S) (Entropy): possibility space, disorder, freedom from pattern",
-        "Î» (Entropy Drive): the dial between crystallization and dissolution",
-        "Ï†Î”E(S,t) (Rate Term): sensitivity to change, the queer signature",
-        "Edge of chaos: where Î» â‰ˆ 0.3-0.5, where adaptation happens"
+        "\u00ce\u00bb (Entropy Drive): the dial between crystallization and dissolution",
+        "\u00cf\u2020\u00ce\u201dE(S,t) (Rate Term): sensitivity to change, the queer signature",
+        "Edge of chaos: where \u00ce\u00bb \u00e2\u2030\u02c6 0.3-0.5, where adaptation happens"
       ],
       "content": [
         "QFEP_Introduction: The Unifying Formula",
@@ -45,8 +46,7 @@
         "QFEP_Phi_Term",
         "QFEP_Edge_Of_Chaos",
         "QFEP_Sandbox",
-        "QFEP_Synthesis",
-        "Chamber_QFEP"
+        "QFEP_Synthesis"
       ],
       "audio": {
         "ambient_preset": "laboratory_hum",
@@ -60,14 +60,14 @@
       ],
       "interactive_elements": {
         "lambda_slider": {
-          "description": "Real-time Î» adjustment (0.0 to 1.0)",
+          "description": "Real-time \u00ce\u00bb adjustment (0.0 to 1.0)",
           "default": 0.4,
           "visual_feedback": "System behavior changes in real-time"
         },
         "phi_slider": {
           "description": "Rate sensitivity adjustment (-1.0 to 1.0)",
           "default": 0.3,
-          "visual_feedback": "Positive Ï† = embrace change, negative Ï† = resist change"
+          "visual_feedback": "Positive \u00cf\u2020 = embrace change, negative \u00cf\u2020 = resist change"
         },
         "entropy_visualization": {
           "description": "Real-time entropy measurement display",
@@ -80,7 +80,7 @@
       },
       "references": {
         "gamwell_chapters": [
-          "Ch 7: Symmetry (Langton's Î»)",
+          "Ch 7: Symmetry (Langton's \u00ce\u00bb)",
           "Ch 10: Turing",
           "Ch 12: Fractals/Bifurcation"
         ],
@@ -201,6 +201,7 @@
           "map": "QFEP_Synthesis",
           "position": "synthesis",
           "artifacts": [
+            "qfep_term_compass",
             "grab_sphere_F",
             "grab_sphere_E",
             "qfep_formula_3d",

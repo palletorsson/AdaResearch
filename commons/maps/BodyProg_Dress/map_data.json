@@ -15,11 +15,7 @@
       "difficulty": "intermediate",
       "category": "bodyprogression",
       "estimated_time": "5-8 minutes",
-      "learning_objectives": [
-        "Outfit selection and application",
-        "Drag as performed identity",
-        "Full avatar assembly"
-      ]
+      "learning_objectives": ["Outfit selection and application","Drag as performed identity","Full avatar assembly"]
     }
   },
   "utility_definitions": {
@@ -42,29 +38,15 @@
     "summary": "BodyProg_Dress - Full outfit unlocks as the culmination of body assembly",
     "layout": "Dressing room with outfit selector and full-length mirror",
     "objective": "Select and wear the ElphabaDress. Experience drag as performed identity -- the body as canvas, not container.",
-    "key_elements": [
-      "dress_selector - outfit selection interface"
-    ]
+    "key_elements": ["dress_selector - outfit selection interface"]
   },
   "lighting": {
-    "ambient_color": [
-      0.35,
-      0.25,
-      0.4
-    ],
+    "ambient_color": [0.35,0.25,0.4],
     "ambient_energy": 0.8,
     "directional_light": {
       "enabled": true,
-      "direction": [
-        -0.1,
-        -0.8,
-        -0.4
-      ],
-      "color": [
-        1.0,
-        0.9,
-        1.0
-      ],
+      "direction": [-0.1,-0.8,-0.4],
+      "color": [1.0,0.9,1.0],
       "energy": 1.0
     }
   },
@@ -75,11 +57,7 @@
     "enable_physics": true,
     "background": {
       "type": "sky",
-      "color": [
-        0.15,
-        0.1,
-        0.22
-      ]
+      "color": [0.15,0.1,0.22]
     }
   },
   "layers": {

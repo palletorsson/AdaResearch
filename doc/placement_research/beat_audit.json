@@ -1,0 +1,446 @@
+{
+  "boolean_surfaces": {
+    "sequence": "boolean_surfaces",
+    "n_beats": 7,
+    "n_maps_in_seq": 5,
+    "n_maps_referenced": 5,
+    "missing_maps": [
+      [
+        "B1",
+        "Boolean_Union"
+      ],
+      [
+        "B2",
+        "Boolean_Intersection"
+      ],
+      [
+        "B3",
+        "Boolean_Difference"
+      ],
+      [
+        "B4",
+        "Boolean_Compose_Workbench"
+      ],
+      [
+        "B5",
+        "Boolean_Architecture_Cavity"
+      ]
+    ],
+    "orphan_maps": [],
+    "multi_purpose": {},
+    "unfilled_beats": [
+      {
+        "id": "B0",
+        "role": "GATEWAY",
+        "concept": "entering boolean_surfaces \u2014 the substrate shifts"
+      },
+      {
+        "id": "B6",
+        "role": "CHAMBER",
+        "concept": "the boolean_surfaces principle held \u2014 carried forward"
+      }
+    ],
+    "bleed_issues": [],
+    "not_in_seq_list": [],
+    "role_counts": {
+      "GATEWAY": 1,
+      "INTRODUCE": 1,
+      "DEMONSTRATE": 2,
+      "SYNTHESIZE": 2,
+      "CHAMBER": 1
+    },
+    "register_counts": {
+      "structural": 1,
+      "teaching": 3,
+      "synthesizing": 3
+    }
+  },
+  "color": {
+    "sequence": "color",
+    "n_beats": 9,
+    "n_maps_in_seq": 7,
+    "n_maps_referenced": 7,
+    "missing_maps": [],
+    "orphan_maps": [],
+    "multi_purpose": {},
+    "unfilled_beats": [
+      {
+        "id": "C0",
+        "role": "GATEWAY",
+        "concept": "entering color \u2014 the substrate shifts"
+      },
+      {
+        "id": "C8",
+        "role": "CHAMBER",
+        "concept": "color \u2014 to be authored"
+      }
+    ],
+    "bleed_issues": [],
+    "not_in_seq_list": [],
+    "role_counts": {
+      "GATEWAY": 1,
+      "INTRODUCE": 1,
+      "DEMONSTRATE": 6,
+      "CHAMBER": 1
+    },
+    "register_counts": {
+      "structural": 1,
+      "teaching": 7,
+      "synthesizing": 1
+    }
+  },
+  "foundationscrisis": {
+    "sequence": "foundationscrisis",
+    "n_beats": 10,
+    "n_maps_in_seq": 8,
+    "n_maps_referenced": 8,
+    "missing_maps": [],
+    "orphan_maps": [],
+    "multi_purpose": {},
+    "unfilled_beats": [
+      {
+        "id": "F0",
+        "role": "GATEWAY",
+        "concept": "entering foundationscrisis \u2014 the substrate shifts"
+      },
+      {
+        "id": "F9",
+        "role": "CHAMBER",
+        "concept": "foundations \u2014 to be authored"
+      }
+    ],
+    "bleed_issues": [],
+    "not_in_seq_list": [],
+    "role_counts": {
+      "GATEWAY": 1,
+      "INTRODUCE": 1,
+      "PRACTICE": 1,
+      "LIMIT": 1,
+      "DEMONSTRATE": 4,
+      "SYNTHESIZE": 1,
+      "CHAMBER": 1
+    },
+    "register_counts": {
+      "structural": 1,
+      "teaching": 5,
+      "exploring": 1,
+      "reflecting": 1,
+      "synthesizing": 2
+    }
+  },
+  "isosurfaces": {
+    "sequence": "isosurfaces",
+    "n_beats": 14,
+    "n_maps_in_seq": 12,
+    "n_maps_referenced": 12,
+    "missing_maps": [],
+    "orphan_maps": [],
+    "multi_purpose": {},
+    "unfilled_beats": [
+      {
+        "id": "I0",
+        "role": "GATEWAY",
+        "concept": "entering isosurfaces \u2014 the substrate shifts"
+      },
+      {
+        "id": "I13",
+        "role": "CHAMBER",
+        "concept": "the isosurfaces principle held \u2014 carried forward"
+      }
+    ],
+    "bleed_issues": [],
+    "not_in_seq_list": [],
+    "role_counts": {
+      "GATEWAY": 1,
+      "INTRODUCE": 1,
+      "DEMONSTRATE": 9,
+      "VARIATE": 1,
+      "SYNTHESIZE": 1,
+      "CHAMBER": 1
+    },
+    "register_counts": {
+      "structural": 1,
+      "teaching": 11,
+      "synthesizing": 2
+    }
+  },
+  "noise": {
+    "sequence": "noise",
+    "n_beats": 11,
+    "n_maps_in_seq": 9,
+    "n_maps_referenced": 9,
+    "missing_maps": [],
+    "orphan_maps": [],
+    "multi_purpose": {},
+    "unfilled_beats": [
+      {
+        "id": "N0",
+        "role": "GATEWAY",
+        "concept": "entering noise \u2014 the substrate shifts"
+      },
+      {
+        "id": "N10",
+        "role": "CHAMBER",
+        "concept": "noise \u2014 to be authored"
+      }
+    ],
+    "bleed_issues": [
+      "N1: bleed_from randomness not reciprocated by any randomness.bleed_to"
+    ],
+    "not_in_seq_list": [],
+    "role_counts": {
+      "GATEWAY": 1,
+      "INTRODUCE": 2,
+      "DEMONSTRATE": 5,
+      "PRACTICE": 2,
+      "CHAMBER": 1
+    },
+    "register_counts": {
+      "structural": 1,
+      "teaching": 7,
+      "exploring": 2,
+      "synthesizing": 1
+    }
+  },
+  "postfoundationscrisis": {
+    "sequence": "postfoundationscrisis",
+    "n_beats": 10,
+    "n_maps_in_seq": 8,
+    "n_maps_referenced": 8,
+    "missing_maps": [],
+    "orphan_maps": [],
+    "multi_purpose": {},
+    "unfilled_beats": [
+      {
+        "id": "Z0",
+        "role": "GATEWAY",
+        "concept": "entering postfoundationscrisis \u2014 the substrate shifts"
+      },
+      {
+        "id": "Z9",
+        "role": "CHAMBER",
+        "concept": "the postfoundationscrisis principle held \u2014 carried forward"
+      }
+    ],
+    "bleed_issues": [],
+    "not_in_seq_list": [],
+    "role_counts": {
+      "GATEWAY": 1,
+      "INTRODUCE": 1,
+      "DEMONSTRATE": 5,
+      "SYNTHESIZE": 2,
+      "CHAMBER": 1
+    },
+    "register_counts": {
+      "structural": 1,
+      "teaching": 6,
+      "synthesizing": 3
+    }
+  },
+  "primitives": {
+    "sequence": "primitives",
+    "n_beats": 14,
+    "n_maps_in_seq": 12,
+    "n_maps_referenced": 13,
+    "missing_maps": [],
+    "orphan_maps": [],
+    "multi_purpose": {},
+    "unfilled_beats": [
+      {
+        "id": "P0",
+        "role": "GATEWAY",
+        "concept": "entering the curriculum \u2014 the player learns to walk before the first idea arrive"
+      },
+      {
+        "id": "P13",
+        "role": "CHAMBER",
+        "concept": "synthesis of the principle \u2014 primitives compose; the player carries it forward"
+      }
+    ],
+    "bleed_issues": [],
+    "not_in_seq_list": [
+      "Catalyst_01_Primitives"
+    ],
+    "role_counts": {
+      "GATEWAY": 1,
+      "INTRODUCE": 1,
+      "DEMONSTRATE": 1,
+      "PRACTICE": 1,
+      "VARIATE": 1,
+      "SYNTHESIZE": 2,
+      "BLEED": 2,
+      "PAUSE": 1,
+      "LIMIT": 1,
+      "REFUSE": 1,
+      "CATALYST_GAIN": 1,
+      "CHAMBER": 1
+    },
+    "register_counts": {
+      "structural": 1,
+      "teaching": 5,
+      "exploring": 3,
+      "resting": 1,
+      "reflecting": 1,
+      "refusing": 1,
+      "catalyst": 1,
+      "synthesizing": 1
+    }
+  },
+  "randomness": {
+    "sequence": "randomness",
+    "n_beats": 15,
+    "n_maps_in_seq": 13,
+    "n_maps_referenced": 13,
+    "missing_maps": [],
+    "orphan_maps": [],
+    "multi_purpose": {},
+    "unfilled_beats": [
+      {
+        "id": "R0",
+        "role": "GATEWAY",
+        "concept": "the player crosses from ordered into disordered \u2014 the substrate changes"
+      },
+      {
+        "id": "R14",
+        "role": "CHAMBER",
+        "concept": "the entropy principle held \u2014 randomness as a substrate the player can now wield"
+      }
+    ],
+    "bleed_issues": [],
+    "not_in_seq_list": [],
+    "role_counts": {
+      "GATEWAY": 1,
+      "INTRODUCE": 1,
+      "DEMONSTRATE": 1,
+      "VARIATE": 3,
+      "PRACTICE": 4,
+      "SYNTHESIZE": 1,
+      "BLEED": 2,
+      "WANDER": 1,
+      "CHAMBER": 1
+    },
+    "register_counts": {
+      "structural": 1,
+      "teaching": 4,
+      "exploring": 9,
+      "synthesizing": 1
+    }
+  },
+  "softbodies": {
+    "sequence": "softbodies",
+    "n_beats": 36,
+    "n_maps_in_seq": 34,
+    "n_maps_referenced": 34,
+    "missing_maps": [],
+    "orphan_maps": [],
+    "multi_purpose": {},
+    "unfilled_beats": [
+      {
+        "id": "S0",
+        "role": "GATEWAY",
+        "concept": "entering softbodies \u2014 the substrate shifts"
+      },
+      {
+        "id": "S35",
+        "role": "CHAMBER",
+        "concept": "the softbodies principle held \u2014 carried forward"
+      }
+    ],
+    "bleed_issues": [
+      "S1: bleed_from morphogenesis (sequence has no beats file yet)"
+    ],
+    "not_in_seq_list": [],
+    "role_counts": {
+      "GATEWAY": 1,
+      "INTRODUCE": 1,
+      "DEMONSTRATE": 31,
+      "CHAMBER": 2,
+      "SYNTHESIZE": 1
+    },
+    "register_counts": {
+      "structural": 1,
+      "teaching": 32,
+      "synthesizing": 3
+    }
+  },
+  "transformation": {
+    "sequence": "transformation",
+    "n_beats": 9,
+    "n_maps_in_seq": 7,
+    "n_maps_referenced": 7,
+    "missing_maps": [],
+    "orphan_maps": [],
+    "multi_purpose": {},
+    "unfilled_beats": [
+      {
+        "id": "T0",
+        "role": "GATEWAY",
+        "concept": "arrival from primitives \u2014 the static shape is about to move"
+      },
+      {
+        "id": "T8",
+        "role": "CHAMBER",
+        "concept": "synthesis \u2014 the player carries translation + rotation + scale forward as a unifi"
+      }
+    ],
+    "bleed_issues": [],
+    "not_in_seq_list": [],
+    "role_counts": {
+      "GATEWAY": 1,
+      "INTRODUCE": 1,
+      "DEMONSTRATE": 3,
+      "VARIATE": 2,
+      "LIMIT": 1,
+      "CHAMBER": 1
+    },
+    "register_counts": {
+      "structural": 1,
+      "teaching": 5,
+      "exploring": 1,
+      "reflecting": 1,
+      "synthesizing": 1
+    }
+  },
+  "wavefunctions": {
+    "sequence": "wavefunctions",
+    "n_beats": 14,
+    "n_maps_in_seq": 12,
+    "n_maps_referenced": 12,
+    "missing_maps": [],
+    "orphan_maps": [],
+    "multi_purpose": {},
+    "unfilled_beats": [
+      {
+        "id": "W0",
+        "role": "GATEWAY",
+        "concept": "from rigid motion to periodic motion \u2014 what stays the same as something repeats"
+      },
+      {
+        "id": "W13",
+        "role": "CHAMBER",
+        "concept": "wave principle held \u2014 the player carries oscillation forward as a substrate for "
+      }
+    ],
+    "bleed_issues": [
+      "W7: bleed_from lambda_edge (sequence has no beats file yet)"
+    ],
+    "not_in_seq_list": [],
+    "role_counts": {
+      "GATEWAY": 1,
+      "INTRODUCE": 1,
+      "DEMONSTRATE": 1,
+      "SYNTHESIZE": 2,
+      "PRACTICE": 3,
+      "VARIATE": 2,
+      "BLEED": 3,
+      "CHAMBER": 1
+    },
+    "register_counts": {
+      "structural": 1,
+      "teaching": 4,
+      "synthesizing": 3,
+      "exploring": 5,
+      "reflecting": 1
+    }
+  }
+}

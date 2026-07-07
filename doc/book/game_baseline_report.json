@@ -1,0 +1,127 @@
+{
+ "generated_by": "tools/game_baseline.py",
+ "met": 8,
+ "total": 9,
+ "beats": [
+  {
+   "role": "the persistent verb — the bracelet",
+   "exists": true,
+   "deployed": 33,
+   "deployed_maps": [
+    "Bracelet_Zoo",
+    "Catalyst_01_Primitives",
+    "Catalyst_02_Transformation",
+    "Catalyst_03_Chromatic",
+    "Catalyst_04_Forces",
+    "Catalyst_05_Waveform",
+    "Catalyst_06_Chaos",
+    "Catalyst_07_Cellular"
+   ],
+   "wired": true,
+   "wired_note": "blocks persist across maps in-session",
+   "met": true,
+   "note": ""
+  },
+  {
+   "role": "stakes — a way to die and return",
+   "exists": true,
+   "deployed": 4,
+   "deployed_maps": [
+    "Lab_Death",
+    "Trans_Pit",
+    "VFM_Catalyst_Chamber",
+    "Zone_ForbiddenWetLab"
+   ],
+   "wired": true,
+   "wired_note": "DeathEffect is an autoload (reload on death)",
+   "met": true,
+   "note": ""
+  },
+  {
+   "role": "resistance — FOE -> FRIEND",
+   "exists": true,
+   "deployed": 17,
+   "deployed_maps": [
+    "Catalyst_01_Primitives",
+    "Catalyst_02_Transformation",
+    "Catalyst_03_Chromatic",
+    "Catalyst_04_Forces",
+    "Catalyst_05_Waveform",
+    "Catalyst_06_Chaos",
+    "Catalyst_07_Cellular",
+    "Catalyst_08_Fractal"
+   ],
+   "wired": true,
+   "wired_note": "personality ladder reaches 'friend'",
+   "met": true,
+   "note": ""
+  },
+  {
+   "role": "visible growth — the world responds",
+   "exists": true,
+   "deployed": "global",
+   "deployed_maps": [],
+   "wired": true,
+   "wired_note": "rebuilds state from completed sequences + soft_stages",
+   "met": true,
+   "note": ""
+  },
+  {
+   "role": "the test — prove-it gates per chapter",
+   "exists": true,
+   "deployed": "22/24 chapters have a prove-it beat",
+   "deployed_maps": [],
+   "wired": true,
+   "wired_note": "ExamGate autoload wires any solve-signal (puzzle_solved / transformation_complete / exam_passed) to complete_map",
+   "met": true,
+   "note": ""
+  },
+  {
+   "role": "the unwinnable level — losing IS the point",
+   "exists": true,
+   "deployed": 1,
+   "deployed_maps": [
+    "Godel_Incompleteness"
+   ],
+   "wired": true,
+   "wired_note": "unwinnable by design; wiring is the artifact's own refusal",
+   "met": true,
+   "note": ""
+  },
+  {
+   "role": "the final test — hold YOUR edge",
+   "exists": true,
+   "deployed": 2,
+   "deployed_maps": [
+    "Corridor_QFEP_Sandbox",
+    "QFEP_Sandbox"
+   ],
+   "wired": false,
+   "wired_note": "reactor exists and is walkable, but nothing measures 'held the edge' or ends the game on it",
+   "met": false,
+   "note": ""
+  },
+  {
+   "role": "the world-verb — zones freeze/dissolve, player retunes",
+   "exists": true,
+   "deployed": 1,
+   "deployed_maps": [
+    "EdgeZones_Demo"
+   ],
+   "wired": true,
+   "wired_note": "EdgeZone: two deaths (crystal/dissolve), retune-by-presence toward the living edge",
+   "met": true,
+   "note": ""
+  },
+  {
+   "role": "return transformed — the hub changes as you do",
+   "exists": true,
+   "deployed": "global",
+   "deployed_maps": [],
+   "wired": true,
+   "wired_note": "MapProgressionManager tracks completion + unlocks",
+   "met": true,
+   "note": ""
+  }
+ ]
+}

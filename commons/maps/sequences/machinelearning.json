@@ -4,8 +4,8 @@
 	  "name": "Machine Learning: Algorithms That Learn",
 	  "truth": "Learning is optimization in a landscape you can't fully see.",
 	  "qfep_term": "Integration",
-	  "qfep_connection": "ML systems navigate Fâ†”E by descending loss landscapes. Gradient descent IS the oscillation between order (model) and entropy (data). Overfitting is F-collapse; underfitting is E-dominance.",
-	  "description": "From evolving creatures to neural networks â€” algorithms that adapt. Three arcs: evolution (selection pressure shapes form), perception (learning to classify and compress), generation (machines that make new things).",
+	  "qfep_connection": "ML systems navigate F\u00e2\u2020\u201dE by descending loss landscapes. Gradient descent IS the oscillation between order (model) and entropy (data). Overfitting is F-collapse; underfitting is E-dominance.",
+	  "description": "From evolving creatures to neural networks \u00e2\u20ac\u201d algorithms that adapt. Three arcs: evolution (selection pressure shapes form), perception (learning to classify and compress), generation (machines that make new things).",
 	  "layer": "integration",
 	  "prerequisites": [
 		"forces",
@@ -25,14 +25,14 @@
         "The gap between model and reality"
 	  ],
 	  "content": [
-		"ML_Evolution: Selection Without Design — selection pressure shapes form without explicit design",
-		"ML_Gradient_Landscape: Descending the Loss Surface — navigating loss surfaces, seeing high dimensions",
-		"ML_Classification: Drawing Boundaries in Data — different ways to draw boundaries in data",
-		"ML_Neural_Networks: Layers Learn Features — layers learn features",
-		"ML_Perception: How Machines Learn to See — how machines learn to see",
-		"ML_Sequence_Memory: Gates and Attention Over Time — learning temporal patterns and long-range dependencies",
-		"ML_Generative: Adversarial Creation from Noise — machines that generate, not just classify",
-        "ML_Synthesis: Agents That Question Themselves — agents that act, models we can question"
+		"ML_Evolution: Selection Without Design \u2014 selection pressure shapes form without explicit design",
+		"ML_Gradient_Landscape: Descending the Loss Surface \u2014 navigating loss surfaces, seeing high dimensions",
+		"ML_Classification: Drawing Boundaries in Data \u2014 different ways to draw boundaries in data",
+		"ML_Neural_Networks: Layers Learn Features \u2014 layers learn features",
+		"ML_Perception: How Machines Learn to See \u2014 how machines learn to see",
+		"ML_Sequence_Memory: Gates and Attention Over Time \u2014 learning temporal patterns and long-range dependencies",
+		"ML_Generative: Adversarial Creation from Noise \u2014 machines that generate, not just classify",
+        "ML_Synthesis: Agents That Question Themselves \u2014 agents that act, models we can question"
 	  ],
 	  "maps": [
 		"ML_Evolution",
@@ -42,8 +42,7 @@
 		"ML_Perception",
 		"ML_Sequence_Memory",
 		"ML_Generative",
-		"ML_Synthesis",
-        "Chamber_ML"
+        "ML_Synthesis"
 	  ],
 	  "audio": {
 		"ambient_preset": "minimal_drone",
@@ -145,7 +144,7 @@
 		  "position": "exploration",
 		  "artifacts": [],
 		  "size_budget": "compact_only",
-		  "rationale": "How machines learn to see: computer vision, CNNs, attention mechanisms. Specialized perception — convolution as learned pattern matching. Artifacts pending placement."
+		  "rationale": "How machines learn to see: computer vision, CNNs, attention mechanisms. Specialized perception \u2014 convolution as learned pattern matching. Artifacts pending placement."
 		},
 		{
 		  "map": "ML_Sequence_Memory",
@@ -167,6 +166,15 @@
 		  "artifacts": [],
 		  "size_budget": "compact_only",
 		  "rationale": "Reinforcement learning agents that act, explainable AI we can question, anomaly detection that finds the unexpected. ML paradigm synthesis. Artifacts pending placement."
+		},
+		{
+		  "map": "Chamber_ML",
+		  "position": "synthesis",
+		  "artifacts": [
+            "learn_input_pair_stand"
+		  ],
+		  "size_budget": "compact_only",
+		  "rationale": "New catalyst affordance demo for the machinelearning phase: learn_input_pair_stand."
 		}
 	  ]
 	}

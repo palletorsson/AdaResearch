@@ -1,0 +1,177 @@
+{
+  "sequences": {
+    "change": {
+      "name": "Change: Rate, Accumulation, and Flow",
+      "truth": "Things change. Change accumulates. Accumulation flows.",
+      "qfep_term": "F",
+      "qfep_connection": "Foundation \u2014 the calculus substrate. Derivative as instantaneous rate of change, integral as accumulated quantity, vector field as flow. The conceptual vocabulary that forces, wavefunctions, randomness, and noise will all use.",
+      "formula": "f'(x) = lim_{h\u21920} (f(x+h) - f(x)) / h; \u222b_a^b f(x) dx = F(b) - F(a); F = grad \u03d5 (vector field as gradient of a scalar)",
+      "demonstration": "Watch a tangent line slide along a curve and read its slope. Pump up the count on a Riemann sum and watch rectangles converge into a continuous integral. Release particles into a vector field and watch them flow. Take over the catalyst and sustain its contact on a target \u2014 accumulation made bracelet-felt.",
+      "description": "The calculus substrate, made visible. Change as instantaneous rate (derivative); accumulation as continuous addition (integral); vector field as flow at every point in space. This sequence's job is to establish the vocabulary so forces, wavefunctions, randomness, and noise can name what they're doing instead of running on an unintroduced backbone.",
+      "layer": "F_order",
+      "prerequisites": [
+        "color"
+      ],
+      "unlocks": [
+        "forces",
+        "wavefunctions"
+      ],
+      "ambient_preset": "calc_lab",
+      "difficulty": "intermediate",
+      "estimated_time": "20-30 minutes",
+      "learning_objectives": [
+        "Change as instantaneous rate: the derivative; slope of a curve at a point; velocity as rate of position",
+        "Slope across a curve: how slope itself becomes a function (derivative-as-function)",
+        "Accumulation as continuous addition: the integral; area under a curve; total from rate",
+        "Riemann sum: discrete accumulation approaching continuous; how rectangles become integrals in the limit",
+        "Vector fields: change-and-flow at every point in space; the first encounter with a function of space (not just time)",
+        "The fundamental theorem of calculus: change and accumulation are inverse operations; one undoes the other",
+        "Carry-forward to forces and waves: F = ma is calculus made physical; sine is the function whose second derivative is itself negated"
+      ],
+      "content": [
+        "Change_Intro: a curve in space; a tangent line slides along it; slope reads out as a number",
+        "Change_Velocity: a particle moves; its position over time draws a curve; its velocity arrow is the derivative made visible",
+        "Change_Slope_Surface: a 2D function z = f(x,y); partial derivatives shown as slope arrows in x and y",
+        "Accumulation_Area: a curve and a shaded area beneath it; slider moves the right boundary; area readout tracks",
+        "Accumulation_Riemann: discrete rectangles approaching a continuous integral as count increases; player adjusts partition",
+        "Flow_Field: a 2D vector field \u2014 arrows everywhere; presets for rotational / divergent / wavy",
+        "Flow_Particle_Pulse: release particles into a field, watch them follow streamlines",
+        "Change_Reconciliation: the FTC bridge \u2014 derivative and integral are inverse; transition into chamber",
+        "Chamber_Change: catalyst chamber \u2014 introduces the sustain affordance (catalyst-as-accumulation); first foe whose state shifts under sustained contact"
+      ],
+      "maps": [
+        "Change_Intro",
+        "Change_Velocity",
+        "Change_Slope_Surface",
+        "Accumulation_Area",
+        "Accumulation_Riemann",
+        "Flow_Field",
+        "Flow_Particle_Pulse",
+        "Change_Reconciliation"
+      ],
+      "axiom_files": [],
+      "algorithm_paths": {},
+      "return_to": "lab",
+      "lab_post": "Lab/map_data_post_change",
+      "unlock_requirements": [
+        "color"
+      ],
+      "completion_rewards": [
+        "calculus_badge",
+        "sustain_affordance"
+      ],
+      "_status": "scaffolded",
+      "_provenance": "Proposed 2026-05-13 via doc/sequence_proposals/2026-05-13_change-sequence.md. Follows from the math-density sieve pass (doc/sieve_passes/2026-05-13T09-15-00_math-density.md) \u2014 addresses the calculus shadow running across forces / wavefunctions / randomness / noise. Maps and artifacts are placeholder names; build follows the spine-walker editing pattern.",
+      "artifact_groups": [
+        {
+          "map": "Change_Intro",
+          "position": "intro",
+          "artifacts": [
+            "slope_tangent_demo",
+            "derivative_pair",
+            "code_display",
+            "science_screen"
+          ],
+          "size_budget": "compact_only",
+          "rationale": "Open with the most concrete change: a tangent line sliding along a curve. The number on the tangent IS the derivative. Code panel shows f(x) and f'(x) side by side.",
+          "grammar": "florence"
+        },
+        {
+          "map": "Change_Velocity",
+          "position": "foundation",
+          "artifacts": [
+            "velocity_arrow",
+            "derivative_pair",
+            "player_trace",
+            "code_display"
+          ],
+          "size_budget": "compact_only",
+          "rationale": "Animate a particle. Position over time = the curve. Velocity arrow = the derivative made physical. player_trace from primitives reappears here as the path-becomes-function move.",
+          "grammar": "florence"
+        },
+        {
+          "map": "Change_Slope_Surface",
+          "position": "foundation",
+          "artifacts": [
+            "partial_derivative_terrain",
+            "science_screen"
+          ],
+          "size_budget": "moderate",
+          "rationale": "Extend derivative from curve to surface. Partial derivatives shown as slope arrows in x and y. Sets up vector field as the next move.",
+          "grammar": "florence"
+        },
+        {
+          "map": "Accumulation_Area",
+          "position": "accumulation",
+          "artifacts": [
+            "integral_area",
+            "code_display",
+            "science_screen"
+          ],
+          "size_budget": "moderate",
+          "rationale": "Shaded area under a curve. Slider moves the right boundary; area readout tracks. Accumulation as a function of the upper bound \u2014 the integral as a function.",
+          "grammar": "florence"
+        },
+        {
+          "map": "Accumulation_Riemann",
+          "position": "accumulation",
+          "artifacts": [
+            "riemann_pump",
+            "riemann_pi",
+            "integral_area"
+          ],
+          "size_budget": "moderate",
+          "rationale": "Player adjusts partition count; rectangles converge to a continuous integral. Reuse riemann_pi from QFEP lab as a finite example: \u03c0 from a Riemann sum.",
+          "grammar": "florence"
+        },
+        {
+          "map": "Flow_Field",
+          "position": "flow",
+          "artifacts": [
+            "vector_field_grid",
+            "science_screen"
+          ],
+          "size_budget": "compact_only",
+          "rationale": "A 2D grid of arrows for f(x,y) = (vx, vy). Presets for rotational / divergent / wavy. Player can dial through them.",
+          "grammar": "florence"
+        },
+        {
+          "map": "Flow_Particle_Pulse",
+          "position": "flow",
+          "artifacts": [
+            "vector_field_grid",
+            "particle_flow_swarm"
+          ],
+          "size_budget": "moderate",
+          "rationale": "Release particles into the field. They follow streamlines. Make flow felt as motion-through-rule.",
+          "grammar": "florence"
+        },
+        {
+          "map": "Change_Reconciliation",
+          "position": "synthesis",
+          "artifacts": [
+            "ftc_bridge",
+            "code_display",
+            "science_screen"
+          ],
+          "size_budget": "moderate",
+          "rationale": "The Fundamental Theorem of Calculus made animated: take derivative, then integrate, return to original. Same for the other direction. The bridge that connects every prior map.",
+          "grammar": "florence"
+        },
+        {
+          "map": "Chamber_Change",
+          "position": "chamber",
+          "artifacts": [
+            "catalyst_sustain_demo",
+            "catalyst_foe#initial_state:foe",
+            "becoming_catalyst",
+            "science_screen"
+          ],
+          "size_budget": "moderate",
+          "rationale": "Catalyst chamber. The bracelet acquires the sustain affordance: hold orb contact to accumulate effect. First foe demonstrates the new way of engaging \u2014 same goo, but tickled by sustained contact rather than impact.",
+          "grammar": "florence"
+        }
+      ]
+    }
+  }
+}

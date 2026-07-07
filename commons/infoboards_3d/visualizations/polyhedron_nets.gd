@@ -1,4 +1,14 @@
 # PolyhedronNets.gd - 2D net visualizations for polyhedra
+#
+# @identity
+# essence: the 2D nets of tetrahedron, cube, and octahedron that fold up along hinges into their closed 3D solids
+# desire: learner watches a flat strip of faces become a volume — surface area precedes and predicts the solid
+# critical_parameter: fold_progress (0..1) — the single scalar that carries the shape from unfolded plane to sealed polyhedron
+# triggers: builds the flat net on ready, then animates hinge rotations across fold_progress to close it into the solid
+# emerges: the understanding that a 3D form is a folded 2D one — every polyhedron is a plane that learned to close
+# needs: [animated fold from net to solid for cube [has], missing folds for the tetra and octa nets it also draws]
+# relationships: the unfolding of the platonic solids; kin to the fold_system and the Melencolia net
+# truth: a polyhedron is a flat thing that folded — the net is not a diagram of the solid, it is the solid unfolded
 extends Node3D
 
 @export var net_type: String = "tetrahedron"

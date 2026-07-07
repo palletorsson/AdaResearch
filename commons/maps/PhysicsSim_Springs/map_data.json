@@ -14,12 +14,7 @@
       "difficulty": "intermediate",
       "category": "physics",
       "estimated_time": "10-12 minutes",
-      "learning_objectives": [
-        "Hooke's law: F = -kx and damped harmonic oscillation",
-        "Spring-mass networks as building blocks for deformable objects",
-        "Cloth simulation from grid-connected springs",
-        "Damping and energy dissipation"
-      ]
+      "learning_objectives": ["Hooke's law: F = -kx and damped harmonic oscillation","Spring-mass networks as building blocks for deformable objects","Cloth simulation from grid-connected springs","Damping and energy dissipation"]
     },
     "title": "Elasticity and Memory"
   },
@@ -39,24 +34,12 @@
     }
   },
   "lighting": {
-    "ambient_color": [
-      0.4,
-      0.4,
-      0.5
-    ],
+    "ambient_color": [0.4,0.4,0.5],
     "ambient_energy": 0.6,
     "directional_light": {
       "enabled": true,
-      "direction": [
-        -0.4,
-        -0.7,
-        -0.4
-      ],
-      "color": [
-        1.0,
-        0.9,
-        0.8
-      ],
+      "direction": [-0.4,-0.7,-0.4],
+      "color": [1.0,0.9,0.8],
       "energy": 1.2
     }
   },
@@ -67,11 +50,7 @@
     "enable_physics": true,
     "background": {
       "type": "sky",
-      "color": [
-        0.2,
-        0.3,
-        0.7
-      ]
+      "color": [0.2,0.3,0.7]
     }
   },
   "layers": {

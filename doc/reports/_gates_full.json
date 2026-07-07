@@ -1,0 +1,251 @@
+{
+  "overall_pass": false,
+  "overall_status": "FAIL",
+  "enabled_gate_count": 4,
+  "passing_enabled_gate_count": 2,
+  "total_gate_count": 4,
+  "command_exit_codes": {
+    "sequence_contract": 0,
+    "artifact_audit": 0,
+    "validate_map_all": 0,
+    "audit_lab_chain": 0
+  },
+  "gates": [
+    {
+      "id": "A",
+      "name": "Sequence Contract",
+      "pass": false,
+      "metrics": {
+        "missing_declared_maps": 0,
+        "duplicate_entries_within_sequence": 1,
+        "undeclared_map_folders": 658
+      },
+      "enabled": true
+    },
+    {
+      "id": "B",
+      "name": "Artifact Registry Integrity",
+      "pass": false,
+      "metrics": {
+        "unresolved_scene_files": 0,
+        "missing_scene_path": 48,
+        "unsupported_scene_path": 0,
+        "missing_map_ready": 30,
+        "missing_include_in_map_data": 30
+      },
+      "enabled": true
+    },
+    {
+      "id": "C",
+      "name": "Map Validation",
+      "pass": true,
+      "metrics": {
+        "grade_A": 943,
+        "grade_B": 145,
+        "grade_C": 159,
+        "grade_F": 0,
+        "max_grade_c": null,
+        "grade_c_blocking": false,
+        "max_grade_f": 0
+      },
+      "enabled": true
+    },
+    {
+      "id": "D",
+      "name": "Lab Progression Continuity",
+      "pass": true,
+      "metrics": {
+        "lost_count": 0,
+        "changed_count": 12,
+        "total_issues": 39,
+        "ok_superset_pairs": 5
+      },
+      "examples": {
+        "lost": [],
+        "changed": [
+          "  STRUCTURE CHANGED (2 cells): e.g. [((7, 4), '1', '6'), ((6, 4), '1', '3')]",
+          "  STRUCTURE CHANGED (6 cells): e.g. [((7, 4), '6', '1'), ((6, 4), '3', '1'), ((7, 3), '6', '1')]",
+          "  UTILITIES CHANGED (1 cells): e.g. [((4, 4), 'm:0.1', 'm:0.4')]",
+          "  STRUCTURE CHANGED (8 cells): e.g. [((10, 5), '2', '3'), ((10, 4), '2', '3'), ((12, 3), '1', '6')]",
+          "  STRUCTURE CHANGED (1 cells): e.g. [((13, 11), '6', '1')]",
+          "  STRUCTURE CHANGED (1 cells): e.g. [((13, 11), '1', '6')]",
+          "  STRUCTURE CHANGED (1 cells): e.g. [((13, 11), '6', '1')]",
+          "  STRUCTURE CHANGED (12 cells): e.g. [((15, 5), '2', '3'), ((18, 4), '1', '2'), ((18, 7), '6', '2')]",
+          "  STRUCTURE CHANGED (9 cells): e.g. [((15, 5), '3', '2'), ((19, 4), '6', '1'), ((14, 4), '2', '1')]",
+          "  STRUCTURE CHANGED (21 cells): e.g. [((21, 10), '2', '1'), ((23, 7), '1', '2'), ((22, 5), '3', '1')]"
+        ]
+      },
+      "enabled": true
+    }
+  ],
+  "raw": {
+    "sequence_contract_summary": {
+      "total_sequences": 68,
+      "declared_entries": 696,
+      "declared_unique_maps": 665,
+      "map_folders_with_data": 1245,
+      "duplicate_entries_within_sequence": 1,
+      "duplicates_across_sequences": 30,
+      "missing_declared_maps": 0,
+      "undeclared_map_folders": 658,
+      "undeclared_prefix_hints": 303,
+      "cross_sequence_prefix_hints": 162
+    },
+    "artifact_audit_summary": {
+      "total_entries": 2225,
+      "dict_entries": 2225,
+      "non_dict_entries": 0,
+      "placeholder_entries": 0,
+      "missing_scene_path": 48,
+      "unsupported_scene_path": 0,
+      "disallowed_scene_prefix": 1,
+      "unresolved_scene_files": 0,
+      "missing_include_in_map_data": 30,
+      "missing_map_ready": 30,
+      "missing_map_sequences_field": 67,
+      "empty_map_sequences": 773,
+      "algorithm_without_curation": 6
+    },
+    "grade_counts": {
+      "A": 943,
+      "C": 159,
+      "B": 145
+    },
+    "lab_metrics": {
+      "total_issues": 39,
+      "lost_count": 0,
+      "changed_count": 12,
+      "ok_superset_pairs": 5,
+      "lost_examples": [],
+      "changed_examples": [
+        "  STRUCTURE CHANGED (2 cells): e.g. [((7, 4), '1', '6'), ((6, 4), '1', '3')]",
+        "  STRUCTURE CHANGED (6 cells): e.g. [((7, 4), '6', '1'), ((6, 4), '3', '1'), ((7, 3), '6', '1')]",
+        "  UTILITIES CHANGED (1 cells): e.g. [((4, 4), 'm:0.1', 'm:0.4')]",
+        "  STRUCTURE CHANGED (8 cells): e.g. [((10, 5), '2', '3'), ((10, 4), '2', '3'), ((12, 3), '1', '6')]",
+        "  STRUCTURE CHANGED (1 cells): e.g. [((13, 11), '6', '1')]",
+        "  STRUCTURE CHANGED (1 cells): e.g. [((13, 11), '1', '6')]",
+        "  STRUCTURE CHANGED (1 cells): e.g. [((13, 11), '6', '1')]",
+        "  STRUCTURE CHANGED (12 cells): e.g. [((15, 5), '2', '3'), ((18, 4), '1', '2'), ((18, 7), '6', '2')]",
+        "  STRUCTURE CHANGED (9 cells): e.g. [((15, 5), '3', '2'), ((19, 4), '6', '1'), ((14, 4), '2', '1')]",
+        "  STRUCTURE CHANGED (21 cells): e.g. [((21, 10), '2', '1'), ((23, 7), '1', '2'), ((22, 5), '3', '1')]"
+      ]
+    },
+    "stderr_samples": {
+      "sequence_contract": [
+        "## Sequence Contract Audit",
+        "",
+        "Checks explicit `maps[]` ownership only; map-name similarities are informational hints and never auto-assigned.",
+        "",
+        "| Metric | Count |",
+        "|---|---:|",
+        "| `total_sequences` | 68 |",
+        "| `declared_entries` | 696 |",
+        "| `declared_unique_maps` | 665 |",
+        "| `map_folders_with_data` | 1245 |",
+        "| `duplicate_entries_within_sequence` | 1 |",
+        "| `duplicates_across_sequences` | 30 |",
+        "| `missing_declared_maps` | 0 |",
+        "| `undeclared_map_folders` | 658 |",
+        "| `undeclared_prefix_hints` | 303 |",
+        "| `cross_sequence_prefix_hints` | 162 |",
+        "",
+        "### Interpretation Notes",
+        "",
+        "- `missing_declared_maps`: blocker. Sequence points to maps that do not exist on disk."
+      ],
+      "artifact_audit": [
+        "## Artifact Registry Audit",
+        "",
+        "Checks unresolved scenes, placeholder-backed entries, and curation metadata coverage.",
+        "",
+        "| Metric | Count |",
+        "|---|---:|",
+        "| `total_entries` | 2225 |",
+        "| `dict_entries` | 2225 |",
+        "| `non_dict_entries` | 0 |",
+        "| `placeholder_entries` | 0 |",
+        "| `missing_scene_path` | 48 |",
+        "| `unsupported_scene_path` | 0 |",
+        "| `disallowed_scene_prefix` | 1 |",
+        "| `unresolved_scene_files` | 0 |",
+        "| `missing_include_in_map_data` | 30 |",
+        "| `missing_map_ready` | 30 |",
+        "| `missing_map_sequences_field` | 67 |",
+        "| `empty_map_sequences` | 773 |",
+        "| `algorithm_without_curation` | 6 |",
+        ""
+      ],
+      "validate_map_all": [
+        "[",
+        "  {",
+        "    \"map\": \"_Example_Branch\",",
+        "    \"path\": \"commons\\\\maps\\\\_Example_Branch\\\\map_data.json\",",
+        "    \"checks\": {",
+        "      \"json_valid\": true,",
+        "      \"has_required_fields\": true,",
+        "      \"dimensions_consistent\": {",
+        "        \"pass\": true,",
+        "        \"issues\": []",
+        "      },",
+        "      \"spawn_safe\": true,",
+        "      \"has_teleporter\": true,",
+        "      \"no_lifts\": true,",
+        "      \"artifacts_in_registry\": {",
+        "        \"pass\": true,",
+        "        \"missing\": []",
+        "      },",
+        "      \"no_artifacts_on_void\": {",
+        "        \"pass\": true,"
+      ],
+      "audit_lab_chain": [
+        "======================================================================",
+        "LAB PROGRESSION CHAIN AUDIT",
+        "======================================================================",
+        "",
+        "--------------------------------------------------",
+        "Stage: Initial (map_data.json)",
+        "  Dimensions: 0x0",
+        "  Structure cells: 236",
+        "  Utilities: 10",
+        "  Artifacts: 0",
+        "  Interactables: 13",
+        "  Teleporters: 7",
+        "    tp->catalyst_test",
+        "    tp->color",
+        "    tp->forces",
+        "    tp->hazards",
+        "    tp->postfoundationscrisis",
+        "    tp->primitives",
+        "    tp->transformation",
+        "",
+        "--------------------------------------------------",
+        "Stage: primitives (map_data_post_primitives.json)",
+        "  Dimensions: 0x0",
+        "  Structure cells: 76",
+        "  Utilities: 6",
+        "  Artifacts: 0",
+        "  Interactables: 12",
+        "  Teleporters: 3",
+        "    tp->color",
+        "    tp->primitives",
+        "    tp->transformation",
+        "",
+        "--------------------------------------------------",
+        "Stage: transformation (map_data_post_transformation.json)",
+        "  Dimensions: 0x0",
+        "  Structure cells: 76",
+        "  Utilities: 9",
+        "  Artifacts: 0",
+        "  Interactables: 12",
+        "  Teleporters: 4"
+      ]
+    }
+  },
+  "gate_policy": {
+    "toggle_source": "doc\\reports\\RELEASE_GATES_TOGGLES.json",
+    "ignore_gate_toggles": false,
+    "require_all_gates_enabled": false,
+    "all_gates_enabled": true,
+    "disabled_gate_ids": []
+  }
+}

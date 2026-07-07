@@ -1,19 +1,13 @@
 {
   "documentation": {
-    "key_elements": [
-      "`player_trace` records movement path through the route",
-      "`y_translation_cube:180:1.5:2` and `z_translation_cube:180:1.5:2` axis demonstrations",
-      "Multiple `pick_up_cube` targets staged across levels",
-      "`pickup_gate#pickups:7` as collection threshold gate",
-      "`dark_sphere` landmark with teleporter `t` and score point `sp` at sequence exit"
-    ],
+    "key_elements": ["`player_trace` records movement path through the route","`y_translation_cube:180:1.5:2` and `z_translation_cube:180:1.5:2` axis demonstrations","Multiple `pick_up_cube` targets staged across levels","`pickup_gate#pickups:7` as collection threshold gate","`dark_sphere` landmark with teleporter `t` and score point `sp` at sequence exit"],
     "layout": "Asymmetric multi-level platform network bridged by walkways and transport cubes.",
     "objective": "Show translation as a formal displacement system across X/Y/Z through navigation and collection tasks.",
     "summary": "Transformation_2 - Translation Route Field"
   },
   "layers": {
     "interactables": [
-      ["player_trace"," "," "," "," "," "," "],
+      ["player_trace"," "," ","transform_composition_workbench:0:0"," "," "," "],
       [" "," "," "," "," "," "," "],
       [" "," "," "," "," "," ","z_translation_cube:180:1.5:2"],
       [" "," "," "," "," ","pick_up_cube:0:1"," "],
@@ -92,23 +86,11 @@
     ]
   },
   "lighting": {
-    "ambient_color": [
-      0.4,
-      0.4,
-      0.5
-    ],
+    "ambient_color": [0.4,0.4,0.5],
     "ambient_energy": 0.6,
     "directional_light": {
-      "color": [
-        1.0,
-        0.9,
-        0.8
-      ],
-      "direction": [
-        -0.4,
-        -0.7,
-        -0.4
-      ],
+      "color": [1.0,0.9,0.8],
+      "direction": [-0.4,-0.7,-0.4],
       "enabled": true,
       "energy": 1.2
     }
@@ -126,12 +108,7 @@
       "category": "tutorial",
       "difficulty": "beginner",
       "estimated_time": "3-4 minutes",
-      "learning_objectives": [
-        "Translation along constrained axes",
-        "Displacement without rotation or scaling",
-        "Route planning through transport systems",
-        "Spatial reasoning across voids"
-      ]
+      "learning_objectives": ["Translation along constrained axes","Displacement without rotation or scaling","Route planning through transport systems","Spatial reasoning across voids"]
     },
     "name": "Translation Basics",
     "title": "Translation Basics",
@@ -140,11 +117,7 @@
   "settings": {
     "auto_reveal_on_entry": false,
     "background": {
-      "color": [
-        0.2,
-        0.3,
-        0.7
-      ],
+      "color": [0.2,0.3,0.7],
       "type": "sky"
     },
     "cube_size": 1.0,

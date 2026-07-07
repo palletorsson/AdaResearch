@@ -1,0 +1,29 @@
+{
+  "timestamp": "2026-07-03T09:12:22.819785",
+  "phase": "baseline",
+  "pipeline_summary": {
+    "sequences_scored": 22,
+    "complete": [
+      "randomness"
+    ],
+    "all_others_head": "stage 6 vr_testing (headset-gated)"
+  },
+  "heat_map_top_5": [
+    "capture 65",
+    "floor 65",
+    "subtitles 60",
+    "primitives subtitles 60"
+  ],
+  "garden_health": {
+    "voice_coverage": "54%",
+    "embodiment_rate": "33%",
+    "phantom_limbs": 843
+  },
+  "release_gates": {
+    "overall": "PASS",
+    "A": "PASS",
+    "B": "PASS",
+    "C": "PASS",
+    "D": "PASS"
+  }
+}

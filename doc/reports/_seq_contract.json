@@ -1,0 +1,5734 @@
+{
+  "summary": {
+    "total_sequences": 68,
+    "declared_entries": 696,
+    "declared_unique_maps": 665,
+    "map_folders_with_data": 1245,
+    "duplicate_entries_within_sequence": 1,
+    "duplicates_across_sequences": 30,
+    "missing_declared_maps": 0,
+    "undeclared_map_folders": 658,
+    "undeclared_prefix_hints": 303,
+    "cross_sequence_prefix_hints": 162
+  },
+  "issues": {
+    "duplicate_entries_within_sequence": [
+      {
+        "map": "Tutorial_Single",
+        "sequence": "array_tutorial",
+        "sequence_name": "Array Tutorial Sequence",
+        "source": "commons/maps/sequences/array_tutorial.json",
+        "positions": [
+          1,
+          4
+        ]
+      }
+    ],
+    "duplicates_across_sequences": [
+      {
+        "map": "Bracelet_Zoo",
+        "owners": [
+          {
+            "sequence": "hazards",
+            "sequence_name": "Hazards: The Bestiary",
+            "source": "commons/maps/sequences/hazards.json"
+          },
+          {
+            "sequence": "testmaps",
+            "sequence_name": "Unused Artifacts Test",
+            "source": "commons/maps/sequences/testmaps.json"
+          }
+        ],
+        "owner_count": 2
+      },
+      {
+        "map": "Cove_Display_Gallery",
+        "owners": [
+          {
+            "sequence": "mosaicanalysis",
+            "sequence_name": "Mosaic Analysis: Grid Logic in Stone and Glass",
+            "source": "commons/maps/sequences/mosaicanalysis.json"
+          },
+          {
+            "sequence": "patterngeneration",
+            "sequence_name": "Shaders & Patterns: The Book of Shaders",
+            "source": "commons/maps/sequences/patterngeneration.json"
+          }
+        ],
+        "owner_count": 2
+      },
+      {
+        "map": "Escher_Impossible",
+        "owners": [
+          {
+            "sequence": "artmathematics",
+            "sequence_name": "Art & Mathematics: Visual Philosophy",
+            "source": "commons/maps/sequences/artmathematics.json"
+          },
+          {
+            "sequence": "foundationscrisis",
+            "sequence_name": "Foundations Crisis: The Limits of Formalization",
+            "source": "commons/maps/sequences/foundationscrisis.json"
+          }
+        ],
+        "owner_count": 2
+      },
+      {
+        "map": "Facade_Italian_Presets",
+        "owners": [
+          {
+            "sequence": "facades",
+            "sequence_name": "Facades: Grammar Builds Architecture",
+            "source": "commons/maps/sequences/facades.json"
+          },
+          {
+            "sequence": "mosaicanalysis",
+            "sequence_name": "Mosaic Analysis: Grid Logic in Stone and Glass",
+            "source": "commons/maps/sequences/mosaicanalysis.json"
+          }
+        ],
+        "owner_count": 2
+      },
+      {
+        "map": "Folding_Zoo",
+        "owners": [
+          {
+            "sequence": "fold_system",
+            "sequence_name": "Folding: Same Faces, Only Positions Change",
+            "source": "commons/maps/sequences/fold_system.json"
+          },
+          {
+            "sequence": "hazards",
+            "sequence_name": "Hazards: The Bestiary",
+            "source": "commons/maps/sequences/hazards.json"
+          }
+        ],
+        "owner_count": 2
+      },
+      {
+        "map": "ProceduralGenerationBooleanPatterns",
+        "owners": [
+          {
+            "sequence": "constraint_solvers",
+            "sequence_name": "Constraint Solvers: Rules Become Worlds",
+            "source": "commons/maps/sequences/constraint_solvers.json"
+          },
+          {
+            "sequence": "proceduralgeneration_all",
+            "sequence_name": "Procedural Generation (All Maps)",
+            "source": "commons/maps/sequences/proceduralgeneration_all.json"
+          }
+        ],
+        "owner_count": 2
+      },
+      {
+        "map": "ProceduralGenerationNetSpace",
+        "owners": [
+          {
+            "sequence": "higher_dimensions",
+            "sequence_name": "Higher Dimensions: Beyond 3D",
+            "source": "commons/maps/sequences/higher_dimensions.json"
+          },
+          {
+            "sequence": "proceduralgeneration_all",
+            "sequence_name": "Procedural Generation (All Maps)",
+            "source": "commons/maps/sequences/proceduralgeneration_all.json"
+          }
+        ],
+        "owner_count": 2
+      },
+      {
+        "map": "ProceduralGenerationPortals",
+        "owners": [
+          {
+            "sequence": "higher_dimensions",
+            "sequence_name": "Higher Dimensions: Beyond 3D",
+            "source": "commons/maps/sequences/higher_dimensions.json"
+          },
+          {
+            "sequence": "proceduralgeneration_all",
+            "sequence_name": "Procedural Generation (All Maps)",
+            "source": "commons/maps/sequences/proceduralgeneration_all.json"
+          }
+        ],
+        "owner_count": 2
+      },
+      {
+        "map": "ProceduralGenerationSixteenCellNet",
+        "owners": [
+          {
+            "sequence": "higher_dimensions",
+            "sequence_name": "Higher Dimensions: Beyond 3D",
+            "source": "commons/maps/sequences/higher_dimensions.json"
+          },
+          {
+            "sequence": "proceduralgeneration_all",
+            "sequence_name": "Procedural Generation (All Maps)",
+            "source": "commons/maps/sequences/proceduralgeneration_all.json"
+          }
+        ],
+        "owner_count": 2
+      },
+      {
+        "map": "ProceduralGenerationTesseractErrorTunnel",
+        "owners": [
+          {
+            "sequence": "higher_dimensions",
+            "sequence_name": "Higher Dimensions: Beyond 3D",
+            "source": "commons/maps/sequences/higher_dimensions.json"
+          },
+          {
+            "sequence": "proceduralgeneration_all",
+            "sequence_name": "Procedural Generation (All Maps)",
+            "source": "commons/maps/sequences/proceduralgeneration_all.json"
+          }
+        ],
+        "owner_count": 2
+      },
+      {
+        "map": "ProceduralGenerationWfcDungeonGenerator",
+        "owners": [
+          {
+            "sequence": "constraint_solvers",
+            "sequence_name": "Constraint Solvers: Rules Become Worlds",
+            "source": "commons/maps/sequences/constraint_solvers.json"
+          },
+          {
+            "sequence": "proceduralgeneration_all",
+            "sequence_name": "Procedural Generation (All Maps)",
+            "source": "commons/maps/sequences/proceduralgeneration_all.json"
+          }
+        ],
+        "owner_count": 2
+      },
+      {
+        "map": "ProceduralGeneration_Delaunay_Triangulation",
+        "owners": [
+          {
+            "sequence": "proceduralgeneration_all",
+            "sequence_name": "Procedural Generation (All Maps)",
+            "source": "commons/maps/sequences/proceduralgeneration_all.json"
+          },
+          {
+            "sequence": "spatial_partitioning",
+            "sequence_name": "Spatial Partitioning: Dividing Space",
+            "source": "commons/maps/sequences/spatial_partitioning.json"
+          }
+        ],
+        "owner_count": 2
+      },
+      {
+        "map": "ProceduralGeneration_Markov_Chains",
+        "owners": [
+          {
+            "sequence": "grammar_systems",
+            "sequence_name": "Grammar Systems: Rules Generate Structure",
+            "source": "commons/maps/sequences/grammar_systems.json"
+          },
+          {
+            "sequence": "proceduralgeneration_all",
+            "sequence_name": "Procedural Generation (All Maps)",
+            "source": "commons/maps/sequences/proceduralgeneration_all.json"
+          }
+        ],
+        "owner_count": 2
+      },
+      {
+        "map": "ProceduralGeneration_N_grams",
+        "owners": [
+          {
+            "sequence": "grammar_systems",
+            "sequence_name": "Grammar Systems: Rules Generate Structure",
+            "source": "commons/maps/sequences/grammar_systems.json"
+          },
+          {
+            "sequence": "proceduralgeneration_all",
+            "sequence_name": "Procedural Generation (All Maps)",
+            "source": "commons/maps/sequences/proceduralgeneration_all.json"
+          }
+        ],
+        "owner_count": 2
+      },
+      {
+        "map": "ProceduralGeneration_Poisson_Disk_Sampling",
+        "owners": [
+          {
+            "sequence": "proceduralgeneration_all",
+            "sequence_name": "Procedural Generation (All Maps)",
+            "source": "commons/maps/sequences/proceduralgeneration_all.json"
+          },
+          {
+            "sequence": "spatial_partitioning",
+            "sequence_name": "Spatial Partitioning: Dividing Space",
+            "source": "commons/maps/sequences/spatial_partitioning.json"
+          }
+        ],
+        "owner_count": 2
+      },
+      {
+        "map": "ProceduralGeneration_Reaction_Diffusion_Systems",
+        "owners": [
+          {
+            "sequence": "proceduralgeneration_all",
+            "sequence_name": "Procedural Generation (All Maps)",
+            "source": "commons/maps/sequences/proceduralgeneration_all.json"
+          },
+          {
+            "sequence": "softbodies",
+            "sequence_name": "Soft Bodies & Morphogenesis: Matter That Finds Its Shape",
+            "source": "commons/maps/sequences/softbodies.json"
+          }
+        ],
+        "owner_count": 2
+      },
+      {
+        "map": "ProceduralGeneration_Space_Partitioning",
+        "owners": [
+          {
+            "sequence": "proceduralgeneration_all",
+            "sequence_name": "Procedural Generation (All Maps)",
+            "source": "commons/maps/sequences/proceduralgeneration_all.json"
+          },
+          {
+            "sequence": "spatial_partitioning",
+            "sequence_name": "Spatial Partitioning: Dividing Space",
+            "source": "commons/maps/sequences/spatial_partitioning.json"
+          }
+        ],
+        "owner_count": 2
+      },
+      {
+        "map": "ProceduralGeneration_Voronoi_Diagrams",
+        "owners": [
+          {
+            "sequence": "proceduralgeneration_all",
+            "sequence_name": "Procedural Generation (All Maps)",
+            "source": "commons/maps/sequences/proceduralgeneration_all.json"
+          },
+          {
+            "sequence": "spatial_partitioning",
+            "sequence_name": "Spatial Partitioning: Dividing Space",
+            "source": "commons/maps/sequences/spatial_partitioning.json"
+          }
+        ],
+        "owner_count": 2
+      },
+      {
+        "map": "ProceduralGeneration_Wave_Function_Collapse",
+        "owners": [
+          {
+            "sequence": "constraint_solvers",
+            "sequence_name": "Constraint Solvers: Rules Become Worlds",
+            "source": "commons/maps/sequences/constraint_solvers.json"
+          },
+          {
+            "sequence": "proceduralgeneration_all",
+            "sequence_name": "Procedural Generation (All Maps)",
+            "source": "commons/maps/sequences/proceduralgeneration_all.json"
+          }
+        ],
+        "owner_count": 2
+      },
+      {
+        "map": "Shader_Arch_Gallery",
+        "owners": [
+          {
+            "sequence": "mosaicanalysis",
+            "sequence_name": "Mosaic Analysis: Grid Logic in Stone and Glass",
+            "source": "commons/maps/sequences/mosaicanalysis.json"
+          },
+          {
+            "sequence": "patterngeneration",
+            "sequence_name": "Shaders & Patterns: The Book of Shaders",
+            "source": "commons/maps/sequences/patterngeneration.json"
+          }
+        ],
+        "owner_count": 2
+      },
+      {
+        "map": "Tile_Shapes_Gallery",
+        "owners": [
+          {
+            "sequence": "mosaicanalysis",
+            "sequence_name": "Mosaic Analysis: Grid Logic in Stone and Glass",
+            "source": "commons/maps/sequences/mosaicanalysis.json"
+          },
+          {
+            "sequence": "patterngeneration",
+            "sequence_name": "Shaders & Patterns: The Book of Shaders",
+            "source": "commons/maps/sequences/patterngeneration.json"
+          }
+        ],
+        "owner_count": 2
+      },
+      {
+        "map": "VFM_01_Foundations",
+        "owners": [
+          {
+            "sequence": "forces",
+            "sequence_name": "Vectors & Forces: From Direction to Dynamics",
+            "source": "commons/maps/sequences/forces.json"
+          },
+          {
+            "sequence": "vectorforcesmuseum",
+            "sequence_name": "Vector & Forces Museum",
+            "source": "commons/maps/sequences/vectorforcesmuseum.json"
+          }
+        ],
+        "owner_count": 2
+      },
+      {
+        "map": "VFM_02_Operations",
+        "owners": [
+          {
+            "sequence": "forces",
+            "sequence_name": "Vectors & Forces: From Direction to Dynamics",
+            "source": "commons/maps/sequences/forces.json"
+          },
+          {
+            "sequence": "vectorforcesmuseum",
+            "sequence_name": "Vector & Forces Museum",
+            "source": "commons/maps/sequences/vectorforcesmuseum.json"
+          }
+        ],
+        "owner_count": 2
+      },
+      {
+        "map": "VFM_03_Motion",
+        "owners": [
+          {
+            "sequence": "forces",
+            "sequence_name": "Vectors & Forces: From Direction to Dynamics",
+            "source": "commons/maps/sequences/forces.json"
+          },
+          {
+            "sequence": "vectorforcesmuseum",
+            "sequence_name": "Vector & Forces Museum",
+            "source": "commons/maps/sequences/vectorforcesmuseum.json"
+          }
+        ],
+        "owner_count": 2
+      },
+      {
+        "map": "VFM_04_Fields",
+        "owners": [
+          {
+            "sequence": "forces",
+            "sequence_name": "Vectors & Forces: From Direction to Dynamics",
+            "source": "commons/maps/sequences/forces.json"
+          },
+          {
+            "sequence": "vectorforcesmuseum",
+            "sequence_name": "Vector & Forces Museum",
+            "source": "commons/maps/sequences/vectorforcesmuseum.json"
+          }
+        ],
+        "owner_count": 2
+      },
+      {
+        "map": "VFM_05_Launch",
+        "owners": [
+          {
+            "sequence": "forces",
+            "sequence_name": "Vectors & Forces: From Direction to Dynamics",
+            "source": "commons/maps/sequences/forces.json"
+          },
+          {
+            "sequence": "vectorforcesmuseum",
+            "sequence_name": "Vector & Forces Museum",
+            "source": "commons/maps/sequences/vectorforcesmuseum.json"
+          }
+        ],
+        "owner_count": 2
+      },
+      {
+        "map": "VFM_06_Springs",
+        "owners": [
+          {
+            "sequence": "forces",
+            "sequence_name": "Vectors & Forces: From Direction to Dynamics",
+            "source": "commons/maps/sequences/forces.json"
+          },
+          {
+            "sequence": "vectorforcesmuseum",
+            "sequence_name": "Vector & Forces Museum",
+            "source": "commons/maps/sequences/vectorforcesmuseum.json"
+          }
+        ],
+        "owner_count": 2
+      },
+      {
+        "map": "VFM_07_Gravity",
+        "owners": [
+          {
+            "sequence": "forces",
+            "sequence_name": "Vectors & Forces: From Direction to Dynamics",
+            "source": "commons/maps/sequences/forces.json"
+          },
+          {
+            "sequence": "vectorforcesmuseum",
+            "sequence_name": "Vector & Forces Museum",
+            "source": "commons/maps/sequences/vectorforcesmuseum.json"
+          }
+        ],
+        "owner_count": 2
+      },
+      {
+        "map": "VFM_08_Arena",
+        "owners": [
+          {
+            "sequence": "forces",
+            "sequence_name": "Vectors & Forces: From Direction to Dynamics",
+            "source": "commons/maps/sequences/forces.json"
+          },
+          {
+            "sequence": "vectorforcesmuseum",
+            "sequence_name": "Vector & Forces Museum",
+            "source": "commons/maps/sequences/vectorforcesmuseum.json"
+          }
+        ],
+        "owner_count": 2
+      },
+      {
+        "map": "Wallpaper_Groups_Gallery",
+        "owners": [
+          {
+            "sequence": "mosaicanalysis",
+            "sequence_name": "Mosaic Analysis: Grid Logic in Stone and Glass",
+            "source": "commons/maps/sequences/mosaicanalysis.json"
+          },
+          {
+            "sequence": "patterngeneration",
+            "sequence_name": "Shaders & Patterns: The Book of Shaders",
+            "source": "commons/maps/sequences/patterngeneration.json"
+          }
+        ],
+        "owner_count": 2
+      }
+    ],
+    "missing_declared_maps": [],
+    "undeclared_map_folders": [
+      "_Example_Branch",
+      "_Example_Island",
+      "_Example_Linear",
+      "AdvancedLaboratory_Entropy_Visualization",
+      "AdvancedLaboratory_Feedback_Cybernetics",
+      "AdvancedLaboratory_Systems_Theory",
+      "AdvancedLaboratory_Water_Dynamics",
+      "AgentialRealism",
+      "Archetype_Amphitheater",
+      "Archetype_Atrium",
+      "Archetype_Bridge",
+      "Archetype_Cathedral",
+      "Archetype_Cave",
+      "Archetype_Citadel",
+      "Archetype_Constellation",
+      "Archetype_Crossroads",
+      "Archetype_Dungeon",
+      "Archetype_Forum",
+      "Archetype_HubSpokes",
+      "Archetype_Maze",
+      "Archetype_Pit",
+      "Archetype_Promenade",
+      "Archetype_Quadrants",
+      "Archetype_Spiral",
+      "Archetype_Stacks",
+      "Archetype_Theater",
+      "Archetype_Tower",
+      "Archetype_Ziggurat",
+      "Array_Basics",
+      "Array_Buren_Courtyard",
+      "Array_Soane_Plaza",
+      "Art_History_Gallery",
+      "Astar_T00",
+      "Astar_T03",
+      "Astar_T08",
+      "Atlas_ReadingRoom",
+      "Atlas_SDF_Gallery",
+      "AutoGenTest",
+      "AutoGenTest2",
+      "Brouwer_Intuitionism_composed",
+      "CA_Rules_Lab",
+      "Canon_Conveyor_Showcase",
+      "Chamber_Arrays",
+      "Chamber_CA",
+      "Chamber_Color",
+      "Chamber_Color.bak.20260429T110640",
+      "Chamber_Facade",
+      "Chamber_Forces",
+      "Chamber_Foundations",
+      "Chamber_Foundations_composed",
+      "Chamber_Fractals",
+      "Chamber_LSystems",
+      "Chamber_ML",
+      "Chamber_Noise",
+      "Chamber_Primitives",
+      "Chamber_Primitives_HumanoidWalker",
+      "Chamber_Primitives_Hybrid",
+      "Chamber_Primitives_Placed",
+      "Chamber_Primitives_SimulatedAnnealing",
+      "Chamber_ProcGen",
+      "Chamber_ProcGen_p1",
+      "Chamber_ProcGen_p2",
+      "Chamber_ProcGen_p3",
+      "Chamber_QFEP",
+      "Chamber_Random",
+      "Chamber_SoftBodies_p1",
+      "Chamber_SoftBodies_p2",
+      "Chamber_SoftBodies_p3",
+      "Chamber_Swarm",
+      "Chamber_Transformation",
+      "Chamber_Waves",
+      "Chamber_Waves_p1",
+      "Chamber_Waves_p2",
+      "Chamber_Waves_p3",
+      "Change_Bench",
+      "Color_Context",
+      "Color_Grabbable",
+      "Color_Overlay",
+      "Color_Pillar_compare_cardinal",
+      "Color_Pillar_compare_cluster_center",
+      "Color_Pillar_compare_linear_path",
+      "Color_Pillar_compare_nearest_role",
+      "Color_Pillar_compare_perimeter",
+      "Color_Pillar_p1",
+      "Color_Pillar_p2",
+      "Color_Pillar_p3",
+      "Color_Showcase",
+      "Color_Spectrum",
+      "Color_Sphere",
+      "ComputationalGeometry_Closest_Pair_Problem",
+      "ComputationalGeometry_Convex_Hull_Algorithms",
+      "ComputationalGeometry_Distance_Fields_SDF",
+      "ComputationalGeometry_Euclidean_Distance_Transform",
+      "ComputationalGeometry_Line_Intersection",
+      "ComputationalGeometry_Medial_Axis_Transform",
+      "ComputationalGeometry_Morphological_Operations",
+      "ComputationalGeometry_Point_in_Polygon",
+      "Creature_Gallery",
+      "Crisis_Synthesis_composed",
+      "CriticalAlgorithms_Algorithmic_Misframing",
+      "CriticalAlgorithms_Attention_Economy",
+      "CriticalAlgorithms_Ethics_in_AI",
+      "CriticalAlgorithms_Societal_Impact",
+      "CriticalAlgorithms_Surveillance_Systems",
+      "DataStructures_BSP_Trees",
+      "DataStructures_Fenwick_Tree_Binary_Indexed_Tree",
+      "DataStructures_Graph_Structures",
+      "DataStructures_Hash_Maps",
+      "DataStructures_Heap_Operations",
+      "DataStructures_Linked_Lists",
+      "DataStructures_Quadtrees_Octrees",
+      "DataStructures_Segment_Tree",
+      "DataStructures_Suffix_Array_Tree",
+      "DataStructures_Trees",
+      "DataStructures_Trie_Operations",
+      "DataStructures_Union_Find_Disjoint_Set",
+      "Demo_Catalyst_Arc",
+      "Escher_Impossible_composed",
+      "Euclid_Parallel_composed",
+      "Facade_baroque",
+      "Facade_bernini_colonnade",
+      "Facade_capri_whitewash",
+      "Facade_classical",
+      "Facade_continuous_monument",
+      "Facade_decon_fragment",
+      "Facade_florence_marble",
+      "Facade_florentine_polychrome",
+      "Facade_galleria_vittorio_emanuele",
+      "Facade_gothic_portal",
+      "Facade_memphis_totem",
+      "Facade_naples_diamond_rustication",
+      "Facade_nyc_tenement",
+      "Facade_painted_vault",
+      "Facade_pompeii_black_room",
+      "Facade_pompeii_ceiling_coffers",
+      "Facade_pompeii_ceiling_medallion",
+      "Facade_pompeii_fourth_style",
+      "Facade_pompeii_red_room",
+      "Facade_pompeii_second_style",
+      "Facade_superstudio_grid",
+      "Facade_venetian_gothic",
+      "Facade_villa_boscoreale",
+      "Facade_villa_mysteries",
+      "Facade_villa_san_michele",
+      "Facade_villa_san_michele_exact",
+      "Florensky_Paraconsistent_composed",
+      "Flower_Water",
+      "Fold_Theatre",
+      "Forces_1",
+      "Forces_2",
+      "Forces_3",
+      "Forces_4",
+      "Forces_5",
+      "Forces_6",
+      "Forces_7",
+      "Forces_8",
+      "Forces_Destruct",
+      "Forces_Drone_Game",
+      "Foundations_Crisis_Hall",
+      "Gallery_Best_Of_AutoResearch",
+      "Gallery_Loader_Demo",
+      "Gallery_Misc_Placed",
+      "Geometric_1",
+      "Geometric_2",
+      "Geometric_3",
+      "Godel_Incompleteness_composed",
+      "Goomba_Arena",
+      "Goomba_Arena_edit048",
+      "GraphTheory_Edmonds_Algorithm",
+      "GraphTheory_Force_Directed_3d",
+      "GraphTheory_Force_Directed_Graph_Layout",
+      "GraphTheory_Graphspace",
+      "GraphTheory_Graphspace_3d",
+      "GraphTheory_Karger_s_Algorithm",
+      "GraphTheory_Kosaraju_s_Algorithm",
+      "GraphTheory_Maximum_Flow_Algorithms",
+      "GraphTheory_Minimum_Spanning_Tree",
+      "GraphTheory_Network_Analysis",
+      "GraphTheory_Path_Finding_3d",
+      "GraphTheory_Push_Relabel_Algorithm",
+      "GraphTheory_Tarjan_s_Algorithm",
+      "GraphTheory_Topological_Sort",
+      "Grid_Editor_Gallery",
+      "Grid_Editor_Workshop",
+      "Grown_MultiDisplay",
+      "Grown_PointTestsClone",
+      "Grown_primitives_w0",
+      "Grown_primitives_w1",
+      "Grown_primitives_w2",
+      "Hazards_Zoo_3",
+      "ISO_Showcase_12",
+      "JSON_Demo",
+      "JumpPadTest",
+      "Lab_Death",
+      "Limits_Lab",
+      "LSystems_AnimatedTree",
+      "LSystems_Backus_Naur_Form_BNF",
+      "LSystems_CityGenerator",
+      "LSystems_Context_Free_Grammars_CFG",
+      "LSystems_ContextSensitiveTree",
+      "LSystems_Different_Grammar_Types",
+      "LSystems_ForestCompetition",
+      "LSystems_Hilbert3D",
+      "LSystems_Shape_Grammars",
+      "LSystems_Stochastic_L_Systems",
+      "LSystems_Tree_L_Systems",
+      "MachineLearning_Attention_Mechanisms",
+      "MachineLearning_Classification_Algorithms",
+      "MachineLearning_Clustering_Algorithms",
+      "MachineLearning_Convolutional_Neural_Networks_CNNs",
+      "MachineLearning_Dimensionality_Reduction",
+      "MachineLearning_Evolving_Creatures",
+      "MachineLearning_Evolving_Flowers",
+      "MachineLearning_Explainable_AI_XAI",
+      "MachineLearning_Fine_tuning",
+      "MachineLearning_Generative_Adversarial_Networks_GANs",
+      "MachineLearning_LSTMs",
+      "MachineLearning_Neural_Networks",
+      "MachineLearning_Random_Walker_Machine",
+      "MachineLearning_Recommendation_Systems",
+      "MachineLearning_Recurrent_Neural_Networks_RNNs",
+      "MachineLearning_Transfer_Learning",
+      "MachineLearning_Transformers",
+      "MachineLearning_Variational_Autoencoders_VAEs",
+      "MANN_Gallery_Pearl",
+      "MANN_Gallery_PearlRight",
+      "mg_animal_crossing",
+      "mg_antichamber_break",
+      "mg_archipelago",
+      "mg_atrium",
+      "mg_borges_paths",
+      "mg_brown_serpentine",
+      "mg_bsp_classic",
+      "mg_bsp_mirror",
+      "mg_ca_rule30",
+      "mg_ca_rule90",
+      "mg_ca_smooth",
+      "mg_cantor_dust",
+      "mg_checker_floor",
+      "mg_chequer_big",
+      "mg_circle_chain",
+      "mg_circle_courtyard",
+      "mg_corridor_grid",
+      "mg_dark_souls",
+      "mg_dark_souls_with_terr",
+      "mg_drunkard",
+      "mg_drunkard_plinths",
+      "mg_floating_platforms",
+      "mg_flw_prairie",
+      "mg_flw_with_garden",
+      "mg_fractal_split",
+      "mg_frame_walk",
+      "mg_full_grammar",
+      "mg_gyroid",
+      "mg_gyroid_dense",
+      "mg_haeckel_specimen",
+      "mg_hilbert_o3",
+      "mg_hilbert_o4",
+      "mg_hilbert_with_specimen",
+      "mg_hollow_knight",
+      "mg_island_with_axis",
+      "mg_island_with_petal",
+      "mg_keystone_room",
+      "mg_loos_raumplan_h",
+      "mg_loos_raumplan_quad",
+      "mg_lorenz_butterfly",
+      "mg_lsystem_dragon",
+      "mg_lsystem_koch",
+      "mg_lsystem_koch_thick",
+      "mg_mansion_six",
+      "mg_metroid_4",
+      "mg_mies_dense",
+      "mg_mies_universal",
+      "mg_mies_with_centerpiece",
+      "mg_noise_blob",
+      "mg_noise_with_circles",
+      "mg_perimeter_plinths",
+      "mg_petal_in_frame",
+      "mg_petal_six",
+      "mg_petal_twelve",
+      "mg_petal_with_axis",
+      "mg_physarum",
+      "mg_physarum_with_columns",
+      "mg_qfep_banner",
+      "mg_ramped_terraces",
+      "mg_renaissance",
+      "mg_resident_evil",
+      "mg_room_simple",
+      "mg_room_walled",
+      "mg_rotated_lsystem",
+      "mg_safdie_habitat",
+      "mg_safdie_with_void",
+      "mg_serpentine_dense",
+      "mg_sierpinski",
+      "mg_soane_collection",
+      "mg_spine_4",
+      "mg_spine_ca",
+      "mg_spine_north",
+      "mg_staircase_axis",
+      "mg_subdivide_mirror",
+      "mg_symmetric_chambers",
+      "mg_terraced_bowl",
+      "mg_terraced_with_columns",
+      "mg_terraced_with_specimen",
+      "mg_tile_courtyard",
+      "mg_turing_pattern",
+      "mg_turing_stripes",
+      "mg_two_circles_ramp",
+      "mg_two_floor",
+      "mg_two_rooms",
+      "mg_ulam_fib",
+      "mg_ulam_primes",
+      "mg_voronoi_district",
+      "mg_voronoi_thick",
+      "mg_walk_safe",
+      "mg_zelda_dense",
+      "mg_zelda_overworld",
+      "mg_zelda_with_specimen",
+      "mg_zigzag_levels",
+      "Minimal_Test",
+      "MiniScene_2d_in_3d_vectors_vis",
+      "MiniScene_adder_board",
+      "MiniScene_agreement_gauge",
+      "MiniScene_basis_vectors_rig",
+      "MiniScene_catalyst_pickup",
+      "MiniScene_control_console",
+      "MiniScene_CoordinateSystem3M",
+      "MiniScene_Harmonic",
+      "MiniScene_length_lantern",
+      "MiniScene_Oscillation_Trio",
+      "MiniScene_Point",
+      "MiniScene_Spring",
+      "MiniScene_stretch_bench",
+      "MiniScene_vector_magnitude_demo",
+      "MiniScene_vector_normalize_demo",
+      "MiniScene_vector_sub",
+      "Modern_Canon_Showcase",
+      "Monte_Carlo_Room",
+      "Naples_Street_Pearl",
+      "Noise_Blue",
+      "Noise_Functions",
+      "Noise_Perlin_Simplex_HumanoidWalker",
+      "Noise_Perlin_Simplex_Hybrid",
+      "Noise_Perlin_Simplex_Placed",
+      "Noise_Perlin_Simplex_SimulatedAnnealing",
+      "Noise_Volume",
+      "NonEuclidean_Spaces_composed",
+      "One_Primitives",
+      "OrbTestChamber",
+      "Oscillation_Animated_Cube",
+      "Path_Block_01",
+      "Path_Block_02",
+      "Pattern_Loom_Gallery",
+      "Pattern_pt01_p1_bauhaus",
+      "Pattern_pt02_p2_escher",
+      "Pattern_pt03_p4m_alhambra",
+      "Pattern_pt04_p6m_persian",
+      "Pattern_pt05_p3_memphis",
+      "Pattern_pt06_pmm_tatami",
+      "Pattern_pt07_p4g_pastel",
+      "Pattern_pt08_p6_monochrome",
+      "Pattern_pt09_pgg_bauhaus",
+      "Pattern_pt10_p3m1_alhambra",
+      "Pattern_Tunnel",
+      "Pattern_Walls_Pearl",
+      "PearlDrop_Test",
+      "PG_Branching_Growth_p1",
+      "PG_Branching_Growth_p2",
+      "PG_Branching_Growth_p3",
+      "PG_Caves_Mazes_p1",
+      "PG_Caves_Mazes_p2",
+      "PG_Caves_Mazes_p3",
+      "PG_Genetic_Evolution_p1",
+      "PG_Genetic_Evolution_p2",
+      "PG_Genetic_Evolution_p3",
+      "PG_Mirrored_Patterns_p1",
+      "PG_Mirrored_Patterns_p2",
+      "PG_Mirrored_Patterns_p3",
+      "PG_Percolation_Network_p1",
+      "PG_Percolation_Network_p2",
+      "PG_Percolation_Network_p3",
+      "PG_Sculpted_Forms_p1",
+      "PG_Sculpted_Forms_p2",
+      "PG_Sculpted_Forms_p3",
+      "PG_Space_Colonization_p1",
+      "PG_Space_Colonization_p2",
+      "PG_Space_Colonization_p3",
+      "Physics_1",
+      "Physics_2",
+      "Physics_3",
+      "Physics_4",
+      "Physics_5",
+      "Placement_Circle_Packing",
+      "Placement_Fold",
+      "Placement_Hybrid",
+      "Placement_Paradoxical",
+      "Placement_Random",
+      "Placement_Rule_Based",
+      "Placement_Sdf",
+      "Placement_Simulated_Annealing"
+    ],
+    "undeclared_prefix_hints": [
+      {
+        "map": "AdvancedLaboratory_Entropy_Visualization",
+        "hints": [
+          {
+            "sequence": "advancedlaboratory",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "AdvancedLaboratory_Feedback_Cybernetics",
+        "hints": [
+          {
+            "sequence": "advancedlaboratory",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "AdvancedLaboratory_Systems_Theory",
+        "hints": [
+          {
+            "sequence": "advancedlaboratory",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "AdvancedLaboratory_Water_Dynamics",
+        "hints": [
+          {
+            "sequence": "advancedlaboratory",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Art_History_Gallery",
+        "hints": [
+          {
+            "sequence": "gallery",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Atlas_ReadingRoom",
+        "hints": [
+          {
+            "sequence": "atlas",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Atlas_SDF_Gallery",
+        "hints": [
+          {
+            "sequence": "atlas",
+            "score": 8
+          },
+          {
+            "sequence": "gallery",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Chamber_Color",
+        "hints": [
+          {
+            "sequence": "color",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Chamber_Color.bak.20260429T110640",
+        "hints": [
+          {
+            "sequence": "color",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Chamber_Forces",
+        "hints": [
+          {
+            "sequence": "forces",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Chamber_Fractals",
+        "hints": [
+          {
+            "sequence": "fractals",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Chamber_LSystems",
+        "hints": [
+          {
+            "sequence": "lsystems",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Chamber_Noise",
+        "hints": [
+          {
+            "sequence": "noise",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Chamber_Primitives",
+        "hints": [
+          {
+            "sequence": "primitives",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Chamber_Primitives_HumanoidWalker",
+        "hints": [
+          {
+            "sequence": "primitives",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Chamber_Primitives_Hybrid",
+        "hints": [
+          {
+            "sequence": "primitives",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Chamber_Primitives_Placed",
+        "hints": [
+          {
+            "sequence": "primitives",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Chamber_Primitives_SimulatedAnnealing",
+        "hints": [
+          {
+            "sequence": "primitives",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Chamber_SoftBodies_p1",
+        "hints": [
+          {
+            "sequence": "softbodies",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Chamber_SoftBodies_p2",
+        "hints": [
+          {
+            "sequence": "softbodies",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Chamber_SoftBodies_p3",
+        "hints": [
+          {
+            "sequence": "softbodies",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Chamber_Transformation",
+        "hints": [
+          {
+            "sequence": "transformation",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Change_Bench",
+        "hints": [
+          {
+            "sequence": "change",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Color_Context",
+        "hints": [
+          {
+            "sequence": "color",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Color_Grabbable",
+        "hints": [
+          {
+            "sequence": "color",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Color_Overlay",
+        "hints": [
+          {
+            "sequence": "color",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Color_Pillar_compare_cardinal",
+        "hints": [
+          {
+            "sequence": "color",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Color_Pillar_compare_cluster_center",
+        "hints": [
+          {
+            "sequence": "color",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Color_Pillar_compare_linear_path",
+        "hints": [
+          {
+            "sequence": "color",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Color_Pillar_compare_nearest_role",
+        "hints": [
+          {
+            "sequence": "color",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Color_Pillar_compare_perimeter",
+        "hints": [
+          {
+            "sequence": "color",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Color_Pillar_p1",
+        "hints": [
+          {
+            "sequence": "color",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Color_Pillar_p2",
+        "hints": [
+          {
+            "sequence": "color",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Color_Pillar_p3",
+        "hints": [
+          {
+            "sequence": "color",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Color_Showcase",
+        "hints": [
+          {
+            "sequence": "color",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Color_Spectrum",
+        "hints": [
+          {
+            "sequence": "color",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Color_Sphere",
+        "hints": [
+          {
+            "sequence": "color",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "ComputationalGeometry_Closest_Pair_Problem",
+        "hints": [
+          {
+            "sequence": "computationalgeometry",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "ComputationalGeometry_Convex_Hull_Algorithms",
+        "hints": [
+          {
+            "sequence": "computationalgeometry",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "ComputationalGeometry_Distance_Fields_SDF",
+        "hints": [
+          {
+            "sequence": "computationalgeometry",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "ComputationalGeometry_Euclidean_Distance_Transform",
+        "hints": [
+          {
+            "sequence": "computationalgeometry",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "ComputationalGeometry_Line_Intersection",
+        "hints": [
+          {
+            "sequence": "computationalgeometry",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "ComputationalGeometry_Medial_Axis_Transform",
+        "hints": [
+          {
+            "sequence": "computationalgeometry",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "ComputationalGeometry_Morphological_Operations",
+        "hints": [
+          {
+            "sequence": "computationalgeometry",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "ComputationalGeometry_Point_in_Polygon",
+        "hints": [
+          {
+            "sequence": "computationalgeometry",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Creature_Gallery",
+        "hints": [
+          {
+            "sequence": "gallery",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "CriticalAlgorithms_Algorithmic_Misframing",
+        "hints": [
+          {
+            "sequence": "criticalalgorithms",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "CriticalAlgorithms_Attention_Economy",
+        "hints": [
+          {
+            "sequence": "criticalalgorithms",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "CriticalAlgorithms_Ethics_in_AI",
+        "hints": [
+          {
+            "sequence": "criticalalgorithms",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "CriticalAlgorithms_Societal_Impact",
+        "hints": [
+          {
+            "sequence": "criticalalgorithms",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "CriticalAlgorithms_Surveillance_Systems",
+        "hints": [
+          {
+            "sequence": "criticalalgorithms",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "DataStructures_BSP_Trees",
+        "hints": [
+          {
+            "sequence": "datastructures",
+            "score": 8
+          },
+          {
+            "sequence": "structure",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "DataStructures_Fenwick_Tree_Binary_Indexed_Tree",
+        "hints": [
+          {
+            "sequence": "datastructures",
+            "score": 8
+          },
+          {
+            "sequence": "structure",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "DataStructures_Graph_Structures",
+        "hints": [
+          {
+            "sequence": "datastructures",
+            "score": 8
+          },
+          {
+            "sequence": "structure",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "DataStructures_Hash_Maps",
+        "hints": [
+          {
+            "sequence": "datastructures",
+            "score": 8
+          },
+          {
+            "sequence": "structure",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "DataStructures_Heap_Operations",
+        "hints": [
+          {
+            "sequence": "datastructures",
+            "score": 8
+          },
+          {
+            "sequence": "structure",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "DataStructures_Linked_Lists",
+        "hints": [
+          {
+            "sequence": "datastructures",
+            "score": 8
+          },
+          {
+            "sequence": "structure",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "DataStructures_Quadtrees_Octrees",
+        "hints": [
+          {
+            "sequence": "datastructures",
+            "score": 8
+          },
+          {
+            "sequence": "structure",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "DataStructures_Segment_Tree",
+        "hints": [
+          {
+            "sequence": "datastructures",
+            "score": 8
+          },
+          {
+            "sequence": "structure",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "DataStructures_Suffix_Array_Tree",
+        "hints": [
+          {
+            "sequence": "datastructures",
+            "score": 8
+          },
+          {
+            "sequence": "structure",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "DataStructures_Trees",
+        "hints": [
+          {
+            "sequence": "datastructures",
+            "score": 8
+          },
+          {
+            "sequence": "structure",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "DataStructures_Trie_Operations",
+        "hints": [
+          {
+            "sequence": "datastructures",
+            "score": 8
+          },
+          {
+            "sequence": "structure",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "DataStructures_Union_Find_Disjoint_Set",
+        "hints": [
+          {
+            "sequence": "datastructures",
+            "score": 8
+          },
+          {
+            "sequence": "joints",
+            "score": 8
+          },
+          {
+            "sequence": "structure",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Facade_superstudio_grid",
+        "hints": [
+          {
+            "sequence": "facades",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Forces_1",
+        "hints": [
+          {
+            "sequence": "forces",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Forces_2",
+        "hints": [
+          {
+            "sequence": "forces",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Forces_3",
+        "hints": [
+          {
+            "sequence": "forces",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Forces_4",
+        "hints": [
+          {
+            "sequence": "forces",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Forces_5",
+        "hints": [
+          {
+            "sequence": "forces",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Forces_6",
+        "hints": [
+          {
+            "sequence": "forces",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Forces_7",
+        "hints": [
+          {
+            "sequence": "forces",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Forces_8",
+        "hints": [
+          {
+            "sequence": "forces",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Forces_Destruct",
+        "hints": [
+          {
+            "sequence": "forces",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Forces_Drone_Game",
+        "hints": [
+          {
+            "sequence": "forces",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Foundations_Crisis_Hall",
+        "hints": [
+          {
+            "sequence": "foundationscrisis",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Gallery_Best_Of_AutoResearch",
+        "hints": [
+          {
+            "sequence": "gallery",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Gallery_Loader_Demo",
+        "hints": [
+          {
+            "sequence": "gallery",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Gallery_Misc_Placed",
+        "hints": [
+          {
+            "sequence": "gallery",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "GraphTheory_Edmonds_Algorithm",
+        "hints": [
+          {
+            "sequence": "graphtheory",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "GraphTheory_Force_Directed_3d",
+        "hints": [
+          {
+            "sequence": "graphtheory",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "GraphTheory_Force_Directed_Graph_Layout",
+        "hints": [
+          {
+            "sequence": "graphtheory",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "GraphTheory_Graphspace",
+        "hints": [
+          {
+            "sequence": "graphtheory",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "GraphTheory_Graphspace_3d",
+        "hints": [
+          {
+            "sequence": "graphtheory",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "GraphTheory_Karger_s_Algorithm",
+        "hints": [
+          {
+            "sequence": "graphtheory",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "GraphTheory_Kosaraju_s_Algorithm",
+        "hints": [
+          {
+            "sequence": "graphtheory",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "GraphTheory_Maximum_Flow_Algorithms",
+        "hints": [
+          {
+            "sequence": "graphtheory",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "GraphTheory_Minimum_Spanning_Tree",
+        "hints": [
+          {
+            "sequence": "graphtheory",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "GraphTheory_Network_Analysis",
+        "hints": [
+          {
+            "sequence": "graphtheory",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "GraphTheory_Path_Finding_3d",
+        "hints": [
+          {
+            "sequence": "graphtheory",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "GraphTheory_Push_Relabel_Algorithm",
+        "hints": [
+          {
+            "sequence": "graphtheory",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "GraphTheory_Tarjan_s_Algorithm",
+        "hints": [
+          {
+            "sequence": "graphtheory",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "GraphTheory_Topological_Sort",
+        "hints": [
+          {
+            "sequence": "graphtheory",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Grid_Editor_Gallery",
+        "hints": [
+          {
+            "sequence": "gallery",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Grown_primitives_w0",
+        "hints": [
+          {
+            "sequence": "primitives",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Grown_primitives_w1",
+        "hints": [
+          {
+            "sequence": "primitives",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Grown_primitives_w2",
+        "hints": [
+          {
+            "sequence": "primitives",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Hazards_Zoo_3",
+        "hints": [
+          {
+            "sequence": "hazards",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "LSystems_AnimatedTree",
+        "hints": [
+          {
+            "sequence": "lsystems",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "LSystems_Backus_Naur_Form_BNF",
+        "hints": [
+          {
+            "sequence": "lsystems",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "LSystems_CityGenerator",
+        "hints": [
+          {
+            "sequence": "lsystems",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "LSystems_Context_Free_Grammars_CFG",
+        "hints": [
+          {
+            "sequence": "lsystems",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "LSystems_ContextSensitiveTree",
+        "hints": [
+          {
+            "sequence": "lsystems",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "LSystems_Different_Grammar_Types",
+        "hints": [
+          {
+            "sequence": "lsystems",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "LSystems_ForestCompetition",
+        "hints": [
+          {
+            "sequence": "lsystems",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "LSystems_Hilbert3D",
+        "hints": [
+          {
+            "sequence": "lsystems",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "LSystems_Shape_Grammars",
+        "hints": [
+          {
+            "sequence": "lsystems",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "LSystems_Stochastic_L_Systems",
+        "hints": [
+          {
+            "sequence": "lsystems",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "LSystems_Tree_L_Systems",
+        "hints": [
+          {
+            "sequence": "lsystems",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "MachineLearning_Attention_Mechanisms",
+        "hints": [
+          {
+            "sequence": "machinelearning",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "MachineLearning_Classification_Algorithms",
+        "hints": [
+          {
+            "sequence": "machinelearning",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "MachineLearning_Clustering_Algorithms",
+        "hints": [
+          {
+            "sequence": "machinelearning",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "MachineLearning_Convolutional_Neural_Networks_CNNs",
+        "hints": [
+          {
+            "sequence": "machinelearning",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "MachineLearning_Dimensionality_Reduction",
+        "hints": [
+          {
+            "sequence": "machinelearning",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "MachineLearning_Evolving_Creatures",
+        "hints": [
+          {
+            "sequence": "machinelearning",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "MachineLearning_Evolving_Flowers",
+        "hints": [
+          {
+            "sequence": "flowers",
+            "score": 8
+          },
+          {
+            "sequence": "machinelearning",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "MachineLearning_Explainable_AI_XAI",
+        "hints": [
+          {
+            "sequence": "machinelearning",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "MachineLearning_Fine_tuning",
+        "hints": [
+          {
+            "sequence": "machinelearning",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "MachineLearning_Generative_Adversarial_Networks_GANs",
+        "hints": [
+          {
+            "sequence": "machinelearning",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "MachineLearning_LSTMs",
+        "hints": [
+          {
+            "sequence": "machinelearning",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "MachineLearning_Neural_Networks",
+        "hints": [
+          {
+            "sequence": "machinelearning",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "MachineLearning_Random_Walker_Machine",
+        "hints": [
+          {
+            "sequence": "machinelearning",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "MachineLearning_Recommendation_Systems",
+        "hints": [
+          {
+            "sequence": "machinelearning",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "MachineLearning_Recurrent_Neural_Networks_RNNs",
+        "hints": [
+          {
+            "sequence": "machinelearning",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "MachineLearning_Transfer_Learning",
+        "hints": [
+          {
+            "sequence": "machinelearning",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "MachineLearning_Transformers",
+        "hints": [
+          {
+            "sequence": "machinelearning",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "MachineLearning_Variational_Autoencoders_VAEs",
+        "hints": [
+          {
+            "sequence": "machinelearning",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "MANN_Gallery_Pearl",
+        "hints": [
+          {
+            "sequence": "gallery",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "MANN_Gallery_PearlRight",
+        "hints": [
+          {
+            "sequence": "gallery",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "mg_fractal_split",
+        "hints": [
+          {
+            "sequence": "fractals",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "mg_noise_blob",
+        "hints": [
+          {
+            "sequence": "noise",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "mg_noise_with_circles",
+        "hints": [
+          {
+            "sequence": "noise",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "MiniScene_2d_in_3d_vectors_vis",
+        "hints": [
+          {
+            "sequence": "vectors",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "MiniScene_basis_vectors_rig",
+        "hints": [
+          {
+            "sequence": "vectors",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "MiniScene_vector_sub",
+        "hints": [
+          {
+            "sequence": "vectors",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Noise_Blue",
+        "hints": [
+          {
+            "sequence": "noise",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Noise_Functions",
+        "hints": [
+          {
+            "sequence": "noise",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Noise_Perlin_Simplex_HumanoidWalker",
+        "hints": [
+          {
+            "sequence": "noise",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Noise_Perlin_Simplex_Hybrid",
+        "hints": [
+          {
+            "sequence": "noise",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Noise_Perlin_Simplex_Placed",
+        "hints": [
+          {
+            "sequence": "noise",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Noise_Perlin_Simplex_SimulatedAnnealing",
+        "hints": [
+          {
+            "sequence": "noise",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Noise_Volume",
+        "hints": [
+          {
+            "sequence": "noise",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "One_Primitives",
+        "hints": [
+          {
+            "sequence": "primitives",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Pattern_Loom_Gallery",
+        "hints": [
+          {
+            "sequence": "gallery",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Primitives_Fiver",
+        "hints": [
+          {
+            "sequence": "primitives",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Primitives_Godot",
+        "hints": [
+          {
+            "sequence": "primitives",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Primitives_Irregular",
+        "hints": [
+          {
+            "sequence": "primitives",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Primitives_Load",
+        "hints": [
+          {
+            "sequence": "primitives",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Primitives_Platonic",
+        "hints": [
+          {
+            "sequence": "primitives",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Primitives_Torus",
+        "hints": [
+          {
+            "sequence": "primitives",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Primitives_Tron_Grid_Navigation",
+        "hints": [
+          {
+            "sequence": "primitives",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Primitives_Useful",
+        "hints": [
+          {
+            "sequence": "primitives",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "ProceduralGeneration_Reaction_Diffusion_Systems_p1",
+        "hints": [
+          {
+            "sequence": "proceduralgeneration",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "ProceduralGeneration_Reaction_Diffusion_Systems_p2",
+        "hints": [
+          {
+            "sequence": "proceduralgeneration",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "ProceduralGeneration_Reaction_Diffusion_Systems_p3",
+        "hints": [
+          {
+            "sequence": "proceduralgeneration",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Randomness_Random_Transformations",
+        "hints": [
+          {
+            "sequence": "randomness",
+            "score": 8
+          },
+          {
+            "sequence": "transformation",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "RecursiveEmergence_Cellular_Automata_1D",
+        "hints": [
+          {
+            "sequence": "cellularautomata",
+            "score": 8
+          },
+          {
+            "sequence": "recursiveemergence",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "RecursiveEmergence_Cellular_Automata_2D",
+        "hints": [
+          {
+            "sequence": "cellularautomata",
+            "score": 8
+          },
+          {
+            "sequence": "recursiveemergence",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "RecursiveEmergence_Cellular_Automata_3D",
+        "hints": [
+          {
+            "sequence": "cellularautomata",
+            "score": 8
+          },
+          {
+            "sequence": "recursiveemergence",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "RecursiveEmergence_Fibonacci_Sequences",
+        "hints": [
+          {
+            "sequence": "recursiveemergence",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "RecursiveEmergence_Iterated_Function_Systems_IFS",
+        "hints": [
+          {
+            "sequence": "recursiveemergence",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "RecursiveEmergence_Julia_Set",
+        "hints": [
+          {
+            "sequence": "recursiveemergence",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "RecursiveEmergence_Koch_Curve",
+        "hints": [
+          {
+            "sequence": "recursiveemergence",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "RecursiveEmergence_Lattice_Gas_Automata",
+        "hints": [
+          {
+            "sequence": "recursiveemergence",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "RecursiveEmergence_Mandelbrot_Set",
+        "hints": [
+          {
+            "sequence": "recursiveemergence",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "RecursiveEmergence_Rule_30_110",
+        "hints": [
+          {
+            "sequence": "recursiveemergence",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "RecursiveEmergence_Tail_Recursion_Memoization",
+        "hints": [
+          {
+            "sequence": "recursiveemergence",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "ResourceManagement_Algorithmic_Complexity_Big_O",
+        "hints": [
+          {
+            "sequence": "resourcemanagement",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "ResourceManagement_Data_Locality_Caching",
+        "hints": [
+          {
+            "sequence": "resourcemanagement",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "ResourceManagement_Hardware_Considerations",
+        "hints": [
+          {
+            "sequence": "resourcemanagement",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "ResourceManagement_Real_time_vs_Offline_Processing",
+        "hints": [
+          {
+            "sequence": "resourcemanagement",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "ResourceManagement_Testing_and_Debugging",
+        "hints": [
+          {
+            "sequence": "resourcemanagement",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "ResourceManagement_Version_Control",
+        "hints": [
+          {
+            "sequence": "resourcemanagement",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "SearchPathfinding_A_Search_Algorithm",
+        "hints": [
+          {
+            "sequence": "searchpathfinding",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "SearchPathfinding_Breadth_First_Search_BFS",
+        "hints": [
+          {
+            "sequence": "searchpathfinding",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "SearchPathfinding_Depth_First_Search_DFS",
+        "hints": [
+          {
+            "sequence": "searchpathfinding",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "SearchPathfinding_Dijkstra_s_Algorithm",
+        "hints": [
+          {
+            "sequence": "searchpathfinding",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "SearchPathfinding_Gradient_Descent",
+        "hints": [
+          {
+            "sequence": "searchpathfinding",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "SearchPathfinding_Particle_Swarm_Optimization",
+        "hints": [
+          {
+            "sequence": "particles",
+            "score": 8
+          },
+          {
+            "sequence": "searchpathfinding",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "SearchPathfinding_Simulated_Annealing",
+        "hints": [
+          {
+            "sequence": "searchpathfinding",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "SoftBodies_Affect_Theory_Visualization_p1",
+        "hints": [
+          {
+            "sequence": "softbodies",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "SoftBodies_Affect_Theory_Visualization_p2",
+        "hints": [
+          {
+            "sequence": "softbodies",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "SoftBodies_Affect_Theory_Visualization_p3",
+        "hints": [
+          {
+            "sequence": "softbodies",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "SoftBodies_Carusell_p1",
+        "hints": [
+          {
+            "sequence": "softbodies",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "SoftBodies_Carusell_p2",
+        "hints": [
+          {
+            "sequence": "softbodies",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "SoftBodies_Carusell_p3",
+        "hints": [
+          {
+            "sequence": "softbodies",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "SoftBodies_Cloth_Physics_p1",
+        "hints": [
+          {
+            "sequence": "softbodies",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "SoftBodies_Cloth_Physics_p2",
+        "hints": [
+          {
+            "sequence": "softbodies",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "SoftBodies_Cloth_Physics_p3",
+        "hints": [
+          {
+            "sequence": "softbodies",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "SoftBodies_Obsticals_p1",
+        "hints": [
+          {
+            "sequence": "softbodies",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "SoftBodies_Obsticals_p2",
+        "hints": [
+          {
+            "sequence": "softbodies",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "SoftBodies_Obsticals_p3",
+        "hints": [
+          {
+            "sequence": "softbodies",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "SoftBodies_Obsticals_Part1",
+        "hints": [
+          {
+            "sequence": "softbodies",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "SoftBodies_Obsticals_Part2_p1",
+        "hints": [
+          {
+            "sequence": "softbodies",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "SoftBodies_Obsticals_Part2_p2",
+        "hints": [
+          {
+            "sequence": "softbodies",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "SoftBodies_Obsticals_Part2_p3",
+        "hints": [
+          {
+            "sequence": "softbodies",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "SoftBodies_Obsticals_Part3",
+        "hints": [
+          {
+            "sequence": "softbodies",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "SoftBodies_Playground_of_Joy_HumanoidWalker",
+        "hints": [
+          {
+            "sequence": "softbodies",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "SoftBodies_Playground_of_Joy_Hybrid",
+        "hints": [
+          {
+            "sequence": "softbodies",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "SoftBodies_Playground_of_Joy_p1",
+        "hints": [
+          {
+            "sequence": "softbodies",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "SoftBodies_Playground_of_Joy_p2",
+        "hints": [
+          {
+            "sequence": "softbodies",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "SoftBodies_Playground_of_Joy_p3",
+        "hints": [
+          {
+            "sequence": "softbodies",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "SoftBodies_Playground_of_Joy_Placed",
+        "hints": [
+          {
+            "sequence": "softbodies",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "SoftBodies_Playground_of_Joy_SimulatedAnnealing",
+        "hints": [
+          {
+            "sequence": "softbodies",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "SoftBodies_Soft_Body_Deformation_p1",
+        "hints": [
+          {
+            "sequence": "softbodies",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "SoftBodies_Soft_Body_Deformation_p2",
+        "hints": [
+          {
+            "sequence": "softbodies",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "SoftBodies_Soft_Body_Deformation_p3",
+        "hints": [
+          {
+            "sequence": "softbodies",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "SpeculativeComputation_Evolutionary_Algorithms",
+        "hints": [
+          {
+            "sequence": "speculativecomputation",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "SpeculativeComputation_Ontological_Uncertainty",
+        "hints": [
+          {
+            "sequence": "speculativecomputation",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "SpeculativeComputation_Queer_Cyborg_Subjectivity",
+        "hints": [
+          {
+            "sequence": "speculativecomputation",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "SpeculativeComputation_Queer_Morphological_Systems",
+        "hints": [
+          {
+            "sequence": "lsystems",
+            "score": 8
+          },
+          {
+            "sequence": "speculativecomputation",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "TestMap_Unused_1",
+        "hints": [
+          {
+            "sequence": "unused",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "TestMap_Unused_10",
+        "hints": [
+          {
+            "sequence": "unused",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "TestMap_Unused_11",
+        "hints": [
+          {
+            "sequence": "unused",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "TestMap_Unused_12",
+        "hints": [
+          {
+            "sequence": "unused",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "TestMap_Unused_13",
+        "hints": [
+          {
+            "sequence": "unused",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "TestMap_Unused_14",
+        "hints": [
+          {
+            "sequence": "unused",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "TestMap_Unused_15",
+        "hints": [
+          {
+            "sequence": "unused",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "TestMap_Unused_16",
+        "hints": [
+          {
+            "sequence": "unused",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "TestMap_Unused_17",
+        "hints": [
+          {
+            "sequence": "unused",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "TestMap_Unused_18",
+        "hints": [
+          {
+            "sequence": "unused",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "TestMap_Unused_19",
+        "hints": [
+          {
+            "sequence": "unused",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "TestMap_Unused_2",
+        "hints": [
+          {
+            "sequence": "unused",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "TestMap_Unused_20",
+        "hints": [
+          {
+            "sequence": "unused",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "TestMap_Unused_21",
+        "hints": [
+          {
+            "sequence": "unused",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "TestMap_Unused_22",
+        "hints": [
+          {
+            "sequence": "unused",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "TestMap_Unused_23",
+        "hints": [
+          {
+            "sequence": "unused",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "TestMap_Unused_24",
+        "hints": [
+          {
+            "sequence": "unused",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "TestMap_Unused_25",
+        "hints": [
+          {
+            "sequence": "unused",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "TestMap_Unused_26",
+        "hints": [
+          {
+            "sequence": "unused",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "TestMap_Unused_27",
+        "hints": [
+          {
+            "sequence": "unused",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "TestMap_Unused_28",
+        "hints": [
+          {
+            "sequence": "unused",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "TestMap_Unused_29",
+        "hints": [
+          {
+            "sequence": "unused",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "TestMap_Unused_3",
+        "hints": [
+          {
+            "sequence": "unused",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "TestMap_Unused_4",
+        "hints": [
+          {
+            "sequence": "unused",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "TestMap_Unused_5",
+        "hints": [
+          {
+            "sequence": "unused",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "TestMap_Unused_6",
+        "hints": [
+          {
+            "sequence": "unused",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "TestMap_Unused_7",
+        "hints": [
+          {
+            "sequence": "unused",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "TestMap_Unused_8",
+        "hints": [
+          {
+            "sequence": "unused",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "TestMap_Unused_9",
+        "hints": [
+          {
+            "sequence": "unused",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Topology_Entropy_Morphogenesis_p1",
+        "hints": [
+          {
+            "sequence": "morphogenesis",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Topology_Entropy_Morphogenesis_p2",
+        "hints": [
+          {
+            "sequence": "morphogenesis",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Topology_Entropy_Morphogenesis_p3",
+        "hints": [
+          {
+            "sequence": "morphogenesis",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Tutorial_2D_Color",
+        "hints": [
+          {
+            "sequence": "color",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "VectorForces",
+        "hints": [
+          {
+            "sequence": "forces",
+            "score": 8
+          },
+          {
+            "sequence": "vectorforcesmuseum",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Vectors_1",
+        "hints": [
+          {
+            "sequence": "vectors",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Vectors_2",
+        "hints": [
+          {
+            "sequence": "vectors",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Vectors_3",
+        "hints": [
+          {
+            "sequence": "vectors",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Vectors_4",
+        "hints": [
+          {
+            "sequence": "vectors",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Vectors_5",
+        "hints": [
+          {
+            "sequence": "vectors",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Vectors_6",
+        "hints": [
+          {
+            "sequence": "vectors",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "VectorSubtraction",
+        "hints": [
+          {
+            "sequence": "vectors",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "VFM_Forces_Lab",
+        "hints": [
+          {
+            "sequence": "forces",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "VFM_Forces_Playground",
+        "hints": [
+          {
+            "sequence": "forces",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "WaveFunctions_3D_Wave_Propagation_p1",
+        "hints": [
+          {
+            "sequence": "wavefunctions",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "WaveFunctions_3D_Wave_Propagation_p2",
+        "hints": [
+          {
+            "sequence": "wavefunctions",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "WaveFunctions_3D_Wave_Propagation_p3",
+        "hints": [
+          {
+            "sequence": "wavefunctions",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "WaveFunctions_AirMusic_p1",
+        "hints": [
+          {
+            "sequence": "wavefunctions",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "WaveFunctions_AirMusic_p2",
+        "hints": [
+          {
+            "sequence": "wavefunctions",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "WaveFunctions_AirMusic_p3",
+        "hints": [
+          {
+            "sequence": "wavefunctions",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "WaveFunctions_AudioLib",
+        "hints": [
+          {
+            "sequence": "wavefunctions",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "WaveFunctions_Beat_Frequencies",
+        "hints": [
+          {
+            "sequence": "wavefunctions",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Wavefunctions_Bernini_p1",
+        "hints": [
+          {
+            "sequence": "wavefunctions",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Wavefunctions_Bernini_p2",
+        "hints": [
+          {
+            "sequence": "wavefunctions",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Wavefunctions_Bernini_p3",
+        "hints": [
+          {
+            "sequence": "wavefunctions",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Wavefunctions_Cables",
+        "hints": [
+          {
+            "sequence": "wavefunctions",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Wavefunctions_ColoredLinesVRCorridor",
+        "hints": [
+          {
+            "sequence": "color",
+            "score": 8
+          },
+          {
+            "sequence": "wavefunctions",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Wavefunctions_Colors",
+        "hints": [
+          {
+            "sequence": "color",
+            "score": 8
+          },
+          {
+            "sequence": "wavefunctions",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "WaveFunctions_Effect_Sound_p1",
+        "hints": [
+          {
+            "sequence": "wavefunctions",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "WaveFunctions_Effect_Sound_p2",
+        "hints": [
+          {
+            "sequence": "wavefunctions",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "WaveFunctions_Effect_Sound_p3",
+        "hints": [
+          {
+            "sequence": "wavefunctions",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "WaveFunctions_Effect_Sound_Test",
+        "hints": [
+          {
+            "sequence": "wavefunctions",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Wavefunctions_Form_Slide",
+        "hints": [
+          {
+            "sequence": "wavefunctions",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "WaveFunctions_Fourier_Form",
+        "hints": [
+          {
+            "sequence": "wavefunctions",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "WaveFunctions_Intro_p1",
+        "hints": [
+          {
+            "sequence": "wavefunctions",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "WaveFunctions_Intro_p2",
+        "hints": [
+          {
+            "sequence": "wavefunctions",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "WaveFunctions_Intro_p3",
+        "hints": [
+          {
+            "sequence": "wavefunctions",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "WaveFunctions_John_Cage_p1",
+        "hints": [
+          {
+            "sequence": "wavefunctions",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "WaveFunctions_John_Cage_p2",
+        "hints": [
+          {
+            "sequence": "wavefunctions",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "WaveFunctions_John_Cage_p3",
+        "hints": [
+          {
+            "sequence": "wavefunctions",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "WaveFunctions_Kusama",
+        "hints": [
+          {
+            "sequence": "wavefunctions",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "WaveFunctions_MathObjects",
+        "hints": [
+          {
+            "sequence": "wavefunctions",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "WaveFunctions_Pendulum_p1",
+        "hints": [
+          {
+            "sequence": "wavefunctions",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "WaveFunctions_Pendulum_p2",
+        "hints": [
+          {
+            "sequence": "wavefunctions",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "WaveFunctions_Pendulum_p3",
+        "hints": [
+          {
+            "sequence": "wavefunctions",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "WaveFunctions_Sine_Space_p1",
+        "hints": [
+          {
+            "sequence": "wavefunctions",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "WaveFunctions_Sine_Space_p2",
+        "hints": [
+          {
+            "sequence": "wavefunctions",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "WaveFunctions_Sine_Space_p3",
+        "hints": [
+          {
+            "sequence": "wavefunctions",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Wavefunctions_Sky_Stairs_p1",
+        "hints": [
+          {
+            "sequence": "wavefunctions",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Wavefunctions_Sky_Stairs_p2",
+        "hints": [
+          {
+            "sequence": "wavefunctions",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Wavefunctions_Sky_Stairs_p3",
+        "hints": [
+          {
+            "sequence": "wavefunctions",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "WaveFunctions_SpaceDystopiaPreview",
+        "hints": [
+          {
+            "sequence": "wavefunctions",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "WaveFunctions_Spherical_Harmonics",
+        "hints": [
+          {
+            "sequence": "wavefunctions",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "WaveFunctions_Synthesis_Lab_p1",
+        "hints": [
+          {
+            "sequence": "wavefunctions",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "WaveFunctions_Synthesis_Lab_p2",
+        "hints": [
+          {
+            "sequence": "wavefunctions",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "WaveFunctions_Synthesis_Lab_p3",
+        "hints": [
+          {
+            "sequence": "wavefunctions",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "WaveFunctions_Synthesis_Lab_Placed",
+        "hints": [
+          {
+            "sequence": "wavefunctions",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "WaveFunctions_TrigWalkingPath_p1",
+        "hints": [
+          {
+            "sequence": "wavefunctions",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "WaveFunctions_TrigWalkingPath_p2",
+        "hints": [
+          {
+            "sequence": "wavefunctions",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "WaveFunctions_TrigWalkingPath_p3",
+        "hints": [
+          {
+            "sequence": "wavefunctions",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "WaveFunctions_Unit_Circle_p1",
+        "hints": [
+          {
+            "sequence": "wavefunctions",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "WaveFunctions_Unit_Circle_p2",
+        "hints": [
+          {
+            "sequence": "wavefunctions",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "WaveFunctions_Unit_Circle_p3",
+        "hints": [
+          {
+            "sequence": "wavefunctions",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "WaveFunctions_Unused",
+        "hints": [
+          {
+            "sequence": "unused",
+            "score": 8
+          },
+          {
+            "sequence": "wavefunctions",
+            "score": 8
+          }
+        ]
+      }
+    ],
+    "cross_sequence_prefix_hints": [
+      {
+        "map": "AdvancedLaboratory_Lab_Equipment_Simulation",
+        "owners": [
+          "postfoundationscrisis"
+        ],
+        "hints": [
+          {
+            "sequence": "advancedlaboratory",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "AdvancedLaboratory_Lab_Equipment_Simulation_v5_symmetric",
+        "owners": [
+          "grow_map_sandbox"
+        ],
+        "hints": [
+          {
+            "sequence": "advancedlaboratory",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Atlas_Gallery_Row_DNA_Variance",
+        "owners": [
+          "atlas"
+        ],
+        "hints": [
+          {
+            "sequence": "gallery",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Atlas_Gallery_Row_Kingdoms",
+        "owners": [
+          "atlas"
+        ],
+        "hints": [
+          {
+            "sequence": "gallery",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Atlas_Gallery_Row_Modulor",
+        "owners": [
+          "atlas"
+        ],
+        "hints": [
+          {
+            "sequence": "gallery",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Atlas_Gallery_Row_Operators",
+        "owners": [
+          "atlas"
+        ],
+        "hints": [
+          {
+            "sequence": "gallery",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Atlas_Gallery_Row_Primitives",
+        "owners": [
+          "atlas"
+        ],
+        "hints": [
+          {
+            "sequence": "gallery",
+            "score": 8
+          },
+          {
+            "sequence": "primitives",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Atlas_Gallery_Row_Stacked_Ops",
+        "owners": [
+          "atlas"
+        ],
+        "hints": [
+          {
+            "sequence": "gallery",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Atlas_Gallery_Row_Transition",
+        "owners": [
+          "atlas"
+        ],
+        "hints": [
+          {
+            "sequence": "gallery",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Catalyst_01_Primitives",
+        "owners": [
+          "catalyst_test"
+        ],
+        "hints": [
+          {
+            "sequence": "primitives",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Catalyst_02_Transformation",
+        "owners": [
+          "catalyst_test"
+        ],
+        "hints": [
+          {
+            "sequence": "transformation",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Catalyst_04_Forces",
+        "owners": [
+          "catalyst_test"
+        ],
+        "hints": [
+          {
+            "sequence": "forces",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Cove_Display_Gallery",
+        "owners": [
+          "mosaicanalysis",
+          "patterngeneration"
+        ],
+        "hints": [
+          {
+            "sequence": "gallery",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "CriticalAlgorithms_Algorithmic_Bias_Visualization",
+        "owners": [
+          "postfoundationscrisis"
+        ],
+        "hints": [
+          {
+            "sequence": "criticalalgorithms",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "CriticalAlgorithms_Applied_Ethics",
+        "owners": [
+          "postfoundationscrisis"
+        ],
+        "hints": [
+          {
+            "sequence": "criticalalgorithms",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "CriticalAlgorithms_Bias_Gallery",
+        "owners": [
+          "criticalalgorithms"
+        ],
+        "hints": [
+          {
+            "sequence": "gallery",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "DataStructures_BSP_Trees: Recursive Volume Partitioning",
+        "owners": [
+          "datastructures"
+        ],
+        "hints": [
+          {
+            "sequence": "structure",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "DataStructures_Fenwick_Tree_Binary_Indexed_Tree: Binary Arithmetic Storage",
+        "owners": [
+          "datastructures"
+        ],
+        "hints": [
+          {
+            "sequence": "structure",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "DataStructures_Graph_Structures: Pure Relation Without Hierarchy",
+        "owners": [
+          "datastructures"
+        ],
+        "hints": [
+          {
+            "sequence": "structure",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "DataStructures_Hash_Maps: Deterministic Scattering",
+        "owners": [
+          "datastructures"
+        ],
+        "hints": [
+          {
+            "sequence": "structure",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "DataStructures_Heap_Operations: Partial Order Dominance",
+        "owners": [
+          "datastructures"
+        ],
+        "hints": [
+          {
+            "sequence": "structure",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "DataStructures_Linked_Lists: Chains of Address",
+        "owners": [
+          "datastructures"
+        ],
+        "hints": [
+          {
+            "sequence": "structure",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "DataStructures_Quadtrees_Octrees: Adaptive Spatial Triage",
+        "owners": [
+          "datastructures"
+        ],
+        "hints": [
+          {
+            "sequence": "structure",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "DataStructures_Segment_Tree: Recursive Range Memory",
+        "owners": [
+          "datastructures"
+        ],
+        "hints": [
+          {
+            "sequence": "structure",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "DataStructures_Suffix_Array_Tree: Sorted Endings",
+        "owners": [
+          "datastructures"
+        ],
+        "hints": [
+          {
+            "sequence": "structure",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "DataStructures_Trees: Binary Recursion Made Spatial",
+        "owners": [
+          "datastructures"
+        ],
+        "hints": [
+          {
+            "sequence": "structure",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "DataStructures_Trie_Operations: Shared Prefix Descent",
+        "owners": [
+          "datastructures"
+        ],
+        "hints": [
+          {
+            "sequence": "structure",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "DataStructures_Union_Find_Disjoint_Set: Irreversible Merging",
+        "owners": [
+          "datastructures"
+        ],
+        "hints": [
+          {
+            "sequence": "joints",
+            "score": 8
+          },
+          {
+            "sequence": "structure",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Facade_Showcase",
+        "owners": [
+          "mosaicanalysis"
+        ],
+        "hints": [
+          {
+            "sequence": "facades",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Florence_Gallery",
+        "owners": [
+          "mosaicanalysis"
+        ],
+        "hints": [
+          {
+            "sequence": "gallery",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Gallery_CellularAutomata",
+        "owners": [
+          "gallery"
+        ],
+        "hints": [
+          {
+            "sequence": "cellularautomata",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Gallery_Color",
+        "owners": [
+          "gallery"
+        ],
+        "hints": [
+          {
+            "sequence": "color",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Gallery_DataStructures",
+        "owners": [
+          "gallery"
+        ],
+        "hints": [
+          {
+            "sequence": "datastructures",
+            "score": 8
+          },
+          {
+            "sequence": "structure",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Gallery_Hazards",
+        "owners": [
+          "gallery"
+        ],
+        "hints": [
+          {
+            "sequence": "hazards",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Gallery_MachineLearning",
+        "owners": [
+          "gallery"
+        ],
+        "hints": [
+          {
+            "sequence": "machinelearning",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Gallery_PhysicsSimulation",
+        "owners": [
+          "gallery"
+        ],
+        "hints": [
+          {
+            "sequence": "physicssimulation",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Gallery_Primitives_1",
+        "owners": [
+          "gallery"
+        ],
+        "hints": [
+          {
+            "sequence": "primitives",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Gallery_Primitives_2",
+        "owners": [
+          "gallery"
+        ],
+        "hints": [
+          {
+            "sequence": "primitives",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Gallery_Primitives_3",
+        "owners": [
+          "gallery"
+        ],
+        "hints": [
+          {
+            "sequence": "primitives",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Gallery_Primitives_4",
+        "owners": [
+          "gallery"
+        ],
+        "hints": [
+          {
+            "sequence": "primitives",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Gallery_ProceduralGeneration",
+        "owners": [
+          "gallery"
+        ],
+        "hints": [
+          {
+            "sequence": "proceduralgeneration",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Gallery_Randomness",
+        "owners": [
+          "gallery"
+        ],
+        "hints": [
+          {
+            "sequence": "randomness",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Gallery_SwarmIntelligence",
+        "owners": [
+          "gallery"
+        ],
+        "hints": [
+          {
+            "sequence": "swarmintelligence",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Gallery_Vectors",
+        "owners": [
+          "gallery"
+        ],
+        "hints": [
+          {
+            "sequence": "vectors",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Gallery_WaveFunctions",
+        "owners": [
+          "gallery"
+        ],
+        "hints": [
+          {
+            "sequence": "wavefunctions",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Grid_Subset_Gallery",
+        "owners": [
+          "testmaps"
+        ],
+        "hints": [
+          {
+            "sequence": "gallery",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Historical_Periods_Gallery",
+        "owners": [
+          "mosaicanalysis"
+        ],
+        "hints": [
+          {
+            "sequence": "gallery",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "ISO_AnimatedNoise",
+        "owners": [
+          "isosurfaces"
+        ],
+        "hints": [
+          {
+            "sequence": "noise",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "ISO_ShapesGallery",
+        "owners": [
+          "isosurfaces"
+        ],
+        "hints": [
+          {
+            "sequence": "gallery",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Lab/map_data_post_advancedlaboratory",
+        "owners": [
+          "lab"
+        ],
+        "hints": [
+          {
+            "sequence": "advancedlaboratory",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Lab/map_data_post_array_tutorial",
+        "owners": [
+          "lab"
+        ],
+        "hints": [
+          {
+            "sequence": "array_tutorial",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Lab/map_data_post_artmathematics",
+        "owners": [
+          "lab"
+        ],
+        "hints": [
+          {
+            "sequence": "artmathematics",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Lab/map_data_post_cellularautomata",
+        "owners": [
+          "lab"
+        ],
+        "hints": [
+          {
+            "sequence": "cellularautomata",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Lab/map_data_post_color",
+        "owners": [
+          "lab"
+        ],
+        "hints": [
+          {
+            "sequence": "color",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Lab/map_data_post_computationalgeometry",
+        "owners": [
+          "lab"
+        ],
+        "hints": [
+          {
+            "sequence": "computationalgeometry",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Lab/map_data_post_criticalalgorithms",
+        "owners": [
+          "lab"
+        ],
+        "hints": [
+          {
+            "sequence": "criticalalgorithms",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Lab/map_data_post_datastructures",
+        "owners": [
+          "lab"
+        ],
+        "hints": [
+          {
+            "sequence": "datastructures",
+            "score": 8
+          },
+          {
+            "sequence": "structure",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Lab/map_data_post_forces",
+        "owners": [
+          "lab"
+        ],
+        "hints": [
+          {
+            "sequence": "forces",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Lab/map_data_post_foundationscrisis",
+        "owners": [
+          "lab"
+        ],
+        "hints": [
+          {
+            "sequence": "foundationscrisis",
+            "score": 8
+          },
+          {
+            "sequence": "postfoundationscrisis",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Lab/map_data_post_fractals",
+        "owners": [
+          "lab"
+        ],
+        "hints": [
+          {
+            "sequence": "fractals",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Lab/map_data_post_graphtheory",
+        "owners": [
+          "lab"
+        ],
+        "hints": [
+          {
+            "sequence": "graphtheory",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Lab/map_data_post_lsystems",
+        "owners": [
+          "lab"
+        ],
+        "hints": [
+          {
+            "sequence": "lsystems",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Lab/map_data_post_machinelearning",
+        "owners": [
+          "lab"
+        ],
+        "hints": [
+          {
+            "sequence": "machinelearning",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Lab/map_data_post_meshes",
+        "owners": [
+          "lab"
+        ],
+        "hints": [
+          {
+            "sequence": "meshes",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Lab/map_data_post_morphogenesis",
+        "owners": [
+          "lab"
+        ],
+        "hints": [
+          {
+            "sequence": "morphogenesis",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Lab/map_data_post_mosaicanalysis",
+        "owners": [
+          "lab"
+        ],
+        "hints": [
+          {
+            "sequence": "mosaicanalysis",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Lab/map_data_post_noise",
+        "owners": [
+          "lab"
+        ],
+        "hints": [
+          {
+            "sequence": "noise",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Lab/map_data_post_patterngeneration",
+        "owners": [
+          "lab"
+        ],
+        "hints": [
+          {
+            "sequence": "patterngeneration",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Lab/map_data_post_physicssimulation",
+        "owners": [
+          "lab"
+        ],
+        "hints": [
+          {
+            "sequence": "physicssimulation",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Lab/map_data_post_primitives",
+        "owners": [
+          "lab"
+        ],
+        "hints": [
+          {
+            "sequence": "primitives",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Lab/map_data_post_proceduralaudio",
+        "owners": [
+          "lab"
+        ],
+        "hints": [
+          {
+            "sequence": "proceduralaudio",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Lab/map_data_post_proceduralgeneration",
+        "owners": [
+          "lab"
+        ],
+        "hints": [
+          {
+            "sequence": "proceduralgeneration",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Lab/map_data_post_qfeplaboratory",
+        "owners": [
+          "lab"
+        ],
+        "hints": [
+          {
+            "sequence": "qfeplaboratory",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Lab/map_data_post_randomness",
+        "owners": [
+          "lab"
+        ],
+        "hints": [
+          {
+            "sequence": "randomness",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Lab/map_data_post_recursiveemergence",
+        "owners": [
+          "lab"
+        ],
+        "hints": [
+          {
+            "sequence": "recursiveemergence",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Lab/map_data_post_resourcemanagement",
+        "owners": [
+          "lab"
+        ],
+        "hints": [
+          {
+            "sequence": "resourcemanagement",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Lab/map_data_post_searchpathfinding",
+        "owners": [
+          "lab"
+        ],
+        "hints": [
+          {
+            "sequence": "searchpathfinding",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Lab/map_data_post_softbodies",
+        "owners": [
+          "lab"
+        ],
+        "hints": [
+          {
+            "sequence": "softbodies",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Lab/map_data_post_speculativecomputation",
+        "owners": [
+          "lab"
+        ],
+        "hints": [
+          {
+            "sequence": "speculativecomputation",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Lab/map_data_post_swarmintelligence",
+        "owners": [
+          "lab"
+        ],
+        "hints": [
+          {
+            "sequence": "swarmintelligence",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Lab/map_data_post_transformation",
+        "owners": [
+          "lab"
+        ],
+        "hints": [
+          {
+            "sequence": "transformation",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Lab/map_data_post_vectors",
+        "owners": [
+          "lab"
+        ],
+        "hints": [
+          {
+            "sequence": "vectors",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Lab/map_data_post_wavefunctions",
+        "owners": [
+          "lab"
+        ],
+        "hints": [
+          {
+            "sequence": "wavefunctions",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "MANN_Gallery_Museum",
+        "owners": [
+          "mosaicanalysis"
+        ],
+        "hints": [
+          {
+            "sequence": "gallery",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Particles_Forces",
+        "owners": [
+          "particles"
+        ],
+        "hints": [
+          {
+            "sequence": "forces",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Pattern_Generation_Four",
+        "owners": [
+          "unused"
+        ],
+        "hints": [
+          {
+            "sequence": "patterngeneration",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Pattern_Generation_One",
+        "owners": [
+          "unused"
+        ],
+        "hints": [
+          {
+            "sequence": "patterngeneration",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Pattern_Generation_Seven",
+        "owners": [
+          "unused"
+        ],
+        "hints": [
+          {
+            "sequence": "patterngeneration",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Pattern_Generation_Six",
+        "owners": [
+          "unused"
+        ],
+        "hints": [
+          {
+            "sequence": "patterngeneration",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Pattern_Generation_Three",
+        "owners": [
+          "unused"
+        ],
+        "hints": [
+          {
+            "sequence": "patterngeneration",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Pattern_Generation_Two",
+        "owners": [
+          "unused"
+        ],
+        "hints": [
+          {
+            "sequence": "patterngeneration",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Pattern_Walls_Gallery",
+        "owners": [
+          "mosaicanalysis"
+        ],
+        "hints": [
+          {
+            "sequence": "gallery",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "PhysicsSimulation_Particle_Systems",
+        "owners": [
+          "physicssimulation"
+        ],
+        "hints": [
+          {
+            "sequence": "particles",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Pixel_Art_Gallery",
+        "owners": [
+          "patterngeneration"
+        ],
+        "hints": [
+          {
+            "sequence": "gallery",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Postmodern_Gallery",
+        "owners": [
+          "mosaicanalysis"
+        ],
+        "hints": [
+          {
+            "sequence": "gallery",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Primitives_2",
+        "owners": [
+          "unused"
+        ],
+        "hints": [
+          {
+            "sequence": "primitives",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "ProceduralGenerationBooleanPatterns",
+        "owners": [
+          "constraint_solvers",
+          "proceduralgeneration_all"
+        ],
+        "hints": [
+          {
+            "sequence": "proceduralgeneration",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "ProceduralGenerationCaveExplorer3dUi",
+        "owners": [
+          "proceduralgeneration_all"
+        ],
+        "hints": [
+          {
+            "sequence": "proceduralgeneration",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "ProceduralGenerationCrystalRandom",
+        "owners": [
+          "proceduralgeneration_all"
+        ],
+        "hints": [
+          {
+            "sequence": "proceduralgeneration",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "ProceduralGenerationMarchingCubesInsideCave",
+        "owners": [
+          "proceduralgeneration_all"
+        ],
+        "hints": [
+          {
+            "sequence": "proceduralgeneration",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "ProceduralGenerationMarchingCubesSculpture",
+        "owners": [
+          "proceduralgeneration_all"
+        ],
+        "hints": [
+          {
+            "sequence": "proceduralgeneration",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "ProceduralGenerationMarchingCubesVovelNoise",
+        "owners": [
+          "proceduralgeneration_all"
+        ],
+        "hints": [
+          {
+            "sequence": "noise",
+            "score": 8
+          },
+          {
+            "sequence": "proceduralgeneration",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "ProceduralGenerationMarchingcubesFlatLandscape",
+        "owners": [
+          "proceduralgeneration_all"
+        ],
+        "hints": [
+          {
+            "sequence": "proceduralgeneration",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "ProceduralGenerationMarchingcubesPortalLandscape",
+        "owners": [
+          "proceduralgeneration_all"
+        ],
+        "hints": [
+          {
+            "sequence": "proceduralgeneration",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "ProceduralGenerationMarchingcubesTorusSculpture",
+        "owners": [
+          "proceduralgeneration_all"
+        ],
+        "hints": [
+          {
+            "sequence": "proceduralgeneration",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "ProceduralGenerationNetSpace",
+        "owners": [
+          "higher_dimensions",
+          "proceduralgeneration_all"
+        ],
+        "hints": [
+          {
+            "sequence": "proceduralgeneration",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "ProceduralGenerationPortals",
+        "owners": [
+          "higher_dimensions",
+          "proceduralgeneration_all"
+        ],
+        "hints": [
+          {
+            "sequence": "proceduralgeneration",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "ProceduralGenerationSixteenCellNet",
+        "owners": [
+          "higher_dimensions",
+          "proceduralgeneration_all"
+        ],
+        "hints": [
+          {
+            "sequence": "proceduralgeneration",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "ProceduralGenerationTesseractErrorTunnel",
+        "owners": [
+          "higher_dimensions",
+          "proceduralgeneration_all"
+        ],
+        "hints": [
+          {
+            "sequence": "proceduralgeneration",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "ProceduralGenerationWfcDungeonGenerator",
+        "owners": [
+          "constraint_solvers",
+          "proceduralgeneration_all"
+        ],
+        "hints": [
+          {
+            "sequence": "proceduralgeneration",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "ProceduralGeneration_21",
+        "owners": [
+          "proceduralgeneration_all"
+        ],
+        "hints": [
+          {
+            "sequence": "proceduralgeneration",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "ProceduralGeneration_BranchingGrowthAlgorithm",
+        "owners": [
+          "proceduralgeneration_all"
+        ],
+        "hints": [
+          {
+            "sequence": "proceduralgeneration",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "ProceduralGeneration_CaveRandomWalk",
+        "owners": [
+          "proceduralgeneration_all"
+        ],
+        "hints": [
+          {
+            "sequence": "proceduralgeneration",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "ProceduralGeneration_CubeMound",
+        "owners": [
+          "proceduralgeneration_all"
+        ],
+        "hints": [
+          {
+            "sequence": "proceduralgeneration",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "ProceduralGeneration_Delaunay_Triangulation",
+        "owners": [
+          "proceduralgeneration_all",
+          "spatial_partitioning"
+        ],
+        "hints": [
+          {
+            "sequence": "proceduralgeneration",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "ProceduralGeneration_Dome",
+        "owners": [
+          "proceduralgeneration_all"
+        ],
+        "hints": [
+          {
+            "sequence": "proceduralgeneration",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "ProceduralGeneration_Eight",
+        "owners": [
+          "proceduralgeneration_all"
+        ],
+        "hints": [
+          {
+            "sequence": "proceduralgeneration",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "ProceduralGeneration_Eleven",
+        "owners": [
+          "proceduralgeneration_all"
+        ],
+        "hints": [
+          {
+            "sequence": "proceduralgeneration",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "ProceduralGeneration_Five",
+        "owners": [
+          "proceduralgeneration_all"
+        ],
+        "hints": [
+          {
+            "sequence": "proceduralgeneration",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "ProceduralGeneration_Four",
+        "owners": [
+          "proceduralgeneration_all"
+        ],
+        "hints": [
+          {
+            "sequence": "proceduralgeneration",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "ProceduralGeneration_Genetic_Algorithms",
+        "owners": [
+          "proceduralgeneration_all"
+        ],
+        "hints": [
+          {
+            "sequence": "proceduralgeneration",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "ProceduralGeneration_Genetic_Programming",
+        "owners": [
+          "proceduralgeneration_all"
+        ],
+        "hints": [
+          {
+            "sequence": "proceduralgeneration",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "ProceduralGeneration_MarchingCave",
+        "owners": [
+          "proceduralgeneration_all"
+        ],
+        "hints": [
+          {
+            "sequence": "proceduralgeneration",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "ProceduralGeneration_MarchingGallery",
+        "owners": [
+          "proceduralgeneration_all"
+        ],
+        "hints": [
+          {
+            "sequence": "gallery",
+            "score": 8
+          },
+          {
+            "sequence": "proceduralgeneration",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "ProceduralGeneration_Marching_Cubes_Algorithm",
+        "owners": [
+          "proceduralgeneration_all"
+        ],
+        "hints": [
+          {
+            "sequence": "proceduralgeneration",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "ProceduralGeneration_Markov_Chains",
+        "owners": [
+          "grammar_systems",
+          "proceduralgeneration_all"
+        ],
+        "hints": [
+          {
+            "sequence": "proceduralgeneration",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "ProceduralGeneration_Maze",
+        "owners": [
+          "proceduralgeneration_all"
+        ],
+        "hints": [
+          {
+            "sequence": "proceduralgeneration",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "ProceduralGeneration_N_grams",
+        "owners": [
+          "grammar_systems",
+          "proceduralgeneration_all"
+        ],
+        "hints": [
+          {
+            "sequence": "proceduralgeneration",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "ProceduralGeneration_Poisson_Disk_Sampling",
+        "owners": [
+          "proceduralgeneration_all",
+          "spatial_partitioning"
+        ],
+        "hints": [
+          {
+            "sequence": "proceduralgeneration",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "ProceduralGeneration_Reaction_Diffusion_Systems",
+        "owners": [
+          "proceduralgeneration_all",
+          "softbodies"
+        ],
+        "hints": [
+          {
+            "sequence": "proceduralgeneration",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "ProceduralGeneration_Seven",
+        "owners": [
+          "proceduralgeneration_all"
+        ],
+        "hints": [
+          {
+            "sequence": "proceduralgeneration",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "ProceduralGeneration_Space_Colonization_Algorithms",
+        "owners": [
+          "proceduralgeneration_all"
+        ],
+        "hints": [
+          {
+            "sequence": "proceduralgeneration",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "ProceduralGeneration_Space_Partitioning",
+        "owners": [
+          "proceduralgeneration_all",
+          "spatial_partitioning"
+        ],
+        "hints": [
+          {
+            "sequence": "proceduralgeneration",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "ProceduralGeneration_Ten",
+        "owners": [
+          "proceduralgeneration_all"
+        ],
+        "hints": [
+          {
+            "sequence": "proceduralgeneration",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "ProceduralGeneration_Three",
+        "owners": [
+          "proceduralgeneration_all"
+        ],
+        "hints": [
+          {
+            "sequence": "proceduralgeneration",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "ProceduralGeneration_Two",
+        "owners": [
+          "proceduralgeneration_all"
+        ],
+        "hints": [
+          {
+            "sequence": "proceduralgeneration",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "ProceduralGeneration_Voronoi_Diagrams",
+        "owners": [
+          "proceduralgeneration_all",
+          "spatial_partitioning"
+        ],
+        "hints": [
+          {
+            "sequence": "proceduralgeneration",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "ProceduralGeneration_Wave_Function_Collapse",
+        "owners": [
+          "constraint_solvers",
+          "proceduralgeneration_all"
+        ],
+        "hints": [
+          {
+            "sequence": "proceduralgeneration",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "RecursiveEmergence_Cellular_Automata_1D: One Row Infinite Descent",
+        "owners": [
+          "recursiveemergence"
+        ],
+        "hints": [
+          {
+            "sequence": "cellularautomata",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "RecursiveEmergence_Cellular_Automata_2D: Grid Life",
+        "owners": [
+          "recursiveemergence"
+        ],
+        "hints": [
+          {
+            "sequence": "cellularautomata",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "RecursiveEmergence_Cellular_Automata_3D: Depth Multiplies Complexity",
+        "owners": [
+          "recursiveemergence"
+        ],
+        "hints": [
+          {
+            "sequence": "cellularautomata",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Shader_02_Colors",
+        "owners": [
+          "patterngeneration"
+        ],
+        "hints": [
+          {
+            "sequence": "color",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Shader_07_Noise",
+        "owners": [
+          "patterngeneration"
+        ],
+        "hints": [
+          {
+            "sequence": "noise",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Shader_08_CellularNoise",
+        "owners": [
+          "patterngeneration"
+        ],
+        "hints": [
+          {
+            "sequence": "noise",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Shader_Arch_Gallery",
+        "owners": [
+          "mosaicanalysis",
+          "patterngeneration"
+        ],
+        "hints": [
+          {
+            "sequence": "gallery",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "SoftBody_sb_noise01_jelly_crystal",
+        "owners": [
+          "softbodies"
+        ],
+        "hints": [
+          {
+            "sequence": "noise",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "SpeculativeComputation_Collective_Knowledge",
+        "owners": [
+          "postfoundationscrisis"
+        ],
+        "hints": [
+          {
+            "sequence": "speculativecomputation",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "SpeculativeComputation_Paraconsistent_Engineering",
+        "owners": [
+          "postfoundationscrisis"
+        ],
+        "hints": [
+          {
+            "sequence": "speculativecomputation",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "SpeculativeComputation_Rhizome_Network",
+        "owners": [
+          "postfoundationscrisis"
+        ],
+        "hints": [
+          {
+            "sequence": "speculativecomputation",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "SpeculativeComputation_Situated_Computation",
+        "owners": [
+          "postfoundationscrisis"
+        ],
+        "hints": [
+          {
+            "sequence": "speculativecomputation",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Structure_Examples",
+        "owners": [
+          "devexamples"
+        ],
+        "hints": [
+          {
+            "sequence": "structure",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Structure_Examples_VoxelGrammar_Principles",
+        "owners": [
+          "devexamples"
+        ],
+        "hints": [
+          {
+            "sequence": "structure",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "SwarmIntelligence_Particle_Swarm_Optimization",
+        "owners": [
+          "swarmintelligence"
+        ],
+        "hints": [
+          {
+            "sequence": "particles",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Tile_Shapes_Gallery",
+        "owners": [
+          "mosaicanalysis",
+          "patterngeneration"
+        ],
+        "hints": [
+          {
+            "sequence": "gallery",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Topology_Entropy_Morphogenesis",
+        "owners": [
+          "softbodies"
+        ],
+        "hints": [
+          {
+            "sequence": "morphogenesis",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Vectors_Act1_WhatAVectorIs",
+        "owners": [
+          "forces"
+        ],
+        "hints": [
+          {
+            "sequence": "vectors",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Vectors_Act2_VectorArithmetic",
+        "owners": [
+          "forces"
+        ],
+        "hints": [
+          {
+            "sequence": "vectors",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Vectors_Act3_FieldsAndMotion",
+        "owners": [
+          "forces"
+        ],
+        "hints": [
+          {
+            "sequence": "vectors",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Vectors_Act4a_KineticForces",
+        "owners": [
+          "forces"
+        ],
+        "hints": [
+          {
+            "sequence": "vectors",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Vectors_Act4b_Oscillation",
+        "owners": [
+          "forces"
+        ],
+        "hints": [
+          {
+            "sequence": "vectors",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Vectors_Act5_ForceAsPlace",
+        "owners": [
+          "forces"
+        ],
+        "hints": [
+          {
+            "sequence": "vectors",
+            "score": 8
+          }
+        ]
+      },
+      {
+        "map": "Wallpaper_Groups_Gallery",
+        "owners": [
+          "mosaicanalysis",
+          "patterngeneration"
+        ],
+        "hints": [
+          {
+            "sequence": "gallery",
+            "score": 8
+          }
+        ]
+      }
+    ]
+  }
+}

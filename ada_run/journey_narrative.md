@@ -1,39 +1,39 @@
-# Player Journey — LSystems_Grammar_Lab
+# Player Journey — Assemblage_Same_Desire
 Sequence: unknown | Position: ?
 
 ## Walk-Through
-1. **Spawn** at (5, 1, 9)
-   Visible: science_screen, lsystem_editor, grammar_provenance, lsystem_tree, fractal_lsystem_string, dark_sphere
+1. **Spawn** at (1, 1, 1)
+   Visible: panel_bridge_loom, ten_print_textile, pattern_atlas_gallery, mamma_monster_gallery, godel_statement_plaque, incompleteness_scale
 
-2. **3 steps northwest** to (4, 1, 7)
-   Encounter: dark_sphere
-   Also visible: science_screen, lsystem_editor, grammar_provenance, lsystem_tree, fractal_lsystem_string
+2. **3 steps southeast** to (3, 1, 2)
+   Encounter: panel_bridge_loom
+   Also visible: ten_print_textile, pattern_atlas_gallery, mamma_monster_gallery, godel_statement_plaque, incompleteness_scale
 
-3. **5 steps northeast** to (6, 1, 5)
-   Encounter: fractal_lsystem_string
-   Also visible: science_screen, lsystem_editor, grammar_provenance, lsystem_tree, dark_sphere
+3. **8 steps east** to (8, 1, 2)
+   Encounter: ten_print_textile
+   Also visible: panel_bridge_loom, pattern_atlas_gallery, mamma_monster_gallery, godel_statement_plaque, incompleteness_scale
 
-4. **7 steps northwest** to (4, 1, 3)
-   Encounter: lsystem_editor
-   Also visible: science_screen, grammar_provenance, lsystem_tree, fractal_lsystem_string, dark_sphere
+4. **9 steps southwest** to (6, 1, 5)
+   Encounter: pattern_atlas_gallery
+   Also visible: panel_bridge_loom, ten_print_textile, mamma_monster_gallery, godel_statement_plaque, incompleteness_scale
 
-5. **7 steps southwest** to (2, 1, 5)
-   Encounter: lsystem_tree
-   Also visible: science_screen, lsystem_editor, grammar_provenance, fractal_lsystem_string, dark_sphere
+5. **11 steps southwest** to (3, 1, 10)
+   Encounter: godel_statement_plaque
+   Also visible: panel_bridge_loom, ten_print_textile, pattern_atlas_gallery, mamma_monster_gallery, incompleteness_scale
 
-6. **9 steps northeast** to (7, 1, 2)
-   Encounter: science_screen
-   Also visible: lsystem_editor, grammar_provenance, lsystem_tree, fractal_lsystem_string, dark_sphere
+6. **12 steps northeast** to (6, 1, 8)
+   Encounter: mamma_monster_gallery
+   Also visible: panel_bridge_loom, ten_print_textile, pattern_atlas_gallery, godel_statement_plaque, incompleteness_scale
 
-7. **9 steps west** to (1, 1, 4)
-   Encounter: grammar_provenance
-   Also visible: science_screen, lsystem_editor, lsystem_tree, fractal_lsystem_string, dark_sphere
+7. **16 steps southeast** to (8, 1, 10)
+   Encounter: incompleteness_scale
+   Also visible: panel_bridge_loom, ten_print_textile, pattern_atlas_gallery, mamma_monster_gallery, godel_statement_plaque
 
-8. **Teleporter** at (4, 0, 8) — 2 steps from spawn
+8. **Teleporter** at (12, 1, 10) — 20 steps from spawn
 
 ## Pacing Assessment
-- Artifact density: 1 per 1.5 steps
-- Total walkable tiles: 63
+- Artifact density: 1 per 2.7 steps
+- Total walkable tiles: 168
 - Artifacts reachable from spawn: 6 / 6
 - Dead ends: 0
 - All artifacts reachable from spawn

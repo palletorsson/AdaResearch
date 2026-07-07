@@ -4,12 +4,7 @@
     "summary": "Atlas · Form Studio — in-VR editor for body recipes",
     "layout": "14x14 open floor. Form Studio Station at center cell (6,6). Spawn at south edge, teleporter at north edge.",
     "objective": "Pick a body recipe via the push-buttons. Grab the horizontal sliders and drag to change the form's DNA. Watch the body rebuild live on the central pedestal.",
-    "key_elements": [
-      "`form_studio_station` at center (6,6)",
-      "9 push-buttons along east side (one per form)",
-      "Up to 4 horizontal sliders along south side (per-form DNA)",
-      "Spawn `s` at south edge, teleporter `t` at north edge"
-    ]
+    "key_elements": ["`form_studio_station` at center (6,6)","9 push-buttons along east side (one per form)","Up to 4 horizontal sliders along south side (per-form DNA)","Spawn `s` at south edge, teleporter `t` at north edge"]
   },
   "subtitles": {},
   "map_info": {
@@ -25,11 +20,7 @@
       "category": "atlas",
       "difficulty": "reference",
       "estimated_time": "5-15 minutes",
-      "learning_objectives": [
-        "Feel how DNA parameters shape a body recipe",
-        "See flower/fungus/walker/tree and the four classical forms side by side",
-        "Find the slider range where a form looks its best"
-      ]
+      "learning_objectives": ["Feel how DNA parameters shape a body recipe","See flower/fungus/walker/tree and the four classical forms side by side","Find the slider range where a form looks its best"]
     },
     "name": "Atlas - Form Studio",
     "version": "1.0",
@@ -51,23 +42,11 @@
     }
   },
   "lighting": {
-    "ambient_color": [
-      0.5,
-      0.5,
-      0.55
-    ],
+    "ambient_color": [0.5,0.5,0.55],
     "ambient_energy": 0.55,
     "directional_light": {
-      "color": [
-        1.0,
-        0.95,
-        0.88
-      ],
-      "direction": [
-        -0.35,
-        -0.8,
-        -0.3
-      ],
+      "color": [1.0,0.95,0.88],
+      "direction": [-0.35,-0.8,-0.3],
       "enabled": true,
       "energy": 1.2
     }
@@ -75,11 +54,7 @@
   "settings": {
     "auto_reveal_on_entry": true,
     "background": {
-      "color": [
-        0.08,
-        0.09,
-        0.12
-      ],
+      "color": [0.08,0.09,0.12],
       "type": "sky"
     },
     "cube_size": 1.0,

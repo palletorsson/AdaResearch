@@ -1,0 +1,82 @@
+{
+  "map_info": {
+    "name": "Chamber_Facade",
+    "lookup_name": "Chamber_Facade",
+    "description": "Synthesis chamber closing the facade_assembly branch. Player arrives carrying the six compositional moves walked across the six expression maps. The chamber gives them a small open space to compose their own facade from the grammar they have inherited. Pass-1 skeleton.",
+    "version": "0.1-skeleton",
+    "format": "json",
+    "created_from": "facade_assembly proposal 2026-05-13",
+    "dimensions": {
+      "width": 6,
+      "depth": 6,
+      "max_height": 3
+    },
+    "metadata": {
+      "difficulty": "intermediate",
+      "category": "chamber",
+      "estimated_time": "3-5 minutes",
+      "learning_objectives": ["Synthesize the six compositional moves into one facade","Recognize what the grammar lets you say and what it refuses"]
+    },
+    "title": "Chamber: Facade"
+  },
+  "utility_definitions": {
+    "sp": {
+      "name": "Spawn",
+      "description": "Player spawn point",
+      "type": "spawn"
+    },
+    "t": {
+      "name": "Exit Portal",
+      "description": "Return to lab",
+      "type": "teleporter",
+      "properties": {
+        "action": "return_to_lab"
+      }
+    }
+  },
+  "documentation": {
+    "summary": "Chamber_Facade — synthesis closing of the facade_assembly branch.",
+    "layout": "6x6 chamber. Spawn at back row. Lab teleporter at front. Open central area for the synthesis artifact (pass-2 build).",
+    "objective": "Let the player compose a facade from the grammar walked.",
+    "key_elements": ["Spawn at (3, 5)","Lab teleporter at (3, 0)","Synthesis composition workbench at center (pass-2)"]
+  },
+  "lighting": {
+    "ambient_color": [0.4,0.4,0.48],
+    "ambient_energy": 0.85,
+    "directional_light": {
+      "enabled": true,
+      "direction": [-0.3,-1.0,-0.2],
+      "energy": 0.7
+    }
+  },
+  "settings": {
+    "player_spawn_height": 0.5,
+    "floor_tile_size": 1.0
+  },
+  "layers": {
+    "structure": [
+      ["2","2","2","2","2","2"],
+      ["2","2","2","2","2","2"],
+      ["2","2","2","2","2","2"],
+      ["2","2","2","2","2","2"],
+      ["2","2","2","2","2","2"],
+      ["2","2","2","2","2","2"]
+    ],
+    "utilities": [
+      [" "," "," ","t"," "," "],
+      [" "," "," "," "," "," "],
+      [" "," "," "," "," "," "],
+      [" "," "," "," "," "," "],
+      [" "," "," "," "," "," "],
+      [" "," "," ","sp"," "," "]
+    ],
+    "interactables": [
+      [" "," "," "," "," "," "],
+      [" "," "," ","facade_builder:180:1.0#preset:classical"," "," "],
+      [" "," "," "," "," "," "],
+      [" "," "," "," "," "," "],
+      [" "," "," "," "," "," "],
+      [" ","science_screen:180:1.2"," "," "," "," "]
+    ]
+  }
+}

@@ -32,14 +32,26 @@
    "drop": [],
    "total_maps": 7
   },
+  "symmetry": {
+   "keep": [
+    "Symmetry_Motif",
+    "Symmetry_Translation",
+    "Symmetry_Mirror_Rotor",
+    "Symmetry_Glide",
+    "Symmetry_Group",
+    "Symmetry_Seventeen"
+   ],
+   "drop": [],
+   "total_maps": 6
+  },
   "array_tutorial": {
    "keep": [
-    "Array_Patterns",
     "Tutorial_Single",
+    "Tutorial_Pattern",
+    "Array_Patterns",
     "Tutorial_Row",
     "Tutorial_2D_Build",
     "Tutorial_3D",
-    "Tutorial_Pattern",
     "Tutorial_Disco"
    ],
    "drop": [],
@@ -140,6 +152,18 @@
     "ForcesArena"
    ],
    "total_maps": 29
+  },
+  "formfinding": {
+   "keep": [
+    "FormFinding_Descent",
+    "FormFinding_Catenary",
+    "FormFinding_Relaxation",
+    "FormFinding_Equilibrium",
+    "FormFinding_Annealing",
+    "FormFinding_Forge"
+   ],
+   "drop": [],
+   "total_maps": 6
   },
   "wavefunctions": {
    "keep": [

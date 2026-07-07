@@ -14,12 +14,7 @@
 	  "difficulty": "beginner",
 	  "category": "tutorial",
 	  "estimated_time": "3-4 minutes",
-	  "learning_objectives": [
-		"2D arrays",
-		"Grid navigation",
-		"X-Y coordinate system",
-        "Multi-dimensional thinking"
-	  ]
+	  "learning_objectives": ["2D arrays","Grid navigation","X-Y coordinate system","Multi-dimensional thinking"]
 	}
   },
   "utility_definitions": {
@@ -41,32 +36,15 @@
 	"summary": "Color_Grabbable - Interactive Color Shelf",
 	"layout": "7x10 boutique space with mirrored shelves and grab-collection stations under dome lighting.",
 	"objective": "Grab color samples from shelves and trigger the experiment completion teleporter.",
-	"key_elements": [
-	  "`grabcolorcollection` stations arranged around the floor",
-	  "Shelves `shelf:0:1` and `shelf:180:1` for display",
-	  "`dark_sphere` dome at (3,3)",
-      "Extra lights `el` and `e` focus lighting, teleporter `t` at (6,7)"
-	]
+	"key_elements": ["`grabcolorcollection` stations arranged around the floor","Shelves `shelf:0:1` and `shelf:180:1` for display","`dark_sphere` dome at (3,3)","Extra lights `el` and `e` focus lighting, teleporter `t` at (6,7)"]
   },
   "lighting": {
-	"ambient_color": [
-	  0.4,
-	  0.4,
-	  0.5
-	],
+	"ambient_color": [0.4,0.4,0.5],
 	"ambient_energy": 0.6,
 	"directional_light": {
 	  "enabled": true,
-	  "direction": [
-		-0.4,
-		-0.7,
-		-0.4
-	  ],
-	  "color": [
-		1.0,
-		0.9,
-		0.8
-	  ],
+	  "direction": [-0.4,-0.7,-0.4],
+	  "color": [1.0,0.9,0.8],
 	  "energy": 1.2
 	}
   },
@@ -79,11 +57,7 @@
 	"initial_tile_visibility": "hidden_except_corners",
 	"background": {
 	  "type": "sky",
-	  "color": [
-		0.2,
-		0.3,
-		0.7
-	  ]
+	  "color": [0.2,0.3,0.7]
 	}
   },
   "layers": {

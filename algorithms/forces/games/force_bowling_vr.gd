@@ -1,6 +1,16 @@
 # ===========================================================================
 # Force Bowling VR - Interactive Game Expansion of Example 2.2: Mass Variation
 # Demonstrates how different masses respond to forces - bowling pin physics!
+#
+# @identity
+# essence: A bowling game where pins of different mass respond differently to the same impact, making F=ma playable
+# desire: To let the player feel mass through collision — heavy pins barely budge while light ones scatter, all from one identical throw
+# critical_parameter: per-object mass — the value that distinguishes ball from pins, and pins from each other, in every momentum exchange
+# triggers: A heavier ball clears more pins; lighter pins fly farther on contact; lane friction decides how far the ball carries
+# emerges: Newton's second law as score — the abstract F=ma becomes a satisfying or frustrating spread of fallen pins
+# needs: mass-varied movers [has], collision momentum transfer [has], lane friction [has], VR ball grab and throw [has]
+# relationships: game expansion of example_2_2 mass_variation; shares the Mover physics body with all NOC Ch.2 forces artifacts
+# truth: Same throw, different mass, different outcome — the law you cannot see, written on the floor in fallen pins.
 # ===========================================================================
 
 extends Node3D

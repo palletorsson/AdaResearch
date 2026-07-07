@@ -109,31 +109,31 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 func _read_metadata_overrides() -> void:
 	if has_meta("config_base_radius"):
-		base_radius = float(String(get_meta("config_base_radius")))
+		base_radius = float(str(get_meta("config_base_radius")))
 	if has_meta("config_column_height"):
-		column_height = float(String(get_meta("config_column_height")))
+		column_height = float(str(get_meta("config_column_height")))
 	if has_meta("config_beam_length"):
-		beam_length = float(String(get_meta("config_beam_length")))
+		beam_length = float(str(get_meta("config_beam_length")))
 	if has_meta("config_pan_radius"):
-		pan_radius = float(String(get_meta("config_pan_radius")))
+		pan_radius = float(str(get_meta("config_pan_radius")))
 	if has_meta("config_left_load"):
-		left_load = float(String(get_meta("config_left_load")))
+		left_load = float(str(get_meta("config_left_load")))
 	if has_meta("config_right_load"):
-		right_load = float(String(get_meta("config_right_load")))
+		right_load = float(str(get_meta("config_right_load")))
 	if has_meta("config_tilt_degrees"):
-		tilt_degrees = float(String(get_meta("config_tilt_degrees")))
+		tilt_degrees = float(str(get_meta("config_tilt_degrees")))
 	if has_meta("config_tilt_from_loads"):
-		tilt_from_loads = _parse_bool(String(get_meta("config_tilt_from_loads")), tilt_from_loads)
+		tilt_from_loads = _parse_bool(str(get_meta("config_tilt_from_loads")), tilt_from_loads)
 	if has_meta("config_base_color"):
-		base_color = _parse_color(String(get_meta("config_base_color")), base_color)
+		base_color = _parse_color(str(get_meta("config_base_color")), base_color)
 	if has_meta("config_beam_color"):
-		beam_color = _parse_color(String(get_meta("config_beam_color")), beam_color)
+		beam_color = _parse_color(str(get_meta("config_beam_color")), beam_color)
 	if has_meta("config_pan_color"):
-		pan_color = _parse_color(String(get_meta("config_pan_color")), pan_color)
+		pan_color = _parse_color(str(get_meta("config_pan_color")), pan_color)
 	if has_meta("config_weight_color"):
-		weight_color = _parse_color(String(get_meta("config_weight_color")), weight_color)
+		weight_color = _parse_color(str(get_meta("config_weight_color")), weight_color)
 	if has_meta("config_accent_color"):
-		accent_color = _parse_color(String(get_meta("config_accent_color")), accent_color)
+		accent_color = _parse_color(str(get_meta("config_accent_color")), accent_color)
 
 
 func _clear_built_children() -> void:

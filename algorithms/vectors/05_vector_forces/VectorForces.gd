@@ -20,7 +20,7 @@ var drag_vector: Node3D
 var net_vector: Node3D
 var velocity_vector: Node3D
 var accel_vector: Node3D
-var info_label: Label3D
+var info_label: Label
 var accumulator := 0.0
 var catapult_gadget: Node3D
 

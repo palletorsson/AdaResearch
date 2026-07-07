@@ -25,7 +25,7 @@ func _ready() -> void:
 
 
 func apply_grid_config(cfg: Dictionary) -> void:
-	if cfg.has("config_path"): config_path = String(cfg["config_path"])
+	if cfg.has("config_path"): config_path = str(cfg["config_path"])
 	if cfg.has("world_size"):  world_size = float(cfg["world_size"])
 	if cfg.has("height_amp"):  height_amp_override = float(cfg["height_amp"])
 	_clear()

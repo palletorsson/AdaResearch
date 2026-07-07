@@ -77,9 +77,9 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 func _read_metadata_overrides() -> void:
 	if has_meta("config_circle_radius"):
-		circle_radius = float(String(get_meta("config_circle_radius")))
+		circle_radius = float(str(get_meta("config_circle_radius")))
 	if has_meta("config_phase_offset_degrees"):
-		phase_offset_degrees = float(String(get_meta("config_phase_offset_degrees")))
+		phase_offset_degrees = float(str(get_meta("config_phase_offset_degrees")))
 
 
 func _build_apparatus() -> void:

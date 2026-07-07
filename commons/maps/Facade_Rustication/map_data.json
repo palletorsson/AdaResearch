@@ -1,0 +1,83 @@
+{
+  "map_info": {
+    "name": "Facade_Rustication",
+    "lookup_name": "Facade_Rustication",
+    "description": "The surfaced expression of facade assembly. The principle's six moves preserved, but the rustication axis is *dialled up to maximum semantic load* — Naples-style diamond-bossed surface, every stone block carved into a pyramid that projects outward. Hierarchy is preserved (heavy at the base, lighter above), bay rhythm regular, but the *texture is the argument*. Smooth ashlar at upper storeys; diamond bossing at the ground. Surface as voice.",
+    "version": "0.2-pass3",
+    "format": "json",
+    "created_from": "facade_assembly proposal 2026-05-13; pass-3 fresh build 2026-05-14",
+    "dimensions": {
+      "width": 10,
+      "depth": 6,
+      "max_height": 4
+    },
+    "metadata": {
+      "difficulty": "intermediate",
+      "category": "expression_map",
+      "actualization_tag": "surfaced",
+      "estimated_time": "3-4 minutes",
+      "learning_objectives": ["Recognise the rustication axis as a load-bearing compositional move","Read surface texture as semantic content, not just material","Identify the defensive-decorative double of diamond bossing as Naples-specific architectural argument"]
+    },
+    "title": "The Principle Surfaced"
+  },
+  "utility_definitions": {
+    "sp": {
+      "name": "Spawn",
+      "description": "Player spawn point — back-centre, facing the rusticated facade",
+      "type": "spawn"
+    },
+    "t": {
+      "name": "Exit Portal",
+      "description": "Continue to Facade_NYC_Tenement",
+      "type": "teleporter",
+      "properties": {
+        "action": "next_in_sequence"
+      }
+    }
+  },
+  "documentation": {
+    "summary": "Facade_Rustication — the principle surfaced. Naples-style diamond-bossed rustication at the ground floor; smooth ashlar above. Texture as voice.",
+    "layout": "10x6 walkable space, same proportion as Classical for direct comparison. Spawn at back-centre. Teleporter on side.",
+    "objective": "Show what happens when the rustication axis is pushed to maximum: every visible stone block is carved into a pyramid that projects outward, making the surface itself the dominant compositional statement.",
+    "key_elements": ["Spawn at (5, 5) — back-centre","Teleporter at (9, 3) — side exit","Facade with diamond-bossed ground storey + smooth ashlar upper storeys (artifacts queued)"]
+  },
+  "lighting": {
+    "ambient_color": [0.4,0.36,0.3],
+    "ambient_energy": 0.85,
+    "directional_light": {
+      "enabled": true,
+      "direction": [-0.45,-1.0,-0.2],
+      "energy": 1.0
+    }
+  },
+  "settings": {
+    "player_spawn_height": 0.5,
+    "floor_tile_size": 1.0
+  },
+  "layers": {
+    "structure": [
+      ["3","3","3","3","3","3","3","3","3","3"],
+      ["2","2","2","2","2","2","2","2","2","2"],
+      ["2","2","2","2","2","2","2","2","2","2"],
+      ["2","2","2","2","2","2","2","2","2","2"],
+      ["2","2","2","2","2","2","2","2","2","2"],
+      ["2","2","2","2","2","2","2","2","2","2"]
+    ],
+    "utilities": [
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," ","t"],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," ","sp"," "," "," "," "]
+    ],
+    "interactables": [
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," ","facade_builder:180:1.0#plan_path:res://commons/facade_parts/presets/naples_diamond_rustication.json"," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "],
+      [" ","science_screen:180:1.2"," "," "," "," "," "," "," "," "]
+    ]
+  }
+}

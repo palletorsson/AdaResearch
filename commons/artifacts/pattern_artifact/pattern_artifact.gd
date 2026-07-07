@@ -24,7 +24,7 @@ func _ready() -> void:
 
 
 func apply_grid_config(cfg: Dictionary) -> void:
-	if cfg.has("config_path"): config_path = String(cfg["config_path"])
+	if cfg.has("config_path"): config_path = str(cfg["config_path"])
 	if cfg.has("quad_size"):   quad_size = float(cfg["quad_size"])
 	if cfg.has("face_up"):     face_up = bool(cfg["face_up"])
 	_clear()

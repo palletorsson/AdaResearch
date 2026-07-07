@@ -14,11 +14,7 @@
 	  "difficulty": "beginner",
 	  "category": "color",
 	  "estimated_time": "3-4 minutes",
-	  "learning_objectives": [
-		"Spectrum visualization",
-		"Color gradients",
-        "Temporal color cycling"
-	  ]
+	  "learning_objectives": ["Spectrum visualization","Color gradients","Temporal color cycling"]
 	},
 	"title": "Walking Through the Spectrum"
   },
@@ -41,32 +37,15 @@
 	"summary": "Color_2 - Rainbow Walkway",
 	"layout": "7x17 suspended corridor with repeating rainbow emitters, mid-course dome, and transport return walkway.",
 	"objective": "Walk through animated rainbow pillars while interacting with pickups and walkway transport.",
-	"key_elements": [
-	  "Series of `rainbow:0:0.5:0.1` emitters along the main lane",
-	  "`mario_cube` that listens for next_cube signal to remove dark_sphere and reveal rainbow",
-	  "Mid-corridor `dark_sphere` observation point",
-      "Walkway `wp` and teleporter `t` with score cube `sp` at the far turnaround"
-	]
+	"key_elements": ["Series of `rainbow:0:0.5:0.1` emitters along the main lane","`mario_cube` that listens for next_cube signal to remove dark_sphere and reveal rainbow","Mid-corridor `dark_sphere` observation point","Walkway `wp` and teleporter `t` with score cube `sp` at the far turnaround"]
   },
   "lighting": {
-	"ambient_color": [
-	  0.4,
-	  0.4,
-	  0.5
-	],
+	"ambient_color": [0.4,0.4,0.5],
 	"ambient_energy": 0.6,
 	"directional_light": {
 	  "enabled": true,
-	  "direction": [
-		-0.4,
-		-0.7,
-		-0.4
-	  ],
-	  "color": [
-		1.0,
-		0.9,
-		0.8
-	  ],
+	  "direction": [-0.4,-0.7,-0.4],
+	  "color": [1.0,0.9,0.8],
 	  "energy": 1.2
 	}
   },
@@ -87,11 +66,7 @@
 	},
 	"background": {
 	  "type": "sky",
-	  "color": [
-		0.2,
-		0.3,
-		0.7
-	  ]
+	  "color": [0.2,0.3,0.7]
 	}
   },
   "layers": {

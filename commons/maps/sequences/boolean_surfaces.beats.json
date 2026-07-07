@@ -1,0 +1,102 @@
+{
+  "_meta": {
+    "schema_version": "beats/0.1",
+    "schema_doc": "doc/beats/schema.md",
+    "sequence": "boolean_surfaces",
+    "phase": "F_order",
+    "description": "",
+    "_draft": true,
+    "_draft_origin": "tools/draft_beats.py — refine via /beats editor"
+  },
+  "beats": [
+    {
+      "id": "B0",
+      "role": "GATEWAY",
+      "concept": "entering boolean_surfaces — the substrate shifts",
+      "register": "structural",
+      "intensity": "low",
+      "maps": [],
+      "stage": "draft",
+      "next": "B1"
+    },
+    {
+      "id": "B1",
+      "role": "INTRODUCE",
+      "concept": "Union: every cell that belongs to either shape belongs to the result. Two squares overlap; the boundary between them disappears. What was 'one and the other' becomes 'one'.",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "Boolean_Union"
+      ],
+      "stage": "draft",
+      "next": "B2",
+      "_concept_origin": "blurb"
+    },
+    {
+      "id": "B2",
+      "role": "DEMONSTRATE",
+      "concept": "Intersection: a cell belongs to the result only if it belongs to BOTH inputs. Two volumes meet; everything outside their shared region vanishes.",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "Boolean_Intersection"
+      ],
+      "stage": "draft",
+      "next": "B3",
+      "_concept_origin": "blurb"
+    },
+    {
+      "id": "B3",
+      "role": "DEMONSTRATE",
+      "concept": "Difference: subtract the second volume from the first. Where they met, a cavity opens. The first shape keeps everything except the region it shared with the second.",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "Boolean_Difference"
+      ],
+      "stage": "draft",
+      "next": "B4",
+      "_concept_origin": "blurb"
+    },
+    {
+      "id": "B4",
+      "role": "SYNTHESIZE",
+      "concept": "AND, OR, NOT — stack them. Boolean operations compose. A union of two intersections. A difference between two unions. Every complex shape is a sentence in this grammar.",
+      "register": "synthesizing",
+      "intensity": "high",
+      "maps": [
+        "Boolean_Compose_Workbench"
+      ],
+      "stage": "draft",
+      "next": "B5",
+      "_concept_origin": "blurb"
+    },
+    {
+      "id": "B5",
+      "role": "SYNTHESIZE",
+      "concept": "Every room is a difference operation: a solid mass minus the volume of a room. Every window: glass minus a rectangle. Every doorway: wall minus a vertical opening.",
+      "register": "synthesizing",
+      "intensity": "high",
+      "maps": [
+        "Boolean_Architecture_Cavity"
+      ],
+      "stage": "draft",
+      "next": "B6",
+      "_concept_origin": "blurb"
+    },
+    {
+      "id": "B6",
+      "role": "CHAMBER",
+      "concept": "the boolean_surfaces principle held — carried forward",
+      "register": "synthesizing",
+      "intensity": "high",
+      "maps": [],
+      "stage": "draft",
+      "note": "no map yet — assign a Chamber_<seq> map or absorb into the last map-beat · auto-reciprocates inbound bleed_from references",
+      "next": null,
+      "bleed_to": [
+        "primitives"
+      ]
+    }
+  ]
+}

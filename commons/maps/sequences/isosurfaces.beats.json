@@ -1,0 +1,201 @@
+{
+  "_meta": {
+    "schema_version": "beats/0.1",
+    "schema_doc": "doc/beats/schema.md",
+    "sequence": "isosurfaces",
+    "phase": "F_order",
+    "description": "Algorithms that extract surfaces from scalar fields. Marching Cubes walks through voxels finding boundaries. Caves emerge from noise. Landscapes generate portals. The implicit becomes explicit.",
+    "_draft": true,
+    "_draft_origin": "tools/draft_beats.py — refine via /beats editor"
+  },
+  "beats": [
+    {
+      "id": "I0",
+      "role": "GATEWAY",
+      "concept": "entering isosurfaces — the substrate shifts",
+      "register": "structural",
+      "intensity": "low",
+      "maps": [],
+      "stage": "draft",
+      "next": "I1",
+      "bleed_from": [
+        "noise"
+      ],
+      "note": "auto-reciprocates outbound bleed_to references"
+    },
+    {
+      "id": "I1",
+      "role": "INTRODUCE",
+      "concept": "A 3D noise field fills invisible space with density values. Marching cubes walks the grid cube by cube — 256 possible configurations, one lookup table — and extracts geometry wherever density crosses a threshold.",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "ISO_Introduction"
+      ],
+      "stage": "draft",
+      "bleed_from": [
+        "noise"
+      ],
+      "note": "auto-detected from description; refine via editor",
+      "next": "I2",
+      "_concept_origin": "blurb"
+    },
+    {
+      "id": "I2",
+      "role": "DEMONSTRATE",
+      "concept": "Two hundred and fifty-six configurations collapse to fifteen. Every possible corner arrangement — vertex inside or outside — reduces through symmetry to a handful of cases. The lookup table is the entire algorithm.",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "ISO_LookupTable"
+      ],
+      "stage": "draft",
+      "next": "I3",
+      "_concept_origin": "blurb"
+    },
+    {
+      "id": "I3",
+      "role": "VARIATE",
+      "concept": "Seven sculptures stand in a row. Each one computed from the same algorithm, different parameters — sphere, torus, strange attractors made solid.",
+      "register": "teaching",
+      "intensity": "medium",
+      "maps": [
+        "ISO_ShapesGallery"
+      ],
+      "stage": "draft",
+      "next": "I4",
+      "_concept_origin": "blurb"
+    },
+    {
+      "id": "I4",
+      "role": "DEMONSTRATE",
+      "concept": "A cube has eight corners. Each corner is inside or outside. Eight binary states: 256 configurations. For each configuration, a lookup table says where the surface cuts through.",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "ISO_TorusGyroid"
+      ],
+      "stage": "draft",
+      "next": "I5",
+      "_concept_origin": "blurb"
+    },
+    {
+      "id": "I5",
+      "role": "DEMONSTRATE",
+      "concept": "Two modes of summoning form from nothing. The fountain rises — marching cubes extract a vertical shape from a scalar field, geometry crystallizing where density crosses threshold.",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "ISO_Sculpting"
+      ],
+      "stage": "draft",
+      "next": "I6",
+      "_concept_origin": "blurb"
+    },
+    {
+      "id": "I6",
+      "role": "DEMONSTRATE",
+      "concept": "Two terrains. Same algorithm, different noise. The flat landscape rolls gently — marching cubes tracing where density crosses zero, converting a scalar field into walkable ground.",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "ISO_FlatTerrain"
+      ],
+      "stage": "draft",
+      "next": "I7",
+      "_concept_origin": "blurb"
+    },
+    {
+      "id": "I7",
+      "role": "DEMONSTRATE",
+      "concept": "Marching cubes at landscape scale. A terrain field — noise-driven, continuous — gets sliced at a threshold. Where the function crosses zero, triangles appear. Ground forms.",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "ISO_PortalLandscape"
+      ],
+      "stage": "draft",
+      "next": "I8",
+      "_concept_origin": "blurb"
+    },
+    {
+      "id": "I8",
+      "role": "DEMONSTRATE",
+      "concept": "Two views of the same algorithm. Outside: terrain stretches under open sky, stone arches rise from the ground like thresholds to nowhere — portals carved by mathematics, not erosion. Inside: the cave closes around you.",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "ISO_Caves"
+      ],
+      "stage": "draft",
+      "next": "I9",
+      "_concept_origin": "blurb"
+    },
+    {
+      "id": "I9",
+      "role": "DEMONSTRATE",
+      "concept": "Noise becomes architecture. A 3D scalar field — Perlin, simplex, whatever turbulence you choose — fills a volume with densities. Marching cubes walks through, voxel by voxel, checking each corner against a threshold.",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "ISO_CaveGeneration"
+      ],
+      "stage": "draft",
+      "next": "I10",
+      "_concept_origin": "blurb"
+    },
+    {
+      "id": "I10",
+      "role": "DEMONSTRATE",
+      "concept": "Noise evolves. The isosurface chases it.",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "ISO_AnimatedNoise"
+      ],
+      "stage": "draft",
+      "next": "I11",
+      "_concept_origin": "blurb"
+    },
+    {
+      "id": "I11",
+      "role": "DEMONSTRATE",
+      "concept": "Each metaball is a point radiating influence. A distance field — strongest at center, fading outward. One sphere alone is trivial. But place two near each other and their fields sum.",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "ISO_Metaballs"
+      ],
+      "stage": "draft",
+      "next": "I12",
+      "_concept_origin": "blurb"
+    },
+    {
+      "id": "I12",
+      "role": "SYNTHESIZE",
+      "concept": "A sphere is where distance from center equals radius. Not a mesh. Not vertices. A condition. Implicit surfaces define shape as equation — every point in space returns a signed distance. Negative means inside.",
+      "register": "synthesizing",
+      "intensity": "high",
+      "maps": [
+        "ISO_ImplicitModeling"
+      ],
+      "stage": "draft",
+      "next": "I13",
+      "_concept_origin": "blurb"
+    },
+    {
+      "id": "I13",
+      "role": "CHAMBER",
+      "concept": "the isosurfaces principle held — carried forward",
+      "register": "synthesizing",
+      "intensity": "high",
+      "maps": [],
+      "stage": "draft",
+      "note": "no map yet — assign a Chamber_<seq> map or absorb into the last map-beat · auto-reciprocates inbound bleed_from references",
+      "next": null,
+      "bleed_to": [
+        "primitives"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "map_info": {
+    "name": "Chamber_Primitives_SimulatedAnnealing",
+    "lookup_name": "Chamber_Primitives_SimulatedAnnealing",
+    "description": "Auto-placement variant of Chamber_Primitives using the 'simulated_annealing' strategy from placement_research. Score: before=0.950, after=0.974.",
+    "dimensions": {
+      "width": 11,
+      "depth": 7,
+      "max_height": 2
+    },
+    "version": "auto-placement-simulated_annealing"
+  },
+  "settings": {
+    "cube_size": 1,
+    "gutter": 0,
+    "show_grid": true,
+    "enable_physics": true,
+    "enter_type": "I"
+  },
+  "utility_definitions": {
+    "t": {
+      "type": "teleporter",
+      "name": "Return to Lab",
+      "description": "Sequence complete",
+      "properties": {
+        "action": "next_in_sequence"
+      }
+    }
+  },
+  "layers": {
+    "structure": [
+      ["1","1","1","1","2","2","2","1","1","1","2"],
+      ["1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","2","1","1","1","1","1"],
+      ["2","2","2","2","2","0","2","2","2","1","1"],
+      ["0","0","0","0","0","0","0","0","2","1","1"],
+      ["0","0","0","0","0","0","0","0","2","1","0"]
+    ],
+    "utilities": [
+      ["sp"," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," ","t"]
+    ],
+    "interactables": [
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," ","catalyst_vent:0:0#emit_interval_s:3.0#wave_size:3#start_delay_s:5.0#initial_state:foe"," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," ","becoming_catalyst#start_mode:primitives"," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," ","science_screen:180:1.5#mode:point"," "," "," "," ","catalyst_target"," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "]
+    ]
+  }
+}

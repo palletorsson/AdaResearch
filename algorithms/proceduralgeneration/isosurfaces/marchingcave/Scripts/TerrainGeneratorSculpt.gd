@@ -164,7 +164,9 @@ func run_compute() -> void:
 	last_compute_dispatch_frame = frame
 	waiting_for_compute = true
 
-func release() -> void:
-	if rendering_device:
-		rendering_device.free_rid(blob_buffer) # Release new buffer
-	super.release()
+# Free the sculpt-specific blob buffer. Called by the base release() after the in-flight
+# compute is synced and before the device is freed, so this stays crash-safe.
+func _free_extra_rids() -> void:
+	if rendering_device and blob_buffer.is_valid():
+		rendering_device.free_rid(blob_buffer)
+		blob_buffer = RID()

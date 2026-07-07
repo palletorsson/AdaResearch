@@ -1,254 +1,255 @@
 {
-	"sequences": {
-		"randomness": {
-			"name": "Randomness: Freedom from Pattern",
-			"description": "Entropy is not decayâ€”entropy is freedom. High-dimensional possibility space too vast to map, too free to control. Where the algorithm cannot predict, where indices fail, where normalization is refused. Randomness is computational wilderness: the vital space from which patterns emerge without blueprint.",
-			"qfep_term": "E(S)",
-			"qfep_connection": "Randomness IS entropy â€” the E(S) term in its purest form. This sequence explores what happens when prediction fails, when patterns dissolve, when the F-model encounters irreducible uncertainty.",
-			"difficulty": "intermediate",
-			"estimated_time": "25-30 minutes",
-			"learning_objectives": [
-				"Entropy as possibility space, not destruction",
-				"PRNG vs TRNG: deterministic sequences vs physical randomness",
-				"Distributions: uniform, Gaussian, and the shapes of chance",
-				"Random walk: non-teleological movement, queer navigation",
-				"Emergence: Turing morphogenesis, patterns from noise"
-			],
-			"content": [
-				"Random_Definition: Entropy as Wilderness",
-				"Random_Remove: Subtraction as Authorship",
-				"Randomness_10_PRINT_Algorithm: One Line Infinite Maze",
-				"Random_Cubes: Probability Primitives",
-				"Random_Rotate_Random_XYZ: Three Axes of Chaos",
-				"Random_Walk: Brownian Motion Paths",
-				"Random_Gaussian: Bell Curve Emergence",
-				"Random_Mushrooms: Spores and Random Tables",
-				"Random_Space_Geometry: Geometry Meets Entropy",
-				"Randomness_Examples_of_Randomness: Gallery of Creative Chaos",
-				"Random_Pheromone: Stigmergy and Trails",
-				"Random_Space: Randomness Fills Space",
-				"Random_Game: Survive the Algorithm"
-			],
-			"maps": [
-				"Random_Definition",
-				"Random_Remove",
-				"Randomness_10_PRINT_Algorithm",
-				"Random_Cubes",
-				"Random_Rotate_Random_XYZ",
-				"Random_Walk",
-				"Random_Gaussian",
-				"Random_Mushrooms",
-				"Random_Space_Geometry",
-				"Randomness_Examples_of_Randomness",
-				"Random_Pheromone",
-				"Random_Space",
-				"Random_Game",
-				"Chamber_Random"
-			],
-			"audio": {
-				"ambient_preset": "white_noise_drift",
-				"interactive_sounds": {
-					"teleport": "AudioSynthesizer.NOISE_BURST"
-				},
-				"volume": -12.0
-			},
-			"return_to": "lab",
-			"lab_map": "Lab/map_data_post_random",
-			"unlock_requirements": [
-				"color"
-			],
-			"completion_rewards": [
-				"entropy_badge",
-				"chaos_explorer_badge",
-				"computational_wilderness_badge"
-			],
-			"artifact_groups": [
-				{
-					"map": "Random_Definition",
-					"position": "intro",
-					"artifacts": [
-						"slot_machine",
-						"prng_crank_machine",
-						"entropy_axiom",
-						"entropy_jar",
-						"random_butterflies",
-						"dark_sphere",
-						"clipboard#prng_axioms",
-						"digital_materiality_glitch",
-						"trng_vs_prng",
-						"random_number_book_page_1955"
-					],
-					"size_budget": "compact_only",
-					"rationale": "Introduces entropy concept with interactive PRNG/TRNG comparisons and historical context artifacts",
-					"grammar": "linear"
-				},
-				{
-					"map": "Random_Remove",
-					"position": "intro",
-					"artifacts": [
-						"remove_random",
-						"dark_sphere",
-						"hazards_demo"
-					],
-					"size_budget": "compact_only",
-					"rationale": "Simple removal mechanic demonstrates randomness as subtraction; hazards demo as teaser",
-					"grammar": "florence"
-				},
-				{
-					"map": "Randomness_10_PRINT_Algorithm",
-					"position": "foundation",
-					"artifacts": [
-						"remove_random",
-						"ten_print_maze_3d",
-						"pickup_cube_placer",
-						"clipboard#ten_print_axioms",
-						"dark_sphere",
-						"nature_system_demo"
-					],
-					"size_budget": "mixed",
-					"rationale": "Classic 10 PRINT algorithm with 3D maze generation; builds on intro with first algorithmic pattern",
-					"grammar": "zelda"
-				},
-				{
-					"map": "Random_Cubes",
-					"position": "foundation",
-					"artifacts": [
-						"dice_throw",
-						"coin_toss",
-						"dark_sphere",
-						"random_object_spawner",
-						"random_edge_profile"
-					],
-					"size_budget": "mixed",
-					"rationale": "Probability primitives (dice, coins) plus random geometry generation via edge profiles",
-					"grammar": "metropolitan"
-				},
-				{
-					"map": "Random_Rotate_Random_XYZ",
-					"position": "foundation",
-					"artifacts": [
-						"Random_Rotate_Random_XYZ",
-						"dark_sphere",
-						"random_decay_multimesh",
-						"hardware_entropy_decay"
-					],
-					"size_budget": "compact_only",
-					"rationale": "Random transformations on geometric objects; introduces entropy decay concept",
-					"grammar": "florence"
-				},
-				{
-					"map": "Random_Walk",
-					"position": "exploration",
-					"artifacts": [
-						"random_walk_terrarium",
-						"random_walk_collection",
-						"pixel_cloud",
-						"random_walk_128",
-						"dark_sphere",
-						"random_walk_leash"
-					],
-					"size_budget": "mixed",
-					"rationale": "Deep dive into random walk variants: terrarium, collection, leashed, and 128-step visualization",
-					"grammar": "venice"
-				},
-				{
-					"map": "Random_Gaussian",
-					"position": "exploration",
-					"artifacts": [
-						"galton_board",
-						"dark_sphere",
-						"distribution_sampler",
-						"gaussian_random",
-						"random_bell_curve"
-					],
-					"size_budget": "mixed",
-					"rationale": "Gaussian distribution explored through physical Galton board and interactive samplers",
-					"grammar": "halflife"
-				},
-				{
-					"map": "Random_Mushrooms",
-					"position": "exploration",
-					"artifacts": [
-						"dark_sphere",
-						"mushrooms",
-						"bubbles_random",
-						"random_number_book_page_collection"
-					],
-					"size_budget": "compact_only",
-					"rationale": "Historical randomness (RAND 1955 book) meets biological randomness (fungal spores)",
-					"grammar": "florence"
-				},
-				{
-					"map": "Random_Space_Geometry",
-					"position": "integration",
-					"artifacts": [
-						"random_transformations_geometric",
-						"dark_sphere",
-						"env_one",
-						"sculpt_one"
-					],
-					"size_budget": "environment",
-					"rationale": "Random geometric transformations at structural level; environment-scale sculpting",
-					"grammar": "vatican"
-				},
-				{
-					"map": "Randomness_Examples_of_Randomness",
-					"position": "integration",
-					"artifacts": [
-						"pollock_painting_in_3d",
-						"pipe_dream",
-						"dark_sphere",
-						"monte_carlo_dartboard",
-						"extreme_randomness"
-					],
-					"size_budget": "mixed",
-					"rationale": "Gallery of artistic randomness applications: Pollock, Monte Carlo, pipe systems",
-					"grammar": "metropolitan"
-				},
-				{
-					"map": "Random_Pheromone",
-					"position": "integration",
-					"artifacts": [
-						"dark_sphere",
-						"pheromone_terrain",
-						"clipboard#pheromone_axioms",
-						"clipboard#queer_energy"
-					],
-					"size_budget": "environment",
-					"rationale": "Stigmergy and pheromone trails: randomness leaving traces becomes emergent behavior",
-					"grammar": "venice"
-				},
-				{
-					"map": "Random_Space",
-					"position": "synthesis",
-					"artifacts": [
-						"random_space",
-						"dark_sphere"
-					],
-					"size_budget": "world_scale",
-					"rationale": "Full random space environment as spatial synthesis of all randomness concepts",
-					"grammar": "zelda"
-				},
-				{
-					"map": "Random_Game",
-					"position": "synthesis",
-					"artifacts": [
-						"r_c",
-						"armadillo_eggling",
-						"origami_droideka",
-						"cube_projectile_spawner",
-						"miura_crawler",
-						"kresling_spire",
-						"scissor_stalker",
-						"kaleidocycle_enemy"
-					],
-					"size_budget": "world_scale",
-					"rationale": "Culmination: hazard gauntlet using randomized projectiles and folding creature enemies; tests understanding through gameplay",
-					"grammar": "halflife"
-				}
-			]
+  "sequences": {
+	"randomness": {
+	  "name": "Randomness: Freedom from Pattern",
+	  "description": "Entropy is not decay\u00e2\u20ac\u201dentropy is freedom. High-dimensional possibility space too vast to map, too free to control. Where the algorithm cannot predict, where indices fail, where normalization is refused. Randomness is computational wilderness: the vital space from which patterns emerge without blueprint.",
+	  "qfep_term": "E(S)",
+	  "qfep_connection": "Randomness IS entropy \u00e2\u20ac\u201d the E(S) term in its purest form. This sequence explores what happens when prediction fails, when patterns dissolve, when the F-model encounters irreducible uncertainty.",
+	  "layer": "E_entropy",
+	  "difficulty": "intermediate",
+	  "estimated_time": "25-30 minutes",
+	  "learning_objectives": [
+		"Entropy as possibility space, not destruction",
+		"PRNG vs TRNG: deterministic sequences vs physical randomness",
+		"Distributions: uniform, Gaussian, and the shapes of chance",
+		"Random walk: non-teleological movement, queer navigation",
+		"Emergence: Turing morphogenesis, patterns from noise",
+        "Shannon entropy: H = -\u03a3 p log p. Logarithm measures disorder. Factorials count arrangements. The integral named at change (seq 4.5) reappears here as expectation \u2014 sum over a distribution becomes integral in the continuous limit."
+	  ],
+	  "content": [
+		"Random_Definition: Entropy as Wilderness",
+		"Random_Remove: Subtraction as Authorship",
+		"Randomness_10_PRINT_Algorithm: One Line Infinite Maze",
+		"Random_Cubes: Probability Primitives",
+		"Random_Rotate_Random_XYZ: Three Axes of Chaos",
+		"Random_Walk: Brownian Motion Paths",
+		"Random_Gaussian: Bell Curve Emergence",
+		"Random_Mushrooms: Spores and Random Tables",
+		"Random_Space_Geometry: Geometry Meets Entropy",
+		"Randomness_Examples_of_Randomness: Gallery of Creative Chaos",
+		"Random_Pheromone: Stigmergy and Trails",
+		"Random_Space: Randomness Fills Space",
+        "Random_Game: Survive the Algorithm"
+	  ],
+	  "maps": [
+		"Random_Definition",
+		"Random_Remove",
+		"Randomness_10_PRINT_Algorithm",
+		"Random_Cubes",
+		"Random_Rotate_Random_XYZ",
+		"Random_Walk",
+		"Random_Gaussian",
+		"Random_Mushrooms",
+		"Random_Space_Geometry",
+		"Randomness_Examples_of_Randomness",
+		"Random_Pheromone",
+		"Random_Space",
+        "Random_Game"
+	  ],
+	  "audio": {
+		"ambient_preset": "white_noise_drift",
+		"interactive_sounds": {
+		  "teleport": "AudioSynthesizer.NOISE_BURST"
+		},
+		"volume": -12.0
+	  },
+	  "return_to": "lab",
+	  "lab_map": "Lab/map_data_post_random",
+	  "unlock_requirements": [
+        "color"
+	  ],
+	  "completion_rewards": [
+		"entropy_badge",
+		"chaos_explorer_badge",
+        "computational_wilderness_badge"
+	  ],
+	  "artifact_groups": [
+		{
+		  "map": "Random_Definition",
+		  "position": "intro",
+		  "artifacts": [
+			"slot_machine",
+			"prng_crank_machine",
+			"entropy_axiom",
+			"entropy_jar",
+			"random_butterflies",
+			"dark_sphere",
+			"clipboard#prng_axioms",
+			"digital_materiality_glitch",
+			"trng_vs_prng",
+            "random_number_book_page_1955"
+		  ],
+		  "size_budget": "compact_only",
+		  "rationale": "Introduces entropy concept with interactive PRNG/TRNG comparisons and historical context artifacts",
+		  "grammar": "linear"
+		},
+		{
+		  "map": "Random_Remove",
+		  "position": "intro",
+		  "artifacts": [
+			"remove_random",
+			"dark_sphere",
+            "hazards_demo"
+		  ],
+		  "size_budget": "compact_only",
+		  "rationale": "Simple removal mechanic demonstrates randomness as subtraction; hazards demo as teaser",
+		  "grammar": "florence"
+		},
+		{
+		  "map": "Randomness_10_PRINT_Algorithm",
+		  "position": "foundation",
+		  "artifacts": [
+			"remove_random",
+			"ten_print_maze_3d",
+			"pickup_cube_placer",
+			"clipboard#ten_print_axioms",
+			"dark_sphere",
+            "nature_system_demo"
+		  ],
+		  "size_budget": "mixed",
+		  "rationale": "Classic 10 PRINT algorithm with 3D maze generation; builds on intro with first algorithmic pattern",
+		  "grammar": "zelda"
+		},
+		{
+		  "map": "Random_Cubes",
+		  "position": "foundation",
+		  "artifacts": [
+			"dice_throw",
+			"coin_toss",
+			"dark_sphere",
+			"random_object_spawner",
+            "random_edge_profile"
+		  ],
+		  "size_budget": "mixed",
+		  "rationale": "Probability primitives (dice, coins) plus random geometry generation via edge profiles",
+		  "grammar": "metropolitan"
+		},
+		{
+		  "map": "Random_Rotate_Random_XYZ",
+		  "position": "foundation",
+		  "artifacts": [
+			"Random_Rotate_Random_XYZ",
+			"dark_sphere",
+			"random_decay_multimesh",
+            "hardware_entropy_decay"
+		  ],
+		  "size_budget": "compact_only",
+		  "rationale": "Random transformations on geometric objects; introduces entropy decay concept",
+		  "grammar": "florence"
+		},
+		{
+		  "map": "Random_Walk",
+		  "position": "exploration",
+		  "artifacts": [
+			"random_walk_terrarium",
+			"random_walk_collection",
+			"pixel_cloud",
+			"random_walk_128",
+			"dark_sphere",
+            "random_walk_leash"
+		  ],
+		  "size_budget": "mixed",
+		  "rationale": "Deep dive into random walk variants: terrarium, collection, leashed, and 128-step visualization",
+		  "grammar": "venice"
+		},
+		{
+		  "map": "Random_Gaussian",
+		  "position": "exploration",
+		  "artifacts": [
+			"galton_board",
+			"dark_sphere",
+			"distribution_sampler",
+			"gaussian_random",
+            "random_bell_curve"
+		  ],
+		  "size_budget": "mixed",
+		  "rationale": "Gaussian distribution explored through physical Galton board and interactive samplers",
+		  "grammar": "halflife"
+		},
+		{
+		  "map": "Random_Mushrooms",
+		  "position": "exploration",
+		  "artifacts": [
+			"dark_sphere",
+			"mushrooms",
+			"bubbles_random",
+            "random_number_book_page_collection"
+		  ],
+		  "size_budget": "compact_only",
+		  "rationale": "Historical randomness (RAND 1955 book) meets biological randomness (fungal spores)",
+		  "grammar": "florence"
+		},
+		{
+		  "map": "Random_Space_Geometry",
+		  "position": "integration",
+		  "artifacts": [
+			"random_transformations_geometric",
+			"dark_sphere",
+			"env_one",
+            "sculpt_one"
+		  ],
+		  "size_budget": "environment",
+		  "rationale": "Random geometric transformations at structural level; environment-scale sculpting",
+		  "grammar": "vatican"
+		},
+		{
+		  "map": "Randomness_Examples_of_Randomness",
+		  "position": "integration",
+		  "artifacts": [
+			"pollock_painting_in_3d",
+			"pipe_dream",
+			"dark_sphere",
+			"monte_carlo_dartboard",
+            "extreme_randomness"
+		  ],
+		  "size_budget": "mixed",
+		  "rationale": "Gallery of artistic randomness applications: Pollock, Monte Carlo, pipe systems",
+		  "grammar": "metropolitan"
+		},
+		{
+		  "map": "Random_Pheromone",
+		  "position": "integration",
+		  "artifacts": [
+			"dark_sphere",
+			"pheromone_terrain",
+			"clipboard#pheromone_axioms",
+            "clipboard#queer_energy"
+		  ],
+		  "size_budget": "environment",
+		  "rationale": "Stigmergy and pheromone trails: randomness leaving traces becomes emergent behavior",
+		  "grammar": "venice"
+		},
+		{
+		  "map": "Random_Space",
+		  "position": "synthesis",
+		  "artifacts": [
+			"random_space",
+            "dark_sphere"
+		  ],
+		  "size_budget": "world_scale",
+		  "rationale": "Full random space environment as spatial synthesis of all randomness concepts",
+		  "grammar": "zelda"
+		},
+		{
+		  "map": "Random_Game",
+		  "position": "synthesis",
+		  "artifacts": [
+			"r_c",
+			"armadillo_eggling",
+			"origami_droideka",
+			"cube_projectile_spawner",
+			"miura_crawler",
+			"kresling_spire",
+			"scissor_stalker",
+            "kaleidocycle_enemy"
+		  ],
+		  "size_budget": "world_scale",
+		  "rationale": "Culmination: hazard gauntlet using randomized projectiles and folding creature enemies; tests understanding through gameplay",
+		  "grammar": "halflife"
 		}
-	},
-	"world_phase": "transition",
-	"artifact_groups": []
+	  ]
+	}
+  },
+  "world_phase": "transition",
+  "artifact_groups": []
 }

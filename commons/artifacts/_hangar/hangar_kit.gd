@@ -157,6 +157,21 @@ static func box(center: Vector3, size: Vector3, mat: Material) -> MeshInstance3D
 	return mi
 
 
+## A StaticBody3D box collider (default layer 1, matching the grid's structure
+## cubes) so a prop is SOLID in-game — the player can't walk through it. size /
+## center are in the prop's local metres. Ignored by mesh-AABB framing.
+static func box_collider(size: Vector3, center: Vector3 = Vector3.ZERO) -> StaticBody3D:
+	var body := StaticBody3D.new()
+	body.name = "Collider"
+	var cs := CollisionShape3D.new()
+	var shape := BoxShape3D.new()
+	shape.size = size
+	cs.shape = shape
+	cs.position = center
+	body.add_child(cs)
+	return body
+
+
 ## A row of small bolt cylinders along a line — the bolted-panel detail.
 static func bolts(a: Vector3, b: Vector3, count: int, radius: float, mat: Material) -> Node3D:
 	var root := Node3D.new()

@@ -1,0 +1,5 @@
+A pressurized sphere is dropped into a rectangular cavity — 0.9 wide, 1.4 tall, 0.9 deep. The mould has flat faces, sharp edges, square corners. The body's internal pressure still wants to push every vertex outward. The cavity meets it with flat walls instead of curved ones. Wherever the body reaches a face, it presses flat against it. Wherever it reaches an edge, it has to fold around — and the bending springs resist this, leaving the corners rounded rather than crisp.
+
+The result is what every soap-press and pharmaceutical mould produces: a rectangular bottle with rounded corners. The flat faces are the simulation's record of where the body had room to fully expand. The rounded corners are the body's record of its own bending stiffness. The cavity decided that the walls are flat; the body decided how cleanly its surface could meet them.
+
+A perfectly inelastic body would render perfect corners. A perfectly elastic body would render no corners at all and just round itself off in the middle. gm03 sits between these limits and shows what the simulation calls a soft box.

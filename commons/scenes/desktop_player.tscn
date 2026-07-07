@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://djouaaayjptll" path="res://commons/scenes/DesktopPlayer.gd" id="1"]
 [ext_resource type="PackedScene" path="res://commons/scenes/DesktopInteractionPointer.tscn" id="2_ptr"]
+[ext_resource type="Script" path="res://commons/scenes/player_held_light.gd" id="3_light"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1"]
 radius = 0.3
@@ -38,3 +39,6 @@ target_position = Vector3(0, 0, -5)
 collide_with_areas = true
 
 [node name="DesktopInteractionPointer" parent="Head" unique_id=340938085 instance=ExtResource("2_ptr")]
+
+[node name="PlayerHeldLight" type="Node3D" parent="Head"]
+script = ExtResource("3_light")

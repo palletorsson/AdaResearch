@@ -1,4 +1,5 @@
 # SwarmProjectile.gd
+# verb: flock
 # 8 boid spheres that flock and independently seek nearby targets.
 # Collective intelligence — the swarm hunts together.
 extends CatalystProjectile

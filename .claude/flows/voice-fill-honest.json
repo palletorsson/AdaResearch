@@ -1,0 +1,45 @@
+{
+  "id": "voice-fill-honest",
+  "title": "Honest Voice-Fill (verify before you voice)",
+  "description": "The autonomous lever when the pipeline is saturated (every sequence frozen at human-gated stage-6 vr_testing) and subtitle truth-beats are exhausted. Fill @identity on scripted-but-voiceless artifacts — but FIRST confirm the 'voiceless' report is real, not a name-resolution false-negative.",
+  "triggers": [
+    "voice coverage",
+    "voiceless artifacts",
+    "fill @identity",
+    "garden voice lever",
+    "pipeline saturated what to work on"
+  ],
+  "granularity": "meso",
+  "model_version": "opus-4.8",
+  "created": "2026-07-04",
+  "updated": "2026-07-04",
+  "confidence": "extracted",
+  "earned_from": "breath 2026-07-04T09:00 — primitives voice 75->79; find_gd registry resolver surfaced +157 false-negative voiceless project-wide (54%->60%)",
+  "nodes": [
+    {
+      "id": "verify",
+      "type": "gate",
+      "label": "Verify the voiceless report is REAL",
+      "detail": "garden_listener.find_gd matches by file STEM. Any artifact whose lookup-name != file-stem (folding_past->animated_folding_past, dgrid->durer_grid) is a FALSE-NEGATIVE 'voiceless'. Resolve lookup-name -> registry scene_path -> .tscn script ext_resource -> .gd before believing 'no @identity'. The resolver now lives in find_gd; NO_GD_FILE after it = genuinely scriptless (e.g. a pure .tscn) = skip, do not fabricate a script."
+    },
+    {
+      "id": "pick",
+      "type": "action",
+      "label": "Pick 3-4 scripted-but-voiceless artifacts",
+      "detail": "Cap at ~4/breath (anti-pattern: too-many-maps). Prefer the FOCUS_VECTOR sequence; when its scripted-voiceless set hits ~0, rotate to the next GROWING sequence, then a DORMANT one."
+    },
+    {
+      "id": "ground",
+      "type": "action",
+      "label": "Write grounded @identity (see identity-writing flow)",
+      "detail": "8 fields, each grounded in the actual exports/_ready/_process behaviour + the registry description. Grounding guards sieve-Q3: a generic block is a sterilising seal, not voice. Place the block between the header comment and `extends`."
+    },
+    {
+      "id": "measure",
+      "type": "gate",
+      "label": "Measure honestly, not by pipeline avg",
+      "detail": "read_identity via the resolver must return truth for each target; scriptless ones stay unresolved (correct). Re-run garden --diagnosis for the voice delta. Do NOT expect pipeline mean-head to move — it is frozen at stage-6 vr_testing (headset-gated) and is dead as a breath signal. Confirm release gates PASS 4/4; commit ONLY the touched files (never git add -A — working-tree drift persists)."
+    }
+  ],
+  "related_flows": ["identity-writing", "breathe-cycle", "heat-map-triage"]
+}

@@ -1,0 +1,1 @@
+Two of the oldest solved minimizations in the world, side by side. A hanging chain finds the catenary — the exact curve of least potential energy for a rope between two points; a soap film finds the minimal surface — the least area that can span its wire frame. No hand draws these shapes. They are computed, continuously, by matter obeying the single instruction: spend the least.

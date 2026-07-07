@@ -15,11 +15,7 @@
       "difficulty": "intermediate",
       "category": "qfeplaboratory",
       "estimated_time": "5-7 minutes",
-      "learning_objectives": [
-        "Visit the seven QFEP phases as physical stations in a circle",
-        "Read each prop's state as the phase it embodies",
-        "Walk the chamber once = walk the phase diagram once"
-      ]
+      "learning_objectives": ["Visit the seven QFEP phases as physical stations in a circle","Read each prop's state as the phase it embodies","Walk the chamber once = walk the phase diagram once"]
     }
   },
   "utility_definitions": {
@@ -28,12 +24,12 @@
   },
   "spawn_points": {
     "default": {
-      "position": [4.5, 1.2, 8.0],
-      "rotation": [0, 0, 0]
+      "position": [4.5,1.2,8.0],
+      "rotation": [0,0,0]
     }
   },
   "lighting": {
-    "ambient_color": [0.42, 0.45, 0.55],
+    "ambient_color": [0.42,0.45,0.55],
     "ambient_energy": 0.55
   },
   "settings": {
@@ -41,37 +37,37 @@
   },
   "layers": {
     "structure": [
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "0", "1", "1", "1", "1"]
+      ["1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","0","1","1","1","1"]
     ],
     "utilities": [
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", "t", " ", " ", " ", " "]
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," ","t"," "," "," "," "]
     ],
     "interactables": [
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", "lab_room#accent_color:0.608,0.365,0.890#signage_top:QFEP PHASE CHAMBER#signage_sub:walk the phase diagram#annotation_top:seven stations, seven phases — F → ω → E → λ → φ → G → ∑#annotation_bottom:the chamber IS the landscape; the walk IS the trajectory#room_width:9.0#room_depth:9.0#room_height:3.8#mounted_artifact_scene:res://commons/artifacts/qfep_phase_apparatus/qfep_phase_apparatus.tscn", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," ","lab_room#accent_color:0.608,0.365,0.890#signage_top:QFEP PHASE CHAMBER#signage_sub:walk the phase diagram#annotation_top:seven stations, seven phases — F → ω → E → λ → φ → G → ∑#annotation_bottom:the chamber IS the landscape; the walk IS the trajectory#room_width:9.0#room_depth:9.0#room_height:3.8#mounted_artifact_scene:res://commons/artifacts/qfep_phase_apparatus/qfep_phase_apparatus.tscn"," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "]
     ]
   }
 }

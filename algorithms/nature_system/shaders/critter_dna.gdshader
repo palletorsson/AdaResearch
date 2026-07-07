@@ -79,6 +79,27 @@ void vertex() {
     v_instance_color = COLOR;
     v_instance_custom = INSTANCE_CUSTOM;
 
+    // ── Tier 2.5: per-instance TAPER for batched limbs / body ──
+    // CreatureBatcher writes:
+    //   INSTANCE_CUSTOM.x = top_radius / bottom_radius (taper factor)
+    //   INSTANCE_CUSTOM.w = 1.0 to enable this transform; 0.0 (default
+    //                       for non-multimesh instances) means leave
+    //                       VERTEX alone.
+    // Canonical mesh is a unit cylinder centred on origin (-0.5..+0.5
+    // in y); we lerp xz scale from 1.0 at y=-0.5 (bottom) to taper
+    // at y=+0.5 (top).
+    if (INSTANCE_CUSTOM.w > 0.5) {
+        float taper_factor = INSTANCE_CUSTOM.x;
+        float t = clamp(VERTEX.y + 0.5, 0.0, 1.0);  // 0 bottom, 1 top
+        float xz_scale = mix(1.0, taper_factor, t);
+        VERTEX.xz *= xz_scale;
+        // Adjust normal so lighting still reads correctly on tapered
+        // surfaces. For a cone-frustum, the surface normal tilts
+        // outward by atan((1 - taper_factor)/2). Approximate by
+        // scaling NORMAL.y inversely to xz scale and renormalising.
+        NORMAL = normalize(vec3(NORMAL.x, NORMAL.y / max(xz_scale, 0.001), NORMAL.z));
+    }
+
     // Height factor for wind weighting (more sway at top)
     v_height_factor = clamp(VERTEX.y * 0.5, 0.0, 1.0);
 

@@ -169,6 +169,14 @@ var _orbit_radius: float = 0.0
 var _orbit_center: Vector3 = Vector3.ZERO
 var _orbiting: bool = false
 var _left_is_orbit: bool = false          # the current LEFT-drag began off-grid → orbit, not edit
+# Projection: isometric orthographic (default — uniform cell size everywhere, no
+# perspective foreshortening, so distant cells click as precisely as near ones) vs
+# the original perspective orbit. Toggle with O. Iso snaps to a clean 45°/35.26°
+# angle; zoom drives ortho `size` instead of orbit radius. View-only, reversible.
+var _ortho: bool = true
+const ISO_YAW := PI / 4.0           # 45° — classic isometric azimuth
+const ISO_PITCH := -0.61548         # elevation atan(1/√2) ≈ 35.26° above horizontal
+const ISO_SIZE_FACTOR := 1.15       # ortho size ≈ orbit_radius * this (match perspective framing)
 
 # ── Panel + HUD ───────────────────────────────────────────────────────
 var _panel: Control = null
@@ -205,6 +213,8 @@ const PREVIEW_PX := 240.0                  # square viewport edge (px)
 # ── Headless capture ──────────────────────────────────────────────────
 var _shot_path: String = ""
 var _capture_frames: int = 0
+var _clean_shot: bool = false             # --clean: hide the HUD/panel before --shot (book-vignette captures)
+var _bare_shot: bool = false              # --bare: catalog bead capture — disable biome, flat void backdrop
 # --paintbiome=<element>: headless proof that biome painting renders. Auto-selects
 # the element, stamps the brush at grid centre, updates the overlay + live rebuild.
 var _paintbiome_arg: String = ""
@@ -257,6 +267,11 @@ func _parse_cli() -> void:
 			_shot_path = a.split("=", true, 1)[1]
 		elif a.begins_with("--paintbiome="):
 			_paintbiome_arg = a.split("=", true, 1)[1].strip_edges()
+		elif a == "--clean":
+			_clean_shot = true
+		elif a == "--bare":
+			_bare_shot = true
+			_clean_shot = true   # bare implies clean (no HUD)
 		elif a == "--testmove":
 			_testmove = true
 		elif a == "--testpersist":
@@ -380,6 +395,8 @@ func _build_real_grid() -> void:
 	# biome without a mouse. Runs once the grid is ready, before the --shot countdown.
 	if _paintbiome_arg != "":
 		_headless_paint_biome(_paintbiome_arg)
+	if _bare_shot:
+		_bare_studio_setup()
 	if _testmove:
 		_headless_test_move()
 	if _testpersist:
@@ -490,15 +507,18 @@ func _fail(msg: String) -> void:
 func _recenter_for_grid() -> void:
 	_orbit_center = Vector3(float(_grid_w) * cube_size * 0.5, 0.6, float(_grid_d) * cube_size * 0.5)
 	_orbit_radius = float(maxi(_grid_w, _grid_d)) * cube_size * 1.4
+	if _ortho and _camera:
+		_camera.size = maxf(2.0, _orbit_radius * ISO_SIZE_FACTOR)
 
 
 func _build_environment() -> void:
 	var env := Environment.new()
 	env.background_mode = Environment.BG_COLOR
-	env.background_color = Color(0.07, 0.08, 0.11)
+	# --bare: pure black catalog backdrop so a bead reads as a cutout, no context.
+	env.background_color = Color(0, 0, 0) if _bare_shot else Color(0.07, 0.08, 0.11)
 	env.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
 	env.ambient_light_color = Color(0.55, 0.58, 0.64)
-	env.ambient_light_energy = 0.75
+	env.ambient_light_energy = 0.9 if _bare_shot else 0.75
 	var we := WorldEnvironment.new()
 	we.name = "WorldEnvironment"
 	we.environment = env
@@ -524,6 +544,24 @@ func _build_camera() -> void:
 		add_child(_camera)
 	_camera.fov = 60.0
 	_camera.current = true
+	_apply_projection()   # default: isometric orthographic
+
+
+## Apply the current projection mode to the camera. Isometric = orthographic with a
+## clean 45°/35.26° angle and `size`-based zoom; perspective = the original fov orbit.
+## Pure view change — the grid, edits, and raycast hover are projection-agnostic
+## (project_ray_origin/normal work in both). Toggle live with O.
+func _apply_projection() -> void:
+	if _camera == null:
+		return
+	if _ortho:
+		_camera.projection = Camera3D.PROJECTION_ORTHOGONAL
+		_orbit_yaw = ISO_YAW
+		_orbit_pitch = ISO_PITCH
+		_camera.size = maxf(2.0, _orbit_radius * ISO_SIZE_FACTOR)
+	else:
+		_camera.projection = Camera3D.PROJECTION_PERSPECTIVE
+		_camera.fov = 60.0
 
 
 # ── Hover highlight (single cell) + brush ghost (footprint) ───────────
@@ -1555,6 +1593,12 @@ func _unhandled_input(event: InputEvent) -> void:
 				elif event.ctrl_pressed: _undo()
 			KEY_Y:
 				if event.ctrl_pressed: _redo()
+			KEY_O:
+				# Toggle isometric (orthographic) ↔ perspective. View-only, reversible.
+				_ortho = not _ortho
+				_apply_projection()
+				_status_msg = "view: %s" % ("ISOMETRIC (ortho)" if _ortho else "PERSPECTIVE")
+				_update_hud()
 	elif event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.pressed:
@@ -1592,9 +1636,16 @@ func _unhandled_input(event: InputEvent) -> void:
 			else:
 				_orbiting = event.pressed
 		elif event.button_index == MOUSE_BUTTON_WHEEL_UP:
-			_orbit_radius = maxf(2.0, _orbit_radius - 1.5)
+			# Zoom: ortho shrinks the view `size`; perspective pulls the orbit radius in.
+			if _ortho and _camera:
+				_camera.size = maxf(2.0, _camera.size - maxf(1.0, _camera.size * 0.08))
+			else:
+				_orbit_radius = maxf(2.0, _orbit_radius - 1.5)
 		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
-			_orbit_radius += 1.5
+			if _ortho and _camera:
+				_camera.size = _camera.size + maxf(1.0, _camera.size * 0.08)
+			else:
+				_orbit_radius += 1.5
 	elif event is InputEventMouseMotion:
 		if _orbiting:
 			_orbit_yaw -= event.relative.x * 0.006
@@ -1667,6 +1718,13 @@ func _process(delta: float) -> void:
 
 	if _capture_frames > 0:
 		_capture_frames -= 1
+		# Hide the HUD a few frames ahead of the shot so the rendered frame is clean.
+		if _capture_frames == 10 and _clean_shot and _hud_layer:
+			_hud_layer.visible = false
+		# Re-assert the studio look LAST — NatureRenderer tweens the environment over
+		# the first second, so stomping it once at build time loses the race.
+		if _capture_frames == 8 and _bare_shot:
+			_bare_studio_setup()
 		if _capture_frames == 0:
 			_take_screenshot(_shot_path)
 			get_tree().quit()
@@ -3396,14 +3454,121 @@ func _update_hud() -> void:
 		_tool_lbl.text = "PAINT · %s   ·   brush %dx%d   ·   #%s" % [
 			_active_paint_op.to_upper(), _active_brush_size, _active_brush_size, _active_color.to_html(false)]
 		_tool_lbl.add_theme_color_override("font_color", _active_color)
-		_controls_lbl.text = "L-drag apply   ·   R-drag orbit   ·   wheel zoom   ·   WASD/QE fly   ·   Ctrl+Z undo   ·   Tab panel%s" % save_hint
+		_controls_lbl.text = "L-drag apply   ·   R-drag orbit   ·   wheel zoom   ·   O iso/persp   ·   WASD/QE fly   ·   Ctrl+Z undo   ·   Tab panel%s" % save_hint
 	else:
 		_tool_lbl.text = "GRID · %s   ·   brush %dx%d   ·   level %d" % [
 			_active_grid_op.to_upper(), _active_brush_size, _active_brush_size, _active_level]
 		_tool_lbl.add_theme_color_override("font_color", C_TEXT)
-		_controls_lbl.text = "L-drag apply   ·   R-drag orbit   ·   wheel zoom   ·   WASD/QE fly   ·   Ctrl+Z undo   ·   Tab panel%s" % save_hint
+		_controls_lbl.text = "L-drag apply   ·   R-drag orbit   ·   wheel zoom   ·   O iso/persp   ·   WASD/QE fly   ·   Ctrl+Z undo   ·   Tab panel%s" % save_hint
 	# Toast.
 	_toast_lbl.text = _status_msg
+
+
+# ── Bare studio capture (catalog beads) ───────────────────────────────
+## Make a bead read cleanly: off-white cubes (so the artifact's own colour is
+## the only saturated thing in frame) and a neutral mid-grey backdrop that
+## separates from BOTH the off-white floor and any dark artifact parts. Also
+## overrides every WorldEnvironment in the tree — a fresh map can spawn its own
+## (NatureRenderer sky etc.), which is why --bare black wasn't sticking.
+const BARE_CUBE := Color(0.90, 0.89, 0.85)     # warm off-white
+const BARE_WIRE := Color(0.60, 0.62, 0.66)     # soft grey edges (kills the loud magenta)
+const BARE_BG   := Color(0.40, 0.41, 0.44)     # neutral studio grey
+func _bare_studio_setup() -> void:
+	# 1. Paint every floor cell off-white (per-instance multimesh colour).
+	if _structure and _structure.has_method("set_cell_color"):
+		for z in range(_grid_d):
+			for x in range(_grid_w):
+				if _structure.get_height_at(x, z) > 0:
+					_structure.set_cell_color(Vector2i(z, x), BARE_CUBE)
+	# 1b. Soften the cube wireframe from magenta to grey so only the artifact is saturated.
+	_bare_soften_wireframe(_structure)
+	# 2. Own the BACKDROP: a fresh map can spawn its own WorldEnvironment /
+	# World3D environment (NatureRenderer sky), which is why --bare black/grey
+	# wasn't sticking. Force one neutral studio environment everywhere.
+	#    might read it: every WorldEnvironment node AND the viewport's World3D
+	#    (NatureRenderer / maps can set either). Plus the default clear colour.
+	var studio := Environment.new()
+	studio.background_mode = Environment.BG_COLOR
+	studio.background_color = BARE_BG
+	studio.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
+	studio.ambient_light_color = Color(0.72, 0.73, 0.76)
+	studio.ambient_light_energy = 1.0
+	studio.fog_enabled = false
+	for we in _all_world_environments(get_tree().get_root()):
+		we.environment = studio
+	var w3d := get_viewport().world_3d
+	if w3d:
+		w3d.environment = studio
+	RenderingServer.set_default_clear_color(BARE_BG)
+	# 3. Frame the camera on the ARTIFACT, not the grid — the footprint zoom that
+	#    makes a bead read as a catalog object instead of a floor with a speck.
+	_bare_frame_artifact()
+	print("[grid-editor] bare studio setup: off-white cubes + neutral backdrop")
+
+
+## Compute the world-space AABB of every spawned artifact and zoom the iso camera
+## onto it (with headroom), so the object fills the frame. Falls back to the grid
+## framing if no artifact is present.
+func _bare_frame_artifact() -> void:
+	var box := _group_world_aabb("vr_editable_artifact")
+	if box.size.length() < 0.05:
+		return
+	_orbit_center = box.position + box.size * 0.5
+	var half_diag: float = box.size.length() * 0.5
+	_orbit_radius = maxf(2.0, half_diag * 3.0)     # ortho: position only, not zoom
+	if _ortho and _camera:
+		_camera.size = maxf(0.6, half_diag * 2.3)  # the actual zoom — tight + headroom
+
+
+func _group_world_aabb(group: String) -> AABB:
+	var combined := AABB()
+	var has := false
+	for n in get_tree().get_nodes_in_group(group):
+		var stack: Array = [n]
+		while not stack.is_empty():
+			var node: Node = stack.pop_back()
+			if node is VisualInstance3D:
+				var local: AABB = node.get_aabb()
+				var xf: Transform3D = node.global_transform
+				for i in 8:
+					var world: Vector3 = xf * local.get_endpoint(i)
+					if not has:
+						combined = AABB(world, Vector3.ZERO); has = true
+					else:
+						combined = combined.expand(world)
+			for c in node.get_children():
+				stack.append(c)
+	return combined
+
+
+## Find the structure's MultiMeshInstance3D material(s) and recolour the wireframe
+## shader uniform to grey. The cube shader uses "wireframeColor"; guard every step
+## so a non-shader material is simply skipped.
+func _bare_soften_wireframe(structure: Node) -> void:
+	if structure == null:
+		return
+	var stack: Array = [structure]
+	while not stack.is_empty():
+		var n: Node = stack.pop_back()
+		if n is MultiMeshInstance3D:
+			var m = n.material_override
+			if m is ShaderMaterial:
+				m.set_shader_parameter("wireframeColor", BARE_WIRE)
+				m.set_shader_parameter("wireframeOpacity", 0.4)
+		for c in n.get_children():
+			stack.append(c)
+
+
+func _all_world_environments(root: Node) -> Array:
+	var found: Array = []
+	var stack: Array = [root]
+	while not stack.is_empty():
+		var n: Node = stack.pop_back()
+		if n is WorldEnvironment:
+			found.append(n)
+		for c in n.get_children():
+			stack.append(c)
+	return found
 
 
 # ── Headless capture ──────────────────────────────────────────────────

@@ -1,4 +1,5 @@
 extends Node3D
+class_name BuildEnv
 
 # @identity
 # essence: reward = height + span + stability + symmetry + motif_reuse; agent places primitives, physics settles, reward evaluates

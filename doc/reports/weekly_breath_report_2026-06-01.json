@@ -1,0 +1,385 @@
+{
+  "report_date": "2026-06-01",
+  "generated": "2026-06-01T00:00:00",
+  "period": "2026-05-25 to 2026-06-01",
+  "trigger": "scheduled-task: ada-weekly-audit",
+  "previous_report": "doc/reports/weekly_breath_report_2026-05-25.json",
+  "mode": "audit (dry-run breather + release gates + trajectory diff)",
+
+  "headline": "STALL BROKEN. After 25 days / 13 consecutive flat breaths at pipeline_avg 5.43 (flagged as a stall for THREE consecutive weekly audits), the ceiling broke this week. Pipeline head-sum avg climbed 5.43 -> 6.045 (+0.615), the largest week-over-week gain in audit history. Milestone reached 2026-05-30: all 22 spine sequences now at HEAD >= 6 (vr_testing). Last week's recommended OPTION B (clear softbodies + change off-spine stage-2 sequences via map authoring) was executed and worked exactly as predicted. A NEW structural ceiling has formed in place of the old one.",
+
+  "total_breaths_in_period": 6,
+  "breaths_in_period": [
+    "2026-05-26T09:05",
+    "2026-05-27T09:04",
+    "2026-05-28T09:12",
+    "2026-05-29T09:00",
+    "2026-05-30T09:05",
+    "2026-05-31T09:05"
+  ],
+  "note": "Six breaths this week (up from 3 last week, highest cadence in the audit record). The breakout sequence: 2026-05-26 flat (11th consecutive flat, but first HEAD-advance setup) -> 2026-05-27 +0.16 (stall broken, largest single-breath HEAD jump since April) -> 2026-05-28 +0.14 -> 2026-05-29 +0.05 -> 2026-05-30 +0.136 (MILESTONE: all 22 spine sequences at HEAD >= 6) -> 2026-05-31 flat at 6.045 (pivoted to garden voicing per the new ceiling). The driver was map_authoring on softbodies and change — the two sequences that last week's audit named as the only sub-stage-6 spine sequences.",
+
+  "pipeline_snapshot": {
+    "global_avg_pipeline_head_sum": 6.045,
+    "global_avg_pipeline_head_sum_last_week": 5.43,
+    "global_avg_pipeline_delta": 0.615,
+    "computation": "(21 sequences at stage 6 * 6 + 1 sequence (randomness) at stage 7 * 7) / 22 = 133/22 = 6.045",
+    "stall_period_status": "STALL BROKEN. The 5.43 plateau (25 days, 13 breaths, since 2026-04-30T07:18) ended on 2026-05-27. This week posted four consecutive non-zero deltas (05-27, 05-28, 05-29, 05-30) for the first time since the 2026-04-12 -> 2026-04-18 ramp.",
+    "sequences_at_stage_7_polish": ["randomness"],
+    "sequences_at_stage_6_vr_testing": [
+      "primitives", "transformation", "array_tutorial", "color", "change", "isosurfaces",
+      "boolean_surfaces", "forces", "wavefunctions", "noise", "cellularautomata",
+      "fractals", "lsystems", "proceduralgeneration", "swarmintelligence", "softbodies",
+      "machinelearning", "graphtheory", "foundationscrisis", "qfeplaboratory",
+      "postfoundationscrisis"
+    ],
+    "sequences_at_stage_2_documentation": [],
+    "milestone_2026_05_30": "All 22 spine sequences advanced to HEAD >= 6. softbodies and change — last week's only two sub-stage-6 spine sequences (softbodies at 79% doc, change at 0%) — both cleared to stage 6. This is the structural completion of stages 1-5 across the entire spine.",
+    "advancement_this_week": [
+      "softbodies: stage_2_documentation 79% (last week) -> stage 6 (this week). The map_authoring + documentation_writing batch predicted by last week's PRIORITY 1 cleared it.",
+      "change: stage 2 (0% doc/art/maps last week) -> stage 6 (this week). change was last week's PRIORITY-deferred 'empty stage'; it was authored from scratch and cleared. This is the item that prop-002 was written about (deferred 3+ breaths) — it finally landed.",
+      "All other spine sequences held at their stage-6 ceiling."
+    ]
+  },
+
+  "release_gates": {
+    "A_sequence_contract": "PASS",
+    "B_artifact_registry": "PASS",
+    "C_map_validation": "PASS",
+    "D_lab_progression": "PASS",
+    "all_passing": true,
+    "passing_count": 4,
+    "passing_count_last_week": 3,
+    "regression_detected": false,
+    "improvement_detected": true,
+    "gate_a_repair": {
+      "missing_declared_maps": 0,
+      "missing_declared_maps_last_week": 8,
+      "missing_declared_maps_delta": -8,
+      "duplicate_entries_within_sequence": 0,
+      "undeclared_map_folders": 625,
+      "undeclared_map_folders_last_week": 623,
+      "undeclared_map_folders_delta": 2,
+      "interpretation": "Gate A FULLY REPAIRED. missing_declared_maps went 8 -> 0 (the 8 boolean_surfaces + change scaffolds from last week were all completed as part of clearing those sequences to stage 6). This is the FIRST 4/4 release-gates week since the rotating-gate pattern began. undeclared_map_folders held essentially flat (+2) and is informational, not blocking."
+    },
+    "gate_b_detail": {
+      "unresolved_scene_files": 0,
+      "missing_scene_path": 0,
+      "missing_map_ready": 6,
+      "missing_include_in_map_data": 6,
+      "status": "PASS held (4 weeks running since 2026-05-12 repair). The 6 missing_map_ready / missing_include are within the gate's tolerance. prop-002-candidate (Gate B preventive tooling) can now be RETIRED — Gate B has held PASS for a full month."
+    },
+    "gate_c_detail": {
+      "grade_A": 911,
+      "grade_B": 144,
+      "grade_C": 139,
+      "grade_F": 0,
+      "grade_A_delta_vs_last_week": "+54 (857 -> 911)",
+      "grade_B_delta_vs_last_week": "0 (144 -> 144)",
+      "grade_C_delta_vs_last_week": "-44 (183 -> 139)",
+      "grade_F_delta_vs_last_week": "0 (0 -> 0)",
+      "interpretation": "Strong map-quality improvement: +54 grade-A maps and -44 grade-C maps. Map authoring this week produced grade-A maps directly and upgraded existing grade-C maps. No grade-F maps for the 7th+ week running."
+    },
+    "gate_d_detail": {
+      "lost_count": 0,
+      "changed_count": 12,
+      "total_issues": 39,
+      "ok_superset_pairs": 5,
+      "status": "PASS held. No lab-progression continuity losses."
+    },
+    "week_delta": "3/4 -> 4/4 PASSING. First all-gates-green week in the audit record. Gate A fully repaired (8 -> 0 missing maps), Gate C improved (+54 grade-A, -44 grade-C). No regressions on B or D."
+  },
+
+  "garden_health": {
+    "total_artifacts": 2091,
+    "voiced": 1029,
+    "voice_coverage_pct": 49,
+    "embodied": 337,
+    "embodiment_rate_pct": 32,
+    "phantom_limbs": 826,
+    "reaching": 540,
+    "voiced_last_week": 1012,
+    "voiced_delta": 17,
+    "embodied_last_week": 336,
+    "embodied_delta": 1,
+    "total_artifacts_last_week": 2058,
+    "total_artifacts_delta": 33,
+    "voiced_delta_note": "+17 voiced (1012 -> 1029) and +33 total artifacts (2058 -> 2091). The new artifacts are from this week's map authoring (softbodies/change clearing to stage 6 added new map interactables). Voice coverage held flat at 49% because new artifacts arrived faster than voicing — denominator grew with numerator.",
+    "state_transitions_this_week": [
+      "boolean_surfaces: voice 0/5 -> 5/5 (DORMANT -> LIVING GARDEN, all EMBODIED). Five artifacts carried only an informal one-line '# @identity:' header that read_identity() resolved to a falsy empty dict; structured 8-field @identity blocks grounded in each .gd algorithm (union/intersection/difference/workbench/habitable-cavity) flipped all 5 to EMBODIED."
+    ],
+    "growth_quality": "RE-ACCELERATION vs last week's pause. Last week +10 voices (all from project-track commits, none from breath work). This week +17 voices WITH a genuine state transition (boolean_surfaces 0 -> LIVING) driven by breath work (2026-05-31). Garden voicing resumed as the breather's success metric once the pipeline hit its new ceiling. Largest remaining 0-voice cluster: bricolage (43/0)."
+  },
+
+  "sequences_improved": [
+    {
+      "id": "softbodies",
+      "pipeline_delta": "HEAD stage_2_documentation 79% -> stage 6 (cleared stages 2-5)",
+      "mechanism": "Executed last week's PRIORITY 1 exactly: the remaining ~7 doc maps (sb_noise01, gl04, gl05, gm01-04) were authored via theme-cluster pair-contrast batching plus map_data.json authoring, clearing documentation + maps + validation thresholds. This was the single largest contributor to breaking the stall.",
+      "breath_refs": ["2026-05-26T09:05", "2026-05-27T09:04", "2026-05-28T09:12"]
+    },
+    {
+      "id": "change",
+      "pipeline_delta": "stage 2 (0% doc/art/maps) -> stage 6",
+      "mechanism": "The chronically-deferred 'empty stage' sequence (subject of prop-002) was authored from scratch — docs, artifacts, and map_data.json across its maps — and cleared all the way to the stage-6 ceiling. Removing it as the lone stage-2 outlier is what allowed the 2026-05-30 'all 22 at HEAD >= 6' milestone.",
+      "breath_refs": ["2026-05-29T09:00", "2026-05-30T09:05"]
+    },
+    {
+      "id": "boolean_surfaces",
+      "pipeline_delta": "pipeline HEAD held at stage 6; GARDEN voice 0/5 -> 5/5 (DORMANT -> LIVING)",
+      "mechanism": "Post-milestone garden-voicing pivot. Structured @identity blocks written for all 5 artifacts (CSG composition algebra). All 5 EMBODIED.",
+      "breath_refs": ["2026-05-31T09:05"]
+    }
+  ],
+
+  "total_delta": {
+    "pipeline_avg_start": 5.43,
+    "pipeline_avg_end": 6.045,
+    "pipeline_delta": 0.615,
+    "pipeline_delta_note": "LARGEST WEEK-OVER-WEEK PIPELINE GAIN IN THE AUDIT RECORD. Breaks 25 days / 13 breaths of flat 5.43. Four consecutive non-zero breath deltas (05-27 through 05-30). The mechanism was exactly last week's OPTION B: clear the two remaining sub-stage-6 spine sequences (softbodies, change) via map authoring. Last week estimated +0.05 if the scorer denominator included softbodies — the actual gain was 12x that because BOTH softbodies AND change cleared, each jumping multiple stages (2 -> 6), not one stage.",
+    "release_gates_start": "3/4 passing (Gate A failing)",
+    "release_gates_end": "4/4 passing (ALL GREEN)",
+    "release_gates_delta": "+1 net passing. First all-gates-green week in the audit record. Gate A fully repaired (missing_declared_maps 8 -> 0).",
+    "garden_voiced_start": 1012,
+    "garden_voiced_end": 1029,
+    "garden_voiced_delta": 17,
+    "garden_state_transitions": 1,
+    "biggest_single_advance": "2026-05-30 milestone breath: all 22 spine sequences reached HEAD >= 6, completing stages 1-5 across the entire curriculum spine for the first time."
+  },
+
+  "week_over_week_comparison": {
+    "last_week_period": "2026-05-18 to 2026-05-25",
+    "this_week_period": "2026-05-25 to 2026-06-01",
+    "pipeline_avg": {
+      "last_week_delta": 0.0,
+      "this_week_delta": 0.615,
+      "interpretation": "From the THIRD consecutive flat week (stall confirmed) to the largest gain on record. The stall-break path last week's audit recommended (OPTION B: clear softbodies + change) was executed and exceeded its estimate by 12x because both sequences jumped 4 stages each rather than 1."
+    },
+    "release_gates": {
+      "last_week_delta": "0 net (Gate A failing, partial repair 14 -> 8)",
+      "this_week_delta": "+1 net (Gate A 8 -> 0, now PASS). 3/4 -> 4/4.",
+      "interpretation": "The rotating-gate pattern (B -> A -> A) resolved. All four gates green. Gate A's residual design-in-flight scaffolds were completed as a byproduct of clearing softbodies/change to stage 6."
+    },
+    "garden_health": {
+      "last_week_voiced_delta": 10,
+      "this_week_voiced_delta": 17,
+      "interpretation": "RE-ACCELERATION (+10 -> +17) and a real state transition (boolean_surfaces 0 -> LIVING) vs zero transitions last week. Garden voicing resumed as the active breath metric after the pipeline hit its new ceiling on 2026-05-30."
+    },
+    "state_transitions": {
+      "last_week": 0,
+      "this_week": 1,
+      "interpretation": "boolean_surfaces DORMANT -> LIVING GARDEN (all 5 EMBODIED)."
+    },
+    "breath_cadence": {
+      "last_week": 3,
+      "this_week": 6,
+      "interpretation": "Doubled (3 -> 6) — highest cadence in the audit record. Daily breaths Mon-Sat this week."
+    }
+  },
+
+  "skill_effectiveness_changes": {
+    "map_authoring": {
+      "total_calls_cumulative": 8,
+      "success_rate": 1.0,
+      "avg_delta": 0.136,
+      "status": "THE STAR OF THE WEEK. map_authoring is now the only skill in the cumulative tracker carrying a non-null avg_delta (0.136). It is the lever that broke the stall — authoring map_data.json for softbodies and change cleared the stages-4/5 thresholds that documentation alone could not. New as a tracked skill this period; previously this work was folded into documentation_writing/direct_file_edit."
+    },
+    "documentation_writing": {
+      "total_calls_cumulative": 71,
+      "total_calls_cumulative_last_week": 41,
+      "success_rate": 1.0,
+      "week_calls": "~30 calls this week, all succeeded",
+      "status": "RISING SHARPLY again (+30, 41 -> 71). Theme-cluster pair-contrast batching continued for the softbodies/change clears. Still 100% success across 71 cumulative calls."
+    },
+    "identity_writing": {
+      "total_calls_cumulative_raw": 34,
+      "success_rate": 1.0,
+      "week_calls": "5 (boolean_surfaces @identity blocks)",
+      "status": "RESUMED. 5 calls this week for boolean_surfaces, all succeeded. The garden-voicing flow is back online as the post-ceiling success metric."
+    },
+    "direct_file_edit": {
+      "total_calls_cumulative": 50,
+      "success_rate": 1.0,
+      "status": "Steady. Embedded across map_authoring and documentation_writing this week."
+    },
+    "registry_repair": {
+      "total_calls_cumulative": 16,
+      "success_rate": 1.0,
+      "week_calls": 0,
+      "status": "Not invoked. Gate B held PASS (4 weeks) and Gate A repaired without dedicated registry work — the scaffold completion handled it."
+    },
+    "ada-breather": {
+      "total_calls_cumulative": 1,
+      "success_rate": 1.0,
+      "week_calls": "6 full breaths + evening evolve-only sessions",
+      "status": "Peak cadence (6 breaths). The skill correctly executed last week's OPTION B recommendation, broke the stall, detected the new wall, and pivoted to garden voicing (prop-003)."
+    },
+    "all_skills_summary": "All tracked skills at 100% cumulative success rate. No skill below the 50% threshold. No new skill-failure patterns. No NEW skill_evolution_proposals warranted this week.",
+    "emerging_pattern": "map_authoring emerged as a distinct, high-leverage skill this week. The lesson confirmed: documentation alone tops out a sequence at the doc threshold; only map_data.json authoring (3-layer maps + validation) clears stages 4-5. The breakthrough required pairing documentation_writing WITH map_authoring on the same sequence in the same week — exactly the mix the 5-item breath budget was crowding out during the 25-day stall."
+  },
+
+  "proposals_pending_review": [
+    {
+      "id": "prop-001",
+      "skill": "ada-breather",
+      "status": "proposed (RECOMMEND RETIRE/SUPERSEDED — 7th consecutive week flagged)",
+      "created": "2026-04-20T09:00:00",
+      "age_days": 42,
+      "tldr": "Garden identity targeting must verify artifact placement in the TARGET sequence's maps, not gallery maps.",
+      "recommendation": "RETIRE/SUPERSEDED. The map-presence-targeting flow has held without further evidence for 19+ days and is captured in .claude/flows/. Apply via /ada-skill-updater at next user session.",
+      "file": "doc/reports/skill_evolution_proposals.json"
+    },
+    {
+      "id": "prop-002",
+      "skill": "ada-breather",
+      "status": "proposed (RECOMMEND RESOLVE — the deferred item it concerns has landed)",
+      "created": "2026-05-29T09:00:00",
+      "age_days": 3,
+      "tldr": "Add a 'deferral re-validation' step so deferred items (like change_sequence_documentation, deferred 3+ breaths) are not copied-forward indefinitely.",
+      "recommendation": "RESOLVE/CLOSE or convert to a flow. The exact item it cites — change_sequence — was un-deferred and CLEARED to stage 6 this week (2026-05-29/30). The proposal's lesson is still valid as a guardrail, but the motivating backlog is gone. Recommend formalizing it as a lightweight Evaluate-phase check via /ada-skill-updater, OR closing it as resolved-by-action."
+    },
+    {
+      "id": "prop-003",
+      "skill": "ada-breather",
+      "status": "proposed (RECOMMEND ADOPT — describes exactly this week's pivot)",
+      "created": "2026-05-31T09:05",
+      "age_days": 1,
+      "tldr": "Add a 'wall detection' pre-check to the Evaluate phase: if every spine sequence is at HEAD >= 6 (a human-gated stage), auto-set the breath success metric to garden voicing instead of pipeline_avg.",
+      "recommendation": "ADOPT. This is the highest-value pending proposal. The condition it describes became true on 2026-05-30 (all 22 at HEAD >= 6) and the breather already pivoted to garden voicing on 2026-05-31 manually. Formalizing it prevents future breaths from logging false-flat 'failures' against a pipeline metric that is structurally frozen. Apply via /ada-skill-updater at next user session."
+    }
+  ],
+
+  "stall_analysis": {
+    "stall_detected": false,
+    "stall_condition": "global_avg improvement over 7 days",
+    "7_day_pipeline_delta": 0.615,
+    "7_day_pipeline_window": "2026-05-25 (5.43) -> 2026-06-01 (6.045)",
+    "verdict": "NO STALL. The 25-day / 13-breath stall at 5.43 — flagged by THREE consecutive prior weekly audits (2026-05-11, 05-18, 05-25) — BROKE this week. global_avg improved +0.615, the largest weekly gain in the audit record. The scheduled-task's stall condition ('global_avg has not improved in 7 days') is NOT met.",
+    "why_it_broke": "Last week's audit named the precise break path (OPTION B: clear softbodies + change, the only two sub-stage-6 spine sequences) and it was executed across this week's 6 breaths. The key mechanical insight: map_authoring (not just documentation_writing) was the missing lever. Pairing both skills on the same sequence cleared stages 4-5 that 25 days of documentation-only breaths could not. Both sequences jumped 2 -> 6 (four stages each), producing 12x the estimated +0.05 lift.",
+    "new_ceiling_warning": {
+      "alert": "A NEW structural ceiling has formed at 6.045. While this week was a genuine breakout, the pipeline metric is now expected to plateau again — for a DIFFERENT reason than before.",
+      "cause_1_vr_gate": "All 22 spine sequences now sit at HEAD >= 6 (vr_testing). Stage 6 -> 7 requires a human-in-headset VR walk with desktop_feedback bridge active. This cannot be advanced by AI work alone. (Same human-gate nature as the old ceiling, but now it is the ONLY pipeline gate left — there are no more sub-stage-6 sequences to clear as an AI-only lever.)",
+      "cause_2_environment_regression": "ENVIRONMENT REGRESSION logged 2026-05-31: the Godot 4.6 console exe was deleted from C:/Users/palle/Desktop/ and the multi_shots capture directory is absent. Stage 7 (polish) requires fresh captures via the Godot capture pipeline, so stage 7 is currently STRUCTURALLY UNREACHABLE for ALL sequences. The lone randomness=stage-7 reading is an artifact of the stage-6 substring gate matching a feedback mention, not real polish work.",
+      "implication": "Next week's pipeline_avg will almost certainly be flat at 6.045 unless (a) a human VR session advances one or more sequences to stage 7, AND (b) the Godot exe is restored so polish captures can be produced. This flatness will NOT be a regression or a true stall — it is the correct reading of a fully-human-gated + environment-blocked metric. The breather has correctly pivoted to garden voicing as its measurable lever (prop-003)."
+    },
+    "forward_recommendation": "Going forward, evaluate breath progress against GARDEN VOICING + RELEASE GATES, not pipeline_avg, until the VR-session + Godot-restore blockers clear. Do NOT flag future pipeline flatness at 6.045 as a stall in the same alarming terms as the 5.43 stall — the two are categorically different (5.43 had AI-actionable levers being missed; 6.045 has none). Adopt prop-003 to encode this distinction.",
+    "action_items_for_user": [
+      "RESTORE GODOT: Re-download Godot_v4.6-stable_win64_console.exe to C:/Users/palle/Desktop/ — this unblocks the entire capture pipeline (stage-7 polish, artifact/map screenshots, chamber iterations). HIGHEST-LEVERAGE single action; currently blocking ALL of stage 7.",
+      "VR SESSION: Walk 1-3 spine sequences in headset with desktop_feedback bridge active to advance them stage 6 -> 7. Now the ONLY pipeline lever (no AI-only sequences remain below stage 6). Flagged for the 4th consecutive week, but the calculus has changed — it is no longer competing with AI-actionable work, it IS the work.",
+      "COMMIT BACKLOG: The working tree shows extensive uncommitted breath output (softbodies/change maps + docs, boolean_surfaces @identity, voicing batches). Per standing policy, surface as a status line at next user session rather than auto-committing. Two-to-three clean commits suggested: (a) softbodies stage-2..5 clear, (b) change sequence authoring, (c) boolean_surfaces voicing.",
+      "PROPOSALS: Adopt prop-003 (wall detection / metric pivot), resolve prop-002 (motivating backlog cleared), retire prop-001 (42 days, superseded by flow). All via /ada-skill-updater."
+    ]
+  },
+
+  "key_discoveries_this_week": [
+    "map_authoring is the stall-breaking lever, not documentation_writing. 25 days of documentation-only breaths could not move pipeline_avg because stages 4-5 require map_data.json (3-layer maps + pathfinder validation), not prose. The breakthrough came from pairing both skills on the same sequence in one week.",
+    "Last week's audit prediction was correct AND conservative. OPTION B (clear softbodies + change) was the right call; the +0.05 estimate undershot by 12x because BOTH sequences cleared and each jumped 4 stages, not 1.",
+    "MILESTONE: all 22 spine sequences at HEAD >= 6 (2026-05-30). Stages 1-5 are now structurally complete across the entire curriculum spine. The remaining work is human-gated (VR) and environment-gated (Godot captures).",
+    "A stall can break and a new ceiling form in the same week. The 5.43 ceiling (AI-actionable, missed levers) was replaced by the 6.045 ceiling (human-gated + environment-blocked, NO AI levers). These require categorically different responses — the second should NOT be alarmed about as a stall.",
+    "ENVIRONMENT REGRESSION: Godot 4.6 console exe deleted from Desktop + multi_shots dir absent. This silently blocks the ENTIRE capture pipeline and makes stage-7 polish unreachable. Restoring the exe is the single highest-leverage user action.",
+    "First 4/4 release-gates week in the audit record. Gate A fully repaired (8 -> 0 missing maps) as a byproduct of clearing softbodies/change. Gate C improved +54 grade-A / -44 grade-C maps.",
+    "The breather self-corrected: detected the new wall (prop-003), refused to game the stage-6 metric by injecting map names into desktop_feedback.md (cited the Sieve anti-scoreboard principle), and pivoted to garden voicing as an honest measurable lever."
+  ],
+
+  "recommendations_for_next_week": [
+    "PRIORITY 1 — USER: RESTORE GODOT EXE. Re-download Godot_v4.6-stable_win64_console.exe to Desktop. Unblocks all of stage 7 + the full capture/chamber pipeline. Single highest-leverage action.",
+    "PRIORITY 2 — USER: VR SESSION. Walk 1-3 spine sequences in headset with the desktop_feedback bridge active. Now the ONLY pipeline-advancement lever (no AI-only sequences remain below stage 6). 4th week flagged, but no longer competing with AI work.",
+    "PRIORITY 3 — BREATHER: CONTINUE GARDEN VOICING as the active metric. Largest 0-voice cluster is bricolage (43/0). Voice coverage is flat at 49% with 826 phantom limbs and 540 reaching artifacts — large headroom. Target the biggest DORMANT/SCATTERED clusters with the map-presence flow.",
+    "PRIORITY 4 — USER: COMMIT THE BACKLOG. Surface uncommitted breath output as a status line. 2-3 clean commits (softbodies clear / change authoring / boolean_surfaces voicing).",
+    "PRIORITY 5 — USER: PROCESS PROPOSALS. Adopt prop-003 (metric pivot), resolve prop-002 (resolved by action), retire prop-001 (superseded). Via /ada-skill-updater.",
+    "MONITORING — Treat pipeline_avg flatness at 6.045 as EXPECTED, not a stall, until Godot + VR blockers clear. Re-classify the stall metric per prop-003."
+  ],
+
+  "comparison_to_last_week_summary": {
+    "what_changed": [
+      "Pipeline_avg BROKE OUT: 5.43 -> 6.045 (+0.615), largest weekly gain on record",
+      "25-day / 13-breath stall ENDED (was flagged 3 consecutive weeks)",
+      "Release gates 3/4 -> 4/4 — first all-green week ever",
+      "Breath cadence doubled (3 -> 6)",
+      "map_authoring emerged as the high-leverage skill (avg_delta 0.136)",
+      "Garden voicing re-accelerated with a real state transition (boolean_surfaces 0 -> LIVING)"
+    ],
+    "what_stayed_the_same": [
+      "Voice coverage flat at 49% (new artifacts grew the denominator)",
+      "randomness still the lone stage-7 reading (and it is an artifact, not real polish)",
+      "All skills at 100% cumulative success",
+      "prop-001 still 'proposed' (now 7th week)"
+    ],
+    "what_got_worse": [
+      "ENVIRONMENT REGRESSION: Godot exe deleted + multi_shots dir absent — stage 7 now structurally unreachable for ALL sequences",
+      "A new pipeline ceiling formed at 6.045 (fully human/environment gated; no AI levers remain)",
+      "VR session STILL unexecuted (4th week) — now the sole pipeline lever",
+      "Working-tree backlog grew further (softbodies/change/boolean_surfaces output uncommitted)"
+    ],
+    "what_got_better": [
+      "Stall broken with the largest pipeline gain on record",
+      "First 4/4 release-gates week ever (Gate A fully repaired)",
+      "Gate C +54 grade-A / -44 grade-C maps",
+      "All 22 spine sequences reached the HEAD >= 6 milestone",
+      "Breather self-corrected (detected wall, refused metric-gaming, pivoted honestly)",
+      "Last week's OPTION-B prediction validated and exceeded 12x"
+    ],
+    "overall_verdict": "BREAKOUT WEEK. The single best pipeline week in the audit record — the 25-day stall broke exactly via the path last week's audit prescribed, and all four release gates went green for the first time. The nuance for next week: a NEW ceiling has formed at 6.045 that is fundamentally different from the old one — it is human-gated (VR) and environment-blocked (Godot exe deleted), with ZERO AI-only levers remaining on the pipeline metric. The correct response is NOT to alarm about pipeline flatness as a stall, but to (1) get the user to restore Godot + run a VR session, and (2) let the breather work the garden-voicing metric, which still has large headroom. Adopt prop-003 to encode this distinction so future audits don't mis-flag the 6.045 plateau."
+  },
+
+  "breather_dry_run_work_plan": {
+    "mode": "dry-run",
+    "trajectory": "PIPELINE BROKE OUT THEN HIT NEW CEILING (5.43 -> 6.045, now human/env-gated) / GARDEN RE-ACCELERATING / GATES ALL GREEN (4/4)",
+    "focus": "auto-selected (garden voicing — the only AI-actionable metric remaining)",
+    "cooling_filter": "No items failed in the last 2 breaths (clean). Pipeline stage-advance items COOLED — all spine sequences at the human-gated stage-6 ceiling, no AI lever.",
+    "items_selected": [
+      {
+        "rank": 1,
+        "item": "bricolage_garden_voicing",
+        "temperature": 65,
+        "reason": "Largest 0-voice cluster (43 artifacts, 0 voiced). Highest single-target garden lift available. Map-presence flow is 41-for-41.",
+        "action": "Map-presence filter for bricolage. Write structured @identity blocks for the voiceless artifacts that declare apply_grid_config.",
+        "dispatch": "identity_writing + direct_file_edit",
+        "expected_outcome": "bricolage advances DORMANT -> REACHING/GROWING. Garden voiced 1029 -> ~1050."
+      },
+      {
+        "rank": 2,
+        "item": "garden_voicing_secondary_cluster",
+        "temperature": 55,
+        "reason": "Continue voicing the next-largest DORMANT/SCATTERED cluster after bricolage to keep voice coverage climbing past 49%.",
+        "action": "Identify next 0-voice or low-voice cluster via garden_listener; voice 5-10 artifacts.",
+        "dispatch": "identity_writing",
+        "expected_outcome": "+10-15 voiced; voice coverage ticks above 49%."
+      },
+      {
+        "rank": 3,
+        "item": "gate_b_missing_map_ready_cleanup",
+        "temperature": 45,
+        "reason": "6 missing_map_ready + 6 missing_include_in_map_data remain within Gate B tolerance. Optional hygiene now that all gates pass — clearing them hardens the green state.",
+        "action": "Enumerate the 6; add the missing _ready() / include_in_map_data flags.",
+        "dispatch": "registry_repair + direct_file_edit",
+        "expected_outcome": "Gate B sub-metrics 6 -> 0; gate margin hardened."
+      },
+      {
+        "rank": 4,
+        "item": "adopt_prop_003_metric_pivot",
+        "temperature": 40,
+        "reason": "Encode the wall-detection / metric-pivot logic so future breaths measure garden voicing (not frozen pipeline_avg) while the VR + Godot blockers persist. Prevents false-stall flags.",
+        "action": "NOTE: prop-003 modifies SKILL.md — proposal-only, requires human /ada-skill-updater. This item is to mark prop-003 'recommended-adopt' and resolve prop-002 / retire prop-001 in the proposals file (data edit, allowed).",
+        "dispatch": "direct_file_edit",
+        "expected_outcome": "Proposals file accurate; prop-003 flagged for user adoption."
+      },
+      {
+        "rank": 5,
+        "item": "surface_commit_backlog",
+        "temperature": 35,
+        "reason": "Sizable uncommitted breath output (softbodies/change maps+docs, boolean_surfaces voicing). Per standing policy, surface as a status line, do NOT auto-commit.",
+        "action": "Summarize uncommitted breath output into a status-line note for the next user session.",
+        "dispatch": "status-line surfacing (no commit)",
+        "expected_outcome": "User sees a clean commit plan at next session."
+      }
+    ],
+    "cooled_items": [
+      {"item": "all spine pipeline stage advances", "reason": "All 22 at HEAD >= 6 (vr_testing) — human-gated. No AI lever. Cooled until VR session + Godot restore."},
+      {"item": "stage_7_polish (any sequence)", "reason": "Godot exe deleted + multi_shots dir absent — capture pipeline broken. Structurally unreachable until user restores the exe."},
+      {"item": "softbodies / change stage clear", "reason": "Completed this week (both 2 -> 6). Done."},
+      {"item": "gate_a_repair", "reason": "Fully repaired this week (8 -> 0). All gates green."}
+    ],
+    "dispatch_summary": "If a full breath ran: 2 items to garden voicing (the only AI-actionable pipeline-equivalent lever), 1 to optional Gate B hygiene, 1 to proposals housekeeping, 1 to backlog surfacing. Projected outcome: garden voiced 1029 -> ~1055, voice coverage past 49%, proposals accurate, gates stay 4/4. Pipeline_avg expected to HOLD at 6.045 (correctly — no AI lever). This is NOT a stall; it is a human/environment-gated plateau, and the breather is working the right metric."
+  }
+}

@@ -2,7 +2,7 @@
 	"approach": "south",
 	"artifact_offset": [
 		0.0,
-		0.109999999403954,
+		0.0,
 		0.0
 	],
 	"clearance": [
@@ -14,33 +14,34 @@
 	"extras": [],
 	"footing": {
 		"anchor": [
-			1.0,
-			1.0
+			1,
+			1
 		],
 		"tiles": [
 			[
-				1.0,
-				1.0,
-				1.0
+				2,
+				2,
+				2
 			],
 			[
-				1.0,
-				3.0,
-				1.0
+				2,
+				2,
+				2
 			],
 			[
-				1.0,
-				1.0,
-				1.0
+				2,
+				2,
+				2
 			]
 		]
 	},
 	"footprint": [
-		1,
-		1,
-		1
+		1.0,
+		1.0,
+		1.0
 	],
 	"lookup_name": "VectorWorkbench",
+	"posture": "table",
 	"rotations": [
 		"0",
 		"90",

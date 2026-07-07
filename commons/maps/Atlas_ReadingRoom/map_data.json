@@ -4,11 +4,7 @@
 	"summary": "Atlas Reading Room — entry hall to the Atlas of Structures",
 	"layout": "20×20 open floor. Four south→north rows of pedestals: Structures, Shapes, Flows, Limits. Spawn at south edge, teleporter at north edge to enter the galleries.",
 	"objective": "Browse the thirteen meta-structures as a catalog. Each pedestal holds one structure signature. Use the teleporter to step into the focused row galleries.",
-	"key_elements": [
-	  "Four rows of @signature pedestals (13 structures total)",
-	  "Spawn `s` at south edge, teleporter `t` at north edge",
-      "Transition zones between rows (currently authorial @hold stubs)"
-	]
+	"key_elements": ["Four rows of @signature pedestals (13 structures total)","Spawn `s` at south edge, teleporter `t` at north edge","Transition zones between rows (currently authorial @hold stubs)"]
   },
   "subtitles": {},
   "map_info": {
@@ -24,11 +20,7 @@
 	  "category": "atlas",
 	  "difficulty": "reference",
 	  "estimated_time": "5-10 minutes",
-	  "learning_objectives": [
-		"Recognize the thirteen meta-structures that recur across domains",
-		"Read a transition as a named verb bridging two structures",
-        "Place any algorithm, body, or system as an instance of these structures"
-	  ]
+	  "learning_objectives": ["Recognize the thirteen meta-structures that recur across domains","Read a transition as a named verb bridging two structures","Place any algorithm, body, or system as an instance of these structures"]
 	},
 	"name": "Atlas Reading Room",
 	"version": "0.2",
@@ -50,23 +42,11 @@
 	}
   },
   "lighting": {
-	"ambient_color": [
-	  0.42,
-	  0.44,
-	  0.5
-	],
+	"ambient_color": [0.42,0.44,0.5],
 	"ambient_energy": 0.6,
 	"directional_light": {
-	  "color": [
-		1,
-		0.95,
-		0.88
-	  ],
-	  "direction": [
-		-0.35,
-		-0.8,
-		-0.3
-	  ],
+	  "color": [1,0.95,0.88],
+	  "direction": [-0.35,-0.8,-0.3],
 	  "enabled": true,
 	  "energy": 1.1
 	}
@@ -74,11 +54,7 @@
   "settings": {
 	"auto_reveal_on_entry": true,
 	"background": {
-	  "color": [
-		0.09,
-		0.1,
-		0.14
-	  ],
+	  "color": [0.09,0.1,0.14],
 	  "type": "sky"
 	},
 	"cube_size": 1,

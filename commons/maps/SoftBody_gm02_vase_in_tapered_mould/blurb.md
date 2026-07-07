@@ -1,0 +1,5 @@
+The same sphere meets a different cavity. Where gm01's cylinder held its radius constant, gm02's mould tapers — narrow at the top (r=0.25, about a thumb's width), wide at the bottom (r=0.7, about a fist). The pressurized body still pushes outward against the wall everywhere it can. But now the wall is at different radii along the body's height. What presses against the narrow upper section becomes a thin neck. What presses against the wide lower section becomes a swollen belly.
+
+The result is a classical amphora — narrow neck, bulging body, the silhouette every museum case knows. No designer set the proportions. The mould did, by tapering at the rate it tapered. The body computed equilibrium against the cavity it was given.
+
+gl02 made a long bottle by holding the sphere from a narrow neck-pin and letting gravity stretch the unpinned mass below. gm02 makes a similar shape by letting the body inflate freely while the cavity itself does the shaping. Two paths, same family, different agency.

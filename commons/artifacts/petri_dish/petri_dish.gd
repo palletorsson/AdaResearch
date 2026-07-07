@@ -70,28 +70,28 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 func _read_metadata_overrides() -> void:
 	if has_meta("config_dish_radius"):
-		dish_radius = float(String(get_meta("config_dish_radius")))
+		dish_radius = float(str(get_meta("config_dish_radius")))
 	if has_meta("config_dish_height"):
-		dish_height = float(String(get_meta("config_dish_height")))
+		dish_height = float(str(get_meta("config_dish_height")))
 	if has_meta("config_agar_color"):
-		agar_color = _parse_color(String(get_meta("config_agar_color")), agar_color)
+		agar_color = _parse_color(str(get_meta("config_agar_color")), agar_color)
 	if has_meta("config_glass_color"):
-		glass_color = _parse_color(String(get_meta("config_glass_color")), glass_color)
+		glass_color = _parse_color(str(get_meta("config_glass_color")), glass_color)
 	if has_meta("config_cell_color"):
-		cell_color = _parse_color(String(get_meta("config_cell_color")), cell_color)
+		cell_color = _parse_color(str(get_meta("config_cell_color")), cell_color)
 	if has_meta("config_grid_color"):
-		grid_color = _parse_color(String(get_meta("config_grid_color")), grid_color)
+		grid_color = _parse_color(str(get_meta("config_grid_color")), grid_color)
 	if has_meta("config_accent_color"):
-		accent_color = _parse_color(String(get_meta("config_accent_color")), accent_color)
+		accent_color = _parse_color(str(get_meta("config_accent_color")), accent_color)
 	if has_meta("config_cell_pattern"):
-		cell_pattern = String(get_meta("config_cell_pattern")).to_lower()
+		cell_pattern = str(get_meta("config_cell_pattern")).to_lower()
 	if has_meta("config_colony_density"):
-		colony_density = float(String(get_meta("config_colony_density")))
+		colony_density = float(str(get_meta("config_colony_density")))
 	if has_meta("config_lid_present"):
-		var lv := String(get_meta("config_lid_present")).to_lower()
+		var lv := str(get_meta("config_lid_present")).to_lower()
 		lid_present = lv in ["true", "1", "yes", "on"]
 	if has_meta("config_grid_visible"):
-		var gv := String(get_meta("config_grid_visible")).to_lower()
+		var gv := str(get_meta("config_grid_visible")).to_lower()
 		grid_visible = gv in ["true", "1", "yes", "on"]
 
 

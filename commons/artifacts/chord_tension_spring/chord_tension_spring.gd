@@ -35,6 +35,7 @@ class_name ChordTensionSpring
 # truth: Musical tension is not metaphor — intervals exert measurable pull on perception.
 
 const _P = preload("res://commons/ui/ada_palette.gd")
+const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
 
 # ── Configuration ──
 const NUM_NODES := 4  # Root, third, fifth, seventh
@@ -101,7 +102,8 @@ var node_rest_positions: Array[Vector3] = []    # Where nodes want to be
 var node_dragging: Array[bool] = []             # Which nodes are being dragged
 var _node_mm: MultiMesh
 var _node_mmi: MultiMeshInstance3D
-var node_labels: Array[Label3D] = []
+var node_labels: Array[Node3D] = []
+var _node_label_cache: Array[String] = []
 var node_areas: Array[Area3D] = []
 
 # Spring visuals
@@ -125,8 +127,11 @@ var base_plate: MeshInstance3D
 
 # Overall chord tension (0 = fully consonant, 1 = maximally dissonant)
 var chord_tension: float = 0.0
-var tension_label: Label3D
-var chord_name_label: Label3D
+# Title + chord name + tension readout live on one framed header board (R-027);
+# rebuilt by _rebuild_header() only when the strings change.
+var _header_root: Node3D
+var _header_cache := ""
+var _chord_name_text: String = "Cmaj7"
 
 signal chord_changed(pitches: Array[int], tension: float)
 signal node_moved(index: int, new_pitch: int)
@@ -188,17 +193,11 @@ func _create_nodes() -> void:
 		col.shape = sphere_shape
 		area.add_child(col)
 
-		# Label
-		var label := Label3D.new()
-		label.text = NOTE_NAMES[node_pitches[i]]
-		label.font_size = 48
-		label.pixel_size = 0.0006
-		label.modulate = _P.TEXT_ON_DARK
-		label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-		label.no_depth_test = true
-		label.position = Vector3(0, 0.06, 0)
-		label.outline_size = 4
-		area.add_child(label)
+		# Note tag — framed 2D-in-3D board (R-027), not a bare Label3D
+		var label: Node3D = BakedText.make_tag(NOTE_NAMES[node_pitches[i]], _P.TEXT_ON_DARK, 0.045)
+		if label:
+			label.position = Vector3(0, 0.07, 0)
+			area.add_child(label)
 
 		add_child(area)
 
@@ -212,6 +211,7 @@ func _create_nodes() -> void:
 
 		node_areas.append(area)
 		node_labels.append(label)
+		_node_label_cache.append(NOTE_NAMES[node_pitches[i]])
 		node_positions.append(Vector3.ZERO)
 		node_velocities.append(Vector3.ZERO)
 		node_rest_positions.append(Vector3.ZERO)
@@ -281,16 +281,11 @@ func _create_preset_buttons() -> void:
 		col.shape = box
 		btn_area.add_child(col)
 
-		var btn_label := Label3D.new()
-		btn_label.text = button_names[i].to_upper()
-		btn_label.font_size = 28
-		btn_label.pixel_size = 0.0005
-		btn_label.modulate = _P.TEXT_ON_DARK
-		btn_label.position = Vector3(0, 0.025, 0)
-		btn_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-		btn_label.no_depth_test = true
-		btn_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		btn_area.add_child(btn_label)
+		# Button tag — framed 2D-in-3D board (R-027), not a bare Label3D
+		var btn_label: Node3D = BakedText.make_tag(button_names[i].to_upper(), _P.TEXT_ON_DARK, 0.018)
+		if btn_label:
+			btn_label.position = Vector3(0, 0.03, 0)
+			btn_area.add_child(btn_label)
 
 		var btn_pos := Vector3(start_x + i * 0.075, 0.02, -(BASE_RADIUS + 0.18))
 		btn_area.position = btn_pos
@@ -318,43 +313,70 @@ func _create_preset_buttons() -> void:
 	add_child(_btn_mmi)
 
 func _create_labels() -> void:
-	# Tension meter label
-	tension_label = Label3D.new()
-	tension_label.text = "TENSION: 0%"
-	tension_label.font_size = 42
-	tension_label.pixel_size = 0.0006
-	tension_label.modulate = _P.TEXT_ON_DARK
-	tension_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	tension_label.no_depth_test = true
-	tension_label.position = Vector3(0, 0.35, 0)
-	tension_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	tension_label.outline_size = 6
-	add_child(tension_label)
-	
-	# Chord name
-	chord_name_label = Label3D.new()
-	chord_name_label.text = "Cmaj7"
-	chord_name_label.font_size = 56
-	chord_name_label.pixel_size = 0.0006
-	chord_name_label.modulate = _P.ACCENT_CYAN
-	chord_name_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	chord_name_label.no_depth_test = true
-	chord_name_label.position = Vector3(0, 0.28, 0)
-	chord_name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	chord_name_label.outline_size = 6
-	add_child(chord_name_label)
-	
-	# Title
-	var title := Label3D.new()
-	title.text = "CHORD TENSION SPRING"
-	title.font_size = 32
-	title.pixel_size = 0.0006
-	title.modulate = _P.TEXT_SECONDARY
-	title.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	title.no_depth_test = true
-	title.position = Vector3(0, 0.42, 0)
-	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	add_child(title)
+	# Title + chord name + tension consolidated onto one framed dark header
+	# board (R-027); rebuilt only when the text changes.
+	_rebuild_header()
+
+func _rebuild_header() -> void:
+	var pct := int(chord_tension * 100)
+	var key := "%s|%d" % [_chord_name_text, pct]
+	if key == _header_cache:
+		return
+	_header_cache = key
+	if is_instance_valid(_header_root):
+		_header_root.queue_free()
+
+	var tension_color: Color
+	if chord_tension < 0.25:
+		tension_color = _P.ACCENT_GREEN
+	elif chord_tension < 0.5:
+		tension_color = _P.ACCENT_YELLOW
+	else:
+		tension_color = _P.ACCENT_RED
+
+	_header_root = Node3D.new()
+	_header_root.name = "HeaderBoard"
+	_header_root.position = Vector3(0, 0.36, 0)
+	_header_root.rotation_degrees.y = 180.0  # face the preset-button side
+	add_child(_header_root)
+	_header_root.add_child(_plate(Vector3(0.42, 0.21, 0.02)))
+	var title: MeshInstance3D = BakedText.make_label_mesh("CHORD TENSION SPRING", Color(0.70, 0.70, 0.74), Vector2(0.34, 0.024), 1400, true)
+	if title:
+		title.position = Vector3(0, 0.07, 0.012)
+		_header_root.add_child(title)
+	var tension: MeshInstance3D = BakedText.make_label_mesh("TENSION: %d%%" % pct, tension_color, Vector2(0.30, 0.034), 1400, true)
+	if tension:
+		tension.position = Vector3(0, 0.0, 0.012)
+		_header_root.add_child(tension)
+	var chord: MeshInstance3D = BakedText.make_label_mesh(_chord_name_text, _P.ACCENT_CYAN, Vector2(0.30, 0.05), 1400, true)
+	if chord:
+		chord.position = Vector3(0, -0.065, 0.012)
+		_header_root.add_child(chord)
+
+func _plate(size: Vector3) -> Node3D:
+	var g := Node3D.new()
+	var frame := MeshInstance3D.new()
+	var fm := BoxMesh.new()
+	fm.size = size + Vector3(0.05, 0.05, -0.01)
+	frame.mesh = fm
+	var fmat := StandardMaterial3D.new()
+	fmat.albedo_color = Color(0.62, 0.60, 0.56)
+	fmat.roughness = 0.7
+	frame.material_override = fmat
+	frame.position = Vector3(0, 0, -0.006)
+	g.add_child(frame)
+	var face := MeshInstance3D.new()
+	var bm := BoxMesh.new()
+	bm.size = size
+	face.mesh = bm
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color(0.10, 0.11, 0.14)
+	mat.emission_enabled = true
+	mat.emission = Color(0.10, 0.11, 0.14)
+	mat.emission_energy_multiplier = 0.25
+	face.material_override = mat
+	g.add_child(face)
+	return g
 
 func _setup_audio() -> void:
 	audio_stream = AudioStreamGenerator.new()
@@ -467,8 +489,22 @@ func _update_node_visuals() -> void:
 
 		_node_mm.set_instance_color(i, color)
 
-		# Update label
-		node_labels[i].text = NOTE_NAMES[node_pitches[i] % 12]
+		# Update note tag (rebuilds only when the text changes)
+		_set_node_tag(i, NOTE_NAMES[node_pitches[i] % 12])
+
+func _set_node_tag(index: int, text: String) -> void:
+	# Rebuild the note tag only when its string changes — never per frame (R-027)
+	if index >= _node_label_cache.size() or _node_label_cache[index] == text:
+		return
+	_node_label_cache[index] = text
+	var old := node_labels[index]
+	if is_instance_valid(old):
+		old.queue_free()
+	var tag: Node3D = BakedText.make_tag(text, _P.TEXT_ON_DARK, 0.045)
+	if tag:
+		tag.position = Vector3(0, 0.07, 0)
+		node_areas[index].add_child(tag)
+	node_labels[index] = tag
 
 func _node_tension(index: int) -> float:
 	# How dissonant is this node relative to all others?
@@ -544,17 +580,9 @@ func _update_spring_visuals() -> void:
 		spring_lines[idx].mesh = mesh
 
 func _update_tension_display() -> void:
-	if tension_label:
-		var pct := int(chord_tension * 100)
-		tension_label.text = "TENSION: %d%%" % pct
-		
-		# Color the label by tension
-		if chord_tension < 0.25:
-			tension_label.modulate = _P.ACCENT_GREEN
-		elif chord_tension < 0.5:
-			tension_label.modulate = _P.ACCENT_YELLOW
-		else:
-			tension_label.modulate = _P.ACCENT_RED
+	# Header board rebuild is gated by _header_cache — no-op unless the
+	# tension percentage or chord name actually changed.
+	_rebuild_header()
 
 # ═══════════════════════════════════════════
 #  AUDIO SYNTHESIS
@@ -662,9 +690,6 @@ func _apply_preset(preset_name: String) -> void:
 	chord_changed.emit(node_pitches, _calculate_chord_tension())
 
 func _update_chord_name() -> void:
-	if not chord_name_label:
-		return
-	
 	var root_name := NOTE_NAMES[node_pitches[0] % 12]
 	
 	# Try to identify chord quality from intervals
@@ -706,7 +731,8 @@ func _update_chord_name() -> void:
 			int_strs.append(str(intv))
 		quality = "(%s)" % ",".join(int_strs)
 	
-	chord_name_label.text = root_name + quality
+	_chord_name_text = root_name + quality
+	_rebuild_header()
 
 # ═══════════════════════════════════════════
 #  KEYBOARD FALLBACK (desktop testing)

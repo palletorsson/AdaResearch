@@ -1,0 +1,183 @@
+{
+	"artifacts": {
+		"csg_union_demo": {
+			"name": "CSG Union Demo",
+			"lookup_name": "csg_union_demo",
+			"description": "Two CSG primitives combined with the union operator. Visualizes A union B as a single composite solid.",
+			"scene": "res://algorithms/boolean_surfaces/csg_union_demo.tscn",
+			"category": "boolean_surfaces",
+			"sequence": "boolean_surfaces",
+			"artifact_type": "boolean_surfaces",
+			"qfep_term": "F",
+			"capacity": "UNION as composition",
+			"dev_themes": [
+				"boolean_surfaces",
+				"sieve_2026_05_13"
+			],
+			"dev_category": "boolean_surfaces",
+			"complexity": "intermediate",
+			"tags": [
+				"csg",
+				"boolean",
+				"union",
+				"F_order"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"boolean_surfaces"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"csg_intersection_demo": {
+			"name": "CSG Intersection Demo",
+			"lookup_name": "csg_intersection_demo",
+			"description": "Two CSG primitives with intersection operator. Only the overlap survives.",
+			"scene": "res://algorithms/boolean_surfaces/csg_intersection_demo.tscn",
+			"category": "boolean_surfaces",
+			"sequence": "boolean_surfaces",
+			"artifact_type": "boolean_surfaces",
+			"qfep_term": "F",
+			"capacity": "INTERSECT as overlap",
+			"dev_themes": [
+				"boolean_surfaces",
+				"sieve_2026_05_13"
+			],
+			"dev_category": "boolean_surfaces",
+			"complexity": "intermediate",
+			"tags": [
+				"csg",
+				"boolean",
+				"intersection",
+				"F_order"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"boolean_surfaces"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"csg_difference_demo": {
+			"name": "CSG Difference Demo",
+			"lookup_name": "csg_difference_demo",
+			"description": "A box with a sphere subtracted. The operator that makes cavities and openings.",
+			"scene": "res://algorithms/boolean_surfaces/csg_difference_demo.tscn",
+			"category": "boolean_surfaces",
+			"sequence": "boolean_surfaces",
+			"artifact_type": "boolean_surfaces",
+			"qfep_term": "F",
+			"capacity": "SUBTRACT as cavity",
+			"dev_themes": [
+				"boolean_surfaces",
+				"sieve_2026_05_13"
+			],
+			"dev_category": "boolean_surfaces",
+			"complexity": "intermediate",
+			"tags": [
+				"csg",
+				"boolean",
+				"difference",
+				"F_order"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"boolean_surfaces"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "compact"
+			}
+		},
+		"csg_compose_workbench": {
+			"name": "CSG Compose Workbench",
+			"lookup_name": "csg_compose_workbench",
+			"description": "Workbench holding all three CSG operators side by side. The introduction artifact for the csg-compose catalyst affordance.",
+			"scene": "res://algorithms/boolean_surfaces/csg_compose_workbench.tscn",
+			"category": "boolean_surfaces",
+			"sequence": "boolean_surfaces",
+			"artifact_type": "boolean_surfaces",
+			"qfep_term": "F",
+			"capacity": "COMPOSE with CSG ops",
+			"dev_themes": [
+				"boolean_surfaces",
+				"sieve_2026_05_13"
+			],
+			"dev_category": "boolean_surfaces",
+			"complexity": "intermediate",
+			"tags": [
+				"csg",
+				"catalyst_affordance",
+				"workbench"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"boolean_surfaces"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "mixed"
+			}
+		},
+		"csg_architecture_cavity": {
+			"name": "CSG Architecture Cavity",
+			"lookup_name": "csg_architecture_cavity",
+			"description": "A solid wall with three openings cut through it. Architecture as Boolean composition.",
+			"scene": "res://algorithms/boolean_surfaces/csg_architecture_cavity.tscn",
+			"category": "boolean_surfaces",
+			"sequence": "boolean_surfaces",
+			"artifact_type": "boolean_surfaces",
+			"qfep_term": "F",
+			"capacity": "WALL minus openings",
+			"dev_themes": [
+				"boolean_surfaces",
+				"sieve_2026_05_13"
+			],
+			"dev_category": "boolean_surfaces",
+			"complexity": "intermediate",
+			"tags": [
+				"csg",
+				"architecture",
+				"boolean",
+				"wall"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"boolean_surfaces"
+			],
+			"parameters": {
+				"footprint": [
+					1,
+					1,
+					1
+				],
+				"size_group": "environment"
+			}
+		}
+	}
+}

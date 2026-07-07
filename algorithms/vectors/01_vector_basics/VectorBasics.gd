@@ -19,7 +19,7 @@ var component_vectors := {
 	"y": null,
 	"z": null
 }
-var info_label: Label3D
+var info_label: Label
 var spring_gadget: Node3D
 var _magnitude_dots: MultiMeshInstance3D
 var _magnitude_label: Label3D

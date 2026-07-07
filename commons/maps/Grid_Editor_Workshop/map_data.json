@@ -14,21 +14,13 @@
       "difficulty": "beginner",
       "category": "interactive",
       "estimated_time": "exploration based",
-      "learning_objectives": [
-        "Explore grid-based layout design",
-        "Understand element placement and spatial reasoning",
-        "Compare web and VR representations of the same system"
-      ]
+      "learning_objectives": ["Explore grid-based layout design","Understand element placement and spatial reasoning","Compare web and VR representations of the same system"]
     }
   },
   "settings": {
     "auto_reveal_on_entry": true,
     "background": {
-      "color": [
-        0.12,
-        0.12,
-        0.15
-      ],
+      "color": [0.12,0.12,0.15],
       "type": "sky"
     },
     "cube_size": 1.0,
@@ -38,23 +30,11 @@
     "enable_physics": true
   },
   "lighting": {
-    "ambient_color": [
-      0.5,
-      0.5,
-      0.55
-    ],
+    "ambient_color": [0.5,0.5,0.55],
     "ambient_energy": 0.7,
     "directional_light": {
-      "color": [
-        1.0,
-        0.95,
-        0.9
-      ],
-      "direction": [
-        -0.3,
-        -0.8,
-        -0.3
-      ],
+      "color": [1.0,0.95,0.9],
+      "direction": [-0.3,-0.8,-0.3],
       "enabled": true,
       "energy": 1.0
     }

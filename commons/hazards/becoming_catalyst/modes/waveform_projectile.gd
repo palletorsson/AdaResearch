@@ -1,4 +1,5 @@
 # WaveformProjectile.gd
+# verb: oscillate
 # Continuous double helix — two glowing trails spiral around the forward axis.
 # Wave-particle duality as identity — always oscillating, never fixed.
 extends CatalystProjectile

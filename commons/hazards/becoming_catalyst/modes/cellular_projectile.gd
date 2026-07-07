@@ -1,4 +1,5 @@
 # CellularProjectile.gd
+# verb: evolve
 # A slow-flying cube with a 3x3 CA grid that evolves as it travels.
 # The pattern changes every step — alive cells glow, dead cells go dark.
 extends CatalystProjectile

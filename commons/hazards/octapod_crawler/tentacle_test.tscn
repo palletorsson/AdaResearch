@@ -1,36 +1,25 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene format=3 uid="uid://b8kse5du0pbp8"]
 
-;; TentacleTest — single FABRIK3D tentacle, follows spine_demo pattern exactly.
-;; 6 bones, 1.0 spacing in +Y, FABRIK3D targets a Marker3D.
-;; Skinned mesh is added by tentacle_test.gd at runtime.
+[ext_resource type="Script" uid="uid://d3x1yosshtgm" path="res://commons/hazards/octapod_crawler/tentacle_test.gd" id="1_script"]
 
-[ext_resource type="Script" path="res://commons/hazards/octapod_crawler/tentacle_test.gd" id="1_script"]
-
-[node name="TentacleTest" type="Node3D"]
+[node name="TentacleTest" type="Node3D" unique_id=1401247405]
 script = ExtResource("1_script")
 
-;; ── Floor ────────────────────────────────────────────────────────────────
+[node name="Floor" type="StaticBody3D" parent="." unique_id=998272543]
 
-[node name="Floor" type="StaticBody3D" parent="."]
-
-[node name="FloorMesh" type="MeshInstance3D" parent="Floor"]
+[node name="FloorMesh" type="MeshInstance3D" parent="Floor" unique_id=942777709]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
 
-[node name="FloorCol" type="CollisionShape3D" parent="Floor"]
+[node name="FloorCol" type="CollisionShape3D" parent="Floor" unique_id=1163729255]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
 
-;; ── Lighting ─────────────────────────────────────────────────────────────
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=843202313]
 transform = Transform3D(0.8, -0.5, 0.3, 0, 0.5, 0.866, -0.6, -0.695, 0.4, 0, 0, 0)
 shadow_enabled = true
 
-;; ── Tentacle: Armature → Skeleton3D → FABRIK3D ──────────────────────────
-;; Bone chain: 6 bones, 1.0 spacing in +Y (identical to spine_demo)
+[node name="Armature" type="Node3D" parent="." unique_id=953296124]
 
-[node name="Armature" type="Node3D" parent="."]
-
-[node name="Skeleton3D" type="Skeleton3D" parent="Armature"]
+[node name="Skeleton3D" type="Skeleton3D" parent="Armature" unique_id=1980162737]
 bones/0/name = "Bone"
 bones/0/parent = -1
 bones/0/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
@@ -74,9 +63,7 @@ bones/5/position = Vector3(0, 1, 0)
 bones/5/rotation = Quaternion(0, 0, 0, 1)
 bones/5/scale = Vector3(1, 1, 1)
 
-;; FABRIK3D — single setting, targets the Target Marker3D
-[node name="FABRIK3D" type="FABRIK3D" parent="Armature/Skeleton3D"]
-active = true
+[node name="FABRIK3D" type="FABRIK3D" parent="Armature/Skeleton3D" unique_id=1611312138]
 angular_delta_limit = 3.141592653589793
 deterministic = true
 setting_count = 1
@@ -100,10 +87,7 @@ settings/0/joints/4/limitation = null
 settings/0/joints/5/rotation_axis = 3
 settings/0/joints/5/limitation = null
 
-;; ── Target Marker3D — FABRIK3D end-effector target ──────────────────────
-;; Starts above the tentacle tip (Y=5 = total bone chain length)
-[node name="Target" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 4.0, 0)
+[node name="Target" type="Marker3D" parent="." unique_id=1834149217]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 4, 0)
 
-;; Small sphere to visualize the target position
-[node name="TargetVis" type="MeshInstance3D" parent="Target"]
+[node name="TargetVis" type="MeshInstance3D" parent="Target" unique_id=1020209152]

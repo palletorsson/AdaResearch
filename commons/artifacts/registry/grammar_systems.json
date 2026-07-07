@@ -81,7 +81,7 @@
 			},
 			"spatial_needs": {
 				"platform": "table",
-				"footprint_cells": 5,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -93,7 +93,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 100,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -205,7 +207,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 5,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -223,7 +225,9 @@
 					"system",
 					"trees"
 				],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 30,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [

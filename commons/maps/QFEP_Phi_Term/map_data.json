@@ -14,12 +14,7 @@
       "difficulty": "advanced",
       "category": "qfep",
       "estimated_time": "4-5 minutes",
-      "learning_objectives": [
-        "φ = rate sensitivity",
-        "Negative φ: resist change, conserve patterns",
-        "Positive φ: embrace change, welcome becoming",
-        "φ > 0 is the queer signature in the formula"
-      ]
+      "learning_objectives": ["φ = rate sensitivity","Negative φ: resist change, conserve patterns","Positive φ: embrace change, welcome becoming","φ > 0 is the queer signature in the formula"]
     },
     "title": "Rate Sensitivity and Becoming"
   },
@@ -41,32 +36,15 @@
     "summary": "QFEP_Phi_Term - Embrace or Resist",
     "layout": "Split space: conservative zone vs becoming zone. Phi slider controls which feels right.",
     "objective": "Experience φ as attitude toward change. Feel the difference between resisting and embracing.",
-    "key_elements": [
-      "Conservative zone (φ < 0): rigid, preserving",
-      "Becoming zone (φ > 0): fluid, transforming",
-      "Phi slider to shift between modes",
-      "Your preference reveals your signature"
-    ]
+    "key_elements": ["Conservative zone (φ < 0): rigid, preserving","Becoming zone (φ > 0): fluid, transforming","Phi slider to shift between modes","Your preference reveals your signature"]
   },
   "lighting": {
-    "ambient_color": [
-      0.25,
-      0.2,
-      0.3
-    ],
+    "ambient_color": [0.25,0.2,0.3],
     "ambient_energy": 0.6,
     "directional_light": {
       "enabled": true,
-      "direction": [
-        -0.4,
-        -0.7,
-        -0.3
-      ],
-      "color": [
-        0.9,
-        0.85,
-        1.0
-      ],
+      "direction": [-0.4,-0.7,-0.3],
+      "color": [0.9,0.85,1.0],
       "energy": 0.9
     }
   },
@@ -77,11 +55,7 @@
     "enable_physics": true,
     "background": {
       "type": "sky",
-      "color": [
-        0.1,
-        0.08,
-        0.15
-      ]
+      "color": [0.1,0.08,0.15]
     },
     "grid_animation": {
       "enabled": true,
@@ -109,7 +83,7 @@
       [" "," "," "," "," "," "," "," "," "," "],
       [" ","s"," "," ","sub:map"," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "],
-      [" ","3t:\u03c6 < 0"," "," "," "," "," ","3t:\u03c6 > 0"," "," "],
+      [" ","3t:φ < 0"," "," "," "," "," ","3t:φ > 0"," "," "],
       [" ","3t:RESIST"," "," "," "," "," ","3t:EMBRACE"," "," "],
       [" "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "],

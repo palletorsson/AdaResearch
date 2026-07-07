@@ -1,0 +1,29 @@
+[
+	{
+		"id": "hold_20260513T105513",
+		"declared_at": "2026-05-13T10:55:13",
+		"reason": "Test hold for substrate validation",
+		"linked_pass": "phase-e-entropy",
+		"status": "cleared",
+		"cleared_at": "2026-05-13T10:55:20",
+		"cleared_by": "manual --clear"
+	},
+	{
+		"id": "hold_20260513T105839",
+		"declared_at": "2026-05-13T10:58:39",
+		"reason": "Meta-sieve produced 4 format-refactor proposals; review each before continuing.",
+		"linked_pass": "meta-sieve-pass-format",
+		"status": "cleared",
+		"cleared_at": "2026-05-13T11:01:24",
+		"cleared_by": "auto (linked pass fully resolved)"
+	},
+	{
+		"id": "hold_20260513T133649",
+		"declared_at": "2026-05-13T13:36:49",
+		"reason": "array_tutorial coherence audit: 122 chips (length, drift, stubs, missing intent). Resolve via /sieve-proposals before applying any structural moves.",
+		"linked_pass": "coherence-array_tutorial-20260513T133413",
+		"status": "cleared",
+		"cleared_at": "2026-05-13T22:31:17",
+		"cleared_by": "auto (linked pass fully resolved)"
+	}
+]

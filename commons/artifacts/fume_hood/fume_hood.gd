@@ -71,23 +71,23 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 func _read_metadata_overrides() -> void:
 	if has_meta("config_hood_width"):
-		hood_width = float(String(get_meta("config_hood_width")))
+		hood_width = float(str(get_meta("config_hood_width")))
 	if has_meta("config_hood_height"):
-		hood_height = float(String(get_meta("config_hood_height")))
+		hood_height = float(str(get_meta("config_hood_height")))
 	if has_meta("config_hood_depth"):
-		hood_depth = float(String(get_meta("config_hood_depth")))
+		hood_depth = float(str(get_meta("config_hood_depth")))
 	if has_meta("config_sash_open_amount"):
-		sash_open_amount = clamp(float(String(get_meta("config_sash_open_amount"))), 0.0, 1.0)
+		sash_open_amount = clamp(float(str(get_meta("config_sash_open_amount"))), 0.0, 1.0)
 	if has_meta("config_interior_color"):
-		interior_color = _parse_color(String(get_meta("config_interior_color")), interior_color)
+		interior_color = _parse_color(str(get_meta("config_interior_color")), interior_color)
 	if has_meta("config_accent_color"):
-		accent_color = _parse_color(String(get_meta("config_accent_color")), accent_color)
+		accent_color = _parse_color(str(get_meta("config_accent_color")), accent_color)
 	if has_meta("config_frame_color"):
-		frame_color = _parse_color(String(get_meta("config_frame_color")), frame_color)
+		frame_color = _parse_color(str(get_meta("config_frame_color")), frame_color)
 	if has_meta("config_light_color"):
-		light_color = _parse_color(String(get_meta("config_light_color")), light_color)
+		light_color = _parse_color(str(get_meta("config_light_color")), light_color)
 	if has_meta("config_interior_light"):
-		var v := String(get_meta("config_interior_light")).to_lower()
+		var v := str(get_meta("config_interior_light")).to_lower()
 		interior_light = v in ["true", "1", "yes", "on"]
 
 

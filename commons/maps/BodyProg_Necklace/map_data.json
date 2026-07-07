@@ -15,11 +15,7 @@
       "difficulty": "beginner",
       "category": "bodyprogression",
       "estimated_time": "3-5 minutes",
-      "learning_objectives": [
-        "Body anchoring",
-        "Neck-point tracking",
-        "Accessory as identity marker"
-      ]
+      "learning_objectives": ["Body anchoring","Neck-point tracking","Accessory as identity marker"]
     }
   },
   "utility_definitions": {
@@ -42,29 +38,15 @@
     "summary": "BodyProg_Necklace - First body anchor beyond floating hands",
     "layout": "Intimate room with central necklace anchor display",
     "objective": "Experience the first body anchor point. A pendant appears at the neck, giving the floating hands a center.",
-    "key_elements": [
-      "necklace_anchor - pendant at neck tracking point"
-    ]
+    "key_elements": ["necklace_anchor - pendant at neck tracking point"]
   },
   "lighting": {
-    "ambient_color": [
-      0.2,
-      0.15,
-      0.25
-    ],
+    "ambient_color": [0.2,0.15,0.25],
     "ambient_energy": 0.5,
     "directional_light": {
       "enabled": true,
-      "direction": [
-        0.0,
-        -1.0,
-        -0.3
-      ],
-      "color": [
-        0.85,
-        0.8,
-        0.95
-      ],
+      "direction": [0.0,-1.0,-0.3],
+      "color": [0.85,0.8,0.95],
       "energy": 0.7
     }
   },
@@ -75,11 +57,7 @@
     "enable_physics": true,
     "background": {
       "type": "sky",
-      "color": [
-        0.08,
-        0.04,
-        0.12
-      ]
+      "color": [0.08,0.04,0.12]
     }
   },
   "layers": {

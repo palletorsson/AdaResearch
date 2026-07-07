@@ -3,7 +3,9 @@ extends Node3D
 # Simple test script to demonstrate the BuildEnv with visual geometry
 # Attach this to a Node3D in a test scene
 
-@onready var env: BuildEnv = $BuildEnv
+# Untyped on purpose: resolves dynamically regardless of when Godot registers the
+# BuildEnv class_name (declared on LearnWorldStacked.gd). env.step()/reset()/bodies work.
+@onready var env = $BuildEnv
 var test_step := 0
 var auto_demo_running := false
 var auto_reset_timer := 0.0

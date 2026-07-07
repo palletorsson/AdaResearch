@@ -14,11 +14,7 @@
       "difficulty": "beginner",
       "category": "vectors",
       "estimated_time": "5-10 minutes",
-      "learning_objectives": [
-        "Torque vectors",
-        "Moment of force",
-        "Angular momentum"
-      ],
+      "learning_objectives": ["Torque vectors","Moment of force","Angular momentum"],
       "spatial_temperature": 0.2
     }
   },
@@ -38,24 +34,12 @@
     }
   },
   "lighting": {
-    "ambient_color": [
-      0.4,
-      0.4,
-      0.5
-    ],
+    "ambient_color": [0.4,0.4,0.5],
     "ambient_energy": 0.6,
     "directional_light": {
       "enabled": true,
-      "direction": [
-        -0.4,
-        -0.7,
-        -0.4
-      ],
-      "color": [
-        1.0,
-        0.9,
-        0.8
-      ],
+      "direction": [-0.4,-0.7,-0.4],
+      "color": [1.0,0.9,0.8],
       "energy": 1.2
     }
   },
@@ -68,11 +52,7 @@
     "initial_tile_visibility": "hidden_except_corners",
     "background": {
       "type": "sky",
-      "color": [
-        0.2,
-        0.3,
-        0.7
-      ]
+      "color": [0.2,0.3,0.7]
     }
   },
   "layers": {

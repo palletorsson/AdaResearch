@@ -50,6 +50,7 @@ var last_meshthread_start_frame : int
 var waiting_for_compute : bool
 var waiting_for_meshthread : bool
 var thread
+var _released : bool = false  # Guard release() against double-teardown (PREDELETE + _exit_tree etc.)
 
 func _ready() -> void:
 	print("🏳️‍🌈 %s: Starting generation..." % get_class_name())
@@ -320,6 +321,11 @@ func _create_fallback_mesh() -> void:
 	# Override in subclass
 	pass
 
+# Override in subclasses that allocate extra GPU buffers (e.g. a sculpt blob buffer).
+# Called from release() AFTER any in-flight compute is synced, so freeing is crash-safe.
+func _free_extra_rids() -> void:
+	pass
+
 func get_params_array():
 	var params = []
 	params.append(time)
@@ -468,24 +474,50 @@ func _notification(type):
 		release()
 
 func release() -> void:
+	# Re-entrant guard: PREDELETE can fire alongside other teardown paths, and a second
+	# pass over an already-freed device/RIDs segfaults.
+	if _released:
+		return
+	_released = true
+
+	# Stop the per-frame loop so _process can't touch a half-freed device mid-teardown.
+	waiting_for_meshthread = false
+	set_process(false)
+
+	# Join the mesh-processing worker before freeing anything it reads.
 	if thread and thread.is_started():
 		thread.wait_to_finish()
-		thread = null
+	thread = null
+
 	if rendering_device:
-		rendering_device.free_rid(pipeline)
-		rendering_device.free_rid(triangle_buffer)
-		rendering_device.free_rid(params_buffer)
-		rendering_device.free_rid(counter_buffer);
-		rendering_device.free_rid(lut_buffer);
-		rendering_device.free_rid(shader)
-		
+		# CRITICAL: a compute dispatch may still be in flight (run_compute() submits but only
+		# syncs ~12 frames later). Freeing buffers / the device with pending GPU work is the
+		# segfault seen when these artifacts are freed mid-generation (e.g. queue_free during a
+		# map's re-curate). Flush it first. sync() must be paired with the prior submit().
+		if waiting_for_compute:
+			rendering_device.sync()
+			waiting_for_compute = false
+
+		# Free in dependency order — the uniform set + pipeline before the buffers/shader they
+		# reference — and guard each RID so a partially-initialised device tears down cleanly.
+		# buffer_set was previously leaked; a dangling set over freed buffers is itself a crash risk.
+		if buffer_set.is_valid(): rendering_device.free_rid(buffer_set)
+		if pipeline.is_valid(): rendering_device.free_rid(pipeline)
+		if triangle_buffer.is_valid(): rendering_device.free_rid(triangle_buffer)
+		if params_buffer.is_valid(): rendering_device.free_rid(params_buffer)
+		if counter_buffer.is_valid(): rendering_device.free_rid(counter_buffer)
+		if lut_buffer.is_valid(): rendering_device.free_rid(lut_buffer)
+		_free_extra_rids()  # subclass-owned buffers, freed after the sync above (crash-safe)
+		if shader.is_valid(): rendering_device.free_rid(shader)
+
+		buffer_set = RID()
 		pipeline = RID()
 		triangle_buffer = RID()
 		params_buffer = RID()
 		counter_buffer = RID()
 		lut_buffer = RID()
 		shader = RID()
-			
+
 		rendering_device.free()
 		rendering_device = null
 

@@ -34,7 +34,7 @@ func _ready() -> void:
 
 func apply_grid_config(cfg: Dictionary) -> void:
     if cfg.has("config_path"):
-        config_path = String(cfg["config_path"])
+        config_path = str(cfg["config_path"])
     for child in get_children():
         child.queue_free()
     _build_from_config()

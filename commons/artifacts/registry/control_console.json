@@ -1,0 +1,36 @@
+{
+	"id": "control_console",
+	"name": "Control Console",
+	"description": "A small Dieter-Rams CONSOLE — a brushed grey-metal CSG cabinet with a warm Braun control plate recessed flush in its slanted face, on a base plinth. Built like the pattern machines' display console with CSG booleans (a block minus a reclined wedge for the angled screen face, minus a shallow pocket for the bezel) so the plate sits INSIDE the metal, framed, not floating. The plate gives the controls a home; the console gives the whole instrument one. By default it shows a reference instrument (title + SCALE k slider + SNAP button + green-LED readout); a teaching machine can house its own controls inside it via the same add_slider / add_button / add_readout API.",
+	"category": "ui",
+	"theoreticalGrounding": "A layout is not a set of positions, it is a set of relationships. The box model nests: a console contains a plate, which contains a row of cells, which contain controls. Once the relationships are modelled, the positions compute themselves and the housing reads as one designed object.",
+	"artifacts": {
+		"control_console": {
+			"lookup_name": "control_console",
+			"name": "Control Console",
+			"description": "Brushed grey-metal CSG cabinet (CSGCombiner3D: block - reclined wedge - shallow pocket) housing the canonical Braun ControlPanel recessed in its slanted face, on a dark base plinth. Forwards add_slider / add_button / add_dial / add_joystick / add_readout / set_title to the inner plate and provides the reading tilt itself. Default demo content: title + SCALE k slider + SNAP button + a green-LED 2D-in-3D readout. DNA: title, tilt_deg, body_color.",
+			"category": "ui",
+			"complexity": "beginner",
+			"scene": "res://commons/ui/control_console.tscn",
+			"include_in_map_data": true,
+			"map_ready": true,
+			"footprint": [1, 1, 1],
+			"tags": ["ui", "console", "control-panel", "csg", "dieter-rams", "housing", "2d-in-3d", "vr", "placeable"],
+			"qfep_connection": "The instrument that holds the instrument — a relational frame that gives the controls a body, a face, a base. The box model one level up.",
+			"parameters": {
+				"title": "Console",
+				"tilt_deg": 20.0,
+				"footprint": [1, 1, 1],
+				"size_group": "small"
+			},
+			"size_group": "small",
+			"spatial_profile": {
+				"dir_group": "directional",
+				"range": 2,
+				"density": "low",
+				"reading_radius": 2,
+				"derived_from": "manual"
+			}
+		}
+	}
+}

@@ -28,7 +28,8 @@ SPINE_FILE = MAPS_DIR / "curriculum_spine.json"
 REGISTRY_DIR = ROOT / "commons" / "artifacts" / "registry"
 FEEDBACK_FILE = ROOT / "ada_run" / "desktop_feedback.md"
 APPDATA = Path(os.environ.get("APPDATA", ""))
-CAPTURES_DIR = APPDATA.parent / "Local" / "Godot" / "app_userdata" / "Ada Research Zero One" / "multi_shots"
+# Godot writes user:// to %APPDATA%/Godot/app_userdata on Windows (Roaming, not Local).
+CAPTURES_DIR = APPDATA / "Godot" / "app_userdata" / "Ada Research Zero One" / "multi_shots"
 
 
 def load_spine():
@@ -53,18 +54,50 @@ def load_sequence_maps(seq_id):
 
 
 def load_all_registry_scenes():
-    """Build a set of all registered artifact scene paths."""
-    scenes = {}
+    """Build a map of artifact lookup_name -> scene path.
+
+    Two passes, so delegate_to artifacts resolve to their target's scene.
+    An entry may carry no `scene` of its own but instead `delegate_to`
+    another registered artifact (the /dna-promoted + pattern-loader
+    convention: dna_*, loom_*, mill_*, the vector *_xl walk-inside
+    exhibits...). At runtime GridInteractablesComponent.gd looks the target
+    up by registry key and renders the TARGET's scene. The scorer must honor
+    the same convention or it undercounts every delegate-based artifact as a
+    missing scene (breath 2026-06-11 — was depressing forces stage 3 to 97%
+    and color stage 3 to 72% even though every delegate target resolves to a
+    scene that exists on disk).
+    """
+    scenes = {}      # lookup_name -> scene path (direct)
+    by_token = {}    # key AND lookup_name -> art dict (for delegate lookup)
     for f in REGISTRY_DIR.glob("*.json"):
         try:
             with open(f, encoding="utf-8") as fh:
                 data = json.load(fh)
-            for key, art in data.get("artifacts", {}).items():
-                scene = art.get("scene", "")
-                if scene:
-                    scenes[art.get("lookup_name", key)] = scene
         except Exception:
             continue
+        for key, art in data.get("artifacts", {}).items():
+            lookup = art.get("lookup_name", key)
+            by_token[key] = art
+            by_token[lookup] = art
+            scene = art.get("scene", "")
+            if scene:
+                scenes[lookup] = scene
+    # Pass 2: resolve delegate_to chains for entries lacking a direct scene.
+    for token, art in by_token.items():
+        lookup = art.get("lookup_name", token)
+        if scenes.get(lookup):
+            continue
+        cur = art
+        seen = set()
+        while cur is not None and not cur.get("scene"):
+            tgt = str(cur.get("delegate_to", "")).strip()
+            if not tgt or tgt in seen:
+                cur = None
+                break
+            seen.add(tgt)
+            cur = by_token.get(tgt)
+        if cur is not None and cur.get("scene"):
+            scenes[lookup] = cur["scene"]
     return scenes
 
 
@@ -126,7 +159,7 @@ def score_sequence(seq_id, maps, registry_scenes):
             for row in interactables:
                 for cell in row:
                     c = (cell or "").strip()
-                    if c and c != " ":
+                    if c and c != " " and not c.startswith("#"):
                         token = c.split(":")[0].split("#")[0]
                         if token in ("dark_sphere", "ds"):
                             s3_done += 1

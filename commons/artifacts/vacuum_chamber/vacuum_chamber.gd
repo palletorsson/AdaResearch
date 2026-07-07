@@ -77,32 +77,32 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 func _read_metadata_overrides() -> void:
 	if has_meta("config_jar_height"):
-		jar_height = float(String(get_meta("config_jar_height")))
+		jar_height = float(str(get_meta("config_jar_height")))
 	if has_meta("config_jar_radius"):
-		jar_radius = float(String(get_meta("config_jar_radius")))
+		jar_radius = float(str(get_meta("config_jar_radius")))
 	if has_meta("config_platform_radius"):
-		platform_radius = float(String(get_meta("config_platform_radius")))
+		platform_radius = float(str(get_meta("config_platform_radius")))
 	if has_meta("config_platform_height"):
-		platform_height = float(String(get_meta("config_platform_height")))
+		platform_height = float(str(get_meta("config_platform_height")))
 	if has_meta("config_glass_color"):
-		glass_color = _parse_color(String(get_meta("config_glass_color")), glass_color)
+		glass_color = _parse_color(str(get_meta("config_glass_color")), glass_color)
 	if has_meta("config_platform_color"):
-		platform_color = _parse_color(String(get_meta("config_platform_color")), platform_color)
+		platform_color = _parse_color(str(get_meta("config_platform_color")), platform_color)
 	if has_meta("config_interior_color"):
-		interior_color = _parse_color(String(get_meta("config_interior_color")), interior_color)
+		interior_color = _parse_color(str(get_meta("config_interior_color")), interior_color)
 	if has_meta("config_specimen_color"):
-		specimen_color = _parse_color(String(get_meta("config_specimen_color")), specimen_color)
+		specimen_color = _parse_color(str(get_meta("config_specimen_color")), specimen_color)
 	if has_meta("config_accent_color"):
-		accent_color = _parse_color(String(get_meta("config_accent_color")), accent_color)
+		accent_color = _parse_color(str(get_meta("config_accent_color")), accent_color)
 	if has_meta("config_gauge_present"):
-		var gv := String(get_meta("config_gauge_present")).to_lower()
+		var gv := str(get_meta("config_gauge_present")).to_lower()
 		gauge_present = gv in ["true", "1", "yes", "on"]
 	if has_meta("config_pressure_status"):
-		pressure_status = String(get_meta("config_pressure_status")).to_lower()
+		pressure_status = str(get_meta("config_pressure_status")).to_lower()
 	if has_meta("config_interior_glow"):
-		interior_glow = float(String(get_meta("config_interior_glow")))
+		interior_glow = float(str(get_meta("config_interior_glow")))
 	if has_meta("config_specimen_visible"):
-		var sv := String(get_meta("config_specimen_visible")).to_lower()
+		var sv := str(get_meta("config_specimen_visible")).to_lower()
 		specimen_visible = sv in ["true", "1", "yes", "on"]
 
 

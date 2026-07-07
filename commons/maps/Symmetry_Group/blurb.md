@@ -1,0 +1,1 @@
+Closure. Compose any two moves that preserve the pattern and you get another move that preserves the pattern — the set closes over itself, and that closed set is the GROUP. At the station, choose a group and paint its domain. Beside it, Memphis and Bauhaus wear the same group as opposed ideologies: the mathematics is innocent; the palette is the politics.

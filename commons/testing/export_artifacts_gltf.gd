@@ -30,11 +30,12 @@ var _registry_name: String = "lab"
 var _output_dir: String = "user://artifact_gltf"
 var _max_count: int = -1            # -1 = export every artifact in registry
 var _skip_set: Dictionary = {}      # lookup_names to bypass entirely
+var _only_set: Dictionary = {}      # if non-empty, export ONLY these lookup_names
 
 
 func _initialize() -> void:
 	for raw_arg in OS.get_cmdline_user_args():
-		var arg := String(raw_arg).strip_edges()
+		var arg := str(raw_arg).strip_edges()
 		if arg.begins_with("--registry="):
 			_registry_name = arg.split("=", true, 1)[1]
 		elif arg.begins_with("--out="):
@@ -44,7 +45,16 @@ func _initialize() -> void:
 		elif arg.begins_with("--skip="):
 			var list := arg.split("=", true, 1)[1]
 			for name in list.split(","):
-				_skip_set[String(name).strip_edges()] = true
+				_skip_set[str(name).strip_edges()] = true
+		elif arg.begins_with("--only="):
+			# Export ONLY these lookup_names — fast, targeted re-exports
+			# of just the new/changed artifact(s) instead of the whole
+			# registry. Comma-separated.
+			var only_list := arg.split("=", true, 1)[1]
+			for name in only_list.split(","):
+				var trimmed := str(name).strip_edges()
+				if trimmed != "":
+					_only_set[trimmed] = true
 	_run.call_deferred()
 
 
@@ -69,6 +79,15 @@ func _run() -> void:
 		return
 
 	var lookup_names: Array = artifacts.keys()
+	# --only filter: restrict to just the named artifact(s). This makes
+	# re-exporting one new artifact instant instead of grinding the whole
+	# registry.
+	if not _only_set.is_empty():
+		var filtered: Array = []
+		for ln in lookup_names:
+			if _only_set.has(str(ln)):
+				filtered.append(ln)
+		lookup_names = filtered
 	if _max_count > 0:
 		lookup_names = lookup_names.slice(0, _max_count)
 

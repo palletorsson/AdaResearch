@@ -179,6 +179,38 @@
     "tension": ""
    }
   },
+  "symmetry": {
+   "Symmetry_Motif": {
+    "hero": "the domain cell — the pattern's genome",
+    "anti": "the meander floor — the rule performed before the theorem",
+    "tension": "a pattern is a rule, not a picture — and the Pompeii meander ran the rule two thousand years before group theory arrived to name it"
+   },
+   "Symmetry_Translation": {
+    "hero": "the lattice — repeat by shifting",
+    "anti": "the 10 PRINT bolt — one coin-flip inside the machine",
+    "tension": "pure repetition is sterile; a single random bit inside the symmetry machine weaves a textile — order plus one coin-flip is already cloth"
+   },
+   "Symmetry_Mirror_Rotor": {
+    "hero": "the rotor — one wedge becomes a rosette",
+    "anti": "the crystallographic restriction — 2, 3, 4, 6 and never 5",
+    "tension": "symmetry gives freely and forbids absolutely: no flat pattern can have 5-fold rotation, felt at the kaleidoscope before it is ever proven"
+   },
+   "Symmetry_Glide": {
+    "hero": "the glide — reflect, then slide",
+    "anti": "Escher — the outsider who taught the theorem to its owners",
+    "tension": "the sneakiest symmetry (no mirror line survives to point at) was seen by an artist copying Alhambra tilings before the mathematicians saw their own catalog"
+   },
+   "Symmetry_Group": {
+    "hero": "closure — the set that contains its own consequences",
+    "anti": "Memphis vs Bauhaus — the same group, opposed politics",
+    "tension": "compose any two moves and the result is already in the set: the group closes; but the group is innocent — what symmetry cannot see (the palette, the ideology) is exactly what design fights about"
+   },
+   "Symmetry_Seventeen": {
+    "hero": "the census that closes — exactly seventeen",
+    "anti": "the book's open censuses — dimension 0.631, the unprovable G",
+    "tension": "the one finished classification in a curriculum about incompleteness: the seventeen wallpaper groups end, completely — closure as the exception that makes the rest of the book's openness legible"
+   }
+  },
   "color": {
    "Pattern_Foundry": {
     "hero": "",
@@ -389,6 +421,38 @@
     "tension": ""
    }
   },
+  "formfinding": {
+   "FormFinding_Descent": {
+    "hero": "the marble at the bottom — form as the minimum",
+    "anti": "the placer — the designer who was supposed to put it there",
+    "tension": "no one placed the marble; the bottom is simply where the energy stops dropping — form is a solved minimization, and the gradient does the solving"
+   },
+   "FormFinding_Catenary": {
+    "hero": "the hanging chain — least energy, drawn by gravity",
+    "anti": "the blueprint curve — the arc a hand would draft",
+    "tension": "the catenary and the soap film are not drawn but computed; matter finds the least-cost shape continuously, and it is always more exact than the draftsman"
+   },
+   "FormFinding_Relaxation": {
+    "hero": "the settled mesh — relaxation to rest length",
+    "anti": "the intended shape — form as a designer's decision",
+    "tension": "D'Arcy Thompson's claim made of glass: the vessel's shape emerged from physics, not design — a form is a fossil of the forces that made it, biology's beauty as the calculus of variations"
+   },
+   "FormFinding_Equilibrium": {
+    "hero": "the tensegrity — structure as invisible tension",
+    "anti": "the pile — stuff stacked until it holds",
+    "tension": "prestress holds a shape under loads that collapse a loose heap of identical parts; structure is a FIELD of forces, not a stack of stuff, and Gaudi found his arches by hanging chains upside down"
+   },
+   "FormFinding_Annealing": {
+    "hero": "the alive form — resting short of the bottom",
+    "anti": "the dead-perfect crystal — the deepest, final minimum",
+    "tension": "the deepest well is frozen and finished; the living form stops short, low enough to hold and high enough to still be moved — the dark room returns as an energy landscape, and pure minimization is death"
+   },
+   "FormFinding_Forge": {
+    "hero": "the forge — matter descends to its liveliest form",
+    "anti": "the imposed mold — shape pressed in from outside",
+    "tension": "you do not carve the form, you let it fall to it; proving mastery is making the system go still by its own descent — the minimum reached is the answer, found the way nature finds it"
+   }
+  },
   "wavefunctions": {
    "WaveFunctions_Intro": {
     "hero": "amplitude",
@@ -559,54 +623,54 @@
   },
   "fractals": {
    "Fractal_Recursion": {
-    "hero": "",
-    "anti": "cantor set — infinite detail as the uncomputable — the middle-third removed forever yields an infinite set of measure zero: a short seed whose full run never ha",
-    "tension": ""
+    "hero": "the generating rule — five lines, its own output as input",
+    "anti": "the vanished author — no one drew the depth-4 staircase; no human could",
+    "tension": "complexity is generated, not designed — recursion estranges the familiar chair into a process caught mid-run, and removes the designer who was supposed to draw the complicated thing"
    },
    "Fractal_RecursiveTrees": {
-    "hero": "build a fractal yourself",
-    "anti": "cantor set — infinite detail as the uncomputable — the middle-third removed forever yields an infinite set of measure zero: a short seed whose full run never ha",
-    "tension": ""
+    "hero": "the stochastic forest — one grammar, no two trees alike",
+    "anti": "the blueprint — the central plan a self is supposed to keep of itself",
+    "tension": "repetition produces difference rather than sameness: noise placed inside recursion makes growth without memory, form without intention — a self that is only a rule faithfully run in circumstances it does not control, and that is enough"
    },
    "Fractal_CantorSet": {
-    "hero": "",
-    "anti": "cantor set — infinite detail as the uncomputable — the middle-third removed forever yields an infinite set of measure zero: a short seed whose full run never ha",
-    "tension": ""
+    "hero": "the dust — uncountably many points of zero length, D=0.631",
+    "anti": "the census — the demand that a thing be point or line, zero or one",
+    "tension": "an identity constituted by subtraction is richer than the whole it was carved from; the first number in the book that answers the classifier's question with neither — 'pathological' was always a word for what could not be placed"
    },
    "Fractal_KochSierpinski": {
-    "hero": "self-similarity — the Koch curve",
-    "anti": "box counting dimension — the fractional/non-integer identity — dimension refuses to be a whole number",
-    "tension": ""
+    "hero": "box-counting — measurement in good faith reports 1.262",
+    "anti": "the smooth Euclidean curve — the norm that turned out to be the exception",
+    "tension": "the monsters were the population and smoothness was the laboratory artifact; measure any real coastline and dimension itself becomes a spectrum — the classifier just hadn't been outdoors"
    },
    "Fractal_MengerSponge": {
-    "hero": "the recursion depth",
-    "anti": "cantor set — infinite detail as the uncomputable — the middle-third removed forever yields an infinite set of measure zero: a short seed whose full run never ha",
-    "tension": ""
+    "hero": "the universal curve — all boundary, no interior, holds every possible line",
+    "anti": "the defended inside — the solid that keeps its interior as its being",
+    "tension": "a body that lost its middle infinitely many times becomes, by exactly that loss, the shape that can contain anything: total evacuation of the center, total hospitality at the edge"
    },
    "Fractal_GoldenSpiral": {
-    "hero": "",
-    "anti": "romanesco — self-similarity as the recursion of the self — the golden-angle spiral grows the whole out of copies of itself",
-    "tension": ""
+    "hero": "the romanesco — φ computed in cells, no brain, no blueprint",
+    "anti": "the rational ratio — the whole-number proportion the Pythagoreans dreamed the world was made of",
+    "tension": "the most irrational number is the biological optimum: irrationality, once filed as a defect, is the exact resource life exploits to pack seeds without collision — the unmeasurable is the optimum, not the flaw"
    },
    "Fractal_JuliaSet": {
-    "hero": "prove it",
-    "anti": "lyapunov fractal — the edge between order and chaos rendered as terrain — each point in parameter space colored by whether nearby paths converge or diverge",
-    "tension": ""
+    "hero": "the found boundary — the fractal discovered in z²+c, drawn by no one",
+    "anti": "the constructed fractal — the shape a person specified by removal or replacement",
+    "tension": "complexity is found, not built: the Julia set is the frontier between settling and fleeing, latent in five characters, and a hair's breadth of c decides whether a world is connected or shattered into dust"
    },
    "Fractal_MandelbrotSet": {
-    "hero": "the Mandelbrot — escape",
-    "anti": "mandelbrot dive — the Mandelbrot boundary as the infinitely-queer edge — the set is trivial to state (does z=z^2+c escape?) and infinitely costly to bound",
-    "tension": ""
+    "hero": "the edge — Hausdorff dimension 2, the margin as full as the plane",
+    "anti": "the negligible boundary — the measure-zero trim you were taught to ignore",
+    "tension": "the margin IS the substance: state it in one breath (does z²+c escape?) and it is computationally irreducible, no bottom to the dive — Turing's halting problem wearing colour, the exact figure foundationscrisis walks toward"
    },
    "Fractal_Synthesis": {
-    "hero": "recursion — a thing inside itself",
-    "anti": "cantor set — infinite detail as the uncomputable — the middle-third removed forever yields an infinite set of measure zero: a short seed whose full run never ha",
-    "tension": ""
+    "hero": "D = log(N)/log(S) — one law measuring the whole zoo",
+    "anti": "the integer census — point/line/plane/solid, the clean categories",
+    "tension": "fractals are the geometry of the phase transition, the shape complexity takes at every edge; queer geometry is a description not a slogan — dimensionally non-normative, nowhere smooth, the monsters were the population all along"
    },
    "Fractal_CrossSequence": {
-    "hero": "",
-    "anti": "cantor set — infinite detail as the uncomputable — the middle-third removed forever yields an infinite set of measure zero: a short seed whose full run never ha",
-    "tension": ""
+    "hero": "Rule 90's stacked history — the Sierpiński triangle with no geometry at all",
+    "anti": "the fractal as a topic — the special class of curious shapes",
+    "tension": "the fractal was a fact about computation, not about shapes: the edge of chaos is where computation itself lives (Rule 110 is Turing-complete), and the chapter closes circular — one recursive rule met at many edges, which is to say nearly everywhere"
    }
   },
   "lsystems": {
@@ -639,6 +703,11 @@
     "hero": "branching — the tree",
     "anti": "branching coral — branching as GROWTH-AS-WRITING — the reef writes itself in F[+F][-F]",
     "tension": ""
+   },
+   "Assemblage_Same_Desire": {
+    "hero": "the loom — an array with rules, still weaving",
+    "anti": "the hierarchy — mathematics as craft's refined superior",
+    "tension": "the desire in Godel is the same desire as in the Kente patterns: to reach, by rule, past what the rule can hold — one practice at different desks, and the room makes the weave and the proof look at each other"
    }
   },
   "proceduralgeneration": {
@@ -838,86 +907,86 @@
   },
   "qfeplaboratory": {
    "QFEP_Introduction": {
-    "hero": "Question — the opening move",
-    "anti": "grab sphere F — F is not a variable to read but a drive to HOLD — Free Energy, the order-seeking hand",
-    "tension": ""
+    "hero": "the grabbable terms — abstraction that survives being picked up",
+    "anti": "the formula-as-authority — the unifier you're told to memorize",
+    "tension": "recognized, not learned: every term redeems experience the walker already owns — but a formula that unifies everything arrives after Gödel on purpose, held firmly and ready to be put down"
    },
    "QFEP_F_Term": {
-    "hero": "Entropy — the measure",
-    "anti": "grab sphere F — F is not a variable to read but a drive to HOLD — Free Energy, the order-seeking hand",
-    "tension": ""
+    "hero": "the snap-click — prediction error falling in your hands",
+    "anti": "the dark room — the one place a prediction never fails",
+    "tension": "F's optimum is death: the drive toward order is pleasant (the puzzles make you complicit), and its logical end is the room where nothing will ever happen again"
    },
    "QFEP_E_Term": {
-    "hero": "Field — the space of possibility",
-    "anti": "grab sphere F — F is not a variable to read but a drive to HOLD — Free Energy, the order-seeking hand",
-    "tension": ""
+    "hero": "the microstate counter — entropy as the size of the possibility space",
+    "anti": "dissolution — freedom's loss wearing freedom's clothes",
+    "tension": "entropy is freedom, but choice requires a chooser: pure chaos and pure order fail symmetrically — the crystal has no future, the static has no self to have one"
    },
    "QFEP_Lambda_Spectrum": {
-    "hero": "run the QFEP loop yourself",
-    "anti": "grab sphere F — F is not a variable to read but a drive to HOLD — Free Energy, the order-seeking hand",
-    "tension": ""
+    "hero": "the walkway — your position IS the parameter",
+    "anti": "the diagram — the edge admired from outside, pinned and finished",
+    "tension": "the curriculum re-walked in forty meters: the edge is findable by feel, and the skill (not the fact) is the point — locating criticality from inside, ready for systems without walkways"
    },
    "QFEP_Phi_Term": {
-    "hero": "Potential — what could become",
-    "anti": "grab sphere F — F is not a variable to read but a drive to HOLD — Free Energy, the order-seeking hand",
-    "tension": ""
+    "hero": "the φ slider crossed at zero — a stance toward change",
+    "anti": "the rigid sculpture — every deviation treated as damage",
+    "tension": "the political term: same λ, opposite disposition — queer names the system that uses perturbation as material, and the thesis goes on record that life requires φ > 0, without making preservation a villain"
    },
    "QFEP_Edge_Of_Chaos": {
-    "hero": "",
-    "anti": "grab sphere F — F is not a variable to read but a drive to HOLD — Free Energy, the order-seeking hand",
-    "tension": ""
+    "hero": "the dwelling — criticality inhabited, not crossed",
+    "anti": "the locked slider — curated criticality, the edge found FOR you",
+    "tension": "three literatures, one address (Langton, Kauffman, Beggs & Plenz) — but real systems get no lock; the harder question is deferred to the walker: how to stay near the edge when nothing holds the parameter still"
    },
    "QFEP_Sandbox": {
-    "hero": "the formula assembled",
-    "anti": "qfep formula 3d — the book's own METHOD turned into a room — QFE = F − λE(S) + φΔE(S,t) standing in space",
-    "tension": ""
+    "hero": "the tuning hand — λ=0.35 vs 0.45 known by feel",
+    "anti": "the recitation — the formula known declaratively, and dead",
+    "tension": "understanding as capacity, not declaration: no wrong answers but still dead ones, and the definite article dissolves — Langton's edge, the reactor's edge, YOUR edge"
    },
    "QFEP_Synthesis": {
-    "hero": "the formula assembled",
-    "anti": "grab sphere F — F is not a variable to read but a drive to HOLD — Free Energy, the order-seeking hand",
-    "tension": ""
+    "hero": "the queer_morphology_specimen — identity-at-the-edge made flesh",
+    "anti": "the conclusion — the formula closed, filed, and finished",
+    "tension": "commencement, not conclusion: the formula handed over as a lens (usable, not crystal-true), and the specimen refuses taxonomy because refusing it is how it stays alive"
    }
   },
   "postfoundationscrisis": {
    "CriticalAlgorithms_Algorithmic_Bias_Visualization": {
-    "hero": "the limit trained in — bias",
-    "anti": "bias from inside — the ML chapter's shadow returning — bias is not a bug but the limit trained INTO the machine",
-    "tension": ""
+    "hero": "the divided room — allocation you feel in your legs",
+    "anti": "“objectivity” — the training data deciding by not deciding",
+    "tension": "bias is incompleteness's social form: classification requires an outside, and the system is consistent BECAUSE it chose what not to see — you audit from inside the space you were trained on"
    },
    "CriticalAlgorithms_Applied_Ethics": {
-    "hero": "arrive — after the crisis",
-    "anti": "bias from inside — the ML chapter's shadow returning — bias is not a bug but the limit trained INTO the machine",
-    "tension": ""
+    "hero": "the calibration slider — a dial with no neutral position",
+    "anti": "ethics as postprocessing — the filter bolted onto a finished model",
+    "tension": "ethics is the shape of the room, not a step in the pipeline; you will classify anyway, so the responsible act is to keep the outside on its panel and the hand on the dial visible"
    },
    "SpeculativeComputation_Paraconsistent_Engineering": {
-    "hero": "arrive — after the crisis",
-    "anti": "bias from inside — the ML chapter's shadow returning — bias is not a bug but the limit trained INTO the machine",
-    "tension": ""
+    "hero": "the four-valued engine — holds P and not-P, keeps answering",
+    "anti": "the principle of explosion — one contradiction proves anything",
+    "tension": "give up explosion instead of giving up the world: contradiction as a load to carry (annotated, scoped) rather than an emergency to purge — Florensky's sphere wired into production"
    },
    "SpeculativeComputation_Situated_Computation": {
-    "hero": "same input, different verdicts — the situated view",
-    "anti": "bias from inside — the ML chapter's shadow returning — bias is not a bug but the limit trained INTO the machine",
-    "tension": ""
+    "hero": "the three platforms — the view with an address",
+    "anti": "the god-trick — the view from everywhere and nowhere",
+    "tension": "objectivity redefined as the careful accounting of the perspective you occupy; the view from a body can be interrogated, the view from nowhere cannot even be found"
    },
    "SpeculativeComputation_Collective_Knowledge": {
-    "hero": "make our own archive — the fragment",
-    "anti": "wiki fragment — the feminist counter to Deleuzian escape — not a line of flight OUT but an archive we build ourselves: incomplete panels that cross-reference ea",
-    "tension": ""
+    "hero": "the mediation station — disagreement recorded as data",
+    "anti": "the single complete system — the proof that covers everything",
+    "tension": "consistent vs corrigible: the commons pools incompleteness instead of fleeing it — each system's outside is another's inside, and Gödel's shadow gets redistributed where it can be worked on"
    },
    "SpeculativeComputation_Rhizome_Network": {
-    "hero": "refuse the root — the rhizome",
-    "anti": "rhizome cave demo — Deleuze refused-then-reworked: adjusting reconnection probability makes hierarchy-vs-multiplicity a concrete topological CHOICE. We can't es",
-    "tension": ""
+    "hero": "the rootless cave — any point connects to any other",
+    "anti": "the tree — root, trunk, and the privileged path",
+    "tension": "the rhizome does not overcome hierarchy, it never needed one — stronger than rebellion, which still orbits the tree it opposes; connection without permission"
    },
    "AdvancedLaboratory_Lab_Equipment_Simulation": {
-    "hero": "build otherwise — molecular design bottom-up",
-    "anti": "bias from inside — the ML chapter's shadow returning — bias is not a bug but the limit trained INTO the machine",
-    "tension": ""
+    "hero": "the MolecularDesigner — build the molecule that holds",
+    "anti": "the void pit — the substrate beneath the regulation benches",
+    "tension": "formal systems, with humility: every order rests on what it cannot formalize, and post-crisis practice is Melencolia's angel standing up — build anyway, with the void in view"
    },
    "PostCrisis_Synthesis": {
-    "hero": "arrive — after the crisis",
-    "anti": "bias from inside — the ML chapter's shadow returning — bias is not a bug but the limit trained INTO the machine",
-    "tension": ""
+    "hero": "the index — small, clickable, revisable",
+    "anti": "the monument — completion as triumph",
+    "tension": "the crisis was mathematics growing up, not failing; the practices are not compromises but what becomes possible once completeness is withdrawn — the edge is not the limit, the edge is the ground"
    }
   }
  }

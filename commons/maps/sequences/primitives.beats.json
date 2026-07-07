@@ -1,0 +1,237 @@
+{
+  "_meta": {
+    "schema_version": "beats/0.1",
+    "schema_doc": "doc/beats/schema.md",
+    "sequence": "primitives",
+    "phase": "F_order",
+    "description": "Beat score for the primitives sequence. Each beat declares an intent in the curriculum's argument; maps express it freely. A beat may have 0, 1, or many maps. Edit any beat; re-run tools/beat_audit.py to check coverage."
+  },
+  "beats": [
+    {
+      "id": "P0",
+      "role": "GATEWAY",
+      "concept": "entering the curriculum — the player learns to walk before the first idea arrives",
+      "register": "structural",
+      "intensity": "low",
+      "maps": [],
+      "note": "no map yet; could be a tutorial corridor before Point_One",
+      "stage": "wired",
+      "iteration_log": [
+        {
+          "date": "2026-05-18",
+          "changes": {
+            "note": {
+              "from": "no map yet; could be a tutorial corridor before Point_One",
+              "to": "no map yet; could be a tutorial corridor before Point_One — edited by /beats editor test"
+            },
+            "stage": {
+              "from": null,
+              "to": "wired"
+            }
+          },
+          "reason": "round-trip test from /beats editor"
+        },
+        {
+          "date": "2026-05-18",
+          "changes": {
+            "note": {
+              "from": "no map yet; could be a tutorial corridor before Point_One — edited by /beats editor test",
+              "to": "no map yet; could be a tutorial corridor before Point_One"
+            }
+          },
+          "reason": "revert test edit, keep inferred stage explicit"
+        }
+      ]
+    },
+    {
+      "id": "P1",
+      "role": "INTRODUCE",
+      "concept": "the point — a position with no extension; the atomic primitive",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "Point_One"
+      ],
+      "next": "P2"
+    },
+    {
+      "id": "P2",
+      "role": "DEMONSTRATE",
+      "concept": "the line — points in sequence; the first compositional operation",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "Point_Line",
+        "Point_Lines"
+      ],
+      "next": "P3"
+    },
+    {
+      "id": "P3",
+      "role": "PRACTICE",
+      "concept": "the trace — the player's own walk leaves a line",
+      "register": "exploring",
+      "intensity": "medium",
+      "maps": [
+        "Point_Trace"
+      ],
+      "next": "P4"
+    },
+    {
+      "id": "P4",
+      "role": "VARIATE",
+      "concept": "lines composed into grids — arrays of arrays",
+      "register": "teaching",
+      "intensity": "medium",
+      "maps": [
+        "Point_Line_Grid"
+      ],
+      "bleed_to": [
+        "array_tutorial"
+      ],
+      "note": "this beat openly previews array_tutorial — the grid IS an array",
+      "next": "P5"
+    },
+    {
+      "id": "P5",
+      "role": "SYNTHESIZE",
+      "concept": "the triangle — three lines compose a closed primitive",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "Point_Triangle",
+        "Point_Triangle_Context"
+      ],
+      "next": "P6"
+    },
+    {
+      "id": "P6",
+      "role": "SYNTHESIZE",
+      "concept": "the platonic solids — closed primitives in three dimensions",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "Primitives_Polythedra"
+      ],
+      "next": "P7"
+    },
+    {
+      "id": "P7",
+      "role": "BLEED",
+      "concept": "the animated cube — motion enters; the primitive becomes a state in time",
+      "register": "exploring",
+      "intensity": "medium",
+      "maps": [
+        "Point_Animatedcube"
+      ],
+      "bleed_from": [
+        "transformation",
+        "wavefunctions"
+      ],
+      "note": "transformation + wavefunctions bleed backward into primitives so the player feels what comes next",
+      "next": "P8"
+    },
+    {
+      "id": "P8",
+      "role": "PAUSE",
+      "concept": "between the geometric and the philosophical — let the primitives settle",
+      "register": "resting",
+      "intensity": "low",
+      "maps": [],
+      "note": "intentional empty beat; can be expressed as breathing-room region inside Primitives_Ignorance or as its own room",
+      "next": "P9"
+    },
+    {
+      "id": "P9",
+      "role": "LIMIT",
+      "concept": "Primitives_Ignorance — what the primitive cannot see; the dark spot in the substrate",
+      "register": "reflecting",
+      "intensity": "medium",
+      "maps": [
+        "Primitives_Ignorance"
+      ],
+      "bleed_from": [
+        "foundationscrisis"
+      ],
+      "note": "early bleed from the crisis phase — the limit shows up here as a foreshadowing",
+      "next": "P10"
+    },
+    {
+      "id": "P10",
+      "role": "BLEED",
+      "concept": "Primitives_Portals — topology bleeds in; the primitive's surface is also a passage",
+      "register": "exploring",
+      "intensity": "medium",
+      "maps": [
+        "Primitives_Portals"
+      ],
+      "bleed_from": [
+        "boolean_surfaces",
+        "isosurfaces"
+      ],
+      "next": "P11"
+    },
+    {
+      "id": "P11",
+      "role": "REFUSE",
+      "concept": "Melencolia — the primitive that refuses to be solved; the puzzle that resists",
+      "register": "refusing",
+      "intensity": "high",
+      "maps": [
+        "Primitives_Melencolia"
+      ],
+      "bleed_from": [
+        "postfoundationscrisis"
+      ],
+      "note": "the most negative-register beat in the sequence; deliberate anti-pattern. Bilateral symmetry around an irresolvable centre.",
+      "next": "P12"
+    },
+    {
+      "id": "P12",
+      "role": "CATALYST_GAIN",
+      "concept": "first catalyst encounter — bracelet pickup; foe creatures introduced",
+      "register": "catalyst",
+      "intensity": "high",
+      "maps": [
+        "Point_One"
+      ],
+      "note": "if Catalyst_01_Primitives isn't yet in the primitives sequence's maps list, that's a wiring gap",
+      "next": "P13",
+      "iteration_log": [
+        {
+          "date": "2026-05-19",
+          "changes": {
+            "maps": {
+              "from": [
+                "Catalyst_01_Primitives"
+              ],
+              "to": [
+                "Point_One"
+              ]
+            }
+          },
+          "reason": "principal integration � Catalyst_01_Primitives was a placeholder side-sequence map; Point_One has the catalyst_vent infrastructure already authored in its map_data.json. The catalyst gain becomes a moment INSIDE primitives rather than alongside it."
+        }
+      ]
+    },
+    {
+      "id": "P13",
+      "role": "CHAMBER",
+      "concept": "synthesis of the principle — primitives compose; the player carries it forward",
+      "register": "synthesizing",
+      "intensity": "high",
+      "maps": [],
+      "bleed_to": [
+        "transformation"
+      ],
+      "note": "the chamber's outflow seeds transformation.T0 — static primitives are about to move",
+      "next": null
+    }
+  ],
+  "_orphan_candidates": [
+    "Grown_primitives_w0",
+    "Grown_primitives_w1",
+    "Grown_primitives_w2"
+  ],
+  "_orphan_note": "Maps in the sequence list with no beat. Either assign them to an existing beat OR add a new beat OR remove them from the sequence. The Grown_primitives_w* maps were generated by the tile WFC experiment; they aren't curriculum content yet."
+}

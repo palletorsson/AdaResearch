@@ -2,7 +2,7 @@
 	"approach": "south",
 	"artifact_offset": [
 		0.0,
-		1.0,
+		0.0,
 		0.0
 	],
 	"clearance": [
@@ -14,31 +14,19 @@
 	"extras": [],
 	"footing": {
 		"anchor": [
-			1.0,
-			1.0
+			0,
+			0
 		],
 		"tiles": [
 			[
-				1.0,
-				1.0,
-				1.0
-			],
-			[
-				1.0,
-				3.0,
-				1.0
-			],
-			[
-				1.0,
-				1.0,
-				1.0
+				2
 			]
 		]
 	},
 	"footprint": [
-		3,
-		1,
-		2
+		3.0,
+		1.0,
+		2.0
 	],
 	"lookup_name": "code_display",
 	"notes": {
@@ -47,6 +35,7 @@
 		],
 		"text": "[auto] AABB.y min = -1.00 — body sinks into / floats above floor"
 	},
+	"posture": "table",
 	"rotations": [
 		"0",
 		"90",

@@ -1,0 +1,82 @@
+{
+  "map_info": {
+    "name": "Facade_Assembly_Principle",
+    "lookup_name": "Facade_Assembly_Principle",
+    "description": "The principle map of facade_assembly. A small dense room where each of the six compositional moves — column orders, bay rhythm, hierarchy, fenestration, rustication, cornice/base — has a labeled tile underfoot. Pass-1 skeleton: spawn, teleporter, six marker tiles. Real principle-vocabulary artifacts authored in pass-2.",
+    "version": "0.1-skeleton",
+    "format": "json",
+    "created_from": "facade_assembly proposal 2026-05-13",
+    "dimensions": {
+      "width": 8,
+      "depth": 6,
+      "max_height": 2
+    },
+    "metadata": {
+      "difficulty": "intermediate",
+      "category": "principle_map",
+      "estimated_time": "3 minutes",
+      "learning_objectives": ["Column orders as compositional primitives","Bay rhythm as horizontal syntax","Hierarchy as vertical syntax","Fenestration as semantic surface","Rustication as surface voice","Cornice/base as framing of the composition"]
+    },
+    "title": "The Assembly Principle"
+  },
+  "utility_definitions": {
+    "sp": {
+      "name": "Spawn",
+      "description": "Player spawn point",
+      "type": "spawn"
+    },
+    "t": {
+      "name": "Exit Portal",
+      "description": "Step here to progress to the next map in the sequence",
+      "type": "teleporter",
+      "properties": {
+        "action": "next_in_sequence"
+      }
+    }
+  },
+  "documentation": {
+    "summary": "Facade_Assembly_Principle — the rulebook map of the facade_assembly branch.",
+    "layout": "8x6 walkable room. Spawn at the back row centre. Teleporter at the front row centre. Six exemplar tiles along the side rows, each marking one of the principle's six moves: column orders, bay rhythm, hierarchy, fenestration, rustication, cornice/base.",
+    "objective": "Name the six compositional moves before the player walks the six expression maps.",
+    "key_elements": ["Spawn at (4, 5)","Teleporter at (4, 0)","Pass-1 skeleton: marker tiles to be populated in pass-2 with principle-vocabulary artifacts"]
+  },
+  "lighting": {
+    "ambient_color": [0.35,0.35,0.42],
+    "ambient_energy": 0.9,
+    "directional_light": {
+      "enabled": true,
+      "direction": [-0.3,-1.0,-0.2],
+      "energy": 0.7
+    }
+  },
+  "settings": {
+    "player_spawn_height": 0.5,
+    "floor_tile_size": 1.0
+  },
+  "layers": {
+    "structure": [
+      ["2","2","2","2","2","2","2","2"],
+      ["2","2","2","2","2","2","2","2"],
+      ["2","2","2","2","2","2","2","2"],
+      ["2","2","2","2","2","2","2","2"],
+      ["2","2","2","2","2","2","2","2"],
+      ["2","2","2","2","2","2","2","2"]
+    ],
+    "utilities": [
+      [" "," "," "," ","t"," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," ","sp"," "," "," "]
+    ],
+    "interactables": [
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," ","facade_builder:180:1.0#plan_path:res://commons/facade_parts/presets/classical.json"," "," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" ","science_screen:180:1.2"," "," "," "," "," "," "]
+    ]
+  }
+}

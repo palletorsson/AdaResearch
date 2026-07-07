@@ -1,0 +1,56 @@
+{
+  "timestamp": "2026-07-02T09:05",
+  "phase": "baseline",
+  "pipeline_summary": {
+    "sequences_scored": 22,
+    "complete": [
+      "randomness"
+    ],
+    "note": "all other 21 sequences at stage 6 (vr_testing, human-gated); global stage avg 6.0909 (saturated)"
+  },
+  "heat_map_top_5": [
+    {
+      "item": "capture",
+      "temp": 65,
+      "reason": "active (1 recent commits)"
+    },
+    {
+      "item": "floor",
+      "temp": 65,
+      "reason": "active (1 recent commits)"
+    },
+    {
+      "item": "forces voice-fill",
+      "temp": 60,
+      "reason": "deep discovery: Forces source voice gap CLOSED"
+    },
+    {
+      "item": "subtitles",
+      "temp": 60,
+      "reason": "primitives in-VR truth-beat layer"
+    },
+    {
+      "item": "primitives subtitles",
+      "temp": 60,
+      "reason": "In-VR truth-beat lever advanced: 3 of 7"
+    }
+  ],
+  "garden_health": {
+    "total_artifacts": 2407,
+    "voiced": 1306,
+    "embodied": 437,
+    "voice_coverage": 0.54,
+    "embodiment_rate": 0.33,
+    "phantom_limbs": 843
+  },
+  "release_gates": {
+    "overall": "PASS",
+    "enabled": "4/4",
+    "map_grades": {
+      "A": 1350,
+      "B": 147,
+      "C": 166,
+      "F": 0
+    }
+  }
+}

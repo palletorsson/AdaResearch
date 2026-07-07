@@ -5,6 +5,16 @@
 #
 # This is a translation adapted for VR where the original algorithm and logic are maintained.
 # License: CC BY-NC-SA 3.0 (derivative of CC BY-NC 3.0 original)
+#
+# @identity
+# essence: Friction modeled as a force that always opposes motion, its magnitude set by how rough the surface is
+# desire: To make resistance visible — let a mover cross polished, wood, and rough zones and watch each surface eat its speed differently
+# critical_parameter: coeff — the per-zone friction coefficient, from 0.05 polished to 0.35 rough, that decides how fast motion dies
+# triggers: Entering a rougher zone shortens the glide; lowering the coefficient lets the mover slide farther; zero friction yields perpetual motion
+# emerges: Surface as character — the floor stops being a passive plane and becomes an active brake whose texture you read in the deceleration
+# needs: per-zone coefficient [has], force directed opposite to velocity [has], floor zone visuals [has], VR sliders [has]
+# relationships: NOC Ch.2; expanded into a game by games/friction_racer_vr; shares the opposing-force law with example_2_5 fluid_resistance
+# truth: Friction is the force that remembers which way you were going — only to take it away.
 # ===========================================================================
 
 extends Node3D

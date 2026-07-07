@@ -23,8 +23,8 @@ MAPS_DIR = os.path.join(REPO, "commons", "maps")
 CHAPTER_MAPS = os.path.join(REPO, "doc", "book", "chapter_maps.json")
 OUT = os.path.join(ENC, "public", "chapters.json")
 
-SPINE = ["primitives", "transformation", "array_tutorial", "color", "change",
-         "isosurfaces", "boolean_surfaces", "forces", "wavefunctions", "randomness",
+SPINE = ["primitives", "transformation", "symmetry", "array_tutorial", "color", "change",
+         "isosurfaces", "boolean_surfaces", "forces", "formfinding", "wavefunctions", "randomness",
          "noise", "cellularautomata", "fractals", "lsystems", "proceduralgeneration",
          "swarmintelligence", "softbodies", "machinelearning", "graphtheory",
          "foundationscrisis", "qfeplaboratory", "postfoundationscrisis"]

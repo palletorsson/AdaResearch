@@ -1,0 +1,151 @@
+{
+  "report_date": "2026-06-29",
+  "generated": "2026-06-29T09:14:00",
+  "period": "2026-06-22 to 2026-06-29",
+  "trigger": "scheduled-task: ada-weekly-audit",
+  "previous_report": "doc/reports/weekly_breath_report_2026-06-22.json",
+  "mode": "audit (dry-run breather + release gates + trajectory diff)",
+
+  "headline": "FLAT WEEK AT THE STRUCTURAL CEILING. Gates stay green (4/4 PASS) and the breath engine stayed 100%-healthy, but the head-sum metric did not move: 6.0909 last week -> 6.0909 this week (delta 0.000). Every recorded breath-day in the window (06-24, 06-27, 06-28, 06-29) sits flat on the 6.0909 ceiling that has capped the project since 2026-06-05. Unlike last week — which posted +0.227 by RECOVERING the forces doc-regression — there was no regression to recover and no new pipeline-head progress, so this week registers a genuine flat. The literal 'global_avg has not improved in 7 days' criterion is therefore TRIGGERED this week, and the trajectory file's stall_detected=True is correctly set. The binding constraint remains structural and human-gated: all 21 non-complete spine sequences are at HEAD 6 (vr_testing), which advances ONLY via a human VR walk. New this period: the autonomous content levers themselves are tightening — voice-fill is now reported exhausted in BOTH forces and primitives, so the 06-29 breath pivoted to the in-VR truth-beat / subtitle teaching layer (Point_One origin truthbeat, Point_Lines dead-laser distance key), a lever measured by dead-key count and per-map subtitle coverage rather than pipeline_avg.",
+
+  "total_breaths_in_period": 5,
+  "breaths_in_period": [
+    "2026-06-24T05:00",
+    "2026-06-24T09:06",
+    "2026-06-27T09:08",
+    "2026-06-28T09:10",
+    "2026-06-29T09:14"
+  ],
+  "note_breath_count": "5 logged morning breaths (vs 4 last period). Every one posted delta 0.0 on head-sum and 0 failures — all energy went to content/voice/subtitle levers that are orthogonal to the pipeline metric.",
+
+  "pipeline_snapshot": {
+    "global_avg_pipeline_head_sum_now": 6.0909,
+    "global_avg_pipeline_head_sum_last_week": 6.0909,
+    "global_avg_pipeline_delta_week_over_week": 0.0,
+    "computation_now": "(21 spine sequences at stage 6 * 6) + (randomness at stage 7 * 7) = 126 + 7 = 133; 133 / 22 = 6.0909",
+    "sequences_at_stage_7_polish": ["randomness"],
+    "sequences_below_stage_6": [],
+    "all_22_sequences_pass_str_doc_art_map_val": true,
+    "regression_status": "CLEAN. No tracked spine sequence regressed this week. The forces/Sky_Climb doc-regression repaired last week stayed repaired. No fresh doc-leak on a declared sequence surfaced in this audit's scorer run.",
+    "all_spine_at_head_6_vr_testing": true
+  },
+
+  "trajectory_diff_vs_last_week": {
+    "this_week_last_updated": "2026-06-29T09:14",
+    "total_breaths_cumulative": 47,
+    "trajectory_history_tail": [
+      {"date": "2026-06-21", "avg": 6.0909},
+      {"date": "2026-06-24", "avg": 6.0909, "note": "two breaths same day, both 6.0909"},
+      {"date": "2026-06-27", "avg": 6.09},
+      {"date": "2026-06-28", "avg": 6.0909},
+      {"date": "2026-06-29", "avg": 6.0909, "note": "audit-day recompute from sequence_pipeline_scorer"}
+    ],
+    "interpretation": "Dead flat at the ceiling across the entire window. Week-over-week delta is exactly 0.000 — neither a regression nor a gain. The metric is saturated, not dipping."
+  },
+
+  "sequences_improved_this_period": [
+    "NONE on the pipeline-head metric — all 21 spine sequences held at HEAD 6 (vr_testing); randomness held at HEAD 7. Head-sum is structurally pinned at 6.0909.",
+    "Content levers (orthogonal to head-sum): voice coverage rose 52% -> 54% via three voicing breaths (06-24 x2 voiced 10 forces/vector artifacts; 06-28 voiced 3 more gun/orbital artifacts).",
+    "primitives — in-VR truth-beat / subtitle teaching layer advanced (06-29: Point_One origin truthbeat + Point_Lines dead-laser distance key). Measured by subtitle coverage / dead-key count, not pipeline_avg.",
+    "Map validation quality (Gate C): grade_A maps jumped 945 -> 1347 (+402) week-over-week, with zero grade_F maintained."
+  ],
+
+  "total_delta": {
+    "week_over_week_head_sum": 0.0,
+    "interpretation": "Zero net pipeline movement. This is the expected steady-state for a ceiling-bound spine: with every sequence at the human-gated vr_testing stage, no autonomous breath can change the number. The real work this week (13 artifacts voiced, subtitle teaching layer, +402 grade_A maps) is genuine but invisible to the head-sum metric by design.",
+    "voice_coverage_delta": "+2 percentage points (52% -> 54%)",
+    "grade_A_maps_delta": "+402 (945 -> 1347)"
+  },
+
+  "skill_effectiveness_changes": {
+    "summary": "No effectiveness regressions and no new failure patterns. Every one of the 5 period breaths succeeded on all attempted items (0 failures across 21 attempted items). documentation_writing / identity_writing remain at 100% cumulative.",
+    "families_exercised_this_period": {
+      "identity_writing / voicing": "06-24 (x2) and 06-28 voiced 13 forces/vector/gun artifacts at 100% success; voice coverage 52% -> 54%. NOTE: trajectory file now reports voice-fill EXHAUSTED in both forces and primitives — the lever is approaching its floor in the focus sequences.",
+      "subtitle / truth-beat authoring": "06-29 began the in-VR teaching layer (Point_One origin truthbeat, Point_Lines dead-laser distance key) using ada-map-expert patterns; new lever, 100% on first use.",
+      "garden_listener / query_identities": "06-27 used to target the next 5 voiceless artifacts (gravity_well, newton_cradle, slingshot_launcher, vector_field, VectorMotion); all voiced successfully."
+    },
+    "cumulative_success_rates_unchanged": true,
+    "new_3plus_failure_pattern": "none — no new effectiveness-grounded proposal warranted this week"
+  },
+
+  "proposals_pending_review": {
+    "count": 7,
+    "all_status": "proposed (none applied)",
+    "file": "doc/reports/skill_evolution_proposals.json",
+    "change_since_last_week": "One NEW proposal added (prop-008, 'lever rotation' for the Evaluate phase) bringing the total 6 -> 7. All seven remain status=proposed; NONE has been applied via /ada-skill-updater. The standing apply-recommendations (prop-002/004/005/006) are now overdue across 4+ consecutive weekly audits.",
+    "items": [
+      {"id": "prop-001", "skill": "ada-breather", "gist": "garden_identity_leverage pre-check in Evaluate"},
+      {"id": "prop-002", "skill": "ada-breather", "gist": "deferral re-validation step in Read/Evaluate — STRONG apply recommendation (standing 4+ audits)"},
+      {"id": "prop-003", "skill": "ada-breather", "gist": "wall-detection / stage-6-ceiling auto-retarget pre-check"},
+      {"id": "prop-004", "skill": "ada-breather", "gist": "crash-safe-write rule in Harvest — STRONG apply recommendation"},
+      {"id": "prop-005", "skill": "ada-breather", "gist": "convention-drift cross-check in Read/Evaluate — STRONG apply recommendation"},
+      {"id": "prop-006", "skill": "ada-breather", "gist": "recent-commit regression re-scan in Read — MOST-EVIDENCED"},
+      {"id": "prop-008", "skill": "ada-breather", "gist": "lever-rotation step in Evaluate (NEW this period) — rotate among voice/subtitle/doc/grade levers as each saturates"}
+    ],
+    "recommendation": "OVERDUE: apply prop-002, prop-004, prop-005, prop-006 via /ada-skill-updater. prop-008 is newly relevant — it directly addresses this week's signal (voice-fill exhausting in focus sequences -> the engine needs an explicit lever-rotation rule rather than re-discovering saturation each breath). prop-001/prop-003 remain lower priority / dependent."
+  },
+
+  "stall_analysis": {
+    "stall_flagged_in_trajectory_file": true,
+    "literal_7day_criterion_triggered": true,
+    "stall_type": "structural-ceiling, now with content-lever tightening",
+    "literal_7day_finding": "global_avg held at 6.0909 for the full window (06-22 6.0909 -> 06-29 6.0909, delta 0.000). By the strict 'has not improved in 7 days' test, this week DOES register a stall — unlike last week, there was no regression trough to recover from, so the flat reads as a true plateau.",
+    "trajectory_file_stall_reason": "Pipeline mean-head saturated at 6.0909 for 45+ breaths (every spine seq except randomness VR-gated at stage 6). Voice-fill lever now also exhausted in forces AND primitives. Autonomous breaths have pivoted to the in-VR truth-beat (subtitles) teaching layer in the focus sequence — measured by dead-key count and per-map subtitle coverage, NOT pipeline_avg.",
+    "diagnosis": [
+      "1. STRUCTURAL CEILING (known, 45+ breaths): all 21 non-complete spine sequences sit at HEAD 6 (vr_testing). Stage 6 advances ONLY via a human VR walk session with bridge feedback. No autonomous breath can lift it; head-sum is mathematically capped at 6.0909 (randomness already at 7). This is the same hard ceiling flagged since 2026-06-05 — not a new or fixable-by-engine condition.",
+      "2. NEW THIS WEEK — content-lever tightening: the voice-fill lever, which had been the one metric still moving autonomously (51% -> 52% -> 54% over recent weeks), is now reported EXHAUSTED in both forces and primitives (the focus sequences). The engine responded correctly by opening a new lever (in-VR subtitle / truth-beat teaching layer, 06-29). This is healthy adaptation, but it means even the orthogonal metrics are starting to saturate in the high-priority sequences.",
+      "3. The breath ENGINE itself is healthy: 5/5 breaths succeeded, 21/21 items succeeded, 0 failures, gates green, no regression. The engine is not out of ideas — it is out of head-moving moves until a human walks the spine, and is now rotating to its second-tier levers as the first-tier ones saturate."
+    ],
+    "why_flat_not_decline": "A flat at the ceiling is the structurally correct steady state for a fully-built, human-gated spine. It is NOT an engine failure and NOT a regression. The concern this week is narrower: the autonomous levers that produce visible content progress are themselves narrowing in the focus sequences, which raises the cost-per-breath of finding orthogonal work.",
+    "recommended_remediation": [
+      "HUMAN LEVER (only ceiling-breaker, standing #1 since 2026-05-30): schedule a VR walk session to take any spine sequence from stage 6 -> stage 7. This is the sole path above 6.0909.",
+      "META (now overdue 4+ audits): apply prop-002/004/005/006 via /ada-skill-updater — AND consider prop-008 (lever rotation), which is precisely the pattern this week surfaced (voice-fill saturating -> need explicit rotation to subtitle/grade/doc levers).",
+      "AUTONOMOUS (sustainable while ceiling-bound): continue the in-VR truth-beat / subtitle teaching layer in primitives (the freshly-opened lever) and rotate voicing to sequences where coverage is still below ceiling (forces/primitives are now near-exhausted; target the LIVING/GROWING sequences with high phantom-limb counts — forces still shows 19 phantom limbs, vectorforcesmuseum 3, but the GROWING tier holds the bulk).",
+      "GRADE LEVER (newly visible): grade_A maps jumped +402 this week — pushing grade_B (147) and grade_C (163) maps toward grade_A is an autonomous lever that moves Gate C quality without needing a VR walk."
+    ]
+  },
+
+  "release_gates": {
+    "overall": "PASS",
+    "enabled_passing": "4/4",
+    "change_since_last_week": "Held PASS (4/4) -> PASS (4/4). No gate flipped. Gate C grade quality improved materially (grade_A +402).",
+    "gate_A_sequence_contract": {"status": "PASS", "missing_declared_maps": 0, "duplicate_entries_within_sequence": 0, "undeclared_map_folders": 1062, "note": "undeclared_map_folders rose 664 -> 1062 (informational / non-blocking under current gate logic; reflects the large volume of generator + concept-map folders not attached to a declared sequence)."},
+    "gate_B_artifact_registry": {"status": "PASS", "unresolved_scene_files": 0, "missing_scene_path": 0, "unsupported_scene_path": 0, "missing_map_ready": 0, "missing_include_in_map_data": 0, "note": "Fully clean, held from last week's repair."},
+    "gate_C_map_validation": {"status": "PASS", "grade_A": 1347, "grade_B": 147, "grade_C": 163, "grade_F": 0, "note": "grade_A 945 -> 1347 (+402); grade_B 146 -> 147; grade_C 162 -> 163; still zero F. Net: many more maps reached top grade."},
+    "gate_D_lab_progression": {"status": "PASS", "lost_count": 0, "changed_count": 12, "total_issues": 39, "ok_superset_pairs": 5, "note": "Unchanged from last week."}
+  },
+
+  "garden_health": {
+    "voice_coverage": "54%",
+    "voice_coverage_last_week": "52%",
+    "embodiment_rate": "33% of voiced artifacts have full bodies",
+    "phantom_limbs": 846,
+    "phantom_limbs_last_week": 846,
+    "total_artifacts": 2395,
+    "note": "Voice coverage +2pt (52% -> 54%) from the 06-24/06-28 voicing breaths. Phantom limbs held flat at 846 (voicing kept pace with new reaching artifacts this week, vs last week's +14). Voicing remains a real lever but is reported exhausted in the two focus sequences (forces, primitives) — future voice gains must come from the GROWING/LIVING tiers."
+  },
+
+  "dry_run_work_plan": {
+    "focus": "auto-selected (FOCUS_VECTOR primary = primitives rebuild, dated 2026-03-28 and stale; live signal = ceiling-saturation + first-tier content levers exhausting in focus sequences)",
+    "trajectory": "FLAT at structural ceiling (delta 0.000 w/w; stall_detected=True, literal 7-day criterion triggered this week)",
+    "items": [
+      {"rank": 1, "item": "continue in-VR truth-beat / subtitle teaching layer in primitives", "temperature": "60 (subtitles / primitives in-VR)", "reason": "Freshly-opened lever (06-29 did Point_One + Point_Lines); the only first-tier lever NOT yet saturated in the focus sequence.", "dispatch": "ada-map-expert (subtitle/truth-beat patterns)", "expected": "+N subtitle keys, dead-laser distance keys cleared; moves the teaching-layer metric, not head-sum."},
+      {"rank": 2, "item": "rotate voicing to GROWING-tier sequences (hazards 40, primitives-domain 39, lsystems 17 phantom limbs)", "temperature": "55 (voice_coverage, off-focus)", "reason": "Voice-fill exhausted in forces/primitives; the 846 phantom limbs now live mostly in GROWING/LIVING tiers.", "dispatch": "identity_writing", "expected": "+5 voiced artifacts in a non-saturated tier; voice coverage 54% -> ~55%."},
+      {"rank": 3, "item": "grade-B -> grade-A map promotion batch (147 grade_B maps)", "temperature": "50 (Gate C quality)", "reason": "grade_A jumped +402 this week — a live autonomous lever that improves Gate C without a VR walk.", "dispatch": "ada-map-expert + map_pathfinder", "expected": "Several grade_B maps promoted to grade_A; Gate C quality up."},
+      {"rank": 4, "item": "apply standing skill_evolution proposals prop-002/004/005/006 + evaluate prop-008", "temperature": "META", "reason": "Overdue 4+ audits; prop-008 (lever rotation) directly matches this week's saturation signal.", "dispatch": "/ada-skill-updater (HUMAN review required)", "expected": "Engine stops re-discovering doc-regression/convention-drift and gains an explicit lever-rotation rule."},
+      {"rank": 5, "item": "resolve undeclared_map_folders growth (664 -> 1062)", "temperature": "40 (gate-A informational)", "reason": "Generator + concept-map folders accumulating outside declared sequences; non-blocking but a rising informational signal.", "dispatch": "ada-sequence-expert", "expected": "Either attach high-value folders to sequences or formally mark generator output exempt; signal stabilizes."}
+    ],
+    "cooled_skipped": "none (no items in last-2-breath items_failed — all 5 period breaths had zero failures)",
+    "human_only_item_not_in_autonomous_plan": "VR walk session to lift any spine sequence stage 6 -> 7 — the sole ceiling-breaker; cannot be done by a breath."
+  },
+
+  "next_actions": [
+    "HUMAN: schedule a VR walk session — the only lever that moves head-sum above 6.0909 (standing recommendation since 2026-05-30; now 4+ weeks outstanding).",
+    "Apply skill_evolution proposals prop-002, prop-004, prop-005, prop-006 via /ada-skill-updater — overdue 4+ audits; evaluate the new prop-008 (lever rotation) which matches this week's saturation signal.",
+    "Autonomous next full breath: continue primitives subtitle/truth-beat layer + rotate voicing OUT of the now-saturated forces/primitives into GROWING-tier sequences.",
+    "Open the grade-B -> grade-A map-promotion lever (147 grade_B maps) as a fresh autonomous quality lever while the pipeline is ceiling-bound.",
+    "Watch undeclared_map_folders (664 -> 1062): decide a policy for generator/concept-map folders before the Gate A informational count grows further."
+  ],
+
+  "audit_status": "PASS with STALL flagged — gates green (4/4), engine 100% healthy, no regression, but head-sum dead flat at the 6.0909 ceiling (delta 0.000 w/w, literal 7-day stall criterion TRIGGERED). Stall is structural (human-gated vr_testing), now compounded by first-tier autonomous levers (voice-fill) saturating in the focus sequences. The binding constraint remains a human VR walk; secondary autonomous levers (subtitles, off-focus voicing, grade promotion) are available and being rotated to."
+}

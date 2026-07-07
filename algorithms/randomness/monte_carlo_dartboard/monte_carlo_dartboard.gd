@@ -19,6 +19,8 @@ extends Node3D
 
 class_name MonteCarloDartboard
 
+const BakedText = preload("res://commons/utils/baked_text_albedo.gd")
+
 # ── Board ────────────────────────────────────────────────────────────────────
 @export var board_size: float = 0.6
 @export var board_thickness: float = 0.03
@@ -44,10 +46,17 @@ var _total_count: int = 0
 var _throw_timer: float = 0.0
 var _dart_meshes: Array[MeshInstance3D] = []
 
-var _pi_label: Label3D
-var _stats_label: Label3D
-var _accuracy_label: Label3D
+# Integrated 2D-in-3D readout — the estimate panel (π + darts + hits + error),
+# consolidated onto ONE baked-text block that rebuilds only when its text changes.
+var _readout_root: Node3D          # anchor holding the readout block (fixed position)
+var _readout_block: Node3D         # the current make_text_block child (swapped on change)
+var _readout_cache: String = ""    # last-rendered joined text — the rebuild cache guard
+var _readout_color: Color = Color(0.85, 0.87, 0.95)
 var _circle_mesh: MeshInstance3D
+
+const _READOUT_LINE_H: float = 0.045
+const _READOUT_WIDTH: float = 0.40
+const _READOUT_GAP: float = 0.014
 
 
 
@@ -136,19 +145,19 @@ func _create_board() -> void:
 		frame.position = s[0] + Vector3(0, board_height, 0)
 		add_child(frame)
 
-	# Corner labels: (0,0) → (1,1) coordinate display
+	# Corner axis tags: (0,0) → (1,1) coordinate display, as small integrated boards.
+	var corner_z := board_thickness / 2.0 + 0.012
 	var corner_positions := [
-		[Vector3(-board_size / 2.0 - 0.03, board_height - board_size / 2.0, board_thickness / 2.0 + 0.01), "(0,0)"],
-		[Vector3(board_size / 2.0 + 0.03, board_height + board_size / 2.0, board_thickness / 2.0 + 0.01), "(1,1)"],
+		[Vector3(-board_size / 2.0 - 0.045, board_height - board_size / 2.0, corner_z), "(0,0)"],
+		[Vector3(board_size / 2.0 + 0.045, board_height + board_size / 2.0, corner_z), "(1,1)"],
 	]
 	for cp in corner_positions:
-		var lbl := Label3D.new()
-		lbl.text = cp[1]
-		lbl.pixel_size = 0.0008
-		lbl.font_size = 8
-		lbl.modulate = Color(0.5, 0.5, 0.55)
-		lbl.position = cp[0]
-		add_child(lbl)
+		var tag := BakedText.make_tag(
+			cp[1], Color(0.6, 0.6, 0.68), 0.032,
+			Color(0.08, 0.09, 0.11), true, Color(0.4, 0.6, 1.0))
+		if tag:
+			tag.position = cp[0]
+			add_child(tag)
 
 
 func _create_circle_overlay() -> void:
@@ -261,69 +270,53 @@ func _throw_dart() -> void:
 # ═════════════════════════════════════════════════════════════════════════════
 
 func _create_labels() -> void:
-	var label_z := board_thickness / 2.0 + 0.01
+	var label_z := board_thickness / 2.0 + 0.012
 
-	# Title
-	var title := Label3D.new()
-	title.text = "MONTE CARLO"
-	title.pixel_size = 0.002
-	title.font_size = 18
-	title.modulate = Color(0.9, 0.9, 0.95)
-	title.position = Vector3(0, board_height + board_size / 2.0 + 0.08, label_z)
-	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	add_child(title)
+	# ── TITLE — one integrated board above the dartboard (title + subtitle lines).
+	var title_block := BakedText.make_text_block(
+		["MONTE CARLO", "Estimating π with random darts"],
+		Color(0.9, 0.9, 0.95), 0.05, board_size + 0.1, 0.012, true)
+	if title_block:
+		title_block.position = Vector3(0, board_height + board_size / 2.0 + 0.09, label_z)
+		add_child(title_block)
 
-	var sub := Label3D.new()
-	sub.text = "Estimating π with random darts"
-	sub.pixel_size = 0.0013
-	sub.font_size = 11
-	sub.modulate = Color(0.6, 0.6, 0.7)
-	sub.position = Vector3(0, board_height + board_size / 2.0 + 0.05, label_z)
-	sub.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	add_child(sub)
+	# ── READOUT — the converging estimate, consolidated onto ONE panel to the right.
+	# An opaque plate behind the block gives it a clean "instrument screen" read; the
+	# text block itself is swapped in _update_display() only when its lines change.
+	_readout_root = Node3D.new()
+	_readout_root.name = "ReadoutPanel"
+	_readout_root.position = Vector3(board_size / 2.0 + 0.34, board_height, label_z)
+	add_child(_readout_root)
 
-	# Big π estimate
-	_pi_label = Label3D.new()
-	_pi_label.name = "PiLabel"
-	_pi_label.text = "π ≈ ?"
-	_pi_label.pixel_size = 0.003
-	_pi_label.font_size = 32
-	_pi_label.modulate = color_pi
-	_pi_label.position = Vector3(board_size / 2.0 + 0.15, board_height + 0.1, label_z)
-	_pi_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
-	add_child(_pi_label)
+	var plate := BakedText.make_panel_mesh(
+		"", Color(0.06, 0.07, 0.10), Color.WHITE,
+		Vector2(_READOUT_WIDTH + 0.06, 0.44), 1400, false)
+	if plate:
+		plate.position = Vector3(0, 0, -0.006)
+		_readout_root.add_child(plate)
 
-	# Stats
-	_stats_label = Label3D.new()
-	_stats_label.name = "StatsLabel"
-	_stats_label.text = "darts: 0\ninside: 0\noutside: 0"
-	_stats_label.pixel_size = 0.001
-	_stats_label.font_size = 10
-	_stats_label.modulate = Color(0.75, 0.75, 0.8)
-	_stats_label.position = Vector3(board_size / 2.0 + 0.15, board_height - 0.05, label_z)
-	_stats_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
-	add_child(_stats_label)
+	_rebuild_readout(["π ≈ ?", "", "darts: 0", "inside: 0", "outside: 0"])
 
-	# Accuracy
-	_accuracy_label = Label3D.new()
-	_accuracy_label.name = "AccuracyLabel"
-	_accuracy_label.text = ""
-	_accuracy_label.pixel_size = 0.001
-	_accuracy_label.font_size = 10
-	_accuracy_label.modulate = Color(0.6, 0.8, 0.6)
-	_accuracy_label.position = Vector3(board_size / 2.0 + 0.15, board_height - 0.15, label_z)
-	_accuracy_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
-	add_child(_accuracy_label)
+	# ── FORMULA — one integrated board below the dartboard.
+	var formula_block := BakedText.make_text_block(
+		["π/4 = area(circle) / area(square)",
+		 "π ≈ 4 × (inside / total)"],
+		Color(0.6, 0.6, 0.68), 0.04, board_size + 0.14, 0.012, true)
+	if formula_block:
+		formula_block.position = Vector3(0, board_height - board_size / 2.0 - 0.1, label_z)
+		add_child(formula_block)
 
-	# Formula explanation below board
-	var formula := Label3D.new()
-	formula.text = "π/4 = area(circle) / area(square)\nπ ≈ 4 × (darts inside circle / total darts)"
-	formula.pixel_size = 0.001
-	formula.font_size = 10
-	formula.modulate = Color(0.55, 0.55, 0.6)
-	formula.position = Vector3(0, board_height - board_size / 2.0 - 0.06, label_z)
-	formula.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	add_child(formula)
+
+# Swap the readout text block for a fresh one holding `lines`. Called only when the
+# joined text differs from the cache (guarded by the caller), so no per-frame churn.
+func _rebuild_readout(lines: Array) -> void:
+	if _readout_block and is_instance_valid(_readout_block):
+		_readout_block.queue_free()
+	_readout_block = BakedText.make_text_block(
+		lines, _readout_color, _READOUT_LINE_H, _READOUT_WIDTH, _READOUT_GAP, true)
+	if _readout_block:
+		_readout_block.position = Vector3(0, 0, 0.002)
+		_readout_root.add_child(_readout_block)
 
 
 func _update_display() -> void:
@@ -334,22 +327,33 @@ func _update_display() -> void:
 	var error: float = absf(pi_estimate - PI)
 	var error_pct: float = error / PI * 100.0
 
-	_pi_label.text = "π ≈ %.6f" % pi_estimate
-
-	_stats_label.text = "darts: %d\ninside: %d\noutside: %d\nratio: %.4f" % [
-		_total_count, _inside_count, _total_count - _inside_count,
-		float(_inside_count) / float(_total_count)
+	# Every readout string, consolidated onto one panel.
+	var lines := [
+		"π ≈ %.6f" % pi_estimate,
+		"",
+		"darts: %d" % _total_count,
+		"inside: %d" % _inside_count,
+		"outside: %d" % (_total_count - _inside_count),
+		"ratio: %.4f" % (float(_inside_count) / float(_total_count)),
+		"",
+		"actual π: %.6f" % PI,
+		"error: %.6f (%.2f%%)" % [error, error_pct],
 	]
 
-	_accuracy_label.text = "actual π: %.6f\nerror: %.6f (%.2f%%)" % [PI, error, error_pct]
-
-	# Color the π label by accuracy
+	# Color the whole readout by accuracy — green excellent, gold good, orange far.
 	if error_pct < 1.0:
-		_pi_label.modulate = Color(0.3, 1.0, 0.3)  # Green — excellent
+		_readout_color = Color(0.4, 1.0, 0.45)
 	elif error_pct < 5.0:
-		_pi_label.modulate = color_pi  # Gold — good
+		_readout_color = color_pi
 	else:
-		_pi_label.modulate = Color(1.0, 0.5, 0.3)  # Orange — getting there
+		_readout_color = Color(1.0, 0.6, 0.35)
+
+	# Cache guard: rebuild the baked block only when its text (or colour) changed.
+	var joined := "%s|%s" % [_readout_color, "\n".join(PackedStringArray(lines))]
+	if joined == _readout_cache:
+		return
+	_readout_cache = joined
+	_rebuild_readout(lines)
 
 
 # ═════════════════════════════════════════════════════════════════════════════
@@ -401,10 +405,9 @@ func _reset() -> void:
 			m.queue_free()
 	_dart_meshes.clear()
 
-	_pi_label.text = "π ≈ ?"
-	_pi_label.modulate = color_pi
-	_stats_label.text = "darts: 0\ninside: 0\noutside: 0"
-	_accuracy_label.text = ""
+	_readout_color = Color(0.85, 0.87, 0.95)
+	_readout_cache = ""
+	_rebuild_readout(["π ≈ ?", "", "darts: 0", "inside: 0", "outside: 0"])
 
 func _exit_tree() -> void:
 	for child in get_children():

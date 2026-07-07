@@ -21,6 +21,7 @@ extends Node3D
 ## Place in the grid and the player's own movements become the entropy source.
 
 const DECAY_SHADER = preload("res://algorithms/randomness/hardware_entropy_decay/hardware_decay.gdshader")
+const BakedText = preload("res://commons/utils/baked_text_albedo.gd")
 
 # --- Export tunables ---
 @export_category("Decay Rates")
@@ -74,10 +75,15 @@ var _interaction_seconds: float = 0.0
 # Scene references
 var _shader_materials: Array[ShaderMaterial] = []
 var _display_meshes: Array[MeshInstance3D] = []
-var _readout_labels: Array[Label3D] = []
-var _title_label: Label3D
-var _stats_label: Label3D
-var _source_label: Label3D
+# Consolidated readout board — one panel, rebuilt (cache-guarded) only when text changes.
+var _readout_anchor: Node3D            # holds the current baked text-block
+var _readout_block: Node3D             # the live text-block child (freed + rebuilt on change)
+var _readout_max_width: float = 0.56
+var _readout_line_h: float = 0.052
+var _readout_cache: String = ""        # guards rebuild: last rendered joined-lines string
+var _source_anchor: Node3D             # holds the status board
+var _source_cache: String = ""         # guards status rebuild
+var _source_pos: Vector3 = Vector3.ZERO
 var _active: bool = true
 var _paused: bool = false
 
@@ -391,97 +397,71 @@ func _build_display_surfaces() -> void:
 
 
 func _build_title() -> void:
-	_title_label = Label3D.new()
-	_title_label.text = "HARDWARE ENTROPY DECAY"
-	_title_label.font_size = 48
-	_title_label.pixel_size = 0.001
-	_title_label.position = Vector3(0, pedestal_height + 1.45, 0)
-	_title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	_title_label.modulate = Color(0.95, 0.85, 0.65)
-	_title_label.outline_size = 6
-	_title_label.outline_modulate = Color(0.2, 0.1, 0.05)
-	add_child(_title_label)
+	# Title board — integrated 2D-in-3D tag, painted onto its own face.
+	var title := BakedText.make_tag(
+		"HARDWARE ENTROPY DECAY",
+		Color(0.95, 0.85, 0.65), 0.13,
+		Color(0.10, 0.06, 0.03), false,
+		Color(0.86, 0.40, 0.16))
+	if title:
+		title.position = Vector3(0, pedestal_height + 1.55, 0)
+		add_child(title)
 
-	var subtitle := Label3D.new()
-	subtitle.text = "Your VR movements become entropy"
-	subtitle.font_size = 24
-	subtitle.pixel_size = 0.001
-	subtitle.position = Vector3(0, pedestal_height + 1.3, 0)
-	subtitle.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	subtitle.modulate = Color(0.7, 0.7, 0.75)
-	add_child(subtitle)
+	# Subtitle board — spaced below the title so the two never overlap.
+	var subtitle := BakedText.make_tag(
+		"Your VR movements become entropy",
+		Color(0.72, 0.72, 0.78), 0.06,
+		Color(0.06, 0.06, 0.08), false,
+		Color(0, 0, 0, 0))
+	if subtitle:
+		subtitle.position = Vector3(0, pedestal_height + 1.36, 0)
+		add_child(subtitle)
 
 
 func _build_readout_panel() -> void:
-	# Stats display panel (floating to the right)
-	var panel_x := float(panel_count) * panel_spacing * 0.5 + 0.8
-	var panel_y := pedestal_height + 0.2
+	# One consolidated readout panel to the right — header + all 8 live readouts +
+	# stats summary render onto a SINGLE surface (make_text_block), so nothing floats
+	# free and nothing overlaps. The backing plate frames the whole board.
+	var panel_x := float(panel_count) * panel_spacing * 0.5 + 0.85
+	var panel_cy := pedestal_height + 0.65   # vertical centre of the board
 
-	# Panel backing
+	# Opaque backing plate — one plate behind the whole readout column.
 	var back := MeshInstance3D.new()
 	var back_mesh := BoxMesh.new()
-	back_mesh.size = Vector3(0.65, 0.9, 0.015)
+	back_mesh.size = Vector3(0.68, 0.98, 0.02)
 	back.mesh = back_mesh
 	var back_mat := StandardMaterial3D.new()
 	back_mat.albedo_color = Color(0.04, 0.04, 0.06)
 	back_mat.metallic = 0.2
+	back_mat.roughness = 0.6
 	back.material_override = back_mat
-	back.position = Vector3(panel_x, panel_y + 0.45, -0.01)
+	back.position = Vector3(panel_x, panel_cy, -0.012)
 	add_child(back)
 
-	# Readout header
-	var header := Label3D.new()
-	header.text = "HARDWARE INPUTS"
-	header.font_size = 18
-	header.pixel_size = 0.001
-	header.position = Vector3(panel_x, panel_y + 0.85, 0)
-	header.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	header.modulate = Color(0.3, 1.0, 0.4)
-	add_child(header)
+	# Anchor for the live baked text-block, sitting just in front of the plate.
+	_readout_anchor = Node3D.new()
+	_readout_anchor.name = "ReadoutBlock"
+	_readout_anchor.position = Vector3(panel_x, panel_cy, 0.004)
+	add_child(_readout_anchor)
 
-	# Create individual readout lines
-	var labels_text := [
-		"VELOCITY",
-		"GRIP",
-		"HEAD ROT",
-		"SCRATCHES",
-		"GRIME",
-		"ENTROPY",
-		"DECAY",
-		"TIME"
-	]
-
-	for i in range(labels_text.size()):
-		var lbl := Label3D.new()
-		lbl.name = "Readout_%d" % i
-		lbl.text = "%s: ---" % labels_text[i]
-		lbl.font_size = 12
-		lbl.pixel_size = 0.001
-		lbl.position = Vector3(panel_x - 0.28, panel_y + 0.72 - i * 0.1, 0)
-		lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
-		lbl.modulate = Color(0.7, 0.8, 0.7)
-		add_child(lbl)
-		_readout_labels.append(lbl)
-
-	# Stats label (below readouts)
-	_stats_label = Label3D.new()
-	_stats_label.text = ""
-	_stats_label.font_size = 10
-	_stats_label.pixel_size = 0.001
-	_stats_label.position = Vector3(panel_x, panel_y - 0.05, 0)
-	_stats_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	_stats_label.modulate = Color(0.5, 0.5, 0.6)
-	add_child(_stats_label)
+	# Seed with a placeholder so the board reads before the first update.
+	_rebuild_readout_block([
+		"HARDWARE INPUTS", "",
+		"VELOCITY   ---", "GRIP       ---", "HEAD ROT   ---",
+		"SCRATCHES  ---", "GRIME      ---", "ENTROPY    ---",
+		"DECAY      ---", "TIME       ---", "",
+		"Peak ---  Total ---",
+	])
 
 
 func _build_source_indicator() -> void:
-	# Small indicator showing whether we're reading real VR or fallback
-	_source_label = Label3D.new()
-	_source_label.font_size = 10
-	_source_label.pixel_size = 0.001
-	_source_label.position = Vector3(0, pedestal_height + 1.15, 0)
-	_source_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	add_child(_source_label)
+	# Small status board showing whether we're reading real VR or fallback.
+	# Held in its own anchor, spaced below the subtitle; rebuilt only on change.
+	_source_pos = Vector3(0, pedestal_height + 1.21, 0)
+	_source_anchor = Node3D.new()
+	_source_anchor.name = "SourceIndicator"
+	_source_anchor.position = _source_pos
+	add_child(_source_anchor)
 	_update_source_indicator()
 
 
@@ -520,53 +500,77 @@ func _build_vr_controls() -> void:
 # UPDATES
 # ============================================================
 
-func _update_readouts() -> void:
-	if _readout_labels.size() < 8:
+# Rebuild the consolidated readout board from a fresh set of lines. Cache-guarded
+# by the caller (see _update_readouts) so the block is only re-baked when the text
+# actually changes — BakedText itself also caches per-line textures.
+func _rebuild_readout_block(lines: Array) -> void:
+	if _readout_anchor == null:
 		return
+	if is_instance_valid(_readout_block):
+		_readout_block.queue_free()
+	_readout_block = BakedText.make_text_block(
+		lines, Color(0.72, 0.86, 0.74),
+		_readout_line_h, _readout_max_width, 0.014, true)
+	if _readout_block:
+		_readout_anchor.add_child(_readout_block)
 
+
+func _update_readouts() -> void:
 	var max_vel := maxf(_left_velocity, _right_velocity)
 	var max_grip := maxf(_grip_left, _grip_right)
 
-	_readout_labels[0].text = "VELOCITY:  %.2f m/s" % max_vel
-	_readout_labels[0].modulate = Color(0.7, 0.8, 0.7).lerp(Color(1.0, 0.3, 0.2), clampf(max_vel / 3.0, 0.0, 1.0))
-
-	_readout_labels[1].text = "GRIP:      %.1f%%" % (max_grip * 100.0)
-	_readout_labels[1].modulate = Color(0.7, 0.8, 0.7).lerp(Color(1.0, 0.8, 0.2), max_grip)
-
-	_readout_labels[2].text = "HEAD ROT:  %.2f r/s" % _head_angular_speed
-	_readout_labels[2].modulate = Color(0.7, 0.8, 0.7).lerp(Color(0.4, 0.6, 1.0), clampf(_head_angular_speed, 0.0, 1.0))
-
-	_readout_labels[3].text = "SCRATCHES: %.1f%%" % (_display_scratch * 100.0)
-	_readout_labels[4].text = "GRIME:     %.1f%%" % (_display_grime * 100.0)
-	_readout_labels[5].text = "ENTROPY:   %.1f%%" % (_display_entropy * 100.0)
-	_readout_labels[6].text = "DECAY:     %.1f%%" % (_display_decay * 100.0)
-
-	# Color the decay readout based on severity
-	var decay_color_val := Color(0.3, 1.0, 0.4).lerp(Color(1.0, 0.2, 0.1), _display_decay)
-	_readout_labels[6].modulate = decay_color_val
-
-	_readout_labels[7].text = "TIME:      %.0fs" % _interaction_seconds
-
-	# Stats summary
-	if _stats_label:
-		_stats_label.text = "Peak: %.1f m/s | Total scratch: %.1f" % [_peak_velocity, _total_scratches]
+	# Compose all readouts as lines on ONE surface. Values quantised so tiny
+	# per-frame jitter doesn't force a rebuild every frame (cache guard below).
+	var lines := [
+		"HARDWARE INPUTS", "",
+		"VELOCITY   %.2f m/s" % max_vel,
+		"GRIP       %.0f%%" % (max_grip * 100.0),
+		"HEAD ROT   %.2f r/s" % _head_angular_speed,
+		"SCRATCHES  %.0f%%" % (_display_scratch * 100.0),
+		"GRIME      %.0f%%" % (_display_grime * 100.0),
+		"ENTROPY    %.0f%%" % (_display_entropy * 100.0),
+		"DECAY      %.0f%%" % (_display_decay * 100.0),
+		"TIME       %.0fs" % _interaction_seconds, "",
+		"Peak %.1f  Total %.1f" % [_peak_velocity, _total_scratches],
+	]
+	var joined := "\n".join(PackedStringArray(lines))
+	if joined == _readout_cache:
+		return   # nothing changed — skip the rebuild
+	_readout_cache = joined
+	_rebuild_readout_block(lines)
 
 
 func _update_source_indicator() -> void:
-	if _source_label == null:
+	if _source_anchor == null:
 		return
 
+	var txt := ""
+	var col := Color.WHITE
+	var accent := Color(0.86, 0.40, 0.16)
 	if _paused:
-		_source_label.text = "[ PAUSED ]"
-		_source_label.modulate = Color(1.0, 0.5, 0.2)
+		txt = "[ PAUSED ]"
+		col = Color(1.0, 0.55, 0.25)
+		accent = Color(1.0, 0.55, 0.2)
 	else:
 		var xr_origin := _find_xr_origin()
 		if xr_origin:
-			_source_label.text = "[ VR HARDWARE ACTIVE ]"
-			_source_label.modulate = Color(0.3, 1.0, 0.4)
+			txt = "[ VR HARDWARE ACTIVE ]"
+			col = Color(0.4, 1.0, 0.5)
+			accent = Color(0.2, 0.9, 0.35)
 		else:
-			_source_label.text = "[ SIMULATED ENTROPY ]"
-			_source_label.modulate = Color(0.6, 0.6, 0.8)
+			txt = "[ SIMULATED ENTROPY ]"
+			col = Color(0.7, 0.7, 0.85)
+			accent = Color(0.4, 0.45, 0.7)
+
+	if txt == _source_cache:
+		return
+	_source_cache = txt
+
+	for child in _source_anchor.get_children():
+		child.queue_free()
+	var board := BakedText.make_tag(txt, col, 0.05, Color(0.05, 0.06, 0.08), false, accent)
+	if board:
+		_source_anchor.add_child(board)
 
 
 func _reset() -> void:

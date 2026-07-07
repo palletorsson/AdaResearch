@@ -542,7 +542,7 @@ def render_one(map_name: str, art_index: dict[str, dict],
         ],
     }
     (out_dir / "plans.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")
-    print(f"  ✓ {map_name}: {m['rows']}×{m['cols']}, {len(m['artifacts'])} artifacts")
+    print(f"  ok {map_name}: {m['rows']}×{m['cols']}, {len(m['artifacts'])} artifacts")
     return True
 
 
@@ -666,8 +666,9 @@ def render_dressing_room(room_path: Path, out_dir: Path) -> bool:
                     f'<rect x="{x}" y="{y}" width="{CELL}" height="{CELL}" '
                     f'fill="{height_color(level + 1)}" stroke="#0d0d12" stroke-width="0.4"/>'
                 )
-        # Artifact on top of anchor's column.
-        ac = anchor[1]
+        # Artifact on top of anchor's column. Dressing-room anchors are stored
+        # as floats (e.g. [1.0, 1.0]) — coerce to an int index and clamp in range.
+        ac = max(0, min(cols - 1, int(round(float(anchor[1])))))
         col_h = col_max[ac]
         cx3 = margin + ac * CELL + CELL / 2
         rect_h = max(0.4, fp[2]) * CELL * 0.9
@@ -680,7 +681,7 @@ def render_dressing_room(room_path: Path, out_dir: Path) -> bool:
         )
         ep.append(svg_close())
         (out_dir / "elevation.svg").write_text("\n".join(ep), encoding="utf-8")
-    print(f"  ✓ {name}: {cols}×{rows} footing, {len(extras)} extras")
+    print(f"  ok {name}: {cols}×{rows} footing, {len(extras)} extras")
     return True
 
 

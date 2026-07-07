@@ -2,6 +2,8 @@
 extends Node3D
 class_name BiasVisualizer
 
+const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
+
 # @identity
 # essence: embedding_space(words, gender_axis) -> proximity_reveals_prejudice
 # desire: see whose edge cases the training data forgot
@@ -87,9 +89,9 @@ var _word_mm: MultiMesh
 var _word_mmi: MultiMeshInstance3D
 var _connection_lines: ImmediateMesh
 var _connection_instance: MeshInstance3D
-var _title_label: Label3D
-var _equation_label: Label3D
-var _explanation_label: Label3D
+var _header_root: Node3D
+var _front_root: Node3D
+var _header_cache := ""
 var _control_panel: Node3D
 var _rotation_enabled: bool = false
 var _created_nodes: Array[Node] = []
@@ -121,51 +123,98 @@ func _create_base():
 	add_child(base)
 	_created_nodes.append(base)
 
-	# Gender axis indicators
-	var axis_label_m = Label3D.new()
-	axis_label_m.text = "♂"
-	axis_label_m.pixel_size = 0.003
-	axis_label_m.font_size = 32
-	axis_label_m.position = Vector3(-display_size * 0.5, 0.02, 0)
-	axis_label_m.modulate = male_color
-	add_child(axis_label_m)
-	_created_nodes.append(axis_label_m)
+	# Gender axis indicators — framed 2D-in-3D tags (R-027), not bare Label3D
+	var axis_tag_m: Node3D = BakedText.make_tag("♂ MASC", male_color, 0.05)
+	if axis_tag_m:
+		axis_tag_m.position = Vector3(-display_size * 0.5, 0.09, 0)
+		add_child(axis_tag_m)
+		_created_nodes.append(axis_tag_m)
 
-	var axis_label_f = Label3D.new()
-	axis_label_f.text = "♀"
-	axis_label_f.pixel_size = 0.003
-	axis_label_f.font_size = 32
-	axis_label_f.position = Vector3(display_size * 0.5, 0.02, 0)
-	axis_label_f.modulate = female_color
-	add_child(axis_label_f)
-	_created_nodes.append(axis_label_f)
+	var axis_tag_f: Node3D = BakedText.make_tag("♀ FEM", female_color, 0.05)
+	if axis_tag_f:
+		axis_tag_f.position = Vector3(display_size * 0.5, 0.09, 0)
+		add_child(axis_tag_f)
+		_created_nodes.append(axis_tag_f)
 
 func _create_labels():
-	_title_label = Label3D.new()
-	_title_label.name = "TitleLabel"
-	_title_label.pixel_size = 0.003
-	_title_label.font_size = 28
-	_title_label.position = Vector3(0, display_size * 0.7, -display_size * 0.5)
-	add_child(_title_label)
-	_created_nodes.append(_title_label)
+	# Header + explanation live on framed display boards (R-027); content is
+	# rebuilt by _rebuild_header() whenever the analogy changes.
+	pass
 
-	_equation_label = Label3D.new()
-	_equation_label.name = "EquationLabel"
-	_equation_label.pixel_size = 0.002
-	_equation_label.font_size = 24
-	_equation_label.position = Vector3(0, display_size * 0.55, -display_size * 0.5)
-	_equation_label.modulate = Color(0.9, 0.9, 0.5)
-	add_child(_equation_label)
-	_created_nodes.append(_equation_label)
+func _rebuild_header(title: String, equation: String, explanation: String) -> void:
+	var key := title + "|" + equation + "|" + explanation
+	if key == _header_cache:
+		return
+	_header_cache = key
+	if is_instance_valid(_header_root):
+		_header_root.queue_free()
+	if is_instance_valid(_front_root):
+		_front_root.queue_free()
+	var ds := display_size
 
-	_explanation_label = Label3D.new()
-	_explanation_label.name = "ExplanationLabel"
-	_explanation_label.pixel_size = 0.0015
-	_explanation_label.font_size = 20
-	_explanation_label.position = Vector3(0, 0.05, display_size * 0.55)
-	_explanation_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	add_child(_explanation_label)
-	_created_nodes.append(_explanation_label)
+	# back board: title + equation on one dark framed panel
+	_header_root = Node3D.new()
+	_header_root.name = "HeaderBoard"
+	_header_root.position = Vector3(0, ds * 0.62, -ds * 0.5)
+	add_child(_header_root)
+	_header_root.add_child(_plate(Vector3(ds * 1.15, ds * 0.3, 0.035)))
+	var t: MeshInstance3D = BakedText.make_label_mesh(title, Color(0.92, 0.95, 1.0), Vector2(ds * 0.98, ds * 0.085), 1300, true)
+	if t:
+		t.position = Vector3(0, ds * 0.062, 0.024)
+		_header_root.add_child(t)
+	var eq: MeshInstance3D = BakedText.make_label_mesh(equation, Color(0.9, 0.9, 0.5), Vector2(ds * 0.92, ds * 0.068), 1300, true)
+	if eq:
+		eq.position = Vector3(0, -ds * 0.055, 0.024)
+		_header_root.add_child(eq)
+
+	# front board: the explanation, wrapped to two lines, at reading height
+	_front_root = Node3D.new()
+	_front_root.name = "ExplanationBoard"
+	_front_root.position = Vector3(0, 0.22, ds * 0.55)
+	add_child(_front_root)
+	var rows := _wrap2(explanation)
+	_front_root.add_child(_plate(Vector3(ds * 1.05, 0.09 * rows.size() + 0.12, 0.035)))
+	var y := 0.045 * (rows.size() - 1)
+	for r in rows:
+		var q: MeshInstance3D = BakedText.make_label_mesh(str(r), Color(0.85, 0.88, 0.92), Vector2(ds * 0.95, 0.075), 1300, true)
+		if q:
+			q.position = Vector3(0, y, 0.024)
+			_front_root.add_child(q)
+		y -= 0.09
+
+func _wrap2(text: String) -> Array:
+	if text.length() < 46:
+		return [text]
+	var mid := text.length() / 2
+	var cut := text.find(" ", mid)
+	if cut < 0:
+		return [text]
+	return [text.substr(0, cut), text.substr(cut + 1)]
+
+func _plate(size: Vector3) -> Node3D:
+	var g := Node3D.new()
+	var frame := MeshInstance3D.new()
+	var fm := BoxMesh.new()
+	fm.size = size + Vector3(0.05, 0.05, -0.01)
+	frame.mesh = fm
+	var fmat := StandardMaterial3D.new()
+	fmat.albedo_color = Color(0.62, 0.60, 0.56)
+	fmat.roughness = 0.7
+	frame.material_override = fmat
+	frame.position = Vector3(0, 0, -0.006)
+	g.add_child(frame)
+	var face := MeshInstance3D.new()
+	var bm := BoxMesh.new()
+	bm.size = size
+	face.mesh = bm
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color(0.10, 0.11, 0.14)
+	mat.emission_enabled = true
+	mat.emission = Color(0.10, 0.11, 0.14)
+	mat.emission_energy_multiplier = 0.25
+	face.material_override = mat
+	g.add_child(face)
+	return g
 
 func _create_word_cloud():
 	var words = WORD_DATA.keys()
@@ -221,13 +270,9 @@ func _create_word_cloud():
 		_word_mm.set_instance_transform(i, xf)
 		_word_mm.set_instance_color(i, color)
 
-		var label = Label3D.new()
-		label.text = word
-		label.pixel_size = 0.0015
-		label.font_size = 16
-		label.position = pos + Vector3(0, word_scale * 1.5, 0)
+		var label: Node3D = BakedText.make_tag(word, color, 0.035)
+		label.position = pos + Vector3(0, word_scale * 2.4, 0)
 		label.visible = false
-		label.modulate = color
 		add_child(label)
 		_created_nodes.append(label)
 
@@ -298,9 +343,7 @@ func _show_analogy():
 			_word_mm.set_instance_transform(info.index, xf)
 			info.label.visible = true
 	
-	_title_label.text = analogy.title
-	_equation_label.text = analogy.equation
-	_explanation_label.text = analogy.explanation
+	_rebuild_header(analogy.title, analogy.equation, analogy.explanation)
 	
 	_draw_connections(analogy.words)
 

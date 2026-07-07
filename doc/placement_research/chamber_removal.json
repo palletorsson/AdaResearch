@@ -1,0 +1,187 @@
+{
+  "applied": true,
+  "plan": [
+    {
+      "sequence": "array_tutorial",
+      "file": "commons\\maps\\sequences\\array_tutorial.json",
+      "removed": [
+        "Chamber_Arrays"
+      ],
+      "remaining_maps": 7,
+      "beats_file_chamber_beats_cleared": []
+    },
+    {
+      "sequence": "cellularautomata",
+      "file": "commons\\maps\\sequences\\cellularautomata.json",
+      "removed": [
+        "Chamber_CA"
+      ],
+      "remaining_maps": 8,
+      "beats_file_chamber_beats_cleared": []
+    },
+    {
+      "sequence": "change",
+      "file": "commons\\maps\\sequences\\change.json",
+      "removed": [
+        "Chamber_Change"
+      ],
+      "remaining_maps": 8,
+      "beats_file_chamber_beats_cleared": []
+    },
+    {
+      "sequence": "color",
+      "file": "commons\\maps\\sequences\\color.json",
+      "removed": [
+        "Chamber_Color"
+      ],
+      "remaining_maps": 7,
+      "beats_file_chamber_beats_cleared": [
+        "C8"
+      ]
+    },
+    {
+      "sequence": "facade_assembly",
+      "file": "commons\\maps\\sequences\\facade_assembly.json",
+      "removed": [
+        "Chamber_Facade"
+      ],
+      "remaining_maps": 8,
+      "beats_file_chamber_beats_cleared": []
+    },
+    {
+      "sequence": "forces",
+      "file": "commons\\maps\\sequences\\forces.json",
+      "removed": [
+        "Chamber_Forces"
+      ],
+      "remaining_maps": 9,
+      "beats_file_chamber_beats_cleared": []
+    },
+    {
+      "sequence": "foundationscrisis",
+      "file": "commons\\maps\\sequences\\foundationscrisis.json",
+      "removed": [
+        "Chamber_Foundations"
+      ],
+      "remaining_maps": 8,
+      "beats_file_chamber_beats_cleared": [
+        "F9"
+      ]
+    },
+    {
+      "sequence": "fractals",
+      "file": "commons\\maps\\sequences\\fractals.json",
+      "removed": [
+        "Chamber_Fractals"
+      ],
+      "remaining_maps": 10,
+      "beats_file_chamber_beats_cleared": []
+    },
+    {
+      "sequence": "lsystems",
+      "file": "commons\\maps\\sequences\\lsystems.json",
+      "removed": [
+        "Chamber_LSystems"
+      ],
+      "remaining_maps": 6,
+      "beats_file_chamber_beats_cleared": []
+    },
+    {
+      "sequence": "machinelearning",
+      "file": "commons\\maps\\sequences\\machinelearning.json",
+      "removed": [
+        "Chamber_ML"
+      ],
+      "remaining_maps": 8,
+      "beats_file_chamber_beats_cleared": []
+    },
+    {
+      "sequence": "noise",
+      "file": "commons\\maps\\sequences\\noise.json",
+      "removed": [
+        "Chamber_Noise"
+      ],
+      "remaining_maps": 9,
+      "beats_file_chamber_beats_cleared": [
+        "N10"
+      ]
+    },
+    {
+      "sequence": "primitives",
+      "file": "commons\\maps\\sequences\\primitives.json",
+      "removed": [
+        "Grown_primitives_w0",
+        "Grown_primitives_w1",
+        "Grown_primitives_w2",
+        "Chamber_Primitives"
+      ],
+      "remaining_maps": 12,
+      "beats_file_chamber_beats_cleared": [
+        "P13"
+      ]
+    },
+    {
+      "sequence": "proceduralgeneration",
+      "file": "commons\\maps\\sequences\\proceduralgeneration.json",
+      "removed": [
+        "Chamber_ProcGen"
+      ],
+      "remaining_maps": 7,
+      "beats_file_chamber_beats_cleared": []
+    },
+    {
+      "sequence": "qfeplaboratory",
+      "file": "commons\\maps\\sequences\\qfeplaboratory.json",
+      "removed": [
+        "Chamber_QFEP"
+      ],
+      "remaining_maps": 8,
+      "beats_file_chamber_beats_cleared": []
+    },
+    {
+      "sequence": "randomness",
+      "file": "commons\\maps\\sequences\\randomness.json",
+      "removed": [
+        "Chamber_Random"
+      ],
+      "remaining_maps": 13,
+      "beats_file_chamber_beats_cleared": [
+        "R14"
+      ]
+    },
+    {
+      "sequence": "swarmintelligence",
+      "file": "commons\\maps\\sequences\\swarmintelligence.json",
+      "removed": [
+        "Chamber_Swarm"
+      ],
+      "remaining_maps": 7,
+      "beats_file_chamber_beats_cleared": []
+    },
+    {
+      "sequence": "transformation",
+      "file": "commons\\maps\\sequences\\transformation.json",
+      "removed": [
+        "Chamber_Transformation"
+      ],
+      "remaining_maps": 7,
+      "beats_file_chamber_beats_cleared": [
+        "T8"
+      ]
+    },
+    {
+      "sequence": "wavefunctions",
+      "file": "commons\\maps\\sequences\\wavefunctions.json",
+      "removed": [
+        "Chamber_Waves"
+      ],
+      "remaining_maps": 12,
+      "beats_file_chamber_beats_cleared": [
+        "W13"
+      ]
+    }
+  ],
+  "skipped": [
+    "softbodies"
+  ]
+}

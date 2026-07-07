@@ -1,0 +1,145 @@
+{
+  "report_date": "2026-06-15",
+  "generated": "2026-06-15T00:00:00",
+  "period": "2026-06-01 to 2026-06-15",
+  "trigger": "scheduled-task: ada-weekly-audit",
+  "previous_report": "doc/reports/weekly_breath_report_2026-06-01.json",
+  "mode": "audit (dry-run breather + release gates + trajectory diff)",
+  "note_period_length": "This period spans 14 days, not 7 — the 2026-06-08 weekly audit was not run (no weekly_breath_report_2026-06-08.json exists). This report covers everything since the last filed audit (2026-06-01).",
+  "headline": "REGRESSION AT THE CEILING. The structural ceiling held all period (all 22 spine sequences pinned at HEAD 6 vr_testing, peaking at head-sum 6.0909 on 06-11/06-13/06-14), then a recurring documentation regression clawed back gains. As of this audit the forces sequence is at stage 2 (96% docs): the new Sky_Climb fly-up course (commit fe190e12a) was committed WITHOUT a blurb.md, and Reformed_Instruments is missing its title field. Current head-sum 5.864, down -0.181 from last week's 6.045. This is the SECOND consecutive 2-day cycle (06-14 recovered forces+color, 06-15 forces re-broke) of the watch-item failure mode seeded 2026-06-14: 'a map committed without companion docs regresses its sequence documentation stage.' It has now recurred and should be escalated.",
+
+  "total_breaths_in_period": 8,
+  "breaths_in_period": [
+    "2026-06-02T09:05",
+    "2026-06-05T09:05",
+    "2026-06-06T09:05",
+    "2026-06-07T09:08",
+    "2026-06-11T09:10",
+    "2026-06-13T09:10",
+    "2026-06-14T09:10",
+    "2026-06-15T09:10"
+  ],
+
+  "pipeline_snapshot": {
+    "global_avg_pipeline_head_sum_now": 5.864,
+    "global_avg_pipeline_head_sum_last_week": 6.045,
+    "global_avg_pipeline_delta_week_over_week": -0.181,
+    "period_peak": 6.0909,
+    "period_peak_dates": ["2026-06-11", "2026-06-13", "2026-06-14"],
+    "computation_now": "(20 sequences at stage 6 * 6) + (randomness at stage 7 * 7) + (forces at stage 2 * 2) = 120 + 7 + 2 = 129; 129 / 22 = 5.864",
+    "sequences_at_stage_7_polish": ["randomness"],
+    "sequences_below_stage_6": ["forces"],
+    "forces_regression": {
+      "current_head": "stage 2: documentation (96%)",
+      "root_cause": "New maps committed without companion blurb/intent docs.",
+      "specific_gaps": [
+        "Sky_Climb — no blurb.md (added by commit fe190e12a 'feat(forces): Sky_Climb fly-up course')",
+        "Reformed_Instruments — no title field in map_data.json",
+        "Sky_Climb — artifact 'calder_mobile_primaries' not found in any registry (Gate B contributor)"
+      ],
+      "sequence_contract_drift": "forces sequence JSON declares 18 content entries but 23 map folders exist on disk (5 undeclared)."
+    }
+  },
+
+  "trajectory_history_tail": [
+    {"date": "2026-06-02", "avg": 5.96},
+    {"date": "2026-06-05", "avg": 6.0909},
+    {"date": "2026-06-06", "avg": 6.0909},
+    {"date": "2026-06-07", "avg": 5.91},
+    {"date": "2026-06-11", "avg": 6.0909},
+    {"date": "2026-06-13", "avg": 6.0909},
+    {"date": "2026-06-14", "avg": 6.0909},
+    {"date": "2026-06-15", "avg": 6.045, "note": "morning-breath post_avg; re-regressed to 5.864 by later same-day forces commits (Sky_Climb / Calder mobile)"}
+  ],
+
+  "sequences_improved_this_period": [
+    "color — recovered from a silent stage-6→stage-2 documentation regression on 2026-06-14 (Pattern_Foundry, Reformed_Instruments docs restored)",
+    "forces — recovered on 2026-06-14, then re-regressed on 2026-06-15 (net negative; see regression block)",
+    "machinelearning / graphtheory — Void_Crossing and related docs touched on 2026-06-15"
+  ],
+
+  "total_delta": {
+    "week_over_week_head_sum": -0.181,
+    "interpretation": "Net regression. The autonomous engine repeatedly restored documentation (06-11 +0.136, 06-14 +0.3636, 06-15 +0.182 intra-day), but each gain was clawed back by undocumented new map commits. The engine is running hot and effective; the leak is upstream of it (commit discipline)."
+  },
+
+  "skill_effectiveness_changes": {
+    "summary": "No effectiveness regressions. Every skill family invoked this period succeeded 100%. No skill posted a 3+-failure pattern; no new skill_evolution proposal warranted on effectiveness grounds.",
+    "families_exercised_this_period": {
+      "documentation_writing": "06-14 (5 maps) + 06-15 (1 map: Void_Crossing) — the dominant lever; 6/6 success. Re-confirmed as the autonomous tool for recovering doc-stage regressions.",
+      "identity_writing / voicing": "06-06, 06-07, 06-13 (15 teaching artifacts voiced) — 15/15 success.",
+      "godot_capture_pipeline": "06-02, 06-05 (stage-7 polish captures) — success.",
+      "tool_bug_fix": "06-02 (CAPTURES_DIR path), 06-11 (scorer delegate-to resolution) — success."
+    },
+    "cumulative_success_rates_unchanged": true
+  },
+
+  "proposals_pending_review": {
+    "count": 5,
+    "all_status": "proposed (none applied)",
+    "file": "doc/reports/skill_evolution_proposals.json",
+    "items": [
+      {"id": "prop-001", "skill": "ada-breather", "gist": "garden_identity_leverage pre-check in Evaluate"},
+      {"id": "prop-002", "skill": "ada-breather", "gist": "deferral re-validation step in Read/Evaluate — STRONG apply recommendation"},
+      {"id": "prop-003", "skill": "ada-breather", "gist": "wall-detection pre-check (stage-6 ceiling) — now safe to apply (gated on prop-005)"},
+      {"id": "prop-004", "skill": "ada-breather", "gist": "crash-safe-write rule in Harvest — STRONG apply recommendation"},
+      {"id": "prop-005", "skill": "ada-breather", "gist": "convention-drift cross-check in Read/Evaluate — STRONG apply recommendation"}
+    ],
+    "recommendation": "Apply prop-002, prop-004, prop-005 (strongest standing) and prop-003 via /ada-skill-updater. They have been past threshold and status=proposed for multiple weekly audits."
+  },
+
+  "stall_analysis": {
+    "stall_flagged": true,
+    "stall_type": "structural-ceiling + recurring-doc-regression (NOT an engine stall)",
+    "criterion": "global_avg has not improved over the trailing 7 days (2026-06-08 → 2026-06-15): from the 6.0909 peak it is now 5.864, a net decline.",
+    "diagnosis": [
+      "1. STRUCTURAL CEILING (known, 5+ breaths): all 22 spine sequences are pinned at HEAD 6 (vr_testing). Stage 6 cannot be advanced by autonomous breaths — it requires a human VR walk session with bridge feedback. This caps head-sum at ~6.0909 regardless of breath effort. Confirmed every audit since 2026-05-30.",
+      "2. RECURRING DOCUMENTATION REGRESSION (new, escalating): new maps are being committed without companion blurb.md/intent.md/title, silently dropping their sequence from stage 6 back to stage 2. This happened to color+forces on 06-14 (recovered) and forces AGAIN on 06-15 (Sky_Climb, not yet recovered). This is the 2nd occurrence of the watch-item seeded 2026-06-14 and is now a confirmed recurring pattern — it crosses the escalation threshold.",
+      "3. The breath engine itself is HEALTHY: it detected and repaired both regressions within a day, with 100% skill success. The problem is upstream commit discipline, not the autonomous loop."
+    ],
+    "why_not_a_true_stall": "Unlike the 25-day 5.43 plateau (broken 2026-05-27), this is not the engine running out of moves. It is (a) a hard ceiling only a human can lift, and (b) a leak that re-opens faster than breaths can patch it. Both are diagnosable and actionable.",
+    "recommended_remediation": [
+      "IMMEDIATE (autonomous, next full breath): write blurb.md for Sky_Climb and add the missing title to Reformed_Instruments → restores forces stage 2→6, recovering +0.181 (head-sum back to 6.045/6.0909).",
+      "REGISTRY: register or alias the 'calder_mobile_primaries' artifact referenced by Sky_Climb (Gate B missing-token contributor).",
+      "CONTRACT: reconcile the forces sequence JSON (18 declared) against the 23 map folders on disk — declare the 5 undeclared maps or move them out of the sequence dir (Gate A undeclared_map_folders: 652 project-wide).",
+      "PROCESS (escalate watch-item to proposal): adopt a commit-discipline rule — 'doc a map in the same commit that declares it' — so new maps ship with blurb/intent/title and never silently regress their sequence. Candidate for a new skill_evolution proposal (prop-006) or a pre-commit gate.",
+      "HUMAN LEVER: the only path past 6.0909 is a VR walk session (stage 6 → stage 7). Recommend scheduling one to convert the saturated spine into polish-stage progress."
+    ]
+  },
+
+  "release_gates": {
+    "overall": "FAIL",
+    "enabled_passing": "2/4",
+    "gate_A_sequence_contract": {"status": "FAIL", "missing_declared_maps": 0, "duplicate_entries_within_sequence": 1, "undeclared_map_folders": 652},
+    "gate_B_artifact_registry": {"status": "FAIL", "unresolved_scene_files": 0, "missing_scene_path": 48, "missing_map_ready": 30, "missing_include_in_map_data": 30},
+    "gate_C_map_validation": {"status": "PASS", "grade_A": 932, "grade_B": 144, "grade_C": 159, "grade_F": 0},
+    "gate_D_lab_progression": {"status": "PASS", "lost_count": 0, "changed_count": 12, "total_issues": 39}
+  },
+
+  "garden_health": {
+    "voice_coverage": "51%",
+    "embodiment_rate": "33% of voiced artifacts have full bodies",
+    "phantom_limbs": 832,
+    "note": "Voicing remains the sustainable autonomous metric while the pipeline is ceiling-bound; 832 VR controls still needed to embody reaching artifacts."
+  },
+
+  "dry_run_work_plan": {
+    "focus": "auto-selected (FOCUS_VECTOR primary = primitives rebuild, but the hot signal is the forces regression)",
+    "trajectory": "declining (net -0.181 week-over-week; at/below structural ceiling)",
+    "items": [
+      {"rank": 1, "item": "forces / Sky_Climb blurb.md", "temperature": "60+ (forces documentation regression)", "reason": "New map shipped without docs; dropped forces stage 6→2.", "dispatch": "documentation_writing (ada-map-expert / ada-humanizer)", "expected": "+0.181 head-sum, forces back to stage 6"},
+      {"rank": 2, "item": "forces / Reformed_Instruments title", "temperature": "60+", "reason": "Missing title field fails verify_sequence + blurb-title alignment.", "dispatch": "direct_file_edit", "expected": "clears 1 of the forces doc-stage blockers"},
+      {"rank": 3, "item": "forces / calder_mobile_primaries registry", "temperature": "50 (Gate B)", "reason": "Artifact referenced by Sky_Climb not in any registry.", "dispatch": "registry_repair / registry_alias", "expected": "-1 missing-token, Gate B improvement"},
+      {"rank": 4, "item": "forces sequence contract (18 declared vs 23 folders)", "temperature": "60 (pipeline doc regression)", "reason": "Undeclared map folders inflate Gate A and confuse the scorer.", "dispatch": "ada-sequence-expert", "expected": "Gate A undeclared count drops; scorer stabilizes"},
+      {"rank": 5, "item": "garden voicing batch (next 5 from 62-item voiceless worklist)", "temperature": "60 (voicing)", "reason": "Sustainable autonomous metric while pipeline is ceiling-bound.", "dispatch": "identity_writing", "expected": "+5 voiced artifacts, voice coverage up"}
+    ],
+    "cooled_skipped": "none (no items in last-2-breath items_failed)"
+  },
+
+  "next_actions": [
+    "Run a full breath to execute work-plan items 1-3 (forces doc recovery) → restores head-sum to ~6.045.",
+    "Apply standing skill_evolution proposals prop-002/004/005 (+prop-003) via /ada-skill-updater — overdue across multiple audits.",
+    "Schedule a human VR walk session to lift any spine sequence from stage 6 → stage 7 (the only ceiling-breaking lever).",
+    "Escalate the 'doc a map in the same commit that declares it' watch-item to a formal proposal/pre-commit gate — it has now recurred."
+  ]
+}

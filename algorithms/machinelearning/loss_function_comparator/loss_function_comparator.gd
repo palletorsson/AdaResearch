@@ -18,6 +18,8 @@
 
 extends Node3D
 
+const BakedText = preload("res://commons/utils/baked_text_albedo.gd")
+
 # --- Configuration ---
 @export var terrain_resolution: int = 32
 @export var terrain_size: float = 0.5
@@ -34,10 +36,11 @@ var _balls: Array[MeshInstance3D] = []
 var _ball_positions: Array[Vector2] = []  # param space (x, z)
 var _trail_points: Array[Array] = [[], [], []]
 var _trail_meshes: Array[MeshInstance3D] = []
-var _labels: Array[Label3D] = []
-var _equation_labels: Array[Label3D] = []
-var _title_label: Label3D
-var _subtitle_label: Label3D
+# Integrated 2D-in-3D boards (baked-text, no floating Label3D):
+#   _legend_boards[t] — one per loss function: name + equation on a spaced tag.
+#   _title_board       — title + subtitle consolidated onto one panel.
+var _legend_boards: Array[Node3D] = []
+var _title_board: Node3D
 
 var _loss_names: Array[String] = ["MSE Loss", "Huber Loss", "Adversarial Loss"]
 var _loss_equations: Array[String] = [
@@ -305,47 +308,75 @@ func _gradient_step(loss_idx: int) -> void:
 # Labels
 # ------------------------------------------------------------------
 
+# Per-loss legend boards: name + equation as one spaced 2-line tag above each
+# terrain. Kept SEPARATE per function (they are the colour-coded legend) but the
+# name and its equation now share one integrated board so they never overlap.
 func _create_labels() -> void:
 	for t in range(3):
-		var lbl := Label3D.new()
-		lbl.text = _loss_names[t]
-		lbl.font_size = 16
-		lbl.modulate = _loss_colors[t]
-		lbl.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-		lbl.position = Vector3((t - 1) * spacing, terrain_height_scale + 0.08, 0)
-		lbl.pixel_size = 0.001
-		add_child(lbl)
-		_labels.append(lbl)
+		var board := Node3D.new()
+		board.name = "LegendBoard_%d" % t
+		board.position = Vector3((t - 1) * spacing, terrain_height_scale + 0.10, 0)
 
-		var eq_lbl := Label3D.new()
-		eq_lbl.text = _loss_equations[t]
-		eq_lbl.font_size = 11
-		eq_lbl.modulate = _loss_colors[t].lerp(Color.WHITE, 0.3)
-		eq_lbl.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-		eq_lbl.position = Vector3((t - 1) * spacing, terrain_height_scale + 0.04, 0)
-		eq_lbl.pixel_size = 0.001
-		add_child(eq_lbl)
-		_equation_labels.append(eq_lbl)
+		# Name — bright colour-coded line.
+		var name_mesh: MeshInstance3D = BakedText.make_label_mesh(
+			_loss_names[t], _loss_colors[t], Vector2(0.34, 0.05), 1400, true)
+		if name_mesh:
+			name_mesh.position = Vector3(0, 0.032, 0)
+			_billboard_mesh(name_mesh)
+			board.add_child(name_mesh)
+
+		# Equation — smaller, desaturated line, clearly gapped below the name.
+		var eq_mesh: MeshInstance3D = BakedText.make_label_mesh(
+			_loss_equations[t], _loss_colors[t].lerp(Color.WHITE, 0.45),
+			Vector2(0.40, 0.032), 1400, true)
+		if eq_mesh:
+			eq_mesh.position = Vector3(0, -0.020, 0)
+			_billboard_mesh(eq_mesh)
+			board.add_child(eq_mesh)
+
+		add_child(board)
+		_legend_boards.append(board)
 
 
+# Title + subtitle consolidated onto ONE opaque panel plate above the centre.
 func _create_title() -> void:
-	_title_label = Label3D.new()
-	_title_label.text = "Loss Function Comparator"
-	_title_label.font_size = 22
-	_title_label.modulate = Color(1, 1, 1, 0.9)
-	_title_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	_title_label.position = Vector3(0, 0.4, 0)
-	_title_label.pixel_size = 0.001
-	add_child(_title_label)
+	_title_board = Node3D.new()
+	_title_board.name = "TitleBoard"
+	_title_board.position = Vector3(0, 0.40, 0)
 
-	_subtitle_label = Label3D.new()
-	_subtitle_label.text = "Same data. Three loss functions. Three different answers."
-	_subtitle_label.font_size = 14
-	_subtitle_label.modulate = Color(0.8, 0.75, 0.7, 0.8)
-	_subtitle_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	_subtitle_label.position = Vector3(0, 0.35, 0)
-	_subtitle_label.pixel_size = 0.001
-	add_child(_subtitle_label)
+	# Opaque backing plate so the two lines read as one board.
+	var plate: MeshInstance3D = BakedText.make_panel_mesh(
+		"", Color(0.06, 0.07, 0.09, 1.0), Color.WHITE, Vector2(0.62, 0.14))
+	if plate:
+		plate.position = Vector3(0, 0, -0.004)
+		_billboard_mesh(plate)
+		_title_board.add_child(plate)
+
+	# Two text lines stacked on the plate face.
+	var block: Node3D = BakedText.make_text_block(
+		["Loss Function Comparator",
+		"Same data. Three loss functions. Three different answers."],
+		Color(0.95, 0.93, 0.90), 0.036, 0.58, 0.016, true)
+	if block:
+		block.position = Vector3(0, 0, 0.004)
+		_billboard_node(block)
+		_title_board.add_child(block)
+
+	add_child(_title_board)
+
+
+# Billboard a single baked-text quad toward the viewer.
+func _billboard_mesh(mesh: MeshInstance3D) -> void:
+	var m = mesh.material_override
+	if m is StandardMaterial3D:
+		m.billboard_mode = BaseMaterial3D.BILLBOARD_ENABLED
+
+
+# Billboard every baked-text quad inside a board node.
+func _billboard_node(node: Node3D) -> void:
+	for child in node.get_children():
+		if child is MeshInstance3D:
+			_billboard_mesh(child)
 
 
 # ------------------------------------------------------------------

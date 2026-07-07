@@ -73,29 +73,29 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 func _read_metadata_overrides() -> void:
 	if has_meta("config_grate_width"):
-		grate_width = float(String(get_meta("config_grate_width")))
+		grate_width = float(str(get_meta("config_grate_width")))
 	if has_meta("config_grate_depth"):
-		grate_depth = float(String(get_meta("config_grate_depth")))
+		grate_depth = float(str(get_meta("config_grate_depth")))
 	if has_meta("config_grate_height"):
-		grate_height = float(String(get_meta("config_grate_height")))
+		grate_height = float(str(get_meta("config_grate_height")))
 	if has_meta("config_bar_count_x"):
-		bar_count_x = int(String(get_meta("config_bar_count_x")))
+		bar_count_x = int(str(get_meta("config_bar_count_x")))
 	if has_meta("config_bar_count_z"):
-		bar_count_z = int(String(get_meta("config_bar_count_z")))
+		bar_count_z = int(str(get_meta("config_bar_count_z")))
 	if has_meta("config_bar_color"):
-		bar_color = _parse_color(String(get_meta("config_bar_color")), bar_color)
+		bar_color = _parse_color(str(get_meta("config_bar_color")), bar_color)
 	if has_meta("config_frame_color"):
-		frame_color = _parse_color(String(get_meta("config_frame_color")), frame_color)
+		frame_color = _parse_color(str(get_meta("config_frame_color")), frame_color)
 	if has_meta("config_accent_color"):
-		accent_color = _parse_color(String(get_meta("config_accent_color")), accent_color)
+		accent_color = _parse_color(str(get_meta("config_accent_color")), accent_color)
 	if has_meta("config_frame_visible"):
-		var fv := String(get_meta("config_frame_visible")).to_lower()
+		var fv := str(get_meta("config_frame_visible")).to_lower()
 		frame_visible = fv in ["true", "1", "yes", "on"]
 	if has_meta("config_accent_visible"):
-		var av := String(get_meta("config_accent_visible")).to_lower()
+		var av := str(get_meta("config_accent_visible")).to_lower()
 		accent_visible = av in ["true", "1", "yes", "on"]
 	if has_meta("config_wear_factor"):
-		wear_factor = float(String(get_meta("config_wear_factor")))
+		wear_factor = float(str(get_meta("config_wear_factor")))
 
 
 func _clear_built_children() -> void:

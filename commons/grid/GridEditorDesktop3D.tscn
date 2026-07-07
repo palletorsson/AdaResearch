@@ -1,9 +1,9 @@
-[gd_scene format=3 uid="uid://b2grid8editrdsk0"]
+[gd_scene format=3 uid="uid://nen0louawvak"]
 
-[ext_resource type="Script" path="res://commons/grid/GridEditorDesktop3D.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://dq4c7jvskjjgy" path="res://commons/grid/GridEditorDesktop3D.gd" id="1_script"]
 
-[node name="GridEditorDesktop3D" type="Node3D"]
+[node name="GridEditorDesktop3D" type="Node3D" unique_id=312721733]
 script = ExtResource("1_script")
 
-[node name="Camera" type="Camera3D" parent="."]
+[node name="Camera" type="Camera3D" parent="." unique_id=1099368500]
 fov = 60.0

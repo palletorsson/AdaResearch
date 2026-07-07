@@ -230,6 +230,12 @@ def load_raw_artifact_entries() -> list[dict[str, Any]]:
             if isinstance(map_sequences_raw, list):
                 map_sequences = [str(s).strip() for s in map_sequences_raw if isinstance(s, str) and str(s).strip()]
 
+            # Parametric variants render via delegation to a base artifact's scene
+            # (delegate_to + delegate_params) rather than owning a `scene` field.
+            # Such entries are not "missing" a scene — their scene resolves at runtime
+            # through the base artifact, which is itself audited independently.
+            delegate_to = str(value.get("delegate_to", "")).strip()
+
             artifact_type = str(value.get("artifact_type", "")).strip().lower()
             source_domain = ""
             if scene_path.startswith("res://algorithms/"):
@@ -244,6 +250,8 @@ def load_raw_artifact_entries() -> list[dict[str, Any]]:
                     "source_file": registry_file.name,
                     "scene_path": scene_path,
                     "scene_exists": scene_exists,
+                    "delegate_to": delegate_to,
+                    "has_delegate": bool(delegate_to),
                     "artifact_type": artifact_type,
                     "source_domain": source_domain,
                     "sequence": str(value.get("sequence", "")).strip().lower(),
@@ -495,7 +503,11 @@ def build_artifact_audit(limit: int = 200) -> dict[str, Any]:
     dict_rows = [r for r in rows if not r.get("issue_non_dict")]
 
     placeholder_entries = [r for r in dict_rows if r.get("artifact_type") == "placeholder"]
-    missing_scene_path = [r for r in dict_rows if not str(r.get("scene_path", "")).strip()]
+    missing_scene_path = [
+        r
+        for r in dict_rows
+        if not str(r.get("scene_path", "")).strip() and not r.get("has_delegate")
+    ]
     unsupported_scene_path = [
         r
         for r in dict_rows

@@ -65,7 +65,10 @@ var _section_headers: Array[Button] = []   # tracked for expand/collapse-all
 
 
 func _ready() -> void:
-	custom_minimum_size = Vector2(400, 0)
+	# Min width must stay under the catalog's responsive holder width
+	# (_refit_ui gives 288–420px) so the panel never overflows the window;
+	# the scroll body + EXPAND_FILL controls handle the rest.
+	custom_minimum_size = Vector2(270, 0)
 	mouse_filter = Control.MOUSE_FILTER_STOP
 	_build_ui()
 	# Any data mutation (footprint/extras/offset/etc.) should mark dirty.
@@ -167,7 +170,7 @@ func _build_ui() -> void:
 	quick_label.add_theme_font_size_override("font_size", 11)
 	outer.add_child(quick_label)
 	var quick_grid := GridContainer.new()
-	quick_grid.columns = 4
+	quick_grid.columns = 3   # 3 keeps the sticky toolbar within the panel width
 	quick_grid.add_theme_constant_override("h_separation", 3)
 	quick_grid.add_theme_constant_override("v_separation", 3)
 	outer.add_child(quick_grid)
@@ -268,13 +271,15 @@ func _build_ui() -> void:
 
 	foot_body.add_child(_make_subtle_label("Paint value (click a tile in 3D):"))
 	var val_grid := GridContainer.new()
-	val_grid.columns = 3
+	val_grid.columns = 5   # compact: number + tooltip, so the row stays narrow
 	val_grid.add_theme_constant_override("h_separation", 2)
 	val_grid.add_theme_constant_override("v_separation", 2)
 	foot_body.add_child(val_grid)
 	for v in TILE_VALUES:
 		var b := Button.new()
-		b.text = "%d  %s" % [v, TILE_NAMES.get(v, "")]
+		b.text = str(v)
+		b.tooltip_text = str(TILE_NAMES.get(v, ""))
+		b.custom_minimum_size = Vector2(34, 0)
 		b.toggle_mode = true
 		b.pressed.connect(_on_paint_value_pressed.bind(v))
 		val_grid.add_child(b)
@@ -526,15 +531,15 @@ func _make_option_button(options: Array) -> OptionButton:
 
 func _refresh_ui() -> void:
 	_saving = true
-	_name_label.text = String(data.get("lookup_name", "(unnamed)"))
+	_name_label.text = str(data.get("lookup_name", "(unnamed)"))
 	var fp: Array = data.get("footprint", [1.0, 1.0, 1.0])
 	if fp.size() >= 3:
 		_fp_w.value = float(fp[0])
 		_fp_d.value = float(fp[1])
 		_fp_h.value = float(fp[2])
 
-	_approach.selected = max(0, DIRECTIONS.find(String(data.get("approach", "south"))))
-	_exit.selected = max(0, DIRECTIONS.find(String(data.get("exit", "north"))))
+	_approach.selected = max(0, DIRECTIONS.find(str(data.get("approach", "south"))))
+	_exit.selected = max(0, DIRECTIONS.find(str(data.get("exit", "north"))))
 
 	var rots_raw: Array = data.get("rotations", ["0"])
 	var rots: Array[String] = []
@@ -567,7 +572,7 @@ func _refresh_ui() -> void:
 	for i in range(_note_tag_buttons.size()):
 		_note_tag_buttons[i].button_pressed = tag_list.has(NOTE_TAGS[i])
 	if _notes_text:
-		_notes_text.text = String(notes.get("text", ""))
+		_notes_text.text = str(notes.get("text", ""))
 
 	_rebuild_extras_list()
 	_saving = false
@@ -713,14 +718,14 @@ func _make_extra_row(idx: int, extra: Variant) -> Control:
 	var type_btn := OptionButton.new()
 	for t in EXTRA_TYPES:
 		type_btn.add_item(t)
-	type_btn.selected = max(0, EXTRA_TYPES.find(String(e.get("type", "3t"))))
+	type_btn.selected = max(0, EXTRA_TYPES.find(str(e.get("type", "3t"))))
 	type_btn.item_selected.connect(_on_extra_type_changed.bind(idx))
 	row.add_child(type_btn)
 
 	var content := LineEdit.new()
 	content.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	content.placeholder_text = "text / key / params"
-	content.text = String(e.get("text", e.get("key", e.get("params", e.get("value", "")))))
+	content.text = str(e.get("text", e.get("key", e.get("params", e.get("value", "")))))
 	content.text_submitted.connect(func(t): _set_extra_content(idx, t))
 	content.focus_exited.connect(func(): _set_extra_content(idx, content.text))
 	row.add_child(content)
@@ -758,7 +763,7 @@ func _on_extra_type_changed(new_idx: int, extra_idx: int) -> void:
 	var e: Dictionary = extras[extra_idx] if extras[extra_idx] is Dictionary else {}
 	var new_type: String = EXTRA_TYPES[new_idx]
 	# Migrate the content key so the existing text becomes the new field.
-	var existing: String = String(e.get("text", e.get("key", e.get("params", e.get("value", "")))))
+	var existing: String = str(e.get("text", e.get("key", e.get("params", e.get("value", "")))))
 	for k in ["text", "key", "params", "value"]:
 		e.erase(k)
 	e["type"] = new_type
@@ -776,7 +781,7 @@ func _set_extra_content(extra_idx: int, value: String) -> void:
 	var extras: Array = data.get("extras", [])
 	if extra_idx >= extras.size(): return
 	var e: Dictionary = extras[extra_idx] if extras[extra_idx] is Dictionary else {}
-	match String(e.get("type", "3t")):
+	match str(e.get("type", "3t")):
 		"3t": e["text"] = value
 		"tt": e["key"] = value
 		"el": e["params"] = value

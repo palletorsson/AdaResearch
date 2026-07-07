@@ -69,32 +69,32 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 func _read_metadata_overrides() -> void:
 	if has_meta("config_bowl_radius"):
-		bowl_radius = float(String(get_meta("config_bowl_radius")))
+		bowl_radius = float(str(get_meta("config_bowl_radius")))
 	if has_meta("config_bowl_height"):
-		bowl_height = float(String(get_meta("config_bowl_height")))
+		bowl_height = float(str(get_meta("config_bowl_height")))
 	if has_meta("config_glass_color"):
-		glass_color = _parse_color(String(get_meta("config_glass_color")), glass_color)
+		glass_color = _parse_color(str(get_meta("config_glass_color")), glass_color)
 	if has_meta("config_glass_emission"):
-		glass_emission = float(String(get_meta("config_glass_emission")))
+		glass_emission = float(str(get_meta("config_glass_emission")))
 	if has_meta("config_water_color"):
-		water_color = _parse_color(String(get_meta("config_water_color")), water_color)
+		water_color = _parse_color(str(get_meta("config_water_color")), water_color)
 	if has_meta("config_water_height_fraction"):
-		water_height_fraction = float(String(get_meta("config_water_height_fraction")))
+		water_height_fraction = float(str(get_meta("config_water_height_fraction")))
 	if has_meta("config_fish_color"):
-		fish_color = _parse_color(String(get_meta("config_fish_color")), fish_color)
+		fish_color = _parse_color(str(get_meta("config_fish_color")), fish_color)
 	if has_meta("config_trail_color"):
-		trail_color = _parse_color(String(get_meta("config_trail_color")), trail_color)
+		trail_color = _parse_color(str(get_meta("config_trail_color")), trail_color)
 	if has_meta("config_accent_color"):
-		accent_color = _parse_color(String(get_meta("config_accent_color")), accent_color)
+		accent_color = _parse_color(str(get_meta("config_accent_color")), accent_color)
 	if has_meta("config_fish_count"):
-		fish_count = int(String(get_meta("config_fish_count")))
+		fish_count = int(str(get_meta("config_fish_count")))
 	if has_meta("config_fish_trail_visible"):
-		var fv := String(get_meta("config_fish_trail_visible")).to_lower()
+		var fv := str(get_meta("config_fish_trail_visible")).to_lower()
 		fish_trail_visible = fv in ["true", "1", "yes", "on"]
 	if has_meta("config_trail_dot_count"):
-		trail_dot_count = int(String(get_meta("config_trail_dot_count")))
+		trail_dot_count = int(str(get_meta("config_trail_dot_count")))
 	if has_meta("config_bubble_count"):
-		bubble_count = int(String(get_meta("config_bubble_count")))
+		bubble_count = int(str(get_meta("config_bubble_count")))
 
 
 func _clear_built_children() -> void:

@@ -73,21 +73,21 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 func _read_metadata_overrides() -> void:
 	if has_meta("config_seat_height"):
-		seat_height = float(String(get_meta("config_seat_height")))
+		seat_height = float(str(get_meta("config_seat_height")))
 	if has_meta("config_seat_radius"):
-		seat_radius = float(String(get_meta("config_seat_radius")))
+		seat_radius = float(str(get_meta("config_seat_radius")))
 	if has_meta("config_base_radius"):
-		base_radius = float(String(get_meta("config_base_radius")))
+		base_radius = float(str(get_meta("config_base_radius")))
 	if has_meta("config_seat_color"):
-		seat_color = _parse_color(String(get_meta("config_seat_color")), seat_color)
+		seat_color = _parse_color(str(get_meta("config_seat_color")), seat_color)
 	if has_meta("config_post_color"):
-		post_color = _parse_color(String(get_meta("config_post_color")), post_color)
+		post_color = _parse_color(str(get_meta("config_post_color")), post_color)
 	if has_meta("config_accent_color"):
-		accent_color = _parse_color(String(get_meta("config_accent_color")), accent_color)
+		accent_color = _parse_color(str(get_meta("config_accent_color")), accent_color)
 	if has_meta("config_base_style"):
-		base_style = String(get_meta("config_base_style")).to_lower()
+		base_style = str(get_meta("config_base_style")).to_lower()
 	if has_meta("config_accent_strip"):
-		var v := String(get_meta("config_accent_strip")).to_lower()
+		var v := str(get_meta("config_accent_strip")).to_lower()
 		accent_strip = v in ["true", "1", "yes", "on"]
 
 

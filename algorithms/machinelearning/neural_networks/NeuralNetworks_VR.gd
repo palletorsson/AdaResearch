@@ -1,5 +1,7 @@
 extends Node3D
 
+const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
+
 # @identity
 # essence: layers of neurons connected by weighted edges; forward pass propagates signal, backward pass propagates error
 # desire: walk through each layer as a physical room, throw data into the input, watch activations cascade and gradients flow back
@@ -42,6 +44,8 @@ var time: float = 0.0
 var training_progress: float = 0.0
 var loss: float = 1.0
 var epoch: int = 0
+var _metrics_board: Node3D
+var _metrics_cache := ""
 
 # Network structure
 var layers: Array = []  # Each layer contains array of neuron nodes
@@ -184,14 +188,8 @@ func _create_neuron(layer_idx: int, neuron_idx: int) -> RigidBody3D:
 		body.collision_layer = 1 | (1 << 20)
 		body.collision_mask = 1
 
-	# Small label showing activation value
-	var label = Label3D.new()
-	label.text = "%.2f" % activations[layer_idx][neuron_idx]
-	label.font_size = 20
-	label.outline_size = 6
-	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	label.position = Vector3(0, neuron_size + 0.2, 0)
-	body.add_child(label)
+	# R-027: per-neuron numeric labels removed — the emission brightness and
+	# pulse already encode activation; twenty floating numbers were noise.
 
 	return body
 
@@ -250,25 +248,23 @@ func _create_layer_room(layer_container: Node3D, layer_idx: int) -> void:
 	layer_container.add_child(grid_mmi)
 
 func _create_layer_label(layer_container: Node3D, layer_idx: int) -> void:
-	"""Create floating label for layer"""
-	var label = Label3D.new()
-
+	"""Framed 2D-in-3D tag for each layer (R-027)"""
+	var text: String
+	var color: Color
 	if layer_idx == 0:
-		label.text = "INPUT LAYER\n%d neurons" % layer_sizes[layer_idx]
-		label.modulate = Color(0.3, 0.5, 0.9)
+		text = "INPUT LAYER — %d neurons" % layer_sizes[layer_idx]
+		color = Color(0.3, 0.5, 0.9)
 	elif layer_idx == layer_sizes.size() - 1:
-		label.text = "OUTPUT LAYER\n%d neurons" % layer_sizes[layer_idx]
-		label.modulate = Color(0.9, 0.3, 0.3)
+		text = "OUTPUT LAYER — %d neurons" % layer_sizes[layer_idx]
+		color = Color(0.9, 0.3, 0.3)
 	else:
-		label.text = "HIDDEN LAYER %d\n%d neurons" % [layer_idx, layer_sizes[layer_idx]]
-		label.modulate = Color(0.3, 0.9, 0.5)
+		text = "HIDDEN LAYER %d — %d neurons" % [layer_idx, layer_sizes[layer_idx]]
+		color = Color(0.3, 0.9, 0.5)
 
-	label.font_size = 48
-	label.outline_size = 12
-	label.outline_modulate = Color.BLACK
-	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	label.position = Vector3(0, room_height / 2.0 + 1.5, 0)
-	layer_container.add_child(label)
+	var tag: Node3D = BakedText.make_tag(text, color, 0.16)
+	if tag:
+		tag.position = Vector3(0, room_height / 2.0 + 1.5, 0)
+		layer_container.add_child(tag)
 
 func _create_weight_connections() -> void:
 	"""Create visual lines showing weights between neurons"""
@@ -344,15 +340,11 @@ func _create_data_input_area() -> void:
 	platform.position = Vector3(-3.0, -room_height / 2.0, 0)
 	add_child(platform)
 
-	# Label
-	var label = Label3D.new()
-	label.text = "TRAINING DATA\nThrow into network"
-	label.font_size = 44
-	label.outline_size = 10
-	label.modulate = Color(0.9, 0.9, 0.3)
-	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	label.position = Vector3(-3.0, 0, 0)
-	add_child(label)
+	# Framed tag (R-027)
+	var tag: Node3D = BakedText.make_tag("TRAINING DATA — throw into network", Color(0.9, 0.9, 0.3), 0.14)
+	if tag:
+		tag.position = Vector3(-3.0, 0, 0)
+		add_child(tag)
 
 	# Create throwable data particles
 	for i in range(10):
@@ -503,43 +495,48 @@ func _create_control_panel() -> void:
 	panel.material_override = mat
 	controls.add_child(panel)
 
-	# Title
-	var title = Label3D.new()
-	title.text = "NEURAL NETWORK\nTRAINING"
-	title.font_size = 56
-	title.outline_size = 12
-	title.position = Vector3(0, 1.8, 0.1)
-	controls.add_child(title)
+	# Panel text as baked label meshes ON the panel (R-027) — the panel box
+	# above is the board; these are its lines.
+	var title: MeshInstance3D = BakedText.make_label_mesh("NEURAL NETWORK TRAINING", Color(0.95, 0.96, 1.0), Vector2(3.0, 0.4), 1400, true)
+	if title:
+		title.position = Vector3(0, 1.8, 0.1)
+		controls.add_child(title)
 
 	# Architecture info
-	var arch_text = "Architecture:\n"
+	var arch_text = "Architecture:  "
 	for i in range(layer_sizes.size()):
 		arch_text += str(layer_sizes[i])
 		if i < layer_sizes.size() - 1:
-			arch_text += " â†’ "
-	var arch_label = Label3D.new()
-	arch_label.text = arch_text
-	arch_label.font_size = 32
-	arch_label.outline_size = 8
-	arch_label.position = Vector3(0, 0.8, 0.1)
-	controls.add_child(arch_label)
+			arch_text += " - "
+	var arch: MeshInstance3D = BakedText.make_label_mesh(arch_text, Color(0.85, 0.88, 0.95), Vector2(2.9, 0.26), 1300, true)
+	if arch:
+		arch.position = Vector3(0, 0.9, 0.1)
+		controls.add_child(arch)
 
-	# Metrics
-	var metrics = Label3D.new()
-	metrics.name = "MetricsLabel"
-	metrics.text = "Loss: 1.00\nEpoch: 0\nLR: %.3f" % learning_rate
-	metrics.font_size = 36
-	metrics.outline_size = 8
-	metrics.position = Vector3(0, -0.5, 0.1)
-	controls.add_child(metrics)
+	# Metrics — dynamic; rebuilt by _update_metrics_board only when the
+	# displayed string changes
+	_metrics_board = Node3D.new()
+	_metrics_board.name = "MetricsBoard"
+	_metrics_board.position = Vector3(0, -0.5, 0.1)
+	controls.add_child(_metrics_board)
+	_update_metrics_board(1.0, 0)
 
 	# Activation function
-	var act_label = Label3D.new()
-	act_label.text = "Activation: %s" % activation_function
-	act_label.font_size = 28
-	act_label.outline_size = 7
-	act_label.position = Vector3(0, -1.5, 0.1)
-	controls.add_child(act_label)
+	var act: MeshInstance3D = BakedText.make_label_mesh("Activation: %s" % activation_function, Color(0.8, 0.84, 0.9), Vector2(2.4, 0.22), 1300, true)
+	if act:
+		act.position = Vector3(0, -1.5, 0.1)
+		controls.add_child(act)
+
+func _update_metrics_board(loss: float, epoch: int) -> void:
+	var text := "Loss %.3f   Epoch %d   LR %.3f" % [loss, epoch, learning_rate]
+	if text == _metrics_cache or _metrics_board == null:
+		return
+	_metrics_cache = text
+	for c in _metrics_board.get_children():
+		c.queue_free()
+	var q: MeshInstance3D = BakedText.make_label_mesh(text, Color(0.95, 0.9, 0.6), Vector2(3.0, 0.28), 1300, true)
+	if q:
+		_metrics_board.add_child(q)
 
 func _create_info_panels() -> void:
 	"""Create educational info panels"""
@@ -567,16 +564,45 @@ func _create_info_panels() -> void:
 		)
 
 func _create_info_panel(pos: Vector3, text: String, color: Color) -> void:
-	"""Create floating info panel"""
-	var label = Label3D.new()
-	label.text = text
-	label.font_size = 32
-	label.outline_size = 8
-	label.outline_modulate = Color.BLACK
-	label.modulate = color
-	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	label.position = pos
-	add_child(label)
+	"""Framed dark board with header + body lines (R-027)"""
+	var rows := text.split("\n")
+	var board := Node3D.new()
+	board.position = pos
+	add_child(board)
+
+	var h: float = 0.34 * rows.size() + 0.3
+	var face := MeshInstance3D.new()
+	var bm := BoxMesh.new()
+	bm.size = Vector3(3.4, h, 0.05)
+	face.mesh = bm
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color(0.10, 0.11, 0.14)
+	mat.emission_enabled = true
+	mat.emission = Color(0.10, 0.11, 0.14)
+	mat.emission_energy_multiplier = 0.25
+	face.material_override = mat
+	board.add_child(face)
+	var bar := MeshInstance3D.new()
+	var bar_m := BoxMesh.new()
+	bar_m.size = Vector3(3.3, 0.03, 0.02)
+	bar.mesh = bar_m
+	var bar_mat := StandardMaterial3D.new()
+	bar_mat.albedo_color = color
+	bar_mat.emission_enabled = true
+	bar_mat.emission = color
+	bar_mat.emission_energy_multiplier = 0.8
+	bar.material_override = bar_mat
+	bar.position = Vector3(0, h * 0.5 - 0.05, 0.03)
+	board.add_child(bar)
+
+	var y: float = h * 0.5 - 0.32
+	for i in rows.size():
+		var line_color := color if i == 0 else Color(0.85, 0.88, 0.92)
+		var q: MeshInstance3D = BakedText.make_label_mesh(str(rows[i]), line_color, Vector2(3.1, 0.26), 1300, true)
+		if q:
+			q.position = Vector3(0, y, 0.035)
+			board.add_child(q)
+		y -= 0.34
 
 func _animate_neurons(_delta) -> void:
 	"""Animate neurons based on activation"""
@@ -588,11 +614,6 @@ func _animate_neurons(_delta) -> void:
 			# Pulse based on activation
 			var pulse = 1.0 + activation * 0.3 * sin(time * 3.0 + layer_idx + neuron_idx)
 			neuron.scale = Vector3.ONE * pulse
-
-			# Update activation label
-			var label = neuron.get_node_or_null("Label3D")
-			if label:
-				label.text = "%.2f" % activation
 
 			# Update emission based on activation
 			var mesh_instance = neuron.get_node_or_null("MeshInstance3D")
@@ -665,14 +686,8 @@ func _animate_weights(_delta) -> void:
 			immediate_mesh.surface_end()
 
 func _update_control_panel() -> void:
-	"""Update control panel displays"""
-	var controls = get_node_or_null("ControlPanel")
-	if not controls:
-		return
-
-	var metrics = controls.get_node_or_null("MetricsLabel")
-	if metrics:
-		metrics.text = "Loss: %.3f\nEpoch: %d\nLR: %.3f" % [loss, epoch, learning_rate]
+	"""Update control panel displays (gated: rebuilds only on change)"""
+	_update_metrics_board(loss, epoch)
 
 # Public API
 func forward_propagation() -> void:

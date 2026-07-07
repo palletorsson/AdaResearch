@@ -1,0 +1,11 @@
+Concept: A cloth grid where each vertex carries two scalar fields — an activator and an inhibitor — that evolve by Gray–Scott or FitzHugh–Nagumo reaction-diffusion. Local concentration modulates local spring stiffness, so the chemical pattern becomes a mechanical pattern, and the cloth drapes anisotropically. The result resembles coral surface texture: ridges where activation dominates, valleys where inhibition dominates.
+
+Sequence role: First reaction-diffusion DNA-bridge cloth study (sb_rd01) within Soft Bodies (13th spine, integration phase). Sister to sb_rd02_stripes_flag (zebra-stripe variant). Connects the soft-body cluster directly to the morphogenesis cluster (ProceduralGeneration_Reaction_Diffusion_Systems, Topology_Entropy_Morphogenesis) — same Turing math, now embedded in a deformable carrier rather than rendered as a flat shader.
+
+Technical angle: Two-field PDE solved on the cloth grid each frame (small explicit Euler step is usually adequate at typical parameters); diffusion rates d_a > d_i and reaction terms tuned to the spotted Gray–Scott regime; activator concentration mapped to a per-vertex stiffness multiplier on attached structural and shear springs. Cloth then integrates as standard spring-mass-Verlet under gravity. The coupling is one-way: chemistry influences mechanics, mechanics does not feed back into chemistry — which keeps the system tractable.
+
+Critical angle: The map literalizes a question latent in all of biology: the pattern on a surface is also the surface. A leopard's spots are not painted onto a uniform skin — the pigment cells that make them are part of the skin, and where the pigment goes the cells go. Reaction-diffusion-as-stiffness-field models that ontological collapse. Decoration becomes structure. This is the integration phase claim at full strength: information and substrate are not two things stacked, they are one thing seen from two angles.
+
+Key artifacts: gallery_marker_soft-body presents the sb_rd01_coral_cloth configuration — Gray–Scott chemistry coupled to a draped cloth — as the room's centerpiece.
+
+Gap: A field-visualization toggle would let learners view the chemical concentrations as a color overlay independent of the deformation, making the coupling between pattern and shape inspectable as two separable layers before they recombine.

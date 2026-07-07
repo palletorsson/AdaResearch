@@ -61,7 +61,16 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		set_meta("config_%s" % str(k), config_data[k])
 	_read_metadata_overrides()
 	if _built:
+		# Detach IMMEDIATELY (remove_child) before queue_free. queue_free
+		# defers to end-of-frame, so the OLD board children (BoardSurface,
+		# Backing, Frame…) would still be in the tree when _build() re-adds
+		# nodes with the SAME names — Godot then auto-renames the NEW ones to
+		# @MeshInstance3D@NNNN, and the deferred texture-bake races against
+		# the old BoardSurface being freed, leaving the rebuilt board on the
+		# no-mipmap live ViewportTexture (the VR "text vanishes" bug). Removing
+		# first guarantees a clean rebuild. Same fix as palm_scanner/lab_room.
 		for c in get_children():
+			remove_child(c)
 			c.queue_free()
 		_built = false
 		_build()

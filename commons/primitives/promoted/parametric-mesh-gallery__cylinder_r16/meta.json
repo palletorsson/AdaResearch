@@ -1,0 +1,30 @@
+{
+  "source_gallery": "parametric-mesh-gallery",
+  "source_entry": "cylinder_r16",
+  "params": {
+    "notes": "Nearly smooth — the wireframe gives away the lattice but the body reads as a cylinder.",
+    "primitive": "cylinder",
+    "radial_segments": 16,
+    "rings": 1
+  },
+  "base_scene": "res://commons/primitives/cylinder/cylinder_radials_rings.tscn",
+  "base_script": "res://commons/primitives/cylinder/cylinder_radials_rings.gd",
+  "overrides": {
+    "radial_segments": "16",
+    "rings": "1",
+    "height": "1.0",
+    "radius": "0.5"
+  },
+  "rating": 5,
+  "verdict": "crown_jewel",
+  "eval": {
+    "stars": 5,
+    "verdict": "crown_jewel",
+    "notes": "r=16 is the smooth-illusion sweet spot for cylinders � bake it",
+    "next_gen_hints": [],
+    "evaluated_by": "smoke_test",
+    "date": "2026-05-20T09:00:00.000Z"
+  },
+  "promoted_at": "2026-05-20T09:09:09.931Z",
+  "lookup_name": "parametric-mesh-gallery__cylinder_r16"
+}

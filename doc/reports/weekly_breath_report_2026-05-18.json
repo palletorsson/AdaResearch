@@ -1,0 +1,364 @@
+{
+  "report_date": "2026-05-18",
+  "generated": "2026-05-18T10:30:00",
+  "period": "2026-05-11 to 2026-05-18",
+  "trigger": "scheduled-task: ada-weekly-audit",
+  "previous_report": "doc/reports/weekly_breath_report_2026-05-11.json",
+  "mode": "audit (dry-run breather + release gates + trajectory diff)",
+
+  "total_breaths_in_period": 2,
+  "breaths_in_period": [
+    "2026-05-12T08:30",
+    "2026-05-13T11:48"
+  ],
+  "note": "Two breaths this week (down from 3 last week). Pipeline_avg flat at 5.43 across both — 9th and 10th consecutive flat breaths since 2026-04-30. STALL CONDITION TRIGGERED per scheduled-task definition: global_avg has not improved in 7 days (now 18 days). This is the second consecutive weekly audit to flag the stall — predicted in 2026-05-04 and confirmed in 2026-05-11.",
+
+  "pipeline_snapshot": {
+    "global_avg_pipeline": 5.43,
+    "global_avg_pipeline_last_week": 5.43,
+    "global_avg_pipeline_delta": 0.0,
+    "stall_period_status": "STALLED — pipeline_avg flat at 5.43 for 18 days (since 2026-04-30T07:18). 10 consecutive flat breaths logged.",
+    "sequences_at_stage_7_polish": ["randomness"],
+    "sequences_at_stage_6_vr_testing": [
+      "primitives", "transformation", "color", "forces", "wavefunctions",
+      "noise", "cellularautomata", "fractals", "lsystems", "proceduralgeneration",
+      "isosurfaces", "swarmintelligence", "machinelearning", "foundationscrisis",
+      "qfeplaboratory", "postfoundationscrisis", "graphtheory", "array_tutorial"
+    ],
+    "sequences_at_stage_2_documentation": [
+      "change (0% doc)",
+      "boolean_surfaces (0% doc)",
+      "softbodies (29% doc, 62% art)"
+    ],
+    "advancement_this_week": [
+      "array_tutorial: stage 2 (last week) → stage 6 (this week) — major jump confirmed in baseline scorer output"
+    ],
+    "advancement_this_week_note": "array_tutorial advanced from stage 2 to stage 6 this week (likely via batch documentation + artifact work in the 2026-05-13 breath). All 18 of 19 spine + adjacent sequences now at stage 6 awaiting VR testing. Pipeline global_avg unchanged because array_tutorial reached stage 6 just like the others — the VR-ceiling reasserts. The non-spine softbodies remains at stage 2."
+  },
+
+  "release_gates": {
+    "A_sequence_contract": "FAIL",
+    "B_artifact_registry": "PASS",
+    "C_map_validation": "PASS",
+    "D_lab_progression": "PASS",
+    "all_passing": false,
+    "passing_count": 3,
+    "passing_count_last_week": 3,
+    "regression_detected": true,
+    "this_week_failure_details": {
+      "gate": "A (Sequence Contract)",
+      "missing_declared_maps": 14,
+      "duplicate_entries_within_sequence": 0,
+      "undeclared_map_folders": 594,
+      "interpretation": "Gate A failure carried over (or re-emerged) from the 2026-05-13 design-in-flight deferral (boolean_surfaces + change sequences scaffolded that day). 14 missing_declared_maps is the same count flagged in the 2026-05-13 breath as 'design-in-flight — boolean_surfaces + change sequences scaffolded same-day.' Has not been repaired in the intervening 5 days. undeclared_map_folders=594 may include map directories added without sequence-file registration."
+    },
+    "fixed_this_week": {
+      "gate": "B (Artifact Registry Integrity)",
+      "last_week_state": "FAIL — 14 unresolved_scene_files",
+      "this_week_state": "PASS — 0 unresolved_scene_files, all sub-metrics 0",
+      "interpretation": "Gate B unresolved_scene_files (14 → 0) resolved between 2026-05-11 and 2026-05-18. Likely via the 2026-05-12 promoted.json prune (pruned 14 stale promoted.json entries from ba85050c7+4f0b5551c per the breath note). This validates last week's recommended fix path. Sustainable but recurrence-prone — Gate B has now had 3 regression+repair cycles in 5 weeks."
+    },
+    "grade_A_maps": 843,
+    "grade_B_maps": 144,
+    "grade_C_maps": 183,
+    "grade_F_maps": 0,
+    "grade_A_delta_vs_last_week": "+33 (810 -> 843)",
+    "grade_C_delta_vs_last_week": "-400 (583 -> 183)",
+    "undeclared_map_folders_delta": "+104 (490 -> 594)",
+    "week_delta": "FLAT 3/4 -> 3/4 (different failing gate: B last week, A this week). Gate B repaired but Gate A deferred-failure carried through.",
+    "validator_counting_reconciliation": "Last week flagged grade_A 1862 (cached) -> 810 (live) as a counting drift. This week 810 -> 843 movement is normal noise. The cached/live reconciliation never happened — but live numbers are now internally consistent week-over-week."
+  },
+
+  "garden_health": {
+    "total_artifacts": 2106,
+    "voiced": 1036,
+    "voice_coverage_pct": 49,
+    "embodied": 344,
+    "embodiment_rate_pct": 33,
+    "phantom_limbs": 860,
+    "voiced_last_week": 953,
+    "voiced_delta": 83,
+    "voice_coverage_pct_last_week": 45,
+    "voice_coverage_pct_delta": 4,
+    "state_transitions_this_week": [
+      "hazards: REACHING -> GROWING (2026-05-12, voiced 59 -> 72)",
+      "particles: SCATTERED -> REACHING (2026-05-13, voiced 6 -> 14, 100%)",
+      "physicssimulation: SCATTERED -> LIVING (2026-05-13, two-state jump, voiced 22 -> 34, 85%; embodied 53% pre-voicing made REACHING/GROWING skippable)"
+    ],
+    "scattered_count_change_note": "wavefunctions still SCATTERED (70/105 voiced). Both particles and physicssimulation exited SCATTERED this week. Three sequences transitioned states across two breaths — sustained high cadence.",
+    "growth_quality": "Acceleration confirmed. +83 voices this week vs +30 last week (~2.8x). Largest single-breath voicing delta on record (+31 on 2026-05-13). Map-presence-targeting flow now 41-for-41 across four consecutive breaths (2026-05-06: 6, 2026-05-09: 14, 2026-05-12: cluster, 2026-05-13: 21)."
+  },
+
+  "sequences_improved": [
+    {
+      "id": "array_tutorial",
+      "pipeline_delta": "stage 2 -> stage 6 (major)",
+      "mechanism": "Batch documentation + artifact registration completing stages 2 through 5 in one breath",
+      "breath_refs": ["2026-05-13T11:48"]
+    },
+    {
+      "id": "hazards",
+      "garden_delta": "REACHING -> GROWING (voiced 59 -> 72)",
+      "mechanism": "3 hazards artifacts * instance-cascade + 2 fractals + 1 patterngeneration",
+      "breath_refs": ["2026-05-12T08:30"]
+    },
+    {
+      "id": "particles",
+      "garden_delta": "SCATTERED -> REACHING (voiced 6 -> 14, 100%)",
+      "mechanism": "Map-presence-targeted @identity adds covering 100% of particles registry",
+      "breath_refs": ["2026-05-13T11:48"]
+    },
+    {
+      "id": "physicssimulation",
+      "garden_delta": "SCATTERED -> LIVING (2-state jump, voiced 22 -> 34, 85%)",
+      "mechanism": "7 @identity adds with instance cascade; high pre-voicing embodiment (53%) skipped REACHING/GROWING",
+      "breath_refs": ["2026-05-13T11:48"]
+    }
+  ],
+
+  "total_delta": {
+    "pipeline_avg_start": 5.43,
+    "pipeline_avg_end": 5.43,
+    "pipeline_delta": 0.0,
+    "pipeline_delta_note": "FLAT WEEK #2 IN A ROW. 18 days since last advance. The structural VR ceiling continues to hold. array_tutorial's stage 2->6 jump validates that AI-only advancement still works on the few off-spine doc-gap sequences — but it cannot lift the global_avg because it lands at the same stage-6 ceiling as the rest.",
+    "release_gates_start": "3/4 passing (Gate B failing)",
+    "release_gates_end": "3/4 passing (Gate A failing)",
+    "release_gates_delta": "0 net, failing gate rotated B -> A",
+    "garden_voiced_start": 953,
+    "garden_voiced_end": 1036,
+    "garden_voiced_delta": 83,
+    "garden_state_transitions": 3,
+    "biggest_single_advance": "+31 voices in one breath (2026-05-13T11:48), single-breath voicing record"
+  },
+
+  "week_over_week_comparison": {
+    "last_week_period": "2026-05-04 to 2026-05-11",
+    "this_week_period": "2026-05-11 to 2026-05-18",
+    "pipeline_avg": {
+      "last_week_delta": 0.0,
+      "this_week_delta": 0.0,
+      "interpretation": "Second consecutive flat week. Last week's recommended OPTION A (VR session) has not happened. OPTION B (advance off-spine stage-2 sequences) was executed for array_tutorial (stage 2 -> 6) but the global_avg didn't move because array_tutorial wasn't in the 19-sequence spine denominator OR the denominator effect is too small. Need to verify which 19/21 sequences are in the scorer."
+    },
+    "release_gates": {
+      "last_week_delta": "0 net (regressed-recovered-regressed cycle)",
+      "this_week_delta": "0 net (Gate B fixed -> Gate A failing)",
+      "interpretation": "Pattern shift: instead of regression cycling on the same gate, the failing gate rotates between A and B as different sub-metrics break. Last week's recommended preventive tooling (prop-002 candidate for Gate B regression guard) is still relevant but the broader issue is registry/sequence drift in general."
+    },
+    "garden_health": {
+      "last_week_voiced_delta": 30,
+      "this_week_voiced_delta": 83,
+      "interpretation": "ACCELERATION (+30 -> +83, ~2.8x speedup). 2026-05-13 single-breath record (+31) exceeded last week's two-breath total. Map-presence-targeting flow is now reliably the highest-leverage AI-only path; cheap voicing wins continue to compound via instance cascade."
+    },
+    "state_transitions": {
+      "last_week": 1,
+      "this_week": 3,
+      "interpretation": "Up from 1 to 3. Includes two-state jump (physicssimulation SCATTERED -> LIVING). Pattern: state transitions are clustering on breaths that target instance-cascade-prone artifacts (apply_grid_config voicing on artifacts that appear in many maps)."
+    }
+  },
+
+  "skill_effectiveness_changes": {
+    "identity_writing": {
+      "total_calls_cumulative_raw": 34,
+      "total_calls_cumulative_implied": 67,
+      "success_rate_raw": 1.0,
+      "success_rate_implied": 0.955,
+      "week_calls": "21 on 2026-05-13 (single-breath record) + cluster on 2026-05-12",
+      "status": "Map-presence-targeting flow now 41-for-41 across four consecutive breaths. The flow IS the fix for prop-001."
+    },
+    "direct_file_edit": {
+      "total_calls_cumulative": 50,
+      "success_rate": 1.0,
+      "week_calls": "+1 on 2026-05-13 (LOD_DISCOVERIES.json achievement decay)",
+      "status": "Still primary tool."
+    },
+    "registry_repair": {
+      "total_calls_cumulative_raw": 16,
+      "total_calls_cumulative_implied": 20,
+      "success_rate": 1.0,
+      "week_calls": "Gate B promoted.json prune on 2026-05-12 (+1 implied)",
+      "status": "Effective when applied; Gate B regression now in its third repair cycle in 5 weeks. The preventive tooling proposal (prop-002 candidate) remains the right next step."
+    },
+    "tool_bug_fix": {
+      "total_calls_cumulative_raw": 2,
+      "success_rate": 1.0,
+      "week_calls": 0,
+      "status": "No tool bugs surfaced this week."
+    },
+    "ada-breather": {
+      "total_calls_cumulative": 2,
+      "success_rate": 1.0,
+      "week_calls": "2 full breaths + 2 evening evolve-only sessions (2026-05-13 had two — pre-breath note + evening harvest)",
+      "status": "Cadence dropped from 3 -> 2 full breaths this week. Still healthy. Dry-run (today) reconfirms VR-bottleneck diagnosis."
+    },
+    "scene_repair": {
+      "total_calls_cumulative": 1,
+      "success_rate": 1.0,
+      "week_calls": 0,
+      "status": "Not called this week. The Gate B repair on 2026-05-12 used registry_repair (promoted.json prune) rather than scene_repair, because the issue was stale entries not missing files."
+    },
+    "emerging_pattern": "Garden continues to accelerate while pipeline stalls. The two indicators have decoupled — pipeline ceiling is structural (VR), garden ceiling is far away (49% coverage). Skill effectiveness is uniformly high across all logged skills (100% raw, 95.5% with reconstructions).",
+    "new_skill_promotion_threshold_crossed": "No new threshold crossings this week. prop-001 still 'proposed' (now 41-for-41 success via the de facto flow fix — recommend RETIRE/SUPERSEDED on next session). prop-002 candidate (Gate B preventive tooling) still un-formalized — its 3-evidence threshold was crossed 2026-05-11 but no proposal has been written yet."
+  },
+
+  "proposals_pending_review": [
+    {
+      "id": "prop-001",
+      "skill": "ada-breather",
+      "status": "proposed (RECOMMEND RETIRE/SUPERSEDED)",
+      "tldr": "Garden identity targeting must verify artifact placement in TARGET sequence maps, not gallery maps.",
+      "age_days": 28,
+      "urgency": "very low — map-presence-targeting flow has 41-for-41 success across 2026-05-06/09/12/13. Recommend RETIRE/SUPERSEDED on next session.",
+      "file": "doc/reports/skill_evolution_proposals.json"
+    },
+    {
+      "id": "prop-002 (still un-formalized)",
+      "skill": "ada-breather + registry tools",
+      "status": "candidate (3-evidence threshold met but no proposal file written)",
+      "tldr": "Add a Gate B pre-commit guard or registry-add helper that injects map_ready/include_in_map_data defaults AND validates scene_path resolution before commit.",
+      "evidence": "3 Gate B regressions in 5 weeks (2026-04-16, 2026-05-04, 2026-05-11). Repaired all three. Now a 4th repair cycle on 2026-05-12. The pattern persists.",
+      "age_days_since_threshold": 7,
+      "next_step": "Human reviewer should run /ada-skill-updater to formalize this proposal into skill_evolution_proposals.json. Carrying over from last week's audit."
+    }
+  ],
+
+  "stall_analysis": {
+    "stall_detected": true,
+    "stall_condition": "global_avg improvement (pipeline) over 7 days",
+    "7_day_pipeline_delta": 0.0,
+    "7_day_pipeline_window": "2026-05-11 (5.43) -> 2026-05-18 (5.43)",
+    "verdict": "STALL CONFIRMED FOR THE SECOND CONSECUTIVE WEEK. Pipeline_avg has been flat at 5.43 for 18 days and 10 consecutive logged breaths since 2026-04-30T07:18. This is the structural VR-testing ceiling predicted in 2026-05-04 and confirmed again in 2026-05-11.",
+    "root_cause_analysis": {
+      "primary_cause": "VR-testing bottleneck (UNCHANGED FROM LAST WEEK). 18 of 19 spine+adjacent sequences now sit at stage 6 (vr_testing). Stage 6 cannot be advanced by AI work alone — requires a human-in-headset session with desktop_feedback bridge entries. Last week's recommended OPTION A (schedule VR session) has not been executed.",
+      "secondary_cause": "Of remaining stage-<6 sequences, only softbodies (stage 2, 29% doc), change (stage 2, 0% doc), and boolean_surfaces (stage 2, 0% doc) are AI-actionable. Advancing all three to stage 3 would lift global_avg by ~+0.10-0.15 if they're in the spine denominator. array_tutorial DID advance stage 2 -> 6 this week — but pipeline_avg did not move, suggesting array_tutorial was already counted OR the denominator is larger than 19.",
+      "tertiary_cause": "randomness (stage 7) polish at 0% — advancing it to a polish-complete state would not move the avg further until other sequences also reach stage 7.",
+      "scoring_anomaly_investigation_needed": "array_tutorial visibly advanced 4 stages (2->6) but global_avg shows 0.0 delta. Either: (a) array_tutorial was already at stage 6 in last week's baseline and the 'stage 2' was a snapshot of an older state, or (b) the scoring denominator is not what last week's report assumed. Recommend the next breath verify the scorer's denominator and which sequences are included.",
+      "non_cause": "Not a tooling failure (release gates partially recovered). Not a skill failure (skills 95-100% effective). Not a cadence failure (2 breaths this week is lower than the 3-per-week target but acceptable). The scorer remains honest about the structural ceiling."
+    },
+    "stall_history_update": {
+      "previous_stall": "5.05 for 10 breaths (Apr-18 to Apr-28)",
+      "previous_stall_broken_at": "2026-04-30T07:18",
+      "previous_stall_break_method": "scoped registry/doc fixes on the only 2 sub-stage-6 spine sequences (color, isosurfaces)",
+      "current_stall_start": "2026-04-30T07:18 (no further advance after this peak)",
+      "current_stall_duration_days": 18,
+      "current_stall_duration_breaths": 10,
+      "current_stall_value": 5.43,
+      "current_stall_break_path_options": [
+        "OPTION A (HUMAN VR): Walk one spine sequence in headset, write feedback via desktop bridge, mark stage 7 advance on that sequence. Estimated lift: +0.05 per sequence walked. STILL THE STRUCTURALLY CORRECT FIX, STILL UNEXECUTED AFTER TWO WEEKS.",
+        "OPTION B (AI, ADVANCE OFF-SPINE STAGE-2): Push softbodies, change, boolean_surfaces through stage 3 (5-10 doc files each). Estimated lift: +0.05-0.10 contingent on denominator. PARTIALLY EXECUTED — array_tutorial advanced 4 stages but global_avg didn't move (anomaly to investigate).",
+        "OPTION C (AI, FILL EMPTY): Create starter map_data.json files for resourcemanagement (heat-map 50°). Estimated lift: +0.05.",
+        "OPTION D (AI, POLISH RANDOMNESS): Advance randomness stage 7 toward 100% polish via captures + doc updates. Estimated lift: marginal until others reach stage 7."
+      ],
+      "recommended_break_path": "OPTION A continues to be the right answer. Second-consecutive-week escalation. Two weeks of audit-flagged stall with no VR session is the structural bottleneck this audit was designed to surface. Recommend a calendar block of 30-60 minutes in headset, walking primitives or forces (the highest-developed spine sequences) with desktop_feedback bridge active."
+    },
+    "is_stall_worth_alarm": "YES — and now escalated. This is the SECOND consecutive weekly audit to flag the stall. The scheduled-task definition ('flag this as a stall and analyze why') has been satisfied for two weeks running. The cause is unchanged and the remediation is unchanged. Recommend the user prioritize a VR session this coming week as the single highest-leverage action.",
+    "escalation_message": "PIPELINE STALL: 18 days / 10 breaths flat at 5.43. Two consecutive weekly audits have flagged this. Root cause is the structural VR-testing ceiling — 18 of 19 spine+adjacent sequences sit at stage 6 awaiting human-in-headset walks. No combination of AI work can break this without OPTION A. Garden continues to compound (+83 voices this week, accelerating) but pipeline avg cannot move."
+  },
+
+  "key_discoveries_this_week": [
+    "Map-presence-targeting flow extended its perfect-success streak to 41-for-41 across four consecutive breaths (2026-05-06/09/12/13). prop-001 is now de facto retired.",
+    "physicssimulation made a two-state garden jump (SCATTERED -> LIVING) in a single breath, mirroring 2026-04-28's forces/flowers pattern. Confirms the 'high pre-voicing embodiment skips intermediate states' heuristic added to 2-evidence-watch on 2026-05-13.",
+    "Gate B repaired via registry_repair (promoted.json prune) on 2026-05-12 — different repair shape than scene_repair, validates that registry_repair generalizes to stale-entry decay as well as missing-path issues.",
+    "Largest single-breath voicing delta on record on 2026-05-13 (+31 voices). Map-presence flow producing accelerating returns: 6 -> 14 -> 21 across last three breaths that use it.",
+    "find_gd cache key collision (Active.gd vs _deprecated/Active.gd) documented as new infrastructure-bug shape under 2-evidence watch. Single occurrence so far; mitigation applied. Watch for second occurrence.",
+    "DATA LOSS INCIDENT (2026-05-13): 4 uncommitted breath_log entries lost mid-breath via ensure_ascii=False on a string with UTF-8 surrogate chars. Skeletons reconstructed. Note: this is a tool-fix-candidate but no formal proposal has been opened — could be a tertiary discovery to track.",
+    "array_tutorial stage 2 -> 6 jump did not move pipeline_avg, suggesting either an older baseline snapshot or a denominator anomaly. Worth a verification breath."
+  ],
+
+  "recommendations_for_next_week": [
+    "PRIORITY 1 — ESCALATE VR SESSION: Schedule 30-60 minutes in headset this week. Walk primitives or forces (highest-developed spine sequences) with desktop_feedback bridge active. This is the ONLY path to break the 5.43 ceiling. Now flagged for the second consecutive week.",
+    "PRIORITY 2 — INVESTIGATE SCORER DENOMINATOR: Verify which sequences are in the pipeline_avg denominator. array_tutorial visibly advanced stage 2 -> 6 but global_avg didn't move (delta = 0.0). One breath of investigation could uncover a real scoring fix worth +0.10-0.20 if the denominator is misaligned.",
+    "PRIORITY 3 — REPAIR GATE A: 14 missing_declared_maps (carryover from 2026-05-13 design-in-flight deferral). 5 days since flagged. Either complete the boolean_surfaces + change sequence scaffolding OR remove the pending entries from sequence files.",
+    "PRIORITY 4 — FORMALIZE prop-002: Gate B preventive tooling crossed 3-evidence threshold 7 days ago (2026-05-11 audit). No proposal file written. Open it formally OR apply directly via /ada-skill-updater.",
+    "PRIORITY 5 — RETIRE prop-001: 41-for-41 success on the flow that supersedes it. One housekeeping update to skill_evolution_proposals.json.",
+    "GARDEN CONTINUATION: wavefunctions (70/105 voiced, still SCATTERED) — one map-presence breath could push it through the 70% threshold to GROWING. Use the proven flow.",
+    "ADDRESS DATA-LOSS TOOL BUG: breath_log writer needs a UTF-8 surrogate-safe path. Single-line fix to lod_session_writer or whichever script writes the log."
+  ],
+
+  "comparison_to_last_week_summary": {
+    "what_changed": [
+      "Garden voicing ACCELERATED (+30 -> +83, ~2.8x)",
+      "State transitions UP (1 -> 3)",
+      "Gate B repaired (FAIL -> PASS) — last week's prediction validated",
+      "array_tutorial advanced stage 2 -> 6 (a major individual-sequence win)",
+      "Breath cadence dropped (3 -> 2 full breaths)"
+    ],
+    "what_stayed_the_same": [
+      "Pipeline_avg flat at 5.43 (second consecutive flat week)",
+      "Release gates net 3/4 passing (failing gate rotated)",
+      "VR testing remains unexecuted — primary stall cause persists",
+      "prop-001 still 'proposed' despite de facto retirement",
+      "prop-002 candidate still un-formalized"
+    ],
+    "what_got_worse": [
+      "Gate A now failing (was passing last week) — design-in-flight deferral aged 5 days",
+      "Breath cadence dropped from 3 to 2",
+      "Stall duration: 11 days -> 18 days"
+    ],
+    "overall_verdict": "Mixed — garden side compounding fast, pipeline side hard-stalled. The decoupling is now structural and well-understood. No autonomous AI work can move the headline metric without VR session. Recommendation: human reviewer treat this audit as a second-week stall escalation."
+  },
+
+  "breather_dry_run_work_plan": {
+    "mode": "dry-run",
+    "trajectory": "PIPELINE STALLED (5.43 x 10 breaths, 18 days) / GARDEN ACCELERATING (+83 voices, ~2.8x last week) / GATES OSCILLATING (B fixed -> A failing, net 3/4 flat)",
+    "focus": "auto-selected (stall mitigation + gate recovery + garden continuation)",
+    "cooling_filter": "Gate B repair pattern just executed 2026-05-12 (cooled). isosurfaces/color stage advance still cooled (at stage 6 ceiling).",
+    "items_selected": [
+      {
+        "rank": 1,
+        "item": "gate_a_unresolved_declared_maps_fix",
+        "temperature": 80,
+        "reason": "Gate A FAIL with new shape (missing_declared_maps:14, undeclared_map_folders:594). Different from last week's Gate B unresolved_scene_files (which is now repaired). This is the deferred 2026-05-13 design-in-flight item aged 5 days — boolean_surfaces + change scaffolding either needs completion OR the dangling sequence entries need removal.",
+        "action": "Enumerate the 14 missing_declared_maps via verbose run_release_gates output. For each: either create the missing map_data.json scaffold OR remove the declared entry from the sequence file. Then re-run gates.",
+        "dispatch": "registry_repair + direct_file_edit",
+        "expected_outcome": "Gate A -> PASS, all 4 release gates passing."
+      },
+      {
+        "rank": 2,
+        "item": "scorer_denominator_investigation",
+        "temperature": 75,
+        "reason": "array_tutorial advanced stage 2 -> 6 this week but global_avg shows 0.0 delta. Either a baseline snapshot issue or a denominator mismatch. One breath of investigation could reveal a free +0.10-0.20 lift if the scorer is undercounting advancement.",
+        "action": "Inspect sequence_pipeline_scorer.py to enumerate which sequences it averages. Cross-check against the spine. Verify array_tutorial's pre/post stage values in last week's baseline vs this week's.",
+        "dispatch": "tool_bug_fix + direct_file_edit",
+        "expected_outcome": "Either confirm scorer is correct (denominator includes off-spine sequences that array_tutorial didn't move enough to lift) OR find a scoring fix worth +0.10-0.20 on global_avg."
+      },
+      {
+        "rank": 3,
+        "item": "softbodies_documentation_push",
+        "temperature": 70,
+        "reason": "Off-spine stage-2 sequence at 29% doc / 62% art across 34 maps. Same pattern array_tutorial used this week. 5-10 doc files would lift it to stage 3+. If the scorer denominator includes it, this is a real global_avg lift.",
+        "action": "Coverage check on commons/maps/Softbodies_*/ for missing blurb.md and intent.md. Write 5-10 doc files for the most under-documented maps. Re-run scorer.",
+        "dispatch": "documentation_writing + direct_file_edit",
+        "expected_outcome": "softbodies: stage 2 -> 3+ (doc% crosses threshold). Likely +0.05 on global_avg if denominator includes it."
+      },
+      {
+        "rank": 4,
+        "item": "wavefunctions_garden_voicing_continued",
+        "temperature": 60,
+        "reason": "Last SCATTERED sequence with .gd headroom (~70/105 voiced). Map-presence flow is 41-for-41. One more batch could push past 70% threshold to GROWING.",
+        "action": "Map-presence filter for wavefunctions. @identity 5-10 voiceless artifacts that appear in WaveFunctions_* maps' interactables AND have apply_grid_config.",
+        "dispatch": "identity_writing + direct_file_edit",
+        "expected_outcome": "wavefunctions: SCATTERED -> GROWING. Garden voiced: 1036 -> ~1046."
+      },
+      {
+        "rank": 5,
+        "item": "prop_001_retire_prop_002_open",
+        "temperature": 55,
+        "reason": "Two housekeeping items overdue. prop-001 should be marked superseded (41-for-41 evidence). prop-002 should be opened (3-evidence threshold crossed 7 days ago). Both are one-file edits to skill_evolution_proposals.json.",
+        "action": "Update doc/reports/skill_evolution_proposals.json: mark prop-001 status 'superseded', add prop-002 with the Gate B preventive tooling proposal pre-drafted in last week's audit.",
+        "dispatch": "direct_file_edit",
+        "expected_outcome": "Backlog cleared. Skill evolution tracking accurate."
+      }
+    ],
+    "cooled_items": [
+      {"item": "gate_b_repair", "reason": "Just executed 2026-05-12 — cooled for at least 2 breaths per cooling filter."},
+      {"item": "isosurfaces / color stage advance", "reason": "At stage 6 ceiling. No AI lever available."},
+      {"item": "array_tutorial documentation push", "reason": "Already advanced stage 2 -> 6 this week. Cooled."}
+    ],
+    "skipped_due_to_5_item_cap": [
+      {"item": "resourcemanagement_starter_structure", "reason": "Heat-map 50° empty sequence. Lower priority than Gate A repair or scorer investigation."},
+      {"item": "data_loss_tool_bug_fix", "reason": "breath_log writer UTF-8 surrogate safety. Single-line fix, low urgency since reconstruction worked. Carry to next breath."},
+      {"item": "change_sequence_documentation", "reason": "Same pattern as softbodies but lower base score. Defer."}
+    ],
+    "dispatch_summary": "If full breath executed: 5 items, 2 to direct registry/scoring fixes, 1 to documentation, 1 to garden voicing, 1 to housekeeping. Projected outcome: Gate A -> PASS (4/4 gates), pipeline_avg possibly +0.05-0.20 contingent on scorer investigation, garden voiced 1036 -> ~1046, prop-001/002 backlog cleared."
+  }
+}

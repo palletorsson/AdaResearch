@@ -84,38 +84,38 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 func _read_metadata_overrides() -> void:
 	if has_meta("config_body_width"):
-		body_width = float(String(get_meta("config_body_width")))
+		body_width = float(str(get_meta("config_body_width")))
 	if has_meta("config_body_height"):
-		body_height = float(String(get_meta("config_body_height")))
+		body_height = float(str(get_meta("config_body_height")))
 	if has_meta("config_body_depth"):
-		body_depth = float(String(get_meta("config_body_depth")))
+		body_depth = float(str(get_meta("config_body_depth")))
 	if has_meta("config_screen_width_factor"):
-		screen_width_factor = float(String(get_meta("config_screen_width_factor")))
+		screen_width_factor = float(str(get_meta("config_screen_width_factor")))
 	if has_meta("config_screen_height_factor"):
-		screen_height_factor = float(String(get_meta("config_screen_height_factor")))
+		screen_height_factor = float(str(get_meta("config_screen_height_factor")))
 	if has_meta("config_body_color"):
-		body_color = _parse_color(String(get_meta("config_body_color")), body_color)
+		body_color = _parse_color(str(get_meta("config_body_color")), body_color)
 	if has_meta("config_screen_bg_color"):
-		screen_bg_color = _parse_color(String(get_meta("config_screen_bg_color")), screen_bg_color)
+		screen_bg_color = _parse_color(str(get_meta("config_screen_bg_color")), screen_bg_color)
 	if has_meta("config_screen_emission"):
-		screen_emission = float(String(get_meta("config_screen_emission")))
+		screen_emission = float(str(get_meta("config_screen_emission")))
 	if has_meta("config_waveform_color"):
-		waveform_color = _parse_color(String(get_meta("config_waveform_color")), waveform_color)
+		waveform_color = _parse_color(str(get_meta("config_waveform_color")), waveform_color)
 	if has_meta("config_grid_color"):
-		grid_color = _parse_color(String(get_meta("config_grid_color")), grid_color)
+		grid_color = _parse_color(str(get_meta("config_grid_color")), grid_color)
 	if has_meta("config_accent_color"):
-		accent_color = _parse_color(String(get_meta("config_accent_color")), accent_color)
+		accent_color = _parse_color(str(get_meta("config_accent_color")), accent_color)
 	if has_meta("config_waveform_shape"):
-		waveform_shape = String(get_meta("config_waveform_shape")).to_lower()
+		waveform_shape = str(get_meta("config_waveform_shape")).to_lower()
 	if has_meta("config_waveform_amplitude"):
-		waveform_amplitude = float(String(get_meta("config_waveform_amplitude")))
+		waveform_amplitude = float(str(get_meta("config_waveform_amplitude")))
 	if has_meta("config_waveform_frequency"):
-		waveform_frequency = int(String(get_meta("config_waveform_frequency")))
+		waveform_frequency = int(str(get_meta("config_waveform_frequency")))
 	if has_meta("config_grid_visible"):
-		var gv := String(get_meta("config_grid_visible")).to_lower()
+		var gv := str(get_meta("config_grid_visible")).to_lower()
 		grid_visible = gv in ["true", "1", "yes", "on"]
 	if has_meta("config_knob_count"):
-		knob_count = int(String(get_meta("config_knob_count")))
+		knob_count = int(str(get_meta("config_knob_count")))
 
 
 func _clear_built_children() -> void:

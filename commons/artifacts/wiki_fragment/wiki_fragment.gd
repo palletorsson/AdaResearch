@@ -131,10 +131,10 @@ func _populate_from_fragment() -> void:
 	var key := _resolve_fragment_key()
 	var frag: Dictionary = FRAGMENTS.get(key, FRAGMENTS["NORTH"])
 
-	_title_label.text = String(frag.title)
+	_title_label.text = str(frag.title)
 	_title_label.modulate = frag.color
-	_body_label.text = String(frag.body)
-	_cf_label.text = "→ %s" % String(frag.cf)
+	_body_label.text = str(frag.body)
+	_cf_label.text = "→ %s" % str(frag.cf)
 	_footer_label.text = "%d editors · %d disagreements · revision %d" % [
 		frag.editors, frag.disagreements, int(frag.editors * 2.3),
 	]
@@ -163,6 +163,6 @@ func _resolve_fragment_key() -> String:
 func apply_grid_config(config_data: Dictionary) -> void:
 	var raw: Variant = config_data.get("fragment", "")
 	if typeof(raw) == TYPE_STRING:
-		_fragment_key = String(raw).strip_edges().to_upper()
+		_fragment_key = str(raw).strip_edges().to_upper()
 	if _title_label != null:
 		_populate_from_fragment()

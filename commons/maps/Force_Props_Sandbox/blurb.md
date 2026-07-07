@@ -1,0 +1,1 @@
+A sandbox for force props — the loose toys of the Forces sequence laid out in one open room. A force cube, a force mower, a bubble blaster, a circle train, a wedge slide, a dot aligner: things to push, ride, and align. There is no lesson here, only the parts. Walk in and play with the pieces before they get arranged into maps that mean something.

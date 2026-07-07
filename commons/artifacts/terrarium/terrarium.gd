@@ -73,31 +73,31 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 func _read_metadata_overrides() -> void:
 	if has_meta("config_tank_width"):
-		tank_width = float(String(get_meta("config_tank_width")))
+		tank_width = float(str(get_meta("config_tank_width")))
 	if has_meta("config_tank_depth"):
-		tank_depth = float(String(get_meta("config_tank_depth")))
+		tank_depth = float(str(get_meta("config_tank_depth")))
 	if has_meta("config_tank_height"):
-		tank_height = float(String(get_meta("config_tank_height")))
+		tank_height = float(str(get_meta("config_tank_height")))
 	if has_meta("config_glass_color"):
-		glass_color = _parse_color(String(get_meta("config_glass_color")), glass_color)
+		glass_color = _parse_color(str(get_meta("config_glass_color")), glass_color)
 	if has_meta("config_frame_color"):
-		frame_color = _parse_color(String(get_meta("config_frame_color")), frame_color)
+		frame_color = _parse_color(str(get_meta("config_frame_color")), frame_color)
 	if has_meta("config_floor_color"):
-		floor_color = _parse_color(String(get_meta("config_floor_color")), floor_color)
+		floor_color = _parse_color(str(get_meta("config_floor_color")), floor_color)
 	if has_meta("config_vegetation_color"):
-		vegetation_color = _parse_color(String(get_meta("config_vegetation_color")), vegetation_color)
+		vegetation_color = _parse_color(str(get_meta("config_vegetation_color")), vegetation_color)
 	if has_meta("config_prey_color"):
-		prey_color = _parse_color(String(get_meta("config_prey_color")), prey_color)
+		prey_color = _parse_color(str(get_meta("config_prey_color")), prey_color)
 	if has_meta("config_predator_color"):
-		predator_color = _parse_color(String(get_meta("config_predator_color")), predator_color)
+		predator_color = _parse_color(str(get_meta("config_predator_color")), predator_color)
 	if has_meta("config_accent_color"):
-		accent_color = _parse_color(String(get_meta("config_accent_color")), accent_color)
+		accent_color = _parse_color(str(get_meta("config_accent_color")), accent_color)
 	if has_meta("config_vegetation_count"):
-		vegetation_count = int(String(get_meta("config_vegetation_count")))
+		vegetation_count = int(str(get_meta("config_vegetation_count")))
 	if has_meta("config_prey_count"):
-		prey_count = int(String(get_meta("config_prey_count")))
+		prey_count = int(str(get_meta("config_prey_count")))
 	if has_meta("config_predator_count"):
-		predator_count = int(String(get_meta("config_predator_count")))
+		predator_count = int(str(get_meta("config_predator_count")))
 
 
 func _clear_built_children() -> void:

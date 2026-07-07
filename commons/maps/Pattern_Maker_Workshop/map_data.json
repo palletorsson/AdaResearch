@@ -14,22 +14,14 @@
       "difficulty": "beginner",
       "category": "arrays",
       "estimated_time": "exploration based",
-      "learning_objectives": [
-        "Understand wallpaper groups and plane symmetry",
-        "See how a small domain tiles into a large pattern",
-        "Explore all 17 crystallographic symmetry groups"
-      ]
+      "learning_objectives": ["Understand wallpaper groups and plane symmetry","See how a small domain tiles into a large pattern","Explore all 17 crystallographic symmetry groups"]
     },
     "title": "Symmetry Workshop"
   },
   "settings": {
     "auto_reveal_on_entry": true,
     "background": {
-      "color": [
-        0.15,
-        0.15,
-        0.2
-      ],
+      "color": [0.15,0.15,0.2],
       "type": "sky"
     },
     "cube_size": 1.0,
@@ -39,23 +31,11 @@
     "enable_physics": true
   },
   "lighting": {
-    "ambient_color": [
-      0.5,
-      0.5,
-      0.55
-    ],
+    "ambient_color": [0.5,0.5,0.55],
     "ambient_energy": 0.7,
     "directional_light": {
-      "color": [
-        1.0,
-        0.95,
-        0.9
-      ],
-      "direction": [
-        -0.3,
-        -0.8,
-        -0.3
-      ],
+      "color": [1.0,0.95,0.9],
+      "direction": [-0.3,-0.8,-0.3],
       "enabled": true,
       "energy": 1.0
     }

@@ -1,0 +1,5 @@
+A smaller pin ring on top. Lower stiffness. Stronger gravity. Three hundred eighty timesteps instead of two hundred. Run the same glass-blowing simulation under those four shifted knobs and the vessel does not settle into a bulb — it stretches into a long drooping bottle, neck thinning, body falling, the whole shape pulled vertically by physics that has been given more time to act.
+
+The bottle is a record of those four numbers and the order they applied. Pin ring small, so the top is narrow. Stiffness low, so the membrane gives. Gravity strong, so the descent is fast. Steps long, so the descent is allowed to keep happening. Stop the simulation at any moment between zero and the chosen step and you would freeze a different vessel — shorter, fuller, more recognizably spherical.
+
+Glass-blowing in the real world is the same problem: a glassblower holds parameters approximately stable for the seconds the glass remains molten and arrests the process when the shape is right. Sb_gl02 is what happens when the simulation runs almost twice as long with less wall stiffness. The bulb becomes a bottle. Time, here, has units of shape.

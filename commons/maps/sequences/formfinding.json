@@ -1,0 +1,44 @@
+{
+ "sequences": {
+  "formfinding": {
+   "name": "Form-Finding: Matter Solves for Its Own Shape",
+   "v1_note": "SEQUENCE CANDIDATE #24 (assemblage 2026-07-07). The variational principle — form as the minimum of a functional. Nature is lazy; the shape is what's left when the energy stops dropping. Cast entirely from the pre-existing gradient-descent / minimal-surface / energy-landscape families. Proposed spine position: after forces (dynamics) and before wavefunctions — forces move things, form-finding is where they REST.",
+   "truth": "A form is the answer to a minimization problem. The hanging chain, the soap film, the settling mesh, the balanced mobile — none were drawn; each is the shape that costs the least. Nature computes form by being lazy, and the calculus of variations is that laziness written down.",
+   "qfep_term": "F",
+   "qfep_connection": "Form-finding is the F term made physical: free-energy minimization is descent toward the lowest-cost configuration. But the dark room returns — the deepest minimum is a dead-perfect crystal, so a LIVING form stops short of the bottom, resting at the edge where it can still be moved.",
+   "layer": "F_order",
+   "prerequisites": [
+    "forces"
+   ],
+   "unlocks": [
+    "wavefunctions"
+   ],
+   "difficulty": "intermediate",
+   "estimated_time": "20-25 minutes",
+   "learning_objectives": [
+    "Form as the minimum of a functional — nature is lazy",
+    "The gradient: roll downhill toward lower cost",
+    "The catenary and the minimal surface: chains and soap films",
+    "Relaxation: a mesh settles to rest length",
+    "Equilibrium: the balance, the truss, the tensegrity",
+    "Escaping the local minimum: annealing, and stopping short of the dead-perfect bottom"
+   ],
+   "maps": [
+    "FormFinding_Descent",
+    "FormFinding_Catenary",
+    "FormFinding_Relaxation",
+    "FormFinding_Equilibrium",
+    "FormFinding_Annealing",
+    "FormFinding_Forge"
+   ],
+   "content": [
+    "FormFinding_Descent: why does matter take THIS shape? — the marble in the bowl, the gradient",
+    "FormFinding_Catenary: the hanging chain and the soap film — the two oldest solved minimizations",
+    "FormFinding_Relaxation: the mesh settles to rest — and D'Arcy Thompson, form as a fossil of forces",
+    "FormFinding_Equilibrium: the balance, the truss, the tensegrity — Gaudi inverts the chain",
+    "FormFinding_Annealing: escape the local minimum — and the landscape's ethics (dead-perfect vs alive)",
+    "FormFinding_Forge: shape your own form; prove it by reaching the minimum"
+   ]
+  }
+ }
+}

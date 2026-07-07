@@ -1,0 +1,1 @@
+One painted cell. The domain is the pattern's whole genome — everything the wall will ever show is already decided in this little square. On the floor, a Pompeii meander built from exactly three tile types: two thousand years of pattern labor, the rule performed before the theorem existed.

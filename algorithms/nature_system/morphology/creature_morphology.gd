@@ -156,6 +156,22 @@ static func _build_body_segments(dna: CritterDNA, root: Node3D, mapper: CritterT
 		inst.name = "Body_%d" % i
 		inst.mesh = mesh
 
+		# Stash spine-segment metadata so CreatureBatcher can recover
+		# the segment's oriented axis (the body is a curved chain of
+		# tubes, and the AABB alone can't distinguish the orientation).
+		# Also stash start/end radii separately for Tier 2.5 taper.
+		# Stash i so the batcher can drive the alternating darkness
+		# tint via INSTANCE_COLOR.
+		inst.set_meta("body_start",
+			seg_start["position"] as Vector3)
+		inst.set_meta("body_end",
+			seg_end["position"] as Vector3)
+		inst.set_meta("body_radius",
+			((seg_start["radius"] as float) + (seg_end["radius"] as float)) * 0.5)
+		inst.set_meta("body_start_radius", seg_start["radius"] as float)
+		inst.set_meta("body_end_radius",   seg_end["radius"] as float)
+		inst.set_meta("body_index", i)
+
 		# Material: scales surface with per-segment variation
 		var mat := mapper.create_part_material(dna, CritterTraitMapper.PartType.TRUNK, base_seed + i)
 		# Body segments alternate slightly darker
@@ -254,11 +270,15 @@ static func _build_limbs(dna: CritterDNA, root: Node3D, mapper: CritterTraitMapp
 				# Number of joints in the limb
 				var joint_count: int = 2 if dna.mobility > 0.5 else 1
 
-				# Build the limb segments
+				# Build the limb segments. Start position is INSIDE the
+				# body (overlap = limb_radius * 1.5) so the body tube
+				# fully covers the limb's first ring — eliminates the
+				# visible seam at the body/limb attachment.
+				var limb_overlap: float = limb_radius * 1.5
 				_build_single_limb(dna, root, mapper,
 					base_seed + seg_idx * 1000 + pair_idx * 100 + (1 if side > 0 else 0),
-					seg_pos + limb_dir * seg_radius,  # Start at body surface
-					limb_dir, limb_length, limb_radius,
+					seg_pos + limb_dir * (seg_radius - limb_overlap),
+					limb_dir, limb_length + limb_overlap, limb_radius,
 					limb_taper, joint_count, limb_sides, lod)
 
 				limb_count += 1
@@ -294,6 +314,21 @@ static func _build_single_limb(dna: CritterDNA, root: Node3D, mapper: CritterTra
 			var inst := MeshInstance3D.new()
 			inst.name = "Limb_%d_%d" % [seed_val, joint_idx]
 			inst.mesh = mesh
+
+			# Stash the limb's actual axis (start point, end point, mean
+			# radius) as metadata. CreatureBatcher reads these to place
+			# a canonical unit cylinder correctly when consolidating
+			# limbs into one MultiMesh — without it, the batcher only
+			# has the axis-aligned AABB to work from, which can't
+			# recover an arbitrarily-oriented tube. Purely additive;
+			# does not affect rendering of the un-batched form.
+			# Also stash start_radius and end_radius separately so the
+			# batcher can recover the taper factor (Tier 2.5).
+			inst.set_meta("limb_start", pos)
+			inst.set_meta("limb_end", end_pos)
+			inst.set_meta("limb_radius", (radius + end_radius) * 0.5)
+			inst.set_meta("limb_start_radius", radius)
+			inst.set_meta("limb_end_radius", end_radius)
 
 			# Limb material: scale surface, different pattern from body
 			var mat := mapper.create_part_material(dna, CritterTraitMapper.PartType.LIMB, seed_val + joint_idx * 10)
@@ -344,6 +379,18 @@ static func _build_limb_tip(dna: CritterDNA, root: Node3D, mapper: CritterTraitM
 	inst.name = "LimbTip_%d" % seed_val
 	inst.mesh = tip_mesh
 	inst.position = pos + dir * tip_size
+
+	# Stash tip size so CreatureBatcher can scale a canonical tip mesh
+	# correctly when batching tips that came from limbs of different
+	# end radii. Type-tag indicates which canonical mesh applies
+	# (claw / fin / pad).
+	inst.set_meta("tip_size", tip_size)
+	if dna.aggression > 0.6 and dna.edge_type > 0.5:
+		inst.set_meta("tip_kind", "claw")
+	elif dna.mobility < 0.3:
+		inst.set_meta("tip_kind", "fin")
+	else:
+		inst.set_meta("tip_kind", "pad")
 
 	# Point in limb direction
 	if dir.length() > 0.001:

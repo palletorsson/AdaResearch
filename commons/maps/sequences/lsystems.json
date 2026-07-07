@@ -1,217 +1,218 @@
 {
-  "sequences": {
-	"lsystems": {
-	  "name": "L-Systems: Rules Grow Structure",
-	  "truth": "A sentence can become a forest. Grammar is generative.",
-	  "qfep_term": "Lambda_Edge",
-	  "qfep_connection": "L-systems sit at the edge between deterministic rules (F) and emergent complexity (E). Simple rewriting rules produce infinite variation. The lambda parameter is iteration count â€” each generation pushes further toward the edge.",
-	  "description": "From a single axiom, a tree grows. L-systems are string rewriting rules that generate branching structures â€” trees, cities, space-filling curves. Start in the grammar lab, watch growth unfold, formalize the rules, build cities, compete for space, and finally watch the world come alive.",
-	  "layer": "lambda_edge",
-	  "prerequisites": [
-		"fractals",
-        "randomness"
-	  ],
-	  "unlocks": [
-        "proceduralgeneration"
-	  ],
-	  "difficulty": "intermediate",
-	  "estimated_time": "25-35 minutes",
-	  "learning_objectives": [
-		"String rewriting as generative process",
-		"Turtle graphics interpretation of L-system strings",
-		"Context-sensitive vs context-free rules",
-		"Formal grammars and space-filling curves",
-		"L-systems beyond biology â€” architecture and space-filling",
-		"Emergence from competing growth systems",
-        "Grammar as world-building principle â€” ecosystem transition"
-	  ],
-	  "content": [
-		"LSystems_Grammar_Lab: The whole concept in miniature â€” axiom, rules, tree, string",
-		"LSystems_Growth: Watch generation by generation, see context change the outcome",
-		"LSystems_Grammars_And_Curves: Formal grammar meets space-filling â€” rules that visit every point",
-		"LSystems_Architecture: Beyond nature â€” grammar builds cities and dungeons",
-		"LSystems_Competition: Multiple trees, one world â€” ecology emerges, catalyst introduced",
-        "LSystems_Living: The world starts to grow â€” grammar becomes biology"
-	  ],
-	  "maps": [
-		"LSystems_Grammar_Lab",
-		"LSystems_Growth",
-		"LSystems_Grammars_And_Curves",
-		"LSystems_Architecture",
-		"LSystems_Competition",
-		"LSystems_Living",
-        "Chamber_LSystems"
-	  ],
-	  "audio": {
-		"ambient_preset": "minimal_drone",
-		"volume": -10.0
-	  },
-	  "return_to": "lab",
-	  "lab_map": "Lab/map_data_post_lsystems",
-	  "completion_rewards": [
-        "grammarian_badge"
-	  ],
-	  "deferred_maps": [
-		"LSystems_Tree_L_Systems",
-		"LSystems_AnimatedTree",
-		"LSystems_ContextSensitiveTree",
-		"LSystems_ForestCompetition",
-		"LSystems_Context_Free_Grammars_CFG",
-		"LSystems_CityGenerator",
-		"LSystems_Hilbert3D",
-		"LSystems_Different_Grammar_Types",
-		"LSystems_Shape_Grammars",
-		"LSystems_Stochastic_L_Systems",
-        "LSystems_Backus_Naur_Form_BNF"
-	  ],
-	  "references": {
-		"key_texts": [
-          "Prusinkiewicz & Lindenmayer: The Algorithmic Beauty of Plants"
-		],
-		"related_algorithms": [
-		  "algorithms/lsystems/",
-          "algorithms/fractals/lsystem_dungeon/"
-		]
-	  },
-	  "artifact_groups": [
-		{
-		  "map": "LSystems_Grammar_Lab",
-		  "position": "intro",
-		  "artifacts": [
-			"dark_sphere",
-			"fractal_lsystem_string",
-			"lsystem_editor",
-            "lsystem_tree"
-		  ],
-		  "size_budget": "mixed",
-		  "rationale": "Interactive pipeline: editor, tree output, visible string expansion, and visual anchor. Axiom rewriting producing organic structure."
-		},
-		{
-		  "map": "LSystems_Growth",
-		  "position": "foundation",
-		  "artifacts": [
-			"AnimatedTree",
-			"ContextSensitiveTree",
-			"lsystem_tree",
-            "parametric_lsystem"
-		  ],
-		  "size_budget": "environment",
-		  "rationale": "Four tree artifacts: animated growth, context-sensitive branching, static comparison, and continuous parameter tweaking. Same axiom, different context, different trees."
-		},
-		{
-		  "map": "LSystems_Grammars_And_Curves",
-		  "position": "exploration",
-		  "artifacts": [
-			"Hilbert3D",
-            "space_filling_curve_gallery"
-		  ],
-		  "size_budget": "mixed",
-		  "rationale": "3D Hilbert curve overhead and floor gallery of Hilbert/Peano/Moore curves. Formal grammar generating paths that visit every point."
-		},
-		{
-		  "map": "LSystems_Architecture",
-		  "position": "exploration",
-		  "artifacts": [
-			"CityGenerator",
-			"dark_sphere",
-            "lsystem_dungeon"
-		  ],
-		  "size_budget": "world_scale",
-		  "rationale": "City and dungeon generation using L-system rules. Same grammar yields different spatial results when turtle interpretation changes."
-		},
-		{
-		  "map": "LSystems_Competition",
-		  "position": "integration",
-		  "artifacts": [
-			"ForestCompetition",
-			"branching_coral",
-            "dark_sphere"
-		  ],
-		  "size_budget": "environment",
-		  "rationale": "Competing growth systems (forest + coral) where ecology emerges from local grammar interactions within shared constraints."
-		},
-		{
-		  "map": "LSystems_Living",
-		  "position": "synthesis",
-		  "artifacts": [
-			"branching_coral",
-			"genetic_tree_sculptor",
-            "lsystem_tree"
-		  ],
-		  "size_budget": "compact_only",
-		  "rationale": "Grammar becomes world: player designs tree DNA (sculptor), coral grows, terrain follows branching logic. Rules-that-make-trees become rules-that-make-worlds."
-		}
-	  ]
-	}
+ "sequences": {
+  "lsystems": {
+   "name": "L-Systems: Rules Grow Structure",
+   "truth": "A sentence can become a forest. Grammar is generative.",
+   "qfep_term": "Lambda_Edge",
+   "qfep_connection": "L-systems sit at the edge between deterministic rules (F) and emergent complexity (E). Simple rewriting rules produce infinite variation. The lambda parameter is iteration count â€” each generation pushes further toward the edge.",
+   "description": "From a single axiom, a tree grows. L-systems are string rewriting rules that generate branching structures â€” trees, cities, space-filling curves. Start in the grammar lab, watch growth unfold, formalize the rules, build cities, compete for space, and finally watch the world come alive.",
+   "layer": "lambda_edge",
+   "prerequisites": [
+    "fractals",
+    "randomness"
+   ],
+   "unlocks": [
+    "proceduralgeneration"
+   ],
+   "difficulty": "intermediate",
+   "estimated_time": "25-35 minutes",
+   "learning_objectives": [
+    "String rewriting as generative process",
+    "Turtle graphics interpretation of L-system strings",
+    "Context-sensitive vs context-free rules",
+    "Formal grammars and space-filling curves",
+    "L-systems beyond biology â€” architecture and space-filling",
+    "Emergence from competing growth systems",
+    "Grammar as world-building principle â€” ecosystem transition"
+   ],
+   "content": [
+    "LSystems_Grammar_Lab: The whole concept in miniature â€” axiom, rules, tree, string",
+    "LSystems_Growth: Watch generation by generation, see context change the outcome",
+    "LSystems_Grammars_And_Curves: Formal grammar meets space-filling â€” rules that visit every point",
+    "LSystems_Architecture: Beyond nature â€” grammar builds cities and dungeons",
+    "LSystems_Competition: Multiple trees, one world â€” ecology emerges, catalyst introduced",
+    "LSystems_Living: The world starts to grow â€” grammar becomes biology",
+    "Assemblage_Same_Desire: the long tradition of math and craft — the same desire in Godel and the Kente patterns"
+   ],
+   "maps": [
+    "LSystems_Grammar_Lab",
+    "LSystems_Growth",
+    "LSystems_Grammars_And_Curves",
+    "LSystems_Architecture",
+    "LSystems_Competition",
+    "LSystems_Living",
+    "Assemblage_Same_Desire"
+   ],
+   "audio": {
+    "ambient_preset": "minimal_drone",
+    "volume": -10.0
+   },
+   "return_to": "lab",
+   "lab_map": "Lab/map_data_post_lsystems",
+   "completion_rewards": [
+    "grammarian_badge"
+   ],
+   "deferred_maps": [
+    "LSystems_Tree_L_Systems",
+    "LSystems_AnimatedTree",
+    "LSystems_ContextSensitiveTree",
+    "LSystems_ForestCompetition",
+    "LSystems_Context_Free_Grammars_CFG",
+    "LSystems_CityGenerator",
+    "LSystems_Hilbert3D",
+    "LSystems_Different_Grammar_Types",
+    "LSystems_Shape_Grammars",
+    "LSystems_Stochastic_L_Systems",
+    "LSystems_Backus_Naur_Form_BNF"
+   ],
+   "references": {
+    "key_texts": [
+     "Prusinkiewicz & Lindenmayer: The Algorithmic Beauty of Plants"
+    ],
+    "related_algorithms": [
+     "algorithms/lsystems/",
+     "algorithms/fractals/lsystem_dungeon/"
+    ]
+   },
+   "artifact_groups": [
+    {
+     "map": "LSystems_Grammar_Lab",
+     "position": "intro",
+     "artifacts": [
+      "dark_sphere",
+      "fractal_lsystem_string",
+      "lsystem_editor",
+      "lsystem_tree"
+     ],
+     "size_budget": "mixed",
+     "rationale": "Interactive pipeline: editor, tree output, visible string expansion, and visual anchor. Axiom rewriting producing organic structure."
+    },
+    {
+     "map": "LSystems_Growth",
+     "position": "foundation",
+     "artifacts": [
+      "AnimatedTree",
+      "ContextSensitiveTree",
+      "lsystem_tree",
+      "parametric_lsystem"
+     ],
+     "size_budget": "environment",
+     "rationale": "Four tree artifacts: animated growth, context-sensitive branching, static comparison, and continuous parameter tweaking. Same axiom, different context, different trees."
+    },
+    {
+     "map": "LSystems_Grammars_And_Curves",
+     "position": "exploration",
+     "artifacts": [
+      "Hilbert3D",
+      "space_filling_curve_gallery"
+     ],
+     "size_budget": "mixed",
+     "rationale": "3D Hilbert curve overhead and floor gallery of Hilbert/Peano/Moore curves. Formal grammar generating paths that visit every point."
+    },
+    {
+     "map": "LSystems_Architecture",
+     "position": "exploration",
+     "artifacts": [
+      "CityGenerator",
+      "dark_sphere",
+      "lsystem_dungeon"
+     ],
+     "size_budget": "world_scale",
+     "rationale": "City and dungeon generation using L-system rules. Same grammar yields different spatial results when turtle interpretation changes."
+    },
+    {
+     "map": "LSystems_Competition",
+     "position": "integration",
+     "artifacts": [
+      "ForestCompetition",
+      "branching_coral",
+      "dark_sphere"
+     ],
+     "size_budget": "environment",
+     "rationale": "Competing growth systems (forest + coral) where ecology emerges from local grammar interactions within shared constraints."
+    },
+    {
+     "map": "LSystems_Living",
+     "position": "synthesis",
+     "artifacts": [
+      "branching_coral",
+      "genetic_tree_sculptor",
+      "lsystem_tree"
+     ],
+     "size_budget": "compact_only",
+     "rationale": "Grammar becomes world: player designs tree DNA (sculptor), coral grows, terrain follows branching logic. Rules-that-make-trees become rules-that-make-worlds."
+    }
+   ]
+  }
+ },
+ "artifact_groups": [
+  {
+   "map": "LSystems_Grammar_Lab",
+   "position": "intro",
+   "artifacts": [
+    "lsystem_editor",
+    "lsystem_tree",
+    "fractal_lsystem_string",
+    "dark_sphere"
+   ],
+   "size_budget": "compact_only",
+   "rationale": "Introduces L-system concept with interactive editor and basic tree. First map, beginner-friendly."
   },
-  "artifact_groups": [
-	{
-	  "map": "LSystems_Grammar_Lab",
-	  "position": "intro",
-	  "artifacts": [
-		"lsystem_editor",
-		"lsystem_tree",
-		"fractal_lsystem_string",
-        "dark_sphere"
-	  ],
-	  "size_budget": "compact_only",
-	  "rationale": "Introduces L-system concept with interactive editor and basic tree. First map, beginner-friendly."
-	},
-	{
-	  "map": "LSystems_Growth",
-	  "position": "foundation",
-	  "artifacts": [
-		"AnimatedTree",
-		"ContextSensitiveTree",
-		"lsystem_tree",
-        "parametric_lsystem"
-	  ],
-	  "size_budget": "compact_only",
-	  "rationale": "Builds on intro with animated growth and context-sensitive variation. Four tree artifacts showing generational progression."
-	},
-	{
-	  "map": "LSystems_Grammars_And_Curves",
-	  "position": "exploration",
-	  "artifacts": [
-		"Hilbert3D",
-        "space_filling_curve_gallery"
-	  ],
-	  "size_budget": "compact_only",
-	  "rationale": "Formal grammar meets space-filling curves. Two focused artifacts showing rules visiting every point."
-	},
-	{
-	  "map": "LSystems_Architecture",
-	  "position": "exploration",
-	  "artifacts": [
-		"dark_sphere",
-		"CityGenerator",
-        "lsystem_dungeon"
-	  ],
-	  "size_budget": "mixed",
-	  "rationale": "Grammar beyond biology. City and dungeon generation show L-systems as architectural tools."
-	},
-	{
-	  "map": "LSystems_Competition",
-	  "position": "integration",
-	  "artifacts": [
-		"ForestCompetition",
-		"branching_coral",
-        "dark_sphere"
-	  ],
-	  "size_budget": "compact_only",
-	  "rationale": "Multiple growth systems competing for space. Ecology emerges from grammar interactions."
-	},
-	{
-	  "map": "LSystems_Living",
-	  "position": "synthesis",
-	  "artifacts": [
-		"lsystem_tree",
-		"genetic_tree_sculptor",
-        "branching_coral"
-	  ],
-	  "size_budget": "compact_only",
-	  "rationale": "Synthesis map with callbacks to tree (intro), coral (integration), plus genetic sculptor bridging to evolution. Grammar becomes biology."
-	}
-  ],
-  "world_phase": "organic"
+  {
+   "map": "LSystems_Growth",
+   "position": "foundation",
+   "artifacts": [
+    "AnimatedTree",
+    "ContextSensitiveTree",
+    "lsystem_tree",
+    "parametric_lsystem"
+   ],
+   "size_budget": "compact_only",
+   "rationale": "Builds on intro with animated growth and context-sensitive variation. Four tree artifacts showing generational progression."
+  },
+  {
+   "map": "LSystems_Grammars_And_Curves",
+   "position": "exploration",
+   "artifacts": [
+    "Hilbert3D",
+    "space_filling_curve_gallery"
+   ],
+   "size_budget": "compact_only",
+   "rationale": "Formal grammar meets space-filling curves. Two focused artifacts showing rules visiting every point."
+  },
+  {
+   "map": "LSystems_Architecture",
+   "position": "exploration",
+   "artifacts": [
+    "dark_sphere",
+    "CityGenerator",
+    "lsystem_dungeon"
+   ],
+   "size_budget": "mixed",
+   "rationale": "Grammar beyond biology. City and dungeon generation show L-systems as architectural tools."
+  },
+  {
+   "map": "LSystems_Competition",
+   "position": "integration",
+   "artifacts": [
+    "ForestCompetition",
+    "branching_coral",
+    "dark_sphere"
+   ],
+   "size_budget": "compact_only",
+   "rationale": "Multiple growth systems competing for space. Ecology emerges from grammar interactions."
+  },
+  {
+   "map": "LSystems_Living",
+   "position": "synthesis",
+   "artifacts": [
+    "lsystem_tree",
+    "genetic_tree_sculptor",
+    "branching_coral"
+   ],
+   "size_budget": "compact_only",
+   "rationale": "Synthesis map with callbacks to tree (intro), coral (integration), plus genetic sculptor bridging to evolution. Grammar becomes biology."
+  }
+ ],
+ "world_phase": "organic"
 }

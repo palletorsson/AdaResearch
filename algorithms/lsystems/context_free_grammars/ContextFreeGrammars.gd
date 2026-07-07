@@ -1,5 +1,7 @@
 extends Node3D
 
+const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
+
 ## Context-Free Grammars — Parse Tree & Chomsky Hierarchy
 ## Visualizes grammar derivations as animated hierarchical parse trees.
 ## Shows attribute grammars with synthesized values, Chomsky hierarchy levels,
@@ -45,9 +47,13 @@ var _hierarchy_instance: MeshInstance3D
 var _derivation_mesh: ImmediateMesh
 var _derivation_instance: MeshInstance3D
 
-var _info_label: Label3D
-var _grammar_label: Label3D
-var _derivation_label: Label3D
+# Framed 2D-in-3D readout boards (R-027) — each rebuilt only when its text changes
+var _info_board: Node3D
+var _info_cache := ""
+var _grammar_board: Node3D
+var _grammar_cache := ""
+var _derivation_board: Node3D
+var _derivation_cache := ""
 
 var _time: float = 0.0
 var _step_timer: float = 0.0
@@ -728,25 +734,41 @@ func _draw_deriv_square(center: Vector3, half: float, col: Color) -> void:
 
 
 func _update_labels() -> void:
-	if _info_label:
-		var attr_text := ""
-		if grammar_index == 2 and not _tree_root.is_empty():
-			attr_text = "\nSynthesized value: %d" % _tree_root.get("attr", 0)
-		_info_label.text = "Context-Free Grammars\n%s\nStep: %d  Nodes: %d%s" % [
-			grammar_names[grammar_index],
-			derivation_step,
-			_next_node_id,
-			attr_text,
-		]
+	# Rebuild each board only when its string changes — never per frame (R-027)
+	var attr_text := ""
+	if grammar_index == 2 and not _tree_root.is_empty():
+		attr_text = "\nSynthesized value: %d" % _tree_root.get("attr", 0)
+	var info_text := "Context-Free Grammars\n%s\nStep: %d  Nodes: %d%s" % [
+		grammar_names[grammar_index],
+		derivation_step,
+		_next_node_id,
+		attr_text,
+	]
+	if info_text != _info_cache:
+		_info_cache = info_text
+		if is_instance_valid(_info_board):
+			_info_board.queue_free()
+		_info_board = _make_board(info_text, Color(0.85, 0.9, 1.0),
+			Vector3(0, display_size * 0.7, 0), 0.42, 0.032)
 
-	if _grammar_label:
-		_grammar_label.text = _grammar_rules_text()
+	var grammar_text := _grammar_rules_text()
+	if grammar_text != _grammar_cache:
+		_grammar_cache = grammar_text
+		if is_instance_valid(_grammar_board):
+			_grammar_board.queue_free()
+		_grammar_board = _make_board(grammar_text, Color(0.7, 0.85, 1.0),
+			Vector3(-display_size * 0.55, display_size * 0.7, 0), 0.38, 0.03)
 
-	if _derivation_label:
-		var display_str := current_string
-		if display_str.length() > 40:
-			display_str = display_str.substr(0, 37) + "..."
-		_derivation_label.text = "Yield: %s\nLength: %d" % [display_str, current_string.length()]
+	var display_str := current_string
+	if display_str.length() > 40:
+		display_str = display_str.substr(0, 37) + "..."
+	var deriv_text := "Yield: %s\nLength: %d" % [display_str, current_string.length()]
+	if deriv_text != _derivation_cache:
+		_derivation_cache = deriv_text
+		if is_instance_valid(_derivation_board):
+			_derivation_board.queue_free()
+		_derivation_board = _make_board(deriv_text, Color(1.0, 0.85, 0.4),
+			Vector3(display_size * 0.55, display_size * 0.7, 0), 0.46, 0.03)
 
 
 func _grammar_rules_text() -> String:
@@ -827,51 +849,67 @@ func _create_displays() -> void:
 
 
 func _create_labels() -> void:
-	_info_label = Label3D.new()
-	_info_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	_info_label.font_size = 24
-	_info_label.outline_size = 4
-	_info_label.modulate = Color(0.85, 0.9, 1.0)
-	_info_label.position = Vector3(0, display_size * 0.7, 0)
-	_info_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	add_child(_info_label)
+	# The info / grammar-rules / derivation readouts are framed boards built
+	# lazily by _update_labels() (R-027) — nothing to pre-create here.
 
-	_grammar_label = Label3D.new()
-	_grammar_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	_grammar_label.font_size = 18
-	_grammar_label.outline_size = 3
-	_grammar_label.modulate = Color(0.7, 0.85, 1.0)
-	_grammar_label.position = Vector3(-display_size * 0.55, display_size * 0.7, 0)
-	_grammar_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
-	add_child(_grammar_label)
-
-	_derivation_label = Label3D.new()
-	_derivation_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	_derivation_label.font_size = 18
-	_derivation_label.outline_size = 3
-	_derivation_label.modulate = Color(1.0, 0.85, 0.4)
-	_derivation_label.position = Vector3(display_size * 0.55, display_size * 0.7, 0)
-	_derivation_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	add_child(_derivation_label)
-
-	# Chomsky hierarchy level labels
+	# Chomsky hierarchy level tags — framed 2D-in-3D tags (R-027)
 	var level_names := ["Type 0: Unrestricted", "Type 1: Context-Sens.", "Type 2: Context-Free", "Type 3: Regular"]
 	var sizes := [0.38, 0.30, 0.22, 0.14]
 	for i in range(4):
-		var lbl := Label3D.new()
-		lbl.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-		lbl.font_size = 12
-		lbl.outline_size = 2
-		lbl.modulate = COL_HIERARCHY[i]
-		lbl.modulate.a = 1.0
-		lbl.text = level_names[i]
-		lbl.position = Vector3(
-			-display_size * 0.55 + sizes[i] * display_size - 0.02,
-			-display_size * 0.25 + sizes[i] * display_size * 0.6 + 0.01,
-			0.01
-		)
-		lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
-		add_child(lbl)
+		var col: Color = COL_HIERARCHY[i]
+		col.a = 1.0
+		var lbl: Node3D = BakedText.make_tag(level_names[i], col, 0.022)
+		if lbl:
+			lbl.position = Vector3(
+				-display_size * 0.55 + sizes[i] * display_size - 0.02,
+				-display_size * 0.25 + sizes[i] * display_size * 0.6 + 0.02,
+				0.01
+			)
+			add_child(lbl)
+
+# One framed dark board holding a multi-line readout — frame + dark face +
+# one baked text line per row.
+func _make_board(text: String, color: Color, pos: Vector3, line_w: float, line_h: float) -> Node3D:
+	var root := Node3D.new()
+	root.position = pos
+	add_child(root)
+	var rows := text.split("\n")
+	root.add_child(_plate(Vector3(line_w + 0.05, line_h * 1.3 * rows.size() + 0.03, 0.02)))
+	var y := line_h * 0.65 * (rows.size() - 1)
+	for r in rows:
+		var line := String(r)
+		if not line.is_empty():
+			var q: MeshInstance3D = BakedText.make_label_mesh(line, color, Vector2(line_w, line_h), 1400, true)
+			if q:
+				q.position = Vector3(0, y, 0.012)
+				root.add_child(q)
+		y -= line_h * 1.3
+	return root
+
+func _plate(size: Vector3) -> Node3D:
+	var g := Node3D.new()
+	var frame := MeshInstance3D.new()
+	var fm := BoxMesh.new()
+	fm.size = size + Vector3(0.05, 0.05, -0.01)
+	frame.mesh = fm
+	var fmat := StandardMaterial3D.new()
+	fmat.albedo_color = Color(0.62, 0.60, 0.56)
+	fmat.roughness = 0.7
+	frame.material_override = fmat
+	frame.position = Vector3(0, 0, -0.006)
+	g.add_child(frame)
+	var face := MeshInstance3D.new()
+	var bm := BoxMesh.new()
+	bm.size = size
+	face.mesh = bm
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color(0.10, 0.11, 0.14)
+	mat.emission_enabled = true
+	mat.emission = Color(0.10, 0.11, 0.14)
+	mat.emission_energy_multiplier = 0.25
+	face.material_override = mat
+	g.add_child(face)
+	return g
 
 
 func set_grammar(index: int) -> void:

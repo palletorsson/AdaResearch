@@ -220,5 +220,8 @@ func _bake_and_replace(mat: StandardMaterial3D) -> void:
 	mi.mesh = baked
 	mi.material_override = mat
 	add_child(mi)
+	# Collider matching the carved mesh — the player collides with the solid
+	# frame but can still pass through the face-mouths (the void is walkable).
+	mi.create_trimesh_collision()
 	_combiner.queue_free()
 	_combiner = null

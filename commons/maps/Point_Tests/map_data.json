@@ -2,8 +2,8 @@
   "map_info": {
     "name": "Tutorial_2D",
     "lookup_name": "Point_Tests",
-    "description": "2D Array Navigation - explore both X and Y axes in a grid structure",
-    "version": "1.0",
+    "description": "2D Array Navigation - explore both X and Y axes in a grid structure\n\n[Placement applied humanoid_walker engine — constraint 0.857→0.938, walkability 0.731→0.988]",
+    "version": "placed-humanoid_walker",
     "format": "json",
     "dimensions": {
       "width": 20,
@@ -14,12 +14,7 @@
       "difficulty": "beginner",
       "category": "tutorial",
       "estimated_time": "3-4 minutes",
-      "learning_objectives": [
-        "2D arrays",
-        "Grid navigation",
-        "X-Y coordinate system",
-        "Multi-dimensional thinking"
-      ]
+      "learning_objectives": ["2D arrays","Grid navigation","X-Y coordinate system","Multi-dimensional thinking"]
     }
   },
   "utility_definitions": {
@@ -41,33 +36,15 @@
     "summary": "Point_Tests - Experimental Grid",
     "layout": "Planar 12x13 testbed with northern 2-high ridge; open experimentation floor.",
     "objective": "Provide sandbox for geometry utility evaluation.",
-    "key_elements": [
-      "Teleporter `t` at (5,6)",
-      "`combine_capsule` gallery at (1,1)",
-      "`doublestick:90:0.5` linkage at (3,3)",
-      "`cube_scene_drag_points` scaled 0.8 at (1,4)",
-      "`combine_sphere` array at (1,6)"
-    ]
+    "key_elements": ["Teleporter `t` at (5,6)","`combine_capsule` gallery at (1,1)","`doublestick:90:0.5` linkage at (3,3)","`cube_scene_drag_points` scaled 0.8 at (1,4)","`combine_sphere` array at (1,6)"]
   },
   "lighting": {
-    "ambient_color": [
-      0.4,
-      0.4,
-      0.5
-    ],
+    "ambient_color": [0.4,0.4,0.5],
     "ambient_energy": 0.6,
     "directional_light": {
       "enabled": true,
-      "direction": [
-        -0.4,
-        -0.7,
-        -0.4
-      ],
-      "color": [
-        1.0,
-        0.9,
-        0.8
-      ],
+      "direction": [-0.4,-0.7,-0.4],
+      "color": [1.0,0.9,0.8],
       "energy": 1.2
     }
   },
@@ -80,11 +57,7 @@
     "initial_tile_visibility": "hidden_except_corners",
     "background": {
       "type": "sky",
-      "color": [
-        0.2,
-        0.3,
-        0.7
-      ]
+      "color": [0.2,0.3,0.7]
     }
   },
   "layers": {
@@ -119,19 +92,26 @@
       [" "," "," "," "," "," "," "," "," "," "," "," "]
     ],
     "interactables": [
-      [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" ","combine_capsule"," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," ",""," "," "," "," "," "," "],
-      [" "," "," ","doublestick:90:0.5"," "," "," "," "," "," "," "," "],
-      [" ","cube_scene_drag_points:0:0:0.8"," "," "," ",""," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" ","combine_sphere"," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "]
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," ","combine_capsule"," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," ","doublestick:90:0.5"," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," ","cube_scene_drag_points:0:0:0.8"," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," ","combine_sphere"," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "," "]
     ]
   }
 }

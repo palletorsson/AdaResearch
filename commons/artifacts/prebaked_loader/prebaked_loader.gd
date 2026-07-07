@@ -40,7 +40,7 @@ func _ready() -> void:
 
 
 func apply_grid_config(cfg: Dictionary) -> void:
-	if cfg.has("scene_path"):   scene_path = String(cfg["scene_path"])
+	if cfg.has("scene_path"):   scene_path = str(cfg["scene_path"])
 	if cfg.has("scale_factor"): scale_factor = float(cfg["scale_factor"])
 	if cfg.has("scale"):        scale_factor = float(cfg["scale"])  # alias
 	if cfg.has("y_offset"):     y_offset = float(cfg["y_offset"])

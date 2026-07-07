@@ -6,6 +6,16 @@ extends MeshInstance3D
 ## 
 ## The solid has 8 faces: 6 irregular pentagons + 2 equilateral triangles.
 ## It appears in the famous engraving representing melancholy and geometry.
+#
+# @identity
+# essence: Dürer's truncated rhombohedron from Melencolia I (1514) — a cube stretched along its body diagonal and cut at two corners
+# desire: learner meets geometry as a mood — the same vertex tables that make a cube can make an object that reads as melancholy
+# critical_parameter: size and the golden-ratio proportions (h, w) — the elongation that turns an ordinary cube into Dürer's brooding solid
+# triggers: builds the 8-face solid (6 pentagons + 2 triangles) via SurfaceTool in _generate_durer_solid on ready
+# emerges: the recognition that a primitive carries cultural weight — a shape can be a symbol, not only a form
+# needs: [procedural mesh from canonical proportions [has], missing the exact irregular-pentagon net of the historical engraving]
+# relationships: the melancholy sibling of the platonic solids; anchors the Primitives_Melencolia map
+# truth: geometry is never only geometry — Dürer's solid proves a polyhedron can hold five centuries of meaning
 
 @export var size: float = 1.0 : set = set_size
 @export var material: Material : set = set_material

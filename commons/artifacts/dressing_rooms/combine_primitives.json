@@ -1,56 +1,105 @@
 {
-	"approach": "south",
-	"artifact_offset": [
-		0.0,
-		1.0,
-		0.0
-	],
-	"clearance": [
-		3.0,
-		3.0,
-		3.0
-	],
-	"exit": "north",
-	"extras": [],
-	"footing": {
-		"anchor": [
-			1.0,
-			1.0
-		],
-		"tiles": [
-			[
-				1.0,
-				1.0,
-				1.0
-			],
-			[
-				1.0,
-				3.0,
-				1.0
-			],
-			[
-				1.0,
-				1.0,
-				1.0
-			]
-		]
-	},
-	"footprint": [
-		1,
-		1,
-		2
-	],
-	"lookup_name": "combine_primitives",
-	"notes": {
-		"tags": [
-			"artifact-needs-fix"
-		],
-		"text": "[auto] AABB.y min = -1.00 — body sinks into / floats above floor"
-	},
-	"rotations": [
-		"0",
-		"90",
-		"180",
-		"270"
-	]
+  "approach": "south",
+  "artifact_offset": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "clearance": [
+    3.0,
+    3.0,
+    3.0
+  ],
+  "exit": "north",
+  "extras": [],
+  "footing": {
+    "anchor": [
+      3,
+      3
+    ],
+    "tiles": [
+      [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1
+      ],
+      [
+        1,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1
+      ],
+      [
+        1,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1
+      ],
+      [
+        1,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1
+      ],
+      [
+        1,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    ]
+  },
+  "footprint": [
+    1,
+    1,
+    2
+  ],
+  "lookup_name": "combine_primitives",
+  "notes": {
+    "tags": [
+      "artifact-needs-fix"
+    ],
+    "text": "[auto] AABB.y min = -1.00 \u2014 body sinks into / floats above floor"
+  },
+  "rotations": [
+    "0",
+    "90",
+    "180",
+    "270"
+  ],
+  "posture": "platform"
 }

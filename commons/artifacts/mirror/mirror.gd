@@ -103,27 +103,27 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 func _read_metadata_overrides() -> void:
 	if has_meta("config_mirror_width"):
-		mirror_width = float(String(get_meta("config_mirror_width")))
+		mirror_width = float(str(get_meta("config_mirror_width")))
 	if has_meta("config_mirror_height"):
-		mirror_height = float(String(get_meta("config_mirror_height")))
+		mirror_height = float(str(get_meta("config_mirror_height")))
 	if has_meta("config_mirror_depth"):
-		mirror_depth = float(String(get_meta("config_mirror_depth")))
+		mirror_depth = float(str(get_meta("config_mirror_depth")))
 	if has_meta("config_frame_thickness"):
-		frame_thickness = float(String(get_meta("config_frame_thickness")))
+		frame_thickness = float(str(get_meta("config_frame_thickness")))
 	if has_meta("config_frame_color"):
-		frame_color = _parse_color(String(get_meta("config_frame_color")), frame_color)
+		frame_color = _parse_color(str(get_meta("config_frame_color")), frame_color)
 	if has_meta("config_glass_color"):
-		glass_color = _parse_color(String(get_meta("config_glass_color")), glass_color)
+		glass_color = _parse_color(str(get_meta("config_glass_color")), glass_color)
 	if has_meta("config_glass_emission"):
-		glass_emission = float(String(get_meta("config_glass_emission")))
+		glass_emission = float(str(get_meta("config_glass_emission")))
 	if has_meta("config_mirror_count"):
-		mirror_count = int(String(get_meta("config_mirror_count")))
+		mirror_count = int(str(get_meta("config_mirror_count")))
 	if has_meta("config_mirror_arrangement"):
-		mirror_arrangement = String(get_meta("config_mirror_arrangement")).to_lower()
+		mirror_arrangement = str(get_meta("config_mirror_arrangement")).to_lower()
 	if has_meta("config_mount_stand"):
-		mount_stand = _parse_bool(String(get_meta("config_mount_stand")), mount_stand)
+		mount_stand = _parse_bool(str(get_meta("config_mount_stand")), mount_stand)
 	if has_meta("config_accent_color"):
-		accent_color = _parse_color(String(get_meta("config_accent_color")), accent_color)
+		accent_color = _parse_color(str(get_meta("config_accent_color")), accent_color)
 
 
 func _clear_built_children() -> void:

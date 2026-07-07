@@ -14,21 +14,13 @@
       "difficulty": "beginner",
       "category": "interactive",
       "estimated_time": "exploration based",
-      "learning_objectives": [
-        "Compare 2D schematic vs 3D rendered control boards",
-        "Explore grid-based layout presets across three domains",
-        "Understand modular element systems: glassware, pipes, control panels"
-      ]
+      "learning_objectives": ["Compare 2D schematic vs 3D rendered control boards","Explore grid-based layout presets across three domains","Understand modular element systems: glassware, pipes, control panels"]
     }
   },
   "settings": {
     "auto_reveal_on_entry": true,
     "background": {
-      "color": [
-        0.06,
-        0.06,
-        0.1
-      ],
+      "color": [0.06,0.06,0.1],
       "type": "sky"
     },
     "cube_size": 1.0,
@@ -38,23 +30,11 @@
     "enable_physics": true
   },
   "lighting": {
-    "ambient_color": [
-      0.45,
-      0.45,
-      0.5
-    ],
+    "ambient_color": [0.45,0.45,0.5],
     "ambient_energy": 0.8,
     "directional_light": {
-      "color": [
-        1.0,
-        0.95,
-        0.9
-      ],
-      "direction": [
-        -0.3,
-        -0.8,
-        -0.3
-      ],
+      "color": [1.0,0.95,0.9],
+      "direction": [-0.3,-0.8,-0.3],
       "enabled": true,
       "energy": 0.9
     }

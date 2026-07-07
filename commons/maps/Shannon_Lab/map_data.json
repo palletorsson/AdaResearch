@@ -1,0 +1,70 @@
+{
+  "map_info": {
+    "name": "Shannon Lab",
+    "lookup_name": "Shannon_Lab",
+    "description": "The Shannon bound test chamber. A 'bright minimal' Half-Life-style lab room procedurally built around the shannon_workbench. Lambda-edge red accent strip names the QFEP phase. White tile floor, observation glass at the entrance, signage reading 'TEST CHAMBER λ-S · Shannon Bound Probe'. The room IS the staging — the workbench is the instrument, the chamber tells you what kind of measurement you're about to take. Built 2026-05-20 as a sample wrapper for the 11 existing workbenches; the lab_room artifact generalizes to all of them by changing accent color, signage, and mounted_artifact_scene.",
+    "manual_file": "",
+    "version": "1.0",
+    "format": "json",
+    "dimensions": {
+      "width": 8,
+      "depth": 8,
+      "max_height": 4
+    },
+    "metadata": {
+      "difficulty": "intermediate",
+      "category": "foundationscrisis",
+      "estimated_time": "3-5 minutes",
+      "learning_objectives": ["Walk into a test chamber that frames the instrument it houses","Read the accent color, signage, and wall annotations as scaffolding for the experiment","Interact with the Shannon binary-entropy workbench at the central plinth"]
+    }
+  },
+  "utility_definitions": {
+    "t": "Next",
+    "s": "Spawn Point"
+  },
+  "spawn_points": {
+    "default": {
+      "position": [4.0,1.2,7.5],
+      "rotation": [0,0,0]
+    }
+  },
+  "lighting": {
+    "ambient_color": [0.42,0.43,0.5],
+    "ambient_energy": 0.5
+  },
+  "settings": {
+    "ambient_preset": "lab"
+  },
+  "layers": {
+    "structure": [
+      ["1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","0","1","1","1"]
+    ],
+    "utilities": [
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," ","t"," "," "," "]
+    ],
+    "interactables": [
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," ","lab_room#accent_color:0.902,0.224,0.275#signage_top:TEST CHAMBER λ-S#signage_sub:Shannon Bound Probe#annotation_top:H(p) bits per symbol#annotation_bottom:the lambda_edge between order and noise#mounted_artifact_scene:res://commons/artifacts/shannon_workbench/shannon_workbench.tscn"," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "]
+    ]
+  }
+}

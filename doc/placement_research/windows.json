@@ -1,0 +1,7354 @@
+{
+  "params": {
+    "max_artifacts_per_window": 6,
+    "max_footprint_per_window": 60,
+    "include_non_spine": false
+  },
+  "n_windows": 156,
+  "n_artifacts_placed": 907,
+  "windows": [
+    {
+      "id": "primitives_w0",
+      "sequence": "primitives",
+      "phase": "F_order",
+      "t_min": 0.0044,
+      "t_max": 0.0074,
+      "t_mean": 0.006,
+      "n_artifacts": 6,
+      "total_footprint": 14,
+      "proposed_size": {
+        "width": 16,
+        "depth": 9,
+        "max_height": 3
+      },
+      "size_override": true,
+      "artifacts": [
+        {
+          "name": "sphere_low",
+          "t": 0.0044,
+          "footprint": 1
+        },
+        {
+          "name": "modulor_man_demo",
+          "t": 0.0051,
+          "footprint": 1
+        },
+        {
+          "name": "roughrock",
+          "t": 0.0056,
+          "footprint": 1
+        },
+        {
+          "name": "sphere",
+          "t": 0.0064,
+          "footprint": 1
+        },
+        {
+          "name": "snap_pyramid_puzzle",
+          "t": 0.0068,
+          "footprint": 1
+        },
+        {
+          "name": "folding_past",
+          "t": 0.0074,
+          "footprint": 9
+        }
+      ]
+    },
+    {
+      "id": "primitives_w1",
+      "sequence": "primitives",
+      "phase": "F_order",
+      "t_min": 0.0079,
+      "t_max": 0.0099,
+      "t_mean": 0.0089,
+      "n_artifacts": 6,
+      "total_footprint": 15,
+      "proposed_size": {
+        "width": 10,
+        "depth": 6,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "line_builder_3d",
+          "t": 0.0079,
+          "footprint": 4
+        },
+        {
+          "name": "catalyst_foe",
+          "t": 0.0083,
+          "footprint": 1
+        },
+        {
+          "name": "snap_octahedron_puzzle",
+          "t": 0.0087,
+          "footprint": 1
+        },
+        {
+          "name": "sphere_high",
+          "t": 0.0092,
+          "footprint": 1
+        },
+        {
+          "name": "mesh_grammar_extruded_spire",
+          "t": 0.0096,
+          "footprint": 1
+        },
+        {
+          "name": "achilles_tortoise",
+          "t": 0.0099,
+          "footprint": 7
+        }
+      ]
+    },
+    {
+      "id": "primitives_w2",
+      "sequence": "primitives",
+      "phase": "F_order",
+      "t_min": 0.0103,
+      "t_max": 0.0154,
+      "t_mean": 0.0125,
+      "n_artifacts": 6,
+      "total_footprint": 6,
+      "proposed_size": {
+        "width": 8,
+        "depth": 5,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "draw_triangle_faces",
+          "t": 0.0103,
+          "footprint": 1
+        },
+        {
+          "name": "scale_lines",
+          "t": 0.011,
+          "footprint": 1
+        },
+        {
+          "name": "catalyst_vent",
+          "t": 0.0116,
+          "footprint": 1
+        },
+        {
+          "name": "laser_exploding_sphere",
+          "t": 0.0129,
+          "footprint": 1
+        },
+        {
+          "name": "triangle",
+          "t": 0.014,
+          "footprint": 1
+        },
+        {
+          "name": "code_display",
+          "t": 0.0154,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "primitives_w3",
+      "sequence": "primitives",
+      "phase": "F_order",
+      "t_min": 0.0161,
+      "t_max": 0.0174,
+      "t_mean": 0.0168,
+      "n_artifacts": 6,
+      "total_footprint": 9,
+      "proposed_size": {
+        "width": 8,
+        "depth": 5,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "mesh_grammar_inset_pattern",
+          "t": 0.0161,
+          "footprint": 1
+        },
+        {
+          "name": "mesh_grammar_seed",
+          "t": 0.0165,
+          "footprint": 1
+        },
+        {
+          "name": "grab_octahedron",
+          "t": 0.0168,
+          "footprint": 1
+        },
+        {
+          "name": "mesh_grammar_subdivided",
+          "t": 0.017,
+          "footprint": 1
+        },
+        {
+          "name": "wedge_skill_pickup",
+          "t": 0.0172,
+          "footprint": 4
+        },
+        {
+          "name": "laser_sword",
+          "t": 0.0174,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "primitives_w4",
+      "sequence": "primitives",
+      "phase": "F_order",
+      "t_min": 0.0176,
+      "t_max": 0.0188,
+      "t_mean": 0.0182,
+      "n_artifacts": 6,
+      "total_footprint": 17,
+      "proposed_size": {
+        "width": 11,
+        "depth": 7,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "pythagorean_triangle_angles",
+          "t": 0.0176,
+          "footprint": 3
+        },
+        {
+          "name": "quad",
+          "t": 0.0179,
+          "footprint": 2
+        },
+        {
+          "name": "laser_measure",
+          "t": 0.018,
+          "footprint": 1
+        },
+        {
+          "name": "durer_scene",
+          "t": 0.0183,
+          "footprint": 9
+        },
+        {
+          "name": "cube_scene",
+          "t": 0.0185,
+          "footprint": 1
+        },
+        {
+          "name": "truncatedtetrahedron",
+          "t": 0.0188,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "primitives_w5",
+      "sequence": "primitives",
+      "phase": "F_order",
+      "t_min": 0.0191,
+      "t_max": 0.021,
+      "t_mean": 0.02,
+      "n_artifacts": 6,
+      "total_footprint": 31,
+      "proposed_size": {
+        "width": 14,
+        "depth": 9,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "dgrid",
+          "t": 0.0191,
+          "footprint": 2
+        },
+        {
+          "name": "parasol_triangle",
+          "t": 0.0194,
+          "footprint": 1
+        },
+        {
+          "name": "CoordinateSystem3M",
+          "t": 0.0197,
+          "footprint": 9
+        },
+        {
+          "name": "hole_with_cones",
+          "t": 0.0201,
+          "footprint": 9
+        },
+        {
+          "name": "capsule",
+          "t": 0.0207,
+          "footprint": 1
+        },
+        {
+          "name": "diamondtoruscollection",
+          "t": 0.021,
+          "footprint": 9
+        }
+      ]
+    },
+    {
+      "id": "primitives_w6",
+      "sequence": "primitives",
+      "phase": "F_order",
+      "t_min": 0.0215,
+      "t_max": 0.0234,
+      "t_mean": 0.0225,
+      "n_artifacts": 6,
+      "total_footprint": 25,
+      "proposed_size": {
+        "width": 13,
+        "depth": 8,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "interactive_point_origin",
+          "t": 0.0215,
+          "footprint": 1
+        },
+        {
+          "name": "plus",
+          "t": 0.0219,
+          "footprint": 1
+        },
+        {
+          "name": "quad_line_puzzle",
+          "t": 0.0223,
+          "footprint": 1
+        },
+        {
+          "name": "origin",
+          "t": 0.0227,
+          "footprint": 4
+        },
+        {
+          "name": "triangleprofiles",
+          "t": 0.0231,
+          "footprint": 9
+        },
+        {
+          "name": "grid_lines",
+          "t": 0.0234,
+          "footprint": 9
+        }
+      ]
+    },
+    {
+      "id": "primitives_w7",
+      "sequence": "primitives",
+      "phase": "F_order",
+      "t_min": 0.0239,
+      "t_max": 0.0255,
+      "t_mean": 0.0247,
+      "n_artifacts": 6,
+      "total_footprint": 6,
+      "proposed_size": {
+        "width": 8,
+        "depth": 5,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "pyramidlong",
+          "t": 0.0239,
+          "footprint": 1
+        },
+        {
+          "name": "snap_tetrahedron_puzzle",
+          "t": 0.0243,
+          "footprint": 1
+        },
+        {
+          "name": "xyz_slider_plate",
+          "t": 0.0246,
+          "footprint": 1
+        },
+        {
+          "name": "bigframe",
+          "t": 0.0249,
+          "footprint": 1
+        },
+        {
+          "name": "righttriangle",
+          "t": 0.0252,
+          "footprint": 1
+        },
+        {
+          "name": "frame_counter_display",
+          "t": 0.0255,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "primitives_w8",
+      "sequence": "primitives",
+      "phase": "F_order",
+      "t_min": 0.0261,
+      "t_max": 0.028,
+      "t_mean": 0.027,
+      "n_artifacts": 6,
+      "total_footprint": 9,
+      "proposed_size": {
+        "width": 8,
+        "depth": 5,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "interactivetriangle",
+          "t": 0.0261,
+          "footprint": 2
+        },
+        {
+          "name": "lshape",
+          "t": 0.0264,
+          "footprint": 2
+        },
+        {
+          "name": "vectorline",
+          "t": 0.0268,
+          "footprint": 2
+        },
+        {
+          "name": "torus_radials_rings",
+          "t": 0.0271,
+          "footprint": 1
+        },
+        {
+          "name": "sphere_mid",
+          "t": 0.0274,
+          "footprint": 1
+        },
+        {
+          "name": "draw_dot",
+          "t": 0.028,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "primitives_w9",
+      "sequence": "primitives",
+      "phase": "F_order",
+      "t_min": 0.0285,
+      "t_max": 0.0304,
+      "t_mean": 0.0295,
+      "n_artifacts": 6,
+      "total_footprint": 18,
+      "proposed_size": {
+        "width": 11,
+        "depth": 7,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "perspective_lines",
+          "t": 0.0285,
+          "footprint": 6
+        },
+        {
+          "name": "pyramid_edit",
+          "t": 0.0289,
+          "footprint": 1
+        },
+        {
+          "name": "grab_trihedron",
+          "t": 0.0293,
+          "footprint": 4
+        },
+        {
+          "name": "line_demo",
+          "t": 0.0296,
+          "footprint": 1
+        },
+        {
+          "name": "folded_strip",
+          "t": 0.03,
+          "footprint": 5
+        },
+        {
+          "name": "static_point",
+          "t": 0.0304,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "primitives_w10",
+      "sequence": "primitives",
+      "phase": "F_order",
+      "t_min": 0.0311,
+      "t_max": 0.0338,
+      "t_mean": 0.0324,
+      "n_artifacts": 6,
+      "total_footprint": 6,
+      "proposed_size": {
+        "width": 8,
+        "depth": 5,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "grab_sphere_point_snap",
+          "t": 0.0311,
+          "footprint": 1
+        },
+        {
+          "name": "player_trace",
+          "t": 0.0316,
+          "footprint": 1
+        },
+        {
+          "name": "plus_line_puzzle",
+          "t": 0.0322,
+          "footprint": 1
+        },
+        {
+          "name": "triangle_line_puzzle",
+          "t": 0.0326,
+          "footprint": 1
+        },
+        {
+          "name": "capsule_radials_rings",
+          "t": 0.0333,
+          "footprint": 1
+        },
+        {
+          "name": "prism_block",
+          "t": 0.0338,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "primitives_w11",
+      "sequence": "primitives",
+      "phase": "F_order",
+      "t_min": 0.0345,
+      "t_max": 0.036,
+      "t_mean": 0.0353,
+      "n_artifacts": 6,
+      "total_footprint": 17,
+      "proposed_size": {
+        "width": 11,
+        "depth": 7,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "parallel_line_puzzle",
+          "t": 0.0345,
+          "footprint": 1
+        },
+        {
+          "name": "combine_portals",
+          "t": 0.0349,
+          "footprint": 9
+        },
+        {
+          "name": "grabbable_line",
+          "t": 0.0352,
+          "footprint": 1
+        },
+        {
+          "name": "lightrod",
+          "t": 0.0355,
+          "footprint": 1
+        },
+        {
+          "name": "star_primitive",
+          "t": 0.0358,
+          "footprint": 1
+        },
+        {
+          "name": "polyhedron_nets_cube",
+          "t": 0.036,
+          "footprint": 4
+        }
+      ]
+    },
+    {
+      "id": "primitives_w12",
+      "sequence": "primitives",
+      "phase": "F_order",
+      "t_min": 0.0361,
+      "t_max": 0.038,
+      "t_mean": 0.0369,
+      "n_artifacts": 6,
+      "total_footprint": 25,
+      "proposed_size": {
+        "width": 13,
+        "depth": 8,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "code_evolution_screen",
+          "t": 0.0361,
+          "footprint": 1
+        },
+        {
+          "name": "pyramid",
+          "t": 0.0363,
+          "footprint": 1
+        },
+        {
+          "name": "animatedcubebuilder",
+          "t": 0.0366,
+          "footprint": 4
+        },
+        {
+          "name": "diamonds",
+          "t": 0.0369,
+          "footprint": 9
+        },
+        {
+          "name": "line",
+          "t": 0.0374,
+          "footprint": 1
+        },
+        {
+          "name": "platonic_grabbables",
+          "t": 0.038,
+          "footprint": 9
+        }
+      ]
+    },
+    {
+      "id": "transformation_w0",
+      "sequence": "transformation",
+      "phase": "F_order",
+      "t_min": 0.0473,
+      "t_max": 0.0524,
+      "t_mean": 0.0497,
+      "n_artifacts": 6,
+      "total_footprint": 12,
+      "proposed_size": {
+        "width": 9,
+        "depth": 6,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "balance_puzzle",
+          "t": 0.0473,
+          "footprint": 1
+        },
+        {
+          "name": "rotation_gimbal",
+          "t": 0.0481,
+          "footprint": 1
+        },
+        {
+          "name": "sweeper_block",
+          "t": 0.0489,
+          "footprint": 6
+        },
+        {
+          "name": "example_2_7_multiple_attractors_vr",
+          "t": 0.0504,
+          "footprint": 2
+        },
+        {
+          "name": "example_1_3_vector_subtraction_vr",
+          "t": 0.0513,
+          "footprint": 1
+        },
+        {
+          "name": "pickup_gate",
+          "t": 0.0524,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "transformation_w1",
+      "sequence": "transformation",
+      "phase": "F_order",
+      "t_min": 0.0531,
+      "t_max": 0.0564,
+      "t_mean": 0.0546,
+      "n_artifacts": 6,
+      "total_footprint": 22,
+      "proposed_size": {
+        "width": 12,
+        "depth": 8,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "spin",
+          "t": 0.0531,
+          "footprint": 6
+        },
+        {
+          "name": "pusher_block",
+          "t": 0.0534,
+          "footprint": 2
+        },
+        {
+          "name": "boolean_tunnel",
+          "t": 0.054,
+          "footprint": 1
+        },
+        {
+          "name": "homogeneous_coordinates",
+          "t": 0.055,
+          "footprint": 2
+        },
+        {
+          "name": "carousel_cake",
+          "t": 0.0557,
+          "footprint": 9
+        },
+        {
+          "name": "z_translation_cube",
+          "t": 0.0564,
+          "footprint": 2
+        }
+      ]
+    },
+    {
+      "id": "transformation_w2",
+      "sequence": "transformation",
+      "phase": "F_order",
+      "t_min": 0.057,
+      "t_max": 0.06,
+      "t_mean": 0.0586,
+      "n_artifacts": 6,
+      "total_footprint": 9,
+      "proposed_size": {
+        "width": 8,
+        "depth": 5,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "example_1_6_vector_normalize_vr",
+          "t": 0.057,
+          "footprint": 1
+        },
+        {
+          "name": "rotate_grid_cubes",
+          "t": 0.0579,
+          "footprint": 1
+        },
+        {
+          "name": "translation_cube_demo",
+          "t": 0.0584,
+          "footprint": 4
+        },
+        {
+          "name": "example_1_4_vector_multiplication_vr",
+          "t": 0.059,
+          "footprint": 1
+        },
+        {
+          "name": "grower_block",
+          "t": 0.0595,
+          "footprint": 1
+        },
+        {
+          "name": "example_1_7_motion_101_velocity_vr",
+          "t": 0.06,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "transformation_w3",
+      "sequence": "transformation",
+      "phase": "F_order",
+      "t_min": 0.0611,
+      "t_max": 0.0674,
+      "t_mean": 0.0632,
+      "n_artifacts": 6,
+      "total_footprint": 7,
+      "proposed_size": {
+        "width": 8,
+        "depth": 5,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "invariants_demo",
+          "t": 0.0611,
+          "footprint": 1
+        },
+        {
+          "name": "quantum_field",
+          "t": 0.0617,
+          "footprint": 1
+        },
+        {
+          "name": "example_1_1_bouncing_ball_with_no_vectors_vr",
+          "t": 0.0623,
+          "footprint": 1
+        },
+        {
+          "name": "chair_assembly_puzzle",
+          "t": 0.0628,
+          "footprint": 2
+        },
+        {
+          "name": "example_1_8_motion_101_velocity_and_constant_acceleration_vr",
+          "t": 0.0639,
+          "footprint": 1
+        },
+        {
+          "name": "matrix_4x4_viewer",
+          "t": 0.0674,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "transformation_w4",
+      "sequence": "transformation",
+      "phase": "F_order",
+      "t_min": 0.0682,
+      "t_max": 0.0753,
+      "t_mean": 0.0713,
+      "n_artifacts": 6,
+      "total_footprint": 13,
+      "proposed_size": {
+        "width": 9,
+        "depth": 6,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "attractorsphere",
+          "t": 0.0682,
+          "footprint": 6
+        },
+        {
+          "name": "shear_matrix_demo",
+          "t": 0.0689,
+          "footprint": 1
+        },
+        {
+          "name": "example_1_5_vector_magnitude_vr",
+          "t": 0.0705,
+          "footprint": 2
+        },
+        {
+          "name": "transform_matrix_cube",
+          "t": 0.0719,
+          "footprint": 2
+        },
+        {
+          "name": "scale_me",
+          "t": 0.0728,
+          "footprint": 1
+        },
+        {
+          "name": "y_translation_cube",
+          "t": 0.0753,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "transformation_w5",
+      "sequence": "transformation",
+      "phase": "F_order",
+      "t_min": 0.076,
+      "t_max": 0.0803,
+      "t_mean": 0.0776,
+      "n_artifacts": 4,
+      "total_footprint": 13,
+      "proposed_size": {
+        "width": 9,
+        "depth": 6,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "example_2_6_single_attractor_vr",
+          "t": 0.076,
+          "footprint": 2
+        },
+        {
+          "name": "transform_composition",
+          "t": 0.0767,
+          "footprint": 1
+        },
+        {
+          "name": "toruscylinder",
+          "t": 0.0775,
+          "footprint": 9
+        },
+        {
+          "name": "x_translation_cube",
+          "t": 0.0803,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "array_tutorial_w0",
+      "sequence": "array_tutorial",
+      "phase": "F_order",
+      "t_min": 0.0901,
+      "t_max": 0.0942,
+      "t_mean": 0.0921,
+      "n_artifacts": 6,
+      "total_footprint": 7,
+      "proposed_size": {
+        "width": 8,
+        "depth": 5,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "matrix_multiply_visual",
+          "t": 0.0901,
+          "footprint": 1
+        },
+        {
+          "name": "pulsar_compact",
+          "t": 0.0909,
+          "footprint": 1
+        },
+        {
+          "name": "buren_col_07_01",
+          "t": 0.0916,
+          "footprint": 1
+        },
+        {
+          "name": "buren_col_04_04",
+          "t": 0.0922,
+          "footprint": 1
+        },
+        {
+          "name": "buren_col_04_10",
+          "t": 0.0935,
+          "footprint": 1
+        },
+        {
+          "name": "bar_array_bubble_sort",
+          "t": 0.0942,
+          "footprint": 2
+        }
+      ]
+    },
+    {
+      "id": "array_tutorial_w1",
+      "sequence": "array_tutorial",
+      "phase": "F_order",
+      "t_min": 0.0947,
+      "t_max": 0.0974,
+      "t_mean": 0.0961,
+      "n_artifacts": 6,
+      "total_footprint": 26,
+      "proposed_size": {
+        "width": 13,
+        "depth": 8,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "bar_array",
+          "t": 0.0947,
+          "footprint": 2
+        },
+        {
+          "name": "science_screen",
+          "t": 0.0952,
+          "footprint": 4
+        },
+        {
+          "name": "grid_2d_4x4",
+          "t": 0.0958,
+          "footprint": 9
+        },
+        {
+          "name": "catalyst_target",
+          "t": 0.0963,
+          "footprint": 9
+        },
+        {
+          "name": "pattern_tile_4x4",
+          "t": 0.0969,
+          "footprint": 1
+        },
+        {
+          "name": "buren_col_04_01",
+          "t": 0.0974,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "array_tutorial_w2",
+      "sequence": "array_tutorial",
+      "phase": "F_order",
+      "t_min": 0.0979,
+      "t_max": 0.1015,
+      "t_mean": 0.0997,
+      "n_artifacts": 6,
+      "total_footprint": 6,
+      "proposed_size": {
+        "width": 8,
+        "depth": 5,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "buren_col_04_07",
+          "t": 0.0979,
+          "footprint": 1
+        },
+        {
+          "name": "pattern_tile_herringbone",
+          "t": 0.0987,
+          "footprint": 1
+        },
+        {
+          "name": "array_slow_substrate",
+          "t": 0.0992,
+          "footprint": 1
+        },
+        {
+          "name": "buren_col_01_10",
+          "t": 0.0999,
+          "footprint": 1
+        },
+        {
+          "name": "array_random_substrate",
+          "t": 0.1007,
+          "footprint": 1
+        },
+        {
+          "name": "grid_model",
+          "t": 0.1015,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "array_tutorial_w3",
+      "sequence": "array_tutorial",
+      "phase": "F_order",
+      "t_min": 0.1024,
+      "t_max": 0.1062,
+      "t_mean": 0.1043,
+      "n_artifacts": 6,
+      "total_footprint": 17,
+      "proposed_size": {
+        "width": 11,
+        "depth": 7,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "pattern_studio_plate",
+          "t": 0.1024,
+          "footprint": 9
+        },
+        {
+          "name": "buren_col_01_04",
+          "t": 0.1031,
+          "footprint": 1
+        },
+        {
+          "name": "proximity_spawner",
+          "t": 0.1041,
+          "footprint": 1
+        },
+        {
+          "name": "buren_col_10_07",
+          "t": 0.1047,
+          "footprint": 1
+        },
+        {
+          "name": "buren_col_01_01",
+          "t": 0.1055,
+          "footprint": 1
+        },
+        {
+          "name": "xyz_coordinates",
+          "t": 0.1062,
+          "footprint": 4
+        }
+      ]
+    },
+    {
+      "id": "array_tutorial_w4",
+      "sequence": "array_tutorial",
+      "phase": "F_order",
+      "t_min": 0.1075,
+      "t_max": 0.1093,
+      "t_mean": 0.1085,
+      "n_artifacts": 6,
+      "total_footprint": 14,
+      "proposed_size": {
+        "width": 10,
+        "depth": 6,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "circular_buffer",
+          "t": 0.1075,
+          "footprint": 1
+        },
+        {
+          "name": "buren_col_07_07",
+          "t": 0.108,
+          "footprint": 1
+        },
+        {
+          "name": "dark_sphere",
+          "t": 0.1084,
+          "footprint": 1
+        },
+        {
+          "name": "pattern_tile_plate",
+          "t": 0.1087,
+          "footprint": 4
+        },
+        {
+          "name": "pulsar_visualizer",
+          "t": 0.109,
+          "footprint": 6
+        },
+        {
+          "name": "wall_pattern_colorizer",
+          "t": 0.1093,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "array_tutorial_w5",
+      "sequence": "array_tutorial",
+      "phase": "F_order",
+      "t_min": 0.1097,
+      "t_max": 0.1127,
+      "t_mean": 0.1113,
+      "n_artifacts": 6,
+      "total_footprint": 6,
+      "proposed_size": {
+        "width": 8,
+        "depth": 5,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "step_sequencer",
+          "t": 0.1097,
+          "footprint": 1
+        },
+        {
+          "name": "grid3d",
+          "t": 0.1105,
+          "footprint": 1
+        },
+        {
+          "name": "array_disco_substrate",
+          "t": 0.1109,
+          "footprint": 1
+        },
+        {
+          "name": "buren_col_01_07",
+          "t": 0.1117,
+          "footprint": 1
+        },
+        {
+          "name": "index_map_puzzle",
+          "t": 0.1123,
+          "footprint": 1
+        },
+        {
+          "name": "pattern_tile_puzzle",
+          "t": 0.1127,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "array_tutorial_w6",
+      "sequence": "array_tutorial",
+      "phase": "F_order",
+      "t_min": 0.1134,
+      "t_max": 0.1152,
+      "t_mean": 0.1143,
+      "n_artifacts": 6,
+      "total_footprint": 14,
+      "proposed_size": {
+        "width": 10,
+        "depth": 6,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "sparse_array_demo",
+          "t": 0.1134,
+          "footprint": 1
+        },
+        {
+          "name": "gridagent",
+          "t": 0.1138,
+          "footprint": 1
+        },
+        {
+          "name": "script_runner",
+          "t": 0.1142,
+          "footprint": 1
+        },
+        {
+          "name": "tiling_demo",
+          "t": 0.1145,
+          "footprint": 9
+        },
+        {
+          "name": "pick_up_cube",
+          "t": 0.1149,
+          "footprint": 1
+        },
+        {
+          "name": "buren_col_07_10",
+          "t": 0.1152,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "array_tutorial_w7",
+      "sequence": "array_tutorial",
+      "phase": "F_order",
+      "t_min": 0.1155,
+      "t_max": 0.1183,
+      "t_mean": 0.1169,
+      "n_artifacts": 6,
+      "total_footprint": 22,
+      "proposed_size": {
+        "width": 12,
+        "depth": 8,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "pattern_tile_brick",
+          "t": 0.1155,
+          "footprint": 1
+        },
+        {
+          "name": "panel_bridge_loom",
+          "t": 0.116,
+          "footprint": 2
+        },
+        {
+          "name": "row_3_x",
+          "t": 0.1164,
+          "footprint": 8
+        },
+        {
+          "name": "buren_col_10_01",
+          "t": 0.1171,
+          "footprint": 1
+        },
+        {
+          "name": "grid_3d_4x4x4",
+          "t": 0.1179,
+          "footprint": 9
+        },
+        {
+          "name": "buren_col_07_04",
+          "t": 0.1183,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "array_tutorial_w8",
+      "sequence": "array_tutorial",
+      "phase": "F_order",
+      "t_min": 0.1189,
+      "t_max": 0.1202,
+      "t_mean": 0.1195,
+      "n_artifacts": 6,
+      "total_footprint": 17,
+      "proposed_size": {
+        "width": 11,
+        "depth": 7,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "array_carpet",
+          "t": 0.1189,
+          "footprint": 1
+        },
+        {
+          "name": "sorting_algorithm_race",
+          "t": 0.1192,
+          "footprint": 1
+        },
+        {
+          "name": "column_3_z",
+          "t": 0.1195,
+          "footprint": 4
+        },
+        {
+          "name": "pattern_maker_station",
+          "t": 0.1196,
+          "footprint": 9
+        },
+        {
+          "name": "pattern_tile_mirror",
+          "t": 0.1199,
+          "footprint": 1
+        },
+        {
+          "name": "buren_col_10_04",
+          "t": 0.1202,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "array_tutorial_w9",
+      "sequence": "array_tutorial",
+      "phase": "F_order",
+      "t_min": 0.1206,
+      "t_max": 0.1238,
+      "t_mean": 0.1225,
+      "n_artifacts": 5,
+      "total_footprint": 29,
+      "proposed_size": {
+        "width": 14,
+        "depth": 9,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "standalone_disco",
+          "t": 0.1206,
+          "footprint": 9
+        },
+        {
+          "name": "buren_col_10_10",
+          "t": 0.122,
+          "footprint": 1
+        },
+        {
+          "name": "facade_grammar_demo",
+          "t": 0.1227,
+          "footprint": 9
+        },
+        {
+          "name": "wall_cove",
+          "t": 0.1233,
+          "footprint": 1
+        },
+        {
+          "name": "vr_tile_editor_mirror",
+          "t": 0.1238,
+          "footprint": 9
+        }
+      ]
+    },
+    {
+      "id": "color_w0",
+      "sequence": "color",
+      "phase": "F_order",
+      "t_min": 0.1332,
+      "t_max": 0.1386,
+      "t_mean": 0.1361,
+      "n_artifacts": 6,
+      "total_footprint": 22,
+      "proposed_size": {
+        "width": 12,
+        "depth": 8,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "hand_model",
+          "t": 0.1332,
+          "footprint": 1
+        },
+        {
+          "name": "strobe_lasers",
+          "t": 0.1342,
+          "footprint": 1
+        },
+        {
+          "name": "brick_wall_factory",
+          "t": 0.1356,
+          "footprint": 9
+        },
+        {
+          "name": "dark_side_prism",
+          "t": 0.1369,
+          "footprint": 9
+        },
+        {
+          "name": "SpectrumVisualizer",
+          "t": 0.138,
+          "footprint": 1
+        },
+        {
+          "name": "shelf_with_stickers",
+          "t": 0.1386,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "color_w1",
+      "sequence": "color",
+      "phase": "F_order",
+      "t_min": 0.1396,
+      "t_max": 0.1423,
+      "t_mean": 0.1411,
+      "n_artifacts": 6,
+      "total_footprint": 42,
+      "proposed_size": {
+        "width": 16,
+        "depth": 11,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "grab_stick_scanner",
+          "t": 0.1396,
+          "footprint": 9
+        },
+        {
+          "name": "RotatingLaser",
+          "t": 0.1403,
+          "footprint": 9
+        },
+        {
+          "name": "visual_color_mixing",
+          "t": 0.1408,
+          "footprint": 6
+        },
+        {
+          "name": "spectrum_forest",
+          "t": 0.1415,
+          "footprint": 9
+        },
+        {
+          "name": "albers_wall_gallery",
+          "t": 0.1419,
+          "footprint": 8
+        },
+        {
+          "name": "prism",
+          "t": 0.1423,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "color_w2",
+      "sequence": "color",
+      "phase": "F_order",
+      "t_min": 0.1427,
+      "t_max": 0.1452,
+      "t_mean": 0.144,
+      "n_artifacts": 6,
+      "total_footprint": 38,
+      "proposed_size": {
+        "width": 16,
+        "depth": 10,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "colorballs",
+          "t": 0.1427,
+          "footprint": 1
+        },
+        {
+          "name": "laser_turret",
+          "t": 0.1432,
+          "footprint": 9
+        },
+        {
+          "name": "rainbow_hallway",
+          "t": 0.1438,
+          "footprint": 9
+        },
+        {
+          "name": "ball_painting_demo",
+          "t": 0.1443,
+          "footprint": 9
+        },
+        {
+          "name": "color_constellation_office",
+          "t": 0.1447,
+          "footprint": 9
+        },
+        {
+          "name": "shelf",
+          "t": 0.1452,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "color_w3",
+      "sequence": "color",
+      "phase": "F_order",
+      "t_min": 0.1458,
+      "t_max": 0.149,
+      "t_mean": 0.1473,
+      "n_artifacts": 6,
+      "total_footprint": 43,
+      "proposed_size": {
+        "width": 17,
+        "depth": 11,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "pillarcolorcollection",
+          "t": 0.1458,
+          "footprint": 9
+        },
+        {
+          "name": "color_sets_overview",
+          "t": 0.1462,
+          "footprint": 9
+        },
+        {
+          "name": "color_scanner",
+          "t": 0.1467,
+          "footprint": 9
+        },
+        {
+          "name": "spherecolors",
+          "t": 0.1475,
+          "footprint": 9
+        },
+        {
+          "name": "MetamerismLab",
+          "t": 0.1484,
+          "footprint": 5
+        },
+        {
+          "name": "nail_color_controller",
+          "t": 0.149,
+          "footprint": 2
+        }
+      ]
+    },
+    {
+      "id": "color_w4",
+      "sequence": "color",
+      "phase": "F_order",
+      "t_min": 0.1499,
+      "t_max": 0.1531,
+      "t_mean": 0.1515,
+      "n_artifacts": 6,
+      "total_footprint": 24,
+      "proposed_size": {
+        "width": 12,
+        "depth": 8,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "flashlight_demo",
+          "t": 0.1499,
+          "footprint": 9
+        },
+        {
+          "name": "k_means_color",
+          "t": 0.1504,
+          "footprint": 1
+        },
+        {
+          "name": "hand_color_controller",
+          "t": 0.1511,
+          "footprint": 2
+        },
+        {
+          "name": "grab_stick",
+          "t": 0.152,
+          "footprint": 9
+        },
+        {
+          "name": "grabcolorcollection",
+          "t": 0.1526,
+          "footprint": 2
+        },
+        {
+          "name": "colorsheets",
+          "t": 0.1531,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "color_w5",
+      "sequence": "color",
+      "phase": "F_order",
+      "t_min": 0.1537,
+      "t_max": 0.1597,
+      "t_mean": 0.1563,
+      "n_artifacts": 6,
+      "total_footprint": 21,
+      "proposed_size": {
+        "width": 12,
+        "depth": 7,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "gridcolorizer",
+          "t": 0.1537,
+          "footprint": 1
+        },
+        {
+          "name": "SimultaneousContrast",
+          "t": 0.1546,
+          "footprint": 7
+        },
+        {
+          "name": "minimalglitch",
+          "t": 0.1553,
+          "footprint": 9
+        },
+        {
+          "name": "grab_rainbow_stick",
+          "t": 0.1563,
+          "footprint": 2
+        },
+        {
+          "name": "gradient_interpolator",
+          "t": 0.1584,
+          "footprint": 1
+        },
+        {
+          "name": "disco_lights",
+          "t": 0.1597,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "color_w6",
+      "sequence": "color",
+      "phase": "F_order",
+      "t_min": 0.1602,
+      "t_max": 0.1618,
+      "t_mean": 0.161,
+      "n_artifacts": 6,
+      "total_footprint": 39,
+      "proposed_size": {
+        "width": 16,
+        "depth": 10,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "color_mixing",
+          "t": 0.1602,
+          "footprint": 9
+        },
+        {
+          "name": "rainbow",
+          "t": 0.1605,
+          "footprint": 1
+        },
+        {
+          "name": "textureglitch",
+          "t": 0.1608,
+          "footprint": 9
+        },
+        {
+          "name": "color_space_navigator",
+          "t": 0.1611,
+          "footprint": 2
+        },
+        {
+          "name": "advancedglitch",
+          "t": 0.1614,
+          "footprint": 9
+        },
+        {
+          "name": "glitchcolor",
+          "t": 0.1618,
+          "footprint": 9
+        }
+      ]
+    },
+    {
+      "id": "color_w7",
+      "sequence": "color",
+      "phase": "F_order",
+      "t_min": 0.1629,
+      "t_max": 0.1655,
+      "t_mean": 0.1641,
+      "n_artifacts": 3,
+      "total_footprint": 11,
+      "proposed_size": {
+        "width": 9,
+        "depth": 5,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "mario_cube",
+          "t": 0.1629,
+          "footprint": 9
+        },
+        {
+          "name": "colortrails",
+          "t": 0.1639,
+          "footprint": 1
+        },
+        {
+          "name": "subpixel_display",
+          "t": 0.1655,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "change_w0",
+      "sequence": "change",
+      "phase": "F_order",
+      "t_min": 0.1586,
+      "t_max": 0.1765,
+      "t_mean": 0.1682,
+      "n_artifacts": 6,
+      "total_footprint": 6,
+      "proposed_size": {
+        "width": 8,
+        "depth": 5,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "vector_field_grid",
+          "t": 0.1586,
+          "footprint": 1
+        },
+        {
+          "name": "derivative_pair",
+          "t": 0.1619,
+          "footprint": 1
+        },
+        {
+          "name": "catalyst_sustain_demo",
+          "t": 0.1662,
+          "footprint": 1
+        },
+        {
+          "name": "slope_tangent_demo",
+          "t": 0.1701,
+          "footprint": 1
+        },
+        {
+          "name": "ftc_bridge",
+          "t": 0.1761,
+          "footprint": 1
+        },
+        {
+          "name": "particle_flow_swarm",
+          "t": 0.1765,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "change_w1",
+      "sequence": "change",
+      "phase": "F_order",
+      "t_min": 0.178,
+      "t_max": 0.1868,
+      "t_mean": 0.1816,
+      "n_artifacts": 4,
+      "total_footprint": 4,
+      "proposed_size": {
+        "width": 8,
+        "depth": 5,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "velocity_arrow",
+          "t": 0.178,
+          "footprint": 1
+        },
+        {
+          "name": "riemann_pump",
+          "t": 0.1797,
+          "footprint": 1
+        },
+        {
+          "name": "integral_area",
+          "t": 0.182,
+          "footprint": 1
+        },
+        {
+          "name": "partial_derivative_terrain",
+          "t": 0.1868,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "isosurfaces_w0",
+      "sequence": "isosurfaces",
+      "phase": "F_order",
+      "t_min": 0.1584,
+      "t_max": 0.1654,
+      "t_mean": 0.162,
+      "n_artifacts": 6,
+      "total_footprint": 14,
+      "proposed_size": {
+        "width": 10,
+        "depth": 6,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "marchingcave",
+          "t": 0.1584,
+          "footprint": 1
+        },
+        {
+          "name": "mc_cave",
+          "t": 0.1595,
+          "footprint": 1
+        },
+        {
+          "name": "mc_terrain_demo",
+          "t": 0.1617,
+          "footprint": 1
+        },
+        {
+          "name": "marchingcubes_portal_landscape",
+          "t": 0.1621,
+          "footprint": 1
+        },
+        {
+          "name": "queer_marching_cave",
+          "t": 0.1649,
+          "footprint": 9
+        },
+        {
+          "name": "mc_portal_landscape",
+          "t": 0.1654,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "isosurfaces_w1",
+      "sequence": "isosurfaces",
+      "phase": "F_order",
+      "t_min": 0.1661,
+      "t_max": 0.1692,
+      "t_mean": 0.1679,
+      "n_artifacts": 6,
+      "total_footprint": 27,
+      "proposed_size": {
+        "width": 13,
+        "depth": 9,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "marchingcubes_torus_sculpture",
+          "t": 0.1661,
+          "footprint": 1
+        },
+        {
+          "name": "mc_inside_cave",
+          "t": 0.1667,
+          "footprint": 1
+        },
+        {
+          "name": "mc_sculpt_vr",
+          "t": 0.168,
+          "footprint": 6
+        },
+        {
+          "name": "fountain_demo",
+          "t": 0.1685,
+          "footprint": 9
+        },
+        {
+          "name": "animated_noise_explorer",
+          "t": 0.1688,
+          "footprint": 1
+        },
+        {
+          "name": "gyroid_demo",
+          "t": 0.1692,
+          "footprint": 9
+        }
+      ]
+    },
+    {
+      "id": "isosurfaces_w2",
+      "sequence": "isosurfaces",
+      "phase": "F_order",
+      "t_min": 0.1696,
+      "t_max": 0.1759,
+      "t_mean": 0.1727,
+      "n_artifacts": 6,
+      "total_footprint": 31,
+      "proposed_size": {
+        "width": 14,
+        "depth": 9,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "marchingcubes_inside_cave",
+          "t": 0.1696,
+          "footprint": 1
+        },
+        {
+          "name": "metaballs",
+          "t": 0.1712,
+          "footprint": 9
+        },
+        {
+          "name": "GyroidDemo",
+          "t": 0.1718,
+          "footprint": 9
+        },
+        {
+          "name": "metaball_world",
+          "t": 0.1735,
+          "footprint": 9
+        },
+        {
+          "name": "portal",
+          "t": 0.1745,
+          "footprint": 2
+        },
+        {
+          "name": "mc_torus_sculpture",
+          "t": 0.1759,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "isosurfaces_w3",
+      "sequence": "isosurfaces",
+      "phase": "F_order",
+      "t_min": 0.1779,
+      "t_max": 0.1886,
+      "t_mean": 0.1829,
+      "n_artifacts": 6,
+      "total_footprint": 22,
+      "proposed_size": {
+        "width": 12,
+        "depth": 8,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "marchingcubes_cave",
+          "t": 0.1779,
+          "footprint": 1
+        },
+        {
+          "name": "marchingcubes_flat_landscape",
+          "t": 0.1811,
+          "footprint": 1
+        },
+        {
+          "name": "marchingcubes_voxel_noise_demo",
+          "t": 0.1818,
+          "footprint": 9
+        },
+        {
+          "name": "fifteen_cases_demo",
+          "t": 0.1837,
+          "footprint": 9
+        },
+        {
+          "name": "mc_overhang_landscape",
+          "t": 0.1841,
+          "footprint": 1
+        },
+        {
+          "name": "nakama_metaballs",
+          "t": 0.1886,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "isosurfaces_w4",
+      "sequence": "isosurfaces",
+      "phase": "F_order",
+      "t_min": 0.189,
+      "t_max": 0.1919,
+      "t_mean": 0.1908,
+      "n_artifacts": 6,
+      "total_footprint": 38,
+      "proposed_size": {
+        "width": 16,
+        "depth": 10,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "mc_flat_landscape",
+          "t": 0.189,
+          "footprint": 1
+        },
+        {
+          "name": "raymarched_metaballs",
+          "t": 0.1903,
+          "footprint": 9
+        },
+        {
+          "name": "voxel_noise_demo",
+          "t": 0.1908,
+          "footprint": 9
+        },
+        {
+          "name": "mc_shapes_gallery",
+          "t": 0.1912,
+          "footprint": 9
+        },
+        {
+          "name": "mc_base",
+          "t": 0.1915,
+          "footprint": 1
+        },
+        {
+          "name": "implicit_surface_modeling",
+          "t": 0.1919,
+          "footprint": 9
+        }
+      ]
+    },
+    {
+      "id": "boolean_surfaces_w0",
+      "sequence": "boolean_surfaces",
+      "phase": "F_order",
+      "t_min": 0.1648,
+      "t_max": 0.1856,
+      "t_mean": 0.1744,
+      "n_artifacts": 5,
+      "total_footprint": 5,
+      "proposed_size": {
+        "width": 8,
+        "depth": 5,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "csg_intersection_demo",
+          "t": 0.1648,
+          "footprint": 1
+        },
+        {
+          "name": "csg_compose_workbench",
+          "t": 0.168,
+          "footprint": 1
+        },
+        {
+          "name": "csg_architecture_cavity",
+          "t": 0.1733,
+          "footprint": 1
+        },
+        {
+          "name": "csg_union_demo",
+          "t": 0.1804,
+          "footprint": 1
+        },
+        {
+          "name": "csg_difference_demo",
+          "t": 0.1856,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "forces_w0",
+      "sequence": "forces",
+      "phase": "oscillation",
+      "t_min": 0.1756,
+      "t_max": 0.1787,
+      "t_mean": 0.1771,
+      "n_artifacts": 6,
+      "total_footprint": 17,
+      "proposed_size": {
+        "width": 11,
+        "depth": 7,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "VectorForces",
+          "t": 0.1756,
+          "footprint": 2
+        },
+        {
+          "name": "throw_ball",
+          "t": 0.1761,
+          "footprint": 1
+        },
+        {
+          "name": "firework_launcher",
+          "t": 0.1765,
+          "footprint": 1
+        },
+        {
+          "name": "example_2_9_n_body_attraction_vr",
+          "t": 0.1772,
+          "footprint": 2
+        },
+        {
+          "name": "gravity_well",
+          "t": 0.1783,
+          "footprint": 2
+        },
+        {
+          "name": "mass_spring_damper",
+          "t": 0.1787,
+          "footprint": 9
+        }
+      ]
+    },
+    {
+      "id": "forces_w1",
+      "sequence": "forces",
+      "phase": "oscillation",
+      "t_min": 0.1791,
+      "t_max": 0.1819,
+      "t_mean": 0.1806,
+      "n_artifacts": 6,
+      "total_footprint": 8,
+      "proposed_size": {
+        "width": 8,
+        "depth": 5,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "grab_sphere_point",
+          "t": 0.1791,
+          "footprint": 1
+        },
+        {
+          "name": "example_2_8_two_body_attraction_vr",
+          "t": 0.1798,
+          "footprint": 2
+        },
+        {
+          "name": "ForceMagnitudeDemo",
+          "t": 0.1803,
+          "footprint": 1
+        },
+        {
+          "name": "ball_dropper",
+          "t": 0.1811,
+          "footprint": 1
+        },
+        {
+          "name": "exercise_1_3_solution_3_d_bouncing_ball_vr",
+          "t": 0.1815,
+          "footprint": 1
+        },
+        {
+          "name": "VectorDotProduct",
+          "t": 0.1819,
+          "footprint": 2
+        }
+      ]
+    },
+    {
+      "id": "forces_w2",
+      "sequence": "forces",
+      "phase": "oscillation",
+      "t_min": 0.1822,
+      "t_max": 0.1842,
+      "t_mean": 0.1832,
+      "n_artifacts": 6,
+      "total_footprint": 11,
+      "proposed_size": {
+        "width": 9,
+        "depth": 5,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "VectorSubtraction",
+          "t": 0.1822,
+          "footprint": 2
+        },
+        {
+          "name": "example_3_2_forces_with_arbitrary_angular_motion_vr",
+          "t": 0.1825,
+          "footprint": 2
+        },
+        {
+          "name": "example_2_5_fluid_resistance_vr",
+          "t": 0.1829,
+          "footprint": 4
+        },
+        {
+          "name": "centripetal_force_demo",
+          "t": 0.1833,
+          "footprint": 1
+        },
+        {
+          "name": "exercise_1_5_solution_accelerate_and_decelerate_vr",
+          "t": 0.1838,
+          "footprint": 1
+        },
+        {
+          "name": "hits_reset_display",
+          "t": 0.1842,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "forces_w3",
+      "sequence": "forces",
+      "phase": "oscillation",
+      "t_min": 0.1854,
+      "t_max": 0.1872,
+      "t_mean": 0.1863,
+      "n_artifacts": 6,
+      "total_footprint": 32,
+      "proposed_size": {
+        "width": 14,
+        "depth": 10,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "turret_boll_infoboard",
+          "t": 0.1854,
+          "footprint": 3
+        },
+        {
+          "name": "library_rack",
+          "t": 0.1858,
+          "footprint": 1
+        },
+        {
+          "name": "momentum_collision",
+          "t": 0.1861,
+          "footprint": 9
+        },
+        {
+          "name": "vector_subtraction_demo",
+          "t": 0.1864,
+          "footprint": 9
+        },
+        {
+          "name": "drag_coefficient_wind_tunnel",
+          "t": 0.1868,
+          "footprint": 1
+        },
+        {
+          "name": "hl_turret_vectors",
+          "t": 0.1872,
+          "footprint": 9
+        }
+      ]
+    },
+    {
+      "id": "forces_w4",
+      "sequence": "forces",
+      "phase": "oscillation",
+      "t_min": 0.1874,
+      "t_max": 0.1886,
+      "t_mean": 0.1879,
+      "n_artifacts": 6,
+      "total_footprint": 30,
+      "proposed_size": {
+        "width": 14,
+        "depth": 9,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "three_body_problem",
+          "t": 0.1874,
+          "footprint": 1
+        },
+        {
+          "name": "spring_chain",
+          "t": 0.1876,
+          "footprint": 1
+        },
+        {
+          "name": "force_fields",
+          "t": 0.1878,
+          "footprint": 9
+        },
+        {
+          "name": "destructibles_test_scene",
+          "t": 0.188,
+          "footprint": 9
+        },
+        {
+          "name": "forcedirected3d",
+          "t": 0.1883,
+          "footprint": 9
+        },
+        {
+          "name": "vector_magnitude_demo",
+          "t": 0.1886,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "forces_w5",
+      "sequence": "forces",
+      "phase": "oscillation",
+      "t_min": 0.1891,
+      "t_max": 0.1915,
+      "t_mean": 0.1906,
+      "n_artifacts": 6,
+      "total_footprint": 28,
+      "proposed_size": {
+        "width": 13,
+        "depth": 9,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "impulse_collision_demo",
+          "t": 0.1891,
+          "footprint": 1
+        },
+        {
+          "name": "vector_addition_walk",
+          "t": 0.19,
+          "footprint": 9
+        },
+        {
+          "name": "dot_product_projector",
+          "t": 0.1905,
+          "footprint": 9
+        },
+        {
+          "name": "nbody_simulation",
+          "t": 0.191,
+          "footprint": 1
+        },
+        {
+          "name": "example_2_2_forces_mass_variation_vr",
+          "t": 0.1913,
+          "footprint": 2
+        },
+        {
+          "name": "weather_vector_field",
+          "t": 0.1915,
+          "footprint": 6
+        }
+      ]
+    },
+    {
+      "id": "forces_w6",
+      "sequence": "forces",
+      "phase": "oscillation",
+      "t_min": 0.1917,
+      "t_max": 0.1949,
+      "t_mean": 0.1933,
+      "n_artifacts": 6,
+      "total_footprint": 31,
+      "proposed_size": {
+        "width": 14,
+        "depth": 9,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "example_2_3_gravity_scaled_by_mass_vr",
+          "t": 0.1917,
+          "footprint": 2
+        },
+        {
+          "name": "torque_demo",
+          "t": 0.192,
+          "footprint": 1
+        },
+        {
+          "name": "spring_system",
+          "t": 0.1924,
+          "footprint": 9
+        },
+        {
+          "name": "particle_systems",
+          "t": 0.1941,
+          "footprint": 9
+        },
+        {
+          "name": "vector_projection_demo",
+          "t": 0.1946,
+          "footprint": 9
+        },
+        {
+          "name": "vector_field_visualizer",
+          "t": 0.1949,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "forces_w7",
+      "sequence": "forces",
+      "phase": "oscillation",
+      "t_min": 0.1952,
+      "t_max": 0.1968,
+      "t_mean": 0.196,
+      "n_artifacts": 6,
+      "total_footprint": 30,
+      "proposed_size": {
+        "width": 14,
+        "depth": 9,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "VectorBasics",
+          "t": 0.1952,
+          "footprint": 2
+        },
+        {
+          "name": "VectorTorque",
+          "t": 0.1955,
+          "footprint": 1
+        },
+        {
+          "name": "health_display",
+          "t": 0.1958,
+          "footprint": 1
+        },
+        {
+          "name": "VectorThrowing",
+          "t": 0.196,
+          "footprint": 8
+        },
+        {
+          "name": "bouncing_ball",
+          "t": 0.1965,
+          "footprint": 9
+        },
+        {
+          "name": "vector_addition_demo",
+          "t": 0.1968,
+          "footprint": 9
+        }
+      ]
+    },
+    {
+      "id": "forces_w8",
+      "sequence": "forces",
+      "phase": "oscillation",
+      "t_min": 0.1972,
+      "t_max": 0.1995,
+      "t_mean": 0.1985,
+      "n_artifacts": 6,
+      "total_footprint": 19,
+      "proposed_size": {
+        "width": 11,
+        "depth": 7,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "example_3_3_pointing_in_the_direction_of_motion_vr",
+          "t": 0.1972,
+          "footprint": 1
+        },
+        {
+          "name": "viscosity_layers",
+          "t": 0.1976,
+          "footprint": 2
+        },
+        {
+          "name": "vector_drone",
+          "t": 0.1983,
+          "footprint": 4
+        },
+        {
+          "name": "combined_forces_demo",
+          "t": 0.1989,
+          "footprint": 1
+        },
+        {
+          "name": "force_field_visualizer",
+          "t": 0.1993,
+          "footprint": 2
+        },
+        {
+          "name": "turret_targeting",
+          "t": 0.1995,
+          "footprint": 9
+        }
+      ]
+    },
+    {
+      "id": "forces_w9",
+      "sequence": "forces",
+      "phase": "oscillation",
+      "t_min": 0.1998,
+      "t_max": 0.2011,
+      "t_mean": 0.2005,
+      "n_artifacts": 6,
+      "total_footprint": 14,
+      "proposed_size": {
+        "width": 10,
+        "depth": 6,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "example_2_1_forces_vr",
+          "t": 0.1998,
+          "footprint": 1
+        },
+        {
+          "name": "chaos_attractor",
+          "t": 0.2001,
+          "footprint": 1
+        },
+        {
+          "name": "orbital_mechanics_demo",
+          "t": 0.2004,
+          "footprint": 1
+        },
+        {
+          "name": "example_1_9_motion_101_velocity_and_random_acceleration_vr",
+          "t": 0.2005,
+          "footprint": 1
+        },
+        {
+          "name": "normal_force_demo",
+          "t": 0.2008,
+          "footprint": 1
+        },
+        {
+          "name": "sphere_splitting_showcase",
+          "t": 0.2011,
+          "footprint": 9
+        }
+      ]
+    },
+    {
+      "id": "forces_w10",
+      "sequence": "forces",
+      "phase": "oscillation",
+      "t_min": 0.2015,
+      "t_max": 0.2035,
+      "t_mean": 0.2026,
+      "n_artifacts": 6,
+      "total_footprint": 15,
+      "proposed_size": {
+        "width": 10,
+        "depth": 6,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "VectorFieldFlow",
+          "t": 0.2015,
+          "footprint": 8
+        },
+        {
+          "name": "gravity_gun_test_scene",
+          "t": 0.202,
+          "footprint": 3
+        },
+        {
+          "name": "work_energy_demo",
+          "t": 0.2024,
+          "footprint": 1
+        },
+        {
+          "name": "newtons_laws",
+          "t": 0.2028,
+          "footprint": 1
+        },
+        {
+          "name": "vector_reflection_demo",
+          "t": 0.2031,
+          "footprint": 1
+        },
+        {
+          "name": "coordinate_system_switcher",
+          "t": 0.2035,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "forces_w11",
+      "sequence": "forces",
+      "phase": "oscillation",
+      "t_min": 0.2038,
+      "t_max": 0.2062,
+      "t_mean": 0.2049,
+      "n_artifacts": 6,
+      "total_footprint": 26,
+      "proposed_size": {
+        "width": 13,
+        "depth": 8,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "friction_ramp",
+          "t": 0.2038,
+          "footprint": 1
+        },
+        {
+          "name": "slingshot_launcher",
+          "t": 0.2042,
+          "footprint": 9
+        },
+        {
+          "name": "VectorAddition",
+          "t": 0.2046,
+          "footprint": 2
+        },
+        {
+          "name": "basis_vectors_rig",
+          "t": 0.205,
+          "footprint": 4
+        },
+        {
+          "name": "queer_cylinder_target",
+          "t": 0.2057,
+          "footprint": 9
+        },
+        {
+          "name": "vector_normalize_demo",
+          "t": 0.2062,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "forces_w12",
+      "sequence": "forces",
+      "phase": "oscillation",
+      "t_min": 0.2066,
+      "t_max": 0.2082,
+      "t_mean": 0.2074,
+      "n_artifacts": 5,
+      "total_footprint": 23,
+      "proposed_size": {
+        "width": 12,
+        "depth": 8,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "newton_cradle",
+          "t": 0.2066,
+          "footprint": 2
+        },
+        {
+          "name": "exercise_1_8_solution_attraction_magnitude_vr",
+          "t": 0.207,
+          "footprint": 1
+        },
+        {
+          "name": "vector_fields",
+          "t": 0.2073,
+          "footprint": 9
+        },
+        {
+          "name": "VectorCrossProduct",
+          "t": 0.2077,
+          "footprint": 2
+        },
+        {
+          "name": "cross_product_demo",
+          "t": 0.2082,
+          "footprint": 9
+        }
+      ]
+    },
+    {
+      "id": "wavefunctions_w0",
+      "sequence": "wavefunctions",
+      "phase": "oscillation",
+      "t_min": 0.2181,
+      "t_max": 0.2211,
+      "t_mean": 0.2197,
+      "n_artifacts": 6,
+      "total_footprint": 15,
+      "proposed_size": {
+        "width": 10,
+        "depth": 6,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "petri_dish_worms",
+          "t": 0.2181,
+          "footprint": 1
+        },
+        {
+          "name": "y_oscillation_cube",
+          "t": 0.2187,
+          "footprint": 1
+        },
+        {
+          "name": "kusama_sine",
+          "t": 0.2194,
+          "footprint": 9
+        },
+        {
+          "name": "draw_dot_time_domain",
+          "t": 0.2203,
+          "footprint": 1
+        },
+        {
+          "name": "ruth_asawa_sculpture",
+          "t": 0.2207,
+          "footprint": 1
+        },
+        {
+          "name": "sine_wall_explanation",
+          "t": 0.2211,
+          "footprint": 2
+        }
+      ]
+    },
+    {
+      "id": "wavefunctions_w1",
+      "sequence": "wavefunctions",
+      "phase": "oscillation",
+      "t_min": 0.2214,
+      "t_max": 0.223,
+      "t_mean": 0.2222,
+      "n_artifacts": 6,
+      "total_footprint": 19,
+      "proposed_size": {
+        "width": 11,
+        "depth": 7,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "demo_passive",
+          "t": 0.2214,
+          "footprint": 3
+        },
+        {
+          "name": "GlassRack",
+          "t": 0.2218,
+          "footprint": 1
+        },
+        {
+          "name": "MelodyChaser3D",
+          "t": 0.2221,
+          "footprint": 1
+        },
+        {
+          "name": "demo_compounds",
+          "t": 0.2224,
+          "footprint": 3
+        },
+        {
+          "name": "wave_equation_solver",
+          "t": 0.2227,
+          "footprint": 2
+        },
+        {
+          "name": "air_music_display_case",
+          "t": 0.223,
+          "footprint": 9
+        }
+      ]
+    },
+    {
+      "id": "wavefunctions_w2",
+      "sequence": "wavefunctions",
+      "phase": "oscillation",
+      "t_min": 0.2233,
+      "t_max": 0.2246,
+      "t_mean": 0.2239,
+      "n_artifacts": 6,
+      "total_footprint": 19,
+      "proposed_size": {
+        "width": 11,
+        "depth": 7,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "SphericalHarmonics",
+          "t": 0.2233,
+          "footprint": 4
+        },
+        {
+          "name": "sound_timeline",
+          "t": 0.2235,
+          "footprint": 1
+        },
+        {
+          "name": "cable_builder",
+          "t": 0.2238,
+          "footprint": 5
+        },
+        {
+          "name": "Rack303Acid",
+          "t": 0.224,
+          "footprint": 1
+        },
+        {
+          "name": "dual_display_test",
+          "t": 0.2243,
+          "footprint": 7
+        },
+        {
+          "name": "chladni_plate",
+          "t": 0.2246,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "wavefunctions_w3",
+      "sequence": "wavefunctions",
+      "phase": "oscillation",
+      "t_min": 0.2252,
+      "t_max": 0.2272,
+      "t_mean": 0.2263,
+      "n_artifacts": 6,
+      "total_footprint": 15,
+      "proposed_size": {
+        "width": 10,
+        "depth": 6,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "oscilloscope_artifact",
+          "t": 0.2252,
+          "footprint": 1
+        },
+        {
+          "name": "wave_interference_tank",
+          "t": 0.2256,
+          "footprint": 2
+        },
+        {
+          "name": "mario_cube_time_trace",
+          "t": 0.2261,
+          "footprint": 1
+        },
+        {
+          "name": "profile_saw",
+          "t": 0.2265,
+          "footprint": 1
+        },
+        {
+          "name": "bernini_columns",
+          "t": 0.2269,
+          "footprint": 9
+        },
+        {
+          "name": "chemicalapparatus",
+          "t": 0.2272,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "wavefunctions_w4",
+      "sequence": "wavefunctions",
+      "phase": "oscillation",
+      "t_min": 0.2274,
+      "t_max": 0.2288,
+      "t_mean": 0.228,
+      "n_artifacts": 6,
+      "total_footprint": 33,
+      "proposed_size": {
+        "width": 15,
+        "depth": 9,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "biomagneticresonator",
+          "t": 0.2274,
+          "footprint": 1
+        },
+        {
+          "name": "sine_wall_corridor",
+          "t": 0.2275,
+          "footprint": 9
+        },
+        {
+          "name": "wave_propagation_3d",
+          "t": 0.2277,
+          "footprint": 9
+        },
+        {
+          "name": "sine_space_explanation",
+          "t": 0.228,
+          "footprint": 4
+        },
+        {
+          "name": "OscillationCurve",
+          "t": 0.2283,
+          "footprint": 9
+        },
+        {
+          "name": "lissajous_curves",
+          "t": 0.2288,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "wavefunctions_w5",
+      "sequence": "wavefunctions",
+      "phase": "oscillation",
+      "t_min": 0.2293,
+      "t_max": 0.2307,
+      "t_mean": 0.2301,
+      "n_artifacts": 6,
+      "total_footprint": 38,
+      "proposed_size": {
+        "width": 16,
+        "depth": 10,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "transformation_cube",
+          "t": 0.2293,
+          "footprint": 1
+        },
+        {
+          "name": "sine_space",
+          "t": 0.2298,
+          "footprint": 9
+        },
+        {
+          "name": "wave_interference",
+          "t": 0.2301,
+          "footprint": 9
+        },
+        {
+          "name": "hallway_scene",
+          "t": 0.2304,
+          "footprint": 9
+        },
+        {
+          "name": "beat_frequency_demo",
+          "t": 0.2305,
+          "footprint": 1
+        },
+        {
+          "name": "double_helix_scene",
+          "t": 0.2307,
+          "footprint": 9
+        }
+      ]
+    },
+    {
+      "id": "wavefunctions_w6",
+      "sequence": "wavefunctions",
+      "phase": "oscillation",
+      "t_min": 0.2309,
+      "t_max": 0.2322,
+      "t_mean": 0.2316,
+      "n_artifacts": 6,
+      "total_footprint": 9,
+      "proposed_size": {
+        "width": 8,
+        "depth": 5,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "oscillation_controlled_cube",
+          "t": 0.2309,
+          "footprint": 1
+        },
+        {
+          "name": "DualBallFMController",
+          "t": 0.2312,
+          "footprint": 2
+        },
+        {
+          "name": "RackSineBasic",
+          "t": 0.2315,
+          "footprint": 1
+        },
+        {
+          "name": "audio_catalog_tablet",
+          "t": 0.2317,
+          "footprint": 2
+        },
+        {
+          "name": "microscope",
+          "t": 0.232,
+          "footprint": 1
+        },
+        {
+          "name": "chord_tension_spring",
+          "t": 0.2322,
+          "footprint": 2
+        }
+      ]
+    },
+    {
+      "id": "wavefunctions_w7",
+      "sequence": "wavefunctions",
+      "phase": "oscillation",
+      "t_min": 0.2325,
+      "t_max": 0.2335,
+      "t_mean": 0.2331,
+      "n_artifacts": 6,
+      "total_footprint": 24,
+      "proposed_size": {
+        "width": 12,
+        "depth": 8,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "rotatescalecubes",
+          "t": 0.2325,
+          "footprint": 9
+        },
+        {
+          "name": "pickup_cube_transforming",
+          "t": 0.2327,
+          "footprint": 1
+        },
+        {
+          "name": "coupled_pendulums",
+          "t": 0.233,
+          "footprint": 1
+        },
+        {
+          "name": "profile",
+          "t": 0.2332,
+          "footprint": 1
+        },
+        {
+          "name": "demo_singles",
+          "t": 0.2334,
+          "footprint": 3
+        },
+        {
+          "name": "PendulumWave",
+          "t": 0.2335,
+          "footprint": 9
+        }
+      ]
+    },
+    {
+      "id": "wavefunctions_w8",
+      "sequence": "wavefunctions",
+      "phase": "oscillation",
+      "t_min": 0.2337,
+      "t_max": 0.235,
+      "t_mean": 0.2343,
+      "n_artifacts": 6,
+      "total_footprint": 23,
+      "proposed_size": {
+        "width": 12,
+        "depth": 8,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "wave_interference_3d",
+          "t": 0.2337,
+          "footprint": 1
+        },
+        {
+          "name": "foucault_pendulum",
+          "t": 0.2339,
+          "footprint": 9
+        },
+        {
+          "name": "lab_table",
+          "t": 0.2342,
+          "footprint": 2
+        },
+        {
+          "name": "harmonic_distance_table",
+          "t": 0.2344,
+          "footprint": 1
+        },
+        {
+          "name": "john_cage_tech_noir",
+          "t": 0.2347,
+          "footprint": 9
+        },
+        {
+          "name": "AudioContr",
+          "t": 0.235,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "wavefunctions_w9",
+      "sequence": "wavefunctions",
+      "phase": "oscillation",
+      "t_min": 0.2353,
+      "t_max": 0.2367,
+      "t_mean": 0.236,
+      "n_artifacts": 6,
+      "total_footprint": 24,
+      "proposed_size": {
+        "width": 12,
+        "depth": 8,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "coloredlines",
+          "t": 0.2353,
+          "footprint": 9
+        },
+        {
+          "name": "TrigWalkingPath",
+          "t": 0.2356,
+          "footprint": 1
+        },
+        {
+          "name": "additive_wave_demo",
+          "t": 0.2359,
+          "footprint": 3
+        },
+        {
+          "name": "VRAudioMonitor",
+          "t": 0.2362,
+          "footprint": 1
+        },
+        {
+          "name": "pickup_cube_rotating",
+          "t": 0.2364,
+          "footprint": 1
+        },
+        {
+          "name": "vertical_wave_lines",
+          "t": 0.2367,
+          "footprint": 9
+        }
+      ]
+    },
+    {
+      "id": "wavefunctions_w10",
+      "sequence": "wavefunctions",
+      "phase": "oscillation",
+      "t_min": 0.2368,
+      "t_max": 0.2386,
+      "t_mean": 0.2376,
+      "n_artifacts": 6,
+      "total_footprint": 10,
+      "proposed_size": {
+        "width": 8,
+        "depth": 5,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "spring_demo",
+          "t": 0.2368,
+          "footprint": 1
+        },
+        {
+          "name": "seismograph",
+          "t": 0.237,
+          "footprint": 2
+        },
+        {
+          "name": "living_paper_lissajous",
+          "t": 0.2373,
+          "footprint": 1
+        },
+        {
+          "name": "profile_triangle",
+          "t": 0.2376,
+          "footprint": 1
+        },
+        {
+          "name": "samplevialrack",
+          "t": 0.2382,
+          "footprint": 1
+        },
+        {
+          "name": "UnitCircleTrig",
+          "t": 0.2386,
+          "footprint": 4
+        }
+      ]
+    },
+    {
+      "id": "wavefunctions_w11",
+      "sequence": "wavefunctions",
+      "phase": "oscillation",
+      "t_min": 0.2391,
+      "t_max": 0.2406,
+      "t_mean": 0.2399,
+      "n_artifacts": 6,
+      "total_footprint": 15,
+      "proposed_size": {
+        "width": 10,
+        "depth": 6,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "atmosphericmonitoring",
+          "t": 0.2391,
+          "footprint": 1
+        },
+        {
+          "name": "resonating_metallophone",
+          "t": 0.2394,
+          "footprint": 2
+        },
+        {
+          "name": "SoundscapeRadioRack",
+          "t": 0.2398,
+          "footprint": 1
+        },
+        {
+          "name": "harmonic_motion_demo",
+          "t": 0.2401,
+          "footprint": 9
+        },
+        {
+          "name": "profile_lissajous",
+          "t": 0.2404,
+          "footprint": 1
+        },
+        {
+          "name": "rotating_cube",
+          "t": 0.2406,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "wavefunctions_w12",
+      "sequence": "wavefunctions",
+      "phase": "oscillation",
+      "t_min": 0.2408,
+      "t_max": 0.2421,
+      "t_mean": 0.2414,
+      "n_artifacts": 6,
+      "total_footprint": 22,
+      "proposed_size": {
+        "width": 12,
+        "depth": 8,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "sine_cylinder_staircase",
+          "t": 0.2408,
+          "footprint": 9
+        },
+        {
+          "name": "pickup_cube_static",
+          "t": 0.2409,
+          "footprint": 1
+        },
+        {
+          "name": "RackDX7Piano",
+          "t": 0.2412,
+          "footprint": 1
+        },
+        {
+          "name": "mario_test_sound_ui",
+          "t": 0.2415,
+          "footprint": 1
+        },
+        {
+          "name": "WavePaintings",
+          "t": 0.2418,
+          "footprint": 9
+        },
+        {
+          "name": "RackAmbientDrone",
+          "t": 0.2421,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "wavefunctions_w13",
+      "sequence": "wavefunctions",
+      "phase": "oscillation",
+      "t_min": 0.2424,
+      "t_max": 0.2444,
+      "t_mean": 0.2434,
+      "n_artifacts": 6,
+      "total_footprint": 19,
+      "proposed_size": {
+        "width": 11,
+        "depth": 7,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "interactable_demo",
+          "t": 0.2424,
+          "footprint": 6
+        },
+        {
+          "name": "coupled_oscillator_lattice",
+          "t": 0.2427,
+          "footprint": 9
+        },
+        {
+          "name": "dna_specimen",
+          "t": 0.2432,
+          "footprint": 1
+        },
+        {
+          "name": "electronicscales",
+          "t": 0.2436,
+          "footprint": 1
+        },
+        {
+          "name": "sine_oscillation",
+          "t": 0.244,
+          "footprint": 1
+        },
+        {
+          "name": "BigPipeSystem",
+          "t": 0.2444,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "wavefunctions_w14",
+      "sequence": "wavefunctions",
+      "phase": "oscillation",
+      "t_min": 0.2447,
+      "t_max": 0.2458,
+      "t_mean": 0.2453,
+      "n_artifacts": 6,
+      "total_footprint": 22,
+      "proposed_size": {
+        "width": 12,
+        "depth": 8,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "coshlea",
+          "t": 0.2447,
+          "footprint": 9
+        },
+        {
+          "name": "holographicdisplay",
+          "t": 0.245,
+          "footprint": 1
+        },
+        {
+          "name": "MarioSoundController",
+          "t": 0.2452,
+          "footprint": 1
+        },
+        {
+          "name": "multimeter",
+          "t": 0.2454,
+          "footprint": 1
+        },
+        {
+          "name": "vowel_sound_board",
+          "t": 0.2456,
+          "footprint": 1
+        },
+        {
+          "name": "SystemsMusicTest",
+          "t": 0.2458,
+          "footprint": 9
+        }
+      ]
+    },
+    {
+      "id": "wavefunctions_w15",
+      "sequence": "wavefunctions",
+      "phase": "oscillation",
+      "t_min": 0.246,
+      "t_max": 0.2474,
+      "t_mean": 0.2466,
+      "n_artifacts": 6,
+      "total_footprint": 14,
+      "proposed_size": {
+        "width": 10,
+        "depth": 6,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "sine_wall",
+          "t": 0.246,
+          "footprint": 9
+        },
+        {
+          "name": "ElphabaDress",
+          "t": 0.2462,
+          "footprint": 1
+        },
+        {
+          "name": "living_paper_fourier",
+          "t": 0.2464,
+          "footprint": 1
+        },
+        {
+          "name": "timbre_sculptor",
+          "t": 0.2467,
+          "footprint": 1
+        },
+        {
+          "name": "control_pendulum",
+          "t": 0.247,
+          "footprint": 1
+        },
+        {
+          "name": "doppler_effect_demo",
+          "t": 0.2474,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "wavefunctions_w16",
+      "sequence": "wavefunctions",
+      "phase": "oscillation",
+      "t_min": 0.2477,
+      "t_max": 0.2488,
+      "t_mean": 0.2482,
+      "n_artifacts": 6,
+      "total_footprint": 24,
+      "proposed_size": {
+        "width": 12,
+        "depth": 8,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "SimpleOscillatingBridge",
+          "t": 0.2477,
+          "footprint": 9
+        },
+        {
+          "name": "math_objects",
+          "t": 0.2479,
+          "footprint": 9
+        },
+        {
+          "name": "profile_beat",
+          "t": 0.2481,
+          "footprint": 1
+        },
+        {
+          "name": "living_paper_heat",
+          "t": 0.2483,
+          "footprint": 1
+        },
+        {
+          "name": "rotating_cube_demo",
+          "t": 0.2485,
+          "footprint": 1
+        },
+        {
+          "name": "unit_circle_advanced",
+          "t": 0.2488,
+          "footprint": 3
+        }
+      ]
+    },
+    {
+      "id": "wavefunctions_w17",
+      "sequence": "wavefunctions",
+      "phase": "oscillation",
+      "t_min": 0.2492,
+      "t_max": 0.2519,
+      "t_mean": 0.2507,
+      "n_artifacts": 4,
+      "total_footprint": 4,
+      "proposed_size": {
+        "width": 8,
+        "depth": 5,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "oscilloscope",
+          "t": 0.2492,
+          "footprint": 1
+        },
+        {
+          "name": "living_paper_sine",
+          "t": 0.2506,
+          "footprint": 1
+        },
+        {
+          "name": "profile_square",
+          "t": 0.2512,
+          "footprint": 1
+        },
+        {
+          "name": "RackMoogBass",
+          "t": 0.2519,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "randomness_w0",
+      "sequence": "randomness",
+      "phase": "E_entropy",
+      "t_min": 0.2607,
+      "t_max": 0.2632,
+      "t_mean": 0.262,
+      "n_artifacts": 6,
+      "total_footprint": 15,
+      "proposed_size": {
+        "width": 10,
+        "depth": 6,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "randomup",
+          "t": 0.2607,
+          "footprint": 9
+        },
+        {
+          "name": "remove_random",
+          "t": 0.2613,
+          "footprint": 1
+        },
+        {
+          "name": "pickup_cube_placer",
+          "t": 0.2618,
+          "footprint": 1
+        },
+        {
+          "name": "random_butterflies",
+          "t": 0.2624,
+          "footprint": 2
+        },
+        {
+          "name": "height_random",
+          "t": 0.2629,
+          "footprint": 1
+        },
+        {
+          "name": "distribution_sampler",
+          "t": 0.2632,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "randomness_w1",
+      "sequence": "randomness",
+      "phase": "E_entropy",
+      "t_min": 0.2636,
+      "t_max": 0.2652,
+      "t_mean": 0.2644,
+      "n_artifacts": 6,
+      "total_footprint": 24,
+      "proposed_size": {
+        "width": 12,
+        "depth": 8,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "random_space",
+          "t": 0.2636,
+          "footprint": 9
+        },
+        {
+          "name": "mushrooms",
+          "t": 0.2639,
+          "footprint": 9
+        },
+        {
+          "name": "origami_droideka",
+          "t": 0.2642,
+          "footprint": 2
+        },
+        {
+          "name": "kaleidocycle_enemy",
+          "t": 0.2645,
+          "footprint": 1
+        },
+        {
+          "name": "plane_manipulator",
+          "t": 0.2649,
+          "footprint": 1
+        },
+        {
+          "name": "noise_mixer",
+          "t": 0.2652,
+          "footprint": 2
+        }
+      ]
+    },
+    {
+      "id": "randomness_w2",
+      "sequence": "randomness",
+      "phase": "E_entropy",
+      "t_min": 0.2655,
+      "t_max": 0.2672,
+      "t_mean": 0.2662,
+      "n_artifacts": 6,
+      "total_footprint": 17,
+      "proposed_size": {
+        "width": 11,
+        "depth": 7,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "GaussianPaintSplatter",
+          "t": 0.2655,
+          "footprint": 4
+        },
+        {
+          "name": "living_paper_self_avoiding",
+          "t": 0.2657,
+          "footprint": 1
+        },
+        {
+          "name": "curl_noise_particles",
+          "t": 0.266,
+          "footprint": 1
+        },
+        {
+          "name": "mesh_grammar_barnacle",
+          "t": 0.2663,
+          "footprint": 1
+        },
+        {
+          "name": "particle_randomness_pure",
+          "t": 0.2668,
+          "footprint": 9
+        },
+        {
+          "name": "monte_carlo_dartboard",
+          "t": 0.2672,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "randomness_w3",
+      "sequence": "randomness",
+      "phase": "E_entropy",
+      "t_min": 0.2675,
+      "t_max": 0.269,
+      "t_mean": 0.2683,
+      "n_artifacts": 6,
+      "total_footprint": 30,
+      "proposed_size": {
+        "width": 14,
+        "depth": 9,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "random_transformations_geometric",
+          "t": 0.2675,
+          "footprint": 1
+        },
+        {
+          "name": "trng_vs_prng",
+          "t": 0.2678,
+          "footprint": 9
+        },
+        {
+          "name": "living_paper_dla",
+          "t": 0.2681,
+          "footprint": 1
+        },
+        {
+          "name": "random_transformations",
+          "t": 0.2684,
+          "footprint": 1
+        },
+        {
+          "name": "pollock_3d",
+          "t": 0.2687,
+          "footprint": 9
+        },
+        {
+          "name": "bubbles_random",
+          "t": 0.269,
+          "footprint": 9
+        }
+      ]
+    },
+    {
+      "id": "randomness_w4",
+      "sequence": "randomness",
+      "phase": "E_entropy",
+      "t_min": 0.2694,
+      "t_max": 0.2714,
+      "t_mean": 0.2703,
+      "n_artifacts": 6,
+      "total_footprint": 22,
+      "proposed_size": {
+        "width": 12,
+        "depth": 8,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "worley_noise",
+          "t": 0.2694,
+          "footprint": 1
+        },
+        {
+          "name": "reaction_diffusion_intro",
+          "t": 0.2697,
+          "footprint": 1
+        },
+        {
+          "name": "particle_randomness_patterns",
+          "t": 0.27,
+          "footprint": 9
+        },
+        {
+          "name": "particle_randomness_emergent",
+          "t": 0.2704,
+          "footprint": 9
+        },
+        {
+          "name": "scissor_stalker",
+          "t": 0.2708,
+          "footprint": 1
+        },
+        {
+          "name": "randompoints_gaussian",
+          "t": 0.2714,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "randomness_w5",
+      "sequence": "randomness",
+      "phase": "E_entropy",
+      "t_min": 0.2719,
+      "t_max": 0.2751,
+      "t_mean": 0.2733,
+      "n_artifacts": 6,
+      "total_footprint": 14,
+      "proposed_size": {
+        "width": 10,
+        "depth": 6,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "living_paper_brownian",
+          "t": 0.2719,
+          "footprint": 1
+        },
+        {
+          "name": "randompoints_uniform",
+          "t": 0.2724,
+          "footprint": 1
+        },
+        {
+          "name": "cube_projectile_spawner",
+          "t": 0.2729,
+          "footprint": 9
+        },
+        {
+          "name": "random_transformations_matrices",
+          "t": 0.2734,
+          "footprint": 1
+        },
+        {
+          "name": "perlin_noise_bridge",
+          "t": 0.2741,
+          "footprint": 1
+        },
+        {
+          "name": "random_walk_terrarium",
+          "t": 0.2751,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "randomness_w6",
+      "sequence": "randomness",
+      "phase": "E_entropy",
+      "t_min": 0.2758,
+      "t_max": 0.2778,
+      "t_mean": 0.2769,
+      "n_artifacts": 6,
+      "total_footprint": 35,
+      "proposed_size": {
+        "width": 15,
+        "depth": 10,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "GaussianBlurShader",
+          "t": 0.2758,
+          "footprint": 3
+        },
+        {
+          "name": "random_walk_collection",
+          "t": 0.2765,
+          "footprint": 9
+        },
+        {
+          "name": "random_edge_profile",
+          "t": 0.2769,
+          "footprint": 1
+        },
+        {
+          "name": "omoss",
+          "t": 0.2772,
+          "footprint": 9
+        },
+        {
+          "name": "random_decay_multimesh",
+          "t": 0.2775,
+          "footprint": 9
+        },
+        {
+          "name": "randomlines",
+          "t": 0.2778,
+          "footprint": 4
+        }
+      ]
+    },
+    {
+      "id": "randomness_w7",
+      "sequence": "randomness",
+      "phase": "E_entropy",
+      "t_min": 0.2779,
+      "t_max": 0.2787,
+      "t_mean": 0.2783,
+      "n_artifacts": 6,
+      "total_footprint": 8,
+      "proposed_size": {
+        "width": 8,
+        "depth": 5,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "mesh_grammar_nodule_sphere",
+          "t": 0.2779,
+          "footprint": 1
+        },
+        {
+          "name": "2d_in_3d_randomness_vis",
+          "t": 0.2781,
+          "footprint": 3
+        },
+        {
+          "name": "r_c",
+          "t": 0.2782,
+          "footprint": 1
+        },
+        {
+          "name": "random_walk_leash",
+          "t": 0.2784,
+          "footprint": 1
+        },
+        {
+          "name": "mesh_grammar_spike_ball",
+          "t": 0.2785,
+          "footprint": 1
+        },
+        {
+          "name": "pipe_dream",
+          "t": 0.2787,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "randomness_w8",
+      "sequence": "randomness",
+      "phase": "E_entropy",
+      "t_min": 0.2788,
+      "t_max": 0.2796,
+      "t_mean": 0.2792,
+      "n_artifacts": 6,
+      "total_footprint": 25,
+      "proposed_size": {
+        "width": 13,
+        "depth": 8,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "armadillo_eggling",
+          "t": 0.2788,
+          "footprint": 4
+        },
+        {
+          "name": "extreme_randomness",
+          "t": 0.279,
+          "footprint": 9
+        },
+        {
+          "name": "dice_throw",
+          "t": 0.2792,
+          "footprint": 1
+        },
+        {
+          "name": "digital_materiality_glitch",
+          "t": 0.2793,
+          "footprint": 1
+        },
+        {
+          "name": "distribution_comparator",
+          "t": 0.2795,
+          "footprint": 1
+        },
+        {
+          "name": "hazards_demo",
+          "t": 0.2796,
+          "footprint": 9
+        }
+      ]
+    },
+    {
+      "id": "randomness_w9",
+      "sequence": "randomness",
+      "phase": "E_entropy",
+      "t_min": 0.2798,
+      "t_max": 0.2814,
+      "t_mean": 0.2806,
+      "n_artifacts": 6,
+      "total_footprint": 46,
+      "proposed_size": {
+        "width": 17,
+        "depth": 11,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "entropy_axiom",
+          "t": 0.2798,
+          "footprint": 9
+        },
+        {
+          "name": "monte_carlo_estimator",
+          "t": 0.2801,
+          "footprint": 1
+        },
+        {
+          "name": "pixel_cloud",
+          "t": 0.2805,
+          "footprint": 9
+        },
+        {
+          "name": "bell_alley",
+          "t": 0.2808,
+          "footprint": 9
+        },
+        {
+          "name": "hardware_entropy_decay",
+          "t": 0.2811,
+          "footprint": 9
+        },
+        {
+          "name": "ten_print_maze_3d",
+          "t": 0.2814,
+          "footprint": 9
+        }
+      ]
+    },
+    {
+      "id": "randomness_w10",
+      "sequence": "randomness",
+      "phase": "E_entropy",
+      "t_min": 0.2817,
+      "t_max": 0.2832,
+      "t_mean": 0.2825,
+      "n_artifacts": 6,
+      "total_footprint": 30,
+      "proposed_size": {
+        "width": 14,
+        "depth": 9,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "coin_toss",
+          "t": 0.2817,
+          "footprint": 1
+        },
+        {
+          "name": "distribution_visualization",
+          "t": 0.282,
+          "footprint": 9
+        },
+        {
+          "name": "random_object_spawner",
+          "t": 0.2823,
+          "footprint": 1
+        },
+        {
+          "name": "walk_random",
+          "t": 0.2827,
+          "footprint": 1
+        },
+        {
+          "name": "sculpt_one",
+          "t": 0.283,
+          "footprint": 9
+        },
+        {
+          "name": "random_bell_curve",
+          "t": 0.2832,
+          "footprint": 9
+        }
+      ]
+    },
+    {
+      "id": "randomness_w11",
+      "sequence": "randomness",
+      "phase": "E_entropy",
+      "t_min": 0.2833,
+      "t_max": 0.2847,
+      "t_mean": 0.2839,
+      "n_artifacts": 6,
+      "total_footprint": 25,
+      "proposed_size": {
+        "width": 13,
+        "depth": 8,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "env_one",
+          "t": 0.2833,
+          "footprint": 9
+        },
+        {
+          "name": "nature_system_demo",
+          "t": 0.2835,
+          "footprint": 9
+        },
+        {
+          "name": "shannon_entropy_meter",
+          "t": 0.2836,
+          "footprint": 1
+        },
+        {
+          "name": "walkingsphere",
+          "t": 0.2839,
+          "footprint": 4
+        },
+        {
+          "name": "slot_machine",
+          "t": 0.2842,
+          "footprint": 1
+        },
+        {
+          "name": "miura_crawler",
+          "t": 0.2847,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "randomness_w12",
+      "sequence": "randomness",
+      "phase": "E_entropy",
+      "t_min": 0.2851,
+      "t_max": 0.2866,
+      "t_mean": 0.2859,
+      "n_artifacts": 6,
+      "total_footprint": 17,
+      "proposed_size": {
+        "width": 11,
+        "depth": 7,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "random_decay_objects",
+          "t": 0.2851,
+          "footprint": 4
+        },
+        {
+          "name": "gaussian_random",
+          "t": 0.2856,
+          "footprint": 1
+        },
+        {
+          "name": "galton_board",
+          "t": 0.2858,
+          "footprint": 1
+        },
+        {
+          "name": "kresling_spire",
+          "t": 0.2861,
+          "footprint": 1
+        },
+        {
+          "name": "probability_distributions_3d",
+          "t": 0.2864,
+          "footprint": 9
+        },
+        {
+          "name": "profile_brownian",
+          "t": 0.2866,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "randomness_w13",
+      "sequence": "randomness",
+      "phase": "E_entropy",
+      "t_min": 0.2868,
+      "t_max": 0.2875,
+      "t_mean": 0.2872,
+      "n_artifacts": 6,
+      "total_footprint": 22,
+      "proposed_size": {
+        "width": 12,
+        "depth": 8,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "pollock_painting_in_3d",
+          "t": 0.2868,
+          "footprint": 9
+        },
+        {
+          "name": "seed_replay_demo",
+          "t": 0.2869,
+          "footprint": 1
+        },
+        {
+          "name": "random_transformations_stochastic",
+          "t": 0.2871,
+          "footprint": 1
+        },
+        {
+          "name": "Random_Rotate_Random_XYZ",
+          "t": 0.2872,
+          "footprint": 1
+        },
+        {
+          "name": "prng_crank_machine",
+          "t": 0.2874,
+          "footprint": 1
+        },
+        {
+          "name": "RotateGridCubes",
+          "t": 0.2875,
+          "footprint": 9
+        }
+      ]
+    },
+    {
+      "id": "randomness_w14",
+      "sequence": "randomness",
+      "phase": "E_entropy",
+      "t_min": 0.2877,
+      "t_max": 0.289,
+      "t_mean": 0.2883,
+      "n_artifacts": 6,
+      "total_footprint": 15,
+      "proposed_size": {
+        "width": 10,
+        "depth": 6,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "random_walk_128",
+          "t": 0.2877,
+          "footprint": 4
+        },
+        {
+          "name": "random_number_book_page_1955",
+          "t": 0.2879,
+          "footprint": 4
+        },
+        {
+          "name": "random_walk_grab_paper",
+          "t": 0.2882,
+          "footprint": 1
+        },
+        {
+          "name": "rejection_sampling_demo",
+          "t": 0.2884,
+          "footprint": 1
+        },
+        {
+          "name": "spawn_randomcubes",
+          "t": 0.2887,
+          "footprint": 1
+        },
+        {
+          "name": "random_gaussian_texture",
+          "t": 0.289,
+          "footprint": 4
+        }
+      ]
+    },
+    {
+      "id": "randomness_w15",
+      "sequence": "randomness",
+      "phase": "E_entropy",
+      "t_min": 0.2893,
+      "t_max": 0.2912,
+      "t_mean": 0.2902,
+      "n_artifacts": 6,
+      "total_footprint": 24,
+      "proposed_size": {
+        "width": 12,
+        "depth": 8,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "randomize_cubes_over_Z",
+          "t": 0.2893,
+          "footprint": 1
+        },
+        {
+          "name": "particle_randomness_evolutionary",
+          "t": 0.2897,
+          "footprint": 3
+        },
+        {
+          "name": "random_edge_profile_collection",
+          "t": 0.29,
+          "footprint": 1
+        },
+        {
+          "name": "GaussianBlurCircle",
+          "t": 0.2904,
+          "footprint": 9
+        },
+        {
+          "name": "ten_print",
+          "t": 0.2908,
+          "footprint": 9
+        },
+        {
+          "name": "clipboard",
+          "t": 0.2912,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "randomness_w16",
+      "sequence": "randomness",
+      "phase": "E_entropy",
+      "t_min": 0.2918,
+      "t_max": 0.2939,
+      "t_mean": 0.2928,
+      "n_artifacts": 6,
+      "total_footprint": 22,
+      "proposed_size": {
+        "width": 12,
+        "depth": 8,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "random_number_book_page_collection",
+          "t": 0.2918,
+          "footprint": 1
+        },
+        {
+          "name": "profile_random_walk",
+          "t": 0.2922,
+          "footprint": 1
+        },
+        {
+          "name": "plane_random",
+          "t": 0.2926,
+          "footprint": 9
+        },
+        {
+          "name": "bubble_particles",
+          "t": 0.293,
+          "footprint": 1
+        },
+        {
+          "name": "entropy_jar",
+          "t": 0.2934,
+          "footprint": 1
+        },
+        {
+          "name": "pheromone_terrain",
+          "t": 0.2939,
+          "footprint": 9
+        }
+      ]
+    },
+    {
+      "id": "randomness_w17",
+      "sequence": "randomness",
+      "phase": "E_entropy",
+      "t_min": 0.2945,
+      "t_max": 0.2945,
+      "t_mean": 0.2945,
+      "n_artifacts": 1,
+      "total_footprint": 1,
+      "proposed_size": {
+        "width": 8,
+        "depth": 5,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "rotate_random_y",
+          "t": 0.2945,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "noise_w0",
+      "sequence": "noise",
+      "phase": "E_entropy",
+      "t_min": 0.3054,
+      "t_max": 0.3122,
+      "t_mean": 0.31,
+      "n_artifacts": 6,
+      "total_footprint": 13,
+      "proposed_size": {
+        "width": 9,
+        "depth": 6,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "profile_noise",
+          "t": 0.3054,
+          "footprint": 1
+        },
+        {
+          "name": "VoxelNoiseROIs",
+          "t": 0.3094,
+          "footprint": 4
+        },
+        {
+          "name": "mesh_grammar_noise_sculpture",
+          "t": 0.3104,
+          "footprint": 1
+        },
+        {
+          "name": "living_paper_perlin",
+          "t": 0.311,
+          "footprint": 1
+        },
+        {
+          "name": "perlin_terrain_sculptor",
+          "t": 0.3116,
+          "footprint": 4
+        },
+        {
+          "name": "noisetext",
+          "t": 0.3122,
+          "footprint": 2
+        }
+      ]
+    },
+    {
+      "id": "noise_w1",
+      "sequence": "noise",
+      "phase": "E_entropy",
+      "t_min": 0.3132,
+      "t_max": 0.3169,
+      "t_mean": 0.3153,
+      "n_artifacts": 6,
+      "total_footprint": 31,
+      "proposed_size": {
+        "width": 14,
+        "depth": 9,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "noisetorus",
+          "t": 0.3132,
+          "footprint": 9
+        },
+        {
+          "name": "shader_noise_space",
+          "t": 0.3138,
+          "footprint": 9
+        },
+        {
+          "name": "randompoint",
+          "t": 0.3153,
+          "footprint": 2
+        },
+        {
+          "name": "voxelnoise",
+          "t": 0.3162,
+          "footprint": 9
+        },
+        {
+          "name": "living_paper_voronoi",
+          "t": 0.3164,
+          "footprint": 1
+        },
+        {
+          "name": "noise_terrain",
+          "t": 0.3169,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "noise_w2",
+      "sequence": "noise",
+      "phase": "E_entropy",
+      "t_min": 0.3182,
+      "t_max": 0.3259,
+      "t_mean": 0.3219,
+      "n_artifacts": 6,
+      "total_footprint": 39,
+      "proposed_size": {
+        "width": 16,
+        "depth": 10,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "simplex_noise",
+          "t": 0.3182,
+          "footprint": 9
+        },
+        {
+          "name": "NoiseColors3D",
+          "t": 0.3195,
+          "footprint": 9
+        },
+        {
+          "name": "mesh_grammar_crumpled",
+          "t": 0.3205,
+          "footprint": 1
+        },
+        {
+          "name": "configurable_portal",
+          "t": 0.3222,
+          "footprint": 2
+        },
+        {
+          "name": "pool_hole_noise",
+          "t": 0.3253,
+          "footprint": 9
+        },
+        {
+          "name": "WhiteNoiseGallery",
+          "t": 0.3259,
+          "footprint": 9
+        }
+      ]
+    },
+    {
+      "id": "noise_w3",
+      "sequence": "noise",
+      "phase": "E_entropy",
+      "t_min": 0.3266,
+      "t_max": 0.33,
+      "t_mean": 0.3285,
+      "n_artifacts": 6,
+      "total_footprint": 38,
+      "proposed_size": {
+        "width": 16,
+        "depth": 10,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "noise_terrain_with_blobs",
+          "t": 0.3266,
+          "footprint": 1
+        },
+        {
+          "name": "MeltingBerniniScene",
+          "t": 0.3272,
+          "footprint": 9
+        },
+        {
+          "name": "particle_randomness_perlin",
+          "t": 0.3287,
+          "footprint": 9
+        },
+        {
+          "name": "noiselayers",
+          "t": 0.3292,
+          "footprint": 1
+        },
+        {
+          "name": "value_noise",
+          "t": 0.3296,
+          "footprint": 9
+        },
+        {
+          "name": "noise_space",
+          "t": 0.33,
+          "footprint": 9
+        }
+      ]
+    },
+    {
+      "id": "noise_w4",
+      "sequence": "noise",
+      "phase": "E_entropy",
+      "t_min": 0.3303,
+      "t_max": 0.3325,
+      "t_mean": 0.3314,
+      "n_artifacts": 6,
+      "total_footprint": 33,
+      "proposed_size": {
+        "width": 15,
+        "depth": 9,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "blue_noise",
+          "t": 0.3303,
+          "footprint": 9
+        },
+        {
+          "name": "RandomGaussianTexture",
+          "t": 0.3307,
+          "footprint": 4
+        },
+        {
+          "name": "random_transformations_noise",
+          "t": 0.3311,
+          "footprint": 1
+        },
+        {
+          "name": "profile_noise_octaves",
+          "t": 0.3317,
+          "footprint": 1
+        },
+        {
+          "name": "neon_wave_grid",
+          "t": 0.3321,
+          "footprint": 9
+        },
+        {
+          "name": "perlin_noise",
+          "t": 0.3325,
+          "footprint": 9
+        }
+      ]
+    },
+    {
+      "id": "noise_w5",
+      "sequence": "noise",
+      "phase": "E_entropy",
+      "t_min": 0.3329,
+      "t_max": 0.3368,
+      "t_mean": 0.3346,
+      "n_artifacts": 5,
+      "total_footprint": 17,
+      "proposed_size": {
+        "width": 11,
+        "depth": 7,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "noisesphere",
+          "t": 0.3329,
+          "footprint": 9
+        },
+        {
+          "name": "living_paper_noise_octaves",
+          "t": 0.3335,
+          "footprint": 1
+        },
+        {
+          "name": "randompoints",
+          "t": 0.3345,
+          "footprint": 2
+        },
+        {
+          "name": "perlin_noise_clouds",
+          "t": 0.3352,
+          "footprint": 1
+        },
+        {
+          "name": "perlin_noise_terrain",
+          "t": 0.3368,
+          "footprint": 4
+        }
+      ]
+    },
+    {
+      "id": "cellularautomata_w0",
+      "sequence": "cellularautomata",
+      "phase": "lambda_edge",
+      "t_min": 0.3475,
+      "t_max": 0.3528,
+      "t_mean": 0.3501,
+      "n_artifacts": 6,
+      "total_footprint": 38,
+      "proposed_size": {
+        "width": 16,
+        "depth": 10,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "ca_bridge",
+          "t": 0.3475,
+          "footprint": 1
+        },
+        {
+          "name": "grid_substrate_runner",
+          "t": 0.349,
+          "footprint": 1
+        },
+        {
+          "name": "ca_conway_city",
+          "t": 0.3497,
+          "footprint": 9
+        },
+        {
+          "name": "decaying_bridge",
+          "t": 0.3504,
+          "footprint": 9
+        },
+        {
+          "name": "ca_rule_comparison",
+          "t": 0.3513,
+          "footprint": 9
+        },
+        {
+          "name": "persian_rug",
+          "t": 0.3528,
+          "footprint": 9
+        }
+      ]
+    },
+    {
+      "id": "cellularautomata_w1",
+      "sequence": "cellularautomata",
+      "phase": "lambda_edge",
+      "t_min": 0.3539,
+      "t_max": 0.3593,
+      "t_mean": 0.3569,
+      "n_artifacts": 6,
+      "total_footprint": 20,
+      "proposed_size": {
+        "width": 11,
+        "depth": 8,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "ca_growth_network",
+          "t": 0.3539,
+          "footprint": 4
+        },
+        {
+          "name": "ca_rule_explorer",
+          "t": 0.3555,
+          "footprint": 4
+        },
+        {
+          "name": "wireworld_circuit",
+          "t": 0.3565,
+          "footprint": 1
+        },
+        {
+          "name": "line_network_ca",
+          "t": 0.3574,
+          "footprint": 1
+        },
+        {
+          "name": "cellular_automata_3d_tree",
+          "t": 0.3585,
+          "footprint": 9
+        },
+        {
+          "name": "becoming_catalyst",
+          "t": 0.3593,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "cellularautomata_w2",
+      "sequence": "cellularautomata",
+      "phase": "lambda_edge",
+      "t_min": 0.3599,
+      "t_max": 0.3649,
+      "t_mean": 0.3624,
+      "n_artifacts": 6,
+      "total_footprint": 26,
+      "proposed_size": {
+        "width": 13,
+        "depth": 8,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "ca_columns",
+          "t": 0.3599,
+          "footprint": 9
+        },
+        {
+          "name": "ca_chair_test",
+          "t": 0.361,
+          "footprint": 1
+        },
+        {
+          "name": "game_of_life_petri",
+          "t": 0.3622,
+          "footprint": 2
+        },
+        {
+          "name": "self_organization_ca",
+          "t": 0.3629,
+          "footprint": 1
+        },
+        {
+          "name": "mold_network",
+          "t": 0.3637,
+          "footprint": 4
+        },
+        {
+          "name": "mirrored_cellular_automata",
+          "t": 0.3649,
+          "footprint": 9
+        }
+      ]
+    },
+    {
+      "id": "cellularautomata_w3",
+      "sequence": "cellularautomata",
+      "phase": "lambda_edge",
+      "t_min": 0.3656,
+      "t_max": 0.3712,
+      "t_mean": 0.3677,
+      "n_artifacts": 6,
+      "total_footprint": 17,
+      "proposed_size": {
+        "width": 11,
+        "depth": 7,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "CellularAutomata3DStacked",
+          "t": 0.3656,
+          "footprint": 4
+        },
+        {
+          "name": "disease_spread_ca",
+          "t": 0.3664,
+          "footprint": 1
+        },
+        {
+          "name": "crossway_ca",
+          "t": 0.3669,
+          "footprint": 9
+        },
+        {
+          "name": "lenia_continuous",
+          "t": 0.3678,
+          "footprint": 1
+        },
+        {
+          "name": "ca_screen",
+          "t": 0.3685,
+          "footprint": 1
+        },
+        {
+          "name": "mesh_grammar_ca_growth",
+          "t": 0.3712,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "cellularautomata_w4",
+      "sequence": "cellularautomata",
+      "phase": "lambda_edge",
+      "t_min": 0.3728,
+      "t_max": 0.3793,
+      "t_mean": 0.3761,
+      "n_artifacts": 6,
+      "total_footprint": 33,
+      "proposed_size": {
+        "width": 15,
+        "depth": 9,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "ca_sphere",
+          "t": 0.3728,
+          "footprint": 4
+        },
+        {
+          "name": "structure_growth",
+          "t": 0.3739,
+          "footprint": 9
+        },
+        {
+          "name": "sierpinski_pyramid",
+          "t": 0.3752,
+          "footprint": 9
+        },
+        {
+          "name": "rule_30_110_gravity",
+          "t": 0.3772,
+          "footprint": 1
+        },
+        {
+          "name": "hexagon_ca_vr",
+          "t": 0.378,
+          "footprint": 9
+        },
+        {
+          "name": "volumetric_fog_ca",
+          "t": 0.3793,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "fractals_w0",
+      "sequence": "fractals",
+      "phase": "lambda_edge",
+      "t_min": 0.3895,
+      "t_max": 0.3928,
+      "t_mean": 0.3913,
+      "n_artifacts": 6,
+      "total_footprint": 25,
+      "proposed_size": {
+        "width": 13,
+        "depth": 8,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "mesh_grammar_branching_coral",
+          "t": 0.3895,
+          "footprint": 1
+        },
+        {
+          "name": "living_paper",
+          "t": 0.3905,
+          "footprint": 1
+        },
+        {
+          "name": "recursive_tree",
+          "t": 0.391,
+          "footprint": 9
+        },
+        {
+          "name": "strange_attractors",
+          "t": 0.3917,
+          "footprint": 1
+        },
+        {
+          "name": "recursive_boolean_cube",
+          "t": 0.3923,
+          "footprint": 4
+        },
+        {
+          "name": "sierpinski_triangle",
+          "t": 0.3928,
+          "footprint": 9
+        }
+      ]
+    },
+    {
+      "id": "fractals_w1",
+      "sequence": "fractals",
+      "phase": "lambda_edge",
+      "t_min": 0.3934,
+      "t_max": 0.3974,
+      "t_mean": 0.3957,
+      "n_artifacts": 6,
+      "total_footprint": 22,
+      "proposed_size": {
+        "width": 12,
+        "depth": 8,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "barnsley_fern",
+          "t": 0.3934,
+          "footprint": 1
+        },
+        {
+          "name": "Hilbert3D",
+          "t": 0.394,
+          "footprint": 1
+        },
+        {
+          "name": "menger_sponge",
+          "t": 0.3958,
+          "footprint": 9
+        },
+        {
+          "name": "cube_bookshelf",
+          "t": 0.3965,
+          "footprint": 1
+        },
+        {
+          "name": "mobius_world",
+          "t": 0.3971,
+          "footprint": 1
+        },
+        {
+          "name": "example_8_3_recursion_circles_vr",
+          "t": 0.3974,
+          "footprint": 9
+        }
+      ]
+    },
+    {
+      "id": "fractals_w2",
+      "sequence": "fractals",
+      "phase": "lambda_edge",
+      "t_min": 0.3978,
+      "t_max": 0.4005,
+      "t_mean": 0.3988,
+      "n_artifacts": 6,
+      "total_footprint": 22,
+      "proposed_size": {
+        "width": 12,
+        "depth": 8,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "fractal_lsystem_tree",
+          "t": 0.3978,
+          "footprint": 1
+        },
+        {
+          "name": "example_8_4_cantor_pagoda_vr",
+          "t": 0.3981,
+          "footprint": 9
+        },
+        {
+          "name": "small_subdivision_cube",
+          "t": 0.3984,
+          "footprint": 1
+        },
+        {
+          "name": "living_paper_koch",
+          "t": 0.3987,
+          "footprint": 1
+        },
+        {
+          "name": "cube_subdivision",
+          "t": 0.3996,
+          "footprint": 1
+        },
+        {
+          "name": "cantor_set",
+          "t": 0.4005,
+          "footprint": 9
+        }
+      ]
+    },
+    {
+      "id": "fractals_w3",
+      "sequence": "fractals",
+      "phase": "lambda_edge",
+      "t_min": 0.4013,
+      "t_max": 0.4036,
+      "t_mean": 0.4026,
+      "n_artifacts": 6,
+      "total_footprint": 32,
+      "proposed_size": {
+        "width": 14,
+        "depth": 10,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "cube_desk",
+          "t": 0.4013,
+          "footprint": 1
+        },
+        {
+          "name": "fractal_stochastic_tree",
+          "t": 0.402,
+          "footprint": 1
+        },
+        {
+          "name": "julia_set",
+          "t": 0.4025,
+          "footprint": 9
+        },
+        {
+          "name": "stochastic_tree_separated",
+          "t": 0.4029,
+          "footprint": 4
+        },
+        {
+          "name": "space_filling_curve_gallery",
+          "t": 0.4032,
+          "footprint": 8
+        },
+        {
+          "name": "fractal_clouds",
+          "t": 0.4036,
+          "footprint": 9
+        }
+      ]
+    },
+    {
+      "id": "fractals_w4",
+      "sequence": "fractals",
+      "phase": "lambda_edge",
+      "t_min": 0.4039,
+      "t_max": 0.4076,
+      "t_mean": 0.4056,
+      "n_artifacts": 6,
+      "total_footprint": 18,
+      "proposed_size": {
+        "width": 11,
+        "depth": 7,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "lyapunov_fractal",
+          "t": 0.4039,
+          "footprint": 1
+        },
+        {
+          "name": "box_counting_dimension",
+          "t": 0.4043,
+          "footprint": 1
+        },
+        {
+          "name": "romanesco",
+          "t": 0.4047,
+          "footprint": 1
+        },
+        {
+          "name": "fractal_recursion_2",
+          "t": 0.4061,
+          "footprint": 2
+        },
+        {
+          "name": "fibonacci_pagoda",
+          "t": 0.4069,
+          "footprint": 9
+        },
+        {
+          "name": "mandelbrot_dive",
+          "t": 0.4076,
+          "footprint": 4
+        }
+      ]
+    },
+    {
+      "id": "fractals_w5",
+      "sequence": "fractals",
+      "phase": "lambda_edge",
+      "t_min": 0.4082,
+      "t_max": 0.411,
+      "t_mean": 0.4097,
+      "n_artifacts": 6,
+      "total_footprint": 29,
+      "proposed_size": {
+        "width": 14,
+        "depth": 9,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "koch_curve_3d",
+          "t": 0.4082,
+          "footprint": 8
+        },
+        {
+          "name": "inverted_tree_cloud",
+          "t": 0.4087,
+          "footprint": 9
+        },
+        {
+          "name": "recursive_tree_2",
+          "t": 0.4093,
+          "footprint": 1
+        },
+        {
+          "name": "fibonacci_sequences",
+          "t": 0.4101,
+          "footprint": 1
+        },
+        {
+          "name": "living_paper_julia",
+          "t": 0.4106,
+          "footprint": 1
+        },
+        {
+          "name": "koch_curve",
+          "t": 0.411,
+          "footprint": 9
+        }
+      ]
+    },
+    {
+      "id": "fractals_w6",
+      "sequence": "fractals",
+      "phase": "lambda_edge",
+      "t_min": 0.4117,
+      "t_max": 0.415,
+      "t_mean": 0.4134,
+      "n_artifacts": 6,
+      "total_footprint": 19,
+      "proposed_size": {
+        "width": 11,
+        "depth": 7,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "fractal_scene",
+          "t": 0.4117,
+          "footprint": 1
+        },
+        {
+          "name": "example_8_4_cantor_set_vr",
+          "t": 0.4122,
+          "footprint": 1
+        },
+        {
+          "name": "fractal_recursion_1",
+          "t": 0.413,
+          "footprint": 1
+        },
+        {
+          "name": "julia_set_explorer",
+          "t": 0.4138,
+          "footprint": 4
+        },
+        {
+          "name": "fibonacci_terrain",
+          "t": 0.4145,
+          "footprint": 9
+        },
+        {
+          "name": "evolutionary_algorithms",
+          "t": 0.415,
+          "footprint": 3
+        }
+      ]
+    },
+    {
+      "id": "fractals_w7",
+      "sequence": "fractals",
+      "phase": "lambda_edge",
+      "t_min": 0.4156,
+      "t_max": 0.4191,
+      "t_mean": 0.4173,
+      "n_artifacts": 6,
+      "total_footprint": 33,
+      "proposed_size": {
+        "width": 15,
+        "depth": 9,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "mandelbrot_set",
+          "t": 0.4156,
+          "footprint": 9
+        },
+        {
+          "name": "cube_cabin",
+          "t": 0.4161,
+          "footprint": 1
+        },
+        {
+          "name": "cellular_automata_3d_stacked",
+          "t": 0.4169,
+          "footprint": 4
+        },
+        {
+          "name": "golden_rectangle",
+          "t": 0.4174,
+          "footprint": 9
+        },
+        {
+          "name": "recursive_table",
+          "t": 0.4186,
+          "footprint": 9
+        },
+        {
+          "name": "fractal_koch_curve",
+          "t": 0.4191,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "fractals_w8",
+      "sequence": "fractals",
+      "phase": "lambda_edge",
+      "t_min": 0.4199,
+      "t_max": 0.4221,
+      "t_mean": 0.4209,
+      "n_artifacts": 3,
+      "total_footprint": 14,
+      "proposed_size": {
+        "width": 10,
+        "depth": 6,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "recursive_chair",
+          "t": 0.4199,
+          "footprint": 4
+        },
+        {
+          "name": "cube_staircase",
+          "t": 0.4206,
+          "footprint": 1
+        },
+        {
+          "name": "diffusion_limited_aggregation",
+          "t": 0.4221,
+          "footprint": 9
+        }
+      ]
+    },
+    {
+      "id": "lsystems_w0",
+      "sequence": "lsystems",
+      "phase": "lambda_edge",
+      "t_min": 0.4319,
+      "t_max": 0.4357,
+      "t_mean": 0.4339,
+      "n_artifacts": 6,
+      "total_footprint": 10,
+      "proposed_size": {
+        "width": 8,
+        "depth": 5,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "lsystem_tree",
+          "t": 0.4319,
+          "footprint": 1
+        },
+        {
+          "name": "living_paper_dragon",
+          "t": 0.4328,
+          "footprint": 1
+        },
+        {
+          "name": "ContextFreeGrammars",
+          "t": 0.4336,
+          "footprint": 1
+        },
+        {
+          "name": "living_paper_tree",
+          "t": 0.4345,
+          "footprint": 1
+        },
+        {
+          "name": "AnimatedTree",
+          "t": 0.4351,
+          "footprint": 1
+        },
+        {
+          "name": "modulor_cypress",
+          "t": 0.4357,
+          "footprint": 5
+        }
+      ]
+    },
+    {
+      "id": "lsystems_w1",
+      "sequence": "lsystems",
+      "phase": "lambda_edge",
+      "t_min": 0.4361,
+      "t_max": 0.4414,
+      "t_mean": 0.4383,
+      "n_artifacts": 6,
+      "total_footprint": 38,
+      "proposed_size": {
+        "width": 16,
+        "depth": 10,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "tree_generation",
+          "t": 0.4361,
+          "footprint": 9
+        },
+        {
+          "name": "grammar_provenance",
+          "t": 0.4366,
+          "footprint": 9
+        },
+        {
+          "name": "ForestCompetition",
+          "t": 0.4372,
+          "footprint": 9
+        },
+        {
+          "name": "CityGenerator",
+          "t": 0.4384,
+          "footprint": 9
+        },
+        {
+          "name": "branching_coral",
+          "t": 0.44,
+          "footprint": 1
+        },
+        {
+          "name": "mesh_grammar_lsystem_tree",
+          "t": 0.4414,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "lsystems_w2",
+      "sequence": "lsystems",
+      "phase": "lambda_edge",
+      "t_min": 0.4425,
+      "t_max": 0.4523,
+      "t_mean": 0.4467,
+      "n_artifacts": 6,
+      "total_footprint": 26,
+      "proposed_size": {
+        "width": 13,
+        "depth": 8,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "context_free_grammars",
+          "t": 0.4425,
+          "footprint": 2
+        },
+        {
+          "name": "fractal_lsystem_string",
+          "t": 0.444,
+          "footprint": 1
+        },
+        {
+          "name": "genetic_tree_sculptor",
+          "t": 0.4446,
+          "footprint": 9
+        },
+        {
+          "name": "lindenmayer_tube_tree",
+          "t": 0.4459,
+          "footprint": 5
+        },
+        {
+          "name": "living_paper_fern",
+          "t": 0.451,
+          "footprint": 1
+        },
+        {
+          "name": "ContextSensitiveTree",
+          "t": 0.4523,
+          "footprint": 8
+        }
+      ]
+    },
+    {
+      "id": "lsystems_w3",
+      "sequence": "lsystems",
+      "phase": "lambda_edge",
+      "t_min": 0.4577,
+      "t_max": 0.4652,
+      "t_mean": 0.4616,
+      "n_artifacts": 6,
+      "total_footprint": 9,
+      "proposed_size": {
+        "width": 8,
+        "depth": 5,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "parametric_lsystem",
+          "t": 0.4577,
+          "footprint": 1
+        },
+        {
+          "name": "lsystem_editor",
+          "t": 0.4586,
+          "footprint": 4
+        },
+        {
+          "name": "lsystem_dungeon",
+          "t": 0.4611,
+          "footprint": 1
+        },
+        {
+          "name": "mesh_grammar_blooming_bulge",
+          "t": 0.4627,
+          "footprint": 1
+        },
+        {
+          "name": "mesh_grammar_coral_fingers",
+          "t": 0.4642,
+          "footprint": 1
+        },
+        {
+          "name": "mesh_grammar_petal_flower",
+          "t": 0.4652,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "proceduralgeneration_w0",
+      "sequence": "proceduralgeneration",
+      "phase": "lambda_edge",
+      "t_min": 0.4758,
+      "t_max": 0.4851,
+      "t_mean": 0.4812,
+      "n_artifacts": 6,
+      "total_footprint": 30,
+      "proposed_size": {
+        "width": 14,
+        "depth": 9,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "layered_membrane",
+          "t": 0.4758,
+          "footprint": 9
+        },
+        {
+          "name": "branching_growth_algorithm",
+          "t": 0.4802,
+          "footprint": 1
+        },
+        {
+          "name": "seed_orb",
+          "t": 0.4812,
+          "footprint": 1
+        },
+        {
+          "name": "space_colonization_algorithm",
+          "t": 0.4819,
+          "footprint": 1
+        },
+        {
+          "name": "dome",
+          "t": 0.4828,
+          "footprint": 9
+        },
+        {
+          "name": "voronoi_space",
+          "t": 0.4851,
+          "footprint": 9
+        }
+      ]
+    },
+    {
+      "id": "proceduralgeneration_w1",
+      "sequence": "proceduralgeneration",
+      "phase": "lambda_edge",
+      "t_min": 0.4893,
+      "t_max": 0.497,
+      "t_mean": 0.4941,
+      "n_artifacts": 6,
+      "total_footprint": 38,
+      "proposed_size": {
+        "width": 16,
+        "depth": 10,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "caverandomwalk",
+          "t": 0.4893,
+          "footprint": 9
+        },
+        {
+          "name": "mesh_grammar_budding",
+          "t": 0.4935,
+          "footprint": 1
+        },
+        {
+          "name": "GeneticProgramming",
+          "t": 0.4942,
+          "footprint": 9
+        },
+        {
+          "name": "maze_generation",
+          "t": 0.4951,
+          "footprint": 1
+        },
+        {
+          "name": "organic_space",
+          "t": 0.4957,
+          "footprint": 9
+        },
+        {
+          "name": "voronoi_diagrams",
+          "t": 0.497,
+          "footprint": 9
+        }
+      ]
+    },
+    {
+      "id": "proceduralgeneration_w2",
+      "sequence": "proceduralgeneration",
+      "phase": "lambda_edge",
+      "t_min": 0.4984,
+      "t_max": 0.5029,
+      "t_mean": 0.5011,
+      "n_artifacts": 6,
+      "total_footprint": 38,
+      "proposed_size": {
+        "width": 16,
+        "depth": 10,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "rhizomatic_maze_space",
+          "t": 0.4984,
+          "footprint": 1
+        },
+        {
+          "name": "percolationnetwork_ca",
+          "t": 0.5002,
+          "footprint": 9
+        },
+        {
+          "name": "cube_mound_scene",
+          "t": 0.5012,
+          "footprint": 9
+        },
+        {
+          "name": "mirror_cellular_texture_for_3d",
+          "t": 0.5017,
+          "footprint": 9
+        },
+        {
+          "name": "sixteen_cell_net_space_showcase",
+          "t": 0.5022,
+          "footprint": 9
+        },
+        {
+          "name": "mesh_grammar_scale_armor",
+          "t": 0.5029,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "proceduralgeneration_w3",
+      "sequence": "proceduralgeneration",
+      "phase": "lambda_edge",
+      "t_min": 0.5035,
+      "t_max": 0.5077,
+      "t_mean": 0.5055,
+      "n_artifacts": 5,
+      "total_footprint": 5,
+      "proposed_size": {
+        "width": 8,
+        "depth": 5,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "array_visualizer",
+          "t": 0.5035,
+          "footprint": 1
+        },
+        {
+          "name": "rule_30_110",
+          "t": 0.5044,
+          "footprint": 1
+        },
+        {
+          "name": "tree_gen",
+          "t": 0.5051,
+          "footprint": 1
+        },
+        {
+          "name": "mesh_grammar_inset_towers",
+          "t": 0.5067,
+          "footprint": 1
+        },
+        {
+          "name": "mesh_grammar_riveted",
+          "t": 0.5077,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "swarmintelligence_w0",
+      "sequence": "swarmintelligence",
+      "phase": "lambda_edge",
+      "t_min": 0.5177,
+      "t_max": 0.5311,
+      "t_mean": 0.5244,
+      "n_artifacts": 6,
+      "total_footprint": 32,
+      "proposed_size": {
+        "width": 14,
+        "depth": 10,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "boids_2d_in_3d",
+          "t": 0.5177,
+          "footprint": 3
+        },
+        {
+          "name": "ecosystem_simulation",
+          "t": 0.5206,
+          "footprint": 1
+        },
+        {
+          "name": "boid_manager",
+          "t": 0.5219,
+          "footprint": 9
+        },
+        {
+          "name": "boid_flocking",
+          "t": 0.5268,
+          "footprint": 1
+        },
+        {
+          "name": "fitness_landscape_politics",
+          "t": 0.5285,
+          "footprint": 9
+        },
+        {
+          "name": "AntColonyV2",
+          "t": 0.5311,
+          "footprint": 9
+        }
+      ]
+    },
+    {
+      "id": "swarmintelligence_w1",
+      "sequence": "swarmintelligence",
+      "phase": "lambda_edge",
+      "t_min": 0.5321,
+      "t_max": 0.5451,
+      "t_mean": 0.5392,
+      "n_artifacts": 5,
+      "total_footprint": 24,
+      "proposed_size": {
+        "width": 12,
+        "depth": 8,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "ant_colony_optimization",
+          "t": 0.5321,
+          "footprint": 1
+        },
+        {
+          "name": "PhysarumColony",
+          "t": 0.5362,
+          "footprint": 9
+        },
+        {
+          "name": "FlowFieldMain",
+          "t": 0.5404,
+          "footprint": 9
+        },
+        {
+          "name": "self_organizing_patterns",
+          "t": 0.5423,
+          "footprint": 1
+        },
+        {
+          "name": "boids_aquarium",
+          "t": 0.5451,
+          "footprint": 4
+        }
+      ]
+    },
+    {
+      "id": "softbodies_w0",
+      "sequence": "softbodies",
+      "phase": "integration",
+      "t_min": 0.5618,
+      "t_max": 0.5703,
+      "t_mean": 0.5667,
+      "n_artifacts": 6,
+      "total_footprint": 38,
+      "proposed_size": {
+        "width": 16,
+        "depth": 10,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "frozen_glass_vessel",
+          "t": 0.5618,
+          "footprint": 1
+        },
+        {
+          "name": "flex_cloth_pad",
+          "t": 0.5648,
+          "footprint": 1
+        },
+        {
+          "name": "entropy_morphogenesis",
+          "t": 0.5663,
+          "footprint": 9
+        },
+        {
+          "name": "soft_mushroom",
+          "t": 0.5681,
+          "footprint": 9
+        },
+        {
+          "name": "softmill",
+          "t": 0.5688,
+          "footprint": 9
+        },
+        {
+          "name": "revolving_joy_ride",
+          "t": 0.5703,
+          "footprint": 9
+        }
+      ]
+    },
+    {
+      "id": "softbodies_w1",
+      "sequence": "softbodies",
+      "phase": "integration",
+      "t_min": 0.5716,
+      "t_max": 0.5808,
+      "t_mean": 0.5779,
+      "n_artifacts": 6,
+      "total_footprint": 25,
+      "proposed_size": {
+        "width": 13,
+        "depth": 8,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "jelly_cube",
+          "t": 0.5716,
+          "footprint": 1
+        },
+        {
+          "name": "soft_body_slicer",
+          "t": 0.5768,
+          "footprint": 1
+        },
+        {
+          "name": "grab_long_stick",
+          "t": 0.5784,
+          "footprint": 2
+        },
+        {
+          "name": "jelly_variants",
+          "t": 0.5797,
+          "footprint": 3
+        },
+        {
+          "name": "softbody_gallery_part3",
+          "t": 0.5802,
+          "footprint": 9
+        },
+        {
+          "name": "softstopscene",
+          "t": 0.5808,
+          "footprint": 9
+        }
+      ]
+    },
+    {
+      "id": "softbodies_w2",
+      "sequence": "softbodies",
+      "phase": "integration",
+      "t_min": 0.5814,
+      "t_max": 0.5849,
+      "t_mean": 0.5831,
+      "n_artifacts": 6,
+      "total_footprint": 35,
+      "proposed_size": {
+        "width": 15,
+        "depth": 10,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "mesh_grammar_detailed_bulge",
+          "t": 0.5814,
+          "footprint": 1
+        },
+        {
+          "name": "breathing_room",
+          "t": 0.582,
+          "footprint": 7
+        },
+        {
+          "name": "flagdancer",
+          "t": 0.5829,
+          "footprint": 6
+        },
+        {
+          "name": "softbody_gallery_part2",
+          "t": 0.5834,
+          "footprint": 9
+        },
+        {
+          "name": "radiolaria",
+          "t": 0.5841,
+          "footprint": 9
+        },
+        {
+          "name": "cloth_straps",
+          "t": 0.5849,
+          "footprint": 3
+        }
+      ]
+    },
+    {
+      "id": "softbodies_w3",
+      "sequence": "softbodies",
+      "phase": "integration",
+      "t_min": 0.5864,
+      "t_max": 0.5935,
+      "t_mean": 0.591,
+      "n_artifacts": 5,
+      "total_footprint": 11,
+      "proposed_size": {
+        "width": 9,
+        "depth": 5,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "reaction_diffusion",
+          "t": 0.5864,
+          "footprint": 1
+        },
+        {
+          "name": "pressure_soft_body",
+          "t": 0.5909,
+          "footprint": 1
+        },
+        {
+          "name": "rounded_softbody_test",
+          "t": 0.5916,
+          "footprint": 4
+        },
+        {
+          "name": "turing_pattern_generator",
+          "t": 0.5927,
+          "footprint": 4
+        },
+        {
+          "name": "viscous_fluid_blob",
+          "t": 0.5935,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "machinelearning_w0",
+      "sequence": "machinelearning",
+      "phase": "integration",
+      "t_min": 0.6026,
+      "t_max": 0.6045,
+      "t_mean": 0.6035,
+      "n_artifacts": 6,
+      "total_footprint": 38,
+      "proposed_size": {
+        "width": 16,
+        "depth": 10,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "learn_world_stacked",
+          "t": 0.6026,
+          "footprint": 9
+        },
+        {
+          "name": "living_paper_kmeans",
+          "t": 0.603,
+          "footprint": 1
+        },
+        {
+          "name": "kmeans_simple",
+          "t": 0.6034,
+          "footprint": 1
+        },
+        {
+          "name": "computer_vision",
+          "t": 0.6037,
+          "footprint": 9
+        },
+        {
+          "name": "anomaly_detection",
+          "t": 0.604,
+          "footprint": 9
+        },
+        {
+          "name": "ensemble_methods",
+          "t": 0.6045,
+          "footprint": 9
+        }
+      ]
+    },
+    {
+      "id": "machinelearning_w1",
+      "sequence": "machinelearning",
+      "phase": "integration",
+      "t_min": 0.6049,
+      "t_max": 0.6073,
+      "t_mean": 0.606,
+      "n_artifacts": 6,
+      "total_footprint": 38,
+      "proposed_size": {
+        "width": 16,
+        "depth": 10,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "evolved_creatures",
+          "t": 0.6049,
+          "footprint": 9
+        },
+        {
+          "name": "transformers",
+          "t": 0.6052,
+          "footprint": 9
+        },
+        {
+          "name": "shape_learner_3d",
+          "t": 0.6056,
+          "footprint": 1
+        },
+        {
+          "name": "evolving_creatures_ea",
+          "t": 0.6061,
+          "footprint": 1
+        },
+        {
+          "name": "pca_visualization",
+          "t": 0.6067,
+          "footprint": 9
+        },
+        {
+          "name": "neural_networks_vr",
+          "t": 0.6073,
+          "footprint": 9
+        }
+      ]
+    },
+    {
+      "id": "machinelearning_w2",
+      "sequence": "machinelearning",
+      "phase": "integration",
+      "t_min": 0.608,
+      "t_max": 0.6109,
+      "t_mean": 0.6091,
+      "n_artifacts": 6,
+      "total_footprint": 39,
+      "proposed_size": {
+        "width": 16,
+        "depth": 10,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "spotlight_attention",
+          "t": 0.608,
+          "footprint": 9
+        },
+        {
+          "name": "random_forest",
+          "t": 0.6083,
+          "footprint": 9
+        },
+        {
+          "name": "9_3_smart_rockets_vr",
+          "t": 0.6088,
+          "footprint": 2
+        },
+        {
+          "name": "optimization_algorithms",
+          "t": 0.6092,
+          "footprint": 9
+        },
+        {
+          "name": "overfitting_demo",
+          "t": 0.6097,
+          "footprint": 1
+        },
+        {
+          "name": "dimensionality_reduction",
+          "t": 0.6109,
+          "footprint": 9
+        }
+      ]
+    },
+    {
+      "id": "machinelearning_w3",
+      "sequence": "machinelearning",
+      "phase": "integration",
+      "t_min": 0.6116,
+      "t_max": 0.6138,
+      "t_mean": 0.6129,
+      "n_artifacts": 6,
+      "total_footprint": 39,
+      "proposed_size": {
+        "width": 16,
+        "depth": 10,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "neural_networks",
+          "t": 0.6116,
+          "footprint": 9
+        },
+        {
+          "name": "adaboost",
+          "t": 0.6124,
+          "footprint": 9
+        },
+        {
+          "name": "axiom_garden",
+          "t": 0.6128,
+          "footprint": 9
+        },
+        {
+          "name": "learn_input_pair_stand",
+          "t": 0.6132,
+          "footprint": 1
+        },
+        {
+          "name": "evolvingflowers",
+          "t": 0.6135,
+          "footprint": 9
+        },
+        {
+          "name": "9_2_smart_rockets_basic_vr",
+          "t": 0.6138,
+          "footprint": 2
+        }
+      ]
+    },
+    {
+      "id": "machinelearning_w4",
+      "sequence": "machinelearning",
+      "phase": "integration",
+      "t_min": 0.6141,
+      "t_max": 0.6165,
+      "t_mean": 0.6151,
+      "n_artifacts": 6,
+      "total_footprint": 23,
+      "proposed_size": {
+        "width": 12,
+        "depth": 8,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "9_1_ga_shakespeare_vr",
+          "t": 0.6141,
+          "footprint": 1
+        },
+        {
+          "name": "evolved_creatures_v2",
+          "t": 0.6144,
+          "footprint": 9
+        },
+        {
+          "name": "gradient_descent_landscape",
+          "t": 0.6148,
+          "footprint": 1
+        },
+        {
+          "name": "computer_vision_vr",
+          "t": 0.6152,
+          "footprint": 9
+        },
+        {
+          "name": "non_teleological_evolution",
+          "t": 0.6156,
+          "footprint": 1
+        },
+        {
+          "name": "9_5_evolving_bloops_vr",
+          "t": 0.6165,
+          "footprint": 2
+        }
+      ]
+    },
+    {
+      "id": "machinelearning_w5",
+      "sequence": "machinelearning",
+      "phase": "integration",
+      "t_min": 0.6171,
+      "t_max": 0.6201,
+      "t_mean": 0.6187,
+      "n_artifacts": 6,
+      "total_footprint": 39,
+      "proposed_size": {
+        "width": 16,
+        "depth": 10,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "generative_adversarial_networks_gans_vr",
+          "t": 0.6171,
+          "footprint": 9
+        },
+        {
+          "name": "gans",
+          "t": 0.618,
+          "footprint": 9
+        },
+        {
+          "name": "decision_boundary_viewer",
+          "t": 0.6185,
+          "footprint": 1
+        },
+        {
+          "name": "clustering_algorithms",
+          "t": 0.6191,
+          "footprint": 9
+        },
+        {
+          "name": "lstms",
+          "t": 0.6196,
+          "footprint": 9
+        },
+        {
+          "name": "loss_function_comparator",
+          "t": 0.6201,
+          "footprint": 2
+        }
+      ]
+    },
+    {
+      "id": "machinelearning_w6",
+      "sequence": "machinelearning",
+      "phase": "integration",
+      "t_min": 0.6206,
+      "t_max": 0.6232,
+      "t_mean": 0.6219,
+      "n_artifacts": 6,
+      "total_footprint": 39,
+      "proposed_size": {
+        "width": 16,
+        "depth": 10,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "9_4_interactive_selection_vr",
+          "t": 0.6206,
+          "footprint": 2
+        },
+        {
+          "name": "explainable_ai_xai_vr",
+          "t": 0.6211,
+          "footprint": 9
+        },
+        {
+          "name": "fine_tuning",
+          "t": 0.6216,
+          "footprint": 9
+        },
+        {
+          "name": "nlp",
+          "t": 0.6223,
+          "footprint": 9
+        },
+        {
+          "name": "genetic_algorithm",
+          "t": 0.6227,
+          "footprint": 9
+        },
+        {
+          "name": "latent_space_walk",
+          "t": 0.6232,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "machinelearning_w7",
+      "sequence": "machinelearning",
+      "phase": "integration",
+      "t_min": 0.6238,
+      "t_max": 0.628,
+      "t_mean": 0.626,
+      "n_artifacts": 6,
+      "total_footprint": 46,
+      "proposed_size": {
+        "width": 17,
+        "depth": 11,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "convolutional_neural_networks_cnns_vr",
+          "t": 0.6238,
+          "footprint": 9
+        },
+        {
+          "name": "random_walker_machine",
+          "t": 0.6245,
+          "footprint": 9
+        },
+        {
+          "name": "9_6_ga_shakespeare_annotated_vr",
+          "t": 0.6256,
+          "footprint": 1
+        },
+        {
+          "name": "feature_engineering",
+          "t": 0.6267,
+          "footprint": 9
+        },
+        {
+          "name": "lstms_vr",
+          "t": 0.6272,
+          "footprint": 9
+        },
+        {
+          "name": "neural_network_visualization",
+          "t": 0.628,
+          "footprint": 9
+        }
+      ]
+    },
+    {
+      "id": "machinelearning_w8",
+      "sequence": "machinelearning",
+      "phase": "integration",
+      "t_min": 0.6283,
+      "t_max": 0.6295,
+      "t_mean": 0.6289,
+      "n_artifacts": 6,
+      "total_footprint": 39,
+      "proposed_size": {
+        "width": 16,
+        "depth": 10,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "svm_visualization",
+          "t": 0.6283,
+          "footprint": 9
+        },
+        {
+          "name": "joint_learn_walk",
+          "t": 0.6286,
+          "footprint": 1
+        },
+        {
+          "name": "explainable_ai",
+          "t": 0.6288,
+          "footprint": 9
+        },
+        {
+          "name": "random_forest_visualization",
+          "t": 0.629,
+          "footprint": 9
+        },
+        {
+          "name": "time_series_analysis",
+          "t": 0.6292,
+          "footprint": 9
+        },
+        {
+          "name": "perceptron_playground",
+          "t": 0.6295,
+          "footprint": 2
+        }
+      ]
+    },
+    {
+      "id": "machinelearning_w9",
+      "sequence": "machinelearning",
+      "phase": "integration",
+      "t_min": 0.6299,
+      "t_max": 0.6322,
+      "t_mean": 0.6312,
+      "n_artifacts": 6,
+      "total_footprint": 38,
+      "proposed_size": {
+        "width": 16,
+        "depth": 10,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "shape_learner_2d",
+          "t": 0.6299,
+          "footprint": 1
+        },
+        {
+          "name": "gradient_descent_visualization",
+          "t": 0.6305,
+          "footprint": 1
+        },
+        {
+          "name": "vaes",
+          "t": 0.6311,
+          "footprint": 9
+        },
+        {
+          "name": "transformers_vr",
+          "t": 0.6315,
+          "footprint": 9
+        },
+        {
+          "name": "switchboard_attention",
+          "t": 0.6319,
+          "footprint": 9
+        },
+        {
+          "name": "attention_mechanisms",
+          "t": 0.6322,
+          "footprint": 9
+        }
+      ]
+    },
+    {
+      "id": "machinelearning_w10",
+      "sequence": "machinelearning",
+      "phase": "integration",
+      "t_min": 0.6325,
+      "t_max": 0.6364,
+      "t_mean": 0.6344,
+      "n_artifacts": 6,
+      "total_footprint": 38,
+      "proposed_size": {
+        "width": 16,
+        "depth": 10,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "backpropagation_flow",
+          "t": 0.6325,
+          "footprint": 1
+        },
+        {
+          "name": "enhanced_kmeans",
+          "t": 0.633,
+          "footprint": 9
+        },
+        {
+          "name": "gradient_descent",
+          "t": 0.6337,
+          "footprint": 9
+        },
+        {
+          "name": "convolutional_neural_networks",
+          "t": 0.6349,
+          "footprint": 1
+        },
+        {
+          "name": "recommendation_systems",
+          "t": 0.6357,
+          "footprint": 9
+        },
+        {
+          "name": "reinforcement_learning",
+          "t": 0.6364,
+          "footprint": 9
+        }
+      ]
+    },
+    {
+      "id": "graphtheory_w0",
+      "sequence": "graphtheory",
+      "phase": "relation",
+      "t_min": 0.6468,
+      "t_max": 0.6584,
+      "t_mean": 0.6528,
+      "n_artifacts": 6,
+      "total_footprint": 22,
+      "proposed_size": {
+        "width": 12,
+        "depth": 8,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "karger_algorithm",
+          "t": 0.6468,
+          "footprint": 1
+        },
+        {
+          "name": "grid3d_prim",
+          "t": 0.6493,
+          "footprint": 1
+        },
+        {
+          "name": "living_paper_dfs_maze",
+          "t": 0.651,
+          "footprint": 1
+        },
+        {
+          "name": "grid3d_dfs",
+          "t": 0.6553,
+          "footprint": 1
+        },
+        {
+          "name": "edmonds_algorithm",
+          "t": 0.6562,
+          "footprint": 9
+        },
+        {
+          "name": "KonigsbergBridge",
+          "t": 0.6584,
+          "footprint": 9
+        }
+      ]
+    },
+    {
+      "id": "graphtheory_w1",
+      "sequence": "graphtheory",
+      "phase": "relation",
+      "t_min": 0.6595,
+      "t_max": 0.6682,
+      "t_mean": 0.6652,
+      "n_artifacts": 6,
+      "total_footprint": 46,
+      "proposed_size": {
+        "width": 17,
+        "depth": 11,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "push_relabel_algorithm",
+          "t": 0.6595,
+          "footprint": 9
+        },
+        {
+          "name": "rhizomatic_structure",
+          "t": 0.6644,
+          "footprint": 9
+        },
+        {
+          "name": "living_paper_bfs",
+          "t": 0.6653,
+          "footprint": 1
+        },
+        {
+          "name": "force_directed_layout",
+          "t": 0.6665,
+          "footprint": 9
+        },
+        {
+          "name": "mst_visualization",
+          "t": 0.6671,
+          "footprint": 9
+        },
+        {
+          "name": "pathfinding3d",
+          "t": 0.6682,
+          "footprint": 9
+        }
+      ]
+    },
+    {
+      "id": "graphtheory_w2",
+      "sequence": "graphtheory",
+      "phase": "relation",
+      "t_min": 0.6705,
+      "t_max": 0.6787,
+      "t_mean": 0.6746,
+      "n_artifacts": 6,
+      "total_footprint": 38,
+      "proposed_size": {
+        "width": 16,
+        "depth": 10,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "topological_sort",
+          "t": 0.6705,
+          "footprint": 1
+        },
+        {
+          "name": "networkflow3d",
+          "t": 0.672,
+          "footprint": 9
+        },
+        {
+          "name": "tarjan_algorithm",
+          "t": 0.6738,
+          "footprint": 9
+        },
+        {
+          "name": "kosaraju_algorithm",
+          "t": 0.6755,
+          "footprint": 9
+        },
+        {
+          "name": "network_analysis",
+          "t": 0.6771,
+          "footprint": 9
+        },
+        {
+          "name": "graphspace",
+          "t": 0.6787,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "foundationscrisis_w0",
+      "sequence": "foundationscrisis",
+      "phase": "synthesis",
+      "t_min": 0.6883,
+      "t_max": 0.6971,
+      "t_mean": 0.6924,
+      "n_artifacts": 6,
+      "total_footprint": 14,
+      "proposed_size": {
+        "width": 10,
+        "depth": 6,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "euclid_postulates_plaque",
+          "t": 0.6883,
+          "footprint": 1
+        },
+        {
+          "name": "phi_slider",
+          "t": 0.689,
+          "footprint": 9
+        },
+        {
+          "name": "angle_sum_triangle",
+          "t": 0.6903,
+          "footprint": 1
+        },
+        {
+          "name": "schrodinger_box",
+          "t": 0.6932,
+          "footprint": 1
+        },
+        {
+          "name": "curvature_slider",
+          "t": 0.6964,
+          "footprint": 1
+        },
+        {
+          "name": "florensky_sphere",
+          "t": 0.6971,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "foundationscrisis_w1",
+      "sequence": "foundationscrisis",
+      "phase": "synthesis",
+      "t_min": 0.698,
+      "t_max": 0.7051,
+      "t_mean": 0.7016,
+      "n_artifacts": 6,
+      "total_footprint": 11,
+      "proposed_size": {
+        "width": 9,
+        "depth": 5,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "godel_statement_plaque",
+          "t": 0.698,
+          "footprint": 1
+        },
+        {
+          "name": "penrose_triangle",
+          "t": 0.6999,
+          "footprint": 2
+        },
+        {
+          "name": "magritte_pipe",
+          "t": 0.7015,
+          "footprint": 1
+        },
+        {
+          "name": "bifurcation_diagram",
+          "t": 0.7023,
+          "footprint": 5
+        },
+        {
+          "name": "superposition_display",
+          "t": 0.7031,
+          "footprint": 1
+        },
+        {
+          "name": "brouwer_choice_sequence",
+          "t": 0.7051,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "foundationscrisis_w2",
+      "sequence": "foundationscrisis",
+      "phase": "synthesis",
+      "t_min": 0.7074,
+      "t_max": 0.7164,
+      "t_mean": 0.712,
+      "n_artifacts": 6,
+      "total_footprint": 16,
+      "proposed_size": {
+        "width": 10,
+        "depth": 7,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "qfep_formula_3d",
+          "t": 0.7074,
+          "footprint": 3
+        },
+        {
+          "name": "lambda_slider",
+          "t": 0.7084,
+          "footprint": 9
+        },
+        {
+          "name": "russell_set_box",
+          "t": 0.7102,
+          "footprint": 1
+        },
+        {
+          "name": "hilbert_hotel",
+          "t": 0.7141,
+          "footprint": 1
+        },
+        {
+          "name": "poincare_disk",
+          "t": 0.7157,
+          "footprint": 1
+        },
+        {
+          "name": "riemann_sphere",
+          "t": 0.7164,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "foundationscrisis_w3",
+      "sequence": "foundationscrisis",
+      "phase": "synthesis",
+      "t_min": 0.7179,
+      "t_max": 0.7209,
+      "t_mean": 0.7195,
+      "n_artifacts": 6,
+      "total_footprint": 9,
+      "proposed_size": {
+        "width": 8,
+        "depth": 5,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "constructive_proof",
+          "t": 0.7179,
+          "footprint": 1
+        },
+        {
+          "name": "escher_staircase",
+          "t": 0.7189,
+          "footprint": 4
+        },
+        {
+          "name": "excluded_middle_demo",
+          "t": 0.7194,
+          "footprint": 1
+        },
+        {
+          "name": "hyperbolic_surface",
+          "t": 0.7198,
+          "footprint": 1
+        },
+        {
+          "name": "elliptic_surface",
+          "t": 0.7203,
+          "footprint": 1
+        },
+        {
+          "name": "parallel_lines",
+          "t": 0.7209,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "qfeplaboratory_w0",
+      "sequence": "qfeplaboratory",
+      "phase": "synthesis",
+      "t_min": 0.7318,
+      "t_max": 0.7384,
+      "t_mean": 0.7348,
+      "n_artifacts": 6,
+      "total_footprint": 22,
+      "proposed_size": {
+        "width": 12,
+        "depth": 8,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "entropy_meter",
+          "t": 0.7318,
+          "footprint": 1
+        },
+        {
+          "name": "reactive_particles",
+          "t": 0.733,
+          "footprint": 9
+        },
+        {
+          "name": "queer_morphology_specimen",
+          "t": 0.7337,
+          "footprint": 1
+        },
+        {
+          "name": "crystal_cluster",
+          "t": 0.7349,
+          "footprint": 1
+        },
+        {
+          "name": "bifurcation_walkway",
+          "t": 0.737,
+          "footprint": 9
+        },
+        {
+          "name": "crystal_formation",
+          "t": 0.7384,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "qfeplaboratory_w1",
+      "sequence": "qfeplaboratory",
+      "phase": "synthesis",
+      "t_min": 0.739,
+      "t_max": 0.7437,
+      "t_mean": 0.7415,
+      "n_artifacts": 6,
+      "total_footprint": 30,
+      "proposed_size": {
+        "width": 14,
+        "depth": 9,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "grab_sphere_F",
+          "t": 0.739,
+          "footprint": 1
+        },
+        {
+          "name": "phase_cube",
+          "t": 0.7401,
+          "footprint": 9
+        },
+        {
+          "name": "edge_core",
+          "t": 0.7412,
+          "footprint": 9
+        },
+        {
+          "name": "turing_pattern",
+          "t": 0.7419,
+          "footprint": 1
+        },
+        {
+          "name": "dissolving_form",
+          "t": 0.7429,
+          "footprint": 1
+        },
+        {
+          "name": "particle_chaos",
+          "t": 0.7437,
+          "footprint": 9
+        }
+      ]
+    },
+    {
+      "id": "qfeplaboratory_w2",
+      "sequence": "qfeplaboratory",
+      "phase": "synthesis",
+      "t_min": 0.7447,
+      "t_max": 0.7484,
+      "t_mean": 0.7472,
+      "n_artifacts": 6,
+      "total_footprint": 16,
+      "proposed_size": {
+        "width": 10,
+        "depth": 7,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "edge_detector",
+          "t": 0.7447,
+          "footprint": 1
+        },
+        {
+          "name": "ordered_grid",
+          "t": 0.7467,
+          "footprint": 1
+        },
+        {
+          "name": "qfep_oscilloscope",
+          "t": 0.7474,
+          "footprint": 1
+        },
+        {
+          "name": "edge_of_chaos_unlocked",
+          "t": 0.7478,
+          "footprint": 3
+        },
+        {
+          "name": "edge_particles",
+          "t": 0.7481,
+          "footprint": 9
+        },
+        {
+          "name": "qfep_term_compass",
+          "t": 0.7484,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "qfeplaboratory_w3",
+      "sequence": "qfeplaboratory",
+      "phase": "synthesis",
+      "t_min": 0.7486,
+      "t_max": 0.7533,
+      "t_mean": 0.7507,
+      "n_artifacts": 6,
+      "total_footprint": 22,
+      "proposed_size": {
+        "width": 12,
+        "depth": 8,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "chaos_particles",
+          "t": 0.7486,
+          "footprint": 9
+        },
+        {
+          "name": "emergence_zone",
+          "t": 0.7489,
+          "footprint": 9
+        },
+        {
+          "name": "snap_cube_puzzle",
+          "t": 0.7494,
+          "footprint": 1
+        },
+        {
+          "name": "rigid_sculpture",
+          "t": 0.7515,
+          "footprint": 1
+        },
+        {
+          "name": "fluid_form",
+          "t": 0.7522,
+          "footprint": 1
+        },
+        {
+          "name": "grab_sphere_lambda",
+          "t": 0.7533,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "qfeplaboratory_w4",
+      "sequence": "qfeplaboratory",
+      "phase": "synthesis",
+      "t_min": 0.7548,
+      "t_max": 0.7583,
+      "t_mean": 0.757,
+      "n_artifacts": 6,
+      "total_footprint": 27,
+      "proposed_size": {
+        "width": 13,
+        "depth": 9,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "grab_sphere_E",
+          "t": 0.7548,
+          "footprint": 1
+        },
+        {
+          "name": "edge_of_chaos_orb",
+          "t": 0.7564,
+          "footprint": 9
+        },
+        {
+          "name": "transforming_pattern",
+          "t": 0.7569,
+          "footprint": 1
+        },
+        {
+          "name": "qfep_reactor",
+          "t": 0.7574,
+          "footprint": 9
+        },
+        {
+          "name": "random_cubes",
+          "t": 0.7579,
+          "footprint": 6
+        },
+        {
+          "name": "grab_sphere_phi",
+          "t": 0.7583,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "qfeplaboratory_w5",
+      "sequence": "qfeplaboratory",
+      "phase": "synthesis",
+      "t_min": 0.7586,
+      "t_max": 0.7632,
+      "t_mean": 0.7603,
+      "n_artifacts": 6,
+      "total_footprint": 19,
+      "proposed_size": {
+        "width": 11,
+        "depth": 7,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "fold_theatre_runner",
+          "t": 0.7586,
+          "footprint": 1
+        },
+        {
+          "name": "snap_tetra_puzzle",
+          "t": 0.7591,
+          "footprint": 1
+        },
+        {
+          "name": "complexity_pattern",
+          "t": 0.7595,
+          "footprint": 1
+        },
+        {
+          "name": "qfep_sandbox_console",
+          "t": 0.7603,
+          "footprint": 9
+        },
+        {
+          "name": "preserved_pattern",
+          "t": 0.7609,
+          "footprint": 1
+        },
+        {
+          "name": "reactive_particle_field",
+          "t": 0.7632,
+          "footprint": 6
+        }
+      ]
+    },
+    {
+      "id": "postfoundationscrisis_w0",
+      "sequence": "postfoundationscrisis",
+      "phase": "synthesis",
+      "t_min": 0.774,
+      "t_max": 0.7831,
+      "t_mean": 0.778,
+      "n_artifacts": 6,
+      "total_footprint": 9,
+      "proposed_size": {
+        "width": 8,
+        "depth": 5,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "bias_from_inside",
+          "t": 0.774,
+          "footprint": 4
+        },
+        {
+          "name": "situated_sensor",
+          "t": 0.7752,
+          "footprint": 1
+        },
+        {
+          "name": "excluded_class_visualizer",
+          "t": 0.7762,
+          "footprint": 1
+        },
+        {
+          "name": "tt",
+          "t": 0.7772,
+          "footprint": 1
+        },
+        {
+          "name": "peer_edit_ledger",
+          "t": 0.7821,
+          "footprint": 1
+        },
+        {
+          "name": "merge_conflict_visualizer",
+          "t": 0.7831,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "postfoundationscrisis_w1",
+      "sequence": "postfoundationscrisis",
+      "phase": "synthesis",
+      "t_min": 0.786,
+      "t_max": 0.7937,
+      "t_mean": 0.7897,
+      "n_artifacts": 6,
+      "total_footprint": 17,
+      "proposed_size": {
+        "width": 11,
+        "depth": 7,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "MolecularDesigner",
+          "t": 0.786,
+          "footprint": 9
+        },
+        {
+          "name": "bias_visualizer",
+          "t": 0.7886,
+          "footprint": 4
+        },
+        {
+          "name": "wiki_fragment_station",
+          "t": 0.7892,
+          "footprint": 1
+        },
+        {
+          "name": "locatable_knowledge_station",
+          "t": 0.7899,
+          "footprint": 1
+        },
+        {
+          "name": "cap_theorem_walk",
+          "t": 0.7906,
+          "footprint": 1
+        },
+        {
+          "name": "room_shape_demonstrator",
+          "t": 0.7937,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "postfoundationscrisis_w2",
+      "sequence": "postfoundationscrisis",
+      "phase": "synthesis",
+      "t_min": 0.7952,
+      "t_max": 0.8013,
+      "t_mean": 0.7988,
+      "n_artifacts": 6,
+      "total_footprint": 6,
+      "proposed_size": {
+        "width": 8,
+        "depth": 5,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "rhizome_cave_demo",
+          "t": 0.7952,
+          "footprint": 1
+        },
+        {
+          "name": "ethical_design_clipboard",
+          "t": 0.7974,
+          "footprint": 1
+        },
+        {
+          "name": "situated_readout",
+          "t": 0.7986,
+          "footprint": 1
+        },
+        {
+          "name": "wiki_fragment",
+          "t": 0.7996,
+          "footprint": 1
+        },
+        {
+          "name": "florensky_in_production",
+          "t": 0.8004,
+          "footprint": 1
+        },
+        {
+          "name": "citation_graph_node",
+          "t": 0.8013,
+          "footprint": 1
+        }
+      ]
+    },
+    {
+      "id": "postfoundationscrisis_w3",
+      "sequence": "postfoundationscrisis",
+      "phase": "synthesis",
+      "t_min": 0.8068,
+      "t_max": 0.8068,
+      "t_mean": 0.8068,
+      "n_artifacts": 1,
+      "total_footprint": 1,
+      "proposed_size": {
+        "width": 8,
+        "depth": 5,
+        "max_height": 3
+      },
+      "size_override": false,
+      "artifacts": [
+        {
+          "name": "edge_as_ground_capstone",
+          "t": 0.8068,
+          "footprint": 1
+        }
+      ]
+    }
+  ]
+}

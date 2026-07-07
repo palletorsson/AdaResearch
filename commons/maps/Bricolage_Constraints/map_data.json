@@ -15,11 +15,7 @@
       "difficulty": "intermediate",
       "category": "bricolage",
       "estimated_time": "6-7 minutes",
-      "learning_objectives": [
-        "Constraint literacy",
-        "Gravity, balance, connectivity",
-        "Structure emerges when constraints satisfied"
-      ]
+      "learning_objectives": ["Constraint literacy","Gravity, balance, connectivity","Structure emerges when constraints satisfied"]
     }
   },
   "utility_definitions": {
@@ -41,32 +37,15 @@
     "summary": "Bricolage_Constraints - What Pushes Back",
     "layout": "13Ã—15 demonstration space with constraint failure/success demonstrations",
     "objective": "Learn to read constraintsâ€”understand what pushes back and why",
-    "key_elements": [
-      "Gravity demonstration (floating vs supported)",
-      "Balance demonstration (tipping vs stable)",
-      "Connectivity demonstration (falling apart vs bonded)",
-      "Triangulation demonstration (racking vs rigid)"
-    ]
+    "key_elements": ["Gravity demonstration (floating vs supported)","Balance demonstration (tipping vs stable)","Connectivity demonstration (falling apart vs bonded)","Triangulation demonstration (racking vs rigid)"]
   },
   "lighting": {
-    "ambient_color": [
-      0.45,
-      0.4,
-      0.4
-    ],
+    "ambient_color": [0.45,0.4,0.4],
     "ambient_energy": 0.65,
     "directional_light": {
       "enabled": true,
-      "direction": [
-        -0.3,
-        -0.8,
-        -0.3
-      ],
-      "color": [
-        1.0,
-        0.9,
-        0.8
-      ],
+      "direction": [-0.3,-0.8,-0.3],
+      "color": [1.0,0.9,0.8],
       "energy": 1.2
     }
   },
@@ -79,11 +58,7 @@
     "initial_tile_visibility": "visible",
     "background": {
       "type": "sky",
-      "color": [
-        0.22,
-        0.2,
-        0.2
-      ]
+      "color": [0.22,0.2,0.2]
     }
   },
   "layers": {

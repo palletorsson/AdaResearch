@@ -3,11 +3,11 @@
 	"noise": {
 	  "name": "Noise: Entropy with Memory",
 	  "truth": "Noise is randomness that remembers its neighbors. Structured disorder, organic unpredictability.",
-	  "qfep_term": "Î»E(S)",
-	  "qfep_connection": "Noise is the Î» parameter tuned for coherence: entropy constrained by smoothness. The edge of chaos made continuous.",
-	  "formula": "noise(p) = Î£ amplitude^i Ã— perlin(frequency^i Ã— p)",
-	  "description": "Noise is randomness that remembers its neighbors. Where pure entropy forgets instantly, noise maintains continuityâ€”each value smoothly related to those around it. This is the Î» parameter tuned for coherence: structured disorder, organic unpredictability, entropy constrained by smoothness. Perlin and Simplex noise are the algorithms that make chaos usableâ€”random enough to be surprising, continuous enough to be natural.",
-	  "layer": "behaviors",
+	  "qfep_term": "\u00ce\u00bbE(S)",
+	  "qfep_connection": "Noise is the \u00ce\u00bb parameter tuned for coherence: entropy constrained by smoothness. The edge of chaos made continuous.",
+	  "formula": "noise(p) = \u00ce\u00a3 amplitude^i \u00c3\u2014 perlin(frequency^i \u00c3\u2014 p)",
+	  "description": "Noise is randomness that remembers its neighbors. Where pure entropy forgets instantly, noise maintains continuity\u00e2\u20ac\u201deach value smoothly related to those around it. This is the \u00ce\u00bb parameter tuned for coherence: structured disorder, organic unpredictability, entropy constrained by smoothness. Perlin and Simplex noise are the algorithms that make chaos usable\u00e2\u20ac\u201drandom enough to be surprising, continuous enough to be natural.",
+	  "layer": "E_entropy",
 	  "prerequisites": [
         "randomness"
 	  ],
@@ -19,7 +19,7 @@
 	  "estimated_time": "30-40 minutes",
 	  "learning_objectives": [
 		"Noise as structured entropy: randomness with continuity constraints",
-		"White noise vs. smooth noise: the Î» spectrum of coherence",
+		"White noise vs. smooth noise: the \u00ce\u00bb spectrum of coherence",
 		"Octaves as fractal layering: multiple scales of structured randomness",
 		"Perlin/Simplex: grid + gradient + interpolation algorithms",
 		"Vector fields: noise as flow direction",
@@ -45,8 +45,7 @@
 		"Noise_Inside_Noise",
 		"Noise_Space_10",
 		"Noise_Perlin_Simplex",
-		"Lab_Path",
-        "Chamber_Noise"
+        "Lab_Path"
 	  ],
 	  "deferred_maps": [
 		"Noise_Blue",

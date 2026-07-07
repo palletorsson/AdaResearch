@@ -3,14 +3,34 @@ extends Node3D
 class_name VectorSceneBase
 
 const VECTOR_SCENE := preload("res://commons/primitives/line/line.tscn")
-const SLIDER_SCENE := preload("res://commons/interactables/slider_horizontal.tscn")
+const SLIDER_SCENE := preload("res://commons/interactables/slider_smooth.tscn")  # canonical (was slider_horizontal — jumpy)
+const BakedText = preload("res://commons/utils/baked_text_albedo.gd")
+const LaserPointScript = preload("res://commons/primitives/point/laser_point.gd")
+# RackPassiveElements has a class_name — reference it globally (no preload needed).
 const SCENE_SCALE: float = 0.33
+
+# Canonical screen palette (matches commons/ui/text_screen.gd) — one look for all
+# vector-bench text. Static text is BAKED onto the panel; only live numbers are Label3D.
+const SCREEN_BG := Color(0.08, 0.10, 0.14)
+const SCREEN_TITLE := Color(0.55, 0.75, 1.0)
+const SCREEN_BODY := Color(0.78, 0.90, 1.0)
 
 # Size control.
 # Default 1.0 reproduces the historical "compact" exhibition size (a 0.5 root
 # scale, applied by subclasses via base_scale()). Larger values produce the
 # walk-inside XL variants. Delivered through delegate_params -> apply_grid_config.
 @export var scale_multiplier: float = 1.0
+
+# When true, vector endpoints are LASER-DRAGGABLE points (moved with the VR
+# FunctionPointer ray) instead of near-hand grab spheres — essential for the big
+# XL benches where the tips are metres away. Auto-enabled past LASER_AUTO_SCALE.
+@export var laser_endpoints: bool = false
+
+# Above this scale_multiplier the tips are genuinely out of arm's reach, so
+# laser drag turns on automatically even if laser_endpoints was left false.
+# Set to 8.0 (vec tip ~2.5 m+) so the existing scale-5 "walk-inside" exhibits
+# keep their near-hand grab; opt in explicitly with laser_endpoints below that.
+const LASER_AUTO_SCALE: float = 8.0
 
 # Base root scale that the compact presentation used. The effective root scale a
 # subclass should apply is base_scale() == BASE_ROOT_SCALE * scale_multiplier.
@@ -108,6 +128,11 @@ func spawn_vector(origin: Vector3, vector: Vector3, color: Color, name: String, 
 	if line_node:
 		line_node.set("vector_name", name)
 		line_node.set("line_color", color)
+	# Swap the near-hand grab spheres for laser-draggable points (same node
+	# names, so line.gd and every subclass keep working) BEFORE the line enters
+	# the tree, so line.gd's @onready GrabSphere refs resolve to the new nodes.
+	if allow_grab and use_laser_endpoints():
+		_install_laser_endpoints(line_node, color)
 	var start_node: Node3D = arrow.get_node_or_null("lineContainer/GrabSphere")
 	var end_node: Node3D = arrow.get_node_or_null("lineContainer/GrabSphere2")
 	if start_node:
@@ -117,7 +142,7 @@ func spawn_vector(origin: Vector3, vector: Vector3, color: Color, name: String, 
 	if not allow_grab:
 		_disable_grab_sphere(start_node)
 		_disable_grab_sphere(end_node)
-	else:
+	elif not use_laser_endpoints():
 		# Keep endpoints comfortably grabbable when the scene is enlarged.
 		# The root node scale already grows the spheres in world space, but we
 		# boost them a little extra so the hit target stays generous at XL size.
@@ -125,6 +150,39 @@ func spawn_vector(origin: Vector3, vector: Vector3, color: Color, name: String, 
 		_boost_grab_sphere(end_node)
 	add_child(arrow)
 	return arrow
+
+
+## Whether this bench should use laser-draggable endpoints — explicit flag, or
+## auto-on once the scene is large enough that the tips are unreachable by hand.
+func use_laser_endpoints() -> bool:
+	return laser_endpoints or scale_multiplier >= LASER_AUTO_SCALE
+
+
+## Replace a line's GrabSphere/GrabSphere2 with LaserPoint handles, keeping the
+## names. The visible radius shrinks as the root scale grows so the world-space
+## handle stays a sensible size; the collider stays generous for easy laser hits.
+func _install_laser_endpoints(line_node: Node, color: Color) -> void:
+	if line_node == null:
+		return
+	var root_scale: float = maxf(0.001, base_scale().x)
+	# Target ~0.10 m visible / ~0.22 m hittable in world space, expressed local.
+	var vis_r: float = clampf(0.10 / root_scale, 0.012, 0.06)
+	var hit_r: float = clampf(0.22 / root_scale, 0.03, 0.14)
+	for child_name in ["GrabSphere", "GrabSphere2"]:
+		var old: Node = line_node.get_node_or_null(child_name)
+		var keep_pos := Vector3.ZERO
+		if old:
+			if old is Node3D:
+				keep_pos = (old as Node3D).position
+			line_node.remove_child(old)
+			old.queue_free()
+		var lp: Node3D = LaserPointScript.new()
+		lp.name = child_name
+		lp.set("color", color)
+		lp.set("radius", vis_r)
+		lp.set("hit_radius", hit_r)
+		lp.position = keep_pos
+		line_node.add_child(lp)
 
 ## Enlarge a grab sphere's collision + visible mesh proportional to
 ## scale_multiplier so vector endpoints stay easy to grab when the scene is big.
@@ -219,7 +277,7 @@ func create_floor(size: float = 6.0, color: Color = Color(0.1, 0.1, 0.12, 1.0)):
 
 ## Creates a unified info canvas: title, hr, two-column table (data | formula).
 ## Positioned back and up. Returns the live data Label3D for per-frame updates.
-func create_info_panel(title: String, position: Vector3, size: Vector2 = Vector2(2.2, 0.8), formula: String = "", description: String = "") -> Label3D:
+func create_info_panel(title: String, position: Vector3, size: Vector2 = Vector2(2.2, 0.8), formula: String = "", description: String = "") -> Label:
 	var sc := SCENE_SCALE
 	var panel = Node3D.new()
 	panel.name = "InfoPanel"
@@ -238,31 +296,25 @@ func create_info_panel(title: String, position: Vector3, size: Vector2 = Vector2
 	box.size = Vector3(w, h, 0.01 * sc)
 	backing.mesh = box
 	var back_mat = StandardMaterial3D.new()
-	back_mat.albedo_color = Color(0.04, 0.05, 0.07, 0.92)
+	back_mat.albedo_color = Color(SCREEN_BG.r, SCREEN_BG.g, SCREEN_BG.b, 0.94)
 	back_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-	back_mat.metallic = 0.15
-	back_mat.roughness = 0.85
+	back_mat.metallic = 0.1
+	back_mat.roughness = 0.6
 	back_mat.render_priority = -10
 	backing.material_override = back_mat
 	panel.add_child(backing)
 	_add_frame(panel, Vector2(w, h))
 
-	# ── TITLE (centered at top) ──
+	# ── TITLE (baked band, not a floating Label3D) ──
 	var title_y := h / 2.0 - pad
-	var title_label = Label3D.new()
-	title_label.name = "TitleLabel"
-	title_label.text = title.to_upper()
-	title_label.pixel_size = 0.0015
-	title_label.font_size = 28
-	title_label.modulate = Color.WHITE
-	title_label.no_depth_test = true
-	title_label.render_priority = 100
-	title_label.outline_size = 4
-	title_label.outline_modulate = Color(0.0, 0.0, 0.0, 0.8)
-	title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	title_label.vertical_alignment = VERTICAL_ALIGNMENT_TOP
-	title_label.position = Vector3(0, title_y, z_front)
-	panel.add_child(title_label)
+	var title_band_h := 0.11 * sc
+	var title_mesh := BakedText.make_panel_mesh(
+		title.to_upper(), SCREEN_BG.lightened(0.06), SCREEN_TITLE,
+		Vector2(w * 0.92, title_band_h), 1400, true)
+	if title_mesh:
+		title_mesh.name = "TitleLabel"
+		title_mesh.position = Vector3(0, title_y - title_band_h * 0.5, z_front)
+		panel.add_child(title_mesh)
 
 	# ── HORIZONTAL RULE (accent line below title) ──
 	var hr_y := title_y - 0.14 * sc
@@ -286,45 +338,38 @@ func create_info_panel(title: String, position: Vector3, size: Vector2 = Vector2
 	var left_x := -half_w + pad                  # Left column: data
 	var right_x := col_gap                        # Right column: formula
 
-	# Left column: LIVE DATA (updated per frame)
-	var data_label = Label3D.new()
+	# Left column: LIVE DATA — a 2D-in-3D text panel (SubViewport 2D Label), so
+	# all text in the instrument is 2D-in-3D. Transparent: glyphs over the backing.
+	var data_w := (half_w - pad) * 0.96
+	var data_h := (h * 0.5 + (hr_y)) - (-h * 0.5 + pad)   # from hr down to bottom pad
+	data_h = maxf(0.1, table_top - (-h * 0.5 + pad))
+	var data_node := Node3D.new()
+	data_node.name = "DataPanel"
+	data_node.position = Vector3(left_x + data_w * 0.5, table_top - data_h * 0.5, z_front)
+	panel.add_child(data_node)
+	var data_label: Label = RackPassiveElements.build_text_panel_2d(
+		data_node, Vector2(data_w, data_h), "", Color.WHITE,
+		HORIZONTAL_ALIGNMENT_LEFT, VERTICAL_ALIGNMENT_TOP, true, 0.05)
 	data_label.name = "Label"
-	data_label.text = ""
-	data_label.pixel_size = 0.0015
-	data_label.font_size = 18
-	data_label.modulate = Color.WHITE
-	data_label.no_depth_test = true
-	data_label.render_priority = 100
-	data_label.outline_size = 3
-	data_label.outline_modulate = Color(0.0, 0.0, 0.0, 0.8)
-	data_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
-	data_label.vertical_alignment = VERTICAL_ALIGNMENT_TOP
-	data_label.position = Vector3(left_x, table_top, z_front)
-	panel.add_child(data_label)
 
-	# Right column: FORMULA + DESCRIPTION (static)
+	# Right column: FORMULA + DESCRIPTION (static — baked, not floating)
 	if formula != "" or description != "":
-		var right_label = Label3D.new()
-		right_label.name = "FormulaLabel"
-		var right_text := ""
+		var right_lines: Array = []
 		if formula != "":
-			right_text = formula
+			right_lines.append(formula)
 		if description != "":
-			if right_text != "":
-				right_text += "\n"
-			right_text += description
-		right_label.text = right_text
-		right_label.pixel_size = 0.0015
-		right_label.font_size = 18
-		right_label.modulate = Color(0.75, 0.88, 1.0)
-		right_label.no_depth_test = true
-		right_label.render_priority = 100
-		right_label.outline_size = 2
-		right_label.outline_modulate = Color(0.0, 0.0, 0.0, 0.6)
-		right_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
-		right_label.vertical_alignment = VERTICAL_ALIGNMENT_TOP
-		right_label.position = Vector3(right_x, table_top, z_front)
-		panel.add_child(right_label)
+			for dl in description.split("\n"):
+				right_lines.append(dl)
+		var col_w := half_w - col_gap - pad
+		var line_h := 0.055 * sc
+		var formula_block := BakedText.make_text_block(
+			right_lines, SCREEN_BODY, line_h, col_w, line_h * 0.25, true)
+		if formula_block:
+			formula_block.name = "FormulaLabel"
+			# make_text_block centres lines vertically around origin; nudge to table top.
+			formula_block.position = Vector3(
+				right_x + col_w * 0.5, table_top - line_h * right_lines.size() * 0.5, z_front)
+			panel.add_child(formula_block)
 
 	# Vertical divider between columns
 	if formula != "" or description != "":
@@ -493,24 +538,60 @@ func _exit_tree() -> void:
 			child.queue_free()
 
 
-## A large billboarded numeric readout placed at a logical position (pre-scale).
-## Returns the Label3D so subclasses can update its text every frame. Sized to be
-## legible from across the room when the scene is enlarged.
+## A numeric readout housed in a text DISPLAY — a dark bezel + screen (the Braun
+## calculator panel from commons/interactables/interactable_demo, RackPassiveElements
+## .build_text_display_static), with the live number on it instead of floating bare.
+## Returns the Label3D so subclasses keep updating its text every frame.
 func create_readout(logical_position: Vector3, color: Color = Color(0.85, 1.0, 0.9, 1.0)) -> Label3D:
+	var display := Node3D.new()
+	display.name = "ReadoutDisplay"
+	display.position = logical_position * SCENE_SCALE
+	info_root.add_child(display)
+
+	# Sized for up to two lines of readout (e.g. "k = 1.00\n|k*v| = 1.48").
+	var w := 0.60
+	var h := 0.28
+
+	# Dark bezel (same palette as the demo text display).
+	var bezel := MeshInstance3D.new()
+	bezel.name = "ReadoutBezel"
+	var bbox := BoxMesh.new()
+	bbox.size = Vector3(w + 0.02, h + 0.02, 0.012)
+	bezel.mesh = bbox
+	var bmat := StandardMaterial3D.new()
+	bmat.albedo_color = Color(0.20, 0.18, 0.16)
+	bmat.metallic = 0.3
+	bmat.roughness = 0.6
+	bezel.material_override = bmat
+	display.add_child(bezel)
+
+	# Dark screen face.
+	var screen := MeshInstance3D.new()
+	screen.name = "ReadoutScreen"
+	var sbox := BoxMesh.new()
+	sbox.size = Vector3(w, h, 0.006)
+	screen.mesh = sbox
+	var smat := StandardMaterial3D.new()
+	smat.albedo_color = Color(0.04, 0.05, 0.06)
+	smat.roughness = 0.4
+	screen.material_override = smat
+	screen.position.z = 0.008
+	display.add_child(screen)
+
+	# The live number, lit, centred on the screen.
 	var label := Label3D.new()
 	label.name = "Readout"
 	label.text = ""
-	label.font_size = 64
+	label.font_size = 48
 	label.modulate = color
-	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 	label.no_depth_test = true
 	label.render_priority = 110
-	label.outline_size = 12
-	label.outline_modulate = Color(0.0, 0.0, 0.0, 0.85)
+	label.line_spacing = 0.0
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	label.pixel_size = 0.0012
-	label.position = logical_position * SCENE_SCALE
-	info_root.add_child(label)
+	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	label.pixel_size = 0.0016
+	label.position = Vector3(0, 0, 0.014)
+	display.add_child(label)
 	return label
 
 ## Spawn a horizontal magnitude slider at a logical position (pre-scale) and
@@ -521,8 +602,13 @@ func create_magnitude_slider(logical_position: Vector3, param_name: String, min_
 	var slider: Node3D = SLIDER_SCENE.instantiate()
 	slider.name = "MagnitudeSlider_" + param_name.replace(" ", "_")
 	slider.position = logical_position * SCENE_SCALE
-	# Tilt the panel slightly toward the player so it reads while standing.
-	slider.rotation_degrees = Vector3(-25.0, 0.0, 0.0)
+	# slider_smooth is a vertical fader → +90° about Z lays it HORIZONTAL (drag
+	# right = bigger), then -25° about X tilts it toward the player. Counter-rotate
+	# the value label so the number stays upright (matches ControlPanel.add_slider).
+	slider.rotation_degrees = Vector3(-25.0, 0.0, 90.0)
+	var _vl := slider.get_node_or_null("Frame/Label3DValue") as Label3D
+	if _vl:
+		_vl.rotation_degrees.z = -90.0
 	add_child(slider)
 	# Use dynamic set/call so this works even though `slider` is base-typed and
 	# the slider script is not a known class_name at compile time.
@@ -572,6 +658,8 @@ func rebuild() -> void:
 func apply_grid_config(config: Dictionary) -> void:
 	if config == null:
 		return
+	if config.has("laser_endpoints"):
+		laser_endpoints = bool(config["laser_endpoints"])
 	if config.has("scale_multiplier"):
 		var new_mult: float = float(config["scale_multiplier"])
 		if new_mult > 0.0 and not is_equal_approx(new_mult, scale_multiplier):

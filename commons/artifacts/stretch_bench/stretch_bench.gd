@@ -37,6 +37,7 @@ var default_k: float = 1.0
 var min_k: float = -3.0
 var max_k: float = 3.0
 var base_vector: Vector3 = Vector3(0.6, 0.4, 0.0)      # fixed reference v in the rail plane (logical units)
+var housed: bool = false                               # seat the control plate INSIDE a ControlConsole cabinet
 
 # ── Runtime state ────────────────────────────────────────────────────────────
 var _k: float = 1.0
@@ -57,8 +58,8 @@ var _bead: MeshInstance3D = null                       # bead on the number line
 var _dial_needle: Node3D = null                        # rotating needle on the brass "k" dial
 var _slider: Node3D = null                             # desktop / accessibility fallback control
 var _snap_button: Node3D = null                        # SNAP integer-lock toggle
-var _info_label: Label3D = null
-var _readout_label: Label3D = null
+var _info_label: Label = null   # 2D live-data column on the info panel (2D-in-3D)
+var _readout_label: Label = null   # 2D Label on the plate's 2D-in-3D display
 var _k_dial_label: Label3D = null
 
 # Caches for the grabbable base vector (so we read v cheaply each frame).
@@ -74,6 +75,8 @@ const TEXT_INTERVAL: float = 0.1
 
 const SLIDER_SCENE_LOCAL := preload("res://commons/interactables/slider_horizontal.tscn")
 const BUTTON_SCENE_LOCAL := preload("res://commons/interactables/push_button.tscn")
+const ControlPanelScript = preload("res://commons/ui/control_panel.gd")
+const ControlConsoleScript = preload("res://commons/ui/control_console.gd")
 
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -361,17 +364,29 @@ func _build_number_line() -> void:
 func _build_controls() -> void:
 	var sc := SCENE_SCALE
 
+	# Seat the k slider + SNAP on the canonical Braun ControlPanel — standard
+	# spacing, orientation, and baked labels (no hand-placed offsets). When
+	# `housed`, the same plate is recessed inside a ControlConsole cabinet (the
+	# console forwards the identical add_slider / add_button / add_readout API).
+	var panel
+	if housed:
+		var console = ControlConsoleScript.new()
+		console.name = "ControlConsole"
+		console.auto_demo = false   # the bench supplies its own controls
+		panel = console
+	else:
+		panel = ControlPanelScript.new()
+		panel.name = "ControlPlate"
+	panel.position = Vector3(0.0, PLINTH_TOP_Y + 0.02, 0.45) * sc
+	add_child(panel)
+	if housed:
+		panel.set_title("Stretch Bench")
+
 	# Desktop / accessibility "k" slider (range min_k..max_k). The crank is the VR
 	# gesture; this is the fallback the design explicitly keeps wired.
-	_slider = SLIDER_SCENE_LOCAL.instantiate()
-	_slider.name = "KSlider"
-	_slider.position = Vector3(0.0, PLINTH_TOP_Y + 0.02, 0.45) * sc
-	_slider.rotation_degrees = Vector3(-30.0, 0.0, 0.0)
-	add_child(_slider)
+	_slider = panel.add_slider("k", "k")
 	if _slider.has_method("set_range"):
 		_slider.call("set_range", min_k, max_k)
-	if _slider.has_method("set_param_name"):
-		_slider.call("set_param_name", "k")
 	if _slider.has_method("set_normalized_value"):
 		_slider.call("set_normalized_value", _k_to_norm(_k))
 	if _slider.has_signal("slider_moved"):
@@ -379,13 +394,9 @@ func _build_controls() -> void:
 
 	# SNAP push_button — toggles continuous vs integer-snapped k so the player can
 	# land exactly on k=-1 (mirror) and k=2 (double).
-	_snap_button = BUTTON_SCENE_LOCAL.instantiate()
-	_snap_button.name = "SnapButton"
-	_snap_button.position = Vector3(0.55, PLINTH_TOP_Y + 0.02, 0.45) * sc
-	_snap_button.rotation_degrees = Vector3(-30.0, 0.0, 0.0)
+	_snap_button = panel.add_button("SNAP")
 	_snap_button.set("pressed_color", twin_color)
 	_snap_button.set("released_color", brass_color)
-	add_child(_snap_button)
 	# Prefer the root `pressed` signal; fall back to the inner area button.
 	if _snap_button.has_signal("pressed"):
 		_snap_button.connect("pressed", Callable(self, "_on_snap_pressed"))
@@ -394,9 +405,8 @@ func _build_controls() -> void:
 		if inner and inner.has_signal("button_pressed"):
 			inner.connect("button_pressed", Callable(self, "_on_snap_inner"))
 
-	var snap_lbl := _make_label("SNAP (integer k)", Color(0.8, 0.9, 1.0), 16)
-	snap_lbl.position = Vector3(0.55, PLINTH_TOP_Y + 0.14, 0.46) * sc
-	add_child(snap_lbl)
+	# Readout display, integrated into the TOP of the plate (not floating).
+	_readout_label = panel.add_readout("")
 
 
 func _build_panels() -> void:
@@ -407,11 +417,6 @@ func _build_panels() -> void:
 		Vector2(2.6, 1.1),
 		"k * v = (k*vx, k*vy, k*vz)",
 		"|k*v| = |k| * |v|\nk<0 reverses\nk=0 collapses")
-
-	# Big billboarded readout of k, floating over the bench.
-	_readout_label = create_readout(
-		Vector3(0.0, PLINTH_TOP_Y + 1.2, 0.0),
-		Color(0.85, 1.0, 0.95, 1.0))
 
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -717,6 +722,10 @@ func apply_grid_config(config: Dictionary) -> void:
 		max_k = float(config["max_k"])
 	if config.has("base_vector") and config["base_vector"] is Vector3:
 		base_vector = config["base_vector"]
+	if config.has("housed"):
+		housed = bool(config["housed"])
+	if config.has("console"):
+		housed = bool(config["console"])
 	if config.has("base_color") and config["base_color"] is Color:
 		base_color = config["base_color"]
 	if config.has("twin_color") and config["twin_color"] is Color:

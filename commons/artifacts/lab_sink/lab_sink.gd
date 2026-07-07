@@ -91,30 +91,30 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 func _read_metadata_overrides() -> void:
 	if has_meta("config_sink_width"):
-		sink_width = float(String(get_meta("config_sink_width")))
+		sink_width = float(str(get_meta("config_sink_width")))
 	if has_meta("config_sink_depth"):
-		sink_depth = float(String(get_meta("config_sink_depth")))
+		sink_depth = float(str(get_meta("config_sink_depth")))
 	if has_meta("config_sink_height"):
-		sink_height = float(String(get_meta("config_sink_height")))
+		sink_height = float(str(get_meta("config_sink_height")))
 	if has_meta("config_basin_depth_factor"):
-		basin_depth_factor = float(String(get_meta("config_basin_depth_factor")))
+		basin_depth_factor = float(str(get_meta("config_basin_depth_factor")))
 	if has_meta("config_counter_color"):
-		counter_color = _parse_color(String(get_meta("config_counter_color")), counter_color)
+		counter_color = _parse_color(str(get_meta("config_counter_color")), counter_color)
 	if has_meta("config_basin_color"):
-		basin_color = _parse_color(String(get_meta("config_basin_color")), basin_color)
+		basin_color = _parse_color(str(get_meta("config_basin_color")), basin_color)
 	if has_meta("config_faucet_color"):
-		faucet_color = _parse_color(String(get_meta("config_faucet_color")), faucet_color)
+		faucet_color = _parse_color(str(get_meta("config_faucet_color")), faucet_color)
 	if has_meta("config_accent_color"):
-		accent_color = _parse_color(String(get_meta("config_accent_color")), accent_color)
+		accent_color = _parse_color(str(get_meta("config_accent_color")), accent_color)
 	if has_meta("config_water_color"):
-		water_color = _parse_color(String(get_meta("config_water_color")), water_color)
+		water_color = _parse_color(str(get_meta("config_water_color")), water_color)
 	if has_meta("config_faucet_style"):
-		faucet_style = String(get_meta("config_faucet_style")).to_lower()
+		faucet_style = str(get_meta("config_faucet_style")).to_lower()
 	if has_meta("config_water_running"):
-		var wv := String(get_meta("config_water_running")).to_lower()
+		var wv := str(get_meta("config_water_running")).to_lower()
 		water_running = wv in ["true", "1", "yes", "on"]
 	if has_meta("config_eyewash_present"):
-		var ev := String(get_meta("config_eyewash_present")).to_lower()
+		var ev := str(get_meta("config_eyewash_present")).to_lower()
 		eyewash_present = ev in ["true", "1", "yes", "on"]
 
 

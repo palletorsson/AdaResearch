@@ -4,10 +4,10 @@
 	  "name": "Foundations Crisis: The Limits of Formalization",
 	  "truth": "Every formal system has an outside. Complete order is impossible.",
 	  "qfep_term": "Edge",
-	  "qfep_connection": "GÃ¶del proves pure F-minimization hits a wall. The edge isn't failureâ€”it's constitutive. Systems must oscillate because they cannot close.",
-	  "formula": "âˆƒ statement S: S is true AND S is unprovable",
-	  "description": "The 19th-20th century crisis that shattered mathematical certainty. Non-Euclidean geometry, Russell's paradox, GÃ¶del's incompleteness, Brouwer's intuitionism. Each map stages a limitâ€”where formal systems encounter their outside.",
-	  "layer": "integration",
+	  "qfep_connection": "G\u00c3\u00b6del proves pure F-minimization hits a wall. The edge isn't failure\u00e2\u20ac\u201dit's constitutive. Systems must oscillate because they cannot close.",
+	  "formula": "\u00e2\u02c6\u0192 statement S: S is true AND S is unprovable",
+	  "description": "The 19th-20th century crisis that shattered mathematical certainty. Non-Euclidean geometry, Russell's paradox, G\u00c3\u00b6del's incompleteness, Brouwer's intuitionism. Each map stages a limit\u00e2\u20ac\u201dwhere formal systems encounter their outside.",
+	  "layer": "synthesis",
 	  "prerequisites": [
 		"primitives",
         "randomness"
@@ -21,19 +21,19 @@
 	  "learning_objectives": [
 		"Non-Euclidean geometry: the parallel postulate is independent",
 		"Russell's paradox: self-reference creates contradiction",
-		"GÃ¶del's incompleteness: true statements that cannot be proven",
+		"G\u00c3\u00b6del's incompleteness: true statements that cannot be proven",
 		"Brouwer's intuitionism: only assert what you can construct",
         "The edge as constitutive, not defective"
 	  ],
 	  "content": [
-		"Euclid_Parallel: The Fifth Postulate — assumed for millennia, independent all along",
-		"NonEuclidean_Spaces: Curvature as Choice — alternatives exist",
-		"Russell_Paradox: The Self-Containing Set — The set of all sets that don't contain themselves",
-		"Godel_Incompleteness: True But Unprovable — self-reference creates the edge",
-		"Escher_Impossible: Locally Valid, Globally Impossible — visual GÃ¶del",
-		"Brouwer_Intuitionism: Only What You Can Construct — Only assert what you can construct",
-		"Florensky_Paraconsistent: Holding Contradiction Without Collapse — holding contradiction without triviality",
-        "Crisis_Synthesis: The Edge Is the Engine — The edge is where the interesting work happens"
+		"Euclid_Parallel: The Fifth Postulate \u2014 assumed for millennia, independent all along",
+		"NonEuclidean_Spaces: Curvature as Choice \u2014 alternatives exist",
+		"Russell_Paradox: The Self-Containing Set \u2014 The set of all sets that don't contain themselves",
+		"Godel_Incompleteness: True But Unprovable \u2014 self-reference creates the edge",
+		"Escher_Impossible: Locally Valid, Globally Impossible \u2014 visual G\u00c3\u00b6del",
+		"Brouwer_Intuitionism: Only What You Can Construct \u2014 Only assert what you can construct",
+		"Florensky_Paraconsistent: Holding Contradiction Without Collapse \u2014 holding contradiction without triviality",
+        "Crisis_Synthesis: The Edge Is the Engine \u2014 The edge is where the interesting work happens"
 	  ],
 	  "maps": [
 		"Euclid_Parallel",
@@ -43,8 +43,7 @@
 		"Escher_Impossible",
 		"Brouwer_Intuitionism",
 		"Florensky_Paraconsistent",
-		"Crisis_Synthesis",
-        "Chamber_Foundations"
+        "Crisis_Synthesis"
 	  ],
 	  "audio": {
 		"ambient_preset": "minimal_drone",
@@ -60,14 +59,14 @@
 		  "Ch 3: Cantor/Infinity",
 		  "Ch 4: Hilbert/Formalism",
 		  "Ch 6: Brouwer/Intuitionism",
-          "Ch 9: GÃ¶del"
+          "Ch 9: G\u00c3\u00b6del"
 		],
 		"key_figures": [
 		  "Euclid",
 		  "Lobachevsky",
 		  "Riemann",
 		  "Russell",
-		  "GÃ¶del",
+		  "G\u00c3\u00b6del",
 		  "Brouwer",
 		  "Florensky",
           "Escher"

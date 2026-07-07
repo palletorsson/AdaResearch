@@ -1,0 +1,47 @@
+{
+  "map_info": {
+    "name": "MiniScene_Harmonic",
+    "lookup_name": "MiniScene_Harmonic",
+    "title": "Mini scene: Harmonic",
+    "description": "A mini scene grown by tools/grow_scene.py — harmonic_motion_demo staged by footprint rule (large). One concept, one bead; maps are necklaces of these.",
+    "version": "0.1-grow-scene",
+    "format": "json",
+    "created_from": "tools/grow_scene.py",
+    "dimensions": {
+      "width": 3,
+      "depth": 3,
+      "max_height": 3
+    },
+    "metadata": {
+      "category": "bead",
+      "estimated_time": "0 minutes"
+    }
+  },
+  "utility_definitions": {},
+  "settings": {
+    "floor_tile_size": 1.0,
+    "disable_biome": true,
+    "color_overrides": {
+      "model_color": "#E7E5DE",
+      "wireframe_color": "#9AA0A6",
+      "wireframe_opacity": 0.35
+    }
+  },
+  "layers": {
+    "structure": [
+      ["1","1","1"],
+      ["1","1","1"],
+      ["1","1","1"]
+    ],
+    "utilities": [
+      [" "," "," "],
+      [" "," "," "],
+      [" "," "," "]
+    ],
+    "interactables": [
+      [" "," "," "],
+      [" ","harmonic_motion_demo:180:0.0"," "],
+      [" "," "," "]
+    ]
+  }
+}

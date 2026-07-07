@@ -5,6 +5,16 @@
 #
 # This is a translation adapted for VR where the original algorithm and logic are maintained.
 # License: CC BY-NC-SA 3.0 (derivative of CC BY-NC 3.0 original)
+#
+# @identity
+# essence: Several gravitational attractors acting on the same movers at once, their pulls combined by vector superposition
+# desire: To show that a body in a field of many centers has no single destiny — it traces the sum of every pull simultaneously
+# critical_parameter: attractor mass/strength — each center's gravitational weight, with up to three attractors competing
+# triggers: Adding an attractor bends every trajectory; dragging one re-sculpts the whole flow field; equal masses create fragile balance points
+# emerges: Three-body unpredictability — orbits that never repeat, bodies captured and slung between centers, sensitive to the smallest nudge
+# needs: per-attractor gravitational force [has], force superposition [has], grabbable attractor anchors [has], arrow visualization [has]
+# relationships: NOC Ch.2; builds on example_2_6 single_attractor; the many-center generalization of two-body example_2_8
+# truth: With one center there is an orbit; with many there is only a path that cannot be told in advance.
 # ===========================================================================
 
 extends Node3D

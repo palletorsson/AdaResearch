@@ -1,0 +1,412 @@
+{
+ "_doctrine": "THE MANUAL TRAJECTORY — the ghost's editorial sort, authored by reading (not scoring) every chapter's beats + voltage. Rules applied: beats give the tutorial spine; each voltage piece is placed where it lands hardest (hook / peak / close), not appended; deliberate inversions allowed (complexity early when the drama wants it, simplicity late as reduction); questions and arrivals are protected openers; the close is chosen for affect (grief, archive, stillness), not completeness. Compare with tools/compare_orders.py.",
+ "sequences": {
+  "primitives": {
+   "arc": "arrive → the wound (Fontana) → trace → the line as walk (Klee) → measure → grid → plane → solid → build → prove → grieve (Dürer LAST — the written chapter ends on Melencolia)",
+   "order": [
+    "you_are_here",
+    "folding_past",
+    "interactive_point_origin_force",
+    "fontana_puncture",
+    "player_trace",
+    "line_builder_3d",
+    "klee_walking_point",
+    "laser_measure",
+    "dgrid",
+    "interactivetriangle",
+    "platonic_grabbables",
+    "pyramid_edit",
+    "becoming_catalyst",
+    "snap_tetrahedron_puzzle",
+    "durer_scene"
+   ]
+  },
+  "array_tutorial": {
+   "arc": "grid appears → address → row → the row as TIME (sequencer) → 2D → THE LOOM (critical heart, mid) → pattern → the data image → mirror → edit live → architecture → grammar",
+   "order": [
+    "grid_model",
+    "xyz_coordinates",
+    "row_3_x",
+    "step_sequencer",
+    "grid_2d_4x4",
+    "panel_bridge_loom",
+    "pattern_tile_puzzle",
+    "pulsar_visualizer",
+    "pattern_tile_mirror",
+    "pattern_maker_station",
+    "pattern_tunnel_machine",
+    "facade_grammar_demo"
+   ]
+  },
+  "transformation": {
+   "arc": "move → turn → the cake's exponential divergence → scale → perpendicular → the matrix → the corridor's accumulated drift → WHAT SURVIVES (invariant = peak) → compose → prove → stillness as mastery (balance LAST)",
+   "order": [
+    "science_screen",
+    "translation_cube_demo",
+    "rotation_gimbal",
+    "carousel_cake",
+    "scale_me",
+    "righttriangle",
+    "matrix_4x4_viewer",
+    "boolean_tunnel",
+    "invariants_demo",
+    "transform_composition_workbench",
+    "chair_assembly_puzzle",
+    "balance_puzzle"
+   ]
+  },
+  "symmetry": {
+   "arc": "the domain cell → deep-time meander (rule before theorem) → the lattice → one coin-flip makes cloth → mirror → rotor and the forbidden five → glide → Escher sees first → CLOSURE (the group) → the palette is the politics → the SEVENTEEN close → the Alhambra → build and prove your own",
+   "order": [
+    "pattern_tile_4x4",
+    "tile_meander_floor",
+    "pattern_tile_cube",
+    "pattern_tile_puzzle",
+    "pattern_loom",
+    "ten_print_textile",
+    "pattern_tile_mirror",
+    "kaleidoscope",
+    "mill_persian_p4",
+    "pattern_tile_brick",
+    "pattern_tile_herringbone",
+    "mill_escher_p4g",
+    "loom_escher_mirror",
+    "pattern_maker_station",
+    "pattern_artifact",
+    "loom_bolt_memphis_p4g",
+    "wall_pattern_gallery",
+    "loom_alhambra_p6m",
+    "mill_alhambra_p6m",
+    "vr_tile_editor"
+   ]
+  },
+  "color": {
+   "arc": "hue → axes → palette → COLOR IS RELATIONAL (contrast, the hinge) → compose → harmony → mix → then the artists in ascending stakes: Albers proves → Mondrian legislates → Kandinsky decrees → Rothko grieves (affect close) → prove",
+   "order": [
+    "SpectrumVisualizer",
+    "color_space_navigator",
+    "color_sets_overview",
+    "dna_color_stacks_stack_simultaneous_contrast",
+    "gridcolorizer",
+    "dna_color_stacks_stack_complementary_red_green",
+    "visual_color_mixing",
+    "dna_modern_art_albers_homage_warm",
+    "dna_modern_art_mondrian_de_stijl",
+    "dna_modern_art_kandinsky_bauhaus_triad",
+    "dna_modern_art_rothko_chromatic_field",
+    "primitive_combo_puzzle"
+   ]
+  },
+  "change": {
+   "arc": "tangent → the flattening screen → f and f' → the rule as CODE → velocity → YOUR OWN WALK as the derivative (body early) → area → accumulate → the field → bodies dragged before force is named → partial → FTC bridge → prove",
+   "order": [
+    "slope_tangent_demo",
+    "science_screen",
+    "derivative_pair",
+    "code_display",
+    "velocity_arrow",
+    "player_trace",
+    "integral_area",
+    "riemann_pump",
+    "vector_field_grid",
+    "particle_flow_swarm",
+    "partial_derivative_terrain",
+    "ftc_bridge",
+    "riemann_pi"
+   ]
+  },
+  "wavefunctions": {
+   "arc": "back-and-forth → THE PLANET TURNS (Foucault as early hook) → amplitude → frequency → phase → the circle hidden inside → spring F↔E → tension that resolves nothing → superposition → two histories meet → standing wave → frozen identity corridor → compose → the pendulum paints its decay (biography, late) → prove",
+   "order": [
+    "sine_oscillation",
+    "foucault_pendulum",
+    "y_oscillation_cube",
+    "RackSineBasic",
+    "OscillationCurve",
+    "unit_circle_advanced",
+    "spring_demo",
+    "chord_tension_spring",
+    "wave_interference_3d",
+    "wave_interference",
+    "chladni_plate",
+    "sine_wall_corridor",
+    "timbre_sculptor",
+    "WavePaintings",
+    "lissajous_curves"
+   ]
+  },
+  "forces": {
+   "arc": "the arrow → force FELT before seen (magnetic) → apply → F=ma → mass as negotiation (Calder) → gravity → drag → the attractor as desire → seized (vortex) → many → never arriving (chaos) → the wall as law → build → prove",
+   "order": [
+    "VectorBasics",
+    "magnetic_simulation",
+    "example_2_1_forces_vr",
+    "newtons_laws",
+    "calder_mobile",
+    "example_2_3_gravity_scaled_by_mass_vr",
+    "drag_corridor",
+    "gravity_well",
+    "force_vortex",
+    "nbody_simulation",
+    "chaos_attractor",
+    "force_field_zone",
+    "vector_machine",
+    "catapult"
+   ]
+  },
+  "formfinding": {
+   "arc": "the marble in the bowl (why THIS shape) → the gradient → the hanging chain → the soap film → relaxation → D'Arcy Thompson (form is a fossil of forces) → the balance → the truss spans most with least → tensegrity (invisible tension) → escape the local minimum → the landscape's ethics (dead-perfect vs alive) → forge your own → prove by descent",
+   "order": [
+    "descent_marble_toy",
+    "gradient_descent",
+    "gradient_descent_well",
+    "cable_builder",
+    "catenoid",
+    "helicoid",
+    "mass_spring_bench",
+    "verlet_workbench",
+    "frozen_glass_vessel",
+    "calder_mobile",
+    "fractal_truss_tower",
+    "tensegrity_triangle",
+    "simulated_annealing",
+    "max_q_basin_room",
+    "energy_landscape_bench",
+    "self_shaping_forge",
+    "gradient_descent_optimizer",
+    "balance_puzzle"
+   ]
+  },
+  "randomness": {
+   "arc": "flip → walk → the shapes of chance → the bell → entropy measured → fate wearing dice (seed) → real vs fake → crank the fake BY HAND → the body's irreducible jitter → paint (Pollock) → the 1955 archive (chance frozen, the coda) → prove",
+   "order": [
+    "coin_toss",
+    "random_walk_leash",
+    "distribution_comparator",
+    "galton_board",
+    "shannon_entropy_meter",
+    "seed_replay_demo",
+    "trng_vs_prng",
+    "prng_crank_machine",
+    "hardware_entropy_decay",
+    "pollock_painting_in_3d",
+    "random_number_book_page_1955",
+    "monte_carlo_dartboard"
+   ]
+  },
+  "noise": {
+   "arc": "raw static → NO NEUTRAL NOISE (ideologies of disorder, early) → smoothed → Perlin → BERNINI DISSOLVES (the showpiece, mid) → octaves → terrain → noise becomes direction → steer → sculpt (authorship's hidden hand) → prove",
+   "order": [
+    "WhiteNoiseGallery",
+    "NoiseColors3D",
+    "simplex_noise",
+    "perlin_noise",
+    "MeltingBerniniScene",
+    "noiselayers",
+    "perlin_noise_terrain",
+    "noise_space",
+    "voxelnoise",
+    "perlin_terrain_sculptor",
+    "configurable_portal"
+   ]
+  },
+  "cellularautomata": {
+   "arc": "cell → neighborhood → one step → Life (emergence without designer) → the global fate written small (SIR, politics AFTER wonder) → the lambda edge → Rule 110 universal → grow → THE MOLD THINKS (bridge to swarm, late) → design → prove",
+   "order": [
+    "grid_substrate_runner",
+    "hexagon_ca_vr",
+    "ca_screen",
+    "game_of_life_petri",
+    "disease_spread_ca",
+    "self_organization_ca",
+    "rule_30_110_gravity",
+    "structure_growth",
+    "mold_network",
+    "ca_rule_explorer",
+    "ca_chair_test"
+   ]
+  },
+  "lsystems": {
+   "arc": "alphabet → WHOSE LANGUAGE (provenance, early — inherited grammar) → rewrite → turtle → iterate → tree → the reef writes itself → mutation (context/stochastic) → design → the grammar leaves the plant and lays a city → prove",
+   "order": [
+    "ContextFreeGrammars",
+    "grammar_provenance",
+    "fractal_lsystem_string",
+    "space_filling_curve_gallery",
+    "AnimatedTree",
+    "lsystem_tree",
+    "branching_coral",
+    "ContextSensitiveTree",
+    "lsystem_editor",
+    "CityGenerator",
+    "lsystem_dungeon"
+   ]
+  },
+  "fractals": {
+   "arc": "the written chapter's order: recursion → the tree → DELETION before addition (Cantor) → Koch → Sierpinski → dimension measured mid → Menger → the romanesco (organic pivot) → Julia (found not built) → Lyapunov terrain → Mandelbrot → THE DIVE (no bottom, last)",
+   "order": [
+    "fractal_recursion_1",
+    "fractal_lsystem_tree",
+    "cantor_set",
+    "fractal_koch_curve",
+    "sierpinski_triangle",
+    "box_counting_dimension",
+    "menger_sponge",
+    "romanesco",
+    "julia_set_explorer",
+    "lyapunov_fractal",
+    "mandelbrot_set",
+    "mandelbrot_dive"
+   ]
+  },
+  "softbodies": {
+   "arc": "the written chapter's order: press the cube FIRST (complexity early, the drama wants it) → chain → cloth → collision as negotiation → pinning → settling/exhaustion → matter remembers force → build → the Turing pattern → the ACTUAL Turing → the radiolarian (ontological close) → prove",
+   "order": [
+    "jelly_cube",
+    "softmill",
+    "cloth_straps",
+    "revolving_joy_ride",
+    "flagdancer",
+    "breathing_room",
+    "softstopscene",
+    "rounded_softbody_test",
+    "softbody_gallery_part2",
+    "turing_pattern_generator",
+    "reaction_diffusion",
+    "radiolaria",
+    "catalyst_target"
+   ]
+  },
+  "isosurfaces": {
+   "arc": "field → the threshold IS a surface → no vertices until chosen (gyroid) → sample the grid → fifteen cases → the cave emerges → rendered straight to the eye (no mesh) → sculpt → THE QUEER INTERIOR (negative space, peak) → resolution → build",
+   "order": [
+    "voxel_noise_demo",
+    "mc_shapes_gallery",
+    "gyroid_demo",
+    "mc_base",
+    "fifteen_cases_demo",
+    "mc_cave",
+    "raymarched_metaballs",
+    "metaball_world",
+    "queer_marching_cave",
+    "mc_terrain_demo",
+    "mc_sculpt_vr"
+   ]
+  },
+  "boolean_surfaces": {
+   "arc": "two solids → union → intersection → difference → THE WALL IS NOTHING BUT DIFFERENCE (architecture as boolean, the payoff) → compose yourself",
+   "order": [
+    "two_solids",
+    "csg_union_demo",
+    "csg_intersection_demo",
+    "csg_difference_demo",
+    "csg_architecture_cavity",
+    "csg_compose_workbench"
+   ]
+  },
+  "proceduralgeneration": {
+   "arc": "tiles → adjacency → constraint as the GIVEN world → collapse → Markov (the past determines the next) → seeds → the rhizome (no center, no author) → evolution closes: authorship without an author",
+   "order": [
+    "cube_mound_scene",
+    "mirror_cellular_texture_for_3d",
+    "percolationnetwork_ca",
+    "maze_generation",
+    "caverandomwalk",
+    "branching_growth_algorithm",
+    "rhizomatic_maze_space",
+    "GeneticProgramming"
+   ]
+  },
+  "swarmintelligence": {
+   "arc": "one bird → the steering rule → the flock APPEARS (aquarium) → open water (not the box) → substrate swap: memory into the environment (ants) → co-evolution → THE MOLD (no neurons, the punchline) → the reduction (a lookup, deliberately late) → the abstraction → emergence becomes POLITICAL → the ecosystem",
+   "order": [
+    "boids_2d_in_3d",
+    "boid_manager",
+    "boids_aquarium",
+    "boid_flocking",
+    "ant_colony_optimization",
+    "AntColonyV2",
+    "PhysarumColony",
+    "FlowFieldMain",
+    "self_organizing_patterns",
+    "fitness_landscape_politics",
+    "ecosystem_simulation"
+   ]
+  },
+  "graphtheory": {
+   "arc": "nodes and edges → THE SEVEN BRIDGES (founding story, early hook) → adjacency → traversal → shortest path (the fastest route as ideology) → who gets to pair (Edmonds) → layout finds form → REFUSE THE ROOT (rhizome, near close) → flow proves",
+   "order": [
+    "graphspace",
+    "KonigsbergBridge",
+    "network_analysis",
+    "tarjan_algorithm",
+    "pathfinding3d",
+    "edmonds_algorithm",
+    "force_directed_layout",
+    "rhizomatic_structure",
+    "networkflow3d"
+   ]
+  },
+  "machinelearning": {
+   "arc": "data → neuron → THE LOSS IS A TRAINED-IN VALUE (early, before descent feels natural) → downhill (forces returns) → layers → attention compresses → train → NO fitness function (the QFEP turn) → overfit → open the black box → learn with your body → prove",
+   "order": [
+    "enhanced_kmeans",
+    "neural_network_visualization",
+    "loss_function_comparator",
+    "gradient_descent_visualization",
+    "neural_networks_vr",
+    "transformers_vr",
+    "9_3_smart_rockets_vr",
+    "non_teleological_evolution",
+    "random_forest_visualization",
+    "explainable_ai_xai_vr",
+    "joint_learn_walk",
+    "anomaly_detection"
+   ]
+  },
+  "foundationscrisis": {
+   "arc": "the ground (axioms) → the set that breaks itself → the liar → G (unprovable truth) → sort the provable and FAIL (the point) → walk the limit (tower) → sit with it (Poincaré) → hold A and not-A (Florensky, the door out) → the formula assembled from the honest limit",
+   "order": [
+    "euclid_postulates_plaque",
+    "russell_set_box",
+    "liar_loop",
+    "godel_sentence_machine",
+    "provability_sorter",
+    "incompleteness_tower",
+    "poincare_disk",
+    "florensky_sphere",
+    "qfep_formula_3d"
+   ]
+  },
+  "qfeplaboratory": {
+   "arc": "the question → hold F → the field of possibility → measure entropy → hold E → potential → hold φ → WALK λ (the walkway before the formula) → only now assemble the formula → the reactor (find YOUR edge) → the specimen (thesis made flesh) → prove",
+   "order": [
+    "qfep_balance_workbench",
+    "grab_sphere_F",
+    "possibility_space_cloud",
+    "shannon_workbench",
+    "grab_sphere_E",
+    "fluid_form",
+    "grab_sphere_phi",
+    "bifurcation_walkway",
+    "qfep_formula_3d",
+    "qfep_reactor",
+    "queer_morphology_specimen",
+    "snap_tetra_puzzle"
+   ]
+  },
+  "postfoundationscrisis": {
+   "arc": "the written chapter's order: bias (the limit trained in) → from inside → contradiction held (Florensky in production) → the situated view → the commons → refuse the root → BUILD ANYWAY (molecular design) → the formula stands, humbled (close)",
+   "order": [
+    "bias_visualizer",
+    "bias_from_inside",
+    "florensky_sphere",
+    "situated_readout",
+    "wiki_fragment",
+    "rhizome_cave_demo",
+    "MolecularDesigner",
+    "qfep_formula_3d"
+   ]
+  }
+ }
+}

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bsl0surreallab01"]
+
+[ext_resource type="Script" path="res://commons/artifacts/surreal_lab/surreal_lab.gd" id="1_surreallab"]
+
+[node name="SurrealLab" type="Node3D"]
+script = ExtResource("1_surreallab")

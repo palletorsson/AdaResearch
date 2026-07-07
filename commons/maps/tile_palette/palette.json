@@ -1,0 +1,130 @@
+{
+  "_meta": {
+    "tile_size": 3,
+    "note": "10-tile palette for WFC placement strategy. Each tile is 3x3. Edge codes (N/E/S/W) determine adjacency. Slots are positions within the tile where an input artifact gets assigned at materialization time.",
+    "edge_codes": [
+      "spawn", "exit", "open", "wall_l", "wall_r",
+      "cluster", "array", "break", "display"
+    ],
+    "compat": {
+      "open":    ["open", "wall_l", "wall_r", "cluster", "array", "break", "display"],
+      "spawn":   ["open", "spawn"],
+      "exit":    ["open", "exit"],
+      "wall_l":  ["wall_l", "open", "break"],
+      "wall_r":  ["wall_r", "open", "break"],
+      "cluster": ["cluster", "open", "break"],
+      "array":   ["array", "open", "break"],
+      "break":   ["open", "wall_l", "wall_r", "cluster", "array", "break", "display", "spawn", "exit"],
+      "display": ["open", "display", "break"]
+    }
+  },
+  "tiles": [
+    {
+      "id": "T01_spawn_intro",
+      "role": "entry",
+      "structure":     [["2","2","2"],["2","2","2"],["2","2","2"]],
+      "utilities":     [["","",""],   ["","",""],   ["","sp",""]],
+      "interactables": [["","",""],   ["","",""],   ["","",""]],
+      "edges": {"N":"open", "E":"break", "S":"spawn", "W":"break"},
+      "slots": []
+    },
+    {
+      "id": "T02_exit_teleporter",
+      "role": "exit",
+      "structure":     [["2","2","2"],["2","2","2"],["2","2","2"]],
+      "utilities":     [["","t",""],  ["","",""],   ["","",""]],
+      "interactables": [["","",""],   ["","",""],   ["","",""]],
+      "edges": {"N":"exit", "E":"break", "S":"open", "W":"break"},
+      "slots": []
+    },
+    {
+      "id": "T03_centerpiece_stage",
+      "role": "centerpiece",
+      "structure":     [["2","2","2"],["2","3","2"],["2","2","2"]],
+      "utilities":     [["","",""],   ["","",""],   ["","",""]],
+      "interactables": [["","",""],   ["","C",""],  ["","",""]],
+      "edges": {"N":"open", "E":"display", "S":"open", "W":"display"},
+      "slots": [
+        {"r":1, "c":1, "type":"centerpiece"}
+      ]
+    },
+    {
+      "id": "T04_wall_left",
+      "role": "wall_back",
+      "structure":     [["2","2","2"],["2","2","2"],["2","2","2"]],
+      "utilities":     [["","",""],   ["","",""],   ["","",""]],
+      "interactables": [["W","",""],  ["W","",""],  ["","",""]],
+      "edges": {"N":"open", "E":"open", "S":"open", "W":"wall_l"},
+      "slots": [
+        {"r":0, "c":0, "type":"wall_backing"}
+      ]
+    },
+    {
+      "id": "T05_wall_right",
+      "role": "wall_back",
+      "structure":     [["2","2","2"],["2","2","2"],["2","2","2"]],
+      "utilities":     [["","",""],   ["","",""],   ["","",""]],
+      "interactables": [["","","W"],  ["","","W"],  ["","",""]],
+      "edges": {"N":"open", "E":"wall_r", "S":"open", "W":"open"},
+      "slots": [
+        {"r":0, "c":2, "type":"wall_backing"}
+      ]
+    },
+    {
+      "id": "T06_wall_paired_bilateral",
+      "role": "wall_back_pair",
+      "structure":     [["3","2","3"],["2","2","2"],["3","2","3"]],
+      "utilities":     [["","",""],   ["","",""],   ["","",""]],
+      "interactables": [["W","","W"], ["","",""],   ["","",""]],
+      "edges": {"N":"open", "E":"wall_r", "S":"open", "W":"wall_l"},
+      "slots": [
+        {"r":0, "c":0, "type":"wall_backing"},
+        {"r":0, "c":2, "type":"wall_backing"}
+      ]
+    },
+    {
+      "id": "T07_cluster_row",
+      "role": "cluster",
+      "structure":     [["2","2","2"],["2","2","2"],["2","2","2"]],
+      "utilities":     [["","",""],   ["","",""],   ["","",""]],
+      "interactables": [["","",""],   ["A","","B"],["","",""]],
+      "edges": {"N":"cluster", "E":"open", "S":"cluster", "W":"open"},
+      "slots": [
+        {"r":1, "c":0, "type":"cluster_anchor"},
+        {"r":1, "c":2, "type":"cluster_member"}
+      ]
+    },
+    {
+      "id": "T08_breathing_room",
+      "role": "breathing",
+      "structure":     [["2","2","2"],["2","2","2"],["2","2","2"]],
+      "utilities":     [["","",""],   ["","",""],   ["","",""]],
+      "interactables": [["","",""],   ["","",""],   ["","",""]],
+      "edges": {"N":"break", "E":"break", "S":"break", "W":"break"},
+      "slots": []
+    },
+    {
+      "id": "T09_small_pair",
+      "role": "paired_small",
+      "structure":     [["2","2","2"],["2","2","2"],["2","2","2"]],
+      "utilities":     [["","",""],   ["","",""],   ["","",""]],
+      "interactables": [["","",""],   ["S","","S"],["","",""]],
+      "edges": {"N":"display", "E":"open", "S":"display", "W":"open"},
+      "slots": [
+        {"r":1, "c":0, "type":"small"},
+        {"r":1, "c":2, "type":"small"}
+      ]
+    },
+    {
+      "id": "T10_framed_alcove",
+      "role": "alcove",
+      "structure":     [["3","3","3"],["3","2","3"],["3","3","3"]],
+      "utilities":     [["","",""],   ["","",""],   ["","",""]],
+      "interactables": [["","",""],   ["","D",""], ["","",""]],
+      "edges": {"N":"break", "E":"break", "S":"break", "W":"break"},
+      "slots": [
+        {"r":1, "c":1, "type":"small"}
+      ]
+    }
+  ]
+}

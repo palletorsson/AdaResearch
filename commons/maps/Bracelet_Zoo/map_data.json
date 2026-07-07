@@ -14,11 +14,7 @@
 	  "difficulty": "exhibition",
 	  "category": "hazards",
 	  "estimated_time": "exploration based",
-	  "learning_objectives": [
-		"See each catalyst's unique themed visual identity",
-		"Test the Capacity Bracelet with different modes",
-        "Destroy varied targets with different projectiles"
-	  ]
+	  "learning_objectives": ["See each catalyst's unique themed visual identity","Test the Capacity Bracelet with different modes","Destroy varied targets with different projectiles"]
 	}
   },
   "utility_definitions": {
@@ -33,16 +29,8 @@
   },
   "spawn_points": {
 	"default": {
-	  "position": [
-		0.5,
-		1.8,
-		0.5
-	  ],
-	  "rotation": [
-		0.0,
-		180.0,
-		0.0
-	  ],
+	  "position": [0.5,1.8,0.5],
+	  "rotation": [0.0,180.0,0.0],
 	  "description": "Entrance â€” facing the catalyst rows"
 	}
   },
@@ -61,24 +49,12 @@
 	}
   },
   "lighting": {
-	"ambient_color": [
-	  0.7,
-	  0.7,
-	  0.85
-	],
+	"ambient_color": [0.7,0.7,0.85],
 	"ambient_energy": 0.4,
 	"directional_light": {
 	  "enabled": true,
-	  "direction": [
-		-0.3,
-		-0.8,
-		-0.2
-	  ],
-	  "color": [
-		1.0,
-		0.98,
-		0.95
-	  ],
+	  "direction": [-0.3,-0.8,-0.2],
+	  "color": [1.0,0.98,0.95],
 	  "energy": 0.8
 	}
   },
@@ -89,11 +65,7 @@
 	"enable_physics": true,
 	"background": {
 	  "type": "sky",
-	  "color": [
-		0.08,
-		0.1,
-		0.18
-	  ]
+	  "color": [0.08,0.1,0.18]
 	}
   },
   "layers": {

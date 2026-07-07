@@ -1,0 +1,92 @@
+{
+  "_readme": "The Element Catalog — one staging-element family spanning both systems. Each element answers 'how does this artifact meet the world?' and has up to two forms: a floor-form (dressing-room POSTURE, a footing recipe of height tiles — tools/classify_postures.py) and a wall-form (a STATION prop — commons/artifacts/station/). Explicit nulls are first-class: they mark where an element genuinely lives on one side only (pit has no prop; lighting has no footing). Consumers: DressingRoomBuilder.gd (staged rendering), classify_postures.py, /staging page (future). 'station' lists CANDIDATES in preference order — a map, not a straitjacket. cfg templates use the props' real apply_grid_config keys; {rows}/{cols}/{height_m} substitute from the footing recipe.",
+  "elements": {
+    "pedestal": {
+      "posture": "pedestal",
+      "station": ["station_plinth", "station_micropod", "station_plinth_wide"],
+      "cfg": { "width_cells": "{anchor_cells}", "depth_cells": "{anchor_cells}", "top_height": "{height_m}" },
+      "pick": "station_micropod if artifact base_m < 1.0; station_plinth_wide if base_m > 1.6; else station_plinth",
+      "relationship": "same-element"
+    },
+    "table": {
+      "posture": "table",
+      "station": ["station_bench", "station_console_desk", "station_cabinet"],
+      "cfg": { "length_cells": 3, "depth_cells": 2, "top_height": "{height_m}" },
+      "relationship": "analog",
+      "note": "one posture fans to three surface props; bench is the default worktop"
+    },
+    "platform": {
+      "posture": "platform",
+      "station": ["station_stage"],
+      "cfg": { "width_cells": 5, "depth_cells": 5, "step_height": "{height_m}" },
+      "relationship": "analog",
+      "note": "station_gantry stages the same bay from above (opposite axis); not auto-placed"
+    },
+    "wall": {
+      "posture": "wall",
+      "station": ["station_wall", "station_panel"],
+      "cfg": { "station_wall": { "length_cells": 3, "height": 2.0 }, "station_panel": { "width_cells": 2 } },
+      "relationship": "analog",
+      "note": "the posture's 2.0m back face + 1.0m mount offset is exactly what wall+panel need; full curated clusters remain the Wall Hangar Editor's job"
+    },
+    "floor": {
+      "posture": "floor",
+      "station": null,
+      "relationship": "floor-only",
+      "note": "the artifact IS the floor (mosaic/terrain) — no prop should be auto-placed under it. station_floorline is the wayfinding analog (joins bays) but stages a relation, not an object"
+    },
+    "float": {
+      "posture": "float",
+      "station": null,
+      "relationship": "gap",
+      "note": "HONEST GAP — no suspension prop exists (a gantry-hoist / ceiling mount would fill it); the posture lifts by bare artifact_offset.y"
+    },
+    "pit": {
+      "posture": "pit",
+      "station": null,
+      "relationship": "floor-only",
+      "note": "grid has no negative heights, so the well is a raised rim; no prop can recess a floor either. station_barrier/handrail can dress the edge (not auto-placed)"
+    },
+    "shelf": {
+      "posture": null,
+      "station": ["station_cabinet"],
+      "relationship": "wall-only",
+      "note": "'the many' has no footing; an open shelf-rack is missing on BOTH sides"
+    },
+    "lighting": {
+      "posture": null,
+      "station": ["station_luminaire", "station_task_light"],
+      "relationship": "wall-only",
+      "note": "acts ON props rather than being an object-on-a-base; the dressing-room 'el' extra is its raw echo"
+    },
+    "circulation": {
+      "posture": null,
+      "station": ["station_ascent", "station_stair_run", "station_ladder", "station_handrail"],
+      "relationship": "wall-only",
+      "note": "postures raise platforms but never the way UP onto them"
+    },
+    "threshold": {
+      "posture": null,
+      "station": ["station_barrier", "station_frame", "station_door"],
+      "relationship": "wall-only"
+    },
+    "clutter": {
+      "posture": null,
+      "station": ["station_crates"],
+      "relationship": "wall-only",
+      "note": "back-of-house believability; postures stage only the hero artifact"
+    },
+    "backdrop": {
+      "posture": null,
+      "station": ["station_skydome"],
+      "relationship": "wall-only",
+      "note": "deliberately grows no grid (footprint_cells 0, auto_ground false)"
+    },
+    "composer": {
+      "posture": null,
+      "station": ["curation_station"],
+      "relationship": "wall-only",
+      "note": "'many postures at once, rendered as real props' — the whole-bay meta-stager"
+    }
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "version": 1,
+  "description": "Footprint catalog for the auto-solver (B-track). Mirrors the hardcoded FOOTPRINTS object in ada_encyclopedia/src/app/editor/page.tsx — same names, same shapes — but exposed as data the server can consume. The solver in /api/maps/solve-from-artifacts reads `connectors` to know each filler's footprint, and `platform_to_connector` to auto-pick which connector belongs under each artifact based on its spatial_needs.platform.",
+
+  "connectors": {
+    "plane": {
+      "label": "Plane",
+      "footprint": [1, 1],
+      "default_height": 1,
+      "notes": "Flat single-cell floor tile. Default gap between artifacts."
+    },
+    "floor": {
+      "label": "Floor pad",
+      "footprint": [3, 3],
+      "default_height": 1,
+      "notes": "Flat 3×3 pad. Used under omni-approach artifacts that want a generous apron."
+    },
+    "pedestal": {
+      "label": "Pedestal",
+      "footprint": [3, 3],
+      "default_height": 2,
+      "notes": "Raised 3×3 platform with the artifact stamped on top (h=2) and a 1-cell apron at h=1 around the edge."
+    },
+    "panel": {
+      "label": "Panel",
+      "footprint": [3, 1],
+      "default_height": 1,
+      "notes": "Facade strip — artifact backed against a wall. Used for artifacts with facade_wall platforms."
+    },
+    "tower": {
+      "label": "Tower",
+      "footprint": [3, 3],
+      "default_height": 4,
+      "notes": "Tall column. Stepped sides 1→2→3→4."
+    },
+    "atrium": {
+      "label": "Atrium",
+      "footprint": [5, 5],
+      "default_height": 1,
+      "notes": "Open courtyard, optional walls at perimeter. Larger gathering space."
+    },
+    "terrace": {
+      "label": "Terrace",
+      "footprint": [3, 3],
+      "default_height": 3,
+      "notes": "Stepped 3-level platform, like lib:pyramid."
+    },
+    "grove": {
+      "label": "Grove",
+      "footprint": [3, 3],
+      "default_height": 1,
+      "notes": "Informal cluster. Flat floor with optional plant-painting around the edges."
+    },
+    "spawn": {
+      "label": "Spawn pad",
+      "footprint": [1, 1],
+      "default_height": 1,
+      "utility": "sp",
+      "notes": "End-cap that auto-prepends to the chain. Carries the spawn utility."
+    },
+    "teleport": {
+      "label": "Teleport pad",
+      "footprint": [1, 1],
+      "default_height": 1,
+      "utility": "t",
+      "notes": "End-cap that auto-appends. Carries the teleporter utility (target filled at save time)."
+    }
+  },
+
+  "platform_to_connector": {
+    "_note": "Maps the artifact registry's spatial_needs.platform string to a connector id. The solver places this connector UNDER the artifact (i.e. the artifact stamps onto the connector's top cells). When the platform is unknown / missing, the _default is used.",
+    "none": "plane",
+    "pedestal": "pedestal",
+    "raised": "pedestal",
+    "facade_wall": "panel",
+    "facade": "panel",
+    "tower": "tower",
+    "atrium": "atrium",
+    "terrace": "terrace",
+    "grove": "grove",
+    "_default": "plane"
+  },
+
+  "solver_defaults": {
+    "_note": "Knobs the solver reads when no override is passed.",
+    "gap_between_artifacts": "plane",
+    "gap_cells": 1,
+    "outer_margin_cells": 2,
+    "axis": "x",
+    "_axis_options": "x | z — direction the chain extends in the grid"
+  }
+}

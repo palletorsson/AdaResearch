@@ -28,24 +28,12 @@
     }
   },
   "lighting": {
-    "ambient_color": [
-      0.3,
-      0.3,
-      0.4
-    ],
+    "ambient_color": [0.3,0.3,0.4],
     "ambient_energy": 0.4,
     "directional_light": {
       "enabled": true,
-      "direction": [
-        -0.3,
-        -0.8,
-        -0.2
-      ],
-      "color": [
-        0.9,
-        0.9,
-        1.0
-      ],
+      "direction": [-0.3,-0.8,-0.2],
+      "color": [0.9,0.9,1.0],
       "energy": 0.6
     }
   },
@@ -56,11 +44,7 @@
     "enable_physics": true,
     "background": {
       "type": "color",
-      "color": [
-        0.02,
-        0.02,
-        0.03
-      ]
+      "color": [0.02,0.02,0.03]
     }
   },
   "layers": {

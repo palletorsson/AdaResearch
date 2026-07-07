@@ -1,0 +1,74 @@
+{
+ "_doctrine": "R-023: the baseline contract. Deck 1 BEATS = what a PLAIN tutorial on this concept would minimally need (derived from the concept, not the inventory); each beat is a ROLE cast with one artifact (alts = understudies). Deck 2 VOLTAGE = the few pieces a plain tutorial would never include -- the critical script, the thinker with QFEP. Everything uncast is AT DEPTH.",
+ "sequence": "formfinding",
+ "_note": "SEQUENCE CANDIDATE #24 (census 2026-07-07): the VARIATIONAL PRINCIPLE — form as the minimum of a functional. Answer to 'what principle does Ada NOT cover': the one MODE of form-generation with no chapter — form as what MINIMIZES. Instruments scattered everywhere (gradient descent in ML, free-energy F in QFEP, catenary + minimal-surface artifacts, softbody settling) but never named as a principle. Proposed spine position: after forces (dynamics) and before wavefunctions — forces move things, form-finding is where they come to REST. No sequence JSON or maps exist yet; this contract is the feasibility test.",
+ "beats": [
+  {
+   "role": "the question — why does matter take THIS shape?",
+   "cast": "descent_marble_toy",
+   "alts": ["max_q_basin_room", "gradient_descent_well"]
+  },
+  {
+   "role": "roll downhill — the gradient",
+   "cast": "gradient_descent",
+   "alts": ["gradient_descent_landscape", "profile_gradient_descent"]
+  },
+  {
+   "role": "the hanging chain — the catenary",
+   "cast": "cable_builder",
+   "alts": ["SplineCables", "catenoid"]
+  },
+  {
+   "role": "the soap film — the minimal surface",
+   "cast": "catenoid",
+   "alts": ["gyroid_demo", "helicoid", "double_enneper"]
+  },
+  {
+   "role": "settle to rest — relaxation",
+   "cast": "mass_spring_bench",
+   "alts": ["verlet_workbench", "energy_landscape_bench"]
+  },
+  {
+   "role": "the balance — equilibrium of forces",
+   "cast": "calder_mobile",
+   "alts": ["lever_balance", "balance_puzzle"]
+  },
+  {
+   "role": "escape the local minimum — annealing",
+   "cast": "simulated_annealing",
+   "alts": ["optimization_algorithms"]
+  },
+  {
+   "role": "find a form yourself",
+   "cast": "self_shaping_forge",
+   "alts": ["energy_landscape_bench", "gradient_descent_optimizer"]
+  },
+  {
+   "role": "prove it — reach the minimum",
+   "cast": "balance_puzzle",
+   "alts": ["descent_marble_toy"]
+  }
+ ],
+ "voltage": [
+  {
+   "piece": "frozen_glass_vessel",
+   "after": "settle to rest — relaxation",
+   "why": "D'Arcy Thompson — 'On Growth and Form': the shape emerged from physics, not design; a form is a FOSSIL of the forces that made it, and biology's beauty is the calculus of variations wearing flesh"
+  },
+  {
+   "piece": "fractal_truss_tower",
+   "after": "the balance — equilibrium of forces",
+   "why": "Gaudi / Frei Otto / Eiffel — form-finding as architecture: hang the chain, invert it, and you have the arch that stands with the LEAST material; the building as a solved minimization, gravity as the co-designer"
+  },
+  {
+   "piece": "tensegrity_triangle",
+   "after": "the balance — equilibrium of forces",
+   "why": "form from prestress — it holds its shape under a load that would collapse a pile of the same parts; stability as an invisible tension, the counter-intuitive proof that structure is a FIELD of forces, not a stack of stuff"
+  },
+  {
+   "piece": "max_q_basin_room",
+   "after": "escape the local minimum — annealing",
+   "why": "the QFEP face and the dark-room return: the landscape has an ethics — a deep narrow well is a DEAD-perfect form, a shallow wide well is ALIVE; F is free-energy minimization, and pure minimization freezes you at the bottom, so form-finding must stop SHORT of the minimum to stay at the edge"
+  }
+ ]
+}

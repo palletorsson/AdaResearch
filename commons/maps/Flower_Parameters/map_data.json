@@ -15,11 +15,7 @@
       "difficulty": "beginner",
       "category": "flowers",
       "estimated_time": "5-8 minutes",
-      "learning_objectives": [
-        "Procedural parameters",
-        "Petal count and shape",
-        "Real-time parameter tuning"
-      ]
+      "learning_objectives": ["Procedural parameters","Petal count and shape","Real-time parameter tuning"]
     }
   },
   "utility_definitions": {
@@ -36,39 +32,21 @@
     "summary": "Flower_Parameters - Interactive parameter exploration with VR sliders",
     "layout": "Open room with interactive BotanicalFlower at center",
     "objective": "Use VR sliders to change petal count, petal length, and petal curve. See how parameters shape procedural form.",
-    "key_elements": [
-      "botanical_flower - interactive with slider controls"
-    ]
+    "key_elements": ["botanical_flower - interactive with slider controls"]
   },
   "interactable_config": {
     "botanical_flower": {
       "interactive": true,
-      "sliders": [
-        "petal_count",
-        "petal_length",
-        "petal_curve"
-      ]
+      "sliders": ["petal_count","petal_length","petal_curve"]
     }
   },
   "lighting": {
-    "ambient_color": [
-      0.6,
-      0.75,
-      0.6
-    ],
+    "ambient_color": [0.6,0.75,0.6],
     "ambient_energy": 0.9,
     "directional_light": {
       "enabled": true,
-      "direction": [
-        -0.3,
-        -0.8,
-        -0.3
-      ],
-      "color": [
-        1.0,
-        0.98,
-        0.9
-      ],
+      "direction": [-0.3,-0.8,-0.3],
+      "color": [1.0,0.98,0.9],
       "energy": 1.0
     }
   },
@@ -79,11 +57,7 @@
     "enable_physics": true,
     "background": {
       "type": "sky",
-      "color": [
-        0.55,
-        0.7,
-        0.55
-      ]
+      "color": [0.55,0.7,0.55]
     }
   },
   "layers": {

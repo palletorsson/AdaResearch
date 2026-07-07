@@ -1,0 +1,2970 @@
+{
+  "room": {
+    "width": 12,
+    "depth": 8,
+    "spawn_row": 7,
+    "spawn_col": 6,
+    "teleporter_row": 0,
+    "teleporter_col": 6
+  },
+  "artifacts": [
+    {
+      "lookup_name": "GaussianBlurCircle",
+      "footprint_cells": 1,
+      "clearance_front": 1,
+      "clearance_back": 1,
+      "clearance_left": 1,
+      "clearance_right": 1,
+      "player_position": "front",
+      "wall_backing": false,
+      "orientation": "face_approach",
+      "isolation": 0,
+      "cluster_with": [],
+      "preferred_zone": "any"
+    },
+    {
+      "lookup_name": "2d_in_3d_randomness_vis",
+      "footprint_cells": 3,
+      "clearance_front": 1,
+      "clearance_back": 1,
+      "clearance_left": 1,
+      "clearance_right": 1,
+      "player_position": "front",
+      "wall_backing": true,
+      "orientation": "face_approach",
+      "isolation": 0,
+      "cluster_with": [],
+      "preferred_zone": "entry"
+    },
+    {
+      "lookup_name": "gallery_winner_showcase",
+      "footprint_cells": 8,
+      "clearance_front": 3,
+      "clearance_back": 2,
+      "clearance_left": 2,
+      "clearance_right": 2,
+      "player_position": "front",
+      "wall_backing": false,
+      "orientation": "face_approach",
+      "isolation": 1,
+      "cluster_with": [],
+      "preferred_zone": "center"
+    },
+    {
+      "lookup_name": "FlowFieldMain",
+      "footprint_cells": 5,
+      "clearance_front": 2,
+      "clearance_back": 2,
+      "clearance_left": 2,
+      "clearance_right": 2,
+      "player_position": "front",
+      "wall_backing": false,
+      "orientation": "face_approach",
+      "isolation": 0,
+      "cluster_with": [
+        "GaussianBlurCircle",
+        "neon_wave_grid"
+      ],
+      "preferred_zone": "entry"
+    },
+    {
+      "lookup_name": "affect_theory_visualization",
+      "footprint_cells": 2,
+      "clearance_front": 1,
+      "clearance_back": 0,
+      "clearance_left": 1,
+      "clearance_right": 1,
+      "player_position": "front",
+      "wall_backing": true,
+      "orientation": "face_approach",
+      "isolation": 0,
+      "cluster_with": [],
+      "preferred_zone": "back"
+    },
+    {
+      "lookup_name": "neon_wave_grid",
+      "footprint_cells": 4,
+      "clearance_front": 2,
+      "clearance_back": 1,
+      "clearance_left": 1,
+      "clearance_right": 1,
+      "player_position": "front",
+      "wall_backing": false,
+      "orientation": "face_approach",
+      "isolation": 0,
+      "cluster_with": [],
+      "preferred_zone": "center"
+    },
+    {
+      "lookup_name": "point",
+      "footprint_cells": 1,
+      "clearance_front": 1,
+      "clearance_back": 1,
+      "clearance_left": 1,
+      "clearance_right": 1,
+      "player_position": "front",
+      "wall_backing": false,
+      "orientation": "face_approach",
+      "isolation": 0,
+      "cluster_with": [],
+      "preferred_zone": "any"
+    }
+  ],
+  "results": {
+    "random": {
+      "constraint_score": 0.9383,
+      "walkability": 0.524,
+      "combined": 0.773,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.778,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 0.8,
+        "cluster_satisfied": 1.0,
+        "preferred_zone_match": 0.58,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 23,
+        "detour_ratio": 3.286,
+        "backtrack_rate": 0.174,
+        "encounter_order": 0.25,
+        "centerpiece_proximity": 0.804,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "GaussianBlurCircle",
+          "affect_theory_visualization",
+          "gallery_winner_showcase",
+          "point",
+          "2d_in_3d_randomness_vis",
+          "FlowFieldMain",
+          "neon_wave_grid"
+        ]
+      },
+      "full_path": [
+        [
+          7,
+          6
+        ],
+        [
+          7,
+          7
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          7,
+          9
+        ],
+        [
+          7,
+          10
+        ],
+        [
+          6,
+          10
+        ],
+        [
+          5,
+          10
+        ],
+        [
+          4,
+          10
+        ],
+        [
+          3,
+          10
+        ],
+        [
+          2,
+          10
+        ],
+        [
+          2,
+          9
+        ],
+        [
+          2,
+          8
+        ],
+        [
+          2,
+          7
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          3,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          0,
+          6
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "GaussianBlurCircle",
+          "row": 6,
+          "col": 6
+        },
+        {
+          "artifact": "2d_in_3d_randomness_vis",
+          "row": 0,
+          "col": 4
+        },
+        {
+          "artifact": "gallery_winner_showcase",
+          "row": 4,
+          "col": 7
+        },
+        {
+          "artifact": "FlowFieldMain",
+          "row": 3,
+          "col": 4
+        },
+        {
+          "artifact": "affect_theory_visualization",
+          "row": 7,
+          "col": 5
+        },
+        {
+          "artifact": "neon_wave_grid",
+          "row": 4,
+          "col": 2
+        },
+        {
+          "artifact": "point",
+          "row": 1,
+          "col": 9
+        }
+      ]
+    },
+    "rule_based": {
+      "constraint_score": 0.8836,
+      "walkability": 0.436,
+      "combined": 0.705,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.765,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 0.2,
+        "cluster_satisfied": 0.67,
+        "preferred_zone_match": 0.72,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 29,
+        "detour_ratio": 4.143,
+        "backtrack_rate": 0.207,
+        "encounter_order": 0.167,
+        "centerpiece_proximity": 0.792,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "gallery_winner_showcase",
+          "neon_wave_grid",
+          "FlowFieldMain",
+          "GaussianBlurCircle",
+          "point",
+          "2d_in_3d_randomness_vis",
+          "affect_theory_visualization"
+        ]
+      },
+      "full_path": [
+        [
+          7,
+          6
+        ],
+        [
+          6,
+          6
+        ],
+        [
+          6,
+          5
+        ],
+        [
+          6,
+          4
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          5,
+          3
+        ],
+        [
+          5,
+          2
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          3,
+          2
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          5,
+          2
+        ],
+        [
+          6,
+          2
+        ],
+        [
+          6,
+          3
+        ],
+        [
+          6,
+          4
+        ],
+        [
+          6,
+          5
+        ],
+        [
+          6,
+          6
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          5,
+          8
+        ],
+        [
+          5,
+          9
+        ],
+        [
+          4,
+          9
+        ],
+        [
+          3,
+          9
+        ],
+        [
+          2,
+          9
+        ],
+        [
+          2,
+          10
+        ],
+        [
+          2,
+          9
+        ],
+        [
+          1,
+          9
+        ],
+        [
+          1,
+          8
+        ],
+        [
+          1,
+          7
+        ],
+        [
+          0,
+          7
+        ],
+        [
+          0,
+          6
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "2d_in_3d_randomness_vis",
+          "row": 0,
+          "col": 10
+        },
+        {
+          "artifact": "affect_theory_visualization",
+          "row": 0,
+          "col": 8
+        },
+        {
+          "artifact": "gallery_winner_showcase",
+          "row": 3,
+          "col": 5
+        },
+        {
+          "artifact": "neon_wave_grid",
+          "row": 3,
+          "col": 3
+        },
+        {
+          "artifact": "FlowFieldMain",
+          "row": 1,
+          "col": 1
+        },
+        {
+          "artifact": "GaussianBlurCircle",
+          "row": 4,
+          "col": 8
+        },
+        {
+          "artifact": "point",
+          "row": 5,
+          "col": 10
+        }
+      ]
+    },
+    "sdf": {
+      "constraint_score": 0.9269,
+      "walkability": 0.391,
+      "combined": 0.713,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.797,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 1.0,
+        "cluster_satisfied": 0.373,
+        "preferred_zone_match": 0.72,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 29,
+        "detour_ratio": 4.143,
+        "backtrack_rate": 0.241,
+        "encounter_order": 0.083,
+        "centerpiece_proximity": 0.75,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "gallery_winner_showcase",
+          "point",
+          "GaussianBlurCircle",
+          "FlowFieldMain",
+          "affect_theory_visualization",
+          "2d_in_3d_randomness_vis",
+          "neon_wave_grid"
+        ]
+      },
+      "full_path": [
+        [
+          7,
+          6
+        ],
+        [
+          6,
+          6
+        ],
+        [
+          6,
+          5
+        ],
+        [
+          6,
+          6
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          5,
+          8
+        ],
+        [
+          5,
+          9
+        ],
+        [
+          5,
+          10
+        ],
+        [
+          4,
+          10
+        ],
+        [
+          3,
+          10
+        ],
+        [
+          3,
+          9
+        ],
+        [
+          3,
+          8
+        ],
+        [
+          2,
+          8
+        ],
+        [
+          1,
+          8
+        ],
+        [
+          1,
+          7
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          0,
+          6
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "gallery_winner_showcase",
+          "row": 3,
+          "col": 3
+        },
+        {
+          "artifact": "FlowFieldMain",
+          "row": 1,
+          "col": 9
+        },
+        {
+          "artifact": "neon_wave_grid",
+          "row": 3,
+          "col": 0
+        },
+        {
+          "artifact": "2d_in_3d_randomness_vis",
+          "row": 0,
+          "col": 1
+        },
+        {
+          "artifact": "affect_theory_visualization",
+          "row": 0,
+          "col": 5
+        },
+        {
+          "artifact": "GaussianBlurCircle",
+          "row": 6,
+          "col": 10
+        },
+        {
+          "artifact": "point",
+          "row": 6,
+          "col": 9
+        }
+      ]
+    },
+    "fold": {
+      "constraint_score": 0.9151,
+      "walkability": 0.583,
+      "combined": 0.782,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.845,
+        "wall_backing_satisfied": 0.5,
+        "isolation_satisfied": 1.0,
+        "cluster_satisfied": 0.839,
+        "preferred_zone_match": 0.58,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 21,
+        "detour_ratio": 3.0,
+        "backtrack_rate": 0.143,
+        "encounter_order": 0.417,
+        "centerpiece_proximity": 0.653,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "GaussianBlurCircle",
+          "FlowFieldMain",
+          "gallery_winner_showcase",
+          "affect_theory_visualization",
+          "neon_wave_grid",
+          "2d_in_3d_randomness_vis",
+          "point"
+        ]
+      },
+      "full_path": [
+        [
+          7,
+          6
+        ],
+        [
+          6,
+          6
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          5,
+          7
+        ],
+        [
+          5,
+          8
+        ],
+        [
+          5,
+          7
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          5,
+          5
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          5,
+          3
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          3,
+          3
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          1,
+          7
+        ],
+        [
+          1,
+          8
+        ],
+        [
+          1,
+          7
+        ],
+        [
+          0,
+          7
+        ],
+        [
+          0,
+          6
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "GaussianBlurCircle",
+          "row": 7,
+          "col": 7
+        },
+        {
+          "artifact": "2d_in_3d_randomness_vis",
+          "row": 0,
+          "col": 2
+        },
+        {
+          "artifact": "gallery_winner_showcase",
+          "row": 3,
+          "col": 9
+        },
+        {
+          "artifact": "FlowFieldMain",
+          "row": 3,
+          "col": 5
+        },
+        {
+          "artifact": "affect_theory_visualization",
+          "row": 6,
+          "col": 4
+        },
+        {
+          "artifact": "neon_wave_grid",
+          "row": 4,
+          "col": 1
+        },
+        {
+          "artifact": "point",
+          "row": 0,
+          "col": 8
+        }
+      ]
+    },
+    "paradoxical": {
+      "constraint_score": 0.9171,
+      "walkability": 0.508,
+      "combined": 0.753,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.712,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 0.9,
+        "cluster_satisfied": 0.624,
+        "preferred_zone_match": 0.58,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 41,
+        "detour_ratio": 5.857,
+        "backtrack_rate": 0.171,
+        "encounter_order": 0.333,
+        "centerpiece_proximity": 0.845,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "gallery_winner_showcase",
+          "neon_wave_grid",
+          "FlowFieldMain",
+          "2d_in_3d_randomness_vis",
+          "point",
+          "GaussianBlurCircle",
+          "affect_theory_visualization"
+        ]
+      },
+      "full_path": [
+        [
+          7,
+          6
+        ],
+        [
+          7,
+          5
+        ],
+        [
+          6,
+          5
+        ],
+        [
+          5,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          3,
+          3
+        ],
+        [
+          3,
+          2
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          5,
+          1
+        ],
+        [
+          5,
+          2
+        ],
+        [
+          6,
+          2
+        ],
+        [
+          7,
+          2
+        ],
+        [
+          7,
+          3
+        ],
+        [
+          7,
+          4
+        ],
+        [
+          7,
+          5
+        ],
+        [
+          7,
+          6
+        ],
+        [
+          7,
+          7
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          7,
+          9
+        ],
+        [
+          6,
+          9
+        ],
+        [
+          5,
+          9
+        ],
+        [
+          4,
+          9
+        ],
+        [
+          3,
+          9
+        ],
+        [
+          2,
+          9
+        ],
+        [
+          2,
+          10
+        ],
+        [
+          2,
+          9
+        ],
+        [
+          1,
+          9
+        ],
+        [
+          0,
+          9
+        ],
+        [
+          0,
+          8
+        ],
+        [
+          0,
+          7
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          0,
+          6
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "2d_in_3d_randomness_vis",
+          "row": 0,
+          "col": 0
+        },
+        {
+          "artifact": "affect_theory_visualization",
+          "row": 0,
+          "col": 2
+        },
+        {
+          "artifact": "gallery_winner_showcase",
+          "row": 4,
+          "col": 6
+        },
+        {
+          "artifact": "neon_wave_grid",
+          "row": 2,
+          "col": 4
+        },
+        {
+          "artifact": "FlowFieldMain",
+          "row": 1,
+          "col": 2
+        },
+        {
+          "artifact": "GaussianBlurCircle",
+          "row": 1,
+          "col": 10
+        },
+        {
+          "artifact": "point",
+          "row": 6,
+          "col": 1
+        }
+      ]
+    },
+    "hybrid": {
+      "constraint_score": 0.9671,
+      "walkability": 0.53,
+      "combined": 0.792,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.829,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 1.0,
+        "cluster_satisfied": 0.739,
+        "preferred_zone_match": 1.0,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 29,
+        "detour_ratio": 4.143,
+        "backtrack_rate": 0.207,
+        "encounter_order": 0.5,
+        "centerpiece_proximity": 0.75,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "FlowFieldMain",
+          "gallery_winner_showcase",
+          "neon_wave_grid",
+          "2d_in_3d_randomness_vis",
+          "affect_theory_visualization",
+          "GaussianBlurCircle",
+          "point"
+        ]
+      },
+      "full_path": [
+        [
+          7,
+          6
+        ],
+        [
+          6,
+          6
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          6,
+          6
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          5,
+          5
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          5,
+          3
+        ],
+        [
+          5,
+          2
+        ],
+        [
+          5,
+          1
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          0,
+          7
+        ],
+        [
+          0,
+          8
+        ],
+        [
+          0,
+          9
+        ],
+        [
+          0,
+          10
+        ],
+        [
+          0,
+          9
+        ],
+        [
+          0,
+          8
+        ],
+        [
+          0,
+          7
+        ],
+        [
+          0,
+          6
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "2d_in_3d_randomness_vis",
+          "row": 6,
+          "col": 0
+        },
+        {
+          "artifact": "affect_theory_visualization",
+          "row": 0,
+          "col": 0
+        },
+        {
+          "artifact": "gallery_winner_showcase",
+          "row": 3,
+          "col": 7
+        },
+        {
+          "artifact": "neon_wave_grid",
+          "row": 3,
+          "col": 2
+        },
+        {
+          "artifact": "FlowFieldMain",
+          "row": 6,
+          "col": 4
+        },
+        {
+          "artifact": "GaussianBlurCircle",
+          "row": 1,
+          "col": 4
+        },
+        {
+          "artifact": "point",
+          "row": 1,
+          "col": 10
+        }
+      ]
+    },
+    "circle_packing": {
+      "constraint_score": 0.9405,
+      "walkability": 0.495,
+      "combined": 0.762,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.78,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 0.9,
+        "cluster_satisfied": 0.49,
+        "preferred_zone_match": 1.0,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 27,
+        "detour_ratio": 3.857,
+        "backtrack_rate": 0.259,
+        "encounter_order": 0.5,
+        "centerpiece_proximity": 0.596,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "2d_in_3d_randomness_vis",
+          "neon_wave_grid",
+          "gallery_winner_showcase",
+          "FlowFieldMain",
+          "point",
+          "GaussianBlurCircle",
+          "affect_theory_visualization"
+        ]
+      },
+      "full_path": [
+        [
+          7,
+          6
+        ],
+        [
+          7,
+          5
+        ],
+        [
+          6,
+          5
+        ],
+        [
+          5,
+          5
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          5,
+          3
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          5,
+          5
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          5,
+          7
+        ],
+        [
+          4,
+          7
+        ],
+        [
+          3,
+          7
+        ],
+        [
+          2,
+          7
+        ],
+        [
+          1,
+          7
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          0,
+          6
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "gallery_winner_showcase",
+          "row": 3,
+          "col": 0
+        },
+        {
+          "artifact": "FlowFieldMain",
+          "row": 5,
+          "col": 8
+        },
+        {
+          "artifact": "neon_wave_grid",
+          "row": 3,
+          "col": 5
+        },
+        {
+          "artifact": "2d_in_3d_randomness_vis",
+          "row": 6,
+          "col": 3
+        },
+        {
+          "artifact": "affect_theory_visualization",
+          "row": 0,
+          "col": 0
+        },
+        {
+          "artifact": "GaussianBlurCircle",
+          "row": 0,
+          "col": 2
+        },
+        {
+          "artifact": "point",
+          "row": 0,
+          "col": 4
+        }
+      ]
+    },
+    "warehouse": {
+      "constraint_score": 0.7787,
+      "walkability": 0.741,
+      "combined": 0.764,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.488,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 0.0,
+        "cluster_satisfied": 0.877,
+        "preferred_zone_match": 0.86,
+        "reachability": 0.429,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 0,
+        "detour_ratio": 0.0,
+        "backtrack_rate": 0.0,
+        "encounter_order": 0.5,
+        "centerpiece_proximity": 0.845,
+        "coverage": 0.429,
+        "visit_order_names": [
+          "gallery_winner_showcase",
+          "FlowFieldMain",
+          "GaussianBlurCircle"
+        ]
+      },
+      "full_path": [
+        [
+          7,
+          6
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "gallery_winner_showcase",
+          "row": 4,
+          "col": 6
+        },
+        {
+          "artifact": "FlowFieldMain",
+          "row": 6,
+          "col": 4
+        },
+        {
+          "artifact": "neon_wave_grid",
+          "row": 2,
+          "col": 6
+        },
+        {
+          "artifact": "2d_in_3d_randomness_vis",
+          "row": 6,
+          "col": 9
+        },
+        {
+          "artifact": "affect_theory_visualization",
+          "row": 0,
+          "col": 7
+        },
+        {
+          "artifact": "GaussianBlurCircle",
+          "row": 7,
+          "col": 7
+        },
+        {
+          "artifact": "point",
+          "row": 7,
+          "col": 8
+        }
+      ]
+    },
+    "simulated_annealing": {
+      "constraint_score": 0.9186,
+      "walkability": 0.575,
+      "combined": 0.781,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.783,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 0.5,
+        "cluster_satisfied": 0.877,
+        "preferred_zone_match": 0.72,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 33,
+        "detour_ratio": 4.714,
+        "backtrack_rate": 0.121,
+        "encounter_order": 0.583,
+        "centerpiece_proximity": 0.653,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "2d_in_3d_randomness_vis",
+          "gallery_winner_showcase",
+          "neon_wave_grid",
+          "FlowFieldMain",
+          "GaussianBlurCircle",
+          "affect_theory_visualization",
+          "point"
+        ]
+      },
+      "full_path": [
+        [
+          7,
+          6
+        ],
+        [
+          7,
+          5
+        ],
+        [
+          7,
+          4
+        ],
+        [
+          7,
+          3
+        ],
+        [
+          6,
+          3
+        ],
+        [
+          6,
+          4
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          2,
+          7
+        ],
+        [
+          3,
+          7
+        ],
+        [
+          2,
+          7
+        ],
+        [
+          1,
+          7
+        ],
+        [
+          1,
+          8
+        ],
+        [
+          1,
+          9
+        ],
+        [
+          1,
+          10
+        ],
+        [
+          2,
+          10
+        ],
+        [
+          3,
+          10
+        ],
+        [
+          4,
+          10
+        ],
+        [
+          5,
+          10
+        ],
+        [
+          5,
+          11
+        ],
+        [
+          4,
+          11
+        ],
+        [
+          3,
+          11
+        ],
+        [
+          2,
+          11
+        ],
+        [
+          1,
+          11
+        ],
+        [
+          1,
+          10
+        ],
+        [
+          1,
+          9
+        ],
+        [
+          1,
+          8
+        ],
+        [
+          0,
+          8
+        ],
+        [
+          0,
+          7
+        ],
+        [
+          0,
+          6
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "2d_in_3d_randomness_vis",
+          "row": 6,
+          "col": 1
+        },
+        {
+          "artifact": "affect_theory_visualization",
+          "row": 0,
+          "col": 9
+        },
+        {
+          "artifact": "gallery_winner_showcase",
+          "row": 3,
+          "col": 1
+        },
+        {
+          "artifact": "neon_wave_grid",
+          "row": 0,
+          "col": 4
+        },
+        {
+          "artifact": "FlowFieldMain",
+          "row": 2,
+          "col": 8
+        },
+        {
+          "artifact": "GaussianBlurCircle",
+          "row": 4,
+          "col": 7
+        },
+        {
+          "artifact": "point",
+          "row": 6,
+          "col": 11
+        }
+      ]
+    },
+    "voronoi": {
+      "constraint_score": 0.9539,
+      "walkability": 0.568,
+      "combined": 0.8,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.84,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 1.0,
+        "cluster_satisfied": 0.906,
+        "preferred_zone_match": 0.58,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 25,
+        "detour_ratio": 3.571,
+        "backtrack_rate": 0.12,
+        "encounter_order": 0.417,
+        "centerpiece_proximity": 0.75,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "GaussianBlurCircle",
+          "gallery_winner_showcase",
+          "affect_theory_visualization",
+          "FlowFieldMain",
+          "neon_wave_grid",
+          "2d_in_3d_randomness_vis",
+          "point"
+        ]
+      },
+      "full_path": [
+        [
+          7,
+          6
+        ],
+        [
+          7,
+          7
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          7,
+          7
+        ],
+        [
+          7,
+          6
+        ],
+        [
+          7,
+          5
+        ],
+        [
+          7,
+          4
+        ],
+        [
+          6,
+          4
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          5,
+          3
+        ],
+        [
+          5,
+          2
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          3,
+          2
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          2,
+          7
+        ],
+        [
+          2,
+          8
+        ],
+        [
+          2,
+          9
+        ],
+        [
+          2,
+          8
+        ],
+        [
+          1,
+          8
+        ],
+        [
+          0,
+          8
+        ],
+        [
+          0,
+          7
+        ],
+        [
+          0,
+          6
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "GaussianBlurCircle",
+          "row": 6,
+          "col": 6
+        },
+        {
+          "artifact": "2d_in_3d_randomness_vis",
+          "row": 0,
+          "col": 2
+        },
+        {
+          "artifact": "gallery_winner_showcase",
+          "row": 4,
+          "col": 8
+        },
+        {
+          "artifact": "FlowFieldMain",
+          "row": 3,
+          "col": 4
+        },
+        {
+          "artifact": "affect_theory_visualization",
+          "row": 7,
+          "col": 3
+        },
+        {
+          "artifact": "neon_wave_grid",
+          "row": 4,
+          "col": 0
+        },
+        {
+          "artifact": "point",
+          "row": 1,
+          "col": 9
+        }
+      ]
+    },
+    "humanoid_walker": {
+      "constraint_score": 0.9021,
+      "walkability": 0.565,
+      "combined": 0.767,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.733,
+        "wall_backing_satisfied": 0.5,
+        "isolation_satisfied": 0.7,
+        "cluster_satisfied": 0.775,
+        "preferred_zone_match": 1.0,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 29,
+        "detour_ratio": 4.143,
+        "backtrack_rate": 0.207,
+        "encounter_order": 0.667,
+        "centerpiece_proximity": 0.653,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "2d_in_3d_randomness_vis",
+          "FlowFieldMain",
+          "gallery_winner_showcase",
+          "neon_wave_grid",
+          "affect_theory_visualization",
+          "point",
+          "GaussianBlurCircle"
+        ]
+      },
+      "full_path": [
+        [
+          7,
+          6
+        ],
+        [
+          7,
+          5
+        ],
+        [
+          7,
+          4
+        ],
+        [
+          7,
+          3
+        ],
+        [
+          6,
+          3
+        ],
+        [
+          7,
+          3
+        ],
+        [
+          7,
+          4
+        ],
+        [
+          7,
+          5
+        ],
+        [
+          7,
+          6
+        ],
+        [
+          6,
+          6
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          5,
+          7
+        ],
+        [
+          5,
+          8
+        ],
+        [
+          4,
+          8
+        ],
+        [
+          3,
+          8
+        ],
+        [
+          2,
+          8
+        ],
+        [
+          2,
+          7
+        ],
+        [
+          1,
+          7
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          0,
+          6
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "2d_in_3d_randomness_vis",
+          "row": 6,
+          "col": 7
+        },
+        {
+          "artifact": "affect_theory_visualization",
+          "row": 2,
+          "col": 6
+        },
+        {
+          "artifact": "gallery_winner_showcase",
+          "row": 3,
+          "col": 1
+        },
+        {
+          "artifact": "neon_wave_grid",
+          "row": 3,
+          "col": 6
+        },
+        {
+          "artifact": "FlowFieldMain",
+          "row": 5,
+          "col": 4
+        },
+        {
+          "artifact": "GaussianBlurCircle",
+          "row": 1,
+          "col": 1
+        },
+        {
+          "artifact": "point",
+          "row": 1,
+          "col": 2
+        }
+      ]
+    },
+    "grow_walker": {
+      "constraint_score": 0.6512,
+      "walkability": 0.7,
+      "combined": 0.671,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.635,
+        "wall_backing_satisfied": 0.0,
+        "isolation_satisfied": 0.0,
+        "cluster_satisfied": 0.471,
+        "preferred_zone_match": 0.44,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 0.0
+      },
+      "walk_details": {
+        "walk_length": 35,
+        "detour_ratio": 5.0,
+        "backtrack_rate": 0.086,
+        "encounter_order": 1.0,
+        "centerpiece_proximity": 0.561,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "2d_in_3d_randomness_vis",
+          "affect_theory_visualization",
+          "FlowFieldMain",
+          "gallery_winner_showcase",
+          "neon_wave_grid",
+          "GaussianBlurCircle",
+          "point"
+        ]
+      },
+      "full_path": [
+        [
+          7,
+          6
+        ],
+        [
+          7,
+          5
+        ],
+        [
+          6,
+          5
+        ],
+        [
+          5,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          3
+        ],
+        [
+          3,
+          2
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          3,
+          0
+        ],
+        [
+          4,
+          0
+        ],
+        [
+          5,
+          0
+        ],
+        [
+          6,
+          0
+        ],
+        [
+          7,
+          0
+        ],
+        [
+          7,
+          1
+        ],
+        [
+          7,
+          2
+        ],
+        [
+          7,
+          3
+        ],
+        [
+          7,
+          4
+        ],
+        [
+          7,
+          5
+        ],
+        [
+          7,
+          6
+        ],
+        [
+          7,
+          7
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          5,
+          8
+        ],
+        [
+          4,
+          8
+        ],
+        [
+          3,
+          8
+        ],
+        [
+          2,
+          8
+        ],
+        [
+          1,
+          8
+        ],
+        [
+          1,
+          7
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          0,
+          6
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "2d_in_3d_randomness_vis",
+          "row": 5,
+          "col": 6
+        },
+        {
+          "artifact": "affect_theory_visualization",
+          "row": 4,
+          "col": 6
+        },
+        {
+          "artifact": "FlowFieldMain",
+          "row": 2,
+          "col": 6
+        },
+        {
+          "artifact": "gallery_winner_showcase",
+          "row": 0,
+          "col": 3
+        },
+        {
+          "artifact": "neon_wave_grid",
+          "row": 0,
+          "col": 1
+        },
+        {
+          "artifact": "GaussianBlurCircle",
+          "row": 0,
+          "col": 0
+        },
+        {
+          "artifact": "point",
+          "row": 0,
+          "col": 6
+        }
+      ]
+    },
+    "focal_composition": {
+      "constraint_score": 0.87,
+      "walkability": 0.543,
+      "combined": 0.739,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.756,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 0.4,
+        "cluster_satisfied": 0.196,
+        "preferred_zone_match": 0.72,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 29,
+        "detour_ratio": 4.143,
+        "backtrack_rate": 0.241,
+        "encounter_order": 0.667,
+        "centerpiece_proximity": 0.596,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "2d_in_3d_randomness_vis",
+          "gallery_winner_showcase",
+          "FlowFieldMain",
+          "neon_wave_grid",
+          "GaussianBlurCircle",
+          "affect_theory_visualization",
+          "point"
+        ]
+      },
+      "full_path": [
+        [
+          7,
+          6
+        ],
+        [
+          7,
+          5
+        ],
+        [
+          7,
+          4
+        ],
+        [
+          6,
+          4
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          4
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          6
+        ],
+        [
+          4,
+          7
+        ],
+        [
+          4,
+          8
+        ],
+        [
+          3,
+          8
+        ],
+        [
+          2,
+          8
+        ],
+        [
+          1,
+          8
+        ],
+        [
+          1,
+          7
+        ],
+        [
+          0,
+          7
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          0,
+          6
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "gallery_winner_showcase",
+          "row": 1,
+          "col": 2
+        },
+        {
+          "artifact": "2d_in_3d_randomness_vis",
+          "row": 6,
+          "col": 2
+        },
+        {
+          "artifact": "affect_theory_visualization",
+          "row": 0,
+          "col": 8
+        },
+        {
+          "artifact": "neon_wave_grid",
+          "row": 4,
+          "col": 9
+        },
+        {
+          "artifact": "FlowFieldMain",
+          "row": 4,
+          "col": 1
+        },
+        {
+          "artifact": "GaussianBlurCircle",
+          "row": 3,
+          "col": 9
+        },
+        {
+          "artifact": "point",
+          "row": 2,
+          "col": 1
+        }
+      ]
+    },
+    "pacing_arc": {
+      "constraint_score": 0.9256,
+      "walkability": 0.351,
+      "combined": 0.696,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.685,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 0.9,
+        "cluster_satisfied": 0.825,
+        "preferred_zone_match": 0.58,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 57,
+        "detour_ratio": 8.143,
+        "backtrack_rate": 0.439,
+        "encounter_order": 0.167,
+        "centerpiece_proximity": 0.845,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "gallery_winner_showcase",
+          "neon_wave_grid",
+          "point",
+          "FlowFieldMain",
+          "2d_in_3d_randomness_vis",
+          "affect_theory_visualization",
+          "GaussianBlurCircle"
+        ]
+      },
+      "full_path": [
+        [
+          7,
+          6
+        ],
+        [
+          7,
+          7
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          5,
+          7
+        ],
+        [
+          4,
+          7
+        ],
+        [
+          3,
+          7
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          0,
+          7
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          3,
+          7
+        ],
+        [
+          4,
+          7
+        ],
+        [
+          5,
+          7
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          7,
+          7
+        ],
+        [
+          7,
+          6
+        ],
+        [
+          7,
+          5
+        ],
+        [
+          7,
+          4
+        ],
+        [
+          7,
+          3
+        ],
+        [
+          6,
+          3
+        ],
+        [
+          5,
+          3
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          3,
+          1
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          5,
+          1
+        ],
+        [
+          6,
+          1
+        ],
+        [
+          7,
+          1
+        ],
+        [
+          7,
+          2
+        ],
+        [
+          7,
+          3
+        ],
+        [
+          7,
+          4
+        ],
+        [
+          7,
+          5
+        ],
+        [
+          7,
+          6
+        ],
+        [
+          7,
+          7
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          5,
+          7
+        ],
+        [
+          4,
+          7
+        ],
+        [
+          3,
+          7
+        ],
+        [
+          3,
+          6
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          0,
+          6
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "gallery_winner_showcase",
+          "row": 4,
+          "col": 4
+        },
+        {
+          "artifact": "FlowFieldMain",
+          "row": 2,
+          "col": 2
+        },
+        {
+          "artifact": "neon_wave_grid",
+          "row": 1,
+          "col": 7
+        },
+        {
+          "artifact": "2d_in_3d_randomness_vis",
+          "row": 0,
+          "col": 3
+        },
+        {
+          "artifact": "affect_theory_visualization",
+          "row": 0,
+          "col": 8
+        },
+        {
+          "artifact": "GaussianBlurCircle",
+          "row": 0,
+          "col": 2
+        },
+        {
+          "artifact": "point",
+          "row": 3,
+          "col": 8
+        }
+      ]
+    },
+    "alexander": {
+      "constraint_score": 0.8898,
+      "walkability": 0.622,
+      "combined": 0.783,
+      "constraint_details": {
+        "footprint_in_bounds": 1.0,
+        "no_overlap": 1.0,
+        "clearance_satisfied": 0.722,
+        "wall_backing_satisfied": 1.0,
+        "isolation_satisfied": 0.2,
+        "cluster_satisfied": 1.0,
+        "preferred_zone_match": 0.58,
+        "reachability": 1.0,
+        "spawn_walkable": 1.0,
+        "teleporter_walkable": 1.0
+      },
+      "walk_details": {
+        "walk_length": 19,
+        "detour_ratio": 2.714,
+        "backtrack_rate": 0.053,
+        "encounter_order": 0.333,
+        "centerpiece_proximity": 0.714,
+        "coverage": 1.0,
+        "visit_order_names": [
+          "GaussianBlurCircle",
+          "FlowFieldMain",
+          "gallery_winner_showcase",
+          "2d_in_3d_randomness_vis",
+          "affect_theory_visualization",
+          "point",
+          "neon_wave_grid"
+        ]
+      },
+      "full_path": [
+        [
+          7,
+          6
+        ],
+        [
+          7,
+          7
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          7,
+          7
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          5,
+          7
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          5,
+          5
+        ],
+        [
+          5,
+          4
+        ],
+        [
+          5,
+          3
+        ],
+        [
+          5,
+          2
+        ],
+        [
+          4,
+          2
+        ],
+        [
+          3,
+          2
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          0,
+          6
+        ]
+      ],
+      "placements": [
+        {
+          "artifact": "GaussianBlurCircle",
+          "row": 6,
+          "col": 8
+        },
+        {
+          "artifact": "2d_in_3d_randomness_vis",
+          "row": 6,
+          "col": 1
+        },
+        {
+          "artifact": "gallery_winner_showcase",
+          "row": 2,
+          "col": 4
+        },
+        {
+          "artifact": "FlowFieldMain",
+          "row": 3,
+          "col": 7
+        },
+        {
+          "artifact": "affect_theory_visualization",
+          "row": 0,
+          "col": 2
+        },
+        {
+          "artifact": "neon_wave_grid",
+          "row": 1,
+          "col": 7
+        },
+        {
+          "artifact": "point",
+          "row": 0,
+          "col": 4
+        }
+      ]
+    }
+  }
+}

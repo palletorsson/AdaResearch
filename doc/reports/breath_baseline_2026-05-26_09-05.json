@@ -1,0 +1,71 @@
+{
+  "timestamp": "2026-05-26T09:05:00",
+  "phase": "baseline",
+  "scheduled_task": "ada-morning-breath",
+  "pipeline_summary": {
+    "sequences_scored": 22,
+    "global_avg_head_weighted": 5.43,
+    "_avg_note": "Convention frozen from prior breaths for trajectory continuity. Head-only unweighted avg this baseline: 5.682. Substage-credit unweighted: 4.718. Same as 2026-05-22 baseline_avg.",
+    "stage_7_polish": ["randomness"],
+    "stage_6_vr_testing": [
+      "primitives", "transformation", "array_tutorial", "color", "isosurfaces",
+      "boolean_surfaces", "forces", "wavefunctions", "noise", "cellularautomata",
+      "fractals", "lsystems", "proceduralgeneration", "swarmintelligence",
+      "machinelearning", "graphtheory", "foundationscrisis", "qfeplaboratory",
+      "postfoundationscrisis"
+    ],
+    "stage_2_documentation": {
+      "change": "0% doc / 0% art / 0% map (still scaffolded; map_data.json absent)",
+      "softbodies": "79% doc (27/34) / 62% art (39/63) — HEAD blocker, 7 maps to clear stage 2"
+    }
+  },
+  "softbodies_remaining_doc_maps": [
+    "sb_noise01 — noise-driven (per 2026-05-22 prediction)",
+    "gl04 — fourth glass cluster slot",
+    "gl05 — fifth glass cluster slot",
+    "gm01 — gallery marker / glass module 01",
+    "gm02 — gallery marker / glass module 02",
+    "gm03 — gallery marker / glass module 03",
+    "gm04 — gallery marker / glass module 04"
+  ],
+  "heat_map_top_5": [
+    {"item": "floor", "temp": 65, "reason": "active (1 recent commit)"},
+    {"item": "encyclopedia", "temp": 65, "reason": "active (1 recent commit)"},
+    {"item": "capture", "temp": 65, "reason": "active (1 recent commit)"},
+    {"item": "gate_b_promoted_stale_decay", "temp": 60, "reason": "deep discovery: Gate B repair pattern"},
+    {"item": "softbodies_documentation_pipeline", "temp": 60, "reason": "deep discovery aligned with HEAD"}
+  ],
+  "heat_map_other": [
+    {"item": "sequence:resourcemanagement", "temp": 50, "reason": "empty sequence (not on spine)"}
+  ],
+  "garden_health": {
+    "voice_coverage_pct": 49,
+    "embodiment_rate_pct": 33,
+    "total_voiced": 1012,
+    "total_artifacts": 2058,
+    "phantom_limbs": 818,
+    "_note": "Total artifacts edged 2054 -> 2058 since 2026-05-22 (project-track commits on lab_room track added 4 new artifacts). Voiced count unchanged."
+  },
+  "release_gates": {
+    "A_sequence_contract": "FAIL (missing_declared_maps: 8, undeclared_map_folders: 623)",
+    "B_artifact_registry": "PASS",
+    "C_map_validation": "PASS (857 grade_A, 144 B, 183 C, 0 F)",
+    "D_lab_progression": "PASS",
+    "overall": "FAIL (3/4 enabled gates passing)",
+    "_note": "Identical to 2026-05-22 state. Gate A still blocked on user-authored boolean_surfaces + change sequence scaffolding (8 declared but absent map folders)."
+  },
+  "consecutive_flat_breaths": 10,
+  "vr_ceiling_active": true,
+  "focus_vector_primary": "Rebuild all primitives maps using Map Studio (VR-ceilinged, head=stage 6)",
+  "expected_substitution": "softbodies stage_2_documentation (HEAD movement remaining: 7 maps to clear)",
+  "context_loaded": [
+    "doc/FOCUS_VECTOR.json",
+    "doc/HEAT_MAP.json (just regenerated)",
+    "doc/reports/breath_log.json (23 entries; latest 2026-05-22T09:04)",
+    "doc/reports/improvement_trajectory.json (stall_detected=true, 10 consecutive flat at 5.43)"
+  ],
+  "cooled_items_from_last_2_breaths": [
+    "gate_a_missing_declared_maps_audit (deferred 2026-05-13, 2026-05-19, 2026-05-22)",
+    "change_sequence_documentation (deferred 2026-05-19, 2026-05-22 — requires map_data.json to exist)"
+  ]
+}

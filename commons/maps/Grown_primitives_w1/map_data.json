@@ -1,0 +1,91 @@
+{
+  "map_info": {
+    "name": "Grown_primitives_w1",
+    "lookup_name": "Grown_primitives_w1",
+    "description": "A map grown by the walker laying floor as it placed artifacts. Started at spawn with no structure; the floor and tables emerged as a byproduct of the walk. Constraint score: 0.812, placed: 6/6 artifacts, laid: 57 floor cells + 0 table cells.",
+    "version": "grown-0.1",
+    "format": "json",
+    "created_from": "tools/grow_map.py 2026-05-15",
+    "dimensions": {
+      "width": 9,
+      "depth": 8,
+      "max_height": 3
+    },
+    "metadata": {
+      "category": "grown_map",
+      "estimated_time": "1 minute",
+      "auto_research_strategy": "grow_walker",
+      "artifacts_placed": ["capsule","triangleprofiles","combine_portals","truncatedtetrahedron","grab_sphere_point_snap","plus_line_puzzle"],
+      "laid_floor_cells": 57,
+      "table_cells": 0,
+      "constraint_score": 0.812
+    },
+    "title": "Grown: primitives_w1"
+  },
+  "utility_definitions": {
+    "sp": {
+      "name": "Spawn",
+      "description": "Player spawn point",
+      "type": "spawn"
+    },
+    "t": {
+      "name": "Exit Portal",
+      "description": "Step here to leave",
+      "type": "teleporter",
+      "properties": {
+        "action": "next_in_sequence"
+      }
+    }
+  },
+  "documentation": {
+    "summary": "Grown_primitives_w1 — map emerged from walker's path",
+    "layout": "9×8 bounding box. The walker entered at spawn and laid 57 floor cells + 0 table cells as it placed 6 artifacts. The teleporter is where the walk ended.",
+    "objective": "Walk the map. The map IS the walk's record.",
+    "key_elements": ["Spawn at (7, 3)","Teleporter at (0, 8)","capsule at (6, 3)","triangleprofiles at (3, 3)","combine_portals at (5, 6)","truncatedtetrahedron at (7, 2)","grab_sphere_point_snap at (7, 4)","plus_line_puzzle at (6, 2)"]
+  },
+  "lighting": {
+    "ambient_color": [0.32,0.34,0.4],
+    "ambient_energy": 0.9,
+    "directional_light": {
+      "enabled": true,
+      "direction": [-0.3,-1.0,-0.2],
+      "energy": 0.7
+    }
+  },
+  "settings": {
+    "player_spawn_height": 0.5,
+    "floor_tile_size": 1.0
+  },
+  "layers": {
+    "structure": [
+      ["0","0","0","2","2","2","2","2","2"],
+      ["0","0","0","2","2","2","2","2","2"],
+      ["0","0","2","2","2","2","2","2","2"],
+      ["0","0","2","2","2","2","2","2","2"],
+      ["0","0","2","2","2","2","2","2","2"],
+      ["0","2","2","2","2","2","2","2","2"],
+      ["0","2","2","2","2","2","2","2","2"],
+      ["0","2","2","2","2","2","2","2","2"]
+    ],
+    "utilities": [
+      [" "," "," "," "," "," "," "," ","t"],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," ","sp"," "," "," "," "," "]
+    ],
+    "interactables": [
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," ","triangleprofiles:180:0.0"," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," ","combine_portals:180:0.0"," "," "],
+      [" "," ","plus_line_puzzle:180:0.0","capsule:180:0.0"," "," "," "," "," "],
+      [" "," ","truncatedtetrahedron:180:0.0"," ","grab_sphere_point_snap:180:0.0"," "," "," "," "]
+    ]
+  }
+}

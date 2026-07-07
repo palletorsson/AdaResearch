@@ -92,27 +92,27 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 func _read_metadata_overrides() -> void:
 	if has_meta("config_tray_width"):
-		tray_width = float(String(get_meta("config_tray_width")))
+		tray_width = float(str(get_meta("config_tray_width")))
 	if has_meta("config_tray_depth"):
-		tray_depth = float(String(get_meta("config_tray_depth")))
+		tray_depth = float(str(get_meta("config_tray_depth")))
 	if has_meta("config_tray_rim_height"):
-		tray_rim_height = float(String(get_meta("config_tray_rim_height")))
+		tray_rim_height = float(str(get_meta("config_tray_rim_height")))
 	if has_meta("config_tray_color"):
-		tray_color = _parse_color(String(get_meta("config_tray_color")), tray_color)
+		tray_color = _parse_color(str(get_meta("config_tray_color")), tray_color)
 	if has_meta("config_dice_count"):
-		dice_count = int(String(get_meta("config_dice_count")))
+		dice_count = int(str(get_meta("config_dice_count")))
 	if has_meta("config_dice_size"):
-		dice_size = float(String(get_meta("config_dice_size")))
+		dice_size = float(str(get_meta("config_dice_size")))
 	if has_meta("config_dice_color"):
-		dice_color = _parse_color(String(get_meta("config_dice_color")), dice_color)
+		dice_color = _parse_color(str(get_meta("config_dice_color")), dice_color)
 	if has_meta("config_dot_color"):
-		dot_color = _parse_color(String(get_meta("config_dot_color")), dot_color)
+		dot_color = _parse_color(str(get_meta("config_dot_color")), dot_color)
 	if has_meta("config_arrangement"):
-		arrangement = String(get_meta("config_arrangement")).to_lower()
+		arrangement = str(get_meta("config_arrangement")).to_lower()
 	if has_meta("config_face_values"):
-		face_values = _parse_int_array(String(get_meta("config_face_values")), face_values)
+		face_values = _parse_int_array(str(get_meta("config_face_values")), face_values)
 	if has_meta("config_accent_color"):
-		accent_color = _parse_color(String(get_meta("config_accent_color")), accent_color)
+		accent_color = _parse_color(str(get_meta("config_accent_color")), accent_color)
 
 
 func _clear_built_children() -> void:

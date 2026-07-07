@@ -1,0 +1,1 @@
+Two new moves. The mirror doubles whatever you paint across a line; the rotor turns one wedge into a rosette — 2-, 3-, 4-, 6-fold, and no other folds, ever (the crystallographic restriction, felt before it is named). The kaleidoscope has known both moves for centuries.

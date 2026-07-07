@@ -1,0 +1,144 @@
+{
+  "report_date": "2026-06-22",
+  "generated": "2026-06-22T00:00:00",
+  "period": "2026-06-15 to 2026-06-22",
+  "trigger": "scheduled-task: ada-weekly-audit",
+  "previous_report": "doc/reports/weekly_breath_report_2026-06-15.json",
+  "mode": "audit (dry-run breather + release gates + trajectory diff)",
+
+  "headline": "RECOVERY TO THE CEILING + GATES GREEN. The forces documentation regression that dominated last week's report is repaired (Sky_Climb now ships blurb.md + intent.md), so the spine is back to its structural ceiling: 21 sequences at HEAD 6 (vr_testing), randomness at HEAD 7, head-sum 6.0909 — up +0.227 from last week's regressed 5.864. Release gates flipped FAIL (2/4) -> PASS (4/4): Gate B is fully clean (missing_scene_path 48->0, missing_map_ready 30->0) and Gate A's blocking duplicate entry (1) was removed. NOT a fresh decline this week, BUT the ceiling itself is unbroken and has been flat at 6.0909 for the last 4 recorded breath-days (06-19/20/21/22). The trajectory's own stall flag remains TRUE on structural grounds: stage 6 (vr_testing) is human-gated and no autonomous breath can lift it. Autonomous energy this period went entirely into content levers — concept maps 7-10 (procgen, fractal, lsystem, foundations, QFEP, postcrisis), softbody Act VII, an artifact-review runner, and a large batch of GDScript null/ArrayMesh/look_at crash fixes — none of which move the pipeline head but all of which thicken coverage and runtime safety.",
+
+  "total_breaths_in_period": 4,
+  "breaths_in_period": [
+    "2026-06-16T09:10",
+    "2026-06-19T09:57",
+    "2026-06-20T10:00",
+    "2026-06-21T09:30"
+  ],
+  "note_breath_count": "Fewer logged morning breaths than last period (4 vs 8); the bulk of this week's commits were large human-driven content sessions (concept maps 7-10, ~700 new artifacts) rather than scorer-driven breaths.",
+
+  "pipeline_snapshot": {
+    "global_avg_pipeline_head_sum_now": 6.0909,
+    "global_avg_pipeline_head_sum_last_week": 5.864,
+    "global_avg_pipeline_delta_week_over_week": 0.227,
+    "computation_now": "(21 spine sequences at stage 6 * 6) + (randomness at stage 7 * 7) = 126 + 7 = 133; 133 / 22 = 6.0909",
+    "sequences_at_stage_7_polish": ["randomness"],
+    "sequences_below_stage_6": [],
+    "all_22_sequences_pass_str_doc_art_map_val": true,
+    "forces_regression_status": "REPAIRED. Sky_Climb now has both blurb.md and intent.md; forces is back at HEAD 6 (vr_testing). The watch-item failure mode from 06-14/06-15 did NOT recur on a tracked sequence this week.",
+    "residual_doc_cleanup": "Reformed_Instruments/map_data.json still has no 'title' field (title: None). It no longer regresses the doc stage (its blurb/intent exist) but should be backfilled for verify_sequence cleanliness.",
+    "undeclared_generator_maps": "MindMap_Primitives / MindMap_Transformation / MindMap_VectorForces (committed 28202eb94) carry only map_data.json, no blurb/intent. They belong to NO sequence so they do not regress any HEAD, but per prop-006's 06-19 evidence_update a touched map folder lacking docs is still a regression signal."
+  },
+
+  "trajectory_diff_vs_last_week": {
+    "this_week_last_updated": "2026-06-21T21:00:00Z",
+    "total_breaths_cumulative": 42,
+    "trajectory_history_tail": [
+      {"date": "2026-06-11", "avg": 6.0909},
+      {"date": "2026-06-15", "avg": 6.045, "note": "morning value; re-regressed to 5.864 same-day (last week's filed figure)"},
+      {"date": "2026-06-19", "avg": 6.0909},
+      {"date": "2026-06-20", "avg": 6.0909},
+      {"date": "2026-06-21", "avg": 6.0909},
+      {"date": "2026-06-22", "avg": 6.0909, "note": "audit-day recompute from sequence_pipeline_scorer"}
+    ],
+    "interpretation": "Week-over-week the number IMPROVED (+0.227), but only by recovering the regression — it returned to, not above, the 6.0909 ceiling that has capped the project since 2026-06-05. Within the trailing days the curve is flat at the ceiling."
+  },
+
+  "sequences_improved_this_period": [
+    "forces — recovered HEAD 2 -> 6 (Sky_Climb docs restored); this is the bulk of the +0.227 week-over-week delta",
+    "foundationscrisis / qfeplaboratory / postfoundationscrisis — final-arc sequences received concept-map page treatment + enrichment commits (Russell/Godel/Escher/Brouwer/Florensky keystones, QFEP E_Term); all confirmed at HEAD 6 this audit",
+    "softbodies — Act VII (16 native SoftBody3D grab/poke artifacts) added; sequence remains at HEAD 6"
+  ],
+
+  "total_delta": {
+    "week_over_week_head_sum": 0.227,
+    "interpretation": "Net positive, entirely from regression recovery (5.864 -> 6.0909). No net-new pipeline progress above the ceiling — that is structurally impossible without a human VR walk. The autonomous content work this week (concept maps, artifacts, crash fixes) is real and valuable but is orthogonal to the head-sum metric, which only measures the 7-stage pipeline."
+  },
+
+  "skill_effectiveness_changes": {
+    "summary": "No effectiveness regressions. documentation_writing remains 71/71 = 1.0 cumulative. Period breaths exercised documentation_writing (mindmap/forces doc recovery), identity_writing (voicing batches 06-20), and tool/artifact crash-fix work (null guards, ArrayMesh, look_at_from_position). No skill posted a new 3+-failure pattern, so no NEW effectiveness-grounded proposal is warranted.",
+    "families_exercised_this_period": {
+      "documentation_writing": "06-19 wrote 6 docs straight from concept-map JSON (self-documenting-source shortcut) — recovered the mindmap generator maps; 100% success.",
+      "identity_writing / voicing": "06-20 voiced 5 voiceless artifacts (pipeline saturated -> pivot to voice coverage); voice coverage 51% -> 52%.",
+      "gdscript_crash_fix": "Large batch this week (null-guard _find_node_by_class, guard empty ArrayMesh in MarkovChainVR/NormalDistributionVR, look_at -> look_at_from_position, SceneInstantiator restore) — drove the artifact-runner walk to '0 errors'. Not tracked in skill_effectiveness blocks but materially improved runtime safety."
+    },
+    "cumulative_success_rates_unchanged": true
+  },
+
+  "proposals_pending_review": {
+    "count": 6,
+    "all_status": "proposed (none applied)",
+    "file": "doc/reports/skill_evolution_proposals.json",
+    "change_since_last_week": "prop-006 was CREATED 2026-06-15 (the escalation last week's report recommended) and has since accumulated strong evidence_updates on 06-16 (3rd consecutive day / 9 map instances) and 06-19 (extended scope to undeclared generator maps). It is now the single most-evidenced recurring autonomous lever in the log.",
+    "items": [
+      {"id": "prop-001", "skill": "ada-breather", "gist": "garden_identity_leverage pre-check in Evaluate"},
+      {"id": "prop-002", "skill": "ada-breather", "gist": "deferral re-validation step in Read/Evaluate — STRONG apply recommendation (standing multiple audits)"},
+      {"id": "prop-003", "skill": "ada-breather", "gist": "wall-detection pre-check (stage-6 ceiling auto-retarget) — safe to apply, gated on prop-005/prop-006"},
+      {"id": "prop-004", "skill": "ada-breather", "gist": "crash-safe-write rule in Harvest — STRONG apply recommendation"},
+      {"id": "prop-005", "skill": "ada-breather", "gist": "convention-drift cross-check (scorer vs runtime resolver) in Read/Evaluate — STRONG apply recommendation"},
+      {"id": "prop-006", "skill": "ada-breather", "gist": "recent-commit regression re-scan in Read phase — MOST-EVIDENCED; promote toward adoption"}
+    ],
+    "recommendation": "OVERDUE: apply prop-002, prop-004, prop-005, and now prop-006 via /ada-skill-updater. prop-002/004/005 have been status=proposed and past threshold across 3+ weekly audits; prop-006 is the best-evidenced of all. prop-001 and prop-003 are lower priority / dependent."
+  },
+
+  "stall_analysis": {
+    "stall_flagged_in_trajectory_file": true,
+    "stall_type": "structural-ceiling (NOT an engine stall, and NOT a fresh week-over-week decline)",
+    "literal_7day_criterion": "Week-over-week global_avg IMPROVED (5.864 -> 6.0909, +0.227), so by the strict 'has not improved in 7 days' test this week does NOT register a new stall — last week was a regression trough and this week recovered it.",
+    "deeper_truth": "The recovery only returned the metric to the 6.0909 ceiling it has been pinned at since 2026-06-05. The last 4 recorded breath-days are flat at 6.0909. The trajectory file's stall_detected=True is CORRECT and should stay set: the binding constraint is structural, not a temporary dip.",
+    "diagnosis": [
+      "1. STRUCTURAL CEILING (known, 6+ breaths): every one of the 21 non-complete spine sequences is at HEAD 6 (vr_testing). Stage 6 advances ONLY via a human VR walk session with bridge feedback. No autonomous breath can lift it. head-sum is therefore capped at 6.0909 (with randomness already at 7).",
+      "2. The doc-regression leak that drove last week's decline did NOT recur on a tracked sequence this week — forces was repaired and stayed repaired. The leak's remaining surface is undeclared generator maps (mindmap_*), which prop-006's 06-19 update already covers.",
+      "3. The breath engine is HEALTHY: 100% skill success, regression repaired, plus a large runtime-safety crash-fix batch landed. The engine is not out of moves on content levers — it is out of pipeline-head moves until a human walks the spine."
+    ],
+    "why_not_a_true_stall_in_the_engine_sense": "Unlike the 25-day 5.43 plateau (broken 2026-05-27), this is a hard human-gated ceiling plus a now-patched content leak. The metric is saturated, not stuck for lack of ideas.",
+    "recommended_remediation": [
+      "HUMAN LEVER (only ceiling-breaker): schedule a VR walk session to take any spine sequence from stage 6 -> stage 7. This is the sole path above 6.0909 and has been the standing #1 recommendation since 2026-05-30.",
+      "AUTONOMOUS CLEANUP (cheap, this-week): backfill the missing 'title' in Reformed_Instruments/map_data.json; write blurb/intent for the 3 MindMap_* generator maps (or formally mark them doc-exempt as projector output).",
+      "META (overdue): apply prop-002/004/005/006 via /ada-skill-updater so the engine stops re-discovering the same doc-regression and convention-drift patterns each breath.",
+      "CONTENT LEVERS (sustainable while ceiling-bound): continue voice-coverage batches (51% -> 52% this week; 846 phantom limbs remain) — the only metric that still moves autonomously."
+    ]
+  },
+
+  "release_gates": {
+    "overall": "PASS",
+    "enabled_passing": "4/4",
+    "change_since_last_week": "FAIL (2/4) -> PASS (4/4). Major improvement: Gate B fully repaired and Gate A's blocking duplicate cleared.",
+    "gate_A_sequence_contract": {"status": "PASS", "missing_declared_maps": 0, "duplicate_entries_within_sequence": 0, "undeclared_map_folders": 664, "note": "duplicate_entries 1 -> 0 flipped this gate to PASS; undeclared_map_folders is informational (652 -> 664) and non-blocking under current gate logic."},
+    "gate_B_artifact_registry": {"status": "PASS", "unresolved_scene_files": 0, "missing_scene_path": 0, "missing_map_ready": 0, "missing_include_in_map_data": 0, "note": "Fully repaired vs last week (missing_scene_path 48 -> 0, missing_map_ready 30 -> 0, missing_include_in_map_data 30 -> 0)."},
+    "gate_C_map_validation": {"status": "PASS", "grade_A": 945, "grade_B": 146, "grade_C": 162, "grade_F": 0, "note": "grade_A 932 -> 945; still zero F."},
+    "gate_D_lab_progression": {"status": "PASS", "lost_count": 0, "changed_count": 12, "total_issues": 39, "ok_superset_pairs": 5}
+  },
+
+  "garden_health": {
+    "voice_coverage": "52%",
+    "voice_coverage_last_week": "51%",
+    "embodiment_rate": "33% of voiced artifacts have full bodies",
+    "phantom_limbs": 846,
+    "phantom_limbs_last_week": 832,
+    "note": "Voice coverage ticked up (+1pt) via the 06-20 voicing breath. Phantom limbs rose 832 -> 846 because this week's ~700 new concept-map artifacts added more reaching (voiced-but-bodiless) artifacts than were embodied. Voicing remains the sustainable autonomous lever while the pipeline is ceiling-bound."
+  },
+
+  "dry_run_work_plan": {
+    "focus": "auto-selected (FOCUS_VECTOR primary = primitives rebuild, dated 2026-03-28 and stale; the live signal is ceiling-saturation + content levers)",
+    "trajectory": "flat at structural ceiling (recovered +0.227 w/w but pinned at 6.0909; stall_detected=True structural)",
+    "items": [
+      {"rank": 1, "item": "MindMap_Primitives / MindMap_Transformation / MindMap_VectorForces docs", "temperature": "60 (mindmap maps)", "reason": "Three generator maps committed with only map_data.json, no blurb/intent (prop-006 06-19 evidence).", "dispatch": "documentation_writing (self-documenting from concept-map JSON)", "expected": "Closes the remaining doc-regression surface; +0 head-sum (undeclared) but removes a recurring heat signal."},
+      {"rank": 2, "item": "garden voicing batch (next 5 from voiceless worklist)", "temperature": "60 (voice_coverage)", "reason": "Only metric that moves autonomously while pipeline is ceiling-bound; 846 phantom limbs.", "dispatch": "identity_writing", "expected": "+5 voiced artifacts, voice coverage 52% -> ~53%."},
+      {"rank": 3, "item": "Reformed_Instruments title backfill", "temperature": "40 (doc cleanup)", "reason": "map_data.json has no title field; fails verify_sequence title-alignment cleanliness.", "dispatch": "direct_file_edit", "expected": "One verify_sequence warning cleared."},
+      {"rank": 4, "item": "resourcemanagement empty-sequence resolution", "temperature": "50 (sequence:resourcemanagement)", "reason": "Declared sequence with no content maps; inflates the empty-sequence heat signal.", "dispatch": "ada-sequence-expert", "expected": "Either scaffold a first map or de-list; heat signal clears."},
+      {"rank": 5, "item": "apply standing skill_evolution proposals prop-002/004/005/006", "temperature": "META", "reason": "Overdue across 3+ audits; prop-006 most-evidenced lever in the log.", "dispatch": "/ada-skill-updater (HUMAN review required)", "expected": "Engine stops re-discovering doc-regression + convention-drift each breath."}
+    ],
+    "cooled_skipped": "none (no items in last-2-breath items_failed)",
+    "human_only_item_not_in_autonomous_plan": "VR walk session to lift any spine sequence stage 6 -> 7 — the sole ceiling-breaker; cannot be done by a breath."
+  },
+
+  "next_actions": [
+    "HUMAN: schedule a VR walk session — the only lever that moves head-sum above 6.0909 (standing recommendation since 2026-05-30).",
+    "Apply skill_evolution proposals prop-002, prop-004, prop-005, prop-006 via /ada-skill-updater — overdue.",
+    "Autonomous next full breath: doc the 3 MindMap_* generator maps + backfill Reformed_Instruments title + continue voicing.",
+    "Resolve the resourcemanagement empty sequence (scaffold or de-list)."
+  ],
+
+  "audit_status": "PASS — gates green, regression recovered, no fresh decline. Stall remains flagged on structural grounds only; the binding constraint is the human-gated vr_testing ceiling."
+}

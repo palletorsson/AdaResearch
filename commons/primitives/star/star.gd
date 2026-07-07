@@ -1,4 +1,14 @@
 # Star.gd - 5-pointed star shape from vertex/face arrays (fits within 1,1,1)
+#
+# @identity
+# essence: a five-pointed star built from an explicit list of 22 vertices and the triangle faces that bind them
+# desire: learner grasps that a recognizable shape is nothing but data — a table of points and a table of faces
+# critical_parameter: the vertex array — move one number and the star deforms; the form lives in the coordinates
+# triggers: constructs its mesh on ready via SurfaceTool from the hardcoded vertex/face arrays
+# emerges: the insight that "shape" is not drawn but declared — geometry is a data structure before it is an image
+# needs: [builds mesh + collision from arrays [has], missing grabbable vertices to let the learner edit the data]
+# relationships: an applied triangle — every face is a triangle; a bridge from primitive faces to named forms
+# truth: a star is not drawn — it is a specific list of vertices and the faces that connect them; form is data
 extends Node3D
 
 var base_color: Color = Color(1.0, 0.9, 0.2)  # Golden yellow

@@ -17,9 +17,7 @@
 	  "difficulty": "beginner",
 	  "category": "primitives",
 	  "estimated_time": "1-2 minutes",
-	  "learning_objectives": [
-        "Point Zero"
-	  ]
+	  "learning_objectives": ["Point Zero"]
 	}
   },
   "utility_definitions": {
@@ -50,51 +48,21 @@
 	"summary": "Point_Zero - Origin Infrastructure",
 	"layout": "7x8 grid with L-shaped platform in northwest; mostly empty void.",
 	"objective": "Introduce origin as infrastructural prerequisite; encounter coordinate system before geometry.",
-	"key_elements": [
-	  "`la:point` annotation at (3,3)",
-	  "`grab_sphere_point` pickup at (3,3)",
-	  "`dark_sphere` ambient enclosure at (3,2)",
-	  "Teleporter `t` at (5,6)",
-	  "speed_display:180",
-	  "frames_display:180",
-	  "game_time_display:180",
-	  "draw_calls_display:180",
-      "memory_display:180"
-	]
+	"key_elements": ["`la:point` annotation at (3,3)","`grab_sphere_point` pickup at (3,3)","`dark_sphere` ambient enclosure at (3,2)","Teleporter `t` at (5,6)","speed_display:180","frames_display:180","game_time_display:180","draw_calls_display:180","memory_display:180"]
   },
   "spawn_points": {
 	"default": {
-	  "position": [
-		1.5,
-		1.2,
-		1.5
-	  ],
-	  "rotation": [
-		0,
-		0,
-		0
-	  ]
+	  "position": [1.5,1.2,1.5],
+	  "rotation": [0,0,0]
 	}
   },
   "lighting": {
-	"ambient_color": [
-	  0.4,
-	  0.4,
-	  0.5
-	],
+	"ambient_color": [0.4,0.4,0.5],
 	"ambient_energy": 0.6,
 	"directional_light": {
 	  "enabled": true,
-	  "direction": [
-		-0.4,
-		-0.7,
-		-0.4
-	  ],
-	  "color": [
-		1.0,
-		0.9,
-		0.8
-	  ],
+	  "direction": [-0.4,-0.7,-0.4],
+	  "color": [1.0,0.9,0.8],
 	  "energy": 1.2
 	}
   },
@@ -108,11 +76,7 @@
 	"initial_tile_visibility": "hidden_except_corners",
 	"background": {
 	  "type": "sky",
-	  "color": [
-		0.2,
-		0.3,
-		0.7
-	  ]
+	  "color": [0.2,0.3,0.7]
 	},
 	"grid_animation": {
 	  "enabled": true,
@@ -130,11 +94,7 @@
 	  "offset_x": -1.5,
 	  "offset_z": -1.5,
 	  "thickness": 0.05,
-	  "color": [
-		0.4,
-		0.6,
-		0.8
-	  ],
+	  "color": [0.4,0.6,0.8],
 	  "model_opacity": 0.5,
 	  "wireframe_width": 1.0,
 	  "emission_strength": 1.0,

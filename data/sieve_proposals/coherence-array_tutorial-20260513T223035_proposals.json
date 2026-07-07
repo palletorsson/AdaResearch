@@ -1,0 +1,288 @@
+{
+	"pass_id": "coherence-array_tutorial-20260513T223035",
+	"kind": "coherence",
+	"sequence_id": "array_tutorial",
+	"threshold": 80,
+	"ran_at": "2026-05-13T22:30:39",
+	"stats": {
+		"maps_analysed": 8,
+		"chips_emitted": 13,
+		"maps_skipped": 0,
+		"maps_failed": 0
+	},
+	"proposals": [
+		{
+			"pass_id": "coherence-array_tutorial-20260513T223035",
+			"move_id": "Tutorial_Pattern-text-drift",
+			"change": "Tutorial_Pattern · text drift",
+			"from_state": "6 artifact(s) placed but unmentioned in any .md: grid_model, panel_bridge_loom, pattern_maker_station, pattern_studio_plate, pattern_tile_plate...",
+			"to_state": "mention each in summary.md or technical.md, or remove from grid if no longer pedagogically central",
+			"impact": "medium",
+			"rationale_excerpt": "Map score: 73. The map is doing more than its text reports. Either the text needs to catch up, or the placed artifacts are supporting cast rather than leads.",
+			"kind": "coherence",
+			"severity": "medium",
+			"deep_links": {
+				"map_builder": "http://localhost:3003/map-builder?name=Tutorial_Pattern",
+				"text_map_coherence": "http://localhost:3003/text-map-coherence?map=Tutorial_Pattern",
+				"ada_writer": "http://localhost:3002/editor?map=Tutorial_Pattern"
+			},
+			"status": "pending",
+			"applied_at": null,
+			"applied_by": null,
+			"pre_existing": false,
+			"notes": ""
+		},
+		{
+			"pass_id": "coherence-array_tutorial-20260513T223035",
+			"move_id": "Tutorial_Pattern-stubs",
+			"change": "Tutorial_Pattern · stub text",
+			"from_state": "stub-flagged file(s): blurb, summary, technical, critical, intent",
+			"to_state": "expand each stub to a real first draft (or remove if not yet warranted)",
+			"impact": "low",
+			"rationale_excerpt": "Stub detection flags files below file-type word-count thresholds. A 30-word summary is not a real summary; it's a placeholder.",
+			"kind": "coherence",
+			"severity": "low",
+			"deep_links": {
+				"map_builder": "http://localhost:3003/map-builder?name=Tutorial_Pattern",
+				"text_map_coherence": "http://localhost:3003/text-map-coherence?map=Tutorial_Pattern",
+				"ada_writer": "http://localhost:3002/editor?map=Tutorial_Pattern"
+			},
+			"status": "pending",
+			"applied_at": null,
+			"applied_by": null,
+			"pre_existing": false,
+			"notes": ""
+		},
+		{
+			"pass_id": "coherence-array_tutorial-20260513T223035",
+			"move_id": "Array_Patterns-text-drift",
+			"change": "Array_Patterns · text drift",
+			"from_state": "4 artifact(s) placed but unmentioned in any .md: grid_model, panel_bridge_loom, pattern_tile_plate, science_screen",
+			"to_state": "mention each in summary.md or technical.md, or remove from grid if no longer pedagogically central",
+			"impact": "low",
+			"rationale_excerpt": "Map score: 86. The map is doing more than its text reports. Either the text needs to catch up, or the placed artifacts are supporting cast rather than leads.",
+			"kind": "coherence",
+			"severity": "low",
+			"deep_links": {
+				"map_builder": "http://localhost:3003/map-builder?name=Array_Patterns",
+				"text_map_coherence": "http://localhost:3003/text-map-coherence?map=Array_Patterns",
+				"ada_writer": "http://localhost:3002/editor?map=Array_Patterns"
+			},
+			"status": "pending",
+			"applied_at": null,
+			"applied_by": null,
+			"pre_existing": false,
+			"notes": ""
+		},
+		{
+			"pass_id": "coherence-array_tutorial-20260513T223035",
+			"move_id": "Array_Patterns-stubs",
+			"change": "Array_Patterns · stub text",
+			"from_state": "stub-flagged file(s): blurb, summary, technical, critical, intent",
+			"to_state": "expand each stub to a real first draft (or remove if not yet warranted)",
+			"impact": "low",
+			"rationale_excerpt": "Stub detection flags files below file-type word-count thresholds. A 30-word summary is not a real summary; it's a placeholder.",
+			"kind": "coherence",
+			"severity": "low",
+			"deep_links": {
+				"map_builder": "http://localhost:3003/map-builder?name=Array_Patterns",
+				"text_map_coherence": "http://localhost:3003/text-map-coherence?map=Array_Patterns",
+				"ada_writer": "http://localhost:3002/editor?map=Array_Patterns"
+			},
+			"status": "pending",
+			"applied_at": null,
+			"applied_by": null,
+			"pre_existing": false,
+			"notes": ""
+		},
+		{
+			"pass_id": "coherence-array_tutorial-20260513T223035",
+			"move_id": "Tutorial_Single-text-drift",
+			"change": "Tutorial_Single · text drift",
+			"from_state": "1 artifact(s) placed but unmentioned in any .md: science_screen",
+			"to_state": "mention each in summary.md or technical.md, or remove from grid if no longer pedagogically central",
+			"impact": "low",
+			"rationale_excerpt": "Map score: 87. The map is doing more than its text reports. Either the text needs to catch up, or the placed artifacts are supporting cast rather than leads.",
+			"kind": "coherence",
+			"severity": "low",
+			"deep_links": {
+				"map_builder": "http://localhost:3003/map-builder?name=Tutorial_Single",
+				"text_map_coherence": "http://localhost:3003/text-map-coherence?map=Tutorial_Single",
+				"ada_writer": "http://localhost:3002/editor?map=Tutorial_Single"
+			},
+			"status": "pending",
+			"applied_at": null,
+			"applied_by": null,
+			"pre_existing": false,
+			"notes": ""
+		},
+		{
+			"pass_id": "coherence-array_tutorial-20260513T223035",
+			"move_id": "Tutorial_Single-stubs",
+			"change": "Tutorial_Single · stub text",
+			"from_state": "stub-flagged file(s): blurb, summary, technical, critical, intent",
+			"to_state": "expand each stub to a real first draft (or remove if not yet warranted)",
+			"impact": "low",
+			"rationale_excerpt": "Stub detection flags files below file-type word-count thresholds. A 30-word summary is not a real summary; it's a placeholder.",
+			"kind": "coherence",
+			"severity": "low",
+			"deep_links": {
+				"map_builder": "http://localhost:3003/map-builder?name=Tutorial_Single",
+				"text_map_coherence": "http://localhost:3003/text-map-coherence?map=Tutorial_Single",
+				"ada_writer": "http://localhost:3002/editor?map=Tutorial_Single"
+			},
+			"status": "pending",
+			"applied_at": null,
+			"applied_by": null,
+			"pre_existing": false,
+			"notes": ""
+		},
+		{
+			"pass_id": "coherence-array_tutorial-20260513T223035",
+			"move_id": "Tutorial_Row-stubs",
+			"change": "Tutorial_Row · stub text",
+			"from_state": "stub-flagged file(s): blurb, summary, technical, critical, intent",
+			"to_state": "expand each stub to a real first draft (or remove if not yet warranted)",
+			"impact": "low",
+			"rationale_excerpt": "Stub detection flags files below file-type word-count thresholds. A 30-word summary is not a real summary; it's a placeholder.",
+			"kind": "coherence",
+			"severity": "low",
+			"deep_links": {
+				"map_builder": "http://localhost:3003/map-builder?name=Tutorial_Row",
+				"text_map_coherence": "http://localhost:3003/text-map-coherence?map=Tutorial_Row",
+				"ada_writer": "http://localhost:3002/editor?map=Tutorial_Row"
+			},
+			"status": "pending",
+			"applied_at": null,
+			"applied_by": null,
+			"pre_existing": false,
+			"notes": ""
+		},
+		{
+			"pass_id": "coherence-array_tutorial-20260513T223035",
+			"move_id": "Tutorial_2D_Build-stubs",
+			"change": "Tutorial_2D_Build · stub text",
+			"from_state": "stub-flagged file(s): blurb, summary, technical, critical, intent",
+			"to_state": "expand each stub to a real first draft (or remove if not yet warranted)",
+			"impact": "low",
+			"rationale_excerpt": "Stub detection flags files below file-type word-count thresholds. A 30-word summary is not a real summary; it's a placeholder.",
+			"kind": "coherence",
+			"severity": "low",
+			"deep_links": {
+				"map_builder": "http://localhost:3003/map-builder?name=Tutorial_2D_Build",
+				"text_map_coherence": "http://localhost:3003/text-map-coherence?map=Tutorial_2D_Build",
+				"ada_writer": "http://localhost:3002/editor?map=Tutorial_2D_Build"
+			},
+			"status": "pending",
+			"applied_at": null,
+			"applied_by": null,
+			"pre_existing": false,
+			"notes": ""
+		},
+		{
+			"pass_id": "coherence-array_tutorial-20260513T223035",
+			"move_id": "Tutorial_3D-text-drift",
+			"change": "Tutorial_3D · text drift",
+			"from_state": "4 artifact(s) placed but unmentioned in any .md: bar_array, bar_array_bubble_sort, grid3d, sorting_algorithm_race",
+			"to_state": "mention each in summary.md or technical.md, or remove from grid if no longer pedagogically central",
+			"impact": "medium",
+			"rationale_excerpt": "Map score: 63. The map is doing more than its text reports. Either the text needs to catch up, or the placed artifacts are supporting cast rather than leads.",
+			"kind": "coherence",
+			"severity": "medium",
+			"deep_links": {
+				"map_builder": "http://localhost:3003/map-builder?name=Tutorial_3D",
+				"text_map_coherence": "http://localhost:3003/text-map-coherence?map=Tutorial_3D",
+				"ada_writer": "http://localhost:3002/editor?map=Tutorial_3D"
+			},
+			"status": "pending",
+			"applied_at": null,
+			"applied_by": null,
+			"pre_existing": false,
+			"notes": ""
+		},
+		{
+			"pass_id": "coherence-array_tutorial-20260513T223035",
+			"move_id": "Tutorial_3D-stubs",
+			"change": "Tutorial_3D · stub text",
+			"from_state": "stub-flagged file(s): blurb, summary, technical, critical, intent",
+			"to_state": "expand each stub to a real first draft (or remove if not yet warranted)",
+			"impact": "low",
+			"rationale_excerpt": "Stub detection flags files below file-type word-count thresholds. A 30-word summary is not a real summary; it's a placeholder.",
+			"kind": "coherence",
+			"severity": "low",
+			"deep_links": {
+				"map_builder": "http://localhost:3003/map-builder?name=Tutorial_3D",
+				"text_map_coherence": "http://localhost:3003/text-map-coherence?map=Tutorial_3D",
+				"ada_writer": "http://localhost:3002/editor?map=Tutorial_3D"
+			},
+			"status": "pending",
+			"applied_at": null,
+			"applied_by": null,
+			"pre_existing": false,
+			"notes": ""
+		},
+		{
+			"pass_id": "coherence-array_tutorial-20260513T223035",
+			"move_id": "Tutorial_Disco-stubs",
+			"change": "Tutorial_Disco · stub text",
+			"from_state": "stub-flagged file(s): blurb, summary, technical, critical, intent",
+			"to_state": "expand each stub to a real first draft (or remove if not yet warranted)",
+			"impact": "low",
+			"rationale_excerpt": "Stub detection flags files below file-type word-count thresholds. A 30-word summary is not a real summary; it's a placeholder.",
+			"kind": "coherence",
+			"severity": "low",
+			"deep_links": {
+				"map_builder": "http://localhost:3003/map-builder?name=Tutorial_Disco",
+				"text_map_coherence": "http://localhost:3003/text-map-coherence?map=Tutorial_Disco",
+				"ada_writer": "http://localhost:3002/editor?map=Tutorial_Disco"
+			},
+			"status": "pending",
+			"applied_at": null,
+			"applied_by": null,
+			"pre_existing": false,
+			"notes": ""
+		},
+		{
+			"pass_id": "coherence-array_tutorial-20260513T223035",
+			"move_id": "Chamber_Arrays-text-drift",
+			"change": "Chamber_Arrays · text drift",
+			"from_state": "2 artifact(s) placed but unmentioned in any .md: catalyst_target, proximity_spawner",
+			"to_state": "mention each in summary.md or technical.md, or remove from grid if no longer pedagogically central",
+			"impact": "medium",
+			"rationale_excerpt": "Map score: 71. The map is doing more than its text reports. Either the text needs to catch up, or the placed artifacts are supporting cast rather than leads.",
+			"kind": "coherence",
+			"severity": "medium",
+			"deep_links": {
+				"map_builder": "http://localhost:3003/map-builder?name=Chamber_Arrays",
+				"text_map_coherence": "http://localhost:3003/text-map-coherence?map=Chamber_Arrays",
+				"ada_writer": "http://localhost:3002/editor?map=Chamber_Arrays"
+			},
+			"status": "pending",
+			"applied_at": null,
+			"applied_by": null,
+			"pre_existing": false,
+			"notes": ""
+		},
+		{
+			"pass_id": "coherence-array_tutorial-20260513T223035",
+			"move_id": "Chamber_Arrays-stubs",
+			"change": "Chamber_Arrays · stub text",
+			"from_state": "stub-flagged file(s): blurb, summary, technical, critical, intent",
+			"to_state": "expand each stub to a real first draft (or remove if not yet warranted)",
+			"impact": "low",
+			"rationale_excerpt": "Stub detection flags files below file-type word-count thresholds. A 30-word summary is not a real summary; it's a placeholder.",
+			"kind": "coherence",
+			"severity": "low",
+			"deep_links": {
+				"map_builder": "http://localhost:3003/map-builder?name=Chamber_Arrays",
+				"text_map_coherence": "http://localhost:3003/text-map-coherence?map=Chamber_Arrays",
+				"ada_writer": "http://localhost:3002/editor?map=Chamber_Arrays"
+			},
+			"status": "pending",
+			"applied_at": null,
+			"applied_by": null,
+			"pre_existing": false,
+			"notes": ""
+		}
+	]
+}

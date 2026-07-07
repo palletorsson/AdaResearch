@@ -391,6 +391,18 @@ func _poll_quest_reload(delta: float) -> void:
 func _live_reload(want_map: String) -> void:
 	if _current_grid_system == null or not is_instance_valid(_current_grid_system):
 		return
+	# Don't stack reloads: if a (re)generation is still running, retry next poll instead of piling
+	# a second build on top of an unfinished one.
+	if "generation_in_progress" in _current_grid_system and bool(_current_grid_system.get("generation_in_progress")):
+		_last_reload_token = ""   # re-detect the same signal next tick
+		return
+	# Drop the spawned biome/ground nodes the in-place reload leaves behind — _clear_all_components
+	# doesn't touch them (they sit on the GridSystem, outside the cleared components), so without
+	# this each reload stacks another copy. Free immediately so the rebuild starts from a clean grid.
+	for n in ["BiomeAccrual", "GroundLayer"]:
+		var leftover = _current_grid_system.get_node_or_null(n)
+		if leftover and is_instance_valid(leftover):
+			leftover.free()
 	if "map_name" in _current_grid_system and str(_current_grid_system.get("map_name")) != want_map:
 		_current_grid_system.set("map_name", want_map)
 	print("AdaVRStaging: hot-reload -> %s" % want_map)

@@ -1,4 +1,5 @@
 # ChaosProjectile.gd
+# verb: arc
 # Tesla coil spark — branching electric arcs that crackle and fork.
 # Unpredictable paths, random impulses, flickering lightning.
 extends CatalystProjectile

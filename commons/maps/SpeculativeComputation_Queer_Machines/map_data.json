@@ -15,12 +15,7 @@
       "difficulty": "advanced",
       "category": "speculativecomputation",
       "estimated_time": "8-12 minutes",
-      "learning_objectives": [
-        "Glitch aesthetics in computation",
-        "Non-binary classification systems",
-        "Fluid taxonomy structures",
-        "Rhizomatic navigation"
-      ]
+      "learning_objectives": ["Glitch aesthetics in computation","Non-binary classification systems","Fluid taxonomy structures","Rhizomatic navigation"]
     }
   },
   "utility_definitions": {
@@ -40,24 +35,12 @@
     }
   },
   "lighting": {
-    "ambient_color": [
-      0.35,
-      0.25,
-      0.4
-    ],
+    "ambient_color": [0.35,0.25,0.4],
     "ambient_energy": 0.5,
     "directional_light": {
       "enabled": true,
-      "direction": [
-        -0.2,
-        -1.0,
-        -0.5
-      ],
-      "color": [
-        0.95,
-        0.85,
-        1.0
-      ],
+      "direction": [-0.2,-1.0,-0.5],
+      "color": [0.95,0.85,1.0],
       "energy": 0.85
     }
   },
@@ -68,11 +51,7 @@
     "enable_physics": true,
     "background": {
       "type": "sky",
-      "color": [
-        0.15,
-        0.1,
-        0.2
-      ]
+      "color": [0.15,0.1,0.2]
     }
   },
   "layers": {

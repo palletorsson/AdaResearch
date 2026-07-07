@@ -14,11 +14,7 @@
 	  "difficulty": "intermediate",
 	  "category": "tutorial",
 	  "estimated_time": "10-15 minutes",
-	  "learning_objectives": [
-		"Recognize between-elements: joints, apertures, corridor transitions",
-		"Recognize beyond-elements: courts, rhythms, negative space, topology",
-        "Compare how small voxel rules scale into larger spatial grammar"
-	  ]
+	  "learning_objectives": ["Recognize between-elements: joints, apertures, corridor transitions","Recognize beyond-elements: courts, rhythms, negative space, topology","Compare how small voxel rules scale into larger spatial grammar"]
 	}
   },
   "utility_definitions": {
@@ -36,31 +32,15 @@
 	"summary": "Module-derived spatial grammar playground built from voxel_grammar_subset.json",
 	"layout": "4x5 station grid with progression from between to beyond",
 	"objective": "Walk and compare module families as playable architectural rules",
-	"key_elements": [
-	  "20 stamped modules from voxel_grammar_subset priority_batch",
-	  "Spawn at northwest corner; teleporter at southeast corner",
-      "Annotation boards and text markers separate between vs beyond zones"
-	]
+	"key_elements": ["20 stamped modules from voxel_grammar_subset priority_batch","Spawn at northwest corner; teleporter at southeast corner","Annotation boards and text markers separate between vs beyond zones"]
   },
   "lighting": {
-	"ambient_color": [
-	  0.4,
-	  0.4,
-	  0.5
-	],
+	"ambient_color": [0.4,0.4,0.5],
 	"ambient_energy": 0.6,
 	"directional_light": {
 	  "enabled": true,
-	  "direction": [
-		-0.4,
-		-0.7,
-		-0.4
-	  ],
-	  "color": [
-		1,
-		0.9,
-		0.8
-	  ],
+	  "direction": [-0.4,-0.7,-0.4],
+	  "color": [1,0.9,0.8],
 	  "energy": 1.2
 	}
   },
@@ -71,11 +51,7 @@
 	"enable_physics": true,
 	"background": {
 	  "type": "sky",
-	  "color": [
-		0.2,
-		0.3,
-		0.7
-	  ]
+	  "color": [0.2,0.3,0.7]
 	}
   },
   "layers": {

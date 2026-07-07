@@ -1,0 +1,5 @@
+A seven-bay facade with a projecting central pavilion. Paired columns flanking the centre, single columns at the wings. A broken pediment over the central window — its curved cornice interrupted to make room for a sculpted figure. The same six compositional moves as the Classical facade across the room, but here every dial is turned past polite.
+
+This is the principle dramatized. Bernini at St. Peter's, the Roman Counter-Reformation arguing through architecture for an audience that needed to be persuaded. Not rule-breaking — *rule-operated-at-intensity*. The bay rhythm is still bay rhythm, but it groups. The hierarchy is still hierarchy, but it projects forward physically. The column order is still Corinthian, but the columns pair up around the centre.
+
+The grammar holds. That's the point. Walk this facade and notice what the rule will tolerate — which is more than the Classical room suggested. Theatrical density without rule-breaking. The next two maps (Venetian Gothic, Naples Rustication) will deviate along different axes, but Baroque's deviation is the most quintessential: the same rule, *louder*.

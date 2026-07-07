@@ -1,0 +1,141 @@
+{
+  "_meta": {
+    "schema_version": "beats/0.1",
+    "schema_doc": "doc/beats/schema.md",
+    "sequence": "postfoundationscrisis",
+    "phase": "synthesis",
+    "description": "The sequence that lands the thesis. The foundations crisis showed that every formal system has an outside. These maps walk what becomes possible once you stop demanding completeness: ethics as archite…",
+    "_draft": true,
+    "_draft_origin": "tools/draft_beats.py — refine via /beats editor"
+  },
+  "beats": [
+    {
+      "id": "Z0",
+      "role": "GATEWAY",
+      "concept": "entering postfoundationscrisis — the substrate shifts",
+      "register": "structural",
+      "intensity": "low",
+      "maps": [],
+      "stage": "draft",
+      "next": "Z1"
+    },
+    {
+      "id": "Z1",
+      "role": "INTRODUCE",
+      "concept": "A room divided. The left half: spacious, five columns wide. The right half: cramped, two columns, same population. The bias is architectural before it is mathematical. Walk through it. Feel the allocation.",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "CriticalAlgorithms_Algorithmic_Bias_Visualization"
+      ],
+      "stage": "draft",
+      "next": "Z2",
+      "_concept_origin": "blurb"
+    },
+    {
+      "id": "Z2",
+      "role": "DEMONSTRATE",
+      "concept": "Every classifier has an outside.",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "CriticalAlgorithms_Applied_Ethics"
+      ],
+      "stage": "draft",
+      "next": "Z3",
+      "_concept_origin": "blurb"
+    },
+    {
+      "id": "Z3",
+      "role": "DEMONSTRATE",
+      "concept": "The Florensky sphere, wired into production.",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "SpeculativeComputation_Paraconsistent_Engineering"
+      ],
+      "stage": "draft",
+      "next": "Z4",
+      "_concept_origin": "blurb"
+    },
+    {
+      "id": "Z4",
+      "role": "DEMONSTRATE",
+      "concept": "There is no view from nowhere.",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "SpeculativeComputation_Situated_Computation"
+      ],
+      "stage": "draft",
+      "next": "Z5",
+      "_concept_origin": "blurb"
+    },
+    {
+      "id": "Z5",
+      "role": "DEMONSTRATE",
+      "concept": "No one system is complete. A commons might be.",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "SpeculativeComputation_Collective_Knowledge"
+      ],
+      "stage": "draft",
+      "next": "Z6",
+      "_concept_origin": "blurb"
+    },
+    {
+      "id": "Z6",
+      "role": "DEMONSTRATE",
+      "concept": "Deleuze and Guattari proposed a structure with no root, no trunk, no privileged path. The rhizome: any point connects to any other. Not a tree. Not a hierarchy. A cave system that grows the way thought should.",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "SpeculativeComputation_Rhizome_Network"
+      ],
+      "stage": "draft",
+      "next": "Z7",
+      "_concept_origin": "blurb"
+    },
+    {
+      "id": "Z7",
+      "role": "SYNTHESIZE",
+      "concept": "A laboratory. Benches at regulation height. Surfaces clean. Tools organized. The molecular designer sits at the center — a formal system made tangible, atoms snapping to valence rules, bonds obeying electron logic.",
+      "register": "synthesizing",
+      "intensity": "high",
+      "maps": [
+        "AdvancedLaboratory_Lab_Equipment_Simulation"
+      ],
+      "stage": "draft",
+      "next": "Z8",
+      "_concept_origin": "blurb"
+    },
+    {
+      "id": "Z8",
+      "role": "SYNTHESIZE",
+      "concept": "Knowing the limits of formalization, what do we build?",
+      "register": "synthesizing",
+      "intensity": "high",
+      "maps": [
+        "PostCrisis_Synthesis"
+      ],
+      "stage": "draft",
+      "next": "Z9",
+      "_concept_origin": "blurb"
+    },
+    {
+      "id": "Z9",
+      "role": "CHAMBER",
+      "concept": "the postfoundationscrisis principle held — carried forward",
+      "register": "synthesizing",
+      "intensity": "high",
+      "maps": [],
+      "stage": "draft",
+      "note": "no map yet — assign a Chamber_<seq> map or absorb into the last map-beat · auto-reciprocates inbound bleed_from references",
+      "next": null,
+      "bleed_to": [
+        "primitives"
+      ]
+    }
+  ]
+}

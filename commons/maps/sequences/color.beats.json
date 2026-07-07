@@ -1,0 +1,128 @@
+{
+  "_meta": {
+    "schema_version": "beats/0.1",
+    "schema_doc": "doc/beats/schema.md",
+    "sequence": "color",
+    "phase": "F_order",
+    "description": "The physics and perception of color. Light has wavelength, but color is what brains make of it. Explore RGB, HSV, and the gap between objective light and subjective experience.",
+    "_draft": true,
+    "_draft_origin": "tools/draft_beats.py — refine via /beats editor"
+  },
+  "beats": [
+    {
+      "id": "C0",
+      "role": "GATEWAY",
+      "concept": "entering color — the substrate shifts",
+      "register": "structural",
+      "intensity": "low",
+      "maps": [],
+      "stage": "draft",
+      "next": "C1"
+    },
+    {
+      "id": "C1",
+      "role": "INTRODUCE",
+      "concept": "A salon for digital fingers. The nail color controller offers precise hue selection while color balls scatter like polish bottles on a shelf. Choose a color, apply it to the hand model, watch pigment become identity.",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "Color_Nails"
+      ],
+      "stage": "draft",
+      "next": "C2",
+      "_concept_origin": "blurb"
+    },
+    {
+      "id": "C2",
+      "role": "DEMONSTRATE",
+      "concept": "The grid becomes a canvas. Each cell awaits its color assignment, a pixel in a larger pattern you construct. The gridcolorizer transforms the floor into a palette - systematic, addressable, yours to paint.",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "Color_Grid_Pallet"
+      ],
+      "stage": "draft",
+      "next": "C3",
+      "_concept_origin": "blurb"
+    },
+    {
+      "id": "C3",
+      "role": "DEMONSTRATE",
+      "concept": "Walk through light itself. Rainbow emitters line the corridor, cycling through the spectrum in slow waves. Red fades to orange fades to yellow - the continuous gradient made temporal.",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "Color_Rainbow"
+      ],
+      "stage": "draft",
+      "next": "C4",
+      "_concept_origin": "blurb"
+    },
+    {
+      "id": "C4",
+      "role": "DEMONSTRATE",
+      "concept": "Pillars of color rise along the runway, each a collection point for chromatic data. Grab the color sticks, watch the flashlight demo reveal how light creates color from darkness.",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "Color_Pillar"
+      ],
+      "stage": "draft",
+      "next": "C5",
+      "_concept_origin": "blurb"
+    },
+    {
+      "id": "C5",
+      "role": "DEMONSTRATE",
+      "concept": "Paint meets physics. The ball painting demo turns spheres into canvases, color into gesture. Throw paint, watch it splash, see how color accumulates on curved surfaces.",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "Color_Paint"
+      ],
+      "stage": "draft",
+      "next": "C6",
+      "_concept_origin": "blurb"
+    },
+    {
+      "id": "C6",
+      "role": "DEMONSTRATE",
+      "concept": "The hallway dissolves into rainbow. Color transitions seamlessly from hue to hue, boundary to boundary, without the discrete steps of individual emitters.",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "Color_Walls"
+      ],
+      "stage": "draft",
+      "next": "C7",
+      "_concept_origin": "blurb"
+    },
+    {
+      "id": "C7",
+      "role": "DEMONSTRATE",
+      "concept": "Light reveals color by adding wavelengths. The flashlight illuminates, and surfaces respond differently — some absorb, some reflect, some fluoresce. In darkness, color vanishes.",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "Color_Flashlight"
+      ],
+      "stage": "draft",
+      "next": "C8",
+      "_concept_origin": "blurb"
+    },
+    {
+      "id": "C8",
+      "role": "CHAMBER",
+      "concept": "color — to be authored",
+      "register": "synthesizing",
+      "intensity": "high",
+      "maps": [],
+      "stage": "draft",
+      "next": null,
+      "bleed_to": [
+        "wavefunctions"
+      ],
+      "note": "auto-reciprocates inbound bleed_from references"
+    }
+  ]
+}

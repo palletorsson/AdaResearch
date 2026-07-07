@@ -1,0 +1,5 @@
+A three-storey facade in smooth dressed marble. The ground floor: large flat panels of Carrara, each block polished to catch low Florentine light. Above it, the piano nobile with paired pilasters between rectangular windows, the marble continuing without bossing. A dentil cornice at the top. Symmetric. Five bays. Italian-Renaissance to the bone, Florentine in voice.
+
+This is the principle surfaced, in its marble register. Where the Naples palazzo a few maps back made the surface argue with diamond bossing — projecting carved pyramids, defensive-decorative, density-as-wealth — the Florentine palazzo argues differently. Same axis, same actualization mode (surface as voice), opposite material strategy: flatness, polish, smoothness, the cost held in what was *removed* from the stone rather than what was *added* to it.
+
+Florence and Naples both knew their walls were arguments. Both chose to argue at the surface. Both chose differently. The principle accommodates the difference; the surfaced tag has a range; the rule set names it. Walk the marble, then think of the diamonds.

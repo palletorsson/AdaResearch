@@ -1,0 +1,19 @@
+{
+	"pass_id": "2026-05-13T10-35-00_phase-e-entropy",
+	"proposals": [
+		{
+			"pass_id": "2026-05-13T10-35-00_phase-e-entropy",
+			"move_id": "cellularautomata-0",
+			"change": "cellularautomata",
+			"from_state": "order 9, phase E_entropy",
+			"to_state": "order 10, phase lambda_edge",
+			"impact": "medium — opens λ_edge with CA's universality",
+			"rationale_excerpt": "ruth statement for randomness\n\nIt's currently empty. Drafted: *\"Entropy is not destruction — entropy is possibility space. Where prediction fails, where indices break, where normalization is refused, that is wilderness.\"* (matches the spine's description but compresses it for `truth` field.)\n\n### 6d. Phase truth statement (E_entropy after reorder)\n\nAfter CA moves out, E_entropy holds randomness + noise. Phase truth:\n*\"Disorder is a creative force. First, pure: any state equally possible. Then, structured: disorder that remembers continuity. Two sequences; both teach how possibility shapes.\"*\n\n## 7. Reorder candidates\n\n| change | from | to | impact |\n|---|---|---|---|\n| **cellularautomata** | order 9, phase E_entropy | order 10, phase lambda_edge | medium — opens λ_edge with CA's universality |\n\nThe other E_entropy sequences stay.\n\n## 8. Verdict\n\nPhase passes the sieve **under reordering**. Three sequences declared as E_entropy; only two truly are. CA's natural home is λ_edge. With CA moved, both phases tighten:\n- **E_entropy**: 2 sequences, both about possibility-space and its constraints\n- **λ_edge**: 6 sequences, all about emergence from constrained entropy\n\nLoad-bearing rule out",
+			"status": "applied",
+			"applied_at": "2026-05-13T10:55:48",
+			"applied_by": "backfill (tonight session, pre-substrate)",
+			"pre_existing": true,
+			"notes": "CA moved from E_entropy to lambda_edge (kept at order 9 per macro)"
+		}
+	]
+}

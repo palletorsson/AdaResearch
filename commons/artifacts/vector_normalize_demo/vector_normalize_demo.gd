@@ -21,13 +21,14 @@ class_name VectorNormalizeDemo
 var vector_v: Node3D
 var unit_vector: Node3D
 var unit_sphere: MeshInstance3D
-var info_label: Label3D
+var info_label: Label
 var unit_label: Label3D
 
 # Cached references
 var _cached_vector_nodes: Dictionary = {}
 var _cached_unit_nodes: Dictionary = {}
 
+const ControlPanelScript = preload("res://commons/ui/control_panel.gd")
 var _sphere_slider: Node
 
 func _ready():
@@ -216,14 +217,14 @@ func _update_unit_label(vec: Vector3):
 		unit_label.visible = false
 
 func _setup_controls():
-	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
-	var panel: Node3D = RackTpl.create_panel("NORMALIZE", [
-		[{"type": "slider_h", "label": "SPHERE", "default": 0.5}],
-	])
+	# Canonical Braun ControlPanel (was a RackTemplates panel).
+	var panel = ControlPanelScript.new()
+	panel.title = "NORMALIZE"
 	panel.position = Vector3(0, 0.5, 0.6)
-	panel.rotation_degrees = Vector3(-25, 0, 0)
 	add_child(panel)
-	_sphere_slider = panel.find_child("Param_0", true, false)
+	_sphere_slider = panel.add_slider("SPHERE", "SPHERE")
+	if _sphere_slider and _sphere_slider.has_method("set_normalized_value"):
+		_sphere_slider.set_normalized_value(0.5)
 	if _sphere_slider and _sphere_slider.has_signal("slider_moved"):
 		_sphere_slider.slider_moved.connect(_on_sphere_opacity_changed)
 

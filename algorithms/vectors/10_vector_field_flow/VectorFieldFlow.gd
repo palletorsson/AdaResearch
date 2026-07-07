@@ -22,7 +22,7 @@ var field_vectors: Array[Node3D] = []  # kept for compatibility but unused with 
 var particle: Node3D
 var particle_velocity: Vector3 = Vector3.ZERO
 var particle_position: Vector3 = Vector3.ZERO
-var info_label: Label3D
+var info_label: Label
 var elapsed := 0.0
 
 # MultiMesh for field arrows — replaces 81 line scenes with 2 draw calls

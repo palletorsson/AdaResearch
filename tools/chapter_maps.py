@@ -28,8 +28,8 @@ BASE_DIR = os.path.join(REPO, "doc", "book", "baselines")
 OUT = os.path.join(REPO, "doc", "book", "chapter_maps.json")
 CAP = 10
 
-SPINE = ["primitives", "transformation", "array_tutorial", "color", "change",
-         "isosurfaces", "boolean_surfaces", "forces", "wavefunctions", "randomness",
+SPINE = ["primitives", "transformation", "symmetry", "array_tutorial", "color", "change",
+         "isosurfaces", "boolean_surfaces", "forces", "formfinding", "wavefunctions", "randomness",
          "noise", "cellularautomata", "fractals", "lsystems", "proceduralgeneration",
          "swarmintelligence", "softbodies", "machinelearning", "graphtheory",
          "foundationscrisis", "qfeplaboratory", "postfoundationscrisis"]

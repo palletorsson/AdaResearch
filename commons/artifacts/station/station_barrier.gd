@@ -195,6 +195,9 @@ func _build() -> void:
 			add_child(_box(Vector3(-pw_plate * 0.5 - ft * 0.5, h * 0.5, fz), Vector3(ft, 0.16, 0.012), fr))
 			add_child(_box(Vector3(pw_plate * 0.5 + ft * 0.5, h * 0.5, fz), Vector3(ft, 0.16, 0.012), fr))
 
+	# Solid in-game: a thin collider along the barrier so it actually stops you.
+	add_child(HangarKit.box_collider(Vector3(w, h, 0.2), Vector3(0, h * 0.5, 0)))
+
 func _build_post(x: float, h: float, pw: float, post_mat: Material, trim_mat: Material, acc_c: Color) -> void:
 	if post_style == "bevelled":
 		# Slim shaft + a wider chamfer collar near the base + a tapered cap block.

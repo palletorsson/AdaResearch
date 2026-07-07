@@ -1,0 +1,47 @@
+{
+	"pass_id": "2026-05-13T10-45-00_phase-integration",
+	"proposals": [
+		{
+			"pass_id": "2026-05-13T10-45-00_phase-integration",
+			"move_id": "swarmintelligence-0",
+			"change": "swarmintelligence",
+			"from_state": "order 14, phase integration",
+			"to_state": "order 14, phase λ_edge",
+			"impact": "clean — moves with phase pointer only, order unchanged",
+			"rationale_excerpt": "earning.json has `artifact_groups` both nested (empty arrays) and at root (populated). Pick one source of truth (root has the data) and delete the nested empty version. Bug-fix scope, not sieve scope, but flagging.\n\n### 6e. Catalyst affordances at integration\n\nFollowing the pattern from λ_edge sieve:\n- softbodies → `flex` or `drape` — the player throws cloth/jelly; matter deforms and finds shape\n- machinelearning → `learn` — the player marks input/output pairs; the bracelet learns the mapping\n\n(Swarm's affordance `flock` moves with it to λ_edge; graph's `connect` lands wherever graph lands.)\n\n## 7. Reorder candidates\n\n| change | from | to | impact |\n|---|---|---|---|\n| **swarmintelligence** | order 14, phase integration | order 14, phase λ_edge | clean — moves with phase pointer only, order unchanged |\n| **graphtheory** | order 19, phase integration | order 18, phase relation (or hinge) | medium — terminal slot vacated; postfoundationscrisis becomes new terminus |\n| **machinelearning** | duplicate artifact_groups | single root-level block | bug-fix |\n\nAfter moves, integration is **2 sequences** (softbodies + ML). A tight phase. λ_edge grows to 5. Relation is a 1-sequence hinge.\n\n##",
+			"status": "applied",
+			"applied_at": "2026-05-13T10:55:48",
+			"applied_by": "backfill (tonight session, pre-substrate)",
+			"pre_existing": true,
+			"notes": "swarm moved from integration order 14 to lambda_edge order 13"
+		},
+		{
+			"pass_id": "2026-05-13T10-45-00_phase-integration",
+			"move_id": "graphtheory-1",
+			"change": "graphtheory",
+			"from_state": "order 19, phase integration",
+			"to_state": "order 18, phase relation (or hinge)",
+			"impact": "medium — terminal slot vacated; postfoundationscrisis becomes new terminus",
+			"rationale_excerpt": "earning.json has `artifact_groups` both nested (empty arrays) and at root (populated). Pick one source of truth (root has the data) and delete the nested empty version. Bug-fix scope, not sieve scope, but flagging.\n\n### 6e. Catalyst affordances at integration\n\nFollowing the pattern from λ_edge sieve:\n- softbodies → `flex` or `drape` — the player throws cloth/jelly; matter deforms and finds shape\n- machinelearning → `learn` — the player marks input/output pairs; the bracelet learns the mapping\n\n(Swarm's affordance `flock` moves with it to λ_edge; graph's `connect` lands wherever graph lands.)\n\n## 7. Reorder candidates\n\n| change | from | to | impact |\n|---|---|---|---|\n| **swarmintelligence** | order 14, phase integration | order 14, phase λ_edge | clean — moves with phase pointer only, order unchanged |\n| **graphtheory** | order 19, phase integration | order 18, phase relation (or hinge) | medium — terminal slot vacated; postfoundationscrisis becomes new terminus |\n| **machinelearning** | duplicate artifact_groups | single root-level block | bug-fix |\n\nAfter moves, integration is **2 sequences** (softbodies + ML). A tight phase. λ_edge grows to 5. Relation is a 1-sequence hinge.\n\n##",
+			"status": "applied",
+			"applied_at": "2026-05-13T10:55:48",
+			"applied_by": "backfill (tonight session, pre-substrate)",
+			"pre_existing": true,
+			"notes": "graphtheory moved from integration order 19 to new relation phase order 16"
+		},
+		{
+			"pass_id": "2026-05-13T10-45-00_phase-integration",
+			"move_id": "machinelearning-2",
+			"change": "machinelearning",
+			"from_state": "duplicate artifact_groups",
+			"to_state": "single root-level block",
+			"impact": "bug-fix",
+			"rationale_excerpt": "earning.json has `artifact_groups` both nested (empty arrays) and at root (populated). Pick one source of truth (root has the data) and delete the nested empty version. Bug-fix scope, not sieve scope, but flagging.\n\n### 6e. Catalyst affordances at integration\n\nFollowing the pattern from λ_edge sieve:\n- softbodies → `flex` or `drape` — the player throws cloth/jelly; matter deforms and finds shape\n- machinelearning → `learn` — the player marks input/output pairs; the bracelet learns the mapping\n\n(Swarm's affordance `flock` moves with it to λ_edge; graph's `connect` lands wherever graph lands.)\n\n## 7. Reorder candidates\n\n| change | from | to | impact |\n|---|---|---|---|\n| **swarmintelligence** | order 14, phase integration | order 14, phase λ_edge | clean — moves with phase pointer only, order unchanged |\n| **graphtheory** | order 19, phase integration | order 18, phase relation (or hinge) | medium — terminal slot vacated; postfoundationscrisis becomes new terminus |\n| **machinelearning** | duplicate artifact_groups | single root-level block | bug-fix |\n\nAfter moves, integration is **2 sequences** (softbodies + ML). A tight phase. λ_edge grows to 5. Relation is a 1-sequence hinge.\n\n##",
+			"status": "deferred",
+			"applied_at": null,
+			"applied_by": null,
+			"pre_existing": true,
+			"notes": "machinelearning artifact_groups schema duplication NOT YET FIXED — manual cleanup deferred"
+		}
+	]
+}

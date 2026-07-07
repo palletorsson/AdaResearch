@@ -14,11 +14,7 @@
       "difficulty": "gallery",
       "category": "gallery",
       "estimated_time": "8-12 minutes",
-      "learning_objectives": [
-        "Browse 24 Misc artifacts",
-        "Identify artifacts for placement in curriculum maps",
-        "Observe artifact visual and interaction patterns"
-      ]
+      "learning_objectives": ["Browse 24 Misc artifacts","Identify artifacts for placement in curriculum maps","Observe artifact visual and interaction patterns"]
     },
     "title": "Misc Artifact Gallery"
   },
@@ -45,32 +41,16 @@
     "enable_physics": true,
     "background": {
       "type": "sky",
-      "color": [
-        0.3,
-        0.3,
-        0.35
-      ]
+      "color": [0.3,0.3,0.35]
     }
   },
   "lighting": {
-    "ambient_color": [
-      0.5,
-      0.5,
-      0.55
-    ],
+    "ambient_color": [0.5,0.5,0.55],
     "ambient_energy": 0.7,
     "directional_light": {
       "enabled": true,
-      "direction": [
-        -0.3,
-        -0.8,
-        -0.3
-      ],
-      "color": [
-        1.0,
-        0.95,
-        0.9
-      ],
+      "direction": [-0.3,-0.8,-0.3],
+      "color": [1.0,0.95,0.9],
       "energy": 0.8
     }
   },

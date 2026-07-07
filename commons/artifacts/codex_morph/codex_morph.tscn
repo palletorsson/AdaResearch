@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bcodexmorph01mg"]
+
+[ext_resource type="Script" path="res://commons/artifacts/codex_morph/codex_morph.gd" id="1_codexmorph"]
+
+[node name="CodexMorph" type="Node3D"]
+script = ExtResource("1_codexmorph")

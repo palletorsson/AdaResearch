@@ -1,0 +1,125 @@
+{
+  "_meta": {
+    "schema_version": "beats/0.1",
+    "schema_doc": "doc/beats/schema.md",
+    "sequence": "transformation",
+    "phase": "F_order",
+    "description": "Beat score for transformation — rigid motions in 3D. Translation, rotation, scale. The player learns the three primary transformations + their composition, ending in the Trans_Pit limit case."
+  },
+  "beats": [
+    {
+      "id": "T0",
+      "role": "GATEWAY",
+      "concept": "arrival from primitives — the static shape is about to move",
+      "register": "structural",
+      "intensity": "low",
+      "maps": [],
+      "bleed_from": [
+        "primitives"
+      ],
+      "next": "T1"
+    },
+    {
+      "id": "T1",
+      "role": "INTRODUCE",
+      "concept": "the three rigid motions — translation, rotation, scale; the grammar of motion",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "Trans_Introduction"
+      ],
+      "bleed_to": [
+        "primitives"
+      ],
+      "note": "reciprocates primitives.P7 bleed — the static cube finds its mover",
+      "next": "T2"
+    },
+    {
+      "id": "T2",
+      "role": "DEMONSTRATE",
+      "concept": "translation — sliding along an axis without changing form",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "Trans_Translation"
+      ],
+      "next": "T3"
+    },
+    {
+      "id": "T3",
+      "role": "VARIATE",
+      "concept": "axis decomposition — translation along x, y, z separately",
+      "register": "teaching",
+      "intensity": "medium",
+      "maps": [
+        "Trans_AxisDecomposition"
+      ],
+      "next": "T4"
+    },
+    {
+      "id": "T4",
+      "role": "DEMONSTRATE",
+      "concept": "rotation — the circle hidden inside motion",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "Trans_Rotation"
+      ],
+      "bleed_to": [
+        "wavefunctions"
+      ],
+      "note": "rotation foreshadows wavefunctions — the unit circle returns there",
+      "next": "T5"
+    },
+    {
+      "id": "T5",
+      "role": "VARIATE",
+      "concept": "rotation spectacle — the range of rotational expression, dramatized",
+      "register": "exploring",
+      "intensity": "medium",
+      "maps": [
+        "Trans_RotationSpectacle"
+      ],
+      "next": "T6"
+    },
+    {
+      "id": "T6",
+      "role": "DEMONSTRATE",
+      "concept": "scale — uniform and non-uniform dilation",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "Trans_Scale"
+      ],
+      "next": "T7"
+    },
+    {
+      "id": "T7",
+      "role": "LIMIT",
+      "concept": "Trans_Pit — when transformations compose against geometry; the architectural pit where motion is constrained",
+      "register": "reflecting",
+      "intensity": "high",
+      "maps": [
+        "Trans_Pit"
+      ],
+      "bleed_from": [
+        "foundationscrisis"
+      ],
+      "note": "the limit of pure rigid motion — anticipates the crisis phase",
+      "next": "T8"
+    },
+    {
+      "id": "T8",
+      "role": "CHAMBER",
+      "concept": "synthesis — the player carries translation + rotation + scale forward as a unified vocabulary",
+      "register": "synthesizing",
+      "intensity": "high",
+      "maps": [],
+      "bleed_to": [
+        "randomness"
+      ],
+      "note": "rigid motion seeds randomness.R5 — random XYZ rotation is the entropic descendant",
+      "next": null
+    }
+  ]
+}

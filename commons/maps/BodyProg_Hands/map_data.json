@@ -15,11 +15,7 @@
       "difficulty": "beginner",
       "category": "bodyprogression",
       "estimated_time": "3-5 minutes",
-      "learning_objectives": [
-        "Hand presence in VR",
-        "Nail color customization",
-        "Mirror interaction"
-      ]
+      "learning_objectives": ["Hand presence in VR","Nail color customization","Mirror interaction"]
     }
   },
   "utility_definitions": {
@@ -42,30 +38,15 @@
     "summary": "BodyProg_Hands - Introduction to VR embodiment through floating hands",
     "layout": "Dark void room with a central mirror and color picker",
     "objective": "See your hands in the mirror. Customize nail color. Experience the body as fragments.",
-    "key_elements": [
-      "mirror_artifact - reflects player's floating hands",
-      "color_picker - nail color customization"
-    ]
+    "key_elements": ["mirror_artifact - reflects player's floating hands","color_picker - nail color customization"]
   },
   "lighting": {
-    "ambient_color": [
-      0.15,
-      0.1,
-      0.2
-    ],
+    "ambient_color": [0.15,0.1,0.2],
     "ambient_energy": 0.4,
     "directional_light": {
       "enabled": true,
-      "direction": [
-        0.0,
-        -1.0,
-        -0.3
-      ],
-      "color": [
-        0.8,
-        0.75,
-        0.9
-      ],
+      "direction": [0.0,-1.0,-0.3],
+      "color": [0.8,0.75,0.9],
       "energy": 0.6
     }
   },
@@ -76,11 +57,7 @@
     "enable_physics": true,
     "background": {
       "type": "sky",
-      "color": [
-        0.05,
-        0.02,
-        0.08
-      ]
+      "color": [0.05,0.02,0.08]
     }
   },
   "layers": {

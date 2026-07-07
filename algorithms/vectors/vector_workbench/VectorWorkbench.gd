@@ -42,7 +42,7 @@ var result_proj: Node3D      # proj_B(A) - projection of A onto B
 # Visual elements
 var angle_arc: MeshInstance3D
 var parallelogram: MeshInstance3D
-var info_label: Label3D
+var info_label: Label
 
 # Display modes
 enum Mode { ALL, ADDITION, DOT_PRODUCT, CROSS_PRODUCT, PROJECTION }

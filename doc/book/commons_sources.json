@@ -1,0 +1,971 @@
+{
+ "_doctrine": "THE COMMONS LEDGER — sources. The standing fourth question ('whose knowledge is this pressed from, and does the walk return it or enclose it?') made into data, beside the dig ledger. Each source names WHOSE knowledge an artifact's form was pressed from. Kinds: named (a credited individual), collective (the unnamed makers — the heart of the commons argument), mathematical (a result that belongs to everyone/no one), nature (a form pressed from the non-human world), institutional (a named organization). 'return': credited = the walk names it; anonymous = the walk uses the form but the makers stay nameless (the debt the ledger surfaces); commons = already common by nature. Mine with tools/build_commons_ledger.py.",
+ "sources": {
+  "pompeii_mosaicists": {
+   "kind": "collective",
+   "match": [
+    "Pompeii",
+    "opus sectile",
+    "opus spicatum",
+    "mosaic floor",
+    "tesserae"
+   ],
+   "tradition": "Roman floor mosaic",
+   "era": "1st c. BCE – 1st c. CE",
+   "pressed": "meander, basket-weave, windmill, chain-link tiling — pattern algorithms run in cut stone by workshop labor",
+   "return": "credited",
+   "note": "the meander ran the procedure two millennia before 'algorithm'; the makers are a workshop, not a name",
+   "credited_in": [
+    "Symmetry_Motif"
+   ],
+   "credited_note": "makers named in the walked turn (the return, 2026-07-08)"
+  },
+  "islamic_alhambra_artisans": {
+   "kind": "collective",
+   "match": [
+    "Alhambra",
+    "Islamic",
+    "p6m",
+    "girih",
+    "arabesque"
+   ],
+   "tradition": "Islamic geometric ornament",
+   "era": "8th–15th c.",
+   "pressed": "the seventeen wallpaper groups — the plane-symmetry census completed by hand under an aniconic constraint, centuries before group theory",
+   "return": "credited",
+   "note": "the one finished census in the book was closed by craftspeople, most unnamed",
+   "credited_in": [
+    "Symmetry_Seventeen",
+    "Symmetry_Glide"
+   ],
+   "credited_note": "makers named in the walked turn (the return, 2026-07-08)"
+  },
+  "persian_weavers": {
+   "kind": "collective",
+   "match": [
+    "Persian"
+   ],
+   "tradition": "Persian carpet & tapestry",
+   "era": "ancient–present",
+   "pressed": "warp/weft symmetry programs (p3, p4, p6) carried in loom labor",
+   "return": "credited",
+   "credited_in": [
+    "Symmetry_Translation"
+   ],
+   "credited_note": "makers named in the walked turn (the return, 2026-07-08)"
+  },
+  "japanese_tatami_makers": {
+   "kind": "collective",
+   "match": [
+    "tatami"
+   ],
+   "tradition": "tatami tiling",
+   "era": "traditional",
+   "pressed": "p3m1 packing constraint as domestic floor grammar",
+   "return": "credited",
+   "credited_in": [
+    "Symmetry_Group"
+   ],
+   "credited_note": "tatami mat-makers named in the Group turn (the return, 2026-07-08)"
+  },
+  "textile_weavers_loom": {
+   "kind": "collective",
+   "match": [
+    "loom",
+    "weave",
+    "warp",
+    "weft",
+    "carpet",
+    "textile",
+    "fabric bolt"
+   ],
+   "tradition": "weaving (largely women's labor)",
+   "era": "prehistoric–present",
+   "pressed": "the addressable grid — the loom as the first computer; the array before the array",
+   "return": "credited",
+   "note": "the arrays chapter's own critical heart",
+   "credited_in": [
+    "Array_Patterns",
+    "Symmetry_Translation",
+    "SoftBodies_Cloth_Physics"
+   ],
+   "credited_note": "makers named in the walked turn (the return, 2026-07-08)"
+  },
+  "anonymous_folk_pattern": {
+   "kind": "collective",
+   "match": [
+    "herringbone",
+    "brick",
+    "basket weave",
+    "masonry"
+   ],
+   "tradition": "vernacular building & craft",
+   "era": "deep time",
+   "pressed": "glide symmetry carried in brickwork and parquet by builders who never named it",
+   "return": "credited",
+   "credited_in": [
+    "Symmetry_Glide"
+   ],
+   "credited_note": "bricklayers/masons/parquet-layers named in the Glide turn (the return, 2026-07-08)"
+  },
+  "turing": {
+   "kind": "named",
+   "match": [
+    "Turing",
+    "reaction-diffusion",
+    "Gray-Scott",
+    "halting",
+    "morphogenesis"
+   ],
+   "tradition": "mathematics / computation",
+   "era": "1912–1954",
+   "pressed": "the halting limit AND reaction-diffusion morphogenesis — the two Turings the book meets",
+   "return": "credited"
+  },
+  "conway": {
+   "kind": "named",
+   "match": [
+    "Conway",
+    "Game of Life",
+    "B3/S23"
+   ],
+   "tradition": "mathematics",
+   "era": "1937–2020",
+   "pressed": "the Game of Life — emergence without a designer",
+   "return": "credited"
+  },
+  "wolfram": {
+   "kind": "named",
+   "match": [
+    "Wolfram",
+    "Rule 30",
+    "Rule 110",
+    "Rule 90",
+    "NKS"
+   ],
+   "tradition": "complexity science",
+   "era": "b.1959",
+   "pressed": "elementary CA, Rule 110 universality, Rule 90 = Sierpinski",
+   "return": "credited"
+  },
+  "mandelbrot": {
+   "kind": "named",
+   "match": [
+    "Mandelbrot"
+   ],
+   "tradition": "fractal geometry",
+   "era": "1924–2010",
+   "pressed": "the Mandelbrot set, fractal dimension, the coastline",
+   "return": "credited"
+  },
+  "cantor": {
+   "kind": "named",
+   "match": [
+    "Cantor"
+   ],
+   "tradition": "set theory",
+   "era": "1845–1918",
+   "pressed": "the middle-third set, the uncountable, dimension between integers",
+   "return": "credited"
+  },
+  "koch_helge": {
+   "kind": "named",
+   "match": [
+    "Koch"
+   ],
+   "tradition": "mathematics",
+   "era": "1870–1924",
+   "pressed": "the Koch curve — infinite length, finite area",
+   "return": "credited"
+  },
+  "sierpinski": {
+   "kind": "named",
+   "match": [
+    "Sierpinski",
+    "Sierpiński"
+   ],
+   "tradition": "mathematics",
+   "era": "1882–1969",
+   "pressed": "the gasket / triangle, the deletion fractal",
+   "return": "credited"
+  },
+  "menger": {
+   "kind": "named",
+   "match": [
+    "Menger"
+   ],
+   "tradition": "topology",
+   "era": "1902–1985",
+   "pressed": "the universal curve — all boundary, no interior",
+   "return": "credited"
+  },
+  "lindenmayer": {
+   "kind": "named",
+   "match": [
+    "Lindenmayer",
+    "L-system"
+   ],
+   "tradition": "theoretical biology",
+   "era": "1925–1989",
+   "pressed": "the rewriting grammar — growth as writing",
+   "return": "credited"
+  },
+  "escher": {
+   "kind": "named",
+   "match": [
+    "Escher"
+   ],
+   "tradition": "graphic art",
+   "era": "1898–1972",
+   "pressed": "the glide made visible — the artist who taught the group theorists to see",
+   "return": "credited"
+  },
+  "gaudi": {
+   "kind": "named",
+   "match": [
+    "Gaudi",
+    "Gaudí"
+   ],
+   "tradition": "architecture",
+   "era": "1852–1926",
+   "pressed": "form-finding by inverted hung chains — the catenary arch",
+   "return": "credited"
+  },
+  "frei_otto": {
+   "kind": "named",
+   "match": [
+    "Frei Otto",
+    "soap film tent"
+   ],
+   "tradition": "architecture",
+   "era": "1925–2015",
+   "pressed": "minimal-surface roofs found by soap film",
+   "return": "credited"
+  },
+  "calder": {
+   "kind": "named",
+   "match": [
+    "Calder"
+   ],
+   "tradition": "sculpture",
+   "era": "1898–1976",
+   "pressed": "the balanced mobile — equilibrium as art, tau = w*d",
+   "return": "credited"
+  },
+  "darcy_thompson": {
+   "kind": "named",
+   "match": [
+    "Thompson",
+    "On Growth and Form",
+    "Growth and Form"
+   ],
+   "tradition": "mathematical biology",
+   "era": "1860–1948",
+   "pressed": "form as a fossil of forces — biology's shapes as physics",
+   "return": "credited"
+  },
+  "haeckel": {
+   "kind": "named",
+   "match": [
+    "Haeckel",
+    "Kunstformen",
+    "radiolaria",
+    "radiolarian"
+   ],
+   "tradition": "biology / illustration",
+   "era": "1834–1919",
+   "pressed": "the radiolarian's silica geometry — nature's form drawn as art",
+   "return": "credited"
+  },
+  "fontana": {
+   "kind": "named",
+   "match": [
+    "Fontana",
+    "puncture",
+    "Spatialism",
+    "the slash"
+   ],
+   "tradition": "art (Spatialism)",
+   "era": "1899–1968",
+   "pressed": "the cut — the point as a wound to the plane",
+   "return": "credited"
+  },
+  "klee": {
+   "kind": "named",
+   "match": [
+    "Klee",
+    "walking line",
+    "walking point"
+   ],
+   "tradition": "art (Bauhaus)",
+   "era": "1879–1940",
+   "pressed": "the line as a walk — drawing as time",
+   "return": "credited"
+  },
+  "durer": {
+   "kind": "named",
+   "match": [
+    "Dürer",
+    "Durer",
+    "Melencolia"
+   ],
+   "tradition": "art",
+   "era": "1471–1528",
+   "pressed": "Melencolia's polyhedron — completion as mourning",
+   "return": "credited"
+  },
+  "pollock": {
+   "kind": "named",
+   "match": [
+    "Pollock"
+   ],
+   "tradition": "art (Abstract Expressionism)",
+   "era": "1912–1956",
+   "pressed": "the drip — chance as painting",
+   "return": "credited"
+  },
+  "bernini": {
+   "kind": "named",
+   "match": [
+    "Bernini"
+   ],
+   "tradition": "Baroque sculpture",
+   "era": "1598–1680",
+   "pressed": "the marble the noise chapter dissolves — the classical against the procedural",
+   "return": "credited"
+  },
+  "serafini": {
+   "kind": "named",
+   "match": [
+    "Serafini",
+    "Codex Seraphinianus"
+   ],
+   "tradition": "art / artists' book",
+   "era": "b.1949",
+   "pressed": "the uncanny-functional, the surreal specimen",
+   "return": "credited"
+  },
+  "mondrian": {
+   "kind": "named",
+   "match": [
+    "Mondrian",
+    "De Stijl"
+   ],
+   "tradition": "art (De Stijl)",
+   "era": "1872–1944",
+   "pressed": "primary + orthogonal as ideology",
+   "return": "credited"
+  },
+  "rothko": {
+   "kind": "named",
+   "match": [
+    "Rothko"
+   ],
+   "tradition": "art (Color Field)",
+   "era": "1903–1970",
+   "pressed": "hue as grief and immersion",
+   "return": "credited"
+  },
+  "albers": {
+   "kind": "named",
+   "match": [
+    "Albers",
+    "Homage to the Square"
+   ],
+   "tradition": "art / color theory",
+   "era": "1888–1976",
+   "pressed": "color is relational, not absolute",
+   "return": "credited"
+  },
+  "kandinsky": {
+   "kind": "named",
+   "match": [
+    "Kandinsky"
+   ],
+   "tradition": "art (Bauhaus)",
+   "era": "1866–1944",
+   "pressed": "the synesthetic triad — yellow=triangle",
+   "return": "credited"
+  },
+  "bauhaus_school": {
+   "kind": "collective",
+   "match": [
+    "Bauhaus"
+   ],
+   "tradition": "design school",
+   "era": "1919–1933",
+   "pressed": "the discipline half of the same-group / opposed-ideology pair",
+   "return": "credited"
+  },
+  "memphis_group": {
+   "kind": "collective",
+   "match": [
+    "Memphis"
+   ],
+   "tradition": "design collective",
+   "era": "1980s",
+   "pressed": "the refusal half of the same-group pair",
+   "return": "credited"
+  },
+  "le_corbusier": {
+   "kind": "named",
+   "match": [
+    "Modulor",
+    "Corbusier"
+   ],
+   "tradition": "architecture",
+   "era": "1887–1965",
+   "pressed": "the Modulor — measure as the body legislated",
+   "return": "credited"
+  },
+  "deleuze_guattari": {
+   "kind": "named",
+   "match": [
+    "Deleuze",
+    "Guattari",
+    "rhizome"
+   ],
+   "tradition": "philosophy",
+   "era": "20th c.",
+   "pressed": "the rhizome — structure with no root",
+   "return": "credited"
+  },
+  "haraway": {
+   "kind": "named",
+   "match": [
+    "Haraway",
+    "situated",
+    "god-trick"
+   ],
+   "tradition": "feminist STS",
+   "era": "b.1944",
+   "pressed": "situated knowledge — objectivity as accounting for standpoint",
+   "return": "credited"
+  },
+  "florensky": {
+   "kind": "named",
+   "match": [
+    "Florensky",
+    "supralogic",
+    "paraconsist"
+   ],
+   "tradition": "theology / mathematics",
+   "era": "1882–1937",
+   "pressed": "A-and-not-A held without collapse",
+   "return": "credited"
+  },
+  "godel": {
+   "kind": "named",
+   "match": [
+    "Gödel",
+    "Godel",
+    "incompleteness"
+   ],
+   "tradition": "logic",
+   "era": "1906–1978",
+   "pressed": "the unprovable truth, the limit of formal systems",
+   "return": "credited"
+  },
+  "russell": {
+   "kind": "named",
+   "match": [
+    "Russell"
+   ],
+   "tradition": "logic",
+   "era": "1872–1970",
+   "pressed": "the set that breaks itself",
+   "return": "credited"
+  },
+  "euclid": {
+   "kind": "named",
+   "match": [
+    "Euclid",
+    "postulate"
+   ],
+   "tradition": "geometry",
+   "era": "c.300 BCE",
+   "pressed": "the axioms — the ground and its parallel crack",
+   "return": "credited"
+  },
+  "poincare": {
+   "kind": "named",
+   "match": [
+    "Poincaré",
+    "Poincare"
+   ],
+   "tradition": "mathematics",
+   "era": "1854–1912",
+   "pressed": "the disk — the limit made walkable",
+   "return": "credited"
+  },
+  "langton": {
+   "kind": "named",
+   "match": [
+    "Langton",
+    "edge of chaos",
+    "lambda"
+   ],
+   "tradition": "artificial life",
+   "era": "b.1948",
+   "pressed": "the edge of chaos, lambda parameter",
+   "return": "credited"
+  },
+  "kauffman": {
+   "kind": "named",
+   "match": [
+    "Kauffman",
+    "NK landscape"
+   ],
+   "tradition": "complexity biology",
+   "era": "b.1939",
+   "pressed": "self-organization at criticality",
+   "return": "credited"
+  },
+  "reynolds": {
+   "kind": "named",
+   "match": [
+    "Reynolds",
+    "boids"
+   ],
+   "tradition": "computer graphics",
+   "era": "b.1953",
+   "pressed": "boids — three rules make a flock",
+   "return": "credited"
+  },
+  "shannon": {
+   "kind": "named",
+   "match": [
+    "Shannon",
+    "entropy meter",
+    "H = "
+   ],
+   "tradition": "information theory",
+   "era": "1916–2001",
+   "pressed": "entropy as a measure in bits",
+   "return": "credited"
+  },
+  "foucault_michel": {
+   "kind": "named",
+   "match": [
+    "Foucault's grid",
+    "quantiz",
+    "Foucault"
+   ],
+   "tradition": "philosophy / physics (both Foucaults)",
+   "era": "20th c. / 1819–1868",
+   "pressed": "the grid's quantization (Michel) and the pendulum that shows the planet turn (Léon)",
+   "return": "credited"
+  },
+  "chladni": {
+   "kind": "named",
+   "match": [
+    "Chladni"
+   ],
+   "tradition": "acoustics",
+   "era": "1756–1827",
+   "pressed": "standing-wave figures on a plate",
+   "return": "credited"
+  },
+  "penrose": {
+   "kind": "named",
+   "match": [
+    "Penrose",
+    "aperiodic"
+   ],
+   "tradition": "mathematics",
+   "era": "b.1931",
+   "pressed": "aperiodic tiling — fivefold that cannot repeat",
+   "return": "credited"
+  },
+  "verlet": {
+   "kind": "named",
+   "match": [
+    "Verlet"
+   ],
+   "tradition": "computational physics",
+   "era": "b.1931",
+   "pressed": "the integrator every cloth relaxes under",
+   "return": "credited"
+  },
+  "markov": {
+   "kind": "named",
+   "match": [
+    "Markov"
+   ],
+   "tradition": "probability",
+   "era": "1856–1922",
+   "pressed": "the chain — next from current, memoryless",
+   "return": "credited"
+  },
+  "rand_corp": {
+   "kind": "institutional",
+   "match": [
+    "A Million Random Digits",
+    "million random digits",
+    "RAND Corporation",
+    "random_number_book",
+    "1955 table"
+   ],
+   "tradition": "think tank",
+   "era": "1955",
+   "pressed": "A Million Random Digits — chance frozen into a table",
+   "return": "credited"
+  },
+  "the_seventeen_groups": {
+   "kind": "mathematical",
+   "match": [
+    "wallpaper group",
+    "seventeen",
+    "plane symmetry",
+    "crystallographic"
+   ],
+   "tradition": "the mathematical commons",
+   "era": "timeless",
+   "pressed": "the census that closes — belongs to no one",
+   "return": "commons"
+  },
+  "the_catenary": {
+   "kind": "mathematical",
+   "match": [
+    "catenary",
+    "catenoid",
+    "hanging chain",
+    "minimal surface"
+   ],
+   "tradition": "the mathematical commons",
+   "era": "timeless",
+   "pressed": "the least-energy curve / least-area surface — solved by every chain and film",
+   "return": "commons"
+  },
+  "fibonacci_golden": {
+   "kind": "mathematical",
+   "match": [
+    "Fibonacci",
+    "golden ratio",
+    "golden angle",
+    "phyllotaxis",
+    "137.5",
+    "phi=",
+    "= phi",
+    "φ"
+   ],
+   "tradition": "the mathematical commons",
+   "era": "timeless (Leonardo of Pisa c.1170–1250 named the sequence Indian mathematicians knew earlier)",
+   "pressed": "the sequence and the golden angle — older than its European name",
+   "return": "commons",
+   "note": "the 'Fibonacci' sequence was documented by Pingala and Hemachandra in India centuries before Leonardo — the name encloses an older commons"
+  },
+  "the_variational_principle": {
+   "kind": "mathematical",
+   "match": [
+    "least action",
+    "variational",
+    "free energy minim",
+    "gradient descent",
+    "energy landscape"
+   ],
+   "tradition": "the mathematical commons",
+   "era": "timeless",
+   "pressed": "form as what minimizes — nature is lazy",
+   "return": "commons"
+  },
+  "romanesco_nature": {
+   "kind": "nature",
+   "match": [
+    "romanesco",
+    "phyllotaxis",
+    "cauliflower",
+    "pinecone",
+    "sunflower"
+   ],
+   "tradition": "the living world",
+   "era": "biological deep time",
+   "pressed": "phyllotaxis — the plant computes phi with no brain",
+   "return": "commons",
+   "note": "the deepest commons: form authored by no one, pressed from matter itself"
+  },
+  "honeycomb_nature": {
+   "kind": "nature",
+   "match": [
+    "honeycomb",
+    "hexagonal tessellation",
+    "hex floor"
+   ],
+   "tradition": "the living world",
+   "era": "biological deep time",
+   "pressed": "the hexagon — least wall for most cells, packing solved by bees",
+   "return": "commons"
+  },
+  "slime_mold": {
+   "kind": "nature",
+   "match": [
+    "Physarum",
+    "slime mold",
+    "slime-mold",
+    "mycelia",
+    "mold_network"
+   ],
+   "tradition": "the living world",
+   "era": "biological deep time",
+   "pressed": "computation without a brain — stigmergy, the substrate thinks",
+   "return": "commons"
+  },
+  "kente_weavers": {
+   "kind": "collective",
+   "match": [
+    "kente",
+    "Kente",
+    "Ashanti strip",
+    "Ewe strip"
+   ],
+   "tradition": "Kente strip-weaving (Ghana)",
+   "era": "17c–present",
+   "pressed": "narrow woven strips sewn edge-to-edge, each cloth a named proverb-pattern; block-and-stripe symmetry",
+   "return": "credited",
+   "note": "from the pattern atlas — pays when loom_kente is built",
+   "credited_in": [
+    "/pattern-atlas (procedural reproduction, makers named)"
+   ],
+   "credited_note": "rule reproduced procedurally in the gallery, 2026-07-08; in-game artifact still on the symmetry build list"
+  },
+  "ikat_dyers": {
+   "kind": "collective",
+   "match": [
+    "ikat",
+    "Ikat"
+   ],
+   "tradition": "Ikat resist-dye weaving (Indonesia / Central Asia / Japan / India)",
+   "era": "ancient–present",
+   "pressed": "pattern dyed into the threads BEFORE weaving — the seed encodes the cloth; the blur is the signature",
+   "return": "credited",
+   "note": "the loveliest symmetry/randomness rhyme: the plan precedes the fabric",
+   "credited_in": [
+    "/pattern-atlas (procedural reproduction, makers named)"
+   ],
+   "credited_note": "rule reproduced procedurally in the gallery, 2026-07-08; in-game artifact still on the symmetry build list"
+  },
+  "bingata_dyers": {
+   "kind": "collective",
+   "match": [
+    "bingata",
+    "Bingata",
+    "Ryukyu stencil"
+   ],
+   "tradition": "Bingata stencil-dyeing (Ryukyu / Okinawa)",
+   "era": "14c–present",
+   "pressed": "stencil-and-paste resist dyeing, bright repeats",
+   "return": "credited",
+   "credited_in": [
+    "/pattern-atlas (procedural reproduction, makers named)"
+   ],
+   "credited_note": "rule reproduced procedurally in the gallery, 2026-07-08; in-game artifact still on the symmetry build list"
+  },
+  "kanga_printers": {
+   "kind": "collective",
+   "match": [
+    "kanga",
+    "Kanga"
+   ],
+   "tradition": "Kanga printing (Swahili coast, East Africa)",
+   "era": "19c–present",
+   "pressed": "printed cotton: border + central motif + a jina (proverb) — text woven into pattern",
+   "return": "credited",
+   "credited_in": [
+    "/pattern-atlas (procedural reproduction, makers named)"
+   ],
+   "credited_note": "rule reproduced procedurally in the gallery, 2026-07-08; in-game artifact still on the symmetry build list"
+  },
+  "indigo_dyers": {
+   "kind": "collective",
+   "match": [
+    "aizome",
+    "adire",
+    "shibori",
+    "indigo resist"
+   ],
+   "tradition": "Indigo resist-dyeing (Japan / Yoruba Nigeria / worldwide)",
+   "era": "ancient–present",
+   "pressed": "fold/bind/stitch determines the symmetry of the resist",
+   "return": "credited",
+   "credited_in": [
+    "/pattern-atlas (procedural reproduction, makers named)"
+   ],
+   "credited_note": "rule reproduced procedurally in the gallery, 2026-07-08; in-game artifact still on the symmetry build list"
+  },
+  "tibetan_carpet_knotters": {
+   "kind": "collective",
+   "match": [
+    "Tibetan tiger",
+    "tiger rug",
+    "tiger carpet"
+   ],
+   "tradition": "Tibetan tiger-rug knotting",
+   "era": "traditional",
+   "pressed": "the tiger pelt abstracted to stripe fields — asymmetry inside a grid",
+   "return": "credited",
+   "credited_in": [
+    "/pattern-atlas (procedural reproduction, makers named)"
+   ],
+   "credited_note": "rule reproduced procedurally in the gallery, 2026-07-08; in-game artifact still on the symmetry build list"
+  },
+  "iznik_potters": {
+   "kind": "collective",
+   "match": [
+    "Iznik",
+    "iznik"
+   ],
+   "tradition": "Iznik tilework (Ottoman Turkey)",
+   "era": "16–17c",
+   "pressed": "fritware tiles, floral-geometric near-p4m/p6m repeats",
+   "return": "credited",
+   "credited_in": [
+    "/pattern-atlas (procedural reproduction, makers named)"
+   ],
+   "credited_note": "rule reproduced procedurally in the gallery, 2026-07-08; in-game artifact still on the symmetry build list"
+  },
+  "anni_albers": {
+   "kind": "named",
+   "match": [
+    "Anni Albers",
+    "On Weaving"
+   ],
+   "tradition": "Bauhaus / Black Mountain weaving",
+   "era": "1899–1994",
+   "pressed": "tessellation and thread as a formal grammar — the theory the weavers embodied",
+   "return": "credited",
+   "note": "ties the anonymous loom to the credited canon; a woman who wrote it down",
+   "credited_in": [
+    "/pattern-atlas (procedural reproduction, makers named)"
+   ],
+   "credited_note": "rule reproduced procedurally in the gallery, 2026-07-08; in-game artifact still on the symmetry build list"
+  },
+  "sonia_delaunay": {
+   "kind": "named",
+   "match": [
+    "Sonia Delaunay",
+    "Delaunay textile",
+    "Orphism"
+   ],
+   "tradition": "Orphism (textile + paint)",
+   "era": "1885–1979",
+   "pressed": "simultaneous colour, rhythmic geometric repeats",
+   "return": "credited",
+   "credited_in": [
+    "/pattern-atlas (procedural reproduction, makers named)"
+   ],
+   "credited_note": "rule reproduced procedurally in the gallery, 2026-07-08; in-game artifact still on the symmetry build list"
+  },
+  "reiko_sudo_nuno": {
+   "kind": "named",
+   "match": [
+    "Reiko Sudo",
+    "NUNO",
+    "Nuno textile"
+   ],
+   "tradition": "contemporary Japanese textile",
+   "era": "b.1953",
+   "pressed": "engineered cloth, weave-as-material-computation",
+   "return": "candidate",
+   "candidate": true
+  },
+  "maria_sibylla_merian": {
+   "kind": "named",
+   "match": [
+    "Merian",
+    "Sibylla",
+    "metamorphosis illustration"
+   ],
+   "tradition": "naturalist illustration",
+   "era": "1647–1717",
+   "pressed": "metamorphosis drawn from life — caterpillar/chrysalis/moth on its host plant as one system",
+   "return": "credited",
+   "note": "a woman naturalist two centuries early; the named companion to Haeckel",
+   "credited_in": [
+    "/pattern-atlas (procedural reproduction, makers named)"
+   ],
+   "credited_note": "rule reproduced procedurally in the gallery, 2026-07-08; in-game artifact still on the symmetry build list"
+  },
+  "vasarely": {
+   "kind": "named",
+   "match": [
+    "Vasarely"
+   ],
+   "tradition": "Op art",
+   "era": "1906–1997",
+   "pressed": "the deformed grid — figure emerging from pure periodic modulation",
+   "return": "credited",
+   "credited_in": [
+    "/pattern-atlas (procedural reproduction, makers named)"
+   ],
+   "credited_note": "rule reproduced procedurally in the gallery, 2026-07-08; in-game artifact still on the symmetry build list"
+  },
+  "ruth_asawa": {
+   "kind": "named",
+   "match": [
+    "Asawa",
+    "looped wire",
+    "looped-wire"
+   ],
+   "tradition": "looped-wire sculpture",
+   "era": "1926–2013",
+   "pressed": "a single continuous crochet of wire finding nested minimal volumes",
+   "return": "credited",
+   "note": "a woman, Japanese-American, interned as a child; a form-finding voltage piece",
+   "credited_in": [
+    "(artifact ruth_asawa_sculpture)"
+   ]
+  },
+  "bridget_riley": {
+   "kind": "named",
+   "match": [
+    "Bridget Riley",
+    "bridget_riley",
+    "Riley op"
+   ],
+   "tradition": "Op art",
+   "era": "b.1931",
+   "pressed": "perceptual pattern — the eye made to move by pure periodic modulation",
+   "return": "credited",
+   "credited_in": [
+    "(artifact bridget_riley_op_art)"
+   ],
+   "note": "already reproduced in Ada"
+  },
+  "kristina_torsson": {
+   "kind": "named",
+   "match": [
+    "Kristina Torsson",
+    "Vamlingbolaget",
+    "varma backen",
+    "Fjader pattern",
+    "Bonan pattern",
+    "mamma_monster"
+   ],
+   "tradition": "Swedish textile & fashion design (Mah-Jong, Vamlingbolaget)",
+   "era": "1966–present",
+   "pressed": "the winding organic line that suspends the grid's order; pattern as dream-catching ('att skapa monster ar som att forsoka fanga en drom'); the repeat as rhythm over cloth without visible seams",
+   "return": "credited",
+   "credited_in": [
+    "(artifact mamma_monster_gallery)",
+    "Mothers Dream (2023)"
+   ],
+   "note": "THE ORIGIN SOURCE — Ada Research begins in a landscape of her patterns; the project's first debt, returned by name"
+  },
+  "mah_jong_collective": {
+   "kind": "collective",
+   "match": [
+    "Mah-Jong",
+    "mahjong_rand",
+    "Henschen",
+    "Nygren"
+   ],
+   "tradition": "Mah-Jong (Swedish fashion collective: Kristina Torsson, Helena Henschen, Veronika Nygren)",
+   "era": "1966–",
+   "pressed": "design fused with ideology — soft colorful clothes meant to change people; the stripe as program",
+   "return": "credited",
+   "credited_in": [
+    "(artifact mamma_monster_gallery)"
+   ]
+  }
+ }
+}

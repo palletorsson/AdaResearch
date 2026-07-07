@@ -1,0 +1,128 @@
+{
+  "_meta": {
+    "title": "Ceiling DNA Library",
+    "purpose": "Ten curated ceiling configurations spanning the design space — sterile to industrial, liminal to clinical. Each entry is a complete `ceiling` block ready to drop into any map's `settings`. Mix preset (tile/light/grid scheme) with fixture preset (vents/sprinklers/sensors/speakers/panels). Same seed (42) across all entries so you can compare LAYOUT differences between mixes; bump the seed if you want a different distribution.",
+    "schema": "settings.ceiling fields documented in commons/grid/CEILING_SYSTEM.md",
+    "generated": "2026-05-27 auto-research pass"
+  },
+
+  "sterile_quarantine": {
+    "blurb": "Medical-grade quarantine chamber. Few visible vents, many smoke sensors, no speakers. Bright cool light, low ceiling. Reads as 'something is being watched here'.",
+    "ceiling": {
+      "preset": "laboratory",
+      "height": 4.0,
+      "light_spacing": 1,
+      "light_intensity": 2.2,
+      "pattern": "checkerboard",
+      "fixtures": { "seed": 42, "vents": 1, "sprinklers": 2, "sensors": 4, "speakers": 0, "panels": 2 }
+    }
+  },
+
+  "research_balanced": {
+    "blurb": "Standard university lab. Balanced mix — a couple of each fixture, regular light spacing. The neutral baseline; everything else is a deviation from this.",
+    "ceiling": {
+      "preset": "laboratory",
+      "height": 4.5,
+      "light_spacing": 1,
+      "light_intensity": 2.0,
+      "pattern": "checkerboard",
+      "fixtures": "research"
+    }
+  },
+
+  "industrial_warehouse": {
+    "blurb": "High ceiling, harsh sparse lights, ventilation everywhere. Reads as storage / manufacturing / loading bay. No speakers, no decorative panels — purely functional.",
+    "ceiling": {
+      "preset": "warehouse",
+      "height": 6.0,
+      "light_spacing": 4,
+      "light_intensity": 1.8,
+      "pattern": "random",
+      "fixtures": { "seed": 42, "vents": 8, "sprinklers": 6, "sensors": 2, "speakers": 0, "panels": 0 }
+    }
+  },
+
+  "liminal_dim": {
+    "blurb": "Backrooms / 3am institution. Sparse low light, a single distant speaker. Most fixtures absent — the emptiness IS the texture. Use for unsettling transitional spaces.",
+    "ceiling": {
+      "preset": "liminal",
+      "height": 4.0,
+      "light_spacing": 3,
+      "light_intensity": 0.9,
+      "pattern": "sine",
+      "fixtures": { "seed": 42, "vents": 2, "sprinklers": 0, "sensors": 2, "speakers": 1, "panels": 0 }
+    }
+  },
+
+  "broadcast_studio": {
+    "blurb": "PA-heavy announcement space. Many overhead speakers, accent panels for dramatic light. Reads as airport gate / lecture hall / control room.",
+    "ceiling": {
+      "preset": "laboratory",
+      "height": 4.0,
+      "light_spacing": 2,
+      "light_intensity": 1.8,
+      "pattern": "sparse",
+      "fixtures": { "seed": 42, "vents": 2, "sprinklers": 2, "sensors": 2, "speakers": 6, "panels": 3 }
+    }
+  },
+
+  "emergency_corridor": {
+    "blurb": "Fire-safety regs gone wild. Sprinklers + sensors everywhere, harsh bright light, low ceiling. Use for hazard zones, evacuation routes, the moment-before-disaster.",
+    "ceiling": {
+      "preset": "institutional",
+      "height": 3.5,
+      "light_spacing": 2,
+      "light_intensity": 2.5,
+      "pattern": "sparse",
+      "fixtures": { "seed": 42, "vents": 2, "sprinklers": 8, "sensors": 6, "speakers": 2, "panels": 0 }
+    }
+  },
+
+  "clinical_clean": {
+    "blurb": "Hospital / clinic. Many sensors (CO2, smoke, motion), measured sprinkler coverage, soft speakers for paging. High light density for surgical brightness.",
+    "ceiling": {
+      "preset": "office",
+      "height": 4.0,
+      "light_spacing": 1,
+      "light_intensity": 2.0,
+      "pattern": "checkerboard",
+      "fixtures": { "seed": 42, "vents": 1, "sprinklers": 4, "sensors": 8, "speakers": 2, "panels": 4 }
+    }
+  },
+
+  "server_room": {
+    "blurb": "Datacenter cold aisle. Maximum vents (cooling), heavy sprinklers (one fault and the whole rack burns), no speakers, no decoration. Functional only.",
+    "ceiling": {
+      "preset": "warehouse",
+      "height": 5.0,
+      "light_spacing": 2,
+      "light_intensity": 1.6,
+      "pattern": "random",
+      "fixtures": { "seed": 42, "vents": 10, "sprinklers": 5, "sensors": 4, "speakers": 0, "panels": 2 }
+    }
+  },
+
+  "gallery_showroom": {
+    "blurb": "Museum-grade exhibition. Sparse functional fixtures, many accent light panels for dramatic art lighting. Calm. Reads as 'observe carefully'.",
+    "ceiling": {
+      "preset": "office",
+      "height": 4.5,
+      "light_spacing": 3,
+      "light_intensity": 1.4,
+      "pattern": "sparse",
+      "fixtures": { "seed": 42, "vents": 1, "sprinklers": 2, "sensors": 2, "speakers": 2, "panels": 6 }
+    }
+  },
+
+  "maintenance_zone": {
+    "blurb": "Utility / mechanical room. Exposed vents, occasional sprinkler, single sensor, no decoration. Sparse harsh light. The unseen backside of the lab.",
+    "ceiling": {
+      "preset": "warehouse",
+      "height": 6.0,
+      "light_spacing": 5,
+      "light_intensity": 1.2,
+      "pattern": "random",
+      "fixtures": { "seed": 42, "vents": 4, "sprinklers": 2, "sensors": 1, "speakers": 0, "panels": 0 }
+    }
+  }
+}

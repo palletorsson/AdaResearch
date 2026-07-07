@@ -14,10 +14,7 @@
       "difficulty": "composed",
       "category": "narrative",
       "grammar": "linear",
-      "learning_objectives": [
-        "Experience linear spatial narrative",
-        "Encounter 6 artifacts in composed sequence"
-      ]
+      "learning_objectives": ["Experience linear spatial narrative","Encounter 6 artifacts in composed sequence"]
     },
     "title": "Linear — Simple Progression"
   },
@@ -27,47 +24,32 @@
       {
         "artifact": "coin_toss",
         "boundary": "preparation",
-        "transitions": [
-          "filter_sweep"
-        ]
+        "transitions": ["filter_sweep"]
       },
       {
         "artifact": "entropy_jar",
         "boundary": "arrival",
-        "transitions": [
-          "riser",
-          "crash"
-        ]
+        "transitions": ["riser","crash"]
       },
       {
         "artifact": "galton_board",
         "boundary": "departure",
-        "transitions": [
-          "downlifter"
-        ]
+        "transitions": ["downlifter"]
       },
       {
         "artifact": "dice_throw",
         "boundary": "arrival",
-        "transitions": [
-          "riser",
-          "crash"
-        ]
+        "transitions": ["riser","crash"]
       },
       {
         "artifact": "random_walk_terrarium",
         "boundary": "departure",
-        "transitions": [
-          "downlifter"
-        ]
+        "transitions": ["downlifter"]
       },
       {
         "artifact": "slot_machine",
         "boundary": "arrival",
-        "transitions": [
-          "riser",
-          "crash"
-        ]
+        "transitions": ["riser","crash"]
       }
     ]
   },
@@ -93,32 +75,16 @@
     "enable_physics": true,
     "background": {
       "type": "sky",
-      "color": [
-        0.25,
-        0.25,
-        0.3
-      ]
+      "color": [0.25,0.25,0.3]
     }
   },
   "lighting": {
-    "ambient_color": [
-      0.45,
-      0.45,
-      0.5
-    ],
+    "ambient_color": [0.45,0.45,0.5],
     "ambient_energy": 0.6,
     "directional_light": {
       "enabled": true,
-      "direction": [
-        -0.3,
-        -0.8,
-        -0.3
-      ],
-      "color": [
-        1.0,
-        0.95,
-        0.9
-      ],
+      "direction": [-0.3,-0.8,-0.3],
+      "color": [1.0,0.95,0.9],
       "energy": 0.8
     }
   },

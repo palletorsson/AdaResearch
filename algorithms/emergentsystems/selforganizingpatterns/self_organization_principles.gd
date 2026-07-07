@@ -13,6 +13,8 @@
 class_name SelfOrganizingPatterns
 extends Node3D
 
+const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
+
 # @identity
 # essence: three modes — stigmergy (deposit/evaporate field), Ising phase transition (spin flip via Metropolis), attractor basins (gradient descent on potential landscape)
 # desire: to push the Noise slider past the critical temperature and watch an ordered flock dissolve into chaos in real time — to hold the phase transition in your hand
@@ -76,11 +78,15 @@ var _graph_mi: MeshInstance3D
 var _mat_unshaded: StandardMaterial3D
 var _mat_alpha: StandardMaterial3D
 
-# Labels
-var _title_label: Label3D
-var _mode_label: Label3D
-var _info_label: Label3D
-var _stats_label: Label3D
+# Text boards (framed 2D-in-3D, R-027) — content rebuilt only when text changes
+var _header_root: Node3D
+var _info_root: Node3D
+var _stats_root: Node3D
+var _header_cache := ""
+var _info_cache := ""
+var _stats_cache := ""
+var _label_cooldown := 0.0
+const LABEL_REFRESH_INTERVAL := 0.25
 
 # VR controls
 var _control_rack: Node3D
@@ -198,36 +204,81 @@ func _create_mesh_instances() -> void:
 # =========================================================================
 
 func _create_labels() -> void:
-	_title_label = Label3D.new()
-	_title_label.text = "Self-Organizing Patterns"
-	_title_label.font_size = 48
-	_title_label.position = Vector3(0, field_size * 0.5 + 0.8, 0)
-	_title_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	_title_label.modulate = Color(0.9, 0.85, 0.7)
-	add_child(_title_label)
+	# Three framed dark boards (R-027): header (title + mode) at the top,
+	# info at the lower left, stats at the lower right. Board content is
+	# baked text, rebuilt only when the string changes (see _update_labels).
+	_header_root = Node3D.new()
+	_header_root.name = "HeaderBoard"
+	_header_root.position = Vector3(0, field_size * 0.5 + 0.6, 0)
+	add_child(_header_root)
 
-	_mode_label = Label3D.new()
-	_mode_label.font_size = 28
-	_mode_label.position = Vector3(0, field_size * 0.5 + 0.4, 0)
-	_mode_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	_mode_label.modulate = Color(0.7, 0.7, 0.8)
-	add_child(_mode_label)
+	_info_root = Node3D.new()
+	_info_root.name = "InfoBoard"
+	_info_root.position = Vector3(-field_size * 0.5 - 0.6, -field_size * 0.5, 0)
+	add_child(_info_root)
 
-	_info_label = Label3D.new()
-	_info_label.font_size = 22
-	_info_label.position = Vector3(-field_size * 0.5 - 0.6, -field_size * 0.5, 0)
-	_info_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	_info_label.modulate = Color(0.6, 0.7, 0.8)
-	add_child(_info_label)
-
-	_stats_label = Label3D.new()
-	_stats_label.font_size = 22
-	_stats_label.position = Vector3(field_size * 0.5 + 0.6, -field_size * 0.5, 0)
-	_stats_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	_stats_label.modulate = Color(0.7, 0.8, 0.6)
-	add_child(_stats_label)
+	_stats_root = Node3D.new()
+	_stats_root.name = "StatsBoard"
+	_stats_root.position = Vector3(field_size * 0.5 + 0.6, -field_size * 0.5, 0)
+	add_child(_stats_root)
 
 	_update_labels()
+
+
+func _rebuild_header(mode_text: String) -> void:
+	for child in _header_root.get_children():
+		child.queue_free()
+	_header_root.add_child(_plate(Vector3(3.2, 0.62, 0.05)))
+	var title: MeshInstance3D = BakedText.make_label_mesh("Self-Organizing Patterns", Color(0.9, 0.85, 0.7), Vector2(2.9, 0.24), 1400, true)
+	if title:
+		title.position = Vector3(0, 0.14, 0.035)
+		_header_root.add_child(title)
+	var mode_line: MeshInstance3D = BakedText.make_label_mesh(mode_text, Color(0.7, 0.7, 0.8), Vector2(2.4, 0.14), 1400, true)
+	if mode_line:
+		mode_line.position = Vector3(0, -0.16, 0.035)
+		_header_root.add_child(mode_line)
+
+
+func _rebuild_board(root: Node3D, text: String, color: Color) -> void:
+	for child in root.get_children():
+		child.queue_free()
+	var rows: PackedStringArray = text.split("\n")
+	var line_h := 0.12
+	var gap := 0.16
+	root.add_child(_plate(Vector3(1.9, gap * rows.size() + 0.14, 0.05)))
+	var y := gap * 0.5 * (rows.size() - 1)
+	for r in rows:
+		var line: MeshInstance3D = BakedText.make_label_mesh(str(r), color, Vector2(1.7, line_h), 1300, true)
+		if line:
+			line.position = Vector3(0, y, 0.035)
+			root.add_child(line)
+		y -= gap
+
+
+func _plate(size: Vector3) -> Node3D:
+	var g := Node3D.new()
+	var frame := MeshInstance3D.new()
+	var fm := BoxMesh.new()
+	fm.size = size + Vector3(0.05, 0.05, -0.01)
+	frame.mesh = fm
+	var fmat := StandardMaterial3D.new()
+	fmat.albedo_color = Color(0.62, 0.60, 0.56)
+	fmat.roughness = 0.7
+	frame.material_override = fmat
+	frame.position = Vector3(0, 0, -0.006)
+	g.add_child(frame)
+	var face := MeshInstance3D.new()
+	var bm := BoxMesh.new()
+	bm.size = size
+	face.mesh = bm
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color(0.10, 0.11, 0.14)
+	mat.emission_enabled = true
+	mat.emission = Color(0.10, 0.11, 0.14)
+	mat.emission_energy_multiplier = 0.25
+	face.material_override = mat
+	g.add_child(face)
+	return g
 
 
 # =========================================================================
@@ -448,7 +499,12 @@ func _process(delta: float) -> void:
 		Mode.ATTRACTOR_BASINS:
 			_update_attractor_basins_mode(delta)
 
-	_update_labels()
+	# Throttle board refresh — baked text rebuilds are texture bakes, so the
+	# readouts update a few times per second, not per frame.
+	_label_cooldown -= delta
+	if _label_cooldown <= 0.0:
+		_label_cooldown = LABEL_REFRESH_INTERVAL
+		_update_labels()
 	_draw_all()
 
 
@@ -1035,32 +1091,45 @@ func _draw_phase_graph() -> void:
 
 func _update_labels() -> void:
 	var mode_names := ["Stigmergy", "Phase Transition", "Attractor Basins"]
-	_mode_label.text = "Mode: %s" % mode_names[_mode]
+	var mode_text := "Mode: %s" % mode_names[_mode]
 
+	var info_text := ""
+	var stats_text := ""
 	match _mode:
 		Mode.STIGMERGY:
-			_info_label.text = "Agents: %d\nDeposit: %.1f\nEvaporation: %.3f\nDiffusion: %.2f" % [
+			info_text = "Agents: %d\nDeposit: %.1f\nEvaporation: %.3f\nDiffusion: %.2f" % [
 				agent_count, deposit_rate, evaporation_rate, diffusion_rate
 			]
-			_stats_label.text = "Order: %.2f\nNoise: %.2f\nCoupling: %.1f" % [
+			stats_text = "Order: %.2f\nNoise: %.2f\nCoupling: %.1f" % [
 				_order_parameter, noise_level, coupling_strength
 			]
 		Mode.PHASE_TRANSITION:
-			_info_label.text = "Agents: %d\nTemperature: %.3f\nCoupling: %.1f\nSweep: %s" % [
+			info_text = "Agents: %d\nTemperature: %.3f\nCoupling: %.1f\nSweep: %s" % [
 				agent_count, _temperature, coupling_strength,
 				"ON" if _phase_sweep_active else "OFF"
 			]
-			_stats_label.text = "Order |M|: %.3f\nSusceptibility: %.2f\n%s" % [
+			stats_text = "Order |M|: %.3f\nSusceptibility: %.2f\n%s" % [
 				_order_parameter, _susceptibility,
 				"ORDERED" if _order_parameter > 0.7 else ("CRITICAL" if _order_parameter > 0.3 else "DISORDERED")
 			]
 		Mode.ATTRACTOR_BASINS:
-			_info_label.text = "Agents: %d\nAttractors: %d\nNoise: %.2f" % [
+			info_text = "Agents: %d\nAttractors: %d\nNoise: %.2f" % [
 				agent_count, num_attractors, noise_level
 			]
-			_stats_label.text = "Convergence: %.0f%%\nBasins: %d" % [
+			stats_text = "Convergence: %.0f%%\nBasins: %d" % [
 				_order_parameter * 100.0, num_attractors
 			]
+
+	# Rebuild each board ONLY when its text actually changed — never per frame.
+	if mode_text != _header_cache:
+		_header_cache = mode_text
+		_rebuild_header(mode_text)
+	if info_text != _info_cache:
+		_info_cache = info_text
+		_rebuild_board(_info_root, info_text, Color(0.6, 0.7, 0.8))
+	if stats_text != _stats_cache:
+		_stats_cache = stats_text
+		_rebuild_board(_stats_root, stats_text, Color(0.7, 0.8, 0.6))
 
 
 # =========================================================================

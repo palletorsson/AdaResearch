@@ -14,11 +14,7 @@
       "difficulty": "beginner",
       "category": "computational_geometry",
       "estimated_time": "4-6 minutes",
-      "learning_objectives": [
-        "Void navigation",
-        "Platform awareness",
-        "Height transitions"
-      ]
+      "learning_objectives": ["Void navigation","Platform awareness","Height transitions"]
     },
     "title": "Void as Datum"
   },
@@ -38,24 +34,12 @@
     }
   },
   "lighting": {
-    "ambient_color": [
-      0.45,
-      0.45,
-      0.55
-    ],
+    "ambient_color": [0.45,0.45,0.55],
     "ambient_energy": 0.65,
     "directional_light": {
       "enabled": true,
-      "direction": [
-        -0.4,
-        -0.7,
-        -0.4
-      ],
-      "color": [
-        1.0,
-        0.95,
-        0.9
-      ],
+      "direction": [-0.4,-0.7,-0.4],
+      "color": [1.0,0.95,0.9],
       "energy": 1.1
     }
   },
@@ -68,11 +52,7 @@
     "initial_tile_visibility": "hidden_except_corners",
     "background": {
       "type": "sky",
-      "color": [
-        0.2,
-        0.3,
-        0.7
-      ]
+      "color": [0.2,0.3,0.7]
     }
   },
   "layers": {

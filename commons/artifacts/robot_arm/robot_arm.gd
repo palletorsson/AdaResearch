@@ -80,24 +80,24 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 func _read_metadata_overrides() -> void:
 	if has_meta("config_base_radius"):
-		base_radius = float(String(get_meta("config_base_radius")))
+		base_radius = float(str(get_meta("config_base_radius")))
 	if has_meta("config_base_height"):
-		base_height = float(String(get_meta("config_base_height")))
+		base_height = float(str(get_meta("config_base_height")))
 	if has_meta("config_arm_segment_count"):
-		arm_segment_count = int(String(get_meta("config_arm_segment_count")))
+		arm_segment_count = int(str(get_meta("config_arm_segment_count")))
 	if has_meta("config_segment_length"):
-		segment_length = float(String(get_meta("config_segment_length")))
+		segment_length = float(str(get_meta("config_segment_length")))
 	if has_meta("config_body_color"):
-		body_color = _parse_color(String(get_meta("config_body_color")), body_color)
+		body_color = _parse_color(str(get_meta("config_body_color")), body_color)
 	if has_meta("config_joint_color"):
-		joint_color = _parse_color(String(get_meta("config_joint_color")), joint_color)
+		joint_color = _parse_color(str(get_meta("config_joint_color")), joint_color)
 	if has_meta("config_accent_color"):
-		accent_color = _parse_color(String(get_meta("config_accent_color")), accent_color)
+		accent_color = _parse_color(str(get_meta("config_accent_color")), accent_color)
 	if has_meta("config_gripper_visible"):
-		var v := String(get_meta("config_gripper_visible")).to_lower()
+		var v := str(get_meta("config_gripper_visible")).to_lower()
 		gripper_visible = v in ["true", "1", "yes", "on"]
 	if has_meta("config_pose_angles_degrees"):
-		var raw := String(get_meta("config_pose_angles_degrees"))
+		var raw := str(get_meta("config_pose_angles_degrees"))
 		var parts := raw.split(",")
 		var arr := PackedFloat32Array()
 		for p in parts:

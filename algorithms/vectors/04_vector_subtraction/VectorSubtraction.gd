@@ -17,7 +17,7 @@ var vector_b: Node3D
 var difference_vector: Node3D
 var negative_b: Node3D
 var tip_tail_neg_b: Node3D
-var info_label: Label3D
+var info_label: Label
 var balance_gadget: Node3D
 
 # Parallelogram dotted lines (mirrors addition style)
@@ -68,10 +68,14 @@ func _ready() -> void:
 	label_a_copy = _create_floating_label("a (copy)", Color(0.9, 0.5, 0.2, 0.65))
 	label_neg_b_copy = _create_floating_label("-b (copy)", Color(1.0, 0.5, 0.65, 0.65))
 
-	# Balance beam gadget
-	balance_gadget = BalanceBeamScript.new()
-	balance_gadget.position = Vector3(-0.6, 0, 0)
-	add_child(balance_gadget)
+	# Balance beam gadget — physics (RigidBody3D + joints). Physics bodies emit
+	# non-finite (NaN) transforms under a scaled parent, so only include it at
+	# desktop scale; the walk-inside / XL exhibits omit this tiny origin gadget.
+	# _process guards `if balance_gadget`.
+	if scale_multiplier <= 2.0:
+		balance_gadget = BalanceBeamScript.new()
+		balance_gadget.position = Vector3(-0.6, 0, 0)
+		add_child(balance_gadget)
 
 	# Cache nodes
 	_cache_vector_nodes(vector_a, _cached_vector_a_nodes)

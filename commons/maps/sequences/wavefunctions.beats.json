@@ -1,0 +1,208 @@
+{
+  "_meta": {
+    "schema_version": "beats/0.1",
+    "schema_doc": "doc/beats/schema.md",
+    "sequence": "wavefunctions",
+    "phase": "oscillation",
+    "description": "Beat score for wavefunctions — periodic motion, the sine wave, the projection of rotation onto a line. Strong aesthetic bleeds from sculpture (Bernini), music (Cage), atmosphere. Ends in a synthesis lab where the player composes their own waves."
+  },
+  "beats": [
+    {
+      "id": "W0",
+      "role": "GATEWAY",
+      "concept": "from rigid motion to periodic motion — what stays the same as something repeats",
+      "register": "structural",
+      "intensity": "low",
+      "maps": [],
+      "bleed_from": [
+        "transformation"
+      ],
+      "next": "W1"
+    },
+    {
+      "id": "W1",
+      "role": "INTRODUCE",
+      "concept": "the wave — a function that returns; oscillation as concept",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "WaveFunctions_Intro"
+      ],
+      "bleed_to": [
+        "primitives"
+      ],
+      "note": "reciprocates primitives.P7.bleed_from — the animated cube finds its mathematical home here",
+      "next": "W2"
+    },
+    {
+      "id": "W2",
+      "role": "DEMONSTRATE",
+      "concept": "pendulum — gravity + length → period; the canonical mechanical oscillator",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "WaveFunctions_Pendulum"
+      ],
+      "next": "W3"
+    },
+    {
+      "id": "W3",
+      "role": "SYNTHESIZE",
+      "concept": "unit circle — sine = vertical projection of uniform circular motion",
+      "register": "synthesizing",
+      "intensity": "high",
+      "maps": [
+        "WaveFunctions_Unit_Circle"
+      ],
+      "bleed_from": [
+        "transformation"
+      ],
+      "note": "rotation from transformation reappears here as the source of sine",
+      "next": "W4"
+    },
+    {
+      "id": "W4",
+      "role": "PRACTICE",
+      "concept": "sine space — walk the wave; the player traces sin(x) underfoot",
+      "register": "exploring",
+      "intensity": "medium",
+      "maps": [
+        "WaveFunctions_Sine_Space"
+      ],
+      "next": "W5"
+    },
+    {
+      "id": "W5",
+      "role": "VARIATE",
+      "concept": "3D wave propagation — the wave is not just a curve; it's a field in space",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "WaveFunctions_3D_Wave_Propagation"
+      ],
+      "next": "W6"
+    },
+    {
+      "id": "W6",
+      "role": "BLEED",
+      "concept": "sound as wave — the player HEARS what they've been seeing",
+      "register": "exploring",
+      "intensity": "medium",
+      "maps": [
+        "WaveFunctions_Effect_Sound"
+      ],
+      "bleed_from": [
+        "softbodies"
+      ],
+      "next": "W7"
+    },
+    {
+      "id": "W7",
+      "role": "BLEED",
+      "concept": "Bernini — sculpture as frozen oscillation; the baroque as visual sine",
+      "register": "exploring",
+      "intensity": "medium",
+      "maps": [
+        "Wavefunctions_Bernini"
+      ],
+      "bleed_from": [
+        "color",
+        "lambda_edge"
+      ],
+      "note": "aesthetic bleed — art history teaches the wave",
+      "next": "W8"
+    },
+    {
+      "id": "W8",
+      "role": "CATALYST_GAIN",
+      "concept": "John Cage — silence as wave, chance as oscillation; the philosophy of period",
+      "register": "catalyst",
+      "intensity": "medium",
+      "maps": [
+        "WaveFunctions_John_Cage"
+      ],
+      "bleed_from": [
+        "randomness"
+      ],
+      "next": "W9",
+      "note": "Cage map has pylon + vents � catalyst infrastructure already in place. The philosophical bleed FROM randomness IS the catalyst arrival: chance becomes wieldable. Previously role=BLEED (re-rolled 2026-05-19) but the bleed_from=randomness semantics preserved.",
+      "iteration_log": [
+        {
+          "date": "2026-05-19",
+          "changes": {
+            "role": {
+              "from": "BLEED",
+              "to": "CATALYST_GAIN"
+            },
+            "register": {
+              "from": "reflecting",
+              "to": "catalyst"
+            },
+            "note": {
+              "from": null,
+              "to": "Cage map has pylon + vents � catalyst infrastructure already in place. The philosophical bleed FROM randomness IS the catalyst arrival: chance becomes wieldable. Previously role=BLEED (re-rolled 2026-05-19) but the bleed_from=randomness semantics preserved."
+            }
+          },
+          "reason": "principal catalyst integration � Cage map already carries the infrastructure; the philosophy-bleed and catalyst-gain are the same moment"
+        }
+      ]
+    },
+    {
+      "id": "W9",
+      "role": "PRACTICE",
+      "concept": "AirMusic — modulating air with wave gestures; instrument as oscillator",
+      "register": "exploring",
+      "intensity": "medium",
+      "maps": [
+        "WaveFunctions_AirMusic"
+      ],
+      "next": "W10"
+    },
+    {
+      "id": "W10",
+      "role": "VARIATE",
+      "concept": "Sky Stairs — frequency as elevation; the wave ascending",
+      "register": "exploring",
+      "intensity": "medium",
+      "maps": [
+        "Wavefunctions_Sky_Stairs"
+      ],
+      "next": "W11"
+    },
+    {
+      "id": "W11",
+      "role": "PRACTICE",
+      "concept": "TrigWalkingPath — the player's footsteps trace trigonometry",
+      "register": "teaching",
+      "intensity": "medium",
+      "maps": [
+        "WaveFunctions_TrigWalkingPath"
+      ],
+      "next": "W12"
+    },
+    {
+      "id": "W12",
+      "role": "SYNTHESIZE",
+      "concept": "Synthesis Lab — the player composes their own waves from harmonics",
+      "register": "synthesizing",
+      "intensity": "high",
+      "maps": [
+        "WaveFunctions_Synthesis_Lab"
+      ],
+      "next": "W13"
+    },
+    {
+      "id": "W13",
+      "role": "CHAMBER",
+      "concept": "wave principle held — the player carries oscillation forward as a substrate for everything that follows",
+      "register": "synthesizing",
+      "intensity": "high",
+      "maps": [],
+      "bleed_to": [
+        "randomness"
+      ],
+      "note": "the chamber bleeds into randomness.R0 — the wave's regularity dissolves into entropy",
+      "next": null
+    }
+  ]
+}

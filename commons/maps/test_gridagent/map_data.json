@@ -35,32 +35,15 @@
 	"summary": "Grid Agent Test Chamber - COPY Tier",
 	"layout": "9x9 grid with basic structure for agent testing",
 	"objective": "Observe grid agent behavior: wandering, feeding, and copying operations",
-	"key_elements": [
-	  "gridagent:copy spawned at center",
-	  "Simple grid structure with cubes to interact with",
-	  "Spawn point for player",
-      "Teleporter to exit"
-	]
+	"key_elements": ["gridagent:copy spawned at center","Simple grid structure with cubes to interact with","Spawn point for player","Teleporter to exit"]
   },
   "lighting": {
-	"ambient_color": [
-	  0.3,
-	  0.4,
-	  0.5
-	],
+	"ambient_color": [0.3,0.4,0.5],
 	"ambient_energy": 0.8,
 	"directional_light": {
 	  "enabled": true,
-	  "direction": [
-		-0.3,
-		-0.8,
-		-0.5
-	  ],
-	  "color": [
-		1.0,
-		0.95,
-		0.9
-	  ],
+	  "direction": [-0.3,-0.8,-0.5],
+	  "color": [1.0,0.95,0.9],
 	  "energy": 1.5
 	}
   },
@@ -71,11 +54,7 @@
 	"enable_physics": true,
 	"background": {
 	  "type": "sky",
-	  "color": [
-		0.15,
-		0.2,
-		0.3
-	  ]
+	  "color": [0.15,0.2,0.3]
 	}
   },
   "layers": {

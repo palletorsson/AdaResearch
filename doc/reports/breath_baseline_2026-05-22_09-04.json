@@ -1,0 +1,44 @@
+{
+  "timestamp": "2026-05-22T09:04:00",
+  "phase": "baseline",
+  "scheduled_task": "ada-morning-breath",
+  "pipeline_summary": {
+    "sequences_scored": 22,
+    "global_avg_head_weighted": 5.43,
+    "stage_7_polish": ["randomness"],
+    "stage_6_vr_testing": [
+      "primitives", "transformation", "array_tutorial", "color", "isosurfaces",
+      "boolean_surfaces", "forces", "wavefunctions", "noise", "cellularautomata",
+      "fractals", "lsystems", "proceduralgeneration", "swarmintelligence",
+      "machinelearning", "graphtheory", "foundationscrisis", "qfeplaboratory",
+      "postfoundationscrisis"
+    ],
+    "stage_2_documentation": {
+      "change": "0% doc/0% art/0% map",
+      "softbodies": "59% doc/62% art (HEAD blocker)"
+    }
+  },
+  "heat_map_top_5": [
+    {"item": "capture", "temp": 80, "reason": "active dev (4 recent commits)"},
+    {"item": "floor", "temp": 65, "reason": "active (1 commit)"},
+    {"item": "shader", "temp": 65, "reason": "active (1 commit)"},
+    {"item": "gate_b_promoted_stale_decay", "temp": 60, "reason": "deep discovery"},
+    {"item": "softbodies_documentation_pipeline", "temp": 60, "reason": "deep discovery - aligns with HEAD"}
+  ],
+  "garden_health": {
+    "voice_coverage_pct": 49,
+    "embodiment_rate_pct": 33,
+    "total_voiced": 1012,
+    "total_artifacts": 2054,
+    "phantom_limbs": 818
+  },
+  "release_gates": {
+    "A_sequence_contract": "FAIL (missing_declared_maps: 8, undeclared_map_folders: 622)",
+    "B_artifact_registry": "PASS",
+    "C_map_validation": "PASS (856 grade_A, 144 B, 183 C, 0 F)",
+    "D_lab_progression": "PASS",
+    "overall": "FAIL (3/4 enabled gates passing)"
+  },
+  "consecutive_flat_breaths": 9,
+  "vr_ceiling_active": true
+}

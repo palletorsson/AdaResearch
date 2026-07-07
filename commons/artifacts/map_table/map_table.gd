@@ -107,39 +107,39 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 func _read_metadata_overrides() -> void:
 	if has_meta("config_table_width"):
-		table_width = float(String(get_meta("config_table_width")))
+		table_width = float(str(get_meta("config_table_width")))
 	if has_meta("config_table_depth"):
-		table_depth = float(String(get_meta("config_table_depth")))
+		table_depth = float(str(get_meta("config_table_depth")))
 	if has_meta("config_table_height"):
-		table_height = float(String(get_meta("config_table_height")))
+		table_height = float(str(get_meta("config_table_height")))
 	if has_meta("config_table_color"):
-		table_color = _parse_color(String(get_meta("config_table_color")), table_color)
+		table_color = _parse_color(str(get_meta("config_table_color")), table_color)
 	if has_meta("config_map_color"):
-		map_color = _parse_color(String(get_meta("config_map_color")), map_color)
+		map_color = _parse_color(str(get_meta("config_map_color")), map_color)
 	if has_meta("config_grid_visible"):
-		grid_visible = _parse_bool(String(get_meta("config_grid_visible")), grid_visible)
+		grid_visible = _parse_bool(str(get_meta("config_grid_visible")), grid_visible)
 	if has_meta("config_grid_size"):
-		grid_size = int(String(get_meta("config_grid_size")))
+		grid_size = int(str(get_meta("config_grid_size")))
 	if has_meta("config_grid_color"):
-		grid_color = _parse_color(String(get_meta("config_grid_color")), grid_color)
+		grid_color = _parse_color(str(get_meta("config_grid_color")), grid_color)
 	if has_meta("config_obstacle_count"):
-		obstacle_count = int(String(get_meta("config_obstacle_count")))
+		obstacle_count = int(str(get_meta("config_obstacle_count")))
 	if has_meta("config_obstacle_color"):
-		obstacle_color = _parse_color(String(get_meta("config_obstacle_color")), obstacle_color)
+		obstacle_color = _parse_color(str(get_meta("config_obstacle_color")), obstacle_color)
 	if has_meta("config_path_visible"):
-		path_visible = _parse_bool(String(get_meta("config_path_visible")), path_visible)
+		path_visible = _parse_bool(str(get_meta("config_path_visible")), path_visible)
 	if has_meta("config_path_color"):
-		path_color = _parse_color(String(get_meta("config_path_color")), path_color)
+		path_color = _parse_color(str(get_meta("config_path_color")), path_color)
 	if has_meta("config_path_glow"):
-		path_glow = float(String(get_meta("config_path_glow")))
+		path_glow = float(str(get_meta("config_path_glow")))
 	if has_meta("config_marker_color"):
-		marker_color = _parse_color(String(get_meta("config_marker_color")), marker_color)
+		marker_color = _parse_color(str(get_meta("config_marker_color")), marker_color)
 	if has_meta("config_start_marker_visible"):
-		start_marker_visible = _parse_bool(String(get_meta("config_start_marker_visible")), start_marker_visible)
+		start_marker_visible = _parse_bool(str(get_meta("config_start_marker_visible")), start_marker_visible)
 	if has_meta("config_end_marker_visible"):
-		end_marker_visible = _parse_bool(String(get_meta("config_end_marker_visible")), end_marker_visible)
+		end_marker_visible = _parse_bool(str(get_meta("config_end_marker_visible")), end_marker_visible)
 	if has_meta("config_accent_color"):
-		accent_color = _parse_color(String(get_meta("config_accent_color")), accent_color)
+		accent_color = _parse_color(str(get_meta("config_accent_color")), accent_color)
 
 
 func _clear_built_children() -> void:

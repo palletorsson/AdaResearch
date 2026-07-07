@@ -1,0 +1,11 @@
+Concept: A square cloth grid pinned at its four corners settles under gravity into a symmetric sagging dome with scalloped edges between the pins. The map is a gallery study showing one pin-topology variant; the player walks around the single soft-body marker.
+
+Sequence role: Fourth and final cloth-drape study (sb04) in the imported soft-body gallery cluster within the Soft Bodies sequence (13th spine, integration phase). Closes the cloth-quartet — sb01 (two corners → catenary), sb02 (top row → flat curtain), sb03 (side edge + wind → wave), sb04 (four corners → dome). The set is a controlled experiment: cloth, springs, gravity, integration scheme all held constant; only the pin pattern changes; four distinct surfaces emerge.
+
+Technical angle: Spring-mass cloth with structural and shear constraints; optional bend springs for crease resistance. Four corner vertices pinned to fixed world positions; remaining vertices integrate freely under gravity with light damping. Verlet or position-based dynamics. The dome is the rest state because the system has C4 symmetry under the four-corner constraint — the unique minimum-energy configuration that respects that symmetry is the symmetric sag. Edge scallops are the local catenary the cloth makes between any two adjacent pinned corners, treating that edge as an sb01-in-miniature.
+
+Critical angle: The cloth-quartet is the integration phase's most explicit demonstration that form is given by where the boundary is allowed to release, not by material specificity. The same cloth becomes catenary, curtain, wave, and dome by re-routing which vertices the world holds. Engineering calls this boundary value problems. The cloth is solving the same Laplace-like equation under four different Dirichlet conditions, without knowing what either word means.
+
+Key artifacts: gallery_marker_soft-body carries the sb04_cloth_tablecloth configuration as the centerpiece of the room — the dome is both the artifact and the demonstration.
+
+Gap: A boundary-comparison rack would mount sb01–sb04 side-by-side as a four-up exhibit, making the "same physics, different boundary → different surface" argument visible in a single glance rather than requiring four room visits. Reuses the existing gallery_marker artifact with a multi-config slot.

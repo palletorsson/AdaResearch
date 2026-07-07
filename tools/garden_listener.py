@@ -52,6 +52,74 @@ def _build_cache():
                 _GD_CACHE[norm] = gd
 
 
+_REG_CACHE = None
+
+
+def _build_registry_index():
+    """Map artifact lookup-name -> backing .gd Path via registry scene_path.
+
+    Many artifacts have a lookup name that differs from their file stem
+    (e.g. 'folding_past' -> animated_folding_past.gd, 'dgrid' -> durer_grid.gd).
+    Stem-only matching reports these as voiceless even when they carry an
+    @identity. Resolve through the registry: read each entry's scene_path,
+    open the .tscn, and follow its script ext_resource to the real .gd.
+    """
+    global _REG_CACHE
+    if _REG_CACHE is not None:
+        return
+    _REG_CACHE = {}
+    reg_dir = REPO / "commons" / "artifacts" / "registry"
+    if not reg_dir.exists():
+        return
+
+    def _resolve_res(res_path):
+        # res://foo/bar.ext -> REPO/foo/bar.ext
+        rel = res_path.replace("res://", "").lstrip("/")
+        return REPO / rel
+
+    def _scene_to_gd(scene_res):
+        scene = _resolve_res(scene_res)
+        if not scene.exists():
+            return None
+        try:
+            txt = scene.read_text(encoding="utf-8", errors="replace")
+        except OSError:
+            return None
+        m = re.search(r'path="(res://[^"]+\.gd)"', txt)
+        if m:
+            gd = _resolve_res(m.group(1))
+            return gd if gd.exists() else None
+        # No script in scene: fall back to a sibling .gd with the same stem
+        sib = scene.with_suffix(".gd")
+        return sib if sib.exists() else None
+
+    def _walk(o):
+        if isinstance(o, dict):
+            scene = o.get("scene_path") or o.get("scene")
+            name = o.get("name") or o.get("lookup_name")
+            if scene and name:
+                gd = _scene_to_gd(str(scene))
+                if gd is not None:
+                    _REG_CACHE.setdefault(str(name).lower(), gd)
+            for k, v in o.items():
+                if isinstance(v, dict):
+                    inner = v.get("scene_path") or v.get("scene")
+                    if inner and k not in ("scene_path", "scene"):
+                        gd = _scene_to_gd(str(inner))
+                        if gd is not None:
+                            _REG_CACHE.setdefault(str(k).lower(), gd)
+                _walk(v)
+        elif isinstance(o, list):
+            for v in o:
+                _walk(v)
+
+    for reg in reg_dir.glob("*.json"):
+        try:
+            _walk(json.load(open(reg, encoding="utf-8")))
+        except (json.JSONDecodeError, OSError):
+            continue
+
+
 def find_gd(artifact_name):
     """Find a .gd file for an artifact name."""
     _build_cache()
@@ -59,6 +127,10 @@ def find_gd(artifact_name):
     result = _GD_CACHE.get(key)
     if result is None:
         result = _GD_CACHE.get(key.replace("_", ""))
+    if result is None:
+        # Fallback: resolve lookup-name -> scene -> script via the registry.
+        _build_registry_index()
+        result = _REG_CACHE.get(key)
     return result
 
 

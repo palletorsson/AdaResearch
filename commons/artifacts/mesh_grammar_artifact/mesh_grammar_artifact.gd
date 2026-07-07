@@ -50,7 +50,7 @@ func _ready() -> void:
 
 
 func apply_grid_config(cfg: Dictionary) -> void:
-	if cfg.has("config_path"): config_path = String(cfg["config_path"])
+	if cfg.has("config_path"): config_path = str(cfg["config_path"])
 	_clear()
 	_build()
 
@@ -82,7 +82,7 @@ func _build() -> void:
 	var seed_val = cfg.get("seed", "cube")
 	var seed_type: String = "cube"
 	if seed_val is String:
-		seed_type = String(seed_val)
+		seed_type = str(seed_val)
 		if not seed_type in ["cube", "sphere", "icosahedron"]:
 			seed_type = "cube"
 	# Otherwise (Dictionary seed) keep cube — DNA bridge support is a TODO.

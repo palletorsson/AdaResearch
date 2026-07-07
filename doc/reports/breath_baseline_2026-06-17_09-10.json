@@ -1,0 +1,29 @@
+{
+ "timestamp": "2026-06-17T09:10",
+ "phase": "baseline",
+ "pipeline_summary": {
+  "sequences_scored": 22,
+  "mean_head_stage": 6.0909,
+  "note": "21 spine seq at stage 6 (vr_testing, headset-gated); randomness COMPLETE(8)"
+ },
+ "heat_map_top_5": [
+  "pattern 65 (active)",
+  "primitive 65 (active)",
+  "pipeline documentation regression 60",
+  "forces documentation regression 60",
+  "sequence:resourcemanagement 50 (empty)"
+ ],
+ "garden_health": {
+  "voice_coverage": "52%",
+  "embodiment_rate": "33%",
+  "phantom_limbs": 832
+ },
+ "release_gates": {
+  "overall": "FAIL",
+  "passing": "2/4",
+  "A_seq_contract": "FAIL(duplicate=1)",
+  "B_artifact_integrity": "FAIL(missing_scene_path=48,missing_map_ready=30,missing_include=30)",
+  "C_map_validation": "PASS",
+  "D_lab_continuity": "PASS"
+ }
+}

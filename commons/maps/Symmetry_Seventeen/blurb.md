@@ -1,0 +1,1 @@
+The census closes. There are exactly seventeen ways a flat pattern can repeat — not roughly, exactly — the one classification in this book that finishes. The Alhambra exhausted the list centuries before group theory counted it. Build your own pattern, then say which of the seventeen it is: naming, for once, with nothing left over.

@@ -1,0 +1,37 @@
+{
+  "timestamp": "2026-05-19T08:00",
+  "phase": "baseline",
+  "pipeline_summary": {
+    "sequences_scored": 22,
+    "heads": {
+      "polish_stage_7": ["randomness"],
+      "vr_testing_stage_6": ["primitives","transformation","array_tutorial","color","isosurfaces","boolean_surfaces","forces","wavefunctions","noise","cellularautomata","fractals","lsystems","proceduralgeneration","swarmintelligence","machinelearning","graphtheory","foundationscrisis","qfeplaboratory","postfoundationscrisis"],
+      "documentation_stage_2": ["change","softbodies"]
+    },
+    "softbodies_stage_2_pct_before": 29,
+    "change_stage_2_pct_before": 0,
+    "vr_bottleneck_streak": 7
+  },
+  "heat_map_top_5": [
+    {"id": "capture", "temperature": 80, "reason": "active (7 recent commits)"},
+    {"id": "shader", "temperature": 65, "reason": "active (1 recent commits)"},
+    {"id": "pattern", "temperature": 65, "reason": "active (1 recent commits)"},
+    {"id": "pipeline_scorer_token_parsing", "temperature": 60, "reason": "deep discovery"},
+    {"id": "garden_voicing_targeting", "temperature": 60, "reason": "deep discovery"}
+  ],
+  "garden_health": {
+    "total_voiced": 1002,
+    "softbodies_state": "DORMANT (10/46 voiced)",
+    "gallery_state": "DORMANT (91/721 voiced — largest backlog)",
+    "states_count": {"DORMANT": 12, "SCATTERED": 14, "REACHING": 12, "GROWING": 10, "LIVING": 7}
+  },
+  "release_gates": {
+    "overall": "FAIL",
+    "passing": 3,
+    "total_enabled": 4,
+    "gate_a_missing_declared_maps": 8,
+    "gate_b_artifact_registry": "PASS",
+    "gate_c_map_validation": "PASS",
+    "gate_d_lab_progression": "PASS"
+  }
+}

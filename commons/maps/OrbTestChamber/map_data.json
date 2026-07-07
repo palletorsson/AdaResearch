@@ -14,11 +14,7 @@
       "difficulty": "test",
       "category": "catalyst",
       "estimated_time": "3 minutes",
-      "learning_objectives": [
-        "Two-handed sustained dose",
-        "One-handed burst with per-hand cooldown",
-        "Catalyst as relation, not weapon"
-      ]
+      "learning_objectives": ["Two-handed sustained dose","One-handed burst with per-hand cooldown","Catalyst as relation, not weapon"]
     }
   },
   "utility_definitions": {
@@ -37,12 +33,12 @@
     }
   },
   "lighting": {
-    "ambient_color": [0.35, 0.38, 0.42],
+    "ambient_color": [0.35,0.38,0.42],
     "ambient_energy": 0.55,
     "directional_light": {
       "enabled": true,
-      "direction": [-0.4, -0.7, -0.4],
-      "color": [1.0, 0.96, 0.88],
+      "direction": [-0.4,-0.7,-0.4],
+      "color": [1.0,0.96,0.88],
       "energy": 1.1
     }
   },
@@ -55,7 +51,7 @@
     "initial_tile_visibility": "all_visible",
     "background": {
       "type": "color",
-      "color": [0.18, 0.22, 0.28]
+      "color": [0.18,0.22,0.28]
     }
   },
   "layers": {

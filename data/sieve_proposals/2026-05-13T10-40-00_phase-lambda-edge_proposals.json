@@ -1,0 +1,47 @@
+{
+	"pass_id": "2026-05-13T10-40-00_phase-lambda-edge",
+	"proposals": [
+		{
+			"pass_id": "2026-05-13T10-40-00_phase-lambda-edge",
+			"move_id": "isosurfaces-0",
+			"change": "isosurfaces",
+			"from_state": "order 12.5, phase λ_edge",
+			"to_state": "order 4.6, phase F_order (geometry sub-phase)",
+			"impact": "medium — moves it to the foundation of form",
+			"rationale_excerpt": "ms show grammar making space. Procedural generation shows that an author isn't needed for a world. Four colors of the same edge.\"*\n\n### 6d. Catalyst affordances at λ_edge (from arsenal sieve)\n\nEach λ_edge sequence should add a catalyst affordance:\n- CA → `evolve` (already declared; static `grid-stamp` came from array_tutorial, here the stamp learns its own rules)\n- fractals → `split` (already declared)\n- lsystems → `grow` (already declared — and earlier in the wand → branching line from primitives)\n- proceduralgeneration → **new**: `seed` (the player throws a seed; world generates around it)\n\n## 7. Reorder candidates\n\n| change | from | to | impact |\n|---|---|---|---|\n| **isosurfaces** | order 12.5, phase λ_edge | order 4.6, phase F_order (geometry sub-phase) | medium — moves it to the foundation of form |\n| **boolean_surfaces** | order 12.7, phase λ_edge | order 4.7, phase F_order | medium — same |\n| (from E_entropy sieve) **cellularautomata** | order 9 | order 10, phase λ_edge | already proposed |\n\nNet effect: F_order grows from 4 to 7 sequences; E_entropy shrinks to 2; λ_edge shrinks from 5 to 4.\n\n## 8. Verdict\n\nPhase passes under **two structural moves**:\n1. Bring CA in from E_e",
+			"status": "applied",
+			"applied_at": "2026-05-13T10:55:48",
+			"applied_by": "backfill (tonight session, pre-substrate)",
+			"pre_existing": true,
+			"notes": "isosurfaces moved from lambda_edge order 12.5 to F_order order 4.6"
+		},
+		{
+			"pass_id": "2026-05-13T10-40-00_phase-lambda-edge",
+			"move_id": "boolean_surfaces-1",
+			"change": "boolean_surfaces",
+			"from_state": "order 12.7, phase λ_edge",
+			"to_state": "order 4.7, phase F_order",
+			"impact": "medium — same",
+			"rationale_excerpt": "ms show grammar making space. Procedural generation shows that an author isn't needed for a world. Four colors of the same edge.\"*\n\n### 6d. Catalyst affordances at λ_edge (from arsenal sieve)\n\nEach λ_edge sequence should add a catalyst affordance:\n- CA → `evolve` (already declared; static `grid-stamp` came from array_tutorial, here the stamp learns its own rules)\n- fractals → `split` (already declared)\n- lsystems → `grow` (already declared — and earlier in the wand → branching line from primitives)\n- proceduralgeneration → **new**: `seed` (the player throws a seed; world generates around it)\n\n## 7. Reorder candidates\n\n| change | from | to | impact |\n|---|---|---|---|\n| **isosurfaces** | order 12.5, phase λ_edge | order 4.6, phase F_order (geometry sub-phase) | medium — moves it to the foundation of form |\n| **boolean_surfaces** | order 12.7, phase λ_edge | order 4.7, phase F_order | medium — same |\n| (from E_entropy sieve) **cellularautomata** | order 9 | order 10, phase λ_edge | already proposed |\n\nNet effect: F_order grows from 4 to 7 sequences; E_entropy shrinks to 2; λ_edge shrinks from 5 to 4.\n\n## 8. Verdict\n\nPhase passes under **two structural moves**:\n1. Bring CA in from E_e",
+			"status": "applied",
+			"applied_at": "2026-05-13T10:55:48",
+			"applied_by": "backfill (tonight session, pre-substrate)",
+			"pre_existing": true,
+			"notes": "boolean_surfaces moved from lambda_edge order 12.7 to F_order order 4.7"
+		},
+		{
+			"pass_id": "2026-05-13T10-40-00_phase-lambda-edge",
+			"move_id": "from-e_entropy-sieve-cellularautomata-2",
+			"change": "(from E_entropy sieve) cellularautomata",
+			"from_state": "order 9",
+			"to_state": "order 10, phase λ_edge",
+			"impact": "already proposed",
+			"rationale_excerpt": "ms show grammar making space. Procedural generation shows that an author isn't needed for a world. Four colors of the same edge.\"*\n\n### 6d. Catalyst affordances at λ_edge (from arsenal sieve)\n\nEach λ_edge sequence should add a catalyst affordance:\n- CA → `evolve` (already declared; static `grid-stamp` came from array_tutorial, here the stamp learns its own rules)\n- fractals → `split` (already declared)\n- lsystems → `grow` (already declared — and earlier in the wand → branching line from primitives)\n- proceduralgeneration → **new**: `seed` (the player throws a seed; world generates around it)\n\n## 7. Reorder candidates\n\n| change | from | to | impact |\n|---|---|---|---|\n| **isosurfaces** | order 12.5, phase λ_edge | order 4.6, phase F_order (geometry sub-phase) | medium — moves it to the foundation of form |\n| **boolean_surfaces** | order 12.7, phase λ_edge | order 4.7, phase F_order | medium — same |\n| (from E_entropy sieve) **cellularautomata** | order 9 | order 10, phase λ_edge | already proposed |\n\nNet effect: F_order grows from 4 to 7 sequences; E_entropy shrinks to 2; λ_edge shrinks from 5 to 4.\n\n## 8. Verdict\n\nPhase passes under **two structural moves**:\n1. Bring CA in from E_e",
+			"status": "applied",
+			"applied_at": "2026-05-13T10:55:48",
+			"applied_by": "backfill (tonight session, pre-substrate)",
+			"pre_existing": true,
+			"notes": "duplicate reference to CA move applied at E_entropy pass"
+		}
+	]
+}

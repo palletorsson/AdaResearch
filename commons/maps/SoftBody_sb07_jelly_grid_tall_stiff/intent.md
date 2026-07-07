@@ -1,0 +1,11 @@
+Concept: A tall narrow grid of mass points connected by high-stiffness springs falls under gravity and remains upright with minor wobble. The aspect ratio (tall + narrow) maximizes the threat of buckling; the stiffness parameter is large enough to resist it. The map is a gallery study showing one stiffness regime of the jelly-grid family.
+
+Sequence role: Jelly stiffness study (sb07) in the imported soft-body gallery cluster within the Soft Bodies sequence (13th spine, integration phase). Forms a contrast pair with sb08 (same lattice, low stiffness, becomes a floppy pancake). The pair generalizes the sb05→sb06 lesson: stiffness, not topology, decides between "shape-keeping" and "shape-losing" behavior.
+
+Technical angle: 3D spring-mass lattice (~80–250 vertices depending on grid spec) with structural springs along the cardinal axes and shear/body diagonals to prevent collapse. Stiffness coefficient k set high relative to mass × gravity; damping moderate to suppress ringing. Verlet or PBD integration over ~120 timesteps. Standing equilibrium requires that the internal forces at each vertex (sum of neighbor spring restoring forces) cancel gravity and impulse-from-impact within the relaxation budget — which holds only when k is large enough that the lattice's natural frequencies are high relative to the disturbance.
+
+Critical angle: Engineering treats stiffness as a number on a spec sheet; sb07 stages it as the parameter that decides between two qualitatively different worlds. Same atoms, same bonds, same topology — one value of k gives you something you can stand a coffee cup on, another value gives you something you sweep up with a sponge. The continuous parameter has a categorical effect, which is the same observation Turing made about reaction-diffusion regimes and Wolfram made about CA rule numbers. Continuous parameter, discrete behavior.
+
+Key artifacts: gallery_marker_soft-body holds the sb07_jelly_grid_tall_stiff configuration as the room's centerpiece — the standing column is the artifact and the demonstration.
+
+Gap: A live stiffness slider on the gallery marker (or an adjacent control plate) would let learners sweep k continuously and watch the column transition from standing to wobbling to puddling in real time. That would compress sb05–sb08 into one interactive study rather than four scattered rooms.

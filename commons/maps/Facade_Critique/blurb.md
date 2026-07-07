@@ -1,0 +1,7 @@
+Two facades face inward from opposite walls. North: a single matte-black slab running the room's full width, four storeys tall, no bays, no openings, no cornice, no base. South: a vertical stack of six unrelated glyph-tiles in primary colours — a stripe, a half-circle, a checkerboard, a dot, a zigzag, a triangle-in-a-square — with no continuity between the levels. The room itself is asymmetric. There is no front. There is no centre. There is no canonical reading.
+
+This is the principle refused. Superstudio's *Continuous Monument* on the north wall refuses bay rhythm as such — the building denies that buildings have bays. Memphis Group's totem on the south refuses hierarchy as such — the building denies that storeys are ranked. Two refusals, two different axes, one shared move: *targeted critique that requires the rule to be installed before the refusal reads*.
+
+Without the five previous facades, neither wall reads as critique. The Superstudio slab reads as a flat industrial wall. The Memphis totem reads as a glyph stack. With the five previous facades — with bay rhythm and hierarchy installed as legible defaults — the refusals become articulate. The building says *no* about something specific.
+
+This is the synthesis of refusal. The next map (Chamber_Facade) is the synthesis of composition. The player has the intellectual power to refuse the grammar after this room; the next room gives them the practical power to compose with it. Both are positions the principle made possible.

@@ -15,11 +15,7 @@
       "difficulty": "intermediate",
       "category": "algorithms",
       "estimated_time": "3-5 minutes",
-      "learning_objectives": [
-        "Walk into a chamber that IS the Turing machine model",
-        "Read the conveyor belt as the tape, the robot arm as the head, the server rack as δ, the panel as q",
-        "Press the HALT button at the back to observe the machine returning a result"
-      ]
+      "learning_objectives": ["Walk into a chamber that IS the Turing machine model","Read the conveyor belt as the tape, the robot arm as the head, the server rack as δ, the panel as q","Press the HALT button at the back to observe the machine returning a result"]
     }
   },
   "utility_definitions": {
@@ -28,12 +24,12 @@
   },
   "spawn_points": {
     "default": {
-      "position": [4.0, 1.2, 7.5],
-      "rotation": [0, 0, 0]
+      "position": [4.0,1.2,7.5],
+      "rotation": [0,0,0]
     }
   },
   "lighting": {
-    "ambient_color": [0.42, 0.45, 0.55],
+    "ambient_color": [0.42,0.45,0.55],
     "ambient_energy": 0.55
   },
   "settings": {
@@ -41,34 +37,34 @@
   },
   "layers": {
     "structure": [
-      ["1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "0", "1", "1", "1"]
+      ["1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","0","1","1","1"]
     ],
     "utilities": [
-      [" ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", "t", " ", " ", " "]
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," ","t"," "," "," "]
     ],
     "interactables": [
-      [" ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", "lab_room#accent_color:0.227,0.482,1.0#signage_top:TURING MACHINE LAB#signage_sub:execute by walking#annotation_top:M = (Q, Σ, Γ, δ, q0, F) — the chamber IS M#annotation_bottom:belt = Γ*, panel = q, server rack = δ, button = HALT#room_width:8.0#room_depth:8.0#room_height:3.8#mounted_artifact_scene:res://commons/artifacts/turing_apparatus/turing_apparatus.tscn", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " "]
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," ","lab_room#accent_color:0.227,0.482,1.0#signage_top:TURING MACHINE LAB#signage_sub:execute by walking#annotation_top:M = (Q, Σ, Γ, δ, q0, F) — the chamber IS M#annotation_bottom:belt = Γ*, panel = q, server rack = δ, button = HALT#room_width:8.0#room_depth:8.0#room_height:3.8#mounted_artifact_scene:res://commons/artifacts/turing_apparatus/turing_apparatus.tscn"," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "]
     ]
   }
 }

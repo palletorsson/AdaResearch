@@ -14,12 +14,7 @@
       "difficulty": "intermediate",
       "category": "lsystems",
       "estimated_time": "5-7 minutes",
-      "learning_objectives": [
-        "Emergence from competing individual rules",
-        "Ecological niches from spatial constraints",
-        "Marine vs terrestrial branching: different kingdom, same grammar",
-        "Catalyst introduction: the branching mode"
-      ]
+      "learning_objectives": ["Emergence from competing individual rules","Ecological niches from spatial constraints","Marine vs terrestrial branching: different kingdom, same grammar","Catalyst introduction: the branching mode"]
     },
     "title": "Competition"
   },
@@ -42,31 +37,15 @@
     "summary": "LSystems_Competition — Ecological emergence and catalyst introduction",
     "layout": "8x10 open field with void clearings as ecological niches. Catalyst station at south.",
     "objective": "See ecology emerge from individual L-system rules competing for space. Preview the branching catalyst mode.",
-    "key_elements": [
-      "`ForestCompetition` at (3,2) — multiple trees competing for space",
-      "`branching_coral` at (6,4) — marine L-system, different kingdom same grammar",
-      "`dark_sphere` at (4,7) — catalyst preview station"
-    ]
+    "key_elements": ["`ForestCompetition` at (3,2) — multiple trees competing for space","`branching_coral` at (6,4) — marine L-system, different kingdom same grammar","`dark_sphere` at (4,7) — catalyst preview station"]
   },
   "lighting": {
-    "ambient_color": [
-      0.3,
-      0.45,
-      0.3
-    ],
+    "ambient_color": [0.3,0.45,0.3],
     "ambient_energy": 0.7,
     "directional_light": {
       "enabled": true,
-      "direction": [
-        -0.3,
-        -0.8,
-        -0.2
-      ],
-      "color": [
-        1.0,
-        0.95,
-        0.8
-      ],
+      "direction": [-0.3,-0.8,-0.2],
+      "color": [1.0,0.95,0.8],
       "energy": 1.2
     }
   },
@@ -79,11 +58,7 @@
     "initial_tile_visibility": "hidden_except_corners",
     "background": {
       "type": "sky",
-      "color": [
-        0.15,
-        0.35,
-        0.4
-      ]
+      "color": [0.15,0.35,0.4]
     }
   },
   "layers": {

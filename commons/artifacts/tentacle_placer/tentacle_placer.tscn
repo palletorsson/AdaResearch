@@ -1,0 +1,96 @@
+[gd_scene load_steps=2 format=4]
+
+;; TentaclePlacer — single-chain FABRIK3D tentacle, structured EXACTLY
+;; like octapod_crawler/octapod_ik.tscn's IK_leg_0 (the proven-working
+;; reference). Key differences from a vanilla setup:
+;;   - format=4 (not 3) — newer scene format the octapod uses
+;;   - Skeleton3D has a TINY X offset (0.012m). The octapod uses this
+;;     to avoid FABRIK3D's "The vectors must not be zero" init error.
+;;     Without this, FABRIK silently fails to solve.
+;;   - FABRIK3D has NO `active = true` declaration — it defaults to true;
+;;     adding the line explicitly seems to confuse the parser.
+;;   - Bones span +Y, 1.0m spacing (vs octapod's 0.12 — same shape,
+;;     scaled for a 6m tentacle reach instead of a 0.6m leg).
+;;
+;; The script (tentacle_placer.gd) builds the procedural pedestal,
+;; skinned tentacle mesh, claw, and drives the Target Marker3D through
+;; the placement cycle. FABRIK3D solves bone rotations automatically.
+
+[ext_resource type="Script" path="res://commons/artifacts/tentacle_placer/tentacle_placer.gd" id="1_script"]
+
+[node name="TentaclePlacer" type="Node3D"]
+script = ExtResource("1_script")
+
+[node name="Armature" type="Node3D" parent="."]
+
+[node name="Skeleton3D" type="Skeleton3D" parent="Armature"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.012, 0, 0)
+bones/0/name = "Bone"
+bones/0/parent = -1
+bones/0/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+bones/0/enabled = true
+bones/0/position = Vector3(0, 0, 0)
+bones/0/rotation = Quaternion(0, 0, 0, 1)
+bones/0/scale = Vector3(1, 1, 1)
+bones/1/name = "Bone.001"
+bones/1/parent = 0
+bones/1/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+bones/1/enabled = true
+bones/1/position = Vector3(0, 1, 0)
+bones/1/rotation = Quaternion(0, 0, 0, 1)
+bones/1/scale = Vector3(1, 1, 1)
+bones/2/name = "Bone.002"
+bones/2/parent = 1
+bones/2/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+bones/2/enabled = true
+bones/2/position = Vector3(0, 1, 0)
+bones/2/rotation = Quaternion(0, 0, 0, 1)
+bones/2/scale = Vector3(1, 1, 1)
+bones/3/name = "Bone.003"
+bones/3/parent = 2
+bones/3/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+bones/3/enabled = true
+bones/3/position = Vector3(0, 1, 0)
+bones/3/rotation = Quaternion(0, 0, 0, 1)
+bones/3/scale = Vector3(1, 1, 1)
+bones/4/name = "Bone.004"
+bones/4/parent = 3
+bones/4/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+bones/4/enabled = true
+bones/4/position = Vector3(0, 1, 0)
+bones/4/rotation = Quaternion(0, 0, 0, 1)
+bones/4/scale = Vector3(1, 1, 1)
+bones/5/name = "Bone.005"
+bones/5/parent = 4
+bones/5/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+bones/5/enabled = true
+bones/5/position = Vector3(0, 1, 0)
+bones/5/rotation = Quaternion(0, 0, 0, 1)
+bones/5/scale = Vector3(1, 1, 1)
+
+[node name="FABRIK3D" type="FABRIK3D" parent="Armature/Skeleton3D"]
+angular_delta_limit = 3.141592653589793
+deterministic = true
+setting_count = 1
+settings/0/target_node = NodePath("../../../Target")
+settings/0/root_bone_name = "Bone"
+settings/0/root_bone = 0
+settings/0/end_bone_name = "Bone.005"
+settings/0/end_bone = 5
+settings/0/extend_end_bone = false
+settings/0/joint_count = 6
+settings/0/joints/0/rotation_axis = 3
+settings/0/joints/0/limitation = null
+settings/0/joints/1/rotation_axis = 3
+settings/0/joints/1/limitation = null
+settings/0/joints/2/rotation_axis = 3
+settings/0/joints/2/limitation = null
+settings/0/joints/3/rotation_axis = 3
+settings/0/joints/3/limitation = null
+settings/0/joints/4/rotation_axis = 3
+settings/0/joints/4/limitation = null
+settings/0/joints/5/rotation_axis = 3
+settings/0/joints/5/limitation = null
+
+[node name="Target" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.0, 0)

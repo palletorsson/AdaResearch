@@ -98,33 +98,33 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 func _read_metadata_overrides() -> void:
 	if has_meta("config_stand_height"):
-		stand_height = float(String(get_meta("config_stand_height")))
+		stand_height = float(str(get_meta("config_stand_height")))
 	if has_meta("config_stand_width"):
-		stand_width = float(String(get_meta("config_stand_width")))
+		stand_width = float(str(get_meta("config_stand_width")))
 	if has_meta("config_post_thickness"):
-		post_thickness = float(String(get_meta("config_post_thickness")))
+		post_thickness = float(str(get_meta("config_post_thickness")))
 	if has_meta("config_stand_color"):
-		stand_color = _parse_color(String(get_meta("config_stand_color")), stand_color)
+		stand_color = _parse_color(str(get_meta("config_stand_color")), stand_color)
 	if has_meta("config_string_length"):
-		string_length = float(String(get_meta("config_string_length")))
+		string_length = float(str(get_meta("config_string_length")))
 	if has_meta("config_string_color"):
-		string_color = _parse_color(String(get_meta("config_string_color")), string_color)
+		string_color = _parse_color(str(get_meta("config_string_color")), string_color)
 	if has_meta("config_bob_radius"):
-		bob_radius = float(String(get_meta("config_bob_radius")))
+		bob_radius = float(str(get_meta("config_bob_radius")))
 	if has_meta("config_bob_color"):
-		bob_color = _parse_color(String(get_meta("config_bob_color")), bob_color)
+		bob_color = _parse_color(str(get_meta("config_bob_color")), bob_color)
 	if has_meta("config_bob_emission"):
-		bob_emission = float(String(get_meta("config_bob_emission")))
+		bob_emission = float(str(get_meta("config_bob_emission")))
 	if has_meta("config_swing_angle_degrees"):
-		swing_angle_degrees = float(String(get_meta("config_swing_angle_degrees")))
+		swing_angle_degrees = float(str(get_meta("config_swing_angle_degrees")))
 	if has_meta("config_arc_visible"):
-		arc_visible = _parse_bool(String(get_meta("config_arc_visible")), arc_visible)
+		arc_visible = _parse_bool(str(get_meta("config_arc_visible")), arc_visible)
 	if has_meta("config_arc_dot_count"):
-		arc_dot_count = int(String(get_meta("config_arc_dot_count")))
+		arc_dot_count = int(str(get_meta("config_arc_dot_count")))
 	if has_meta("config_arc_color"):
-		arc_color = _parse_color(String(get_meta("config_arc_color")), arc_color)
+		arc_color = _parse_color(str(get_meta("config_arc_color")), arc_color)
 	if has_meta("config_accent_color"):
-		accent_color = _parse_color(String(get_meta("config_accent_color")), accent_color)
+		accent_color = _parse_color(str(get_meta("config_accent_color")), accent_color)
 
 
 func _clear_built_children() -> void:

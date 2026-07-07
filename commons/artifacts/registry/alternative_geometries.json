@@ -88,7 +88,7 @@
 			},
 			"spatial_needs": {
 				"platform": "table",
-				"footprint_cells": 5,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -106,7 +106,9 @@
 					"surface",
 					"pairs"
 				],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 44,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -214,7 +216,9 @@
 					"depends",
 					"euclid_postulates_plaque"
 				],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -329,7 +333,9 @@
 					"diverge",
 					"depends"
 				],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -428,7 +434,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 1,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -446,7 +452,9 @@
 					"entropy",
 					"becoming"
 				],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 25,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -538,7 +546,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 1,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -550,7 +558,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 256,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -660,7 +670,9 @@
 					"converge",
 					"depends"
 				],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -761,7 +773,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 5,
+				"footprint_cells": 1,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -773,7 +785,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -861,7 +875,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 2,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -873,7 +887,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 9,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -975,7 +991,7 @@
 			},
 			"spatial_needs": {
 				"platform": "table",
-				"footprint_cells": 5,
+				"footprint_cells": 1,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -993,7 +1009,9 @@
 					"assumptions",
 					"other"
 				],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -1071,7 +1089,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 5,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -1083,7 +1101,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 418,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -1184,7 +1204,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 5,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -1202,7 +1222,9 @@
 					"deterministic",
 					"growth"
 				],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 625,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -1293,7 +1315,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 5,
+				"footprint_cells": 1,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -1311,7 +1333,9 @@
 					"maze_generation",
 					"structured"
 				],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -1402,7 +1426,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 2,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -1420,7 +1444,9 @@
 					"hierarchical",
 					"graph"
 				],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 270,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -1519,7 +1545,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 5,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -1531,7 +1557,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 208,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -1646,7 +1674,9 @@
 					"hyperbolic",
 					"complex"
 				],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -1680,6 +1710,76 @@
 				"approach_dir": "any",
 				"derived_at": "2026-04-29T09:39:46.045762Z",
 				"derived_from": "aabb_size + category"
+			}
+		},
+		"triangle_curvature_workbench": {
+			"name": "Triangle Curvature Workbench",
+			"lookup_name": "triangle_curvature_workbench",
+			"description": "An interactive workbench for Gauss-Bonnet on a triangle. One slider drives Gaussian curvature K through seven detents {-2, -1, -0.5, 0, +0.5, +1, +2}; the host surface morphs with K's sign (Poincaré disk for K<0, flat cyan grid for K=0, violet sphere for K>0); three triangle vertices at canonical 30° geodesic separation stay fixed while their connecting edges become geodesics ON the active surface (arcs, lines, great-circle arcs); the readout shows α + β + γ in degrees, the Gauss-Bonnet excess (sphere) or defect (disk) as a signed angle, and a regime word. The slider IS Gauss-Bonnet — the parallel postulate exposed as a setting on K, not a truth about lines. Paired with /triangle-table-gallery's nine cells (3 surfaces × 3 sizes).",
+			"scene": "res://commons/artifacts/triangle_curvature_workbench/triangle_curvature_workbench.tscn",
+			"category": "limits-of-geometry",
+			"interaction": "grab_slide",
+			"sequence": "computationalgeometry",
+			"artifact_type": "geometry",
+			"qfep_term": "F",
+			"capacity": "WALK Gauss-Bonnet — angle sum is a property of the surface",
+			"dev_themes": [
+				"geometry",
+				"non_euclidean",
+				"gauss_bonnet",
+				"curvature",
+				"parallel_postulate"
+			],
+			"dev_category": "geometry",
+			"complexity": "intermediate",
+			"tags": [
+				"interactive",
+				"slider",
+				"geometry",
+				"non_euclidean",
+				"curvature",
+				"gauss_bonnet",
+				"triangle",
+				"poincare_disk",
+				"sphere",
+				"limits_of_geometry",
+				"parallel_postulate"
+			],
+			"include_in_map_data": true,
+			"map_ready": true,
+			"map_sequences": [
+				"computationalgeometry",
+				"higher_dimensions"
+			],
+			"parameters": {
+				"footprint": [
+					2,
+					3,
+					2
+				],
+				"size_group": "medium"
+			},
+			"spatial_needs": {
+				"platform": "floor",
+				"footprint_cells": 4,
+				"clearance": {
+					"front": 2,
+					"back": 1,
+					"left": 1,
+					"right": 1
+				},
+				"player_position": "front",
+				"wall_backing": false,
+				"orientation": "face_approach",
+				"isolation": 0,
+				"cluster_with": [
+					"curvature_slider",
+					"hyperbolic_surface",
+					"elliptic_surface",
+					"riemann_sphere",
+					"euclid_postulates_plaque"
+				],
+				"preferred_zone": "any"
 			}
 		},
 		"riemann_torus": {
@@ -1747,7 +1847,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 5,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -1759,7 +1859,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 312,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [

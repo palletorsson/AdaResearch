@@ -1,4 +1,14 @@
 # AnimatedFoldingPast.gd - Frame-in-frame animation representing time collapsing into the present
+#
+# @identity
+# essence: nested wireframe frames march inward, each 0.85 the size of the last — time collapsing toward the present
+# desire: learner watches the past recede frame-by-frame and feels duration as a spatial nesting, not a line
+# critical_parameter: scale_ratio (0.85) and cycle_duration (4s) — how fast and how tightly the past folds inward
+# triggers: animates automatically every _process frame; no interaction, it is a standing meditation on time
+# emerges: the intuition that "the present" is only the innermost frame of an endless regress of prior moments
+# needs: [renders and animates on ready [has], missing a way for the learner to scrub or freeze the fold]
+# relationships: a temporal sibling of the static point — where Point_One fixes a place, this fixes a now
+# truth: the past does not vanish — it recedes, each moment nesting inside the one that follows
 extends Node3D
 
 ## Frame Configuration

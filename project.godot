@@ -31,6 +31,7 @@ XRToolsRumbleManager="*uid://by853dk86g1qw"
 GameManager="*res://commons/managers/GameManager.gd"
 TextManager="*res://commons/managers/TextManager.gd"
 MapProgressionManager="*res://commons/managers/MapProgressionManager.gd"
+ExamGate="*res://commons/managers/ExamGate.gd"
 EcosystemManager="*res://commons/managers/EcosystemManager.gd"
 GrammarOperationsManager="*res://commons/managers/GrammarOperationsManager.gd"
 BiomeAccrualManager="*res://commons/managers/BiomeAccrualManager.gd"
@@ -60,7 +61,7 @@ window/size/viewport_height=1200
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/godot-xr-tools/plugin.cfg", "res://addons/map_grid_editor/plugin.cfg")
+enabled=PackedStringArray("res://addons/godot-xr-tools/plugin.cfg", "res://addons/map_tool_3d/plugin.cfg")
 
 [filesystem]
 

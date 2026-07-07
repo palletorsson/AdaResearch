@@ -133,7 +133,7 @@ func _create_ball(index: int) -> Node3D:
 	rb.mass = ball_mass
 	rb.gravity_scale = 1.0
 	rb.linear_damp = 0.1
-	rb.angular_damp = 0.3
+	rb.angular_damp = 0.3	
 	
 	# Physics material
 	var phys_mat = PhysicsMaterial.new()

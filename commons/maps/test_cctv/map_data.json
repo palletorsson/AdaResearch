@@ -14,9 +14,7 @@
       "difficulty": "test",
       "category": "test",
       "estimated_time": "2 minutes",
-      "learning_objectives": [
-        "Test CCTV monitor functionality"
-      ]
+      "learning_objectives": ["Test CCTV monitor functionality"]
     }
   },
   "utility_definitions": {
@@ -33,12 +31,7 @@
     "summary": "CCTV Test - Monitor Display System",
     "layout": "Simple 7x7 grid with CCTV monitors displaying various scenes",
     "objective": "Test CCTV monitor system with different configurations",
-    "key_elements": [
-      "CCTV monitors at various positions",
-      "Different rotation angles and scales",
-      "Various target scenes displayed",
-      "Teleporter to exit"
-    ]
+    "key_elements": ["CCTV monitors at various positions","Different rotation angles and scales","Various target scenes displayed","Teleporter to exit"]
   },
   "artifact_definitions": {
     "origin": {
@@ -47,24 +40,12 @@
     }
   },
   "lighting": {
-    "ambient_color": [
-      0.3,
-      0.3,
-      0.4
-    ],
+    "ambient_color": [0.3,0.3,0.4],
     "ambient_energy": 0.8,
     "directional_light": {
       "enabled": true,
-      "direction": [
-        -0.5,
-        -0.7,
-        -0.3
-      ],
-      "color": [
-        1.0,
-        0.95,
-        0.9
-      ],
+      "direction": [-0.5,-0.7,-0.3],
+      "color": [1.0,0.95,0.9],
       "energy": 1.0
     }
   },

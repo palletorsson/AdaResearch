@@ -1,0 +1,66 @@
+{
+ "_doctrine": "PATTERN DNA — each tradition's shader carries a GENOME (g_scale repeat density, g_weight motif thickness/size, g_wobble jitter amplitude, g_tint palette cast). A variant is a gene setting; the canonical genes (all 1.0) reproduce the tradition's reference look. Sweep variants per the props-DNA convention: fine / canonical / bold. Capture with commons/testing/capture_pattern_dna.gd.",
+ "genes": {
+  "g_scale": {
+   "min": 0.3,
+   "max": 3.0,
+   "default": 1.0,
+   "means": "repeat density — how fine the weave/tiling runs"
+  },
+  "g_weight": {
+   "min": 0.4,
+   "max": 2.2,
+   "default": 1.0,
+   "means": "motif thickness / size — the hand's pressure"
+  },
+  "g_wobble": {
+   "min": 0.0,
+   "max": 2.5,
+   "default": 1.0,
+   "means": "jitter amplitude — the dye's blur, the binding's unevenness, the human wobble"
+  },
+  "g_tint": {
+   "default": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "means": "palette cast multiplied over the tradition's colours"
+  }
+ },
+ "variants": {
+  "fine": {
+   "g_scale": 1.8,
+   "g_weight": 0.8,
+   "g_wobble": 0.7,
+   "note": "the fine cloth — tight repeat, light hand"
+  },
+  "canonical": {
+   "g_scale": 1.0,
+   "g_weight": 1.0,
+   "g_wobble": 1.0,
+   "note": "the reference look — the atlas plate"
+  },
+  "bold": {
+   "g_scale": 0.6,
+   "g_weight": 1.45,
+   "g_wobble": 1.6,
+   "note": "the festival bolt — big motifs, heavy hand, live wobble"
+  }
+ },
+ "traditions": [
+  "atlas_kente",
+  "atlas_ikat",
+  "atlas_bingata",
+  "atlas_kanga",
+  "atlas_shibori",
+  "atlas_tiger",
+  "atlas_iznik",
+  "atlas_zellige",
+  "atlas_meander",
+  "atlas_albers",
+  "atlas_delaunay",
+  "atlas_vasarely",
+  "atlas_riley"
+ ]
+}

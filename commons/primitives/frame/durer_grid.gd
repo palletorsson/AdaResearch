@@ -2,6 +2,16 @@
 # Usage: dgrid:90:1:1#config:10:10 for 10x10 grid cells
 # Format: dgrid[:rotation:height:scale]#config:rows:cols
 # A standing frame with a grid of wires for perspective drawing assistance
+#
+# @identity
+# essence: a standing frame strung with a grid of wires — Dürer's drawing screen, the reticule that flattens depth
+# desire: learner sees perspective as a literal projection through a grid, not an optical trick of the eye
+# critical_parameter: rows x cols — the grid density that quantizes the continuous scene into drawable cells
+# triggers: builds on ready; rebuilds when apply_grid_config or set_grid_resolution changes the cell count
+# emerges: the realization that Renaissance perspective was an algorithm — sample the world cell by cell
+# needs: [renders frame + reconfigurable wire grid [has], missing a subject seen THROUGH the grid to project]
+# relationships: a descendant of grid_lines and line; the frame that turns a coordinate grid into an instrument
+# truth: perspective is a projection through a grid — Dürer put a screen between eye and world to flatten it
 extends Node3D
 
 const GridMaterialFactory: GDScript = preload("res://commons/primitives/shared/grid_material_factory.gd")

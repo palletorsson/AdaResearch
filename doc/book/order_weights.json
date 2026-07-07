@@ -1,0 +1,84 @@
+{
+ "generated_by": "tools/fit_order_weights.py",
+ "note": "weights fitted to reproduce the manual order of the written chapters; consensus excluded (it is itself a blend)",
+ "global": {
+  "weights": {
+   "pedagogy": 1.0,
+   "ontology": 0.0,
+   "criticality": 0.25,
+   "engine": 0.0,
+   "atoms": 0.0
+  },
+  "mean_rho": 0.671,
+  "per_chapter_rho": {
+   "primitives": 0.725,
+   "array_tutorial": 0.173,
+   "softbodies": 0.951,
+   "fractals": 0.762,
+   "qfeplaboratory": 0.441,
+   "postfoundationscrisis": 0.976
+  }
+ },
+ "per_chapter": {
+  "primitives": {
+   "weights": {
+    "pedagogy": 0.0,
+    "ontology": 0.0,
+    "criticality": 0.0,
+    "engine": 0.25,
+    "atoms": 0.0
+   },
+   "rho": 0.904
+  },
+  "array_tutorial": {
+   "weights": {
+    "pedagogy": 0.25,
+    "ontology": 0.0,
+    "criticality": 0.0,
+    "engine": 0.25,
+    "atoms": 1.0
+   },
+   "rho": 0.573
+  },
+  "softbodies": {
+   "weights": {
+    "pedagogy": 0.25,
+    "ontology": 0.0,
+    "criticality": 0.0,
+    "engine": 0.0,
+    "atoms": 0.0
+   },
+   "rho": 0.951
+  },
+  "fractals": {
+   "weights": {
+    "pedagogy": 1.0,
+    "ontology": 0.5,
+    "criticality": 0.0,
+    "engine": 0.25,
+    "atoms": 0.0
+   },
+   "rho": 0.874
+  },
+  "qfeplaboratory": {
+   "weights": {
+    "pedagogy": 1.0,
+    "ontology": 0.25,
+    "criticality": 0.0,
+    "engine": 1.0,
+    "atoms": 0.0
+   },
+   "rho": 0.531
+  },
+  "postfoundationscrisis": {
+   "weights": {
+    "pedagogy": 0.25,
+    "ontology": 0.0,
+    "criticality": 0.0,
+    "engine": 0.0,
+    "atoms": 0.0
+   },
+   "rho": 1.0
+  }
+ }
+}

@@ -26,6 +26,11 @@ const HangarKit := preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 @export var wear: float = 0.08
 @export var three_bar: bool = true
 @export var grime: bool = true
+@export_group("Content")
+## Integrated INFO SCREEN — a lit console readout standing at the back of the
+## worktop, facing the operator: the bench's own display, part of the body.
+@export var info_lines: Array = []
+@export var info_header: String = ""
 @export_group("Color")
 @export var body_color: Color = Color(0.81, 0.79, 0.75)
 @export var top_color: Color = Color(0.70, 0.68, 0.64)
@@ -62,6 +67,11 @@ func _read_metadata_overrides() -> void:
 	if has_meta("config_wear"): wear = float(str(get_meta("config_wear")))
 	if has_meta("config_three_bar"): three_bar = _b(get_meta("config_three_bar"))
 	if has_meta("config_grime"): grime = _b(get_meta("config_grime"))
+	if has_meta("config_info_lines"):
+		var il = get_meta("config_info_lines")
+		if il is Array: info_lines = il
+		elif il is String and str(il).strip_edges() != "": info_lines = [str(il)]
+	if has_meta("config_info_header"): info_header = str(get_meta("config_info_header"))
 	if has_meta("config_body_color"): body_color = _pc(str(get_meta("config_body_color")), body_color)
 	if has_meta("config_top_color"): top_color = _pc(str(get_meta("config_top_color")), top_color)
 	if has_meta("config_accent_color"): accent_color = _pc(str(get_meta("config_accent_color")), accent_color)
@@ -106,6 +116,31 @@ func _build() -> void:
 		if q:
 			q.position = Vector3(w * 0.1, leg_top - APRON_H * 0.5, d * 0.5 - LEG_W * 0.5 + 0.03)
 			add_child(q)
+
+	# Integrated info screen — a lit console standing at the back of the worktop,
+	# facing the operator (+Z), on a strut that ties it into the bench body.
+	if info_lines.size() > 0:
+		_build_info_screen(w, d, th)
+
+	# Solid in-game: a body collider covering the bench volume.
+	add_child(HangarKit.box_collider(Vector3(w, th, d), Vector3(0, th * 0.5, 0)))
+
+func _build_info_screen(w: float, d: float, th: float) -> void:
+	var sw: float = clampf(w * 0.5, 0.24, 1.1)
+	var sh: float = 0.30
+	var sx: float = -w * 0.20                 # back-left, clear of the drawers (right)
+	var sz: float = -(d * 0.5 - 0.05)         # back edge; screen faces +Z toward the operator
+	var sy: float = th + sh * 0.5 + 0.08      # standing above the worktop
+	# Riser backing panel behind the screen.
+	add_child(_box(Vector3(sx, th + sh * 0.5 + 0.03, sz - 0.015),
+		Vector3(sw + 0.05, sh + 0.12, 0.03), _mat(body_color.darkened(0.05))))
+	var screen: Node3D = HangarKit.readout(info_header, info_lines, Vector2(sw, sh),
+		Color(0.06, 0.07, 0.09), Color(0.82, 0.88, 0.94), accent_color)
+	screen.position = Vector3(sx, sy, sz + 0.03)
+	add_child(screen)
+	# A lit strut from the worktop up to the console — the "connection".
+	add_child(_box(Vector3(sx - sw * 0.5, th + 0.06, sz + 0.01),
+		Vector3(0.014, 0.16, 0.014), _emi(accent_color, 0.9)))
 
 func _mat(c: Color) -> StandardMaterial3D:
 	return HangarKit.rams_body(c, wear)

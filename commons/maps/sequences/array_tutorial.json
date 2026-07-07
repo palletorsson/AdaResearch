@@ -1,184 +1,149 @@
 {
-	"sequences": {
-		"array_tutorial": {
-			"name": "Array Tutorial Sequence",
-			"description": "Progressive tutorial introducing array concepts through VR navigation",
-			"qfep_term": "F",
-			"qfep_connection": "Arrays are pure order \u00e2\u20ac\u201d every element at a known index, zero access entropy. The F-baseline: structure before complexity, the grid before the noise.",
-			"difficulty": "beginner",
-			"estimated_time": "15-20 minutes",
-			"learning_objectives": [
-				"Basic VR navigation",
-				"Single element interaction",
-				"Linear array traversal",
-				"2D grid understanding",
-				"Pattern recognition"
-			],
-			"maps": [
-				"Tutorial_Pattern",
-				"Array_Patterns",
-				"Tutorial_Single",
-				"Tutorial_Row",
-				"Tutorial_2D_Build",
-				"Tutorial_3D",
-				"Tutorial_Disco",
-				"Chamber_Arrays",
-				"Pattern_pt01_p1_bauhaus",
-				"Pattern_pt02_p2_escher",
-				"Pattern_pt03_p4m_alhambra",
-				"Pattern_pt04_p6m_persian",
-				"Pattern_pt05_p3_memphis",
-				"Pattern_pt06_pmm_tatami",
-				"Pattern_pt07_p4g_pastel",
-				"Pattern_pt08_p6_monochrome",
-				"Pattern_pt09_pgg_bauhaus",
-				"Pattern_pt10_p3m1_alhambra",
-				"Facade_baroque",
-				"Facade_bernini_colonnade",
-				"Facade_capri_whitewash",
-				"Facade_classical",
-				"Facade_continuous_monument",
-				"Facade_decon_fragment",
-				"Facade_florence_marble",
-				"Facade_florentine_polychrome",
-				"Facade_galleria_vittorio_emanuele",
-				"Facade_gothic_portal",
-				"Facade_memphis_totem",
-				"Facade_naples_diamond_rustication",
-				"Facade_nyc_tenement",
-				"Facade_painted_vault",
-				"Facade_pompeii_black_room",
-				"Facade_pompeii_ceiling_coffers",
-				"Facade_pompeii_ceiling_medallion",
-				"Facade_pompeii_fourth_style",
-				"Facade_pompeii_red_room",
-				"Facade_pompeii_second_style",
-				"Facade_superstudio_grid",
-				"Facade_venetian_gothic",
-				"Facade_villa_boscoreale",
-				"Facade_villa_mysteries",
-				"Facade_villa_san_michele",
-				"Facade_villa_san_michele_exact"
-			],
-			"return_to": "lab",
-			"lab_map": "Lab/map_data_post_array_tutorial",
-			"unlock_requirements": [],
-			"completion_rewards": [
-				"array_explorer_badge",
-				"grid_navigator_badge"
-			],
-			"artifact_groups": [
-				{
-					"map": "Array_Patterns",
-					"position": "intro",
-					"artifacts": [
-						"pattern_tile_4x4",
-						"vr_tile_editor_mirror",
-						"pattern_tile_mirror",
-						"tiling_demo",
-						"dark_sphere",
-						"facade_grammar_demo",
-						"pattern_tile_brick",
-						"pattern_tile_herringbone"
-					],
-					"size_budget": "mixed",
-					"rationale": "Gallery of pattern stations from simple repeat to complex tiling. Introduces array structure through visual patterns.",
-					"grammar": "linear"
-				},
-				{
-					"map": "Tutorial_Single",
-					"position": "intro",
-					"artifacts": [
-						"pick_up_cube",
-						"dark_sphere",
-						"xyz_coordinates"
-					],
-					"size_budget": "compact_only",
-					"rationale": "Minimal first interaction: one cube to grab, one exit to find. Pure intro to VR navigation.",
-					"grammar": "florence"
-				},
-				{
-					"map": "Tutorial_Row",
-					"position": "foundation",
-					"artifacts": [
-						"column_3_z",
-						"xyz_coordinates",
-						"dark_sphere"
-					],
-					"size_budget": "compact_only",
-					"rationale": "Linear array traversal: row completion with coordinate reference.",
-					"grammar": "zelda"
-				},
-				{
-					"map": "Tutorial_2D_Build",
-					"position": "foundation",
-					"artifacts": [
-						"grid_2d_4x4",
-						"pick_up_cube",
-						"dark_sphere",
-						"pulsar_visualizer",
-						"xyz_coordinates",
-						"gridagent"
-					],
-					"size_budget": "mixed",
-					"rationale": "2D array navigation: X and Y axes in a grid structure with active hazard introduction.",
-					"grammar": "zelda"
-				},
-				{
-					"map": "Tutorial_3D",
-					"position": "exploration",
-					"artifacts": [
-						"grid_3d_4x4x4",
-						"dark_sphere"
-					],
-					"size_budget": "compact_only",
-					"rationale": "Vertical navigation and volumetric thinking: 3D array as spatial cube.",
-					"grammar": "zelda"
-				},
-				{
-					"map": "Tutorial_Pattern",
-					"position": "exploration",
-					"artifacts": [
-						"script_runner#array",
-						"pattern_tile_puzzle",
-						"pattern_tile_puzzle#p4m",
-						"pattern_tile_mirror",
-						"dark_sphere",
-						"pulsar_compact"
-					],
-					"size_budget": "mixed",
-					"rationale": "Pattern recognition: checkerboard indexing, wave patterns, wallpaper groups. Arrays as function: index to value.",
-					"grammar": "linear"
-				},
-				{
-					"map": "Tutorial_Disco",
-					"position": "synthesis",
-					"artifacts": [
-						"standalone_disco",
-						"dark_sphere"
-					],
-					"size_budget": "environment",
-					"rationale": "Large reactive disco floor: audio-step interaction and spatial pattern reading. Culmination of array concepts at scale.",
-					"grammar": "vatican"
-				}
-			],
-			"content": [
-				"Array_Patterns: Tiles, Carpets, Wallpaper Groups",
-				"Tutorial_Single: One Cube, One Grab",
-				"Tutorial_Row: Linear Array Traversal",
-				"Tutorial_2D_Build: Two-Dimensional Grid Navigation",
-				"Tutorial_3D: Volumetric Three-Index Arrays",
-				"Tutorial_Pattern: Patterns as Array Equations",
-				"Tutorial_Disco: Reactive Disco Floor at Scale"
-			],
-			"notes": "",
-			"last_imported_from": {
-				"gallery": "facade",
-				"n_added": 26,
-				"at": "2026-04-29T08:19:35.514548Z"
-			}
+  "sequences": {
+	"array_tutorial": {
+	  "name": "Array Tutorial Sequence",
+	  "description": "Progressive tutorial introducing array concepts through VR navigation",
+	  "qfep_term": "F",
+	  "qfep_connection": "Arrays are pure order \u00e2\u20ac\u201d every element at a known index, zero access entropy. The F-baseline: structure before complexity, the grid before the noise.",
+	  "layer": "F_order",
+	  "difficulty": "beginner",
+	  "estimated_time": "15-20 minutes",
+	  "learning_objectives": [
+		"Basic VR navigation",
+		"Single element interaction",
+		"Linear array traversal",
+		"2D grid understanding",
+		"Pattern recognition",
+        "Binary indexing, floor division, and modular arithmetic: 2 bits address a 4\u00d74 grid; `index // width` is the row, `index % width` is the column; modular arithmetic wraps the grid into wallpaper-group symmetries."
+	  ],
+	  "maps": [
+			"Tutorial_Single",	
+		"Tutorial_Pattern",
+		"Array_Patterns",
+		"Tutorial_Row",
+		"Tutorial_2D_Build",
+		"Tutorial_3D",
+        "Tutorial_Disco"
+	  ],
+	  "return_to": "lab",
+	  "lab_map": "Lab/map_data_post_array_tutorial",
+	  "unlock_requirements": [],
+	  "completion_rewards": [
+		"array_explorer_badge",
+        "grid_navigator_badge"
+	  ],
+	  "artifact_groups": [
+		{
+		  "map": "Array_Patterns",
+		  "position": "intro",
+		  "artifacts": [
+			"pattern_tile_4x4",
+			"vr_tile_editor_mirror",
+			"pattern_tile_mirror",
+			"tiling_demo",
+			"dark_sphere",
+			"facade_grammar_demo",
+			"pattern_tile_brick",
+            "pattern_tile_herringbone"
+		  ],
+		  "size_budget": "mixed",
+		  "rationale": "Gallery of pattern stations from simple repeat to complex tiling. Introduces array structure through visual patterns.",
+		  "grammar": "linear"
+		},
+		{
+		  "map": "Tutorial_Single",
+		  "position": "intro",
+		  "artifacts": [
+			"pick_up_cube",
+			"dark_sphere",
+            "xyz_coordinates"
+		  ],
+		  "size_budget": "compact_only",
+		  "rationale": "Minimal first interaction: one cube to grab, one exit to find. Pure intro to VR navigation.",
+		  "grammar": "florence"
+		},
+		{
+		  "map": "Tutorial_Row",
+		  "position": "foundation",
+		  "artifacts": [
+			"column_3_z",
+			"xyz_coordinates",
+            "dark_sphere"
+		  ],
+		  "size_budget": "compact_only",
+		  "rationale": "Linear array traversal: row completion with coordinate reference.",
+		  "grammar": "zelda"
+		},
+		{
+		  "map": "Tutorial_2D_Build",
+		  "position": "foundation",
+		  "artifacts": [
+			"grid_2d_4x4",
+			"pick_up_cube",
+			"dark_sphere",
+			"pulsar_visualizer",
+			"xyz_coordinates",
+            "gridagent"
+		  ],
+		  "size_budget": "mixed",
+		  "rationale": "2D array navigation: X and Y axes in a grid structure with active hazard introduction.",
+		  "grammar": "zelda"
+		},
+		{
+		  "map": "Tutorial_3D",
+		  "position": "exploration",
+		  "artifacts": [
+			"grid_3d_4x4x4",
+            "dark_sphere"
+		  ],
+		  "size_budget": "compact_only",
+		  "rationale": "Vertical navigation and volumetric thinking: 3D array as spatial cube.",
+		  "grammar": "zelda"
+		},
+		{
+		  "map": "Tutorial_Pattern",
+		  "position": "exploration",
+		  "artifacts": [
+			"script_runner#array",
+			"pattern_tile_puzzle",
+			"pattern_tile_puzzle#p4m",
+			"pattern_tile_mirror",
+			"dark_sphere",
+            "pulsar_compact"
+		  ],
+		  "size_budget": "mixed",
+		  "rationale": "Pattern recognition: checkerboard indexing, wave patterns, wallpaper groups. Arrays as function: index to value.",
+		  "grammar": "linear"
+		},
+		{
+		  "map": "Tutorial_Disco",
+		  "position": "synthesis",
+		  "artifacts": [
+			"standalone_disco",
+            "dark_sphere"
+		  ],
+		  "size_budget": "environment",
+		  "rationale": "Large reactive disco floor: audio-step interaction and spatial pattern reading. Culmination of array concepts at scale.",
+		  "grammar": "vatican"
 		}
-	},
-	"world_phase": "grid",
-	"artifact_groups": []
+	  ],
+	  "content": [
+		"Array_Patterns: Tiles, Carpets, Wallpaper Groups",
+		"Tutorial_Single: One Cube, One Grab",
+		"Tutorial_Row: Linear Array Traversal",
+		"Tutorial_2D_Build: Two-Dimensional Grid Navigation",
+		"Tutorial_3D: Volumetric Three-Index Arrays",
+		"Tutorial_Pattern: Patterns as Array Equations",
+        "Tutorial_Disco: Reactive Disco Floor at Scale"
+	  ],
+	  "notes": "2026-05-13: discarded 26 Facade_* stubs (moved conceptually to new facade_assembly branch sequence \u2014 to be rebuilt) and 10 Pattern_pt* stubs (to be rebuilt under mosaicanalysis as wallpaper-group expression maps). All 36 had MISSING artifact tokens and no .md text. Folders on disk preserved pending explicit deletion.",
+	  "last_imported_from": {
+		"gallery": "facade",
+		"n_added": 26,
+		"at": "2026-04-29T08:19:35.514548Z"
+	  }
+	}
+  },
+  "world_phase": "grid",
+  "artifact_groups": []
 }

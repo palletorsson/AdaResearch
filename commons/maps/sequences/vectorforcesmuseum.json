@@ -1,0 +1,27 @@
+{
+  "sequences": {
+	"vectorforcesmuseum": {
+	  "name": "Vector & Forces Museum",
+	  "description": "Eight chained halls showing every kept vector and forces artifact, curated from a full audit (doc/VECTOR_FORCES_MUSEUM.md). Small interactive pieces sit on height-2 plinth rows; big pieces get open floor and firing lanes. Foundations, Operations, Motion, Fields, Launch, Springs, Gravity, Arena — the loop closes back at the entrance.",
+	  "difficulty": "open",
+	  "estimated_time": "45-90 min",
+	  "layer": "museum",
+	  "prerequisites": [],
+	  "unlock_requirements": [],
+	  "unlocks": [],
+	  "maps": [
+		"VFM_01_Foundations",
+		"VFM_02_Operations",
+		"VFM_03_Motion",
+		"VFM_04_Fields",
+		"VFM_05_Launch",
+		"VFM_06_Springs",
+		"VFM_07_Gravity",
+        "VFM_08_Arena"
+	  ],
+	  "qfep_connection": "Vectors are the project's first relational handles: every force is a relation made visible. The museum shows the whole vocabulary at once — a field guide rather than a lesson.",
+	  "truth": "A force is a vector you can stand inside.",
+	  "content": "Curated exhibition of ~86 vector/forces artifacts across 8 themed halls, teleporter-chained in a loop."
+	}
+  }
+}

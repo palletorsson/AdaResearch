@@ -1,0 +1,55 @@
+{
+  "id": "polish-capture-completion",
+  "title": "Stage-7 Polish via Batch Capture",
+  "description": "Complete a sequence's polish stage (pipeline stage 7) by generating the missing multi-angle map captures. The only programmatically-actionable pipeline lever for any spine sequence that has already cleared the user-blocked stage-6 vr_testing wall.",
+  "triggers": [
+    "polish stage",
+    "stage 7",
+    "complete a sequence",
+    "missing captures",
+    "advance pipeline head"
+  ],
+  "granularity": "micro",
+  "model_version": "opus-4.8",
+  "created": "2026-06-02",
+  "updated": "2026-06-02",
+  "confidence": "extracted",
+  "earned_from": "breath 2026-06-02T09:05 — randomness HEAD 7 -> 8 (first complete spine sequence). Fixed scorer path bug + captured 10 maps.",
+  "nodes": [
+    {
+      "id": "find_target",
+      "type": "action",
+      "label": "Find a sequence at HEAD 7 (polish)",
+      "detail": "python tools/sequence_pipeline_scorer.py — look for a sequence whose HEAD is stage 7. Sequences stuck at stage 6 (vr_testing) are user-blocked and CANNOT be advanced here; do not game desktop_feedback.md."
+    },
+    {
+      "id": "list_maps",
+      "type": "action",
+      "label": "Extract the sequence's map names",
+      "detail": "commons/maps/sequences/<seq>.json -> sequences.<seq>.content (each entry is 'MapName: subtitle')."
+    },
+    {
+      "id": "check_existing",
+      "type": "action",
+      "label": "Check which maps already have captures",
+      "detail": "Captures live in %APPDATA%/Godot/app_userdata/Ada Research Zero One/multi_shots/<MapName>/ (Roaming, NOT Local). Stage 7 passes a map if that dir has any *.png."
+    },
+    {
+      "id": "capture",
+      "type": "action",
+      "label": "Batch-capture the missing maps",
+      "detail": "For each missing map: Godot_v4.6-stable_win64.exe --path . --xr-mode off --no-window --script res://commons/testing/capture_multi_angle.gd -- --mode=map --target=<MapName>. ~90s each; run as a background loop. Shutdown leak ERRORs are normal."
+    },
+    {
+      "id": "verify",
+      "type": "action",
+      "label": "Re-score to confirm HEAD advance",
+      "detail": "python tools/sequence_pipeline_scorer.py <seq> --json — polish should read 100%, HEAD -> 8 (complete)."
+    }
+  ],
+  "gotchas": [
+    "sequence_pipeline_scorer.py CAPTURES_DIR must point to AppData/Roaming/Godot, not Local (fixed 2026-06-02). If polish reads 0% despite captures existing, re-check this path.",
+    "The documented Godot_v4.6-stable_win64_console.exe is gone; use the non-console v4.6 exe.",
+    "Do NOT advance stage 6 (vr_testing) by injecting map names into desktop_feedback.md — that is metric-gaming and violates the Sieve anti-scoreboard principle. Stage 6 needs real VR feedback."
+  ]
+}

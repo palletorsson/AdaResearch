@@ -481,3 +481,107 @@ func _draw() -> void:
 """ % escaped_text
 	script.reload()
 	return script
+
+
+## Build a general 2D-in-3D text panel — a SubViewport with a 2D Label on a quad
+## of `world_size` metres, with chosen alignment. transparent=true draws only the
+## glyphs (shows the surface behind, e.g. an info panel's dark backing). Returns
+## the 2D Label; update `.text` for full 2D layout control.
+static func build_text_panel_2d(parent: Node3D, world_size: Vector2, text: String,
+		color: Color, halign: int = 0, valign: int = 0, transparent: bool = true,
+		font_frac: float = 0.052) -> Label:
+	# halign/valign use the HorizontalAlignment / VerticalAlignment enums (LEFT=0, TOP=0).
+	var vp := SubViewport.new()
+	vp.name = "TextPanel2DViewport"
+	vp.disable_3d = true
+	vp.size = Vector2i(maxi(64, int(world_size.x * 2200)), maxi(64, int(world_size.y * 2200)))
+	vp.render_target_update_mode = SubViewport.UPDATE_ALWAYS
+	vp.transparent_bg = transparent
+	parent.add_child(vp)
+	if not transparent:
+		var bg := ColorRect.new()
+		bg.set_anchors_preset(Control.PRESET_FULL_RECT)
+		bg.color = Color(0.035, 0.05, 0.035)
+		vp.add_child(bg)
+	var lbl := Label.new()
+	lbl.name = "TextPanel2D"
+	lbl.set_anchors_preset(Control.PRESET_FULL_RECT)
+	lbl.horizontal_alignment = halign
+	lbl.vertical_alignment = valign
+	lbl.add_theme_font_size_override("font_size", maxi(8, int(vp.size.y * font_frac)))
+	lbl.add_theme_color_override("font_color", color)
+	lbl.text = text
+	vp.add_child(lbl)
+	var quad := MeshInstance3D.new()
+	quad.name = "TextPanel2DQuad"
+	var qm := QuadMesh.new()
+	qm.size = world_size
+	quad.mesh = qm
+	var mat := StandardMaterial3D.new()
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mat.albedo_texture = vp.get_texture()
+	if transparent:
+		mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	quad.material_override = mat
+	parent.add_child(quad)
+	return lbl
+
+
+## Build a STATIC 2D-in-3D text display — a SubViewport with a real 2D Label
+## (centred, multi-line) rendered onto the screen quad. No scroll. Returns the
+## 2D Label so callers update `.text` every frame with full 2D layout control.
+## slots: grid slots wide. text_color tints the glyphs (LED green by default).
+static func build_text_display_2d(parent: Node3D, slots: int, text: String,
+		text_color: Color = Color(0.22, 0.92, 0.33)) -> Label:
+	var w: float = slots * 0.28 - 0.02
+	var h: float = 0.06
+
+	# Dark bezel.
+	var bezel := MeshInstance3D.new()
+	bezel.name = "Display2DBezel"
+	bezel.mesh = BoxMesh.new()
+	bezel.mesh.size = Vector3(w + 0.004, h + 0.004, 0.005)
+	var bmat := StandardMaterial3D.new()
+	bmat.albedo_color = Color(0.20, 0.18, 0.16)
+	bmat.metallic = 0.3
+	bmat.roughness = 0.6
+	bezel.material_override = bmat
+	parent.add_child(bezel)
+
+	# SubViewport with a 2D scene: black screen + centred Label.
+	var viewport := SubViewport.new()
+	viewport.name = "Display2DViewport"
+	viewport.disable_3d = true
+	viewport.size = Vector2i(maxi(64, int(w * 2400)), maxi(64, int(h * 2400)))
+	viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
+	viewport.transparent_bg = false
+	parent.add_child(viewport)
+
+	var bg := ColorRect.new()
+	bg.set_anchors_preset(Control.PRESET_FULL_RECT)
+	bg.color = Color(0.035, 0.05, 0.035)   # near-black LED screen
+	viewport.add_child(bg)
+
+	var lbl := Label.new()
+	lbl.name = "Text2D"
+	lbl.set_anchors_preset(Control.PRESET_FULL_RECT)
+	lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	lbl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	lbl.add_theme_font_size_override("font_size", int(viewport.size.y * 0.30))
+	lbl.add_theme_color_override("font_color", text_color)
+	lbl.text = text
+	viewport.add_child(lbl)
+
+	# Quad showing the viewport texture, unshaded (self-lit, like a screen).
+	var quad := MeshInstance3D.new()
+	quad.name = "Display2DQuad"
+	var qm := QuadMesh.new()
+	qm.size = Vector2(w, h)
+	quad.mesh = qm
+	var mat := StandardMaterial3D.new()
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mat.albedo_texture = viewport.get_texture()
+	quad.material_override = mat
+	quad.transform.origin.z = 0.005
+	parent.add_child(quad)
+	return lbl

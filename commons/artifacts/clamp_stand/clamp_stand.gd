@@ -86,27 +86,27 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 func _read_metadata_overrides() -> void:
 	if has_meta("config_base_width"):
-		base_width = float(String(get_meta("config_base_width")))
+		base_width = float(str(get_meta("config_base_width")))
 	if has_meta("config_base_depth"):
-		base_depth = float(String(get_meta("config_base_depth")))
+		base_depth = float(str(get_meta("config_base_depth")))
 	if has_meta("config_base_height"):
-		base_height = float(String(get_meta("config_base_height")))
+		base_height = float(str(get_meta("config_base_height")))
 	if has_meta("config_base_color"):
-		base_color = _parse_color(String(get_meta("config_base_color")), base_color)
+		base_color = _parse_color(str(get_meta("config_base_color")), base_color)
 	if has_meta("config_pole_height"):
-		pole_height = float(String(get_meta("config_pole_height")))
+		pole_height = float(str(get_meta("config_pole_height")))
 	if has_meta("config_pole_radius"):
-		pole_radius = float(String(get_meta("config_pole_radius")))
+		pole_radius = float(str(get_meta("config_pole_radius")))
 	if has_meta("config_pole_color"):
-		pole_color = _parse_color(String(get_meta("config_pole_color")), pole_color)
+		pole_color = _parse_color(str(get_meta("config_pole_color")), pole_color)
 	if has_meta("config_clamp_count"):
-		clamp_count = int(String(get_meta("config_clamp_count")))
+		clamp_count = int(str(get_meta("config_clamp_count")))
 	if has_meta("config_clamp_color"):
-		clamp_color = _parse_color(String(get_meta("config_clamp_color")), clamp_color)
+		clamp_color = _parse_color(str(get_meta("config_clamp_color")), clamp_color)
 	if has_meta("config_accent_color"):
-		accent_color = _parse_color(String(get_meta("config_accent_color")), accent_color)
+		accent_color = _parse_color(str(get_meta("config_accent_color")), accent_color)
 	if has_meta("config_holding_flask"):
-		var h := String(get_meta("config_holding_flask")).to_lower()
+		var h := str(get_meta("config_holding_flask")).to_lower()
 		holding_flask = h in ["true", "1", "yes", "on"]
 
 

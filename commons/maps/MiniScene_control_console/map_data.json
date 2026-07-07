@@ -1,0 +1,42 @@
+{
+  "map_info": {
+    "name": "MiniScene_control_console",
+    "lookup_name": "MiniScene_control_console",
+    "title": "Mini scene: control console",
+    "description": "A mini scene: the control_console placeable artifact on its footprint — a grey-metal CSG cabinet with a Braun control plate recessed in its slanted face. The instrument that holds the instrument. One bead; maps are necklaces of these.",
+    "version": "0.1-grow-scene",
+    "format": "json",
+    "created_from": "manual",
+    "dimensions": {
+      "width": 3,
+      "depth": 3,
+      "max_height": 3
+    },
+    "metadata": {
+      "category": "bead",
+      "estimated_time": "0 minutes"
+    }
+  },
+  "utility_definitions": {},
+  "settings": {
+    "floor_tile_size": 1.0,
+    "disable_biome": true
+  },
+  "layers": {
+    "structure": [
+      ["1","1","1"],
+      ["1","1","1"],
+      ["1","1","1"]
+    ],
+    "utilities": [
+      [" "," "," "],
+      [" "," "," "],
+      [" "," "," "]
+    ],
+    "interactables": [
+      [" "," "," "],
+      [" ","control_console:0:0.0"," "],
+      [" "," "," "]
+    ]
+  }
+}

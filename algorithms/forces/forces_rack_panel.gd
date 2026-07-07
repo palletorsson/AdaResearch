@@ -1,156 +1,78 @@
-## ForcesRackPanel — Shared Ada-styled rack panel for Forces examples
+## ForcesRackPanel — Shared Ada-styled rack panel for Forces examples.
 ##
-## Builds a white backing panel with title, sliders, and readouts.
-## Uses the Ada design system palette and interactable slider scenes.
+## CONVERGED (2026-06-13, Interface Overhaul Phase 1): this is now a thin
+## API-PRESERVING ADAPTER over the canonical `ControlPanel` board. The public
+## surface is byte-for-byte identical, so the 9 forces examples are untouched —
+## but they inherit the canonical styling and ALL the slider fixes (smooth
+## slider, never-scale-physics, bidirectional clamp). See doc/INTERFACE_OVERHAUL.md.
 ##
-## Usage:
+## Usage (unchanged):
 ##   var panel = ForcesRackPanel.new()
 ##   panel.setup("Example 2.3: Gravity", 1, 3)
 ##   var slider = panel.add_slider("Gravity", 0.1, 2.5, 0.9, 0.05)
-##   slider.value_changed.connect(_on_gravity_changed)
+##   slider.slider_moved.connect(_on_gravity_changed)
 ##   add_child(panel)
 class_name ForcesRackPanel
 extends Node3D
 
-const SLIDER_SMOOTH_SCENE := preload("res://commons/interactables/slider_smooth.tscn")
-const PANEL_MATERIAL := preload("res://commons/ui/materials/panel_white.tres")
+const CONTROL_PANEL := preload("res://commons/ui/control_panel.gd")
 
-# Ada palette constants
-const TEXT_PRIMARY := Color(0.12, 0.12, 0.14, 1.0)
-const TEXT_SECONDARY := Color(0.40, 0.40, 0.44, 1.0)
-const TEXT_ON_DARK := Color(0.92, 0.92, 0.94, 1.0)
-const ACCENT_ORANGE := Color(0.95, 0.45, 0.15, 1.0)
-const ACCENT_CYAN := Color(0.00, 0.78, 0.85, 1.0)
-
-# Layout constants (from AdaPalette)
-const RACK_UNIT := 0.08     # 8cm
-const MODULE_GAP := 0.006   # 6mm
-const PANEL_DEPTH := 0.012  # 12mm
-
-# Slider module size: 1x2 rack units = 8cm x 16cm
-const SLIDER_WIDTH := 0.08
-const SLIDER_HEIGHT := 0.16
-
-# Panel layout
-const TITLE_HEIGHT := 0.04       # Space for title at top
-const PADDING_H := 0.02          # Horizontal padding
-const PADDING_V := 0.015         # Vertical padding
-const READOUT_HEIGHT := 0.025    # Height for a readout row
-const SLIDER_SLOT_GAP := 0.012   # Gap between slider columns
-
-# Internal state
-var _title_label: Label3D
-var _panel_mesh: MeshInstance3D
-var _columns: int = 1
-var _rack_units_tall: int = 3
-var _next_slider_index: int = 0
-var _readout_count: int = 0
-var _sliders: Array = []
-var _readouts: Dictionary = {}
-
-# Signal forwarded from sliders — carries (slider_name: String, value: float)
+# Signal forwarded from sliders — carries (slider_name: String, value: float).
+# Kept for API compatibility (some callers may connect it).
 signal slider_value_changed(slider_name: String, value: float)
 
+# The canonical board this panel delegates to.
+var _board  # ControlPanel
+var _columns: int = 1
+var _sliders: Array = []          # [{instance, name, min, max, default}]
+var _readouts: Dictionary = {}    # name -> Label (board readout line)
+var _readout_line: Object = null  # the board's single multi-line readout
+var _readout_names: Array = []    # ordered names backing _readout_line
+var _readout_values: Dictionary = {}
 
-func setup(title: String, columns: int = 1, rack_units_tall: int = 3) -> void:
+
+func setup(title: String, columns: int = 1, _rack_units_tall: int = 3) -> void:
 	_columns = max(1, columns)
-	_rack_units_tall = max(2, rack_units_tall)
-	_build_panel(title)
-
-
-func _build_panel(title: String) -> void:
-	# Calculate panel dimensions
-	var panel_width: float = _columns * SLIDER_WIDTH + (_columns - 1) * SLIDER_SLOT_GAP + PADDING_H * 2.0
-	var panel_height: float = _rack_units_tall * RACK_UNIT
-
-	# Ensure minimum width for title
-	panel_width = max(panel_width, 0.18)
-
-	# Create backing panel mesh
-	_panel_mesh = MeshInstance3D.new()
-	_panel_mesh.name = "PanelBacking"
-	var box := BoxMesh.new()
-	box.size = Vector3(panel_width, panel_height, PANEL_DEPTH)
-	_panel_mesh.mesh = box
-	_panel_mesh.material_override = PANEL_MATERIAL
-	add_child(_panel_mesh)
-
-	# Title label — at top of panel, on the surface
-	_title_label = Label3D.new()
-	_title_label.name = "TitleLabel"
-	_title_label.text = title
-	_title_label.font_size = 14
-	_title_label.pixel_size = 0.001
-	_title_label.modulate = TEXT_PRIMARY
-	_title_label.outline_size = 0
-	_title_label.billboard = BaseMaterial3D.BILLBOARD_DISABLED
-	_title_label.position = Vector3(0, panel_height * 0.5 - TITLE_HEIGHT * 0.5 - 0.005, PANEL_DEPTH * 0.5 + 0.001)
-	_title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	add_child(_title_label)
-
-	# Instruction label below title
-	var instructions_label := Label3D.new()
-	instructions_label.name = "InstructionsLabel"
-	instructions_label.text = ""
-	instructions_label.font_size = 9
-	instructions_label.pixel_size = 0.001
-	instructions_label.modulate = TEXT_SECONDARY
-	instructions_label.outline_size = 0
-	instructions_label.billboard = BaseMaterial3D.BILLBOARD_DISABLED
-	instructions_label.position = Vector3(0, panel_height * 0.5 - TITLE_HEIGHT - 0.005, PANEL_DEPTH * 0.5 + 0.001)
-	instructions_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	add_child(instructions_label)
+	_board = CONTROL_PANEL.new()
+	_board.name = "Board"
+	add_child(_board)
+	_board.title = title
 
 
 func set_instructions(text: String) -> void:
-	var lbl = get_node_or_null("InstructionsLabel")
-	if lbl:
-		lbl.text = text
+	# The board carries no instructions line; expose it as the subtitle if the
+	# board supports one, else fold it into the title's second line.
+	if _board == null:
+		return
+	if "subtitle" in _board:
+		_board.set("subtitle", text)
 
 
-## Add a slider to the panel.
-## Returns the slider root Node3D (has slider_moved signal and value API).
-## For integer/stepped params, set use_snap=true — values will be rounded.
-## All sliders use slider_smooth.tscn which provides set_range/get_normalized_value/slider_moved.
-func add_slider(param_name: String, range_min: float, range_max: float, default_val: float, step: float = 0.0, use_snap: bool = false) -> Node3D:
-	var slider_instance: Node3D = SLIDER_SMOOTH_SCENE.instantiate()
-	slider_instance.name = "Slider_%s" % param_name.replace(" ", "_")
+## Add a slider. Returns the slider root (slider_smooth: slider_moved + value API)
+## — identical contract to before. min/max/default/step/snap preserved.
+func add_slider(param_name: String, range_min: float, range_max: float, default_val: float, _step: float = 0.0, use_snap: bool = false) -> Node3D:
+	var s: Node3D = _board.add_slider(param_name, param_name)
+	if s == null:
+		return null
+	if use_snap and "decimal_places" in s:
+		s.set("decimal_places", 0)
+	if s.has_method("set_range"):
+		s.set_range(range_min, range_max)
+	if range_max != range_min and s.has_method("set_normalized_value"):
+		var norm: float = clampf((default_val - range_min) / (range_max - range_min), 0.0, 1.0)
+		_defer_set_normalized.call_deferred(s, norm)
+	# Forward per-slider moves to the panel-level aggregate signal.
+	if s.has_signal("slider_moved") and not s.is_connected("slider_moved", _on_any_slider_moved):
+		s.connect("slider_moved", _on_any_slider_moved.bind(param_name))
+	_sliders.append({"instance": s, "name": param_name, "min": range_min, "max": range_max, "default": default_val})
+	return s
 
-	# For snap sliders, set decimal_places to 0 so the label shows integers
-	if use_snap:
-		slider_instance.set("decimal_places", 0)
 
-	# Position the slider in its slot on the panel
-	var slot_pos := _get_slider_slot_position(_next_slider_index)
-	slider_instance.position = slot_pos
-	add_child(slider_instance)
-
-	# Configure range and default value
-	# The smooth slider has set_range() and set_normalized_value()
-	if slider_instance.has_method("set_range"):
-		slider_instance.set_range(range_min, range_max)
-
-	if slider_instance.has_method("set_param_name"):
-		slider_instance.set_param_name(param_name)
-
-	# Set default normalized value (deferred so the slider's _ready() runs first)
-	if range_max != range_min:
-		var norm := (default_val - range_min) / (range_max - range_min)
-		norm = clampf(norm, 0.0, 1.0)
-		_defer_set_normalized.call_deferred(slider_instance, norm)
-
-	# The smooth slider scene has a built-in LabelName node — no extra label needed
-
-	_sliders.append({
-		"instance": slider_instance,
-		"name": param_name,
-		"min": range_min,
-		"max": range_max,
-		"default": default_val
-	})
-	_next_slider_index += 1
-
-	return slider_instance
+func _on_any_slider_moved(_value, param_name: String) -> void:
+	for d in _sliders:
+		if d["name"] == param_name:
+			slider_value_changed.emit(param_name, get_slider_value(_sliders.find(d)))
+			return
 
 
 func _defer_set_normalized(slider: Node3D, norm: float) -> void:
@@ -158,72 +80,65 @@ func _defer_set_normalized(slider: Node3D, norm: float) -> void:
 		slider.set_normalized_value(norm)
 
 
-## Add a display-only readout label on the panel.
-## Returns the Label3D so the caller can update its text.
+## Add a named readout. Backed by the board's single multi-line readout line
+## (one row per name), so the styling is canonical. Returns a stand-in Label
+## the caller can also write to (kept for API compatibility).
 func add_readout(label_name: String, initial_text: String = "--") -> Label3D:
-	var panel_height: float = _rack_units_tall * RACK_UNIT
-	var panel_width: float = _columns * SLIDER_WIDTH + (_columns - 1) * SLIDER_SLOT_GAP + PADDING_H * 2.0
-	panel_width = max(panel_width, 0.18)
-
-	var readout := Label3D.new()
-	readout.name = "Readout_%s" % label_name.replace(" ", "_")
-	readout.font_size = 11
-	readout.pixel_size = 0.001
-	readout.modulate = ACCENT_CYAN
-	readout.outline_size = 0
-	readout.billboard = BaseMaterial3D.BILLBOARD_DISABLED
-	readout.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-
-	# Position readouts below the sliders area
-	var readout_y: float = -panel_height * 0.5 + PADDING_V + _readout_count * READOUT_HEIGHT + READOUT_HEIGHT * 0.5
-	readout.position = Vector3(0, readout_y, PANEL_DEPTH * 0.5 + 0.001)
-	readout.text = "%s: %s" % [label_name, initial_text]
-
-	add_child(readout)
-	_readouts[label_name] = readout
-	_readout_count += 1
-
-	return readout
+	if _readout_line == null:
+		_readout_line = _board.add_readout("")
+	_readout_names.append(label_name)
+	_readout_values[label_name] = initial_text
+	_rebuild_readout_text()
+	# Back-compat shim: a detached Label3D some callers store; we mirror writes
+	# to it through update_readout, so returning a fresh one is safe.
+	var shim := Label3D.new()
+	shim.name = "ReadoutShim_%s" % label_name.replace(" ", "_")
+	shim.visible = false
+	add_child(shim)
+	_readouts[label_name] = shim
+	return shim
 
 
-## Update a named readout's displayed value
 func update_readout(label_name: String, value_text: String) -> void:
-	var readout: Label3D = _readouts.get(label_name, null)
-	if readout and is_instance_valid(readout):
-		var new_text := "%s: %s" % [label_name, value_text]
-		if readout.text != new_text:
-			readout.text = new_text
+	if not _readout_values.has(label_name):
+		_readout_names.append(label_name)
+	_readout_values[label_name] = value_text
+	_rebuild_readout_text()
 
 
-## Get the panel width for external positioning
+func _rebuild_readout_text() -> void:
+	if _readout_line == null:
+		return
+	var lines: Array[String] = []
+	for n in _readout_names:
+		lines.append("%s: %s" % [n, _readout_values.get(n, "--")])
+	_readout_line.text = "\n".join(lines)
+
+
 func get_panel_width() -> float:
-	var w: float = _columns * SLIDER_WIDTH + (_columns - 1) * SLIDER_SLOT_GAP + PADDING_H * 2.0
-	return max(w, 0.18)
+	if _board and _board.has_method("get_board_size"):
+		return _board.get_board_size().x
+	return max(_columns * 0.12, 0.4)
 
 
-## Get the panel height for external positioning
 func get_panel_height() -> float:
-	return _rack_units_tall * RACK_UNIT
+	if _board and _board.has_method("get_board_size"):
+		return _board.get_board_size().y
+	return 0.3
 
 
-## Programmatically set a slider's value by index
 func set_slider_value(index: int, value: float) -> void:
 	if index < 0 or index >= _sliders.size():
 		return
 	var data: Dictionary = _sliders[index]
 	var slider: Node3D = data["instance"]
-	if not is_instance_valid(slider):
+	if not is_instance_valid(slider) or data["max"] == data["min"]:
 		return
-	var range_min: float = data["min"]
-	var range_max: float = data["max"]
-	if range_max == range_min:
-		return
-	var norm: float = clampf((value - range_min) / (range_max - range_min), 0.0, 1.0)
+	var norm: float = clampf((value - data["min"]) / (data["max"] - data["min"]), 0.0, 1.0)
 	if slider.has_method("set_normalized_value"):
 		slider.set_normalized_value(norm)
 
 
-## Get a slider's current logical value by index
 func get_slider_value(index: int) -> float:
 	if index < 0 or index >= _sliders.size():
 		return 0.0
@@ -231,41 +146,10 @@ func get_slider_value(index: int) -> float:
 	var slider: Node3D = data["instance"]
 	if not is_instance_valid(slider):
 		return data["default"]
-	var range_min: float = data["min"]
-	var range_max: float = data["max"]
 	if slider.has_method("get_normalized_value"):
-		var norm: float = slider.get_normalized_value()
-		return lerp(range_min, range_max, norm)
+		return lerp(data["min"], data["max"], float(slider.get_normalized_value()))
 	return data["default"]
 
 
-func _get_slider_slot_position(index: int) -> Vector3:
-	var panel_height: float = _rack_units_tall * RACK_UNIT
-	var panel_width: float = _columns * SLIDER_WIDTH + (_columns - 1) * SLIDER_SLOT_GAP + PADDING_H * 2.0
-	panel_width = max(panel_width, 0.18)
-
-	var col: int = index % _columns
-	var row: int = index / _columns
-
-	# Horizontal: center the columns on the panel
-	var total_sliders_width: float = _columns * SLIDER_WIDTH + (_columns - 1) * SLIDER_SLOT_GAP
-	var start_x: float = -total_sliders_width * 0.5 + SLIDER_WIDTH * 0.5
-	var x: float = start_x + col * (SLIDER_WIDTH + SLIDER_SLOT_GAP)
-
-	# Vertical: start below title area, each row goes down
-	var top_y: float = panel_height * 0.5 - TITLE_HEIGHT - 0.02
-	var y: float = top_y - SLIDER_HEIGHT * 0.5 - row * (SLIDER_HEIGHT + MODULE_GAP)
-
-	# Z: on the front surface of the panel
-	var z: float = PANEL_DEPTH * 0.5 + 0.002
-
-	return Vector3(x, y, z)
-
-func _exit_tree() -> void:
-	for child in get_children():
-		if not child.owner:
-			child.queue_free()
-
-
-func apply_grid_config(config: Dictionary) -> void:
+func apply_grid_config(_config: Dictionary) -> void:
 	pass

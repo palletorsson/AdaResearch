@@ -1,0 +1,29 @@
+{
+  "timestamp": "2026-06-02T09:05:00",
+  "phase": "baseline",
+  "pipeline_summary": {
+    "method": "mean HEAD over 22 spine sequences",
+    "global_avg": 6.045,
+    "head_distribution": "21 sequences at stage 6 (vr_testing, user-blocked); randomness at stage 7 (polish)",
+    "only_movable_head": "randomness (stage 7 polish -> 8 complete) requires capture PNGs"
+  },
+  "heat_map_top_5": [
+    "floor 80 (active commits)",
+    "shader 65 (active)",
+    "primitive 65 (active)",
+    "change sequence documentation 60 (deep discovery)",
+    "boolean_surfaces 60 (deep discovery, worked last breath)"
+  ],
+  "garden_health": {
+    "note": "spine DORMANT/SCATTERED on voicing: softbodies 10/46, isosurfaces 3/27; gallery 96/722 (non-spine)"
+  },
+  "release_gates": {
+    "overall": "PASS",
+    "enabled": "4/4 passing",
+    "A_sequence_contract": "PASS (undeclared_map_folders 626 informational)",
+    "B_registry": "PASS (missing_map_ready 6, missing_include 6)",
+    "C_map_validation": "PASS (gradeA 911, B 144, C 139, F 0)",
+    "D_lab_continuity": "PASS"
+  },
+  "discovered_bug": "tools/sequence_pipeline_scorer.py CAPTURES_DIR points to AppData/Local/Godot (nonexistent); Godot writes to AppData/Roaming/Godot. Polish stage reads 0% for ALL sequences regardless of actual captures."
+}

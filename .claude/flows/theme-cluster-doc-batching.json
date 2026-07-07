@@ -1,0 +1,103 @@
+{
+  "id": "theme-cluster-doc-batching",
+  "title": "Theme-cluster pair-contrast documentation batching",
+  "description": "Clear a sequence's stage-2 documentation HEAD by batching 5-7 maps per breath, structured as singles-that-close-a-set or pairs-that-contrast-a-parameter-axis. Demonstrated to scale from substage progress (29% -> 44% -> 59% -> 79%) to full stage clear (-> 100%) and HEAD advance in 4 breaths.",
+  "triggers": [
+    "softbodies stage 2",
+    "stage_2_documentation",
+    "doc batching",
+    "blurb intent batch",
+    "imported gallery maps",
+    "cluster documentation"
+  ],
+  "granularity": "macro",
+  "model_version": "opus-4.7",
+  "created": "2026-05-26",
+  "updated": "2026-05-26",
+  "earned_from": "5 consecutive breaths 2026-04-30, 2026-05-19, 2026-05-21, 2026-05-22, 2026-05-26 cumulative documentation_writing 55/55. Final breath 2026-05-26 cleared softbodies stage 2 100% and advanced HEAD 2 -> 3 - the first stage advance in 26 days under the VR ceiling.",
+  "preconditions": [
+    "Target sequence has a stage-2 documentation HEAD (some maps lack blurb.md and/or intent.md)",
+    "Maps cluster into named groups by shared artifact substrate or generator (e.g. all SoftBody_gm__ are mould variants; all SoftBody_sb_ca__ are CA-rule variants)",
+    "Each map's map_data.json description encodes the parameter that distinguishes it from its cluster-mates",
+    "An existing batch of already-docced sister maps is available as a voice reference"
+  ],
+  "nodes": [
+    {
+      "id": "identify_blockers",
+      "type": "action",
+      "label": "List the exact maps missing blurb.md or intent.md",
+      "detail": "Iterate the sequence's maps[] list and check os.path.exists for blurb.md and intent.md in each commons/maps/<name>/. Output count + names. Should be 5-7 maps for a single-breath clear; if more, plan multiple breaths."
+    },
+    {
+      "id": "cluster_them",
+      "type": "action",
+      "label": "Group blockers into singles-and-pairs by cluster substrate",
+      "detail": "Two kinds of items: (a) SINGLES that CLOSE an existing set (e.g. sb_noise01 closes rule-as-loom rd/ls/ca/noise where the other three families already had pair-contrast), (b) PAIRS that CONTRAST a parameter axis (e.g. gl04 vs gl05 = param-variation vs param-breakdown; gm01 vs gm02 = constant-radius vs varying-radius cavity). Pairs must contrast a clean axis; if you cannot name the contrast in one phrase, choose a different pairing."
+    },
+    {
+      "id": "budget_check",
+      "type": "decision",
+      "label": "Total items <= 5?",
+      "detail": "Hard limit per breath. A pair counts as one item. If the cluster needs > 5 items, defer the lowest-priority pair to the next breath; do NOT exceed the budget."
+    },
+    {
+      "id": "read_voice",
+      "type": "action",
+      "label": "Read 1-2 already-docced sister-map blurb+intent files",
+      "detail": "Pick maps from the same cluster docced in earlier breaths. Read both files. Match: short narrative paragraphs in blurb.md, structured Concept/Sequence-role/Technical-angle/Critical-angle/Key-artifacts/Gap sections in intent.md. The voice is physics-first, rule-as-author framing, no craft-romanticism."
+    },
+    {
+      "id": "read_map_descriptions",
+      "type": "action",
+      "label": "Read map_data.json description fields for each blocker",
+      "detail": "Each map's description encodes the parameter it varies. Use python with encoding='utf-8' to avoid garbled output on non-ASCII characters (already-imported maps often have utf8 ellipsis/arrow chars). The description is the source-of-truth for what the map demonstrates."
+    },
+    {
+      "id": "write_pair",
+      "type": "action",
+      "label": "Write blurb + intent per map, pair-by-pair",
+      "detail": "For each pair, write both maps' blurb.md and intent.md before moving on. The two docs of a pair should reference each other implicitly through the cluster-axis they contrast. Keep blurb under 200 words (3 short narrative paragraphs). Keep intent structured: Concept, Sequence role (must name the cluster + pair-contrast), Technical angle, Critical angle, Key artifacts, Gap. Critical angle should advance a small theorem the cluster jointly demonstrates."
+    },
+    {
+      "id": "verify_scorer",
+      "type": "action",
+      "label": "Re-run sequence_pipeline_scorer to confirm HEAD movement",
+      "detail": "python tools/sequence_pipeline_scorer.py | grep <sequence>. Confirm stage_2_documentation is now OK and HEAD has moved past stage 2. If still at 99% or 95%, one map's docs failed to write - re-check os.path.exists for both files in every blocker."
+    },
+    {
+      "id": "verify_pathfinder",
+      "type": "action",
+      "label": "Re-run pathfinder on the modified maps",
+      "detail": "Doc edits should not change map structure, but a defensive check. python tools/map_pathfinder.py check <MapName> for each blocker. Pre-existing WARNs at the cluster level are expected (e.g. teleporter-height WARN affects entire gallery import) and do not block; 0 FAIL is the success criterion."
+    },
+    {
+      "id": "harvest",
+      "type": "end",
+      "label": "HEAD advanced; record in breath_log under skill documentation_writing"
+    }
+  ],
+  "edges": [
+    { "from": "identify_blockers", "to": "cluster_them" },
+    { "from": "cluster_them", "to": "budget_check" },
+    { "from": "budget_check", "to": "read_voice", "label": "yes (<=5)" },
+    { "from": "budget_check", "to": "cluster_them", "label": "no - re-cluster or defer" },
+    { "from": "read_voice", "to": "read_map_descriptions" },
+    { "from": "read_map_descriptions", "to": "write_pair" },
+    { "from": "write_pair", "to": "verify_scorer" },
+    { "from": "verify_scorer", "to": "verify_pathfinder" },
+    { "from": "verify_pathfinder", "to": "harvest" }
+  ],
+  "confidence": "verified",
+  "summary": "Group stage-2 doc blockers into singles-that-close-a-set or pairs-that-contrast-an-axis (<=5 items per breath). Read sister-map voice. Write blurb + intent per map. Verify with scorer + pathfinder. Demonstrated 55/55 cumulative success across 5 breaths; cleared softbodies stage 2 100% in 4 breaths.",
+  "anti_patterns": [
+    "Pairing two maps that share a parameter rather than contrasting one. The contrast is what gives the cluster its theorem; without it, the docs read as repetition.",
+    "Reading the map_data.json without encoding='utf-8'. Imported maps often have utf8 ellipsis/arrow characters that the default Windows codepage mangles.",
+    "Exceeding the 5-item budget by treating each map as its own item. Pairs count as one item; that is the budget's allowance for pair-contrast.",
+    "Writing blurb in the same structured form as intent. blurb.md is narrative (3 short paragraphs); intent.md is structured (Concept/Sequence-role/Technical-angle/Critical-angle/Key-artifacts/Gap). Mixing the two voices breaks the reader's expectation set by 27+ already-docced sister maps."
+  ],
+  "links_to": [
+    "breathe-cycle",
+    "sequence-improve",
+    "metadata-enrich"
+  ]
+}

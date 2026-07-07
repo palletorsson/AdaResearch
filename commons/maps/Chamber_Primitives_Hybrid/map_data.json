@@ -1,0 +1,59 @@
+{
+  "map_info": {
+    "name": "Chamber_Primitives_Hybrid",
+    "lookup_name": "Chamber_Primitives_Hybrid",
+    "description": "Auto-placement variant of Chamber_Primitives using the 'hybrid' strategy from placement_research. Score: before=0.946, after=0.954.",
+    "dimensions": {
+      "width": 11,
+      "depth": 7,
+      "max_height": 2
+    },
+    "version": "auto-placement-hybrid"
+  },
+  "settings": {
+    "cube_size": 1,
+    "gutter": 0,
+    "show_grid": true,
+    "enable_physics": true,
+    "enter_type": "I"
+  },
+  "utility_definitions": {
+    "t": {
+      "type": "teleporter",
+      "name": "Return to Lab",
+      "description": "Sequence complete",
+      "properties": {
+        "action": "next_in_sequence"
+      }
+    }
+  },
+  "layers": {
+    "structure": [
+      ["1","1","1","1","2","2","2","1","1","1","2"],
+      ["1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","2","1","1","1","1","1"],
+      ["2","2","2","2","2","0","2","2","2","1","1"],
+      ["0","0","0","0","0","0","0","0","2","1","1"],
+      ["0","0","0","0","0","0","0","0","2","1","0"]
+    ],
+    "utilities": [
+      ["sp"," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," ","t"]
+    ],
+    "interactables": [
+      [" "," "," "," "," "," ","science_screen:180:1.5#mode:point"," "," "," "," "],
+      [" "," "," ","catalyst_vent:0:0#emit_interval_s:3.0#wave_size:3#start_delay_s:5.0#initial_state:foe"," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," ","becoming_catalyst#start_mode:primitives"," "," "," ","catalyst_target"," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "]
+    ]
+  }
+}

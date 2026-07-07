@@ -1,0 +1,47 @@
+{
+  "map_info": {
+    "name": "MiniScene_Point",
+    "lookup_name": "MiniScene_Point",
+    "title": "Mini scene: Point",
+    "description": "A mini scene grown by tools/grow_scene.py — point staged by footprint rule (space). One concept, one bead; maps are necklaces of these.",
+    "version": "0.1-grow-scene",
+    "format": "json",
+    "created_from": "tools/grow_scene.py",
+    "dimensions": {
+      "width": 3,
+      "depth": 3,
+      "max_height": 3
+    },
+    "metadata": {
+      "category": "bead",
+      "estimated_time": "0 minutes"
+    }
+  },
+  "utility_definitions": {},
+  "settings": {
+    "floor_tile_size": 1.0,
+    "disable_biome": true,
+    "color_overrides": {
+      "model_color": "#E7E5DE",
+      "wireframe_color": "#9AA0A6",
+      "wireframe_opacity": 0.35
+    }
+  },
+  "layers": {
+    "structure": [
+      ["1","1","1"],
+      ["1","1","1"],
+      ["1","1","1"]
+    ],
+    "utilities": [
+      [" "," "," "],
+      [" "," "," "],
+      [" "," "," "]
+    ],
+    "interactables": [
+      [" "," "," "],
+      [" ","point:180:1.6"," "],
+      [" "," "," "]
+    ]
+  }
+}

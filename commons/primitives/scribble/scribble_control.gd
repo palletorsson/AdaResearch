@@ -135,19 +135,16 @@ func _draw_glyph(ch: String, origin: Vector2, h: float, seed: int) -> float:
 		var u := ch.unicode_at(0)
 		var baseline := Vector2(origin.x, origin.y + h * 0.84)
 		var ci := get_canvas_item()
-		# Faint chalky double, offset down-right.
-		_font.draw_char(ci, baseline + Vector2(2.0, 2.0), u, fs,
-			Color(ink_color.r, ink_color.g, ink_color.b, 0.28))
-		# FAUX-BOLD: draw the glyph several times at 1px sub-offsets so the
+		# FAUX-BOLD: draw the glyph a few times at small sub-offsets so the
 		# thin font strokes gain the same visual weight as the hand-drawn
-		# symbol strokes. Thin antialiased text was washing out at VR
-		# viewing distance (per-eye resolution + mipmaps eat 1px strokes),
-		# so only the chunky symbols survived. Stacking passes thickens it.
-		var bold: float = maxf(1.0, h * 0.05)   # bold radius scales with size
+		# symbol strokes (thin antialiased text washes out at VR distance).
+		# NOTE: no faint offset "ghost" pass — that read as a second blurry
+		# copy of the text BEHIND the chalk. Every pass is full-opacity ink so
+		# the result is one clean, solid stroke.
+		var bold: float = maxf(0.8, h * 0.045)   # bold radius scales with size
 		for off in [
 			Vector2(bold, 0.0), Vector2(-bold, 0.0),
 			Vector2(0.0, bold), Vector2(0.0, -bold),
-			Vector2(bold, bold) * 0.7, Vector2(-bold, -bold) * 0.7,
 		]:
 			_font.draw_char(ci, baseline + off, u, fs, ink_color)
 		_font.draw_char(ci, baseline, u, fs, ink_color)

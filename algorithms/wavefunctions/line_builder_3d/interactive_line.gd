@@ -1,3 +1,14 @@
+# interactive_line.gd - a line as a tube threaded through grabbable points
+#
+# @identity
+# essence: a line rendered as a tube through a chain of grabbable point-spheres, rebuilt every frame from their positions
+# desire: learner feels that a line is not a stroke but a sequence of points — move a point and the line follows
+# critical_parameter: the point positions (point_count and their live global_position) — the line is nothing but the points it threads
+# triggers: spawns point_count spheres with random jitter, then rebuilds a tube mesh through them every _process via SurfaceTool
+# emerges: the insight that a curve is an interpolation over samples — continuity is manufactured between discrete handles
+# needs: [live tube rebuilt from grabbable points [has], missing a control to add or remove points at runtime]
+# relationships: the movable cousin of the static line primitive; a bridge from point to curve
+# truth: a line is a decision to connect points — the points are given, the connection is authored
 extends Node3D
 
 @export var point_scene: PackedScene = preload("res://commons/primitives/point/grab_sphere_point.tscn")

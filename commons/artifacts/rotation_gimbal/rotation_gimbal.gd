@@ -6,6 +6,8 @@ class_name RotationGimbal
 ## rings align and "GIMBAL LOCK!" flashes. Inner box shows the final orientation.
 ## Teaches why quaternions matter.
 
+const BakedText = preload("res://commons/utils/baked_text_albedo.gd")
+
 # --- Configuration ---
 
 @export var ring_radius_outer: float = 0.28
@@ -39,12 +41,19 @@ var _y_ring: MeshInstance3D
 var _z_ring: MeshInstance3D
 var _inner_box: MeshInstance3D
 var _box_axes_mesh: MeshInstance3D
-var _title_label: Label3D
-var _matrix_label: Label3D
-var _angles_label: Label3D
-var _lock_label: Label3D
-var _info_label: Label3D
 var _control_panel: Node3D
+
+# --- Integrated 2D-in-3D boards (baked text on surfaces) ---
+var _readout_board: Node3D       # Euler angles + rotation matrix, one panel
+var _readout_anchor: Node3D      # fixed transform holding the readout board
+var _lock_board: Node3D          # "GIMBAL LOCK!" flash board
+var _lock_mat: StandardMaterial3D  # cached material of the lock board face (for flash)
+var _info_board: Node3D          # status/info line under the rings
+var _info_anchor: Node3D         # fixed transform holding the info board
+
+# Cache guards — rebuild a board only when its text actually changes
+var _readout_cache: String = ""
+var _info_cache: String = ""
 
 # Sliders
 var _x_slider: Node
@@ -83,6 +92,7 @@ func _build_gimbal() -> void:
 	_x_ring = _create_ring(ring_radius_outer, ring_tube_radius, color_x, "XRing")
 	_x_ring_pivot.add_child(_x_ring)
 	_add_axis_tick(_x_ring_pivot, ring_radius_outer, color_x, Vector3.RIGHT)
+	_add_axis_tag(_x_ring_pivot, ring_radius_outer, color_x, Vector3.RIGHT, "X  PITCH")
 
 	# Middle: Y-axis ring (green) — yaw
 	_y_ring_pivot = Node3D.new()
@@ -93,6 +103,7 @@ func _build_gimbal() -> void:
 	_y_ring.rotation_degrees.z = 90.0  # Rotate so torus aligns with Y rotation
 	_y_ring_pivot.add_child(_y_ring)
 	_add_axis_tick(_y_ring_pivot, ring_radius_mid, color_y, Vector3.UP)
+	_add_axis_tag(_y_ring_pivot, ring_radius_mid, color_y, Vector3.UP, "Y  YAW")
 
 	# Innermost: Z-axis ring (blue) — roll
 	_z_ring_pivot = Node3D.new()
@@ -103,6 +114,7 @@ func _build_gimbal() -> void:
 	_z_ring.rotation_degrees.x = 90.0  # Rotate so torus aligns with Z rotation
 	_z_ring_pivot.add_child(_z_ring)
 	_add_axis_tick(_z_ring_pivot, ring_radius_inner, color_z, Vector3.BACK)
+	_add_axis_tag(_z_ring_pivot, ring_radius_inner, color_z, Vector3.BACK, "Z  ROLL")
 
 
 func _create_ring(radius: float, tube_radius: float, color: Color, ring_name: String) -> MeshInstance3D:
@@ -153,6 +165,23 @@ func _add_axis_tick(pivot: Node3D, radius: float, color: Color, direction: Vecto
 	mat.vertex_color_use_as_albedo = true
 	tick_mesh.material_override = mat
 	pivot.add_child(tick_mesh)
+
+
+func _add_axis_tag(pivot: Node3D, radius: float, color: Color, direction: Vector3, text: String) -> void:
+	# A small integrated 2D-in-3D board naming the ring's axis. Pushed well OUT
+	# past the ring (radius + tick + clearance) so it never collides with the
+	# torus or with the neighbouring ring's tag. Billboarded to stay readable.
+	var tag: Node3D = BakedText.make_tag(
+		text, color.lightened(0.35), 0.055,
+		Color(0.06, 0.07, 0.09), true, color)
+	if tag == null:
+		return
+	tag.name = "AxisTag"
+	# Clearance beyond the outermost tick tip; scaled a touch by ring size so the
+	# three tags fan outward rather than stacking at one distance.
+	var clearance := 0.075
+	tag.position = direction * (radius + clearance)
+	pivot.add_child(tag)
 
 
 # ------------------------------------------------------------------
@@ -248,95 +277,79 @@ func _build_box_face_markers() -> void:
 # ------------------------------------------------------------------
 
 func _build_labels() -> void:
-	# Title
-	_title_label = Label3D.new()
-	_title_label.name = "TitleLabel"
-	_title_label.text = "GIMBAL LOCK"
-	_title_label.font_size = 28
-	_title_label.pixel_size = 0.001
-	_title_label.position = Vector3(0, 0.72, 0)
-	_title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	_title_label.modulate = Color(0.92, 0.92, 0.97)
-	_title_label.outline_size = 5
-	_title_label.billboard = BaseMaterial3D.BILLBOARD_DISABLED
-	add_child(_title_label)
+	# \u2500\u2500 Title header board \u2014 title + subtitle + legend on ONE opaque plate \u2500\u2500
+	# One printed panel above the rig instead of three stacked floating labels.
+	var header_lines := [
+		"GIMBAL LOCK",
+		"Why Euler angles lose a degree of freedom",
+		"",
+		"X pitch = red   Y yaw = green   Z roll = blue",
+	]
+	var header := BakedText.make_text_block(
+		header_lines, Color(0.90, 0.92, 0.98), 0.052, 0.72, 0.020, true)
+	header.name = "HeaderBoard"
+	# A dark backing plate so the text reads as a display, not floating glyphs.
+	add_child(_make_backing_plate("HeaderPlate", Vector3(0, 0.66, -0.006),
+		Vector2(0.82, 0.30), Color(0.05, 0.06, 0.08)))
+	header.position = Vector3(0, 0.66, 0)
+	add_child(header)
 
-	# Subtitle
-	var subtitle = Label3D.new()
-	subtitle.name = "SubtitleLabel"
-	subtitle.text = "Why Euler angles lose a degree of freedom"
-	subtitle.font_size = 14
-	subtitle.pixel_size = 0.001
-	subtitle.position = Vector3(0, 0.68, 0)
-	subtitle.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	subtitle.modulate = Color(0.7, 0.75, 0.85, 0.9)
-	subtitle.outline_size = 3
-	subtitle.billboard = BaseMaterial3D.BILLBOARD_DISABLED
-	add_child(subtitle)
+	# \u2500\u2500 Readout board \u2014 Euler angles + rotation matrix on ONE panel \u2500\u2500
+	# Fixed anchor to the left of the rig; the board is rebuilt (cache-guarded)
+	# only when the numbers change. Left of centre so it clears the rings.
+	_readout_anchor = Node3D.new()
+	_readout_anchor.name = "ReadoutAnchor"
+	_readout_anchor.position = Vector3(-0.62, 0.40, 0.02)
+	add_child(_readout_anchor)
+	# Static backing plate for the readout \u2014 persists across board rebuilds.
+	_readout_anchor.add_child(_make_backing_plate("ReadoutPlate", Vector3(0, 0, -0.006),
+		Vector2(0.44, 0.44), Color(0.04, 0.05, 0.07)))
 
-	# Euler angles readout
-	_angles_label = Label3D.new()
-	_angles_label.name = "AnglesLabel"
-	_angles_label.font_size = 18
-	_angles_label.pixel_size = 0.001
-	_angles_label.position = Vector3(-0.42, 0.45, 0)
-	_angles_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
-	_angles_label.modulate = Color(0.85, 0.85, 0.9)
-	_angles_label.outline_size = 3
-	_angles_label.billboard = BaseMaterial3D.BILLBOARD_DISABLED
-	add_child(_angles_label)
+	# \u2500\u2500 Lock warning board \u2014 the flashing "GIMBAL LOCK!" alert \u2500\u2500
+	# make_tag gives an opaque board; we grab its face material to pulse alpha.
+	_lock_board = BakedText.make_tag(
+		"GIMBAL  LOCK", Color(1.0, 0.85, 0.80), 0.10,
+		Color(0.14, 0.02, 0.02), false, color_lock)
+	if _lock_board:
+		_lock_board.name = "LockBoard"
+		_lock_board.position = Vector3(0, 0.05, 0)
+		add_child(_lock_board)
+		# Cache the dark glass face material (emission disabled) so _process can
+		# pulse its alpha. The frame face also has emission off, so take the
+		# first non-emissive StandardMaterial3D found — either reads as the plate.
+		for child in _lock_board.get_children():
+			if child is MeshInstance3D:
+				var mm = child.material_override
+				if mm is StandardMaterial3D and not mm.emission_enabled:
+					_lock_mat = mm
+					# Enable alpha so the _process flash can fade the face.
+					_lock_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+					break
+		_set_lock_visible(false)
 
-	# Rotation matrix display
-	_matrix_label = Label3D.new()
-	_matrix_label.name = "MatrixLabel"
-	_matrix_label.font_size = 14
-	_matrix_label.pixel_size = 0.001
-	_matrix_label.position = Vector3(0.38, 0.45, 0)
-	_matrix_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
-	_matrix_label.modulate = Color(0.75, 0.8, 0.9)
-	_matrix_label.outline_size = 2
-	_matrix_label.billboard = BaseMaterial3D.BILLBOARD_DISABLED
-	add_child(_matrix_label)
+	# \u2500\u2500 Info / status board \u2014 one line under the rig, rebuilt on state change \u2500\u2500
+	_info_anchor = Node3D.new()
+	_info_anchor.name = "InfoAnchor"
+	_info_anchor.position = Vector3(0, -0.02, 0.0)
+	add_child(_info_anchor)
 
-	# GIMBAL LOCK warning label
-	_lock_label = Label3D.new()
-	_lock_label.name = "LockWarning"
-	_lock_label.text = "GIMBAL LOCK!"
-	_lock_label.font_size = 36
-	_lock_label.pixel_size = 0.001
-	_lock_label.position = Vector3(0, 0.05, 0)
-	_lock_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	_lock_label.modulate = Color(color_lock, 0.0)  # Start invisible
-	_lock_label.outline_size = 6
-	_lock_label.outline_modulate = Color(0, 0, 0, 0.8)
-	_lock_label.billboard = BaseMaterial3D.BILLBOARD_DISABLED
-	add_child(_lock_label)
 
-	# Info label explaining gimbal lock
-	_info_label = Label3D.new()
-	_info_label.name = "InfoLabel"
-	_info_label.text = "Set Y to 90\u00b0 \u2014 X and Z axes merge!"
-	_info_label.font_size = 12
-	_info_label.pixel_size = 0.001
-	_info_label.position = Vector3(0, -0.01, 0)
-	_info_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	_info_label.modulate = Color(0.6, 0.65, 0.75, 0.8)
-	_info_label.outline_size = 2
-	_info_label.billboard = BaseMaterial3D.BILLBOARD_DISABLED
-	add_child(_info_label)
-
-	# Legend
-	var legend = Label3D.new()
-	legend.name = "LegendLabel"
-	legend.text = "X (pitch) = Red | Y (yaw) = Green | Z (roll) = Blue"
-	legend.font_size = 11
-	legend.pixel_size = 0.001
-	legend.position = Vector3(0, -0.05, 0)
-	legend.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	legend.modulate = Color(0.55, 0.55, 0.6, 0.7)
-	legend.outline_size = 2
-	legend.billboard = BaseMaterial3D.BILLBOARD_DISABLED
-	add_child(legend)
+func _make_backing_plate(node_name: String, pos: Vector3, size: Vector2, col: Color) -> MeshInstance3D:
+	# A flat dark plate behind a text board so the readout reads as a lit display
+	# panel rather than glyphs floating in space.
+	var plate := MeshInstance3D.new()
+	plate.name = node_name
+	var qm := QuadMesh.new()
+	qm.size = size
+	plate.mesh = qm
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = col
+	mat.roughness = 0.5
+	mat.metallic = 0.15
+	plate.material_override = mat
+	plate.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	plate.position = pos
+	return plate
 
 
 # ------------------------------------------------------------------
@@ -425,21 +438,15 @@ func _update_gimbal() -> void:
 	var dist_to_90 = minf(absf(y_mod - 90.0), absf(y_mod - 270.0))
 	_is_locked = dist_to_90 < gimbal_lock_threshold
 
-	_update_angles_label()
-	_update_matrix_label()
+	_update_readout_board()
 	_update_lock_warning()
+	_update_info_board()
 
 
-func _update_angles_label() -> void:
-	if not _angles_label:
-		return
-	_angles_label.text = "Euler Angles:\n  X (pitch): %.1f\u00b0\n  Y (yaw):   %.1f\u00b0\n  Z (roll):  %.1f\u00b0" % [
-		angle_x, angle_y, angle_z
-	]
-
-
-func _update_matrix_label() -> void:
-	if not _matrix_label:
+func _update_readout_board() -> void:
+	# Euler angles AND the combined rotation matrix on ONE make_text_block panel.
+	# Cache-guarded: rebuild the baked-text quads only when the string changes.
+	if not _readout_anchor:
 		return
 
 	# Build the combined rotation matrix R = Rx * Ry * Rz
@@ -454,7 +461,6 @@ func _update_matrix_label() -> void:
 	var cz = cos(rz)
 	var sz = sin(rz)
 
-	# Combined rotation matrix: Rx * Ry * Rz
 	var m00 = cy * cz
 	var m01 = -cy * sz
 	var m02 = sy
@@ -465,24 +471,65 @@ func _update_matrix_label() -> void:
 	var m21 = cx * sy * sz + sx * cz
 	var m22 = cx * cy
 
-	_matrix_label.text = "R = Rx\u00b7Ry\u00b7Rz\n|%5.2f %5.2f %5.2f|\n|%5.2f %5.2f %5.2f|\n|%5.2f %5.2f %5.2f|" % [
-		m00, m01, m02,
-		m10, m11, m12,
-		m20, m21, m22,
+	var lines := [
+		"EULER ANGLES",
+		"X pitch  %7.1f" % angle_x,
+		"Y yaw    %7.1f" % angle_y,
+		"Z roll   %7.1f" % angle_z,
+		"",
+		"R = Rx . Ry . Rz",
+		"%5.2f  %5.2f  %5.2f" % [m00, m01, m02],
+		"%5.2f  %5.2f  %5.2f" % [m10, m11, m12],
+		"%5.2f  %5.2f  %5.2f" % [m20, m21, m22],
 	]
+	var key := "\n".join(lines)
+	if key == _readout_cache:
+		return
+	_readout_cache = key
+
+	if _readout_board and is_instance_valid(_readout_board):
+		_readout_board.queue_free()
+	_readout_board = BakedText.make_text_block(
+		lines, Color(0.82, 0.88, 0.98), 0.036, 0.42, 0.010, true)
+	_readout_board.name = "ReadoutBoard"
+	_readout_anchor.add_child(_readout_board)
 
 
 func _update_lock_warning() -> void:
-	if not _lock_label:
+	# Toggle the lock board's base visibility; _process pulses its alpha while locked.
+	_set_lock_visible(_is_locked)
+
+
+func _update_info_board() -> void:
+	# One status line under the rig, rebuilt only when the message changes.
+	if not _info_anchor:
 		return
+	var msg: String
+	var col: Color
 	if _is_locked:
-		_lock_label.modulate = Color(color_lock, 1.0)
-		_info_label.text = "X and Z rotate the SAME axis! 1 DOF lost."
-		_info_label.modulate = Color(color_lock, 0.9)
+		msg = "X and Z rotate the SAME axis  -  1 DOF lost"
+		col = Color(1.0, 0.55, 0.45)
 	else:
-		_lock_label.modulate = Color(color_lock, 0.0)
-		_info_label.text = "Set Y to 90\u00b0 \u2014 X and Z axes merge!"
-		_info_label.modulate = Color(0.6, 0.65, 0.75, 0.8)
+		msg = "Set Y to 90 deg  -  X and Z axes merge"
+		col = Color(0.62, 0.68, 0.80)
+	var key := "%s|%s" % [msg, col]
+	if key == _info_cache:
+		return
+	_info_cache = key
+
+	if _info_board and is_instance_valid(_info_board):
+		_info_board.queue_free()
+	_info_board = BakedText.make_tag(msg, col, 0.05, Color(0.05, 0.06, 0.09), false, col)
+	if _info_board:
+		_info_board.name = "InfoBoard"
+		_info_anchor.add_child(_info_board)
+
+
+func _set_lock_visible(on: bool) -> void:
+	if _lock_board:
+		_lock_board.visible = on
+	if _lock_mat:
+		_lock_mat.albedo_color.a = 1.0 if on else 0.0
 
 
 # ------------------------------------------------------------------
@@ -492,8 +539,9 @@ func _update_lock_warning() -> void:
 func _process(delta: float) -> void:
 	if _is_locked:
 		_lock_flash_time += delta * 4.0
-		var alpha = 0.6 + 0.4 * sin(_lock_flash_time)
-		_lock_label.modulate = Color(color_lock, alpha)
+		# Flash the lock board by pulsing its face alpha.
+		if _lock_mat:
+			_lock_mat.albedo_color.a = 0.6 + 0.4 * sin(_lock_flash_time)
 
 		# Pulse the ring emission when locked
 		var pulse = 0.8 + 0.6 * sin(_lock_flash_time * 1.5)

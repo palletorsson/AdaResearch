@@ -100,33 +100,33 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 func _read_metadata_overrides() -> void:
 	if has_meta("config_prism_size"):
-		prism_size = float(String(get_meta("config_prism_size")))
+		prism_size = float(str(get_meta("config_prism_size")))
 	if has_meta("config_prism_height"):
-		prism_height = float(String(get_meta("config_prism_height")))
+		prism_height = float(str(get_meta("config_prism_height")))
 	if has_meta("config_glass_color"):
-		glass_color = _parse_color(String(get_meta("config_glass_color")), glass_color)
+		glass_color = _parse_color(str(get_meta("config_glass_color")), glass_color)
 	if has_meta("config_glass_emission"):
-		glass_emission = float(String(get_meta("config_glass_emission")))
+		glass_emission = float(str(get_meta("config_glass_emission")))
 	if has_meta("config_pedestal_visible"):
-		pedestal_visible = _parse_bool(String(get_meta("config_pedestal_visible")), pedestal_visible)
+		pedestal_visible = _parse_bool(str(get_meta("config_pedestal_visible")), pedestal_visible)
 	if has_meta("config_pedestal_radius"):
-		pedestal_radius = float(String(get_meta("config_pedestal_radius")))
+		pedestal_radius = float(str(get_meta("config_pedestal_radius")))
 	if has_meta("config_pedestal_height"):
-		pedestal_height = float(String(get_meta("config_pedestal_height")))
+		pedestal_height = float(str(get_meta("config_pedestal_height")))
 	if has_meta("config_pedestal_color"):
-		pedestal_color = _parse_color(String(get_meta("config_pedestal_color")), pedestal_color)
+		pedestal_color = _parse_color(str(get_meta("config_pedestal_color")), pedestal_color)
 	if has_meta("config_light_in_visible"):
-		light_in_visible = _parse_bool(String(get_meta("config_light_in_visible")), light_in_visible)
+		light_in_visible = _parse_bool(str(get_meta("config_light_in_visible")), light_in_visible)
 	if has_meta("config_light_in_color"):
-		light_in_color = _parse_color(String(get_meta("config_light_in_color")), light_in_color)
+		light_in_color = _parse_color(str(get_meta("config_light_in_color")), light_in_color)
 	if has_meta("config_light_out_visible"):
-		light_out_visible = _parse_bool(String(get_meta("config_light_out_visible")), light_out_visible)
+		light_out_visible = _parse_bool(str(get_meta("config_light_out_visible")), light_out_visible)
 	if has_meta("config_spectrum_band_count"):
-		spectrum_band_count = int(String(get_meta("config_spectrum_band_count")))
+		spectrum_band_count = int(str(get_meta("config_spectrum_band_count")))
 	if has_meta("config_light_glow"):
-		light_glow = float(String(get_meta("config_light_glow")))
+		light_glow = float(str(get_meta("config_light_glow")))
 	if has_meta("config_accent_color"):
-		accent_color = _parse_color(String(get_meta("config_accent_color")), accent_color)
+		accent_color = _parse_color(str(get_meta("config_accent_color")), accent_color)
 
 
 func _clear_built_children() -> void:

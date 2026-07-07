@@ -1,0 +1,94 @@
+{
+  "map_info": {
+    "name": "Grown_primitives_w0",
+    "lookup_name": "Grown_primitives_w0",
+    "description": "A map grown by the walker laying floor as it placed artifacts. Started at spawn with no structure; the floor and tables emerged as a byproduct of the walk. Constraint score: 0.819, placed: 6/6 artifacts, laid: 80 floor cells + 0 table cells.",
+    "version": "grown-0.1",
+    "format": "json",
+    "created_from": "tools/grow_map.py 2026-05-15",
+    "dimensions": {
+      "width": 14,
+      "depth": 9,
+      "max_height": 3
+    },
+    "metadata": {
+      "category": "grown_map",
+      "estimated_time": "1 minute",
+      "auto_research_strategy": "grow_walker",
+      "artifacts_placed": ["dgrid","CoordinateSystem3M","lshape","quad","sphere_high","righttriangle"],
+      "laid_floor_cells": 80,
+      "table_cells": 0,
+      "constraint_score": 0.819
+    },
+    "title": "Grown: primitives_w0"
+  },
+  "utility_definitions": {
+    "sp": {
+      "name": "Spawn",
+      "description": "Player spawn point",
+      "type": "spawn"
+    },
+    "t": {
+      "name": "Exit Portal",
+      "description": "Step here to leave",
+      "type": "teleporter",
+      "properties": {
+        "action": "next_in_sequence"
+      }
+    }
+  },
+  "documentation": {
+    "summary": "Grown_primitives_w0 — map emerged from walker's path",
+    "layout": "14×9 bounding box. The walker entered at spawn and laid 80 floor cells + 0 table cells as it placed 6 artifacts. The teleporter is where the walk ended.",
+    "objective": "Walk the map. The map IS the walk's record.",
+    "key_elements": ["Spawn at (8, 7)","Teleporter at (1, 0)","dgrid at (7, 7)","CoordinateSystem3M at (4, 7)","lshape at (8, 11)","quad at (0, 7)","sphere_high at (8, 6)","righttriangle at (8, 8)"]
+  },
+  "lighting": {
+    "ambient_color": [0.32,0.34,0.4],
+    "ambient_energy": 0.9,
+    "directional_light": {
+      "enabled": true,
+      "direction": [-0.3,-1.0,-0.2],
+      "energy": 0.7
+    }
+  },
+  "settings": {
+    "player_spawn_height": 0.5,
+    "floor_tile_size": 1.0
+  },
+  "layers": {
+    "structure": [
+      ["2","2","2","2","2","2","2","2","2","0","0","0","0","0"],
+      ["2","2","2","2","2","2","2","2","2","0","0","0","0","0"],
+      ["2","2","2","2","2","2","2","2","0","0","0","0","0","0"],
+      ["2","2","2","2","2","2","2","2","2","2","2","2","0","0"],
+      ["2","2","2","0","0","0","2","2","2","2","2","2","0","0"],
+      ["2","2","2","0","0","0","2","2","2","2","2","2","0","0"],
+      ["2","2","0","0","0","0","2","2","2","2","2","2","0","0"],
+      ["0","0","0","0","0","2","2","2","2","2","2","2","2","0"],
+      ["0","0","0","0","0","2","2","2","2","2","2","2","2","0"]
+    ],
+    "utilities": [
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+      ["t"," "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," ","sp"," "," "," "," "," "," "]
+    ],
+    "interactables": [
+      [" "," "," "," "," "," "," ","quad:180:0.0"," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," ","CoordinateSystem3M:180:0.0"," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," ","dgrid:180:0.0"," "," "," "," "," "," "],
+      [" "," "," "," "," "," ","sphere_high:180:0.0"," ","righttriangle:180:0.0"," "," ","lshape:180:0.0"," "," "]
+    ]
+  }
+}

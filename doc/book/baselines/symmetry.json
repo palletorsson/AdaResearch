@@ -1,0 +1,80 @@
+{
+ "_doctrine": "R-023: the baseline contract. Deck 1 BEATS = what a PLAIN tutorial on this concept would minimally need (derived from the concept, not the inventory); each beat is a ROLE cast with one artifact (alts = understudies). Deck 2 VOLTAGE = the few pieces a plain tutorial would never include -- the critical script, the thinker with QFEP. Everything uncast is AT DEPTH: kept, honored by the dig line, not needed by the book or the walk.",
+ "sequence": "symmetry",
+ "_note": "SEQUENCE CANDIDATE #23 (assemblage test, 2026-07-07): the 17 wallpaper groups. Drafted from the concept, then cast from disk — the loom/mill/pattern families were built before the chapter existed. Natural spine position: between transformation (individual transforms) and array_tutorial (the grid) — transforms → GROUPS → grid is the construction order. No sequence JSON or maps exist yet; this contract is the feasibility test.",
+ "beats": [
+  {
+   "role": "one motif — the domain cell",
+   "cast": "pattern_tile_4x4",
+   "alts": ["pattern_studio_plate", "pattern_tile_cube"]
+  },
+  {
+   "role": "translate — the tile repeats",
+   "cast": "pattern_tile_puzzle",
+   "alts": ["pattern_loom", "loom_persian_warp"]
+  },
+  {
+   "role": "reflect — the mirror",
+   "cast": "pattern_tile_mirror",
+   "alts": ["vr_tile_editor_mirror", "loom_memphis_mirror"]
+  },
+  {
+   "role": "rotate — the rotor",
+   "cast": "mill_persian_p4",
+   "alts": ["kaleidoscope", "mill_memphis_p3"]
+  },
+  {
+   "role": "glide — the sneaky symmetry",
+   "cast": "mill_escher_p4g",
+   "alts": ["loom_bolt_memphis_p4g", "pattern_tile_brick", "pattern_tile_herringbone"]
+  },
+  {
+   "role": "closure — the group, the complete set of moves",
+   "cast": "pattern_maker_station",
+   "alts": ["pattern_artifact"]
+  },
+  {
+   "role": "the seventeen — the census CLOSES",
+   "cast": "wall_pattern_gallery",
+   "alts": ["pattern_compositor"],
+   "weak": true
+  },
+  {
+   "role": "build a pattern yourself",
+   "cast": "vr_tile_editor",
+   "alts": ["pattern_tile_8x8", "pattern_studio_plate"]
+  },
+  {
+   "role": "prove it — reproduce the target group",
+   "cast": "pattern_tile_puzzle",
+   "alts": ["facade_grammar_demo"]
+  }
+ ],
+ "voltage": [
+  {
+   "piece": "loom_alhambra_p6m",
+   "after": "the seventeen — the census CLOSES",
+   "why": "the Alhambra — Islamic artisans exhausted the 17-group census centuries before group theory existed to count it; mathematics done in tile, proof-without-theorem, and the census actually CLOSES: the book's one finished classification, the deliberate counter-rhyme to fractional dimension and incompleteness"
+  },
+  {
+   "piece": "loom_escher_mirror",
+   "after": "glide — the sneaky symmetry",
+   "why": "Escher — the outsider who sat in the Alhambra copying tilings and taught the mathematicians to SEE their own theorem; the artist as the group theorist's instrument"
+  },
+  {
+   "piece": "tile_meander_floor",
+   "after": "one motif — the domain cell",
+   "why": "the Pompeii meander — three tile types, deep-time pattern labor; tiles repeat, mosaics don't: the difference between a rule performed and a picture made, two thousand years before the distinction had a name"
+  },
+  {
+   "piece": "ten_print_textile",
+   "after": "translate — the tile repeats",
+   "why": "10 PRINT as a loom — one random bit inside a symmetry machine weaves an endless bolt; the smallest possible argument that order plus a coin-flip is a textile, rhyming forward to randomness and back to the arrays' loom"
+  },
+  {
+   "piece": "loom_bolt_memphis_p4g",
+   "after": "closure — the group, the complete set of moves",
+   "why": "Memphis vs Bauhaus on the SAME group — identical mathematics, opposed ideologies; the palette is the politics, the group is innocent: what symmetry cannot see is exactly what design fights about"
+  }
+ ]
+}

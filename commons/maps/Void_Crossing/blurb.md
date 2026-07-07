@@ -1,0 +1,1 @@
+A floor that stops, a gap of nothing, and a far ledge you have to reach. The bridge is not made of stone — it is made of a vector. Step into the force field, aim it with the machine on the near shore, and let one chosen direction carry you and the loose cubes across the void. Here a force stops being a number and becomes a place you walk through.

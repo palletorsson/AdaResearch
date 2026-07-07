@@ -1,0 +1,11 @@
+Concept: A 5×5×5 spring-mass jelly grid (125 vertex masses) with low spring stiffness is dropped under gravity and settles into a squashed lattice on the floor — not a bounce, a collapse. The map is a gallery study exposing the simulation as a single soft-body marker centerpiece.
+
+Sequence role: Second jelly study (sb06) in the imported soft-body gallery cluster within the Soft Bodies sequence (13th spine, integration phase). Follows sb05 (8-corner cube, minimum topology) and precedes sb07 (tall stiff grid) and sb08 (floppy grid). The cluster argues that stiffness is a continuous parameter selecting between rubber-ball-like rebound and gel-like collapse; sb06 sits near the collapse end.
+
+Technical angle: 5×5×5 lattice of 125 vertex masses connected by structural springs (axis-aligned edges between adjacent vertices), shear springs (face diagonals), and bend springs (skipping one vertex along each axis) for volumetric stability. Spring constant k is set low so that gravitational load exceeds the elastic restoring force per spring — vertices yield faster than they spring back. Integration via Verlet or semi-implicit Euler with damping. Floor collision through penalty force or position projection. Settled height is determined by the equilibrium point where each spring's compression supports the weight above it.
+
+Critical angle: Sb05 is the minimum sufficient soft cube; sb06 is the lattice at low stiffness, demonstrating that the same topology supports radically different rest behavior once you turn one continuous knob. The pair stages a critical lesson: the same equations and the same geometry produce qualitatively different ontologies — bouncy vs. collapsing — under different parameter values. Topology fixes what can happen; stiffness fixes which of the possible behaviors actually happens.
+
+Key artifacts: gallery_marker_soft-body presents the sb06_jelly_grid_settle configuration. The squashed lattice is the room's centerpiece and explanation.
+
+Gap: A stiffness-slider artifact — the same one called out in sb05's gap — would let learners scrub k continuously from squashed (low) to rebounding (high) on this same 5×5×5 grid, making the stiffness-shape relationship perceptible as a single gesture rather than implied across separate rooms.

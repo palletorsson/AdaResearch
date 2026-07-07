@@ -66,7 +66,7 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 func _read_metadata_overrides() -> void:
 	if has_meta("config_station_spacing"):
-		station_spacing = float(String(get_meta("config_station_spacing")))
+		station_spacing = float(str(get_meta("config_station_spacing")))
 
 
 func _build_apparatus() -> void:

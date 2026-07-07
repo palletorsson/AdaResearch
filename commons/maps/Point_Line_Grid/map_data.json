@@ -1,521 +1,120 @@
 {
   "documentation": {
-    "key_elements": [
-      "`player_trace` at (0,0)",
-      "`grid_lines` at (4,3)",
-      "`dark_sphere` enclosure at (3,4)",
-      "`grab_sphere_point_snap` at (2,8)",
-      "Teleporter `t` at (4,8)",
-      "Floating text: the_grid/the_trace"
-    ],
-    "layout": "8x14 grid with central void and extended south runway.",
-    "objective": "Combine grid structure with trace recording; addressable space meets duration.",
-    "summary": "Point_Line_Grid - Grid and Trace Space"
+	"key_elements": ["`player_trace` at (0,0)","`grid_lines` at (4,3)","`dark_sphere` enclosure at (3,4)","`grab_sphere_point_snap` at (2,8)","Teleporter `t` at (4,8)","Floating text: the_grid/the_trace"],
+	"layout": "8x14 grid with central void and extended south runway.",
+	"objective": "Combine grid structure with trace recording; addressable space meets duration.",
+	"summary": "Point_Line_Grid - Grid and Trace Space"
   },
   "layers": {
-    "interactables": [
-      [
-        "player_trace:0:0.35",
-        "dark_sphere:0:-0.5",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        "grid_lines",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        "grab_sphere_point_snap",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ]
-    ],
-    "structure": [
-      [
-        "1",
-        "1",
-        "1",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0"
-      ],
-      [
-        "1",
-        "1",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0"
-      ],
-      [
-        "1",
-        "1",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0"
-      ],
-      [
-        "2",
-        "1",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0"
-      ],
-      [
-        "2",
-        "1",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0"
-      ],
-      [
-        "2",
-        "1",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0"
-      ],
-      [
-        "2",
-        "1",
-        "1",
-        "2",
-        "2",
-        "2",
-        "0",
-        "0"
-      ],
-      [
-        "2",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "2",
-        "0"
-      ],
-      [
-        "0",
-        "1",
-        "2",
-        "1",
-        "0",
-        "1",
-        "2",
-        "0"
-      ],
-      [
-        "0",
-        "1",
-        "1",
-        "1",
-        "1",
-        "1",
-        "2",
-        "0"
-      ],
-      [
-        "0",
-        "0",
-        "0",
-        "2",
-        "2",
-        "2",
-        "0",
-        "0"
-      ],
-      [
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0"
-      ],
-      [
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0"
-      ],
-      [
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0",
-        "0"
-      ]
-    ],
-    "utilities": [
-      [
-        "m:0:3:-0.5:0.1",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        "s",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        "t",
-        " ",
-        " ",
-        "an:-90"
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        "3t:the_grid/the_trace",
-        " ",
-        " ",
-        " "
-      ],
-      [
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " ",
-        " "
-      ]
-    ]
+	"interactables": [
+	  ["player_trace:0:0.5"," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "],
+	  [" "," "," "," ","grid_lines"," "," "," "],
+	  [" "," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "],
+	  [" "," "," "," ","floating_sphere_field#bounds:5,3,8"," "," "," "],
+	  [" "," ","grab_sphere_point_snap"," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," ","room_grammar"]
+	],
+	"structure": [
+	  ["1","1","1","1","1","1","1","1"],
+	  ["1","1","0","0","0","0","0","1"],
+	  ["1","1","0","0","0","0","0","1"],
+	  ["1","1","0","0","0","0","0","1"],
+	  ["1","1","0","0","0","0","0","1"],
+	  ["1","1","0","0","0","0","0","1"],
+	  ["1","1","1","1","1","1","1","1"],
+	  ["1","1","1","1","1","1","1","0"],
+	  ["1","1","2","1","0","1","1","0"],
+	  ["1","1","1","1","1","1","1","0"],
+	  ["1","1","2","1","2","1","1","0"],
+	  ["1","1","1","1","1","1","1","1"],
+	  ["1","1","2","1","2","1","2","1"],
+	  ["1","1","1","1","1","1","1","1"]
+	],
+	"utilities": [
+	  ["m:0:3:-0.5:0.1"," "," "," "," "," "," "," "],
+	  ["s"," "," "," "," "," "," "," "],
+	  ["sub:grid"," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "],
+	  [" "," "," "," ","t"," "," ","an:-90"],
+	  [" "," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "],
+	  [" "," "," "," ","3t:the_grid/the_trace"," "," "," "],
+	  [" "," "," "," "," "," "," "," "]
+	]
   },
   "lighting": {
-    "ambient_color": [
-      0.4,
-      0.4,
-      0.5
-    ],
-    "ambient_energy": 0.6,
-    "directional_light": {
-      "color": [
-        1,
-        0.9,
-        0.8
-      ],
-      "direction": [
-        -0.4,
-        -0.7,
-        -0.4
-      ],
-      "enabled": true,
-      "energy": 1.2
-    }
+	"ambient_color": [0.4,0.4,0.5],
+	"ambient_energy": 0.6,
+	"directional_light": {
+	  "color": [1,0.9,0.8],
+	  "direction": [-0.4,-0.7,-0.4],
+	  "enabled": true,
+	  "energy": 1.2
+	}
   },
   "map_info": {
-    "description": "The Grid provides the stable structure of space; the Trace records what happens within it. Where the Line reduces movement to an efficient relation, the Trace accumulates duration—sequence, hesitation, deviation. As a body moves, positions are recorded against the grid, forming a temporary history. Yet this history is bounded: memory is finite, motion is sampled, and deviation is measured relative to fixed frames. The Trace resists reduction, but only from within the grid that enables its capture, leaving a remainder that cannot be fully contained.",
-    "description_2": "The Grid formalizes space into a system of addressability. By overlaying a coordinate structure, the map reveals how free space becomes indexed, repeatable, and computable. The player navigates a tension between embodied movement and numerical position, experiencing how grids enable calculation while simultaneously erasing local irregularities. This map exposes the political and technical consequences of choosing a coordinate system.",
-    "dimensions": {
-      "depth": 14,
-      "max_height": 3,
-      "width": 8
-    },
-    "format": "json",
-    "lookup_name": "Point_Line_Grid",
-    "metadata": {
-      "category": "tutorial",
-      "difficulty": "beginner",
-      "estimated_time": "3-4 minutes",
-      "learning_objectives": [
-        "Grid structure",
-        "Trace recording",
-        "Coordinate system politics"
-      ]
-    },
-    "name": "The Grid Trace",
-    "title": "Grid Quantizes Movement",
-    "version": "1.0"
+	"description": "The Grid provides the stable structure of space; the Trace records what happens within it. Where the Line reduces movement to an efficient relation, the Trace accumulates duration—sequence, hesitation, deviation. As a body moves, positions are recorded against the grid, forming a temporary history. Yet this history is bounded: memory is finite, motion is sampled, and deviation is measured relative to fixed frames. The Trace resists reduction, but only from within the grid that enables its capture, leaving a remainder that cannot be fully contained.",
+	"description_2": "The Grid formalizes space into a system of addressability. By overlaying a coordinate structure, the map reveals how free space becomes indexed, repeatable, and computable. The player navigates a tension between embodied movement and numerical position, experiencing how grids enable calculation while simultaneously erasing local irregularities. This map exposes the political and technical consequences of choosing a coordinate system.",
+	"dimensions": {
+	  "depth": 14,
+	  "max_height": 3,
+	  "width": 8
+	},
+	"format": "json",
+	"lookup_name": "Point_Line_Grid",
+	"metadata": {
+	  "category": "tutorial",
+	  "difficulty": "beginner",
+	  "estimated_time": "3-4 minutes",
+	  "learning_objectives": ["Grid structure","Trace recording","Coordinate system politics"]
+	},
+	"name": "The Grid Trace",
+	"title": "Grid Quantizes Movement",
+	"version": "1.0"
   },
   "settings": {
-    "auto_reveal_on_entry": false,
-    "background": {
-      "color": [
-        0.2,
-        0.3,
-        0.7
-      ],
-      "type": "sky"
-    },
-    "cube_size": 1,
-    "enable_physics": true,
-    "enter_type": "I",
-    "gutter": 0,
-    "initial_tile_visibility": "hidden_except_corners",
-    "show_grid": true
+	"auto_reveal_on_entry": false,
+	"background": {
+	  "color": [0.2,0.3,0.7],
+	  "type": "sky"
+	},
+	"cube_size": 1,
+	"enable_physics": true,
+	"enter_type": "I",
+	"gutter": 0,
+	"initial_tile_visibility": "hidden_except_corners",
+	"show_grid": true,
+	"disable_biome": true
   },
   "utility_definitions": {
-    "s": {
-      "properties": {
-        "height": 5.5
-      }
-    },
-    "t": {
-      "description": "Continue to next step",
-      "name": "Next",
-      "properties": {
-        "action": "next_in_sequence"
-      },
-      "type": "teleporter"
-    }
+	"s": {
+	  "properties": {
+		"height": 5.5
+	  }
+	},
+	"t": {
+	  "description": "Continue to next step",
+	  "name": "Next",
+	  "properties": {
+		"action": "next_in_sequence"
+	  },
+	  "type": "teleporter"
+	}
+  },
+  "subtitles": {
+	"grid": "The grid quantizes: continuous movement snaps to discrete cells. This is how space becomes computable — and how the body's path becomes data."
   }
 }

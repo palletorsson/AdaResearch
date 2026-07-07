@@ -5,7 +5,8 @@
       "name": "encyclopedia",
       "runtimeExecutable": "cmd",
       "runtimeArgs": ["/c", "cd /d C:\\Users\\palle\\Documents\\GitHub\\ada_encyclopedia && npm run dev"],
-      "port": 3003
+      "port": 3003,
+      "autoPort": false
     }
   ]
 }

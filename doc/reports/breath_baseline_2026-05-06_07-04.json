@@ -1,0 +1,35 @@
+{
+  "timestamp": "2026-05-06T07:04",
+  "phase": "baseline",
+  "mode": "full",
+  "pipeline_summary": {
+    "global_avg": 5.43,
+    "spine_sequences_at_stage_6_vr_testing": 17,
+    "spine_sequences_at_stage_7_polish": 1,
+    "non_spine_at_stage_2": 2,
+    "non_spine_at_stage_1": 1,
+    "vr_bottleneck_breath_count": 5
+  },
+  "heat_map_top_5": [
+    {"item": "capture", "temp": 65, "reason": "active (1 recent commits)"},
+    {"item": "pipeline_scorer empty sequence schema", "temp": 60, "reason": "RESOLVED 2026-05-03 — stale heat"},
+    {"item": "tscn uid path drift", "temp": 60, "reason": "RESOLVED 2026-05-03 — stale heat"},
+    {"item": "garden_voicing_targeting", "temp": 60, "reason": "active — apply lesson from 2026-05-05"},
+    {"item": "sequence:boolean_surfaces", "temp": 50, "reason": "empty sequence"}
+  ],
+  "garden_health": {
+    "total_voiced": 928,
+    "voice_coverage_pct": 44,
+    "embodiment_rate_pct": 35,
+    "phantom_total": 736,
+    "wavefunctions": "SCATTERED 64/105 (61.0%)",
+    "randomness": "SCATTERED 38/73 (52.1%)"
+  },
+  "release_gates": {
+    "A_sequence_contract": "PASS",
+    "B_artifact_registry": "PASS",
+    "C_map_validation": "PASS",
+    "D_lab_progression": "PASS",
+    "passing": "4/4"
+  }
+}

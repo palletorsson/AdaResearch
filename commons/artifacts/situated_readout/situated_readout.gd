@@ -146,7 +146,7 @@ func _resolve_quadrant_key(pos: Vector3) -> String:
 func apply_grid_config(config_data: Dictionary) -> void:
 	var raw: Variant = config_data.get("verdict", "")
 	if typeof(raw) == TYPE_STRING:
-		_verdict_override = String(raw).strip_edges().to_upper()
+		_verdict_override = str(raw).strip_edges().to_upper()
 	# Re-populate if config arrives after _ready() already ran.
 	if _verdict_label != null:
 		_populate_from_position()

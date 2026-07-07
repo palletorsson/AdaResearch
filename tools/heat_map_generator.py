@@ -90,8 +90,9 @@ def get_heat():
         with open(disc_path, encoding='utf-8') as f:
             discoveries = json.load(f)
         recent = [d for d in discoveries.get("discoveries", [])
-                  if d.get("lod", 0) >= 3]  # deep discoveries
-        for disc in recent[-3:]:  # last 3 deep discoveries
+                  if d.get("lod", 0) >= 3
+                  and d.get("status") != "resolved"]  # deep discoveries, not yet resolved
+        for disc in recent[-3:]:  # last 3 unresolved deep discoveries
             heat.append({
                 "item": disc.get("topic", "unknown")[:60],
                 "temperature": 60,

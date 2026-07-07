@@ -14,7 +14,7 @@ var radius_vector: Node3D
 var force_vector: Node3D
 var torque_vector: Node3D
 var moment_arm_vector: Node3D
-var info_label: Label3D
+var info_label: Label
 
 func _ready() -> void:
 	super._ready()

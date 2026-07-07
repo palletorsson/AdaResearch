@@ -14,11 +14,7 @@
 	  "difficulty": "test",
 	  "category": "color",
 	  "estimated_time": "1 minute",
-	  "learning_objectives": [
-		"MultiMesh per-instance colors",
-		"Color patterns",
-        "NextCube integration"
-	  ]
+	  "learning_objectives": ["MultiMesh per-instance colors","Color patterns","NextCube integration"]
 	},
 	"title": "Light Reveals Color"
   },
@@ -38,24 +34,12 @@
 	"objective": "Grab the NextCube to cycle through different color patterns on the grid"
   },
   "lighting": {
-	"ambient_color": [
-	  0.3,
-	  0.3,
-	  0.4
-	],
+	"ambient_color": [0.3,0.3,0.4],
 	"ambient_energy": 0.8,
 	"directional_light": {
 	  "enabled": true,
-	  "direction": [
-		-0.3,
-		-0.7,
-		-0.5
-	  ],
-	  "color": [
-		1.0,
-		0.95,
-		0.9
-	  ],
+	  "direction": [-0.3,-0.7,-0.5],
+	  "color": [1.0,0.95,0.9],
 	  "energy": 1.0
 	}
   },
@@ -67,11 +51,7 @@
 	"colorizer_enabled": true,
 	"background": {
 	  "type": "sky",
-	  "color": [
-		0.1,
-		0.1,
-		0.15
-	  ]
+	  "color": [0.1,0.1,0.15]
 	}
   },
   "layers": {
@@ -108,9 +88,9 @@
 	  [" "," "," "," "," "," "," "," "," "," "," "],
 	  [" "," "," "," "," "," "," "," "," "," "," "],
 	  [" "," "," "," "," "," "," "," "," "," "," "],
-	  [" "," "," "," "," ","flashlight_demo:180"," "," "," "," "," "],
-	  [" "," "," "," ","dark_sphere"," "," "," "," "," "," "],
-	  [" "," "," "," "," ","prism"," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "," "," "," "],
+	  [" "," "," "," "," "," "," "," "," "," "," "],
 	  [" "," "," "," "," "," "," "," "," "," "," "],
 	  [" "," "," "," "," "," "," "," "," "," "," "],
 	  [" "," "," "," "," "," "," "," "," "," "," "],

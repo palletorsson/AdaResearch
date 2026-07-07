@@ -1,0 +1,189 @@
+{
+  "_meta": {
+    "schema_version": "beats/0.1",
+    "schema_doc": "doc/beats/schema.md",
+    "sequence": "randomness",
+    "phase": "E_entropy",
+    "description": "Beat score for randomness — the entropy phase. From RNG primitives through walks, distributions, and emergent behaviour. Bleeds heavily into noise, swarmintelligence, and back into wavefunctions (Cage)."
+  },
+  "beats": [
+    {
+      "id": "R0",
+      "role": "GATEWAY",
+      "concept": "the player crosses from ordered into disordered — the substrate changes",
+      "register": "structural",
+      "intensity": "low",
+      "maps": [],
+      "bleed_from": [
+        "wavefunctions"
+      ],
+      "next": "R1"
+    },
+    {
+      "id": "R1",
+      "role": "INTRODUCE",
+      "concept": "definition of randomness — what counts; the slot machine + the entropy jar",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "Random_Definition"
+      ],
+      "next": "R2"
+    },
+    {
+      "id": "R2",
+      "role": "DEMONSTRATE",
+      "concept": "removal — randomness as subtraction; what's left when structure is taken away",
+      "register": "teaching",
+      "intensity": "medium",
+      "maps": [
+        "Random_Remove"
+      ],
+      "next": "R3"
+    },
+    {
+      "id": "R3",
+      "role": "VARIATE",
+      "concept": "10 PRINT — the classic one-line generator; randomness as algorithm",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "Randomness_10_PRINT_Algorithm"
+      ],
+      "next": "R4"
+    },
+    {
+      "id": "R4",
+      "role": "PRACTICE",
+      "concept": "Random_Cubes — the player walks an array of stochastic objects",
+      "register": "exploring",
+      "intensity": "medium",
+      "maps": [
+        "Random_Cubes"
+      ],
+      "next": "R5"
+    },
+    {
+      "id": "R5",
+      "role": "VARIATE",
+      "concept": "rotate random XYZ — random transformation of orientation",
+      "register": "exploring",
+      "intensity": "medium",
+      "maps": [
+        "Random_Rotate_Random_XYZ"
+      ],
+      "bleed_from": [
+        "transformation"
+      ],
+      "next": "R6"
+    },
+    {
+      "id": "R6",
+      "role": "PRACTICE",
+      "concept": "Random_Walk — the canonical 1D/2D walk; entropy on the move",
+      "register": "exploring",
+      "intensity": "high",
+      "maps": [
+        "Random_Walk"
+      ],
+      "next": "R7"
+    },
+    {
+      "id": "R7",
+      "role": "SYNTHESIZE",
+      "concept": "Gaussian — distributions emerge from summed randomness; CLT made visible",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "Random_Gaussian"
+      ],
+      "next": "R8"
+    },
+    {
+      "id": "R8",
+      "role": "BLEED",
+      "concept": "Random_Mushrooms — organic emergence; randomness becomes biology",
+      "register": "exploring",
+      "intensity": "medium",
+      "maps": [
+        "Random_Mushrooms"
+      ],
+      "bleed_from": [
+        "softbodies",
+        "noise"
+      ],
+      "next": "R9"
+    },
+    {
+      "id": "R9",
+      "role": "VARIATE",
+      "concept": "Random_Space_Geometry — randomness at the scale of architecture",
+      "register": "exploring",
+      "intensity": "medium",
+      "maps": [
+        "Random_Space_Geometry"
+      ],
+      "next": "R10"
+    },
+    {
+      "id": "R10",
+      "role": "PRACTICE",
+      "concept": "examples gallery — the player walks the catalogue",
+      "register": "exploring",
+      "intensity": "low",
+      "maps": [
+        "Randomness_Examples_of_Randomness"
+      ],
+      "next": "R11"
+    },
+    {
+      "id": "R11",
+      "role": "BLEED",
+      "concept": "Random_Pheromone — stigmergy; agents leaving randomness for others to find",
+      "register": "exploring",
+      "intensity": "medium",
+      "maps": [
+        "Random_Pheromone"
+      ],
+      "bleed_to": [
+        "swarmintelligence"
+      ],
+      "next": "R12"
+    },
+    {
+      "id": "R12",
+      "role": "WANDER",
+      "concept": "Random_Space — pure unprescribed exploration of stochastic territory",
+      "register": "exploring",
+      "intensity": "low",
+      "maps": [
+        "Random_Space"
+      ],
+      "next": "R13"
+    },
+    {
+      "id": "R13",
+      "role": "PRACTICE",
+      "concept": "Random_Game — randomness becomes game mechanic; the player plays with chance",
+      "register": "exploring",
+      "intensity": "high",
+      "maps": [
+        "Random_Game"
+      ],
+      "next": "R14"
+    },
+    {
+      "id": "R14",
+      "role": "CHAMBER",
+      "concept": "the entropy principle held — randomness as a substrate the player can now wield",
+      "register": "synthesizing",
+      "intensity": "high",
+      "maps": [],
+      "bleed_to": [
+        "wavefunctions"
+      ],
+      "note": "back-bleed into wavefunctions.W8 — entropy completes the Cage philosophy retroactively",
+      "next": null
+    }
+  ]
+}

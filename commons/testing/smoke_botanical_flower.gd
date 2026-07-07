@@ -5,7 +5,7 @@ extends SceneTree
 
 const BotanicalFlowerScene := preload("res://commons/flora/botanical_flower.tscn")
 
-const CONFIG_PATH := "C:/Users/palle/Documents/GitHub/ada_encyclopedia/public/botanical-flower-gallery/bf_composite_disk_01.json"
+const CONFIG_PATH := "C:/Users/palle/Documents/GitHub/ada_encyclopedia/public/botanical-flower-gallery/bf_alien_strange_08.json"
 const OUT_PATH := "user://bf_smoke.png"
 
 

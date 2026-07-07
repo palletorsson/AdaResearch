@@ -1,0 +1,1 @@
+The sneaky symmetry: reflect, then slide. No mirror line survives to point at — footprints in snow obey it, herringbone brick obeys it, and Escher built a career on it. He sat in the Alhambra copying tilings and taught the mathematicians to see their own theorem.

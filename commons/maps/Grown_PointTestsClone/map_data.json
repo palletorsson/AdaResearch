@@ -1,0 +1,97 @@
+{
+  "map_info": {
+    "name": "Grown_PointTestsClone",
+    "lookup_name": "Grown_PointTestsClone",
+    "description": "A map grown by the walker laying floor as it placed artifacts. Started at spawn with no structure; the floor and tables emerged as a byproduct of the walk. Constraint score: 0.798, placed: 4/4 artifacts, laid: 63 floor cells + 1 table cells.",
+    "version": "grown-0.1",
+    "format": "json",
+    "created_from": "tools/grow_map.py 2026-05-15",
+    "dimensions": {
+      "width": 12,
+      "depth": 10,
+      "max_height": 3
+    },
+    "metadata": {
+      "category": "grown_map",
+      "estimated_time": "1 minute",
+      "auto_research_strategy": "grow_walker",
+      "artifacts_placed": ["combine_sphere","cube_scene_drag_points","doublestick","combine_capsule"],
+      "laid_floor_cells": 63,
+      "table_cells": 1,
+      "constraint_score": 0.798
+    },
+    "title": "Grown: PointTestsClone"
+  },
+  "utility_definitions": {
+    "sp": {
+      "name": "Spawn",
+      "description": "Player spawn point",
+      "type": "spawn"
+    },
+    "t": {
+      "name": "Exit Portal",
+      "description": "Step here to leave",
+      "type": "teleporter",
+      "properties": {
+        "action": "next_in_sequence"
+      }
+    }
+  },
+  "documentation": {
+    "summary": "Grown_PointTestsClone — map emerged from walker's path",
+    "layout": "12×10 bounding box. The walker entered at spawn and laid 63 floor cells + 1 table cells as it placed 4 artifacts. The teleporter is where the walk ended.",
+    "objective": "Walk the map. The map IS the walk's record.",
+    "key_elements": ["Spawn at (9, 7)","Teleporter at (0, 0)","combine_sphere at (6, 7)","cube_scene_drag_points at (4, 7)","doublestick at (3, 7)","combine_capsule at (0, 0)"]
+  },
+  "lighting": {
+    "ambient_color": [0.32,0.34,0.4],
+    "ambient_energy": 0.9,
+    "directional_light": {
+      "enabled": true,
+      "direction": [-0.3,-1.0,-0.2],
+      "energy": 0.7
+    }
+  },
+  "settings": {
+    "player_spawn_height": 0.5,
+    "floor_tile_size": 1.0
+  },
+  "layers": {
+    "structure": [
+      ["2","2","2","2","2","2","2","2","0","0","0","0"],
+      ["2","2","2","2","2","2","2","2","0","0","0","0"],
+      ["2","2","2","2","2","0","2","2","2","2","0","0"],
+      ["2","2","2","2","2","0","2","3","2","2","2","0"],
+      ["2","2","2","2","0","0","2","2","2","2","2","0"],
+      ["2","2","0","0","0","0","2","2","2","2","2","0"],
+      ["0","0","0","0","0","0","2","2","2","2","2","0"],
+      ["0","0","0","0","0","0","2","2","2","2","2","0"],
+      ["0","0","0","0","0","0","0","2","0","0","0","0"],
+      ["0","0","0","0","0","0","0","2","0","0","0","0"]
+    ],
+    "utilities": [
+      ["t"," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," ","sp"," "," "," "," "]
+    ],
+    "interactables": [
+      ["combine_capsule:180:0.0"," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," ","doublestick:180:0.0"," "," "," "," "],
+      [" "," "," "," "," "," "," ","cube_scene_drag_points:180:0.0"," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," ","combine_sphere:180:0.0"," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "," "," "," "]
+    ]
+  }
+}

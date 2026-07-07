@@ -14,12 +14,7 @@
 	  "difficulty": "beginner",
 	  "category": "primitives",
 	  "estimated_time": "3 minutes",
-	  "learning_objectives": [
-		"Platonic solids",
-		"Regular polyhedra",
-		"Symmetry",
-        "3D geometry"
-	  ]
+	  "learning_objectives": ["Platonic solids","Regular polyhedra","Symmetry","3D geometry"]
 	}
   },
   "utility_definitions": {
@@ -36,34 +31,15 @@
 	"summary": "Primitives_Platonic - The Five Perfect Solids",
 	"layout": "7x3 platform displaying all 5 Platonic solids in static form",
 	"objective": "Understand the unique properties of the 5 regular convex polyhedra",
-	"key_elements": [
-	  "Tetrahedron (4 triangular faces)",
-	  "Cube/Hexahedron (6 square faces)",
-	  "Octahedron (8 triangular faces)",
-	  "Dodecahedron (12 pentagonal faces)",
-	  "Icosahedron (20 triangular faces)",
-      "Polyhedra info board and teleporter"
-	]
+	"key_elements": ["Tetrahedron (4 triangular faces)","Cube/Hexahedron (6 square faces)","Octahedron (8 triangular faces)","Dodecahedron (12 pentagonal faces)","Icosahedron (20 triangular faces)","Polyhedra info board and teleporter"]
   },
   "lighting": {
-	"ambient_color": [
-	  0.5,
-	  0.5,
-	  0.6
-	],
+	"ambient_color": [0.5,0.5,0.6],
 	"ambient_energy": 0.8,
 	"directional_light": {
 	  "enabled": true,
-	  "direction": [
-		-0.4,
-		-0.7,
-		-0.4
-	  ],
-	  "color": [
-		1.0,
-		0.95,
-		0.9
-	  ],
+	  "direction": [-0.4,-0.7,-0.4],
+	  "color": [1.0,0.95,0.9],
 	  "energy": 1.4
 	}
   },
@@ -76,11 +52,7 @@
 	"initial_tile_visibility": "all_visible",
 	"background": {
 	  "type": "sky",
-	  "color": [
-		0.25,
-		0.35,
-		0.65
-	  ]
+	  "color": [0.25,0.35,0.65]
 	}
   },
   "layers": {

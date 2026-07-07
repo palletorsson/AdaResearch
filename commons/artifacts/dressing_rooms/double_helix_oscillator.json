@@ -1,50 +1,99 @@
 {
-	"approach": "south",
-	"artifact_offset": [
-		0.0,
-		0.200000002980232,
-		0.0
-	],
-	"clearance": [
-		3.0,
-		3.0,
-		3.0
-	],
-	"exit": "north",
-	"extras": [],
-	"footing": {
-		"anchor": [
-			1.0,
-			1.0
-		],
-		"tiles": [
-			[
-				1.0,
-				1.0,
-				1.0
-			],
-			[
-				1.0,
-				3.0,
-				1.0
-			],
-			[
-				1.0,
-				1.0,
-				1.0
-			]
-		]
-	},
-	"footprint": [
-		3,
-		3,
-		1
-	],
-	"lookup_name": "double_helix_oscillator",
-	"rotations": [
-		"0",
-		"90",
-		"180",
-		"270"
-	]
+  "approach": "south",
+  "artifact_offset": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "clearance": [
+    3.0,
+    3.0,
+    3.0
+  ],
+  "exit": "north",
+  "extras": [],
+  "footing": {
+    "anchor": [
+      3,
+      3
+    ],
+    "tiles": [
+      [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1
+      ],
+      [
+        1,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1
+      ],
+      [
+        1,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1
+      ],
+      [
+        1,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1
+      ],
+      [
+        1,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    ]
+  },
+  "footprint": [
+    3,
+    3,
+    1
+  ],
+  "lookup_name": "double_helix_oscillator",
+  "rotations": [
+    "0",
+    "90",
+    "180",
+    "270"
+  ],
+  "posture": "platform"
 }

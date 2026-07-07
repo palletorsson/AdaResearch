@@ -4,11 +4,11 @@
 	  "name": "Fractals: Infinite Within Finite",
 	  "truth": "Infinite complexity from finite rules. Dimensions between integers. D = log(N)/log(S). Self-similarity across scales.",
 	  "qfep_term": "E(S) + F",
-	  "qfep_connection": "Fractals embody the QFEP tension directly: F (deterministic recursive rule) + Î»E(S) (random variation in stochastic fractals) creates forms at the edge of chaos. The Mandelbrot boundary is where order meets chaosâ€”infinitely complex yet bounded. Fractals are queer geometry: dimensionally non-normative, nowhere smooth, computationally irreducible.",
-	  "formula": "D = log(N)/log(S), z_{n+1} = z_nÂ² + c",
+	  "qfep_connection": "Fractals embody the QFEP tension directly: F (deterministic recursive rule) + \u00ce\u00bbE(S) (random variation in stochastic fractals) creates forms at the edge of chaos. The Mandelbrot boundary is where order meets chaos\u00e2\u20ac\u201dinfinitely complex yet bounded. Fractals are queer geometry: dimensionally non-normative, nowhere smooth, computationally irreducible.",
+	  "formula": "D = log(N)/log(S), z_{n+1} = z_n\u00c2\u00b2 + c",
 	  "demonstration": "Walk inside the Menger sponge. Watch the stochastic tree grow with random variation. Zoom into the Mandelbrot boundary and see infinite detail.",
-	  "description": "Self-similarity across scales, infinite complexity from finite rules. Fractals refuse integer dimensionsâ€”they exist between 1D and 2D, between line and plane. The Mandelbrot boundary is infinitely complex yet bounded; the Sierpinski triangle has zero area yet infinite structure. This is queer geometry: dimensionally non-normative, nowhere smooth, computationally irreducible.",
-	  "layer": "emergence",
+	  "description": "Self-similarity across scales, infinite complexity from finite rules. Fractals refuse integer dimensions\u00e2\u20ac\u201dthey exist between 1D and 2D, between line and plane. The Mandelbrot boundary is infinitely complex yet bounded; the Sierpinski triangle has zero area yet infinite structure. This is queer geometry: dimensionally non-normative, nowhere smooth, computationally irreducible.",
+	  "layer": "lambda_edge",
 	  "prerequisites": [
 		"primitives",
         "transformation"
@@ -21,22 +21,22 @@
 	  "estimated_time": "30-40 minutes",
 	  "learning_objectives": [
 		"Self-similarity: the whole contains copies of itself",
-		"Fractal dimension: D = log(N)/log(S) â€” between integers",
+		"Fractal dimension: D = log(N)/log(S) \u00e2\u20ac\u201d between integers",
 		"Recursion as emergence: simple rules, infinite complexity",
 		"Edge of chaos: Mandelbrot boundary, Julia variations",
         "Natural fractals: trees, coastlines, romanesco"
 	  ],
 	  "content": [
-		"Fractal_Recursion: Recursion Calls Itself — the function that calls itself",
-		"Fractal_RecursiveTrees: Branching Without Blueprints — deterministic vs stochastic trees, inverted roots, fractal forests",
-		"Fractal_CantorSet: Existence Without Extension — infinite subdivision, zero measure infinite set",
-		"Fractal_KochSierpinski: Infinite Perimeter, Fractal Dimension — Koch curve D≈1.26, Sierpinski triangle D≈1.585",
-		"Fractal_MengerSponge: Walkable Three-Dimensional Fractal — D≈2.727, infinite surface zero volume",
-		"Fractal_GoldenSpiral: Fibonacci and Phyllotaxis — golden ratio, 137.5°, romanesco",
-		"Fractal_JuliaSet: Parameter Space Exploration — connected vs disconnected, complex iteration",
-		"Fractal_MandelbrotSet: The Master Fractal — infinite boundary, edge of chaos",
-		"Fractal_Synthesis: Edge of Chaos Gallery — all fractals converge, QFEP complete",
-        "Fractal_CrossSequence: Fractals Meet Evolution — stochastic fractals, evolutionary algorithms, cellular automata"
+		"Fractal_Recursion: Recursion Calls Itself \u2014 the function that calls itself",
+		"Fractal_RecursiveTrees: Branching Without Blueprints \u2014 deterministic vs stochastic trees, inverted roots, fractal forests",
+		"Fractal_CantorSet: Existence Without Extension \u2014 infinite subdivision, zero measure infinite set",
+		"Fractal_KochSierpinski: Infinite Perimeter, Fractal Dimension \u2014 Koch curve D\u22481.26, Sierpinski triangle D\u22481.585",
+		"Fractal_MengerSponge: Walkable Three-Dimensional Fractal \u2014 D\u22482.727, infinite surface zero volume",
+		"Fractal_GoldenSpiral: Fibonacci and Phyllotaxis \u2014 golden ratio, 137.5\u00b0, romanesco",
+		"Fractal_JuliaSet: Parameter Space Exploration \u2014 connected vs disconnected, complex iteration",
+		"Fractal_MandelbrotSet: The Master Fractal \u2014 infinite boundary, edge of chaos",
+		"Fractal_Synthesis: Edge of Chaos Gallery \u2014 all fractals converge, QFEP complete",
+        "Fractal_CrossSequence: Fractals Meet Evolution \u2014 stochastic fractals, evolutionary algorithms, cellular automata"
 	  ],
 	  "maps": [
 		"Fractal_Recursion",
@@ -48,8 +48,7 @@
 		"Fractal_JuliaSet",
 		"Fractal_MandelbrotSet",
 		"Fractal_Synthesis",
-		"Fractal_CrossSequence",
-        "Chamber_Fractals"
+        "Fractal_CrossSequence"
 	  ],
 	  "axiom_files": [
 		"res://commons/context/clipboard/tutorial_text/fractals_axioms.md",

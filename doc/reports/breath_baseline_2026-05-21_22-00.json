@@ -1,0 +1,52 @@
+{
+  "timestamp": "2026-05-21T22:00",
+  "phase": "baseline",
+  "pipeline_summary": {
+    "sequences_scored": 22,
+    "global_avg": 5.43,
+    "stage_distribution": {
+      "stage_2_documentation": ["change (0/0/0)", "softbodies (44/62/OK)"],
+      "stage_6_vr_testing": [
+        "primitives", "transformation", "array_tutorial", "color", "isosurfaces",
+        "boolean_surfaces", "forces", "wavefunctions", "noise", "cellularautomata",
+        "fractals", "lsystems", "proceduralgeneration", "swarmintelligence",
+        "machinelearning", "graphtheory", "foundationscrisis", "qfeplaboratory",
+        "postfoundationscrisis"
+      ],
+      "stage_7_polish": ["randomness"]
+    },
+    "note": "8th consecutive flat-avg breath. Stage 6 ceiling is structural (requires headset)."
+  },
+  "heat_map_top_5": [
+    {"item": "capture", "temperature": 80, "reason": "active (4 recent commits)"},
+    {"item": "floor", "temperature": 65, "reason": "active (1 recent commits)"},
+    {"item": "shader", "temperature": 65, "reason": "active (1 recent commits)"},
+    {"item": "garden_voicing_targeting", "temperature": 60, "reason": "deep discovery follow-up"},
+    {"item": "gate_b_promoted_stale_decay", "temperature": 60, "reason": "deep discovery follow-up"},
+    {"item": "softbodies_documentation_pipeline", "temperature": 60, "reason": "imported soft-body gallery maps need docs"}
+  ],
+  "garden_health": {
+    "voiced": 1012,
+    "embodied": 336,
+    "reaching": 536,
+    "phantom_limbs": 818,
+    "voice_coverage_pct": 49,
+    "embodiment_rate_pct": 33,
+    "delta_from_2026_05_19": "+11 voiced",
+    "sequences_states": {
+      "scattered": ["wavefunctions", "qfeplaboratory", "array_tutorial", "transformation", "catalyst_test", "noise", "structure", "proceduralgeneration", "swarmintelligence", "lab", "facades", "annotations", "biological_growth"],
+      "reaching": ["fractals", "patterngeneration", "mosaicanalysis", "color", "cellularautomata", "facade_assembly", "graphtheory", "particles", "grammar_systems", "proceduralaudio", "artmathematics", "meshes"],
+      "growing": ["primitives", "hazards", "randomness", "foundationscrisis", "lsystems", "postfoundationscrisis", "fold_system", "bodyprogression", "morphogenesis", "spatial_partitioning"],
+      "living": ["forces", "grammar_gallery", "physicssimulation", "machinelearning", "joints", "flowers", "vectors"]
+    }
+  },
+  "release_gates": {
+    "overall": "FAIL",
+    "passing": "3/4",
+    "A_sequence_contract": {"status": "FAIL", "missing_declared_maps": 8, "undeclared_map_folders": 622},
+    "B_artifact_registry": {"status": "PASS", "unresolved": 0, "missing_paths": 0},
+    "C_map_validation": {"status": "PASS", "grade_A": 856, "grade_B": 144, "grade_C": 183, "grade_F": 0},
+    "D_lab_progression": {"status": "PASS", "lost": 0, "changed": 12, "total_issues": 39}
+  },
+  "uncommitted_warning_from_evening_notes": "Five consecutive evening harvests have flagged uncommitted breath work (2026-05-13 voicing batch + 2026-05-19 softbody docs). Today's 2026-05-21 evening note revised position: project-track commits (a4f005eda catalyst_pickup, 2026-05-21) did land, so user is selectively committing. Breath edits remain working-tree-only as deliberate policy."
+}

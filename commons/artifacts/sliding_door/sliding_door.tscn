@@ -1,0 +1,6 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://commons/artifacts/sliding_door/sliding_door.gd" id="1_script"]
+
+[node name="SlidingDoor" type="Node3D"]
+script = ExtResource("1_script")

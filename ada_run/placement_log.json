@@ -1,0 +1,1426 @@
+[
+  {
+    "map": "Point_Tests",
+    "engine": "humanoid_walker",
+    "reason": "4 artifacts \u2192 humanoid_walker (default for multi-artifact maps)",
+    "in_place": false,
+    "n_artifacts": 4,
+    "before": {
+      "constraint": 0.857,
+      "walkability": 0.731
+    },
+    "after": {
+      "constraint": 0.938,
+      "walkability": 0.988
+    },
+    "delta": {
+      "constraint": 0.081,
+      "walkability": 0.257
+    },
+    "output": "commons\\maps\\Point_Tests_Placed\\map_data.json",
+    "sequence_info": null
+  },
+  {
+    "map": "Noise_Perlin_Simplex",
+    "engine": "humanoid_walker",
+    "reason": "in-spine sequence + 6 artifacts \u2192 humanoid_walker (encounter order matters)",
+    "in_place": false,
+    "n_artifacts": 6,
+    "before": {
+      "constraint": 0.993,
+      "walkability": 0.62
+    },
+    "after": {
+      "constraint": 0.94,
+      "walkability": 0.583
+    },
+    "delta": {
+      "constraint": -0.053,
+      "walkability": -0.037
+    },
+    "output": "commons\\maps\\Noise_Perlin_Simplex_Placed\\map_data.json",
+    "sequence_info": {
+      "sequence_id": "noise",
+      "in_spine": true,
+      "phase": "E_entropy",
+      "order": 8
+    }
+  },
+  {
+    "map": "SoftBodies_Playground_of_Joy",
+    "engine": "humanoid_walker",
+    "reason": "in-spine sequence + 3 artifacts \u2192 humanoid_walker (encounter order matters)",
+    "in_place": false,
+    "n_artifacts": 3,
+    "before": {
+      "constraint": 0.96,
+      "walkability": 0.446
+    },
+    "after": {
+      "constraint": 0.971,
+      "walkability": 0.667
+    },
+    "delta": {
+      "constraint": 0.011,
+      "walkability": 0.221
+    },
+    "output": "commons\\maps\\SoftBodies_Playground_of_Joy_Placed\\map_data.json",
+    "sequence_info": {
+      "sequence_id": "softbodies",
+      "in_spine": true,
+      "phase": "integration",
+      "order": 14
+    }
+  },
+  {
+    "map": "Random_Game",
+    "engine": "simulated_annealing",
+    "reason": "8 artifacts in 221-cell room \u2192 sim_annealing (heavy compute justified)",
+    "in_place": false,
+    "n_artifacts": 8,
+    "before": {
+      "constraint": 0.884,
+      "walkability": 0.519
+    },
+    "after": {
+      "constraint": 0.964,
+      "walkability": 0.663
+    },
+    "delta": {
+      "constraint": 0.079,
+      "walkability": 0.144
+    },
+    "output": "commons\\maps\\Random_Game_Placed\\map_data.json",
+    "sequence_info": {
+      "sequence_id": "randomness",
+      "in_spine": true,
+      "phase": "E_entropy",
+      "order": 7
+    }
+  },
+  {
+    "map": "Random_Gaussian",
+    "engine": "simulated_annealing",
+    "reason": "9 artifacts in 286-cell room \u2192 sim_annealing (heavy compute justified)",
+    "in_place": false,
+    "n_artifacts": 9,
+    "before": {
+      "constraint": 0.738,
+      "walkability": 0.669
+    },
+    "after": {
+      "constraint": 0.965,
+      "walkability": 0.576
+    },
+    "delta": {
+      "constraint": 0.226,
+      "walkability": -0.093
+    },
+    "output": "commons\\maps\\Random_Gaussian_Placed\\map_data.json",
+    "sequence_info": {
+      "sequence_id": "randomness",
+      "in_spine": true,
+      "phase": "E_entropy",
+      "order": 7
+    }
+  },
+  {
+    "map": "Chamber_Primitives",
+    "engine": "hybrid",
+    "reason": "chamber + few artifacts \u2192 hybrid (tight constraint optimization)",
+    "in_place": false,
+    "n_artifacts": 4,
+    "before": {
+      "constraint": 0.946,
+      "walkability": 0.703
+    },
+    "after": {
+      "constraint": 0.954,
+      "walkability": 0.615
+    },
+    "delta": {
+      "constraint": 0.008,
+      "walkability": -0.088
+    },
+    "output": "commons\\maps\\Chamber_Primitives_Placed\\map_data.json",
+    "sequence_info": {
+      "sequence_id": "primitives",
+      "in_spine": true,
+      "phase": "F_order",
+      "order": 1
+    }
+  },
+  {
+    "map": "Point_Tests",
+    "engine": "humanoid_walker",
+    "reason": "4 artifacts \u2192 humanoid_walker (default for multi-artifact maps)",
+    "in_place": false,
+    "n_artifacts": 4,
+    "before": {
+      "constraint": 0.857,
+      "walkability": 0.731,
+      "combined": 0.806
+    },
+    "after": {
+      "constraint": 0.938,
+      "walkability": 0.988,
+      "combined": 0.958
+    },
+    "delta": {
+      "constraint": 0.081,
+      "walkability": 0.257,
+      "combined": 0.152
+    },
+    "is_improvement": true,
+    "written": false,
+    "output": "(dry-run: not written)",
+    "sequence_info": null
+  },
+  {
+    "map": "Noise_Perlin_Simplex",
+    "engine": "humanoid_walker",
+    "reason": "in-spine sequence + 6 artifacts \u2192 humanoid_walker (encounter order matters)",
+    "in_place": false,
+    "n_artifacts": 6,
+    "before": {
+      "constraint": 0.993,
+      "walkability": 0.62,
+      "combined": 0.844
+    },
+    "after": {
+      "constraint": 0.94,
+      "walkability": 0.583,
+      "combined": 0.797
+    },
+    "delta": {
+      "constraint": -0.053,
+      "walkability": -0.037,
+      "combined": -0.047
+    },
+    "is_improvement": false,
+    "written": false,
+    "output": "(dry-run: not written)",
+    "sequence_info": {
+      "sequence_id": "noise",
+      "in_spine": true,
+      "phase": "E_entropy",
+      "order": 8
+    }
+  },
+  {
+    "map": "SoftBodies_Playground_of_Joy",
+    "engine": "humanoid_walker",
+    "reason": "in-spine sequence + 3 artifacts \u2192 humanoid_walker (encounter order matters)",
+    "in_place": false,
+    "n_artifacts": 3,
+    "before": {
+      "constraint": 0.96,
+      "walkability": 0.446,
+      "combined": 0.755
+    },
+    "after": {
+      "constraint": 0.971,
+      "walkability": 0.667,
+      "combined": 0.85
+    },
+    "delta": {
+      "constraint": 0.011,
+      "walkability": 0.221,
+      "combined": 0.095
+    },
+    "is_improvement": true,
+    "written": false,
+    "output": "(dry-run: not written)",
+    "sequence_info": {
+      "sequence_id": "softbodies",
+      "in_spine": true,
+      "phase": "integration",
+      "order": 14
+    }
+  },
+  {
+    "map": "Random_Game",
+    "engine": "simulated_annealing",
+    "reason": "8 artifacts in 221-cell room \u2192 sim_annealing (heavy compute justified)",
+    "in_place": false,
+    "n_artifacts": 8,
+    "before": {
+      "constraint": 0.884,
+      "walkability": 0.519,
+      "combined": 0.738
+    },
+    "after": {
+      "constraint": 0.964,
+      "walkability": 0.663,
+      "combined": 0.843
+    },
+    "delta": {
+      "constraint": 0.079,
+      "walkability": 0.144,
+      "combined": 0.105
+    },
+    "is_improvement": true,
+    "written": false,
+    "output": "(dry-run: not written)",
+    "sequence_info": {
+      "sequence_id": "randomness",
+      "in_spine": true,
+      "phase": "E_entropy",
+      "order": 7
+    }
+  },
+  {
+    "map": "Random_Gaussian",
+    "engine": "simulated_annealing",
+    "reason": "9 artifacts in 286-cell room \u2192 sim_annealing (heavy compute justified)",
+    "in_place": false,
+    "n_artifacts": 9,
+    "before": {
+      "constraint": 0.738,
+      "walkability": 0.669,
+      "combined": 0.711
+    },
+    "after": {
+      "constraint": 0.965,
+      "walkability": 0.576,
+      "combined": 0.809
+    },
+    "delta": {
+      "constraint": 0.226,
+      "walkability": -0.093,
+      "combined": 0.099
+    },
+    "is_improvement": true,
+    "written": false,
+    "output": "(dry-run: not written)",
+    "sequence_info": {
+      "sequence_id": "randomness",
+      "in_spine": true,
+      "phase": "E_entropy",
+      "order": 7
+    }
+  },
+  {
+    "map": "Chamber_Primitives",
+    "engine": "hybrid",
+    "reason": "chamber + few artifacts \u2192 hybrid (tight constraint optimization)",
+    "in_place": false,
+    "n_artifacts": 4,
+    "before": {
+      "constraint": 0.946,
+      "walkability": 0.703,
+      "combined": 0.849
+    },
+    "after": {
+      "constraint": 0.954,
+      "walkability": 0.615,
+      "combined": 0.818
+    },
+    "delta": {
+      "constraint": 0.008,
+      "walkability": -0.088,
+      "combined": -0.031
+    },
+    "is_improvement": false,
+    "written": false,
+    "output": "(dry-run: not written)",
+    "sequence_info": {
+      "sequence_id": "primitives",
+      "in_spine": true,
+      "phase": "F_order",
+      "order": 1
+    }
+  },
+  {
+    "map": "Color_Context",
+    "engine": "simulated_annealing",
+    "reason": "21 artifacts in 525-cell room \u2192 sim_annealing (heavy compute justified)",
+    "in_place": false,
+    "n_artifacts": 21,
+    "before": {
+      "constraint": 0.818,
+      "walkability": 0.382,
+      "combined": 0.644
+    },
+    "after": {
+      "constraint": 0.895,
+      "walkability": 0.498,
+      "combined": 0.736
+    },
+    "delta": {
+      "constraint": 0.077,
+      "walkability": 0.116,
+      "combined": 0.093
+    },
+    "is_improvement": true,
+    "written": false,
+    "output": "(dry-run: not written)",
+    "sequence_info": null
+  },
+  {
+    "map": "Vector_Exhibition",
+    "engine": "simulated_annealing",
+    "reason": "28 artifacts in 260-cell room \u2192 sim_annealing (heavy compute justified)",
+    "in_place": false,
+    "n_artifacts": 28,
+    "before": {
+      "constraint": 0.939,
+      "walkability": 0.501,
+      "combined": 0.764
+    },
+    "after": {
+      "constraint": 0.952,
+      "walkability": 0.503,
+      "combined": 0.772
+    },
+    "delta": {
+      "constraint": 0.013,
+      "walkability": 0.002,
+      "combined": 0.008
+    },
+    "is_improvement": true,
+    "written": false,
+    "output": "(dry-run: not written)",
+    "sequence_info": null
+  },
+  {
+    "map": "WaveFunctions_Synthesis_Lab",
+    "engine": "humanoid_walker",
+    "reason": "in-spine sequence + 24 artifacts \u2192 humanoid_walker (encounter order matters)",
+    "in_place": false,
+    "n_artifacts": 24,
+    "before": {
+      "constraint": 0.657,
+      "walkability": 0.503,
+      "combined": 0.595
+    },
+    "after": {
+      "constraint": 0.755,
+      "walkability": 0.693,
+      "combined": 0.73
+    },
+    "delta": {
+      "constraint": 0.098,
+      "walkability": 0.19,
+      "combined": 0.135
+    },
+    "is_improvement": true,
+    "written": false,
+    "output": "(dry-run: not written)",
+    "sequence_info": {
+      "sequence_id": "wavefunctions",
+      "in_spine": true,
+      "phase": "oscillation",
+      "order": 6
+    }
+  },
+  {
+    "map": "Test_Substrates",
+    "engine": "humanoid_walker",
+    "reason": "27 artifacts \u2192 humanoid_walker (default for multi-artifact maps)",
+    "in_place": false,
+    "n_artifacts": 27,
+    "before": {
+      "constraint": 0.761,
+      "walkability": 0.317,
+      "combined": 0.583
+    },
+    "after": {
+      "constraint": 0.844,
+      "walkability": 0.337,
+      "combined": 0.641
+    },
+    "delta": {
+      "constraint": 0.084,
+      "walkability": 0.02,
+      "combined": 0.058
+    },
+    "is_improvement": true,
+    "written": false,
+    "output": "(dry-run: not written)",
+    "sequence_info": {
+      "sequence_id": "testmaps",
+      "in_spine": false,
+      "phase": null,
+      "order": null
+    }
+  },
+  {
+    "map": "Gallery_Misc",
+    "engine": "humanoid_walker",
+    "reason": "25 artifacts \u2192 humanoid_walker (default for multi-artifact maps)",
+    "in_place": false,
+    "n_artifacts": 25,
+    "before": {
+      "constraint": 0.644,
+      "walkability": 0.381,
+      "combined": 0.539
+    },
+    "after": {
+      "constraint": 0.518,
+      "walkability": 0.599,
+      "combined": 0.55
+    },
+    "delta": {
+      "constraint": -0.126,
+      "walkability": 0.218,
+      "combined": 0.012
+    },
+    "is_improvement": true,
+    "written": false,
+    "output": "(dry-run: not written)",
+    "sequence_info": {
+      "sequence_id": "gallery",
+      "in_spine": false,
+      "phase": null,
+      "order": null
+    }
+  },
+  {
+    "map": "Gallery_LivingPaper",
+    "engine": "humanoid_walker",
+    "reason": "29 artifacts \u2192 humanoid_walker (default for multi-artifact maps)",
+    "in_place": false,
+    "n_artifacts": 29,
+    "before": {
+      "constraint": 0.973,
+      "walkability": 0.714,
+      "combined": 0.87
+    },
+    "after": {
+      "constraint": 0.933,
+      "walkability": 0.548,
+      "combined": 0.779
+    },
+    "delta": {
+      "constraint": -0.04,
+      "walkability": -0.166,
+      "combined": -0.09
+    },
+    "is_improvement": false,
+    "written": false,
+    "output": "(dry-run: not written)",
+    "sequence_info": {
+      "sequence_id": "gallery",
+      "in_spine": false,
+      "phase": null,
+      "order": null
+    }
+  },
+  {
+    "map": "Point_Tests",
+    "engine": "humanoid_walker",
+    "reason": "4 artifacts \u2192 humanoid_walker (default for multi-artifact maps)",
+    "in_place": false,
+    "n_artifacts": 4,
+    "before": {
+      "constraint": 0.857,
+      "walkability": 0.731,
+      "combined": 0.806
+    },
+    "after": {
+      "constraint": 0.938,
+      "walkability": 0.988,
+      "combined": 0.958
+    },
+    "delta": {
+      "constraint": 0.081,
+      "walkability": 0.257,
+      "combined": 0.152
+    },
+    "is_improvement": true,
+    "written": true,
+    "output": "commons\\maps\\Point_Tests_Placed\\map_data.json",
+    "sequence_info": null
+  },
+  {
+    "map": "Noise_Perlin_Simplex",
+    "engine": "humanoid_walker",
+    "reason": "in-spine sequence + 6 artifacts \u2192 humanoid_walker (encounter order matters)",
+    "in_place": false,
+    "n_artifacts": 6,
+    "before": {
+      "constraint": 0.993,
+      "walkability": 0.62,
+      "combined": 0.844
+    },
+    "after": {
+      "constraint": 0.94,
+      "walkability": 0.583,
+      "combined": 0.797
+    },
+    "delta": {
+      "constraint": -0.053,
+      "walkability": -0.037,
+      "combined": -0.047
+    },
+    "is_improvement": false,
+    "written": false,
+    "output": "(skipped: \u0394combined=-0.047 < 0.005)",
+    "sequence_info": {
+      "sequence_id": "noise",
+      "in_spine": true,
+      "phase": "E_entropy",
+      "order": 8
+    }
+  },
+  {
+    "map": "SoftBodies_Playground_of_Joy",
+    "engine": "humanoid_walker",
+    "reason": "in-spine sequence + 3 artifacts \u2192 humanoid_walker (encounter order matters)",
+    "in_place": false,
+    "n_artifacts": 3,
+    "before": {
+      "constraint": 0.96,
+      "walkability": 0.446,
+      "combined": 0.755
+    },
+    "after": {
+      "constraint": 0.971,
+      "walkability": 0.667,
+      "combined": 0.85
+    },
+    "delta": {
+      "constraint": 0.011,
+      "walkability": 0.221,
+      "combined": 0.095
+    },
+    "is_improvement": true,
+    "written": true,
+    "output": "commons\\maps\\SoftBodies_Playground_of_Joy_Placed\\map_data.json",
+    "sequence_info": {
+      "sequence_id": "softbodies",
+      "in_spine": true,
+      "phase": "integration",
+      "order": 14
+    }
+  },
+  {
+    "map": "Random_Game",
+    "engine": "simulated_annealing",
+    "reason": "8 artifacts in 221-cell room \u2192 sim_annealing (heavy compute justified)",
+    "in_place": false,
+    "n_artifacts": 8,
+    "before": {
+      "constraint": 0.884,
+      "walkability": 0.519,
+      "combined": 0.738
+    },
+    "after": {
+      "constraint": 0.964,
+      "walkability": 0.663,
+      "combined": 0.843
+    },
+    "delta": {
+      "constraint": 0.079,
+      "walkability": 0.144,
+      "combined": 0.105
+    },
+    "is_improvement": true,
+    "written": true,
+    "output": "commons\\maps\\Random_Game_Placed\\map_data.json",
+    "sequence_info": {
+      "sequence_id": "randomness",
+      "in_spine": true,
+      "phase": "E_entropy",
+      "order": 7
+    }
+  },
+  {
+    "map": "Random_Gaussian",
+    "engine": "simulated_annealing",
+    "reason": "9 artifacts in 286-cell room \u2192 sim_annealing (heavy compute justified)",
+    "in_place": false,
+    "n_artifacts": 9,
+    "before": {
+      "constraint": 0.738,
+      "walkability": 0.669,
+      "combined": 0.711
+    },
+    "after": {
+      "constraint": 0.965,
+      "walkability": 0.576,
+      "combined": 0.809
+    },
+    "delta": {
+      "constraint": 0.226,
+      "walkability": -0.093,
+      "combined": 0.099
+    },
+    "is_improvement": true,
+    "written": true,
+    "output": "commons\\maps\\Random_Gaussian_Placed\\map_data.json",
+    "sequence_info": {
+      "sequence_id": "randomness",
+      "in_spine": true,
+      "phase": "E_entropy",
+      "order": 7
+    }
+  },
+  {
+    "map": "Chamber_Primitives",
+    "engine": "hybrid",
+    "reason": "chamber + few artifacts \u2192 hybrid (tight constraint optimization)",
+    "in_place": false,
+    "n_artifacts": 4,
+    "before": {
+      "constraint": 0.946,
+      "walkability": 0.703,
+      "combined": 0.849
+    },
+    "after": {
+      "constraint": 0.954,
+      "walkability": 0.615,
+      "combined": 0.818
+    },
+    "delta": {
+      "constraint": 0.008,
+      "walkability": -0.088,
+      "combined": -0.031
+    },
+    "is_improvement": false,
+    "written": false,
+    "output": "(skipped: \u0394combined=-0.031 < 0.005)",
+    "sequence_info": {
+      "sequence_id": "primitives",
+      "in_spine": true,
+      "phase": "F_order",
+      "order": 1
+    }
+  },
+  {
+    "map": "Color_Context",
+    "engine": "simulated_annealing",
+    "reason": "21 artifacts in 525-cell room \u2192 sim_annealing (heavy compute justified)",
+    "in_place": false,
+    "n_artifacts": 21,
+    "before": {
+      "constraint": 0.818,
+      "walkability": 0.382,
+      "combined": 0.644
+    },
+    "after": {
+      "constraint": 0.895,
+      "walkability": 0.498,
+      "combined": 0.736
+    },
+    "delta": {
+      "constraint": 0.077,
+      "walkability": 0.116,
+      "combined": 0.093
+    },
+    "is_improvement": true,
+    "written": true,
+    "output": "commons\\maps\\Color_Context_Placed\\map_data.json",
+    "sequence_info": null
+  },
+  {
+    "map": "Vector_Exhibition",
+    "engine": "simulated_annealing",
+    "reason": "28 artifacts in 260-cell room \u2192 sim_annealing (heavy compute justified)",
+    "in_place": false,
+    "n_artifacts": 28,
+    "before": {
+      "constraint": 0.939,
+      "walkability": 0.501,
+      "combined": 0.764
+    },
+    "after": {
+      "constraint": 0.952,
+      "walkability": 0.503,
+      "combined": 0.772
+    },
+    "delta": {
+      "constraint": 0.013,
+      "walkability": 0.002,
+      "combined": 0.008
+    },
+    "is_improvement": true,
+    "written": true,
+    "output": "commons\\maps\\Vector_Exhibition_Placed\\map_data.json",
+    "sequence_info": null
+  },
+  {
+    "map": "WaveFunctions_Synthesis_Lab",
+    "engine": "humanoid_walker",
+    "reason": "in-spine sequence + 24 artifacts \u2192 humanoid_walker (encounter order matters)",
+    "in_place": false,
+    "n_artifacts": 24,
+    "before": {
+      "constraint": 0.657,
+      "walkability": 0.503,
+      "combined": 0.595
+    },
+    "after": {
+      "constraint": 0.755,
+      "walkability": 0.693,
+      "combined": 0.73
+    },
+    "delta": {
+      "constraint": 0.098,
+      "walkability": 0.19,
+      "combined": 0.135
+    },
+    "is_improvement": true,
+    "written": true,
+    "output": "commons\\maps\\WaveFunctions_Synthesis_Lab_Placed\\map_data.json",
+    "sequence_info": {
+      "sequence_id": "wavefunctions",
+      "in_spine": true,
+      "phase": "oscillation",
+      "order": 6
+    }
+  },
+  {
+    "map": "Test_Substrates",
+    "engine": "humanoid_walker",
+    "reason": "27 artifacts \u2192 humanoid_walker (default for multi-artifact maps)",
+    "in_place": false,
+    "n_artifacts": 27,
+    "before": {
+      "constraint": 0.761,
+      "walkability": 0.317,
+      "combined": 0.583
+    },
+    "after": {
+      "constraint": 0.844,
+      "walkability": 0.337,
+      "combined": 0.641
+    },
+    "delta": {
+      "constraint": 0.084,
+      "walkability": 0.02,
+      "combined": 0.058
+    },
+    "is_improvement": true,
+    "written": true,
+    "output": "commons\\maps\\Test_Substrates_Placed\\map_data.json",
+    "sequence_info": {
+      "sequence_id": "testmaps",
+      "in_spine": false,
+      "phase": null,
+      "order": null
+    }
+  },
+  {
+    "map": "Gallery_Misc",
+    "engine": "humanoid_walker",
+    "reason": "25 artifacts \u2192 humanoid_walker (default for multi-artifact maps)",
+    "in_place": false,
+    "n_artifacts": 25,
+    "before": {
+      "constraint": 0.644,
+      "walkability": 0.381,
+      "combined": 0.539
+    },
+    "after": {
+      "constraint": 0.518,
+      "walkability": 0.599,
+      "combined": 0.55
+    },
+    "delta": {
+      "constraint": -0.126,
+      "walkability": 0.218,
+      "combined": 0.012
+    },
+    "is_improvement": true,
+    "written": true,
+    "output": "commons\\maps\\Gallery_Misc_Placed\\map_data.json",
+    "sequence_info": {
+      "sequence_id": "gallery",
+      "in_spine": false,
+      "phase": null,
+      "order": null
+    }
+  },
+  {
+    "map": "Gallery_LivingPaper",
+    "engine": "humanoid_walker",
+    "reason": "29 artifacts \u2192 humanoid_walker (default for multi-artifact maps)",
+    "in_place": false,
+    "n_artifacts": 29,
+    "before": {
+      "constraint": 0.973,
+      "walkability": 0.714,
+      "combined": 0.87
+    },
+    "after": {
+      "constraint": 0.933,
+      "walkability": 0.548,
+      "combined": 0.779
+    },
+    "delta": {
+      "constraint": -0.04,
+      "walkability": -0.166,
+      "combined": -0.09
+    },
+    "is_improvement": false,
+    "written": false,
+    "output": "(skipped: \u0394combined=-0.090 < 0.005)",
+    "sequence_info": {
+      "sequence_id": "gallery",
+      "in_spine": false,
+      "phase": null,
+      "order": null
+    }
+  },
+  {
+    "map": "Point_Tests",
+    "engine": "humanoid_walker",
+    "reason": "4 artifacts \u2192 humanoid_walker (default for multi-artifact maps)",
+    "in_place": false,
+    "n_artifacts": 4,
+    "before": {
+      "constraint": 0.857,
+      "walkability": 0.731,
+      "combined": 0.806
+    },
+    "after": {
+      "constraint": 0.938,
+      "walkability": 0.988,
+      "combined": 0.958
+    },
+    "delta": {
+      "constraint": 0.081,
+      "walkability": 0.257,
+      "combined": 0.152
+    },
+    "is_improvement": true,
+    "written": false,
+    "output": "(dry-run: not written)",
+    "sequence_info": null
+  },
+  {
+    "map": "Point_Tests",
+    "engine": "humanoid_walker",
+    "reason": "4 artifacts \u2192 humanoid_walker (default for multi-artifact maps)",
+    "in_place": true,
+    "n_artifacts": 4,
+    "before": {
+      "constraint": 0.857,
+      "walkability": 0.731,
+      "combined": 0.806
+    },
+    "after": {
+      "constraint": 0.938,
+      "walkability": 0.988,
+      "combined": 0.958
+    },
+    "delta": {
+      "constraint": 0.081,
+      "walkability": 0.257,
+      "combined": 0.152
+    },
+    "is_improvement": true,
+    "written": false,
+    "output": "(dry-run: not written)",
+    "sequence_info": null
+  },
+  {
+    "map": "WaveFunctions_Synthesis_Lab",
+    "engine": "humanoid_walker",
+    "reason": "in-spine sequence + 24 artifacts \u2192 humanoid_walker (encounter order matters)",
+    "in_place": true,
+    "n_artifacts": 24,
+    "before": {
+      "constraint": 0.657,
+      "walkability": 0.503,
+      "combined": 0.595
+    },
+    "after": {
+      "constraint": 0.755,
+      "walkability": 0.693,
+      "combined": 0.73
+    },
+    "delta": {
+      "constraint": 0.098,
+      "walkability": 0.19,
+      "combined": 0.135
+    },
+    "is_improvement": true,
+    "written": false,
+    "output": "(dry-run: not written)",
+    "sequence_info": {
+      "sequence_id": "wavefunctions",
+      "in_spine": true,
+      "phase": "oscillation",
+      "order": 6
+    }
+  },
+  {
+    "map": "Random_Game",
+    "engine": "simulated_annealing",
+    "reason": "8 artifacts in 221-cell room \u2192 sim_annealing (heavy compute justified)",
+    "in_place": true,
+    "n_artifacts": 8,
+    "before": {
+      "constraint": 0.884,
+      "walkability": 0.519,
+      "combined": 0.738
+    },
+    "after": {
+      "constraint": 0.964,
+      "walkability": 0.663,
+      "combined": 0.843
+    },
+    "delta": {
+      "constraint": 0.079,
+      "walkability": 0.144,
+      "combined": 0.105
+    },
+    "is_improvement": true,
+    "written": false,
+    "output": "(dry-run: not written)",
+    "sequence_info": {
+      "sequence_id": "randomness",
+      "in_spine": true,
+      "phase": "E_entropy",
+      "order": 7
+    }
+  },
+  {
+    "map": "Random_Gaussian",
+    "engine": "simulated_annealing",
+    "reason": "9 artifacts in 286-cell room \u2192 sim_annealing (heavy compute justified)",
+    "in_place": true,
+    "n_artifacts": 9,
+    "before": {
+      "constraint": 0.738,
+      "walkability": 0.669,
+      "combined": 0.711
+    },
+    "after": {
+      "constraint": 0.965,
+      "walkability": 0.576,
+      "combined": 0.809
+    },
+    "delta": {
+      "constraint": 0.226,
+      "walkability": -0.093,
+      "combined": 0.099
+    },
+    "is_improvement": true,
+    "written": false,
+    "output": "(dry-run: not written)",
+    "sequence_info": {
+      "sequence_id": "randomness",
+      "in_spine": true,
+      "phase": "E_entropy",
+      "order": 7
+    }
+  },
+  {
+    "map": "SoftBodies_Playground_of_Joy",
+    "engine": "humanoid_walker",
+    "reason": "in-spine sequence + 3 artifacts \u2192 humanoid_walker (encounter order matters)",
+    "in_place": true,
+    "n_artifacts": 3,
+    "before": {
+      "constraint": 0.96,
+      "walkability": 0.446,
+      "combined": 0.755
+    },
+    "after": {
+      "constraint": 0.971,
+      "walkability": 0.667,
+      "combined": 0.85
+    },
+    "delta": {
+      "constraint": 0.011,
+      "walkability": 0.221,
+      "combined": 0.095
+    },
+    "is_improvement": true,
+    "written": false,
+    "output": "(dry-run: not written)",
+    "sequence_info": {
+      "sequence_id": "softbodies",
+      "in_spine": true,
+      "phase": "integration",
+      "order": 14
+    }
+  },
+  {
+    "map": "Color_Context",
+    "engine": "simulated_annealing",
+    "reason": "21 artifacts in 525-cell room \u2192 sim_annealing (heavy compute justified)",
+    "in_place": true,
+    "n_artifacts": 21,
+    "before": {
+      "constraint": 0.818,
+      "walkability": 0.382,
+      "combined": 0.644
+    },
+    "after": {
+      "constraint": 0.895,
+      "walkability": 0.498,
+      "combined": 0.736
+    },
+    "delta": {
+      "constraint": 0.077,
+      "walkability": 0.116,
+      "combined": 0.093
+    },
+    "is_improvement": true,
+    "written": false,
+    "output": "(dry-run: not written)",
+    "sequence_info": null
+  },
+  {
+    "map": "Test_Substrates",
+    "engine": "humanoid_walker",
+    "reason": "27 artifacts \u2192 humanoid_walker (default for multi-artifact maps)",
+    "in_place": true,
+    "n_artifacts": 27,
+    "before": {
+      "constraint": 0.761,
+      "walkability": 0.317,
+      "combined": 0.583
+    },
+    "after": {
+      "constraint": 0.844,
+      "walkability": 0.337,
+      "combined": 0.641
+    },
+    "delta": {
+      "constraint": 0.084,
+      "walkability": 0.02,
+      "combined": 0.058
+    },
+    "is_improvement": true,
+    "written": false,
+    "output": "(dry-run: not written)",
+    "sequence_info": {
+      "sequence_id": "testmaps",
+      "in_spine": false,
+      "phase": null,
+      "order": null
+    }
+  },
+  {
+    "map": "Point_Tests",
+    "engine": "humanoid_walker",
+    "reason": "4 artifacts \u2192 humanoid_walker (default for multi-artifact maps)",
+    "in_place": true,
+    "n_artifacts": 4,
+    "before": {
+      "constraint": 0.857,
+      "walkability": 0.731,
+      "combined": 0.806
+    },
+    "after": {
+      "constraint": 0.938,
+      "walkability": 0.988,
+      "combined": 0.958
+    },
+    "delta": {
+      "constraint": 0.081,
+      "walkability": 0.257,
+      "combined": 0.152
+    },
+    "is_improvement": true,
+    "written": true,
+    "output": "commons\\maps\\Point_Tests\\map_data.json",
+    "sequence_info": null
+  },
+  {
+    "map": "WaveFunctions_Synthesis_Lab",
+    "engine": "humanoid_walker",
+    "reason": "in-spine sequence + 24 artifacts \u2192 humanoid_walker (encounter order matters)",
+    "in_place": true,
+    "n_artifacts": 24,
+    "before": {
+      "constraint": 0.657,
+      "walkability": 0.503,
+      "combined": 0.595
+    },
+    "after": {
+      "constraint": 0.755,
+      "walkability": 0.693,
+      "combined": 0.73
+    },
+    "delta": {
+      "constraint": 0.098,
+      "walkability": 0.19,
+      "combined": 0.135
+    },
+    "is_improvement": true,
+    "written": true,
+    "output": "commons\\maps\\WaveFunctions_Synthesis_Lab\\map_data.json",
+    "sequence_info": {
+      "sequence_id": "wavefunctions",
+      "in_spine": true,
+      "phase": "oscillation",
+      "order": 6
+    }
+  },
+  {
+    "map": "Random_Game",
+    "engine": "simulated_annealing",
+    "reason": "8 artifacts in 221-cell room \u2192 sim_annealing (heavy compute justified)",
+    "in_place": true,
+    "n_artifacts": 8,
+    "before": {
+      "constraint": 0.884,
+      "walkability": 0.519,
+      "combined": 0.738
+    },
+    "after": {
+      "constraint": 0.964,
+      "walkability": 0.663,
+      "combined": 0.843
+    },
+    "delta": {
+      "constraint": 0.079,
+      "walkability": 0.144,
+      "combined": 0.105
+    },
+    "is_improvement": true,
+    "written": true,
+    "output": "commons\\maps\\Random_Game\\map_data.json",
+    "sequence_info": {
+      "sequence_id": "randomness",
+      "in_spine": true,
+      "phase": "E_entropy",
+      "order": 7
+    }
+  },
+  {
+    "map": "Random_Gaussian",
+    "engine": "simulated_annealing",
+    "reason": "9 artifacts in 286-cell room \u2192 sim_annealing (heavy compute justified)",
+    "in_place": true,
+    "n_artifacts": 9,
+    "before": {
+      "constraint": 0.738,
+      "walkability": 0.669,
+      "combined": 0.711
+    },
+    "after": {
+      "constraint": 0.965,
+      "walkability": 0.576,
+      "combined": 0.809
+    },
+    "delta": {
+      "constraint": 0.226,
+      "walkability": -0.093,
+      "combined": 0.099
+    },
+    "is_improvement": true,
+    "written": true,
+    "output": "commons\\maps\\Random_Gaussian\\map_data.json",
+    "sequence_info": {
+      "sequence_id": "randomness",
+      "in_spine": true,
+      "phase": "E_entropy",
+      "order": 7
+    }
+  },
+  {
+    "map": "SoftBodies_Playground_of_Joy",
+    "engine": "humanoid_walker",
+    "reason": "in-spine sequence + 3 artifacts \u2192 humanoid_walker (encounter order matters)",
+    "in_place": true,
+    "n_artifacts": 3,
+    "before": {
+      "constraint": 0.96,
+      "walkability": 0.446,
+      "combined": 0.755
+    },
+    "after": {
+      "constraint": 0.971,
+      "walkability": 0.667,
+      "combined": 0.85
+    },
+    "delta": {
+      "constraint": 0.011,
+      "walkability": 0.221,
+      "combined": 0.095
+    },
+    "is_improvement": true,
+    "written": true,
+    "output": "commons\\maps\\SoftBodies_Playground_of_Joy\\map_data.json",
+    "sequence_info": {
+      "sequence_id": "softbodies",
+      "in_spine": true,
+      "phase": "integration",
+      "order": 14
+    }
+  },
+  {
+    "map": "Color_Context",
+    "engine": "simulated_annealing",
+    "reason": "21 artifacts in 525-cell room \u2192 sim_annealing (heavy compute justified)",
+    "in_place": true,
+    "n_artifacts": 21,
+    "before": {
+      "constraint": 0.818,
+      "walkability": 0.382,
+      "combined": 0.644
+    },
+    "after": {
+      "constraint": 0.895,
+      "walkability": 0.498,
+      "combined": 0.736
+    },
+    "delta": {
+      "constraint": 0.077,
+      "walkability": 0.116,
+      "combined": 0.093
+    },
+    "is_improvement": true,
+    "written": true,
+    "output": "commons\\maps\\Color_Context\\map_data.json",
+    "sequence_info": null
+  },
+  {
+    "map": "Test_Substrates",
+    "engine": "humanoid_walker",
+    "reason": "27 artifacts \u2192 humanoid_walker (default for multi-artifact maps)",
+    "in_place": true,
+    "n_artifacts": 27,
+    "before": {
+      "constraint": 0.761,
+      "walkability": 0.317,
+      "combined": 0.583
+    },
+    "after": {
+      "constraint": 0.844,
+      "walkability": 0.337,
+      "combined": 0.641
+    },
+    "delta": {
+      "constraint": 0.084,
+      "walkability": 0.02,
+      "combined": 0.058
+    },
+    "is_improvement": true,
+    "written": true,
+    "output": "commons\\maps\\Test_Substrates\\map_data.json",
+    "sequence_info": {
+      "sequence_id": "testmaps",
+      "in_spine": false,
+      "phase": null,
+      "order": null
+    }
+  },
+  {
+    "map": "Color_Context",
+    "engine": "simulated_annealing",
+    "reason": "16 artifacts in 525-cell room \u2192 sim_annealing (heavy compute justified)",
+    "in_place": false,
+    "n_artifacts": 16,
+    "before": {
+      "constraint": 0.895,
+      "walkability": 0.356,
+      "combined": 0.68
+    },
+    "after": {
+      "constraint": 0.981,
+      "walkability": 0.432,
+      "combined": 0.761
+    },
+    "delta": {
+      "constraint": 0.086,
+      "walkability": 0.076,
+      "combined": 0.082
+    },
+    "is_improvement": true,
+    "written": false,
+    "output": "(dry-run: not written)",
+    "sequence_info": null
+  },
+  {
+    "map": "WaveFunctions_Synthesis_Lab",
+    "engine": "humanoid_walker",
+    "reason": "in-spine sequence + 24 artifacts \u2192 humanoid_walker (encounter order matters)",
+    "in_place": false,
+    "n_artifacts": 24,
+    "before": {
+      "constraint": 0.755,
+      "walkability": 0.693,
+      "combined": 0.73
+    },
+    "after": {
+      "constraint": 0.753,
+      "walkability": 0.693,
+      "combined": 0.729
+    },
+    "delta": {
+      "constraint": -0.002,
+      "walkability": 0.0,
+      "combined": -0.001
+    },
+    "is_improvement": false,
+    "written": false,
+    "output": "(dry-run: not written)",
+    "sequence_info": {
+      "sequence_id": "wavefunctions",
+      "in_spine": true,
+      "phase": "oscillation",
+      "order": 6
+    }
+  },
+  {
+    "map": "Random_Game",
+    "engine": "pacing_arc",
+    "reason": "8 artifacts in-spine in 221-cell room \u2192 pacing_arc (Mario 4-beat curriculum walk)",
+    "in_place": false,
+    "n_artifacts": 8,
+    "before": {
+      "constraint": 0.964,
+      "walkability": 0.663,
+      "combined": 0.843
+    },
+    "after": {
+      "constraint": 0.89,
+      "walkability": 0.496,
+      "combined": 0.733
+    },
+    "delta": {
+      "constraint": -0.073,
+      "walkability": -0.167,
+      "combined": -0.111
+    },
+    "is_improvement": false,
+    "written": false,
+    "output": "(dry-run: not written)",
+    "sequence_info": {
+      "sequence_id": "randomness",
+      "in_spine": true,
+      "phase": "E_entropy",
+      "order": 7
+    }
+  },
+  {
+    "map": "Gallery_Misc",
+    "engine": "focal_composition",
+    "reason": "gallery/showcase map \u2192 focal_composition (centerpiece + supporting cast, interior-design pattern)",
+    "in_place": false,
+    "n_artifacts": 25,
+    "before": {
+      "constraint": 0.644,
+      "walkability": 0.381,
+      "combined": 0.539
+    },
+    "after": {
+      "constraint": 0.757,
+      "walkability": 0.561,
+      "combined": 0.678
+    },
+    "delta": {
+      "constraint": 0.113,
+      "walkability": 0.18,
+      "combined": 0.14
+    },
+    "is_improvement": true,
+    "written": false,
+    "output": "(dry-run: not written)",
+    "sequence_info": {
+      "sequence_id": "gallery",
+      "in_spine": false,
+      "phase": null,
+      "order": null
+    }
+  }
+]

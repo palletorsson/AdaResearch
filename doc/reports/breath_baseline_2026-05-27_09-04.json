@@ -1,0 +1,74 @@
+{
+  "timestamp": "2026-05-27T09:04",
+  "phase": "baseline",
+  "pipeline_summary": {
+    "total_spine_sequences": 22,
+    "global_avg": 5.43,
+    "per_sequence_heads": {
+      "randomness": "7_polish",
+      "primitives": "6_vr_testing",
+      "transformation": "6_vr_testing",
+      "array_tutorial": "6_vr_testing",
+      "color": "6_vr_testing",
+      "isosurfaces": "6_vr_testing",
+      "boolean_surfaces": "6_vr_testing",
+      "forces": "6_vr_testing",
+      "wavefunctions": "6_vr_testing",
+      "noise": "6_vr_testing",
+      "cellularautomata": "6_vr_testing",
+      "fractals": "6_vr_testing",
+      "lsystems": "6_vr_testing",
+      "proceduralgeneration": "6_vr_testing",
+      "swarmintelligence": "6_vr_testing",
+      "machinelearning": "6_vr_testing",
+      "graphtheory": "6_vr_testing",
+      "foundationscrisis": "6_vr_testing",
+      "qfeplaboratory": "6_vr_testing",
+      "postfoundationscrisis": "6_vr_testing",
+      "softbodies": "3_artifacts (62%)",
+      "change": "2_documentation (0%)"
+    },
+    "actionable_heads": [
+      "softbodies stage 3 artifacts: 39/63 (62%) — 24 cells missing scene file (single token: gallery_marker_soft-body)",
+      "change stage 2 documentation: 0/8 — but all map folders missing on disk, so docs alone won't advance HEAD"
+    ]
+  },
+  "heat_map_top_5": [
+    {"item": "floor", "temperature": 65, "reason": "active (1 recent commits)"},
+    {"item": "encyclopedia", "temperature": 65, "reason": "active (1 recent commits)"},
+    {"item": "capture", "temperature": 65, "reason": "active (1 recent commits)"},
+    {"item": "softbodies_documentation_pipeline", "temperature": 60, "reason": "deep discovery follow-up"},
+    {"item": "softbodies stage 2 cleared", "temperature": 60, "reason": "stage 2 cleared, next is stage 3 artifacts"}
+  ],
+  "garden_health": {
+    "total_artifacts": 2057,
+    "voiced": 1010,
+    "voice_coverage_pct": 49,
+    "embodied": 335,
+    "embodiment_rate_pct": 33,
+    "reaching": 535,
+    "phantom_limbs": 817,
+    "states": {
+      "DORMANT": 12,
+      "SCATTERED": 16,
+      "REACHING": 12,
+      "GROWING": 9,
+      "LIVING": 7
+    }
+  },
+  "release_gates": {
+    "overall": "FAIL",
+    "enabled_passing": "3/4",
+    "A_sequence_contract": "FAIL (8 missing_declared_maps; 623 undeclared_map_folders)",
+    "B_artifact_registry_integrity": "PASS",
+    "C_map_validation": "PASS (856 A, 144 B, 184 C, 0 F)",
+    "D_lab_progression_continuity": "PASS"
+  },
+  "focus_vector": {
+    "primary": "Rebuild all primitives maps using Map Studio",
+    "actionable_now": false,
+    "reason": "primitives HEAD = vr_testing (stage 6), requires human in VR; no fresh primitives doc/artifact work blocking pipeline"
+  },
+  "cooling_filter": [],
+  "trajectory": "11 consecutive flat top-line breaths at 5.43; 2026-05-26 first HEAD advance in 26 days (softbodies stage 2 -> 3)"
+}

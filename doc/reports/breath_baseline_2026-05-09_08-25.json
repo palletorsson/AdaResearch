@@ -1,0 +1,69 @@
+{
+  "timestamp": "2026-05-09T08:25",
+  "phase": "baseline",
+  "pipeline_summary": {
+    "global_avg": 5.43,
+    "spine_sequences": 19,
+    "heads": {
+      "stage_2_documentation": ["array_tutorial (18% doc, 60% art)", "softbodies (29% doc, 64% art)"],
+      "stage_1_structure": ["boolean_surfaces (0%)"],
+      "stage_6_vr_testing": [
+        "primitives", "transformation", "color", "forces", "wavefunctions", "noise",
+        "cellularautomata", "fractals", "lsystems", "proceduralgeneration", "isosurfaces",
+        "swarmintelligence", "machinelearning", "foundationscrisis", "qfeplaboratory",
+        "postfoundationscrisis", "graphtheory"
+      ],
+      "stage_7_polish": ["randomness"]
+    }
+  },
+  "heat_map_top_5": [
+    {"item": "primitive", "temp": 80, "reason": "active (6 recent commits)"},
+    {"item": "shader", "temp": 75, "reason": "active (3 recent commits)"},
+    {"item": "capture", "temp": 75, "reason": "active (3 recent commits)"},
+    {"item": "encyclopedia", "temp": 65, "reason": "active (1 recent commits)"},
+    {"item": "pipeline_scorer empty sequence schema", "temp": 60, "reason": "RESOLVED 2026-05-03 — heat map stale"},
+    {"item": "tscn uid path drift", "temp": 60, "reason": "RESOLVED 2026-05-03 — heat map stale"},
+    {"item": "garden_voicing_targeting", "temp": 60, "reason": "active flow"},
+    {"item": "sequence:boolean_surfaces", "temp": 50, "reason": "empty sequence"},
+    {"item": "sequence:resourcemanagement", "temp": 50, "reason": "empty sequence"}
+  ],
+  "garden_health": {
+    "total_voiced": 936,
+    "voice_coverage_pct": 44,
+    "embodiment_rate_pct": 35,
+    "phantom_limbs_total": 744,
+    "scattered_sequences": [
+      "wavefunctions (67/105 = 63.8%)",
+      "randomness (41/73 = 56.2%)",
+      "qfeplaboratory (28/52 = 53.8%)",
+      "physicssimulation (22/40)",
+      "transformation (15/35)",
+      "color (20/30)",
+      "noise (11/19)",
+      "swarmintelligence (10/16)",
+      "proceduralgeneration (10/15)"
+    ],
+    "dormant_sequences": [
+      "gallery (89/721 = 12.3%)",
+      "array_tutorial (17/75)",
+      "softbodies (10/46)"
+    ]
+  },
+  "release_gates": {
+    "A_sequence_contract": "PASS",
+    "B_artifact_registry": "PASS",
+    "C_map_validation": "PASS",
+    "D_lab_progression": "PASS",
+    "passing": 4
+  },
+  "trajectory_context": {
+    "consecutive_flat_breaths_at_5.43": 5,
+    "structural_ceiling": "stage 6 VR testing — requires human VR session",
+    "garden_voiced_trajectory": [904, 912, 928, 936],
+    "last_breath_handoff": "voice the remaining ~11 randomness actionables to push past 70% threshold (would advance SCATTERED -> LIVING due to 58% embodiment rate)"
+  },
+  "focus_vector": {
+    "primary": "Rebuild all primitives maps using Map Studio (human VR work)",
+    "ai_supports": "Continue garden voicing on map-presence-targeted sequences"
+  }
+}

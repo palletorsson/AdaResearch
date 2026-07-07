@@ -83,8 +83,8 @@ func _add_info_frame() -> void:
 	title_label.pixel_size = 0.0015
 	title_label.font_size = 28
 	title_label.modulate = Color.WHITE
-	title_label.no_depth_test = true
-	title_label.render_priority = 100
+	title_label.no_depth_test = false  # occlude behind walls/boards, don't bleed through
+	title_label.render_priority = 0
 	title_label.outline_size = 4
 	title_label.outline_modulate = Color(0.0, 0.0, 0.0, 0.8)
 	title_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -111,8 +111,8 @@ func _add_info_frame() -> void:
 	formula_label.pixel_size = 0.0015
 	formula_label.font_size = 22
 	formula_label.modulate = Color(0.85, 0.95, 1.0)
-	formula_label.no_depth_test = true
-	formula_label.render_priority = 100
+	formula_label.no_depth_test = false  # occlude behind walls/boards
+	formula_label.render_priority = 0
 	formula_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	formula_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	formula_label.position = Vector3(0, content_top, 0.08 * sc)
@@ -138,8 +138,8 @@ func _add_info_frame() -> void:
 	desc_label.pixel_size = 0.0015
 	desc_label.font_size = 16
 	desc_label.modulate = Color(0.55, 0.6, 0.65)
-	desc_label.no_depth_test = true
-	desc_label.render_priority = 100
+	desc_label.no_depth_test = false  # occlude behind walls/boards
+	desc_label.render_priority = 0
 	desc_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	desc_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	desc_label.position = Vector3(0, content_top - 0.12 * sc, 0.08 * sc)
@@ -205,13 +205,37 @@ func _exit_tree() -> void:
 
 
 func apply_grid_config(config: Dictionary) -> void:
-	# map_data tokens: CoordinateSystem3M:0:0#display_scale:1.5
+	# map_data tokens: CoordinateSystem3M:0:0#display_scale:1.5#tick_step:0.0
 	if config.has("display_scale"):
 		display_scale = float(config["display_scale"])
 		scale = Vector3(display_scale, display_scale, display_scale)
+	# axis_length / axis_thickness / tick_step only affect the AXES, which
+	# were already built in _ready() — so changing the vars alone does
+	# nothing (the old bug: tick_step:0.0 was ignored, ticks stayed). Track
+	# whether any axis-shaping value changed and rebuild the axes if so.
+	var rebuild_axes := false
 	if config.has("axis_length"):
-		axis_length = float(config["axis_length"])
+		axis_length = float(config["axis_length"]); rebuild_axes = true
 	if config.has("axis_thickness"):
-		axis_thickness = float(config["axis_thickness"])
+		axis_thickness = float(config["axis_thickness"]); rebuild_axes = true
 	if config.has("tick_step"):
-		tick_step = float(config["tick_step"])
+		tick_step = float(config["tick_step"]); rebuild_axes = true
+	if rebuild_axes:
+		_rebuild_axes()
+
+
+# Rebuild just the three axes + their labels (used when axis_length /
+# tick_step / axis_thickness change after _ready). Leaves the info panel and
+# gyroscope intact.
+func _rebuild_axes() -> void:
+	for child in get_children():
+		# Axis nodes carry the CoordinateLine script; their labels are Label3D
+		# with single-letter text. Remove both; keep panel + gyroscope.
+		if child is Label3D and child.text in ["X", "Y", "Z"]:
+			child.queue_free()
+		elif child.get_script() != null and \
+				str(child.get_script().resource_path).ends_with("coordinate_line.gd"):
+			child.queue_free()
+	create_axis(Vector3.RIGHT, Color.RED, "X")
+	create_axis(Vector3.UP, Color.GREEN, "Y")
+	create_axis(Vector3.BACK, Color.BLUE, "Z")

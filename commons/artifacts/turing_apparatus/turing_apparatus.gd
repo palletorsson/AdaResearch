@@ -102,16 +102,16 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 func _read_metadata_overrides() -> void:
 	if has_meta("config_belt_arrow_count"):
-		belt_arrow_count = int(String(get_meta("config_belt_arrow_count")))
+		belt_arrow_count = int(str(get_meta("config_belt_arrow_count")))
 	if has_meta("config_panel_breakers_on_count"):
-		panel_breakers_on_count = int(String(get_meta("config_panel_breakers_on_count")))
+		panel_breakers_on_count = int(str(get_meta("config_panel_breakers_on_count")))
 	if has_meta("config_button_pressed"):
-		var v: String = String(get_meta("config_button_pressed")).to_lower()
+		var v: String = str(get_meta("config_button_pressed")).to_lower()
 		button_pressed = (v == "true" or v == "1" or v == "yes")
 	if has_meta("config_program_server_count"):
-		program_server_count = int(String(get_meta("config_program_server_count")))
+		program_server_count = int(str(get_meta("config_program_server_count")))
 	if has_meta("config_accent_color"):
-		accent_color = _parse_color(String(get_meta("config_accent_color")), accent_color)
+		accent_color = _parse_color(str(get_meta("config_accent_color")), accent_color)
 
 
 func _parse_color(s: String, fallback: Color) -> Color:

@@ -1,0 +1,142 @@
+{
+  "_meta": {
+    "schema_version": "beats/0.1",
+    "schema_doc": "doc/beats/schema.md",
+    "sequence": "foundationscrisis",
+    "phase": "synthesis",
+    "description": "The 19th-20th century crisis that shattered mathematical certainty. Non-Euclidean geometry, Russell's paradox, GÃ¶del's incompleteness, Brouwer's intuitionism. Each map stages a limitâ€”where formal s…",
+    "_draft": true,
+    "_draft_origin": "tools/draft_beats.py — refine via /beats editor"
+  },
+  "beats": [
+    {
+      "id": "F0",
+      "role": "GATEWAY",
+      "concept": "entering foundationscrisis — the substrate shifts",
+      "register": "structural",
+      "intensity": "low",
+      "maps": [],
+      "stage": "draft",
+      "next": "F1"
+    },
+    {
+      "id": "F1",
+      "role": "INTRODUCE",
+      "concept": "Five axioms. Four are obvious. The fifth is not.",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "Euclid_Parallel"
+      ],
+      "stage": "draft",
+      "next": "F2",
+      "_concept_origin": "blurb"
+    },
+    {
+      "id": "F2",
+      "role": "PRACTICE",
+      "concept": "Euclid's fifth postulate held for two millennia. Then Bolyai, Lobachevsky, and Riemann asked: what if parallel lines don't behave?",
+      "register": "exploring",
+      "intensity": "medium",
+      "maps": [
+        "NonEuclidean_Spaces"
+      ],
+      "stage": "draft",
+      "next": "F3",
+      "_concept_origin": "blurb"
+    },
+    {
+      "id": "F3",
+      "role": "LIMIT",
+      "concept": "A set collects things. The set of even numbers. The set of red objects. Most sets don't contain themselves — the set of even numbers is not itself an even number.",
+      "register": "reflecting",
+      "intensity": "high",
+      "maps": [
+        "Russell_Paradox"
+      ],
+      "stage": "draft",
+      "next": "F4",
+      "_concept_origin": "blurb"
+    },
+    {
+      "id": "F4",
+      "role": "DEMONSTRATE",
+      "concept": "In 1931, Kurt Gödel fed mathematics to itself.",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "Godel_Incompleteness"
+      ],
+      "stage": "draft",
+      "next": "F5",
+      "_concept_origin": "blurb"
+    },
+    {
+      "id": "F5",
+      "role": "DEMONSTRATE",
+      "concept": "Each step makes sense. North side, height one. East side, height two. South, three. West, four. Climb the perimeter clockwise and every transition feels valid — just stairs, just geometry, just one foot after the other.",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "Escher_Impossible"
+      ],
+      "stage": "draft",
+      "next": "F6",
+      "_concept_origin": "blurb"
+    },
+    {
+      "id": "F6",
+      "role": "DEMONSTRATE",
+      "concept": "Classical mathematics lets you prove a bridge exists by showing that its absence is absurd. You never build the bridge. You never cross it. You just know, somewhere, it must be.",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "Brouwer_Intuitionism"
+      ],
+      "stage": "draft",
+      "next": "F7",
+      "_concept_origin": "blurb"
+    },
+    {
+      "id": "F7",
+      "role": "DEMONSTRATE",
+      "concept": "Classical logic has a rule: if a contradiction exists, everything follows. One false step and the entire system collapses into triviality. Pavel Florensky — mathematician, priest, executed by Stalin — rejected this.",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "Florensky_Paraconsistent"
+      ],
+      "stage": "draft",
+      "next": "F8",
+      "_concept_origin": "blurb"
+    },
+    {
+      "id": "F8",
+      "role": "SYNTHESIZE",
+      "concept": "Gödel's plaque. Russell's boxes. Escher's staircase. Florensky's sphere. Four wings of a single argument, radiating from a summit where the formula stands complete: QFE = F - λE(S) + φΔE(S,t).",
+      "register": "synthesizing",
+      "intensity": "high",
+      "maps": [
+        "Crisis_Synthesis"
+      ],
+      "stage": "draft",
+      "next": "F9",
+      "_concept_origin": "blurb"
+    },
+    {
+      "id": "F9",
+      "role": "CHAMBER",
+      "concept": "foundations — to be authored",
+      "register": "synthesizing",
+      "intensity": "high",
+      "maps": [],
+      "stage": "draft",
+      "next": null,
+      "bleed_to": [
+        "primitives",
+        "transformation"
+      ],
+      "note": "auto-reciprocates inbound bleed_from references"
+    }
+  ]
+}

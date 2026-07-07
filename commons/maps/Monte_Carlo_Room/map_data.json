@@ -15,11 +15,7 @@
       "difficulty": "intermediate",
       "category": "randomness",
       "estimated_time": "4-5 minutes",
-      "learning_objectives": [
-        "See the Monte Carlo loop as a workshop: sample → walk → weigh → report",
-        "Read the running mean on the info_screen as the estimator output",
-        "Notice the scales tilting toward whichever hypothesis the dice are favouring"
-      ]
+      "learning_objectives": ["See the Monte Carlo loop as a workshop: sample → walk → weigh → report","Read the running mean on the info_screen as the estimator output","Notice the scales tilting toward whichever hypothesis the dice are favouring"]
     }
   },
   "utility_definitions": {
@@ -28,12 +24,12 @@
   },
   "spawn_points": {
     "default": {
-      "position": [4.0, 1.2, 7.5],
-      "rotation": [0, 0, 0]
+      "position": [4.0,1.2,7.5],
+      "rotation": [0,0,0]
     }
   },
   "lighting": {
-    "ambient_color": [0.42, 0.45, 0.55],
+    "ambient_color": [0.42,0.45,0.55],
     "ambient_energy": 0.55
   },
   "settings": {
@@ -41,34 +37,34 @@
   },
   "layers": {
     "structure": [
-      ["1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "1", "1", "1", "1"],
-      ["1", "1", "1", "1", "0", "1", "1", "1"]
+      ["1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","0","1","1","1"]
     ],
     "utilities": [
-      [" ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", "t", " ", " ", " "]
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," ","t"," "," "," "]
     ],
     "interactables": [
-      [" ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", "lab_room#accent_color:0.20,0.55,0.95#signage_top:MONTE CARLO ROOM#signage_sub:sample · walk · weigh · report#annotation_top:μ̂ = (1/N) Σᵢ f(Xᵢ)#annotation_bottom:N=1024 samples · estimate 0.6427 ± 0.06#room_width:8.0#room_depth:8.0#room_height:3.8#mounted_artifact_scene:res://commons/artifacts/monte_carlo_apparatus/monte_carlo_apparatus.tscn", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " ", " ", " ", " "]
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," ","lab_room#accent_color:0.20,0.55,0.95#signage_top:MONTE CARLO ROOM#signage_sub:sample · walk · weigh · report#annotation_top:μ̂ = (1/N) Σᵢ f(Xᵢ)#annotation_bottom:N=1024 samples · estimate 0.6427 ± 0.06#room_width:8.0#room_depth:8.0#room_height:3.8#mounted_artifact_scene:res://commons/artifacts/monte_carlo_apparatus/monte_carlo_apparatus.tscn"," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "]
     ]
   }
 }

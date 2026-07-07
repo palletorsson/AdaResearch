@@ -14,6 +14,7 @@ extends SceneTree
 ##     --script res://commons/testing/botanical_flower_gallery_lab.gd
 
 const BotanicalFlowerScene := preload("res://commons/flora/botanical_flower.tscn")
+const GroundPatchClass = preload("res://commons/testing/ground_patch.gd")
 
 # Gallery dir hard-coded to the encyclopedia public path. If you move
 # the encyclopedia, edit here.
@@ -122,7 +123,7 @@ func _render_one(cfg_name: String) -> bool:
 		_flower.queue_free()
 		await process_frame
 
-	# Spawn fresh flower at origin.
+	# Spawn fresh flower at origin, on a meadow ground patch.
 	_flower = BotanicalFlowerScene.instantiate()
 	_root_3d.add_child(_flower)
 	_flower.configure(cfg)
@@ -133,6 +134,16 @@ func _render_one(cfg_name: String) -> bool:
 	# for the flower head and inflorescence stack. Use a generous factor.
 	var stem_h: float = float(cfg.get("stem_height", 0.25))
 	var overall: float = float(cfg.get("overall_scale", 1.0))
+
+	# Ground patch — flower kingdom signature: meadow soil + golden
+	# pollen sparkle. Sized roughly to the flower's footprint × 1.5 so
+	# the patch reads as ground without dominating the frame.
+	var ground_size: float = maxf(stem_h * overall * 2.0, 0.6)
+	GroundPatchClass.attach(
+		_flower,
+		"flower",
+		Vector2(ground_size, ground_size)
+	)
 	var flower_count: int = int(cfg.get("flower_count", 1))
 	var flower_spacing: float = float(cfg.get("flower_spacing", 0.04))
 	# Inflorescences stack flowers above the stem top — add their span.

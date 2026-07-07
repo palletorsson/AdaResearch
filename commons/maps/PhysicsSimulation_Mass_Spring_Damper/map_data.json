@@ -14,11 +14,7 @@
       "difficulty": "advanced",
       "category": "physicssimulation",
       "estimated_time": "10-15 minutes",
-      "learning_objectives": [
-        "Mass-spring-damper systems",
-        "Oscillation",
-        "Damping ratios"
-      ],
+      "learning_objectives": ["Mass-spring-damper systems","Oscillation","Damping ratios"],
       "spatial_temperature": 0.5
     },
     "title": "Mass-Spring-Damper"
@@ -39,24 +35,12 @@
     }
   },
   "lighting": {
-    "ambient_color": [
-      0.4,
-      0.4,
-      0.5
-    ],
+    "ambient_color": [0.4,0.4,0.5],
     "ambient_energy": 0.6,
     "directional_light": {
       "enabled": true,
-      "direction": [
-        -0.4,
-        -0.7,
-        -0.4
-      ],
-      "color": [
-        1.0,
-        0.9,
-        0.8
-      ],
+      "direction": [-0.4,-0.7,-0.4],
+      "color": [1.0,0.9,0.8],
       "energy": 1.2
     }
   },
@@ -69,11 +53,7 @@
     "initial_tile_visibility": "hidden_except_corners",
     "background": {
       "type": "sky",
-      "color": [
-        0.2,
-        0.3,
-        0.7
-      ]
+      "color": [0.2,0.3,0.7]
     }
   },
   "layers": {

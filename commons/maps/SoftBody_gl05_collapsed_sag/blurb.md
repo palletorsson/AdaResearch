@@ -1,0 +1,5 @@
+The other glass studies hold their shape. gl05 does not. Stiffness is set very low, pre-inflation is skipped, gravity is increased, and the simulation is allowed to run for five hundred steps instead of two hundred. By the time it stops, the sphere is no longer a sphere. The unpinned portion has stretched downward into a long teardrop. The walls are thin. The mouth has elongated. What hangs is closer to a candle's drip than a vessel.
+
+A glassblower would say the piece was left too long in the kiln, that the glass passed the point where it could hold form. The simulation documents this directly. There is no kiln, no temperature, no viscosity in the usual sense — only a stiffness number that fell too low. When stiffness is too low, the springs cannot resist gravity, the body keeps stretching, and the vessel pattern breaks.
+
+This is the family member that names its own limit. Bulb, bottle, bowl, lopsided vase — and then the collapsed sag, which is what tells you the rest are vessels. Without the failure case, you would not know what the parameter window actually was.

@@ -432,6 +432,8 @@ func _read_metadata_overrides() -> void:
 		wall_band_color = _parse_color(str(get_meta("config_wall_band_color")), wall_band_color)
 	if has_meta("config_show_plinth"):
 		show_plinth = _parse_bool(str(get_meta("config_show_plinth")), show_plinth)
+	if has_meta("config_show_wall_annotations"):
+		show_wall_annotations = _parse_bool(str(get_meta("config_show_wall_annotations")), show_wall_annotations)
 	# Ceiling fixtures
 	if has_meta("config_show_ceiling_fixtures"):
 		show_ceiling_fixtures = _parse_bool(str(get_meta("config_show_ceiling_fixtures")), show_ceiling_fixtures)

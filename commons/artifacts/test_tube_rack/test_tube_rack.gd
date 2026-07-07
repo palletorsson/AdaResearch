@@ -74,27 +74,27 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 func _read_metadata_overrides() -> void:
 	if has_meta("config_rack_width"):
-		rack_width = float(String(get_meta("config_rack_width")))
+		rack_width = float(str(get_meta("config_rack_width")))
 	if has_meta("config_rack_depth"):
-		rack_depth = float(String(get_meta("config_rack_depth")))
+		rack_depth = float(str(get_meta("config_rack_depth")))
 	if has_meta("config_rack_height"):
-		rack_height = float(String(get_meta("config_rack_height")))
+		rack_height = float(str(get_meta("config_rack_height")))
 	if has_meta("config_tube_count"):
-		tube_count = int(String(get_meta("config_tube_count")))
+		tube_count = int(str(get_meta("config_tube_count")))
 	if has_meta("config_tube_height"):
-		tube_height = float(String(get_meta("config_tube_height")))
+		tube_height = float(str(get_meta("config_tube_height")))
 	if has_meta("config_tube_radius"):
-		tube_radius = float(String(get_meta("config_tube_radius")))
+		tube_radius = float(str(get_meta("config_tube_radius")))
 	if has_meta("config_tube_content_count"):
-		tube_content_count = int(String(get_meta("config_tube_content_count")))
+		tube_content_count = int(str(get_meta("config_tube_content_count")))
 	if has_meta("config_rack_color"):
-		rack_color = _parse_color(String(get_meta("config_rack_color")), rack_color)
+		rack_color = _parse_color(str(get_meta("config_rack_color")), rack_color)
 	if has_meta("config_tube_glass_color"):
-		tube_glass_color = _parse_color(String(get_meta("config_tube_glass_color")), tube_glass_color)
+		tube_glass_color = _parse_color(str(get_meta("config_tube_glass_color")), tube_glass_color)
 	if has_meta("config_content_color"):
-		content_color = _parse_color(String(get_meta("config_content_color")), content_color)
+		content_color = _parse_color(str(get_meta("config_content_color")), content_color)
 	if has_meta("config_accent_color"):
-		accent_color = _parse_color(String(get_meta("config_accent_color")), accent_color)
+		accent_color = _parse_color(str(get_meta("config_accent_color")), accent_color)
 
 
 func _clear_built_children() -> void:

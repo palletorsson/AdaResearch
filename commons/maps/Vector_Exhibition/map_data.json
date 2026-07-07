@@ -27,23 +27,11 @@
 	}
   },
   "lighting": {
-	"ambient_color": [
-	  0.4,
-	  0.4,
-	  0.5
-	],
+	"ambient_color": [0.4,0.4,0.5],
 	"ambient_energy": 0.6,
 	"directional_light": {
-	  "color": [
-		1.0,
-		0.95,
-		0.85
-	  ],
-	  "direction": [
-		-0.3,
-		-0.8,
-		-0.3
-	  ],
+	  "color": [1.0,0.95,0.85],
+	  "direction": [-0.3,-0.8,-0.3],
 	  "enabled": true,
 	  "energy": 1.0
 	}
@@ -51,11 +39,7 @@
   "settings": {
 	"auto_reveal_on_entry": true,
 	"background": {
-	  "color": [
-		0.15,
-		0.2,
-		0.3
-	  ],
+	  "color": [0.15,0.2,0.3],
 	  "type": "sky"
 	},
 	"cube_size": 1.0,

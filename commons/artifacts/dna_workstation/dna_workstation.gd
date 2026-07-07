@@ -235,7 +235,7 @@ func _find_config(substrate: String, config_id: String) -> Dictionary:
 # ─── Per-substrate builders ───────────────────────────────────
 
 func _build_lsystem(cfg: Dictionary) -> Node3D:
-	var axiom: String = String(cfg.get("axiom", "F"))
+	var axiom: String = str(cfg.get("axiom", "F"))
 	var rules: Dictionary = cfg.get("rules", {})
 	var iters: int = int(cfg.get("iterations", 4))
 	var seed_val: int = int(cfg.get("seed", 0))

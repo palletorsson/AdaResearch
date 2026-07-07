@@ -284,45 +284,45 @@
       0.0
     ]
   ],
-  "conceptual_corr": 0.219,
+  "conceptual_corr": 1.0,
   "pulled_apart": [
-    {
-      "a": "Three rigid motions",
-      "b": "Matrix / homogeneous",
-      "placed": 0.55,
-      "conceptual": 0.0
-    },
-    {
-      "a": "Rotation",
-      "b": "Curved space (non-Euclidean)",
-      "placed": 0.82,
-      "conceptual": 0.61
-    },
     {
       "a": "Three rigid motions",
       "b": "Curved space (non-Euclidean)",
       "placed": 1.0,
-      "conceptual": 0.79
+      "conceptual": 0.92
+    },
+    {
+      "a": "Translation",
+      "b": "Curved space (non-Euclidean)",
+      "placed": 0.91,
+      "conceptual": 0.83
+    },
+    {
+      "a": "Three rigid motions",
+      "b": "Boolean / CSG",
+      "placed": 0.91,
+      "conceptual": 0.83
     }
   ],
   "jammed_together": [
     {
-      "a": "Field / flow",
-      "b": "Boolean / CSG",
+      "a": "Three rigid motions",
+      "b": "Translation",
       "placed": 0.09,
-      "conceptual": 1.0
+      "conceptual": 0.08
     },
     {
-      "a": "Tiling / pattern",
-      "b": "Field / flow",
+      "a": "Translation",
+      "b": "Rotation",
       "placed": 0.09,
-      "conceptual": 0.94
+      "conceptual": 0.08
     },
     {
       "a": "Rotation",
       "b": "Scale",
       "placed": 0.09,
-      "conceptual": 0.88
+      "conceptual": 0.08
     }
   ]
 }

@@ -8,13 +8,15 @@
 # critical_parameter: generation_depth — at depth 1 all three look alike; at depth 5 the cultural divergence becomes unmistakable
 # triggers: increasing depth reveals that Lindenmayer's tree grows UP (botanical hierarchy), the Islamic pattern grows OUT (tiling symmetry), the kinship pattern grows AROUND (reciprocal branching)
 # emerges: the viewer notices that "natural" branching is itself a cultural assumption — the L-system engine is neutral, but the axioms never are
-# needs: [has] depth slider via ArtifactControls; [has] Label3D provenance annotations; [missing] no audio; no axiom editor
+# needs: [has] depth slider via ArtifactControls; [has] framed provenance boards; [missing] no audio; no axiom editor
 # relationships: placed in LSystems_Grammar_Lab alongside lsystem_editor and lsystem_tree; responds to the critical.md question "whose grammar?"
 # truth: the grammar is never just math — it is always also a claim about what counts as growth
 
 extends Node3D
 
 class_name GrammarProvenance
+
+const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
 
 ## How many generations to expand each L-system
 @export_range(1, 6) var generation_depth: int = 4:
@@ -63,8 +65,6 @@ var _grammars: Array[Dictionary] = [
 
 var _tree_meshes: Array[MeshInstance3D] = []
 var _immediate_meshes: Array[ImmediateMesh] = []
-var _labels: Array[Label3D] = []
-var _title_labels: Array[Label3D] = []
 var _controls: Node  # ArtifactControls
 
 
@@ -113,27 +113,24 @@ func _build_trees() -> void:
 		base.position = Vector3(0, -0.01, 0)
 		mi.add_child(base)
 
-		# Title label (grammar name)
-		var title := Label3D.new()
-		title.name = "Title_%d" % i
-		title.text = _grammars[i]["label"]
-		title.font_size = 32
-		title.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-		title.position = Vector3(0, -0.1, 0)
-		title.modulate = Color(1, 1, 1, 0.9)
-		mi.add_child(title)
-		_title_labels.append(title)
-
-		# Provenance label (below)
-		var lbl := Label3D.new()
-		lbl.name = "Provenance_%d" % i
-		lbl.text = _grammars[i]["subtitle"]
-		lbl.font_size = 18
-		lbl.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-		lbl.position = Vector3(0, -0.25, 0)
-		lbl.modulate = Color(0.8, 0.8, 0.8, 0.7)
-		mi.add_child(lbl)
-		_labels.append(lbl)
+		# Title + provenance consolidated on one framed dark panel (R-027)
+		var panel := Node3D.new()
+		panel.name = "Provenance_%d" % i
+		panel.position = Vector3(0, -0.2, 0.38)
+		mi.add_child(panel)
+		panel.add_child(_plate(Vector3(0.9, 0.42, 0.03)))
+		var title_mesh: MeshInstance3D = BakedText.make_label_mesh(_grammars[i]["label"], Color(1, 1, 1), Vector2(0.8, 0.06), 1300, true)
+		if title_mesh:
+			title_mesh.position = Vector3(0, 0.14, 0.022)
+			panel.add_child(title_mesh)
+		var rows: PackedStringArray = str(_grammars[i]["subtitle"]).split("\n")
+		var y := 0.055
+		for r in rows:
+			var line: MeshInstance3D = BakedText.make_label_mesh(str(r), Color(0.8, 0.8, 0.8), Vector2(0.8, 0.042), 1300, true)
+			if line:
+				line.position = Vector3(0, y, 0.022)
+				panel.add_child(line)
+			y -= 0.058
 
 
 func _build_controls() -> void:
@@ -149,23 +146,46 @@ func _build_controls() -> void:
 
 
 func _build_header() -> void:
-	var header := Label3D.new()
+	# Header + subtitle consolidated on one framed dark panel (R-027)
+	var header := Node3D.new()
 	header.name = "Header"
-	header.text = "WHOSE GRAMMAR?"
-	header.font_size = 48
-	header.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	header.position = Vector3(0, 1.8, 0)
-	header.modulate = Color(1, 0.9, 0.7, 0.9)
+	header.position = Vector3(0, 1.7, 0)
 	add_child(header)
+	header.add_child(_plate(Vector3(1.7, 0.34, 0.035)))
+	var title: MeshInstance3D = BakedText.make_label_mesh("WHOSE GRAMMAR?", Color(1, 0.9, 0.7), Vector2(1.5, 0.11), 1300, true)
+	if title:
+		title.position = Vector3(0, 0.07, 0.024)
+		header.add_child(title)
+	var sub: MeshInstance3D = BakedText.make_label_mesh("Same engine. Different axioms. Different worlds.", Color(0.8, 0.8, 0.8), Vector2(1.5, 0.05), 1300, true)
+	if sub:
+		sub.position = Vector3(0, -0.09, 0.024)
+		header.add_child(sub)
 
-	var sub := Label3D.new()
-	sub.name = "SubHeader"
-	sub.text = "Same engine. Different axioms. Different worlds."
-	sub.font_size = 22
-	sub.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	sub.position = Vector3(0, 1.6, 0)
-	sub.modulate = Color(0.8, 0.8, 0.8, 0.7)
-	add_child(sub)
+
+func _plate(size: Vector3) -> Node3D:
+	var g := Node3D.new()
+	var frame := MeshInstance3D.new()
+	var fm := BoxMesh.new()
+	fm.size = size + Vector3(0.05, 0.05, -0.01)
+	frame.mesh = fm
+	var fmat := StandardMaterial3D.new()
+	fmat.albedo_color = Color(0.62, 0.60, 0.56)
+	fmat.roughness = 0.7
+	frame.material_override = fmat
+	frame.position = Vector3(0, 0, -0.006)
+	g.add_child(frame)
+	var face := MeshInstance3D.new()
+	var bm := BoxMesh.new()
+	bm.size = size
+	face.mesh = bm
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color(0.10, 0.11, 0.14)
+	mat.emission_enabled = true
+	mat.emission = Color(0.10, 0.11, 0.14)
+	mat.emission_energy_multiplier = 0.25
+	face.material_override = mat
+	g.add_child(face)
+	return g
 
 
 # ── L-System Engine ─────────────────────────────────────────

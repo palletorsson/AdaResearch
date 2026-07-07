@@ -61,7 +61,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 1,
+				"footprint_cells": 4,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -73,7 +73,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 4,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -165,7 +167,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 1,
+				"footprint_cells": 4,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -177,7 +179,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 4,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -289,7 +293,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -379,7 +385,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 1,
+				"footprint_cells": 2,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -391,7 +397,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 2,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -483,7 +491,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 1,
+				"footprint_cells": 2,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -495,7 +503,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 2,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -594,7 +604,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 3,
+				"footprint_cells": 6,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -606,7 +616,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 6,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -640,7 +652,7 @@
 		"additive_wave_demo": {
 			"category": "waves",
 			"complexity": "intermediate",
-			"description": "Interactive demonstration of additive wave synthesis \u2014 layer sine waves of different frequencies and amplitudes to build complex waveforms. Visualizes Fourier's fundamental insight that any shape can be constructed from simple oscillations.",
+			"description": "Interactive demonstration of additive wave synthesis — layer sine waves of different frequencies and amplitudes to build complex waveforms. Visualizes Fourier's fundamental insight that any shape can be constructed from simple oscillations.",
 			"dev_themes": [
 				"commons",
 				"mixed",
@@ -711,7 +723,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 2,
+				"footprint_cells": 3,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -729,7 +741,9 @@
 					"contrasts",
 					"timbre_sculptor"
 				],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 3,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -819,7 +833,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 1,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -831,7 +845,9 @@
 				"orientation": "face_approach",
 				"isolation": 1,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 9,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -935,7 +951,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -1095,7 +1113,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -1171,7 +1191,9 @@
 				"orientation": "face_approach",
 				"isolation": 2,
 				"cluster_with": [],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -1234,7 +1256,7 @@
 			],
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 3,
+				"footprint_cells": 1,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -1246,7 +1268,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -1332,7 +1356,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 5,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -1344,7 +1368,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 15,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -1378,7 +1404,7 @@
 		"barnsley_fern": {
 			"category": "procedural",
 			"complexity": "beginner",
-			"description": "Classic Barnsley fern rendered via iterated function system \u2014 four affine transforms with weighted probabilities produce the iconic fractal fern shape as a point cloud on a floor display. Density-based coloring reveals the self-similar structure.",
+			"description": "Classic Barnsley fern rendered via iterated function system — four affine transforms with weighted probabilities produce the iconic fractal fern shape as a point cloud on a floor display. Density-based coloring reveals the self-similar structure.",
 			"dev_themes": [
 				"commons",
 				"mixed",
@@ -1432,7 +1458,7 @@
 			},
 			"spatial_needs": {
 				"platform": "sunken",
-				"footprint_cells": 2,
+				"footprint_cells": 1,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -1444,7 +1470,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -1483,7 +1511,7 @@
 		"bias_visualizer": {
 			"category": "emergence",
 			"complexity": "intermediate",
-			"description": "Interactive visualization of statistical and algorithmic bias \u2014 demonstrates how initial conditions, training data, or parameter choices create systematic skew in outputs. A critical theory artifact making invisible biases tangible.",
+			"description": "Interactive visualization of statistical and algorithmic bias — demonstrates how initial conditions, training data, or parameter choices create systematic skew in outputs. A critical theory artifact making invisible biases tangible.",
 			"dev_themes": [
 				"art",
 				"commons",
@@ -1509,7 +1537,7 @@
 				],
 				"size_group": "compact"
 			},
-			"qfep_connection": "Bias is frozen E(S) \u00e2\u20ac\u201d entropy collapsed into stereotypes. The model minimizes prediction error (F) by encoding societal patterns. Critical \u00cf\u2020: questioning whose data, whose categories.",
+			"qfep_connection": "Bias is frozen E(S) â€” entropy collapsed into stereotypes. The model minimizes prediction error (F) by encoding societal patterns. Critical Ï†: questioning whose data, whose categories.",
 			"scene": "res://commons/artifacts/bias_visualizer/bias_visualizer.tscn",
 			"sequence": "postfoundationscrisis",
 			"tags": [
@@ -1552,7 +1580,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 1,
+				"footprint_cells": 4,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -1570,7 +1598,9 @@
 					"thinking",
 					"depends"
 				],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 4,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -1649,7 +1679,7 @@
 			],
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 3,
+				"footprint_cells": 1,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -1661,7 +1691,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -1737,7 +1769,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -1792,7 +1826,7 @@
 				],
 				"size_group": "standard"
 			},
-			"qfep_connection": "Rule 110 is Turing complete \u00e2\u20ac\u201d proof that simple local rules can produce universal computation. Edge of chaos territory.",
+			"qfep_connection": "Rule 110 is Turing complete â€” proof that simple local rules can produce universal computation. Edge of chaos territory.",
 			"scene": "res://commons/artifacts/ca_rule_explorer/ca_rule_explorer.tscn",
 			"sequence": "cellularautomata",
 			"size_group": "standard",
@@ -1838,7 +1872,7 @@
 			},
 			"spatial_needs": {
 				"platform": "table",
-				"footprint_cells": 2,
+				"footprint_cells": 4,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -1855,7 +1889,9 @@
 					"interaction",
 					"exploration"
 				],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 4,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -1941,7 +1977,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -2007,7 +2045,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -2061,7 +2101,7 @@
 			],
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 5,
+				"footprint_cells": 2,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -2073,7 +2113,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 2,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -2161,7 +2203,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -2239,7 +2283,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -2357,7 +2403,9 @@
 					"tutorial",
 					"nearly"
 				],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -2433,7 +2481,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -2564,7 +2614,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 3,
+				"footprint_cells": 1,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -2576,7 +2626,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -2661,7 +2713,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -2685,7 +2739,7 @@
 		"control_pendulum": {
 			"category": "waves",
 			"complexity": "intermediate",
-			"description": "A pendulum with configurable control parameters \u2014 adjust damping, driving force, and frequency to explore the transition from periodic motion through quasi-periodicity to chaos. The canonical example of nonlinear dynamics in a physical system.",
+			"description": "A pendulum with configurable control parameters — adjust damping, driving force, and frequency to explore the transition from periodic motion through quasi-periodicity to chaos. The canonical example of nonlinear dynamics in a physical system.",
 			"dev_themes": [
 				"commons",
 				"mixed",
@@ -2764,7 +2818,9 @@
 					"drives",
 					"oscillation_controlled_cube"
 				],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -2803,7 +2859,7 @@
 		"coupled_pendulums": {
 			"category": "waves",
 			"complexity": "intermediate",
-			"description": "Two or more pendulums connected by springs or shared supports, demonstrating energy transfer, normal modes, and synchronization. Watch energy slosh back and forth between pendulums \u2014 the physical basis of beat frequencies and resonance coupling.",
+			"description": "Two or more pendulums connected by springs or shared supports, demonstrating energy transfer, normal modes, and synchronization. Watch energy slosh back and forth between pendulums — the physical basis of beat frequencies and resonance coupling.",
 			"dev_themes": [
 				"commons",
 				"mixed",
@@ -2829,7 +2885,7 @@
 				],
 				"size_group": "compact"
 			},
-			"qfep_connection": "Energy oscillates between subsystems. \u00ce\u00bb = coupling strength. At edge of chaos, unpredictable transfer patterns emerge.",
+			"qfep_connection": "Energy oscillates between subsystems. Î» = coupling strength. At edge of chaos, unpredictable transfer patterns emerge.",
 			"scene": "res://commons/artifacts/coupled_pendulums/coupled_pendulums.tscn",
 			"sequence": "wavefunctions",
 			"tags": [
@@ -2884,7 +2940,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -2992,7 +3050,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -3095,7 +3155,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -3170,7 +3232,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -3234,7 +3298,7 @@
 			],
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 3,
+				"footprint_cells": 1,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -3246,7 +3310,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -3341,7 +3407,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -3365,7 +3433,7 @@
 		"distribution_sampler": {
 			"category": "emergence",
 			"complexity": "beginner",
-			"description": "Sample from various probability distributions \u2014 uniform, Gaussian, Poisson, exponential \u2014 and watch the histogram build in real-time. Compare theoretical curves with empirical results, experiencing the law of large numbers as shapes converge.",
+			"description": "Sample from various probability distributions — uniform, Gaussian, Poisson, exponential — and watch the histogram build in real-time. Compare theoretical curves with empirical results, experiencing the law of large numbers as shapes converge.",
 			"dev_themes": [
 				"commons",
 				"emergence",
@@ -3390,7 +3458,7 @@
 				],
 				"size_group": "compact"
 			},
-			"qfep_connection": "Distributions as 'shape of randomness' \u00e2\u20ac\u201d entropy has structure. Different distributions = different \u00ce\u00bb signatures.",
+			"qfep_connection": "Distributions as 'shape of randomness' â€” entropy has structure. Different distributions = different Î» signatures.",
 			"scene": "res://commons/artifacts/distribution_sampler/distribution_sampler.tscn",
 			"sequence": "randomness",
 			"tags": [
@@ -3451,7 +3519,9 @@
 					"contrasts",
 					"slot_machine"
 				],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -3490,7 +3560,7 @@
 		"dna_specimen": {
 			"category": "waves",
 			"complexity": "beginner",
-			"description": "A detailed 3D model of a DNA double helix displayed as a museum specimen. The iconic twisted ladder of nucleotide base pairs \u2014 adenine-thymine, guanine-cytosine \u2014 rendered as a structural biology exhibit. Information encoded in molecular geometry.",
+			"description": "A detailed 3D model of a DNA double helix displayed as a museum specimen. The iconic twisted ladder of nucleotide base pairs — adenine-thymine, guanine-cytosine — rendered as a structural biology exhibit. Information encoded in molecular geometry.",
 			"dev_themes": [
 				"biology",
 				"commons",
@@ -3576,7 +3646,9 @@
 					"contrasts",
 					"double_helix_scene"
 				],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -3657,7 +3729,7 @@
 			],
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 3,
+				"footprint_cells": 1,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -3669,7 +3741,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -3759,7 +3833,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -3854,7 +3930,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 3,
+				"footprint_cells": 7,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -3866,7 +3942,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 7,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -3942,7 +4020,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -3976,7 +4056,7 @@
 		"durer_scene": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "D\u00c3\u00bcrer's Melencolia I elements: truncated rhombohedron polyhedron, magic square, compass, ladder, hourglass, bell, scales.",
+			"description": "DÃ¼rer's Melencolia I elements: truncated rhombohedron polyhedron, magic square, compass, ladder, hourglass, bell, scales.",
 			"dev_themes": [
 				"commons",
 				"mixed"
@@ -3992,7 +4072,7 @@
 			"map_sequences": [
 				"primitives"
 			],
-			"name": "D\u00c3\u00bcrer Melencolia Scene",
+			"name": "DÃ¼rer Melencolia Scene",
 			"parameters": {
 				"footprint": [
 					6.0,
@@ -4035,7 +4115,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 5,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -4047,7 +4127,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 42,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -4132,7 +4214,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -4156,7 +4240,7 @@
 		"flow_field_painter": {
 			"category": "procedural",
 			"complexity": "intermediate",
-			"description": "Paint with vector fields \u2014 particles follow the flow you create, tracing streamlines that reveal the hidden topology of your brushstrokes. Combines art and physics as your gestures define the force landscape that particles navigate.",
+			"description": "Paint with vector fields — particles follow the flow you create, tracing streamlines that reveal the hidden topology of your brushstrokes. Combines art and physics as your gestures define the force landscape that particles navigate.",
 			"dev_themes": [
 				"art",
 				"commons",
@@ -4182,7 +4266,7 @@
 				],
 				"size_group": "compact"
 			},
-			"qfep_connection": "Noise as structured randomness \u00e2\u20ac\u201d not chaos, not order, but \u00ce\u00bb-edge. Flow reveals hidden structure.",
+			"qfep_connection": "Noise as structured randomness â€” not chaos, not order, but Î»-edge. Flow reveals hidden structure.",
 			"scene": "res://commons/artifacts/flow_field_painter/flow_field_painter.tscn",
 			"sequence": "noise",
 			"tags": [
@@ -4236,7 +4320,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -4327,7 +4413,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -4376,7 +4464,7 @@
 				],
 				"size_group": "compact"
 			},
-			"qfep_connection": "Fields as invisible structure \u00e2\u20ac\u201d order you can't see until you probe it. The hidden F that shapes everything.",
+			"qfep_connection": "Fields as invisible structure â€” order you can't see until you probe it. The hidden F that shapes everything.",
 			"scene": "res://commons/artifacts/force_field_visualizer/force_field_visualizer.tscn",
 			"sequence": "forces",
 			"tags": [
@@ -4419,7 +4507,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 1,
+				"footprint_cells": 2,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -4437,7 +4525,9 @@
 					"concept",
 					"different"
 				],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 2,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -4515,7 +4605,7 @@
 			],
 			"spatial_needs": {
 				"platform": "pedestal",
-				"footprint_cells": 3,
+				"footprint_cells": 1,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -4527,7 +4617,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -4610,7 +4702,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 1,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -4622,7 +4714,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 400,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -4656,7 +4750,7 @@
 		"frame_counter_display": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "label.text = Engine.get_process_frames() \u2014 a live counter of rendered frames since startup",
+			"description": "label.text = Engine.get_process_frames() — a live counter of rendered frames since startup",
 			"dev_themes": [
 				"commons",
 				"mixed"
@@ -4731,7 +4825,9 @@
 					"interactive",
 					"scenes"
 				],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -4831,7 +4927,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -4865,7 +4963,7 @@
 		"game_of_life_petri": {
 			"category": "emergence",
 			"complexity": "beginner",
-			"description": "Conway's Game of Life presented as a laboratory petri dish \u2014 cellular automata as biological experiment. Watch gliders, oscillators, and still lifes emerge from simple birth/death rules in a circular containment vessel.",
+			"description": "Conway's Game of Life presented as a laboratory petri dish — cellular automata as biological experiment. Watch gliders, oscillators, and still lifes emerge from simple birth/death rules in a circular containment vessel.",
 			"dev_themes": [
 				"biology",
 				"commons",
@@ -4891,7 +4989,7 @@
 				],
 				"size_group": "compact"
 			},
-			"qfep_connection": "Game of Life operates at the edge of chaos \u00e2\u20ac\u201d simple enough to be deterministic, complex enough to be unpredictable. Turing complete computation from four rules.",
+			"qfep_connection": "Game of Life operates at the edge of chaos â€” simple enough to be deterministic, complex enough to be unpredictable. Turing complete computation from four rules.",
 			"scene": "res://commons/artifacts/game_of_life_petri/game_of_life_petri.tscn",
 			"sequence": "cellularautomata",
 			"tags": [
@@ -4935,7 +5033,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 1,
+				"footprint_cells": 2,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -4953,7 +5051,9 @@
 					"automata",
 					"completeness"
 				],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 2,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -5058,7 +5158,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -5143,7 +5245,9 @@
 				"orientation": "face_approach",
 				"isolation": 1,
 				"cluster_with": [],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -5167,7 +5271,7 @@
 		"glitch_body": {
 			"category": "emergence",
 			"complexity": "intermediate",
-			"description": "Mesh that refuses stable form \u2014 a procedural sphere-like shape rebuilt every frame with time-varying noise perturbation and HSV hue cycling. Vertices oscillate, stretch, and collapse; the mesh is always transforming, never settling. A body in continuous becoming, resisting fixed categorization.",
+			"description": "Mesh that refuses stable form — a procedural sphere-like shape rebuilt every frame with time-varying noise perturbation and HSV hue cycling. Vertices oscillate, stretch, and collapse; the mesh is always transforming, never settling. A body in continuous becoming, resisting fixed categorization.",
 			"dev_themes": [
 				"commons",
 				"emergence",
@@ -5248,7 +5352,9 @@
 				"orientation": "face_approach",
 				"isolation": 1,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -5355,7 +5461,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -5457,7 +5565,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -5546,7 +5656,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 1,
+				"footprint_cells": 2,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -5558,7 +5668,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 2,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -5662,7 +5774,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -5814,7 +5928,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 1,
+				"footprint_cells": 2,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -5826,7 +5940,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 2,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -5920,7 +6036,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 3,
+				"footprint_cells": 1,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -5932,7 +6048,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -6028,7 +6146,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 1,
+				"footprint_cells": 2,
 				"clearance": {
 					"front": 2,
 					"back": 1,
@@ -6040,7 +6158,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 2,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -6074,7 +6194,7 @@
 		"hand_model": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "Static hand-model reference for VR scale and positioning \u2014 provides a human-proportioned anchor for sizing artifacts in the scene.",
+			"description": "Static hand-model reference for VR scale and positioning — provides a human-proportioned anchor for sizing artifacts in the scene.",
 			"dev_themes": [
 				"commons",
 				"mixed"
@@ -6118,7 +6238,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -6152,7 +6274,7 @@
 		"harmonic_motion_demo": {
 			"category": "waves",
 			"complexity": "beginner",
-			"description": "Interactive simple harmonic motion demonstration \u2014 a mass oscillating on a spring with real-time graphs of position, velocity, and acceleration. Adjust spring constant and mass to see how frequency depends on physical parameters.",
+			"description": "Interactive simple harmonic motion demonstration — a mass oscillating on a spring with real-time graphs of position, velocity, and acceleration. Adjust spring constant and mass to see how frequency depends on physical parameters.",
 			"dev_themes": [
 				"commons",
 				"mixed",
@@ -6217,7 +6339,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 3,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -6229,7 +6351,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 16,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -6268,7 +6392,7 @@
 		"health_display": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "Live health readout panel wired to GameManager.health_updated \u2014 shows current hit points on a Label3D and updates every frame the value changes.",
+			"description": "Live health readout panel wired to GameManager.health_updated — shows current hit points on a Label3D and updates every frame the value changes.",
 			"dev_themes": [
 				"commons",
 				"mixed"
@@ -6336,7 +6460,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -6426,7 +6552,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 3,
+				"footprint_cells": 2,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -6438,7 +6564,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 2,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -6472,7 +6600,7 @@
 		"hits_reset_display": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "Counter panel showing hits taken toward map reset \u2014 displays N / max, incrementing as the player accumulates damage from hazards.",
+			"description": "Counter panel showing hits taken toward map reset — displays N / max, incrementing as the player accumulates damage from hazards.",
 			"dev_themes": [
 				"commons",
 				"mixed"
@@ -6540,7 +6668,9 @@
 				"orientation": "face_approach",
 				"isolation": 1,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -6626,7 +6756,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -6692,7 +6824,7 @@
 			],
 			"spatial_needs": {
 				"platform": "table",
-				"footprint_cells": 3,
+				"footprint_cells": 1,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -6704,7 +6836,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -6782,7 +6916,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -6848,7 +6984,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -6927,7 +7065,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -6961,7 +7101,7 @@
 		"interactable_demo": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "Inspection rig laying out one of every VR control type in a single row \u2014 buttons, knobs, sliders (smooth/horizontal/snap/zero), lever, and wheel \u2014 each labelled for testing and review.",
+			"description": "Inspection rig laying out one of every VR control type in a single row — buttons, knobs, sliders (smooth/horizontal/snap/zero), lever, and wheel — each labelled for testing and review.",
 			"dev_themes": [
 				"commons",
 				"mixed"
@@ -6994,7 +7134,7 @@
 			],
 			"spatial_needs": {
 				"platform": "table",
-				"footprint_cells": 1,
+				"footprint_cells": 6,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -7006,7 +7146,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 6,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -7040,7 +7182,7 @@
 		"jelly_variants": {
 			"category": "physics",
 			"complexity": "beginner",
-			"description": "A collection of soft body jelly cubes with different material properties \u2014 varying stiffness, damping, and viscosity. Poke, squeeze, and throw them to feel how parameters shape deformation behavior. A tactile physics playground.",
+			"description": "A collection of soft body jelly cubes with different material properties — varying stiffness, damping, and viscosity. Poke, squeeze, and throw them to feel how parameters shape deformation behavior. A tactile physics playground.",
 			"dev_themes": [
 				"commons",
 				"mixed",
@@ -7065,7 +7207,7 @@
 				],
 				"size_group": "room_scale"
 			},
-			"qfep_connection": "Parameter space exploration \u00e2\u20ac\u201d stiffness, pressure, damping create different morphological behaviors",
+			"qfep_connection": "Parameter space exploration â€” stiffness, pressure, damping create different morphological behaviors",
 			"scene": "res://commons/artifacts/jelly_cube/jelly_variants.tscn",
 			"sequence": "softbodies",
 			"tags": [
@@ -7121,7 +7263,9 @@
 				"orientation": "face_approach",
 				"isolation": 1,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 3,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -7160,7 +7304,7 @@
 		"julia_set_explorer": {
 			"category": "procedural",
 			"complexity": "intermediate",
-			"description": "Navigate the infinite complexity of Julia sets \u2014 zoom into fractal boundaries where order and chaos interweave at every scale. Adjust the complex parameter c to morph between connected and disconnected Julia sets, watching the Mandelbrot set's DNA unfold.",
+			"description": "Navigate the infinite complexity of Julia sets — zoom into fractal boundaries where order and chaos interweave at every scale. Adjust the complex parameter c to morph between connected and disconnected Julia sets, watching the Mandelbrot set's DNA unfold.",
 			"dev_themes": [
 				"biology",
 				"commons",
@@ -7186,7 +7330,7 @@
 				],
 				"size_group": "compact"
 			},
-			"qfep_connection": "Julia sets from c inside Mandelbrot are connected (ordered). Outside = disconnected dust (chaos). The c parameter IS a \u00ce\u00bb-like dial.",
+			"qfep_connection": "Julia sets from c inside Mandelbrot are connected (ordered). Outside = disconnected dust (chaos). The c parameter IS a Î»-like dial.",
 			"scene": "res://commons/artifacts/julia_set_explorer/julia_set_explorer.tscn",
 			"sequence": "fractals",
 			"tags": [
@@ -7230,7 +7374,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 1,
+				"footprint_cells": 4,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -7248,7 +7392,9 @@
 					"mandelbrot_dive",
 					"duality"
 				],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 4,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -7327,7 +7473,7 @@
 			],
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 3,
+				"footprint_cells": 1,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -7339,7 +7485,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -7403,7 +7551,7 @@
 			],
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 3,
+				"footprint_cells": 1,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -7415,7 +7563,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -7482,7 +7632,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 2,
+				"footprint_cells": 1,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -7494,7 +7644,9 @@
 				"orientation": "face_approach",
 				"isolation": 1,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -7600,7 +7752,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -7659,7 +7813,7 @@
 				],
 				"size_group": "compact"
 			},
-			"qfep_connection": "Rewrite rules are deterministic (F) yet produce organic complexity. The iteration count is like \u00ce\u00bb \u00e2\u20ac\u201d more iterations reveal more detail at the edge of legibility.",
+			"qfep_connection": "Rewrite rules are deterministic (F) yet produce organic complexity. The iteration count is like Î» â€” more iterations reveal more detail at the edge of legibility.",
 			"scene": "res://commons/artifacts/lsystem_editor/lsystem_editor.tscn",
 			"sequence": "lsystems",
 			"tags": [
@@ -7702,7 +7856,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 1,
+				"footprint_cells": 4,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -7719,7 +7873,9 @@
 					"interactive",
 					"fractal_lsystem_string"
 				],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 4,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -7800,7 +7956,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -7876,7 +8034,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -7978,7 +8138,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -8012,7 +8174,7 @@
 		"mario_cube": {
 			"category": "primitives",
 			"complexity": "beginner",
-			"description": "An interactive surprise cube inspired by classic platformer mechanics \u2014 hit it from below to trigger the NextCube signal, remove the DarkSphere, and reveal a rainbow effect. A playful intersection of game design and signal systems.",
+			"description": "An interactive surprise cube inspired by classic platformer mechanics — hit it from below to trigger the NextCube signal, remove the DarkSphere, and reveal a rainbow effect. A playful intersection of game design and signal systems.",
 			"dev_themes": [
 				"commons",
 				"mixed"
@@ -8070,7 +8232,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 1,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 1,
@@ -8088,7 +8250,9 @@
 					"depends",
 					"trigger"
 				],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 17,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -8205,7 +8369,9 @@
 					"sampling",
 					"contrasts"
 				],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -8280,7 +8446,7 @@
 			],
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 3,
+				"footprint_cells": 1,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -8292,7 +8458,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -8382,7 +8550,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -8473,7 +8643,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 5,
+				"footprint_cells": 1,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -8485,7 +8655,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -8552,7 +8724,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -8637,7 +8811,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 5,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -8649,7 +8823,9 @@
 				"orientation": "face_approach",
 				"isolation": 2,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 24,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -8683,7 +8859,7 @@
 		"monte_carlo_estimator": {
 			"category": "emergence",
 			"complexity": "intermediate",
-			"description": "Estimate mathematical quantities through random sampling \u2014 watch as dart throws approximate pi, random walks estimate integrals, and stochastic processes converge to deterministic values. The power of randomness as a computational tool.",
+			"description": "Estimate mathematical quantities through random sampling — watch as dart throws approximate pi, random walks estimate integrals, and stochastic processes converge to deterministic values. The power of randomness as a computational tool.",
 			"dev_themes": [
 				"commons",
 				"emergence",
@@ -8708,7 +8884,7 @@
 				],
 				"size_group": "compact"
 			},
-			"qfep_connection": "Order (\u00cf\u20ac) emerges from randomness through accumulation. Law of large numbers as F-minimization.",
+			"qfep_connection": "Order (Ï€) emerges from randomness through accumulation. Law of large numbers as F-minimization.",
 			"scene": "res://commons/artifacts/monte_carlo_estimator/monte_carlo_estimator.tscn",
 			"sequence": "randomness",
 			"tags": [
@@ -8765,7 +8941,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -8866,7 +9044,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 1,
+				"footprint_cells": 2,
 				"clearance": {
 					"front": 2,
 					"back": 1,
@@ -8884,7 +9062,9 @@
 					"unlocks",
 					"color_sets_overview"
 				],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 2,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -8970,7 +9150,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -8994,7 +9176,7 @@
 		"orbital_mechanics_demo": {
 			"category": "physics",
 			"complexity": "intermediate",
-			"description": "Interactive orbital mechanics simulation \u2014 launch satellites, adjust velocity and angle, and watch Kepler's laws emerge from Newton's gravity. Explore circular, elliptical, parabolic, and hyperbolic orbits by tuning initial conditions.",
+			"description": "Interactive orbital mechanics simulation — launch satellites, adjust velocity and angle, and watch Kepler's laws emerge from Newton's gravity. Explore circular, elliptical, parabolic, and hyperbolic orbits by tuning initial conditions.",
 			"dev_themes": [
 				"commons",
 				"mixed",
@@ -9020,7 +9202,7 @@
 				],
 				"size_group": "compact"
 			},
-			"qfep_connection": "Orbit as dynamic equilibrium \u00e2\u20ac\u201d perpetual falling, never landing. Balance between kinetic and potential. Stability from motion.",
+			"qfep_connection": "Orbit as dynamic equilibrium â€” perpetual falling, never landing. Balance between kinetic and potential. Stability from motion.",
 			"scene": "res://commons/artifacts/orbital_mechanics_demo/orbital_mechanics_demo.tscn",
 			"sequence": "forces",
 			"tags": [
@@ -9074,7 +9256,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -9197,7 +9381,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -9231,7 +9417,7 @@
 		"oscilloscope_artifact": {
 			"category": "waves",
 			"complexity": "intermediate",
-			"description": "A virtual oscilloscope displaying real-time waveforms \u2014 connect it to audio sources or mathematical functions to visualize signals in the time domain. Adjust timebase, amplitude, and trigger settings like its real-world counterpart.",
+			"description": "A virtual oscilloscope displaying real-time waveforms — connect it to audio sources or mathematical functions to visualize signals in the time domain. Adjust timebase, amplitude, and trigger settings like its real-world counterpart.",
 			"dev_themes": [
 				"commons",
 				"mixed",
@@ -9304,7 +9490,9 @@
 				"orientation": "face_approach",
 				"isolation": 1,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -9394,7 +9582,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -9418,7 +9608,7 @@
 		"perlin_terrain_sculptor": {
 			"category": "procedural",
 			"complexity": "intermediate",
-			"description": "Sculpt terrain using Perlin noise parameters \u2014 adjust octaves, persistence, lacunarity, and scale to shape landscapes from smooth rolling hills to jagged mountain ranges. Real-time terrain generation making noise mathematics tangible.",
+			"description": "Sculpt terrain using Perlin noise parameters — adjust octaves, persistence, lacunarity, and scale to shape landscapes from smooth rolling hills to jagged mountain ranges. Real-time terrain generation making noise mathematics tangible.",
 			"dev_themes": [
 				"commons",
 				"mixed",
@@ -9443,7 +9633,7 @@
 				],
 				"size_group": "compact"
 			},
-			"qfep_connection": "Noise is E(S) made visible. The threshold is a \u00ce\u00bb-like parameter \u00e2\u20ac\u201d where you draw the line between solid and void.",
+			"qfep_connection": "Noise is E(S) made visible. The threshold is a Î»-like parameter â€” where you draw the line between solid and void.",
 			"scene": "res://commons/artifacts/perlin_terrain_sculptor/perlin_terrain_sculptor.tscn",
 			"sequence": "noise",
 			"tags": [
@@ -9485,7 +9675,7 @@
 			},
 			"spatial_needs": {
 				"platform": "pedestal",
-				"footprint_cells": 1,
+				"footprint_cells": 4,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -9503,7 +9693,9 @@
 					"receivers",
 					"paired"
 				],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 4,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -9542,7 +9734,7 @@
 		"petri_dish_worms": {
 			"category": "emergence",
 			"complexity": "intermediate",
-			"description": "Simulated worm-like organisms wriggling in a petri dish \u2014 simple steering behaviors and sinusoidal body motion create surprisingly lifelike movement. Emergence of biological-looking behavior from minimal procedural rules.",
+			"description": "Simulated worm-like organisms wriggling in a petri dish — simple steering behaviors and sinusoidal body motion create surprisingly lifelike movement. Emergence of biological-looking behavior from minimal procedural rules.",
 			"dev_themes": [
 				"biology",
 				"commons",
@@ -9627,7 +9819,9 @@
 					"animation",
 					"contrasts"
 				],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -9756,7 +9950,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -9820,7 +10016,7 @@
 			],
 			"spatial_needs": {
 				"platform": "pedestal",
-				"footprint_cells": 5,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -9832,7 +10028,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 180,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -9947,7 +10145,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -10049,7 +10249,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -10125,7 +10327,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -10217,7 +10421,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -10283,7 +10489,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -10367,7 +10575,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 1,
+				"footprint_cells": 4,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -10379,7 +10587,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 4,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -10546,7 +10756,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 3,
+				"footprint_cells": 2,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -10558,7 +10768,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 2,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -10644,7 +10856,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -10719,7 +10933,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -10743,7 +10959,7 @@
 		"queer_morphology_specimen": {
 			"category": "emergence",
 			"complexity": "advanced",
-			"description": "A procedural specimen that defies binary classification \u2014 its form shifts between categories, refusing stable taxonomy. A critical theory artifact embodying the QFEP framework's challenge to normative boundaries in biological and computational classification.",
+			"description": "A procedural specimen that defies binary classification — its form shifts between categories, refusing stable taxonomy. A critical theory artifact embodying the QFEP framework's challenge to normative boundaries in biological and computational classification.",
 			"dev_themes": [
 				"art",
 				"biology",
@@ -10769,7 +10985,7 @@
 				],
 				"size_group": "compact"
 			},
-			"qfep_connection": "THIS IS QFEP EMBODIED. \u00ce\u00bb drives order\u00e2\u2020\u2019chaos transition in soft body physics. \u00cf\u2020 encodes resistance/embrace of change. At \u00ce\u00bb\u00e2\u2030\u02c60.5, specimen breathes at edge of chaos \u00e2\u20ac\u201d where life emerges. Queer morphology = form as process, not fixed state.",
+			"qfep_connection": "THIS IS QFEP EMBODIED. Î» drives orderâ†’chaos transition in soft body physics. Ï† encodes resistance/embrace of change. At Î»â‰ˆ0.5, specimen breathes at edge of chaos â€” where life emerges. Queer morphology = form as process, not fixed state.",
 			"scene": "res://commons/artifacts/queer_morphology_specimen/queer_morphology_specimen.tscn",
 			"sequence": "qfeplaboratory",
 			"tags": [
@@ -10835,7 +11051,9 @@
 					"depends",
 					"lambda_slider"
 				],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -10935,7 +11153,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 5,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -10947,7 +11165,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 220,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -10981,7 +11201,7 @@
 		"random_walk_terrarium": {
 			"category": "procedural",
 			"complexity": "intermediate",
-			"description": "A contained ecosystem where random walkers create terrain \u2014 trails accumulate into landscapes, paths cross to form structures, and the terrarium slowly fills with the emergent geography of stochastic exploration.",
+			"description": "A contained ecosystem where random walkers create terrain — trails accumulate into landscapes, paths cross to form structures, and the terrarium slowly fills with the emergent geography of stochastic exploration.",
 			"dev_themes": [
 				"commons",
 				"mixed",
@@ -11012,7 +11232,7 @@
 				],
 				"size_group": "compact"
 			},
-			"qfep_connection": "Random walk as pure E(S) \u00e2\u20ac\u201d no memory, no direction, maximum entropy. L\u00c3\u00a9vy flights: structured randomness.",
+			"qfep_connection": "Random walk as pure E(S) â€” no memory, no direction, maximum entropy. LÃ©vy flights: structured randomness.",
 			"scene": "res://commons/artifacts/random_walk_terrarium/random_walk_terrarium.tscn",
 			"sequence": "randomness",
 			"size_group": "compact",
@@ -11075,7 +11295,9 @@
 					"feeds",
 					"random_walk_collection"
 				],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -11163,7 +11385,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 3,
+				"footprint_cells": 1,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -11175,7 +11397,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -11265,7 +11489,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -11339,7 +11565,7 @@
 			],
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 3,
+				"footprint_cells": 1,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -11351,7 +11577,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -11427,7 +11655,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -11518,7 +11748,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -11618,7 +11850,9 @@
 				"orientation": "face_approach",
 				"isolation": 1,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -11720,7 +11954,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 3,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -11806,7 +12042,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -11881,7 +12119,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -11960,7 +12200,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -12052,7 +12294,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -12145,7 +12389,7 @@
 			},
 			"spatial_needs": {
 				"platform": "sunken",
-				"footprint_cells": 3,
+				"footprint_cells": 1,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -12157,7 +12401,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -12224,7 +12470,7 @@
 			],
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 3,
+				"footprint_cells": 1,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -12236,7 +12482,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -12260,7 +12508,7 @@
 		"spring_demo": {
 			"category": "physics",
 			"complexity": "beginner",
-			"description": "A hands-on spring physics demonstration \u2014 stretch, compress, and release springs to feel Hooke's law in action. Visualizes the relationship between displacement, restoring force, and oscillation with real-time force vectors.",
+			"description": "A hands-on spring physics demonstration — stretch, compress, and release springs to feel Hooke's law in action. Visualizes the relationship between displacement, restoring force, and oscillation with real-time force vectors.",
 			"dev_themes": [
 				"commons",
 				"mixed",
@@ -12344,7 +12592,9 @@
 					"integration",
 					"contrasts"
 				],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -12378,7 +12628,7 @@
 		"spring_network": {
 			"category": "physics",
 			"complexity": "intermediate",
-			"description": "Mass-spring lattice \u2014 a 6x6 grid of masses connected by springs that deform and oscillate. Verlet integration for stability, strain-colored spring lines, and fixed corner anchors. Extends Hooke's law from single springs to 2D networks.",
+			"description": "Mass-spring lattice — a 6x6 grid of masses connected by springs that deform and oscillate. Verlet integration for stability, strain-colored spring lines, and fixed corner anchors. Extends Hooke's law from single springs to 2D networks.",
 			"dev_themes": [
 				"commons",
 				"mixed",
@@ -12500,7 +12750,7 @@
 			},
 			"spatial_needs": {
 				"platform": "sunken",
-				"footprint_cells": 1,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -12512,7 +12762,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 36,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -12586,7 +12838,7 @@
 			],
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 3,
+				"footprint_cells": 1,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -12598,7 +12850,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -12679,7 +12933,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 3,
+				"footprint_cells": 1,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -12691,7 +12945,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -12755,7 +13011,7 @@
 			],
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 1,
+				"footprint_cells": 4,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -12767,7 +13023,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 4,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -12855,7 +13113,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 1,
+				"footprint_cells": 2,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -12867,7 +13125,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 2,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -12901,7 +13161,7 @@
 		"transform_matrix_cube": {
 			"category": "primitives",
 			"complexity": "intermediate",
-			"description": "Interactive 3D cube with its transformation matrix displayed in real-time. Rotate, scale, and translate the cube while watching the 4x4 matrix update \u2014 making the abstract algebra of linear transformations concrete and visual.",
+			"description": "Interactive 3D cube with its transformation matrix displayed in real-time. Rotate, scale, and translate the cube while watching the 4x4 matrix update — making the abstract algebra of linear transformations concrete and visual.",
 			"dev_themes": [
 				"commons",
 				"mixed"
@@ -12925,7 +13185,7 @@
 				],
 				"size_group": "compact"
 			},
-			"qfep_connection": "Matrix as transformation rule \u00e2\u20ac\u201d how one space maps to another. det(M) shows information preservation/loss.",
+			"qfep_connection": "Matrix as transformation rule â€” how one space maps to another. det(M) shows information preservation/loss.",
 			"scene": "res://commons/artifacts/transform_matrix_cube/transform_matrix_cube.tscn",
 			"sequence": "transformation",
 			"tags": [
@@ -12968,7 +13228,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 1,
+				"footprint_cells": 2,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -12980,7 +13240,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 2,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -13086,7 +13348,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -13110,7 +13374,7 @@
 		"turing_pattern_generator": {
 			"category": "emergence",
 			"complexity": "advanced",
-			"description": "Generate reaction-diffusion Turing patterns in real-time \u2014 spots, stripes, and labyrinthine structures emerge from the interplay of activator and inhibitor chemicals diffusing at different rates. Alan Turing's morphogenesis made visible.",
+			"description": "Generate reaction-diffusion Turing patterns in real-time — spots, stripes, and labyrinthine structures emerge from the interplay of activator and inhibitor chemicals diffusing at different rates. Alan Turing's morphogenesis made visible.",
 			"dev_themes": [
 				"commons",
 				"emergence",
@@ -13136,7 +13400,7 @@
 				],
 				"size_group": "compact"
 			},
-			"qfep_connection": "Turing patterns emerge at specific feed/kill ratios \u00e2\u20ac\u201d another \u00ce\u00bb parameter space. Order (uniform) vs chaos (noise) with patterns at the edge.",
+			"qfep_connection": "Turing patterns emerge at specific feed/kill ratios â€” another Î» parameter space. Order (uniform) vs chaos (noise) with patterns at the edge.",
 			"scene": "res://commons/artifacts/turing_pattern_generator/turing_pattern_generator.tscn",
 			"sequence": "softbodies",
 			"tags": [
@@ -13181,7 +13445,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 1,
+				"footprint_cells": 4,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -13199,7 +13463,9 @@
 					"approach",
 					"demonstrate"
 				],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 4,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -13301,7 +13567,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 5,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -13313,7 +13579,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 10,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -13399,7 +13667,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -13476,7 +13746,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -13557,7 +13829,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 1,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -13569,7 +13841,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 400,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -13603,7 +13877,7 @@
 		"wave_equation_solver": {
 			"category": "waves",
 			"complexity": "advanced",
-			"description": "2D wave equation on a membrane \u2014 finite difference PDE solver simulating a struck drumhead. Gaussian pulse propagates and reflects off clamped boundaries with viscous damping. ImmediateMesh surface colored by displacement: blue positive, red negative, dark zero.",
+			"description": "2D wave equation on a membrane — finite difference PDE solver simulating a struck drumhead. Gaussian pulse propagates and reflects off clamped boundaries with viscous damping. ImmediateMesh surface colored by displacement: blue positive, red negative, dark zero.",
 			"dev_themes": [
 				"commons",
 				"mixed",
@@ -13672,7 +13946,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 2,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -13711,7 +13987,7 @@
 		"wave_interference_tank": {
 			"category": "waves",
 			"complexity": "intermediate",
-			"description": "A ripple tank simulation showing wave interference patterns \u2014 place point sources and watch circular waves superpose, creating constructive and destructive interference. The physical demonstration that reveals the wave nature of light, sound, and quantum mechanics.",
+			"description": "A ripple tank simulation showing wave interference patterns — place point sources and watch circular waves superpose, creating constructive and destructive interference. The physical demonstration that reveals the wave nature of light, sound, and quantum mechanics.",
 			"dev_themes": [
 				"commons",
 				"mixed",
@@ -13737,7 +14013,7 @@
 				],
 				"size_group": "compact"
 			},
-			"qfep_connection": "Superposition \u00e2\u20ac\u201d waves don't fight, they add. Patterns emerge from phase relationships. Information through interference.",
+			"qfep_connection": "Superposition â€” waves don't fight, they add. Patterns emerge from phase relationships. Information through interference.",
 			"scene": "res://commons/artifacts/wave_interference_tank/wave_interference_tank.tscn",
 			"sequence": "wavefunctions",
 			"tags": [
@@ -13784,7 +14060,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 1,
+				"footprint_cells": 2,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -13796,7 +14072,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 2,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -13896,7 +14174,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 1,
+				"footprint_cells": 4,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -13908,7 +14186,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 4,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -13999,7 +14279,7 @@
 			},
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 1,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -14011,7 +14291,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 144,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -14162,7 +14444,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -14196,7 +14480,7 @@
 		"artifact_workstation": {
 			"category": "tools",
 			"complexity": "beginner",
-			"description": "VR Artifact Workstation \u2014 browse and test any of 1692 artifacts from inside VR. Navigate by sequence, type, or all. Arrow keys for desktop, VR buttons for headset.",
+			"description": "VR Artifact Workstation — browse and test any of 1692 artifacts from inside VR. Navigate by sequence, type, or all. Arrow keys for desktop, VR buttons for headset.",
 			"dev_themes": [
 				"tools",
 				"quality"
@@ -14259,7 +14543,7 @@
 			},
 			"spatial_needs": {
 				"platform": "table",
-				"footprint_cells": 4,
+				"footprint_cells": 9,
 				"clearance": {
 					"front": 2,
 					"back": 2,
@@ -14271,7 +14555,9 @@
 				"orientation": "face_approach",
 				"isolation": 1,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 20,
+				"footprint_source": "measured_capped"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -14305,7 +14591,7 @@
 		"demo_singles": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "demo_singles \u2014 procedural demo.",
+			"description": "demo_singles — procedural demo.",
 			"dev_themes": [
 				"commons"
 			],
@@ -14329,7 +14615,7 @@
 		"demo_passive": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "demo_passive \u2014 procedural demo.",
+			"description": "demo_passive — procedural demo.",
 			"dev_themes": [
 				"commons"
 			],
@@ -14353,7 +14639,7 @@
 		"demo_compounds": {
 			"category": "unknown",
 			"complexity": "beginner",
-			"description": "demo_compounds \u2014 procedural demo.",
+			"description": "demo_compounds — procedural demo.",
 			"dev_themes": [
 				"commons"
 			],
@@ -14387,7 +14673,7 @@
 			"include_in_map_data": false,
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 2,
+				"footprint_cells": 1,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -14399,7 +14685,9 @@
 				"orientation": "face_approach",
 				"isolation": 1,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -14447,7 +14735,7 @@
 			"include_in_map_data": false,
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 2,
+				"footprint_cells": 5,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -14459,7 +14747,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "any"
+				"preferred_zone": "any",
+				"measured_footprint_cells": 5,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -14512,7 +14802,7 @@
 			],
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 2,
+				"footprint_cells": 1,
 				"clearance": {
 					"front": 1,
 					"back": 1,
@@ -14524,7 +14814,9 @@
 				"orientation": "face_approach",
 				"isolation": 0,
 				"cluster_with": [],
-				"preferred_zone": "entry"
+				"preferred_zone": "entry",
+				"measured_footprint_cells": 1,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -14593,7 +14885,7 @@
 			],
 			"spatial_needs": {
 				"platform": "none",
-				"footprint_cells": 8,
+				"footprint_cells": 6,
 				"clearance": {
 					"front": 2,
 					"back": 1,
@@ -14607,7 +14899,9 @@
 				"cluster_with": [
 					"workstation"
 				],
-				"preferred_zone": "end"
+				"preferred_zone": "end",
+				"measured_footprint_cells": 6,
+				"footprint_source": "measured"
 			},
 			"measurements": {
 				"aabb_size": [
@@ -14637,11 +14931,166 @@
 				"derived_at": "2026-04-29T09:39:46.084544Z",
 				"derived_from": "aabb_size + category"
 			}
+		},
+		"transform_composition_workbench": {
+			"name": "Transform Composition Workbench",
+			"lookup_name": "transform_composition_workbench",
+			"description": "Interactive 3D workbench. A slider selects one of 4 transformation pairs; the same base tetrahedron is shown after T1∘T2 (left) and T2∘T1 (right). Order matters — except for pair 2 (rotation × uniform scale around origin) which commutes. Paired with /transform-composition-gallery.",
+			"scene": "res://commons/artifacts/transform_composition_workbench/transform_composition_workbench.tscn",
+			"category": "transformation",
+			"interaction": "grab_slide",
+			"sequence": "transformation",
+			"artifact_type": "transformation",
+			"qfep_term": "F",
+			"capacity": "WALK the non-commutativity of transformations",
+			"dev_themes": [
+				"interactive",
+				"slider",
+				"transformation",
+				"composition",
+				"non-commutative"
+			],
+			"dev_category": "transformation",
+			"complexity": "intermediate",
+			"tags": [
+				"interactive",
+				"slider",
+				"transformation",
+				"composition",
+				"non-commutative"
+			],
+			"include_in_map_data": true,
+			"map_sequences": [
+				"transformation"
+			],
+			"map_ready": true,
+			"parameters": {
+				"footprint": [
+					1,
+					1
+				]
+			},
+			"size_group": "standard"
+		},
+		"hand_scanner": {
+			"lookup_name": "hand_scanner",
+			"scene": "res://commons/interactables/hand_scanner.tscn",
+			"scene_path": "res://commons/interactables/hand_scanner.tscn",
+			"name": "Hand Scanner",
+			"category": "interactables",
+			"description": "Palm-reader pad — hover an open hand over the glowing plate; a scan line sweeps, a dwell ring fills, and on completion it flashes ACCEPTED with chime + haptic. The proximity/dwell hand modality: recognition by presence, not contact. Signals: scan_started, scan_progress(0..1), scan_complete, scan_aborted. Desktop pointer click runs an instant scan.",
+			"ada_kind": "interactable",
+			"tags": [
+				"vr",
+				"scanner",
+				"hand",
+				"proximity",
+				"dwell",
+				"interactable",
+				"input"
+			],
+			"map_ready": true,
+			"include_in_map_data": true
+		},
+		"grab_cube": {
+			"lookup_name": "grab_cube",
+			"scene": "res://commons/interactables/grab_cube.tscn",
+			"scene_path": "res://commons/interactables/grab_cube.tscn",
+			"name": "Grab Cube",
+			"category": "interactables",
+			"description": "A small free cube you grab and carry with full 6-DOF — the grab-carry hand modality. Glows on highlight, hums when held. Extends XRToolsPickable. Signals: grabbed, dropped.",
+			"ada_kind": "interactable",
+			"tags": [
+				"vr",
+				"grab",
+				"pickable",
+				"carry",
+				"interactable",
+				"input"
+			],
+			"map_ready": true,
+			"include_in_map_data": true
+		},
+		"snap_socket": {
+			"lookup_name": "snap_socket",
+			"scene": "res://commons/interactables/snap_socket.tscn",
+			"scene_path": "res://commons/interactables/snap_socket.tscn",
+			"name": "Snap Socket",
+			"category": "interactables",
+			"description": "A lit cradle that magnetically seats a matching token when a hand brings it close — the snap/place modality. Wraps XRToolsSnapZone; spawns a matching token pre-seated. Green when filled, amber when empty. Signals: socket_filled, socket_emptied.",
+			"ada_kind": "interactable",
+			"tags": [
+				"vr",
+				"snap",
+				"socket",
+				"place",
+				"interactable",
+				"input"
+			],
+			"map_ready": true,
+			"include_in_map_data": true
+		},
+		"poke_keypad": {
+			"lookup_name": "poke_keypad",
+			"scene": "res://commons/interactables/poke_keypad.tscn",
+			"scene_path": "res://commons/interactables/poke_keypad.tscn",
+			"name": "Poke Keypad",
+			"category": "interactables",
+			"description": "A 3x3 grid of small keys pressed with a single fingertip — the precise finger-poke modality, distinct from the palm-push button. Each key depresses + lights on poke. Optional unlock_code sequence. Signals: key_pressed(index), code_entered.",
+			"ada_kind": "interactable",
+			"tags": [
+				"vr",
+				"keypad",
+				"poke",
+				"finger",
+				"interactable",
+				"input"
+			],
+			"map_ready": true,
+			"include_in_map_data": true
+		},
+		"climb_grip": {
+			"lookup_name": "climb_grip",
+			"scene": "res://commons/interactables/climb_grip.tscn",
+			"scene_path": "res://commons/interactables/climb_grip.tscn",
+			"name": "Climb Grip",
+			"category": "interactables",
+			"description": "A chunky rung you grab to pull your own body past — the climb modality, the only hand verb that moves the SELF not the object. Wraps XRToolsClimbable; needs the player movement-climb function to feel its effect.",
+			"ada_kind": "interactable",
+			"tags": [
+				"vr",
+				"climb",
+				"grip",
+				"locomotion",
+				"interactable",
+				"input"
+			],
+			"map_ready": true,
+			"include_in_map_data": true
+		},
+		"gadget_wall": {
+			"lookup_name": "gadget_wall",
+			"scene": "res://commons/interactables/gadget_wall.tscn",
+			"scene_path": "res://commons/interactables/gadget_wall.tscn",
+			"name": "Gadget Wall",
+			"category": "interactables",
+			"description": "A teaching wall of every hand interaction — press, hover/dwell, poke, grab-carry, snap, climb, lever, sliders, dial, wheel, joystick, XY pad — one of each, labelled, each with a status dot that lights when used. Successor to InteractableDemo, sampling MODALITIES.",
+			"ada_kind": "interactable",
+			"tags": [
+				"vr",
+				"demo",
+				"sampler",
+				"hand",
+				"teaching",
+				"interactable"
+			],
+			"map_ready": true,
+			"include_in_map_data": true
 		}
 	},
 	"registry_info": {
 		"category": "artifacts",
-		"description": "Standalone museum-style artifacts living in commons/artifacts/ \u2014 interactive 3D exhibits covering waves, physics, math, biology, fractals, cellular automata, and more.",
+		"description": "Standalone museum-style artifacts living in commons/artifacts/ — interactive 3D exhibits covering waves, physics, math, biology, fractals, cellular automata, and more.",
 		"name": "commons_artifacts"
 	}
 }

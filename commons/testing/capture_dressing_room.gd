@@ -122,7 +122,10 @@ func _run() -> void:
 		return entry
 
 	# Build the dressing room (footing + anchor plinth + artifact + extras).
-	var room_node := Builder.build(room_dict, 0, registry_lookup)
+	# `staged: true` renders the raised footing as its real station prop
+	# (Element Catalog) instead of blockout tiles — the web's prop view.
+	var staged_mode: bool = bool(cfg.get("staged", false))
+	var room_node := Builder.build(room_dict, 0, registry_lookup, staged_mode)
 	root.add_child(room_node)
 
 	# Resolve vitrine_grammar (registry-query siblings around the centre).
@@ -145,6 +148,16 @@ func _run() -> void:
 	# === Measure + classify =========================================
 	# AABB measured from the artifact subtree only (not footing tiles).
 	var artifact_root := room_node.get_node_or_null("Artifact")
+	# Seat the artifact ON its surface (match the game's auto-ground) — the
+	# builder puts its ORIGIN at the anchor top, so one whose origin isn't at
+	# its base sinks into the footing (a board under a raised table). Do this
+	# BEFORE measuring so the framing reflects the seated position.
+	if artifact_root is Node3D:
+		var seat_aabb := _measure_artifact_aabb(artifact_root)
+		if seat_aabb.size != Vector3.ZERO:
+			var seat_d: float = (artifact_root as Node3D).global_position.y - seat_aabb.position.y
+			if absf(seat_d) > 0.01:
+				(artifact_root as Node3D).global_position.y += seat_d
 	var aabb: AABB
 	if artifact_root != null:
 		aabb = _measure_artifact_aabb(artifact_root)
@@ -160,6 +173,13 @@ func _run() -> void:
 	var question: String = String(cfg.get("question", "default"))
 	if question == "visual_integrity":
 		best_shots = _corner_macros_for(aabb)
+	elif question == "staging":
+		# Posture review — frame the WHOLE dressing room (footing + artifact)
+		# so you can read HOW the thing is staged (plinth / table / platform /
+		# float / floor), not just the artifact. The default shot sets tight-
+		# frame the artifact and crop the footing to a sliver, which hides the
+		# posture. Measured over the room node (not just the Artifact subtree).
+		best_shots = _staging_shots_for(_measure_room_aabb(room_node))
 	# Allow the caller to override shots entirely.
 	var override_shots: Array = cfg.get("shots", [])
 	var shot_list: Array = override_shots if override_shots.size() > 0 else best_shots
@@ -517,6 +537,65 @@ func _corner_macros_for(aabb: AABB) -> Array:
 			"fov": fov,
 		})
 	return corners
+
+
+## Whole-room AABB: footing tiles + artifact together (the staging), NOT
+## just the artifact. Unlike _measure_artifact_aabb this keeps large
+## artifacts (no >18 footprint guard needed — the huge studio floor lives
+## on `root`, not the room node, so it's never in scope here). Skips the
+## AnchorMarker (a debug rectangle).
+func _measure_room_aabb(node: Node) -> AABB:
+	var combined := AABB()
+	var has_any := false
+	var stack: Array = [node]
+	while stack.size() > 0:
+		var n = stack.pop_back()
+		if n == null: continue
+		for c in n.get_children():
+			stack.push_back(c)
+		if n is Node3D and (n as Node3D).name == "AnchorMarker":
+			continue
+		if not (n is VisualInstance3D): continue
+		var vi := n as VisualInstance3D
+		var local := vi.get_aabb()
+		if local.size.length_squared() < 0.0001: continue
+		var world: AABB = vi.global_transform * local
+		if not has_any:
+			combined = world
+			has_any = true
+		else:
+			combined = combined.merge(world)
+	if not has_any:
+		return AABB(Vector3(-1, 0, -1), Vector3(2, 2, 2))
+	return combined
+
+
+## Staging shot set — reads the POSTURE. A 3/4 hero (footing plan + how the
+## artifact sits on it) and a near-level side profile (the height stack: the
+## floor→plinth lift, or a float's air gap, shows as a silhouette). Absolute
+## positions framed to the whole-room AABB so the footing is never cropped.
+func _staging_shots_for(aabb: AABB) -> Array:
+	var c: Vector3 = aabb.get_center()
+	var s: Vector3 = aabb.size
+	var max_half: float = max(s.x, max(s.y, s.z)) * 0.5
+	var fov: float = 48.0
+	var pad: float = 1.4   # headroom so footing edges + a float's air gap stay in frame
+	var dist: float = max(1.2, max_half / max(0.05, tan(deg_to_rad(fov) * 0.5)) * pad)
+	var specs: Array = [
+		{"name": "staging_hero",    "dir": Vector3(1.0, 0.85, 1.5)},   # front-right-above
+		{"name": "staging_profile", "dir": Vector3(1.6, 0.32, 0.18)},  # near-side, low — reads height
+	]
+	var out: Array = []
+	for spec in specs:
+		var d: Vector3 = (spec["dir"] as Vector3).normalized()
+		var pos: Vector3 = c + d * dist
+		out.append({
+			"name": spec["name"],
+			"position": [pos.x, pos.y, pos.z],
+			"look_at": [c.x, c.y, c.z],
+			"fov": fov,
+		})
+	return out
 
 
 func _to_vec3(a) -> Vector3:

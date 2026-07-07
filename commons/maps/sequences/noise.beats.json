@@ -1,0 +1,159 @@
+{
+  "_meta": {
+    "schema_version": "beats/0.1",
+    "schema_doc": "doc/beats/schema.md",
+    "sequence": "noise",
+    "phase": "E_entropy",
+    "description": "Noise is randomness that remembers its neighbors. Where pure entropy forgets instantly, noise maintains continuityâ€”each value smoothly related to those around it. This is the Î» parameter tuned for …",
+    "_draft": true,
+    "_draft_origin": "tools/draft_beats.py — refine via /beats editor"
+  },
+  "beats": [
+    {
+      "id": "N0",
+      "role": "GATEWAY",
+      "concept": "entering noise — the substrate shifts",
+      "register": "structural",
+      "intensity": "low",
+      "maps": [],
+      "stage": "draft",
+      "next": "N1"
+    },
+    {
+      "id": "N1",
+      "role": "INTRODUCE",
+      "concept": "White noise screams chaos — every frequency, every sample independent, pure static. Blue noise whispers structure — random but refusing to clump, maintaining distance. Between them: the spectrum of coherent randomness.",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "Random_Noise_Types"
+      ],
+      "stage": "draft",
+      "bleed_from": [
+        "randomness"
+      ],
+      "note": "auto-detected from description; refine via editor",
+      "next": "N2",
+      "_concept_origin": "blurb"
+    },
+    {
+      "id": "N2",
+      "role": "DEMONSTRATE",
+      "concept": "Noise extruded vertically. Sample the 2D function, lift the result into height. Mountains rise from mathematics, valleys fall from continuous variation.",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "Noise_Columns"
+      ],
+      "stage": "draft",
+      "next": "N3",
+      "_concept_origin": "blurb"
+    },
+    {
+      "id": "N3",
+      "role": "INTRODUCE",
+      "concept": "Before Perlin, noise was static — random values with no memory, no structure. Then came coherent noise: smooth, continuous, organic. Sample adjacent points and get adjacent values.",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "Noise_One"
+      ],
+      "stage": "draft",
+      "next": "N4",
+      "_concept_origin": "blurb"
+    },
+    {
+      "id": "N4",
+      "role": "DEMONSTRATE",
+      "concept": "Three-dimensional noise carved into blocks. Where the function exceeds threshold: solid. Where it falls below: void. Caves, overhangs, floating islands — topologies impossible with heightmaps alone.",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "Noise_Voxel"
+      ],
+      "stage": "draft",
+      "next": "N5",
+      "_concept_origin": "blurb"
+    },
+    {
+      "id": "N5",
+      "role": "DEMONSTRATE",
+      "concept": "Six octaves layered. Low frequency for large features, high frequency for fine detail. Each octave adds texture at a different scale.",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "Noise_6_Wall"
+      ],
+      "stage": "draft",
+      "next": "N6",
+      "_concept_origin": "blurb"
+    },
+    {
+      "id": "N6",
+      "role": "DEMONSTRATE",
+      "concept": "Noise controlling noise. The output of one function becomes the input coordinate of another. Warped, distorted, folded space. What was smooth becomes turbulent. What was regular becomes organic.",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "Noise_Inside_Noise"
+      ],
+      "stage": "draft",
+      "next": "N7",
+      "_concept_origin": "blurb"
+    },
+    {
+      "id": "N7",
+      "role": "PRACTICE",
+      "concept": "Expand the canvas. Ten dimensions of parameters: position, time, octaves, persistence, lacunarity, seed. Each dimension adds variation, adds control, adds possibility.",
+      "register": "exploring",
+      "intensity": "medium",
+      "maps": [
+        "Noise_Space_10"
+      ],
+      "stage": "draft",
+      "next": "N8",
+      "_concept_origin": "blurb"
+    },
+    {
+      "id": "N8",
+      "role": "DEMONSTRATE",
+      "concept": "Perlin noise: the original coherent gradient noise, 1983. Simplex noise: Ken Perlin's improved version, 2001. Compare them side by side. Perlin has axis-aligned artifacts; Simplex is cleaner in higher dimensions.",
+      "register": "teaching",
+      "intensity": "high",
+      "maps": [
+        "Noise_Perlin_Simplex"
+      ],
+      "stage": "draft",
+      "next": "N9",
+      "_concept_origin": "blurb"
+    },
+    {
+      "id": "N9",
+      "role": "PRACTICE",
+      "concept": "The corridor back. Every sequence ends here — nine maps of noise, and now the return. A dark sphere pulses in purple light, slow rotation, breathing emission. Not a lesson. A threshold.",
+      "register": "exploring",
+      "intensity": "medium",
+      "maps": [
+        "Lab_Path"
+      ],
+      "stage": "draft",
+      "next": "N10",
+      "_concept_origin": "blurb"
+    },
+    {
+      "id": "N10",
+      "role": "CHAMBER",
+      "concept": "noise — to be authored",
+      "register": "synthesizing",
+      "intensity": "high",
+      "maps": [],
+      "stage": "draft",
+      "next": null,
+      "bleed_to": [
+        "isosurfaces",
+        "randomness"
+      ],
+      "note": "auto-reciprocates inbound bleed_from references"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b7coralv2trial2x"]
+
+[ext_resource type="Script" path="res://commons/artifacts/_coral_trials/v2/trial.gd" id="1_coralv2"]
+
+[node name="CoralTrialV2" type="Node3D"]
+script = ExtResource("1_coralv2")

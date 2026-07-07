@@ -257,6 +257,12 @@ const PRESETS := {
 var config: Dictionary = {}
 var _built := false
 
+# Stem joint chain — populated by _build_stem, consumed by inflorescence
+# and leaf placement so attachments follow the curved stem rather than
+# floating in straight-line coordinates.
+var _stem_joints: Array[Node3D] = []
+var _stem_seg_h: float = 0.0
+
 
 # ═══════════════════════════════════════════════════════════════════════
 # LIFECYCLE
@@ -343,15 +349,16 @@ func _build_inflorescence(c: Dictionary, rng: RandomNumberGenerator, s: float) -
 				var t: float = 0.4 + float(i) / maxf(count - 1.0, 1.0) * 0.55
 				var angle: float = TAU * float(i) * 0.618  # Golden angle for spiral
 				var pedicel_len: float = spacing * (1.0 + rng.randf_range(-0.2, 0.2))
+				var attach: Dictionary = _stem_attach_at(t)
 
 				var joint := Node3D.new()
 				joint.name = "Pedicel_%d" % i
-				joint.position = Vector3(0, stem_h * t, 0)
+				joint.position = Vector3(0, attach.local_y, 0)
 				joint.rotation = Vector3(
 					deg_to_rad(30 + rng.randf_range(-10, 10)),
 					angle, 0
 				)
-				self.add_child(joint)
+				attach.parent.add_child(joint)
 
 				var head_pos := Node3D.new()
 				head_pos.name = "HeadMount_%d" % i
@@ -370,16 +377,18 @@ func _build_inflorescence(c: Dictionary, rng: RandomNumberGenerator, s: float) -
 			for i in count:
 				var t: float = 0.5 + float(i) / maxf(count - 1.0, 1.0) * 0.45
 				var angle: float = TAU * float(i) * 0.618
+				var attach: Dictionary = _stem_attach_at(t)
 
 				var mount := Node3D.new()
 				mount.name = "SpikeFlower_%d" % i
-				mount.position = Vector3(0, stem_h * t, 0)
+				mount.position = Vector3(0, attach.local_y, 0)
 				mount.rotation.y = angle
-				self.add_child(mount)
+				attach.parent.add_child(mount)
 				_build_flower_head(c, mount, sub_s * 0.7, rng)
 
 		InflorescenceType.UMBEL:
-			# All radiate from one point at top — flock
+			# All radiate from one point at top — flock.
+			# Attach to stem_top so the umbel rides the curved stem.
 			for i in count:
 				var angle: float = TAU * float(i) / count
 				var tilt: float = deg_to_rad(25 + rng.randf_range(-8, 8))
@@ -387,9 +396,9 @@ func _build_inflorescence(c: Dictionary, rng: RandomNumberGenerator, s: float) -
 
 				var ray := Node3D.new()
 				ray.name = "Ray_%d" % i
-				ray.position = Vector3(0, stem_h, 0)
+				ray.position = Vector3.ZERO
 				ray.rotation = Vector3(tilt, angle, 0)
-				self.add_child(ray)
+				stem_top.add_child(ray)
 
 				var tip := Node3D.new()
 				tip.position = Vector3(0, stalk_len, 0)
@@ -399,8 +408,8 @@ func _build_inflorescence(c: Dictionary, rng: RandomNumberGenerator, s: float) -
 				_build_flower_head(c, tip, sub_s * 0.6, rng)
 
 		InflorescenceType.HEAD:
-			# Dense sphere at top — huvud (e.g. allium, clover)
-			# Radius proportional to sub-flower size and count
+			# Dense sphere at top — huvud (e.g. allium, clover).
+			# Attach to stem_top so the cluster sits on the actual stem tip.
 			var head_r: float = maxf(c.petal_length * s * 1.5, spacing) * sqrt(count) * 0.25
 			var golden := (1.0 + sqrt(5.0)) / 2.0
 
@@ -417,35 +426,39 @@ func _build_inflorescence(c: Dictionary, rng: RandomNumberGenerator, s: float) -
 
 				var mount := Node3D.new()
 				mount.name = "HeadFlower_%d" % i
-				mount.position = Vector3(0, stem_h, 0) + pos
-				self.add_child(mount)
+				mount.position = pos
+				stem_top.add_child(mount)
 				# Point outward from center (must be in tree for look_at)
 				if pos.length() > 0.001:
 					mount.look_at(mount.global_position + pos.normalized(), Vector3.UP)
 				_build_flower_head(c, mount, sub_s * 0.35, rng)
 
 		InflorescenceType.CYME:
-			# Central flower first, then branching — kvast
+			# Central flower first, then branching — kvast.
+			# Top sits on stem_top; branches attach to lower stem joints
+			# at fraction (1 - drop_frac) so they follow any stem curve.
 			var top_mount := Node3D.new()
-			top_mount.position = Vector3(0, stem_h, 0)
-			self.add_child(top_mount)
+			top_mount.position = Vector3.ZERO
+			stem_top.add_child(top_mount)
 			_build_flower_head(c, top_mount, sub_s, rng)
 
 			for i in range(1, count):
 				var angle: float = TAU * float(i) / (count - 1)
-				var drop: float = float(i) / count * stem_h * 0.3
+				var drop_frac: float = float(i) / count * 0.3   # 0..0.3
+				var t: float = 1.0 - drop_frac
 				var spread: float = spacing * 3.0
+				var attach: Dictionary = _stem_attach_at(t)
 
 				var branch := Node3D.new()
 				branch.name = "CymeBranch_%d" % i
 				branch.position = Vector3(
 					sin(angle) * spread,
-					stem_h - drop,
+					attach.local_y,
 					cos(angle) * spread
 				)
-				self.add_child(branch)
+				attach.parent.add_child(branch)
 
-				_build_pedicel(self, spread, c.stem_color, s)
+				_build_pedicel(branch, spread * 0.6, c.stem_color, s)
 				_build_flower_head(c, branch, sub_s * 0.75, rng)
 
 		InflorescenceType.PANICLE:
@@ -454,15 +467,16 @@ func _build_inflorescence(c: Dictionary, rng: RandomNumberGenerator, s: float) -
 				var t: float = 0.3 + float(i) / maxf(count - 1.0, 1.0) * 0.65
 				var angle: float = TAU * float(i) * 0.618
 				var spread: float = spacing * 2.0 * (1.0 - t)
+				var attach: Dictionary = _stem_attach_at(t)
 
 				var mount := Node3D.new()
 				mount.name = "PanicleFlower_%d" % i
 				mount.position = Vector3(
 					sin(angle) * spread,
-					stem_h * t,
+					attach.local_y,
 					cos(angle) * spread
 				)
-				self.add_child(mount)
+				attach.parent.add_child(mount)
 				_build_flower_head(c, mount, sub_s * 0.5, rng)
 
 
@@ -482,6 +496,10 @@ func _build_stem(c: Dictionary, parent: Node3D, s: float) -> Node3D:
 	var seg_h: float = height / n_segs
 	var current: Node3D = parent
 
+	# Reset chain for this build — leaves and inflorescence attach via these.
+	_stem_joints.clear()
+	_stem_seg_h = seg_h
+
 	for i in n_segs:
 		var t: float = float(i) / n_segs
 
@@ -493,6 +511,7 @@ func _build_stem(c: Dictionary, parent: Node3D, s: float) -> Node3D:
 			# Curve increases toward the top (quadratic)
 			joint.rotation.x = curve * t * 0.3
 		current.add_child(joint)
+		_stem_joints.append(joint)
 
 		# Tapered cylinder segment
 		var cyl := CylinderMesh.new()
@@ -516,6 +535,21 @@ func _build_stem(c: Dictionary, parent: Node3D, s: float) -> Node3D:
 	tip.position.y = seg_h
 	current.add_child(tip)
 	return tip
+
+
+## Find an attachment point along the stem at fraction t (0 = base, 1 = tip).
+## Returns {parent: Node3D, local_y: float} — the caller should add its node
+## as a child of `parent` at local position (0, local_y, 0) and any radial
+## offsets in (x, z). This honors stem curve: straight-line coords like
+## (0, stem_h * t, 0) on `self` drift away from the actual curved stem.
+func _stem_attach_at(t: float) -> Dictionary:
+	if _stem_joints.is_empty():
+		return {"parent": self, "local_y": 0.0}
+	var n: int = _stem_joints.size()
+	var tc: float = clampf(t, 0.0, 1.0)
+	var seg_idx: int = clampi(int(tc * n), 0, n - 1)
+	var local_y: float = (tc * float(n) - float(seg_idx)) * _stem_seg_h
+	return {"parent": _stem_joints[seg_idx], "local_y": local_y}
 
 
 ## Short pedicel (flower stalk) for inflorescence sub-flowers.
@@ -554,52 +588,67 @@ func _place_leaves(c: Dictionary, parent: Node3D, stem_h: float, s: float, rng: 
 	var leaf_mat := _make_material(c.leaf_color, 0.7, true)
 
 	for i in count:
-		var y_pos: float
-		var y_angle: float  # Rotation around stem (Y axis)
+		var t: float       # Fraction along stem 0..1
+		var y_angle: float  # Rotation around stem axis
 
 		match phyl:
 			Phyllotaxis.ALTERNATE:
-				y_pos = stem_h * (0.15 + float(i) / count * 0.55)
+				t = 0.15 + float(i) / count * 0.55
 				y_angle = TAU * float(i) * 0.618  # Golden angle
 
 			Phyllotaxis.OPPOSITE:
-				y_pos = stem_h * (0.15 + float(i / 2) / (count / 2) * 0.55)
+				t = 0.15 + float(i / 2) / max(count / 2, 1) * 0.55
 				y_angle = PI * float(i % 2)  # 0 or 180 degrees
 
 			Phyllotaxis.WHORLED:
-				y_pos = stem_h * 0.35
+				t = 0.35
 				y_angle = TAU * float(i) / count
 
 			Phyllotaxis.ROSETTE:
-				y_pos = 0.02 * s  # All at base
+				t = 0.0  # All at base
 				y_angle = TAU * float(i) / count
 
 			Phyllotaxis.SPIRAL:
-				y_pos = stem_h * (0.1 + float(i) / count * 0.6)
+				t = 0.1 + float(i) / count * 0.6
 				y_angle = TAU * float(i) * 0.3819660113  # Golden angle / TAU
 
 			_:
-				y_pos = stem_h * (0.15 + float(i) / count * 0.55)
+				t = 0.15 + float(i) / count * 0.55
 				y_angle = TAU * float(i) / count
 
-		# Slight randomness for organic feel
-		y_pos += rng.randf_range(-0.01, 0.01) * s
+		# Slight randomness for organic feel — small jitter in t (±0.04)
+		t += rng.randf_range(-0.04, 0.04)
 		y_angle += rng.randf_range(-0.1, 0.1)
+
+		# Resolve to a stem joint so leaves follow the curved stem.
+		var attach: Dictionary = _stem_attach_at(t)
+		# Special case for ROSETTE: nudge slightly above ground so leaves
+		# don't z-fight the floor; otherwise use the joint-relative offset.
+		var local_y: float = attach.local_y
+		if phyl == Phyllotaxis.ROSETTE:
+			local_y = max(local_y, 0.02 * s)
 
 		var leaf_node := MeshInstance3D.new()
 		leaf_node.name = "Leaf_%d" % i
 		leaf_node.mesh = leaf_mesh
 		leaf_node.material_override = leaf_mat
 
-		# Position and orient: rotate around Y axis, tilt outward
-		leaf_node.position = Vector3(0, y_pos, 0)
+		# Position relative to the stem joint that covers this fraction;
+		# leaf rotation is local to that joint, so leaves spiral around
+		# the stem's actual axis rather than world Y.
+		leaf_node.position = Vector3(0, local_y, 0)
 		leaf_node.rotation = Vector3(
 			deg_to_rad(leaf_angle_deg + rng.randf_range(-5, 5)),
 			y_angle,
 			0
 		)
 
-		parent.add_child(leaf_node)
+		# Fall back to the originally-passed parent if no stem chain was
+		# built (defensive — shouldn't happen in normal flow).
+		if attach.parent == self and _stem_joints.is_empty():
+			parent.add_child(leaf_node)
+		else:
+			(attach.parent as Node3D).add_child(leaf_node)
 
 
 # ═══════════════════════════════════════════════════════════════════════

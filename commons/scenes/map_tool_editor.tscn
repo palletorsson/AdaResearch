@@ -3,108 +3,1789 @@
 [ext_resource type="Script" uid="uid://bwtc0iu7ban5g" path="res://commons/scenes/map_tool_editor.gd" id="1"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qas5r"]
-albedo_color = Color(0.3, 0.55, 0.95, 1)
+albedo_color = Color(0.5, 0.72, 0.58, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_lik4i"]
-size = Vector3(0.5, 0.5, 0.5)
+size = Vector3(0.96, 1, 0.96)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7fimr"]
-albedo_color = Color(0.3, 0.55, 0.95, 1)
+albedo_color = Color(0.5, 0.72, 0.58, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_2k0ra"]
-size = Vector3(0.5, 0.5, 0.5)
+size = Vector3(0.96, 1, 0.96)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qx7p0"]
-albedo_color = Color(0.3, 0.55, 0.95, 1)
+albedo_color = Color(0.5, 0.72, 0.58, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_luqhn"]
-size = Vector3(0.5, 0.5, 0.5)
+size = Vector3(0.96, 1, 0.96)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mxd8c"]
-albedo_color = Color(0.3, 0.55, 0.95, 1)
+albedo_color = Color(0.5, 0.72, 0.58, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_yc4gl"]
-size = Vector3(0.5, 0.5, 0.5)
+size = Vector3(0.96, 1, 0.96)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6pxr1"]
-albedo_color = Color(0.3, 0.55, 0.95, 1)
+albedo_color = Color(0.5, 0.72, 0.58, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_oeyx1"]
-size = Vector3(0.5, 0.5, 0.5)
+size = Vector3(0.96, 1, 0.96)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mtcf0"]
-albedo_color = Color(0.3, 0.55, 0.95, 1)
+albedo_color = Color(0.5, 0.72, 0.58, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_tylqi"]
-size = Vector3(0.5, 0.5, 0.5)
+size = Vector3(0.96, 1, 0.96)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7ggit"]
-albedo_color = Color(0.3, 0.55, 0.95, 1)
+albedo_color = Color(0.5, 0.72, 0.58, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_pjdte"]
-size = Vector3(0.5, 0.5, 0.5)
+size = Vector3(0.96, 1, 0.96)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r48eb"]
-albedo_color = Color(0.95, 0.55, 0.18, 1)
+albedo_color = Color(0.5, 0.72, 0.58, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_p0df3"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mn1tc"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_va1od"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_okfta"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_kqh6s"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wwkkg"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_jjyph"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0dewd"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_2evfr"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q24c4"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_y4rr2"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ihoqt"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_1p8lp"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_176q3"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_igb3e"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kihw3"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ssu4c"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rwa04"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_c6apf"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_odo4c"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_o01vg"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r80w2"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_1wih6"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_85ftq"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_kvsvm"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0e6mq"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_qpeuh"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o478y"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_6ytrj"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mv01m"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_qbfll"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fge2d"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ubkfi"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ee4e6"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_homec"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_edx3y"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_jt0ph"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3btob"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_110tp"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ux3my"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_70a4t"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kxikk"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_3avmw"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dx4ov"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ls3ms"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8n5fc"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_kceta"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bhsui"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_o5en2"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wsrit"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_c1vo8"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0c2rm"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ag4g3"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_afsfy"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_3dgke"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rc3ye"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_laivo"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_efev5"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_gg7vs"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3dr5h"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_0s6i2"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k70mk"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_hva1c"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6c5y0"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_gr4bk"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1f5a1"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ygtla"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i682x"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_6o4xv"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0c8xf"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_kj5ae"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8ejf3"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_i8j71"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_osrel"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_f3fwm"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yby63"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_6sg0f"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yw3km"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_8qaer"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5qevh"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_4t2up"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0k0ab"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_5iyot"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r183b"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ep8t0"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_at84s"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_i376a"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wmpwg"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_jk7ey"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fdpwr"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_jomvl"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j4dfg"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_vcdwx"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_36c75"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_adacn"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eao7y"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_xh1w8"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_87npo"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_gw0p5"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1cj65"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_5dce3"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q5cpm"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_3yo47"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_krvg1"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_uyu7k"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tyc1h"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_fppt6"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kjxhi"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_n4xdq"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h5tq4"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_vq22d"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5ccrj"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_c8kdt"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i75it"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_yo731"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_erndk"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_7p6uy"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6ptjy"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_va87a"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_daofc"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_7r71f"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f4l7s"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_cshxu"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6abag"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ocp3e"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8e6va"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_33guy"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5wj2r"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_y0rcv"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ng1y8"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ducro"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nlbw5"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_hosk6"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pv11p"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_tbaxr"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dbfuu"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_th3np"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ihjyf"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_lvyu5"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tt1cl"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_6n7lb"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kvjnh"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_tbr0h"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pxjoi"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_nq1rc"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j05wy"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_m8krl"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gu3m0"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_4qh8o"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_86h2e"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_a3gsf"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6dywy"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_h7vle"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_va0fd"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_dddrv"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x2qu0"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_jtm84"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rt5rs"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_2i0vi"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t0yf3"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_sd4h0"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sqktt"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_jagxt"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2cck8"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_1hlkm"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_am8r3"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_7h233"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_435f6"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_owxwi"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5pj4n"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_671n4"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4cv0w"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_fnx0g"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_48oyc"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_04mis"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_564jo"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_2uybo"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_flaok"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_0cek1"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_axwmx"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_1l35i"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7rdnr"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_0f2fe"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pptme"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_hayhx"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yk5ea"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_0rw6y"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l7y5r"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_1qttd"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dfdcp"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_tp0xu"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jmnpf"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_57rdc"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u2tcc"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_pnet5"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6q5mp"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_xq8uo"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ssn63"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_j6nf7"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1ap0j"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ymn4k"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lvker"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_f0kqp"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w3n2o"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_jypey"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x6po5"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_evkgr"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p3gf6"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_stl65"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iu1j8"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_w1xx1"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_27pxw"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_2m6wc"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qipaw"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ia8hb"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kory8"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_1p0pk"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0lsen"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_qnhaq"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yo8u3"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_1pnoj"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uew54"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_i2tku"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ryuwh"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_rxcbr"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qsfqh"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_23c6s"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eisao"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_6y73a"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p5ou8"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ivtvv"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d6d6d"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_8hscc"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d5gae"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_gandt"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i600e"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_k8svi"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_anfo4"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_hd57q"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sm3nh"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ybpll"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xoik5"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_xpa8p"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r4co2"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_7pngs"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5w0i7"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_vfxeq"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uf3oj"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_kw4iu"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_11hni"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_jgq8n"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_excwh"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_bve2d"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_omt35"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_hbi0a"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3c533"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_xc5vr"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ygqe0"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_v5do3"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xf8qt"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_xowsp"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_omq75"]
+albedo_color = Color(0.5, 0.72, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_tgo33"]
+size = Vector3(0.96, 1, 0.96)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3d56l"]
+albedo_color = Color(0.85, 0.3, 0.85, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_1ac8b"]
+size = Vector3(0.45, 0.45, 0.45)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qh7lh"]
+albedo_color = Color(0.3, 0.55, 0.95, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_t68s4"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f1ksb"]
+albedo_color = Color(0.3, 0.55, 0.95, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_hwbfw"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0qjvs"]
+albedo_color = Color(0.3, 0.55, 0.95, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_5a01a"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5polk"]
+albedo_color = Color(0.3, 0.55, 0.95, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_m2jr1"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_boh00"]
+albedo_color = Color(0.3, 0.55, 0.95, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_1bivg"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1j5ri"]
+albedo_color = Color(0.3, 0.55, 0.95, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_5u7hn"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4kowv"]
+albedo_color = Color(0.95, 0.55, 0.18, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_kq22d"]
 size = Vector3(0.5, 0.5, 0.5)
 
 [node name="MapToolEditor" type="Node3D" unique_id=2010344205]
 script = ExtResource("1")
+status = "▶ LAYER: Structure
+Proto_Fractal_Recursion
+14 x 10 cells (total_size 1.00)
+12 artifacts · 2 utilities · 2 clusters
+139 structure cubes
+EDIT GRID — cubes selectable"
 
-[node name="cluster_fractal_recursion" type="MeshInstance3D" parent="." unique_id=1890121051]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.3, 1)
+[node name="@MeshInstance3D@192721" type="MeshInstance3D" parent="." unique_id=524249411]
 material_override = SubResource("StandardMaterial3D_qas5r")
 mesh = SubResource("BoxMesh_lik4i")
-metadata/token = "cluster:fractal_recursion"
-metadata/layer = "interactable"
+metadata/gcube = true
 
-[node name="cube_staircase" type="MeshInstance3D" parent="." unique_id=1398673863]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 1.3, 3)
+[node name="@MeshInstance3D@192722" type="MeshInstance3D" parent="." unique_id=1207032451]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
 material_override = SubResource("StandardMaterial3D_7fimr")
 mesh = SubResource("BoxMesh_2k0ra")
-metadata/token = "cube_staircase"
-metadata/layer = "interactable"
+metadata/gcube = true
 
-[node name="example_8_3_recursion_circles_vr" type="MeshInstance3D" parent="." unique_id=1333931781]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1.3, 5)
+[node name="@MeshInstance3D@192723" type="MeshInstance3D" parent="." unique_id=1303281351]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
 material_override = SubResource("StandardMaterial3D_qx7p0")
 mesh = SubResource("BoxMesh_luqhn")
-metadata/token = "example_8_3_recursion_circles_vr"
-metadata/layer = "interactable"
+metadata/gcube = true
 
-[node name="fibonacci_pagoda" type="MeshInstance3D" parent="." unique_id=560748769]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 1.3, 5)
+[node name="@MeshInstance3D@192724" type="MeshInstance3D" parent="." unique_id=2077595119]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
 material_override = SubResource("StandardMaterial3D_mxd8c")
 mesh = SubResource("BoxMesh_yc4gl")
-metadata/token = "fibonacci_pagoda"
-metadata/layer = "interactable"
+metadata/gcube = true
 
-[node name="recursive_boolean_cube" type="MeshInstance3D" parent="." unique_id=619709267]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 1.3, 7)
+[node name="@MeshInstance3D@192725" type="MeshInstance3D" parent="." unique_id=1115099064]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
 material_override = SubResource("StandardMaterial3D_6pxr1")
 mesh = SubResource("BoxMesh_oeyx1")
-metadata/token = "recursive_boolean_cube"
-metadata/layer = "interactable"
+metadata/gcube = true
 
-[node name="recursive_chair" type="MeshInstance3D" parent="." unique_id=649940080]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1.3, 8)
+[node name="@MeshInstance3D@192726" type="MeshInstance3D" parent="." unique_id=1382951806]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
 material_override = SubResource("StandardMaterial3D_mtcf0")
 mesh = SubResource("BoxMesh_tylqi")
-metadata/token = "recursive_chair"
-metadata/layer = "interactable"
+metadata/gcube = true
 
-[node name="recursive_table" type="MeshInstance3D" parent="." unique_id=1090130066]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 1.3, 8)
+[node name="@MeshInstance3D@192727" type="MeshInstance3D" parent="." unique_id=1222543458]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
 material_override = SubResource("StandardMaterial3D_7ggit")
 mesh = SubResource("BoxMesh_pjdte")
-metadata/token = "recursive_table"
-metadata/layer = "interactable"
+metadata/gcube = true
 
-[node name="t" type="MeshInstance3D" parent="." unique_id=1936850974]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 1.3, 9)
+[node name="@MeshInstance3D@192728" type="MeshInstance3D" parent="." unique_id=111571994]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 0)
 material_override = SubResource("StandardMaterial3D_r48eb")
 mesh = SubResource("BoxMesh_p0df3")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192729" type="MeshInstance3D" parent="." unique_id=216770557]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
+material_override = SubResource("StandardMaterial3D_mn1tc")
+mesh = SubResource("BoxMesh_va1od")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192730" type="MeshInstance3D" parent="." unique_id=101663788]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 0)
+material_override = SubResource("StandardMaterial3D_okfta")
+mesh = SubResource("BoxMesh_kqh6s")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192731" type="MeshInstance3D" parent="." unique_id=1782180690]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0)
+material_override = SubResource("StandardMaterial3D_wwkkg")
+mesh = SubResource("BoxMesh_jjyph")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192732" type="MeshInstance3D" parent="." unique_id=311255497]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, 0)
+material_override = SubResource("StandardMaterial3D_0dewd")
+mesh = SubResource("BoxMesh_2evfr")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192733" type="MeshInstance3D" parent="." unique_id=615304214]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 0)
+material_override = SubResource("StandardMaterial3D_q24c4")
+mesh = SubResource("BoxMesh_y4rr2")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192734" type="MeshInstance3D" parent="." unique_id=1337544854]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, 0)
+material_override = SubResource("StandardMaterial3D_ihoqt")
+mesh = SubResource("BoxMesh_1p8lp")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192735" type="MeshInstance3D" parent="." unique_id=2065233577]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+material_override = SubResource("StandardMaterial3D_176q3")
+mesh = SubResource("BoxMesh_igb3e")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192736" type="MeshInstance3D" parent="." unique_id=958416544]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1)
+material_override = SubResource("StandardMaterial3D_kihw3")
+mesh = SubResource("BoxMesh_ssu4c")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192737" type="MeshInstance3D" parent="." unique_id=1134824403]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 1)
+material_override = SubResource("StandardMaterial3D_rwa04")
+mesh = SubResource("BoxMesh_c6apf")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192738" type="MeshInstance3D" parent="." unique_id=769240956]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 1)
+material_override = SubResource("StandardMaterial3D_odo4c")
+mesh = SubResource("BoxMesh_o01vg")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192739" type="MeshInstance3D" parent="." unique_id=202522264]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 1)
+material_override = SubResource("StandardMaterial3D_r80w2")
+mesh = SubResource("BoxMesh_1wih6")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192740" type="MeshInstance3D" parent="." unique_id=1152104452]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 1)
+material_override = SubResource("StandardMaterial3D_85ftq")
+mesh = SubResource("BoxMesh_kvsvm")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192741" type="MeshInstance3D" parent="." unique_id=1329869160]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 1)
+material_override = SubResource("StandardMaterial3D_0e6mq")
+mesh = SubResource("BoxMesh_qpeuh")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192742" type="MeshInstance3D" parent="." unique_id=1753416825]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 1)
+material_override = SubResource("StandardMaterial3D_o478y")
+mesh = SubResource("BoxMesh_6ytrj")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192743" type="MeshInstance3D" parent="." unique_id=2097669341]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 1)
+material_override = SubResource("StandardMaterial3D_mv01m")
+mesh = SubResource("BoxMesh_qbfll")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192744" type="MeshInstance3D" parent="." unique_id=2007213410]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 1)
+material_override = SubResource("StandardMaterial3D_fge2d")
+mesh = SubResource("BoxMesh_ubkfi")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192745" type="MeshInstance3D" parent="." unique_id=1865080734]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 1)
+material_override = SubResource("StandardMaterial3D_ee4e6")
+mesh = SubResource("BoxMesh_homec")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192746" type="MeshInstance3D" parent="." unique_id=1235266950]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, 1)
+material_override = SubResource("StandardMaterial3D_edx3y")
+mesh = SubResource("BoxMesh_jt0ph")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192747" type="MeshInstance3D" parent="." unique_id=2024740348]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 1)
+material_override = SubResource("StandardMaterial3D_3btob")
+mesh = SubResource("BoxMesh_110tp")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192748" type="MeshInstance3D" parent="." unique_id=1252634207]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, 1)
+material_override = SubResource("StandardMaterial3D_ux3my")
+mesh = SubResource("BoxMesh_70a4t")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192749" type="MeshInstance3D" parent="." unique_id=260065688]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+material_override = SubResource("StandardMaterial3D_kxikk")
+mesh = SubResource("BoxMesh_3avmw")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192750" type="MeshInstance3D" parent="." unique_id=242857068]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 2)
+material_override = SubResource("StandardMaterial3D_dx4ov")
+mesh = SubResource("BoxMesh_ls3ms")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192751" type="MeshInstance3D" parent="." unique_id=219469414]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
+material_override = SubResource("StandardMaterial3D_8n5fc")
+mesh = SubResource("BoxMesh_kceta")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192752" type="MeshInstance3D" parent="." unique_id=1711044543]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 2)
+material_override = SubResource("StandardMaterial3D_bhsui")
+mesh = SubResource("BoxMesh_o5en2")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192753" type="MeshInstance3D" parent="." unique_id=1626588683]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 2)
+material_override = SubResource("StandardMaterial3D_wsrit")
+mesh = SubResource("BoxMesh_c1vo8")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192754" type="MeshInstance3D" parent="." unique_id=1405482097]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 2)
+material_override = SubResource("StandardMaterial3D_0c2rm")
+mesh = SubResource("BoxMesh_ag4g3")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192755" type="MeshInstance3D" parent="." unique_id=694460998]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 2)
+material_override = SubResource("StandardMaterial3D_afsfy")
+mesh = SubResource("BoxMesh_3dgke")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192756" type="MeshInstance3D" parent="." unique_id=1380914561]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 2)
+material_override = SubResource("StandardMaterial3D_rc3ye")
+mesh = SubResource("BoxMesh_laivo")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192757" type="MeshInstance3D" parent="." unique_id=763426183]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 2)
+material_override = SubResource("StandardMaterial3D_efev5")
+mesh = SubResource("BoxMesh_gg7vs")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192758" type="MeshInstance3D" parent="." unique_id=133365217]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 2)
+material_override = SubResource("StandardMaterial3D_3dr5h")
+mesh = SubResource("BoxMesh_0s6i2")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192759" type="MeshInstance3D" parent="." unique_id=1141086346]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 2)
+material_override = SubResource("StandardMaterial3D_k70mk")
+mesh = SubResource("BoxMesh_hva1c")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192760" type="MeshInstance3D" parent="." unique_id=2108430715]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, 2)
+material_override = SubResource("StandardMaterial3D_6c5y0")
+mesh = SubResource("BoxMesh_gr4bk")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192761" type="MeshInstance3D" parent="." unique_id=270618048]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 2)
+material_override = SubResource("StandardMaterial3D_1f5a1")
+mesh = SubResource("BoxMesh_ygtla")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192762" type="MeshInstance3D" parent="." unique_id=744171579]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, 2)
+material_override = SubResource("StandardMaterial3D_i682x")
+mesh = SubResource("BoxMesh_6o4xv")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192763" type="MeshInstance3D" parent="." unique_id=299494327]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+material_override = SubResource("StandardMaterial3D_0c8xf")
+mesh = SubResource("BoxMesh_kj5ae")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192764" type="MeshInstance3D" parent="." unique_id=1932824569]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 3)
+material_override = SubResource("StandardMaterial3D_8ejf3")
+mesh = SubResource("BoxMesh_i8j71")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192765" type="MeshInstance3D" parent="." unique_id=975328486]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 3)
+material_override = SubResource("StandardMaterial3D_osrel")
+mesh = SubResource("BoxMesh_f3fwm")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192766" type="MeshInstance3D" parent="." unique_id=1890000428]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 3)
+material_override = SubResource("StandardMaterial3D_yby63")
+mesh = SubResource("BoxMesh_6sg0f")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192767" type="MeshInstance3D" parent="." unique_id=1720896521]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 3)
+material_override = SubResource("StandardMaterial3D_yw3km")
+mesh = SubResource("BoxMesh_8qaer")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192768" type="MeshInstance3D" parent="." unique_id=550949414]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 3)
+material_override = SubResource("StandardMaterial3D_5qevh")
+mesh = SubResource("BoxMesh_4t2up")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192769" type="MeshInstance3D" parent="." unique_id=694026237]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 3)
+material_override = SubResource("StandardMaterial3D_0k0ab")
+mesh = SubResource("BoxMesh_5iyot")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192770" type="MeshInstance3D" parent="." unique_id=325954906]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 3)
+material_override = SubResource("StandardMaterial3D_r183b")
+mesh = SubResource("BoxMesh_ep8t0")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192771" type="MeshInstance3D" parent="." unique_id=1584037436]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 3)
+material_override = SubResource("StandardMaterial3D_at84s")
+mesh = SubResource("BoxMesh_i376a")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192772" type="MeshInstance3D" parent="." unique_id=1145018201]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 3)
+material_override = SubResource("StandardMaterial3D_wmpwg")
+mesh = SubResource("BoxMesh_jk7ey")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192773" type="MeshInstance3D" parent="." unique_id=977432037]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 3)
+material_override = SubResource("StandardMaterial3D_fdpwr")
+mesh = SubResource("BoxMesh_jomvl")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192774" type="MeshInstance3D" parent="." unique_id=1189205595]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, 3)
+material_override = SubResource("StandardMaterial3D_j4dfg")
+mesh = SubResource("BoxMesh_vcdwx")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192775" type="MeshInstance3D" parent="." unique_id=1534730721]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 3)
+material_override = SubResource("StandardMaterial3D_36c75")
+mesh = SubResource("BoxMesh_adacn")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192776" type="MeshInstance3D" parent="." unique_id=1639466926]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, 3)
+material_override = SubResource("StandardMaterial3D_eao7y")
+mesh = SubResource("BoxMesh_xh1w8")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192777" type="MeshInstance3D" parent="." unique_id=10134525]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+material_override = SubResource("StandardMaterial3D_87npo")
+mesh = SubResource("BoxMesh_gw0p5")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192778" type="MeshInstance3D" parent="." unique_id=296041271]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 4)
+material_override = SubResource("StandardMaterial3D_1cj65")
+mesh = SubResource("BoxMesh_5dce3")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192779" type="MeshInstance3D" parent="." unique_id=2121095505]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 4)
+material_override = SubResource("StandardMaterial3D_q5cpm")
+mesh = SubResource("BoxMesh_3yo47")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192780" type="MeshInstance3D" parent="." unique_id=1793418065]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 4)
+material_override = SubResource("StandardMaterial3D_krvg1")
+mesh = SubResource("BoxMesh_uyu7k")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192781" type="MeshInstance3D" parent="." unique_id=843007234]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 4)
+material_override = SubResource("StandardMaterial3D_tyc1h")
+mesh = SubResource("BoxMesh_fppt6")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192782" type="MeshInstance3D" parent="." unique_id=980685057]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 4)
+material_override = SubResource("StandardMaterial3D_kjxhi")
+mesh = SubResource("BoxMesh_n4xdq")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192783" type="MeshInstance3D" parent="." unique_id=945254991]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 4)
+material_override = SubResource("StandardMaterial3D_h5tq4")
+mesh = SubResource("BoxMesh_vq22d")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192784" type="MeshInstance3D" parent="." unique_id=465296308]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 4)
+material_override = SubResource("StandardMaterial3D_5ccrj")
+mesh = SubResource("BoxMesh_c8kdt")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192785" type="MeshInstance3D" parent="." unique_id=1977494592]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 4)
+material_override = SubResource("StandardMaterial3D_i75it")
+mesh = SubResource("BoxMesh_yo731")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192786" type="MeshInstance3D" parent="." unique_id=74904643]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 4)
+material_override = SubResource("StandardMaterial3D_erndk")
+mesh = SubResource("BoxMesh_7p6uy")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192787" type="MeshInstance3D" parent="." unique_id=1324952094]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 4)
+material_override = SubResource("StandardMaterial3D_6ptjy")
+mesh = SubResource("BoxMesh_va87a")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192788" type="MeshInstance3D" parent="." unique_id=283696363]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, 4)
+material_override = SubResource("StandardMaterial3D_daofc")
+mesh = SubResource("BoxMesh_7r71f")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192789" type="MeshInstance3D" parent="." unique_id=305150841]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 4)
+material_override = SubResource("StandardMaterial3D_f4l7s")
+mesh = SubResource("BoxMesh_cshxu")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192790" type="MeshInstance3D" parent="." unique_id=740643495]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, 4)
+material_override = SubResource("StandardMaterial3D_6abag")
+mesh = SubResource("BoxMesh_ocp3e")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192791" type="MeshInstance3D" parent="." unique_id=872120051]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
+material_override = SubResource("StandardMaterial3D_8e6va")
+mesh = SubResource("BoxMesh_33guy")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192792" type="MeshInstance3D" parent="." unique_id=1852612353]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 5)
+material_override = SubResource("StandardMaterial3D_5wj2r")
+mesh = SubResource("BoxMesh_y0rcv")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192793" type="MeshInstance3D" parent="." unique_id=174015529]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 5)
+material_override = SubResource("StandardMaterial3D_ng1y8")
+mesh = SubResource("BoxMesh_ducro")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192794" type="MeshInstance3D" parent="." unique_id=543360908]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 5)
+material_override = SubResource("StandardMaterial3D_nlbw5")
+mesh = SubResource("BoxMesh_hosk6")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192795" type="MeshInstance3D" parent="." unique_id=52204271]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 5)
+material_override = SubResource("StandardMaterial3D_pv11p")
+mesh = SubResource("BoxMesh_tbaxr")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192796" type="MeshInstance3D" parent="." unique_id=1943280446]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 5)
+material_override = SubResource("StandardMaterial3D_dbfuu")
+mesh = SubResource("BoxMesh_th3np")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192797" type="MeshInstance3D" parent="." unique_id=1570192679]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 5)
+material_override = SubResource("StandardMaterial3D_ihjyf")
+mesh = SubResource("BoxMesh_lvyu5")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192798" type="MeshInstance3D" parent="." unique_id=1584187036]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 5)
+material_override = SubResource("StandardMaterial3D_tt1cl")
+mesh = SubResource("BoxMesh_6n7lb")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192799" type="MeshInstance3D" parent="." unique_id=1317515906]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 5)
+material_override = SubResource("StandardMaterial3D_kvjnh")
+mesh = SubResource("BoxMesh_tbr0h")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192800" type="MeshInstance3D" parent="." unique_id=985445442]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 5)
+material_override = SubResource("StandardMaterial3D_pxjoi")
+mesh = SubResource("BoxMesh_nq1rc")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192801" type="MeshInstance3D" parent="." unique_id=192535081]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 5)
+material_override = SubResource("StandardMaterial3D_j05wy")
+mesh = SubResource("BoxMesh_m8krl")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192802" type="MeshInstance3D" parent="." unique_id=640235811]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, 5)
+material_override = SubResource("StandardMaterial3D_gu3m0")
+mesh = SubResource("BoxMesh_4qh8o")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192803" type="MeshInstance3D" parent="." unique_id=772887803]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 5)
+material_override = SubResource("StandardMaterial3D_86h2e")
+mesh = SubResource("BoxMesh_a3gsf")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192804" type="MeshInstance3D" parent="." unique_id=1660631685]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, 5)
+material_override = SubResource("StandardMaterial3D_6dywy")
+mesh = SubResource("BoxMesh_h7vle")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192805" type="MeshInstance3D" parent="." unique_id=1108914791]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6)
+material_override = SubResource("StandardMaterial3D_va0fd")
+mesh = SubResource("BoxMesh_dddrv")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192806" type="MeshInstance3D" parent="." unique_id=2138445506]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 6)
+material_override = SubResource("StandardMaterial3D_x2qu0")
+mesh = SubResource("BoxMesh_jtm84")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192807" type="MeshInstance3D" parent="." unique_id=892678184]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 6)
+material_override = SubResource("StandardMaterial3D_rt5rs")
+mesh = SubResource("BoxMesh_2i0vi")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192808" type="MeshInstance3D" parent="." unique_id=663924542]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 6)
+material_override = SubResource("StandardMaterial3D_t0yf3")
+mesh = SubResource("BoxMesh_sd4h0")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192809" type="MeshInstance3D" parent="." unique_id=205863119]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 6)
+material_override = SubResource("StandardMaterial3D_sqktt")
+mesh = SubResource("BoxMesh_jagxt")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192810" type="MeshInstance3D" parent="." unique_id=1504745609]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 6)
+material_override = SubResource("StandardMaterial3D_2cck8")
+mesh = SubResource("BoxMesh_1hlkm")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192811" type="MeshInstance3D" parent="." unique_id=1803260420]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 6)
+material_override = SubResource("StandardMaterial3D_am8r3")
+mesh = SubResource("BoxMesh_7h233")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192812" type="MeshInstance3D" parent="." unique_id=1677127380]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 6)
+material_override = SubResource("StandardMaterial3D_435f6")
+mesh = SubResource("BoxMesh_owxwi")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192813" type="MeshInstance3D" parent="." unique_id=87011417]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 6)
+material_override = SubResource("StandardMaterial3D_5pj4n")
+mesh = SubResource("BoxMesh_671n4")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192814" type="MeshInstance3D" parent="." unique_id=1391148444]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 6)
+material_override = SubResource("StandardMaterial3D_4cv0w")
+mesh = SubResource("BoxMesh_fnx0g")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192815" type="MeshInstance3D" parent="." unique_id=669458379]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 6)
+material_override = SubResource("StandardMaterial3D_48oyc")
+mesh = SubResource("BoxMesh_04mis")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192816" type="MeshInstance3D" parent="." unique_id=381505312]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, 6)
+material_override = SubResource("StandardMaterial3D_564jo")
+mesh = SubResource("BoxMesh_2uybo")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192817" type="MeshInstance3D" parent="." unique_id=300056187]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, 6)
+material_override = SubResource("StandardMaterial3D_flaok")
+mesh = SubResource("BoxMesh_0cek1")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192818" type="MeshInstance3D" parent="." unique_id=526246773]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 1, 6)
+material_override = SubResource("StandardMaterial3D_axwmx")
+mesh = SubResource("BoxMesh_1l35i")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192819" type="MeshInstance3D" parent="." unique_id=1340955566]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7)
+material_override = SubResource("StandardMaterial3D_7rdnr")
+mesh = SubResource("BoxMesh_0f2fe")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192820" type="MeshInstance3D" parent="." unique_id=881952400]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 7)
+material_override = SubResource("StandardMaterial3D_pptme")
+mesh = SubResource("BoxMesh_hayhx")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192821" type="MeshInstance3D" parent="." unique_id=1993690295]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 7)
+material_override = SubResource("StandardMaterial3D_yk5ea")
+mesh = SubResource("BoxMesh_0rw6y")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192822" type="MeshInstance3D" parent="." unique_id=1138689952]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 7)
+material_override = SubResource("StandardMaterial3D_l7y5r")
+mesh = SubResource("BoxMesh_1qttd")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192823" type="MeshInstance3D" parent="." unique_id=1946213150]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 7)
+material_override = SubResource("StandardMaterial3D_dfdcp")
+mesh = SubResource("BoxMesh_tp0xu")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192824" type="MeshInstance3D" parent="." unique_id=1721007751]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 7)
+material_override = SubResource("StandardMaterial3D_jmnpf")
+mesh = SubResource("BoxMesh_57rdc")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192825" type="MeshInstance3D" parent="." unique_id=406337017]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 7)
+material_override = SubResource("StandardMaterial3D_u2tcc")
+mesh = SubResource("BoxMesh_pnet5")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192826" type="MeshInstance3D" parent="." unique_id=1383723865]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 7)
+material_override = SubResource("StandardMaterial3D_6q5mp")
+mesh = SubResource("BoxMesh_xq8uo")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192827" type="MeshInstance3D" parent="." unique_id=1372572474]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 7)
+material_override = SubResource("StandardMaterial3D_ssn63")
+mesh = SubResource("BoxMesh_j6nf7")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192828" type="MeshInstance3D" parent="." unique_id=1348344642]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 7)
+material_override = SubResource("StandardMaterial3D_1ap0j")
+mesh = SubResource("BoxMesh_ymn4k")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192829" type="MeshInstance3D" parent="." unique_id=1364285114]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 7)
+material_override = SubResource("StandardMaterial3D_lvker")
+mesh = SubResource("BoxMesh_f0kqp")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192830" type="MeshInstance3D" parent="." unique_id=1742775323]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, 7)
+material_override = SubResource("StandardMaterial3D_w3n2o")
+mesh = SubResource("BoxMesh_jypey")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192831" type="MeshInstance3D" parent="." unique_id=1150823846]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 7)
+material_override = SubResource("StandardMaterial3D_x6po5")
+mesh = SubResource("BoxMesh_evkgr")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192832" type="MeshInstance3D" parent="." unique_id=1803853415]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, 7)
+material_override = SubResource("StandardMaterial3D_p3gf6")
+mesh = SubResource("BoxMesh_stl65")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192833" type="MeshInstance3D" parent="." unique_id=939054918]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
+material_override = SubResource("StandardMaterial3D_iu1j8")
+mesh = SubResource("BoxMesh_w1xx1")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192834" type="MeshInstance3D" parent="." unique_id=840164887]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 8)
+material_override = SubResource("StandardMaterial3D_27pxw")
+mesh = SubResource("BoxMesh_2m6wc")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192835" type="MeshInstance3D" parent="." unique_id=915348078]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 8)
+material_override = SubResource("StandardMaterial3D_qipaw")
+mesh = SubResource("BoxMesh_ia8hb")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192836" type="MeshInstance3D" parent="." unique_id=1514043134]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 8)
+material_override = SubResource("StandardMaterial3D_kory8")
+mesh = SubResource("BoxMesh_1p0pk")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192837" type="MeshInstance3D" parent="." unique_id=2031105251]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 8)
+material_override = SubResource("StandardMaterial3D_0lsen")
+mesh = SubResource("BoxMesh_qnhaq")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192838" type="MeshInstance3D" parent="." unique_id=821773087]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 8)
+material_override = SubResource("StandardMaterial3D_yo8u3")
+mesh = SubResource("BoxMesh_1pnoj")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192839" type="MeshInstance3D" parent="." unique_id=707379732]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 8)
+material_override = SubResource("StandardMaterial3D_uew54")
+mesh = SubResource("BoxMesh_i2tku")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192840" type="MeshInstance3D" parent="." unique_id=630417953]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 8)
+material_override = SubResource("StandardMaterial3D_ryuwh")
+mesh = SubResource("BoxMesh_rxcbr")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192841" type="MeshInstance3D" parent="." unique_id=1434300930]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 8)
+material_override = SubResource("StandardMaterial3D_qsfqh")
+mesh = SubResource("BoxMesh_23c6s")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192842" type="MeshInstance3D" parent="." unique_id=1000732]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 8)
+material_override = SubResource("StandardMaterial3D_eisao")
+mesh = SubResource("BoxMesh_6y73a")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192843" type="MeshInstance3D" parent="." unique_id=1421394833]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 8)
+material_override = SubResource("StandardMaterial3D_p5ou8")
+mesh = SubResource("BoxMesh_ivtvv")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192844" type="MeshInstance3D" parent="." unique_id=368176567]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0, 9)
+material_override = SubResource("StandardMaterial3D_d6d6d")
+mesh = SubResource("BoxMesh_8hscc")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192845" type="MeshInstance3D" parent="." unique_id=1475847502]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 8)
+material_override = SubResource("StandardMaterial3D_d5gae")
+mesh = SubResource("BoxMesh_gandt")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192846" type="MeshInstance3D" parent="." unique_id=1661398590]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, 8)
+material_override = SubResource("StandardMaterial3D_i600e")
+mesh = SubResource("BoxMesh_k8svi")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192847" type="MeshInstance3D" parent="." unique_id=1275573250]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9)
+material_override = SubResource("StandardMaterial3D_anfo4")
+mesh = SubResource("BoxMesh_hd57q")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192848" type="MeshInstance3D" parent="." unique_id=956250952]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 9)
+material_override = SubResource("StandardMaterial3D_sm3nh")
+mesh = SubResource("BoxMesh_ybpll")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192849" type="MeshInstance3D" parent="." unique_id=1092398067]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 9)
+material_override = SubResource("StandardMaterial3D_xoik5")
+mesh = SubResource("BoxMesh_xpa8p")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192850" type="MeshInstance3D" parent="." unique_id=537270372]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 9)
+material_override = SubResource("StandardMaterial3D_r4co2")
+mesh = SubResource("BoxMesh_7pngs")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192851" type="MeshInstance3D" parent="." unique_id=263129611]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 9)
+material_override = SubResource("StandardMaterial3D_5w0i7")
+mesh = SubResource("BoxMesh_vfxeq")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192852" type="MeshInstance3D" parent="." unique_id=1842311658]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 9)
+material_override = SubResource("StandardMaterial3D_uf3oj")
+mesh = SubResource("BoxMesh_kw4iu")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192853" type="MeshInstance3D" parent="." unique_id=450190422]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 9)
+material_override = SubResource("StandardMaterial3D_11hni")
+mesh = SubResource("BoxMesh_jgq8n")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192854" type="MeshInstance3D" parent="." unique_id=880254627]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 9)
+material_override = SubResource("StandardMaterial3D_excwh")
+mesh = SubResource("BoxMesh_bve2d")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192855" type="MeshInstance3D" parent="." unique_id=316517306]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 9)
+material_override = SubResource("StandardMaterial3D_omt35")
+mesh = SubResource("BoxMesh_hbi0a")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192856" type="MeshInstance3D" parent="." unique_id=1163908426]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 9)
+material_override = SubResource("StandardMaterial3D_3c533")
+mesh = SubResource("BoxMesh_xc5vr")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192857" type="MeshInstance3D" parent="." unique_id=1384381961]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 9)
+material_override = SubResource("StandardMaterial3D_ygqe0")
+mesh = SubResource("BoxMesh_v5do3")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192858" type="MeshInstance3D" parent="." unique_id=580959774]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 9)
+material_override = SubResource("StandardMaterial3D_xf8qt")
+mesh = SubResource("BoxMesh_xowsp")
+metadata/gcube = true
+
+[node name="@MeshInstance3D@192859" type="MeshInstance3D" parent="." unique_id=1642928487]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, 9)
+material_override = SubResource("StandardMaterial3D_omq75")
+mesh = SubResource("BoxMesh_tgo33")
+metadata/gcube = true
+
+[node name="cluster_fractal_recursion" type="MeshInstance3D" parent="." unique_id=1201068956]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1, 1)
+material_override = SubResource("StandardMaterial3D_3d56l")
+mesh = SubResource("BoxMesh_1ac8b")
+metadata/token = "cluster:fractal_recursion"
+metadata/layer = "interactable"
+metadata/y_lift = 0.0
+
+[node name="cube_staircase" type="MeshInstance3D" parent="." unique_id=1917283320]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 1.3, 3)
+material_override = SubResource("StandardMaterial3D_qh7lh")
+mesh = SubResource("BoxMesh_t68s4")
+metadata/token = "cube_staircase"
+metadata/layer = "interactable"
+metadata/y_lift = 0.3
+
+[node name="example_8_3_recursion_circles_vr" type="MeshInstance3D" parent="." unique_id=1960157814]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.3, 5)
+material_override = SubResource("StandardMaterial3D_f1ksb")
+mesh = SubResource("BoxMesh_hwbfw")
+metadata/token = "example_8_3_recursion_circles_vr"
+metadata/layer = "interactable"
+metadata/y_lift = 0.3
+
+[node name="fibonacci_pagoda" type="MeshInstance3D" parent="." unique_id=233594129]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 1.3, 5)
+material_override = SubResource("StandardMaterial3D_0qjvs")
+mesh = SubResource("BoxMesh_5a01a")
+metadata/token = "fibonacci_pagoda"
+metadata/layer = "interactable"
+metadata/y_lift = 0.3
+
+[node name="recursive_boolean_cube" type="MeshInstance3D" parent="." unique_id=1787233474]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 1.3, 7)
+material_override = SubResource("StandardMaterial3D_5polk")
+mesh = SubResource("BoxMesh_m2jr1")
+metadata/token = "recursive_boolean_cube"
+metadata/layer = "interactable"
+metadata/y_lift = 0.3
+
+[node name="recursive_chair" type="MeshInstance3D" parent="." unique_id=12932305]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.3, 8)
+material_override = SubResource("StandardMaterial3D_boh00")
+mesh = SubResource("BoxMesh_1bivg")
+metadata/token = "recursive_chair"
+metadata/layer = "interactable"
+metadata/y_lift = 0.3
+
+[node name="recursive_table" type="MeshInstance3D" parent="." unique_id=1208513829]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 1.3, 9)
+material_override = SubResource("StandardMaterial3D_1j5ri")
+mesh = SubResource("BoxMesh_5u7hn")
+metadata/token = "recursive_table"
+metadata/layer = "interactable"
+metadata/y_lift = 0.3
+
+[node name="t" type="MeshInstance3D" parent="." unique_id=2095089278]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 0.3, 8)
+material_override = SubResource("StandardMaterial3D_4kowv")
+mesh = SubResource("BoxMesh_kq22d")
 metadata/token = "t"
 metadata/layer = "utility"
+metadata/y_lift = 0.3

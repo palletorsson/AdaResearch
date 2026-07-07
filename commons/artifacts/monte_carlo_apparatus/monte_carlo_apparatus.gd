@@ -64,9 +64,9 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 func _read_metadata_overrides() -> void:
 	if has_meta("config_current_estimate"):
-		current_estimate = float(String(get_meta("config_current_estimate")))
+		current_estimate = float(str(get_meta("config_current_estimate")))
 	if has_meta("config_sample_count_so_far"):
-		sample_count_so_far = int(String(get_meta("config_sample_count_so_far")))
+		sample_count_so_far = int(str(get_meta("config_sample_count_so_far")))
 
 
 func _build_apparatus() -> void:

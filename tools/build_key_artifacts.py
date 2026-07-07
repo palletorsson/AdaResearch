@@ -75,6 +75,20 @@ def essence_of(gd: str) -> str:
     return m.group(1).strip() if m else ""
 
 
+def label3d_count(gd: str) -> int:
+    """Floating Label3D uses in the artifact's code — the R-027 board-migration
+    worklist: every key artifact should carry its text on framed 2D-in-3D
+    boards (BakedTextAlbedo), not free-floating Label3D."""
+    if not gd or not os.path.exists(gd):
+        return 0
+    try:
+        with open(gd, encoding="utf-8", errors="replace") as f:
+            src = f.read()
+    except OSError:
+        return 0
+    return src.count("Label3D.new(") + src.count("Label3D>") + src.count("= Label3D")
+
+
 def mtime_of(gd: str) -> float:
     """the .gd's last-modified unix timestamp (0 if unknown) — the 'last changed' key."""
     try:
@@ -92,8 +106,8 @@ def capture_of(name: str) -> str:
     return ""
 
 
-SPINE = ["primitives", "transformation", "array_tutorial", "color", "change",
-         "isosurfaces", "boolean_surfaces", "forces", "wavefunctions", "randomness",
+SPINE = ["primitives", "transformation", "symmetry", "array_tutorial", "color", "change",
+         "isosurfaces", "boolean_surfaces", "forces", "formfinding", "wavefunctions", "randomness",
          "noise", "cellularautomata", "fractals", "lsystems", "proceduralgeneration",
          "swarmintelligence", "softbodies", "machinelearning", "graphtheory",
          "foundationscrisis", "qfeplaboratory", "postfoundationscrisis"]
@@ -154,6 +168,7 @@ def main() -> int:
             "scene": scene,
             "mtime": round(mtime_of(gd)),
             "has_md": os.path.exists(os.path.join(PUB, "artifact-md", name + ".md")),
+            "labels": label3d_count(gd),
         })
 
     # rank: heroes+voltage first, then by book-weight, then weak-first (improve worklist)

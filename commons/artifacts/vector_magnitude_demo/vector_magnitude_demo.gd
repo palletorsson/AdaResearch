@@ -22,10 +22,11 @@ var vector_v: Node3D
 var component_x: Node3D
 var component_y: Node3D
 var component_z: Node3D
-var info_label: Label3D
+var info_label: Label
 var length_label: Label3D
 
 # VR controls
+const ControlPanelScript = preload("res://commons/ui/control_panel.gd")
 var _scale_slider: Node3D
 var _base_direction := Vector3(0.8, 0.6, 0.4).normalized()
 
@@ -130,15 +131,15 @@ func _update_length_label(vec: Vector3):
 	length_label.position = vec * 0.5 * SCENE_SCALE + Vector3(0, 0.05, 0.08)
 
 func _setup_controls():
-	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
-	var panel: Node3D = RackTpl.create_panel("MAGNITUDE", [
-		[{"type": "slider_h", "label": "SCALE", "default": 0.5}],
-	])
+	# Canonical Braun ControlPanel (was a RackTemplates panel).
+	var panel = ControlPanelScript.new()
+	panel.title = "MAGNITUDE"
 	panel.position = Vector3(0, 0.5, 0.6)
-	panel.rotation_degrees = Vector3(-25, 0, 0)
 	add_child(panel)
 	_created_nodes.append(panel)
-	_scale_slider = panel.find_child("Param_0", true, false)
+	_scale_slider = panel.add_slider("SCALE", "SCALE")
+	if _scale_slider and _scale_slider.has_method("set_normalized_value"):
+		_scale_slider.set_normalized_value(0.5)
 	if _scale_slider and _scale_slider.has_signal("slider_moved"):
 		_scale_slider.slider_moved.connect(_on_scale_changed)
 

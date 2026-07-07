@@ -14,11 +14,7 @@
 	  "difficulty": "beginner",
 	  "category": "random_challenges",
 	  "estimated_time": "3-5 minutes",
-	  "learning_objectives": [
-		"Prototype map for sequence `random_challenges`.",
-		"Validate map flow and artifact placement.",
-        "Refine layout for sequence pedagogy."
-	  ]
+	  "learning_objectives": ["Prototype map for sequence `random_challenges`.","Validate map flow and artifact placement.","Refine layout for sequence pedagogy."]
 	}
   },
   "utility_definitions": {
@@ -40,16 +36,10 @@
 	"summary": "Random_0 scaffold",
 	"layout": "7x9 test room with spawn and teleporter.",
 	"objective": "Prototype map for sequence `random_challenges`.",
-	"key_elements": [
-      "Add sequence artifacts."
-	]
+	"key_elements": ["Add sequence artifacts."]
   },
   "lighting": {
-	"ambient_color": [
-	  0.4,
-	  0.4,
-	  0.5
-	],
+	"ambient_color": [0.4,0.4,0.5],
 	"ambient_energy": 0.6
   },
   "settings": {

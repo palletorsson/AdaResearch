@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b1codexopticsv1xx"]
+
+[ext_resource type="Script" path="res://commons/artifacts/_codexoptics_trials/v1/trial.gd" id="1_codexopticsv1"]
+
+[node name="CodexOpticsTrialV1" type="Node3D"]
+script = ExtResource("1_codexopticsv1")

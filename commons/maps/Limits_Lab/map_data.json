@@ -1,0 +1,73 @@
+{
+  "map_info": {
+    "name": "Limits Lab",
+    "lookup_name": "Limits_Lab",
+    "description": "Four ways the universe puts bounds on what can be computed, decided, or compressed. Halting workbench at the NW corner (the halting problem made literal). Cantor diagonal at the NE (uncountability hand-cranked). Russell paradox at the SW (the set that cannot exist). Complexity dial at the SE (polynomial vs exponential, no constant factor closes the gap). Walk the four corners, turn each knob, read the floor. The instruments are siblings: each names a different limit of formal systems. Built 2026-05-21 as a cluster map paired with /halting-bench-gallery, /cantor-diagonal-gallery, /russell-paradox-gallery, /complexity-dial-gallery.",
+    "manual_file": "",
+    "version": "1.0",
+    "format": "json",
+    "dimensions": {
+      "width": 9,
+      "depth": 9,
+      "max_height": 2
+    },
+    "metadata": {
+      "difficulty": "advanced",
+      "category": "foundationscrisis",
+      "estimated_time": "5-10 minutes",
+      "learning_objectives": ["Halting problem: you can see halt but cannot in general predict","Cantor's diagonal: the reals are uncountable","Russell's paradox: self-reference + negation = contradiction","P vs NP: polynomial and exponential are different in kind"]
+    }
+  },
+  "utility_definitions": {
+    "t": "Next",
+    "s": "Spawn Point"
+  },
+  "spawn_points": {
+    "default": {
+      "position": [4.5,1.2,4.5],
+      "rotation": [0,0,0]
+    }
+  },
+  "lighting": {
+    "ambient_color": [0.4,0.4,0.5],
+    "ambient_energy": 0.55
+  },
+  "settings": {
+    "ambient_preset": "lab"
+  },
+  "layers": {
+    "structure": [
+      ["1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","0","1","1","1","1"]
+    ],
+    "utilities": [
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," ","t"," "," "," "," "]
+    ],
+    "interactables": [
+      [" "," "," "," "," "," "," "," "," "],
+      [" ","halting_workbench:0:0"," "," "," "," "," ","cantor_diagonal_workbench:180:0"," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "," "],
+      [" ","russell_paradox_workbench:0:0"," "," "," "," "," ","complexity_dial_workbench:180:0"," "],
+      [" "," "," "," "," "," "," "," "," "]
+    ]
+  }
+}

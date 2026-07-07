@@ -14,12 +14,7 @@
       "difficulty": "advanced",
       "category": "physics",
       "estimated_time": "12-15 minutes",
-      "learning_objectives": [
-        "SPH fluid simulation: particles approximating continuous fluid",
-        "Finite Element Method for engineering deformation",
-        "Soft body physics: between rigid and fluid",
-        "Physics as art: kinetic sculpture systems"
-      ]
+      "learning_objectives": ["SPH fluid simulation: particles approximating continuous fluid","Finite Element Method for engineering deformation","Soft body physics: between rigid and fluid","Physics as art: kinetic sculpture systems"]
     },
     "title": "Continuous Matter"
   },
@@ -39,24 +34,12 @@
     }
   },
   "lighting": {
-    "ambient_color": [
-      0.4,
-      0.4,
-      0.5
-    ],
+    "ambient_color": [0.4,0.4,0.5],
     "ambient_energy": 0.6,
     "directional_light": {
       "enabled": true,
-      "direction": [
-        -0.4,
-        -0.7,
-        -0.4
-      ],
-      "color": [
-        1.0,
-        0.9,
-        0.8
-      ],
+      "direction": [-0.4,-0.7,-0.4],
+      "color": [1.0,0.9,0.8],
       "energy": 1.2
     }
   },
@@ -67,11 +50,7 @@
     "enable_physics": true,
     "background": {
       "type": "sky",
-      "color": [
-        0.2,
-        0.3,
-        0.7
-      ]
+      "color": [0.2,0.3,0.7]
     }
   },
   "layers": {

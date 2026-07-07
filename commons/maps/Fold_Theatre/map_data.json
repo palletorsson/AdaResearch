@@ -14,12 +14,7 @@
       "difficulty": "advanced",
       "category": "qfep",
       "estimated_time": "5-7 minutes",
-      "learning_objectives": [
-        "F edge: an algorithm becomes another algorithm",
-        "Apparatus-as-phenomenon: detail arrives where attention is",
-        "Pattern-as-maze: the algorithm IS the floor plan",
-        "Part-grammar: every cube knows what it is"
-      ]
+      "learning_objectives": ["F edge: an algorithm becomes another algorithm","Apparatus-as-phenomenon: detail arrives where attention is","Pattern-as-maze: the algorithm IS the floor plan","Part-grammar: every cube knows what it is"]
     },
     "title": "The Fold Theatre"
   },
@@ -43,19 +38,14 @@
     "volume": -10.0
   },
   "lighting": {
-    "ambient_color": [0.4, 0.42, 0.5],
+    "ambient_color": [0.4,0.42,0.5],
     "ambient_energy": 0.55
   },
   "documentation": {
     "summary": "Fold_Theatre — F-edge first cycle on the substrate",
     "layout": "Long-axis corridor 13 wide x 17 deep. Spawn at z=1 col=2 (front-left), teleporter at z=15 col=10 (back-right). Centre-floor hosts the substrate runner; substrate cycles visibility expressions, paints flower-grammar roles, subdivides at viewer attention, and guarantees the spawn-to-teleporter route via PATH_GUARANTEE.",
     "objective": "Walk from entrance to exit while the floor reorganises itself. The algorithm becoming another algorithm — formal F edge — paired with the visual-grammar argument from doc/EDGES_OF_ALGORITHM_VISUAL_SEEDS.md (Haeckel Tafel 9, Codex carousel, Hilma af Klint).",
-    "key_elements": [
-      "GridSubstrateRunner with all four channels (visibility + glyph + part + colour-by-role)",
-      "PATH_GUARANTEE floor-plan mode protects walkability across all visibility expressions",
-      "Flower-grammar paints concentric anatomy on the floor",
-      "Subdivide-by-attention reveals detail where the player's gaze falls"
-    ]
+    "key_elements": ["GridSubstrateRunner with all four channels (visibility + glyph + part + colour-by-role)","PATH_GUARANTEE floor-plan mode protects walkability across all visibility expressions","Flower-grammar paints concentric anatomy on the floor","Subdivide-by-attention reveals detail where the player's gaze falls"]
   },
   "settings": {
     "render_walls": true,

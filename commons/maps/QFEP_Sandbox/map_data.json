@@ -14,12 +14,7 @@
       "difficulty": "advanced",
       "category": "qfep",
       "estimated_time": "10+ minutes",
-      "learning_objectives": [
-        "Full parameter control",
-        "λ and φ work together",
-        "Find your personal edge",
-        "You have earned the force of QFEP"
-      ]
+      "learning_objectives": ["Full parameter control","λ and φ work together","Find your personal edge","You have earned the force of QFEP"]
     },
     "title": "Full Parameter Control"
   },
@@ -41,32 +36,15 @@
     "summary": "QFEP_Sandbox - You Control Everything",
     "layout": "Open laboratory. Control console with all sliders. Reactive environment.",
     "objective": "Play with all parameters. Discover how λ and φ interact. Find configurations that feel alive.",
-    "key_elements": [
-      "Full control console: λ slider, φ slider",
-      "Real-time visualization of QFE",
-      "Environment responds to your settings",
-      "No wrong answers — explore"
-    ]
+    "key_elements": ["Full control console: λ slider, φ slider","Real-time visualization of QFE","Environment responds to your settings","No wrong answers — explore"]
   },
   "lighting": {
-    "ambient_color": [
-      0.2,
-      0.2,
-      0.25
-    ],
+    "ambient_color": [0.2,0.2,0.25],
     "ambient_energy": 0.6,
     "directional_light": {
       "enabled": true,
-      "direction": [
-        -0.3,
-        -0.7,
-        -0.4
-      ],
-      "color": [
-        0.95,
-        0.95,
-        1.0
-      ],
+      "direction": [-0.3,-0.7,-0.4],
+      "color": [0.95,0.95,1.0],
       "energy": 1.0
     }
   },
@@ -77,11 +55,7 @@
     "enable_physics": true,
     "background": {
       "type": "sky",
-      "color": [
-        0.08,
-        0.08,
-        0.12
-      ]
+      "color": [0.08,0.08,0.12]
     },
     "grid_animation": {
       "enabled": true,

@@ -14,12 +14,7 @@
 	  "difficulty": "beginner",
 	  "category": "tutorial",
 	  "estimated_time": "3-4 minutes",
-	  "learning_objectives": [
-		"2D arrays",
-		"Grid navigation",
-		"X-Y coordinate system",
-        "Multi-dimensional thinking"
-	  ]
+	  "learning_objectives": ["2D arrays","Grid navigation","X-Y coordinate system","Multi-dimensional thinking"]
 	},
 	"title": "Two-Dimensional Grid Navigation"
   },
@@ -42,33 +37,15 @@
 	"summary": "Tutorial_2D - Multi-Artifact Grid Lab",
 	"layout": "8x23 guided corridor with a central 2D grid station and a south-side exit bay.",
 	"objective": "Teach 2D coordinate reasoning by combining row/column helpers, a core 4x4 grid artifact, and supporting reference objects.",
-	"key_elements": [
-	  "`grid_2d_4x4` as the primary interaction hub at (2,11)",
-	  "`row_3_x` and `column_3_z` helper artifacts in the early corridor",
-	  "`pick_up_cube`, `dark_sphere`, `pulsar_visualizer`, and `xyz_coordinates` as comparison/reference stations",
-	  "`gridagent:copy` near the end to contrast static artifacts with active hazards",
-      "Exit bay with `an`, `sp`, and teleporter `t` for sequence progression"
-	]
+	"key_elements": ["`grid_2d_4x4` as the primary interaction hub at (2,11)","`row_3_x` and `column_3_z` helper artifacts in the early corridor","`pick_up_cube`, `dark_sphere`, `pulsar_visualizer`, and `xyz_coordinates` as comparison/reference stations","`gridagent:copy` near the end to contrast static artifacts with active hazards","Exit bay with `an`, `sp`, and teleporter `t` for sequence progression"]
   },
   "lighting": {
-	"ambient_color": [
-	  0.4,
-	  0.4,
-	  0.5
-	],
+	"ambient_color": [0.4,0.4,0.5],
 	"ambient_energy": 0.6,
 	"directional_light": {
 	  "enabled": true,
-	  "direction": [
-		-0.4,
-		-0.7,
-		-0.4
-	  ],
-	  "color": [
-		1,
-		0.9,
-		0.8
-	  ],
+	  "direction": [-0.4,-0.7,-0.4],
+	  "color": [1,0.9,0.8],
 	  "energy": 1.2
 	}
   },
@@ -81,11 +58,7 @@
 	"initial_tile_visibility": "hidden_except_corners",
 	"background": {
 	  "type": "sky",
-	  "color": [
-		0.2,
-		0.3,
-		0.7
-	  ]
+	  "color": [0.2,0.3,0.7]
 	}
   },
   "layers": {

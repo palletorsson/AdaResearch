@@ -32,7 +32,7 @@ func _ready() -> void:
 
 
 func apply_grid_config(cfg: Dictionary) -> void:
-	if cfg.has("config_path"): config_path = String(cfg["config_path"])
+	if cfg.has("config_path"): config_path = str(cfg["config_path"])
 	_clear()
 	_build()
 
@@ -59,7 +59,7 @@ func _build() -> void:
 	if vr_preview:
 		cfg["iterations"] = mini(int(cfg.get("iterations", 4)), 4)
 
-	var axiom: String = String(cfg.get("axiom", "F"))
+	var axiom: String = str(cfg.get("axiom", "F"))
 	var rules: Dictionary = cfg.get("rules", {})
 	var iters: int = int(cfg.get("iterations", 4))
 	var seed_val: int = int(cfg.get("seed", 0))

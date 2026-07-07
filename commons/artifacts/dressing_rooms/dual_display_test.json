@@ -1,56 +1,63 @@
 {
-	"approach": "south",
-	"artifact_offset": [
-		0.0,
-		0.550000011920929,
-		0.0
-	],
-	"clearance": [
-		3.0,
-		3.0,
-		3.0
-	],
-	"exit": "north",
-	"extras": [],
-	"footing": {
-		"anchor": [
-			1.0,
-			1.0
-		],
-		"tiles": [
-			[
-				1.0,
-				1.0,
-				1.0
-			],
-			[
-				1.0,
-				3.0,
-				1.0
-			],
-			[
-				1.0,
-				1.0,
-				1.0
-			]
-		]
-	},
-	"footprint": [
-		3,
-		1,
-		2
-	],
-	"lookup_name": "dual_display_test",
-	"notes": {
-		"tags": [
-			"artifact-needs-fix"
-		],
-		"text": "[auto] AABB.y min = -0.55 — body sinks into / floats above floor"
-	},
-	"rotations": [
-		"0",
-		"90",
-		"180",
-		"270"
-	]
+  "approach": "south",
+  "artifact_offset": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "clearance": [
+    3.0,
+    3.0,
+    3.0
+  ],
+  "exit": "north",
+  "extras": [],
+  "footing": {
+    "anchor": [
+      1,
+      2
+    ],
+    "tiles": [
+      [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    ]
+  },
+  "footprint": [
+    3,
+    1,
+    2
+  ],
+  "lookup_name": "dual_display_test",
+  "notes": {
+    "tags": [
+      "artifact-needs-fix"
+    ],
+    "text": "[auto] AABB.y min = -0.55 \u2014 body sinks into / floats above floor"
+  },
+  "rotations": [
+    "0",
+    "90",
+    "180",
+    "270"
+  ],
+  "posture": "floor"
 }

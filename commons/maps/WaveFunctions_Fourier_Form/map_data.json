@@ -14,13 +14,7 @@
       "difficulty": "advanced",
       "category": "wavefunctions",
       "estimated_time": "5-7 minutes",
-      "learning_objectives": [
-        "Epicycles: nested rotating circles creating complex curves",
-        "Discrete Fourier Transform (DFT): encoding shapes as frequency spectra",
-        "Compression via low-pass filtering (discarding small circles)",
-        "Phasor representation: radius, frequency, phase",
-        "Critical: Is handwriting personal, or just a frequency spectrum?"
-      ]
+      "learning_objectives": ["Epicycles: nested rotating circles creating complex curves","Discrete Fourier Transform (DFT): encoding shapes as frequency spectra","Compression via low-pass filtering (discarding small circles)","Phasor representation: radius, frequency, phase","Critical: Is handwriting personal, or just a frequency spectrum?"]
     }
   },
   "utility_definitions": {
@@ -42,32 +36,15 @@
     "summary": "WaveFunctions Fourier Form",
     "layout": "13x14 chamber with central dais focused on sculpting Fourier shapes under a light dome.",
     "objective": "Explore how Fourier components construct complex forms using the interactive shape tool.",
-    "key_elements": [
-      "Spawn `s` along the northern rim",
-      "`fouriertransformshape` workstation at (5,6)",
-      "`dark_sphere` enclosure enhancing visual contrast",
-      "Teleporter `t` on the south-east walkway"
-    ]
+    "key_elements": ["Spawn `s` along the northern rim","`fouriertransformshape` workstation at (5,6)","`dark_sphere` enclosure enhancing visual contrast","Teleporter `t` on the south-east walkway"]
   },
   "lighting": {
-    "ambient_color": [
-      0.4,
-      0.4,
-      0.5
-    ],
+    "ambient_color": [0.4,0.4,0.5],
     "ambient_energy": 0.6,
     "directional_light": {
       "enabled": true,
-      "direction": [
-        -0.4,
-        -0.7,
-        -0.4
-      ],
-      "color": [
-        1.0,
-        0.9,
-        0.8
-      ],
+      "direction": [-0.4,-0.7,-0.4],
+      "color": [1.0,0.9,0.8],
       "energy": 1.2
     }
   },
@@ -80,11 +57,7 @@
     "initial_tile_visibility": "hidden_except_corners",
     "background": {
       "type": "sky",
-      "color": [
-        0.2,
-        0.3,
-        0.7
-      ]
+      "color": [0.2,0.3,0.7]
     }
   },
   "layers": {

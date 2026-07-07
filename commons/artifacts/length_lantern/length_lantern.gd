@@ -59,8 +59,8 @@ var _x_label: Label3D = null
 var _y_label: Label3D = null
 var _z_label: Label3D = null
 var _diag_label: Label3D = null
-var _info_label: Label3D = null             # live data column from create_info_panel
-var _readout_label: Label3D = null          # billboard |v| above the lantern
+var _info_label: Label = null             # live data column from create_info_panel
+var _readout_label: Label = null            # 2D |v| on the plate's 2D-in-3D display
 var _ruler_root: Node3D = null
 var _ruler_fill: MeshInstance3D = null
 var _ruler_fill_material: StandardMaterial3D = null
@@ -72,6 +72,7 @@ var _snap_button: Node3D = null
 
 const SLIDER_SCENE_LL := preload("res://commons/interactables/slider_horizontal.tscn")
 const BUTTON_SCENE_LL := preload("res://commons/interactables/push_button.tscn")
+const ControlPanelScript = preload("res://commons/ui/control_panel.gd")
 
 # ── Throttling + resolve-animation state ─────────────────────────────────────
 var _time_since_text: float = 0.0
@@ -116,7 +117,6 @@ func build_scene() -> void:
 		Vector2(2.4, 1.05),
 		"|v| = sqrt(x^2 + y^2 + z^2)",
 		"length = diagonal\nof the x,y,z box")
-	_readout_label = create_readout(Vector3(0.0, 2.0, 0.0), DERIVED_COLOR)
 
 	if show_sliders:
 		_build_controls()
@@ -354,39 +354,40 @@ func _build_ruler() -> void:
 # ═════════════════════════════════════════════════════════════════════════
 
 func _build_controls() -> void:
+	# Seat the x/y/z sliders + SNAP on the canonical ControlPanel — the plate
+	# enforces spacing and orientation so the controls no longer overlap (the old
+	# hand-placed layout packed them 0.11 m apart for ~0.3 m-wide sliders).
 	var lip_z: float = reach + 0.25       # front lip of the plate
 	var lip_y: float = 0.42
-	var spacing: float = 0.34
+	var panel = ControlPanelScript.new()
+	panel.name = "ControlPlate"
+	panel.position = Vector3(0.0, lip_y, lip_z) * SCENE_SCALE
+	add_child(panel)
 
-	_x_slider = _make_axis_slider("x", Vector3(-spacing, lip_y, lip_z), snap_target_logical.x, "_on_x_slider")
-	_y_slider = _make_axis_slider("y", Vector3(0.0, lip_y, lip_z), snap_target_logical.y, "_on_y_slider")
-	_z_slider = _make_axis_slider("z", Vector3(spacing, lip_y, lip_z), snap_target_logical.z, "_on_z_slider")
+	_x_slider = panel.add_slider("x", "x")
+	_configure_axis_slider(_x_slider, snap_target_logical.x, "_on_x_slider")
+	_y_slider = panel.add_slider("y", "y")
+	_configure_axis_slider(_y_slider, snap_target_logical.y, "_on_y_slider")
+	_z_slider = panel.add_slider("z", "z")
+	_configure_axis_slider(_z_slider, snap_target_logical.z, "_on_z_slider")
 
 	# SNAP button — replays the resolve proof toward the showcase triple.
-	_snap_button = BUTTON_SCENE_LL.instantiate()
-	_snap_button.position = Vector3(spacing * 2.0, lip_y - 0.02, lip_z) * SCENE_SCALE
+	_snap_button = panel.add_button("SNAP")
 	_snap_button.set("pressed_color", DERIVED_COLOR)
 	_snap_button.set("released_color", Color(0.85, 0.82, 0.4))
-	add_child(_snap_button)
 	if _snap_button.has_signal("pressed"):
 		_snap_button.connect("pressed", Callable(self, "_on_snap_pressed"))
 	if _snap_button.has_method("update_colors"):
 		_snap_button.call_deferred("update_colors")
 
-	var snap_lbl: Label3D = _ll_label("SNAP", Color(0.95, 0.9, 0.5), 16)
-	snap_lbl.position = Vector3(spacing * 2.0, lip_y + 0.12, lip_z) * SCENE_SCALE
-	add_child(snap_lbl)
+	# Readout display integrated into the top of the plate (not floating).
+	_readout_label = panel.add_readout("")
 
 
-## Build one labelled horizontal slider mapped to logical -RANGE..+RANGE.
-func _make_axis_slider(axis_name: String, logical_pos: Vector3, start_val: float, handler: String) -> Node3D:
-	var slider: Node3D = SLIDER_SCENE_LL.instantiate()
-	slider.name = "Slider_" + axis_name
-	slider.position = logical_pos * SCENE_SCALE
-	slider.rotation_degrees = Vector3(-25.0, 0.0, 0.0)
-	add_child(slider)
-	if slider.has_method("set_param_name"):
-		slider.call("set_param_name", axis_name)
+## Wire one panel slider to logical -RANGE..+RANGE with its start value + handler.
+func _configure_axis_slider(slider: Node3D, start_val: float, handler: String) -> void:
+	if slider == null:
+		return
 	if slider.has_method("set_range"):
 		slider.call("set_range", -SLIDER_LOGICAL_RANGE, SLIDER_LOGICAL_RANGE)
 	if slider.has_method("set_normalized_value"):
@@ -394,7 +395,6 @@ func _make_axis_slider(axis_name: String, logical_pos: Vector3, start_val: float
 		slider.call("set_normalized_value", norm)
 	if slider.has_signal("slider_moved"):
 		slider.connect("slider_moved", Callable(self, handler))
-	return slider
 
 
 func _slider_logical(slider: Node3D) -> float:
@@ -608,8 +608,11 @@ func _update_input_color(is_degenerate: bool) -> void:
 
 
 func _update_readout_color(is_degenerate: bool) -> void:
+	# The plate readout is a 2D Label on a green-LED display; flip it red only
+	# when degenerate. Use the theme font_color (not modulate, which multiplies).
 	if _readout_label:
-		_readout_label.modulate = DEGENERATE_COLOR if is_degenerate else DERIVED_COLOR
+		var c: Color = DEGENERATE_COLOR if is_degenerate else Color(0.22, 0.92, 0.33)
+		_readout_label.add_theme_color_override("font_color", c)
 
 
 # ═════════════════════════════════════════════════════════════════════════
@@ -639,9 +642,8 @@ func _update_text(v: Vector3) -> void:
 		_info_label.text = "\n".join(lines)
 
 	if _readout_label:
+		# Readout now lives on the plate display (add_readout); only update the text.
 		_readout_label.text = "|v| = %.2f" % mag
-		# Keep the readout hovering above the lantern-tip.
-		_readout_label.position = (v + Vector3(0.0, 0.22, 0.0)) * SCENE_SCALE
 
 
 # ═════════════════════════════════════════════════════════════════════════

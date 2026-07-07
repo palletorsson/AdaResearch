@@ -8,7 +8,7 @@ var normal_component_vector: Node3D
 var plane_mesh: MeshInstance3D
 var projection_drop_line: MeshInstance3D
 var _projection_drop_mesh: ImmediateMesh
-var info_label: Label3D
+var info_label: Label
 var readout_label: Label3D
 var magnitude_slider: Node3D
 

@@ -1,4 +1,5 @@
 # ForcesProjectile.gd
+# verb: gather
 # Warm amber mortar with gentle parabolic arc.
 # On hit: creates a calming field that slows, tames, focuses.
 # Force as care — not destruction but harnessing.

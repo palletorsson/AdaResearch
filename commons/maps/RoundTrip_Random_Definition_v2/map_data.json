@@ -1,0 +1,153 @@
+{
+  "map_info": {
+    "name": "RoundTrip_Random_Definition_v2",
+    "lookup_name": "RoundTrip_Random_Definition_v2",
+    "description": "Generated from prompt — archetype: promenade. See doc/placement_research/prompts/.",
+    "version": "prompt-generated-0.1",
+    "format": "json",
+    "created_from": "tools/generate_from_prompt.py",
+    "dimensions": {
+      "width": 5,
+      "depth": 30,
+      "max_height": 5
+    },
+    "metadata": {
+      "category": "prompt_generated",
+      "archetype": "promenade",
+      "n_artifacts": 12
+    },
+    "title": "RoundTrip_Random_Definition_v2"
+  },
+  "utility_definitions": {
+    "sp": {
+      "name": "Spawn",
+      "description": "Player spawn point",
+      "type": "spawn"
+    },
+    "t": {
+      "name": "Exit Portal",
+      "description": "Step here to leave",
+      "type": "teleporter",
+      "properties": {
+        "action": "next_in_sequence"
+      }
+    }
+  },
+  "documentation": {
+    "summary": "RoundTrip_Random_Definition_v2 — generated from prompt",
+    "layout": "5×30, archetype promenade",
+    "objective": "Walk the prompted layout.",
+    "key_elements": ["Spawn at (0, 0)","Teleporter at (16, 2)","slot_machine at (2, 0)","prng_crank_machine at (2, 4)","entropy_axiom at (5, 2)","science_screen at (8, 4)","entropy_jar at (9, 2)","random_butterflies at (10, 2)","seed_replay_demo at (11, 2)","dark_sphere at (12, 2)","clipboard at (13, 4)","digital_materiality_glitch at (15, 0)","trng_vs_prng at (15, 4)","random_number_book_page_1955 at (19, 2)"]
+  },
+  "lighting": {
+    "ambient_color": [0.3,0.32,0.4],
+    "ambient_energy": 0.9,
+    "directional_light": {
+      "enabled": true,
+      "direction": [-0.3,-1.0,-0.2],
+      "energy": 0.7
+    }
+  },
+  "settings": {
+    "player_spawn_height": 0.5,
+    "floor_tile_size": 1.0
+  },
+  "layers": {
+    "structure": [
+      ["1","1","1","1","1"],
+      ["1","1","1","1","1"],
+      ["1","1","1","1","1"],
+      ["1","1","1","1","1"],
+      ["1","1","1","1","1"],
+      ["1","1","1","1","1"],
+      ["1","1","1","1","1"],
+      ["1","1","1","1","1"],
+      ["1","1","1","1","1"],
+      ["1","1","1","1","1"],
+      ["1","1","1","1","1"],
+      ["1","1","1","1","1"],
+      ["1","1","1","1","1"],
+      ["1","1","1","1","2"],
+      ["2","1","1","1","2"],
+      ["2","1","1","1","2"],
+      ["2","1","2","1","2"],
+      ["2","1","1","1","1"],
+      ["1","1","1","1","1"],
+      ["1","1","1","1","1"],
+      ["0","0","0","0","0"],
+      ["0","0","0","0","0"],
+      ["0","0","0","0","0"],
+      ["0","0","0","0","0"],
+      ["0","0","0","0","0"],
+      ["0","0","0","0","0"],
+      ["0","0","0","0","0"],
+      ["0","0","0","0","0"],
+      ["0","0","0","0","0"],
+      ["0","0","0","0","0"]
+    ],
+    "utilities": [
+      ["sp"," "," "," ","an:-90"],
+      [" "," "," "," "," "],
+      [" "," "," "," "," "],
+      [" "," "," "," "," "],
+      [" "," "," "," "," "],
+      [" "," "," "," "," "],
+      [" "," "," "," "," "],
+      [" "," "," "," "," "],
+      [" "," "," "," "," "],
+      [" "," "," "," "," "],
+      [" "," "," "," "," "],
+      [" "," "," "," "," "],
+      [" "," "," "," "," "],
+      [" "," "," "," "," "],
+      [" "," "," "," "," "],
+      [" "," "," "," "," "],
+      [" "," ","t"," "," "],
+      [" "," "," "," "," "],
+      [" "," "," "," "," "],
+      ["sr:18:19:10"," "," "," "," "],
+      [" "," "," "," "," "],
+      [" "," "," "," "," "],
+      [" "," "," "," "," "],
+      [" "," "," "," "," "],
+      [" "," "," "," "," "],
+      [" "," "," "," "," "],
+      [" "," "," "," "," "],
+      [" "," "," "," "," "],
+      [" "," "," "," "," "],
+      [" "," "," "," "," "]
+    ],
+    "interactables": [
+      [" "," "," "," "," "],
+      [" "," "," "," "," "],
+      ["slot_machine:0:0.0"," "," "," ","prng_crank_machine:0:0.0"],
+      [" "," "," "," "," "],
+      [" "," "," "," "," "],
+      [" "," ","entropy_axiom:0:0.0"," "," "],
+      [" "," "," "," "," "],
+      [" "," "," "," "," "],
+      [" "," "," "," ","science_screen:0:0.0"],
+      [" "," ","entropy_jar:0:0.0"," "," "],
+      [" "," ","random_butterflies:0:0.0"," "," "],
+      [" "," ","seed_replay_demo:0:0.0"," "," "],
+      [" "," ","dark_sphere:0:0.0"," "," "],
+      [" "," "," "," ","clipboard:0:0.0"],
+      [" "," "," "," "," "],
+      ["digital_materiality_glitch:0:0.0"," "," "," ","trng_vs_prng:0:0.0"],
+      [" "," "," "," "," "],
+      [" "," "," "," "," "],
+      [" "," "," "," "," "],
+      [" "," ","random_number_book_page_1955:0:0.0"," "," "],
+      [" "," "," "," "," "],
+      [" "," "," "," "," "],
+      [" "," "," "," "," "],
+      [" "," "," "," "," "],
+      [" "," "," "," "," "],
+      [" "," "," "," "," "],
+      [" "," "," "," "," "],
+      [" "," "," "," "," "],
+      [" "," "," "," "," "],
+      [" "," "," "," "," "]
+    ]
+  }
+}

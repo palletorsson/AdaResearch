@@ -13,11 +13,7 @@
 	  "difficulty": "hub",
 	  "category": "laboratory",
 	  "estimated_time": "exploration based",
-	  "learning_objectives": [
-		"Central hub for all learning sequences",
-		"Progressive artifact discovery",
-        "Interactive lab environment"
-	  ]
+	  "learning_objectives": ["Central hub for all learning sequences","Progressive artifact discovery","Interactive lab environment"]
 	}
   },
   "utility_definitions": {
@@ -31,49 +27,24 @@
 	"Lab_One_Info": " Find First Simulation. "
   },
   "external_references": {
-	"artifact_registries": [
-	  "res://commons/artifacts/lab_artifacts.json",
-	  "res://commons/artifacts/grid_artifacts.json",
-	  "res://commons/artifacts/registry/furniture.json",
-      "res://commons/artifacts/registry/hazards.json"
-	],
+	"artifact_registries": ["res://commons/artifacts/lab_artifacts.json","res://commons/artifacts/grid_artifacts.json","res://commons/artifacts/registry/furniture.json","res://commons/artifacts/registry/hazards.json"],
 	"utility_registry": "res://commons/utilities/utility_registry.json",
 	"fallback_to_gdscript": "res://commons/grid/UtilityRegistry.gd"
   },
   "spawn_points": {
 	"default": {
-	  "position": [
-		0.6,
-		1.8,
-		1.0
-	  ],
-	  "rotation": [
-		0.0,
-		180.0,
-		0.0
-	  ],
+	  "position": [0.6,1.8,1.0],
+	  "rotation": [0.0,180.0,0.0],
 	  "description": "Facing newest wing"
 	}
   },
   "lighting": {
-	"ambient_color": [
-	  0.2,
-	  0.2,
-	  0.3
-	],
+	"ambient_color": [0.2,0.2,0.3],
 	"ambient_energy": 0.2,
 	"directional_light": {
 	  "enabled": true,
-	  "direction": [
-		-0.3,
-		-0.8,
-		-0.2
-	  ],
-	  "color": [
-		1.0,
-		0.9,
-		0.8
-	  ],
+	  "direction": [-0.3,-0.8,-0.2],
+	  "color": [1.0,0.9,0.8],
 	  "energy": 0.6
 	},
 	"lab_atmosphere": {
@@ -91,10 +62,7 @@
 	"progression": {
 	  "enable_artifact_unlocking": true,
 	  "save_progression": true,
-	  "initial_artifacts": [
-		"rotating_cube",
-        "xyz_coordinates"
-	  ],
+	  "initial_artifacts": ["rotating_cube","xyz_coordinates"],
 	  "unlock_on_sequence_completion": true
 	},
 	"ceiling": {
@@ -106,7 +74,8 @@
 	  "offset_z": 0.0,
 	  "light_spacing": 3,
 	  "light_intensity": 1.2,
-	  "pattern": "sparse"
+	  "pattern": "sparse",
+	  "fixtures": "research"
 	}
   },
   "layers": {
@@ -140,13 +109,12 @@
 	  [" ","m:0.1"," "," "," "," "," "," "," "," "],
 	  [" "," "," ",""," "," "," "," ","t:transformation"," "],
 	  [" "," "," "," ","sub:Lab_One_Info"," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "," "," "," "],
-	
+	  [" ","t:color"," ","t:forces"," "," "," "," "," "," "],
 	  [" "," ","t:primitives"," "," "," "," "," "," "," "],
 	  [" "," "," "," "," "," "," "," ","t:color"," "],
 	  [" ","t:postfoundationscrisis"," "," "," "," "," "," "," "," "],
 	  [" "," "," "," "," "," "," "," "," "," "],
-		  [" "," "," "," "," "," "," "," "," "," "],	
+	  [" "," "," "," "," "," "," "," "," "," "],
 	  [" "," "," ","t:catalyst_test"," ","t:hazards",""," "," "," "]
 	],
 	"interactables": [

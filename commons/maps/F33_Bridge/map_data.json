@@ -20,24 +20,12 @@
     }
   },
   "lighting": {
-    "ambient_color": [
-      0.3,
-      0.3,
-      0.4
-    ],
+    "ambient_color": [0.3,0.3,0.4],
     "ambient_energy": 0.5,
     "directional_light": {
       "enabled": true,
-      "direction": [
-        -0.4,
-        -0.7,
-        -0.4
-      ],
-      "color": [
-        1.0,
-        0.9,
-        0.8
-      ],
+      "direction": [-0.4,-0.7,-0.4],
+      "color": [1.0,0.9,0.8],
       "energy": 1.0
     }
   },

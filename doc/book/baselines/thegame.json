@@ -1,0 +1,74 @@
+{
+ "_doctrine": "R-023 APPLIED TO THE GAME ITSELF: if Ada were JUST a game, what would it minimally need? Beats are SYSTEMS, not artifacts; the audit dimension is not walkable-in-a-map but EXISTS / DEPLOYED / WIRED — a beat is met only when the system exists, appears in the world, AND is connected to the loop. Audit with tools/game_baseline.py.",
+ "sequence": "thegame",
+ "_thesis": "The game: the world keeps trying to freeze or dissolve — the two deaths, pure order and pure chaos — and the player, chapter by chapter, learns to hold it (and themselves) at the edge where things live. Every algorithm becomes a way of holding. Nothing is defeated; everything is re-tuned (FOE -> FRIEND). The score is the world's visible aliveness. Completion is forbidden (Melencolia); the game ends by handing you the tools.",
+ "beats": [
+  {
+   "role": "the persistent verb — a tool you carry that changes the world",
+   "system": "becoming_catalyst (the bracelet: place / remove / transform; blocks persist across maps within a session)",
+   "source": "commons/hazards/becoming_catalyst/"
+  },
+  {
+   "role": "stakes — a way to die and return",
+   "system": "DeathEffect autoload + DangerZone hazards (h:fire, h:death, h:electric, h:toxic, h:vacuum)",
+   "source": "commons/managers/DeathEffect.gd"
+  },
+  {
+   "role": "resistance — an antagonist that is re-tuned, not destroyed",
+   "system": "catalyst_foe + catalyst_vent (personality ladder foe -> wary -> neutral -> curious -> FRIEND)",
+   "source": "commons/hazards/catalyst_foe/"
+  },
+  {
+   "role": "visible growth — the world responds to progress",
+   "system": "EcosystemManager + soft_stages.json (density/kingdoms per completed sequence: grey -> flowers -> creatures -> evolution)",
+   "source": "commons/managers/EcosystemManager.gd"
+  },
+  {
+   "role": "the test — a prove-it gate per chapter",
+   "system": "the 'prove it' beats in every chapter baseline + MapProgressionManager (completion, unlocks, save)",
+   "source": "doc/book/baselines/*.json + commons/managers/MapProgressionManager.gd"
+  },
+  {
+   "role": "the unwinnable level — losing IS the point",
+   "system": "provability_sorter in foundationscrisis ('prove it — or fail to, which is the point')",
+   "source": "foundationscrisis baseline"
+  },
+  {
+   "role": "the final test — hold YOUR edge, unassisted",
+   "system": "qfep_reactor sandbox (find the living regime and keep it alive)",
+   "source": "qfeplaboratory baseline / QFEP_Sandbox"
+  },
+  {
+   "role": "the world-verb — zones that freeze or dissolve, and the retune",
+   "system": "MISSING BY DESIGN-DEBT: DangerZone has five flavors of instant harm but NO order-death (crystallizing zone) or chaos-death (dissolving zone), and no retune interaction. This is the thesis-mechanic — the one beat that makes the rest a GAME rather than a museum with hazards.",
+   "source": "(to build: commons/hazards/edge_zones/ — crystallize + dissolve DangerZone types, bracelet-retunable)"
+  },
+  {
+   "role": "return transformed — the hub that changes as you do",
+   "system": "lab progression (lab_map_progression.json, lab_post per spine sequence) + MapProgressionManager unlocks",
+   "source": "commons/hazards/becoming_catalyst/lab_map_progression.json"
+  }
+ ],
+ "voltage": [
+  {
+   "piece": "FOE -> FRIEND",
+   "why": "combat as relation-change: the antagonist is never destroyed, only re-tuned into kinship — a queer combat design no plain game would ship"
+  },
+  {
+   "piece": "the unwinnable boss",
+   "why": "foundationscrisis as the level you cannot beat, on purpose: the tool breaks in your hand and the post-crisis chapters teach you to build with the broken tool"
+  },
+  {
+   "piece": "no scoreboard",
+   "why": "the score is the ecology — the world visibly more alive behind you; 'holding the edge' cannot be pointified, which is exactly why it is the right win condition (sieve Q1)"
+  },
+  {
+   "piece": "death as thrownness again",
+   "why": "you do not respawn as a new hero; you arrive again, mid-scene, the frame-counter already running — Point_One's lesson enforced by the reload"
+  },
+  {
+   "piece": "the ending that hands you tools",
+   "why": "Melencolia forbids completion: the game does not end when the world is fixed but when you no longer need the walls' instructions — the manual was the game all along"
+  }
+ ]
+}

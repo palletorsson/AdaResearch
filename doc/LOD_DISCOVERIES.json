@@ -384,6 +384,48 @@
       "topic": "forces voice-fill",
       "insight": "Forces source voice gap CLOSED after voicing gravity_gun/algo_gun/orbital_challenge_vr; only 2 UI/infra .gd remain. The breath's forces voice-fill lever is exhausted at source level — rotate to another sequence next time.",
       "lod": 3
+    },
+    {
+      "timestamp": "2026-06-29T07:14:14.077762+00:00",
+      "topic": "subtitles",
+      "insight": "primitives in-VR truth-beat layer is the new autonomous lever: map_data subtitles + sub:key trigger (subtitle_trigger.gd, walk-over). 8/10 primitives maps empty; keys dead without a trigger token on a path cell. Point_One+Point_Lines wired.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-07-01T07:12:07.597984+00:00",
+      "topic": "primitives subtitles",
+      "insight": "In-VR truth-beat lever advanced: 3 of 7 zero-subtitle primitives maps (Point_Line_Grid, Point_Triangle_Context, Primitives_Polythedra) now carry one blurb-grounded subtitle on the spawn->centerpiece path. Recipe: load JSON, set utilities[row][col]='sub:<key>' + add subtitles dict, reformat via compact_map_json._ser. 4 maps remain (Point_Animatedcube, Primitives_Ignorance, Primitives_Portals, Primitives_Melencolia).",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-07-02T07:13:08.888123+00:00",
+      "topic": "primitives subtitles",
+      "insight": "10/12 primitives maps now carry in-VR truth-beat sub: triggers (utilities-layer walk-over Area3D resolving subtitles[key]); only Point_One + Primitives_Melencolia remain. Non-canonical maps Point_Line/Point_Triangle skipped by --sequence, compact by direct path.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-07-03T07:12:19.157600+00:00",
+      "topic": "primitives subtitles",
+      "insight": "Primitives subtitle truth-beat sweep complete 10/10; Point_One=origin, Melencolia=finitude were last gaps. Pattern: top-level subtitles:{key:text} + sub:key token in utilities layer at the reflection beat. Pipeline stays flat because HEAD is vr_testing (headset-gated).",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-07-04T07:37:01.179957+00:00",
+      "topic": "garden_voice",
+      "insight": "garden_listener.find_gd matched only by file stem, silently reporting every lookup-name!=file-stem artifact as voiceless; added a registry resolver (name->scene->script) that raised honest project voice coverage 54%->60% (+161). Measure voice with the resolver, not stem-matching.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-07-05T07:15:16.215227+00:00",
+      "topic": "primitives voice",
+      "insight": "garden_listener.find_gd resolves scene->sibling .gd only; artifacts whose registry scene points to a .tscn with an ext_resource script in another dir (or shared/no script) stay invisible to the voice metric. Voiced 4 such tail scripts: rotation.gd, DurerPolyhedron.gd, interactive_line.gd, polyhedron_nets.gd.",
+      "lod": 3
+    },
+    {
+      "timestamp": "2026-07-06T07:09:13.814241+00:00",
+      "topic": "primitives voice",
+      "insight": "garden_listener voice count does not resolve commons/primitives/*/ folder scripts; @identity added to point+4 solids left it at 61% — resolver targets a narrower set than registry scene_path",
+      "lod": 3
     }
   ]
 }

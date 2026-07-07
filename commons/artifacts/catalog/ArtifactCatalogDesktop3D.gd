@@ -76,7 +76,7 @@ func _refresh_catalog():
 	# Auto-load artifact from command line: --artifact=<lookup_name>
 	var args: PackedStringArray = OS.get_cmdline_user_args()
 	for raw_arg in args:
-		var arg: String = String(raw_arg).strip_edges()
+		var arg: String = str(raw_arg).strip_edges()
 		if arg.begins_with("--artifact="):
 			var lookup: String = arg.substr(11).strip_edges()
 			if not lookup.is_empty():

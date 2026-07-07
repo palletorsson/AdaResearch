@@ -1,0 +1,42 @@
+{
+  "map_info": {
+    "name": "MiniScene_adder_board",
+    "lookup_name": "MiniScene_adder_board",
+    "title": "Mini scene: adder board",
+    "description": "A mini scene grown by tools/grow_scene.py — adder_board staged by footprint rule (pad). One concept, one bead; maps are necklaces of these.",
+    "version": "0.1-grow-scene",
+    "format": "json",
+    "created_from": "tools/grow_scene.py",
+    "dimensions": {
+      "width": 3,
+      "depth": 3,
+      "max_height": 3
+    },
+    "metadata": {
+      "category": "bead",
+      "estimated_time": "0 minutes"
+    }
+  },
+  "utility_definitions": {},
+  "settings": {
+    "floor_tile_size": 1.0,
+    "disable_biome": true
+  },
+  "layers": {
+    "structure": [
+      ["1","1","1"],
+      ["1","1","1"],
+      ["1","1","1"]
+    ],
+    "utilities": [
+      [" "," "," "],
+      [" "," "," "],
+      [" "," "," "]
+    ],
+    "interactables": [
+      [" "," "," "],
+      [" ","adder_board:0:0.0"," "],
+      [" "," "," "]
+    ]
+  }
+}

@@ -15,11 +15,7 @@
       "difficulty": "beginner",
       "category": "bricolage",
       "estimated_time": "4-5 minutes",
-      "learning_objectives": [
-        "Bricoleur vs Engineer mindset",
-        "Primitives as potential parts",
-        "Inventory thinking"
-      ]
+      "learning_objectives": ["Bricoleur vs Engineer mindset","Primitives as potential parts","Inventory thinking"]
     }
   },
   "utility_definitions": {
@@ -41,31 +37,15 @@
     "summary": "Bricolage_Inventory - The Workshop",
     "layout": "11Ã—13 workshop space with primitive specimens arranged for examination",
     "objective": "Shift from 'shapes' to 'potential parts'â€”see primitives as inventory for assembly",
-    "key_elements": [
-      "Primitive specimens on pedestals",
-      "clipboard#bricolage_axioms introducing the concept",
-      "Transition from primitives sequence to assembly thinking"
-    ]
+    "key_elements": ["Primitive specimens on pedestals","clipboard#bricolage_axioms introducing the concept","Transition from primitives sequence to assembly thinking"]
   },
   "lighting": {
-    "ambient_color": [
-      0.5,
-      0.45,
-      0.4
-    ],
+    "ambient_color": [0.5,0.45,0.4],
     "ambient_energy": 0.7,
     "directional_light": {
       "enabled": true,
-      "direction": [
-        -0.3,
-        -0.8,
-        -0.3
-      ],
-      "color": [
-        1.0,
-        0.95,
-        0.85
-      ],
+      "direction": [-0.3,-0.8,-0.3],
+      "color": [1.0,0.95,0.85],
       "energy": 1.1
     }
   },
@@ -78,11 +58,7 @@
     "initial_tile_visibility": "visible",
     "background": {
       "type": "sky",
-      "color": [
-        0.25,
-        0.22,
-        0.2
-      ]
+      "color": [0.25,0.22,0.2]
     }
   },
   "layers": {

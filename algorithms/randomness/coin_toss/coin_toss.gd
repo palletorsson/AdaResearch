@@ -19,6 +19,8 @@ extends Node3D
 
 class_name CoinToss
 
+const BakedText = preload("res://commons/utils/baked_text_albedo.gd")
+
 # ── Coin ─────────────────────────────────────────────────────────────────────
 @export var coin_radius: float = 0.025
 @export var coin_thickness: float = 0.003
@@ -43,10 +45,21 @@ var _coin_states: Dictionary = {}  # instance_id → { settled: bool, result: ""
 var _total_flips: int = 0
 var _heads_count: int = 0
 var _tails_count: int = 0
-var _ratio_label: Label3D
-var _result_label: Label3D
-var _stats_label: Label3D
-var _history_label: Label3D
+# ── Display boards (2D-in-3D baked-text, one body — no floating labels) ───────
+# Anchor for the consolidated readout stack; each board owns a vertical band
+# with gaps so nothing overlaps. Boards are rebuilt only when their text
+# changes (cache-string guarded) to avoid per-frame texture churn.
+var _board_anchor: Node3D            # holds title + readout + history boards
+var _readout_holder: Node3D          # the rebuilt stats/ratio block lives here
+var _history_holder: Node3D          # the rebuilt history ribbon lives here
+var _result_holder: Node3D           # the big H/T flash near the landing pad
+var _readout_cache: String = ""
+var _history_cache: String = ""
+var _result_cache: String = ""
+
+const READOUT_COLOR := Color(0.85, 0.88, 0.95)
+const READOUT_ACCENT := Color(1.0, 0.82, 0.3)
+
 var _history: Array[String] = []  # Last N results
 
 const MAX_COINS := 8
@@ -413,90 +426,121 @@ func _read_coin_result(coin: RigidBody3D) -> void:
 # ═════════════════════════════════════════════════════════════════════════════
 
 func _create_labels() -> void:
-	# Title
-	var title := Label3D.new()
-	title.text = "COIN TOSS"
-	title.pixel_size = 0.002
-	title.font_size = 18
-	title.modulate = Color(0.9, 0.9, 0.95)
-	title.position = Vector3(0.17, pedestal_height + 0.25, -0.15)
-	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	add_child(title)
+	# One instrument body on the console face. Boards share a fixed-orientation
+	# anchor and are stacked with clear vertical gaps so no two ever overlap:
+	#   TITLE board   (static, top)
+	#   READOUT board (dynamic multi-line — ratio + counts on ONE plate)
+	#   HISTORY board (dynamic ribbon, below)
+	# The big H/T flash lives on its own board out by the landing pad.
+	_board_anchor = Node3D.new()
+	_board_anchor.name = "ReadoutBoards"
+	_board_anchor.position = Vector3(0.17, pedestal_height + 0.02, -0.15)
+	add_child(_board_anchor)
 
-	var sub := Label3D.new()
-	sub.text = "Bernoulli Trial  p = 0.5"
-	sub.pixel_size = 0.0014
-	sub.font_size = 11
-	sub.modulate = Color(0.6, 0.6, 0.7)
-	sub.position = Vector3(0.17, pedestal_height + 0.22, -0.15)
-	sub.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	add_child(sub)
+	# TITLE + subtitle — one static two-line board.
+	var title_board := BakedText.make_text_block(
+		["COIN TOSS", "Bernoulli Trial   p = 0.5"],
+		Color(0.9, 0.92, 0.97), 0.045, 0.36, 0.014, true)
+	if title_board:
+		# Sub line reads dimmer — tint just the second quad.
+		var kids := title_board.get_children()
+		if kids.size() >= 2 and kids[1] is MeshInstance3D:
+			var m = (kids[1] as MeshInstance3D).material_override
+			if m is StandardMaterial3D:
+				m.albedo_color = Color(0.62, 0.63, 0.72)
+		title_board.position = Vector3(0.0, 0.30, 0.0)
+		_board_anchor.add_child(title_board)
 
-	# Big ratio display
-	_ratio_label = Label3D.new()
-	_ratio_label.name = "RatioLabel"
-	_ratio_label.text = "H/T = ?/?"
-	_ratio_label.pixel_size = 0.003
-	_ratio_label.font_size = 24
-	_ratio_label.modulate = Color(1.0, 0.95, 0.5)
-	_ratio_label.position = Vector3(0.17, pedestal_height + 0.14, -0.15)
-	_ratio_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	add_child(_ratio_label)
+	# READOUT holder (rebuilt on change) — sits mid-band.
+	_readout_holder = Node3D.new()
+	_readout_holder.name = "ReadoutHolder"
+	_readout_holder.position = Vector3(0.0, 0.10, 0.0)
+	_board_anchor.add_child(_readout_holder)
 
-	# Result flash
-	_result_label = Label3D.new()
-	_result_label.name = "ResultLabel"
-	_result_label.text = ""
-	_result_label.pixel_size = 0.006
-	_result_label.font_size = 48
-	_result_label.modulate = Color(1.0, 0.9, 0.3)
-	_result_label.position = Vector3(0.35, 0.5, 0)
-	_result_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	add_child(_result_label)
+	# HISTORY holder (rebuilt on change) — bottom band, clear gap below readout.
+	_history_holder = Node3D.new()
+	_history_holder.name = "HistoryHolder"
+	_history_holder.position = Vector3(0.0, -0.10, 0.0)
+	_board_anchor.add_child(_history_holder)
 
-	# Stats
-	_stats_label = Label3D.new()
-	_stats_label.name = "StatsLabel"
-	_stats_label.text = "Flips: 0\n\nGrab a coin\nand toss it!"
-	_stats_label.pixel_size = 0.0012
-	_stats_label.font_size = 16
-	_stats_label.modulate = Color(0.75, 0.75, 0.8)
-	_stats_label.position = Vector3(0.17, pedestal_height + 0.04, -0.15)
-	_stats_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
-	add_child(_stats_label)
+	# RESULT flash holder — separate board out at the landing pad.
+	_result_holder = Node3D.new()
+	_result_holder.name = "ResultHolder"
+	_result_holder.position = Vector3(0.35, 0.5, 0.0)
+	add_child(_result_holder)
 
-	# History ribbon
-	_history_label = Label3D.new()
-	_history_label.name = "HistoryLabel"
-	_history_label.text = ""
-	_history_label.pixel_size = 0.001
-	_history_label.font_size = 16
-	_history_label.modulate = Color(0.5, 0.5, 0.55)
-	_history_label.position = Vector3(0.17, pedestal_height - 0.02, -0.15)
-	_history_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	add_child(_history_label)
+	# Prime the boards with their idle text.
+	_rebuild_readout()
+	_rebuild_history()
+	_rebuild_result()
 
 
 func _update_display() -> void:
+	_rebuild_readout()
+	_rebuild_history()
+	_rebuild_result()
+
+
+# ── Board rebuilders — each guarded by a cache string so the texture is only
+#    re-baked when its content actually changes (no per-frame churn). ─────────
+
+func _rebuild_readout() -> void:
+	# The stats/count READOUT — all figures consolidated onto ONE multi-line
+	# board so they can never overlap each other.
+	var text: String
 	if _total_flips == 0:
-		return
-
-	var ratio := float(_heads_count) / float(_total_flips)
-
-	_ratio_label.text = "H/T = %d/%d  (%.1f%%)" % [_heads_count, _tails_count, ratio * 100.0]
-
-	var last := _history[_history.size() - 1] if _history.size() > 0 else ""
-	_result_label.text = last
-	if last == "H":
-		_result_label.modulate = color_heads
+		text = "Flips: 0\n\nGrab a coin\nand toss it!"
 	else:
-		_result_label.modulate = color_tails
+		var ratio := float(_heads_count) / float(_total_flips)
+		text = "H / T  =  %d / %d   (%.1f%%)\nHeads: %d\nTails: %d\nRatio: %.4f  (→ 0.5000)" % [
+			_heads_count, _tails_count, ratio * 100.0,
+			_heads_count, _tails_count, ratio
+		]
+	if text == _readout_cache:
+		return
+	_readout_cache = text
+	for c in _readout_holder.get_children():
+		c.queue_free()
+	var lines := text.split("\n")
+	var arr: Array = []
+	for l in lines:
+		arr.append(l)
+	var block := BakedText.make_text_block(arr, READOUT_COLOR, 0.034, 0.36, 0.012, true)
+	if block:
+		_readout_holder.add_child(block)
 
-	_stats_label.text = "Flips: %d\nHeads: %d\nTails: %d\nRatio: %.4f\n(→ 0.5000)" % [
-		_total_flips, _heads_count, _tails_count, ratio
-	]
 
-	_history_label.text = " ".join(_history)
+func _rebuild_history() -> void:
+	# The history ribbon (HHTTHT...) on its own spaced board.
+	var text := " ".join(_history)
+	if text == _history_cache:
+		return
+	_history_cache = text
+	for c in _history_holder.get_children():
+		c.queue_free()
+	if text.strip_edges() == "":
+		return
+	var tag := BakedText.make_tag(text, Color(0.6, 0.62, 0.68), 0.05,
+		Color(0.06, 0.07, 0.09), false, READOUT_ACCENT)
+	if tag:
+		_history_holder.add_child(tag)
+
+
+func _rebuild_result() -> void:
+	# The big single-glyph H/T flash out at the landing pad.
+	var last := _history[_history.size() - 1] if _history.size() > 0 else ""
+	if last == _result_cache:
+		return
+	_result_cache = last
+	for c in _result_holder.get_children():
+		c.queue_free()
+	if last == "":
+		return
+	var col := color_heads if last == "H" else color_tails
+	var flash := BakedText.make_tag(last, col, 0.22, Color(0.05, 0.06, 0.08),
+		true, col)
+	if flash:
+		_result_holder.add_child(flash)
 
 
 # ═════════════════════════════════════════════════════════════════════════════
@@ -547,10 +591,9 @@ func _reset_stats() -> void:
 	_heads_count = 0
 	_tails_count = 0
 	_history.clear()
-	_ratio_label.text = "H/T = ?/?"
-	_result_label.text = ""
-	_stats_label.text = "Flips: 0\n\nGrab a coin\nand toss it!"
-	_history_label.text = ""
+	_rebuild_readout()
+	_rebuild_history()
+	_rebuild_result()
 
 func _exit_tree() -> void:
 	for child in get_children():

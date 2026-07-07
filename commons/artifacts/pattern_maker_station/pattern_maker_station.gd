@@ -20,6 +20,8 @@
 extends Node3D
 class_name PatternMakerStation
 
+const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
+
 var PUSH_BUTTON: PackedScene
 
 # ── Palette ──────────────────────────────────────────────────────────
@@ -85,8 +87,9 @@ var _carpet_mesh: MeshInstance3D
 var _carpet_material: StandardMaterial3D  # CPU fallback
 var _carpet_shader_material: ShaderMaterial  # GPU tiling
 var _domain_texture: ImageTexture  # Small domain texture for GPU shader
-var _group_label: Label3D
-var _size_label: Label3D
+var _group_tag: Node3D
+var _group_tag_pos: Vector3
+var _group_cache := ""
 var _palette_indicators: Array[MeshInstance3D] = []
 var _edit_grid_container: Node3D
 var _touch_area: Area3D
@@ -226,14 +229,16 @@ func _build_edit_grid() -> void:
 	# Frame
 	_build_grid_frame(start_x, start_y, grid_total)
 
-	# Title label
-	var title := Label3D.new()
-	title.text = "PATTERN MAKER"
-	title.pixel_size = 0.0008
-	title.font_size = 14
-	title.modulate = Color(0.12, 0.12, 0.12)  # Dark on cream
-	title.position = Vector3(0, panel_height - 0.03, 0.01)
-	_panel_root.add_child(title)
+	# Title board — framed 2D-in-3D header panel (R-027), not a bare Label3D
+	var header := Node3D.new()
+	header.name = "TitleBoard"
+	header.position = Vector3(0, panel_height - 0.03, 0.012)
+	_panel_root.add_child(header)
+	header.add_child(_plate(Vector3(0.34, 0.05, 0.02)))
+	var title: MeshInstance3D = BakedText.make_label_mesh("PATTERN MAKER", Color(0.92, 0.90, 0.85), Vector2(0.30, 0.028), 1400, true)
+	if title:
+		title.position = Vector3(0, 0, 0.012)
+		header.add_child(title)
 
 func _build_grid_lines(start_x: float, start_y: float, total: float) -> void:
 	var line_mat := StandardMaterial3D.new()
@@ -284,14 +289,11 @@ func _build_palette() -> void:
 	var start_x: float = -panel_width * 0.5 + 0.08
 	var spacing: float = 0.065
 
-	# Palette label
-	var lbl := Label3D.new()
-	lbl.text = "COLOR"
-	lbl.pixel_size = 0.0006
-	lbl.font_size = 8
-	lbl.modulate = Color(0.4, 0.38, 0.35)  # Warm gray on cream
-	lbl.position = Vector3(start_x - 0.02, base_y + 0.04, 0.01)
-	_panel_root.add_child(lbl)
+	# Palette label — framed tag (R-027)
+	var lbl: Node3D = BakedText.make_tag("COLOR", Color(0.85, 0.83, 0.80), 0.02)
+	if lbl:
+		lbl.position = Vector3(start_x - 0.02, base_y + 0.04, 0.01)
+		_panel_root.add_child(lbl)
 
 	_palette_indicators.clear()
 	for i in PALETTE.size():
@@ -337,21 +339,14 @@ func _build_controls() -> void:
 	_panel_root.add_child(group_btn)
 	_connect_btn(group_btn, _cycle_group)
 
-	_group_label = Label3D.new()
-	_group_label.text = WallpaperGroups.get_group_name(_current_group).to_upper()
-	_group_label.pixel_size = 0.0008
-	_group_label.font_size = 12
-	_group_label.modulate = COL_COPPER  # Copper accent text
-	_group_label.position = Vector3(base_x, base_y - 0.04, 0.01)
-	_panel_root.add_child(_group_label)
+	# Group readout — framed tag rebuilt only when the text changes (R-027)
+	_group_tag_pos = Vector3(base_x, base_y - 0.04, 0.012)
+	_set_group_tag(WallpaperGroups.get_group_name(_current_group).to_upper())
 
-	var group_lbl := Label3D.new()
-	group_lbl.text = "GROUP"
-	group_lbl.pixel_size = 0.0005
-	group_lbl.font_size = 7
-	group_lbl.modulate = Color(0.4, 0.38, 0.35)
-	group_lbl.position = Vector3(base_x, base_y + 0.035, 0.01)
-	_panel_root.add_child(group_lbl)
+	var group_lbl: Node3D = BakedText.make_tag("GROUP", Color(0.85, 0.83, 0.80), 0.018)
+	if group_lbl:
+		group_lbl.position = Vector3(base_x, base_y + 0.035, 0.01)
+		_panel_root.add_child(group_lbl)
 
 	# ── Mirror X ──
 	var mx_btn := PUSH_BUTTON.instantiate()
@@ -494,7 +489,7 @@ func _select_color(idx: int) -> void:
 func _cycle_group() -> void:
 	_group_index = (_group_index + 1) % GROUP_ORDER.size()
 	_current_group = GROUP_ORDER[_group_index]
-	_group_label.text = WallpaperGroups.get_group_name(_current_group).to_upper()
+	_set_group_tag(WallpaperGroups.get_group_name(_current_group).to_upper())
 	_update_carpet()
 	print("[PatternMaker] Group → %s" % WallpaperGroups.get_group_name(_current_group))
 
@@ -635,10 +630,45 @@ func _connect_btn(btn: Node, callback: Callable) -> void:
 		area.button_pressed.connect(func(_b): callback.call())
 
 func _add_btn_label(btn: Node, text: String) -> void:
-	var lbl := Label3D.new()
-	lbl.text = text
-	lbl.pixel_size = 0.0006
-	lbl.font_size = 7
-	lbl.modulate = Color(0.6, 0.6, 0.6)
-	lbl.position = Vector3(0, -0.03, 0)
-	btn.add_child(lbl)
+	var lbl: Node3D = BakedText.make_tag(text, Color(0.75, 0.75, 0.75), 0.016)
+	if lbl:
+		lbl.position = Vector3(0, -0.035, 0)
+		btn.add_child(lbl)
+
+func _set_group_tag(text: String) -> void:
+	# Rebuild the group readout only when the string changes — never per press of
+	# the same value, never per frame (R-027)
+	if text == _group_cache:
+		return
+	_group_cache = text
+	if is_instance_valid(_group_tag):
+		_group_tag.queue_free()
+	_group_tag = BakedText.make_tag(text, COL_COPPER, 0.028)
+	if _group_tag:
+		_group_tag.position = _group_tag_pos
+		_panel_root.add_child(_group_tag)
+
+func _plate(size: Vector3) -> Node3D:
+	var g := Node3D.new()
+	var frame := MeshInstance3D.new()
+	var fm := BoxMesh.new()
+	fm.size = size + Vector3(0.05, 0.05, -0.01)
+	frame.mesh = fm
+	var fmat := StandardMaterial3D.new()
+	fmat.albedo_color = Color(0.62, 0.60, 0.56)
+	fmat.roughness = 0.7
+	frame.material_override = fmat
+	frame.position = Vector3(0, 0, -0.006)
+	g.add_child(frame)
+	var face := MeshInstance3D.new()
+	var bm := BoxMesh.new()
+	bm.size = size
+	face.mesh = bm
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color(0.10, 0.11, 0.14)
+	mat.emission_enabled = true
+	mat.emission = Color(0.10, 0.11, 0.14)
+	mat.emission_energy_multiplier = 0.25
+	face.material_override = mat
+	g.add_child(face)
+	return g

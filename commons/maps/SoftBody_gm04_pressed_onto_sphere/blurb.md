@@ -1,0 +1,5 @@
+Every other mould in the gallery is a cavity. gm04 inverts the relationship. There is no enclosing wall here — instead, a solid sphere sits in the world, and a sheet-like soft body falls onto it from above. Gravity pulls the body down. The solid sphere is in the way. The body cannot pass through. It drapes over.
+
+Where the body lands on the top of the sphere, vertices flatten against the curve. Where the body hangs off the edge, vertices fall away and pool below. The final shape is not a vessel sitting in a cavity but a vessel wrapping a form — fabric over a sculpture, pottery slumped onto a wooden mandrel, a sheet of glass laid over a stone and pulled down by its own weight.
+
+gm01 through gm03 ask: what shape does the cavity allow the body to be? gm04 asks the opposite: what shape does the obstacle force the body to take? Both questions land in the same family of answers, because in both cases the body is computing equilibrium against a geometry it did not author. The agency lies elsewhere — in the cavity, or in the obstruction — and the body is what records the encounter.

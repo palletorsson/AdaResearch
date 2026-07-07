@@ -1,14 +1,14 @@
-[gd_scene load_steps=14 format=3 uid="uid://dqus3el56gbp5"]
+[gd_scene format=3 uid="uid://dqus3el56gbp5"]
 
 [ext_resource type="Script" uid="uid://lqeedqhm41pc" path="res://commons/scenes/LabGridSystem.gd" id="1_labgrid"]
 [ext_resource type="PackedScene" uid="uid://bw7x4mrg1j8no" path="res://commons/grid/grid_system.tscn" id="2_grid"]
 [ext_resource type="Script" uid="uid://b7qlq12bbaryn" path="res://commons/scenes/DesktopLabManager.gd" id="2_labmanager"]
-[ext_resource type="PackedScene" path="res://commons/scenes/desktop_player.tscn" id="3_player"]
+[ext_resource type="PackedScene" uid="uid://b33u6sl8s1ook" path="res://commons/scenes/desktop_player.tscn" id="3_player"]
 [ext_resource type="Shader" uid="uid://sxbwaskjqxca" path="res://commons/resourses/shaders/sky.gdshader" id="4_sky"]
-[ext_resource type="Script" path="res://commons/maps/catalog/DesktopMapSwitcherOverlay.gd" id="5_overlay"]
-[ext_resource type="Script" path="res://commons/maps/catalog/MapLayerEditorOverlay.gd" id="6_layer_editor"]
-[ext_resource type="Script" path="res://commons/maps/catalog/ProjectDashboardOverlay.gd" id="7_dashboard"]
-[ext_resource type="Script" path="res://commons/maps/catalog/LabEvolutionEditor.gd" id="8_lab_evolution"]
+[ext_resource type="Script" uid="uid://ccnvftjwyddwq" path="res://commons/maps/catalog/DesktopMapSwitcherOverlay.gd" id="5_overlay"]
+[ext_resource type="Script" uid="uid://3fvf1c2sfs8g" path="res://commons/maps/catalog/MapLayerEditorOverlay.gd" id="6_layer_editor"]
+[ext_resource type="Script" uid="uid://bxaoja1oejlkh" path="res://commons/maps/catalog/ProjectDashboardOverlay.gd" id="7_dashboard"]
+[ext_resource type="Script" uid="uid://du6pe4s2nfxnp" path="res://commons/maps/catalog/LabEvolutionEditor.gd" id="8_lab_evolution"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1"]
 shader = ExtResource("4_sky")
@@ -71,37 +71,37 @@ adjustment_saturation = 1.01
 [sub_resource type="BoxShape3D" id="BoxShape3D_floor"]
 size = Vector3(50, 0.1, 50)
 
-[node name="LabDesktop" type="Node3D"]
+[node name="LabDesktop" type="Node3D" unique_id=1490113398]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2126140843]
 environment = SubResource("Environment_1")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=291104221]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 10, 0)
 shadow_enabled = true
 
-[node name="DesktopPlayer" parent="." instance=ExtResource("3_player")]
+[node name="DesktopPlayer" parent="." unique_id=665428583 instance=ExtResource("3_player")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.2, 1)
 use_gravity = false
 allow_jump = false
 
-[node name="LabGridSystem" parent="." instance=ExtResource("2_grid")]
+[node name="LabGridSystem" parent="." unique_id=1365249091 instance=ExtResource("2_grid")]
 script = ExtResource("1_labgrid")
 lab_mode = true
 lab_cube_color = Color(0.95, 0.95, 0.98, 1)
 lab_ambient_color = Color(0.9, 0.9, 1, 1)
 map_name = "Lab"
 
-[node name="DesktopLabManager" type="Node3D" parent="."]
+[node name="DesktopLabManager" type="Node3D" parent="." unique_id=994469634]
 script = ExtResource("2_labmanager")
 
-[node name="Floor" type="StaticBody3D" parent="."]
+[node name="Floor" type="StaticBody3D" parent="." unique_id=1100140756]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=1464760140]
 shape = SubResource("BoxShape3D_floor")
 
-[node name="Label3D" type="Label3D" parent="."]
+[node name="Label3D" type="Label3D" parent="." unique_id=1283673363]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -2)
 text = "LAB - Desktop Mode
 Left Click / Enter: Interact with teleporters/artifacts
@@ -112,14 +112,14 @@ ESC: Toggle mouse"
 font_size = 24
 outline_size = 8
 
-[node name="DesktopMapSwitcherOverlay" type="CanvasLayer" parent="."]
+[node name="DesktopMapSwitcherOverlay" type="CanvasLayer" parent="." unique_id=1628670632]
 script = ExtResource("5_overlay")
 
-[node name="MapLayerEditorOverlay" type="CanvasLayer" parent="."]
+[node name="MapLayerEditorOverlay" type="CanvasLayer" parent="." unique_id=184120974]
 script = ExtResource("6_layer_editor")
 
-[node name="ProjectDashboardOverlay" type="CanvasLayer" parent="."]
+[node name="ProjectDashboardOverlay" type="CanvasLayer" parent="." unique_id=1977568942]
 script = ExtResource("7_dashboard")
 
-[node name="LabEvolutionEditor" type="CanvasLayer" parent="."]
+[node name="LabEvolutionEditor" type="CanvasLayer" parent="." unique_id=618019368]
 script = ExtResource("8_lab_evolution")
