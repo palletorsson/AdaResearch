@@ -120,14 +120,17 @@ func _build_edge(col: int, row: int, edge: String, is_door: bool,
 		return
 
 	_door_count += 1
-	# doorway: two jambs + a lintel above the opening
-	var jamb_len: float = maxf(0.05, (seg_len - door_width) * 0.5)
-	var jamb_off: float = (door_width + jamb_len) * 0.5
-	var side := Vector3(jamb_off, 0, 0) if along_x else Vector3(0, 0, jamb_off)
-	_wall_box(mid + side, base_y, jamb_len, wall_height, along_x)
-	_wall_box(mid - side, base_y, jamb_len, wall_height, along_x)
+	# doorway: lintel above the opening; jambs only when the opening is
+	# narrower than the edge (door_width >= edge -> full clear opening)
+	var opening: float = minf(door_width, seg_len)
+	var jamb_len: float = (seg_len - opening) * 0.5
+	if jamb_len > 0.08:
+		var jamb_off: float = (opening + jamb_len) * 0.5
+		var side := Vector3(jamb_off, 0, 0) if along_x else Vector3(0, 0, jamb_off)
+		_wall_box(mid + side, base_y, jamb_len, wall_height, along_x)
+		_wall_box(mid - side, base_y, jamb_len, wall_height, along_x)
 	var lintel_h: float = maxf(0.05, wall_height - door_height)
-	_wall_box(mid, base_y + door_height, door_width, lintel_h, along_x)
+	_wall_box(mid, base_y + door_height, seg_len, lintel_h, along_x)
 
 func _wall_box(mid: Vector3, base_y: float, length: float, height: float, along_x: bool) -> void:
 	var size := Vector3(length, height, wall_thickness) if along_x \

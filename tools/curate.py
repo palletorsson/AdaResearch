@@ -78,14 +78,16 @@ def main():
         c0 = 1 + i * room_w
         c1 = c0 + room_w - 1
         # perimeter of each room (shared edges dedupe in the component)
+        cx_room = c0 + room_w // 2
         for c in range(c0, c1 + 1):
-            add_wall(1, c, "n")
+            # north entries near each room's center (double) — testers arrive from 0,0
+            add_wall(1, c, "N" if c in (cx_room, cx_room + 1) else "n")
             add_wall(D - 2, c, "s")
+        door_rows = (axis_r, axis_r + 1)   # double doors — VR-wide openings
         for r in range(1, D - 1):
-            # west edge: the enfilade door on the axis (except room 0 = entrance wall w/ door too)
-            add_wall(r, c0, "W" if r == axis_r else "w")
+            add_wall(r, c0, "W" if r in door_rows else "w")
             if i == n - 1:
-                add_wall(r, c1, "E" if r == axis_r else "e")
+                add_wall(r, c1, "E" if r in door_rows else "e")
 
     # spawn before room 0's door; teleporter past the last room's door
     utilities[axis_r][0] = "s"
@@ -145,7 +147,7 @@ def main():
             "cube_size": 1.0, "gutter": 0.02, "show_grid": True, "enable_physics": True,
             "auto_reveal_on_entry": False, "initial_tile_visibility": "all",
             "background": "dark",
-            "wall_segments": {"height": 3.6, "thickness": 0.18, "color": [0.82, 0.79, 0.72]},
+            "wall_segments": {"height": 3.6, "thickness": 0.18, "door_width": 2.6, "color": [0.82, 0.79, 0.72]},
         },
         "lighting": {
             "ambient_color": [0.32, 0.31, 0.34], "ambient_energy": 0.35,
