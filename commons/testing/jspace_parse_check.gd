@@ -13,6 +13,9 @@ func _initialize() -> void:
 		"res://commons/artifacts/jspace/jspace_count_plates.tscn",
 		"res://commons/artifacts/jspace/jspace_ring.tscn",
 		"res://commons/artifacts/museum/museum_hall_shell.tscn",
+		"res://commons/artifacts/curator/mode_crown.tscn",
+		"res://commons/artifacts/curator/mode_dialogue.tscn",
+		"res://commons/artifacts/curator/mode_witness_wall.tscn",
 	]:
 		var scene = load(path)
 		if scene == null:

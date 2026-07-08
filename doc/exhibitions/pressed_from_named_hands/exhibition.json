@@ -1,0 +1,57 @@
+{
+ "schema": "exhibition/v1",
+ "id": "pressed_from_named_hands",
+ "brief": "The visitor leaves knowing that every pattern in this game was pressed from named hands.",
+ "argument_form": "enfilade",
+ "curator": "Palle + Claude",
+ "date": "2026-07-08",
+ "sieve": {
+  "thickens": "gives the ledger a body; credit becomes a place you stand, not a table you query",
+  "forecloses": "reads the patterns as debts first, delights second - the joy register is parked at the door",
+  "dark_spot": "the sources the ledger has not yet heard of; the wall shows 80 names and cannot show the unnamed"
+ },
+ "rooms": [
+  {
+   "id": "origin",
+   "role": "anchor",
+   "mode": "mode_crown",
+   "mode_config": {"span": 7.0, "height": 4.4},
+   "artifacts": [{"token": "mamma_monster_gallery", "slot": "under_crown"}],
+   "reason": "The origin source. The book begins in a landscape of Kristina Torsson's patterns; the census, the atlas and the ledger all descend from this room's plates. Ledger: kristina_torsson = THE ORIGIN SOURCE.",
+   "excluded": [
+    {"token": "pattern_atlas_gallery", "why": "the world's traditions belong in the dialogue and on the wall, not in the crown - the crown is for where THIS game began"},
+    {"token": "incompleteness_scale", "why": "already crowned in Museum_Spine_Court; an anchor reused is an anchor dulled"}
+   ],
+   "ruling": "pending"
+  },
+  {
+   "id": "same_desire",
+   "role": "tension",
+   "mode": "mode_dialogue",
+   "mode_config": {"gap": 8.0, "tension": "the_same_desire:_the_cloth_computes,_the_sentence_weaves"},
+   "artifacts": [
+    {"token": "godel_statement_plaque", "slot": "west_plinth"},
+    {"token": "panel_bridge_loom", "slot": "east_plinth"}
+   ],
+   "reason": "The Assemblage claim staged as a held axis: Godel's self-referential sentence faces the loom (an array with rules). Same reach past what a mind can hold - one in logic, one in cloth. From heroes/assemblage tension.",
+   "excluded": [
+    {"token": "ten_print_textile", "why": "a bridge, not a pole - it resolves the tension the room must hold open"}
+   ],
+   "ruling": "pending"
+  },
+  {
+   "id": "the_return",
+   "role": "debt",
+   "mode": "mode_witness_wall",
+   "mode_config": {},
+   "artifacts": [],
+   "reason": "The fourth question answered in architecture: whose knowledge is this pressed from, and does the walk return it. The wall reads commons_sources.json live - 80 traditions, name and era, hush-lit, with a bench. It grows when the ledger grows.",
+   "excluded": [
+    {"token": "clipboard", "why": "no interpretive furniture in this room; the names carry it"}
+   ],
+   "ruling": "pending"
+  }
+ ],
+ "route": {"enter": "south of origin", "exit": "past the wall, east"},
+ "notes": "First exhibition through the Curator pipeline. Compile: python tools/curate.py pressed_from_named_hands"
+}

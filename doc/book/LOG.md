@@ -535,3 +535,40 @@ strategy in place.py; GridMap MeshLibrary renderer for stairs/mezzanines
 (the ascent problem — pathfinder walks down, not up); real floor-plan
 mining (our 246 maps' placement stats, then Louvre/Met plans as grammar
 sources).
+
+## 2026-07-08 — the Curator: first exhibition compiled (rulings pending)
+
+The tool designed and its first slice built end-to-end. Pipeline: BRIEF ->
+GATHER -> ARGUE -> STAGE -> DRAFT -> RULE -> INSCRIBE, with a 15-mode
+display grammar read from museum typologies (crown, total room, reliquary,
+house-in-house, witness wall, inscribed wall, section, immersion field,
+route wall, dialogue, specimen house, enfilade, precarious, archive rack,
+treasury wall). Deep curation = an argument with a decision record; the
+tool makes decisions visible, exclusions named, re-deals cheap. The ruling
+stays human.
+
+Built:
+- exhibition/v1 schema (doc/exhibitions/<id>/exhibition.json): brief,
+  argument_form, sieve pass, rooms[] each with role, mode+config,
+  artifacts+slots, REASON (measured), EXCLUDED (named + why), RULING.
+- Three mode-kits (commons/artifacts/curator/ + registry curator.json):
+  mode_crown (GEM canopy: inverted lit pyramid + dais + downlight),
+  mode_dialogue (facing plinths, cross-lights, tension sentence baked at
+  the midpoint), mode_witness_wall (READS commons_sources.json LIVE and
+  bakes all 80 traditions into hush-lit columns; grows with the ledger).
+  All three pass the compile probe (get_script != null).
+- tools/curate.py: exhibition.json -> Exhibition_<Id> map (enfilade of
+  walls-layer rooms + mode kits + artifacts at slots + shell), decision
+  record referenced in map_info.exhibition. Prints pending-ruling count.
+- First exhibition: pressed_from_named_hands ("the visitor leaves knowing
+  every pattern in this game was pressed from named hands"): CROWN =
+  mamma_monster_gallery (the origin), DIALOGUE = godel_statement_plaque vs
+  panel_bridge_loom ("the cloth computes, the sentence weaves"), WITNESS
+  WALL = the ledger's 80 sources. Exhibition_PressedFromNamedHands:
+  616/616 reachable, captured. 3/3 rulings PENDING — the draft awaits
+  Palle: edit the ruling fields in exhibition.json, re-run curate.py.
+
+NEXT: /curator ruling page in the encyclopedia (plan + stills + evidence
+per room, approve/swap buttons writing back to exhibition.json); eye-level
+interior capture; more modes (reliquary, archive rack, total room);
+argument forms beyond enfilade (court, wings, dialogue-loop).
