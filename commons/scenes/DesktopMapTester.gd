@@ -19,6 +19,12 @@ var current_map_index: int = 0
 func _ready() -> void:
 	print("DesktopMapTester: Initializing...")
 
+	# CLI override: --map=<Name> (after "--" in the launch args)
+	for a in OS.get_cmdline_user_args():
+		if a.begins_with("--map="):
+			start_map = a.substr(6)
+			print("DesktopMapTester: cmdline map -> '%s'" % start_map)
+
 	# MapToolEditor "Show in desktop" handoff: a one-shot start map in user://current_map.txt.
 	if FileAccess.file_exists("user://current_map.txt"):
 		var handoff := FileAccess.get_file_as_string("user://current_map.txt").strip_edges()
