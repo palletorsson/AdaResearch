@@ -1,0 +1,348 @@
+{
+ "generated_by": "scratchpad/subtopic_census.py",
+ "sequence": "softbodies",
+ "ground_truth_maps": 34,
+ "unique_placed_artifacts": 21,
+ "carded": 21,
+ "cardless": [],
+ "chosen_k": 7,
+ "silhouette": 0.281,
+ "ari_vs_maps": 0.102,
+ "clusters": [
+  {
+   "cluster": 0,
+   "size": 8,
+   "maps": {
+    "SoftBodies_Carusell": 3,
+    "SoftBodies_Obsticals": 2,
+    "SoftBodies_Soft_Body_Deformation": 1,
+    "SoftBodies_Playground_of_Joy": 1,
+    "SoftBodies_Obsticals_Part2": 1
+   },
+   "top_terms": [
+    "soft",
+    "bodies",
+    "body",
+    "with",
+    "cube",
+    "softbody",
+    "test",
+    "gallery"
+   ],
+   "members": [
+    "breathing_room",
+    "cloth_straps",
+    "flagdancer",
+    "jelly_cube",
+    "revolving_joy_ride",
+    "rounded_softbody_test",
+    "soft_mushroom",
+    "softbody_gallery_part2"
+   ]
+  },
+  {
+   "cluster": 4,
+   "size": 4,
+   "maps": {
+    "SoftBodies_Carusell": 2,
+    "Chamber_SoftBodies": 1,
+    "SoftBodies_Soft_Body_Deformation": 1
+   },
+   "top_terms": [
+    "grab",
+    "that",
+    "cube",
+    "stick",
+    "into",
+    "primitives",
+    "commons",
+    "artifacts"
+   ],
+   "members": [
+    "catalyst_target",
+    "grab_long_stick",
+    "pick_up_cube",
+    "science_screen"
+   ]
+  },
+  {
+   "cluster": 1,
+   "size": 2,
+   "maps": {
+    "SoftBodies_Playground_of_Joy": 1,
+    "SoftBodies_Affect_Theory_Visualization": 1
+   },
+   "top_terms": [
+    "generation",
+    "procedural",
+    "growth",
+    "interactive",
+    "branching",
+    "procgen",
+    "extra",
+    "visualization"
+   ],
+   "members": [
+    "branching_growth_algorithm",
+    "radiolaria"
+   ]
+  },
+  {
+   "cluster": 2,
+   "size": 2,
+   "maps": {
+    "SoftBodies_Playground_of_Joy": 1,
+    "Chamber_SoftBodies": 1
+   },
+   "top_terms": [
+    "hazards",
+    "grid",
+    "from",
+    "with",
+    "player",
+    "creature",
+    "radius",
+    "legs"
+   ],
+   "members": [
+    "gridagent",
+    "proximity_spawner"
+   ]
+  },
+  {
+   "cluster": 3,
+   "size": 2,
+   "maps": {
+    "ProceduralGeneration_Reaction_Diffusion_Systems": 2
+   },
+   "top_terms": [
+    "diffusion",
+    "reaction",
+    "turing",
+    "spots",
+    "patterns",
+    "stripes",
+    "pattern",
+    "gray"
+   ],
+   "members": [
+    "reaction_diffusion",
+    "turing_pattern_generator"
+   ]
+  },
+  {
+   "cluster": 5,
+   "size": 2,
+   "maps": {
+    "SoftBodies_Soft_Body_Deformation": 1,
+    "SoftBodies_Cloth_Physics": 1
+   },
+   "top_terms": [
+    "simulation",
+    "physics",
+    "soft",
+    "body",
+    "demonstration",
+    "example",
+    "bodies",
+    "exercise"
+   ],
+   "members": [
+    "softmill",
+    "softstopscene"
+   ]
+  },
+  {
+   "cluster": 6,
+   "size": 1,
+   "maps": {
+    "Topology_Entropy_Morphogenesis": 1
+   },
+   "top_terms": [
+    "entropy",
+    "geometries",
+    "alternative",
+    "shannon",
+    "disorder",
+    "meter",
+    "bits",
+    "log"
+   ],
+   "members": [
+    "entropy_morphogenesis"
+   ]
+  }
+ ],
+ "map_scatter": [
+  {
+   "map": "SoftBodies_Soft_Body_Deformation",
+   "artifacts": 3,
+   "clusters": 3
+  },
+  {
+   "map": "SoftBodies_Carusell",
+   "artifacts": 5,
+   "clusters": 2
+  },
+  {
+   "map": "SoftBodies_Obsticals",
+   "artifacts": 2,
+   "clusters": 1
+  },
+  {
+   "map": "SoftBodies_Obsticals_Part2",
+   "artifacts": 1,
+   "clusters": 1
+  },
+  {
+   "map": "SoftBodies_Cloth_Physics",
+   "artifacts": 1,
+   "clusters": 1
+  },
+  {
+   "map": "SoftBodies_Playground_of_Joy",
+   "artifacts": 3,
+   "clusters": 3
+  },
+  {
+   "map": "SoftBodies_Affect_Theory_Visualization",
+   "artifacts": 1,
+   "clusters": 1
+  },
+  {
+   "map": "ProceduralGeneration_Reaction_Diffusion_Systems",
+   "artifacts": 2,
+   "clusters": 1
+  },
+  {
+   "map": "Topology_Entropy_Morphogenesis",
+   "artifacts": 1,
+   "clusters": 1
+  },
+  {
+   "map": "Chamber_SoftBodies",
+   "artifacts": 2,
+   "clusters": 2
+  },
+  {
+   "map": "SoftBody_sb01_cloth_drape_corners",
+   "artifacts": 0,
+   "clusters": 0
+  },
+  {
+   "map": "SoftBody_sb02_cloth_drape_top_row",
+   "artifacts": 0,
+   "clusters": 0
+  },
+  {
+   "map": "SoftBody_sb03_cloth_flag_sideways",
+   "artifacts": 0,
+   "clusters": 0
+  },
+  {
+   "map": "SoftBody_sb04_cloth_tablecloth",
+   "artifacts": 0,
+   "clusters": 0
+  },
+  {
+   "map": "SoftBody_sb05_jelly_box_bounce",
+   "artifacts": 0,
+   "clusters": 0
+  },
+  {
+   "map": "SoftBody_sb06_jelly_grid_settle",
+   "artifacts": 0,
+   "clusters": 0
+  },
+  {
+   "map": "SoftBody_sb07_jelly_grid_tall_stiff",
+   "artifacts": 0,
+   "clusters": 0
+  },
+  {
+   "map": "SoftBody_sb08_jelly_grid_floppy",
+   "artifacts": 0,
+   "clusters": 0
+  },
+  {
+   "map": "SoftBody_sb_ls01_plant_skeleton",
+   "artifacts": 0,
+   "clusters": 0
+  },
+  {
+   "map": "SoftBody_sb_ls02_plant_wind_collapse",
+   "artifacts": 0,
+   "clusters": 0
+  },
+  {
+   "map": "SoftBody_sb_ca01_conway_cloth",
+   "artifacts": 0,
+   "clusters": 0
+  },
+  {
+   "map": "SoftBody_sb_ca02_life_without_death_cloth",
+   "artifacts": 0,
+   "clusters": 0
+  },
+  {
+   "map": "SoftBody_sb_noise01_jelly_crystal",
+   "artifacts": 0,
+   "clusters": 0
+  },
+  {
+   "map": "SoftBody_sb_rd01_coral_cloth",
+   "artifacts": 0,
+   "clusters": 0
+  },
+  {
+   "map": "SoftBody_sb_rd02_stripes_flag",
+   "artifacts": 0,
+   "clusters": 0
+  },
+  {
+   "map": "SoftBody_gl01_classic_bulb",
+   "artifacts": 0,
+   "clusters": 0
+  },
+  {
+   "map": "SoftBody_gl02_long_bottle",
+   "artifacts": 0,
+   "clusters": 0
+  },
+  {
+   "map": "SoftBody_gl03_wide_bowl",
+   "artifacts": 0,
+   "clusters": 0
+  },
+  {
+   "map": "SoftBody_gl04_lopsided_vase",
+   "artifacts": 0,
+   "clusters": 0
+  },
+  {
+   "map": "SoftBody_gl05_collapsed_sag",
+   "artifacts": 0,
+   "clusters": 0
+  },
+  {
+   "map": "SoftBody_gm01_bottle_in_cylinder_mould",
+   "artifacts": 0,
+   "clusters": 0
+  },
+  {
+   "map": "SoftBody_gm02_vase_in_tapered_mould",
+   "artifacts": 0,
+   "clusters": 0
+  },
+  {
+   "map": "SoftBody_gm03_box_in_cube_mould",
+   "artifacts": 0,
+   "clusters": 0
+  },
+  {
+   "map": "SoftBody_gm04_pressed_onto_sphere",
+   "artifacts": 0,
+   "clusters": 0
+  }
+ ]
+}

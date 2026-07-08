@@ -1,0 +1,40 @@
+{
+ "artifacts": {
+  "jspace_zoom_chamber": {
+   "lookup_name": "jspace_zoom_chamber",
+   "scene": "res://commons/artifacts/jspace/jspace_zoom_chamber.tscn",
+   "class_name": "JSpaceZoomChamber",
+   "name": "J-Space Zoom Chamber (the hidden layer, walkable)",
+   "category": "jspace",
+   "complexity": "advanced",
+   "description": "Seventeen feature-words from the count-to-five interpretability image, each a pillar standing at its REAL coordinate in the book's own LSA space (MDS of cosine distances; Kruskal stress-1 posted on the center plaque). Walking distance is semantic distance, up to the reported stress. Activation = pillar height and glow, from real document frequency. Introspective pillars (thoughts, claude, human, fascinating) light only under gaze — the observer effect as floor. OOV words (consciousness, mississippi, chat, countdown, okay) stand dark on the rim: the book has never said them, so it cannot place them. After Anthropic's feature-activation visualizations."
+  },
+  "jspace_feature_field": {
+   "lookup_name": "jspace_feature_field",
+   "scene": "res://commons/artifacts/jspace/jspace_feature_field.tscn",
+   "class_name": "JSpaceFeatureField",
+   "name": "J-Space Feature Field (sparse, breathing)",
+   "category": "jspace",
+   "complexity": "intermediate",
+   "description": "The raw activation field before the zoom: a seeded sparse grid where most tiles stay dark (sparsity as the honest majority), some glow blue, dense cells stack as height (superposition), and tiles brighten near the walker — attention as proximity."
+  },
+  "jspace_count_plates": {
+   "lookup_name": "jspace_count_plates",
+   "scene": "res://commons/artifacts/jspace/jspace_count_plates.tscn",
+   "class_name": "JSpaceCountPlates",
+   "name": "J-Space Count Plates (the output, walked)",
+   "category": "jspace",
+   "complexity": "intermediate",
+   "description": "Five coral floor plates, one to five, stepped strictly in order; wrong order flashes red and resets; the fifth emits exam_passed so the ExamGate completes the map. The output strip of the interpretability image made performable — the body does autoregression, one token per stride."
+  },
+  "jspace_ring": {
+   "lookup_name": "jspace_ring",
+   "scene": "res://commons/artifacts/jspace/jspace_ring.tscn",
+   "class_name": "JSpaceRing",
+   "name": "J-Space Ring (the endless topic scroller)",
+   "category": "jspace",
+   "complexity": "advanced",
+   "description": "The spine's whole arc as a ring you walk forever: 24 topic arcs (point, line, grid, array, loop, random, walk, noise, wave, sound, fractal, recursion, grammar, branch, growth, cell, neighbor, spring, cloth, force, agent, flock, learn, proof) with 60 concept-words standing as pillars at the angle of their peak topic. Your angular position IS the reading axis — walk the loop and every pillar's height and glow interpolates continuously between the two topics you stand between, measured as LSA activation in the book's own corpus. Point-country sinks behind you as line-country rises ahead; walk long enough and point comes back around after proof. The endless twin of the count-to-five chamber."
+  }
+ }
+}

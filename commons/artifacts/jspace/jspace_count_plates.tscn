@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/artifacts/jspace/jspace_count_plates.gd" id="1"]
+
+[node name="JSpaceCountPlates" type="Node3D"]
+script = ExtResource("1")

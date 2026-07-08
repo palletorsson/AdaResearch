@@ -173,3 +173,270 @@
 - 2026-07-08 08:00 · **build** · MAMMA MONSTER — THE ORIGIN GALLERY. Palle shared the full context: the salvaged SD prompt files were the machinery of 'Mothers Dream' (2023) — his artwork weaving Kristina Torsson's pattern legacy with AI (25,000 img2img frames, the AI given more freedom every 280 frames, Coltrane-driven Processing playback; Kristina Torsson co-founded MAH-JONG 1966 with Helena Henschen & Veronika Nygren — design fused with ideology — then Vamlingbolaget on Gotland). And the essay's key line: 'VR-verket borjar i ett landskap av mammas monster' — ADA RESEARCH BEGINS IN A LANDSCAPE OF HER PATTERNS. Built commons/artifacts/mamma_monster_gallery/: SIX SHADERS interpreting her named patterns from the written record — mm_varma_backen (Sudret meadow: bleeding-heart pendants on winding stems — the organic line that suspends the grid's order), mm_fjader (the henyard feather), mm_bonan (found in the pistachio bowl during yatzy — chance as source, beans tumbled at hash angles), mm_mahjong_rand (the 1966 stripe as ideology, analog edge-waver alive), mm_rutan_oscillerar (the Vamlingbo teenage room: two checks moire against each other, neon silk bleeding through where they disagree, TIME-animated — 'the queer CGI room before CGI'), mm_moders_drom (the 280-frame freedom cycle AS A SHADER: mother-patterns breathing between weave and dream on TIME). All carry the DNA genes + NEW g_dream gene (0=the weave as drawn, 1=the machine's dream). Gallery artifact with the family named on tags + her sentence: 'Att skapa monster ar som att forsoka fanga en drom.' Capture-verified 6/6. LEDGER: kristina_torsson (named, THE ORIGIN SOURCE, credited) + mah_jong_collective added — 71 sources, credited 775·98·0. HONESTY: interpretations from the written record, not scans — the deluxe version works from her actual archive with her. RECOMMEND (Palle rules): place at the game's BEGINNING (primitives entry), because that is where the essay says the work begins.
 - 2026-07-08 09:00 · **build** · THE SAME DESIRE — three corrections taken and built. (1) CANONICAL IMAGES = GODOT PHOTOGRAPHS: commons/testing/capture_pattern_closeups.gd photographs all 19 pattern shaders (13 atlas + 6 mamma) full-frame closeup IN-ENGINE, one 6s run → public/pattern-closeups/; /pattern-atlas REWRITTEN around the photographs (SVG dropped) with 'the origin — Mamma Monster' section first, 19/19 verified loading. (2) THE LOOM IS AN ARRAY WITH RULES: the thread stated on the page and staged in the room. (3) THE MIDWAY ASSEMBLAGE: new map Assemblage_Same_Desire (14×12, added to lsystems — the inherited-grammar chapter, spine position 15 = midway) staging the long tradition of math and craft on ONE AXIS: enter past panel_bridge_loom + ten_print_textile (the array with rules, chance in the machine) → pattern_atlas_gallery (the world's makers) → mamma_monster_gallery AT THE HEART → godel_statement_plaque + incompleteness_scale at the far end, FACING THE CLOTH. Pathfinder OK; capture shows the full axis legible (the scale's 'THIS SCALE'S OWN WEIGHT' label facing the weave). walked.md written — THE TURN: 'the desire in Godel is the same desire as in the Kente patterns — to reach, by rule, past what the rule can hold; one practice at different desks'; placed midway BECAUSE after the rules, before their limits — 'the limit was never a wall; it is the place where every maker, at every desk, has always leaned out.' Heroes pair added (lsystems). Reader rebuilt. The essay's thread (loom → Jacquard → Ada Lovelace → this game; Sadie Plant, material not metaphor) is now a room.
 - 2026-07-08 09:40 · **note** · BLOG 6 (with images): '2026-07-08-mamma-monster' — the week's most personal arc told with the Godot photographs inline: varma backen + bonan + rutan oscillerar + moders drom closeups, the Mamma Monster gallery, Kente + ikat closeups, and the Assemblage Same Desire room shot. The circle named: prompt files → Mothers Dream → the origin source → six shaders + g_dream gene → photographed in-engine → the midway assemblage where Godel faces the cloth. Closing: 'The general intellect has a face here. She works at a fabric table in Vamlingbo... and her patterns now hang midway through a curriculum that begins, as it always did, in a landscape she made.' Six blogs this arc; 9/9 images verified serving.
+- 2026-07-08 10:30 · **build** · INVESTIGATION II — six more patterns, one theorem. pattern_atlas.md appended (second sweep + a deferred list with ethics notes: Aboriginal dot painting & Navajo weaving deferred pending collaboration protocols; kurbits/Marimekko reserved for Mamma Monster II with Kristina's archive). SIX NEW SHADERS (gened from birth): atlas2_wang — WANG TILES, the Same-Desire room's THEOREM: edge colors derived from the shared edge so the tiling is legal by construction, and whether a tile set tiles the plane is UNDECIDABLE (Berger 1966, domino→halting; aperiodicity fell out of the proof) — a craft-shaped question that IS Godel/Turing territory, literally; atlas2_batik (Java — kawung + the wax CRACKLE as the hand's proof, the wobble gene's ancestor); atlas2_kuba (Shoowa interlace whose rule CHANGES section by section — improvisation as grammar, the stochastic rule centuries early); atlas2_hitomezashi (one coin-flip per row+column, stitch where bits agree — XOR, mazes emerge; mending as mathematics); atlas2_sami (duodji band — the Nordic homecoming nearest Vamlingbo); atlas2_adinkra (stamped NAMED proverbs in comb-divided fields). Gallery 13→19 plates (columns 7 = 3 rows, clears the census room floor); registry description pays the new makers; 6 ledger sources added (77 total, credited 783·98·0). Re-photographed: 25 closeups + 57 DNA sweeps (19 traditions × 3 variants), both one-run headless; /pattern-atlas 25/25 verified (all credited), /pattern-dna auto-grows. VERIFIED IN THE PIXELS: the Wang closeup shows every shared edge matching across seams — the theorem visible. NEXT investigation III candidates parked: Molas, tatreez, Fair Isle, Penrose-proper, quasicrystal.
+- 2026-07-09 morning · **play** · THE IMAGINED WALK BEGINS (Palle: use CLAUDE_GUIDE_TO_PLAYING_ADA_RESEARCH.md, walk a map at a time, draw what you imagine as SVG). Method: read the three layers + blurb + artifact configs, stand in the spawn, walk the axis, then DRAW the first-person view. Map 1/10: POINT_ONE walked from source — the ragged west shelf over the maroon void; move-player nudge at frame one (you arrive late); frame_counter_display already running (drawn ticking, 'running before you arrived'); you_are_here disc mid-walk; fontana_puncture with the interactive point EMBEDDED IN THE WOUND (the map's quietest strong choice — the point lives inside the cut); the three-mode point row (transformation/chromatic/waveform) on pedestals; floating_sphere_field adrift east; CoordinateSystem3M triad + science_screen at the far end; teleporter ring in the void-notch at row 13; code_evolution_screen glowing UNREACHABLE across the void (legible but never touchable — reading at a distance as a designed experience). SVG delivered in-chat; imagined-walks/ dir seeded in encyclopedia. NEXT: Point_Lines (2/10).
+
+## 2026-07-08 — J-Space made walkable (the Riemann dream, measured)
+
+Palle asked whether the interpretability image (count to five, feature grid)
+could become a WALKABLE map — the dream: "that the world model would align
+with a real 3d space... that we could walk the geometry as truth."
+
+Answer: yes, with the lie measured. Built `JSpace_Count_To_Five`:
+
+- **jspace_layout.json** — the 17 feature-words embedded in the book's OWN
+  LSA space (same recipe as handoff_score.py; corpus = artifact cards +
+  walked/tutorial/blurb pages + blogs, 3,936 docs), MDS'd to a 2D floor plan.
+  Kruskal stress-1 = 0.27, POSTED ON A PLAQUE in the room, not hidden.
+  Findings the geometry surfaced: "claude" is the book's strongest feature
+  (255 docs); "five" (205) stands nearest to it; "halfway" neighbors
+  "starting"; "consciousness" is OOV — the book has never said the word, so
+  it stands dark on the rim, unplaceable.
+- **jspace_zoom_chamber** — pillars at measured coordinates, activation as
+  height+glow, NN threads on the floor; introspective pillars (thoughts,
+  claude, human, fascinating) light ONLY under gaze — the observer effect
+  as floor.
+- **jspace_feature_field** — the sparse prelude: seeded field, most tiles
+  dark, dense cells stacked (superposition as height), near tiles brighten.
+- **jspace_count_plates** — the output walked: five coral plates stepped in
+  order; wrong order resets; plate five emits exam_passed -> ExamGate
+  completes the map. The body performs autoregression.
+
+Validation: pathfinder OK (299/299 reachable), headless instantiate check
+OK (all three artifacts + layout json), 4-angle capture taken. Registry:
+commons/artifacts/registry/jspace.json. Regenerate geometry after the book
+grows: scratchpad jspace_layout.py (recipe recorded in the json header).
+
+The principle, for the book: a projection that reports its stress is a
+chart; one that hides it is a myth. The room is a chart of the book's mind.
+
+## 2026-07-08 — the endless ring (topic-to-topic scroller)
+
+Palle: "can we build an endless scroller... a room we scroll through as we
+walk and the world changes around us from topic to topic?" Answer: a LOOP,
+not a hallway. Built JSpace_Endless_Ring + jspace_ring artifact.
+
+- scratchpad/jspace_topics.py -> jspace_topics.json: 60 concept-words x 24
+  spine topics (point..proof), activation = LSA cosine in the book's corpus
+  (3,936 docs). Each word peaks at one topic. Census: cell owns 5 words,
+  proof 5, fractal/recursion/branch/spring/learn 4 each. wave owns 0 (sound
+  and noise absorbed it) — logged, not hidden. Adjacent-topic continuity
+  mean 0.13 (range -0.10..0.53): the arc genuinely lurches in places.
+- jspace_ring.gd: 24 topic arcs around a ring; 60 pillars at their peak-topic
+  angle. The PLAYER'S ANGLE is the reading axis: _process reads camera angle,
+  interpolates each word's activation between the two topics you stand
+  between, and resizes+re-lights every pillar continuously. Point-country
+  sinks behind you as line-country rises ahead. Spine order kept (Palle's
+  call) so the scroll IS the curriculum; sharp transitions stay as honest
+  seams. Real ring, normal locomotion (Palle's call) — no treadmill vection.
+- Map: 19x19 disc, spawn on the ring at 'point', teleporter at the rim to
+  leave (the loop keeps turning without you). Endless by construction; walk
+  past proof and point comes back around.
+
+Validation: pathfinder OK (261/261 reachable), headless instantiate OK
+(parse check extended to include the ring). NOTE: static 4-angle capture
+CANNOT show this artifact — the field only lights under a walking camera, so
+captures come back dark/flat. Wrote commons/testing/capture_jspace_ring.gd
+(orbit capture) but bare-SceneTree offscreen render returned black (known
+Godot headless-viewport fiddliness; see reference_mapsim_godot_camera). Proof
+delivered as a two-state top-down SVG built from the REAL matrix (point-light
+vs fractal-light, same dots, different lighting). The real proof is the VR
+walk. Registry: jspace.json (4 artifacts now: chamber, field, plates, ring).
+
+Regenerate after the book grows: scratchpad jspace_topics.py.
+NEXT (if wanted): fix the orbit capture (use a real map-load harness not bare
+SceneTree), or a /jspace-ring web page (the SVG interactive, slider = angle).
+
+## 2026-07-08 — /jspace-ring: the scroll as a web page
+
+The endless ring's web twin, for representation and later editing:
+ada_encyclopedia /jspace-ring + GET /api/jspace (reads the SAME
+commons/artifacts/jspace/jspace_topics.json the Godot artifact loads —
+one truth-file, two faces).
+
+- THE PAGE SCROLL IS THE WALK: a 3-lap scroll track drives the reading
+  angle; near either end it silently jumps one lap (the field is periodic,
+  so the jump is invisible) — scroll forever, genuinely endless.
+- Three synced views: top-down ring (lit wedge = where you read), the
+  CORRIDOR (word-pillars slide past and re-light as you scroll — the
+  scroller itself), and an INSPECTOR (click any word: 24-topic activation
+  sparkline + table, the editing surface-to-be).
+- Header shows current topic, the i0->i1 blend, and the SEAM cosine of the
+  transition you're crossing (rose when < 0.05 — the arc's honest lurches).
+
+Verified in preview: scroll 10 topics -> FRACTAL with dimension/octave/self
+lit (matches the measured matrix); both wrap directions phase-preserving;
+inspector opens with all 24 rows. Next editing step when wanted: drag a
+word's activation in the inspector -> POST back to jspace_topics.json ->
+the game re-lights on next load.
+
+## 2026-07-08 — blog: "The Walk Rents a Dimension"
+
+The j-space arc blogged (2026-07-08-the-walk-rents-a-dimension, seq
+qfeplaboratory, 2 images): chamber -> shift -> ring -> web scroll, then the
+real question. Nash territory: 128-D cannot embed isometrically in 3; the
+Nash-Kuiper C1 route (Hevea flat torus) buys isometry with corrugation at
+every scale — true and unreadable. So the game CHARTS and posts the lie
+(stress plaque). The body's channel budget table: xz(2) + height(1, display)
++ light(1) + gaze(1) + TIME OF WALK(1, serial) + topology(loop) vs 128 dims.
+Palle's key: "as we walk we mostly access 2d xz, time is the walk
+progression" — formalized as: the scroll is a 1-D lease on an N-D space;
+the scroller amortizes the embedding problem instead of solving it. What
+curation holds: which dimension becomes architecture (spine order kept,
+seams honest), the un-channeled dims (present exactly once, as posted
+error), and the RE-DEAL (each room may deal the channel budget differently).
+
+## 2026-07-08 — the register pilot: reach-directions RECUR
+
+Palle's question sharpened to: do the extra qualities that different
+artifacts on the same topic activate (the hand, the punctum, the famous
+instance...) RECUR across topics — i.e. are registers a real second axis
+system (topic x register), and which cells are empty?
+
+Pilot (scratchpad/register_pilot.py -> jspace_registers_pilot.json):
+top-26 artifacts per topic for point/line/random by LSA cosine, residual =
+v - (v.t)t, KMeans(7) on pooled unit residuals.
+
+VERDICT: 7/7 clusters topic-MIXED. Registers are structure in the field,
+not our projection. The seven measured registers:
+  HAND (grab_sphere_point + grab_line_pusher — point and line share it),
+  PUZZLE (the line_puzzle family; point has almost none),
+  DIAGRAM (plus_lines, coordinate_axes, chalkboard),
+  WALK/TRACE (random_walk_leash + randompoints_gaussian + grabbable_line),
+  MACHINE (random_transformations + interactive_point_origin_force),
+  EXHIBIT incl. famous instance (random_number_book_page_1955, fireworks),
+  META/TEXT (point_is, monte_carlo_estimator).
+
+The GAP MATRIX (empty cells = build list):
+  point x PUZZLE (no snap-the-point exam),
+  random x HAND (no chance you can grab — THE COIN TOSS fills hand+famous
+    at once; the matrix converges on Palle's example from two directions),
+  random x DIAGRAM (no chalkboard of probability),
+  line x EXHIBIT/famous (no famous line in the room),
+  line x META (no line_is).
+
+Confirmed prediction: Palle's body-side registers (punctum/thrownness,
+the buzz/haptic, 'you are here', small/medium/large) did NOT fall out of
+the corpus — they live in VR and walked prose, not card text. The matrix
+needs two sources (measured + hand-named), and their disagreement marks
+the darkest fold: what the body knows and the book cannot yet say.
+
+NEXT: scale census to all 24 topics; register column in /jspace-ring
+inspector; fill cells famous-first (coin toss pays a maker via the ledger).
+
+## 2026-07-08 — subtopic census validated on randomness (with corrections)
+
+Palle's adjustment: point/line are SUBTOPICS (one map each), random is a
+SEQUENCE (13 maps) — the register pilot mixed levels. Hierarchy: sequence ->
+subtopic(=map) -> register(=artifact variation). Pure register = v -
+proj(sequence) - proj(subtopic). And density at subtopic level should
+DERIVE map counts.
+
+Validation (scratchpad/subtopic_census.py ->
+jspace_subtopic_census_randomness.json): 67 placed artifacts across the 13
+randomness maps, embedded, KMeans swept k=5..18.
+
+HONEST VERDICT: the instrument does NOT mechanically recover 13 — best
+silhouette at k=7 (weak, 0.13), ARI vs map partition 0.21-0.26. The space
+is smoother than the map partition. BUT the pockets are meaningful and the
+diagnostics are exactly what the method promised:
+- MODEL MAP: Random_Gaussian — 8 artifacts, ONE pocket (galton_board,
+  dice_throw, distribution_sampler...). The only fully coherent map; what
+  a subtopic-map should look like.
+- OVERLOADED: Random_Definition — 13 artifacts across FIVE pockets, incl.
+  a clean ENTROPY pocket (entropy_jar, shannon_entropy_meter,
+  hardware_entropy_decay). A definition room sampling everything may be
+  intentional; the entropy pocket is the strongest candidate for a room
+  of its own.
+- THIN: Random_Pheromone — 1 artifact.
+- BOUNDARY LEAK: a NOISE pocket (perlin/worley/curl) inside randomness
+  maps — noise has its own sequence; foreshadowing or misplacement.
+- CAST != CONCEPT: Random_Game's pocket is creatures/hazards
+  (miura_crawler, kaleidocycle_enemy) — game rooms cluster by MECHANICS,
+  invisible to card semantics.
+
+CORRECTION to the register pilot's gap matrix: coin_toss, dice_throw,
+galton_board EXIST and are placed — random x HAND / famous-instance is NOT
+empty. The pilot's top-26-by-cosine selection missed them (selection
+artifact). Gap matrix cells must be checked against PLACED artifacts, not
+top-N similarity picks.
+
+REFINED RULE (what the data actually supports): map count != pocket count.
+Sequences mix three room kinds — CONCEPT rooms (one pocket, like Gaussian),
+SURVEY rooms (sample all pockets, like Definition), GAME rooms (cast by
+mechanics). The instrument's real output is pocket->home coverage: every
+dense pocket needs at least one concept room; survey and game rooms borrow.
+NEXT: run census on a sequence in doubt (not ground-truthed) where it earns
+its keep; add sequence+subtopic double-subtraction to the register script.
+
+## 2026-07-08 — subtopic census: softbodies (the inverse diagnosis)
+
+Randomness was dense inventory / coarse pockets. Softbodies inverts it:
+34 maps, only 21 placed artifacts — because 24 of the 34 maps are ETUDES:
+parameter-variation studies (sb01-08 cloth/jelly drapes, sb_ls/ca/rd
+crossovers, gl01-05 glass bulbs, gm01-04 glass-meets-mould) whose only
+interactable is a shared gallery_marker; the softbody apparatus lives in
+MAP CONFIG, invisible to card space by design. (Census tokenizer initially
+dropped the marker on its hyphen — patched; markers now excluded as
+furniture.)
+
+So the room taxonomy gains a third species, and the map-count rule is now:
+  CONCEPT room  — one pocket, one map (Random_Gaussian)
+  SURVEY room   — samples all pockets (Random_Definition)
+  GAME room     — pockets recast as mechanics (Random_Game)
+  ETUDE         — one apparatus x swept parameters, cast by config
+                  (24 of softbodies' 34; legitimately one gallery-family)
+
+The artifact-cast half (10 rooms, 21 artifacts, silhouette 0.28 at k=7) is
+thin and heavily BORROWED: reaction_diffusion/turing (procgen),
+entropy_morphogenesis (topology), branching_growth/radiolaria (procgen),
+gridagent/proximity_spawner (hazards). Native pockets: the soft gallery
+blob (jelly_cube, cloth_straps, flagdancer, breathing_room), the HAND
+cluster (grab_long_stick, pick_up_cube), the sim pair (softmill,
+softstopscene).
+
+REGISTER MATRIX for softbodies (checked against PLACED artifacts):
+  HAND yes · WALK/obstacle yes · EXHIBIT yes · MACHINE yes
+  PUZZLE none  — no softbody exam anywhere (nothing gates the chapter)
+  DIAGRAM none — spring-mass-damper never made visible; k and damping
+                 are swept in 24 etudes but never DIAGRAMMED once
+  FAMOUS none  — no Hooke's spring, no trampoline, no water balloon
+  META none    — no softbody_is
+The build list is those four cells, and the diagram cell is the sharpest:
+the sequence varies the parameters 24 times without ever showing the
+apparatus that has the parameters.
+
+Files: jspace_subtopic_census_softbodies.json (+randomness sibling).
+
+## 2026-07-08 — the full 22(+2)-sequence census sweep + /jspace-census
+
+scratchpad/census_sweep.py -> jspace_census_sweep.json (one shared
+embedding, all 24 spine sequences) + encyclopedia /jspace-census (table:
+maps/artifacts/etudes/thin/pockets/silhouette + 7 register cells, rows
+expand to pockets with members; /api/jspace now serves census + pilot).
+
+SPINE TOTALS: 24 sequences · 246 maps · 883 placed artifacts · 26 etudes ·
+129/168 register cells empty (conservative probe, cos>0.40 vs pilot
+centroids — treat empty as unproven, not proven-absent).
+
+HEADLINES:
+- MOST COHERENT: symmetry (sil 0.395!) — the census-born chapter is the
+  best-clustered in the spine; built concept-first and it shows. Then
+  cellularautomata 0.315, color 0.296.
+- SMEARED: change (0.104, 13 artifacts / 8 maps — thinnest real sequence),
+  postfoundationscrisis 0.127, graphtheory 0.128, lsystems 0.128.
+- UNCLUSTERABLE: boolean_surfaces — 5 placed artifacts total (consistent
+  with the earlier footprint fp=0 finding; the sequence barely exists
+  physically).
+- OVER-POCKETED (maps hold several subtopics): qfeplaboratory 15 pockets/8
+  maps, fractals 15/10, primitives 14/10, noise 12/9.
+- UNDER-POCKETED (survey/game-heavy, maps share pockets): forces 13/29,
+  wavefunctions 6/12, randomness 7/13.
+- ETUDES: softbodies 24 (the gallery family), color 1, forces 1.
+- REGISTER GAPS AT SCALE: PUZZLE is empty nearly spine-wide (the exam gap,
+  matching the ExamGate finding: exams exist mostly in primitives' line
+  puzzles). symmetry/formfinding/fractals/swarm/graphtheory show 0/7 —
+  the new chapters have pockets but no register cast yet.
+
+URL: localhost:3003/jspace-census (verified: 24 rows, expansion, no
+console errors).

@@ -1,0 +1,658 @@
+{
+ "generated_by": "scratchpad/register_pilot.py",
+ "method": "residual = v_artifact - (v.t)t in LSA(128); KMeans(k=7) on pooled unit residuals",
+ "topics": [
+  "point",
+  "line",
+  "random"
+ ],
+ "top_n": 26,
+ "min_cos": 0.1,
+ "verdict": "7/7 clusters are topic-mixed",
+ "clusters": [
+  {
+   "cluster": 0,
+   "size": 14,
+   "topics": {
+    "point": 4,
+    "line": 1,
+    "random": 9
+   },
+   "mixed": true,
+   "top_terms": [
+    "randomness",
+    "particle",
+    "with",
+    "bench",
+    "its",
+    "room",
+    "life",
+    "particles",
+    "chaos",
+    "edge"
+   ],
+   "members": [
+    {
+     "artifact": "randompoint",
+     "topic": "point",
+     "topic_cos": 0.507,
+     "r_cos": 0.645
+    },
+    {
+     "artifact": "random_number_book_page_collection",
+     "topic": "random",
+     "topic_cos": 0.656,
+     "r_cos": 0.623
+    },
+    {
+     "artifact": "rotate_random_y",
+     "topic": "random",
+     "topic_cos": 0.732,
+     "r_cos": 0.58
+    },
+    {
+     "artifact": "Random_Rotate_Random_XYZ",
+     "topic": "random",
+     "topic_cos": 0.797,
+     "r_cos": 0.567
+    },
+    {
+     "artifact": "random_fireworks",
+     "topic": "random",
+     "topic_cos": 0.642,
+     "r_cos": 0.553
+    },
+    {
+     "artifact": "random_transformations_stochastic",
+     "topic": "random",
+     "topic_cos": 0.734,
+     "r_cos": 0.538
+    },
+    {
+     "artifact": "random_number_book_page_1955",
+     "topic": "random",
+     "topic_cos": 0.688,
+     "r_cos": 0.531
+    },
+    {
+     "artifact": "bubbles_random",
+     "topic": "random",
+     "topic_cos": 0.629,
+     "r_cos": 0.525
+    },
+    {
+     "artifact": "plane_random",
+     "topic": "random",
+     "topic_cos": 0.672,
+     "r_cos": 0.483
+    },
+    {
+     "artifact": "random_edge_profile",
+     "topic": "random",
+     "topic_cos": 0.625,
+     "r_cos": 0.451
+    },
+    {
+     "artifact": "ifs_bench",
+     "topic": "point",
+     "topic_cos": 0.384,
+     "r_cos": 0.357
+    },
+    {
+     "artifact": "derivative_pair",
+     "topic": "line",
+     "topic_cos": 0.518,
+     "r_cos": 0.354
+    },
+    {
+     "artifact": "chaos_game_tool",
+     "topic": "point",
+     "topic_cos": 0.412,
+     "r_cos": 0.283
+    },
+    {
+     "artifact": "ifs_room",
+     "topic": "point",
+     "topic_cos": 0.418,
+     "r_cos": 0.281
+    }
+   ],
+   "register_name": "THE EXHIBIT \u2014 the specimen in the room, incl. the famous instance (random_number_book_page_1955, random_fireworks)"
+  },
+  {
+   "cluster": 4,
+   "size": 14,
+   "topics": {
+    "point": 2,
+    "line": 3,
+    "random": 9
+   },
+   "mixed": true,
+   "top_terms": [
+    "randomness",
+    "grab",
+    "walk",
+    "space",
+    "through",
+    "cubes",
+    "interactive",
+    "path",
+    "grid",
+    "that"
+   ],
+   "members": [
+    {
+     "artifact": "random_walk_leash",
+     "topic": "random",
+     "topic_cos": 0.706,
+     "r_cos": 0.746
+    },
+    {
+     "artifact": "walk_random",
+     "topic": "random",
+     "topic_cos": 0.581,
+     "r_cos": 0.704
+    },
+    {
+     "artifact": "randompoints_uniform",
+     "topic": "point",
+     "topic_cos": 0.41,
+     "r_cos": 0.643
+    },
+    {
+     "artifact": "random_walk_128",
+     "topic": "random",
+     "topic_cos": 0.743,
+     "r_cos": 0.602
+    },
+    {
+     "artifact": "randompoints_gaussian",
+     "topic": "point",
+     "topic_cos": 0.406,
+     "r_cos": 0.599
+    },
+    {
+     "artifact": "random_walk_collection",
+     "topic": "random",
+     "topic_cos": 0.649,
+     "r_cos": 0.569
+    },
+    {
+     "artifact": "grabbable_line",
+     "topic": "line",
+     "topic_cos": 0.719,
+     "r_cos": 0.532
+    },
+    {
+     "artifact": "random_walker_machine",
+     "topic": "random",
+     "topic_cos": 0.655,
+     "r_cos": 0.513
+    },
+    {
+     "artifact": "random_decay_multimesh",
+     "topic": "random",
+     "topic_cos": 0.608,
+     "r_cos": 0.502
+    },
+    {
+     "artifact": "random_walk_bench",
+     "topic": "random",
+     "topic_cos": 0.642,
+     "r_cos": 0.486
+    },
+    {
+     "artifact": "klee_walking_point",
+     "topic": "line",
+     "topic_cos": 0.64,
+     "r_cos": 0.411
+    },
+    {
+     "artifact": "crystal_random_walk_demo",
+     "topic": "random",
+     "topic_cos": 0.633,
+     "r_cos": 0.391
+    },
+    {
+     "artifact": "line_builder_3d",
+     "topic": "line",
+     "topic_cos": 0.529,
+     "r_cos": 0.289
+    },
+    {
+     "artifact": "random_cubes",
+     "topic": "random",
+     "topic_cos": 0.595,
+     "r_cos": 0.234
+    }
+   ],
+   "register_name": "THE WALK/TRACE \u2014 traversal, path, leash (random_walk_leash, randompoints_gaussian)"
+  },
+  {
+   "cluster": 5,
+   "size": 14,
+   "topics": {
+    "point": 4,
+    "line": 10
+   },
+   "mixed": true,
+   "top_terms": [
+    "primitives",
+    "lines",
+    "for",
+    "chalkboard",
+    "coordinate",
+    "two",
+    "side",
+    "system",
+    "perspective",
+    "triangle"
+   ],
+   "members": [
+    {
+     "artifact": "plus_lines",
+     "topic": "line",
+     "topic_cos": 0.745,
+     "r_cos": 0.809
+    },
+    {
+     "artifact": "cross_lines",
+     "topic": "line",
+     "topic_cos": 0.612,
+     "r_cos": 0.775
+    },
+    {
+     "artifact": "parallel_lines",
+     "topic": "line",
+     "topic_cos": 0.627,
+     "r_cos": 0.731
+    },
+    {
+     "artifact": "perspective_lines",
+     "topic": "point",
+     "topic_cos": 0.343,
+     "r_cos": 0.729
+    },
+    {
+     "artifact": "coordinate_axes_xy",
+     "topic": "line",
+     "topic_cos": 0.514,
+     "r_cos": 0.722
+    },
+    {
+     "artifact": "coordinate_lines",
+     "topic": "line",
+     "topic_cos": 0.522,
+     "r_cos": 0.703
+    },
+    {
+     "artifact": "point_collection",
+     "topic": "point",
+     "topic_cos": 0.578,
+     "r_cos": 0.696
+    },
+    {
+     "artifact": "line_collection",
+     "topic": "line",
+     "topic_cos": 0.669,
+     "r_cos": 0.692
+    },
+    {
+     "artifact": "point_chalkboard",
+     "topic": "point",
+     "topic_cos": 0.499,
+     "r_cos": 0.578
+    },
+    {
+     "artifact": "horizon_line",
+     "topic": "line",
+     "topic_cos": 0.649,
+     "r_cos": 0.569
+    },
+    {
+     "artifact": "one_meter_line",
+     "topic": "line",
+     "topic_cos": 0.749,
+     "r_cos": 0.536
+    },
+    {
+     "artifact": "redline",
+     "topic": "line",
+     "topic_cos": 0.623,
+     "r_cos": 0.476
+    },
+    {
+     "artifact": "line_chalkboard",
+     "topic": "line",
+     "topic_cos": 0.646,
+     "r_cos": 0.468
+    },
+    {
+     "artifact": "partial_derivative_terrain",
+     "topic": "point",
+     "topic_cos": 0.356,
+     "r_cos": 0.339
+    }
+   ],
+   "register_name": "THE DIAGRAM \u2014 static, coordinate-labeled, chalkboard (plus_lines, coordinate_axes)"
+  },
+  {
+   "cluster": 1,
+   "size": 13,
+   "topics": {
+    "point": 8,
+    "line": 5
+   },
+   "mixed": true,
+   "top_terms": [
+    "primitives",
+    "grab",
+    "sphere",
+    "with",
+    "grabbable",
+    "stick",
+    "that",
+    "color",
+    "pickable",
+    "cube"
+   ],
+   "members": [
+    {
+     "artifact": "grab_sphere_point_with_text",
+     "topic": "point",
+     "topic_cos": 0.565,
+     "r_cos": 0.889
+    },
+    {
+     "artifact": "grab_line_pusher",
+     "topic": "line",
+     "topic_cos": 0.537,
+     "r_cos": 0.889
+    },
+    {
+     "artifact": "grab_sphere_point",
+     "topic": "point",
+     "topic_cos": 0.586,
+     "r_cos": 0.882
+    },
+    {
+     "artifact": "grab_sphere_point_color_with_text",
+     "topic": "point",
+     "topic_cos": 0.498,
+     "r_cos": 0.813
+    },
+    {
+     "artifact": "grab_sphere_point_with_color",
+     "topic": "point",
+     "topic_cos": 0.558,
+     "r_cos": 0.794
+    },
+    {
+     "artifact": "point",
+     "topic": "point",
+     "topic_cos": 0.695,
+     "r_cos": 0.764
+    },
+    {
+     "artifact": "grab_line_drawer",
+     "topic": "line",
+     "topic_cos": 0.586,
+     "r_cos": 0.718
+    },
+    {
+     "artifact": "grab_line",
+     "topic": "line",
+     "topic_cos": 0.59,
+     "r_cos": 0.706
+    },
+    {
+     "artifact": "grab_line_music",
+     "topic": "line",
+     "topic_cos": 0.578,
+     "r_cos": 0.692
+    },
+    {
+     "artifact": "line",
+     "topic": "line",
+     "topic_cos": 0.603,
+     "r_cos": 0.676
+    },
+    {
+     "artifact": "grab_sphere_point_snap",
+     "topic": "point",
+     "topic_cos": 0.371,
+     "r_cos": 0.614
+    },
+    {
+     "artifact": "static_point",
+     "topic": "point",
+     "topic_cos": 0.751,
+     "r_cos": 0.545
+    },
+    {
+     "artifact": "fontana_puncture",
+     "topic": "point",
+     "topic_cos": 0.366,
+     "r_cos": 0.538
+    }
+   ],
+   "register_name": "THE HAND \u2014 grabbable, pushable, drawable (grab_sphere_point, grab_line_pusher)"
+  },
+  {
+   "cluster": 2,
+   "size": 10,
+   "topics": {
+    "point": 4,
+    "random": 6
+   },
+   "mixed": true,
+   "top_terms": [
+    "visualization",
+    "interactive",
+    "randomness",
+    "toy",
+    "transformations",
+    "primitives",
+    "machinelearning",
+    "noise",
+    "geometric",
+    "generation"
+   ],
+   "members": [
+    {
+     "artifact": "random_transformations",
+     "topic": "random",
+     "topic_cos": 0.663,
+     "r_cos": 0.876
+    },
+    {
+     "artifact": "random_decay_objects",
+     "topic": "random",
+     "topic_cos": 0.664,
+     "r_cos": 0.844
+    },
+    {
+     "artifact": "random_transformations_matrices",
+     "topic": "random",
+     "topic_cos": 0.739,
+     "r_cos": 0.764
+    },
+    {
+     "artifact": "random_transformations_geometric",
+     "topic": "random",
+     "topic_cos": 0.729,
+     "r_cos": 0.764
+    },
+    {
+     "artifact": "trng_vs_prng",
+     "topic": "random",
+     "topic_cos": 0.738,
+     "r_cos": 0.606
+    },
+    {
+     "artifact": "interactive_point_origin_force",
+     "topic": "point",
+     "topic_cos": 0.377,
+     "r_cos": 0.523
+    },
+    {
+     "artifact": "interactive_point_origin",
+     "topic": "point",
+     "topic_cos": 0.669,
+     "r_cos": 0.491
+    },
+    {
+     "artifact": "random_forest_visualization",
+     "topic": "random",
+     "topic_cos": 0.611,
+     "r_cos": 0.407
+    },
+    {
+     "artifact": "poisson_scatter_toy",
+     "topic": "point",
+     "topic_cos": 0.337,
+     "r_cos": 0.313
+    },
+    {
+     "artifact": "hull_crusher",
+     "topic": "point",
+     "topic_cos": 0.37,
+     "r_cos": 0.257
+    }
+   ],
+   "register_name": "THE MACHINE \u2014 process applied to things, force, transformation (random_transformations, interactive_point_origin_force)"
+  },
+  {
+   "cluster": 3,
+   "size": 8,
+   "topics": {
+    "point": 1,
+    "line": 7
+   },
+   "mixed": true,
+   "top_terms": [
+    "puzzle",
+    "primitives",
+    "interactive",
+    "snap",
+    "triangle",
+    "points",
+    "assembly",
+    "drag",
+    "form",
+    "furniture"
+   ],
+   "members": [
+    {
+     "artifact": "plus_line_puzzle",
+     "topic": "line",
+     "topic_cos": 0.662,
+     "r_cos": 0.93
+    },
+    {
+     "artifact": "parallel_line_puzzle",
+     "topic": "line",
+     "topic_cos": 0.689,
+     "r_cos": 0.911
+    },
+    {
+     "artifact": "quad_line_puzzle",
+     "topic": "line",
+     "topic_cos": 0.624,
+     "r_cos": 0.885
+    },
+    {
+     "artifact": "triangle_line_puzzle",
+     "topic": "line",
+     "topic_cos": 0.528,
+     "r_cos": 0.875
+    },
+    {
+     "artifact": "cross_line_puzzle",
+     "topic": "line",
+     "topic_cos": 0.64,
+     "r_cos": 0.85
+    },
+    {
+     "artifact": "line_demo",
+     "topic": "line",
+     "topic_cos": 0.605,
+     "r_cos": 0.523
+    },
+    {
+     "artifact": "two_points_line",
+     "topic": "line",
+     "topic_cos": 0.739,
+     "r_cos": 0.493
+    },
+    {
+     "artifact": "draw_triangle_faces",
+     "topic": "point",
+     "topic_cos": 0.327,
+     "r_cos": 0.411
+    }
+   ],
+   "register_name": "THE PUZZLE \u2014 snap, assemble, prove-it (the line_puzzle family)"
+  },
+  {
+   "cluster": 6,
+   "size": 5,
+   "topics": {
+    "point": 3,
+    "random": 2
+   },
+   "mixed": true,
+   "top_terms": [
+    "commons",
+    "artifacts",
+    "randomness",
+    "with",
+    "text",
+    "terrain",
+    "space",
+    "into",
+    "through",
+    "landscape"
+   ],
+   "members": [
+    {
+     "artifact": "2d_in_3d_point_vis",
+     "topic": "point",
+     "topic_cos": 0.647,
+     "r_cos": 0.948
+    },
+    {
+     "artifact": "point_is",
+     "topic": "point",
+     "topic_cos": 0.628,
+     "r_cos": 0.946
+    },
+    {
+     "artifact": "pickable_showcase",
+     "topic": "point",
+     "topic_cos": 0.392,
+     "r_cos": 0.882
+    },
+    {
+     "artifact": "monte_carlo_estimator",
+     "topic": "random",
+     "topic_cos": 0.651,
+     "r_cos": 0.74
+    },
+    {
+     "artifact": "random_walk_terrarium",
+     "topic": "random",
+     "topic_cos": 0.629,
+     "r_cos": 0.716
+    }
+   ],
+   "register_name": "THE META/TEXT \u2014 representation about representation (point_is, 2d_in_3d_point_vis, monte_carlo_estimator)"
+  }
+ ],
+ "hand_named_unmeasured": [
+  "THE PUNCTUM/EXISTENTIAL \u2014 thrownness, being-struck (fontana_puncture; lives in walked prose, thin in card text)",
+  "THE BODY-SIGNAL \u2014 buzz, haptic, sound (invisible to the corpus: the OOV of the body)",
+  "THE INDEXICAL \u2014 'you are here' (you_are_here exists; card text too thin to cluster)",
+  "THE SCALED \u2014 small/medium/large of the same thing (not yet built as a family)"
+ ]
+}

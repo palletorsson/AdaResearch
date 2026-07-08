@@ -1,0 +1,170 @@
+{
+ "generated_by": "scratchpad/jspace_layout.py",
+ "recipe": "TF-IDF->TruncatedSVD(128) LSA on artifact cards + heroes texts; MDS(2D, cosine distance) -> floor plan. Walking distance ~ semantic distance.",
+ "stress1": 0.2749,
+ "corpus_docs": 3936,
+ "half_width_m": 3.6,
+ "in_vocab": 12,
+ "oov": [
+  "consciousness",
+  "okay",
+  "chat",
+  "countdown",
+  "mississippi"
+ ],
+ "tiles": [
+  {
+   "word": "thoughts",
+   "x": 0.605,
+   "z": 2.406,
+   "activation": 0.012,
+   "docs": 3,
+   "introspective": true,
+   "oov": false
+  },
+  {
+   "word": "human",
+   "x": 1.349,
+   "z": 0.079,
+   "activation": 0.353,
+   "docs": 90,
+   "introspective": true,
+   "oov": false
+  },
+  {
+   "word": "finished",
+   "x": 2.658,
+   "z": 1.724,
+   "activation": 0.18,
+   "docs": 46,
+   "introspective": false,
+   "oov": false
+  },
+  {
+   "word": "counting",
+   "x": 3.6,
+   "z": -1.163,
+   "activation": 0.106,
+   "docs": 27,
+   "introspective": false,
+   "oov": false
+  },
+  {
+   "word": "fascinating",
+   "x": -0.971,
+   "z": -0.807,
+   "activation": 0.008,
+   "docs": 2,
+   "introspective": true,
+   "oov": false
+  },
+  {
+   "word": "complete",
+   "x": -2.768,
+   "z": -2.611,
+   "activation": 0.42,
+   "docs": 107,
+   "introspective": false,
+   "oov": false
+  },
+  {
+   "word": "starting",
+   "x": 1.753,
+   "z": -2.38,
+   "activation": 0.184,
+   "docs": 47,
+   "introspective": false,
+   "oov": false
+  },
+  {
+   "word": "claude",
+   "x": -0.572,
+   "z": 2.058,
+   "activation": 1.0,
+   "docs": 255,
+   "introspective": true,
+   "oov": false
+  },
+  {
+   "word": "pause",
+   "x": -2.985,
+   "z": 0.343,
+   "activation": 0.094,
+   "docs": 24,
+   "introspective": false,
+   "oov": false
+  },
+  {
+   "word": "halfway",
+   "x": 0.038,
+   "z": -3.134,
+   "activation": 0.043,
+   "docs": 11,
+   "introspective": false,
+   "oov": false
+  },
+  {
+   "word": "five",
+   "x": -1.548,
+   "z": 2.542,
+   "activation": 0.804,
+   "docs": 205,
+   "introspective": false,
+   "oov": false
+  },
+  {
+   "word": "done",
+   "x": -1.158,
+   "z": 0.943,
+   "activation": 0.247,
+   "docs": 63,
+   "introspective": false,
+   "oov": false
+  },
+  {
+   "word": "consciousness",
+   "x": 3.721,
+   "z": 2.704,
+   "activation": 0.0,
+   "docs": 0,
+   "introspective": true,
+   "oov": true
+  },
+  {
+   "word": "okay",
+   "x": -1.421,
+   "z": 4.375,
+   "activation": 0.0,
+   "docs": 0,
+   "introspective": false,
+   "oov": true
+  },
+  {
+   "word": "chat",
+   "x": -4.6,
+   "z": 0.0,
+   "activation": 0.0,
+   "docs": 0,
+   "introspective": false,
+   "oov": true
+  },
+  {
+   "word": "countdown",
+   "x": -1.421,
+   "z": -4.375,
+   "activation": 0.0,
+   "docs": 0,
+   "introspective": false,
+   "oov": true
+  },
+  {
+   "word": "mississippi",
+   "x": 3.721,
+   "z": -2.704,
+   "activation": 0.0,
+   "docs": 0,
+   "introspective": false,
+   "oov": true
+  }
+ ]
+}

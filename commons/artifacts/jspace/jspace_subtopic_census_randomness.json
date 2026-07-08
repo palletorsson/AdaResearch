@@ -1,0 +1,305 @@
+{
+ "generated_by": "scratchpad/subtopic_census.py",
+ "sequence": "randomness",
+ "ground_truth_maps": 13,
+ "unique_placed_artifacts": 67,
+ "carded": 67,
+ "cardless": [],
+ "chosen_k": 7,
+ "silhouette": 0.13,
+ "ari_vs_maps": 0.207,
+ "clusters": [
+  {
+   "cluster": 5,
+   "size": 21,
+   "maps": {
+    "Random_Definition": 5,
+    "Random_Walk": 5,
+    "Random_Mushrooms": 3,
+    "Random_Cubes": 3,
+    "Random_Rotate_Random_XYZ": 2,
+    "Random_Space": 1,
+    "Random_Space_Geometry": 1,
+    "Random_Remove": 1
+   },
+   "top_terms": [
+    "random",
+    "randomness",
+    "walk",
+    "that",
+    "cubes",
+    "transformations",
+    "grid",
+    "collection"
+   ],
+   "members": [
+    "Random_Rotate_Random_XYZ",
+    "bubbles_random",
+    "coin_toss",
+    "entropy_axiom",
+    "pixel_cloud",
+    "prng_crank_machine",
+    "random_decay_multimesh",
+    "random_edge_profile",
+    "random_number_book_page_1955",
+    "random_number_book_page_collection",
+    "random_object_spawner",
+    "random_space",
+    "random_transformations_geometric",
+    "random_walk_128",
+    "random_walk_collection",
+    "random_walk_leash",
+    "random_walk_terrarium",
+    "reaction_diffusion_intro",
+    "remove_random",
+    "seed_replay_demo",
+    "trng_vs_prng"
+   ]
+  },
+  {
+   "cluster": 2,
+   "size": 11,
+   "maps": {
+    "Random_Gaussian": 8,
+    "Random_Cubes": 1,
+    "Randomness_Examples_of_Randomness": 1,
+    "Random_Definition": 1
+   },
+   "top_terms": [
+    "randomness",
+    "curve",
+    "gaussian",
+    "distribution",
+    "bell",
+    "distributions",
+    "with",
+    "patterns"
+   ],
+   "members": [
+    "GaussianBlurCircle",
+    "GaussianBlurShader",
+    "GaussianPaintSplatter",
+    "dice_throw",
+    "distribution_comparator",
+    "distribution_sampler",
+    "galton_board",
+    "gaussian_random",
+    "monte_carlo_dartboard",
+    "random_bell_curve",
+    "slot_machine"
+   ]
+  },
+  {
+   "cluster": 3,
+   "size": 10,
+   "maps": {
+    "Random_Game": 6,
+    "Random_Rotate_Random_XYZ": 1,
+    "Random_Remove": 1,
+    "Random_Walk": 1,
+    "Randomness_10_PRINT_Algorithm": 1
+   },
+   "top_terms": [
+    "hazards",
+    "test",
+    "with",
+    "for",
+    "creature",
+    "legs",
+    "scene",
+    "fold"
+   ],
+   "members": [
+    "RotateGridCubes",
+    "armadillo_eggling",
+    "hazards_demo",
+    "kaleidocycle_enemy",
+    "kresling_spire",
+    "lab_room",
+    "miura_crawler",
+    "nature_system_demo",
+    "origami_droideka",
+    "scissor_stalker"
+   ]
+  },
+  {
+   "cluster": 6,
+   "size": 9,
+   "maps": {
+    "Randomness_Examples_of_Randomness": 3,
+    "Random_Space_Geometry": 2,
+    "Random_Mushrooms": 1,
+    "Random_Definition": 1,
+    "Random_Pheromone": 1,
+    "Randomness_10_PRINT_Algorithm": 1
+   },
+   "top_terms": [
+    "randomness",
+    "interactive",
+    "procedural",
+    "generation",
+    "using",
+    "algorithm",
+    "particle",
+    "based"
+   ],
+   "members": [
+    "bubble_particles",
+    "digital_materiality_glitch",
+    "env_one",
+    "extreme_randomness",
+    "pheromone_terrain",
+    "pipe_dream",
+    "pollock_painting_in_3d",
+    "sculpt_one",
+    "ten_print_maze_3d"
+   ]
+  },
+  {
+   "cluster": 0,
+   "size": 7,
+   "maps": {
+    "Random_Definition": 5,
+    "Random_Rotate_Random_XYZ": 1,
+    "Random_Space": 1
+   },
+   "top_terms": [
+    "entropy",
+    "sphere",
+    "randomness",
+    "disorder",
+    "grab",
+    "display",
+    "shannon",
+    "chaos"
+   ],
+   "members": [
+    "clipboard",
+    "dark_sphere",
+    "entropy_jar",
+    "hardware_entropy_decay",
+    "random_butterflies",
+    "science_screen",
+    "shannon_entropy_meter"
+   ]
+  },
+  {
+   "cluster": 1,
+   "size": 5,
+   "maps": {
+    "Random_Space_Geometry": 2,
+    "Random_Space": 2,
+    "Random_Mushrooms": 1
+   },
+   "top_terms": [
+    "noise",
+    "randomness",
+    "perlin",
+    "color",
+    "terrain",
+    "random",
+    "from",
+    "blue"
+   ],
+   "members": [
+    "curl_noise_particles",
+    "mushrooms",
+    "noise_mixer",
+    "perlin_noise_bridge",
+    "worley_noise"
+   ]
+  },
+  {
+   "cluster": 4,
+   "size": 4,
+   "maps": {
+    "Random_Game": 2,
+    "Random_Definition": 1,
+    "Randomness_10_PRINT_Algorithm": 1
+   },
+   "top_terms": [
+    "cube",
+    "pickup",
+    "cubes",
+    "that",
+    "primitives",
+    "random",
+    "catalyst",
+    "with"
+   ],
+   "members": [
+    "catalyst_pickup",
+    "cube_projectile_spawner",
+    "pickup_cube_placer",
+    "r_c"
+   ]
+  }
+ ],
+ "map_scatter": [
+  {
+   "map": "Random_Definition",
+   "artifacts": 13,
+   "clusters": 5
+  },
+  {
+   "map": "Random_Remove",
+   "artifacts": 2,
+   "clusters": 2
+  },
+  {
+   "map": "Randomness_10_PRINT_Algorithm",
+   "artifacts": 3,
+   "clusters": 3
+  },
+  {
+   "map": "Random_Cubes",
+   "artifacts": 4,
+   "clusters": 2
+  },
+  {
+   "map": "Random_Rotate_Random_XYZ",
+   "artifacts": 4,
+   "clusters": 3
+  },
+  {
+   "map": "Random_Walk",
+   "artifacts": 6,
+   "clusters": 2
+  },
+  {
+   "map": "Random_Gaussian",
+   "artifacts": 8,
+   "clusters": 1
+  },
+  {
+   "map": "Random_Mushrooms",
+   "artifacts": 5,
+   "clusters": 3
+  },
+  {
+   "map": "Random_Space_Geometry",
+   "artifacts": 5,
+   "clusters": 3
+  },
+  {
+   "map": "Randomness_Examples_of_Randomness",
+   "artifacts": 4,
+   "clusters": 2
+  },
+  {
+   "map": "Random_Pheromone",
+   "artifacts": 1,
+   "clusters": 1
+  },
+  {
+   "map": "Random_Space",
+   "artifacts": 4,
+   "clusters": 3
+  },
+  {
+   "map": "Random_Game",
+   "artifacts": 8,
+   "clusters": 2
+  }
+ ]
+}

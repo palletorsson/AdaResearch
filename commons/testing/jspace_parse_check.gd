@@ -1,0 +1,38 @@
+extends SceneTree
+# One-shot headless check for the jspace artifact family: parse the scripts,
+# instantiate the scenes, confirm the layout json loads, then write a result
+# file (for the watchdog) and quit.
+
+const OUT := "user://jspace_parse_check.json"
+
+func _initialize() -> void:
+	var result := {"ok": true, "errors": []}
+	for path in [
+		"res://commons/artifacts/jspace/jspace_zoom_chamber.tscn",
+		"res://commons/artifacts/jspace/jspace_feature_field.tscn",
+		"res://commons/artifacts/jspace/jspace_count_plates.tscn",
+		"res://commons/artifacts/jspace/jspace_ring.tscn",
+	]:
+		var scene = load(path)
+		if scene == null:
+			result["ok"] = false
+			result["errors"].append("load failed: %s" % path)
+			continue
+		var inst = scene.instantiate()
+		if inst == null:
+			result["ok"] = false
+			result["errors"].append("instantiate failed: %s" % path)
+			continue
+		root.add_child(inst)   # runs _ready — builds visuals headless
+		print("OK  %s  (%d children after _ready)" % [path, inst.get_child_count()])
+	var f := FileAccess.open("res://commons/artifacts/jspace/jspace_layout.json", FileAccess.READ)
+	if f == null or not (JSON.parse_string(f.get_as_text()) is Dictionary):
+		result["ok"] = false
+		result["errors"].append("layout json unreadable")
+	else:
+		print("OK  jspace_layout.json")
+	var out := FileAccess.open(OUT, FileAccess.WRITE)
+	out.store_string(JSON.stringify(result))
+	out.close()
+	print("RESULT: %s" % JSON.stringify(result))
+	quit(0 if result["ok"] else 1)
