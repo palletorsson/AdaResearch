@@ -673,3 +673,30 @@ re-weight.
 NEXT: his walk-notes -> re-weight score -> generation 3; niche podiums
 (vitrine INSIDE niches); gaze_ride as a sightline term; then feed the
 best genomes to the Curator as the room library exhibitions compile into.
+
+## 2026-07-08 — gallery evolution v2: three tastes, three buildings
+
+"Use your full fantasy, use auto research like dna. keep going." —
+tools/gallery_evolve.py: genome v2 (8 forms incl. basilica/cross/rotunda/
+pockets/terrace, 5 podium motifs incl. ring/spiral/constellation, niche
+depth, freestanding route walls, 3 light moods), THREE taste-profiles
+evolved as separate populations (pop 24, 5 gens, tournament + crossover +
+elitism), champions only written to disk (12 maps, all pathfinder-clean).
+
+RESULTS (doc/reports/gallery_dna_research.md):
+- CAPACITY -> CROSS + constellation + dramatic (25-29 slots): the
+  crossing walls quadruple hanging surface while constellation scatters
+  podiums into every quadrant.
+- DRAMA -> loop/pockets + DRAMATIC light, vista 26; a SPIRAL-motif loop
+  gallery is champion 1 — the walk itself becomes the drama.
+- INTIMACY -> BASILICA + ring + DUSK + 8 deep niches. The learning curve
+  is the story: 26.1 -> 29.6 -> 43.8 -> 47.8 -> 49.3 — evolution DISCOVERED
+  the basilica (nave, pierced colonnades, niche cloister) from parts no
+  seed combined. Capture confirms: a genuine basilica nobody drew.
+- Conclusion in the placement-research tradition: NO SINGLE FORM WINS —
+  the taste-profile is the choice. Curator picks the profile; evolution
+  furnishes the building.
+
+NEXT: Palle walks CAP_1 / DRA_1 / INT_1 -> verdicts re-weight the
+fitness -> generation 6+; then the Curator compiles exhibitions INTO
+champion genomes (architecture library complete: empty, scored, evolved).

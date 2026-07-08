@@ -1,0 +1,500 @@
+{
+ "generated_by": "tools/gallery_evolve.py",
+ "seed": 461,
+ "pop": 24,
+ "gens": 5,
+ "profiles": {
+  "capacity": {
+   "history": [
+    {
+     "gen": 1,
+     "best": 38.72,
+     "mean": 31.25,
+     "best_form": "basilica"
+    },
+    {
+     "gen": 2,
+     "best": 38.84,
+     "mean": 34.37,
+     "best_form": "basilica"
+    },
+    {
+     "gen": 3,
+     "best": 39.8,
+     "mean": 36.5,
+     "best_form": "cross"
+    },
+    {
+     "gen": 4,
+     "best": 39.8,
+     "mean": 37.94,
+     "best_form": "cross"
+    },
+    {
+     "gen": 5,
+     "best": 39.8,
+     "mean": 39.09,
+     "best_form": "cross"
+    }
+   ],
+   "champions": [
+    {
+     "id": "Gallery_CAP_1",
+     "fitness": 39.8,
+     "genome": {
+      "w": 25,
+      "d": 12,
+      "form": "cross",
+      "height": "flat",
+      "niche_every": 3,
+      "niche_deep": 2,
+      "podium_motif": "constellation",
+      "podium_spacing": 3,
+      "vitrines": 6,
+      "dais": 2,
+      "route_walls": 1,
+      "light": "dramatic"
+     },
+     "measure": {
+      "slots": 25,
+      "kinds": 4,
+      "n_niche": 7,
+      "hang": 129,
+      "vista": 25,
+      "doors": 0,
+      "terraced": false,
+      "loop": true,
+      "min_slot_dist": 2.0,
+      "reachable": true,
+      "dais": 2,
+      "light": "dramatic"
+     }
+    },
+    {
+     "id": "Gallery_CAP_2",
+     "fitness": 39.8,
+     "genome": {
+      "w": 25,
+      "d": 12,
+      "form": "cross",
+      "height": "flat",
+      "niche_every": 3,
+      "niche_deep": 2,
+      "podium_motif": "constellation",
+      "podium_spacing": 3,
+      "vitrines": 6,
+      "dais": 2,
+      "route_walls": 1,
+      "light": "dramatic"
+     },
+     "measure": {
+      "slots": 25,
+      "kinds": 4,
+      "n_niche": 7,
+      "hang": 129,
+      "vista": 25,
+      "doors": 0,
+      "terraced": false,
+      "loop": true,
+      "min_slot_dist": 2.0,
+      "reachable": true,
+      "dais": 2,
+      "light": "dramatic"
+     }
+    },
+    {
+     "id": "Gallery_CAP_3",
+     "fitness": 39.8,
+     "genome": {
+      "w": 25,
+      "d": 12,
+      "form": "cross",
+      "height": "flat",
+      "niche_every": 4,
+      "niche_deep": 1,
+      "podium_motif": "constellation",
+      "podium_spacing": 3,
+      "vitrines": 6,
+      "dais": 2,
+      "route_walls": 1,
+      "light": "bright"
+     },
+     "measure": {
+      "slots": 23,
+      "kinds": 4,
+      "n_niche": 5,
+      "hang": 111,
+      "vista": 25,
+      "doors": 0,
+      "terraced": false,
+      "loop": true,
+      "min_slot_dist": 2.0,
+      "reachable": true,
+      "dais": 2,
+      "light": "bright"
+     }
+    },
+    {
+     "id": "Gallery_CAP_4",
+     "fitness": 39.8,
+     "genome": {
+      "w": 25,
+      "d": 18,
+      "form": "cross",
+      "height": "flat",
+      "niche_every": 3,
+      "niche_deep": 2,
+      "podium_motif": "double_row",
+      "podium_spacing": 3,
+      "vitrines": 6,
+      "dais": 2,
+      "route_walls": 0,
+      "light": "dramatic"
+     },
+     "measure": {
+      "slots": 29,
+      "kinds": 4,
+      "n_niche": 7,
+      "hang": 143,
+      "vista": 25,
+      "doors": 0,
+      "terraced": false,
+      "loop": true,
+      "min_slot_dist": 2.2,
+      "reachable": true,
+      "dais": 2,
+      "light": "dramatic"
+     }
+    }
+   ]
+  },
+  "drama": {
+   "history": [
+    {
+     "gen": 1,
+     "best": 40.9,
+     "mean": 28.57,
+     "best_form": "cross"
+    },
+    {
+     "gen": 2,
+     "best": 47.9,
+     "mean": 36.41,
+     "best_form": "cross"
+    },
+    {
+     "gen": 3,
+     "best": 48.8,
+     "mean": 41.72,
+     "best_form": "loop"
+    },
+    {
+     "gen": 4,
+     "best": 48.8,
+     "mean": 44.55,
+     "best_form": "loop"
+    },
+    {
+     "gen": 5,
+     "best": 48.8,
+     "mean": 46.52,
+     "best_form": "loop"
+    }
+   ],
+   "champions": [
+    {
+     "id": "Gallery_DRA_1",
+     "fitness": 48.8,
+     "genome": {
+      "w": 26,
+      "d": 18,
+      "form": "loop",
+      "height": "step_down",
+      "niche_every": 4,
+      "niche_deep": 1,
+      "podium_motif": "spiral",
+      "podium_spacing": 3,
+      "vitrines": 2,
+      "dais": 2,
+      "route_walls": 1,
+      "light": "dramatic"
+     },
+     "measure": {
+      "slots": 17,
+      "kinds": 4,
+      "n_niche": 6,
+      "hang": 132,
+      "vista": 26,
+      "doors": 0,
+      "terraced": true,
+      "loop": true,
+      "min_slot_dist": 2.0,
+      "reachable": true,
+      "dais": 2,
+      "light": "dramatic"
+     }
+    },
+    {
+     "id": "Gallery_DRA_2",
+     "fitness": 48.8,
+     "genome": {
+      "w": 26,
+      "d": 18,
+      "form": "pockets",
+      "height": "step_down",
+      "niche_every": 4,
+      "niche_deep": 1,
+      "podium_motif": "double_row",
+      "podium_spacing": 3,
+      "vitrines": 2,
+      "dais": 2,
+      "route_walls": 1,
+      "light": "dramatic"
+     },
+     "measure": {
+      "slots": 26,
+      "kinds": 4,
+      "n_niche": 6,
+      "hang": 152,
+      "vista": 26,
+      "doors": 4,
+      "terraced": true,
+      "loop": true,
+      "min_slot_dist": 2.0,
+      "reachable": true,
+      "dais": 2,
+      "light": "dramatic"
+     }
+    },
+    {
+     "id": "Gallery_DRA_3",
+     "fitness": 48.8,
+     "genome": {
+      "w": 26,
+      "d": 14,
+      "form": "cross",
+      "height": "step_down",
+      "niche_every": 4,
+      "niche_deep": 1,
+      "podium_motif": "double_row",
+      "podium_spacing": 3,
+      "vitrines": 2,
+      "dais": 2,
+      "route_walls": 1,
+      "light": "dramatic"
+     },
+     "measure": {
+      "slots": 26,
+      "kinds": 4,
+      "n_niche": 6,
+      "hang": 122,
+      "vista": 26,
+      "doors": 0,
+      "terraced": true,
+      "loop": true,
+      "min_slot_dist": 2.0,
+      "reachable": true,
+      "dais": 2,
+      "light": "dramatic"
+     }
+    },
+    {
+     "id": "Gallery_DRA_4",
+     "fitness": 48.8,
+     "genome": {
+      "w": 26,
+      "d": 18,
+      "form": "loop",
+      "height": "step_down",
+      "niche_every": 5,
+      "niche_deep": 1,
+      "podium_motif": "double_row",
+      "podium_spacing": 3,
+      "vitrines": 2,
+      "dais": 2,
+      "route_walls": 1,
+      "light": "dramatic"
+     },
+     "measure": {
+      "slots": 20,
+      "kinds": 4,
+      "n_niche": 4,
+      "hang": 128,
+      "vista": 26,
+      "doors": 0,
+      "terraced": true,
+      "loop": true,
+      "min_slot_dist": 2.0,
+      "reachable": true,
+      "dais": 2,
+      "light": "dramatic"
+     }
+    }
+   ]
+  },
+  "intimacy": {
+   "history": [
+    {
+     "gen": 1,
+     "best": 26.1,
+     "mean": 12.45,
+     "best_form": "cross"
+    },
+    {
+     "gen": 2,
+     "best": 29.6,
+     "mean": 20.32,
+     "best_form": "basilica"
+    },
+    {
+     "gen": 3,
+     "best": 43.8,
+     "mean": 22.83,
+     "best_form": "basilica"
+    },
+    {
+     "gen": 4,
+     "best": 47.8,
+     "mean": 29.5,
+     "best_form": "basilica"
+    },
+    {
+     "gen": 5,
+     "best": 49.3,
+     "mean": 34.22,
+     "best_form": "basilica"
+    }
+   ],
+   "champions": [
+    {
+     "id": "Gallery_INT_1",
+     "fitness": 49.3,
+     "genome": {
+      "w": 26,
+      "d": 11,
+      "form": "basilica",
+      "height": "step_down",
+      "niche_every": 3,
+      "niche_deep": 1,
+      "podium_motif": "ring",
+      "podium_spacing": 3,
+      "vitrines": 4,
+      "dais": 2,
+      "route_walls": 3,
+      "light": "dusk"
+     },
+     "measure": {
+      "slots": 21,
+      "kinds": 4,
+      "n_niche": 8,
+      "hang": 134,
+      "vista": 26,
+      "doors": 16,
+      "terraced": true,
+      "loop": true,
+      "min_slot_dist": 2.2,
+      "reachable": true,
+      "dais": 2,
+      "light": "dusk"
+     }
+    },
+    {
+     "id": "Gallery_INT_2",
+     "fitness": 47.8,
+     "genome": {
+      "w": 26,
+      "d": 11,
+      "form": "basilica",
+      "height": "step_down",
+      "niche_every": 3,
+      "niche_deep": 1,
+      "podium_motif": "axis_row",
+      "podium_spacing": 3,
+      "vitrines": 2,
+      "dais": 1,
+      "route_walls": 1,
+      "light": "dusk"
+     },
+     "measure": {
+      "slots": 18,
+      "kinds": 3,
+      "n_niche": 8,
+      "hang": 126,
+      "vista": 26,
+      "doors": 16,
+      "terraced": true,
+      "loop": true,
+      "min_slot_dist": 3.0,
+      "reachable": true,
+      "dais": 0,
+      "light": "dusk"
+     }
+    },
+    {
+     "id": "Gallery_INT_3",
+     "fitness": 47.8,
+     "genome": {
+      "w": 26,
+      "d": 11,
+      "form": "basilica",
+      "height": "step_down",
+      "niche_every": 3,
+      "niche_deep": 1,
+      "podium_motif": "axis_row",
+      "podium_spacing": 3,
+      "vitrines": 2,
+      "dais": 1,
+      "route_walls": 1,
+      "light": "dusk"
+     },
+     "measure": {
+      "slots": 18,
+      "kinds": 3,
+      "n_niche": 8,
+      "hang": 126,
+      "vista": 26,
+      "doors": 16,
+      "terraced": true,
+      "loop": true,
+      "min_slot_dist": 3.0,
+      "reachable": true,
+      "dais": 0,
+      "light": "dusk"
+     }
+    },
+    {
+     "id": "Gallery_INT_4",
+     "fitness": 47.8,
+     "genome": {
+      "w": 26,
+      "d": 12,
+      "form": "basilica",
+      "height": "flat",
+      "niche_every": 3,
+      "niche_deep": 1,
+      "podium_motif": "ring",
+      "podium_spacing": 5,
+      "vitrines": 0,
+      "dais": 1,
+      "route_walls": 3,
+      "light": "dusk"
+     },
+     "measure": {
+      "slots": 15,
+      "kinds": 3,
+      "n_niche": 8,
+      "hang": 136,
+      "vista": 26,
+      "doors": 16,
+      "terraced": false,
+      "loop": true,
+      "min_slot_dist": 3.0,
+      "reachable": true,
+      "dais": 1,
+      "light": "dusk"
+     }
+    }
+   ]
+  }
+ }
+}
