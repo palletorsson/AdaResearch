@@ -9,7 +9,9 @@ class_name DesktopPlayer
 @export var gravity: float = 9.8
 @export var use_gravity: bool = true
 @export var allow_jump: bool = true
+@export var fly_mode: bool = false     # F toggles walk <-> fly at runtime
 @export var interaction_distance: float = 5.0
+var _fly_key_held: bool = false
 
 # Camera reference
 @onready var camera: Camera3D = $Head/Camera3D
@@ -101,8 +103,24 @@ func _physics_process(delta: float) -> void:
 	# Apply mouse look
 	_apply_camera_rotation(delta)
 
-	# Keep preview mode stable when gravity is disabled.
-	if use_gravity:
+	# F toggles walk <-> fly (fly: Space up, Ctrl down)
+	if Input.is_key_pressed(KEY_F):
+		if not _fly_key_held:
+			_fly_key_held = true
+			fly_mode = not fly_mode
+			print("DesktopPlayer: %s mode" % ("FLY" if fly_mode else "WALK"))
+	else:
+		_fly_key_held = false
+
+	if fly_mode:
+		var vy := 0.0
+		if Input.is_key_pressed(KEY_SPACE):
+			vy += 1.0
+		if Input.is_key_pressed(KEY_CTRL):
+			vy -= 1.0
+		var fly_speed: float = sprint_speed if Input.is_key_pressed(KEY_SHIFT) else walk_speed
+		velocity.y = vy * fly_speed
+	elif use_gravity:
 		if not is_on_floor():
 			velocity.y -= gravity * delta
 

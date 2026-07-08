@@ -42,7 +42,7 @@ size = Vector2(100, 100)
 
 [node name="DesktopMapTester" type="Node3D" unique_id=1260083495]
 script = ExtResource("1_tester")
-start_map = "Proto_Fractal_Recursion"
+start_map = "Exhibition_PressedFromNamedHands"
 start_sequence = "testmaps"
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2121602924]
@@ -54,7 +54,7 @@ shadow_enabled = true
 
 [node name="DesktopPlayer" parent="." unique_id=128389222 instance=ExtResource("2_player")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
-use_gravity = false
+use_gravity = true
 allow_jump = false
 
 [node name="GridSystem" parent="." unique_id=2023279570 instance=ExtResource("3_grid")]

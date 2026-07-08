@@ -203,7 +203,7 @@ func _position_player_at_spawn(map_data: Dictionary) -> void:
 			var cell: Variant = row_array[x]
 			if typeof(cell) == TYPE_STRING and str(cell).begins_with("s"):
 				# Position player at spawn (convert grid coords to world)
-				var spawn_pos: Vector3 = Vector3(x, 1.8, z)
+				var spawn_pos: Vector3 = Vector3(x, 3.0, z)  # above floor top; gravity settles the player
 				player.global_position = spawn_pos
 				print("DesktopMapTester: Player spawned at grid position (%d, %d) = %s" % [x, z, spawn_pos])
 				return
