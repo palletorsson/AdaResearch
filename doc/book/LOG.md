@@ -440,3 +440,22 @@ HEADLINES:
 
 URL: localhost:3003/jspace-census (verified: 24 rows, expansion, no
 console errors).
+
+## 2026-07-08 — Random_Entropy: the orphan pocket gets its room
+
+The census found a clean entropy pocket buried in Random_Definition
+(entropy_jar, shannon_entropy_meter, hardware_entropy_decay, dark_sphere).
+Built its concept room: commons/maps/Random_Entropy — 16x10, five phases:
+spawn west -> shannon_entropy_meter (teaching) -> north machine row
+(entropy_jar, hardware_entropy_decay, trng_vs_prng) -> south diagram wall
+(entropy_axiom, science_screen) -> dark end (dark_sphere +
+random_butterflies, the incompressibles) -> teleporter. blurb + tutorial
+(claim: entropy measures surprise not mess; try: can you or the meter
+tell true from pseudo?). Inserted after Random_Definition -> randomness
+now 14 maps. Pathfinder 153/153; captured.
+
+Census refreshed: entropy pocket now SPANS Definition(4)+Entropy(2) —
+the sweep attributes artifacts to their FIRST map in sequence order, so
+the upstream survey still claims what it previews. Correct game shape
+(survey previews, concept room teaches); a most-specific-map attribution
+is a possible census refinement.

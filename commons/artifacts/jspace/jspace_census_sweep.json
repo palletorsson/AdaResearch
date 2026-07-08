@@ -19,65 +19,95 @@
    "etudes": 0,
    "etude_maps": [],
    "thin_maps": [],
-   "pockets": 14,
-   "silhouette": 0.15,
-   "ari": 0.128,
+   "pockets": 15,
+   "silhouette": 0.151,
+   "ari": 0.104,
    "clusters": [
     {
-     "size": 9,
+     "size": 12,
      "kind": "SPANS",
      "maps": {
-      "Primitives_Portals": 2,
-      "Primitives_Ignorance": 2,
+      "Primitives_Ignorance": 3,
+      "Primitives_Melencolia": 2,
       "Point_One": 2,
-      "Primitives_Melencolia": 1
+      "Point_Triangle_Context": 2
      },
      "terms": [
       "primitives",
-      "torus",
       "with",
+      "torus",
       "into",
-      "misc",
-      "that"
+      "that",
+      "profile"
      ],
      "members": [
-      "achilles_tortoise",
+      "bigframe",
       "combine_portals",
       "diamonds",
       "diamondtoruscollection",
       "folding_past",
+      "hole_with_cones",
+      "interactive_point_origin_force",
       "mystic_writing_pad",
       "plus",
       "quad",
+      "room_grammar",
+      "triangleprofiles"
+     ]
+    },
+    {
+     "size": 9,
+     "kind": "SPANS",
+     "maps": {
+      "Point_Lines": 3,
+      "Point_One": 2,
+      "Primitives_Ignorance": 2,
+      "Primitives_Portals": 1
+     },
+     "terms": [
+      "primitives",
+      "lines",
+      "from",
+      "cube",
+      "rock",
+      "line"
+     ],
+     "members": [
+      "achilles_tortoise",
+      "cube_scene",
+      "draw_dot",
+      "origin",
+      "perspective_lines",
+      "roughrock",
+      "scale_lines",
+      "star_primitive",
       "you_are_here"
      ]
     },
     {
-     "size": 8,
+     "size": 7,
      "kind": "SPANS",
      "maps": {
-      "Primitives_Ignorance": 4,
-      "Point_Lines": 2,
-      "Primitives_Melencolia": 1,
-      "Point_Line_Grid": 1
+      "Primitives_Ignorance": 5,
+      "Point_Animatedcube": 1,
+      "Primitives_Polythedra": 1
      },
      "terms": [
       "primitives",
-      "with",
-      "grid",
-      "primitive",
-      "lines",
-      "for"
+      "faces",
+      "grab",
+      "triangular",
+      "cube",
+      "vertices"
      ],
      "members": [
-      "bigframe",
-      "capsule",
-      "dgrid",
-      "grid_lines",
-      "hole_with_cones",
-      "lightrod",
+      "animatedcubebuilder",
+      "grab_octahedron",
+      "grab_trihedron",
       "lshape",
-      "star_primitive"
+      "platonic_grabbables",
+      "prism_block",
+      "truncatedtetrahedron"
      ]
     },
     {
@@ -106,111 +136,6 @@
      ]
     },
     {
-     "size": 7,
-     "kind": "SPANS",
-     "maps": {
-      "Primitives_Melencolia": 2,
-      "Point_Lines": 2,
-      "Point_One": 1,
-      "Primitives_Ignorance": 1
-     },
-     "terms": [
-      "display",
-      "commons",
-      "artifacts",
-      "text",
-      "with",
-      "shaders"
-     ],
-     "members": [
-      "code_display",
-      "durer_scene",
-      "frame_counter_display",
-      "laser_measure",
-      "library_rack",
-      "polyhedron_nets_cube",
-      "science_screen"
-     ]
-    },
-    {
-     "size": 7,
-     "kind": "SPANS",
-     "maps": {
-      "Point_Lines": 3,
-      "Point_Trace": 1,
-      "Point_One": 1,
-      "Primitives_Ignorance": 1
-     },
-     "terms": [
-      "primitives",
-      "lines",
-      "from",
-      "cube",
-      "points",
-      "profile"
-     ],
-     "members": [
-      "cube_scene",
-      "draw_dot",
-      "origin",
-      "perspective_lines",
-      "roughrock",
-      "scale_lines",
-      "triangleprofiles"
-     ]
-    },
-    {
-     "size": 7,
-     "kind": "MAP-SHAPED",
-     "maps": {
-      "Point_Lines": 6,
-      "Point_Line_Grid": 1
-     },
-     "terms": [
-      "line",
-      "primitives",
-      "grab",
-      "wavefunctions",
-      "point",
-      "space"
-     ],
-     "members": [
-      "grabbable_line",
-      "klee_walking_point",
-      "laser_sword",
-      "line",
-      "line_builder_3d",
-      "modulor_man_demo",
-      "player_trace"
-     ]
-    },
-    {
-     "size": 6,
-     "kind": "SPANS",
-     "maps": {
-      "Point_Lines": 2,
-      "Point_Triangle_Context": 2,
-      "Primitives_Ignorance": 1,
-      "Primitives_Polythedra": 1
-     },
-     "terms": [
-      "puzzle",
-      "line",
-      "interactive",
-      "primitives",
-      "snap",
-      "endpoints"
-     ],
-     "members": [
-      "parallel_line_puzzle",
-      "plus_line_puzzle",
-      "quad_line_puzzle",
-      "snap_octahedron_puzzle",
-      "snap_tetrahedron_puzzle",
-      "triangle_line_puzzle"
-     ]
-    },
-    {
      "size": 6,
      "kind": "SPANS",
      "maps": {
@@ -224,8 +149,8 @@
       "primitives",
       "grid",
       "point",
-      "for",
-      "pickable"
+      "pickable",
+      "grab"
      ],
      "members": [
       "dark_sphere",
@@ -234,31 +159,6 @@
       "grab_sphere_point_snap",
       "laser_exploding_sphere",
       "sphere"
-     ]
-    },
-    {
-     "size": 6,
-     "kind": "SPANS",
-     "maps": {
-      "Primitives_Ignorance": 4,
-      "Point_Animatedcube": 1,
-      "Primitives_Polythedra": 1
-     },
-     "terms": [
-      "primitives",
-      "grab",
-      "faces",
-      "cube",
-      "vertices",
-      "triangular"
-     ],
-     "members": [
-      "animatedcubebuilder",
-      "grab_octahedron",
-      "grab_trihedron",
-      "platonic_grabbables",
-      "prism_block",
-      "truncatedtetrahedron"
      ]
     },
     {
@@ -273,7 +173,7 @@
       "sphere",
       "rings",
       "primitives",
-      "poly"
+      "cylinder"
      ],
      "members": [
       "capsule_radials_rings",
@@ -287,101 +187,215 @@
      "size": 5,
      "kind": "MAP-SHAPED",
      "maps": {
-      "Primitives_Melencolia": 3,
+      "Point_Lines": 4,
+      "Point_Line_Grid": 1
+     },
+     "terms": [
+      "line",
+      "primitives",
+      "grab",
+      "with",
+      "point",
+      "grabbable"
+     ],
+     "members": [
+      "grabbable_line",
+      "klee_walking_point",
+      "laser_sword",
+      "line",
+      "player_trace"
+     ]
+    },
+    {
+     "size": 4,
+     "kind": "mixed",
+     "maps": {
+      "Point_Lines": 2,
+      "Point_Triangle_Context": 2
+     },
+     "terms": [
+      "puzzle",
+      "line",
+      "interactive",
+      "primitives",
+      "lines",
+      "snap"
+     ],
+     "members": [
+      "parallel_line_puzzle",
+      "plus_line_puzzle",
+      "quad_line_puzzle",
+      "triangle_line_puzzle"
+     ]
+    },
+    {
+     "size": 4,
+     "kind": "SPANS",
+     "maps": {
+      "Primitives_Melencolia": 1,
+      "Primitives_Ignorance": 1,
+      "Point_Animatedcube": 1,
+      "Point_Lines": 1
+     },
+     "terms": [
+      "commons",
+      "artifacts",
+      "shaders",
+      "cube",
+      "display",
+      "shader"
+     ],
+     "members": [
+      "durer_scene",
+      "library_rack",
+      "polyhedron_nets_cube",
+      "science_screen"
+     ]
+    },
+    {
+     "size": 4,
+     "kind": "MAP-SHAPED",
+     "maps": {
+      "Primitives_Polythedra": 3,
+      "Point_One": 1
+     },
+     "terms": [
+      "hazards",
+      "path",
+      "game",
+      "life",
+      "player",
+      "test"
+     ],
+     "members": [
+      "becoming_catalyst",
+      "lab_room",
+      "path_game_controller",
+      "path_watchdog"
+     ]
+    },
+    {
+     "size": 4,
+     "kind": "SPANS",
+     "maps": {
+      "Point_Lines": 2,
+      "Primitives_Ignorance": 1,
+      "Point_Line_Grid": 1
+     },
+     "terms": [
+      "primitives",
+      "grid",
+      "with",
+      "for",
+      "lines",
+      "primitive"
+     ],
+     "members": [
+      "capsule",
+      "dgrid",
+      "grid_lines",
+      "lightrod"
+     ]
+    },
+    {
+     "size": 4,
+     "kind": "mixed",
+     "maps": {
+      "Primitives_Melencolia": 2,
       "Primitives_Polythedra": 2
      },
      "terms": [
       "pyramid",
       "primitives",
-      "primitive",
-      "square",
       "grab",
-      "cube"
+      "primitive",
+      "cube",
+      "square"
      ],
      "members": [
       "pyramid",
       "pyramid_edit",
       "pyramidlong",
-      "snap_pyramid_puzzle",
       "tentacle_placer"
+     ]
+    },
+    {
+     "size": 3,
+     "kind": "SPANS",
+     "maps": {
+      "Primitives_Ignorance": 1,
+      "Primitives_Melencolia": 1,
+      "Primitives_Polythedra": 1
+     },
+     "terms": [
+      "puzzle",
+      "snap",
+      "interactive",
+      "primitives",
+      "points",
+      "pyramid"
+     ],
+     "members": [
+      "snap_octahedron_puzzle",
+      "snap_pyramid_puzzle",
+      "snap_tetrahedron_puzzle"
+     ]
+    },
+    {
+     "size": 3,
+     "kind": "SPANS",
+     "maps": {
+      "Primitives_Melencolia": 1,
+      "Point_One": 1,
+      "Point_Lines": 1
+     },
+     "terms": [
+      "display",
+      "commons",
+      "artifacts",
+      "text",
+      "primitives",
+      "showing"
+     ],
+     "members": [
+      "code_display",
+      "frame_counter_display",
+      "laser_measure"
      ]
     },
     {
      "size": 2,
      "kind": "MAP-SHAPED",
      "maps": {
-      "Primitives_Polythedra": 2
+      "Point_Lines": 2
      },
      "terms": [
-      "path",
-      "game",
-      "hazards",
-      "life",
-      "player",
-      "block"
-     ],
-     "members": [
-      "path_game_controller",
-      "path_watchdog"
-     ]
-    },
-    {
-     "size": 2,
-     "kind": "mixed",
-     "maps": {
-      "Primitives_Polythedra": 1,
-      "Point_One": 1
-     },
-     "terms": [
-      "force",
-      "catalyst",
-      "field",
-      "hazards",
-      "that",
-      "player"
-     ],
-     "members": [
-      "becoming_catalyst",
-      "interactive_point_origin_force"
-     ]
-    },
-    {
-     "size": 2,
-     "kind": "mixed",
-     "maps": {
-      "Point_One": 1,
-      "Point_Line_Grid": 1
-     },
-     "terms": [
-      "room",
-      "test",
-      "procgen",
-      "extra",
+      "wavefunctions",
+      "line",
+      "demo",
+      "scale",
       "space",
-      "lab"
+      "wave"
      ],
      "members": [
-      "lab_room",
-      "room_grammar"
+      "line_builder_3d",
+      "modulor_man_demo"
      ]
     }
    ],
    "registers": {
     "HAND": null,
-    "PUZZLE": [
-     "snap_octahedron_puzzle",
-     0.59
-    ],
-    "DIAGRAM": [
-     "perspective_lines",
-     0.437
-    ],
+    "PUZZLE": null,
+    "DIAGRAM": null,
     "WALK": null,
-    "MACHINE": null,
+    "MACHINE": [
+     "durer_scene",
+     0.646
+    ],
     "EXHIBIT": null,
     "META": [
-     "durer_scene",
-     0.701
+     "snap_octahedron_puzzle",
+     0.697
     ]
    },
    "map_rows": [
@@ -390,15 +404,14 @@
      "n": 9,
      "species": "survey",
      "pockets": [
-      1,
+      0,
       4,
       5,
       10,
-      11,
       13
      ],
      "registers": [
-      "META"
+      "MACHINE"
      ],
      "artifacts": [
       "CoordinateSystem3M",
@@ -419,15 +432,16 @@
      "pockets": [
       0,
       1,
-      3,
+      2,
       5,
+      6,
       10,
+      11,
       12,
       13
      ],
      "registers": [
-      "DIAGRAM",
-      "PUZZLE"
+      "META"
      ],
      "artifacts": [
       "cube_scene",
@@ -457,11 +471,11 @@
      "n": 5,
      "species": "survey",
      "pockets": [
-      1,
+      0,
+      2,
       4,
       5,
-      10,
-      13
+      10
      ],
      "registers": [],
      "artifacts": [
@@ -477,10 +491,10 @@
      "n": 5,
      "species": "survey",
      "pockets": [
-      1,
-      3,
-      12,
-      13
+      4,
+      6,
+      10,
+      11
      ],
      "registers": [],
      "artifacts": [
@@ -496,16 +510,15 @@
      "n": 14,
      "species": "survey",
      "pockets": [
-      0,
       1,
       2,
       4,
       5,
-      10,
-      13
+      9,
+      10
      ],
      "registers": [
-      "PUZZLE"
+      "META"
      ],
      "artifacts": [
       "dark_sphere",
@@ -530,16 +543,15 @@
      "species": "survey",
      "pockets": [
       0,
-      1,
+      4,
+      5,
       7,
       8,
-      9,
       10,
-      11,
-      13
+      14
      ],
      "registers": [
-      "PUZZLE"
+      "META"
      ],
      "artifacts": [
       "becoming_catalyst",
@@ -560,12 +572,12 @@
      "n": 5,
      "species": "room",
      "pockets": [
-      1,
-      5,
-      8
+      2,
+      7,
+      10
      ],
      "registers": [
-      "META"
+      "MACHINE"
      ],
      "artifacts": [
       "animatedcubebuilder",
@@ -581,17 +593,18 @@
      "species": "survey",
      "pockets": [
       0,
-      1,
       2,
       3,
       4,
-      5,
       6,
+      7,
       8,
+      9,
       10
      ],
      "registers": [
-      "PUZZLE"
+      "MACHINE",
+      "META"
      ],
      "artifacts": [
       "capsule",
@@ -622,11 +635,12 @@
     {
      "map": "Primitives_Portals",
      "n": 5,
-     "species": "room",
+     "species": "survey",
      "pockets": [
-      1,
-      3,
-      4
+      0,
+      4,
+      6,
+      10
      ],
      "registers": [],
      "artifacts": [
@@ -642,17 +656,18 @@
      "n": 11,
      "species": "survey",
      "pockets": [
-      1,
-      3,
+      0,
+      2,
       4,
-      5,
       7,
       8,
-      10
+      10,
+      13,
+      14
      ],
      "registers": [
-      "META",
-      "PUZZLE"
+      "MACHINE",
+      "META"
      ],
      "artifacts": [
       "bigframe",
@@ -678,37 +693,10 @@
    "etudes": 0,
    "etude_maps": [],
    "thin_maps": [],
-   "pockets": 8,
-   "silhouette": 0.179,
-   "ari": 0.201,
+   "pockets": 9,
+   "silhouette": 0.168,
+   "ari": 0.362,
    "clusters": [
-    {
-     "size": 7,
-     "kind": "SPANS",
-     "maps": {
-      "Trans_RotationSpectacle": 2,
-      "Trans_Translation": 2,
-      "Trans_Rotation": 2,
-      "Trans_AxisDecomposition": 1
-     },
-     "terms": [
-      "rotation",
-      "into",
-      "motion",
-      "that",
-      "translation",
-      "through"
-     ],
-     "members": [
-      "boolean_tunnel",
-      "carousel_cake",
-      "player_trace",
-      "rotate_grid_cubes",
-      "science_screen",
-      "spin",
-      "toruscylinder"
-     ]
-    },
     {
      "size": 6,
      "kind": "MAP-SHAPED",
@@ -719,8 +707,8 @@
      "terms": [
       "rotation",
       "scale",
-      "matrix",
       "translation",
+      "matrix",
       "transform",
       "transforms"
      ],
@@ -734,21 +722,22 @@
      ]
     },
     {
-     "size": 4,
-     "kind": "mixed",
+     "size": 5,
+     "kind": "MAP-SHAPED",
      "maps": {
-      "Trans_AxisDecomposition": 2,
+      "Trans_AxisDecomposition": 3,
       "Trans_Translation": 2
      },
      "terms": [
       "cube",
       "axis",
       "translation",
+      "rotation",
       "that",
-      "motion",
-      "along"
+      "motion"
      ],
      "members": [
+      "toruscylinder",
       "translation_cube_demo",
       "x_translation_cube",
       "y_translation_cube",
@@ -756,44 +745,66 @@
      ]
     },
     {
-     "size": 3,
+     "size": 5,
      "kind": "MAP-SHAPED",
      "maps": {
-      "Trans_Translation": 2,
-      "Trans_Scale": 1
+      "Trans_Translation": 4,
+      "Trans_AxisDecomposition": 1
      },
      "terms": [
-      "commons",
-      "artifacts",
       "that",
       "cube",
-      "space",
-      "rule"
+      "into",
+      "commons",
+      "artifacts",
+      "primitives"
      ],
      "members": [
-      "clipboard",
+      "cube_scene",
       "pick_up_cube",
-      "pickup_gate"
+      "pickup_gate",
+      "player_trace",
+      "science_screen"
      ]
     },
     {
-     "size": 3,
-     "kind": "SPANS",
+     "size": 4,
+     "kind": "mixed",
      "maps": {
-      "Trans_AxisDecomposition": 1,
+      "Trans_RotationSpectacle": 2,
+      "Trans_Rotation": 2
+     },
+     "terms": [
+      "rotation",
+      "cubes",
+      "cake",
+      "through",
+      "into",
+      "rule"
+     ],
+     "members": [
+      "boolean_tunnel",
+      "carousel_cake",
+      "rotate_grid_cubes",
+      "spin"
+     ]
+    },
+    {
+     "size": 2,
+     "kind": "mixed",
+     "maps": {
       "Trans_Scale": 1,
       "Trans_RotationSpectacle": 1
      },
      "terms": [
       "primitives",
       "that",
-      "cube",
       "triangle",
-      "for",
-      "rotation"
+      "rotation",
+      "translation",
+      "shape"
      ],
      "members": [
-      "cube_scene",
       "prism_block",
       "righttriangle"
      ]
@@ -809,32 +820,13 @@
       "puzzle",
       "furniture",
       "assembly",
-      "chair",
       "into",
+      "chair",
       "cube"
      ],
      "members": [
       "balance_puzzle",
       "chair_assembly_puzzle"
-     ]
-    },
-    {
-     "size": 2,
-     "kind": "MAP-SHAPED",
-     "maps": {
-      "Trans_Pit": 2
-     },
-     "terms": [
-      "cube",
-      "hazards",
-      "that",
-      "color",
-      "player",
-      "path"
-     ],
-     "members": [
-      "grower_block",
-      "pusher_block"
      ]
     },
     {
@@ -847,33 +839,67 @@
      "terms": [
       "sphere",
       "scale",
+      "misc",
       "room",
       "algorithms",
-      "misc",
       "its"
      ],
      "members": [
       "dark_sphere",
       "scale_me"
      ]
+    },
+    {
+     "size": 2,
+     "kind": "MAP-SHAPED",
+     "maps": {
+      "Trans_Pit": 2
+     },
+     "terms": [
+      "cube",
+      "hazards",
+      "that",
+      "player",
+      "color",
+      "into"
+     ],
+     "members": [
+      "grower_block",
+      "pusher_block"
+     ]
+    },
+    {
+     "size": 1,
+     "kind": "MAP-SHAPED",
+     "maps": {
+      "Trans_Scale": 1
+     },
+     "terms": [
+      "commons",
+      "artifacts",
+      "space",
+      "for",
+      "display",
+      "you"
+     ],
+     "members": [
+      "clipboard"
+     ]
     }
    ],
    "registers": {
     "HAND": null,
-    "PUZZLE": [
-     "chair_assembly_puzzle",
-     0.403
-    ],
-    "DIAGRAM": [
-     "righttriangle",
-     0.419
-    ],
+    "PUZZLE": null,
+    "DIAGRAM": null,
     "WALK": null,
-    "MACHINE": null,
+    "MACHINE": [
+     "clipboard",
+     0.529
+    ],
     "EXHIBIT": null,
     "META": [
-     "clipboard",
-     0.505
+     "chair_assembly_puzzle",
+     0.483
     ]
    },
    "map_rows": [
@@ -883,10 +909,12 @@
      "species": "room",
      "pockets": [
       1,
-      2,
+      3,
       5
      ],
-     "registers": [],
+     "registers": [
+      "META"
+     ],
      "artifacts": [
       "balance_puzzle",
       "dark_sphere",
@@ -902,11 +930,10 @@
      "n": 8,
      "species": "survey",
      "pockets": [
-      0,
-      1,
+      2,
       3,
-      5,
-      6
+      4,
+      5
      ],
      "registers": [],
      "artifacts": [
@@ -923,13 +950,11 @@
     {
      "map": "Trans_AxisDecomposition",
      "n": 8,
-     "species": "survey",
+     "species": "room",
      "pockets": [
-      0,
-      3,
-      5,
-      6,
-      7
+      2,
+      4,
+      5
      ],
      "registers": [],
      "artifacts": [
@@ -948,9 +973,9 @@
      "n": 6,
      "species": "room",
      "pockets": [
-      3,
+      4,
       5,
-      6
+      7
      ],
      "registers": [],
      "artifacts": [
@@ -967,14 +992,12 @@
      "n": 5,
      "species": "survey",
      "pockets": [
-      3,
+      0,
+      4,
       5,
-      6,
       7
      ],
-     "registers": [
-      "DIAGRAM"
-     ],
+     "registers": [],
      "artifacts": [
       "boolean_tunnel",
       "carousel_cake",
@@ -988,15 +1011,15 @@
      "n": 7,
      "species": "survey",
      "pockets": [
-      2,
-      3,
+      0,
+      1,
+      4,
       5,
-      6,
-      7
+      8
      ],
      "registers": [
-      "META",
-      "PUZZLE"
+      "MACHINE",
+      "META"
      ],
      "artifacts": [
       "chair_assembly_puzzle",
@@ -1013,7 +1036,7 @@
      "n": 2,
      "species": "room",
      "pockets": [
-      4
+      6
      ],
      "registers": [],
      "artifacts": [
@@ -1032,7 +1055,7 @@
    "etude_maps": [],
    "thin_maps": [],
    "pockets": 4,
-   "silhouette": 0.395,
+   "silhouette": 0.396,
    "ari": -0.048,
    "clusters": [
     {
@@ -1125,8 +1148,8 @@
       "shader",
       "that",
       "display",
-      "pattern",
-      "book"
+      "wall",
+      "gallery"
      ],
      "members": [
       "science_screen",
@@ -1259,8 +1282,8 @@
    "etude_maps": [],
    "thin_maps": [],
    "pockets": 9,
-   "silhouette": 0.241,
-   "ari": 0.313,
+   "silhouette": 0.261,
+   "ari": 0.261,
    "clusters": [
     {
      "size": 11,
@@ -1275,8 +1298,8 @@
       "pattern",
       "arrays",
       "carpet",
-      "patterns",
-      "wallpaper"
+      "wallpaper",
+      "patterns"
      ],
      "members": [
       "pattern_maker_station",
@@ -1293,69 +1316,70 @@
      ]
     },
     {
-     "size": 4,
+     "size": 5,
      "kind": "SPANS",
      "maps": {
       "Tutorial_2D_Build": 2,
       "Tutorial_Row": 1,
-      "Tutorial_3D": 1
+      "Tutorial_3D": 1,
+      "Tutorial_Disco": 1
      },
      "terms": [
       "arrays",
-      "pickup",
       "grid",
+      "pickup",
       "cubes",
-      "cube",
-      "for"
+      "sequencer",
+      "cube"
      ],
      "members": [
       "column_3_z",
       "grid_2d_4x4",
       "grid_3d_4x4x4",
-      "row_3_x"
-     ]
-    },
-    {
-     "size": 4,
-     "kind": "MAP-SHAPED",
-     "maps": {
-      "Tutorial_3D": 4
-     },
-     "terms": [
-      "array",
-      "bar",
-      "sort",
-      "visualization",
-      "algorithm",
-      "grid"
-     ],
-     "members": [
-      "bar_array",
-      "bar_array_bubble_sort",
-      "grid3d",
-      "sorting_algorithm_race"
+      "row_3_x",
+      "step_sequencer"
      ]
     },
     {
      "size": 3,
      "kind": "SPANS",
      "maps": {
+      "Tutorial_3D": 1,
       "Tutorial_Pattern": 1,
-      "Tutorial_2D_Build": 1,
-      "Tutorial_Disco": 1
+      "Tutorial_2D_Build": 1
      },
      "terms": [
-      "arrays",
-      "sequencer",
+      "grid",
       "visualization",
-      "glass",
-      "step",
-      "pulsar"
+      "grab",
+      "hazards",
+      "from",
+      "arrays"
      ],
      "members": [
-      "pulsar_compact",
-      "pulsar_visualizer",
-      "step_sequencer"
+      "grid3d",
+      "grid_model",
+      "gridagent"
+     ]
+    },
+    {
+     "size": 3,
+     "kind": "MAP-SHAPED",
+     "maps": {
+      "Tutorial_3D": 3
+     },
+     "terms": [
+      "bar",
+      "array",
+      "sort",
+      "algorithm",
+      "bubble",
+      "insertion"
+     ],
+     "members": [
+      "bar_array",
+      "bar_array_bubble_sort",
+      "sorting_algorithm_race"
      ]
     },
     {
@@ -1365,8 +1389,8 @@
       "Tutorial_Single": 3
      },
      "terms": [
-      "sphere",
       "that",
+      "sphere",
       "cube",
       "commons",
       "artifacts",
@@ -1386,16 +1410,16 @@
       "Tutorial_2D_Build": 1
      },
      "terms": [
-      "grid",
-      "hazards",
-      "grab",
-      "from",
       "arrays",
-      "interactive"
+      "glass",
+      "visualization",
+      "pulsar",
+      "interactive",
+      "tubes"
      ],
      "members": [
-      "grid_model",
-      "gridagent"
+      "pulsar_compact",
+      "pulsar_visualizer"
      ]
     },
     {
@@ -1408,9 +1432,9 @@
       "demo",
       "arrays",
       "gallery",
-      "grammar",
       "facade",
-      "tile"
+      "grammar",
+      "composition"
      ],
      "members": [
       "facade_grammar_demo",
@@ -1424,10 +1448,10 @@
       "Tutorial_Single": 1
      },
      "terms": [
-      "system",
       "commons",
-      "coordinate",
+      "system",
       "artifacts",
+      "coordinate",
       "cartesian",
       "godot"
      ],
@@ -1443,11 +1467,11 @@
      },
      "terms": [
       "line",
-      "display",
       "point",
+      "display",
       "with",
-      "text",
-      "example"
+      "example",
+      "text"
      ],
      "members": [
       "script_runner"
@@ -1459,12 +1483,12 @@
     "PUZZLE": null,
     "DIAGRAM": null,
     "WALK": null,
-    "MACHINE": null,
-    "EXHIBIT": null,
-    "META": [
+    "MACHINE": [
      "standalone_disco",
-     0.56
-    ]
+     0.555
+    ],
+    "EXHIBIT": null,
+    "META": null
    },
    "map_rows": [
     {
@@ -1472,11 +1496,11 @@
      "n": 4,
      "species": "room",
      "pockets": [
-      0,
+      5,
       7
      ],
      "registers": [
-      "META"
+      "MACHINE"
      ],
      "artifacts": [
       "dark_sphere",
@@ -1490,9 +1514,9 @@
      "n": 10,
      "species": "survey",
      "pockets": [
-      1,
-      4,
-      5,
+      0,
+      2,
+      3,
       6,
       7
      ],
@@ -1515,8 +1539,8 @@
      "n": 13,
      "species": "survey",
      "pockets": [
-      1,
-      4,
+      0,
+      3,
       7,
       8
      ],
@@ -1542,12 +1566,12 @@
      "n": 3,
      "species": "room",
      "pockets": [
-      0,
-      2,
+      1,
+      5,
       7
      ],
      "registers": [
-      "META"
+      "MACHINE"
      ],
      "artifacts": [
       "column_3_z",
@@ -1560,14 +1584,14 @@
      "n": 8,
      "species": "survey",
      "pockets": [
-      0,
+      1,
       2,
-      4,
+      3,
       5,
       7
      ],
      "registers": [
-      "META"
+      "MACHINE"
      ],
      "artifacts": [
       "column_3_z",
@@ -1583,10 +1607,11 @@
     {
      "map": "Tutorial_3D",
      "n": 6,
-     "species": "room",
+     "species": "survey",
      "pockets": [
-      2,
+      1,
       3,
+      4,
       7
      ],
      "registers": [],
@@ -1604,12 +1629,12 @@
      "n": 3,
      "species": "room",
      "pockets": [
+      0,
       1,
-      5,
       7
      ],
      "registers": [
-      "META"
+      "MACHINE"
      ],
      "artifacts": [
       "dark_sphere",
@@ -1629,15 +1654,15 @@
     "Color_Flashlight"
    ],
    "thin_maps": [],
-   "pockets": 11,
-   "silhouette": 0.296,
-   "ari": 0.3,
+   "pockets": 8,
+   "silhouette": 0.283,
+   "ari": 0.324,
    "clusters": [
     {
-     "size": 14,
+     "size": 15,
      "kind": "MAP-SHAPED",
      "maps": {
-      "Color_Context_Placed": 14
+      "Color_Context_Placed": 15
      },
      "terms": [
       "dna",
@@ -1661,34 +1686,37 @@
       "dna_modern_art_kandinsky_bauhaus_triad",
       "dna_modern_art_mondrian_de_stijl",
       "dna_modern_art_rothko_chromatic_field",
-      "dna_primitive_stack_ps01_bauhaus_totem_green"
+      "dna_primitive_stack_ps01_bauhaus_totem_green",
+      "primitive_assembler"
      ]
     },
     {
-     "size": 11,
+     "size": 13,
      "kind": "SPANS",
      "maps": {
       "Color_Pillar": 4,
       "Color_Walls": 4,
-      "Color_Nails": 2,
-      "Color_Grid_Pallet": 1
+      "Color_Nails": 3,
+      "Color_Grid_Pallet": 2
      },
      "terms": [
       "color",
+      "grid",
       "from",
-      "space",
+      "palette",
       "hue",
-      "mixing",
-      "palette"
+      "cube"
      ],
      "members": [
       "SpectrumVisualizer",
+      "brick_wall_factory",
       "color_constellation_office",
       "color_sets_overview",
       "color_space_navigator",
       "colorballs",
       "dark_side_prism",
       "gradient_interpolator",
+      "gridcolorizer",
       "pillarcolorcollection",
       "spectrum_forest",
       "subpixel_display",
@@ -1696,22 +1724,23 @@
      ]
     },
     {
-     "size": 6,
+     "size": 7,
      "kind": "SPANS",
      "maps": {
       "Pattern_Foundry": 4,
-      "Color_Paint": 1,
-      "Color_Context_Placed": 1
+      "Color_Context_Placed": 2,
+      "Color_Paint": 1
      },
      "terms": [
       "pattern",
+      "mill",
       "palette",
-      "machine",
       "loom",
-      "carpet",
-      "mill"
+      "machine",
+      "carpet"
      ],
      "members": [
+      "mill_memphis_p3",
       "pattern_machine_a",
       "pattern_machine_b",
       "pattern_machine_c",
@@ -1721,10 +1750,10 @@
      ]
     },
     {
-     "size": 6,
+     "size": 7,
      "kind": "SPANS",
      "maps": {
-      "Color_Nails": 3,
+      "Color_Nails": 4,
       "Color_Paint": 1,
       "Color_Context_Placed": 1,
       "Color_Rainbow": 1
@@ -1740,10 +1769,35 @@
      "members": [
       "ball_painting_demo",
       "constraint_sculptor",
+      "dark_sphere",
       "hand_color_controller",
       "hand_model",
       "mario_cube",
       "nail_color_controller"
+     ]
+    },
+    {
+     "size": 5,
+     "kind": "SPANS",
+     "maps": {
+      "Color_Context_Placed": 3,
+      "Color_Walls": 1,
+      "Color_Nails": 1
+     },
+     "terms": [
+      "procgen",
+      "extra",
+      "with",
+      "boolean",
+      "architecture",
+      "csg"
+     ],
+     "members": [
+      "crackpropagation_ca",
+      "csg_architecture_cavity",
+      "dress_selector",
+      "rainbow_hallway",
+      "science_screen"
      ]
     },
     {
@@ -1772,66 +1826,24 @@
      "size": 4,
      "kind": "SPANS",
      "maps": {
-      "Color_Context_Placed": 2,
+      "Color_Pillar": 1,
       "Color_Nails": 1,
-      "Color_Rainbow": 1
-     },
-     "terms": [
-      "sphere",
-      "puzzle",
-      "cube",
-      "primitives",
-      "grab",
-      "stack"
-     ],
-     "members": [
-      "dark_sphere",
-      "pick_up_cube",
-      "primitive_assembler",
-      "primitive_combo_puzzle"
-     ]
-    },
-    {
-     "size": 3,
-     "kind": "MAP-SHAPED",
-     "maps": {
-      "Color_Context_Placed": 2,
-      "Color_Nails": 1
-     },
-     "terms": [
-      "procgen",
-      "extra",
-      "display",
-      "that",
-      "with",
-      "through"
-     ],
-     "members": [
-      "crackpropagation_ca",
-      "dress_selector",
-      "science_screen"
-     ]
-    },
-    {
-     "size": 3,
-     "kind": "SPANS",
-     "maps": {
-      "Color_Nails": 1,
-      "Color_Grid_Pallet": 1,
+      "Color_Rainbow": 1,
       "Color_Context_Placed": 1
      },
      "terms": [
-      "color",
-      "mill",
-      "grid",
-      "pattern",
-      "palette",
-      "cube"
+      "grab",
+      "stick",
+      "cube",
+      "primitives",
+      "grabbable",
+      "puzzle"
      ],
      "members": [
-      "brick_wall_factory",
-      "gridcolorizer",
-      "mill_memphis_p3"
+      "grab_rainbow_stick",
+      "grab_stick_scanner",
+      "pick_up_cube",
+      "primitive_combo_puzzle"
      ]
     },
     {
@@ -1853,62 +1865,22 @@
       "albers_wall_gallery",
       "rainbow"
      ]
-    },
-    {
-     "size": 2,
-     "kind": "mixed",
-     "maps": {
-      "Color_Pillar": 1,
-      "Color_Nails": 1
-     },
-     "terms": [
-      "grab",
-      "stick",
-      "color",
-      "primitives",
-      "grabbable",
-      "rainbow"
-     ],
-     "members": [
-      "grab_rainbow_stick",
-      "grab_stick_scanner"
-     ]
-    },
-    {
-     "size": 2,
-     "kind": "mixed",
-     "maps": {
-      "Color_Context_Placed": 1,
-      "Color_Walls": 1
-     },
-     "terms": [
-      "boolean",
-      "architecture",
-      "csg",
-      "with",
-      "wavefunctions",
-      "cavity"
-     ],
-     "members": [
-      "csg_architecture_cavity",
-      "rainbow_hallway"
-     ]
     }
    ],
    "registers": {
-    "HAND": [
-     "grab_rainbow_stick",
-     0.592
-    ],
+    "HAND": null,
     "PUZZLE": null,
-    "DIAGRAM": null,
+    "DIAGRAM": [
+     "grab_rainbow_stick",
+     0.666
+    ],
     "WALK": null,
-    "MACHINE": null,
-    "EXHIBIT": null,
-    "META": [
+    "MACHINE": [
      "constraint_sculptor",
-     0.78
-    ]
+     0.774
+    ],
+    "EXHIBIT": null,
+    "META": null
    },
    "map_rows": [
     {
@@ -1916,7 +1888,7 @@
      "n": 4,
      "species": "room",
      "pockets": [
-      2
+      1
      ],
      "registers": [],
      "artifacts": [
@@ -1933,16 +1905,14 @@
      "pockets": [
       0,
       1,
-      2,
       3,
       4,
-      8,
-      9,
-      10
+      5,
+      7
      ],
      "registers": [
-      "HAND",
-      "META"
+      "DIAGRAM",
+      "MACHINE"
      ],
      "artifacts": [
       "constraint_sculptor",
@@ -1977,16 +1947,14 @@
      "n": 9,
      "species": "survey",
      "pockets": [
-      0,
+      2,
       3,
-      4,
       5,
-      7,
-      10
+      7
      ],
      "registers": [
-      "HAND",
-      "META"
+      "DIAGRAM",
+      "MACHINE"
      ],
      "artifacts": [
       "brick_wall_factory",
@@ -2003,12 +1971,11 @@
     {
      "map": "Color_Grid_Pallet",
      "n": 4,
-     "species": "survey",
+     "species": "room",
      "pockets": [
-      0,
+      2,
       3,
-      5,
-      10
+      7
      ],
      "registers": [],
      "artifacts": [
@@ -2023,12 +1990,12 @@
      "n": 4,
      "species": "room",
      "pockets": [
-      4,
-      6,
-      10
+      3,
+      5,
+      6
      ],
      "registers": [
-      "META"
+      "MACHINE"
      ],
      "artifacts": [
       "dark_sphere",
@@ -2042,13 +2009,13 @@
      "n": 7,
      "species": "survey",
      "pockets": [
-      5,
-      7,
-      8,
-      10
+      2,
+      3,
+      4,
+      5
      ],
      "registers": [
-      "HAND"
+      "DIAGRAM"
      ],
      "artifacts": [
       "SpectrumVisualizer",
@@ -2063,15 +2030,14 @@
     {
      "map": "Color_Paint",
      "n": 4,
-     "species": "survey",
+     "species": "room",
      "pockets": [
-      2,
-      4,
-      6,
-      10
+      1,
+      3,
+      6
      ],
      "registers": [
-      "META"
+      "MACHINE"
      ],
      "artifacts": [
       "albers_wall_gallery",
@@ -2085,10 +2051,10 @@
      "n": 7,
      "species": "survey",
      "pockets": [
-      5,
-      8,
-      9,
-      10
+      2,
+      3,
+      4,
+      7
      ],
      "registers": [],
      "artifacts": [
@@ -2120,11 +2086,11 @@
    "etude_maps": [],
    "thin_maps": [],
    "pockets": 5,
-   "silhouette": 0.104,
-   "ari": 0.004,
+   "silhouette": 0.117,
+   "ari": 0.046,
    "clusters": [
     {
-     "size": 6,
+     "size": 5,
      "kind": "SPANS",
      "maps": {
       "Change_Intro": 2,
@@ -2134,10 +2100,10 @@
      },
      "terms": [
       "curve",
-      "tangent",
       "with",
+      "tangent",
       "derivative",
-      "side",
+      "two",
       "line"
      ],
      "members": [
@@ -2145,7 +2111,6 @@
       "ftc_bridge",
       "integral_area",
       "partial_derivative_terrain",
-      "riemann_pump",
       "slope_tangent_demo"
      ]
     },
@@ -2158,12 +2123,12 @@
       "Change_Velocity": 1
      },
      "terms": [
-      "grid",
       "field",
-      "vector",
+      "grid",
       "arrow",
-      "direction",
-      "particle"
+      "vector",
+      "particle",
+      "direction"
      ],
      "members": [
       "particle_flow_swarm",
@@ -2173,57 +2138,59 @@
     },
     {
      "size": 2,
-     "kind": "MAP-SHAPED",
+     "kind": "mixed",
      "maps": {
-      "Change_Intro": 2
+      "Change_Velocity": 1,
+      "Change_Intro": 1
      },
      "terms": [
-      "display",
-      "artifacts",
-      "commons",
-      "text",
       "that",
-      "showing"
+      "into",
+      "screen",
+      "through",
+      "tangent",
+      "science"
      ],
      "members": [
-      "code_display",
+      "player_trace",
       "science_screen"
      ]
     },
     {
-     "size": 1,
+     "size": 2,
      "kind": "MAP-SHAPED",
      "maps": {
-      "Change_Velocity": 1
+      "Accumulation_Riemann": 2
      },
      "terms": [
-      "line",
-      "space",
-      "motion",
-      "path",
-      "into",
-      "primitives"
+      "side",
+      "geometries",
+      "torus",
+      "alternative",
+      "riemann",
+      "curve"
      ],
      "members": [
-      "player_trace"
+      "riemann_pi",
+      "riemann_pump"
      ]
     },
     {
      "size": 1,
      "kind": "MAP-SHAPED",
      "maps": {
-      "Accumulation_Riemann": 1
+      "Change_Intro": 1
      },
      "terms": [
-      "geometries",
-      "alternative",
-      "torus",
-      "riemann",
-      "lines",
-      "curvature"
+      "display",
+      "commons",
+      "artifacts",
+      "text",
+      "system",
+      "showing"
      ],
      "members": [
-      "riemann_pi"
+      "code_display"
      ]
     }
    ],
@@ -2232,12 +2199,12 @@
     "PUZZLE": null,
     "DIAGRAM": null,
     "WALK": null,
-    "MACHINE": null,
-    "EXHIBIT": null,
-    "META": [
+    "MACHINE": [
      "code_display",
-     0.445
-    ]
+     0.547
+    ],
+    "EXHIBIT": null,
+    "META": null
    },
    "map_rows": [
     {
@@ -2245,11 +2212,12 @@
      "n": 4,
      "species": "room",
      "pockets": [
-      0,
-      4
+      1,
+      2,
+      3
      ],
      "registers": [
-      "META"
+      "MACHINE"
      ],
      "artifacts": [
       "code_display",
@@ -2266,10 +2234,10 @@
       0,
       1,
       2,
-      4
+      3
      ],
      "registers": [
-      "META"
+      "MACHINE"
      ],
      "artifacts": [
       "code_display",
@@ -2283,8 +2251,8 @@
      "n": 2,
      "species": "room",
      "pockets": [
-      0,
-      4
+      1,
+      2
      ],
      "registers": [],
      "artifacts": [
@@ -2297,11 +2265,12 @@
      "n": 3,
      "species": "room",
      "pockets": [
-      0,
-      4
+      1,
+      2,
+      3
      ],
      "registers": [
-      "META"
+      "MACHINE"
      ],
      "artifacts": [
       "code_display",
@@ -2314,8 +2283,8 @@
      "n": 3,
      "species": "room",
      "pockets": [
-      0,
-      3
+      2,
+      4
      ],
      "registers": [],
      "artifacts": [
@@ -2329,8 +2298,8 @@
      "n": 2,
      "species": "room",
      "pockets": [
-      1,
-      4
+      0,
+      1
      ],
      "registers": [],
      "artifacts": [
@@ -2343,7 +2312,7 @@
      "n": 2,
      "species": "room",
      "pockets": [
-      1
+      0
      ],
      "registers": [],
      "artifacts": [
@@ -2356,11 +2325,12 @@
      "n": 3,
      "species": "room",
      "pockets": [
-      0,
-      4
+      1,
+      2,
+      3
      ],
      "registers": [
-      "META"
+      "MACHINE"
      ],
      "artifacts": [
       "code_display",
@@ -2381,45 +2351,9 @@
    ],
    "thin_maps": [],
    "pockets": 13,
-   "silhouette": 0.131,
-   "ari": 0.277,
+   "silhouette": 0.125,
+   "ari": 0.233,
    "clusters": [
-    {
-     "size": 16,
-     "kind": "SPANS",
-     "maps": {
-      "VFM_03_Motion": 6,
-      "ForcesChaos": 4,
-      "VFM_01_Foundations": 2,
-      "Vectors_Act2_VectorArithmetic": 1
-     },
-     "terms": [
-      "physics",
-      "simulation",
-      "demonstration",
-      "example",
-      "force",
-      "body"
-     ],
-     "members": [
-      "bouncing_ball",
-      "collision_crasher",
-      "example_2_1_forces_vr",
-      "example_2_3_gravity_scaled_by_mass_vr",
-      "example_2_5_fluid_resistance_vr",
-      "example_2_8_two_body_attraction_vr",
-      "example_2_9_n_body_attraction_vr",
-      "example_3_2_forces_with_arbitrary_angular_motion_vr",
-      "friction_ramp",
-      "gravity_well",
-      "momentum_collision",
-      "nbody_simulation",
-      "newton_cradle",
-      "newtons_laws",
-      "slingshot_launcher",
-      "three_body_problem"
-     ]
-    },
     {
      "size": 11,
      "kind": "mixed",
@@ -2430,9 +2364,9 @@
      "terms": [
       "interactive",
       "for",
-      "slider",
       "qfep",
-      "one",
+      "slider",
+      "gallery",
       "workbench"
      ],
      "members": [
@@ -2453,28 +2387,85 @@
      "size": 9,
      "kind": "SPANS",
      "maps": {
-      "Force_Preview": 4,
+      "ForcesChaos": 4,
+      "VFM_03_Motion": 3,
+      "VFM_01_Foundations": 1,
+      "Vectors_Act2_VectorArithmetic": 1
+     },
+     "terms": [
+      "physics",
+      "simulation",
+      "example",
+      "demonstration",
+      "body",
+      "force"
+     ],
+     "members": [
+      "example_2_1_forces_vr",
+      "example_2_3_gravity_scaled_by_mass_vr",
+      "example_2_5_fluid_resistance_vr",
+      "example_2_8_two_body_attraction_vr",
+      "example_2_9_n_body_attraction_vr",
+      "example_3_2_forces_with_arbitrary_angular_motion_vr",
+      "example_3_3_pointing_in_the_direction_of_motion_vr",
+      "nbody_simulation",
+      "three_body_problem"
+     ]
+    },
+    {
+     "size": 9,
+     "kind": "SPANS",
+     "maps": {
+      "VFM_06_Springs": 3,
+      "VFM_03_Motion": 3,
+      "ForcesComposition": 1,
+      "Force_Preview": 1
+     },
+     "terms": [
+      "physics",
+      "simulation",
+      "with",
+      "motion",
+      "ball",
+      "demo"
+     ],
+     "members": [
+      "ConeTwistBag",
+      "HingeCrank",
+      "SliderPress",
+      "bouncing_ball",
+      "collision_crasher",
+      "momentum_collision",
+      "newton_cradle",
+      "reflection_hall",
+      "slingshot_launcher"
+     ]
+    },
+    {
+     "size": 8,
+     "kind": "SPANS",
+     "maps": {
+      "VFM_06_Springs": 2,
+      "VFM_07_Gravity": 2,
       "VFM_05_Launch": 1,
-      "Sky_Climb": 1,
-      "VFM_04_Fields": 1
+      "VFM_03_Motion": 1
      },
      "terms": [
       "force",
+      "physics",
       "velocity",
-      "with",
-      "vector",
+      "simulation",
       "gravity",
-      "body"
+      "with"
      ],
      "members": [
+      "ChainSwing",
       "catapult",
-      "force_pad",
-      "force_vortex",
-      "human_catapult",
-      "interactive_point_origin_force",
-      "mortar_vector_siege",
-      "reflection_hall",
-      "trajectory_artifact",
+      "friction_ramp",
+      "gravity_well",
+      "harmonic_motion_demo",
+      "newtons_laws",
+      "orbital_mechanics_demo",
       "vector_arena"
      ]
     },
@@ -2482,23 +2473,51 @@
      "size": 7,
      "kind": "SPANS",
      "maps": {
-      "VFM_06_Springs": 4,
+      "Force_Preview": 3,
+      "Sky_Climb": 1,
+      "VFM_04_Fields": 1,
+      "VectorOperations": 1
+     },
+     "terms": [
+      "force",
+      "player",
+      "vector",
+      "dna",
+      "field",
+      "velocity"
+     ],
+     "members": [
+      "force_pad",
+      "force_vortex",
+      "human_catapult",
+      "interactive_point_origin_force",
+      "mortar_vector_siege",
+      "proximity_spawner",
+      "trajectory_artifact"
+     ]
+    },
+    {
+     "size": 7,
+     "kind": "SPANS",
+     "maps": {
+      "VFM_06_Springs": 3,
       "ForcesSystems": 2,
+      "ForcesChaos": 1,
       "VFM_07_Gravity": 1
      },
      "terms": [
       "spring",
       "springs",
       "mass",
-      "commons",
-      "artifacts",
-      "demo"
+      "force",
+      "nodes",
+      "grid"
      ],
      "members": [
       "coupled_pendulums",
-      "harmonic_motion_demo",
+      "forcedirected3d",
+      "grid3d_force_directed",
       "mass_spring_damper",
-      "orbital_mechanics_demo",
       "spring_demo",
       "spring_network",
       "spring_system"
@@ -2565,8 +2584,8 @@
      "terms": [
       "dna",
       "bench",
+      "lattice",
       "with",
-      "set",
       "line",
       "grabbable"
      ],
@@ -2579,57 +2598,10 @@
      ]
     },
     {
-     "size": 5,
-     "kind": "MAP-SHAPED",
-     "maps": {
-      "VFM_06_Springs": 4,
-      "VFM_03_Motion": 1
-     },
-     "terms": [
-      "simulation",
-      "physics",
-      "motion",
-      "joint",
-      "from",
-      "axis"
-     ],
-     "members": [
-      "ChainSwing",
-      "ConeTwistBag",
-      "HingeCrank",
-      "SliderPress",
-      "example_3_3_pointing_in_the_direction_of_motion_vr"
-     ]
-    },
-    {
      "size": 4,
      "kind": "SPANS",
      "maps": {
-      "VFM_02_Operations": 1,
-      "VFM_03_Motion": 1,
-      "VFM_04_Fields": 1,
-      "VFM_08_Arena": 1
-     },
-     "terms": [
-      "steering",
-      "exercise",
-      "noc",
-      "agents",
-      "field",
-      "behavior"
-     ],
-     "members": [
-      "exercise_5_9_angle_between",
-      "flocking_controls",
-      "noc_5_04_flow_field",
-      "queer_cylinder_target"
-     ]
-    },
-    {
-     "size": 4,
-     "kind": "SPANS",
-     "maps": {
-      "ForcesChaos": 1,
+      "Force_Props_Sandbox": 1,
       "VFM_05_Launch": 1,
       "ForcesSystems": 1,
       "VFM_06_Springs": 1
@@ -2639,11 +2611,11 @@
       "particles",
       "physics",
       "simulation",
-      "visualization",
+      "that",
       "force"
      ],
      "members": [
-      "chaos_attractor",
+      "death_pylon",
       "firework_launcher",
       "particle_systems",
       "surreal_kinetic_sculpture"
@@ -2651,43 +2623,46 @@
     },
     {
      "size": 3,
-     "kind": "MAP-SHAPED",
+     "kind": "SPANS",
      "maps": {
-      "VectorOperations": 2,
-      "Force_Props_Sandbox": 1
+      "VFM_02_Operations": 1,
+      "VFM_03_Motion": 1,
+      "VFM_04_Fields": 1
      },
      "terms": [
-      "hazards",
-      "that",
-      "particle",
-      "player",
-      "catalyst",
-      "creature"
+      "steering",
+      "exercise",
+      "noc",
+      "agents",
+      "field",
+      "following"
      ],
      "members": [
-      "catalyst_target",
-      "death_pylon",
-      "proximity_spawner"
+      "exercise_5_9_angle_between",
+      "flocking_controls",
+      "noc_5_04_flow_field"
      ]
     },
     {
-     "size": 2,
-     "kind": "mixed",
+     "size": 3,
+     "kind": "SPANS",
      "maps": {
+      "VectorOperations": 1,
       "ForcesChaos": 1,
-      "VFM_07_Gravity": 1
+      "VFM_08_Arena": 1
      },
      "terms": [
-      "graph",
-      "force",
-      "edges",
-      "misc",
-      "nodes",
-      "algorithms"
+      "primitives",
+      "visualization",
+      "that",
+      "cylinder",
+      "chaos",
+      "attractor"
      ],
      "members": [
-      "forcedirected3d",
-      "grid3d_force_directed"
+      "catalyst_target",
+      "chaos_attractor",
+      "queer_cylinder_target"
      ]
     },
     {
@@ -2712,22 +2687,25 @@
     }
    ],
    "registers": {
-    "HAND": [
-     "grab_sphere_point",
-     0.695
+    "HAND": null,
+    "PUZZLE": [
+     "graphics_monitor",
+     0.408
     ],
-    "PUZZLE": null,
     "DIAGRAM": [
-     "queer_cylinder_target",
-     0.444
+     "grab_sphere_point",
+     0.641
     ],
     "WALK": null,
-    "MACHINE": null,
-    "EXHIBIT": null,
-    "META": [
-     "health_display",
-     0.486
-    ]
+    "MACHINE": [
+     "graphics_monitor",
+     0.512
+    ],
+    "EXHIBIT": [
+     "queer_cylinder_target",
+     0.467
+    ],
+    "META": null
    },
    "map_rows": [
     {
@@ -2735,7 +2713,7 @@
      "n": 5,
      "species": "room",
      "pockets": [
-      7
+      2
      ],
      "registers": [],
      "artifacts": [
@@ -2763,7 +2741,7 @@
      "n": 6,
      "species": "room",
      "pockets": [
-      10
+      1
      ],
      "registers": [],
      "artifacts": [
@@ -2780,8 +2758,9 @@
      "n": 12,
      "species": "room",
      "pockets": [
-      0,
-      7
+      2,
+      5,
+      9
      ],
      "registers": [],
      "artifacts": [
@@ -2804,8 +2783,8 @@
      "n": 6,
      "species": "room",
      "pockets": [
-      0,
-      10
+      1,
+      5
      ],
      "registers": [],
      "artifacts": [
@@ -2823,8 +2802,8 @@
      "species": "room",
      "pockets": [
       0,
-      9,
-      12
+      5,
+      8
      ],
      "registers": [],
      "artifacts": [
@@ -2853,7 +2832,7 @@
      "n": 4,
      "species": "room",
      "pockets": [
-      0
+      5
      ],
      "registers": [],
      "artifacts": [
@@ -2866,14 +2845,16 @@
     {
      "map": "VFM_01_Foundations",
      "n": 19,
-     "species": "room",
+     "species": "survey",
      "pockets": [
-      0,
-      2,
-      9
+      3,
+      4,
+      5,
+      8
      ],
      "registers": [
-      "META"
+      "MACHINE",
+      "PUZZLE"
      ],
      "artifacts": [
       "CoordinateSystem3M",
@@ -2902,8 +2883,9 @@
      "n": 12,
      "species": "room",
      "pockets": [
-      9,
-      12
+      2,
+      8,
+      11
      ],
      "registers": [],
      "artifacts": [
@@ -2926,7 +2908,7 @@
      "n": 10,
      "species": "room",
      "pockets": [
-      2
+      4
      ],
      "registers": [],
      "artifacts": [
@@ -2947,8 +2929,8 @@
      "n": 12,
      "species": "room",
      "pockets": [
-      0,
-      4
+      5,
+      10
      ],
      "registers": [],
      "artifacts": [
@@ -2971,7 +2953,8 @@
      "n": 11,
      "species": "room",
      "pockets": [
-      12
+      2,
+      11
      ],
      "registers": [],
      "artifacts": [
@@ -3007,10 +2990,11 @@
      "n": 15,
      "species": "survey",
      "pockets": [
-      1,
       2,
+      3,
       4,
-      7
+      9,
+      10
      ],
      "registers": [],
      "artifacts": [
@@ -3036,7 +3020,7 @@
      "n": 5,
      "species": "room",
      "pockets": [
-      7
+      2
      ],
      "registers": [],
      "artifacts": [
@@ -3078,10 +3062,13 @@
     {
      "map": "ForcesFoundations",
      "n": 10,
-     "species": "room",
+     "species": "survey",
      "pockets": [
       2,
-      12
+      3,
+      4,
+      9,
+      11
      ],
      "registers": [],
      "artifacts": [
@@ -3103,8 +3090,9 @@
      "species": "survey",
      "pockets": [
       2,
-      3,
-      8,
+      7,
+      9,
+      11,
       12
      ],
      "registers": [],
@@ -3126,8 +3114,9 @@
      "n": 9,
      "species": "room",
      "pockets": [
-      3,
-      12
+      2,
+      7,
+      11
      ],
      "registers": [],
      "artifacts": [
@@ -3147,9 +3136,9 @@
      "n": 11,
      "species": "room",
      "pockets": [
-      3,
-      4,
-      7
+      2,
+      7,
+      10
      ],
      "registers": [],
      "artifacts": [
@@ -3169,11 +3158,12 @@
     {
      "map": "VFM_05_Launch",
      "n": 13,
-     "species": "room",
+     "species": "survey",
      "pockets": [
+      0,
       2,
-      5,
-      7
+      3,
+      9
      ],
      "registers": [],
      "artifacts": [
@@ -3197,16 +3187,18 @@
      "n": 15,
      "species": "survey",
      "pockets": [
-      1,
+      0,
       2,
-      3,
-      5,
+      4,
+      6,
+      7,
       8,
-      9,
       11,
       12
      ],
-     "registers": [],
+     "registers": [
+      "MACHINE"
+     ],
      "artifacts": [
       "VectorBasics",
       "basis_vectors_rig",
@@ -3228,15 +3220,14 @@
     {
      "map": "VFM_06_Springs",
      "n": 13,
-     "species": "room",
+     "species": "survey",
      "pockets": [
-      1,
-      5,
-      11
+      0,
+      3,
+      6,
+      9
      ],
-     "registers": [
-      "META"
-     ],
+     "registers": [],
      "artifacts": [
       "ChainSwing",
       "ConeTwistBag",
@@ -3258,15 +3249,17 @@
      "n": 13,
      "species": "survey",
      "pockets": [
+      0,
       2,
-      5,
+      4,
       6,
       8,
-      9,
       11,
       12
      ],
-     "registers": [],
+     "registers": [
+      "MACHINE"
+     ],
      "artifacts": [
       "catalyst_target",
       "chaos_attractor",
@@ -3288,12 +3281,12 @@
      "n": 9,
      "species": "room",
      "pockets": [
-      2,
-      6,
-      11
+      3,
+      4,
+      6
      ],
      "registers": [
-      "META"
+      "MACHINE"
      ],
      "artifacts": [
       "example_2_8_two_body_attraction_vr",
@@ -3312,11 +3305,12 @@
      "n": 7,
      "species": "room",
      "pockets": [
-      4,
-      7
+      3,
+      9,
+      11
      ],
      "registers": [
-      "DIAGRAM"
+      "EXHIBIT"
      ],
      "artifacts": [
       "collision_carts",
@@ -3333,16 +3327,16 @@
      "n": 20,
      "species": "survey",
      "pockets": [
-      4,
-      7,
+      2,
+      3,
       8,
-      9,
+      11,
       12
      ],
      "registers": [
       "DIAGRAM",
-      "HAND",
-      "META"
+      "EXHIBIT",
+      "MACHINE"
      ],
      "artifacts": [
       "VectorAddition",
@@ -3377,75 +3371,76 @@
    "etudes": 0,
    "etude_maps": [],
    "thin_maps": [],
-   "pockets": 5,
-   "silhouette": 0.129,
-   "ari": 0.348,
+   "pockets": 6,
+   "silhouette": 0.131,
+   "ari": 0.11,
    "clusters": [
     {
      "size": 8,
      "kind": "SPANS",
      "maps": {
-      "FormFinding_Descent": 3,
-      "FormFinding_Annealing": 3,
-      "FormFinding_Forge": 2
+      "FormFinding_Relaxation": 3,
+      "FormFinding_Annealing": 2,
+      "FormFinding_Forge": 2,
+      "FormFinding_Descent": 1
      },
      "terms": [
       "soft",
+      "bodies",
+      "body",
       "gradient",
       "descent",
-      "bodies",
-      "downhill",
-      "landscape"
+      "bench"
      ],
      "members": [
       "descent_marble_toy",
       "energy_landscape_bench",
-      "gradient_descent",
+      "frozen_glass_vessel",
       "gradient_descent_optimizer",
-      "gradient_descent_well",
+      "mass_spring_bench",
       "max_q_basin_room",
       "self_shaping_forge",
-      "simulated_annealing"
-     ]
-    },
-    {
-     "size": 4,
-     "kind": "MAP-SHAPED",
-     "maps": {
-      "FormFinding_Relaxation": 3,
-      "FormFinding_Equilibrium": 1
-     },
-     "terms": [
-      "soft",
-      "bodies",
-      "spring",
-      "bench",
-      "triangle",
-      "from"
-     ],
-     "members": [
-      "frozen_glass_vessel",
-      "mass_spring_bench",
-      "tensegrity_triangle",
       "verlet_workbench"
      ]
     },
     {
-     "size": 3,
+     "size": 4,
+     "kind": "SPANS",
+     "maps": {
+      "FormFinding_Descent": 2,
+      "FormFinding_Catenary": 1,
+      "FormFinding_Annealing": 1
+     },
+     "terms": [
+      "gradient",
+      "descent",
+      "downhill",
+      "landscape",
+      "misc",
+      "algorithms"
+     ],
+     "members": [
+      "cable_builder",
+      "gradient_descent",
+      "gradient_descent_well",
+      "simulated_annealing"
+     ]
+    },
+    {
+     "size": 2,
      "kind": "MAP-SHAPED",
      "maps": {
-      "FormFinding_Catenary": 3
+      "FormFinding_Catenary": 2
      },
      "terms": [
       "surface",
       "parametric",
-      "curve",
-      "wavefunctions",
       "minimal",
-      "wave"
+      "curve",
+      "spiral",
+      "gyroid"
      ],
      "members": [
-      "cable_builder",
       "catenoid",
       "helicoid"
      ]
@@ -3459,11 +3454,11 @@
      },
      "terms": [
       "puzzle",
-      "into",
       "that",
       "furniture",
-      "display",
-      "shaders"
+      "into",
+      "its",
+      "display"
      ],
      "members": [
       "balance_puzzle",
@@ -3487,6 +3482,24 @@
      "members": [
       "fractal_truss_tower"
      ]
+    },
+    {
+     "size": 1,
+     "kind": "MAP-SHAPED",
+     "maps": {
+      "FormFinding_Equilibrium": 1
+     },
+     "terms": [
+      "triangle",
+      "primitives",
+      "shape",
+      "three",
+      "that",
+      "pythagorean"
+     ],
+     "members": [
+      "tensegrity_triangle"
+     ]
     }
    ],
    "registers": {
@@ -3496,7 +3509,10 @@
     "WALK": null,
     "MACHINE": null,
     "EXHIBIT": null,
-    "META": null
+    "META": [
+     "balance_puzzle",
+     0.457
+    ]
    },
    "map_rows": [
     {
@@ -3504,8 +3520,9 @@
      "n": 4,
      "species": "room",
      "pockets": [
-      2,
-      3
+      0,
+      1,
+      4
      ],
      "registers": [],
      "artifacts": [
@@ -3520,8 +3537,9 @@
      "n": 4,
      "species": "room",
      "pockets": [
-      0,
-      3
+      1,
+      2,
+      4
      ],
      "registers": [],
      "artifacts": [
@@ -3536,8 +3554,8 @@
      "n": 4,
      "species": "room",
      "pockets": [
-      1,
-      3
+      0,
+      4
      ],
      "registers": [],
      "artifacts": [
@@ -3552,9 +3570,9 @@
      "n": 4,
      "species": "room",
      "pockets": [
-      1,
       3,
-      4
+      4,
+      5
      ],
      "registers": [],
      "artifacts": [
@@ -3569,8 +3587,9 @@
      "n": 4,
      "species": "room",
      "pockets": [
-      2,
-      3
+      0,
+      1,
+      4
      ],
      "registers": [],
      "artifacts": [
@@ -3585,10 +3604,12 @@
      "n": 4,
      "species": "room",
      "pockets": [
-      2,
-      3
+      0,
+      4
      ],
-     "registers": [],
+     "registers": [
+      "META"
+     ],
      "artifacts": [
       "balance_puzzle",
       "gradient_descent_optimizer",
@@ -3607,8 +3628,8 @@
    "etude_maps": [],
    "thin_maps": [],
    "pockets": 6,
-   "silhouette": 0.137,
-   "ari": 0.081,
+   "silhouette": 0.139,
+   "ari": 0.05,
    "clusters": [
     {
      "size": 27,
@@ -3623,9 +3644,9 @@
       "wave",
       "wavefunctions",
       "sine",
-      "frequency",
       "waves",
-      "amplitude"
+      "frequency",
+      "interference"
      ],
      "members": [
       "ElphabaDress",
@@ -3638,8 +3659,8 @@
       "bernini_columns",
       "cable_builder",
       "chemicalapparatus",
+      "chladni_plate",
       "dual_display_test",
-      "hallway_scene",
       "holographicdisplay",
       "kusama_sine",
       "microscope",
@@ -3661,9 +3682,49 @@
      "size": 20,
      "kind": "SPANS",
      "maps": {
-      "WaveFunctions_Effect_Sound": 8,
-      "WaveFunctions_Synthesis_Lab": 5,
-      "WaveFunctions_AirMusic": 4,
+      "WaveFunctions_Effect_Sound": 4,
+      "WaveFunctions_Pendulum": 3,
+      "WaveFunctions_Intro": 3,
+      "WaveFunctions_TrigWalkingPath": 2
+     },
+     "terms": [
+      "wavefunctions",
+      "with",
+      "glassrack",
+      "color",
+      "parametric",
+      "bigpipe"
+     ],
+     "members": [
+      "BigPipeSystem",
+      "GlassRack",
+      "MarioSoundController",
+      "MelodyChaser3D",
+      "SystemsMusicTest",
+      "TrigWalkingPath",
+      "chord_tension_spring",
+      "colorballs",
+      "coloredlines",
+      "coupled_oscillator_lattice",
+      "dark_sphere",
+      "hallway_scene",
+      "john_cage_tech_noir",
+      "lab_table",
+      "lissajous_curves",
+      "mario_test_sound_ui",
+      "math_objects",
+      "rotatescalecubes",
+      "science_screen",
+      "unit_circle_advanced"
+     ]
+    },
+    {
+     "size": 17,
+     "kind": "SPANS",
+     "maps": {
+      "WaveFunctions_Effect_Sound": 7,
+      "WaveFunctions_Synthesis_Lab": 4,
+      "WaveFunctions_AirMusic": 3,
       "WaveFunctions_Pendulum": 1
      },
      "terms": [
@@ -3672,7 +3733,7 @@
       "with",
       "sound",
       "audio",
-      "waves"
+      "spectrum"
      ],
      "members": [
       "DualBallFMController",
@@ -3681,56 +3742,17 @@
       "RackDX7Piano",
       "RackMoogBass",
       "SoundscapeRadioRack",
-      "SystemsMusicTest",
       "VRAudioMonitor",
       "air_music_display_case",
       "atmosphericmonitoring",
       "audio_catalog_tablet",
       "beat_frequency_demo",
       "biomagneticresonator",
-      "chladni_plate",
-      "chord_tension_spring",
       "harmonic_distance_table",
       "multimeter",
       "resonating_metallophone",
       "timbre_sculptor",
       "vowel_sound_board"
-     ]
-    },
-    {
-     "size": 16,
-     "kind": "SPANS",
-     "maps": {
-      "WaveFunctions_Pendulum": 3,
-      "WaveFunctions_Effect_Sound": 3,
-      "WaveFunctions_TrigWalkingPath": 2,
-      "WaveFunctions_Unit_Circle": 2
-     },
-     "terms": [
-      "wavefunctions",
-      "with",
-      "glassrack",
-      "color",
-      "visualization",
-      "parametric"
-     ],
-     "members": [
-      "BigPipeSystem",
-      "GlassRack",
-      "MarioSoundController",
-      "MelodyChaser3D",
-      "TrigWalkingPath",
-      "colorballs",
-      "coloredlines",
-      "coupled_oscillator_lattice",
-      "dark_sphere",
-      "john_cage_tech_noir",
-      "lab_table",
-      "lissajous_curves",
-      "mario_test_sound_ui",
-      "math_objects",
-      "rotatescalecubes",
-      "unit_circle_advanced"
      ]
     },
     {
@@ -3765,18 +3787,18 @@
      ]
     },
     {
-     "size": 8,
+     "size": 7,
      "kind": "MAP-SHAPED",
      "maps": {
-      "WaveFunctions_Intro": 8
+      "WaveFunctions_Intro": 7
      },
      "terms": [
       "cube",
       "primitives",
-      "that",
       "pickup",
-      "moves",
-      "rotating"
+      "that",
+      "rotating",
+      "moves"
      ],
      "members": [
       "cube_scene",
@@ -3785,7 +3807,6 @@
       "pickup_cube_static",
       "pickup_cube_transforming",
       "rotating_cube",
-      "science_screen",
       "transformation_cube"
      ]
     },
@@ -3803,7 +3824,7 @@
       "demo",
       "force",
       "from",
-      "pendulum"
+      "spring"
      ],
      "members": [
       "AudioContr",
@@ -3817,18 +3838,18 @@
    ],
    "registers": {
     "HAND": null,
-    "PUZZLE": null,
+    "PUZZLE": [
+     "rotatescalecubes",
+     0.448
+    ],
     "DIAGRAM": null,
     "WALK": null,
     "MACHINE": [
-     "coloredlines",
-     0.557
+     "AudioContr",
+     0.924
     ],
     "EXHIBIT": null,
-    "META": [
-     "AudioContr",
-     0.936
-    ]
+    "META": null
    },
    "map_rows": [
     {
@@ -3837,14 +3858,14 @@
      "species": "survey",
      "pockets": [
       0,
-      1,
       2,
       3,
-      4
+      4,
+      5
      ],
      "registers": [
       "MACHINE",
-      "META"
+      "PUZZLE"
      ],
      "artifacts": [
       "SphericalHarmonics",
@@ -3870,9 +3891,9 @@
      "n": 10,
      "species": "survey",
      "pockets": [
-      0,
       1,
-      4,
+      2,
+      3,
       5
      ],
      "registers": [],
@@ -3895,9 +3916,9 @@
      "species": "survey",
      "pockets": [
       0,
-      1,
       2,
-      4
+      3,
+      5
      ],
      "registers": [],
      "artifacts": [
@@ -3914,8 +3935,8 @@
      "n": 6,
      "species": "room",
      "pockets": [
-      0,
-      1
+      2,
+      3
      ],
      "registers": [],
      "artifacts": [
@@ -3932,8 +3953,8 @@
      "n": 4,
      "species": "room",
      "pockets": [
-      0,
-      1
+      2,
+      3
      ],
      "registers": [],
      "artifacts": [
@@ -3952,10 +3973,10 @@
       1,
       2,
       3,
-      5
+      4
      ],
      "registers": [
-      "META"
+      "MACHINE"
      ],
      "artifacts": [
       "AudioContr",
@@ -3987,9 +4008,9 @@
      "n": 4,
      "species": "room",
      "pockets": [
-      0,
       1,
-      5
+      2,
+      3
      ],
      "registers": [],
      "artifacts": [
@@ -4004,8 +4025,8 @@
      "n": 4,
      "species": "room",
      "pockets": [
-      0,
-      1
+      2,
+      3
      ],
      "registers": [],
      "artifacts": [
@@ -4020,8 +4041,8 @@
      "n": 8,
      "species": "room",
      "pockets": [
-      0,
-      5
+      1,
+      2
      ],
      "registers": [],
      "artifacts": [
@@ -4041,8 +4062,8 @@
      "species": "room",
      "pockets": [
       0,
-      1,
-      2
+      2,
+      3
      ],
      "registers": [],
      "artifacts": [
@@ -4057,9 +4078,9 @@
      "n": 6,
      "species": "room",
      "pockets": [
-      0,
       1,
-      5
+      2,
+      3
      ],
      "registers": [],
      "artifacts": [
@@ -4076,15 +4097,15 @@
      "n": 24,
      "species": "survey",
      "pockets": [
-      0,
       1,
+      2,
       3,
       4,
       5
      ],
      "registers": [
       "MACHINE",
-      "META"
+      "PUZZLE"
      ],
      "artifacts": [
       "GlassRack",
@@ -4117,24 +4138,24 @@
   },
   {
    "sequence": "randomness",
-   "maps": 13,
+   "maps": 14,
    "artifacts": 67,
    "carded": 67,
    "etudes": 0,
    "etude_maps": [],
    "thin_maps": [],
    "pockets": 7,
-   "silhouette": 0.13,
-   "ari": 0.207,
+   "silhouette": 0.128,
+   "ari": 0.215,
    "clusters": [
     {
-     "size": 21,
+     "size": 19,
      "kind": "SPANS",
      "maps": {
-      "Random_Definition": 5,
       "Random_Walk": 5,
+      "Random_Definition": 4,
       "Random_Mushrooms": 3,
-      "Random_Cubes": 3
+      "Random_Rotate_Random_XYZ": 2
      },
      "terms": [
       "random",
@@ -4147,8 +4168,6 @@
      "members": [
       "Random_Rotate_Random_XYZ",
       "bubbles_random",
-      "coin_toss",
-      "entropy_axiom",
       "pixel_cloud",
       "prng_crank_machine",
       "random_decay_multimesh",
@@ -4169,12 +4188,11 @@
      ]
     },
     {
-     "size": 11,
+     "size": 10,
      "kind": "SPANS",
      "maps": {
       "Random_Gaussian": 8,
       "Random_Cubes": 1,
-      "Randomness_Examples_of_Randomness": 1,
       "Random_Definition": 1
      },
      "terms": [
@@ -4194,7 +4212,6 @@
       "distribution_sampler",
       "galton_board",
       "gaussian_random",
-      "monte_carlo_dartboard",
       "random_bell_curve",
       "slot_machine"
      ]
@@ -4203,21 +4220,50 @@
      "size": 10,
      "kind": "SPANS",
      "maps": {
-      "Random_Game": 6,
+      "Randomness_Examples_of_Randomness": 4,
+      "Random_Space_Geometry": 2,
       "Random_Rotate_Random_XYZ": 1,
-      "Random_Remove": 1,
-      "Random_Walk": 1
+      "Random_Mushrooms": 1
      },
      "terms": [
-      "hazards",
-      "test",
-      "with",
-      "for",
-      "creature",
-      "legs"
+      "randomness",
+      "interactive",
+      "using",
+      "procedural",
+      "generation",
+      "particle"
      ],
      "members": [
       "RotateGridCubes",
+      "bubble_particles",
+      "digital_materiality_glitch",
+      "env_one",
+      "extreme_randomness",
+      "monte_carlo_dartboard",
+      "pipe_dream",
+      "pollock_painting_in_3d",
+      "sculpt_one",
+      "ten_print_maze_3d"
+     ]
+    },
+    {
+     "size": 9,
+     "kind": "SPANS",
+     "maps": {
+      "Random_Game": 6,
+      "Random_Remove": 1,
+      "Random_Walk": 1,
+      "Randomness_10_PRINT_Algorithm": 1
+     },
+     "terms": [
+      "hazards",
+      "for",
+      "creature",
+      "player",
+      "test",
+      "with"
+     ],
+     "members": [
       "armadillo_eggling",
       "hazards_demo",
       "kaleidocycle_enemy",
@@ -4230,122 +4276,100 @@
      ]
     },
     {
-     "size": 9,
+     "size": 7,
      "kind": "SPANS",
      "maps": {
-      "Randomness_Examples_of_Randomness": 3,
-      "Random_Space_Geometry": 2,
-      "Random_Mushrooms": 1,
-      "Random_Definition": 1
+      "Random_Definition": 4,
+      "Random_Entropy": 2,
+      "Random_Cubes": 1
      },
      "terms": [
+      "entropy",
       "randomness",
-      "interactive",
-      "procedural",
-      "generation",
-      "using",
-      "algorithm"
+      "grab",
+      "random",
+      "chaos",
+      "shannon"
      ],
      "members": [
-      "bubble_particles",
-      "digital_materiality_glitch",
-      "env_one",
-      "extreme_randomness",
-      "pheromone_terrain",
-      "pipe_dream",
-      "pollock_painting_in_3d",
-      "sculpt_one",
-      "ten_print_maze_3d"
+      "clipboard",
+      "coin_toss",
+      "entropy_axiom",
+      "entropy_jar",
+      "hardware_entropy_decay",
+      "random_butterflies",
+      "shannon_entropy_meter"
      ]
     },
     {
      "size": 7,
      "kind": "SPANS",
      "maps": {
-      "Random_Definition": 5,
-      "Random_Rotate_Random_XYZ": 1,
-      "Random_Space": 1
-     },
-     "terms": [
-      "entropy",
-      "sphere",
-      "randomness",
-      "disorder",
-      "grab",
-      "display"
-     ],
-     "members": [
-      "clipboard",
-      "dark_sphere",
-      "entropy_jar",
-      "hardware_entropy_decay",
-      "random_butterflies",
-      "science_screen",
-      "shannon_entropy_meter"
-     ]
-    },
-    {
-     "size": 5,
-     "kind": "SPANS",
-     "maps": {
       "Random_Space_Geometry": 2,
       "Random_Space": 2,
+      "Random_Definition": 1,
       "Random_Mushrooms": 1
      },
      "terms": [
       "noise",
       "randomness",
       "perlin",
-      "color",
       "terrain",
+      "sphere",
       "random"
      ],
      "members": [
       "curl_noise_particles",
+      "dark_sphere",
       "mushrooms",
       "noise_mixer",
       "perlin_noise_bridge",
+      "pheromone_terrain",
       "worley_noise"
      ]
     },
     {
-     "size": 4,
+     "size": 5,
      "kind": "SPANS",
      "maps": {
+      "Random_Definition": 2,
       "Random_Game": 2,
-      "Random_Definition": 1,
       "Randomness_10_PRINT_Algorithm": 1
      },
      "terms": [
       "cube",
+      "that",
       "pickup",
       "cubes",
-      "that",
       "primitives",
-      "random"
+      "catalyst"
      ],
      "members": [
       "catalyst_pickup",
       "cube_projectile_spawner",
       "pickup_cube_placer",
-      "r_c"
+      "r_c",
+      "science_screen"
      ]
     }
    ],
    "registers": {
     "HAND": null,
-    "PUZZLE": null,
+    "PUZZLE": [
+     "extreme_randomness",
+     0.549
+    ],
     "DIAGRAM": null,
     "WALK": null,
     "MACHINE": [
-     "extreme_randomness",
-     0.546
+     "clipboard",
+     0.518
     ],
-    "EXHIBIT": null,
-    "META": [
-     "random_walk_terrarium",
-     0.517
-    ]
+    "EXHIBIT": [
+     "random_object_spawner",
+     0.445
+    ],
+    "META": null
    },
    "map_rows": [
     {
@@ -4354,13 +4378,14 @@
      "species": "survey",
      "pockets": [
       0,
-      2,
+      1,
+      3,
       4,
       5,
       6
      ],
      "registers": [
-      "META"
+      "MACHINE"
      ],
      "artifacts": [
       "catalyst_pickup",
@@ -4379,12 +4404,34 @@
      ]
     },
     {
+     "map": "Random_Entropy",
+     "n": 8,
+     "species": "survey",
+     "pockets": [
+      1,
+      4,
+      5,
+      6
+     ],
+     "registers": [],
+     "artifacts": [
+      "dark_sphere",
+      "entropy_axiom",
+      "entropy_jar",
+      "hardware_entropy_decay",
+      "random_butterflies",
+      "science_screen",
+      "shannon_entropy_meter",
+      "trng_vs_prng"
+     ]
+    },
+    {
      "map": "Random_Remove",
      "n": 3,
      "species": "room",
      "pockets": [
-      0,
-      3,
+      1,
+      2,
       5
      ],
      "registers": [],
@@ -4399,14 +4446,15 @@
      "n": 7,
      "species": "survey",
      "pockets": [
-      0,
+      1,
+      2,
       3,
       4,
       5,
       6
      ],
      "registers": [
-      "META"
+      "MACHINE"
      ],
      "artifacts": [
       "clipboard",
@@ -4421,13 +4469,16 @@
     {
      "map": "Random_Cubes",
      "n": 5,
-     "species": "room",
+     "species": "survey",
      "pockets": [
       0,
-      2,
+      1,
+      4,
       5
      ],
-     "registers": [],
+     "registers": [
+      "EXHIBIT"
+     ],
      "artifacts": [
       "coin_toss",
       "dark_sphere",
@@ -4439,10 +4490,11 @@
     {
      "map": "Random_Rotate_Random_XYZ",
      "n": 5,
-     "species": "room",
+     "species": "survey",
      "pockets": [
-      0,
+      1,
       3,
+      4,
       5
      ],
      "registers": [],
@@ -4459,13 +4511,13 @@
      "n": 8,
      "species": "survey",
      "pockets": [
-      0,
-      3,
-      4,
-      5
+      1,
+      2,
+      5,
+      6
      ],
      "registers": [
-      "META"
+      "MACHINE"
      ],
      "artifacts": [
       "catalyst_pickup",
@@ -4484,11 +4536,9 @@
      "species": "room",
      "pockets": [
       0,
-      2
+      5
      ],
-     "registers": [
-      "META"
-     ],
+     "registers": [],
      "artifacts": [
       "GaussianBlurCircle",
       "GaussianBlurShader",
@@ -4504,12 +4554,11 @@
     {
      "map": "Random_Mushrooms",
      "n": 6,
-     "species": "survey",
+     "species": "room",
      "pockets": [
-      0,
       1,
-      5,
-      6
+      3,
+      5
      ],
      "registers": [],
      "artifacts": [
@@ -4524,14 +4573,15 @@
     {
      "map": "Random_Space_Geometry",
      "n": 6,
-     "species": "survey",
+     "species": "room",
      "pockets": [
-      0,
       1,
-      5,
-      6
+      3,
+      5
      ],
-     "registers": [],
+     "registers": [
+      "PUZZLE"
+     ],
      "artifacts": [
       "curl_noise_particles",
       "dark_sphere",
@@ -4546,12 +4596,11 @@
      "n": 5,
      "species": "room",
      "pockets": [
-      0,
-      2,
-      6
+      3,
+      5
      ],
      "registers": [
-      "MACHINE"
+      "PUZZLE"
      ],
      "artifacts": [
       "dark_sphere",
@@ -4566,11 +4615,11 @@
      "n": 3,
      "species": "room",
      "pockets": [
-      0,
-      6
+      4,
+      5
      ],
      "registers": [
-      "META"
+      "MACHINE"
      ],
      "artifacts": [
       "clipboard",
@@ -4583,12 +4632,12 @@
      "n": 5,
      "species": "room",
      "pockets": [
-      0,
       1,
+      4,
       5
      ],
      "registers": [
-      "META"
+      "MACHINE"
      ],
      "artifacts": [
       "dark_sphere",
@@ -4603,10 +4652,12 @@
      "n": 8,
      "species": "room",
      "pockets": [
-      3,
-      4
+      2,
+      6
      ],
-     "registers": [],
+     "registers": [
+      "EXHIBIT"
+     ],
      "artifacts": [
       "armadillo_eggling",
       "cube_projectile_spawner",
@@ -4631,7 +4682,7 @@
     "Lab_Path"
    ],
    "pockets": 12,
-   "silhouette": 0.143,
+   "silhouette": 0.145,
    "ari": 0.28,
    "clusters": [
     {
@@ -4644,10 +4695,10 @@
      "terms": [
       "noise",
       "terrain",
-      "generation",
       "perlin",
+      "generation",
       "randomness",
-      "interactive"
+      "using"
      ],
      "members": [
       "noise_terrain",
@@ -4667,31 +4718,12 @@
       "perlin",
       "blue",
       "space",
-      "random"
+      "for"
      ],
      "members": [
       "NoiseColors3D",
       "WhiteNoiseGallery",
       "randompoints"
-     ]
-    },
-    {
-     "size": 2,
-     "kind": "MAP-SHAPED",
-     "maps": {
-      "Noise_Perlin_Simplex": 2
-     },
-     "terms": [
-      "noise",
-      "interactive",
-      "visualization",
-      "randomness",
-      "generation",
-      "perlin"
-     ],
-     "members": [
-      "perlin_noise",
-      "simplex_noise"
      ]
     },
     {
@@ -4735,6 +4767,25 @@
      ]
     },
     {
+     "size": 2,
+     "kind": "MAP-SHAPED",
+     "maps": {
+      "Noise_Perlin_Simplex": 2
+     },
+     "terms": [
+      "noise",
+      "visualization",
+      "interactive",
+      "randomness",
+      "generation",
+      "perlin"
+     ],
+     "members": [
+      "perlin_noise",
+      "simplex_noise"
+     ]
+    },
+    {
      "size": 1,
      "kind": "MAP-SHAPED",
      "maps": {
@@ -4750,6 +4801,24 @@
      ],
      "members": [
       "science_screen"
+     ]
+    },
+    {
+     "size": 1,
+     "kind": "MAP-SHAPED",
+     "maps": {
+      "Noise_Perlin_Simplex": 1
+     },
+     "terms": [
+      "portal",
+      "lab",
+      "furniture",
+      "terrain",
+      "frame",
+      "chair"
+     ],
+     "members": [
+      "configurable_portal"
      ]
     },
     {
@@ -4774,51 +4843,15 @@
      "size": 1,
      "kind": "MAP-SHAPED",
      "maps": {
-      "Noise_One": 1
-     },
-     "terms": [
-      "fractal",
-      "noise",
-      "randomness",
-      "motion",
-      "how",
-      "random"
-     ],
-     "members": [
-      "noiselayers"
-     ]
-    },
-    {
-     "size": 1,
-     "kind": "MAP-SHAPED",
-     "maps": {
-      "Noise_Perlin_Simplex": 1
-     },
-     "terms": [
-      "portal",
-      "furniture",
-      "lab",
-      "configurable",
-      "terrain",
-      "landscape"
-     ],
-     "members": [
-      "configurable_portal"
-     ]
-    },
-    {
-     "size": 1,
-     "kind": "MAP-SHAPED",
-     "maps": {
       "Random_Noise_Types": 1
      },
      "terms": [
       "randomness",
       "point",
       "coordinate",
-      "its",
-      "cartesian",
-      "system"
+      "system",
+      "pickable",
+      "its"
      ],
      "members": [
       "randompoint"
@@ -4828,18 +4861,18 @@
      "size": 1,
      "kind": "MAP-SHAPED",
      "maps": {
-      "Noise_Voxel": 1
+      "Noise_One": 1
      },
      "terms": [
+      "fractal",
       "noise",
       "randomness",
-      "field",
-      "cubes",
-      "perlin",
-      "marching"
+      "motion",
+      "how",
+      "perlin"
      ],
      "members": [
-      "voxelnoise"
+      "noiselayers"
      ]
     },
     {
@@ -4853,11 +4886,29 @@
       "procedural",
       "baroque",
       "bernini",
-      "meltingberniniscene",
-      "organic"
+      "organic",
+      "meltingberniniscene"
      ],
      "members": [
       "MeltingBerniniScene"
+     ]
+    },
+    {
+     "size": 1,
+     "kind": "MAP-SHAPED",
+     "maps": {
+      "Noise_Voxel": 1
+     },
+     "terms": [
+      "noise",
+      "randomness",
+      "field",
+      "perlin",
+      "cubes",
+      "marching"
+     ],
+     "members": [
+      "voxelnoise"
      ]
     }
    ],
@@ -4867,10 +4918,7 @@
     "DIAGRAM": null,
     "WALK": null,
     "MACHINE": null,
-    "EXHIBIT": [
-     "randompoint",
-     0.402
-    ],
+    "EXHIBIT": null,
     "META": null
    },
    "map_rows": [
@@ -4879,12 +4927,10 @@
      "n": 4,
      "species": "room",
      "pockets": [
-      3,
-      8
+      6,
+      9
      ],
-     "registers": [
-      "EXHIBIT"
-     ],
+     "registers": [],
      "artifacts": [
       "NoiseColors3D",
       "WhiteNoiseGallery",
@@ -4897,8 +4943,8 @@
      "n": 2,
      "species": "room",
      "pockets": [
-      5,
-      11
+      4,
+      8
      ],
      "registers": [],
      "artifacts": [
@@ -4912,8 +4958,8 @@
      "species": "room",
      "pockets": [
       1,
-      5,
-      6
+      4,
+      7
      ],
      "registers": [],
      "artifacts": [
@@ -4927,10 +4973,10 @@
      "n": 4,
      "species": "survey",
      "pockets": [
+      0,
       2,
       4,
-      5,
-      9
+      10
      ],
      "registers": [],
      "artifacts": [
@@ -4945,8 +4991,8 @@
      "n": 2,
      "species": "room",
      "pockets": [
-      5,
-      10
+      4,
+      5
      ],
      "registers": [],
      "artifacts": [
@@ -4960,7 +5006,7 @@
      "species": "room",
      "pockets": [
       1,
-      5
+      4
      ],
      "registers": [],
      "artifacts": [
@@ -4973,8 +5019,8 @@
      "n": 2,
      "species": "room",
      "pockets": [
-      5,
-      10
+      4,
+      5
      ],
      "registers": [],
      "artifacts": [
@@ -4987,10 +5033,10 @@
      "n": 6,
      "species": "survey",
      "pockets": [
-      0,
       2,
-      5,
-      7
+      3,
+      4,
+      11
      ],
      "registers": [],
      "artifacts": [
@@ -5007,7 +5053,7 @@
      "n": 1,
      "species": "thin",
      "pockets": [
-      5
+      4
      ],
      "registers": [],
      "artifacts": [
@@ -5024,12 +5070,12 @@
    "etudes": 0,
    "etude_maps": [],
    "thin_maps": [],
-   "pockets": 4,
-   "silhouette": 0.315,
-   "ari": -0.021,
+   "pockets": 5,
+   "silhouette": 0.278,
+   "ari": -0.019,
    "clusters": [
     {
-     "size": 23,
+     "size": 22,
      "kind": "SPANS",
      "maps": {
       "CA_ExpandingSpace": 4,
@@ -5058,7 +5104,6 @@
       "crossway_ca",
       "decaying_bridge",
       "disease_spread_ca",
-      "grid_substrate_runner",
       "hexagon_ca_vr",
       "line_network_ca",
       "mirrored_cellular_automata",
@@ -5075,20 +5120,20 @@
      "size": 2,
      "kind": "mixed",
      "maps": {
-      "CA_BeyondBinary": 1,
-      "CA_GameOfLife": 1
+      "CA_Introduction": 1,
+      "CA_BeyondBinary": 1
      },
      "terms": [
-      "life",
-      "game",
-      "test",
-      "conway",
-      "scene",
-      "room"
+      "that",
+      "cellular",
+      "automata",
+      "grid",
+      "floor",
+      "display"
      ],
      "members": [
-      "game_of_life_petri",
-      "lab_room"
+      "grid_substrate_runner",
+      "science_screen"
      ]
     },
     {
@@ -5113,18 +5158,36 @@
      "size": 1,
      "kind": "MAP-SHAPED",
      "maps": {
+      "CA_GameOfLife": 1
+     },
+     "terms": [
+      "test",
+      "scene",
+      "room",
+      "lab",
+      "qfep",
+      "life"
+     ],
+     "members": [
+      "lab_room"
+     ]
+    },
+    {
+     "size": 1,
+     "kind": "MAP-SHAPED",
+     "maps": {
       "CA_BeyondBinary": 1
      },
      "terms": [
-      "that",
-      "display",
-      "shaders",
-      "into",
-      "screen",
-      "tangent"
+      "life",
+      "game",
+      "cellular",
+      "conway",
+      "automata",
+      "commons"
      ],
      "members": [
-      "science_screen"
+      "game_of_life_petri"
      ]
     }
    ],
@@ -5133,12 +5196,12 @@
     "PUZZLE": null,
     "DIAGRAM": null,
     "WALK": null,
-    "MACHINE": null,
-    "EXHIBIT": null,
-    "META": [
+    "MACHINE": [
      "ca_rule_explorer",
-     0.409
-    ]
+     0.41
+    ],
+    "EXHIBIT": null,
+    "META": null
    },
    "map_rows": [
     {
@@ -5147,7 +5210,8 @@
      "species": "room",
      "pockets": [
       0,
-      1
+      2,
+      3
      ],
      "registers": [],
      "artifacts": [
@@ -5163,7 +5227,7 @@
      "species": "room",
      "pockets": [
       0,
-      1
+      3
      ],
      "registers": [],
      "artifacts": [
@@ -5195,9 +5259,9 @@
      "species": "survey",
      "pockets": [
       0,
-      1,
       2,
-      3
+      3,
+      4
      ],
      "registers": [],
      "artifacts": [
@@ -5215,7 +5279,7 @@
      "species": "room",
      "pockets": [
       0,
-      1
+      3
      ],
      "registers": [],
      "artifacts": [
@@ -5231,7 +5295,7 @@
      "n": 2,
      "species": "room",
      "pockets": [
-      0
+      3
      ],
      "registers": [],
      "artifacts": [
@@ -5244,10 +5308,10 @@
      "n": 3,
      "species": "room",
      "pockets": [
-      0
+      3
      ],
      "registers": [
-      "META"
+      "MACHINE"
      ],
      "artifacts": [
       "CellularAutomata3DStacked",
@@ -5260,7 +5324,7 @@
      "n": 4,
      "species": "room",
      "pockets": [
-      0
+      3
      ],
      "registers": [],
      "artifacts": [
@@ -5280,15 +5344,15 @@
    "etudes": 0,
    "etude_maps": [],
    "thin_maps": [],
-   "pockets": 15,
-   "silhouette": 0.232,
-   "ari": 0.16,
+   "pockets": 12,
+   "silhouette": 0.226,
+   "ari": 0.198,
    "clusters": [
     {
-     "size": 9,
+     "size": 10,
      "kind": "SPANS",
      "maps": {
-      "Fractal_Recursion": 4,
+      "Fractal_Recursion": 5,
       "Fractal_KochSierpinski": 2,
       "Fractal_RecursiveTrees": 2,
       "Fractal_MengerSponge": 1
@@ -5308,18 +5372,18 @@
       "cube_staircase",
       "cube_subdivision",
       "menger_sponge",
+      "recursive_boolean_cube",
       "recursive_chair",
       "recursive_table",
       "small_subdivision_cube"
      ]
     },
     {
-     "size": 7,
+     "size": 6,
      "kind": "SPANS",
      "maps": {
       "Fractal_RecursiveTrees": 4,
       "Fractal_CrossSequence": 1,
-      "Fractal_Recursion": 1,
       "Fractal_CantorSet": 1
      },
      "terms": [
@@ -5334,35 +5398,59 @@
       "fractal_lsystem_tree",
       "fractal_stochastic_tree",
       "inverted_tree_cloud",
-      "recursive_boolean_cube",
       "recursive_tree",
       "recursive_tree_2",
       "stochastic_tree_separated"
      ]
     },
     {
-     "size": 5,
+     "size": 6,
      "kind": "SPANS",
      "maps": {
+      "Fractal_Recursion": 2,
       "Fractal_Synthesis": 2,
       "Fractal_MengerSponge": 1,
-      "Fractal_Recursion": 1,
       "Fractal_RecursiveTrees": 1
      },
      "terms": [
       "procgen",
       "extra",
       "fractal",
-      "recursive",
       "patterns",
+      "recursive",
       "fractals"
      ],
      "members": [
       "diffusion_limited_aggregation",
+      "example_8_3_recursion_circles_vr",
       "fractal_clouds",
       "fractal_recursion_1",
       "fractal_recursion_2",
       "fractal_scene"
+     ]
+    },
+    {
+     "size": 5,
+     "kind": "SPANS",
+     "maps": {
+      "Fractal_CantorSet": 3,
+      "Fractal_JuliaSet": 1,
+      "Fractal_MandelbrotSet": 1
+     },
+     "terms": [
+      "procgen",
+      "extra",
+      "set",
+      "fractal",
+      "cantor",
+      "julia"
+     ],
+     "members": [
+      "cantor_set",
+      "example_8_4_cantor_pagoda_vr",
+      "example_8_4_cantor_set_vr",
+      "julia_set",
+      "mandelbrot_set"
      ]
     },
     {
@@ -5373,12 +5461,12 @@
       "Fractal_Recursion": 1
      },
      "terms": [
-      "procgen",
       "extra",
+      "procgen",
       "spiral",
       "fibonacci",
       "golden",
-      "recursive"
+      "staircase"
      ],
      "members": [
       "fibonacci_pagoda",
@@ -5389,25 +5477,24 @@
      ]
     },
     {
-     "size": 4,
+     "size": 3,
      "kind": "MAP-SHAPED",
      "maps": {
-      "Fractal_CantorSet": 3,
-      "Fractal_Recursion": 1
+      "Fractal_JuliaSet": 2,
+      "Fractal_MandelbrotSet": 1
      },
      "terms": [
-      "procgen",
-      "extra",
+      "fractal",
       "set",
-      "example",
-      "cantor",
-      "bar"
+      "chaos",
+      "edge",
+      "julia",
+      "mandelbrot"
      ],
      "members": [
-      "cantor_set",
-      "example_8_3_recursion_circles_vr",
-      "example_8_4_cantor_pagoda_vr",
-      "example_8_4_cantor_set_vr"
+      "julia_set_explorer",
+      "lyapunov_fractal",
+      "mandelbrot_dive"
      ]
     },
     {
@@ -5423,7 +5510,7 @@
       "fractal",
       "procgen",
       "extra",
-      "generation"
+      "recursive"
      ],
      "members": [
       "fractal_koch_curve",
@@ -5432,41 +5519,44 @@
      ]
     },
     {
-     "size": 2,
-     "kind": "mixed",
+     "size": 3,
+     "kind": "MAP-SHAPED",
      "maps": {
-      "Fractal_JuliaSet": 1,
-      "Fractal_MandelbrotSet": 1
+      "Fractal_RecursiveTrees": 2,
+      "Fractal_Recursion": 1
      },
      "terms": [
-      "set",
-      "fractal",
-      "chaos",
-      "julia",
-      "mandelbrot",
-      "edge"
+      "that",
+      "paper",
+      "surface",
+      "living",
+      "geometries",
+      "into"
      ],
      "members": [
-      "julia_set_explorer",
-      "mandelbrot_dive"
+      "living_paper",
+      "mobius_world",
+      "science_screen"
      ]
     },
     {
-     "size": 2,
+     "size": 3,
      "kind": "MAP-SHAPED",
      "maps": {
-      "Fractal_CrossSequence": 2
+      "Fractal_CrossSequence": 2,
+      "Fractal_Recursion": 1
      },
      "terms": [
-      "curve",
       "lsystems",
+      "curve",
       "space",
+      "sphere",
       "visualization",
-      "hilbert",
-      "koch"
+      "hilbert"
      ],
      "members": [
       "Hilbert3D",
+      "dark_sphere",
       "space_filling_curve_gallery"
      ]
     },
@@ -5474,20 +5564,20 @@
      "size": 2,
      "kind": "mixed",
      "maps": {
-      "Fractal_JuliaSet": 1,
-      "Fractal_MandelbrotSet": 1
+      "Fractal_CrossSequence": 1,
+      "Fractal_Synthesis": 1
      },
      "terms": [
-      "procgen",
-      "extra",
-      "visualization",
-      "set",
       "fractal",
-      "julia"
+      "particle",
+      "through",
+      "selection",
+      "space",
+      "chaos"
      ],
      "members": [
-      "julia_set",
-      "mandelbrot_set"
+      "evolutionary_algorithms",
+      "strange_attractors"
      ]
     },
     {
@@ -5503,51 +5593,11 @@
       "pyramid",
       "using",
       "cubes",
-      "sierpinski"
+      "recursive"
      ],
      "members": [
       "cellular_automata_3d_stacked",
       "sierpinski_pyramid"
-     ]
-    },
-    {
-     "size": 2,
-     "kind": "mixed",
-     "maps": {
-      "Fractal_RecursiveTrees": 1,
-      "Fractal_Recursion": 1
-     },
-     "terms": [
-      "paper",
-      "that",
-      "living",
-      "into",
-      "wave",
-      "canvas"
-     ],
-     "members": [
-      "living_paper",
-      "science_screen"
-     ]
-    },
-    {
-     "size": 2,
-     "kind": "mixed",
-     "maps": {
-      "Fractal_Recursion": 1,
-      "Fractal_RecursiveTrees": 1
-     },
-     "terms": [
-      "sphere",
-      "surface",
-      "parametric",
-      "geometries",
-      "alternative",
-      "player"
-     ],
-     "members": [
-      "dark_sphere",
-      "mobius_world"
      ]
     },
     {
@@ -5561,50 +5611,12 @@
       "procgen",
       "extra",
       "sierpinski",
-      "log",
-      "interactive"
+      "interactive",
+      "log"
      ],
      "members": [
       "box_counting_dimension",
       "sierpinski_triangle"
-     ]
-    },
-    {
-     "size": 2,
-     "kind": "mixed",
-     "maps": {
-      "Fractal_JuliaSet": 1,
-      "Fractal_Synthesis": 1
-     },
-     "terms": [
-      "fractal",
-      "space",
-      "chaos",
-      "fractals",
-      "point",
-      "attractor"
-     ],
-     "members": [
-      "lyapunov_fractal",
-      "strange_attractors"
-     ]
-    },
-    {
-     "size": 1,
-     "kind": "MAP-SHAPED",
-     "maps": {
-      "Fractal_CrossSequence": 1
-     },
-     "terms": [
-      "particle",
-      "selection",
-      "randomness",
-      "system",
-      "machinelearning",
-      "genetic"
-     ],
-     "members": [
-      "evolutionary_algorithms"
      ]
     }
    ],
@@ -5623,13 +5635,11 @@
      "n": 10,
      "species": "survey",
      "pockets": [
-      0,
-      1,
-      5,
+      2,
+      4,
       7,
-      9,
-      10,
-      11
+      8,
+      10
      ],
      "registers": [],
      "artifacts": [
@@ -5650,10 +5660,10 @@
      "n": 10,
      "species": "survey",
      "pockets": [
-      0,
       1,
-      5,
-      9,
+      2,
+      4,
+      7,
       10
      ],
      "registers": [],
@@ -5675,9 +5685,9 @@
      "n": 5,
      "species": "room",
      "pockets": [
+      1,
       5,
-      10,
-      11
+      10
      ],
      "registers": [],
      "artifacts": [
@@ -5693,12 +5703,12 @@
      "n": 9,
      "species": "survey",
      "pockets": [
-      1,
       2,
-      8,
+      6,
+      7,
       9,
       10,
-      13
+      11
      ],
      "registers": [],
      "artifacts": [
@@ -5718,8 +5728,8 @@
      "n": 3,
      "species": "room",
      "pockets": [
-      0,
-      1,
+      2,
+      4,
       10
      ],
      "registers": [],
@@ -5734,7 +5744,7 @@
      "n": 5,
      "species": "room",
      "pockets": [
-      7,
+      8,
       10
      ],
      "registers": [],
@@ -5749,12 +5759,11 @@
     {
      "map": "Fractal_JuliaSet",
      "n": 4,
-     "species": "survey",
+     "species": "room",
      "pockets": [
       3,
-      6,
-      10,
-      14
+      5,
+      10
      ],
      "registers": [],
      "artifacts": [
@@ -5770,7 +5779,7 @@
      "species": "room",
      "pockets": [
       3,
-      6,
+      5,
       10
      ],
      "registers": [],
@@ -5786,13 +5795,13 @@
      "species": "survey",
      "pockets": [
       0,
-      2,
+      1,
+      4,
       5,
-      7,
+      6,
+      8,
       10,
-      11,
-      13,
-      14
+      11
      ],
      "registers": [],
      "artifacts": [
@@ -5813,11 +5822,10 @@
      "n": 6,
      "species": "survey",
      "pockets": [
-      4,
-      5,
-      8,
-      10,
-      12
+      0,
+      1,
+      9,
+      10
      ],
      "registers": [],
      "artifacts": [
@@ -5840,7 +5848,7 @@
    "etude_maps": [],
    "thin_maps": [],
    "pockets": 6,
-   "silhouette": 0.128,
+   "silhouette": 0.133,
    "ari": 0.151,
    "clusters": [
     {
@@ -5857,8 +5865,8 @@
       "tree",
       "system",
       "growth",
-      "with",
-      "branching"
+      "branching",
+      "with"
      ],
      "members": [
       "AnimatedTree",
@@ -5879,12 +5887,12 @@
       "LSystems_Architecture": 2
      },
      "terms": [
-      "system",
       "lsystems",
+      "system",
       "grammar",
       "rules",
-      "procedural",
-      "from"
+      "from",
+      "procedural"
      ],
      "members": [
       "CityGenerator",
@@ -5903,11 +5911,11 @@
      },
      "terms": [
       "that",
-      "crisis",
       "foundations",
+      "crisis",
       "into",
-      "not",
-      "furniture"
+      "furniture",
+      "through"
      ],
      "members": [
       "godel_statement_plaque",
@@ -5943,8 +5951,8 @@
      "terms": [
       "loom",
       "randomness",
-      "weaving",
       "pattern",
+      "weaving",
       "print",
       "bolt"
      ],
@@ -5978,10 +5986,7 @@
     "WALK": null,
     "MACHINE": null,
     "EXHIBIT": null,
-    "META": [
-     "lsystem_editor",
-     0.418
-    ]
+    "META": null
    },
    "map_rows": [
     {
@@ -5994,9 +5999,7 @@
       3,
       4
      ],
-     "registers": [
-      "META"
-     ],
+     "registers": [],
      "artifacts": [
       "dark_sphere",
       "fractal_lsystem_string",
@@ -6110,28 +6113,55 @@
    "thin_maps": [
     "PG_Space_Colonization"
    ],
-   "pockets": 9,
-   "silhouette": 0.173,
-   "ari": -0.073,
+   "pockets": 5,
+   "silhouette": 0.17,
+   "ari": -0.008,
    "clusters": [
+    {
+     "size": 7,
+     "kind": "SPANS",
+     "maps": {
+      "PG_Caves_Mazes": 2,
+      "PG_Sculpted_Forms": 2,
+      "PG_Genetic_Evolution": 1,
+      "PG_Mirrored_Patterns": 1
+     },
+     "terms": [
+      "procgen",
+      "extra",
+      "generation",
+      "procedural",
+      "random",
+      "cellular"
+     ],
+     "members": [
+      "GeneticProgramming",
+      "caverandomwalk",
+      "cube_mound_scene",
+      "layered_membrane",
+      "maze_generation",
+      "mirror_cellular_texture_for_3d",
+      "percolationnetwork_ca"
+     ]
+    },
     {
      "size": 2,
      "kind": "mixed",
      "maps": {
-      "PG_Branching_Growth": 1,
-      "PG_Space_Colonization": 1
+      "PG_Percolation_Network": 1,
+      "PG_Sculpted_Forms": 1
      },
      "terms": [
-      "growth",
-      "branching",
-      "procgen",
-      "extra",
-      "algorithm",
-      "space"
+      "sphere",
+      "primitives",
+      "scale",
+      "for",
+      "primitive",
+      "surface"
      ],
      "members": [
-      "branching_growth_algorithm",
-      "space_colonization_algorithm"
+      "dark_sphere",
+      "dome"
      ]
     },
     {
@@ -6145,9 +6175,9 @@
       "space",
       "geometries",
       "alternative",
-      "growth",
       "patterns",
-      "organic"
+      "that",
+      "growth"
      ],
      "members": [
       "organic_space",
@@ -6158,60 +6188,20 @@
      "size": 2,
      "kind": "mixed",
      "maps": {
-      "PG_Percolation_Network": 1,
-      "PG_Sculpted_Forms": 1
+      "PG_Branching_Growth": 1,
+      "PG_Space_Colonization": 1
      },
      "terms": [
-      "sphere",
-      "primitives",
-      "for",
-      "scale",
-      "primitive",
-      "surface"
-     ],
-     "members": [
-      "dark_sphere",
-      "dome"
-     ]
-    },
-    {
-     "size": 2,
-     "kind": "mixed",
-     "maps": {
-      "PG_Caves_Mazes": 1,
-      "PG_Percolation_Network": 1
-     },
-     "terms": [
-      "procgen",
+      "growth",
+      "branching",
       "extra",
-      "random",
-      "lattice",
-      "from",
-      "grid"
-     ],
-     "members": [
-      "caverandomwalk",
-      "percolationnetwork_ca"
-     ]
-    },
-    {
-     "size": 2,
-     "kind": "mixed",
-     "maps": {
-      "PG_Sculpted_Forms": 1,
-      "PG_Caves_Mazes": 1
-     },
-     "terms": [
       "procgen",
-      "extra",
-      "generation",
-      "procedural",
-      "with",
-      "recursive"
+      "algorithm",
+      "space"
      ],
      "members": [
-      "layered_membrane",
-      "maze_generation"
+      "branching_growth_algorithm",
+      "space_colonization_algorithm"
      ]
     },
     {
@@ -6231,75 +6221,18 @@
      "members": [
       "science_screen"
      ]
-    },
-    {
-     "size": 1,
-     "kind": "MAP-SHAPED",
-     "maps": {
-      "PG_Sculpted_Forms": 1
-     },
-     "terms": [
-      "procgen",
-      "extra",
-      "cube",
-      "cubes",
-      "scene",
-      "terrain"
-     ],
-     "members": [
-      "cube_mound_scene"
-     ]
-    },
-    {
-     "size": 1,
-     "kind": "MAP-SHAPED",
-     "maps": {
-      "PG_Genetic_Evolution": 1
-     },
-     "terms": [
-      "generation",
-      "procgen",
-      "extra",
-      "random",
-      "selection",
-      "fitness"
-     ],
-     "members": [
-      "GeneticProgramming"
-     ]
-    },
-    {
-     "size": 1,
-     "kind": "MAP-SHAPED",
-     "maps": {
-      "PG_Mirrored_Patterns": 1
-     },
-     "terms": [
-      "cellular",
-      "automata",
-      "procgen",
-      "extra",
-      "interactive",
-      "generation"
-     ],
-     "members": [
-      "mirror_cellular_texture_for_3d"
-     ]
     }
    ],
    "registers": {
-    "HAND": [
-     "dome",
-     0.487
-    ],
+    "HAND": null,
     "PUZZLE": null,
-    "DIAGRAM": [
-     "dome",
-     0.408
-    ],
+    "DIAGRAM": null,
     "WALK": null,
     "MACHINE": null,
-    "EXHIBIT": null,
+    "EXHIBIT": [
+     "dome",
+     0.504
+    ],
     "META": null
    },
    "map_rows": [
@@ -6308,8 +6241,8 @@
      "n": 2,
      "species": "room",
      "pockets": [
-      4,
-      7
+      0,
+      4
      ],
      "registers": [],
      "artifacts": [
@@ -6322,7 +6255,7 @@
      "n": 1,
      "species": "thin",
      "pockets": [
-      0
+      3
      ],
      "registers": [],
      "artifacts": [
@@ -6334,8 +6267,8 @@
      "n": 2,
      "species": "room",
      "pockets": [
-      2,
-      3
+      0,
+      1
      ],
      "registers": [],
      "artifacts": [
@@ -6348,8 +6281,8 @@
      "n": 2,
      "species": "room",
      "pockets": [
-      0,
-      1
+      2,
+      3
      ],
      "registers": [],
      "artifacts": [
@@ -6362,8 +6295,7 @@
      "n": 2,
      "species": "room",
      "pockets": [
-      3,
-      5
+      0
      ],
      "registers": [],
      "artifacts": [
@@ -6376,13 +6308,11 @@
      "n": 3,
      "species": "room",
      "pockets": [
-      2,
-      5,
-      6
+      0,
+      1
      ],
      "registers": [
-      "DIAGRAM",
-      "HAND"
+      "EXHIBIT"
      ],
      "artifacts": [
       "cube_mound_scene",
@@ -6395,8 +6325,8 @@
      "n": 2,
      "species": "room",
      "pockets": [
-      1,
-      8
+      0,
+      2
      ],
      "registers": [],
      "artifacts": [
@@ -6443,75 +6373,102 @@
     "SoftBodies_Affect_Theory_Visualization",
     "Topology_Entropy_Morphogenesis"
    ],
-   "pockets": 10,
-   "silhouette": 0.247,
-   "ari": 0.163,
+   "pockets": 5,
+   "silhouette": 0.266,
+   "ari": 0.06,
    "clusters": [
     {
-     "size": 6,
+     "size": 10,
      "kind": "SPANS",
      "maps": {
       "SoftBodies_Carusell": 3,
       "SoftBodies_Obsticals": 2,
-      "SoftBodies_Obsticals_Part2": 1
+      "SoftBodies_Soft_Body_Deformation": 2,
+      "SoftBodies_Playground_of_Joy": 1
      },
      "terms": [
       "soft",
       "bodies",
       "body",
-      "with",
-      "softbody",
-      "gallery"
+      "simulation",
+      "physics",
+      "with"
      ],
      "members": [
       "breathing_room",
       "cloth_straps",
       "flagdancer",
+      "jelly_cube",
       "revolving_joy_ride",
+      "rounded_softbody_test",
       "soft_mushroom",
-      "softbody_gallery_part2"
+      "softbody_gallery_part2",
+      "softmill",
+      "softstopscene"
+     ]
+    },
+    {
+     "size": 4,
+     "kind": "SPANS",
+     "maps": {
+      "SoftBodies_Carusell": 2,
+      "Chamber_SoftBodies": 1,
+      "SoftBodies_Soft_Body_Deformation": 1
+     },
+     "terms": [
+      "grab",
+      "that",
+      "stick",
+      "cube",
+      "its",
+      "into"
+     ],
+     "members": [
+      "catalyst_target",
+      "grab_long_stick",
+      "pick_up_cube",
+      "science_screen"
      ]
     },
     {
      "size": 3,
-     "kind": "SPANS",
+     "kind": "MAP-SHAPED",
      "maps": {
-      "Chamber_SoftBodies": 1,
-      "SoftBodies_Carusell": 1,
-      "SoftBodies_Soft_Body_Deformation": 1
+      "ProceduralGeneration_Reaction_Diffusion_Systems": 2,
+      "Topology_Entropy_Morphogenesis": 1
      },
      "terms": [
-      "that",
-      "cube",
-      "commons",
-      "into",
-      "artifacts",
-      "its"
+      "diffusion",
+      "reaction",
+      "turing",
+      "entropy",
+      "spots",
+      "patterns"
      ],
      "members": [
-      "catalyst_target",
-      "pick_up_cube",
-      "science_screen"
+      "entropy_morphogenesis",
+      "reaction_diffusion",
+      "turing_pattern_generator"
      ]
     },
     {
      "size": 2,
      "kind": "mixed",
      "maps": {
-      "SoftBodies_Soft_Body_Deformation": 1,
-      "SoftBodies_Playground_of_Joy": 1
+      "SoftBodies_Playground_of_Joy": 1,
+      "SoftBodies_Affect_Theory_Visualization": 1
      },
      "terms": [
-      "soft",
-      "cube",
-      "bodies",
-      "with",
-      "body",
-      "for"
+      "generation",
+      "procedural",
+      "growth",
+      "interactive",
+      "branching",
+      "procgen"
      ],
      "members": [
-      "jelly_cube",
-      "rounded_softbody_test"
+      "branching_growth_algorithm",
+      "radiolaria"
      ]
     },
     {
@@ -6524,135 +6481,24 @@
      "terms": [
       "hazards",
       "grid",
+      "player",
       "from",
       "with",
-      "player",
-      "creature"
+      "radius"
      ],
      "members": [
       "gridagent",
       "proximity_spawner"
      ]
-    },
-    {
-     "size": 2,
-     "kind": "MAP-SHAPED",
-     "maps": {
-      "ProceduralGeneration_Reaction_Diffusion_Systems": 2
-     },
-     "terms": [
-      "diffusion",
-      "reaction",
-      "turing",
-      "spots",
-      "patterns",
-      "stripes"
-     ],
-     "members": [
-      "reaction_diffusion",
-      "turing_pattern_generator"
-     ]
-    },
-    {
-     "size": 2,
-     "kind": "mixed",
-     "maps": {
-      "SoftBodies_Soft_Body_Deformation": 1,
-      "SoftBodies_Cloth_Physics": 1
-     },
-     "terms": [
-      "simulation",
-      "physics",
-      "soft",
-      "body",
-      "demonstration",
-      "example"
-     ],
-     "members": [
-      "softmill",
-      "softstopscene"
-     ]
-    },
-    {
-     "size": 1,
-     "kind": "MAP-SHAPED",
-     "maps": {
-      "SoftBodies_Carusell": 1
-     },
-     "terms": [
-      "grab",
-      "stick",
-      "primitives",
-      "grabbable",
-      "rainbow",
-      "tetrahedron"
-     ],
-     "members": [
-      "grab_long_stick"
-     ]
-    },
-    {
-     "size": 1,
-     "kind": "MAP-SHAPED",
-     "maps": {
-      "SoftBodies_Affect_Theory_Visualization": 1
-     },
-     "terms": [
-      "procedural",
-      "generation",
-      "art",
-      "using",
-      "growth",
-      "forms"
-     ],
-     "members": [
-      "radiolaria"
-     ]
-    },
-    {
-     "size": 1,
-     "kind": "MAP-SHAPED",
-     "maps": {
-      "Topology_Entropy_Morphogenesis": 1
-     },
-     "terms": [
-      "entropy",
-      "geometries",
-      "alternative",
-      "shannon",
-      "disorder",
-      "meter"
-     ],
-     "members": [
-      "entropy_morphogenesis"
-     ]
-    },
-    {
-     "size": 1,
-     "kind": "MAP-SHAPED",
-     "maps": {
-      "SoftBodies_Playground_of_Joy": 1
-     },
-     "terms": [
-      "growth",
-      "branching",
-      "procgen",
-      "extra",
-      "visualization",
-      "interactive"
-     ],
-     "members": [
-      "branching_growth_algorithm"
-     ]
     }
    ],
    "registers": {
-    "HAND": [
-     "grab_long_stick",
-     0.613
-    ],
+    "HAND": null,
     "PUZZLE": null,
-    "DIAGRAM": null,
+    "DIAGRAM": [
+     "grab_long_stick",
+     0.689
+    ],
     "WALK": null,
     "MACHINE": null,
     "EXHIBIT": null,
@@ -6665,8 +6511,7 @@
      "species": "room",
      "pockets": [
       0,
-      4,
-      6
+      2
      ],
      "registers": [],
      "artifacts": [
@@ -6680,12 +6525,11 @@
      "n": 5,
      "species": "room",
      "pockets": [
-      2,
-      4,
-      5
+      0,
+      2
      ],
      "registers": [
-      "HAND"
+      "DIAGRAM"
      ],
      "artifacts": [
       "cloth_straps",
@@ -6700,12 +6544,11 @@
      "n": 4,
      "species": "room",
      "pockets": [
-      2,
-      4,
-      5
+      0,
+      2
      ],
      "registers": [
-      "HAND"
+      "DIAGRAM"
      ],
      "artifacts": [
       "breathing_room",
@@ -6719,12 +6562,11 @@
      "n": 3,
      "species": "room",
      "pockets": [
-      2,
-      4,
-      5
+      0,
+      2
      ],
      "registers": [
-      "HAND"
+      "DIAGRAM"
      ],
      "artifacts": [
       "grab_long_stick",
@@ -6737,7 +6579,7 @@
      "n": 1,
      "species": "thin",
      "pockets": [
-      6
+      0
      ],
      "registers": [],
      "artifacts": [
@@ -6750,8 +6592,8 @@
      "species": "room",
      "pockets": [
       0,
-      1,
-      9
+      3,
+      4
      ],
      "registers": [],
      "artifacts": [
@@ -6765,7 +6607,7 @@
      "n": 1,
      "species": "thin",
      "pockets": [
-      7
+      3
      ],
      "registers": [],
      "artifacts": [
@@ -6777,7 +6619,7 @@
      "n": 2,
      "species": "room",
      "pockets": [
-      3
+      1
      ],
      "registers": [],
      "artifacts": [
@@ -6790,7 +6632,7 @@
      "n": 1,
      "species": "thin",
      "pockets": [
-      8
+      1
      ],
      "registers": [],
      "artifacts": [
@@ -6802,7 +6644,7 @@
      "n": 3,
      "species": "room",
      "pockets": [
-      1,
+      2,
       4
      ],
      "registers": [],
@@ -7017,36 +6859,38 @@
     "ISO_PortalLandscape",
     "ISO_ImplicitModeling"
    ],
-   "pockets": 13,
-   "silhouette": 0.253,
-   "ari": 0.118,
+   "pockets": 11,
+   "silhouette": 0.259,
+   "ari": 0.228,
    "clusters": [
     {
-     "size": 3,
-     "kind": "MAP-SHAPED",
+     "size": 4,
+     "kind": "SPANS",
      "maps": {
       "ISO_Caves": 2,
-      "ISO_LookupTable": 1
+      "ISO_LookupTable": 1,
+      "ISO_Introduction": 1
      },
      "terms": [
       "cave",
       "marching",
       "cubes",
       "isosurfaces",
-      "marchingcubes",
+      "noise",
       "gpu"
      ],
      "members": [
       "mc_cave",
       "mc_inside_cave",
-      "queer_marching_cave"
+      "queer_marching_cave",
+      "voxel_noise_demo"
      ]
     },
     {
-     "size": 3,
+     "size": 4,
      "kind": "MAP-SHAPED",
      "maps": {
-      "ISO_FlatTerrain": 2,
+      "ISO_FlatTerrain": 3,
       "ISO_Caves": 1
      },
      "terms": [
@@ -7060,7 +6904,8 @@
      "members": [
       "mc_flat_landscape",
       "mc_overhang_landscape",
-      "mc_portal_landscape"
+      "mc_portal_landscape",
+      "mc_terrain_demo"
      ]
     },
     {
@@ -7086,62 +6931,23 @@
      ]
     },
     {
-     "size": 2,
-     "kind": "mixed",
+     "size": 3,
+     "kind": "MAP-SHAPED",
      "maps": {
-      "ISO_ImplicitModeling": 1,
-      "ISO_Metaballs": 1
-     },
-     "terms": [
-      "procgen",
-      "extra",
-      "surface",
-      "visualization",
-      "interactive",
-      "generation"
-     ],
-     "members": [
-      "implicit_surface_modeling",
-      "metaballs"
-     ]
-    },
-    {
-     "size": 2,
-     "kind": "mixed",
-     "maps": {
-      "ISO_AnimatedNoise": 1,
-      "ISO_Metaballs": 1
-     },
-     "terms": [
-      "cubes",
-      "marching",
-      "noise",
-      "isosurfaces",
-      "field",
-      "cave"
-     ],
-     "members": [
-      "animated_noise_explorer",
-      "metaball_world"
-     ]
-    },
-    {
-     "size": 2,
-     "kind": "mixed",
-     "maps": {
-      "ISO_Sculpting": 1,
-      "ISO_Metaballs": 1
+      "ISO_Metaballs": 2,
+      "ISO_Sculpting": 1
      },
      "terms": [
       "mesh",
       "time",
-      "sdf",
       "marching",
-      "visualization",
-      "surface"
+      "sdf",
+      "shader",
+      "with"
      ],
      "members": [
       "mc_sculpt_vr",
+      "nakama_metaballs",
       "raymarched_metaballs"
      ]
     },
@@ -7172,12 +6978,12 @@
       "ISO_ShapesGallery": 2
      },
      "terms": [
-      "cubes",
       "torus",
+      "cubes",
       "marching",
       "isosurfaces",
       "gallery",
-      "side"
+      "cave"
      ],
      "members": [
       "mc_shapes_gallery",
@@ -7188,20 +6994,40 @@
      "size": 2,
      "kind": "mixed",
      "maps": {
-      "ISO_FlatTerrain": 1,
-      "ISO_Introduction": 1
+      "ISO_AnimatedNoise": 1,
+      "ISO_Metaballs": 1
      },
      "terms": [
-      "demo",
-      "noise",
-      "marching",
       "cubes",
-      "cave",
-      "isosurfaces"
+      "marching",
+      "isosurfaces",
+      "noise",
+      "field",
+      "cave"
      ],
      "members": [
-      "mc_terrain_demo",
-      "voxel_noise_demo"
+      "animated_noise_explorer",
+      "metaball_world"
+     ]
+    },
+    {
+     "size": 2,
+     "kind": "mixed",
+     "maps": {
+      "ISO_ImplicitModeling": 1,
+      "ISO_Metaballs": 1
+     },
+     "terms": [
+      "procgen",
+      "extra",
+      "surface",
+      "visualization",
+      "interactive",
+      "generation"
+     ],
+     "members": [
+      "implicit_surface_modeling",
+      "metaballs"
      ]
     },
     {
@@ -7228,18 +7054,18 @@
      "size": 1,
      "kind": "MAP-SHAPED",
      "maps": {
-      "ISO_Metaballs": 1
+      "ISO_ShapesGallery": 1
      },
      "terms": [
-      "sphere",
-      "mesh",
-      "with",
-      "shader",
-      "shaders",
-      "marching"
+      "demo",
+      "gyroid",
+      "triply",
+      "minimal",
+      "surface",
+      "periodic"
      ],
      "members": [
-      "nakama_metaballs"
+      "gyroid_demo"
      ]
     },
     {
@@ -7259,35 +7085,17 @@
      "members": [
       "science_screen"
      ]
-    },
-    {
-     "size": 1,
-     "kind": "MAP-SHAPED",
-     "maps": {
-      "ISO_ShapesGallery": 1
-     },
-     "terms": [
-      "demo",
-      "gyroid",
-      "triply",
-      "minimal",
-      "surface",
-      "periodic"
-     ],
-     "members": [
-      "gyroid_demo"
-     ]
     }
    ],
    "registers": {
     "HAND": null,
-    "PUZZLE": null,
+    "PUZZLE": [
+     "metaballs",
+     0.406
+    ],
     "DIAGRAM": null,
     "WALK": null,
-    "MACHINE": [
-     "metaballs",
-     0.474
-    ],
+    "MACHINE": null,
     "EXHIBIT": null,
     "META": null
    },
@@ -7297,8 +7105,8 @@
      "n": 2,
      "species": "room",
      "pockets": [
-      6,
-      11
+      3,
+      6
      ],
      "registers": [],
      "artifacts": [
@@ -7312,7 +7120,7 @@
      "species": "room",
      "pockets": [
       0,
-      4
+      3
      ],
      "registers": [],
      "artifacts": [
@@ -7325,8 +7133,8 @@
      "n": 3,
      "species": "room",
      "pockets": [
-      9,
-      10
+      5,
+      7
      ],
      "registers": [],
      "artifacts": [
@@ -7340,8 +7148,8 @@
      "n": 2,
      "species": "room",
      "pockets": [
-      8,
-      9
+      1,
+      7
      ],
      "registers": [],
      "artifacts": [
@@ -7354,8 +7162,8 @@
      "n": 2,
      "species": "room",
      "pockets": [
-      4,
-      7
+      0,
+      2
      ],
      "registers": [],
      "artifacts": [
@@ -7368,8 +7176,7 @@
      "n": 3,
      "species": "room",
      "pockets": [
-      2,
-      11
+      4
      ],
      "registers": [],
      "artifacts": [
@@ -7383,7 +7190,7 @@
      "n": 1,
      "species": "thin",
      "pockets": [
-      12
+      10
      ],
      "registers": [],
      "artifacts": [
@@ -7395,8 +7202,8 @@
      "n": 3,
      "species": "room",
      "pockets": [
-      0,
-      2
+      3,
+      4
      ],
      "registers": [],
      "artifacts": [
@@ -7410,8 +7217,8 @@
      "n": 2,
      "species": "room",
      "pockets": [
-      8,
-      12
+      1,
+      10
      ],
      "registers": [],
      "artifacts": [
@@ -7424,8 +7231,8 @@
      "n": 2,
      "species": "room",
      "pockets": [
-      4,
-      5
+      0,
+      8
      ],
      "registers": [],
      "artifacts": [
@@ -7436,15 +7243,14 @@
     {
      "map": "ISO_Metaballs",
      "n": 4,
-     "species": "survey",
+     "species": "room",
      "pockets": [
-      1,
-      3,
-      5,
-      7
+      2,
+      8,
+      9
      ],
      "registers": [
-      "MACHINE"
+      "PUZZLE"
      ],
      "artifacts": [
       "metaball_world",
@@ -7458,7 +7264,7 @@
      "n": 1,
      "species": "thin",
      "pockets": [
-      1
+      9
      ],
      "registers": [],
      "artifacts": [
@@ -7550,7 +7356,7 @@
     "SwarmIntelligence_Swarm_Intelligence_Algorithms"
    ],
    "pockets": 4,
-   "silhouette": 0.249,
+   "silhouette": 0.247,
    "ari": 0.062,
    "clusters": [
     {
@@ -7565,9 +7371,9 @@
      "terms": [
       "misc",
       "algorithms",
-      "simulation",
       "synthesis",
       "field",
+      "simulation",
       "using"
      ],
      "members": [
@@ -7610,11 +7416,11 @@
      },
      "terms": [
       "steering",
-      "behavior",
-      "agents",
-      "cube",
       "rules",
-      "landscape"
+      "simple",
+      "agents",
+      "behavior",
+      "ant"
      ],
      "members": [
       "boids_aquarium",
@@ -7756,31 +7562,33 @@
    "thin_maps": [
     "ML_Generative"
    ],
-   "pockets": 9,
-   "silhouette": 0.186,
-   "ari": 0.188,
+   "pockets": 8,
+   "silhouette": 0.191,
+   "ari": 0.1,
    "clusters": [
     {
-     "size": 5,
+     "size": 6,
      "kind": "SPANS",
      "maps": {
-      "ML_Classification": 3,
-      "ML_Gradient_Landscape": 1,
-      "ML_Sequence_Memory": 1
+      "ML_Perception": 2,
+      "ML_Sequence_Memory": 2,
+      "ML_Classification": 1,
+      "ML_Synthesis": 1
      },
      "terms": [
-      "visualization",
-      "machinelearning",
       "interactive",
+      "machinelearning",
+      "visualization",
       "with",
-      "random",
-      "attention"
+      "neural",
+      "based"
      ],
      "members": [
+      "computer_vision_vr",
+      "convolutional_neural_networks_cnns_vr",
       "enhanced_kmeans",
-      "pca_visualization",
-      "random_forest_visualization",
-      "svm_visualization",
+      "explainable_ai_xai_vr",
+      "lstms_vr",
       "transformers_vr"
      ]
     },
@@ -7788,30 +7596,8 @@
      "size": 4,
      "kind": "SPANS",
      "maps": {
-      "ML_Perception": 2,
-      "ML_Synthesis": 1,
-      "ML_Sequence_Memory": 1
-     },
-     "terms": [
-      "interactive",
-      "machinelearning",
-      "with",
-      "visualization",
-      "walkable",
-      "neural"
-     ],
-     "members": [
-      "computer_vision_vr",
-      "convolutional_neural_networks_cnns_vr",
-      "explainable_ai_xai_vr",
-      "lstms_vr"
-     ]
-    },
-    {
-     "size": 3,
-     "kind": "MAP-SHAPED",
-     "maps": {
       "ML_Neural_Networks": 2,
+      "ML_Synthesis": 1,
       "ML_Generative": 1
      },
      "terms": [
@@ -7820,32 +7606,34 @@
       "with",
       "neural",
       "visualization",
-      "through"
+      "algorithms"
      ],
      "members": [
+      "anomaly_detection",
       "generative_adversarial_networks_gans_vr",
       "neural_network_visualization",
       "neural_networks_vr"
      ]
     },
     {
-     "size": 2,
-     "kind": "mixed",
+     "size": 3,
+     "kind": "MAP-SHAPED",
      "maps": {
-      "ML_Synthesis": 1,
-      "ML_Neural_Networks": 1
+      "ML_Classification": 2,
+      "ML_Gradient_Landscape": 1
      },
      "terms": [
+      "visualization",
       "machinelearning",
-      "through",
-      "gradient",
-      "walk",
-      "from",
-      "learning"
+      "random",
+      "with",
+      "for",
+      "attention"
      ],
      "members": [
-      "joint_learn_walk",
-      "learn_world_stacked"
+      "pca_visualization",
+      "random_forest_visualization",
+      "svm_visualization"
      ]
     },
     {
@@ -7860,8 +7648,8 @@
       "descent",
       "downhill",
       "landscape",
-      "visualization",
-      "machinelearning"
+      "machinelearning",
+      "loss"
      ],
      "members": [
       "gradient_descent_visualization",
@@ -7888,6 +7676,44 @@
      ]
     },
     {
+     "size": 2,
+     "kind": "mixed",
+     "maps": {
+      "ML_Synthesis": 1,
+      "ML_Neural_Networks": 1
+     },
+     "terms": [
+      "machinelearning",
+      "through",
+      "gradient",
+      "learning",
+      "walk",
+      "network"
+     ],
+     "members": [
+      "joint_learn_walk",
+      "learn_world_stacked"
+     ]
+    },
+    {
+     "size": 1,
+     "kind": "MAP-SHAPED",
+     "maps": {
+      "ML_Evolution": 1
+     },
+     "terms": [
+      "color",
+      "machinelearning",
+      "system",
+      "selection",
+      "rules",
+      "fitness"
+     ],
+     "members": [
+      "evolvingflowers"
+     ]
+    },
+    {
      "size": 1,
      "kind": "MAP-SHAPED",
      "maps": {
@@ -7904,53 +7730,17 @@
      "members": [
       "science_screen"
      ]
-    },
-    {
-     "size": 1,
-     "kind": "MAP-SHAPED",
-     "maps": {
-      "ML_Synthesis": 1
-     },
-     "terms": [
-      "machinelearning",
-      "algorithms",
-      "misc",
-      "visualization",
-      "what",
-      "selection"
-     ],
-     "members": [
-      "anomaly_detection"
-     ]
-    },
-    {
-     "size": 1,
-     "kind": "MAP-SHAPED",
-     "maps": {
-      "ML_Evolution": 1
-     },
-     "terms": [
-      "color",
-      "machinelearning",
-      "system",
-      "rules",
-      "selection",
-      "genetic"
-     ],
-     "members": [
-      "evolvingflowers"
-     ]
     }
    ],
    "registers": {
     "HAND": null,
-    "PUZZLE": null,
+    "PUZZLE": [
+     "transformers_vr",
+     0.441
+    ],
     "DIAGRAM": null,
     "WALK": null,
-    "MACHINE": [
-     "transformers_vr",
-     0.545
-    ],
+    "MACHINE": null,
     "EXHIBIT": null,
     "META": null
    },
@@ -7960,10 +7750,10 @@
      "n": 5,
      "species": "survey",
      "pockets": [
-      2,
+      0,
       3,
-      6,
-      7
+      4,
+      5
      ],
      "registers": [],
      "artifacts": [
@@ -7994,10 +7784,11 @@
      "n": 3,
      "species": "room",
      "pockets": [
-      4
+      2,
+      6
      ],
      "registers": [
-      "MACHINE"
+      "PUZZLE"
      ],
      "artifacts": [
       "enhanced_kmeans",
@@ -8011,7 +7802,7 @@
      "species": "room",
      "pockets": [
       1,
-      8
+      7
      ],
      "registers": [],
      "artifacts": [
@@ -8025,7 +7816,7 @@
      "n": 2,
      "species": "room",
      "pockets": [
-      0
+      6
      ],
      "registers": [],
      "artifacts": [
@@ -8038,11 +7829,10 @@
      "n": 2,
      "species": "room",
      "pockets": [
-      0,
-      4
+      6
      ],
      "registers": [
-      "MACHINE"
+      "PUZZLE"
      ],
      "artifacts": [
       "lstms_vr",
@@ -8054,7 +7844,7 @@
      "n": 1,
      "species": "thin",
      "pockets": [
-      8
+      1
      ],
      "registers": [],
      "artifacts": [
@@ -8066,9 +7856,9 @@
      "n": 3,
      "species": "room",
      "pockets": [
-      0,
       1,
-      5
+      6,
+      7
      ],
      "registers": [],
      "artifacts": [
@@ -8093,58 +7883,58 @@
     "GT_Matching"
    ],
    "pockets": 4,
-   "silhouette": 0.128,
-   "ari": -0.019,
+   "silhouette": 0.096,
+   "ari": 0.049,
    "clusters": [
     {
      "size": 6,
      "kind": "SPANS",
      "maps": {
-      "GT_Connectivity": 2,
-      "GT_Foundations": 1,
-      "GT_Matching": 1,
-      "GT_Spanning_Trees": 1
+      "GT_Foundations": 2,
+      "GT_Network_Analysis": 2,
+      "GT_Layout": 1,
+      "GT_Flow": 1
      },
      "terms": [
       "misc",
       "algorithms",
       "graph",
-      "edges",
-      "algorithm",
-      "visualization"
+      "network",
+      "nodes",
+      "edges"
      ],
      "members": [
       "KonigsbergBridge",
-      "edmonds_algorithm",
-      "kosaraju_algorithm",
-      "mst_visualization",
-      "pathfinding3d",
-      "tarjan_algorithm"
+      "force_directed_layout",
+      "graphspace",
+      "network_analysis",
+      "networkflow3d",
+      "push_relabel_algorithm"
      ]
     },
     {
      "size": 5,
      "kind": "SPANS",
      "maps": {
-      "GT_Network_Analysis": 2,
-      "GT_Layout": 1,
-      "GT_Foundations": 1,
-      "GT_Flow": 1
+      "GT_Connectivity": 2,
+      "GT_Matching": 1,
+      "GT_Spanning_Trees": 1,
+      "GT_Pathfinding": 1
      },
      "terms": [
       "misc",
       "algorithms",
-      "network",
       "graph",
-      "flow",
-      "edges"
+      "edges",
+      "visualization",
+      "algorithm"
      ],
      "members": [
-      "force_directed_layout",
-      "graphspace",
-      "network_analysis",
-      "networkflow3d",
-      "push_relabel_algorithm"
+      "edmonds_algorithm",
+      "kosaraju_algorithm",
+      "mst_visualization",
+      "pathfinding3d",
+      "tarjan_algorithm"
      ]
     },
     {
@@ -8176,8 +7966,8 @@
      "terms": [
       "rhizome",
       "tree",
-      "deleuze",
       "rhizomatic",
+      "deleuze",
       "guattari",
       "root"
      ],
@@ -8201,8 +7991,7 @@
      "n": 2,
      "species": "room",
      "pockets": [
-      0,
-      1
+      2
      ],
      "registers": [],
      "artifacts": [
@@ -8215,7 +8004,7 @@
      "n": 1,
      "species": "thin",
      "pockets": [
-      1
+      2
      ],
      "registers": [],
      "artifacts": [
@@ -8227,7 +8016,7 @@
      "n": 1,
      "species": "thin",
      "pockets": [
-      0
+      1
      ],
      "registers": [],
      "artifacts": [
@@ -8239,8 +8028,8 @@
      "n": 3,
      "species": "room",
      "pockets": [
-      1,
-      2
+      2,
+      3
      ],
      "registers": [],
      "artifacts": [
@@ -8255,7 +8044,7 @@
      "species": "room",
      "pockets": [
       0,
-      3
+      1
      ],
      "registers": [],
      "artifacts": [
@@ -8269,7 +8058,7 @@
      "n": 1,
      "species": "thin",
      "pockets": [
-      0
+      1
      ],
      "registers": [],
      "artifacts": [
@@ -8281,8 +8070,8 @@
      "n": 2,
      "species": "room",
      "pockets": [
-      1,
-      3
+      0,
+      2
      ],
      "registers": [],
      "artifacts": [
@@ -8295,7 +8084,7 @@
      "n": 1,
      "species": "thin",
      "pockets": [
-      0
+      1
      ],
      "registers": [],
      "artifacts": [
@@ -8312,31 +8101,30 @@
    "etudes": 0,
    "etude_maps": [],
    "thin_maps": [],
-   "pockets": 4,
-   "silhouette": 0.223,
-   "ari": 0.195,
+   "pockets": 5,
+   "silhouette": 0.201,
+   "ari": 0.219,
    "clusters": [
     {
-     "size": 18,
+     "size": 15,
      "kind": "SPANS",
      "maps": {
-      "Russell_Paradox": 4,
       "Escher_Impossible": 4,
       "Godel_Incompleteness": 4,
-      "Florensky_Paraconsistent": 3
+      "Florensky_Paraconsistent": 3,
+      "Russell_Paradox": 2
      },
      "terms": [
       "crisis",
       "foundations",
-      "that",
       "impossible",
-      "not",
-      "triangle"
+      "staircase",
+      "postfoundations",
+      "not"
      ],
      "members": [
       "barber_paradox",
       "both_true_gate",
-      "brouwer_choice_sequence",
       "constructive_proof",
       "constructive_staircase",
       "escher_staircase",
@@ -8349,9 +8137,7 @@
       "magritte_pipe",
       "penrose_triangle",
       "provability_sorter",
-      "russell_set_box",
-      "schrodinger_box",
-      "self_membership_set"
+      "schrodinger_box"
      ]
     },
     {
@@ -8362,12 +8148,12 @@
       "Euclid_Parallel": 2
      },
      "terms": [
-      "triangle",
       "lines",
+      "triangle",
       "geometries",
       "alternative",
       "surface",
-      "sum"
+      "parallel"
      ],
      "members": [
       "angle_sum_triangle",
@@ -8377,6 +8163,29 @@
       "parallel_lines",
       "poincare_disk",
       "riemann_sphere"
+     ]
+    },
+    {
+     "size": 4,
+     "kind": "SPANS",
+     "maps": {
+      "Russell_Paradox": 2,
+      "Brouwer_Intuitionism": 1,
+      "Euclid_Parallel": 1
+     },
+     "terms": [
+      "that",
+      "set",
+      "foundations",
+      "crisis",
+      "russell",
+      "paradox"
+     ],
+     "members": [
+      "brouwer_choice_sequence",
+      "russell_set_box",
+      "science_screen",
+      "self_membership_set"
      ]
     },
     {
@@ -8404,11 +8213,10 @@
      ]
     },
     {
-     "size": 4,
+     "size": 3,
      "kind": "MAP-SHAPED",
      "maps": {
-      "Crisis_Synthesis": 3,
-      "Euclid_Parallel": 1
+      "Crisis_Synthesis": 3
      },
      "terms": [
       "qfep",
@@ -8416,32 +8224,28 @@
       "lambda",
       "entropy",
       "chaos",
-      "formula"
+      "edge"
      ],
      "members": [
       "lambda_slider",
       "phi_slider",
-      "qfep_formula_3d",
-      "science_screen"
+      "qfep_formula_3d"
      ]
     }
    ],
    "registers": {
-    "HAND": [
-     "florensky_sphere",
-     0.404
-    ],
-    "PUZZLE": null,
-    "DIAGRAM": [
-     "parallel_lines",
-     0.578
-    ],
-    "WALK": null,
-    "MACHINE": [
+    "HAND": null,
+    "PUZZLE": [
      "superposition_display",
-     0.591
+     0.439
     ],
-    "EXHIBIT": null,
+    "DIAGRAM": null,
+    "WALK": null,
+    "MACHINE": null,
+    "EXHIBIT": [
+     "parallel_lines",
+     0.505
+    ],
     "META": null
    },
    "map_rows": [
@@ -8451,11 +8255,11 @@
      "species": "room",
      "pockets": [
       0,
-      1,
-      3
+      2,
+      4
      ],
      "registers": [
-      "DIAGRAM"
+      "EXHIBIT"
      ],
      "artifacts": [
       "angle_sum_triangle",
@@ -8469,7 +8273,7 @@
      "n": 5,
      "species": "room",
      "pockets": [
-      3
+      2
      ],
      "registers": [],
      "artifacts": [
@@ -8485,7 +8289,8 @@
      "n": 4,
      "species": "room",
      "pockets": [
-      2
+      0,
+      1
      ],
      "registers": [],
      "artifacts": [
@@ -8500,7 +8305,7 @@
      "n": 4,
      "species": "room",
      "pockets": [
-      2
+      1
      ],
      "registers": [],
      "artifacts": [
@@ -8515,7 +8320,7 @@
      "n": 4,
      "species": "room",
      "pockets": [
-      2
+      1
      ],
      "registers": [],
      "artifacts": [
@@ -8531,7 +8336,8 @@
      "species": "room",
      "pockets": [
       0,
-      2
+      1,
+      4
      ],
      "registers": [],
      "artifacts": [
@@ -8546,12 +8352,11 @@
      "n": 4,
      "species": "room",
      "pockets": [
-      0,
-      2
+      1,
+      4
      ],
      "registers": [
-      "HAND",
-      "MACHINE"
+      "PUZZLE"
      ],
      "artifacts": [
       "both_true_gate",
@@ -8563,15 +8368,14 @@
     {
      "map": "Crisis_Synthesis",
      "n": 8,
-     "species": "room",
+     "species": "survey",
      "pockets": [
       0,
       1,
-      2
+      3,
+      4
      ],
-     "registers": [
-      "HAND"
-     ],
+     "registers": [],
      "artifacts": [
       "bifurcation_diagram",
       "escher_staircase",
@@ -8594,9 +8398,33 @@
    "etude_maps": [],
    "thin_maps": [],
    "pockets": 15,
-   "silhouette": 0.219,
-   "ari": 0.231,
+   "silhouette": 0.233,
+   "ari": 0.23,
    "clusters": [
+    {
+     "size": 6,
+     "kind": "mixed",
+     "maps": {
+      "QFEP_Lambda_Spectrum": 3,
+      "QFEP_Edge_Of_Chaos": 3
+     },
+     "terms": [
+      "edge",
+      "qfep",
+      "chaos",
+      "lambda",
+      "order",
+      "particles"
+     ],
+     "members": [
+      "bifurcation_walkway",
+      "complexity_pattern",
+      "edge_core",
+      "edge_of_chaos_unlocked",
+      "edge_particles",
+      "emergence_zone"
+     ]
+    },
     {
      "size": 5,
      "kind": "MAP-SHAPED",
@@ -8609,8 +8437,8 @@
       "qfep",
       "meter",
       "shannon",
-      "disorder",
-      "space"
+      "space",
+      "disorder"
      ],
      "members": [
       "entropy_fan",
@@ -8618,29 +8446,6 @@
       "possibility_space_cloud",
       "random_cubes",
       "shannon_workbench"
-     ]
-    },
-    {
-     "size": 5,
-     "kind": "MAP-SHAPED",
-     "maps": {
-      "QFEP_Edge_Of_Chaos": 3,
-      "QFEP_Lambda_Spectrum": 2
-     },
-     "terms": [
-      "edge",
-      "qfep",
-      "chaos",
-      "lambda",
-      "order",
-      "particles"
-     ],
-     "members": [
-      "complexity_pattern",
-      "edge_core",
-      "edge_of_chaos_unlocked",
-      "edge_particles",
-      "emergence_zone"
      ]
     },
     {
@@ -8688,6 +8493,30 @@
      ]
     },
     {
+     "size": 4,
+     "kind": "SPANS",
+     "maps": {
+      "QFEP_Lambda_Spectrum": 1,
+      "QFEP_Introduction": 1,
+      "QFEP_E_Term": 1,
+      "QFEP_Sandbox": 1
+     },
+     "terms": [
+      "qfep",
+      "particle",
+      "particles",
+      "entropy",
+      "chaos",
+      "edge"
+     ],
+     "members": [
+      "chaos_particles",
+      "lambda_slider",
+      "particle_chaos",
+      "reactive_particles"
+     ]
+    },
+    {
      "size": 3,
      "kind": "MAP-SHAPED",
      "maps": {
@@ -8696,8 +8525,8 @@
      },
      "terms": [
       "qfep",
-      "for",
       "form",
+      "for",
       "phi",
       "mesh",
       "lambda"
@@ -8709,66 +8538,23 @@
      ]
     },
     {
-     "size": 3,
-     "kind": "SPANS",
+     "size": 2,
+     "kind": "mixed",
      "maps": {
-      "QFEP_Lambda_Spectrum": 1,
-      "QFEP_E_Term": 1,
-      "QFEP_Sandbox": 1
-     },
-     "terms": [
-      "particle",
-      "qfep",
-      "particles",
-      "entropy",
-      "chaos",
-      "system"
-     ],
-     "members": [
-      "chaos_particles",
-      "particle_chaos",
-      "reactive_particles"
-     ]
-    },
-    {
-     "size": 3,
-     "kind": "MAP-SHAPED",
-     "maps": {
-      "QFEP_Lambda_Spectrum": 2,
-      "QFEP_F_Term": 1
+      "QFEP_F_Term": 1,
+      "QFEP_Lambda_Spectrum": 1
      },
      "terms": [
       "qfep",
       "crystal",
+      "for",
       "order",
-      "grid",
-      "cube",
-      "lambda"
+      "pure",
+      "pattern"
      ],
      "members": [
       "crystal_cluster",
-      "crystal_formation",
-      "ordered_grid"
-     ]
-    },
-    {
-     "size": 2,
-     "kind": "mixed",
-     "maps": {
-      "QFEP_Lambda_Spectrum": 1,
-      "QFEP_Introduction": 1
-     },
-     "terms": [
-      "qfep",
-      "chaos",
-      "edge",
-      "order",
-      "entropy",
-      "lambda"
-     ],
-     "members": [
-      "bifurcation_walkway",
-      "lambda_slider"
+      "crystal_formation"
      ]
     },
     {
@@ -8831,42 +8617,6 @@
      "size": 1,
      "kind": "MAP-SHAPED",
      "maps": {
-      "QFEP_F_Term": 1
-     },
-     "terms": [
-      "sphere",
-      "scale",
-      "lsystems",
-      "surface",
-      "rotation",
-      "its"
-     ],
-     "members": [
-      "dark_sphere"
-     ]
-    },
-    {
-     "size": 1,
-     "kind": "MAP-SHAPED",
-     "maps": {
-      "QFEP_Introduction": 1
-     },
-     "terms": [
-      "commons",
-      "text",
-      "artifacts",
-      "using",
-      "scale",
-      "for"
-     ],
-     "members": [
-      "tt"
-     ]
-    },
-    {
-     "size": 1,
-     "kind": "MAP-SHAPED",
-     "maps": {
       "QFEP_Edge_Of_Chaos": 1
      },
      "terms": [
@@ -8888,6 +8638,42 @@
       "QFEP_Introduction": 1
      },
      "terms": [
+      "commons",
+      "artifacts",
+      "text",
+      "using",
+      "for",
+      "display"
+     ],
+     "members": [
+      "tt"
+     ]
+    },
+    {
+     "size": 1,
+     "kind": "MAP-SHAPED",
+     "maps": {
+      "QFEP_F_Term": 1
+     },
+     "terms": [
+      "sphere",
+      "scale",
+      "lsystems",
+      "surface",
+      "rotation",
+      "its"
+     ],
+     "members": [
+      "dark_sphere"
+     ]
+    },
+    {
+     "size": 1,
+     "kind": "MAP-SHAPED",
+     "maps": {
+      "QFEP_Introduction": 1
+     },
+     "terms": [
       "that",
       "display",
       "shaders",
@@ -8898,24 +8684,42 @@
      "members": [
       "science_screen"
      ]
+    },
+    {
+     "size": 1,
+     "kind": "MAP-SHAPED",
+     "maps": {
+      "QFEP_Lambda_Spectrum": 1
+     },
+     "terms": [
+      "grid",
+      "qfep",
+      "cube",
+      "order",
+      "lambda",
+      "phi"
+     ],
+     "members": [
+      "ordered_grid"
+     ]
     }
    ],
    "registers": {
-    "HAND": [
+    "HAND": null,
+    "PUZZLE": null,
+    "DIAGRAM": [
      "grab_sphere_lambda",
-     0.596
+     0.637
     ],
-    "PUZZLE": [
-     "snap_tetra_puzzle",
-     0.63
-    ],
-    "DIAGRAM": null,
     "WALK": null,
-    "MACHINE": null,
+    "MACHINE": [
+     "queer_morphology_specimen",
+     0.588
+    ],
     "EXHIBIT": null,
     "META": [
-     "queer_morphology_specimen",
-     0.571
+     "snap_tetra_puzzle",
+     0.701
     ]
    },
    "map_rows": [
@@ -8924,15 +8728,15 @@
      "n": 9,
      "species": "survey",
      "pockets": [
-      1,
-      2,
+      4,
+      6,
       9,
-      12,
-      14
+      10,
+      13
      ],
      "registers": [
-      "HAND",
-      "META"
+      "DIAGRAM",
+      "MACHINE"
      ],
      "artifacts": [
       "grab_sphere_E",
@@ -8951,17 +8755,17 @@
      "n": 8,
      "species": "survey",
      "pockets": [
+      0,
       2,
-      3,
       5,
-      6,
-      11,
+      9,
+      10,
       12,
-      14
+      13
      ],
      "registers": [
-      "META",
-      "PUZZLE"
+      "MACHINE",
+      "META"
      ],
      "artifacts": [
       "crystal_cluster",
@@ -8977,15 +8781,14 @@
     {
      "map": "QFEP_E_Term",
      "n": 7,
-     "species": "survey",
+     "species": "room",
      "pockets": [
-      2,
-      5,
-      7,
-      12
+      0,
+      9,
+      10
      ],
      "registers": [
-      "META"
+      "MACHINE"
      ],
      "artifacts": [
       "entropy_fan",
@@ -9002,11 +8805,11 @@
      "n": 7,
      "species": "survey",
      "pockets": [
-      0,
+      1,
       2,
-      7,
+      3,
       10,
-      11
+      14
      ],
      "registers": [],
      "artifacts": [
@@ -9024,13 +8827,13 @@
      "n": 6,
      "species": "survey",
      "pockets": [
-      0,
-      8,
+      3,
+      6,
       9,
-      12
+      11
      ],
      "registers": [
-      "META"
+      "MACHINE"
      ],
      "artifacts": [
       "fluid_form",
@@ -9046,13 +8849,13 @@
      "n": 6,
      "species": "survey",
      "pockets": [
-      2,
-      10,
-      12,
-      13
+      1,
+      8,
+      9,
+      10
      ],
      "registers": [
-      "META"
+      "MACHINE"
      ],
      "artifacts": [
       "edge_core",
@@ -9066,15 +8869,14 @@
     {
      "map": "QFEP_Sandbox",
      "n": 6,
-     "species": "survey",
+     "species": "room",
      "pockets": [
-      2,
-      7,
+      6,
       9,
-      12
+      10
      ],
      "registers": [
-      "META"
+      "MACHINE"
      ],
      "artifacts": [
       "lambda_slider",
@@ -9090,14 +8892,14 @@
      "n": 7,
      "species": "survey",
      "pockets": [
-      1,
       4,
-      9,
-      12
+      6,
+      7,
+      9
      ],
      "registers": [
-      "HAND",
-      "META"
+      "DIAGRAM",
+      "MACHINE"
      ],
      "artifacts": [
       "grab_sphere_E",
@@ -9124,34 +8926,10 @@
     "SpeculativeComputation_Rhizome_Network",
     "AdvancedLaboratory_Lab_Equipment_Simulation"
    ],
-   "pockets": 5,
-   "silhouette": 0.127,
-   "ari": -0.019,
+   "pockets": 8,
+   "silhouette": 0.13,
+   "ari": 0.058,
    "clusters": [
-    {
-     "size": 4,
-     "kind": "SPANS",
-     "maps": {
-      "AdvancedLaboratory_Lab_Equipment_Simulation": 1,
-      "CriticalAlgorithms_Algorithmic_Bias_Visualization": 1,
-      "PostCrisis_Synthesis": 1,
-      "SpeculativeComputation_Paraconsistent_Engineering": 1
-     },
-     "terms": [
-      "visualization",
-      "interactive",
-      "qfep",
-      "with",
-      "display",
-      "from"
-     ],
-     "members": [
-      "MolecularDesigner",
-      "bias_visualizer",
-      "qfep_formula_3d",
-      "superposition_display"
-     ]
-    },
     {
      "size": 3,
      "kind": "MAP-SHAPED",
@@ -9161,11 +8939,11 @@
      },
      "terms": [
       "foundations",
-      "crisis",
       "sphere",
+      "crisis",
       "impossible",
       "not",
-      "godel"
+      "provable"
      ],
      "members": [
       "florensky_sphere",
@@ -9184,8 +8962,8 @@
      "terms": [
       "misc",
       "algorithms",
-      "display",
       "from",
+      "display",
       "space",
       "synthesis"
      ],
@@ -9200,19 +8978,37 @@
      "kind": "mixed",
      "maps": {
       "CriticalAlgorithms_Algorithmic_Bias_Visualization": 1,
-      "CriticalAlgorithms_Applied_Ethics": 1
+      "SpeculativeComputation_Paraconsistent_Engineering": 1
      },
      "terms": [
-      "commons",
+      "visualization",
+      "interactive",
       "display",
+      "commons",
       "artifacts",
-      "text",
-      "that",
-      "using"
+      "with"
      ],
      "members": [
-      "science_screen",
-      "tt"
+      "bias_visualizer",
+      "superposition_display"
+     ]
+    },
+    {
+     "size": 1,
+     "kind": "MAP-SHAPED",
+     "maps": {
+      "PostCrisis_Synthesis": 1
+     },
+     "terms": [
+      "qfep",
+      "visualization",
+      "phi",
+      "color",
+      "lambda",
+      "formula"
+     ],
+     "members": [
+      "qfep_formula_3d"
      ]
     },
     {
@@ -9227,10 +9023,64 @@
       "cubes",
       "rhizome",
       "isosurfaces",
-      "demo"
+      "growth"
      ],
      "members": [
       "rhizome_cave_demo"
+     ]
+    },
+    {
+     "size": 1,
+     "kind": "MAP-SHAPED",
+     "maps": {
+      "AdvancedLaboratory_Lab_Equipment_Simulation": 1
+     },
+     "terms": [
+      "from",
+      "interactive",
+      "snap",
+      "puzzle",
+      "rules",
+      "crisis"
+     ],
+     "members": [
+      "MolecularDesigner"
+     ]
+    },
+    {
+     "size": 1,
+     "kind": "MAP-SHAPED",
+     "maps": {
+      "CriticalAlgorithms_Algorithmic_Bias_Visualization": 1
+     },
+     "terms": [
+      "that",
+      "display",
+      "shaders",
+      "into",
+      "screen",
+      "tangent"
+     ],
+     "members": [
+      "science_screen"
+     ]
+    },
+    {
+     "size": 1,
+     "kind": "MAP-SHAPED",
+     "maps": {
+      "CriticalAlgorithms_Applied_Ethics": 1
+     },
+     "terms": [
+      "commons",
+      "artifacts",
+      "text",
+      "using",
+      "for",
+      "display"
+     ],
+     "members": [
+      "tt"
      ]
     }
    ],
@@ -9240,8 +9090,8 @@
     "DIAGRAM": null,
     "WALK": null,
     "MACHINE": [
-     "superposition_display",
-     0.464
+     "bias_visualizer",
+     0.414
     ],
     "EXHIBIT": null,
     "META": null
@@ -9252,11 +9102,13 @@
      "n": 3,
      "species": "room",
      "pockets": [
-      0,
       2,
-      3
+      4,
+      6
      ],
-     "registers": [],
+     "registers": [
+      "MACHINE"
+     ],
      "artifacts": [
       "bias_from_inside",
       "bias_visualizer",
@@ -9268,9 +9120,9 @@
      "n": 3,
      "species": "room",
      "pockets": [
-      0,
       1,
-      3
+      2,
+      7
      ],
      "registers": [],
      "artifacts": [
@@ -9284,13 +9136,11 @@
      "n": 4,
      "species": "room",
      "pockets": [
-      0,
       1,
-      2
+      4,
+      7
      ],
-     "registers": [
-      "MACHINE"
-     ],
+     "registers": [],
      "artifacts": [
       "florensky_sphere",
       "schrodinger_box",
@@ -9303,7 +9153,7 @@
      "n": 1,
      "species": "thin",
      "pockets": [
-      3
+      2
      ],
      "registers": [],
      "artifacts": [
@@ -9315,7 +9165,7 @@
      "n": 1,
      "species": "thin",
      "pockets": [
-      3
+      2
      ],
      "registers": [],
      "artifacts": [
@@ -9327,7 +9177,7 @@
      "n": 1,
      "species": "thin",
      "pockets": [
-      4
+      3
      ],
      "registers": [],
      "artifacts": [
@@ -9339,7 +9189,7 @@
      "n": 1,
      "species": "thin",
      "pockets": [
-      2
+      5
      ],
      "registers": [],
      "artifacts": [
@@ -9354,7 +9204,7 @@
       0,
       1,
       2,
-      3
+      7
      ],
      "registers": [],
      "artifacts": [
