@@ -13,7 +13,7 @@ const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
 # relationships: the in-game twin of the /pattern-atlas web gallery; pays the same commons_sources the ledger tracks (kente weavers, ikat resist-dyers, bingata dyers, kanga printers, indigo dyers, Tibetan carpet-knotters, Iznik potters, al-Andalus zellige cutters, Pompeii mosaicists, Anni Albers, Sonia Delaunay, Vasarely, Bridget Riley); sibling of [[wall_pattern_gallery]] and the symmetry chapter's looms.
 # truth: a pattern reproduced without its makers is an enclosure; reproduced beside their names it is a return. This room is the difference, standing up.
 
-@export var columns: int = 6
+@export var columns: int = 7
 @export var plate_w: float = 1.15
 @export var plate_h: float = 0.85
 
@@ -31,6 +31,12 @@ const PLATES := [
 	{"shader": "atlas_delaunay", "title": "SONIA DELAUNAY", "makers": "Orphism · textile + paint"},
 	{"shader": "atlas_vasarely", "title": "VASARELY", "makers": "op art · the deformed grid"},
 	{"shader": "atlas_riley", "title": "BRIDGET RILEY", "makers": "op art · the eye supplies the motion"},
+	{"shader": "atlas2_wang", "title": "WANG TILES", "makers": "Hao Wang 1961 · Berger 1966 — tiling is undecidable"},
+	{"shader": "atlas2_batik", "title": "BATIK", "makers": "batik makers of Java — the crackle is the hand"},
+	{"shader": "atlas2_kuba", "title": "KUBA / SHOOWA", "makers": "Kuba kingdom weavers & embroiderers · DR Congo"},
+	{"shader": "atlas2_hitomezashi", "title": "HITOMEZASHI", "makers": "farm households of northern Japan — mending as pattern"},
+	{"shader": "atlas2_sami", "title": "SAMI BAND", "makers": "Sami band weavers · Sapmi"},
+	{"shader": "atlas2_adinkra", "title": "ADINKRA", "makers": "carvers & stampers of Gyaman / Asante · Ghana"},
 ]
 
 var _built := false

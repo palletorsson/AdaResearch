@@ -5,21 +5,21 @@
   "registry_artifacts": 2580,
   "attributed_artifacts": 636,
   "unattributed_artifacts": 1944,
-  "sources_drawn_on": 71,
+  "sources_drawn_on": 77,
   "by_kind": {
    "nature": 14,
-   "named": 545,
+   "named": 547,
    "mathematical": 84,
-   "collective": 226,
+   "collective": 232,
    "institutional": 4
   },
   "by_return": {
    "commons": 98,
-   "credited": 775
+   "credited": 783
   }
  },
  "return_line": {
-  "credited": 775,
+  "credited": 783,
   "commons": 98,
   "anonymous": 0,
   "reading": "credited = the walk names the source; commons = already common by nature; anonymous = the form is used but its makers stay nameless — the debt this ledger surfaces"
@@ -1487,6 +1487,38 @@
    ],
    "count": 2
   },
+  "hao_wang": {
+   "kind": "named",
+   "tradition": "mathematical logic / tiling theory",
+   "era": "Hao Wang 1921–1995; Berger 1966",
+   "pressed": "square tiles with matching edges — and the proof that whether a tile set tiles the plane is UNDECIDABLE; the domino problem reduces to halting, aperiodicity falls out",
+   "return": "credited",
+   "credited_in": [
+    "(artifact pattern_atlas_gallery)",
+    "/pattern-atlas"
+   ],
+   "artifacts": [
+    "pattern_atlas_gallery",
+    "shader_05_patterns"
+   ],
+   "count": 2
+  },
+  "sashiko_stitchers": {
+   "kind": "collective",
+   "tradition": "sashiko stitching, northern-Japan farm households (mostly women)",
+   "era": "Edo–present",
+   "pressed": "one coin-flip per row and column; a stitch where the bits agree — an XOR rule; mending as mathematics",
+   "return": "credited",
+   "credited_in": [
+    "(artifact pattern_atlas_gallery)",
+    "/pattern-atlas"
+   ],
+   "artifacts": [
+    "art_history_gallery",
+    "pattern_atlas_gallery"
+   ],
+   "count": 2
+  },
   "gaudi": {
    "kind": "named",
    "tradition": "architecture",
@@ -1672,6 +1704,66 @@
    ],
    "count": 1
   },
+  "batik_makers_java": {
+   "kind": "collective",
+   "tradition": "Javanese batik (canting hands & cap stampers, largely women)",
+   "era": "ancient–present (UNESCO)",
+   "pressed": "wax-resist dye; the crackle is where the wax broke — the fault-lines are the hand's proof",
+   "return": "credited",
+   "credited_in": [
+    "(artifact pattern_atlas_gallery)",
+    "/pattern-atlas"
+   ],
+   "artifacts": [
+    "pattern_atlas_gallery"
+   ],
+   "count": 1
+  },
+  "kuba_weavers": {
+   "kind": "collective",
+   "tradition": "Kuba kingdom raffia weaving & embroidery, DR Congo (men weave, women embroider)",
+   "era": "17c–present",
+   "pressed": "angular interlace whose rule CHANGES section by section — improvisation as grammar; the stochastic rule centuries early",
+   "return": "credited",
+   "credited_in": [
+    "(artifact pattern_atlas_gallery)",
+    "/pattern-atlas"
+   ],
+   "artifacts": [
+    "pattern_atlas_gallery"
+   ],
+   "count": 1
+  },
+  "sami_band_weavers": {
+   "kind": "collective",
+   "tradition": "Sami band weaving (duodji), Sapmi",
+   "era": "traditional–present",
+   "pressed": "pick-up band weave: diamond chains between bordered stripes — the Nordic lineage nearest Vamlingbo",
+   "return": "credited",
+   "credited_in": [
+    "(artifact pattern_atlas_gallery)",
+    "/pattern-atlas"
+   ],
+   "artifacts": [
+    "pattern_atlas_gallery"
+   ],
+   "count": 1
+  },
+  "adinkra_makers": {
+   "kind": "collective",
+   "tradition": "adinkra carving & stamping, Gyaman / Asante (Ghana)",
+   "era": "19c–present",
+   "pressed": "calabash stamps in comb-divided fields; every symbol a NAMED proverb — the pattern is a text",
+   "return": "credited",
+   "credited_in": [
+    "(artifact pattern_atlas_gallery)",
+    "/pattern-atlas"
+   ],
+   "artifacts": [
+    "pattern_atlas_gallery"
+   ],
+   "count": 1
+  },
   "kauffman": {
    "kind": "named",
    "tradition": "complexity biology",
@@ -1776,6 +1868,7 @@
    "kente_weavers",
    "mondrian",
    "persian_weavers",
+   "sashiko_stitchers",
    "textile_weavers_loom"
   ],
   "attention_loom": [
@@ -3119,16 +3212,22 @@
    "euclid"
   ],
   "pattern_atlas_gallery": [
+   "adinkra_makers",
    "albers",
    "anni_albers",
+   "batik_makers_java",
    "bingata_dyers",
    "bridget_riley",
+   "hao_wang",
    "ikat_dyers",
    "indigo_dyers",
    "iznik_potters",
    "kanga_printers",
    "kente_weavers",
+   "kuba_weavers",
    "pompeii_mosaicists",
+   "sami_band_weavers",
+   "sashiko_stitchers",
    "sonia_delaunay",
    "textile_weavers_loom",
    "tibetan_carpet_knotters",
@@ -3562,6 +3661,7 @@
   ],
   "shader_05_patterns": [
    "anonymous_folk_pattern",
+   "hao_wang",
    "penrose",
    "textile_weavers_loom"
   ],

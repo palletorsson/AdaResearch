@@ -94,3 +94,27 @@ The old project reached for the whole world's ornament to feed a generator.
 Turned around, the same reach is a map of the makers Ada's commons ledger should
 grow to name — most of them women, most of them anonymous, most of them outside
 the canon the book started from.
+
+---
+
+## Investigation II (2026-07-08) — the second sweep
+
+Six more pattern systems, chosen by the same rule (a reproducible grammar with
+nameable makers), plus one mathematical jewel that makes the Same Desire room's
+claim a theorem rather than a metaphor.
+
+| Tradition | Makers | The rule | Why it matters here |
+|---|---|---|---|
+| **Wang tiles** | Hao Wang (1961), Robert Berger (1966); the mathematical commons | square tiles with colored edges; adjacent edges must match | THE THEOREM OF THE SAME-DESIRE ROOM: whether a given tile set can tile the plane is UNDECIDABLE — Berger reduced the domino problem to the halting problem, and the first aperiodic tilings fell out of the proof. A craft-shaped question (do these tiles fit?) IS Godel/Turing territory, literally. |
+| **Batik (Java)** | batik makers of Java — canting hands & cap stampers, largely women; UNESCO-listed | hot wax resists the dye; the CRACKLE is where the wax broke — the fault-lines are the signature | the wobble gene's ancestor: the crack is not an error, it is the proof a hand and hot wax were there. Kawung, parang, sekar jagad grammars. |
+| **Kuba / Shoowa cloth** | Kuba kingdom weavers & embroiderers (DR Congo) — men weave the raffia, women embroider | angular interlace whose RULE CHANGES section by section — celebrated improvisational grammar (admired by Klee and Matisse) | pattern as jazz: the grammar mutates mid-cloth on purpose; the L-systems chapter's stochastic rule, centuries early |
+| **Sashiko / hitomezashi** | northern-Japan farm households, mostly women — mending as pattern | one random bit per row and per column; a stitch appears where the bits agree — an XOR rule | the purest binary pattern in the atlas: emergent mazes from per-line coin flips; mending-as-mathematics |
+| **Sámi band weaving (duodji)** | Sámi band weavers, Sápmi | pick-up band weave: diamond and zigzag chains on narrow warps | the atlas comes home north: the Nordic craft lineage nearest Vamlingbo's looms |
+| **Adinkra** | adinkra carvers & stampers of Gyaman / Asante (Ghana) | calabash stamps in comb-divided fields; every symbol is a NAMED proverb | like kanga's jina: the pattern is a text; stamped repetition as rhetoric |
+
+Considered and deferred: Aboriginal dot painting (sacred-knowledge protocols —
+not ours to reproduce without collaboration), Navajo weaving (same care),
+Marimekko + kurbits/Dala (the Swedish folk thread — belongs to a future
+Mamma Monster II with Kristina's actual archive), Hannah Hoch (collage is
+assemblage, not repeat — already honored by the map's FORM), Molas, tatreez,
+Fair Isle (candidates for Investigation III).
