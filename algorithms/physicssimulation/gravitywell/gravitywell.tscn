@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cgrvwl003003"]
 
-[ext_resource type="Script" path="res://algorithms/physicssimulation/gravitywell/GravityWell.gd" id="1_well"]
+[ext_resource type="Script" path="res://algorithms/physicssimulation/gravitywell/gravitywell.gd" id="1_well"]
 
 [node name="GravityWell" type="Node3D"]
 script = ExtResource("1_well")

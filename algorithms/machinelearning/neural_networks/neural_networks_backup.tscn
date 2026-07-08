@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cmjop4tyethgl"]
 
-[ext_resource type="Script" path="res://algorithms/MachineLearning/neural_networks/NeuralNetworks.gd" id="1_nn"]
+[ext_resource type="Script" path="res://algorithms/machinelearning/neural_networks/NeuralNetworks.gd" id="1_nn"]
 
 [node name="NeuralNetworks" type="Node3D"]
 script = ExtResource("1_nn")

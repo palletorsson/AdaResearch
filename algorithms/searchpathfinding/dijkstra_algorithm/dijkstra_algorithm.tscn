@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c7x9k7v6m5nqr"]
 
-[ext_resource type="Script" path="res://algorithms/SearchPathfinding/dijkstra_algorithm/DijkstraAlgorithm.gd" id="1_dijkstra"]
+[ext_resource type="Script" path="res://algorithms/searchpathfinding/dijkstra_algorithm/DijkstraAlgorithm.gd" id="1_dijkstra"]
 
 [node name="DijkstraAlgorithm" type="Node3D"]
 script = ExtResource("1_dijkstra")

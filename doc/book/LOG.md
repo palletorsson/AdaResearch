@@ -613,3 +613,27 @@ NEXT: agent-simulated flows (humanoid_walker as circulation term); door
 openings where corridors cross hulls between compartments (bulkheads);
 artifact-level ledger credits so maker springs fire; hook spaceform in as
 a curate.py argument form ('found' vs 'enfilade').
+
+## 2026-07-08 — the case-mismatch purge (NewtonCradle's double life)
+
+Palle hit 'Class "NewtonCradle" hides a global script class'. Root cause:
+Windows' case-insensitive filesystem lets a .tscn reference
+NewtonCradle.gd while the file on disk is newtoncradle.gd — the load
+WORKS, but Godot registers res:// paths case-SENSITIVELY, so the same
+script registers twice and its class_name collides with itself.
+
+Swept every .tscn for script references whose exact case doesn't match
+disk: 27 mismatches (whole MachineLearning + CriticalAlgorithms families
+referenced via old CamelCase dir names, plus gravitywell / newtoncradle /
+slingshotlauncher / softbodies / dijkstra / particle_swarm). All rewritten
+to exact on-disk case; 3 stale CamelCase .gd.uid files renamed to match.
+Re-sweep: 0 remaining. Probe: project loads clean.
+
+LIKELY BONUS FIX: gravity_well and newton_cradle were the prop-validation
+'render-NOTHING / class-cache' artifacts — this double-registration is
+the probable root cause of that whole bug class. Re-run
+--validate-props to confirm.
+
+Tooling note: the sweep is 20 lines of python (true_case walk via
+os.listdir) — worth promoting to tools/ if it recurs after future
+renames.

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://pukcgr9r9gcsu"]
 
-[ext_resource type="Script" path="res://algorithms/SwarmIntelligence/particle_swarm_optimization/ParticleSwarmOptimization.gd" id="1_pso"]
+[ext_resource type="Script" path="res://algorithms/swarmintelligence/particle_swarm_optimization/ParticleSwarmOptimization.gd" id="1_pso"]
 
 [node name="ParticleSwarmOptimization" type="Node3D"]
 script = ExtResource("1_pso")
