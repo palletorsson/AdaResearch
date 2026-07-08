@@ -637,3 +637,39 @@ the probable root cause of that whole bug class. Re-run
 Tooling note: the sweep is 20 lines of python (true_case walk via
 os.listdir) — worth promoting to tools/ if it recurs after future
 renames.
+
+## 2026-07-08 — gallery DNA: empty architecture, iterated ("hard to say what
+## I really want" -> make 20 and walk them)
+
+Palle's move: separate the SPACE question from the COLLECTION question.
+Good architecture = exhibit POSSIBILITIES (podium, niches, walls) without
+artifacts; make ~20, score for hosting capacity, mutate, iterate.
+
+Built:
+- Exhibit affordance kit (commons/artifacts/exhibits/ + registry
+  exhibits.json): exhibit_podium (empty plinth + waiting top-light;
+  kind=dais variant) and exhibit_vitrine (empty glass case). "An empty
+  podium is not nothing — it is the architecture's opinion about where
+  meaning should stand."
+- tools/gallery_gen.py: GENOME {w, d, form court|axis|loop, niche_every,
+  podium_rows, podium_spacing, vitrines, dais} -> walkable empty gallery
+  (walls-layer hull with 1-cell NICHE recesses, interior spine/block by
+  form, affordances planted). SCORE = slots(cap) + 2*diversity +
+  hang-capacity + loop + open-center + spacing - unreachable. Gen1 = 20
+  genomes -> gen2 = 8 mutations of the top 4. 28 galleries on disk
+  (Gallery_G01..G20, H01..H08), all pathfinder-clean; DNA + lineage in
+  commons/data/gallery_dna.json, ranked table in
+  doc/reports/gallery_dna_scores.json.
+
+RESULTS: G12 leads (37.62: axis, 18 slots, 4 kinds, loop, open 0.94);
+its CHILD H05 second (37.50, mutation bought 3 more slots for 0.02
+open-center) — the mutate step already paid. HONEST NOTE: axis form sweeps
+the top 10 — the scorer rewards spine walls (hang + loop through doors +
+podium rows fit naturally). Either axis IS better for hosting, or the
+score under-values court/loop virtues (vista, circling) it can't yet see.
+The judge that can: Palle's legs. Walk G12/H05 vs the best court, then
+re-weight.
+
+NEXT: his walk-notes -> re-weight score -> generation 3; niche podiums
+(vitrine INSIDE niches); gaze_ride as a sightline term; then feed the
+best genomes to the Curator as the room library exhibitions compile into.

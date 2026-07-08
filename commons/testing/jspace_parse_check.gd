@@ -16,6 +16,8 @@ func _initialize() -> void:
 		"res://commons/artifacts/curator/mode_crown.tscn",
 		"res://commons/artifacts/curator/mode_dialogue.tscn",
 		"res://commons/artifacts/curator/mode_witness_wall.tscn",
+		"res://commons/artifacts/exhibits/exhibit_podium.tscn",
+		"res://commons/artifacts/exhibits/exhibit_vitrine.tscn",
 	]:
 		var scene = load(path)
 		if scene == null:

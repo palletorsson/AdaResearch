@@ -1,0 +1,22 @@
+{
+ "artifacts": {
+  "exhibit_podium": {
+   "lookup_name": "exhibit_podium",
+   "scene": "res://commons/artifacts/exhibits/exhibit_podium.tscn",
+   "class_name": "ExhibitPodium",
+   "name": "Exhibit Podium (empty, waiting)",
+   "category": "exhibits",
+   "complexity": "beginner",
+   "description": "An empty plinth with a soft top light - the exhibit affordance itself, before any exhibit. Planted by the gallery-DNA generator to mark hosting capacity; filled later by the Curator or placement engines. Config: size, height, kind (podium/dais)."
+  },
+  "exhibit_vitrine": {
+   "lookup_name": "exhibit_vitrine",
+   "scene": "res://commons/artifacts/exhibits/exhibit_vitrine.tscn",
+   "class_name": "ExhibitVitrine",
+   "name": "Exhibit Vitrine (empty, waiting)",
+   "category": "exhibits",
+   "complexity": "beginner",
+   "description": "An empty glass case on a dark base - the wall-side affordance for small precious things. Sets the visitor's pausing rhythm before the collection exists."
+  }
+ }
+}
