@@ -459,3 +459,45 @@ the sweep attributes artifacts to their FIRST map in sequence order, so
 the upstream survey still claims what it previews. Correct game shape
 (survey previews, concept room teaches); a most-specific-map attribution
 is a possible census refinement.
+
+## 2026-07-08 — the museum turn: Spine Court + the compile-check lesson
+
+Palle: "a night at the museum... architecture and placement of artifacts
+come alive" + GridMap question. Core-grid rule respected: GridMap
+integration PROPOSED as an additive MeshLibrary renderer (gated, painted
+from the same structure layer, GridSystem stays truth) — NOT built,
+awaiting his go.
+
+Built instead, on the existing grid:
+- MUSEUM GRAMMAR (from Cour Marly / Met Dendur / NHM / Hermitage):
+  terraces descend INTO the collection; AXIAL ANCHOR at the far end;
+  FLANKING PAIR at thresholds; GREETER on the mid terrace; PERIMETER
+  RHYTHM under the arcade; OPEN CENTER (floor may be art); LIGHT FROM
+  ABOVE. Written as the grammar block in Museum_Spine_Court/tutorial.md —
+  ready to become a placement strategy in the place.py family.
+- museum_hall_shell artifact (commons/artifacts/museum/, registry
+  museum.json): two-story arcade + iron/glass skylight + trees/benches,
+  purely visual, configurable w/d/h, worn AROUND any map.
+- Museum_Spine_Court (26x16): h3 entry terrace -> h2 -> court h1;
+  incompleteness_scale as anchor, gravity_well+newton_cradle flanking,
+  galton_board greeting, menger/koch/cantor north rhythm,
+  pendulums/springs/petri south, pompeii_mosaic_floor as the open
+  center. 416/416 reachable. NOTE: pathfinder allows DROPS not climbs —
+  anchor platform lowered to court level; no ramp utilities exist in any
+  map despite the documented 'r' code.
+
+THE LESSON (recurring gotcha, now instrumented): GDScript 4 cannot infer
+types from Variant-returning builtins — `var z := side * d` (side from
+untyped array), `var a := lerp(...)`, `var frac := f - floor(f)` all FAIL
+TO COMPILE and the scene spawns silently scriptless. This shipped: the
+museum shell rendered nothing, and jspace_ring.gd had been committed
+NON-COMPILING (its 'validated' captures were bare grid — false pass).
+Fix: typed declarations (floorf, `: float`). jspace_parse_check.gd now
+FAILS on inst.get_script()==null — compile checking is part of every
+artifact probe from now on. Ring recaptured: the lit sector follows the
+orbit camera — the scroll mechanic finally visible in a still.
+
+NEXT (museum thread): 'museum' strategy in place.py implementing the
+grammar; GridMap MeshLibrary shell (pier/arch/balustrade kit) pending
+Palle's go; floor-plan reading — mine OUR 246 maps for placement stats,
+then real museum plans as grammar sources.

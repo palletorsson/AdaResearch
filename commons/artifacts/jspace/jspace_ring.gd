@@ -183,14 +183,14 @@ func _process(_delta: float) -> void:
 	var f := ang / TAU * float(_n)
 	var i0 := int(floor(f)) % _n
 	var i1 := (i0 + 1) % _n
-	var frac := f - floor(f)
+	var frac: float = f - floorf(f)
 
 	# re-light every pillar by its interpolated activation
 	for p in _pillars:
 		var acts: Array = p["acts"]
 		if acts.size() <= i1:
 			continue
-		var a := lerp(float(acts[i0]), float(acts[i1]), frac)
+		var a: float = lerp(float(acts[i0]), float(acts[i1]), frac)
 		a = clampf(a, 0.0, 0.6) / 0.6            # normalize typical range
 		var h := 0.12 + a * MAX_H
 		var body: MeshInstance3D = p["body"]

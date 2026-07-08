@@ -12,6 +12,7 @@ func _initialize() -> void:
 		"res://commons/artifacts/jspace/jspace_feature_field.tscn",
 		"res://commons/artifacts/jspace/jspace_count_plates.tscn",
 		"res://commons/artifacts/jspace/jspace_ring.tscn",
+		"res://commons/artifacts/museum/museum_hall_shell.tscn",
 	]:
 		var scene = load(path)
 		if scene == null:
@@ -23,7 +24,11 @@ func _initialize() -> void:
 			result["ok"] = false
 			result["errors"].append("instantiate failed: %s" % path)
 			continue
+		if inst.get_script() == null:
+			result["ok"] = false
+			result["errors"].append("SCRIPT FAILED TO COMPILE: %s" % path)
 		root.add_child(inst)   # runs _ready — builds visuals headless
+		result["children_%s" % path.get_file()] = inst.get_child_count()
 		print("OK  %s  (%d children after _ready)" % [path, inst.get_child_count()])
 	var f := FileAccess.open("res://commons/artifacts/jspace/jspace_layout.json", FileAccess.READ)
 	if f == null or not (JSON.parse_string(f.get_as_text()) is Dictionary):
