@@ -1,0 +1,364 @@
+{
+ "pressure": 0.22,
+ "adjacencies": [
+  {
+   "a": "cantor_bench",
+   "b": "menger_bench",
+   "distance_cells": 3.2,
+   "paid_by": [
+    {
+     "type": "kin",
+     "w": 0.68
+    },
+    {
+     "type": "theme",
+     "w": 0.3
+    }
+   ]
+  },
+  {
+   "a": "menger_toy",
+   "b": "menger_bench",
+   "distance_cells": 3.6,
+   "paid_by": [
+    {
+     "type": "kin",
+     "w": 0.57
+    },
+    {
+     "type": "theme",
+     "w": 0.3
+    }
+   ]
+  },
+  {
+   "a": "galton_board",
+   "b": "dice_throw",
+   "distance_cells": 4.5,
+   "paid_by": [
+    {
+     "type": "kin",
+     "w": 0.512
+    },
+    {
+     "type": "theme",
+     "w": 0.3
+    }
+   ]
+  },
+  {
+   "a": "dice_throw",
+   "b": "coin_toss",
+   "distance_cells": 4.1,
+   "paid_by": [
+    {
+     "type": "kin",
+     "w": 0.481
+    },
+    {
+     "type": "theme",
+     "w": 0.3
+    }
+   ]
+  },
+  {
+   "a": "coin_toss",
+   "b": "random_number_book_page_1955",
+   "distance_cells": 5.8,
+   "paid_by": [
+    {
+     "type": "kin",
+     "w": 0.402
+    },
+    {
+     "type": "theme",
+     "w": 0.3
+    }
+   ]
+  },
+  {
+   "a": "newton_cradle",
+   "b": "exercise_3_15_double_pendulum_vr",
+   "distance_cells": 6.1,
+   "paid_by": [
+    {
+     "type": "kin",
+     "w": 0.357
+    },
+    {
+     "type": "theme",
+     "w": 0.3
+    }
+   ]
+  },
+  {
+   "a": "parametric_pendulum_waves",
+   "b": "exercise_3_15_double_pendulum_vr",
+   "distance_cells": 2.2,
+   "paid_by": [
+    {
+     "type": "kin",
+     "w": 0.311
+    },
+    {
+     "type": "theme",
+     "w": 0.3
+    }
+   ]
+  },
+  {
+   "a": "radiolaria",
+   "b": "branching_growth_algorithm",
+   "distance_cells": 4.1,
+   "paid_by": [
+    {
+     "type": "kin",
+     "w": 0.252
+    },
+    {
+     "type": "theme",
+     "w": 0.3
+    }
+   ]
+  },
+  {
+   "a": "menger_toy",
+   "b": "cantor_bench",
+   "distance_cells": 4.1,
+   "paid_by": [
+    {
+     "type": "kin",
+     "w": 0.245
+    },
+    {
+     "type": "theme",
+     "w": 0.3
+    }
+   ]
+  },
+  {
+   "a": "dice_throw",
+   "b": "random_number_book_page_1955",
+   "distance_cells": 2.2,
+   "paid_by": [
+    {
+     "type": "kin",
+     "w": 0.213
+    },
+    {
+     "type": "theme",
+     "w": 0.3
+    }
+   ]
+  },
+  {
+   "a": "galton_board",
+   "b": "coin_toss",
+   "distance_cells": 5.4,
+   "paid_by": [
+    {
+     "type": "kin",
+     "w": 0.211
+    },
+    {
+     "type": "theme",
+     "w": 0.3
+    }
+   ]
+  },
+  {
+   "a": "menger_bench",
+   "b": "mass_spring_bench",
+   "distance_cells": 2.2,
+   "paid_by": [
+    {
+     "type": "kin",
+     "w": 0.409
+    }
+   ]
+  },
+  {
+   "a": "dice_throw",
+   "b": "newton_cradle",
+   "distance_cells": 6.1,
+   "paid_by": [
+    {
+     "type": "kin",
+     "w": 0.409
+    }
+   ]
+  },
+  {
+   "a": "cantor_bench",
+   "b": "mass_spring_bench",
+   "distance_cells": 2.2,
+   "paid_by": [
+    {
+     "type": "kin",
+     "w": 0.369
+    }
+   ]
+  },
+  {
+   "a": "coin_toss",
+   "b": "random_butterflies",
+   "distance_cells": 4.0,
+   "paid_by": [
+    {
+     "type": "kin",
+     "w": 0.365
+    }
+   ]
+  },
+  {
+   "a": "random_number_book_page_1955",
+   "b": "random_butterflies",
+   "distance_cells": 5.1,
+   "paid_by": [
+    {
+     "type": "kin",
+     "w": 0.305
+    }
+   ]
+  },
+  {
+   "a": "menger_toy",
+   "b": "koch_curve",
+   "distance_cells": 5.8,
+   "paid_by": [
+    {
+     "type": "theme",
+     "w": 0.3
+    }
+   ]
+  },
+  {
+   "a": "koch_curve",
+   "b": "cantor_bench",
+   "distance_cells": 4.1,
+   "paid_by": [
+    {
+     "type": "theme",
+     "w": 0.3
+    }
+   ]
+  },
+  {
+   "a": "galton_board",
+   "b": "random_number_book_page_1955",
+   "distance_cells": 3.6,
+   "paid_by": [
+    {
+     "type": "theme",
+     "w": 0.3
+    }
+   ]
+  },
+  {
+   "a": "newton_cradle",
+   "b": "mass_spring_bench",
+   "distance_cells": 4.1,
+   "paid_by": [
+    {
+     "type": "theme",
+     "w": 0.3
+    }
+   ]
+  },
+  {
+   "a": "parametric_pendulum_waves",
+   "b": "mass_spring_bench",
+   "distance_cells": 4.1,
+   "paid_by": [
+    {
+     "type": "theme",
+     "w": 0.3
+    }
+   ]
+  },
+  {
+   "a": "mass_spring_bench",
+   "b": "exercise_3_15_double_pendulum_vr",
+   "distance_cells": 2.8,
+   "paid_by": [
+    {
+     "type": "theme",
+     "w": 0.3
+    }
+   ]
+  },
+  {
+   "a": "game_of_life_petri",
+   "b": "radiolaria",
+   "distance_cells": 4.1,
+   "paid_by": [
+    {
+     "type": "theme",
+     "w": 0.3
+    }
+   ]
+  },
+  {
+   "a": "game_of_life_petri",
+   "b": "branching_growth_algorithm",
+   "distance_cells": 2.0,
+   "paid_by": [
+    {
+     "type": "theme",
+     "w": 0.3
+    }
+   ]
+  },
+  {
+   "a": "radiolaria",
+   "b": "random_butterflies",
+   "distance_cells": 2.8,
+   "paid_by": [
+    {
+     "type": "theme",
+     "w": 0.3
+    }
+   ]
+  },
+  {
+   "a": "branching_growth_algorithm",
+   "b": "random_butterflies",
+   "distance_cells": 6.1,
+   "paid_by": [
+    {
+     "type": "theme",
+     "w": 0.3
+    }
+   ]
+  },
+  {
+   "a": "koch_curve",
+   "b": "galton_board",
+   "distance_cells": 5.8,
+   "paid_by": [
+    {
+     "type": "kin",
+     "w": 0.291
+    }
+   ]
+  },
+  {
+   "a": "dice_throw",
+   "b": "random_butterflies",
+   "distance_cells": 5.0,
+   "paid_by": [
+    {
+     "type": "kin",
+     "w": 0.231
+    }
+   ]
+  }
+ ],
+ "energy": {
+  "springs_x_distance": 59.5,
+  "area_cells": 91,
+  "pressure_cost": 20.02,
+  "total_spring_weight": 13.81
+ },
+ "unplugged": []
+}

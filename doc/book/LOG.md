@@ -572,3 +572,44 @@ NEXT: /curator ruling page in the encyclopedia (plan + stills + evidence
 per room, approve/swap buttons writing back to exhibition.json); eye-level
 interior capture; more modes (reliquary, archive rack, total room);
 argument forms beyond enfilade (court, wings, dialogue-loop).
+
+## 2026-07-08 — spaceform: three pressures, one cast (formfinding as map generator)
+
+Palle's spaceship insight formalized: the map as the EQUILIBRIUM FORM of
+its relations under pressure — E = SUM(w_ij * d_ij) + P*area + walk terms.
+Curation-as-function: connect() gives the springs, pressure prices every
+inch, the form falls out. This is the game's own formfinding chapter
+applied to its own architecture.
+
+tools/spaceform.py: the Museum_Wings cast (16 artifacts, 4 families) ->
+typed springs (kin = LSA cosine > 0.18 in the book's space; theme = same
+family 0.30; maker/lineage extractors wired but fired 0 edges for this
+cast — see honesty notes) -> force relaxation (springs pull to rest 3.2,
+min-sep shoulder, centripetal pressure) -> grid snap -> floor carved
+(neighborhoods + MST corridors + strong-spring corridors) -> HULL walls
+(walls layer on every floor/void boundary) -> map + ENERGY RECEIPT
+(energy_receipt.json travels with each map: every adjacency <= 6.5 cells
+lists the springs that paid for it; unplugged list; E breakdown).
+
+THE DIAL, MEASURED:
+  Spaceform_Court  P=0.012  18x14  141 floor cells  springsE 60.3  hull 1.69
+  Spaceform_House  P=0.06   13x13   92 cells        springsE 42.1  hull 5.52
+  Spaceform_Ship   P=0.22   12x15   91 cells        springsE 59.5  hull 20.02
+All 3 pathfinder-clean, captured. The captures SHOW the dial: Court = open
+found-form hall with organic perimeter niches; Ship = crushed pressure
+vessel. Serendipity: mass_spring_bench's tag reads "NOBODY MODELLED THIS
+SHAPE — THE SPRINGS DID" mid-frame — the demo captioned itself.
+
+HONEST NOTES: (1) only kin+theme springs fired — ledger credited_in holds
+map/chapter names not artifact tokens (matching needs artifact-level
+credits), and construction 'uses' edges are sparse within this cast; the
+maker/lineage networks need better extractors before connect() is full.
+(2) The Ship's springsE ROSE vs House (59.5 > 42.1): past a point the
+min-separation shoulder binds — the room becomes INCOMPRESSIBLE and extra
+pressure buys nothing but strain. The House sits near the efficient point.
+Pressure is a dial with a knee, and the knee is measurable.
+
+NEXT: agent-simulated flows (humanoid_walker as circulation term); door
+openings where corridors cross hulls between compartments (bulkheads);
+artifact-level ledger credits so maker springs fire; hook spaceform in as
+a curate.py argument form ('found' vs 'enfilade').
