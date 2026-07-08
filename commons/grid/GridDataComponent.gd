@@ -271,6 +271,30 @@ func get_interactable_data():
 func is_data_loaded() -> bool:
 	return structure_data_instance != null
 
+# Get the optional interior wall-segments layer (additive).
+# Returns layers.walls (grid of edge-code strings: n/e/s/w = wall on that
+# edge, uppercase = doorway). Empty array if absent — maps without a walls
+# layer are unaffected. See GridWallSegmentsComponent.
+func get_walls_layer() -> Array:
+	if json_loader and json_loader.map_data is Dictionary:
+		var layers = json_loader.map_data.get("layers", {})
+		if layers is Dictionary:
+			var walls = layers.get("walls", [])
+			if walls is Array:
+				return walls
+	return []
+
+# Raw structure layer grid (strings), for components that need per-cell
+# heights without the parsed instance (e.g. wall segment base elevation).
+func get_structure_layer_raw() -> Array:
+	if json_loader and json_loader.map_data is Dictionary:
+		var layers = json_loader.map_data.get("layers", {})
+		if layers is Dictionary:
+			var st = layers.get("structure", [])
+			if st is Array:
+				return st
+	return []
+
 # Get the modifier op-stack from the loaded map (additive).
 # Returns the map_data.json top-level `modifiers` array (a list of op dicts;
 # see doc/BRACELET_GARDEN_MODIFIERS.md). Empty array if the key is absent —

@@ -16,7 +16,7 @@ func _run() -> void:
 	await process_frame
 	await process_frame
 	var catalog: Node = current_scene
-	var ok: bool = bool(catalog.call("load_map_fresh", "Museum_Spine_Court"))
+	var ok: bool = bool(catalog.call("load_map_fresh", "Museum_Wings"))
 	if not ok:
 		_finish({"ok": false, "error": "load_map_fresh false"})
 		return
@@ -36,6 +36,7 @@ func _run() -> void:
 				hits.append(n)
 				break
 	# inspect the shell itself
+	var segs := root.find_child("WallSegments", true, false)
 	var shell := root.find_child("MuseumHallShell", true, false)
 	var shell_info := {}
 	if shell:
@@ -50,7 +51,8 @@ func _run() -> void:
 		for i in mini(4, shell.get_child_count()):
 			shell_info["first_children"].append(shell.get_child(i).name)
 	_finish({"ok": true, "total_nodes": names.size(), "cast_hits": hits,
-			"shell": shell_info})
+			"shell": shell_info,
+			"wall_segments": segs.get_child_count() if segs else -1})
 
 func _collect(n: Node, out: Array) -> void:
 	out.append(n.name)

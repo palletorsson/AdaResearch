@@ -14,7 +14,7 @@
 
 ## Core Rule
 
-- **Do not change core behavior like the grid system without deep consideration and notifying the user first.**
+- **Grid system changes are allowed** (guard lifted 2026-07-08 — it was for older models). Discipline still applies: additive hooks gated by new data (a map without the new layer must be untouched), headless compile-check + live map-load test before commit, pathfinder extended in the same change, and a negative test proving the new behavior actually bites.
 
 ## The Sieve — three questions for substantial decisions
 

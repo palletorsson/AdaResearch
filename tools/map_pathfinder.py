@@ -230,6 +230,27 @@ class MapGraph:
         self.utils = layers.get("utilities", [])
         self.ints = layers.get("interactables", [])
 
+        # Optional interior wall segments (layers.walls): per-cell edge codes,
+        # lowercase n/e/s/w = solid wall (blocks movement across that edge),
+        # UPPERCASE = doorway (passable). Blocked edges stored as normalized
+        # undirected keys so either declaring cell blocks the crossing.
+        self.wall_edges: set[tuple] = set()
+        for wr, wrow in enumerate(layers.get("walls", []) or []):
+            for wc, cell in enumerate(wrow):
+                for ch in str(cell).strip():
+                    low = ch.lower()
+                    if low not in "nesw" or ch != low:
+                        continue  # skip doors and junk
+                    if low == "n":
+                        edge = ("h", wr, wc)
+                    elif low == "s":
+                        edge = ("h", wr + 1, wc)
+                    elif low == "w":
+                        edge = ("v", wr, wc)
+                    else:
+                        edge = ("v", wr, wc + 1)
+                    self.wall_edges.add(edge)
+
         self.rows = len(self.struct)
         self.cols = max((len(r) for r in self.struct), default=0)
 
@@ -430,6 +451,18 @@ class MapGraph:
             nb = (r + dr, c + dc)
             if nb not in self.walkable:
                 continue
+            # interior wall segment on the shared edge blocks the step
+            if self.wall_edges:
+                if dr == -1:
+                    edge = ("h", r, c)
+                elif dr == 1:
+                    edge = ("h", r + 1, c)
+                elif dc == -1:
+                    edge = ("v", r, c)
+                else:
+                    edge = ("v", r, c + 1)
+                if edge in self.wall_edges:
+                    continue
             nb_h = self.hmap.get(nb, 0)
             # Teleport on void — always reachable from adjacent walkable cell
             if nb_h == 0 and nb in self._teleport_set:

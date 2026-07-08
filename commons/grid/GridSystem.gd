@@ -13,6 +13,7 @@ const InteractablesComponentScript = preload("res://commons/grid/GridInteractabl
 const SpawnComponentScript = preload("res://commons/grid/GridSpawnComponent.gd")
 const CeilingComponentScript = preload("res://commons/grid/GridCeilingComponent.gd")
 const WallComponentScript = preload("res://commons/grid/GridWallComponent.gd")
+const WallSegmentsComponentScript = preload("res://commons/grid/GridWallSegmentsComponent.gd")
 const AudioComponentScript = preload("res://commons/grid/GridAudioComponent.gd")
 const TimelineComponentScript = preload("res://commons/grid/GridTimelineComponent.gd")
 const FloorPlanLoader = preload("res://commons/grid/FloorPlanLoader.gd")
@@ -57,6 +58,7 @@ var interactables_component
 var spawn_component
 var ceiling_component
 var wall_component
+var wall_segments_component
 var audio_component
 var timeline_component
 
@@ -189,6 +191,10 @@ func _initialize_components():
 	wall_component = WallComponentScript.new()
 	wall_component.name = "GridWallComponent"
 	add_child(wall_component)
+
+	wall_segments_component = WallSegmentsComponentScript.new()
+	wall_segments_component.name = "GridWallSegmentsComponent"
+	add_child(wall_segments_component)
 
 	audio_component = AudioComponentScript.new()
 	audio_component.name = "GridAudioComponent"
@@ -576,6 +582,14 @@ func _handle_wall_generation():
 
 	var settings = data_component.get_settings()
 	var wall_config = settings.get("walls", {})
+
+	# Interior wall segments (additive): only when the map declares layers.walls
+	var walls_layer = data_component.get_walls_layer()
+	if walls_layer.size() > 0:
+		wall_segments_component.initialize(self, data_component, settings)
+		wall_segments_component.generate_segments(
+			walls_layer, data_component.get_structure_layer_raw(),
+			settings.get("wall_segments", {}))
 
 	if not wall_config.is_empty():
 		print("GridSystem: Generating walls...")

@@ -16,6 +16,7 @@ const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
 @export var hall_width: float = 26.0    # X
 @export var hall_depth: float = 16.0    # Z
 @export var wall_height: float = 9.0
+@export var sky_plane: bool = true
 
 const STONE := Color(0.86, 0.82, 0.72)
 const STONE_DARK := Color(0.72, 0.67, 0.57)
@@ -45,6 +46,8 @@ func _read_meta_overrides() -> void:
 		hall_depth = float(str(get_meta("config_depth")))
 	if has_meta("config_height"):
 		wall_height = float(str(get_meta("config_height")))
+	if has_meta("config_sky"):
+		sky_plane = str(get_meta("config_sky")) in ["1", "true", "yes"]
 
 func _mat(c: Color, rough := 0.85, emit := 0.0) -> StandardMaterial3D:
 	var m := StandardMaterial3D.new()
@@ -125,8 +128,9 @@ func _build() -> void:
 		var z4 := -d * 0.5 + float(i) * (d / float(beams_z))
 		_box(Vector3(w, 0.3, 0.14), Vector3(0, h, z4), iron)
 	_box(Vector3(w, 0.06, d), Vector3(0, h + 0.2, 0), glass)
-	# the sky itself — a soft lit plane well above the glass, gentle
-	_box(Vector3(w * 1.15, 0.05, d * 1.15), Vector3(0, h + 4.0, 0), _mat(Color(0.9, 0.93, 0.99), 0.4, 0.45))
+	if sky_plane:
+		# the sky itself — a soft lit plane well above the glass, gentle
+		_box(Vector3(w * 1.15, 0.05, d * 1.15), Vector3(0, h + 4.0, 0), _mat(Color(0.9, 0.93, 0.99), 0.4, 0.45))
 
 	# ── trees and benches — the breath between the marbles ─────────────────
 	var margin_x := w * 0.5 - 2.2

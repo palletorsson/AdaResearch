@@ -501,3 +501,37 @@ NEXT (museum thread): 'museum' strategy in place.py implementing the
 grammar; GridMap MeshLibrary shell (pier/arch/balustrade kit) pending
 Palle's go; floor-plan reading — mine OUR 246 maps for placement stats,
 then real museum plans as grammar sources.
+
+## 2026-07-08 — walls: the grid learns interiors (guard lifted)
+
+Palle lifted the GridSystem guard ("it was for older models") and asked for
+bigger structures — house segments, walls, Two Point Museum style. First
+sanctioned grid change, kept additive:
+
+- NEW LAYER `layers.walls`: per-cell edge codes (n/e/s/w = solid wall on
+  that edge, UPPERCASE = doorway). Maps without the layer are untouched.
+- GridWallSegmentsComponent (commons/grid/): builds thin collidable wall
+  segments + doorways (jambs+lintel) on cell edges, deduped shared edges,
+  base elevation from the structure layer via GridCommon.surface_world_y.
+  Config: settings.wall_segments {height,thickness,color,door_width/height}.
+- GridSystem hook in _handle_wall_generation (4 additive edits) +
+  GridDataComponent.get_walls_layer()/get_structure_layer_raw().
+- PATHFINDER wall-aware: blocked-edge set from the walls layer; doors pass.
+  POSITIVE test: Museum_Wings 660/660 reachable WITH walls. NEGATIVE test:
+  sealing the NW wing's doors makes its 4 cells unreachable — walls bite.
+- Museum_Wings (30x22): Two Point grammar — central street, four themed
+  wings behind real walls (Fractal / Chance / Motion / Life, each one
+  census pocket walkable), mamma_monster_gallery as the axial anchor,
+  you_are_here greeting the entrance, shell around it (sky_plane now
+  optional: #sky:0). Probe: 170 wall segments spawned, live map load OK.
+- CLAUDE.md Core Rule updated (guard lifted, discipline codified).
+
+NOTE: --check-only can't validate autoload-dependent scripts (GameManager
+unresolved) — live map-load is the real compile test. Exterior captures
+can't show interior architecture; the walk is the judge.
+
+NEXT (museum thread): eye-level interior capture mode; 'museum' placement
+strategy in place.py; GridMap MeshLibrary renderer for stairs/mezzanines
+(the ascent problem — pathfinder walks down, not up); real floor-plan
+mining (our 246 maps' placement stats, then Louvre/Met plans as grammar
+sources).
