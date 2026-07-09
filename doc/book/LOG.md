@@ -803,3 +803,28 @@ scene; make niches 2m long.
    opening) x niche_deep, non-overlapping. Champions + TER_DEMO
    regenerated (TER_DEMO: 6 wedges, 4 niches, return_path True),
    pathfinder-clean, /gallery-dna refreshed.
+
+## 2026-07-08 — wedge y-sink fixed (core grid, notified)
+
+Palle: the wedge sits 0.5 below the floor; default y should work.
+ROOT CAUSE (not the map data — verified Prop_wedge structure is IDENTICAL
+to AdvancedLaboratory's wp cell): the shared walkableprism.tscn mesh is
+CENTER-origin (PrismMesh size (2,1,1), spans -0.5..+0.5, no Y offset in the
+scene). GridUtilitiesComponent places it at the cube-TOP surface, so the
+prism's base sinks half a cube below the floor and its peak lands half a
+cube short of a +1 step. Latent in EVERY wp map — invisible until now
+because other maps put wp on FLAT ground (Chamber_Color: all neighbours
+height 1), where a half-buried bump goes unnoticed. A real terrace step is
+the first place it bites.
+
+FIX (core-grid change, per the house rule I flagged it): in the wp branch
+of GridUtilitiesComponent._configure_utility, raise the prism half a cube
+(position.y += cube_size * 0.5) so its base seats ON the floor and the ramp
+bridges floor -> plateau. wp-only; no other utility type touched. Prop_wedge
++ Gallery_TER_DEMO recaptured: the prisms now read as proper ramps at each
+step. Component loads (capture exit 0; the isolated --check-only
+'GameManager not found' is the autoload-absent artifact, not the edit).
+
+NOTE: flat-ground wp (rare, decorative) now sits fully ON the floor as a
+1m ramp instead of half-sunk — arguably more correct ramp semantics. If any
+existing map relied on the sunk look, revert is one line.

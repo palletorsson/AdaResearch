@@ -525,6 +525,13 @@ func _apply_utility_parameters(utility_object: Node3D, utility_type: String, par
 				utility_object.set_meta("spawn_name", parameters[0])
 				print("GridUtilitiesComponent: Set spawn name to: %s" % parameters[0])
 		"wp":  # Walkable prism
+			# The prism mesh is CENTER-origin (spans -0.5..+0.5), but it is
+			# placed at the cube-top surface — so by default its base sinks
+			# half a cube below the floor and its peak falls half a cube short
+			# of a +1 step. Raise it half a cube so the base seats ON the floor
+			# and the ramp bridges floor -> plateau. (Latent everywhere; only
+			# visible on real steps — flat-ground wp hid the sink.)
+			utility_object.position.y += cube_size * 0.5
 			if parameters.size() > 0:
 				var rotation_y = float(parameters[0])
 				utility_object.rotation_degrees.y = rotation_y
