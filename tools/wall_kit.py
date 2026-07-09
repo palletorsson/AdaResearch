@@ -53,27 +53,50 @@ def add_wall(bl, r, c, code):
         bl["walls"][r][c] += code
 
 
-def perimeter(bl):
-    """the contract: perimeter walls with centred gates on all four sides."""
+def perimeter(bl, sides=("g", "g", "g", "g")):
+    """the contract, v2. sides = (n, e, s, w), each:
+    'g' wall with the centred gate (the meeting point) · 's' solid wall · 'o' open."""
+    n, e, s, w = sides
     for i in range(B):
-        if i not in GATE:
+        if n != "o" and (n == "s" or i not in GATE):
             add_wall(bl, 0, i, "n")
+        if s != "o" and (s == "s" or i not in GATE):
             add_wall(bl, B - 1, i, "s")
+        if w != "o" and (w == "s" or i not in GATE):
             add_wall(bl, i, 0, "w")
+        if e != "o" and (e == "s" or i not in GATE):
             add_wall(bl, i, B - 1, "e")
+
+
+# enclosure classes (Palle: "one, corner, all sides, 3 part, 4 already in"),
+# authored facing north, rotated at seed time
+ENCLOSURES = {
+    "open":    ("g", "g", "g", "g"),   # all gated — the original contract
+    "one":     ("s", "g", "g", "g"),   # one solid side
+    "corner":  ("s", "s", "g", "g"),   # two adjacent solid
+    "channel": ("s", "g", "s", "g"),   # two opposite solid — a corridor
+    "three":   ("s", "s", "s", "g"),   # the U — one way in
+}
+ENC_WEIGHTS = {"open": 3, "one": 3, "corner": 2, "channel": 2, "three": 1}
+
+
+def rot_sides(sides, k):
+    """rotate the (n,e,s,w) pattern clockwise k quarter-turns."""
+    n, e, s, w = sides
+    for _ in range(k % 4):
+        n, e, s, w = w, n, e, s
+    return (n, e, s, w)
 
 
 # ── the blocks ───────────────────────────────────────────────────────────────
 
 def mk_field():
     bl = blank()
-    perimeter(bl)
     return bl
 
 
 def mk_pinwheel():
     bl = blank()
-    perimeter(bl)
     # four sliding walls, each stopping short — corner gaps admit rotationally
     for c in (2, 3, 4):
         add_wall(bl, 3, c, "n")          # top wall (between r2/r3), c2..4
@@ -88,7 +111,6 @@ def mk_pinwheel():
 
 def mk_court():
     bl = blank()
-    perimeter(bl)
     for r in range(2, 6):
         for c in range(2, 6):
             bl["structure"][r][c] = "1"          # sunken centre
@@ -99,7 +121,6 @@ def mk_court():
 
 def mk_ledge():
     bl = blank()
-    perimeter(bl)
     for r in (1, 2):
         for c in range(2, 6):
             bl["structure"][r][c] = "3"          # the overlook island
@@ -110,7 +131,6 @@ def mk_ledge():
 
 def mk_street():
     bl = blank()
-    perimeter(bl)
     # one dense wall across the block, door at the centre (the Uffizi bay wall)
     for c in range(1, 7):
         if c not in GATE:
@@ -120,7 +140,6 @@ def mk_street():
 
 def mk_cross():
     bl = blank()
-    perimeter(bl)
     # four quadrant rooms; the crossing stays open at the gates
     for r in range(B):
         if r not in GATE:
@@ -133,7 +152,6 @@ def mk_cross():
 
 def mk_colonnade():
     bl = blank()
-    perimeter(bl)
     for (r, c) in ((2, 2), (2, 5), (5, 2), (5, 5)):
         for code in "nesw":
             add_wall(bl, r, c, code)             # a sealed pillar cell
@@ -149,13 +167,54 @@ WEIGHTS = {"field": 2, "pinwheel": 2, "court": 2, "ledge": 2,
 
 # ── the seeder ───────────────────────────────────────────────────────────────
 
+def spanning_tree(cols, rows, rng):
+    """random DFS tree over the block grid; returns the set of tree seams,
+    each as frozenset({(br,bc),(br2,bc2)}). Tree seams are forced open (gated)
+    so the map is connected BY CONSTRUCTION however solid the other seams get."""
+    start = (rng.randrange(rows), rng.randrange(cols))
+    seen = {start}
+    stack = [start]
+    seams = set()
+    while stack:
+        r, c = stack[-1]
+        nbrs = [(r + dr, c + dc) for dr, dc in ((-1, 0), (1, 0), (0, -1), (0, 1))
+                if 0 <= r + dr < rows and 0 <= c + dc < cols
+                and (r + dr, c + dc) not in seen]
+        if not nbrs:
+            stack.pop()
+            continue
+        nb = rng.choice(nbrs)
+        seams.add(frozenset({(r, c), nb}))
+        seen.add(nb)
+        stack.append(nb)
+    return seams
+
+
 def seed_map(cols, rows, seed, name):
     rng = random.Random(seed)
     names = list(KIT)
     weights = [WEIGHTS[n] for n in names]
+    enames = list(ENCLOSURES)
+    eweights = [ENC_WEIGHTS[n] for n in enames]
     chosen = [[rng.choices(names, weights)[0] for _ in range(cols)]
               for _ in range(rows)]
     chosen[0][0] = "field"                       # calm arrival
+    # enclosure + rotation per block
+    encl = [[rot_sides(ENCLOSURES[rng.choices(enames, eweights)[0]],
+                       rng.randrange(4)) for _ in range(cols)]
+            for _ in range(rows)]
+    # the connectivity guarantee: tree seams must be gated on BOTH sides
+    tree = spanning_tree(cols, rows, rng)
+    SIDE = {(-1, 0): 0, (0, 1): 1, (1, 0): 2, (0, -1): 3}   # n e s w index
+    for br in range(rows):
+        for bc in range(cols):
+            for (dr, dc), i in SIDE.items():
+                nb = (br + dr, bc + dc)
+                if 0 <= nb[0] < rows and 0 <= nb[1] < cols and \
+                        frozenset({(br, bc), nb}) in tree:
+                    sides = list(encl[br][bc])
+                    sides[i] = "g"
+                    encl[br][bc] = tuple(sides)
     W, H = cols * B, rows * B
     layers = {"structure": [[SEA] * W for _ in range(H)],
               "utilities": [[" "] * W for _ in range(H)],
@@ -164,6 +223,7 @@ def seed_map(cols, rows, seed, name):
     for br in range(rows):
         for bc in range(cols):
             bl = KIT[chosen[br][bc]]()
+            perimeter(bl, encl[br][bc])
             for r in range(B):
                 for c in range(B):
                     R, C = br * B + r, bc * B + c
@@ -182,13 +242,15 @@ def seed_map(cols, rows, seed, name):
     layers["structure"][H - 2][W - 2] = "0"      # teleporter sits on void
     data = {"map_info": {"name": name, "lookup_name": name, "title": name,
                          "wall_kit": {"seed": seed, "grid": f"{cols}x{rows}",
-                                      "blocks": chosen}},
+                                      "blocks": chosen,
+                                      "enclosures": [["".join(e) for e in row]
+                                                     for row in encl]}},
             "layers": layers}
     out = ROOT / "commons" / "maps" / name
     out.mkdir(parents=True, exist_ok=True)
     with open(out / "map_data.json", "w", encoding="utf-8", newline="\n") as f:
         json.dump(data, f, indent=1)
-    return chosen
+    return chosen, encl
 
 
 def main() -> int:
@@ -201,10 +263,11 @@ def main() -> int:
     cols, rows = (int(x) for x in arg("grid", "3x2").split("x"))
     seed = int(arg("seed", "7"))
     name = arg("name", f"WallKit_Seed_{seed}")
-    chosen = seed_map(cols, rows, seed, name)
+    chosen, encl = seed_map(cols, rows, seed, name)
     print(f"{name}: {cols}x{rows} blocks ({cols*B}x{rows*B} cells), seed {seed}")
-    for row in chosen:
-        print("  " + " | ".join(f"{n:9s}" for n in row))
+    for br, row in enumerate(chosen):
+        print("  " + " | ".join(f"{n:9s}[{''.join(encl[br][bc])}]"
+                                for bc, n in enumerate(row)))
     print(f"view: /map-viewer?map={name}")
     return 0
 
