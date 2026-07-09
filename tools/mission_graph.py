@@ -250,11 +250,31 @@ def build_halls(seq, name):
     tr, tc = lr * B + B - 2, lc * B + B - 2
     layers["utilities"][tr][tc] = "t:restart"
     layers["structure"][tr][tc] = "0"
+    # per-act wall palettes: the act arc as a material register — arrival is
+    # bright (glass/whiteboard/window), work is serviced (conduit/display/
+    # locker), depth is industrial (hazard/rib/slit). Rects in CELL coords;
+    # the Three.js viewer seeds each act's walls from its own weight table.
+    PALETTES = {
+        "arrival": {"plain": 5, "glass": 3, "whiteboard": 2, "window": 3,
+                    "vent": 1, "locker": 1},
+        "work":    {"plain": 4, "conduit": 3, "display": 2, "locker": 2,
+                    "vent": 2, "window": 1, "beam": 1},
+        "depth":   {"plain": 3, "hazard": 2, "rib": 3, "beam": 2, "slit": 2,
+                    "conduit": 2, "vent": 1},
+    }
+    def act_palette(k):
+        if k == 0:
+            return "arrival"
+        return "depth" if k == rows - 1 else "work"
+    palettes = [{"act": r, "name": act_palette(r),
+                 "rect": [0, r * B, W - 1, (r + 1) * B - 1],
+                 "weights": PALETTES[act_palette(r)]} for r in range(rows)]
     data = {"map_info": {"name": name, "lookup_name": name, "title": name,
                          "mission_graph": {"seq": seq, "mode": "act-halls",
                                            "acts": lens, "doors": doors}},
             "settings": {"wall_segments": {"style": "labwall", "height": 3.2,
-                                        "thickness": 0.16, "door_width": 2.2}},
+                                        "thickness": 0.16, "door_width": 2.2,
+                                        "palettes": palettes}},
             "layers": layers}
     out = ROOT / "commons" / "maps" / name
     out.mkdir(parents=True, exist_ok=True)

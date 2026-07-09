@@ -22,7 +22,65 @@
    "style": "labwall",
    "height": 3.2,
    "thickness": 0.16,
-   "door_width": 2.2
+   "door_width": 2.2,
+   "palettes": [
+    {
+     "act": 0,
+     "name": "arrival",
+     "rect": [
+      0,
+      0,
+      39,
+      7
+     ],
+     "weights": {
+      "plain": 5,
+      "glass": 3,
+      "whiteboard": 2,
+      "window": 3,
+      "vent": 1,
+      "locker": 1
+     }
+    },
+    {
+     "act": 1,
+     "name": "work",
+     "rect": [
+      0,
+      8,
+      39,
+      15
+     ],
+     "weights": {
+      "plain": 4,
+      "conduit": 3,
+      "display": 2,
+      "locker": 2,
+      "vent": 2,
+      "window": 1,
+      "beam": 1
+     }
+    },
+    {
+     "act": 2,
+     "name": "depth",
+     "rect": [
+      0,
+      16,
+      39,
+      23
+     ],
+     "weights": {
+      "plain": 3,
+      "hazard": 2,
+      "rib": 3,
+      "beam": 2,
+      "slit": 2,
+      "conduit": 2,
+      "vent": 1
+     }
+    }
+   ]
   }
  },
  "layers": {
