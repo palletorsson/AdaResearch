@@ -1026,3 +1026,27 @@ in-engine capture), and photographs (Curated_RandomnessEdge, Furnished_CAP_1,
 Spaceform Court/House/Ship). Also: fly now moves toward the mouse-look
 (pitch included); fly toggle F->G (F is flashlight). Verified in preview:
 4 stages, 24-dept SVG, phase legend, 5 photos, 0 broken images, no errors.
+
+## 2026-07-08 — the full BED vocabulary + footprint selector + guaranteed aisles
+
+"Keep understanding and integrating all footprint beds... with player
+pathfinding between artifacts. Still consistent space." Driving it:
+
+- BEDS (exhibit_furniture): added pit (sunken well + up-light, the well
+  posture), panel (wall-hung flat, MoMA shadow-gap), floor_work (flush pad +
+  gold don't-step studs, the terrain posture); platform grew s/m/l/xl. Now
+  the full staging vocabulary: plinth · hollow · table · platform · pit ·
+  panel · floor_work · vitrine · cabinet, all sized. (Compile guard caught a
+  Variant-inference on the dict.get() sizes — typed.)
+- SELECTOR (tools/staging_beds.py): measured footprint -> the right bed.
+  fp1 small->plinth; tall->vitrine; fp2->table (hand-height) or platform;
+  fp3-4->platform/floor_work; fp5-7->floor_work; >7 floor_work + OVERSIZE
+  (own room). Lies-flat (h<0.35: mosaic/dish) -> floor_work; graphic-by-name
+  -> panel (wall); well/pool/reflect -> pit. Verified across a varied cast.
+- CONSISTENT SPACE + PATHFINDING (tools/stage_gallery.py): a cast laid on a
+  uniform lattice (pitch 3 = bed cell + 2-cell aisle), wall works on the hull;
+  a door-graph BFS confirms every bed reachable with a free approach.
+  Staged_Wings (the 16): each on its measured bed, 16/16 reachable with
+  clearance, pathfinder-clean, captured (bare_world = readable).
+
+The bed fits the footprint; the aisle fits the body.

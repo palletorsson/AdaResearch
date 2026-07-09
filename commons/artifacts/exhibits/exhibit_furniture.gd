@@ -83,9 +83,46 @@ func _build() -> void:
 							Vector3(sx * (s * 0.5 - 0.03), h * 0.5, sz * (s * 0.5 - 0.03)), dark)
 			_box(Vector3(s + 0.06, 0.05, s + 0.06), Vector3(0, h + 0.025, 0), stone)
 		"platform":
-			var side := 2.4 if size_class == "l" else 1.6
+			var side: float = {"s": 1.2, "m": 1.6, "l": 2.4, "xl": 3.4}.get(size_class, 1.6)
 			_box(Vector3(side, 0.28, side), Vector3(0, 0.14, 0), stone)
 			_box(Vector3(side + 0.08, 0.03, side + 0.08), Vector3(0, 0.295, 0), _mat(Color(0.9, 0.88, 0.84), 0.4))
+		"pit":
+			# a sunken well — the inverse of a plinth; a raised lip, a dark recess,
+			# a soft up-light. The object sits DOWN in it (the well posture).
+			var pw: float = {"s": 1.0, "m": 1.6, "l": 2.4}.get(size_class, 1.6)
+			var lip := _mat(Color(0.7, 0.68, 0.63))
+			for a in [Vector3(pw * 0.5, 0, 0), Vector3(-pw * 0.5, 0, 0), Vector3(0, 0, pw * 0.5), Vector3(0, 0, -pw * 0.5)]:
+				var horiz: bool = abs(a.x) > 0.01
+				_box(Vector3(0.14 if horiz else pw + 0.28, 0.18, pw + 0.28 if horiz else 0.14),
+						a + Vector3(0, 0.09, 0), lip)
+			_box(Vector3(pw, 0.04, pw), Vector3(0, -0.4, 0), _mat(Color(0.06, 0.06, 0.08), 0.5))   # recessed floor
+			var up := OmniLight3D.new()
+			up.position = Vector3(0, -0.2, 0)
+			up.omni_range = pw * 1.4
+			up.light_energy = 1.2
+			up.light_color = Color(0.9, 0.95, 1.0)
+			add_child(up)
+		"panel":
+			# a wall-mounted flat display — for flat/graphic works. A framed plane
+			# on a thin standoff (reads as hung), MoMA shadow-gap under the frame.
+			var pwid: float = {"s": 1.2, "m": 2.0, "l": 3.2}.get(size_class, 2.0)
+			var phgt: float = pwid * 0.66
+			_box(Vector3(pwid + 0.08, phgt + 0.08, 0.05), Vector3(0, 1.4 + phgt * 0.5, -0.06), dark)   # frame
+			_box(Vector3(pwid, phgt, 0.02), Vector3(0, 1.4 + phgt * 0.5, -0.03), _mat(Color(0.93, 0.92, 0.89), 0.75))
+			var sh := MeshInstance3D.new()
+			var q := QuadMesh.new(); q.size = Vector2(pwid + 0.2, 0.4); sh.mesh = q
+			sh.material_override = _mat(Color(0.02, 0.02, 0.03, 0.45), 1.0, 0.0, true)
+			sh.rotation_degrees = Vector3(-90, 0, 0); sh.position = Vector3(0, 0.012, 0.1)
+			sh.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+			add_child(sh)
+		"floor_work":
+			# terrain posture: the work sits DIRECTLY on the floor, marked only by a
+			# flush pad + corner studs (don't-step-here), no plinth.
+			var fw: float = {"s": 1.4, "m": 2.2, "l": 3.2}.get(size_class, 2.2)
+			_box(Vector3(fw, 0.03, fw), Vector3(0, 0.015, 0), _mat(Color(0.3, 0.3, 0.33), 0.7))
+			for sx in [-1.0, 1.0]:
+				for sz in [-1.0, 1.0]:
+					_box(Vector3(0.1, 0.14, 0.1), Vector3(sx * fw * 0.48, 0.07, sz * fw * 0.48), _mat(Color(0.7, 0.6, 0.3), 0.4, 1.0))
 		"table_2m":
 			_box(Vector3(2.0, 0.05, 0.9), Vector3(0, 0.75, 0), _mat(Color(0.5, 0.42, 0.34), 0.5))
 			for sx in [-1.0, 1.0]:
