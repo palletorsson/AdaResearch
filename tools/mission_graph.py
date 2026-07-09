@@ -191,6 +191,8 @@ def build(seq, name, cols):
                for (br, bc), r in sorted(rooms.items(),
                                          key=lambda kv: (kv[1]["kind"], kv[1]["i"]))]
     data = {"map_info": {"name": name, "lookup_name": name, "title": name,
+                         "dimensions": {"width": W, "depth": H,
+                                        "max_height": 3},
                          "mission_graph": {"seq": seq, "beats": len(beats),
                                            "chapels": len(volt),
                                            "rooms": mission}},
@@ -397,6 +399,8 @@ def build_halls(seq, name):
                  "weights": PALETTES[register(k)],
                  "accent": ACCENTS[register(k)]} for k in range(rows)]
     data = {"map_info": {"name": name, "lookup_name": name, "title": name,
+                         "dimensions": {"width": W, "depth": H,
+                                        "max_height": 3},
                          "mission_graph": {"seq": seq, "mode": "act-halls-v3",
                                            "acts": [len(a) for a in acts],
                                            "depths": depths, "swaps": swaps}},

@@ -262,6 +262,8 @@ def seed_map(cols, rows, seed, name):
     layers["utilities"][H - 2][W - 2] = "t:restart"
     layers["structure"][H - 2][W - 2] = "0"      # teleporter sits on void
     data = {"map_info": {"name": name, "lookup_name": name, "title": name,
+                         "dimensions": {"width": W, "depth": H,
+                                        "max_height": 3},
                          "wall_kit": {"seed": seed, "grid": f"{cols}x{rows}",
                                       "blocks": chosen,
                                       "enclosures": [["".join(e) for e in row]
