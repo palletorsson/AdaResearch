@@ -148,22 +148,30 @@ def compile_gallery(g, gid="X"):
     for (r, c) in floor:
         structure[r][c] = str(hmap[(r, c)])
 
-    # hull niches (skip on rotunda/terrace-north to keep it simple)
+    # hull niches — 2m long (two cells wide along the wall) x niche_deep deep.
+    # Skip rotunda (curved hull). The recess is carved into the NORTH wall.
     slots = []
     ne = g["niche_every"]
+    NICHE_LEN = 2                       # 2 cells = 2 metres of opening
     if ne and g["form"] != "rotunda":
-        for c in range(O + 1, O + W - 1):
+        c = O + 1
+        while c < O + W - NICHE_LEN:
             if (c - O) % ne == 0:
                 depth = g["niche_deep"]
-                ok = all((O - 1 - dd, c) not in floor for dd in range(depth))
-                if not ok:
-                    continue
-                for dd in range(depth):
-                    rr = O - 1 - dd
-                    floor.add((rr, c))
-                    structure[rr][c] = structure[O][c]
-                    hmap[(rr, c)] = hmap[(O, c)]
-                slots.append((O - depth, c, "niche"))
+                cols = list(range(c, c + NICHE_LEN))
+                ok = all((O - 1 - dd, cc) not in floor
+                         for dd in range(depth) for cc in cols)
+                if ok:
+                    for dd in range(depth):
+                        rr = O - 1 - dd
+                        for cc in cols:
+                            floor.add((rr, cc))
+                            structure[rr][cc] = structure[O][cc]
+                            hmap[(rr, cc)] = hmap[(O, cc)]
+                    # one slot per 2m niche, centred on its opening
+                    slots.append((O - depth, cols[0], "niche"))
+                    c += NICHE_LEN       # don't overlap the next niche
+            c += 1
 
     # hull walls: every floor/void boundary
     for (r, c) in floor:
@@ -178,7 +186,8 @@ def compile_gallery(g, gid="X"):
 
     # wedges: walkable prisms to climb BACK up the terraces (wp:0 = ridge
     # west, sloping down east — matches west-high terraces). Placed on the
-    # LOWER cell at each height boundary; cells reserved from furniture.
+    # LOWER (east) cell of each west-high boundary; wp:180 = ramp rises WEST
+    # (verified in Test_WedgeRotations against AdvancedLab/Chamber_Color).
     n_wedges = 0
     if len(set(hmap.values())) > 1:
         boundary_cols = sorted({c for (r, c) in floor
@@ -197,7 +206,7 @@ def compile_gallery(g, gid="X"):
                     picks.append(rows_here[1])
             for pr in picks:
                 if utilities[pr][bc] == " " and inter[pr][bc] == " ":
-                    utilities[pr][bc] = "wp:0"
+                    utilities[pr][bc] = "wp:180"
                     inter[pr][bc] = "RESERVED"
                     n_wedges += 1
             # Cour Marly: flank the stair head on the UPPER terrace

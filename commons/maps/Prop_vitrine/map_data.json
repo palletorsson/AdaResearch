@@ -1,0 +1,97 @@
+{
+ "map_info": {
+  "name": "Prop: vitrine",
+  "title": "Prop_vitrine",
+  "lookup_name": "Prop_vitrine",
+  "description": "Isolation scene for exhibit_vitrine - one object, lit, alone, to inspect in the tester or a capture.",
+  "version": "0.1",
+  "format": "json",
+  "dimensions": {
+   "width": 9,
+   "depth": 9,
+   "max_height": 2
+  },
+  "metadata": {
+   "difficulty": "beginner",
+   "category": "test",
+   "estimated_time": "1 min",
+   "learning_objectives": ["inspect vitrine"]
+  }
+ },
+ "utility_definitions": {
+  "s": {
+   "type": "spawn",
+   "description": "step back and look"
+  },
+  "t": {
+   "type": "teleporter",
+   "description": "exit"
+  }
+ },
+ "settings": {
+  "cube_size": 1.0,
+  "gutter": 0.02,
+  "show_grid": true,
+  "enable_physics": true,
+  "auto_reveal_on_entry": false,
+  "initial_tile_visibility": "all",
+  "background": "dark"
+ },
+ "lighting": {
+  "ambient_color": [
+   0.55,
+   0.55,
+   0.6
+  ],
+  "ambient_energy": 0.75,
+  "directional_light": {
+   "enabled": true,
+   "direction": [
+    -0.3,
+    -0.8,
+    -0.35
+   ],
+   "color": [
+    1.0,
+    0.99,
+    0.95
+   ],
+   "energy": 1.0
+  }
+ },
+ "layers": {
+  "structure": [
+   ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+   ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+   ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+   ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+   ["1", "1", "1", "1", "1", "1", "1", "1", "0"],
+   ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+   ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+   ["1", "1", "1", "1", "1", "1", "1", "1", "1"],
+   ["1", "1", "1", "1", "1", "1", "1", "1", "1"]
+  ],
+  "utilities": [
+   [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+   [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+   [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+   [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+   [" ", "s", " ", " ", " ", " ", " ", " ", "t"],
+   [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+   [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+   [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+   [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+  ],
+  "interactables": [
+   [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+   [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+   [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+   [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+   [" ", " ", " ", " ", "exhibit_vitrine", " ", " ", " ", " "],
+   [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+   [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+   [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+   [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+  ]
+ }
+}

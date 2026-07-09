@@ -774,3 +774,32 @@ Result: the terrace form RETURNED to the drama podium (DRA_3, terrace +
 4 floating walls) — wedges made verticality affordable to evolution.
 Champions + demo recaptured, /gallery-dna refreshed. The auto-research
 loop has now run four self-directed iterations in one day.
+
+## 2026-07-08 — wedge rotation fixed, 2m niches, per-prop isolation scenes
+
+Palle: look how other maps rotate wedges; give each prop an isolation
+scene; make niches 2m long.
+
+1. WEDGE ROTATION — the generator used wp:0 (ramps SOUTH). Surveyed all
+   wp tokens in the map corpus (0/90/180/270 in use) + built
+   Test_WedgeRotations (four 2->1 west-high steps, rot 0/90/180/270 side
+   by side). Reading it with the two CLEAN single-step maps
+   (AdvancedLaboratory, Chamber_Color both wp:180 when only West is
+   higher): west-high step -> wp:180 (ramp rises WEST). Our terraces are
+   west-high with the wedge on the east low cell -> fixed to wp:180.
+   Prop_wedge capture confirms the prism's tall edge now seats against
+   the west plateau. (Pathfinder treats rotation as cosmetic, so this was
+   invisible to validation — only the eye caught it; the isolation scene
+   is exactly the tool for that class of bug.)
+
+2. ISOLATION SCENES — tools/prop_isolation.py writes 18 Prop_<name> maps,
+   one lit object each (podium s/m/l, dais, vitrine, floating_wall,
+   plinth s/m/l, hollow, platform, table_2m, vitrine_tall, cabinet,
+   infoboard, sign_exit, sign_fire, and the wedge on a real step). Walk or
+   capture any prop alone: --map=Prop_cabinet etc. --capture flag batches
+   all 18.
+
+3. 2M NICHES — niches were 1 cell wide; now NICHE_LEN=2 (2 metres of
+   opening) x niche_deep, non-overlapping. Champions + TER_DEMO
+   regenerated (TER_DEMO: 6 wedges, 4 niches, return_path True),
+   pathfinder-clean, /gallery-dna refreshed.
