@@ -1068,3 +1068,20 @@ platform, coins on plinths, the flat piece on a floor pad. Curated_
 RandomnessEdge: RAND book on a platform, the rest on plinths, pathfinder-
 clean. One bed brain now drives the whole pipeline: evolve -> furnish/
 curate (select_bed) -> the right body under every artifact, aisles between.
+
+## 2026-07-09 — /map-viewer: the fast eyes (three.js)
+
+The JS question answered in architecture: Python = brains, GDScript = the
+VR body, and now JS = the fast eyes. /map-viewer renders ANY map_data.json
+(all 1773 maps, live via /api/maps?raw=1) in three.js in milliseconds:
+instanced floor with grid, walls layer with door openings + lintels, the
+wedge as correct ramp geometry (rotation honoured), colored el lights as
+real point lights, spawn/teleporter rings, 3t signs, and BEDS with their
+#mount artifacts as labelled markers. Orbit + pointer-lock walk modes.
+Verified: Furnished_CAP_1 25x18 renders with all 20 interactables.
+
+This kills the iteration bottleneck that cost us hours yesterday (15s
+headless captures, biome floods, camera framing): generate -> SEE in
+milliseconds -> re-weight. The lock-in answer made real: the portability
+lives in the data contract (map_data.json), so eyes in JS, brains in
+Python, body in Godot.
