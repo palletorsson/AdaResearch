@@ -900,3 +900,16 @@ This closes the architecture-first arc end to end: evolve empty room ->
 furnish with the cast the footprints fit. NEXT (backlog): hand oversized/
 unplaced to place.py for their own rooms; encounter-order fitness term; the
 Curator picking a taste-profile then furnishing its argument.
+
+## 2026-07-08 — backlog #3 + #9: encounter-order + niche vitrines
+
+- #9 NICHE VITRINES: each 2m niche now hosts a tall vitrine set INTO the
+  recess — the alcoves became real display spaces, not empty pockets.
+- #3 ENCOUNTER ORDER: order_score = 1 - (fraction of nearest-neighbour walk
+  steps that move AWAY from the exit); rewards a progressive spawn->exit
+  route over criss-cross. Champions score 0.56-0.67; DRAMA shifted to the
+  AXIS form (spine wall funnels a clean forward walk, order 0.6). Reach and
+  approach stay 1.0 everywhere.
+All 12 champions recaptured, pathfinder-clean, /gallery-dna refreshed.
+Backlog now: 8 of 18 struck. Remaining high-value: #2 wire walk_evaluator,
+#12 Curator->genome loop, #16 physics walkability probe.

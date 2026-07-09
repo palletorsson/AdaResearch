@@ -24,8 +24,9 @@ items are done. This is the steering surface for the auto-research loop.
 2. **Wire walk_evaluator directly.** It already scores detour / encounter-order
    / backtrack with footprints — call it on the compiled gallery instead of the
    local BFS, so empty-gallery walkability uses the same instrument as placed maps.
-3. **Encounter order term.** Reward galleries whose nearest-neighbour walk visits
-   slots in a sensible spawn→...→exit order (no criss-cross), not just low detour.
+3. ~~**Encounter order term** — order_score = 1 - backtrack fraction of the
+   nearest-neighbour walk; rewards progressive spawn→exit routes. Drama shifted
+   to the axis form for its clean progression.~~
 4. **Clearance-aware placement.** When two slots' clearances overlap, nudge or
    drop one — currently only checked, not repaired.
 5. **Door-width pathing.** Verify the player capsule fits every doorway on the
@@ -35,7 +36,8 @@ items are done. This is the steering surface for the auto-research loop.
 6. **Wall-wash light strips** as a gene (grazing light down a hanging wall).
 7. **Floor-material zones** — the red-carpet street, a plinth apron.
 8. **Coat-check / bench entry sequence** — an arrival room before the collection.
-9. **Niche-embedded vitrines** (a case *inside* a 2m niche).
+9. ~~**Niche-embedded vitrines** — a tall vitrine set into each 2m niche recess;
+   the alcoves are now real display spaces.~~
 10. **Mezzanine / upper gallery** (the balustrade rail already exists in the shell).
 11. **Rotunda oculus** — top-light the round form's centre.
 

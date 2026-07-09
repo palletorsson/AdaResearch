@@ -177,8 +177,10 @@ def compile_gallery(g, gid="X"):
                             floor.add((rr, cc))
                             structure[rr][cc] = structure[O][cc]
                             hmap[(rr, cc)] = hmap[(O, cc)]
-                    # one slot per 2m niche, centred on its opening
+                    # one slot per 2m niche + a vitrine set INTO the recess
                     slots.append((O - depth, cols[0], "niche"))
+                    vr, vc = O - depth, cols[0]
+                    inter[vr][vc] = "exhibit_furniture#kind:vitrine_tall"
                     c += NICHE_LEN       # don't overlap the next niche
             c += 1
 
@@ -530,6 +532,18 @@ def measure(data, slots):
             cur = nxt
             remaining.remove(nxt)
     detour = (walk_len / straight) if straight > 0 else 1.0
+    # encounter order: how monotonically the walk advances toward the exit (east)
+    backtrack = 0.0
+    if graph.spawn and len(reachable_slots) >= 2:
+        order = []
+        cur2 = graph.spawn
+        rem = list(reachable_slots)
+        while rem:
+            nx = min(rem, key=lambda p2: _m.dist(cur2, p2))
+            order.append(nx); cur2 = nx; rem.remove(nx)
+        back_steps = sum(1 for i in range(1, len(order)) if order[i][1] < order[i-1][1])
+        backtrack = back_steps / max(1, len(order) - 1)
+    order_score = 1.0 - backtrack     # 1 = perfectly progressive, 0 = all criss-cross
     total_footprint = sum(FOOTPRINT.get(t[2], 1) for t in slots)
 
     # return path: can you walk BACK from the exit to the spawn (climbs need wedges)
@@ -557,6 +571,7 @@ def measure(data, slots):
             "return_path": return_path,
             "reach_frac": round(reach_frac, 2), "approach_frac": round(approach_frac, 2),
             "detour": round(detour, 2), "footprint_cells": total_footprint,
+            "order_score": round(order_score, 2),
             "hang": hang, "vista": best_run, "doors": doors,
             "terraced": len(heights) > 1, "loop": has_loop,
             "min_slot_dist": round(min_d, 1), "reachable": reachable,
@@ -574,11 +589,11 @@ def fitness(profile, m):
         return (m["vista"] * 0.9 + m["dais"] * 3.0 + (6 if m["terraced"] else 0)
                 + (4 if m["light"] == "dramatic" else 0) + min(m["hang"], 80) * 0.03
                 + m["floating"] * 2.5 + min(m["slots"], 10) * 0.5
-                + m["hospitality"] * 1.0 + (2.0 if m.get("return_path") else 0.0) + m.get('reach_frac',1)*5.0 + m.get('approach_frac',1)*4.0 - max(0.0, m.get('detour',1)-1.4)*3.0 + spacing)
+                + m["hospitality"] * 1.0 + (2.0 if m.get("return_path") else 0.0) + m.get('reach_frac',1)*5.0 + m.get('approach_frac',1)*4.0 - max(0.0, m.get('detour',1)-1.4)*3.0 + m.get('order_score',1)*2.5 + spacing)
     # intimacy
     return (m["n_niche"] * 2.2 + m["doors"] * 1.2 - m["vista"] * 0.35
             + (4 if m["light"] == "dusk" else 0) + min(m["slots"], 14) * 0.8
-            + m["kinds"] * 1.5 + m["hospitality"] * 2.0 + (2.0 if m.get("return_path") else 0.0) + m.get('reach_frac',1)*5.0 + m.get('approach_frac',1)*4.0 - max(0.0, m.get('detour',1)-1.4)*3.0 + spacing)
+            + m["kinds"] * 1.5 + m["hospitality"] * 2.0 + (2.0 if m.get("return_path") else 0.0) + m.get('reach_frac',1)*5.0 + m.get('approach_frac',1)*4.0 - max(0.0, m.get('detour',1)-1.4)*3.0 + m.get('order_score',1)*2.5 + spacing)
 
 
 # ── evolution ────────────────────────────────────────────────────────────────
@@ -647,7 +662,8 @@ def main():
                   f"mix={g.get('furniture_mix','?'):8s} float={g.get('floating_walls',0)} "
                   f"sign={g.get('signage',0)} light={g['light']:8s} "
                   f"slots={m['slots']:2d} reach={m.get('reach_frac',1)} "
-                  f"appr={m.get('approach_frac',1)} detour={m.get('detour',1)}")
+                  f"appr={m.get('approach_frac',1)} detour={m.get('detour',1)} "
+                  f"order={m.get('order_score',1)}")
     (ROOT / "doc" / "reports" / "gallery_dna_research.json").write_text(
         json.dumps(report, indent=1), encoding="utf-8")
 

@@ -21,30 +21,30 @@ Three taste-profiles evolved as separate populations (pop 24, 5 generations, tou
 
 | gen | best | mean | best form |
 |---|---|---|---|
-| 1 | 63.1 | 44.56 | basilica |
-| 2 | 63.1 | 50.14 | basilica |
-| 3 | 63.1 | 53.65 | basilica |
-| 4 | 66.1 | 56.12 | rotunda |
-| 5 | 66.1 | 57.15 | rotunda |
+| 1 | 64.55 | 46.19 | basilica |
+| 2 | 64.55 | 52.01 | basilica |
+| 3 | 64.55 | 55.99 | basilica |
+| 4 | 67.51 | 57.04 | axis |
+| 5 | 67.51 | 59.74 | axis |
 
-- **Gallery_DRA_1** (fit 66.1): rotunda / ring / dramatic, 25 slots, vista 23, 0 niches, terraced=True
-- **Gallery_DRA_2** (fit 66.1): basilica / ring / dramatic, 30 slots, vista 23, 4 niches, terraced=True
-- **Gallery_DRA_3** (fit 63.1): basilica / ring / dramatic, 33 slots, vista 23, 6 niches, terraced=True
-- **Gallery_DRA_4** (fit 62.86): cross / ring / dramatic, 33 slots, vista 23, 6 niches, terraced=True
+- **Gallery_DRA_1** (fit 67.51): axis / ring / dramatic, 34 slots, vista 23, 6 niches, terraced=True
+- **Gallery_DRA_2** (fit 64.72): terrace / axis_row / dramatic, 29 slots, vista 23, 6 niches, terraced=True
+- **Gallery_DRA_3** (fit 64.55): basilica / ring / dramatic, 33 slots, vista 23, 6 niches, terraced=True
+- **Gallery_DRA_4** (fit 64.31): cross / ring / dramatic, 33 slots, vista 23, 6 niches, terraced=True
 
 ## intimacy
 
 | gen | best | mean | best form |
 |---|---|---|---|
-| 1 | 55.63 | 33.78 | basilica |
-| 2 | 61.65 | 48.25 | basilica |
-| 3 | 61.65 | 53.66 | basilica |
-| 4 | 64.45 | 57.27 | basilica |
-| 5 | 65.37 | 60.3 | basilica |
+| 1 | 57.05 | 35.39 | basilica |
+| 2 | 63.23 | 49.77 | basilica |
+| 3 | 63.23 | 55.1 | basilica |
+| 4 | 68.47 | 59.74 | basilica |
+| 5 | 68.47 | 63.02 | basilica |
 
-- **Gallery_INT_1** (fit 65.37): basilica / axis_row / dusk, 18 slots, vista 23, 6 niches, terraced=True
-- **Gallery_INT_2** (fit 64.45): basilica / double_row / dusk, 37 slots, vista 21, 6 niches, terraced=False
-- **Gallery_INT_3** (fit 64.45): basilica / ring / dusk, 28 slots, vista 21, 6 niches, terraced=False
-- **Gallery_INT_4** (fit 64.45): basilica / double_row / dusk, 37 slots, vista 21, 6 niches, terraced=False
+- **Gallery_INT_1** (fit 68.47): basilica / ring / dusk, 26 slots, vista 23, 5 niches, terraced=False
+- **Gallery_INT_2** (fit 68.47): basilica / ring / dusk, 26 slots, vista 23, 5 niches, terraced=False
+- **Gallery_INT_3** (fit 66.85): basilica / ring / dusk, 25 slots, vista 23, 5 niches, terraced=False
+- **Gallery_INT_4** (fit 66.4): basilica / ring / dusk, 28 slots, vista 23, 5 niches, terraced=False
 
 The three champions disagree on purpose: capacity, drama and intimacy are different buildings. No single form wins — the profile is the choice.
