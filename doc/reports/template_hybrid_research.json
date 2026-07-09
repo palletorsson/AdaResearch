@@ -1,0 +1,788 @@
+{
+ "seed": 23,
+ "rows": [
+  {
+   "id": "HYB_CAPxINT_7",
+   "parents": "capacity\u00d7intimacy",
+   "genome": {
+    "w": 24,
+    "d": 13,
+    "form": "basilica",
+    "height": "flat",
+    "niche_every": 4,
+    "niche_deep": 1,
+    "podium_motif": "ring",
+    "podium_spacing": 5,
+    "vitrines": 4,
+    "dais": 1,
+    "route_walls": 1,
+    "floating_walls": 3,
+    "furniture_mix": "full",
+    "signage": 1,
+    "infoboard": 1,
+    "light": "dramatic"
+   },
+   "scores": {
+    "capacity": 61.6,
+    "drama": 60.02,
+    "intimacy": 64.12
+   },
+   "generalist": 60.02,
+   "mean": 61.91
+  },
+  {
+   "id": "HYB_CAPxINT_4",
+   "parents": "capacity\u00d7intimacy",
+   "genome": {
+    "w": 24,
+    "d": 18,
+    "form": "basilica",
+    "height": "flat",
+    "niche_every": 4,
+    "niche_deep": 1,
+    "podium_motif": "ring",
+    "podium_spacing": 6,
+    "vitrines": 4,
+    "dais": 1,
+    "route_walls": 1,
+    "floating_walls": 3,
+    "furniture_mix": "full",
+    "signage": 1,
+    "infoboard": 1,
+    "light": "dramatic"
+   },
+   "scores": {
+    "capacity": 61.6,
+    "drama": 59.95,
+    "intimacy": 64.05
+   },
+   "generalist": 59.95,
+   "mean": 61.87
+  },
+  {
+   "id": "HYB_CAPxINT_3",
+   "parents": "capacity\u00d7intimacy",
+   "genome": {
+    "w": 24,
+    "d": 13,
+    "form": "axis",
+    "height": "flat",
+    "niche_every": 3,
+    "niche_deep": 1,
+    "podium_motif": "ring",
+    "podium_spacing": 6,
+    "vitrines": 4,
+    "dais": 1,
+    "route_walls": 1,
+    "floating_walls": 3,
+    "furniture_mix": "full",
+    "signage": 1,
+    "infoboard": 1,
+    "light": "dusk"
+   },
+   "scores": {
+    "capacity": 61.6,
+    "drama": 56.0,
+    "intimacy": 60.5
+   },
+   "generalist": 56.0,
+   "mean": 59.37
+  },
+  {
+   "id": "HYB_DRAxINT_6",
+   "parents": "drama\u00d7intimacy",
+   "genome": {
+    "w": 26,
+    "d": 18,
+    "form": "basilica",
+    "height": "flat",
+    "niche_every": 5,
+    "niche_deep": 1,
+    "podium_motif": "ring",
+    "podium_spacing": 6,
+    "vitrines": 4,
+    "dais": 2,
+    "route_walls": 0,
+    "floating_walls": 3,
+    "furniture_mix": "full",
+    "signage": 1,
+    "infoboard": 1,
+    "light": "dramatic"
+   },
+   "scores": {
+    "capacity": 55.6,
+    "drama": 58.48,
+    "intimacy": 57.27
+   },
+   "generalist": 55.6,
+   "mean": 57.12
+  },
+  {
+   "id": "HYB_DRAxINT_7",
+   "parents": "drama\u00d7intimacy",
+   "genome": {
+    "w": 26,
+    "d": 18,
+    "form": "basilica",
+    "height": "flat",
+    "niche_every": 5,
+    "niche_deep": 1,
+    "podium_motif": "double_row",
+    "podium_spacing": 5,
+    "vitrines": 2,
+    "dais": 2,
+    "route_walls": 0,
+    "floating_walls": 4,
+    "furniture_mix": "full",
+    "signage": 1,
+    "infoboard": 1,
+    "light": "dusk"
+   },
+   "scores": {
+    "capacity": 55.6,
+    "drama": 57.35,
+    "intimacy": 61.65
+   },
+   "generalist": 55.6,
+   "mean": 58.2
+  },
+  {
+   "id": "HYB_CAPxINT_5",
+   "parents": "capacity\u00d7intimacy",
+   "genome": {
+    "w": 24,
+    "d": 13,
+    "form": "basilica",
+    "height": "flat",
+    "niche_every": 4,
+    "niche_deep": 1,
+    "podium_motif": "ring",
+    "podium_spacing": 6,
+    "vitrines": 4,
+    "dais": 0,
+    "route_walls": 1,
+    "floating_walls": 3,
+    "furniture_mix": "full",
+    "signage": 1,
+    "infoboard": 1,
+    "light": "bright"
+   },
+   "scores": {
+    "capacity": 59.6,
+    "drama": 53.12,
+    "intimacy": 62.73
+   },
+   "generalist": 53.12,
+   "mean": 58.48
+  },
+  {
+   "id": "SPEC_INT",
+   "parents": "intimacy",
+   "genome": {
+    "w": 24,
+    "d": 18,
+    "form": "basilica",
+    "height": "flat",
+    "niche_every": 3,
+    "niche_deep": 1,
+    "podium_motif": "ring",
+    "podium_spacing": 5,
+    "vitrines": 4,
+    "dais": 0,
+    "route_walls": 0,
+    "floating_walls": 3,
+    "furniture_mix": "full",
+    "signage": 1,
+    "infoboard": 1,
+    "light": "dusk"
+   },
+   "scores": {
+    "capacity": 59.6,
+    "drama": 52.92,
+    "intimacy": 70.92
+   },
+   "generalist": 52.92,
+   "mean": 61.15
+  },
+  {
+   "id": "SPEC_CAP",
+   "parents": "capacity",
+   "genome": {
+    "w": 24,
+    "d": 13,
+    "form": "axis",
+    "height": "flat",
+    "niche_every": 4,
+    "niche_deep": 1,
+    "podium_motif": "ring",
+    "podium_spacing": 6,
+    "vitrines": 4,
+    "dais": 1,
+    "route_walls": 1,
+    "floating_walls": 4,
+    "furniture_mix": "full",
+    "signage": 1,
+    "infoboard": 1,
+    "light": "dramatic"
+   },
+   "scores": {
+    "capacity": 61.6,
+    "drama": 62.45,
+    "intimacy": 52.05
+   },
+   "generalist": 52.05,
+   "mean": 58.7
+  },
+  {
+   "id": "HYB_DRAxINT_8",
+   "parents": "drama\u00d7intimacy",
+   "genome": {
+    "w": 24,
+    "d": 15,
+    "form": "basilica",
+    "height": "flat",
+    "niche_every": 5,
+    "niche_deep": 1,
+    "podium_motif": "double_row",
+    "podium_spacing": 6,
+    "vitrines": 6,
+    "dais": 0,
+    "route_walls": 0,
+    "floating_walls": 4,
+    "furniture_mix": "cabinet",
+    "signage": 1,
+    "infoboard": 1,
+    "light": "dramatic"
+   },
+   "scores": {
+    "capacity": 51.6,
+    "drama": 59.55,
+    "intimacy": 54.45
+   },
+   "generalist": 51.6,
+   "mean": 55.2
+  },
+  {
+   "id": "HYB_CAPxINT_2",
+   "parents": "capacity\u00d7intimacy",
+   "genome": {
+    "w": 24,
+    "d": 18,
+    "form": "axis",
+    "height": "flat",
+    "niche_every": 3,
+    "niche_deep": 2,
+    "podium_motif": "ring",
+    "podium_spacing": 5,
+    "vitrines": 4,
+    "dais": 1,
+    "route_walls": 0,
+    "floating_walls": 4,
+    "furniture_mix": "full",
+    "signage": 1,
+    "infoboard": 1,
+    "light": "dramatic"
+   },
+   "scores": {
+    "capacity": 55.6,
+    "drama": 56.27,
+    "intimacy": 50.28
+   },
+   "generalist": 50.28,
+   "mean": 54.05
+  },
+  {
+   "id": "HYB_CAPxINT_6",
+   "parents": "capacity\u00d7intimacy",
+   "genome": {
+    "w": 24,
+    "d": 18,
+    "form": "axis",
+    "height": "flat",
+    "niche_every": 4,
+    "niche_deep": 1,
+    "podium_motif": "ring",
+    "podium_spacing": 5,
+    "vitrines": 2,
+    "dais": 1,
+    "route_walls": 1,
+    "floating_walls": 4,
+    "furniture_mix": "full",
+    "signage": 1,
+    "infoboard": 1,
+    "light": "dusk"
+   },
+   "scores": {
+    "capacity": 55.6,
+    "drama": 52.33,
+    "intimacy": 49.93
+   },
+   "generalist": 49.93,
+   "mean": 52.62
+  },
+  {
+   "id": "HYB_CAPxDRA_5",
+   "parents": "capacity\u00d7drama",
+   "genome": {
+    "w": 24,
+    "d": 14,
+    "form": "axis",
+    "height": "flat",
+    "niche_every": 5,
+    "niche_deep": 1,
+    "podium_motif": "double_row",
+    "podium_spacing": 6,
+    "vitrines": 4,
+    "dais": 1,
+    "route_walls": 1,
+    "floating_walls": 4,
+    "furniture_mix": "full",
+    "signage": 1,
+    "infoboard": 1,
+    "light": "dramatic"
+   },
+   "scores": {
+    "capacity": 61.6,
+    "drama": 62.5,
+    "intimacy": 49.9
+   },
+   "generalist": 49.9,
+   "mean": 58.0
+  },
+  {
+   "id": "HYB_CAPxDRA_8",
+   "parents": "capacity\u00d7drama",
+   "genome": {
+    "w": 24,
+    "d": 13,
+    "form": "axis",
+    "height": "flat",
+    "niche_every": 5,
+    "niche_deep": 1,
+    "podium_motif": "double_row",
+    "podium_spacing": 6,
+    "vitrines": 4,
+    "dais": 1,
+    "route_walls": 0,
+    "floating_walls": 4,
+    "furniture_mix": "full",
+    "signage": 1,
+    "infoboard": 1,
+    "light": "dramatic"
+   },
+   "scores": {
+    "capacity": 61.6,
+    "drama": 62.38,
+    "intimacy": 49.78
+   },
+   "generalist": 49.78,
+   "mean": 57.92
+  },
+  {
+   "id": "HYB_DRAxINT_2",
+   "parents": "drama\u00d7intimacy",
+   "genome": {
+    "w": 26,
+    "d": 15,
+    "form": "basilica",
+    "height": "flat",
+    "niche_every": 5,
+    "niche_deep": 1,
+    "podium_motif": "ring",
+    "podium_spacing": 5,
+    "vitrines": 2,
+    "dais": 2,
+    "route_walls": 0,
+    "floating_walls": 3,
+    "furniture_mix": "cabinet",
+    "signage": 1,
+    "infoboard": 1,
+    "light": "dusk"
+   },
+   "scores": {
+    "capacity": 47.6,
+    "drama": 54.7,
+    "intimacy": 55.5
+   },
+   "generalist": 47.6,
+   "mean": 52.6
+  },
+  {
+   "id": "HYB_CAPxINT_1",
+   "parents": "capacity\u00d7intimacy",
+   "genome": {
+    "w": 24,
+    "d": 13,
+    "form": "axis",
+    "height": "flat",
+    "niche_every": 4,
+    "niche_deep": 1,
+    "podium_motif": "ring",
+    "podium_spacing": 5,
+    "vitrines": 4,
+    "dais": 2,
+    "route_walls": 1,
+    "floating_walls": 3,
+    "furniture_mix": "full",
+    "signage": 1,
+    "infoboard": 1,
+    "light": "dramatic"
+   },
+   "scores": {
+    "capacity": 55.6,
+    "drama": 56.95,
+    "intimacy": 46.05
+   },
+   "generalist": 46.05,
+   "mean": 52.87
+  },
+  {
+   "id": "HYB_CAPxDRA_7",
+   "parents": "capacity\u00d7drama",
+   "genome": {
+    "w": 24,
+    "d": 13,
+    "form": "axis",
+    "height": "flat",
+    "niche_every": 4,
+    "niche_deep": 1,
+    "podium_motif": "ring",
+    "podium_spacing": 6,
+    "vitrines": 2,
+    "dais": 2,
+    "route_walls": 0,
+    "floating_walls": 4,
+    "furniture_mix": "full",
+    "signage": 1,
+    "infoboard": 1,
+    "light": "dramatic"
+   },
+   "scores": {
+    "capacity": 55.6,
+    "drama": 59.4,
+    "intimacy": 46.0
+   },
+   "generalist": 46.0,
+   "mean": 53.67
+  },
+  {
+   "id": "HYB_CAPxINT_8",
+   "parents": "capacity\u00d7intimacy",
+   "genome": {
+    "w": 24,
+    "d": 18,
+    "form": "axis",
+    "height": "flat",
+    "niche_every": 4,
+    "niche_deep": 1,
+    "podium_motif": "ring",
+    "podium_spacing": 6,
+    "vitrines": 4,
+    "dais": 0,
+    "route_walls": 0,
+    "floating_walls": 3,
+    "furniture_mix": "classic",
+    "signage": 1,
+    "infoboard": 1,
+    "light": "dramatic"
+   },
+   "scores": {
+    "capacity": 53.6,
+    "drama": 56.9,
+    "intimacy": 46.0
+   },
+   "generalist": 46.0,
+   "mean": 52.17
+  },
+  {
+   "id": "HYB_CAPxDRA_1",
+   "parents": "capacity\u00d7drama",
+   "genome": {
+    "w": 26,
+    "d": 13,
+    "form": "axis",
+    "height": "flat",
+    "niche_every": 5,
+    "niche_deep": 1,
+    "podium_motif": "double_row",
+    "podium_spacing": 6,
+    "vitrines": 4,
+    "dais": 2,
+    "route_walls": 0,
+    "floating_walls": 4,
+    "furniture_mix": "classic",
+    "signage": 1,
+    "infoboard": 1,
+    "light": "dramatic"
+   },
+   "scores": {
+    "capacity": 55.6,
+    "drama": 67.35,
+    "intimacy": 44.75
+   },
+   "generalist": 44.75,
+   "mean": 55.9
+  },
+  {
+   "id": "HYB_CAPxDRA_6",
+   "parents": "capacity\u00d7drama",
+   "genome": {
+    "w": 24,
+    "d": 13,
+    "form": "axis",
+    "height": "flat",
+    "niche_every": 5,
+    "niche_deep": 1,
+    "podium_motif": "ring",
+    "podium_spacing": 6,
+    "vitrines": 4,
+    "dais": 1,
+    "route_walls": 0,
+    "floating_walls": 4,
+    "furniture_mix": "cabinet",
+    "signage": 1,
+    "infoboard": 1,
+    "light": "dramatic"
+   },
+   "scores": {
+    "capacity": 53.6,
+    "drama": 62.67,
+    "intimacy": 44.08
+   },
+   "generalist": 44.08,
+   "mean": 53.45
+  },
+  {
+   "id": "HYB_CAPxDRA_2",
+   "parents": "capacity\u00d7drama",
+   "genome": {
+    "w": 26,
+    "d": 15,
+    "form": "axis",
+    "height": "flat",
+    "niche_every": 5,
+    "niche_deep": 1,
+    "podium_motif": "double_row",
+    "podium_spacing": 6,
+    "vitrines": 2,
+    "dais": 1,
+    "route_walls": 0,
+    "floating_walls": 4,
+    "furniture_mix": "full",
+    "signage": 1,
+    "infoboard": 1,
+    "light": "dramatic"
+   },
+   "scores": {
+    "capacity": 55.6,
+    "drama": 58.33,
+    "intimacy": 43.23
+   },
+   "generalist": 43.23,
+   "mean": 52.39
+  },
+  {
+   "id": "HYB_CAPxDRA_4",
+   "parents": "capacity\u00d7drama",
+   "genome": {
+    "w": 26,
+    "d": 13,
+    "form": "terrace",
+    "height": "step_down",
+    "niche_every": 4,
+    "niche_deep": 1,
+    "podium_motif": "ring",
+    "podium_spacing": 6,
+    "vitrines": 4,
+    "dais": 2,
+    "route_walls": 1,
+    "floating_walls": 4,
+    "furniture_mix": "full",
+    "signage": 1,
+    "infoboard": 1,
+    "light": "dramatic"
+   },
+   "scores": {
+    "capacity": 55.6,
+    "drama": 67.42,
+    "intimacy": 40.71
+   },
+   "generalist": 40.71,
+   "mean": 54.58
+  },
+  {
+   "id": "HYB_DRAxINT_1",
+   "parents": "drama\u00d7intimacy",
+   "genome": {
+    "w": 24,
+    "d": 18,
+    "form": "terrace",
+    "height": "flat",
+    "niche_every": 5,
+    "niche_deep": 1,
+    "podium_motif": "double_row",
+    "podium_spacing": 6,
+    "vitrines": 2,
+    "dais": 2,
+    "route_walls": 0,
+    "floating_walls": 0,
+    "furniture_mix": "full",
+    "signage": 1,
+    "infoboard": 1,
+    "light": "dramatic"
+   },
+   "scores": {
+    "capacity": 52.52,
+    "drama": 55.0,
+    "intimacy": 37.1
+   },
+   "generalist": 37.1,
+   "mean": 48.21
+  },
+  {
+   "id": "HYB_DRAxINT_5",
+   "parents": "drama\u00d7intimacy",
+   "genome": {
+    "w": 26,
+    "d": 15,
+    "form": "terrace",
+    "height": "flat",
+    "niche_every": 5,
+    "niche_deep": 1,
+    "podium_motif": "ring",
+    "podium_spacing": 5,
+    "vitrines": 4,
+    "dais": 0,
+    "route_walls": 0,
+    "floating_walls": 3,
+    "furniture_mix": "full",
+    "signage": 1,
+    "infoboard": 1,
+    "light": "dramatic"
+   },
+   "scores": {
+    "capacity": 53.6,
+    "drama": 58.8,
+    "intimacy": 36.9
+   },
+   "generalist": 36.9,
+   "mean": 49.77
+  },
+  {
+   "id": "HYB_DRAxINT_4",
+   "parents": "drama\u00d7intimacy",
+   "genome": {
+    "w": 26,
+    "d": 18,
+    "form": "terrace",
+    "height": "flat",
+    "niche_every": 5,
+    "niche_deep": 1,
+    "podium_motif": "double_row",
+    "podium_spacing": 6,
+    "vitrines": 4,
+    "dais": 1,
+    "route_walls": 0,
+    "floating_walls": 4,
+    "furniture_mix": "cabinet",
+    "signage": 1,
+    "infoboard": 1,
+    "light": "dusk"
+   },
+   "scores": {
+    "capacity": 47.6,
+    "drama": 59.95,
+    "intimacy": 36.05
+   },
+   "generalist": 36.05,
+   "mean": 47.87
+  },
+  {
+   "id": "HYB_DRAxINT_3",
+   "parents": "drama\u00d7intimacy",
+   "genome": {
+    "w": 26,
+    "d": 15,
+    "form": "terrace",
+    "height": "flat",
+    "niche_every": 5,
+    "niche_deep": 1,
+    "podium_motif": "ring",
+    "podium_spacing": 5,
+    "vitrines": 2,
+    "dais": 0,
+    "route_walls": 0,
+    "floating_walls": 3,
+    "furniture_mix": "full",
+    "signage": 0,
+    "infoboard": 1,
+    "light": "dramatic"
+   },
+   "scores": {
+    "capacity": 52.1,
+    "drama": 57.8,
+    "intimacy": 34.9
+   },
+   "generalist": 34.9,
+   "mean": 48.27
+  },
+  {
+   "id": "HYB_CAPxDRA_3",
+   "parents": "capacity\u00d7drama",
+   "genome": {
+    "w": 24,
+    "d": 15,
+    "form": "terrace",
+    "height": "flat",
+    "niche_every": 5,
+    "niche_deep": 1,
+    "podium_motif": "double_row",
+    "podium_spacing": 6,
+    "vitrines": 4,
+    "dais": 2,
+    "route_walls": 0,
+    "floating_walls": 1,
+    "furniture_mix": "cabinet",
+    "signage": 1,
+    "infoboard": 1,
+    "light": "dramatic"
+   },
+   "scores": {
+    "capacity": 46.64,
+    "drama": 58.1,
+    "intimacy": 33.2
+   },
+   "generalist": 33.2,
+   "mean": 45.98
+  },
+  {
+   "id": "SPEC_DRA",
+   "parents": "drama",
+   "genome": {
+    "w": 26,
+    "d": 15,
+    "form": "terrace",
+    "height": "flat",
+    "niche_every": 5,
+    "niche_deep": 1,
+    "podium_motif": "double_row",
+    "podium_spacing": 6,
+    "vitrines": 2,
+    "dais": 2,
+    "route_walls": 0,
+    "floating_walls": 4,
+    "furniture_mix": "cabinet",
+    "signage": 1,
+    "infoboard": 1,
+    "light": "dramatic"
+   },
+   "scores": {
+    "capacity": 47.6,
+    "drama": 67.48,
+    "intimacy": 32.58
+   },
+   "generalist": 32.58,
+   "mean": 49.22
+  }
+ ]
+}
