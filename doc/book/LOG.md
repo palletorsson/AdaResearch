@@ -913,3 +913,27 @@ Curator picking a taste-profile then furnishing its argument.
 All 12 champions recaptured, pathfinder-clean, /gallery-dna refreshed.
 Backlog now: 8 of 18 struck. Remaining high-value: #2 wire walk_evaluator,
 #12 Curator->genome loop, #16 physics walkability probe.
+
+## 2026-07-08 — THE LOOP CLOSED: curate_gallery.py (#12)
+
+Work Package 3 in one command. tools/curate_gallery.py:
+  brief + taste + cast
+    -> EVOLVE a champion room for the taste, pick the best-fitting by slots
+    -> FURNISH by measured footprint (small->plinth, wide->table, flat->wall;
+       giants flagged for own room; hospitality kept)
+    -> Curated_<id> map + doc/exhibitions/<id>/curation.json decision record
+       (brief, taste, champion genome, every match, oversized, unplaced,
+       learning curve, a SIEVE pass whose dark_spot names exactly the works
+       the footprints couldn't seat).
+
+Demo: Curated_RandomnessEdge ("From a fair coin to the incompressible",
+intimacy, 10 randomness works) -> a basilica nave, 9 placed by fit
+(RAND book -> large slot, butterflies -> wall, coin/dice/galton/entropy
+-> plinths in the aisles), trng_vs_prng flagged for its own room.
+Pathfinder-clean, captured. The whole arc runs end to end: brief ->
+architecture -> collection -> walkable exhibition, every step measured,
+the human ruling on top.
+
+Backlog: 9 of 18 struck; the three pillars (evolve / furnish / curate) all
+land. Remaining are refinements (walk_evaluator wiring, physics probe,
+light strips, mezzanine) and the human loop (walk-verdict re-weighting).

@@ -42,8 +42,9 @@ items are done. This is the steering surface for the auto-research loop.
 11. **Rotunda oculus** — top-light the round form's centre.
 
 ## The loop / integration
-12. **Curator compiles into a champion genome** — exhibition.json → pick a
-    taste-profile → evolve the room → hang the argument into its slots.
+12. ~~**Curator compiles into a champion genome** — tools/curate_gallery.py:
+    brief + taste + cast -> evolve a fitting champion -> furnish by footprint
+    -> Curated_<id> map + curation.json decision record. THE LOOP IS CLOSED.~~
 13. ~~**Fill the slots with a cast** — tools/furnish_gallery.py: empty champion +
     cast -> footprint-matched furnished map (Furnished_CAP_1 done).~~ NEXT: hand
     the oversized/unplaced to place.py for their own generated rooms.

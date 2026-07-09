@@ -1,0 +1,98 @@
+{
+ "generated_by": "tools/curate_gallery.py",
+ "id": "randomness_edge",
+ "brief": "From a fair coin to the incompressible",
+ "taste": "intimacy",
+ "map": "Curated_RandomnessEdge",
+ "champion": {
+  "genome": {
+   "w": 24,
+   "d": 15,
+   "form": "basilica",
+   "height": "flat",
+   "niche_every": 4,
+   "niche_deep": 1,
+   "podium_motif": "double_row",
+   "podium_spacing": 3,
+   "vitrines": 2,
+   "dais": 1,
+   "route_walls": 2,
+   "floating_walls": 0,
+   "furniture_mix": "full",
+   "signage": 1,
+   "infoboard": 1,
+   "light": "dramatic"
+  },
+  "fitness": 62.65,
+  "measure": {
+   "slots": 31,
+   "reach_frac": 1.0,
+   "approach_frac": 1.0,
+   "detour": 1.21,
+   "order_score": 0.62
+  }
+ },
+ "placed": [
+  {
+   "artifact": "random_number_book_page_1955",
+   "slot": "large",
+   "fp": 4.0
+  },
+  {
+   "artifact": "random_butterflies",
+   "slot": "wall",
+   "fp": 2.0
+  },
+  {
+   "artifact": "coin_toss",
+   "slot": "small",
+   "fp": 1.0
+  },
+  {
+   "artifact": "dice_throw",
+   "slot": "small",
+   "fp": 1.0
+  },
+  {
+   "artifact": "galton_board",
+   "slot": "small",
+   "fp": 1.0
+  },
+  {
+   "artifact": "shannon_entropy_meter",
+   "slot": "small",
+   "fp": 1.0
+  },
+  {
+   "artifact": "entropy_jar",
+   "slot": "small",
+   "fp": 1.0
+  },
+  {
+   "artifact": "dark_sphere",
+   "slot": "small",
+   "fp": 1.0
+  },
+  {
+   "artifact": "monte_carlo_estimator",
+   "slot": "wall",
+   "fp": 1.0
+  }
+ ],
+ "oversized": [
+  "trng_vs_prng"
+ ],
+ "unplaced": [],
+ "learning_curve": [
+  50.4,
+  62.55,
+  62.8,
+  62.8,
+  63.38
+ ],
+ "sieve": {
+  "thickens": "the collection gets a room whose walk was measured, not guessed",
+  "forecloses": "one taste chosen; the other two rooms this cast could have lived in are foregone",
+  "dark_spot": "the oversized works (own room) and the unplaced (no fitting slot) \u2014 what the footprints could not seat here"
+ }
+}
