@@ -643,6 +643,10 @@ func _on_spawn_complete(spawn_position: Vector3):
 	# creatures, biome ring foliage, and the NatureRenderer sky/fog — so a viewer
 	# (e.g. the map-simulator bridge) shows just the map grid. Additive; the normal
 	# game path leaves bare_world false and behaves exactly as before.
+	# Now also honoured from map settings.bare_world (so a map — e.g. the Spine
+	# Museum — can declare itself world-free without a code caller).
+	if data_component and bool(data_component.get_settings().get("bare_world", false)):
+		bare_world = true
 	if not bare_world:
 		# Spawn ecosystem organisms if configured (after terrain is built)
 		call_deferred("_handle_ecosystem_spawn")

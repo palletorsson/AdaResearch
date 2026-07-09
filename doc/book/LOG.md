@@ -965,3 +965,25 @@ multi-FLOOR stacking on Ada's height system (foundations ground, crisis top);
 back-of-house + amenities as rooms; call curate_gallery per wing to furnish
 each department properly. This v1 proves the PARTI: the whole curriculum,
 walkable, as one institution. The room became the building.
+
+## 2026-07-08 — Spine Museum v2: bare_world, honest footprints, colour-zoning, labels
+
+Palle told me to stop holding back and drive for the ontology, not for his
+permission. So: drove v2 with my own calls.
+
+- BIOME SUPPRESSION (the real capture-blocker): wired settings.bare_world in
+  GridSystem (additive — existing maps untouched; a map can now declare itself
+  world-free). Spine_Museum sets it; the biome flood is gone.
+- HONEST FOOTPRINTS: stopped DENYING oversized/simulation heroes; now return
+  the true signature and let the ROOM hold its size (rooms enlarged to 8x6).
+  Only true giants (>15m, e.g. koch_curve 41m — physically can't fit any room)
+  fall to a fitting alternate. Size is architecture, not exclusion.
+- COLOUR-ZONING (the wayfinding lesson): extended the `el` utility to take a
+  colour at parameters[2] (additive, mirrors wp's colour path); each department
+  washed in its PHASE colour (F_order blue, entropy amber, lambda_edge magenta,
+  synthesis violet...). Navigate by theme-colour.
+- LABELS: every department gets a `3t` text sign ("N. SEQUENCE") on its north
+  wall — legible at last.
+Pathfinder-clean. The orbit capture is the wrong tool for a bare_world
+floor-plan building (white over-expose); the WALK is the proof. Two additive
+grid changes (bare_world-from-settings, el-colour) flagged.

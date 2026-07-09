@@ -586,6 +586,17 @@ func _apply_utility_parameters(utility_object: Node3D, utility_type: String, par
 						if mesh_node and mesh_node is Node3D:
 							mesh_node.visible = not hide_flag
 				print("GridUtilitiesComponent: Set extra light fixture hidden=%s" % str(hide_flag))
+			# Optional colour at parameters[2] — tints the light (department zoning).
+			if parameters.size() > 2:
+				var col_param := str(parameters[2]).strip_edges()
+				if not col_param.is_empty():
+					var light_node2 := utility_object.get_node_or_null("StaticBody3D/OmniLight3D")
+					if light_node2 == null:
+						light_node2 = utility_object.get_node_or_null("OmniLight3D")
+					if light_node2 and light_node2 is Light3D:
+						var c := Color.html(col_param) if col_param.begins_with("#") else Color.from_string(col_param, Color.WHITE)
+						(light_node2 as Light3D).light_color = c
+						print("GridUtilitiesComponent: Tinted extra light '%s'" % col_param)
 		"3t":  # Text display
 			var text_value = _build_text_display_message(parameters)
 			utility_object.set_meta("display_text", text_value)

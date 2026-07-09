@@ -22,14 +22,18 @@ sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 ROOT = Path(__file__).resolve().parent.parent
 
 COLS, ROWS = 6, 4          # 24 department rooms
-RW, RD = 6, 5              # interior of each department
+RW, RD = 8, 6              # interior of each department (fits real heroes)
 ROT_D = 7                  # rotunda band depth at the south entrance
 
-# phase -> a department accent (used for the name tag colour later; v1 records it)
-PHASE_HINT = {
-    "F_order": "order", "oscillation": "wave", "E_entropy": "entropy",
-    "lambda_edge": "edge", "integration": "integration", "relation": "relation",
-    "synthesis": "synthesis",
+# phase -> department accent colour (the wayfinding zoning, washed by an el light)
+PHASE_COLOR = {
+    "F_order":     "#8fb8e8",   # cool blue — foundations of order
+    "oscillation": "#7fe0d0",   # teal — waves
+    "E_entropy":   "#e8c46a",   # amber — entropy/heat
+    "lambda_edge": "#e08bd0",   # magenta — the living edge
+    "integration": "#9be08b",   # green — integration/life
+    "relation":    "#e8a06a",   # orange — relation
+    "synthesis":   "#c98be0",   # violet — synthesis/crisis
 }
 
 
@@ -59,10 +63,8 @@ GENERIC = {"science_screen", "dark_sphere", "clipboard", "floating_sphere_field"
            "you_are_here", "CoordinateSystem3M", "frame_counter_display", "tt",
            "grab_long_stick", "pick_up_cube", "catalyst_target",
            # environment-builders / oversized (fill the whole room):
-           "lab_room", "GlassRack", "grid_substrate_runner",
-           # simulation/GPU heroes that hang or crash headless (memory):
-           "boid_flocking", "mc_torus_sculpture", "gradient_descent_visualization",
-           "graphspace", "csg_union_demo"}
+           # only truly hang/crash-prone headless (memory) stay denied:
+           "boid_flocking", "mc_torus_sculpture"}
 try:
     _SIZES = json.loads((ROOT / "commons/data/artifact_sizes.json").read_text(encoding="utf-8"))["sizes"]
 except Exception:
@@ -89,20 +91,27 @@ def seq_maps(seq_name):
     return [m for m in maps if m]
 
 
+def footprint_m(token):
+    e = _SIZES.get(token)
+    return float(e.get("max_dimension_m", 1.5)) if e else 1.5
+
+
 def hero_of(seq_name, cross_freq):
-    """Signature artifact: most-placed in THIS sequence, but rare across the
-    whole spine (skip generic furniture)."""
+    """The sequence's signature artifact (most-placed here, rare across the
+    spine). Size is handled by the room, not by exclusion."""
     from collections import Counter
     freq = Counter()
     for m in seq_maps(seq_name):
         for t in set(tokens_of_map(m)):
-            if t not in GENERIC and fits_room(t):
+            if t not in GENERIC:
                 freq[t] += 1
     if not freq:
         return None
-    # score = local frequency / cross-sequence spread (signature, not filler)
-    best = max(freq, key=lambda t: freq[t] / (1 + cross_freq.get(t, 0)))
-    return best
+    ranked = sorted(freq, key=lambda t: -freq[t] / (1 + cross_freq.get(t, 0)))
+    for t in ranked:
+        if footprint_m(t) <= 15.0:      # fits a hall; true giants (koch 41m) skipped
+            return t
+    return ranked[0] if ranked else None
 
 
 def main():
@@ -167,6 +176,12 @@ def main():
         cx, cz = (c0 + c1) // 2, (r0 + r1) // 2
         if h:
             inter[cz][cx] = h
+        # department name (3t text on the north wall) — legibility
+        label = f"{i + 1}. {s['name'].upper()}"
+        utilities[r0][cx] = f"3t:{label}"
+        # phase colour-zoning: a tinted extra light in the room's corner
+        col = PHASE_COLOR.get(s.get("phase"), "#cccccc")
+        utilities[r0 + 1][c0 + 1] = f"el:2.5:0:{col}"
         placed_seq.append({"order": i + 1, "seq": s["name"], "phase": s.get("phase"),
                            "hero": h, "grid": [gr, gc], "cell": [cz, cx]})
 
@@ -258,6 +273,7 @@ def main():
                                 "t": {"type": "teleporter", "description": "exit past department 24"}},
         "settings": {"cube_size": 1.0, "gutter": 0.02, "show_grid": True, "enable_physics": True,
                      "auto_reveal_on_entry": False, "initial_tile_visibility": "all", "background": "dark",
+                     "bare_world": True,
                      "wall_segments": {"height": 3.6, "thickness": 0.18, "door_width": 2.6,
                                        "color": [0.85, 0.83, 0.78]}},
         "lighting": {"ambient_color": [0.46, 0.46, 0.5], "ambient_energy": 0.6,
