@@ -879,3 +879,24 @@ exactly as Palle said.
   walk_evaluator directly; encounter-order term; clearance repair; light
   strips / floor zones / mezzanine / oculus; Curator->genome->place.py loop;
   physics walkability probe; eye-level captures).
+
+## 2026-07-08 — furnish_gallery: empty architecture meets a real cast (#1, #13)
+
+Kept iterating the backlog. tools/furnish_gallery.py fills an evolved EMPTY
+champion with a real cast, matched by MEASURED footprint
+(artifact_sizes.json grid_cells): small -> plinths, wide -> table/platform/
+dais, flat -> wall/vitrine/cabinet. Hospitality (signage, infoboards,
+floating walls) kept.
+
+Furnished_CAP_1 (pockets champion + the Museum_Wings 16): 13 placed by fit
+(parametric_pendulum_waves fp5 -> large slot; newton_cradle fp2 -> wall;
+menger/cantor -> plinths), and the FOOTPRINT INTELLIGENCE fired: koch_curve
+(41 cells!) + radiolaria (13) flagged OVERSIZED (own room), random book page
+(fp4) unplaced (large slots taken). The giant line artifact is NOT jammed on
+a podium — the space knows its real size. Pathfinder-clean, captured: real
+devices in the pockets, EXIT preserved.
+
+This closes the architecture-first arc end to end: evolve empty room ->
+furnish with the cast the footprints fit. NEXT (backlog): hand oversized/
+unplaced to place.py for their own rooms; encounter-order fitness term; the
+Curator picking a taste-profile then furnishing its argument.

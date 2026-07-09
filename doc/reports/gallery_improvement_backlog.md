@@ -16,10 +16,11 @@ items are done. This is the steering surface for the auto-research loop.
 - ~~PATHFINDING + FOOTPRINT in fitness (reach_frac, approach_frac, detour)~~
 
 ## Pathfinding & footprints (deepen what just landed)
-1. **Real footprints, not proxies.** FOOTPRINT{} is a hand table; read the
-   measured `artifact_sizes.json` grid_cells + registry spatial_needs.clearance
-   per slot so a 2m table reserves its true AABB and clearance, and place.py's
-   sync_footprints feeds the same numbers.
+1. ~~**Real footprints at furnish time** — furnish_gallery.py matches the cast to
+   slots by MEASURED artifact_sizes.json grid_cells; giants (koch_curve 41c,
+   radiolaria 13c) flagged for their own room.~~ (Empty-slot measure still uses
+   the per-KIND table, which is correct — slots are sized by kind, not by an
+   artifact that isn't there yet.)
 2. **Wire walk_evaluator directly.** It already scores detour / encounter-order
    / backtrack with footprints — call it on the compiled gallery instead of the
    local BFS, so empty-gallery walkability uses the same instrument as placed maps.
@@ -41,8 +42,9 @@ items are done. This is the steering surface for the auto-research loop.
 ## The loop / integration
 12. **Curator compiles into a champion genome** — exhibition.json → pick a
     taste-profile → evolve the room → hang the argument into its slots.
-13. **place.py fills the slots** — feed a champion gallery + a cast to the real
-    placement engines (humanoid_walker / hybrid / sim_annealing).
+13. ~~**Fill the slots with a cast** — tools/furnish_gallery.py: empty champion +
+    cast -> footprint-matched furnished map (Furnished_CAP_1 done).~~ NEXT: hand
+    the oversized/unplaced to place.py for their own generated rooms.
 14. **Walk-verdict re-weighting** — Palle's spoken reactions → fitness weights →
     next generation (the human-in-the-loop step, still manual).
 15. **/gallery-dna interactivity** — click a champion → walk it in the live
