@@ -71,13 +71,18 @@ def perimeter(bl, sides=("g", "g", "g", "g")):
 # enclosure classes (Palle: "one, corner, all sides, 3 part, 4 already in"),
 # authored facing north, rotated at seed time
 ENCLOSURES = {
+    "none":    ("o", "o", "o", "o"),   # NO walls — the room is made by floor,
+                                       # level, pillars, things (the most
+                                       # important space; SANAA condition)
     "open":    ("g", "g", "g", "g"),   # all gated — the original contract
     "one":     ("s", "g", "g", "g"),   # one solid side
     "corner":  ("s", "s", "g", "g"),   # two adjacent solid
     "channel": ("s", "g", "s", "g"),   # two opposite solid — a corridor
     "three":   ("s", "s", "s", "g"),   # the U — one way in
+    "veil":    ("o", "g", "o", "g"),   # open flow one axis, doored the other
 }
-ENC_WEIGHTS = {"open": 3, "one": 3, "corner": 2, "channel": 2, "three": 1}
+ENC_WEIGHTS = {"none": 4, "open": 2, "one": 2, "corner": 2, "channel": 1,
+               "three": 1, "veil": 2}
 
 
 def rot_sides(sides, k):
@@ -213,7 +218,8 @@ def seed_map(cols, rows, seed, name):
                 if 0 <= nb[0] < rows and 0 <= nb[1] < cols and \
                         frozenset({(br, bc), nb}) in tree:
                     sides = list(encl[br][bc])
-                    sides[i] = "g"
+                    if sides[i] == "s":       # unseal solids only — never
+                        sides[i] = "g"        # add a wall to an open side
                     encl[br][bc] = tuple(sides)
     W, H = cols * B, rows * B
     layers = {"structure": [[SEA] * W for _ in range(H)],
