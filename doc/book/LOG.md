@@ -757,3 +757,20 @@ released; n_wedges in measures). Gallery_TER_DEMO (terrace, mixed mix,
 2 floating walls, signed): 4 wedges, pathfinder-clean, capture shows the
 prisms seated at both steps — the terraced hall is now climbable both
 ways. Champions recaptured, /gallery-dna refreshed.
+
+## 2026-07-08 — generation 7: grand stairs, the Marly flank, the loop home
+
+Three improvements in one breath:
+- GRAND STAIRS: boundaries >= 6 rows get a run of THREE adjacent wedges
+  (TER_DEMO: 4 -> 6 wedges) — the monumental ascent instead of the service
+  ramp.
+- THE MARLY FLANK: palette furniture placed on the upper terrace watching
+  over each stair head — the Cour Marly grammar, automated.
+- RETURN PATH, MEASURED: reverse BFS from the far end over the pathfinder's
+  own climb rules; return_path=True/False in every measure; +2 fitness in
+  every profile (museums are loops, not slides). TER_DEMO: return_path=True.
+
+Result: the terrace form RETURNED to the drama podium (DRA_3, terrace +
+4 floating walls) — wedges made verticality affordable to evolution.
+Champions + demo recaptured, /gallery-dna refreshed. The auto-research
+loop has now run four self-directed iterations in one day.

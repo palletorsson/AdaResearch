@@ -183,17 +183,29 @@ def compile_gallery(g, gid="X"):
     if len(set(hmap.values())) > 1:
         boundary_cols = sorted({c for (r, c) in floor
                                 if (r, c - 1) in floor and hmap[(r, c - 1)] == hmap[(r, c)] + 1})
+        flank_cells = []
         for bc in boundary_cols:
             rows_here = sorted([r for (r, c) in floor if c == bc
                                 and (r, bc - 1) in floor and hmap[(r, bc - 1)] == hmap[(r, bc)] + 1])
-            picks = [rows_here[len(rows_here) // 2]]
-            if len(rows_here) > 4:
-                picks.append(rows_here[1])
+            if len(rows_here) >= 6:
+                # GRAND STAIR: three adjacent wedges mid-boundary
+                mid = len(rows_here) // 2
+                picks = rows_here[mid - 1:mid + 2]
+            else:
+                picks = [rows_here[len(rows_here) // 2]]
+                if len(rows_here) > 4:
+                    picks.append(rows_here[1])
             for pr in picks:
                 if utilities[pr][bc] == " " and inter[pr][bc] == " ":
                     utilities[pr][bc] = "wp:0"
                     inter[pr][bc] = "RESERVED"
                     n_wedges += 1
+            # Cour Marly: flank the stair head on the UPPER terrace
+            if picks:
+                top, bot = min(picks), max(picks)
+                for fr in (top - 1, bot + 1):
+                    if (fr, bc - 1) in floor:
+                        flank_cells.append((fr, bc - 1))
 
     # interior architecture by form
     doors = 0
@@ -264,6 +276,8 @@ def compile_gallery(g, gid="X"):
     # podium motifs -- cycle the genome's furniture palette
     palette = PALETTES[g.get("furniture_mix", "classic")]
     put_count = [0]
+    if len(set(hmap.values())) > 1:
+        pass  # flank_cells placed after put() is defined (below)
 
     def put(r, c, kind_unused=None, token=None):
         if (r, c) in floor and inter[r][c] == " ":
@@ -275,6 +289,11 @@ def compile_gallery(g, gid="X"):
             inter[r][c] = tok
             slots.append((r, c, slot_kind, value))
             put_count[0] += 1
+
+    # the Marly flank: palette pieces watching over each stair head
+    if len(set(hmap.values())) > 1:
+        for (fr, fc) in flank_cells:
+            put(fr, fc)
 
     sp = g["podium_spacing"]
     if g["podium_motif"] == "axis_row":
@@ -451,11 +470,29 @@ def measure(data, slots):
         for j in range(i + 1, len(slots)):
             min_d = min(min_d, math.dist(slots[i][:2], slots[j][:2]))
 
+    # return path: can you walk BACK from the exit to the spawn (climbs need wedges)
+    return_path = False
+    spawn_pos = graph.spawn
+    exit_candidates = [p2 for p2 in floor_cells if p2 in reach]
+    if spawn_pos and exit_candidates:
+        far = max(exit_candidates, key=lambda p2: p2[1])
+        from collections import deque
+        back = {far}
+        q = deque([far])
+        while q:
+            cur = q.popleft()
+            for nb in graph.neighbors(cur):
+                if nb not in back:
+                    back.add(nb)
+                    q.append(nb)
+        return_path = spawn_pos in back
+
     g2 = data["map_info"]["gallery_genome"]
     hospitality = (1 if g2.get("infoboard", 0) else 0) + (1 if g2.get("signage", 0) else 0)
     return {"slots": capacity, "kinds": len(kinds), "n_niche": kinds.get("niche", 0),
             "hospitality": hospitality, "floating": kinds.get("floating_wall", 0),
             "wedges": data["map_info"].get("n_wedges", 0),
+            "return_path": return_path,
             "hang": hang, "vista": best_run, "doors": doors,
             "terraced": len(heights) > 1, "loop": has_loop,
             "min_slot_dist": round(min_d, 1), "reachable": reachable,
@@ -468,16 +505,16 @@ def fitness(profile, m):
     spacing = 2.0 if m["min_slot_dist"] >= 2.0 else -4.0
     if profile == "capacity":
         return (min(m["slots"], 20) * 1.2 + m["kinds"] * 2.0 + min(m["hang"], 110) * 0.06
-                + (4 if m["loop"] else 0) + m["hospitality"] * 1.5 + spacing)
+                + (4 if m["loop"] else 0) + m["hospitality"] * 1.5 + (2.0 if m.get("return_path") else 0.0) + spacing)
     if profile == "drama":
         return (m["vista"] * 0.9 + m["dais"] * 3.0 + (6 if m["terraced"] else 0)
                 + (4 if m["light"] == "dramatic" else 0) + min(m["hang"], 80) * 0.03
                 + m["floating"] * 2.5 + min(m["slots"], 10) * 0.5
-                + m["hospitality"] * 1.0 + spacing)
+                + m["hospitality"] * 1.0 + (2.0 if m.get("return_path") else 0.0) + spacing)
     # intimacy
     return (m["n_niche"] * 2.2 + m["doors"] * 1.2 - m["vista"] * 0.35
             + (4 if m["light"] == "dusk" else 0) + min(m["slots"], 14) * 0.8
-            + m["kinds"] * 1.5 + m["hospitality"] * 2.0 + spacing)
+            + m["kinds"] * 1.5 + m["hospitality"] * 2.0 + (2.0 if m.get("return_path") else 0.0) + spacing)
 
 
 # ── evolution ────────────────────────────────────────────────────────────────
