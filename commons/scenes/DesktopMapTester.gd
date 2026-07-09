@@ -195,6 +195,13 @@ func _position_player_at_spawn(map_data: Dictionary) -> void:
 	if not player:
 		return
 
+	# Honour settings.start_fly — large exploratory maps (e.g. the Spine Museum)
+	# spawn in fly mode so the visitor can never get stuck. Toggle back with F.
+	var settings: Dictionary = map_data.get("settings", {})
+	if bool(settings.get("start_fly", false)) and "fly_mode" in player:
+		player.fly_mode = true
+		print("DesktopMapTester: start_fly -> player in FLY mode (F toggles)")
+
 	# Look for spawn point in utilities layer
 	var layers: Dictionary = map_data.get("layers", {})
 	var utilities: Array = layers.get("utilities", [])

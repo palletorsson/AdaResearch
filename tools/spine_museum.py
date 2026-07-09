@@ -277,7 +277,7 @@ def main():
                                 "t": {"type": "teleporter", "description": "exit past department 24"}},
         "settings": {"cube_size": 1.0, "gutter": 0.02, "show_grid": True, "enable_physics": True,
                      "auto_reveal_on_entry": False, "initial_tile_visibility": "all", "background": "dark",
-                     "bare_world": True,
+                     "bare_world": True, "start_fly": True,
                      "wall_segments": {"height": 3.6, "thickness": 0.18, "door_width": 2.6,
                                        "color": [0.85, 0.83, 0.78]}},
         "lighting": {"ambient_color": [0.46, 0.46, 0.5], "ambient_energy": 0.6,
