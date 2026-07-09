@@ -113,35 +113,38 @@ func _physics_process(delta: float) -> void:
 	else:
 		_fly_key_held = false
 
+	var input_dir := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+	var speed = sprint_speed if Input.is_key_pressed(KEY_SHIFT) else walk_speed
+
 	if fly_mode:
-		var vy := 0.0
+		# Fly toward where you LOOK: forward/back follow the camera's full 3D
+		# look direction (pitch included), so W climbs when you look up.
+		var basis: Basis = camera.global_transform.basis if camera else transform.basis
+		var dir := (basis * Vector3(input_dir.x, 0, input_dir.y))
+		if dir.length() > 0.001:
+			dir = dir.normalized()
+		# Space / Ctrl add pure vertical on top of the look direction.
 		if Input.is_key_pressed(KEY_SPACE):
-			vy += 1.0
+			dir.y += 1.0
 		if Input.is_key_pressed(KEY_CTRL):
-			vy -= 1.0
-		var fly_speed: float = sprint_speed if Input.is_key_pressed(KEY_SHIFT) else walk_speed
-		velocity.y = vy * fly_speed
-	elif use_gravity:
+			dir.y -= 1.0
+		velocity = dir * speed
+		move_and_slide()
+		return
+
+	# ── walk mode ────────────────────────────────────────────────────────
+	if use_gravity:
 		if not is_on_floor():
 			velocity.y -= gravity * delta
-
 		if allow_jump and Input.is_action_just_pressed("ui_accept") and is_on_floor():
 			velocity.y = jump_velocity
 	else:
 		velocity.y = 0.0
 
-	# Get input direction
-	var input_dir := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-
-	# Calculate movement direction relative to camera
 	var direction := Vector3.ZERO
 	if input_dir != Vector2.ZERO:
 		direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 
-	# Apply speed (sprint with shift key)
-	var speed = sprint_speed if Input.is_key_pressed(KEY_SHIFT) else walk_speed
-
-	# Apply movement
 	if direction:
 		velocity.x = direction.x * speed
 		velocity.z = direction.z * speed
