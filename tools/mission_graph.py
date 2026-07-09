@@ -270,15 +270,17 @@ def draw_feature(layers, feature, oy, ox, F):
             _wall(layers, oy + r, ox + mid + 2, "e")
             _wall(layers, oy + min(r + 1, F - 1), ox + mid - 2, "w")
     elif feature == "chapel":
-        # the hut stays intimate whatever the hall size: 4x4, one door
-        h0 = mid - 2
-        for c in range(h0, h0 + 4):
-            if c != h0 + 1:
+        # a real room in the hall: 6x6 hut, one 2-wide door facing the walk
+        S = min(6, F - 2)
+        h0 = (F - S) // 2
+        door = (h0 + S // 2 - 1, h0 + S // 2)
+        for c in range(h0, h0 + S):
+            if c not in door:
                 _wall(layers, oy + h0, ox + c, "n")
-            _wall(layers, oy + h0 + 3, ox + c, "s")
-        for r in range(h0, h0 + 4):
+            _wall(layers, oy + h0 + S - 1, ox + c, "s")
+        for r in range(h0, h0 + S):
             _wall(layers, oy + r, ox + h0, "w")
-            _wall(layers, oy + r, ox + h0 + 3, "e")
+            _wall(layers, oy + r, ox + h0 + S - 1, "e")
     # field: nothing -- the breathing room
 
 
@@ -356,8 +358,8 @@ def build_halls(seq, name):
         for j, e in enumerate(entries):
             ox = AISLE + j * (F + AISLE)
             oy = y + AISLE
-            budget_fp = 2.0 if e["feature"] == "chapel" else float(F - 2)
-            budget_h = 2.8 if e["feature"] == "chapel" else 3.4
+            budget_fp = 4.0 if e["feature"] == "chapel" else float(F - 2)
+            budget_h = 3.0 if e["feature"] == "chapel" else 3.4
             chosen, swapped = resolve_cast(e["cast"], e["alts"], budget_fp, budget_h)
             e["cast"] = chosen
             if swapped:
