@@ -38,6 +38,10 @@ var _style: String = ""
 var _mat_panel: StandardMaterial3D
 var _mat_dark: StandardMaterial3D
 var _mat_accent: StandardMaterial3D
+# light palettes (config.palettes): zone rects in cell coords, each with an
+# `accent` [r,g,b] — the emissive line changes register per zone (mission
+# act-halls: amber arrival, cyan work, red depth). No palettes = one amber.
+var _zone_accents: Array = []   # [{x0,y0,x1,y1, mat}]
 const HOVER := 0.06
 const KICK_H := 0.28
 const ACCENT_H := 0.08
@@ -85,6 +89,22 @@ func generate_segments(walls_layer: Array, structure_layer: Array, config: Dicti
 		_mat_accent.emission_enabled = true
 		_mat_accent.emission = Color(1.0, 0.55, 0.15)
 		_mat_accent.emission_energy_multiplier = 1.6
+		_zone_accents.clear()
+		for p in config.get("palettes", []):
+			if not (p is Dictionary and p.has("rect") and p.has("accent")):
+				continue
+			var rect: Array = p["rect"]
+			var acc: Array = p["accent"]
+			if rect.size() < 4 or acc.size() < 3:
+				continue
+			var m := StandardMaterial3D.new()
+			var col2 := Color(acc[0], acc[1], acc[2])
+			m.albedo_color = col2
+			m.emission_enabled = true
+			m.emission = col2
+			m.emission_energy_multiplier = 1.6
+			_zone_accents.append({"x0": int(rect[0]), "y0": int(rect[1]),
+					"x1": int(rect[2]), "y1": int(rect[3]), "mat": m})
 
 	var total := cube_size + gutter
 	var count := 0
@@ -129,8 +149,18 @@ func _cell_floor_y(col: int, row: int, structure_layer: Array, total: float) -> 
 			return GridCommon.surface_world_y(h, total, cube_size * 0.5)
 	return 0.0
 
+var _current_accent: StandardMaterial3D = null
+
+func _accent_for(col: int, row: int) -> StandardMaterial3D:
+	for z in _zone_accents:
+		if col >= z["x0"] and col <= z["x1"] and row >= z["y0"] and row <= z["y1"]:
+			return z["mat"]
+	return _mat_accent
+
 func _build_edge(col: int, row: int, edge: String, is_door: bool,
 		structure_layer: Array, total: float) -> void:
+	if _style == "labwall":
+		_current_accent = _accent_for(col, row)
 	var center: Vector3 = GridCommon.grid_to_world_position(Vector3i(col, 0, row), cube_size, gutter)
 	var base_y := _cell_floor_y(col, row, structure_layer, total)
 	var half := total * 0.5
@@ -209,8 +239,9 @@ func _dress_labwall(body: StaticBody3D, length: float, height: float, along_x: b
 	var groove_y := panel_bottom + panel_h * 0.38
 	body.add_child(_box_mesh(_seg_size(length, 0.09, t * 1.06, along_x), _mat_dark,
 			Vector3(0, groove_y, 0)))
-	# the amber line — the Half-Life accent
-	body.add_child(_box_mesh(_seg_size(length, ACCENT_H, t * 1.18, along_x), _mat_accent,
+	# the accent line — amber by default, zone-colored under light palettes
+	var acc_mat := _current_accent if _current_accent != null else _mat_accent
+	body.add_child(_box_mesh(_seg_size(length, ACCENT_H, t * 1.18, along_x), acc_mat,
 			Vector3(0, accent_y, 0)))
 	body.add_child(_box_mesh(_seg_size(length, TRIM_H, t * 1.25, along_x), _mat_dark,
 			Vector3(0, trim_y, 0)))

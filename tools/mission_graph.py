@@ -262,13 +262,19 @@ def build_halls(seq, name):
         "depth":   {"plain": 3, "hazard": 2, "rib": 3, "beam": 2, "slit": 2,
                     "conduit": 2, "vent": 1},
     }
+    # the light register: each palette carries its accent color — the wall's
+    # emissive line shifts as you descend (VR labwall + any future consumer)
+    ACCENTS = {"arrival": [1.0, 0.62, 0.18],   # warm amber
+               "work":    [0.25, 0.85, 1.0],   # cyan
+               "depth":   [1.0, 0.25, 0.15]}   # red
     def act_palette(k):
         if k == 0:
             return "arrival"
         return "depth" if k == rows - 1 else "work"
     palettes = [{"act": r, "name": act_palette(r),
                  "rect": [0, r * B, W - 1, (r + 1) * B - 1],
-                 "weights": PALETTES[act_palette(r)]} for r in range(rows)]
+                 "weights": PALETTES[act_palette(r)],
+                 "accent": ACCENTS[act_palette(r)]} for r in range(rows)]
     data = {"map_info": {"name": name, "lookup_name": name, "title": name,
                          "mission_graph": {"seq": seq, "mode": "act-halls",
                                            "acts": lens, "doors": doors}},
