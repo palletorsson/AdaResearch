@@ -1,0 +1,155 @@
+{
+ "results": [
+  {
+   "seed": 11,
+   "isolated": 55.57,
+   "isolated_trace": [
+    {
+     "gen": 1,
+     "best_generalist": 50.5
+    },
+    {
+     "gen": 2,
+     "best_generalist": 53.73
+    },
+    {
+     "gen": 3,
+     "best_generalist": 55.57
+    },
+    {
+     "gen": 4,
+     "best_generalist": 55.57
+    },
+    {
+     "gen": 5,
+     "best_generalist": 55.57
+    }
+   ],
+   "migration": 60.53,
+   "migration_trace": [
+    {
+     "gen": 1,
+     "best_generalist": 50.5
+    },
+    {
+     "gen": 2,
+     "best_generalist": 53.73
+    },
+    {
+     "gen": 3,
+     "best_generalist": 60.53
+    },
+    {
+     "gen": 4,
+     "best_generalist": 60.53
+    },
+    {
+     "gen": 5,
+     "best_generalist": 60.53
+    }
+   ],
+   "delta": 4.96
+  },
+  {
+   "seed": 23,
+   "isolated": 53.6,
+   "isolated_trace": [
+    {
+     "gen": 1,
+     "best_generalist": 52.1
+    },
+    {
+     "gen": 2,
+     "best_generalist": 52.1
+    },
+    {
+     "gen": 3,
+     "best_generalist": 52.1
+    },
+    {
+     "gen": 4,
+     "best_generalist": 53.6
+    },
+    {
+     "gen": 5,
+     "best_generalist": 53.6
+    }
+   ],
+   "migration": 60.1,
+   "migration_trace": [
+    {
+     "gen": 1,
+     "best_generalist": 52.1
+    },
+    {
+     "gen": 2,
+     "best_generalist": 52.1
+    },
+    {
+     "gen": 3,
+     "best_generalist": 57.88
+    },
+    {
+     "gen": 4,
+     "best_generalist": 60.1
+    },
+    {
+     "gen": 5,
+     "best_generalist": 60.1
+    }
+   ],
+   "delta": 6.5
+  },
+  {
+   "seed": 37,
+   "isolated": 46.75,
+   "isolated_trace": [
+    {
+     "gen": 1,
+     "best_generalist": 45.67
+    },
+    {
+     "gen": 2,
+     "best_generalist": 46.75
+    },
+    {
+     "gen": 3,
+     "best_generalist": 46.75
+    },
+    {
+     "gen": 4,
+     "best_generalist": 46.75
+    },
+    {
+     "gen": 5,
+     "best_generalist": 46.75
+    }
+   ],
+   "migration": 53.38,
+   "migration_trace": [
+    {
+     "gen": 1,
+     "best_generalist": 45.67
+    },
+    {
+     "gen": 2,
+     "best_generalist": 46.75
+    },
+    {
+     "gen": 3,
+     "best_generalist": 53.38
+    },
+    {
+     "gen": 4,
+     "best_generalist": 53.38
+    },
+    {
+     "gen": 5,
+     "best_generalist": 53.38
+    }
+   ],
+   "delta": 6.63
+  }
+ ],
+ "verdict": "MIGRATION WINS"
+}

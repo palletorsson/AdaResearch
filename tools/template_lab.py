@@ -79,9 +79,18 @@ def main() -> int:
         profile = arg("profile", "capacity")
         gens = int(arg("gens", "2"))
         pop = int(arg("pop", "10"))
-        # quick evolution: reuse ge.evolve if its signature fits, else inline
+        if profile == "generalist" or flag("migration"):
+            # the proven rule (template_migration_research: 3/3 seeds, +5..+6.6):
+            # capacity+intimacy co-evolve with migrant exchange; best generalist wins
+            from template_migration_research import evolve_pair
+            g, s, _trace = evolve_pair(rng, migration=True)
+            print(json.dumps({"ok": True, "profile": "generalist", "genome": g,
+                              "score": round(s, 3), "seed": seed}))
+            return 0
+        # engine's own loop returns ([(fitness, genome, measure), ...], history)
         try:
-            champ, score = ge.evolve(profile, rng)  # engine's own loop
+            scored, _history = ge.evolve(profile, rng)
+            score, champ, _m = scored[0]
             print(json.dumps({"ok": True, "profile": profile, "genome": champ,
                               "score": round(score, 3), "seed": seed}))
             return 0
