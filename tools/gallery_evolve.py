@@ -186,8 +186,9 @@ def compile_gallery(g, gid="X"):
 
     # wedges: walkable prisms to climb BACK up the terraces (wp:0 = ridge
     # west, sloping down east — matches west-high terraces). Placed on the
-    # LOWER (east) cell of each west-high boundary; wp:180 = ramp rises WEST
-    # (verified in Test_WedgeRotations against AdvancedLab/Chamber_Color).
+    # LOWER (east) cell of each west-high boundary; wp:90 = ramp rises WEST
+    # (verified empirically in Test_WedgeCube: :90 vertical-face-to-plateau,
+    # hypotenuse to the low floor - the climbable ramp; :180 ramps N/S).
     n_wedges = 0
     if len(set(hmap.values())) > 1:
         boundary_cols = sorted({c for (r, c) in floor
@@ -206,7 +207,7 @@ def compile_gallery(g, gid="X"):
                     picks.append(rows_here[1])
             for pr in picks:
                 if utilities[pr][bc] == " " and inter[pr][bc] == " ":
-                    utilities[pr][bc] = "wp:180"
+                    utilities[pr][bc] = "wp:90"
                     inter[pr][bc] = "RESERVED"
                     n_wedges += 1
             # Cour Marly: flank the stair head on the UPPER terrace

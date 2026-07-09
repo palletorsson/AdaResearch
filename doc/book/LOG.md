@@ -828,3 +828,24 @@ step. Component loads (capture exit 0; the isolated --check-only
 NOTE: flat-ground wp (rare, decorative) now sits fully ON the floor as a
 1m ramp instead of half-sunk — arguably more correct ramp semantics. If any
 existing map relied on the sunk look, revert is one line.
+
+## 2026-07-08 — wedge rotation corrected: :90, not :180 (Palle called it)
+
+Palle: for the wedge test with :90, or put a cube in front. Both were the
+right move — my :180 (chosen from ambiguous static data: AdvancedLab used
+:180 for west-high but the auto-generated Color_Pillar_compare_* maps used
+:90) was wrong.
+
+Built Test_WedgeCube (four wedges, each with a height-2 cube directly WEST
+= the plateau to climb onto, rotations 0/90/180/270). The capture is
+decisive: **:90 is the west-climbing ramp** (vertical face against the
+plateau, hypotenuse down to the low floor - a real ascending slope you walk
+up). :180 ramps N/S - it looked 'tucked' but was disconnected from the
+plateau. Convention: :90 climb WEST, :270 climb EAST, :0/:180 the N/S axis.
+
+Fixed gallery_evolve (wp:180 -> wp:90), prop_isolation, regenerated
+champions + Prop_wedge + Gallery_TER_DEMO. Prop_wedge now shows the
+climbable slope face rising to the plateau. Lesson: wedge rotation is
+INVISIBLE to the pathfinder (cosmetic for reachability) AND ambiguous in
+the corpus - the cube-in-front isolation test is the only ground truth,
+exactly as Palle said.
