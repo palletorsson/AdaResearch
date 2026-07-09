@@ -426,6 +426,12 @@
       "topic": "primitives voice",
       "insight": "garden_listener voice count does not resolve commons/primitives/*/ folder scripts; @identity added to point+4 solids left it at 61% — resolver targets a narrower set than registry scene_path",
       "lod": 3
+    },
+    {
+      "timestamp": "2026-07-09T09:57:04.637671+00:00",
+      "topic": "garden voice metric",
+      "insight": "primitives voice heat item is uncoolable by @identity: primitives sequence is voice-saturated on all scripted artifacts; the 22 voiceless are scriptless .tscn props. Scripted-voiceless artifacts live in the gallery sequence (Primitives_N galleries), not primitives. Voice-enrich there, not here.",
+      "lod": 3
     }
   ]
 }

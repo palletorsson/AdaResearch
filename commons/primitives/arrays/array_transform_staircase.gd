@@ -6,6 +6,15 @@ class_name ArrayTransformStaircase
 ## Three modes showing the three fundamental transformations
 ## Each cumulative. Each strict.
 
+# @identity
+# essence: an array of identical elements stepped by one affine transform — position[i]=i×offset, rotation[i]=i×angle, or scale[i]=base×factor^i
+# desire: the learner switches mode and sees that translate, rotate, and scale are the same act — a rule applied i times — differing only in which channel it accumulates
+# critical_parameter: the mode enum (TRANSLATE/ROTATE/SCALE); with count and the per-mode step it decides whether the staircase walks, fans, or grows
+# triggers: any exported setter calls _rebuild; mode-guarded so a translate step only rebuilds in translate mode
+# emerges: that repetition-with-a-rule is the seed of every array primitive — geometry is a loop index run through a transform
+# needs: [has three live transform modes and a count slider [has], missing a mixed mode that composes all three at once]
+# relationships: sibling to the point/line/grid primitives it multiplies; parent to every later tiling and L-system that repeats a motif under a transform
+# truth: to copy is never neutral — each copy carries the transform that made it, and the difference is the pattern
 enum TransformMode {
 	TRANSLATE,  # position[i] = i × offset
 	ROTATE,     # rotation[i] = i × angle  

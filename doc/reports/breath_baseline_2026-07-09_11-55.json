@@ -1,0 +1,34 @@
+{
+  "timestamp": "2026-07-09T11:55",
+  "phase": "baseline",
+  "pipeline_summary": {
+    "sequences_scored": 24,
+    "mean_head": 6.0909,
+    "note": "23 of 24 pinned at stage 6 vr_testing (headset-gated); randomness COMPLETE"
+  },
+  "heat_map_top_5": [
+    {
+      "museum": 80
+    },
+    {
+      "floor": 65
+    },
+    {
+      "garden_voice": 60
+    },
+    {
+      "primitives_voice": 60
+    }
+  ],
+  "garden_health": {
+    "voice_coverage_pct": 61,
+    "total_artifacts": 2470,
+    "voiced": 1522,
+    "embodied": 492,
+    "phantom_limbs": 999
+  },
+  "release_gates": {
+    "overall": "PASS",
+    "enabled": "4/4"
+  }
+}

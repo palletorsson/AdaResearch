@@ -331,6 +331,21 @@
           "note": "CROSS-REFERENCE / scoping. prop-009 (metric-observability pre-check: do not commit to a lever, or bank a success, on a metric that cannot resolve the files the lever edits) is the CONSUMER-side complement to prop-005's PRODUCER-side resolver fix -- both trace to the SAME root: garden_listener.find_gd resolves a narrower file set (105 primitives .gd) than the 252 registry scene_path entries the breather edits against, so folder-style commons/primitives/*/ scripts are invisible to the voice metric. That same resolver gap is prop-005's 07-04 (stem-match), 07-05 (sibling-only), and 07-06 (folder-set 105-vs-252) evidence -- THREE consecutive breaths (07-04/05/06) of real primitives voice work under-credited, coverage pinned ~60-61%. RELATIONSHIP TO prop-008: today's breath followed prop-008's layer-first rule into a sub-tier the metric cannot see, banking 5 invisible voice adds -- so prop-008's 'exhaust every intra-focus sub-tier first' should be GATED by prop-009's observability check (only rotate into a sub-tier whose work a scorer can credit). RECOMMENDATION: apply prop-009 together with prop-005 (the resolver fix removes the blind spot; the pre-check stops the cycle trusting it until fixed) and with prop-003/prop-008 as the observability gate on the metric-by-available-lever ladder. Fresh proposal, 1 occurrence-cluster spanning 3 breaths; 0 failures, so this is a scoping note, not a threshold event."
         }
       ]
+    },
+    {
+      "id": "prop-heatmap-voice-coolability",
+      "created": "2026-07-09T11:55",
+      "skill": "heat_map_generator.py (tool) + ada-breather cooling filter",
+      "status": "proposed",
+      "evidence": "The 'primitives voice' heat item (60 deg) has been surfaced and attempted across 4 consecutive breaths (2026-07-04/05/06/09), each returning pipeline delta 0. Root cause (proven 2026-07-09): the primitives SEQUENCE is voice-saturated on ALL scripted artifacts (83/83 scripted voiced); the 22 voiceless remainder are ALL scriptless .tscn props (NO_GD), which cannot be voiced by @identity enrichment — only by authoring new scripts. The heat item is structurally uncoolable by the autonomous voice lever, yet keeps ranking at 60 deg and luring breaths.",
+      "proposed_change": "In heat_map_generator.py, compute the 'voice' deep-discovery signal from ENRICHABLE-voiceless only (artifacts where find_gd resolves a .gd that lacks @identity), excluding NO_GD scriptless artifacts. A sequence whose entire voiceless remainder is scriptless should NOT emit a voice heat item (it needs a BUILD task, surfaced separately). Alternatively, add a 'scriptless_voiceless -> author scripts' signal distinct from 'enrichable_voiceless -> add @identity'.",
+      "expected_improvement": "Stops repeat breaths on an impossible lever; redirects the voice lever to sequences with real enrichable-voiceless artifacts (gallery: 531; and any GROWING sequence with NO_ID scripted artifacts).",
+      "breath_refs": [
+        "2026-07-04T09:00",
+        "2026-07-05T09:00",
+        "2026-07-06T09:00",
+        "2026-07-09T11:55"
+      ]
     }
   ]
 }

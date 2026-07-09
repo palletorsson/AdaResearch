@@ -2868,6 +2868,55 @@
         "commons/primitives/bipyramid/bipyramid.gd"
       ],
       "duration_minutes": 12
+    },
+    {
+      "breath_id": "2026-07-09T11:55",
+      "mode": "full",
+      "baseline_avg": 6.0909,
+      "post_avg": 6.0909,
+      "delta": 0.0,
+      "items_attempted": [
+        "array_translate/rotate/scale@identity",
+        "cross_lines@identity",
+        "arch@identity",
+        "diamond@identity",
+        "crystal@identity"
+      ],
+      "items_succeeded": [
+        "array_transform_staircase.gd@identity",
+        "cross_lines@identity",
+        "arch@identity",
+        "diamond@identity",
+        "crystal@identity"
+      ],
+      "items_failed": [],
+      "failure_reasons": {},
+      "skills_used": [
+        "ada-breather",
+        "garden_listener",
+        "release_gates"
+      ],
+      "skill_effectiveness": {
+        "ada-breather": {
+          "calls": 1,
+          "succeeded": 1,
+          "failed": 0
+        }
+      },
+      "discoveries": [
+        "ROOT CAUSE FOUND for the 'primitives voice' heat item that 3 prior breaths (07-04/05/06) bounced off with delta 0: the garden voice metric counts artifact-INSTANCES per SEQUENCE via get_sequence_artifacts (map interactables layer). In the `primitives` SEQUENCE, voiced=83/105 and ALL 22 voiceless are NO_GD (scriptless .tscn display props). ZERO are 'no @identity'. Every SCRIPTED primitives artifact is already voiced. So the 'primitives voice' item is STRUCTURALLY UNCOOLABLE by @identity enrichment — the remaining gap needs NEW SCRIPTS authored, a build task not an enrichment task. The heat item is a false lure.",
+        "The genuinely-voiceless scripted artifacts the last 3 breaths (and this one) enriched actually live in the `gallery` SEQUENCE's 'Primitives_N Artifact Gallery' maps, not the `primitives` sequence maps. Voicing them raises gallery coverage (now 191/722), never primitives'. gallery has a 531-artifact voice backlog = the real forward lever if voice-enrichment continues.",
+        "PROVEN this breath: 5 files / 7 artifact-names voiced (array_transform_staircase.gd backs translate+rotate+scale), all read 8/8 @identity fields, all credited in gallery, release gates PASS. Grounded-in-code, not slop.",
+        "LEVER LADDER UPDATE: (1) primitives subtitle — EXHAUSTED; (2) primitives @identity voice — EXHAUSTED (all scripted primitives voiced; remainder scriptless); (3) rotate voice-enrichment to gallery (531 voiceless) or a GROWING sequence with scripted-voiceless artifacts (hazards, wavefunctions). Heat map should stop surfacing 'primitives voice' — see skill_evolution_proposals."
+      ],
+      "files_changed": [
+        "commons/primitives/arrays/array_transform_staircase.gd",
+        "commons/primitives/line/cross_lines.gd",
+        "commons/primitives/arch/arch.gd",
+        "commons/primitives/diamond/diamond.gd",
+        "commons/primitives/crystal/crystal.gd"
+      ],
+      "duration_minutes": 20
     }
   ]
 }

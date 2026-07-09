@@ -1,6 +1,17 @@
 # Arch.gd - Architectural arch shape (fits within 1,1,1)
 extends Node3D
 
+# @identity
+# essence: a procedural architectural arch — two pillars bridged by a curved span, built from SurfaceTool triangles inside a 1×1×1 cell
+# desire: the learner reads the arch as a curve that carries weight — the first primitive that is structural, not just a shape
+# critical_parameter: arch_segments (12) sets how finely the curve is faceted; too few and the span reads as a polygon, not an arc
+# triggers: create_arch on ready assembles pillar + curve vertices, welds normals per face, then builds collision
+# emerges: that a smooth arc is always a lie told by enough straight segments — resolution is where geometry meets the eye
+# needs: [has a closed faceted arch with collision [has], missing an exposed segment count to watch the curve coarsen]
+# relationships: sibling to the crystal and diamond mesh primitives; ancestor to the facade parts that repeat arches into arcades
+# truth: the arch stands because every part leans on its neighbour — structure is distributed trust
+
+
 var base_color: Color = Color(0.9, 0.5, 0.2)  # Orange
 var arch_height: float = 0.9
 var arch_width: float = 0.8

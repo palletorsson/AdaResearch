@@ -1,6 +1,17 @@
 # Crystal.gd - Sharp crystalline polyhedron with faceted surfaces
 extends Node3D
 
+# @identity
+# essence: a hexagonal-prism crystal with pyramidal terminations — stacked hexagons of shifting radius fan-triangulated into clean facets
+# desire: the learner reads mineral form as rule-bound growth — six-fold symmetry repeated up an axis, tapering to a point
+# critical_parameter: the per-ring radius (base 0.8 → mid 0.9 → upper 0.6); the taper profile is what separates quartz from a plain prism
+# triggers: create_crystal on ready lays the hexagon rings, then fan-triangulates each face for sharp faceting
+# emerges: that crystalline order is symmetry plus a growth axis — the same primitive that governs snowflakes and lattices
+# needs: [has a faceted tapering hex-crystal [has], missing crystal_type actually switching quartz/amethyst/emerald geometry]
+# relationships: sibling to diamond in the faceted-gem family; distant kin to the lattice and tiling primitives that share its symmetry
+# truth: a crystal is a rule made visible — grow the same angle long enough and matter remembers the geometry
+
+
 var base_color: Color = Color(0.3, 0.8, 1.0)  # Crystal blue
 var crystal_type: String = "quartz"  # quartz, amethyst, emerald, diamond
 

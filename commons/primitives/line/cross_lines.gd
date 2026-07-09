@@ -2,6 +2,17 @@ extends Node3D
 
 # Script to create an X cross with 1 meter diagonal lines
 
+# @identity
+# essence: two 1-metre diagonal lines crossed into an X — the simplest figure where lines meet and a point is born from intersection
+# desire: the learner sees that a point can be defined not by placement but by where two lines agree — coordinates as consequence, not given
+# critical_parameter: the two line endpoints (±0.5 corners); rotate or shift one and the crossing point slides off centre
+# triggers: setup_cross on ready wires each child lineContainer via set_positions + set_line_properties
+# emerges: that intersection is a second way to make a point — the grid's cells are nothing but a field of such crossings
+# needs: [has two configured diagonals meeting at origin [has], missing a movable endpoint to watch the crossing point track]
+# relationships: made of the line primitive; parent to the grid, whose every node is a crossing like this one
+# truth: where two commitments cross, a location appears that neither line chose alone
+
+
 func _ready():
 	setup_cross()
 

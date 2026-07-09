@@ -1,6 +1,17 @@
 # Diamond.gd - Elongated octahedron primitive
 extends Node3D
 
+# @identity
+# essence: an elongated octahedron — a top pyramid and a bottom pyramid sharing a mid-ring, stretched off the regular solid
+# desire: the learner sees the octahedron's symmetry deliberately broken — the same vertex-ring, but the poles pulled unequal
+# critical_parameter: the top point at y=0.6 against the bottom at y=-0.4; the asymmetry is what makes it a gem, not a solid
+# triggers: create_diamond on ready fans the pyramid faces and splits the mid-band quads into triangles
+# emerges: that a named shape is a family of proportions — move one vertex and octahedron becomes diamond becomes spindle
+# needs: [has a two-pyramid faceted body [has], missing a stretch parameter to sweep between octahedron and diamond]
+# relationships: elongated cousin of the octahedron primitive; sibling to crystal in the faceted-gem family
+# truth: perfection is a special case of proportion — most beauty lives in the deliberate asymmetry
+
+
 var base_color: Color = Color(0.9, 0.0, 0.0)  # Red from pride colors
 
 func _ready():
