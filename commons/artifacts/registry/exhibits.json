@@ -17,6 +17,15 @@
    "category": "exhibits",
    "complexity": "beginner",
    "description": "An empty glass case on a dark base - the wall-side affordance for small precious things. Sets the visitor's pausing rhythm before the collection exists."
+  },
+  "exhibit_furniture": {
+   "lookup_name": "exhibit_furniture",
+   "scene": "res://commons/artifacts/exhibits/exhibit_furniture.tscn",
+   "class_name": "ExhibitFurniture",
+   "name": "Exhibit Furniture (the display family)",
+   "category": "exhibits",
+   "complexity": "intermediate",
+   "description": "The display-furniture family as one parametric artifact - kind selects the body: floating_wall (MoMA hover with contact-shadow accent), plinth s/m/l, hollow_plinth, platform, table_2m, vitrine_tall, cabinet, infoboard, sign_exit, sign_fire (with the little red cylinder). All empty, all waiting. Config: kind, size, w, h."
   }
  }
 }

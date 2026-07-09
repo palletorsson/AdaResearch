@@ -700,3 +700,34 @@ RESULTS (doc/reports/gallery_dna_research.md):
 NEXT: Palle walks CAP_1 / DRA_1 / INT_1 -> verdicts re-weight the
 fitness -> generation 6+; then the Curator compiles exhibitions INTO
 champion genomes (architecture library complete: empty, scored, evolved).
+
+## 2026-07-08 — gallery evolution v3: the furniture vocabulary + hospitality
+
+Palle: MoMA floating wall (hover + contact-shadow accent), footprint
+sizes, plinths, hollow, platforms, 2m tables, tall vitrines, cabinets,
+infoboards, fire-extinguisher signs — keep auto-research.
+
+Built exhibit_furniture (one parametric artifact, kind selects the body):
+floating_wall (hover 0.14m, unshaded dark contact-shadow quad in the gap
+= the cheap accent, steel hangers above), plinth s/m/l, hollow_plinth,
+platform, table_2m, vitrine_tall, cabinet (3 shelves), infoboard (angled
+lectern, baked INFO), sign_exit (green, double-faced), sign_fire (red +
+the little extinguisher cylinder). Registry exhibits.json extended; probe
+caught a fresh Variant-inference compile error (Dictionary.get -> var :=)
+— the guard earns its keep the same day it was built.
+
+gallery_evolve v3: genome + furniture_mix palettes (classic/mixed/
+cabinet/full), floating_walls 0-4 (interactables — hover, don't block the
+floor), signage + infoboard genes; capacity counts slot VALUE (cabinet=3,
+table=2, floating wall=2 faces); hang += floating faces.
+
+RESULTS v3 (all profiles up ~20 pts): CAPACITY -> pockets + full mix +
+floats + signage (10 furniture kinds); DRAMA -> basilica/terrace + FOUR
+floating walls under dramatic light (the hover conquered drama); INTIMACY
+-> dusk basilica, full mix, 46 slots, climbing 45->60 over 5 gens.
+FINDING: every champion in every profile chose signage=1 — HOSPITALITY
+WON UNIVERSALLY. Even drama wants the fire sign. Care reads in every
+taste; the wayfinding layer is not decoration, it is trust.
+
+Capture: the furnished basilica reads as an institution — table, vitrines,
+cabinets, FIRE mid-nave, EXIT by the teleporter.

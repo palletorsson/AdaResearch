@@ -48,6 +48,27 @@ ELITE = 4
 CHAMPIONS = 4          # per profile written to disk
 
 FORMS = ["court", "axis", "loop", "basilica", "cross", "rotunda", "pockets", "terrace"]
+
+# furniture palettes: what the motif plants (token, slot_kind, slot_value)
+PALETTES = {
+    "classic": [("exhibit_podium", "podium", 1),
+                ("exhibit_furniture#kind:plinth#size:m", "plinth_m", 1),
+                ("exhibit_furniture#kind:vitrine_tall", "vitrine_tall", 1)],
+    "mixed":   [("exhibit_furniture#kind:plinth#size:s", "plinth_s", 1),
+                ("exhibit_furniture#kind:plinth#size:l", "plinth_l", 1),
+                ("exhibit_furniture#kind:table_2m", "table", 2),
+                ("exhibit_furniture#kind:platform#size:l", "platform", 2),
+                ("exhibit_furniture#kind:hollow_plinth", "hollow", 1)],
+    "cabinet": [("exhibit_furniture#kind:cabinet", "cabinet", 3),
+                ("exhibit_furniture#kind:vitrine_tall", "vitrine_tall", 1),
+                ("exhibit_vitrine", "vitrine", 1)],
+    "full":    [("exhibit_podium", "podium", 1),
+                ("exhibit_furniture#kind:table_2m", "table", 2),
+                ("exhibit_furniture#kind:cabinet", "cabinet", 3),
+                ("exhibit_furniture#kind:hollow_plinth", "hollow", 1),
+                ("exhibit_furniture#kind:platform", "platform", 2),
+                ("exhibit_furniture#kind:vitrine_tall", "vitrine_tall", 1)],
+}
 MOTIFS = ["axis_row", "double_row", "ring", "constellation", "spiral"]
 LIGHTS = ["bright", "dusk", "dramatic"]
 
@@ -66,6 +87,10 @@ def make_genome(rng):
         "vitrines": rng.choice([0, 2, 4, 6]),
         "dais": rng.choice([0, 1, 1, 2]),
         "route_walls": rng.choice([0, 0, 1, 2, 3]),
+        "floating_walls": rng.choice([0, 0, 1, 2, 3, 4]),
+        "furniture_mix": rng.choice(["classic", "mixed", "cabinet", "full"]),
+        "signage": rng.choice([0, 1, 1]),
+        "infoboard": rng.choice([0, 1, 1]),
         "light": rng.choice(LIGHTS),
     }
 
@@ -217,11 +242,20 @@ def compile_gallery(g, gid="X"):
             if (rr, c) in floor and (rr - 1, c) in floor:
                 aw(rr, c, "n")
 
-    # podium motifs
-    def put(r, c, kind, token="exhibit_podium"):
+    # podium motifs -- cycle the genome's furniture palette
+    palette = PALETTES[g.get("furniture_mix", "classic")]
+    put_count = [0]
+
+    def put(r, c, kind_unused=None, token=None):
         if (r, c) in floor and inter[r][c] == " ":
-            inter[r][c] = token
-            slots.append((r, c, kind))
+            tok, slot_kind, value = palette[put_count[0] % len(palette)]
+            if token is not None:
+                tok = token
+                slot_kind = kind_unused or "podium"
+                value = 1
+            inter[r][c] = tok
+            slots.append((r, c, slot_kind, value))
+            put_count[0] += 1
 
     sp = g["podium_spacing"]
     if g["podium_motif"] == "axis_row":
@@ -253,26 +287,54 @@ def compile_gallery(g, gid="X"):
 
     for i in range(g["dais"]):
         c = O + W - 3 - i * 4
-        put(axis_r, c, "dais", "exhibit_podium#kind:dais")
+        put(axis_r, c, "dais", token="exhibit_podium#kind:dais")
     placed_v = 0
     for c in range(O + 1, O + W - 1, 3):
         if placed_v >= g["vitrines"]:
             break
         r = O + D - 1
         if (r, c) in floor and inter[r][c] == " ":
-            put(r, c, "vitrine", "exhibit_vitrine")
+            put(r, c, "vitrine", token="exhibit_vitrine")
             placed_v += 1
+
+    # floating walls (MoMA hover) -- interactables, they don't block the floor
+    fw = g.get("floating_walls", 0)
+    for i in range(fw):
+        rr = O + 2 + (i * 4) % max(1, D - 4)
+        cc = O + 4 + (i * 6) % max(1, W - 8)
+        rot = 90 if i % 2 else 0
+        if (rr, cc) in floor and inter[rr][cc] == " ":
+            inter[rr][cc] = "exhibit_furniture:%d#kind:floating_wall#w:4" % rot
+            slots.append((rr, cc, "floating_wall", 2))
+
+    # hospitality: infoboard near the entry, signage by the walls
+    if g.get("infoboard", 0):
+        cand = sorted(floor, key=lambda p: (p[1], abs(p[0] - axis_r)))
+        for (rr, cc) in cand[2:8]:
+            if inter[rr][cc] == " ":
+                inter[rr][cc] = "exhibit_furniture#kind:infoboard"
+                break
+    if g.get("signage", 0):
+        east_cells = sorted(floor, key=lambda p: (-p[1], abs(p[0] - axis_r)))
+        for (rr, cc) in east_cells[1:6]:
+            if inter[rr][cc] == " ":
+                inter[rr][cc] = "exhibit_furniture#kind:sign_exit"
+                break
+        hullish = [pp for pp in floor if any(ch in walls[pp[0]][pp[1]] for ch in "ns")]
+        for (rr, cc) in hullish[:: max(1, len(hullish) // 2)][:2]:
+            if inter[rr][cc] == " ":
+                inter[rr][cc] = "exhibit_furniture#kind:sign_fire"
 
     # spawn west (highest terrace), teleporter east on void
     spawn = min((p for p in floor), key=lambda p: (p[1], abs(p[0] - axis_r)))
     utilities[spawn[0]][spawn[1]] = "s"
     inter[spawn[0]][spawn[1]] = " "
-    slots = [s for s in slots if (s[0], s[1]) != spawn]
+    slots = [t for t in slots if (t[0], t[1]) != spawn]
     exit_c = max((p for p in floor), key=lambda p: (p[1], -abs(p[0] - axis_r)))
     utilities[exit_c[0]][exit_c[1]] = "t"
     structure[exit_c[0]][exit_c[1]] = "0"
     inter[exit_c[0]][exit_c[1]] = " "
-    slots = [s for s in slots if (s[0], s[1]) != exit_c]
+    slots = [t for t in slots if (t[0], t[1]) != exit_c]
 
     light_cfg = {
         "bright": {"ambient_color": [0.5, 0.5, 0.52], "ambient_energy": 0.65,
@@ -325,9 +387,14 @@ def measure(data, slots):
     reachable = len(reach) >= len(floor_cells) * 0.92
 
     kinds = {}
-    for (_, _, k) in slots:
+    capacity = 0
+    for t in slots:
+        k = t[2]
+        v = t[3] if len(t) > 3 else 1
         kinds[k] = kinds.get(k, 0) + 1
+        capacity += v
     hang = sum(1 for row in data["layers"]["walls"] for cell in row for ch in cell if ch in "nesw")
+    hang += kinds.get("floating_wall", 0) * 8   # both faces hangable
 
     # vista: longest straight walkable run (wall-edge aware)
     blocked = graph.wall_edges
@@ -359,7 +426,10 @@ def measure(data, slots):
         for j in range(i + 1, len(slots)):
             min_d = min(min_d, math.dist(slots[i][:2], slots[j][:2]))
 
-    return {"slots": len(slots), "kinds": len(kinds), "n_niche": kinds.get("niche", 0),
+    g2 = data["map_info"]["gallery_genome"]
+    hospitality = (1 if g2.get("infoboard", 0) else 0) + (1 if g2.get("signage", 0) else 0)
+    return {"slots": capacity, "kinds": len(kinds), "n_niche": kinds.get("niche", 0),
+            "hospitality": hospitality, "floating": kinds.get("floating_wall", 0),
             "hang": hang, "vista": best_run, "doors": doors,
             "terraced": len(heights) > 1, "loop": has_loop,
             "min_slot_dist": round(min_d, 1), "reachable": reachable,
@@ -371,16 +441,17 @@ def fitness(profile, m):
         return -100.0
     spacing = 2.0 if m["min_slot_dist"] >= 2.0 else -4.0
     if profile == "capacity":
-        return (min(m["slots"], 16) * 1.2 + m["kinds"] * 2.0 + min(m["hang"], 110) * 0.06
-                + (4 if m["loop"] else 0) + spacing)
+        return (min(m["slots"], 20) * 1.2 + m["kinds"] * 2.0 + min(m["hang"], 110) * 0.06
+                + (4 if m["loop"] else 0) + m["hospitality"] * 1.5 + spacing)
     if profile == "drama":
         return (m["vista"] * 0.9 + m["dais"] * 3.0 + (6 if m["terraced"] else 0)
                 + (4 if m["light"] == "dramatic" else 0) + min(m["hang"], 80) * 0.03
-                + min(m["slots"], 10) * 0.5 + spacing)
+                + m["floating"] * 2.5 + min(m["slots"], 10) * 0.5
+                + m["hospitality"] * 1.0 + spacing)
     # intimacy
     return (m["n_niche"] * 2.2 + m["doors"] * 1.2 - m["vista"] * 0.35
-            + (4 if m["light"] == "dusk" else 0) + min(m["slots"], 12) * 0.8
-            + m["kinds"] * 1.5 + spacing)
+            + (4 if m["light"] == "dusk" else 0) + min(m["slots"], 14) * 0.8
+            + m["kinds"] * 1.5 + m["hospitality"] * 2.0 + spacing)
 
 
 # ── evolution ────────────────────────────────────────────────────────────────
@@ -446,8 +517,9 @@ def main():
             g = r["genome"]
             m = r["measure"]
             print(f"   {r['id']:16s} fit={r['fitness']:6.2f} form={g['form']:9s} "
-                  f"motif={g['podium_motif']:13s} light={g['light']:8s} "
-                  f"slots={m['slots']:2d} vista={m['vista']:2d} niches={m['n_niche']}")
+                  f"mix={g.get('furniture_mix','?'):8s} float={g.get('floating_walls',0)} "
+                  f"sign={g.get('signage',0)} light={g['light']:8s} "
+                  f"slots={m['slots']:2d} kinds={m['kinds']} vista={m['vista']:2d}")
     (ROOT / "doc" / "reports" / "gallery_dna_research.json").write_text(
         json.dumps(report, indent=1), encoding="utf-8")
 

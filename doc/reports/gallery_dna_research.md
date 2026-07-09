@@ -6,45 +6,45 @@ Three taste-profiles evolved as separate populations (pop 24, 5 generations, tou
 
 | gen | best | mean | best form |
 |---|---|---|---|
-| 1 | 38.72 | 31.25 | basilica |
-| 2 | 38.84 | 34.37 | basilica |
-| 3 | 39.8 | 36.5 | cross |
-| 4 | 39.8 | 37.94 | cross |
-| 5 | 39.8 | 39.09 | cross |
+| 1 | 51.14 | 43.69 | cross |
+| 2 | 57.98 | 49.59 | pockets |
+| 3 | 58.1 | 54.02 | pockets |
+| 4 | 58.1 | 54.79 | pockets |
+| 5 | 58.1 | 56.18 | pockets |
 
-- **Gallery_CAP_1** (fit 39.8): cross / constellation / dramatic, 25 slots, vista 25, 7 niches, terraced=False
-- **Gallery_CAP_2** (fit 39.8): cross / constellation / dramatic, 25 slots, vista 25, 7 niches, terraced=False
-- **Gallery_CAP_3** (fit 39.8): cross / constellation / bright, 23 slots, vista 25, 5 niches, terraced=False
-- **Gallery_CAP_4** (fit 39.8): cross / double_row / dramatic, 29 slots, vista 25, 7 niches, terraced=False
+- **Gallery_CAP_1** (fit 58.1): pockets / double_row / dramatic, 22 slots, vista 17, 3 niches, terraced=True
+- **Gallery_CAP_2** (fit 58.1): pockets / double_row / bright, 20 slots, vista 16, 2 niches, terraced=True
+- **Gallery_CAP_3** (fit 58.1): pockets / double_row / dramatic, 21 slots, vista 14, 2 niches, terraced=True
+- **Gallery_CAP_4** (fit 58.1): pockets / double_row / bright, 23 slots, vista 16, 2 niches, terraced=True
 
 ## drama
 
 | gen | best | mean | best form |
 |---|---|---|---|
-| 1 | 40.9 | 28.57 | cross |
-| 2 | 47.9 | 36.41 | cross |
-| 3 | 48.8 | 41.72 | loop |
-| 4 | 48.8 | 44.55 | loop |
-| 5 | 48.8 | 46.52 | loop |
+| 1 | 46.1 | 34.62 | basilica |
+| 2 | 47.1 | 40.35 | cross |
+| 3 | 47.1 | 41.01 | cross |
+| 4 | 52.1 | 44.53 | basilica |
+| 5 | 52.1 | 47.09 | basilica |
 
-- **Gallery_DRA_1** (fit 48.8): loop / spiral / dramatic, 17 slots, vista 26, 6 niches, terraced=True
-- **Gallery_DRA_2** (fit 48.8): pockets / double_row / dramatic, 26 slots, vista 26, 6 niches, terraced=True
-- **Gallery_DRA_3** (fit 48.8): cross / double_row / dramatic, 26 slots, vista 26, 6 niches, terraced=True
-- **Gallery_DRA_4** (fit 48.8): loop / double_row / dramatic, 20 slots, vista 26, 4 niches, terraced=True
+- **Gallery_DRA_1** (fit 52.1): basilica / ring / dramatic, 26 slots, vista 23, 4 niches, terraced=True
+- **Gallery_DRA_2** (fit 52.1): basilica / ring / dramatic, 26 slots, vista 23, 4 niches, terraced=True
+- **Gallery_DRA_3** (fit 52.1): terrace / axis_row / dramatic, 22 slots, vista 23, 4 niches, terraced=True
+- **Gallery_DRA_4** (fit 52.1): basilica / ring / dramatic, 26 slots, vista 23, 4 niches, terraced=True
 
 ## intimacy
 
 | gen | best | mean | best form |
 |---|---|---|---|
-| 1 | 26.1 | 12.45 | cross |
-| 2 | 29.6 | 20.32 | basilica |
-| 3 | 43.8 | 22.83 | basilica |
-| 4 | 47.8 | 29.5 | basilica |
-| 5 | 49.3 | 34.22 | basilica |
+| 1 | 45.05 | 24.24 | basilica |
+| 2 | 52.95 | 38.97 | basilica |
+| 3 | 55.85 | 44.39 | basilica |
+| 4 | 57.35 | 49.4 | basilica |
+| 5 | 60.35 | 52.52 | basilica |
 
-- **Gallery_INT_1** (fit 49.3): basilica / ring / dusk, 21 slots, vista 26, 8 niches, terraced=True
-- **Gallery_INT_2** (fit 47.8): basilica / axis_row / dusk, 18 slots, vista 26, 8 niches, terraced=True
-- **Gallery_INT_3** (fit 47.8): basilica / axis_row / dusk, 18 slots, vista 26, 8 niches, terraced=True
-- **Gallery_INT_4** (fit 47.8): basilica / ring / dusk, 15 slots, vista 26, 8 niches, terraced=False
+- **Gallery_INT_1** (fit 60.35): basilica / double_row / dusk, 46 slots, vista 23, 7 niches, terraced=True
+- **Gallery_INT_2** (fit 57.35): basilica / double_row / dusk, 35 slots, vista 23, 7 niches, terraced=True
+- **Gallery_INT_3** (fit 57.35): basilica / double_row / dusk, 35 slots, vista 23, 7 niches, terraced=True
+- **Gallery_INT_4** (fit 57.35): basilica / double_row / dusk, 35 slots, vista 23, 7 niches, terraced=True
 
 The three champions disagree on purpose: capacity, drama and intimacy are different buildings. No single form wins — the profile is the choice.
