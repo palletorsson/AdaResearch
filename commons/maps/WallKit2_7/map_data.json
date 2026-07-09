@@ -3,13 +3,18 @@
   "name": "WallKit2_7",
   "lookup_name": "WallKit2_7",
   "title": "WallKit2_7",
+  "dimensions": {
+   "width": 24,
+   "depth": 16,
+   "max_height": 3
+  },
   "wall_kit": {
    "seed": 7,
    "grid": "3x2",
    "blocks": [
     [
      "field",
-     "field",
+     "pinwheel",
      "street"
     ],
     [
@@ -20,21 +25,666 @@
    ],
    "enclosures": [
     [
-     "gggg",
-     "gggg",
-     "gsgg"
+     "oooo",
+     "oooo",
+     "gggg"
     ],
     [
-     "gggg",
-     "gggg",
-     "gssg"
+     "oooo",
+     "oooo",
+     "ogog"
     ]
    ]
+  }
+ },
+ "settings": {
+  "wall_segments": {
+   "style": "labwall",
+   "height": 3.2,
+   "thickness": 0.16,
+   "door_width": 2.2
   },
-  "dimensions": {
-   "width": 24,
-   "depth": 16,
-   "max_height": 3
+  "wall_runs": {
+   "runs": [
+    {
+     "axis": "h",
+     "x": 0,
+     "z": 0,
+     "len": 24,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "slit",
+       "door": false
+      },
+      {
+       "v": "slit",
+       "door": false
+      },
+      {
+       "v": "window",
+       "door": false
+      },
+      {
+       "v": "slit",
+       "door": false
+      },
+      {
+       "v": "slit",
+       "door": false
+      },
+      {
+       "v": "slit",
+       "door": false
+      },
+      {
+       "v": "window",
+       "door": false
+      },
+      {
+       "v": "slit",
+       "door": false
+      },
+      {
+       "v": "slit",
+       "door": false
+      },
+      {
+       "v": "slit",
+       "door": false
+      },
+      {
+       "v": "window",
+       "door": false
+      },
+      {
+       "v": "slit",
+       "door": false
+      },
+      {
+       "v": "slit",
+       "door": false
+      },
+      {
+       "v": "slit",
+       "door": false
+      },
+      {
+       "v": "window",
+       "door": false
+      },
+      {
+       "v": "slit",
+       "door": false
+      },
+      {
+       "v": "slit",
+       "door": false
+      },
+      {
+       "v": "slit",
+       "door": false
+      },
+      {
+       "v": "window",
+       "door": false
+      },
+      {
+       "v": "slit",
+       "door": false
+      },
+      {
+       "v": "slit",
+       "door": false
+      },
+      {
+       "v": "slit",
+       "door": false
+      },
+      {
+       "v": "window",
+       "door": false
+      },
+      {
+       "v": "slit",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "v",
+     "x": 0,
+     "z": 0,
+     "len": 16,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "display",
+       "door": false
+      },
+      {
+       "v": "display",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "display",
+       "door": false
+      },
+      {
+       "v": "display",
+       "door": false
+      },
+      {
+       "v": "display",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "display",
+       "door": false
+      },
+      {
+       "v": "display",
+       "door": false
+      },
+      {
+       "v": "display",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "display",
+       "door": false
+      },
+      {
+       "v": "display",
+       "door": false
+      },
+      {
+       "v": "display",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "display",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "v",
+     "x": 16,
+     "z": 0,
+     "len": 3,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "locker",
+       "door": false
+      },
+      {
+       "v": "locker",
+       "door": false
+      },
+      {
+       "v": "locker",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "v",
+     "x": 16,
+     "z": 5,
+     "len": 6,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "slit",
+       "door": false
+      },
+      {
+       "v": "slit",
+       "door": false
+      },
+      {
+       "v": "vent",
+       "door": false
+      },
+      {
+       "v": "slit",
+       "door": false
+      },
+      {
+       "v": "slit",
+       "door": false
+      },
+      {
+       "v": "slit",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "v",
+     "x": 16,
+     "z": 13,
+     "len": 3,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "v",
+     "x": 24,
+     "z": 0,
+     "len": 16,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "glass",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "glass",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "glass",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "glass",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "v",
+     "x": 14,
+     "z": 2,
+     "len": 3,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "locker",
+       "door": false
+      },
+      {
+       "v": "locker",
+       "door": false
+      },
+      {
+       "v": "locker",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "h",
+     "x": 10,
+     "z": 3,
+     "len": 3,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "h",
+     "x": 17,
+     "z": 3,
+     "len": 2,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "vent",
+       "door": false
+      },
+      {
+       "v": "vent",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "h",
+     "x": 21,
+     "z": 3,
+     "len": 2,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "display",
+       "door": false
+      },
+      {
+       "v": "display",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "v",
+     "x": 10,
+     "z": 3,
+     "len": 3,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "slit",
+       "door": false
+      },
+      {
+       "v": "slit",
+       "door": false
+      },
+      {
+       "v": "slit",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "h",
+     "x": 11,
+     "z": 6,
+     "len": 3,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "h",
+     "x": 16,
+     "z": 8,
+     "len": 3,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "glass",
+       "door": false
+      },
+      {
+       "v": "glass",
+       "door": false
+      },
+      {
+       "v": "glass",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "h",
+     "x": 21,
+     "z": 8,
+     "len": 3,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "whiteboard",
+       "door": false
+      },
+      {
+       "v": "whiteboard",
+       "door": false
+      },
+      {
+       "v": "whiteboard",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "h",
+     "x": 0,
+     "z": 16,
+     "len": 24,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "window",
+       "door": false
+      },
+      {
+       "v": "window",
+       "door": false
+      },
+      {
+       "v": "conduit",
+       "door": false
+      },
+      {
+       "v": "window",
+       "door": false
+      },
+      {
+       "v": "window",
+       "door": false
+      },
+      {
+       "v": "window",
+       "door": false
+      },
+      {
+       "v": "conduit",
+       "door": false
+      },
+      {
+       "v": "window",
+       "door": false
+      },
+      {
+       "v": "window",
+       "door": false
+      },
+      {
+       "v": "window",
+       "door": false
+      },
+      {
+       "v": "conduit",
+       "door": false
+      },
+      {
+       "v": "window",
+       "door": false
+      },
+      {
+       "v": "window",
+       "door": false
+      },
+      {
+       "v": "window",
+       "door": false
+      },
+      {
+       "v": "conduit",
+       "door": false
+      },
+      {
+       "v": "window",
+       "door": false
+      },
+      {
+       "v": "window",
+       "door": false
+      },
+      {
+       "v": "window",
+       "door": false
+      },
+      {
+       "v": "conduit",
+       "door": false
+      },
+      {
+       "v": "window",
+       "door": false
+      },
+      {
+       "v": "window",
+       "door": false
+      },
+      {
+       "v": "window",
+       "door": false
+      },
+      {
+       "v": "conduit",
+       "door": false
+      },
+      {
+       "v": "window",
+       "door": false
+      }
+     ]
+    }
+   ],
+   "corners": [
+    {
+     "x": -0.5,
+     "z": -0.5,
+     "y": 2
+    },
+    {
+     "x": 15.5,
+     "z": -0.5,
+     "y": 2
+    },
+    {
+     "x": 23.5,
+     "z": -0.5,
+     "y": 2
+    },
+    {
+     "x": 9.5,
+     "z": 2.5,
+     "y": 2
+    },
+    {
+     "x": 15.5,
+     "z": 7.5,
+     "y": 2
+    },
+    {
+     "x": 23.5,
+     "z": 7.5,
+     "y": 2
+    },
+    {
+     "x": -0.5,
+     "z": 15.5,
+     "y": 2
+    },
+    {
+     "x": 15.5,
+     "z": 15.5,
+     "y": 2
+    },
+    {
+     "x": 23.5,
+     "z": 15.5,
+     "y": 2
+    }
+   ]
   }
  },
  "layers": {
@@ -883,15 +1533,15 @@
     "n",
     "n",
     "n",
-    "en",
-    "wn",
     "n",
     "n",
     "n",
     "n",
     "n",
     "n",
-    "en",
+    "n",
+    "n",
+    "n",
     "wn",
     "n",
     "n",
@@ -909,41 +1559,15 @@
     "",
     "",
     "",
-    "e",
-    "w",
     "",
     "",
     "",
     "",
     "",
     "",
-    "e",
-    "w",
     "",
     "",
     "",
-    "",
-    "",
-    "",
-    "e"
-   ],
-   [
-    "w",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "e",
-    "w",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "e",
     "w",
     "",
     "",
@@ -967,7 +1591,33 @@
     "",
     "",
     "",
+    "e",
     "",
+    "",
+    "w",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "e"
+   ],
+   [
+    "w",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "nw",
+    "n",
+    "n",
+    "e",
     "",
     "",
     "",
@@ -990,10 +1640,10 @@
     "",
     "",
     "",
+    "w",
     "",
     "",
-    "",
-    "",
+    "e",
     "",
     "",
     "",
@@ -1013,7 +1663,15 @@
     "",
     "",
     "",
-    "e",
+    "",
+    "",
+    "",
+    "w",
+    "s",
+    "s",
+    "s",
+    "",
+    "",
     "w",
     "",
     "",
@@ -1021,7 +1679,25 @@
     "",
     "",
     "",
-    "e",
+    "e"
+   ],
+   [
+    "w",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
     "w",
     "",
     "",
@@ -1039,41 +1715,15 @@
     "",
     "",
     "",
-    "e",
-    "w",
     "",
     "",
     "",
     "",
     "",
     "",
-    "e",
-    "w",
     "",
     "",
     "",
-    "",
-    "",
-    "",
-    "e"
-   ],
-   [
-    "sw",
-    "s",
-    "s",
-    "",
-    "",
-    "s",
-    "s",
-    "se",
-    "sw",
-    "s",
-    "s",
-    "",
-    "",
-    "s",
-    "s",
-    "se",
     "sw",
     "s",
     "s",
@@ -1084,32 +1734,6 @@
     "se"
    ],
    [
-    "nw",
-    "n",
-    "n",
-    "",
-    "",
-    "n",
-    "n",
-    "en",
-    "nw",
-    "n",
-    "n",
-    "",
-    "",
-    "n",
-    "n",
-    "en",
-    "nw",
-    "n",
-    "n",
-    "",
-    "",
-    "n",
-    "n",
-    "ne"
-   ],
-   [
     "w",
     "",
     "",
@@ -1117,41 +1741,15 @@
     "",
     "",
     "",
-    "e",
-    "w",
     "",
     "",
     "",
     "",
     "",
     "",
-    "e",
-    "w",
     "",
     "",
     "",
-    "",
-    "",
-    "",
-    "e"
-   ],
-   [
-    "w",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "e",
-    "w",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "e",
     "w",
     "",
     "",
@@ -1178,7 +1776,33 @@
     "",
     "",
     "",
+    "w",
     "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "e"
+   ],
+   [
+    "w",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "w",
     "",
     "",
     "",
@@ -1221,7 +1845,25 @@
     "",
     "",
     "",
-    "e",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "e"
+   ],
+   [
     "w",
     "",
     "",
@@ -1229,7 +1871,15 @@
     "",
     "",
     "",
-    "e",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
     "w",
     "",
     "",
@@ -1247,15 +1897,15 @@
     "",
     "",
     "",
-    "e",
-    "w",
     "",
     "",
     "",
     "",
     "",
     "",
-    "e",
+    "",
+    "",
+    "",
     "w",
     "",
     "",
@@ -1273,15 +1923,15 @@
     "s",
     "s",
     "s",
-    "es",
-    "ws",
     "s",
     "s",
     "s",
     "s",
     "s",
     "s",
-    "es",
+    "s",
+    "s",
+    "s",
     "ws",
     "s",
     "s",

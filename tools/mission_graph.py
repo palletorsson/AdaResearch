@@ -199,6 +199,8 @@ def build(seq, name, cols):
             "settings": {"wall_segments": {"style": "labwall", "height": 3.2,
                                         "thickness": 0.16, "door_width": 2.2}},
             "layers": layers}
+    import wall_runs as _wr
+    _wr.annotate(data, name)   # marriage 2: runs live in the map
     out = ROOT / "commons" / "maps" / name
     out.mkdir(parents=True, exist_ok=True)
     with open(out / "map_data.json", "w", encoding="utf-8", newline="\n") as f:
@@ -408,6 +410,8 @@ def build_halls(seq, name):
                                            "thickness": 0.16, "door_width": 2.2,
                                            "palettes": palettes}},
             "layers": layers}
+    import wall_runs as _wr
+    _wr.annotate(data, name)   # marriage 2: runs live in the map
     out = ROOT / "commons" / "maps" / name
     out.mkdir(parents=True, exist_ok=True)
     with open(out / "map_data.json", "w", encoding="utf-8", newline="\n") as f:
