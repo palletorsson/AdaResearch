@@ -937,3 +937,31 @@ the human ruling on top.
 Backlog: 9 of 18 struck; the three pillars (evolve / furnish / curate) all
 land. Remaining are refinements (walk_evaluator wiring, physics probe,
 light strips, mezzanine) and the human loop (walk-verdict re-weighting).
+
+## 2026-07-08 — THE SPINE MUSEUM: the curriculum as one building (museum composer v1)
+
+Greenlit after two batches of famous museum floor plans. The lesson: a great
+museum is department-WINGS around a ROTUNDA, threaded by a numbered TRAIL (=
+the curatorial sequence), zoned by theme. Ada's spine IS that.
+
+tools/spine_museum.py: entrance ROTUNDA (incompleteness_scale monument + info
++ exit/fire signs) opening onto a boustrophedon GRID of 24 DEPARTMENT wings,
+one per spine sequence in curriculum order. Each dept carries its SIGNATURE
+hero (freq-in-seq / cross-seq-spread, generic furniture + oversized +
+simulation/GPU artifacts denied). The DOORS between consecutive depts ARE the
+numbered trail; redundant grid-adjacent doors add the enfilade+bypass
+circulation (no room isolable). Spawn in the rotunda, exit past dept 24
+(foundations -> crisis). Spine_Museum 38x29, pathfinder-clean, WALKABLE.
+
+HONEST v1 LIMITS (capture, not structure): the bird's-eye captures flood with
+the nature/ecosystem biome (the map isn't in a sequence so density defaults
+high) + a few oversized UNMEASURED procedural heroes (romanesco/mc_cave)
+engulf the frame — fixed partially by requiring measured-small heroes (1 dept
+empty). The WALK from the rotunda is clean; the flooded capture is cosmetic.
+
+V2 (backlog): biome suppression flag for museum maps; per-dept NAME LABELS +
+phase COLOR-ZONING (the wayfinding lesson we couldn't do via el-light);
+multi-FLOOR stacking on Ada's height system (foundations ground, crisis top);
+back-of-house + amenities as rooms; call curate_gallery per wing to furnish
+each department properly. This v1 proves the PARTI: the whole curriculum,
+walkable, as one institution. The room became the building.

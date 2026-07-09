@@ -41,6 +41,17 @@ items are done. This is the steering surface for the auto-research loop.
 10. **Mezzanine / upper gallery** (the balustrade rail already exists in the shell).
 11. **Rotunda oculus** — top-light the round form's centre.
 
+## The Spine Museum (built — the museum composer)
+- ~~**Spine_Museum** (tools/spine_museum.py): the whole 24-sequence curriculum
+  as ONE departmental museum — entrance rotunda (incompleteness monument) +
+  24 department wings in a boustrophedon grid, each with its SIGNATURE hero,
+  DOORS = the numbered curriculum trail, redundant grid circulation (enfilade
+  + bypass). Pathfinder-clean, walkable.~~
+  V2 NEEDS: suppress biome/ecosystem in the museum (floods captures);
+  measured-small heroes only (some empty depts); per-department NAME LABELS +
+  phase COLOR-ZONING (the wayfinding lesson); multi-FLOOR stacking (foundations
+  below, crisis above); back-of-house + amenities rooms; curate_gallery per wing.
+
 ## The loop / integration
 12. ~~**Curator compiles into a champion genome** — tools/curate_gallery.py:
     brief + taste + cast -> evolve a fitting champion -> furnish by footprint
