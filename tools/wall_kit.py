@@ -163,11 +163,26 @@ def mk_colonnade():
     return bl
 
 
+def mk_chapel():
+    """a 4x4 walled hut with ONE door, aisles flowing around it — the only
+    enclosed room in an open hall. Built for the voltage pieces: the walk
+    streams past; the critical turn requires stepping through a threshold."""
+    bl = blank()
+    for c in range(2, 6):
+        if c != 3:                                   # the one door, north
+            add_wall(bl, 2, c, "n")
+        add_wall(bl, 5, c, "s")
+    for r in range(2, 6):
+        add_wall(bl, r, 2, "w")
+        add_wall(bl, r, 5, "e")
+    return bl
+
+
 KIT = {"field": mk_field, "pinwheel": mk_pinwheel, "court": mk_court,
        "ledge": mk_ledge, "street": mk_street, "cross": mk_cross,
-       "colonnade": mk_colonnade}
+       "colonnade": mk_colonnade, "chapel": mk_chapel}
 WEIGHTS = {"field": 2, "pinwheel": 2, "court": 2, "ledge": 2,
-           "street": 2, "cross": 1, "colonnade": 2}
+           "street": 2, "cross": 1, "colonnade": 2, "chapel": 1}
 
 
 # ── the seeder ───────────────────────────────────────────────────────────────

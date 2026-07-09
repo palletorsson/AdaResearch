@@ -162,6 +162,113 @@ def build(seq, name, cols):
     return 0
 
 
+def chunk_acts(n: int) -> list:
+    """near-equal act sizes; 3 acts up to 11 beats, 4 beyond."""
+    k = 3 if n <= 11 else 4
+    base, rem = divmod(n, k)
+    return [base + (1 if i < rem else 0) for i in range(k)]
+
+
+def build_halls(seq, name):
+    """ACT-HALLS: beats grouped into acts; each act = one WALL-LESS hall
+    (blocks flow into each other, 'o' seams); features stand as stations;
+    voltage chapels are the only enclosed rooms, inserted inline (the hall
+    flows around the hut); ONE door between consecutive acts."""
+    beats, volt = load_mission(seq)
+    if not beats:
+        print(f"no beats in baseline for {seq}")
+        return 1
+    sizes = chunk_acts(len(beats))
+    # rows of entries: beats in act order, chapels inserted after their beat
+    acts, gi = [], 0
+    for sz in sizes:
+        acts.append([{"kind": "beat", "i": gi + j, "role": beats[gi + j]["role"],
+                      "cast": beats[gi + j]["cast"],
+                      "feature": feature_for(beats[gi + j]["role"], gi + j)}
+                     for j in range(sz)])
+        gi += sz
+    n = len(beats)
+    for k, piece in enumerate(volt):
+        t = round(k * (n - 1) / max(1, len(volt) - 1)) if len(volt) > 1 else n // 2
+        for act in acts:
+            for j, e in enumerate(act):
+                if e["kind"] == "beat" and e["i"] == t:
+                    act.insert(j + 1, {"kind": "chapel", "i": k,
+                                       "role": f"voltage: {piece}", "cast": piece,
+                                       "feature": "chapel"})
+                    break
+            else:
+                continue
+            break
+    rows = len(acts)
+    lens = [len(a) for a in acts]
+    cols = max(lens)
+    # walking direction serpentine at ACT level; door col between acts
+    def col_of(r, j):                      # entry j of act r -> grid col
+        return j if r % 2 == 0 else lens[r] - 1 - j
+    grid = {}
+    for r, act in enumerate(acts):
+        for j, e in enumerate(act):
+            grid[(r, col_of(r, j))] = e
+    doors = {}                             # (r) -> door col between act r and r+1
+    for r in range(rows - 1):
+        doors[r] = min(lens[r], lens[r + 1]) - 1 if r % 2 == 0 else 0
+    W, H = cols * B, rows * B
+    layers = {"structure": [["0"] * W for _ in range(H)],
+              "utilities": [[" "] * W for _ in range(H)],
+              "walls": [[""] * W for _ in range(H)],
+              "interactables": [[" "] * W for _ in range(H)]}
+    for (r, c), e in grid.items():
+        bl = wk.KIT[e["feature"]]()
+        sides = ["s", "s", "s", "s"]       # n e s w
+        if (r, c + 1) in grid:
+            sides[1] = "o"                 # the hall flows
+        if (r, c - 1) in grid:
+            sides[3] = "o"
+        if (r - 1, c) in grid:
+            sides[0] = "g" if doors.get(r - 1) == c else "s"
+        if (r + 1, c) in grid:
+            sides[2] = "g" if doors.get(r) == c else "s"
+        wk.perimeter(bl, tuple(sides))
+        R0, C0 = r * B, c * B
+        for rr in range(B):
+            for cc in range(B):
+                layers["structure"][R0 + rr][C0 + cc] = bl["structure"][rr][cc]
+                layers["utilities"][R0 + rr][C0 + cc] = bl["utilities"][rr][cc]
+                layers["walls"][R0 + rr][C0 + cc] = bl["walls"][rr][cc]
+        if e.get("cast"):
+            if e["feature"] == "chapel":
+                layers["interactables"][R0 + 3][C0 + 3] = e["cast"]   # inside the hut
+            else:
+                layers["interactables"][R0 + 1][C0 + B // 2] = e["cast"]
+    fr, fc = 0, col_of(0, 0)
+    layers["utilities"][fr * B + 1][fc * B + 1] = "sp"
+    lr = rows - 1
+    lc = col_of(lr, lens[lr] - 1)
+    tr, tc = lr * B + B - 2, lc * B + B - 2
+    layers["utilities"][tr][tc] = "t:restart"
+    layers["structure"][tr][tc] = "0"
+    data = {"map_info": {"name": name, "lookup_name": name, "title": name,
+                         "mission_graph": {"seq": seq, "mode": "act-halls",
+                                           "acts": lens, "doors": doors}},
+            "layers": layers}
+    out = ROOT / "commons" / "maps" / name
+    out.mkdir(parents=True, exist_ok=True)
+    with open(out / "map_data.json", "w", encoding="utf-8", newline="\n") as f:
+        json.dump(data, f, indent=1)
+    print(f"{name}: {len(beats)} beats + {len(volt)} voltage -> "
+          f"{rows} act-halls {lens} ({W}x{H} cells)")
+    for r, act in enumerate(acts):
+        marks = " · ".join((f"[{e['cast']}]" if e["kind"] == "chapel"
+                            else f"{e['feature']}:{e['cast']}") for e in act)
+        arrow = "→" if r % 2 == 0 else "←"
+        print(f"  act {r+1} {arrow}  {marks}")
+        if r in doors:
+            print(f"         door at col {doors[r]}")
+    print(f"view: /map-viewer?map={name}")
+    return 0
+
+
 def main() -> int:
     arg = lambda k, d: next((a.split("=", 1)[1] for a in sys.argv
                              if a.startswith(f"--{k}=")), d)
@@ -169,9 +276,13 @@ def main() -> int:
     if not seq:
         print(__doc__)
         return 1
-    cols = int(arg("cols", "3"))
-    name = arg("name", f"Mission_{seq.title().replace('_','')}")
-    return build(seq, name, cols)
+    mode = arg("mode", "halls")
+    if mode == "chain":
+        cols = int(arg("cols", "3"))
+        name = arg("name", f"Mission_{seq.title().replace('_','')}")
+        return build(seq, name, cols)
+    name = arg("name", f"MissionHall_{seq.title().replace('_','')}")
+    return build_halls(seq, name)
 
 
 if __name__ == "__main__":
