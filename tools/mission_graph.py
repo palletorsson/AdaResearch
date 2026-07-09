@@ -53,10 +53,59 @@ def feature_for(role: str, i: int) -> str:
 def load_mission(seq: str):
     p = ROOT / "doc" / "book" / "baselines" / f"{seq}.json"
     d = json.loads(p.read_text(encoding="utf-8"))
-    beats = [{"role": b.get("role", f"beat {i}"), "cast": b.get("cast", "")}
+    beats = [{"role": b.get("role", f"beat {i}"), "cast": b.get("cast", ""),
+              "alts": b.get("alts", [])}
              for i, b in enumerate(d.get("beats", [])) if not b.get("missing")]
     volt = [v.get("piece", "") for v in d.get("voltage", []) if v.get("piece")]
     return beats, volt
+
+
+# ── cast size governance (the oracle rules the room) ────────────────────────
+# runtime-growers: static AABB measures ~0 but the artifact expands while
+# running (ribbons, sprawling traces) — treat as oversize in confined rooms
+RUNTIME_GROWERS = {"player_trace"}
+_SIZES = None
+
+def _sizes():
+    global _SIZES
+    if _SIZES is None:
+        p = ROOT / "commons" / "data" / "artifact_sizes.json"
+        _SIZES = json.loads(p.read_text(encoding="utf-8")).get("sizes", {})
+    return _SIZES
+
+def _fit(name: str, max_fp: float, max_h: float):
+    """(fits, footprint) — None footprint = unmeasured (runtime-growers like
+    player_trace measure 0.0; treat as suspect, prefer a measured alt)."""
+    s = _sizes().get(name)
+    if not s or not s.get("base_m"):
+        return None, None
+    fp = max(s.get("grid_cells", [1, 1]))
+    h = s.get("height_m", 1.0)
+    return (fp <= max_fp and h <= max_h), fp
+
+def resolve_cast(cast: str, alts: list, max_fp: float, max_h: float):
+    """the cast if it measurably fits; else the smallest measured alt that
+    fits; else the smallest measured candidate. Returns (name, swapped_from)."""
+    ok, _ = _fit(cast, max_fp, max_h)
+    if ok:
+        return cast, None
+    fitting, measured = [], []
+    for a in alts:
+        a_ok, a_fp = _fit(a, max_fp, max_h)
+        if a_ok:
+            fitting.append((a_fp, a))
+        if a_fp is not None:
+            measured.append((a_fp, a))
+    if fitting:
+        return min(fitting)[1], cast
+    if measured:
+        return min(measured)[1], cast
+    # nothing measured among the alts. If the cast itself is KNOWN bad —
+    # measured-oversize (ok is False) or a runtime-grower on the suspect
+    # list — an unmeasured alt (curator's first pick) beats keeping it.
+    if (ok is False or cast in RUNTIME_GROWERS) and alts:
+        return alts[0], cast
+    return cast, None
 
 
 def embed(beats, volt, cols):
@@ -171,6 +220,40 @@ def chunk_acts(n: int) -> list:
     return [base + (1 if i < rem else 0) for i in range(k)]
 
 
+HB = 14          # hall block size: feature centred leaves a 5m clear ring
+OFF = (HB - B) // 2
+HGATE = (HB // 2 - 1, HB // 2)
+
+
+def hall_block(feature: str) -> dict:
+    """a 14x14 hall cell with the 8x8 feature blitted at its centre — the
+    surrounding ring (>=5m to any wall) is the placing space Palle asked for."""
+    bl8 = wk.KIT[feature]()
+    bl = {"structure": [[wk.SEA] * HB for _ in range(HB)],
+          "utilities": [[" "] * HB for _ in range(HB)],
+          "walls": [[""] * HB for _ in range(HB)]}
+    for r in range(B):
+        for c in range(B):
+            bl["structure"][OFF + r][OFF + c] = bl8["structure"][r][c]
+            bl["utilities"][OFF + r][OFF + c] = bl8["utilities"][r][c]
+            bl["walls"][OFF + r][OFF + c] = bl8["walls"][r][c]
+    return bl
+
+
+def hall_perimeter(bl: dict, sides: tuple) -> None:
+    """the edge contract at hall scale: centred 2-cell gates at HGATE."""
+    n, e, s, w = sides
+    for i in range(HB):
+        if n != "o" and (n == "s" or i not in HGATE):
+            bl["walls"][0][i] += "n" if "n" not in bl["walls"][0][i] else ""
+        if s != "o" and (s == "s" or i not in HGATE):
+            bl["walls"][HB - 1][i] += "s" if "s" not in bl["walls"][HB - 1][i] else ""
+        if w != "o" and (w == "s" or i not in HGATE):
+            bl["walls"][i][0] += "w" if "w" not in bl["walls"][i][0] else ""
+        if e != "o" and (e == "s" or i not in HGATE):
+            bl["walls"][i][HB - 1] += "e" if "e" not in bl["walls"][i][HB - 1] else ""
+
+
 def build_halls(seq, name):
     """ACT-HALLS: beats grouped into acts; each act = one WALL-LESS hall
     (blocks flow into each other, 'o' seams); features stand as stations;
@@ -184,10 +267,14 @@ def build_halls(seq, name):
     # rows of entries: beats in act order, chapels inserted after their beat
     acts, gi = [], 0
     for sz in sizes:
-        acts.append([{"kind": "beat", "i": gi + j, "role": beats[gi + j]["role"],
-                      "cast": beats[gi + j]["cast"],
-                      "feature": feature_for(beats[gi + j]["role"], gi + j)}
-                     for j in range(sz)])
+        row_entries = []
+        for j in range(sz):
+            b = beats[gi + j]
+            chosen, swapped = resolve_cast(b["cast"], b.get("alts", []), 4.0, 3.4)
+            row_entries.append({"kind": "beat", "i": gi + j, "role": b["role"],
+                                "cast": chosen, "swapped_from": swapped,
+                                "feature": feature_for(b["role"], gi + j)})
+        acts.append(row_entries)
         gi += sz
     n = len(beats)
     for k, piece in enumerate(volt):
@@ -195,9 +282,10 @@ def build_halls(seq, name):
         for act in acts:
             for j, e in enumerate(act):
                 if e["kind"] == "beat" and e["i"] == t:
+                    cp, csw = resolve_cast(piece, [], 2.0, 2.8)
                     act.insert(j + 1, {"kind": "chapel", "i": k,
-                                       "role": f"voltage: {piece}", "cast": piece,
-                                       "feature": "chapel"})
+                                       "role": f"voltage: {piece}", "cast": cp,
+                                       "swapped_from": csw, "feature": "chapel"})
                     break
             else:
                 continue
@@ -215,13 +303,13 @@ def build_halls(seq, name):
     doors = {}                             # (r) -> door col between act r and r+1
     for r in range(rows - 1):
         doors[r] = min(lens[r], lens[r + 1]) - 1 if r % 2 == 0 else 0
-    W, H = cols * B, rows * B
+    W, H = cols * HB, rows * HB
     layers = {"structure": [["0"] * W for _ in range(H)],
               "utilities": [[" "] * W for _ in range(H)],
               "walls": [[""] * W for _ in range(H)],
               "interactables": [[" "] * W for _ in range(H)]}
     for (r, c), e in grid.items():
-        bl = wk.KIT[e["feature"]]()
+        bl = hall_block(e["feature"])
         sides = ["s", "s", "s", "s"]       # n e s w
         if (r, c + 1) in grid:
             sides[1] = "o"                 # the hall flows
@@ -231,23 +319,23 @@ def build_halls(seq, name):
             sides[0] = "g" if doors.get(r - 1) == c else "s"
         if (r + 1, c) in grid:
             sides[2] = "g" if doors.get(r) == c else "s"
-        wk.perimeter(bl, tuple(sides))
-        R0, C0 = r * B, c * B
-        for rr in range(B):
-            for cc in range(B):
+        hall_perimeter(bl, tuple(sides))
+        R0, C0 = r * HB, c * HB
+        for rr in range(HB):
+            for cc in range(HB):
                 layers["structure"][R0 + rr][C0 + cc] = bl["structure"][rr][cc]
                 layers["utilities"][R0 + rr][C0 + cc] = bl["utilities"][rr][cc]
                 layers["walls"][R0 + rr][C0 + cc] = bl["walls"][rr][cc]
         if e.get("cast"):
             if e["feature"] == "chapel":
-                layers["interactables"][R0 + 3][C0 + 3] = e["cast"]   # inside the hut
+                layers["interactables"][R0 + OFF + 3][C0 + OFF + 3] = e["cast"]   # inside the hut
             else:
-                layers["interactables"][R0 + 1][C0 + B // 2] = e["cast"]
+                layers["interactables"][R0 + 2][C0 + HB // 2] = e["cast"]   # north aisle of the 5m ring
     fr, fc = 0, col_of(0, 0)
-    layers["utilities"][fr * B + 1][fc * B + 1] = "sp"
+    layers["utilities"][fr * HB + 2][fc * HB + 2] = "sp"
     lr = rows - 1
     lc = col_of(lr, lens[lr] - 1)
-    tr, tc = lr * B + B - 2, lc * B + B - 2
+    tr, tc = lr * HB + HB - 3, lc * HB + HB - 3
     layers["utilities"][tr][tc] = "t:restart"
     layers["structure"][tr][tc] = "0"
     # per-act wall palettes: the act arc as a material register — arrival is
@@ -272,7 +360,7 @@ def build_halls(seq, name):
             return "arrival"
         return "depth" if k == rows - 1 else "work"
     palettes = [{"act": r, "name": act_palette(r),
-                 "rect": [0, r * B, W - 1, (r + 1) * B - 1],
+                 "rect": [0, r * HB, W - 1, (r + 1) * HB - 1],
                  "weights": PALETTES[act_palette(r)],
                  "accent": ACCENTS[act_palette(r)]} for r in range(rows)]
     data = {"map_info": {"name": name, "lookup_name": name, "title": name,
