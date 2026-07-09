@@ -987,3 +987,21 @@ permission. So: drove v2 with my own calls.
 Pathfinder-clean. The orbit capture is the wrong tool for a bare_world
 floor-plan building (white over-expose); the WALK is the proof. Two additive
 grid changes (bare_world-from-settings, el-colour) flagged.
+
+## 2026-07-08 — Spine Museum: the entry was broken (rotunda not adjacent to dept 1)
+
+Palle walked v2: "all rooms must have exit doors so I can move between."
+Diagnosed with a REAL door-graph BFS (uppercase=passable) over the walls
+layer — not the pathfinder's own logic, which passed while the building was
+actually sealed. Found the bug: the rotunda sat at the SOUTH but department 1
+was at the TOP of the grid — not adjacent — so the single rotunda door led
+nowhere sensible and the entry was broken.
+
+FIX: flipped the boustrophedon so dept 1 is at the BOTTOM row (adjacent to
+the south rotunda) and the trail snakes UP to dept 24 at the top; opened the
+rotunda->dept-1 gap to nearly full width; made EVERY door 2 cells wide.
+Re-checked with the door-graph BFS: all 24 department regions reachable from
+the rotunda spawn (the only unreachable cells are the harmless exterior
+margin). LESSON: pathfinder reachability != walkable-door connectivity; when
+the body can't move, check the doors the WALL COMPONENT actually builds, not
+the abstract graph.

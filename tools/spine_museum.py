@@ -153,11 +153,14 @@ def main():
         c0 = 1 + gc * RW
         return r0, c0, r0 + RD - 1, c0 + RW - 1
 
-    # boustrophedon curriculum order -> (gr, gc)
+    # boustrophedon curriculum order -> (gr, gc), starting at the BOTTOM row
+    # (adjacent to the south rotunda) and snaking UP: dept 1 by the entrance,
+    # dept 24 at the far top.
     def order_to_grid(i):
-        gr = i // COLS
+        band = i // COLS
+        gr = ROWS - 1 - band
         col = i % COLS
-        gc = col if gr % 2 == 0 else (COLS - 1 - col)
+        gc = col if band % 2 == 0 else (COLS - 1 - col)
         return gr, gc
 
     placed_seq = []
@@ -186,26 +189,27 @@ def main():
                            "hero": h, "grid": [gr, gc], "cell": [cz, cx]})
 
     # DOORS = the numbered trail: open the shared edge between consecutive rooms
+    def _open(r, c, edge):        # lowercase edge -> uppercase (a doorway)
+        walls[r][c] = walls[r][c].replace(edge, edge.upper())
+
     def carve_door(a, b):
         (gra, gca), (grb, gcb) = order_to_grid(a), order_to_grid(b)
         ra0, ca0, ra1, ca1 = room_cells(gra, gca)
         rb0, cb0, rb1, cb1 = room_cells(grb, gcb)
         if gra == grb and abs(gca - gcb) == 1:          # horizontal neighbours
-            r = (ra0 + ra1) // 2
-            if gca < gcb:                                # a east edge = b west edge
-                walls[r][ca1] = walls[r][ca1].replace("e", "E")
-                walls[r][cb0] = walls[r][cb0].replace("w", "W")
-            else:
-                walls[r][ca0] = walls[r][ca0].replace("w", "W")
-                walls[r][cb1] = walls[r][cb1].replace("e", "E")
-        elif gca == gcb and abs(gra - grb) == 1:         # vertical neighbours (row turn)
-            c = (ca0 + ca1) // 2
-            if gra < grb:
-                walls[ra1][c] = walls[ra1][c].replace("s", "S")
-                walls[rb0][c] = walls[rb0][c].replace("n", "N")
-            else:
-                walls[ra0][c] = walls[ra0][c].replace("n", "N")
-                walls[rb1][c] = walls[rb1][c].replace("s", "S")
+            rr = [(ra0 + ra1) // 2, (ra0 + ra1) // 2 + 1]   # TWO cells wide
+            for r in rr:
+                if gca < gcb:
+                    _open(r, ca1, "e"); _open(r, cb0, "w")
+                else:
+                    _open(r, ca0, "w"); _open(r, cb1, "e")
+        elif gca == gcb and abs(gra - grb) == 1:         # vertical neighbours
+            cc = [(ca0 + ca1) // 2, (ca0 + ca1) // 2 + 1]
+            for c in cc:
+                if gra < grb:
+                    _open(ra1, c, "s"); _open(rb0, c, "n")
+                else:
+                    _open(ra0, c, "n"); _open(rb1, c, "s")
 
     for i in range(len(seqs) - 1):
         carve_door(i, i + 1)
@@ -230,11 +234,11 @@ def main():
     # the monument at the rotunda centre
     mono_r, mono_c = (rr0 + rr1) // 2, (rc0 + rc1) // 2
     inter[mono_r][mono_c] = "incompleteness_scale:180"
-    # a door from the rotunda up into department 1 (order 0 -> grid (0,0))
+    # a WIDE opening from the rotunda up into department 1 (now bottom-adjacent)
     d1r0, d1c0, d1r1, d1c1 = room_cells(*order_to_grid(0))
-    door_c = (d1c0 + d1c1) // 2
-    walls[d1r1][door_c] = walls[d1r1][door_c].replace("s", "S")   # dept-1 south door
-    aw(rr0, door_c, "N")                                          # rotunda north door
+    for door_c in range(d1c0 + 1, d1c1):                          # nearly full-width
+        walls[d1r1][door_c] = walls[d1r1][door_c].replace("s", "S")
+        walls[rr0][door_c] = walls[rr0][door_c].replace("n", "N")
     # amenities flanking the rotunda entrance
     inter[mono_r][rc0 + 2] = "exhibit_furniture#kind:infoboard"
     inter[mono_r][rc1 - 2] = "exhibit_furniture#kind:sign_exit"
