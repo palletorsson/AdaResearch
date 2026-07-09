@@ -1015,3 +1015,14 @@ the abstract graph.
   el-colour I added) at each consecutive-department threshold in the Spine
   Museum, so the curriculum order is legible as you move through the doors.
   Pathfinder-clean.
+
+## 2026-07-08 — /space-automation: a URL for the recent creations
+
+New encyclopedia page /space-automation collects the whole arc: the
+4-stage pipeline (evolve/furnish/curate/compose), the SPINE MUSEUM drawn as
+its true color-zoned floor plan from spine_museum.json (24 phase-coloured
+departments + gold trail + rotunda — legible where the biome floods the
+in-engine capture), and photographs (Curated_RandomnessEdge, Furnished_CAP_1,
+Spaceform Court/House/Ship). Also: fly now moves toward the mouse-look
+(pitch included); fly toggle F->G (F is flashlight). Verified in preview:
+4 stages, 24-dept SVG, phase legend, 5 photos, 0 broken images, no errors.
