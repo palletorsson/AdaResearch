@@ -220,59 +220,91 @@ def chunk_acts(n: int) -> list:
     return [base + (1 if i < rem else 0) for i in range(k)]
 
 
-HB = 14          # hall block size: feature centred leaves a 5m clear ring
-OFF = (HB - B) // 2
-HGATE = (HB // 2 - 1, HB // 2)
+# -- act-halls v3: varying hall sizes, features FILL the hall (2m aisles) ----
+# Palle (on the sparse 14-cell rings): "different size halls, and the middle
+# room fills so the hall wall towards the wall is two m." Each act is ONE hall
+# whose depth varies by register; each entry's feature scales to F = depth-4,
+# leaving a 2-cell (2m) aisle to every wall. Stations sit at a F+2 pitch.
+
+ACT_DEPTH = {"arrival": 12, "work": 16, "depth": 14}
 
 
-def hall_block(feature: str) -> dict:
-    """a 14x14 hall cell with the 8x8 feature blitted at its centre — the
-    surrounding ring (>=5m to any wall) is the placing space Palle asked for."""
-    bl8 = wk.KIT[feature]()
-    bl = {"structure": [[wk.SEA] * HB for _ in range(HB)],
-          "utilities": [[" "] * HB for _ in range(HB)],
-          "walls": [[""] * HB for _ in range(HB)]}
-    for r in range(B):
-        for c in range(B):
-            bl["structure"][OFF + r][OFF + c] = bl8["structure"][r][c]
-            bl["utilities"][OFF + r][OFF + c] = bl8["utilities"][r][c]
-            bl["walls"][OFF + r][OFF + c] = bl8["walls"][r][c]
-    return bl
+def _wall(layers, r, c, code):
+    if code not in layers["walls"][r][c]:
+        layers["walls"][r][c] += code
 
 
-def hall_perimeter(bl: dict, sides: tuple) -> None:
-    """the edge contract at hall scale: centred 2-cell gates at HGATE."""
-    n, e, s, w = sides
-    for i in range(HB):
-        if n != "o" and (n == "s" or i not in HGATE):
-            bl["walls"][0][i] += "n" if "n" not in bl["walls"][0][i] else ""
-        if s != "o" and (s == "s" or i not in HGATE):
-            bl["walls"][HB - 1][i] += "s" if "s" not in bl["walls"][HB - 1][i] else ""
-        if w != "o" and (w == "s" or i not in HGATE):
-            bl["walls"][i][0] += "w" if "w" not in bl["walls"][i][0] else ""
-        if e != "o" and (e == "s" or i not in HGATE):
-            bl["walls"][i][HB - 1] += "e" if "e" not in bl["walls"][i][HB - 1] else ""
+def draw_feature(layers, feature, oy, ox, F):
+    """scaled feature drawn straight into the stitched layers at (oy, ox)."""
+    st, ut = layers["structure"], layers["utilities"]
+    mid = F // 2
+    if feature == "court":
+        for r in range(2, F - 2):
+            for c in range(2, F - 2):
+                st[oy + r][ox + c] = "1"
+        ut[oy + mid][ox + 2] = "wp:-90"
+        ut[oy + mid][ox + F - 3] = "wp:90"
+    elif feature == "ledge":
+        d = max(2, F // 3)
+        for r in range(1, 1 + d):
+            for c in range(2, F - 2):
+                st[oy + r][ox + c] = "3"
+        ut[oy + 1 + d][ox + mid - 1] = "wp:180"
+        ut[oy + 1 + d][ox + mid] = "wp:180"
+    elif feature == "street":
+        for c in range(F):
+            if c not in (mid - 1, mid):
+                _wall(layers, oy + mid, ox + c, "n")
+    elif feature == "colonnade":
+        for (r, c) in ((2, 2), (2, F - 3), (F - 3, 2), (F - 3, F - 3)):
+            for code in "nesw":
+                _wall(layers, oy + r, ox + c, code)
+    elif feature == "pinwheel":
+        arm = max(3, F // 2 - 1)
+        a0 = (F - arm) // 2
+        for c in range(a0, a0 + arm):
+            _wall(layers, oy + mid - 2, ox + c, "n")
+            _wall(layers, oy + mid + 2, ox + min(c + 1, F - 1), "s")
+        for r in range(a0, a0 + arm):
+            _wall(layers, oy + r, ox + mid + 2, "e")
+            _wall(layers, oy + min(r + 1, F - 1), ox + mid - 2, "w")
+    elif feature == "chapel":
+        # the hut stays intimate whatever the hall size: 4x4, one door
+        h0 = mid - 2
+        for c in range(h0, h0 + 4):
+            if c != h0 + 1:
+                _wall(layers, oy + h0, ox + c, "n")
+            _wall(layers, oy + h0 + 3, ox + c, "s")
+        for r in range(h0, h0 + 4):
+            _wall(layers, oy + r, ox + h0, "w")
+            _wall(layers, oy + r, ox + h0 + 3, "e")
+    # field: nothing -- the breathing room
+
+
+def cast_spot(feature, oy, ox, F):
+    mid = F // 2
+    if feature == "ledge":
+        return oy + 1, ox + mid            # on the overlook
+    if feature == "street":
+        return oy + mid + 2, ox + mid      # beside the door
+    return oy + mid, ox + mid              # court pit / hut / centre
 
 
 def build_halls(seq, name):
-    """ACT-HALLS: beats grouped into acts; each act = one WALL-LESS hall
-    (blocks flow into each other, 'o' seams); features stand as stations;
-    voltage chapels are the only enclosed rooms, inserted inline (the hall
-    flows around the hut); ONE door between consecutive acts."""
+    """acts as single halls of varying size; features fill them (2m aisles);
+    voltage chapels the only enclosed rooms; one carved door between acts."""
     beats, volt = load_mission(seq)
     if not beats:
         print(f"no beats in baseline for {seq}")
         return 1
     sizes = chunk_acts(len(beats))
-    # rows of entries: beats in act order, chapels inserted after their beat
     acts, gi = [], 0
     for sz in sizes:
         row_entries = []
         for j in range(sz):
             b = beats[gi + j]
-            chosen, swapped = resolve_cast(b["cast"], b.get("alts", []), 4.0, 3.4)
             row_entries.append({"kind": "beat", "i": gi + j, "role": b["role"],
-                                "cast": chosen, "swapped_from": swapped,
+                                "cast": b["cast"], "alts": b.get("alts", []),
                                 "feature": feature_for(b["role"], gi + j)})
         acts.append(row_entries)
         gi += sz
@@ -282,66 +314,71 @@ def build_halls(seq, name):
         for act in acts:
             for j, e in enumerate(act):
                 if e["kind"] == "beat" and e["i"] == t:
-                    cp, csw = resolve_cast(piece, [], 2.0, 2.8)
                     act.insert(j + 1, {"kind": "chapel", "i": k,
-                                       "role": f"voltage: {piece}", "cast": cp,
-                                       "swapped_from": csw, "feature": "chapel"})
+                                       "role": "voltage: " + piece, "cast": piece,
+                                       "alts": [], "feature": "chapel"})
                     break
             else:
                 continue
             break
     rows = len(acts)
-    lens = [len(a) for a in acts]
-    cols = max(lens)
-    # walking direction serpentine at ACT level; door col between acts
-    def col_of(r, j):                      # entry j of act r -> grid col
-        return j if r % 2 == 0 else lens[r] - 1 - j
-    grid = {}
-    for r, act in enumerate(acts):
-        for j, e in enumerate(act):
-            grid[(r, col_of(r, j))] = e
-    doors = {}                             # (r) -> door col between act r and r+1
-    for r in range(rows - 1):
-        doors[r] = min(lens[r], lens[r + 1]) - 1 if r % 2 == 0 else 0
-    W, H = cols * HB, rows * HB
+
+    def register(k):
+        if k == 0:
+            return "arrival"
+        return "depth" if k == rows - 1 else "work"
+
+    depths = [ACT_DEPTH[register(k)] for k in range(rows)]
+    Fs = [d - 4 for d in depths]
+    widths = [2 + len(a) * (Fs[k] + 2) for k, a in enumerate(acts)]
+    W = max(widths)
+    H = sum(depths)
     layers = {"structure": [["0"] * W for _ in range(H)],
               "utilities": [[" "] * W for _ in range(H)],
               "walls": [[""] * W for _ in range(H)],
               "interactables": [[" "] * W for _ in range(H)]}
-    for (r, c), e in grid.items():
-        bl = hall_block(e["feature"])
-        sides = ["s", "s", "s", "s"]       # n e s w
-        if (r, c + 1) in grid:
-            sides[1] = "o"                 # the hall flows
-        if (r, c - 1) in grid:
-            sides[3] = "o"
-        if (r - 1, c) in grid:
-            sides[0] = "g" if doors.get(r - 1) == c else "s"
-        if (r + 1, c) in grid:
-            sides[2] = "g" if doors.get(r) == c else "s"
-        hall_perimeter(bl, tuple(sides))
-        R0, C0 = r * HB, c * HB
-        for rr in range(HB):
-            for cc in range(HB):
-                layers["structure"][R0 + rr][C0 + cc] = bl["structure"][rr][cc]
-                layers["utilities"][R0 + rr][C0 + cc] = bl["utilities"][rr][cc]
-                layers["walls"][R0 + rr][C0 + cc] = bl["walls"][rr][cc]
-        if e.get("cast"):
-            if e["feature"] == "chapel":
-                layers["interactables"][R0 + OFF + 3][C0 + OFF + 3] = e["cast"]   # inside the hut
-            else:
-                layers["interactables"][R0 + 2][C0 + HB // 2] = e["cast"]   # north aisle of the 5m ring
-    fr, fc = 0, col_of(0, 0)
-    layers["utilities"][fr * HB + 2][fc * HB + 2] = "sp"
+    y = 0
+    y0s, swaps = [], []
+    for k, act in enumerate(acts):
+        D, F, Wk = depths[k], Fs[k], widths[k]
+        y0s.append(y)
+        for r in range(D):
+            for c in range(Wk):
+                layers["structure"][y + r][c] = SEA
+        for c in range(Wk):
+            _wall(layers, y, c, "n")
+            _wall(layers, y + D - 1, c, "s")
+        for r in range(D):
+            _wall(layers, y + r, 0, "w")
+            _wall(layers, y + r, Wk - 1, "e")
+        entries = act if k % 2 == 0 else list(reversed(act))
+        for j, e in enumerate(entries):
+            ox = 2 + j * (F + 2)
+            oy = y + 2
+            budget_fp = 2.0 if e["feature"] == "chapel" else float(F - 2)
+            budget_h = 2.8 if e["feature"] == "chapel" else 3.4
+            chosen, swapped = resolve_cast(e["cast"], e["alts"], budget_fp, budget_h)
+            e["cast"] = chosen
+            if swapped:
+                swaps.append(swapped + "->" + chosen)
+            draw_feature(layers, e["feature"], oy, ox, F)
+            cr, cc = cast_spot(e["feature"], oy, ox, F)
+            layers["interactables"][cr][cc] = chosen
+        y += D
+    # carve ONE door between consecutive acts, near the walking end
+    for k in range(rows - 1):
+        yb = y0s[k + 1]
+        ov = min(widths[k], widths[k + 1])
+        xs = (ov - 4, ov - 3) if k % 2 == 0 else (2, 3)
+        for x in xs:
+            layers["walls"][yb - 1][x] = layers["walls"][yb - 1][x].replace("s", "")
+            layers["walls"][yb][x] = layers["walls"][yb][x].replace("n", "")
+    layers["utilities"][2][2] = "sp"
     lr = rows - 1
-    lc = col_of(lr, lens[lr] - 1)
-    tr, tc = lr * HB + HB - 3, lc * HB + HB - 3
-    layers["utilities"][tr][tc] = "t:restart"
-    layers["structure"][tr][tc] = "0"
-    # per-act wall palettes: the act arc as a material register — arrival is
-    # bright (glass/whiteboard/window), work is serviced (conduit/display/
-    # locker), depth is industrial (hazard/rib/slit). Rects in CELL coords;
-    # the Three.js viewer seeds each act's walls from its own weight table.
+    tx = widths[lr] - 3 if lr % 2 == 0 else 2
+    ty = y0s[lr] + depths[lr] - 3
+    layers["utilities"][ty][tx] = "t:restart"
+    layers["structure"][ty][tx] = "0"
     PALETTES = {
         "arrival": {"plain": 5, "glass": 3, "whiteboard": 2, "window": 3,
                     "vent": 1, "locker": 1},
@@ -350,39 +387,32 @@ def build_halls(seq, name):
         "depth":   {"plain": 3, "hazard": 2, "rib": 3, "beam": 2, "slit": 2,
                     "conduit": 2, "vent": 1},
     }
-    # the light register: each palette carries its accent color — the wall's
-    # emissive line shifts as you descend (VR labwall + any future consumer)
-    ACCENTS = {"arrival": [1.0, 0.62, 0.18],   # warm amber
-               "work":    [0.25, 0.85, 1.0],   # cyan
-               "depth":   [1.0, 0.25, 0.15]}   # red
-    def act_palette(k):
-        if k == 0:
-            return "arrival"
-        return "depth" if k == rows - 1 else "work"
-    palettes = [{"act": r, "name": act_palette(r),
-                 "rect": [0, r * HB, W - 1, (r + 1) * HB - 1],
-                 "weights": PALETTES[act_palette(r)],
-                 "accent": ACCENTS[act_palette(r)]} for r in range(rows)]
+    ACCENTS = {"arrival": [1.0, 0.62, 0.18], "work": [0.25, 0.85, 1.0],
+               "depth": [1.0, 0.25, 0.15]}
+    palettes = [{"act": k, "name": register(k),
+                 "rect": [0, y0s[k], W - 1, y0s[k] + depths[k] - 1],
+                 "weights": PALETTES[register(k)],
+                 "accent": ACCENTS[register(k)]} for k in range(rows)]
     data = {"map_info": {"name": name, "lookup_name": name, "title": name,
-                         "mission_graph": {"seq": seq, "mode": "act-halls",
-                                           "acts": lens, "doors": doors}},
+                         "mission_graph": {"seq": seq, "mode": "act-halls-v3",
+                                           "acts": [len(a) for a in acts],
+                                           "depths": depths, "swaps": swaps}},
             "settings": {"wall_segments": {"style": "labwall", "height": 3.2,
-                                        "thickness": 0.16, "door_width": 2.2,
-                                        "palettes": palettes}},
+                                           "thickness": 0.16, "door_width": 2.2,
+                                           "palettes": palettes}},
             "layers": layers}
     out = ROOT / "commons" / "maps" / name
     out.mkdir(parents=True, exist_ok=True)
     with open(out / "map_data.json", "w", encoding="utf-8", newline="\n") as f:
         json.dump(data, f, indent=1)
-    print(f"{name}: {len(beats)} beats + {len(volt)} voltage -> "
-          f"{rows} act-halls {lens} ({W}x{H} cells)")
-    for r, act in enumerate(acts):
-        marks = " · ".join((f"[{e['cast']}]" if e["kind"] == "chapel"
-                            else f"{e['feature']}:{e['cast']}") for e in act)
-        arrow = "→" if r % 2 == 0 else "←"
-        print(f"  act {r+1} {arrow}  {marks}")
-        if r in doors:
-            print(f"         door at col {doors[r]}")
+    print(f"{name}: {len(beats)} beats + {len(volt)} voltage -> {rows} act-halls "
+          f"depths {depths} ({W}x{H} cells)")
+    for k, act in enumerate(acts):
+        marks = " - ".join((("[" + e["cast"] + "]") if e["kind"] == "chapel"
+                            else e["feature"] + ":" + e["cast"]) for e in act)
+        print(f"  act {k+1} D={depths[k]}  {marks}")
+    if swaps:
+        print("  size-governed swaps:", ", ".join(swaps))
     print(f"view: /map-viewer?map={name}")
     return 0
 
