@@ -30,10 +30,14 @@ func _init() -> void:
 		"plain": _v_plain(), "glass": _v_glass(), "whiteboard": _v_whiteboard(),
 		"display": _v_display(), "conduit": _v_conduit(), "vent": _v_vent(),
 		"hazard": _v_hazard(), "locker": _v_locker(), "rib": _v_rib(),
-		"beam": _v_beam(),
+		"beam": _v_beam(), "window": _v_window(), "slit": _v_slit(),
+		"doorframe": _v_doorframe(), "corner": _v_corner(),
 	}
+	# weight 0 = never random-seeded; placed by role (doorframe on door
+	# edges, corner posts where perpendicular walls meet)
 	var weights := {"plain": 6, "glass": 2, "whiteboard": 1, "display": 1,
-		"conduit": 2, "vent": 2, "hazard": 1, "locker": 2, "rib": 2, "beam": 2}
+		"conduit": 2, "vent": 2, "hazard": 1, "locker": 2, "rib": 2, "beam": 2,
+		"window": 2, "slit": 1, "doorframe": 0, "corner": 0}
 	var manifest := []
 	for vname in variants:
 		var node: Node3D = variants[vname]
@@ -195,4 +199,50 @@ func _v_beam() -> Node3D:
 	_panel(n, z)
 	_box(n, Vector3(L, 0.18, T * 1.5), Vector3(0, 2.05, 0), mat_dark)
 	_box(n, Vector3(L, 0.04, T * 1.55), Vector3(0, 1.94, 0), mat_amber)
+	return n
+
+func _v_window() -> Node3D:
+	# waist-to-head glazing between posts: lower panel, proud sill, glass, header strip
+	var n := Node3D.new()
+	var z := _chassis(n)
+	var sill_y := 0.95
+	var glass_top := 2.1
+	_box(n, Vector3(L, sill_y - z["bottom"], T), Vector3(0, z["bottom"] + (sill_y - z["bottom"]) * 0.5, 0), mat_panel)
+	_box(n, Vector3(L, 0.08, T * 1.3), Vector3(0, sill_y, 0), mat_dark)
+	_box(n, Vector3(0.08, glass_top - sill_y, T * 1.08), Vector3(-0.46, sill_y + (glass_top - sill_y) * 0.5, 0), mat_dark)
+	_box(n, Vector3(0.08, glass_top - sill_y, T * 1.08), Vector3(0.46, sill_y + (glass_top - sill_y) * 0.5, 0), mat_dark)
+	_box(n, Vector3(0.84, glass_top - sill_y - 0.08, 0.04), Vector3(0, sill_y + (glass_top - sill_y) * 0.5, 0), mat_glass)
+	_box(n, Vector3(L, z["top"] - glass_top, T), Vector3(0, glass_top + (z["top"] - glass_top) * 0.5, 0), mat_panel)
+	return n
+
+func _v_slit() -> Node3D:
+	# a narrow full-height glass slit — the guarded glimpse
+	var n := Node3D.new()
+	var z := _chassis(n)
+	var h: float = z["top"] - z["bottom"]
+	var mid: float = z["bottom"] + h * 0.5
+	_box(n, Vector3(0.34, h, T), Vector3(-0.33, mid, 0), mat_panel)
+	_box(n, Vector3(0.34, h, T), Vector3(0.33, mid, 0), mat_panel)
+	_box(n, Vector3(0.05, h, T * 1.06), Vector3(-0.135, mid, 0), mat_dark)
+	_box(n, Vector3(0.05, h, T * 1.06), Vector3(0.135, mid, 0), mat_dark)
+	_box(n, Vector3(0.17, h - 0.06, 0.04), Vector3(0, mid, 0), mat_glass)
+	return n
+
+func _v_doorframe() -> Node3D:
+	# for DOOR edges: jamb posts + header + amber threshold line over the opening
+	var n := Node3D.new()
+	var door_h := 2.3
+	_box(n, Vector3(0.12, door_h, T * 1.5), Vector3(-0.44, door_h * 0.5, 0), mat_dark)
+	_box(n, Vector3(0.12, door_h, T * 1.5), Vector3(0.44, door_h * 0.5, 0), mat_dark)
+	_box(n, Vector3(L, H - door_h - 0.12, T), Vector3(0, door_h + 0.06 + (H - door_h - 0.12) * 0.5, 0), mat_panel)
+	_box(n, Vector3(L, 0.08, T * 1.3), Vector3(0, door_h + 0.04, 0), mat_amber)
+	_box(n, Vector3(L, 0.22, T * 1.25), Vector3(0, H - 0.11, 0), mat_dark)
+	return n
+
+func _v_corner() -> Node3D:
+	# a corner post where perpendicular walls meet: dark column, amber ring, cap
+	var n := Node3D.new()
+	_box(n, Vector3(0.26, H - HOVER, 0.26), Vector3(0, HOVER + (H - HOVER) * 0.5, 0), mat_dark)
+	_box(n, Vector3(0.3, ACCENT_H, 0.3), Vector3(0, H - TRIM_H - ACCENT_H * 0.5, 0), mat_amber)
+	_box(n, Vector3(0.32, 0.2, 0.32), Vector3(0, H - 0.1, 0), mat_dark)
 	return n
