@@ -227,7 +227,7 @@ def chunk_acts(n: int) -> list:
 # leaving a 2-cell (2m) aisle to every wall. Stations sit at a F+2 pitch.
 
 ACT_DEPTH = {"arrival": 14, "work": 18, "depth": 16}
-AISLE = 3        # the inner corridor: feature-to-wall and station-to-station
+AISLE = 2        # the inner corridor: feature-to-wall and station-to-station (tight = dense)
 
 
 def _wall(layers, r, c, code):
