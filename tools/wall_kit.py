@@ -266,6 +266,8 @@ def seed_map(cols, rows, seed, name):
                                       "blocks": chosen,
                                       "enclosures": [["".join(e) for e in row]
                                                      for row in encl]}},
+            "settings": {"wall_segments": {"style": "labwall", "height": 3.2,
+                                        "thickness": 0.16, "door_width": 2.2}},
             "layers": layers}
     out = ROOT / "commons" / "maps" / name
     out.mkdir(parents=True, exist_ok=True)

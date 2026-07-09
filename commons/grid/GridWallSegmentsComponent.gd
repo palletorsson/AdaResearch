@@ -29,6 +29,20 @@ var _container: Node3D
 var _built_edges: Dictionary = {}
 var _mat: StandardMaterial3D
 
+# "labwall" style (additive, config settings.wall_segments.style): the
+# Half-Life industrial composition — dark kick plate, concrete panel, groove,
+# emissive amber accent line, dark top trim, and a small hover gap under the
+# wall so it casts a shadow line (the cheap accent). Maps without the style
+# key render exactly as before.
+var _style: String = ""
+var _mat_panel: StandardMaterial3D
+var _mat_dark: StandardMaterial3D
+var _mat_accent: StandardMaterial3D
+const HOVER := 0.06
+const KICK_H := 0.28
+const ACCENT_H := 0.08
+const TRIM_H := 0.55
+
 signal wall_segments_complete(segment_count: int)
 
 func initialize(grid_sys: Node3D, data_comp: GridDataComponent, settings: Dictionary = {}) -> void:
@@ -56,6 +70,21 @@ func generate_segments(walls_layer: Array, structure_layer: Array, config: Dicti
 	_mat = StandardMaterial3D.new()
 	_mat.albedo_color = wall_color
 	_mat.roughness = 0.85
+
+	_style = str(config.get("style", ""))
+	if _style == "labwall":
+		_mat_panel = StandardMaterial3D.new()
+		_mat_panel.albedo_color = wall_color if c is Array else Color(0.52, 0.54, 0.55)
+		_mat_panel.roughness = 0.9
+		_mat_dark = StandardMaterial3D.new()
+		_mat_dark.albedo_color = Color(0.12, 0.13, 0.14)
+		_mat_dark.roughness = 0.6
+		_mat_dark.metallic = 0.35
+		_mat_accent = StandardMaterial3D.new()
+		_mat_accent.albedo_color = Color(1.0, 0.62, 0.18)
+		_mat_accent.emission_enabled = true
+		_mat_accent.emission = Color(1.0, 0.55, 0.15)
+		_mat_accent.emission_energy_multiplier = 1.6
 
 	var total := cube_size + gutter
 	var count := 0
@@ -137,18 +166,57 @@ func _wall_box(mid: Vector3, base_y: float, length: float, height: float, along_
 		else Vector3(wall_thickness, height, length)
 	var body := StaticBody3D.new()
 	body.position = Vector3(mid.x, base_y + height * 0.5, mid.z)
-	var mesh := MeshInstance3D.new()
-	var bm := BoxMesh.new()
-	bm.size = size
-	mesh.mesh = bm
-	mesh.material_override = _mat
-	body.add_child(mesh)
+	if _style == "labwall":
+		_dress_labwall(body, length, height, along_x)
+	else:
+		body.add_child(_box_mesh(size, _mat, Vector3.ZERO))
 	var col_shape := CollisionShape3D.new()
 	var shape := BoxShape3D.new()
 	shape.size = size
 	col_shape.shape = shape
 	body.add_child(col_shape)
 	_container.add_child(body)
+
+func _box_mesh(size: Vector3, mat: StandardMaterial3D, offset: Vector3) -> MeshInstance3D:
+	var mesh := MeshInstance3D.new()
+	var bm := BoxMesh.new()
+	bm.size = size
+	mesh.mesh = bm
+	mesh.material_override = mat
+	mesh.position = offset
+	return mesh
+
+# The labwall composition, built inside the body's local space (origin at the
+# wall's volumetric centre). Short pieces (lintels) stay a plain dark slab.
+func _dress_labwall(body: StaticBody3D, length: float, height: float, along_x: bool) -> void:
+	var t := wall_thickness
+	var y0 := -height * 0.5                      # local floor line
+	if height < 1.6:
+		body.add_child(_box_mesh(_seg_size(length, height, t, along_x), _mat_dark, Vector3.ZERO))
+		return
+	# hover gap: visuals start above the floor line; collision stays full
+	var kick_y := y0 + HOVER + KICK_H * 0.5
+	body.add_child(_box_mesh(_seg_size(length, KICK_H, t * 1.35, along_x), _mat_dark,
+			Vector3(0, kick_y, 0)))
+	var trim_y := height * 0.5 - TRIM_H * 0.5
+	var accent_y := height * 0.5 - TRIM_H - ACCENT_H * 0.5
+	var panel_bottom := y0 + HOVER + KICK_H
+	var panel_top := accent_y - ACCENT_H * 0.5
+	var panel_h := panel_top - panel_bottom
+	body.add_child(_box_mesh(_seg_size(length, panel_h, t, along_x), _mat_panel,
+			Vector3(0, panel_bottom + panel_h * 0.5, 0)))
+	# groove: a dark proud line a third of the way up the panel
+	var groove_y := panel_bottom + panel_h * 0.38
+	body.add_child(_box_mesh(_seg_size(length, 0.09, t * 1.06, along_x), _mat_dark,
+			Vector3(0, groove_y, 0)))
+	# the amber line — the Half-Life accent
+	body.add_child(_box_mesh(_seg_size(length, ACCENT_H, t * 1.18, along_x), _mat_accent,
+			Vector3(0, accent_y, 0)))
+	body.add_child(_box_mesh(_seg_size(length, TRIM_H, t * 1.25, along_x), _mat_dark,
+			Vector3(0, trim_y, 0)))
+
+func _seg_size(l: float, h: float, th: float, along_x: bool) -> Vector3:
+	return Vector3(l, h, th) if along_x else Vector3(th, h, l)
 
 func clear_segments() -> void:
 	if _container and is_instance_valid(_container):

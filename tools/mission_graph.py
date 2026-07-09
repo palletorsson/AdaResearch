@@ -145,6 +145,8 @@ def build(seq, name, cols):
                          "mission_graph": {"seq": seq, "beats": len(beats),
                                            "chapels": len(volt),
                                            "rooms": mission}},
+            "settings": {"wall_segments": {"style": "labwall", "height": 3.2,
+                                        "thickness": 0.16, "door_width": 2.2}},
             "layers": layers}
     out = ROOT / "commons" / "maps" / name
     out.mkdir(parents=True, exist_ok=True)
@@ -251,6 +253,8 @@ def build_halls(seq, name):
     data = {"map_info": {"name": name, "lookup_name": name, "title": name,
                          "mission_graph": {"seq": seq, "mode": "act-halls",
                                            "acts": lens, "doors": doors}},
+            "settings": {"wall_segments": {"style": "labwall", "height": 3.2,
+                                        "thickness": 0.16, "door_width": 2.2}},
             "layers": layers}
     out = ROOT / "commons" / "maps" / name
     out.mkdir(parents=True, exist_ok=True)
