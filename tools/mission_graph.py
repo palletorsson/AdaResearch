@@ -202,6 +202,8 @@ def build(seq, name, cols):
             "layers": layers}
     import wall_runs as _wr
     _wr.annotate(data, name)   # marriage 2: runs live in the map
+    import wall_props as _wp
+    _wp.annotate(data, name)    # the hospitality layer on the run slots
     out = ROOT / "commons" / "maps" / name
     out.mkdir(parents=True, exist_ok=True)
     with open(out / "map_data.json", "w", encoding="utf-8", newline="\n") as f:
@@ -421,6 +423,8 @@ def build_halls(seq, name):
             "layers": layers}
     import wall_runs as _wr
     _wr.annotate(data, name)   # marriage 2: runs live in the map
+    import wall_props as _wp
+    _wp.annotate(data, name)    # the hospitality layer on the run slots
     out = ROOT / "commons" / "maps" / name
     out.mkdir(parents=True, exist_ok=True)
     with open(out / "map_data.json", "w", encoding="utf-8", newline="\n") as f:
