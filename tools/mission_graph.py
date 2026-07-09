@@ -226,7 +226,8 @@ def chunk_acts(n: int) -> list:
 # whose depth varies by register; each entry's feature scales to F = depth-4,
 # leaving a 2-cell (2m) aisle to every wall. Stations sit at a F+2 pitch.
 
-ACT_DEPTH = {"arrival": 12, "work": 16, "depth": 14}
+ACT_DEPTH = {"arrival": 14, "work": 18, "depth": 16}
+AISLE = 3        # the inner corridor: feature-to-wall and station-to-station
 
 
 def _wall(layers, r, c, code):
@@ -329,8 +330,8 @@ def build_halls(seq, name):
         return "depth" if k == rows - 1 else "work"
 
     depths = [ACT_DEPTH[register(k)] for k in range(rows)]
-    Fs = [d - 4 for d in depths]
-    widths = [2 + len(a) * (Fs[k] + 2) for k, a in enumerate(acts)]
+    Fs = [d - 2 * AISLE for d in depths]
+    widths = [AISLE + len(a) * (Fs[k] + AISLE) for k, a in enumerate(acts)]
     W = max(widths)
     H = sum(depths)
     layers = {"structure": [["0"] * W for _ in range(H)],
@@ -353,8 +354,8 @@ def build_halls(seq, name):
             _wall(layers, y + r, Wk - 1, "e")
         entries = act if k % 2 == 0 else list(reversed(act))
         for j, e in enumerate(entries):
-            ox = 2 + j * (F + 2)
-            oy = y + 2
+            ox = AISLE + j * (F + AISLE)
+            oy = y + AISLE
             budget_fp = 2.0 if e["feature"] == "chapel" else float(F - 2)
             budget_h = 2.8 if e["feature"] == "chapel" else 3.4
             chosen, swapped = resolve_cast(e["cast"], e["alts"], budget_fp, budget_h)
