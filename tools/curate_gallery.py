@@ -31,6 +31,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "tools"))
 import gallery_evolve as ge
 import furnish_gallery as fg
+import staging_beds as sb
 
 SEED = 461
 
@@ -104,8 +105,10 @@ def main():
             continue
         used[best] = True
         s = empty[best]
-        inter[s["r"]][s["c"]] = a["tok"]
-        placed.append({"artifact": a["tok"], "slot": s["class"], "fp": round(a["fp"], 1)})
+        bed = sb.select_bed(a["tok"])
+        rot = ":180" if bed["is_wall"] else ""
+        inter[s["r"]][s["c"]] = f"{bed['bed']}{rot}#mount:{a['tok']}"
+        placed.append({"artifact": a["tok"], "bed": bed["bed"], "fp": round(a["fp"], 1)})
     for i, s in enumerate(empty):
         if not used[i]:
             inter[s["r"]][s["c"]] = " "
@@ -149,7 +152,8 @@ def main():
     print(f"\ncurated -> {title}")
     print(f"  PLACED {len(placed)}:")
     for p in placed:
-        print(f"    {p['artifact']:34s} -> {p['slot']:10s} (fp {p['fp']})")
+        bedname = p['bed'].split('kind:')[-1].split('#')[0] if 'kind:' in p['bed'] else 'podium'
+        print(f"    {p['artifact']:34s} -> {bedname:12s} (fp {p['fp']})")
     if oversized:
         print(f"  OVERSIZED (own room): {', '.join(a['tok'] for a in oversized)}")
     if unplaced:

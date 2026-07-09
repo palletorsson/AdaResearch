@@ -20,6 +20,8 @@ from pathlib import Path
 
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT / "tools"))
+import staging_beds as sb
 
 WINGS = ["menger_toy", "koch_curve", "cantor_bench", "menger_bench",
          "galton_board", "dice_throw", "coin_toss", "random_number_book_page_1955",
@@ -120,8 +122,11 @@ def main():
             continue
         used[best] = True
         s = slots[best]
-        inter[s["r"]][s["c"]] = a["tok"]
-        placed.append((a["tok"], s["class"], a["fp"]))
+        bed = sb.select_bed(a["tok"])
+        # the bed carries the artifact on its surface; wall works face into the room
+        rot = ":180" if bed["is_wall"] else ""
+        inter[s["r"]][s["c"]] = f"{bed['bed']}{rot}#mount:{a['tok']}"
+        placed.append((a["tok"], bed["bed"].split("kind:")[-1].split("#")[0] if "kind:" in bed["bed"] else "podium", a["fp"]))
 
     # remaining empty slots -> clear back to floor (or leave a podium as apron)
     for i, s in enumerate(slots):

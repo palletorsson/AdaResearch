@@ -18,9 +18,13 @@ const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
 @export var panel_w: float = 4.0          # floating_wall width
 @export var panel_h: float = 2.6
 
+@export var mount: String = ""            # a lookup_name to seat on the bed's surface
+
 func _ready() -> void:
 	_read_meta_overrides()
 	_build()
+	if mount != "":
+		_mount_artifact(mount)
 
 func apply_grid_config(config_data: Dictionary) -> void:
 	for k in config_data.keys():
@@ -36,6 +40,50 @@ func _read_meta_overrides() -> void:
 		panel_w = float(str(get_meta("config_w")))
 	if has_meta("config_h"):
 		panel_h = float(str(get_meta("config_h")))
+	if has_meta("config_mount"):
+		mount = str(get_meta("config_mount"))
+
+# The bed's surface height — where a mounted artifact sits.
+func _surface_y() -> float:
+	match kind:
+		"plinth":
+			return {"s": 1.19, "m": 0.99, "l": 0.64}.get(size_class, 0.99)
+		"hollow_plinth": return 0.95
+		"table_2m": return 0.8
+		"platform": return 0.31
+		"pit": return -0.28          # the object sits DOWN in the well
+		"floor_work": return 0.05
+		"vitrine_tall": return 0.3
+		"panel": return 1.4 + ({"s": 1.2, "m": 2.0, "l": 3.2}.get(size_class, 2.0) * 0.66) * 0.5
+		_: return 0.9
+
+# Load an artifact by lookup_name from the registries and seat it on the bed.
+func _mount_artifact(lookup: String) -> void:
+	var dir := DirAccess.open("res://commons/artifacts/registry/")
+	if dir == null:
+		return
+	var scene_path := ""
+	dir.list_dir_begin()
+	var f := dir.get_next()
+	while f != "":
+		if f.ends_with(".json"):
+			var file := FileAccess.open("res://commons/artifacts/registry/" + f, FileAccess.READ)
+			if file:
+				var parsed = JSON.parse_string(file.get_as_text())
+				if parsed is Dictionary and parsed.get("artifacts", {}).has(lookup):
+					scene_path = str(parsed["artifacts"][lookup].get("scene", ""))
+					break
+		f = dir.get_next()
+	if scene_path == "":
+		return
+	var scene = load(scene_path)
+	if scene == null:
+		return
+	var inst = scene.instantiate()
+	if inst is Node3D:
+		var on_panel := kind == "panel"
+		inst.position = Vector3(0, _surface_y(), 0.15 if on_panel else 0.0)
+		add_child(inst)
 
 func _mat(c: Color, rough := 0.6, emit := 0.0, unshaded := false) -> StandardMaterial3D:
 	var m := StandardMaterial3D.new()

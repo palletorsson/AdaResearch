@@ -1050,3 +1050,21 @@ pathfinding between artifacts. Still consistent space." Driving it:
   clearance, pathfinder-clean, captured (bare_world = readable).
 
 The bed fits the footprint; the aisle fits the body.
+
+## 2026-07-08 — the bed BRAIN wired into furnish + curate (bed carries artifact)
+
+Wired staging_beds.select_bed into furnish_gallery + curate_gallery.
+Architecture: the BED CARRIES THE ARTIFACT — one token per cell, the bed,
+mounts the artifact on its surface. Added a `mount` config to
+exhibit_furniture: after building the bed it loads the artifact by
+lookup_name from the registries and seats it at the bed's _surface_y()
+(plinth 0.99, table 0.8, platform 0.31, pit -0.28 in the well, floor_work
+0.05, panel on the face). furnish/curate now emit
+`<bed>#mount:<artifact>` per work, bed chosen by measured footprint.
+
+Verified: Furnished_CAP_1 capture shows artifacts SITTING ON their beds —
+pendulum-waves on a table, newton_cradle on its stand, the petri dish on a
+platform, coins on plinths, the flat piece on a floor pad. Curated_
+RandomnessEdge: RAND book on a platform, the rest on plinths, pathfinder-
+clean. One bed brain now drives the whole pipeline: evolve -> furnish/
+curate (select_bed) -> the right body under every artifact, aisles between.
