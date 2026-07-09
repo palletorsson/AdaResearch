@@ -731,3 +731,29 @@ taste; the wayfinding layer is not decoration, it is trust.
 
 Capture: the furnished basilica reads as an institution — table, vitrines,
 cabinets, FIRE mid-nave, EXIT by the teleporter.
+
+## 2026-07-08 — /gallery-dna: the population as a contact sheet
+
+All 12 champions captured in-engine and published to the encyclopedia:
+/gallery-dna — per champion: capture, genome line (form / mix / motif /
+light / floating / signed), measures (slots, kinds, vista, niches,
+terraced), plus each profile's learning curve. The pockets-form CAP
+champions read clearly as Two-Point-style wing plans; the DRA basilicas
+show the floating walls mid-nave. Verified: 12 cards, 0 broken images.
+The judging loop is now one scroll instead of twelve walks.
+
+## 2026-07-08 — wedges: the terraces become two-way
+
+Palle: add wp wedges + rotation from the utilities layer to walk between
+levels. DISCOVERY: the whole stack already existed — GridUtilitiesComponent
+handles wp (walkable prism, rotation + color params, mapobjects/
+walkableprism.tscn: PrismMesh left_to_right=0, ridge -X, WITH StaticBody
+collision) and map_pathfinder already documents 'climbing up requires wp
+ramp'. Only the GENERATOR was missing.
+
+gallery_evolve: terraced compiles now plant wp:0 on the LOWER cell at
+every height boundary (1-2 per step; cells reserved from furniture then
+released; n_wedges in measures). Gallery_TER_DEMO (terrace, mixed mix,
+2 floating walls, signed): 4 wedges, pathfinder-clean, capture shows the
+prisms seated at both steps — the terraced hall is now climbable both
+ways. Champions recaptured, /gallery-dna refreshed.

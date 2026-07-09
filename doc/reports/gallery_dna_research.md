@@ -21,26 +21,26 @@ Three taste-profiles evolved as separate populations (pop 24, 5 generations, tou
 
 | gen | best | mean | best form |
 |---|---|---|---|
-| 1 | 46.1 | 34.62 | basilica |
-| 2 | 47.1 | 40.35 | cross |
-| 3 | 47.1 | 41.01 | cross |
-| 4 | 52.1 | 44.53 | basilica |
-| 5 | 52.1 | 47.09 | basilica |
+| 1 | 52.1 | 34.77 | basilica |
+| 2 | 52.1 | 39.46 | basilica |
+| 3 | 52.1 | 41.94 | basilica |
+| 4 | 52.1 | 45.0 | basilica |
+| 5 | 52.1 | 48.2 | basilica |
 
-- **Gallery_DRA_1** (fit 52.1): basilica / ring / dramatic, 26 slots, vista 23, 4 niches, terraced=True
-- **Gallery_DRA_2** (fit 52.1): basilica / ring / dramatic, 26 slots, vista 23, 4 niches, terraced=True
-- **Gallery_DRA_3** (fit 52.1): terrace / axis_row / dramatic, 22 slots, vista 23, 4 niches, terraced=True
+- **Gallery_DRA_1** (fit 52.1): basilica / ring / dramatic, 30 slots, vista 23, 7 niches, terraced=True
+- **Gallery_DRA_2** (fit 52.1): basilica / axis_row / dramatic, 31 slots, vista 23, 7 niches, terraced=True
+- **Gallery_DRA_3** (fit 52.1): cross / ring / dramatic, 30 slots, vista 23, 7 niches, terraced=True
 - **Gallery_DRA_4** (fit 52.1): basilica / ring / dramatic, 26 slots, vista 23, 4 niches, terraced=True
 
 ## intimacy
 
 | gen | best | mean | best form |
 |---|---|---|---|
-| 1 | 45.05 | 24.24 | basilica |
-| 2 | 52.95 | 38.97 | basilica |
-| 3 | 55.85 | 44.39 | basilica |
-| 4 | 57.35 | 49.4 | basilica |
-| 5 | 60.35 | 52.52 | basilica |
+| 1 | 45.05 | 24.18 | basilica |
+| 2 | 52.95 | 38.91 | basilica |
+| 3 | 55.85 | 44.29 | basilica |
+| 4 | 57.35 | 49.15 | basilica |
+| 5 | 60.35 | 52.35 | basilica |
 
 - **Gallery_INT_1** (fit 60.35): basilica / double_row / dusk, 46 slots, vista 23, 7 niches, terraced=True
 - **Gallery_INT_2** (fit 57.35): basilica / double_row / dusk, 35 slots, vista 23, 7 niches, terraced=True

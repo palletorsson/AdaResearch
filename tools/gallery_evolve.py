@@ -176,6 +176,25 @@ def compile_gallery(g, gid="X"):
         if (r, c + 1) not in floor:
             aw(r, c, "e")
 
+    # wedges: walkable prisms to climb BACK up the terraces (wp:0 = ridge
+    # west, sloping down east — matches west-high terraces). Placed on the
+    # LOWER cell at each height boundary; cells reserved from furniture.
+    n_wedges = 0
+    if len(set(hmap.values())) > 1:
+        boundary_cols = sorted({c for (r, c) in floor
+                                if (r, c - 1) in floor and hmap[(r, c - 1)] == hmap[(r, c)] + 1})
+        for bc in boundary_cols:
+            rows_here = sorted([r for (r, c) in floor if c == bc
+                                and (r, bc - 1) in floor and hmap[(r, bc - 1)] == hmap[(r, bc)] + 1])
+            picks = [rows_here[len(rows_here) // 2]]
+            if len(rows_here) > 4:
+                picks.append(rows_here[1])
+            for pr in picks:
+                if utilities[pr][bc] == " " and inter[pr][bc] == " ":
+                    utilities[pr][bc] = "wp:0"
+                    inter[pr][bc] = "RESERVED"
+                    n_wedges += 1
+
     # interior architecture by form
     doors = 0
     if g["form"] == "axis":
@@ -325,6 +344,12 @@ def compile_gallery(g, gid="X"):
             if inter[rr][cc] == " ":
                 inter[rr][cc] = "exhibit_furniture#kind:sign_fire"
 
+    # release wedge reservations (furniture placement is done)
+    for r in range(PD):
+        for c in range(PW):
+            if inter[r][c] == "RESERVED":
+                inter[r][c] = " "
+
     # spawn west (highest terrace), teleporter east on void
     spawn = min((p for p in floor), key=lambda p: (p[1], abs(p[0] - axis_r)))
     utilities[spawn[0]][spawn[1]] = "s"
@@ -356,7 +381,7 @@ def compile_gallery(g, gid="X"):
                            f"light={g['light']}, {len(slots)} exhibit slots and no artifacts. Auto-research champion.",
             "version": "0.2", "format": "json",
             "dimensions": {"width": PW, "depth": PD, "max_height": 3},
-            "gallery_genome": g,
+            "gallery_genome": g, "n_wedges": n_wedges,
             "metadata": {"difficulty": "beginner", "category": "museum",
                          "estimated_time": "2-4 minutes",
                          "learning_objectives": ["architecture before collection"]},
@@ -430,6 +455,7 @@ def measure(data, slots):
     hospitality = (1 if g2.get("infoboard", 0) else 0) + (1 if g2.get("signage", 0) else 0)
     return {"slots": capacity, "kinds": len(kinds), "n_niche": kinds.get("niche", 0),
             "hospitality": hospitality, "floating": kinds.get("floating_wall", 0),
+            "wedges": data["map_info"].get("n_wedges", 0),
             "hang": hang, "vista": best_run, "doors": doors,
             "terraced": len(heights) > 1, "loop": has_loop,
             "min_slot_dist": round(min_d, 1), "reachable": reachable,
