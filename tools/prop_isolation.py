@@ -65,7 +65,7 @@ def build(suffix, token, needs_step):
         for r in range(cz - 1, cz + 2):
             structure[r][cx - 1] = "2"          # high plateau (west)
             structure[r][cx] = "1"              # low cell with wedge
-        utilities[cz][cx] = "wp:90"            # ramp rises WEST (verified)
+        utilities[cz][cx] = "wp:-90"            # ramp rises WEST (verified)
         inter[cz + 2][cx] = "exhibit_furniture#kind:infoboard"
     else:
         inter[cz][cx] = token

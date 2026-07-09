@@ -69,6 +69,15 @@ PALETTES = {
                 ("exhibit_furniture#kind:platform", "platform", 2),
                 ("exhibit_furniture#kind:vitrine_tall", "vitrine_tall", 1)],
 }
+# footprint (cells the object occupies) + needs_approach (player must stand free
+# beside it to view). Derived from spatial_needs.footprint_cells / measured AABB.
+FOOTPRINT = {
+    "podium": 1, "plinth_s": 1, "plinth_m": 1, "plinth_l": 1, "hollow": 1,
+    "dais": 1, "vitrine": 1, "vitrine_tall": 1, "cabinet": 1, "table": 2,
+    "platform": 2, "floating_wall": 1, "niche": 1,
+}
+WALL_BACKED = {"cabinet", "vitrine", "floating_wall", "niche"}   # want a wall behind
+
 MOTIFS = ["axis_row", "double_row", "ring", "constellation", "spiral"]
 LIGHTS = ["bright", "dusk", "dramatic"]
 
@@ -186,7 +195,7 @@ def compile_gallery(g, gid="X"):
 
     # wedges: walkable prisms to climb BACK up the terraces (wp:0 = ridge
     # west, sloping down east — matches west-high terraces). Placed on the
-    # LOWER (east) cell of each west-high boundary; wp:90 = ramp rises WEST
+    # LOWER (east) cell of each west-high boundary; wp:-90 = ramp rises WEST (walked-verified by Palle)
     # (verified empirically in Test_WedgeCube: :90 vertical-face-to-plateau,
     # hypotenuse to the low floor - the climbable ramp; :180 ramps N/S).
     n_wedges = 0
@@ -207,7 +216,7 @@ def compile_gallery(g, gid="X"):
                     picks.append(rows_here[1])
             for pr in picks:
                 if utilities[pr][bc] == " " and inter[pr][bc] == " ":
-                    utilities[pr][bc] = "wp:90"
+                    utilities[pr][bc] = "wp:-90"
                     inter[pr][bc] = "RESERVED"
                     n_wedges += 1
             # Cour Marly: flank the stair head on the UPPER terrace
@@ -480,6 +489,49 @@ def measure(data, slots):
         for j in range(i + 1, len(slots)):
             min_d = min(min_d, math.dist(slots[i][:2], slots[j][:2]))
 
+    # ── PATHFINDING + FOOTPRINT: reachability, approach clearance, aisle ──
+    slot_cells = [(t[0], t[1]) for t in slots]
+    reach_slots = sum(1 for sc in slot_cells if sc in reach)
+    reach_frac = reach_slots / max(1, len(slot_cells))
+    # approach clearance: a footprinted object needs >=1 free walkable neighbour
+    approach_ok = 0
+    for t in slots:
+        (r, c) = (t[0], t[1])
+        kind = t[2]
+        free_nbrs = sum(1 for nb in graph.neighbors((r, c))
+                        if nb in reach and nb not in slot_cells)
+        need = 2 if FOOTPRINT.get(kind, 1) >= 2 else 1
+        if free_nbrs >= need:
+            approach_ok += 1
+    approach_frac = approach_ok / max(1, len(slots))
+    # aisle quality: nearest-neighbour walk over reachable slots, detour ratio
+    import math as _m
+    from collections import deque as _dq
+    def _bfs_len(a, b):
+        if a == b: return 0
+        seen = {a}; q = _dq([(a, 0)])
+        while q:
+            cur2, d = q.popleft()
+            for nb in graph.neighbors(cur2):
+                if nb == b: return d + 1
+                if nb not in seen:
+                    seen.add(nb); q.append((nb, d + 1))
+        return None
+    reachable_slots = [sc for sc in slot_cells if sc in reach]
+    walk_len, straight = 0.0, 0.0
+    if graph.spawn and len(reachable_slots) >= 2:
+        cur = graph.spawn
+        remaining = list(reachable_slots)
+        while remaining:
+            nxt = min(remaining, key=lambda p2: _m.dist(cur, p2))
+            step = _bfs_len(cur, nxt)
+            walk_len += step if step is not None else _m.dist(cur, nxt)
+            straight += _m.dist(cur, nxt)
+            cur = nxt
+            remaining.remove(nxt)
+    detour = (walk_len / straight) if straight > 0 else 1.0
+    total_footprint = sum(FOOTPRINT.get(t[2], 1) for t in slots)
+
     # return path: can you walk BACK from the exit to the spawn (climbs need wedges)
     return_path = False
     spawn_pos = graph.spawn
@@ -503,6 +555,8 @@ def measure(data, slots):
             "hospitality": hospitality, "floating": kinds.get("floating_wall", 0),
             "wedges": data["map_info"].get("n_wedges", 0),
             "return_path": return_path,
+            "reach_frac": round(reach_frac, 2), "approach_frac": round(approach_frac, 2),
+            "detour": round(detour, 2), "footprint_cells": total_footprint,
             "hang": hang, "vista": best_run, "doors": doors,
             "terraced": len(heights) > 1, "loop": has_loop,
             "min_slot_dist": round(min_d, 1), "reachable": reachable,
@@ -520,11 +574,11 @@ def fitness(profile, m):
         return (m["vista"] * 0.9 + m["dais"] * 3.0 + (6 if m["terraced"] else 0)
                 + (4 if m["light"] == "dramatic" else 0) + min(m["hang"], 80) * 0.03
                 + m["floating"] * 2.5 + min(m["slots"], 10) * 0.5
-                + m["hospitality"] * 1.0 + (2.0 if m.get("return_path") else 0.0) + spacing)
+                + m["hospitality"] * 1.0 + (2.0 if m.get("return_path") else 0.0) + m.get('reach_frac',1)*5.0 + m.get('approach_frac',1)*4.0 - max(0.0, m.get('detour',1)-1.4)*3.0 + spacing)
     # intimacy
     return (m["n_niche"] * 2.2 + m["doors"] * 1.2 - m["vista"] * 0.35
             + (4 if m["light"] == "dusk" else 0) + min(m["slots"], 14) * 0.8
-            + m["kinds"] * 1.5 + m["hospitality"] * 2.0 + (2.0 if m.get("return_path") else 0.0) + spacing)
+            + m["kinds"] * 1.5 + m["hospitality"] * 2.0 + (2.0 if m.get("return_path") else 0.0) + m.get('reach_frac',1)*5.0 + m.get('approach_frac',1)*4.0 - max(0.0, m.get('detour',1)-1.4)*3.0 + spacing)
 
 
 # ── evolution ────────────────────────────────────────────────────────────────
@@ -592,7 +646,8 @@ def main():
             print(f"   {r['id']:16s} fit={r['fitness']:6.2f} form={g['form']:9s} "
                   f"mix={g.get('furniture_mix','?'):8s} float={g.get('floating_walls',0)} "
                   f"sign={g.get('signage',0)} light={g['light']:8s} "
-                  f"slots={m['slots']:2d} kinds={m['kinds']} vista={m['vista']:2d}")
+                  f"slots={m['slots']:2d} reach={m.get('reach_frac',1)} "
+                  f"appr={m.get('approach_frac',1)} detour={m.get('detour',1)}")
     (ROOT / "doc" / "reports" / "gallery_dna_research.json").write_text(
         json.dumps(report, indent=1), encoding="utf-8")
 

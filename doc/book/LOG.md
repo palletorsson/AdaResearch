@@ -849,3 +849,33 @@ climbable slope face rising to the plateau. Lesson: wedge rotation is
 INVISIBLE to the pathfinder (cosmetic for reachability) AND ambiguous in
 the corpus - the cube-in-front isolation test is the only ground truth,
 exactly as Palle said.
+
+## 2026-07-08 — wp:-90 (final), pathfinding + footprints in the fitness, backlog
+
+- WEDGE ROTATION FINAL: Palle walked it -> wp:-90 (the walkable slope faces
+  the approach; :90 was the mirror with the cliff facing the player). Trust
+  the walked verdict; rotation is invisible to the pathfinder and I'd guessed
+  wrong twice from static renders. Generator + prop_isolation + Prop_wedge +
+  terraced maps all wp:-90.
+
+- PATHFINDING + FOOTPRINTS wired into gallery_evolve fitness (Palle's ask):
+  * FOOTPRINT{} per slot kind (from spatial_needs.footprint_cells) +
+    WALL_BACKED set.
+  * measure() now runs MapGraph BFS from spawn over the compiled gallery:
+    reach_frac (every slot reachable respecting walls + wedge climbs),
+    approach_frac (every object has >=1 free walkable neighbour for its
+    footprint = clearance to stand and view), detour (nearest-neighbour walk
+    length / straight-line = aisle quality), footprint_cells (total).
+  * Fitness (all profiles): + reach*5 + approach*4 - max(0,detour-1.4)*3.
+    Reachability + clearance are now near-hard requirements; clean aisles
+    rewarded.
+  RESULT: every champion reach=1.0 approach=1.0. DRAMA discovered the
+  ROTUNDA (DRA_1, detour 1.32 — the round form circulates cleanest);
+  intimacy basilicas hit detour 1.29. Pathfinding made the generator care
+  that the space actually WALKS, not just looks.
+
+- BACKLOG: doc/reports/gallery_improvement_backlog.md — 18 items ordered by
+  leverage (real footprints from artifact_sizes not the proxy table; wire
+  walk_evaluator directly; encounter-order term; clearance repair; light
+  strips / floor zones / mezzanine / oculus; Curator->genome->place.py loop;
+  physics walkability probe; eye-level captures).
