@@ -1,14 +1,16 @@
 #!/usr/bin/env python3
-"""template_vertical_repair.py — round 3: open the vertical genome space.
+"""template_vertical_repair.py — round 3: connectivity repair for generated rooms.
 
-Diagnosis (2026-07-09): terraced genomes (height=step_down, form=pockets/
-terrace) fail the 92%-coverage check not because the checker is biased but
-because the GENERATOR seals rooms: wedges only bridge 1-level boundaries, so
-a 2-level cliff (h3 next to h1) leaves the low pocket unreachable. Evolution
-therefore never explores height honestly.
+VERDICT (2026-07-09, see doc/reports/template_vertical_research.md): the
+original premise — "terraced genomes are systematically penalized" — was
+FALSE. Survey of 400 genomes: flat 224/224 pass, terraced 174/176; the
+migration champions were already terraced. The ~1% real failures are
+WALL-SEALED pockets (same-height cells closed by route/hull wall edges),
+and this file's repair operator fixes them (2/2 in the survey, by doors).
 
 THE REPAIR OPERATOR: after compile, flood from spawn; for each unreached
 component find its lowest-|dh| boundary to reached floor and bridge it —
+  dh == 0 : carve a DOOR (uppercase the wall code on the blocking edge)
   dh == 1 : place a wp wedge on the lower cell, rotated to rise toward the high side
   dh >= 2 : carve the component-side boundary cell into an intermediate step
             (height hi-1) + wedge, then recurse (the next pass sees a 1-step)
