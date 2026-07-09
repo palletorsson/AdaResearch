@@ -214,6 +214,19 @@ def main():
     for i in range(len(seqs) - 1):
         carve_door(i, i + 1)
 
+    # the numbered trail made VISIBLE: a warm-gold breadcrumb light at each
+    # consecutive-department threshold (the Smithsonian 1->N route).
+    def trail_marker(a, b):
+        (gra, gca), (grb, gcb) = order_to_grid(a), order_to_grid(b)
+        ra0, ca0, ra1, ca1 = room_cells(gra, gca)
+        rb0, cb0, rb1, cb1 = room_cells(grb, gcb)
+        mr = (min(ra0, rb0) + max(ra1, rb1)) // 2
+        mc = (min(ca0, cb0) + max(ca1, cb1)) // 2
+        if utilities[mr][mc].strip() == "":
+            utilities[mr][mc] = "el:1.6:0:#ffcf7a"
+    for i in range(len(seqs) - 1):
+        trail_marker(i, i + 1)
+
     # redundant circulation (the enfilade + bypass lesson): a door between EVERY
     # grid-adjacent department, so vistas align and no room can be isolated.
     grid_at = {order_to_grid(i): i for i in range(len(seqs))}

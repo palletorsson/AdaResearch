@@ -103,8 +103,9 @@ func _physics_process(delta: float) -> void:
 	# Apply mouse look
 	_apply_camera_rotation(delta)
 
-	# F toggles walk <-> fly (fly: Space up, Ctrl down)
-	if Input.is_key_pressed(KEY_F):
+	# G toggles walk <-> fly (fly: Space up, Ctrl down). Was F, but F is the
+	# flashlight — freed it to avoid the double-bind.
+	if Input.is_key_pressed(KEY_G):
 		if not _fly_key_held:
 			_fly_key_held = true
 			fly_mode = not fly_mode

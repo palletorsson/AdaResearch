@@ -1005,3 +1005,13 @@ the rotunda spawn (the only unreachable cells are the harmless exterior
 margin). LESSON: pathfinder reachability != walkable-door connectivity; when
 the body can't move, check the doors the WALL COMPONENT actually builds, not
 the abstract graph.
+
+## 2026-07-08 — F/G fix + the visible numbered trail
+
+- KEY CONFLICT: F was bound to BOTH fly-toggle AND flashlight (Palle
+  reported). Moved DesktopPlayer fly toggle to G (glide); F stays flashlight.
+- KEEP UPDATING THE GALLERY: the numbered trail made VISIBLE (Smithsonian
+  1->N lesson) — a warm-gold breadcrumb light (el:1.6:0:#ffcf7a, reusing the
+  el-colour I added) at each consecutive-department threshold in the Spine
+  Museum, so the curriculum order is legible as you move through the doors.
+  Pathfinder-clean.
