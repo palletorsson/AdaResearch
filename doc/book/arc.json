@@ -1,5 +1,5 @@
 {
- "_doctrine": "R-025: the tutorial arc. NOC-for-Godot-3D across all 22 spine chapters. Each chapter's beats are authored to BUILD ON the vocabulary of prior chapters (builds_on names them). roles = the beat skeleton; casting (role -> real artifact) happens per-sequence against the map inventory. Voltage (the critical script) is chosen per chapter from its charged artifacts.",
+ "_doctrine": "R-025: the tutorial arc. NOC-for-Godot-3D across all 24 spine chapters. Each chapter's beats are authored to BUILD ON the vocabulary of prior chapters (builds_on names them). roles = the beat skeleton; casting (role -> real artifact) happens per-sequence against the map inventory. Voltage (the critical script) is chosen per chapter from its charged artifacts.",
  "chapters": [
   {
    "seq": "primitives",
@@ -38,10 +38,30 @@
    ]
   },
   {
+   "seq": "symmetry",
+   "builds_on": [
+    "transformation",
+    "primitives"
+   ],
+   "teaches": "the moves that leave a pattern unchanged — translate, reflect, rotate, glide; closure makes the group; the seventeen wallpaper groups as a complete census of the plane",
+   "roles": [
+    "one motif — the domain cell",
+    "translate — the tile repeats",
+    "reflect — the mirror",
+    "rotate — the rotor",
+    "glide — the sneaky symmetry",
+    "closure — the group, the complete set of moves",
+    "the seventeen — the census CLOSES",
+    "build a pattern yourself",
+    "prove it — reproduce the target group"
+   ]
+  },
+  {
    "seq": "array_tutorial",
    "builds_on": [
     "primitives",
-    "transformation"
+    "transformation",
+    "symmetry"
    ],
    "teaches": "the grid as an addressable structure — index to position, repetition as a first-class move",
    "roles": [
@@ -151,8 +171,28 @@
    ]
   },
   {
+   "seq": "formfinding",
+   "builds_on": [
+    "forces",
+    "change"
+   ],
+   "teaches": "why matter takes THIS shape — form as energy descent; the gradient, the catenary, the minimal surface, relaxation, equilibrium, and annealing out of local minima",
+   "roles": [
+    "the question — why does matter take THIS shape?",
+    "roll downhill — the gradient",
+    "the hanging chain — the catenary",
+    "the soap film — the minimal surface",
+    "settle to rest — relaxation",
+    "the balance — equilibrium of forces",
+    "escape the local minimum — annealing",
+    "find a form yourself",
+    "prove it — reach the minimum"
+   ]
+  },
+  {
    "seq": "wavefunctions",
    "builds_on": [
+    "formfinding",
     "forces",
     "change"
    ],
