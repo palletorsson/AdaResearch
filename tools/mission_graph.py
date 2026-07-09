@@ -1,0 +1,178 @@
+#!/usr/bin/env python3
+"""mission_graph.py — the map generated FROM the teaching arc (Dormans' move).
+
+Mission/space decoupling: generate the MISSION first, then embed it in space.
+Ada already has the mission — a chapter's baseline: the beat sequence (the
+tutorial spine) + the voltage pieces (the critical charge). This tool turns
+that graph into a walkable map built from wall_kit blocks:
+
+  beats     -> rooms on a serpentine spine, one gate to the previous room,
+               one to the next — the walk IS the lesson order
+  voltage   -> side-chapels hanging off their nearest beat (the branch
+               points where the critical trajectory leaves the tutorial)
+  cast      -> each beat's artifact standing in its own room
+  the rest  -> void; the map's outline is the mission's silhouette
+
+Feature by role (rough semantics): arrive->field, move/trace->pinwheel,
+repeat/grid/pattern->street, measure/census->colonnade, build-yourself->court,
+voltage chapels alternate ledge (shrine) / court (pit).
+
+Usage:
+  python tools/mission_graph.py --seq=primitives [--name=Mission_Primitives]
+  python tools/mission_graph.py --seq=randomness --cols=4
+"""
+import json
+import math
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT / "tools"))
+sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+
+import wall_kit as wk
+
+B, SEA = wk.B, wk.SEA
+
+
+def feature_for(role: str, i: int) -> str:
+    r = role.lower()
+    if i == 0 or "arrive" in r or "appears" in r:
+        return "field"
+    if any(k in r for k in ("move", "trace", "walk", "rotate", "turn")):
+        return "pinwheel"
+    if any(k in r for k in ("repeat", "grid", "pattern", "tile", "mirror")):
+        return "street"
+    if any(k in r for k in ("measure", "census", "count", "seventeen", "prove")):
+        return "colonnade"
+    if any(k in r for k in ("build", "compose", "yourself", "design", "paint")):
+        return "court"
+    return ("pinwheel", "colonnade", "street", "field")[i % 4]
+
+
+def load_mission(seq: str):
+    p = ROOT / "doc" / "book" / "baselines" / f"{seq}.json"
+    d = json.loads(p.read_text(encoding="utf-8"))
+    beats = [{"role": b.get("role", f"beat {i}"), "cast": b.get("cast", "")}
+             for i, b in enumerate(d.get("beats", [])) if not b.get("missing")]
+    volt = [v.get("piece", "") for v in d.get("voltage", []) if v.get("piece")]
+    return beats, volt
+
+
+def embed(beats, volt, cols):
+    """serpentine spine + adjacent chapels. Returns rooms dict (r,c)->room."""
+    n = len(beats)
+    rows = math.ceil(n / cols) + 1          # buffer row for chapels
+    order = []
+    for r in range(rows):
+        cs = range(cols) if r % 2 == 0 else range(cols - 1, -1, -1)
+        order += [(r, c) for c in cs]
+    spine = order[:n]
+    rooms = {}
+    for i, cell in enumerate(spine):
+        rooms[cell] = {"kind": "beat", "i": i, "role": beats[i]["role"],
+                       "cast": beats[i]["cast"],
+                       "feature": feature_for(beats[i]["role"], i),
+                       "gates": set()}
+    for i in range(n - 1):
+        a, b = spine[i], spine[i + 1]
+        rooms[a]["gates"].add(b)
+        rooms[b]["gates"].add(a)
+    # chapels: voltage k attaches to its spread-out target beat
+    for k, piece in enumerate(volt):
+        t = round(k * (n - 1) / max(1, len(volt) - 1)) if len(volt) > 1 else n // 2
+        target = spine[t]
+        placed = False
+        for dr, dc in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+            nb = (target[0] + dr, target[1] + dc)
+            if 0 <= nb[0] < rows and 0 <= nb[1] < cols and nb not in rooms:
+                rooms[nb] = {"kind": "chapel", "i": k, "role": f"voltage: {piece}",
+                             "cast": piece,
+                             "feature": "ledge" if k % 2 == 0 else "court",
+                             "gates": {target}}
+                rooms[target]["gates"].add(nb)
+                placed = True
+                break
+        if not placed:
+            # host the piece inside its beat room instead
+            rooms[target].setdefault("extra", []).append(piece)
+    return rooms, spine, rows
+
+
+def build(seq, name, cols):
+    beats, volt = load_mission(seq)
+    if not beats:
+        print(f"no beats in baseline for {seq}")
+        return 1
+    rooms, spine, rows = embed(beats, volt, cols)
+    W, H = cols * B, rows * B
+    layers = {"structure": [["0"] * W for _ in range(H)],
+              "utilities": [[" "] * W for _ in range(H)],
+              "walls": [[""] * W for _ in range(H)],
+              "interactables": [[" "] * W for _ in range(H)]}
+    DIRS = {(-1, 0): 0, (0, 1): 1, (1, 0): 2, (0, -1): 3}   # n e s w
+    for (br, bc), room in rooms.items():
+        bl = wk.KIT[room["feature"]]()
+        sides = ["s", "s", "s", "s"]
+        for (dr, dc), i in DIRS.items():
+            if (br + dr, bc + dc) in room["gates"]:
+                sides[i] = "g"
+        wk.perimeter(bl, tuple(sides))
+        for r in range(B):
+            for c in range(B):
+                R, C = br * B + r, bc * B + c
+                layers["structure"][R][C] = bl["structure"][r][c]
+                layers["utilities"][R][C] = bl["utilities"][r][c]
+                layers["walls"][R][C] = bl["walls"][r][c]
+        # the cast stands in its room (clear of the sunken/raised centre)
+        R0, C0 = br * B, bc * B
+        if room.get("cast"):
+            layers["interactables"][R0 + 1][C0 + B // 2] = room["cast"]
+        for j, piece in enumerate(room.get("extra", [])):
+            layers["interactables"][R0 + B - 2][C0 + 2 + j * 2] = piece
+    # spawn in the first beat, exit teleporter in the last
+    fr, fc = spine[0]
+    layers["utilities"][fr * B + 1][fc * B + 1] = "sp"
+    lr, lc = spine[-1]
+    tr, tc = lr * B + B - 2, lc * B + B - 2
+    layers["utilities"][tr][tc] = "t:restart"
+    layers["structure"][tr][tc] = "0"
+    mission = [{"beat": r["i"], "kind": r["kind"], "role": r["role"],
+                "cast": r["cast"], "block": [br, bc]}
+               for (br, bc), r in sorted(rooms.items(),
+                                         key=lambda kv: (kv[1]["kind"], kv[1]["i"]))]
+    data = {"map_info": {"name": name, "lookup_name": name, "title": name,
+                         "mission_graph": {"seq": seq, "beats": len(beats),
+                                           "chapels": len(volt),
+                                           "rooms": mission}},
+            "layers": layers}
+    out = ROOT / "commons" / "maps" / name
+    out.mkdir(parents=True, exist_ok=True)
+    with open(out / "map_data.json", "w", encoding="utf-8", newline="\n") as f:
+        json.dump(data, f, indent=1)
+    print(f"{name}: {len(beats)} beats + {len(volt)} voltage -> "
+          f"{len(rooms)} rooms on {cols}x{rows} blocks ({W}x{H} cells)")
+    for i, cell in enumerate(spine):
+        room = rooms[cell]
+        chapels = [f" +[{rooms[g]['cast']}]" for g in room["gates"]
+                   if g in rooms and rooms[g]["kind"] == "chapel"]
+        print(f"  {i+1:2d}. {room['feature']:9s} {room['role'][:44]:44s} "
+              f"<{room['cast']}>{''.join(chapels)}")
+    print(f"view: /map-viewer?map={name}")
+    return 0
+
+
+def main() -> int:
+    arg = lambda k, d: next((a.split("=", 1)[1] for a in sys.argv
+                             if a.startswith(f"--{k}=")), d)
+    seq = arg("seq", None)
+    if not seq:
+        print(__doc__)
+        return 1
+    cols = int(arg("cols", "3"))
+    name = arg("name", f"Mission_{seq.title().replace('_','')}")
+    return build(seq, name, cols)
+
+
+if __name__ == "__main__":
+    sys.exit(main())
