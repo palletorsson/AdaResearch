@@ -31,6 +31,7 @@ sys.path.insert(0, str(ROOT / "tools"))
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 import wall_kit as wk
+import staging_beds as sb
 
 B, SEA = wk.B, wk.SEA
 
@@ -370,7 +371,15 @@ def build_halls(seq, name):
                 swaps.append(swapped + "->" + chosen)
             draw_feature(layers, e["feature"], oy, ox, F)
             cr, cc = cast_spot(e["feature"], oy, ox, F)
-            layers["interactables"][cr][cc] = chosen
+            # MARRIAGE 1: the bed carries the artifact (staging_beds decides
+            # the body — plinth/table/platform/pit/panel/vitrine by measured
+            # footprint; same convention as furnish_gallery)
+            bed = sb.select_bed(chosen)
+            if bed["is_wall"] and e["feature"] != "chapel":
+                cr, cc = y + 1, ox + F // 2      # graphics hang on the hall wall
+                layers["interactables"][cr][cc] = f"{bed['bed']}:180#mount:{chosen}"
+            else:
+                layers["interactables"][cr][cc] = f"{bed['bed']}#mount:{chosen}"
         y += D
     # carve ONE door between consecutive acts, near the walking end
     for k in range(rows - 1):
