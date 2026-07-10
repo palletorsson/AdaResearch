@@ -27,6 +27,20 @@ em-square footprints); tight around artifacts; verdicts on `/hall-verdicts`
 
 ## Specced — next candidates
 
+### dérive bricolage (the wanderer with the backpack) — Palle 2026-07-10, IN BUILD
+ONE wanderer carries the beats in a backpack in teaching order. FORWARD PASS
+(the dérive): she drifts — heading momentum + seeded turn noise + a soft pull
+toward the centroid so the walk circles compactly — carving 3-wide floor, and
+every (6 + footprint) steps places the next artifact on a TIGHT plate beside
+her path (footprint + 1 aisle); voltage goes in 1-deep side alcoves. RETURN
+PASS (the bricolage — "then goes back again to improve"): she retraces,
+pruning floor bulges to a fixpoint (never breaking connectivity), carving up
+to 2 shortcut loops where her path nearly self-touches, and staffing benches
+at the plates on the second look. Placement and curation are the SAME WALK in
+two directions — no other strategy has the return. Tightness target < 1600
+floor cells. KNOBS: turn probability, centroid pull, spacing, prune
+aggressiveness, shortcut count. `tools/gen_derive.py`.
+
 ### flocking rooms (separation as layout) — Palle 2026-07-10
 Rooms are BOIDS. Each beat's room (sized footprint+aisle) is an agent with:
 - **separation** — the "perfect but close" force: rooms repel inside radius
