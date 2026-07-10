@@ -27,7 +27,8 @@ var mat_amber: StandardMaterial3D
 var mat_plate: StandardMaterial3D
 var mat_backlight: StandardMaterial3D
 
-const FAMILIES := ["gridglass", "tank", "cage", "shadowbox", "openframe"]
+const FAMILIES := ["gridglass", "tank", "cage", "shadowbox", "openframe",
+	"table_display_1m", "table_display_2m", "podium"]
 
 
 func _init() -> void:
@@ -72,6 +73,16 @@ func build(family: String, accent: StandardMaterial3D = null) -> Node3D:
 	"""origin at bottom-centre (plinth base); interior clear for the mount."""
 	var n := Node3D.new()
 	var acc := accent if accent != null else mat_amber
+	# stand families: no plinth, no housing — table displays and the podium
+	if family == "table_display_1m":
+		_table_display(n, acc, 1.0)
+		return n
+	if family == "table_display_2m":
+		_table_display(n, acc, 2.0)
+		return n
+	if family == "podium":
+		_podium(n, acc)
+		return n
 	# the default 1m cube plinth under every housing
 	_box(n, Vector3(1.0, PLINTH_H, 1.0), Vector3(0, PLINTH_H * 0.5, 0), mat_dark)
 	_box(n, Vector3(1.06, 0.05, 1.06), Vector3(0, PLINTH_H - 0.025, 0), mat_steel)
@@ -95,8 +106,46 @@ func build(family: String, accent: StandardMaterial3D = null) -> Node3D:
 
 func mount_point(family: String) -> Vector3:
 	"""where the housed artifact's origin should sit (local)."""
+	if family in ["table_display_1m", "table_display_2m"]:
+		return Vector3(0, 0.82, -0.28)     # on the table, against the panel
+	if family == "podium":
+		return Vector3(0, 1.14, 0)          # the operating surface
 	var hover := 0.05 if family in ["tank", "openframe"] else 0.0
 	return Vector3(0, PLINTH_H + hover + BASE_H + 0.01, 0)
+
+
+# ── stand families ───────────────────────────────────────────────────────────
+func _table_display(n: Node3D, acc: StandardMaterial3D, w: float) -> void:
+	"""a table with a FRAMELESS vertical panel — 2D content edge to edge."""
+	var top_y := 0.78
+	# slim steel legs + dark top slab
+	for sx in [-w * 0.5 + 0.06, w * 0.5 - 0.06]:
+		for sz in [-0.32, 0.32]:
+			_box(n, Vector3(0.05, top_y, 0.05), Vector3(sx, top_y * 0.5, sz), mat_steel)
+	_box(n, Vector3(w, 0.05, 0.8), Vector3(0, top_y + 0.025, 0), mat_dark)
+	# the frameless panel: one thin bright surface, no border, full width
+	var panel_h := 1.25
+	_box(n, Vector3(w, panel_h, 0.022),
+		Vector3(0, top_y + 0.05 + panel_h * 0.5, -0.34), mat_white)
+	# two small stand tabs behind (invisible from the front)
+	for sx in [-w * 0.25, w * 0.25]:
+		_box(n, Vector3(0.05, 0.3, 0.05), Vector3(sx, top_y + 0.2, -0.395), mat_dark)
+	# the hand-grammar on the table's front edge
+	_box(n, Vector3(0.34, 0.08, 0.012), Vector3(-w * 0.5 + 0.24, top_y - 0.06, 0.4), mat_plate)
+	_box(n, Vector3(0.08, 0.08, 0.02), Vector3(w * 0.5 - 0.12, top_y - 0.06, 0.4), acc)
+	_box(n, Vector3(w, 0.018, 0.014), Vector3(0, top_y + 0.055, 0.4), acc)
+
+
+func _podium(n: Node3D, acc: StandardMaterial3D) -> void:
+	"""the operating stand — a small interactive at hand height (coin_toss)."""
+	_box(n, Vector3(0.5, 0.08, 0.5), Vector3(0, 0.04, 0), mat_dark)      # foot
+	_box(n, Vector3(0.4, 0.96, 0.4), Vector3(0, 0.08 + 0.48, 0), mat_dark)
+	_box(n, Vector3(0.62, 0.06, 0.62), Vector3(0, 1.1, 0), mat_steel)    # top
+	_box(n, Vector3(0.62, 0.03, 0.08), Vector3(0, 1.085, 0.31), mat_dark)  # lip
+	# hand-grammar on the column front
+	_box(n, Vector3(0.3, 0.08, 0.012), Vector3(-0.04, 0.9, 0.21), mat_plate)
+	_box(n, Vector3(0.07, 0.07, 0.018), Vector3(0.14, 0.78, 0.21), acc)
+	_box(n, Vector3(0.4, 0.016, 0.014), Vector3(0, 1.07, 0.21), acc)
 
 
 # ── the chassis: the one hand-grammar ────────────────────────────────────────

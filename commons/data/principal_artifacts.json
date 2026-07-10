@@ -375,6 +375,25 @@
     "atmosphere": "none — air",
     "for": "growth, grammar, things that should breathe"
    }
+  },
+  "stand_families": {
+   "table_display_1m": {
+    "for": "vertical 2D content, frameless — papers, compositions, readouts",
+    "mount": "on the table against the panel"
+   },
+   "table_display_2m": {
+    "for": "wide vertical 2D content, frameless",
+    "mount": "on the table against the panel"
+   },
+   "podium": {
+    "for": "small hand-operated interactives — coin_toss and kin",
+    "mount": "the operating surface at 1.1m"
+   }
   }
+ },
+ "artifact_overrides": {
+  "_note": "per-artifact integration overrides — for lone artifacts outside any principal/kin; value = a wrapper family name",
+  "coin_toss": "podium",
+  "dice_throw": "podium"
  }
 }

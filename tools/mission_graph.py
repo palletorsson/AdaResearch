@@ -70,6 +70,9 @@ def _integration():
                     continue
                 for n in k.get("members", []):
                     _INTEGRATION.setdefault(n, (integ, k.get("cube_family", "gridglass")))
+            for n, fam in decl.get("artifact_overrides", {}).items():
+                if not n.startswith("_"):
+                    _INTEGRATION[n] = ("wrap", fam)
     return _INTEGRATION
 
 B, SEA = wk.B, wk.SEA
@@ -417,7 +420,7 @@ def build_halls(seq, name):
             integ, cfam = _integration().get(chosen, (None, None))
             if integ in ("self", "field"):
                 layers["interactables"][cr][cc] = chosen
-            elif integ == "cube":
+            elif integ in ("cube", "wrap"):
                 layers["interactables"][cr][cc] = f"sim_cube#family:{cfam}#mount:{chosen}"
             else:
                 # MARRIAGE 1: the bed carries the artifact (staging_beds decides

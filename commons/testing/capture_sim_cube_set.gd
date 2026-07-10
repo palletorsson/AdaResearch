@@ -21,6 +21,9 @@ const SUBTITLES := {
 	"cage": "mesh bars · dark — agents, things that could get out",
 	"shadowbox": "one open face · backlit — luminous curves",
 	"openframe": "edges only · lab-white — growth, things that breathe",
+	"table_display_1m": "1m table · frameless vertical panel — 2D content edge to edge",
+	"table_display_2m": "2m table · frameless vertical panel — 2D content edge to edge",
+	"podium": "the operating stand — a small interactive at hand height",
 }
 
 var _viewport: SubViewport
@@ -112,7 +115,7 @@ func _run() -> void:
 		print("captured ", path)
 		_entries.append({"id": fam, "image": "/sim-cube-set/" + fam + ".png",
 			"label": fam, "subtitle": SUBTITLES.get(fam, ""),
-			"notes": "2m housing on the 1m cube plinth", "prop": "sim_cube"})
+			"notes": "wrapper family", "prop": "sim_cube"})
 		for child in _holder.get_children():
 			child.queue_free()
 		await create_timer(0.05).timeout
