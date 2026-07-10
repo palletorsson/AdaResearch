@@ -25,6 +25,48 @@
     "possibility_space_cloud->emergence_zone",
     "qfep_reactor->edge_of_chaos_unlocked",
     "bifurcation_walkway->edge_of_chaos_unlocked"
+   ],
+   "supporting_cast": [
+    {
+     "name": "qfep_reactor_bench",
+     "act": 0,
+     "register": "arrival",
+     "beside": "emergence_zone",
+     "cell": [
+      10,
+      29
+     ]
+    },
+    {
+     "name": "phi_rate_bench",
+     "act": 1,
+     "register": "work",
+     "beside": "edge_of_chaos_unlocked",
+     "cell": [
+      28,
+      24
+     ]
+    },
+    {
+     "name": "lambda_dial_bench",
+     "act": 1,
+     "register": "work",
+     "beside": "qfep_formula_3d",
+     "cell": [
+      28,
+      54
+     ]
+    },
+    {
+     "name": "f_order_bench",
+     "act": 1,
+     "register": "work",
+     "beside": "fluid_form",
+     "cell": [
+      28,
+      69
+     ]
+    }
    ]
   }
  },
@@ -16122,7 +16164,7 @@
     " ",
     " ",
     " ",
-    " ",
+    "qfep_reactor_bench",
     " ",
     " ",
     " ",
@@ -17557,6 +17599,7 @@
     " ",
     " ",
     " ",
+    "phi_rate_bench",
     " ",
     " ",
     " ",
@@ -17586,6 +17629,7 @@
     " ",
     " ",
     " ",
+    "lambda_dial_bench",
     " ",
     " ",
     " ",
@@ -17600,9 +17644,7 @@
     " ",
     " ",
     " ",
-    " ",
-    " ",
-    " ",
+    "f_order_bench",
     " ",
     " ",
     " ",

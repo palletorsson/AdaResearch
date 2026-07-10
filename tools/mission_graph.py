@@ -23,6 +23,7 @@ Usage:
 """
 import json
 import math
+import re
 import sys
 from pathlib import Path
 
@@ -346,6 +347,99 @@ def cast_spot(feature, oy, ox, F):
     return oy + mid, ox + mid              # court pit / hut / centre
 
 
+# ── the supporting cast: the library lands in the hall ──────────────────────
+# Palle ("go" on the reframe): the mission casts only heroes; the kin:bench
+# library — self-grounded 1-2 cell instruments with honest footprints — staffs
+# the halls. Same-domain benches only (curriculum honesty: a hall teaches with
+# its own chapter's instruments), concept-matched to each beat where possible.
+# Density is a NARRATIVE parameter, not a packing score (the sieve guard):
+# arrival sparse (1/hall), work dense (1/beat), depth sparse+charged (1/hall).
+
+def _norm(s: str) -> str:
+    return re.sub(r"[^a-z0-9]", "", s.lower())
+
+
+def _bench_library(seq: str):
+    """same-domain kin:bench members with honest cells: [(name, w, d)]."""
+    p = ROOT / "commons" / "data" / "principal_artifacts.json"
+    if not p.exists():
+        return []
+    decl = json.loads(p.read_text(encoding="utf-8"))
+    members = set(decl.get("kin", {}).get("bench", {}).get("members", []))
+    skip = set(decl.get("kin", {}).get("bench", {}).get("staff_skip", []))
+    nseq = _norm(seq)
+    lib = []
+    for rp in sorted((ROOT / "commons" / "artifacts" / "registry").glob("*.json")):
+        dom = _norm(rp.stem)
+        if not dom or (dom not in nseq and nseq not in dom):
+            continue
+        try:
+            d = json.loads(rp.read_text(encoding="utf-8"))
+        except json.JSONDecodeError:
+            continue
+        for k, e in d.get("artifacts", {}).items():
+            if not isinstance(e, dict):
+                continue
+            n = e.get("lookup_name", k)
+            if n in members and n not in skip:
+                s = _sizes().get(n, {})
+                gc = s.get("grid_cells", [2, 2])
+                lib.append((n, int(max(1, gc[0])), int(max(1, gc[1]))))
+    return lib
+
+
+def _match_score(bench: str, cast: str) -> int:
+    """concept kinship: beat-cast tokens found inside the bench's name."""
+    b = bench.replace("_bench", "")
+    score = 0
+    for tok in re.split(r"[_\W]+", str(cast).lower()):
+        if len(tok) >= 3 and not tok.isdigit() and tok in b:
+            score += len(tok)
+        elif tok.isdigit() and tok in b:
+            score += 2
+    return score
+
+
+def staff_supporting_cast(layers, slots, lib, register_of):
+    """place same-domain benches on each chosen feature's south rim, facing
+    the walk. Honest spacing; occupied cells respected. Returns tokens list."""
+    if not lib:
+        return []
+    used = set()
+    staffed = []
+    QUOTA = {"arrival": 1, "work": None, "depth": 1}    # None = every beat
+    by_act = {}
+    for s in slots:
+        by_act.setdefault(s["act"], []).append(s)
+    for k in sorted(by_act):
+        reg = register_of(k)
+        beats = [s for s in by_act[k] if s["kind"] == "beat"]
+        if not beats:
+            continue
+        quota = QUOTA.get(reg)
+        chosen = beats if quota is None else [beats[len(beats) // 2]]
+        for s in chosen:
+            ranked = sorted((( _match_score(n, s["cast"]), -w, n, w, d)
+                             for (n, w, d) in lib if n not in used
+                             and n != s["cast"]), reverse=True)
+            if not ranked:
+                continue
+            _, _, name, w, d = ranked[0]
+            r = s["oy"] + s["F"] - 1
+            c0 = s["ox"] + s["F"] // 2
+            for c in (c0, c0 - max(2, w + 1), c0 + max(2, w + 1),
+                      c0 - 2 * (w + 1), c0 + 2 * (w + 1)):
+                if 0 <= c < len(layers["interactables"][r]) \
+                        and layers["interactables"][r][c] == " " \
+                        and layers["utilities"][r][c] == " ":
+                    layers["interactables"][r][c] = name
+                    used.add(name)
+                    staffed.append({"name": name, "act": k, "register": reg,
+                                    "beside": s["cast"], "cell": [r, c]})
+                    break
+    return staffed
+
+
 def build_halls(seq, name):
     """acts as single halls of varying size; features fill them (2m aisles);
     voltage chapels the only enclosed rooms; one carved door between acts."""
@@ -394,7 +488,7 @@ def build_halls(seq, name):
               "walls": [[""] * W for _ in range(H)],
               "interactables": [[" "] * W for _ in range(H)]}
     y = 0
-    y0s, swaps = [], []
+    y0s, swaps, slots = [], [], []
     for k, act in enumerate(acts):
         D, F, Wk = depths[k], Fs[k], widths[k]
         y0s.append(y)
@@ -418,6 +512,8 @@ def build_halls(seq, name):
             if swapped:
                 swaps.append(swapped + "->" + chosen)
             draw_feature(layers, e["feature"], oy, ox, F)
+            slots.append({"act": k, "kind": e["kind"], "cast": e["cast"],
+                          "oy": oy, "ox": ox, "F": F})
             cr, cc = cast_spot(e["feature"], oy, ox, F)
             # INTEGRATION precedes beds (the common wrapper): self/field stand
             # bare; cube gets its family housing; the rest fall to beds.
@@ -451,6 +547,9 @@ def build_halls(seq, name):
     ty = y0s[lr] + depths[lr] - 3
     layers["utilities"][ty][tx] = "t:restart"
     layers["structure"][ty][tx] = "0"
+    # the supporting cast: same-domain benches staff the halls (after spawn/
+    # teleporter so occupancy is respected)
+    staffed = staff_supporting_cast(layers, slots, _bench_library(seq), register)
     PALETTES = {
         "arrival": {"plain": 5, "glass": 3, "whiteboard": 2, "window": 3,
                     "vent": 1, "locker": 1},
@@ -470,7 +569,8 @@ def build_halls(seq, name):
                                         "max_height": 3},
                          "mission_graph": {"seq": seq, "mode": "act-halls-v3",
                                            "acts": [len(a) for a in acts],
-                                           "depths": depths, "swaps": swaps}},
+                                           "depths": depths, "swaps": swaps,
+                                           "supporting_cast": staffed}},
             "settings": {"wall_segments": {"style": "labwall", "height": 3.2,
                                            "thickness": 0.16, "door_width": 2.2,
                                            "palettes": palettes}},
@@ -491,6 +591,9 @@ def build_halls(seq, name):
         print(f"  act {k+1} D={depths[k]}  {marks}")
     if swaps:
         print("  size-governed swaps:", ", ".join(swaps))
+    if staffed:
+        print("  supporting cast:", ", ".join(
+            f"{s['name']} (beside {s['beside']}, {s['register']})" for s in staffed))
     print(f"view: /map-viewer?map={name}")
     return 0
 

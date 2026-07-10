@@ -23,6 +23,58 @@
    ],
    "swaps": [
     "trng_vs_prng->prng_crank_machine"
+   ],
+   "supporting_cast": [
+    {
+     "name": "random_walk_bench",
+     "act": 0,
+     "register": "arrival",
+     "beside": "random_walk_leash",
+     "cell": [
+      10,
+      29
+     ]
+    },
+    {
+     "name": "seed_bench",
+     "act": 1,
+     "register": "work",
+     "beside": "seed_replay_demo",
+     "cell": [
+      28,
+      9
+     ]
+    },
+    {
+     "name": "entropy_bench",
+     "act": 1,
+     "register": "work",
+     "beside": "shannon_entropy_meter",
+     "cell": [
+      28,
+      39
+     ]
+    },
+    {
+     "name": "scatter_bench",
+     "act": 1,
+     "register": "work",
+     "beside": "galton_board",
+     "cell": [
+      28,
+      54
+     ]
+    },
+    {
+     "name": "rejection_bench",
+     "act": 2,
+     "register": "depth",
+     "beside": "pollock_painting_in_3d",
+     "cell": [
+      44,
+      34
+     ]
+    }
    ]
   }
  },
@@ -14337,7 +14389,7 @@
     " ",
     " ",
     " ",
-    " ",
+    "random_walk_bench",
     " ",
     " ",
     " ",
@@ -15272,7 +15324,7 @@
     " ",
     " ",
     " ",
-    "exhibit_furniture#kind:plinth#size:m#mount:galton_board",
+    "sim_cube#family:pedestal#mount:galton_board",
     " ",
     " ",
     " ",
@@ -15577,6 +15629,7 @@
     " ",
     " ",
     " ",
+    "seed_bench",
     " ",
     " ",
     " ",
@@ -15606,6 +15659,7 @@
     " ",
     " ",
     " ",
+    "entropy_bench",
     " ",
     " ",
     " ",
@@ -15620,9 +15674,7 @@
     " ",
     " ",
     " ",
-    " ",
-    " ",
-    " ",
+    "scatter_bench",
     " ",
     " ",
     " ",
@@ -16722,7 +16774,7 @@
     " ",
     " ",
     " ",
-    " ",
+    "rejection_bench",
     " ",
     " ",
     " ",

@@ -27,6 +27,58 @@
     "rule_30_110_gravity->ca_rule_explorer",
     "structure_growth->ca_growth_network",
     "ca_chair_test->sierpinski_pyramid"
+   ],
+   "supporting_cast": [
+    {
+     "name": "life_zoo_bench",
+     "act": 0,
+     "register": "arrival",
+     "beside": "mirrored_cellular_automata",
+     "cell": [
+      10,
+      29
+     ]
+    },
+    {
+     "name": "rule90_bench",
+     "act": 1,
+     "register": "work",
+     "beside": "ca_rule_explorer",
+     "cell": [
+      28,
+      9
+     ]
+    },
+    {
+     "name": "brians_brain_bench",
+     "act": 1,
+     "register": "work",
+     "beside": "self_organization_ca",
+     "cell": [
+      28,
+      39
+     ]
+    },
+    {
+     "name": "life_bench",
+     "act": 1,
+     "register": "work",
+     "beside": "game_of_life_petri",
+     "cell": [
+      28,
+      54
+     ]
+    },
+    {
+     "name": "rule110_bench",
+     "act": 2,
+     "register": "depth",
+     "beside": "ca_rule_explorer",
+     "cell": [
+      44,
+      34
+     ]
+    }
    ]
   }
  },
@@ -14401,7 +14453,7 @@
     " ",
     " ",
     " ",
-    " ",
+    "life_zoo_bench",
     " ",
     " ",
     " ",
@@ -15641,6 +15693,7 @@
     " ",
     " ",
     " ",
+    "rule90_bench",
     " ",
     " ",
     " ",
@@ -15670,6 +15723,7 @@
     " ",
     " ",
     " ",
+    "brians_brain_bench",
     " ",
     " ",
     " ",
@@ -15684,9 +15738,7 @@
     " ",
     " ",
     " ",
-    " ",
-    " ",
-    " ",
+    "life_bench",
     " ",
     " ",
     " ",
@@ -16786,7 +16838,7 @@
     " ",
     " ",
     " ",
-    " ",
+    "rule110_bench",
     " ",
     " ",
     " ",
