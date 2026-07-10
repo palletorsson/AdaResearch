@@ -1,5 +1,5 @@
 {
- "_doctrine": "PRINCIPAL ARTIFACTS: one canonical scene + one harmonized interface; instances are registry configs (the motif/cartridge move made explicit). The principal declares the DISPLAY footprint once — pose, cells, height — and every instance inherits it via tools/principal_artifacts.py --sync-footprints (source:principal in artifact_sizes.json). Per-instance AABB measurement is wrong for these: it catches planes lying flat (grid2d h=0.02) or nothing (grid3d, composition unmeasured). The type is the spatial truth; edit it HERE. interface[] = the harmonized config contract — the migration target for instances that drift. KIN families (kin{}) are interface-similar artifacts with SEPARATE scenes/scripts — harmonization candidates the gallery surfaces via declared members, name stems (pattern_machine_a..d), and suffix conventions (*_workbench, *_machine).",
+ "_doctrine": "PRINCIPAL ARTIFACTS: one canonical scene + one harmonized interface; instances are registry configs (the motif/cartridge move made explicit). The principal declares the DISPLAY footprint once — pose, cells, height — and every instance inherits it via tools/principal_artifacts.py --sync-footprints (source:principal in artifact_sizes.json). Per-instance AABB measurement is wrong for these: it catches planes lying flat (grid2d h=0.02) or nothing (grid3d, composition unmeasured). The type is the spatial truth; edit it HERE. interface[] = the harmonized config contract — the migration target for instances that drift. KIN families (kin{}) are interface-similar artifacts with SEPARATE scenes/scripts — harmonization candidates the gallery surfaces via declared members, name stems (pattern_machine_a..d), and suffix conventions (*_workbench, *_machine). INTEGRATION (Palle 2026-07-09): the wrapper is the middle layer — what makes an artifact FEEL integrated in map space. Vocabulary: self (brings its own base — no bed, no wrapper: workbenches, kiosks), cube (the 1m sim-housing — the grid cell made visible; wrapper IS the bed AND carries the harmonized physical interface: label plate, play/pause, cartridge slot), frame (flat work, framed + wall/hover mounted), plinth (small, held to the eye), field (the artifact IS the environment — room-scale, housing would kill it). Declared integration PRECEDES size-guessed beds; 'field'/apparition stays unhoused on purpose (the sieve's dark spot).",
  "principals": {
   "living_paper": {
    "scene": "res://commons/substrates/living_paper/living_paper.tscn",
@@ -21,7 +21,8 @@
     "depth_m": 0.3,
     "height_m": 1.3
    },
-   "bed": "plinth"
+   "bed": "plinth",
+   "integration": "frame"
   },
   "grid2d": {
    "scene": "res://commons/substrates/grid2d/grid2d_substrate.tscn",
@@ -45,7 +46,8 @@
     "depth_m": 0.3,
     "height_m": 2.0
    },
-   "bed": "panel"
+   "bed": "panel",
+   "integration": "cube"
   },
   "grid3d": {
    "scene": "res://commons/substrates/grid3d/grid3d_substrate.tscn",
@@ -67,7 +69,8 @@
     "depth_m": 2.6,
     "height_m": 2.4
    },
-   "bed": "platform"
+   "bed": "platform",
+   "integration": "cube"
   },
   "profile": {
    "scene": "res://commons/substrates/profile/profile_substrate.tscn",
@@ -90,7 +93,8 @@
     "depth_m": 0.3,
     "height_m": 1.5
    },
-   "bed": "table_2m"
+   "bed": "table_2m",
+   "integration": "cube"
   },
   "bar_array": {
    "scene": "res://commons/substrates/bar_array/bar_array_substrate.tscn",
@@ -112,7 +116,8 @@
     "depth_m": 0.6,
     "height_m": 1.2
    },
-   "bed": "table_2m"
+   "bed": "none (self-grounded)",
+   "integration": "self"
   },
   "step_sequencer": {
    "scene": "res://commons/audio/sequencer/step_sequencer.tscn",
@@ -133,7 +138,8 @@
     "depth_m": 0.6,
     "height_m": 1.1
    },
-   "bed": "table_2m"
+   "bed": "none (self-grounded)",
+   "integration": "self"
   },
   "composition_artifact": {
    "scene": "res://commons/artifacts/composition_artifact/composition_artifact.tscn",
@@ -152,7 +158,8 @@
     "depth_m": 0.3,
     "height_m": 2.0
    },
-   "bed": "panel"
+   "bed": "panel",
+   "integration": "frame"
   },
   "mesh_grammar": {
    "scene": "res://commons/mesh_grammar/mesh_grammar_node.tscn",
@@ -172,7 +179,8 @@
     "depth_m": 0.9,
     "height_m": 0.9
    },
-   "bed": "plinth"
+   "bed": "plinth",
+   "integration": "plinth"
   }
  },
  "kin": {
@@ -189,7 +197,7 @@
     "depth_m": 1.6,
     "height_m": 1.5
    },
-   "bed": "table_2m",
+   "bed": "none (self-grounded)",
    "members": [
     "VectorWorkbench",
     "ca_rules_workbench",
@@ -206,7 +214,8 @@
     "transformation_workbench",
     "triangle_curvature_workbench",
     "verlet_workbench"
-   ]
+   ],
+   "integration": "self"
   },
   "pattern_machine": {
    "note": "pattern machines a-d — same idea, four separate scripts; merge candidates Corrected to 2x2 x 3.0m per registry footprint [2,3,2].",
@@ -221,13 +230,14 @@
     "depth_m": 2.0,
     "height_m": 3.0
    },
-   "bed": "panel",
+   "bed": "none (self-grounded)",
    "members": [
     "pattern_machine_a",
     "pattern_machine_b",
     "pattern_machine_c",
     "pattern_machine_d"
-   ]
+   ],
+   "integration": "self"
   },
   "machines": {
    "note": "the *_machine convention — heterogeneous (slot 1x1, random_walker 21x21!); fill-only truth is a REVIEW placeholder",
@@ -242,7 +252,7 @@
     "depth_m": 0.8,
     "height_m": 1.8
    },
-   "bed": "platform",
+   "bed": "none (self-grounded)",
    "members": [
     "godel_sentence_machine",
     "pattern_tunnel_machine",
@@ -250,7 +260,8 @@
     "prng_crank_machine",
     "random_walker_machine",
     "slot_machine"
-   ]
+   ],
+   "integration": "self"
   },
   "wave_examples": {
    "note": "the NOC oscillation wave family — same teaching interface, separate scenes; all measured, no sync needed prefer_registry: measured AABBs catch the wave mid-frame (0.2m); the registry's room-scale footprints are the truth.",
@@ -263,7 +274,8 @@
     "additive_wave_demo",
     "vertical_wave_lines"
    ],
-   "prefer_registry": true
+   "prefer_registry": true,
+   "integration": "field"
   },
   "displays": {
    "note": "standing screens/kiosks missing from the oracle; fill placeholder pending capture-measure",
@@ -278,7 +290,7 @@
     "depth_m": 0.4,
     "height_m": 1.6
    },
-   "bed": "panel",
+   "bed": "none (self-grounded)",
    "members": [
     "artifact_readout_screen",
     "brians_brain_display",
@@ -290,7 +302,8 @@
     "monitor_setup",
     "station_multiscreen",
     "mondrian_3d_display"
-   ]
+   ],
+   "integration": "self"
   },
   "readouts": {
    "note": "the 1x1 x 0.2m HUD readout family (make_text_block descendants) — all measured; grouped for the canonical-UI migration (TextScreen)",
@@ -307,7 +320,8 @@
     "draw_calls_display",
     "running_text_display",
     "ca_screen"
-   ]
+   ],
+   "integration": "frame"
   }
  }
 }
