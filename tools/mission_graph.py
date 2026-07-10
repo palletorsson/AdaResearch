@@ -615,13 +615,14 @@ ROOM_BAND_BUDGET = 56        # a band fills left->right until it would exceed th
 
 
 def _room_inner(f: int) -> int:
-    """inner floor size from the hero's max grid-cell footprint (the room fits
-    its hero with a 2m aisle all round): small -> 10, medium -> 14, big -> 18."""
+    """inner floor size from the hero's max grid-cell footprint (Palle: keep
+    the maps a bit tighter around the artifacts): small -> 8, medium -> 12,
+    big -> 16 — the room hugs its hero, ~3 cells of walk all round."""
     if f <= 2:
-        return 10
+        return 8
     if f <= 4:
-        return 14
-    return 18
+        return 12
+    return 16
 
 
 def _cast_cells(name: str) -> int:
@@ -671,7 +672,7 @@ def build_rooms(seq, name):
         if swapped:
             swaps.append(swapped + "->" + chosen)
         if idx == 0 or idx == last_idx:
-            inner = max(inner, 12)
+            inner = max(inner, 10)
         e["inner"] = inner
 
     # 3. lay the rooms into serpentine bands (turns, not one straight corridor)
