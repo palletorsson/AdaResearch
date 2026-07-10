@@ -103,6 +103,78 @@ def main() -> int:
             "capture": fam_cap,
             "instances": rows,
         })
+    # ── KIN families: interface-similar, SEPARATE scenes (harmonization
+    # candidates). Three detectors: declared (principal_artifacts.json kin{}),
+    # name stems (pattern_machine_a..d), suffix conventions (*_workbench,
+    # *_machine). Only names not already in a scene family.
+    import re
+    all_names = {}
+    for scene, insts in by_scene.items():
+        for i in insts:
+            all_names[i["name"]] = i
+    in_family = set()
+    for f in families:
+        in_family.update(r["name"] for r in f["instances"])
+
+    def kin_family(kname, members, basis, note=""):
+        rows = []
+        for n in sorted(members):
+            i = all_names.get(n)
+            if not i:
+                continue
+            s = sizes.get(n, {})
+            src = s.get("source") or ("measured" if s.get("base_m") else "missing")
+            cap = f"artifact-gallery/captures/{n}/front.png" \
+                if (CAPS / n / "front.png").exists() else None
+            rows.append({"name": n, "registry": i["registry"],
+                         "cartridge": {"scene": Path(str(i["entry"]["scene"])).stem},
+                         "size": {"cells": s.get("grid_cells"),
+                                  "h": s.get("height_m"), "source": src},
+                         "capture": cap})
+        if len(rows) < 3:
+            return None
+        return {"scene": f"(kin — {len(rows)} separate scenes)", "stem": kname,
+                "count": len(rows), "principal": None, "declaration": None,
+                "basis": basis, "note": note,
+                "base_genes": [], "cartridge_genes": ["scene"], "drift": [],
+                "capture": next((r["capture"] for r in rows if r["capture"]), None),
+                "instances": rows}
+
+    kin_declared = json.loads(pfile.read_text(encoding="utf-8")).get("kin", {}) \
+        if pfile.exists() else {}
+    for kname, kd in kin_declared.items():
+        kf = kin_family(kname, [m for m in kd.get("members", []) if m not in in_family],
+                        "declared", kd.get("note", ""))
+        if kf:
+            families.append(kf)
+            in_family.update(r["name"] for r in kf["instances"])
+    # stem clusters: strip one trailing _<letter> or _<digits> segment
+    stems = defaultdict(list)
+    for n in all_names:
+        if n in in_family:
+            continue
+        m = re.match(r"^(.*)_(?:[a-z]|\d+)$", n)
+        if m and len(m.group(1)) >= 6:
+            stems[m.group(1)].append(n)
+    for stem, members in stems.items():
+        kf = kin_family(stem + "_*", members, "stem",
+                        "numbered/lettered variants — separate scenes")
+        if kf:
+            families.append(kf)
+            in_family.update(r["name"] for r in kf["instances"])
+    # suffix conventions: the interactive-machine benches
+    for suffix in ("workbench", "machine"):
+        members = [n for n in all_names
+                   if n not in in_family and n.lower().endswith(suffix)]
+        kf = kin_family(f"*_{suffix}", members, "suffix",
+                        f"the {suffix} convention — one design pattern, "
+                        f"{len(members)} implementations")
+        if kf:
+            families.append(kf)
+            in_family.update(r["name"] for r in kf["instances"])
+
+    for f in families:
+        f.setdefault("basis", "scene")
     families.sort(key=lambda f: (-bool(f["principal"]), -f["count"]))
     OUT.write_text(json.dumps(
         {"generated_by": "tools/build_principal_gallery.py",

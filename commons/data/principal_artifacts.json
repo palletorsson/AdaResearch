@@ -1,61 +1,191 @@
 {
- "_doctrine": "PRINCIPAL ARTIFACTS: one canonical scene + one harmonized interface; instances are registry configs (the motif/cartridge move made explicit). The principal declares the DISPLAY footprint once — pose, cells, height — and every instance inherits it via tools/principal_artifacts.py --sync-footprints (source:principal in artifact_sizes.json). Per-instance AABB measurement is wrong for these: it catches planes lying flat (grid2d h=0.02) or nothing (grid3d, composition unmeasured). The type is the spatial truth; edit it HERE. interface[] = the harmonized config contract — the migration target for instances that drift.",
+ "_doctrine": "PRINCIPAL ARTIFACTS: one canonical scene + one harmonized interface; instances are registry configs (the motif/cartridge move made explicit). The principal declares the DISPLAY footprint once — pose, cells, height — and every instance inherits it via tools/principal_artifacts.py --sync-footprints (source:principal in artifact_sizes.json). Per-instance AABB measurement is wrong for these: it catches planes lying flat (grid2d h=0.02) or nothing (grid3d, composition unmeasured). The type is the spatial truth; edit it HERE. interface[] = the harmonized config contract — the migration target for instances that drift. KIN families (kin{}) are interface-similar artifacts with SEPARATE scenes/scripts — harmonization candidates the gallery surfaces via declared members, name stems (pattern_machine_a..d), and suffix conventions (*_workbench, *_machine).",
  "principals": {
   "living_paper": {
    "scene": "res://commons/substrates/living_paper/living_paper.tscn",
    "kind": "substrate",
-   "interface": ["algorithm", "step_interval", "auto_play", "label_text", "cartridge"],
-   "display": {"pose": "standing", "grid_cells": [1, 1], "base_m": 1.0, "depth_m": 0.3, "height_m": 1.3},
+   "interface": [
+    "algorithm",
+    "step_interval",
+    "auto_play",
+    "label_text",
+    "cartridge"
+   ],
+   "display": {
+    "pose": "standing",
+    "grid_cells": [
+     1,
+     1
+    ],
+    "base_m": 1.0,
+    "depth_m": 0.3,
+    "height_m": 1.3
+   },
    "bed": "plinth"
   },
   "grid2d": {
    "scene": "res://commons/substrates/grid2d/grid2d_substrate.tscn",
    "kind": "substrate",
-   "interface": ["algorithm", "grid_width", "grid_height", "step_interval", "auto_play", "label_text", "cartridge"],
-   "display": {"pose": "standing", "grid_cells": [2, 1], "base_m": 2.0, "depth_m": 0.3, "height_m": 2.0},
+   "interface": [
+    "algorithm",
+    "grid_width",
+    "grid_height",
+    "step_interval",
+    "auto_play",
+    "label_text",
+    "cartridge"
+   ],
+   "display": {
+    "pose": "standing",
+    "grid_cells": [
+     2,
+     1
+    ],
+    "base_m": 2.0,
+    "depth_m": 0.3,
+    "height_m": 2.0
+   },
    "bed": "panel"
   },
   "grid3d": {
    "scene": "res://commons/substrates/grid3d/grid3d_substrate.tscn",
    "kind": "substrate",
-   "interface": ["algorithm", "step_interval", "auto_play", "label_text", "cartridge"],
-   "display": {"pose": "volume", "grid_cells": [3, 3], "base_m": 2.6, "depth_m": 2.6, "height_m": 2.4},
+   "interface": [
+    "algorithm",
+    "step_interval",
+    "auto_play",
+    "label_text",
+    "cartridge"
+   ],
+   "display": {
+    "pose": "volume",
+    "grid_cells": [
+     3,
+     3
+    ],
+    "base_m": 2.6,
+    "depth_m": 2.6,
+    "height_m": 2.4
+   },
    "bed": "platform"
   },
   "profile": {
    "scene": "res://commons/substrates/profile/profile_substrate.tscn",
    "kind": "substrate",
-   "interface": ["algorithm", "sample_count", "step_interval", "auto_play", "label_text", "cartridge"],
-   "display": {"pose": "standing", "grid_cells": [2, 1], "base_m": 2.0, "depth_m": 0.3, "height_m": 1.5},
+   "interface": [
+    "algorithm",
+    "sample_count",
+    "step_interval",
+    "auto_play",
+    "label_text",
+    "cartridge"
+   ],
+   "display": {
+    "pose": "standing",
+    "grid_cells": [
+     2,
+     1
+    ],
+    "base_m": 2.0,
+    "depth_m": 0.3,
+    "height_m": 1.5
+   },
    "bed": "table_2m"
   },
   "bar_array": {
    "scene": "res://commons/substrates/bar_array/bar_array_substrate.tscn",
    "kind": "substrate",
-   "interface": ["algorithm", "step_interval", "auto_play", "label_text", "cartridge"],
-   "display": {"pose": "bench", "grid_cells": [2, 1], "base_m": 2.0, "depth_m": 0.6, "height_m": 1.2},
+   "interface": [
+    "algorithm",
+    "step_interval",
+    "auto_play",
+    "label_text",
+    "cartridge"
+   ],
+   "display": {
+    "pose": "bench",
+    "grid_cells": [
+     2,
+     1
+    ],
+    "base_m": 2.0,
+    "depth_m": 0.6,
+    "height_m": 1.2
+   },
    "bed": "table_2m"
   },
   "step_sequencer": {
    "scene": "res://commons/audio/sequencer/step_sequencer.tscn",
    "kind": "instrument",
-   "interface": ["pattern", "bpm", "auto_play", "label_text"],
-   "display": {"pose": "bench", "grid_cells": [2, 1], "base_m": 2.0, "depth_m": 0.6, "height_m": 1.1},
+   "interface": [
+    "pattern",
+    "bpm",
+    "auto_play",
+    "label_text"
+   ],
+   "display": {
+    "pose": "bench",
+    "grid_cells": [
+     2,
+     1
+    ],
+    "base_m": 2.0,
+    "depth_m": 0.6,
+    "height_m": 1.1
+   },
    "bed": "table_2m"
   },
   "composition_artifact": {
    "scene": "res://commons/artifacts/composition_artifact/composition_artifact.tscn",
    "kind": "display",
-   "interface": ["composition", "label_text"],
-   "display": {"pose": "standing", "grid_cells": [2, 1], "base_m": 2.0, "depth_m": 0.3, "height_m": 2.0},
+   "interface": [
+    "composition",
+    "label_text"
+   ],
+   "display": {
+    "pose": "standing",
+    "grid_cells": [
+     2,
+     1
+    ],
+    "base_m": 2.0,
+    "depth_m": 0.3,
+    "height_m": 2.0
+   },
    "bed": "panel"
   },
   "mesh_grammar": {
    "scene": "res://commons/mesh_grammar/mesh_grammar_node.tscn",
    "kind": "specimen",
-   "interface": ["grammar", "seed", "label_text"],
-   "display": {"pose": "object", "grid_cells": [1, 1], "base_m": 0.9, "depth_m": 0.9, "height_m": 0.9},
+   "interface": [
+    "grammar",
+    "seed",
+    "label_text"
+   ],
+   "display": {
+    "pose": "object",
+    "grid_cells": [
+     1,
+     1
+    ],
+    "base_m": 0.9,
+    "depth_m": 0.9,
+    "height_m": 0.9
+   },
    "bed": "plinth"
+  }
+ },
+ "kin": {
+  "wave_examples": {
+   "note": "the NOC oscillation wave family — same teaching interface, separate scenes",
+   "members": [
+    "example_3_8_static_wave_vr",
+    "example_3_9_the_wave_vr",
+    "exercise_3_11_oop_wave_vr",
+    "exercise_3_12_additive_wave_vr",
+    "additive_wave_demo",
+    "vertical_wave_lines"
+   ]
   }
  }
 }
