@@ -396,9 +396,35 @@ def discover():
     return 0
 
 
+def suspect_double_stand():
+    """housed declarations whose measured height suggests they bring their own
+    stand (the coin_toss class) — never double-stand; review to 'self'."""
+    sys.path.insert(0, str(ROOT / "tools"))
+    import mission_graph as mg
+    sizes = json.loads(SIZES.read_text(encoding="utf-8"))["sizes"]
+    suspects = []
+    for name, (integ, fam) in sorted(mg._integration().items()):
+        if integ not in ("wrap", "cube", "plinth"):
+            continue
+        h = sizes.get(name, {}).get("height_m") or 0
+        if h >= 0.9:
+            suspects.append({"name": name, "integration": integ,
+                             "family": fam, "height_m": h})
+    out = ROOT / "doc" / "reports" / "double_stand_suspects.json"
+    out.write_text(json.dumps({"rule": "artifacts that bring their own "
+        "pedestal/stand are integration:self — never double-stand",
+        "suspects": suspects}, indent=1), encoding="utf-8", newline="\n")
+    print(f"{len(suspects)} double-stand suspects -> {out.name}")
+    for s2 in suspects[:12]:
+        print(f"  {s2['name']:36s} {s2['integration']}:{s2['family']} h={s2['height_m']}m")
+    return 0
+
+
 def main() -> int:
     if "--audit" in sys.argv:
         return audit()
+    if "--suspect-double-stand" in sys.argv:
+        return suspect_double_stand()
     if "--discover" in sys.argv:
         return discover()
     if "--sync-footprints" in sys.argv:

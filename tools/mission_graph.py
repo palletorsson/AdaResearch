@@ -71,7 +71,11 @@ def _integration():
                 for n in k.get("members", []):
                     _INTEGRATION.setdefault(n, (integ, k.get("wrap_family") or k.get("cube_family", "gridglass")))
             for n, fam in decl.get("artifact_overrides", {}).items():
-                if not n.startswith("_"):
+                if n.startswith("_"):
+                    continue
+                if fam in ("self", "field"):
+                    _INTEGRATION[n] = (fam, None)
+                else:
                     _INTEGRATION[n] = ("wrap", fam)
     return _INTEGRATION
 

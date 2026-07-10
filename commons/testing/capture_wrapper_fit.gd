@@ -29,7 +29,6 @@ const PAIRS := [
 	["table_display_1m", "ca_screen"],
 	["table_display_1m", "albers_relief"],
 	["table_display_2m", "buren_col_01_01"],
-	["podium", "coin_toss"],
 	["podium", "grab_sphere_E"],
 	["plinth", "crystalcluster"],
 	["frame", "living_paper_life"],

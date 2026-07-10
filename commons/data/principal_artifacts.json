@@ -483,8 +483,56 @@
   }
  },
  "artifact_overrides": {
-  "_note": "per-artifact integration overrides — for lone artifacts outside any principal/kin; value = a wrapper family name",
-  "coin_toss": "podium",
-  "dice_throw": "podium"
+  "_note": "per-artifact integration overrides — for lone artifacts outside any principal/kin; value = wrapper family name OR 'self'/'field'. RULE (Palle): artifacts that bring their own pedestal/stand are SELF — never double-stand them.",
+  "coin_toss": "self",
+  "dice_throw": "self"
+ },
+ "feature_principals": {
+  "_note": "Palle 2026-07-09: 'what we are looking for is artifacts that share the same FEATURE we can optimize' — component-level principals, props-dna style (one parametric .gd, DNA variants). control_console is the built prototype: a console that houses any machine's controls. Census = how many artifact .gd files hand-roll each part today. Migration: extract the part as a parametric prop, artifacts compose instead of hand-rolling. Also the DOUBLE-STAND RULE: artifacts that bring their own pedestal are integration:self — never wrap them (coin_toss was the first catch; 115 suspects in doc/reports/double_stand_suspects.json).",
+  "census": {
+   "dial": {
+    "files": 378,
+    "status": "extract",
+    "note": "the jackpot — one parametric dial prop"
+   },
+   "control_panel": {
+    "files": 107,
+    "status": "extract",
+    "note": "converge on control_console's Braun plate"
+   },
+   "console": {
+    "files": 79,
+    "status": "exists",
+    "solution": "control_console (Dieter-Rams, houses any machine's controls)"
+   },
+   "chamber": {
+    "files": 73,
+    "status": "extract",
+    "note": "specimen/reaction chambers — kin of the sim-cube families"
+   },
+   "pedestal": {
+    "files": 71,
+    "status": "extract",
+    "note": "the coin_toss class — self-standing bases; one prop ends double-standing"
+   },
+   "housing": {
+    "files": 69,
+    "status": "partial",
+    "solution": "CubeWrapperLibrary covers the display case; machine housings remain"
+   },
+   "knob": {
+    "files": 53,
+    "status": "extract"
+   },
+   "dome": {
+    "files": 44,
+    "status": "extract",
+    "note": "glass domes / bell jars — a cube-family sibling"
+   },
+   "lever": {
+    "files": 33,
+    "status": "extract"
+   }
+  }
  }
 }
