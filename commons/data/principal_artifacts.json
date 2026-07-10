@@ -47,7 +47,8 @@
     "height_m": 2.0
    },
    "bed": "panel",
-   "integration": "cube"
+   "integration": "cube",
+   "cube_family": "gridglass"
   },
   "grid3d": {
    "scene": "res://commons/substrates/grid3d/grid3d_substrate.tscn",
@@ -70,7 +71,8 @@
     "height_m": 2.4
    },
    "bed": "platform",
-   "integration": "cube"
+   "integration": "cube",
+   "cube_family": "gridglass"
   },
   "profile": {
    "scene": "res://commons/substrates/profile/profile_substrate.tscn",
@@ -94,7 +96,8 @@
     "height_m": 1.5
    },
    "bed": "table_2m",
-   "integration": "cube"
+   "integration": "cube",
+   "cube_family": "shadowbox"
   },
   "bar_array": {
    "scene": "res://commons/substrates/bar_array/bar_array_substrate.tscn",
@@ -322,6 +325,56 @@
     "ca_screen"
    ],
    "integration": "frame"
+  }
+ },
+ "wrappers": {
+  "_note": "Palle: 'room for more cube families so we do not collapse all objects — the DNA makes the different cube families look different.' The cube is a GENUS: the chassis is invariant (the shared hand-grammar), the family is expression (legible at 3m). Families assigned at PRINCIPAL level = wayfinding: you read the department by its vitrine. Keep the family count small (5-8). Build target: CubeWrapperLibrary (Godot builders -> glTF, the WallVariantLibrary pipeline).",
+  "cube_chassis": {
+   "size_m": 1.0,
+   "invariants": [
+    "1m grid quantization",
+    "label plate lower-front-left",
+    "mount point centered",
+    "touch corner lower-front-right",
+    "accent line at plate height"
+   ]
+  },
+  "cube_families": {
+   "gridglass": {
+    "enclosure": "glazed",
+    "frame": "steel-cool",
+    "base": "flush",
+    "atmosphere": "grid-lined interior",
+    "for": "discrete/grid worlds — CA, arrays, pixels"
+   },
+   "tank": {
+    "enclosure": "liquid tank",
+    "frame": "brass-warm",
+    "base": "hover-shadow",
+    "atmosphere": "fluid tint, backlit",
+    "for": "physics, particles, flows — things that move continuously"
+   },
+   "cage": {
+    "enclosure": "mesh cage",
+    "frame": "dark",
+    "base": "flush",
+    "atmosphere": "clear",
+    "for": "agents, walkers, creatures — things that could get out"
+   },
+   "shadowbox": {
+    "enclosure": "one open face, dark interior",
+    "frame": "dark",
+    "base": "drawer",
+    "atmosphere": "backlit subject",
+    "for": "curves, profiles, single luminous figures"
+   },
+   "openframe": {
+    "enclosure": "edges only, open air",
+    "frame": "lab-white",
+    "base": "hover-shadow",
+    "atmosphere": "none — air",
+    "for": "growth, grammar, things that should breathe"
+   }
   }
  }
 }
