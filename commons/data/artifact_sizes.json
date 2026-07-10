@@ -3270,19 +3270,20 @@
   },
   "additive_wave_demo": {
    "aabb_size": [
-    2.2,
-    0.89,
-    0.59
+    3.0,
+    1.0,
+    1.0
    ],
-   "base_m": 2.2,
-   "height_m": 0.89,
-   "max_dimension_m": 2.2,
+   "base_m": 3.0,
+   "height_m": 1.0,
+   "max_dimension_m": 3.0,
    "grid_cells": [
     3.0,
     1.0
    ],
    "registry": "commons_artifacts",
-   "measured_at": "2026-04-29T07:09:56.762620Z"
+   "principal": "kin:wave_examples",
+   "source": "registry"
   },
   "advancedglitch": {
    "aabb_size": [
@@ -9616,35 +9617,37 @@
   },
   "example_3_8_static_wave_vr": {
    "aabb_size": [
-    0.24,
-    0.41,
-    0.24
+    1.0,
+    1.0,
+    1.0
    ],
-   "base_m": 0.24,
-   "height_m": 0.41,
-   "max_dimension_m": 0.41,
+   "base_m": 1.0,
+   "height_m": 1.0,
+   "max_dimension_m": 1.0,
    "grid_cells": [
     1.0,
     1.0
    ],
    "registry": "physics_simulation",
-   "measured_at": "2026-04-29T07:09:56.762620Z"
+   "principal": "kin:wave_examples",
+   "source": "registry"
   },
   "example_3_9_the_wave_vr": {
    "aabb_size": [
-    0.33,
-    0.2,
-    0.12
+    22.0,
+    22.0,
+    22.0
    ],
-   "base_m": 0.33,
-   "height_m": 0.2,
-   "max_dimension_m": 0.33,
+   "base_m": 22.0,
+   "height_m": 22.0,
+   "max_dimension_m": 22.0,
    "grid_cells": [
-    1.0,
-    1.0
+    22.0,
+    22.0
    ],
    "registry": "physics_simulation",
-   "measured_at": "2026-04-29T07:09:56.762620Z"
+   "principal": "kin:wave_examples",
+   "source": "registry"
   },
   "example_4_1_single_particle_vr": {
    "aabb_size": [
@@ -10064,35 +10067,37 @@
   },
   "exercise_3_11_oop_wave_vr": {
    "aabb_size": [
-    0.04,
-    0.23,
-    0.29
+    22.0,
+    22.0,
+    22.0
    ],
-   "base_m": 0.29,
-   "height_m": 0.23,
-   "max_dimension_m": 0.29,
+   "base_m": 22.0,
+   "height_m": 22.0,
+   "max_dimension_m": 22.0,
    "grid_cells": [
-    1.0,
-    1.0
+    22.0,
+    22.0
    ],
    "registry": "physics_simulation",
-   "measured_at": "2026-04-29T07:09:56.762620Z"
+   "principal": "kin:wave_examples",
+   "source": "registry"
   },
   "exercise_3_12_additive_wave_vr": {
    "aabb_size": [
-    0.33,
-    0.13,
-    0.09
+    22.0,
+    22.0,
+    22.0
    ],
-   "base_m": 0.33,
-   "height_m": 0.13,
-   "max_dimension_m": 0.33,
+   "base_m": 22.0,
+   "height_m": 22.0,
+   "max_dimension_m": 22.0,
    "grid_cells": [
-    1.0,
-    1.0
+    22.0,
+    22.0
    ],
    "registry": "physics_simulation",
-   "measured_at": "2026-04-29T07:09:56.762620Z"
+   "principal": "kin:wave_examples",
+   "source": "registry"
   },
   "exercise_3_15_double_pendulum_vr": {
    "aabb_size": [
@@ -17418,20 +17423,20 @@
   },
   "mondrian_3d_display": {
    "aabb_size": [
-    2.0,
-    1.6,
-    0.4
+    1.0,
+    1.0,
+    1.0
    ],
-   "base_m": 2.0,
-   "height_m": 1.6,
-   "max_dimension_m": 2.0,
+   "base_m": 1.0,
+   "height_m": 1.0,
+   "max_dimension_m": 1.0,
    "grid_cells": [
-    2.0,
+    1.0,
     1.0
    ],
    "registry": "commons_artifacts",
    "principal": "kin:displays",
-   "source": "kin-fill"
+   "source": "registry"
   },
   "mondrian_relief": {
    "aabb_size": [
@@ -28923,343 +28928,343 @@
   },
   "array_disco_substrate": {
    "aabb_size": [
-    2.0,
-    2.0,
-    0.3
+    1.0,
+    1.0,
+    1.0
    ],
-   "base_m": 2.0,
-   "height_m": 2.0,
-   "max_dimension_m": 2.0,
+   "base_m": 1.0,
+   "height_m": 1.0,
+   "max_dimension_m": 1.0,
    "grid_cells": [
-    2.0,
+    1.0,
     1.0
    ],
    "registry": "array_substrates",
    "principal": "grid2d",
-   "source": "principal"
+   "source": "registry"
   },
   "array_slow_substrate": {
    "aabb_size": [
-    2.0,
-    2.0,
-    0.3
+    1.0,
+    1.0,
+    1.0
    ],
-   "base_m": 2.0,
-   "height_m": 2.0,
-   "max_dimension_m": 2.0,
+   "base_m": 1.0,
+   "height_m": 1.0,
+   "max_dimension_m": 1.0,
    "grid_cells": [
-    2.0,
+    1.0,
     1.0
    ],
    "registry": "array_substrates",
    "principal": "grid2d",
-   "source": "principal"
+   "source": "registry"
   },
   "array_random_substrate": {
    "aabb_size": [
-    2.0,
-    2.0,
-    0.3
+    1.0,
+    1.0,
+    1.0
    ],
-   "base_m": 2.0,
-   "height_m": 2.0,
-   "max_dimension_m": 2.0,
+   "base_m": 1.0,
+   "height_m": 1.0,
+   "max_dimension_m": 1.0,
    "grid_cells": [
-    2.0,
+    1.0,
     1.0
    ],
    "registry": "array_substrates",
    "principal": "grid2d",
-   "source": "principal"
+   "source": "registry"
   },
   "buren_col_01_01": {
    "aabb_size": [
-    2.0,
-    2.0,
-    0.3
+    1.0,
+    1.0,
+    6.0
    ],
-   "base_m": 2.0,
-   "height_m": 2.0,
-   "max_dimension_m": 2.0,
+   "base_m": 6.0,
+   "height_m": 1.0,
+   "max_dimension_m": 6.0,
    "grid_cells": [
-    2.0,
-    1.0
+    1.0,
+    6.0
    ],
    "registry": "buren_columns",
    "principal": "composition_artifact",
-   "source": "principal"
+   "source": "registry"
   },
   "buren_col_01_04": {
    "aabb_size": [
-    2.0,
-    2.0,
-    0.3
+    1.0,
+    1.0,
+    6.0
    ],
-   "base_m": 2.0,
-   "height_m": 2.0,
-   "max_dimension_m": 2.0,
+   "base_m": 6.0,
+   "height_m": 1.0,
+   "max_dimension_m": 6.0,
    "grid_cells": [
-    2.0,
-    1.0
+    1.0,
+    6.0
    ],
    "registry": "buren_columns",
    "principal": "composition_artifact",
-   "source": "principal"
+   "source": "registry"
   },
   "buren_col_01_07": {
    "aabb_size": [
-    2.0,
-    2.0,
-    0.3
+    1.0,
+    1.0,
+    6.0
    ],
-   "base_m": 2.0,
-   "height_m": 2.0,
-   "max_dimension_m": 2.0,
+   "base_m": 6.0,
+   "height_m": 1.0,
+   "max_dimension_m": 6.0,
    "grid_cells": [
-    2.0,
-    1.0
+    1.0,
+    6.0
    ],
    "registry": "buren_columns",
    "principal": "composition_artifact",
-   "source": "principal"
+   "source": "registry"
   },
   "buren_col_01_10": {
    "aabb_size": [
-    2.0,
-    2.0,
-    0.3
+    1.0,
+    1.0,
+    6.0
    ],
-   "base_m": 2.0,
-   "height_m": 2.0,
-   "max_dimension_m": 2.0,
+   "base_m": 6.0,
+   "height_m": 1.0,
+   "max_dimension_m": 6.0,
    "grid_cells": [
-    2.0,
-    1.0
+    1.0,
+    6.0
    ],
    "registry": "buren_columns",
    "principal": "composition_artifact",
-   "source": "principal"
+   "source": "registry"
   },
   "buren_col_04_01": {
    "aabb_size": [
-    2.0,
-    2.0,
-    0.3
+    1.0,
+    1.0,
+    6.0
    ],
-   "base_m": 2.0,
-   "height_m": 2.0,
-   "max_dimension_m": 2.0,
+   "base_m": 6.0,
+   "height_m": 1.0,
+   "max_dimension_m": 6.0,
    "grid_cells": [
-    2.0,
-    1.0
+    1.0,
+    6.0
    ],
    "registry": "buren_columns",
    "principal": "composition_artifact",
-   "source": "principal"
+   "source": "registry"
   },
   "buren_col_04_04": {
    "aabb_size": [
-    2.0,
-    2.0,
-    0.3
+    1.0,
+    1.0,
+    6.0
    ],
-   "base_m": 2.0,
-   "height_m": 2.0,
-   "max_dimension_m": 2.0,
+   "base_m": 6.0,
+   "height_m": 1.0,
+   "max_dimension_m": 6.0,
    "grid_cells": [
-    2.0,
-    1.0
+    1.0,
+    6.0
    ],
    "registry": "buren_columns",
    "principal": "composition_artifact",
-   "source": "principal"
+   "source": "registry"
   },
   "buren_col_04_07": {
    "aabb_size": [
-    2.0,
-    2.0,
-    0.3
+    1.0,
+    1.0,
+    6.0
    ],
-   "base_m": 2.0,
-   "height_m": 2.0,
-   "max_dimension_m": 2.0,
+   "base_m": 6.0,
+   "height_m": 1.0,
+   "max_dimension_m": 6.0,
    "grid_cells": [
-    2.0,
-    1.0
+    1.0,
+    6.0
    ],
    "registry": "buren_columns",
    "principal": "composition_artifact",
-   "source": "principal"
+   "source": "registry"
   },
   "buren_col_04_10": {
    "aabb_size": [
-    2.0,
-    2.0,
-    0.3
+    1.0,
+    1.0,
+    6.0
    ],
-   "base_m": 2.0,
-   "height_m": 2.0,
-   "max_dimension_m": 2.0,
+   "base_m": 6.0,
+   "height_m": 1.0,
+   "max_dimension_m": 6.0,
    "grid_cells": [
-    2.0,
-    1.0
+    1.0,
+    6.0
    ],
    "registry": "buren_columns",
    "principal": "composition_artifact",
-   "source": "principal"
+   "source": "registry"
   },
   "buren_col_07_01": {
    "aabb_size": [
-    2.0,
-    2.0,
-    0.3
+    1.0,
+    1.0,
+    6.0
    ],
-   "base_m": 2.0,
-   "height_m": 2.0,
-   "max_dimension_m": 2.0,
+   "base_m": 6.0,
+   "height_m": 1.0,
+   "max_dimension_m": 6.0,
    "grid_cells": [
-    2.0,
-    1.0
+    1.0,
+    6.0
    ],
    "registry": "buren_columns",
    "principal": "composition_artifact",
-   "source": "principal"
+   "source": "registry"
   },
   "buren_col_07_04": {
    "aabb_size": [
-    2.0,
-    2.0,
-    0.3
+    1.0,
+    1.0,
+    6.0
    ],
-   "base_m": 2.0,
-   "height_m": 2.0,
-   "max_dimension_m": 2.0,
+   "base_m": 6.0,
+   "height_m": 1.0,
+   "max_dimension_m": 6.0,
    "grid_cells": [
-    2.0,
-    1.0
+    1.0,
+    6.0
    ],
    "registry": "buren_columns",
    "principal": "composition_artifact",
-   "source": "principal"
+   "source": "registry"
   },
   "buren_col_07_07": {
    "aabb_size": [
-    2.0,
-    2.0,
-    0.3
+    1.0,
+    1.0,
+    6.0
    ],
-   "base_m": 2.0,
-   "height_m": 2.0,
-   "max_dimension_m": 2.0,
+   "base_m": 6.0,
+   "height_m": 1.0,
+   "max_dimension_m": 6.0,
    "grid_cells": [
-    2.0,
-    1.0
+    1.0,
+    6.0
    ],
    "registry": "buren_columns",
    "principal": "composition_artifact",
-   "source": "principal"
+   "source": "registry"
   },
   "buren_col_07_10": {
    "aabb_size": [
-    2.0,
-    2.0,
-    0.3
+    1.0,
+    1.0,
+    6.0
    ],
-   "base_m": 2.0,
-   "height_m": 2.0,
-   "max_dimension_m": 2.0,
+   "base_m": 6.0,
+   "height_m": 1.0,
+   "max_dimension_m": 6.0,
    "grid_cells": [
-    2.0,
-    1.0
+    1.0,
+    6.0
    ],
    "registry": "buren_columns",
    "principal": "composition_artifact",
-   "source": "principal"
+   "source": "registry"
   },
   "buren_col_10_01": {
    "aabb_size": [
-    2.0,
-    2.0,
-    0.3
+    1.0,
+    1.0,
+    6.0
    ],
-   "base_m": 2.0,
-   "height_m": 2.0,
-   "max_dimension_m": 2.0,
+   "base_m": 6.0,
+   "height_m": 1.0,
+   "max_dimension_m": 6.0,
    "grid_cells": [
-    2.0,
-    1.0
+    1.0,
+    6.0
    ],
    "registry": "buren_columns",
    "principal": "composition_artifact",
-   "source": "principal"
+   "source": "registry"
   },
   "buren_col_10_04": {
    "aabb_size": [
-    2.0,
-    2.0,
-    0.3
+    1.0,
+    1.0,
+    6.0
    ],
-   "base_m": 2.0,
-   "height_m": 2.0,
-   "max_dimension_m": 2.0,
+   "base_m": 6.0,
+   "height_m": 1.0,
+   "max_dimension_m": 6.0,
    "grid_cells": [
-    2.0,
-    1.0
+    1.0,
+    6.0
    ],
    "registry": "buren_columns",
    "principal": "composition_artifact",
-   "source": "principal"
+   "source": "registry"
   },
   "buren_col_10_07": {
    "aabb_size": [
-    2.0,
-    2.0,
-    0.3
+    1.0,
+    1.0,
+    6.0
    ],
-   "base_m": 2.0,
-   "height_m": 2.0,
-   "max_dimension_m": 2.0,
+   "base_m": 6.0,
+   "height_m": 1.0,
+   "max_dimension_m": 6.0,
    "grid_cells": [
-    2.0,
-    1.0
+    1.0,
+    6.0
    ],
    "registry": "buren_columns",
    "principal": "composition_artifact",
-   "source": "principal"
+   "source": "registry"
   },
   "buren_col_10_10": {
    "aabb_size": [
-    2.0,
-    2.0,
-    0.3
+    1.0,
+    1.0,
+    6.0
    ],
-   "base_m": 2.0,
-   "height_m": 2.0,
-   "max_dimension_m": 2.0,
+   "base_m": 6.0,
+   "height_m": 1.0,
+   "max_dimension_m": 6.0,
    "grid_cells": [
-    2.0,
-    1.0
+    1.0,
+    6.0
    ],
    "registry": "buren_columns",
    "principal": "composition_artifact",
-   "source": "principal"
+   "source": "registry"
   },
   "composition_artifact": {
    "aabb_size": [
     2.0,
     2.0,
-    0.3
+    4.0
    ],
-   "base_m": 2.0,
+   "base_m": 4.0,
    "height_m": 2.0,
-   "max_dimension_m": 2.0,
+   "max_dimension_m": 4.0,
    "grid_cells": [
     2.0,
-    1.0
+    4.0
    ],
    "registry": "composition_artifact",
    "principal": "composition_artifact",
-   "source": "principal"
+   "source": "registry"
   },
   "ca_rules_workbench": {
    "aabb_size": [
@@ -29497,58 +29502,58 @@
    ],
    "registry": "pattern_machine_a",
    "principal": "kin:pattern_machine",
-   "source": "kin-fill"
+   "source": "registry"
   },
   "pattern_machine_b": {
    "aabb_size": [
     2.0,
     3.0,
-    2.0
+    3.0
    ],
-   "base_m": 2.0,
+   "base_m": 3.0,
    "height_m": 3.0,
    "max_dimension_m": 3.0,
    "grid_cells": [
     2.0,
-    2.0
+    3.0
    ],
    "registry": "pattern_machine_b",
    "principal": "kin:pattern_machine",
-   "source": "kin-fill"
+   "source": "registry"
   },
   "pattern_machine_c": {
    "aabb_size": [
-    2.0,
     3.0,
-    2.0
+    3.0,
+    4.0
    ],
-   "base_m": 2.0,
+   "base_m": 4.0,
    "height_m": 3.0,
-   "max_dimension_m": 3.0,
+   "max_dimension_m": 4.0,
    "grid_cells": [
-    2.0,
-    2.0
+    3.0,
+    4.0
    ],
    "registry": "pattern_machine_c",
    "principal": "kin:pattern_machine",
-   "source": "kin-fill"
+   "source": "registry"
   },
   "pattern_machine_d": {
    "aabb_size": [
     2.0,
     3.0,
-    2.0
+    3.0
    ],
-   "base_m": 2.0,
+   "base_m": 3.0,
    "height_m": 3.0,
    "max_dimension_m": 3.0,
    "grid_cells": [
     2.0,
-    2.0
+    3.0
    ],
    "registry": "pattern_machine_d",
    "principal": "kin:pattern_machine",
-   "source": "kin-fill"
+   "source": "registry"
   },
   "godel_sentence_machine": {
    "aabb_size": [
@@ -29569,20 +29574,20 @@
   },
   "pattern_tunnel_machine": {
    "aabb_size": [
-    2.0,
-    1.8,
-    0.8
+    3.0,
+    3.0,
+    10.0
    ],
-   "base_m": 2.0,
-   "height_m": 1.8,
-   "max_dimension_m": 2.0,
+   "base_m": 10.0,
+   "height_m": 3.0,
+   "max_dimension_m": 10.0,
    "grid_cells": [
-    2.0,
-    1.0
+    3.0,
+    10.0
    ],
    "registry": "procgen_extra",
    "principal": "kin:machines",
-   "source": "kin-fill"
+   "source": "registry"
   },
   "vector_machine": {
    "aabb_size": [
@@ -29671,37 +29676,37 @@
   },
   "hand_telemetry_display": {
    "aabb_size": [
-    2.0,
-    1.6,
-    0.4
+    1.0,
+    1.0,
+    1.0
    ],
-   "base_m": 2.0,
-   "height_m": 1.6,
-   "max_dimension_m": 2.0,
+   "base_m": 1.0,
+   "height_m": 1.0,
+   "max_dimension_m": 1.0,
    "grid_cells": [
-    2.0,
+    1.0,
     1.0
    ],
    "registry": "primitives",
    "principal": "kin:displays",
-   "source": "kin-fill"
+   "source": "registry"
   },
   "image_billboard": {
    "aabb_size": [
-    2.0,
-    1.6,
-    0.4
+    1.0,
+    1.0,
+    2.0
    ],
    "base_m": 2.0,
-   "height_m": 1.6,
+   "height_m": 1.0,
    "max_dimension_m": 2.0,
    "grid_cells": [
-    2.0,
-    1.0
+    1.0,
+    2.0
    ],
    "registry": "image_billboard",
    "principal": "kin:displays",
-   "source": "kin-fill"
+   "source": "registry"
   },
   "info_screen": {
    "aabb_size": [
@@ -29723,19 +29728,19 @@
   "monitor_setup": {
    "aabb_size": [
     2.0,
-    1.6,
-    0.4
+    2.0,
+    2.0
    ],
    "base_m": 2.0,
-   "height_m": 1.6,
+   "height_m": 2.0,
    "max_dimension_m": 2.0,
    "grid_cells": [
     2.0,
-    1.0
+    2.0
    ],
    "registry": "lab",
    "principal": "kin:displays",
-   "source": "kin-fill"
+   "source": "registry"
   },
   "station_multiscreen": {
    "aabb_size": [

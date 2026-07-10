@@ -91,6 +91,19 @@ def sync_footprints():
             continue
         instances = [n for n, i in reg.items() if i["scene"] == p["scene"]]
         for n in instances:
+            # PRECEDENCE: an explicit per-instance registry footprint [w,h,d]
+            # beats the type truth — the same scene can serve different poses
+            # (Buren columns are 1x6 stripes; array_disco is a floor).
+            fp = reg[n]["entry"].get("footprint")
+            if isinstance(fp, list) and len(fp) == 3:
+                w, h, dd = float(fp[0]), float(fp[1]), float(fp[2])
+                sizes[n] = {"aabb_size": [w, h, dd], "base_m": max(w, dd),
+                            "height_m": h, "max_dimension_m": max(w, h, dd),
+                            "grid_cells": [w, dd],
+                            "registry": reg[n]["file"].replace(".json", ""),
+                            "principal": pname, "source": "registry"}
+                total += 1
+                continue
             gc = disp.get("grid_cells", [1, 1])
             sizes[n] = {
                 "aabb_size": [float(disp.get("base_m", gc[0])),
@@ -115,16 +128,29 @@ def sync_footprints():
     kin_total = 0
     for kname, k in kin.items():
         disp = k.get("display")
-        if not disp:
+        if not disp and not k.get("prefer_registry"):
             continue
         filled = 0
         for n in k.get("members", []):
             if n not in reg:
                 continue
             prev = sizes.get(n, {})
-            if prev.get("base_m") and prev.get("source") != "kin-fill":
+            keep_measured = prev.get("base_m") and prev.get("source") not in ("kin-fill", "registry")
+            if keep_measured and not k.get("prefer_registry"):
                 continue                     # real measurement — leave it alone
             # (own kin-fill entries are re-written so corrections propagate)
+            fp = reg[n]["entry"].get("footprint")
+            if isinstance(fp, list) and len(fp) == 3:
+                w, h, dd = float(fp[0]), float(fp[1]), float(fp[2])
+                sizes[n] = {"aabb_size": [w, h, dd], "base_m": max(w, dd),
+                            "height_m": h, "max_dimension_m": max(w, h, dd),
+                            "grid_cells": [w, dd],
+                            "registry": reg[n]["file"].replace(".json", ""),
+                            "principal": f"kin:{kname}", "source": "registry"}
+                kin_total += 1
+                continue
+            if not disp:
+                continue                     # registry-only kin, no fill truth
             gc = disp.get("grid_cells", [1, 1])
             sizes[n] = {
                 "aabb_size": [float(disp.get("base_m", gc[0])),
@@ -151,11 +177,60 @@ def sync_footprints():
     return 0
 
 
+def verify():
+    """diff registry spatial claims against the oracle for every principal
+    and kin member; conflicts -> doc/reports/principal_verify.json"""
+    decl = json.loads(PRINCIPALS.read_text(encoding="utf-8"))
+    reg = load_registry()
+    sizes = json.loads(SIZES.read_text(encoding="utf-8"))["sizes"]
+    members = {}
+    for pname, p in decl.get("principals", {}).items():
+        for n, i in reg.items():
+            if i["scene"] == p["scene"]:
+                members[n] = pname
+    for kname, k in decl.get("kin", {}).items():
+        for n in k.get("members", []):
+            members.setdefault(n, f"kin:{kname}")
+    conflicts = []
+    for n, owner in sorted(members.items()):
+        e = reg.get(n, {}).get("entry", {})
+        s = sizes.get(n, {})
+        if not s.get("base_m"):
+            continue
+        oracle_cells = s.get("grid_cells", [1, 1])
+        oracle_area = oracle_cells[0] * oracle_cells[1]
+        oracle_h = s.get("height_m", 0)
+        sn = e.get("spatial_needs") or {}
+        fp_cells = sn.get("footprint_cells")
+        if fp_cells and abs(fp_cells - oracle_area) >= 2:
+            conflicts.append({"name": n, "owner": owner, "field": "footprint_cells",
+                              "registry": fp_cells, "oracle": oracle_area})
+        fp = e.get("footprint")
+        if isinstance(fp, list) and len(fp) == 3:
+            if abs(float(fp[1]) - oracle_h) > 0.8:
+                conflicts.append({"name": n, "owner": owner, "field": "footprint[h]",
+                                  "registry": fp[1], "oracle": oracle_h})
+            if abs(float(fp[0]) * float(fp[2]) - oracle_area) >= 2:
+                conflicts.append({"name": n, "owner": owner, "field": "footprint[area]",
+                                  "registry": f"{fp[0]}x{fp[2]}", "oracle": oracle_area})
+    out = ROOT / "doc" / "reports" / "principal_verify.json"
+    out.write_text(json.dumps({"members_checked": len(members),
+                               "conflicts": conflicts}, indent=1),
+                   encoding="utf-8", newline="\n")
+    print(f"verified {len(members)} members: {len(conflicts)} conflicts -> {out.name}")
+    for c in conflicts[:15]:
+        print(f"  {c['name']:34s} [{c['owner']}] {c['field']}: "
+              f"registry={c['registry']} vs oracle={c['oracle']}")
+    return 0
+
+
 def main() -> int:
     if "--audit" in sys.argv:
         return audit()
     if "--sync-footprints" in sys.argv:
         return sync_footprints()
+    if "--verify" in sys.argv:
+        return verify()
     print(__doc__)
     return 1
 

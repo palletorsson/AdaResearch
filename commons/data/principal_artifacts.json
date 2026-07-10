@@ -253,7 +253,7 @@
    ]
   },
   "wave_examples": {
-   "note": "the NOC oscillation wave family — same teaching interface, separate scenes; all measured, no sync needed",
+   "note": "the NOC oscillation wave family — same teaching interface, separate scenes; all measured, no sync needed prefer_registry: measured AABBs catch the wave mid-frame (0.2m); the registry's room-scale footprints are the truth.",
    "sync": "fill",
    "members": [
     "example_3_8_static_wave_vr",
@@ -262,7 +262,8 @@
     "exercise_3_12_additive_wave_vr",
     "additive_wave_demo",
     "vertical_wave_lines"
-   ]
+   ],
+   "prefer_registry": true
   },
   "displays": {
    "note": "standing screens/kiosks missing from the oracle; fill placeholder pending capture-measure",

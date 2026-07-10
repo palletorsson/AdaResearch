@@ -1,0 +1,201 @@
+{
+ "members_checked": 188,
+ "conflicts": [
+  {
+   "name": "VectorWorkbench",
+   "owner": "kin:workbench",
+   "field": "footprint[area]",
+   "registry": "4x3",
+   "oracle": 3.0
+  },
+  {
+   "name": "brians_brain_display",
+   "owner": "kin:displays",
+   "field": "footprint_cells",
+   "registry": 4,
+   "oracle": 2.0
+  },
+  {
+   "name": "example_3_9_the_wave_vr",
+   "owner": "kin:wave_examples",
+   "field": "footprint_cells",
+   "registry": 1,
+   "oracle": 484.0
+  },
+  {
+   "name": "exercise_3_11_oop_wave_vr",
+   "owner": "kin:wave_examples",
+   "field": "footprint_cells",
+   "registry": 1,
+   "oracle": 484.0
+  },
+  {
+   "name": "exercise_3_12_additive_wave_vr",
+   "owner": "kin:wave_examples",
+   "field": "footprint_cells",
+   "registry": 1,
+   "oracle": 484.0
+  },
+  {
+   "name": "grid2d",
+   "owner": "grid2d",
+   "field": "footprint_cells",
+   "registry": 9,
+   "oracle": 2.0
+  },
+  {
+   "name": "grid2d_bfs",
+   "owner": "grid2d",
+   "field": "footprint_cells",
+   "registry": 9,
+   "oracle": 2.0
+  },
+  {
+   "name": "grid2d_brians_brain",
+   "owner": "grid2d",
+   "field": "footprint_cells",
+   "registry": 9,
+   "oracle": 2.0
+  },
+  {
+   "name": "grid2d_dfs_maze",
+   "owner": "grid2d",
+   "field": "footprint_cells",
+   "registry": 9,
+   "oracle": 2.0
+  },
+  {
+   "name": "grid2d_langtons_ant",
+   "owner": "grid2d",
+   "field": "footprint_cells",
+   "registry": 9,
+   "oracle": 2.0
+  },
+  {
+   "name": "grid2d_life",
+   "owner": "grid2d",
+   "field": "footprint_cells",
+   "registry": 9,
+   "oracle": 2.0
+  },
+  {
+   "name": "grid2d_rule110",
+   "owner": "grid2d",
+   "field": "footprint_cells",
+   "registry": 9,
+   "oracle": 2.0
+  },
+  {
+   "name": "grid2d_rule30",
+   "owner": "grid2d",
+   "field": "footprint_cells",
+   "registry": 9,
+   "oracle": 2.0
+  },
+  {
+   "name": "grid2d_rule90",
+   "owner": "grid2d",
+   "field": "footprint_cells",
+   "registry": 9,
+   "oracle": 2.0
+  },
+  {
+   "name": "grid2d_seeds",
+   "owner": "grid2d",
+   "field": "footprint_cells",
+   "registry": 9,
+   "oracle": 2.0
+  },
+  {
+   "name": "grid2d_wireworld",
+   "owner": "grid2d",
+   "field": "footprint_cells",
+   "registry": 9,
+   "oracle": 2.0
+  },
+  {
+   "name": "grid3d",
+   "owner": "grid3d",
+   "field": "footprint_cells",
+   "registry": 1,
+   "oracle": 9.0
+  },
+  {
+   "name": "grid3d_bfs",
+   "owner": "grid3d",
+   "field": "footprint_cells",
+   "registry": 1,
+   "oracle": 9.0
+  },
+  {
+   "name": "grid3d_dfs",
+   "owner": "grid3d",
+   "field": "footprint_cells",
+   "registry": 1,
+   "oracle": 9.0
+  },
+  {
+   "name": "grid3d_dijkstra",
+   "owner": "grid3d",
+   "field": "footprint_cells",
+   "registry": 1,
+   "oracle": 9.0
+  },
+  {
+   "name": "grid3d_entropy",
+   "owner": "grid3d",
+   "field": "footprint_cells",
+   "registry": 1,
+   "oracle": 9.0
+  },
+  {
+   "name": "grid3d_force_directed",
+   "owner": "grid3d",
+   "field": "footprint_cells",
+   "registry": 1,
+   "oracle": 9.0
+  },
+  {
+   "name": "grid3d_kruskal",
+   "owner": "grid3d",
+   "field": "footprint_cells",
+   "registry": 1,
+   "oracle": 9.0
+  },
+  {
+   "name": "grid3d_prim",
+   "owner": "grid3d",
+   "field": "footprint_cells",
+   "registry": 1,
+   "oracle": 9.0
+  },
+  {
+   "name": "grid3d_random_graph",
+   "owner": "grid3d",
+   "field": "footprint_cells",
+   "registry": 1,
+   "oracle": 9.0
+  },
+  {
+   "name": "pattern_tunnel_machine",
+   "owner": "kin:machines",
+   "field": "footprint_cells",
+   "registry": 9,
+   "oracle": 30.0
+  },
+  {
+   "name": "random_walker_machine",
+   "owner": "kin:machines",
+   "field": "footprint_cells",
+   "registry": 9,
+   "oracle": 441.0
+  },
+  {
+   "name": "vertical_wave_lines",
+   "owner": "kin:wave_examples",
+   "field": "footprint_cells",
+   "registry": 9,
+   "oracle": 144.0
+  }
+ ]
+}
