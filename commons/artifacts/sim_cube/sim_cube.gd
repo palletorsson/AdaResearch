@@ -8,6 +8,7 @@ extends Node3D
 class_name SimCube
 
 const CubeLib := preload("res://commons/grid/CubeWrapperLibrary.gd")
+const LabelFramer := preload("res://commons/grid/LabelFramer.gd")
 
 @export var family: String = "gridglass"
 @export var mount: String = ""
@@ -73,3 +74,6 @@ func _mount_artifact(lib, lookup: String) -> void:
 	if inst is Node3D:
 		add_child(inst)
 		lib.fit_artifact(inst, family, _load_metrics(lookup))
+		# framed-text principal: hanging labels get bodies inside wrappers too
+		LabelFramer.frame_labels(inst)
+		LabelFramer.frame_labels.call_deferred(inst)
