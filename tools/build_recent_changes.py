@@ -92,6 +92,7 @@ PAGES = [
     {"label": "Heroes Timeline", "route": "/heroes-timeline", "note": "the dialectic as a timeline mind map"},
     {"label": "Template Lab", "route": "/template-lab", "note": "genome -> walkable room in seconds (Three.js)"},
     {"label": "Principal Gallery", "route": "/principal-gallery", "note": "DNA of all similar artifacts — see the family, rule on the type"},
+    {"label": "Sim-Cube Set", "route": "/sim-cube-set", "note": "the five wrapper families, closeup"},
     {"label": "Composition", "route": "/composition", "note": "need · potential · actual"},
     {"label": "Key Artifacts", "route": "/key-artifacts", "note": "the book's DNA"},
     {"label": "Station Gallery", "route": "/station-gallery", "note": "the lab benches"},

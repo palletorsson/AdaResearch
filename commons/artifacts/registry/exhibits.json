@@ -33,11 +33,11 @@
    "scene": "res://commons/artifacts/sim_cube/sim_cube.tscn",
    "category": "exhibit",
    "artifact_type": "wrapper",
-   "description": "A 1m housing that integrates a simulation into map space — the grid cell made visible. Five family styles (gridglass/tank/cage/shadowbox/openframe) keep housed artifacts recognizable by nature. Token: sim_cube#family:tank#mount:<lookup>.",
+   "description": "A 2m housing on a 1m cube plinth that integrates a simulation into map space — the grid cell made visible. Five family styles (gridglass/tank/cage/shadowbox/openframe) keep housed artifacts recognizable by nature. Token: sim_cube#family:tank#mount:<lookup>.",
    "footprint": [
-    1,
-    1,
-    1
+    2,
+    3,
+    2
    ]
   }
  }

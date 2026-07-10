@@ -12,7 +12,8 @@
 # Consumers: sim_cube artifact (runtime), export_cube_gltf.gd (browser).
 extends RefCounted
 
-const S := 1.0            # the cube IS one grid cell
+const S := 2.0            # the housing: 2m (artifacts overflowed 1m — Palle)
+const PLINTH_H := 1.0     # every sim-cube stands on a 1m cube plinth by default
 const EDGE := 0.035
 const BASE_H := 0.06
 
@@ -68,27 +69,34 @@ func _box(parent: Node3D, size: Vector3, pos: Vector3, mat: StandardMaterial3D) 
 
 
 func build(family: String, accent: StandardMaterial3D = null) -> Node3D:
-	"""origin at bottom-centre; interior clear for the mounted artifact."""
+	"""origin at bottom-centre (plinth base); interior clear for the mount."""
 	var n := Node3D.new()
 	var acc := accent if accent != null else mat_amber
+	# the default 1m cube plinth under every housing
+	_box(n, Vector3(1.0, PLINTH_H, 1.0), Vector3(0, PLINTH_H * 0.5, 0), mat_dark)
+	_box(n, Vector3(1.06, 0.05, 1.06), Vector3(0, PLINTH_H - 0.025, 0), mat_steel)
+	var housing := Node3D.new()
+	housing.name = "Housing"
+	housing.position.y = PLINTH_H
+	n.add_child(housing)
 	var hover := 0.0
 	if family in ["tank", "openframe"]:
 		hover = 0.05                        # the momo shadow gap
-	_chassis(n, acc, hover)
+	_chassis(housing, acc, hover)
 	match family:
-		"gridglass": _f_gridglass(n, hover)
-		"tank": _f_tank(n, hover)
-		"cage": _f_cage(n, hover)
-		"shadowbox": _f_shadowbox(n, hover)
-		"openframe": _f_openframe(n, hover, mat_white)
-		_: _f_openframe(n, hover, mat_steel)
+		"gridglass": _f_gridglass(housing, hover)
+		"tank": _f_tank(housing, hover)
+		"cage": _f_cage(housing, hover)
+		"shadowbox": _f_shadowbox(housing, hover)
+		"openframe": _f_openframe(housing, hover, mat_white)
+		_: _f_openframe(housing, hover, mat_steel)
 	return n
 
 
 func mount_point(family: String) -> Vector3:
 	"""where the housed artifact's origin should sit (local)."""
 	var hover := 0.05 if family in ["tank", "openframe"] else 0.0
-	return Vector3(0, hover + BASE_H + 0.01, 0)
+	return Vector3(0, PLINTH_H + hover + BASE_H + 0.01, 0)
 
 
 # ── the chassis: the one hand-grammar ────────────────────────────────────────
