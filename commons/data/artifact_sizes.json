@@ -29259,6 +29259,346 @@
    "registry": "composition_artifact",
    "principal": "composition_artifact",
    "source": "principal"
+  },
+  "ca_rules_workbench": {
+   "aabb_size": [
+    2.0,
+    1.5,
+    0.8
+   ],
+   "base_m": 2.0,
+   "height_m": 1.5,
+   "max_dimension_m": 2.0,
+   "grid_cells": [
+    2.0,
+    1.0
+   ],
+   "registry": "cellular_automata",
+   "principal": "kin:workbench",
+   "source": "kin-fill"
+  },
+  "cantor_diagonal_workbench": {
+   "aabb_size": [
+    2.0,
+    1.5,
+    0.8
+   ],
+   "base_m": 2.0,
+   "height_m": 1.5,
+   "max_dimension_m": 2.0,
+   "grid_cells": [
+    2.0,
+    1.0
+   ],
+   "registry": "qfep",
+   "principal": "kin:workbench",
+   "source": "kin-fill"
+  },
+  "complexity_dial_workbench": {
+   "aabb_size": [
+    2.0,
+    1.5,
+    0.8
+   ],
+   "base_m": 2.0,
+   "height_m": 1.5,
+   "max_dimension_m": 2.0,
+   "grid_cells": [
+    2.0,
+    1.0
+   ],
+   "registry": "foundations",
+   "principal": "kin:workbench",
+   "source": "kin-fill"
+  },
+  "csg_compose_workbench": {
+   "aabb_size": [
+    2.0,
+    1.5,
+    0.8
+   ],
+   "base_m": 2.0,
+   "height_m": 1.5,
+   "max_dimension_m": 2.0,
+   "grid_cells": [
+    2.0,
+    1.0
+   ],
+   "registry": "boolean_surfaces",
+   "principal": "kin:workbench",
+   "source": "kin-fill"
+  },
+  "halting_workbench": {
+   "aabb_size": [
+    2.0,
+    1.5,
+    0.8
+   ],
+   "base_m": 2.0,
+   "height_m": 1.5,
+   "max_dimension_m": 2.0,
+   "grid_cells": [
+    2.0,
+    1.0
+   ],
+   "registry": "foundations",
+   "principal": "kin:workbench",
+   "source": "kin-fill"
+  },
+  "qfep_balance_workbench": {
+   "aabb_size": [
+    2.0,
+    1.5,
+    0.8
+   ],
+   "base_m": 2.0,
+   "height_m": 1.5,
+   "max_dimension_m": 2.0,
+   "grid_cells": [
+    2.0,
+    1.0
+   ],
+   "registry": "qfep",
+   "principal": "kin:workbench",
+   "source": "kin-fill"
+  },
+  "riemann_sum_workbench": {
+   "aabb_size": [
+    2.0,
+    1.5,
+    0.8
+   ],
+   "base_m": 2.0,
+   "height_m": 1.5,
+   "max_dimension_m": 2.0,
+   "grid_cells": [
+    2.0,
+    1.0
+   ],
+   "registry": "change",
+   "principal": "kin:workbench",
+   "source": "kin-fill"
+  },
+  "russell_paradox_workbench": {
+   "aabb_size": [
+    2.0,
+    1.5,
+    0.8
+   ],
+   "base_m": 2.0,
+   "height_m": 1.5,
+   "max_dimension_m": 2.0,
+   "grid_cells": [
+    2.0,
+    1.0
+   ],
+   "registry": "qfep",
+   "principal": "kin:workbench",
+   "source": "kin-fill"
+  },
+  "shannon_workbench": {
+   "aabb_size": [
+    2.0,
+    1.5,
+    0.8
+   ],
+   "base_m": 2.0,
+   "height_m": 1.5,
+   "max_dimension_m": 2.0,
+   "grid_cells": [
+    2.0,
+    1.0
+   ],
+   "registry": "qfep",
+   "principal": "kin:workbench",
+   "source": "kin-fill"
+  },
+  "tangent_slope_workbench": {
+   "aabb_size": [
+    2.0,
+    1.5,
+    0.8
+   ],
+   "base_m": 2.0,
+   "height_m": 1.5,
+   "max_dimension_m": 2.0,
+   "grid_cells": [
+    2.0,
+    1.0
+   ],
+   "registry": "change",
+   "principal": "kin:workbench",
+   "source": "kin-fill"
+  },
+  "transform_composition_workbench": {
+   "aabb_size": [
+    2.0,
+    1.5,
+    0.8
+   ],
+   "base_m": 2.0,
+   "height_m": 1.5,
+   "max_dimension_m": 2.0,
+   "grid_cells": [
+    2.0,
+    1.0
+   ],
+   "registry": "commons_artifacts",
+   "principal": "kin:workbench",
+   "source": "kin-fill"
+  },
+  "triangle_curvature_workbench": {
+   "aabb_size": [
+    2.0,
+    1.5,
+    0.8
+   ],
+   "base_m": 2.0,
+   "height_m": 1.5,
+   "max_dimension_m": 2.0,
+   "grid_cells": [
+    2.0,
+    1.0
+   ],
+   "registry": "alternative_geometries",
+   "principal": "kin:workbench",
+   "source": "kin-fill"
+  },
+  "verlet_workbench": {
+   "aabb_size": [
+    2.0,
+    1.5,
+    0.8
+   ],
+   "base_m": 2.0,
+   "height_m": 1.5,
+   "max_dimension_m": 2.0,
+   "grid_cells": [
+    2.0,
+    1.0
+   ],
+   "registry": "soft_bodies",
+   "principal": "kin:workbench",
+   "source": "kin-fill"
+  },
+  "pattern_machine_a": {
+   "aabb_size": [
+    2.0,
+    2.0,
+    0.5
+   ],
+   "base_m": 2.0,
+   "height_m": 2.0,
+   "max_dimension_m": 2.0,
+   "grid_cells": [
+    2.0,
+    1.0
+   ],
+   "registry": "pattern_machine_a",
+   "principal": "kin:pattern_machine",
+   "source": "kin-fill"
+  },
+  "pattern_machine_b": {
+   "aabb_size": [
+    2.0,
+    2.0,
+    0.5
+   ],
+   "base_m": 2.0,
+   "height_m": 2.0,
+   "max_dimension_m": 2.0,
+   "grid_cells": [
+    2.0,
+    1.0
+   ],
+   "registry": "pattern_machine_b",
+   "principal": "kin:pattern_machine",
+   "source": "kin-fill"
+  },
+  "pattern_machine_c": {
+   "aabb_size": [
+    2.0,
+    2.0,
+    0.5
+   ],
+   "base_m": 2.0,
+   "height_m": 2.0,
+   "max_dimension_m": 2.0,
+   "grid_cells": [
+    2.0,
+    1.0
+   ],
+   "registry": "pattern_machine_c",
+   "principal": "kin:pattern_machine",
+   "source": "kin-fill"
+  },
+  "pattern_machine_d": {
+   "aabb_size": [
+    2.0,
+    2.0,
+    0.5
+   ],
+   "base_m": 2.0,
+   "height_m": 2.0,
+   "max_dimension_m": 2.0,
+   "grid_cells": [
+    2.0,
+    1.0
+   ],
+   "registry": "pattern_machine_d",
+   "principal": "kin:pattern_machine",
+   "source": "kin-fill"
+  },
+  "godel_sentence_machine": {
+   "aabb_size": [
+    2.0,
+    1.8,
+    0.8
+   ],
+   "base_m": 2.0,
+   "height_m": 1.8,
+   "max_dimension_m": 2.0,
+   "grid_cells": [
+    2.0,
+    1.0
+   ],
+   "registry": "foundations_crisis",
+   "principal": "kin:machines",
+   "source": "kin-fill"
+  },
+  "pattern_tunnel_machine": {
+   "aabb_size": [
+    2.0,
+    1.8,
+    0.8
+   ],
+   "base_m": 2.0,
+   "height_m": 1.8,
+   "max_dimension_m": 2.0,
+   "grid_cells": [
+    2.0,
+    1.0
+   ],
+   "registry": "procgen_extra",
+   "principal": "kin:machines",
+   "source": "kin-fill"
+  },
+  "vector_machine": {
+   "aabb_size": [
+    2.0,
+    1.8,
+    0.8
+   ],
+   "base_m": 2.0,
+   "height_m": 1.8,
+   "max_dimension_m": 2.0,
+   "grid_cells": [
+    2.0,
+    1.0
+   ],
+   "registry": "vectors_demos",
+   "principal": "kin:machines",
+   "source": "kin-fill"
   }
  },
  "_principal_sync": "tools/principal_artifacts.py --sync-footprints"

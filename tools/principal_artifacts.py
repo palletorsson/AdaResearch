@@ -108,10 +108,44 @@ def sync_footprints():
             total += 1
         print(f"  {pname:14s} -> {len(instances)} instances inherit "
               f"{gc} cells x {disp.get('height_m')}m ({disp.get('pose','standing')})")
+    # KIN families: interface-similar, separate scenes. Their members carry
+    # their OWN measurements when they exist — kin truth only FILLS gaps
+    # (sync: "fill"), it never overrides a real measurement.
+    kin = json.loads(PRINCIPALS.read_text(encoding="utf-8")).get("kin", {})
+    kin_total = 0
+    for kname, k in kin.items():
+        disp = k.get("display")
+        if not disp:
+            continue
+        filled = 0
+        for n in k.get("members", []):
+            if n not in reg:
+                continue
+            if sizes.get(n, {}).get("base_m"):
+                continue                     # measured — leave it alone
+            gc = disp.get("grid_cells", [1, 1])
+            sizes[n] = {
+                "aabb_size": [float(disp.get("base_m", gc[0])),
+                              float(disp.get("height_m", 1.0)),
+                              float(disp.get("depth_m", gc[1]))],
+                "base_m": float(disp.get("base_m", gc[0])),
+                "height_m": float(disp.get("height_m", 1.0)),
+                "max_dimension_m": max(float(disp.get("base_m", gc[0])),
+                                       float(disp.get("height_m", 1.0))),
+                "grid_cells": [float(gc[0]), float(gc[1])],
+                "registry": reg[n]["file"].replace(".json", ""),
+                "principal": f"kin:{kname}",
+                "source": "kin-fill",
+            }
+            filled += 1
+            kin_total += 1
+        if filled:
+            print(f"  kin:{kname:12s} -> filled {filled} missing members "
+                  f"({disp.get('grid_cells')} x {disp.get('height_m')}m)")
     doc["_principal_sync"] = "tools/principal_artifacts.py --sync-footprints"
     with open(SIZES, "w", encoding="utf-8", newline="\n") as f:
         json.dump(doc, f, indent=1)
-    print(f"synced {total} instances from {len(decl)} principals -> {SIZES.name}")
+    print(f"synced {total} principal instances + {kin_total} kin fills -> {SIZES.name}")
     return 0
 
 

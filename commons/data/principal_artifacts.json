@@ -176,8 +176,85 @@
   }
  },
  "kin": {
+  "workbench": {
+   "note": "the workbench convention — bench + controls + display teaching one concept; 15 implementations, zero code sharing. Interface contract to converge on: bench, dials, display, label.",
+   "sync": "fill",
+   "display": {
+    "pose": "bench",
+    "grid_cells": [
+     2,
+     1
+    ],
+    "base_m": 2.0,
+    "depth_m": 0.8,
+    "height_m": 1.5
+   },
+   "bed": "table_2m",
+   "members": [
+    "VectorWorkbench",
+    "ca_rules_workbench",
+    "cantor_diagonal_workbench",
+    "complexity_dial_workbench",
+    "csg_compose_workbench",
+    "halting_workbench",
+    "qfep_balance_workbench",
+    "riemann_sum_workbench",
+    "russell_paradox_workbench",
+    "shannon_workbench",
+    "tangent_slope_workbench",
+    "transform_composition_workbench",
+    "transformation_workbench",
+    "triangle_curvature_workbench",
+    "verlet_workbench"
+   ]
+  },
+  "pattern_machine": {
+   "note": "pattern machines a-d — same idea, four separate scripts; merge candidates",
+   "sync": "fill",
+   "display": {
+    "pose": "standing",
+    "grid_cells": [
+     2,
+     1
+    ],
+    "base_m": 2.0,
+    "depth_m": 0.5,
+    "height_m": 2.0
+   },
+   "bed": "panel",
+   "members": [
+    "pattern_machine_a",
+    "pattern_machine_b",
+    "pattern_machine_c",
+    "pattern_machine_d"
+   ]
+  },
+  "machines": {
+   "note": "the *_machine convention — heterogeneous (slot 1x1, random_walker 21x21!); fill-only truth is a REVIEW placeholder",
+   "sync": "fill",
+   "display": {
+    "pose": "standing",
+    "grid_cells": [
+     2,
+     1
+    ],
+    "base_m": 2.0,
+    "depth_m": 0.8,
+    "height_m": 1.8
+   },
+   "bed": "platform",
+   "members": [
+    "godel_sentence_machine",
+    "pattern_tunnel_machine",
+    "vector_machine",
+    "prng_crank_machine",
+    "random_walker_machine",
+    "slot_machine"
+   ]
+  },
   "wave_examples": {
-   "note": "the NOC oscillation wave family — same teaching interface, separate scenes",
+   "note": "the NOC oscillation wave family — same teaching interface, separate scenes; all measured, no sync needed",
+   "sync": "fill",
    "members": [
     "example_3_8_static_wave_vr",
     "example_3_9_the_wave_vr",
