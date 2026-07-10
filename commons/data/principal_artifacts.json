@@ -769,6 +769,17 @@
     "files": 33,
     "status": "extract"
    }
+  },
+  "framed_text": {
+   "note": "Palle 2026-07-10: ALL hanging Label3D must be 2D-in-3D boards or plates INTEGRATED in the wrapper or artifact \u2014 the artifact_readout_screen truth (a label that floats is an annotation; framed, lit, mounted = part of the world) applied systemically. Census: 945 billboarded Label3D sites across 557 scripts -> per-file migration is the wrong shape; standardize the meeting point instead.",
+   "rule": "billboard enabled = hanging = gets a body; surface labels (ticks, engraved values) untouched",
+   "components": {
+    "LabelFramer": "commons/grid/LabelFramer.gd \u2014 systemic in-place framing at spawn (GridInteractablesComponent hook, opt-out config framed_labels:false)",
+    "artifact_readout_screen": "authored caption with mounts stalk/wall/freestand/desk",
+    "text_screen": "commons/ui/text_screen.gd \u2014 authored 2D-in-3D text (SCREEN/STAND/PAD)",
+    "baked_text_albedo": "text baked into a surface material (the fire_extinguisher principle)"
+   },
+   "probe": "commons/testing/probe_label_framer.gd (9 checks incl. live map + negatives)"
   }
  }
 }

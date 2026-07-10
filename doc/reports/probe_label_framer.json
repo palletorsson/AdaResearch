@@ -1,0 +1,14 @@
+{
+ "failures": 0,
+ "log": [
+  "PASS  compile: GridInteractablesComponent",
+  "PASS  compile: LabelFramer",
+  "PASS  unit: framed >= 1 on single_cube  framed=1 labels=1",
+  "PASS  unit: billboard disabled on framed",
+  "PASS  unit: bezel+panel plates added",
+  "PASS  unit: idempotent (second pass frames 0)  0",
+  "PASS  negative: opt-out frames 0  0",
+  "PASS  negative: surface label untouched",
+  "PASS  live: Tutorial_Single spawns framed labels  labels=19 framed=3"
+ ]
+}

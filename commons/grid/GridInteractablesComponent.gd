@@ -831,6 +831,17 @@ func _place_dialectic_panels(dialectic_name: String, origin: Vector3, rotation: 
 # class_name) so it resolves headless. See commons/artifacts/_hangar/.
 const PackagingResolver := preload("res://commons/artifacts/_hangar/packaging_resolver.gd")
 const HangarKit := preload("res://commons/artifacts/_hangar/hangar_kit.gd")
+const LabelFramer := preload("res://commons/grid/LabelFramer.gd")
+
+
+# Text hygiene (Palle: all hanging Label3D become 2D-in-3D boards/plates
+# integrated in the artifact — the artifact_readout_screen principle applied
+# at the meeting point). Deferred so labels created inside the artifact's own
+# _ready are caught too. Safe to repeat (per-label meta marker).
+func _frame_labels_deferred(node: Node) -> void:
+	if is_instance_valid(node):
+		LabelFramer.frame_labels(node)
+
 
 # Suppress standalone-demo chrome on an embedded artifact: hide screen-space CanvasLayers
 # (2D overlays have no place in a VR map) and de-activate the artifact's own Camera3D so it
@@ -1022,6 +1033,8 @@ func _place_artifact(x: int, y: int, z: int, lookup_name: String, total_size: fl
 	# catches UI/cameras created inside the artifact's own _ready/call_deferred.
 	_suppress_embedded_chrome(artifact_object)
 	call_deferred("_suppress_embedded_chrome", artifact_object)
+	LabelFramer.frame_labels(artifact_object)
+	call_deferred("_frame_labels_deferred", artifact_object)
 
 	# Make it editable in VR: the catalyst's Edit-mode laser targets this group,
 	# and the B-save uses grid_cell / vr_saved_cell to move it (clearing the old
