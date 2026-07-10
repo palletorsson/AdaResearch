@@ -17,7 +17,16 @@
       "include_in_map_data": true,
       "map_ready": true,
       "map_sequences": [],
-      "tags": ["prop", "door", "safety", "radiation", "hazard", "signage", "restricted", "lab"],
+      "tags": [
+        "prop",
+        "door",
+        "safety",
+        "radiation",
+        "hazard",
+        "signage",
+        "restricted",
+        "lab"
+      ],
       "parameters": {
         "door_width": "Door width along X in meters (default 0.9)",
         "door_height": "Door height in meters (default 2.0)",
@@ -32,7 +41,13 @@
         "handle_side": "left | right — handle edge; hinges go opposite (default left)",
         "door_open": "Bool — slab pivots ~90 degrees on the hinge edge (default false)"
       },
-      "dev_themes": ["environment", "lab", "safety", "radiation", "signage"]
+      "dev_themes": [
+        "environment",
+        "lab",
+        "safety",
+        "radiation",
+        "signage"
+      ]
     },
     "wooden_pallet": {
       "lookup_name": "wooden_pallet",
@@ -45,7 +60,15 @@
       "include_in_map_data": true,
       "map_ready": true,
       "map_sequences": [],
-      "tags": ["prop", "warehouse", "logistics", "pallet", "boxes", "cargo", "fragile"],
+      "tags": [
+        "prop",
+        "warehouse",
+        "logistics",
+        "pallet",
+        "boxes",
+        "cargo",
+        "fragile"
+      ],
       "parameters": {
         "pallet_length": "Pallet length along X in meters (default 1.2)",
         "pallet_width": "Pallet width along Z in meters (default 0.8)",
@@ -61,7 +84,12 @@
         "label_color": "Shipping label color (default pale yellow)",
         "show_decals": "Bool — FRAGILE tape, arrows, barcode, label (default true)"
       },
-      "dev_themes": ["environment", "warehouse", "logistics", "props"]
+      "dev_themes": [
+        "environment",
+        "warehouse",
+        "logistics",
+        "props"
+      ]
     },
     "metal_storage_cabinet": {
       "lookup_name": "metal_storage_cabinet",
@@ -74,7 +102,15 @@
       "include_in_map_data": true,
       "map_ready": true,
       "map_sequences": [],
-      "tags": ["prop", "storage", "cabinet", "office", "lab", "furniture", "doors"],
+      "tags": [
+        "prop",
+        "storage",
+        "cabinet",
+        "office",
+        "lab",
+        "furniture",
+        "doors"
+      ],
       "parameters": {
         "cabinet_width": "Width along X in meters (default 0.9)",
         "cabinet_height": "Height in meters (default 1.8)",
@@ -87,7 +123,13 @@
         "shelf_count": "Interior shelves, visible when open (default 3)",
         "show_hinges": "Bool — hinge dots on the outer edges (default true)"
       },
-      "dev_themes": ["environment", "office", "lab", "furniture", "storage"]
+      "dev_themes": [
+        "environment",
+        "office",
+        "lab",
+        "furniture",
+        "storage"
+      ]
     },
     "fire_hose_box": {
       "lookup_name": "fire_hose_box",
@@ -100,7 +142,15 @@
       "include_in_map_data": true,
       "map_ready": true,
       "map_sequences": [],
-      "tags": ["prop", "safety", "fire", "hose", "cabinet", "signage", "emergency"],
+      "tags": [
+        "prop",
+        "safety",
+        "fire",
+        "hose",
+        "cabinet",
+        "signage",
+        "emergency"
+      ],
       "parameters": {
         "box_width": "Width along X in meters (default 0.6)",
         "box_height": "Height in meters (default 0.6)",
@@ -114,7 +164,12 @@
         "label_color": "Label color (default white)",
         "show_pictogram": "Bool — hose-reel pictogram on the side (default true)"
       },
-      "dev_themes": ["environment", "safety", "fire", "signage"]
+      "dev_themes": [
+        "environment",
+        "safety",
+        "fire",
+        "signage"
+      ]
     },
     "computer_console": {
       "lookup_name": "computer_console",
@@ -127,7 +182,15 @@
       "include_in_map_data": true,
       "map_ready": true,
       "map_sequences": [],
-      "tags": ["prop", "computer", "terminal", "console", "screen", "control_room", "kiosk"],
+      "tags": [
+        "prop",
+        "computer",
+        "terminal",
+        "console",
+        "screen",
+        "control_room",
+        "kiosk"
+      ],
       "parameters": {
         "console_width": "Width along X in meters (default 0.55)",
         "console_height": "Height in meters (default 1.1)",
@@ -142,7 +205,12 @@
         "cable_visible": "Bool — drooping side cable (default true)",
         "cable_color": "Cable color (default near-black)"
       },
-      "dev_themes": ["environment", "computer", "control_room", "interface"]
+      "dev_themes": [
+        "environment",
+        "computer",
+        "control_room",
+        "interface"
+      ]
     },
     "computer_keyboard": {
       "lookup_name": "computer_keyboard",
@@ -155,7 +223,14 @@
       "include_in_map_data": true,
       "map_ready": true,
       "map_sequences": [],
-      "tags": ["prop", "computer", "keyboard", "desk", "workstation", "input"],
+      "tags": [
+        "prop",
+        "computer",
+        "keyboard",
+        "desk",
+        "workstation",
+        "input"
+      ],
       "parameters": {
         "base_color": "Base tray color (default navy)",
         "key_color": "Keycap color (default slate)",
@@ -168,7 +243,12 @@
         "key_size": "Keycap size in meters (default 0.022)",
         "tilt_degrees": "Back-tilt wedge angle in degrees (default 6)"
       },
-      "dev_themes": ["environment", "computer", "desk", "input"]
+      "dev_themes": [
+        "environment",
+        "computer",
+        "desk",
+        "input"
+      ]
     },
     "surreal_lab": {
       "lookup_name": "surreal_lab",
@@ -1780,7 +1860,8 @@
         "preferred_zone": "any",
         "measured_footprint_cells": 2,
         "footprint_source": "designed"
-      }
+      },
+      "content": "text"
     },
     "barrier": {
       "lookup_name": "barrier",
@@ -3027,7 +3108,8 @@
         "info",
         "wall",
         "signage"
-      ]
+      ],
+      "content": "text"
     },
     "crate": {
       "lookup_name": "crate",
@@ -4888,7 +4970,8 @@
         "preferred_zone": "any",
         "measured_footprint_cells": 3,
         "footprint_source": "designed"
-      }
+      },
+      "content": "text"
     },
     "large_table": {
       "lookup_name": "large_table",
@@ -5148,7 +5231,8 @@
         "preferred_zone": "any",
         "measured_footprint_cells": 1,
         "footprint_source": "designed"
-      }
+      },
+      "content": "text"
     },
     "ceiling_vent": {
       "lookup_name": "ceiling_vent",

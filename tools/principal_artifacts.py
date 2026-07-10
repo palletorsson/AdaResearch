@@ -460,10 +460,32 @@ def advise():
     sys.path.insert(0, str(ROOT / "tools"))
     import mission_graph as mg
     sizes = json.loads(SIZES.read_text(encoding="utf-8"))["sizes"]
+    reg = load_registry()
+    # content pre-check (Palle: "all text should be a 2D-in-3D info board or
+    # plate"): geometry can't see "this is text" — a small plaque trips no
+    # geometric rule and falls through to cube. Tier 1: the authoritative
+    # registry field content:"text". Tier 2: word-boundary text-noun tokens
+    # minus the machine-surface stoplist (galton_board is not reading matter).
+    TEXT_NOUNS = {"chalkboard", "whiteboard", "plaque", "placard", "infoboard",
+                  "readout", "text", "statement", "caption", "tt", "3t"}
+    STOP = {"galton", "adder", "control", "singing", "vowel", "electrical",
+            "filter", "science", "chladni", "pattern", "xyz", "audio", "world"}
+
+    def _is_text(name):
+        e = reg.get(name, {}).get("entry", {})
+        if e.get("content") == "text":
+            return True
+        toks = set(re.split(r"[_\-]", name.lower()))
+        return bool(toks & TEXT_NOUNS) and not (toks & STOP)
 
     def form_advice(name):
         s2 = sizes.get(name, {})
         ab = s2.get("aabb_size")
+        if _is_text(name):
+            h = float(ab[1]) if ab else 1.0
+            if h >= 0.9:
+                return "frame|table_display", "text-primary, stands — board"
+            return "frame|table_display", "text-primary, hand-scale — plate"
         if not ab or not s2.get("base_m"):
             return "unmeasured", "?"
         w, h, dd = float(ab[0]), float(ab[1]), float(ab[2])

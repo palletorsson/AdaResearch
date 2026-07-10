@@ -33,6 +33,9 @@ const PAIRS := [
 	["podium", "grab_sphere_E"],
 	["plinth", "crystalcluster"],
 	["podium", "living_paper_life"],
+	["frame", "chalkboard"],
+	["frame", "info_screen"],
+	["table_display_1m", "godel_statement_plaque"],
 ]
 
 var _viewport: SubViewport

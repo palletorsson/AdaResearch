@@ -1,5 +1,5 @@
 {
- "members_checked": 349,
+ "members_checked": 383,
  "conflicts": [
   {
    "name": "VectorWorkbench",
@@ -7,13 +7,6 @@
    "field": "footprint[area]",
    "registry": "4x3",
    "oracle": 3.0
-  },
-  {
-   "name": "brians_brain_display",
-   "owner": "kin:displays",
-   "field": "footprint_cells",
-   "registry": 4,
-   "oracle": 2.0
   },
   {
    "name": "example_3_9_the_wave_vr",
@@ -254,6 +247,13 @@
    "oracle": 144.0
   },
   {
+   "name": "info_display",
+   "owner": "kin:text_board",
+   "field": "footprint[h]",
+   "registry": 2.0,
+   "oracle": 1.0
+  },
+  {
    "name": "metaballs",
    "owner": "metaballs",
    "field": "footprint_cells",
@@ -280,6 +280,13 @@
    "field": "footprint_cells",
    "registry": 9,
    "oracle": 144.0
+  },
+  {
+   "name": "spit_text_3d",
+   "owner": "kin:text_plate",
+   "field": "footprint_cells",
+   "registry": 1,
+   "oracle": 4.0
   },
   {
    "name": "test_scene_3",

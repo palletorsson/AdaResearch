@@ -1,7 +1,7 @@
 {
   "registry_info": {
     "name": "foundations",
-    "description": "Artifacts for the Foundations Crisis sequence - G\u00f6del, Russell, Escher, Magritte, Florensky",
+    "description": "Artifacts for the Foundations Crisis sequence - Gödel, Russell, Escher, Magritte, Florensky",
     "category": "integration",
     "theoretical_grounding": "Gamwell 'Mathematics and Art' Chapters 3-6, 9, 13"
   },
@@ -10,8 +10,8 @@
       "lookup_name": "godel_statement_plaque",
       "scene": "res://commons/interfaces/foundations/godel_statement_plaque.tscn",
       "class_name": "GodelStatementPlaque",
-      "description": "Self-referential plaque cycling through increasingly paradoxical statements, culminating in G\u00f6del's incompleteness",
-      "gamwell_reference": "Chapter 9: G\u00f6del's Incompleteness Theorem",
+      "description": "Self-referential plaque cycling through increasingly paradoxical statements, culminating in Gödel's incompleteness",
+      "gamwell_reference": "Chapter 9: Gödel's Incompleteness Theorem",
       "qfep_connection": "Proves pure F-minimization is impossible - every formal system has an outside",
       "signals": [
         "statement_changed",
@@ -51,7 +51,7 @@
         "foundationscrisis"
       ],
       "sequence": "foundationscrisis",
-      "name": "G\u00c3\u00b6del Statement Plaque",
+      "name": "GÃ¶del Statement Plaque",
       "geometry_spec": {
         "mesh_type": "composed_primitives",
         "topology": "manifold_closed",
@@ -138,7 +138,8 @@
         "approach_dir": "any",
         "derived_at": "2026-04-29T09:39:46.106998Z",
         "derived_from": "aabb_size + category"
-      }
+      },
+      "content": "text"
     },
     "russell_set_box": {
       "lookup_name": "russell_set_box",
@@ -281,7 +282,7 @@
       "class_name": "MagrittePipe",
       "description": "'Ceci n'est pas une pipe' - The gap between representation and reality",
       "gamwell_reference": "Chapter 9: Magritte's 'The Treachery of Images' (1929)",
-      "qfep_connection": "F (predictive model) \u2260 reality. The map is not the territory.",
+      "qfep_connection": "F (predictive model) ≠ reality. The map is not the territory.",
       "signals": [
         "representation_questioned",
         "layer_revealed"
@@ -413,7 +414,7 @@
       "lookup_name": "escher_staircase",
       "scene": "res://commons/interfaces/foundations/escher_staircase.tscn",
       "class_name": "EscherStaircase",
-      "description": "Impossible staircase - locally coherent, globally impossible. Visual G\u00f6del.",
+      "description": "Impossible staircase - locally coherent, globally impossible. Visual Gödel.",
       "gamwell_reference": "Chapter 9: Escher's impossible objects",
       "qfep_connection": "Local validity does not guarantee global consistency",
       "signals": [
@@ -551,7 +552,7 @@
       "class_name": "FlorenskySphere",
       "description": "Paraconsistent logic sphere - holds A and not-A simultaneously without collapse",
       "gamwell_reference": "Chapter 3: Florensky's 'Pillar and Ground of the Truth' - supralogic",
-      "qfep_connection": "QFEP allows holding order (F) and disorder (-\u03bbE) without triviality",
+      "qfep_connection": "QFEP allows holding order (F) and disorder (-λE) without triviality",
       "signals": [
         "state_observed",
         "superposition_entered",
@@ -688,7 +689,7 @@
       "class_name": "BifurcationDiagram",
       "description": "Interactive 3D bifurcation diagram from logistic map - walk through the edge of chaos",
       "gamwell_reference": "Chapter 12: Chaos Theory, Fractals",
-      "qfep_connection": "The \u03bb parameter IS Langton's \u03bb - tunes between order and chaos",
+      "qfep_connection": "The λ parameter IS Langton's λ - tunes between order and chaos",
       "signals": [
         "r_changed",
         "regime_changed"
@@ -950,13 +951,14 @@
         "approach_dir": "front",
         "derived_at": "2026-04-29T09:39:46.106998Z",
         "derived_from": "aabb_size + category"
-      }
+      },
+      "content": "text"
     },
     "penrose_triangle": {
       "lookup_name": "penrose_triangle",
       "scene": "res://commons/artifacts/penrose_triangle/penrose_triangle.tscn",
       "class_name": "PenroseTriangle",
-      "description": "The impossible triangle - locally coherent, globally impossible. Visual G\u00f6del.",
+      "description": "The impossible triangle - locally coherent, globally impossible. Visual Gödel.",
       "gamwell_reference": "Chapter 9: Penrose and Escher collaboration",
       "qfep_connection": "Local validity does not guarantee global consistency",
       "signals": [
@@ -1092,7 +1094,7 @@
       "lookup_name": "poincare_disk",
       "scene": "res://commons/artifacts/poincare_disk/poincare_disk.tscn",
       "class_name": "PoincareDisk",
-      "description": "Poincar\u00e9 disk model of hyperbolic geometry - where parallel lines diverge and triangles have angle sum < 180\u00b0",
+      "description": "Poincaré disk model of hyperbolic geometry - where parallel lines diverge and triangles have angle sum < 180°",
       "gamwell_reference": "Chapter 2: Non-Euclidean Geometry",
       "qfep_connection": "The parallel postulate is independent - geometry is a choice",
       "signals": [
@@ -1227,7 +1229,7 @@
       "lookup_name": "schrodinger_box",
       "scene": "res://commons/artifacts/schrodinger_box/schrodinger_box.tscn",
       "class_name": "SchrodingerBox",
-      "description": "Schr\u00f6dinger's cat thought experiment - superposition collapses upon observation",
+      "description": "Schrödinger's cat thought experiment - superposition collapses upon observation",
       "gamwell_reference": "Quantum mechanics and measurement problem",
       "qfep_connection": "Observation collapses possibility - connects to Florensky's paraconsistent holding of A and not-A",
       "signals": [
@@ -1364,9 +1366,9 @@
       "lookup_name": "angle_sum_triangle",
       "scene": "res://commons/artifacts/angle_sum_triangle/angle_sum_triangle.tscn",
       "class_name": "AngleSumTriangle",
-      "description": "Demonstrates that triangle angles sum to 180\u00b0 in Euclidean space \u2014 a fact that fails in non-Euclidean geometries",
+      "description": "Demonstrates that triangle angles sum to 180° in Euclidean space — a fact that fails in non-Euclidean geometries",
       "gamwell_reference": "Chapter 1-2: Euclidean Geometry",
-      "qfep_connection": "The angle sum property is axiomatic \u2014 it holds only when the parallel postulate is assumed",
+      "qfep_connection": "The angle sum property is axiomatic — it holds only when the parallel postulate is assumed",
       "signals": [],
       "interactions": [
         "observe angle labels and sum"
@@ -1988,16 +1990,16 @@
       "scene": "res://commons/artifacts/complexity_dial_workbench/complexity_dial_workbench.tscn",
       "class_name": "ComplexityDialWorkbench",
       "name": "Complexity Dial Workbench",
-      "description": "Interactive workbench for the polynomial-vs-exponential gap. One slider drives N \u2208 [1,60]; five algorithms (O(log N), O(N), O(N log N), O(N\u00b2), O(2^N)) race their step counts simultaneously. Log-scaled bars + step-count labels + a dashed wall-clock line at 10\u2079 ops/sec + a small growth-curve panel at the bottom. At N\u224830 the exponential bar crosses the wall-clock line; at N=60 the gap is 18 orders of magnitude. Sister to /complexity-dial-gallery (web frieze frozen at 7 N-values).",
+      "description": "Interactive workbench for the polynomial-vs-exponential gap. One slider drives N ∈ [1,60]; five algorithms (O(log N), O(N), O(N log N), O(N²), O(2^N)) race their step counts simultaneously. Log-scaled bars + step-count labels + a dashed wall-clock line at 10⁹ ops/sec + a small growth-curve panel at the bottom. At N≈30 the exponential bar crosses the wall-clock line; at N=60 the gap is 18 orders of magnitude. Sister to /complexity-dial-gallery (web frieze frozen at 7 N-values).",
       "gamwell_reference": "Chapter 9-13: Turing-era complexity theory, decidability vs tractability",
-      "qfep_connection": "The polynomial/exponential gap as a categorical, not quantitative, limit \u2014 not bridgeable by any constant factor. A different kind of thing.",
+      "qfep_connection": "The polynomial/exponential gap as a categorical, not quantitative, limit — not bridgeable by any constant factor. A different kind of thing.",
       "signals": [],
       "interactions": [
         "grab slider to change N (input size); 5 algorithm bars and the growth curves update live"
       ],
       "parameters": {
         "initial_n": "Starting N value (default 30)",
-        "practical_log_threshold": "log10 of the wall-clock cutoff (default 9 = 10\u2079 ops/sec)",
+        "practical_log_threshold": "log10 of the wall-clock cutoff (default 9 = 10⁹ ops/sec)",
         "plate_scale": "Overall workbench scale (default 2.0)",
         "footprint": [
           2,

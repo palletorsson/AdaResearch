@@ -20112,19 +20112,20 @@
   },
   "point_is": {
    "aabb_size": [
-    0.0,
-    0.0,
-    0.0
+    1.0,
+    1.0,
+    1.0
    ],
-   "base_m": 0.0,
-   "height_m": 0.0,
-   "max_dimension_m": 0.0,
+   "base_m": 1.0,
+   "height_m": 1.0,
+   "max_dimension_m": 1.0,
    "grid_cells": [
     1.0,
     1.0
    ],
    "registry": "commons_artifacts",
-   "measured_at": "2026-04-29T07:09:56.762620Z"
+   "principal": "kin:text_plate",
+   "source": "registry"
   },
   "poisson_disk_sampling_3d": {
    "aabb_size": [
@@ -25329,19 +25330,20 @@
   },
   "spit_text_3d": {
    "aabb_size": [
-    0.0,
-    0.0,
-    0.0
+    1.0,
+    1.0,
+    4.0
    ],
-   "base_m": 0.0,
-   "height_m": 0.0,
-   "max_dimension_m": 0.0,
+   "base_m": 4.0,
+   "height_m": 1.0,
+   "max_dimension_m": 4.0,
    "grid_cells": [
     1.0,
-    1.0
+    4.0
    ],
    "registry": "commons_artifacts",
-   "measured_at": "2026-04-29T07:09:56.762620Z"
+   "principal": "kin:text_plate",
+   "source": "registry"
   },
   "spotlight_attention": {
    "aabb_size": [
@@ -29625,20 +29627,20 @@
   },
   "brians_brain_display": {
    "aabb_size": [
-    2.0,
-    1.6,
-    0.4
+    1.39,
+    2.62,
+    1.39
    ],
-   "base_m": 2.0,
-   "height_m": 1.6,
-   "max_dimension_m": 2.0,
+   "base_m": 1.39,
+   "height_m": 2.62,
+   "max_dimension_m": 2.62,
    "grid_cells": [
-    2.0,
-    1.0
+    2,
+    2
    ],
    "registry": "cellular_automata",
    "principal": "kin:displays",
-   "source": "kin-fill"
+   "source": "em-square"
   },
   "computer_monitor": {
    "aabb_size": [
@@ -29710,20 +29712,20 @@
   },
   "info_screen": {
    "aabb_size": [
-    2.0,
-    1.6,
-    0.4
+    1.08,
+    0.63,
+    0.05
    ],
-   "base_m": 2.0,
-   "height_m": 1.6,
-   "max_dimension_m": 2.0,
+   "base_m": 1.08,
+   "height_m": 0.63,
+   "max_dimension_m": 1.08,
    "grid_cells": [
-    2.0,
+    1.0,
     1.0
    ],
    "registry": "lab",
    "principal": "kin:displays",
-   "source": "kin-fill"
+   "source": "em-square"
   },
   "monitor_setup": {
    "aabb_size": [
@@ -29745,19 +29747,19 @@
   "station_multiscreen": {
    "aabb_size": [
     2.0,
-    1.6,
-    0.4
+    1.2,
+    0.13
    ],
    "base_m": 2.0,
-   "height_m": 1.6,
+   "height_m": 1.2,
    "max_dimension_m": 2.0,
    "grid_cells": [
-    2.0,
+    2,
     1.0
    ],
    "registry": "station",
    "principal": "kin:displays",
-   "source": "kin-fill"
+   "source": "em-square"
   },
   "abject_bench": {
    "aabb_size": [
@@ -31713,6 +31715,397 @@
    "registry": "cellular_automata",
    "principal": "kin:bench",
    "source": "em-square"
+  },
+  "chalkboard": {
+   "aabb_size": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "base_m": 1.0,
+   "height_m": 1.0,
+   "max_dimension_m": 1.0,
+   "grid_cells": [
+    1.0,
+    1.0
+   ],
+   "registry": "primitives",
+   "principal": "kin:text_board",
+   "source": "registry"
+  },
+  "circle_chalkboard": {
+   "aabb_size": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "base_m": 1.0,
+   "height_m": 1.0,
+   "max_dimension_m": 1.0,
+   "grid_cells": [
+    1.0,
+    1.0
+   ],
+   "registry": "primitives",
+   "principal": "kin:text_board",
+   "source": "registry"
+  },
+  "cube_chalkboard": {
+   "aabb_size": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "base_m": 1.0,
+   "height_m": 1.0,
+   "max_dimension_m": 1.0,
+   "grid_cells": [
+    1.0,
+    1.0
+   ],
+   "registry": "primitives",
+   "principal": "kin:text_board",
+   "source": "registry"
+  },
+  "endlessness_chalkboard": {
+   "aabb_size": [
+    2.0,
+    1.0,
+    1.0
+   ],
+   "base_m": 2.0,
+   "height_m": 1.0,
+   "max_dimension_m": 2.0,
+   "grid_cells": [
+    2.0,
+    1.0
+   ],
+   "registry": "primitives",
+   "principal": "kin:text_board",
+   "source": "registry"
+  },
+  "grid_chalkboard": {
+   "aabb_size": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "base_m": 1.0,
+   "height_m": 1.0,
+   "max_dimension_m": 1.0,
+   "grid_cells": [
+    1.0,
+    1.0
+   ],
+   "registry": "primitives",
+   "principal": "kin:text_board",
+   "source": "registry"
+  },
+  "ignorance_chalkboard": {
+   "aabb_size": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "base_m": 1.0,
+   "height_m": 1.0,
+   "max_dimension_m": 1.0,
+   "grid_cells": [
+    1.0,
+    1.0
+   ],
+   "registry": "primitives",
+   "principal": "kin:text_board",
+   "source": "registry"
+  },
+  "line_chalkboard": {
+   "aabb_size": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "base_m": 1.0,
+   "height_m": 1.0,
+   "max_dimension_m": 1.0,
+   "grid_cells": [
+    1.0,
+    1.0
+   ],
+   "registry": "primitives",
+   "principal": "kin:text_board",
+   "source": "registry"
+  },
+  "melencolia_chalkboard": {
+   "aabb_size": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "base_m": 1.0,
+   "height_m": 1.0,
+   "max_dimension_m": 1.0,
+   "grid_cells": [
+    1.0,
+    1.0
+   ],
+   "registry": "primitives",
+   "principal": "kin:text_board",
+   "source": "registry"
+  },
+  "mesh_chalkboard": {
+   "aabb_size": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "base_m": 1.0,
+   "height_m": 1.0,
+   "max_dimension_m": 1.0,
+   "grid_cells": [
+    1.0,
+    1.0
+   ],
+   "registry": "primitives",
+   "principal": "kin:text_board",
+   "source": "registry"
+  },
+  "network_chalkboard": {
+   "aabb_size": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "base_m": 1.0,
+   "height_m": 1.0,
+   "max_dimension_m": 1.0,
+   "grid_cells": [
+    1.0,
+    1.0
+   ],
+   "registry": "primitives",
+   "principal": "kin:text_board",
+   "source": "registry"
+  },
+  "point_chalkboard": {
+   "aabb_size": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "base_m": 1.0,
+   "height_m": 1.0,
+   "max_dimension_m": 1.0,
+   "grid_cells": [
+    1.0,
+    1.0
+   ],
+   "registry": "primitives",
+   "principal": "kin:text_board",
+   "source": "registry"
+  },
+  "polyhedra_chalkboard": {
+   "aabb_size": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "base_m": 1.0,
+   "height_m": 1.0,
+   "max_dimension_m": 1.0,
+   "grid_cells": [
+    1.0,
+    1.0
+   ],
+   "registry": "primitives",
+   "principal": "kin:text_board",
+   "source": "registry"
+  },
+  "qfep_chalkboard": {
+   "aabb_size": [
+    2.0,
+    1.0,
+    1.0
+   ],
+   "base_m": 2.0,
+   "height_m": 1.0,
+   "max_dimension_m": 2.0,
+   "grid_cells": [
+    2.0,
+    1.0
+   ],
+   "registry": "primitives",
+   "principal": "kin:text_board",
+   "source": "registry"
+  },
+  "quad_chalkboard": {
+   "aabb_size": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "base_m": 1.0,
+   "height_m": 1.0,
+   "max_dimension_m": 1.0,
+   "grid_cells": [
+    1.0,
+    1.0
+   ],
+   "registry": "primitives",
+   "principal": "kin:text_board",
+   "source": "registry"
+  },
+  "thrownness_chalkboard": {
+   "aabb_size": [
+    2.0,
+    1.0,
+    1.0
+   ],
+   "base_m": 2.0,
+   "height_m": 1.0,
+   "max_dimension_m": 2.0,
+   "grid_cells": [
+    2.0,
+    1.0
+   ],
+   "registry": "primitives",
+   "principal": "kin:text_board",
+   "source": "registry"
+  },
+  "trace_chalkboard": {
+   "aabb_size": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "base_m": 1.0,
+   "height_m": 1.0,
+   "max_dimension_m": 1.0,
+   "grid_cells": [
+    1.0,
+    1.0
+   ],
+   "registry": "primitives",
+   "principal": "kin:text_board",
+   "source": "registry"
+  },
+  "triangle_chalkboard": {
+   "aabb_size": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "base_m": 1.0,
+   "height_m": 1.0,
+   "max_dimension_m": 1.0,
+   "grid_cells": [
+    1.0,
+    1.0
+   ],
+   "registry": "primitives",
+   "principal": "kin:text_board",
+   "source": "registry"
+  },
+  "triangle_whiteboard": {
+   "aabb_size": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "base_m": 1.0,
+   "height_m": 1.0,
+   "max_dimension_m": 1.0,
+   "grid_cells": [
+    1.0,
+    1.0
+   ],
+   "registry": "primitives",
+   "principal": "kin:text_board",
+   "source": "registry"
+  },
+  "whiteboard": {
+   "aabb_size": [
+    2.5,
+    1.34,
+    0.1
+   ],
+   "base_m": 2.5,
+   "height_m": 1.34,
+   "max_dimension_m": 2.5,
+   "grid_cells": [
+    3,
+    1.0
+   ],
+   "registry": "lab",
+   "principal": "kin:text_board",
+   "source": "em-square"
+  },
+  "mobile_whiteboard": {
+   "aabb_size": [
+    1.58,
+    1.68,
+    0.53
+   ],
+   "base_m": 1.58,
+   "height_m": 1.68,
+   "max_dimension_m": 1.68,
+   "grid_cells": [
+    2,
+    1.0
+   ],
+   "registry": "lab",
+   "principal": "kin:text_board",
+   "source": "em-square"
+  },
+  "info_board": {
+   "aabb_size": [
+    1.2,
+    1.6,
+    0.0
+   ],
+   "base_m": 1.2,
+   "height_m": 1.6,
+   "max_dimension_m": 1.6,
+   "grid_cells": [
+    2,
+    1.0
+   ],
+   "registry": "lab",
+   "principal": "kin:text_board",
+   "source": "em-square"
+  },
+  "station_panel": {
+   "aabb_size": [
+    1.9,
+    0.6,
+    0.11
+   ],
+   "base_m": 1.9,
+   "height_m": 0.6,
+   "max_dimension_m": 1.9,
+   "grid_cells": [
+    2,
+    1.0
+   ],
+   "registry": "station",
+   "principal": "kin:text_board",
+   "source": "em-square"
+  },
+  "wall_placard": {
+   "aabb_size": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "base_m": 1.0,
+   "height_m": 1.0,
+   "max_dimension_m": 1.0,
+   "grid_cells": [
+    1.0,
+    1.0
+   ],
+   "registry": "primitives",
+   "principal": "kin:text_board",
+   "source": "registry"
   }
  },
  "_principal_sync": "tools/principal_artifacts.py --sync-footprints"

@@ -552,6 +552,82 @@
     "wind_bench",
     "wireworld_bench"
    ]
+  },
+  "text_board": {
+   "note": "the 2D-in-3D INFO BOARD family (Palle 2026-07-10: all reading matter is a board or a plate, never a 3D housing, never bare floating text). Upright reading, viewer stands. Chalkboards/whiteboards are already 2D-in-3D by construction (SubViewport scribble -> board quad, wall-hung, no floor stand) \u2014 the frame wrapper gives them freestanding legs; wall-hung placement stays native. Interface to converge on: title, body/lines, width, mount. Canonical renderer: commons/ui/text_screen.gd.",
+   "sync": "fill",
+   "display": {
+    "pose": "standing",
+    "grid_cells": [
+     1,
+     1
+    ],
+    "base_m": 1.0,
+    "depth_m": 0.12,
+    "height_m": 1.6
+   },
+   "bed": "none (frame \u2014 the 2D panel stands vertical, no 3D housing)",
+   "integration": "wrap",
+   "wrap_family": "frame",
+   "measure_all": true,
+   "measure_skip": [],
+   "members": [
+    "chalkboard",
+    "circle_chalkboard",
+    "cube_chalkboard",
+    "endlessness_chalkboard",
+    "grid_chalkboard",
+    "ignorance_chalkboard",
+    "line_chalkboard",
+    "melencolia_chalkboard",
+    "mesh_chalkboard",
+    "network_chalkboard",
+    "point_chalkboard",
+    "polyhedra_chalkboard",
+    "qfep_chalkboard",
+    "quad_chalkboard",
+    "thrownness_chalkboard",
+    "trace_chalkboard",
+    "triangle_chalkboard",
+    "triangle_whiteboard",
+    "whiteboard",
+    "mobile_whiteboard",
+    "info_board",
+    "info_display",
+    "station_panel",
+    "euclid_postulates_plaque",
+    "situated_readout",
+    "turret_boll_infoboard",
+    "code_evolution_screen",
+    "wall_placard",
+    "tt"
+   ]
+  },
+  "text_plate": {
+   "note": "the 2D-in-3D PLATE family \u2014 reading matter at hand/table scale (TextScreen PAD register). Small plaques, ticker bands, raw in-world text utilities that must never render as bare floating Label3D/TextMesh.",
+   "sync": "fill",
+   "display": {
+    "pose": "standing",
+    "grid_cells": [
+     1,
+     1
+    ],
+    "base_m": 1.0,
+    "depth_m": 0.3,
+    "height_m": 0.4
+   },
+   "bed": "none (table display)",
+   "integration": "wrap",
+   "wrap_family": "table_display_1m",
+   "measure_all": true,
+   "measure_skip": [],
+   "members": [
+    "godel_statement_plaque",
+    "3t",
+    "text_display",
+    "spit_text_3d",
+    "point_is"
+   ]
   }
  },
  "wrappers": {
@@ -641,7 +717,11 @@
   "buren_col_10_01": "field",
   "buren_col_10_04": "field",
   "buren_col_10_07": "field",
-  "buren_col_10_10": "field"
+  "buren_col_10_10": "field",
+  "info_screen": "frame",
+  "artifact_readout_screen": "frame",
+  "station_multiscreen": "frame",
+  "_text_screens": "info_screen/artifact_readout_screen/station_multiscreen: text-primary \u2014 pulled out of kin:displays gridglass drift to frame (Palle text rule)"
  },
  "feature_principals": {
   "_note": "Palle 2026-07-09: 'what we are looking for is artifacts that share the same FEATURE we can optimize' \u2014 component-level principals, props-dna style (one parametric .gd, DNA variants). control_console is the built prototype: a console that houses any machine's controls. Census = how many artifact .gd files hand-roll each part today. Migration: extract the part as a parametric prop, artifacts compose instead of hand-rolling. Also the DOUBLE-STAND RULE: artifacts that bring their own pedestal are integration:self \u2014 never wrap them (coin_toss was the first catch; 115 suspects in doc/reports/double_stand_suspects.json).",

@@ -1909,6 +1909,39 @@
    ],
    "source": "measured"
   },
+  "brians_brain_display": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.39,
+    2.62,
+    1.39
+   ],
+   "source": "measured"
+  },
+  "info_screen": {
+   "anchor_y": 0.31,
+   "base": "float",
+   "pose": "standing",
+   "size": [
+    1.08,
+    0.63,
+    0.05
+   ],
+   "source": "measured"
+  },
+  "station_multiscreen": {
+   "anchor_y": 0.6,
+   "base": "float",
+   "pose": "standing",
+   "size": [
+    2.0,
+    1.2,
+    0.13
+   ],
+   "source": "measured"
+  },
   "frame_counter_display": {
    "anchor_y": -0.2,
    "base": "float",
@@ -3182,6 +3215,369 @@
     1.84,
     2.52,
     1.84
+   ],
+   "source": "measured"
+  },
+  "chalkboard": {
+   "anchor_y": 0.66,
+   "base": "float",
+   "pose": "standing",
+   "size": [
+    1.72,
+    1.28,
+    0.16
+   ],
+   "source": "measured"
+  },
+  "circle_chalkboard": {
+   "anchor_y": 0.66,
+   "base": "float",
+   "pose": "standing",
+   "size": [
+    1.72,
+    1.28,
+    0.16
+   ],
+   "source": "measured"
+  },
+  "cube_chalkboard": {
+   "anchor_y": 0.66,
+   "base": "float",
+   "pose": "standing",
+   "size": [
+    1.72,
+    1.28,
+    0.16
+   ],
+   "source": "measured"
+  },
+  "endlessness_chalkboard": {
+   "anchor_y": 0.66,
+   "base": "float",
+   "pose": "standing",
+   "size": [
+    2.12,
+    1.28,
+    0.16
+   ],
+   "source": "measured"
+  },
+  "grid_chalkboard": {
+   "anchor_y": 0.66,
+   "base": "float",
+   "pose": "standing",
+   "size": [
+    1.72,
+    1.28,
+    0.16
+   ],
+   "source": "measured"
+  },
+  "ignorance_chalkboard": {
+   "anchor_y": 0.66,
+   "base": "float",
+   "pose": "standing",
+   "size": [
+    1.72,
+    1.28,
+    0.16
+   ],
+   "source": "measured"
+  },
+  "line_chalkboard": {
+   "anchor_y": 0.66,
+   "base": "float",
+   "pose": "standing",
+   "size": [
+    1.72,
+    1.28,
+    0.16
+   ],
+   "source": "measured"
+  },
+  "melencolia_chalkboard": {
+   "anchor_y": 0.66,
+   "base": "float",
+   "pose": "standing",
+   "size": [
+    1.72,
+    1.28,
+    0.16
+   ],
+   "source": "measured"
+  },
+  "mesh_chalkboard": {
+   "anchor_y": 0.66,
+   "base": "float",
+   "pose": "standing",
+   "size": [
+    1.72,
+    1.28,
+    0.16
+   ],
+   "source": "measured"
+  },
+  "network_chalkboard": {
+   "anchor_y": 0.66,
+   "base": "float",
+   "pose": "standing",
+   "size": [
+    1.72,
+    1.28,
+    0.16
+   ],
+   "source": "measured"
+  },
+  "point_chalkboard": {
+   "anchor_y": 0.66,
+   "base": "float",
+   "pose": "standing",
+   "size": [
+    1.72,
+    1.28,
+    0.16
+   ],
+   "source": "measured"
+  },
+  "polyhedra_chalkboard": {
+   "anchor_y": 0.66,
+   "base": "float",
+   "pose": "standing",
+   "size": [
+    1.72,
+    1.28,
+    0.16
+   ],
+   "source": "measured"
+  },
+  "qfep_chalkboard": {
+   "anchor_y": 0.66,
+   "base": "float",
+   "pose": "standing",
+   "size": [
+    2.32,
+    1.28,
+    0.16
+   ],
+   "source": "measured"
+  },
+  "quad_chalkboard": {
+   "anchor_y": 0.66,
+   "base": "float",
+   "pose": "standing",
+   "size": [
+    1.72,
+    1.28,
+    0.16
+   ],
+   "source": "measured"
+  },
+  "thrownness_chalkboard": {
+   "anchor_y": 0.66,
+   "base": "float",
+   "pose": "standing",
+   "size": [
+    2.12,
+    1.28,
+    0.16
+   ],
+   "source": "measured"
+  },
+  "trace_chalkboard": {
+   "anchor_y": 0.66,
+   "base": "float",
+   "pose": "standing",
+   "size": [
+    1.72,
+    1.28,
+    0.16
+   ],
+   "source": "measured"
+  },
+  "triangle_chalkboard": {
+   "anchor_y": 0.66,
+   "base": "float",
+   "pose": "standing",
+   "size": [
+    1.72,
+    1.28,
+    0.16
+   ],
+   "source": "measured"
+  },
+  "triangle_whiteboard": {
+   "anchor_y": 0.57,
+   "base": "float",
+   "pose": "standing",
+   "size": [
+    1.6,
+    1.15,
+    0.12
+   ],
+   "source": "measured"
+  },
+  "whiteboard": {
+   "anchor_y": 0.09,
+   "base": "floor",
+   "pose": "standing",
+   "size": [
+    2.5,
+    1.34,
+    0.1
+   ],
+   "source": "measured"
+  },
+  "mobile_whiteboard": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.58,
+    1.68,
+    0.53
+   ],
+   "source": "measured"
+  },
+  "info_board": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "standing",
+   "size": [
+    1.2,
+    1.6,
+    0.0
+   ],
+   "source": "measured"
+  },
+  "info_display": {
+   "anchor_y": 0.5,
+   "base": "float",
+   "pose": "standing",
+   "size": [
+    1.0,
+    1.0,
+    0.02
+   ],
+   "source": "measured"
+  },
+  "station_panel": {
+   "anchor_y": 0.3,
+   "base": "float",
+   "pose": "standing",
+   "size": [
+    1.9,
+    0.6,
+    0.11
+   ],
+   "source": "measured"
+  },
+  "euclid_postulates_plaque": {
+   "anchor_y": 0.52,
+   "base": "float",
+   "pose": "standing",
+   "size": [
+    0.84,
+    1.04,
+    0.06
+   ],
+   "source": "measured"
+  },
+  "situated_readout": {
+   "anchor_y": -0.4,
+   "base": "float",
+   "pose": "standing",
+   "size": [
+    1.2,
+    0.9,
+    0.05
+   ],
+   "source": "measured"
+  },
+  "turret_boll_infoboard": {
+   "anchor_y": 1.54,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    4.24,
+    5.17,
+    4.96
+   ],
+   "source": "measured"
+  },
+  "code_evolution_screen": {
+   "anchor_y": 1.23,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    2.66,
+    2.4,
+    2.4
+   ],
+   "source": "measured"
+  },
+  "wall_placard": {
+   "anchor_y": 0.23,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    0.66,
+    0.46,
+    0.07
+   ],
+   "source": "measured"
+  },
+  "tt": {
+   "anchor_y": 0.6,
+   "base": "float",
+   "pose": "standing",
+   "size": [
+    1.0,
+    1.2,
+    0.0
+   ],
+   "source": "measured"
+  },
+  "godel_statement_plaque": {
+   "anchor_y": 0.5,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    1.0,
+    1.0,
+    1.0
+   ],
+   "source": "measured"
+  },
+  "3t": {
+   "anchor_y": -2.93,
+   "base": "float",
+   "pose": "flat",
+   "size": [
+    4.29,
+    0.12,
+    0.05
+   ],
+   "source": "measured"
+  },
+  "text_display": {
+   "anchor_y": 3.47,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    7.07,
+    7.07,
+    5.0
+   ],
+   "source": "measured"
+  },
+  "spit_text_3d": {
+   "anchor_y": -0.12,
+   "base": "floor",
+   "pose": "flat",
+   "size": [
+    0.73,
+    0.13,
+    0.0
    ],
    "source": "measured"
   },
