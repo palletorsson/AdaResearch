@@ -26,13 +26,13 @@ const PAIRS := [
 	["pedestal", "galton_board"],
 	["tank", "particle_fountain"],
 	["cage", "random_walk_leash"],
-	["table_display_1m", "living_paper_random_walk"],
+	["podium", "living_paper_random_walk"],
 	["table_display_1m", "ca_screen"],
 	["table_display_1m", "albers_relief"],
 	["table_display_2m", "buren_col_01_01"],
 	["podium", "grab_sphere_E"],
 	["plinth", "crystalcluster"],
-	["frame", "living_paper_life"],
+	["podium", "living_paper_life"],
 ]
 
 var _viewport: SubViewport
