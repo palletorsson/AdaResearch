@@ -21,8 +21,13 @@ Commands:
   --sync-footprints  write each principal's display truth into
                      artifact_sizes.json for every instance
                      (source: "principal" — the type is the truth)
+  --discover         classify every registry artifact covered vs ORPHAN, then
+                     cluster orphans by 4 independent signals (scene / script /
+                     config-signature / name-token) to surface the next
+                     principal-or-kin families -> doc/reports/principal_discovery.json
 """
 import json
+import re
 import sys
 from collections import defaultdict
 from pathlib import Path
@@ -224,9 +229,178 @@ def verify():
     return 0
 
 
+BOILERPLATE_KEYS = {
+    "name", "lookup_name", "scene", "description", "category", "artifact_type",
+    "sequence", "complexity", "include_in_map_data", "map_sequences", "tags",
+    "dev_themes", "dev_category",
+}
+NAME_TOKENS = {
+    "machine", "workbench", "bench", "board", "screen", "display", "puzzle",
+    "station", "assemblage", "assembly", "meter", "viewer", "lab", "studio",
+    "generator", "simulator",
+}
+_SCRIPT_RE = re.compile(
+    r'ext_resource\s+type="Script"[^\]]*?path="(res://[^"]+\.gd)"')
+
+
+def _scene_path(scene_res):
+    """res:// scene reference -> repo Path"""
+    return ROOT / scene_res.replace("res://", "", 1)
+
+
+def _first_script(scene_res, cache):
+    """first ext_resource type=Script path in a .tscn, or None (cached)"""
+    if scene_res in cache:
+        return cache[scene_res]
+    val = None
+    p = _scene_path(scene_res)
+    try:
+        m = _SCRIPT_RE.search(p.read_text(encoding="utf-8", errors="replace"))
+        if m:
+            val = m.group(1)
+    except (OSError, ValueError):
+        val = None
+    cache[scene_res] = val
+    return val
+
+
+def discover():
+    reg = load_registry()
+    decl = {}
+    if PRINCIPALS.exists():
+        decl = json.loads(PRINCIPALS.read_text(encoding="utf-8"))
+    principal_scenes = {p["scene"] for p in decl.get("principals", {}).values()}
+    kin_members = set()
+    for k in decl.get("kin", {}).values():
+        kin_members.update(k.get("members", []))
+    overrides = set(k for k in decl.get("artifact_overrides", {}) if k != "_note")
+
+    # ---- 1. COVERAGE ---------------------------------------------------
+    orphans = {}
+    covered = 0
+    for name, info in reg.items():
+        if (info["scene"] in principal_scenes
+                or name in kin_members or name in overrides):
+            covered += 1
+        else:
+            orphans[name] = info
+    total = len(reg)
+    print(f"coverage: {covered} covered / {len(orphans)} orphans / {total} total")
+
+    sizes = json.loads(SIZES.read_text(encoding="utf-8")).get("sizes", {})
+
+    # ---- 2. CLUSTER ORPHANS by independent signals ---------------------
+    # groups: list of (signal, display_name, members frozenset)
+    groups = []
+
+    # a. shared scene (>=2)
+    by_scene = defaultdict(list)
+    for name, info in orphans.items():
+        by_scene[info["scene"]].append(name)
+    for scene, ks in by_scene.items():
+        if len(ks) >= 2:
+            stem = scene.replace("res://", "").rsplit("/", 1)[-1].replace(".tscn", "")
+            groups.append(("scene", f"scene:{stem}", frozenset(ks)))
+
+    # b. shared root SCRIPT across differing scenes (>=2)
+    script_cache = {}
+    by_script = defaultdict(set)
+    scenes_by_script = defaultdict(set)
+    for name, info in orphans.items():
+        scr = _first_script(info["scene"], script_cache)
+        if scr:
+            by_script[scr].add(name)
+            scenes_by_script[scr].add(info["scene"])
+    for scr, ks in by_script.items():
+        if len(ks) >= 2 and len(scenes_by_script[scr]) >= 2:
+            stem = scr.replace("res://", "").rsplit("/", 1)[-1].replace(".gd", "")
+            groups.append(("script", f"script:{stem}", frozenset(ks)))
+
+    # c. config-signature — entry-key dialect shared by >=4
+    by_sig = defaultdict(list)
+    for name, info in orphans.items():
+        sig = frozenset(info["entry"].keys()) - BOILERPLATE_KEYS
+        if sig:
+            by_sig[sig].append(name)
+    for sig, ks in by_sig.items():
+        if len(ks) >= 4:
+            keys = sorted(sig)
+            label = "+".join(keys[:3]) + ("+..." if len(keys) > 3 else "")
+            groups.append(("config", f"config:{label}", frozenset(ks)))
+
+    # d. name-token — final underscore token (>=3)
+    by_token = defaultdict(list)
+    for name in orphans:
+        tok = name.rsplit("_", 1)[-1].lower()
+        if tok in NAME_TOKENS:
+            by_token[tok].append(name)
+    for tok, ks in by_token.items():
+        if len(ks) >= 3:
+            groups.append(("token", f"token:{tok}", frozenset(ks)))
+
+    # ---- merge groups sharing the SAME member set; union their signals -
+    NAME_PRIORITY = {"script": 0, "token": 1, "config": 2, "scene": 3}
+    merged = {}
+    for signal, dname, members in groups:
+        m = merged.setdefault(members, {"signals": set(), "names": []})
+        m["signals"].add(signal)
+        m["names"].append((NAME_PRIORITY[signal], dname))
+
+    clusters = []
+    for members, m in merged.items():
+        signals = sorted(m["signals"])
+        name = min(m["names"])[1]
+        member_list = sorted(members)
+        # suggested integration guess from measured oracle sizes
+        heights = [sizes[n]["height_m"] for n in member_list
+                   if n in sizes and sizes[n].get("height_m") is not None]
+        bases = [sizes[n]["base_m"] for n in member_list
+                 if n in sizes and sizes[n].get("base_m") is not None]
+        avg_h = sum(heights) / len(heights) if heights else 0.0
+        avg_b = sum(bases) / len(bases) if bases else 0.0
+        if avg_h > 0.8 and avg_b >= 1.5:
+            integ = "self"
+        elif avg_b >= 6.0:
+            integ = "field"
+        else:
+            integ = "review"
+        score = len(member_list) * len(signals)
+        clusters.append({
+            "name": name,
+            "signals": signals,
+            "score": score,
+            "members": member_list,
+            "suggested_integration": integ,
+        })
+    clusters.sort(key=lambda c: (-c["score"], c["name"]))
+
+    # ---- 3. print top 25 ----------------------------------------------
+    print(f"\norphan clusters (top 25 of {len(clusters)}):")
+    for c in clusters[:25]:
+        sig = "+".join(c["signals"])
+        print(f"  [{sig:20s}] {c['name']:34s} n={len(c['members']):3d} "
+              f"score={c['score']:3d} -> {c['suggested_integration']}")
+        print(f"        {', '.join(c['members'][:6])}")
+
+    # ---- 4. write full report -----------------------------------------
+    out = ROOT / "doc" / "reports" / "principal_discovery.json"
+    payload = {
+        "coverage": {"covered": covered, "orphans": len(orphans), "total": total},
+        "clusters": [{"name": c["name"], "signals": c["signals"],
+                      "members": c["members"],
+                      "suggested_integration": c["suggested_integration"]}
+                     for c in clusters],
+    }
+    out.write_text(json.dumps(payload, indent=1), encoding="utf-8", newline="\n")
+    print(f"\nwrote {len(clusters)} clusters -> {out.name}")
+    return 0
+
+
 def main() -> int:
     if "--audit" in sys.argv:
         return audit()
+    if "--discover" in sys.argv:
+        return discover()
     if "--sync-footprints" in sys.argv:
         return sync_footprints()
     if "--verify" in sys.argv:

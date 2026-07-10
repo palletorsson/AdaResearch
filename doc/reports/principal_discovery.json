@@ -1,0 +1,4072 @@
+{
+ "coverage": {
+  "covered": 236,
+  "orphans": 2310,
+  "total": 2546
+ },
+ "clusters": [
+  {
+   "name": "config:footprint+geometry_spec+map_ready+...",
+   "signals": [
+    "config"
+   ],
+   "members": [
+    "2d_in_3d_point_vis",
+    "2d_in_3d_vectors_vis",
+    "7_1_elementary_ca_vr",
+    "7_2_game_of_life_vr",
+    "7_3_game_of_life_oop_vr",
+    "7_8_hexagon_ca_vr",
+    "AnickaYiLab",
+    "AntColonyV2",
+    "AudioContr",
+    "CA_sphere",
+    "CellularAutomata3DStacked",
+    "CellularAutomata3DTree",
+    "ConnectedTriangles",
+    "DualBallFMController",
+    "FlowFieldMain",
+    "GaussianPaintSplatter",
+    "GyroidDemo",
+    "HandheldInfoBoard",
+    "MeltingBerniniScene",
+    "MetamerismLab",
+    "NoiseColors3D",
+    "PhysarumColony",
+    "PipilottiRistWorld",
+    "RotatingLaser",
+    "SDFDrawTool",
+    "SierpinskiPyramid",
+    "SimultaneousContrast",
+    "VRBrush",
+    "VectorFieldFlow",
+    "VectorForces",
+    "VectorMotion",
+    "VectorProjectionReflection",
+    "VectorSubtraction",
+    "VectorThrowing",
+    "VectorTorque",
+    "WhiteNoiseGallery",
+    "aalto_vase",
+    "additive_synthesis",
+    "advancedglitch",
+    "agent_spawner",
+    "agnes_grid",
+    "albers_wall_gallery",
+    "alessi_tree",
+    "algo_gun",
+    "alphahash",
+    "animalpatterns",
+    "animatedcubebuilder",
+    "arch",
+    "array_rotate",
+    "array_scale",
+    "array_translate",
+    "artifact_workstation",
+    "attractorsphere",
+    "audio_catalog_tablet",
+    "ball_painting_demo",
+    "binary_space_partitioning",
+    "bipyramid",
+    "boid_manager",
+    "boids_2d_in_3d",
+    "booleanvariations",
+    "brick_wall_factory",
+    "bubbles_random",
+    "buffergeometryparticles",
+    "ca_columns",
+    "cantor_pagoda_vr",
+    "cantor_set",
+    "capsule",
+    "capsule_radials_rings",
+    "cave_explorer_3d_ui",
+    "caverandomwalk",
+    "cavetest",
+    "cellular_automata_3d_tree",
+    "closest_pair",
+    "code_display",
+    "color_constellation_office",
+    "coloredlines",
+    "combine_capsule",
+    "combine_portals",
+    "combine_sphere",
+    "combine_torus",
+    "combo_cube_visual",
+    "computer_vision_vr",
+    "configurable_portal",
+    "convolutional_neural_networks_cnns_vr",
+    "coordinates",
+    "cross_line_puzzle",
+    "cross_lines",
+    "crossway_ca",
+    "crystal",
+    "crystal_ball",
+    "cube",
+    "cube_lines",
+    "cube_projectile_spawner",
+    "cube_scene_drag_points",
+    "cube_subdivision",
+    "cube_with_shader",
+    "cylinder_radials_rings",
+    "dark_side_prism",
+    "delaunay_triangulation_3d_cell",
+    "destructible_marching_cube",
+    "destructibles_test_scene",
+    "dgrid",
+    "diamond",
+    "diamonds",
+    "diamondtoruscollection",
+    "diffusion_limited_aggregation",
+    "distance_fields_sdf",
+    "dodecahedron",
+    "doublestick",
+    "draw_dot",
+    "draw_dot_time_domain",
+    "draw_triangle_faces",
+    "drawing_paper",
+    "durer_scene",
+    "dynamic_rock",
+    "dynamiccubemap",
+    "earths_delight",
+    "ecosystem_simulation_2",
+    "editable_bezier",
+    "editable_catmull_rom",
+    "editable_curve",
+    "elevator_platform",
+    "entropy_morphogenesis",
+    "evolved_creatures",
+    "evolvingflowers",
+    "example_1_10_accelerating_towards_the_mouse_vr",
+    "example_1_1_bouncing_ball_with_no_vectors_vr",
+    "example_1_2_bouncing_ball_with_vectors_vr",
+    "example_1_3_vector_subtraction_vr",
+    "example_1_4_vector_multiplication_vr",
+    "example_1_5_vector_magnitude_vr",
+    "example_1_6_vector_normalize_vr",
+    "example_1_7_motion_101_velocity_vr",
+    "example_1_8_motion_101_velocity_and_constant_acceleration_vr",
+    "example_1_9_motion_101_velocity_and_random_acceleration_vr",
+    "example_2_2_forces_mass_variation_vr",
+    "example_2_3_gravity_scaled_by_mass_vr",
+    "example_2_4_friction_vr",
+    "example_2_6_single_attractor_vr",
+    "example_2_7_multiple_attractors_vr",
+    "example_2_8_two_body_attraction_vr",
+    "example_2_9_n_body_attraction_vr",
+    "example_3_10_swinging_pendulum_vr",
+    "example_3_11_a_spring_connection_vr",
+    "example_3_1_angular_motion_using_rotate_vr",
+    "example_3_4_polar_to_cartesian_vr",
+    "example_3_5_simple_harmonic_motion_vr",
+    "example_3_6_simple_harmonic_motion_ii_vr",
+    "example_3_7_oscillator_objects_vr",
+    "example_4_1_single_particle_vr",
+    "example_4_3_particle_emitter_vr",
+    "example_4_4_multiple_emitters_vr",
+    "example_4_6_particle_repeller_vr",
+    "example_6_1_basic_rigidbody_vr",
+    "example_6_2_falling_boxes_vr",
+    "example_6_3_compound_bodies_vr",
+    "example_6_4_windmill_vr",
+    "example_6_5_chain_vr",
+    "example_6_6_grab_vr",
+    "example_6_7_bridge_vr",
+    "example_6_8_collision_layers_vr",
+    "example_8_3_recursion_circles_vr",
+    "example_8_4_cantor_pagoda_vr",
+    "exercise_3_15_double_pendulum_vr",
+    "exercise_3_1_baton_vr",
+    "exercise_3_5_spiral_vr",
+    "exercise_3_6_asteroids_vr",
+    "explainable_ai_xai_vr",
+    "fetishtorus",
+    "fibonacci_pagoda",
+    "fibonacci_terrain",
+    "fine_tuning_vr",
+    "floor_tiles",
+    "fm_synthesis",
+    "folded_strip",
+    "foldedpaper",
+    "folding_cube",
+    "folding_cube_interactive",
+    "folding_past",
+    "forcedirected3d",
+    "fractal_clouds",
+    "fractal_koch_curve",
+    "fractal_lsystem_tree",
+    "fractal_recursion_1",
+    "fractal_recursion_2",
+    "fractal_recursion_circles",
+    "fractal_space",
+    "fractal_stochastic_tree",
+    "fuzzy_cloud",
+    "generative_adversarial_networks_gans_vr",
+    "geometric_transformations",
+    "glass_planes_2_5d",
+    "glass_planes_empty",
+    "golden_rectangle",
+    "grab_aalto_vase",
+    "grab_alessi_tree",
+    "grab_cube",
+    "grab_cube_show",
+    "grab_dodecahedron",
+    "grab_icosahedron",
+    "grab_line",
+    "grab_line_drawer",
+    "grab_line_music",
+    "grab_line_pusher",
+    "grab_long_stick",
+    "grab_octahedron",
+    "grab_rainbow_stick",
+    "grab_sphere_point",
+    "grab_sphere_point_color_with_text",
+    "grab_sphere_point_snap",
+    "grab_sphere_point_with_text",
+    "grab_stick",
+    "grab_stick_scanner",
+    "grab_tetrahedron",
+    "grab_trihedron",
+    "grabable_agnes",
+    "grabable_mondrian",
+    "grabcolorcollection",
+    "gradient_descent_visualization",
+    "graphics_monitor",
+    "graphics_slideshow_all",
+    "gravity_gun_test_scene",
+    "grid_eye",
+    "grid_lines",
+    "gyroid_cheese",
+    "halocube",
+    "hand_color_controller",
+    "helper_arm",
+    "hole_with_cones",
+    "homagetothesquare",
+    "icosahedron",
+    "interactive_point_origin",
+    "interactivetriangle",
+    "inverted_tree_cloud",
+    "karger_algorithm",
+    "koch_curve_1",
+    "koch_curve_3d",
+    "laser_measure",
+    "learn_world_stacked",
+    "lefttriangle",
+    "level_entrance",
+    "lightrod",
+    "line",
+    "line_demo",
+    "line_interface",
+    "lshape",
+    "lstms_vr",
+    "magnifying_glass_tool",
+    "mandelbrot_set",
+    "marching_cubes_sculpt_vr",
+    "mario_cube_time_trace",
+    "materialstransmission",
+    "menger_sponge",
+    "mengersponge",
+    "menu",
+    "modernpolysolid",
+    "monitorsystem",
+    "nail_color_controller",
+    "neural_networks_vr",
+    "noise_space",
+    "octahedron",
+    "one_meter_line",
+    "organic_space",
+    "origin",
+    "oscillation_controlled_cube",
+    "oscillation_cube",
+    "parallel_line_puzzle",
+    "pathfinding_visualization",
+    "penrose_tilings",
+    "percolationnetwork_ca",
+    "perlin_noise",
+    "perlin_noise_terrain",
+    "persian_rug",
+    "perspective_lines",
+    "pickup_cube_combo",
+    "pickup_cube_rotating",
+    "pickup_cube_scaling",
+    "pickup_cube_static",
+    "pickup_cube_transforming",
+    "pillarcolorcollection",
+    "pixel_cloud",
+    "plane",
+    "platonicsolids",
+    "player_position",
+    "plus",
+    "plus_line_puzzle",
+    "point",
+    "polyhedron_nets_cube",
+    "portal",
+    "portal_frame",
+    "postprocessing_bloom",
+    "prismblock",
+    "profile_chair",
+    "pyramid",
+    "pyramid_edit",
+    "pyramidlong",
+    "pythagorean_proof",
+    "pythagorean_triangle",
+    "pythagorean_triangle_angles",
+    "quad",
+    "quad_line_puzzle",
+    "queer_cylinder_target",
+    "quest_controller",
+    "random_object_spawner",
+    "random_space",
+    "random_walk_collection",
+    "randomlines",
+    "raycastingpoints",
+    "rectcube",
+    "recursive_boolean_cube",
+    "recursive_chair",
+    "recursive_table",
+    "recursive_tree",
+    "recursive_tree_2",
+    "reset_cube",
+    "riemann_pi",
+    "riemann_torus",
+    "right_triangle_lines",
+    "rock_primitive",
+    "rock_scanner",
+    "rock_spawner",
+    "romanesco",
+    "rotating_cube",
+    "rotation_match_puzzle",
+    "roughrock",
+    "scaleme",
+    "science_desk",
+    "science_glasses",
+    "seismograph",
+    "self_organizing_patterns",
+    "sequencer",
+    "settings_ui",
+    "shader_noise_space",
+    "shelf",
+    "shelf_with_stickers",
+    "sierpinski_triangle",
+    "simple_rock",
+    "simplex_noise",
+    "sine_wave_controller",
+    "sliding_door",
+    "small_subdivision_cube",
+    "smallcontainment",
+    "snap_demo",
+    "snap_octahedron_puzzle",
+    "snap_pyramid_puzzle",
+    "snap_tetrahedron_puzzle",
+    "snap_triangle_puzzle",
+    "snap_wedge_puzzle",
+    "soft_mushroom",
+    "softbodytest",
+    "softmill",
+    "softstopscene",
+    "soundboxes",
+    "spectrum_forest",
+    "sphere_splitting_showcase",
+    "spherecolors",
+    "square_pyramid",
+    "standalone_disco",
+    "star_primitive",
+    "static_point",
+    "stochastic_tree_separated",
+    "strobe_lasers",
+    "structure_growth",
+    "subtractive_synthesis",
+    "tesla_sparks",
+    "test_scene_4",
+    "test_scene_6",
+    "tetrahedron",
+    "tetrahedron_edit",
+    "text_display",
+    "textureglitch",
+    "throw_ball",
+    "topological_sort_algorithm",
+    "torus_radials_rings",
+    "trafficcone",
+    "transform_staircase_dna",
+    "transform_staircase_fibonacci",
+    "transform_staircase_mobius",
+    "transform_staircase_showcase",
+    "transform_staircase_spiral",
+    "transformation_cube",
+    "transformers_vr",
+    "translation_demo",
+    "triangle",
+    "triangle_line_puzzle",
+    "triangleprofiles",
+    "triangular_cupola",
+    "triangularblock",
+    "trihedron",
+    "truncatedtetrahedron",
+    "unitcube",
+    "value_mapper_example",
+    "variational_autoencoders_vaes_vr",
+    "vector_drone",
+    "vector_field",
+    "vectorline",
+    "vectorpoint",
+    "visual_color_mixing",
+    "voronoi_diagram_3d",
+    "voronoi_space",
+    "voronoi_visualization",
+    "vowel_sound_board",
+    "waterflowers",
+    "waterone",
+    "wfc_dungeon_generator",
+    "wood_cube",
+    "xyz_coordinates",
+    "zelda_tilemap",
+    "zelda_tiles_3d"
+   ],
+   "suggested_integration": "self"
+  },
+  {
+   "name": "config:class_name+map_ready+parameters+...",
+   "signals": [
+    "config"
+   ],
+   "members": [
+    "abject_bench",
+    "abject_room",
+    "abject_toy",
+    "accountability_ledger",
+    "aliveness_meter",
+    "attractor_bench",
+    "attractor_plotter",
+    "attractor_room",
+    "axiom_bench",
+    "axiom_room",
+    "barber_paradox",
+    "becoming_bench",
+    "becoming_toy",
+    "bias_atlas_room",
+    "bias_blindspot_toy",
+    "big_o_complexity",
+    "blob_pet_toy",
+    "blue_noise_bench",
+    "blue_noise_planter",
+    "blue_noise_toy",
+    "both_true_gate",
+    "bounce_arena_room",
+    "bounce_blob_toy",
+    "bounce_egg_toy",
+    "bounce_membrane",
+    "bounce_well",
+    "bracket_bench",
+    "bracket_pruner",
+    "bracket_room",
+    "brake_skid",
+    "breathing_hall_room",
+    "breathing_toy",
+    "brians_brain_bench",
+    "bsp_bench",
+    "bsp_floorplan_tool",
+    "bsp_toy",
+    "bubble_blaster",
+    "ca_texture_bench",
+    "ca_texture_toy",
+    "ca_texture_wall",
+    "calder_mobile",
+    "calder_object_mobile",
+    "cantor_bench",
+    "cap_theorem_bench",
+    "cave_bench",
+    "centrifuge_ring",
+    "centripetal_bench",
+    "chaos_game_tool",
+    "chomsky_room",
+    "circle_train",
+    "city_bench",
+    "city_room",
+    "city_toy",
+    "cloth_loom",
+    "coin_dice_bench",
+    "collision_carts",
+    "colonization_bench",
+    "colonization_grower",
+    "colonization_room",
+    "commons_bench",
+    "commons_room",
+    "constructive_room",
+    "constructive_staircase",
+    "context_pruner",
+    "context_room",
+    "context_toy",
+    "contradiction_engine",
+    "coordinate_locator",
+    "coral_bench",
+    "coral_room",
+    "crisis_edge_toy",
+    "crisis_synthesis_bench",
+    "curtain_membrane_room",
+    "curvature_bench",
+    "curve_plotter",
+    "data_locality_caching",
+    "dendrite_bench",
+    "dendrite_toy",
+    "descent_marble_toy",
+    "dice_rain_room",
+    "dimension_bench",
+    "dimension_meter",
+    "dimension_room",
+    "distribution_bench",
+    "dla_bench",
+    "dla_grower",
+    "dna_sprout",
+    "dot_aligner",
+    "drag_corridor",
+    "drag_lane",
+    "dragon_bench",
+    "dragon_room",
+    "edge_ground_bench",
+    "edge_ground_room",
+    "edge_ground_synthesis",
+    "edge_ground_toy",
+    "edge_of_chaos_bench",
+    "elasticity_press",
+    "elementary_ca_bench",
+    "energy_landscape_bench",
+    "entropy_bench",
+    "entropy_fan",
+    "escape_time_room",
+    "escher_room",
+    "ethics_bench",
+    "ethics_room",
+    "ethics_toy",
+    "euclid_parallel_bench",
+    "f_order_bench",
+    "f_order_room",
+    "fern_bench",
+    "fern_press",
+    "fern_room",
+    "field_bench",
+    "firework_burst",
+    "flatland_room",
+    "folding_menagerie_room",
+    "force_cube",
+    "force_field_zone",
+    "force_mower",
+    "force_room",
+    "forest_bench",
+    "four_classes_bench",
+    "four_classes_room",
+    "four_classes_toy",
+    "fractal_antenna",
+    "fractal_antenna_toy",
+    "fractal_arch_bench",
+    "fractal_facade_toy",
+    "fractal_furniture_room",
+    "fractal_heat_exchanger",
+    "fractal_skyline_room",
+    "fractal_stool_toy",
+    "fractal_truss_tower",
+    "free_vector",
+    "furniture_recursion_bench",
+    "generations_bench",
+    "generations_room",
+    "genetic_bench",
+    "genetic_breeder",
+    "genome_bench",
+    "genome_toy",
+    "godel_incompleteness_room",
+    "golden_spiral_bench",
+    "grab_jelly_bench",
+    "grab_jelly_toy",
+    "gradient_descent_optimizer",
+    "grammar_bench",
+    "grove_room",
+    "growth_animator",
+    "halting_bench",
+    "hangar_barrier_fence",
+    "hangar_cabinet_cluster",
+    "hangar_podium",
+    "hangar_step_base",
+    "hangar_supply_pile",
+    "hangar_wall_panel",
+    "hangar_worktable",
+    "hardware_cross_section",
+    "hex_ca_toy",
+    "hilbert_bench",
+    "hilbert_hotel_room",
+    "hilbert_room",
+    "ifs_bench",
+    "ifs_room",
+    "impossible_object_press",
+    "impossible_trident",
+    "incompleteness_tower",
+    "jelly_ball_pit_room",
+    "jelly_room",
+    "jitter_bench",
+    "julia_bench",
+    "koch_loom",
+    "koch_snowflake_press",
+    "lambda_dial_bench",
+    "lambda_edge_room",
+    "langton_bench",
+    "langton_swarm",
+    "langton_toy",
+    "lattice_gas_bench",
+    "lattice_gas_pump",
+    "lattice_gas_room",
+    "launch_arc",
+    "lava_lamp_tool",
+    "lenia_aquarium",
+    "lenia_room",
+    "lever_balance",
+    "lever_room",
+    "lever_toy",
+    "liar_loop",
+    "life_bench",
+    "life_rules_room",
+    "life_zoo_bench",
+    "lottery_drum",
+    "lsystem_tree_room",
+    "lyapunov_bench",
+    "magnitude_bench",
+    "magnitude_hall",
+    "mandelbrot_bench",
+    "markov_generator",
+    "markov_melody",
+    "mass_spring_bench",
+    "max_q_basin_room",
+    "mc_field_bench",
+    "membrane_bench",
+    "membrane_filter",
+    "membrane_toy",
+    "menger_bench",
+    "menger_filter",
+    "menger_toy",
+    "merge_conflict_toy",
+    "mesh_grammar_bench",
+    "mesh_grammar_room",
+    "microstate_counter",
+    "miura_press",
+    "molecular_bench",
+    "molecular_room",
+    "molecular_toy",
+    "momentum_cradle",
+    "morpho_egg",
+    "morpho_menagerie",
+    "morphogenesis_bench",
+    "neighbourhood_bench",
+    "newton_bench",
+    "newton_fractal_tool",
+    "noise_compare_bench",
+    "noise_displacer",
+    "noise_dunes_bench",
+    "noise_flow_drones",
+    "noise_height_toy",
+    "noise_terrain_forge",
+    "octopus_bench",
+    "octopus_room",
+    "orbit_pair",
+    "orbit_walk",
+    "paraconsistent_room",
+    "parametric_bench",
+    "parametric_designer",
+    "parametric_room",
+    "parse_tree_tool",
+    "peer_production_tool",
+    "pendulum_hall",
+    "pendulum_swing",
+    "perlin_bench",
+    "phi_becoming_room",
+    "phi_rate_bench",
+    "pi_dart_bench",
+    "pi_dart_room",
+    "pi_dart_toy",
+    "poisson_forest_scatter",
+    "poisson_scatter_bench",
+    "poisson_scatter_toy",
+    "poke_dough_toy",
+    "poke_pillar_room",
+    "possibility_space_cloud",
+    "pressure_balloon",
+    "pressure_dome_room",
+    "pressure_valve_tool",
+    "projection_shadow",
+    "projection_toy",
+    "provability_sorter",
+    "qfep_formula_toy",
+    "qfep_reactor_bench",
+    "qfep_reactor_toy",
+    "random_fireworks",
+    "random_walk_bench",
+    "reaction_diffusion_bench",
+    "realtime_vs_offline",
+    "recursion_animator",
+    "recursion_bench",
+    "recursive_tree_bench",
+    "rejection_bench",
+    "rejection_room",
+    "rejection_toy",
+    "replica_room",
+    "restitution_bench",
+    "return_launcher",
+    "rhizome_bench",
+    "rhizome_grower",
+    "rhizome_toy",
+    "rigidity_dial_bench",
+    "rigidity_toy",
+    "river_crossing",
+    "route_vector",
+    "rule110_bench",
+    "rule110_computer",
+    "rule30_bench",
+    "rule30_rng",
+    "rule90_bench",
+    "rule90_loom",
+    "rule90_toy",
+    "russell_paradox_room",
+    "sapling_toy",
+    "scaling_bench",
+    "scatter_bench",
+    "sdf_blob_toy",
+    "sdf_cavern_room",
+    "sdf_sculpt_bench",
+    "seed_bench",
+    "seed_toy",
+    "seed_vs_random",
+    "seed_world_bench",
+    "seed_world_room",
+    "seed_world_toy",
+    "self_membership_set",
+    "self_shaping_forge",
+    "sierpinski_bench",
+    "sierpinski_stamp",
+    "situated_bench",
+    "slime_bench",
+    "slime_farm",
+    "slime_toy",
+    "slingshot_pull",
+    "soft_catapult",
+    "soft_handshake",
+    "space_filling_bench",
+    "space_filling_room",
+    "spring_bob",
+    "spring_node_toy",
+    "spring_tower",
+    "squish_press",
+    "standpoint_room",
+    "station_ascent",
+    "station_barrier",
+    "station_bench",
+    "station_cabinet",
+    "station_crates",
+    "station_floorline",
+    "station_luminaire",
+    "station_micropod",
+    "station_panel",
+    "station_pillar",
+    "station_plinth",
+    "station_plinth_wide",
+    "station_stage",
+    "station_wall",
+    "stigmergy_bench",
+    "stigmergy_room",
+    "stigmergy_toy",
+    "stochastic_bench",
+    "stochastic_room",
+    "stochastic_seeder",
+    "stochastic_toy",
+    "stretch_blob_room",
+    "substrate_bench",
+    "substrate_room",
+    "substrate_switcher",
+    "taffy_pull",
+    "ten_print_bench",
+    "ten_print_textile",
+    "ten_print_toy",
+    "tentacle_grab_bench",
+    "terrain_bench",
+    "terrain_forge",
+    "terrain_toy",
+    "terrain_world_generator",
+    "tesseract_bench",
+    "test_harness",
+    "throttle_gain",
+    "tiling_bench",
+    "torque_bench",
+    "torque_crank",
+    "tree_nursery",
+    "tug_of_war",
+    "turtle_bench",
+    "turtle_plotter",
+    "turtle_room",
+    "vector_add",
+    "vector_bench",
+    "vector_sub",
+    "velocity_bench",
+    "version_control_tree",
+    "vine_grower",
+    "viscous_bench",
+    "voronoi_bench",
+    "voronoi_shatter_tool",
+    "weather_vane",
+    "wedge_slide",
+    "wfc_dungeon_room",
+    "wfc_room_bench",
+    "wfc_tile_bench",
+    "wind_bench",
+    "wind_room",
+    "wind_toy",
+    "wireworld_bench",
+    "wireworld_toy",
+    "work_meter",
+    "work_room",
+    "work_toy",
+    "world_forge"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "config:footprint_measured+geometry_spec+map_ready+...",
+   "signals": [
+    "config"
+   ],
+   "members": [
+    "ColoredLinesVR",
+    "DancingBody",
+    "ElphabaDress",
+    "GlassRack_BranchingCondenser",
+    "GlassRack_BreakingBadCoffee",
+    "GlassRack_ComplexApparatus",
+    "GlassRack_DistillationRack",
+    "GlassRack_DistillationY",
+    "GlassRack_FractionalDistillation",
+    "GlassRack_RefluxApparatus",
+    "GlassRack_SbendManifold",
+    "GlassRack_SimpleTube",
+    "GlassRack_SpiralCondenser",
+    "GlassRack_SpiralTube",
+    "MarioSoundController",
+    "MelodyChaser3D",
+    "MelodySoundBoard",
+    "Rack303Acid",
+    "Rack808Drums",
+    "RackAmbientDrone",
+    "RackDX7Piano",
+    "RackMario",
+    "RackMoogBass",
+    "RotateGridCubes",
+    "SimpleOscillatingBridge",
+    "air_music_display_case",
+    "ant_agent",
+    "ant_colony_art",
+    "armadillo_droideka",
+    "array_carpet",
+    "art_history_gallery",
+    "artifact_catalog_kiosk",
+    "atmosphericmonitoring",
+    "attachable_wood_cube",
+    "barnsley_fern",
+    "bayesian_inference",
+    "bell_alley",
+    "bernini_columns",
+    "binary_table",
+    "biomagneticresonator",
+    "botanical_flower",
+    "boyer_moore",
+    "branching_coral",
+    "branching_vine",
+    "breather_surface",
+    "bricoleur_golem",
+    "buffer_geometry_particles",
+    "cable_builder",
+    "carpet_cove_gallery",
+    "catenoid",
+    "cave_generator",
+    "cave_system",
+    "cellular_automata_3d_stacked",
+    "cellular_automata_basic",
+    "central_limit_theorem",
+    "chemicalapparatus",
+    "chord_tension_spring",
+    "chromatic_field",
+    "circularradarmonitor",
+    "coin_flip",
+    "collision_crasher",
+    "color_space_navigator",
+    "combined_forces_demo",
+    "constraint_web",
+    "cove_display",
+    "crack_propagation_ca",
+    "creature_gallery",
+    "cross_validation",
+    "curl_noise_particles",
+    "data_tree_walker",
+    "datatablet",
+    "decision_boundary_viewer",
+    "deltahedron_creature",
+    "deltahedron_stages",
+    "dice_roll",
+    "dini_surface",
+    "doppler_effect_demo",
+    "double_enneper",
+    "doublehelix",
+    "dress_selector",
+    "dynamic_cubemap",
+    "ecosystem_ca",
+    "edible_mushroom",
+    "electronicscales",
+    "enneper_order3",
+    "escher_stairwalker",
+    "evolutionary_algorithms",
+    "evolved_creatures_v2",
+    "evolving_flowers",
+    "example_5_12_sine_cosine_lookup",
+    "example_5_9_flocking",
+    "example_5_9_flocking_with_binning",
+    "exercise_5_13_crowd_path_following",
+    "exercise_5_2_pursuit",
+    "exercise_5_4_wander",
+    "exercise_5_9_angle_between",
+    "extreme_randomness",
+    "facade_builder",
+    "fibonacci_snake",
+    "fibonacci_snake_stages",
+    "figure_eight_knot",
+    "fine_tuning",
+    "flocking_controls",
+    "flora_landscape",
+    "flower_lab",
+    "fold_demo_critter",
+    "fold_wall",
+    "folding_zoo",
+    "foliage_showcase",
+    "fractal_hydra",
+    "game_of_life_oop_vr",
+    "glitchcolor",
+    "gradient_descent_landscape",
+    "gradient_hunter",
+    "grammar_markov",
+    "graph_coloring",
+    "graph_weaver",
+    "grid_editor_board",
+    "grid_editor_board_3d",
+    "gridagent",
+    "growslimbs",
+    "harmonic_distance_table",
+    "helicoid",
+    "helix_cylinder",
+    "helix_cylinder_creature",
+    "helix_fold",
+    "hexagon_cave_vr",
+    "holographicdisplay",
+    "hull_crusher",
+    "ik_arm_demo",
+    "index_sentinel",
+    "inflate_flock",
+    "instancingscatter",
+    "isosurface_trap",
+    "joint_articulator",
+    "kaleidocycle_enemy",
+    "kitbashing",
+    "klein_bottle",
+    "kresling_spire",
+    "laser_exploding_sphere",
+    "levenshtein_distance",
+    "lifeform_walker",
+    "limbgrowth",
+    "mario_test_sound_ui",
+    "markov_chain",
+    "materials_transmission",
+    "math_objects",
+    "math_objects_gallery",
+    "maze_spinner",
+    "mesh_builder_demo",
+    "mesh_morpher",
+    "microscope",
+    "minimalglitch",
+    "mirror_artifact",
+    "miura_crawler",
+    "mobius_strip_parametric",
+    "modulor_man",
+    "modulor_man_interactive",
+    "monte_carlo",
+    "monte_carlo_protein",
+    "morphobody",
+    "multimeter",
+    "necklace_anchor",
+    "neon_wave_grid",
+    "newton_raphson_visualization",
+    "noc_5_01_seek",
+    "noc_5_02_arrive",
+    "noc_5_03_stay_within_walls",
+    "noc_5_04_flow_field",
+    "noc_5_05_path_following_simple",
+    "noc_5_07_separation",
+    "noc_5_08_path_following",
+    "noc_5_08_separation_and_seek",
+    "noise_field",
+    "noise_mixer",
+    "normal_distribution",
+    "normal_force_demo",
+    "octapod_crawler",
+    "omoss",
+    "origami_bird",
+    "origami_pyre_plane",
+    "paradox_stalker",
+    "parametric_lsystem",
+    "parametric_pendulum_waves",
+    "parasol_triangle",
+    "particle_emitter_hazard",
+    "particle_randomness_emergent",
+    "particle_randomness_evolutionary",
+    "particle_swarm_optimization_legacy",
+    "pattern_compositor",
+    "pattern_maker_station",
+    "pattern_mine",
+    "pattern_tile_cube",
+    "perception_altering",
+    "percolation_ca",
+    "pipettedispenser",
+    "pixel_carpet_gallery",
+    "plane_manipulator",
+    "plane_random",
+    "plasma_critter",
+    "pollock_3d",
+    "pollock_painting_in_3d",
+    "probability_distributions_3d",
+    "progression_driver",
+    "puls_markov",
+    "pulsing_ca",
+    "pylon_cables",
+    "qfep_calibrator",
+    "quantum_field",
+    "quantumentanglementmeter",
+    "r_c",
+    "random_plants",
+    "random_walk_128",
+    "random_walk_grab_paper",
+    "randompoints_gaussian",
+    "randompoints_uniform",
+    "randomup",
+    "recrystallization_ca",
+    "recursion_spiral",
+    "regression_analysis",
+    "rejection_sampling_demo",
+    "remains_to_be_seen",
+    "resonance_chamber",
+    "resonating_metallophone",
+    "room_grammar",
+    "rotating_cube_demo",
+    "samplevialrack",
+    "scalable_wood_cube",
+    "scissor_stalker",
+    "sculpt_one",
+    "seashell",
+    "segment_slide",
+    "shader_01_shaping",
+    "shader_02_colors",
+    "shader_03_shapes",
+    "shader_04_matrices",
+    "shader_05_patterns",
+    "shader_06_random",
+    "shader_07_noise",
+    "shader_08_cellularnoise",
+    "shader_09_fbm",
+    "shader_10_reactiondiffusion",
+    "shader_11_queerrubber",
+    "shader_12_pinkextravaganza",
+    "shader_arch_gallery",
+    "sine_space_explanation",
+    "sine_wall_explanation",
+    "singing_board",
+    "small_world_network",
+    "snappable_wood_cube",
+    "soft_mushrooms",
+    "soft_stage_dashboard",
+    "soft_trampoline",
+    "sorting_algorithm_race",
+    "spatial_voronoi",
+    "spectrum_display",
+    "sphere_droideka",
+    "spring_mass_bouncer",
+    "spring_network",
+    "squishy_ball_pit",
+    "static_reference_cube",
+    "stick_tool",
+    "stigmergy_grid",
+    "swarm_hive",
+    "switchboard_attention",
+    "tech_noir_audio",
+    "ten_tulip_buckets",
+    "tentacle_cube",
+    "terminal",
+    "terrain_erosion",
+    "tesseract_phaser",
+    "tiling_demo",
+    "timbre_sculptor",
+    "torque_demo",
+    "torso_estimation_vis",
+    "torus_knot",
+    "trefoil_knot",
+    "vr_map_loader_kiosk",
+    "vr_tile_editor",
+    "walkable_sine_bridge",
+    "walkingsphere",
+    "wall_cove",
+    "water_flowers",
+    "water_land_ride",
+    "waterbomb_enemy",
+    "waterbomb_hopper",
+    "wave_equation_solver",
+    "wave_rider",
+    "wave_torus",
+    "wfc_tile_mosaic",
+    "work_energy_demo",
+    "worley_noise",
+    "y_oscillation_cube"
+   ],
+   "suggested_integration": "self"
+  },
+  {
+   "name": "config:footprint_measured+geometry_spec+map_ready+...",
+   "signals": [
+    "config"
+   ],
+   "members": [
+    "2d_in_3d_randomness_vis",
+    "CircleSpiral",
+    "CityGenerator",
+    "ElphabaDemo",
+    "GaussianBlurCircle",
+    "Lissajous3D",
+    "MolecularDesigner",
+    "OscillationCurve",
+    "OscillationDriver",
+    "PendulumCircle",
+    "PendulumGrid3x3",
+    "PendulumWave",
+    "PhonemeCloud",
+    "RackSineBasic",
+    "RandomGaussianTexture",
+    "SoundBoxLong",
+    "SoundBoxShort",
+    "SplineCables",
+    "StaticCables",
+    "SystemsMusicTest",
+    "UnitCircleTrig",
+    "VRAudioMonitor",
+    "VitruvianMan",
+    "VoxelNoiseROIs",
+    "WaveRideScene",
+    "algorithmic_bias",
+    "algorithmic_bias_visualization",
+    "ant_colony_optimization",
+    "ant_colony_v2",
+    "astar",
+    "axiom_garden",
+    "basket_weave_floor",
+    "blockbuilderentity",
+    "blue_noise",
+    "braid_meander_floor",
+    "bsp_trees",
+    "btree_visualization",
+    "cellular_automata_grabable",
+    "chain_link_floor",
+    "cloth_simulation",
+    "cloth_straps",
+    "cloudvolume",
+    "clustering_algorithms",
+    "color_mixing",
+    "color_scanner",
+    "compass_rose_floor",
+    "computer_vision",
+    "control_pendulum",
+    "coshlea",
+    "cryogenicpreservation",
+    "crystal_random_walk_demo",
+    "curvature_slider",
+    "dense_carpet_floor",
+    "diamond_lattice_floor",
+    "diamonds_squares_floor",
+    "dijkstra_algorithm",
+    "dimensionality_reduction",
+    "distribution_visualization",
+    "double_helix_oscillator",
+    "double_snake_meander",
+    "electromagneticfieldgenerator",
+    "elliptic_surface",
+    "ensemble_methods",
+    "exact_meander_floor",
+    "explainable_ai",
+    "feature_engineering",
+    "fenwick_tree",
+    "filter_screen",
+    "five_leg_critter",
+    "flagdancer",
+    "floor_plan_space",
+    "flower_of_life_floor",
+    "fluxdetector",
+    "four_leg_critter",
+    "fourier_transform_advanced",
+    "fouriertransformshape",
+    "free_meander_floor",
+    "gallery_winner_showcase",
+    "gans",
+    "genetic_algorithm",
+    "glitch_grid_floor",
+    "gradient_descent",
+    "guilloche_border_floor",
+    "hallway_scene",
+    "herringbone_floor",
+    "honeycomb_hex_floor",
+    "hyperbolic_surface",
+    "interlocking_t_floor",
+    "konigsberg_bridge",
+    "labyrinth_floor",
+    "line_builder_3d",
+    "linked_lists",
+    "liturgicalambientgen",
+    "lstms",
+    "marchingcubes_voxel_noise_demo",
+    "mario_cube",
+    "meander_threshold_floor",
+    "memphis_floor",
+    "mirror_snake_meander",
+    "mobius_strip_altgeo",
+    "multi_zone_carpet_floor",
+    "neon_chevron_floor",
+    "nested_diamonds_floor",
+    "network_flow_visualization",
+    "neural_networks",
+    "nlp",
+    "non_euclidean_space",
+    "octagon_square_floor",
+    "one_leg",
+    "optimization_algorithms",
+    "opus_sectile_floor",
+    "oscilloscope_artifact",
+    "panel_bridge_loom",
+    "parametric_shapes",
+    "particle_swarm_optimization",
+    "pelta_shield_floor",
+    "pendulum_slap",
+    "perspective_cubes_floor",
+    "physarum_colony",
+    "pixel_cross_floor",
+    "pixel_invader_floor",
+    "polka_dot_field_floor",
+    "pompeii_mosaic_floor",
+    "pool_hole_noise",
+    "pulsar_visualizer",
+    "quantum_superposition",
+    "radial_mandala_floor",
+    "radiolaria",
+    "rainbow_checker_floor",
+    "rainbow_hallway",
+    "random_decay_multimesh",
+    "random_decay_objects",
+    "random_gaussian_texture",
+    "recommendation_systems",
+    "reinforcement_learning",
+    "resonancechamber",
+    "revolving_joy_ride",
+    "riemann_sphere",
+    "robotarm",
+    "rotation_oscillation_cube",
+    "rsa_visualization",
+    "san_michele_mosaic_floor",
+    "simulated_annealing",
+    "sine_art_monitor",
+    "sine_cylinder_staircase",
+    "sine_space",
+    "sine_wall",
+    "sine_wall_corridor",
+    "sine_wall_static",
+    "six_leg_critter",
+    "softbody_gallery_part1",
+    "softbody_gallery_part2",
+    "softbody_gallery_part3",
+    "solomons_knot_floor",
+    "space_filling_floor",
+    "spawn_randomcubes",
+    "spectral_analyzer",
+    "spectral_sine_wave",
+    "spiral_mosaic_floor",
+    "spotlight_attention",
+    "star_rosette_floor",
+    "stepped_zigzag_floor",
+    "superposition_display",
+    "swastika_meander_floor",
+    "techstrider",
+    "ten_print",
+    "three_leg_critter",
+    "tiles_explained",
+    "transformers",
+    "trng_vs_prng",
+    "tumbling_blocks_floor",
+    "turret_targeting",
+    "turtle_meander_floor",
+    "two_leg_critter",
+    "unit_circle_advanced",
+    "vaes",
+    "value_noise",
+    "vr_component_demo",
+    "wave_scale_floor",
+    "weather_vector_field",
+    "windmill_floor",
+    "world_map_tablet"
+   ],
+   "suggested_integration": "self"
+  },
+  {
+   "name": "token:bench",
+   "signals": [
+    "token"
+   ],
+   "members": [
+    "abject_bench",
+    "attractor_bench",
+    "axiom_bench",
+    "becoming_bench",
+    "blue_noise_bench",
+    "bracket_bench",
+    "brians_brain_bench",
+    "bsp_bench",
+    "ca_texture_bench",
+    "cantor_bench",
+    "cap_theorem_bench",
+    "cave_bench",
+    "centripetal_bench",
+    "city_bench",
+    "coin_dice_bench",
+    "colonization_bench",
+    "commons_bench",
+    "coral_bench",
+    "crisis_synthesis_bench",
+    "curvature_bench",
+    "dendrite_bench",
+    "dimension_bench",
+    "distribution_bench",
+    "dla_bench",
+    "dragon_bench",
+    "edge_ground_bench",
+    "edge_of_chaos_bench",
+    "elementary_ca_bench",
+    "energy_landscape_bench",
+    "entropy_bench",
+    "ethics_bench",
+    "euclid_parallel_bench",
+    "f_order_bench",
+    "fern_bench",
+    "field_bench",
+    "forest_bench",
+    "four_classes_bench",
+    "fractal_arch_bench",
+    "furniture_recursion_bench",
+    "generations_bench",
+    "genetic_bench",
+    "genome_bench",
+    "golden_spiral_bench",
+    "grab_jelly_bench",
+    "grammar_bench",
+    "halting_bench",
+    "hilbert_bench",
+    "ifs_bench",
+    "jitter_bench",
+    "julia_bench",
+    "lambda_dial_bench",
+    "langton_bench",
+    "lattice_gas_bench",
+    "life_bench",
+    "life_zoo_bench",
+    "lyapunov_bench",
+    "magnitude_bench",
+    "mandelbrot_bench",
+    "mass_spring_bench",
+    "mc_field_bench",
+    "membrane_bench",
+    "menger_bench",
+    "mesh_grammar_bench",
+    "molecular_bench",
+    "morphogenesis_bench",
+    "neighbourhood_bench",
+    "newton_bench",
+    "noise_compare_bench",
+    "noise_dunes_bench",
+    "octopus_bench",
+    "parametric_bench",
+    "perlin_bench",
+    "phi_rate_bench",
+    "pi_dart_bench",
+    "poisson_scatter_bench",
+    "qfep_reactor_bench",
+    "random_walk_bench",
+    "reaction_diffusion_bench",
+    "recursion_bench",
+    "recursive_tree_bench",
+    "rejection_bench",
+    "restitution_bench",
+    "rhizome_bench",
+    "rigidity_dial_bench",
+    "rule110_bench",
+    "rule30_bench",
+    "rule90_bench",
+    "scaling_bench",
+    "scatter_bench",
+    "sdf_sculpt_bench",
+    "seed_bench",
+    "seed_world_bench",
+    "sierpinski_bench",
+    "situated_bench",
+    "slime_bench",
+    "space_filling_bench",
+    "station_bench",
+    "stigmergy_bench",
+    "stochastic_bench",
+    "stretch_bench",
+    "substrate_bench",
+    "ten_print_bench",
+    "tentacle_grab_bench",
+    "terrain_bench",
+    "tesseract_bench",
+    "tiling_bench",
+    "torque_bench",
+    "turtle_bench",
+    "vector_bench",
+    "velocity_bench",
+    "viscous_bench",
+    "voronoi_bench",
+    "wfc_room_bench",
+    "wfc_tile_bench",
+    "wind_bench",
+    "wireworld_bench"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "config:footprint+map_ready+promoted_from",
+   "signals": [
+    "config"
+   ],
+   "members": [
+    "alessi_tree_v2",
+    "bipyramid_v2",
+    "chair_v2",
+    "crystalcluster_v2",
+    "cube_v2",
+    "diamond_v2",
+    "diamond_v2_flat",
+    "grammar_cube_to_pyramid_r000",
+    "grammar_cube_to_pyramid_r010",
+    "grammar_cube_to_pyramid_r025",
+    "grammar_cube_to_pyramid_r050",
+    "grammar_cube_to_pyramid_r075",
+    "grammar_cube_to_pyramid_r100",
+    "grammar_cube_to_pyramid_r140",
+    "grammar_cube_to_pyramid_r200",
+    "grammar_forced_perspective_persp_exp_strong",
+    "grammar_forced_perspective_persp_exp_weak",
+    "grammar_forced_perspective_persp_inverted",
+    "grammar_forced_perspective_persp_linear",
+    "grammar_forced_perspective_persp_zigzag",
+    "grammar_meeting_faces_clean_side",
+    "grammar_meeting_faces_clean_top",
+    "grammar_meeting_faces_edge_meeting",
+    "grammar_meeting_faces_face_off_center",
+    "grammar_meeting_faces_rotated_45",
+    "grammar_meeting_faces_vertex_meeting",
+    "grammar_negative_space_aperture",
+    "grammar_negative_space_bracket_pair",
+    "grammar_negative_space_corner_pillars",
+    "grammar_negative_space_niche_in_row",
+    "grammar_negative_space_square_frame",
+    "grammar_negative_space_tower_interior",
+    "grammar_recursive_branching_tree_d1",
+    "grammar_recursive_branching_tree_d2",
+    "grammar_recursive_branching_tree_d3",
+    "grammar_recursive_branching_tree_d4",
+    "grammar_recursive_branching_tree_d5",
+    "grammar_revolve_profile_aalto_wave",
+    "grammar_revolve_profile_bottle_long_neck",
+    "grammar_revolve_profile_candlestick",
+    "grammar_revolve_profile_column_with_capital",
+    "grammar_revolve_profile_lamp_stem",
+    "grammar_revolve_profile_onion_dome",
+    "grammar_revolve_profile_spool_thread",
+    "grammar_revolve_profile_urn_classical",
+    "grammar_revolve_profile_vase_classical",
+    "grammar_solomonic_stack_helix_d00",
+    "grammar_solomonic_stack_helix_d05",
+    "grammar_solomonic_stack_helix_d15",
+    "grammar_solomonic_stack_helix_d30",
+    "grammar_solomonic_stack_helix_d45",
+    "grammar_tessellation_field_alhambra_basket_weave",
+    "grammar_tessellation_field_alhambra_chinese_lattice",
+    "grammar_tessellation_field_alhambra_girih_10_star",
+    "grammar_tessellation_field_alhambra_girih_pentagonal_rosette",
+    "grammar_tessellation_field_alhambra_hex_square_triangle_lattice",
+    "grammar_tessellation_field_alhambra_interlace_lattice",
+    "grammar_tessellation_field_alhambra_muqarnas",
+    "grammar_tessellation_field_alhambra_nested_concentric",
+    "grammar_tessellation_field_alhambra_penrose_d_vertex",
+    "grammar_tessellation_field_alhambra_penrose_decagon_patch",
+    "grammar_tessellation_field_alhambra_penrose_sun",
+    "grammar_tessellation_field_alhambra_rosette_field",
+    "grammar_tessellation_field_alhambra_running_bond_brick",
+    "grammar_tessellation_field_alhambra_square_bullseye_floor",
+    "grammar_tessellation_field_alhambra_square_pinwheel_rings",
+    "grammar_tessellation_field_alhambra_star_and_cross",
+    "grammar_tessellation_field_alhambra_stepped_pyramid_3d",
+    "grammar_tessellation_field_alhambra_torus_3_triangular",
+    "grammar_tessellation_field_alhambra_torus_4_diamond",
+    "grammar_tessellation_field_alhambra_torus_5_flower",
+    "grammar_tessellation_field_alhambra_torus_8_truncated_square",
+    "grammar_tessellation_field_alhambra_truchet_diagonal",
+    "grammar_tessellation_field_alhambra_truncated_square_488",
+    "grammar_tessellation_field_k04_squares",
+    "grammar_tessellation_field_k06_honeycomb",
+    "grammar_tessellation_field_k36_trihexagonal",
+    "grammar_totem_pole_autumn_diminish",
+    "grammar_totem_pole_bauhaus_pinch",
+    "grammar_totem_pole_frida_ziggurat",
+    "grammar_totem_pole_harlem_column",
+    "grammar_totem_pole_hokusai_wave",
+    "grammar_totem_pole_industrial_smokestack",
+    "grammar_totem_pole_joy_bulbs",
+    "grammar_totem_pole_memphis_bulge",
+    "grammar_totem_pole_mondrian_cubes",
+    "grammar_totem_pole_neon_spool",
+    "grammar_totem_pole_pinkness_planets",
+    "grammar_totem_pole_rainbow_taper",
+    "steppedpyramid_v2",
+    "tetrahedron_v2",
+    "tetrahedron_v2_flat",
+    "trafficcone_v2",
+    "trafficcone_v3",
+    "triangularprism_v2",
+    "unitcube_v2"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "config:footprint+map_ready+measurements+...",
+   "signals": [
+    "config"
+   ],
+   "members": [
+    "CaveGenerator",
+    "ChengSimulationScaled",
+    "Shader_Gallery",
+    "WFC3DGenerator",
+    "arrow",
+    "boolean_patterns",
+    "booleans",
+    "ca_conway_city",
+    "ca_rule_comparison",
+    "capsules",
+    "cctv",
+    "chair2",
+    "chaos_attractor",
+    "column_3_z",
+    "combine_primitives",
+    "context_free_grammars",
+    "coordinate_axes_xy",
+    "coordinate_lines",
+    "cube_mound_scene",
+    "cube_mound_scene_sphere",
+    "cylinder",
+    "dewcoveredfol",
+    "disco_lights",
+    "dna_workstation",
+    "dome",
+    "drawing_pen",
+    "dual_display_test",
+    "fabrics",
+    "falling_cube",
+    "fatwireframe",
+    "flashlight_demo",
+    "frozen_glass_vessel",
+    "glassdivider",
+    "gray_scott_comparison",
+    "grid_2d_4x4",
+    "grid_3d_4x4x4",
+    "grid_editor_main",
+    "gridscheckers",
+    "hand_model",
+    "horizon_plumb_lines",
+    "info_display",
+    "infokiosk",
+    "interactable_demo",
+    "julia_set",
+    "koch_curve",
+    "layered_membrane",
+    "lindenmayer_tube_tree",
+    "line_collection",
+    "liquid_simulation",
+    "magnifying_glass",
+    "magnifying_glass_red",
+    "mirror_cellular_texture_for_3d",
+    "mirrored_cellular_automata",
+    "modelsynthesis",
+    "modernistchairgallery",
+    "modulor_cypress",
+    "modulor_man_demo",
+    "mondrian_run",
+    "noisetorus",
+    "noisetorus_ex_1",
+    "parallel_lines",
+    "pickable_showcase",
+    "platonic_demo",
+    "platonic_grabbables",
+    "plus_lines",
+    "point_collection",
+    "poisson_disk_sampling_3d",
+    "prism",
+    "rd_coral_garden",
+    "rorschach_monitor",
+    "row_3_x",
+    "scifi_panel_wall",
+    "sixteen_cell_net_space_showcase",
+    "slime_mold",
+    "sphere",
+    "spherenetwork",
+    "tartan_demo",
+    "tesla_sphere",
+    "tessellating_portal_demo",
+    "tesseract_net_space_showcase",
+    "tesseract_tunnel_demo",
+    "torus",
+    "tree_generation",
+    "truchettiles",
+    "voronoi_diagrams",
+    "wave_function_collapse",
+    "waves"
+   ],
+   "suggested_integration": "self"
+  },
+  {
+   "name": "config:class_name+geometry_spec+map_ready+...",
+   "signals": [
+    "config"
+   ],
+   "members": [
+    "abacus",
+    "autoclave",
+    "barber_pole",
+    "barrier",
+    "biomech",
+    "biomech_ng",
+    "bunsen_burner",
+    "cable_tray",
+    "cardboard_box",
+    "ceiling_vent",
+    "chemistry_flask",
+    "clamp_stand",
+    "codex_arch",
+    "codex_flora",
+    "codex_food",
+    "codex_glyph",
+    "codex_loom",
+    "codex_morph",
+    "codex_swarm",
+    "concrete_barrier",
+    "conveyor_belt",
+    "electrical_panel",
+    "emergency_button",
+    "exit_sign",
+    "fence_segment",
+    "fire_extinguisher",
+    "fishbowl",
+    "floor_grate",
+    "fume_hood",
+    "future_drone",
+    "futuristic_fuse_box",
+    "gas_canister",
+    "glove_box",
+    "great_wave",
+    "haeckel",
+    "industrial_robot_arm",
+    "iv_stand",
+    "kaleidoscope",
+    "lab_sink",
+    "lab_stool",
+    "large_table",
+    "large_window",
+    "lock_box",
+    "map_table",
+    "mirror",
+    "mobile_whiteboard",
+    "oscilloscope",
+    "palm_scanner",
+    "pendulum",
+    "petri_dish",
+    "prefab_sculpture",
+    "probability_box",
+    "robot_arm",
+    "safety_shower",
+    "scales",
+    "security_camera",
+    "server_rack",
+    "slide_projector",
+    "specimen_jar",
+    "steel_barricade",
+    "street_sign",
+    "surreal_lab",
+    "tech_crate",
+    "terrarium",
+    "test_tube_rack",
+    "transformer",
+    "vacuum_chamber",
+    "wall_clock",
+    "whiteboard",
+    "window_ac_unit",
+    "wood_pallet"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "config:footprint+geometry_spec+map_ready+...",
+   "signals": [
+    "config"
+   ],
+   "members": [
+    "BigPipe",
+    "IndexVisualizer",
+    "PipeLayout",
+    "audio_effects",
+    "bigframe",
+    "ca_bridge",
+    "colorballs",
+    "colortrails",
+    "cube_bookshelf",
+    "cube_cabin",
+    "cube_chair",
+    "cube_create",
+    "cube_desk",
+    "cube_staircase",
+    "cylinder_low",
+    "cylinder_mid",
+    "digital_materiality_glitch",
+    "disco_floor",
+    "ecosystem_simulation",
+    "example_4_2_array_particles_vr",
+    "example_4_5_inheritance_polymorphism_vr",
+    "example_particle_body",
+    "fractal_scene",
+    "generative_music",
+    "granular_synthesis",
+    "graphics_slideshow",
+    "graphspace3d",
+    "hollowrock",
+    "kochsnowflake",
+    "marching_cubes",
+    "marchingcave",
+    "marchingcubes_cave",
+    "marchingcubes_flat_landscape",
+    "marchingcubes_inside_cave",
+    "marchingcubes_portal_landscape",
+    "marchingcubes_torus_sculpture",
+    "mobius_world",
+    "modernchair",
+    "mondrian_2d",
+    "noise_terrain",
+    "noiselayers",
+    "parametric_surface",
+    "player_presence_indicator",
+    "proceduralrock",
+    "psychoacoustics",
+    "rainbow",
+    "reset_area",
+    "rhizomatic_maze_space",
+    "rockfactory",
+    "rockfactory_gravity",
+    "rule_30_110_gravity",
+    "scale_lines",
+    "sphere_high",
+    "sphere_low",
+    "sphere_mid",
+    "spit_text_3d",
+    "steppedpyramid",
+    "torus_low",
+    "tts_test"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "config:capacity+footprint+gamwell_reference+...",
+   "signals": [
+    "config"
+   ],
+   "members": [
+    "CoordinateSystem3M",
+    "CrosswayCA",
+    "ForceMagnitudeDemo",
+    "KonigsbergBridge",
+    "SpectrumVisualizer",
+    "VectorAddition",
+    "VectorBasics",
+    "VectorCrossProduct",
+    "VectorDotProduct",
+    "adaboost",
+    "bouncing_ball",
+    "bulging_tunnel",
+    "carousel_cake",
+    "clipboard",
+    "edmonds_algorithm",
+    "example_2_5_fluid_resistance_vr",
+    "example_3_2_forces_with_arbitrary_angular_motion_vr",
+    "example_3_3_pointing_in_the_direction_of_motion_vr",
+    "exercise_1_3_solution_3_d_bouncing_ball_vr",
+    "exercise_1_5_solution_accelerate_and_decelerate_vr",
+    "exercise_1_8_solution_attraction_magnitude_vr",
+    "force_directed_layout",
+    "kosaraju_algorithm",
+    "mass_spring_damper",
+    "mst_visualization",
+    "network_analysis",
+    "networkflow3d",
+    "pathfinding3d",
+    "pick_up_cube",
+    "pickup_gate",
+    "push_relabel_algorithm",
+    "random_forest",
+    "randompoints",
+    "righttriangle",
+    "scale_me",
+    "science_screen",
+    "spin",
+    "spring_system",
+    "tarjan_algorithm",
+    "toruscylinder",
+    "translation_cube_demo"
+   ],
+   "suggested_integration": "self"
+  },
+  {
+   "name": "config:footprint+map_ready+parameters+...",
+   "signals": [
+    "config"
+   ],
+   "members": [
+    "automatic_writing_desk",
+    "chalkboard",
+    "circle_chalkboard",
+    "cube_chalkboard",
+    "endlessness_chalkboard",
+    "floating_sphere_field",
+    "fontana_puncture",
+    "grid_brush_demo",
+    "grid_chalkboard",
+    "grid_ops_demo",
+    "hand_telemetry_diptych",
+    "horizon_line",
+    "ignorance_chalkboard",
+    "klee_walking_point",
+    "line_chalkboard",
+    "living_paper",
+    "melencolia_chalkboard",
+    "mesh_chalkboard",
+    "modifier_grid_demo",
+    "mystic_writing_pad",
+    "network_chalkboard",
+    "pink_triangle",
+    "pixel_heart",
+    "pixel_thumb",
+    "point_chalkboard",
+    "polyhedra_chalkboard",
+    "prebaked_loader",
+    "qfep_chalkboard",
+    "quad_chalkboard",
+    "redline",
+    "tensegrity_triangle",
+    "three_points_triangle",
+    "thrownness_chalkboard",
+    "trace_chalkboard",
+    "triangle_chalkboard",
+    "triangle_whiteboard",
+    "two_points_line",
+    "wall_placard",
+    "you_are_here"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "config:footprint_measured+geometry_spec+map_ready+...",
+   "signals": [
+    "config"
+   ],
+   "members": [
+    "BigPipeSystem",
+    "BigPipe_CrossManifold",
+    "BigPipe_IndustrialBranch",
+    "BigPipe_LBend",
+    "BigPipe_Serpentine",
+    "BigPipe_StraightRun",
+    "BigPipe_TDistribution",
+    "BigPipe_VerticalBypass",
+    "Random_Rotate_Random_XYZ",
+    "bst_visualization",
+    "bubble_particles",
+    "colorsheets",
+    "dendrite_growth_ca",
+    "evolving_creatures_ea",
+    "gaussian_random",
+    "grid_3d_capture",
+    "grid_model",
+    "height_random",
+    "hypothesis_testing",
+    "index_visualizer",
+    "k_means_color",
+    "library_rack",
+    "pickup_cube_placer",
+    "proximity_spawner",
+    "randomize_cubes_over_Z",
+    "remove_random",
+    "resonance_frequencies",
+    "rotate_random_y",
+    "shape_learner_2d",
+    "shape_learner_3d",
+    "sine_oscillation",
+    "sound_timeline",
+    "volumetric_fog_ca",
+    "vowel_instrument",
+    "vowel_synth",
+    "walk_random",
+    "wall_pattern_colorizer",
+    "wall_pattern_gallery",
+    "wall_shader_showcase"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "config:footprint+map_ready+measurements+...",
+   "signals": [
+    "config"
+   ],
+   "members": [
+    "WFCCav",
+    "WFCSculptureGenerator",
+    "algorithm_overview",
+    "animated_cube",
+    "array_visualizer",
+    "branching_growth_algorithm",
+    "branching_growth_algorithm_continued",
+    "bucket_of_tulips",
+    "camera_context",
+    "clipboard_large",
+    "clippingplanes",
+    "color_pattern_mate_texture_for_3d",
+    "color_pattern_texture_for_3d",
+    "concept_synthesizer",
+    "dimension_lens",
+    "entropy_visualization",
+    "fibonacci_sequences",
+    "geometric_crystal",
+    "grid_snapper",
+    "knowledge_prism",
+    "light_sphere",
+    "marching_cubes_static",
+    "maze_generation",
+    "player_position_to_console",
+    "point_is",
+    "probability_sphere",
+    "quantum_dice",
+    "reality_modifier",
+    "renaissancepaintingfloorrattern",
+    "rhizome_cave_system",
+    "rorschach_scan",
+    "space_colonization_algorithm",
+    "spatial_compass",
+    "voronoi_grid_3d",
+    "wfc_3d_demo"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "config:capacity+map_ready+parameters+...",
+   "signals": [
+    "config"
+   ],
+   "members": [
+    "cap_theorem_walk",
+    "catalyst_sustain_demo",
+    "citation_graph_node",
+    "csg_architecture_cavity",
+    "csg_difference_demo",
+    "csg_intersection_demo",
+    "csg_union_demo",
+    "derivative_pair",
+    "edge_as_ground_capstone",
+    "ethical_design_clipboard",
+    "excluded_class_visualizer",
+    "flex_cloth_pad",
+    "florensky_in_production",
+    "ftc_bridge",
+    "gallery_marker_facade",
+    "gallery_marker_soft-body",
+    "integral_area",
+    "learn_input_pair_stand",
+    "locatable_knowledge_station",
+    "merge_conflict_visualizer",
+    "partial_derivative_terrain",
+    "particle_flow_swarm",
+    "peer_edit_ledger",
+    "qfep_term_compass",
+    "riemann_pump",
+    "room_shape_demonstrator",
+    "seed_orb",
+    "situated_sensor",
+    "slope_tangent_demo",
+    "vector_field_grid",
+    "velocity_arrow",
+    "wiki_fragment_station"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "config:footprint_measured+geometry_spec+map_ready+...",
+   "signals": [
+    "config"
+   ],
+   "members": [
+    "BeatFrequencies",
+    "DoublePendulum",
+    "ForestCompetition",
+    "HarmonicBuilder",
+    "OscillatingWave",
+    "binary_trees",
+    "collision_detection",
+    "elementary_ca_vr",
+    "fem_simulation",
+    "fitness_landscape_politics",
+    "fluid_simulation",
+    "fourier_transform",
+    "fractal_lsystem_string",
+    "grammar_provenance",
+    "graph_structures",
+    "hash_maps",
+    "heap_operations",
+    "lsystem_dungeon",
+    "lsystem_tree",
+    "magnetic_simulation",
+    "numerical_integration",
+    "redblack_visualization",
+    "rigid_body",
+    "soft_bodies",
+    "spring_mass_system",
+    "standing_waves",
+    "surreal_kinetic_sculpture",
+    "trie_operations",
+    "union_find",
+    "unit_circle",
+    "wave_interference",
+    "wave_propagation_3d"
+   ],
+   "suggested_integration": "self"
+  },
+  {
+   "name": "config:footprint+interaction+interactions+...",
+   "signals": [
+    "config"
+   ],
+   "members": [
+    "agnes_martin_grid_painting",
+    "attention_economy_sim",
+    "backpropagation_flow",
+    "big_o_race",
+    "bridget_riley_op_art",
+    "cache_hit_visualizer",
+    "constraint_sculptor",
+    "data_labor_counter",
+    "dimensional_analogy",
+    "filter_bubble_demo",
+    "fluid_taxonomy_tree",
+    "found_object_assembler",
+    "garbage_collector_demo",
+    "hypercube_rotation",
+    "kitbash_station",
+    "latent_space_walk",
+    "non_binary_classifier",
+    "overfitting_demo",
+    "pressure_soft_body",
+    "profiler_flame_graph",
+    "rhizome_navigator",
+    "schlegel_diagram",
+    "soft_body_slicer",
+    "sol_lewitt_wall_drawing",
+    "surveillance_panopticon",
+    "vera_molnar_des_ordres",
+    "viscous_fluid_blob"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "config:map_ready",
+   "signals": [
+    "config"
+   ],
+   "members": [
+    "apple_cell",
+    "becoming_hourglass",
+    "catalyst_altar",
+    "cost_ledger",
+    "coupling_resonator",
+    "delta_butterfly",
+    "delta_forge",
+    "enigma_rotor_stack",
+    "entropy_bellows",
+    "half_life_clock",
+    "half_life_manometer",
+    "halting_lantern",
+    "imitation_gate",
+    "incompleteness_scale",
+    "info_board",
+    "lambda_organ",
+    "morphogen_tide_pool",
+    "observer_cage",
+    "order_loom",
+    "phase_chamber_bell",
+    "strange_loop_stair",
+    "time_ratchet",
+    "universal_lathe",
+    "vortessence_tap",
+    "vortigaunt_lattice_harp"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "config:footprint+geometry_spec+map_ready+...",
+   "signals": [
+    "config"
+   ],
+   "members": [
+    "GaussianBlurShader",
+    "armadillo_eggling",
+    "ca_growth_network",
+    "ca_sphere",
+    "decaying_bridge",
+    "entropy_axiom",
+    "env_one",
+    "hazards_demo",
+    "hexagon_ca_vr",
+    "john_cage_tech_noir",
+    "kusama_sine",
+    "lab_table",
+    "mold_network",
+    "origami_droideka",
+    "pheromone_terrain",
+    "pipe_dream",
+    "random_bell_curve",
+    "random_edge_profile",
+    "randompoint",
+    "ten_print_maze_3d",
+    "voxelnoise"
+   ],
+   "suggested_integration": "self"
+  },
+  {
+   "name": "config:footprint+map_ready+parameters+...",
+   "signals": [
+    "config"
+   ],
+   "members": [
+    "adder_board",
+    "agreement_gauge",
+    "control_console",
+    "force_pad",
+    "force_vortex",
+    "human_catapult",
+    "length_lantern",
+    "lsystem_artifact",
+    "mesh_grammar_artifact",
+    "mortar_vector_siege",
+    "pattern_artifact",
+    "pattern_loom",
+    "pattern_mill",
+    "primitive_assembler",
+    "primitive_combo_puzzle",
+    "rd_artifact",
+    "reflection_hall",
+    "stretch_bench",
+    "trajectory_artifact"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "config:footprint_measured+geometry_spec+interaction+...",
+   "signals": [
+    "config"
+   ],
+   "members": [
+    "bias_visualizer",
+    "boids_aquarium",
+    "chladni_plate",
+    "coupled_pendulums",
+    "distribution_sampler",
+    "flow_field_painter",
+    "force_field_visualizer",
+    "game_of_life_petri",
+    "jelly_cube",
+    "jelly_variants",
+    "julia_set_explorer",
+    "lsystem_editor",
+    "monte_carlo_estimator",
+    "orbital_mechanics_demo",
+    "perlin_terrain_sculptor",
+    "queer_morphology_specimen",
+    "transform_matrix_cube",
+    "turing_pattern_generator",
+    "wave_interference_tank"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "config:footprint_measured+geometry_spec+map_ready+...",
+   "signals": [
+    "config"
+   ],
+   "members": [
+    "ContextSensitiveTree",
+    "axis_translation_cube",
+    "coupled_oscillator_lattice",
+    "game_of_life_vr",
+    "genetic_tree_sculptor",
+    "homogeneous_coordinates",
+    "invariants_demo",
+    "lenia_continuous",
+    "lissajous_curves",
+    "lyapunov_exponents",
+    "lyapunov_fractal",
+    "rotation_gimbal",
+    "shear_matrix_demo",
+    "slingshot_launcher",
+    "strange_attractors",
+    "transform_composition",
+    "viscosity_layers",
+    "wave_interference_3d",
+    "wireworld_circuit"
+   ],
+   "suggested_integration": "self"
+  },
+  {
+   "name": "config:class_name",
+   "signals": [
+    "config"
+   ],
+   "members": [
+    "edge_zone_crystal",
+    "edge_zone_dissolve",
+    "exhibit_furniture",
+    "exhibit_podium",
+    "exhibit_vitrine",
+    "jspace_count_plates",
+    "jspace_feature_field",
+    "jspace_ring",
+    "jspace_zoom_chamber",
+    "mamma_monster_gallery",
+    "mode_crown",
+    "mode_dialogue",
+    "mode_witness_wall",
+    "museum_hall_shell",
+    "pattern_atlas_gallery",
+    "tutorial_wall"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "token:puzzle",
+   "signals": [
+    "token"
+   ],
+   "members": [
+    "balance_puzzle",
+    "cross_line_puzzle",
+    "index_map_puzzle",
+    "parallel_line_puzzle",
+    "plus_line_puzzle",
+    "primitive_combo_puzzle",
+    "quad_line_puzzle",
+    "rotation_match_puzzle",
+    "snap_cube_puzzle",
+    "snap_octahedron_puzzle",
+    "snap_pyramid_puzzle",
+    "snap_tetra_puzzle",
+    "snap_tetrahedron_puzzle",
+    "snap_triangle_puzzle",
+    "snap_wedge_puzzle",
+    "triangle_line_puzzle"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "config:class_name+footprint_measured+gamwell_reference+...",
+   "signals": [
+    "config"
+   ],
+   "members": [
+    "angle_sum_triangle",
+    "bifurcation_diagram",
+    "brouwer_choice_sequence",
+    "constructive_proof",
+    "escher_staircase",
+    "euclid_postulates_plaque",
+    "excluded_middle_demo",
+    "florensky_sphere",
+    "godel_statement_plaque",
+    "hilbert_hotel",
+    "magritte_pipe",
+    "penrose_triangle",
+    "poincare_disk",
+    "russell_set_box",
+    "schrodinger_box"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "config:footprint_measured+geometry_spec+map_ready+...",
+   "signals": [
+    "config"
+   ],
+   "members": [
+    "TrigWalkingPath",
+    "affect_theory_visualization",
+    "ca_chair_test",
+    "convolutional_neural_networks",
+    "fallingblocks",
+    "perlin_noise_clouds",
+    "playground_of_joy",
+    "random_transformations",
+    "ruth_asawa_sculpture",
+    "segment_tree",
+    "softbody3d",
+    "suffix_array_tree",
+    "tessellation_lattice_demo",
+    "tile_meander_floor"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "config:footprint_measured+map_ready+measurements+...",
+   "signals": [
+    "config"
+   ],
+   "members": [
+    "breathing_room",
+    "cellular_automata_1d",
+    "cellular_automata_2d",
+    "degrading_shader_demo",
+    "double_helix_scene",
+    "maze_generator",
+    "noisetext",
+    "perlin_noise_bridge",
+    "perlinvolume",
+    "queer_collection_gallery_a",
+    "random_color_book_page_collection",
+    "reaction_diffusion_intro",
+    "shader_gallery"
+   ],
+   "suggested_integration": "self"
+  },
+  {
+   "name": "config:footprint_measured+geometry_spec+interaction+...",
+   "signals": [
+    "config"
+   ],
+   "members": [
+    "9_1_ga_shakespeare_vr",
+    "9_2_smart_rockets_basic_vr",
+    "9_4_interactive_selection_vr",
+    "9_6_ga_shakespeare_annotated_vr",
+    "goomba_box",
+    "particle_randomness_patterns",
+    "particle_randomness_perlin",
+    "particle_randomness_pure",
+    "random_butterflies",
+    "shannon_entropy_meter",
+    "shell_roller",
+    "spring_hopper"
+   ],
+   "suggested_integration": "self"
+  },
+  {
+   "name": "script:GlassRackController",
+   "signals": [
+    "script"
+   ],
+   "members": [
+    "GlassRack",
+    "GlassRack_BranchingCondenser",
+    "GlassRack_BreakingBadCoffee",
+    "GlassRack_ComplexApparatus",
+    "GlassRack_DistillationRack",
+    "GlassRack_DistillationY",
+    "GlassRack_FractionalDistillation",
+    "GlassRack_RefluxApparatus",
+    "GlassRack_SbendManifold",
+    "GlassRack_SimpleTube",
+    "GlassRack_SpiralCondenser",
+    "GlassRack_SpiralTube"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "config:capacity+footprint+gamwell_reference+...",
+   "signals": [
+    "config"
+   ],
+   "members": [
+    "ChainSwing",
+    "CharacterRagdoll",
+    "ConeTwistBag",
+    "DrawbridgeHinge",
+    "GimbalStabilizer",
+    "HingeCrank",
+    "PendulumPin",
+    "SliderPress",
+    "SpringSuspension",
+    "mushrooms",
+    "tscn_joint"
+   ],
+   "suggested_integration": "self"
+  },
+  {
+   "name": "config:class_name+footprint+map_ready",
+   "signals": [
+    "config"
+   ],
+   "members": [
+    "attention_loom",
+    "fluid_flag",
+    "goedel_atrium",
+    "gradient_descent_well",
+    "graph_basilica",
+    "lambda_hall",
+    "milk_triangle",
+    "push_cart",
+    "rhizome_vault",
+    "token_stream",
+    "work_station"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "config:footprint_measured+geometry_spec+interaction+...",
+   "signals": [
+    "config"
+   ],
+   "members": [
+    "catalyst_pedestal",
+    "entropy_jar",
+    "force_field",
+    "galton_board",
+    "grower_block",
+    "loving_triangle",
+    "monte_carlo_dartboard",
+    "pusher_block",
+    "random_walk_leash",
+    "sweeper_block",
+    "wedge_skill_pickup"
+   ],
+   "suggested_integration": "self"
+  },
+  {
+   "name": "config:footprint_measured+geometry_spec+interaction+...",
+   "signals": [
+    "config"
+   ],
+   "members": [
+    "chaos_particles",
+    "complexity_pattern",
+    "dissolving_form",
+    "edge_core",
+    "fluid_form",
+    "ordered_grid",
+    "particle_chaos",
+    "preserved_pattern",
+    "random_cubes",
+    "rigid_sculpture",
+    "transforming_pattern"
+   ],
+   "suggested_integration": "self"
+  },
+  {
+   "name": "config:footprint_measured+map_ready+measurements+...",
+   "signals": [
+    "config"
+   ],
+   "members": [
+    "beat_frequency_demo",
+    "circle_spiral_scene",
+    "facade_grammar_demo",
+    "genetic_programming",
+    "gradient_interpolator",
+    "pattern_studio_plate",
+    "pattern_tile_plate",
+    "seed_replay_demo",
+    "subpixel_display",
+    "vector_reflection_demo",
+    "wfc"
+   ],
+   "suggested_integration": "self"
+  },
+  {
+   "name": "config:footprint+map_ready+measurements+...",
+   "signals": [
+    "config"
+   ],
+   "members": [
+    "form_studio_station",
+    "graph_grammar_station",
+    "sdf_gallery_room",
+    "sdf_gallery_row_dna_variance",
+    "sdf_gallery_row_kingdoms",
+    "sdf_gallery_row_modulor",
+    "sdf_gallery_row_operators",
+    "sdf_gallery_row_primitives",
+    "sdf_gallery_row_stacked_ops",
+    "sdf_gallery_row_transition"
+   ],
+   "suggested_integration": "self"
+  },
+  {
+   "name": "script:grab_cube",
+   "signals": [
+    "script"
+   ],
+   "members": [
+    "agnes_grid",
+    "grab_cube",
+    "grab_long_stick",
+    "grab_rainbow_stick",
+    "grabable_agnes",
+    "grabable_mondrian",
+    "helper_arm",
+    "magnifying_glass_tool",
+    "wood_cube",
+    "zelda_tiles_3d"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "config:capacity+footprint_measured+gamwell_reference+...",
+   "signals": [
+    "config"
+   ],
+   "members": [
+    "SoundscapeRadioRack",
+    "firework_launcher",
+    "friction_ramp",
+    "gravity_well",
+    "newton_cradle",
+    "verlet_integration",
+    "x_translation_cube",
+    "y_translation_cube",
+    "z_translation_cube"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "config:capacity+footprint_measured+geometry_spec+...",
+   "signals": [
+    "config"
+   ],
+   "members": [
+    "edge_detector",
+    "edge_of_chaos_unlocked",
+    "entropy_meter",
+    "lambda_slider",
+    "phase_cube",
+    "phi_slider",
+    "qfep_formula_3d",
+    "qfep_oscilloscope",
+    "qfep_reactor"
+   ],
+   "suggested_integration": "self"
+  },
+  {
+   "name": "config:class_name+map_ready+parameters",
+   "signals": [
+    "config"
+   ],
+   "members": [
+    "cctv_camera",
+    "computer_console",
+    "computer_keyboard",
+    "crate",
+    "fire_hose_box",
+    "lead_safety_door",
+    "metal_storage_cabinet",
+    "tentacle_placer",
+    "wooden_pallet"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "script:big_pipe_system",
+   "signals": [
+    "script"
+   ],
+   "members": [
+    "BigPipe",
+    "BigPipeSystem",
+    "BigPipe_CrossManifold",
+    "BigPipe_IndustrialBranch",
+    "BigPipe_LBend",
+    "BigPipe_Serpentine",
+    "BigPipe_StraightRun",
+    "BigPipe_TDistribution",
+    "BigPipe_VerticalBypass"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "config:footprint+interaction+interactions+...",
+   "signals": [
+    "config"
+   ],
+   "members": [
+    "centripetal_force_demo",
+    "circular_buffer",
+    "drag_coefficient_wind_tunnel",
+    "impulse_collision_demo",
+    "index_map_puzzle",
+    "matrix_multiply_visual",
+    "sparse_array_demo",
+    "spring_chain"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "token:station",
+   "signals": [
+    "token"
+   ],
+   "members": [
+    "curation_station",
+    "form_studio_station",
+    "graph_grammar_station",
+    "kitbash_station",
+    "locatable_knowledge_station",
+    "pattern_maker_station",
+    "wiki_fragment_station",
+    "work_station"
+   ],
+   "suggested_integration": "self"
+  },
+  {
+   "name": "config:footprint+geometry_spec+map_ready+...",
+   "signals": [
+    "config"
+   ],
+   "members": [
+    "agnes_grid_2d",
+    "boid_flocking",
+    "graphics_slideshow_2d",
+    "gridcolorizer",
+    "marching_cubes_cave_gallery",
+    "pop_music_demo",
+    "zigzagprofile"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "script:element_layout_node",
+   "signals": [
+    "script"
+   ],
+   "members": [
+    "Rack303Acid",
+    "Rack808Drums",
+    "RackAmbientDrone",
+    "RackDX7Piano",
+    "RackMario",
+    "RackMoogBass",
+    "RackSineBasic"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "script:sdf_gallery_row_artifact",
+   "signals": [
+    "script"
+   ],
+   "members": [
+    "sdf_gallery_row_dna_variance",
+    "sdf_gallery_row_kingdoms",
+    "sdf_gallery_row_modulor",
+    "sdf_gallery_row_operators",
+    "sdf_gallery_row_primitives",
+    "sdf_gallery_row_stacked_ops",
+    "sdf_gallery_row_transition"
+   ],
+   "suggested_integration": "self"
+  },
+  {
+   "name": "token:board",
+   "signals": [
+    "token"
+   ],
+   "members": [
+    "adder_board",
+    "control_board",
+    "galton_board",
+    "grid_editor_board",
+    "info_board",
+    "singing_board",
+    "vowel_sound_board"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "token:display",
+   "signals": [
+    "token"
+   ],
+   "members": [
+    "code_display",
+    "cove_display",
+    "info_display",
+    "spectrum_display",
+    "subpixel_display",
+    "superposition_display",
+    "text_display"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "config:footprint_measured+geometry_spec+interaction+...",
+   "signals": [
+    "config"
+   ],
+   "members": [
+    "GlassRack",
+    "dna_specimen",
+    "glitch_body",
+    "harmonic_motion_demo",
+    "perceptron_playground",
+    "petri_dish_worms"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "script:TerrainGenerator",
+   "signals": [
+    "script"
+   ],
+   "members": [
+    "marchingcave",
+    "marchingcubes_cave",
+    "marchingcubes_inside_cave",
+    "mc_base",
+    "mc_cave",
+    "mc_inside_cave"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "script:viewport_2d_in_3d",
+   "signals": [
+    "script"
+   ],
+   "members": [
+    "2d_in_3d_point_vis",
+    "2d_in_3d_randomness_vis",
+    "2d_in_3d_vectors_vis",
+    "HandheldInfoBoard",
+    "boids_2d_in_3d",
+    "turret_boll_infoboard"
+   ],
+   "suggested_integration": "self"
+  },
+  {
+   "name": "token:generator",
+   "signals": [
+    "token"
+   ],
+   "members": [
+    "cave_generator",
+    "markov_generator",
+    "maze_generator",
+    "terrain_world_generator",
+    "turing_pattern_generator",
+    "wfc_dungeon_generator"
+   ],
+   "suggested_integration": "self"
+  },
+  {
+   "name": "config:ada_kind+map_ready+scene_path",
+   "signals": [
+    "config"
+   ],
+   "members": [
+    "climb_grip",
+    "gadget_wall",
+    "hand_scanner",
+    "poke_keypad",
+    "snap_socket"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "config:class_name+compute+footprint_measured+...",
+   "signals": [
+    "config"
+   ],
+   "members": [
+    "fountain_demo",
+    "gyroid_demo",
+    "mc_sculpt_vr",
+    "mc_shapes_gallery",
+    "voxel_noise_demo"
+   ],
+   "suggested_integration": "self"
+  },
+  {
+   "name": "config:footprint+geometry_spec+interaction+...",
+   "signals": [
+    "config"
+   ],
+   "members": [
+    "anomaly_detection",
+    "enhanced_kmeans",
+    "nature_system_demo",
+    "pca_visualization",
+    "svm_visualization"
+   ],
+   "suggested_integration": "self"
+  },
+  {
+   "name": "config:footprint+map_ready+measurements+...",
+   "signals": [
+    "config"
+   ],
+   "members": [
+    "ContextFreeGrammars",
+    "code_evolution_screen",
+    "grabbable_line",
+    "laser_sword",
+    "xyz_slider_plate"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "config:footprint_measured+map_ready+measurements+...",
+   "signals": [
+    "config"
+   ],
+   "members": [
+    "cellular_automata_3d",
+    "noise_terrain_with_blobs",
+    "octapod_ik",
+    "pompeii_meander_floor",
+    "reaction_diffusion"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "config:footprint_measured+map_ready+measurements+...",
+   "signals": [
+    "config"
+   ],
+   "members": [
+    "IKArm",
+    "box_counting_dimension",
+    "lifetime_curves",
+    "particle_campfire",
+    "simulation_instability"
+   ],
+   "suggested_integration": "self"
+  },
+  {
+   "name": "config:footprint_measured+map_ready+measurements+...",
+   "signals": [
+    "config"
+   ],
+   "members": [
+    "penteract_double_projection",
+    "random_edge_profile_collection",
+    "reaction_diffusion_vr",
+    "request_note",
+    "tesseract_tunnel"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "config:map_ready+parameters",
+   "signals": [
+    "config"
+   ],
+   "members": [
+    "chromatic_form_artifact",
+    "composition_platform",
+    "path_cube",
+    "path_pyramid",
+    "path_wedge"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "script:RandomTransformations",
+   "signals": [
+    "script"
+   ],
+   "members": [
+    "random_transformations",
+    "random_transformations_geometric",
+    "random_transformations_matrices",
+    "random_transformations_noise",
+    "random_transformations_stochastic"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "script:extrem_randomness",
+   "signals": [
+    "script"
+   ],
+   "members": [
+    "extreme_randomness",
+    "particle_randomness_emergent",
+    "particle_randomness_patterns",
+    "particle_randomness_perlin",
+    "particle_randomness_pure"
+   ],
+   "suggested_integration": "self"
+  },
+  {
+   "name": "script:pickup_wrapper",
+   "signals": [
+    "script"
+   ],
+   "members": [
+    "pickup_cube_combo",
+    "pickup_cube_rotating",
+    "pickup_cube_scaling",
+    "pickup_cube_static",
+    "pickup_cube_transforming"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "script:transform_staircase",
+   "signals": [
+    "script"
+   ],
+   "members": [
+    "transform_staircase_dna",
+    "transform_staircase_fibonacci",
+    "transform_staircase_mobius",
+    "transform_staircase_showcase",
+    "transform_staircase_spiral"
+   ],
+   "suggested_integration": "self"
+  },
+  {
+   "name": "token:meter",
+   "signals": [
+    "token"
+   ],
+   "members": [
+    "aliveness_meter",
+    "dimension_meter",
+    "entropy_meter",
+    "shannon_entropy_meter",
+    "work_meter"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "config:capacity+footprint+gamwell_reference+...",
+   "signals": [
+    "config"
+   ],
+   "members": [
+    "boolean_tunnel",
+    "graphspace",
+    "player_trace",
+    "three_body_problem"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "config:class_name+compute+footprint_measured+...",
+   "signals": [
+    "config"
+   ],
+   "members": [
+    "mc_flat_landscape",
+    "mc_overhang_landscape",
+    "mc_terrain_demo",
+    "rhizome_cave_demo"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "config:class_name+footprint_measured+geometry_spec+...",
+   "signals": [
+    "config"
+   ],
+   "members": [
+    "ball_dropper",
+    "laser_turret",
+    "sentry_turret",
+    "turret_boll_infoboard"
+   ],
+   "suggested_integration": "self"
+  },
+  {
+   "name": "config:class_name+footprint_measured+geometry_spec+...",
+   "signals": [
+    "config"
+   ],
+   "members": [
+    "basis_vectors_rig",
+    "cross_product_demo",
+    "dot_product_projector",
+    "vector_joint_playground"
+   ],
+   "suggested_integration": "self"
+  },
+  {
+   "name": "config:footprint+geometry_spec+map_ready+...",
+   "signals": [
+    "config"
+   ],
+   "members": [
+    "WavePaintings",
+    "disease_spread_ca",
+    "self_organization_ca",
+    "space_filling_curve_gallery"
+   ],
+   "suggested_integration": "self"
+  },
+  {
+   "name": "config:footprint+geometry_spec+map_ready+...",
+   "signals": [
+    "config"
+   ],
+   "members": [
+    "SphericalHarmonics",
+    "foucault_pendulum",
+    "newtons_laws",
+    "sierpinski_pyramid"
+   ],
+   "suggested_integration": "self"
+  },
+  {
+   "name": "config:footprint+map_ready+parameters+...",
+   "signals": [
+    "config"
+   ],
+   "members": [
+    "code",
+    "marching_cubes_gallery",
+    "tile_patterns",
+    "zelda_tilemap_2d"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "config:footprint_measured+geometry_spec+interaction+...",
+   "signals": [
+    "config"
+   ],
+   "members": [
+    "random_transformations_geometric",
+    "random_transformations_matrices",
+    "random_transformations_noise",
+    "random_transformations_stochastic"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "script:axis_translation_cube",
+   "signals": [
+    "script"
+   ],
+   "members": [
+    "axis_translation_cube",
+    "x_translation_cube",
+    "y_translation_cube",
+    "z_translation_cube"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "script:grab_sphere",
+   "signals": [
+    "script"
+   ],
+   "members": [
+    "grab_cube_show",
+    "grab_sphere_point",
+    "grab_sphere_point_color_with_text",
+    "grab_sphere_point_with_text"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "script:softbody_test_gallery",
+   "signals": [
+    "script"
+   ],
+   "members": [
+    "softbody_gallery_part1",
+    "softbody_gallery_part2",
+    "softbody_gallery_part3",
+    "softbodytest"
+   ],
+   "suggested_integration": "self"
+  },
+  {
+   "name": "script:SoundBox",
+   "signals": [
+    "script"
+   ],
+   "members": [
+    "SoundBoxLong",
+    "SoundBoxShort",
+    "soundboxes"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "script:array_transform_staircase",
+   "signals": [
+    "script"
+   ],
+   "members": [
+    "array_rotate",
+    "array_scale",
+    "array_translate"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "script:color_scanner",
+   "signals": [
+    "script"
+   ],
+   "members": [
+    "color_scanner",
+    "grab_stick",
+    "grab_stick_scanner"
+   ],
+   "suggested_integration": "self"
+  },
+  {
+   "name": "script:editable_curve",
+   "signals": [
+    "script"
+   ],
+   "members": [
+    "editable_bezier",
+    "editable_catmull_rom",
+    "editable_curve"
+   ],
+   "suggested_integration": "self"
+  },
+  {
+   "name": "script:path_block",
+   "signals": [
+    "script"
+   ],
+   "members": [
+    "path_cube",
+    "path_pyramid",
+    "path_wedge"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "script:station_plinth",
+   "signals": [
+    "script"
+   ],
+   "members": [
+    "station_micropod",
+    "station_plinth",
+    "station_plinth_wide"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "token:screen",
+   "signals": [
+    "token"
+   ],
+   "members": [
+    "code_evolution_screen",
+    "filter_screen",
+    "science_screen"
+   ],
+   "suggested_integration": "self"
+  },
+  {
+   "name": "scene:7_1_elementary_ca_vr",
+   "signals": [
+    "scene"
+   ],
+   "members": [
+    "7_1_elementary_ca_vr",
+    "elementary_ca_vr"
+   ],
+   "suggested_integration": "self"
+  },
+  {
+   "name": "scene:7_2_game_of_life_vr",
+   "signals": [
+    "scene"
+   ],
+   "members": [
+    "7_2_game_of_life_vr",
+    "game_of_life_vr"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "scene:7_3_game_of_life_oop_vr",
+   "signals": [
+    "scene"
+   ],
+   "members": [
+    "7_3_game_of_life_oop_vr",
+    "game_of_life_oop_vr"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "scene:7_8_hexagon_ca_vr",
+   "signals": [
+    "scene"
+   ],
+   "members": [
+    "7_8_hexagon_ca_vr",
+    "hexagon_ca_vr"
+   ],
+   "suggested_integration": "self"
+  },
+  {
+   "name": "scene:AntColonyV2",
+   "signals": [
+    "scene"
+   ],
+   "members": [
+    "AntColonyV2",
+    "ant_colony_v2"
+   ],
+   "suggested_integration": "self"
+  },
+  {
+   "name": "scene:BigPipeSystem",
+   "signals": [
+    "scene"
+   ],
+   "members": [
+    "BigPipe",
+    "BigPipeSystem"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "scene:CA_sphere",
+   "signals": [
+    "scene"
+   ],
+   "members": [
+    "CA_sphere",
+    "ca_sphere"
+   ],
+   "suggested_integration": "self"
+  },
+  {
+   "name": "scene:CellularAutomata3DStacked",
+   "signals": [
+    "scene"
+   ],
+   "members": [
+    "CellularAutomata3DStacked",
+    "cellular_automata_3d_stacked"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "scene:CellularAutomata3DTree",
+   "signals": [
+    "scene"
+   ],
+   "members": [
+    "CellularAutomata3DTree",
+    "cellular_automata_3d_tree"
+   ],
+   "suggested_integration": "self"
+  },
+  {
+   "name": "scene:CrosswayCA",
+   "signals": [
+    "scene"
+   ],
+   "members": [
+    "CrosswayCA",
+    "crossway_ca"
+   ],
+   "suggested_integration": "self"
+  },
+  {
+   "name": "scene:FineTuning_VR",
+   "signals": [
+    "scene"
+   ],
+   "members": [
+    "fine_tuning",
+    "fine_tuning_vr"
+   ],
+   "suggested_integration": "self"
+  },
+  {
+   "name": "scene:GeneticProgramming",
+   "signals": [
+    "scene"
+   ],
+   "members": [
+    "GeneticProgramming",
+    "genetic_programming"
+   ],
+   "suggested_integration": "self"
+  },
+  {
+   "name": "scene:GyroidDemo",
+   "signals": [
+    "scene"
+   ],
+   "members": [
+    "GyroidDemo",
+    "gyroid_demo"
+   ],
+   "suggested_integration": "self"
+  },
+  {
+   "name": "scene:IndexVisualizer",
+   "signals": [
+    "scene"
+   ],
+   "members": [
+    "IndexVisualizer",
+    "index_visualizer"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "scene:MarchingCubesSculptVR",
+   "signals": [
+    "scene"
+   ],
+   "members": [
+    "marching_cubes_sculpt_vr",
+    "mc_sculpt_vr"
+   ],
+   "suggested_integration": "self"
+  },
+  {
+   "name": "scene:PhysarumColony",
+   "signals": [
+    "scene"
+   ],
+   "members": [
+    "PhysarumColony",
+    "physarum_colony"
+   ],
+   "suggested_integration": "self"
+  },
+  {
+   "name": "scene:RandomGaussianTexture",
+   "signals": [
+    "scene"
+   ],
+   "members": [
+    "RandomGaussianTexture",
+    "random_gaussian_texture"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "scene:Shader_Gallery",
+   "signals": [
+    "scene"
+   ],
+   "members": [
+    "Shader_Gallery",
+    "shader_gallery"
+   ],
+   "suggested_integration": "self"
+  },
+  {
+   "name": "scene:buffergeometryparticles",
+   "signals": [
+    "scene"
+   ],
+   "members": [
+    "buffer_geometry_particles",
+    "buffergeometryparticles"
+   ],
+   "suggested_integration": "self"
+  },
+  {
+   "name": "scene:codeDisplay",
+   "signals": [
+    "scene"
+   ],
+   "members": [
+    "code_display",
+    "tt"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "scene:context_free_grammars",
+   "signals": [
+    "scene"
+   ],
+   "members": [
+    "ContextFreeGrammars",
+    "context_free_grammars"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "scene:dynamiccubemap",
+   "signals": [
+    "scene"
+   ],
+   "members": [
+    "dynamic_cubemap",
+    "dynamiccubemap"
+   ],
+   "suggested_integration": "self"
+  },
+  {
+   "name": "scene:evolutionary_algorithms",
+   "signals": [
+    "scene"
+   ],
+   "members": [
+    "evolutionary_algorithms",
+    "particle_randomness_evolutionary"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "scene:evolvingflowers",
+   "signals": [
+    "scene"
+   ],
+   "members": [
+    "evolving_flowers",
+    "evolvingflowers"
+   ],
+   "suggested_integration": "self"
+  },
+  {
+   "name": "scene:example_8_3_recursion_circles_vr",
+   "signals": [
+    "scene"
+   ],
+   "members": [
+    "example_8_3_recursion_circles_vr",
+    "fractal_recursion_circles"
+   ],
+   "suggested_integration": "self"
+  },
+  {
+   "name": "scene:example_8_4_cantor_pagoda_vr",
+   "signals": [
+    "scene"
+   ],
+   "members": [
+    "cantor_pagoda_vr",
+    "example_8_4_cantor_pagoda_vr"
+   ],
+   "suggested_integration": "self"
+  },
+  {
+   "name": "scene:example_8_5_koch_curve_vr",
+   "signals": [
+    "scene"
+   ],
+   "members": [
+    "fractal_koch_curve",
+    "test_scene_4"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "scene:example_8_7_stochastic_tree_vr",
+   "signals": [
+    "scene"
+   ],
+   "members": [
+    "fractal_stochastic_tree",
+    "test_scene_6"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "scene:facade_builder",
+   "signals": [
+    "scene"
+   ],
+   "members": [
+    "dna_facade_classical",
+    "facade_builder"
+   ],
+   "suggested_integration": "self"
+  },
+  {
+   "name": "scene:gallery_marker",
+   "signals": [
+    "scene"
+   ],
+   "members": [
+    "gallery_marker_facade",
+    "gallery_marker_soft-body"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "scene:john_cage_tech_noir",
+   "signals": [
+    "scene"
+   ],
+   "members": [
+    "john_cage_tech_noir",
+    "tech_noir_audio"
+   ],
+   "suggested_integration": "self"
+  },
+  {
+   "name": "scene:kiosk",
+   "signals": [
+    "scene"
+   ],
+   "members": [
+    "mario_test_sound_ui",
+    "vr_map_loader_kiosk"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "scene:marching_cubes_terrain_demo",
+   "signals": [
+    "scene"
+   ],
+   "members": [
+    "marching_cubes",
+    "mc_terrain_demo"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "scene:marchingcubes",
+   "signals": [
+    "scene"
+   ],
+   "members": [
+    "marchingcave",
+    "mc_base"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "scene:marchingcubes_cave",
+   "signals": [
+    "scene"
+   ],
+   "members": [
+    "marchingcubes_cave",
+    "mc_cave"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "scene:marchingcubes_flat_landscape",
+   "signals": [
+    "scene"
+   ],
+   "members": [
+    "marchingcubes_flat_landscape",
+    "mc_flat_landscape"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "scene:marchingcubes_inside_cave",
+   "signals": [
+    "scene"
+   ],
+   "members": [
+    "marchingcubes_inside_cave",
+    "mc_inside_cave"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "scene:marchingcubes_overhang_landscape",
+   "signals": [
+    "scene"
+   ],
+   "members": [
+    "marchingcubes_portal_landscape",
+    "mc_overhang_landscape"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "scene:marchingcubes_torus_sculpture",
+   "signals": [
+    "scene"
+   ],
+   "members": [
+    "marchingcubes_torus_sculpture",
+    "mc_torus_sculpture"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "scene:materialstransmission",
+   "signals": [
+    "scene"
+   ],
+   "members": [
+    "materials_transmission",
+    "materialstransmission"
+   ],
+   "suggested_integration": "self"
+  },
+  {
+   "name": "scene:math_objects",
+   "signals": [
+    "scene"
+   ],
+   "members": [
+    "math_objects",
+    "math_objects_gallery"
+   ],
+   "suggested_integration": "self"
+  },
+  {
+   "name": "scene:mesh_grammar_artifact",
+   "signals": [
+    "scene"
+   ],
+   "members": [
+    "dna_mesh_grammar_gen00_petals",
+    "mesh_grammar_artifact"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "scene:mirror_cellular_texture_for_3d",
+   "signals": [
+    "scene"
+   ],
+   "members": [
+    "mirror_cellular_texture_for_3d",
+    "mirrored_cellular_automata"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "scene:snap_octahedron_puzzle",
+   "signals": [
+    "scene"
+   ],
+   "members": [
+    "snap_cube_puzzle",
+    "snap_octahedron_puzzle"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "scene:snap_tetrahedron_puzzle",
+   "signals": [
+    "scene"
+   ],
+   "members": [
+    "snap_tetra_puzzle",
+    "snap_tetrahedron_puzzle"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "scene:soft_mushrooms",
+   "signals": [
+    "scene"
+   ],
+   "members": [
+    "soft_mushroom",
+    "soft_mushrooms"
+   ],
+   "suggested_integration": "self"
+  },
+  {
+   "name": "scene:strange_attractors",
+   "signals": [
+    "scene"
+   ],
+   "members": [
+    "chaos_attractor",
+    "strange_attractors"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "scene:topological_sort",
+   "signals": [
+    "scene"
+   ],
+   "members": [
+    "topological_sort",
+    "topological_sort_algorithm"
+   ],
+   "suggested_integration": "self"
+  },
+  {
+   "name": "scene:unit_circle",
+   "signals": [
+    "scene"
+   ],
+   "members": [
+    "unit_circle",
+    "unit_circle_advanced"
+   ],
+   "suggested_integration": "self"
+  },
+  {
+   "name": "scene:voxel_noise_demo",
+   "signals": [
+    "scene"
+   ],
+   "members": [
+    "marchingcubes_voxel_noise_demo",
+    "voxel_noise_demo"
+   ],
+   "suggested_integration": "self"
+  },
+  {
+   "name": "scene:vr_tile_editor",
+   "signals": [
+    "scene"
+   ],
+   "members": [
+    "vr_tile_editor",
+    "vr_tile_editor_mirror"
+   ],
+   "suggested_integration": "self"
+  },
+  {
+   "name": "script:CellularAutomata3D_Flexible",
+   "signals": [
+    "script"
+   ],
+   "members": [
+    "mold_network",
+    "structure_growth"
+   ],
+   "suggested_integration": "self"
+  },
+  {
+   "name": "script:GameSoundMeter",
+   "signals": [
+    "script"
+   ],
+   "members": [
+    "spectral_analyzer",
+    "spectrum_display"
+   ],
+   "suggested_integration": "self"
+  },
+  {
+   "name": "script:ResetTeleporter",
+   "signals": [
+    "script"
+   ],
+   "members": [
+    "reset_area",
+    "reset_cube"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "script:RockFactory",
+   "signals": [
+    "script"
+   ],
+   "members": [
+    "rockfactory",
+    "rockfactory_gravity"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "script:SceneInstantiator",
+   "signals": [
+    "script"
+   ],
+   "members": [
+    "random_edge_profile_collection",
+    "random_number_book_page_collection"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "script:TransformationTween",
+   "signals": [
+    "script"
+   ],
+   "members": [
+    "combo_cube_visual",
+    "transformation_cube"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "script:aalto_vase",
+   "signals": [
+    "script"
+   ],
+   "members": [
+    "aalto_vase",
+    "grab_aalto_vase"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "script:alessi_tree",
+   "signals": [
+    "script"
+   ],
+   "members": [
+    "alessi_tree",
+    "grab_alessi_tree"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "script:axis_slider",
+   "signals": [
+    "script"
+   ],
+   "members": [
+    "elevator_platform",
+    "sliding_door"
+   ],
+   "suggested_integration": "self"
+  },
+  {
+   "name": "script:calder_mobile",
+   "signals": [
+    "script"
+   ],
+   "members": [
+    "calder_mobile",
+    "calder_object_mobile"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "script:cube_mound",
+   "signals": [
+    "script"
+   ],
+   "members": [
+    "cube_mound_scene",
+    "cube_mound_scene_sphere"
+   ],
+   "suggested_integration": "self"
+  },
+  {
+   "name": "script:cylinder_radials_rings",
+   "signals": [
+    "script"
+   ],
+   "members": [
+    "cylinder",
+    "cylinder_radials_rings"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "script:edge_zone",
+   "signals": [
+    "script"
+   ],
+   "members": [
+    "edge_zone_crystal",
+    "edge_zone_dissolve"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "script:glass_planes_2_5d",
+   "signals": [
+    "script"
+   ],
+   "members": [
+    "glass_planes_2_5d",
+    "glass_planes_empty"
+   ],
+   "suggested_integration": "self"
+  },
+  {
+   "name": "script:jelly_cube",
+   "signals": [
+    "script"
+   ],
+   "members": [
+    "jelly_cube",
+    "jelly_variants"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "script:line",
+   "signals": [
+    "script"
+   ],
+   "members": [
+    "line",
+    "line_interface"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "script:nail_color_controller",
+   "signals": [
+    "script"
+   ],
+   "members": [
+    "hand_color_controller",
+    "nail_color_controller"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "script:paper_draw_surface",
+   "signals": [
+    "script"
+   ],
+   "members": [
+    "ball_painting_demo",
+    "drawing_paper"
+   ],
+   "suggested_integration": "self"
+  },
+  {
+   "name": "script:pixel_icon",
+   "signals": [
+    "script"
+   ],
+   "members": [
+    "pixel_heart",
+    "pixel_thumb"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "script:proceduralrock",
+   "signals": [
+    "script"
+   ],
+   "members": [
+    "dynamic_rock",
+    "proceduralrock"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "script:randompoints",
+   "signals": [
+    "script"
+   ],
+   "members": [
+    "randompoints",
+    "randompoints_gaussian"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "script:settings_ui",
+   "signals": [
+    "script"
+   ],
+   "members": [
+    "settings_ui",
+    "text_display"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "script:shelf",
+   "signals": [
+    "script"
+   ],
+   "members": [
+    "shelf",
+    "shelf_with_stickers"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "script:snap_connection_manager",
+   "signals": [
+    "script"
+   ],
+   "members": [
+    "line_demo",
+    "snap_demo"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "script:softbody3d",
+   "signals": [
+    "script"
+   ],
+   "members": [
+    "softbody3d",
+    "softmill"
+   ],
+   "suggested_integration": "self"
+  },
+  {
+   "name": "script:tesseract_tunnel",
+   "signals": [
+    "script"
+   ],
+   "members": [
+    "tesseract_tunnel",
+    "tesseract_tunnel_demo"
+   ],
+   "suggested_integration": "self"
+  },
+  {
+   "name": "script:triangularblock",
+   "signals": [
+    "script"
+   ],
+   "members": [
+    "prismblock",
+    "triangularblock"
+   ],
+   "suggested_integration": "review"
+  },
+  {
+   "name": "script:vector_op_console",
+   "signals": [
+    "script"
+   ],
+   "members": [
+    "vector_add",
+    "vector_sub"
+   ],
+   "suggested_integration": "review"
+  }
+ ]
+}
