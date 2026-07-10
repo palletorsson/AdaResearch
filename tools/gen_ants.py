@@ -50,6 +50,8 @@ SEA = mg.SEA                      # "2" — the walkable floor height
 CANVAS = 64                       # working canvas (~64); cropped honest before finish
 ANTS = 30                         # the finding — 30 ants across all connections
 MARGIN = 2                        # plate margin each side (Palle: keep it tight)
+THRESHOLD = 2                     # pheromone -> floor (Palle: raise to 2 — only
+                                  # the well-trodden paths become the plate)
 
 
 # ── the footprint (the plate seed) ──────────────────────────────────────────
@@ -145,10 +147,13 @@ def _walk(phero, start, target, rng, monotone):
     With prob 0.65 it steps toward B (reduces distance); else a lateral veer
     perpendicular to its heading, never immediately backward. A monotone ant
     (ant 0 of every connection) always steps toward B, so it is GUARANTEED to
-    reach the target — that is what wires the plates together."""
+    reach the target — that is what wires the plates together. The monotone
+    spine deposits 2 (the trail the others reinforce) so it survives the
+    pheromone threshold; wobble ants deposit 1 and their solo detours prune."""
+    dep = 2 if monotone else 1
     r, c = start
     tr, tc = target
-    phero[r][c] += 1
+    phero[r][c] += dep
     prev = None
     steps = 0
     while (r, c) != (tr, tc) and steps < 400:
@@ -174,7 +179,7 @@ def _walk(phero, start, target, rng, monotone):
                 break
         prev = (r, c)
         r, c = nxt
-        phero[r][c] += 1
+        phero[r][c] += dep
         steps += 1
 
 
@@ -285,7 +290,7 @@ def build(seq, name, seed):
     trail_cells = 0
     for r in range(CANVAS):
         for c in range(CANVAS):
-            if phero[r][c] >= 1:
+            if phero[r][c] >= THRESHOLD:
                 trail_cells += 1
                 floor.add((r, c))
                 for dr, dc in ((-1, 0), (1, 0), (0, -1), (0, 1)):
@@ -406,7 +411,7 @@ def build(seq, name, seed):
     # 11. report — the plate rects + the trail cell count
     print(f"{name}: {n} heroes, {len(conns)} connections, {ANTS} ants "
           f"-> {W}x{H} cells (canvas {CANVAS}, cropped)")
-    print(f"  trail cells (pheromone>=1): {trail_cells}; floor cells total: {len(floor)}")
+    print(f"  trail cells (pheromone>={THRESHOLD}): {trail_cells}; floor cells total: {len(floor)}")
     for i in range(n):
         x0, y0, pw, ph = plates_t[i]
         print(f"  plate {i + 1:2d} <{casts[i]}>  rect=[x{x0},y{y0},w{pw},h{ph}]")
