@@ -63,13 +63,13 @@ def _integration():
                 if not integ:
                     continue
                 for n in scene_map.get(pr.get("scene", ""), []):
-                    _INTEGRATION[n] = (integ, pr.get("cube_family", "gridglass"))
+                    _INTEGRATION[n] = (integ, pr.get("wrap_family") or pr.get("cube_family", "gridglass"))
             for k in decl.get("kin", {}).values():
                 integ = k.get("integration")
                 if not integ:
                     continue
                 for n in k.get("members", []):
-                    _INTEGRATION.setdefault(n, (integ, k.get("cube_family", "gridglass")))
+                    _INTEGRATION.setdefault(n, (integ, k.get("wrap_family") or k.get("cube_family", "gridglass")))
             for n, fam in decl.get("artifact_overrides", {}).items():
                 if not n.startswith("_"):
                     _INTEGRATION[n] = ("wrap", fam)
