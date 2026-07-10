@@ -24,6 +24,8 @@ const SUBTITLES := {
 	"table_display_1m": "1m table · frameless vertical panel — 2D content edge to edge",
 	"table_display_2m": "2m table · frameless vertical panel — 2D content edge to edge",
 	"podium": "the operating stand — a small interactive at hand height",
+	"plinth": "the display column — small things held to the eye",
+	"frame": "freestanding framed panel · hovering — flat work, wall-free",
 }
 
 var _viewport: SubViewport

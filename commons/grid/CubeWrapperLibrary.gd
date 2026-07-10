@@ -28,7 +28,7 @@ var mat_plate: StandardMaterial3D
 var mat_backlight: StandardMaterial3D
 
 const FAMILIES := ["gridglass", "tank", "cage", "shadowbox", "openframe",
-	"table_display_1m", "table_display_2m", "podium"]
+	"table_display_1m", "table_display_2m", "podium", "plinth", "frame"]
 
 
 func _init() -> void:
@@ -83,6 +83,12 @@ func build(family: String, accent: StandardMaterial3D = null) -> Node3D:
 	if family == "podium":
 		_podium(n, acc)
 		return n
+	if family == "plinth":
+		_plinth(n, acc)
+		return n
+	if family == "frame":
+		_frame(n, acc)
+		return n
 	# the default 1m cube plinth under every housing
 	_box(n, Vector3(1.0, PLINTH_H, 1.0), Vector3(0, PLINTH_H * 0.5, 0), mat_dark)
 	_box(n, Vector3(1.06, 0.05, 1.06), Vector3(0, PLINTH_H - 0.025, 0), mat_steel)
@@ -110,6 +116,10 @@ func mount_point(family: String) -> Vector3:
 		return Vector3(0, 0.82, -0.28)     # on the table, against the panel
 	if family == "podium":
 		return Vector3(0, 1.14, 0)          # the operating surface
+	if family == "plinth":
+		return Vector3(0, 1.0, 0)           # on the top plate
+	if family == "frame":
+		return Vector3(0, 0.85, 0.06)       # in front of the backing, low anchor
 	var hover := 0.05 if family in ["tank", "openframe"] else 0.0
 	return Vector3(0, PLINTH_H + hover + BASE_H + 0.01, 0)
 
@@ -146,6 +156,35 @@ func _podium(n: Node3D, acc: StandardMaterial3D) -> void:
 	_box(n, Vector3(0.3, 0.08, 0.012), Vector3(-0.04, 0.9, 0.21), mat_plate)
 	_box(n, Vector3(0.07, 0.07, 0.018), Vector3(0.14, 0.78, 0.21), acc)
 	_box(n, Vector3(0.4, 0.016, 0.014), Vector3(0, 1.07, 0.21), acc)
+
+
+func _plinth(n: Node3D, acc: StandardMaterial3D) -> void:
+	"""the display column — a small thing held to the eye on a top plate."""
+	_box(n, Vector3(0.66, 0.05, 0.66), Vector3(0, 0.025, 0), mat_dark)     # foot plate
+	_box(n, Vector3(0.5, 0.95, 0.5), Vector3(0, 0.05 + 0.475, 0), mat_dark)  # column
+	_box(n, Vector3(0.6, 0.04, 0.6), Vector3(0, 0.98, 0), mat_steel)       # top plate
+	# hand-grammar on the column front (+Z)
+	_box(n, Vector3(0.3, 0.08, 0.012), Vector3(-0.04, 0.78, 0.251), mat_plate)
+	_box(n, Vector3(0.07, 0.07, 0.018), Vector3(0.15, 0.66, 0.251), acc)
+	_box(n, Vector3(0.4, 0.016, 0.014), Vector3(0, 0.92, 0.251), acc)
+
+
+func _frame(n: Node3D, acc: StandardMaterial3D) -> void:
+	"""a freestanding framed display for flat work — the panel HOVERS above the base."""
+	_box(n, Vector3(1.2, 0.08, 0.3), Vector3(0, 0.04, 0), mat_dark)        # base bar
+	# two slim posts rising from the ends
+	for px in [-0.56, 0.56]:
+		_box(n, Vector3(0.05, 2.2, 0.05), Vector3(px, 0.08 + 1.1, 0), mat_dark)
+	# the framed panel — dark border around an inset white backing, centred ~1.45m
+	var pw := 1.1
+	var ph := 1.4
+	var cy := 1.45
+	_box(n, Vector3(pw, ph, 0.05), Vector3(0, cy, 0), mat_dark)            # frame border
+	_box(n, Vector3(pw - 0.1, ph - 0.1, 0.03), Vector3(0, cy, 0.011), mat_white)  # inset backing
+	# hand-grammar on the base bar front (+Z)
+	_box(n, Vector3(0.3, 0.05, 0.012), Vector3(-0.4, 0.05, 0.151), mat_plate)
+	_box(n, Vector3(0.06, 0.06, 0.018), Vector3(0.48, 0.05, 0.151), acc)
+	_box(n, Vector3(1.2, 0.014, 0.014), Vector3(0, 0.075, 0.151), acc)
 
 
 # ── the chassis: the one hand-grammar ────────────────────────────────────────

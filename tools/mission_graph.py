@@ -35,7 +35,7 @@ import staging_beds as sb
 
 # integration (the common wrapper): principal_artifacts.json declares how an
 # artifact sits in map space — self (own base, no bed), cube (sim_cube housing
-# by family), frame/plinth (bed), field (IS the environment, bare).
+# by family), frame/plinth (own housing), field (IS the environment, bare).
 _INTEGRATION = None
 
 def _integration():
@@ -420,8 +420,9 @@ def build_halls(seq, name):
             integ, cfam = _integration().get(chosen, (None, None))
             if integ in ("self", "field"):
                 layers["interactables"][cr][cc] = chosen
-            elif integ in ("cube", "wrap"):
-                layers["interactables"][cr][cc] = f"sim_cube#family:{cfam}#mount:{chosen}"
+            elif integ in ("cube", "wrap", "plinth", "frame"):
+                fam = cfam if integ in ("cube", "wrap") else integ
+                layers["interactables"][cr][cc] = f"sim_cube#family:{fam}#mount:{chosen}"
             else:
                 # MARRIAGE 1: the bed carries the artifact (staging_beds decides
                 # the body by measured footprint; furnish_gallery convention)
