@@ -51,6 +51,9 @@ static func _frame_one(label: Label3D) -> bool:
 		return false
 	label.set_meta("label_framed", true)
 	label.billboard = BaseMaterial3D.BILLBOARD_DISABLED
+	# hanging labels hover just off their body — the panel behind the glyphs
+	# would embed into it. Nudge the whole assembly forward along its facing.
+	label.position += label.transform.basis.z * 0.035
 	var aabb := label.get_aabb()
 	var w: float = maxf(aabb.size.x + PAD_W * 2.0, MIN_W)
 	var h: float = maxf(aabb.size.y + PAD_H * 2.0, MIN_H)
