@@ -186,6 +186,94 @@
    },
    "bed": "plinth",
    "integration": "plinth"
+  },
+  "pattern_tile_puzzle": {
+   "scene": "res://commons/primitives/arrays/pattern_tile_puzzle.tscn",
+   "kind": "puzzle",
+   "interface": [],
+   "integration": "self",
+   "_note": "integration-only principal: no display{} -> footprints stay measured"
+  },
+  "equipment_assembly_puzzle": {
+   "scene": "res://commons/primitives/assembly/equipment_assembly_puzzle.tscn",
+   "kind": "puzzle",
+   "interface": [],
+   "integration": "self",
+   "_note": "integration-only principal: no display{} -> footprints stay measured"
+  },
+  "chair_assembly_puzzle": {
+   "scene": "res://commons/primitives/furniture/chair_assembly_puzzle.tscn",
+   "kind": "puzzle",
+   "interface": [],
+   "integration": "self",
+   "_note": "integration-only principal: no display{} -> footprints stay measured"
+  },
+  "assembly_line_puzzle": {
+   "scene": "res://commons/primitives/assembly/assembly_line_puzzle.tscn",
+   "kind": "puzzle",
+   "interface": [],
+   "integration": "self",
+   "_note": "integration-only principal: no display{} -> footprints stay measured"
+  },
+  "pulsar_glass_tubes": {
+   "scene": "res://algorithms/arrays/pulsar/pulsar_glass_tubes.tscn",
+   "kind": "instrument",
+   "interface": [],
+   "integration": "self",
+   "_note": "integration-only principal: no display{} -> footprints stay measured"
+  },
+  "grab_sphere_point_with_color": {
+   "scene": "res://commons/primitives/point/grab_sphere_point_with_color.tscn",
+   "kind": "hand",
+   "interface": [],
+   "integration": "wrap",
+   "_note": "integration-only principal: no display{} -> footprints stay measured",
+   "wrap_family": "podium"
+  },
+  "biederman_relief_puzzle": {
+   "scene": "res://commons/primitives/furniture/biederman_relief_puzzle.tscn",
+   "kind": "relief",
+   "interface": [],
+   "integration": "wrap",
+   "_note": "integration-only principal: no display{} -> footprints stay measured",
+   "wrap_family": "table_display_1m"
+  },
+  "reactive_particle_field": {
+   "scene": "res://commons/interfaces/qfep/reactive_particle_field.tscn",
+   "kind": "field",
+   "interface": [],
+   "integration": "field",
+   "_note": "integration-only principal: no display{} -> footprints stay measured"
+  },
+  "metaballs": {
+   "scene": "res://algorithms/proceduralgeneration/isosurfaces/implicitsurfacemodeling/metaballs/metaballs.tscn",
+   "kind": "field",
+   "interface": [],
+   "integration": "field",
+   "_note": "integration-only principal: no display{} -> footprints stay measured"
+  },
+  "crystalcluster": {
+   "scene": "res://commons/primitives/crystalcluster/crystalcluster.tscn",
+   "kind": "specimen",
+   "interface": [],
+   "integration": "plinth",
+   "_note": "integration-only principal: no display{} -> footprints stay measured"
+  },
+  "example_8_4_cantor_set_vr": {
+   "scene": "res://algorithms/fractals/example_8_4_cantor_set_vr.tscn",
+   "kind": "substrate",
+   "interface": [],
+   "integration": "cube",
+   "_note": "integration-only principal: no display{} -> footprints stay measured",
+   "cube_family": "shadowbox"
+  },
+  "example_8_6_recursive_tree_vr": {
+   "scene": "res://algorithms/fractals/example_8_6_recursive_tree_vr.tscn",
+   "kind": "substrate",
+   "interface": [],
+   "integration": "cube",
+   "_note": "integration-only principal: no display{} -> footprints stay measured",
+   "cube_family": "openframe"
   }
  },
  "kin": {
