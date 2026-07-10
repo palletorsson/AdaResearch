@@ -420,9 +420,76 @@ def suspect_double_stand():
     return 0
 
 
+def advise():
+    """the CONSIDERATE pass (Palle: 'these errors should not occur — we need
+    a way to get more considerate in relation to the artifacts'): derive the
+    integration each housed artifact's FORM asks for, from its measured shape,
+    and diff against what is declared. Run BEFORE declaring; rerun after.
+    Rules (aabb w,h,d from the oracle):
+      base >= 6m                      -> field   (it IS the environment)
+      thin plane (min dim <= 0.18*max, h >= 0.7) -> frame/table_display
+      flat slab  (h < 0.35, base >= 1)-> frame/table_display (stand it up)
+      tall (h >= 0.9)                 -> self    (brings its own stand;
+                                          pedestal if elevation is wanted)
+      small (all dims <= 0.45)        -> plinth/podium
+      true volume (dims comparable)   -> cube family
+    """
+    sys.path.insert(0, str(ROOT / "tools"))
+    import mission_graph as mg
+    sizes = json.loads(SIZES.read_text(encoding="utf-8"))["sizes"]
+
+    def form_advice(name):
+        s2 = sizes.get(name, {})
+        ab = s2.get("aabb_size")
+        if not ab or not s2.get("base_m"):
+            return "unmeasured", "?"
+        w, h, dd = float(ab[0]), float(ab[1]), float(ab[2])
+        base = max(w, dd)
+        thin = min(w, dd)
+        if base >= 6.0:
+            return "field", f"{w:.1f}x{h:.1f}x{dd:.1f} room-scale"
+        if h >= 0.7 and thin <= 0.18 * max(base, h):
+            return "frame|table_display", f"{w:.1f}x{h:.1f}x{dd:.1f} vertical plane"
+        if h < 0.35 and base >= 1.0:
+            return "frame|table_display", f"{w:.1f}x{h:.1f}x{dd:.1f} flat slab (stand it up)"
+        if h >= 0.9:
+            return "self(+pedestal)", f"{w:.1f}x{h:.1f}x{dd:.1f} tall — own stand likely"
+        if max(w, h, dd) <= 0.45:
+            return "plinth|podium", f"{w:.1f}x{h:.1f}x{dd:.1f} small"
+        return "cube", f"{w:.1f}x{h:.1f}x{dd:.1f} volume"
+
+    conflicts, agreements = [], 0
+    for name, (integ, fam) in sorted(mg._integration().items()):
+        advice, why = form_advice(name)
+        declared = integ if integ in ("self", "field") else (fam or integ)
+        ok = (advice == "unmeasured"
+              or declared in advice
+              or (advice == "self(+pedestal)" and declared in ("self", "pedestal"))
+              or (advice == "cube" and integ in ("cube",))
+              or (advice == "plinth|podium" and declared in ("plinth", "podium"))
+              or (advice == "frame|table_display" and (
+                  "table_display" in str(declared) or declared == "frame")))
+        if ok:
+            agreements += 1
+        else:
+            conflicts.append({"name": name, "declared": f"{integ}:{fam}",
+                              "form_advises": advice, "evidence": why})
+    out = ROOT / "doc" / "reports" / "integration_advice.json"
+    out.write_text(json.dumps({"agreements": agreements,
+                               "conflicts": conflicts}, indent=1),
+                   encoding="utf-8", newline="\n")
+    print(f"advise: {agreements} agree, {len(conflicts)} conflicts -> {out.name}")
+    for c in conflicts[:15]:
+        print(f"  {c['name']:34s} declared {c['declared']:26s} "
+              f"form: {c['form_advises']:20s} ({c['evidence']})")
+    return 0
+
+
 def main() -> int:
     if "--audit" in sys.argv:
         return audit()
+    if "--advise" in sys.argv:
+        return advise()
     if "--suspect-double-stand" in sys.argv:
         return suspect_double_stand()
     if "--discover" in sys.argv:

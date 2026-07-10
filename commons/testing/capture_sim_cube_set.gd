@@ -26,6 +26,7 @@ const SUBTITLES := {
 	"podium": "the operating stand — a small interactive at hand height",
 	"plinth": "the display column — small things held to the eye",
 	"frame": "freestanding framed panel · hovering — flat work, wall-free",
+	"pedestal": "the 1m elevation base — self-standing instruments, raised",
 }
 
 var _viewport: SubViewport

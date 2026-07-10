@@ -47,9 +47,9 @@
     "depth_m": 0.3,
     "height_m": 2.0
    },
-   "bed": "panel",
-   "integration": "cube",
-   "cube_family": "gridglass"
+   "bed": "none (frame — the 2D plane stands vertical, no 3D housing)",
+   "integration": "wrap",
+   "wrap_family": "frame"
   },
   "grid3d": {
    "scene": "res://commons/substrates/grid3d/grid3d_substrate.tscn",
@@ -485,7 +485,8 @@
  "artifact_overrides": {
   "_note": "per-artifact integration overrides — for lone artifacts outside any principal/kin; value = wrapper family name OR 'self'/'field'. RULE (Palle): artifacts that bring their own pedestal/stand are SELF — never double-stand them.",
   "coin_toss": "self",
-  "dice_throw": "self"
+  "dice_throw": "self",
+  "galton_board": "pedestal"
  },
  "feature_principals": {
   "_note": "Palle 2026-07-09: 'what we are looking for is artifacts that share the same FEATURE we can optimize' — component-level principals, props-dna style (one parametric .gd, DNA variants). control_console is the built prototype: a console that houses any machine's controls. Census = how many artifact .gd files hand-roll each part today. Migration: extract the part as a parametric prop, artifacts compose instead of hand-rolling. Also the DOUBLE-STAND RULE: artifacts that bring their own pedestal are integration:self — never wrap them (coin_toss was the first catch; 115 suspects in doc/reports/double_stand_suspects.json).",

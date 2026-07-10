@@ -1,0 +1,857 @@
+{
+ "agreements": 96,
+ "conflicts": [
+  {
+   "name": "additive_wave_demo",
+   "declared": "field:gridglass",
+   "form_advises": "self(+pedestal)",
+   "evidence": "3.0x1.0x1.0 tall \u2014 own stand likely"
+  },
+  {
+   "name": "albers_relief",
+   "declared": "wrap:table_display_1m",
+   "form_advises": "self(+pedestal)",
+   "evidence": "1.0x1.3x0.5 tall \u2014 own stand likely"
+  },
+  {
+   "name": "analysis_station_puzzle",
+   "declared": "self:gridglass",
+   "form_advises": "frame|table_display",
+   "evidence": "1.0x0.3x0.8 flat slab (stand it up)"
+  },
+  {
+   "name": "array_disco_substrate",
+   "declared": "wrap:frame",
+   "form_advises": "self(+pedestal)",
+   "evidence": "1.0x1.0x1.0 tall \u2014 own stand likely"
+  },
+  {
+   "name": "array_random_substrate",
+   "declared": "wrap:frame",
+   "form_advises": "self(+pedestal)",
+   "evidence": "1.0x1.0x1.0 tall \u2014 own stand likely"
+  },
+  {
+   "name": "array_slow_substrate",
+   "declared": "wrap:frame",
+   "form_advises": "self(+pedestal)",
+   "evidence": "1.0x1.0x1.0 tall \u2014 own stand likely"
+  },
+  {
+   "name": "assembly_line_puzzle",
+   "declared": "self:gridglass",
+   "form_advises": "frame|table_display",
+   "evidence": "2.1x0.3x1.6 flat slab (stand it up)"
+  },
+  {
+   "name": "biederman_relief",
+   "declared": "wrap:table_display_1m",
+   "form_advises": "self(+pedestal)",
+   "evidence": "1.0x1.3x0.5 tall \u2014 own stand likely"
+  },
+  {
+   "name": "buren_col_01_01",
+   "declared": "wrap:table_display_2m",
+   "form_advises": "field",
+   "evidence": "1.0x1.0x6.0 room-scale"
+  },
+  {
+   "name": "buren_col_01_04",
+   "declared": "wrap:table_display_2m",
+   "form_advises": "field",
+   "evidence": "1.0x1.0x6.0 room-scale"
+  },
+  {
+   "name": "buren_col_01_07",
+   "declared": "wrap:table_display_2m",
+   "form_advises": "field",
+   "evidence": "1.0x1.0x6.0 room-scale"
+  },
+  {
+   "name": "buren_col_01_10",
+   "declared": "wrap:table_display_2m",
+   "form_advises": "field",
+   "evidence": "1.0x1.0x6.0 room-scale"
+  },
+  {
+   "name": "buren_col_04_01",
+   "declared": "wrap:table_display_2m",
+   "form_advises": "field",
+   "evidence": "1.0x1.0x6.0 room-scale"
+  },
+  {
+   "name": "buren_col_04_04",
+   "declared": "wrap:table_display_2m",
+   "form_advises": "field",
+   "evidence": "1.0x1.0x6.0 room-scale"
+  },
+  {
+   "name": "buren_col_04_07",
+   "declared": "wrap:table_display_2m",
+   "form_advises": "field",
+   "evidence": "1.0x1.0x6.0 room-scale"
+  },
+  {
+   "name": "buren_col_04_10",
+   "declared": "wrap:table_display_2m",
+   "form_advises": "field",
+   "evidence": "1.0x1.0x6.0 room-scale"
+  },
+  {
+   "name": "buren_col_07_01",
+   "declared": "wrap:table_display_2m",
+   "form_advises": "field",
+   "evidence": "1.0x1.0x6.0 room-scale"
+  },
+  {
+   "name": "buren_col_07_04",
+   "declared": "wrap:table_display_2m",
+   "form_advises": "field",
+   "evidence": "1.0x1.0x6.0 room-scale"
+  },
+  {
+   "name": "buren_col_07_07",
+   "declared": "wrap:table_display_2m",
+   "form_advises": "field",
+   "evidence": "1.0x1.0x6.0 room-scale"
+  },
+  {
+   "name": "buren_col_07_10",
+   "declared": "wrap:table_display_2m",
+   "form_advises": "field",
+   "evidence": "1.0x1.0x6.0 room-scale"
+  },
+  {
+   "name": "buren_col_10_01",
+   "declared": "wrap:table_display_2m",
+   "form_advises": "field",
+   "evidence": "1.0x1.0x6.0 room-scale"
+  },
+  {
+   "name": "buren_col_10_04",
+   "declared": "wrap:table_display_2m",
+   "form_advises": "field",
+   "evidence": "1.0x1.0x6.0 room-scale"
+  },
+  {
+   "name": "buren_col_10_07",
+   "declared": "wrap:table_display_2m",
+   "form_advises": "field",
+   "evidence": "1.0x1.0x6.0 room-scale"
+  },
+  {
+   "name": "buren_col_10_10",
+   "declared": "wrap:table_display_2m",
+   "form_advises": "field",
+   "evidence": "1.0x1.0x6.0 room-scale"
+  },
+  {
+   "name": "ca_screen",
+   "declared": "wrap:table_display_1m",
+   "form_advises": "plinth|podium",
+   "evidence": "0.2x0.2x0.0 small"
+  },
+  {
+   "name": "composition_artifact",
+   "declared": "wrap:table_display_2m",
+   "form_advises": "self(+pedestal)",
+   "evidence": "2.0x2.0x4.0 tall \u2014 own stand likely"
+  },
+  {
+   "name": "constructivist_relief",
+   "declared": "wrap:table_display_1m",
+   "form_advises": "self(+pedestal)",
+   "evidence": "1.0x1.3x0.5 tall \u2014 own stand likely"
+  },
+  {
+   "name": "crystal_cluster",
+   "declared": "plinth:gridglass",
+   "form_advises": "cube",
+   "evidence": "0.9x0.7x0.7 volume"
+  },
+  {
+   "name": "crystal_formation",
+   "declared": "plinth:gridglass",
+   "form_advises": "cube",
+   "evidence": "0.7x0.7x0.8 volume"
+  },
+  {
+   "name": "crystalcluster",
+   "declared": "plinth:gridglass",
+   "form_advises": "cube",
+   "evidence": "0.8x0.7x0.7 volume"
+  },
+  {
+   "name": "diagnostic_station_puzzle",
+   "declared": "self:gridglass",
+   "form_advises": "frame|table_display",
+   "evidence": "1.0x0.3x0.8 flat slab (stand it up)"
+  },
+  {
+   "name": "edge_particles",
+   "declared": "field:gridglass",
+   "form_advises": "self(+pedestal)",
+   "evidence": "2.0x1.5x2.0 tall \u2014 own stand likely"
+  },
+  {
+   "name": "emergence_zone",
+   "declared": "field:gridglass",
+   "form_advises": "self(+pedestal)",
+   "evidence": "2.0x1.5x2.0 tall \u2014 own stand likely"
+  },
+  {
+   "name": "equipment_assembly_puzzle",
+   "declared": "self:gridglass",
+   "form_advises": "frame|table_display",
+   "evidence": "1.0x0.3x0.8 flat slab (stand it up)"
+  },
+  {
+   "name": "example_3_8_static_wave_vr",
+   "declared": "field:gridglass",
+   "form_advises": "self(+pedestal)",
+   "evidence": "1.0x1.0x1.0 tall \u2014 own stand likely"
+  },
+  {
+   "name": "example_8_6_recursive_tree_vr",
+   "declared": "cube:openframe",
+   "form_advises": "plinth|podium",
+   "evidence": "0.1x0.1x0.0 small"
+  },
+  {
+   "name": "fractal_recursive_tree",
+   "declared": "cube:openframe",
+   "form_advises": "plinth|podium",
+   "evidence": "0.1x0.1x0.0 small"
+  },
+  {
+   "name": "galton_board",
+   "declared": "wrap:pedestal",
+   "form_advises": "cube",
+   "evidence": "0.5x0.9x0.3 volume"
+  },
+  {
+   "name": "grid3d",
+   "declared": "cube:gridglass",
+   "form_advises": "self(+pedestal)",
+   "evidence": "2.6x2.4x2.6 tall \u2014 own stand likely"
+  },
+  {
+   "name": "grid3d_bfs",
+   "declared": "cube:gridglass",
+   "form_advises": "self(+pedestal)",
+   "evidence": "2.6x2.4x2.6 tall \u2014 own stand likely"
+  },
+  {
+   "name": "grid3d_dfs",
+   "declared": "cube:gridglass",
+   "form_advises": "self(+pedestal)",
+   "evidence": "2.6x2.4x2.6 tall \u2014 own stand likely"
+  },
+  {
+   "name": "grid3d_dijkstra",
+   "declared": "cube:gridglass",
+   "form_advises": "self(+pedestal)",
+   "evidence": "2.6x2.4x2.6 tall \u2014 own stand likely"
+  },
+  {
+   "name": "grid3d_entropy",
+   "declared": "cube:gridglass",
+   "form_advises": "self(+pedestal)",
+   "evidence": "2.6x2.4x2.6 tall \u2014 own stand likely"
+  },
+  {
+   "name": "grid3d_force_directed",
+   "declared": "cube:gridglass",
+   "form_advises": "self(+pedestal)",
+   "evidence": "2.6x2.4x2.6 tall \u2014 own stand likely"
+  },
+  {
+   "name": "grid3d_kruskal",
+   "declared": "cube:gridglass",
+   "form_advises": "self(+pedestal)",
+   "evidence": "2.6x2.4x2.6 tall \u2014 own stand likely"
+  },
+  {
+   "name": "grid3d_prim",
+   "declared": "cube:gridglass",
+   "form_advises": "self(+pedestal)",
+   "evidence": "2.6x2.4x2.6 tall \u2014 own stand likely"
+  },
+  {
+   "name": "grid3d_random_graph",
+   "declared": "cube:gridglass",
+   "form_advises": "self(+pedestal)",
+   "evidence": "2.6x2.4x2.6 tall \u2014 own stand likely"
+  },
+  {
+   "name": "lab_assembly_puzzle",
+   "declared": "self:gridglass",
+   "form_advises": "frame|table_display",
+   "evidence": "2.1x0.3x1.6 flat slab (stand it up)"
+  },
+  {
+   "name": "living_paper",
+   "declared": "wrap:table_display_1m",
+   "form_advises": "plinth|podium",
+   "evidence": "0.2x0.2x0.1 small"
+  },
+  {
+   "name": "living_paper_bfs",
+   "declared": "wrap:table_display_1m",
+   "form_advises": "self(+pedestal)",
+   "evidence": "1.0x1.3x0.3 tall \u2014 own stand likely"
+  },
+  {
+   "name": "living_paper_brians_brain",
+   "declared": "wrap:table_display_1m",
+   "form_advises": "self(+pedestal)",
+   "evidence": "1.0x1.3x0.3 tall \u2014 own stand likely"
+  },
+  {
+   "name": "living_paper_brownian",
+   "declared": "wrap:table_display_1m",
+   "form_advises": "self(+pedestal)",
+   "evidence": "1.0x1.3x0.3 tall \u2014 own stand likely"
+  },
+  {
+   "name": "living_paper_bubble_sort",
+   "declared": "wrap:table_display_1m",
+   "form_advises": "self(+pedestal)",
+   "evidence": "1.0x1.3x0.3 tall \u2014 own stand likely"
+  },
+  {
+   "name": "living_paper_dfs_maze",
+   "declared": "wrap:table_display_1m",
+   "form_advises": "self(+pedestal)",
+   "evidence": "1.0x1.3x0.3 tall \u2014 own stand likely"
+  },
+  {
+   "name": "living_paper_dla",
+   "declared": "wrap:table_display_1m",
+   "form_advises": "self(+pedestal)",
+   "evidence": "1.0x1.3x0.3 tall \u2014 own stand likely"
+  },
+  {
+   "name": "living_paper_dragon",
+   "declared": "wrap:table_display_1m",
+   "form_advises": "self(+pedestal)",
+   "evidence": "1.0x1.3x0.3 tall \u2014 own stand likely"
+  },
+  {
+   "name": "living_paper_fern",
+   "declared": "wrap:table_display_1m",
+   "form_advises": "self(+pedestal)",
+   "evidence": "1.0x1.3x0.3 tall \u2014 own stand likely"
+  },
+  {
+   "name": "living_paper_fourier",
+   "declared": "wrap:table_display_1m",
+   "form_advises": "self(+pedestal)",
+   "evidence": "1.0x1.3x0.3 tall \u2014 own stand likely"
+  },
+  {
+   "name": "living_paper_heat",
+   "declared": "wrap:table_display_1m",
+   "form_advises": "self(+pedestal)",
+   "evidence": "1.0x1.3x0.3 tall \u2014 own stand likely"
+  },
+  {
+   "name": "living_paper_insertion_sort",
+   "declared": "wrap:table_display_1m",
+   "form_advises": "self(+pedestal)",
+   "evidence": "1.0x1.3x0.3 tall \u2014 own stand likely"
+  },
+  {
+   "name": "living_paper_julia",
+   "declared": "wrap:table_display_1m",
+   "form_advises": "self(+pedestal)",
+   "evidence": "1.0x1.3x0.3 tall \u2014 own stand likely"
+  },
+  {
+   "name": "living_paper_kmeans",
+   "declared": "wrap:table_display_1m",
+   "form_advises": "self(+pedestal)",
+   "evidence": "1.0x1.3x0.3 tall \u2014 own stand likely"
+  },
+  {
+   "name": "living_paper_koch",
+   "declared": "wrap:table_display_1m",
+   "form_advises": "self(+pedestal)",
+   "evidence": "1.0x1.3x0.3 tall \u2014 own stand likely"
+  },
+  {
+   "name": "living_paper_levy",
+   "declared": "wrap:table_display_1m",
+   "form_advises": "self(+pedestal)",
+   "evidence": "1.0x1.3x0.3 tall \u2014 own stand likely"
+  },
+  {
+   "name": "living_paper_life",
+   "declared": "wrap:table_display_1m",
+   "form_advises": "self(+pedestal)",
+   "evidence": "1.0x1.3x0.3 tall \u2014 own stand likely"
+  },
+  {
+   "name": "living_paper_lissajous",
+   "declared": "wrap:table_display_1m",
+   "form_advises": "self(+pedestal)",
+   "evidence": "1.0x1.3x0.3 tall \u2014 own stand likely"
+  },
+  {
+   "name": "living_paper_mandelbrot",
+   "declared": "wrap:table_display_1m",
+   "form_advises": "self(+pedestal)",
+   "evidence": "1.0x1.3x0.3 tall \u2014 own stand likely"
+  },
+  {
+   "name": "living_paper_merge_sort",
+   "declared": "wrap:table_display_1m",
+   "form_advises": "self(+pedestal)",
+   "evidence": "1.0x1.3x0.3 tall \u2014 own stand likely"
+  },
+  {
+   "name": "living_paper_noise_octaves",
+   "declared": "wrap:table_display_1m",
+   "form_advises": "self(+pedestal)",
+   "evidence": "1.0x1.3x0.3 tall \u2014 own stand likely"
+  },
+  {
+   "name": "living_paper_perlin",
+   "declared": "wrap:table_display_1m",
+   "form_advises": "self(+pedestal)",
+   "evidence": "1.0x1.3x0.3 tall \u2014 own stand likely"
+  },
+  {
+   "name": "living_paper_quadtree",
+   "declared": "wrap:table_display_1m",
+   "form_advises": "self(+pedestal)",
+   "evidence": "1.0x1.3x0.3 tall \u2014 own stand likely"
+  },
+  {
+   "name": "living_paper_quick_sort",
+   "declared": "wrap:table_display_1m",
+   "form_advises": "self(+pedestal)",
+   "evidence": "1.0x1.3x0.3 tall \u2014 own stand likely"
+  },
+  {
+   "name": "living_paper_random_walk",
+   "declared": "wrap:table_display_1m",
+   "form_advises": "self(+pedestal)",
+   "evidence": "1.0x1.3x0.3 tall \u2014 own stand likely"
+  },
+  {
+   "name": "living_paper_reaction_diffusion",
+   "declared": "wrap:table_display_1m",
+   "form_advises": "self(+pedestal)",
+   "evidence": "1.0x1.3x0.3 tall \u2014 own stand likely"
+  },
+  {
+   "name": "living_paper_rule110",
+   "declared": "wrap:table_display_1m",
+   "form_advises": "self(+pedestal)",
+   "evidence": "1.0x1.3x0.3 tall \u2014 own stand likely"
+  },
+  {
+   "name": "living_paper_rule30",
+   "declared": "wrap:table_display_1m",
+   "form_advises": "self(+pedestal)",
+   "evidence": "1.0x1.3x0.3 tall \u2014 own stand likely"
+  },
+  {
+   "name": "living_paper_seeds",
+   "declared": "wrap:table_display_1m",
+   "form_advises": "self(+pedestal)",
+   "evidence": "1.0x1.3x0.3 tall \u2014 own stand likely"
+  },
+  {
+   "name": "living_paper_self_avoiding",
+   "declared": "wrap:table_display_1m",
+   "form_advises": "self(+pedestal)",
+   "evidence": "1.0x1.3x0.3 tall \u2014 own stand likely"
+  },
+  {
+   "name": "living_paper_sierpinski",
+   "declared": "wrap:table_display_1m",
+   "form_advises": "self(+pedestal)",
+   "evidence": "1.0x1.3x0.3 tall \u2014 own stand likely"
+  },
+  {
+   "name": "living_paper_sine",
+   "declared": "wrap:table_display_1m",
+   "form_advises": "self(+pedestal)",
+   "evidence": "1.0x1.3x0.3 tall \u2014 own stand likely"
+  },
+  {
+   "name": "living_paper_tree",
+   "declared": "wrap:table_display_1m",
+   "form_advises": "self(+pedestal)",
+   "evidence": "1.0x1.3x0.3 tall \u2014 own stand likely"
+  },
+  {
+   "name": "living_paper_voronoi",
+   "declared": "wrap:table_display_1m",
+   "form_advises": "self(+pedestal)",
+   "evidence": "1.0x1.3x0.3 tall \u2014 own stand likely"
+  },
+  {
+   "name": "measurement_station_puzzle",
+   "declared": "self:gridglass",
+   "form_advises": "frame|table_display",
+   "evidence": "1.0x0.3x0.8 flat slab (stand it up)"
+  },
+  {
+   "name": "mesh_grammar",
+   "declared": "plinth:gridglass",
+   "form_advises": "self(+pedestal)",
+   "evidence": "0.9x0.9x0.9 tall \u2014 own stand likely"
+  },
+  {
+   "name": "mesh_grammar_barnacle",
+   "declared": "plinth:gridglass",
+   "form_advises": "self(+pedestal)",
+   "evidence": "0.9x0.9x0.9 tall \u2014 own stand likely"
+  },
+  {
+   "name": "mesh_grammar_blooming_bulge",
+   "declared": "plinth:gridglass",
+   "form_advises": "self(+pedestal)",
+   "evidence": "0.9x0.9x0.9 tall \u2014 own stand likely"
+  },
+  {
+   "name": "mesh_grammar_branching_coral",
+   "declared": "plinth:gridglass",
+   "form_advises": "self(+pedestal)",
+   "evidence": "0.9x0.9x0.9 tall \u2014 own stand likely"
+  },
+  {
+   "name": "mesh_grammar_budding",
+   "declared": "plinth:gridglass",
+   "form_advises": "self(+pedestal)",
+   "evidence": "0.9x0.9x0.9 tall \u2014 own stand likely"
+  },
+  {
+   "name": "mesh_grammar_ca_growth",
+   "declared": "plinth:gridglass",
+   "form_advises": "self(+pedestal)",
+   "evidence": "0.9x0.9x0.9 tall \u2014 own stand likely"
+  },
+  {
+   "name": "mesh_grammar_coral_fingers",
+   "declared": "plinth:gridglass",
+   "form_advises": "self(+pedestal)",
+   "evidence": "0.9x0.9x0.9 tall \u2014 own stand likely"
+  },
+  {
+   "name": "mesh_grammar_crumpled",
+   "declared": "plinth:gridglass",
+   "form_advises": "self(+pedestal)",
+   "evidence": "0.9x0.9x0.9 tall \u2014 own stand likely"
+  },
+  {
+   "name": "mesh_grammar_detailed_bulge",
+   "declared": "plinth:gridglass",
+   "form_advises": "self(+pedestal)",
+   "evidence": "0.9x0.9x0.9 tall \u2014 own stand likely"
+  },
+  {
+   "name": "mesh_grammar_extruded_spire",
+   "declared": "plinth:gridglass",
+   "form_advises": "self(+pedestal)",
+   "evidence": "0.9x0.9x0.9 tall \u2014 own stand likely"
+  },
+  {
+   "name": "mesh_grammar_inset_pattern",
+   "declared": "plinth:gridglass",
+   "form_advises": "self(+pedestal)",
+   "evidence": "0.9x0.9x0.9 tall \u2014 own stand likely"
+  },
+  {
+   "name": "mesh_grammar_inset_towers",
+   "declared": "plinth:gridglass",
+   "form_advises": "self(+pedestal)",
+   "evidence": "0.9x0.9x0.9 tall \u2014 own stand likely"
+  },
+  {
+   "name": "mesh_grammar_lsystem_tree",
+   "declared": "plinth:gridglass",
+   "form_advises": "self(+pedestal)",
+   "evidence": "0.9x0.9x0.9 tall \u2014 own stand likely"
+  },
+  {
+   "name": "mesh_grammar_nodule_sphere",
+   "declared": "plinth:gridglass",
+   "form_advises": "self(+pedestal)",
+   "evidence": "0.9x0.9x0.9 tall \u2014 own stand likely"
+  },
+  {
+   "name": "mesh_grammar_noise_sculpture",
+   "declared": "plinth:gridglass",
+   "form_advises": "self(+pedestal)",
+   "evidence": "0.9x0.9x0.9 tall \u2014 own stand likely"
+  },
+  {
+   "name": "mesh_grammar_petal_flower",
+   "declared": "plinth:gridglass",
+   "form_advises": "self(+pedestal)",
+   "evidence": "0.9x0.9x0.9 tall \u2014 own stand likely"
+  },
+  {
+   "name": "mesh_grammar_riveted",
+   "declared": "plinth:gridglass",
+   "form_advises": "self(+pedestal)",
+   "evidence": "0.9x0.9x0.9 tall \u2014 own stand likely"
+  },
+  {
+   "name": "mesh_grammar_scale_armor",
+   "declared": "plinth:gridglass",
+   "form_advises": "self(+pedestal)",
+   "evidence": "0.9x0.9x0.9 tall \u2014 own stand likely"
+  },
+  {
+   "name": "mesh_grammar_seed",
+   "declared": "plinth:gridglass",
+   "form_advises": "self(+pedestal)",
+   "evidence": "0.9x0.9x0.9 tall \u2014 own stand likely"
+  },
+  {
+   "name": "mesh_grammar_spike_ball",
+   "declared": "plinth:gridglass",
+   "form_advises": "self(+pedestal)",
+   "evidence": "0.9x0.9x0.9 tall \u2014 own stand likely"
+  },
+  {
+   "name": "mesh_grammar_subdivided",
+   "declared": "plinth:gridglass",
+   "form_advises": "self(+pedestal)",
+   "evidence": "0.9x0.9x0.9 tall \u2014 own stand likely"
+  },
+  {
+   "name": "mondrian_relief",
+   "declared": "wrap:table_display_1m",
+   "form_advises": "self(+pedestal)",
+   "evidence": "1.0x1.3x0.5 tall \u2014 own stand likely"
+  },
+  {
+   "name": "pattern_tile_4x4",
+   "declared": "self:gridglass",
+   "form_advises": "cube",
+   "evidence": "0.8x0.8x0.8 volume"
+  },
+  {
+   "name": "pattern_tile_8x8",
+   "declared": "self:gridglass",
+   "form_advises": "cube",
+   "evidence": "0.8x0.8x0.8 volume"
+  },
+  {
+   "name": "pattern_tile_brick",
+   "declared": "self:gridglass",
+   "form_advises": "cube",
+   "evidence": "0.8x0.8x0.8 volume"
+  },
+  {
+   "name": "pattern_tile_herringbone",
+   "declared": "self:gridglass",
+   "form_advises": "cube",
+   "evidence": "0.8x0.8x0.8 volume"
+  },
+  {
+   "name": "pattern_tile_mirror",
+   "declared": "self:gridglass",
+   "form_advises": "cube",
+   "evidence": "0.8x0.8x0.8 volume"
+  },
+  {
+   "name": "pattern_tile_puzzle",
+   "declared": "self:gridglass",
+   "form_advises": "cube",
+   "evidence": "0.8x0.8x0.8 volume"
+  },
+  {
+   "name": "pattern_tunnel_machine",
+   "declared": "self:gridglass",
+   "form_advises": "field",
+   "evidence": "3.0x3.0x10.0 room-scale"
+  },
+  {
+   "name": "profile",
+   "declared": "cube:shadowbox",
+   "form_advises": "frame|table_display",
+   "evidence": "2.0x1.5x0.3 vertical plane"
+  },
+  {
+   "name": "profile_beat",
+   "declared": "cube:shadowbox",
+   "form_advises": "frame|table_display",
+   "evidence": "2.0x1.5x0.3 vertical plane"
+  },
+  {
+   "name": "profile_bell_curve",
+   "declared": "cube:shadowbox",
+   "form_advises": "frame|table_display",
+   "evidence": "2.0x1.5x0.3 vertical plane"
+  },
+  {
+   "name": "profile_brownian",
+   "declared": "cube:shadowbox",
+   "form_advises": "frame|table_display",
+   "evidence": "2.0x1.5x0.3 vertical plane"
+  },
+  {
+   "name": "profile_damped",
+   "declared": "cube:shadowbox",
+   "form_advises": "frame|table_display",
+   "evidence": "2.0x1.5x0.3 vertical plane"
+  },
+  {
+   "name": "profile_fourier",
+   "declared": "cube:shadowbox",
+   "form_advises": "frame|table_display",
+   "evidence": "2.0x1.5x0.3 vertical plane"
+  },
+  {
+   "name": "profile_gradient_descent",
+   "declared": "cube:shadowbox",
+   "form_advises": "frame|table_display",
+   "evidence": "2.0x1.5x0.3 vertical plane"
+  },
+  {
+   "name": "profile_lissajous",
+   "declared": "cube:shadowbox",
+   "form_advises": "frame|table_display",
+   "evidence": "2.0x1.5x0.3 vertical plane"
+  },
+  {
+   "name": "profile_logistic",
+   "declared": "cube:shadowbox",
+   "form_advises": "frame|table_display",
+   "evidence": "2.0x1.5x0.3 vertical plane"
+  },
+  {
+   "name": "profile_noise",
+   "declared": "cube:shadowbox",
+   "form_advises": "frame|table_display",
+   "evidence": "2.0x1.5x0.3 vertical plane"
+  },
+  {
+   "name": "profile_noise_octaves",
+   "declared": "cube:shadowbox",
+   "form_advises": "frame|table_display",
+   "evidence": "2.0x1.5x0.3 vertical plane"
+  },
+  {
+   "name": "profile_random_walk",
+   "declared": "cube:shadowbox",
+   "form_advises": "frame|table_display",
+   "evidence": "2.0x1.5x0.3 vertical plane"
+  },
+  {
+   "name": "profile_saw",
+   "declared": "cube:shadowbox",
+   "form_advises": "frame|table_display",
+   "evidence": "2.0x1.5x0.3 vertical plane"
+  },
+  {
+   "name": "profile_sine",
+   "declared": "cube:shadowbox",
+   "form_advises": "frame|table_display",
+   "evidence": "2.0x1.5x0.3 vertical plane"
+  },
+  {
+   "name": "profile_spring",
+   "declared": "cube:shadowbox",
+   "form_advises": "frame|table_display",
+   "evidence": "2.0x1.5x0.3 vertical plane"
+  },
+  {
+   "name": "profile_square",
+   "declared": "cube:shadowbox",
+   "form_advises": "frame|table_display",
+   "evidence": "2.0x1.5x0.3 vertical plane"
+  },
+  {
+   "name": "profile_triangle",
+   "declared": "cube:shadowbox",
+   "form_advises": "frame|table_display",
+   "evidence": "2.0x1.5x0.3 vertical plane"
+  },
+  {
+   "name": "pulsar_compact",
+   "declared": "self:gridglass",
+   "form_advises": "cube",
+   "evidence": "0.7x0.2x1.0 volume"
+  },
+  {
+   "name": "pulsar_glass_tubes",
+   "declared": "self:gridglass",
+   "form_advises": "cube",
+   "evidence": "0.7x0.2x1.0 volume"
+  },
+  {
+   "name": "pulsar_lines",
+   "declared": "self:gridglass",
+   "form_advises": "cube",
+   "evidence": "0.7x0.2x1.0 volume"
+  },
+  {
+   "name": "random_walker_machine",
+   "declared": "self:gridglass",
+   "form_advises": "field",
+   "evidence": "20.7x2.1x20.4 room-scale"
+  },
+  {
+   "name": "reactive_particle_field",
+   "declared": "field:gridglass",
+   "form_advises": "self(+pedestal)",
+   "evidence": "2.0x1.5x2.0 tall \u2014 own stand likely"
+  },
+  {
+   "name": "reactive_particles",
+   "declared": "field:gridglass",
+   "form_advises": "self(+pedestal)",
+   "evidence": "2.0x1.6x2.0 tall \u2014 own stand likely"
+  },
+  {
+   "name": "scientific_assembly_puzzle",
+   "declared": "self:gridglass",
+   "form_advises": "frame|table_display",
+   "evidence": "2.1x0.3x1.6 flat slab (stand it up)"
+  },
+  {
+   "name": "score_display",
+   "declared": "wrap:table_display_1m",
+   "form_advises": "cube",
+   "evidence": "0.6x0.2x0.1 volume"
+  },
+  {
+   "name": "stool_assembly_puzzle",
+   "declared": "self:gridglass",
+   "form_advises": "cube",
+   "evidence": "1.1x0.9x0.6 volume"
+  },
+  {
+   "name": "storage_station_puzzle",
+   "declared": "self:gridglass",
+   "form_advises": "frame|table_display",
+   "evidence": "1.0x0.3x0.8 flat slab (stand it up)"
+  },
+  {
+   "name": "table_assembly_puzzle",
+   "declared": "self:gridglass",
+   "form_advises": "cube",
+   "evidence": "1.1x0.8x0.6 volume"
+  },
+  {
+   "name": "test_scene_5",
+   "declared": "cube:openframe",
+   "form_advises": "plinth|podium",
+   "evidence": "0.1x0.1x0.0 small"
+  },
+  {
+   "name": "transformation_workbench",
+   "declared": "self:gridglass",
+   "form_advises": "cube",
+   "evidence": "1.4x0.7x0.4 volume"
+  }
+ ]
+}

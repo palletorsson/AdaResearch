@@ -28,7 +28,7 @@ var mat_plate: StandardMaterial3D
 var mat_backlight: StandardMaterial3D
 
 const FAMILIES := ["gridglass", "tank", "cage", "shadowbox", "openframe",
-	"table_display_1m", "table_display_2m", "podium", "plinth", "frame"]
+	"table_display_1m", "table_display_2m", "podium", "plinth", "frame", "pedestal"]
 
 
 func _init() -> void:
@@ -83,6 +83,9 @@ func build(family: String, accent: StandardMaterial3D = null) -> Node3D:
 	if family == "podium":
 		_podium(n, acc)
 		return n
+	if family == "pedestal":
+		_pedestal(n, acc)
+		return n
 	if family == "plinth":
 		_plinth(n, acc)
 		return n
@@ -110,8 +113,18 @@ func build(family: String, accent: StandardMaterial3D = null) -> Node3D:
 	return n
 
 
+func mount_rotation(family: String) -> Vector3:
+	"""radians. Families made for FLAT content stand it upright: a plane
+	lying in XZ (normal +Y) rotates -90deg about X to face the viewer."""
+	if family == "frame":
+		return Vector3(-PI * 0.5, 0, 0)
+	return Vector3.ZERO
+
+
 func mount_point(family: String) -> Vector3:
 	"""where the housed artifact's origin should sit (local)."""
+	if family == "pedestal":
+		return Vector3(0, 1.02, 0)          # on the platform top
 	if family in ["table_display_1m", "table_display_2m"]:
 		return Vector3(0, 0.82, -0.28)     # on the table, against the panel
 	if family == "podium":
@@ -144,6 +157,18 @@ func _table_display(n: Node3D, acc: StandardMaterial3D, w: float) -> void:
 	_box(n, Vector3(0.34, 0.08, 0.012), Vector3(-w * 0.5 + 0.24, top_y - 0.06, 0.4), mat_plate)
 	_box(n, Vector3(0.08, 0.08, 0.02), Vector3(w * 0.5 - 0.12, top_y - 0.06, 0.4), acc)
 	_box(n, Vector3(w, 0.018, 0.014), Vector3(0, top_y + 0.055, 0.4), acc)
+
+
+func _pedestal(n: Node3D, acc: StandardMaterial3D) -> void:
+	"""the 1m elevation base — a broad sturdy platform for self-standing
+	instruments (the galton class): elevation, not housing."""
+	_box(n, Vector3(1.3, 0.08, 1.3), Vector3(0, 0.04, 0), mat_dark)      # foot
+	_box(n, Vector3(1.1, 0.86, 1.1), Vector3(0, 0.08 + 0.43, 0), mat_dark)
+	_box(n, Vector3(1.24, 0.06, 1.24), Vector3(0, 0.97, 0), mat_steel)   # platform
+	# hand-grammar on the front face
+	_box(n, Vector3(0.34, 0.09, 0.012), Vector3(-0.3, 0.8, 0.56), mat_plate)
+	_box(n, Vector3(0.08, 0.08, 0.02), Vector3(0.4, 0.8, 0.56), acc)
+	_box(n, Vector3(1.1, 0.018, 0.014), Vector3(0, 0.94, 0.56), acc)
 
 
 func _podium(n: Node3D, acc: StandardMaterial3D) -> void:

@@ -32,10 +32,10 @@ func _build() -> void:
 	housing.name = "Housing"
 	add_child(housing)
 	if mount != "":
-		_mount_artifact(mount, lib.mount_point(family))
+		_mount_artifact(mount, lib.mount_point(family), lib.mount_rotation(family))
 
 
-func _mount_artifact(lookup: String, at: Vector3) -> void:
+func _mount_artifact(lookup: String, at: Vector3, rot: Vector3 = Vector3.ZERO) -> void:
 	var dir := DirAccess.open("res://commons/artifacts/registry/")
 	if dir == null:
 		return
@@ -59,4 +59,5 @@ func _mount_artifact(lookup: String, at: Vector3) -> void:
 	var inst = scene.instantiate()
 	if inst is Node3D:
 		inst.position = at
+		inst.rotation = rot
 		add_child(inst)

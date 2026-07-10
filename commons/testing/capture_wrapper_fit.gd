@@ -18,12 +18,13 @@ const FRAME_PADDING: float = 1.9
 # (family, artifact) pairs — representative instance per housed declaration.
 # Known headless-hangers must NOT appear here (the CA runners class).
 const PAIRS := [
-	["gridglass", "grid2d_life"],
+	["frame", "grid2d_life"],
 	["gridglass", "grid3d_bfs"],
 	["shadowbox", "profile_sine"],
 	["shadowbox", "example_8_4_cantor_set_vr"],
 	["openframe", "example_8_6_recursive_tree_vr"],
-	["tank", "galton_board"],
+	["pedestal", "galton_board"],
+	["tank", "particle_fountain"],
 	["cage", "random_walk_leash"],
 	["table_display_1m", "living_paper_random_walk"],
 	["table_display_1m", "ca_screen"],
@@ -113,6 +114,7 @@ func _run() -> void:
 				var inst = packed.instantiate()
 				if inst is Node3D:
 					inst.position = lib.mount_point(fam)
+					inst.rotation = lib.mount_rotation(fam)
 					node.add_child(inst)
 					mounted = true
 		await create_timer(0.35).timeout
