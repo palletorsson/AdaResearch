@@ -26,6 +26,19 @@
    "category": "exhibits",
    "complexity": "intermediate",
    "description": "The display-furniture family as one parametric artifact - kind selects the body: floating_wall (MoMA hover with contact-shadow accent), plinth s/m/l, hollow_plinth, platform, table_2m, vitrine_tall, cabinet, infoboard, sign_exit, sign_fire (with the little red cylinder). All empty, all waiting. Config: kind, size, w, h."
+  },
+  "sim_cube": {
+   "name": "Sim Cube — the common wrapper",
+   "lookup_name": "sim_cube",
+   "scene": "res://commons/artifacts/sim_cube/sim_cube.tscn",
+   "category": "exhibit",
+   "artifact_type": "wrapper",
+   "description": "A 1m housing that integrates a simulation into map space — the grid cell made visible. Five family styles (gridglass/tank/cage/shadowbox/openframe) keep housed artifacts recognizable by nature. Token: sim_cube#family:tank#mount:<lookup>.",
+   "footprint": [
+    1,
+    1,
+    1
+   ]
   }
  }
 }

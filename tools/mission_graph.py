@@ -33,6 +33,45 @@ sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 import wall_kit as wk
 import staging_beds as sb
 
+# integration (the common wrapper): principal_artifacts.json declares how an
+# artifact sits in map space — self (own base, no bed), cube (sim_cube housing
+# by family), frame/plinth (bed), field (IS the environment, bare).
+_INTEGRATION = None
+
+def _integration():
+    global _INTEGRATION
+    if _INTEGRATION is None:
+        _INTEGRATION = {}
+        p = ROOT / "commons" / "data" / "principal_artifacts.json"
+        if p.exists():
+            decl = json.loads(p.read_text(encoding="utf-8"))
+            scene_map = {}
+            import glob as _g
+            for rp in _g.glob(str(ROOT / "commons/artifacts/registry/*.json")):
+                try:
+                    rd = json.loads(open(rp, encoding="utf-8").read())
+                except json.JSONDecodeError:
+                    continue
+                arts = rd.get("artifacts", rd)
+                if not isinstance(arts, dict):
+                    continue
+                for k, e in arts.items():
+                    if isinstance(e, dict) and e.get("scene"):
+                        scene_map.setdefault(e["scene"], []).append(e.get("lookup_name", k))
+            for pr in decl.get("principals", {}).values():
+                integ = pr.get("integration")
+                if not integ:
+                    continue
+                for n in scene_map.get(pr.get("scene", ""), []):
+                    _INTEGRATION[n] = (integ, pr.get("cube_family", "gridglass"))
+            for k in decl.get("kin", {}).values():
+                integ = k.get("integration")
+                if not integ:
+                    continue
+                for n in k.get("members", []):
+                    _INTEGRATION.setdefault(n, (integ, k.get("cube_family", "gridglass")))
+    return _INTEGRATION
+
 B, SEA = wk.B, wk.SEA
 
 
@@ -373,15 +412,22 @@ def build_halls(seq, name):
                 swaps.append(swapped + "->" + chosen)
             draw_feature(layers, e["feature"], oy, ox, F)
             cr, cc = cast_spot(e["feature"], oy, ox, F)
-            # MARRIAGE 1: the bed carries the artifact (staging_beds decides
-            # the body — plinth/table/platform/pit/panel/vitrine by measured
-            # footprint; same convention as furnish_gallery)
-            bed = sb.select_bed(chosen)
-            if bed["is_wall"] and e["feature"] != "chapel":
-                cr, cc = y + 1, ox + F // 2      # graphics hang on the hall wall
-                layers["interactables"][cr][cc] = f"{bed['bed']}:180#mount:{chosen}"
+            # INTEGRATION precedes beds (the common wrapper): self/field stand
+            # bare; cube gets its family housing; the rest fall to beds.
+            integ, cfam = _integration().get(chosen, (None, None))
+            if integ in ("self", "field"):
+                layers["interactables"][cr][cc] = chosen
+            elif integ == "cube":
+                layers["interactables"][cr][cc] = f"sim_cube#family:{cfam}#mount:{chosen}"
             else:
-                layers["interactables"][cr][cc] = f"{bed['bed']}#mount:{chosen}"
+                # MARRIAGE 1: the bed carries the artifact (staging_beds decides
+                # the body by measured footprint; furnish_gallery convention)
+                bed = sb.select_bed(chosen)
+                if bed["is_wall"] and e["feature"] != "chapel":
+                    cr, cc = y + 1, ox + F // 2      # graphics hang on the hall wall
+                    layers["interactables"][cr][cc] = f"{bed['bed']}:180#mount:{chosen}"
+                else:
+                    layers["interactables"][cr][cc] = f"{bed['bed']}#mount:{chosen}"
         y += D
     # carve ONE door between consecutive acts, near the walking end
     for k in range(rows - 1):
