@@ -457,7 +457,21 @@ func initialize(grid_parent: Node3D, struct_component: GridStructureComponent, u
 
 	# Load artifact registries based on map configuration
 	_load_artifact_registries()
-	
+
+	# Computation budget (gated: only maps that declare settings.proximity_lod;
+	# see commons/grid/ProximityLOD.gd). One manager per grid parent, replaced
+	# on re-initialize so a flagless map after a flagged one is clean.
+	var old_plod = parent_node.get_node_or_null("ProximityLOD")
+	if old_plod:
+		old_plod.queue_free()
+	var plod = settings.get("proximity_lod", null)
+	if plod != null and str(plod).to_lower() not in ["false", "0", "off"]:
+		var mgr := ProximityLODScript.new()
+		mgr.name = "ProximityLOD"
+		mgr.configure(plod)
+		parent_node.add_child(mgr)
+		print("GridInteractablesComponent: ProximityLOD armed (radius=%s)" % str(mgr.radius))
+
 	print("GridInteractablesComponent: Initialized with cube_size=%f, gutter=%f" % [cube_size, gutter])
 
 ## Read a runtime flag from ada_run/runtime_flags.json. Mirrors GridSystem's
@@ -832,6 +846,7 @@ func _place_dialectic_panels(dialectic_name: String, origin: Vector3, rotation: 
 const PackagingResolver := preload("res://commons/artifacts/_hangar/packaging_resolver.gd")
 const HangarKit := preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 const LabelFramer := preload("res://commons/grid/LabelFramer.gd")
+const ProximityLODScript := preload("res://commons/grid/ProximityLOD.gd")
 
 
 # Text hygiene (Palle: all hanging Label3D become 2D-in-3D boards/plates

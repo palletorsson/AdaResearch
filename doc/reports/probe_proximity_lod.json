@@ -1,0 +1,13 @@
+{
+ "failures": 0,
+ "log": [
+  "PASS  compile: GridSystem",
+  "PASS  compile: GridInteractablesComponent",
+  "PASS  compile: ProximityLOD",
+  "PASS  unit: far artifact frozen  4",
+  "PASS  negative: opt-out stays awake",
+  "PASS  unit: near artifact wakes  0",
+  "PASS  negative: no camera, never frozen",
+  "PASS  live-gate: unflagged map has NO ProximityLOD"
+ ]
+}

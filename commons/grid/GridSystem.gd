@@ -338,6 +338,12 @@ func _on_data_loaded(loaded_map_name: String, format: String):
 	# Pass animation settings if present
 	if settings.has("grid_animation"):
 		component_settings["grid_animation"] = settings["grid_animation"]
+
+	# Computation budget for dense generated maps (mission halls/rooms emit
+	# settings.proximity_lod) — forwarded so the interactables component can
+	# arm the ProximityLOD manager. Maps without the flag are untouched.
+	if settings.has("proximity_lod"):
+		component_settings["proximity_lod"] = settings["proximity_lod"]
 	
 	structure_component.initialize(self, base_cube, component_settings)
 	utilities_component.initialize(self, structure_component, component_settings)
