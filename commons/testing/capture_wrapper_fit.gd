@@ -113,9 +113,8 @@ func _run() -> void:
 			if packed != null:
 				var inst = packed.instantiate()
 				if inst is Node3D:
-					inst.position = lib.mount_point(fam)
-					inst.rotation = lib.mount_rotation(fam)
 					node.add_child(inst)
+					lib.fit_artifact(inst, fam, _load_metrics(art))
 					mounted = true
 		await create_timer(0.35).timeout
 
@@ -159,6 +158,19 @@ func _run() -> void:
 	f.close()
 	print("DONE — %d wrapper-fit pairs" % _entries.size())
 	quit(0)
+
+
+func _load_metrics(lookup: String) -> Dictionary:
+	var f := FileAccess.open("res://commons/data/artifact_metrics.json", FileAccess.READ)
+	if f == null:
+		return {}
+	var parsed = JSON.parse_string(f.get_as_text())
+	f.close()
+	if parsed is Dictionary:
+		var mm = parsed.get("metrics", {})
+		if mm is Dictionary and mm.has(lookup):
+			return mm[lookup]
+	return {}
 
 
 func _find_scene(lookup: String) -> String:

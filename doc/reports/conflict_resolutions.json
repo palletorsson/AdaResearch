@@ -3,8 +3,14 @@
  "counts": {
   "conflicts_in": 142,
   "groups": 20,
-  "advise_before": {"agree": 96, "conflict": 142},
-  "advise_after": {"agree": 115, "conflict": 123},
+  "advise_before": {
+   "agree": 96,
+   "conflict": 142
+  },
+  "advise_after": {
+   "agree": 115,
+   "conflict": 123
+  },
   "resolved_members": 124,
   "verdict_members": 18
  },
@@ -152,19 +158,28 @@
    "from": "field",
    "to": "field",
    "rationale": "Ambient particle fields (kind:field). A 2.0x1.5x2.0 cloud is not a pedestal object; the doctrine keeps field/apparition unhoused on purpose (housing/pedestal would kill the field). Form 'self(+pedestal)' misreads the cloud extent as own-stand."
+  },
+  {
+   "group": "principal:profile (profile + 16 profile_*)",
+   "members_count": 17,
+   "options": [
+    "KEEP cube:shadowbox",
+    "CHANGE to frame | table_display_2m"
+   ],
+   "why_ambiguous": "A profile is a 1D curve renderer (2.0x1.5x0.3 vertical plane) — flat-ish 2D content, which rule 3 says gets frame/table_display and NEVER a 3D housing. BUT the shadowbox cube-family was purpose-built 'for curves, profiles, single luminous figures' (one open face, dark backlit interior, 0.3m depth suits a backlit curve, not a flat frame). Genuine design-intent-vs-rule-3 tension; whether a shallow backlit shadowbox counts as a forbidden '3D housing' for 2D content is Palle's call. Left untouched.",
+   "decision": "KEEP",
+   "rationale": "PALLE RULED: shadowbox stays (design intent wins)"
   }
  ],
  "verdicts": [
   {
-   "group": "principal:profile (profile + 16 profile_*)",
-   "members_count": 17,
-   "options": ["KEEP cube:shadowbox", "CHANGE to frame | table_display_2m"],
-   "why_ambiguous": "A profile is a 1D curve renderer (2.0x1.5x0.3 vertical plane) — flat-ish 2D content, which rule 3 says gets frame/table_display and NEVER a 3D housing. BUT the shadowbox cube-family was purpose-built 'for curves, profiles, single luminous figures' (one open face, dark backlit interior, 0.3m depth suits a backlit curve, not a flat frame). Genuine design-intent-vs-rule-3 tension; whether a shallow backlit shadowbox counts as a forbidden '3D housing' for 2D content is Palle's call. Left untouched."
-  },
-  {
    "group": "override:galton_board",
    "members_count": 1,
-   "options": ["KEEP pedestal", "self", "cube:tank"],
+   "options": [
+    "KEEP pedestal",
+    "self",
+    "cube:tank"
+   ],
    "why_ambiguous": "0.5x0.9x0.3 — not flat, not room-scale. The 0.9m height for a 0.5m board may already include an own base/funnel (rule 1 -> self) or not (pedestal elevates it). Dropping balls is physics, which could suit the tank cube-family. Evidence is inconclusive; taste call, left as declared (pedestal)."
   }
  ]

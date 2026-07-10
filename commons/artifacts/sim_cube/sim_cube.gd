@@ -32,10 +32,23 @@ func _build() -> void:
 	housing.name = "Housing"
 	add_child(housing)
 	if mount != "":
-		_mount_artifact(mount, lib.mount_point(family), lib.mount_rotation(family))
+		_mount_artifact(lib, mount)
 
 
-func _mount_artifact(lookup: String, at: Vector3, rot: Vector3 = Vector3.ZERO) -> void:
+func _load_metrics(lookup: String) -> Dictionary:
+	var f := FileAccess.open("res://commons/data/artifact_metrics.json", FileAccess.READ)
+	if f == null:
+		return {}
+	var parsed = JSON.parse_string(f.get_as_text())
+	f.close()
+	if parsed is Dictionary:
+		var mm = parsed.get("metrics", {})
+		if mm is Dictionary and mm.has(lookup):
+			return mm[lookup]
+	return {}
+
+
+func _mount_artifact(lib, lookup: String) -> void:
 	var dir := DirAccess.open("res://commons/artifacts/registry/")
 	if dir == null:
 		return
@@ -58,6 +71,5 @@ func _mount_artifact(lookup: String, at: Vector3, rot: Vector3 = Vector3.ZERO) -
 		return
 	var inst = scene.instantiate()
 	if inst is Node3D:
-		inst.position = at
-		inst.rotation = rot
 		add_child(inst)
+		lib.fit_artifact(inst, family, _load_metrics(lookup))

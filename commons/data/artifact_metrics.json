@@ -1,0 +1,1959 @@
+{
+ "_note": "the em-square: per-artifact base contract (anchor_y/size/pose/base). Declared metrics{} on principals beat measurement. Consumed by CubeWrapperLibrary.fit_artifact.",
+ "metrics": {
+  "living_paper": {
+   "anchor_y": 0.1,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    0.2,
+    0.2,
+    0.08
+   ],
+   "source": "measured"
+  },
+  "living_paper_random_walk": {
+   "anchor_y": 0.1,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    0.2,
+    0.2,
+    0.08
+   ],
+   "source": "measured:living_paper"
+  },
+  "living_paper_brownian": {
+   "anchor_y": 0.1,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    0.2,
+    0.2,
+    0.08
+   ],
+   "source": "measured:living_paper"
+  },
+  "living_paper_levy": {
+   "anchor_y": 0.1,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    0.2,
+    0.2,
+    0.08
+   ],
+   "source": "measured:living_paper"
+  },
+  "living_paper_self_avoiding": {
+   "anchor_y": 0.1,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    0.2,
+    0.2,
+    0.08
+   ],
+   "source": "measured:living_paper"
+  },
+  "living_paper_rule30": {
+   "anchor_y": 0.1,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    0.2,
+    0.2,
+    0.08
+   ],
+   "source": "measured:living_paper"
+  },
+  "living_paper_rule110": {
+   "anchor_y": 0.1,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    0.2,
+    0.2,
+    0.08
+   ],
+   "source": "measured:living_paper"
+  },
+  "living_paper_life": {
+   "anchor_y": 0.1,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    0.2,
+    0.2,
+    0.08
+   ],
+   "source": "measured:living_paper"
+  },
+  "living_paper_seeds": {
+   "anchor_y": 0.1,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    0.2,
+    0.2,
+    0.08
+   ],
+   "source": "measured:living_paper"
+  },
+  "living_paper_brians_brain": {
+   "anchor_y": 0.1,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    0.2,
+    0.2,
+    0.08
+   ],
+   "source": "measured:living_paper"
+  },
+  "living_paper_bubble_sort": {
+   "anchor_y": 0.1,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    0.2,
+    0.2,
+    0.08
+   ],
+   "source": "measured:living_paper"
+  },
+  "living_paper_insertion_sort": {
+   "anchor_y": 0.1,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    0.2,
+    0.2,
+    0.08
+   ],
+   "source": "measured:living_paper"
+  },
+  "living_paper_merge_sort": {
+   "anchor_y": 0.1,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    0.2,
+    0.2,
+    0.08
+   ],
+   "source": "measured:living_paper"
+  },
+  "living_paper_quick_sort": {
+   "anchor_y": 0.1,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    0.2,
+    0.2,
+    0.08
+   ],
+   "source": "measured:living_paper"
+  },
+  "living_paper_sine": {
+   "anchor_y": 0.1,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    0.2,
+    0.2,
+    0.08
+   ],
+   "source": "measured:living_paper"
+  },
+  "living_paper_fourier": {
+   "anchor_y": 0.1,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    0.2,
+    0.2,
+    0.08
+   ],
+   "source": "measured:living_paper"
+  },
+  "living_paper_lissajous": {
+   "anchor_y": 0.1,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    0.2,
+    0.2,
+    0.08
+   ],
+   "source": "measured:living_paper"
+  },
+  "living_paper_mandelbrot": {
+   "anchor_y": 0.1,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    0.2,
+    0.2,
+    0.08
+   ],
+   "source": "measured:living_paper"
+  },
+  "living_paper_julia": {
+   "anchor_y": 0.1,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    0.2,
+    0.2,
+    0.08
+   ],
+   "source": "measured:living_paper"
+  },
+  "living_paper_sierpinski": {
+   "anchor_y": 0.1,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    0.2,
+    0.2,
+    0.08
+   ],
+   "source": "measured:living_paper"
+  },
+  "living_paper_koch": {
+   "anchor_y": 0.1,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    0.2,
+    0.2,
+    0.08
+   ],
+   "source": "measured:living_paper"
+  },
+  "living_paper_tree": {
+   "anchor_y": 0.1,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    0.2,
+    0.2,
+    0.08
+   ],
+   "source": "measured:living_paper"
+  },
+  "living_paper_fern": {
+   "anchor_y": 0.1,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    0.2,
+    0.2,
+    0.08
+   ],
+   "source": "measured:living_paper"
+  },
+  "living_paper_dragon": {
+   "anchor_y": 0.1,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    0.2,
+    0.2,
+    0.08
+   ],
+   "source": "measured:living_paper"
+  },
+  "living_paper_perlin": {
+   "anchor_y": 0.1,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    0.2,
+    0.2,
+    0.08
+   ],
+   "source": "measured:living_paper"
+  },
+  "living_paper_noise_octaves": {
+   "anchor_y": 0.1,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    0.2,
+    0.2,
+    0.08
+   ],
+   "source": "measured:living_paper"
+  },
+  "living_paper_bfs": {
+   "anchor_y": 0.1,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    0.2,
+    0.2,
+    0.08
+   ],
+   "source": "measured:living_paper"
+  },
+  "living_paper_dfs_maze": {
+   "anchor_y": 0.1,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    0.2,
+    0.2,
+    0.08
+   ],
+   "source": "measured:living_paper"
+  },
+  "living_paper_reaction_diffusion": {
+   "anchor_y": 0.1,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    0.2,
+    0.2,
+    0.08
+   ],
+   "source": "measured:living_paper"
+  },
+  "living_paper_dla": {
+   "anchor_y": 0.1,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    0.2,
+    0.2,
+    0.08
+   ],
+   "source": "measured:living_paper"
+  },
+  "living_paper_voronoi": {
+   "anchor_y": 0.1,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    0.2,
+    0.2,
+    0.08
+   ],
+   "source": "measured:living_paper"
+  },
+  "living_paper_kmeans": {
+   "anchor_y": 0.1,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    0.2,
+    0.2,
+    0.08
+   ],
+   "source": "measured:living_paper"
+  },
+  "living_paper_heat": {
+   "anchor_y": 0.1,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    0.2,
+    0.2,
+    0.08
+   ],
+   "source": "measured:living_paper"
+  },
+  "living_paper_quadtree": {
+   "anchor_y": 0.1,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    0.2,
+    0.2,
+    0.08
+   ],
+   "source": "measured:living_paper"
+  },
+  "array_disco_substrate": {
+   "anchor_y": 0.03,
+   "base": "floor",
+   "pose": "flat",
+   "size": [
+    2.01,
+    0.04,
+    2.01
+   ],
+   "source": "measured:grid2d"
+  },
+  "array_slow_substrate": {
+   "anchor_y": 0.03,
+   "base": "floor",
+   "pose": "flat",
+   "size": [
+    2.01,
+    0.04,
+    2.01
+   ],
+   "source": "measured:grid2d"
+  },
+  "array_random_substrate": {
+   "anchor_y": 0.03,
+   "base": "floor",
+   "pose": "flat",
+   "size": [
+    2.01,
+    0.04,
+    2.01
+   ],
+   "source": "measured:grid2d"
+  },
+  "grid2d": {
+   "anchor_y": 0.03,
+   "base": "floor",
+   "pose": "flat",
+   "size": [
+    2.01,
+    0.04,
+    2.01
+   ],
+   "source": "measured:grid2d"
+  },
+  "grid2d_life": {
+   "anchor_y": 0.03,
+   "base": "floor",
+   "pose": "flat",
+   "size": [
+    2.01,
+    0.04,
+    2.01
+   ],
+   "source": "measured:grid2d"
+  },
+  "grid2d_seeds": {
+   "anchor_y": 0.03,
+   "base": "floor",
+   "pose": "flat",
+   "size": [
+    2.01,
+    0.04,
+    2.01
+   ],
+   "source": "measured:grid2d"
+  },
+  "grid2d_brians_brain": {
+   "anchor_y": 0.03,
+   "base": "floor",
+   "pose": "flat",
+   "size": [
+    2.01,
+    0.04,
+    2.01
+   ],
+   "source": "measured:grid2d"
+  },
+  "grid2d_rule30": {
+   "anchor_y": 0.03,
+   "base": "floor",
+   "pose": "flat",
+   "size": [
+    2.01,
+    0.04,
+    2.01
+   ],
+   "source": "measured:grid2d"
+  },
+  "grid2d_rule110": {
+   "anchor_y": 0.03,
+   "base": "floor",
+   "pose": "flat",
+   "size": [
+    2.01,
+    0.04,
+    2.01
+   ],
+   "source": "measured:grid2d"
+  },
+  "grid2d_rule90": {
+   "anchor_y": 0.03,
+   "base": "floor",
+   "pose": "flat",
+   "size": [
+    2.01,
+    0.04,
+    2.01
+   ],
+   "source": "measured:grid2d"
+  },
+  "grid2d_bfs": {
+   "anchor_y": 0.03,
+   "base": "floor",
+   "pose": "flat",
+   "size": [
+    2.01,
+    0.04,
+    2.01
+   ],
+   "source": "measured:grid2d"
+  },
+  "grid2d_dfs_maze": {
+   "anchor_y": 0.03,
+   "base": "floor",
+   "pose": "flat",
+   "size": [
+    2.01,
+    0.04,
+    2.01
+   ],
+   "source": "measured:grid2d"
+  },
+  "grid2d_wireworld": {
+   "anchor_y": 0.03,
+   "base": "floor",
+   "pose": "flat",
+   "size": [
+    2.01,
+    0.04,
+    2.01
+   ],
+   "source": "measured:grid2d"
+  },
+  "grid2d_langtons_ant": {
+   "anchor_y": 0.03,
+   "base": "floor",
+   "pose": "flat",
+   "size": [
+    2.01,
+    0.04,
+    2.01
+   ],
+   "source": "measured:grid2d"
+  },
+  "grid3d": {
+   "anchor_y": 0.93,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    1.58,
+    1.6,
+    1.68
+   ],
+   "source": "measured:grid3d"
+  },
+  "grid3d_bfs": {
+   "anchor_y": 0.93,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    1.58,
+    1.6,
+    1.68
+   ],
+   "source": "measured:grid3d"
+  },
+  "grid3d_dfs": {
+   "anchor_y": 0.93,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    1.58,
+    1.6,
+    1.68
+   ],
+   "source": "measured:grid3d"
+  },
+  "grid3d_dijkstra": {
+   "anchor_y": 0.93,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    1.58,
+    1.6,
+    1.68
+   ],
+   "source": "measured:grid3d"
+  },
+  "grid3d_kruskal": {
+   "anchor_y": 0.93,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    1.58,
+    1.6,
+    1.68
+   ],
+   "source": "measured:grid3d"
+  },
+  "grid3d_prim": {
+   "anchor_y": 0.93,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    1.58,
+    1.6,
+    1.68
+   ],
+   "source": "measured:grid3d"
+  },
+  "grid3d_force_directed": {
+   "anchor_y": 0.93,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    1.58,
+    1.6,
+    1.68
+   ],
+   "source": "measured:grid3d"
+  },
+  "grid3d_random_graph": {
+   "anchor_y": 0.93,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    1.58,
+    1.6,
+    1.68
+   ],
+   "source": "measured:grid3d"
+  },
+  "grid3d_entropy": {
+   "anchor_y": 0.93,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    1.58,
+    1.6,
+    1.68
+   ],
+   "source": "measured:grid3d"
+  },
+  "profile": {
+   "anchor_y": 0.21,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    0.4,
+    0.34,
+    0.01
+   ],
+   "source": "measured:profile"
+  },
+  "profile_sine": {
+   "anchor_y": 0.21,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    0.4,
+    0.34,
+    0.01
+   ],
+   "source": "measured:profile"
+  },
+  "profile_square": {
+   "anchor_y": 0.21,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    0.4,
+    0.34,
+    0.01
+   ],
+   "source": "measured:profile"
+  },
+  "profile_saw": {
+   "anchor_y": 0.21,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    0.4,
+    0.34,
+    0.01
+   ],
+   "source": "measured:profile"
+  },
+  "profile_triangle": {
+   "anchor_y": 0.21,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    0.4,
+    0.34,
+    0.01
+   ],
+   "source": "measured:profile"
+  },
+  "profile_fourier": {
+   "anchor_y": 0.21,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    0.4,
+    0.34,
+    0.01
+   ],
+   "source": "measured:profile"
+  },
+  "profile_beat": {
+   "anchor_y": 0.21,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    0.4,
+    0.34,
+    0.01
+   ],
+   "source": "measured:profile"
+  },
+  "profile_lissajous": {
+   "anchor_y": 0.21,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    0.4,
+    0.34,
+    0.01
+   ],
+   "source": "measured:profile"
+  },
+  "profile_noise": {
+   "anchor_y": 0.21,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    0.4,
+    0.34,
+    0.01
+   ],
+   "source": "measured:profile"
+  },
+  "profile_noise_octaves": {
+   "anchor_y": 0.21,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    0.4,
+    0.34,
+    0.01
+   ],
+   "source": "measured:profile"
+  },
+  "profile_random_walk": {
+   "anchor_y": 0.21,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    0.4,
+    0.34,
+    0.01
+   ],
+   "source": "measured:profile"
+  },
+  "profile_brownian": {
+   "anchor_y": 0.21,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    0.4,
+    0.34,
+    0.01
+   ],
+   "source": "measured:profile"
+  },
+  "profile_bell_curve": {
+   "anchor_y": 0.21,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    0.4,
+    0.34,
+    0.01
+   ],
+   "source": "measured:profile"
+  },
+  "profile_damped": {
+   "anchor_y": 0.21,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    0.4,
+    0.34,
+    0.01
+   ],
+   "source": "measured:profile"
+  },
+  "profile_spring": {
+   "anchor_y": 0.21,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    0.4,
+    0.34,
+    0.01
+   ],
+   "source": "measured:profile"
+  },
+  "profile_gradient_descent": {
+   "anchor_y": 0.21,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    0.4,
+    0.34,
+    0.01
+   ],
+   "source": "measured:profile"
+  },
+  "profile_logistic": {
+   "anchor_y": 0.21,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    0.4,
+    0.34,
+    0.01
+   ],
+   "source": "measured:profile"
+  },
+  "bar_array": {
+   "anchor_y": 0.04,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.38,
+    0.35,
+    0.19
+   ],
+   "source": "measured:bar_array"
+  },
+  "bar_array_bubble_sort": {
+   "anchor_y": 0.04,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.38,
+    0.35,
+    0.19
+   ],
+   "source": "measured:bar_array"
+  },
+  "bar_array_insertion_sort": {
+   "anchor_y": 0.04,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.38,
+    0.35,
+    0.19
+   ],
+   "source": "measured:bar_array"
+  },
+  "bar_array_selection_sort": {
+   "anchor_y": 0.04,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.38,
+    0.35,
+    0.19
+   ],
+   "source": "measured:bar_array"
+  },
+  "bar_array_merge_sort": {
+   "anchor_y": 0.04,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.38,
+    0.35,
+    0.19
+   ],
+   "source": "measured:bar_array"
+  },
+  "bar_array_quicksort": {
+   "anchor_y": 0.04,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.38,
+    0.35,
+    0.19
+   ],
+   "source": "measured:bar_array"
+  },
+  "bar_array_heap_sort": {
+   "anchor_y": 0.04,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.38,
+    0.35,
+    0.19
+   ],
+   "source": "measured:bar_array"
+  },
+  "bar_array_histogram": {
+   "anchor_y": 0.04,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.38,
+    0.35,
+    0.19
+   ],
+   "source": "measured:bar_array"
+  },
+  "bar_array_fibonacci": {
+   "anchor_y": 0.04,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.38,
+    0.35,
+    0.19
+   ],
+   "source": "measured:bar_array"
+  },
+  "bar_array_prime_sieve": {
+   "anchor_y": 0.04,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.38,
+    0.35,
+    0.19
+   ],
+   "source": "measured:bar_array"
+  },
+  "step_sequencer": {
+   "anchor_y": 0.65,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    1.6,
+    1.6,
+    1.6
+   ],
+   "source": "measured:step_sequencer"
+  },
+  "step_sequencer_trap": {
+   "anchor_y": 0.65,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    1.6,
+    1.6,
+    1.6
+   ],
+   "source": "measured:step_sequencer"
+  },
+  "step_sequencer_synth": {
+   "anchor_y": 0.65,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    1.6,
+    1.6,
+    1.6
+   ],
+   "source": "measured:step_sequencer"
+  },
+  "step_sequencer_house": {
+   "anchor_y": 0.65,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    1.6,
+    1.6,
+    1.6
+   ],
+   "source": "measured:step_sequencer"
+  },
+  "step_sequencer_pads": {
+   "anchor_y": 0.65,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    1.6,
+    1.6,
+    1.6
+   ],
+   "source": "measured:step_sequencer"
+  },
+  "step_sequencer_kraftwerk": {
+   "anchor_y": 0.65,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    1.6,
+    1.6,
+    1.6
+   ],
+   "source": "measured:step_sequencer"
+  },
+  "step_sequencer_disco": {
+   "anchor_y": 0.65,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    1.6,
+    1.6,
+    1.6
+   ],
+   "source": "measured:step_sequencer"
+  },
+  "step_sequencer_ambient": {
+   "anchor_y": 0.65,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    1.6,
+    1.6,
+    1.6
+   ],
+   "source": "measured:step_sequencer"
+  },
+  "step_sequencer_jazz": {
+   "anchor_y": 0.65,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    1.6,
+    1.6,
+    1.6
+   ],
+   "source": "measured:step_sequencer"
+  },
+  "step_sequencer_chiptune": {
+   "anchor_y": 0.65,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    1.6,
+    1.6,
+    1.6
+   ],
+   "source": "measured:step_sequencer"
+  },
+  "step_sequencer_scifi": {
+   "anchor_y": 0.65,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    1.6,
+    1.6,
+    1.6
+   ],
+   "source": "measured:step_sequencer"
+  },
+  "step_sequencer_cinematic": {
+   "anchor_y": 0.65,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    1.6,
+    1.6,
+    1.6
+   ],
+   "source": "measured:step_sequencer"
+  },
+  "step_sequencer_breakbeat": {
+   "anchor_y": 0.65,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    1.6,
+    1.6,
+    1.6
+   ],
+   "source": "measured:step_sequencer"
+  },
+  "step_sequencer_cosmic": {
+   "anchor_y": 0.65,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    1.6,
+    1.6,
+    1.6
+   ],
+   "source": "measured:step_sequencer"
+  },
+  "step_sequencer_lofi": {
+   "anchor_y": 0.65,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    1.6,
+    1.6,
+    1.6
+   ],
+   "source": "measured:step_sequencer"
+  },
+  "mesh_grammar": {
+   "anchor_y": 0.43,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    0.85,
+    0.85,
+    0.85
+   ],
+   "source": "measured:mesh_grammar"
+  },
+  "mesh_grammar_seed": {
+   "anchor_y": 0.43,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    0.85,
+    0.85,
+    0.85
+   ],
+   "source": "measured:mesh_grammar"
+  },
+  "mesh_grammar_extruded_spire": {
+   "anchor_y": 0.43,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    0.85,
+    0.85,
+    0.85
+   ],
+   "source": "measured:mesh_grammar"
+  },
+  "mesh_grammar_inset_pattern": {
+   "anchor_y": 0.43,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    0.85,
+    0.85,
+    0.85
+   ],
+   "source": "measured:mesh_grammar"
+  },
+  "mesh_grammar_subdivided": {
+   "anchor_y": 0.43,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    0.85,
+    0.85,
+    0.85
+   ],
+   "source": "measured:mesh_grammar"
+  },
+  "mesh_grammar_nodule_sphere": {
+   "anchor_y": 0.43,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    0.85,
+    0.85,
+    0.85
+   ],
+   "source": "measured:mesh_grammar"
+  },
+  "mesh_grammar_coral_fingers": {
+   "anchor_y": 0.43,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    0.85,
+    0.85,
+    0.85
+   ],
+   "source": "measured:mesh_grammar"
+  },
+  "mesh_grammar_crumpled": {
+   "anchor_y": 0.43,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    0.85,
+    0.85,
+    0.85
+   ],
+   "source": "measured:mesh_grammar"
+  },
+  "mesh_grammar_budding": {
+   "anchor_y": 0.43,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    0.85,
+    0.85,
+    0.85
+   ],
+   "source": "measured:mesh_grammar"
+  },
+  "mesh_grammar_branching_coral": {
+   "anchor_y": 0.43,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    0.85,
+    0.85,
+    0.85
+   ],
+   "source": "measured:mesh_grammar"
+  },
+  "mesh_grammar_inset_towers": {
+   "anchor_y": 0.43,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    0.85,
+    0.85,
+    0.85
+   ],
+   "source": "measured:mesh_grammar"
+  },
+  "mesh_grammar_detailed_bulge": {
+   "anchor_y": 0.43,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    0.85,
+    0.85,
+    0.85
+   ],
+   "source": "measured:mesh_grammar"
+  },
+  "mesh_grammar_noise_sculpture": {
+   "anchor_y": 0.43,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    0.85,
+    0.85,
+    0.85
+   ],
+   "source": "measured:mesh_grammar"
+  },
+  "mesh_grammar_petal_flower": {
+   "anchor_y": 0.43,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    0.85,
+    0.85,
+    0.85
+   ],
+   "source": "measured:mesh_grammar"
+  },
+  "mesh_grammar_scale_armor": {
+   "anchor_y": 0.43,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    0.85,
+    0.85,
+    0.85
+   ],
+   "source": "measured:mesh_grammar"
+  },
+  "mesh_grammar_riveted": {
+   "anchor_y": 0.43,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    0.85,
+    0.85,
+    0.85
+   ],
+   "source": "measured:mesh_grammar"
+  },
+  "mesh_grammar_barnacle": {
+   "anchor_y": 0.43,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    0.85,
+    0.85,
+    0.85
+   ],
+   "source": "measured:mesh_grammar"
+  },
+  "mesh_grammar_lsystem_tree": {
+   "anchor_y": 0.43,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    0.85,
+    0.85,
+    0.85
+   ],
+   "source": "measured:mesh_grammar"
+  },
+  "mesh_grammar_ca_growth": {
+   "anchor_y": 0.43,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    0.85,
+    0.85,
+    0.85
+   ],
+   "source": "measured:mesh_grammar"
+  },
+  "mesh_grammar_spike_ball": {
+   "anchor_y": 0.43,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    0.85,
+    0.85,
+    0.85
+   ],
+   "source": "measured:mesh_grammar"
+  },
+  "mesh_grammar_blooming_bulge": {
+   "anchor_y": 0.43,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    0.85,
+    0.85,
+    0.85
+   ],
+   "source": "measured:mesh_grammar"
+  },
+  "pattern_tile_puzzle": {
+   "anchor_y": 0.41,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    0.82,
+    0.82,
+    0.84
+   ],
+   "source": "measured:pattern_tile_puzzle"
+  },
+  "pattern_tile_4x4": {
+   "anchor_y": 0.41,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    0.82,
+    0.82,
+    0.84
+   ],
+   "source": "measured:pattern_tile_puzzle"
+  },
+  "pattern_tile_mirror": {
+   "anchor_y": 0.41,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    0.82,
+    0.82,
+    0.84
+   ],
+   "source": "measured:pattern_tile_puzzle"
+  },
+  "pattern_tile_8x8": {
+   "anchor_y": 0.41,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    0.82,
+    0.82,
+    0.84
+   ],
+   "source": "measured:pattern_tile_puzzle"
+  },
+  "pattern_tile_brick": {
+   "anchor_y": 0.41,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    0.82,
+    0.82,
+    0.84
+   ],
+   "source": "measured:pattern_tile_puzzle"
+  },
+  "pattern_tile_herringbone": {
+   "anchor_y": 0.41,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    0.82,
+    0.82,
+    0.84
+   ],
+   "source": "measured:pattern_tile_puzzle"
+  },
+  "analysis_station_puzzle": {
+   "anchor_y": -0.13,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.93,
+    1.94,
+    1.94
+   ],
+   "source": "measured:equipment_assembly_puzzle"
+  },
+  "diagnostic_station_puzzle": {
+   "anchor_y": -0.13,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.93,
+    1.94,
+    1.94
+   ],
+   "source": "measured:equipment_assembly_puzzle"
+  },
+  "equipment_assembly_puzzle": {
+   "anchor_y": -0.13,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.93,
+    1.94,
+    1.94
+   ],
+   "source": "measured:equipment_assembly_puzzle"
+  },
+  "measurement_station_puzzle": {
+   "anchor_y": -0.13,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.93,
+    1.94,
+    1.94
+   ],
+   "source": "measured:equipment_assembly_puzzle"
+  },
+  "storage_station_puzzle": {
+   "anchor_y": -0.13,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.93,
+    1.94,
+    1.94
+   ],
+   "source": "measured:equipment_assembly_puzzle"
+  },
+  "chair_assembly_puzzle": {
+   "anchor_y": 0.24,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    1.16,
+    1.12,
+    0.61
+   ],
+   "source": "measured:chair_assembly_puzzle"
+  },
+  "shelf_assembly_puzzle": {
+   "anchor_y": 0.24,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    1.16,
+    1.12,
+    0.61
+   ],
+   "source": "measured:chair_assembly_puzzle"
+  },
+  "stool_assembly_puzzle": {
+   "anchor_y": 0.24,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    1.16,
+    1.12,
+    0.61
+   ],
+   "source": "measured:chair_assembly_puzzle"
+  },
+  "table_assembly_puzzle": {
+   "anchor_y": 0.24,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    1.16,
+    1.12,
+    0.61
+   ],
+   "source": "measured:chair_assembly_puzzle"
+  },
+  "assembly_line_puzzle": {
+   "anchor_y": -0.43,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    2.1,
+    0.38,
+    1.65
+   ],
+   "source": "measured:assembly_line_puzzle"
+  },
+  "lab_assembly_puzzle": {
+   "anchor_y": -0.43,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    2.1,
+    0.38,
+    1.65
+   ],
+   "source": "measured:assembly_line_puzzle"
+  },
+  "scientific_assembly_puzzle": {
+   "anchor_y": -0.43,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    2.1,
+    0.38,
+    1.65
+   ],
+   "source": "measured:assembly_line_puzzle"
+  },
+  "pulsar_glass_tubes": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "flat",
+   "size": [
+    0.74,
+    0.25,
+    0.98
+   ],
+   "source": "measured:pulsar_glass_tubes"
+  },
+  "pulsar_compact": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "flat",
+   "size": [
+    0.74,
+    0.25,
+    0.98
+   ],
+   "source": "measured:pulsar_glass_tubes"
+  },
+  "pulsar_lines": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "flat",
+   "size": [
+    0.74,
+    0.25,
+    0.98
+   ],
+   "source": "measured:pulsar_glass_tubes"
+  },
+  "grab_sphere_point_with_color": {
+   "anchor_y": 0.01,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    0.02,
+    0.02,
+    0.02
+   ],
+   "source": "measured:grab_sphere_point_with_color"
+  },
+  "grab_sphere_F": {
+   "anchor_y": 0.01,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    0.02,
+    0.02,
+    0.02
+   ],
+   "source": "measured:grab_sphere_point_with_color"
+  },
+  "grab_sphere_E": {
+   "anchor_y": 0.01,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    0.02,
+    0.02,
+    0.02
+   ],
+   "source": "measured:grab_sphere_point_with_color"
+  },
+  "grab_sphere_lambda": {
+   "anchor_y": 0.01,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    0.02,
+    0.02,
+    0.02
+   ],
+   "source": "measured:grab_sphere_point_with_color"
+  },
+  "grab_sphere_phi": {
+   "anchor_y": 0.01,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    0.02,
+    0.02,
+    0.02
+   ],
+   "source": "measured:grab_sphere_point_with_color"
+  },
+  "albers_relief": {
+   "anchor_y": 0.13,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.0,
+    1.33,
+    0.5
+   ],
+   "source": "measured:biederman_relief_puzzle"
+  },
+  "biederman_relief": {
+   "anchor_y": 0.13,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.0,
+    1.33,
+    0.5
+   ],
+   "source": "measured:biederman_relief_puzzle"
+  },
+  "constructivist_relief": {
+   "anchor_y": 0.13,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.0,
+    1.33,
+    0.5
+   ],
+   "source": "measured:biederman_relief_puzzle"
+  },
+  "mondrian_relief": {
+   "anchor_y": 0.13,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.0,
+    1.33,
+    0.5
+   ],
+   "source": "measured:biederman_relief_puzzle"
+  },
+  "reactive_particle_field": {
+   "anchor_y": 0.77,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    1.98,
+    1.52,
+    1.93
+   ],
+   "source": "measured:reactive_particle_field"
+  },
+  "reactive_particles": {
+   "anchor_y": 0.77,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    1.98,
+    1.52,
+    1.93
+   ],
+   "source": "measured:reactive_particle_field"
+  },
+  "edge_particles": {
+   "anchor_y": 0.77,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    1.98,
+    1.52,
+    1.93
+   ],
+   "source": "measured:reactive_particle_field"
+  },
+  "emergence_zone": {
+   "anchor_y": 0.77,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    1.98,
+    1.52,
+    1.93
+   ],
+   "source": "measured:reactive_particle_field"
+  },
+  "raymarched_metaballs": {
+   "anchor_y": 6.0,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    12.0,
+    12.0,
+    12.0
+   ],
+   "unreliable_rest_aabb": true,
+   "source": "measured:metaballs"
+  },
+  "implicit_surface_modeling": {
+   "anchor_y": 6.0,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    12.0,
+    12.0,
+    12.0
+   ],
+   "unreliable_rest_aabb": true,
+   "source": "measured:metaballs"
+  },
+  "metaballs": {
+   "anchor_y": 6.0,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    12.0,
+    12.0,
+    12.0
+   ],
+   "unreliable_rest_aabb": true,
+   "source": "measured:metaballs"
+  },
+  "crystalcluster": {
+   "anchor_y": 0.37,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    0.94,
+    0.74,
+    0.74
+   ],
+   "source": "measured:crystalcluster"
+  },
+  "crystal_cluster": {
+   "anchor_y": 0.37,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    0.94,
+    0.74,
+    0.74
+   ],
+   "source": "measured:crystalcluster"
+  },
+  "crystal_formation": {
+   "anchor_y": 0.37,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    0.94,
+    0.74,
+    0.74
+   ],
+   "source": "measured:crystalcluster"
+  },
+  "example_8_4_cantor_set_vr": {
+   "anchor_y": -0.05,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    3.1,
+    4.31,
+    3.37
+   ],
+   "source": "measured:example_8_4_cantor_set_vr"
+  },
+  "fractal_cantor_set": {
+   "anchor_y": -0.05,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    3.1,
+    4.31,
+    3.37
+   ],
+   "source": "measured:example_8_4_cantor_set_vr"
+  },
+  "test_scene_3": {
+   "anchor_y": -0.05,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    3.1,
+    4.31,
+    3.37
+   ],
+   "source": "measured:example_8_4_cantor_set_vr"
+  },
+  "example_8_6_recursive_tree_vr": {
+   "anchor_y": -0.21,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    3.1,
+    4.16,
+    3.37
+   ],
+   "source": "measured:example_8_6_recursive_tree_vr"
+  },
+  "fractal_recursive_tree": {
+   "anchor_y": -0.21,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    3.1,
+    4.16,
+    3.37
+   ],
+   "source": "measured:example_8_6_recursive_tree_vr"
+  },
+  "test_scene_5": {
+   "anchor_y": -0.21,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    3.1,
+    4.16,
+    3.37
+   ],
+   "source": "measured:example_8_6_recursive_tree_vr"
+  },
+  "VectorWorkbench": {
+   "anchor_y": 0.68,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    3.28,
+    2.09,
+    0.99
+   ],
+   "source": "measured"
+  },
+  "pattern_machine_a": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    2.4,
+    3.83,
+    5.86
+   ],
+   "source": "measured"
+  },
+  "godel_sentence_machine": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.37,
+    1.55,
+    1.34
+   ],
+   "source": "measured"
+  },
+  "pattern_tunnel_machine": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "standing",
+   "size": [
+    3.6,
+    3.47,
+    18.89
+   ],
+   "unreliable_rest_aabb": true,
+   "source": "measured"
+  },
+  "random_walker_machine": {
+   "anchor_y": 1.32,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    20.31,
+    10.09,
+    20.58
+   ],
+   "unreliable_rest_aabb": true,
+   "source": "measured"
+  },
+  "example_3_8_static_wave_vr": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.15,
+    1.32,
+    1.11
+   ],
+   "source": "measured"
+  },
+  "artifact_readout_screen": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "standing",
+   "size": [
+    0.56,
+    1.99,
+    0.32
+   ],
+   "source": "measured"
+  },
+  "frame_counter_display": {
+   "anchor_y": -0.2,
+   "base": "float",
+   "pose": "flat",
+   "size": [
+    1.0,
+    0.3,
+    0.15
+   ],
+   "source": "measured"
+  },
+  "coin_toss": {
+   "anchor_y": 5.5,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    15.0,
+    15.0,
+    15.0
+   ],
+   "unreliable_rest_aabb": true,
+   "source": "measured"
+  },
+  "dice_throw": {
+   "anchor_y": 5.9,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    16.0,
+    16.0,
+    16.0
+   ],
+   "unreliable_rest_aabb": true,
+   "source": "measured"
+  },
+  "galton_board": {
+   "anchor_y": 0.15,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    0.75,
+    0.97,
+    0.27
+   ],
+   "source": "measured"
+  }
+ }
+}

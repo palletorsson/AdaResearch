@@ -1,0 +1,357 @@
+{
+ "_note": "measured em-square metrics (rest pose, headless); declared metrics in principal_artifacts.json win on merge",
+ "failed": [],
+ "metrics": {
+  "VectorWorkbench": {
+   "anchor_y": 0.68,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    3.28,
+    2.09,
+    0.99
+   ]
+  },
+  "artifact_readout_screen": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "standing",
+   "size": [
+    0.56,
+    1.99,
+    0.32
+   ]
+  },
+  "assembly_line_puzzle": {
+   "anchor_y": -0.43,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    2.1,
+    0.38,
+    1.65
+   ]
+  },
+  "bar_array": {
+   "anchor_y": 0.04,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.38,
+    0.35,
+    0.19
+   ]
+  },
+  "biederman_relief_puzzle": {
+   "anchor_y": 0.13,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.0,
+    1.33,
+    0.5
+   ]
+  },
+  "buren_col_01_01": {
+   "unmeasurable": true
+  },
+  "buren_col_01_04": {
+   "unmeasurable": true
+  },
+  "buren_col_01_07": {
+   "unmeasurable": true
+  },
+  "buren_col_01_10": {
+   "unmeasurable": true
+  },
+  "buren_col_04_01": {
+   "unmeasurable": true
+  },
+  "buren_col_04_04": {
+   "unmeasurable": true
+  },
+  "buren_col_04_07": {
+   "unmeasurable": true
+  },
+  "buren_col_04_10": {
+   "unmeasurable": true
+  },
+  "buren_col_07_01": {
+   "unmeasurable": true
+  },
+  "buren_col_07_04": {
+   "unmeasurable": true
+  },
+  "buren_col_07_07": {
+   "unmeasurable": true
+  },
+  "buren_col_07_10": {
+   "unmeasurable": true
+  },
+  "buren_col_10_01": {
+   "unmeasurable": true
+  },
+  "buren_col_10_04": {
+   "unmeasurable": true
+  },
+  "buren_col_10_07": {
+   "unmeasurable": true
+  },
+  "buren_col_10_10": {
+   "unmeasurable": true
+  },
+  "chair_assembly_puzzle": {
+   "anchor_y": 0.24,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    1.16,
+    1.12,
+    0.61
+   ]
+  },
+  "coin_toss": {
+   "anchor_y": 5.5,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    15.0,
+    15.0,
+    15.0
+   ]
+  },
+  "composition_artifact": {
+   "unmeasurable": true
+  },
+  "crystalcluster": {
+   "anchor_y": 0.37,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    0.94,
+    0.74,
+    0.74
+   ]
+  },
+  "dice_throw": {
+   "anchor_y": 5.9,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    16.0,
+    16.0,
+    16.0
+   ]
+  },
+  "equipment_assembly_puzzle": {
+   "anchor_y": -0.13,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.93,
+    1.94,
+    1.94
+   ]
+  },
+  "example_3_8_static_wave_vr": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.15,
+    1.32,
+    1.11
+   ]
+  },
+  "example_8_4_cantor_set_vr": {
+   "anchor_y": -0.05,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    3.1,
+    4.31,
+    3.37
+   ]
+  },
+  "example_8_6_recursive_tree_vr": {
+   "anchor_y": -0.21,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    3.1,
+    4.16,
+    3.37
+   ]
+  },
+  "frame_counter_display": {
+   "anchor_y": -0.2,
+   "base": "float",
+   "pose": "flat",
+   "size": [
+    1.0,
+    0.3,
+    0.15
+   ]
+  },
+  "galton_board": {
+   "anchor_y": 0.15,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    0.75,
+    0.97,
+    0.27
+   ]
+  },
+  "godel_sentence_machine": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.37,
+    1.55,
+    1.34
+   ]
+  },
+  "grab_sphere_point_with_color": {
+   "anchor_y": 0.01,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    0.02,
+    0.02,
+    0.02
+   ]
+  },
+  "grid2d": {
+   "anchor_y": 0.03,
+   "base": "floor",
+   "pose": "flat",
+   "size": [
+    2.01,
+    0.04,
+    2.01
+   ]
+  },
+  "grid3d": {
+   "anchor_y": 0.93,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    1.58,
+    1.6,
+    1.68
+   ]
+  },
+  "living_paper": {
+   "anchor_y": 0.1,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    0.2,
+    0.2,
+    0.08
+   ]
+  },
+  "mesh_grammar": {
+   "anchor_y": 0.43,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    0.85,
+    0.85,
+    0.85
+   ]
+  },
+  "metaballs": {
+   "anchor_y": 6.0,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    12.0,
+    12.0,
+    12.0
+   ]
+  },
+  "pattern_machine_a": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    2.4,
+    3.83,
+    5.86
+   ]
+  },
+  "pattern_tile_puzzle": {
+   "anchor_y": 0.41,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    0.82,
+    0.82,
+    0.84
+   ]
+  },
+  "pattern_tunnel_machine": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "standing",
+   "size": [
+    3.6,
+    3.47,
+    18.89
+   ]
+  },
+  "profile": {
+   "anchor_y": 0.21,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    0.4,
+    0.34,
+    0.01
+   ]
+  },
+  "pulsar_glass_tubes": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "flat",
+   "size": [
+    0.74,
+    0.25,
+    0.98
+   ]
+  },
+  "random_walker_machine": {
+   "anchor_y": 1.32,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    20.31,
+    10.09,
+    20.58
+   ]
+  },
+  "reactive_particle_field": {
+   "anchor_y": 0.77,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    1.98,
+    1.52,
+    1.93
+   ]
+  },
+  "step_sequencer": {
+   "anchor_y": 0.65,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    1.6,
+    1.6,
+    1.6
+   ]
+  }
+ }
+}

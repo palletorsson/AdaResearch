@@ -485,11 +485,59 @@ def advise():
     return 0
 
 
+
+
+def metrics():
+    """THE EM-SQUARE MERGE: measured testimony (doc/reports/
+    artifact_metrics_measured.json) + declared metrics{} on principals
+    (declared wins) -> commons/data/artifact_metrics.json, the runtime
+    lookup the wrapper layout engine reads. Instances inherit their
+    principal's metrics; overrides/kin reps carry their own."""
+    sys.path.insert(0, str(ROOT / "tools"))
+    import mission_graph as mg
+    measured = json.loads((ROOT / "doc/reports/artifact_metrics_measured.json")
+                          .read_text(encoding="utf-8")).get("metrics", {})
+    decl = json.loads(PRINCIPALS.read_text(encoding="utf-8"))
+    reg = load_registry()
+    scene_to_principal = {p["scene"]: (n, p) for n, p in decl["principals"].items()}
+    out = {}
+    for name in mg._integration():
+        pinfo = reg.get(name)
+        m = None
+        src = None
+        if pinfo and pinfo["scene"] in scene_to_principal:
+            pn, p = scene_to_principal[pinfo["scene"]]
+            m = p.get("metrics") or measured.get(pn)
+            src = "declared" if p.get("metrics") else "measured:" + pn
+        if m is None:
+            m = measured.get(name)
+            src = "measured"
+        if m is None or m.get("unmeasurable"):
+            continue
+        m = dict(m)
+        size = m.get("size", [1, 1, 1])
+        if max(size) > 8:
+            m["unreliable_rest_aabb"] = True
+        m["source"] = src
+        out[name] = m
+    dst = ROOT / "commons" / "data" / "artifact_metrics.json"
+    dst.write_text(json.dumps({"_note": "the em-square: per-artifact base "
+        "contract (anchor_y/size/pose/base). Declared metrics{} on principals "
+        "beat measurement. Consumed by CubeWrapperLibrary.fit_artifact.",
+        "metrics": out}, indent=1), encoding="utf-8", newline="\n")
+    unreliable = [n for n, m in out.items() if m.get("unreliable_rest_aabb")]
+    print(f"metrics: {len(out)} artifacts -> {dst.name}; "
+          f"{len(unreliable)} unreliable rest AABBs: {unreliable[:5]}")
+    return 0
+
+
 def main() -> int:
     if "--audit" in sys.argv:
         return audit()
     if "--advise" in sys.argv:
         return advise()
+    if "--metrics" in sys.argv:
+        return metrics()
     if "--suspect-double-stand" in sys.argv:
         return suspect_double_stand()
     if "--discover" in sys.argv:

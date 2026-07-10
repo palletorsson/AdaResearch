@@ -292,3 +292,55 @@ func _f_shadowbox(n: Node3D, hover: float) -> void:
 
 func _f_openframe(n: Node3D, hover: float, mat: StandardMaterial3D) -> void:
 	_edges(n, mat, hover + BASE_H, S - BASE_H)
+
+# ── THE EM-SQUARE LAYOUT ENGINE ──────────────────────────────────────────────
+# Font metrics for artifacts: every housed artifact carries a base contract
+# (anchor_y / size / pose / base — commons/data/artifact_metrics.json) and
+# this ONE setter fits any artifact into any family without looking inside —
+# the way a layout engine sets type. Wang tiles = the space's edge contract;
+# this = the artifact's base contract.
+
+const PANEL_SPECS := {
+	"frame": {"center": Vector3(0, 1.45, 0.055), "w": 1.06, "h": 1.36},
+	"table_display_1m": {"center": Vector3(0, 1.46, -0.31), "w": 0.96, "h": 1.2},
+	"table_display_2m": {"center": Vector3(0, 1.46, -0.31), "w": 1.96, "h": 1.2},
+}
+const FIT_BUDGETS := {
+	"gridglass": [1.8, 1.8], "tank": [1.8, 1.8], "cage": [1.8, 1.8],
+	"shadowbox": [1.8, 1.8], "openframe": [1.9, 1.9],
+	"podium": [0.55, 0.9], "plinth": [0.55, 1.0], "pedestal": [1.15, 2.0],
+	"table_display_1m": [0.9, 0.7], "table_display_2m": [1.9, 0.7],
+	"frame": [1.0, 1.3],
+}
+
+
+func fit_artifact(inst: Node3D, family: String, m: Dictionary) -> Dictionary:
+	"""fit a mounted artifact by its em-square metrics. Returns what it did."""
+	if m.is_empty() or m.get("unreliable_rest_aabb", false):
+		inst.position = mount_point(family)
+		inst.rotation = mount_rotation(family)
+		return {"mode": "fallback"}
+	var size: Array = m.get("size", [1.0, 1.0, 1.0])
+	var w := float(size[0])
+	var h := float(size[1])
+	var dd := float(size[2])
+	var anchor := float(m.get("anchor_y", 0.0))
+	var pose := str(m.get("pose", "volume"))
+	# PANEL branch: flat content standing on a display surface
+	if pose == "flat" and PANEL_SPECS.has(family):
+		var spec: Dictionary = PANEL_SPECS[family]
+		var s2: float = minf(1.0, minf(float(spec["w"]) / maxf(w, 0.01),
+				float(spec["h"]) / maxf(dd, 0.01)))
+		inst.rotation = Vector3(PI * 0.5, 0, 0)   # cells face the viewer (+Z)
+		inst.scale = Vector3.ONE * s2
+		inst.position = spec["center"]
+		return {"mode": "panel", "scale": s2}
+	# BASE branch: base sits on the mount point, contain-scaled to budget
+	var bud: Array = FIT_BUDGETS.get(family, [1.8, 1.8])
+	var s3: float = minf(1.0, minf(float(bud[0]) / maxf(maxf(w, dd), 0.01),
+			float(bud[1]) / maxf(h, 0.01)))
+	inst.rotation = Vector3.ZERO
+	inst.scale = Vector3.ONE * s3
+	var mp := mount_point(family)
+	inst.position = Vector3(mp.x, mp.y + anchor * s3, mp.z)
+	return {"mode": "base", "scale": s3, "anchor": anchor}
