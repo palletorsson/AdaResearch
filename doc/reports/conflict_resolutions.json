@@ -1,0 +1,171 @@
+{
+ "_about": "Resolution of the 142 form-vs-declaration conflicts in integration_advice.json, grouped by owning declaration (principal scene / kin / override), decided per-family per Palle's four rules. Only commons/data/principal_artifacts.json was edited.",
+ "counts": {
+  "conflicts_in": 142,
+  "groups": 20,
+  "advise_before": {"agree": 96, "conflict": 142},
+  "advise_after": {"agree": 115, "conflict": 123},
+  "resolved_members": 124,
+  "verdict_members": 18
+ },
+ "resolved": [
+  {
+   "group": "principal:composition_artifact (+16 buren_col_*)",
+   "members_count": 17,
+   "decision": "CHANGE",
+   "from": "wrap:table_display_2m",
+   "to": "self (principal) + field (buren_col_* overrides)",
+   "rationale": "table_display_2m is for FLAT 2D content (rule 3) but neither tenant is flat 2D. composition_artifact is a 2.0x2.0x4.0 primitive-stack tower that brings its own base -> self (rule 1). The 16 buren_col_* are 6m striped Buren courtyard columns you walk among -> room-scale environment -> field (rule 2), pinned via overrides so they win over the now-self principal."
+  },
+  {
+   "group": "kin:machines (room-scale members)",
+   "members_count": 2,
+   "decision": "CHANGE",
+   "from": "self",
+   "to": "field (overrides)",
+   "rationale": "pattern_tunnel_machine (3x3x10 subway-tiled walkthrough) and random_walker_machine (20.7x2.1x20.4) are room-scale spaces you move through -> field (rule 2). The kin note already flags 'self' as a heterogeneous REVIEW placeholder; the other operable machines stay self."
+  },
+  {
+   "group": "principal:living_paper",
+   "members_count": 34,
+   "decision": "KEEP",
+   "from": "wrap:table_display_1m",
+   "to": "wrap:table_display_1m",
+   "rationale": "Flat 2D papers (rule 3) — table_display_1m is the family's named tenant ('papers, compositions, readouts'). Form 'self(+pedestal)' is the tall-panel heuristic: a 1.3m 2D paper is tall but does not bring a 3D stand (the table display IS its stand); the bare 'living_paper' measured 0.2m empty (mid-config)."
+  },
+  {
+   "group": "principal:grid2d (array_disco/random/slow_substrate)",
+   "members_count": 3,
+   "decision": "KEEP",
+   "from": "wrap:frame",
+   "to": "wrap:frame",
+   "rationale": "A 2D grid world (CA/arrays/pixels) is a vertical plane -> frame (rule 3, matches principal bed note). The 1x1x1 oracle read (form: self) is the plane synced to a cube cell, not a self-standing volume. The other 11 grid2d_* instances already agree; untouched."
+  },
+  {
+   "group": "principal:grid3d",
+   "members_count": 9,
+   "decision": "KEEP",
+   "from": "cube:gridglass",
+   "to": "cube:gridglass",
+   "rationale": "A 2.6x2.4x2.6 MultiMesh 3D graph is a true volume with comparable dims and no base of its own; it needs housing. gridglass is the declared home for discrete/grid worlds. Form 'self' is the tall-rule firing before the volume-rule; a floating graph does not bring its own pedestal."
+  },
+  {
+   "group": "principal:mesh_grammar",
+   "members_count": 21,
+   "decision": "KEEP",
+   "from": "plinth",
+   "to": "plinth",
+   "rationale": "0.9x0.9x0.9 sculptural specimens (kind:specimen) presented on a plinth, held to the eye. Form 'self(+pedestal)' trips only because h=0.9 is exactly the self threshold; a specimen does not bring its own base, the plinth elevates it. plinth ~ pedestal, both correct presentation."
+  },
+  {
+   "group": "principal:crystalcluster (crystal_cluster/crystal_formation/crystalcluster)",
+   "members_count": 3,
+   "decision": "KEEP",
+   "from": "plinth",
+   "to": "plinth",
+   "rationale": "Mineral-cluster specimens ~0.7-0.9m on a plinth. Form 'cube' is the volume-heuristic (comparable dims) which cannot distinguish specimen-on-plinth from a housed volume; the specimen presentation is intentional, consistent with mesh_grammar."
+  },
+  {
+   "group": "principal:biederman_relief_puzzle (albers/biederman/constructivist/mondrian_relief)",
+   "members_count": 4,
+   "decision": "KEEP",
+   "from": "wrap:table_display_1m",
+   "to": "wrap:table_display_1m",
+   "rationale": "Art reliefs (kind:relief) are vertical, shallow-depth (0.5m) content mounted against a panel -> table_display is a 2D-content stand, rule-3 compliant (not a 3D housing). Form 'self' misreads the 1.3m height as own-stand; a displayed relief does not stand itself."
+  },
+  {
+   "group": "kin:readouts (ca_screen, score_display)",
+   "members_count": 2,
+   "decision": "KEEP",
+   "from": "wrap:table_display_1m",
+   "to": "wrap:table_display_1m",
+   "rationale": "Tiny HUD text readouts (make_text_block descendants) are 2D content -> table_display_1m, the family's named tenant. Form 'plinth|podium'/'cube' is the sub-0.2m HUD measurement; these are migration candidates to TextScreen anyway."
+  },
+  {
+   "group": "kin:wave_examples (additive_wave_demo, example_3_8_static_wave_vr)",
+   "members_count": 2,
+   "decision": "KEEP",
+   "from": "field",
+   "to": "field",
+   "rationale": "NOC oscillation waves; the kin's own prefer_registry note says measured AABBs catch the wave mid-frame. The wave IS the environment -> field is intentional. Form 'self(+pedestal)' is the mid-frame snapshot, not a self-standing object."
+  },
+  {
+   "group": "kin:workbench (transformation_workbench)",
+   "members_count": 1,
+   "decision": "KEEP",
+   "from": "self",
+   "to": "self",
+   "rationale": "An operated workbench (bench + grabbable cube + live matrix) is self-grounded by the workbench convention. Form 'cube' would seal an interactive tool in a vitrine; self is correct."
+  },
+  {
+   "group": "principal:assembly_line_puzzle (assembly_line/lab/scientific_assembly_puzzle)",
+   "members_count": 3,
+   "decision": "KEEP",
+   "from": "self",
+   "to": "self",
+   "rationale": "Horizontal assembly work-surfaces (2.1x0.3x1.6, h=0.3) you operate on. Form 'frame|table_display (stand it up)' misreads a floor/bench surface as wall art; an operated puzzle is self, not hung."
+  },
+  {
+   "group": "principal:equipment_assembly_puzzle (analysis/diagnostic/measurement/storage_station_puzzle + equipment_assembly_puzzle)",
+   "members_count": 5,
+   "decision": "KEEP",
+   "from": "self",
+   "to": "self",
+   "rationale": "Station/equipment assembly puzzles are horizontal operated surfaces (1.0x0.3x0.8, h=0.3). Same flat-slab misfire as the assembly_line group; self (operated, own footprint) is correct."
+  },
+  {
+   "group": "principal:chair_assembly_puzzle (stool_assembly_puzzle, table_assembly_puzzle)",
+   "members_count": 2,
+   "decision": "KEEP",
+   "from": "self",
+   "to": "self",
+   "rationale": "Furniture-assembly puzzles (~1.1x0.9x0.6) you build by hand. Form 'cube' would seal them in a case and block assembly; self is correct for an operated puzzle."
+  },
+  {
+   "group": "principal:pattern_tile_puzzle (pattern_tile_4x4/8x8/brick/herringbone/mirror/puzzle)",
+   "members_count": 6,
+   "decision": "KEEP",
+   "from": "self",
+   "to": "self",
+   "rationale": "Interactive tile puzzles (0.8x0.8x0.8) operated directly. Form 'cube' is the volume-heuristic; a sealed vitrine would prevent play. self (own footprint, operated) is correct."
+  },
+  {
+   "group": "principal:example_8_6_recursive_tree_vr (+ fractal_recursive_tree, test_scene_5)",
+   "members_count": 3,
+   "decision": "KEEP",
+   "from": "cube:openframe",
+   "to": "cube:openframe",
+   "rationale": "A recursive fractal tree; registry footprint is 1x3x3 (a 3m tree). The oracle's 0.1x0.1x0.0 (form: plinth|podium) is a pre-growth/empty measurement. openframe (edges-only, 'things that should breathe/grow') is the purpose-built home for growth structures."
+  },
+  {
+   "group": "principal:pulsar_glass_tubes (pulsar_compact, pulsar_glass_tubes, pulsar_lines)",
+   "members_count": 3,
+   "decision": "KEEP",
+   "from": "self",
+   "to": "self",
+   "rationale": "An instrument (kind:instrument, integration:self) that is self-grounded like bar_array and step_sequencer. Form 'cube' (0.7x0.2x1.0) would house a read/operated instrument; self is consistent with the instrument convention."
+  },
+  {
+   "group": "principal:reactive_particle_field (edge_particles, emergence_zone, reactive_particle_field, reactive_particles)",
+   "members_count": 4,
+   "decision": "KEEP",
+   "from": "field",
+   "to": "field",
+   "rationale": "Ambient particle fields (kind:field). A 2.0x1.5x2.0 cloud is not a pedestal object; the doctrine keeps field/apparition unhoused on purpose (housing/pedestal would kill the field). Form 'self(+pedestal)' misreads the cloud extent as own-stand."
+  }
+ ],
+ "verdicts": [
+  {
+   "group": "principal:profile (profile + 16 profile_*)",
+   "members_count": 17,
+   "options": ["KEEP cube:shadowbox", "CHANGE to frame | table_display_2m"],
+   "why_ambiguous": "A profile is a 1D curve renderer (2.0x1.5x0.3 vertical plane) — flat-ish 2D content, which rule 3 says gets frame/table_display and NEVER a 3D housing. BUT the shadowbox cube-family was purpose-built 'for curves, profiles, single luminous figures' (one open face, dark backlit interior, 0.3m depth suits a backlit curve, not a flat frame). Genuine design-intent-vs-rule-3 tension; whether a shallow backlit shadowbox counts as a forbidden '3D housing' for 2D content is Palle's call. Left untouched."
+  },
+  {
+   "group": "override:galton_board",
+   "members_count": 1,
+   "options": ["KEEP pedestal", "self", "cube:tank"],
+   "why_ambiguous": "0.5x0.9x0.3 — not flat, not room-scale. The 0.9m height for a 0.5m board may already include an own base/funnel (rule 1 -> self) or not (pedestal elevates it). Dropping balls is physics, which could suit the tank cube-family. Evidence is inconclusive; taste call, left as declared (pedestal)."
+  }
+ ]
+}

@@ -1,5 +1,5 @@
 {
- "agreements": 96,
+ "agreements": 115,
  "conflicts": [
   {
    "name": "additive_wave_demo",
@@ -50,112 +50,10 @@
    "evidence": "1.0x1.3x0.5 tall \u2014 own stand likely"
   },
   {
-   "name": "buren_col_01_01",
-   "declared": "wrap:table_display_2m",
-   "form_advises": "field",
-   "evidence": "1.0x1.0x6.0 room-scale"
-  },
-  {
-   "name": "buren_col_01_04",
-   "declared": "wrap:table_display_2m",
-   "form_advises": "field",
-   "evidence": "1.0x1.0x6.0 room-scale"
-  },
-  {
-   "name": "buren_col_01_07",
-   "declared": "wrap:table_display_2m",
-   "form_advises": "field",
-   "evidence": "1.0x1.0x6.0 room-scale"
-  },
-  {
-   "name": "buren_col_01_10",
-   "declared": "wrap:table_display_2m",
-   "form_advises": "field",
-   "evidence": "1.0x1.0x6.0 room-scale"
-  },
-  {
-   "name": "buren_col_04_01",
-   "declared": "wrap:table_display_2m",
-   "form_advises": "field",
-   "evidence": "1.0x1.0x6.0 room-scale"
-  },
-  {
-   "name": "buren_col_04_04",
-   "declared": "wrap:table_display_2m",
-   "form_advises": "field",
-   "evidence": "1.0x1.0x6.0 room-scale"
-  },
-  {
-   "name": "buren_col_04_07",
-   "declared": "wrap:table_display_2m",
-   "form_advises": "field",
-   "evidence": "1.0x1.0x6.0 room-scale"
-  },
-  {
-   "name": "buren_col_04_10",
-   "declared": "wrap:table_display_2m",
-   "form_advises": "field",
-   "evidence": "1.0x1.0x6.0 room-scale"
-  },
-  {
-   "name": "buren_col_07_01",
-   "declared": "wrap:table_display_2m",
-   "form_advises": "field",
-   "evidence": "1.0x1.0x6.0 room-scale"
-  },
-  {
-   "name": "buren_col_07_04",
-   "declared": "wrap:table_display_2m",
-   "form_advises": "field",
-   "evidence": "1.0x1.0x6.0 room-scale"
-  },
-  {
-   "name": "buren_col_07_07",
-   "declared": "wrap:table_display_2m",
-   "form_advises": "field",
-   "evidence": "1.0x1.0x6.0 room-scale"
-  },
-  {
-   "name": "buren_col_07_10",
-   "declared": "wrap:table_display_2m",
-   "form_advises": "field",
-   "evidence": "1.0x1.0x6.0 room-scale"
-  },
-  {
-   "name": "buren_col_10_01",
-   "declared": "wrap:table_display_2m",
-   "form_advises": "field",
-   "evidence": "1.0x1.0x6.0 room-scale"
-  },
-  {
-   "name": "buren_col_10_04",
-   "declared": "wrap:table_display_2m",
-   "form_advises": "field",
-   "evidence": "1.0x1.0x6.0 room-scale"
-  },
-  {
-   "name": "buren_col_10_07",
-   "declared": "wrap:table_display_2m",
-   "form_advises": "field",
-   "evidence": "1.0x1.0x6.0 room-scale"
-  },
-  {
-   "name": "buren_col_10_10",
-   "declared": "wrap:table_display_2m",
-   "form_advises": "field",
-   "evidence": "1.0x1.0x6.0 room-scale"
-  },
-  {
    "name": "ca_screen",
    "declared": "wrap:table_display_1m",
    "form_advises": "plinth|podium",
    "evidence": "0.2x0.2x0.0 small"
-  },
-  {
-   "name": "composition_artifact",
-   "declared": "wrap:table_display_2m",
-   "form_advises": "self(+pedestal)",
-   "evidence": "2.0x2.0x4.0 tall \u2014 own stand likely"
   },
   {
    "name": "constructivist_relief",
@@ -668,12 +566,6 @@
    "evidence": "0.8x0.8x0.8 volume"
   },
   {
-   "name": "pattern_tunnel_machine",
-   "declared": "self:gridglass",
-   "form_advises": "field",
-   "evidence": "3.0x3.0x10.0 room-scale"
-  },
-  {
    "name": "profile",
    "declared": "cube:shadowbox",
    "form_advises": "frame|table_display",
@@ -792,12 +684,6 @@
    "declared": "self:gridglass",
    "form_advises": "cube",
    "evidence": "0.7x0.2x1.0 volume"
-  },
-  {
-   "name": "random_walker_machine",
-   "declared": "self:gridglass",
-   "form_advises": "field",
-   "evidence": "20.7x2.1x20.4 room-scale"
   },
   {
    "name": "reactive_particle_field",

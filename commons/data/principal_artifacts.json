@@ -162,9 +162,8 @@
     "depth_m": 0.3,
     "height_m": 2.0
    },
-   "bed": "none (table display)",
-   "integration": "wrap",
-   "wrap_family": "table_display_2m"
+   "bed": "none (self-grounded — primitive stack brings its own base)",
+   "integration": "self"
   },
   "mesh_grammar": {
    "scene": "res://commons/mesh_grammar/mesh_grammar_node.tscn",
@@ -486,7 +485,26 @@
   "_note": "per-artifact integration overrides — for lone artifacts outside any principal/kin; value = wrapper family name OR 'self'/'field'. RULE (Palle): artifacts that bring their own pedestal/stand are SELF — never double-stand them.",
   "coin_toss": "self",
   "dice_throw": "self",
-  "galton_board": "pedestal"
+  "galton_board": "pedestal",
+  "_note_field": "Palle rule 2 — room-scale (base>=6m) is field, housing would kill it. The Buren courtyard columns (6m striped, walk among them) and the walkthrough machines are the environment, not table-displayed content.",
+  "pattern_tunnel_machine": "field",
+  "random_walker_machine": "field",
+  "buren_col_01_01": "field",
+  "buren_col_01_04": "field",
+  "buren_col_01_07": "field",
+  "buren_col_01_10": "field",
+  "buren_col_04_01": "field",
+  "buren_col_04_04": "field",
+  "buren_col_04_07": "field",
+  "buren_col_04_10": "field",
+  "buren_col_07_01": "field",
+  "buren_col_07_04": "field",
+  "buren_col_07_07": "field",
+  "buren_col_07_10": "field",
+  "buren_col_10_01": "field",
+  "buren_col_10_04": "field",
+  "buren_col_10_07": "field",
+  "buren_col_10_10": "field"
  },
  "feature_principals": {
   "_note": "Palle 2026-07-09: 'what we are looking for is artifacts that share the same FEATURE we can optimize' — component-level principals, props-dna style (one parametric .gd, DNA variants). control_console is the built prototype: a console that houses any machine's controls. Census = how many artifact .gd files hand-roll each part today. Migration: extract the part as a parametric prop, artifacts compose instead of hand-rolling. Also the DOUBLE-STAND RULE: artifacts that bring their own pedestal are integration:self — never wrap them (coin_toss was the first catch; 115 suspects in doc/reports/double_stand_suspects.json).",
