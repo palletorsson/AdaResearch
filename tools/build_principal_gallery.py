@@ -176,6 +176,42 @@ def main() -> int:
     for f in families:
         f.setdefault("basis", "scene")
     families.sort(key=lambda f: (-bool(f["principal"]), -f["count"]))
+
+    # ── per-family DNA galleries (props-dna-gallery convention): flat slug
+    # public/principal-dna-<family>/manifest.json, <=10 image-first entries,
+    # GalleryView-compatible so Palle can verdict each instance.
+    for f in families:
+        slug = re.sub(r"[^a-z0-9\-_]", "", f["stem"].lower().replace("*", "")
+                      .replace("__", "_").strip("_").replace("_", "-"))
+        gal_dir = ENC / "public" / f"principal-dna-{slug}"
+        fallback = f.get("capture")
+        entries = []
+        picked = sorted(f["instances"], key=lambda r: (r["capture"] is None, r["name"]))[:10]
+        for r in picked:
+            img = r["capture"] or fallback
+            if not img:
+                continue
+            size = r["size"]
+            fpr = (f"{size['cells'][0]:g}x{size['cells'][1]:g} · {size['h']}m"
+                   if size.get("cells") else "no footprint")
+            cart = " · ".join(f"{k}: {str(v)[:28]}" for k, v in
+                              list(r.get("cartridge", {}).items())[:2])
+            entries.append({"id": r["name"], "image": "/" + img,
+                            "label": r["name"],
+                            "subtitle": cart or f["stem"],
+                            "notes": f"{fpr} ({size.get('source')})"
+                                     + ("" if r["capture"] else " · family image"),
+                            "prop": f["stem"]})
+        if not entries:
+            f["gallery"] = None
+            continue
+        gal_dir.mkdir(parents=True, exist_ok=True)
+        (gal_dir / "manifest.json").write_text(json.dumps(
+            {"description": f.get("note") or f"{f['stem']} — {f['count']} instances, "
+             f"showing {len(entries)}", "entries": entries},
+            indent=1, ensure_ascii=False), encoding="utf-8", newline="\n")
+        f["gallery"] = f"principal-dna-{slug}"
+        f["slug"] = slug
     OUT.write_text(json.dumps(
         {"generated_by": "tools/build_principal_gallery.py",
          "families": families}, indent=1, ensure_ascii=False),
