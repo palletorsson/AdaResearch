@@ -177,16 +177,16 @@
  },
  "kin": {
   "workbench": {
-   "note": "the workbench convention — bench + controls + display teaching one concept; 15 implementations, zero code sharing. Interface contract to converge on: bench, dials, display, label.",
+   "note": "the workbench convention — bench + controls + display teaching one concept; 15 implementations, zero code sharing. Interface contract to converge on: bench, dials, display, label. Footprint corrected to 2x2 per registry spatial_needs (shannon, verlet: footprint_cells 4).",
    "sync": "fill",
    "display": {
     "pose": "bench",
     "grid_cells": [
      2,
-     1
+     2
     ],
     "base_m": 2.0,
-    "depth_m": 0.8,
+    "depth_m": 1.6,
     "height_m": 1.5
    },
    "bed": "table_2m",
@@ -209,17 +209,17 @@
    ]
   },
   "pattern_machine": {
-   "note": "pattern machines a-d — same idea, four separate scripts; merge candidates",
+   "note": "pattern machines a-d — same idea, four separate scripts; merge candidates Corrected to 2x2 x 3.0m per registry footprint [2,3,2].",
    "sync": "fill",
    "display": {
     "pose": "standing",
     "grid_cells": [
      2,
-     1
+     2
     ],
     "base_m": 2.0,
-    "depth_m": 0.5,
-    "height_m": 2.0
+    "depth_m": 2.0,
+    "height_m": 3.0
    },
    "bed": "panel",
    "members": [
@@ -262,6 +262,50 @@
     "exercise_3_12_additive_wave_vr",
     "additive_wave_demo",
     "vertical_wave_lines"
+   ]
+  },
+  "displays": {
+   "note": "standing screens/kiosks missing from the oracle; fill placeholder pending capture-measure",
+   "sync": "fill",
+   "display": {
+    "pose": "standing",
+    "grid_cells": [
+     2,
+     1
+    ],
+    "base_m": 2.0,
+    "depth_m": 0.4,
+    "height_m": 1.6
+   },
+   "bed": "panel",
+   "members": [
+    "artifact_readout_screen",
+    "brians_brain_display",
+    "computer_monitor",
+    "digital_display_array",
+    "hand_telemetry_display",
+    "image_billboard",
+    "info_screen",
+    "monitor_setup",
+    "station_multiscreen",
+    "mondrian_3d_display"
+   ]
+  },
+  "readouts": {
+   "note": "the 1x1 x 0.2m HUD readout family (make_text_block descendants) — all measured; grouped for the canonical-UI migration (TextScreen)",
+   "sync": "fill",
+   "members": [
+    "frame_counter_display",
+    "frames_display",
+    "game_time_display",
+    "health_display",
+    "hits_reset_display",
+    "memory_display",
+    "speed_display",
+    "score_display",
+    "draw_calls_display",
+    "running_text_display",
+    "ca_screen"
    ]
   }
  }

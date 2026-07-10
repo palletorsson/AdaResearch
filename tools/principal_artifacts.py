@@ -121,8 +121,10 @@ def sync_footprints():
         for n in k.get("members", []):
             if n not in reg:
                 continue
-            if sizes.get(n, {}).get("base_m"):
-                continue                     # measured — leave it alone
+            prev = sizes.get(n, {})
+            if prev.get("base_m") and prev.get("source") != "kin-fill":
+                continue                     # real measurement — leave it alone
+            # (own kin-fill entries are re-written so corrections propagate)
             gc = disp.get("grid_cells", [1, 1])
             sizes[n] = {
                 "aabb_size": [float(disp.get("base_m", gc[0])),

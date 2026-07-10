@@ -17418,19 +17418,20 @@
   },
   "mondrian_3d_display": {
    "aabb_size": [
-    0.0,
-    0.0,
-    0.0
+    2.0,
+    1.6,
+    0.4
    ],
-   "base_m": 0.0,
-   "height_m": 0.0,
-   "max_dimension_m": 0.0,
+   "base_m": 2.0,
+   "height_m": 1.6,
+   "max_dimension_m": 2.0,
    "grid_cells": [
-    1.0,
+    2.0,
     1.0
    ],
    "registry": "commons_artifacts",
-   "measured_at": "2026-04-29T07:09:56.762620Z"
+   "principal": "kin:displays",
+   "source": "kin-fill"
   },
   "mondrian_relief": {
    "aabb_size": [
@@ -29264,14 +29265,14 @@
    "aabb_size": [
     2.0,
     1.5,
-    0.8
+    1.6
    ],
    "base_m": 2.0,
    "height_m": 1.5,
    "max_dimension_m": 2.0,
    "grid_cells": [
     2.0,
-    1.0
+    2.0
    ],
    "registry": "cellular_automata",
    "principal": "kin:workbench",
@@ -29281,14 +29282,14 @@
    "aabb_size": [
     2.0,
     1.5,
-    0.8
+    1.6
    ],
    "base_m": 2.0,
    "height_m": 1.5,
    "max_dimension_m": 2.0,
    "grid_cells": [
     2.0,
-    1.0
+    2.0
    ],
    "registry": "qfep",
    "principal": "kin:workbench",
@@ -29298,14 +29299,14 @@
    "aabb_size": [
     2.0,
     1.5,
-    0.8
+    1.6
    ],
    "base_m": 2.0,
    "height_m": 1.5,
    "max_dimension_m": 2.0,
    "grid_cells": [
     2.0,
-    1.0
+    2.0
    ],
    "registry": "foundations",
    "principal": "kin:workbench",
@@ -29315,14 +29316,14 @@
    "aabb_size": [
     2.0,
     1.5,
-    0.8
+    1.6
    ],
    "base_m": 2.0,
    "height_m": 1.5,
    "max_dimension_m": 2.0,
    "grid_cells": [
     2.0,
-    1.0
+    2.0
    ],
    "registry": "boolean_surfaces",
    "principal": "kin:workbench",
@@ -29332,14 +29333,14 @@
    "aabb_size": [
     2.0,
     1.5,
-    0.8
+    1.6
    ],
    "base_m": 2.0,
    "height_m": 1.5,
    "max_dimension_m": 2.0,
    "grid_cells": [
     2.0,
-    1.0
+    2.0
    ],
    "registry": "foundations",
    "principal": "kin:workbench",
@@ -29349,14 +29350,14 @@
    "aabb_size": [
     2.0,
     1.5,
-    0.8
+    1.6
    ],
    "base_m": 2.0,
    "height_m": 1.5,
    "max_dimension_m": 2.0,
    "grid_cells": [
     2.0,
-    1.0
+    2.0
    ],
    "registry": "qfep",
    "principal": "kin:workbench",
@@ -29366,14 +29367,14 @@
    "aabb_size": [
     2.0,
     1.5,
-    0.8
+    1.6
    ],
    "base_m": 2.0,
    "height_m": 1.5,
    "max_dimension_m": 2.0,
    "grid_cells": [
     2.0,
-    1.0
+    2.0
    ],
    "registry": "change",
    "principal": "kin:workbench",
@@ -29383,14 +29384,14 @@
    "aabb_size": [
     2.0,
     1.5,
-    0.8
+    1.6
    ],
    "base_m": 2.0,
    "height_m": 1.5,
    "max_dimension_m": 2.0,
    "grid_cells": [
     2.0,
-    1.0
+    2.0
    ],
    "registry": "qfep",
    "principal": "kin:workbench",
@@ -29400,14 +29401,14 @@
    "aabb_size": [
     2.0,
     1.5,
-    0.8
+    1.6
    ],
    "base_m": 2.0,
    "height_m": 1.5,
    "max_dimension_m": 2.0,
    "grid_cells": [
     2.0,
-    1.0
+    2.0
    ],
    "registry": "qfep",
    "principal": "kin:workbench",
@@ -29417,14 +29418,14 @@
    "aabb_size": [
     2.0,
     1.5,
-    0.8
+    1.6
    ],
    "base_m": 2.0,
    "height_m": 1.5,
    "max_dimension_m": 2.0,
    "grid_cells": [
     2.0,
-    1.0
+    2.0
    ],
    "registry": "change",
    "principal": "kin:workbench",
@@ -29434,14 +29435,14 @@
    "aabb_size": [
     2.0,
     1.5,
-    0.8
+    1.6
    ],
    "base_m": 2.0,
    "height_m": 1.5,
    "max_dimension_m": 2.0,
    "grid_cells": [
     2.0,
-    1.0
+    2.0
    ],
    "registry": "commons_artifacts",
    "principal": "kin:workbench",
@@ -29451,14 +29452,14 @@
    "aabb_size": [
     2.0,
     1.5,
-    0.8
+    1.6
    ],
    "base_m": 2.0,
    "height_m": 1.5,
    "max_dimension_m": 2.0,
    "grid_cells": [
     2.0,
-    1.0
+    2.0
    ],
    "registry": "alternative_geometries",
    "principal": "kin:workbench",
@@ -29468,14 +29469,14 @@
    "aabb_size": [
     2.0,
     1.5,
-    0.8
+    1.6
    ],
    "base_m": 2.0,
    "height_m": 1.5,
    "max_dimension_m": 2.0,
    "grid_cells": [
     2.0,
-    1.0
+    2.0
    ],
    "registry": "soft_bodies",
    "principal": "kin:workbench",
@@ -29484,15 +29485,15 @@
   "pattern_machine_a": {
    "aabb_size": [
     2.0,
-    2.0,
-    0.5
+    3.0,
+    2.0
    ],
    "base_m": 2.0,
-   "height_m": 2.0,
-   "max_dimension_m": 2.0,
+   "height_m": 3.0,
+   "max_dimension_m": 3.0,
    "grid_cells": [
     2.0,
-    1.0
+    2.0
    ],
    "registry": "pattern_machine_a",
    "principal": "kin:pattern_machine",
@@ -29501,15 +29502,15 @@
   "pattern_machine_b": {
    "aabb_size": [
     2.0,
-    2.0,
-    0.5
+    3.0,
+    2.0
    ],
    "base_m": 2.0,
-   "height_m": 2.0,
-   "max_dimension_m": 2.0,
+   "height_m": 3.0,
+   "max_dimension_m": 3.0,
    "grid_cells": [
     2.0,
-    1.0
+    2.0
    ],
    "registry": "pattern_machine_b",
    "principal": "kin:pattern_machine",
@@ -29518,15 +29519,15 @@
   "pattern_machine_c": {
    "aabb_size": [
     2.0,
-    2.0,
-    0.5
+    3.0,
+    2.0
    ],
    "base_m": 2.0,
-   "height_m": 2.0,
-   "max_dimension_m": 2.0,
+   "height_m": 3.0,
+   "max_dimension_m": 3.0,
    "grid_cells": [
     2.0,
-    1.0
+    2.0
    ],
    "registry": "pattern_machine_c",
    "principal": "kin:pattern_machine",
@@ -29535,15 +29536,15 @@
   "pattern_machine_d": {
    "aabb_size": [
     2.0,
-    2.0,
-    0.5
+    3.0,
+    2.0
    ],
    "base_m": 2.0,
-   "height_m": 2.0,
-   "max_dimension_m": 2.0,
+   "height_m": 3.0,
+   "max_dimension_m": 3.0,
    "grid_cells": [
     2.0,
-    1.0
+    2.0
    ],
    "registry": "pattern_machine_d",
    "principal": "kin:pattern_machine",
@@ -29598,6 +29599,159 @@
    ],
    "registry": "vectors_demos",
    "principal": "kin:machines",
+   "source": "kin-fill"
+  },
+  "artifact_readout_screen": {
+   "aabb_size": [
+    2.0,
+    1.6,
+    0.4
+   ],
+   "base_m": 2.0,
+   "height_m": 1.6,
+   "max_dimension_m": 2.0,
+   "grid_cells": [
+    2.0,
+    1.0
+   ],
+   "registry": "packaging",
+   "principal": "kin:displays",
+   "source": "kin-fill"
+  },
+  "brians_brain_display": {
+   "aabb_size": [
+    2.0,
+    1.6,
+    0.4
+   ],
+   "base_m": 2.0,
+   "height_m": 1.6,
+   "max_dimension_m": 2.0,
+   "grid_cells": [
+    2.0,
+    1.0
+   ],
+   "registry": "cellular_automata",
+   "principal": "kin:displays",
+   "source": "kin-fill"
+  },
+  "computer_monitor": {
+   "aabb_size": [
+    2.0,
+    1.6,
+    0.4
+   ],
+   "base_m": 2.0,
+   "height_m": 1.6,
+   "max_dimension_m": 2.0,
+   "grid_cells": [
+    2.0,
+    1.0
+   ],
+   "registry": "lab",
+   "principal": "kin:displays",
+   "source": "kin-fill"
+  },
+  "digital_display_array": {
+   "aabb_size": [
+    2.0,
+    1.6,
+    0.4
+   ],
+   "base_m": 2.0,
+   "height_m": 1.6,
+   "max_dimension_m": 2.0,
+   "grid_cells": [
+    2.0,
+    1.0
+   ],
+   "registry": "lab",
+   "principal": "kin:displays",
+   "source": "kin-fill"
+  },
+  "hand_telemetry_display": {
+   "aabb_size": [
+    2.0,
+    1.6,
+    0.4
+   ],
+   "base_m": 2.0,
+   "height_m": 1.6,
+   "max_dimension_m": 2.0,
+   "grid_cells": [
+    2.0,
+    1.0
+   ],
+   "registry": "primitives",
+   "principal": "kin:displays",
+   "source": "kin-fill"
+  },
+  "image_billboard": {
+   "aabb_size": [
+    2.0,
+    1.6,
+    0.4
+   ],
+   "base_m": 2.0,
+   "height_m": 1.6,
+   "max_dimension_m": 2.0,
+   "grid_cells": [
+    2.0,
+    1.0
+   ],
+   "registry": "image_billboard",
+   "principal": "kin:displays",
+   "source": "kin-fill"
+  },
+  "info_screen": {
+   "aabb_size": [
+    2.0,
+    1.6,
+    0.4
+   ],
+   "base_m": 2.0,
+   "height_m": 1.6,
+   "max_dimension_m": 2.0,
+   "grid_cells": [
+    2.0,
+    1.0
+   ],
+   "registry": "lab",
+   "principal": "kin:displays",
+   "source": "kin-fill"
+  },
+  "monitor_setup": {
+   "aabb_size": [
+    2.0,
+    1.6,
+    0.4
+   ],
+   "base_m": 2.0,
+   "height_m": 1.6,
+   "max_dimension_m": 2.0,
+   "grid_cells": [
+    2.0,
+    1.0
+   ],
+   "registry": "lab",
+   "principal": "kin:displays",
+   "source": "kin-fill"
+  },
+  "station_multiscreen": {
+   "aabb_size": [
+    2.0,
+    1.6,
+    0.4
+   ],
+   "base_m": 2.0,
+   "height_m": 1.6,
+   "max_dimension_m": 2.0,
+   "grid_cells": [
+    2.0,
+    1.0
+   ],
+   "registry": "station",
+   "principal": "kin:displays",
    "source": "kin-fill"
   }
  },
