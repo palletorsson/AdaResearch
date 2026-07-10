@@ -20,6 +20,7 @@ voltage chapels alternate ledge (shrine) / court (pit).
 Usage:
   python tools/mission_graph.py --seq=primitives [--name=Mission_Primitives]
   python tools/mission_graph.py --seq=randomness --cols=4
+  python tools/mission_graph.py --seq=randomness --mode=rooms   # sized rooms + turns
 """
 import json
 import math
@@ -229,7 +230,7 @@ def build(seq, name, cols):
             layers["interactables"][R0 + B - 2][C0 + 2 + j * 2] = piece
     # spawn in the first beat, exit teleporter in the last
     fr, fc = spine[0]
-    layers["utilities"][fr * B + 1][fc * B + 1] = "sp"
+    layers["utilities"][fr * B + 1][fc * B + 1] = "s"
     lr, lc = spine[-1]
     tr, tc = lr * B + B - 2, lc * B + B - 2
     layers["utilities"][tr][tc] = "t:restart"
@@ -541,7 +542,9 @@ def build_halls(seq, name):
         for x in xs:
             layers["walls"][yb - 1][x] = layers["walls"][yb - 1][x].replace("s", "")
             layers["walls"][yb][x] = layers["walls"][yb][x].replace("n", "")
-    layers["utilities"][2][2] = "sp"
+    # "s" = spawn_point ("sp" is SCORE_POINTS — halls only worked via the
+    # pathfinder's (0,0) fallback; the rooms worker caught it)
+    layers["utilities"][2][2] = "s"
     lr = rows - 1
     tx = widths[lr] - 3 if lr % 2 == 0 else 2
     ty = y0s[lr] + depths[lr] - 3
@@ -573,7 +576,8 @@ def build_halls(seq, name):
                                            "supporting_cast": staffed}},
             "settings": {"wall_segments": {"style": "labwall", "height": 3.2,
                                            "thickness": 0.16, "door_width": 2.2,
-                                           "palettes": palettes}},
+                                           "palettes": palettes},
+                         "proximity_lod": {"radius": 14.0}},
             "layers": layers}
     import wall_runs as _wr
     _wr.annotate(data, name)   # marriage 2: runs live in the map
@@ -598,6 +602,304 @@ def build_halls(seq, name):
     return 0
 
 
+# -- mission-rooms v1: a chain of individually-sized rooms with TURNS ---------
+# Palle (on the act-halls): "how we can go from different size spaces and not
+# just straight hallways." Each beat becomes its OWN room, sized to its hero's
+# measured footprint; the chain serpentines in bands (left->right, drop down,
+# right->left) so the walk TURNS — the hand-made individual-map feel, generated
+# from the mission. Rooms are SEA-floor islands in the void, joined by carved
+# doors (within a band, abutting rooms) and 3-wide connector corridors (between
+# bands, when the depth gap needs bridging).
+
+ROOM_BAND_BUDGET = 56        # a band fills left->right until it would exceed this
+
+
+def _room_inner(f: int) -> int:
+    """inner floor size from the hero's max grid-cell footprint (the room fits
+    its hero with a 2m aisle all round): small -> 10, medium -> 14, big -> 18."""
+    if f <= 2:
+        return 10
+    if f <= 4:
+        return 14
+    return 18
+
+
+def _cast_cells(name: str) -> int:
+    """max grid_cells of a cast (default 2 when unmeasured)."""
+    s = _sizes().get(name, {})
+    gc = s.get("grid_cells")
+    if not gc:
+        return 2
+    return max(1, int(max(int(gc[0]), int(gc[1]))))
+
+
+def build_rooms(seq, name):
+    """a chain of individually-sized rooms with turns (serpentine bands), the
+    heroes standing in their own rooms, voltage chapels as small side-rooms."""
+    beats, volt = load_mission(seq)
+    if not beats:
+        print(f"no beats in baseline for {seq}")
+        return 1
+
+    # 1. the mission: beats, each voltage chapel inserted after its target beat
+    # (same spreading rule as build_halls)
+    entries = [{"kind": "beat", "i": i, "role": b["role"], "cast": b["cast"],
+                "alts": b.get("alts", [])} for i, b in enumerate(beats)]
+    n = len(beats)
+    for k, piece in enumerate(volt):
+        t = round(k * (n - 1) / max(1, len(volt) - 1)) if len(volt) > 1 else n // 2
+        for j, e in enumerate(entries):
+            if e["kind"] == "beat" and e["i"] == t:
+                entries.insert(j + 1, {"kind": "chapel", "i": k,
+                                       "role": "voltage: " + piece,
+                                       "cast": piece, "alts": []})
+                break
+
+    # 2. size each room to its hero: resolve the cast GENEROUSLY first, then pick
+    # the inner size from the chosen cast's footprint. Chapels are always 8; the
+    # arrival and exit rooms get at least 12 (they need breathing room).
+    swaps = []
+    last_idx = len(entries) - 1
+    for idx, e in enumerate(entries):
+        if e["kind"] == "chapel":
+            chosen, swapped = resolve_cast(e["cast"], e["alts"], 6.0, 3.0)
+            inner = 8
+        else:
+            chosen, swapped = resolve_cast(e["cast"], e["alts"], 16.0, 3.4)
+            inner = _room_inner(_cast_cells(chosen))
+        e["cast"] = chosen
+        if swapped:
+            swaps.append(swapped + "->" + chosen)
+        if idx == 0 or idx == last_idx:
+            inner = max(inner, 12)
+        e["inner"] = inner
+
+    # 3. lay the rooms into serpentine bands (turns, not one straight corridor)
+    bands = []
+    cur, cur_w = [], 0
+    for e in entries:
+        w = e["inner"] + 2
+        if cur and cur_w + w > ROOM_BAND_BUDGET:
+            bands.append(cur)
+            cur, cur_w = [], 0
+        cur.append(e)
+        cur_w += w
+    if cur:
+        bands.append(cur)
+
+    band_h = [max(e["inner"] + 2 for e in band) for band in bands]
+    band_y = [0] * len(bands)
+    for k in range(1, len(bands)):
+        band_y[k] = band_y[k - 1] + band_h[k - 1]     # bands ABUT (no gap)
+    # x: band 0 runs left->right from 0; every next band's FIRST room sits
+    # directly under the previous band's LAST room (the crossing, >=4 overlap
+    # since both rooms are >=10 wide), then runs the other way. Rooms are
+    # TOP-ALIGNED on their band's y.
+    for k, band in enumerate(bands):
+        anchor = 0 if k == 0 else bands[k - 1][-1]["x"]
+        if k % 2 == 0:                                 # left -> right
+            x = anchor
+            for e in band:
+                e["x"], e["y"] = x, band_y[k]
+                x += e["inner"] + 2
+        else:                                          # right -> left
+            band[0]["x"], band[0]["y"] = anchor, band_y[k]
+            for prev, e in zip(band, band[1:]):
+                e["x"], e["y"] = prev["x"] - (e["inner"] + 2), band_y[k]
+
+    # crop: shift so the leftmost cell is column 0 (right->left bands go negative)
+    min_x = min(e["x"] for band in bands for e in band)
+    for band in bands:
+        for e in band:
+            e["x"] -= min_x
+    W = max(e["x"] + e["inner"] + 2 for band in bands for e in band)
+    H = band_y[-1] + band_h[-1]
+
+    layers = {"structure": [["0"] * W for _ in range(H)],
+              "utilities": [[" "] * W for _ in range(H)],
+              "walls": [[""] * W for _ in range(H)],
+              "interactables": [[" "] * W for _ in range(H)]}
+
+    def unwall(r, c, code):
+        layers["walls"][r][c] = layers["walls"][r][c].replace(code, "")
+
+    # 4. draw each room: SEA floor + perimeter walls (build_halls conventions)
+    for band in bands:
+        for e in band:
+            x, y, s = e["x"], e["y"], e["inner"] + 2
+            for r in range(s):
+                for c in range(s):
+                    layers["structure"][y + r][x + c] = SEA
+            for c in range(s):
+                _wall(layers, y, x + c, "n")
+                _wall(layers, y + s - 1, x + c, "s")
+            for r in range(s):
+                _wall(layers, y + r, x, "w")
+                _wall(layers, y + r, x + s - 1, "e")
+
+    # 5. doors WITHIN a band: consecutive rooms abut -> a 2-cell door on the
+    # shared vertical edge, centred on the vertical overlap (both top-aligned)
+    within_doors = 0
+    for band in bands:
+        for a, b in zip(band, band[1:]):
+            lo, hi = (a, b) if a["x"] < b["x"] else (b, a)
+            le = lo["x"] + lo["inner"] + 2 - 1         # left room's east column
+            rw = hi["x"]                               # right room's west column
+            ov = min(lo["inner"] + 2, hi["inner"] + 2)
+            mid = a["y"] + ov // 2
+            for r in (mid - 1, mid):
+                unwall(r, le, "e")
+                unwall(r, rw, "w")
+            within_doors += 1
+
+    # 6. band CROSSINGS: last room of band k and first of band k+1 share x. If
+    # k's last room is the band's tallest they abut -> a 2-cell horizontal door;
+    # else a 3-wide SEA connector corridor bridges the depth gap (extending the
+    # upper room down is FORBIDDEN — the corridor turns the walk into the band).
+    crossings = []
+    for k in range(len(bands) - 1):
+        up = bands[k][-1]
+        dn = bands[k + 1][0]
+        us_sz = up["inner"] + 2
+        dn_sz = dn["inner"] + 2
+        ov_start = max(up["x"], dn["x"])
+        ov_end = min(up["x"] + us_sz, dn["x"] + dn_sz) - 1
+        ov = ov_end - ov_start + 1
+        if us_sz == band_h[k]:
+            # abut: 2-cell door on the shared horizontal edge, centred on overlap
+            row_up = up["y"] + us_sz - 1               # up room's south row
+            row_dn = dn["y"]                           # dn room's north row (== +1)
+            dc = ov_start + max(0, (ov - 2) // 2)
+            for c in (dc, dc + 1):
+                unwall(row_up, c, "s")
+                unwall(row_dn, c, "n")
+            crossings.append(("door", 0))
+        else:
+            # gap: a 3-wide SEA connector with w/e walls, opening the up room's
+            # south and the dn room's north (3 wide) so the walk drops through
+            cx = ov_start + max(0, (ov - 3) // 2)
+            gap_top = up["y"] + us_sz                  # first empty row below up
+            gap_bot = dn["y"] - 1                      # last empty row above dn
+            for r in range(gap_top, gap_bot + 1):
+                for c in (cx, cx + 1, cx + 2):
+                    layers["structure"][r][c] = SEA
+                _wall(layers, r, cx, "w")
+                _wall(layers, r, cx + 2, "e")
+            for c in (cx, cx + 1, cx + 2):
+                unwall(up["y"] + us_sz - 1, c, "s")
+                unwall(dn["y"], c, "n")
+            crossings.append(("connector", gap_bot - gap_top + 1))
+
+    # 7. the hero stands in each room centre (the build_halls integration block:
+    # self/field bare; cube/wrap/plinth/frame -> sim_cube; else a staging bed,
+    # wall beds hung against the room's north wall)
+    for band in bands:
+        for e in band:
+            x, y, s = e["x"], e["y"], e["inner"] + 2
+            chosen = e["cast"]
+            cr, cc = y + s // 2, x + s // 2
+            integ, cfam = _integration().get(chosen, (None, None))
+            if integ in ("self", "field"):
+                layers["interactables"][cr][cc] = chosen
+            elif integ in ("cube", "wrap", "plinth", "frame"):
+                fam = cfam if integ in ("cube", "wrap") else integ
+                layers["interactables"][cr][cc] = f"sim_cube#family:{fam}#mount:{chosen}"
+            else:
+                bed = sb.select_bed(chosen)
+                if bed["is_wall"] and e["kind"] != "chapel":
+                    cr, cc = y + 1, x + s // 2         # graphics hang on the wall
+                    layers["interactables"][cr][cc] = f"{bed['bed']}:180#mount:{chosen}"
+                else:
+                    layers["interactables"][cr][cc] = f"{bed['bed']}#mount:{chosen}"
+
+    # 8. spawn in the arrival room; exit teleporter in the far corner of the last
+    # room (structure void under it, like build_halls). 's' (not 'sp') — the
+    # pathfinder's find_spawn only recognises 's'/'s:' and 'sp' is score_points.
+    first = bands[0][0]
+    layers["utilities"][first["y"] + 2][first["x"] + 2] = "s"
+    last = bands[-1][-1]
+    ls = last["inner"] + 2
+    ty = last["y"] + ls - 3
+    tx = (last["x"] + ls - 3) if (len(bands) - 1) % 2 == 0 else (last["x"] + 2)
+    layers["utilities"][ty][tx] = "t:restart"
+    layers["structure"][ty][tx] = "0"
+
+    # 9. the supporting cast staffs the beat rooms (after spawn/teleporter so
+    # occupancy is respected) — band 0 = arrival, last band = depth, else work
+    def register(k):
+        if k == 0:
+            return "arrival"
+        return "depth" if k == len(bands) - 1 else "work"
+    slots = [{"act": k, "kind": "beat", "cast": e["cast"],
+              "oy": e["y"] + 1, "ox": e["x"] + 1, "F": e["inner"]}
+             for k, band in enumerate(bands) for e in band if e["kind"] == "beat"]
+    staffed = staff_supporting_cast(layers, slots, _bench_library(seq), register)
+
+    # palettes: one rect per band (build_halls' register weights + accents,
+    # duplicated here so build_halls itself is untouched)
+    PALETTES = {
+        "arrival": {"plain": 5, "glass": 3, "whiteboard": 2, "window": 3,
+                    "vent": 1, "locker": 1},
+        "work":    {"plain": 4, "conduit": 3, "display": 2, "locker": 2,
+                    "vent": 2, "window": 1, "beam": 1},
+        "depth":   {"plain": 3, "hazard": 2, "rib": 3, "beam": 2, "slit": 2,
+                    "conduit": 2, "vent": 1},
+    }
+    ACCENTS = {"arrival": [1.0, 0.62, 0.18], "work": [0.25, 0.85, 1.0],
+               "depth": [1.0, 0.25, 0.15]}
+    palettes = [{"act": k, "name": register(k),
+                 "rect": [0, band_y[k], W - 1, band_y[k] + band_h[k] - 1],
+                 "weights": PALETTES[register(k)],
+                 "accent": ACCENTS[register(k)]} for k in range(len(bands))]
+
+    rooms_out = [{"beat": e["i"], "kind": e["kind"], "cast": e["cast"],
+                  "rect": [e["x"], e["y"], e["inner"] + 2, e["inner"] + 2],
+                  "inner": e["inner"]}
+                 for band in bands for e in band]
+    bands_out = [{"index": k, "register": register(k), "y": band_y[k],
+                  "height": band_h[k], "rooms": len(bands[k]),
+                  "dir": "LR" if k % 2 == 0 else "RL"} for k in range(len(bands))]
+
+    data = {"map_info": {"name": name, "lookup_name": name, "title": name,
+                         "dimensions": {"width": W, "depth": H, "max_height": 3},
+                         "mission_graph": {"seq": seq, "mode": "rooms-v1",
+                                           "bands": bands_out, "rooms": rooms_out,
+                                           "swaps": swaps,
+                                           "supporting_cast": staffed}},
+            "settings": {"wall_segments": {"style": "labwall", "height": 3.2,
+                                           "thickness": 0.16, "door_width": 2.2,
+                                           "palettes": palettes},
+                         "proximity_lod": {"radius": 14.0}},
+            "layers": layers}
+    import wall_runs as _wr
+    _wr.annotate(data, name)   # marriage 2: runs live in the map
+    import wall_props as _wp
+    _wp.annotate(data, name)    # the hospitality layer on the run slots
+    out = ROOT / "commons" / "maps" / name
+    out.mkdir(parents=True, exist_ok=True)
+    with open(out / "map_data.json", "w", encoding="utf-8", newline="\n") as f:
+        json.dump(data, f, indent=1)
+
+    n_conn = sum(1 for c in crossings if c[0] == "connector")
+    n_bdoor = sum(1 for c in crossings if c[0] == "door")
+    print(f"{name}: {len(beats)} beats + {len(volt)} voltage -> {len(entries)} rooms "
+          f"in {len(bands)} bands ({W}x{H} cells)")
+    for k, band in enumerate(bands):
+        dirn = "L->R" if k % 2 == 0 else "R->L"
+        marks = " - ".join(
+            (f"[{e['cast']}/{e['inner']}]" if e["kind"] == "chapel"
+             else f"{e['cast']}/{e['inner']}") for e in band)
+        print(f"  band {k+1} {dirn} y={band_y[k]} h={band_h[k]}  {marks}")
+    print(f"  doors: {within_doors} in-band, {n_bdoor} band-abut, {n_conn} connector(s)")
+    if swaps:
+        print("  size-governed swaps:", ", ".join(swaps))
+    if staffed:
+        print("  supporting cast:", ", ".join(
+            f"{s['name']} (beside {s['beside']}, {s['register']})" for s in staffed))
+    print(f"view: /map-viewer?map={name}")
+    return 0
+
+
 def main() -> int:
     arg = lambda k, d: next((a.split("=", 1)[1] for a in sys.argv
                              if a.startswith(f"--{k}=")), d)
@@ -610,6 +912,9 @@ def main() -> int:
         cols = int(arg("cols", "3"))
         name = arg("name", f"Mission_{seq.title().replace('_','')}")
         return build(seq, name, cols)
+    if mode == "rooms":
+        name = arg("name", f"MissionRooms_{seq.title().replace('_','')}")
+        return build_rooms(seq, name)
     name = arg("name", f"MissionHall_{seq.title().replace('_','')}")
     return build_halls(seq, name)
 
