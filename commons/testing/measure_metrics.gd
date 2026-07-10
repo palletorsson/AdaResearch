@@ -33,17 +33,38 @@ func _run() -> void:
 			subjects[oname] = str(reg[oname])
 	for kname in decl.get("kin", {}):
 		var k: Dictionary = decl["kin"][kname]
+		# measure_all: true → every member testifies (bench-cluster onboarding);
+		# measure_skip lists known headless-hangers (watchdog-killed → skipped).
+		var all: bool = bool(k.get("measure_all", false))
+		var skip: Array = k.get("measure_skip", [])
 		for m in k.get("members", []):
+			if skip.has(m):
+				continue
 			if reg.has(m) and not subjects.has(m):
 				subjects[m] = str(reg[m])
-				break                       # one representative per kin
+				if not all:
+					break               # one representative per kin
 
 	var holder := Node3D.new()
 	get_root().add_child(holder)
 	var results := {}
 	var failed := []
+	# convergent loop: preload prior measurements (pass --fresh to remeasure
+	# everything) and store incrementally, so a watchdog kill loses nothing.
+	var fresh := OS.get_cmdline_user_args().has("--fresh")
+	if not fresh and FileAccess.file_exists("res://doc/reports/artifact_metrics_measured.json"):
+		var pf := FileAccess.open("res://doc/reports/artifact_metrics_measured.json", FileAccess.READ)
+		var prior = JSON.parse_string(pf.get_as_text())
+		pf.close()
+		if prior is Dictionary and prior.get("metrics") is Dictionary:
+			results = prior["metrics"]
 	for name in subjects:
+		if results.has(name):
+			continue                        # already testified in a prior run
 		var path: String = subjects[name]
+		# announce BEFORE instantiating: on a watchdog kill the last
+		# "measuring" line names the hanger for measure_skip.
+		print("measuring ", name)
 		if path == "" or not ResourceLoader.exists(path):
 			failed.append(name)
 			continue
@@ -80,16 +101,21 @@ func _run() -> void:
 				"base": "floor" if absf(base_y) < 0.15 else "float",
 			}
 		print("measured ", name, " -> ", JSON.stringify(results.get(name, {})))
+		_store(results, failed)
 		inst.queue_free()
 		await create_timer(0.05).timeout
 
+	_store(results, failed)
+	print("DONE — %d measured, %d failed" % [results.size(), failed.size()])
+	quit(0)
+
+
+func _store(results: Dictionary, failed: Array) -> void:
 	var out := {"_note": "measured em-square metrics (rest pose, headless); declared metrics in principal_artifacts.json win on merge",
 		"metrics": results, "failed": failed}
 	var of := FileAccess.open("res://doc/reports/artifact_metrics_measured.json", FileAccess.WRITE)
 	of.store_string(JSON.stringify(out, " "))
 	of.close()
-	print("DONE — %d measured, %d failed" % [results.size(), failed.size()])
-	quit(0)
 
 
 func _load_registry() -> Dictionary:

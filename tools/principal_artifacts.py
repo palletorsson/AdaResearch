@@ -27,6 +27,7 @@ Commands:
                      principal-or-kin families -> doc/reports/principal_discovery.json
 """
 import json
+import math
 import re
 import sys
 from collections import defaultdict
@@ -131,19 +132,25 @@ def sync_footprints():
     # (sync: "fill"), it never overrides a real measurement.
     kin = json.loads(PRINCIPALS.read_text(encoding="utf-8")).get("kin", {})
     kin_total = 0
+    em_metrics = {}
+    em_path = ROOT / "doc" / "reports" / "artifact_metrics_measured.json"
+    if em_path.exists():
+        em_metrics = json.loads(em_path.read_text(encoding="utf-8")).get("metrics", {})
     for kname, k in kin.items():
         disp = k.get("display")
         if not disp and not k.get("prefer_registry"):
             continue
         filled = 0
+        em_filled = 0
         for n in k.get("members", []):
             if n not in reg:
                 continue
             prev = sizes.get(n, {})
-            keep_measured = prev.get("base_m") and prev.get("source") not in ("kin-fill", "registry")
+            keep_measured = prev.get("base_m") and prev.get("source") not in (
+                "kin-fill", "registry", "em-square")
             if keep_measured and not k.get("prefer_registry"):
                 continue                     # real measurement — leave it alone
-            # (own kin-fill entries are re-written so corrections propagate)
+            # (own kin-fill / em-square entries are re-written so corrections propagate)
             fp = reg[n]["entry"].get("footprint")
             if isinstance(fp, list) and len(fp) == 3:
                 w, h, dd = float(fp[0]), float(fp[1]), float(fp[2])
@@ -152,6 +159,21 @@ def sync_footprints():
                             "grid_cells": [w, dd],
                             "registry": reg[n]["file"].replace(".json", ""),
                             "principal": f"kin:{kname}", "source": "registry"}
+                kin_total += 1
+                continue
+            # em-square rest-pose testimony beats the flat type fill
+            # (measurement > type truth); unreliable AABBs (>8m) fall through.
+            mm = em_metrics.get(n)
+            if (mm and isinstance(mm.get("size"), list)
+                    and not mm.get("unmeasurable") and max(mm["size"]) <= 8):
+                w, h, dd = (float(x) for x in mm["size"])
+                sizes[n] = {"aabb_size": [w, h, dd], "base_m": max(w, dd),
+                            "height_m": h, "max_dimension_m": max(w, h, dd),
+                            "grid_cells": [max(1.0, math.ceil(w - 0.1)),
+                                           max(1.0, math.ceil(dd - 0.1))],
+                            "registry": reg[n]["file"].replace(".json", ""),
+                            "principal": f"kin:{kname}", "source": "em-square"}
+                em_filled += 1
                 kin_total += 1
                 continue
             if not disp:
@@ -172,9 +194,10 @@ def sync_footprints():
             }
             filled += 1
             kin_total += 1
-        if filled:
-            print(f"  kin:{kname:12s} -> filled {filled} missing members "
-                  f"({disp.get('grid_cells')} x {disp.get('height_m')}m)")
+        if filled or em_filled:
+            print(f"  kin:{kname:12s} -> {em_filled} em-square measured + "
+                  f"{filled} type-filled "
+                  f"({disp.get('grid_cells')} x {disp.get('height_m')}m fill)")
     doc["_principal_sync"] = "tools/principal_artifacts.py --sync-footprints"
     with open(SIZES, "w", encoding="utf-8", newline="\n") as f:
         json.dump(doc, f, indent=1)

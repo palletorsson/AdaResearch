@@ -12,6 +12,16 @@
     0.99
    ]
   },
+  "abject_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.58,
+    2.39,
+    1.58
+   ]
+  },
   "artifact_readout_screen": {
    "anchor_y": 0.0,
    "base": "floor",
@@ -32,6 +42,26 @@
     1.65
    ]
   },
+  "attractor_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    2.13,
+    2.78,
+    2.72
+   ]
+  },
+  "axiom_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.7,
+    3.32,
+    1.7
+   ]
+  },
   "bar_array": {
    "anchor_y": 0.04,
    "base": "floor",
@@ -42,6 +72,16 @@
     0.19
    ]
   },
+  "becoming_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.5,
+    2.35,
+    1.5
+   ]
+  },
   "biederman_relief_puzzle": {
    "anchor_y": 0.13,
    "base": "floor",
@@ -50,6 +90,46 @@
     1.0,
     1.33,
     0.5
+   ]
+  },
+  "blue_noise_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.15,
+    1.28,
+    0.7
+   ]
+  },
+  "bracket_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.33,
+    2.26,
+    1.33
+   ]
+  },
+  "brians_brain_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.1,
+    2.1,
+    1.0
+   ]
+  },
+  "bsp_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.14,
+    1.86,
+    1.14
    ]
   },
   "buren_col_01_01": {
@@ -100,6 +180,56 @@
   "buren_col_10_10": {
    "unmeasurable": true
   },
+  "ca_texture_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    2.45,
+    2.83,
+    2.45
+   ]
+  },
+  "cantor_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    2.02,
+    2.61,
+    2.02
+   ]
+  },
+  "cap_theorem_bench": {
+   "anchor_y": 0.06,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.31,
+    2.13,
+    1.23
+   ]
+  },
+  "cave_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    2.42,
+    2.81,
+    2.42
+   ]
+  },
+  "centripetal_bench": {
+   "anchor_y": -0.1,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    2.4,
+    3.38,
+    2.4
+   ]
+  },
   "chair_assembly_puzzle": {
    "anchor_y": 0.24,
    "base": "float",
@@ -108,6 +238,26 @@
     1.16,
     1.12,
     0.61
+   ]
+  },
+  "city_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.87,
+    2.52,
+    2.52
+   ]
+  },
+  "coin_dice_bench": {
+   "anchor_y": 0.5,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    1.68,
+    2.94,
+    1.68
    ]
   },
   "coin_toss": {
@@ -120,8 +270,48 @@
     15.0
    ]
   },
+  "colonization_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.69,
+    2.64,
+    1.69
+   ]
+  },
+  "commons_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    2.01,
+    2.51,
+    2.01
+   ]
+  },
   "composition_artifact": {
    "unmeasurable": true
+  },
+  "coral_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.82,
+    2.53,
+    1.82
+   ]
+  },
+  "crisis_synthesis_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.25,
+    2.24,
+    1.25
+   ]
   },
   "crystalcluster": {
    "anchor_y": 0.37,
@@ -131,6 +321,26 @@
     0.94,
     0.74,
     0.74
+   ]
+  },
+  "curvature_bench": {
+   "anchor_y": 0.09,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    2.07,
+    2.63,
+    2.07
+   ]
+  },
+  "dendrite_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.79,
+    2.5,
+    1.79
    ]
   },
   "dice_throw": {
@@ -143,6 +353,96 @@
     16.0
    ]
   },
+  "dimension_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.1,
+    2.09,
+    1.17
+   ]
+  },
+  "distribution_bench": {
+   "anchor_y": 0.5,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    1.98,
+    3.09,
+    1.98
+   ]
+  },
+  "dla_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.53,
+    2.37,
+    1.53
+   ]
+  },
+  "dragon_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    2.52,
+    2.88,
+    2.52
+   ]
+  },
+  "edge_ground_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.2,
+    2.09,
+    1.18
+   ]
+  },
+  "edge_of_chaos_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    2.25,
+    2.73,
+    2.25
+   ]
+  },
+  "elementary_ca_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.61,
+    2.4,
+    1.61
+   ]
+  },
+  "energy_landscape_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    2.62,
+    2.91,
+    2.62
+   ]
+  },
+  "entropy_bench": {
+   "anchor_y": -0.09,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.39,
+    2.21,
+    1.39
+   ]
+  },
   "equipment_assembly_puzzle": {
    "anchor_y": -0.13,
    "base": "floor",
@@ -151,6 +451,26 @@
     1.93,
     1.94,
     1.94
+   ]
+  },
+  "ethics_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.56,
+    2.28,
+    1.56
+   ]
+  },
+  "euclid_parallel_bench": {
+   "anchor_y": -0.01,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    2.66,
+    2.94,
+    2.66
    ]
   },
   "example_3_8_static_wave_vr": {
@@ -183,6 +503,66 @@
     3.37
    ]
   },
+  "f_order_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.5,
+    2.25,
+    1.5
+   ]
+  },
+  "fern_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.63,
+    2.43,
+    1.63
+   ]
+  },
+  "field_bench": {
+   "anchor_y": -0.1,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    2.2,
+    3.38,
+    2.2
+   ]
+  },
+  "forest_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    2.14,
+    5.75,
+    3.41
+   ]
+  },
+  "four_classes_bench": {
+   "anchor_y": -0.01,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    2.0,
+    2.59,
+    2.0
+   ]
+  },
+  "fractal_arch_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.75,
+    2.7,
+    1.75
+   ]
+  },
   "frame_counter_display": {
    "anchor_y": -0.2,
    "base": "float",
@@ -191,6 +571,16 @@
     1.0,
     0.3,
     0.15
+   ]
+  },
+  "furniture_recursion_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.1,
+    2.13,
+    1.05
    ]
   },
   "galton_board": {
@@ -203,6 +593,36 @@
     0.27
    ]
   },
+  "generations_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    2.36,
+    2.78,
+    2.36
+   ]
+  },
+  "genetic_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.81,
+    2.71,
+    1.81
+   ]
+  },
+  "genome_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.61,
+    2.61,
+    1.61
+   ]
+  },
   "godel_sentence_machine": {
    "anchor_y": 0.0,
    "base": "floor",
@@ -213,6 +633,26 @@
     1.34
    ]
   },
+  "golden_spiral_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.86,
+    2.53,
+    1.86
+   ]
+  },
+  "grab_jelly_bench": {
+   "anchor_y": 0.25,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    1.1,
+    2.31,
+    0.8
+   ]
+  },
   "grab_sphere_point_with_color": {
    "anchor_y": 0.01,
    "base": "floor",
@@ -221,6 +661,16 @@
     0.02,
     0.02,
     0.02
+   ]
+  },
+  "grammar_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    2.1,
+    2.65,
+    2.1
    ]
   },
   "grid2d": {
@@ -243,6 +693,106 @@
     1.68
    ]
   },
+  "halting_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    2.51,
+    2.36,
+    1.71
+   ]
+  },
+  "hilbert_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.93,
+    2.57,
+    1.93
+   ]
+  },
+  "ifs_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.36,
+    2.28,
+    1.36
+   ]
+  },
+  "jitter_bench": {
+   "anchor_y": -0.09,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    2.17,
+    2.6,
+    2.17
+   ]
+  },
+  "julia_bench": {
+   "anchor_y": 0.01,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.32,
+    2.27,
+    1.32
+   ]
+  },
+  "lambda_dial_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.69,
+    2.29,
+    1.58
+   ]
+  },
+  "langton_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.65,
+    2.43,
+    1.65
+   ]
+  },
+  "lattice_gas_bench": {
+   "anchor_y": -0.01,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.7,
+    2.44,
+    1.7
+   ]
+  },
+  "life_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.57,
+    2.39,
+    1.57
+   ]
+  },
+  "life_zoo_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.1,
+    2.09,
+    0.97
+   ]
+  },
   "living_paper": {
    "anchor_y": 0.1,
    "base": "floor",
@@ -251,6 +801,76 @@
     0.2,
     0.2,
     0.08
+   ]
+  },
+  "lyapunov_bench": {
+   "anchor_y": 0.01,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.25,
+    2.23,
+    1.25
+   ]
+  },
+  "magnitude_bench": {
+   "anchor_y": -0.1,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    2.71,
+    3.59,
+    2.54
+   ]
+  },
+  "mandelbrot_bench": {
+   "anchor_y": 0.01,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.1,
+    1.84,
+    0.47
+   ]
+  },
+  "mass_spring_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    2.83,
+    3.01,
+    2.83
+   ]
+  },
+  "mc_field_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.1,
+    2.13,
+    1.1
+   ]
+  },
+  "membrane_bench": {
+   "anchor_y": 0.21,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    1.66,
+    2.64,
+    1.86
+   ]
+  },
+  "menger_bench": {
+   "anchor_y": 0.01,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.63,
+    2.42,
+    1.63
    ]
   },
   "mesh_grammar": {
@@ -263,6 +883,16 @@
     0.85
    ]
   },
+  "mesh_grammar_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.21,
+    2.05,
+    1.2
+   ]
+  },
   "metaballs": {
    "anchor_y": 6.0,
    "base": "float",
@@ -271,6 +901,86 @@
     12.0,
     12.0,
     12.0
+   ]
+  },
+  "molecular_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.81,
+    2.41,
+    1.81
+   ]
+  },
+  "morphogenesis_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.46,
+    2.54,
+    1.46
+   ]
+  },
+  "neighbourhood_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.95,
+    2.35,
+    1.95
+   ]
+  },
+  "newton_bench": {
+   "anchor_y": -0.1,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    2.6,
+    3.38,
+    1.76
+   ]
+  },
+  "noise_compare_bench": {
+   "anchor_y": -0.09,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.9,
+    2.47,
+    1.88
+   ]
+  },
+  "noise_dunes_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.15,
+    2.13,
+    1.01
+   ]
+  },
+  "octopus_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.71,
+    2.46,
+    1.71
+   ]
+  },
+  "parametric_bench": {
+   "anchor_y": 0.09,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    3.38,
+    3.38,
+    3.38
    ]
   },
   "pattern_machine_a": {
@@ -303,6 +1013,46 @@
     18.89
    ]
   },
+  "perlin_bench": {
+   "anchor_y": -0.09,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.72,
+    1.95,
+    0.97
+   ]
+  },
+  "phi_rate_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.55,
+    2.6,
+    1.31
+   ]
+  },
+  "pi_dart_bench": {
+   "anchor_y": 0.01,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.55,
+    2.4,
+    1.55
+   ]
+  },
+  "poisson_scatter_bench": {
+   "anchor_y": 0.46,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    1.45,
+    1.48,
+    1.4
+   ]
+  },
   "profile": {
    "anchor_y": 0.21,
    "base": "float",
@@ -323,6 +1073,26 @@
     0.98
    ]
   },
+  "qfep_reactor_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    2.09,
+    2.55,
+    2.09
+   ]
+  },
+  "random_walk_bench": {
+   "anchor_y": 0.5,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    1.79,
+    3.0,
+    1.85
+   ]
+  },
   "random_walker_machine": {
    "anchor_y": 1.32,
    "base": "float",
@@ -331,6 +1101,16 @@
     20.31,
     10.09,
     20.58
+   ]
+  },
+  "reaction_diffusion_bench": {
+   "anchor_y": -0.01,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    2.16,
+    2.67,
+    2.16
    ]
   },
   "reactive_particle_field": {
@@ -343,6 +1123,186 @@
     1.93
    ]
   },
+  "recursion_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.63,
+    2.45,
+    1.63
+   ]
+  },
+  "recursive_tree_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    2.05,
+    2.92,
+    2.05
+   ]
+  },
+  "rejection_bench": {
+   "anchor_y": 0.01,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.64,
+    2.43,
+    1.64
+   ]
+  },
+  "restitution_bench": {
+   "anchor_y": -0.7,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    5.0,
+    3.43,
+    2.46
+   ]
+  },
+  "rhizome_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.83,
+    2.42,
+    1.83
+   ]
+  },
+  "rigidity_dial_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.72,
+    2.46,
+    1.72
+   ]
+  },
+  "rule110_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.88,
+    2.54,
+    1.88
+   ]
+  },
+  "rule30_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    2.45,
+    2.83,
+    2.45
+   ]
+  },
+  "rule90_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.73,
+    2.47,
+    1.73
+   ]
+  },
+  "scaling_bench": {
+   "anchor_y": -0.1,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    2.66,
+    3.66,
+    2.2
+   ]
+  },
+  "scatter_bench": {
+   "anchor_y": -0.65,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    1.99,
+    2.0,
+    1.99
+   ]
+  },
+  "sdf_sculpt_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.1,
+    1.95,
+    1.1
+   ]
+  },
+  "seed_bench": {
+   "anchor_y": -0.09,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.46,
+    2.24,
+    1.46
+   ]
+  },
+  "seed_world_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    3.09,
+    3.17,
+    3.09
+   ]
+  },
+  "sierpinski_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.72,
+    2.46,
+    1.72
+   ]
+  },
+  "situated_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.65,
+    2.33,
+    1.65
+   ]
+  },
+  "slime_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.05,
+    2.04,
+    0.95
+   ]
+  },
+  "space_filling_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.93,
+    2.57,
+    1.93
+   ]
+  },
   "step_sequencer": {
    "anchor_y": 0.65,
    "base": "float",
@@ -351,6 +1311,196 @@
     1.6,
     1.6,
     1.6
+   ]
+  },
+  "stigmergy_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.54,
+    2.37,
+    1.54
+   ]
+  },
+  "stochastic_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.31,
+    2.38,
+    1.29
+   ]
+  },
+  "stretch_bench": {
+   "anchor_y": 0.07,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    0.52,
+    0.57,
+    0.27
+   ]
+  },
+  "substrate_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    2.3,
+    2.74,
+    2.3
+   ]
+  },
+  "ten_print_bench": {
+   "anchor_y": -0.45,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    2.31,
+    2.31,
+    2.31
+   ]
+  },
+  "tentacle_grab_bench": {
+   "anchor_y": 0.55,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    1.0,
+    2.63,
+    0.95
+   ]
+  },
+  "terrain_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    2.4,
+    2.8,
+    2.4
+   ]
+  },
+  "tesseract_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.66,
+    2.3,
+    1.8
+   ]
+  },
+  "tiling_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    2.9,
+    2.14,
+    2.9
+   ]
+  },
+  "torque_bench": {
+   "anchor_y": -0.1,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    3.26,
+    3.29,
+    2.0
+   ]
+  },
+  "turtle_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.8,
+    2.5,
+    1.8
+   ]
+  },
+  "vector_bench": {
+   "anchor_y": -0.1,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    2.6,
+    3.15,
+    2.2
+   ]
+  },
+  "velocity_bench": {
+   "anchor_y": -0.72,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    3.4,
+    3.09,
+    2.4
+   ]
+  },
+  "viscous_bench": {
+   "anchor_y": -0.4,
+   "base": "float",
+   "pose": "volume",
+   "size": [
+    2.41,
+    2.41,
+    2.41
+   ]
+  },
+  "voronoi_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.06,
+    1.98,
+    0.97
+   ]
+  },
+  "wfc_room_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.12,
+    1.93,
+    1.12
+   ]
+  },
+  "wfc_tile_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.12,
+    1.87,
+    1.12
+   ]
+  },
+  "wind_bench": {
+   "anchor_y": -0.1,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    2.6,
+    3.12,
+    1.6
+   ]
+  },
+  "wireworld_bench": {
+   "anchor_y": 0.0,
+   "base": "floor",
+   "pose": "volume",
+   "size": [
+    1.84,
+    2.52,
+    1.84
    ]
   }
  }

@@ -1,5 +1,5 @@
 {
- "_doctrine": "PRINCIPAL ARTIFACTS: one canonical scene + one harmonized interface; instances are registry configs (the motif/cartridge move made explicit). The principal declares the DISPLAY footprint once — pose, cells, height — and every instance inherits it via tools/principal_artifacts.py --sync-footprints (source:principal in artifact_sizes.json). Per-instance AABB measurement is wrong for these: it catches planes lying flat (grid2d h=0.02) or nothing (grid3d, composition unmeasured). The type is the spatial truth; edit it HERE. interface[] = the harmonized config contract — the migration target for instances that drift. KIN families (kin{}) are interface-similar artifacts with SEPARATE scenes/scripts — harmonization candidates the gallery surfaces via declared members, name stems (pattern_machine_a..d), and suffix conventions (*_workbench, *_machine). INTEGRATION (Palle 2026-07-09): the wrapper is the middle layer — what makes an artifact FEEL integrated in map space. Vocabulary: self (brings its own base — no bed, no wrapper: workbenches, kiosks), cube (the 1m sim-housing — the grid cell made visible; wrapper IS the bed AND carries the harmonized physical interface: label plate, play/pause, cartridge slot), frame (flat work, framed + wall/hover mounted), plinth (small, held to the eye), field (the artifact IS the environment — room-scale, housing would kill it). Declared integration PRECEDES size-guessed beds; 'field'/apparition stays unhoused on purpose (the sieve's dark spot).",
+ "_doctrine": "PRINCIPAL ARTIFACTS: one canonical scene + one harmonized interface; instances are registry configs (the motif/cartridge move made explicit). The principal declares the DISPLAY footprint once \u2014 pose, cells, height \u2014 and every instance inherits it via tools/principal_artifacts.py --sync-footprints (source:principal in artifact_sizes.json). Per-instance AABB measurement is wrong for these: it catches planes lying flat (grid2d h=0.02) or nothing (grid3d, composition unmeasured). The type is the spatial truth; edit it HERE. interface[] = the harmonized config contract \u2014 the migration target for instances that drift. KIN families (kin{}) are interface-similar artifacts with SEPARATE scenes/scripts \u2014 harmonization candidates the gallery surfaces via declared members, name stems (pattern_machine_a..d), and suffix conventions (*_workbench, *_machine). INTEGRATION (Palle 2026-07-09): the wrapper is the middle layer \u2014 what makes an artifact FEEL integrated in map space. Vocabulary: self (brings its own base \u2014 no bed, no wrapper: workbenches, kiosks), cube (the 1m sim-housing \u2014 the grid cell made visible; wrapper IS the bed AND carries the harmonized physical interface: label plate, play/pause, cartridge slot), frame (flat work, framed + wall/hover mounted), plinth (small, held to the eye), field (the artifact IS the environment \u2014 room-scale, housing would kill it). Declared integration PRECEDES size-guessed beds; 'field'/apparition stays unhoused on purpose (the sieve's dark spot).",
  "principals": {
   "living_paper": {
    "scene": "res://commons/substrates/living_paper/living_paper.tscn",
@@ -47,7 +47,7 @@
     "depth_m": 0.3,
     "height_m": 2.0
    },
-   "bed": "none (frame — the 2D plane stands vertical, no 3D housing)",
+   "bed": "none (frame \u2014 the 2D plane stands vertical, no 3D housing)",
    "integration": "wrap",
    "wrap_family": "frame"
   },
@@ -99,7 +99,7 @@
    "bed": "table_2m",
    "integration": "cube",
    "cube_family": "shadowbox",
-   "_verdict": "Palle 2026-07-09: profile STAYS in the shadowbox — the purpose-built dark box wins over the flat-curve rule. Ruled after seeing /wrapper-fit."
+   "_verdict": "Palle 2026-07-09: profile STAYS in the shadowbox \u2014 the purpose-built dark box wins over the flat-curve rule. Ruled after seeing /wrapper-fit."
   },
   "bar_array": {
    "scene": "res://commons/substrates/bar_array/bar_array_substrate.tscn",
@@ -163,7 +163,7 @@
     "depth_m": 0.3,
     "height_m": 2.0
    },
-   "bed": "none (self-grounded — primitive stack brings its own base)",
+   "bed": "none (self-grounded \u2014 primitive stack brings its own base)",
    "integration": "self"
   },
   "mesh_grammar": {
@@ -278,7 +278,7 @@
  },
  "kin": {
   "workbench": {
-   "note": "the workbench convention — bench + controls + display teaching one concept; 15 implementations, zero code sharing. Interface contract to converge on: bench, dials, display, label. Footprint corrected to 2x2 per registry spatial_needs (shannon, verlet: footprint_cells 4).",
+   "note": "the workbench convention \u2014 bench + controls + display teaching one concept; 15 implementations, zero code sharing. Interface contract to converge on: bench, dials, display, label. Footprint corrected to 2x2 per registry spatial_needs (shannon, verlet: footprint_cells 4).",
    "sync": "fill",
    "display": {
     "pose": "bench",
@@ -311,7 +311,7 @@
    "integration": "self"
   },
   "pattern_machine": {
-   "note": "pattern machines a-d — same idea, four separate scripts; merge candidates Corrected to 2x2 x 3.0m per registry footprint [2,3,2].",
+   "note": "pattern machines a-d \u2014 same idea, four separate scripts; merge candidates Corrected to 2x2 x 3.0m per registry footprint [2,3,2].",
    "sync": "fill",
    "display": {
     "pose": "standing",
@@ -333,7 +333,7 @@
    "integration": "self"
   },
   "machines": {
-   "note": "the *_machine convention — heterogeneous (slot 1x1, random_walker 21x21!); fill-only truth is a REVIEW placeholder",
+   "note": "the *_machine convention \u2014 heterogeneous (slot 1x1, random_walker 21x21!); fill-only truth is a REVIEW placeholder",
    "sync": "fill",
    "display": {
     "pose": "standing",
@@ -357,7 +357,7 @@
    "integration": "self"
   },
   "wave_examples": {
-   "note": "the NOC oscillation wave family — same teaching interface, separate scenes; all measured, no sync needed prefer_registry: measured AABBs catch the wave mid-frame (0.2m); the registry's room-scale footprints are the truth.",
+   "note": "the NOC oscillation wave family \u2014 same teaching interface, separate scenes; all measured, no sync needed prefer_registry: measured AABBs catch the wave mid-frame (0.2m); the registry's room-scale footprints are the truth.",
    "sync": "fill",
    "members": [
     "example_3_8_static_wave_vr",
@@ -399,7 +399,7 @@
    "integration": "self"
   },
   "readouts": {
-   "note": "the 1x1 x 0.2m HUD readout family (make_text_block descendants) — all measured; grouped for the canonical-UI migration (TextScreen)",
+   "note": "the 1x1 x 0.2m HUD readout family (make_text_block descendants) \u2014 all measured; grouped for the canonical-UI migration (TextScreen)",
    "sync": "fill",
    "members": [
     "frame_counter_display",
@@ -416,10 +416,145 @@
    ],
    "integration": "wrap",
    "wrap_family": "table_display_1m"
+  },
+  "bench": {
+   "note": "the *_bench convention \u2014 one algorithm 'on a bench': a self-grounded 2x2 bench body carrying a live sim/geometry plus panels and a readout, teaching one concept. Separate scenes/scripts; ~112 share the embodied_prop.gd base, the rest (grab_jelly, tentacle_grab, stretch) build their own bench too. Sibling of kin:workbench (that = bench+dials+display console; this = the leaner embodied prop). All unmeasured pre-onboarding; footprint filled 2x2 per registry spatial_needs.footprint_cells=4 and the workbench precedent. station_bench EXCLUDED \u2014 curation-kit furniture (parametric HangarKit worktable), not a concept bench. Interface to converge on: bench, panels, live-field display, label.",
+   "sync": "fill",
+   "display": {
+    "pose": "bench",
+    "grid_cells": [
+     2,
+     2
+    ],
+    "base_m": 2.0,
+    "depth_m": 1.6,
+    "height_m": 1.5
+   },
+   "bed": "none (self-grounded)",
+   "integration": "self",
+   "measure_all": true,
+   "measure_skip": [],
+   "members": [
+    "abject_bench",
+    "attractor_bench",
+    "axiom_bench",
+    "becoming_bench",
+    "blue_noise_bench",
+    "bracket_bench",
+    "brians_brain_bench",
+    "bsp_bench",
+    "ca_texture_bench",
+    "cantor_bench",
+    "cap_theorem_bench",
+    "cave_bench",
+    "centripetal_bench",
+    "city_bench",
+    "coin_dice_bench",
+    "colonization_bench",
+    "commons_bench",
+    "coral_bench",
+    "crisis_synthesis_bench",
+    "curvature_bench",
+    "dendrite_bench",
+    "dimension_bench",
+    "distribution_bench",
+    "dla_bench",
+    "dragon_bench",
+    "edge_ground_bench",
+    "edge_of_chaos_bench",
+    "elementary_ca_bench",
+    "energy_landscape_bench",
+    "entropy_bench",
+    "ethics_bench",
+    "euclid_parallel_bench",
+    "f_order_bench",
+    "fern_bench",
+    "field_bench",
+    "forest_bench",
+    "four_classes_bench",
+    "fractal_arch_bench",
+    "furniture_recursion_bench",
+    "generations_bench",
+    "genetic_bench",
+    "genome_bench",
+    "golden_spiral_bench",
+    "grab_jelly_bench",
+    "grammar_bench",
+    "halting_bench",
+    "hilbert_bench",
+    "ifs_bench",
+    "jitter_bench",
+    "julia_bench",
+    "lambda_dial_bench",
+    "langton_bench",
+    "lattice_gas_bench",
+    "life_bench",
+    "life_zoo_bench",
+    "lyapunov_bench",
+    "magnitude_bench",
+    "mandelbrot_bench",
+    "mass_spring_bench",
+    "mc_field_bench",
+    "membrane_bench",
+    "menger_bench",
+    "mesh_grammar_bench",
+    "molecular_bench",
+    "morphogenesis_bench",
+    "neighbourhood_bench",
+    "newton_bench",
+    "noise_compare_bench",
+    "noise_dunes_bench",
+    "octopus_bench",
+    "parametric_bench",
+    "perlin_bench",
+    "phi_rate_bench",
+    "pi_dart_bench",
+    "poisson_scatter_bench",
+    "qfep_reactor_bench",
+    "random_walk_bench",
+    "reaction_diffusion_bench",
+    "recursion_bench",
+    "recursive_tree_bench",
+    "rejection_bench",
+    "restitution_bench",
+    "rhizome_bench",
+    "rigidity_dial_bench",
+    "rule110_bench",
+    "rule30_bench",
+    "rule90_bench",
+    "scaling_bench",
+    "scatter_bench",
+    "sdf_sculpt_bench",
+    "seed_bench",
+    "seed_world_bench",
+    "sierpinski_bench",
+    "situated_bench",
+    "slime_bench",
+    "space_filling_bench",
+    "stigmergy_bench",
+    "stochastic_bench",
+    "stretch_bench",
+    "substrate_bench",
+    "ten_print_bench",
+    "tentacle_grab_bench",
+    "terrain_bench",
+    "tesseract_bench",
+    "tiling_bench",
+    "torque_bench",
+    "turtle_bench",
+    "vector_bench",
+    "velocity_bench",
+    "viscous_bench",
+    "voronoi_bench",
+    "wfc_room_bench",
+    "wfc_tile_bench",
+    "wind_bench",
+    "wireworld_bench"
+   ]
   }
  },
  "wrappers": {
-  "_note": "Palle: 'room for more cube families so we do not collapse all objects — the DNA makes the different cube families look different.' The cube is a GENUS: the chassis is invariant (the shared hand-grammar), the family is expression (legible at 3m). Families assigned at PRINCIPAL level = wayfinding: you read the department by its vitrine. Keep the family count small (5-8). Build target: CubeWrapperLibrary (Godot builders -> glTF, the WallVariantLibrary pipeline).",
+  "_note": "Palle: 'room for more cube families so we do not collapse all objects \u2014 the DNA makes the different cube families look different.' The cube is a GENUS: the chassis is invariant (the shared hand-grammar), the family is expression (legible at 3m). Families assigned at PRINCIPAL level = wayfinding: you read the department by its vitrine. Keep the family count small (5-8). Build target: CubeWrapperLibrary (Godot builders -> glTF, the WallVariantLibrary pipeline).",
   "cube_chassis": {
    "size_m": 1.0,
    "invariants": [
@@ -436,21 +571,21 @@
     "frame": "steel-cool",
     "base": "flush",
     "atmosphere": "grid-lined interior",
-    "for": "discrete/grid worlds — CA, arrays, pixels"
+    "for": "discrete/grid worlds \u2014 CA, arrays, pixels"
    },
    "tank": {
     "enclosure": "liquid tank",
     "frame": "brass-warm",
     "base": "hover-shadow",
     "atmosphere": "fluid tint, backlit",
-    "for": "physics, particles, flows — things that move continuously"
+    "for": "physics, particles, flows \u2014 things that move continuously"
    },
    "cage": {
     "enclosure": "mesh cage",
     "frame": "dark",
     "base": "flush",
     "atmosphere": "clear",
-    "for": "agents, walkers, creatures — things that could get out"
+    "for": "agents, walkers, creatures \u2014 things that could get out"
    },
    "shadowbox": {
     "enclosure": "one open face, dark interior",
@@ -463,13 +598,13 @@
     "enclosure": "edges only, open air",
     "frame": "lab-white",
     "base": "hover-shadow",
-    "atmosphere": "none — air",
+    "atmosphere": "none \u2014 air",
     "for": "growth, grammar, things that should breathe"
    }
   },
   "stand_families": {
    "table_display_1m": {
-    "for": "vertical 2D content, frameless — papers, compositions, readouts",
+    "for": "vertical 2D content, frameless \u2014 papers, compositions, readouts",
     "mount": "on the table against the panel"
    },
    "table_display_2m": {
@@ -477,17 +612,17 @@
     "mount": "on the table against the panel"
    },
    "podium": {
-    "for": "small hand-operated interactives — coin_toss and kin",
+    "for": "small hand-operated interactives \u2014 coin_toss and kin",
     "mount": "the operating surface at 1.1m"
    }
   }
  },
  "artifact_overrides": {
-  "_note": "per-artifact integration overrides — for lone artifacts outside any principal/kin; value = wrapper family name OR 'self'/'field'. RULE (Palle): artifacts that bring their own pedestal/stand are SELF — never double-stand them.",
+  "_note": "per-artifact integration overrides \u2014 for lone artifacts outside any principal/kin; value = wrapper family name OR 'self'/'field'. RULE (Palle): artifacts that bring their own pedestal/stand are SELF \u2014 never double-stand them.",
   "coin_toss": "self",
   "dice_throw": "self",
   "galton_board": "pedestal",
-  "_note_field": "Palle rule 2 — room-scale (base>=6m) is field, housing would kill it. The Buren courtyard columns (6m striped, walk among them) and the walkthrough machines are the environment, not table-displayed content.",
+  "_note_field": "Palle rule 2 \u2014 room-scale (base>=6m) is field, housing would kill it. The Buren courtyard columns (6m striped, walk among them) and the walkthrough machines are the environment, not table-displayed content.",
   "pattern_tunnel_machine": "field",
   "random_walker_machine": "field",
   "buren_col_01_01": "field",
@@ -508,12 +643,12 @@
   "buren_col_10_10": "field"
  },
  "feature_principals": {
-  "_note": "Palle 2026-07-09: 'what we are looking for is artifacts that share the same FEATURE we can optimize' — component-level principals, props-dna style (one parametric .gd, DNA variants). control_console is the built prototype: a console that houses any machine's controls. Census = how many artifact .gd files hand-roll each part today. Migration: extract the part as a parametric prop, artifacts compose instead of hand-rolling. Also the DOUBLE-STAND RULE: artifacts that bring their own pedestal are integration:self — never wrap them (coin_toss was the first catch; 115 suspects in doc/reports/double_stand_suspects.json).",
+  "_note": "Palle 2026-07-09: 'what we are looking for is artifacts that share the same FEATURE we can optimize' \u2014 component-level principals, props-dna style (one parametric .gd, DNA variants). control_console is the built prototype: a console that houses any machine's controls. Census = how many artifact .gd files hand-roll each part today. Migration: extract the part as a parametric prop, artifacts compose instead of hand-rolling. Also the DOUBLE-STAND RULE: artifacts that bring their own pedestal are integration:self \u2014 never wrap them (coin_toss was the first catch; 115 suspects in doc/reports/double_stand_suspects.json).",
   "census": {
    "dial": {
     "files": 378,
     "status": "extract",
-    "note": "the jackpot — one parametric dial prop"
+    "note": "the jackpot \u2014 one parametric dial prop"
    },
    "control_panel": {
     "files": 107,
@@ -528,12 +663,12 @@
    "chamber": {
     "files": 73,
     "status": "extract",
-    "note": "specimen/reaction chambers — kin of the sim-cube families"
+    "note": "specimen/reaction chambers \u2014 kin of the sim-cube families"
    },
    "pedestal": {
     "files": 71,
     "status": "extract",
-    "note": "the coin_toss class — self-standing bases; one prop ends double-standing"
+    "note": "the coin_toss class \u2014 self-standing bases; one prop ends double-standing"
    },
    "housing": {
     "files": 69,
@@ -547,7 +682,7 @@
    "dome": {
     "files": 44,
     "status": "extract",
-    "note": "glass domes / bell jars — a cube-family sibling"
+    "note": "glass domes / bell jars \u2014 a cube-family sibling"
    },
    "lever": {
     "files": 33,

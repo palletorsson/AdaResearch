@@ -1,5 +1,5 @@
 {
- "members_checked": 188,
+ "members_checked": 349,
  "conflicts": [
   {
    "name": "VectorWorkbench",
@@ -9,6 +9,27 @@
    "oracle": 3.0
   },
   {
+   "name": "attractor_bench",
+   "owner": "kin:bench",
+   "field": "footprint_cells",
+   "registry": 4,
+   "oracle": 9
+  },
+  {
+   "name": "blue_noise_bench",
+   "owner": "kin:bench",
+   "field": "footprint_cells",
+   "registry": 4,
+   "oracle": 2.0
+  },
+  {
+   "name": "brians_brain_bench",
+   "owner": "kin:bench",
+   "field": "footprint_cells",
+   "registry": 4,
+   "oracle": 1.0
+  },
+  {
    "name": "brians_brain_display",
    "owner": "kin:displays",
    "field": "footprint_cells",
@@ -16,11 +37,102 @@
    "oracle": 2.0
   },
   {
+   "name": "ca_texture_bench",
+   "owner": "kin:bench",
+   "field": "footprint_cells",
+   "registry": 4,
+   "oracle": 9
+  },
+  {
+   "name": "cave_bench",
+   "owner": "kin:bench",
+   "field": "footprint_cells",
+   "registry": 4,
+   "oracle": 9
+  },
+  {
+   "name": "centripetal_bench",
+   "owner": "kin:bench",
+   "field": "footprint_cells",
+   "registry": 5,
+   "oracle": 9
+  },
+  {
+   "name": "city_bench",
+   "owner": "kin:bench",
+   "field": "footprint_cells",
+   "registry": 4,
+   "oracle": 6
+  },
+  {
+   "name": "dimension_bench",
+   "owner": "kin:bench",
+   "field": "footprint_cells",
+   "registry": 4,
+   "oracle": 2.0
+  },
+  {
+   "name": "dragon_bench",
+   "owner": "kin:bench",
+   "field": "footprint_cells",
+   "registry": 4,
+   "oracle": 9
+  },
+  {
+   "name": "edge_of_chaos_bench",
+   "owner": "kin:bench",
+   "field": "footprint_cells",
+   "registry": 4,
+   "oracle": 9
+  },
+  {
+   "name": "energy_landscape_bench",
+   "owner": "kin:bench",
+   "field": "footprint_cells",
+   "registry": 4,
+   "oracle": 9
+  },
+  {
+   "name": "euclid_parallel_bench",
+   "owner": "kin:bench",
+   "field": "footprint_cells",
+   "registry": 4,
+   "oracle": 9
+  },
+  {
    "name": "example_3_9_the_wave_vr",
    "owner": "kin:wave_examples",
    "field": "footprint_cells",
    "registry": 1,
    "oracle": 484.0
+  },
+  {
+   "name": "example_8_4_cantor_set_vr",
+   "owner": "example_8_4_cantor_set_vr",
+   "field": "footprint[h]",
+   "registry": 3.0,
+   "oracle": 0.25
+  },
+  {
+   "name": "example_8_4_cantor_set_vr",
+   "owner": "example_8_4_cantor_set_vr",
+   "field": "footprint[area]",
+   "registry": "1.0x3.0",
+   "oracle": 1.0
+  },
+  {
+   "name": "example_8_6_recursive_tree_vr",
+   "owner": "example_8_6_recursive_tree_vr",
+   "field": "footprint[h]",
+   "registry": 3.0,
+   "oracle": 0.05
+  },
+  {
+   "name": "example_8_6_recursive_tree_vr",
+   "owner": "example_8_6_recursive_tree_vr",
+   "field": "footprint[area]",
+   "registry": "1.0x3.0",
+   "oracle": 1.0
   },
   {
    "name": "exercise_3_11_oop_wave_vr",
@@ -35,6 +147,83 @@
    "field": "footprint_cells",
    "registry": 1,
    "oracle": 484.0
+  },
+  {
+   "name": "field_bench",
+   "owner": "kin:bench",
+   "field": "footprint_cells",
+   "registry": 4,
+   "oracle": 9
+  },
+  {
+   "name": "forest_bench",
+   "owner": "kin:bench",
+   "field": "footprint_cells",
+   "registry": 4,
+   "oracle": 12
+  },
+  {
+   "name": "fractal_cantor_set",
+   "owner": "example_8_4_cantor_set_vr",
+   "field": "footprint[h]",
+   "registry": 3.0,
+   "oracle": 0.25
+  },
+  {
+   "name": "fractal_cantor_set",
+   "owner": "example_8_4_cantor_set_vr",
+   "field": "footprint[area]",
+   "registry": "1.0x3.0",
+   "oracle": 1.0
+  },
+  {
+   "name": "fractal_recursive_tree",
+   "owner": "example_8_6_recursive_tree_vr",
+   "field": "footprint[h]",
+   "registry": 3.0,
+   "oracle": 0.05
+  },
+  {
+   "name": "fractal_recursive_tree",
+   "owner": "example_8_6_recursive_tree_vr",
+   "field": "footprint[area]",
+   "registry": "1.0x3.0",
+   "oracle": 1.0
+  },
+  {
+   "name": "furniture_recursion_bench",
+   "owner": "kin:bench",
+   "field": "footprint_cells",
+   "registry": 4,
+   "oracle": 1.0
+  },
+  {
+   "name": "generations_bench",
+   "owner": "kin:bench",
+   "field": "footprint_cells",
+   "registry": 4,
+   "oracle": 9
+  },
+  {
+   "name": "godel_sentence_machine",
+   "owner": "kin:machines",
+   "field": "footprint_cells",
+   "registry": 2,
+   "oracle": 4
+  },
+  {
+   "name": "grab_jelly_bench",
+   "owner": "kin:bench",
+   "field": "footprint_cells",
+   "registry": 4,
+   "oracle": 1.0
+  },
+  {
+   "name": "grab_sphere_point_with_color",
+   "owner": "grab_sphere_point_with_color",
+   "field": "footprint[h]",
+   "registry": 1,
+   "oracle": 0.02
   },
   {
    "name": "grid2d",
@@ -177,11 +366,102 @@
    "oracle": 9.0
   },
   {
+   "name": "halting_bench",
+   "owner": "kin:bench",
+   "field": "footprint_cells",
+   "registry": 4,
+   "oracle": 6
+  },
+  {
+   "name": "implicit_surface_modeling",
+   "owner": "metaballs",
+   "field": "footprint_cells",
+   "registry": 9,
+   "oracle": 144.0
+  },
+  {
+   "name": "jitter_bench",
+   "owner": "kin:bench",
+   "field": "footprint_cells",
+   "registry": 4,
+   "oracle": 9
+  },
+  {
+   "name": "life_zoo_bench",
+   "owner": "kin:bench",
+   "field": "footprint_cells",
+   "registry": 4,
+   "oracle": 1.0
+  },
+  {
+   "name": "magnitude_bench",
+   "owner": "kin:bench",
+   "field": "footprint_cells",
+   "registry": 4,
+   "oracle": 9
+  },
+  {
+   "name": "mandelbrot_bench",
+   "owner": "kin:bench",
+   "field": "footprint_cells",
+   "registry": 4,
+   "oracle": 1.0
+  },
+  {
+   "name": "mass_spring_bench",
+   "owner": "kin:bench",
+   "field": "footprint_cells",
+   "registry": 4,
+   "oracle": 9
+  },
+  {
+   "name": "mc_field_bench",
+   "owner": "kin:bench",
+   "field": "footprint_cells",
+   "registry": 4,
+   "oracle": 1.0
+  },
+  {
+   "name": "metaballs",
+   "owner": "metaballs",
+   "field": "footprint_cells",
+   "registry": 9,
+   "oracle": 144.0
+  },
+  {
+   "name": "newton_bench",
+   "owner": "kin:bench",
+   "field": "footprint_cells",
+   "registry": 4,
+   "oracle": 6
+  },
+  {
+   "name": "noise_dunes_bench",
+   "owner": "kin:bench",
+   "field": "footprint_cells",
+   "registry": 4,
+   "oracle": 2.0
+  },
+  {
+   "name": "parametric_bench",
+   "owner": "kin:bench",
+   "field": "footprint_cells",
+   "registry": 4,
+   "oracle": 16
+  },
+  {
    "name": "pattern_tunnel_machine",
    "owner": "kin:machines",
    "field": "footprint_cells",
    "registry": 9,
    "oracle": 30.0
+  },
+  {
+   "name": "perlin_bench",
+   "owner": "kin:bench",
+   "field": "footprint_cells",
+   "registry": 4,
+   "oracle": 2.0
   },
   {
    "name": "random_walker_machine",
@@ -191,11 +471,172 @@
    "oracle": 441.0
   },
   {
+   "name": "raymarched_metaballs",
+   "owner": "metaballs",
+   "field": "footprint_cells",
+   "registry": 9,
+   "oracle": 144.0
+  },
+  {
+   "name": "reaction_diffusion_bench",
+   "owner": "kin:bench",
+   "field": "footprint_cells",
+   "registry": 4,
+   "oracle": 9
+  },
+  {
+   "name": "restitution_bench",
+   "owner": "kin:bench",
+   "field": "footprint_cells",
+   "registry": 4,
+   "oracle": 15
+  },
+  {
+   "name": "rule30_bench",
+   "owner": "kin:bench",
+   "field": "footprint_cells",
+   "registry": 4,
+   "oracle": 9
+  },
+  {
+   "name": "scaling_bench",
+   "owner": "kin:bench",
+   "field": "footprint_cells",
+   "registry": 4,
+   "oracle": 9
+  },
+  {
+   "name": "sdf_sculpt_bench",
+   "owner": "kin:bench",
+   "field": "footprint_cells",
+   "registry": 4,
+   "oracle": 1.0
+  },
+  {
+   "name": "seed_world_bench",
+   "owner": "kin:bench",
+   "field": "footprint_cells",
+   "registry": 4,
+   "oracle": 9
+  },
+  {
+   "name": "slime_bench",
+   "owner": "kin:bench",
+   "field": "footprint_cells",
+   "registry": 4,
+   "oracle": 1.0
+  },
+  {
+   "name": "substrate_bench",
+   "owner": "kin:bench",
+   "field": "footprint_cells",
+   "registry": 4,
+   "oracle": 9
+  },
+  {
+   "name": "ten_print_bench",
+   "owner": "kin:bench",
+   "field": "footprint_cells",
+   "registry": 4,
+   "oracle": 9
+  },
+  {
+   "name": "tentacle_grab_bench",
+   "owner": "kin:bench",
+   "field": "footprint_cells",
+   "registry": 4,
+   "oracle": 1.0
+  },
+  {
+   "name": "terrain_bench",
+   "owner": "kin:bench",
+   "field": "footprint_cells",
+   "registry": 4,
+   "oracle": 9
+  },
+  {
+   "name": "test_scene_3",
+   "owner": "example_8_4_cantor_set_vr",
+   "field": "footprint[h]",
+   "registry": 3.0,
+   "oracle": 0.25
+  },
+  {
+   "name": "test_scene_3",
+   "owner": "example_8_4_cantor_set_vr",
+   "field": "footprint[area]",
+   "registry": "1.0x3.0",
+   "oracle": 1.0
+  },
+  {
+   "name": "test_scene_5",
+   "owner": "example_8_6_recursive_tree_vr",
+   "field": "footprint[h]",
+   "registry": 3.0,
+   "oracle": 0.05
+  },
+  {
+   "name": "test_scene_5",
+   "owner": "example_8_6_recursive_tree_vr",
+   "field": "footprint[area]",
+   "registry": "1.0x3.0",
+   "oracle": 1.0
+  },
+  {
+   "name": "tiling_bench",
+   "owner": "kin:bench",
+   "field": "footprint_cells",
+   "registry": 4,
+   "oracle": 9
+  },
+  {
+   "name": "torque_bench",
+   "owner": "kin:bench",
+   "field": "footprint_cells",
+   "registry": 4,
+   "oracle": 8
+  },
+  {
+   "name": "vector_bench",
+   "owner": "kin:bench",
+   "field": "footprint_cells",
+   "registry": 4,
+   "oracle": 9
+  },
+  {
+   "name": "velocity_bench",
+   "owner": "kin:bench",
+   "field": "footprint_cells",
+   "registry": 4,
+   "oracle": 12
+  },
+  {
    "name": "vertical_wave_lines",
    "owner": "kin:wave_examples",
    "field": "footprint_cells",
    "registry": 9,
    "oracle": 144.0
+  },
+  {
+   "name": "viscous_bench",
+   "owner": "kin:bench",
+   "field": "footprint_cells",
+   "registry": 4,
+   "oracle": 9
+  },
+  {
+   "name": "voronoi_bench",
+   "owner": "kin:bench",
+   "field": "footprint_cells",
+   "registry": 4,
+   "oracle": 1.0
+  },
+  {
+   "name": "wind_bench",
+   "owner": "kin:bench",
+   "field": "footprint_cells",
+   "registry": 4,
+   "oracle": 6
   }
  ]
 }

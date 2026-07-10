@@ -29557,20 +29557,20 @@
   },
   "godel_sentence_machine": {
    "aabb_size": [
-    2.0,
-    1.8,
-    0.8
+    1.37,
+    1.55,
+    1.34
    ],
-   "base_m": 2.0,
-   "height_m": 1.8,
-   "max_dimension_m": 2.0,
+   "base_m": 1.37,
+   "height_m": 1.55,
+   "max_dimension_m": 1.55,
    "grid_cells": [
-    2.0,
-    1.0
+    2,
+    2
    ],
    "registry": "foundations_crisis",
    "principal": "kin:machines",
-   "source": "kin-fill"
+   "source": "em-square"
   },
   "pattern_tunnel_machine": {
    "aabb_size": [
@@ -29608,20 +29608,20 @@
   },
   "artifact_readout_screen": {
    "aabb_size": [
-    2.0,
-    1.6,
-    0.4
+    0.56,
+    1.99,
+    0.32
    ],
-   "base_m": 2.0,
-   "height_m": 1.6,
-   "max_dimension_m": 2.0,
+   "base_m": 0.56,
+   "height_m": 1.99,
+   "max_dimension_m": 1.99,
    "grid_cells": [
-    2.0,
+    1.0,
     1.0
    ],
    "registry": "packaging",
    "principal": "kin:displays",
-   "source": "kin-fill"
+   "source": "em-square"
   },
   "brians_brain_display": {
    "aabb_size": [
@@ -29758,6 +29758,1961 @@
    "registry": "station",
    "principal": "kin:displays",
    "source": "kin-fill"
+  },
+  "abject_bench": {
+   "aabb_size": [
+    1.58,
+    2.39,
+    1.58
+   ],
+   "base_m": 1.58,
+   "height_m": 2.39,
+   "max_dimension_m": 2.39,
+   "grid_cells": [
+    2,
+    2
+   ],
+   "registry": "soft_bodies",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "attractor_bench": {
+   "aabb_size": [
+    2.13,
+    2.78,
+    2.72
+   ],
+   "base_m": 2.72,
+   "height_m": 2.78,
+   "max_dimension_m": 2.78,
+   "grid_cells": [
+    3,
+    3
+   ],
+   "registry": "fractals",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "axiom_bench": {
+   "aabb_size": [
+    1.7,
+    3.32,
+    1.7
+   ],
+   "base_m": 1.7,
+   "height_m": 3.32,
+   "max_dimension_m": 3.32,
+   "grid_cells": [
+    2,
+    2
+   ],
+   "registry": "lsystems",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "becoming_bench": {
+   "aabb_size": [
+    1.5,
+    2.35,
+    1.5
+   ],
+   "base_m": 1.5,
+   "height_m": 2.35,
+   "max_dimension_m": 2.35,
+   "grid_cells": [
+    2,
+    2
+   ],
+   "registry": "soft_bodies",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "blue_noise_bench": {
+   "aabb_size": [
+    1.15,
+    1.28,
+    0.7
+   ],
+   "base_m": 1.15,
+   "height_m": 1.28,
+   "max_dimension_m": 1.28,
+   "grid_cells": [
+    2,
+    1.0
+   ],
+   "registry": "randomness",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "bracket_bench": {
+   "aabb_size": [
+    1.33,
+    2.26,
+    1.33
+   ],
+   "base_m": 1.33,
+   "height_m": 2.26,
+   "max_dimension_m": 2.26,
+   "grid_cells": [
+    2,
+    2
+   ],
+   "registry": "lsystems",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "brians_brain_bench": {
+   "aabb_size": [
+    1.1,
+    2.1,
+    1.0
+   ],
+   "base_m": 1.1,
+   "height_m": 2.1,
+   "max_dimension_m": 2.1,
+   "grid_cells": [
+    1.0,
+    1.0
+   ],
+   "registry": "cellular_automata",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "bsp_bench": {
+   "aabb_size": [
+    1.14,
+    1.86,
+    1.14
+   ],
+   "base_m": 1.14,
+   "height_m": 1.86,
+   "max_dimension_m": 1.86,
+   "grid_cells": [
+    2,
+    2
+   ],
+   "registry": "procedural_generation",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "ca_texture_bench": {
+   "aabb_size": [
+    2.45,
+    2.83,
+    2.45
+   ],
+   "base_m": 2.45,
+   "height_m": 2.83,
+   "max_dimension_m": 2.83,
+   "grid_cells": [
+    3,
+    3
+   ],
+   "registry": "cellular_automata",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "cantor_bench": {
+   "aabb_size": [
+    2.02,
+    2.61,
+    2.02
+   ],
+   "base_m": 2.02,
+   "height_m": 2.61,
+   "max_dimension_m": 2.61,
+   "grid_cells": [
+    2,
+    2
+   ],
+   "registry": "fractals",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "cap_theorem_bench": {
+   "aabb_size": [
+    1.31,
+    2.13,
+    1.23
+   ],
+   "base_m": 1.31,
+   "height_m": 2.13,
+   "max_dimension_m": 2.13,
+   "grid_cells": [
+    2,
+    2
+   ],
+   "registry": "postfoundations_crisis",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "cave_bench": {
+   "aabb_size": [
+    2.42,
+    2.81,
+    2.42
+   ],
+   "base_m": 2.42,
+   "height_m": 2.81,
+   "max_dimension_m": 2.81,
+   "grid_cells": [
+    3,
+    3
+   ],
+   "registry": "cellular_automata",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "centripetal_bench": {
+   "aabb_size": [
+    2.4,
+    3.38,
+    2.4
+   ],
+   "base_m": 2.4,
+   "height_m": 3.38,
+   "max_dimension_m": 3.38,
+   "grid_cells": [
+    3,
+    3
+   ],
+   "registry": "vectors_demos",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "city_bench": {
+   "aabb_size": [
+    1.87,
+    2.52,
+    2.52
+   ],
+   "base_m": 2.52,
+   "height_m": 2.52,
+   "max_dimension_m": 2.52,
+   "grid_cells": [
+    2,
+    3
+   ],
+   "registry": "lsystems",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "coin_dice_bench": {
+   "aabb_size": [
+    1.68,
+    2.94,
+    1.68
+   ],
+   "base_m": 1.68,
+   "height_m": 2.94,
+   "max_dimension_m": 2.94,
+   "grid_cells": [
+    2,
+    2
+   ],
+   "registry": "randomness",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "colonization_bench": {
+   "aabb_size": [
+    1.69,
+    2.64,
+    1.69
+   ],
+   "base_m": 1.69,
+   "height_m": 2.64,
+   "max_dimension_m": 2.64,
+   "grid_cells": [
+    2,
+    2
+   ],
+   "registry": "procedural_generation",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "commons_bench": {
+   "aabb_size": [
+    2.01,
+    2.51,
+    2.01
+   ],
+   "base_m": 2.01,
+   "height_m": 2.51,
+   "max_dimension_m": 2.51,
+   "grid_cells": [
+    2,
+    2
+   ],
+   "registry": "postfoundations_crisis",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "coral_bench": {
+   "aabb_size": [
+    1.82,
+    2.53,
+    1.82
+   ],
+   "base_m": 1.82,
+   "height_m": 2.53,
+   "max_dimension_m": 2.53,
+   "grid_cells": [
+    2,
+    2
+   ],
+   "registry": "lsystems",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "crisis_synthesis_bench": {
+   "aabb_size": [
+    1.25,
+    2.24,
+    1.25
+   ],
+   "base_m": 1.25,
+   "height_m": 2.24,
+   "max_dimension_m": 2.24,
+   "grid_cells": [
+    2,
+    2
+   ],
+   "registry": "foundations_crisis",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "curvature_bench": {
+   "aabb_size": [
+    2.07,
+    2.63,
+    2.07
+   ],
+   "base_m": 2.07,
+   "height_m": 2.63,
+   "max_dimension_m": 2.63,
+   "grid_cells": [
+    2,
+    2
+   ],
+   "registry": "foundations_crisis",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "dendrite_bench": {
+   "aabb_size": [
+    1.79,
+    2.5,
+    1.79
+   ],
+   "base_m": 1.79,
+   "height_m": 2.5,
+   "max_dimension_m": 2.5,
+   "grid_cells": [
+    2,
+    2
+   ],
+   "registry": "cellular_automata",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "dimension_bench": {
+   "aabb_size": [
+    1.1,
+    2.09,
+    1.17
+   ],
+   "base_m": 1.17,
+   "height_m": 2.09,
+   "max_dimension_m": 2.09,
+   "grid_cells": [
+    1.0,
+    2
+   ],
+   "registry": "fractals",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "distribution_bench": {
+   "aabb_size": [
+    1.98,
+    3.09,
+    1.98
+   ],
+   "base_m": 1.98,
+   "height_m": 3.09,
+   "max_dimension_m": 3.09,
+   "grid_cells": [
+    2,
+    2
+   ],
+   "registry": "randomness",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "dla_bench": {
+   "aabb_size": [
+    1.53,
+    2.37,
+    1.53
+   ],
+   "base_m": 1.53,
+   "height_m": 2.37,
+   "max_dimension_m": 2.37,
+   "grid_cells": [
+    2,
+    2
+   ],
+   "registry": "fractals",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "dragon_bench": {
+   "aabb_size": [
+    2.52,
+    2.88,
+    2.52
+   ],
+   "base_m": 2.52,
+   "height_m": 2.88,
+   "max_dimension_m": 2.88,
+   "grid_cells": [
+    3,
+    3
+   ],
+   "registry": "lsystems",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "edge_ground_bench": {
+   "aabb_size": [
+    1.2,
+    2.09,
+    1.18
+   ],
+   "base_m": 1.2,
+   "height_m": 2.09,
+   "max_dimension_m": 2.09,
+   "grid_cells": [
+    2,
+    2
+   ],
+   "registry": "postfoundations_crisis",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "edge_of_chaos_bench": {
+   "aabb_size": [
+    2.25,
+    2.73,
+    2.25
+   ],
+   "base_m": 2.25,
+   "height_m": 2.73,
+   "max_dimension_m": 2.73,
+   "grid_cells": [
+    3,
+    3
+   ],
+   "registry": "cellular_automata",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "elementary_ca_bench": {
+   "aabb_size": [
+    1.61,
+    2.4,
+    1.61
+   ],
+   "base_m": 1.61,
+   "height_m": 2.4,
+   "max_dimension_m": 2.4,
+   "grid_cells": [
+    2,
+    2
+   ],
+   "registry": "cellular_automata",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "energy_landscape_bench": {
+   "aabb_size": [
+    2.62,
+    2.91,
+    2.62
+   ],
+   "base_m": 2.62,
+   "height_m": 2.91,
+   "max_dimension_m": 2.91,
+   "grid_cells": [
+    3,
+    3
+   ],
+   "registry": "soft_bodies",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "entropy_bench": {
+   "aabb_size": [
+    1.39,
+    2.21,
+    1.39
+   ],
+   "base_m": 1.39,
+   "height_m": 2.21,
+   "max_dimension_m": 2.21,
+   "grid_cells": [
+    2,
+    2
+   ],
+   "registry": "randomness",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "ethics_bench": {
+   "aabb_size": [
+    1.56,
+    2.28,
+    1.56
+   ],
+   "base_m": 1.56,
+   "height_m": 2.28,
+   "max_dimension_m": 2.28,
+   "grid_cells": [
+    2,
+    2
+   ],
+   "registry": "postfoundations_crisis",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "euclid_parallel_bench": {
+   "aabb_size": [
+    2.66,
+    2.94,
+    2.66
+   ],
+   "base_m": 2.66,
+   "height_m": 2.94,
+   "max_dimension_m": 2.94,
+   "grid_cells": [
+    3,
+    3
+   ],
+   "registry": "foundations_crisis",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "f_order_bench": {
+   "aabb_size": [
+    1.5,
+    2.25,
+    1.5
+   ],
+   "base_m": 1.5,
+   "height_m": 2.25,
+   "max_dimension_m": 2.25,
+   "grid_cells": [
+    2,
+    2
+   ],
+   "registry": "qfep",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "fern_bench": {
+   "aabb_size": [
+    1.63,
+    2.43,
+    1.63
+   ],
+   "base_m": 1.63,
+   "height_m": 2.43,
+   "max_dimension_m": 2.43,
+   "grid_cells": [
+    2,
+    2
+   ],
+   "registry": "lsystems",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "field_bench": {
+   "aabb_size": [
+    2.2,
+    3.38,
+    2.2
+   ],
+   "base_m": 2.2,
+   "height_m": 3.38,
+   "max_dimension_m": 3.38,
+   "grid_cells": [
+    3,
+    3
+   ],
+   "registry": "vectors_demos",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "forest_bench": {
+   "aabb_size": [
+    2.14,
+    5.75,
+    3.41
+   ],
+   "base_m": 3.41,
+   "height_m": 5.75,
+   "max_dimension_m": 5.75,
+   "grid_cells": [
+    3,
+    4
+   ],
+   "registry": "lsystems",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "four_classes_bench": {
+   "aabb_size": [
+    2.0,
+    2.59,
+    2.0
+   ],
+   "base_m": 2.0,
+   "height_m": 2.59,
+   "max_dimension_m": 2.59,
+   "grid_cells": [
+    2,
+    2
+   ],
+   "registry": "cellular_automata",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "fractal_arch_bench": {
+   "aabb_size": [
+    1.75,
+    2.7,
+    1.75
+   ],
+   "base_m": 1.75,
+   "height_m": 2.7,
+   "max_dimension_m": 2.7,
+   "grid_cells": [
+    2,
+    2
+   ],
+   "registry": "fractals",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "furniture_recursion_bench": {
+   "aabb_size": [
+    1.1,
+    2.13,
+    1.05
+   ],
+   "base_m": 1.1,
+   "height_m": 2.13,
+   "max_dimension_m": 2.13,
+   "grid_cells": [
+    1.0,
+    1.0
+   ],
+   "registry": "fractals",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "generations_bench": {
+   "aabb_size": [
+    2.36,
+    2.78,
+    2.36
+   ],
+   "base_m": 2.36,
+   "height_m": 2.78,
+   "max_dimension_m": 2.78,
+   "grid_cells": [
+    3,
+    3
+   ],
+   "registry": "lsystems",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "genetic_bench": {
+   "aabb_size": [
+    1.81,
+    2.71,
+    1.81
+   ],
+   "base_m": 1.81,
+   "height_m": 2.71,
+   "max_dimension_m": 2.71,
+   "grid_cells": [
+    2,
+    2
+   ],
+   "registry": "procedural_generation",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "genome_bench": {
+   "aabb_size": [
+    1.61,
+    2.61,
+    1.61
+   ],
+   "base_m": 1.61,
+   "height_m": 2.61,
+   "max_dimension_m": 2.61,
+   "grid_cells": [
+    2,
+    2
+   ],
+   "registry": "randomness",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "golden_spiral_bench": {
+   "aabb_size": [
+    1.86,
+    2.53,
+    1.86
+   ],
+   "base_m": 1.86,
+   "height_m": 2.53,
+   "max_dimension_m": 2.53,
+   "grid_cells": [
+    2,
+    2
+   ],
+   "registry": "fractals",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "grab_jelly_bench": {
+   "aabb_size": [
+    1.1,
+    2.31,
+    0.8
+   ],
+   "base_m": 1.1,
+   "height_m": 2.31,
+   "max_dimension_m": 2.31,
+   "grid_cells": [
+    1.0,
+    1.0
+   ],
+   "registry": "soft_bodies",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "grammar_bench": {
+   "aabb_size": [
+    2.1,
+    2.65,
+    2.1
+   ],
+   "base_m": 2.1,
+   "height_m": 2.65,
+   "max_dimension_m": 2.65,
+   "grid_cells": [
+    2,
+    2
+   ],
+   "registry": "lsystems",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "halting_bench": {
+   "aabb_size": [
+    2.51,
+    2.36,
+    1.71
+   ],
+   "base_m": 2.51,
+   "height_m": 2.36,
+   "max_dimension_m": 2.51,
+   "grid_cells": [
+    3,
+    2
+   ],
+   "registry": "foundations_crisis",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "hilbert_bench": {
+   "aabb_size": [
+    1.93,
+    2.57,
+    1.93
+   ],
+   "base_m": 1.93,
+   "height_m": 2.57,
+   "max_dimension_m": 2.57,
+   "grid_cells": [
+    2,
+    2
+   ],
+   "registry": "lsystems",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "ifs_bench": {
+   "aabb_size": [
+    1.36,
+    2.28,
+    1.36
+   ],
+   "base_m": 1.36,
+   "height_m": 2.28,
+   "max_dimension_m": 2.28,
+   "grid_cells": [
+    2,
+    2
+   ],
+   "registry": "fractals",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "jitter_bench": {
+   "aabb_size": [
+    2.17,
+    2.6,
+    2.17
+   ],
+   "base_m": 2.17,
+   "height_m": 2.6,
+   "max_dimension_m": 2.6,
+   "grid_cells": [
+    3,
+    3
+   ],
+   "registry": "randomness",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "julia_bench": {
+   "aabb_size": [
+    1.32,
+    2.27,
+    1.32
+   ],
+   "base_m": 1.32,
+   "height_m": 2.27,
+   "max_dimension_m": 2.27,
+   "grid_cells": [
+    2,
+    2
+   ],
+   "registry": "fractals",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "lambda_dial_bench": {
+   "aabb_size": [
+    1.69,
+    2.29,
+    1.58
+   ],
+   "base_m": 1.69,
+   "height_m": 2.29,
+   "max_dimension_m": 2.29,
+   "grid_cells": [
+    2,
+    2
+   ],
+   "registry": "qfep",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "langton_bench": {
+   "aabb_size": [
+    1.65,
+    2.43,
+    1.65
+   ],
+   "base_m": 1.65,
+   "height_m": 2.43,
+   "max_dimension_m": 2.43,
+   "grid_cells": [
+    2,
+    2
+   ],
+   "registry": "cellular_automata",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "lattice_gas_bench": {
+   "aabb_size": [
+    1.7,
+    2.44,
+    1.7
+   ],
+   "base_m": 1.7,
+   "height_m": 2.44,
+   "max_dimension_m": 2.44,
+   "grid_cells": [
+    2,
+    2
+   ],
+   "registry": "cellular_automata",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "life_bench": {
+   "aabb_size": [
+    1.57,
+    2.39,
+    1.57
+   ],
+   "base_m": 1.57,
+   "height_m": 2.39,
+   "max_dimension_m": 2.39,
+   "grid_cells": [
+    2,
+    2
+   ],
+   "registry": "cellular_automata",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "life_zoo_bench": {
+   "aabb_size": [
+    1.1,
+    2.09,
+    0.97
+   ],
+   "base_m": 1.1,
+   "height_m": 2.09,
+   "max_dimension_m": 2.09,
+   "grid_cells": [
+    1.0,
+    1.0
+   ],
+   "registry": "cellular_automata",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "lyapunov_bench": {
+   "aabb_size": [
+    1.25,
+    2.23,
+    1.25
+   ],
+   "base_m": 1.25,
+   "height_m": 2.23,
+   "max_dimension_m": 2.23,
+   "grid_cells": [
+    2,
+    2
+   ],
+   "registry": "fractals",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "magnitude_bench": {
+   "aabb_size": [
+    2.71,
+    3.59,
+    2.54
+   ],
+   "base_m": 2.71,
+   "height_m": 3.59,
+   "max_dimension_m": 3.59,
+   "grid_cells": [
+    3,
+    3
+   ],
+   "registry": "vectors_demos",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "mandelbrot_bench": {
+   "aabb_size": [
+    1.1,
+    1.84,
+    0.47
+   ],
+   "base_m": 1.1,
+   "height_m": 1.84,
+   "max_dimension_m": 1.84,
+   "grid_cells": [
+    1.0,
+    1.0
+   ],
+   "registry": "fractals",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "mass_spring_bench": {
+   "aabb_size": [
+    2.83,
+    3.01,
+    2.83
+   ],
+   "base_m": 2.83,
+   "height_m": 3.01,
+   "max_dimension_m": 3.01,
+   "grid_cells": [
+    3,
+    3
+   ],
+   "registry": "soft_bodies",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "mc_field_bench": {
+   "aabb_size": [
+    1.1,
+    2.13,
+    1.1
+   ],
+   "base_m": 1.1,
+   "height_m": 2.13,
+   "max_dimension_m": 2.13,
+   "grid_cells": [
+    1.0,
+    1.0
+   ],
+   "registry": "procedural_generation",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "membrane_bench": {
+   "aabb_size": [
+    1.66,
+    2.64,
+    1.86
+   ],
+   "base_m": 1.86,
+   "height_m": 2.64,
+   "max_dimension_m": 2.64,
+   "grid_cells": [
+    2,
+    2
+   ],
+   "registry": "soft_bodies",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "menger_bench": {
+   "aabb_size": [
+    1.63,
+    2.42,
+    1.63
+   ],
+   "base_m": 1.63,
+   "height_m": 2.42,
+   "max_dimension_m": 2.42,
+   "grid_cells": [
+    2,
+    2
+   ],
+   "registry": "fractals",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "mesh_grammar_bench": {
+   "aabb_size": [
+    1.21,
+    2.05,
+    1.2
+   ],
+   "base_m": 1.21,
+   "height_m": 2.05,
+   "max_dimension_m": 2.05,
+   "grid_cells": [
+    2,
+    2
+   ],
+   "registry": "procedural_generation",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "molecular_bench": {
+   "aabb_size": [
+    1.81,
+    2.41,
+    1.81
+   ],
+   "base_m": 1.81,
+   "height_m": 2.41,
+   "max_dimension_m": 2.41,
+   "grid_cells": [
+    2,
+    2
+   ],
+   "registry": "postfoundations_crisis",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "morphogenesis_bench": {
+   "aabb_size": [
+    1.46,
+    2.54,
+    1.46
+   ],
+   "base_m": 1.46,
+   "height_m": 2.54,
+   "max_dimension_m": 2.54,
+   "grid_cells": [
+    2,
+    2
+   ],
+   "registry": "cellular_automata",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "neighbourhood_bench": {
+   "aabb_size": [
+    1.95,
+    2.35,
+    1.95
+   ],
+   "base_m": 1.95,
+   "height_m": 2.35,
+   "max_dimension_m": 2.35,
+   "grid_cells": [
+    2,
+    2
+   ],
+   "registry": "cellular_automata",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "newton_bench": {
+   "aabb_size": [
+    2.6,
+    3.38,
+    1.76
+   ],
+   "base_m": 2.6,
+   "height_m": 3.38,
+   "max_dimension_m": 3.38,
+   "grid_cells": [
+    3,
+    2
+   ],
+   "registry": "vectors_demos",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "noise_compare_bench": {
+   "aabb_size": [
+    1.9,
+    2.47,
+    1.88
+   ],
+   "base_m": 1.9,
+   "height_m": 2.47,
+   "max_dimension_m": 2.47,
+   "grid_cells": [
+    2,
+    2
+   ],
+   "registry": "randomness",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "noise_dunes_bench": {
+   "aabb_size": [
+    1.15,
+    2.13,
+    1.01
+   ],
+   "base_m": 1.15,
+   "height_m": 2.13,
+   "max_dimension_m": 2.13,
+   "grid_cells": [
+    2,
+    1.0
+   ],
+   "registry": "randomness",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "octopus_bench": {
+   "aabb_size": [
+    1.71,
+    2.46,
+    1.71
+   ],
+   "base_m": 1.71,
+   "height_m": 2.46,
+   "max_dimension_m": 2.46,
+   "grid_cells": [
+    2,
+    2
+   ],
+   "registry": "soft_bodies",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "parametric_bench": {
+   "aabb_size": [
+    3.38,
+    3.38,
+    3.38
+   ],
+   "base_m": 3.38,
+   "height_m": 3.38,
+   "max_dimension_m": 3.38,
+   "grid_cells": [
+    4,
+    4
+   ],
+   "registry": "lsystems",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "perlin_bench": {
+   "aabb_size": [
+    1.72,
+    1.95,
+    0.97
+   ],
+   "base_m": 1.72,
+   "height_m": 1.95,
+   "max_dimension_m": 1.95,
+   "grid_cells": [
+    2,
+    1.0
+   ],
+   "registry": "randomness",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "phi_rate_bench": {
+   "aabb_size": [
+    1.55,
+    2.6,
+    1.31
+   ],
+   "base_m": 1.55,
+   "height_m": 2.6,
+   "max_dimension_m": 2.6,
+   "grid_cells": [
+    2,
+    2
+   ],
+   "registry": "qfep",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "pi_dart_bench": {
+   "aabb_size": [
+    1.55,
+    2.4,
+    1.55
+   ],
+   "base_m": 1.55,
+   "height_m": 2.4,
+   "max_dimension_m": 2.4,
+   "grid_cells": [
+    2,
+    2
+   ],
+   "registry": "randomness",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "poisson_scatter_bench": {
+   "aabb_size": [
+    1.45,
+    1.48,
+    1.4
+   ],
+   "base_m": 1.45,
+   "height_m": 1.48,
+   "max_dimension_m": 1.48,
+   "grid_cells": [
+    2,
+    2
+   ],
+   "registry": "procedural_generation",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "qfep_reactor_bench": {
+   "aabb_size": [
+    2.09,
+    2.55,
+    2.09
+   ],
+   "base_m": 2.09,
+   "height_m": 2.55,
+   "max_dimension_m": 2.55,
+   "grid_cells": [
+    2,
+    2
+   ],
+   "registry": "qfep",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "random_walk_bench": {
+   "aabb_size": [
+    1.79,
+    3.0,
+    1.85
+   ],
+   "base_m": 1.85,
+   "height_m": 3.0,
+   "max_dimension_m": 3.0,
+   "grid_cells": [
+    2,
+    2
+   ],
+   "registry": "randomness",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "reaction_diffusion_bench": {
+   "aabb_size": [
+    2.16,
+    2.67,
+    2.16
+   ],
+   "base_m": 2.16,
+   "height_m": 2.67,
+   "max_dimension_m": 2.67,
+   "grid_cells": [
+    3,
+    3
+   ],
+   "registry": "cellular_automata",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "recursion_bench": {
+   "aabb_size": [
+    1.63,
+    2.45,
+    1.63
+   ],
+   "base_m": 1.63,
+   "height_m": 2.45,
+   "max_dimension_m": 2.45,
+   "grid_cells": [
+    2,
+    2
+   ],
+   "registry": "fractals",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "recursive_tree_bench": {
+   "aabb_size": [
+    2.05,
+    2.92,
+    2.05
+   ],
+   "base_m": 2.05,
+   "height_m": 2.92,
+   "max_dimension_m": 2.92,
+   "grid_cells": [
+    2,
+    2
+   ],
+   "registry": "fractals",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "rejection_bench": {
+   "aabb_size": [
+    1.64,
+    2.43,
+    1.64
+   ],
+   "base_m": 1.64,
+   "height_m": 2.43,
+   "max_dimension_m": 2.43,
+   "grid_cells": [
+    2,
+    2
+   ],
+   "registry": "randomness",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "restitution_bench": {
+   "aabb_size": [
+    5.0,
+    3.43,
+    2.46
+   ],
+   "base_m": 5.0,
+   "height_m": 3.43,
+   "max_dimension_m": 5.0,
+   "grid_cells": [
+    5,
+    3
+   ],
+   "registry": "vectors_demos",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "rhizome_bench": {
+   "aabb_size": [
+    1.83,
+    2.42,
+    1.83
+   ],
+   "base_m": 1.83,
+   "height_m": 2.42,
+   "max_dimension_m": 2.42,
+   "grid_cells": [
+    2,
+    2
+   ],
+   "registry": "postfoundations_crisis",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "rigidity_dial_bench": {
+   "aabb_size": [
+    1.72,
+    2.46,
+    1.72
+   ],
+   "base_m": 1.72,
+   "height_m": 2.46,
+   "max_dimension_m": 2.46,
+   "grid_cells": [
+    2,
+    2
+   ],
+   "registry": "soft_bodies",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "rule110_bench": {
+   "aabb_size": [
+    1.88,
+    2.54,
+    1.88
+   ],
+   "base_m": 1.88,
+   "height_m": 2.54,
+   "max_dimension_m": 2.54,
+   "grid_cells": [
+    2,
+    2
+   ],
+   "registry": "cellular_automata",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "rule30_bench": {
+   "aabb_size": [
+    2.45,
+    2.83,
+    2.45
+   ],
+   "base_m": 2.45,
+   "height_m": 2.83,
+   "max_dimension_m": 2.83,
+   "grid_cells": [
+    3,
+    3
+   ],
+   "registry": "cellular_automata",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "rule90_bench": {
+   "aabb_size": [
+    1.73,
+    2.47,
+    1.73
+   ],
+   "base_m": 1.73,
+   "height_m": 2.47,
+   "max_dimension_m": 2.47,
+   "grid_cells": [
+    2,
+    2
+   ],
+   "registry": "cellular_automata",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "scaling_bench": {
+   "aabb_size": [
+    2.66,
+    3.66,
+    2.2
+   ],
+   "base_m": 2.66,
+   "height_m": 3.66,
+   "max_dimension_m": 3.66,
+   "grid_cells": [
+    3,
+    3
+   ],
+   "registry": "vectors_demos",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "scatter_bench": {
+   "aabb_size": [
+    1.99,
+    2.0,
+    1.99
+   ],
+   "base_m": 1.99,
+   "height_m": 2.0,
+   "max_dimension_m": 2.0,
+   "grid_cells": [
+    2,
+    2
+   ],
+   "registry": "randomness",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "sdf_sculpt_bench": {
+   "aabb_size": [
+    1.1,
+    1.95,
+    1.1
+   ],
+   "base_m": 1.1,
+   "height_m": 1.95,
+   "max_dimension_m": 1.95,
+   "grid_cells": [
+    1.0,
+    1.0
+   ],
+   "registry": "procedural_generation",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "seed_bench": {
+   "aabb_size": [
+    1.46,
+    2.24,
+    1.46
+   ],
+   "base_m": 1.46,
+   "height_m": 2.24,
+   "max_dimension_m": 2.24,
+   "grid_cells": [
+    2,
+    2
+   ],
+   "registry": "randomness",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "seed_world_bench": {
+   "aabb_size": [
+    3.09,
+    3.17,
+    3.09
+   ],
+   "base_m": 3.09,
+   "height_m": 3.17,
+   "max_dimension_m": 3.17,
+   "grid_cells": [
+    3,
+    3
+   ],
+   "registry": "procedural_generation",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "sierpinski_bench": {
+   "aabb_size": [
+    1.72,
+    2.46,
+    1.72
+   ],
+   "base_m": 1.72,
+   "height_m": 2.46,
+   "max_dimension_m": 2.46,
+   "grid_cells": [
+    2,
+    2
+   ],
+   "registry": "fractals",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "situated_bench": {
+   "aabb_size": [
+    1.65,
+    2.33,
+    1.65
+   ],
+   "base_m": 1.65,
+   "height_m": 2.33,
+   "max_dimension_m": 2.33,
+   "grid_cells": [
+    2,
+    2
+   ],
+   "registry": "postfoundations_crisis",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "slime_bench": {
+   "aabb_size": [
+    1.05,
+    2.04,
+    0.95
+   ],
+   "base_m": 1.05,
+   "height_m": 2.04,
+   "max_dimension_m": 2.04,
+   "grid_cells": [
+    1.0,
+    1.0
+   ],
+   "registry": "procedural_generation",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "space_filling_bench": {
+   "aabb_size": [
+    1.93,
+    2.57,
+    1.93
+   ],
+   "base_m": 1.93,
+   "height_m": 2.57,
+   "max_dimension_m": 2.57,
+   "grid_cells": [
+    2,
+    2
+   ],
+   "registry": "fractals",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "stigmergy_bench": {
+   "aabb_size": [
+    1.54,
+    2.37,
+    1.54
+   ],
+   "base_m": 1.54,
+   "height_m": 2.37,
+   "max_dimension_m": 2.37,
+   "grid_cells": [
+    2,
+    2
+   ],
+   "registry": "cellular_automata",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "stochastic_bench": {
+   "aabb_size": [
+    1.31,
+    2.38,
+    1.29
+   ],
+   "base_m": 1.31,
+   "height_m": 2.38,
+   "max_dimension_m": 2.38,
+   "grid_cells": [
+    2,
+    2
+   ],
+   "registry": "lsystems",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "stretch_bench": {
+   "aabb_size": [
+    1.0,
+    2.0,
+    1.0
+   ],
+   "base_m": 1.0,
+   "height_m": 2.0,
+   "max_dimension_m": 2.0,
+   "grid_cells": [
+    1.0,
+    1.0
+   ],
+   "registry": "stretch_bench",
+   "principal": "kin:bench",
+   "source": "registry"
+  },
+  "substrate_bench": {
+   "aabb_size": [
+    2.3,
+    2.74,
+    2.3
+   ],
+   "base_m": 2.3,
+   "height_m": 2.74,
+   "max_dimension_m": 2.74,
+   "grid_cells": [
+    3,
+    3
+   ],
+   "registry": "lsystems",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "ten_print_bench": {
+   "aabb_size": [
+    2.31,
+    2.31,
+    2.31
+   ],
+   "base_m": 2.31,
+   "height_m": 2.31,
+   "max_dimension_m": 2.31,
+   "grid_cells": [
+    3,
+    3
+   ],
+   "registry": "randomness",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "tentacle_grab_bench": {
+   "aabb_size": [
+    1.0,
+    2.63,
+    0.95
+   ],
+   "base_m": 1.0,
+   "height_m": 2.63,
+   "max_dimension_m": 2.63,
+   "grid_cells": [
+    1.0,
+    1.0
+   ],
+   "registry": "soft_bodies",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "terrain_bench": {
+   "aabb_size": [
+    2.4,
+    2.8,
+    2.4
+   ],
+   "base_m": 2.4,
+   "height_m": 2.8,
+   "max_dimension_m": 2.8,
+   "grid_cells": [
+    3,
+    3
+   ],
+   "registry": "fractals",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "tesseract_bench": {
+   "aabb_size": [
+    1.66,
+    2.3,
+    1.8
+   ],
+   "base_m": 1.8,
+   "height_m": 2.3,
+   "max_dimension_m": 2.3,
+   "grid_cells": [
+    2,
+    2
+   ],
+   "registry": "procedural_generation",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "tiling_bench": {
+   "aabb_size": [
+    2.9,
+    2.14,
+    2.9
+   ],
+   "base_m": 2.9,
+   "height_m": 2.14,
+   "max_dimension_m": 2.9,
+   "grid_cells": [
+    3,
+    3
+   ],
+   "registry": "procedural_generation",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "torque_bench": {
+   "aabb_size": [
+    3.26,
+    3.29,
+    2.0
+   ],
+   "base_m": 3.26,
+   "height_m": 3.29,
+   "max_dimension_m": 3.29,
+   "grid_cells": [
+    4,
+    2
+   ],
+   "registry": "vectors_demos",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "turtle_bench": {
+   "aabb_size": [
+    1.8,
+    2.5,
+    1.8
+   ],
+   "base_m": 1.8,
+   "height_m": 2.5,
+   "max_dimension_m": 2.5,
+   "grid_cells": [
+    2,
+    2
+   ],
+   "registry": "lsystems",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "vector_bench": {
+   "aabb_size": [
+    2.6,
+    3.15,
+    2.2
+   ],
+   "base_m": 2.6,
+   "height_m": 3.15,
+   "max_dimension_m": 3.15,
+   "grid_cells": [
+    3,
+    3
+   ],
+   "registry": "vectors_demos",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "velocity_bench": {
+   "aabb_size": [
+    3.4,
+    3.09,
+    2.4
+   ],
+   "base_m": 3.4,
+   "height_m": 3.09,
+   "max_dimension_m": 3.4,
+   "grid_cells": [
+    4,
+    3
+   ],
+   "registry": "vectors_demos",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "viscous_bench": {
+   "aabb_size": [
+    2.41,
+    2.41,
+    2.41
+   ],
+   "base_m": 2.41,
+   "height_m": 2.41,
+   "max_dimension_m": 2.41,
+   "grid_cells": [
+    3,
+    3
+   ],
+   "registry": "soft_bodies",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "voronoi_bench": {
+   "aabb_size": [
+    1.06,
+    1.98,
+    0.97
+   ],
+   "base_m": 1.06,
+   "height_m": 1.98,
+   "max_dimension_m": 1.98,
+   "grid_cells": [
+    1.0,
+    1.0
+   ],
+   "registry": "procedural_generation",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "wfc_room_bench": {
+   "aabb_size": [
+    1.12,
+    1.93,
+    1.12
+   ],
+   "base_m": 1.12,
+   "height_m": 1.93,
+   "max_dimension_m": 1.93,
+   "grid_cells": [
+    2,
+    2
+   ],
+   "registry": "procedural_generation",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "wfc_tile_bench": {
+   "aabb_size": [
+    1.12,
+    1.87,
+    1.12
+   ],
+   "base_m": 1.12,
+   "height_m": 1.87,
+   "max_dimension_m": 1.87,
+   "grid_cells": [
+    2,
+    2
+   ],
+   "registry": "procedural_generation",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "wind_bench": {
+   "aabb_size": [
+    2.6,
+    3.12,
+    1.6
+   ],
+   "base_m": 2.6,
+   "height_m": 3.12,
+   "max_dimension_m": 3.12,
+   "grid_cells": [
+    3,
+    2
+   ],
+   "registry": "vectors_demos",
+   "principal": "kin:bench",
+   "source": "em-square"
+  },
+  "wireworld_bench": {
+   "aabb_size": [
+    1.84,
+    2.52,
+    1.84
+   ],
+   "base_m": 1.84,
+   "height_m": 2.52,
+   "max_dimension_m": 2.52,
+   "grid_cells": [
+    2,
+    2
+   ],
+   "registry": "cellular_automata",
+   "principal": "kin:bench",
+   "source": "em-square"
   }
  },
  "_principal_sync": "tools/principal_artifacts.py --sync-footprints"
