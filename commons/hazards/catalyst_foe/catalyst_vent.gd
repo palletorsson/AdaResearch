@@ -35,6 +35,12 @@ const FOE_SCENE := preload("res://commons/hazards/catalyst_foe/catalyst_foe.tscn
 # names CatalystFoe.apply_grid_config takes: foe / wary / neutral /
 # curious / friend.
 @export var initial_state: String = "foe"
+# Optional foe-mode seed for every foe this vent spawns (goo / transport /
+# swarm / drainfriend / chroma / wave / fractal / branch — see
+# CatalystFoe.FoeMode). Empty = leave each foe on its own default (GOO).
+# Set per-placement via the e:RATE:WAVE:DELAY:KIND utility token or
+# apply_grid_config {"foe_mode": ...}.
+@export var default_foe_mode: String = ""
 
 var _emitted: int = 0
 var _timer: float = 0.0          # accumulates dt
@@ -156,7 +162,12 @@ func _emit_one() -> void:
 	# already-warmed creatures (curious, neutral); an Emergence-phase
 	# chamber spawns friends.
 	if foe.has_method("apply_grid_config"):
-		foe.call("apply_grid_config", {"initial_state": initial_state})
+		var foe_cfg: Dictionary = {"initial_state": initial_state}
+		# Thread the vent's foe-mode seed down so token-placed vents
+		# (e:RATE:WAVE:DELAY:KIND) shape their offspring's friend kind.
+		if not default_foe_mode.is_empty():
+			foe_cfg["foe_mode"] = default_foe_mode
+		foe.call("apply_grid_config", foe_cfg)
 	_emitted += 1
 	_live_count += 1
 	foe.tree_exited.connect(_on_foe_exited)
@@ -191,6 +202,10 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	# Seed the personality stage of every foe this vent spawns.
 	if config_data.has("initial_state"):
 		initial_state = String(config_data.get("initial_state"))
+	# foe_mode: optional kind seed applied to every foe this vent spawns
+	# (see default_foe_mode above). Empty string clears it.
+	if config_data.has("foe_mode"):
+		default_foe_mode = String(config_data.get("foe_mode")).to_lower()
 
 
 # Diagnostic helpers ----------------------------------------------------

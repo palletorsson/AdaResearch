@@ -131,6 +131,13 @@ const UTILITY_TYPES = {
 		"description": "Dual-nature force zone — hazard that transmutes into benefit (f:fire, f:electric:15, f:toxic:10). Q-FEP: same potential, different restraint.",
 		"supports_parameters": true  # type:intensity (e.g. "fire:1.5", "electric:2")
 	},
+	"e": {
+		"name": "catalyst_vent",
+		"file": "",  # no scene here — CatalystVentScanner instantiates post-load (GridSystem._scan_catalyst_vents)
+		"category": "hazard",
+		"description": "Catalyst vent — emits CatalystFoe waves (e:RATE:WAVE:DELAY[:KIND], KIND = goo/transport/swarm/drainfriend/chroma/wave/fractal/branch). Same grammar as the /editor enemy brush.",
+		"supports_parameters": true  # rate, wave_size, start_delay, foe kind
+	},
 	"q": {
 		"name": "quit_cube", 
 		"file": "quit_cube.tscn", 

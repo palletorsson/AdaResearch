@@ -230,6 +230,11 @@ func generate_utilities(utility_data, utility_definitions: Dictionary = {}):
 				var y_pos = structure_component.find_highest_y_at(x, z)
 				_place_force_field(utility_cell, x, y_pos, z, total_size)
 				utility_count += 1
+			# Catalyst vent token (e / e:RATE:WAVE:DELAY[:KIND]) — spawned
+			# post-load by CatalystVentScanner (GridSystem._scan_catalyst_vents),
+			# not by this component. Count it, place nothing here.
+			elif utility_cell == "e" or utility_cell.begins_with("e:"):
+				utility_count += 1
 			else:
 				# Handle regular utilities
 				var parsed = UtilityRegistry.parse_utility_cell(utility_cell)

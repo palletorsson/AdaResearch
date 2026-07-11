@@ -544,10 +544,61 @@ func _on_grid_animation_complete():
 # Handle utilities generation completion
 func _on_utilities_complete(utility_count: int):
 	print("GridSystem: Utilities generation complete (%d utilities)" % utility_count)
-	
+
+	# Spawn catalyst vents from editor-painted e: tokens (additive).
+	# Guarded inside: a map whose utilities hold no "e" token is untouched.
+	_scan_catalyst_vents()
+
 	# Generate interactables
 	var interactable_data = data_component.get_interactable_data()
 	interactables_component.generate_interactables(interactable_data)
+
+# Spawn CatalystVents from editor-painted `e` utility tokens (additive).
+# Translates "e" / "e:RATE:WAVE:DELAY[:KIND]" cells in the utilities layout
+# into CatalystVent instances via CatalystVentScanner — the editor's enemy
+# brush and the VR runtime speak the same token grammar. Guard FIRST: only
+# when at least one vent token exists does this touch the tree; maps without
+# e: tokens take the early return with zero side effects. Mirrors the
+# GroundLayer hook pattern (idempotent container, dropped on reload).
+func _scan_catalyst_vents() -> void:
+	if not data_component or not structure_component:
+		return
+	var utility_data = data_component.get_utility_data()
+	if not utility_data or not utility_data.layout_data:
+		return
+	var layout: Array = utility_data.layout_data
+	# Cheap pre-scan for any vent token before creating anything.
+	var has_vent_token: bool = false
+	for row in layout:
+		if row == null:
+			continue
+		for cell in row:
+			var tok: String = str(cell).strip_edges()
+			if tok == "e" or tok.begins_with("e:"):
+				has_vent_token = true
+				break
+		if has_vent_token:
+			break
+	if not has_vent_token:
+		return
+	# Drop any prior vents container (idempotent reload).
+	var old_vents = get_node_or_null("CatalystVents")
+	if old_vents:
+		old_vents.queue_free()
+	var vents_root: Node3D = Node3D.new()
+	vents_root.name = "CatalystVents"
+	add_child(vents_root)
+	var total_size: float = cube_size + gutter
+	# Seat each vent on the cube top of its own column — same convention
+	# GridUtilitiesComponent uses for regular utilities.
+	var y_lookup: Callable = func(x: int, z: int) -> float:
+		return GridCommon.surface_world_y(structure_component.find_highest_y_at(x, z), total_size)
+	var VentScannerScript = preload("res://commons/managers/CatalystVentScanner.gd")
+	var vent_count: int = VentScannerScript.scan_utilities(layout, total_size, global_position, vents_root, {
+		"cell_inset": 0.0,  # grid cells centre on x * total_size (editor centres on x + 0.5)
+		"y_lookup": y_lookup,
+	})
+	print("GridSystem: 🕳️ CatalystVentScanner spawned %d vent(s) from e: tokens" % vent_count)
 
 # Handle interactables generation completion
 func _on_interactables_complete(interactable_count: int):
