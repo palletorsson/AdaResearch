@@ -413,115 +413,172 @@
    "n": 1,
    "title": "The screen that draws the where",
    "register": "walk",
-   "body": "You arrive on an empty floor and the first thing waiting is a screen. It wakes, draws a point, then three arrows growing out of that point, one for each direction the room owns. It marks the point zero: the origin. It rules faint lines across the floor and up the walls until the whole room is graph paper, then prints a small pair of numbers beside your feet. Take a step; the numbers tick over. This is the frame \u2014 an origin someone planted, axes someone chose, coordinates that follow you around like a price tag. Nothing has been done to anything yet. The room has only learned to say where."
+   "body": "You arrive on an empty floor and the first thing waiting is a screen. It wakes, draws a point, then three arrows growing out of that point, one for each direction the room owns. It marks the point zero: the origin. It rules faint lines across the floor and up the walls until the whole room is graph paper, then prints a small pair of numbers beside your feet. Take a step; the numbers tick over. This is the frame \u2014 an origin someone planted, axes someone chose, coordinates that follow you around like a price tag. Nothing has been done to anything yet. The room has only learned to say where.",
+   "concept": "frame",
+   "cast": "science_screen",
+   "image": "/artifact-gallery/captures/science_screen/front.png"
   },
   {
    "n": 2,
    "title": "A cube learns its first verb",
    "register": "walk",
-   "body": "The second bench holds a cube and one verb. Grip the cube and slide it: a pair of numbers rides its shoulder, counting its distance from the origin along each axis. This is translation \u2014 the whole solid carried sideways, every corner moved by exactly the same amount, no corner treated specially. Let go and look: the cube is still the cube. Same edges, same angles between the edges, same heft. Nothing about the thing itself is different; only its address in the frame has moved. Slide it home and the numbers walk back down to zero, as if the trip had never been taken."
+   "body": "The second bench holds a cube and one verb. Grip the cube and slide it: a pair of numbers rides its shoulder, counting its distance from the origin along each axis. This is translation \u2014 the whole solid carried sideways, every corner moved by exactly the same amount, no corner treated specially. Let go and look: the cube is still the cube. Same edges, same angles between the edges, same heft. Nothing about the thing itself is different; only its address in the frame has moved. Slide it home and the numbers walk back down to zero, as if the trip had never been taken.",
+   "concept": "translate",
+   "cast": "translation_cube_demo",
+   "image": null
   },
   {
    "n": 3,
    "title": "Three rings and one still line",
    "register": "walk",
-   "body": "The gimbal is three rings nested one inside the next, a small cube hung at the center. Push the outer ring and the cube rotates: same address, new facing. Where translation moved every corner by the same amount, rotation moves each corner differently \u2014 the far edge sweeps a wide arc, the middle barely stirs, and one line through the cube, the axis of spin, does not move at all. Every rotation keeps one such line still; find it and you have named the motion. Push two rings at once and the two motions stack in ways your wrist does not expect. The numbers hold steady. Only the angle to the frame has changed."
+   "body": "The gimbal is three rings nested one inside the next, a small cube hung at the center. Push the outer ring and the cube rotates: same address, new facing. Where translation moved every corner by the same amount, rotation moves each corner differently \u2014 the far edge sweeps a wide arc, the middle barely stirs, and one line through the cube, the axis of spin, does not move at all. Every rotation keeps one such line still; find it and you have named the motion. Push two rings at once and the two motions stack in ways your wrist does not expect. The numbers hold steady. Only the angle to the frame has changed.",
+   "concept": "rotate",
+   "cast": "rotation_gimbal",
+   "image": "/artifact-gallery/captures/rotation_gimbal/front.png"
   },
   {
    "n": 4,
    "title": "Who planted zero",
    "register": "turn",
-   "body": "Slide a cube and call it motion \u2014 the claim leans entirely on the frame staying put. The screen at the door planted an origin, called it zero, and every translation since has been measured against that private flag. Move the origin instead and the cube's numbers change while the cube sits untouched: the same reading, produced by doing nothing to the thing itself. Rotation plays the matching trick with facing. The frame is not a window onto motion; it is a verdict about which motions exist and which are bookkeeping. Whoever plants zero owns the difference between \"it moved\" and \"you measured differently,\" and no bench in this room asks you to vote on where zero goes."
+   "body": "Slide a cube and call it motion \u2014 the claim leans entirely on the frame staying put. The screen at the door planted an origin, called it zero, and every translation since has been measured against that private flag. Move the origin instead and the cube's numbers change while the cube sits untouched: the same reading, produced by doing nothing to the thing itself. Rotation plays the matching trick with facing. The frame is not a window onto motion; it is a verdict about which motions exist and which are bookkeeping. Whoever plants zero owns the difference between \"it moved\" and \"you measured differently,\" and no bench in this room asks you to vote on where zero goes.",
+   "concept": "rotate",
+   "cast": "rotation_gimbal",
+   "image": "/artifact-gallery/captures/rotation_gimbal/front.png"
   },
   {
    "n": 5,
    "title": "Pinch it bigger",
    "register": "walk",
-   "body": "The next cube answers your pinch. Pull two opposite corners apart and the whole solid grows; push them together to shrink it back down. This is scale, the third verb: every distance inside the body multiplied by one factor. Unlike a slide or a spin, scaling will not leave the thing alone \u2014 double the cube and its edges double, its faces quadruple, its volume comes back eight times heavier. The three verbs are not siblings after all; two of them are couriers and one is a surgeon. Set the factor under one and the cube tightens toward its own middle. Set it exactly to one and nothing happens: the verb that does nothing, the quiet zero of the family."
+   "body": "The next cube answers your pinch. Pull two opposite corners apart and the whole solid grows; push them together to shrink it back down. This is scale, the third verb: every distance inside the body multiplied by one factor. Unlike a slide or a spin, scaling will not leave the thing alone \u2014 double the cube and its edges double, its faces quadruple, its volume comes back eight times heavier. The three verbs are not siblings after all; two of them are couriers and one is a surgeon. Set the factor under one and the cube tightens toward its own middle. Set it exactly to one and nothing happens: the verb that does nothing, the quiet zero of the family.",
+   "concept": "scale",
+   "cast": "scale_me",
+   "image": null
   },
   {
    "n": 6,
    "title": "The cake that comes apart",
    "register": "walk",
-   "body": "The carousel cake stands waist-high: a birthday cake of separate tiers, each tier on its own bearing, all given one instruction \u2014 rotate, one turn a minute. For a moment the cake moves as one solid; then it is not one. A candle on the narrow top tier ambles in a tight circle while a candle at the wide bottom rim covers ten times the ground in the same minute, because the instruction fixes the angle and lets radius do what scale did \u2014 multiply the same motion into unequal ground. Same law for every tier, and the tiers still come apart, icing shearing between them. Watch the seams: uniform treatment, measured at the rim, is not uniform at all."
+   "body": "The carousel cake stands waist-high: a birthday cake of separate tiers, each tier on its own bearing, all given one instruction \u2014 rotate, one turn a minute. For a moment the cake moves as one solid; then it is not one. A candle on the narrow top tier ambles in a tight circle while a candle at the wide bottom rim covers ten times the ground in the same minute, because the instruction fixes the angle and lets radius do what scale did \u2014 multiply the same motion into unequal ground. Same law for every tier, and the tiers still come apart, icing shearing between them. Watch the seams: uniform treatment, measured at the rim, is not uniform at all.",
+   "concept": "cake",
+   "cast": "carousel_cake",
+   "image": null
   },
   {
    "n": 7,
    "title": "One law, unequal riders",
    "register": "turn",
-   "body": "\"The same for everyone\" is the oldest costume inequality owns, and the cake catches it on a bearing. One rule, one speed, and the outer tier still travels ten times farther than the top \u2014 the law was uniform, the riders sat at different radii, and the difference did the sorting. Scale runs the same con inside a single body: one multiplier, and edges double while volume grows eightfold, so \"doubled\" lands harder in the middle of a thing than on its skin. Any rule stated once and applied everywhere bills each body according to where it sits \u2014 distance from the axis, distance from the origin \u2014 while filing itself as fair. The cake is honest about it; most uniform rules do not shear where you can see."
+   "body": "\"The same for everyone\" is the oldest costume inequality owns, and the cake catches it on a bearing. One rule, one speed, and the outer tier still travels ten times farther than the top \u2014 the law was uniform, the riders sat at different radii, and the difference did the sorting. Scale runs the same con inside a single body: one multiplier, and edges double while volume grows eightfold, so \"doubled\" lands harder in the middle of a thing than on its skin. Any rule stated once and applied everywhere bills each body according to where it sits \u2014 distance from the axis, distance from the origin \u2014 while filing itself as fair. The cake is honest about it; most uniform rules do not shear where you can see.",
+   "concept": "cake",
+   "cast": "carousel_cake",
+   "image": null
   },
   {
    "n": 8,
    "title": "The shadow along another arrow",
    "register": "walk",
-   "body": "Two arrows rise from one point on the alignment bench, a red one fixed, a blue one loose in your hand, an angle open between them. A number floats where they meet. Swing the blue arrow and the number moves: point the pair the same way and it climbs to the full product of their lengths; open them to a quarter turn and it dies to zero. The bench is taking the dot product \u2014 laying the shadow of one arrow along the other and measuring how much of blue agrees with red. This is projection, agreement priced as a single number. Rotate either arrow and the price updates; the frame never enters. The score belongs to the pair alone."
+   "body": "Two arrows rise from one point on the alignment bench, a red one fixed, a blue one loose in your hand, an angle open between them. A number floats where they meet. Swing the blue arrow and the number moves: point the pair the same way and it climbs to the full product of their lengths; open them to a quarter turn and it dies to zero. The bench is taking the dot product \u2014 laying the shadow of one arrow along the other and measuring how much of blue agrees with red. This is projection, agreement priced as a single number. Rotate either arrow and the price updates; the frame never enters. The score belongs to the pair alone.",
+   "concept": "dot",
+   "cast": "invariants_demo",
+   "image": null
   },
   {
    "n": 9,
    "title": "The arrow neither one owns",
    "register": "walk",
-   "body": "The right triangle bench keeps two arrows but asks the opposite question. Where the dot product measured what the pair shares, the cross product builds what neither owns: grip both arrows and a third grows out of their plane, perpendicular to each, standing off the bench like a mast. Its length is the area the two arrows brace between them \u2014 open them toward a right angle and the mast stretches; fold them toward agreement and it dies to nothing, exactly where the dot product sings loudest. Two products, one dial read from opposite ends: one pays arrows for pointing together, the other pays them for spanning ground, and each reads zero precisely where the other peaks."
+   "body": "The right triangle bench keeps two arrows but asks the opposite question. Where the dot product measured what the pair shares, the cross product builds what neither owns: grip both arrows and a third grows out of their plane, perpendicular to each, standing off the bench like a mast. Its length is the area the two arrows brace between them \u2014 open them toward a right angle and the mast stretches; fold them toward agreement and it dies to nothing, exactly where the dot product sings loudest. Two products, one dial read from opposite ends: one pays arrows for pointing together, the other pays them for spanning ground, and each reads zero precisely where the other peaks.",
+   "concept": "cross",
+   "cast": "righttriangle",
+   "image": null
   },
   {
    "n": 10,
    "title": "Zero for disagreement",
    "register": "turn",
-   "body": "The dot product grades every arrow by one question \u2014 how much of you lies along me \u2014 and files the entire perpendicular remainder under zero. Build a syllabus, a salary, a search ranking on that score, and whatever sits orthogonal to the chosen direction becomes formally worthless: not opposed, not resisted, just invisible to the instrument. The cross product carries its own fine print \u2014 the mast could stand up or down, both perpendicular, and the bench picks one by convention, a right-hand agreement nobody at the bench ever signed. One number deletes whatever disagrees with its axis; the other settles ambiguity by inherited handshake. Neither is neutral. Both smuggle a chosen direction inside the costume of measurement."
+   "body": "The dot product grades every arrow by one question \u2014 how much of you lies along me \u2014 and files the entire perpendicular remainder under zero. Build a syllabus, a salary, a search ranking on that score, and whatever sits orthogonal to the chosen direction becomes formally worthless: not opposed, not resisted, just invisible to the instrument. The cross product carries its own fine print \u2014 the mast could stand up or down, both perpendicular, and the bench picks one by convention, a right-hand agreement nobody at the bench ever signed. One number deletes whatever disagrees with its axis; the other settles ambiguity by inherited handshake. Neither is neutral. Both smuggle a chosen direction inside the costume of measurement.",
+   "concept": "cross",
+   "cast": "righttriangle",
+   "image": null
   },
   {
    "n": 11,
    "title": "Verbs on a rail",
    "register": "walk",
-   "body": "The workbench hands you the verbs as physical tiles \u2014 slide, rotate, scale \u2014 and a rail to hang them on. Hang three and press run: the cube performs them left to right and lands somewhere new. This is composition, small verbs strung into one act. Build \"rotate a quarter turn, then slide two units, then scale by half\" and watch the cube speak the whole sentence. Lift the middle tile out, hang a different one, run it again. The rail holds any chain you can spell, and every chain is itself one transformation \u2014 one door in, one door out, no matter how many verbs stand between."
+   "body": "The workbench hands you the verbs as physical tiles \u2014 slide, rotate, scale \u2014 and a rail to hang them on. Hang three and press run: the cube performs them left to right and lands somewhere new. This is composition, small verbs strung into one act. Build \"rotate a quarter turn, then slide two units, then scale by half\" and watch the cube speak the whole sentence. Lift the middle tile out, hang a different one, run it again. The rail holds any chain you can spell, and every chain is itself one transformation \u2014 one door in, one door out, no matter how many verbs stand between.",
+   "concept": "compose",
+   "cast": "transform_composition_workbench",
+   "image": "/artifact-gallery/captures/transform_composition_workbench/front.png"
   },
   {
    "n": 12,
    "title": "Swap two tiles",
    "register": "walk",
-   "body": "Two tiles on the rail: slide, then rotate. The cube steps aside, then turns in its new spot, done. Now swap the tiles \u2014 rotate, then slide \u2014 and press run. The cube turns first, so the slide that follows runs along a new facing; it walks off at an angle and ends somewhere else entirely. Same two verbs, same amounts, and the composition refuses to commute: the chain read forward and the chain reversed are two different acts with two different endings. The workbench makes it physical. Order matters \u2014 not as a slogan but as a place, the spot your cube now occupies that the other ordering can never reach."
+   "body": "Two tiles on the rail: slide, then rotate. The cube steps aside, then turns in its new spot, done. Now swap the tiles \u2014 rotate, then slide \u2014 and press run. The cube turns first, so the slide that follows runs along a new facing; it walks off at an angle and ends somewhere else entirely. Same two verbs, same amounts, and the composition refuses to commute: the chain read forward and the chain reversed are two different acts with two different endings. The workbench makes it physical. Order matters \u2014 not as a slogan but as a place, the spot your cube now occupies that the other ordering can never reach.",
+   "concept": "noncommute",
+   "cast": "transform_composition_workbench",
+   "image": "/artifact-gallery/captures/transform_composition_workbench/front.png"
   },
   {
    "n": 13,
    "title": "Sequence is never neutral",
    "register": "turn",
-   "body": "Every institution runs on chains \u2014 application, then review; arrest, then hearing; budget, then vote \u2014 and the workbench just showed that a chain and its swap are different machines. Rotate-then-slide strands the cube where slide-then-rotate never goes: no single step was unfair, and the composition still sorted the endings by sequence alone. That is the quiet power inside any procedure. Each part can be defensible while the ordering does the deciding, and \"we followed the steps\" answers a question nobody asked. Non-commutative acts hand whoever schedules them a power that never appears on the books, because it lives between the steps, not in them. The workbench at least shows its rail. Most chains you stand inside do not."
+   "body": "Every institution runs on chains \u2014 application, then review; arrest, then hearing; budget, then vote \u2014 and the workbench just showed that a chain and its swap are different machines. Rotate-then-slide strands the cube where slide-then-rotate never goes: no single step was unfair, and the composition still sorted the endings by sequence alone. That is the quiet power inside any procedure. Each part can be defensible while the ordering does the deciding, and \"we followed the steps\" answers a question nobody asked. Non-commutative acts hand whoever schedules them a power that never appears on the books, because it lives between the steps, not in them. The workbench at least shows its rail. Most chains you stand inside do not.",
+   "concept": "noncommute",
+   "cast": "transform_composition_workbench",
+   "image": "/artifact-gallery/captures/transform_composition_workbench/front.png"
   },
   {
    "n": 14,
    "title": "Sixteen numbers, one act",
    "register": "walk",
-   "body": "The viewer bench holds the payoff: a square of sixteen numbers hanging in the air, four rows, four columns, the workbench's chain glowing beside it. Press collapse and the chain folds \u2014 slide, rotate, scale, three tiles or ten, all multiplied down into that single 4x4 grid. This is the matrix: composition written as one object. Feed the cube's corners through it and the entire history happens in one pass. Two chains with different endings collapse into two different matrices; the swap you made earlier is still visible here, sixteen numbers quietly disagreeing with sixteen others. The rail was the sentence. The matrix is the word."
+   "body": "The viewer bench holds the payoff: a square of sixteen numbers hanging in the air, four rows, four columns, the workbench's chain glowing beside it. Press collapse and the chain folds \u2014 slide, rotate, scale, three tiles or ten, all multiplied down into that single 4x4 grid. This is the matrix: composition written as one object. Feed the cube's corners through it and the entire history happens in one pass. Two chains with different endings collapse into two different matrices; the swap you made earlier is still visible here, sixteen numbers quietly disagreeing with sixteen others. The rail was the sentence. The matrix is the word.",
+   "concept": "matrix",
+   "cast": "matrix_4x4_viewer",
+   "image": null
   },
   {
    "n": 15,
    "title": "The corridor that adds up",
    "register": "walk",
-   "body": "The boolean tunnel is the only bench you enter. A corridor of square ribs runs ahead, and each rib is the previous rib pushed through the same small matrix \u2014 carried forward a step, rotated a few degrees. Walk in. The first joints read as construction noise; ten segments along, the floor is banking like a road; by the far end the corridor has rolled your sense of up a quarter of the way around. No single rib did it. The twist exists only as accumulation \u2014 one modest transformation compounding rib after rib after rib \u2014 and you meet it not on a screen but in your ankles. Architecture as a chain you are standing inside."
+   "body": "The boolean tunnel is the only bench you enter. A corridor of square ribs runs ahead, and each rib is the previous rib pushed through the same small matrix \u2014 carried forward a step, rotated a few degrees. Walk in. The first joints read as construction noise; ten segments along, the floor is banking like a road; by the far end the corridor has rolled your sense of up a quarter of the way around. No single rib did it. The twist exists only as accumulation \u2014 one modest transformation compounding rib after rib after rib \u2014 and you meet it not on a screen but in your ankles. Architecture as a chain you are standing inside.",
+   "concept": "tunnel",
+   "cast": "boolean_tunnel",
+   "image": null
   },
   {
    "n": 16,
    "title": "What the collapse forgets",
    "register": "turn",
-   "body": "Collapse a chain into a matrix and the order that built it is gone: sixteen numbers keep the destination and burn the itinerary. Two histories that end alike become indistinguishable \u2014 ask the grid which verb came first and there is no memory left to consult. That is convenience, and it is also amnesty, because every audit of process dies at the moment of collapse. The tunnel runs the same erasure through the body: each segment moves you by less than you would bother to contest, and the twist only shows once you are already turned. Steps small enough disarm objection; summaries compact enough disarm review. Two benches, one trick from opposite ends \u2014 power arrives pre-multiplied, or it arrives in increments."
+   "body": "Collapse a chain into a matrix and the order that built it is gone: sixteen numbers keep the destination and burn the itinerary. Two histories that end alike become indistinguishable \u2014 ask the grid which verb came first and there is no memory left to consult. That is convenience, and it is also amnesty, because every audit of process dies at the moment of collapse. The tunnel runs the same erasure through the body: each segment moves you by less than you would bother to contest, and the twist only shows once you are already turned. Steps small enough disarm objection; summaries compact enough disarm review. Two benches, one trick from opposite ends \u2014 power arrives pre-multiplied, or it arrives in increments.",
+   "concept": "tunnel",
+   "cast": "boolean_tunnel",
+   "image": null
   },
   {
    "n": 17,
    "title": "What comes home untouched",
    "register": "walk",
-   "body": "The last teaching bench runs the full battery. Set a wire pyramid on the plate and the bench drags it through everything the room taught: a slide, a spin about each axis, a scale to double, a whole chain off the workbench, matrix after matrix. Beside the plate, a panel of dials watches numbers. The pyramid's coordinates churn under every act. Its edge lengths ride through slide and spin untouched, then break the moment scale arrives. The angles between its edges hold through all of it, every time. This is the invariant: whatever a family of transformations cannot reach. The bench's real product is not the moved pyramid \u2014 it is the short list of readings that came home unchanged."
+   "body": "The last teaching bench runs the full battery. Set a wire pyramid on the plate and the bench drags it through everything the room taught: a slide, a spin about each axis, a scale to double, a whole chain off the workbench, matrix after matrix. Beside the plate, a panel of dials watches numbers. The pyramid's coordinates churn under every act. Its edge lengths ride through slide and spin untouched, then break the moment scale arrives. The angles between its edges hold through all of it, every time. This is the invariant: whatever a family of transformations cannot reach. The bench's real product is not the moved pyramid \u2014 it is the short list of readings that came home unchanged.",
+   "concept": "invariant",
+   "cast": "invariants_demo",
+   "image": null
   },
   {
    "n": 18,
    "title": "Rebuild the chair",
    "register": "walk",
-   "body": "The proof is a chair in pieces: legs, back, seat scattered across the floor, and above them a faint ghost of the finished chair \u2014 the target pose, position and facing and size all spoken for. The assembly is yours. Take each piece and spend the verbs: slide it across the room, rotate it to the ghost's facing, scale the one leg that arrives wrong, until the piece clicks into its outline. No single chain is the answer \u2014 two builders reach the same pose through different verbs in different orders, and the bench grades only the end state. Every reading the ghost fixes must land; every invariant must agree. When the last piece settles, the chair simply exists."
+   "body": "The proof is a chair in pieces: legs, back, seat scattered across the floor, and above them a faint ghost of the finished chair \u2014 the target pose, position and facing and size all spoken for. The assembly is yours. Take each piece and spend the verbs: slide it across the room, rotate it to the ghost's facing, scale the one leg that arrives wrong, until the piece clicks into its outline. No single chain is the answer \u2014 two builders reach the same pose through different verbs in different orders, and the bench grades only the end state. Every reading the ghost fixes must land; every invariant must agree. When the last piece settles, the chair simply exists.",
+   "concept": "pose",
+   "cast": "chair_assembly_puzzle",
+   "image": null
   },
   {
    "n": 19,
    "title": "The room read backward",
    "register": "turn",
-   "body": "Walk the room backward and the benches close into one argument. The screen planted a frame; slide, spin, and scale gave you three verbs against it; the birthday cake showed one law riding unequal tiers. The dot product priced agreement, the cross product built the perpendicular and picked its direction by handshake, and the workbench strung the verbs into a chain whose swap \u2014 order matters \u2014 moved the ending. The matrix collapsed the chain into sixteen unaccountable numbers; the tunnel wrapped that accumulation around your ankles; the invariant named what the whole storm could not reach; and the chair spent every verb steering toward one target pose. A dozen benches, thirteen moves, and the room's own ordering is the final exhibit: it would not commute either."
+   "body": "Walk the room backward and the benches close into one argument. The screen planted a frame; slide, spin, and scale gave you three verbs against it; the birthday cake showed one law riding unequal tiers. The dot product priced agreement, the cross product built the perpendicular and picked its direction by handshake, and the workbench strung the verbs into a chain whose swap \u2014 order matters \u2014 moved the ending. The matrix collapsed the chain into sixteen unaccountable numbers; the tunnel wrapped that accumulation around your ankles; the invariant named what the whole storm could not reach; and the chair spent every verb steering toward one target pose. A dozen benches, thirteen moves, and the room's own ordering is the final exhibit: it would not commute either.",
+   "concept": "pose",
+   "cast": "chair_assembly_puzzle",
+   "image": null
   }
  ],
  "violations": [],

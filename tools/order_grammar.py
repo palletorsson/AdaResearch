@@ -265,6 +265,32 @@ def main():
             "pedagogy": kendall(order, class_order("ped")),
             "ontology": kendall(order, class_order("onto")),
             "criticality": kendall(order, class_order("crit"))}
+    # the perfect image: each section's primary concept -> its cast artifact's
+    # Godot capture (front.png), when one exists locally. Primary = the concept
+    # the section debuts, else the freshest concept it mentions.
+    caps = ENC / "public" / "artifact-gallery" / "captures"
+    intro_ix = {}
+    for i, p in enumerate(per):
+        for c in p.get("introduces", []):
+            intro_ix.setdefault(c, i)
+    for i, s in enumerate(sections):
+        p = per[i]
+        introduces = p.get("introduces", [])
+        ments = p.get("mentions", [])
+        if introduces:
+            primary = introduces[0]
+        elif ments:
+            ranked = sorted((m for m in ments if m in intro_ix),
+                            key=lambda m: intro_ix[m], reverse=True)
+            primary = ranked[0] if ranked else ments[0]
+        else:
+            primary = None
+        cast = concepts[primary]["cast"] if primary in concepts else None
+        s["concept"] = primary
+        s["cast"] = cast
+        s["image"] = (f"/artifact-gallery/captures/{cast}/front.png"
+                      if cast and (caps / cast / "front.png").exists() else None)
+
     report = {"sequence": seq,
               "written_order": order, "baseline_order": baseline_order,
               "agreement_kendall": taus, "rows": rows,
