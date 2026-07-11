@@ -41,8 +41,9 @@
   },
   "flock": {
    "tool": "gen_flocking.py",
-   "knobs": {"_pending": "worker in flight — separation/cohesion/alignment weights, steps"},
-   "note": "rooms as boids; separation = honest footprint spacing; sequence-cohesion clusters the walk"
+   "knobs": {"PLANE": 72, "STEPS": 200, "SEP": 0.11, "COH": 0.021,
+             "ALIGN": 0.003, "DAMP": 0.86, "AISLE": 3, "VOLT_SIZE": 6},
+   "note": "rooms as boids; separation = honest spacing, sequence-cohesion clusters the walk (tightest maps: 721/884 cells)"
   },
   "physarum": {
    "tool": "gen_physarum.py",
