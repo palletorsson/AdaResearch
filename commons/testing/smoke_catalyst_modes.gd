@@ -2,7 +2,7 @@ extends SceneTree
 
 ## Verifies catalyst_foe per-mode dispatch.
 ##
-## All 4 cases run synchronously (no awaits) so we exit before any
+## All cases run synchronously (no awaits) so we exit before any
 ## autoload-driven polling can keep the SceneTree alive.
 
 const FOE_SCENE := preload("res://commons/hazards/catalyst_foe/catalyst_foe.tscn")
@@ -16,8 +16,13 @@ func _initialize() -> void:
 		{"mode": "primitives",     "expected": 0, "label": "GOO"},
 		{"mode": "transformation", "expected": 1, "label": "TRANSPORT"},
 		{"mode": "swarm",          "expected": 2, "label": "SWARM"},
+		{"mode": "chaos",          "expected": 2, "label": "SWARM (chaos)"},
+		{"mode": "forces",         "expected": 2, "label": "SWARM (forces)"},
 		{"mode": "cellular",       "expected": 3, "label": "DRAINFRIEND"},
-		{"mode": "chromatic",      "expected": 0, "label": "GOO (chromatic falls through)"},
+		{"mode": "chromatic",      "expected": 4, "label": "CHROMA"},
+		{"mode": "waveform",       "expected": 5, "label": "WAVE"},
+		{"mode": "fractal",        "expected": 6, "label": "FRACTAL"},
+		{"mode": "branching",      "expected": 7, "label": "BRANCH"},
 	]
 	print("=== catalyst_foe per-mode dispatch ===")
 	var fails: int = 0

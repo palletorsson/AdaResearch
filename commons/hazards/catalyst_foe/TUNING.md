@@ -62,6 +62,20 @@ selects the **friend behavior** at hit time — see `MODE_BY_ID` in
 fire the matching bracelet mode. To force a specific kind in
 `/editor`, use the dropdown in the Play tab's catalyst HUD.
 
+| mode_id | FoeMode | Friend contact behavior |
+|---|---|---|
+| `primitives` (+ unmapped) | GOO | convert peer (badge-less baseline) |
+| `transformation` | TRANSPORT | push peer ~2m away from player |
+| `forces` / `swarm` / `chaos` | SWARM | convert, +40% chase speed |
+| `cellular` | DRAINFRIEND | convert, drags a peer back on FOE catch |
+| `chromatic` | CHROMA | convert (magenta hue, stacked-cube badge) |
+| `waveform` | WAVE | convert + halve chase_speed of non-friends within 3m |
+| `fractal` | FRACTAL | convert + second-nearest foe advances one step too |
+| `branching` | BRANCH | convert (leaf-green hue, trunk+twig badge) |
+
+Seed a kind directly via `foe_mode=` config: `goo` / `transport` /
+`swarm` / `drainfriend` / `chroma` / `wave` / `fractal` / `branch`.
+
 ## Common patterns
 
 ### Onboarding map (gentle)
@@ -95,7 +109,8 @@ For maps where catalyst is incidental — one foe every 10 seconds, only 3.
 2. **Foe's `_physics_process`** uses `step_period_s` for walking.
 3. **Foe's player-contact** uses `damage_percent` + `damage_cooldown_s`.
 4. **Foe's `hit_by_catalyst_mode`** uses the projectile's mode_id to
-   pick the friend behavior (goo / transport / swarm / drainfriend).
+   pick the friend behavior (goo / transport / swarm / drainfriend /
+   chroma / wave / fractal / branch).
 
 ## Editing existing maps
 

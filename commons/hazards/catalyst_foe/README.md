@@ -53,9 +53,14 @@ The editor at `/editor` paints `e:RATE:WAVE` utility tokens. This system answers
 - L-click in editor ↔ trigger-fire the bracelet in VR
 - Per-sequence kind dropdown ↔ active catalyst mode (transformation, chromatic, etc.)
 
-## What's not yet wired
+## Per-mode friend kinds
 
-- **Per-mode foe variants** (transport / swarm / drainfriend) — the editor's four kinds aren't yet reflected in VR. Each catalyst mode currently flips foes to FRIEND uniformly.
+Every catalyst mode now maps to a distinct friend kind (`MODE_BY_ID` in `catalyst_foe.gd`):
+GOO (primitives), TRANSPORT (transformation), SWARM (forces/swarm/chaos), DRAINFRIEND (cellular),
+CHROMA (chromatic), WAVE (waveform — slow-pulses nearby foes), FRACTAL (fractal — split conversion),
+BRANCH (branching). Each kind gets its own friend hue and a small badge mesh; GOO stays badge-less.
+
+## What's not yet wired
 - **soft_stages.json** auto-detection by sequence — the foe accepts an `initial_state` config but doesn't yet read its sequence's `enemies.kind`.
 - **Win/lose narrative banners** in VR — the editor has them; VR maps would need a small HUD or an end-of-sequence chamber transition.
 - **Vent visualization in /editor** is the inverse — but the existing `e:` token + grey pillar already mirrors this.

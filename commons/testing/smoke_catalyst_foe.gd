@@ -7,7 +7,7 @@ extends SceneTree
 ##   - A CatalystVent at (3, 0, 0) emitting every 0.5s, wave_size 3
 ## Runs for 4 seconds, then asserts:
 ##   - At least one foe spawned and walked toward player
-##   - Calling foe.hit_by_projectile() flips it to FRIEND
+##   - 4 hit_by_projectile() calls walk it foe→wary→neutral→curious→friend
 ##   - The friend then chases another foe
 ## Prints PASS/FAIL.
 
@@ -62,16 +62,17 @@ func _run() -> void:
 	if not f0.has_method("hit_by_projectile"):
 		print("FAIL: foe missing hit_by_projectile()")
 		quit(1); return
-	print("- firing catalyst hit on foe[0]...")
-	f0.call("hit_by_projectile", Color(1.0, 0.0, 1.0))
+	print("- firing 4 catalyst hits on foe[0] (one personality step each)...")
+	for i in range(4):
+		f0.call("hit_by_projectile", Color(1.0, 0.0, 1.0))
 	await _wait(0.5).timeout
-	var state_after: int = int(f0.get("state"))
-	print("- foe[0].state after hit = %d (1 = FRIEND)" % state_after)
-	if state_after != 1:
-		print("FAIL: hit_by_projectile didn't flip state")
+	var personality_after: String = String(f0.call("get_personality"))
+	print("- foe[0].personality after 4 hits = '%s' (expect 'friend')" % personality_after)
+	if personality_after != "friend":
+		print("FAIL: 4 hits didn't walk personality to friend")
 		quit(1); return
 
-	print("PASS: foe spawned, walks, accepts catalyst hit, flips to friend")
+	print("PASS: foe spawned, walks, 4 catalyst hits walk it to friend")
 	quit(0)
 
 

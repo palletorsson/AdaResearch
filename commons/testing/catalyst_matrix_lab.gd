@@ -25,13 +25,13 @@ const ProjectileScript := preload("res://commons/hazards/becoming_catalyst/catal
 const MODES: Array = [
 	{"id": "primitives",     "color": Color(0.85, 0.85, 0.95), "speed": 6.0,  "expected_foe_mode": 0, "label": "GOO (convert)",                   "wait_frames": 500, "lifetime": 10.0},
 	{"id": "transformation", "color": Color(0.7, 0.3, 0.85),   "speed": 12.0, "expected_foe_mode": 1, "label": "TRANSPORT (push peers)"},
-	{"id": "chromatic",      "color": Color(1.0, 0.5, 0.2),    "speed": 10.0, "expected_foe_mode": 0, "label": "GOO (chromatic falls through)"},
+	{"id": "chromatic",      "color": Color(1.0, 0.5, 0.2),    "speed": 10.0, "expected_foe_mode": 4, "label": "CHROMA (hue+badge)"},
 	{"id": "forces",         "color": Color(0.3, 0.7, 1.0),    "speed": 14.0, "expected_foe_mode": 2, "label": "SWARM (faster + bigger)"},
-	{"id": "waveform",       "color": Color(0.9, 0.4, 0.6),    "speed": 9.0,  "expected_foe_mode": 0, "label": "GOO"},
+	{"id": "waveform",       "color": Color(0.9, 0.4, 0.6),    "speed": 9.0,  "expected_foe_mode": 5, "label": "WAVE (slow pulse)"},
 	{"id": "chaos",          "color": Color(0.95, 0.2, 0.2),   "speed": 13.0, "expected_foe_mode": 2, "label": "SWARM (chaos)"},
 	{"id": "cellular",       "color": Color(0.4, 0.9, 0.3),    "speed": 8.0,  "expected_foe_mode": 3, "label": "DRAINFRIEND (entropy)"},
-	{"id": "fractal",        "color": Color(0.6, 0.4, 0.95),   "speed": 11.0, "expected_foe_mode": 0, "label": "GOO"},
-	{"id": "branching",      "color": Color(0.5, 0.95, 0.5),   "speed": 9.0,  "expected_foe_mode": 0, "label": "GOO"},
+	{"id": "fractal",        "color": Color(0.6, 0.4, 0.95),   "speed": 11.0, "expected_foe_mode": 6, "label": "FRACTAL (split conversion)"},
+	{"id": "branching",      "color": Color(0.5, 0.95, 0.5),   "speed": 9.0,  "expected_foe_mode": 7, "label": "BRANCH (hue+badge)"},
 	{"id": "swarm",          "color": Color(0.95, 0.7, 0.2),   "speed": 12.0, "expected_foe_mode": 2, "label": "SWARM"},
 ]
 
@@ -228,7 +228,7 @@ func _write_markdown() -> void:
 	for r in _results:
 		var hit: String = "✓" if r.get("hit", false) else "✗"
 		var ok: String = "PASS" if r.get("pass", false) else "FAIL"
-		var fm_lbl: String = ["GOO", "TRANSPORT", "SWARM", "DRAINFRIEND"][int(r.get("foe_mode_after", 0))]
+		var fm_lbl: String = ["GOO", "TRANSPORT", "SWARM", "DRAINFRIEND", "CHROMA", "WAVE", "FRACTAL", "BRANCH"][int(r.get("foe_mode_after", 0))]
 		f.store_string("| `%s` | %s | %s | %d | %d (%s) | %s |\n" % [
 			r["mode"], r["label"], hit, int(r.get("state_after", 0)),
 			int(r.get("foe_mode_after", 0)), fm_lbl, ok])

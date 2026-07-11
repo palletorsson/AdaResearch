@@ -1,7 +1,7 @@
 # @identity
 # essence: a HazardCreatureBase subclass that the catalyst phase-shifts through 5 personality stages — extends the project's shared personality system with catalyst-specific dispatch
 # desire: to embody the unifying enemy principle in VR -- the angry are biome-borne, the catalyst doesn't kill, transformation propagates one notch at a time
-# critical_parameter: foe_mode -- locked at FIRST catalyst hit; determines FRIEND peer-conversion behaviour (GOO converts, TRANSPORT pushes, SWARM speeds up, DRAINFRIEND drags peers back)
+# critical_parameter: foe_mode -- locked at FIRST catalyst hit; determines FRIEND peer-conversion behaviour (GOO converts, TRANSPORT pushes, SWARM speeds up, DRAINFRIEND drags peers back, WAVE slow-pulses, FRACTAL split-converts, CHROMA/BRANCH convert with distinct hue+badge)
 # triggers: hit_by_catalyst_mode(color, mode_id) advances personality one step along the arc; HazardManager + soft_stages.json drive sequence-aware initial personality
 # emerges: a flock of color walking toward the next angry thing — the catalyst becomes the world, one curriculum sequence at a time
 # needs: HazardCreatureBase parent [has, provides _personality + behavior flags + apply_grid_config + soft_stages.json wiring]; collision_layer 2 [has, in .tscn]; CharacterBody3D root [has, inherited from parent]
@@ -20,11 +20,12 @@
 #   - take_damage / _apply_damage / _handle_contact_damage
 #
 # This subclass adds:
-#   - foe_mode (GOO/TRANSPORT/SWARM/DRAINFRIEND) — catalyst-specific
+#   - foe_mode (GOO/TRANSPORT/SWARM/DRAINFRIEND/CHROMA/WAVE/FRACTAL/BRANCH)
 #   - hit_by_catalyst_mode() entry point for catalyst projectile
 #   - One-step-per-hit personality arc advancement
 #   - FRIEND peer-conversion behavior (override _process_chase)
-#   - Per-foe_mode visual badge (wedge / satellites / drain pyramid)
+#   - Per-foe_mode visual badge (wedge / satellites / drain pyramid /
+#     stacked cubes / sine spheres / nested boxes / trunk+twig)
 #   - hit-burst particle + light pulse on transformation
 extends HazardCreatureBase
 class_name CatalystFoe
@@ -48,8 +49,14 @@ signal personality_changed(from_personality: String, to_personality: String)
 # Locked at the FIRST catalyst hit (the one that takes the creature out
 # of "foe"); determines FRIEND peer-conversion behavior at the end of
 # the arc. Mirrors the editor's per-sequence enemy kinds.
-enum FoeMode { GOO, TRANSPORT, SWARM, DRAINFRIEND }
+enum FoeMode { GOO, TRANSPORT, SWARM, DRAINFRIEND, CHROMA, WAVE, FRACTAL, BRANCH }
 var foe_mode: FoeMode = FoeMode.GOO
+
+# The exact mode_id that locked this creature's lineage (first catalyst hit).
+# Still finer-grained than foe_mode (unmapped mode_ids default to GOO) and
+# each grants a distinct friend power. Carried through peer conversions so a
+# chain started by one mode stays that mode's lineage.
+var _locked_mode_id: String = "primitives"
 
 const MODE_BY_ID: Dictionary = {
 	"transformation": FoeMode.TRANSPORT,
@@ -57,7 +64,11 @@ const MODE_BY_ID: Dictionary = {
 	"swarm":          FoeMode.SWARM,
 	"chaos":          FoeMode.SWARM,
 	"cellular":       FoeMode.DRAINFRIEND,
-	# everything else → GOO (default)
+	"chromatic":      FoeMode.CHROMA,
+	"waveform":       FoeMode.WAVE,
+	"fractal":        FoeMode.FRACTAL,
+	"branching":      FoeMode.BRANCH,
+	# everything else (incl. "primitives") → GOO (default)
 }
 
 
@@ -153,6 +164,7 @@ func hit_by_catalyst_mode(color: Color, mode_id: String) -> void:
 	# Lock the foe_mode at the FIRST hit.
 	if prev == "foe":
 		foe_mode = MODE_BY_ID.get(mode_id, FoeMode.GOO)
+		_locked_mode_id = mode_id
 		# Step rate per mode (matches editor's stepMul).
 		if foe_mode == FoeMode.SWARM:
 			chase_speed = chase_speed * 1.4  # faster
@@ -161,6 +173,11 @@ func hit_by_catalyst_mode(color: Color, mode_id: String) -> void:
 	# Update personality via parent (sets behaviour flags).
 	set_personality(next_personality)
 	personality_changed.emit(prev, next_personality)
+
+	# The moment of alignment: the first FRIEND of a mode-lineage grants the
+	# player that lineage's lasting power (CatalystCapabilityManager dedupes).
+	if next_personality == "friend":
+		_grant_friend_power()
 
 	# Visual flash on transition.
 	if next_personality == "friend":
@@ -258,8 +275,27 @@ func _process_friend_chase(delta: float) -> void:
 					if away.length() > 0.001:
 						away = away.normalized()
 						target.global_position += Vector3(round(away.x) * 2.0, 0, round(away.z) * 2.0)
+			FoeMode.WAVE:
+				# Convert peer + slow pulse: halve chase_speed of every
+				# other non-friend foe within 3m (the wave dampens).
+				if _custom_mat != null:
+					target.hit_by_catalyst_mode(_custom_mat.albedo_color, _mode_id_for_dispatch())
+				for n in get_tree().get_nodes_in_group("catalyst_foe"):
+					var f := n as CatalystFoe
+					if f == null or f == self or f._personality == "friend":
+						continue
+					if f.global_position.distance_to(global_position) <= 3.0:
+						f.chase_speed = f.chase_speed * 0.5
+			FoeMode.FRACTAL:
+				# Split conversion: the second-nearest non-friend foe also
+				# advances one arc step (the conversion recurses).
+				if _custom_mat != null:
+					target.hit_by_catalyst_mode(_custom_mat.albedo_color, _mode_id_for_dispatch())
+					var second: CatalystFoe = _second_nearest_non_friend(target)
+					if second != null:
+						second.hit_by_catalyst_mode(_custom_mat.albedo_color, _mode_id_for_dispatch())
 			_:
-				# Default (GOO / SWARM / DRAINFRIEND): convert peer
+				# Default (GOO / SWARM / DRAINFRIEND / CHROMA / BRANCH): convert peer
 				if _custom_mat != null:
 					target.hit_by_catalyst_mode(_custom_mat.albedo_color, _mode_id_for_dispatch())
 	else:
@@ -289,12 +325,47 @@ func _nearest_non_friend() -> CatalystFoe:
 	return best
 
 
+func _second_nearest_non_friend(exclude: CatalystFoe) -> CatalystFoe:
+	# Nearest non-friend foe that is NOT `exclude` — FRACTAL's split target.
+	var best: CatalystFoe = null
+	var best_d: float = INF
+	for n in get_tree().get_nodes_in_group("catalyst_foe"):
+		var f := n as CatalystFoe
+		if f == null or f == self or f == exclude or f._personality == "friend":
+			continue
+		var d: float = f.global_position.distance_to(global_position)
+		if d < best_d:
+			best_d = d
+			best = f
+	return best
+
+
 func _mode_id_for_dispatch() -> String:
-	match foe_mode:
+	# Peer conversions carry the exact lineage mode, not just the coarse kind —
+	# a chromatic-born chain keeps granting/painting chromatic.
+	return _locked_mode_id
+
+
+## Canonical mode_id for a FoeMode — used when a map seeds foe_mode directly
+## (apply_grid_config) so _locked_mode_id stays consistent with the kind.
+static func _canonical_mode_for(m: FoeMode) -> String:
+	match m:
 		FoeMode.TRANSPORT:   return "transformation"
 		FoeMode.SWARM:       return "swarm"
 		FoeMode.DRAINFRIEND: return "cellular"
+		FoeMode.CHROMA:      return "chromatic"
+		FoeMode.WAVE:        return "waveform"
+		FoeMode.FRACTAL:     return "fractal"
+		FoeMode.BRANCH:      return "branching"
 		_:                   return "primitives"
+
+
+## Report this creature's alignment to the capability manager. The first
+## conversion of a mode-lineage becomes a lasting player power.
+func _grant_friend_power() -> void:
+	var mgr: Node = get_node_or_null("/root/CatalystCapabilityManager")
+	if mgr != null and mgr.has_method("grant_friend_power"):
+		mgr.grant_friend_power(_locked_mode_id)
 
 
 func _friend_hue_for_mode(m: FoeMode) -> Color:
@@ -303,6 +374,10 @@ func _friend_hue_for_mode(m: FoeMode) -> Color:
 		FoeMode.TRANSPORT:   return Color(0.20, 0.55, 0.95)   # sky blue
 		FoeMode.SWARM:       return Color(0.95, 0.50, 0.18)   # warm orange
 		FoeMode.DRAINFRIEND: return Color(0.65, 0.30, 0.85)   # violet
+		FoeMode.CHROMA:      return Color(0.93, 0.28, 0.60)   # magenta (rainbow-adjacent)
+		FoeMode.WAVE:        return Color(0.18, 0.80, 0.90)   # cyan
+		FoeMode.FRACTAL:     return Color(0.10, 0.55, 0.52)   # deep teal
+		FoeMode.BRANCH:      return Color(0.40, 0.64, 0.12)   # leaf green
 		_: return Color(0.30, 0.78, 0.42)
 
 
@@ -355,6 +430,71 @@ func _build_friend_badge() -> void:
 		drain.position = Vector3(0, -0.20, 0)
 		drain.rotation = Vector3(PI, 0, 0)
 		_badge.add_child(drain)
+	elif foe_mode == FoeMode.CHROMA:
+		# Two stacked tinted cubes — chromatic layering
+		var tints: Array[Color] = [Color(0.93, 0.28, 0.60), Color(0.35, 0.75, 0.95)]
+		for i in range(2):
+			var cube := MeshInstance3D.new()
+			var cm := BoxMesh.new()
+			cm.size = Vector3(0.12, 0.06, 0.12)
+			cube.mesh = cm
+			var tm := StandardMaterial3D.new()
+			tm.albedo_color = tints[i]
+			tm.emission_enabled = true
+			tm.emission = tints[i]
+			tm.emission_energy_multiplier = 2.0
+			cube.material_override = tm
+			cube.position = Vector3(0, 0.20 + i * 0.08, 0)
+			_badge.add_child(cube)
+	elif foe_mode == FoeMode.WAVE:
+		# 3 small spheres in a sine offset — the wave crest
+		for i in range(3):
+			var crest := MeshInstance3D.new()
+			var wm := SphereMesh.new()
+			wm.radius = 0.05
+			wm.height = 0.10
+			crest.mesh = wm
+			crest.material_override = bm
+			crest.position = Vector3((i - 1) * 0.14, 0.24 + sin(i * TAU / 3.0) * 0.05, 0)
+			_badge.add_child(crest)
+	elif foe_mode == FoeMode.FRACTAL:
+		# 2 nested boxes at different scales — self-similarity
+		var outer := MeshInstance3D.new()
+		var om := BoxMesh.new()
+		om.size = Vector3(0.16, 0.16, 0.16)
+		outer.mesh = om
+		outer.material_override = bm
+		outer.position = Vector3(0, 0.24, 0)
+		_badge.add_child(outer)
+		var inner := MeshInstance3D.new()
+		var im := BoxMesh.new()
+		im.size = Vector3(0.10, 0.10, 0.10)
+		inner.mesh = im
+		inner.material_override = bm
+		inner.position = Vector3(0, 0.24, 0)
+		inner.rotation = Vector3(PI / 4.0, PI / 4.0, 0)  # corners poke through the outer faces
+		_badge.add_child(inner)
+	elif foe_mode == FoeMode.BRANCH:
+		# Thin vertical cylinder + tilted twig — the branching stem
+		var trunk := MeshInstance3D.new()
+		var trm := CylinderMesh.new()
+		trm.top_radius = 0.02
+		trm.bottom_radius = 0.02
+		trm.height = 0.18
+		trunk.mesh = trm
+		trunk.material_override = bm
+		trunk.position = Vector3(0, 0.26, 0)
+		_badge.add_child(trunk)
+		var twig := MeshInstance3D.new()
+		var twm := CylinderMesh.new()
+		twm.top_radius = 0.015
+		twm.bottom_radius = 0.015
+		twm.height = 0.12
+		twig.mesh = twm
+		twig.material_override = bm
+		twig.position = Vector3(0.05, 0.30, 0)
+		twig.rotation = Vector3(0, 0, -PI / 5.0)
+		_badge.add_child(twig)
 
 
 # ── Hit visuals ─────────────────────────────────────────────────────
@@ -441,11 +581,16 @@ func apply_grid_config(config: Dictionary) -> void:
 		"transport":   FoeMode.TRANSPORT,
 		"swarm":       FoeMode.SWARM,
 		"drainfriend": FoeMode.DRAINFRIEND,
+		"chroma":      FoeMode.CHROMA,
+		"wave":        FoeMode.WAVE,
+		"fractal":     FoeMode.FRACTAL,
+		"branch":      FoeMode.BRANCH,
 	}
 	if config.has("foe_mode"):
 		var fm_str: String = String(config.get("foe_mode", "")).to_lower()
 		if FOE_MODE_BY_NAME.has(fm_str):
 			foe_mode = FOE_MODE_BY_NAME[fm_str]
+			_locked_mode_id = _canonical_mode_for(foe_mode)
 
 	# initial_state — personality seed. Parent's set_personality fires
 	# behaviour-flag dispatch; we add visual sync. Sets _personality_seeded
