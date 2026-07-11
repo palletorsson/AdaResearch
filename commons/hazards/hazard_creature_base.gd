@@ -507,6 +507,12 @@ func _advance_catalyst_personality(mode: String) -> void:
 	var next_p: String = PERSONALITY_ARC[min(idx + 1, PERSONALITY_ARC.size() - 1)]
 	if next_p != _personality:
 		set_personality(next_p)
+		# Reaching FRIEND is the moment of alignment — report it so the
+		# capability manager can grant the mode's lasting player power.
+		if next_p == "friend":
+			var mgr: Node = get_node_or_null("/root/CatalystCapabilityManager")
+			if mgr != null and mgr.has_method("grant_friend_power"):
+				mgr.grant_friend_power(mode)
 
 
 func _query_hazard_manager() -> void:

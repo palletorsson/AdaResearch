@@ -10,6 +10,23 @@ const SAVE_FILE = "user://capability_progression.json"
 
 const CAPACITY_NAMES = ["", "Observe", "Touch", "Manipulate", "Construct", "Control", "Embody"]
 
+# Friend powers — the lasting player ability granted the FIRST time a creature
+# of a given catalyst-mode lineage is converted all the way to FRIEND.
+# Keyed by the mode_id that locked the foe (CatalystFoe._locked_mode_id).
+# Editor-tool modes are deliberately absent: converting is the only way in.
+const FRIEND_POWERS = {
+	"primitives":     {"power": "shield",      "label": "Shield",      "description": "A friend orbits you and absorbs one hit."},
+	"transformation": {"power": "porter",      "label": "Porter",      "description": "A friend shoves path blocks to bridge gaps."},
+	"chromatic":      {"power": "neutralizer", "label": "Neutralizer", "description": "A friend standing in a danger zone mutes its damage."},
+	"forces":         {"power": "launcher",    "label": "Launcher",    "description": "Friends cluster underfoot and boost your jump."},
+	"waveform":       {"power": "calmer",      "label": "Calmer",      "description": "A friend emits a slow-wave that halves nearby foe speed."},
+	"chaos":          {"power": "decoy",       "label": "Decoy",       "description": "Foes chase the chaotic friend instead of you."},
+	"cellular":       {"power": "replicator",  "label": "Replicator",  "description": "A friend's conversions yield two friends."},
+	"fractal":        {"power": "splitter",    "label": "Splitter",    "description": "A friend splits in two when hit instead of reverting."},
+	"branching":      {"power": "bridger",     "label": "Bridger",     "description": "A friend grows a walkable tendril over hazards."},
+	"swarm":          {"power": "escort",      "label": "Escort",      "description": "The flock forms a shield-wall around you."},
+}
+
 # Current state
 var _all_stages: Dictionary = {}
 var _completed_sequences: Array[String] = []
@@ -17,6 +34,7 @@ var _capacity_level: int = 1
 var _hand_verbs: Dictionary = {}             # verb -> true (acts as Set)
 var _movement_abilities: Dictionary = {}     # ability -> true
 var _catalyst_modes: Array[String] = []
+var _friend_powers: Dictionary = {}          # power -> mode_id that granted it
 var _current_stage_order: int = 0
 
 # Bracelet state — persists across scenes
@@ -31,6 +49,7 @@ signal capacity_level_changed(new_level: int)
 signal hand_verbs_changed(verbs: Array[String])
 signal movement_ability_unlocked(ability: String)
 signal catalyst_mode_registered(mode_id: String)
+signal friend_power_granted(mode_id: String, power: String)
 
 func _ready():
 	_load_stages()
@@ -90,6 +109,45 @@ func get_unlocked_catalyst_modes() -> Array[String]:
 
 func is_catalyst_mode_unlocked(mode_id: String) -> bool:
 	return _catalyst_modes.has(mode_id)
+
+# ---------------------------------------------------------------------------
+# Public API — Friend Powers
+# ---------------------------------------------------------------------------
+
+## Called by creatures (CatalystFoe / HazardCreatureBase) the moment a
+## conversion reaches FRIEND. The first conversion of a mode-lineage grants
+## its power permanently; repeats are no-ops.
+func grant_friend_power(mode_id: String) -> void:
+	var def: Dictionary = FRIEND_POWERS.get(mode_id, {})
+	if def.is_empty():
+		return  # editor tools / unknown modes grant nothing
+	var power: String = str(def["power"])
+	if _friend_powers.has(power):
+		return
+	_friend_powers[power] = mode_id
+	save_state()
+	friend_power_granted.emit(mode_id, power)
+	capability_unlocked.emit(power)
+	print("CatalystCapabilityManager: Friend power granted — '%s' (from mode '%s')" % [power, mode_id])
+
+func has_friend_power(power: String) -> bool:
+	return _friend_powers.has(power)
+
+func get_friend_powers() -> Array[String]:
+	var powers: Array[String] = []
+	for p in _friend_powers.keys():
+		powers.append(str(p))
+	return powers
+
+## Label + description for HUD / text screens. Empty dict if unknown.
+func get_friend_power_info(power: String) -> Dictionary:
+	for mode_id in FRIEND_POWERS.keys():
+		var def: Dictionary = FRIEND_POWERS[mode_id]
+		if str(def["power"]) == power:
+			var out: Dictionary = def.duplicate()
+			out["mode_id"] = mode_id
+			return out
+	return {}
 
 # ---------------------------------------------------------------------------
 # Public API — Capacity Bracelet
@@ -214,6 +272,7 @@ func get_capability_config() -> Dictionary:
 		"hand_verbs": get_available_hand_verbs(),
 		"movement_abilities": get_available_movement_abilities(),
 		"catalyst_modes": get_unlocked_catalyst_modes(),
+		"friend_powers": get_friend_powers(),
 		"stage_order": _current_stage_order,
 	}
 
@@ -246,6 +305,7 @@ func unlock_all_capabilities() -> void:
 func reset_progression() -> void:
 	_completed_sequences.clear()
 	_catalyst_modes.clear()
+	_friend_powers.clear()
 	_bracelet_activated = false
 	_bracelet_tracker = ""
 	if is_instance_valid(_bracelet):
@@ -267,6 +327,14 @@ func _connect_progression_signals() -> void:
 		print("CatalystCapabilityManager: Connected to MapProgressionManager.sequence_completed")
 	else:
 		push_warning("CatalystCapabilityManager: MapProgressionManager not found or missing signal")
+
+	# Event-driven unlock: a stage may declare capability.unlock_event so the
+	# capability lands at the sequence's THEME MOMENT (e.g. crossing Trans_Pit)
+	# instead of waiting for the sequence boundary. sequence_completed above
+	# stays the fallback — _advance_stage dedupes.
+	if mpm and mpm.has_signal("map_completed"):
+		if not mpm.map_completed.is_connected(_on_map_completed):
+			mpm.map_completed.connect(_on_map_completed)
 
 	var scene_mgr = get_node_or_null("/root/SceneManager")
 	if scene_mgr and scene_mgr.has_signal("sequence_completed"):
@@ -305,6 +373,40 @@ func _on_node_added(node: Node) -> void:
 
 func _on_sequence_completed(sequence_name: String) -> void:
 	_advance_stage(sequence_name)
+
+## Theme-event unlock, variant A: a declared map is the sequence's theme
+## moment. Fires the stage's capability early when that map completes.
+func _on_map_completed(map_name: String) -> void:
+	for seq_id in _all_stages.keys():
+		if _completed_sequences.has(seq_id):
+			continue
+		var ev: Dictionary = _get_unlock_event(seq_id)
+		if ev.is_empty():
+			continue
+		if str(ev.get("type", "")) == "map_completed" and str(ev.get("map", "")) == map_name:
+			print("CatalystCapabilityManager: Theme event — '%s' completed unlocks '%s' early" % [
+				map_name, seq_id])
+			_advance_stage(seq_id)
+
+## Theme-event unlock, variant B: an artifact/trigger in the world calls this
+## directly when the player ENACTS the sequence's theme. Only honoured if the
+## stage declares an unlock_event of type "theme" (data-gated — nothing can
+## unlock a sequence that didn't opt in).
+func notify_theme_event(sequence_name: String) -> void:
+	if _completed_sequences.has(sequence_name):
+		return
+	var ev: Dictionary = _get_unlock_event(sequence_name)
+	if str(ev.get("type", "")) != "theme":
+		return
+	print("CatalystCapabilityManager: Theme event enacted — unlocking '%s' early" % sequence_name)
+	_advance_stage(sequence_name)
+
+func _get_unlock_event(sequence_name: String) -> Dictionary:
+	if not _all_stages.has(sequence_name):
+		return {}
+	var cap: Dictionary = _all_stages[sequence_name].get("capability", {})
+	var ev = cap.get("unlock_event", {})
+	return ev if ev is Dictionary else {}
 
 func _on_scene_sequence_completed(sequence_name: String, _data: Dictionary) -> void:
 	_advance_stage(sequence_name)
@@ -487,7 +589,47 @@ func _load_stages() -> void:
 # ---------------------------------------------------------------------------
 
 func save_state() -> void:
-	pass  # In-memory only — fresh start each game, persists across scene transitions
+	var payload: Dictionary = {
+		"completed_sequences": _completed_sequences,
+		"catalyst_modes": _catalyst_modes,
+		"friend_powers": _friend_powers,
+		"bracelet_activated": _bracelet_activated,
+		"bracelet_tracker": _bracelet_tracker,
+	}
+	var f: FileAccess = FileAccess.open(SAVE_FILE, FileAccess.WRITE)
+	if f == null:
+		push_warning("CatalystCapabilityManager: Could not write %s" % SAVE_FILE)
+		return
+	f.store_string(JSON.stringify(payload, "\t"))
+	f.close()
 
 func _load_saved_progress() -> void:
-	pass  # In-memory only — CatalystCapabilityManager is an autoload, state survives scene changes
+	if not FileAccess.file_exists(SAVE_FILE):
+		return
+	var f: FileAccess = FileAccess.open(SAVE_FILE, FileAccess.READ)
+	if f == null:
+		return
+	var json: JSON = JSON.new()
+	var text: String = f.get_as_text()
+	f.close()
+	if json.parse(text) != OK:
+		push_warning("CatalystCapabilityManager: Corrupt save %s — starting fresh" % SAVE_FILE)
+		return
+	if not (json.data is Dictionary):
+		return
+	var data: Dictionary = json.data
+	_completed_sequences.clear()
+	for s in data.get("completed_sequences", []):
+		_completed_sequences.append(str(s))
+	_catalyst_modes.clear()
+	for m in data.get("catalyst_modes", []):
+		_catalyst_modes.append(str(m))
+	_friend_powers.clear()
+	var fp = data.get("friend_powers", {})
+	if fp is Dictionary:
+		for k in fp.keys():
+			_friend_powers[str(k)] = str(fp[k])
+	_bracelet_activated = bool(data.get("bracelet_activated", false))
+	_bracelet_tracker = str(data.get("bracelet_tracker", ""))
+	print("CatalystCapabilityManager: Loaded progression — %d sequences, %d modes, %d friend powers" % [
+		_completed_sequences.size(), _catalyst_modes.size(), _friend_powers.size()])

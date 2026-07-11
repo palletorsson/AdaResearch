@@ -80,7 +80,12 @@
         ],
         "movement_abilities": [
           "teleport"
-        ]
+        ],
+        "unlock_event": {
+          "type": "map_completed",
+          "map": "Trans_Pit",
+          "comment": "Theme moment: surviving the fire-pit limit case IS transformation — the mode lands here, not at the sequence boundary."
+        }
       },
       "enemies": {
         "kind": "transport",
