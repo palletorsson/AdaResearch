@@ -1,0 +1,9192 @@
+{
+ "map_info": {
+  "name": "MissionWFC_Randomness",
+  "lookup_name": "MissionWFC_Randomness",
+  "title": "MissionWFC_Randomness",
+  "dimensions": {
+   "width": 32,
+   "depth": 40,
+   "max_height": 3
+  },
+  "mission_graph": {
+   "seq": "randomness",
+   "mode": "wfc-blocks",
+   "beats": 9,
+   "grid": [
+    4,
+    5
+   ],
+   "pinned": 14,
+   "collapsed": {
+    "channel": 1,
+    "none": 1,
+    "three": 1,
+    "veil": 3
+   },
+   "weights_used": {
+    "arrival": {
+     "none": 5,
+     "open": 3,
+     "one": 2
+    },
+    "work": {
+     "street": 3,
+     "colonnade": 3,
+     "corner": 2,
+     "none": 2
+    },
+    "depth": {
+     "three": 3,
+     "channel": 2,
+     "none": 2,
+     "veil": 1
+    }
+   },
+   "seed": 7,
+   "swaps": [
+    "trng_vs_prng->prng_crank_machine"
+   ],
+   "supporting_cast": [
+    {
+     "name": "random_walk_bench",
+     "act": 0,
+     "register": "arrival",
+     "beside": "random_walk_leash",
+     "cell": [
+      6,
+      20
+     ]
+    },
+    {
+     "name": "seed_bench",
+     "act": 1,
+     "register": "work",
+     "beside": "galton_board",
+     "cell": [
+      14,
+      20
+     ]
+    },
+    {
+     "name": "entropy_bench",
+     "act": 1,
+     "register": "work",
+     "beside": "shannon_entropy_meter",
+     "cell": [
+      14,
+      12
+     ]
+    },
+    {
+     "name": "scatter_bench",
+     "act": 2,
+     "register": "work",
+     "beside": "seed_replay_demo",
+     "cell": [
+      22,
+      4
+     ]
+    },
+    {
+     "name": "rejection_bench",
+     "act": 2,
+     "register": "work",
+     "beside": "prng_crank_machine",
+     "cell": [
+      22,
+      12
+     ]
+    },
+    {
+     "name": "pi_dart_bench",
+     "act": 2,
+     "register": "work",
+     "beside": "pollock_painting_in_3d",
+     "cell": [
+      22,
+      28
+     ]
+    },
+    {
+     "name": "perlin_bench",
+     "act": 3,
+     "register": "depth",
+     "beside": "monte_carlo_dartboard",
+     "cell": [
+      30,
+      28
+     ]
+    }
+   ]
+  }
+ },
+ "settings": {
+  "wall_segments": {
+   "style": "labwall",
+   "height": 3.2,
+   "thickness": 0.16,
+   "door_width": 2.2,
+   "palettes": [
+    {
+     "act": 0,
+     "name": "arrival",
+     "rect": [
+      0,
+      0,
+      31,
+      7
+     ],
+     "weights": {
+      "plain": 5,
+      "glass": 3,
+      "whiteboard": 2,
+      "window": 3,
+      "vent": 1,
+      "locker": 1
+     },
+     "accent": [
+      1.0,
+      0.62,
+      0.18
+     ]
+    },
+    {
+     "act": 1,
+     "name": "work",
+     "rect": [
+      0,
+      8,
+      31,
+      23
+     ],
+     "weights": {
+      "plain": 4,
+      "conduit": 3,
+      "display": 2,
+      "locker": 2,
+      "vent": 2,
+      "window": 1,
+      "beam": 1
+     },
+     "accent": [
+      0.25,
+      0.85,
+      1.0
+     ]
+    },
+    {
+     "act": 2,
+     "name": "depth",
+     "rect": [
+      0,
+      24,
+      31,
+      39
+     ],
+     "weights": {
+      "plain": 3,
+      "hazard": 2,
+      "rib": 3,
+      "beam": 2,
+      "slit": 2,
+      "conduit": 2,
+      "vent": 1
+     },
+     "accent": [
+      1.0,
+      0.25,
+      0.15
+     ]
+    }
+   ]
+  },
+  "proximity_lod": {
+   "radius": 14.0
+  },
+  "wall_runs": {
+   "runs": [
+    {
+     "axis": "h",
+     "x": 0,
+     "z": 0,
+     "len": 32,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "glass",
+       "door": false
+      },
+      {
+       "v": "glass",
+       "door": false
+      },
+      {
+       "v": "whiteboard",
+       "door": false
+      },
+      {
+       "v": "glass",
+       "door": false
+      },
+      {
+       "v": "glass",
+       "door": false
+      },
+      {
+       "v": "glass",
+       "door": false
+      },
+      {
+       "v": "whiteboard",
+       "door": false
+      },
+      {
+       "v": "glass",
+       "door": false
+      },
+      {
+       "v": "glass",
+       "door": false
+      },
+      {
+       "v": "glass",
+       "door": false
+      },
+      {
+       "v": "whiteboard",
+       "door": false
+      },
+      {
+       "v": "glass",
+       "door": false
+      },
+      {
+       "v": "glass",
+       "door": false
+      },
+      {
+       "v": "glass",
+       "door": false
+      },
+      {
+       "v": "whiteboard",
+       "door": false
+      },
+      {
+       "v": "glass",
+       "door": false
+      },
+      {
+       "v": "glass",
+       "door": false
+      },
+      {
+       "v": "glass",
+       "door": false
+      },
+      {
+       "v": "whiteboard",
+       "door": false
+      },
+      {
+       "v": "glass",
+       "door": false
+      },
+      {
+       "v": "glass",
+       "door": false
+      },
+      {
+       "v": "glass",
+       "door": false
+      },
+      {
+       "v": "whiteboard",
+       "door": false
+      },
+      {
+       "v": "glass",
+       "door": false
+      },
+      {
+       "v": "glass",
+       "door": false
+      },
+      {
+       "v": "glass",
+       "door": false
+      },
+      {
+       "v": "whiteboard",
+       "door": false
+      },
+      {
+       "v": "glass",
+       "door": false
+      },
+      {
+       "v": "glass",
+       "door": false
+      },
+      {
+       "v": "glass",
+       "door": false
+      },
+      {
+       "v": "whiteboard",
+       "door": false
+      },
+      {
+       "v": "glass",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "v",
+     "x": 0,
+     "z": 0,
+     "len": 40,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "hazard",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "hazard",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "hazard",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "hazard",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "v",
+     "x": 8,
+     "z": 0,
+     "len": 3,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "whiteboard",
+       "door": false
+      },
+      {
+       "v": "whiteboard",
+       "door": false
+      },
+      {
+       "v": "whiteboard",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "v",
+     "x": 8,
+     "z": 5,
+     "len": 6,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "whiteboard",
+       "door": false
+      },
+      {
+       "v": "conduit",
+       "door": false
+      },
+      {
+       "v": "conduit",
+       "door": false
+      },
+      {
+       "v": "conduit",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "v",
+     "x": 8,
+     "z": 13,
+     "len": 6,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "conduit",
+       "door": false
+      },
+      {
+       "v": "conduit",
+       "door": false
+      },
+      {
+       "v": "locker",
+       "door": false
+      },
+      {
+       "v": "conduit",
+       "door": false
+      },
+      {
+       "v": "conduit",
+       "door": false
+      },
+      {
+       "v": "conduit",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "v",
+     "x": 8,
+     "z": 21,
+     "len": 6,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "locker",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "v",
+     "x": 8,
+     "z": 29,
+     "len": 6,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "beam",
+       "door": false
+      },
+      {
+       "v": "beam",
+       "door": false
+      },
+      {
+       "v": "slit",
+       "door": false
+      },
+      {
+       "v": "beam",
+       "door": false
+      },
+      {
+       "v": "beam",
+       "door": false
+      },
+      {
+       "v": "beam",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "v",
+     "x": 8,
+     "z": 37,
+     "len": 3,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "v",
+     "x": 16,
+     "z": 0,
+     "len": 3,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "glass",
+       "door": false
+      },
+      {
+       "v": "glass",
+       "door": false
+      },
+      {
+       "v": "glass",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "v",
+     "x": 16,
+     "z": 5,
+     "len": 6,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "vent",
+       "door": false
+      },
+      {
+       "v": "conduit",
+       "door": false
+      },
+      {
+       "v": "conduit",
+       "door": false
+      },
+      {
+       "v": "conduit",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "v",
+     "x": 16,
+     "z": 13,
+     "len": 6,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "vent",
+       "door": false
+      },
+      {
+       "v": "vent",
+       "door": false
+      },
+      {
+       "v": "locker",
+       "door": false
+      },
+      {
+       "v": "vent",
+       "door": false
+      },
+      {
+       "v": "vent",
+       "door": false
+      },
+      {
+       "v": "vent",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "v",
+     "x": 16,
+     "z": 21,
+     "len": 6,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "conduit",
+       "door": false
+      },
+      {
+       "v": "conduit",
+       "door": false
+      },
+      {
+       "v": "conduit",
+       "door": false
+      },
+      {
+       "v": "rib",
+       "door": false
+      },
+      {
+       "v": "rib",
+       "door": false
+      },
+      {
+       "v": "rib",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "v",
+     "x": 16,
+     "z": 29,
+     "len": 6,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "vent",
+       "door": false
+      },
+      {
+       "v": "vent",
+       "door": false
+      },
+      {
+       "v": "beam",
+       "door": false
+      },
+      {
+       "v": "vent",
+       "door": false
+      },
+      {
+       "v": "vent",
+       "door": false
+      },
+      {
+       "v": "vent",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "v",
+     "x": 16,
+     "z": 37,
+     "len": 3,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "vent",
+       "door": false
+      },
+      {
+       "v": "vent",
+       "door": false
+      },
+      {
+       "v": "vent",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "v",
+     "x": 24,
+     "z": 0,
+     "len": 3,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "glass",
+       "door": false
+      },
+      {
+       "v": "glass",
+       "door": false
+      },
+      {
+       "v": "glass",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "v",
+     "x": 24,
+     "z": 5,
+     "len": 6,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "window",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "v",
+     "x": 24,
+     "z": 13,
+     "len": 6,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "locker",
+       "door": false
+      },
+      {
+       "v": "locker",
+       "door": false
+      },
+      {
+       "v": "conduit",
+       "door": false
+      },
+      {
+       "v": "locker",
+       "door": false
+      },
+      {
+       "v": "locker",
+       "door": false
+      },
+      {
+       "v": "locker",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "v",
+     "x": 24,
+     "z": 21,
+     "len": 6,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "conduit",
+       "door": false
+      },
+      {
+       "v": "conduit",
+       "door": false
+      },
+      {
+       "v": "vent",
+       "door": false
+      },
+      {
+       "v": "rib",
+       "door": false
+      },
+      {
+       "v": "rib",
+       "door": false
+      },
+      {
+       "v": "rib",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "v",
+     "x": 24,
+     "z": 29,
+     "len": 6,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "conduit",
+       "door": false
+      },
+      {
+       "v": "conduit",
+       "door": false
+      },
+      {
+       "v": "hazard",
+       "door": false
+      },
+      {
+       "v": "conduit",
+       "door": false
+      },
+      {
+       "v": "conduit",
+       "door": false
+      },
+      {
+       "v": "conduit",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "v",
+     "x": 24,
+     "z": 37,
+     "len": 3,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "v",
+     "x": 32,
+     "z": 0,
+     "len": 40,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "hazard",
+       "door": false
+      },
+      {
+       "v": "hazard",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "hazard",
+       "door": false
+      },
+      {
+       "v": "hazard",
+       "door": false
+      },
+      {
+       "v": "hazard",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "hazard",
+       "door": false
+      },
+      {
+       "v": "hazard",
+       "door": false
+      },
+      {
+       "v": "hazard",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "hazard",
+       "door": false
+      },
+      {
+       "v": "hazard",
+       "door": false
+      },
+      {
+       "v": "hazard",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "hazard",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "h",
+     "x": 10,
+     "z": 2,
+     "len": 1,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "plain",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "h",
+     "x": 12,
+     "z": 2,
+     "len": 2,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "glass",
+       "door": false
+      },
+      {
+       "v": "glass",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "v",
+     "x": 10,
+     "z": 2,
+     "len": 4,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "glass",
+       "door": false
+      },
+      {
+       "v": "glass",
+       "door": false
+      },
+      {
+       "v": "glass",
+       "door": false
+      },
+      {
+       "v": "glass",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "v",
+     "x": 10,
+     "z": 10,
+     "len": 1,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "locker",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "v",
+     "x": 10,
+     "z": 13,
+     "len": 1,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "conduit",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "v",
+     "x": 14,
+     "z": 2,
+     "len": 4,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "glass",
+       "door": false
+      },
+      {
+       "v": "glass",
+       "door": false
+      },
+      {
+       "v": "glass",
+       "door": false
+      },
+      {
+       "v": "glass",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "v",
+     "x": 14,
+     "z": 10,
+     "len": 1,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "plain",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "v",
+     "x": 14,
+     "z": 13,
+     "len": 1,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "vent",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "v",
+     "x": 22,
+     "z": 2,
+     "len": 3,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "locker",
+       "door": false
+      },
+      {
+       "v": "locker",
+       "door": false
+      },
+      {
+       "v": "locker",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "v",
+     "x": 22,
+     "z": 18,
+     "len": 4,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "conduit",
+       "door": false
+      },
+      {
+       "v": "conduit",
+       "door": false
+      },
+      {
+       "v": "conduit",
+       "door": false
+      },
+      {
+       "v": "conduit",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "v",
+     "x": 22,
+     "z": 26,
+     "len": 4,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "beam",
+       "door": false
+      },
+      {
+       "v": "beam",
+       "door": false
+      },
+      {
+       "v": "beam",
+       "door": false
+      },
+      {
+       "v": "beam",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "h",
+     "x": 18,
+     "z": 3,
+     "len": 3,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "locker",
+       "door": false
+      },
+      {
+       "v": "locker",
+       "door": false
+      },
+      {
+       "v": "locker",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "h",
+     "x": 25,
+     "z": 3,
+     "len": 2,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "h",
+     "x": 29,
+     "z": 3,
+     "len": 2,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "whiteboard",
+       "door": false
+      },
+      {
+       "v": "whiteboard",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "v",
+     "x": 18,
+     "z": 3,
+     "len": 3,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "whiteboard",
+       "door": false
+      },
+      {
+       "v": "whiteboard",
+       "door": false
+      },
+      {
+       "v": "whiteboard",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "v",
+     "x": 18,
+     "z": 18,
+     "len": 4,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "locker",
+       "door": false
+      },
+      {
+       "v": "locker",
+       "door": false
+      },
+      {
+       "v": "locker",
+       "door": false
+      },
+      {
+       "v": "locker",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "v",
+     "x": 18,
+     "z": 26,
+     "len": 4,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "beam",
+       "door": false
+      },
+      {
+       "v": "beam",
+       "door": false
+      },
+      {
+       "v": "beam",
+       "door": false
+      },
+      {
+       "v": "beam",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "h",
+     "x": 10,
+     "z": 6,
+     "len": 4,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "window",
+       "door": false
+      },
+      {
+       "v": "window",
+       "door": false
+      },
+      {
+       "v": "window",
+       "door": false
+      },
+      {
+       "v": "window",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "h",
+     "x": 19,
+     "z": 6,
+     "len": 3,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "h",
+     "x": 0,
+     "z": 8,
+     "len": 3,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "locker",
+       "door": false
+      },
+      {
+       "v": "locker",
+       "door": false
+      },
+      {
+       "v": "locker",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "h",
+     "x": 5,
+     "z": 8,
+     "len": 6,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "window",
+       "door": false
+      },
+      {
+       "v": "window",
+       "door": false
+      },
+      {
+       "v": "glass",
+       "door": false
+      },
+      {
+       "v": "window",
+       "door": false
+      },
+      {
+       "v": "window",
+       "door": false
+      },
+      {
+       "v": "window",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "h",
+     "x": 13,
+     "z": 8,
+     "len": 6,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "window",
+       "door": false
+      },
+      {
+       "v": "window",
+       "door": false
+      },
+      {
+       "v": "window",
+       "door": false
+      },
+      {
+       "v": "window",
+       "door": false
+      },
+      {
+       "v": "window",
+       "door": false
+      },
+      {
+       "v": "window",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "h",
+     "x": 21,
+     "z": 8,
+     "len": 6,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "whiteboard",
+       "door": false
+      },
+      {
+       "v": "whiteboard",
+       "door": false
+      },
+      {
+       "v": "window",
+       "door": false
+      },
+      {
+       "v": "whiteboard",
+       "door": false
+      },
+      {
+       "v": "whiteboard",
+       "door": false
+      },
+      {
+       "v": "whiteboard",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "h",
+     "x": 29,
+     "z": 8,
+     "len": 3,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "window",
+       "door": false
+      },
+      {
+       "v": "window",
+       "door": false
+      },
+      {
+       "v": "window",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "h",
+     "x": 2,
+     "z": 10,
+     "len": 1,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "conduit",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "h",
+     "x": 4,
+     "z": 10,
+     "len": 2,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "window",
+       "door": false
+      },
+      {
+       "v": "window",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "h",
+     "x": 10,
+     "z": 10,
+     "len": 1,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "conduit",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "h",
+     "x": 13,
+     "z": 10,
+     "len": 1,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "display",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "h",
+     "x": 26,
+     "z": 10,
+     "len": 1,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "vent",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "h",
+     "x": 28,
+     "z": 10,
+     "len": 2,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "v",
+     "x": 2,
+     "z": 10,
+     "len": 4,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "vent",
+       "door": false
+      },
+      {
+       "v": "vent",
+       "door": false
+      },
+      {
+       "v": "vent",
+       "door": false
+      },
+      {
+       "v": "vent",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "v",
+     "x": 2,
+     "z": 18,
+     "len": 1,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "conduit",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "v",
+     "x": 2,
+     "z": 21,
+     "len": 1,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "plain",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "v",
+     "x": 6,
+     "z": 10,
+     "len": 4,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "display",
+       "door": false
+      },
+      {
+       "v": "display",
+       "door": false
+      },
+      {
+       "v": "display",
+       "door": false
+      },
+      {
+       "v": "display",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "v",
+     "x": 6,
+     "z": 18,
+     "len": 1,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "plain",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "v",
+     "x": 6,
+     "z": 21,
+     "len": 1,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "conduit",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "v",
+     "x": 11,
+     "z": 10,
+     "len": 1,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "conduit",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "v",
+     "x": 11,
+     "z": 13,
+     "len": 1,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "display",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "h",
+     "x": 10,
+     "z": 11,
+     "len": 1,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "conduit",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "h",
+     "x": 13,
+     "z": 11,
+     "len": 1,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "display",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "v",
+     "x": 13,
+     "z": 10,
+     "len": 1,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "vent",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "v",
+     "x": 13,
+     "z": 13,
+     "len": 1,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "locker",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "v",
+     "x": 26,
+     "z": 10,
+     "len": 4,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "conduit",
+       "door": false
+      },
+      {
+       "v": "conduit",
+       "door": false
+      },
+      {
+       "v": "conduit",
+       "door": false
+      },
+      {
+       "v": "conduit",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "v",
+     "x": 26,
+     "z": 26,
+     "len": 1,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "beam",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "v",
+     "x": 26,
+     "z": 29,
+     "len": 1,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "rib",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "v",
+     "x": 30,
+     "z": 10,
+     "len": 4,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "v",
+     "x": 30,
+     "z": 26,
+     "len": 1,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "plain",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "v",
+     "x": 30,
+     "z": 29,
+     "len": 1,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "hazard",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "h",
+     "x": 2,
+     "z": 14,
+     "len": 4,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "display",
+       "door": false
+      },
+      {
+       "v": "display",
+       "door": false
+      },
+      {
+       "v": "display",
+       "door": false
+      },
+      {
+       "v": "display",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "h",
+     "x": 10,
+     "z": 14,
+     "len": 1,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "locker",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "h",
+     "x": 13,
+     "z": 14,
+     "len": 1,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "vent",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "h",
+     "x": 26,
+     "z": 14,
+     "len": 4,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "display",
+       "door": false
+      },
+      {
+       "v": "display",
+       "door": false
+      },
+      {
+       "v": "display",
+       "door": false
+      },
+      {
+       "v": "display",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "h",
+     "x": 10,
+     "z": 13,
+     "len": 1,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "conduit",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "h",
+     "x": 13,
+     "z": 13,
+     "len": 1,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "locker",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "h",
+     "x": 0,
+     "z": 16,
+     "len": 3,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "h",
+     "x": 5,
+     "z": 16,
+     "len": 6,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "display",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "h",
+     "x": 13,
+     "z": 16,
+     "len": 14,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "window",
+       "door": false
+      },
+      {
+       "v": "window",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "window",
+       "door": false
+      },
+      {
+       "v": "window",
+       "door": false
+      },
+      {
+       "v": "window",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "window",
+       "door": false
+      },
+      {
+       "v": "window",
+       "door": false
+      },
+      {
+       "v": "window",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "window",
+       "door": false
+      },
+      {
+       "v": "window",
+       "door": false
+      },
+      {
+       "v": "window",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "h",
+     "x": 29,
+     "z": 16,
+     "len": 3,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "locker",
+       "door": false
+      },
+      {
+       "v": "locker",
+       "door": false
+      },
+      {
+       "v": "locker",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "h",
+     "x": 2,
+     "z": 18,
+     "len": 1,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "vent",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "h",
+     "x": 5,
+     "z": 18,
+     "len": 1,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "display",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "h",
+     "x": 18,
+     "z": 18,
+     "len": 1,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "vent",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "h",
+     "x": 20,
+     "z": 18,
+     "len": 2,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "v",
+     "x": 3,
+     "z": 18,
+     "len": 1,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "conduit",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "v",
+     "x": 3,
+     "z": 21,
+     "len": 1,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "conduit",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "h",
+     "x": 2,
+     "z": 19,
+     "len": 1,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "window",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "h",
+     "x": 5,
+     "z": 19,
+     "len": 1,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "conduit",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "h",
+     "x": 9,
+     "z": 19,
+     "len": 2,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "h",
+     "x": 13,
+     "z": 19,
+     "len": 2,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "v",
+     "x": 5,
+     "z": 18,
+     "len": 1,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "display",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "v",
+     "x": 5,
+     "z": 21,
+     "len": 1,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "plain",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "h",
+     "x": 2,
+     "z": 21,
+     "len": 1,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "conduit",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "h",
+     "x": 5,
+     "z": 21,
+     "len": 1,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "conduit",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "h",
+     "x": 2,
+     "z": 22,
+     "len": 1,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "conduit",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "h",
+     "x": 5,
+     "z": 22,
+     "len": 1,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "plain",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "h",
+     "x": 18,
+     "z": 22,
+     "len": 4,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "display",
+       "door": false
+      },
+      {
+       "v": "display",
+       "door": false
+      },
+      {
+       "v": "display",
+       "door": false
+      },
+      {
+       "v": "display",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "h",
+     "x": 0,
+     "z": 24,
+     "len": 19,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "conduit",
+       "door": false
+      },
+      {
+       "v": "conduit",
+       "door": false
+      },
+      {
+       "v": "window",
+       "door": false
+      },
+      {
+       "v": "conduit",
+       "door": false
+      },
+      {
+       "v": "conduit",
+       "door": false
+      },
+      {
+       "v": "conduit",
+       "door": false
+      },
+      {
+       "v": "window",
+       "door": false
+      },
+      {
+       "v": "conduit",
+       "door": false
+      },
+      {
+       "v": "conduit",
+       "door": false
+      },
+      {
+       "v": "conduit",
+       "door": false
+      },
+      {
+       "v": "window",
+       "door": false
+      },
+      {
+       "v": "conduit",
+       "door": false
+      },
+      {
+       "v": "conduit",
+       "door": false
+      },
+      {
+       "v": "conduit",
+       "door": false
+      },
+      {
+       "v": "window",
+       "door": false
+      },
+      {
+       "v": "conduit",
+       "door": false
+      },
+      {
+       "v": "conduit",
+       "door": false
+      },
+      {
+       "v": "conduit",
+       "door": false
+      },
+      {
+       "v": "window",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "h",
+     "x": 21,
+     "z": 24,
+     "len": 6,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "vent",
+       "door": false
+      },
+      {
+       "v": "vent",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "vent",
+       "door": false
+      },
+      {
+       "v": "vent",
+       "door": false
+      },
+      {
+       "v": "vent",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "h",
+     "x": 29,
+     "z": 24,
+     "len": 3,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "h",
+     "x": 18,
+     "z": 26,
+     "len": 1,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "hazard",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "h",
+     "x": 20,
+     "z": 26,
+     "len": 2,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "rib",
+       "door": false
+      },
+      {
+       "v": "rib",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "h",
+     "x": 26,
+     "z": 26,
+     "len": 1,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "plain",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "h",
+     "x": 29,
+     "z": 26,
+     "len": 1,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "plain",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "v",
+     "x": 27,
+     "z": 26,
+     "len": 1,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "hazard",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "v",
+     "x": 27,
+     "z": 29,
+     "len": 1,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "rib",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "h",
+     "x": 26,
+     "z": 27,
+     "len": 1,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "plain",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "h",
+     "x": 29,
+     "z": 27,
+     "len": 1,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "hazard",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "v",
+     "x": 29,
+     "z": 26,
+     "len": 1,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "hazard",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "v",
+     "x": 29,
+     "z": 29,
+     "len": 1,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "plain",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "h",
+     "x": 18,
+     "z": 30,
+     "len": 4,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "h",
+     "x": 26,
+     "z": 30,
+     "len": 1,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "hazard",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "h",
+     "x": 29,
+     "z": 30,
+     "len": 1,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "conduit",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "h",
+     "x": 26,
+     "z": 29,
+     "len": 1,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "plain",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "h",
+     "x": 29,
+     "z": 29,
+     "len": 1,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "slit",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "h",
+     "x": 0,
+     "z": 32,
+     "len": 3,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "rib",
+       "door": false
+      },
+      {
+       "v": "rib",
+       "door": false
+      },
+      {
+       "v": "rib",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "h",
+     "x": 5,
+     "z": 32,
+     "len": 6,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "rib",
+       "door": false
+      },
+      {
+       "v": "rib",
+       "door": false
+      },
+      {
+       "v": "rib",
+       "door": false
+      },
+      {
+       "v": "rib",
+       "door": false
+      },
+      {
+       "v": "rib",
+       "door": false
+      },
+      {
+       "v": "rib",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "h",
+     "x": 13,
+     "z": 32,
+     "len": 6,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "hazard",
+       "door": false
+      },
+      {
+       "v": "hazard",
+       "door": false
+      },
+      {
+       "v": "slit",
+       "door": false
+      },
+      {
+       "v": "hazard",
+       "door": false
+      },
+      {
+       "v": "hazard",
+       "door": false
+      },
+      {
+       "v": "hazard",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "h",
+     "x": 21,
+     "z": 32,
+     "len": 6,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "beam",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "h",
+     "x": 29,
+     "z": 32,
+     "len": 3,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "slit",
+       "door": false
+      },
+      {
+       "v": "slit",
+       "door": false
+      },
+      {
+       "v": "slit",
+       "door": false
+      }
+     ]
+    },
+    {
+     "axis": "h",
+     "x": 0,
+     "z": 40,
+     "len": 32,
+     "baseY": 2,
+     "modules": [
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      },
+      {
+       "v": "plain",
+       "door": false
+      }
+     ]
+    }
+   ],
+   "corners": [
+    {
+     "x": -0.5,
+     "z": -0.5,
+     "y": 2
+    },
+    {
+     "x": 7.5,
+     "z": -0.5,
+     "y": 2
+    },
+    {
+     "x": 15.5,
+     "z": -0.5,
+     "y": 2
+    },
+    {
+     "x": 23.5,
+     "z": -0.5,
+     "y": 2
+    },
+    {
+     "x": 31.5,
+     "z": -0.5,
+     "y": 2
+    },
+    {
+     "x": 9.5,
+     "z": 1.5,
+     "y": 2
+    },
+    {
+     "x": 13.5,
+     "z": 1.5,
+     "y": 2
+    },
+    {
+     "x": 17.5,
+     "z": 2.5,
+     "y": 2
+    },
+    {
+     "x": 9.5,
+     "z": 5.5,
+     "y": 2
+    },
+    {
+     "x": 13.5,
+     "z": 5.5,
+     "y": 2
+    },
+    {
+     "x": -0.5,
+     "z": 7.5,
+     "y": 2
+    },
+    {
+     "x": 7.5,
+     "z": 7.5,
+     "y": 2
+    },
+    {
+     "x": 15.5,
+     "z": 7.5,
+     "y": 2
+    },
+    {
+     "x": 23.5,
+     "z": 7.5,
+     "y": 2
+    },
+    {
+     "x": 31.5,
+     "z": 7.5,
+     "y": 2
+    },
+    {
+     "x": 1.5,
+     "z": 9.5,
+     "y": 2
+    },
+    {
+     "x": 5.5,
+     "z": 9.5,
+     "y": 2
+    },
+    {
+     "x": 9.5,
+     "z": 9.5,
+     "y": 2
+    },
+    {
+     "x": 10.5,
+     "z": 9.5,
+     "y": 2
+    },
+    {
+     "x": 10.5,
+     "z": 10.5,
+     "y": 2
+    },
+    {
+     "x": 9.5,
+     "z": 10.5,
+     "y": 2
+    },
+    {
+     "x": 12.5,
+     "z": 9.5,
+     "y": 2
+    },
+    {
+     "x": 13.5,
+     "z": 9.5,
+     "y": 2
+    },
+    {
+     "x": 13.5,
+     "z": 10.5,
+     "y": 2
+    },
+    {
+     "x": 12.5,
+     "z": 10.5,
+     "y": 2
+    },
+    {
+     "x": 25.5,
+     "z": 9.5,
+     "y": 2
+    },
+    {
+     "x": 29.5,
+     "z": 9.5,
+     "y": 2
+    },
+    {
+     "x": 1.5,
+     "z": 13.5,
+     "y": 2
+    },
+    {
+     "x": 5.5,
+     "z": 13.5,
+     "y": 2
+    },
+    {
+     "x": 9.5,
+     "z": 12.5,
+     "y": 2
+    },
+    {
+     "x": 10.5,
+     "z": 12.5,
+     "y": 2
+    },
+    {
+     "x": 10.5,
+     "z": 13.5,
+     "y": 2
+    },
+    {
+     "x": 9.5,
+     "z": 13.5,
+     "y": 2
+    },
+    {
+     "x": 12.5,
+     "z": 12.5,
+     "y": 2
+    },
+    {
+     "x": 13.5,
+     "z": 12.5,
+     "y": 2
+    },
+    {
+     "x": 13.5,
+     "z": 13.5,
+     "y": 2
+    },
+    {
+     "x": 12.5,
+     "z": 13.5,
+     "y": 2
+    },
+    {
+     "x": 25.5,
+     "z": 13.5,
+     "y": 2
+    },
+    {
+     "x": 29.5,
+     "z": 13.5,
+     "y": 2
+    },
+    {
+     "x": -0.5,
+     "z": 15.5,
+     "y": 2
+    },
+    {
+     "x": 7.5,
+     "z": 15.5,
+     "y": 2
+    },
+    {
+     "x": 15.5,
+     "z": 15.5,
+     "y": 2
+    },
+    {
+     "x": 23.5,
+     "z": 15.5,
+     "y": 2
+    },
+    {
+     "x": 31.5,
+     "z": 15.5,
+     "y": 2
+    },
+    {
+     "x": 1.5,
+     "z": 17.5,
+     "y": 2
+    },
+    {
+     "x": 2.5,
+     "z": 17.5,
+     "y": 2
+    },
+    {
+     "x": 2.5,
+     "z": 18.5,
+     "y": 2
+    },
+    {
+     "x": 1.5,
+     "z": 18.5,
+     "y": 2
+    },
+    {
+     "x": 4.5,
+     "z": 17.5,
+     "y": 2
+    },
+    {
+     "x": 5.5,
+     "z": 17.5,
+     "y": 2
+    },
+    {
+     "x": 5.5,
+     "z": 18.5,
+     "y": 2
+    },
+    {
+     "x": 4.5,
+     "z": 18.5,
+     "y": 2
+    },
+    {
+     "x": 17.5,
+     "z": 17.5,
+     "y": 2
+    },
+    {
+     "x": 21.5,
+     "z": 17.5,
+     "y": 2
+    },
+    {
+     "x": 1.5,
+     "z": 20.5,
+     "y": 2
+    },
+    {
+     "x": 2.5,
+     "z": 20.5,
+     "y": 2
+    },
+    {
+     "x": 2.5,
+     "z": 21.5,
+     "y": 2
+    },
+    {
+     "x": 1.5,
+     "z": 21.5,
+     "y": 2
+    },
+    {
+     "x": 4.5,
+     "z": 20.5,
+     "y": 2
+    },
+    {
+     "x": 5.5,
+     "z": 20.5,
+     "y": 2
+    },
+    {
+     "x": 5.5,
+     "z": 21.5,
+     "y": 2
+    },
+    {
+     "x": 4.5,
+     "z": 21.5,
+     "y": 2
+    },
+    {
+     "x": 17.5,
+     "z": 21.5,
+     "y": 2
+    },
+    {
+     "x": 21.5,
+     "z": 21.5,
+     "y": 2
+    },
+    {
+     "x": -0.5,
+     "z": 23.5,
+     "y": 2
+    },
+    {
+     "x": 7.5,
+     "z": 23.5,
+     "y": 2
+    },
+    {
+     "x": 15.5,
+     "z": 23.5,
+     "y": 2
+    },
+    {
+     "x": 23.5,
+     "z": 23.5,
+     "y": 2
+    },
+    {
+     "x": 31.5,
+     "z": 23.5,
+     "y": 2
+    },
+    {
+     "x": 17.5,
+     "z": 25.5,
+     "y": 2
+    },
+    {
+     "x": 21.5,
+     "z": 25.5,
+     "y": 2
+    },
+    {
+     "x": 25.5,
+     "z": 25.5,
+     "y": 2
+    },
+    {
+     "x": 26.5,
+     "z": 25.5,
+     "y": 2
+    },
+    {
+     "x": 26.5,
+     "z": 26.5,
+     "y": 2
+    },
+    {
+     "x": 25.5,
+     "z": 26.5,
+     "y": 2
+    },
+    {
+     "x": 28.5,
+     "z": 25.5,
+     "y": 2
+    },
+    {
+     "x": 29.5,
+     "z": 25.5,
+     "y": 2
+    },
+    {
+     "x": 29.5,
+     "z": 26.5,
+     "y": 2
+    },
+    {
+     "x": 28.5,
+     "z": 26.5,
+     "y": 2
+    },
+    {
+     "x": 17.5,
+     "z": 29.5,
+     "y": 2
+    },
+    {
+     "x": 21.5,
+     "z": 29.5,
+     "y": 2
+    },
+    {
+     "x": 25.5,
+     "z": 28.5,
+     "y": 2
+    },
+    {
+     "x": 26.5,
+     "z": 28.5,
+     "y": 2
+    },
+    {
+     "x": 26.5,
+     "z": 29.5,
+     "y": 2
+    },
+    {
+     "x": 25.5,
+     "z": 29.5,
+     "y": 2
+    },
+    {
+     "x": 28.5,
+     "z": 28.5,
+     "y": 2
+    },
+    {
+     "x": 29.5,
+     "z": 28.5,
+     "y": 2
+    },
+    {
+     "x": 29.5,
+     "z": 29.5,
+     "y": 2
+    },
+    {
+     "x": 28.5,
+     "z": 29.5,
+     "y": 2
+    },
+    {
+     "x": -0.5,
+     "z": 31.5,
+     "y": 2
+    },
+    {
+     "x": 7.5,
+     "z": 31.5,
+     "y": 2
+    },
+    {
+     "x": 15.5,
+     "z": 31.5,
+     "y": 2
+    },
+    {
+     "x": 23.5,
+     "z": 31.5,
+     "y": 2
+    },
+    {
+     "x": 31.5,
+     "z": 31.5,
+     "y": 2
+    },
+    {
+     "x": -0.5,
+     "z": 39.5,
+     "y": 2
+    },
+    {
+     "x": 7.5,
+     "z": 39.5,
+     "y": 2
+    },
+    {
+     "x": 15.5,
+     "z": 39.5,
+     "y": 2
+    },
+    {
+     "x": 23.5,
+     "z": 39.5,
+     "y": 2
+    },
+    {
+     "x": 31.5,
+     "z": 39.5,
+     "y": 2
+    }
+   ]
+  },
+  "wall_props": [
+   {
+    "run": 0,
+    "module": 10,
+    "cell": [
+     10,
+     0
+    ],
+    "prop": "info_board"
+   },
+   {
+    "run": 1,
+    "module": 13,
+    "cell": [
+     0,
+     13
+    ],
+    "prop": "fire_hose_box"
+   },
+   {
+    "run": 20,
+    "module": 13,
+    "cell": [
+     31,
+     13
+    ],
+    "prop": "fire_hose_box"
+   },
+   {
+    "run": 119,
+    "module": 10,
+    "cell": [
+     10,
+     39
+    ],
+    "prop": "fire_extinguisher"
+   }
+  ]
+ },
+ "layers": {
+  "structure": [
+   [
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2"
+   ],
+   [
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2"
+   ],
+   [
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2"
+   ],
+   [
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2"
+   ],
+   [
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2"
+   ],
+   [
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2"
+   ],
+   [
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2"
+   ],
+   [
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2"
+   ],
+   [
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2"
+   ],
+   [
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2"
+   ],
+   [
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2"
+   ],
+   [
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2"
+   ],
+   [
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2"
+   ],
+   [
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2"
+   ],
+   [
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2"
+   ],
+   [
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2"
+   ],
+   [
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2"
+   ],
+   [
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2"
+   ],
+   [
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "1",
+    "1",
+    "1",
+    "1",
+    "2",
+    "2"
+   ],
+   [
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "1",
+    "1",
+    "1",
+    "1",
+    "2",
+    "2"
+   ],
+   [
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "1",
+    "1",
+    "1",
+    "1",
+    "2",
+    "2"
+   ],
+   [
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "1",
+    "1",
+    "1",
+    "1",
+    "2",
+    "2"
+   ],
+   [
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2"
+   ],
+   [
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2"
+   ],
+   [
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2"
+   ],
+   [
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2"
+   ],
+   [
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2"
+   ],
+   [
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2"
+   ],
+   [
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2"
+   ],
+   [
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2"
+   ],
+   [
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "0",
+    "2"
+   ],
+   [
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2"
+   ],
+   [
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2"
+   ],
+   [
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2"
+   ],
+   [
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2"
+   ],
+   [
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2"
+   ],
+   [
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2"
+   ],
+   [
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2"
+   ],
+   [
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2"
+   ],
+   [
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2",
+    "2"
+   ]
+  ],
+  "utilities": [
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    "s",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    "wp:-90",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    "wp:90",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    "t:restart",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ]
+  ],
+  "walls": [
+   [
+    "nw",
+    "n",
+    "n",
+    "n",
+    "n",
+    "n",
+    "n",
+    "en",
+    "nw",
+    "n",
+    "n",
+    "n",
+    "n",
+    "n",
+    "n",
+    "en",
+    "nw",
+    "n",
+    "n",
+    "n",
+    "n",
+    "n",
+    "n",
+    "en",
+    "nw",
+    "n",
+    "n",
+    "n",
+    "n",
+    "n",
+    "n",
+    "en"
+   ],
+   [
+    "w",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "e",
+    "w",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "e",
+    "w",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "e",
+    "w",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "e"
+   ],
+   [
+    "w",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "e",
+    "w",
+    "",
+    "nw",
+    "",
+    "n",
+    "ne",
+    "",
+    "e",
+    "w",
+    "",
+    "",
+    "",
+    "",
+    "e",
+    "",
+    "e",
+    "w",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "e"
+   ],
+   [
+    "w",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "w",
+    "",
+    "",
+    "e",
+    "",
+    "",
+    "",
+    "",
+    "nw",
+    "n",
+    "n",
+    "e",
+    "",
+    "",
+    "",
+    "n",
+    "n",
+    "",
+    "",
+    "n",
+    "n",
+    "e"
+   ],
+   [
+    "w",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "w",
+    "",
+    "",
+    "e",
+    "",
+    "",
+    "",
+    "",
+    "w",
+    "",
+    "",
+    "e",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "e"
+   ],
+   [
+    "w",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "e",
+    "w",
+    "",
+    "sw",
+    "s",
+    "s",
+    "se",
+    "",
+    "e",
+    "w",
+    "",
+    "w",
+    "s",
+    "s",
+    "s",
+    "",
+    "e",
+    "w",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "e"
+   ],
+   [
+    "w",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "e",
+    "w",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "e",
+    "w",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "e",
+    "w",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "e"
+   ],
+   [
+    "sw",
+    "s",
+    "s",
+    "",
+    "",
+    "s",
+    "s",
+    "se",
+    "sw",
+    "s",
+    "s",
+    "",
+    "",
+    "s",
+    "s",
+    "se",
+    "sw",
+    "s",
+    "s",
+    "",
+    "",
+    "s",
+    "s",
+    "se",
+    "sw",
+    "s",
+    "s",
+    "",
+    "",
+    "s",
+    "s",
+    "se"
+   ],
+   [
+    "nw",
+    "n",
+    "n",
+    "",
+    "",
+    "n",
+    "n",
+    "en",
+    "nw",
+    "n",
+    "n",
+    "",
+    "",
+    "n",
+    "n",
+    "en",
+    "nw",
+    "n",
+    "n",
+    "",
+    "",
+    "n",
+    "n",
+    "en",
+    "nw",
+    "n",
+    "n",
+    "",
+    "",
+    "n",
+    "n",
+    "en"
+   ],
+   [
+    "w",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "e",
+    "w",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "e",
+    "w",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "e",
+    "w",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "e"
+   ],
+   [
+    "w",
+    "",
+    "nw",
+    "",
+    "n",
+    "ne",
+    "",
+    "e",
+    "w",
+    "",
+    "nesw",
+    "",
+    "",
+    "nesw",
+    "",
+    "e",
+    "w",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "e",
+    "w",
+    "",
+    "nw",
+    "",
+    "n",
+    "ne",
+    "",
+    "e"
+   ],
+   [
+    "w",
+    "",
+    "w",
+    "",
+    "",
+    "e",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "w",
+    "",
+    "",
+    "e",
+    "",
+    "e"
+   ],
+   [
+    "w",
+    "",
+    "w",
+    "",
+    "",
+    "e",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "w",
+    "",
+    "",
+    "e",
+    "",
+    "e"
+   ],
+   [
+    "w",
+    "",
+    "sw",
+    "s",
+    "s",
+    "se",
+    "",
+    "e",
+    "w",
+    "",
+    "nesw",
+    "",
+    "",
+    "nesw",
+    "",
+    "e",
+    "w",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "e",
+    "w",
+    "",
+    "sw",
+    "s",
+    "s",
+    "se",
+    "",
+    "e"
+   ],
+   [
+    "w",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "e",
+    "w",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "e",
+    "w",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "e",
+    "w",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "e"
+   ],
+   [
+    "sw",
+    "s",
+    "s",
+    "",
+    "",
+    "s",
+    "s",
+    "se",
+    "sw",
+    "s",
+    "s",
+    "",
+    "",
+    "s",
+    "s",
+    "se",
+    "sw",
+    "s",
+    "s",
+    "s",
+    "s",
+    "s",
+    "s",
+    "se",
+    "sw",
+    "s",
+    "s",
+    "",
+    "",
+    "s",
+    "s",
+    "se"
+   ],
+   [
+    "nw",
+    "n",
+    "n",
+    "",
+    "",
+    "n",
+    "n",
+    "en",
+    "nw",
+    "n",
+    "n",
+    "",
+    "",
+    "n",
+    "n",
+    "en",
+    "nw",
+    "n",
+    "n",
+    "n",
+    "n",
+    "n",
+    "n",
+    "en",
+    "nw",
+    "n",
+    "n",
+    "",
+    "",
+    "n",
+    "n",
+    "en"
+   ],
+   [
+    "w",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "e",
+    "w",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "e",
+    "w",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "e",
+    "w",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "e"
+   ],
+   [
+    "w",
+    "",
+    "nesw",
+    "",
+    "",
+    "nesw",
+    "",
+    "e",
+    "w",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "e",
+    "w",
+    "",
+    "nw",
+    "",
+    "n",
+    "ne",
+    "",
+    "e",
+    "w",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "e"
+   ],
+   [
+    "w",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "n",
+    "n",
+    "",
+    "",
+    "n",
+    "n",
+    "",
+    "",
+    "",
+    "w",
+    "",
+    "",
+    "e",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "e"
+   ],
+   [
+    "w",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "w",
+    "",
+    "",
+    "e",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "e"
+   ],
+   [
+    "w",
+    "",
+    "nesw",
+    "",
+    "",
+    "nesw",
+    "",
+    "e",
+    "w",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "e",
+    "w",
+    "",
+    "sw",
+    "s",
+    "s",
+    "se",
+    "",
+    "e",
+    "w",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "e"
+   ],
+   [
+    "w",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "e",
+    "w",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "e",
+    "w",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "e",
+    "w",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "e"
+   ],
+   [
+    "sw",
+    "s",
+    "s",
+    "s",
+    "s",
+    "s",
+    "s",
+    "se",
+    "sw",
+    "s",
+    "s",
+    "s",
+    "s",
+    "s",
+    "s",
+    "se",
+    "sw",
+    "s",
+    "s",
+    "",
+    "",
+    "s",
+    "s",
+    "se",
+    "sw",
+    "s",
+    "s",
+    "",
+    "",
+    "s",
+    "s",
+    "se"
+   ],
+   [
+    "nw",
+    "n",
+    "n",
+    "",
+    "",
+    "n",
+    "n",
+    "n",
+    "nw",
+    "n",
+    "n",
+    "",
+    "",
+    "n",
+    "n",
+    "en",
+    "nw",
+    "n",
+    "n",
+    "",
+    "",
+    "n",
+    "n",
+    "en",
+    "nw",
+    "n",
+    "n",
+    "",
+    "",
+    "n",
+    "n",
+    "en"
+   ],
+   [
+    "w",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "w",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "e",
+    "w",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "e",
+    "w",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "e"
+   ],
+   [
+    "w",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "w",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "e",
+    "w",
+    "",
+    "nw",
+    "",
+    "n",
+    "ne",
+    "",
+    "e",
+    "w",
+    "",
+    "nesw",
+    "",
+    "",
+    "nesw",
+    "",
+    "e"
+   ],
+   [
+    "w",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "w",
+    "",
+    "",
+    "e",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "e"
+   ],
+   [
+    "w",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "w",
+    "",
+    "",
+    "e",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "e"
+   ],
+   [
+    "w",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "w",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "e",
+    "w",
+    "",
+    "sw",
+    "s",
+    "s",
+    "se",
+    "",
+    "e",
+    "w",
+    "",
+    "nesw",
+    "",
+    "",
+    "nesw",
+    "",
+    "e"
+   ],
+   [
+    "w",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "w",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "e",
+    "w",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "e",
+    "w",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "e"
+   ],
+   [
+    "sw",
+    "s",
+    "s",
+    "",
+    "",
+    "s",
+    "s",
+    "s",
+    "sw",
+    "s",
+    "s",
+    "",
+    "",
+    "s",
+    "s",
+    "se",
+    "sw",
+    "s",
+    "s",
+    "",
+    "",
+    "s",
+    "s",
+    "se",
+    "sw",
+    "s",
+    "s",
+    "",
+    "",
+    "s",
+    "s",
+    "se"
+   ],
+   [
+    "w",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "e",
+    "n",
+    "n",
+    "n",
+    "",
+    "",
+    "n",
+    "n",
+    "n",
+    "nw",
+    "n",
+    "n",
+    "",
+    "",
+    "n",
+    "n",
+    "en",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "e"
+   ],
+   [
+    "w",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "e",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "w",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "e",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "e"
+   ],
+   [
+    "w",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "e",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "w",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "e",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "e"
+   ],
+   [
+    "w",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "e"
+   ],
+   [
+    "w",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "e"
+   ],
+   [
+    "w",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "e",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "w",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "e",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "e"
+   ],
+   [
+    "w",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "e",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "w",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "e",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "e"
+   ],
+   [
+    "ws",
+    "s",
+    "s",
+    "s",
+    "s",
+    "s",
+    "s",
+    "es",
+    "s",
+    "s",
+    "s",
+    "s",
+    "s",
+    "s",
+    "s",
+    "s",
+    "sw",
+    "s",
+    "s",
+    "s",
+    "s",
+    "s",
+    "s",
+    "se",
+    "s",
+    "s",
+    "s",
+    "s",
+    "s",
+    "s",
+    "s",
+    "se"
+   ]
+  ],
+  "interactables": [
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    "info_board:180",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    "coin_toss",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    "exhibit_furniture#kind:plinth#size:m#mount:shannon_entropy_meter",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    "exhibit_furniture#kind:plinth#size:s#mount:random_walk_leash",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    "exhibit_furniture#kind:plinth#size:m#mount:distribution_comparator",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    "random_walk_bench",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    "prng_crank_machine",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    "exhibit_furniture#kind:plinth#size:m#mount:shannon_entropy_meter",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    "sim_cube#family:pedestal#mount:galton_board",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    "exhibit_furniture#kind:plinth#size:m#mount:seed_replay_demo",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    "fire_hose_box:90",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    "fire_hose_box:270"
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    "entropy_bench",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    "seed_bench",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    "exhibit_furniture#kind:plinth#size:m#mount:seed_replay_demo",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    "prng_crank_machine",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    "exhibit_furniture#kind:floor_work#size:l#mount:hardware_entropy_decay",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    "exhibit_furniture#kind:floor_work#size:l#mount:pollock_painting_in_3d",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    "scatter_bench",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    "rejection_bench",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    "pi_dart_bench",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    "exhibit_furniture#kind:platform#size:l#mount:random_number_book_page_1955",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    "exhibit_furniture#kind:plinth#size:m#mount:monte_carlo_dartboard",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    "perlin_bench",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    "fire_extinguisher:0",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ]
+  ]
+ }
+}
