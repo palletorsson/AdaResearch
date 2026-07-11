@@ -48,7 +48,9 @@ def load_lexicon(seq: str):
 
 def parse_sections(text: str):
     out = []
-    blocks = re.split(r"^## +", text, flags=re.M)[1:]
+    # split only on real section heads (## <n>. ...) so a quoted GDScript
+    # doc-comment line (## Foo) inside a code section never splits.
+    blocks = re.split(r"^## +(?=\d)", text, flags=re.M)[1:]
     for b in blocks:
         lines = b.strip().splitlines()
         head = lines[0].strip()
@@ -58,7 +60,7 @@ def parse_sections(text: str):
         register = "walk"
         body_lines = []
         for ln in lines[1:]:
-            r = re.match(r"\*register:\s*(walk|turn)\*", ln.strip(), re.I)
+            r = re.match(r"\*register:\s*(walk|turn|code)\*", ln.strip(), re.I)
             if r:
                 register = r.group(1).lower()
                 continue
@@ -79,20 +81,60 @@ def mentions(body: str, concepts: dict) -> set:
     return hit
 
 
+_SRC_CACHE = {}
+
+
+def find_source(cast: str):
+    """repo-relative path of <cast>.gd (under algorithms/ or commons/), or None
+    — so R6 can confirm a code section quotes a REAL file, not pseudocode."""
+    if cast in _SRC_CACHE:
+        return _SRC_CACHE[cast]
+    hit = None
+    for base in ("algorithms", "commons"):
+        d = ROOT / base
+        if not d.exists():
+            continue
+        for p in d.rglob(cast + ".gd"):
+            if ".claude" in p.parts:
+                continue
+            hit = str(p.relative_to(ROOT)).replace("\\", "/")
+            break
+        if hit:
+            break
+    _SRC_CACHE[cast] = hit
+    return hit
+
+
+def code_casts(body: str, concepts: dict) -> set:
+    """concepts whose cast-artifact token appears in a code body (code sections
+    are tied to a concept by the source they quote, NOT by alias-scan — a
+    variable name like _heads_count must not count as the concept 'uniform')."""
+    low = body.lower()
+    return {cid for cid, spec in concepts.items()
+            if str(spec.get("cast", "")).lower()
+            and str(spec["cast"]).lower() in low}
+
+
 def check(sections, concepts):
     intro = {}
     per = []
     violations = []
     for i, s in enumerate(sections):
+        reg = s["register"]
+        if reg == "code":
+            cc = code_casts(s["body"], concepts)
+            per.append({"n": s["n"], "register": reg, "title": s["title"],
+                        "mentions": sorted(cc), "introduces": []})
+            continue
         ment = mentions(s["body"] + " " + s["title"], concepts)
         new = sorted(m for m in ment if m not in intro)
-        per.append({"n": s["n"], "register": s["register"], "title": s["title"],
+        per.append({"n": s["n"], "register": reg, "title": s["title"],
                     "mentions": sorted(ment), "introduces": new})
         if len(new) > 1:
             violations.append({"rule": "R1", "section": s["n"],
                                "detail": f"introduces {len(new)} concepts: {', '.join(new)}"})
         for c in new:
-            if s["register"] == "turn":
+            if reg == "turn":
                 violations.append({"rule": "R2", "section": s["n"],
                                    "detail": f"'{c}' debuts in a turn section"})
             if intro and not (ment & set(intro)):
@@ -113,6 +155,32 @@ def check(sections, concepts):
         if not used:
             violations.append({"rule": "R5", "section": sections[ib]["n"],
                                "detail": f"'{b}' debuts before '{a}' was ever used again"})
+    # R6 CODE REGISTER (opt-in — the walk->code->turn hinge). If the chapter
+    # shows source at all, it must show it right: >= 3 code sections, each
+    # quoting a concept's REAL .gd, each placed after that concept's walk and
+    # at/before its critiquing turn.
+    code_secs = [(i, s) for i, s in enumerate(sections) if s["register"] == "code"]
+    if code_secs:
+        crit_turn = {}
+        for c, di in intro.items():
+            for j in range(di + 1, len(sections)):
+                if sections[j]["register"] == "turn" and c in mentions(
+                        sections[j]["body"] + " " + sections[j]["title"], concepts):
+                    crit_turn[c] = j
+                    break
+        valid = 0
+        for j, s in code_secs:
+            for c in code_casts(s["body"], concepts):
+                di = intro.get(c)
+                if di is None or not find_source(concepts[c]["cast"]):
+                    continue
+                if di < j <= crit_turn.get(c, len(sections)):
+                    valid += 1
+                    break
+        if valid < 3:
+            violations.append({"rule": "R6", "section": 0,
+                               "detail": f"{valid} valid code section(s); need >=3 "
+                                         f"(each quotes a real .gd, placed walk->code->turn)"})
     return order, per, violations
 
 

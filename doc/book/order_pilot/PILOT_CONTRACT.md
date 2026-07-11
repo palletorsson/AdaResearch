@@ -36,27 +36,53 @@ From `doc/book/baselines/<seq>.json` (beats: role + cast + alts; voltage):
 
 ## Step 2 — the draft
 
-`# <Title> — the order the writing found`, then 14–20 sections. Each:
+`# <Title> — the order the writing found`, then 16–24 sections. Each:
 
     ## <n>. <title>
-    *register: walk*   OR   *register: turn*
-    <body: 60–140 words>
+    *register: walk*   OR   *register: code*   OR   *register: turn*
+    <body: 60–140 words for walk/turn; a fenced source block for code>
 
 THE GRAMMAR (mechanically checked):
 
 - **R1** each section introduces at most ONE new concept (first alias-mention
   anywhere = its debut).
-- **R2** debuts happen in walk sections, never turns.
+- **R2** debuts happen in walk sections, never turns, never code.
 - **R3** every introducing section (after the first) also mentions ≥ 1
   earlier concept — the new arrives through the old.
 - **R4** every concept is mentioned in a turn section within 4 sections
   after its debut.
 - **R5** before each new debut, the previous debuted concept is mentioned at
   least once more.
+- **R6** the chapter carries at least **3 code sections**, each quoting a
+  concept's REAL cast `.gd`, each placed **after that concept's debut walk
+  and before its critiquing turn** — the walk → code → turn hinge.
+
+### The code register (walk → code → turn)
+
+The code is not decoration; it is where the walk's innocence and the turn's
+suspicion meet and get adjudicated by real source. For at least three of the
+chapter's most load-bearing concepts, insert a code section between the
+concept's debut walk and its critiquing turn:
+
+    ## <n>. <title>
+    *register: code*
+    ```gdscript
+    <6–14 lines of the concept's ACTUAL cast .gd — the core function>
+    ```
+
+Get the source honestly: `Glob **/<cast>.gd` (the cast is in the lexicon),
+read the file, quote a faithful trimmed snippet of the load-bearing function
+— never pseudocode, never invented. **Strip any `##` doc-comment lines** from
+the snippet (they break section parsing; single-`#` comments are fine). The
+code section itself introduces no concept and mentions no new alias; it is
+tied to its concept by the `<cast>` token it contains. Then the turn may
+point at a specific line — the strongest critique names the exact line where
+an assumption is typed into being (or, as with `coin_toss.gd`, discovers the
+code is *honester* than the label, and says so).
 
 Alias discipline: never use ANY concept's alias words before its debut
-(metaphor counts). Braid roughly 2–3 walks then a turn. The final section is
-a turn that looks back along the whole chain and introduces nothing.
+(metaphor counts). Braid roughly walk · walk · code · turn. The final section
+is a turn that looks back along the whole chain and introduces nothing.
 
 VOICE — walks teach through the concrete artifact: present tense, what the
 hand does and the eye sees; naming thinkers, theorems, and algorithms is
