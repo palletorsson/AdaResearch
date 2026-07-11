@@ -30,8 +30,9 @@
   },
   "antrooms": {
    "tool": "gen_antrooms.py",
-   "knobs": {"_pending": "worker in flight — perfect close rooms, A*-over-noise openings, reuse discount 0.35"},
-   "note": "perfect but close rooms; ants OPEN the space between with pathfinding"
+   "knobs": {"CANVAS": 64, "MIN_INNER": 7, "CAP_INNER": 14, "N_EXTRA": 2,
+             "REUSE": "0.35 — cost discount on carved floor (lower = more trunk merging)"},
+   "note": "perfect but close rooms; ants OPEN the space between with A*-over-noise; reuse discount merges trunks (proven 2.8x)"
   },
   "derive": {
    "tool": "gen_derive.py",
@@ -45,8 +46,9 @@
   },
   "physarum": {
    "tool": "gen_physarum.py",
-   "knobs": {"_pending": "worker in flight — agents 120, steps 400, trunk percentile 60, vein percentile 92"},
-   "note": "slime trunks between sealed rooms; corridor width follows flow"
+   "knobs": {"AGENTS": 120, "STEPS": 400, "DECAY": 0.92, "FOOD": 8.0,
+             "TRUNK_PCTL": 60.0, "VEIN_PCTL": 92.0, "TRUNK_W": 4, "TWIG_W": 2},
+   "note": "slime trunks between sealed rooms; corridor width follows flow (trunk 4-wide / twig 2-wide)"
   }
  }
 }
