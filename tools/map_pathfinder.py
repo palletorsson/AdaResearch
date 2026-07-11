@@ -22,6 +22,9 @@ Movement rules:
   - jp (jump pad) one-way arc: jp:target_x:target_z[:arc_height]
   - Teleport cells are walkable destinations even on void
   - Height 0 = void (unwalkable without tc/br)
+  - h:death (DangerZone) cells are lethal — blocked, never walkable
+  - Other h: hazards (h:fire, h:electric, ...) are walkable but cost extra,
+    so found paths prefer hazard-free detours
 
 Examples:
   python tools/map_pathfinder.py check Crisis_Synthesis
@@ -35,6 +38,7 @@ Examples:
 from __future__ import annotations
 
 import argparse
+import heapq
 import json
 import os
 import re
@@ -53,6 +57,10 @@ OVERSIGHT_PROJECT = os.environ.get("OVERSIGHT_PROJECT", "ada-research")
 
 # Artifacts exempt from Rule 4 reachability — decorative/environmental only
 EXEMPT_ARTIFACTS = {"dark_sphere"}
+
+# Extra traversal cost for stepping INTO a non-lethal hazard cell (h:fire etc.)
+# — high enough that any reasonable detour beats walking through the hazard.
+HAZARD_EXTRA_COST = 25.0
 
 # Registry cache for view_only flag lookup
 _registry_cache: dict[str, dict] | None = None
@@ -268,6 +276,25 @@ class MapGraph:
                 if cell and cell != " ":
                     self.util_map[(r, c)] = cell
 
+        # Hazard cells (DangerZone utilities). Token's FIRST ':'-segment must
+        # be exactly "h" — no substring matching (WallKit maps carry "axis":"h"
+        # strings elsewhere). Forms: h, h:fire, h:death, h:fire:20 (dps suffix).
+        # Bare "h" has no kind — treated as a generic non-lethal hazard.
+        self.hazard_kinds: dict[tuple[int, int], str] = {}
+        for pos, cell in self.util_map.items():
+            parts = cell.split(":")
+            if parts[0] == "h":
+                kind = parts[1].strip() if len(parts) > 1 and parts[1].strip() else "generic"
+                self.hazard_kinds[pos] = kind
+        # h:death = lethal, blocks the cell entirely; every other kind stays
+        # walkable but costs HAZARD_EXTRA_COST on edges INTO the cell.
+        self.death_cells: set[tuple[int, int]] = {
+            pos for pos, kind in self.hazard_kinds.items() if kind == "death"
+        }
+        self.hazard_cost_cells: set[tuple[int, int]] = (
+            set(self.hazard_kinds) - self.death_cells
+        )
+
         # wp cells
         self.wp_cells: set[tuple[int, int]] = {
             pos for pos, cell in self.util_map.items() if cell.startswith("wp")
@@ -328,6 +355,10 @@ class MapGraph:
         for tp in self.teleports:
             if tp not in self.walkable:
                 self.walkable.add(tp)
+
+        # h:death cells are lethal — never walkable, regardless of what floor,
+        # bridge, or landing made them walkable above.
+        self.walkable -= self.death_cells
 
     def _parse_tc(self):
         bridges: list[tuple[tuple[int, int], tuple[int, int]]] = []
@@ -507,31 +538,44 @@ class MapGraph:
                     queue.append(nb)
         return visited
 
+    def step_extra_cost(self, pos: tuple[int, int]) -> float:
+        """Extra traversal cost for stepping INTO pos (hazard penalty)."""
+        return HAZARD_EXTRA_COST if pos in self.hazard_cost_cells else 0.0
+
     def bfs_path(
         self, target: tuple[int, int]
     ) -> Optional[list[tuple[int, int]]]:
-        """BFS shortest path from spawn to target. Returns path list or None."""
+        """Least-cost path from spawn to target (uniform-cost search).
+
+        Each step costs 1.0 plus a hazard penalty for edges into non-lethal
+        hazard cells (h:fire etc.), so paths prefer hazard-free detours.
+        Without hazards this degenerates to BFS shortest path.
+        Returns path list or None.
+        """
         if self.spawn == target:
             return [self.spawn]
         parent: dict[tuple[int, int], tuple[int, int]] = {}
-        visited = {self.spawn}
-        queue = deque([self.spawn])
-        while queue:
-            pos = queue.popleft()
+        dist: dict[tuple[int, int], float] = {self.spawn: 0.0}
+        heap: list[tuple[float, tuple[int, int]]] = [(0.0, self.spawn)]
+        while heap:
+            d, pos = heapq.heappop(heap)
+            if d > dist.get(pos, float("inf")):
+                continue  # stale heap entry
+            if pos == target:
+                # Reconstruct
+                path = [pos]
+                cur = pos
+                while cur in parent:
+                    cur = parent[cur]
+                    path.append(cur)
+                path.reverse()
+                return path
             for nb in self.neighbors(pos):
-                if nb not in visited:
-                    visited.add(nb)
+                nd = d + 1.0 + self.step_extra_cost(nb)
+                if nd < dist.get(nb, float("inf")):
+                    dist[nb] = nd
                     parent[nb] = pos
-                    if nb == target:
-                        # Reconstruct
-                        path = [nb]
-                        cur = nb
-                        while cur in parent:
-                            cur = parent[cur]
-                            path.append(cur)
-                        path.reverse()
-                        return path
-                    queue.append(nb)
+                    heapq.heappush(heap, (nd, nb))
         return None
 
     def find_target(self, name: str) -> Optional[tuple[int, int]]:
@@ -981,6 +1025,25 @@ def cmd_check(args: argparse.Namespace) -> int:
                     f"{len(graph.artifacts)} artifacts, "
                     f"{len(graph.teleports)} teleport(s))"
                 )
+                if graph.hazard_kinds:
+                    by_kind: dict[str, list[tuple[int, int]]] = {}
+                    for pos in sorted(graph.hazard_kinds):
+                        by_kind.setdefault(graph.hazard_kinds[pos], []).append(pos)
+                    parts = []
+                    for kind in sorted(by_kind):
+                        cells = ", ".join(f"({c},{r})" for r, c in by_kind[kind])
+                        parts.append(f"{kind} x{len(by_kind[kind])} [{cells}]")
+                    print(f"  Hazards: {len(graph.hazard_kinds)} cell(s) — {'; '.join(parts)}")
+                    # Does the least-cost spawn->teleport path cross a hazard?
+                    if graph.teleports:
+                        tp_path = graph.bfs_path(graph.teleports[0])
+                        if tp_path:
+                            crossed = [p for p in tp_path if p in graph.hazard_kinds]
+                            if crossed:
+                                cells = ", ".join(f"({c},{r})" for r, c in crossed)
+                                print(f"  Path spawn->teleport CROSSES hazard cell(s): {cells}")
+                            else:
+                                print("  Path spawn->teleport avoids all hazard cells")
             if warnings:
                 for w in warnings:
                     print(f"  Rule {w['rule']} [{w['severity']}] {w['msg']}")
