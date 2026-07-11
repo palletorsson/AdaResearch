@@ -40,7 +40,12 @@
         ],
         "movement_abilities": [
           "teleport"
-        ]
+        ],
+        "unlock_event": {
+          "type": "map_completed",
+          "map": "Point_Animatedcube",
+          "comment": "Theme moment chosen 2026-07-11; chamber follows this map in the sequence."
+        }
       },
       "enemies": {
         "kind": "goo",
@@ -129,7 +134,12 @@
         ],
         "movement_abilities": [
           "teleport"
-        ]
+        ],
+        "unlock_event": {
+          "type": "map_completed",
+          "map": "Color_Flashlight",
+          "comment": "Theme moment chosen 2026-07-11; chamber follows this map in the sequence."
+        }
       },
       "enemies": {
         "kind": "goo",
@@ -225,7 +235,12 @@
         "catalyst_affordances": [
           "drive",
           "push"
-        ]
+        ],
+        "unlock_event": {
+          "type": "map_completed",
+          "map": "ForcesFoundations",
+          "comment": "Theme moment chosen 2026-07-11; chamber follows this map in the sequence."
+        }
       },
       "enemies": {
         "kind": "swarm",
@@ -310,7 +325,12 @@
         ],
         "catalyst_affordances": [
           "oscillate"
-        ]
+        ],
+        "unlock_event": {
+          "type": "map_completed",
+          "map": "WaveFunctions_TrigWalkingPath",
+          "comment": "Theme moment chosen 2026-07-11; chamber follows this map in the sequence."
+        }
       },
       "enemies": {
         "kind": "goo",
@@ -357,7 +377,12 @@
         ],
         "catalyst_affordances": [
           "scatter"
-        ]
+        ],
+        "unlock_event": {
+          "type": "map_completed",
+          "map": "Random_Game",
+          "comment": "Theme moment chosen 2026-07-11; chamber follows this map in the sequence."
+        }
       },
       "enemies": {
         "kind": "swarm",
@@ -448,7 +473,12 @@
         ],
         "catalyst_affordances": [
           "evolve"
-        ]
+        ],
+        "unlock_event": {
+          "type": "map_completed",
+          "map": "CA_AgentsCircuits",
+          "comment": "Theme moment chosen 2026-07-11; chamber follows this map in the sequence."
+        }
       },
       "enemies": {
         "kind": "drainfriend",
@@ -495,7 +525,12 @@
         ],
         "catalyst_affordances": [
           "split"
-        ]
+        ],
+        "unlock_event": {
+          "type": "map_completed",
+          "map": "Fractal_MandelbrotSet",
+          "comment": "Theme moment chosen 2026-07-11; chamber follows this map in the sequence."
+        }
       },
       "enemies": {
         "kind": "goo",
@@ -544,7 +579,12 @@
         ],
         "catalyst_affordances": [
           "grow"
-        ]
+        ],
+        "unlock_event": {
+          "type": "map_completed",
+          "map": "LSystems_Living",
+          "comment": "Theme moment chosen 2026-07-11; chamber follows this map in the sequence."
+        }
       },
       "enemies": {
         "kind": "goo",
@@ -688,7 +728,12 @@
         ],
         "catalyst_affordances": [
           "flock"
-        ]
+        ],
+        "unlock_event": {
+          "type": "map_completed",
+          "map": "SwarmIntelligence_Ant_Colony_Optimization",
+          "comment": "Theme moment chosen 2026-07-11; chamber follows this map in the sequence."
+        }
       },
       "enemies": {
         "kind": "swarm",
