@@ -7,8 +7,21 @@
   "opening": "the between: carved doors (rooms) | continuous floor (wanghall) | wander trails (ants) | A*-over-noise (antrooms) | return-pass shortcuts (derive) | slime trunks (physarum) | gates+L-corridors (flock)",
   "dress": "map_principal.finish: labwall + register palettes + proximity_lod + wall runs + wall props + supporting cast (benches by register quota)"
  },
- "recipes_note": "rd + erosion recipes below; lsystem/dla/voronoi/wfc register when their workers land",
+ "recipes_note": "lsystem/dla/wfc register when their workers land",
+ "recipes_voronoi_note": "voronoi below",
  "recipes": {
+  "voronoi": {
+   "tool": "gen_voronoi.py",
+   "mode": "voronoi-territories",
+   "knobs": {"CANVAS": 56, "MIN_DIST": 13, "ERODE_R": 9, "FLOOR_TARGET": 2200,
+             "DOOR_W": 3, "CORR_W": 3},
+   "sliders": {
+    "ERODE_R": {"label": "territory radius (floor around each site)", "min": 5, "max": 12, "step": 1, "default": 9},
+    "MIN_DIST": {"label": "artifact distance (site spacing)", "min": 10, "max": 18, "step": 1, "default": 13},
+    "CORR_W": {"label": "corridor width", "min": 2, "max": 5, "step": 1, "default": 3}
+   },
+   "note": "beat sites tessellate territories; walls on every territory meeting edge (the wang move); doors where beat-order neighbours touch, L-corridors where they do not"
+  },
   "rd": {
    "tool": "gen_rd.py",
    "mode": "reaction-diffusion",
