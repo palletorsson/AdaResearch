@@ -58,6 +58,8 @@ BUDGET_H = 3.4                    # resolve_cast height budget
 MIN_INNER = 7                     # smallest inner floor a room may have
 CAP_INNER = 14                    # largest inner floor a room may have
 N_EXTRA = 2                       # loop connections beyond the beat-order chain
+SPACING = 12                      # artifact distance: room min-spacing (relaxes -2/-4/0)
+CORRIDOR_W = 3                    # carved corridor width (spine + perpendicular cells)
 NOISE_LO, NOISE_HI = 1.0, 1.5     # cost(cell) = NOISE_LO + NOISE_HI * noise(cell)
 REUSE = 0.35                      # cost multiplier on already-carved corridor floor
 
@@ -93,13 +95,13 @@ def _overlaps(rect, placed, pad=1):
 
 def _place_rooms(sizes, rng):
     """place each room at the candidate (seeded-shuffled every-3rd grid) that
-    maximises min-distance to the placed centres, >= 12 apart (relax 10/8/0)."""
+    maximises min-distance to the placed centres, >= SPACING apart (relaxing)."""
     cands = [(ax, ay) for ay in range(1, CANVAS, 3) for ax in range(1, CANVAS, 3)]
     rng.shuffle(cands)
     placed, centers, rooms = [], [], []
     for rs in sizes:
         best = None
-        for thresh in (12.0, 10.0, 8.0, 0.0):
+        for thresh in (float(SPACING), SPACING - 2.0, SPACING - 4.0, 0.0):
             pick, pick_d, pick_c = None, -1.0, None
             for (ax, ay) in cands:
                 x1, y1 = ax + rs - 1, ay + rs - 1
@@ -238,7 +240,13 @@ def build(seq, name, seed):
             else:
                 dr, dc = cell[0] - path[k - 1][0], cell[1] - path[k - 1][1]
             perps = [(0, -1), (0, 1)] if dr != 0 else [(-1, 0), (1, 0)]
-            for (pr, pc) in [(0, 0)] + perps:      # spine + one cell each side = 3 wide
+            # spine + (CORRIDOR_W - 1) perpendicular cells, alternating sides
+            side = [(0, 0)]
+            for w in range(1, CORRIDOR_W):
+                p = perps[(w - 1) % 2]
+                k2 = (w + 1) // 2
+                side.append((p[0] * k2, p[1] * k2))
+            for (pr, pc) in side:
                 rr, cc = cell[0] + pr, cell[1] + pc
                 if 0 <= rr < CANVAS and 0 <= cc < CANVAS and (rr, cc) not in room_floor:
                     carved.add((rr, cc))           # skip cells already room floor

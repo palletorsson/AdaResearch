@@ -30,8 +30,15 @@
   },
   "antrooms": {
    "tool": "gen_antrooms.py",
+   "mode": "ant-rooms",
    "knobs": {"CANVAS": 64, "MIN_INNER": 7, "CAP_INNER": 14, "N_EXTRA": 2,
+             "SPACING": 12, "CORRIDOR_W": 3,
              "REUSE": "0.35 — cost discount on carved floor (lower = more trunk merging)"},
+   "sliders": {
+    "SPACING": {"label": "artifact distance (room spacing)", "min": 8, "max": 20, "step": 1, "default": 12},
+    "N_EXTRA": {"label": "extra loop connections", "min": 0, "max": 6, "step": 1, "default": 2},
+    "CORRIDOR_W": {"label": "corridor width", "min": 2, "max": 5, "step": 1, "default": 3}
+   },
    "note": "perfect but close rooms; ants OPEN the space between with A*-over-noise; reuse discount merges trunks (proven 2.8x)"
   },
   "derive": {
