@@ -1,0 +1,25 @@
+{
+ "baseline_order": ["arrive", "point", "trace", "line", "measure",
+                    "grid", "plane", "solid", "build", "proof"],
+ "concepts": {
+  "arrive":     {"cast": "you_are_here", "aliases": ["you are here", "marker", "arrival", "arrive", "wayfinding"]},
+  "point":      {"cast": "interactive_point_origin_force", "aliases": ["point", "points", "dot", "origin"]},
+  "trace":      {"cast": "player_trace", "aliases": ["trace", "trail", "footsteps", "wake"]},
+  "line":       {"cast": "line_builder_3d", "aliases": ["line", "lines", "segment", "taut"]},
+  "measure":    {"cast": "laser_measure", "aliases": ["measure", "laser", "length", "ruler"]},
+  "grid":       {"cast": "dgrid", "aliases": ["grid", "lattice", "graph paper", "crosshatch"]},
+  "plane":      {"cast": "interactivetriangle", "aliases": ["plane", "triangle", "face", "faces"]},
+  "wound":      {"cast": "fontana_puncture", "aliases": ["fontana", "wound", "puncture", "slash", "canvas"]},
+  "solid":      {"cast": "platonic_grabbables", "aliases": ["solid", "polyhedron", "platonic", "cube", "volume"]},
+  "melancholy": {"cast": "durer_scene", "aliases": ["melencolia", "durer", "melancholy", "grief", "engraving", "angel"]},
+  "build":      {"cast": "pyramid_edit", "aliases": ["build", "pyramid", "assemble", "apex"]},
+  "becoming":   {"cast": "becoming_catalyst", "aliases": ["catalyst", "bracelet", "becoming", "wedge"]},
+  "proof":      {"cast": "snap_tetrahedron_puzzle", "aliases": ["snap", "puzzle", "tetrahedron", "prove", "exit"]}
+ },
+ "aside": ["klee_walking_point (voltage not taken — Klee is quoted inside the trace walk instead of cast as a concept)",
+           "folding_past (voltage not taken — the map remembering being walked overlaps the trace)",
+           "mystic_writing_pad", "draw_dot", "grab_sphere_point_snap", "CoordinateSystem3M",
+           "grabbable_line", "scale_lines", "grid_lines", "draw_triangle_faces",
+           "parasol_triangle", "grab_trihedron", "polyhedron_nets_cube", "animatedcubebuilder",
+           "snap_pyramid_puzzle / snap_octahedron_puzzle (understudies — same exit test, other bodies)"]
+}

@@ -1,0 +1,22 @@
+{
+ "baseline_order": ["hue", "axes", "palette", "contrast", "composition",
+                    "harmony", "relation", "mixing", "match"],
+ "concepts": {
+  "hue":         {"cast": "SpectrumVisualizer", "aliases": ["hue", "spectrum", "wavelength", "rainbow", "prism"]},
+  "axes":        {"cast": "color_space_navigator", "aliases": ["value", "saturation", "saturated", "lightness", "axis", "axes"]},
+  "palette":     {"cast": "color_sets_overview", "aliases": ["palette", "swatch", "swatches", "scheme"]},
+  "contrast":    {"cast": "dna_color_stacks_stack_simultaneous_contrast", "aliases": ["contrast", "simultaneous", "afterimage", "vibrate", "vibrates"]},
+  "composition": {"cast": "gridcolorizer", "aliases": ["composition", "grid", "colorizer", "arrangement", "layout"]},
+  "harmony":     {"cast": "dna_color_stacks_stack_complementary_red_green", "aliases": ["harmony", "wheel", "complementary", "complement", "triadic"]},
+  "relation":    {"cast": "dna_modern_art_albers_homage_warm", "aliases": ["albers", "homage", "relational", "nested"]},
+  "mixing":      {"cast": "visual_color_mixing", "aliases": ["mix", "mixing", "mixed", "blend", "additive"]},
+  "match":       {"cast": "primitive_combo_puzzle", "aliases": ["match", "matches", "matched", "target", "puzzle"]},
+  "dogma":       {"cast": "dna_modern_art_mondrian_de_stijl", "aliases": ["mondrian", "de stijl", "primary", "primaries", "dogma"]},
+  "immersion":   {"cast": "dna_modern_art_rothko_chromatic_field", "aliases": ["rothko", "chromatic", "grief", "mourning", "immersion"]},
+  "synesthesia": {"cast": "dna_modern_art_kandinsky_bauhaus_triad", "aliases": ["kandinsky", "bauhaus", "synesthesia", "synesthetic", "triangle"]}
+ },
+ "aside": ["dark_side_prism", "flashlight_demo", "grab_rainbow_stick",
+           "rainbow_hallway", "albers_wall_gallery", "color_constellation_office",
+           "ball_painting_demo", "nail_color_controller",
+           "the handling props (mario_cube, pick_up_cube, grab_stick_scanner, hand_model, dark_sphere, brick_wall_factory) — the sequence's hands and rooms, not its color argument"]
+}

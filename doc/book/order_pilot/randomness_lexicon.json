@@ -1,0 +1,21 @@
+{
+ "baseline_order": ["uniform", "walk", "distribution", "gaussian", "entropy",
+                    "seed", "prng", "paint", "montecarlo"],
+ "concepts": {
+  "uniform":      {"cast": "coin_toss", "aliases": ["coin", "flip", "heads", "tails", "fifty-fifty", "uniform"]},
+  "walk":         {"cast": "random_walk_leash", "aliases": ["walk", "step", "wander", "drunkard"]},
+  "distribution": {"cast": "distribution_comparator", "aliases": ["distribution", "histogram", "shape of chance", "comparator", "cluster"]},
+  "gaussian":     {"cast": "galton_board", "aliases": ["gaussian", "bell", "normal", "galton", "peg", "pile"]},
+  "entropy":      {"cast": "shannon_entropy_meter", "aliases": ["entropy", "disorder", "surprise", "bits", "shannon"]},
+  "seed":         {"cast": "seed_replay_demo", "aliases": ["seed", "replay", "same sequence", "deterministic chance"]},
+  "prng":         {"cast": "prng_crank_machine", "aliases": ["pseudo", "prng", "crank", "generator", "formula chance"]},
+  "trng":         {"cast": "hardware_entropy_decay", "aliases": ["true random", "trng", "hardware", "decay", "physical noise"]},
+  "paint":        {"cast": "pollock_painting_in_3d", "aliases": ["pollock", "paint", "drip", "splatter", "gesture"]},
+  "montecarlo":   {"cast": "monte_carlo_dartboard", "aliases": ["monte carlo", "dartboard", "dart", "estimate", "pi by throwing"]},
+  "book1955":     {"cast": "random_number_book_page_1955", "aliases": ["1955", "rand book", "printed table", "page of digits"]}
+ },
+ "aside": ["slot_machine", "random_butterflies", "random_walk_collection",
+           "gaussian_random", "bubbles_random", "random_decay_multimesh",
+           "extreme_randomness", "digital_materiality_glitch",
+           "the 15 randomness benches (attach around the ordered spine, like supporting cast around heroes)"]
+}

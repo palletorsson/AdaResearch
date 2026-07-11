@@ -1,0 +1,23 @@
+{
+ "baseline_order": ["frame", "translate", "rotate", "scale", "dot",
+                    "cross", "matrix", "invariant", "compose", "pose"],
+ "concepts": {
+  "frame":      {"cast": "science_screen", "aliases": ["frame", "axes", "origin", "coordinates", "screen"]},
+  "translate":  {"cast": "translation_cube_demo", "aliases": ["translate", "translation", "slide", "shift", "displacement"]},
+  "rotate":     {"cast": "rotation_gimbal", "aliases": ["rotate", "rotation", "gimbal", "spin", "swivel"]},
+  "scale":      {"cast": "scale_me", "aliases": ["scale", "scaling", "resize", "shrink", "enlarge"]},
+  "cake":       {"cast": "carousel_cake", "aliases": ["cake", "carousel", "tier", "tiers", "birthday"]},
+  "dot":        {"cast": "invariants_demo", "aliases": ["dot", "dot product", "projection", "project", "aligned", "alignment"]},
+  "cross":      {"cast": "righttriangle", "aliases": ["cross", "cross product", "perpendicular", "right angle"]},
+  "compose":    {"cast": "transform_composition_workbench", "aliases": ["compose", "composition", "workbench", "chain"]},
+  "noncommute": {"cast": "transform_composition_workbench", "aliases": ["commute", "commutative", "swap", "order matters", "reversed"]},
+  "matrix":     {"cast": "matrix_4x4_viewer", "aliases": ["matrix", "matrices", "4x4", "sixteen"]},
+  "tunnel":     {"cast": "boolean_tunnel", "aliases": ["tunnel", "corridor", "twist", "segment", "segments"]},
+  "invariant":  {"cast": "invariants_demo", "aliases": ["invariant", "invariance", "unchanged", "preserved", "survives"]},
+  "pose":       {"cast": "chair_assembly_puzzle", "aliases": ["pose", "chair", "target", "assembly", "seat"]}
+ },
+ "aside": ["balance_puzzle (the stillness voltage — mastery as coming to rest — left standing beside the chair)",
+           "homogeneous_coordinates", "transform_composition", "player_trace",
+           "dark_sphere", "pick_up_cube", "toruscylinder", "prism_block", "grower_block",
+           "the understudies (x_translation_cube, spin, rotate_grid_cubes, cube_scene) stand behind their beats"]
+}

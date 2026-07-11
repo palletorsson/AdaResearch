@@ -15,11 +15,16 @@ applied to prose sequence):
   R4 CRITIQUE-FOLLOWS every concept meets a turn section within K sections
   R5 EARN-THE-NEXT    the previous concept is used again before the next debuts
 
-Commands:
-  python tools/order_grammar.py check doc/book/order_pilot/randomness_draft.md
-  python tools/order_grammar.py report doc/book/order_pilot/randomness_draft.md
-      -> doc/reports/order_pilot_randomness.json
-      -> ../ada_encyclopedia/public/order-pilot.json  (the /order-pilot page)
+Per-sequence lexicon: doc/book/order_pilot/<seq>_lexicon.json
+  {"baseline_order": [concept ids in beat order],
+   "concepts": {id: {"cast": artifact, "aliases": [words]}},
+   "aside": [artifacts the concepts do NOT cover — the honest leftover]}
+
+Commands (seq derived from the draft filename <seq>_draft.md):
+  python tools/order_grammar.py check  doc/book/order_pilot/<seq>_draft.md
+  python tools/order_grammar.py report doc/book/order_pilot/<seq>_draft.md
+      -> doc/reports/order_pilot_<seq>.json
+      -> ../ada_encyclopedia/public/order-pilot/<seq>.json (+ index.json)
 """
 import json
 import re
@@ -29,31 +34,19 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 ENC = ROOT.parent / "ada_encyclopedia"
+PILOT = ROOT / "doc" / "book" / "order_pilot"
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 K_CRITIQUE = 4          # R4 window (sections)
 
-# the concept lexicon: id -> (cast artifact, alias regexes)
-CONCEPTS = {
-    "uniform":    ("coin_toss", ["coin", "flip", "heads", "tails", "fifty-fifty", "uniform"]),
-    "walk":       ("random_walk_leash", ["walk", "step", "wander", "drunkard"]),
-    "distribution": ("distribution_comparator", ["distribution", "histogram", "shape of chance", "comparator", "cluster"]),
-    "gaussian":   ("galton_board", ["gaussian", "bell", "normal", "galton", "peg", "pile"]),
-    "entropy":    ("shannon_entropy_meter", ["entropy", "disorder", "surprise", "bits", "shannon"]),
-    "seed":       ("seed_replay_demo", ["seed", "replay", "same sequence", "deterministic chance"]),
-    "prng":       ("prng_crank_machine", ["pseudo", "prng", "crank", "generator", "formula chance"]),
-    "trng":       ("hardware_entropy_decay", ["true random", "trng", "hardware", "decay", "physical noise"]),
-    "paint":      ("pollock_painting_in_3d", ["pollock", "paint", "drip", "splatter", "gesture"]),
-    "montecarlo": ("monte_carlo_dartboard", ["monte carlo", "dartboard", "dart", "estimate", "pi by throwing"]),
-    "book1955":   ("random_number_book_page_1955", ["1955", "rand book", "printed table", "page of digits"]),
-}
 
-BASELINE_ORDER = ["uniform", "walk", "distribution", "gaussian", "entropy",
-                  "seed", "prng", "paint", "montecarlo"]   # beat order (trng/book are voltage)
+def load_lexicon(seq: str):
+    p = PILOT / f"{seq}_lexicon.json"
+    d = json.loads(p.read_text(encoding="utf-8"))
+    return d["concepts"], d["baseline_order"], d.get("aside", [])
 
 
 def parse_sections(text: str):
-    """[{n, title, register, body}] from the pilot format."""
     out = []
     blocks = re.split(r"^## +", text, flags=re.M)[1:]
     for b in blocks:
@@ -75,24 +68,23 @@ def parse_sections(text: str):
     return out
 
 
-def mentions(body: str) -> set:
+def mentions(body: str, concepts: dict) -> set:
     low = " " + re.sub(r"[^a-z0-9\- ]", " ", body.lower()) + " "
     hit = set()
-    for cid, (_, aliases) in CONCEPTS.items():
-        for a in aliases:
-            if re.search(r"(?<![a-z0-9])" + re.escape(a) + r"(?![a-z0-9])", low):
+    for cid, spec in concepts.items():
+        for a in spec["aliases"]:
+            if re.search(r"(?<![a-z0-9])" + re.escape(a.lower()) + r"(?![a-z0-9])", low):
                 hit.add(cid)
                 break
     return hit
 
 
-def check(sections):
-    """returns (intro_order, per-section mentions, violations[])"""
+def check(sections, concepts):
     intro = {}
     per = []
     violations = []
     for i, s in enumerate(sections):
-        ment = mentions(s["body"] + " " + s["title"])
+        ment = mentions(s["body"] + " " + s["title"], concepts)
         new = sorted(m for m in ment if m not in intro)
         per.append({"n": s["n"], "register": s["register"], "title": s["title"],
                     "mentions": sorted(ment), "introduces": new})
@@ -107,16 +99,13 @@ def check(sections):
                 violations.append({"rule": "R3", "section": s["n"],
                                    "detail": f"'{c}' arrives without any earlier concept"})
             intro[c] = i
-    # R4: a turn within K sections after intro
     for c, i in intro.items():
         window = sections[i + 1: i + 1 + K_CRITIQUE]
-        hit = any(s["register"] == "turn" and c in mentions(s["body"] + " " + s["title"])
+        hit = any(s["register"] == "turn" and c in mentions(s["body"] + " " + s["title"], concepts)
                   for s in window)
-        # the intro section itself being a turn is impossible (R2); same-section ok if turn follows
         if not hit:
             violations.append({"rule": "R4", "section": sections[i]["n"],
                                "detail": f"'{c}' never meets a turn within {K_CRITIQUE} sections"})
-    # R5: used again before the next debut
     order = sorted(intro, key=lambda c: intro[c])
     for a, b in zip(order, order[1:]):
         ia, ib = intro[a], intro[b]
@@ -128,7 +117,6 @@ def check(sections):
 
 
 def kendall(a: list, b: list) -> float:
-    """kendall tau over the concepts present in both."""
     common = [x for x in a if x in b]
     if len(common) < 2:
         return 0.0
@@ -145,10 +133,9 @@ def kendall(a: list, b: list) -> float:
     return round((conc - disc) / n, 3) if n else 0.0
 
 
-def three_orders_ranks():
-    """cast-artifact -> {ped, onto, crit} class ranks from three_orders.py."""
+def three_orders_ranks(seq: str):
     try:
-        r = subprocess.run([sys.executable, "tools/three_orders.py", "randomness"],
+        r = subprocess.run([sys.executable, "tools/three_orders.py", seq],
                            capture_output=True, text=True, cwd=ROOT, timeout=120)
         txt = r.stdout
     except Exception:
@@ -169,11 +156,17 @@ def main():
         print(__doc__)
         return 1
     path = ROOT / sys.argv[2]
+    seq = path.stem.replace("_draft", "")
+    concepts, baseline_order, aside = load_lexicon(seq)
     text = path.read_text(encoding="utf-8")
     sections = parse_sections(text)
-    order, per, violations = check(sections)
-    print(f"sections: {len(sections)}  concepts introduced: {len(order)}/{len(CONCEPTS)}")
+    order, per, violations = check(sections, concepts)
+    print(f"[{seq}] sections: {len(sections)}  concepts introduced: {len(order)}/{len(concepts)}")
     print("written order:", " -> ".join(order))
+    missing = [c for c in concepts if c not in order]
+    if missing:
+        violations.append({"rule": "R0", "section": 0,
+                           "detail": f"never introduced: {', '.join(missing)}"})
     if violations:
         print(f"VIOLATIONS ({len(violations)}):")
         for v in violations:
@@ -183,48 +176,57 @@ def main():
     if sys.argv[1] == "check":
         return 0 if not violations else 2
 
-    # report: diff against baseline + three orders, emit page data
     decl = ""
     m = re.search(r"<!-- order-declaration(.*?)-->", text, re.S)
     if m:
         decl = m.group(1).strip()
-    t3 = three_orders_ranks()
+    t3 = three_orders_ranks(seq)
     rows = []
     for c in order:
-        cast = CONCEPTS[c][0]
+        cast = concepts[c]["cast"]
         r3 = t3.get(cast, {})
         rows.append({"concept": c, "cast": cast,
                      "written": order.index(c),
-                     "baseline": BASELINE_ORDER.index(c) if c in BASELINE_ORDER else None,
+                     "baseline": baseline_order.index(c) if c in baseline_order else None,
                      "ped": r3.get("ped"), "onto": r3.get("onto"), "crit": r3.get("crit")})
-    tau_baseline = kendall(order, BASELINE_ORDER)
 
     def class_order(key):
         have = [r for r in rows if r[key] is not None]
         return [r["concept"] for r in sorted(have, key=lambda r: (r[key], order.index(r["concept"])))]
-    taus = {"baseline": tau_baseline,
+    taus = {"baseline": kendall(order, baseline_order),
             "pedagogy": kendall(order, class_order("ped")),
             "ontology": kendall(order, class_order("onto")),
             "criticality": kendall(order, class_order("crit"))}
-    report = {"sequence": "randomness",
-              "written_order": order, "baseline_order": BASELINE_ORDER,
+    report = {"sequence": seq,
+              "written_order": order, "baseline_order": baseline_order,
               "agreement_kendall": taus, "rows": rows,
               "sections": per,
               "text_sections": sections,
               "violations": violations,
               "declaration": decl,
+              "aside": aside,
               "grammar": {"R1": "one concept per section", "R2": "debut in walk, never turn",
                           "R3": "the new arrives through the old",
                           "R4": f"a turn within {K_CRITIQUE} sections",
                           "R5": "used again before the next debut"}}
-    out1 = ROOT / "doc" / "reports" / "order_pilot_randomness.json"
+    out1 = ROOT / "doc" / "reports" / f"order_pilot_{seq}.json"
     out1.write_text(json.dumps(report, indent=1), encoding="utf-8", newline="\n")
-    out2 = ENC / "public" / "order-pilot.json"
-    out2.write_text(json.dumps(report, indent=1), encoding="utf-8", newline="\n")
+    outdir = ENC / "public" / "order-pilot"
+    outdir.mkdir(parents=True, exist_ok=True)
+    (outdir / f"{seq}.json").write_text(json.dumps(report, indent=1),
+                                        encoding="utf-8", newline="\n")
+    idx_p = outdir / "index.json"
+    idx = {"sequences": []}
+    if idx_p.exists():
+        idx = json.loads(idx_p.read_text(encoding="utf-8"))
+    entry = {"seq": seq, "concepts": len(order), "clean": not violations,
+             "tau_baseline": taus["baseline"]}
+    idx["sequences"] = [e for e in idx["sequences"] if e["seq"] != seq] + [entry]
+    idx_p.write_text(json.dumps(idx, indent=1), encoding="utf-8", newline="\n")
     print(f"agreement (kendall tau): baseline {taus['baseline']}  ped {taus['pedagogy']}  "
           f"onto {taus['ontology']}  crit {taus['criticality']}")
     print(f"-> {out1}")
-    print(f"-> {out2}")
+    print(f"-> {outdir / (seq + '.json')}")
     return 0
 
 
