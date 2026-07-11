@@ -1,0 +1,52 @@
+{
+ "_doctrine": "THE RULE BOX (Palle: 'a factory making a pearl necklace, artifact as input, footprint as decoration, plus additional parameters we can change'). Every map strategy is the SAME factory with different rules per stage: string (the mission order) -> pearl (footprint becomes plate/room/segment) -> thread (how pearls lie in space) -> opening (how the between is made) -> dress (staffing, palettes, props via map_principal.finish). A recipe names the strategy tool + the knobs to turn. Run: python tools/pearl_factory.py --recipe=<name> [--seq=..] [--seed=..] [--set KNOB=value]",
+ "stages": {
+  "string": "mission beats + voltage from doc/book/baselines/<seq>.json (fixed for all recipes)",
+  "pearl": "the decoration: footprint -> plate (ants) | room+aisle (rooms/antrooms/flock/physarum) | segment width (wanghall) | tight plate beside path (derive)",
+  "thread": "the layout: serpentine bands (rooms) | one axis (wanghall) | max-min scatter (ants/antrooms/physarum) | drift walk (derive) | boids (flock)",
+  "opening": "the between: carved doors (rooms) | continuous floor (wanghall) | wander trails (ants) | A*-over-noise (antrooms) | return-pass shortcuts (derive) | slime trunks (physarum) | gates+L-corridors (flock)",
+  "dress": "map_principal.finish: labwall + register palettes + proximity_lod + wall runs + wall props + supporting cast (benches by register quota)"
+ },
+ "recipes": {
+  "halls": {
+   "tool": "mission_graph.py", "args": ["--mode=halls"],
+   "knobs": {"ACT_DEPTH": "register hall depths {arrival:14, work:18, depth:16}", "AISLE": "3 — inner corridor width"},
+   "note": "three register act-halls; features fill; chapels the only enclosed rooms"
+  },
+  "rooms": {
+   "tool": "mission_graph.py", "args": ["--mode=rooms"],
+   "knobs": {"_room_inner": "8/12/16 by footprint (tight)", "ROOM_BAND_BUDGET": "56 — band width before a turn"},
+   "note": "per-beat sized rooms, serpentine bands with turns"
+  },
+  "wanghall": {
+   "tool": "gen_wanghall.py",
+   "knobs": {"ENTRY_LEN": 4, "EXIT_LEN": 4, "VOLT_LEN": 6, "VOLT_WIDTH": 8, "ENTRY_BASE": 12},
+   "note": "ONE breathing hall; widths pulse wide(14-18)/narrow(10); voltage = width-8 pinches"
+  },
+  "ants": {
+   "tool": "gen_ants.py",
+   "knobs": {"ANTS": 30, "MARGIN": 2, "THRESHOLD": 2, "CANVAS": 64},
+   "note": "footprint plates; ants find the floor; pheromone >= THRESHOLD becomes the plate (2 = only well-trodden paths)"
+  },
+  "antrooms": {
+   "tool": "gen_antrooms.py",
+   "knobs": {"_pending": "worker in flight — perfect close rooms, A*-over-noise openings, reuse discount 0.35"},
+   "note": "perfect but close rooms; ants OPEN the space between with pathfinding"
+  },
+  "derive": {
+   "tool": "gen_derive.py",
+   "knobs": {"_pending": "worker in flight — turn prob, centroid pull, spacing, prune, shortcuts (max 2), tight < 1600 cells"},
+   "note": "the wanderer with the backpack; forward places, the return improves"
+  },
+  "flock": {
+   "tool": "gen_flocking.py",
+   "knobs": {"_pending": "worker in flight — separation/cohesion/alignment weights, steps"},
+   "note": "rooms as boids; separation = honest footprint spacing; sequence-cohesion clusters the walk"
+  },
+  "physarum": {
+   "tool": "gen_physarum.py",
+   "knobs": {"_pending": "worker in flight — agents 120, steps 400, trunk percentile 60, vein percentile 92"},
+   "note": "slime trunks between sealed rooms; corridor width follows flow"
+  }
+ }
+}

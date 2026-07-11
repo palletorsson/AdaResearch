@@ -434,6 +434,14 @@ def main():
     if not seq:
         print(__doc__)
         return 1
+    # the rule box: --set KNOB=value overrides a module constant
+    # (pearl_factory.py — the additional parameters we can change)
+    for a in sys.argv:
+        if a.startswith("--set="):
+            k, _, v = a[6:].partition("=")
+            if k in globals() and not k.startswith("_"):
+                globals()[k] = type(globals()[k])(v)
+                print(f"knob {k} = {globals()[k]}")
     seed = int(arg("seed", "7"))
     name = arg("name", f"MissionAnts_{seq.title().replace('_', '')}")
     return build(seq, name, seed)
