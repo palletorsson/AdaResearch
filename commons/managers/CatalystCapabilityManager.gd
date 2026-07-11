@@ -8,6 +8,12 @@ extends Node
 const STAGES_FILE = "res://commons/maps/soft_stages.json"
 const SAVE_FILE = "user://capability_progression.json"
 
+const FRIEND_POWER_GUARD := preload("res://commons/managers/FriendPowerGuard.gd")
+
+# Launcher friend power (forces lineage) — periodic underfoot-cluster check.
+const LAUNCHER_CHECK_INTERVAL_S := 0.5
+const LAUNCHER_COOLDOWN_S := 3.0
+
 const CAPACITY_NAMES = ["", "Observe", "Touch", "Manipulate", "Construct", "Control", "Embody"]
 
 # Friend powers — the lasting player ability granted the FIRST time a creature
@@ -37,6 +43,10 @@ var _catalyst_modes: Array[String] = []
 var _friend_powers: Dictionary = {}          # power -> mode_id that granted it
 var _current_stage_order: int = 0
 
+# Launcher power runtime state
+var _launcher_check_accum: float = 0.0
+var _launcher_cooldown_left: float = 0.0
+
 # Bracelet state — persists across scenes
 var _bracelet: Node = null
 var _bracelet_activated: bool = false        # True once first catalyst is picked up
@@ -61,6 +71,81 @@ func _ready():
 		_capacity_level, get_capacity_level_name(), _hand_verbs.size(), _catalyst_modes.size(),
 		_bracelet_activated, _bracelet_tracker
 	])
+
+func _process(delta: float) -> void:
+	# Launcher friend power (forces lineage): friends clustered underfoot boost
+	# the player's jump. Lightweight timer — the real work only runs every
+	# LAUNCHER_CHECK_INTERVAL_S and only while catalyst creatures exist at all.
+	if _launcher_cooldown_left > 0.0:
+		_launcher_cooldown_left = maxf(_launcher_cooldown_left - delta, 0.0)
+	_launcher_check_accum += delta
+	if _launcher_check_accum < LAUNCHER_CHECK_INTERVAL_S:
+		return
+	_launcher_check_accum = 0.0
+	if _launcher_cooldown_left > 0.0:
+		return
+	var tree := get_tree()
+	if tree == null or tree.get_nodes_in_group("catalyst_foe").is_empty():
+		return
+	var player := _find_launcher_player()
+	if player == null or not player.is_inside_tree():
+		return
+	var impulse: Vector3 = FRIEND_POWER_GUARD.check_launcher(tree, player.global_position)
+	if impulse == Vector3.ZERO:
+		return
+	if _apply_launch_impulse(impulse):
+		_launcher_cooldown_left = LAUNCHER_COOLDOWN_S
+		print("CatalystCapabilityManager: Launcher — forces friends underfoot boost jump (+%.1f m/s)" % impulse.y)
+
+## Player node used as the position reference for the launcher check.
+func _find_launcher_player() -> Node3D:
+	var tree := get_tree()
+	if tree == null:
+		return null
+	var candidate: Node = tree.get_first_node_in_group("player")
+	if candidate is Node3D:
+		return candidate as Node3D
+	candidate = tree.get_first_node_in_group("player_body")
+	if candidate is Node3D:
+		return candidate as Node3D
+	if tree.current_scene:
+		candidate = tree.current_scene.find_child("XROrigin3D", true, false)
+		if candidate is Node3D:
+			return candidate as Node3D
+	return null
+
+## Apply an upward boost to the actual movable player body.
+## Preferred path: the proven jump_pad route — walk up from the "player_body"
+## group node to its CharacterBody3D (XRToolsPlayerBody in VR, the desktop
+## player root otherwise) and add to velocity, with floor snap briefly off so
+## the body actually leaves the ground. Fallback: XRTools request_jump().
+## Returns true only if an impulse was actually applied.
+func _apply_launch_impulse(impulse: Vector3) -> bool:
+	var tree := get_tree()
+	if tree == null:
+		return false
+	var start: Node = tree.get_first_node_in_group("player_body")
+	if start == null:
+		start = tree.get_first_node_in_group("player")
+	var node: Node = start
+	while node:
+		if node is CharacterBody3D:
+			var body := node as CharacterBody3D
+			body.velocity.y = maxf(body.velocity.y, 0.0) + impulse.y
+			if body.floor_snap_length > 0.0:
+				var prev_snap: float = body.floor_snap_length
+				body.floor_snap_length = 0.0
+				tree.create_timer(0.4).timeout.connect(_restore_floor_snap.bind(body, prev_snap))
+			return true
+		node = node.get_parent()
+	if start and start.has_method("request_jump"):
+		start.call("request_jump")
+		return true
+	return false
+
+func _restore_floor_snap(body: Node, prev_snap: float) -> void:
+	if is_instance_valid(body) and "floor_snap_length" in body:
+		body.set("floor_snap_length", prev_snap)
 
 # ---------------------------------------------------------------------------
 # Public API — Capacity Ladder
@@ -129,6 +214,9 @@ func grant_friend_power(mode_id: String) -> void:
 	friend_power_granted.emit(mode_id, power)
 	capability_unlocked.emit(power)
 	print("CatalystCapabilityManager: Friend power granted — '%s' (from mode '%s')" % [power, mode_id])
+	# HUD moment — full label + description of the newly won power.
+	print("CatalystCapabilityManager: *** NEW FRIEND POWER: %s — %s ***" % [
+		str(def.get("label", power)), str(def.get("description", ""))])
 
 func has_friend_power(power: String) -> bool:
 	return _friend_powers.has(power)

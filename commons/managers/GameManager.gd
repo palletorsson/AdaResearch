@@ -6,6 +6,7 @@ extends Node
 
 const DEATH_CROSS_SCENE: PackedScene = preload("res://commons/primitives/plus/plus.tscn")
 const TESTPLUS_SEQUENCE_INDEX_PATH := "res://commons/maps/sequences/sequence_index.json"
+const FRIEND_POWER_GUARD := preload("res://commons/managers/FriendPowerGuard.gd")
 
 # Game Modes
 enum GameMode {
@@ -330,6 +331,12 @@ func apply_health_damage(amount: float) -> void:
 	var death_fx = get_node_or_null("/root/DeathEffect")
 	if death_fx and death_fx.has_method("is_immune") and death_fx.is_immune():
 		return
+	# Friend power (shield): a primitives-lineage FRIEND near the player can
+	# absorb the hit entirely. Zero-cost no-op when no such friend exists.
+	var shield_player: Node3D = _resolve_player_node()
+	if shield_player and shield_player.is_inside_tree() and FRIEND_POWER_GUARD.try_absorb(get_tree(), shield_player.global_position):
+		print("FriendPower: shield absorbed %.0f damage" % amount)
+		return
 	set_health(player_health - amount)
 	# Health > 0: red flash + teleport to spawn (try again)
 	# Health <= 0: handled by _handle_player_death (full death + game reset)
@@ -537,13 +544,12 @@ func _resolve_player_node() -> Node3D:
 		return current_player
 
 	var tree: SceneTree = get_tree()
-	if tree == null or tree.current_scene == null:
+	if tree == null:
 		return null
 
-	var scene_root: Node = tree.current_scene
-	var candidate: Node = null
-
-	candidate = tree.get_first_node_in_group("player")
+	# Group lookups first — they work even when current_scene is null
+	# (headless --script runs, mid-transition frames).
+	var candidate: Node = tree.get_first_node_in_group("player")
 	if candidate is Node3D:
 		current_player = candidate as Node3D
 		return current_player
@@ -552,6 +558,10 @@ func _resolve_player_node() -> Node3D:
 	if candidate is Node3D:
 		current_player = candidate as Node3D
 		return current_player
+
+	if tree.current_scene == null:
+		return null
+	var scene_root: Node = tree.current_scene
 
 	var names: Array[String] = ["XROrigin3D", "DesktopPlayer", "Player", "PlayerBody"]
 	for name in names:

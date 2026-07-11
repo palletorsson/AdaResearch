@@ -66,6 +66,14 @@ var heat_level: float = 0.0  # Fire
 var oxygen_level: float = 100.0  # Vacuum
 var pulse_timer: float = 0.0  # Electric
 
+# Chromatic NEUTRALIZER (catalyst friend power): while a live FRIEND foe of
+# the "chromatic" lineage stands inside this zone, per-tick damage is muted
+# and the zone's light/particles dim. instant_kill zones (h:death) are NEVER
+# muted — death is not negotiable. Zero-cost when no such friend exists.
+const NEUTRALIZE_SCAN_INTERVAL := 0.25
+var _neutralized: bool = false
+var _neutralize_scan_timer: float = 0.0
+
 # Visual nodes (created dynamically)
 var zone_mesh: MeshInstance3D
 var warning_label: Label3D
@@ -78,6 +86,7 @@ signal damage_dealt(amount: float, danger_type: Type)
 func _ready() -> void:
 	print("[DangerZone] _ready() called - type: %s, position: %s" % [Type.keys()[danger_type], global_position])
 	config = TYPE_CONFIG.get(danger_type, TYPE_CONFIG[Type.GENERIC])
+	add_to_group("danger_zone")  # world-power systems (neutralizer, bridger tendril) find zones via this group
 
 	# Fire burns fast — ~1 second to kill from full health
 	if danger_type == Type.FIRE:
@@ -391,6 +400,13 @@ func _setup_audio() -> void:
 	# TODO: Load type-specific ambient sounds
 
 func _process(delta: float) -> void:
+	# Neutralizer power: rescan for a chromatic friend on a slow cadence.
+	# One group scan per interval — cached in _neutralized, never per body.
+	_neutralize_scan_timer += delta
+	if _neutralize_scan_timer >= NEUTRALIZE_SCAN_INTERVAL:
+		_neutralize_scan_timer = 0.0
+		_set_neutralized(_scan_for_chroma_friend())
+
 	# Animate visuals (always, even when player not inside)
 	_animate_visuals(delta)
 
@@ -416,21 +432,23 @@ func _process(delta: float) -> void:
 
 func _animate_visuals(delta: float) -> void:
 	var t := Time.get_ticks_msec() / 1000.0
+	# Neutralized zones glow faint — the mute is visible, restored on exit
+	var mute: float = 0.15 if _neutralized else 1.0
 
 	match danger_type:
 		Type.FIRE:
 			# Pulsing fire glow
 			if _zone_light:
-				_zone_light.light_energy = 1.5 + sin(t * 6.0) * 0.5
+				_zone_light.light_energy = (1.5 + sin(t * 6.0) * 0.5) * mute
 			if _zone_mat:
-				_zone_mat.emission_energy_multiplier = 1.5 + sin(t * 4.0) * 0.5
+				_zone_mat.emission_energy_multiplier = (1.5 + sin(t * 4.0) * 0.5) * mute
 
 		Type.ELECTRIC:
 			# Rapid flickering tesla sphere
 			if _zone_light:
-				_zone_light.light_energy = 1.0 + randf() * 3.0
+				_zone_light.light_energy = (1.0 + randf() * 3.0) * mute
 			if _zone_mat:
-				_zone_mat.emission_energy_multiplier = 2.0 + randf() * 2.0
+				_zone_mat.emission_energy_multiplier = (2.0 + randf() * 2.0) * mute
 				_zone_mat.albedo_color.a = 0.1 + randf() * 0.15
 
 		Type.VACUUM:
@@ -439,12 +457,12 @@ func _animate_visuals(delta: float) -> void:
 				var pulse := 1.0 + sin(t * 1.5) * 0.1
 				zone_mesh.scale = Vector3(pulse, pulse, pulse)
 			if _zone_light:
-				_zone_light.light_energy = 0.8 + sin(t * 1.5) * 0.3
+				_zone_light.light_energy = (0.8 + sin(t * 1.5) * 0.3) * mute
 
 		Type.TOXIC:
 			# Gentle light pulse
 			if _zone_light:
-				_zone_light.light_energy = 0.6 + sin(t * 2.0) * 0.2
+				_zone_light.light_energy = (0.6 + sin(t * 2.0) * 0.2) * mute
 
 
 func _process_generic(delta: float) -> void:
@@ -531,6 +549,12 @@ func _is_player(body: Node3D) -> bool:
 	return false
 
 func _deal_damage(amount: float) -> void:
+	# NEUTRALIZER: a chromatic friend inside the zone mutes per-tick damage.
+	# instant_kill never routes through here (see _instant_kill) — death is
+	# not negotiable.
+	if _neutralized:
+		return
+
 	var game_manager = get_node_or_null("/root/GameManager")
 	if game_manager and game_manager.has_method("apply_health_damage"):
 		game_manager.apply_health_damage(amount)
@@ -539,9 +563,77 @@ func _deal_damage(amount: float) -> void:
 	damage_dealt.emit(amount, danger_type)
 
 func _instant_kill() -> void:
+	# Deliberately NOT gated on _neutralized — h:death cannot be muted.
 	var game_manager = get_node_or_null("/root/GameManager")
 	if game_manager and game_manager.has_method("set_health"):
 		game_manager.set_health(0.0)
+
+# ============================================================================
+# CHROMATIC NEUTRALIZER (catalyst friend power)
+# ============================================================================
+
+func _scan_for_chroma_friend() -> bool:
+	# True when a live FRIEND catalyst_foe of the chromatic lineage stands
+	# inside this zone. Cheap no-op when the group is empty.
+	var foes = get_tree().get_nodes_in_group("catalyst_foe")
+	if foes.is_empty():
+		return false
+
+	var center: Vector3 = global_position
+	var col: CollisionShape3D = _find_zone_shape()
+	if col:
+		center = col.global_position
+	var radius: float = _effective_radius()
+
+	for foe in foes:
+		if not is_instance_valid(foe) or not (foe is Node3D):
+			continue
+		if not ("_personality" in foe) or String(foe.get("_personality")) != "friend":
+			continue
+		if not ("_locked_mode_id" in foe) or String(foe.get("_locked_mode_id")) != "chromatic":
+			continue
+		if (foe as Node3D).global_position.distance_to(center) <= radius:
+			return true
+	return false
+
+func _set_neutralized(muted: bool) -> void:
+	if muted == _neutralized:
+		return
+	_neutralized = muted
+	# Cheap visual: particles off while muted; animated lights dim via the
+	# mute factor in _animate_visuals. Non-animated types dim directly here.
+	if _zone_particles and is_instance_valid(_zone_particles):
+		_zone_particles.emitting = not muted
+	if _zone_light and is_instance_valid(_zone_light):
+		match danger_type:
+			Type.GENERIC, Type.RADIATION:
+				_zone_light.light_energy = 0.2 if muted else 1.5
+			_:
+				pass  # handled per-frame in _animate_visuals
+
+func _find_zone_shape() -> CollisionShape3D:
+	var col = get_node_or_null("CollisionShape3D")
+	if col and col is CollisionShape3D:
+		return col
+	for child in get_children():
+		if child is CollisionShape3D:
+			return child
+	return null
+
+func _effective_radius() -> float:
+	# Derive the zone's reach from its collision shape; safe fallback of 1m.
+	var col: CollisionShape3D = _find_zone_shape()
+	if col and col.shape:
+		var shape: Shape3D = col.shape
+		if shape is BoxShape3D:
+			var s: Vector3 = (shape as BoxShape3D).size
+			return max(s.x, max(s.y, s.z)) * 0.5
+		if shape is SphereShape3D:
+			return (shape as SphereShape3D).radius
+		if shape is CylinderShape3D:
+			var cyl: CylinderShape3D = shape as CylinderShape3D
+			return max(cyl.radius, cyl.height * 0.5)
+	return 1.0
 
 func _flash_screen(_color: Color) -> void:
 	# TODO: Add screen flash effect

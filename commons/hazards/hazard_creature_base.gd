@@ -60,6 +60,13 @@ var _orbit_player: bool = false
 var _follow_player: bool = false
 var _approach_speed_factor: float = 1.0
 
+# ── Decoy (chaos-lineage friend power) ──────────────────────────────────
+# A FOE that would chase the player first looks for a chaos-lineage FRIEND
+# within its detection radius and chases THAT node instead. Re-evaluated at
+# most every 0.5s to stay cheap; falls back to the player when none in range.
+var _decoy_target: Node3D = null
+var _decoy_retarget_timer: float = 0.0
+
 # ── State ────────────────────────────────────────────────────────────────
 
 var _health: float = 0.0
@@ -99,6 +106,17 @@ func _physics_process(delta: float) -> void:
 
 	if not is_instance_valid(_player_node):
 		_find_player()
+
+	# Timed calmer slow restore (set by waveform-lineage friends via metas).
+	# Lives here so the slow can never become permanent even if the friend
+	# that applied it is freed mid-effect.
+	if has_meta("calmer_slow_until"):
+		var slow_until: float = float(get_meta("calmer_slow_until"))
+		if float(Time.get_ticks_msec()) * 0.001 >= slow_until:
+			if has_meta("calmer_base_speed"):
+				chase_speed = float(get_meta("calmer_base_speed"))
+				remove_meta("calmer_base_speed")
+			remove_meta("calmer_slow_until")
 
 	match _state:
 		BaseState.IDLE:
@@ -225,6 +243,18 @@ func _process_chase(delta: float) -> void:
 	var to_player: Vector3 = _player_node.global_position - global_position
 	to_player.y = 0.0
 
+	# DECOY (chaos-lineage friend power): a chasing FOE re-evaluates its
+	# target at most every 0.5s — a chaos-lineage FRIEND within detection
+	# radius draws the chase away from the player.
+	if _personality == "foe" and not _flee_from_player \
+			and not _orbit_player and not _follow_player:
+		_decoy_retarget_timer -= delta
+		if _decoy_retarget_timer <= 0.0:
+			_decoy_retarget_timer = 0.5
+			_decoy_target = _find_decoy_target()
+	else:
+		_decoy_target = null
+
 	# Personality-aware movement
 	if _flee_from_player:
 		# Wary: flee away from player
@@ -272,9 +302,15 @@ func _process_chase(delta: float) -> void:
 			velocity.z = velocity.z * 0.85
 			_face_direction(to_player.normalized(), delta * 1.0)
 	else:
-		# Foe: standard aggressive chase
-		if to_player.length() > 0.1:
-			var move_dir: Vector3 = to_player.normalized()
+		# Foe: standard aggressive chase — a live decoy overrides the player
+		# as the chase target (same movement code, different target).
+		var chase_pos: Vector3 = _player_node.global_position
+		if is_instance_valid(_decoy_target):
+			chase_pos = _decoy_target.global_position
+		var to_target: Vector3 = chase_pos - global_position
+		to_target.y = 0.0
+		if to_target.length() > 0.1:
+			var move_dir: Vector3 = to_target.normalized()
 			velocity.x = move_dir.x * chase_speed
 			velocity.z = move_dir.z * chase_speed
 			_face_direction(move_dir, delta * 5.0)
@@ -318,12 +354,17 @@ func _on_state_changed(_new_state: BaseState) -> void:
 # ── Player Detection ────────────────────────────────────────────────────
 
 func _find_player() -> void:
+	# Group lookup first — it works even when current_scene is null
+	# (headless --script runs, mid-transition frames).
+	var by_group: Node = get_tree().get_first_node_in_group("player")
+	if by_group is Node3D:
+		_player_node = by_group
+		return
 	var scene: Node = get_tree().current_scene
 	if not scene:
 		_player_node = null
 		return
 	for candidate in [
-		get_tree().get_first_node_in_group("player"),
 		scene.find_child("XROrigin3D", true, false),
 		scene.find_child("Player", true, false),
 	]:
@@ -331,6 +372,27 @@ func _find_player() -> void:
 			_player_node = candidate
 			return
 	_player_node = null
+
+
+## Nearest chaos-lineage FRIEND within detection radius, or null.
+## Fully defensive — only trusts nodes exposing _personality/_locked_mode_id.
+func _find_decoy_target() -> Node3D:
+	var best: Node3D = null
+	var best_d: float = detection_radius
+	for n in get_tree().get_nodes_in_group("catalyst_foe"):
+		if n == self or not (n is Node3D):
+			continue
+		if not ("_personality" in n) or not ("_locked_mode_id" in n):
+			continue
+		if str(n.get("_personality")) != "friend":
+			continue
+		if str(n.get("_locked_mode_id")) != "chaos":
+			continue
+		var d: float = global_position.distance_to((n as Node3D).global_position)
+		if d <= best_d:
+			best_d = d
+			best = n
+	return best
 
 
 func _get_player_distance() -> float:
