@@ -7,7 +7,17 @@
 > via `tools/book_log.py`) — web face at **localhost:3003/book-log** (filterable timeline
 > + the rulings panel).
 
-**Last updated:** 2026-07-04 — R-009 applied: fractals walk hand-cut (+mandelbrot_dive,
+**Last updated:** 2026-07-12 — **R-029: the Em-Square interlude.** The book's first
+interlude, placed after Part I (Order) in `manuscript_frame.json` (`interludes[]`), plus a
+computed **The Principal** beat per chapter — each names its hero and how the em-square seats
+it (self/cube/frame/plinth/field), resolved principals → overrides → kin → measured-size
+(Palle's rule 2: base ≥ 6 m = field). The interlude's checkable claim holds in the data:
+field seating is absent in Order/Dynamics, arrives with Entropy (Noise 10 m, CA 7 m) and
+returns in Emergence (mushroom 20 m, slime 50 m); Edge/Synthesis have none — so "field arrives
+with entropy and returns in Emergence," not a clean monotonic loosening. Authored `principal`
+field in any overlay overrides the computed beat. Rebuild: `python tools/build_manuscript.py`.
+
+**Earlier:** 2026-07-04 — R-009 applied: fractals walk hand-cut (+mandelbrot_dive,
 +box_counting_dimension; −fractal_scene, −recursive_tree_2 [ghost's cuts, pending friction]);
 Hilbert blank declared (renders in chapter + as EMPTY PLINTH in the staging brief); field
 journal carries its first real entries. R-010: blanks have a lifecycle (declared → candidates

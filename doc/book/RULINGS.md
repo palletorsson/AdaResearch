@@ -662,4 +662,31 @@ book if wanted. This is R-023 (artifact baseline) and R-020 (the at-depth reserv
 
 ---
 
-<!-- Next: R-029 — write chapter 2 (transformation) key-maps + synthesis holding voice; per-chapter as the engine turns -->
+## R-029 · 2026-07-12 · The principal as a chapter (the measure, made a room)
+
+**Palle:** "can we write principal as stand alone chapter to the book and into other chapter
+sequences?" — ruled this session (AskUserQuestion): **interlude after Part I (Order)** + **a
+Principal beat per chapter**.
+
+**Ruling:** The principal-artifact doctrine — the em-square (one canonical scene → many
+instances; the type is the spatial truth), the wrapper vocabulary self/cube/frame/plinth/field,
+and `field` left unhoused on purpose (the sieve's dark spot) — is the material body of the
+already-declared motif **the measure**. So it earns a chapter, not a new thread.
+- HOME: the book's FIRST interlude, placed after Part I (Order), where the grid and line first
+  establish measurement. New structural element: `manuscript_frame.json` gains `interludes`
+  (each `{after, title, epigraph, body}`), rendered by build_manuscript.py after its part.
+- WEAVE: every sequence chapter gets a **The Principal** beat — names its hero (tutorial
+  `hero_name`) as the chapter's principal and how the em-square seats it, resolved from
+  `commons/data/principal_artifacts.json` (principals → artifact_overrides → kin members →
+  measured-bed fallback). Computed by the builder; an authored `principal` field in the overlay
+  overrides the prose (unruled per-chapter wording is the ghost's, marked by absence of overlay).
+- The interlude's CHECKABLE claim, which the per-chapter beats bear out: seating loosens as
+  entropy rises — Order's principals sit on plinths and frames; by the Edge and Emergence more
+  become FIELD, environments you enter rather than objects you regard. The measure loosens its
+  grip as λ rises; that loosening is the book.
+Knob: promote the interlude to a full front-matter method chapter, or add interludes between
+other parts, if this one reads well.
+
+---
+
+<!-- Next: R-030 — write chapter 2 (transformation) key-maps + synthesis holding voice; per-chapter as the engine turns -->

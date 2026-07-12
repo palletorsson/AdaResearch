@@ -71,6 +71,107 @@ def clean(node):
     return node
 
 
+# --- The Principal (R-029) — the em-square doctrine, woven per chapter -------
+# Each chapter names its hero as its principal and how the em-square seats it.
+# Seating is resolved from the same declarations the map builders use, so book
+# and game stay in agreement: principals → per-artifact overrides → kin family
+# membership → the measured bed every unhoused thing falls to.
+PRINCIPALS = load_json(os.path.join(REPO, "commons", "data", "principal_artifacts.json")) or {}
+_SIZES_RAW = load_json(os.path.join(REPO, "commons", "data", "artifact_sizes.json")) or {}
+SIZES = _SIZES_RAW.get("sizes", _SIZES_RAW)
+
+
+def seat_from_size(hero: str) -> str | None:
+    """Derive seating from the measured base — the map builder's own --advise rule
+    (Palle's rule 2: base ≥ 6 m is the environment, housing would kill it). Used
+    only for heroes no principal/override/kin declares. None if unmeasured."""
+    s = SIZES.get(hero) if isinstance(SIZES, dict) else None
+    if not isinstance(s, dict) or s.get("base_m") is None:
+        return None
+    base = float(s["base_m"])
+    n = hero.lower()
+    if base >= 6.0:
+        return "field"
+    if any(k in n for k in ("_plate", "_screen", "_board", "_panel")):
+        return "frame"
+    if base == 0.0:  # live / no static mesh — an act, not an object; brings its own ground
+        return "self"
+    if any(k in n for k in ("workbench", "_bench", "_machine", "kiosk", "console", "editor")):
+        return "self"
+    if base >= 2.5:
+        return "self"
+    if base >= 1.0:
+        return "cube"
+    return "plinth"
+
+SEAT_GLOSS = {
+    "self": "brings its own base — no plinth, no bed",
+    "cube": "the one-metre sim-cell made visible — the grid's unit turned into housing",
+    "frame": "flat work, framed and wall- or hover-mounted",
+    "plinth": "small, raised to the eye on a dark column",
+    "podium": "a broad platform — elevation, not housing",
+    "pedestal": "a broad platform — elevation, not housing",
+    "field": "the artifact IS the environment — to house it would kill it",
+    "table_display_1m": "a table display for flat, vertical work",
+    "table_display_2m": "a wide table display for flat, vertical work",
+    "bed": "the grid's default floor, where a thing rests until it is measured or declared",
+}
+
+
+def resolve_seating(hero: str) -> str:
+    """How the em-square seats this artifact: the wrapper family, resolved from
+    the declarations. Falls back to 'bed' — the size-guessed floor."""
+    if not hero:
+        return "bed"
+    pr = PRINCIPALS.get("principals", {})
+    if hero in pr and isinstance(pr[hero], dict):
+        fam = pr[hero].get("wrap_family") or pr[hero].get("integration") or "bed"
+        return "bed" if fam == "wrap" else fam
+    ov = PRINCIPALS.get("artifact_overrides", {})
+    if isinstance(ov.get(hero), str):
+        return ov[hero]
+    for fv in PRINCIPALS.get("kin", {}).values():
+        if isinstance(fv, dict) and isinstance(fv.get("members"), list) and hero in fv["members"]:
+            return fv.get("wrap_family") or fv.get("integration") or fv.get("wrap") or "self"
+    return seat_from_size(hero) or "bed"
+
+
+def render_interlude(il: dict, lines: list) -> None:
+    """An interlude between parts — a reflection that is not a sequence chapter."""
+    lines += [f"# Interlude: {il['title']}", ""]
+    if il.get("epigraph"):
+        lines += [f"*{il['epigraph']}*", ""]
+    if il.get("body"):
+        lines += [il["body"], ""]
+
+
+def render_principal(t: dict, hero: str, essence: str, lines: list, stats: dict) -> None:
+    """The Principal beat: the chapter's hero read through the em-square. Authored
+    prose in the overlay's `principal` field wins; else a computed sentence."""
+    authored = t.get("principal")
+    seat = resolve_seating(hero)
+    prose = ""
+    if isinstance(authored, str):
+        prose = authored.strip()
+    elif isinstance(authored, dict) and authored.get("prose"):
+        prose = str(authored["prose"]).strip()
+    if not prose and not hero:
+        return
+    lines += ["### The Principal", ""]
+    if prose:
+        lines += [prose, ""]
+    else:
+        nm = hero.replace("_", " ")
+        seatword = seat if seat != "bed" else "the measured bed"
+        ess = f" — *{essence}* —" if essence else " —"
+        lines.append(
+            f"This chapter's principal is **{nm}**{ess} one canonical scene, inherited by every "
+            f"instance; the type is the spatial truth. It seats **{seatword}**: "
+            f"{SEAT_GLOSS.get(seat, SEAT_GLOSS['bed'])}.")
+        lines.append("")
+    stats["principal"] = {"hero": hero, "seating": seat}
+
+
 def art_prose(a: dict) -> str:
     """Authored prose wins; else essence + description as the fallback voice."""
     if a.get("prose"):
@@ -106,6 +207,19 @@ def render_chapter(t: dict, number: int, lines: list) -> dict:
     lines.append("")
     stats = {"seq": t["seq"], "name": name, "number": number,
              "authored": bool(t.get("authored")), "truth": t.get("truth", "")}
+    # The Principal beat (R-029): hero token from the question page's capture path
+    # (the reliable lookup token; hero_name is humanized), essence from the primitive.
+    hero = ""
+    hero_essence = ""
+    for _p in t.get("pages", []):
+        if _p.get("kind") == "question" and not hero:
+            m = re.search(r"/captures/([^/]+)/", _p.get("hero") or "")
+            hero = (m.group(1) if m else "") or _p.get("hero_name") or ""
+        if _p.get("kind") == "primitive" and isinstance(_p.get("artifact"), dict):
+            if not hero_essence:
+                hero_essence = _p["artifact"].get("essence", "") or ""
+            if not hero:
+                hero = _p["artifact"].get("name", "") or ""
     walk_count = 0
     for p in t.get("pages", []):
         kind = p["kind"]
@@ -119,6 +233,7 @@ def render_chapter(t: dict, number: int, lines: list) -> dict:
             if p.get("text"):
                 lines.append(p["text"])
                 lines.append("")
+            render_principal(t, hero, hero_essence, lines, stats)
         elif kind == "primitive":
             lines.append("### The Primitive")
             lines.append("")
@@ -317,6 +432,9 @@ def main() -> int:
                 lines.append(f"{num}. {nm}{tr}{mark}")
             else:
                 lines.append(f"{num}. {seq} *(not yet built)*")
+        for il in frame.get("interludes", []):
+            if il.get("after") == part["title"]:
+                lines.append(f"— *Interlude: {il['title']}*")
         lines.append("")
     lines += ["*† skeleton chapter — assembled from truth sources, awaiting its writing pass.*", ""]
 
@@ -333,6 +451,11 @@ def main() -> int:
             if not t:
                 continue
             part_toc["chapters"].append(render_chapter(t, num, lines))
+        # Interludes declared after this part (R-029): the em-square, and future kin.
+        for il in frame.get("interludes", []):
+            if il.get("after") == part["title"]:
+                render_interlude(il, lines)
+                part_toc["chapters"].append({"interlude": il["title"]})
         toc_entries.append(part_toc)
 
     md = "\n".join(lines)
