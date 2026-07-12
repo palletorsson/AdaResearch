@@ -1526,6 +1526,35 @@
         "measured_footprint_cells": 4,
         "footprint_source": "designed"
       }
+    },
+    "seed_world": {
+      "category": "proceduralgeneration",
+      "complexity": "intermediate",
+      "description": "The procedural-generation seam. An open world promises infinite variety; the truth is a finite formula fed one number. Nothing is stored - not the mountains, not the coastline - only the seed and the recipe. Walk away and the terrain is freed from memory; walk back and it rebuilds bit-for-bit from the same seed. Two visits to one seed, drawn identical, because they are not two worlds but one number run twice.",
+      "dev_themes": [
+        "digital_bias",
+        "seam"
+      ],
+      "include_in_map_data": true,
+      "interaction": "ambient",
+      "lookup_name": "seed_world",
+      "map_ready": true,
+      "map_sequences": [
+        "proceduralgeneration"
+      ],
+      "name": "Seed World",
+      "qfep_connection": "A station in the bias landscape (doc/SEAM_PER_SEQUENCE.md); the digital-bias seam for proceduralgeneration. Bias is conserved; show the seam.",
+      "scene": "res://algorithms/proceduralgeneration/seed_world/seed_world.tscn",
+      "sequence": "proceduralgeneration",
+      "tags": [
+        "procgen",
+        "seed",
+        "determinism",
+        "compression",
+        "on_demand",
+        "seam",
+        "digital_bias"
+      ]
     }
   }
 }

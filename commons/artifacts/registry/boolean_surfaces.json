@@ -178,6 +178,35 @@
 				],
 				"size_group": "environment"
 			}
+		},
+		"coincident_face": {
+			"category": "boolean_surfaces",
+			"complexity": "intermediate",
+			"description": "The boolean-surfaces seam. CSG promises exact cuts; subtract one solid from another and the boundary is a clean surface. But when the cut plane lands on a coincident face, the two surfaces claim the same depth and the float grid cannot say which is in front - so the renderer flickers, awarding each pixel to whichever number rounded higher this frame. The clean boolean is exact everywhere except the one place you asked it to be.",
+			"dev_themes": [
+				"digital_bias",
+				"seam"
+			],
+			"include_in_map_data": true,
+			"interaction": "ambient",
+			"lookup_name": "coincident_face",
+			"map_ready": true,
+			"map_sequences": [
+				"boolean_surfaces"
+			],
+			"name": "Coincident Face",
+			"qfep_connection": "A station in the bias landscape (doc/SEAM_PER_SEQUENCE.md); the digital-bias seam for boolean_surfaces. Bias is conserved; show the seam.",
+			"scene": "res://algorithms/booleansurfaces/coincident_face/coincident_face.tscn",
+			"sequence": "boolean_surfaces",
+			"tags": [
+				"boolean",
+				"csg",
+				"z_fighting",
+				"coincident",
+				"float_precision",
+				"seam",
+				"digital_bias"
+			]
 		}
 	}
 }

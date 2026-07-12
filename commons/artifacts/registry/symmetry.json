@@ -1,0 +1,36 @@
+{
+ "version": "1.0",
+ "format": "lab_artifacts",
+ "description": "Artifacts.",
+ "artifacts": {
+  "wallpaper_cage": {
+   "category": "symmetry",
+   "complexity": "intermediate",
+   "description": "The symmetry seam. Rotation is a continuous dial - any real angle turns the circle (SO(2), a smooth infinity of symmetries). But a periodic tiling admits only 1, 2, 3, 4, 6-fold rotation - the crystallographic restriction. Five-fold never closes. Amber: the continuous dial. Blue: the five allowed orders. Red: the forbidden ones. From this cage falls a finite catalogue - exactly 17 wallpaper groups, the complete list of ways a pattern can repeat. The continuum walks in, a countable law walks out.",
+   "dev_themes": [
+    "digital_bias",
+    "seam"
+   ],
+   "include_in_map_data": true,
+   "interaction": "ambient",
+   "lookup_name": "wallpaper_cage",
+   "map_ready": true,
+   "map_sequences": [
+    "symmetry"
+   ],
+   "name": "Wallpaper Cage",
+   "qfep_connection": "A station in the bias landscape (doc/SEAM_PER_SEQUENCE.md); the digital-bias seam for symmetry. Bias is conserved; show the seam.",
+   "scene": "res://algorithms/symmetry/wallpaper_cage/wallpaper_cage.tscn",
+   "sequence": "symmetry",
+   "tags": [
+    "symmetry",
+    "wallpaper_groups",
+    "crystallographic",
+    "rotation",
+    "lattice",
+    "seam",
+    "digital_bias"
+   ]
+  }
+ }
+}
