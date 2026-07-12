@@ -1,489 +1,518 @@
 {
-	"artifacts": {
-		"catalyst_sustain_demo": {
-			"name": "Catalyst Sustain Demo",
-			"lookup_name": "catalyst_sustain_demo",
-			"description": "Demonstrates the catalyst bracelet's sustain affordance — hold a state while time runs. A glowing torus floats above a pedestal; a trail of after-images shows the integral of held-position over time. First place the player meets 'hold this while time passes.'",
-			"scene": "res://algorithms/change/catalyst_sustain_demo.tscn",
-			"category": "change",
-			"sequence": "change",
-			"artifact_type": "change",
-			"qfep_term": "F",
-			"capacity": "SUSTAIN over time",
-			"dev_themes": [
-				"change",
-				"sieve_2026_05_13"
-			],
-			"dev_category": "change",
-			"complexity": "intermediate",
-			"tags": [
-				"interactive",
-				"catalyst_affordance",
-				"sustain",
-				"integration"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"change"
-			],
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			}
-		},
-		"slope_tangent_demo": {
-			"name": "Slope Tangent Demo",
-			"lookup_name": "slope_tangent_demo",
-			"description": "A sine curve with a moving point that drags its tangent line. Where the curve is steep, the tangent tilts; at zero crossings, it flattens. The first map showing rate as a thing alongside the thing — derivative as instantaneous slope.",
-			"scene": "res://algorithms/change/slope_tangent_demo.tscn",
-			"category": "change",
-			"sequence": "change",
-			"artifact_type": "change",
-			"qfep_term": "F",
-			"capacity": "SEE the rate of change",
-			"dev_themes": [
-				"change",
-				"sieve_2026_05_13"
-			],
-			"dev_category": "change",
-			"complexity": "intermediate",
-			"tags": [
-				"derivative",
-				"tangent",
-				"rate_of_change",
-				"calculus"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"change"
-			],
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			}
-		},
-		"integral_area": {
-			"name": "Integral Area",
-			"lookup_name": "integral_area",
-			"description": "Area under a curve as accumulation, animated. A sweep marker progresses left to right; vertical strips light up as they enter the swept region. The definite integral made visible: the headline accumulation artifact for the change sequence.",
-			"scene": "res://algorithms/change/integral_area.tscn",
-			"category": "change",
-			"sequence": "change",
-			"artifact_type": "change",
-			"qfep_term": "F",
-			"capacity": "ACCUMULATE under the curve",
-			"dev_themes": [
-				"change",
-				"sieve_2026_05_13"
-			],
-			"dev_category": "change",
-			"complexity": "intermediate",
-			"tags": [
-				"integral",
-				"area_under_curve",
-				"accumulation",
-				"calculus"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"change"
-			],
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			}
-		},
-		"derivative_pair": {
-			"name": "Derivative Pair",
-			"lookup_name": "derivative_pair",
-			"description": "Two stacked curves with a shared vertical sweep line. f on top, f' below. Shows the derivative as a function in its own right.",
-			"scene": "res://algorithms/change/derivative_pair.tscn",
-			"category": "change",
-			"sequence": "change",
-			"artifact_type": "change",
-			"qfep_term": "F",
-			"capacity": "PAIR function and rate",
-			"dev_themes": [
-				"change",
-				"sieve_2026_05_13"
-			],
-			"dev_category": "change",
-			"complexity": "intermediate",
-			"tags": [
-				"derivative",
-				"function",
-				"calculus"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"change"
-			],
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			}
-		},
-		"velocity_arrow": {
-			"name": "Velocity Arrow",
-			"lookup_name": "velocity_arrow",
-			"description": "A puck moves around a closed track with an arrow riding on it. Length = speed, direction = motion. Velocity as the visible derivative of position.",
-			"scene": "res://algorithms/change/velocity_arrow.tscn",
-			"category": "change",
-			"sequence": "change",
-			"artifact_type": "change",
-			"qfep_term": "F",
-			"capacity": "SEE motion as derivative",
-			"dev_themes": [
-				"change",
-				"sieve_2026_05_13"
-			],
-			"dev_category": "change",
-			"complexity": "intermediate",
-			"tags": [
-				"velocity",
-				"tangent",
-				"kinematics"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"change"
-			],
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			}
-		},
-		"partial_derivative_terrain": {
-			"name": "Partial Derivative Terrain",
-			"lookup_name": "partial_derivative_terrain",
-			"description": "A wavy terrain. Two arrows ride a moving sample point, one for partial-x, one for partial-y. First map showing two-axis differentiation.",
-			"scene": "res://algorithms/change/partial_derivative_terrain.tscn",
-			"category": "change",
-			"sequence": "change",
-			"artifact_type": "change",
-			"qfep_term": "F",
-			"capacity": "SEE partials in 3D",
-			"dev_themes": [
-				"change",
-				"sieve_2026_05_13"
-			],
-			"dev_category": "change",
-			"complexity": "intermediate",
-			"tags": [
-				"partial_derivative",
-				"gradient",
-				"calculus_3d"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"change"
-			],
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			}
-		},
-		"riemann_pump": {
-			"name": "Riemann Pump",
-			"lookup_name": "riemann_pump",
-			"description": "Three side-by-side strip displays of the same curve, accumulated via left, right, and midpoint sums. The strip count pumps up and down, showing convergence and bias.",
-			"scene": "res://algorithms/change/riemann_pump.tscn",
-			"category": "change",
-			"sequence": "change",
-			"artifact_type": "change",
-			"qfep_term": "F",
-			"capacity": "PUMP strips to integrate",
-			"dev_themes": [
-				"change",
-				"sieve_2026_05_13"
-			],
-			"dev_category": "change",
-			"complexity": "intermediate",
-			"tags": [
-				"riemann_sum",
-				"integration",
-				"accumulation"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"change"
-			],
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			}
-		},
-		"vector_field_grid": {
-			"name": "Vector Field Grid",
-			"lookup_name": "vector_field_grid",
-			"description": "Regular grid of arrows over a plane, each pointing along a stream function flow direction. Arrow length and color reflect magnitude.",
-			"scene": "res://algorithms/change/vector_field_grid.tscn",
-			"category": "change",
-			"sequence": "change",
-			"artifact_type": "change",
-			"qfep_term": "F",
-			"capacity": "FIELD as arrows",
-			"dev_themes": [
-				"change",
-				"sieve_2026_05_13"
-			],
-			"dev_category": "change",
-			"complexity": "intermediate",
-			"tags": [
-				"vector_field",
-				"stream_function",
-				"flow"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"change"
-			],
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			}
-		},
-		"particle_flow_swarm": {
-			"name": "Particle Flow Swarm",
-			"lookup_name": "particle_flow_swarm",
-			"description": "Many small particles ride the same vector field shown in vector_field_grid. Pairs with the grid to demonstrate field effect on bodies.",
-			"scene": "res://algorithms/change/particle_flow_swarm.tscn",
-			"category": "change",
-			"sequence": "change",
-			"artifact_type": "change",
-			"qfep_term": "F",
-			"capacity": "RIDE the field",
-			"dev_themes": [
-				"change",
-				"sieve_2026_05_13"
-			],
-			"dev_category": "change",
-			"complexity": "intermediate",
-			"tags": [
-				"particles",
-				"flow",
-				"vector_field"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"change"
-			],
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			}
-		},
-		"ftc_bridge": {
-			"name": "FTC Bridge",
-			"lookup_name": "ftc_bridge",
-			"description": "An arched bridge labeled with the Fundamental Theorem of Calculus. A pulse runs from left pillar (a) to right pillar (b). The change-sequence capstone.",
-			"scene": "res://algorithms/change/ftc_bridge.tscn",
-			"category": "change",
-			"sequence": "change",
-			"artifact_type": "change",
-			"qfep_term": "F",
-			"capacity": "BRIDGE derivative and integral",
-			"dev_themes": [
-				"change",
-				"sieve_2026_05_13"
-			],
-			"dev_category": "change",
-			"complexity": "intermediate",
-			"tags": [
-				"fundamental_theorem",
-				"calculus_capstone",
-				"integration"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"change"
-			],
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			}
-		},
-		"riemann_sum_workbench": {
-			"name": "Riemann Sum Workbench",
-			"lookup_name": "riemann_sum_workbench",
-			"description": "An interactive workbench for the midpoint Riemann sum. One slider drives N (rectangle count) through six detents [4, 8, 16, 32, 64, 128]; N translucent blue rectangles regenerate under the curve f(x) = ½ + 0.4·sin(2x) + 0.15·cos(5x) on [0, 5]; a live readout shows Σ, the true ∫ ≈ 2.864, and the signed error; a side error-bar shrinks toward green as N grows. The slider IS the limit — at N=4 the polygon visibly under- and overshoots; at N=128 it traces the curve. Paired with the /riemann-sum-gallery web cells of this same instrument frozen at the six N-values.",
-			"scene": "res://commons/artifacts/riemann_sum_workbench/riemann_sum_workbench.tscn",
-			"category": "change",
-			"interaction": "grab_slide",
-			"sequence": "change",
-			"artifact_type": "change",
-			"qfep_term": "F",
-			"capacity": "WALK the integration limit",
-			"dev_themes": [
-				"change",
-				"calculus",
-				"integration",
-				"riemann_sum",
-				"convergence"
-			],
-			"dev_category": "change",
-			"complexity": "intermediate",
-			"tags": [
-				"interactive",
-				"slider",
-				"calculus",
-				"integration",
-				"riemann_sum",
-				"midpoint_rule",
-				"convergence",
-				"limit",
-				"area_under_curve"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"change"
-			],
-			"parameters": {
-				"footprint": [
-					2,
-					3,
-					2
-				],
-				"size_group": "medium"
-			},
-			"spatial_needs": {
-				"platform": "floor",
-				"footprint_cells": 4,
-				"clearance": {
-					"front": 2,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [
-					"integral_area",
-					"slope_tangent_demo",
-					"ftc_bridge",
-					"shannon_workbench"
-				],
-				"preferred_zone": "any"
-			}
-		},
-		"tangent_slope_workbench": {
-			"name": "Tangent Slope Workbench",
-			"lookup_name": "tangent_slope_workbench",
-			"description": "An interactive workbench for the derivative as tangent slope. One slider drives x continuously across [0, 5]; a red marker slides along the curve f(x) = ½ + 0.4·sin(2x) + 0.15·cos(5x); a bright gold tangent line through the marker rotates to match f'(x) = 0.8·cos(2x) − 0.75·sin(5x); a small f'(x) subplot above the main plot tracks the derivative as its own function; a live readout shows f'(x), f(x), an up/down/flat slope word, and x; a side sign indicator arrow tilts up (green) when rising, down (red) when falling, flat (white) at extrema. At local maxima/minima the tangent goes horizontal — the geometric moment of an extremum. Paired with the /tangent-slope-gallery web cells of this same instrument frozen at 8 x-positions. Sibling to riemann_sum_workbench — same f, differentiation vs. integration.",
-			"scene": "res://commons/artifacts/tangent_slope_workbench/tangent_slope_workbench.tscn",
-			"category": "calculus",
-			"interaction": "grab_slide",
-			"sequence": "change",
-			"artifact_type": "change",
-			"qfep_term": "F",
-			"capacity": "WALK the derivative slope",
-			"dev_themes": [
-				"change",
-				"calculus",
-				"derivative",
-				"tangent",
-				"slope"
-			],
-			"dev_category": "change",
-			"complexity": "intermediate",
-			"tags": [
-				"interactive",
-				"slider",
-				"calculus",
-				"derivative",
-				"tangent",
-				"slope",
-				"rate_of_change",
-				"local_extrema",
-				"differentiation"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"change"
-			],
-			"parameters": {
-				"footprint": [
-					2,
-					3,
-					2
-				],
-				"size_group": "medium"
-			},
-			"spatial_needs": {
-				"platform": "floor",
-				"footprint_cells": 4,
-				"clearance": {
-					"front": 2,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [
-					"riemann_sum_workbench",
-					"slope_tangent_demo",
-					"derivative_pair",
-					"ftc_bridge"
-				],
-				"preferred_zone": "any"
-			}
-		}
-	}
+ "artifacts": {
+  "catalyst_sustain_demo": {
+   "name": "Catalyst Sustain Demo",
+   "lookup_name": "catalyst_sustain_demo",
+   "description": "Demonstrates the catalyst bracelet's sustain affordance \u2014 hold a state while time runs. A glowing torus floats above a pedestal; a trail of after-images shows the integral of held-position over time. First place the player meets 'hold this while time passes.'",
+   "scene": "res://algorithms/change/catalyst_sustain_demo.tscn",
+   "category": "change",
+   "sequence": "change",
+   "artifact_type": "change",
+   "qfep_term": "F",
+   "capacity": "SUSTAIN over time",
+   "dev_themes": [
+    "change",
+    "sieve_2026_05_13"
+   ],
+   "dev_category": "change",
+   "complexity": "intermediate",
+   "tags": [
+    "interactive",
+    "catalyst_affordance",
+    "sustain",
+    "integration"
+   ],
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "change"
+   ],
+   "parameters": {
+    "footprint": [
+     1,
+     1,
+     1
+    ],
+    "size_group": "compact"
+   }
+  },
+  "slope_tangent_demo": {
+   "name": "Slope Tangent Demo",
+   "lookup_name": "slope_tangent_demo",
+   "description": "A sine curve with a moving point that drags its tangent line. Where the curve is steep, the tangent tilts; at zero crossings, it flattens. The first map showing rate as a thing alongside the thing \u2014 derivative as instantaneous slope.",
+   "scene": "res://algorithms/change/slope_tangent_demo.tscn",
+   "category": "change",
+   "sequence": "change",
+   "artifact_type": "change",
+   "qfep_term": "F",
+   "capacity": "SEE the rate of change",
+   "dev_themes": [
+    "change",
+    "sieve_2026_05_13"
+   ],
+   "dev_category": "change",
+   "complexity": "intermediate",
+   "tags": [
+    "derivative",
+    "tangent",
+    "rate_of_change",
+    "calculus"
+   ],
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "change"
+   ],
+   "parameters": {
+    "footprint": [
+     1,
+     1,
+     1
+    ],
+    "size_group": "compact"
+   }
+  },
+  "integral_area": {
+   "name": "Integral Area",
+   "lookup_name": "integral_area",
+   "description": "Area under a curve as accumulation, animated. A sweep marker progresses left to right; vertical strips light up as they enter the swept region. The definite integral made visible: the headline accumulation artifact for the change sequence.",
+   "scene": "res://algorithms/change/integral_area.tscn",
+   "category": "change",
+   "sequence": "change",
+   "artifact_type": "change",
+   "qfep_term": "F",
+   "capacity": "ACCUMULATE under the curve",
+   "dev_themes": [
+    "change",
+    "sieve_2026_05_13"
+   ],
+   "dev_category": "change",
+   "complexity": "intermediate",
+   "tags": [
+    "integral",
+    "area_under_curve",
+    "accumulation",
+    "calculus"
+   ],
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "change"
+   ],
+   "parameters": {
+    "footprint": [
+     1,
+     1,
+     1
+    ],
+    "size_group": "compact"
+   }
+  },
+  "derivative_pair": {
+   "name": "Derivative Pair",
+   "lookup_name": "derivative_pair",
+   "description": "Two stacked curves with a shared vertical sweep line. f on top, f' below. Shows the derivative as a function in its own right.",
+   "scene": "res://algorithms/change/derivative_pair.tscn",
+   "category": "change",
+   "sequence": "change",
+   "artifact_type": "change",
+   "qfep_term": "F",
+   "capacity": "PAIR function and rate",
+   "dev_themes": [
+    "change",
+    "sieve_2026_05_13"
+   ],
+   "dev_category": "change",
+   "complexity": "intermediate",
+   "tags": [
+    "derivative",
+    "function",
+    "calculus"
+   ],
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "change"
+   ],
+   "parameters": {
+    "footprint": [
+     1,
+     1,
+     1
+    ],
+    "size_group": "compact"
+   }
+  },
+  "velocity_arrow": {
+   "name": "Velocity Arrow",
+   "lookup_name": "velocity_arrow",
+   "description": "A puck moves around a closed track with an arrow riding on it. Length = speed, direction = motion. Velocity as the visible derivative of position.",
+   "scene": "res://algorithms/change/velocity_arrow.tscn",
+   "category": "change",
+   "sequence": "change",
+   "artifact_type": "change",
+   "qfep_term": "F",
+   "capacity": "SEE motion as derivative",
+   "dev_themes": [
+    "change",
+    "sieve_2026_05_13"
+   ],
+   "dev_category": "change",
+   "complexity": "intermediate",
+   "tags": [
+    "velocity",
+    "tangent",
+    "kinematics"
+   ],
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "change"
+   ],
+   "parameters": {
+    "footprint": [
+     1,
+     1,
+     1
+    ],
+    "size_group": "compact"
+   }
+  },
+  "partial_derivative_terrain": {
+   "name": "Partial Derivative Terrain",
+   "lookup_name": "partial_derivative_terrain",
+   "description": "A wavy terrain. Two arrows ride a moving sample point, one for partial-x, one for partial-y. First map showing two-axis differentiation.",
+   "scene": "res://algorithms/change/partial_derivative_terrain.tscn",
+   "category": "change",
+   "sequence": "change",
+   "artifact_type": "change",
+   "qfep_term": "F",
+   "capacity": "SEE partials in 3D",
+   "dev_themes": [
+    "change",
+    "sieve_2026_05_13"
+   ],
+   "dev_category": "change",
+   "complexity": "intermediate",
+   "tags": [
+    "partial_derivative",
+    "gradient",
+    "calculus_3d"
+   ],
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "change"
+   ],
+   "parameters": {
+    "footprint": [
+     1,
+     1,
+     1
+    ],
+    "size_group": "compact"
+   }
+  },
+  "riemann_pump": {
+   "name": "Riemann Pump",
+   "lookup_name": "riemann_pump",
+   "description": "Three side-by-side strip displays of the same curve, accumulated via left, right, and midpoint sums. The strip count pumps up and down, showing convergence and bias.",
+   "scene": "res://algorithms/change/riemann_pump.tscn",
+   "category": "change",
+   "sequence": "change",
+   "artifact_type": "change",
+   "qfep_term": "F",
+   "capacity": "PUMP strips to integrate",
+   "dev_themes": [
+    "change",
+    "sieve_2026_05_13"
+   ],
+   "dev_category": "change",
+   "complexity": "intermediate",
+   "tags": [
+    "riemann_sum",
+    "integration",
+    "accumulation"
+   ],
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "change"
+   ],
+   "parameters": {
+    "footprint": [
+     1,
+     1,
+     1
+    ],
+    "size_group": "compact"
+   }
+  },
+  "vector_field_grid": {
+   "name": "Vector Field Grid",
+   "lookup_name": "vector_field_grid",
+   "description": "Regular grid of arrows over a plane, each pointing along a stream function flow direction. Arrow length and color reflect magnitude.",
+   "scene": "res://algorithms/change/vector_field_grid.tscn",
+   "category": "change",
+   "sequence": "change",
+   "artifact_type": "change",
+   "qfep_term": "F",
+   "capacity": "FIELD as arrows",
+   "dev_themes": [
+    "change",
+    "sieve_2026_05_13"
+   ],
+   "dev_category": "change",
+   "complexity": "intermediate",
+   "tags": [
+    "vector_field",
+    "stream_function",
+    "flow"
+   ],
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "change"
+   ],
+   "parameters": {
+    "footprint": [
+     1,
+     1,
+     1
+    ],
+    "size_group": "compact"
+   }
+  },
+  "particle_flow_swarm": {
+   "name": "Particle Flow Swarm",
+   "lookup_name": "particle_flow_swarm",
+   "description": "Many small particles ride the same vector field shown in vector_field_grid. Pairs with the grid to demonstrate field effect on bodies.",
+   "scene": "res://algorithms/change/particle_flow_swarm.tscn",
+   "category": "change",
+   "sequence": "change",
+   "artifact_type": "change",
+   "qfep_term": "F",
+   "capacity": "RIDE the field",
+   "dev_themes": [
+    "change",
+    "sieve_2026_05_13"
+   ],
+   "dev_category": "change",
+   "complexity": "intermediate",
+   "tags": [
+    "particles",
+    "flow",
+    "vector_field"
+   ],
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "change"
+   ],
+   "parameters": {
+    "footprint": [
+     1,
+     1,
+     1
+    ],
+    "size_group": "compact"
+   }
+  },
+  "ftc_bridge": {
+   "name": "FTC Bridge",
+   "lookup_name": "ftc_bridge",
+   "description": "An arched bridge labeled with the Fundamental Theorem of Calculus. A pulse runs from left pillar (a) to right pillar (b). The change-sequence capstone.",
+   "scene": "res://algorithms/change/ftc_bridge.tscn",
+   "category": "change",
+   "sequence": "change",
+   "artifact_type": "change",
+   "qfep_term": "F",
+   "capacity": "BRIDGE derivative and integral",
+   "dev_themes": [
+    "change",
+    "sieve_2026_05_13"
+   ],
+   "dev_category": "change",
+   "complexity": "intermediate",
+   "tags": [
+    "fundamental_theorem",
+    "calculus_capstone",
+    "integration"
+   ],
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "change"
+   ],
+   "parameters": {
+    "footprint": [
+     1,
+     1,
+     1
+    ],
+    "size_group": "compact"
+   }
+  },
+  "riemann_sum_workbench": {
+   "name": "Riemann Sum Workbench",
+   "lookup_name": "riemann_sum_workbench",
+   "description": "An interactive workbench for the midpoint Riemann sum. One slider drives N (rectangle count) through six detents [4, 8, 16, 32, 64, 128]; N translucent blue rectangles regenerate under the curve f(x) = \u00bd + 0.4\u00b7sin(2x) + 0.15\u00b7cos(5x) on [0, 5]; a live readout shows \u03a3, the true \u222b \u2248 2.864, and the signed error; a side error-bar shrinks toward green as N grows. The slider IS the limit \u2014 at N=4 the polygon visibly under- and overshoots; at N=128 it traces the curve. Paired with the /riemann-sum-gallery web cells of this same instrument frozen at the six N-values.",
+   "scene": "res://commons/artifacts/riemann_sum_workbench/riemann_sum_workbench.tscn",
+   "category": "change",
+   "interaction": "grab_slide",
+   "sequence": "change",
+   "artifact_type": "change",
+   "qfep_term": "F",
+   "capacity": "WALK the integration limit",
+   "dev_themes": [
+    "change",
+    "calculus",
+    "integration",
+    "riemann_sum",
+    "convergence"
+   ],
+   "dev_category": "change",
+   "complexity": "intermediate",
+   "tags": [
+    "interactive",
+    "slider",
+    "calculus",
+    "integration",
+    "riemann_sum",
+    "midpoint_rule",
+    "convergence",
+    "limit",
+    "area_under_curve"
+   ],
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "change"
+   ],
+   "parameters": {
+    "footprint": [
+     2,
+     3,
+     2
+    ],
+    "size_group": "medium"
+   },
+   "spatial_needs": {
+    "platform": "floor",
+    "footprint_cells": 4,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "face_approach",
+    "isolation": 0,
+    "cluster_with": [
+     "integral_area",
+     "slope_tangent_demo",
+     "ftc_bridge",
+     "shannon_workbench"
+    ],
+    "preferred_zone": "any"
+   }
+  },
+  "tangent_slope_workbench": {
+   "name": "Tangent Slope Workbench",
+   "lookup_name": "tangent_slope_workbench",
+   "description": "An interactive workbench for the derivative as tangent slope. One slider drives x continuously across [0, 5]; a red marker slides along the curve f(x) = \u00bd + 0.4\u00b7sin(2x) + 0.15\u00b7cos(5x); a bright gold tangent line through the marker rotates to match f'(x) = 0.8\u00b7cos(2x) \u2212 0.75\u00b7sin(5x); a small f'(x) subplot above the main plot tracks the derivative as its own function; a live readout shows f'(x), f(x), an up/down/flat slope word, and x; a side sign indicator arrow tilts up (green) when rising, down (red) when falling, flat (white) at extrema. At local maxima/minima the tangent goes horizontal \u2014 the geometric moment of an extremum. Paired with the /tangent-slope-gallery web cells of this same instrument frozen at 8 x-positions. Sibling to riemann_sum_workbench \u2014 same f, differentiation vs. integration.",
+   "scene": "res://commons/artifacts/tangent_slope_workbench/tangent_slope_workbench.tscn",
+   "category": "calculus",
+   "interaction": "grab_slide",
+   "sequence": "change",
+   "artifact_type": "change",
+   "qfep_term": "F",
+   "capacity": "WALK the derivative slope",
+   "dev_themes": [
+    "change",
+    "calculus",
+    "derivative",
+    "tangent",
+    "slope"
+   ],
+   "dev_category": "change",
+   "complexity": "intermediate",
+   "tags": [
+    "interactive",
+    "slider",
+    "calculus",
+    "derivative",
+    "tangent",
+    "slope",
+    "rate_of_change",
+    "local_extrema",
+    "differentiation"
+   ],
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "change"
+   ],
+   "parameters": {
+    "footprint": [
+     2,
+     3,
+     2
+    ],
+    "size_group": "medium"
+   },
+   "spatial_needs": {
+    "platform": "floor",
+    "footprint_cells": 4,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "face_approach",
+    "isolation": 0,
+    "cluster_with": [
+     "riemann_sum_workbench",
+     "slope_tangent_demo",
+     "derivative_pair",
+     "ftc_bridge"
+    ],
+    "preferred_zone": "any"
+   }
+  },
+  "zeno_staircase": {
+   "category": "change",
+   "complexity": "intermediate",
+   "description": "The change (calculus) seam. Motion is continuous; the machine reads at frame ticks and holds between (Zeno's arrow, frozen then jump). The amber curve vs the blue staircase; the 'instantaneous' rate it reports is a secant over one frozen frame, not the tangent.",
+   "dev_themes": [
+    "digital_bias",
+    "seam"
+   ],
+   "include_in_map_data": true,
+   "interaction": "ambient",
+   "lookup_name": "zeno_staircase",
+   "map_ready": true,
+   "map_sequences": [
+    "change"
+   ],
+   "name": "Zeno Staircase",
+   "qfep_connection": "A station in the bias landscape (doc/SEAM_PER_SEQUENCE.md); the digital-bias seam for change. Bias is conserved; show the seam.",
+   "scene": "res://algorithms/change/zeno_staircase/zeno_staircase.tscn",
+   "sequence": "change",
+   "tags": [
+    "calculus",
+    "derivative",
+    "zeno",
+    "sampling",
+    "zero_order_hold",
+    "seam",
+    "digital_bias"
+   ]
+  }
+ }
 }
