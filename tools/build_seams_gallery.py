@@ -16,9 +16,9 @@ CAPS = ENC / "public" / "artifact-gallery" / "captures"
 # status override (None -> computed from capture; "chapter" for order-pilot)
 CATALOG = [
  ("primitives","sampling","the sampled line","a continuous path following the hand","a staircase of held samples","magnify — walk into the tunnel","archimedean_tunnel",None),
- ("transformation","lattice","the stepped transform","continuous SE(3) motion","snaps on a lattice of transforms","reach for the angle between two steps",None,None),
+ ("transformation","lattice","the stepped transform","continuous SE(3) motion","snaps on a lattice of transforms","reach for the angle between two steps","stepped_transform",None),
  ("symmetry","lattice","finite symmetry","continuous symmetry","n-fold; exactly 17 wallpaper groups","try to make a pattern outside the 17 rooms",None,None),
- ("array_tutorial","lattice","the lattice","continuous space","integer indices, no between-cells","reach for element 2.5 — you snap to the nearest",None,None),
+ ("array_tutorial","lattice","the lattice","continuous space","integer indices, no between-cells","reach for element 2.5 — you snap to the nearest","lattice_walk",None),
  ("color","lattice","the gamut","the spectrum","a 3×8-bit lattice; out-of-gamut clamped","eat the mushroom — the gamut shrinks","banding_gradient",None),
  ("change","sampling","the finite difference","the instantaneous derivative","a rate measured over one frame","zoom — the smooth curve is a chord-staircase (Zeno)","zeno_staircase",None),
  ("forces","sampling","the step","continuous dynamics","Euler/Verlet jumps","stiffen a spring and it explodes; a fast ball tunnels the wall","euler_drift",None),
@@ -35,7 +35,7 @@ CATALOG = [
  ("boolean_surfaces","lattice","coincident-face precision","an exact cut","floats at the interface","subtract two shapes — the boundary z-fights and flickers",None,None),
  ("swarmintelligence","sampling","finite agents","emergence from infinite locals","N boids on a discrete tick","slow the tick — the 'living' motion is frame-by-frame bookkeeping",None,None),
  ("machinelearning","compression","the model is the seam","understanding","a compressed table interpolated","off its training set it is confident and wrong — Ada reading herself","model_seam",None),
- ("graphtheory","lattice","space to graph","real terrain","nodes and edges","you can only be at a node, never between",None,None),
+ ("graphtheory","lattice","space to graph","real terrain","nodes and edges","you can only be at a node, never between","node_snap",None),
  ("foundationscrisis","limit","the computability limit","provability / decidability","the halting wall","the sorter rolls randf() because the decider is forbidden",None,"chapter"),
  ("qfeplaboratory","limit","measuring what can't be held","continuous entropy / order","quantized meters and dials","the entropy meter saturates — it cannot read true max entropy",None,None),
  ("postfoundationscrisis","limit","the confession","living after the limit","the seam owned","the 'no god's-eye' artifact hands you a god's-eye slider, and confesses it",None,"chapter"),

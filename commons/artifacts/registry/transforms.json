@@ -2345,6 +2345,35 @@
 				"derived_at": "2026-04-29T09:39:46.288797Z",
 				"derived_from": "aabb_size + category"
 			}
+		},
+		"stepped_transform": {
+			"category": "transformation",
+			"complexity": "intermediate",
+			"description": "The transformation seam. Rigid motion (SE(3)) is continuous - a pose for every real number. The machine keeps only a lattice of representable transforms: grid positions, stepped angles. Amber: the continuous glide, moving and turning through every in-between pose. Blue: the same motion snapped to a staircase, the heading jumping in fixed increments. Reach for the pose between two steps and you snap.",
+			"dev_themes": [
+				"digital_bias",
+				"seam"
+			],
+			"include_in_map_data": true,
+			"interaction": "ambient",
+			"lookup_name": "stepped_transform",
+			"map_ready": true,
+			"map_sequences": [
+				"transformation"
+			],
+			"name": "Stepped Transform",
+			"qfep_connection": "A station in the bias landscape (doc/SEAM_PER_SEQUENCE.md); the digital-bias seam for transformation. Bias is conserved; show the seam.",
+			"scene": "res://algorithms/transformation/stepped_transform/stepped_transform.tscn",
+			"sequence": "transformation",
+			"tags": [
+				"transformation",
+				"se3",
+				"rotation",
+				"lattice",
+				"quantization",
+				"seam",
+				"digital_bias"
+			]
 		}
 	}
 }

@@ -3182,7 +3182,7 @@
 			}
 		},
 		"gallery_marker_facade": {
-			"name": "Gallery Marker — Facade",
+			"name": "Gallery Marker \u2014 Facade",
 			"lookup_name": "gallery_marker_facade",
 			"description": "Bronze pedestal + glowing stake + Label3D reading FACADE. Single-cell sub-gallery anchor used 20+ times across facade maps. Shared scene at commons/artifacts/gallery_marker; the lookup_name fixes the label per gallery_marker_<sequence> alias pattern.",
 			"scene": "res://commons/artifacts/gallery_marker/gallery_marker.tscn",
@@ -10804,6 +10804,35 @@
 				"derived_at": "2026-04-29T09:39:46.050807Z",
 				"derived_from": "aabb_size + category"
 			}
+		},
+		"lattice_walk": {
+			"category": "array_tutorial",
+			"complexity": "intermediate",
+			"description": "The array seam. An array is a lattice - integer addresses, no cells between. The amber line is the continuous path you want across the grid; the blue staircase is the path you can occupy: whole cells, the line rounded to the nearest lattice point. Reach for element 2.5 and you snap to 2 or 3. The smooth intention survives only as a stair of held cells.",
+			"dev_themes": [
+				"digital_bias",
+				"seam"
+			],
+			"include_in_map_data": true,
+			"interaction": "ambient",
+			"lookup_name": "lattice_walk",
+			"map_ready": true,
+			"map_sequences": [
+				"array_tutorial"
+			],
+			"name": "Lattice Walk",
+			"qfep_connection": "A station in the bias landscape (doc/SEAM_PER_SEQUENCE.md); the digital-bias seam for array_tutorial. Bias is conserved; show the seam.",
+			"scene": "res://algorithms/arrays/lattice_walk/lattice_walk.tscn",
+			"sequence": "array_tutorial",
+			"tags": [
+				"array",
+				"index",
+				"lattice",
+				"sample_and_hold",
+				"grid",
+				"seam",
+				"digital_bias"
+			]
 		}
 	}
 }
