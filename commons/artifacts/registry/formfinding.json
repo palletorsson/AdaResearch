@@ -1,0 +1,36 @@
+{
+ "version": "1.0",
+ "format": "lab_artifacts",
+ "description": "Form-finding artifacts - equilibrium as an approached limit.",
+ "artifacts": {
+  "settling_tremble": {
+   "category": "formfinding",
+   "complexity": "intermediate",
+   "description": "The form-finding seam. A hanging chain finds an exact equilibrium - the catenary. A solver cannot reach it; it relaxes step by step and stops when the largest move drops below a tolerance, epsilon. So the 'settled' shape trembles inside a band someone chose. Amber: the true catenary. Blue: the relaxed nodes, each a hair off. The inset magnifies it - zoom the settled form and it still shivers. Settled means tired, not still.",
+   "dev_themes": [
+    "digital_bias",
+    "seam"
+   ],
+   "include_in_map_data": true,
+   "interaction": "ambient",
+   "lookup_name": "settling_tremble",
+   "map_ready": true,
+   "map_sequences": [
+    "formfinding"
+   ],
+   "name": "Settling Tremble",
+   "qfep_connection": "A station in the bias landscape (doc/SEAM_PER_SEQUENCE.md); the digital-bias seam for formfinding. Bias is conserved; show the seam.",
+   "scene": "res://algorithms/formfinding/settling_tremble/settling_tremble.tscn",
+   "sequence": "formfinding",
+   "tags": [
+    "formfinding",
+    "equilibrium",
+    "catenary",
+    "tolerance",
+    "relaxation",
+    "seam",
+    "digital_bias"
+   ]
+  }
+ }
+}

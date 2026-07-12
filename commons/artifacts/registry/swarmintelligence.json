@@ -1444,6 +1444,35 @@
 				"derived_at": "2026-04-29T09:39:46.285361Z",
 				"derived_from": "aabb_size + category"
 			}
+		},
+		"tick_flock": {
+			"category": "swarmintelligence",
+			"complexity": "intermediate",
+			"description": "The swarm-intelligence seam. A flock looks alive - emergence, a whole beyond its parts. Underneath: N agents, each reading neighbours and doing arithmetic, advanced one discrete tick at a time. Between ticks nothing moves; the glide is frozen frames the eye splices. Blue: each boid's positions, one per tick, visibly separated - it teleports, it does not fly. Amber: the arc we imagine. Slow the clock and the flock is a for-loop.",
+			"dev_themes": [
+				"digital_bias",
+				"seam"
+			],
+			"include_in_map_data": true,
+			"interaction": "ambient",
+			"lookup_name": "tick_flock",
+			"map_ready": true,
+			"map_sequences": [
+				"swarmintelligence"
+			],
+			"name": "Tick Flock",
+			"qfep_connection": "A station in the bias landscape (doc/SEAM_PER_SEQUENCE.md); the digital-bias seam for swarmintelligence. Bias is conserved; show the seam.",
+			"scene": "res://algorithms/swarmintelligence/tick_flock/tick_flock.tscn",
+			"sequence": "swarmintelligence",
+			"tags": [
+				"swarm",
+				"boids",
+				"emergence",
+				"discrete_tick",
+				"sampling",
+				"seam",
+				"digital_bias"
+			]
 		}
 	}
 }

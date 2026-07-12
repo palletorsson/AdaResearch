@@ -22,7 +22,7 @@ CATALOG = [
  ("color","lattice","the gamut","the spectrum","a 3×8-bit lattice; out-of-gamut clamped","eat the mushroom — the gamut shrinks","banding_gradient",None),
  ("change","sampling","the finite difference","the instantaneous derivative","a rate measured over one frame","zoom — the smooth curve is a chord-staircase (Zeno)","zeno_staircase",None),
  ("forces","sampling","the step","continuous dynamics","Euler/Verlet jumps","stiffen a spring and it explodes; a fast ball tunnels the wall","euler_drift",None),
- ("formfinding","lattice","tolerance","a true equilibrium curve","settled to an epsilon","zoom the 'settled' form — it still trembles",None,None),
+ ("formfinding","lattice","tolerance","a true equilibrium curve","settled to an epsilon","zoom the 'settled' form — it still trembles","settling_tremble",None),
  ("wavefunctions","sampling","Nyquist","a continuous wave","samples","raise the pitch past half the sample rate — it descends","aliasing_wave",None),
  ("randomness","determinism","the crank vs the harvest","fair independent chance","a formula chewing a seed","set the seed twice — the walk traces itself","galton_friction",None),
  ("noise","determinism","the entropy floor","real chaos","gradient noise (Perlin is a crank too)","push structure toward max entropy — it collapses into the field","noise_floor",None),
@@ -33,11 +33,11 @@ CATALOG = [
  ("softbodies","lattice","the mass-spring lattice","an elastic continuum","point masses on springs","squeeze — it is faceted; stiffen — it detonates","spring_lattice",None),
  ("isosurfaces","lattice","marching cubes","a smooth implicit surface","triangles guessed between grid samples","lower the resolution — the blob turns to lego","marching_squares",None),
  ("boolean_surfaces","lattice","coincident-face precision","an exact cut","floats at the interface","subtract two shapes — the boundary z-fights and flickers","coincident_face",None),
- ("swarmintelligence","sampling","finite agents","emergence from infinite locals","N boids on a discrete tick","slow the tick — the 'living' motion is frame-by-frame bookkeeping",None,None),
+ ("swarmintelligence","sampling","finite agents","emergence from infinite locals","N boids on a discrete tick","slow the tick — the 'living' motion is frame-by-frame bookkeeping","tick_flock",None),
  ("machinelearning","compression","the model is the seam","understanding","a compressed table interpolated","off its training set it is confident and wrong — Ada reading herself","model_seam",None),
  ("graphtheory","lattice","space to graph","real terrain","nodes and edges","you can only be at a node, never between","node_snap",None),
  ("foundationscrisis","limit","the computability limit","provability / decidability","the halting wall","the sorter rolls randf() because the decider is forbidden",None,"chapter"),
- ("qfeplaboratory","limit","measuring what can't be held","continuous entropy / order","quantized meters and dials","the entropy meter saturates — it cannot read true max entropy",None,None),
+ ("qfeplaboratory","limit","measuring what can't be held","continuous entropy / order","quantized meters and dials","the entropy meter saturates — it cannot read true max entropy","entropy_ceiling",None),
  ("postfoundationscrisis","limit","the confession","living after the limit","the seam owned","the 'no god's-eye' artifact hands you a god's-eye slider, and confesses it",None,"chapter"),
 ]
 

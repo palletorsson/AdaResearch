@@ -1,0 +1,36 @@
+{
+ "version": "1.0",
+ "format": "lab_artifacts",
+ "description": "QFEP-laboratory artifacts - measuring the limit with instruments made of it.",
+ "artifacts": {
+  "entropy_ceiling": {
+   "category": "qfeplaboratory",
+   "complexity": "intermediate",
+   "description": "The QFEP-laboratory seam, the thesis at its most self-aware. The lab measures order and disorder, but its meters are quantized - a finite ladder of ticks, a needle that steps. True maximum entropy is a limit the instrument can never reach; push toward it and the needle pins at the last tick, reading MAX - a finite number standing in for an infinity it cannot hold. The lab that studies the limit is built out of the limit.",
+   "dev_themes": [
+    "digital_bias",
+    "seam"
+   ],
+   "include_in_map_data": true,
+   "interaction": "ambient",
+   "lookup_name": "entropy_ceiling",
+   "map_ready": true,
+   "map_sequences": [
+    "qfeplaboratory"
+   ],
+   "name": "Entropy Ceiling",
+   "qfep_connection": "A station in the bias landscape (doc/SEAM_PER_SEQUENCE.md); the digital-bias seam for qfeplaboratory. Bias is conserved; show the seam.",
+   "scene": "res://algorithms/qfeplaboratory/entropy_ceiling/entropy_ceiling.tscn",
+   "sequence": "qfeplaboratory",
+   "tags": [
+    "qfep",
+    "entropy",
+    "measurement",
+    "quantization",
+    "limit",
+    "seam",
+    "digital_bias"
+   ]
+  }
+ }
+}
