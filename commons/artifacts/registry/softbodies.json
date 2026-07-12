@@ -1,77 +1,106 @@
 {
-	"artifacts": {
-		"gallery_marker_soft-body": {
-			"name": "Gallery Marker — Soft Body",
-			"lookup_name": "gallery_marker_soft-body",
-			"description": "Small bronze pedestal + glowing stake + Label3D reading SOFT BODY. Single-cell sub-gallery anchor used 24x across softbodies maps. Shared scene at commons/artifacts/gallery_marker; the lookup_name fixes the label.",
-			"scene": "res://commons/artifacts/gallery_marker/gallery_marker.tscn",
-			"category": "softbodies",
-			"sequence": "softbodies",
-			"artifact_type": "marker",
-			"qfep_term": "Indexing",
-			"capacity": "POINTS the player at a softbodies sub-gallery",
-			"dev_themes": [
-				"softbodies",
-				"breath_2026_05_27"
-			],
-			"dev_category": "softbodies",
-			"complexity": "simple",
-			"tags": [
-				"marker",
-				"gallery_anchor",
-				"sub_gallery",
-				"way_finding"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"softbodies"
-			],
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "tiny",
-				"label": "SOFT BODY"
-			}
-		},
-		"flex_cloth_pad": {
-			"name": "Flex Cloth Pad",
-			"lookup_name": "flex_cloth_pad",
-			"description": "Hanging cloth simulated as spring-mass vertices. The integration phase affordance: the bracelet's flex/drape mode nudges the cloth and watches it settle.",
-			"scene": "res://algorithms/softbodies/affordance_demos/flex_cloth_pad.tscn",
-			"category": "softbodies",
-			"sequence": "softbodies",
-			"artifact_type": "softbodies",
-			"qfep_term": "Integration",
-			"capacity": "FLEX a soft body",
-			"dev_themes": [
-				"softbodies",
-				"sieve_2026_05_13"
-			],
-			"dev_category": "softbodies",
-			"complexity": "intermediate",
-			"tags": [
-				"catalyst_affordance",
-				"cloth",
-				"soft_body",
-				"integration"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"softbodies"
-			],
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			}
-		}
-	}
+ "artifacts": {
+  "gallery_marker_soft-body": {
+   "name": "Gallery Marker \u2014 Soft Body",
+   "lookup_name": "gallery_marker_soft-body",
+   "description": "Small bronze pedestal + glowing stake + Label3D reading SOFT BODY. Single-cell sub-gallery anchor used 24x across softbodies maps. Shared scene at commons/artifacts/gallery_marker; the lookup_name fixes the label.",
+   "scene": "res://commons/artifacts/gallery_marker/gallery_marker.tscn",
+   "category": "softbodies",
+   "sequence": "softbodies",
+   "artifact_type": "marker",
+   "qfep_term": "Indexing",
+   "capacity": "POINTS the player at a softbodies sub-gallery",
+   "dev_themes": [
+    "softbodies",
+    "breath_2026_05_27"
+   ],
+   "dev_category": "softbodies",
+   "complexity": "simple",
+   "tags": [
+    "marker",
+    "gallery_anchor",
+    "sub_gallery",
+    "way_finding"
+   ],
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "softbodies"
+   ],
+   "parameters": {
+    "footprint": [
+     1,
+     1,
+     1
+    ],
+    "size_group": "tiny",
+    "label": "SOFT BODY"
+   }
+  },
+  "flex_cloth_pad": {
+   "name": "Flex Cloth Pad",
+   "lookup_name": "flex_cloth_pad",
+   "description": "Hanging cloth simulated as spring-mass vertices. The integration phase affordance: the bracelet's flex/drape mode nudges the cloth and watches it settle.",
+   "scene": "res://algorithms/softbodies/affordance_demos/flex_cloth_pad.tscn",
+   "category": "softbodies",
+   "sequence": "softbodies",
+   "artifact_type": "softbodies",
+   "qfep_term": "Integration",
+   "capacity": "FLEX a soft body",
+   "dev_themes": [
+    "softbodies",
+    "sieve_2026_05_13"
+   ],
+   "dev_category": "softbodies",
+   "complexity": "intermediate",
+   "tags": [
+    "catalyst_affordance",
+    "cloth",
+    "soft_body",
+    "integration"
+   ],
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "softbodies"
+   ],
+   "parameters": {
+    "footprint": [
+     1,
+     1,
+     1
+    ],
+    "size_group": "compact"
+   }
+  },
+  "spring_lattice": {
+   "category": "softbodies",
+   "complexity": "intermediate",
+   "description": "The soft-bodies seam. A jelly is an elastic continuum - infinitely divisible, smooth under any load. The machine cannot integrate a continuum; it replaces it with a finite mesh of point masses on springs. Left: the true smooth blob. Right: the same blob as a mass-spring lattice - a faceted polygon at a chosen resolution; stiffen the springs past the timestep and it detonates. The smoothness was lattice resolution in disguise.",
+   "dev_themes": [
+    "digital_bias",
+    "seam"
+   ],
+   "include_in_map_data": true,
+   "interaction": "ambient",
+   "lookup_name": "spring_lattice",
+   "map_ready": true,
+   "map_sequences": [
+    "softbodies"
+   ],
+   "name": "Spring Lattice",
+   "qfep_connection": "A station in the bias landscape (doc/SEAM_PER_SEQUENCE.md); the digital-bias seam for softbodies. Bias is conserved; show the seam.",
+   "scene": "res://algorithms/softbodies/spring_lattice/spring_lattice.tscn",
+   "sequence": "softbodies",
+   "tags": [
+    "softbody",
+    "mass_spring",
+    "lattice",
+    "continuum",
+    "integration",
+    "seam",
+    "digital_bias"
+   ]
+  }
+ }
 }
