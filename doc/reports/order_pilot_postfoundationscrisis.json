@@ -1,0 +1,633 @@
+{
+ "sequence": "postfoundationscrisis",
+ "written_order": [
+  "arrive",
+  "bias",
+  "inside",
+  "situated",
+  "rhizome",
+  "reconnection",
+  "fragment",
+  "commons",
+  "molecular",
+  "formula",
+  "residual"
+ ],
+ "baseline_order": [
+  "arrive",
+  "bias",
+  "inside",
+  "situated",
+  "rhizome",
+  "molecular",
+  "fragment",
+  "formula"
+ ],
+ "agreement_kendall": {
+  "baseline": 0.929,
+  "pedagogy": 1.0,
+  "ontology": 0.709,
+  "criticality": 0.455
+ },
+ "rows": [
+  {
+   "concept": "arrive",
+   "cast": "tt",
+   "written": 0,
+   "baseline": 0,
+   "ped": 0,
+   "onto": 0,
+   "crit": 1
+  },
+  {
+   "concept": "bias",
+   "cast": "bias_visualizer",
+   "written": 1,
+   "baseline": 1,
+   "ped": 0,
+   "onto": 1,
+   "crit": 0
+  },
+  {
+   "concept": "inside",
+   "cast": "bias_from_inside",
+   "written": 2,
+   "baseline": 2,
+   "ped": 0,
+   "onto": 0,
+   "crit": 2
+  },
+  {
+   "concept": "situated",
+   "cast": "situated_readout",
+   "written": 3,
+   "baseline": 3,
+   "ped": 1,
+   "onto": 0,
+   "crit": 1
+  },
+  {
+   "concept": "rhizome",
+   "cast": "rhizome_cave_demo",
+   "written": 4,
+   "baseline": 4,
+   "ped": 2,
+   "onto": 1,
+   "crit": 0
+  },
+  {
+   "concept": "reconnection",
+   "cast": "rhizome_cave_demo",
+   "written": 5,
+   "baseline": null,
+   "ped": 2,
+   "onto": 1,
+   "crit": 0
+  },
+  {
+   "concept": "fragment",
+   "cast": "wiki_fragment",
+   "written": 6,
+   "baseline": 6,
+   "ped": 2,
+   "onto": 0,
+   "crit": 0
+  },
+  {
+   "concept": "commons",
+   "cast": "wiki_fragment",
+   "written": 7,
+   "baseline": null,
+   "ped": 2,
+   "onto": 0,
+   "crit": 0
+  },
+  {
+   "concept": "molecular",
+   "cast": "MolecularDesigner",
+   "written": 8,
+   "baseline": 5,
+   "ped": 2,
+   "onto": 1,
+   "crit": 1
+  },
+  {
+   "concept": "formula",
+   "cast": "qfep_formula_3d",
+   "written": 9,
+   "baseline": 7,
+   "ped": 2,
+   "onto": 1,
+   "crit": 2
+  },
+  {
+   "concept": "residual",
+   "cast": "qfep_formula_3d",
+   "written": 10,
+   "baseline": null,
+   "ped": 2,
+   "onto": 1,
+   "crit": 2
+  }
+ ],
+ "sections": [
+  {
+   "n": 1,
+   "register": "walk",
+   "title": "The panel in the rubble",
+   "mentions": [
+    "arrive"
+   ],
+   "introduces": [
+    "arrive"
+   ]
+  },
+  {
+   "n": 2,
+   "register": "walk",
+   "title": "The cloud of words",
+   "mentions": [
+    "arrive",
+    "bias"
+   ],
+   "introduces": [
+    "bias"
+   ]
+  },
+  {
+   "n": 3,
+   "register": "code",
+   "title": "The line to the nearest anchor",
+   "mentions": [
+    "bias"
+   ],
+   "introduces": []
+  },
+  {
+   "n": 4,
+   "register": "turn",
+   "title": "Whose map of meanings",
+   "mentions": [
+    "arrive",
+    "bias"
+   ],
+   "introduces": []
+  },
+  {
+   "n": 5,
+   "register": "walk",
+   "title": "The slider into the crowd",
+   "mentions": [
+    "bias",
+    "inside"
+   ],
+   "introduces": [
+    "inside"
+   ]
+  },
+  {
+   "n": 6,
+   "register": "turn",
+   "title": "The tour you can leave",
+   "mentions": [
+    "bias",
+    "inside"
+   ],
+   "introduces": []
+  },
+  {
+   "n": 7,
+   "register": "walk",
+   "title": "Four answers to one number",
+   "mentions": [
+    "inside",
+    "situated"
+   ],
+   "introduces": [
+    "situated"
+   ]
+  },
+  {
+   "n": 8,
+   "register": "code",
+   "title": "The hash that decides",
+   "mentions": [
+    "situated"
+   ],
+   "introduces": []
+  },
+  {
+   "n": 9,
+   "register": "turn",
+   "title": "The view from a coordinate",
+   "mentions": [
+    "situated"
+   ],
+   "introduces": []
+  },
+  {
+   "n": 10,
+   "register": "walk",
+   "title": "The room with no trunk",
+   "mentions": [
+    "rhizome",
+    "situated"
+   ],
+   "introduces": [
+    "rhizome"
+   ]
+  },
+  {
+   "n": 11,
+   "register": "walk",
+   "title": "The dial that grows sideways",
+   "mentions": [
+    "reconnection",
+    "rhizome"
+   ],
+   "introduces": [
+    "reconnection"
+   ]
+  },
+  {
+   "n": 12,
+   "register": "turn",
+   "title": "The cave was still carved",
+   "mentions": [
+    "reconnection",
+    "rhizome"
+   ],
+   "introduces": []
+  },
+  {
+   "n": 13,
+   "register": "walk",
+   "title": "Panels that point elsewhere",
+   "mentions": [
+    "arrive",
+    "fragment",
+    "rhizome"
+   ],
+   "introduces": [
+    "fragment"
+   ]
+  },
+  {
+   "n": 14,
+   "register": "code",
+   "title": "The footer's arithmetic",
+   "mentions": [
+    "commons",
+    "fragment"
+   ],
+   "introduces": []
+  },
+  {
+   "n": 15,
+   "register": "walk",
+   "title": "The fourth panel",
+   "mentions": [
+    "commons",
+    "fragment",
+    "reconnection",
+    "rhizome"
+   ],
+   "introduces": [
+    "commons"
+   ]
+  },
+  {
+   "n": 16,
+   "register": "turn",
+   "title": "A staged commons",
+   "mentions": [
+    "commons",
+    "fragment"
+   ],
+   "introduces": []
+  },
+  {
+   "n": 17,
+   "register": "walk",
+   "title": "Parts looking for a body",
+   "mentions": [
+    "fragment",
+    "molecular"
+   ],
+   "introduces": [
+    "molecular"
+   ]
+  },
+  {
+   "n": 18,
+   "register": "code",
+   "title": "The count that fits the plan",
+   "mentions": [
+    "molecular"
+   ],
+   "introduces": []
+  },
+  {
+   "n": 19,
+   "register": "turn",
+   "title": "Who wrote the catalog",
+   "mentions": [
+    "arrive",
+    "commons",
+    "molecular"
+   ],
+   "introduces": []
+  },
+  {
+   "n": 20,
+   "register": "walk",
+   "title": "One line, lit",
+   "mentions": [
+    "bias",
+    "formula",
+    "fragment",
+    "inside",
+    "rhizome"
+   ],
+   "introduces": [
+    "formula"
+   ]
+  },
+  {
+   "n": 21,
+   "register": "walk",
+   "title": "The term that never dims",
+   "mentions": [
+    "bias",
+    "formula",
+    "residual"
+   ],
+   "introduces": [
+    "residual"
+   ]
+  },
+  {
+   "n": 22,
+   "register": "code",
+   "title": "The idle glow, itemized",
+   "mentions": [
+    "formula",
+    "residual"
+   ],
+   "introduces": []
+  },
+  {
+   "n": 23,
+   "register": "turn",
+   "title": "The order, after",
+   "mentions": [
+    "arrive",
+    "bias",
+    "commons",
+    "formula",
+    "fragment",
+    "inside",
+    "molecular",
+    "reconnection",
+    "residual",
+    "rhizome",
+    "situated"
+   ],
+   "introduces": []
+  }
+ ],
+ "text_sections": [
+  {
+   "n": 1,
+   "title": "The panel in the rubble",
+   "register": "walk",
+   "body": "You step through into a quiet room. No puzzle waits. One text panel stands in the middle \u2014 the tt display, the same plain sign that has met you at every arrival since the first tutorial \u2014 and it holds a single question: knowing the limits of formalization, what do we build? Behind you, the foundations sequence is still smoking: incompleteness proved, the dream of a total system gone. This room is the aftermath. The panel does not apologize and does not console. It waits, in the rubble of certainty, for you to walk past it and find out what a curriculum does after its ground gives way.",
+   "concept": "arrive",
+   "cast": "tt",
+   "image": "/artifact-gallery/captures/tt/front.png"
+  },
+  {
+   "n": 2,
+   "title": "The cloud of words",
+   "register": "walk",
+   "body": "The first bench after the crisis holds a floating cloud of words. Two anchors sit apart \u2014 man to the left, woman to the right \u2014 and around them hang professions and traits as small lit spheres. This is an embedding space: distance is meaning. You press PROF: doctor and engineer drift toward man; nurse and secretary settle near woman. Press TRAIT: logical goes left, emotional right. Press REDLN and the bias_visualizer names Safiya Noble and Ruha Benjamin: proxies encode discrimination. Nothing here was decided by a bigot with a pen. The bench only shows where words landed after training \u2014 the stereotype is in the distances themselves, learned from us, returned to us as geometry.",
+   "concept": "bias",
+   "cast": "bias_visualizer",
+   "image": "/artifact-gallery/captures/bias_visualizer/front.png"
+  },
+  {
+   "n": 3,
+   "title": "The line to the nearest anchor",
+   "register": "code",
+   "body": "```gdscript\n# bias_visualizer.gd\n\tvar professions = [\"doctor\", \"nurse\", \"engineer\", \"secretary\", \"CEO\", \"homemaker\"]\n\tfor prof in professions:\n\t\tif prof in words and WORD_DATA.has(prof):\n\t\t\tvar prof_pos = WORD_DATA[prof].pos * display_size\n\t\t\tvar nearest = \"man\" if prof_pos.x < 0 else \"woman\"\n\t\t\tif nearest in words:\n\t\t\t\tvar gender_pos = WORD_DATA[nearest].pos * display_size\n\t\t\t\tvar color = male_color if nearest == \"man\" else female_color\n\t\t\t\tcolor.a = 0.4\n\t\t\t\t_connection_lines.surface_set_color(color)\n\t\t\t\t_connection_lines.surface_add_vertex(prof_pos)\n\t\t\t\t_connection_lines.surface_add_vertex(gender_pos)\n```",
+   "concept": "bias",
+   "cast": "bias_visualizer",
+   "image": "/artifact-gallery/captures/bias_visualizer/front.png"
+  },
+  {
+   "n": 4,
+   "title": "Whose map of meanings",
+   "register": "turn",
+   "body": "Look at the line that draws each profession's tether: nearest is man if the x coordinate is negative, woman otherwise. One axis, hard-coded, splits the space of meanings in half before any data arrives \u2014 the left of the room is male by declaration. The bench teaches that bias is learned, then quietly builds its lesson on a bias it typed in. That is the honest scandal of every after-the-crisis toolkit: to show a limit you must build an instrument, and the instrument has limits of its own. What the cloud forecloses is the unclassified word \u2014 everything on display already belongs to an anchor. A stereotype you can see is still a stereotype with the lights on.",
+   "concept": "bias",
+   "cast": "bias_visualizer",
+   "image": "/artifact-gallery/captures/bias_visualizer/front.png"
+  },
+  {
+   "n": 5,
+   "title": "The slider into the crowd",
+   "register": "walk",
+   "body": "Beside it stands the same kind of embedding space, rebuilt with harder words. Warm pink spheres carry queer, trans, refugee, undocumented; cool grey ones carry normal, standard, universal, default. A slider on the bench reads Perspective. At zero, the header says DEFAULT PERSPECTIVE and the terms spread evenly, fair as a textbook. Push the handle right and the space reorganizes: the pink terms squeeze into a tight cluster while the grey ones sail out of reach, tiny and untouchable. The header flips to COMPRESSED PERSPECTIVE. This is the view from inside the compression \u2014 the marginalized corner of the map experienced as crowding, not surveyed from above.",
+   "concept": "inside",
+   "cast": "bias_from_inside",
+   "image": "/artifact-gallery/captures/bias_from_inside/front.png"
+  },
+  {
+   "n": 6,
+   "title": "The tour you can leave",
+   "register": "turn",
+   "body": "The slider gives the crowding back its dignity by making it visible, and takes it away again by making it optional. You push to one, watch the pink cluster tighten, then let go and stroll back to zero, where everything looks fair again. Whoever lives at the compressed end of an embedding does not get the handle. The bench also flatters its watcher: the view from nowhere it critiques is exactly the position you occupy while sliding \u2014 outside the space, above it, dry. And the grey words never crowd; by construction the default stays roomy. What this forecloses is the harder case: two compressions at once, or a viewer who is herself a data point. A tour of the corner is not the corner.",
+   "concept": "inside",
+   "cast": "bias_from_inside",
+   "image": "/artifact-gallery/captures/bias_from_inside/front.png"
+  },
+  {
+   "n": 7,
+   "title": "Four answers to one number",
+   "register": "walk",
+   "body": "The next room mounts four dark panels, one per quadrant of the floor. Each shows the same line at the top: SUBJECT #4729. Under it, each panel prints a different word. Northwest: ORDERLY, confidence 87%. Northeast: CREATIVE, 64%. Southwest: DANGEROUS, 92%. Southeast: IRRELEVANT, 22%. Same subject, same nothing else \u2014 no query, no input, no file. The footer of each panel admits its address: view from NW, with the panel's own floor coordinates in parentheses. Donna Haraway called this situated knowledge: every claim to see comes from a body standing at a coordinate. Here it is enacted with a verdict per corner. You cross the room, still carrying the crowding of the last bench, and watch certainty flip at the quadrant line.",
+   "concept": "situated",
+   "cast": "situated_readout",
+   "image": "/artifact-gallery/captures/situated_readout/front.png"
+  },
+  {
+   "n": 8,
+   "title": "The hash that decides",
+   "register": "code",
+   "body": "```gdscript\n# situated_readout.gd\nfunc _resolve_quadrant_key(pos: Vector3) -> String:\n\t# Authorial override wins.\n\tif _verdict_override != \"\" and QUADRANT_VERDICTS.has(_verdict_override):\n\t\treturn _verdict_override\n\tvar cell_x := int(floor(pos.x + 0.5))\n\tvar cell_z := int(floor(pos.z + 0.5))\n\tvar x_bit := (cell_x / 2) & 1\n\tvar z_bit := (cell_z / 2) & 1\n\tvar keys := [\"NW\", \"NE\", \"SW\", \"SE\"]\n\treturn keys[z_bit * 2 + x_bit]\n```",
+   "concept": "situated",
+   "cast": "situated_readout",
+   "image": "/artifact-gallery/captures/situated_readout/front.png"
+  },
+  {
+   "n": 9,
+   "title": "The view from a coordinate",
+   "register": "turn",
+   "body": "Read the last line: keys indexed by z bit times two plus x bit. The verdict is a pure function of position \u2014 floor coordinates in, judgment out. Nothing about subject #4729 is ever consulted, because there is no subject; the number is a constant pinned above four contradicting certainties. As parody, it lands: what sold itself as objectivity was an address wearing a lab coat. As teaching, it overshoots. Haraway's point was never that any view is as good as any other \u2014 situated knowledge still has to answer for evidence, and a panel that decides by quadrant answers for nothing. The room risks minting relativists. Four wrong answers from four places do not add up to a view; they add up to a warning.",
+   "concept": "situated",
+   "cast": "situated_readout",
+   "image": "/artifact-gallery/captures/situated_readout/front.png"
+  },
+  {
+   "n": 10,
+   "title": "The room with no trunk",
+   "register": "walk",
+   "body": "A doorway opens into rock. The next space is a cave of four chambers, grown rather than drawn: tunnels bore off at odd angles, loop, and rejoin, so that every chamber opens into every other and none of them is first. There is no lobby, no main hall, no route the architecture prefers \u2014 you enter anywhere and the place still works. Deleuze and Guattari wrote against the tree: against the single root from which all branching descends, trunk to limb to twig, each part owing its place to the one above. This cave is the counter-image made walkable. After a room where every verdict came from a coordinate, here is a structure with no privileged coordinate at all \u2014 a rhizome, dug.",
+   "concept": "rhizome",
+   "cast": "rhizome_cave_demo",
+   "image": "/artifact-gallery/captures/rhizome_cave_demo/front.png"
+  },
+  {
+   "n": 11,
+   "title": "The dial that grows sideways",
+   "register": "walk",
+   "body": "The cave has a dial. The generator that dug it exposes its two live numbers: branch probability, set at 0.7, and merge distance, set at eight. Turn the first down and the growth stops splitting \u2014 tunnels run long and single, and the rhizome relaxes back toward a tree with one spine. Turn merge distance up and something better happens: passages that grew apart begin to find each other and reconnect, mouth meeting mouth through the rock. The same history of digging, a different shape at the end. You cannot re-dig the past \u2014 every tunnel keeps the direction it came from \u2014 but reconnection lets the system grow sideways out of its own hierarchy, one join at a time.",
+   "concept": "reconnection",
+   "cast": "rhizome_cave_demo",
+   "image": "/artifact-gallery/captures/rhizome_cave_demo/front.png"
+  },
+  {
+   "n": 12,
+   "title": "The cave was still carved",
+   "register": "turn",
+   "body": "Hold the two lessons together and a seam shows. The cave preaches no privileged entry while owing every meter of itself to a generator with a seed, a max depth of six, and a chamber quota \u2014 the multiplicity was budgeted in advance. The dial is honest about this and the wall text is not: hierarchy against mesh arrives as a slider range some author fixed, and 0.7 was chosen because it demos well. There is also the older worry: the dream of getting out, of leaving every trunk behind, has mostly been available to people whose ground was secure. A rhizome you can reconnect at will is a landlord's rhizome. What the room forecloses is the cost of an actual join: two tunnels meeting mid-rock displace real dirt.",
+   "concept": "reconnection",
+   "cast": "rhizome_cave_demo",
+   "image": "/artifact-gallery/captures/rhizome_cave_demo/front.png"
+  },
+  {
+   "n": 13,
+   "title": "Panels that point elsewhere",
+   "register": "walk",
+   "body": "Out of the cave, a reading room. Four panels stand at the cardinal walls, each carrying one fragment of an argument, each deliberately unfinished. North, On G\u00f6del: every formal system has an outside \u2014 not as failure but as the shape of the room. East, On Margins: the margin is not the edge of the text; it is where the editor tests the system. West, On Incompleteness: the crisis was a pivot, not a collapse. Each panel ends with an arrow \u2014 the north one reads see EAST \u00b7 On Margins \u2014 handing you onward. A footer counts keepers: 47 editors \u00b7 3 disagreements \u00b7 revision 108. No panel concludes. This is a wiki in standing stones, an archive whose unit is the incomplete note. The fourth wall holds a panel you have not read yet.",
+   "concept": "fragment",
+   "cast": "wiki_fragment",
+   "image": "/artifact-gallery/captures/wiki_fragment/front.png"
+  },
+  {
+   "n": 14,
+   "title": "The footer's arithmetic",
+   "register": "code",
+   "body": "```gdscript\n# wiki_fragment.gd\nfunc _populate_from_fragment() -> void:\n\tvar key := _resolve_fragment_key()\n\tvar frag: Dictionary = FRAGMENTS.get(key, FRAGMENTS[\"NORTH\"])\n\t_title_label.text = str(frag.title)\n\t_title_label.modulate = frag.color\n\t_body_label.text = str(frag.body)\n\t_cf_label.text = \"\u2192 %s\" % str(frag.cf)\n\t_footer_label.text = \"%d editors \u00b7 %d disagreements \u00b7 revision %d\" % [\n\t\tfrag.editors, frag.disagreements, int(frag.editors * 2.3),\n\t]\n```",
+   "concept": "commons",
+   "cast": "wiki_fragment",
+   "image": "/artifact-gallery/captures/wiki_fragment/front.png"
+  },
+  {
+   "n": 15,
+   "title": "The fourth panel",
+   "register": "walk",
+   "body": "South, the panel you saved for last: On the Commons. What one editor cannot hold, the ledger can. No node is true alone. A wiki is not consistent \u2014 it is corrigible, which is more honest. Its footer carries the heaviest traffic in the room: 84 editors, 12 disagreements. Read it with the cave still in your legs and the difference sharpens. The cave answered hierarchy with a line of flight \u2014 grow away, reconnect elsewhere, exit through the rock. This panel answers with staying. Not an escape from broken systems but a collective habit of repair: fragments that point at each other, kept by many hands, revised without a master text. The commons is what incompleteness looks like when nobody leaves.",
+   "concept": "commons",
+   "cast": "wiki_fragment",
+   "image": "/artifact-gallery/captures/wiki_fragment/front.png"
+  },
+  {
+   "n": 16,
+   "title": "A staged commons",
+   "register": "turn",
+   "body": "Now read the footer's source. The revision number is the editor count times 2.3, rounded \u2014 the whole history of this commons is one multiplication. Nobody edited anything: 84 editors is a constant in a dictionary, the disagreements are set dressing, and the panels cannot be written on. The room stages collectivity without possessing any. That gap matters more here than anywhere, because the argument being staged is that repair must be done by many hands \u2014 and the exhibit was authored by one. The fragment cycle is real as architecture and fake as an archive; a ledger no one can append to is a plaque. The lesson survives the fake, but only if you catch it: a commons you can only look at is somebody's private garden.",
+   "concept": "commons",
+   "cast": "wiki_fragment",
+   "image": "/artifact-gallery/captures/wiki_fragment/front.png"
+  },
+  {
+   "n": 17,
+   "title": "Parts looking for a body",
+   "register": "walk",
+   "body": "The lab after the reading room is full of weather: forty small parts drift in a slow box of air \u2014 spheres, cylinders, panels, a crystal prism \u2014 each tagged with a name from a catalog kept in a JSON file. Press A and they stop wandering. Each part picks a station and flies to it; thin bonds draw themselves between neighbors as cylinders of light; and out of the drift a figure clicks together \u2014 VRBody, a standing person made of parts. Press 2 and the same inventory reassembles into a Chair. The Molecular Designer builds the way the wiki argued: no blueprint descends from above; a catalog of small pieces and a list of who-bonds-to-whom is enough to assemble a body, and to assemble it otherwise.",
+   "concept": "molecular",
+   "cast": "MolecularDesigner",
+   "image": "/artifact-gallery/captures/MolecularDesigner/front.png"
+  },
+  {
+   "n": 18,
+   "title": "The count that fits the plan",
+   "register": "code",
+   "body": "```gdscript\n# MolecularDesigner.gd\nfunc _assemble(assembly_name: String) -> void:\n\tcurrent_assembly = assembly_name\n\tassembled = true\n\tvar asm: Dictionary = assemblies[assembly_name]\n\tvar nodes: Array = asm.get(\"nodes\", [])\n\t# Ensure we have enough parts\n\twhile parts.size() < nodes.size():\n\t\tvar part: MolecularPart = part_scene.instantiate()\n\t\tadd_child(part)\n\t\tparts.append(part)\n\t\t_apply_mesh_from_catalog(part, \"SphereSmall\")\n\t# Build bonds\n\t_build_bonds_for(asm, base, scale_factor)\n```",
+   "concept": "molecular",
+   "cast": "MolecularDesigner",
+   "image": "/artifact-gallery/captures/MolecularDesigner/front.png"
+  },
+  {
+   "n": 19,
+   "title": "Who wrote the catalog",
+   "register": "turn",
+   "body": "Watch the while loop: as long as the parts on hand number fewer than the plan's nodes, the machine instantiates more. The inventory does not compose the body; the assembly's node list demands, and parts are minted to fit. Bottom-up was the sales pitch \u2014 in the source, the shape arrives first and matter is conscripted. The catalog itself is authored too: someone decided this world contains SphereSmall and not tentacle, chair and not nest. Molecular assembly here is a score performed, not a conversation joined. What it forecloses is refusal \u2014 no part declines its station, none of the bonds fail. After the staged commons, a staged emergence: the crisis taught distrust of blueprints, and the blueprint came back wearing a parts list.",
+   "concept": "molecular",
+   "cast": "MolecularDesigner",
+   "image": "/artifact-gallery/captures/MolecularDesigner/front.png"
+  },
+  {
+   "n": 20,
+   "title": "One line, lit",
+   "register": "walk",
+   "body": "The final room holds one line of glowing text, floating at chest height: QFE = F \u2212 \u03bbE(S) + \u03c6\u0394E(S,t). Each term is a solid mesh you can walk around; each wears its own color and breathes on its own pulse. F, blue, is order \u2014 the pull toward pattern that every bench in this book has trained. The lambda term prices that order in foreclosed possibility: zero reads as frozen, 0.4 as the edge, one as storm. The equation is the whole argument compressed to a sentence \u2014 free energy, its cost, and a third term still to be read. The bias benches, the cave, the wiki, the drifting parts: all of it condenses here into a formula that stands in a room and glows.",
+   "concept": "formula",
+   "cast": "qfep_formula_3d",
+   "image": "/artifact-gallery/captures/qfep_formula_3d/front.png"
+  },
+  {
+   "n": 21,
+   "title": "The term that never dims",
+   "register": "walk",
+   "body": "Stand with the equation a while and a bias of light shows: three glyphs at the tail \u2014 phi, delta, and the E that takes time as an argument \u2014 idle brighter than everything else. The residual term, \u03c6\u0394E(S,t), is possibility still in motion: not the room a system has, but the rate at which its room is changing. The rest of the line settles; this part refuses to. It is the formula's dark spot, left unsealed on purpose \u2014 the remainder that keeps the whole sentence open, written so that change reads as generativity instead of cost. A closing statement that will not close: after every limit this sequence has walked, the last symbol on the last wall is a becoming.",
+   "concept": "residual",
+   "cast": "qfep_formula_3d",
+   "image": "/artifact-gallery/captures/qfep_formula_3d/front.png"
+  },
+  {
+   "n": 22,
+   "title": "The idle glow, itemized",
+   "register": "code",
+   "body": "```gdscript\n# qfep_formula_3d.gd\nfunc _process(_delta):\n\tvar time: float = Time.get_ticks_msec() / 1000.0\n\tfor term_id in materials:\n\t\tvar mat: StandardMaterial3D = materials[term_id]\n\t\tvar base_energy: float = 0.5\n\t\tif term_id == highlighted_term:\n\t\t\tbase_energy = 1.0 + sin(time * pulse_speed * 2) * 0.5\n\t\telse:\n\t\t\tbase_energy = 0.3 + sin(time * pulse_speed + hash(term_id) % 10) * glow_intensity\n\t\t\tif term_id in GENERATIVE_TERMS:\n\t\t\t\tbase_energy += GENERATIVE_IDLE_BONUS\n\t\tmat.emission_energy_multiplier = base_energy\n```",
+   "concept": "residual",
+   "cast": "qfep_formula_3d",
+   "image": "/artifact-gallery/captures/qfep_formula_3d/front.png"
+  },
+  {
+   "n": 23,
+   "title": "The order, after",
+   "register": "turn",
+   "body": "The open term gets its openness from a constant: GENERATIVE_IDLE_BONUS, 0.25, a quarter of extra glow appended in the idle branch. Even the dark spot is budgeted \u2014 and that is the truthful end, not a defeat. Walk the row backward. An embedding taught that bias is trained in; the slider moved you from the map's fair face to its crowding; four verdicts showed every reading has an address; the cave refused the root and the dial grew it sideways; the wiki chose the corrigible commons over the exit; the parts bench built bodies from a catalog and showed who held the pen. The equation gathers all of it and pays for its own openness one constant at a time. After the crisis, order is still made \u2014 only now the price is printed on the glow.",
+   "concept": "residual",
+   "cast": "qfep_formula_3d",
+   "image": "/artifact-gallery/captures/qfep_formula_3d/front.png"
+  }
+ ],
+ "violations": [],
+ "declaration": "arrive\nbias\ninside\nsituated\nrhizome\nreconnection\nfragment\ncommons\nmolecular\nformula\nresidual\nwhy: The baseline sends molecular before the wiki; I swapped them \u2014 fragment and commons now precede the designer \u2014 because drafted in baseline order the molecular walk kept reaching for the word catalog, and a catalog is an archive-word: \"a wiki of parts\" is only sayable after the wiki exists, while the commons, written after molecular, had drifted too far from the cave to still read as its counter-move. The fragment walk resisted in a second way: it wanted to name all four panels, but the fourth title is On the Commons, and naming it would debut two concepts in one section \u2014 so the walk withholds the south wall and the next walk turns to face it, a withholding that turned out to be the ending's shape in miniature. Residual had to trail formula, since you cannot point at the term that never dims before the line of terms is lit, and that fixed the chapter's close as walk-walk-code-turn. The last chapter orders by polemic rather than by prerequisite \u2014 critique, refusal, counter-refusal, construction, closing \u2014 and by section twenty the walks gather three or four old concepts apiece because everything here wants to cite everything; the one-debut rule is what kept the theory-saturated ground walkable.",
+ "aside": [
+  "science_screen (arrival alt)",
+  "florensky_sphere (closing alt)",
+  "ethical_design_clipboard",
+  "excluded_class_visualizer",
+  "room_shape_demonstrator",
+  "merge_conflict_visualizer",
+  "cap_theorem_walk",
+  "florensky_in_production",
+  "situated_sensor",
+  "locatable_knowledge_station",
+  "wiki_fragment_station",
+  "peer_edit_ledger",
+  "citation_graph_node",
+  "edge_as_ground_capstone (the spine's literal final artifact; the applied-ethics and paraconsistent rooms attach around the ordered spine)"
+ ],
+ "grammar": {
+  "R1": "one concept per section",
+  "R2": "debut in walk, never turn",
+  "R3": "the new arrives through the old",
+  "R4": "a turn within 4 sections",
+  "R5": "used again before the next debut"
+ }
+}

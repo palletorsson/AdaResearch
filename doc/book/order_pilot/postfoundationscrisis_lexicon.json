@@ -1,0 +1,24 @@
+{
+ "baseline_order": ["arrive", "bias", "inside", "situated", "rhizome",
+                    "molecular", "fragment", "formula"],
+ "concepts": {
+  "arrive":       {"cast": "tt", "aliases": ["crisis", "aftermath", "arrival", "rubble", "threshold"]},
+  "bias":         {"cast": "bias_visualizer", "aliases": ["bias", "biased", "embedding", "embeddings", "stereotype", "redlining"]},
+  "inside":       {"cast": "bias_from_inside", "aliases": ["from inside", "crowding", "crowded", "marginalized", "compressed"]},
+  "situated":     {"cast": "situated_readout", "aliases": ["situated", "verdict", "verdicts", "quadrant", "haraway", "somewhere"]},
+  "rhizome":      {"cast": "rhizome_cave_demo", "aliases": ["rhizome", "rhizomatic", "deleuze", "cave", "root", "roots"]},
+  "reconnection": {"cast": "rhizome_cave_demo", "aliases": ["reconnection", "reconnect", "reconnects", "sideways", "merge distance", "branch probability"]},
+  "fragment":     {"cast": "wiki_fragment", "aliases": ["fragment", "fragments", "wiki", "archive", "ledger", "corrigible"]},
+  "commons":      {"cast": "wiki_fragment", "aliases": ["commons", "collective", "line of flight", "exit"]},
+  "molecular":    {"cast": "MolecularDesigner", "aliases": ["molecular", "assemble", "assembly", "catalog", "bonds", "vrbody"]},
+  "formula":      {"cast": "qfep_formula_3d", "aliases": ["formula", "equation", "qfe", "lambda", "free energy"]},
+  "residual":     {"cast": "qfep_formula_3d", "aliases": ["residual", "phi", "delta", "dark spot", "remainder"]}
+ },
+ "aside": ["science_screen (arrival alt)", "florensky_sphere (closing alt)",
+           "ethical_design_clipboard", "excluded_class_visualizer",
+           "room_shape_demonstrator", "merge_conflict_visualizer",
+           "cap_theorem_walk", "florensky_in_production", "situated_sensor",
+           "locatable_knowledge_station", "wiki_fragment_station",
+           "peer_edit_ledger", "citation_graph_node",
+           "edge_as_ground_capstone (the spine's literal final artifact; the applied-ethics and paraconsistent rooms attach around the ordered spine)"]
+}

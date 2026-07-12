@@ -1,0 +1,20 @@
+{
+ "baseline_order": ["axioms", "russellset", "selfreference", "godel", "halting",
+                    "tower", "hyperbolic", "truthgap"],
+ "concepts": {
+  "axioms":          {"cast": "euclid_postulates_plaque", "aliases": ["axiom", "axioms", "postulate", "postulates", "plaque", "fifth"]},
+  "selfreference":   {"cast": "liar_loop", "aliases": ["liar", "self-reference", "own tail", "chalk sign", "truth-lamp"]},
+  "russellset":      {"cast": "russell_set_box", "aliases": ["set", "box", "boxes", "russell", "paradox", "nested"]},
+  "godel":           {"cast": "godel_sentence_machine", "aliases": ["godel", "prove", "proof", "provable", "unprovable", "prover"]},
+  "halting":         {"cast": "godel_sentence_machine", "aliases": ["halting", "halt", "halts", "turing", "decider"]},
+  "tower":           {"cast": "incompleteness_tower", "aliases": ["tower", "patch", "patched", "level", "levels"]},
+  "truthgap":        {"cast": "provability_sorter", "aliases": ["sorter", "band", "rings", "rain", "subset"]},
+  "hyperbolic":      {"cast": "poincare_disk", "aliases": ["disk", "hyperbolic", "rim", "geodesic", "arcs"]},
+  "paraconsistency": {"cast": "florensky_sphere", "aliases": ["sphere", "florensky", "skin", "not-a", "paraconsistency"]},
+  "formula":         {"cast": "qfep_formula_3d", "aliases": ["formula", "equation", "qfe", "phi", "lambda"]}
+ },
+ "aside": ["parallel_lines", "angle_sum_triangle", "barber_paradox",
+           "self_membership_set", "godel_statement_plaque", "escher_staircase",
+           "penrose_triangle", "riemann_sphere", "hyperbolic_surface",
+           "excluded_middle_demo", "constructive_proof"]
+}

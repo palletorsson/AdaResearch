@@ -1,0 +1,618 @@
+{
+ "sequence": "foundationscrisis",
+ "written_order": [
+  "axioms",
+  "selfreference",
+  "russellset",
+  "godel",
+  "halting",
+  "tower",
+  "truthgap",
+  "hyperbolic",
+  "paraconsistency",
+  "formula"
+ ],
+ "baseline_order": [
+  "axioms",
+  "russellset",
+  "selfreference",
+  "godel",
+  "halting",
+  "tower",
+  "hyperbolic",
+  "truthgap"
+ ],
+ "agreement_kendall": {
+  "baseline": 0.857,
+  "pedagogy": 0.733,
+  "ontology": 0.067,
+  "criticality": 0.333
+ },
+ "rows": [
+  {
+   "concept": "axioms",
+   "cast": "euclid_postulates_plaque",
+   "written": 0,
+   "baseline": 0,
+   "ped": 0,
+   "onto": 1,
+   "crit": 2
+  },
+  {
+   "concept": "selfreference",
+   "cast": "liar_loop",
+   "written": 1,
+   "baseline": 2,
+   "ped": 1,
+   "onto": 2,
+   "crit": 0
+  },
+  {
+   "concept": "russellset",
+   "cast": "russell_set_box",
+   "written": 2,
+   "baseline": 1,
+   "ped": 0,
+   "onto": 2,
+   "crit": 2
+  },
+  {
+   "concept": "godel",
+   "cast": "godel_sentence_machine",
+   "written": 3,
+   "baseline": 3,
+   "ped": 1,
+   "onto": 2,
+   "crit": 1
+  },
+  {
+   "concept": "halting",
+   "cast": "godel_sentence_machine",
+   "written": 4,
+   "baseline": 4,
+   "ped": 1,
+   "onto": 2,
+   "crit": 1
+  },
+  {
+   "concept": "tower",
+   "cast": "incompleteness_tower",
+   "written": 5,
+   "baseline": 5,
+   "ped": 1,
+   "onto": 2,
+   "crit": 2
+  },
+  {
+   "concept": "truthgap",
+   "cast": "provability_sorter",
+   "written": 6,
+   "baseline": 7,
+   "ped": 1,
+   "onto": 2,
+   "crit": 0
+  },
+  {
+   "concept": "hyperbolic",
+   "cast": "poincare_disk",
+   "written": 7,
+   "baseline": 6,
+   "ped": 0,
+   "onto": 0,
+   "crit": 2
+  },
+  {
+   "concept": "paraconsistency",
+   "cast": "florensky_sphere",
+   "written": 8,
+   "baseline": null,
+   "ped": 2,
+   "onto": 1,
+   "crit": 2
+  },
+  {
+   "concept": "formula",
+   "cast": "qfep_formula_3d",
+   "written": 9,
+   "baseline": null,
+   "ped": 2,
+   "onto": 0,
+   "crit": 1
+  }
+ ],
+ "sections": [
+  {
+   "n": 1,
+   "register": "walk",
+   "title": "The plaque with five statements",
+   "mentions": [
+    "axioms"
+   ],
+   "introduces": [
+    "axioms"
+   ]
+  },
+  {
+   "n": 2,
+   "register": "walk",
+   "title": "The sign that speaks about the sign",
+   "mentions": [
+    "axioms",
+    "selfreference"
+   ],
+   "introduces": [
+    "selfreference"
+   ]
+  },
+  {
+   "n": 3,
+   "register": "walk",
+   "title": "The box that contains the question",
+   "mentions": [
+    "russellset",
+    "selfreference"
+   ],
+   "introduces": [
+    "russellset"
+   ]
+  },
+  {
+   "n": 4,
+   "register": "code",
+   "title": "The box, opened in source",
+   "mentions": [
+    "russellset"
+   ],
+   "introduces": []
+  },
+  {
+   "n": 5,
+   "register": "turn",
+   "title": "Five lines that recite a collapse",
+   "mentions": [
+    "axioms",
+    "russellset",
+    "selfreference"
+   ],
+   "introduces": []
+  },
+  {
+   "n": 6,
+   "register": "walk",
+   "title": "The machine that prints its own limit",
+   "mentions": [
+    "godel",
+    "selfreference"
+   ],
+   "introduces": [
+    "godel"
+   ]
+  },
+  {
+   "n": 7,
+   "register": "code",
+   "title": "The jam, scheduled",
+   "mentions": [
+    "godel",
+    "halting"
+   ],
+   "introduces": []
+  },
+  {
+   "n": 8,
+   "register": "turn",
+   "title": "The jam is on the clock",
+   "mentions": [
+    "godel"
+   ],
+   "introduces": []
+  },
+  {
+   "n": 9,
+   "register": "walk",
+   "title": "The judge that cannot exist",
+   "mentions": [
+    "godel",
+    "halting",
+    "selfreference"
+   ],
+   "introduces": [
+    "halting"
+   ]
+  },
+  {
+   "n": 10,
+   "register": "code",
+   "title": "Forever, implemented",
+   "mentions": [
+    "godel",
+    "halting"
+   ],
+   "introduces": []
+  },
+  {
+   "n": 11,
+   "register": "turn",
+   "title": "Forever, six seconds wide",
+   "mentions": [
+    "halting"
+   ],
+   "introduces": []
+  },
+  {
+   "n": 12,
+   "register": "walk",
+   "title": "The tower of patches",
+   "mentions": [
+    "axioms",
+    "godel",
+    "tower"
+   ],
+   "introduces": [
+    "tower"
+   ]
+  },
+  {
+   "n": 13,
+   "register": "turn",
+   "title": "Renovation as a way of life",
+   "mentions": [
+    "axioms",
+    "godel",
+    "tower"
+   ],
+   "introduces": []
+  },
+  {
+   "n": 14,
+   "register": "walk",
+   "title": "Two rings and a gold remainder",
+   "mentions": [
+    "godel",
+    "truthgap"
+   ],
+   "introduces": [
+    "truthgap"
+   ]
+  },
+  {
+   "n": 15,
+   "register": "code",
+   "title": "The sorter's dice",
+   "mentions": [
+    "truthgap"
+   ],
+   "introduces": []
+  },
+  {
+   "n": 16,
+   "register": "turn",
+   "title": "The lottery inside the sorter",
+   "mentions": [
+    "axioms",
+    "halting",
+    "russellset",
+    "tower",
+    "truthgap"
+   ],
+   "introduces": []
+  },
+  {
+   "n": 17,
+   "register": "walk",
+   "title": "The table where the fifth is denied",
+   "mentions": [
+    "axioms",
+    "hyperbolic"
+   ],
+   "introduces": [
+    "hyperbolic"
+   ]
+  },
+  {
+   "n": 18,
+   "register": "turn",
+   "title": "Infinity as a coaster",
+   "mentions": [
+    "axioms",
+    "hyperbolic"
+   ],
+   "introduces": []
+  },
+  {
+   "n": 19,
+   "register": "walk",
+   "title": "The sphere that keeps both faces",
+   "mentions": [
+    "paraconsistency",
+    "russellset"
+   ],
+   "introduces": [
+    "paraconsistency"
+   ]
+  },
+  {
+   "n": 20,
+   "register": "code",
+   "title": "The disabled cull",
+   "mentions": [
+    "paraconsistency"
+   ],
+   "introduces": []
+  },
+  {
+   "n": 21,
+   "register": "turn",
+   "title": "Peace by not computing",
+   "mentions": [
+    "paraconsistency",
+    "russellset"
+   ],
+   "introduces": []
+  },
+  {
+   "n": 22,
+   "register": "walk",
+   "title": "One line, still breathing",
+   "mentions": [
+    "axioms",
+    "formula",
+    "paraconsistency",
+    "selfreference",
+    "truthgap"
+   ],
+   "introduces": [
+    "formula"
+   ]
+  },
+  {
+   "n": 23,
+   "register": "turn",
+   "title": "The order the crisis makes",
+   "mentions": [
+    "axioms",
+    "formula",
+    "godel",
+    "halting",
+    "hyperbolic",
+    "paraconsistency",
+    "russellset",
+    "selfreference",
+    "tower",
+    "truthgap"
+   ],
+   "introduces": []
+  }
+ ],
+ "text_sections": [
+  {
+   "n": 1,
+   "title": "The plaque with five statements",
+   "register": "walk",
+   "body": "The first room holds a bronze-framed plaque on a dark stand, five statements printed on its face, tagged I to V along the bottom edge. Click, and a small amber highlight slides from numeral to numeral. The first four are one line each: a straight line joins any two points; a line extends as far as you like; a circle can be drawn around any center; all right angles agree. You nod before you finish reading. Then the fifth. The highlight turns orange, the whole plaque warms, and the text runs four lines about crossing lines and interior angles. Euclid's postulates carried geometry for two thousand years, and geometers spent most of those years trying to derive the long one from the four short ones. The plaque keeps it glowing: the odd axiom out.",
+   "concept": "axioms",
+   "cast": "euclid_postulates_plaque",
+   "image": "/artifact-gallery/captures/euclid_postulates_plaque/front.png"
+  },
+  {
+   "n": 2,
+   "title": "The sign that speaks about the sign",
+   "register": "walk",
+   "body": "The next stand is a slim mast holding a chalk slate framed in purple wire. Written across it: THIS STATEMENT IS FALSE. Above the slate a glass bulb hangs in a thin steel hoop, TRUE on its left, FALSE on its right. Watch the truth-lamp work. It eases green and TRUE swells \u2014 but grant the sentence truth and it tells you it is false. The bulb slides red, FALSE swells \u2014 but grant it falsehood and it has just told the truth. The lamp never settles. Around the slate an almost-closed circle of glowing tubes chases its own tail, arrowhead forever a hand's width behind its end. The plaque made claims about points and lines. This chalk sign is the liar: a sentence whose only subject is the sentence.",
+   "concept": "selfreference",
+   "cast": "liar_loop",
+   "image": "/artifact-gallery/captures/liar_loop/front.png"
+  },
+  {
+   "n": 3,
+   "title": "The box that contains the question",
+   "register": "walk",
+   "body": "On a low table sits a wooden box the color of old rust, lid closed. Its label reads S = { x | x \u2209 x } \u2014 the set of all sets that do not contain themselves \u2014 and beneath, smaller: Does S contain itself? Say yes, and by its own label it must not. Say no, and then it qualifies, so it must. The liar again, dressed as furniture. Click the lid: it hinges back from the rear edge, and inside waits another box, smaller, cooler in color. Open that one \u2014 another. Five deep the nesting stops pretending, and a pale glyph glows in the last hollow: \u221e. Bertrand Russell mailed this paradox to Frege in 1901, and the ground arithmetic was being rebuilt on cracked before the letter was opened.",
+   "concept": "russellset",
+   "cast": "russell_set_box",
+   "image": "/artifact-gallery/captures/russell_set_box/front.png"
+  },
+  {
+   "n": 4,
+   "title": "The box, opened in source",
+   "register": "code",
+   "body": "```gdscript\n# commons/interfaces/foundations/russell_set_box.gd \u2014 _update_paradox_text()\n\tmatch _current_depth:\n\t\t0:\n\t\t\ttext = \"Does S contain itself?\"\n\t\t1:\n\t\t\ttext = \"If S \u2208 S, then S \u2209 S (by definition)\"\n\t\t2:\n\t\t\ttext = \"If S \u2209 S, then S \u2208 S (by definition)\"\n\t\t3:\n\t\t\ttext = \"Therefore S \u2208 S \u2194 S \u2209 S\"\n\t\t4:\n\t\t\ttext = \"CONTRADICTION\"\n\t\t_:\n\t\t\ttext = \"The paradox has no resolution. Every formal system has an outside.\"\n```",
+   "concept": "russellset",
+   "cast": "russell_set_box",
+   "image": "/artifact-gallery/captures/russell_set_box/front.png"
+  },
+  {
+   "n": 5,
+   "title": "Five lines that recite a collapse",
+   "register": "turn",
+   "body": "Read the source before admiring the wound. The box does not derive its crisis; a five-branch lookup recites it, one printed line per opening, and the branch for depth four is simply CONTRADICTION. Depth is a counter. The infinite regress is five props and a glyph \u2014 max_visible_depth is 5 \u2014 a paradox with a display budget. What the exhibit flattens is the damage: Russell's letter did not open a toy, it broke the ground the postulates had promised, and the rebuilding of arithmetic on collections stalled in one page. Yet the code is honest where the wood cannot be: no finite prop nests forever, so the last branch stops arguing and posts a sign. The liar could oscillate all day. The set had to ship.",
+   "concept": "russellset",
+   "cast": "russell_set_box",
+   "image": "/artifact-gallery/captures/russell_set_box/front.png"
+  },
+  {
+   "n": 6,
+   "title": "The machine that prints its own limit",
+   "register": "walk",
+   "body": "A chalk circle on the floor, and inside it a standing slab on two steel legs. Printed across the panel: G: \"G IS NOT PROVABLE\" \u2014 and beneath, smaller and purple: = this very sentence. Out of the G a glowing loop spins and bites back into it, arrowhead first \u2014 the liar's own tail welded in wire, captioned G names itself. From the right edge a steel prover arm swings in, a two-jawed clamp stamped PROVE reaching for the sentence. It seizes. A red JAM flare, the whole panel flushes hot, the arm shudders and retracts. Then, overhead, a gold plate breathes into view \u2014 TRUE, BUT UNPROVABLE \u2014 holds, fades, and the arm swings in again. This is Godel's 1931 sentence staged as a machine: the true claim no derivation reaches, watched failing to be reached.",
+   "concept": "godel",
+   "cast": "godel_sentence_machine",
+   "image": "/artifact-gallery/captures/godel_sentence_machine/front.png"
+  },
+  {
+   "n": 7,
+   "title": "The jam, scheduled",
+   "register": "code",
+   "body": "```gdscript\n# commons/artifacts/godel_sentence_machine/godel_sentence_machine.gd \u2014 _process()\n\t# phase 0.00..0.40  attempt: arm swings in toward G\n\t# phase 0.40..0.55  jam: arm shudders, red spark flares\n\t# phase 0.55..1.00  conclude: arm retracts, gold verdict glows then fades\n\tif phase < 0.40:\n\t\treach = _smooth(phase / 0.40)\n\telif phase < 0.55:\n\t\treach = 1.0\n\t\tjam = (phase - 0.40) / 0.15\n\telse:\n\t\tconclude = (phase - 0.55) / 0.45\n\t\treach = 1.0 - _smooth(conclude)\n```",
+   "concept": "halting",
+   "cast": "godel_sentence_machine",
+   "image": "/artifact-gallery/captures/godel_sentence_machine/front.png"
+  },
+  {
+   "n": 8,
+   "title": "The jam is on the clock",
+   "register": "turn",
+   "body": "Now the schedule. The seizure is not discovered, it is booked: jam = (phase - 0.40) / 0.15. At forty percent of a six-second cycle the arm must shudder, at fifty-five it must give up, and the gold plate is contractually due at the end. Nothing searches. No derivation is attempted and found wanting; the failure is choreography with a fixed curtain time. Before calling that a cheat, ask what an honest version would do: actually hunt for a proof of G, live, in front of visitors. That hunt would never come back, and the exhibit would stand still forever, indistinguishable from a broken one. The staged jam is the only way to show this limit and still open the doors. The loop, at least, spins for real.",
+   "concept": "godel",
+   "cast": "godel_sentence_machine",
+   "image": "/artifact-gallery/captures/godel_sentence_machine/front.png"
+  },
+  {
+   "n": 9,
+   "title": "The judge that cannot exist",
+   "register": "walk",
+   "body": "Stand at the same machine and time it against your breath. Six seconds: reach, seize, retract, gold. You can promise a stranger the arm comes back, because its return is written into the cycle. Alan Turing, 1936, asked whether that promise can be manufactured in general: one judge that reads any machine with any input and always answers \u2014 this one finishes, this one never will. Build such a decider and you can build its saboteur: a machine that asks the judge about itself, then does the opposite \u2014 running on when told it stops, stopping when told it runs. The liar's move, aimed at prediction instead of truth. So no such judge exists. The halting problem is this wing's second great limit, and notice: it has no bench of its own. The museum lends it Godel's machine.",
+   "concept": "halting",
+   "cast": "godel_sentence_machine",
+   "image": "/artifact-gallery/captures/godel_sentence_machine/front.png"
+  },
+  {
+   "n": 10,
+   "title": "Forever, implemented",
+   "register": "code",
+   "body": "```gdscript\n# commons/artifacts/godel_sentence_machine/godel_sentence_machine.gd\n@export var cycle_period: float = 6.0\n\nfunc _process(delta: float) -> void:\n\tif Engine.is_editor_hint():\n\t\treturn\n\t_t += delta\n\tvar phase: float = fmod(_t, cycle_period) / cycle_period  # 0..1\n\t# The cycle: attempt (reach in) -> jam (seize, red) -> conclude (gold verdict).\n```",
+   "concept": "halting",
+   "cast": "godel_sentence_machine",
+   "image": "/artifact-gallery/captures/godel_sentence_machine/front.png"
+  },
+  {
+   "n": 11,
+   "title": "Forever, six seconds wide",
+   "register": "turn",
+   "body": "The word forever, in source, is fmod(_t, cycle_period): a six-second wheel that wraps. It has to be. _process must hand control back every frame; an artifact that genuinely ran without returning would freeze the room, the headset, the visitor's hands. The engine's one absolute rule is that everything halts, sixty times a second. So the halting problem is the single exhibit this museum can never perform, only mime \u2014 every indoor forever you will ever be shown is a modulo. That is worth keeping. Turing's limit is not scenery here; it is the reason the scenery works at all. The scheduled jam and this wheel are the same confession at two depths: what cannot be computed can, at best, be scheduled.",
+   "concept": "halting",
+   "cast": "godel_sentence_machine",
+   "image": "/artifact-gallery/captures/godel_sentence_machine/front.png"
+  },
+  {
+   "n": 12,
+   "title": "The tower of patches",
+   "register": "walk",
+   "body": "Past the machine stands a tower of five translucent floors, each narrower than the one below, tagged S1 to S5 up the side. In every floor an opening glows the familiar gold \u2014 the same gold as the unprovable plate \u2014 and above each opening hovers a small cyan block labeled + AXIOM. A pulse climbs. When it reaches a floor, the block descends and seats itself; the gold cools to cyan and nearly closes; that level is patched. The instant it seats, the floor above flares a fresh gold hole. Patch, climb, flare, all the way up \u2014 then the whole thing wraps and begins again at the bottom. Adopt the unreachable truth as a new axiom and you own a larger system, which manufactures its own unreachable truth. Five levels are enough to teach the rhythm.",
+   "concept": "tower",
+   "cast": "incompleteness_tower",
+   "image": "/artifact-gallery/captures/incompleteness_tower/front.png"
+  },
+  {
+   "n": 13,
+   "title": "Renovation as a way of life",
+   "register": "turn",
+   "body": "The tower sells repair as rhythm. Each patch is real \u2014 S2 truly seals the hole S1 could not \u2014 and each patch grows the building, so the leak moves one level up and one size larger. What the loop flatters is the calm. In working mathematics, adding an axiom is not an elevator ride; it is a fight about what the subject is. Choice was contested for decades; large-cardinal axioms still are. The exhibit's pulse climbs at a fixed pace, as if patching were maintenance rather than allegiance. And the wrap at the top quietly teaches despair on a timer: five floors, then reset. Godel's second act is stranger than that \u2014 the ladder has no top, and every rung is a decision about whom you trust.",
+   "concept": "tower",
+   "cast": "incompleteness_tower",
+   "image": "/artifact-gallery/captures/incompleteness_tower/front.png"
+  },
+  {
+   "n": 14,
+   "title": "Two rings and a gold remainder",
+   "register": "walk",
+   "body": "A low plinth carries two rings of light: an outer blue hoop labeled TRUE, an inner cyan one labeled PROVABLE, and between them a flat gold band. From above, small white beads rain down in a staggered drizzle \u2014 statement-tokens, the placard says. Most settle inside the cyan circle: true, and reachable by derivation. Some land in the gold between and stay there, pulsing \u2014 TRUE BUT UNPROVABLE, the sign reads. One bead never fell with the others: fixed in the band, brighter, tagged G, breathing where Godel's sentence lives. The sorter's whole claim is drawn on the floor in circles: the provable is a proper subset of the true, an inner region with a remainder that never empties. Watch long enough and the rhythm is plain \u2014 most truths land inside, and the band always catches its share.",
+   "concept": "truthgap",
+   "cast": "provability_sorter",
+   "image": "/artifact-gallery/captures/provability_sorter/front.png"
+  },
+  {
+   "n": 15,
+   "title": "The sorter's dice",
+   "register": "code",
+   "body": "```gdscript\n# commons/artifacts/provability_sorter/provability_sorter.gd \u2014 _build_tokens()\n\tvar i: int = 0\n\twhile i < token_count:\n\t\t_drop_t[i] = _rng.randf()                        # stagger the fall\n\t\t# roughly 1 in 4 lands in the gold gap (true-but-unprovable); rest are provable\n\t\tvar gap: bool = (_rng.randf() < 0.28)\n\t\t_is_gap[i] = 1 if gap else 0\n\t\t_ang[i] = _rng.randf() * TAU\n\t\tif gap:\n\t\t\t_rest_r[i] = gap_r + _rng.randf_range(-0.02, 0.02)\n\t\telse:\n\t\t\t_rest_r[i] = _rng.randf() * (inner_radius - 0.04)\n```",
+   "concept": "truthgap",
+   "cast": "provability_sorter",
+   "image": "/artifact-gallery/captures/provability_sorter/front.png"
+  },
+  {
+   "n": 16,
+   "title": "The lottery inside the sorter",
+   "register": "turn",
+   "body": "Find the sorting rule in the source: var gap: bool = (_rng.randf() < 0.28). Which statements land forever beyond derivation is decided by a random draw against a hand-set dial, and the comment above it shrugs \u2014 roughly 1 in 4. This is not laziness; it is the theorem wearing overalls. A procedure that could examine a statement and announce true-but-unreachable would be exactly the decider Turing forbade \u2014 a working sorter would refute its own placard. So the artifact rolls dice and hides the confession in a comment, honester than the plinth it stands on. What the staging still flattens: the band's population is no fixed rate of nature. Candidates drift in and out of reach as axioms are adopted \u2014 the tower runs next door \u2014 and 0.28 freezes a border that is actually a negotiation.",
+   "concept": "truthgap",
+   "cast": "provability_sorter",
+   "image": "/artifact-gallery/captures/provability_sorter/front.png"
+  },
+  {
+   "n": 17,
+   "title": "The table where the fifth is denied",
+   "register": "walk",
+   "body": "A round table of dark glass, edged with an amber rim that glows: the Poincar\u00e9 disk. Across its face run eight blue arcs, and every one meets the rim at a right angle. These arcs are this floor's straight lines \u2014 geodesics \u2014 and through a point beside any one of them pass many others that never cross it. A red triangle sits near the center, its three sides bowed inward, its posted angle sum about 150 degrees, thirty short of the flat page's 180. The rim is infinity: an endless plane compressed to a tabletop you could lean over. This is the fifth postulate denied outright \u2014 and nothing collapses. The other four hold. Triangles thin, parallels multiply, and the geometry runs on, consistent, hyperbolic, at home on a coffee table.",
+   "concept": "hyperbolic",
+   "cast": "poincare_disk",
+   "image": "/artifact-gallery/captures/poincare_disk/front.png"
+  },
+  {
+   "n": 18,
+   "title": "Infinity as a coaster",
+   "register": "turn",
+   "body": "The disk domesticates its own bad news. Infinity as a coaster, the great denial as table decor \u2014 walk past too fast and it reads as a curio, not a crisis. Its comfort is borrowed, too: the disk is a model built inside the old flat geometry, so what it earns is relative safety \u2014 if the plaque's world is consistent, so is this one. Certainty is not restored; the mortgage is transferred. After this table, the fifth postulate stops being a truth you failed to derive and becomes a preference you declare, and the plaque in the first room retroactively turns into a menu. What the model forecloses is quieter: rendered flat and finite, the endless floor can be admired without ever being walked.",
+   "concept": "hyperbolic",
+   "cast": "poincare_disk",
+   "image": "/artifact-gallery/captures/poincare_disk/front.png"
+  },
+  {
+   "n": 19,
+   "title": "The sphere that keeps both faces",
+   "register": "walk",
+   "body": "The last alcove holds a sphere you can see into: a violet, translucent skin \u2014 and, look again, both sides of that skin lit at once, the far face glowing through the near one. Inside, a white core pulses. The tag reads A \u2227 \u00acA. Pavel Florensky, mathematician and priest, shot in 1937, argued that some truths only arrive as held contradictions: A and not-A together, and the world does not end. Click the sphere and it collapses \u2014 pure blue A or pure red not-A, chosen by chance \u2014 holds that single answer for two seconds, then returns to violet both. The resting state is the contradiction; the settled answer is only the visitor's brief interruption. Where Russell's box burst on contact with its own question, this surface carries the same charge and does not burst.",
+   "concept": "paraconsistency",
+   "cast": "florensky_sphere",
+   "image": "/artifact-gallery/captures/florensky_sphere/front.png"
+  },
+  {
+   "n": 20,
+   "title": "The disabled cull",
+   "register": "code",
+   "body": "```gdscript\n# commons/interfaces/foundations/florensky_sphere.gd \u2014 _create_sphere()\n\tvar mat = StandardMaterial3D.new()\n\tmat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA\n\tmat.albedo_color = color_both\n\t# Paraconsistency made visible: the skin is double-faced.\n\t# Disable culling so the sphere's INNER surface and OUTER surface both\n\t# render at once \u2014 the boundary reads from both sides simultaneously\n\t# (A \u2227 \u00acA on one skin, not two objects). Back-lighting lets the far\n\t# face glow through the near one, so inside-and-outside coexist.\n\tmat.cull_mode = BaseMaterial3D.CULL_DISABLED\n\tmat.backlight_enabled = true\n\tmat.backlight = Color(0.5, 0.5, 0.5)\n```",
+   "concept": "paraconsistency",
+   "cast": "florensky_sphere",
+   "image": "/artifact-gallery/captures/florensky_sphere/front.png"
+  },
+  {
+   "n": 21,
+   "title": "Peace by not computing",
+   "register": "turn",
+   "body": "One line carries the whole theology: mat.cull_mode = BaseMaterial3D.CULL_DISABLED. Holding A and not-A is implemented as switching a default off. Renderers routinely discard the face you are not supposed to see; paraconsistency, in this sphere, is just ceasing to throw the far side away. Read generously, that is the deepest claim in the room \u2014 the contradiction was never exotic, the exclusion was manufactured, and removing it costs one line. Read coldly, the sphere buys its peace by not computing: classical logic detonates because from A and not-A anything follows, and this skin simply never runs that inference. Russell's box was an alarm \u2014 contradiction as the sign the ground had failed. Make the alarm an ornament and you may stop hearing alarms. Florensky held both readings; so should the exhibit.",
+   "concept": "paraconsistency",
+   "cast": "florensky_sphere",
+   "image": "/artifact-gallery/captures/florensky_sphere/front.png"
+  },
+  {
+   "n": 22,
+   "title": "One line, still breathing",
+   "register": "walk",
+   "body": "The exit room contains a single line of floating text, each character its own slab of glowing mesh: QFE = F \u2212 \u03bbE(S) + \u03c6\u0394E(S,t). The colors do the reading. F burns blue \u2014 the order every room here wanted, the plaque's old dream of ground. The middle term sits green and red \u2014 what holding an order costs, paid out in excluded possibility. And the tail, \u03c6\u0394E(S,t), pulses magenta and never fully dims: the equation grants its own last term an idle glow the others are denied. This is the whole wing printed once: build form, price its exclusions, and keep one term open on purpose. The liar's lamp that would not settle, the gold band that never empties, the sphere at rest inside its contradiction \u2014 each was this phi term already, met earlier and wearing work clothes.",
+   "concept": "formula",
+   "cast": "qfep_formula_3d",
+   "image": "/artifact-gallery/captures/qfep_formula_3d/front.png"
+  },
+  {
+   "n": 23,
+   "title": "The order the crisis makes",
+   "register": "turn",
+   "body": "Walk it backwards. An equation that keeps one term deliberately open. A sphere holding not-A against A. A hyperbolic disk where the fifth postulate died and nothing else did. A sorter whose gold band is stocked by dice, because no honest procedure could stock it. A tower where every patch buys a taller leak, one level up. A machine whose prover arm jams on schedule, since a true hunt would never return \u2014 and, read again, the halting judge that cannot exist. A liar's lamp. A set that bursts as furniture. A plaque of five axioms, one glowing wrong. The order was itself an argument: ground, speech aimed at itself, collapse, the two great limits, rooms for living with them. Every proof here was staged, and said so. The staging, read closely, was the most honest thing on display.",
+   "concept": "formula",
+   "cast": "qfep_formula_3d",
+   "image": "/artifact-gallery/captures/qfep_formula_3d/front.png"
+  }
+ ],
+ "violations": [],
+ "declaration": "axioms\nselfreference\nrussellset\ngodel\nhalting\ntower\ntruthgap\nhyperbolic\nparaconsistency\nformula\nwhy: The baseline puts Russell's set before self-reference, and the draft could not hold that order: every attempt to describe the box's question (\"does it contain itself?\") kept borrowing the liar's whole pattern \u2014 a sentence about the sentence \u2014 in clumsier words, so the liar moved ahead and the box became \"the liar dressed as furniture,\" which is what the walk actually says. Second real reorder: the baseline holds provability_sorter for last (\"prove it \u2014 or fail to\"), but the sorter's turn only bites if Turing's decider is already on the table (the 0.28 dice ARE the impossibility of the sorting), so truthgap slid forward to sit with the limits, and the Poincare disk and Florensky sphere closed the chapter as the two habitable rooms \u2014 limit first, then living with it. One concept resisted becoming concrete: halting has no bench of its own (its cast is the borrowed godel_sentence_machine, marked weak in the baseline), and the engine itself cannot host a non-returning run \u2014 so its walk had to teach through the visitor timing the borrowed machine's cycle, and its code section quotes fmod(_t, cycle_period): forever, implemented as a wheel. The danger words (set, paradox, proof, halt) resolved by debut order \u2014 set and paradox went to the box which debuts third, proof-words to Godel, halt-words to Turing \u2014 and section 1 and 2 were rewritten to say \"derive\" instead of \"prove,\" which cost nothing.",
+ "aside": [
+  "parallel_lines",
+  "angle_sum_triangle",
+  "barber_paradox",
+  "self_membership_set",
+  "godel_statement_plaque",
+  "escher_staircase",
+  "penrose_triangle",
+  "riemann_sphere",
+  "hyperbolic_surface",
+  "excluded_middle_demo",
+  "constructive_proof"
+ ],
+ "grammar": {
+  "R1": "one concept per section",
+  "R2": "debut in walk, never turn",
+  "R3": "the new arrives through the old",
+  "R4": "a turn within 4 sections",
+  "R5": "used again before the next debut"
+ }
+}
