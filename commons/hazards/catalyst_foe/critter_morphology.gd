@@ -20,6 +20,12 @@ const PINK_BODY := Color(0.93, 0.28, 0.60)
 const PINK_GLOW := Color(1.0, 0.52, 0.74)
 const BLOB_RADIUS := 0.16
 
+# The blob surface reuses the catalyst orb's vertex-noise shader (a
+# 3D-simplex-displaced breathing sphere) with a pink palette.
+const ORB_NOISE_SHADER := preload("res://commons/hazards/becoming_catalyst/orb_noise.gdshader")
+# Plant-and-step leg rig (gait ported from the six_leg hexapod).
+const CritterLegs := preload("res://commons/hazards/catalyst_foe/critter_legs.gd")
+
 
 ## Stage traits for a soft_stages order value. order <= 4 → legacy cube.
 static func stage_for(order: float) -> Dictionary:
@@ -58,14 +64,30 @@ static func stage_for(order: float) -> Dictionary:
 static func build(mesh_root: Node3D, body_mat: StandardMaterial3D, stage: Dictionary) -> Dictionary:
 	var refs: Dictionary = {"legs": [], "eyes": []}
 
-	# Body — a softly squashed pink blob.
+	# Body — a softly squashed pink blob, breathing via the orb's
+	# vertex-noise shader (organic wobble, palette mixed by the noise).
 	var blob := MeshInstance3D.new()
 	var sphere := SphereMesh.new()
 	sphere.radius = BLOB_RADIUS
 	sphere.height = BLOB_RADIUS * 1.7  # squashed — rounder than tall
+	sphere.radial_segments = 48
+	sphere.rings = 24
 	blob.mesh = sphere
-	blob.set_surface_override_material(0, body_mat)
+	var blob_mat := ShaderMaterial.new()
+	blob_mat.shader = ORB_NOISE_SHADER
+	blob_mat.set_shader_parameter("palette_a", PINK_BODY.darkened(0.15))
+	blob_mat.set_shader_parameter("palette_b", PINK_BODY)
+	blob_mat.set_shader_parameter("palette_c", Color(1.0, 0.74, 0.86))
+	blob_mat.set_shader_parameter("noise_scale", 6.0)
+	blob_mat.set_shader_parameter("noise_amount", 0.045)
+	blob_mat.set_shader_parameter("time_scale", 0.9)
+	blob_mat.set_shader_parameter("emission_energy", 1.1)
+	blob_mat.set_shader_parameter("halo_softness", 0.3)
+	blob.set_surface_override_material(0, blob_mat)
 	mesh_root.add_child(blob)
+	refs["blob_mat"] = blob_mat
+	# body_mat still tints eyes-adjacent accents + the friend badge; the
+	# blob itself is shader-driven (personality tints go via set_blob_tint).
 
 	# Eyes — oversized, front-facing (+Z is the facing direction).
 	var eye_white := StandardMaterial3D.new()
@@ -106,40 +128,28 @@ static func build(mesh_root: Node3D, body_mat: StandardMaterial3D, stage: Dictio
 		blush.rotation_degrees = Vector3(90, 0, side * -20)
 		mesh_root.add_child(blush)
 
-	# Legs — spider silhouette after the octapod stage. Two bent segments per
-	# leg, proportions from octapod_crawler (leg_length 0.35 at its scale).
+	# Legs — the plant-and-step rig (gait ported from the six_leg hexapod;
+	# feet stay planted in the world while the body moves, then lift and
+	# step). Self-driving: it reads the body's velocity and ground height.
 	var leg_count: int = int(stage.get("legs", 0))
 	if leg_count > 0:
-		var leg_mat := StandardMaterial3D.new()
-		leg_mat.albedo_color = PINK_BODY.darkened(0.25)
-		for i in range(leg_count):
-			var angle: float = TAU * float(i) / float(leg_count) + TAU / 16.0
-			var leg_root := Node3D.new()
-			leg_root.name = "Leg%d" % i
-			leg_root.position = Vector3(cos(angle) * BLOB_RADIUS * 0.8, -0.02, sin(angle) * BLOB_RADIUS * 0.8)
-			leg_root.rotation.y = -angle
-			mesh_root.add_child(leg_root)
-
-			var upper := MeshInstance3D.new()
-			var um := CapsuleMesh.new()
-			um.radius = 0.014
-			um.height = 0.2
-			upper.mesh = um
-			upper.set_surface_override_material(0, leg_mat)
-			upper.position = Vector3(0.08, 0.03, 0)
-			upper.rotation_degrees = Vector3(0, 0, -55)
-			leg_root.add_child(upper)
-
-			var lower := MeshInstance3D.new()
-			var lm := CapsuleMesh.new()
-			lm.radius = 0.011
-			lm.height = 0.18
-			lower.mesh = lm
-			lower.set_surface_override_material(0, leg_mat)
-			lower.position = Vector3(0.17, -0.05, 0)
-			lower.rotation_degrees = Vector3(0, 0, 30)
-			leg_root.add_child(lower)
-			refs["legs"].append(leg_root)
+		var legs = CritterLegs.new()
+		legs.name = "GaitRig"
+		legs.leg_count = leg_count
+		mesh_root.add_child(legs)
+		refs["legs_node"] = legs
 
 	mesh_root.scale = Vector3.ONE * float(stage.get("scale", 1.0))
 	return refs
+
+
+## Retint the shader blob (personality arc / friend hue). No-op on the
+## legacy cube (no blob_mat in refs).
+static func set_blob_tint(refs: Dictionary, tint: Color, energy: float) -> void:
+	var bm = refs.get("blob_mat")
+	if bm is ShaderMaterial:
+		var mat := bm as ShaderMaterial
+		mat.set_shader_parameter("palette_a", tint.darkened(0.15))
+		mat.set_shader_parameter("palette_b", tint)
+		mat.set_shader_parameter("palette_c", tint.lightened(0.4))
+		mat.set_shader_parameter("emission_energy", energy)

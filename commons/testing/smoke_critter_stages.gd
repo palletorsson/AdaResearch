@@ -73,12 +73,11 @@ func _run() -> void:
 	octo_foe.call("apply_grid_config", {"critter_stage": 7.0})
 	root.add_child(octo_foe)
 	await process_frame
+	# Legs live under the GaitRig node ("Leg0".."Leg7"), one level down.
 	var legs: int = 0
 	var mesh_root: Node = octo_foe.get("_mesh_root")
 	if mesh_root != null:
-		for child in mesh_root.get_children():
-			if String(child.name).begins_with("Leg"):
-				legs += 1
+		legs = mesh_root.find_children("Leg?", "", true, false).size()
 	print("- octapod legs: %d (expect 8)" % legs)
 	if legs != 8:
 		print("FAIL: octapod legs"); quit(1); return

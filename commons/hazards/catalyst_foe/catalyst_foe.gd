@@ -231,14 +231,63 @@ func _process_visual(delta: float) -> void:
 		offset.x += sin(t * 13.7) * 0.03 * jitter
 		offset.z += cos(t * 11.3) * 0.03 * jitter
 	_mesh_root.position = offset
-	# Leg gait — sway scaled by how fast the body actually moves.
-	var legs: Array = _critter_refs.get("legs", [])
-	if not legs.is_empty():
-		var gait: float = clamp(velocity.length() / max(chase_speed, 0.01), 0.15, 1.0)
-		for i in range(legs.size()):
-			var leg = legs[i]
-			if leg is Node3D and is_instance_valid(leg):
-				(leg as Node3D).rotation.x = sin(t * 9.0 + float(i) * PI * 0.5) * 0.18 * gait
+	# (Legs walk themselves — the GaitRig plants and steps in world space.)
+	# Googly eyes track the player: rotate each eye so its pupil (+Z child)
+	# faces the player's head. Full-range tracking — the googly IS the charm.
+	if is_instance_valid(_player_node):
+		var look_target: Vector3 = _player_node.global_position + Vector3(0, 1.0, 0)
+		for e in _critter_refs.get("eyes", []):
+			if e is Node3D and is_instance_valid(e) and (e as Node3D).is_inside_tree():
+				var eye := e as Node3D
+				var to_p: Vector3 = look_target - eye.global_position
+				if to_p.length() > 0.05 and absf(to_p.normalized().y) < 0.95:
+					eye.look_at(look_target, Vector3.UP)
+					eye.rotate_object_local(Vector3.UP, PI)  # look_at aims -Z; pupil sits at +Z
+
+
+# ── Comic words ─────────────────────────────────────────────────────
+# Impact language: a billboarded word fires on every catalyst hit and a
+# bigger one on the pop. Randomized text + color, back-ease punch-in,
+# drift up and fade. Words parent to the MAP (not the foe) so a BOOM!
+# outlives the body that shouted it.
+
+const HIT_WORDS: Array[String] = ["POP!", "WOW!", "BOING!", "EEP!", "ZING!", "OOF!"]
+const BOOM_WORDS: Array[String] = ["BOOM!", "POW!", "BAM!", "KABOOM!", "SPLAT!", "WOW!"]
+const COMIC_COLORS: Array[Color] = [
+	Color(1.0, 0.85, 0.20),  # comic yellow
+	Color(0.95, 0.30, 0.55), # hot pink
+	Color(0.40, 0.90, 1.00), # pop cyan
+	Color(1.0, 1.0, 1.0),    # flat white
+]
+
+
+func _spawn_comic_word(words: Array, size: float) -> void:
+	if not _critter_active():
+		return
+	var host: Node = get_parent()
+	if host == null:
+		return
+	var label := Label3D.new()
+	label.text = words[randi() % words.size()]
+	label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	label.no_depth_test = true
+	label.font_size = 220
+	label.pixel_size = 0.0016 * size
+	label.outline_size = 56
+	label.modulate = COMIC_COLORS[randi() % COMIC_COLORS.size()]
+	label.outline_modulate = Color(0.08, 0.06, 0.12)
+	host.add_child(label)
+	var seen: Vector3 = _mesh_root.position if _mesh_root != null else Vector3.ZERO
+	label.global_position = global_position + seen \
+		+ Vector3(randf_range(-0.15, 0.15), 0.28, randf_range(-0.15, 0.15))
+	label.scale = Vector3.ONE * 0.15
+	var tw := label.create_tween()
+	tw.tween_property(label, "scale", Vector3.ONE, 0.16) \
+		.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	tw.set_parallel(true)
+	tw.tween_property(label, "position:y", label.position.y + 0.35, 0.55)
+	tw.tween_property(label, "modulate:a", 0.0, 0.4).set_delay(0.25)
+	tw.chain().tween_callback(label.queue_free)
 
 
 ## The critter pops: a cute pink detonation. Damage was already applied by
@@ -252,6 +301,8 @@ func _blow_up() -> void:
 	var at: Vector3 = _mesh_root.position if _mesh_root != null else Vector3.ZERO
 	_spawn_hit_burst(burst_color, at, 2.0)
 	_spawn_light_pulse(burst_color, at)
+	_spawn_confetti(at)
+	_spawn_comic_word(BOOM_WORDS, 1.8)
 	# Balloon-pop shell: an expanding unlit pink sphere that reads at any
 	# distance — the moment the cute thing stops being there.
 	var pop := MeshInstance3D.new()
@@ -272,6 +323,47 @@ func _blow_up() -> void:
 		.set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
 	pop_tween.tween_property(pop_mat, "albedo_color:a", 0.0, 0.35)
 	pop_tween.chain().tween_callback(pop.queue_free)
+
+
+## Spinning pink-family confetti quads — the celebratory half of the pop.
+## (Richer particle features borrowed from the codebase's developed
+## examples: hue variation, per-particle spin, billboard-particles mode.)
+func _spawn_confetti(offset: Vector3) -> void:
+	var confetti := GPUParticles3D.new()
+	confetti.position = offset
+	confetti.amount = 40
+	confetti.lifetime = 1.1
+	confetti.one_shot = true
+	confetti.explosiveness = 1.0
+	var pmat := ParticleProcessMaterial.new()
+	pmat.direction = Vector3(0, 1, 0)
+	pmat.spread = 180.0
+	pmat.initial_velocity_min = 1.8
+	pmat.initial_velocity_max = 4.2
+	pmat.gravity = Vector3(0, -3.5, 0)
+	pmat.scale_min = 0.5
+	pmat.scale_max = 1.4
+	pmat.angle_min = 0.0
+	pmat.angle_max = 360.0
+	pmat.angular_velocity_min = -360.0
+	pmat.angular_velocity_max = 360.0
+	pmat.hue_variation_min = -0.12
+	pmat.hue_variation_max = 0.12
+	pmat.color = Color(1.0, 0.62, 0.80)
+	confetti.process_material = pmat
+	var quad := QuadMesh.new()
+	quad.size = Vector2(0.05, 0.05)
+	confetti.draw_pass_1 = quad
+	var qmat := StandardMaterial3D.new()
+	qmat.vertex_color_use_as_albedo = true
+	qmat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	qmat.billboard_mode = BaseMaterial3D.BILLBOARD_PARTICLES
+	qmat.cull_mode = BaseMaterial3D.CULL_DISABLED
+	confetti.material_override = qmat
+	add_child(confetti)
+	confetti.emitting = true
+	var cleanup := get_tree().create_timer(confetti.lifetime + 0.3)
+	cleanup.timeout.connect(confetti.queue_free)
 	if _mesh_root != null:
 		_mesh_root.visible = false
 	contact_damage = 0.0
@@ -373,6 +465,8 @@ func hit_by_catalyst_mode(color: Color, mode_id: String) -> void:
 	# Update personality via parent (sets behaviour flags).
 	set_personality(next_personality)
 	personality_changed.emit(prev, next_personality)
+	# Comic impact word on every catalyst hit (critter stages only).
+	_spawn_comic_word(HIT_WORDS, 0.8)
 
 	# The moment of alignment: the first FRIEND of a mode-lineage grants the
 	# player that lineage's lasting power (CatalystCapabilityManager dedupes).
@@ -427,15 +521,19 @@ func _apply_state_visuals_for_personality(p: String) -> void:
 			"foe":
 				_custom_mat.emission = CritterMorphology.PINK_GLOW
 				_custom_mat.emission_energy_multiplier = 0.9
+				CritterMorphology.set_blob_tint(_critter_refs, CritterMorphology.PINK_BODY, 1.1)
 			"wary":
 				_custom_mat.emission = Color(0.95, 0.35, 0.30)
 				_custom_mat.emission_energy_multiplier = 1.1
+				CritterMorphology.set_blob_tint(_critter_refs, Color(0.90, 0.30, 0.38), 1.3)
 			"neutral":
 				_custom_mat.emission = Color(0.90, 0.68, 0.62)
 				_custom_mat.emission_energy_multiplier = 0.8
+				CritterMorphology.set_blob_tint(_critter_refs, Color(0.88, 0.55, 0.62), 0.9)
 			"curious":
 				_custom_mat.emission = Color(1.0, 0.75, 0.45)
 				_custom_mat.emission_energy_multiplier = 1.3
+				CritterMorphology.set_blob_tint(_critter_refs, Color(0.98, 0.55, 0.55), 1.4)
 		return
 	match p:
 		"foe":
@@ -461,6 +559,7 @@ func _apply_state_visuals_for_personality(p: String) -> void:
 			_custom_mat.albedo_color = hue
 			_custom_mat.emission = hue
 			_custom_mat.emission_energy_multiplier = 1.6
+			CritterMorphology.set_blob_tint(_critter_refs, hue, 1.6)
 
 
 # ── Override _process_chase for FRIEND peer-conversion ──────────────
