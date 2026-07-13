@@ -248,8 +248,30 @@ func _blow_up() -> void:
 		return
 	_blown_up = true
 	var burst_color: Color = CritterMorphology.PINK_GLOW
-	_spawn_hit_burst(burst_color)
-	_spawn_light_pulse(burst_color)
+	# Burst where the body is SEEN (flying stages hover the mesh above the node).
+	var at: Vector3 = _mesh_root.position if _mesh_root != null else Vector3.ZERO
+	_spawn_hit_burst(burst_color, at, 2.0)
+	_spawn_light_pulse(burst_color, at)
+	# Balloon-pop shell: an expanding unlit pink sphere that reads at any
+	# distance — the moment the cute thing stops being there.
+	var pop := MeshInstance3D.new()
+	var pm := SphereMesh.new()
+	pm.radius = 0.22
+	pm.height = 0.44
+	pop.mesh = pm
+	var pop_mat := StandardMaterial3D.new()
+	pop_mat.albedo_color = Color(burst_color.r, burst_color.g, burst_color.b, 0.85)
+	pop_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	pop_mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	pop.material_override = pop_mat
+	pop.position = at
+	add_child(pop)
+	var pop_tween := create_tween()
+	pop_tween.set_parallel(true)
+	pop_tween.tween_property(pop, "scale", Vector3.ONE * 4.5, 0.35) \
+		.set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+	pop_tween.tween_property(pop_mat, "albedo_color:a", 0.0, 0.35)
+	pop_tween.chain().tween_callback(pop.queue_free)
 	if _mesh_root != null:
 		_mesh_root.visible = false
 	contact_damage = 0.0
@@ -720,20 +742,21 @@ func _build_friend_badge() -> void:
 
 # ── Hit visuals ─────────────────────────────────────────────────────
 
-func _spawn_hit_burst(burst_color: Color) -> void:
+func _spawn_hit_burst(burst_color: Color, offset: Vector3 = Vector3.ZERO, boost: float = 1.0) -> void:
 	var burst := GPUParticles3D.new()
-	burst.amount = 24
+	burst.position = offset
+	burst.amount = int(24 * boost)
 	burst.lifetime = 0.6
 	burst.one_shot = true
 	burst.explosiveness = 0.95
 	var pmat := ParticleProcessMaterial.new()
 	pmat.direction = Vector3(0, 1, 0)
 	pmat.spread = 180.0
-	pmat.initial_velocity_min = 1.5
-	pmat.initial_velocity_max = 3.5
+	pmat.initial_velocity_min = 1.5 * boost
+	pmat.initial_velocity_max = 3.5 * boost
 	pmat.gravity = Vector3(0, -1.5, 0)
-	pmat.scale_min = 0.05
-	pmat.scale_max = 0.12
+	pmat.scale_min = 0.05 * boost
+	pmat.scale_max = 0.12 * boost
 	pmat.color = burst_color
 	burst.process_material = pmat
 	var sphere := SphereMesh.new()
@@ -752,8 +775,9 @@ func _spawn_hit_burst(burst_color: Color) -> void:
 	cleanup.timeout.connect(burst.queue_free)
 
 
-func _spawn_light_pulse(light_color: Color) -> void:
+func _spawn_light_pulse(light_color: Color, offset: Vector3 = Vector3.ZERO) -> void:
 	var light := OmniLight3D.new()
+	light.position = offset
 	light.light_color = light_color
 	light.light_energy = 4.0
 	light.omni_range = 2.5
