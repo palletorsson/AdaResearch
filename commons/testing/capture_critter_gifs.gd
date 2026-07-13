@@ -20,11 +20,97 @@ func _init() -> void:
 	if dir:
 		dir.make_dir_recursive(OUT_DIR + "/serpent")
 		dir.make_dir_recursive(OUT_DIR + "/pop")
+		dir.make_dir_recursive(OUT_DIR + "/walk")
+		dir.make_dir_recursive(OUT_DIR + "/hitpop")
 
 	await _capture_serpent()
 	await _capture_pop()
+	await _capture_walk()
+	await _capture_hitpop()
 	print("[critter_gifs] complete")
 	quit()
+
+
+## The octapod walking — plant-and-step gait in profile.
+func _capture_walk() -> void:
+	var root := Node3D.new()
+	root.name = "WalkGif"
+	VRCaptureRig.build_environment(root)
+
+	var foe: Node3D = FOE_SCENE.instantiate() as Node3D
+	foe.call("apply_grid_config", {
+		"critter_stage": 7.0, "initial_state": "foe",
+		"speed": 1.1, "chase_speed": 1.1, "detection_radius": 14.0,
+	})
+	foe.position = Vector3(0, 0.35, 1.8)
+	root.add_child(foe)
+
+	var bait := Node3D.new()
+	bait.name = "Player"
+	bait.add_to_group("player")
+	bait.position = Vector3(0, 0.35, -9.0)
+	root.add_child(bait)
+
+	# Low profile camera on the flight lane so the legs read against the sky.
+	var cam := VRCaptureRig.build_camera(Vector3(2.6, 0.85, -0.5), Vector3(0, 0.55, -0.5), 45.0)
+	root.add_child(cam)
+
+	_swap_scene(root)
+	var vp: Viewport = root.get_viewport()
+	if vp != null:
+		vp.size = FRAME_SIZE
+	for _i in range(30):
+		await process_frame
+
+	for f in range(90):
+		await process_frame
+		await process_frame
+		_grab(root, "walk", f)
+	print("[critter_gifs] walk frames done")
+
+
+## The molt-pop: two catalyst-projectile hits — each pops the balloon,
+## the critter reforms one personality step warmer.
+func _capture_hitpop() -> void:
+	var root := Node3D.new()
+	root.name = "HitPopGif"
+	VRCaptureRig.build_environment(root)
+
+	var foe: Node3D = FOE_SCENE.instantiate() as Node3D
+	foe.call("apply_grid_config", {
+		"critter_stage": 4.5, "initial_state": "foe",
+		"speed": 0.0, "chase_speed": 0.0, "detection_radius": 0.0,
+	})
+	foe.set("patrol_width", 0.01)
+	foe.set("patrol_depth", 0.01)
+	foe.position = Vector3(0, 0.35, 0)
+	root.add_child(foe)
+
+	# A player stand-in off to the side gives the eyes something to track.
+	var watcher := Node3D.new()
+	watcher.name = "Player"
+	watcher.add_to_group("player")
+	watcher.position = Vector3(1.4, 0.4, 1.6)
+	root.add_child(watcher)
+
+	var cam := VRCaptureRig.build_camera(Vector3(1.05, 1.35, 1.4), Vector3(0, 0.85, 0), 45.0)
+	root.add_child(cam)
+
+	_swap_scene(root)
+	var vp: Viewport = root.get_viewport()
+	if vp != null:
+		vp.size = FRAME_SIZE
+	for _i in range(20):
+		await process_frame
+
+	# ~3s: hit at frames 15 and 55 — molt pop, retint, reform.
+	for f in range(90):
+		await process_frame
+		await process_frame
+		if f == 15 or f == 55:
+			foe.call("hit_by_catalyst_mode", Color(0.9, 0.95, 1.0), "primitives")
+		_grab(root, "hitpop", f)
+	print("[critter_gifs] hitpop frames done")
 
 
 func _swap_scene(root: Node3D) -> void:

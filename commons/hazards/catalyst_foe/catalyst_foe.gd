@@ -303,8 +303,14 @@ func _blow_up() -> void:
 	_spawn_light_pulse(burst_color, at)
 	_spawn_confetti(at)
 	_spawn_comic_word(BOOM_WORDS, 1.8)
-	# Balloon-pop shell: an expanding unlit pink sphere that reads at any
-	# distance — the moment the cute thing stops being there.
+	_spawn_pop_shell(at, 4.5)
+
+
+## Balloon-pop shell: an expanding unlit pink sphere that reads at any
+## distance. The death-pop uses end_scale 4.5; the molt-pop (projectile
+## hit) uses a smaller shell.
+func _spawn_pop_shell(at: Vector3, end_scale: float) -> void:
+	var burst_color: Color = CritterMorphology.PINK_GLOW
 	var pop := MeshInstance3D.new()
 	var pm := SphereMesh.new()
 	pm.radius = 0.22
@@ -319,10 +325,24 @@ func _blow_up() -> void:
 	add_child(pop)
 	var pop_tween := create_tween()
 	pop_tween.set_parallel(true)
-	pop_tween.tween_property(pop, "scale", Vector3.ONE * 4.5, 0.35) \
+	pop_tween.tween_property(pop, "scale", Vector3.ONE * end_scale, 0.35) \
 		.set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
 	pop_tween.tween_property(pop_mat, "albedo_color:a", 0.0, 0.35)
 	pop_tween.chain().tween_callback(pop.queue_free)
+
+
+## Molt-pop: a catalyst PROJECTILE hit pops the balloon — but the catalyst
+## doesn't kill, so the critter is still there when the shell clears, one
+## personality step warmer. Squash-stretch sells the burst-and-reform.
+func _molt_pop() -> void:
+	var at: Vector3 = _mesh_root.position if _mesh_root != null else Vector3.ZERO
+	_spawn_pop_shell(at, 2.4)
+	_spawn_hit_burst(CritterMorphology.PINK_GLOW, at, 1.2)
+	var tw := create_tween()
+	tw.tween_property(self, "scale", Vector3(1.3, 0.65, 1.3), 0.07) \
+		.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	tw.tween_property(self, "scale", Vector3.ONE, 0.32) \
+		.set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
 
 
 ## Spinning pink-family confetti quads — the celebratory half of the pop.
@@ -498,9 +518,13 @@ func hit_by_catalyst_mode(color: Color, mode_id: String) -> void:
 			_spawn_hit_burst(c)
 			_spawn_light_pulse(c)
 	else:
-		# Subtle flash on intermediate transitions.
 		_apply_state_visuals_for_personality(next_personality)
-		if _custom_mat != null:
+		if _critter_active():
+			# The projectile pops the balloon — molt, not death: the shell
+			# clears and the critter is still there, one step warmer.
+			_molt_pop()
+		elif _custom_mat != null:
+			# Legacy cube: subtle flash on intermediate transitions.
 			_spawn_hit_burst(_custom_mat.emission)
 
 

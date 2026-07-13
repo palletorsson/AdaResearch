@@ -72,6 +72,15 @@ func _run() -> void:
 		print("FAIL: 4 hits didn't walk personality to friend")
 		quit(1); return
 
+	# The conversion above granted a real friend power — scrub so test runs
+	# never pollute actual player progression.
+	var mgr: Node = get_root().get_node_or_null("CatalystCapabilityManager")
+	if mgr and mgr.has_method("reset_progression"):
+		mgr.reset_progression()
+	var save_path := "user://capability_progression.json"
+	if FileAccess.file_exists(save_path):
+		DirAccess.remove_absolute(ProjectSettings.globalize_path(save_path))
+
 	print("PASS: foe spawned, walks, 4 catalyst hits walk it to friend")
 	quit(0)
 
