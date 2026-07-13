@@ -1,0 +1,479 @@
+{
+	"map_info": {
+		"name": "Grown_Point_Line_Grid",
+		"lookup_name": "Grown_Point_Line_Grid",
+		"description": "A map grown by the walker laying floor as it placed artifacts. Started at spawn with no structure; the floor and tables emerged as a byproduct of the walk. Constraint score: 0.934, placed: 5/5 artifacts, laid: 95 floor cells + 2 table cells.",
+		"version": "grown-0.1",
+		"format": "json",
+		"created_from": "tools/grow_map.py 2026-05-15",
+		"dimensions": {
+			"width": 11,
+			"depth": 10,
+			"max_height": 3
+		},
+		"metadata": {
+			"category": "grown_map",
+			"estimated_time": "1 minute",
+			"auto_research_strategy": "grow_walker",
+			"artifacts_placed": [
+				"grid_lines",
+				"player_trace",
+				"grab_sphere_point_snap",
+				"floating_sphere_field",
+				"room_grammar"
+			],
+			"laid_floor_cells": 95,
+			"table_cells": 2,
+			"constraint_score": 0.934
+		},
+		"title": "Grown: Point_Line_Grid"
+	},
+	"utility_definitions": {
+		"sp": {
+			"name": "Spawn",
+			"description": "Player spawn point",
+			"type": "spawn"
+		},
+		"t": {
+			"name": "Exit Portal",
+			"description": "Step here to leave",
+			"type": "teleporter",
+			"properties": {
+				"action": "next_in_sequence"
+			}
+		}
+	},
+	"documentation": {
+		"summary": "Grown_Point_Line_Grid \u2014 map emerged from walker's path",
+		"layout": "11\u00d710 bounding box. The walker entered at spawn and laid 95 floor cells + 2 table cells as it placed 5 artifacts. The teleporter is where the walk ended.",
+		"objective": "Walk the map. The map IS the walk's record.",
+		"key_elements": [
+			"Spawn at (9, 3)",
+			"Teleporter at (0, 10)",
+			"grid_lines at (6, 3)",
+			"player_trace at (5, 3)",
+			"grab_sphere_point_snap at (4, 3)",
+			"floating_sphere_field at (0, 3)",
+			"room_grammar at (0, 2)"
+		]
+	},
+	"lighting": {
+		"ambient_color": [
+			0.32,
+			0.34,
+			0.4
+		],
+		"ambient_energy": 0.9,
+		"directional_light": {
+			"enabled": true,
+			"direction": [
+				-0.3,
+				-1.0,
+				-0.2
+			],
+			"energy": 0.7
+		}
+	},
+	"settings": {
+		"player_spawn_height": 0.5,
+		"floor_tile_size": 1.0
+	},
+	"layers": {
+		"structure": [
+			[
+				"0",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2"
+			],
+			[
+				"0",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2"
+			],
+			[
+				"0",
+				"0",
+				"0",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2"
+			],
+			[
+				"0",
+				"0",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2"
+			],
+			[
+				"0",
+				"2",
+				"2",
+				"3",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2"
+			],
+			[
+				"0",
+				"2",
+				"2",
+				"3",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2"
+			],
+			[
+				"0",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2"
+			],
+			[
+				"0",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2"
+			],
+			[
+				"0",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2"
+			],
+			[
+				"0",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"0",
+				"0"
+			]
+		],
+		"utilities": [
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				"t"
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				"sp",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			]
+		],
+		"interactables": [
+			[
+				" ",
+				" ",
+				"room_grammar:180:0.0",
+				"floating_sphere_field:180:0.0",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				"grab_sphere_point_snap:180:0.0",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				"player_trace:180:0.0",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				"grid_lines:180:0.0",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			]
+		]
+	}
+}
