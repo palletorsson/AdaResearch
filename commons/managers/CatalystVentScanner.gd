@@ -45,6 +45,7 @@ const FOE_KINDS: Array[String] = ["goo", "transport", "swarm", "drainfriend", "c
 ##   "e:RATE:M"        → emit_interval_s = RATE, wave_size = M
 ##   "e:RATE:M:D"      → also start_delay_s = D
 ##   "e:RATE:M:D:KIND" → also seed each spawned foe's foe_mode (see FOE_KINDS)
+##   "e:RATE:M:D:KIND:STAGE" → also pin the critter stage (soft_stages order)
 static func scan_utilities(
 	utilities: Array,
 	cell_size: float,
@@ -86,6 +87,15 @@ static func scan_utilities(
 				var k: String = parts[4].strip_edges().to_lower()
 				if k in FOE_KINDS:
 					foe_kind = k
+			# Optional 6th segment: pin the evolving critter's stage
+			# (soft_stages order) for this vent's brood — e.g.
+			# "e:2:5:5:swarm:7" spawns octapod-stage critters regardless
+			# of progression. -1 = unset (foes ask HazardManager).
+			var critter_stage: float = -1.0
+			if parts.size() > 5:
+				var st: float = parts[5].to_float()
+				if st > 0.0:
+					critter_stage = st
 			var inst: Node = VENT_SCENE.instantiate()
 			if inst == null:
 				continue
@@ -108,6 +118,8 @@ static func scan_utilities(
 				}
 				if not foe_kind.is_empty():
 					cfg["foe_mode"] = foe_kind
+				if critter_stage > 0.0:
+					cfg["critter_stage"] = critter_stage
 				inst.call("apply_grid_config", cfg)
 			spawned += 1
 	return spawned
