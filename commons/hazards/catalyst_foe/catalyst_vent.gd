@@ -41,11 +41,37 @@ const FOE_SCENE := preload("res://commons/hazards/catalyst_foe/catalyst_foe.tscn
 # Set per-placement via the e:RATE:WAVE:DELAY:KIND utility token or
 # apply_grid_config {"foe_mode": ...}.
 @export var default_foe_mode: String = ""
+# Optional critter-stage pin (soft_stages order) threaded to every spawned
+# foe; -1 = unset (each foe asks HazardManager itself). See
+# critter_morphology.gd for the stage table.
+@export var critter_stage: float = -1.0
+
+const CritterMorphology := preload("res://commons/hazards/catalyst_foe/critter_morphology.gd")
 
 var _emitted: int = 0
 var _timer: float = 0.0          # accumulates dt
 var _started: bool = false       # flips true once start_delay elapses
 var _live_count: int = 0
+var _wave_mult_applied: bool = false
+
+
+## The "many" critter stage (CA onward) doubles this vent's wave. Applied
+## lazily on the first physics tick so play-time progression decides,
+## not scene-load order.
+func _apply_stage_wave_mult() -> void:
+	if _wave_mult_applied:
+		return
+	_wave_mult_applied = true
+	var order: float = critter_stage
+	if order < 0.0:
+		var hm: Node = get_node_or_null("/root/HazardManager")
+		if hm != null and hm.has_method("get_current_stage_order"):
+			order = float(hm.get_current_stage_order())
+		else:
+			return
+	var mult: int = int(CritterMorphology.stage_for(order).get("wave_mult", 1))
+	if mult > 1:
+		wave_size = wave_size * mult
 
 
 func _ready() -> void:
@@ -100,6 +126,7 @@ func _build_visual() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	_apply_stage_wave_mult()
 	if _emitted >= wave_size:
 		return
 	# Wait until the player has actually picked up the catalyst before
@@ -167,6 +194,8 @@ func _emit_one() -> void:
 		# (e:RATE:WAVE:DELAY:KIND) shape their offspring's friend kind.
 		if not default_foe_mode.is_empty():
 			foe_cfg["foe_mode"] = default_foe_mode
+		if critter_stage >= 0.0:
+			foe_cfg["critter_stage"] = critter_stage
 		foe.call("apply_grid_config", foe_cfg)
 	_emitted += 1
 	_live_count += 1
@@ -206,6 +235,9 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	# (see default_foe_mode above). Empty string clears it.
 	if config_data.has("foe_mode"):
 		default_foe_mode = String(config_data.get("foe_mode")).to_lower()
+	# critter_stage: pin the evolving critter's stage for this vent's brood.
+	if config_data.has("critter_stage"):
+		critter_stage = float(config_data.get("critter_stage", -1.0))
 
 
 # Diagnostic helpers ----------------------------------------------------

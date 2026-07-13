@@ -127,12 +127,56 @@ var _tendril_script = null
 var _tendril_checked: bool = false
 
 
+# ── Critter morphology ──────────────────────────────────────────────
+# ONE evolving pink critter: legacy grey cube before color, then a
+# hovering mote → air-serpent (wavefunctions) → 8-legged octapod
+# (randomness) → doubled waves (CA) → grand (fractals+). Stage resolves
+# from HazardManager.get_current_stage_order() unless a map/vent seeds
+# `critter_stage` via apply_grid_config. Flight and the snake-wave are
+# VISUAL (mesh root offsets) — collision and pathing stay grounded so
+# the catalyst-projectile and contact contracts are untouched.
+
+const CritterMorphology := preload("res://commons/hazards/catalyst_foe/critter_morphology.gd")
+var _critter_stage_order: float = -1.0   # apply_grid_config override; -1 = ask HazardManager
+var _critter_stage_cache: Dictionary = {}
+var _critter_refs: Dictionary = {}       # {"legs": [...], "eyes": [...]} from morphology build
+var _critter_time: float = 0.0
+var _blown_up: bool = false
+
+
+func _critter_stage() -> Dictionary:
+	if _critter_stage_cache.is_empty():
+		var order: float = _critter_stage_order
+		if order < 0.0:
+			var hm: Node = get_node_or_null("/root/HazardManager")
+			if hm != null and hm.has_method("get_current_stage_order"):
+				order = float(hm.get_current_stage_order())
+			else:
+				order = 0.0
+		_critter_stage_cache = CritterMorphology.stage_for(order)
+	return _critter_stage_cache
+
+
+func _critter_active() -> bool:
+	return String(_critter_stage().get("name", "cube")) != "cube"
+
+
 # ── Lifecycle (parent calls these in order from its _ready) ─────────
 
 func _create_materials() -> void:
-	# Subtle grey-goo body tint with small per-instance variation so
-	# multiple foes spawned from the same vent look distinguishable.
 	_custom_mat = StandardMaterial3D.new()
+	if _critter_active():
+		# The pink critter — small per-instance hue wobble keeps a wave
+		# of siblings distinguishable without leaving pink.
+		var wobble: float = randf_range(-0.04, 0.04)
+		_custom_mat.albedo_color = Color(0.93 + wobble, 0.28, 0.60 - wobble)
+		_custom_mat.emission_enabled = true
+		_custom_mat.emission = CritterMorphology.PINK_GLOW
+		_custom_mat.emission_energy_multiplier = randf_range(0.5, 0.7)
+		_custom_mat.roughness = 0.55
+		return
+	# Legacy grey-goo cube tint with small per-instance variation so
+	# multiple foes spawned from the same vent look distinguishable.
 	var grey_jitter: float = randf_range(0.07, 0.16)
 	_custom_mat.albedo_color = Color(grey_jitter, grey_jitter, grey_jitter + 0.02)
 	_custom_mat.emission_enabled = true
@@ -155,10 +199,79 @@ func _build_collision() -> void:
 
 
 func _build_mesh() -> void:
-	# 0.3m grey-tinted cube — the catalyst-foe's silhouette.
-	var box := BoxMesh.new()
-	box.size = Vector3(0.3, 0.3, 0.3)
-	_add_mesh(box, _custom_mat)
+	var stage: Dictionary = _critter_stage()
+	if String(stage.get("name", "cube")) == "cube":
+		# Pre-color world (soft_stages order <= 4): the legacy grey lab cube.
+		var box := BoxMesh.new()
+		box.size = Vector3(0.3, 0.3, 0.3)
+		_add_mesh(box, _custom_mat)
+		return
+	# After color: the pink critter, staged by curriculum order.
+	_critter_refs = CritterMorphology.build(_mesh_root, _custom_mat, stage)
+
+
+## Critter life: hover-bob, air-serpent weave, leg gait, chaos twitch.
+## All offsets live on _mesh_root — physics stays grounded.
+func _process_visual(delta: float) -> void:
+	if _mesh_root == null or not _critter_active() or _blown_up:
+		return
+	_critter_time += delta
+	var stage: Dictionary = _critter_stage()
+	var t: float = _critter_time
+	var offset := Vector3.ZERO
+	if bool(stage.get("flying", false)):
+		offset.y = float(stage.get("hover", 0.0)) + sin(t * 2.2) * 0.06
+	if bool(stage.get("wave", false)) and velocity.length_squared() > 0.01:
+		# Wavefunctions: it swims through the air like a snake — lateral
+		# weave perpendicular to facing plus a vertical ripple.
+		offset.x += sin(t * 3.4) * 0.22
+		offset.y += sin(t * 5.1) * 0.12
+	var jitter: float = float(stage.get("jitter", 0.0))
+	if jitter > 0.0:
+		offset.x += sin(t * 13.7) * 0.03 * jitter
+		offset.z += cos(t * 11.3) * 0.03 * jitter
+	_mesh_root.position = offset
+	# Leg gait — sway scaled by how fast the body actually moves.
+	var legs: Array = _critter_refs.get("legs", [])
+	if not legs.is_empty():
+		var gait: float = clamp(velocity.length() / max(chase_speed, 0.01), 0.15, 1.0)
+		for i in range(legs.size()):
+			var leg = legs[i]
+			if leg is Node3D and is_instance_valid(leg):
+				(leg as Node3D).rotation.x = sin(t * 9.0 + float(i) * PI * 0.5) * 0.18 * gait
+
+
+## The critter pops: a cute pink detonation. Damage was already applied by
+## the contact path — the blow-up is the exit. One per life.
+func _blow_up() -> void:
+	if _blown_up:
+		return
+	_blown_up = true
+	var burst_color: Color = CritterMorphology.PINK_GLOW
+	_spawn_hit_burst(burst_color)
+	_spawn_light_pulse(burst_color)
+	if _mesh_root != null:
+		_mesh_root.visible = false
+	contact_damage = 0.0
+	for child in get_children():
+		if child is CollisionShape3D:
+			(child as CollisionShape3D).set_deferred("disabled", true)
+	_set_state(BaseState.DEAD)
+
+
+## Rebuild body after a late critter_stage seed (config after _ready).
+func _rebuild_critter_visuals() -> void:
+	if _mesh_root == null:
+		return
+	for child in _mesh_root.get_children():
+		child.queue_free()
+	_mesh_root.scale = Vector3.ONE
+	_critter_refs = {}
+	_create_materials()
+	_build_mesh()
+	_apply_state_visuals_for_personality(_personality)
+	if _personality == "friend":
+		_build_friend_badge()
 
 
 func _on_ready() -> void:
@@ -282,6 +395,25 @@ func hit_by_catalyst_mode(color: Color, mode_id: String) -> void:
 
 func _apply_state_visuals_for_personality(p: String) -> void:
 	if _custom_mat == null:
+		return
+	# The critter stays PINK through the hostile half of the arc — the cute
+	# thing is the dangerous thing. Only the emission tint carries the arc
+	# until FRIEND takes the lineage hue (below, shared with the cube).
+	if _critter_active() and p != "friend":
+		_custom_mat.albedo_color = CritterMorphology.PINK_BODY
+		match p:
+			"foe":
+				_custom_mat.emission = CritterMorphology.PINK_GLOW
+				_custom_mat.emission_energy_multiplier = 0.9
+			"wary":
+				_custom_mat.emission = Color(0.95, 0.35, 0.30)
+				_custom_mat.emission_energy_multiplier = 1.1
+			"neutral":
+				_custom_mat.emission = Color(0.90, 0.68, 0.62)
+				_custom_mat.emission_energy_multiplier = 0.8
+			"curious":
+				_custom_mat.emission = Color(1.0, 0.75, 0.45)
+				_custom_mat.emission_energy_multiplier = 1.3
 		return
 	match p:
 		"foe":
@@ -1042,6 +1174,14 @@ func apply_grid_config(config: Dictionary) -> void:
 			foe_mode = MODE_BY_ID.get(fm_str, FoeMode.GOO)
 			_locked_mode_id = fm_str
 
+	# critter_stage — soft_stages order override for the evolving pink
+	# critter (maps/vents pin a stage; unseeded foes ask HazardManager).
+	if config.has("critter_stage"):
+		_critter_stage_order = float(config.get("critter_stage", -1.0))
+		_critter_stage_cache = {}
+		if _mesh_root != null:
+			_rebuild_critter_visuals()
+
 	# initial_state — personality seed. Parent's set_personality fires
 	# behaviour-flag dispatch; we add visual sync. Sets _personality_seeded
 	# so the deferred HazardManager query doesn't override.
@@ -1083,4 +1223,7 @@ func _try_damage_target(target: Object) -> bool:
 	caught_player.emit()
 	if foe_mode == FoeMode.DRAINFRIEND:
 		drag_one_friend_back()
+	# The pink critter is a balloon: landing its hit costs its life.
+	if _personality == "foe" and bool(_critter_stage().get("pop", false)):
+		_blow_up()
 	return true
