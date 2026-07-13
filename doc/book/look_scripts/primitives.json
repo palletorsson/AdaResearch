@@ -1,0 +1,62 @@
+{
+	"_meta": {
+		"description": "Experience scripts for the look composer (tools/compose_map.py). One entry per map: register (arrival|promenade|close), hero/counter preference substrings (matched against cast base names), resolved from doc/book/heroes.json pairs. GHOST-DRAFTED 2026-07-13 — hero/counter picks await Palle's look-rulings; correct them here, in language, never in cells.",
+		"chapter": "primitives"
+	},
+	"maps": {
+		"Point_One": {
+			"register": "arrival",
+			"hero": ["interactive_point_origin_force", "origin"],
+			"counter": ["frame_counter_display"],
+			"note": "the point, the first mark — against the loop already running (thrownness); awe needs a vacuum"
+		},
+		"Point_Lines": {
+			"register": "promenade",
+			"hero": ["klee_walking_point"],
+			"counter": ["modulor_man_demo"],
+			"note": "Klee's walking line against the Modulor's standard body"
+		},
+		"Point_Trace": {
+			"register": "promenade",
+			"hero": ["mystic_writing_pad"],
+			"counter": ["science_screen"],
+			"note": "the hand's residue against the symbol that keeps only endpoints"
+		},
+		"Point_Line_Grid": {
+			"register": "promenade",
+			"hero": ["player_trace"],
+			"counter": ["grid_lines"],
+			"note": "the continuous body's path against Foucault's quantizing frame"
+		},
+		"Point_Triangle_Context": {
+			"register": "promenade",
+			"hero": ["interactivetriangle", "parasol_triangle", "triangle"],
+			"counter": ["pythagorean_triangle_angles"],
+			"note": "the felt triangle against the theorem"
+		},
+		"Primitives_Polythedra": {
+			"register": "promenade",
+			"hero": ["snap_tetrahedron_puzzle", "grab_trihedron", "pyramid_edit"],
+			"counter": ["cube_scene"],
+			"note": "assembling the solid against the given block"
+		},
+		"Point_Animatedcube": {
+			"register": "promenade",
+			"hero": ["animatedcubebuilder"],
+			"counter": ["polyhedron_nets_cube"],
+			"note": "the cube in time against the cube unfolded flat"
+		},
+		"Primitives_Ignorance": {
+			"register": "promenade",
+			"hero": ["platonic_grabbables"],
+			"counter": ["roughrock"],
+			"note": "the platonic ideals against the rock that refuses a name"
+		},
+		"Primitives_Melencolia": {
+			"register": "close",
+			"hero": ["durer_scene"],
+			"counter": ["snap_pyramid_puzzle", "pyramid"],
+			"note": "Dürer's angel last — measurement alone does not move"
+		}
+	}
+}

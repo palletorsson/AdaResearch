@@ -20,6 +20,10 @@ Contradictions between rulings are content, not errors.
 
 ---
 
+## Chapter verdict — primitives
+
+**L-000 (Palle, 2026-07-13, verbatim):** "the composed works better in primitives."
+
 ## Pair 01 — Point_One (the arrival)
 
 **L-001:**
