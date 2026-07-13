@@ -1,0 +1,352 @@
+{
+	"_meta": {
+		"description": "Development threads — the project's long-running lines of work, tracked as first-class rows. Rendered at /threads in the encyclopedia; git activity is matched live via each thread's regex patterns. Seeded 2026-07-13 from the four-month blog synthesis (2026-03-13 → 2026-07-13). Hand-edit freely: progress numbers, open items, and match patterns are all data.",
+		"version": "1.0",
+		"last_updated": "2026-07-13"
+	},
+	"threads": [
+		{
+			"id": "book",
+			"title": "The Book",
+			"status": "active",
+			"summary": "Rulings are the source, prose is compiled (trench protocol); baseline contracts pick each chapter's cast; heroes/anti-heroes carry the dialectic. The instrument is finished — what remains is the writing.",
+			"progress": {
+				"done": 8,
+				"total": 24,
+				"unit": "chapters written"
+			},
+			"match": [
+				"\\b(book|chapter|manuscript|ruling|hero|anti-hero|walked|baseline|trench|dig|blank|tutorial_wall)\\b"
+			],
+			"openItems": [
+				{
+					"id": "book-1",
+					"text": "Write the transformation chapter (anti-hero pairs thinnest at 3/7)",
+					"done": false
+				},
+				{
+					"id": "book-2",
+					"text": "Back-of-spine pass: foundationscrisis → graphtheory → machinelearning",
+					"done": false
+				},
+				{
+					"id": "book-3",
+					"text": "Voice rulings on the 3 drafted chapters at /chapter (fractals, qfeplaboratory, postfoundationscrisis)",
+					"done": false
+				},
+				{
+					"id": "book-4",
+					"text": "Symmetry + form-finding through the pipeline: intent/tutorial.md, placement pass, captures, the seventeen wall",
+					"done": false
+				},
+				{
+					"id": "book-5",
+					"text": "R-027: migrate the remaining ~70 key artifacts off floating Label3D text",
+					"done": false
+				},
+				{
+					"id": "book-6",
+					"text": "DNA essence pass: 73 key artifacts lack an @identity essence",
+					"done": false
+				},
+				{
+					"id": "book-7",
+					"text": "Order-mixer conflict: color chapter's manual trajectory inverts its pedagogy axis — someone has to be wrong",
+					"done": false
+				}
+			],
+			"links": [
+				{
+					"label": "The book starts writing itself",
+					"href": "/blog/2026-07-07-the-book-starts-writing-itself"
+				},
+				{
+					"label": "The trench protocol",
+					"href": "/blog/2026-07-04-the-trench-protocol"
+				},
+				{
+					"label": "Heroes timeline",
+					"href": "/heroes-timeline"
+				},
+				{
+					"label": "Book log",
+					"href": "/book-log"
+				}
+			]
+		},
+		{
+			"id": "space-automation",
+			"title": "Space Automation (maps)",
+			"status": "active",
+			"summary": "The map is engine-neutral data; the engine is a swappable renderer. Wang-tile room contracts make maps connected by construction; the mission graph seeds rooms from teaching beats; the map simulator edits live and saves validated map_data.json.",
+			"match": [
+				"\\b(map|maps|simulator|wang|corridor|necklace|placement|grow_map|mission)\\b"
+			],
+			"openItems": [
+				{
+					"id": "space-1",
+					"text": "Second renderer (Three.js) of map_data.json — two projections of one spec keep each other honest",
+					"done": false
+				},
+				{
+					"id": "space-2",
+					"text": "Registry-honesty punch list (47 benches)",
+					"done": false
+				},
+				{
+					"id": "space-3",
+					"text": "Footprint measurement gaps: ~845 artifacts unmeasured in artifact_sizes.json",
+					"done": false
+				},
+				{
+					"id": "space-4",
+					"text": "Monuments belong in the map pipeline — route super-large artifacts (205 detected) as levels, not objects",
+					"done": false
+				}
+			],
+			"links": [
+				{
+					"label": "Two contracts (Wang tiles + em-square)",
+					"href": "/blog/2026-07-10-two-contracts"
+				},
+				{
+					"label": "The map simulator",
+					"href": "/blog/2026-07-01-the-map-simulator"
+				},
+				{
+					"label": "An engine you could swap",
+					"href": "/blog/2026-07-02-an-engine-you-could-swap"
+				},
+				{
+					"label": "Map simulator",
+					"href": "/map-simulator"
+				}
+			]
+		},
+		{
+			"id": "staging",
+			"title": "Artifact Staging (types + em-square)",
+			"status": "active",
+			"summary": "Eight staging types in staging_dna.json give ~2,570 artifacts a considered home — improve the type, not the room. The em-square (anchor, rest pose, base contact) lets one layout engine seat everything without looking inside it.",
+			"match": [
+				"\\b(staging|dressing|wrapper|em-square|plinth|prop|station|monument|classif)\\b"
+			],
+			"openItems": [
+				{
+					"id": "staging-1",
+					"text": "Walk the 205 detected monuments in auto-discover; accept/reject each classification",
+					"done": false
+				},
+				{
+					"id": "staging-2",
+					"text": "Resolve the deferred ambiguous wrapper-family conflicts (form vs declaration)",
+					"done": false
+				},
+				{
+					"id": "staging-3",
+					"text": "Suspension prop for the apparition type",
+					"done": false
+				}
+			],
+			"links": [
+				{
+					"label": "Improve the type, not the room",
+					"href": "/blog/2026-07-02-improve-the-type-not-the-room"
+				},
+				{
+					"label": "The window shows, the web steers",
+					"href": "/blog/2026-07-02-the-window-shows-the-web-steers"
+				}
+			]
+		},
+		{
+			"id": "catalyst",
+			"title": "Catalyst, Friends & Hazards",
+			"status": "active",
+			"summary": "The danger system became one system: friend conversions grant persistent player powers (ten modes, lineage-tracked), chambers unlock at theme events mid-sequence, and the pathfinder is hazard-aware. The powers are still registered fiction.",
+			"progress": {
+				"done": 0,
+				"total": 10,
+				"unit": "friend powers with in-world effects"
+			},
+			"match": [
+				"\\b(catalyst|hazard|foe|friend|bracelet|chamber|critter|danger|vent)\\b"
+			],
+			"openItems": [
+				{
+					"id": "catalyst-1",
+					"text": "Implement in-world effects for the ten friend powers (shield parts flames, porter crosses pits…)",
+					"done": false
+				},
+				{
+					"id": "catalyst-2",
+					"text": "Adopt hazard rooms into sequences 1–6: give Lab_Death and Zone_ForbiddenWetLab corridors",
+					"done": false
+				},
+				{
+					"id": "catalyst-3",
+					"text": "The QFEP reunion room where all ten powers matter",
+					"done": false
+				}
+			],
+			"links": [
+				{
+					"label": "The friend that gives back",
+					"href": "/blog/2026-07-11-the-friend-that-gives-back"
+				}
+			]
+		},
+		{
+			"id": "seams",
+			"title": "The Seams (bias landscape)",
+			"status": "active",
+			"summary": "One seam artifact per sequence — the exact place that domain's continuous or infinite ideal is counterfeited by the cheap and discrete. The law underneath: bias is conserved; show the seam.",
+			"progress": {
+				"done": 22,
+				"total": 24,
+				"unit": "seam artifacts built"
+			},
+			"match": [
+				"\\b(seam|alias|galton|nyquist|counterfeit|bias)\\b"
+			],
+			"openItems": [
+				{
+					"id": "seams-1",
+					"text": "Place the seams into their sequences' maps — met mid-walk, not browsed in a gallery",
+					"done": false
+				},
+				{
+					"id": "seams-2",
+					"text": "Headset TRNG artifact (hardware_entropy_decay): harvest IMU/camera/body noise — the argument walked",
+					"done": false
+				},
+				{
+					"id": "seams-3",
+					"text": "The two unbuilt seams: build or declare as blanks with empty plinths",
+					"done": false
+				}
+			],
+			"links": [
+				{
+					"label": "A seam in every sequence",
+					"href": "/blog/2026-07-12-a-seam-in-every-sequence"
+				},
+				{
+					"label": "The crank and the harvest",
+					"href": "/blog/2026-07-12-the-crank-and-the-harvest"
+				},
+				{
+					"label": "Seams gallery",
+					"href": "/seams"
+				}
+			]
+		},
+		{
+			"id": "commons",
+			"title": "Commons Ledger & Provenance",
+			"status": "active",
+			"summary": "The standing fourth question: whose knowledge is this pressed from — does the walk return it or enclose it? Candidate sources auto-credit makers the moment their pattern is built. The first weaver has a name: Kristina Torsson, credited as origin.",
+			"match": [
+				"\\b(commons|ledger|provenance|maker|mamma|monster|kente|ikat|iznik|atlas)\\b"
+			],
+			"openItems": [
+				{
+					"id": "commons-1",
+					"text": "Build loom_kente, loom_ikat, mill_iznik — each auto-credits its makers on arrival",
+					"done": false
+				},
+				{
+					"id": "commons-2",
+					"text": "Decide what part of Ada's text and tooling passes into common hands; write the schedule into the work",
+					"done": false
+				}
+			],
+			"links": [
+				{
+					"label": "The larger we",
+					"href": "/blog/2026-07-08-the-larger-we"
+				},
+				{
+					"label": "The same reach, turned",
+					"href": "/blog/2026-07-08-the-same-reach-turned"
+				},
+				{
+					"label": "Mamma Mönster",
+					"href": "/blog/2026-07-08-mamma-monster"
+				}
+			]
+		},
+		{
+			"id": "vr-walking",
+			"title": "VR Walking (the bottleneck)",
+			"status": "active",
+			"summary": "Nearly every spine sequence sits at pipeline stage 6 unwalked. Gaze-ride lets the machine pre-walk, but the headset walk is the one thing only a body can do — and it is what promotes chapters from draft to more-than-draft.",
+			"progress": {
+				"done": 2,
+				"total": 24,
+				"unit": "sequences walked"
+			},
+			"match": [
+				"\\b(vr|walk|quest|headset|gaze|ride|feedback)\\b"
+			],
+			"openItems": [
+				{
+					"id": "vr-1",
+					"text": "The five-sequence playable slice (primitives → randomness) as the demo of the pedagogical bet",
+					"done": false
+				},
+				{
+					"id": "vr-2",
+					"text": "Walk symmetry and form-finding",
+					"done": false
+				},
+				{
+					"id": "vr-3",
+					"text": "Feed VR bridge feedback into the chapters (reader_comments + desktop_feedback)",
+					"done": false
+				}
+			],
+			"links": [
+				{
+					"label": "The unwalked museum",
+					"href": "/blog/2026-06-10-the-unwalked-museum"
+				},
+				{
+					"label": "The map is a stream of tokens",
+					"href": "/blog/2026-06-30-the-map-is-a-stream-of-tokens"
+				}
+			]
+		},
+		{
+			"id": "jspace",
+			"title": "J-Space (walkable hidden layer)",
+			"status": "simmering",
+			"summary": "The book's LSA space as walkable rooms — the chamber, the endless ring, the web scroll twin. Fidelity and legibility trade openly: the projection's error is posted on a plaque (stress-1 = 0.27), and the walk rents the missing dimensions through time.",
+			"match": [
+				"\\b(jspace|j-space|lsa|ring|stress|interpretab|manifold)\\b"
+			],
+			"openItems": [
+				{
+					"id": "jspace-1",
+					"text": "Re-deal channel allocations per room (xz on MDS axes, topics on a dial) — the inspector is one drag-and-POST away",
+					"done": false
+				},
+				{
+					"id": "jspace-2",
+					"text": "Judge the per-map puzzles; more species beyond the études",
+					"done": false
+				}
+			],
+			"links": [
+				{
+					"label": "The walk rents a dimension",
+					"href": "/blog/2026-07-08-the-walk-rents-a-dimension"
+				},
+				{
+					"label": "J-space ring",
+					"href": "/jspace-ring"
+				}
+			]
+		}
+	]
+}
