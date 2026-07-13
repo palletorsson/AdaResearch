@@ -100,45 +100,60 @@ def set_rotation(token, rot):
 # ── layout registers ─────────────────────────────────────────────────────
 
 def lay_promenade(cast, hero_i, counter_i, seed, hero_last=False):
-    """Stations along a spine; smalls hug walls, hero centered in vacuum."""
-    order = [i for i in range(len(cast)) if i not in (hero_i, counter_i)]
-    if hero_last:
-        hero_slot = len(order)
-    else:
-        hero_slot = max(1, int(len(order) * 0.72))
+    """The forward reading (L-010): z is the film's timeline. The central
+    column is the view corridor — reserved for the hero, so the vanishing
+    point always shows the promise. Artifacts group into SCENES of 1-3 at
+    the wings (frames), with varied gaps between scenes (cuts)."""
+    rest = [i for i in range(len(cast)) if i not in (hero_i, counter_i)]
+    pattern = [3, 2, 3] if seed % 2 == 0 else [2, 3, 2]
+    scenes, k, pi = [], 0, 0
+    while k < len(rest):
+        n = pattern[pi % len(pattern)]
+        scenes.append(rest[k:k + n])
+        k += n
+        pi += 1
+    hero_scene = len(scenes) if hero_last else max(1, int(round(len(scenes) * 0.72)))
     width = max(7, cells_of(cast[hero_i]) + 4)
     if width % 2 == 0:
         width += 1
     cx = width // 2
-    placements = []  # (x, z, token)
+    wings = [1, width - 2]          # edge of frame
+    inner = [2, width - 3]          # mid layer — never the axis
+    gaps = [1, 1, 2]                # montage pacing, rotated (composed density ~1.2 art/row)
+    placements = []
     z = 2
-    side = seed % 2  # alternation phase
-    jitter = (seed // 2) % 2
-    slot = 0
-    seq = order[:hero_slot] + ["HERO"] + order[hero_slot:]
+    side = seed % 2
     hero_size = size_of(cast[hero_i])
-    for item in seq:
-        if item == "HERO":
-            pre = max(4, int(round(2.5 * hero_size))) + ((seed % 3) - 1)
-            z += max(3, pre)
+
+    def lay_scene(scene, z):
+        # frame composition: near-left / near-right / mid, axis stays clear
+        spots = [(wings[side], z), (wings[1 - side], z),
+                 (inner[(side + len(placements)) % 2], z + 1)]
+        for j, idx in enumerate(scene):
+            x, zz = spots[j % 3]
+            placements.append((x, zz, cast[idx]))
+        return z + (2 if len(scene) > 2 else 1)
+
+    for si, scene in enumerate(scenes):
+        if si == hero_scene:
+            pre = max(3, int(round(1.8 * hero_size))) + (seed % 2)
+            z += pre
             if counter_i is not None:
-                # counter two rows before the hero, off-axis, facing it
-                cxp = 1 if side else width - 2
-                placements.append((cxp, z - 2, set_rotation(cast[counter_i], 0)))
-            placements.append((cx, z, cast[hero_i]))
-            z += max(3, int(round(2.0 * hero_size)))
-            continue
-        tok = cast[item]
-        s = size_of(tok)
-        gap = min(7, max(2, int(round(1.8 * s)))) + (jitter if slot % 3 == 2 else 0)
-        if s <= 1.2:  # small: hug a wall
-            x = 1 if side else width - 2
-            side = 1 - side
-        else:  # medium: inner lane, alternating
-            x = 2 if slot % 2 else width - 3
-        placements.append((x, z, tok))
-        z += gap
-        slot += 1
+                placements.append((wings[side], z - 2,
+                                   set_rotation(cast[counter_i], 0)))
+            placements.append((cx, z, cast[hero_i]))   # on the axis: the climax
+            z += max(2, int(round(1.5 * hero_size)))
+        z = lay_scene(scene, z)
+        z += gaps[(si + seed) % len(gaps)]
+        side = 1 - side
+    if hero_scene >= len(scenes):  # close register: hero after the last cut
+        pre = max(4, int(round(2.0 * hero_size)))
+        z += pre
+        if counter_i is not None:
+            placements.append((wings[side], z - 2,
+                               set_rotation(cast[counter_i], 0)))
+        placements.append((cx, z, cast[hero_i]))
+        z += max(2, int(round(1.5 * hero_size)))
     depth = z + 2
     floor = [["1"] * width for _ in range(depth)]
     return width, depth, floor, placements, (cx, 0), (cx, depth - 1)
@@ -268,8 +283,27 @@ def score_candidate(name, cast, hero_i, dropped):
     hero_bonus = 1.0 if 25 <= hd <= 80 else (0.5 if hd > 0 else 0.0)
     rank1 = 1.0 if seen_deg and hd == max(seen_deg.values()) else 0.0
     fidelity = 1.0 - len(dropped) / max(1, len(cast))
-    s = 2 * tau + coverage + hero_bonus + rank1 + fidelity
-    return s, f"tau={tau:+.2f} cov={coverage:.2f} heroDeg={hd} rank1={int(rank1)} fid={fidelity:.2f}"
+    # the forward reading (L-010): the promise and the dolly-in.
+    # per step, the hero's angular size and screen position when visible.
+    hero_track = []  # (step, deg, pos)
+    for sm in re.finditer(r"step (\d+).*?(?=step \d+|\Z)", ride, re.S):
+        step = int(sm.group(1))
+        for lm in re.finditer(r"^\s+(\S+)\s+\w+\s+(\d+)deg\s+(\S+)", sm.group(0), re.M):
+            if base_of(lm.group(1)) == hero_b:
+                hero_track.append((step, int(lm.group(2)), lm.group(3)))
+    promise = 0.0
+    if hero_track and hero_track[0][0] <= 1:
+        promise = 1.0 if hero_track[0][2] == "CENTER" else 0.5
+    degs = [d for _, d, _ in hero_track]
+    if len(degs) >= 2:
+        peak = degs.index(max(degs))
+        rises = sum(1 for a, b2 in zip(degs[:peak + 1], degs[1:peak + 1]) if b2 >= a)
+        dolly = rises / max(1, peak) if peak else 0.5
+    else:
+        dolly = 0.0
+    s = 2 * tau + coverage + hero_bonus + rank1 + fidelity + promise + dolly
+    return s, (f"tau={tau:+.2f} cov={coverage:.2f} heroDeg={hd} rank1={int(rank1)} "
+               f"fid={fidelity:.2f} promise={promise:.1f} dolly={dolly:.2f}")
 
 
 def compose(map_name, scripts, seeds, prefix):

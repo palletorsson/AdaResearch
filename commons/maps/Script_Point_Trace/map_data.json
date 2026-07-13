@@ -4,24 +4,15 @@
    "tool": "script_compose.py",
    "register": "promenade",
    "script_note": "the hand's residue against the symbol that keeps only endpoints",
-   "seed": 0,
+   "seed": 1,
    "dropped": [],
-   "score": 3.5,
-   "ride": "tau=+0.00 cov=1.00 heroDeg=20 rank1=1 fid=1.00"
+   "score": 5.667,
+   "ride": "tau=+0.33 cov=1.00 heroDeg=20 rank1=1 fid=1.00 promise=0.5 dolly=1.00"
   },
   "authored_by": "script (language) + solver (geometry) + gaze_ride (observation)"
  },
  "layers": {
   "structure": [
-   [
-    "1",
-    "1",
-    "1",
-    "1",
-    "1",
-    "1",
-    "1"
-   ],
    [
     "1",
     "1",
@@ -289,15 +280,6 @@
     " ",
     " ",
     " ",
-    " ",
-    " ",
-    " ",
-    " "
-   ],
-   [
-    " ",
-    " ",
-    " ",
     "t",
     " ",
     " ",
@@ -325,7 +307,7 @@
    ],
    [
     " ",
-    " ",
+    "floating_sphere_field#bounds:4,3,10",
     " ",
     " ",
     " ",
@@ -343,15 +325,6 @@
    ],
    [
     " ",
-    "floating_sphere_field#bounds:4,3,10",
-    " ",
-    " ",
-    " ",
-    " ",
-    " "
-   ],
-   [
-    " ",
     " ",
     " ",
     " ",
@@ -369,12 +342,12 @@
     " "
    ],
    [
-    " ",
-    " ",
-    " ",
-    " ",
     " ",
     "science_screen:0:3",
+    " ",
+    " ",
+    " ",
+    " ",
     " "
    ],
    [
@@ -406,7 +379,7 @@
    ],
    [
     " ",
-    " ",
+    "draw_dot:0:1",
     " ",
     " ",
     " ",
@@ -419,7 +392,7 @@
     " ",
     " ",
     " ",
-    "draw_dot:0:1",
+    " ",
     " "
    ],
    [
@@ -476,7 +449,7 @@
  "map_info": {
   "dimensions": {
    "width": 7.0,
-   "depth": 16.0,
+   "depth": 15.0,
    "max_height": 4.0
   },
   "lookup_name": "Script_Point_Trace",

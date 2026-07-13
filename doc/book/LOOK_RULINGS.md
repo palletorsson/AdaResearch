@@ -62,6 +62,17 @@ Contradictions between rulings are content, not errors.
 
 ---
 
+## Rulings on the composer
+
+**L-010 (Palle, 2026-07-13, verbatim):** "One aspect of the composition is the forward reading of what the central perspective gives, what the in to the world vector produces, it like the time line of film, the running man, endless runner plus z."
+
 ## Compiled properties (grows as rulings land)
 
-*(none yet — first rulings pending)*
+**P-1. The forward reading (from L-010).** Compose in the view, not in the plan. Z is the film's
+timeline: the into-the-world vector is the reading direction, the central perspective is the reading
+line, and the walk is playback. Compiled as: (a) *axis discipline* — the corridor's central column is
+the view corridor, reserved for the hero and thresholds only, so the vanishing point always shows the
+promise; (b) *the dolly-in* — the hero should appear early, small, CENTER (the promise) and grow
+monotonically in angular size to one climax (scored from the ride log); (c) *scenes, not rows* —
+artifacts group into frames of 1–3 at the wings with varied gaps between scenes: cuts, montage pacing,
+not a metronome.
