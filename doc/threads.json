@@ -248,9 +248,9 @@
 			"id": "catalyst",
 			"title": "Catalyst, Friends & Hazards",
 			"status": "active",
-			"summary": "The danger system became one system: friend conversions grant persistent player powers (ten modes, lineage-tracked), chambers unlock at theme events mid-sequence, and the pathfinder is hazard-aware. The powers are still registered fiction.",
+			"summary": "The danger system became one system, and then one creature. Friend conversions grant persistent player powers (ten modes, lineage-tracked, disk-persisted); chambers unlock at theme events mid-sequence; the pathfinder is hazard-aware; all ten powers now ACT in-world (8 smoke-verified, porter/replicator wired). The foe is ONE evolving pink critter — grey cube until color, then mote → air-serpent → walking octapod (hexapod plant-and-step gait) → doubled waves → grand — with a breathing vertex-noise body, googly player-tracking eyes, comic words (POP!/BOOM!), a kamikaze pop, and a molt-pop on projectile hits (pops, reforms one step warmer). Chamber_Random is prepped and headless-verified for the VR walk.",
 			"progress": {
-				"done": 0,
+				"done": 10,
 				"total": 10,
 				"unit": "friend powers with in-world effects"
 			},
@@ -260,8 +260,8 @@
 			"openItems": [
 				{
 					"id": "catalyst-1",
-					"text": "Implement in-world effects for the ten friend powers (shield parts flames, porter crosses pits…)",
-					"done": false
+					"text": "Implement in-world effects for the ten friend powers — DONE cfdd504f5 (8 smoke-verified; porter + replicator wired, need a VR walk)",
+					"done": true
 				},
 				{
 					"id": "catalyst-2",
@@ -275,13 +275,13 @@
 				},
 				{
 					"id": "catalyst-4",
-					"text": "Persistence stubs: CatalystCapabilityManager.save_state() + BecomingCatalyst._save_unlocked_modes() are pass — powers reset on map change",
-					"done": false
+					"text": "Persistence — DONE 1c1b11fb0: save_state/_load real (user://capability_progression.json); fresh start = reset_progression() or delete the file",
+					"done": true
 				},
 				{
 					"id": "catalyst-5",
-					"text": "Break the GOO collapse: distinct CHROMA/WAVE/FRACTAL/BRANCH friend kinds so all 10 modes differ",
-					"done": false
+					"text": "Break the GOO collapse — DONE e6175f4c1: CHROMA/WAVE/FRACTAL/BRANCH kinds, all 10 modes dispatch distinctly",
+					"done": true
 				},
 				{
 					"id": "catalyst-6",
@@ -295,7 +295,27 @@
 				},
 				{
 					"id": "catalyst-8",
-					"text": "Chamber WARN: teleport at (10,6) lacks a z=7 catch row in most chambers; WAVE slow-pulse has no clamp",
+					"text": "Chamber WARN: teleport at (10,6) lacks a z=7 catch row in most chambers (WAVE slow-pulse clamp was fixed in the calmer rework)",
+					"done": false
+				},
+				{
+					"id": "catalyst-9",
+					"text": "The pink critter — DONE ab08062a6→2380b0569: 5 stages, orb-noise body, hexapod gait, googly tracking, comic words, kamikaze + molt-pop (e45892f53); captures + 4 GIFs in /critter-stages",
+					"done": true
+				},
+				{
+					"id": "catalyst-10",
+					"text": "VR walk of Chamber_Random (vent pinned e:2:5:5:swarm:7, headless proxy green 94c8b288c): judge gait scuttle-vs-shuffle, googly eyes in stereo, comic-word scale, pop juice",
+					"done": false
+				},
+				{
+					"id": "catalyst-11",
+					"text": "Swap the octapod stage's cheap two-bone legs for the full IK rig (octapod_ik.tscn) if the VR walk wants it",
+					"done": false
+				},
+				{
+					"id": "catalyst-12",
+					"text": "/editor web dropdown still only knows 4 foe kinds (VR has 8 + critter stages)",
 					"done": false
 				}
 			],
@@ -303,6 +323,18 @@
 				{
 					"label": "The friend that gives back",
 					"href": "/blog/2026-07-11-the-friend-that-gives-back"
+				},
+				{
+					"label": "One pink critter",
+					"href": "/blog/2026-07-13-one-pink-critter"
+				},
+				{
+					"label": "The room is ready",
+					"href": "/blog/2026-07-13-the-room-is-ready"
+				},
+				{
+					"label": "Catalyst loop overview",
+					"href": "/catalyst-loop"
 				}
 			]
 		},
