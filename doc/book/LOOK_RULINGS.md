@@ -68,7 +68,22 @@ Contradictions between rulings are content, not errors.
 
 **L-011 (Palle, 2026-07-14, verbatim):** "There is still room for improvement in auto map making vs composed maps. Now not all relevant artifacts are included. I want to be able to flag some artifacts to include in certain maps. But larger: sensuous desire producing space as a compressed timeline. … The body moving through space, in the VR set is the potential interaction primarily the visual and the hand interaction. The visual and the interaction creates different desires in the space timeline. So instead of seeing space as a room we can see it as desire space over a timeline. This means we can make a room editor in 2d that reproduces that desire. If you get me. It is a kind of Fourier transform."
 
+**L-012 (Palle, 2026-07-14, verbatim):** "So what's the relation between the visual and the interaction. Let's say the visual see a hero artifact in the distance, a desire or curiosity enters, a hand control joystick moves there and you can feature inspect the artifact, then the hand can touch if it is interactable or if artifacts produce a timeline you can observe. So there are different kinds of desires for both the visual channel and the interactive channel."
+
 ## Compiled properties (grows as rulings land)
+
+**P-3. The desire cycle (from L-012).** The channels convert, they don't run parallel:
+**promise** (visual, far — the hero small on the axis; curiosity as potential energy) →
+**locomotion** (hand — the joystick spends the debt the eye wrote; the hand's first act is travel,
+not touch) → **inspection** (visual, near — orbit, parallax, feature detail) → **consummation**,
+which forks by the artifact's staging kind: *instrument* → touch/operate (hand feedback loop);
+*performer* → dwell (the artifact runs its own timeline nested inside the walk's — you pay in time
+standing still); *specimen/tableau/well/apparition* → held gaze / reading; *terrain* → the body.
+Kinds: visual = {promise, inspection, spectacle}; hand = {locomotion, touch, operation}.
+The typed test a composed map passes and a generated one fails even at matched intensity:
+**every cycle completes in its artifact's own currency** — instruments within arm's reach of the
+walk, performers with a dwell pocket and a held sightline, promises consummated or declared as
+blanks. Cycle-completion is scoreable from the ride log joined with staging types (edge-9).
 
 **P-2. Desire space over a timeline (from L-011).** Space is not a room; it is two desire curves
 over walk-time — **visual desire** (what the eye is promised ahead: angular presence on the axis)
