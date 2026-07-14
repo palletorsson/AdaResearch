@@ -74,7 +74,21 @@ Contradictions between rulings are content, not errors.
 
 **L-014 (Palle, 2026-07-14, verbatim):** "like a the foot print each artifact has a dwell and that is fills the time in another way then moving in space."
 
+**L-015 (Palle, 2026-07-14, verbatim):** "estimated_time should be a the sum not the frame?" — ruled: the sum. Duration is derived from the claims (dwells + locomotion), like the floor from footprints; genuine ceilings live separately as a declared time_budget.
+
+**L-016 (Palle, 2026-07-14, verbatim):** "can we make the radical move to see the map to connect the map editor to the timeline make them the same some how?"
+
 ## Compiled properties (grows as rulings land)
+
+**P-5. Space ⇄ time: one object, two projections (from L-016).** The map editor and the timeline
+editor are the same surface: the plan is the timeline folded into the floor; the timeline is the
+map unrolled along its walk; the walk-path is the shared axis. Built as /space-time: plan above
+(z flows right), filmstrip below (time flows right, bar = temporal footprint), one state — drag an
+artifact in either projection and the other follows; drag a bar's right edge to change its dwell;
+runtime is always the sum (L-015). Edits save as sibling maps only; per-artifact dwell edits can
+be declared back into artifact_dwell.json. The client walk is a stated approximation (greedy
+stride mirroring gaze_ride); the Python transform remains the truth — two renderers of one spec
+keeping each other honest.
 
 **P-4. The temporal footprint (from L-014).** Like the footprint, each artifact has a dwell — the
 footprint claims cells in the grid, the dwell claims seconds on the timeline. A map is a double
