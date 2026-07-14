@@ -2,7 +2,7 @@
 	"_meta": {
 		"description": "Development threads — the project's long-running lines of work, tracked as first-class rows. Rendered at /threads in the encyclopedia; git activity is matched live via each thread's regex patterns. Seeded 2026-07-13 from the four-month blog synthesis; deepened same day from doc/plans, doc/book/STATE.md, doc/reports, memory, the pipeline scorer, and the uncommitted working tree. Hand-edit freely: progress numbers, open items, and match patterns are all data.",
 		"version": "1.0",
-		"last_updated": "2026-07-13"
+		"last_updated": "2026-07-14"
 	},
 	"threads": [
 		{
@@ -38,6 +38,23 @@
 				{
 					"id": "edge-5",
 					"text": "Show the seam of authorship: make the hand/machine edge legible in-world rather than faking composedness — bias is conserved",
+					"done": false
+				},
+				{
+					"id": "edge-6",
+					"text": "Pins (L-011): look_scripts carry pins — artifacts flagged into a map by name, never dropped by the composer",
+					"done": true,
+					"completed": "2026-07-14"
+				},
+				{
+					"id": "edge-7",
+					"text": "Forward transform + 2D editor (L-011): tools/desire_timeline.py reads maps into eye/hand desire curves; /desire-timeline overlays variants and saves editable targets",
+					"done": true,
+					"completed": "2026-07-14"
+				},
+				{
+					"id": "edge-8",
+					"text": "Inverse transform: script_compose scores candidates against saved desire targets (doc/book/look_scripts/desire_targets/) — the curve editor becomes the fitness target",
 					"done": false
 				}
 			],

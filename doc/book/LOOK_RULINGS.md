@@ -66,7 +66,18 @@ Contradictions between rulings are content, not errors.
 
 **L-010 (Palle, 2026-07-13, verbatim):** "One aspect of the composition is the forward reading of what the central perspective gives, what the in to the world vector produces, it like the time line of film, the running man, endless runner plus z."
 
+**L-011 (Palle, 2026-07-14, verbatim):** "There is still room for improvement in auto map making vs composed maps. Now not all relevant artifacts are included. I want to be able to flag some artifacts to include in certain maps. But larger: sensuous desire producing space as a compressed timeline. … The body moving through space, in the VR set is the potential interaction primarily the visual and the hand interaction. The visual and the interaction creates different desires in the space timeline. So instead of seeing space as a room we can see it as desire space over a timeline. This means we can make a room editor in 2d that reproduces that desire. If you get me. It is a kind of Fourier transform."
+
 ## Compiled properties (grows as rulings land)
+
+**P-2. Desire space over a timeline (from L-011).** Space is not a room; it is two desire curves
+over walk-time — **visual desire** (what the eye is promised ahead: angular presence on the axis)
+and **hand desire** (what the body can reach and operate: interactables within arm's length) —
+and the room is their spatial rendering. The transform runs both ways, like a Fourier pair:
+*forward* = read an existing map into its desire timeline (gaze_ride for the eye, reach analysis
+for the hand); *inverse* = edit the timeline in 2D and solve the corridor that reproduces it.
+Authorship moves into the curve editor; cells become output. Pinning (the practical clause):
+scripts carry `pins` — artifacts flagged into a map by name, never dropped by any generator.
 
 **P-1. The forward reading (from L-010).** Compose in the view, not in the plan. Z is the film's
 timeline: the into-the-world vector is the reading direction, the central perspective is the reading

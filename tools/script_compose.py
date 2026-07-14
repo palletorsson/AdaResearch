@@ -309,6 +309,11 @@ def score_candidate(name, cast, hero_i, dropped):
 def compose(map_name, scripts, seeds, prefix):
     script = scripts["maps"][map_name]
     source, cast, exit_tok = read_cast(map_name)
+    # pins (L-011): artifacts flagged into this map by name — never dropped.
+    for pin in script.get("pins", []):
+        if not any(base_of(t) == base_of(pin) for t in cast):
+            cast.append(pin)
+            print(f"  pinned: {base_of(pin)}")
     hero_i = pick(cast, script["hero"])
     if hero_i is None:
         hero_i = max(range(len(cast)), key=lambda i: size_of(cast[i]))
