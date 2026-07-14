@@ -7,9 +7,29 @@
   "opening": "the between: carved doors (rooms) | continuous floor (wanghall) | wander trails (ants) | A*-over-noise (antrooms) | return-pass shortcuts (derive) | slime trunks (physarum) | gates+L-corridors (flock)",
   "dress": "map_principal.finish: labwall + register palettes + proximity_lod + wall runs + wall props + supporting cast (benches by register quota)"
  },
- "recipes_note": "lsystem/dla/wfc register when their workers land",
- "recipes_voronoi_note": "voronoi below",
+ "recipes_note": "THE BOX IS FULL - 13 strategies, every one seeded-deterministic, pathfinder-gated, sliderable",
  "recipes": {
+  "lsystem": {
+   "tool": "gen_lsystem.py",
+   "mode": "lsystem-trunk",
+   "knobs": {"ITERATIONS": 3, "SEG_LEN": 7, "CANVAS": 72, "MAX_BEATS": 9},
+   "sliders": {
+    "ITERATIONS": {"label": "grammar iterations (branching depth)", "min": 2, "max": 4, "step": 1, "default": 3},
+    "SEG_LEN": {"label": "segment length (trunk stride)", "min": 5, "max": 10, "step": 1, "default": 7}
+   },
+   "note": "the grammar grows the map: turtle path = corridor skeleton, beat rooms at branch tips in derivation order, chapels on side twigs"
+  },
+  "dla": {
+   "tool": "gen_dla.py",
+   "mode": "dla-dendrites",
+   "knobs": {"WALKERS": 110, "STICKINESS": 1.0, "PRUNE_ROUNDS": 6, "SCATTER_MIN": 12},
+   "sliders": {
+    "WALKERS": {"label": "walkers (dendrite growth)", "min": 60, "max": 900, "step": 10, "default": 110},
+    "PRUNE_ROUNDS": {"label": "tip pruning (dead-twig trim)", "min": 0, "max": 12, "step": 1, "default": 6},
+    "STICKINESS": {"label": "stickiness", "min": 0.3, "max": 1.0, "step": 0.05, "default": 1.0}
+   },
+   "note": "rooms as aggregation seeds; seeded walkers stick into dendritic corridors (110 default - screening physics over-grows at 900); A*-over-noise repairs, tips pruned"
+  },
   "wfc": {
    "tool": "gen_wfc.py",
    "mode": "wfc-blocks",

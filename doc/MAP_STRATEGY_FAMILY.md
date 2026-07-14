@@ -15,15 +15,28 @@ deterministic (seeded — byte-identical per seed); honest sizes (rooms from
 em-square footprints); tight around artifacts; verdicts on `/hall-verdicts`
 (the shot + walk + rule loop).
 
-## Implemented
+## Implemented — THE BOX IS FULL (13 strategies, 2026-07-11)
 
-| strategy | file | floor idea |
-|---|---|---|
-| act-halls | `mission_graph.py --mode=halls` | three register halls, features fill, chapels = only enclosed rooms |
-| sized rooms | `mission_graph.py --mode=rooms` | per-beat rooms sized by cast footprint, serpentine bands with turns |
-| breathing wang-hall | `gen_wanghall.py` | ONE hall, widths pulse wide/narrow, voltage = width-8 pinches |
-| ants (plates + wander) | `gen_ants.py` | footprint plates; 30 ants find the floor; pheromone ≥ 2 = well-trodden |
-| ant-rooms (rooms + pathfinding) | `gen_antrooms.py` | perfect close rooms; ants OPEN the space between (A* over noise, carved cells discount → trunks merge) |
+All: pathfinder 0 issues / 100%, seeded byte-identical, tight, all layers via
+the finisher, knobs via `pearl_factory.py --set`, shots + sliders on
+`/hall-verdicts`. Floor-cell counts on the randomness/lsystems pair.
+
+| strategy | file | floor idea | cells |
+|---|---|---|---|
+| act-halls | `mission_graph.py --mode=halls` | three register halls, features fill, chapels the only rooms | — |
+| sized rooms | `mission_graph.py --mode=rooms` | per-beat rooms by footprint, serpentine bands with turns | — |
+| breathing wang-hall | `gen_wanghall.py` | ONE hall, widths pulse, voltage = width-8 pinches | — |
+| ants | `gen_ants.py` | footprint plates; 30 ants find the floor; pheromone ≥ 2 stays | 2051 |
+| ant-rooms | `gen_antrooms.py` | perfect close rooms; A*-over-noise opens the between; reuse merges trunks (2.8×) | 771/902 |
+| dérive bricolage | `gen_derive.py` | the wanderer with the backpack; forward places, the return improves | **385/471** |
+| flocking rooms | `gen_flocking.py` | rooms as boids; separation = honest spacing; sequence-cohesion clusters | 721/884 |
+| physarum trunks | `gen_physarum.py` | slime finds circulation; width follows flow (trunk 4 / twig 2) | 1158/1236 |
+| reaction-diffusion | `gen_rd.py` | Gray-Scott floor; spots/stripes/sparse by register; A* repairs | 1610/1698 |
+| erosion valleys | `gen_erosion.py` | valleys = least-cost water routes between plateau rooms; berm banks | 1495/1645 |
+| voronoi territories | `gen_voronoi.py` | sites tessellate; walls at every meeting edge; doors where beat-neighbours touch | 1937/2007 |
+| WFC blocks | `gen_wfc.py` | wang blocks wave-collapsed; register weights; spanning-tree unseal (seed-swept 10/10) | ~1268/1012 |
+| DLA dendrites | `gen_dla.py` | rooms as aggregation seeds; walkers stick into dendrites; tips pruned | 1662/1764 |
+| L-system trunk | `gen_lsystem.py` | the grammar grows the map; rooms at branch tips in derivation order | — |
 
 ## Specced — next candidates
 
