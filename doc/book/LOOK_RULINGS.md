@@ -72,7 +72,20 @@ Contradictions between rulings are content, not errors.
 
 **L-013 (Palle, 2026-07-14, verbatim):** "actually different artifact has different dwell, that is so good."
 
+**L-014 (Palle, 2026-07-14, verbatim):** "like a the foot print each artifact has a dwell and that is fills the time in another way then moving in space."
+
 ## Compiled properties (grows as rulings land)
+
+**P-4. The temporal footprint (from L-014).** Like the footprint, each artifact has a dwell — the
+footprint claims cells in the grid, the dwell claims seconds on the timeline. A map is a double
+packing: spatial claims arranged in the floor, temporal claims arranged on the walk. And the two
+ways of filling time differ in kind: **locomotion** fills time *through* space (coupled by walk
+speed — the tracking shot), **dwell** fills time *in place* (space holds, time runs — the static
+long take). Temporal void exists too: stretches where nothing claims your time are the pacing's
+rest beats, as compositional as spatial void. The em-square gave every artifact its spatial
+contract (anchor, rest pose, base); the dwell is the third contract — the em-square in time.
+Budgeting follows: a map's declared estimated_time is the timeline's grid size, and the composer
+must pack dwells into it the way footprints pack into the floor (feeds edge-8).
 
 **P-3a. Dwell is per-artifact (from L-013).** Not a global constant to rule once — each artifact
 carries its own dwell: one cycle of its own process (the Game of Life needs generations, the Galton
