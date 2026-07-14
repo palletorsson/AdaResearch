@@ -47,8 +47,17 @@ except Exception:
     _DW = {"defaults": {}, "artifacts": {}}
 
 
+TEXT_RE = re.compile(
+    r"tutorial_wall|text_screen|info_board|chalk|plaque|sign|board|label"
+    r"|wall_text|criticalinfo|code_display|reading|caption", re.I)
+PROSE_WPM = 220.0
+CODE_WPM = 80.0
+
+
 def kind_of(base):
     """Desire kind (P-3): stated name-heuristic until interaction DNA is wired."""
+    if TEXT_RE.search(base):
+        return "tableau"
     if TERRAIN_RE.search(base):
         return "terrain"
     if HAND_RE.search(base):
@@ -58,10 +67,29 @@ def kind_of(base):
     return "specimen"
 
 
-def dwell_of(base):
+def reading_dwell(map_name):
+    """P-6: the text is the clock — a map's tutorial.md read time in seconds
+    (prose at 220 wpm, fenced code at 80 wpm), clamped to something walkable."""
+    p = os.path.join(MAPS_DIR, map_name, "tutorial.md")
+    if not os.path.isfile(p):
+        return None
+    text = open(p, encoding="utf-8", errors="replace").read()
+    parts = re.split(r"```", text)
+    prose_w = sum(len(seg.split()) for i, seg in enumerate(parts) if i % 2 == 0)
+    code_w = sum(len(seg.split()) for i, seg in enumerate(parts) if i % 2 == 1)
+    secs = prose_w / PROSE_WPM * 60 + code_w / CODE_WPM * 60
+    return max(15, min(240, round(secs)))
+
+
+def dwell_of(base, map_name=None):
     if base in _DW.get("artifacts", {}):
         return _DW["artifacts"][base]
-    return _DW.get("defaults", {}).get(kind_of(base), 5)
+    kind = kind_of(base)
+    if kind == "tableau" and map_name and base.startswith("tutorial_wall"):
+        r = reading_dwell(map_name)
+        if r is not None:
+            return r
+    return _DW.get("defaults", {}).get(kind, 5)
 
 
 def base_of(token):
@@ -132,7 +160,7 @@ def transform(map_name):
             promise = next((s for s, dist, _ in hits if dist >= PROMISE_M), None)
         min_dist = min(dist for _, dist, _ in hits)
         inspected = min_dist <= INSPECT_M
-        dwell = dwell_of(b)
+        dwell = dwell_of(b, map_name)
         if kind == "instrument":
             done = min_dist <= REACH_M
             consummation = "touch" if done else "OUT OF REACH"
@@ -157,13 +185,31 @@ def transform(map_name):
         path_m += ((a["x"] - b2["x"]) ** 2 + (a["z"] - b2["z"]) ** 2) ** 0.5
     runtime = round(path_m / WALK_MPS + dwell_total, 1)
     complete = sum(1 for c in cycles if c["complete"])
+    # ── modality alternation (P-6): reading exhausts; only doing/watching
+    #    relieve. Flag any continuous reading run over the overload line. ──
+    by_base = {c["artifact"]: c for c in cycles}
+    visit_seq = []
+    for s in steps:
+        if s["visit"] and s["visit"] in by_base and s["visit"] not in visit_seq:
+            visit_seq.append(s["visit"])
+    run, longest_read = 0.0, 0.0
+    for b in visit_seq:
+        c = by_base[b]
+        if c["kind"] == "tableau" and c["complete"]:
+            run += c["dwell_s"]
+            longest_read = max(longest_read, run)
+        elif c["kind"] in ("instrument", "performer"):
+            run = 0.0  # modality relief
+    overload = longest_read > 90
     return {"map": map_name, "steps": steps, "classes": classes,
             "cycles": cycles,
             "summary": {"cycles": len(cycles), "complete": complete,
                         "incomplete": [c["artifact"] for c in cycles if not c["complete"]],
                         "path_m": round(path_m, 1),
                         "dwell_s": round(dwell_total, 1),
-                        "runtime_s": runtime},
+                        "runtime_s": runtime,
+                        "longest_reading_run_s": round(longest_read, 1),
+                        "reading_overload": overload},
             "channels": {
                 "visual": "sum of angular sizes in view (deg) — the eye's field",
                 "axis": "largest CENTER angular size (deg) — the promise on the reading line",

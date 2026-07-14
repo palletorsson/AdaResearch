@@ -78,7 +78,21 @@ Contradictions between rulings are content, not errors.
 
 **L-016 (Palle, 2026-07-14, verbatim):** "can we make the radical move to see the map to connect the map editor to the timeline make them the same some how?"
 
+**L-017 (Palle, 2026-07-14, verbatim):** "Can we connect this to the tutorials text or text as a way to organize the content in vr spatiality, what the cognitive load of the reading is, can that be the dwell, what needs to be emphasized, when do we need different cognitive modalities in game as different kind of artifacts?"
+
 ## Compiled properties (grows as rulings land)
+
+**P-6. Text as the score's clock (from L-017).** Reading time is a computable temporal footprint:
+a text artifact's dwell = its words ÷ reading speed (prose ~220 wpm, code ~80 wpm, formulas
+slower per line) — so editing tutorial.md re-times the room; the text is the clock. Cognitive
+load is the symbolic channel beside the eye and the hand, and it EXHAUSTS: the artifact kinds are
+cognitive modalities (tableau=read, instrument=operate, performer=watch, specimen=gaze,
+terrain=move), and composition must alternate them — a reading run over ~90s with no hand or
+spectacle interleaved is an overload flag the composer should fix, the way NOC follows a concept
+with an exercise (THE IDEA → THE CODE → TRY is a modality script; TRY contracts an instrument
+within reach). Emphasis flows from the text too: the turn's subject, the truth statement, the
+hero/anti-hero pair name what deserves the axis, the vacuum, the dolly-in. Full compiler
+(text → segments → modality/load/emphasis → desire target + script) is edge-12.
 
 **P-5. Space ⇄ time: one object, two projections (from L-016).** The map editor and the timeline
 editor are the same surface: the plan is the timeline folded into the floor; the timeline is the
