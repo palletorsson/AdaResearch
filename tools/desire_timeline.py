@@ -31,7 +31,37 @@ OUT_DIR = os.path.normpath(os.path.join(
 HAND_RE = re.compile(
     r"grab|slider|button|puzzle|builder|draw|edit|snap|interactive|catalyst"
     r"|toss|pad|writing|crank|placer|dice|toy", re.I)
+PERF_RE = re.compile(
+    r"anim|sim|life|flock|swarm|wave|automata|evolut|particle|pendulum|galton"
+    r"|clock|counter|walker|running|flow|trace|scene|field", re.I)
+TERRAIN_RE = re.compile(r"floor|carpet|mosaic|tiling|ground|terrain", re.I)
 REACH_M = 2.5
+PROMISE_M = 8.0
+INSPECT_M = 4.0
+WALK_MPS = 1.4
+
+DWELL_PATH = os.path.join(ROOT, "commons", "data", "artifact_dwell.json")
+try:
+    _DW = json.load(open(DWELL_PATH, encoding="utf-8"))
+except Exception:
+    _DW = {"defaults": {}, "artifacts": {}}
+
+
+def kind_of(base):
+    """Desire kind (P-3): stated name-heuristic until interaction DNA is wired."""
+    if TERRAIN_RE.search(base):
+        return "terrain"
+    if HAND_RE.search(base):
+        return "instrument"
+    if PERF_RE.search(base):
+        return "performer"
+    return "specimen"
+
+
+def dwell_of(base):
+    if base in _DW.get("artifacts", {}):
+        return _DW["artifacts"][base]
+    return _DW.get("defaults", {}).get(kind_of(base), 5)
 
 
 def base_of(token):
@@ -84,7 +114,56 @@ def transform(map_name):
         steps.append({"step": step, "x": x, "z": z,
                       "visual": round(visual, 1), "axis": round(axis, 1),
                       "hand": round(hand, 1), "visit": visit, "seen": seen})
+    # ── the desire cycles (P-3): promise → approach → inspect → consummation,
+    #    forking by kind; dwell is per-artifact (L-013). ──
+    sightings = {}  # base -> list of (step, dist, pos)
+    for sm in STEP_RE.finditer(log):
+        step = int(sm.group(1))
+        for vm in VIEW_RE.finditer(sm.group(4)):
+            sightings.setdefault(base_of(vm.group(1)), []).append(
+                (step, float(vm.group(4)), vm.group(3)))
+    cycles = []
+    dwell_total = 0.0
+    for b, hits in sorted(sightings.items()):
+        kind = kind_of(b)
+        promise = next((s for s, dist, pos in hits
+                        if dist >= PROMISE_M and pos == "CENTER"), None)
+        if promise is None:
+            promise = next((s for s, dist, _ in hits if dist >= PROMISE_M), None)
+        min_dist = min(dist for _, dist, _ in hits)
+        inspected = min_dist <= INSPECT_M
+        dwell = dwell_of(b)
+        if kind == "instrument":
+            done = min_dist <= REACH_M
+            consummation = "touch" if done else "OUT OF REACH"
+        elif kind == "performer":
+            done = inspected
+            consummation = f"dwell {dwell}s" if done else "PASSED BY"
+        elif kind == "terrain":
+            done = True
+            consummation = "underfoot"
+        else:
+            done = True
+            consummation = "gaze"
+        if done:
+            dwell_total += dwell
+        cycles.append({"artifact": b, "kind": kind,
+                       "promise": promise, "inspected": inspected,
+                       "consummation": consummation, "dwell_s": dwell,
+                       "complete": done})
+    # locomotion time from the walk's path length
+    path_m = 0.0
+    for a, b2 in zip(steps, steps[1:]):
+        path_m += ((a["x"] - b2["x"]) ** 2 + (a["z"] - b2["z"]) ** 2) ** 0.5
+    runtime = round(path_m / WALK_MPS + dwell_total, 1)
+    complete = sum(1 for c in cycles if c["complete"])
     return {"map": map_name, "steps": steps, "classes": classes,
+            "cycles": cycles,
+            "summary": {"cycles": len(cycles), "complete": complete,
+                        "incomplete": [c["artifact"] for c in cycles if not c["complete"]],
+                        "path_m": round(path_m, 1),
+                        "dwell_s": round(dwell_total, 1),
+                        "runtime_s": runtime},
             "channels": {
                 "visual": "sum of angular sizes in view (deg) — the eye's field",
                 "axis": "largest CENTER angular size (deg) — the promise on the reading line",

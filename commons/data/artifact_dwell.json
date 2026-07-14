@@ -1,0 +1,23 @@
+{
+	"_readme": "Dwell is per-artifact (L-013): one cycle of the artifact's own process, in seconds. Sources, in precedence order: (1) 'artifacts' declarations below (hand-ruled or measured), (2) 'defaults' by desire kind. Consumed by tools/desire_timeline.py — the map's experienced runtime = locomotion time + sum of dwells. Declare freely; measurement passes can overwrite the 'measured' block later, declarations always win.",
+	"defaults": {
+		"instrument": 8,
+		"performer": 15,
+		"specimen": 4,
+		"tableau": 6,
+		"terrain": 0
+	},
+	"artifacts": {
+		"animatedcubebuilder": 12,
+		"game_of_life_petri": 30,
+		"galton_friction": 25,
+		"floating_sphere_field": 6,
+		"frame_counter_display": 5,
+		"mystic_writing_pad": 20,
+		"player_trace": 10,
+		"klee_walking_point": 15,
+		"durer_scene": 20,
+		"folding_past": 12,
+		"becoming_catalyst": 10
+	}
+}

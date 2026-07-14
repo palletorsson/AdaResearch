@@ -70,7 +70,16 @@ Contradictions between rulings are content, not errors.
 
 **L-012 (Palle, 2026-07-14, verbatim):** "So what's the relation between the visual and the interaction. Let's say the visual see a hero artifact in the distance, a desire or curiosity enters, a hand control joystick moves there and you can feature inspect the artifact, then the hand can touch if it is interactable or if artifacts produce a timeline you can observe. So there are different kinds of desires for both the visual channel and the interactive channel."
 
+**L-013 (Palle, 2026-07-14, verbatim):** "actually different artifact has different dwell, that is so good."
+
 ## Compiled properties (grows as rulings land)
+
+**P-3a. Dwell is per-artifact (from L-013).** Not a global constant to rule once — each artifact
+carries its own dwell: one cycle of its own process (the Game of Life needs generations, the Galton
+board needs the bell to build, a slider needs its feedback loop felt once). Duration is DNA: dwell
+comes from the artifact — measured cycle length where measurable, declared in
+`commons/data/artifact_dwell.json` otherwise, defaulted by staging kind as the fallback. The map's
+experienced runtime = locomotion time + Σ dwell — the compressed timeline, literally.
 
 **P-3. The desire cycle (from L-012).** The channels convert, they don't run parallel:
 **promise** (visual, far — the hero small on the axis; curiosity as potential energy) →
