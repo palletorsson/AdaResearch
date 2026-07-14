@@ -4,24 +4,15 @@
    "tool": "script_compose.py",
    "register": "promenade",
    "script_note": "the felt triangle against the theorem",
-   "seed": 2,
+   "seed": 0,
    "dropped": [],
-   "score": 5.005,
-   "ride": "tau=+0.54 cov=0.93 heroDeg=20 rank1=0 fid=1.00 promise=0.5 dolly=1.00"
+   "score": 6.888,
+   "ride": "tau=+0.51 cov=0.93 heroDeg=20 rank1=0 fid=1.00 promise=0.5 dolly=1.00 FIT=0.64"
   },
   "authored_by": "script (language) + solver (geometry) + gaze_ride (observation)"
  },
  "layers": {
   "structure": [
-   [
-    "1",
-    "1",
-    "1",
-    "1",
-    "1",
-    "1",
-    "1"
-   ],
    [
     "1",
     "1",
@@ -433,15 +424,6 @@
     " ",
     " ",
     " ",
-    " ",
-    " ",
-    " ",
-    " "
-   ],
-   [
-    " ",
-    " ",
-    " ",
     "t",
     " ",
     " ",
@@ -480,15 +462,6 @@
     " ",
     " ",
     "triangle_line_puzzle:90:1",
-    " ",
-    " ",
-    " ",
-    " "
-   ],
-   [
-    " ",
-    " ",
-    " ",
     " ",
     " ",
     " ",
@@ -550,6 +523,15 @@
    ],
    [
     " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
     "triangle:90",
     " ",
     " ",
@@ -563,15 +545,6 @@
     " ",
     " ",
     "quad:90",
-    " ",
-    " "
-   ],
-   [
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
     " ",
     " "
    ],
@@ -692,7 +665,7 @@
  "map_info": {
   "dimensions": {
    "width": 7.0,
-   "depth": 24.0,
+   "depth": 23.0,
    "max_height": 4.0
   },
   "lookup_name": "Script_Point_Triangle_Context",

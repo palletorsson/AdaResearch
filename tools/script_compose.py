@@ -31,6 +31,9 @@ import sys
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MAPS_DIR = os.path.join(ROOT, "commons", "maps")
 SIZES_PATH = os.path.join(ROOT, "commons", "data", "artifact_sizes.json")
+TARGETS_DIR = os.path.join(ROOT, "doc", "book", "look_scripts", "desire_targets")
+
+import desire_timeline as dt  # noqa: E402 — shared ride-log parsing (same tools dir)
 
 
 def load_sizes():
@@ -256,7 +259,58 @@ def kendall(a, b):
     return (conc - disc) / n if n else 0.0
 
 
-def score_candidate(name, cast, hero_i, dropped):
+def curves_from_ride(ride):
+    """Per-step visual/hand desire from the ride log (mirror of desire_timeline)."""
+    vis, hand = [], []
+    for sm in dt.STEP_RE.finditer(ride):
+        v = h = 0.0
+        for vm in dt.VIEW_RE.finditer(sm.group(4)):
+            b = dt.base_of(vm.group(1))
+            deg = int(vm.group(2))
+            dist = float(vm.group(4))
+            v += deg
+            if dist <= dt.REACH_M and dt.is_hand(b):
+                h += deg
+        vis.append(v)
+        hand.append(h)
+    return vis, hand
+
+
+def resample(seq, n):
+    if not seq:
+        return [0.0] * n
+    if len(seq) == 1:
+        return [float(seq[0])] * n
+    out = []
+    for i in range(n):
+        f = i * (len(seq) - 1) / (n - 1)
+        a, b = seq[int(f)], seq[min(len(seq) - 1, int(f) + 1)]
+        out.append(a + (b - a) * (f - int(f)))
+    return out
+
+
+def load_target(map_name):
+    p = os.path.join(TARGETS_DIR, f"{map_name}.json")
+    if not os.path.isfile(p):
+        return None
+    return json.load(open(p, encoding="utf-8")).get("target")
+
+
+def curve_fit(ride, target):
+    """The inverse transform (edge-8): how well a candidate's desire curves
+    reproduce the target drawn in /desire-timeline. 1 = perfect."""
+    vis, hand = curves_from_ride(ride)
+    fits = []
+    for got, want in ((vis, target["visual"]), (hand, target["hand"])):
+        want = [float(w) for w in want]
+        got_r = resample(got, len(want))
+        scale = max(max(want, default=1.0), 1.0)
+        mae = sum(abs(g - w) for g, w in zip(got_r, want)) / len(want)
+        fits.append(max(0.0, 1.0 - mae / scale))
+    return sum(fits) / len(fits)
+
+
+def score_candidate(name, cast, hero_i, dropped, target=None):
     rc, out = run([sys.executable, "tools/map_pathfinder.py", "check", name])
     if rc != 0 or "0 FAIL" not in out:
         return None, "pathfinder FAIL"
@@ -302,8 +356,13 @@ def score_candidate(name, cast, hero_i, dropped):
     else:
         dolly = 0.0
     s = 2 * tau + coverage + hero_bonus + rank1 + fidelity + promise + dolly
-    return s, (f"tau={tau:+.2f} cov={coverage:.2f} heroDeg={hd} rank1={int(rank1)} "
-               f"fid={fidelity:.2f} promise={promise:.1f} dolly={dolly:.2f}")
+    detail = (f"tau={tau:+.2f} cov={coverage:.2f} heroDeg={hd} rank1={int(rank1)} "
+              f"fid={fidelity:.2f} promise={promise:.1f} dolly={dolly:.2f}")
+    if target is not None:
+        fit = curve_fit(ride, target)
+        s += 3.0 * fit  # the drawn curve leads once it exists
+        detail += f" FIT={fit:.2f}"
+    return s, detail
 
 
 def compose(map_name, scripts, seeds, prefix):
@@ -318,6 +377,9 @@ def compose(map_name, scripts, seeds, prefix):
     if hero_i is None:
         hero_i = max(range(len(cast)), key=lambda i: size_of(cast[i]))
     counter_i = pick(cast, script.get("counter", []), exclude=hero_i)
+    target = load_target(map_name)
+    if target:
+        print(f"  desire target found — the drawn curve leads")
     best = None
     cand_name = f"ScriptCand_{map_name}"
     for seed in range(seeds):
@@ -330,7 +392,7 @@ def compose(map_name, scripts, seeds, prefix):
         data, dropped = build_map(source, cand_name, w, dep, floor, pl, sp, ex,
                                   exit_tok, script, seed)
         write_map(cand_name, data)
-        s, detail = score_candidate(cand_name, cast, hero_i, dropped)
+        s, detail = score_candidate(cand_name, cast, hero_i, dropped, target)
         print(f"  seed {seed}: {'--' if s is None else f'{s:.2f}'}  {detail}")
         if s is not None and (best is None or s > best[0]):
             best = (s, seed, data, detail)

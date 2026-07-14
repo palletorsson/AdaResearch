@@ -4,24 +4,15 @@
    "tool": "script_compose.py",
    "register": "promenade",
    "script_note": "Klee's walking line against the Modulor's standard body",
-   "seed": 1,
+   "seed": 3,
    "dropped": [],
-   "score": 4.713,
-   "ride": "tau=+0.36 cov=1.00 heroDeg=20 rank1=0 fid=1.00 promise=0.5 dolly=1.00"
+   "score": 7.09,
+   "ride": "tau=+0.35 cov=1.00 heroDeg=20 rank1=0 fid=1.00 promise=0.5 dolly=1.00 FIT=0.80"
   },
   "authored_by": "script (language) + solver (geometry) + gaze_ride (observation)"
  },
  "layers": {
   "structure": [
-   [
-    "1",
-    "1",
-    "1",
-    "1",
-    "1",
-    "1",
-    "1"
-   ],
    [
     "1",
     "1",
@@ -847,15 +838,6 @@
     " ",
     " ",
     " ",
-    " ",
-    " ",
-    " ",
-    " "
-   ],
-   [
-    " ",
-    " ",
-    " ",
     "t",
     " ",
     " ",
@@ -928,20 +910,20 @@
    ],
    [
     " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " "
-   ],
-   [
-    " ",
     "parallel_line_puzzle:0:1.200:0#fillhole:remove",
     " ",
     " ",
     " ",
     "plus_line_puzzle:0:1.200:0#plusfillhole:remove",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
     " "
    ],
    [
@@ -1000,20 +982,20 @@
    ],
    [
     " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " "
-   ],
-   [
-    " ",
     "laser_exploding_sphere:0:2:1",
     " ",
     " ",
     " ",
     "cube_scene:0:1:0.400",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
     " "
    ],
    [
@@ -1072,20 +1054,20 @@
    ],
    [
     " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " "
-   ],
-   [
-    " ",
     "laser_measure:0:1:1",
     " ",
     " ",
     " ",
     "grabbable_line:0:1:1",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
     " "
    ],
    [
@@ -1198,20 +1180,20 @@
    ],
    [
     " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " "
-   ],
-   [
-    " ",
     "laser_sword:0:0:1",
     " ",
     " ",
     " ",
     "perspective_lines:0:2:1",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
     " "
    ],
    [
@@ -1276,15 +1258,6 @@
     " ",
     " ",
     " "
-   ],
-   [
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " "
    ]
   ]
  },
@@ -1313,7 +1286,7 @@
  "map_info": {
   "dimensions": {
    "width": 7.0,
-   "depth": 47.0,
+   "depth": 46.0,
    "max_height": 4.0
   },
   "lookup_name": "Script_Point_Lines",
