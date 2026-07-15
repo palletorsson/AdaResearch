@@ -1,0 +1,106 @@
+{
+	"_readme": "Sub-templates for /template-maps (L-018/P-7): named parameter presets of the 18 placement-contract templates. id = '<parent>#<slug>'. Seeded 2026-07-15 from the May archetype catalogs (generate_archetype_maps*.py: Promenade, Ziggurat, Theater, Forum, Constellation...) where they map onto the palette; save new ones from the zone inspector in /template-maps.",
+	"subtemplates": {
+		"gallery#tight": {
+			"label": "tight (museum)",
+			"parent": "gallery",
+			"params": {
+				"spacing": 2
+			}
+		},
+		"gallery#sparse": {
+			"label": "sparse (cathedral)",
+			"parent": "gallery",
+			"params": {
+				"spacing": 5
+			}
+		},
+		"aisle#promenade": {
+			"label": "promenade",
+			"parent": "aisle",
+			"params": {
+				"spacing": 4
+			}
+		},
+		"aisle#dense": {
+			"label": "dense pairs",
+			"parent": "aisle",
+			"params": {
+				"spacing": 2
+			}
+		},
+		"random#constellation": {
+			"label": "constellation",
+			"parent": "random",
+			"params": {
+				"density": 0.06,
+				"seed": 7
+			}
+		},
+		"random#dense": {
+			"label": "dense field",
+			"parent": "random",
+			"params": {
+				"density": 0.25,
+				"seed": 46
+			}
+		},
+		"void#islet": {
+			"label": "islet (pit edge)",
+			"parent": "void",
+			"params": {
+				"size": 0.3
+			}
+		},
+		"void#plateau": {
+			"label": "plateau",
+			"parent": "void",
+			"params": {
+				"size": 0.75
+			}
+		},
+		"platform#ziggurat": {
+			"label": "ziggurat",
+			"parent": "platform",
+			"params": {
+				"size": 8
+			}
+		},
+		"platform#dais": {
+			"label": "dais",
+			"parent": "platform",
+			"params": {
+				"size": 3
+			}
+		},
+		"ring#forum": {
+			"label": "forum",
+			"parent": "ring",
+			"params": {
+				"count": 12
+			}
+		},
+		"amphi#theater": {
+			"label": "theater",
+			"parent": "amphi",
+			"params": {
+				"rows": 4
+			}
+		},
+		"spine#stations": {
+			"label": "stations",
+			"parent": "spine",
+			"params": {
+				"spacing": 4
+			}
+		},
+		"spiral#tower": {
+			"label": "tower coil",
+			"parent": "spiral",
+			"params": {
+				"turns": 3,
+				"count": 14
+			}
+		}
+	}
+}
