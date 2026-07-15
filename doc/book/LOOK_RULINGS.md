@@ -80,7 +80,18 @@ Contradictions between rulings are content, not errors.
 
 **L-017 (Palle, 2026-07-14, verbatim):** "Can we connect this to the tutorials text or text as a way to organize the content in vr spatiality, what the cognitive load of the reading is, can that be the dwell, what needs to be emphasized, when do we need different cognitive modalities in game as different kind of artifacts?"
 
+**L-018 (Palle, 2026-07-15, verbatim):** "Can we make a web tool that shows and makes templates maps where artifacts has their decided spot. The template map should decide where the artifact can be placed and have different subtemplates. We can paint the type of template in a 2d grid deciding the square size. The first template is just an open floor where artifacts can be placed on any square. Then the podium gallery with distance slider between artifacts, then podium aisle mirror with distance slider, then a platform with a podium on top with size controller, random podiums with density, wall on the sides with podium cube along the walls, shrunken void with size slider, and 10 more principal setups."
+
 ## Compiled properties (grows as rulings land)
+
+**P-7. The template is the placement contract (from L-018).** Edge-4 materialized: a template
+decides where artifacts MAY stand (slots), parameterized (spacing, density, size); maps are
+composed by painting template regions onto the grid. The author's hand enters twice — choosing
+and painting the templates, and dropping artifacts into slots — while everything between stays
+free. Built as /template-maps: 18 principals (open floor, podium gallery, mirrored aisle,
+platform+podium, random podiums, wall podiums, shrunken void, ring, spiral, spine, corners,
+amphitheater, courtyard, diagonal, cross, checker, vitrine wall, stage hero), per-zone sliders,
+cast auto-fill, export as sibling maps with a round-trip sidecar.
 
 **P-6. Text as the score's clock (from L-017).** Reading time is a computable temporal footprint:
 a text artifact's dwell = its words ÷ reading speed (prose ~220 wpm, code ~80 wpm, formulas

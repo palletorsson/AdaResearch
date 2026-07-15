@@ -2,7 +2,7 @@
 	"_meta": {
 		"description": "Development threads — the project's long-running lines of work, tracked as first-class rows. Rendered at /threads in the encyclopedia; git activity is matched live via each thread's regex patterns. Seeded 2026-07-13 from the four-month blog synthesis; deepened same day from doc/plans, doc/book/STATE.md, doc/reports, memory, the pipeline scorer, and the uncommitted working tree. Hand-edit freely: progress numbers, open items, and match patterns are all data.",
 		"version": "1.0",
-		"last_updated": "2026-07-14"
+		"last_updated": "2026-07-15"
 	},
 	"threads": [
 		{
@@ -32,7 +32,7 @@
 				},
 				{
 					"id": "edge-4",
-					"text": "Define the authorship loci by contract: where the hand enters (heroes, thresholds, the 2-3 dramatic placements per map); the generator fills the rest",
+					"text": "Define the authorship loci by contract: where the hand enters (heroes, thresholds, the 2-3 dramatic placements per map); the generator fills the rest — materialized as /template-maps (P-7): the template IS the contract",
 					"done": false
 				},
 				{
@@ -81,6 +81,12 @@
 					"text": "Text as the score's clock (L-017/P-6): full compiler text -> segments -> modality/load/emphasis -> desire target + script; pilot done (reading-dwell from tutorial.md, modality-overload flag); next: segment the walls, wire walked.md emphasis to hero/axis",
 					"done": true,
 					"completed": "2026-07-14"
+				},
+				{
+					"id": "edge-13",
+					"text": "Template maps (L-018/P-7): /template-maps — 18 principal placement contracts painted onto the grid, per-zone sliders, slots as decided spots, cast auto-fill, sibling export + sidecar. Next: judge TemplateMap_* with the tournament fitness; wire slots into script_compose as authorship loci",
+					"done": true,
+					"completed": "2026-07-15"
 				}
 			],
 			"links": [
