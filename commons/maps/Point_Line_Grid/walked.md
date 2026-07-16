@@ -3,6 +3,11 @@
 > R-021, amended: the considered critical tutorial for a walked, working map.
 > The ghost drafts from what the map IS; Palle rules the voice. Two trajectories
 > woven: the walk (tutorial) and the turn (critical).
+>
+> PILOT (ruling pending): the dwell register. The walk keeps its walking tempo;
+> at three stations it stops, and an inset long-take opens — distilled from the
+> map's own thinking files, provenance shown. The page is paced like the map:
+> walk → dwell → walk. Each dwell carries its computed reading time (P-6).
 
 ## What this map holds (seed)
 
@@ -24,7 +29,72 @@ grid_lines · player_trace · grab_sphere_point_snap · room_grammar · floating
 
 You bring two things into this room that the last maps gave you: a grid (from Point_Lines) and a trace (from Point_Trace). The map's whole move is to make them collide. `grid_lines` lays down a fixed frame — you did not choose it, it was here — and now when `player_trace` records your motion it no longer keeps where you *were*. It keeps the **cell you fell inside**. Walk a smooth curve and watch it come back to you as a staircase: your continuous path, quantized, snapped to the nearest addresses. The body moved through real numbers; the record holds integers.
 
+> **Dwell — `grid_lines` · ~55s**
+>
+> Look down at the lines and count what defines them: two numbers. Cells per
+> axis, meters between lines — `grid_size` and `cell_spacing`, nothing else.
+> The whole apparatus is drawn as independent segments, pure edges, no
+> triangles, no filled surface: the grid has no interior at all, only
+> relationships between positions. Walk from one intersection to the next and
+> you have walked exactly one meter — it is a ruler built into the floor.
+> Every intersection has an integer address; every position between
+> intersections has no name the grid recognizes. Now look at the center of
+> the room, where the floor is missing — and notice that the lines cross the
+> void anyway. Nothing is there, and it is addressed. That is the grid's
+> confession: it does not need anything to occupy a cell for the cell to have
+> a name, which means indexing claims space as legible and governable
+> regardless of whether a body can stand there. And once laid down, the grid
+> forgets it was laid down — it presents itself as how space simply is, the
+> way a surveyed section line comes to look like nature. Two exported
+> variables, and territory appears. The word for that register is cadastral,
+> and it was invented for collecting tax.
+>
+> *distilled from critical.md · technical.md*
+
+> **Dwell — `player_trace` · ~55s**
+>
+> Stand still and watch your own wake. The trail behind you is being rebuilt
+> from scratch every frame — the visible line is not the record; an array of
+> positions is, and the mesh is merely derived from it. Read the array's
+> honest constraints: a new point only when you have moved at least a
+> centimeter, so your stillness does not exist here; at most 1024 positions
+> kept, so when memory fills, the oldest point is dropped for each new one —
+> the trace forgets, from the far end, as you go. And every position it holds
+> is relative. The trail stores your location in the coordinate frame of the
+> trace node itself: move that node and every recorded coordinate changes,
+> though you never moved differently. Absolute position does not exist in
+> this engine — only positions relative to some frame, composed all the way
+> up to the root, and "the world" is just the frame everyone agreed to stop
+> at. Meanwhile the headset is doing this to you ninety times a second
+> whether you look at the trail or not. You cannot use this system without
+> being indexed by it. The trail just makes visible what the infrastructure
+> was already writing.
+>
+> *distilled from technical.md · critical.md*
+
 `grab_sphere_point_snap` is the map's honest instrument — reach for the sphere and feel it *jump*, refusing to sit where your hand actually is, sitting instead where the grid permits. That small tug is the entire lesson in your muscles: **agency negotiating with imposed structure.** You can feel the fit when your intention lands on a cell, and the misfit when it lands between two and the grid decides for you. `room_grammar` frames the whole space as a set of rules you're inside rather than a neutral floor.
+
+> **Dwell — `grab_sphere_point_snap` · ~55s**
+>
+> Hold the sphere and feel the argument. During the drag, two things are true
+> at once: the sphere follows your hand, and the trail follows the grid —
+> they diverge, and the moment you let go, the sphere jumps to the nearest
+> node, a small discontinuity you feel in space. The operation deciding all
+> of this is three arithmetic steps: divide by the cell size, round, multiply
+> back. That is quantization entire — the same three steps that make pixels
+> out of images, samples out of sound, voxels out of volumes, tiles out of
+> maps. The data table beside you shows the transaction in two columns: where
+> you measurably were, and the cell that will stand for it. (2.37, 0.0,
+> −1.83) becomes (2, 0, −2). The decimals are erased; where you precisely
+> were is replaced by the name of the cell you were in — information
+> discarded, because that is what addressing requires. And the staircase your
+> diagonal becomes has a technical name: aliasing. The grid is a sampling
+> frequency, and your movement changes faster than it samples. Shrink the
+> cells and the staircase leans toward your curve; it never becomes it. Ask,
+> before you put the sphere down, what falls below this grid's resolution —
+> and who set the resolution.
+>
+> *distilled from technical.md · critical.md*
 
 ## The turn (critical)
 
