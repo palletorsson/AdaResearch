@@ -2,7 +2,7 @@
 	"_meta": {
 		"description": "Development threads — the project's long-running lines of work, tracked as first-class rows. Rendered at /threads in the encyclopedia; git activity is matched live via each thread's regex patterns. Seeded 2026-07-13 from the four-month blog synthesis; deepened same day from doc/plans, doc/book/STATE.md, doc/reports, memory, the pipeline scorer, and the uncommitted working tree. Hand-edit freely: progress numbers, open items, and match patterns are all data.",
 		"version": "1.0",
-		"last_updated": "2026-07-15"
+		"last_updated": "2026-07-16"
 	},
 	"threads": [
 		{
@@ -170,6 +170,11 @@
 				{
 					"id": "book-10",
 					"text": "Captures for machinelearning + graphtheory — both walk 11 artifacts with 0 illustrated",
+					"done": false
+				},
+				{
+					"id": "book-11",
+					"text": "Fractals source files OFFSET from their maps (CantorSet<->radial circles, KochSierpinski<->Cantor, GoldenSpiral<->Menger, MandelbrotSet/JuliaSet legacy Fibonacci content) — re-align critical.md/technical.md before the fractals voice pass; found by the dwell drafters 2026-07-16",
 					"done": false
 				}
 			],
