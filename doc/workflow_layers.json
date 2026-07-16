@@ -1,0 +1,247 @@
+{
+	"_readme": "The writing<->mapmaking process as LAYERS — the registry behind the workflow-layers visualization (to be built at /workflow-layers in the encyclopedia). Each layer is one register of the edge compiler (see doc/book/LOOK_RULINGS.md P-1..P-7 and doc/HANDOFF_2026-07-16_the-edge-compiler.md). Layers are toggleable: 'enabled' turns a layer on/off in the displayed process; 'order' sorts the stack; add/remove = edit this file (the page should POST back here). direction: down = writing->space, up = space->writing, loop = closes the cycle.",
+	"layers": [
+		{
+			"id": "truth",
+			"title": "Sequence truth",
+			"domain": "writing",
+			"direction": "down",
+			"description": "Each chapter's one-sentence truth and its place on the spine — what the maps must ultimately teach.",
+			"tools": [
+				"tools/query_identities.py"
+			],
+			"data": [
+				"commons/maps/curriculum_spine.json",
+				"commons/maps/sequences/*.json"
+			],
+			"pages": [
+				"/heroes-timeline"
+			],
+			"enabled": true,
+			"order": 1
+		},
+		{
+			"id": "baseline",
+			"title": "Baseline beats & cast",
+			"domain": "writing",
+			"direction": "down",
+			"description": "R-023: ask the concept what a plain tutorial minimally needs; beats cast with real artifacts, voltage added, the rest honored at depth.",
+			"tools": [
+				"tools/baseline.py",
+				"tools/chapter_maps.py"
+			],
+			"data": [
+				"doc/book/heroes.json",
+				"doc/book/chapter_maps.json"
+			],
+			"pages": [
+				"/composition",
+				"/key-artifacts"
+			],
+			"enabled": true,
+			"order": 2
+		},
+		{
+			"id": "walked",
+			"title": "The walk & the turn (walked.md)",
+			"domain": "writing",
+			"direction": "down",
+			"description": "The trench protocol: rulings are the source, prose is compiled. Walk at walking tempo; the turn carries the critique.",
+			"tools": [
+				"tools/build_chapter_reader.py"
+			],
+			"data": [
+				"commons/maps/*/walked.md",
+				"doc/book/RULINGS.md",
+				"doc/book/STATE.md"
+			],
+			"pages": [
+				"/chapter"
+			],
+			"enabled": true,
+			"order": 3
+		},
+		{
+			"id": "dwells",
+			"title": "The dwell register",
+			"domain": "writing",
+			"direction": "down",
+			"description": "The walk learns to stop: inset long-takes at hero/counter/side stations, distilled from each map's critical.md and technical.md, provenance shown, reading time computed (P-6). Ruling pending.",
+			"tools": [],
+			"data": [
+				"commons/maps/*/walked.md",
+				"commons/maps/*/critical.md",
+				"commons/maps/*/technical.md"
+			],
+			"pages": [
+				"/chapter"
+			],
+			"enabled": true,
+			"order": 4
+		},
+		{
+			"id": "text-compiler",
+			"title": "Text → desire targets",
+			"domain": "time",
+			"direction": "down",
+			"description": "P-6: the text is the clock. tutorial.md segments (idea/code/try) with computed loads compile into desire curves; TRY contracts a hand spike; the turn names the emphasis.",
+			"tools": [
+				"tools/text_to_target.py"
+			],
+			"data": [
+				"commons/maps/*/tutorial.md",
+				"doc/book/look_scripts/desire_targets/*.json"
+			],
+			"pages": [],
+			"enabled": true,
+			"order": 5
+		},
+		{
+			"id": "desire-timeline",
+			"title": "Desire curves & dwell clock",
+			"domain": "time",
+			"direction": "loop",
+			"description": "P-2/P-3/P-4: space as eye+hand desire over walk-time; per-artifact temporal footprints; cycles consummated in each artifact's currency; runtime = walk + sum of dwells (the sum, not the frame).",
+			"tools": [
+				"tools/desire_timeline.py"
+			],
+			"data": [
+				"commons/data/artifact_dwell.json",
+				"ada_encyclopedia/public/desire-timelines/*.json"
+			],
+			"pages": [
+				"/desire-timeline",
+				"/space-time"
+			],
+			"enabled": true,
+			"order": 6
+		},
+		{
+			"id": "contracts",
+			"title": "Placement contracts (templates)",
+			"domain": "contract",
+			"direction": "down",
+			"description": "P-7: the template decides where artifacts MAY stand. 23 principals + sub-templates + custom tile patterns, painted onto the grid; slots are the decided spots; empty slots are declared blanks.",
+			"tools": [],
+			"data": [
+				"commons/data/template_subtemplates.json",
+				"commons/data/template_patterns.json",
+				"commons/maps/TemplateMap_*/template_layout.json"
+			],
+			"pages": [
+				"/template-maps",
+				"/template-gallery",
+				"/template-pattern-editor"
+			],
+			"enabled": true,
+			"order": 7
+		},
+		{
+			"id": "composer",
+			"title": "The composer (script → room)",
+			"domain": "space",
+			"direction": "down",
+			"description": "Experience-first composition: registers (arrival/promenade/close), the forward reading (axis discipline, dolly-in, scenes-not-rows), pins never dropped, FIT chasing the drawn/compiled desire targets.",
+			"tools": [
+				"tools/script_compose.py"
+			],
+			"data": [
+				"doc/book/look_scripts/primitives.json",
+				"commons/maps/Script_*/map_data.json"
+			],
+			"pages": [],
+			"enabled": true,
+			"order": 8
+		},
+		{
+			"id": "generator-box",
+			"title": "The generator box (14 strategies)",
+			"domain": "space",
+			"direction": "down",
+			"description": "The pearl factory: wfc, halls, rooms, ants, antrooms, wanghall, voronoi, rd, erosion, derive, flock, physarum, dla, lsystem — one door, named knobs.",
+			"tools": [
+				"tools/pearl_factory.py",
+				"tools/gen_*.py"
+			],
+			"data": [
+				"commons/data/map_rule_box.json"
+			],
+			"pages": [],
+			"enabled": true,
+			"order": 9
+		},
+		{
+			"id": "judge",
+			"title": "The experience judge",
+			"domain": "observation",
+			"direction": "up",
+			"description": "Candidates scored in the experience domain: encounter order, the promise, the dolly-in, hero rank, desire-cycle completion. Pathfinder is the hard gate. 24-sequence tournament: 8 different champions.",
+			"tools": [
+				"tools/map_tournament.py",
+				"tools/map_pathfinder.py"
+			],
+			"data": [
+				"doc/reports/map_tournament_*.json"
+			],
+			"pages": [],
+			"enabled": true,
+			"order": 10
+		},
+		{
+			"id": "observation",
+			"title": "Observation (ride, captures, live window)",
+			"domain": "observation",
+			"direction": "up",
+			"description": "gaze_ride reads a map as a token stream; headless captures make the pairs; the map-sim bridge shows any edit standing in a live Godot window within a second.",
+			"tools": [
+				"tools/gaze_ride.py",
+				"tools/godot_watchdog.py",
+				"commons/testing/capture_multi_angle.gd"
+			],
+			"data": [
+				"ada_encyclopedia/public/look-pairs/"
+			],
+			"pages": [
+				"/look-pairs",
+				"/map-simulator"
+			],
+			"enabled": true,
+			"order": 11
+		},
+		{
+			"id": "rulings",
+			"title": "Rulings (the loop closes)",
+			"domain": "ruling",
+			"direction": "loop",
+			"description": "Judgments in language over captures and pages — archived verbatim, compiled into the contracts. Reader comments land in doc/book/reader_comments.json; the chapter reads itself aloud in registers (TTS, 1.5x default).",
+			"tools": [],
+			"data": [
+				"doc/book/LOOK_RULINGS.md",
+				"doc/book/reader_comments.json"
+			],
+			"pages": [
+				"/chapter",
+				"/threads"
+			],
+			"enabled": true,
+			"order": 12
+		},
+		{
+			"id": "staging",
+			"title": "Artifact staging (types + em-square)",
+			"domain": "contract",
+			"direction": "down",
+			"description": "Optional layer: staging DNA types give each artifact its housing; the em-square its spatial contract. Improve the type, not the room.",
+			"tools": [
+				"tools/classify_postures.py"
+			],
+			"data": [
+				"commons/data/staging_dna.json",
+				"commons/data/artifact_sizes.json"
+			],
+			"pages": [],
+			"enabled": false,
+			"order": 13
+		}
+	]
+}
