@@ -201,7 +201,7 @@
 			"id": "biome-grid",
 			"title": "Biome Grid (the living layer)",
 			"status": "active",
-			"summary": "Palle, 2026-07-16: the biome becomes part of the grid — grid points activate algorithms that produce the biome as a living layer on the cells, with roles (seed/field/edge/halo/mute) and modifiers (density, tier, palette, clock). Completes the June consolidation plan (three populators -> one dispatcher) and gives soul maps a declared vacuum (mute). Design: doc/plans/biome_grid_redesign.md. CORE GRID: additive, gated, negative-tested.",
+			"summary": "Palle, 2026-07-16: the biome becomes part of the grid — grid points activate algorithms that produce the biome as a living layer on the cells, with roles (seed/field/edge/halo/mute) and modifiers (density, tier, palette, clock). Completes the June consolidation plan (three populators -> one dispatcher) and gives soul maps a declared vacuum (mute). Design: doc/plans/biome_grid_redesign.md. CORE GRID: additive, gated, negative-tested. ADDENDUM: reactivity — cells declare on=<trigger>:<response> (catalyst modes, touch, dwell, tick); CA steps and claims expand layers at runtime via the existing mutator stack; declared vs runtime state kept honestly separate.",
 			"match": [
 				"\b(biome|kingdom|flora|fauna|fungus|dispatcher|accrual|ring|halo|ecosystem)\b"
 			],
@@ -209,6 +209,11 @@
 				{
 					"id": "biome-1",
 					"text": "Step 1-2: layers.biome grammar in BiomePaintTokens + GridBiomeComponent (additive, gated); negative test — maps without the layer load byte-identically",
+					"done": false
+				},
+				{
+					"id": "biome-7",
+					"text": "Reactivity grammar (on=trigger:response): catalyst modes route into cell events via repaint_biome path + mutator stack; CA step/claim expands into field cells at runtime only; honesty guard applies to triggered growth",
 					"done": false
 				},
 				{

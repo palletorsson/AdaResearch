@@ -78,6 +78,62 @@ checks (kingdom, stage_order) exactly as today; soft_stages.json remains the
 per-sequence law; the map's biome layer is the per-cell request, honesty is
 the filter. A map cannot paint itself trees in sequence 2.
 
+## Reactivity: the grid answers the catalyst (Palle, 2026-07-16 addendum)
+
+> "Then we can also integrate a system that we already have in the grid to make
+> the grid react to the catalyst and to add local algorithms to certain cells —
+> for instance using cellular automata to expand some grid layer."
+
+Three existing systems fuse here, none of them new:
+- **The catalyst's runtime brush**: GridSystem already carries a runtime
+  paint-layer override (`repaint_biome()`, the catalyst biome brush) — the
+  write path from the player's hand into the layer EXISTS.
+- **The mutator stack** (2026-04-26): GridColorizer refactored into
+  channel-agnostic per-cell mutators (color/hide/rotate/lift) that already
+  run CA, Sierpinski, and rotation fields over grid cells — LOCAL ALGORITHMS
+  ON CELLS are a solved problem; they just never had a declarative home.
+- **Catalyst mode lineages** (chroma/wave/fractal/branch/...): ten typed ways
+  the player's tool can touch the world.
+
+Grammar addition — the reactive modifier:
+
+    on=<trigger>:<response>[/<response>...]
+
+- **triggers**: `catalyst` (any mode), `catalyst.<mode>` (e.g. catalyst.fractal),
+  `touch` (player body), `dwell` (attention — the desire clock), `tick` (time)
+- **responses**: `seed` (activate this cell's algorithm), `step` (advance the
+  local algorithm one generation), `claim` (expand into adjacent `field`
+  cells), `mutate:<channel>` (route into the mutator stack: color/lift/...),
+  `mute` / `unmute`
+
+Examples:
+    fungus:ca:seed:rule=110:on=catalyst.branch:step     hit it, the CA grows
+    flora:scatter:field:on=catalyst.chroma:claim        chroma spreads the meadow
+    mineral:tint:seed:on=dwell:step                     attention colors the stone
+    ::mute:on=catalyst.fractal:unmute                   the vacuum that can be opened
+
+Runtime model (two layers, honestly separated):
+- **Declared state**: `layers.biome` in map_data.json — what the author wrote.
+- **Runtime state**: the dispatcher's working copy — what play has done to it.
+  CA steps, claims, and catalyst hits mutate ONLY the runtime copy; the map
+  file is never rewritten by play. Persistence, if ever wanted, is a separate
+  ruling (the bracelet's placed-blocks precedent: session-persistent, not
+  file-persistent).
+- **Expansion**: `claim` writes runtime state into adjacent `field` cells —
+  cellular automata literally expanding a grid layer, cell by cell, exactly
+  as asked. `halo` cells may claim outward (wilderness that grows).
+
+Honesty and safety:
+- The dispatch guard applies to TRIGGERED growth too: a catalyst.branch hit
+  in sequence 2 does nothing (with the standard primitive-fallback shimmer so
+  the refusal is visible, not silent).
+- Reactions never touch structure/walkability. A reaction that would block a
+  path is a hazard-layer feature, out of scope here.
+- Cross-thread note: this is where the catalyst thread's "friend powers need
+  in-world effects" partially lands — several powers ARE grid reactions
+  (the neutralizer clearing toxic cells = mute on a hazard-adjacent layer;
+  the bridger's tendril = a claimed row). One mechanism, two threads served.
+
 ## Architecture (the consolidation, completed by this redesign)
 
     map_data.json layers.biome
