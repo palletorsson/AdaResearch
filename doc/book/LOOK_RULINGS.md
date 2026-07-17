@@ -82,7 +82,25 @@ Contradictions between rulings are content, not errors.
 
 **L-018 (Palle, 2026-07-15, verbatim):** "Can we make a web tool that shows and makes templates maps where artifacts has their decided spot. The template map should decide where the artifact can be placed and have different subtemplates. We can paint the type of template in a 2d grid deciding the square size. The first template is just an open floor where artifacts can be placed on any square. Then the podium gallery with distance slider between artifacts, then podium aisle mirror with distance slider, then a platform with a podium on top with size controller, random podiums with density, wall on the sides with podium cube along the walls, shrunken void with size slider, and 10 more principal setups."
 
+**L-019 (Palle, 2026-07-16, verbatim):** "As we go forward we need to have the intent of the different levels of thinking in the maps in mind. 1. The current state has some important heroes (like the nails in the color sequence that are not strictly part of the color curriculum but an artifact that connects the very body queer and color). 2. We need to ask about the curriculum, does the sequence teach the subject? 3. And think of queer Ontology, does the map have the right kind? 4. Etc 5. Etc 6. Etc. As it stands now there is some sequence with a weaker initial state. How can we prioritize the different aspects of the map and the sequence as we go forward to mold the right wonderful world and book?"
+
 ## Compiled properties (grows as rulings land)
+
+**P-8. The six intents — rule the lead, never average (from L-019).** A map is thought at six
+levels at once, and they are different KINDS of good: **soul** (connective heroes like color's
+nails — body↔queer↔subject touching in one object; not curriculum, the most valuable and most
+prunable), **curriculum** (does the sequence teach the subject — baseline met, beats walkable),
+**ontology** (is the map the right queer kind — real anti-hero, real turn, the seam shown),
+**experience** (composed not generated — the edge fitness, desire cycles, pacing), **world**
+(the map as a place — spine position, biome honesty, transitions), **page** (does the writing
+carry it — walk, turn, dwells). Prioritization is NOT a weighting — the mean eats the drama
+(the seven-orders finding). Instead: (1) each map DECLARES its lead intent, the way chapters
+have natures; followers may not veto the lead. (2) Connective heroes are pinned WITH their
+reason and exempt from every scoring instrument — some things you do not measure, you rule.
+(3) Weak sequences triage by the lead: urgent where weakest AT THE LEVEL IT LEADS WITH — a
+soul-lead map with no nails is an emergency; a curriculum-lead map missing a beat is a worklist.
+(4) Diagnostics show intents side by side, never summed — divergence is the content.
+Register: doc/book/map_intents.json.
 
 **P-7. The template is the placement contract (from L-018).** Edge-4 materialized: a template
 decides where artifacts MAY stand (slots), parameterized (spacing, density, size); maps are

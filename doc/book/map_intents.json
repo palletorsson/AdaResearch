@@ -1,0 +1,66 @@
+{
+	"_readme": "P-8 (L-019): the six intents per map — rule the lead, never average. Each map declares which level of thinking LEADS it (soul | curriculum | ontology | experience | world | page); followers may not veto the lead. connective_heroes are pinned WITH their reason and exempt from every scoring instrument. weakness names where the map is weakest AT ITS LEAD — that is the triage. GHOST-DRAFTED entries are marked; Palle rules. Exemplar first: color's nails.",
+	"intents": {
+		"soul": "connective heroes — body↔queer↔subject touching in one object; not curriculum; never pruned, never scored",
+		"curriculum": "does the sequence teach the subject — baseline met, beats walkable, exit provable",
+		"ontology": "is the map the right queer kind — real anti-hero, real turn, the seam shown",
+		"experience": "composed, not generated — the edge fitness, desire cycles, pacing",
+		"world": "the map as a place — spine position, biome honesty, transitions to neighbors",
+		"page": "the writing carries it — walk, turn, dwells written and ruled"
+	},
+	"exemplar": {
+		"sequence": "color",
+		"note": "the nails: not strictly part of the color curriculum but the artifact that connects the very body, queer, and color (Palle, L-019 verbatim). The class this register exists to protect.",
+		"connective_heroes": [
+			{ "artifact": "nails", "connects": ["body", "queer", "color"], "status": "ruled (L-019)" }
+		]
+	},
+	"sequences": {
+		"transformation": {
+			"_status": "GHOST-DRAFTED 2026-07-16 — initial state weak: 3/7 distinct antis, carousel cake smeared across five maps, three maps share hero 'arrive in transformed space', Trans_Pit hero EMPTY, no walked.md. Palle rules the leads and the connective candidates.",
+			"chapter_soul_question": "transformation is the trans chapter — where does the body that changes irreversibly stand in it? Candidates below are drafts, not rulings.",
+			"maps": {
+				"Trans_Introduction": {
+					"lead": "curriculum",
+					"weakness": "anti (invariants demo) is strong but shared framing with QFEP core — fine as opener",
+					"connective_candidates": []
+				},
+				"Trans_Translation": {
+					"lead": "curriculum",
+					"weakness": "hero 'arrive in transformed space' shared with two other maps — needs its own",
+					"connective_candidates": []
+				},
+				"Trans_AxisDecomposition": {
+					"lead": "ontology",
+					"weakness": "anti is the smeared carousel cake — decomposition deserves its own antagonist (the body that will not decompose into axes?)",
+					"connective_candidates": []
+				},
+				"Trans_Rotation": {
+					"lead": "curriculum",
+					"weakness": "duplicate hero AND duplicate anti — thinnest page in the chapter",
+					"connective_candidates": []
+				},
+				"Trans_RotationSpectacle": {
+					"lead": "experience",
+					"weakness": "the spectacle should be the chapter's composed showpiece; currently indistinct from Trans_Rotation",
+					"connective_candidates": []
+				},
+				"Trans_Scale": {
+					"lead": "curriculum",
+					"weakness": "duplicate hero; scale is where the Modulor/body-as-ruler thread could return",
+					"connective_candidates": [
+						{ "artifact": "modulor_man_demo", "connects": ["body", "measure", "scale"], "status": "draft — the body as the unit that scaling violates" }
+					]
+				},
+				"Trans_Pit": {
+					"lead": "soul",
+					"weakness": "HERO EMPTY — and this is the chapter's soul map: the fire you cross, irreversible change under your feet, the theme-event where the transformation catalyst arrives. The nails-equivalent of this chapter is missing or unnamed.",
+					"connective_candidates": [
+						{ "artifact": "becoming_catalyst", "connects": ["body", "trans", "irreversibility"], "status": "draft — the bracelet that arrives AT the crossing; change you wear" },
+						{ "artifact": "ElphabaDress", "connects": ["body", "queer", "performed identity"], "status": "draft — the dress from Body Progression; transformation as something the body puts on and cannot take off" }
+					]
+				}
+			}
+		}
+	}
+}
