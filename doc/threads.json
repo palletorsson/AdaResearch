@@ -198,6 +198,53 @@
 			]
 		},
 		{
+			"id": "biome-grid",
+			"title": "Biome Grid (the living layer)",
+			"status": "active",
+			"summary": "Palle, 2026-07-16: the biome becomes part of the grid — grid points activate algorithms that produce the biome as a living layer on the cells, with roles (seed/field/edge/halo/mute) and modifiers (density, tier, palette, clock). Completes the June consolidation plan (three populators -> one dispatcher) and gives soul maps a declared vacuum (mute). Design: doc/plans/biome_grid_redesign.md. CORE GRID: additive, gated, negative-tested.",
+			"match": [
+				"\b(biome|kingdom|flora|fauna|fungus|dispatcher|accrual|ring|halo|ecosystem)\b"
+			],
+			"openItems": [
+				{
+					"id": "biome-1",
+					"text": "Step 1-2: layers.biome grammar in BiomePaintTokens + GridBiomeComponent (additive, gated); negative test — maps without the layer load byte-identically",
+					"done": false
+				},
+				{
+					"id": "biome-2",
+					"text": "Dispatcher TODOs 3.b-3.f: substrate lookup per kingdom (the crown-jewel upgrades, pending since May)",
+					"done": false
+				},
+				{
+					"id": "biome-3",
+					"text": "Halo role replaces BiomeRingComponent on one map, A/B capture, then retire behind a flag",
+					"done": false
+				},
+				{
+					"id": "biome-4",
+					"text": "Accrual compile-in tool: sequence defaults written as explicit biome rows (sibling-first)",
+					"done": false
+				},
+				{
+					"id": "biome-5",
+					"text": "Authoring: 4th paint mode in /template-maps (kingdom palette + roles); pattern editor biome codes",
+					"done": false
+				},
+				{
+					"id": "biome-6",
+					"text": "Perf gate: every spawn through ChunkManager; scrubber as harness; per-map budget in layer _meta",
+					"done": false
+				}
+			],
+			"links": [
+				{
+					"label": "Design",
+					"href": "/api/find?q=biome_grid_redesign"
+				}
+			]
+		},
+		{
 			"id": "space-automation",
 			"title": "Space Automation (maps)",
 			"status": "active",
