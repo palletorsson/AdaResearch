@@ -14,6 +14,7 @@ const SpawnComponentScript = preload("res://commons/grid/GridSpawnComponent.gd")
 const CeilingComponentScript = preload("res://commons/grid/GridCeilingComponent.gd")
 const WallComponentScript = preload("res://commons/grid/GridWallComponent.gd")
 const WallSegmentsComponentScript = preload("res://commons/grid/GridWallSegmentsComponent.gd")
+const BiomeGridComponentScript = preload("res://commons/grid/GridBiomeComponent.gd")
 const AudioComponentScript = preload("res://commons/grid/GridAudioComponent.gd")
 const TimelineComponentScript = preload("res://commons/grid/GridTimelineComponent.gd")
 const FloorPlanLoader = preload("res://commons/grid/FloorPlanLoader.gd")
@@ -59,6 +60,7 @@ var spawn_component
 var ceiling_component
 var wall_component
 var wall_segments_component
+var biome_grid_component  # additive living layer (layers.biome; P-8)
 var audio_component
 var timeline_component
 
@@ -195,6 +197,10 @@ func _initialize_components():
 	wall_segments_component = WallSegmentsComponentScript.new()
 	wall_segments_component.name = "GridWallSegmentsComponent"
 	add_child(wall_segments_component)
+
+	biome_grid_component = BiomeGridComponentScript.new()
+	biome_grid_component.name = "GridBiomeComponent"
+	add_child(biome_grid_component)
 
 	audio_component = AudioComponentScript.new()
 	audio_component.name = "GridAudioComponent"
@@ -647,6 +653,13 @@ func _handle_wall_generation():
 		wall_segments_component.generate_segments(
 			walls_layer, data_component.get_structure_layer_raw(),
 			settings.get("wall_segments", {}))
+
+	# Living biome layer (additive): only when the map declares layers.biome
+	var biome_layer = data_component.get_biome_layer()
+	if biome_layer.size() > 0:
+		biome_grid_component.initialize(self, cube_size, gutter)
+		biome_grid_component.generate(
+			biome_layer, data_component.get_structure_layer_raw())
 
 	if not wall_config.is_empty():
 		print("GridSystem: Generating walls...")

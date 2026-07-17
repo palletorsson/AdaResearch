@@ -208,8 +208,9 @@
 			"openItems": [
 				{
 					"id": "biome-1",
-					"text": "Step 1-2: layers.biome grammar in BiomePaintTokens + GridBiomeComponent (additive, gated); negative test — maps without the layer load byte-identically",
-					"done": false
+					"text": "Step 1-2: layers.biome grammar in BiomePaintTokens + GridBiomeComponent (additive, gated); negative test — maps without the layer load byte-identically — DONE: BiomeGridTokens + GridBiomeComponent (+react pilot: seed/step/claim/mute); positive 6-cell stats exact on Biome_GridTest; negative PASS on Point_One",
+					"done": true,
+					"completed": "2026-07-17"
 				},
 				{
 					"id": "biome-7",

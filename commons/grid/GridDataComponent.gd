@@ -284,6 +284,18 @@ func get_walls_layer() -> Array:
 				return walls
 	return []
 
+# Get the optional living-biome layer (additive; P-8 grammar, see
+# BiomeGridTokens / doc/plans/biome_grid_redesign.md). Empty array if absent —
+# maps without a biome layer are unaffected. See GridBiomeComponent.
+func get_biome_layer() -> Array:
+	if json_loader and json_loader.map_data is Dictionary:
+		var layers = json_loader.map_data.get("layers", {})
+		if layers is Dictionary:
+			var biome = layers.get("biome", [])
+			if biome is Array:
+				return biome
+	return []
+
 # Raw structure layer grid (strings), for components that need per-cell
 # heights without the parsed instance (e.g. wall segment base elevation).
 func get_structure_layer_raw() -> Array:
