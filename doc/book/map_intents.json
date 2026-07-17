@@ -12,7 +12,15 @@
 		"sequence": "color",
 		"note": "the nails: not strictly part of the color curriculum but the artifact that connects the very body, queer, and color (Palle, L-019 verbatim). The class this register exists to protect.",
 		"connective_heroes": [
-			{ "artifact": "nails", "connects": ["body", "queer", "color"], "status": "ruled (L-019)" }
+			{
+				"artifact": "nails",
+				"connects": [
+					"body",
+					"queer",
+					"color"
+				],
+				"status": "ruled (L-019)"
+			}
 		]
 	},
 	"sequences": {
@@ -49,15 +57,39 @@
 					"lead": "curriculum",
 					"weakness": "duplicate hero; scale is where the Modulor/body-as-ruler thread could return",
 					"connective_candidates": [
-						{ "artifact": "modulor_man_demo", "connects": ["body", "measure", "scale"], "status": "draft — the body as the unit that scaling violates" }
+						{
+							"artifact": "modulor_man_demo",
+							"connects": [
+								"body",
+								"measure",
+								"scale"
+							],
+							"status": "draft — the body as the unit that scaling violates"
+						}
 					]
 				},
 				"Trans_Pit": {
 					"lead": "soul",
-					"weakness": "HERO EMPTY — and this is the chapter's soul map: the fire you cross, irreversible change under your feet, the theme-event where the transformation catalyst arrives. The nails-equivalent of this chapter is missing or unnamed.",
+					"weakness": "hero RULED 2026-07-16: becoming_catalyst. Remaining: distinct anti (carousel cake is smeared), walked.md, dwells.",
 					"connective_candidates": [
-						{ "artifact": "becoming_catalyst", "connects": ["body", "trans", "irreversibility"], "status": "draft — the bracelet that arrives AT the crossing; change you wear" },
-						{ "artifact": "ElphabaDress", "connects": ["body", "queer", "performed identity"], "status": "draft — the dress from Body Progression; transformation as something the body puts on and cannot take off" }
+						{
+							"artifact": "becoming_catalyst",
+							"connects": [
+								"body",
+								"trans",
+								"irreversibility"
+							],
+							"status": "RULED hero (Palle, 2026-07-16)"
+						},
+						{
+							"artifact": "ElphabaDress",
+							"connects": [
+								"body",
+								"queer",
+								"performed identity"
+							],
+							"status": "draft — the dress from Body Progression; transformation as something the body puts on and cannot take off"
+						}
 					]
 				}
 			}

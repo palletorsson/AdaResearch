@@ -689,4 +689,14 @@ other parts, if this one reads well.
 
 ---
 
-<!-- Next: R-030 — write chapter 2 (transformation) key-maps + synthesis holding voice; per-chapter as the engine turns -->
+## R-030 — transformation opens: Trans_Pit's hero ruled (2026-07-16)
+
+Palle, verbatim: "rule Trans_Pit: becoming_catalyst is the hero, run the dig."
+
+- Trans_Pit leads with SOUL (P-8): the fire crossing, irreversible change under
+  your feet, the theme-event where the transformation catalyst arrives — and its
+  hero is now the becoming_catalyst itself: change you wear. heroes.json updated.
+- The dig runs on transformation next; its report feeds the remaining rulings
+  (distinct antis for the carousel-cake five, the chapter's other connective heroes).
+
+<!-- Next: R-031 — rule the dig's promotions/burials for transformation; then walked.md pages -->
