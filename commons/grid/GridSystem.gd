@@ -813,20 +813,30 @@ func repaint_biome(layers: Array, margin: int = 0) -> void:
 	_handle_biome_ring(true)   # live brush: skip the ecosystem re-sync (same map)
 
 
-## biome-3: true when layers.biome declares at least one valid halo cell.
-## The map then owns its outside (the grid-native halo) and the ground_ring
-## accrual layer retires for this map. Maps without halo cells: unchanged.
-func _biome_layer_has_halo() -> bool:
+## biome-3/4: one scan over layers.biome for the accrual data-gates.
+##   has_halo  — the map owns its outside; ground_ring retires (biome-3).
+##   has_seeds — the map owns its organisms; the flagged accrual populators
+##               (compiled_by_biome_layer) stand down (biome-4). Mute/field-
+##               only declarations gate NOTHING: a soul map protecting its
+##               void with mute cells keeps its sequence biome elsewhere.
+func _biome_layer_flags() -> Dictionary:
+	var flags: Dictionary = {"has_halo": false, "has_seeds": false}
 	if not data_component:
-		return false
+		return flags
 	for row in data_component.get_biome_layer():
 		if not (row is Array):
 			continue
 		for cell in row:
 			var parsed: Dictionary = BiomeGridTokensLib.parse(cell)
-			if not parsed["empty"] and parsed["valid"] and parsed["role"] == "halo":
-				return true
-	return false
+			if parsed["empty"] or not parsed["valid"]:
+				continue
+			if parsed["role"] == "halo":
+				flags["has_halo"] = true
+			elif parsed["role"] == "seed":
+				flags["has_seeds"] = true
+			if flags["has_halo"] and flags["has_seeds"]:
+				return flags
+	return flags
 
 
 ## Live mesh-only preview of the ground while the biome brush paints "ground".
@@ -916,6 +926,7 @@ func _handle_biome_ring(live_repaint: bool = false):
 	# (Gated by the runtime flag above — early return already handled.)
 	var accrual_early = get_node_or_null("/root/BiomeAccrualManager")
 	if accrual_early and accrual_early.has_method("apply"):
+		var _biome_flags: Dictionary = _biome_layer_flags()
 		var dims_early: Vector3i = data_component.get_grid_dimensions()
 		# BIOME MARGIN (live brush only): when the catalyst biome brush painted a ring
 		# AROUND the grid, _runtime_biome_margin > 0. The substrate + scatter then span
@@ -974,10 +985,11 @@ func _handle_biome_ring(live_repaint: bool = false):
 			# ground_only (settings.ground_only): keep just the walkable ground —
 			# for clean maps (e.g. primitives) that want terrain, not the abstract biome.
 			"only_ground": bool(data_component.get_settings().get("ground_only", false)) if data_component else false,
-			# biome-3: a map that declares halo cells in layers.biome owns its
-			# own outside — GridBiomeComponent spills the wilderness per cell
-			# and the ground_ring accrual layer retires for this map.
-			"has_biome_halo": _biome_layer_has_halo(),
+			# biome-3/4: declared-biome data-gates. Halo cells retire the
+			# ground_ring; seed cells stand down the flagged accrual
+			# populators (the map compiled its organisms in as rows).
+			"has_biome_halo": _biome_flags["has_halo"],
+			"has_biome_seeds": _biome_flags["has_seeds"],
 		})
 
 	# ── Ground paint layer (G3.7 + smart fallback) ────────────────────

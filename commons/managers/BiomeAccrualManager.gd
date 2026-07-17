@@ -141,6 +141,14 @@ func apply(grid_root: Node, context: Dictionary) -> Node:
 		if override_disable.has(kind):
 			skipped.append(kind + "(map_override)")
 			continue
+		# biome-4: a map that declares seed cells in layers.biome has compiled
+		# its organisms into explicit rows — the flagged populators stand down
+		# and the grid-native dispatcher renders those cells instead. Mute/
+		# field-only declarations do NOT trigger this (soul maps protecting a
+		# void keep their sequence biome).
+		if bool(context.get("has_biome_seeds", false)) and bool(entry.get("compiled_by_biome_layer", false)):
+			skipped.append(kind + "(declared_biome)")
+			continue
 		# ground_only maps (e.g. the clean primitives maps) keep just the walkable
 		# ground layers — the abstract field + organisms are suppressed.
 		if only_ground and kind != "ground_substrate" and kind != "ground_ring":
