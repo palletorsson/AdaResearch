@@ -1,6 +1,6 @@
 {
  "documentation": {
-  "biome_grid_test": "pilot map for layers.biome (doc/plans/biome_grid_redesign.md) \u2014 2 seeds, 2 fields, 1 mute, 1 halo, 1 reactive"
+  "biome_grid_test": "pilot map for layers.biome (doc/plans/biome_grid_redesign.md) \u2014 4 seeds (tree/fungus/flower/fauna, exercising all dispatcher routes), 2 fields, 1 mute, 1 halo (marker-only), 1 reactive"
  },
  "layers": {
   "structure": [
@@ -363,7 +363,7 @@
    [
     "",
     "",
-    "",
+    "flora:scatter:seed:t=2",
     "",
     "",
     "::mute",
@@ -376,7 +376,7 @@
     "",
     "",
     "",
-    "",
+    "fauna:dna:seed:t=2",
     "",
     ""
    ],

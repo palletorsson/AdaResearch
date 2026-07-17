@@ -657,9 +657,17 @@ func _handle_wall_generation():
 	# Living biome layer (additive): only when the map declares layers.biome
 	var biome_layer = data_component.get_biome_layer()
 	if biome_layer.size() > 0:
+		# stage_order feeds the dispatcher's curriculum-honesty guard (biome-2).
+		# Read-only here (no sync, no disk write) — the authoritative ecosystem
+		# sync to THIS map's sequence happens later in _handle_biome_ring, so
+		# this read can lag one map behind. Locked kingdoms fall back visibly.
+		var biome_stage: int = 0
+		var eco_b = get_node_or_null("/root/EcosystemManager")
+		if eco_b and eco_b.has_method("get_current_stage_order"):
+			biome_stage = int(eco_b.get_current_stage_order())
 		biome_grid_component.initialize(self, cube_size, gutter)
 		biome_grid_component.generate(
-			biome_layer, data_component.get_structure_layer_raw())
+			biome_layer, data_component.get_structure_layer_raw(), biome_stage)
 
 	if not wall_config.is_empty():
 		print("GridSystem: Generating walls...")

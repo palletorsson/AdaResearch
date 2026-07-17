@@ -97,6 +97,23 @@ static func parse(raw: Variant) -> Dictionary:
 	return out
 
 
+# biome-2: grammar kingdom (+ algo, for flora) → BiomePaintDispatcher kingdom id
+# (the painted-layer ints: tree 0, creature 1, flower 2, fungus 3). flora splits
+# by algo — woody algos become trees, everything else flowers. mineral / water /
+# meta have no substrate yet → -1, the caller keeps its pilot marker.
+static func dispatch_kingdom_of(cell: Dictionary) -> int:
+	match String(cell.get("kingdom", "")):
+		"flora":
+			var algo: String = String(cell.get("algo", ""))
+			return 0 if algo in ["lsystem", "tree", "dna"] else 2
+		"fungus":
+			return 3
+		"fauna":
+			return 1
+		_:
+			return -1
+
+
 # Convenience: density modifier as float (default 1.0), tier as int (default 2).
 static func density_of(cell: Dictionary) -> float:
 	var mods: Dictionary = cell.get("mods", {})

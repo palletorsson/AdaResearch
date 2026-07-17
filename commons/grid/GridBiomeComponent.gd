@@ -8,9 +8,11 @@
 # Discipline (walls-layer precedent):
 #   - Maps WITHOUT layers.biome never construct any of this (GridSystem gates).
 #   - Never touches structure or walkability; the pathfinder is unaffected.
-#   - Pilot rendering = primitive kingdom-tinted markers on seed cells
-#     (the dispatcher's crown-jewel substrates route in at biome-2;
-#     ChunkManager routing is the biome-6 perf gate).
+#   - Rendering (biome-2): seed/halo cells whose kingdom maps to a painted-
+#     layer kingdom route through BiomePaintDispatcher.spawn_cell — the SAME
+#     honesty guard + substrate ladder as painted cells (one dispatch law,
+#     two authoring surfaces). Kingdoms without a substrate (mineral/water/
+#     meta) keep the pilot marker. ChunkManager routing is the biome-6 gate.
 #
 # Reactivity (pilot subset of the addendum):
 #   react(col, row, trigger) applies the cell's matching responses to the
@@ -34,10 +36,14 @@ const KINGDOM_COLORS: Dictionary = {
 var _grid_system: Node3D = null
 var _cube_size: float = 1.0
 var _gutter: float = 0.0
+var _stage_order: int = 0        # feeds the dispatcher's curriculum-honesty guard
+var _dispatcher: Node3D = null   # lazy — maps whose kingdoms never map stay dispatcher-free
 var _declared: Dictionary = {}   # "col,row" -> parsed cell (immutable after generate)
 var _runtime: Dictionary = {}    # "col,row" -> {active, muted, generation, claimed_by}
 var _structure: Array = []
 var _stats: Dictionary = {"cells": 0, "seeds": 0, "fields": 0, "mutes": 0, "halos": 0, "invalid": 0, "reactive": 0}
+var _routed: int = 0             # cells sent through the dispatcher
+var _marker_only: int = 0        # cells kept on the pilot marker (no substrate kingdom)
 
 
 func initialize(grid_sys: Node3D, cube_size: float, gutter: float) -> void:
@@ -46,8 +52,9 @@ func initialize(grid_sys: Node3D, cube_size: float, gutter: float) -> void:
 	_gutter = gutter
 
 
-func generate(biome_layer: Array, structure_layer: Array) -> void:
+func generate(biome_layer: Array, structure_layer: Array, stage_order: int = 0) -> void:
 	_structure = structure_layer
+	_stage_order = stage_order
 	for row in range(biome_layer.size()):
 		var cells: Variant = biome_layer[row]
 		if not (cells is Array):
@@ -76,10 +83,13 @@ func generate(biome_layer: Array, structure_layer: Array) -> void:
 			if not (parsed["reactions"] as Array).is_empty():
 				_stats["reactive"] += 1
 			if parsed["role"] == "seed" or parsed["role"] == "halo":
-				_spawn_marker(col, row, parsed)
+				_stage_cell(col, row, parsed)
 	print("GridBiomeComponent: %d biome cells (%d seeds, %d fields, %d mutes, %d halos, %d reactive, %d invalid)" % [
 		_stats["cells"], _stats["seeds"], _stats["fields"], _stats["mutes"],
 		_stats["halos"], _stats["reactive"], _stats["invalid"]])
+	if _routed > 0 or _marker_only > 0:
+		print("GridBiomeComponent: routed %d cells -> BiomePaintDispatcher (stage_order %d), %d marker-only" % [
+			_routed, _stage_order, _marker_only])
 
 
 # ── reactivity (runtime only; the map file is never rewritten) ──
@@ -125,10 +135,50 @@ func _apply_response(key: String, col: int, row: int, cell: Dictionary, response
 					if not bool(nstate["muted"]) and String(nstate["claimed_by"]).is_empty():
 						nstate["claimed_by"] = key
 						nstate["active"] = true
-						_spawn_marker(col + offset.x, row + offset.y, cell)
+						# claimed growth renders as the CLAIMING seed's substrate —
+						# and the honesty guard applies to triggered growth too.
+						_stage_cell(col + offset.x, row + offset.y, cell)
 		_:
 			# mutate:<channel> routes into the mutator stack at biome-2.
 			pass
+
+
+# ── staging (biome-2): substrate via the dispatcher when the kingdom maps,
+#    pilot marker otherwise ──
+
+func _stage_cell(col: int, row: int, cell: Dictionary) -> void:
+	var kid: int = BiomeGridTokensScript.dispatch_kingdom_of(cell)
+	if kid < 0:
+		_marker_only += 1
+		_spawn_marker(col, row, cell)
+		return
+	_routed += 1
+	var step: float = _cube_size + _gutter
+	var local: Vector3 = Vector3(
+		col * step, _cell_height(col, row) * _cube_size + 0.02, row * step)
+	var deposit: Dictionary = {
+		"x": col, "z": row, "kingdom": kid,
+		# tier (1..5) IS the painted intensity ladder; strength = intensity/5
+		# per BiomePaintTokens. Density stays a per-cell field-fill knob.
+		"strength": float(BiomeGridTokensScript.tier_of(cell)) / 5.0,
+		"sterile": false,
+		"raw": "%s:%s" % [cell["kingdom"], cell["algo"]],
+		# exact world position against real structure heights — the painted
+		# path's flat-floor _cell_to_world cannot know these.
+		"world_pos": to_global(local) if is_inside_tree() else local,
+	}
+	_get_dispatcher().spawn_cell(deposit, _stage_order, {"cube_size": _cube_size}, self)
+
+
+func _get_dispatcher() -> Node3D:
+	if _dispatcher == null:
+		# load (not preload / class_name): the dispatcher preloads heavy
+		# substrate scenes — only maps that actually route pay for them.
+		var DispatcherScript = load("res://commons/biome_layers/biome_paint_dispatcher.gd")
+		_dispatcher = DispatcherScript.new()
+		_dispatcher.name = "BiomeGridDispatcher"
+		add_child(_dispatcher)
+	return _dispatcher
 
 
 # ── pilot rendering: one small kingdom-tinted marker per active cell ──

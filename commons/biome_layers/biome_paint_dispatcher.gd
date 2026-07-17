@@ -16,10 +16,12 @@
 #   4. If no dispatch entry exists, primitive fallback.
 #
 # Status 2026-05-05: Foundation alive — TODOs 3.a (unlock guard),
-# 3.g (primitive fallback), 3.h (cell-to-world) filled. Painted cells
-# now spawn cube primitives at the right positions, kingdom-color tinted.
-# TODOs 3.b–3.f (substrate lookup + dispatch) are next session — they
-# upgrade individual kingdoms from primitive to crown-jewel substrate.
+# 3.g (primitive fallback), 3.h (cell-to-world) filled.
+# Status 2026-07-17 (biome-2): 3.b–3.e substrate branches are LIVE
+# (flower→BotanicalFlower, fungus→MoldNetwork CA, tree→TreeMorphology DNA,
+# creature→CritterSpawner) and the dispatcher is now also the render path
+# for the grid-native `layers.biome` (GridBiomeComponent → spawn_cell):
+# one dispatch law, two authoring surfaces (painted + grid-declared).
 
 extends Node3D
 class_name BiomePaintDispatcher
@@ -115,6 +117,15 @@ func apply(ctx: Dictionary) -> void:
 	var deposits: Array = BiomePaintTokensClass.iter_painted_cells(paint)
 	for deposit in deposits:
 		_spawn_for_deposit(deposit, stage_order, ctx, parent)
+
+
+# biome-2 (layers.biome): dispatch ONE grid-declared cell. GridBiomeComponent
+# builds the deposit (kingdom already mapped to the painted ids, world_pos
+# computed against real structure heights) and the honesty guard + substrate
+# match run exactly as for painted cells.
+func spawn_cell(deposit: Dictionary, stage_order: int, ctx: Dictionary,
+		parent: Node3D) -> void:
+	_spawn_for_deposit(deposit, stage_order, ctx, parent)
 
 
 # ── Internals ─────────────────────────────────────────────────────────────
@@ -361,8 +372,10 @@ func _spawn_primitive_fallback(deposit: Dictionary, ctx: Dictionary,
 	mat.shading_mode = BaseMaterial3D.SHADING_MODE_PER_VERTEX
 	mesh_inst.material_override = mat
 
-	mesh_inst.global_position = _cell_to_world(deposit, ctx)
+	# add_child BEFORE global_position (same fix as _spawn_flower — setting
+	# global_position off-tree fails and lands the cube at origin).
 	parent.add_child(mesh_inst)
+	mesh_inst.global_position = _cell_to_world(deposit, ctx)
 
 
 # Convert a painted cell's (x, z) grid address into a world Vector3.
@@ -370,6 +383,11 @@ func _spawn_primitive_fallback(deposit: Dictionary, ctx: Dictionary,
 # cells are cube_size apart, y sits one cube above the floor so the
 # primitive perches on the cube top instead of clipping into it.
 func _cell_to_world(deposit: Dictionary, ctx: Dictionary) -> Vector3:
+	# Grid-native deposits (layers.biome) carry their exact world position,
+	# computed against real per-cell structure heights — which the painted
+	# path's flat-floor math below cannot know.
+	if deposit.has("world_pos"):
+		return deposit["world_pos"]
 	var grid_center: Vector3 = ctx.get("grid_center", Vector3.ZERO)
 	var grid_dims: Vector3i = ctx.get("grid_dims", Vector3i(10, 1, 10))
 	var cube_size: float = float(ctx.get("cube_size", 1.0))
