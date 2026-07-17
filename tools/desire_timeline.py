@@ -30,7 +30,7 @@ OUT_DIR = os.path.normpath(os.path.join(
 
 HAND_RE = re.compile(
     r"grab|slider|button|puzzle|builder|draw|edit|snap|interactive|catalyst"
-    r"|toss|pad|writing|crank|placer|dice|toy", re.I)
+    r"|toss|pad|writing|crank|placer|dice|toy|pick|rotat|gimbal|scale_me", re.I)
 PERF_RE = re.compile(
     r"anim|sim|life|flock|swarm|wave|automata|evolut|particle|pendulum|galton"
     r"|clock|counter|walker|running|flow|trace|scene|field", re.I)

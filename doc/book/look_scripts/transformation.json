@@ -1,0 +1,51 @@
+{
+	"_meta": {
+		"description": "Experience scripts for transformation (R-030/R-031 pairs, P-8 leads). Hero/counter prefs resolve against each map's cast; PINS carry the soul map's ruled pair into the script even though they arrive by event, not grid cell (L-011: pins are never dropped). GHOST-DRAFTED 2026-07-16 from the ruled heroes.json; correct in language.",
+		"chapter": "transformation"
+	},
+	"maps": {
+		"Trans_Introduction": {
+			"register": "arrival",
+			"hero": ["rotation_gimbal"],
+			"counter": ["invariants_demo"],
+			"note": "rotate it — against the demo that insists identity survives (the chapter's thesis stated at the door)"
+		},
+		"Trans_Translation": {
+			"register": "promenade",
+			"hero": ["player_trace"],
+			"counter": ["transform_composition_workbench"],
+			"note": "arrival in transformed space — against order-matters; the empty plinth (counter to transform_composition) stays declared"
+		},
+		"Trans_AxisDecomposition": {
+			"register": "promenade",
+			"hero": ["translation_cube_demo"],
+			"counter": ["toruscylinder"],
+			"note": "translate a solid, one axis at a time — against the solid that is its own rotation"
+		},
+		"Trans_Rotation": {
+			"register": "promenade",
+			"hero": ["rotate_grid_cubes"],
+			"counter": ["spin"],
+			"note": "controlled rotation — against rotation with no one at the gimbal"
+		},
+		"Trans_RotationSpectacle": {
+			"register": "promenade",
+			"hero": ["carousel_cake"],
+			"counter": ["boolean_tunnel"],
+			"note": "experience leads: the spectacle composed as a dolly-in; toruscylinder remains the ruled absent counter on the page"
+		},
+		"Trans_Scale": {
+			"register": "promenade",
+			"hero": ["scale_me"],
+			"counter": ["prism_block"],
+			"note": "at what size am I allowed to exist — righttriangle is the ruled anti, carried by prism_block in this cast"
+		},
+		"Trans_Pit": {
+			"register": "close",
+			"hero": ["becoming_catalyst"],
+			"counter": ["invariants_demo"],
+			"pins": ["becoming_catalyst", "invariants_demo"],
+			"note": "the soul map (R-030): the crossing; hero and counter PINNED — they arrive by theme-event and ruling, not by the tiny grid cast"
+		}
+	}
+}

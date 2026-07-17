@@ -102,6 +102,9 @@ def main():
         segs = segments_of(map_name)
         turn = turn_of(map_name)
         _, cast, _ = read_cast(map_name)
+        for pin in script.get("pins", []):
+            if not any(base_of(t) == base_of(pin) for t in cast):
+                cast.append(pin)
         hero_i = pick(cast, script["hero"])
         hero_b = base_of(cast[hero_i]) if hero_i is not None else ""
         hero_kind = dt.kind_of(hero_b)
