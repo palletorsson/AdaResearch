@@ -28,6 +28,13 @@ const BiomeRingComponentClass = preload("res://commons/grid/BiomeRingComponent.g
 
 
 func apply(ctx: Dictionary) -> void:
+	# biome-3: a map that declares halo cells in layers.biome has taken
+	# ownership of its own outside — GridBiomeComponent spills the wilderness
+	# per cell (the grid-native ring). Data-gated retirement: maps without
+	# halo cells run the ring exactly as before.
+	if bool(ctx.get("has_biome_halo", false)):
+		print("[ground_ring] map declares biome halo cells — ring retired for this map")
+		return
 	var density: float = float(ctx.get("density", 0.0))
 	# Barren maps (seq 1-2, density < 0.05): no ground ring. This mirrors the
 	# component's own internal gate and the old GridSystem density gate, so the

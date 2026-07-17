@@ -224,8 +224,8 @@
 				},
 				{
 					"id": "biome-3",
-					"text": "Halo role replaces BiomeRingComponent on one map, A/B capture, then retire behind a flag",
-					"done": false
+					"text": "Halo replaces the ring DONE 2026-07-17: halo cells spill per-cell wilderness outward (ground strip + kingdom ground-cover, deterministic, no collider, void stays void between bands); a map declaring halo cells data-gates ground_ring off (has_biome_halo in accrual ctx). A/B captured on biome_lab siblings Biome_HaloRing (ring, density 1.0) vs Biome_HaloTest (32 halo cells, 875 instances, ring retired). NOTE: the ring's walkable off-grid collider is NOT reproduced — halo is scenery only",
+					"done": true
 				},
 				{
 					"id": "biome-4",

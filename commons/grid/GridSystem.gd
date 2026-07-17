@@ -15,6 +15,7 @@ const CeilingComponentScript = preload("res://commons/grid/GridCeilingComponent.
 const WallComponentScript = preload("res://commons/grid/GridWallComponent.gd")
 const WallSegmentsComponentScript = preload("res://commons/grid/GridWallSegmentsComponent.gd")
 const BiomeGridComponentScript = preload("res://commons/grid/GridBiomeComponent.gd")
+const BiomeGridTokensLib = preload("res://commons/grid/BiomeGridTokens.gd")
 const AudioComponentScript = preload("res://commons/grid/GridAudioComponent.gd")
 const TimelineComponentScript = preload("res://commons/grid/GridTimelineComponent.gd")
 const FloorPlanLoader = preload("res://commons/grid/FloorPlanLoader.gd")
@@ -812,6 +813,22 @@ func repaint_biome(layers: Array, margin: int = 0) -> void:
 	_handle_biome_ring(true)   # live brush: skip the ecosystem re-sync (same map)
 
 
+## biome-3: true when layers.biome declares at least one valid halo cell.
+## The map then owns its outside (the grid-native halo) and the ground_ring
+## accrual layer retires for this map. Maps without halo cells: unchanged.
+func _biome_layer_has_halo() -> bool:
+	if not data_component:
+		return false
+	for row in data_component.get_biome_layer():
+		if not (row is Array):
+			continue
+		for cell in row:
+			var parsed: Dictionary = BiomeGridTokensLib.parse(cell)
+			if not parsed["empty"] and parsed["valid"] and parsed["role"] == "halo":
+				return true
+	return false
+
+
 ## Live mesh-only preview of the ground while the biome brush paints "ground".
 ## Far cheaper than repaint_biome — rebuilds just the ground mesh (no collider,
 ## no other layers), so the terrain rises under the brush in real time. The full
@@ -957,6 +974,10 @@ func _handle_biome_ring(live_repaint: bool = false):
 			# ground_only (settings.ground_only): keep just the walkable ground —
 			# for clean maps (e.g. primitives) that want terrain, not the abstract biome.
 			"only_ground": bool(data_component.get_settings().get("ground_only", false)) if data_component else false,
+			# biome-3: a map that declares halo cells in layers.biome owns its
+			# own outside — GridBiomeComponent spills the wilderness per cell
+			# and the ground_ring accrual layer retires for this map.
+			"has_biome_halo": _biome_layer_has_halo(),
 		})
 
 	# ── Ground paint layer (G3.7 + smart fallback) ────────────────────
