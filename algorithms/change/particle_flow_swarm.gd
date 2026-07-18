@@ -8,8 +8,17 @@
 # Demonstrates that a vector field acts on whatever rides it. Foreshadows forces and the
 # integration phase (where settling = riding a gradient field).
 #
-# @identity: First map where the player sees a field's effect on bodies.
 # @qfep_term: F (the field) + Δ(S,t) (the riding).
+#
+# @identity
+# essence: many small particles carried along the same stream-function field vector_field_grid draws, re-spawning across the plane so the flow reads as continuous streamlines
+# desire: to show that a vector field acts on whatever rides it — the field's effect, not just its shape
+# critical_parameter: particle_count — the swarm density; too few and streamlines never form, too many and the MultiMesh floods the plane into a blur
+# triggers: _ready() builds a MultiMesh and spawns particles; _process advances each along the local field vector and re-spawns those that drift off-domain
+# emerges: streamlines without stored trails — the field made kinetic, foreshadowing settling-as-riding-a-gradient in the integration phase
+# needs: MultiMeshInstance3D [present]; particle integrator over the field [present]; apply_grid_config for particle_count [present]; class_name ParticleFlowSwarm [present]; @identity [present, 2026-07-12]
+# relationships: rides the field that vector_field_grid displays; foreshadows forces and gradient_descent; sibling in the change sequence
+# truth: a field is invisible until a body moves through it — the particle is how the field speaks.
 
 extends Node3D
 class_name ParticleFlowSwarm

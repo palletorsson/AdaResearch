@@ -2,6 +2,16 @@ extends Node3D
 
 # Sphere Grid Display System
 # Generates a grid of spheres using ring and segment combinations with gradient coloring
+#
+# @identity
+# essence: a 2D lattice of spheres, one per (rings × radial_segments) pair, each surface painted with exactly that many latitude/longitude lines so its tessellation parameters are readable at a glance
+# desire: to turn two abstract mesh parameters into a walkable table — you don't read "rings=8, segments=16", you see the ball that those numbers make
+# critical_parameter: rings_values × radial_segments_values — the two axes of the sweep; every entry pair spawns one labelled sphere at spacing intervals, gradient-coloured by its index
+# triggers: _ready() seeds a blue→pink gradient if unset and calls generate_sphere_grid(); each cell builds a SphereMesh + ParametricGrid material + a billboard Label3D naming its rings/segments/hemisphere
+# emerges: the discretisation of a smooth surface made visible — coarse spheres read as faceted gems, fine ones as smooth balls, and the whole grid is the continuum of that trade-off
+# needs: SphereMesh grid generator [present]; ParametricGrid material via grid_material_factory [present]; per-cell parameter labels [present]; @identity [present, 2026-07-18]; class_name — absent, spawned by scene
+# relationships: sibling of combine_capsule and combine_torus (the same parameter-sweep grammar over different primitives); a primitives-sequence teaching table; downstream of the point/line/grid ontology
+# truth: a sphere is not a thing but a decision about how finely to cut a curve — the grid lets you hold every version of that decision at once and choose with your eyes.
 
 @export_group("Sphere Parameters")
 @export var radius: float = 0.3

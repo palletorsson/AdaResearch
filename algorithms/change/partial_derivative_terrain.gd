@@ -9,8 +9,17 @@
 # take its derivative with respect to either one. This is the substrate for forces' 3D
 # vector calculus and for ML's gradient descent.
 #
-# @identity: First map where the player meets two-axis differentiation.
 # @qfep_term: F over a 2D domain.
+#
+# @identity
+# essence: a bumpy height-field z=f(x,y) with two arrows riding the surface — a red ∂f/∂x and a green ∂f/∂y — reading both partial slopes at the sampled point
+# desire: to make two-variable differentiation visible as two independent directional slopes on one surface, not a formula on a page
+# critical_parameter: height_scale — how pronounced the terrain's bumps are; too flat and the partials vanish, too steep and the arrows overshoot the surface they measure
+# triggers: _ready() builds the terrain ArrayMesh from f(x,y) then two arrow meshes; _process walks the sample point and re-reads ∂f/∂x and ∂f/∂y, re-orienting each arrow
+# emerges: two slopes at one point — the seed of the gradient vector that forces' 3D calculus and ML's gradient descent later stack into a single arrow
+# needs: terrain ArrayMesh [present]; red ∂x + green ∂y arrows [present]; apply_grid_config for grid_size/span [present]; class_name PartialDerivativeTerrain [present]; @identity [present, 2026-07-12]
+# relationships: precursor to vector_field_grid (a whole field of such slopes); feeds gradient_descent in formfinding/ML; sibling of riemann_pump and ftc_bridge in the change sequence
+# truth: a derivative in more than one dimension is not one number but a choice of direction — you differentiate with respect to whichever axis you think to ask about.
 
 extends Node3D
 class_name PartialDerivativeTerrain

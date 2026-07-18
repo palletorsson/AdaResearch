@@ -11,8 +11,17 @@
 # the partition becomes finer — but the *biases* differ at coarse resolution. This is
 # the difference between a sum and an integral made visible.
 #
-# @identity: First map where the player sees that accumulation has a choice of strategy.
 # @qfep_term: F at the cusp of Δ — accumulation as the inverse operation of slope.
+#
+# @identity
+# essence: three side-by-side strip panels summing the same curve's area by left, right, and midpoint rectangles, pumping the strip count up and down to show them converge
+# desire: to show that accumulation is a choice of strategy at coarse resolution but one shared area in the limit
+# critical_parameter: n_strips — the partition fineness; at low counts the three panels' biases diverge visibly, at high counts they collapse onto the true integral
+# triggers: _ready() builds three panels (axes + curve + strips); _process pumps n_strips on a slow sinusoid and rebuilds each strategy's rectangle heights
+# emerges: the difference between a sum and an integral, made spatial — three biases converging to one number
+# needs: three strip panels [present]; curve mesh per panel [present]; pump animation [present]; class_name RiemannPump [present]; @identity [present, 2026-07-12]
+# relationships: the accumulation counterpart to partial_derivative_terrain's slope; resolved by ftc_bridge (which names sum and slope as inverses); sibling in the change sequence
+# truth: area under a curve has no single recipe — left, right, and midpoint all reach it, and their disagreement at coarse scale is the integral announcing itself.
 
 extends Node3D
 class_name RiemannPump

@@ -1,6 +1,16 @@
 extends GrabLine
 class_name GrabLineDrawer
 
+# @identity
+# essence: a GrabLine whose tip leaves a fading trail — moving the endpoint past min_draw_distance appends to a capped point buffer rendered as a ribbon; the line becomes a pen
+# desire: to make the learner feel that a moving point traces a path — that a curve is the HISTORY of a point, not a shape you place
+# critical_parameter: trail_length (300) — how much of the point's past the line remembers before the oldest samples fade and drop
+# triggers: _process compares the tip to _last_draw_pos; exceeding min_draw_distance records a trail point; the buffer trims to trail_length and fades toward its tail
+# emerges: that a line and a trajectory are the same object in two tenses — the grab_line IS the present endpoint, the trail IS its past
+# needs: trail recording [has]; fade [has]; capped buffer [has]; save trail to TraceData [missing]; apply_grid_config [missing]
+# relationships: extends grab_line (adds memory to the endpoint); kin to editable_curve (both make continuous marks) but drawn by gesture, not control points; the drawing verb beside grab_line_pusher (acts) and grab_line_music (sounds)
+# truth: to draw is to move a point and refuse to forget where it has been
+
 ## GrabLine variant that draws trails from the tip when moved
 
 @export_group("Drawing Settings")

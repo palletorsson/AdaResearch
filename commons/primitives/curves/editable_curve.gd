@@ -2,6 +2,16 @@
 extends Node3D
 class_name EditableCurve
 
+# @identity
+# essence: an interactive spline — 4+ grabbable control points resampled by cubic Bézier, Catmull-Rom, or linear interpolation into an ImmediateMesh line strip, with Bézier drawing its tangent-handle scaffolding
+# desire: to let the learner feel the difference between a curve that passes THROUGH its points (Catmull-Rom) and one merely PULLED toward them (Bézier) — by dragging the same control net under both laws
+# critical_parameter: curve_segments (32) — the sampling resolution; the true curve is continuous, the drawn curve is a polyline, and this number is the grain of that lie
+# triggers: moving any control point emits curve_changed and calls _rebuild_curve; curve_type switches the interpolation law; _process polls positions for non-signal VR movement
+# emerges: that interpolation is a choice, not a fact — the same points yield wholly different shapes depending on which basis functions weight them
+# needs: grabbable control points [has]; three curve laws [has]; live Bézier tangent handles [has]; apply_grid_config [missing]; add/remove points exposed to VR [missing — API-only]
+# relationships: descends from grab_line and line (endpoints you hold) into the continuous — a curve is a line that remembers more than two points; feeds TraceData via save_to_trace_data; parent of editable_bezier and editable_catmull_rom (same script, curve_type preset)
+# truth: a smooth curve is a weighted memory of a few points — the hand places the control net, the basis function decides how much each point is believed
+
 ## Editable Curve - Interactive Bezier/Catmull-Rom curve with grabbable control points
 ## Extends the trace concept: from recorded gesture to deliberate construction
 

@@ -1,6 +1,16 @@
 extends GrabLine
 class_name GrabLineMusic
 
+# @identity
+# essence: a GrabLine that sonifies itself — tip velocity drives volume, line length maps to pitch (base_frequency + length*range) through a live AudioStreamGenerator with selectable waveform and vibrato
+# desire: to let the learner HEAR a line's two properties at once — how fast the hand moves (loudness) and how long the line is (pitch) — binding metric to sound
+# critical_parameter: base_frequency/frequency_range (220Hz + 880Hz) — the pitch window the line's length is mapped onto; it decides whether stretching the line whispers or shrieks
+# triggers: _process reads tip velocity and line length each frame; the generator playback is filled with the chosen waveform at the mapped frequency; movement above min_velocity_for_sound opens the volume
+# emerges: that measurement and sensation are interchangeable — a number (length) becomes a frequency you feel in the body, closing the loop grab_line opened with its length label
+# needs: real-time synthesis [has]; velocity->volume and length->pitch [has]; 4 waveforms plus vibrato [has]; apply_grid_config [missing]; scale-quantized pitch [missing — continuous glissando only]
+# relationships: extends grab_line (gives the endpoint a voice); the sounding verb beside grab_line_drawer (marks) and grab_line_pusher (touches); turns the line primitive into a synthesizer
+# truth: a length is already a pitch — the line was singing before we gave it a speaker
+
 ## GrabLine variant that produces music based on tip movement and line length
 
 @export_group("Sound Settings")

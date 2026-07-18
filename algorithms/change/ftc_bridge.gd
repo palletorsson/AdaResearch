@@ -8,8 +8,17 @@
 # This is the *capstone* of the change sequence — the unifying claim that derivative and
 # integral are inverse operations. Sets up the entire QFEP rate-term Δ(S,t).
 #
-# @identity: The sequence's synthesis: change names both directions of accumulation.
 # @qfep_term: F at the boundary, pointing at Δ(S,t) as the bridge.
+#
+# @identity
+# essence: an arched bridge with a derivative curve on the left pillar and its antiderivative on the right, a pulse running the span under the beam ∫f'(x)dx = f(b)−f(a)
+# desire: to stage the Fundamental Theorem of Calculus as a spatial crossing — the two directions of change meeting over one arch
+# critical_parameter: pulse_speed — the pace of the endpoint-naming pulse; it walks the eye from f(a) to f(b) and back at whatever tempo you set
+# triggers: _ready() builds pillars, arch, pulse marker, and the FTC label; _process runs the pulse from the left endpoint to the right, naming both in turn
+# emerges: derivative and integral shown as inverse operations — the capstone that unifies the whole change sequence
+# needs: two pillars + arch [present]; running pulse marker [present]; FTC label [present]; class_name FTCBridge [present]; @identity [present, 2026-07-12]
+# relationships: the synthesis of partial_derivative_terrain (slope) and riemann_pump (accumulation); points forward to QFEP's rate-term Δ(S,t); capstone of the change sequence
+# truth: differentiation and integration are the same bridge walked in opposite directions — to accumulate a rate is to recover the thing that was changing.
 
 extends Node3D
 class_name FTCBridge

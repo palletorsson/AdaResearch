@@ -3,6 +3,16 @@ class_name FoldingCubeInteractive
 
 ## Interactive Folding Cube - Grab edges to fold manually
 ## Or use the fold handle to animate
+#
+# @identity
+# essence: a folding cube with a grabbable handle floating above it — pull the handle down and the cube's six faces unfold flat, let go and it snaps to whichever state is nearer
+# desire: to put the fold transform in the player's hand — not a button that plays an animation, but a continuous dial where handle height IS fold progress
+# critical_parameter: handle Y position — mapped by inverse_lerp(max_y, min_y, handle_y) onto fold_progress 0…1, so the fold is scrubbed by the physical height at which you hold the handle
+# triggers: _ready() builds a FoldingCube and an xr-tools pickable handle (Area3D click fallback if the addon is absent); _process scrubs fold_progress while grabbed; release snaps via animate_fold/animate_unfold at the 0.5 threshold
+# emerges: folding felt as a reversible motion you own — the cube becomes a net and back again under your hand, the unfold made tangible rather than watched
+# needs: FoldingCube child [present]; grabbable fold handle with pickable + Area3D fallback [present]; handle-Y → fold_progress mapping [present]; snap-to-nearest on release [present]; @identity [present, 2026-07-18]; class_name FoldingCubeInteractive [present]
+# relationships: the interactive skin over FoldingCube; kin to the folding-creature system where folding is a universal transform; a primitives-sequence bridge from static cube to living net
+# truth: a cube and its unfolded cross are the same six squares under a reversible move — putting that move on a handle turns a fact about topology into something you can pull.
 
 @export var face_size: float = 0.5
 @export var face_color: Color = Color(0.9, 0.85, 0.8, 1.0)

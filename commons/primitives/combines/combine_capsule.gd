@@ -2,6 +2,16 @@ extends Node3D
 
 # Capsule Grid Display System
 # Generates a grid of capsules by combining height and segment values with gradient coloring
+#
+# @identity
+# essence: a lattice of capsules sweeping height against radial_segments, each painted with UV-space lines so the three-zone hemisphere-cylinder-hemisphere body of a capsule stays legible at every density
+# desire: to show that a capsule is a cylinder that grew two caps — vary the height and the middle stretches, vary the segments and the whole skin sharpens or smooths
+# critical_parameter: height_values × radial_segments_values — the two sweep axes (rings held fixed at 6); each pair spawns one labelled capsule, gradient-coloured orange→blue by index
+# triggers: _ready() seeds an orange→blue gradient if unset and calls generate_capsule_grid(); each cell builds a CapsuleMesh + ParametricGrid material + a Label3D naming its height and segments
+# emerges: the difference between geometric parameters (height, a real length) and topological ones (segments, a count) shown side by side — height stretches, segments tessellate, and they do not trade against each other
+# needs: CapsuleMesh grid generator [present]; ParametricGrid material via grid_material_factory [present]; per-cell height/segment labels [present]; @identity [present, 2026-07-18]; class_name — absent, spawned by scene
+# relationships: sibling of combine_sphere and combine_torus (shared parameter-sweep grammar); a primitives-sequence teaching table; the capsule is the sphere's elongated cousin
+# truth: length and resolution are different kinds of number — one measures the world, the other measures how coarsely you agreed to describe it, and the capsule wears both at once.
 
 @export_group("Capsule Parameters")
 @export var radius: float = 0.3

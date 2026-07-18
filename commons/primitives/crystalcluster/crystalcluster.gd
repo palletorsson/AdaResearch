@@ -1,6 +1,16 @@
 # CrystalCluster.gd - Multiple small crystals arranged in a cluster
 extends Node3D
 
+# @identity
+# essence: five hexagonal-prism crystals, each SurfaceTool triangles with face-center normals, scattered by a per-crystal seeded RNG (seed = i*42) so the "randomness" is identical every run; skinned with the SimpleGrid wireframe shader
+# desire: to show that a cluster reads as organic even though every position and rotation is fixed — deterministic seeding makes chance repeatable
+# critical_parameter: rng.seed = i * 42 — the deterministic seed; change it and the same code grows a different-looking cluster from the same rules
+# triggers: create_crystal_cluster on _ready builds 5 crystals; each gets a fresh RandomNumberGenerator seeded by its index; set_base_color re-skins every child
+# emerges: that "random arrangement" and "fixed arrangement" can be the same thing — a seed is a frozen roll of the dice
+# needs: 5 hex-prism crystals [has]; deterministic layout [has]; wireframe material [has]; apply_grid_config [missing]; configurable crystal count [missing — hardcoded 5]
+# relationships: sibling to crystal and diamond (single mesh primitives) — a cluster is what happens when you repeat a primitive under jitter; shares the SimpleGrid shader with the grid family
+# truth: a seed turns chance into a decision you can repeat — the cluster looks scattered because it was told exactly how to scatter
+
 var base_color: Color = Color(0.0, 0.4, 1.0)  # Blue from pride colors
 
 func _ready():

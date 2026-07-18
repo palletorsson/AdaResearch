@@ -2,6 +2,16 @@ extends Node3D
 
 # Torus Grid Display System
 # This script creates a grid of toruses with different ring and ring segment values
+#
+# @identity
+# essence: an 11×11 lattice of tori sweeping rings against ring_segments, each surface painted with exactly its own (rings, segments) as UV lines so the parameters you count are the parameters it teaches
+# desire: to make the torus's double-loop structure countable — the big loop around the hole and the small loop around the tube, each with its own resolution dial
+# critical_parameter: rings_values × segments_values (3…24 each) — the two sweep axes; every pair spawns one labelled torus at spacing intervals, gradient-coloured by index across the full 121-cell grid
+# triggers: _ready() seeds an orange→blue gradient if unset and calls generate_torus_grid(); each cell builds a TorusMesh + ParametricGrid material + a Label3D reading "R:n / S:m"
+# emerges: the genus-1 surface laid out as a full contour atlas — at low values the tori read as faceted rings, at high values as smooth donuts, the grid holding the entire coarse-to-fine spectrum in one glance
+# needs: TorusMesh grid generator [present]; ParametricGrid material via grid_material_factory [present]; per-cell R:/S: labels [present]; get_torus_at_grid_position lookup [present]; @identity [present, 2026-07-18]; class_name — absent, spawned by scene
+# relationships: sibling of combine_sphere and combine_capsule (shared parameter-sweep grammar); the torus is the first surface with a hole, so this table is where genus enters the primitives sequence
+# truth: a torus is two circles multiplied — the sweep grid is the multiplication table, and every cell is a different agreement about how finely to draw each factor.
 
 @export_group("Torus Parameters")
 @export var inner_radius: float = 0.23

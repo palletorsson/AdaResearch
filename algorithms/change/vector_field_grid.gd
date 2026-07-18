@@ -8,8 +8,17 @@
 # Sets up the flow-along intuition for the next sequence (forces) and pairs with
 # particle_flow_swarm where particles ride this same field.
 #
-# @identity: First map where the player meets a *field* as a distribution of vectors.
 # @qfep_term: F as a vector function over a domain.
+#
+# @identity
+# essence: a regular grid of arrows over a plane, each pointing along a stream-function field v=(∂Ψ/∂y,−∂Ψ/∂x), the whole field slowly scrolling
+# desire: to present a field — a vector assigned to every point of a domain — as a single seeable object
+# critical_parameter: spacing — the grid density; too sparse and the circulation reads as noise, too dense and the arrows overlap into a smear
+# triggers: _ready() builds the arrow grid; _process advances Ψ's phase and re-orients and re-colours each arrow by the local field vector
+# emerges: circulation lines around saddle points — the flow-along intuition the forces sequence will inhabit
+# needs: arrow grid [present]; stream-function field Ψ [present]; apply_grid_config for cols/rows/spacing [present]; class_name VectorFieldGrid [present]; @identity [present, 2026-07-12]
+# relationships: paired with particle_flow_swarm (particles ride this same field); precursor to the forces sequence; sibling in the change sequence
+# truth: a field is not one arrow but a rule that hands you an arrow wherever you stand — the world laid out before anything moves through it.
 
 extends Node3D
 class_name VectorFieldGrid

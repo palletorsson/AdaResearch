@@ -1,6 +1,16 @@
 extends GrabLine
 class_name GrabLinePusher
 
+# @identity
+# essence: a GrabLine with a StaticBody3D collider welded to its tip — the endpoint gains physical presence and can shove rigid bodies in the scene
+# desire: to make an abstract endpoint consequential — the learner feels that a point with a collider stops being a coordinate and becomes a thing that touches
+# critical_parameter: tip_collider_radius (0.05) — the size of the tip's physical footprint; below it the point is a mathematical dot, at it the point can push
+# triggers: _setup_pusher_tip on ready parents a collider and metallic sphere to the tip marker; moving the grab_line drags the collider through the physics world
+# emerges: that the difference between a coordinate and an object is a collision shape — geometry becomes agency the moment it can occupy space
+# needs: tip collider [has]; visible pusher mesh [has]; apply_grid_config [missing]; configurable mass/impulse [missing — kinematic push only]
+# relationships: extends grab_line (adds a body to the endpoint); the acting verb beside grab_line_drawer (records) and grab_line_music (sounds) — three ways to spend the same held line
+# truth: a point becomes real to the world only when it can be in the way
+
 ## GrabLine variant with a collider at the tip for pushing objects
 
 @export_group("Pusher Settings")
