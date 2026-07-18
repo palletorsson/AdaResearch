@@ -1,0 +1,204 @@
+{
+ "seq": "forces",
+ "phase": "oscillation",
+ "truth": "Direction + magnitude = vector. F = ma. Acceleration is the only thing you feel. Position and velocity are states; force is what changes them.",
+ "current_n": 30,
+ "tight_n": 8,
+ "v1_tutorial": [
+  {
+   "slot": "threshold",
+   "map": "Sky_Climb",
+   "hero": "calder_mobile",
+   "hero_prov": "heuristic (cast default)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 5,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "primitive",
+   "map": "VectorFoundations",
+   "hero": "",
+   "hero_prov": "none",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 0,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "walk",
+   "map": "ForcesChaos",
+   "hero": "many",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 13,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "walk2",
+   "map": "Force_Preview",
+   "hero": "adder_board",
+   "hero_prov": "heuristic (cast default)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 12,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "turn",
+   "map": "Reformed_Instruments",
+   "hero": "ca_rules_workbench",
+   "hero_prov": "measured (dig load-bearing)",
+   "slot_prov": "heuristic (position)",
+   "lb": true,
+   "walked": false,
+   "cast_n": 6,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "critical",
+   "map": "Void_Crossing",
+   "hero": "bounded",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 3,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "world",
+   "map": "ForcesArena",
+   "hero": "VectorAddition",
+   "hero_prov": "heuristic (cast default)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 20,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "close",
+   "map": null,
+   "gap": true,
+   "prov": "declared gap — no existing map holds this slot"
+  },
+  {
+   "slot": "seed",
+   "map": "Chamber_Forces",
+   "hero": "becoming_catalyst",
+   "hero_prov": "heuristic (cast default)",
+   "slot_prov": "heuristic (name)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 4,
+   "prov": "heuristic (provenance-ranked pick)"
+  }
+ ],
+ "v2_anti": [
+  {
+   "slot": "turn",
+   "host_map": "Reformed_Instruments",
+   "anti": "tangent_slope_workbench",
+   "why": "opposed on continuous/discrete (walked×walked)",
+   "prov": "ghost — counter-pair sleeping in dig (L-021)"
+  },
+  {
+   "slot": "turn",
+   "host_map": "Reformed_Instruments",
+   "anti": "cantor_diagonal_workbench",
+   "why": "opposed on determinism/chance (walked×walked)",
+   "prov": "ghost — counter-pair sleeping in dig (L-021)"
+  },
+  {
+   "slot": "turn",
+   "host_map": "Reformed_Instruments",
+   "anti": "riemann_sum_workbench",
+   "why": "opposed on continuous/discrete (needs promotion)",
+   "prov": "ghost — counter-pair sleeping in dig (L-021)"
+  },
+  {
+   "slot": "turn",
+   "host_map": "Reformed_Instruments",
+   "anti": "flow_field_painter",
+   "why": "opposed on determinism/chance (needs promotion)",
+   "prov": "ghost — counter-pair sleeping in dig (L-021)"
+  },
+  {
+   "slot": "turn",
+   "host_map": "Reformed_Instruments",
+   "anti": "HingeCrank",
+   "why": "opposed on build/remove, continuous/discrete (needs promotion)",
+   "prov": "ghost — counter-pair sleeping in dig (L-021)"
+  }
+ ],
+ "v3_laws": {
+  "slot-grammar": {
+   "order": [
+    "Sky_Climb",
+    "VectorFoundations",
+    "ForcesChaos",
+    "Force_Preview",
+    "Reformed_Instruments",
+    "Void_Crossing",
+    "ForcesArena",
+    "Chamber_Forces"
+   ],
+   "law": "the tutorial arc itself (V1 identity)",
+   "tau_vs_tutorial": 1.0
+  },
+  "footprint-ascending": {
+   "order": [
+    "Chamber_Forces",
+    "Sky_Climb",
+    "VectorFoundations",
+    "ForcesChaos",
+    "Force_Preview",
+    "Void_Crossing",
+    "ForcesArena",
+    "Reformed_Instruments"
+   ],
+   "law": "small meets you first — the gaze law's cousin",
+   "tau_vs_tutorial": 0.36
+  },
+  "density-rising": {
+   "order": [
+    "VectorFoundations",
+    "Void_Crossing",
+    "Chamber_Forces",
+    "Sky_Climb",
+    "Reformed_Instruments",
+    "Force_Preview",
+    "ForcesChaos",
+    "ForcesArena"
+   ],
+   "law": "sparse -> dense; the world thickens",
+   "tau_vs_tutorial": 0.07
+  },
+  "truth-earned": {
+   "order": [
+    "Sky_Climb",
+    "VectorFoundations",
+    "ForcesChaos",
+    "Force_Preview",
+    "Void_Crossing",
+    "ForcesArena",
+    "Chamber_Forces",
+    "Reformed_Instruments"
+   ],
+   "law": "load-bearing heroes arrive late — the walk earns them",
+   "tau_vs_tutorial": 0.79
+  }
+ },
+ "dig_counter_pool": [
+  "transform_composition_workbench",
+  "tangent_slope_workbench",
+  "cantor_diagonal_workbench"
+ ],
+ "law_note": "P-9/P-10 + L-021: every value proposes; Palle rules"
+}

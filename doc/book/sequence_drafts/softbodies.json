@@ -1,0 +1,183 @@
+{
+ "seq": "softbodies",
+ "phase": "integration",
+ "truth": "Form is not imposed  --  it emerges from the material's own dynamics.",
+ "current_n": 34,
+ "tight_n": 9,
+ "v1_tutorial": [
+  {
+   "slot": "threshold",
+   "map": "SoftBodies_Soft_Body_Deformation",
+   "hero": "jelly_cube",
+   "hero_prov": "measured (dig load-bearing)",
+   "slot_prov": "heuristic (position)",
+   "lb": true,
+   "walked": true,
+   "cast_n": 3,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "primitive",
+   "map": "SoftBodies_Cloth_Physics",
+   "hero": "the",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": true,
+   "cast_n": 1,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "walk",
+   "map": "SoftBodies_Carusell",
+   "hero": "revolving_joy_ride",
+   "hero_prov": "measured (dig load-bearing)",
+   "slot_prov": "heuristic (position)",
+   "lb": true,
+   "walked": true,
+   "cast_n": 5,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "walk2",
+   "map": "SoftBodies_Obsticals",
+   "hero": "the",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": true,
+   "cast_n": 4,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "turn",
+   "map": "SoftBodies_Obsticals_Part2",
+   "hero": "the",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": true,
+   "cast_n": 3,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "critical",
+   "map": "SoftBodies_Playground_of_Joy",
+   "hero": "free",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": true,
+   "cast_n": 3,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "world",
+   "map": "ProceduralGeneration_Reaction_Diffusion_Systems",
+   "hero": "two",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": true,
+   "cast_n": 2,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "close",
+   "map": "SoftBody_gm04_pressed_onto_sphere",
+   "hero": "gallery_marker_soft-body",
+   "hero_prov": "heuristic (cast default)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 1,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "seed",
+   "map": "Chamber_SoftBodies",
+   "hero": "the",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (name)",
+   "lb": false,
+   "walked": true,
+   "cast_n": 3,
+   "prov": "heuristic (provenance-ranked pick)"
+  }
+ ],
+ "v2_anti": [
+  {
+   "slot": "turn",
+   "host_map": "SoftBodies_Obsticals_Part2",
+   "anti": "turing_pattern_generator ⟷ branching_growth_algorithm",
+   "why": "opposed on continuous/discrete (needs promotion)",
+   "prov": "ghost — top sleeping counter-pair (L-021)"
+  }
+ ],
+ "v3_laws": {
+  "slot-grammar": {
+   "order": [
+    "SoftBodies_Soft_Body_Deformation",
+    "SoftBodies_Cloth_Physics",
+    "SoftBodies_Carusell",
+    "SoftBodies_Obsticals",
+    "SoftBodies_Obsticals_Part2",
+    "SoftBodies_Playground_of_Joy",
+    "ProceduralGeneration_Reaction_Diffusion_Systems",
+    "SoftBody_gm04_pressed_onto_sphere",
+    "Chamber_SoftBodies"
+   ],
+   "law": "the tutorial arc itself (V1 identity)",
+   "tau_vs_tutorial": 1.0
+  },
+  "footprint-ascending": {
+   "order": [
+    "SoftBodies_Soft_Body_Deformation",
+    "SoftBodies_Cloth_Physics",
+    "SoftBodies_Obsticals",
+    "SoftBodies_Obsticals_Part2",
+    "SoftBodies_Playground_of_Joy",
+    "ProceduralGeneration_Reaction_Diffusion_Systems",
+    "SoftBody_gm04_pressed_onto_sphere",
+    "Chamber_SoftBodies",
+    "SoftBodies_Carusell"
+   ],
+   "law": "small meets you first — the gaze law's cousin",
+   "tau_vs_tutorial": 0.67
+  },
+  "density-rising": {
+   "order": [
+    "SoftBodies_Cloth_Physics",
+    "SoftBody_gm04_pressed_onto_sphere",
+    "ProceduralGeneration_Reaction_Diffusion_Systems",
+    "SoftBodies_Soft_Body_Deformation",
+    "SoftBodies_Obsticals_Part2",
+    "SoftBodies_Playground_of_Joy",
+    "Chamber_SoftBodies",
+    "SoftBodies_Obsticals",
+    "SoftBodies_Carusell"
+   ],
+   "law": "sparse -> dense; the world thickens",
+   "tau_vs_tutorial": -0.06
+  },
+  "truth-earned": {
+   "order": [
+    "SoftBodies_Cloth_Physics",
+    "SoftBodies_Obsticals",
+    "SoftBodies_Obsticals_Part2",
+    "SoftBodies_Playground_of_Joy",
+    "ProceduralGeneration_Reaction_Diffusion_Systems",
+    "SoftBody_gm04_pressed_onto_sphere",
+    "Chamber_SoftBodies",
+    "SoftBodies_Soft_Body_Deformation",
+    "SoftBodies_Carusell"
+   ],
+   "law": "load-bearing heroes arrive late — the walk earns them",
+   "tau_vs_tutorial": 0.28
+  }
+ },
+ "dig_counter_pool": [
+  "turing_pattern_generator"
+ ],
+ "law_note": "P-9/P-10 + L-021: every value proposes; Palle rules"
+}
