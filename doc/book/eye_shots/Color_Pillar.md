@@ -15,15 +15,15 @@ clearance violations: **0 overlaps, 1 tight** — the law wants ≥1.2m to walk 
 no sibling kept — the move did not beat the ride (overlaps 0→0, tight 1→1). Note-only.
 
 ## The voice (qfep)
-5 of 7 cast members carry a theory-claim; 2 mute.
+7 of 7 cast members carry a theory-claim; 0 mute.
 - **SpectrumVisualizer** — Lambda between physics and perception — the linear spectrum is pure F (physics, ordered by wavelength). The ci
 - **color_sets_overview** — sets_to_show — controls how many palettes are visible simultaneously, determining comparison density naming a 
 - **dark_sphere** — Transformation often needs an invariant reference to be legible. The sphere stays simple so surrounding change
-- **loom_drum_persian_p6** — F_order: a named carpet program.
-- mute: grab_rainbow_stick, visual_color_mixing
+- **grab_rainbow_stick** — the rainbow made holdable — a spectrum along a stick; the gradient as a hand tool.
 
 ## The text vs the space
-**no walked.md** — the space stands unwritten; this note is the first text this map has.
+walked.md exists — the writing names 7/7 of the cast; dwells declared for 0.
+- **the writing's subjects are blocked in space**: grab_rainbow_stick sit in clearance violations — the text promises what the floor obstructs.
 
 ## The heuristic understanding
 The space already walks: the bodies keep the law without being told. What carries this map is its voice, not its floor.

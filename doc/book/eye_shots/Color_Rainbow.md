@@ -3,23 +3,18 @@
 > one pass: ride (gaze), move (place --only-improve), gate (pathfinder), voice (qfep). Field note, not a ruling.
 
 ## The ride (before)
-clearance violations: **7 overlaps, 20 tight** — the law wants ≥1.2m to walk between.
-- `[OVERLAP] mario_cube                 <-> dark_sphere                gap -6.56m (centers 2.00m)`
-- `[OVERLAP] mario_cube                 <-> rainbow:0:0.5:0.1          gap -5.64m (centers 3.00m)`
-- `[OVERLAP] mario_cube                 <-> rainbow:0:0.5:0.1          gap -4.64m (centers 4.00m)`
-- `[OVERLAP] mario_cube                 <-> rainbow:0:0.5:0.1          gap -3.64m (centers 5.00m)`
-- `[OVERLAP] mario_cube                 <-> rainbow:0:0.5:0.1          gap -2.64m (centers 6.00m)`
-- `[OVERLAP] mario_cube                 <-> rainbow:0:0.5:0.1          gap -1.64m (centers 7.00m)`
-- `[OVERLAP] mario_cube                 <-> rainbow:0:0.5:0.1          gap -0.64m (centers 8.00m)`
-- `[tight  ] mario_cube                 <-> rainbow:0:0.5:0.1          gap +0.36m (centers 9.00m)`
+clearance violations: **3 overlaps, 0 tight** — the law wants ≥1.2m to walk between.
+- `[OVERLAP] pick_up_cube               <-> mario_cube                 gap -2.31m (centers 6.08m)`
+- `[OVERLAP] dark_sphere                <-> mario_cube                 gap -7.15m (centers 1.41m)`
+- `[OVERLAP] mario_cube                 <-> rainbow:0:0.5:0.1          gap -5.48m (centers 3.16m)`
 
 ## The move
     logged 1 entries to ada_run\placement_log.json
     summary: 1 maps processed
-      constraint improved: 1/1  mean Δ=+0.063
-      walkability improved: 1/1  mean Δ=+0.210
+      constraint improved: 0/1  mean Δ=+0.000
+      walkability improved: 1/1  mean Δ=+0.075
 
-sibling **Trial_eye_Color_Rainbow** kept: overlaps 7→3, tight 20→0, pathfinder OK.
+no sibling kept — the move did not beat the ride (overlaps 3→3, tight 0→0). Note-only.
 
 ## The voice (qfep)
 4 of 4 cast members carry a theory-claim; 0 mute.
@@ -29,7 +24,8 @@ sibling **Trial_eye_Color_Rainbow** kept: overlaps 7→3, tight 20→0, pathfind
 - **rainbow** — SECONDARY_FADE — controls how visible the second rainbow is, teaching that double rainbows exist with reversed
 
 ## The text vs the space
-**no walked.md** — the space stands unwritten; this note is the first text this map has.
+walked.md exists — the writing names 4/4 of the cast; dwells declared for 0.
+- **the writing's subjects are blocked in space**: dark_sphere, mario_cube, pick_up_cube, rainbow sit in clearance violations — the text promises what the floor obstructs.
 
 ## The heuristic understanding
-The floor was fighting the walk — bodies inside each other's clearance. The mover found a better seating; the ride confirms it in text. The voice column above says what the room is FOR; the next writing pass should say it in the walked page.
+The violations are real but mechanical moving does not fix them — they are placement DECISIONS (which body yields?), not placement errors. This is verdict material, not tooling material.

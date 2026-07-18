@@ -22,15 +22,16 @@ clearance violations: **5 overlaps, 5 tight** — the law wants ≥1.2m to walk 
 no sibling kept — the move did not beat the ride (overlaps 5→5, tight 5→5). Note-only.
 
 ## The voice (qfep)
-23 of 26 cast members carry a theory-claim; 3 mute.
+26 of 26 cast members carry a theory-claim; 0 mute.
+- **2d_in_3d_point_vis** — a 2D point diagram raised into the room — the flat lesson made walkable; reference furniture for the eye.
+- **constraint_sculptor** — lambda_edge: sculpting inside randomized constraints — the material answers with bounded surprise; authorship 
 - **crackpropagation_ca** — Edge of chaos — the crack threshold is the critical lambda where order (intact material) meets entropy (shatte
 - **csg_architecture_cavity** — wall_size against the opening sizes — the ratio of solid to void. Too little solid and the wall stops reading 
-- **dna_color_furniture_furniture_becker_utensilo_bauhaus** — F_order: a curated finding given a name in the registry.
-- **dna_color_furniture_furniture_coco_pendant_warm** — F_order: a curated finding given a name in the registry.
-- mute: 2d_in_3d_point_vis, constraint_sculptor, pattern_tunnel_machine
 
 ## The text vs the space
-**no walked.md** — the space stands unwritten; this note is the first text this map has.
+walked.md exists — the writing names 8/26 of the cast; dwells declared for 0.
+- **the writing's subjects are blocked in space**: 2d_in_3d_point_vis, constraint_sculptor, crackpropagation_ca, csg_architecture_cavity, pattern_tunnel_machine sit in clearance violations — the text promises what the floor obstructs.
+- space without text: dna_color_furniture_furniture_becker_utensilo_bauhaus, dna_color_furniture_furniture_coco_pendant_warm, dna_color_furniture_furniture_lamp_warm_glow, dna_color_furniture_furniture_vignelli_metafora_primary, dna_color_stacks_stack_complementary_red_green, dna_color_stacks_stack_monochrome_blue — standing in the room, absent from the walk.
 
 ## The heuristic understanding
 The violations are real but mechanical moving does not fix them — they are placement DECISIONS (which body yields?), not placement errors. This is verdict material, not tooling material.

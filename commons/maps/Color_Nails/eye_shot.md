@@ -22,15 +22,15 @@ clearance violations: **0 overlaps, 13 tight** — the law wants ≥1.2m to walk
 no sibling kept — the move did not beat the ride (overlaps 0→0, tight 13→13). Note-only.
 
 ## The voice (qfep)
-5 of 9 cast members carry a theory-claim; 4 mute.
+9 of 9 cast members carry a theory-claim; 0 mute.
 - **brick_wall_factory** — palette — selects from 20 named palettes (starry_night to industrial_brutalism), redefining the wall's emotion
 - **colorballs** — current_palette_index — switches the entire chromatic vocabulary; same physics, different visual language a co
 - **dark_side_prism** — fan_length — controls how far the spectrum spreads, making refraction feel gentle or dramatic white light is n
 - **dark_sphere** — Transformation often needs an invariant reference to be legible. The sphere stays simple so surrounding change
-- mute: grab_stick_scanner, hand_color_controller, hand_model, nail_color_controller
 
 ## The text vs the space
-**no walked.md** — the space stands unwritten; this note is the first text this map has.
+walked.md exists — the writing names 9/9 of the cast; dwells declared for 0.
+- **the writing's subjects are blocked in space**: colorballs, dark_side_prism, dark_sphere, hand_color_controller, hand_model, nail_color_controller sit in clearance violations — the text promises what the floor obstructs.
 
 ## The heuristic understanding
 The violations are real but mechanical moving does not fix them — they are placement DECISIONS (which body yields?), not placement errors. This is verdict material, not tooling material.

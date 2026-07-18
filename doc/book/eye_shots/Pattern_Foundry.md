@@ -21,7 +21,8 @@ no sibling kept — the move did not beat the ride (overlaps 0→0, tight 0→0)
 - **pattern_machine_d** — F_order: the 17 wallpaper groups as a press program — a hand-set matrix multiplied by constraint into endless 
 
 ## The text vs the space
-**no walked.md** — the space stands unwritten; this note is the first text this map has.
+walked.md exists — the writing names 4/4 of the cast; dwells declared for 0.
+- the text and the space cover each other — the walk as written is the walk as built.
 
 ## The heuristic understanding
 The space already walks: the bodies keep the law without being told. What carries this map is its voice, not its floor.
