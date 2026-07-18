@@ -1,0 +1,33 @@
+# Eye shot — Primitives_Ignorance
+
+> one pass: ride (gaze), move (place --only-improve), gate (pathfinder), voice (qfep). Field note, not a ruling.
+
+## The ride (before)
+clearance violations: **0 overlaps, 52 tight** — the law wants ≥1.2m to walk between.
+- `[tight  ] dark_sphere:0:-0.5         <-> cube_scene:0:-0.5          gap +0.00m (centers 1.00m)`
+- `[tight  ] dark_sphere:0:-0.5         <-> sphere:0:-0.5              gap +1.00m (centers 2.00m)`
+- `[tight  ] cube_scene:0:-0.5          <-> sphere:0:-0.5              gap +0.00m (centers 1.00m)`
+- `[tight  ] cube_scene:0:-0.5          <-> platonic_grabbables        gap +0.76m (centers 4.47m)`
+- `[tight  ] sphere:0:-0.5              <-> platonic_grabbables        gap +0.41m (centers 4.12m)`
+- `[tight  ] hole_with_cones:30:-0.5    <-> sphere_high                gap +1.00m (centers 2.00m)`
+- `[tight  ] hole_with_cones:30:-0.5    <-> righttriangle              gap +1.00m (centers 2.00m)`
+- `[tight  ] sphere_high                <-> sphere_high                gap +1.00m (centers 2.00m)`
+
+## The move
+    logged 1 entries to ada_run\placement_log.json
+    summary: 1 maps processed
+      constraint improved: 1/1  mean Δ=+0.111
+      walkability improved: 0/1  mean Δ=-0.013
+
+no sibling kept — the move did not beat the ride (overlaps 0→3, tight 52→23). Note-only.
+
+## The voice (qfep)
+6 of 23 cast members carry a theory-claim; 17 mute.
+- **cube_scene** — Transformation changes S while the cube serves as the invariant reference body. Because the base form is so le
+- **dark_sphere** — Transformation often needs an invariant reference to be legible. The sphere stays simple so surrounding change
+- **floating_sphere_field** — The void was never empty, only under-rendered. Replacing the lattice with a drift trades the comfort of fixed 
+- **library_rack** — the collection key — one word selects which registry to display a library is not the objects — it is the act o
+- mute: capsule, capsule_radials_rings, diamonds, grab_octahedron, hole_with_cones, lshape, platonic_grabbables, plus
+
+## The heuristic understanding
+The violations are real but mechanical moving does not fix them — they are placement DECISIONS (which body yields?), not placement errors. This is verdict material, not tooling material.
