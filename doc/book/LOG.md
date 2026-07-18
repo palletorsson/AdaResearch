@@ -1135,3 +1135,25 @@ Python, body in Godot.
 - 2026-07-10 15:56 · **build** · THE EM-SQUARE SHIPS (Palle: 'profile stays in the shadowbox; build the em-square metrics') — font metrics for artifacts, end to end: (1) measure_metrics.gd = the testimony rig: 47 housed artifacts measured headless (anchor_y / size / rest pose / base contact) — grid2d confessed 2x0.04x2 flat plane; coin_toss confessed a 15m rest AABB (environment-bundler, now DATA not surprise); zero failures. (2) --metrics merge: declared beats measured -> commons/data/artifact_metrics.json (177 artifacts, 7 flagged unreliable — all field-types). (3) fit_artifact() in CubeWrapperLibrary = THE LAYOUT ENGINE: PANEL branch (flat content -> stand upright facing viewer, contain-scale to the family's panel spec) + BASE branch (base seated on mount via anchor*scale, contain-scale to family budget) — sim_cube and the fit rig both consume it; mount_point/mount_rotation now the no-metrics fallback. PROOF: frame__grid2d_life = the Game of Life standing vertical, gliders facing out, scaled to the panel — the fix that three rounds of per-case guessing could not land took ONE metrics pass. Wang tiles = the space's edge contract; the em-cube = the artifact's base contract. Profile verdict recorded: shadowbox stays (design intent over rule).
 - 2026-07-10 15:58 · **note** · BLOG: two-contracts (2026-07-10) — Wang tiles (the space edge contract) + the em-square (the artifact base contract) as ONE move found twice: standardize the meeting point, never the thing. Records the day arc (kitbash insight -> edge contract -> mission graph -> wrappers -> fit failures -> metrics engine), the craft ledger (Palle refusals -> rules -> detectors -> review), and the QFEP reading (the standard says how we MEET, never what we ARE).
 - 2026-07-12 18:34 · **draft** · R-029: Em-Square interlude (after Part I) + a computed 'The Principal' beat per chapter (hero + em-square seating).
+- 2026-07-17 10:17 · **dig** · dig report transformation: LB=transform_composition, transform_composition_workbench; 15 promotions proposed, 1 blanks, 1 buried with reasons
+- 2026-07-17 18:42 · **dig** · dig report color: LB=rainbow, brick_wall_factory; 11 promotions proposed, 0 blanks, 27 buried with reasons
+- 2026-07-18 14:17 · **dig** · dig report array_tutorial: LB=pattern_maker_station; 1 promotions proposed, 1 blanks, 16 buried with reasons
+- 2026-07-18 14:17 · **dig** · dig report change: LB=player_trace; 4 promotions proposed, 1 blanks, 3 buried with reasons
+- 2026-07-18 14:17 · **dig** · dig report forces: LB=ca_rules_workbench, qfep_balance_workbench; 21 promotions proposed, 1 blanks, 21 buried with reasons
+- 2026-07-18 14:17 · **dig** · dig report wavefunctions: LB=oscilloscope, timbre_sculptor; 18 promotions proposed, 1 blanks, 48 buried with reasons
+- 2026-07-18 14:17 · **dig** · dig report cellularautomata: LB=ca_growth_network, ca_bridge; 5 promotions proposed, 1 blanks, 8 buried with reasons
+- 2026-07-18 14:17 · **dig** · dig report proceduralgeneration: LB=branching_growth_algorithm, GeneticProgramming; 0 promotions proposed, 0 blanks, 1 buried with reasons
+- 2026-07-18 14:17 · **dig** · dig report softbodies: LB=jelly_cube, revolving_joy_ride; 2 promotions proposed, 2 blanks, 5 buried with reasons
+- 2026-07-18 14:17 · **dig** · dig report isosurfaces: LB=mc_cave; 2 promotions proposed, 1 blanks, 12 buried with reasons
+- 2026-07-18 14:17 · **dig** · dig report swarmintelligence: LB=PhysarumColony, boids_aquarium; 0 promotions proposed, 2 blanks, 3 buried with reasons
+- 2026-07-18 14:17 · **dig** · dig report machinelearning: LB=evolved_creatures, gradient_descent_visualization; 2 promotions proposed, 2 blanks, 8 buried with reasons
+- 2026-07-18 14:17 · **dig** · dig report graphtheory: LB=graphspace, rhizomatic_structure; 2 promotions proposed, 1 blanks, 1 buried with reasons
+- 2026-07-18 14:17 · **dig** · dig report foundationscrisis: LB=angle_sum_triangle, poincare_disk; 2 promotions proposed, 2 blanks, 8 buried with reasons
+- 2026-07-18 14:17 · **dig** · dig report qfeplaboratory: LB=bifurcation_walkway, qfep_balance_workbench; 1 promotions proposed, 2 blanks, 23 buried with reasons
+- 2026-07-18 14:17 · **dig** · dig report postfoundationscrisis: LB=bias_visualizer; 1 promotions proposed, 0 blanks, 2 buried with reasons
+- 2026-07-18 14:19 · **build** · chapter rebuilt: symmetry
+- 2026-07-18 14:19 · **build** · chapter rebuilt: formfinding
+- 2026-07-18 14:19 · **build** · chapter rebuilt: boolean_surfaces
+- 2026-07-18 14:19 · **dig** · dig report symmetry: LB=kaleidoscope, pattern_maker_station; 0 promotions proposed, 2 blanks, 8 buried with reasons
+- 2026-07-18 14:19 · **dig** · dig report formfinding: LB=cable_builder, gradient_descent_well; 1 promotions proposed, 1 blanks, 2 buried with reasons
+- 2026-07-18 14:19 · **dig** · dig report boolean_surfaces: LB=csg_architecture_cavity, csg_difference_demo; 0 promotions proposed, 0 blanks, 0 buried with reasons
