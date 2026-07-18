@@ -18,15 +18,16 @@ clearance violations: **0 overlaps, 4 tight** — the law wants ≥1.2m to walk 
 no sibling kept — the move did not beat the ride (overlaps 0→0, tight 4→4). Note-only.
 
 ## The voice (qfep)
-9 of 10 cast members carry a theory-claim; 1 mute.
+10 of 10 cast members carry a theory-claim; 0 mute.
 - **VectorBasics** — Pure F-decomposition — breaking a single quantity into orthogonal components. The vector IS its components, an
 - **basis_vectors_rig** — Basis as frame of reference - the coordinate system from which we measure all positions target_point — the Vec
 - **bouncing_ball** — Pure F — gravity pulls, floor reflects. The simplest possible physics: one force, one constraint. The bounce c
 - **catalyst_target** — Transformation here is discrete state change: intact, flashing, destroyed, respawned. Identity persists while 
-- mute: proximity_spawner
 
 ## The text vs the space
-**no walked.md** — the space stands unwritten; this note is the first text this map has.
+walked.md exists — the writing names 7/10 of the cast; dwells declared for 0.
+- **the writing's subjects are blocked in space**: VectorBasics, catalyst_target, friction_ramp sit in clearance violations — the text promises what the floor obstructs.
+- space without text: example_2_1_forces_vr, example_2_3_gravity_scaled_by_mass_vr, example_2_5_fluid_resistance_vr — standing in the room, absent from the walk.
 
 ## The heuristic understanding
 The violations are real but mechanical moving does not fix them — they are placement DECISIONS (which body yields?), not placement errors. This is verdict material, not tooling material.

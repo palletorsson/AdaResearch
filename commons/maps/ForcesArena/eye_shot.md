@@ -22,15 +22,16 @@ clearance violations: **6 overlaps, 18 tight** — the law wants ≥1.2m to walk
 no sibling kept — the move did not beat the ride (overlaps 6→6, tight 18→18). Note-only.
 
 ## The voice (qfep)
-14 of 20 cast members carry a theory-claim; 6 mute.
+20 of 20 cast members carry a theory-claim; 0 mute.
 - **VectorAddition** — F-composition — two deterministic forces combine into one deterministic result. Superposition is linearity mad
 - **VectorBasics** — Pure F-decomposition — breaking a single quantity into orthogonal components. The vector IS its components, an
 - **VectorCrossProduct** — F-perpendicularity — the cross product extracts the component of interaction that is orthogonal to both inputs
 - **VectorSubtraction** — negative_b — the negated vector rendered in parallel shows why a-b ≠ b-a; switching which is negated flips the
-- mute: grab_sphere_point, health_display, hits_reset_display, proximity_spawner, queer_cylinder_target, throw_ball
 
 ## The text vs the space
-**no walked.md** — the space stands unwritten; this note is the first text this map has.
+walked.md exists — the writing names 19/20 of the cast; dwells declared for 0.
+- **the writing's subjects are blocked in space**: VectorThrowing, catalyst_target, destructibles_test_scene, health_display, hits_reset_display, human_catapult, proximity_spawner, queer_cylinder_target, vector_drone sit in clearance violations — the text promises what the floor obstructs.
+- space without text: VectorBasics — standing in the room, absent from the walk.
 
 ## The heuristic understanding
 The violations are real but mechanical moving does not fix them — they are placement DECISIONS (which body yields?), not placement errors. This is verdict material, not tooling material.

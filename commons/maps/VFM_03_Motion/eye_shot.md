@@ -14,15 +14,15 @@ clearance violations: **0 overlaps, 0 tight** — the law wants ≥1.2m to walk 
 no sibling kept — the move did not beat the ride (overlaps 0→1, tight 0→1). Note-only.
 
 ## The voice (qfep)
-12 of 15 cast members carry a theory-claim; 3 mute.
+15 of 15 cast members carry a theory-claim; 0 mute.
 - **ForceMagnitudeDemo** — Classical F — force as deterministic law. Drag the arrow, the ball obeys. No randomness, no emergence. Pure Ne
 - **VectorForces** — DRAG_COEFFICIENT (0.8) — too high and the ball stops immediately; zero and it goes parabolic; the visible drag
 - **VectorMotion** — acceleration — it is the only thing directly driven; velocity is its running sum and position is velocity's su
 - **bouncing_ball** — Pure F — gravity pulls, floor reflects. The simplest possible physics: one force, one constraint. The bounce c
-- mute: collision_crasher, combined_forces_demo, flocking_controls
 
 ## The text vs the space
-**no walked.md** — the space stands unwritten; this note is the first text this map has.
+walked.md exists — the writing names 10/15 of the cast; dwells declared for 0.
+- space without text: example_2_5_fluid_resistance_vr, example_3_2_forces_with_arbitrary_angular_motion_vr, example_3_3_pointing_in_the_direction_of_motion_vr, exercise_1_3_solution_3_d_bouncing_ball_vr, exercise_1_5_solution_accelerate_and_decelerate_vr — standing in the room, absent from the walk.
 
 ## The heuristic understanding
 The space already walks: the bodies keep the law without being told. What carries this map is its voice, not its floor.

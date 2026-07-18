@@ -3,34 +3,35 @@
 > one pass: ride (gaze), move (place --only-improve), gate (pathfinder), voice (qfep). Field note, not a ruling.
 
 ## The ride (before)
-clearance violations: **12 overlaps, 10 tight** — the law wants ≥1.2m to walk between.
-- `[OVERLAP] library_rack:0:0#collection:physics_simulation#layout:rack_layout.json <-> forcedirected3d            gap -5.71m (centers 3.61m)`
-- `[tight  ] three_body_problem         <-> example_2_8_two_body_attraction_vr gap +1.07m (centers 2.24m)`
-- `[tight  ] three_body_problem         <-> particle_systems           gap +0.21m (centers 6.71m)`
-- `[OVERLAP] nbody_simulation           <-> particle_systems           gap -2.71m (centers 3.61m)`
-- `[OVERLAP] chaos_attractor            <-> forcedirected3d            gap -6.19m (centers 3.00m)`
-- `[tight  ] chaos_attractor            <-> particle_systems           gap +0.91m (centers 7.28m)`
-- `[OVERLAP] chaos_attractor            <-> spring_system              gap -2.50m (centers 3.00m)`
-- `[OVERLAP] forcedirected3d            <-> particle_systems           gap -4.62m (centers 10.20m)`
+clearance violations: **12 overlaps, 4 tight** — the law wants ≥1.2m to walk between.
+- `[OVERLAP] library_rack:0:0#collection:physics_simulation#layout:rack_layout.json <-> spring_system              gap -0.25m (centers 5.39m)`
+- `[OVERLAP] three_body_problem         <-> spring_system              gap -2.63m (centers 3.00m)`
+- `[tight  ] chaos_attractor            <-> spring_system              gap +0.58m (centers 6.08m)`
+- `[OVERLAP] nbody_simulation           <-> spring_system              gap -4.04m (centers 1.41m)`
+- `[tight  ] nbody_simulation           <-> forcedirected3d            gap +1.06m (centers 10.20m)`
+- `[tight  ] spring_system              <-> dark_sphere                gap +0.10m (centers 5.66m)`
+- `[tight  ] spring_system              <-> particle_systems           gap +0.27m (centers 11.40m)`
+- `[OVERLAP] spring_system              <-> forcedirected3d            gap -4.90m (centers 9.06m)`
 
 ## The move
     logged 1 entries to ada_run\placement_log.json
     summary: 1 maps processed
-      constraint improved: 1/1  mean Δ=+0.043
-      walkability improved: 0/1  mean Δ=-0.004
+      constraint improved: 0/1  mean Δ=-0.018
+      walkability improved: 1/1  mean Δ=+0.010
 
-sibling **Trial_eye_ForcesChaos** kept: overlaps 12→12, tight 10→4, pathfinder OK.
+no sibling kept — the move did not beat the ride (overlaps 12→12, tight 4→4). Note-only.
 
 ## The voice (qfep)
-11 of 13 cast members carry a theory-claim; 2 mute.
+13 of 13 cast members carry a theory-claim; 0 mute.
 - **catalyst_target** — Transformation here is discrete state change: intact, flashing, destroyed, respawned. Identity persists while 
+- **chaos_attractor** — lambda_edge: strange attractors traced live — deterministic rules whose futures diverge from any measurable pr
 - **dark_sphere** — Transformation often needs an invariant reference to be legible. The sphere stays simple so surrounding change
 - **example_2_8_two_body_attraction_vr** — gravitational_constant and initial tangential velocity — together they decide circular, elliptical, parabolic,
-- **example_2_9_n_body_attraction_vr** — body count and gravitational_constant — count gates whether the system can be reasoned about; G scales how fas
-- mute: chaos_attractor, proximity_spawner
 
 ## The text vs the space
-**no walked.md** — the space stands unwritten; this note is the first text this map has.
+walked.md exists — the writing names 11/13 of the cast; dwells declared for 0.
+- **the writing's subjects are blocked in space**: chaos_attractor, dark_sphere, forcedirected3d, library_rack, nbody_simulation, particle_systems, spring_system, three_body_problem sit in clearance violations — the text promises what the floor obstructs.
+- space without text: example_2_8_two_body_attraction_vr, example_2_9_n_body_attraction_vr — standing in the room, absent from the walk.
 
 ## The heuristic understanding
-The floor was fighting the walk — bodies inside each other's clearance. The mover found a better seating; the ride confirms it in text. The voice column above says what the room is FOR; the next writing pass should say it in the walked page.
+The violations are real but mechanical moving does not fix them — they are placement DECISIONS (which body yields?), not placement errors. This is verdict material, not tooling material.

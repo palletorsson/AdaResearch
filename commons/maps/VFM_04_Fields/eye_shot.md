@@ -19,15 +19,15 @@ clearance violations: **2 overlaps, 3 tight** — the law wants ≥1.2m to walk 
 no sibling kept — the move did not beat the ride (overlaps 2→2, tight 3→3). Note-only.
 
 ## The voice (qfep)
-9 of 11 cast members carry a theory-claim; 2 mute.
+11 of 11 cast members carry a theory-claim; 0 mute.
 - **VectorFieldFlow** — The swirl-to-radial ratio in _field_value(). It determines whether the field spirals inward, orbits, or ejects
 - **flow_field_painter** — Noise as structured randomness â€” not chaos, not order, but Î»-edge. Flow reveals hidden structure. noise_sca
 - **force_field_visualizer** — Fields as invisible structure â€” order you can't see until you probe it. The hidden F that shapes everything.
 - **force_fields** — Regional F — three zones with three different force laws. Cross a boundary and physics changes. Lambda is spat
-- mute: interactive_point_origin_force, noc_5_04_flow_field
 
 ## The text vs the space
-**no walked.md** — the space stands unwritten; this note is the first text this map has.
+walked.md exists — the writing names 11/11 of the cast; dwells declared for 0.
+- **the writing's subjects are blocked in space**: force_field_visualizer, force_fields, magnetic_simulation, vector_field, weather_vector_field sit in clearance violations — the text promises what the floor obstructs.
 
 ## The heuristic understanding
 The violations are real but mechanical moving does not fix them — they are placement DECISIONS (which body yields?), not placement errors. This is verdict material, not tooling material.
