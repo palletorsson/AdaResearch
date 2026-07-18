@@ -1,101 +1,612 @@
 {
-  "map_info": {
-	"name": "Fractal_Recursion",
-	"lookup_name": "Fractal_Recursion",
-	"title": "Recursion Calls Itself",
-	"description": "Recursion Introduction - the function that calls itself",
-	"manual_file": "res://commons/context/clipboard/tutorial_text/fractals_axioms.md",
-	"version": "1.0",
-	"format": "json",
-	"dimensions": {
-	  "width": 9,
-	  "depth": 22,
-	  "max_height": 2
-	},
-	"metadata": {
-	  "difficulty": "beginner",
-	  "category": "fractals",
-	  "estimated_time": "3-4 minutes",
-	  "learning_objectives": ["Recursion basics","Self-reference","Base case vs recursive case","Subdivision as recursion"]
-	}
+ "map_info": {
+  "name": "Fractal_Recursion",
+  "lookup_name": "Fractal_Recursion",
+  "title": "Fractal_Recursion",
+  "description": "Recursion Introduction - the function that calls itself\n\n[Placement applied promenade engine \u2014 constraint 0.707\u21920.714, walkability 0.623\u21920.698]",
+  "manual_file": "res://commons/context/clipboard/tutorial_text/fractals_axioms.md",
+  "version": "placed-promenade",
+  "format": "json",
+  "dimensions": {
+   "width": 9,
+   "depth": 22,
+   "max_height": 2
   },
-  "utility_definitions": {
-	"t": {
-	  "type": "teleporter",
-	  "name": "Next: Recursive Trees",
-	  "description": "Continue to branching structures",
-	  "properties": {
-		"action": "next_in_sequence"
-	  }
-	}
+  "metadata": {
+   "difficulty": "beginner",
+   "category": "fractals",
+   "estimated_time": "3-4 minutes",
+   "learning_objectives": [
+    "Recursion basics",
+    "Self-reference",
+    "Base case vs recursive case",
+    "Subdivision as recursion"
+   ]
   },
-  "lighting": {
-	"ambient_color": [0.4,0.4,0.5],
-	"ambient_energy": 0.6,
-	"directional_light": {
-	  "enabled": true,
-	  "direction": [-0.4,-0.7,-0.4],
-	  "color": [1,0.95,0.9],
-	  "energy": 1.2
-	}
-  },
-  "settings": {
-	"cube_size": 1,
-	"gutter": 0,
-	"show_grid": true,
-	"enable_physics": true,
-	"auto_reveal_on_entry": false,
-	"initial_tile_visibility": "hidden_except_corners",
-	"background": {
-	  "type": "sky",
-	  "color": [0.15,0.2,0.4]
-	}
-  },
-  "layers": {
-	"structure": [
-	  ["1","1","1","1","1","1","1","1","1"],
-	  ["1","1","1","1","1","1","1","1","1"],
-	  ["1","1","2","1","1","1","1","1","1"],
-	  ["1","1","2","1","1","1","1","1","1"],
-	  ["1","1","1","1","1","1","1","1","1"],
-	  ["1","1","1","2","2","2","1","1","1"],
-	  ["1","1","1","1","1","1","1","1","1"],
-	  ["0","0","1","1","1","1","1","0","1"],
-	  ["0","0","0","0","0","0","1","1","1"],
-	  ["0","0","0","0","0","0","0","0","0"],
-	  ["0","0","0","0","0","0","0","0","0"],
-	  ["0","0","0","0","0","0","0","0","0"],
-	  ["0","0","0","0","0","0","0","0","0"]
-	],
-	"utilities": [
-	  ["sp"," "," "," "," "," "," "," ","an:-90"],
-	  [" "," "," "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "," "," "],
-	  [" ","wp:180"," "," "," "," "," ","t"," "],
-	  [" "," "," "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "," "," "]
-	],
-	"interactables": [
-	  [" "," "," "," "," "," "," ","science_screen:180:1.5#mode:bars"," "],
-	  [" "," ","fibonacci_pagoda"," ",""," "," "," "," "],
-	  [" "," ","recursive_chair:0:-0.5:0.2"," "," "," "," "," ","fractal_recursion_2:-90:2"],
-	  [" "," ","recursive_table:0:-0.5:0.2"," ","dark_sphere"," "," "," ","fractal_recursion_2:-90:2"],
-	  [" "," "," "," ","example_8_3_recursion_circles_vr"," "," "," "," "],
-	  [" "," "," ","cube_subdivision","cube_subdivision","cube_subdivision"," "," "," "],
-	  [" ","recursive_boolean_cube:0:4"," "," "," "," "," "," "," "],
-	  [" "," "," ","cube_staircase"," ",""," "," "," "],
-	  [" "," "," ",""," ",""," "," "," "],
-	  [" "," "," "," "," "," "," "," "," "],
-	  [" ",""," "," ",""," "," "," "," "],
-	  [" "," "," "," "," "," "," "," "," "],
-	  [" "," ",""," "," "," "," "," "," "]
-	]
+  "eye_shot_adopted": "Trial_eye_Fractal_Recursion"
+ },
+ "utility_definitions": {
+  "t": {
+   "type": "teleporter",
+   "name": "Next: Recursive Trees",
+   "description": "Continue to branching structures",
+   "properties": {
+    "action": "next_in_sequence"
+   }
   }
+ },
+ "lighting": {
+  "ambient_color": [
+   0.4,
+   0.4,
+   0.5
+  ],
+  "ambient_energy": 0.6,
+  "directional_light": {
+   "enabled": true,
+   "direction": [
+    -0.4,
+    -0.7,
+    -0.4
+   ],
+   "color": [
+    1,
+    0.95,
+    0.9
+   ],
+   "energy": 1.2
+  }
+ },
+ "settings": {
+  "cube_size": 1,
+  "gutter": 0,
+  "show_grid": true,
+  "enable_physics": true,
+  "auto_reveal_on_entry": false,
+  "initial_tile_visibility": "hidden_except_corners",
+  "background": {
+   "type": "sky",
+   "color": [
+    0.15,
+    0.2,
+    0.4
+   ]
+  }
+ },
+ "layers": {
+  "structure": [
+   [
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1"
+   ],
+   [
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1"
+   ],
+   [
+    "1",
+    "1",
+    "2",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1"
+   ],
+   [
+    "1",
+    "1",
+    "2",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1"
+   ],
+   [
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1"
+   ],
+   [
+    "1",
+    "1",
+    "1",
+    "2",
+    "2",
+    "2",
+    "1",
+    "1",
+    "1"
+   ],
+   [
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1"
+   ],
+   [
+    "0",
+    "0",
+    "1",
+    "1",
+    "1",
+    "1",
+    "1",
+    "0",
+    "1"
+   ],
+   [
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "1",
+    "1",
+    "1"
+   ],
+   [
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0"
+   ],
+   [
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0"
+   ],
+   [
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0"
+   ],
+   [
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0",
+    "0"
+   ]
+  ],
+  "utilities": [
+   [
+    "sp",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    "an:-90"
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    "wp:180",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    "t",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ]
+  ],
+  "interactables": [
+   [
+    " ",
+    "fractal_recursion_2:-90:2",
+    " ",
+    "recursive_table:0:-0.5:0.2",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    "science_screen:180:1.5#mode:bars",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    "fibonacci_pagoda",
+    " ",
+    " ",
+    "example_8_3_recursion_circles_vr",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    "cube_subdivision",
+    " "
+   ],
+   [
+    " ",
+    "dark_sphere",
+    " ",
+    "recursive_chair:0:-0.5:0.2",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    "cube_staircase",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ],
+   [
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " ",
+    " "
+   ]
+  ]
+ }
 }
