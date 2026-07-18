@@ -47,6 +47,8 @@ def build_critical_index():
     def ent(ln):
         return idx.setdefault(ln, {"phase": None, "phase_idx": None, "crit_text": "", "role": None})
 
+    _scene_alias = {}   # script/scene stem -> {lookup_names} (see step 1)
+
     # 1) registries: per-artifact qfep_connection prefix -> phase (+ its critical prose)
     for p in glob.glob(os.path.join(ROOT, "commons", "artifacts", "registry", "*.json")):
         try:
@@ -67,6 +69,15 @@ def build_critical_index():
                 v["phase"], v["phase_idx"] = PHASES[pi], pi
             if q:
                 v["crit_text"] = (v["crit_text"] + " " + q).strip()
+            # scene-stem alias: @identity in .gd is keyed by script FILENAME,
+            # but maps speak lookup_name — when they differ (softstopscene ->
+            # fourstopsoftbody.tscn) the artifact reads as mute. Remember the
+            # scene stem so step 2 can merge the .gd claim into the lookup.
+            sc = str(e.get("scene", ""))
+            if sc:
+                stem = os.path.splitext(os.path.basename(sc))[0]
+                if stem and stem != ln:
+                    _scene_alias.setdefault(stem, set()).add(ln)
 
     # 2) @identity from .gd: the artifact's own theory claim
     for base in ("algorithms", os.path.join("commons", "artifacts")):
@@ -88,13 +99,16 @@ def build_critical_index():
                         bits.append(m.group(1).strip())
                 if bits:
                     blob = " ".join(bits)
-                    v["crit_text"] = (v["crit_text"] + " " + blob).strip()
+                    targets = [v] + [ent(a) for a in
+                                     _scene_alias.get(f[:-3], ())]
                     low = blob.lower()
-                    if v["role"] is None:
-                        if any(k in low for k in _AMBIENT_KW):
-                            v["role"] = "ambient"
-                        elif any(k in low for k in _CONTAINER_KW):
-                            v["role"] = "container"
+                    for tv in targets:
+                        tv["crit_text"] = (tv["crit_text"] + " " + blob).strip()
+                        if tv["role"] is None:
+                            if any(k in low for k in _AMBIENT_KW):
+                                tv["role"] = "ambient"
+                            elif any(k in low for k in _CONTAINER_KW):
+                                tv["role"] = "container"
 
     for t, r in _ROLE_OVERRIDE.items():          # curated truth wins
         idx.setdefault(t, {"phase": None, "phase_idx": None, "crit_text": "", "role": None})["role"] = r

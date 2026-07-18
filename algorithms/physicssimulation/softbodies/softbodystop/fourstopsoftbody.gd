@@ -1,6 +1,16 @@
 extends Node3D
 class_name FourSoftBodyController
 
+# @identity
+# essence: four identical soft bodies dropped at the same instant, each one FROZEN at a different moment of its fall (stop_times 7.5s, 11s, 12s, 12s) — a 2x2 grid of the same deformation arrested at four depths. Not four objects: one event, sampled four times. The stopped cloth keeps the exact crumple it had when its timer fired, so the room holds a sequence of sculptures that are really timestamps.
+# desire: it wants to make deformation READABLE by interrupting it. A falling soft body is a blur of becoming; stopped, it becomes a form you can walk around. It wants the player to compare the four arrests and reconstruct the fall in their head — to see that the material was never heading toward a final shape, only passing through shapes.
+# critical_parameter: stop_times — the four freeze moments. Change them and the same fall yields different sculptures; set them equal and difference collapses into repetition. The parameter IS the argument: form here is not designed, it is sampled from a process.
+# triggers: _ready spawns the 2x2 grid and arms one Timer per body; each timeout freezes its SoftBody3D mid-fall (ui timers optionally show the countdown).
+# emerges: placed in the softbodies chapter's primitive slot it becomes the chapter's first lesson standing still: the frozen crumples are what "form emerges from the material's own dynamics" looks like when you stop the dynamics to look.
+# needs: a soft body scene to instance [softbodybody.tscn, present]; per-body Timers [built in _ready]; a floor to fall toward [the map provides].
+# relationships: the still sibling of every live simulation in the sequence — jelly_cube shows deformation happening, this shows it HELD; kin to the seam's sampled-line argument (a continuous process, held at samples).
+# truth: the softbodies chapter says form is not imposed — it emerges from the material's own dynamics. This artifact adds the corollary: any FORM you can point at is just a process someone stopped. The four arrests differ, and none of them is the cloth; the cloth was the falling.
+
 # Configuration
 @export var soft_body_scene_path: String = "res://algorithms/physicssimulation/softbodies/softbodystop/softbodybody.tscn"
 @export var spacing: float = 3.0

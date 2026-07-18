@@ -14,8 +14,8 @@ clearance violations: **0 overlaps, 0 tight** — the law wants ≥1.2m to walk 
 no sibling kept — the move did not beat the ride (overlaps 0→0, tight 0→0). Note-only.
 
 ## The voice (qfep)
-0 of 1 cast members carry a theory-claim; 1 mute.
-- mute: softstopscene
+1 of 1 cast members carry a theory-claim; 0 mute.
+- **softstopscene** — stop_times — the four freeze moments. Change them and the same fall yields different sculptures; set them equa
 
 ## The text vs the space
 walked.md exists — the writing names 0/1 of the cast; dwells declared for 0.
