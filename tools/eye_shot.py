@@ -83,6 +83,27 @@ def map_cast(name):
     return sorted(cast)
 
 
+def read_walked(map_name, cast):
+    """the existing writing, IN the loop (Palle): the map's walked.md +
+    dwell declarations. Returns (exists, mentioned_cast, unmentioned_cast,
+    dwelled_count)."""
+    p = MAPS / map_name / "walked.md"
+    if not p.exists():
+        return False, [], list(cast), 0
+    text = p.read_text(encoding="utf-8", errors="replace").lower()
+    mentioned = [a for a in cast
+                 if a.lower() in text
+                 or a.lower().replace("_", " ") in text]
+    unmentioned = [a for a in cast if a not in mentioned]
+    try:
+        dw = json.loads((ROOT / "commons" / "data" / "artifact_dwell.json")
+                        .read_text(encoding="utf-8")).get("artifacts", {})
+    except Exception:
+        dw = {}
+    dwelled = sum(1 for a in cast if a in dw)
+    return True, mentioned, unmentioned, dwelled
+
+
 def make_sibling(src, dst):
     d = MAPS / dst
     if d.exists():
@@ -150,6 +171,26 @@ def shot(map_name, qidx):
         L.append(f"- **{a}** — {crit}")
     if mutes:
         L.append(f"- mute: {', '.join(mutes[:8])}")
+    walked_exists, mentioned, unmentioned, dwelled = read_walked(map_name, cast)
+    L.append("\n## The text vs the space")
+    if walked_exists:
+        viol_names = set(re.findall(r"[a-zA-Z0-9_]+", " ".join(viol_b)))
+        blocked = [a for a in mentioned if a in viol_names]
+        L.append(f"walked.md exists — the writing names {len(mentioned)}/"
+                 f"{len(cast)} of the cast; dwells declared for {dwelled}.")
+        if blocked:
+            L.append(f"- **the writing's subjects are blocked in space**: "
+                     f"{', '.join(blocked)} sit in clearance violations — "
+                     f"the text promises what the floor obstructs.")
+        if unmentioned:
+            L.append(f"- space without text: {', '.join(unmentioned[:6])} — "
+                     f"standing in the room, absent from the walk.")
+        if not blocked and not unmentioned:
+            L.append("- the text and the space cover each other — the walk "
+                     "as written is the walk as built.")
+    else:
+        L.append("**no walked.md** — the space stands unwritten; this note "
+                 "is the first text this map has.")
     L.append("\n## The heuristic understanding")
     if ov_b == 0 and ti_b <= 2:
         L.append("The space already walks: the bodies keep the law without "
@@ -164,7 +205,11 @@ def shot(map_name, qidx):
                  "them — they are placement DECISIONS (which body yields?), "
                  "not placement errors. This is verdict material, not tooling "
                  "material.")
-    note.write_text("\n".join(L) + "\n", encoding="utf-8", newline="\n")
+    body = "\n".join(L) + "\n"
+    note.write_text(body, encoding="utf-8", newline="\n")
+    # the map-dir copy: beside walked.md, where the /book compilers read
+    (MAPS / map_name / "eye_shot.md").write_text(body, encoding="utf-8",
+                                                 newline="\n")
 
     print(f"  {map_name:36s} ov {ov_b}->{ov_a if pf_ok else '-'} "
           f"ti {ti_b}->{ti_a if pf_ok else '-'} "
