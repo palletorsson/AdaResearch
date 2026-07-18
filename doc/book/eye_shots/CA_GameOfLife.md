@@ -22,7 +22,8 @@ no sibling kept — the move did not beat the ride (overlaps 0→0, tight 1→1)
 - **lab_room** — accent_color — drives the strip, lights, signage tint, and sub-line color. Matches the QFEP phase of the workb
 
 ## The text vs the space
-**no walked.md** — the space stands unwritten; this note is the first text this map has.
+walked.md exists — the writing names 5/5 of the cast; dwells declared for 0.
+- **the writing's subjects are blocked in space**: ca_columns, dark_sphere sit in clearance violations — the text promises what the floor obstructs.
 
 ## The heuristic understanding
 The space already walks: the bodies keep the law without being told. What carries this map is its voice, not its floor.

@@ -22,13 +22,15 @@ clearance violations: **8 overlaps, 2 tight** — the law wants ≥1.2m to walk 
 no sibling kept — the move did not beat the ride (overlaps 8→8, tight 2→2). Note-only.
 
 ## The voice (qfep)
-2 of 5 cast members carry a theory-claim; 3 mute.
+5 of 5 cast members carry a theory-claim; 0 mute.
+- **ca_chair_test** — f_order: the chair grown by rule — furniture as the output of a cellular process, sat-on proof that local rule
+- **cellular_automata_3d_tree** — f_order: growth as computation — a tree-form accreted by 3D CA steps, branching where the rule permits. The or
+- **crossway_ca** — f_order: automata at the crossing — lanes of cells negotiating an intersection by neighborhood rule alone; tra
 - **dark_sphere** — Transformation often needs an invariant reference to be legible. The sphere stays simple so surrounding change
-- **decaying_bridge** — decay_speed vs regrow_speed — the ratio determines whether the bridge survives your crossing Architecture that
-- mute: ca_chair_test, cellular_automata_3d_tree, crossway_ca
 
 ## The text vs the space
-**no walked.md** — the space stands unwritten; this note is the first text this map has.
+walked.md exists — the writing names 5/5 of the cast; dwells declared for 0.
+- **the writing's subjects are blocked in space**: ca_chair_test, cellular_automata_3d_tree, crossway_ca, dark_sphere, decaying_bridge sit in clearance violations — the text promises what the floor obstructs.
 
 ## The heuristic understanding
 The violations are real but mechanical moving does not fix them — they are placement DECISIONS (which body yields?), not placement errors. This is verdict material, not tooling material.

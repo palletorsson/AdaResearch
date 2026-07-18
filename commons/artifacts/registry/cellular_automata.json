@@ -327,7 +327,7 @@
   "7_8_hexagon_ca_vr": {
    "category": "unknown",
    "complexity": "beginner",
-   "description": "hex_cell(t+1) = life_rule(6_neighbors) stacked vertically \u2014 terrain from time",
+   "description": "hex_cell(t+1) = life_rule(6_neighbors) stacked vertically — terrain from time",
    "dev_themes": [
     "cellular_automata",
     "computation",
@@ -552,7 +552,7 @@
   "CellularAutomata3DStacked": {
    "category": "unknown",
    "complexity": "intermediate",
-   "description": "layer(n+1) = life_rules(layer(n)) with outward\u2192upward phase transition",
+   "description": "layer(n+1) = life_rules(layer(n)) with outward→upward phase transition",
    "dev_themes": [
     "biology",
     "cellular_automata",
@@ -667,7 +667,7 @@
   "CellularAutomata3DTree": {
    "category": "unknown",
    "complexity": "intermediate",
-   "description": "square_layer(n) \u2192 ca_prune(edge, isolation, random) \u2192 tree silhouette",
+   "description": "square_layer(n) → ca_prune(edge, isolation, random) → tree silhouette",
    "dev_themes": [
     "biology",
     "cellular_automata",
@@ -782,8 +782,8 @@
   "CrosswayCA": {
    "category": "emergence",
    "complexity": "intermediate",
-   "description": "Each row obeys a different Wolfram rule number. Where rule regimes collide at row boundaries, interference patterns emerge \u2014 moire-like zones of order in the chaos. Every 10 turns all rules re-randomize and the entire pattern language shifts. A crossroads of computational grammars where the boundaries become the most interesting places.",
-   "qfep_connection": "Critical lambda \u2014 each row is a different lambda value (rule number). The boundaries between rows are the edges of chaos, where different computational regimes interfere and produce emergent structure.",
+   "description": "Each row obeys a different Wolfram rule number. Where rule regimes collide at row boundaries, interference patterns emerge — moire-like zones of order in the chaos. Every 10 turns all rules re-randomize and the entire pattern language shifts. A crossroads of computational grammars where the boundaries become the most interesting places.",
+   "qfep_connection": "Critical lambda — each row is a different lambda value (rule number). The boundaries between rows are the edges of chaos, where different computational regimes interfere and produce emergent structure.",
    "gamwell_reference": "Cellular automata, Wolfram classification, emergence",
    "capacity": "SEE that when different rules collide, the boundaries between them produce more complexity than either rule alone",
    "interactions": [
@@ -1111,7 +1111,8 @@
     1.0,
     1,
     1.0
-   ]
+   ],
+   "qfep_connection": "f_order: the chair grown by rule — furniture as the output of a cellular process, sat-on proof that local rules can build to a human scale."
   },
   "ca_columns": {
    "category": "emergence",
@@ -1346,7 +1347,7 @@
   "ca_screen": {
    "category": "emergence",
    "complexity": "intermediate",
-   "description": "Screen display that renders live cellular-automata patterns \u2014 rule outputs visualised on a flat panel as the simulation runs.",
+   "description": "Screen display that renders live cellular-automata patterns — rule outputs visualised on a flat panel as the simulation runs.",
    "dev_themes": [
     "biology",
     "cellular_automata",
@@ -1416,7 +1417,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.064565Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "f_order: the rule made watchable — a flat panel rendering a live automaton, generations scrolling as they are computed. The chapter's television: local rules broadcasting their global consequence."
   },
   "ca_showcase": {
    "category": "emergence",
@@ -1441,7 +1443,7 @@
     ],
     "size_group": "environment"
    },
-   "qfep_connection": "Survey of CA behavior classes \u2014 each class maps to a \u03bb value. Class I (death) = \u03bb=0, Class II (static) = low \u03bb, Class IV (complex) = \u03bb\u22480.4, Class III (chaotic) = \u03bb\u21921. The full spectrum rendered.",
+   "qfep_connection": "Survey of CA behavior classes — each class maps to a λ value. Class I (death) = λ=0, Class II (static) = low λ, Class IV (complex) = λ≈0.4, Class III (chaotic) = λ→1. The full spectrum rendered.",
    "scene": "res://algorithms/cellularautomata/ca_showcase/ca_showcase.tscn",
    "tags": [
     "cellular_automata",
@@ -1633,7 +1635,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.064565Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "f_order: an automaton wrapped on a sphere — the same neighborhood rule with no edge to hide at. On a closed surface every cell's consequence eventually comes home."
   },
   "cellular_automata_1d": {
    "category": "emergence",
@@ -2107,7 +2110,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.064565Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "f_order: growth as computation — a tree-form accreted by 3D CA steps, branching where the rule permits. The organism as the rule's fossil record."
   },
   "cellular_automata_basic": {
    "category": "emergence",
@@ -2523,7 +2527,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.064565Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "f_order: automata at the crossing — lanes of cells negotiating an intersection by neighborhood rule alone; traffic with no traffic authority."
   },
   "decaying_bridge": {
    "category": "emergence",
@@ -2740,7 +2745,7 @@
     "cellularautomata"
    ],
    "name": "Disease Spread CA",
-   "qfep_connection": "SIR epidemic dynamics as entropy propagation \u2014 infection spreads E(S) through a network, recovery restores local F. The transmission rate IS \u03bb: how fast disorder propagates through structure.",
+   "qfep_connection": "SIR epidemic dynamics as entropy propagation — infection spreads E(S) through a network, recovery restores local F. The transmission rate IS λ: how fast disorder propagates through structure.",
    "scene": "res://algorithms/cellularautomata/ca_showcase/disease_spread_ca.tscn",
    "sequence": "cellularautomata",
    "size_group": "xlarge",
@@ -2945,7 +2950,7 @@
     ],
     "size_group": "world_scale"
    },
-   "qfep_connection": "Wolfram's 256 rules as a complete \u03bb-spectrum. Rule 30 produces chaos from order, Rule 110 is Turing-complete at the edge of chaos \u2014 the simplest system that can compute anything.",
+   "qfep_connection": "Wolfram's 256 rules as a complete λ-spectrum. Rule 30 produces chaos from order, Rule 110 is Turing-complete at the edge of chaos — the simplest system that can compute anything.",
    "scene": "res://algorithms/cellularautomata/noc_ch07/7_1_elementary_ca_vr.tscn",
    "tags": [
     "cellular_automata",
@@ -3150,7 +3155,7 @@
    "map_ready": true,
    "map_sequences": [],
    "name": "Game of Life VR",
-   "qfep_connection": "Emergent gliders and oscillators are persistent low-F structures surviving in high-E(S) space. Life exists at Langton's \u03bb \u2248 0.27 \u2014 just below the edge of chaos, where complex computation emerges from two rules.",
+   "qfep_connection": "Emergent gliders and oscillators are persistent low-F structures surviving in high-E(S) space. Life exists at Langton's λ ≈ 0.27 — just below the edge of chaos, where complex computation emerges from two rules.",
    "scene": "res://algorithms/cellularautomata/noc_ch07/7_2_game_of_life_vr.tscn",
    "tags": [
     "cellular_automata",
@@ -3344,7 +3349,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.065071Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "f_order: the same game on six neighbors — a hexagonal lattice showing that 'neighborhood' is a choice, and the choice changes the worlds that can emerge."
   },
   "hexagon_cave_vr": {
    "category": "emergence",
@@ -3473,7 +3479,7 @@
     ],
     "size_group": "world_scale"
    },
-   "qfep_connection": "Discrete particles on a lattice reproducing continuous fluid dynamics \u2014 microscopic F (collision rules) generates macroscopic E(S) (turbulence, flow). The Navier-Stokes equations emerge from local interactions.",
+   "qfep_connection": "Discrete particles on a lattice reproducing continuous fluid dynamics — microscopic F (collision rules) generates macroscopic E(S) (turbulence, flow). The Navier-Stokes equations emerge from local interactions.",
    "scene": "res://algorithms/cellularautomata/lattice_gas_automata/lattice_gas_automata.tscn",
    "sequence": "physicssimulation",
    "tags": [
@@ -3524,7 +3530,7 @@
   "lenia_continuous": {
    "category": "emergence",
    "complexity": "advanced",
-   "description": "Continuous cellular automaton (Lenia) \u2014 smooth lifelike organisms emerge from a ring-shaped kernel, bell-curve growth function, and continuous [0,1] states. The 'wow' artifact for cellular automata: watch amorphous blobs self-organize into gliding, pulsing creatures on a glowing floor display.",
+   "description": "Continuous cellular automaton (Lenia) — smooth lifelike organisms emerge from a ring-shaped kernel, bell-curve growth function, and continuous [0,1] states. The 'wow' artifact for cellular automata: watch amorphous blobs self-organize into gliding, pulsing creatures on a glowing floor display.",
    "dev_themes": [
     "art",
     "biology",
@@ -3538,7 +3544,7 @@
     "cellularautomata"
    ],
    "name": "Lenia Continuous",
-   "qfep_connection": "Continuous CA with smooth \u03bb-variation. Creatures self-maintain through continuous F-minimization \u2014 they persist by predicting their own next state. Lenia lives at the edge of chaos in continuous space.",
+   "qfep_connection": "Continuous CA with smooth λ-variation. Creatures self-maintain through continuous F-minimization — they persist by predicting their own next state. Lenia lives at the edge of chaos in continuous space.",
    "scene": "res://commons/artifacts/lenia_continuous/lenia_continuous.tscn",
    "sequence": "cellularautomata",
    "tags": [
@@ -3726,7 +3732,8 @@
     ],
     "max_dimension_m": 0.0,
     "measured_at": "2026-04-29T07:09:56.762620Z"
-   }
+   },
+   "qfep_connection": "f_order: one-dimensional automata drawn as line networks — the space-time diagram standing up: each generation a stratum, history as geology."
   },
   "mirrored_cellular_automata": {
    "category": "emergence",
@@ -3921,7 +3928,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.065071Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "relation: the slime mold's answer — a network grown by local reinforcement, efficiency without an engineer. The biological cousin of every rule in the room."
   },
   "percolation_ca": {
    "category": "emergence",
@@ -4358,7 +4366,7 @@
     ],
     "size_group": "world_scale"
    },
-   "qfep_connection": "Rule 30: deterministic chaos (high \u03bb, unpredictable from initial conditions). Rule 110: Turing-complete at \u03bb\u22480.4, the exact edge where F-minimization and E(S)-generation balance.",
+   "qfep_connection": "Rule 30: deterministic chaos (high λ, unpredictable from initial conditions). Rule 110: Turing-complete at λ≈0.4, the exact edge where F-minimization and E(S)-generation balance.",
    "scene": "res://algorithms/cellularautomata/rule_30_110/rule_30_110.tscn",
    "sequence": "proceduralgeneration_all",
    "tags": [
@@ -4543,7 +4551,8 @@
     ],
     "max_dimension_m": 0.0,
     "measured_at": "2026-04-29T07:09:56.762620Z"
-   }
+   },
+   "qfep_connection": "lambda_edge: Rule 30 and Rule 110 under gravity — chaos and Turing-completeness made to fall. The two most famous rows of cells in mathematics, given weight."
   },
   "self_organization_ca": {
    "category": "emergence",
@@ -4566,7 +4575,7 @@
     "cellularautomata"
    ],
    "name": "Self Organization CA",
-   "qfep_connection": "Self-organization IS F-minimization made visible \u2014 local interactions spontaneously produce global order. The system finds its own low-F configuration without external instruction.",
+   "qfep_connection": "Self-organization IS F-minimization made visible — local interactions spontaneously produce global order. The system finds its own low-F configuration without external instruction.",
    "scene": "res://algorithms/cellularautomata/ca_showcase/self_organization_ca.tscn",
    "sequence": "cellularautomata",
    "size_group": "xlarge",
@@ -4683,7 +4692,7 @@
     ],
     "size_group": "compact"
    },
-   "qfep_connection": "Fractal self-similarity as infinite F-compression \u2014 the same pattern at every scale. Sierpinski's triangle emerges from Rule 90 (a CA), showing how recursive structure achieves maximum order with minimum description length.",
+   "qfep_connection": "Fractal self-similarity as infinite F-compression — the same pattern at every scale. Sierpinski's triangle emerges from Rule 90 (a CA), showing how recursive structure achieves maximum order with minimum description length.",
    "scene": "res://algorithms/cellularautomata/sierpinski_pyramid/SierpinskiPyramid.tscn",
    "sequence": "cellularautomata",
    "size_group": "compact",
@@ -4771,7 +4780,7 @@
   "fold_theatre_runner": {
    "category": "emergence",
    "complexity": "advanced",
-   "description": "F-edge first cycle. Substrate runner subclass with all four channels enabled \u2014 visibility cycles rule_30 / sierpinski / menger_sponge (the fold vocabulary), glyph runs subdivide_by_attention, part tags via flower_grammar, color-by-role paints concentric flower anatomy. PATH_GUARANTEE keeps spawn-to-teleporter walkable across every visibility pattern. Used by Fold_Theatre in qfeplaboratory.",
+   "description": "F-edge first cycle. Substrate runner subclass with all four channels enabled — visibility cycles rule_30 / sierpinski / menger_sponge (the fold vocabulary), glyph runs subdivide_by_attention, part tags via flower_grammar, color-by-role paints concentric flower anatomy. PATH_GUARANTEE keeps spawn-to-teleporter walkable across every visibility pattern. Used by Fold_Theatre in qfeplaboratory.",
    "dev_themes": [
     "qfep",
     "substrate",
@@ -4829,7 +4838,7 @@
   "grid_substrate_runner": {
    "category": "emergence",
    "complexity": "beginner",
-   "description": "Integrated substrate component \u2014 single-cell artifact that mounts visibility (and optionally colour) mutators on the MAP'S existing GridMultiMesh. Same integration shape as gridcolorizer: doesn't build its own multimesh, finds the floor that's already there. Cycles Wolfram CA, fractal, and BFS-frontier expressions on the actual cubes the player walks. Floor-plan SPAWN_LARGEST keeps reachability honest.",
+   "description": "Integrated substrate component — single-cell artifact that mounts visibility (and optionally colour) mutators on the MAP'S existing GridMultiMesh. Same integration shape as gridcolorizer: doesn't build its own multimesh, finds the floor that's already there. Cycles Wolfram CA, fractal, and BFS-frontier expressions on the actual cubes the player walks. Floor-plan SPAWN_LARGEST keeps reachability honest.",
    "dev_themes": [
     "cellular_automata",
     "substrate",
@@ -4890,7 +4899,8 @@
     ],
     "max_dimension_m": 0.0,
     "measured_at": "2026-04-29T07:09:56.762620Z"
-   }
+   },
+   "qfep_connection": "the substrate mount — a single cell that plays rule-patterns through the map's own floor grid; infrastructure that lets the room itself be the automaton, never dominant as an object."
   },
   "structure_growth": {
    "category": "emergence",
@@ -5003,7 +5013,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.065071Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "f_order: architecture accreted cell by cell — a 3D growth simulation where structure is not drawn but reached; the blueprint is the rule, the building is its runtime."
   },
   "volumetric_fog_ca": {
    "category": "emergence",
@@ -5106,7 +5117,7 @@
   "wireworld_circuit": {
    "category": "emergence",
    "complexity": "advanced",
-   "description": "Wireworld cellular automaton \u2014 4-state CA for logic gates and signal routing. Displays an OR gate with clock inputs on a floor display, demonstrating how simple state-transition rules produce computational behavior.",
+   "description": "Wireworld cellular automaton — 4-state CA for logic gates and signal routing. Displays an OR gate with clock inputs on a floor display, demonstrating how simple state-transition rules produce computational behavior.",
    "dev_themes": [
     "biology",
     "cellular_automata",
@@ -5120,7 +5131,7 @@
     "cellularautomata"
    ],
    "name": "Wireworld Circuit",
-   "qfep_connection": "Computation as signal propagation through constraint \u2014 pure F-minimization in a cellular medium. Electrons flow through wire topology; the circuit IS the F-model that channels E(S).",
+   "qfep_connection": "Computation as signal propagation through constraint — pure F-minimization in a cellular medium. Electrons flow through wire topology; the circuit IS the F-model that channels E(S).",
    "scene": "res://commons/artifacts/wireworld_circuit/wireworld_circuit.tscn",
    "sequence": "cellularautomata",
    "tags": [
@@ -5215,7 +5226,7 @@
   "ca_conway_city": {
    "lookup_name": "ca_conway_city",
    "name": "Conway Emergent City",
-   "description": "Walkable modernist skyline emerging from Conway's Game of Life. B=[3], S=[2,3] run for 10 steps; surviving cells become cubes, height driven by live-neighbor count. No urban planner \u2014 the rule is the architect. Change the rule string and the city becomes a different kind of thing.",
+   "description": "Walkable modernist skyline emerging from Conway's Game of Life. B=[3], S=[2,3] run for 10 steps; surviving cells become cubes, height driven by live-neighbor count. No urban planner — the rule is the architect. Change the rule string and the city becomes a different kind of thing.",
    "scene": "res://commons/artifacts/ca_conway_city/ca_conway_city.tscn",
    "category": "cellular_automata",
    "include_in_map_data": true,

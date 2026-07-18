@@ -16,14 +16,15 @@ clearance violations: **0 overlaps, 2 tight** — the law wants ≥1.2m to walk 
 no sibling kept — the move did not beat the ride (overlaps 0→0, tight 2→2). Note-only.
 
 ## The voice (qfep)
-3 of 4 cast members carry a theory-claim; 1 mute.
+4 of 4 cast members carry a theory-claim; 0 mute.
+- **ca_screen** — f_order: the rule made watchable — a flat panel rendering a live automaton, generations scrolling as they are 
 - **disease_spread_ca** — SIR epidemic dynamics as entropy propagation — infection spreads E(S) through a network, recovery restores loc
 - **self_organization_ca** — Self-organization IS F-minimization made visible — local interactions spontaneously produce global order. The 
 - **volumetric_fog_ca** — smooth_factor and birth/survival thresholds (B5/S4) — control whether fog dissipates or aggregates Fog is a ce
-- mute: ca_screen
 
 ## The text vs the space
-**no walked.md** — the space stands unwritten; this note is the first text this map has.
+walked.md exists — the writing names 4/4 of the cast; dwells declared for 0.
+- **the writing's subjects are blocked in space**: ca_screen, self_organization_ca, volumetric_fog_ca sit in clearance violations — the text promises what the floor obstructs.
 
 ## The heuristic understanding
 The space already walks: the bodies keep the law without being told. What carries this map is its voice, not its floor.
