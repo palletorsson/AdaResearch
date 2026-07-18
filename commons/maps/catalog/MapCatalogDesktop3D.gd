@@ -203,10 +203,15 @@ func _mapsim_schedule_stage() -> void:
 func _mapsim_stage_artifacts() -> void:
 	if not (_grid_system and is_instance_valid(_grid_system)):
 		return
-	var host := get_node_or_null("MapSimStaging")
-	if host:
-		host.queue_free()
-	host = Node3D.new()
+	# Free EVERY old staging host by name PREFIX: queue_free is deferred, so
+	# the dying host still owns the name this frame and the fresh add_child
+	# gets auto-renamed — an exact-name lookup then never finds it again and
+	# every map switch leaks one full set of staged props (the "previous map
+	# content stays" bug). Prefix matching catches the renamed survivors too.
+	for c in get_children():
+		if str(c.name).begins_with("MapSimStaging") or str(c.name).begins_with("@MapSimStaging"):
+			c.queue_free()
+	var host := Node3D.new()
 	host.name = "MapSimStaging"
 	add_child(host)
 	var lookup_cb := Callable(self, "_lookup_artifact_info")
@@ -296,6 +301,11 @@ func _mapsim_apply_control(msg: Dictionary) -> void:
 	# scratch map dir and sends its name; a real map is sent by its own name.
 	var m := str(msg.get("map", ""))
 	if m != "":
+		# purge the previous map's staging NOW — not 1.3s later when the new
+		# stage pass runs (and never, when staging is off)
+		for c in get_children():
+			if str(c.name).begins_with("MapSimStaging") or str(c.name).begins_with("@MapSimStaging"):
+				c.queue_free()
 		load_map_fresh(m)
 		_mapsim_current_map = m
 		_mapsim_lift_grid()
@@ -307,8 +317,9 @@ func _mapsim_apply_control(msg: Dictionary) -> void:
 		if _mapsim_staged:
 			_mapsim_schedule_stage()
 		else:
-			var host := get_node_or_null("MapSimStaging")
-			if host: host.queue_free()
+			for c in get_children():
+				if str(c.name).begins_with("MapSimStaging") or str(c.name).begins_with("@MapSimStaging"):
+					c.queue_free()
 			for node in _collect_all_artifacts():
 				if node is Node3D: (node as Node3D).visible = true
 	var wm := str(msg.get("window", ""))
