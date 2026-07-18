@@ -1,0 +1,173 @@
+{
+ "seq": "isosurfaces",
+ "phase": "F_order",
+ "truth": "Define a field, extract a surface. The boundary between inside and outside becomes geometry.",
+ "current_n": 12,
+ "tight_n": 8,
+ "v1_tutorial": [
+  {
+   "slot": "threshold",
+   "map": "ISO_Introduction",
+   "hero": "the",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 2,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "primitive",
+   "map": "ISO_LookupTable",
+   "hero": "mc_cave",
+   "hero_prov": "measured (dig load-bearing)",
+   "slot_prov": "heuristic (position)",
+   "lb": true,
+   "walked": false,
+   "cast_n": 2,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "walk",
+   "map": "ISO_ShapesGallery",
+   "hero": "prove",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 3,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "walk2",
+   "map": "ISO_Sculpting",
+   "hero": "build",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 2,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "turn",
+   "map": "ISO_FlatTerrain",
+   "hero": "resolution",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 3,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "critical",
+   "map": "ISO_Caves",
+   "hero": "mc_inside_cave",
+   "hero_prov": "heuristic (cast default)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 3,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "world",
+   "map": "ISO_CaveGeneration",
+   "hero": "marchingcave",
+   "hero_prov": "heuristic (cast default)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 2,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "close",
+   "map": "ISO_ImplicitModeling",
+   "hero": "implicit_surface_modeling",
+   "hero_prov": "heuristic (cast default)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 1,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "seed",
+   "map": null,
+   "gap": true,
+   "prov": "declared gap — no existing map holds this slot"
+  }
+ ],
+ "v2_anti": [
+  {
+   "kind": "seam",
+   "slot": "critical",
+   "host_map": "ISO_Caves",
+   "anti": "marching_squares",
+   "why": "marching cubes — lower the resolution — the blob turns to lego",
+   "prov": "register (seam catalog) — placement ghost"
+  }
+ ],
+ "v3_laws": {
+  "slot-grammar": {
+   "order": [
+    "ISO_Introduction",
+    "ISO_LookupTable",
+    "ISO_ShapesGallery",
+    "ISO_Sculpting",
+    "ISO_FlatTerrain",
+    "ISO_Caves",
+    "ISO_CaveGeneration",
+    "ISO_ImplicitModeling"
+   ],
+   "law": "the tutorial arc itself (V1 identity)",
+   "tau_vs_tutorial": 1.0
+  },
+  "footprint-ascending": {
+   "order": [
+    "ISO_Introduction",
+    "ISO_LookupTable",
+    "ISO_ShapesGallery",
+    "ISO_Sculpting",
+    "ISO_FlatTerrain",
+    "ISO_Caves",
+    "ISO_CaveGeneration",
+    "ISO_ImplicitModeling"
+   ],
+   "law": "small meets you first — the gaze law's cousin",
+   "tau_vs_tutorial": 1.0
+  },
+  "density-rising": {
+   "order": [
+    "ISO_ImplicitModeling",
+    "ISO_Introduction",
+    "ISO_LookupTable",
+    "ISO_Sculpting",
+    "ISO_CaveGeneration",
+    "ISO_ShapesGallery",
+    "ISO_FlatTerrain",
+    "ISO_Caves"
+   ],
+   "law": "sparse -> dense; the world thickens",
+   "tau_vs_tutorial": 0.21
+  },
+  "truth-earned": {
+   "order": [
+    "ISO_Introduction",
+    "ISO_ShapesGallery",
+    "ISO_Sculpting",
+    "ISO_FlatTerrain",
+    "ISO_Caves",
+    "ISO_CaveGeneration",
+    "ISO_ImplicitModeling",
+    "ISO_LookupTable"
+   ],
+   "law": "load-bearing heroes arrive late — the walk earns them",
+   "tau_vs_tutorial": 0.57
+  }
+ },
+ "dig_counter_pool": [],
+ "law_note": "P-9/P-10 + L-021: every value proposes; Palle rules"
+}

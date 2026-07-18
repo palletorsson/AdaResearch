@@ -3,7 +3,7 @@
  "phase": "oscillation",
  "truth": "Direction + magnitude = vector. F = ma. Acceleration is the only thing you feel. Position and velocity are states; force is what changes them.",
  "current_n": 30,
- "tight_n": 8,
+ "tight_n": 9,
  "v1_tutorial": [
   {
    "slot": "threshold",
@@ -18,13 +18,13 @@
   },
   {
    "slot": "primitive",
-   "map": "VectorFoundations",
-   "hero": "",
-   "hero_prov": "none",
+   "map": "Console_Test",
+   "hero": "cantor_diagonal_workbench",
+   "hero_prov": "heuristic (cast default)",
    "slot_prov": "heuristic (position)",
    "lb": false,
    "walked": false,
-   "cast_n": 0,
+   "cast_n": 6,
    "prov": "ghost (slot-fill from unused pool)"
   },
   {
@@ -51,28 +51,39 @@
   },
   {
    "slot": "turn",
-   "map": "Reformed_Instruments",
-   "hero": "ca_rules_workbench",
-   "hero_prov": "measured (dig load-bearing)",
+   "map": "VFM_03_Motion",
+   "hero": "ForceMagnitudeDemo",
+   "hero_prov": "heuristic (cast default)",
    "slot_prov": "heuristic (position)",
-   "lb": true,
+   "lb": false,
    "walked": false,
-   "cast_n": 6,
+   "cast_n": 15,
    "prov": "ghost (slot-fill from unused pool)"
   },
   {
    "slot": "critical",
-   "map": "Void_Crossing",
-   "hero": "bounded",
+   "map": "ForcesFoundations",
+   "hero": "a",
    "hero_prov": "register (heroes.json)",
    "slot_prov": "heuristic (position)",
    "lb": false,
    "walked": false,
-   "cast_n": 3,
+   "cast_n": 10,
    "prov": "ghost (slot-fill from unused pool)"
   },
   {
    "slot": "world",
+   "map": "VFM_04_Fields",
+   "hero": "VectorFieldFlow",
+   "hero_prov": "heuristic (cast default)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 11,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "close",
    "map": "ForcesArena",
    "hero": "VectorAddition",
    "hero_prov": "heuristic (cast default)",
@@ -80,72 +91,48 @@
    "lb": false,
    "walked": false,
    "cast_n": 20,
-   "prov": "ghost (slot-fill from unused pool)"
-  },
-  {
-   "slot": "close",
-   "map": null,
-   "gap": true,
-   "prov": "declared gap — no existing map holds this slot"
+   "prov": "heuristic (provenance-ranked pick)"
   },
   {
    "slot": "seed",
    "map": "Chamber_Forces",
    "hero": "becoming_catalyst",
    "hero_prov": "heuristic (cast default)",
-   "slot_prov": "heuristic (name)",
+   "slot_prov": "register (chamber convention)",
    "lb": false,
    "walked": false,
    "cast_n": 4,
-   "prov": "heuristic (provenance-ranked pick)"
+   "prov": "register — Chamber_* closes the sequence"
   }
  ],
  "v2_anti": [
   {
    "slot": "turn",
-   "host_map": "Reformed_Instruments",
-   "anti": "tangent_slope_workbench",
+   "host_map": "VFM_03_Motion",
+   "anti": "ca_rules_workbench ⟷ tangent_slope_workbench",
    "why": "opposed on continuous/discrete (walked×walked)",
-   "prov": "ghost — counter-pair sleeping in dig (L-021)"
+   "prov": "ghost — top sleeping counter-pair (L-021)",
+   "kind": "counter-pair"
   },
   {
-   "slot": "turn",
-   "host_map": "Reformed_Instruments",
-   "anti": "cantor_diagonal_workbench",
-   "why": "opposed on determinism/chance (walked×walked)",
-   "prov": "ghost — counter-pair sleeping in dig (L-021)"
-  },
-  {
-   "slot": "turn",
-   "host_map": "Reformed_Instruments",
-   "anti": "riemann_sum_workbench",
-   "why": "opposed on continuous/discrete (needs promotion)",
-   "prov": "ghost — counter-pair sleeping in dig (L-021)"
-  },
-  {
-   "slot": "turn",
-   "host_map": "Reformed_Instruments",
-   "anti": "flow_field_painter",
-   "why": "opposed on determinism/chance (needs promotion)",
-   "prov": "ghost — counter-pair sleeping in dig (L-021)"
-  },
-  {
-   "slot": "turn",
-   "host_map": "Reformed_Instruments",
-   "anti": "HingeCrank",
-   "why": "opposed on build/remove, continuous/discrete (needs promotion)",
-   "prov": "ghost — counter-pair sleeping in dig (L-021)"
+   "kind": "seam",
+   "slot": "critical",
+   "host_map": "ForcesFoundations",
+   "anti": "euler_drift",
+   "why": "the step — stiffen a spring and it explodes; a fast ball tunnels the wall",
+   "prov": "register (seam catalog) — placement ghost"
   }
  ],
  "v3_laws": {
   "slot-grammar": {
    "order": [
     "Sky_Climb",
-    "VectorFoundations",
+    "Console_Test",
     "ForcesChaos",
     "Force_Preview",
-    "Reformed_Instruments",
-    "Void_Crossing",
+    "VFM_03_Motion",
+    "ForcesFoundations",
+    "VFM_04_Fields",
     "ForcesArena",
     "Chamber_Forces"
    ],
@@ -155,44 +142,47 @@
   "footprint-ascending": {
    "order": [
     "Chamber_Forces",
+    "VFM_03_Motion",
     "Sky_Climb",
-    "VectorFoundations",
     "ForcesChaos",
     "Force_Preview",
-    "Void_Crossing",
+    "ForcesFoundations",
     "ForcesArena",
-    "Reformed_Instruments"
+    "Console_Test",
+    "VFM_04_Fields"
    ],
    "law": "small meets you first — the gaze law's cousin",
-   "tau_vs_tutorial": 0.36
+   "tau_vs_tutorial": 0.06
   },
   "density-rising": {
    "order": [
-    "VectorFoundations",
-    "Void_Crossing",
     "Chamber_Forces",
     "Sky_Climb",
-    "Reformed_Instruments",
+    "Console_Test",
+    "ForcesFoundations",
+    "VFM_04_Fields",
     "Force_Preview",
     "ForcesChaos",
+    "VFM_03_Motion",
     "ForcesArena"
    ],
    "law": "sparse -> dense; the world thickens",
-   "tau_vs_tutorial": 0.07
+   "tau_vs_tutorial": 0.17
   },
   "truth-earned": {
    "order": [
     "Sky_Climb",
-    "VectorFoundations",
+    "Console_Test",
     "ForcesChaos",
     "Force_Preview",
-    "Void_Crossing",
+    "VFM_03_Motion",
+    "ForcesFoundations",
+    "VFM_04_Fields",
     "ForcesArena",
-    "Chamber_Forces",
-    "Reformed_Instruments"
+    "Chamber_Forces"
    ],
    "law": "load-bearing heroes arrive late — the walk earns them",
-   "tau_vs_tutorial": 0.79
+   "tau_vs_tutorial": 1.0
   }
  },
  "dig_counter_pool": [

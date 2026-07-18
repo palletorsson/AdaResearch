@@ -1,0 +1,184 @@
+{
+ "seq": "transformation",
+ "phase": "F_order",
+ "truth": "Identity preserved under transformation. What stays the same when everything changes? Invariants define structure; transformations reveal what matters.",
+ "current_n": 8,
+ "tight_n": 8,
+ "v1_tutorial": [
+  {
+   "slot": "threshold",
+   "map": "Trans_Introduction",
+   "hero": "transform_composition",
+   "hero_prov": "measured (dig load-bearing)",
+   "slot_prov": "register (look script)",
+   "lb": true,
+   "walked": true,
+   "cast_n": 7,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "primitive",
+   "map": "Trans_Translation",
+   "hero": "transform_composition_workbench",
+   "hero_prov": "measured (dig load-bearing)",
+   "slot_prov": "register (look script)",
+   "lb": true,
+   "walked": true,
+   "cast_n": 8,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "walk",
+   "map": "Trans_AxisDecomposition",
+   "hero": "translate",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "register (look script)",
+   "lb": false,
+   "walked": true,
+   "cast_n": 8,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "walk2",
+   "map": "Trans_Rotation",
+   "hero": "arrive",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "register (look script)",
+   "lb": false,
+   "walked": true,
+   "cast_n": 7,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "turn",
+   "map": "Trans_RotationSpectacle",
+   "hero": "the",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "register (look script)",
+   "lb": false,
+   "walked": true,
+   "cast_n": 5,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "critical",
+   "map": "Trans_Scale",
+   "hero": "arrive",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "register (look script)",
+   "lb": false,
+   "walked": true,
+   "cast_n": 7,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "world",
+   "map": "Trans_Pit",
+   "hero": "becoming_catalyst",
+   "hero_prov": "ruled (R-030)",
+   "slot_prov": "ruled (R-030)",
+   "lb": false,
+   "walked": true,
+   "cast_n": 2,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "close",
+   "map": null,
+   "gap": true,
+   "prov": "declared gap — no existing map holds this slot"
+  },
+  {
+   "slot": "seed",
+   "map": "Chamber_Transformation",
+   "hero": "becoming_catalyst",
+   "hero_prov": "heuristic (cast default)",
+   "slot_prov": "register (chamber convention)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 4,
+   "prov": "register — Chamber_* closes the sequence"
+  }
+ ],
+ "v2_anti": [
+  {
+   "slot": "turn",
+   "host_map": "Trans_RotationSpectacle",
+   "anti": "rotation_gimbal ⟷ transform_composition_workbench",
+   "why": "opposed on order/entropy (walked×walked)",
+   "prov": "ghost — top sleeping counter-pair (L-021)",
+   "kind": "counter-pair"
+  },
+  {
+   "kind": "seam",
+   "slot": "critical",
+   "host_map": "Trans_Scale",
+   "anti": "stepped_transform",
+   "why": "the stepped transform — reach for the angle between two steps",
+   "prov": "register (seam catalog) — placement ghost"
+  }
+ ],
+ "v3_laws": {
+  "slot-grammar": {
+   "order": [
+    "Trans_Introduction",
+    "Trans_Translation",
+    "Trans_AxisDecomposition",
+    "Trans_Rotation",
+    "Trans_RotationSpectacle",
+    "Trans_Scale",
+    "Trans_Pit",
+    "Chamber_Transformation"
+   ],
+   "law": "the tutorial arc itself (V1 identity)",
+   "tau_vs_tutorial": 1.0
+  },
+  "footprint-ascending": {
+   "order": [
+    "Trans_Pit",
+    "Chamber_Transformation",
+    "Trans_Introduction",
+    "Trans_AxisDecomposition",
+    "Trans_Rotation",
+    "Trans_RotationSpectacle",
+    "Trans_Scale",
+    "Trans_Translation"
+   ],
+   "law": "small meets you first — the gaze law's cousin",
+   "tau_vs_tutorial": -0.14
+  },
+  "density-rising": {
+   "order": [
+    "Trans_Pit",
+    "Chamber_Transformation",
+    "Trans_RotationSpectacle",
+    "Trans_Introduction",
+    "Trans_Rotation",
+    "Trans_Scale",
+    "Trans_Translation",
+    "Trans_AxisDecomposition"
+   ],
+   "law": "sparse -> dense; the world thickens",
+   "tau_vs_tutorial": -0.43
+  },
+  "truth-earned": {
+   "order": [
+    "Trans_AxisDecomposition",
+    "Trans_Rotation",
+    "Trans_RotationSpectacle",
+    "Trans_Scale",
+    "Trans_Pit",
+    "Chamber_Transformation",
+    "Trans_Introduction",
+    "Trans_Translation"
+   ],
+   "law": "load-bearing heroes arrive late — the walk earns them",
+   "tau_vs_tutorial": 0.14
+  }
+ },
+ "dig_counter_pool": [
+  "rotation_gimbal",
+  "clipboard"
+ ],
+ "law_note": "P-9/P-10 + L-021: every value proposes; Palle rules"
+}

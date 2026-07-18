@@ -1,0 +1,155 @@
+{
+ "seq": "symmetry",
+ "phase": "F_order",
+ "truth": "A pattern is not a picture — it is a rule performed. There are exactly seventeen ways a flat pattern can repeat: the one census in this book that CLOSES. The Alhambra's artisans exhausted it centuries before group theory existed to count it.",
+ "current_n": 6,
+ "tight_n": 6,
+ "v1_tutorial": [
+  {
+   "slot": "threshold",
+   "map": "Symmetry_Motif",
+   "hero": "the",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": true,
+   "cast_n": 4,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "primitive",
+   "map": "Symmetry_Translation",
+   "hero": "the",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": true,
+   "cast_n": 4,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "walk",
+   "map": "Symmetry_Mirror_Rotor",
+   "hero": "kaleidoscope",
+   "hero_prov": "measured (dig load-bearing)",
+   "slot_prov": "heuristic (position)",
+   "lb": true,
+   "walked": true,
+   "cast_n": 4,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "walk2",
+   "map": "Symmetry_Group",
+   "hero": "pattern_maker_station",
+   "hero_prov": "measured (dig load-bearing)",
+   "slot_prov": "heuristic (position)",
+   "lb": true,
+   "walked": true,
+   "cast_n": 4,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "turn",
+   "map": "Symmetry_Glide",
+   "hero": "the",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": true,
+   "cast_n": 4,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "critical",
+   "map": "Symmetry_Seventeen",
+   "hero": "the",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": true,
+   "cast_n": 6,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "world",
+   "map": null,
+   "gap": true,
+   "prov": "declared gap — no existing map holds this slot"
+  },
+  {
+   "slot": "close",
+   "map": null,
+   "gap": true,
+   "prov": "declared gap — no existing map holds this slot"
+  },
+  {
+   "slot": "seed",
+   "map": null,
+   "gap": true,
+   "prov": "declared gap — no existing map holds this slot"
+  }
+ ],
+ "v2_anti": [
+  {
+   "kind": "seam",
+   "slot": "critical",
+   "host_map": "Symmetry_Seventeen",
+   "anti": "wallpaper_cage",
+   "why": "finite symmetry — try to make a pattern outside the 17 rooms",
+   "prov": "register (seam catalog) — placement ghost"
+  }
+ ],
+ "v3_laws": {
+  "slot-grammar": {
+   "order": [
+    "Symmetry_Motif",
+    "Symmetry_Translation",
+    "Symmetry_Mirror_Rotor",
+    "Symmetry_Group",
+    "Symmetry_Glide",
+    "Symmetry_Seventeen"
+   ],
+   "law": "the tutorial arc itself (V1 identity)",
+   "tau_vs_tutorial": 1.0
+  },
+  "footprint-ascending": {
+   "order": [
+    "Symmetry_Motif",
+    "Symmetry_Translation",
+    "Symmetry_Mirror_Rotor",
+    "Symmetry_Glide",
+    "Symmetry_Seventeen",
+    "Symmetry_Group"
+   ],
+   "law": "small meets you first — the gaze law's cousin",
+   "tau_vs_tutorial": 0.73
+  },
+  "density-rising": {
+   "order": [
+    "Symmetry_Motif",
+    "Symmetry_Translation",
+    "Symmetry_Mirror_Rotor",
+    "Symmetry_Group",
+    "Symmetry_Glide",
+    "Symmetry_Seventeen"
+   ],
+   "law": "sparse -> dense; the world thickens",
+   "tau_vs_tutorial": 1.0
+  },
+  "truth-earned": {
+   "order": [
+    "Symmetry_Motif",
+    "Symmetry_Translation",
+    "Symmetry_Glide",
+    "Symmetry_Seventeen",
+    "Symmetry_Mirror_Rotor",
+    "Symmetry_Group"
+   ],
+   "law": "load-bearing heroes arrive late — the walk earns them",
+   "tau_vs_tutorial": 0.47
+  }
+ },
+ "dig_counter_pool": [],
+ "law_note": "P-9/P-10 + L-021: every value proposes; Palle rules"
+}

@@ -1,0 +1,188 @@
+{
+ "seq": "graphtheory",
+ "phase": "relation",
+ "truth": "Everything is a graph if you squint hard enough.",
+ "current_n": 8,
+ "tight_n": 8,
+ "v1_tutorial": [
+  {
+   "slot": "threshold",
+   "map": "GT_Foundations",
+   "hero": "graphspace",
+   "hero_prov": "measured (dig load-bearing)",
+   "slot_prov": "heuristic (position)",
+   "lb": true,
+   "walked": false,
+   "cast_n": 2,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "primitive",
+   "map": "GT_Layout",
+   "hero": "build",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 1,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "walk",
+   "map": "GT_Network_Analysis",
+   "hero": "rhizomatic_structure",
+   "hero_prov": "measured (dig load-bearing)",
+   "slot_prov": "heuristic (position)",
+   "lb": true,
+   "walked": false,
+   "cast_n": 3,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "walk2",
+   "map": "GT_Connectivity",
+   "hero": "traversal",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 3,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "turn",
+   "map": "GT_Pathfinding",
+   "hero": "shortest",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 1,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "critical",
+   "map": "GT_Spanning_Trees",
+   "hero": "mst_visualization",
+   "hero_prov": "heuristic (cast default)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 1,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "world",
+   "map": "GT_Flow",
+   "hero": "karger_algorithm",
+   "hero_prov": "heuristic (cast default)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 2,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "close",
+   "map": "GT_Matching",
+   "hero": "edmonds_algorithm",
+   "hero_prov": "heuristic (cast default)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 1,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "seed",
+   "map": null,
+   "gap": true,
+   "prov": "declared gap — no existing map holds this slot"
+  }
+ ],
+ "v2_anti": [
+  {
+   "slot": "turn",
+   "host_map": "GT_Pathfinding",
+   "anti": "KonigsbergBridge ⟷ rhizomatic_structure",
+   "why": "opposed on determinism/chance (walked×walked)",
+   "prov": "ghost — top sleeping counter-pair (L-021)",
+   "kind": "counter-pair"
+  },
+  {
+   "kind": "seam",
+   "slot": "critical",
+   "host_map": "GT_Spanning_Trees",
+   "anti": "node_snap",
+   "why": "space to graph — you can only be at a node, never between",
+   "prov": "register (seam catalog) — placement ghost"
+  }
+ ],
+ "v3_laws": {
+  "slot-grammar": {
+   "order": [
+    "GT_Foundations",
+    "GT_Layout",
+    "GT_Network_Analysis",
+    "GT_Connectivity",
+    "GT_Pathfinding",
+    "GT_Spanning_Trees",
+    "GT_Flow",
+    "GT_Matching"
+   ],
+   "law": "the tutorial arc itself (V1 identity)",
+   "tau_vs_tutorial": 1.0
+  },
+  "footprint-ascending": {
+   "order": [
+    "GT_Flow",
+    "GT_Foundations",
+    "GT_Layout",
+    "GT_Connectivity",
+    "GT_Pathfinding",
+    "GT_Matching",
+    "GT_Network_Analysis",
+    "GT_Spanning_Trees"
+   ],
+   "law": "small meets you first — the gaze law's cousin",
+   "tau_vs_tutorial": 0.29
+  },
+  "density-rising": {
+   "order": [
+    "GT_Layout",
+    "GT_Pathfinding",
+    "GT_Spanning_Trees",
+    "GT_Matching",
+    "GT_Foundations",
+    "GT_Flow",
+    "GT_Network_Analysis",
+    "GT_Connectivity"
+   ],
+   "law": "sparse -> dense; the world thickens",
+   "tau_vs_tutorial": 0.07
+  },
+  "truth-earned": {
+   "order": [
+    "GT_Layout",
+    "GT_Connectivity",
+    "GT_Pathfinding",
+    "GT_Spanning_Trees",
+    "GT_Flow",
+    "GT_Matching",
+    "GT_Foundations",
+    "GT_Network_Analysis"
+   ],
+   "law": "load-bearing heroes arrive late — the walk earns them",
+   "tau_vs_tutorial": 0.21
+  }
+ },
+ "dig_counter_pool": [
+  "KonigsbergBridge",
+  "pathfinding3d",
+  "tarjan_algorithm",
+  "networkflow3d",
+  "network_analysis",
+  "karger_algorithm"
+ ],
+ "law_note": "P-9/P-10 + L-021: every value proposes; Palle rules"
+}

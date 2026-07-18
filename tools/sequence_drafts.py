@@ -83,6 +83,18 @@ def _dig(seq: str) -> dict:
     return out
 
 
+def _seams() -> dict:
+    """seq -> seam row from the seam catalog (the bias landscape — the OTHER
+    anti: amber ideal vs blue counterfeit, one seam artifact per sequence)."""
+    try:
+        import build_seams_gallery as sg
+        return {row[0]: {"seam": row[2], "artifact": row[6],
+                         "crossing": row[5]}
+                for row in sg.CATALOG if row[6]}
+    except Exception:
+        return {}
+
+
 def _name_kin(seq: str, map_name: str) -> bool:
     """does the map's name belong to the sequence's own family?"""
     stem = re.sub(r"[^a-z]", "", seq.lower())[:6]
@@ -135,6 +147,21 @@ def build_seq(rz_seq: dict) -> dict:
     by_slot = {}
     for r in rows.values():
         by_slot.setdefault(str(r.get("slot", "")), []).append(r)
+    n_rows = max((r.get("order", 0) for r in rows.values()), default=1)
+
+    def _band(r: dict, slot: str) -> float:
+        """position-band affinity: a ruled roster order is EVIDENCE — a map's
+        current position should land near its slot's position in the arc."""
+        si = SLOTS.index(slot) / (len(SLOTS) - 1)
+        pos = (r.get("order", 1) - 1) / max(1, n_rows - 1)
+        return -abs(pos - si)
+
+    # THE CHAMBER CONVENTION (register-grade): Chamber_* is the catalyst
+    # chamber — the sequence's closing seed by project law, never mid-thread.
+    chamber = next((r for r in rows.values()
+                    if str(r.get("map", "")).startswith("Chamber_")
+                    and r.get("exists")), None)
+
     # slot-fill hints for slots rule-zero's position heuristic never assigned:
     # the ghost proposes from the UNUSED pool by name/cast signals (P-10)
     HINT = {
@@ -152,21 +179,38 @@ def build_seq(rz_seq: dict) -> dict:
             r.get("cast_n", 0)),
     }
     v1, used = [], set()
+    if chamber is not None:
+        used.add(chamber["map"])            # reserved for the seed slot
     for slot in SLOTS:
+        if slot == "seed" and chamber is not None:
+            hero = str(chamber.get("hero", "")).split(" ")[0]
+            v1.append({"slot": "seed", "map": chamber["map"], "hero": hero,
+                       "hero_prov": chamber.get("hero_prov"),
+                       "slot_prov": "register (chamber convention)",
+                       "lb": hero in dig["load_bearing"],
+                       "walked": bool(chamber.get("walked")),
+                       "cast_n": chamber.get("cast_n", 0),
+                       "prov": "register — Chamber_* closes the sequence"})
+            continue
         pool_slot = "walk" if slot == "walk2" else slot
         pool = [r for r in by_slot.get(pool_slot, [])
                 if r.get("map") not in used and r.get("exists")]
         ghost_fill = False
         if not pool and slot in HINT:
-            pool = [r for r in rows.values()
-                    if r.get("map") not in used and r.get("exists")]
-            pool = sorted(pool, key=HINT[slot], reverse=True)[:1]
+            cand = [r for r in rows.values()
+                    if r.get("map") not in used and r.get("exists")
+                    and not str(r.get("map", "")).startswith("Chamber_")]
+            # position band FIRST (a ruled order is evidence), name hints second
+            pool = sorted(cand, key=lambda r: (round(_band(r, slot), 2),
+                                               HINT[slot](r)),
+                          reverse=True)[:1]
             ghost_fill = True
         if not pool:
             v1.append({"slot": slot, "map": None, "gap": True,
                        "prov": "declared gap — no existing map holds this slot"})
             continue
-        pick = sorted(pool, key=lambda r: _pick_score(r, seq, dig),
+        pick = sorted(pool, key=lambda r: (_pick_score(r, seq, dig),
+                                           _band(r, slot)),
                       reverse=True)[0]
         used.add(pick["map"])
         hero = str(pick.get("hero", "")).split(" ")[0]
@@ -201,6 +245,21 @@ def build_seq(rz_seq: dict) -> dict:
             anti.append({"slot": host["slot"], "host_map": host["map"],
                          "anti": f"{p['a']} ⟷ {p['b']}", "why": p["why"],
                          "prov": "ghost — top sleeping counter-pair (L-021)"})
+    for a in anti:
+        a["kind"] = "counter-pair"
+    # the SEAM — the sequence's bias-landscape artifact (built, cataloged):
+    # the crossing belongs where the critical charge lives
+    seam = _seams().get(seq)
+    if seam:
+        host = next((e for e in v1 if e["slot"] == "critical"
+                     and e.get("map")), None) or \
+               next((e for e in v1 if e["slot"] == "world"
+                     and e.get("map")), None)
+        if host:
+            anti.append({"kind": "seam", "slot": host["slot"],
+                         "host_map": host["map"], "anti": seam["artifact"],
+                         "why": f"{seam['seam']} — {seam['crossing']}",
+                         "prov": "register (seam catalog) — placement ghost"})
 
     # V3 — the same selection under different laws
     def footprint(m):

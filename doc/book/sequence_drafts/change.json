@@ -1,0 +1,173 @@
+{
+ "seq": "change",
+ "phase": "F_order",
+ "truth": "Things change. Change accumulates. Accumulation flows.",
+ "current_n": 8,
+ "tight_n": 8,
+ "v1_tutorial": [
+  {
+   "slot": "threshold",
+   "map": "Change_Intro",
+   "hero": "the",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 4,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "primitive",
+   "map": "Change_Velocity",
+   "hero": "player_trace",
+   "hero_prov": "measured (dig load-bearing)",
+   "slot_prov": "heuristic (position)",
+   "lb": true,
+   "walked": false,
+   "cast_n": 4,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "walk",
+   "map": "Change_Slope_Surface",
+   "hero": "partial",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 2,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "walk2",
+   "map": "Accumulation_Area",
+   "hero": "the",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 3,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "turn",
+   "map": "Accumulation_Riemann",
+   "hero": "the",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 3,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "critical",
+   "map": "Flow_Field",
+   "hero": "the",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 2,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "world",
+   "map": "Flow_Particle_Pulse",
+   "hero": "the",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 2,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "close",
+   "map": "Change_Reconciliation",
+   "hero": "the",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 3,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "seed",
+   "map": null,
+   "gap": true,
+   "prov": "declared gap — no existing map holds this slot"
+  }
+ ],
+ "v2_anti": [
+  {
+   "kind": "seam",
+   "slot": "critical",
+   "host_map": "Flow_Field",
+   "anti": "zeno_staircase",
+   "why": "the finite difference — zoom — the smooth curve is a chord-staircase (Zeno)",
+   "prov": "register (seam catalog) — placement ghost"
+  }
+ ],
+ "v3_laws": {
+  "slot-grammar": {
+   "order": [
+    "Change_Intro",
+    "Change_Velocity",
+    "Change_Slope_Surface",
+    "Accumulation_Area",
+    "Accumulation_Riemann",
+    "Flow_Field",
+    "Flow_Particle_Pulse",
+    "Change_Reconciliation"
+   ],
+   "law": "the tutorial arc itself (V1 identity)",
+   "tau_vs_tutorial": 1.0
+  },
+  "footprint-ascending": {
+   "order": [
+    "Change_Intro",
+    "Change_Velocity",
+    "Change_Slope_Surface",
+    "Accumulation_Area",
+    "Accumulation_Riemann",
+    "Flow_Field",
+    "Flow_Particle_Pulse",
+    "Change_Reconciliation"
+   ],
+   "law": "small meets you first — the gaze law's cousin",
+   "tau_vs_tutorial": 1.0
+  },
+  "density-rising": {
+   "order": [
+    "Change_Slope_Surface",
+    "Flow_Field",
+    "Flow_Particle_Pulse",
+    "Accumulation_Area",
+    "Accumulation_Riemann",
+    "Change_Reconciliation",
+    "Change_Intro",
+    "Change_Velocity"
+   ],
+   "law": "sparse -> dense; the world thickens",
+   "tau_vs_tutorial": -0.14
+  },
+  "truth-earned": {
+   "order": [
+    "Change_Intro",
+    "Change_Slope_Surface",
+    "Accumulation_Area",
+    "Accumulation_Riemann",
+    "Flow_Field",
+    "Flow_Particle_Pulse",
+    "Change_Reconciliation",
+    "Change_Velocity"
+   ],
+   "law": "load-bearing heroes arrive late — the walk earns them",
+   "tau_vs_tutorial": 0.57
+  }
+ },
+ "dig_counter_pool": [],
+ "law_note": "P-9/P-10 + L-021: every value proposes; Palle rules"
+}

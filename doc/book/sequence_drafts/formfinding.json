@@ -1,0 +1,165 @@
+{
+ "seq": "formfinding",
+ "phase": "F_order",
+ "truth": "A form is the answer to a minimization problem. The hanging chain, the soap film, the settling mesh, the balanced mobile — none were drawn; each is the shape that costs the least. Nature computes form by being lazy, and the calculus of variations is that laziness written down.",
+ "current_n": 6,
+ "tight_n": 6,
+ "v1_tutorial": [
+  {
+   "slot": "threshold",
+   "map": "FormFinding_Descent",
+   "hero": "gradient_descent_well",
+   "hero_prov": "measured (dig load-bearing)",
+   "slot_prov": "heuristic (position)",
+   "lb": true,
+   "walked": true,
+   "cast_n": 4,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "primitive",
+   "map": "FormFinding_Catenary",
+   "hero": "cable_builder",
+   "hero_prov": "measured (dig load-bearing)",
+   "slot_prov": "heuristic (position)",
+   "lb": true,
+   "walked": true,
+   "cast_n": 4,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "walk",
+   "map": "FormFinding_Relaxation",
+   "hero": "the",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": true,
+   "cast_n": 4,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "walk2",
+   "map": "FormFinding_Equilibrium",
+   "hero": "the",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": true,
+   "cast_n": 4,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "turn",
+   "map": "FormFinding_Annealing",
+   "hero": "the",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": true,
+   "cast_n": 4,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "critical",
+   "map": "FormFinding_Forge",
+   "hero": "the",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": true,
+   "cast_n": 4,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "world",
+   "map": null,
+   "gap": true,
+   "prov": "declared gap — no existing map holds this slot"
+  },
+  {
+   "slot": "close",
+   "map": null,
+   "gap": true,
+   "prov": "declared gap — no existing map holds this slot"
+  },
+  {
+   "slot": "seed",
+   "map": null,
+   "gap": true,
+   "prov": "declared gap — no existing map holds this slot"
+  }
+ ],
+ "v2_anti": [
+  {
+   "slot": "turn",
+   "host_map": "FormFinding_Annealing",
+   "anti": "gradient_descent_well ⟷ frozen_glass_vessel",
+   "why": "opposed on build/remove (walked×walked)",
+   "prov": "ghost — top sleeping counter-pair (L-021)",
+   "kind": "counter-pair"
+  },
+  {
+   "kind": "seam",
+   "slot": "critical",
+   "host_map": "FormFinding_Forge",
+   "anti": "settling_tremble",
+   "why": "tolerance — zoom the 'settled' form — it still trembles",
+   "prov": "register (seam catalog) — placement ghost"
+  }
+ ],
+ "v3_laws": {
+  "slot-grammar": {
+   "order": [
+    "FormFinding_Descent",
+    "FormFinding_Catenary",
+    "FormFinding_Relaxation",
+    "FormFinding_Equilibrium",
+    "FormFinding_Annealing",
+    "FormFinding_Forge"
+   ],
+   "law": "the tutorial arc itself (V1 identity)",
+   "tau_vs_tutorial": 1.0
+  },
+  "footprint-ascending": {
+   "order": [
+    "FormFinding_Descent",
+    "FormFinding_Relaxation",
+    "FormFinding_Equilibrium",
+    "FormFinding_Annealing",
+    "FormFinding_Forge",
+    "FormFinding_Catenary"
+   ],
+   "law": "small meets you first — the gaze law's cousin",
+   "tau_vs_tutorial": 0.47
+  },
+  "density-rising": {
+   "order": [
+    "FormFinding_Descent",
+    "FormFinding_Catenary",
+    "FormFinding_Relaxation",
+    "FormFinding_Equilibrium",
+    "FormFinding_Annealing",
+    "FormFinding_Forge"
+   ],
+   "law": "sparse -> dense; the world thickens",
+   "tau_vs_tutorial": 1.0
+  },
+  "truth-earned": {
+   "order": [
+    "FormFinding_Relaxation",
+    "FormFinding_Equilibrium",
+    "FormFinding_Annealing",
+    "FormFinding_Forge",
+    "FormFinding_Descent",
+    "FormFinding_Catenary"
+   ],
+   "law": "load-bearing heroes arrive late — the walk earns them",
+   "tau_vs_tutorial": -0.07
+  }
+ },
+ "dig_counter_pool": [
+  "frozen_glass_vessel"
+ ],
+ "law_note": "P-9/P-10 + L-021: every value proposes; Palle rules"
+}

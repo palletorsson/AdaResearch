@@ -51,35 +51,35 @@
   },
   {
    "slot": "turn",
-   "map": "SoftBodies_Obsticals_Part2",
-   "hero": "the",
-   "hero_prov": "register (heroes.json)",
+   "map": "SoftBody_sb07_jelly_grid_tall_stiff",
+   "hero": "gallery_marker_soft-body",
+   "hero_prov": "heuristic (cast default)",
    "slot_prov": "heuristic (position)",
    "lb": false,
-   "walked": true,
-   "cast_n": 3,
+   "walked": false,
+   "cast_n": 1,
    "prov": "ghost (slot-fill from unused pool)"
   },
   {
    "slot": "critical",
-   "map": "SoftBodies_Playground_of_Joy",
-   "hero": "free",
-   "hero_prov": "register (heroes.json)",
+   "map": "SoftBody_sb_ca02_life_without_death_cloth",
+   "hero": "gallery_marker_soft-body",
+   "hero_prov": "heuristic (cast default)",
    "slot_prov": "heuristic (position)",
    "lb": false,
-   "walked": true,
-   "cast_n": 3,
+   "walked": false,
+   "cast_n": 1,
    "prov": "ghost (slot-fill from unused pool)"
   },
   {
    "slot": "world",
-   "map": "ProceduralGeneration_Reaction_Diffusion_Systems",
-   "hero": "two",
-   "hero_prov": "register (heroes.json)",
+   "map": "SoftBody_gl01_classic_bulb",
+   "hero": "gallery_marker_soft-body",
+   "hero_prov": "heuristic (cast default)",
    "slot_prov": "heuristic (position)",
    "lb": false,
-   "walked": true,
-   "cast_n": 2,
+   "walked": false,
+   "cast_n": 1,
    "prov": "ghost (slot-fill from unused pool)"
   },
   {
@@ -98,20 +98,29 @@
    "map": "Chamber_SoftBodies",
    "hero": "the",
    "hero_prov": "register (heroes.json)",
-   "slot_prov": "heuristic (name)",
+   "slot_prov": "register (chamber convention)",
    "lb": false,
    "walked": true,
    "cast_n": 3,
-   "prov": "heuristic (provenance-ranked pick)"
+   "prov": "register — Chamber_* closes the sequence"
   }
  ],
  "v2_anti": [
   {
    "slot": "turn",
-   "host_map": "SoftBodies_Obsticals_Part2",
+   "host_map": "SoftBody_sb07_jelly_grid_tall_stiff",
    "anti": "turing_pattern_generator ⟷ branching_growth_algorithm",
    "why": "opposed on continuous/discrete (needs promotion)",
-   "prov": "ghost — top sleeping counter-pair (L-021)"
+   "prov": "ghost — top sleeping counter-pair (L-021)",
+   "kind": "counter-pair"
+  },
+  {
+   "kind": "seam",
+   "slot": "critical",
+   "host_map": "SoftBody_sb_ca02_life_without_death_cloth",
+   "anti": "spring_lattice",
+   "why": "the mass-spring lattice — squeeze — it is faceted; stiffen — it detonates",
+   "prov": "register (seam catalog) — placement ghost"
   }
  ],
  "v3_laws": {
@@ -121,9 +130,9 @@
     "SoftBodies_Cloth_Physics",
     "SoftBodies_Carusell",
     "SoftBodies_Obsticals",
-    "SoftBodies_Obsticals_Part2",
-    "SoftBodies_Playground_of_Joy",
-    "ProceduralGeneration_Reaction_Diffusion_Systems",
+    "SoftBody_sb07_jelly_grid_tall_stiff",
+    "SoftBody_sb_ca02_life_without_death_cloth",
+    "SoftBody_gl01_classic_bulb",
     "SoftBody_gm04_pressed_onto_sphere",
     "Chamber_SoftBodies"
    ],
@@ -135,9 +144,9 @@
     "SoftBodies_Soft_Body_Deformation",
     "SoftBodies_Cloth_Physics",
     "SoftBodies_Obsticals",
-    "SoftBodies_Obsticals_Part2",
-    "SoftBodies_Playground_of_Joy",
-    "ProceduralGeneration_Reaction_Diffusion_Systems",
+    "SoftBody_sb07_jelly_grid_tall_stiff",
+    "SoftBody_sb_ca02_life_without_death_cloth",
+    "SoftBody_gl01_classic_bulb",
     "SoftBody_gm04_pressed_onto_sphere",
     "Chamber_SoftBodies",
     "SoftBodies_Carusell"
@@ -148,25 +157,25 @@
   "density-rising": {
    "order": [
     "SoftBodies_Cloth_Physics",
+    "SoftBody_sb07_jelly_grid_tall_stiff",
+    "SoftBody_sb_ca02_life_without_death_cloth",
+    "SoftBody_gl01_classic_bulb",
     "SoftBody_gm04_pressed_onto_sphere",
-    "ProceduralGeneration_Reaction_Diffusion_Systems",
     "SoftBodies_Soft_Body_Deformation",
-    "SoftBodies_Obsticals_Part2",
-    "SoftBodies_Playground_of_Joy",
     "Chamber_SoftBodies",
     "SoftBodies_Obsticals",
     "SoftBodies_Carusell"
    ],
    "law": "sparse -> dense; the world thickens",
-   "tau_vs_tutorial": -0.06
+   "tau_vs_tutorial": 0.11
   },
   "truth-earned": {
    "order": [
     "SoftBodies_Cloth_Physics",
     "SoftBodies_Obsticals",
-    "SoftBodies_Obsticals_Part2",
-    "SoftBodies_Playground_of_Joy",
-    "ProceduralGeneration_Reaction_Diffusion_Systems",
+    "SoftBody_sb07_jelly_grid_tall_stiff",
+    "SoftBody_sb_ca02_life_without_death_cloth",
+    "SoftBody_gl01_classic_bulb",
     "SoftBody_gm04_pressed_onto_sphere",
     "Chamber_SoftBodies",
     "SoftBodies_Soft_Body_Deformation",

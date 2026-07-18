@@ -1,0 +1,196 @@
+{
+ "seq": "fractals",
+ "phase": "lambda_edge",
+ "truth": "Infinite complexity from finite rules. Dimensions between integers. D = log(N)/log(S). Self-similarity across scales.",
+ "current_n": 11,
+ "tight_n": 9,
+ "v1_tutorial": [
+  {
+   "slot": "threshold",
+   "map": "Fractal_Recursion",
+   "hero": "the",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": true,
+   "cast_n": 10,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "primitive",
+   "map": "Fractal_RecursiveTrees",
+   "hero": "the",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": true,
+   "cast_n": 10,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "walk",
+   "map": "Fractal_CantorSet",
+   "hero": "example_8_4_cantor_set_vr",
+   "hero_prov": "measured (dig load-bearing)",
+   "slot_prov": "heuristic (position)",
+   "lb": true,
+   "walked": true,
+   "cast_n": 5,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "walk2",
+   "map": "Fractal_Synthesis",
+   "hero": "D",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": true,
+   "cast_n": 10,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "turn",
+   "map": "Fractal_GoldenSpiral",
+   "hero": "the",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": true,
+   "cast_n": 5,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "critical",
+   "map": "Fractal_JuliaSet",
+   "hero": "the",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": true,
+   "cast_n": 4,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "world",
+   "map": "Fractal_MandelbrotSet",
+   "hero": "the",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": true,
+   "cast_n": 3,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "close",
+   "map": "Fractal_CrossSequence",
+   "hero": "Rule",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": true,
+   "cast_n": 6,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "seed",
+   "map": "Chamber_Fractals",
+   "hero": "becoming_catalyst",
+   "hero_prov": "heuristic (cast default)",
+   "slot_prov": "register (chamber convention)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 4,
+   "prov": "register — Chamber_* closes the sequence"
+  }
+ ],
+ "v2_anti": [
+  {
+   "slot": "turn",
+   "host_map": "Fractal_GoldenSpiral",
+   "anti": "recursive_table ⟷ cube_subdivision",
+   "why": "opposed on build/remove (walked×walked)",
+   "prov": "ghost — top sleeping counter-pair (L-021)",
+   "kind": "counter-pair"
+  },
+  {
+   "kind": "seam",
+   "slot": "critical",
+   "host_map": "Fractal_JuliaSet",
+   "anti": "depth_cap",
+   "why": "the floor — zoom past iteration N — the detail is gone, flat",
+   "prov": "register (seam catalog) — placement ghost"
+  }
+ ],
+ "v3_laws": {
+  "slot-grammar": {
+   "order": [
+    "Fractal_Recursion",
+    "Fractal_RecursiveTrees",
+    "Fractal_CantorSet",
+    "Fractal_Synthesis",
+    "Fractal_GoldenSpiral",
+    "Fractal_JuliaSet",
+    "Fractal_MandelbrotSet",
+    "Fractal_CrossSequence",
+    "Chamber_Fractals"
+   ],
+   "law": "the tutorial arc itself (V1 identity)",
+   "tau_vs_tutorial": 1.0
+  },
+  "footprint-ascending": {
+   "order": [
+    "Chamber_Fractals",
+    "Fractal_CantorSet",
+    "Fractal_Recursion",
+    "Fractal_RecursiveTrees",
+    "Fractal_Synthesis",
+    "Fractal_GoldenSpiral",
+    "Fractal_JuliaSet",
+    "Fractal_MandelbrotSet",
+    "Fractal_CrossSequence"
+   ],
+   "law": "small meets you first — the gaze law's cousin",
+   "tau_vs_tutorial": 0.44
+  },
+  "density-rising": {
+   "order": [
+    "Fractal_MandelbrotSet",
+    "Fractal_JuliaSet",
+    "Chamber_Fractals",
+    "Fractal_CantorSet",
+    "Fractal_GoldenSpiral",
+    "Fractal_CrossSequence",
+    "Fractal_Recursion",
+    "Fractal_RecursiveTrees",
+    "Fractal_Synthesis"
+   ],
+   "law": "sparse -> dense; the world thickens",
+   "tau_vs_tutorial": -0.39
+  },
+  "truth-earned": {
+   "order": [
+    "Fractal_Recursion",
+    "Fractal_RecursiveTrees",
+    "Fractal_Synthesis",
+    "Fractal_GoldenSpiral",
+    "Fractal_JuliaSet",
+    "Fractal_MandelbrotSet",
+    "Fractal_CrossSequence",
+    "Chamber_Fractals",
+    "Fractal_CantorSet"
+   ],
+   "law": "load-bearing heroes arrive late — the walk earns them",
+   "tau_vs_tutorial": 0.67
+  }
+ },
+ "dig_counter_pool": [
+  "recursive_table",
+  "recursive_chair",
+  "inverted_tree_cloud",
+  "fibonacci_pagoda",
+  "cube_subdivision"
+ ],
+ "law_note": "P-9/P-10 + L-021: every value proposes; Palle rules"
+}

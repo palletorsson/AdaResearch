@@ -1,0 +1,193 @@
+{
+ "seq": "cellularautomata",
+ "phase": "lambda_edge",
+ "truth": "Local rules, global patterns. Each cell knows only its neighbors, yet worlds emerge. Rule 110 is Turing completeâ€”simple rules can compute anything.",
+ "current_n": 9,
+ "tight_n": 9,
+ "v1_tutorial": [
+  {
+   "slot": "threshold",
+   "map": "CA_Introduction",
+   "hero": "the",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 4,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "primitive",
+   "map": "CA_ElementaryRules",
+   "hero": "seed",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 2,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "walk",
+   "map": "CA_BeyondBinary",
+   "hero": "ca_growth_network",
+   "hero_prov": "measured (dig load-bearing)",
+   "slot_prov": "heuristic (position)",
+   "lb": true,
+   "walked": false,
+   "cast_n": 6,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "walk2",
+   "map": "CA_GameOfLife",
+   "hero": "ca_bridge",
+   "hero_prov": "measured (dig load-bearing)",
+   "slot_prov": "heuristic (position)",
+   "lb": true,
+   "walked": false,
+   "cast_n": 5,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "turn",
+   "map": "CA_ExpandingSpace",
+   "hero": "prove",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 5,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "critical",
+   "map": "CA_SoftRules",
+   "hero": "Rule",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 2,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "world",
+   "map": "CA_AgentsCircuits",
+   "hero": "design",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 3,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "close",
+   "map": "CA_EdgeOfChaos",
+   "hero": "one",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 4,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "seed",
+   "map": "Chamber_CA",
+   "hero": "becoming_catalyst",
+   "hero_prov": "heuristic (cast default)",
+   "slot_prov": "register (chamber convention)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 4,
+   "prov": "register — Chamber_* closes the sequence"
+  }
+ ],
+ "v2_anti": [
+  {
+   "slot": "turn",
+   "host_map": "CA_ExpandingSpace",
+   "anti": "ca_growth_network ⟷ game_of_life_petri",
+   "why": "opposed on order/entropy (needs promotion)",
+   "prov": "ghost — top sleeping counter-pair (L-021)",
+   "kind": "counter-pair"
+  },
+  {
+   "kind": "seam",
+   "slot": "critical",
+   "host_map": "CA_SoftRules",
+   "anti": "rule30_random",
+   "why": "deterministic random — rewind Rule 30's seed — it repeats; Life breaks at the edge",
+   "prov": "register (seam catalog) — placement ghost"
+  }
+ ],
+ "v3_laws": {
+  "slot-grammar": {
+   "order": [
+    "CA_Introduction",
+    "CA_ElementaryRules",
+    "CA_BeyondBinary",
+    "CA_GameOfLife",
+    "CA_ExpandingSpace",
+    "CA_SoftRules",
+    "CA_AgentsCircuits",
+    "CA_EdgeOfChaos",
+    "Chamber_CA"
+   ],
+   "law": "the tutorial arc itself (V1 identity)",
+   "tau_vs_tutorial": 1.0
+  },
+  "footprint-ascending": {
+   "order": [
+    "Chamber_CA",
+    "CA_Introduction",
+    "CA_ElementaryRules",
+    "CA_GameOfLife",
+    "CA_ExpandingSpace",
+    "CA_SoftRules",
+    "CA_AgentsCircuits",
+    "CA_EdgeOfChaos",
+    "CA_BeyondBinary"
+   ],
+   "law": "small meets you first — the gaze law's cousin",
+   "tau_vs_tutorial": 0.28
+  },
+  "density-rising": {
+   "order": [
+    "CA_ElementaryRules",
+    "CA_SoftRules",
+    "CA_AgentsCircuits",
+    "CA_Introduction",
+    "CA_EdgeOfChaos",
+    "Chamber_CA",
+    "CA_GameOfLife",
+    "CA_ExpandingSpace",
+    "CA_BeyondBinary"
+   ],
+   "law": "sparse -> dense; the world thickens",
+   "tau_vs_tutorial": 0.06
+  },
+  "truth-earned": {
+   "order": [
+    "CA_Introduction",
+    "CA_ElementaryRules",
+    "CA_ExpandingSpace",
+    "CA_SoftRules",
+    "CA_AgentsCircuits",
+    "CA_EdgeOfChaos",
+    "Chamber_CA",
+    "CA_BeyondBinary",
+    "CA_GameOfLife"
+   ],
+   "law": "load-bearing heroes arrive late — the walk earns them",
+   "tau_vs_tutorial": 0.44
+  }
+ },
+ "dig_counter_pool": [
+  "mirrored_cellular_automata",
+  "persian_rug"
+ ],
+ "law_note": "P-9/P-10 + L-021: every value proposes; Palle rules"
+}

@@ -1,0 +1,193 @@
+{
+ "seq": "wavefunctions",
+ "phase": "oscillation",
+ "truth": "Everything oscillates. Fourier shows every signal is a sum of sines. The wave is the fundamental pattern of non-restâ€”perpetual movement between poles.",
+ "current_n": 13,
+ "tight_n": 9,
+ "v1_tutorial": [
+  {
+   "slot": "threshold",
+   "map": "WaveFunctions_Intro",
+   "hero": "amplitude",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 16,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "primitive",
+   "map": "WaveFunctions_Unit_Circle",
+   "hero": "phase",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 6,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "walk",
+   "map": "WaveFunctions_Effect_Sound",
+   "hero": "timbre_sculptor",
+   "hero_prov": "measured (dig load-bearing)",
+   "slot_prov": "heuristic (position)",
+   "lb": true,
+   "walked": false,
+   "cast_n": 22,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "walk2",
+   "map": "WaveFunctions_Pendulum",
+   "hero": "BigPipeSystem",
+   "hero_prov": "heuristic (cast default)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 10,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "turn",
+   "map": "Wavefunctions_Bernini",
+   "hero": "ElphabaDress",
+   "hero_prov": "heuristic (cast default)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 4,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "critical",
+   "map": "WaveFunctions_John_Cage",
+   "hero": "dark_sphere",
+   "hero_prov": "heuristic (cast default)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 4,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "world",
+   "map": "Wavefunctions_Sky_Stairs",
+   "hero": "cube_scene",
+   "hero_prov": "heuristic (cast default)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 4,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "close",
+   "map": "WaveFunctions_Synthesis_Lab",
+   "hero": "oscilloscope",
+   "hero_prov": "measured (dig load-bearing)",
+   "slot_prov": "heuristic (position)",
+   "lb": true,
+   "walked": false,
+   "cast_n": 24,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "seed",
+   "map": "Chamber_Waves",
+   "hero": "becoming_catalyst",
+   "hero_prov": "heuristic (cast default)",
+   "slot_prov": "register (chamber convention)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 4,
+   "prov": "register — Chamber_* closes the sequence"
+  }
+ ],
+ "v2_anti": [
+  {
+   "slot": "turn",
+   "host_map": "Wavefunctions_Bernini",
+   "anti": "colorballs ⟷ seismograph",
+   "why": "opposed on continuous/discrete (needs promotion)",
+   "prov": "ghost — top sleeping counter-pair (L-021)",
+   "kind": "counter-pair"
+  },
+  {
+   "kind": "seam",
+   "slot": "critical",
+   "host_map": "WaveFunctions_John_Cage",
+   "anti": "aliasing_wave",
+   "why": "Nyquist — raise the pitch past half the sample rate — it descends",
+   "prov": "register (seam catalog) — placement ghost"
+  }
+ ],
+ "v3_laws": {
+  "slot-grammar": {
+   "order": [
+    "WaveFunctions_Intro",
+    "WaveFunctions_Unit_Circle",
+    "WaveFunctions_Effect_Sound",
+    "WaveFunctions_Pendulum",
+    "Wavefunctions_Bernini",
+    "WaveFunctions_John_Cage",
+    "Wavefunctions_Sky_Stairs",
+    "WaveFunctions_Synthesis_Lab",
+    "Chamber_Waves"
+   ],
+   "law": "the tutorial arc itself (V1 identity)",
+   "tau_vs_tutorial": 1.0
+  },
+  "footprint-ascending": {
+   "order": [
+    "Chamber_Waves",
+    "WaveFunctions_Effect_Sound",
+    "WaveFunctions_John_Cage",
+    "WaveFunctions_Synthesis_Lab",
+    "Wavefunctions_Bernini",
+    "WaveFunctions_Intro",
+    "WaveFunctions_Unit_Circle",
+    "WaveFunctions_Pendulum",
+    "Wavefunctions_Sky_Stairs"
+   ],
+   "law": "small meets you first — the gaze law's cousin",
+   "tau_vs_tutorial": -0.22
+  },
+  "density-rising": {
+   "order": [
+    "Wavefunctions_Bernini",
+    "WaveFunctions_John_Cage",
+    "Wavefunctions_Sky_Stairs",
+    "Chamber_Waves",
+    "WaveFunctions_Unit_Circle",
+    "WaveFunctions_Pendulum",
+    "WaveFunctions_Intro",
+    "WaveFunctions_Effect_Sound",
+    "WaveFunctions_Synthesis_Lab"
+   ],
+   "law": "sparse -> dense; the world thickens",
+   "tau_vs_tutorial": -0.11
+  },
+  "truth-earned": {
+   "order": [
+    "WaveFunctions_Intro",
+    "WaveFunctions_Unit_Circle",
+    "WaveFunctions_Pendulum",
+    "Wavefunctions_Bernini",
+    "WaveFunctions_John_Cage",
+    "Wavefunctions_Sky_Stairs",
+    "Chamber_Waves",
+    "WaveFunctions_Effect_Sound",
+    "WaveFunctions_Synthesis_Lab"
+   ],
+   "law": "load-bearing heroes arrive late — the walk earns them",
+   "tau_vs_tutorial": 0.67
+  }
+ },
+ "dig_counter_pool": [
+  "colorballs",
+  "cube_scene"
+ ],
+ "law_note": "P-9/P-10 + L-021: every value proposes; Palle rules"
+}

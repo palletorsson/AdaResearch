@@ -1,0 +1,176 @@
+{
+ "seq": "proceduralgeneration",
+ "phase": "lambda_edge",
+ "truth": "A world doesn't need an author. Rules and randomness are enough.",
+ "current_n": 7,
+ "tight_n": 7,
+ "v1_tutorial": [
+  {
+   "slot": "threshold",
+   "map": "PG_Genetic_Evolution",
+   "hero": "GeneticProgramming",
+   "hero_prov": "measured (dig load-bearing)",
+   "slot_prov": "heuristic (position)",
+   "lb": true,
+   "walked": false,
+   "cast_n": 2,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "primitive",
+   "map": "PG_Space_Colonization",
+   "hero": "space_colonization_algorithm",
+   "hero_prov": "heuristic (cast default)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 1,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "walk",
+   "map": "PG_Branching_Growth",
+   "hero": "branching_growth_algorithm",
+   "hero_prov": "measured (dig load-bearing)",
+   "slot_prov": "heuristic (position)",
+   "lb": true,
+   "walked": false,
+   "cast_n": 2,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "walk2",
+   "map": "PG_Sculpted_Forms",
+   "hero": "the",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 3,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "turn",
+   "map": "PG_Percolation_Network",
+   "hero": "constraint",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 2,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "critical",
+   "map": "PG_Caves_Mazes",
+   "hero": "wave",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 2,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "world",
+   "map": "PG_Mirrored_Patterns",
+   "hero": "adjacency",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 2,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "close",
+   "map": null,
+   "gap": true,
+   "prov": "declared gap — no existing map holds this slot"
+  },
+  {
+   "slot": "seed",
+   "map": null,
+   "gap": true,
+   "prov": "declared gap — no existing map holds this slot"
+  }
+ ],
+ "v2_anti": [
+  {
+   "slot": "turn",
+   "host_map": "PG_Percolation_Network",
+   "anti": "space_colonization_algorithm ⟷ branching_growth_algorithm",
+   "why": "opposed on order/entropy (walked×walked)",
+   "prov": "ghost — top sleeping counter-pair (L-021)",
+   "kind": "counter-pair"
+  },
+  {
+   "kind": "seam",
+   "slot": "critical",
+   "host_map": "PG_Caves_Mazes",
+   "anti": "seed_world",
+   "why": "the seed is the world — walk away and back — recreated identically from its seed",
+   "prov": "register (seam catalog) — placement ghost"
+  }
+ ],
+ "v3_laws": {
+  "slot-grammar": {
+   "order": [
+    "PG_Genetic_Evolution",
+    "PG_Space_Colonization",
+    "PG_Branching_Growth",
+    "PG_Sculpted_Forms",
+    "PG_Percolation_Network",
+    "PG_Caves_Mazes",
+    "PG_Mirrored_Patterns"
+   ],
+   "law": "the tutorial arc itself (V1 identity)",
+   "tau_vs_tutorial": 1.0
+  },
+  "footprint-ascending": {
+   "order": [
+    "PG_Space_Colonization",
+    "PG_Branching_Growth",
+    "PG_Sculpted_Forms",
+    "PG_Percolation_Network",
+    "PG_Caves_Mazes",
+    "PG_Mirrored_Patterns",
+    "PG_Genetic_Evolution"
+   ],
+   "law": "small meets you first — the gaze law's cousin",
+   "tau_vs_tutorial": 0.43
+  },
+  "density-rising": {
+   "order": [
+    "PG_Space_Colonization",
+    "PG_Genetic_Evolution",
+    "PG_Branching_Growth",
+    "PG_Percolation_Network",
+    "PG_Caves_Mazes",
+    "PG_Mirrored_Patterns",
+    "PG_Sculpted_Forms"
+   ],
+   "law": "sparse -> dense; the world thickens",
+   "tau_vs_tutorial": 0.62
+  },
+  "truth-earned": {
+   "order": [
+    "PG_Space_Colonization",
+    "PG_Sculpted_Forms",
+    "PG_Percolation_Network",
+    "PG_Caves_Mazes",
+    "PG_Mirrored_Patterns",
+    "PG_Genetic_Evolution",
+    "PG_Branching_Growth"
+   ],
+   "law": "load-bearing heroes arrive late — the walk earns them",
+   "tau_vs_tutorial": 0.14
+  }
+ },
+ "dig_counter_pool": [
+  "percolationnetwork_ca",
+  "caverandomwalk",
+  "layered_membrane"
+ ],
+ "law_note": "P-9/P-10 + L-021: every value proposes; Palle rules"
+}

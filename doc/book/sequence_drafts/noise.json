@@ -1,0 +1,183 @@
+{
+ "seq": "noise",
+ "phase": "E_entropy",
+ "truth": "Noise is randomness that remembers its neighbors. Structured disorder, organic unpredictability.",
+ "current_n": 9,
+ "tight_n": 8,
+ "v1_tutorial": [
+  {
+   "slot": "threshold",
+   "map": "Random_Noise_Types",
+   "hero": "WhiteNoiseGallery",
+   "hero_prov": "measured (dig load-bearing)",
+   "slot_prov": "heuristic (position)",
+   "lb": true,
+   "walked": false,
+   "cast_n": 4,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "primitive",
+   "map": "Noise_Columns",
+   "hero": "MeltingBerniniScene",
+   "hero_prov": "heuristic (cast default)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 2,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "walk",
+   "map": "Noise_Voxel",
+   "hero": "perlin_terrain_sculptor",
+   "hero_prov": "measured (dig load-bearing)",
+   "slot_prov": "heuristic (position)",
+   "lb": true,
+   "walked": false,
+   "cast_n": 4,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "walk2",
+   "map": "Noise_Perlin_Simplex",
+   "hero": "smooth",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 6,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "turn",
+   "map": "Noise_6_Wall",
+   "hero": "dark_sphere",
+   "hero_prov": "heuristic (cast default)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 2,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "critical",
+   "map": "Noise_Inside_Noise",
+   "hero": "dark_sphere",
+   "hero_prov": "heuristic (cast default)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 2,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "world",
+   "map": "Noise_Space_10",
+   "hero": "the",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 2,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "close",
+   "map": null,
+   "gap": true,
+   "prov": "declared gap — no existing map holds this slot"
+  },
+  {
+   "slot": "seed",
+   "map": "Lab_Path",
+   "hero": "dark_sphere",
+   "hero_prov": "heuristic (cast default)",
+   "slot_prov": "heuristic (name)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 1,
+   "prov": "heuristic (provenance-ranked pick)"
+  }
+ ],
+ "v2_anti": [
+  {
+   "slot": "turn",
+   "host_map": "Noise_6_Wall",
+   "anti": "MeltingBerniniScene ⟷ WhiteNoiseGallery",
+   "why": "opposed on determinism/chance (walked×walked)",
+   "prov": "ghost — top sleeping counter-pair (L-021)",
+   "kind": "counter-pair"
+  },
+  {
+   "kind": "seam",
+   "slot": "critical",
+   "host_map": "Noise_Inside_Noise",
+   "anti": "noise_floor",
+   "why": "the entropy floor — push structure toward max entropy — it collapses into the field",
+   "prov": "register (seam catalog) — placement ghost"
+  }
+ ],
+ "v3_laws": {
+  "slot-grammar": {
+   "order": [
+    "Random_Noise_Types",
+    "Noise_Columns",
+    "Noise_Voxel",
+    "Noise_Perlin_Simplex",
+    "Noise_6_Wall",
+    "Noise_Inside_Noise",
+    "Noise_Space_10",
+    "Lab_Path"
+   ],
+   "law": "the tutorial arc itself (V1 identity)",
+   "tau_vs_tutorial": 1.0
+  },
+  "footprint-ascending": {
+   "order": [
+    "Noise_6_Wall",
+    "Noise_Inside_Noise",
+    "Lab_Path",
+    "Noise_Perlin_Simplex",
+    "Noise_Space_10",
+    "Noise_Voxel",
+    "Noise_Columns",
+    "Random_Noise_Types"
+   ],
+   "law": "small meets you first — the gaze law's cousin",
+   "tau_vs_tutorial": -0.57
+  },
+  "density-rising": {
+   "order": [
+    "Lab_Path",
+    "Noise_Columns",
+    "Noise_6_Wall",
+    "Noise_Inside_Noise",
+    "Noise_Space_10",
+    "Random_Noise_Types",
+    "Noise_Voxel",
+    "Noise_Perlin_Simplex"
+   ],
+   "law": "sparse -> dense; the world thickens",
+   "tau_vs_tutorial": -0.21
+  },
+  "truth-earned": {
+   "order": [
+    "Noise_Columns",
+    "Noise_Perlin_Simplex",
+    "Noise_6_Wall",
+    "Noise_Inside_Noise",
+    "Noise_Space_10",
+    "Lab_Path",
+    "Random_Noise_Types",
+    "Noise_Voxel"
+   ],
+   "law": "load-bearing heroes arrive late — the walk earns them",
+   "tau_vs_tutorial": 0.21
+  }
+ },
+ "dig_counter_pool": [
+  "MeltingBerniniScene"
+ ],
+ "law_note": "P-9/P-10 + L-021: every value proposes; Palle rules"
+}

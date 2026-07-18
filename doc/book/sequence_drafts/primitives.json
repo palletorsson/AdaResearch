@@ -1,0 +1,192 @@
+{
+ "seq": "primitives",
+ "phase": "F_order",
+ "truth": "A point is position without extension. Everything is built from nothing.",
+ "current_n": 11,
+ "tight_n": 9,
+ "v1_tutorial": [
+  {
+   "slot": "threshold",
+   "map": "Point_One",
+   "hero": "the",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "register (look script)",
+   "lb": false,
+   "walked": true,
+   "cast_n": 10,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "primitive",
+   "map": "Point_Lines",
+   "hero": "klee_walking_point",
+   "hero_prov": "measured (dig load-bearing)",
+   "slot_prov": "register (look script)",
+   "lb": true,
+   "walked": true,
+   "cast_n": 20,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "walk",
+   "map": "Primitives_Ignorance",
+   "hero": "cube_scene",
+   "hero_prov": "measured (dig load-bearing)",
+   "slot_prov": "register (look script)",
+   "lb": true,
+   "walked": true,
+   "cast_n": 23,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "walk2",
+   "map": "Primitives_Polythedra",
+   "hero": "cube_scene",
+   "hero_prov": "measured (dig load-bearing)",
+   "slot_prov": "register (look script)",
+   "lb": true,
+   "walked": true,
+   "cast_n": 12,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "turn",
+   "map": "Point_Triangle_Context",
+   "hero": "the",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "register (look script)",
+   "lb": false,
+   "walked": true,
+   "cast_n": 14,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "critical",
+   "map": "Point_Animatedcube",
+   "hero": "the",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "register (look script)",
+   "lb": false,
+   "walked": true,
+   "cast_n": 5,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "world",
+   "map": "Primitives_Portals",
+   "hero": "the",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": true,
+   "cast_n": 5,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "close",
+   "map": "Primitives_Melencolia",
+   "hero": "cube_scene",
+   "hero_prov": "measured (dig load-bearing)",
+   "slot_prov": "register (look script)",
+   "lb": true,
+   "walked": true,
+   "cast_n": 11,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "seed",
+   "map": "Chamber_Primitives",
+   "hero": "becoming_catalyst",
+   "hero_prov": "heuristic (cast default)",
+   "slot_prov": "register (chamber convention)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 4,
+   "prov": "register — Chamber_* closes the sequence"
+  }
+ ],
+ "v2_anti": [
+  {
+   "slot": "turn",
+   "host_map": "Point_Triangle_Context",
+   "anti": "klee_walking_point ⟷ cube_scene",
+   "why": "opposed on order/entropy (walked×walked)",
+   "prov": "ghost — top sleeping counter-pair (L-021)",
+   "kind": "counter-pair"
+  },
+  {
+   "kind": "seam",
+   "slot": "critical",
+   "host_map": "Point_Animatedcube",
+   "anti": "archimedean_tunnel",
+   "why": "the sampled line — magnify — walk into the tunnel",
+   "prov": "register (seam catalog) — placement ghost"
+  }
+ ],
+ "v3_laws": {
+  "slot-grammar": {
+   "order": [
+    "Point_One",
+    "Point_Lines",
+    "Primitives_Ignorance",
+    "Primitives_Polythedra",
+    "Point_Triangle_Context",
+    "Point_Animatedcube",
+    "Primitives_Portals",
+    "Primitives_Melencolia",
+    "Chamber_Primitives"
+   ],
+   "law": "the tutorial arc itself (V1 identity)",
+   "tau_vs_tutorial": 1.0
+  },
+  "footprint-ascending": {
+   "order": [
+    "Chamber_Primitives",
+    "Point_One",
+    "Point_Lines",
+    "Primitives_Ignorance",
+    "Primitives_Polythedra",
+    "Point_Triangle_Context",
+    "Point_Animatedcube",
+    "Primitives_Portals",
+    "Primitives_Melencolia"
+   ],
+   "law": "small meets you first — the gaze law's cousin",
+   "tau_vs_tutorial": 0.56
+  },
+  "density-rising": {
+   "order": [
+    "Chamber_Primitives",
+    "Point_Animatedcube",
+    "Primitives_Portals",
+    "Point_One",
+    "Primitives_Melencolia",
+    "Primitives_Polythedra",
+    "Point_Triangle_Context",
+    "Point_Lines",
+    "Primitives_Ignorance"
+   ],
+   "law": "sparse -> dense; the world thickens",
+   "tau_vs_tutorial": -0.44
+  },
+  "truth-earned": {
+   "order": [
+    "Point_One",
+    "Point_Triangle_Context",
+    "Point_Animatedcube",
+    "Primitives_Portals",
+    "Chamber_Primitives",
+    "Point_Lines",
+    "Primitives_Ignorance",
+    "Primitives_Polythedra",
+    "Primitives_Melencolia"
+   ],
+   "law": "load-bearing heroes arrive late — the walk earns them",
+   "tau_vs_tutorial": 0.28
+  }
+ },
+ "dig_counter_pool": [
+  "player_trace"
+ ],
+ "law_note": "P-9/P-10 + L-021: every value proposes; Palle rules"
+}

@@ -1,0 +1,187 @@
+{
+ "seq": "lsystems",
+ "phase": "lambda_edge",
+ "truth": "A sentence can become a forest. Grammar is generative.",
+ "current_n": 8,
+ "tight_n": 8,
+ "v1_tutorial": [
+  {
+   "slot": "threshold",
+   "map": "LSystems_Grammar_Lab",
+   "hero": "lsystem_editor",
+   "hero_prov": "measured (dig load-bearing)",
+   "slot_prov": "heuristic (position)",
+   "lb": true,
+   "walked": false,
+   "cast_n": 6,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "primitive",
+   "map": "LSystems_Growth",
+   "hero": "iterate",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 4,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "walk",
+   "map": "LSystems_Grammars_And_Curves",
+   "hero": "space_filling_curve_gallery",
+   "hero_prov": "measured (dig load-bearing)",
+   "slot_prov": "heuristic (position)",
+   "lb": true,
+   "walked": false,
+   "cast_n": 3,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "walk2",
+   "map": "LSystems_Architecture",
+   "hero": "prove",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 3,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "turn",
+   "map": "LSystems_Competition",
+   "hero": "ForestCompetition",
+   "hero_prov": "heuristic (cast default)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 3,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "critical",
+   "map": "LSystems_Living",
+   "hero": "branching",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 3,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "world",
+   "map": "Assemblage_Same_Desire",
+   "hero": "the",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": true,
+   "cast_n": 6,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "close",
+   "map": null,
+   "gap": true,
+   "prov": "declared gap — no existing map holds this slot"
+  },
+  {
+   "slot": "seed",
+   "map": "Chamber_LSystems",
+   "hero": "becoming_catalyst",
+   "hero_prov": "heuristic (cast default)",
+   "slot_prov": "register (chamber convention)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 4,
+   "prov": "register — Chamber_* closes the sequence"
+  }
+ ],
+ "v2_anti": [
+  {
+   "slot": "turn",
+   "host_map": "LSystems_Competition",
+   "anti": "lsystem_editor ⟷ parametric_lsystem",
+   "why": "opposed on determinism/chance, order/entropy (walked×walked)",
+   "prov": "ghost — top sleeping counter-pair (L-021)",
+   "kind": "counter-pair"
+  },
+  {
+   "kind": "seam",
+   "slot": "critical",
+   "host_map": "LSystems_Living",
+   "anti": "grammar_seed",
+   "why": "grammar as seed — the forest is one seed; growth halts at the budget",
+   "prov": "register (seam catalog) — placement ghost"
+  }
+ ],
+ "v3_laws": {
+  "slot-grammar": {
+   "order": [
+    "LSystems_Grammar_Lab",
+    "LSystems_Growth",
+    "LSystems_Grammars_And_Curves",
+    "LSystems_Architecture",
+    "LSystems_Competition",
+    "LSystems_Living",
+    "Assemblage_Same_Desire",
+    "Chamber_LSystems"
+   ],
+   "law": "the tutorial arc itself (V1 identity)",
+   "tau_vs_tutorial": 1.0
+  },
+  "footprint-ascending": {
+   "order": [
+    "Chamber_LSystems",
+    "LSystems_Growth",
+    "LSystems_Architecture",
+    "LSystems_Living",
+    "Assemblage_Same_Desire",
+    "LSystems_Grammar_Lab",
+    "LSystems_Grammars_And_Curves",
+    "LSystems_Competition"
+   ],
+   "law": "small meets you first — the gaze law's cousin",
+   "tau_vs_tutorial": -0.14
+  },
+  "density-rising": {
+   "order": [
+    "LSystems_Grammars_And_Curves",
+    "LSystems_Architecture",
+    "LSystems_Competition",
+    "LSystems_Living",
+    "LSystems_Growth",
+    "Chamber_LSystems",
+    "LSystems_Grammar_Lab",
+    "Assemblage_Same_Desire"
+   ],
+   "law": "sparse -> dense; the world thickens",
+   "tau_vs_tutorial": 0.21
+  },
+  "truth-earned": {
+   "order": [
+    "LSystems_Growth",
+    "LSystems_Architecture",
+    "LSystems_Competition",
+    "LSystems_Living",
+    "Assemblage_Same_Desire",
+    "Chamber_LSystems",
+    "LSystems_Grammar_Lab",
+    "LSystems_Grammars_And_Curves"
+   ],
+   "law": "load-bearing heroes arrive late — the walk earns them",
+   "tau_vs_tutorial": 0.21
+  }
+ },
+ "dig_counter_pool": [
+  "fractal_lsystem_string",
+  "lsystem_tree",
+  "CityGenerator",
+  "parametric_lsystem",
+  "ContextSensitiveTree"
+ ],
+ "law_note": "P-9/P-10 + L-021: every value proposes; Palle rules"
+}

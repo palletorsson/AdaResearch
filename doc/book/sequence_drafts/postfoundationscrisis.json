@@ -1,0 +1,175 @@
+{
+ "seq": "postfoundationscrisis",
+ "phase": "synthesis",
+ "truth": "Knowing the limits of formalization, what do we build?",
+ "current_n": 8,
+ "tight_n": 8,
+ "v1_tutorial": [
+  {
+   "slot": "threshold",
+   "map": "CriticalAlgorithms_Algorithmic_Bias_Visualization",
+   "hero": "bias_visualizer",
+   "hero_prov": "measured (dig load-bearing)",
+   "slot_prov": "heuristic (position)",
+   "lb": true,
+   "walked": true,
+   "cast_n": 3,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "primitive",
+   "map": "CriticalAlgorithms_Applied_Ethics",
+   "hero": "the",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": true,
+   "cast_n": 3,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "walk",
+   "map": "SpeculativeComputation_Paraconsistent_Engineering",
+   "hero": "the",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": true,
+   "cast_n": 4,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "walk2",
+   "map": "SpeculativeComputation_Situated_Computation",
+   "hero": "the",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": true,
+   "cast_n": 1,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "turn",
+   "map": "SpeculativeComputation_Collective_Knowledge",
+   "hero": "the",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": true,
+   "cast_n": 1,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "critical",
+   "map": "SpeculativeComputation_Rhizome_Network",
+   "hero": "the",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": true,
+   "cast_n": 1,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "world",
+   "map": "AdvancedLaboratory_Lab_Equipment_Simulation",
+   "hero": "the",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": true,
+   "cast_n": 1,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "close",
+   "map": "PostCrisis_Synthesis",
+   "hero": "the",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": true,
+   "cast_n": 4,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "seed",
+   "map": null,
+   "gap": true,
+   "prov": "declared gap — no existing map holds this slot"
+  }
+ ],
+ "v2_anti": [
+  {
+   "slot": "turn",
+   "host_map": "SpeculativeComputation_Collective_Knowledge",
+   "anti": "bias_visualizer ⟷ MolecularDesigner",
+   "why": "opposed on order/entropy (walked×walked)",
+   "prov": "ghost — top sleeping counter-pair (L-021)",
+   "kind": "counter-pair"
+  }
+ ],
+ "v3_laws": {
+  "slot-grammar": {
+   "order": [
+    "CriticalAlgorithms_Algorithmic_Bias_Visualization",
+    "CriticalAlgorithms_Applied_Ethics",
+    "SpeculativeComputation_Paraconsistent_Engineering",
+    "SpeculativeComputation_Situated_Computation",
+    "SpeculativeComputation_Collective_Knowledge",
+    "SpeculativeComputation_Rhizome_Network",
+    "AdvancedLaboratory_Lab_Equipment_Simulation",
+    "PostCrisis_Synthesis"
+   ],
+   "law": "the tutorial arc itself (V1 identity)",
+   "tau_vs_tutorial": 1.0
+  },
+  "footprint-ascending": {
+   "order": [
+    "CriticalAlgorithms_Applied_Ethics",
+    "SpeculativeComputation_Paraconsistent_Engineering",
+    "SpeculativeComputation_Situated_Computation",
+    "SpeculativeComputation_Collective_Knowledge",
+    "SpeculativeComputation_Rhizome_Network",
+    "AdvancedLaboratory_Lab_Equipment_Simulation",
+    "PostCrisis_Synthesis",
+    "CriticalAlgorithms_Algorithmic_Bias_Visualization"
+   ],
+   "law": "small meets you first — the gaze law's cousin",
+   "tau_vs_tutorial": 0.5
+  },
+  "density-rising": {
+   "order": [
+    "SpeculativeComputation_Situated_Computation",
+    "SpeculativeComputation_Collective_Knowledge",
+    "SpeculativeComputation_Rhizome_Network",
+    "AdvancedLaboratory_Lab_Equipment_Simulation",
+    "CriticalAlgorithms_Algorithmic_Bias_Visualization",
+    "CriticalAlgorithms_Applied_Ethics",
+    "SpeculativeComputation_Paraconsistent_Engineering",
+    "PostCrisis_Synthesis"
+   ],
+   "law": "sparse -> dense; the world thickens",
+   "tau_vs_tutorial": 0.14
+  },
+  "truth-earned": {
+   "order": [
+    "CriticalAlgorithms_Applied_Ethics",
+    "SpeculativeComputation_Paraconsistent_Engineering",
+    "SpeculativeComputation_Situated_Computation",
+    "SpeculativeComputation_Collective_Knowledge",
+    "SpeculativeComputation_Rhizome_Network",
+    "AdvancedLaboratory_Lab_Equipment_Simulation",
+    "PostCrisis_Synthesis",
+    "CriticalAlgorithms_Algorithmic_Bias_Visualization"
+   ],
+   "law": "load-bearing heroes arrive late — the walk earns them",
+   "tau_vs_tutorial": 0.5
+  }
+ },
+ "dig_counter_pool": [
+  "MolecularDesigner"
+ ],
+ "law_note": "P-9/P-10 + L-021: every value proposes; Palle rules"
+}

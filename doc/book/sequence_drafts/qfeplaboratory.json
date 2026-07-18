@@ -1,0 +1,173 @@
+{
+ "seq": "qfeplaboratory",
+ "phase": "synthesis",
+ "truth": "QFE = F âˆ’ Î»E(S) + Ï†Î”E(S,t). Life exists at Î» â‰ˆ 0.3-0.5.",
+ "current_n": 8,
+ "tight_n": 8,
+ "v1_tutorial": [
+  {
+   "slot": "threshold",
+   "map": "QFEP_Introduction",
+   "hero": "qfep_balance_workbench",
+   "hero_prov": "measured (dig load-bearing)",
+   "slot_prov": "heuristic (position)",
+   "lb": true,
+   "walked": true,
+   "cast_n": 9,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "primitive",
+   "map": "QFEP_F_Term",
+   "hero": "the",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": true,
+   "cast_n": 8,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "walk",
+   "map": "QFEP_Lambda_Spectrum",
+   "hero": "bifurcation_walkway",
+   "hero_prov": "measured (dig load-bearing)",
+   "slot_prov": "heuristic (position)",
+   "lb": true,
+   "walked": true,
+   "cast_n": 7,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "walk2",
+   "map": "QFEP_E_Term",
+   "hero": "the",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": true,
+   "cast_n": 7,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "turn",
+   "map": "QFEP_Phi_Term",
+   "hero": "the",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": true,
+   "cast_n": 6,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "critical",
+   "map": "QFEP_Edge_Of_Chaos",
+   "hero": "the",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": true,
+   "cast_n": 6,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "world",
+   "map": "QFEP_Sandbox",
+   "hero": "the",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": true,
+   "cast_n": 6,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "close",
+   "map": "QFEP_Synthesis",
+   "hero": "the",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": true,
+   "cast_n": 7,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "seed",
+   "map": null,
+   "gap": true,
+   "prov": "declared gap — no existing map holds this slot"
+  }
+ ],
+ "v2_anti": [
+  {
+   "kind": "seam",
+   "slot": "critical",
+   "host_map": "QFEP_Edge_Of_Chaos",
+   "anti": "entropy_ceiling",
+   "why": "measuring what can't be held — the entropy meter saturates — it cannot read true max entropy",
+   "prov": "register (seam catalog) — placement ghost"
+  }
+ ],
+ "v3_laws": {
+  "slot-grammar": {
+   "order": [
+    "QFEP_Introduction",
+    "QFEP_F_Term",
+    "QFEP_Lambda_Spectrum",
+    "QFEP_E_Term",
+    "QFEP_Phi_Term",
+    "QFEP_Edge_Of_Chaos",
+    "QFEP_Sandbox",
+    "QFEP_Synthesis"
+   ],
+   "law": "the tutorial arc itself (V1 identity)",
+   "tau_vs_tutorial": 1.0
+  },
+  "footprint-ascending": {
+   "order": [
+    "QFEP_F_Term",
+    "QFEP_E_Term",
+    "QFEP_Phi_Term",
+    "QFEP_Edge_Of_Chaos",
+    "QFEP_Sandbox",
+    "QFEP_Synthesis",
+    "QFEP_Introduction",
+    "QFEP_Lambda_Spectrum"
+   ],
+   "law": "small meets you first — the gaze law's cousin",
+   "tau_vs_tutorial": 0.21
+  },
+  "density-rising": {
+   "order": [
+    "QFEP_Phi_Term",
+    "QFEP_Edge_Of_Chaos",
+    "QFEP_Sandbox",
+    "QFEP_Lambda_Spectrum",
+    "QFEP_E_Term",
+    "QFEP_Synthesis",
+    "QFEP_F_Term",
+    "QFEP_Introduction"
+   ],
+   "law": "sparse -> dense; the world thickens",
+   "tau_vs_tutorial": -0.36
+  },
+  "truth-earned": {
+   "order": [
+    "QFEP_F_Term",
+    "QFEP_E_Term",
+    "QFEP_Phi_Term",
+    "QFEP_Edge_Of_Chaos",
+    "QFEP_Sandbox",
+    "QFEP_Synthesis",
+    "QFEP_Introduction",
+    "QFEP_Lambda_Spectrum"
+   ],
+   "law": "load-bearing heroes arrive late — the walk earns them",
+   "tau_vs_tutorial": 0.21
+  }
+ },
+ "dig_counter_pool": [],
+ "law_note": "P-9/P-10 + L-021: every value proposes; Palle rules"
+}

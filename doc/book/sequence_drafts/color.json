@@ -1,0 +1,192 @@
+{
+ "seq": "color",
+ "phase": "F_order",
+ "truth": "Color is perception, not physics. RGB is a lie we agree on. What you see depends on context, not wavelength alone.",
+ "current_n": 10,
+ "tight_n": 9,
+ "v1_tutorial": [
+  {
+   "slot": "threshold",
+   "map": "Pattern_Foundry",
+   "hero": "pattern_machine_a",
+   "hero_prov": "heuristic (cast default)",
+   "slot_prov": "ghost (2026-07-18 draft)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 4,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "primitive",
+   "map": "Color_Rainbow",
+   "hero": "rainbow",
+   "hero_prov": "measured (dig load-bearing)",
+   "slot_prov": "ghost (2026-07-18 draft)",
+   "lb": true,
+   "walked": false,
+   "cast_n": 4,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "walk",
+   "map": "Color_Pillar",
+   "hero": "a",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "ghost (2026-07-18 draft)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 7,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "walk2",
+   "map": "Color_Grid_Pallet",
+   "hero": "color",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "ghost (2026-07-18 draft)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 4,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "turn",
+   "map": "Color_Context_Placed",
+   "hero": "contrast",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "ghost (2026-07-18 draft)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 26,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "critical",
+   "map": "Color_Flashlight",
+   "hero": "",
+   "hero_prov": "none",
+   "slot_prov": "ghost (2026-07-18 draft)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 0,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "world",
+   "map": "Color_Walls",
+   "hero": "value",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "ghost (2026-07-18 draft)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 7,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "close",
+   "map": "Color_Nails",
+   "hero": "nail_color_controller",
+   "hero_prov": "ruled (L-019)",
+   "slot_prov": "ruled (L-019)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 9,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "seed",
+   "map": "Chamber_Color",
+   "hero": "becoming_catalyst",
+   "hero_prov": "heuristic (cast default)",
+   "slot_prov": "register (chamber convention)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 4,
+   "prov": "register — Chamber_* closes the sequence"
+  }
+ ],
+ "v2_anti": [
+  {
+   "slot": "turn",
+   "host_map": "Color_Context_Placed",
+   "anti": "crackpropagation_ca ⟷ spectrum_forest",
+   "why": "opposed on continuous/discrete (needs promotion)",
+   "prov": "ghost — top sleeping counter-pair (L-021)",
+   "kind": "counter-pair"
+  },
+  {
+   "kind": "seam",
+   "slot": "critical",
+   "host_map": "Color_Flashlight",
+   "anti": "banding_gradient",
+   "why": "the gamut — eat the mushroom — the gamut shrinks",
+   "prov": "register (seam catalog) — placement ghost"
+  }
+ ],
+ "v3_laws": {
+  "slot-grammar": {
+   "order": [
+    "Pattern_Foundry",
+    "Color_Rainbow",
+    "Color_Pillar",
+    "Color_Grid_Pallet",
+    "Color_Context_Placed",
+    "Color_Flashlight",
+    "Color_Walls",
+    "Color_Nails",
+    "Chamber_Color"
+   ],
+   "law": "the tutorial arc itself (V1 identity)",
+   "tau_vs_tutorial": 1.0
+  },
+  "footprint-ascending": {
+   "order": [
+    "Chamber_Color",
+    "Color_Rainbow",
+    "Color_Pillar",
+    "Color_Grid_Pallet",
+    "Color_Context_Placed",
+    "Color_Flashlight",
+    "Color_Walls",
+    "Color_Nails",
+    "Pattern_Foundry"
+   ],
+   "law": "small meets you first — the gaze law's cousin",
+   "tau_vs_tutorial": 0.17
+  },
+  "density-rising": {
+   "order": [
+    "Color_Flashlight",
+    "Pattern_Foundry",
+    "Color_Rainbow",
+    "Color_Grid_Pallet",
+    "Chamber_Color",
+    "Color_Pillar",
+    "Color_Walls",
+    "Color_Nails",
+    "Color_Context_Placed"
+   ],
+   "law": "sparse -> dense; the world thickens",
+   "tau_vs_tutorial": 0.33
+  },
+  "truth-earned": {
+   "order": [
+    "Pattern_Foundry",
+    "Color_Pillar",
+    "Color_Grid_Pallet",
+    "Color_Context_Placed",
+    "Color_Flashlight",
+    "Color_Walls",
+    "Color_Nails",
+    "Chamber_Color",
+    "Color_Rainbow"
+   ],
+   "law": "load-bearing heroes arrive late — the walk earns them",
+   "tau_vs_tutorial": 0.61
+  }
+ },
+ "dig_counter_pool": [
+  "crackpropagation_ca"
+ ],
+ "law_note": "P-9/P-10 + L-021: every value proposes; Palle rules"
+}

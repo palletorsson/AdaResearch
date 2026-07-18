@@ -1,0 +1,148 @@
+{
+ "seq": "boolean_surfaces",
+ "phase": "F_order",
+ "truth": "Composition is not addition. Boolean ops give us a lawful way to compose solids: A∪B, A∩B, A−B. Every architectural cavity is a difference; every joint is an intersection.",
+ "current_n": 5,
+ "tight_n": 5,
+ "v1_tutorial": [
+  {
+   "slot": "threshold",
+   "map": "Boolean_Union",
+   "hero": "union",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 1,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "primitive",
+   "map": "Boolean_Intersection",
+   "hero": "intersection",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 1,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "walk",
+   "map": "Boolean_Difference",
+   "hero": "csg_difference_demo",
+   "hero_prov": "measured (dig load-bearing)",
+   "slot_prov": "heuristic (position)",
+   "lb": true,
+   "walked": false,
+   "cast_n": 1,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "walk2",
+   "map": "Boolean_Compose_Workbench",
+   "hero": "compose",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 1,
+   "prov": "heuristic (provenance-ranked pick)"
+  },
+  {
+   "slot": "turn",
+   "map": "Boolean_Architecture_Cavity",
+   "hero": "csg_architecture_cavity",
+   "hero_prov": "measured (dig load-bearing)",
+   "slot_prov": "heuristic (position)",
+   "lb": true,
+   "walked": false,
+   "cast_n": 1,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "critical",
+   "map": null,
+   "gap": true,
+   "prov": "declared gap — no existing map holds this slot"
+  },
+  {
+   "slot": "world",
+   "map": null,
+   "gap": true,
+   "prov": "declared gap — no existing map holds this slot"
+  },
+  {
+   "slot": "close",
+   "map": null,
+   "gap": true,
+   "prov": "declared gap — no existing map holds this slot"
+  },
+  {
+   "slot": "seed",
+   "map": null,
+   "gap": true,
+   "prov": "declared gap — no existing map holds this slot"
+  }
+ ],
+ "v2_anti": [
+  {
+   "slot": "turn",
+   "host_map": "Boolean_Architecture_Cavity",
+   "anti": "csg_union_demo",
+   "why": "opposed on build/remove (walked×walked)",
+   "prov": "ghost — counter-pair sleeping in dig (L-021)",
+   "kind": "counter-pair"
+  }
+ ],
+ "v3_laws": {
+  "slot-grammar": {
+   "order": [
+    "Boolean_Union",
+    "Boolean_Intersection",
+    "Boolean_Difference",
+    "Boolean_Compose_Workbench",
+    "Boolean_Architecture_Cavity"
+   ],
+   "law": "the tutorial arc itself (V1 identity)",
+   "tau_vs_tutorial": 1.0
+  },
+  "footprint-ascending": {
+   "order": [
+    "Boolean_Union",
+    "Boolean_Intersection",
+    "Boolean_Difference",
+    "Boolean_Compose_Workbench",
+    "Boolean_Architecture_Cavity"
+   ],
+   "law": "small meets you first — the gaze law's cousin",
+   "tau_vs_tutorial": 1.0
+  },
+  "density-rising": {
+   "order": [
+    "Boolean_Union",
+    "Boolean_Intersection",
+    "Boolean_Difference",
+    "Boolean_Compose_Workbench",
+    "Boolean_Architecture_Cavity"
+   ],
+   "law": "sparse -> dense; the world thickens",
+   "tau_vs_tutorial": 1.0
+  },
+  "truth-earned": {
+   "order": [
+    "Boolean_Union",
+    "Boolean_Intersection",
+    "Boolean_Compose_Workbench",
+    "Boolean_Difference",
+    "Boolean_Architecture_Cavity"
+   ],
+   "law": "load-bearing heroes arrive late — the walk earns them",
+   "tau_vs_tutorial": 0.8
+  }
+ },
+ "dig_counter_pool": [
+  "csg_union_demo"
+ ],
+ "law_note": "P-9/P-10 + L-021: every value proposes; Palle rules"
+}
