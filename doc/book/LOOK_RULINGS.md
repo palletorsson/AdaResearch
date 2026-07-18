@@ -84,7 +84,45 @@ Contradictions between rulings are content, not errors.
 
 **L-019 (Palle, 2026-07-16, verbatim):** "As we go forward we need to have the intent of the different levels of thinking in the maps in mind. 1. The current state has some important heroes (like the nails in the color sequence that are not strictly part of the color curriculum but an artifact that connects the very body queer and color). 2. We need to ask about the curriculum, does the sequence teach the subject? 3. And think of queer Ontology, does the map have the right kind? 4. Etc 5. Etc 6. Etc. As it stands now there is some sequence with a weaker initial state. How can we prioritize the different aspects of the map and the sequence as we go forward to mold the right wonderful world and book?"
 
+**L-020 (Palle, 2026-07-18, verbatim):** "The pair rule is just one rule. It is maybe too specific, I mean what does this produce, one among possible strategies that needs to be audited, some goes for anti also maybe other rules. But we should try to keep it as simple as possible. So the question is are these the right rules or are we making this system too complicated, maybe the pair and anti need to sit in the discovery sleep if you get me."
+
+**L-021 (Palle, 2026-07-18, verbatim):** "Can we think of each map as an ontological flower that wants to express every aspect of itself but is bound by its selfness, its object oriented ontology?" — ruled yes, adopted as the drafter's opening question per map.
+
+**L-022 (Palle, 2026-07-18, verbatim):** "also a note the bound should not be superficial, I mean what we are doing here is further archaeology we are trying to discover relations so the bound does not be to be made up it should be the real bound, get me? … also where do we put the heuristic limit. I mean the rules are discovered and the build makes an informed decision?"
+
 ## Compiled properties (grows as rulings land)
+
+**P-10. The ontological flower — real bounds only (from L-021, L-022).** Each map is an object
+that wants to express every aspect of itself and is bound by its selfness. Every pipeline output
+(timeline, ride, page, curve, capture, sibling) is a *bloom* — a partial profile — and none of
+them is the map; the census calling the nails "mute" measured the instrument's poverty, not the
+object's. The drafter's opening question per map replaces the pair-slot: **"what does this map
+want to show, and how is it bound?"** — and the answer's genre is free (drama, ensemble/flowerhead,
+fruit — the bracelet expresses by transfer, not display). The bound must be ARCHAEOLOGICAL, never
+invented: this work is further archaeology, discovering relations — admissible bounds are found in
+the data (the finite cast, the grid, the dwell budget, event-gates the game already declares like
+`map_completed: Trans_Pit`, the dig's at-depth census, the reading-overload line). A made-up bound
+is decoration and voids the flower. Expression-deficit is measurable: the gap between the map's
+inventory and what any walk can witness (buried list, incomplete cycles, coverage remainder).
+The Sieve is the flower's anatomy: Q1 the bloom, Q2 the bound, Q3 the withdrawn.
+
+**P-9. Law is what the composer eats; the rest sleeps in discovery (from L-020).** Rules are
+audited by their mechanical consumers: hero is consumed at every stage (composer climax, promise,
+dolly, rank1, heroDeg, text-compiler spike) — law. Anti is consumed only by prose — a writing
+device, not law. Tension is consumed by nothing (blank across color, nothing broke) — already
+asleep. The mandatory register per map shrinks to three ruled words: **lead** (P-8), **hero**
+(the face the flower turns to the walker), **register** (arrival/promenade/close — its phenology).
+Pairs, antis, tensions, blanks, promotions live where the dig puts them — in the dig reports,
+dormant (the discovery sleep; the seed bank). A drafter MAY wake a pair when the chapter's truth
+is opposition-shaped (transformation woke five, rightly; Pattern_Foundry wakes none and stops
+lying about a quartet) — waking is a per-chapter act against the material, never a slot to fill.
+Mandatory fields manufacture smears (the Albers anti, seven times). The heuristic limit (L-022):
+**rules are discovered; the build makes an informed decision.** Every input to the composer
+carries provenance — ruled > measured > compiled-from-text > heuristic-default (the dwell
+register's precedence, generalized). Heuristics (name-regex kinds, default dwells, curve
+templates) may PROPOSE but never bind; a discovery always overrides a heuristic; and a heuristic
+failing chapter-wide (hand = 0.0 across a whole sequence) halts that chapter for an audit instead
+of silently composing flat rooms.
 
 **P-8. The six intents — rule the lead, never average (from L-019).** A map is thought at six
 levels at once, and they are different KINDS of good: **soul** (connective heroes like color's
