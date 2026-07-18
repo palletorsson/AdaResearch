@@ -3,33 +3,29 @@
 > one pass: ride (gaze), move (place --only-improve), gate (pathfinder), voice (qfep). Field note, not a ruling.
 
 ## The ride (before)
-clearance violations: **0 overlaps, 38 tight** — the law wants ≥1.2m to walk between.
-- `[tight  ] cube_scene:0:8             <-> cube_scene:0:8             gap +0.00m (centers 1.00m)`
-- `[tight  ] cube_scene:0:8             <-> cube_scene:0:8             gap +1.00m (centers 2.00m)`
-- `[tight  ] cube_scene:0:8             <-> cube_scene:0:8             gap +0.00m (centers 1.00m)`
-- `[tight  ] cube_scene:0:8             <-> sine_cylinder_staircase:0:-2.5 gap +1.00m (centers 2.00m)`
-- `[tight  ] cube_scene:0:8             <-> dark_sphere                gap +0.49m (centers 1.41m)`
-- `[tight  ] cube_scene:0:8             <-> sine_cylinder_staircase:0:-2.5 gap +0.00m (centers 1.00m)`
-- `[tight  ] cube_scene:0:8             <-> cube_scene:0:6             gap +1.00m (centers 2.00m)`
-- `[tight  ] dark_sphere                <-> sine_cylinder_staircase:0:-2.5 gap +0.08m (centers 1.00m)`
+clearance violations: **0 overlaps, 3 tight** — the law wants ≥1.2m to walk between.
+- `[tight  ] cube_scene:0:8             <-> dark_sphere                gap +0.08m (centers 1.00m)`
+- `[tight  ] cube_scene:0:8             <-> math_objects:0:1           gap +1.00m (centers 2.00m)`
+- `[tight  ] dark_sphere                <-> math_objects:0:1           gap +0.08m (centers 1.00m)`
 
 ## The move
     logged 1 entries to ada_run\placement_log.json
     summary: 1 maps processed
-      constraint improved: 0/1  mean Δ=-0.047
-      walkability improved: 1/1  mean Δ=+0.145
+      constraint improved: 0/1  mean Δ=+0.000
+      walkability improved: 1/1  mean Δ=+0.166
 
-sibling **Trial_eye_Wavefunctions_Sky_Stairs** kept: overlaps 0→0, tight 38→3, pathfinder OK.
+no sibling kept — the move did not beat the ride (overlaps 0→0, tight 3→3). Note-only.
 
 ## The voice (qfep)
-3 of 4 cast members carry a theory-claim; 1 mute.
+4 of 4 cast members carry a theory-claim; 0 mute.
 - **cube_scene** — Transformation changes S while the cube serves as the invariant reference body. Because the base form is so le
 - **dark_sphere** — Transformation often needs an invariant reference to be legible. The sphere stays simple so surrounding change
+- **math_objects** — reference mathematical objects — the room's vocabulary shelf; quiet furniture.
 - **sine_cylinder_staircase** — SINE_MODULATION — amplitude of the radial sine wave that makes the staircase breathe A spiral staircase with s
-- mute: math_objects
 
 ## The text vs the space
-**no walked.md** — the space stands unwritten; this note is the first text this map has.
+walked.md exists — the writing names 4/4 of the cast; dwells declared for 0.
+- **the writing's subjects are blocked in space**: cube_scene, dark_sphere, math_objects sit in clearance violations — the text promises what the floor obstructs.
 
 ## The heuristic understanding
-The floor was fighting the walk — bodies inside each other's clearance. The mover found a better seating; the ride confirms it in text. The voice column above says what the room is FOR; the next writing pass should say it in the walked page.
+The violations are real but mechanical moving does not fix them — they are placement DECISIONS (which body yields?), not placement errors. This is verdict material, not tooling material.

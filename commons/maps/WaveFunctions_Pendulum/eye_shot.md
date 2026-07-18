@@ -3,34 +3,29 @@
 > one pass: ride (gaze), move (place --only-improve), gate (pathfinder), voice (qfep). Field note, not a ruling.
 
 ## The ride (before)
-clearance violations: **2 overlaps, 11 tight** — the law wants ≥1.2m to walk between.
-- `[tight  ] PendulumWave:90            <-> PendulumWave:90            gap +0.41m (centers 1.41m)`
-- `[tight  ] PendulumWave:90            <-> PendulumWave:90            gap +1.00m (centers 2.00m)`
-- `[tight  ] PendulumWave:90            <-> PendulumWave:90            gap +0.41m (centers 1.41m)`
-- `[tight  ] WavePaintings:180:1:0.2    <-> foucault_pendulum          gap +0.70m (centers 5.00m)`
-- `[OVERLAP] GlassRack:0:0.6#config:reflux_apparatus <-> lab_table                  gap -0.10m (centers 1.00m)`
-- `[tight  ] GlassRack:0:0.6#config:reflux_apparatus <-> foucault_pendulum          gap +0.70m (centers 5.00m)`
-- `[OVERLAP] GlassRack:0:0.6#config:spiral_condenser <-> lab_table                  gap -0.10m (centers 1.00m)`
-- `[tight  ] GlassRack:0:0.6#config:spiral_condenser <-> foucault_pendulum          gap +0.70m (centers 5.00m)`
+clearance violations: **2 overlaps, 1 tight** — the law wants ≥1.2m to walk between.
+- `[OVERLAP] foucault_pendulum          <-> BigPipeSystem:0:1#path:straight,straight,corner_right,straight,straight gap -0.18m (centers 4.12m)`
+- `[OVERLAP] foucault_pendulum          <-> dark_sphere                gap -0.10m (centers 4.12m)`
+- `[tight  ] BigPipeSystem:0:1#path:straight,straight,corner_right,straight,straight <-> dark_sphere                gap +1.08m (centers 2.00m)`
 
 ## The move
     logged 1 entries to ada_run\placement_log.json
     summary: 1 maps processed
-      constraint improved: 1/1  mean Δ=+0.066
-      walkability improved: 1/1  mean Δ=+0.029
+      constraint improved: 1/1  mean Δ=+0.010
+      walkability improved: 0/1  mean Δ=-0.010
 
-sibling **Trial_eye_WaveFunctions_Pendulum** kept: overlaps 2→2, tight 11→1, pathfinder OK.
+no sibling kept — the move did not beat the ride (overlaps 2→2, tight 1→1). Note-only.
 
 ## The voice (qfep)
-5 of 10 cast members carry a theory-claim; 5 mute.
+10 of 10 cast members carry a theory-claim; 0 mute.
+- **BigPipeSystem** — oscillation: the organ's logic at room scale — pipes whose lengths ARE their pitches; geometry as tuning, the 
+- **GlassRack** — oscillation: the glass rack chassis — the eurorack made walkable; modules at body height, patching as architec
 - **PendulumWave** — length — determines natural frequency via sqrt(g/L) Gravity and a string are sufficient to generate periodic m
-- **WavePaintings** — Oscillation as the fundamental pattern of non-rest — perpetual movement between poles. The simplest E(S) that 
-- **dark_sphere** — Transformation often needs an invariant reference to be legible. The sphere stays simple so surrounding change
-- **foucault_pendulum** — The pendulum maintains its F (swing plane) while the frame rotates beneath it. Inertia as F-preservation — the
-- mute: BigPipeSystem, GlassRack, VRAudioMonitor, draw_dot_time_domain, lab_table
+- **VRAudioMonitor** — the monitor — level meters for the inhabited mix; it marks what is sounding without asserting content.
 
 ## The text vs the space
-**no walked.md** — the space stands unwritten; this note is the first text this map has.
+walked.md exists — the writing names 10/10 of the cast; dwells declared for 0.
+- **the writing's subjects are blocked in space**: BigPipeSystem, dark_sphere, foucault_pendulum sit in clearance violations — the text promises what the floor obstructs.
 
 ## The heuristic understanding
-The floor was fighting the walk — bodies inside each other's clearance. The mover found a better seating; the ride confirms it in text. The voice column above says what the room is FOR; the next writing pass should say it in the walked page.
+The violations are real but mechanical moving does not fix them — they are placement DECISIONS (which body yields?), not placement errors. This is verdict material, not tooling material.

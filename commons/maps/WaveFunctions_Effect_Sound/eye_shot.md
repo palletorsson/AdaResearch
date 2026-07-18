@@ -22,15 +22,17 @@ clearance violations: **11 overlaps, 55 tight** — the law wants ≥1.2m to wal
 no sibling kept — the move did not beat the ride (overlaps 11→11, tight 55→55). Note-only.
 
 ## The voice (qfep)
-10 of 22 cast members carry a theory-claim; 12 mute.
+19 of 22 cast members carry a theory-claim; 3 mute.
+- **AudioContr** — the audio controller — the room's mixing desk; infrastructure that routes the chapter's voices, never dominant
+- **BigPipeSystem** — oscillation: the organ's logic at room scale — pipes whose lengths ARE their pitches; geometry as tuning, the 
 - **DualBallFMController** — mod_index — controls harmonic richness from pure tone to metallic chaos All timbral complexity is phase modula
-- **MarioSoundController** — mode — switches between Mario jump, coin, laser, explosion, powerup generators Every game sound is a parametri
-- **MelodyChaser3D** — beat_interval — sets the tempo that drives the melodic sequence A melody is a path through pitch-space travers
-- **cable_builder** — control_point_count — determines degrees of freedom for curve shaping A hanging cable finds the shape that min
-- mute: AudioContr, BigPipeSystem, GlassRack, Rack303Acid, RackDX7Piano, RackMoogBass, RackSineBasic, VRAudioMonitor
+- **GlassRack** — oscillation: the glass rack chassis — the eurorack made walkable; modules at body height, patching as architec
+- mute: audio_catalog_tablet, interactable_demo, mario_test_sound_ui
 
 ## The text vs the space
-**no walked.md** — the space stands unwritten; this note is the first text this map has.
+walked.md exists — the writing names 14/22 of the cast; dwells declared for 0.
+- **the writing's subjects are blocked in space**: AudioContr, BigPipeSystem, GlassRack, RackSineBasic sit in clearance violations — the text promises what the floor obstructs.
+- space without text: dark_sphere, harmonic_distance_table, interactable_demo, lab_table, mario_test_sound_ui, pick_up_cube — standing in the room, absent from the walk.
 
 ## The heuristic understanding
 The violations are real but mechanical moving does not fix them — they are placement DECISIONS (which body yields?), not placement errors. This is verdict material, not tooling material.

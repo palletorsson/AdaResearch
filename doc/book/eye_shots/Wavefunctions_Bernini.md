@@ -17,14 +17,15 @@ clearance violations: **2 overlaps, 1 tight** — the law wants ≥1.2m to walk 
 no sibling kept — the move did not beat the ride (overlaps 2→2, tight 1→1). Note-only.
 
 ## The voice (qfep)
-3 of 4 cast members carry a theory-claim; 1 mute.
+4 of 4 cast members carry a theory-claim; 0 mute.
 - **ElphabaDress** — wave_intensity — transforms static garment into living oscillation Fabric is a surface that remembers every wa
+- **bernini_columns** — oscillation: the Solomonic columns — Bernini's baroque twist as frozen oscillation; a sine wave carved in marb
 - **dark_sphere** — Transformation often needs an invariant reference to be legible. The sphere stays simple so surrounding change
 - **vowel_sound_board** — formant frequencies (F1, F2) — the two resonant peaks that define each vowel Every vowel is a pair of resonant
-- mute: bernini_columns
 
 ## The text vs the space
-**no walked.md** — the space stands unwritten; this note is the first text this map has.
+walked.md exists — the writing names 4/4 of the cast; dwells declared for 0.
+- **the writing's subjects are blocked in space**: ElphabaDress, bernini_columns, dark_sphere, vowel_sound_board sit in clearance violations — the text promises what the floor obstructs.
 
 ## The heuristic understanding
 The violations are real but mechanical moving does not fix them — they are placement DECISIONS (which body yields?), not placement errors. This is verdict material, not tooling material.
