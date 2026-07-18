@@ -1,0 +1,313 @@
+{
+	"map_info": {
+		"name": "Trial_eye_Chamber_CA",
+		"lookup_name": "Trial_eye_Chamber_CA",
+		"description": "Your CA burst hits the walker. Its armor is a Game of Life grid. Your cells interact with its cells. Conway meets Conway.\n\n[Placement applied hybrid engine \u2014 constraint 0.946\u21920.932, walkability 0.734\u21920.792]",
+		"dimensions": {
+			"width": 11,
+			"depth": 7,
+			"max_height": 2
+		},
+		"title": "Trial_eye_Chamber_CA",
+		"eye_shot_of": "Chamber_CA",
+		"version": "placed-hybrid"
+	},
+	"settings": {
+		"cube_size": 1.0,
+		"gutter": 0.0,
+		"show_grid": true,
+		"enable_physics": true,
+		"enter_type": "I"
+	},
+	"utility_definitions": {
+		"t": {
+			"type": "teleporter",
+			"name": "Return to Lab",
+			"description": "Sequence complete",
+			"properties": {
+				"action": "next_in_sequence"
+			}
+		}
+	},
+	"layers": {
+		"structure": [
+			[
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1"
+			],
+			[
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1"
+			],
+			[
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1"
+			],
+			[
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1"
+			],
+			[
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1"
+			],
+			[
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1"
+			],
+			[
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"0"
+			]
+		],
+		"utilities": [
+			[
+				"sp",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				"e:2:5:5:drainfriend",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				"t"
+			]
+		],
+		"interactables": [
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				"proximity_spawner#type:lifeform_walker",
+				" "
+			],
+			[
+				" ",
+				"catalyst_target",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				"becoming_catalyst#start_mode:cellular",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				"science_screen:180:1.5#mode:grid",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			]
+		]
+	}
+}

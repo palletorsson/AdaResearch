@@ -1,0 +1,28 @@
+# Eye shot — SpeculativeComputation_Paraconsistent_Engineering
+
+> one pass: ride (gaze), move (place --only-improve), gate (pathfinder), voice (qfep). Field note, not a ruling.
+
+## The ride (before)
+clearance violations: **0 overlaps, 0 tight** — the law wants ≥1.2m to walk between.
+
+## The move
+    logged 1 entries to ada_run\placement_log.json
+    summary: 1 maps processed
+      constraint improved: 1/1  mean Δ=+0.042
+      walkability improved: 0/1  mean Δ=-0.095
+
+no sibling kept — the move did not beat the ride (overlaps 0→0, tight 0→0). Note-only.
+
+## The voice (qfep)
+3 of 4 cast members carry a theory-claim; 1 mute.
+- **florensky_sphere** — QFEP allows holding order (F) and disorder (-λE) without triviality
+- **schrodinger_box** — Observation collapses possibility - connects to Florensky's paraconsistent holding of A and not-A auto_reset_t
+- **superposition_display** — _speed — controls the oscillation frequency between basis states superposition is not uncertainty about which 
+- mute: tt
+
+## The text vs the space
+walked.md exists — the writing names 4/4 of the cast; dwells declared for 0.
+- the text and the space cover each other — the walk as written is the walk as built.
+
+## The heuristic understanding
+The space already walks: the bodies keep the law without being told. What carries this map is its voice, not its floor.
