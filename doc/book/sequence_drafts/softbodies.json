@@ -3,7 +3,7 @@
  "phase": "integration",
  "truth": "Form is not imposed  --  it emerges from the material's own dynamics.",
  "current_n": 34,
- "tight_n": 9,
+ "tight_n": 8,
  "v1_tutorial": [
   {
    "slot": "threshold",
@@ -51,47 +51,42 @@
   },
   {
    "slot": "turn",
-   "map": "SoftBody_sb07_jelly_grid_tall_stiff",
-   "hero": "gallery_marker_soft-body",
-   "hero_prov": "heuristic (cast default)",
+   "map": "Topology_Entropy_Morphogenesis",
+   "hero": "maximum",
+   "hero_prov": "register (heroes.json)",
    "slot_prov": "heuristic (position)",
    "lb": false,
-   "walked": false,
+   "walked": true,
    "cast_n": 1,
    "prov": "ghost (slot-fill from unused pool)"
   },
   {
    "slot": "critical",
-   "map": "SoftBody_sb_ca02_life_without_death_cloth",
-   "hero": "gallery_marker_soft-body",
-   "hero_prov": "heuristic (cast default)",
+   "map": "ProceduralGeneration_Reaction_Diffusion_Systems",
+   "hero": "two",
+   "hero_prov": "register (heroes.json)",
    "slot_prov": "heuristic (position)",
    "lb": false,
-   "walked": false,
-   "cast_n": 1,
+   "walked": true,
+   "cast_n": 2,
    "prov": "ghost (slot-fill from unused pool)"
   },
   {
    "slot": "world",
-   "map": "SoftBody_gl01_classic_bulb",
-   "hero": "gallery_marker_soft-body",
-   "hero_prov": "heuristic (cast default)",
+   "map": "SoftBodies_Affect_Theory_Visualization",
+   "hero": "the",
+   "hero_prov": "register (heroes.json)",
    "slot_prov": "heuristic (position)",
    "lb": false,
-   "walked": false,
+   "walked": true,
    "cast_n": 1,
    "prov": "ghost (slot-fill from unused pool)"
   },
   {
    "slot": "close",
-   "map": "SoftBody_gm04_pressed_onto_sphere",
-   "hero": "gallery_marker_soft-body",
-   "hero_prov": "heuristic (cast default)",
-   "slot_prov": "heuristic (position)",
-   "lb": false,
-   "walked": false,
-   "cast_n": 1,
-   "prov": "heuristic (provenance-ranked pick)"
+   "map": null,
+   "gap": true,
+   "prov": "declared gap — no existing map holds this slot"
   },
   {
    "slot": "seed",
@@ -108,7 +103,7 @@
  "v2_anti": [
   {
    "slot": "turn",
-   "host_map": "SoftBody_sb07_jelly_grid_tall_stiff",
+   "host_map": "Topology_Entropy_Morphogenesis",
    "anti": "turing_pattern_generator ⟷ branching_growth_algorithm",
    "why": "opposed on continuous/discrete (needs promotion)",
    "prov": "ghost — top sleeping counter-pair (L-021)",
@@ -117,7 +112,7 @@
   {
    "kind": "seam",
    "slot": "critical",
-   "host_map": "SoftBody_sb_ca02_life_without_death_cloth",
+   "host_map": "ProceduralGeneration_Reaction_Diffusion_Systems",
    "anti": "spring_lattice",
    "why": "the mass-spring lattice — squeeze — it is faceted; stiffen — it detonates",
    "prov": "register (seam catalog) — placement ghost"
@@ -130,10 +125,9 @@
     "SoftBodies_Cloth_Physics",
     "SoftBodies_Carusell",
     "SoftBodies_Obsticals",
-    "SoftBody_sb07_jelly_grid_tall_stiff",
-    "SoftBody_sb_ca02_life_without_death_cloth",
-    "SoftBody_gl01_classic_bulb",
-    "SoftBody_gm04_pressed_onto_sphere",
+    "Topology_Entropy_Morphogenesis",
+    "ProceduralGeneration_Reaction_Diffusion_Systems",
+    "SoftBodies_Affect_Theory_Visualization",
     "Chamber_SoftBodies"
    ],
    "law": "the tutorial arc itself (V1 identity)",
@@ -144,45 +138,42 @@
     "SoftBodies_Soft_Body_Deformation",
     "SoftBodies_Cloth_Physics",
     "SoftBodies_Obsticals",
-    "SoftBody_sb07_jelly_grid_tall_stiff",
-    "SoftBody_sb_ca02_life_without_death_cloth",
-    "SoftBody_gl01_classic_bulb",
-    "SoftBody_gm04_pressed_onto_sphere",
+    "Topology_Entropy_Morphogenesis",
+    "ProceduralGeneration_Reaction_Diffusion_Systems",
+    "SoftBodies_Affect_Theory_Visualization",
     "Chamber_SoftBodies",
     "SoftBodies_Carusell"
    ],
    "law": "small meets you first — the gaze law's cousin",
-   "tau_vs_tutorial": 0.67
+   "tau_vs_tutorial": 0.64
   },
   "density-rising": {
    "order": [
     "SoftBodies_Cloth_Physics",
-    "SoftBody_sb07_jelly_grid_tall_stiff",
-    "SoftBody_sb_ca02_life_without_death_cloth",
-    "SoftBody_gl01_classic_bulb",
-    "SoftBody_gm04_pressed_onto_sphere",
+    "Topology_Entropy_Morphogenesis",
+    "SoftBodies_Affect_Theory_Visualization",
+    "ProceduralGeneration_Reaction_Diffusion_Systems",
     "SoftBodies_Soft_Body_Deformation",
     "Chamber_SoftBodies",
     "SoftBodies_Obsticals",
     "SoftBodies_Carusell"
    ],
    "law": "sparse -> dense; the world thickens",
-   "tau_vs_tutorial": 0.11
+   "tau_vs_tutorial": 0.0
   },
   "truth-earned": {
    "order": [
     "SoftBodies_Cloth_Physics",
     "SoftBodies_Obsticals",
-    "SoftBody_sb07_jelly_grid_tall_stiff",
-    "SoftBody_sb_ca02_life_without_death_cloth",
-    "SoftBody_gl01_classic_bulb",
-    "SoftBody_gm04_pressed_onto_sphere",
+    "Topology_Entropy_Morphogenesis",
+    "ProceduralGeneration_Reaction_Diffusion_Systems",
+    "SoftBodies_Affect_Theory_Visualization",
     "Chamber_SoftBodies",
     "SoftBodies_Soft_Body_Deformation",
     "SoftBodies_Carusell"
    ],
    "law": "load-bearing heroes arrive late — the walk earns them",
-   "tau_vs_tutorial": 0.28
+   "tau_vs_tutorial": 0.21
   }
  },
  "dig_counter_pool": [

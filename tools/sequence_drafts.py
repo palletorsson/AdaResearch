@@ -178,6 +178,16 @@ def build_seq(rz_seq: dict) -> dict:
             r"(arena|world|field|systems|applied)", r["map"], re.I) else 0,
             r.get("cast_n", 0)),
     }
+    # HOLLOWNESS GUARD (2026-07-19, found by the softbodies fold): maps whose
+    # hero is a wayfinding anchor (gallery_marker_*) are 12x12 empty floors
+    # with a you-are-here stake — furniture, not rooms. Position must never
+    # out-rank hollowness; exclude them from every slot pick.
+    rows = {k: r for k, r in rows.items()
+            if not str(r.get("hero", "")).startswith("gallery_marker")}
+    by_slot = {}
+    for r in rows.values():
+        by_slot.setdefault(str(r.get("slot", "")), []).append(r)
+
     v1, used = [], set()
     if chamber is not None:
         used.add(chamber["map"])            # reserved for the seed slot

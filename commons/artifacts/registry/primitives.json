@@ -3,7 +3,7 @@
   "pixel_heart": {
    "category": "primitives",
    "complexity": "beginner",
-   "description": "A pixel-art heart extruded into a field of small 3D cubes on a single MultiMesh (one draw call). The 'love' reaction in the project's own cube vocabulary \u2014 warm red voxels, beveled, readable across a room.",
+   "description": "A pixel-art heart extruded into a field of small 3D cubes on a single MultiMesh (one draw call). The 'love' reaction in the project's own cube vocabulary — warm red voxels, beveled, readable across a room.",
    "dev_themes": [
     "commons",
     "primitives",
@@ -40,12 +40,12 @@
     "love",
     "multimesh"
    ],
-   "qfep_connection": "A reaction is a primitive feeling, so it is a primitive object \u2014 the heart was always pixels; we gave the pixels depth."
+   "qfep_connection": "A reaction is a primitive feeling, so it is a primitive object — the heart was always pixels; we gave the pixels depth."
   },
   "pixel_thumb": {
    "category": "primitives",
    "complexity": "beginner",
-   "description": "A pixel-art thumbs-up extruded into a field of small 3D cubes on a single MultiMesh (one draw call). The 'friend / approved' reaction in the project's own cube vocabulary \u2014 cool blue voxels, beveled.",
+   "description": "A pixel-art thumbs-up extruded into a field of small 3D cubes on a single MultiMesh (one draw call). The 'friend / approved' reaction in the project's own cube vocabulary — cool blue voxels, beveled.",
    "dev_themes": [
     "commons",
     "primitives",
@@ -82,12 +82,12 @@
     "friend",
     "multimesh"
    ],
-   "qfep_connection": "The thumb says yes in the grammar of the grid \u2014 the catalyst's foe-to-friend arc made into a solid object."
+   "qfep_connection": "The thumb says yes in the grammar of the grid — the catalyst's foe-to-friend arc made into a solid object."
   },
   "floating_sphere_field": {
    "category": "primitives",
    "complexity": "beginner",
-   "description": "A sparse field of soft glowing spheres drifting in the void on a single GPUParticles3D. The subtle successor to the Kusama dot-grid biome layer \u2014 presence-by-scarcity instead of overwhelming repetition. Ambient atmosphere for the void around the player.",
+   "description": "A sparse field of soft glowing spheres drifting in the void on a single GPUParticles3D. The subtle successor to the Kusama dot-grid biome layer — presence-by-scarcity instead of overwhelming repetition. Ambient atmosphere for the void around the player.",
    "dev_themes": [
     "commons",
     "primitives",
@@ -126,12 +126,12 @@
     "drift",
     "kusama"
    ],
-   "qfep_connection": "The void was never empty, only under-rendered. Replacing the lattice with a drift trades the comfort of fixed coordinates for the truth that presence does not require a position \u2014 the F term loosening before \u03bbE(S)."
+   "qfep_connection": "The void was never empty, only under-rendered. Replacing the lattice with a drift trades the comfort of fixed coordinates for the truth that presence does not require a position — the F term loosening before λE(S)."
   },
   "xyz_slider_plate": {
    "category": "primitives",
    "complexity": "beginner",
-   "description": "Dieter Rams plate with three sliders (X, Y, Z) that move a glowing point through space. Live coordinate display and line to origin. Teaches axis independence \u2014 moving one slider doesn't affect the others.",
+   "description": "Dieter Rams plate with three sliders (X, Y, Z) that move a glowing point through space. Live coordinate display and line to origin. Teaches axis independence — moving one slider doesn't affect the others.",
    "dev_themes": [
     "commons",
     "primitives",
@@ -167,7 +167,7 @@
     "interactive",
     "dieter_rams"
    ],
-   "qfep_connection": "Axis independence as felt experience \u2014 the hand learns that three degrees of freedom are orthogonal by moving each one alone.",
+   "qfep_connection": "Axis independence as felt experience — the hand learns that three degrees of freedom are orthogonal by moving each one alone.",
    "measurements": {
     "aabb_size": [
      0.26,
@@ -200,7 +200,7 @@
   "laser_sword": {
    "category": "primitives",
    "complexity": "beginner",
-   "description": "Grabbable glowing blade on a Rams handle \u2014 pick it up and the blade ignites with a layered hum. Swing speed modulates pitch and glow intensity. Teaches directed line segment as embodied intention.",
+   "description": "Grabbable glowing blade on a Rams handle — pick it up and the blade ignites with a layered hum. Swing speed modulates pitch and glow intensity. Teaches directed line segment as embodied intention.",
    "dev_themes": [
     "commons",
     "primitives"
@@ -235,7 +235,7 @@
     "sword",
     "interactive"
    ],
-   "qfep_connection": "Direction as embodied will \u2014 the blade points where you point, making directed line segment a felt experience before a mathematical concept.",
+   "qfep_connection": "Direction as embodied will — the blade points where you point, making directed line segment a felt experience before a mathematical concept.",
    "measurements": {
     "aabb_size": [
      0.06,
@@ -268,7 +268,7 @@
   "grabbable_line": {
    "category": "primitives",
    "complexity": "beginner",
-   "description": "A line segment you grab as one object \u2014 pick up anywhere along its length to move it through space. Fixed length, visible endpoints, integer-resistance glitch. Complements the endpoint-first line by teaching whole-before-parts.",
+   "description": "A line segment you grab as one object — pick up anywhere along its length to move it through space. Fixed length, visible endpoints, integer-resistance glitch. Complements the endpoint-first line by teaching whole-before-parts.",
    "dev_themes": [
     "commons",
     "primitives"
@@ -302,7 +302,7 @@
     "measurement",
     "resistance"
    ],
-   "qfep_connection": "Holding a line whole before decomposing it into endpoints \u2014 unity precedes analysis, the body grasps the relation before the mind names the parts.",
+   "qfep_connection": "Holding a line whole before decomposing it into endpoints — unity precedes analysis, the body grasps the relation before the mind names the parts.",
    "measurements": {
     "aabb_size": [
      0.28,
@@ -335,7 +335,7 @@
   "code_evolution_screen": {
    "category": "primitives",
    "complexity": "beginner",
-   "description": "Dual-panel VR code viewer \u2014 watch code build up stage by stage with parallel thinking narration. Uses SubViewport + RichTextLabel with Catppuccin Mocha syntax highlighting.",
+   "description": "Dual-panel VR code viewer — watch code build up stage by stage with parallel thinking narration. Uses SubViewport + RichTextLabel with Catppuccin Mocha syntax highlighting.",
    "dev_themes": [
     "commons",
     "primitives",
@@ -370,7 +370,7 @@
     "2d_in_3d",
     "subviewport"
    ],
-   "qfep_connection": "Code as temporal process \u2014 each line is a decision, each stage is a conceptual leap. Understanding emerges from watching construction, not reading completion.",
+   "qfep_connection": "Code as temporal process — each line is a decision, each stage is a conceptual leap. Understanding emerges from watching construction, not reading completion.",
    "measurements": {
     "aabb_size": [
      0.96,
@@ -1124,7 +1124,7 @@
   "array_rotate": {
    "category": "unknown",
    "complexity": "intermediate",
-   "description": "Array + Rotate. rotation[i] = i \u00c3\u2014 angle. The fan/wheel: cumulative rotation around axis.",
+   "description": "Array + Rotate. rotation[i] = i Ã— angle. The fan/wheel: cumulative rotation around axis.",
    "dev_themes": [
     "core",
     "primitives"
@@ -1332,7 +1332,7 @@
   "array_translate": {
    "category": "unknown",
    "complexity": "intermediate",
-   "description": "Array + Translate. position[i] = i \u00c3\u2014 offset. The staircase: cumulative translation.",
+   "description": "Array + Translate. position[i] = i Ã— offset. The staircase: cumulative translation.",
    "dev_themes": [
     "core",
     "primitives"
@@ -4626,7 +4626,7 @@
   "dgrid": {
    "category": "unknown",
    "complexity": "intermediate",
-   "description": "Standing perspective grid frame inspired by Albrecht D\u00c3\u00bcrer. Use dgrid:90:1:1#config:10:10 for 10x10 grid.",
+   "description": "Standing perspective grid frame inspired by Albrecht DÃ¼rer. Use dgrid:90:1:1#config:10:10 for 10x10 grid.",
    "dev_themes": [
     "core",
     "primitives"
@@ -4642,7 +4642,7 @@
    "map_sequences": [
     "primitives"
    ],
-   "name": "D\u00c3\u00bcrer Grid",
+   "name": "DÃ¼rer Grid",
    "parameters": {
     "footprint": [
      1,
@@ -5133,7 +5133,7 @@
   "dome": {
    "category": "unknown",
    "complexity": "beginner",
-   "description": "Half-sphere primitive produced by boolean subtraction \u2014 used as reference geometry for enclosures and shelters.",
+   "description": "Half-sphere primitive produced by boolean subtraction — used as reference geometry for enclosures and shelters.",
    "dev_themes": [
     "core",
     "primitives"
@@ -5321,7 +5321,7 @@
   "draw_dot": {
    "category": "unknown",
    "complexity": "beginner",
-   "description": "sample(hand_position) \u2192 ImmediateMesh trail \u2014 the hand writes points in 3D space",
+   "description": "sample(hand_position) → ImmediateMesh trail — the hand writes points in 3D space",
    "dev_themes": [
     "core",
     "primitives"
@@ -5556,7 +5556,7 @@
   "draw_triangle_faces": {
    "category": "unknown",
    "complexity": "beginner",
-   "description": "fan_triangulate(loop) \u2192 colored mesh face \u2014 closed point loops become surfaces",
+   "description": "fan_triangulate(loop) → colored mesh face — closed point loops become surfaces",
    "dev_themes": [
     "core",
     "primitives"
@@ -6303,7 +6303,7 @@
   "folded_strip": {
    "category": "unknown",
    "complexity": "beginner",
-   "description": "triangle_strip(24) \u2014 alternating-height vertices forming a pleated ribbon of connected faces",
+   "description": "triangle_strip(24) — alternating-height vertices forming a pleated ribbon of connected faces",
    "dev_themes": [
     "core",
     "primitives"
@@ -7040,7 +7040,7 @@
   "glass_planes_empty": {
    "category": "unknown",
    "complexity": "intermediate",
-   "description": "2.5D: Array of transparent glass planes. Pure repetition \u00e2\u20ac\u201d depth from layered transparency. No noise.",
+   "description": "2.5D: Array of transparent glass planes. Pure repetition â€” depth from layered transparency. No noise.",
    "dev_themes": [
     "core",
     "primitives"
@@ -8316,12 +8316,13 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.188778Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "F_force: the probe — a graspable stick trailing a long cloth ribbon. It is how the hand asks a soft world questions: poke, drag, sweep, and the ribbon writes the answer in folds. The instrument of contact in the softbodies rooms; force made holdable."
   },
   "grab_octahedron": {
    "category": "unknown",
    "complexity": "beginner",
-   "description": "octahedron \u2014 6 vertices, 12 edges, 8 triangular faces: dual of the cube, Platonic solid",
+   "description": "octahedron — 6 vertices, 12 edges, 8 triangular faces: dual of the cube, Platonic solid",
    "dev_themes": [
     "core",
     "primitives"
@@ -8753,7 +8754,7 @@
   "grab_sphere_point_snap": {
    "category": "unknown",
    "complexity": "beginner",
-   "description": "snap(position) = round(position / grid_size) * grid_size \u2014 discretise continuous space",
+   "description": "snap(position) = round(position / grid_size) * grid_size — discretise continuous space",
    "dev_themes": [
     "core",
     "primitives"
@@ -9182,7 +9183,7 @@
   "grab_trihedron": {
    "category": "unknown",
    "complexity": "beginner",
-   "description": "trihedron \u2014 4 vertices, 3 triangular faces and 1 quad base: the wedge as 3D primitive",
+   "description": "trihedron — 4 vertices, 3 triangular faces and 1 quad base: the wedge as 3D primitive",
    "dev_themes": [
     "core",
     "primitives"
@@ -9296,7 +9297,7 @@
   "grid_lines": {
    "category": "unknown",
    "complexity": "beginner",
-   "description": "grid = {x=i*step, z=j*step : i,j \u2208 \u2124} \u2014 the XZ plane made legible as a lattice of lines",
+   "description": "grid = {x=i*step, z=j*step : i,j ∈ ℤ} — the XZ plane made legible as a lattice of lines",
    "dev_themes": [
     "core",
     "primitives"
@@ -9933,7 +9934,7 @@
    "map_sequences": [
     "primitives"
    ],
-   "name": "1.0.2 Interactive Point \u2014 Force Catalyst",
+   "name": "1.0.2 Interactive Point — Force Catalyst",
    "scene": "res://commons/primitives/point/interactive_point_origin_force.tscn",
    "tags": [
     "primitive",
@@ -9944,10 +9945,10 @@
    ],
    "parameters": {
     "attraction_radius": "Sphere radius (m) within which RigidBody3D bodies feel the pull. Default 1.5.",
-    "attraction_strength": "Pull-force coefficient k in F = k / d\u00b2. Default 8.0.",
+    "attraction_strength": "Pull-force coefficient k in F = k / d². Default 8.0.",
     "ball_speed": "Initial velocity (m/s) of two-hand projectile balls. Default 6.0.",
     "ball_lifetime": "How long each spawned ball lives before queue_free. Default 2.0s.",
-    "morph_speed": "How fast morph_t lerps from 0 \u2192 1 on pickup. Default 1.4 (\u22480.7s)."
+    "morph_speed": "How fast morph_t lerps from 0 → 1 on pickup. Default 1.4 (≈0.7s)."
    }
   },
   "interactive_point_origin": {
@@ -11068,7 +11069,7 @@
   "line_demo": {
    "category": "unknown",
    "complexity": "beginner",
-   "description": "snap_connection(pointA, pointB) \u2192 line \u2014 demonstrate the SnapConnectionManager wiring",
+   "description": "snap_connection(pointA, pointB) → line — demonstrate the SnapConnectionManager wiring",
    "dev_themes": [
     "core",
     "primitives"
@@ -11994,7 +11995,7 @@
   "origin": {
    "category": "unknown",
    "complexity": "beginner",
-   "description": "(0, 0, 0) \u2014 the reference from which all coordinates are measured",
+   "description": "(0, 0, 0) — the reference from which all coordinates are measured",
    "dev_themes": [
     "core",
     "primitives"
@@ -12500,7 +12501,7 @@
   "perspective_lines": {
    "category": "unknown",
    "complexity": "intermediate",
-   "description": "all lines \u2192 (0,0,0) \u2014 convergence to a single vanishing point as perspective law",
+   "description": "all lines → (0,0,0) — convergence to a single vanishing point as perspective law",
    "dev_themes": [
     "core",
     "primitives"
@@ -12712,7 +12713,7 @@
   "pickup_cube_rotating": {
    "category": "unknown",
    "complexity": "beginner",
-   "description": "Pickup cube that rotates continuously \u2014 wraps pick_up_cube.gd and disables internal collision so the player can walk into the pickup area freely.",
+   "description": "Pickup cube that rotates continuously — wraps pick_up_cube.gd and disables internal collision so the player can walk into the pickup area freely.",
    "dev_themes": [
     "core",
     "primitives"
@@ -15213,7 +15214,7 @@
   "pythagorean_triangle_angles": {
    "category": "unknown",
    "complexity": "beginner",
-   "description": "a\u00b2 + b\u00b2 = c\u00b2 \u2014 the Pythagorean theorem made spatial: three squares grown from triangle sides",
+   "description": "a² + b² = c² — the Pythagorean theorem made spatial: three squares grown from triangle sides",
    "dev_themes": [
     "core",
     "primitives"
@@ -16981,7 +16982,7 @@
   "rotation_match_puzzle": {
    "category": "unknown",
    "complexity": "intermediate",
-   "description": "Vera Moln\u00c3\u00a1r-inspired rotation puzzle. Match cube rotations to ghost targets. Config: style:molnar|interruptions|random|gradient, grid_x:3, grid_z:3, max_rot:45, tolerance:10, axis:z",
+   "description": "Vera MolnÃ¡r-inspired rotation puzzle. Match cube rotations to ghost targets. Config: style:molnar|interruptions|random|gradient, grid_x:3, grid_z:3, max_rot:45, tolerance:10, axis:z",
    "dev_themes": [
     "core",
     "primitives"
@@ -17204,7 +17205,7 @@
   "scale_lines": {
    "category": "unknown",
    "complexity": "beginner",
-   "description": "[100m, 10m, 1m, 10cm, 1mm] \u2014 a logarithmic ladder of reference lengths made tangible",
+   "description": "[100m, 10m, 1m, 10cm, 1mm] — a logarithmic ladder of reference lengths made tangible",
    "dev_themes": [
     "core",
     "primitives"
@@ -19959,7 +19960,7 @@
   "transform_staircase_fibonacci": {
    "category": "unknown",
    "complexity": "intermediate",
-   "description": "Fibonacci spiral: array + golden angle (137.5\u00c2\u00b0) + scaling. Nature's growth pattern.",
+   "description": "Fibonacci spiral: array + golden angle (137.5Â°) + scaling. Nature's growth pattern.",
    "dev_themes": [
     "core",
     "primitives"
@@ -20067,7 +20068,7 @@
   "transform_staircase_mobius": {
    "category": "unknown",
    "complexity": "expert",
-   "description": "M\u00c3\u00b6bius strip: array + rotation + twist. One-sided surface, topological oddity.",
+   "description": "MÃ¶bius strip: array + rotation + twist. One-sided surface, topological oddity.",
    "dev_themes": [
     "core",
     "primitives"
@@ -20174,7 +20175,7 @@
   "transform_staircase_showcase": {
    "category": "unknown",
    "complexity": "intermediate",
-   "description": "All five staircase types together: Linear, Spiral, DNA, Fibonacci, M\u00c3\u00b6bius. Culmination of arrays + transformation.",
+   "description": "All five staircase types together: Linear, Spiral, DNA, Fibonacci, MÃ¶bius. Culmination of arrays + transformation.",
    "dev_themes": [
     "biology",
     "core",
@@ -21376,7 +21377,7 @@
   "truncatedtetrahedron": {
    "category": "unknown",
    "complexity": "beginner",
-   "description": "tetrahedron with corners cut \u2014 each vertex replaced by a triangular face, adding 4 new faces",
+   "description": "tetrahedron with corners cut — each vertex replaced by a triangular face, adding 4 new faces",
    "dev_themes": [
     "core",
     "primitives"
@@ -21778,7 +21779,7 @@
   "achilles_tortoise": {
    "category": "primitives",
    "complexity": "beginner",
-   "description": "Zeno's paradox of Achilles and the Tortoise. Watch infinite steps converge to a finite limit: A_n = L*(1-1/2^n). Each step halves the gap \u2014 infinite steps, finite distance. The paradox dissolves in the limit.",
+   "description": "Zeno's paradox of Achilles and the Tortoise. Watch infinite steps converge to a finite limit: A_n = L*(1-1/2^n). Each step halves the gap — infinite steps, finite distance. The paradox dissolves in the limit.",
    "dev_themes": [
     "core",
     "primitives"
@@ -22176,7 +22177,7 @@
     "sample_interval": 0.12,
     "row_count": 18,
     "world_coords": true,
-    "brand_text": "ADA \u00b7 OVERSIGHT",
+    "brand_text": "ADA · OVERSIGHT",
     "footprint": [
      1,
      1,
@@ -22710,7 +22711,7 @@
   "wall_placard": {
    "category": "primitives",
    "complexity": "beginner",
-   "description": "A museum wall caption \u2014 TITLE, a thin accent rule, sequence-date metadata, and one sentence of intent, in gallery-label typography. The curatorial register of the lab: it CAPTIONS the work (where the chalkboard states the science and the gem enacts it). Replaces the old AnnotationInfoBoard HUD (XP/health/barcode) as the wall caption. Procedural 2D-in-3D, baked to a mipmapped texture so the small body text stays legible at VR distance.",
+   "description": "A museum wall caption — TITLE, a thin accent rule, sequence-date metadata, and one sentence of intent, in gallery-label typography. The curatorial register of the lab: it CAPTIONS the work (where the chalkboard states the science and the gem enacts it). Replaces the old AnnotationInfoBoard HUD (XP/health/barcode) as the wall caption. Procedural 2D-in-3D, baked to a mipmapped texture so the small body text stays legible at VR distance.",
    "dev_themes": [
     "commons",
     "primitives",
@@ -22732,7 +22733,7 @@
    "name": "Wall Placard",
    "parameters": {
     "title": "THE POINT",
-    "meta": "PRIMITIVES \u00b7 2036",
+    "meta": "PRIMITIVES · 2036",
     "body": "Position without extension. Zero dimensions. The seed of all form.",
     "footprint": [
      1,
@@ -22800,7 +22801,7 @@
   "triangle_chalkboard": {
    "category": "primitives",
    "complexity": "beginner",
-   "description": "A mystical chalkboard for THE TRIANGLE - the labelled triangle plus \u0394 as both shape and symbol: the first plane to close, the only rigid polygon, and change/difference. Ends on a koan, not a formula: 'what is the cost of \u0394?'",
+   "description": "A mystical chalkboard for THE TRIANGLE - the labelled triangle plus Δ as both shape and symbol: the first plane to close, the only rigid polygon, and change/difference. Ends on a koan, not a formula: 'what is the cost of Δ?'",
    "dev_themes": [
     "commons",
     "primitives",
@@ -22838,7 +22839,7 @@
     "mystical",
     "didactic"
    ],
-   "qfep_connection": "\u0394 is form, change, and difference in one symbol - and to differ, to close a new plane, is never free. The board names the cost without paying it.",
+   "qfep_connection": "Δ is form, change, and difference in one symbol - and to differ, to close a new plane, is never free. The board names the cost without paying it.",
    "content": "text"
   },
   "line_chalkboard": {
@@ -23463,7 +23464,7 @@
   "silhouette_gate": {
    "name": "Silhouette Gate (draw to open)",
    "lookup_name": "silhouette_gate",
-   "description": "A ghost silhouette of a form. Take the drawing point and trace the form by passing through every vertex; complete it and the form dissolves as a sliding door opens. 2D forms (triangle, square/quad, pentagon, hexagon, circle) AND 3D forms \u2014 a cube is a green wireframe whose 8 corners must all be drawn through. Configurable: form, form_size, hit_radius, ordered, ring_points, rotation_offset_deg, door_tag.",
+   "description": "A ghost silhouette of a form. Take the drawing point and trace the form by passing through every vertex; complete it and the form dissolves as a sliding door opens. 2D forms (triangle, square/quad, pentagon, hexagon, circle) AND 3D forms — a cube is a green wireframe whose 8 corners must all be drawn through. Configurable: form, form_size, hit_radius, ordered, ring_points, rotation_offset_deg, door_tag.",
    "scene": "res://commons/artifacts/silhouette_gate/silhouette_gate.tscn",
    "category": "puzzle",
    "footprint": [
@@ -23483,7 +23484,7 @@
   "archimedean_tunnel": {
    "category": "primitives",
    "complexity": "intermediate",
-   "description": "The primitives seam. A digital line is a polygon pretending to be a curve \u2014 at arm's length the machine's chords read smooth; magnified (the tunnel) they cut every corner, with holes between the samples where the hand was and the machine never looked. Archimedes exhausted the circle with polygons; the machine stops at N.",
+   "description": "The primitives seam. A digital line is a polygon pretending to be a curve — at arm's length the machine's chords read smooth; magnified (the tunnel) they cut every corner, with holes between the samples where the hand was and the machine never looked. Archimedes exhausted the circle with polygons; the machine stops at N.",
    "dev_themes": [
     "digital_bias",
     "seam"

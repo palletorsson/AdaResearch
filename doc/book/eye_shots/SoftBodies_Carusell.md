@@ -20,11 +20,11 @@ clearance violations: **2 overlaps, 4 tight** — the law wants ≥1.2m to walk 
 no sibling kept — the move did not beat the ride (overlaps 2→2, tight 4→4). Note-only.
 
 ## The voice (qfep)
-3 of 5 cast members carry a theory-claim; 2 mute.
+5 of 5 cast members carry a theory-claim; 0 mute.
 - **cloth_straps** — strap_count — more straps create a denser curtain with more inter-strap collision, fewer straps let each one s
+- **grab_long_stick** — F_force: the probe — a graspable stick trailing a long cloth ribbon. It is how the hand asks a soft world ques
 - **pick_up_cube** — Pure S as carried displacement: the cube stays itself while its coordinates change. The artifact isolates tran
 - **revolving_joy_ride** — ride_speed — slow rotation lets soft bodies dangle and sway, fast rotation stretches them into elongated teard
-- mute: grab_long_stick, soft_mushroom
 
 ## The text vs the space
 walked.md exists — the writing names 1/5 of the cast; dwells declared for 0.

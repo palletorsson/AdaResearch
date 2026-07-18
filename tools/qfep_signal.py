@@ -69,15 +69,26 @@ def build_critical_index():
                 v["phase"], v["phase_idx"] = PHASES[pi], pi
             if q:
                 v["crit_text"] = (v["crit_text"] + " " + q).strip()
-            # scene-stem alias: @identity in .gd is keyed by script FILENAME,
-            # but maps speak lookup_name — when they differ (softstopscene ->
-            # fourstopsoftbody.tscn) the artifact reads as mute. Remember the
-            # scene stem so step 2 can merge the .gd claim into the lookup.
+            # alias bridge: @identity in .gd is keyed by script FILENAME, but
+            # maps speak lookup_name — and script name, scene stem, and lookup
+            # can all differ (rotating_arm.gd -> softmill.tscn -> softmill).
+            # Register the scene stem AND every .gd the scene references, so
+            # step 2 merges the claim into the lookup whatever the file names.
             sc = str(e.get("scene", ""))
             if sc:
                 stem = os.path.splitext(os.path.basename(sc))[0]
                 if stem and stem != ln:
                     _scene_alias.setdefault(stem, set()).add(ln)
+                scp = os.path.join(ROOT, sc.replace("res://", ""))
+                if os.path.isfile(scp):
+                    try:
+                        stxt = open(scp, encoding="utf-8", errors="replace").read()
+                        for m in re.finditer(r'([A-Za-z0-9_]+)\.gd"', stxt):
+                            gstem = m.group(1)
+                            if gstem != ln:
+                                _scene_alias.setdefault(gstem, set()).add(ln)
+                    except Exception:
+                        pass
 
     # 2) @identity from .gd: the artifact's own theory claim
     for base in ("algorithms", os.path.join("commons", "artifacts")):

@@ -1,7 +1,7 @@
 {
  "artifacts": {
   "gallery_marker_soft-body": {
-   "name": "Gallery Marker \u2014 Soft Body",
+   "name": "Gallery Marker — Soft Body",
    "lookup_name": "gallery_marker_soft-body",
    "description": "Small bronze pedestal + glowing stake + Label3D reading SOFT BODY. Single-cell sub-gallery anchor used 24x across softbodies maps. Shared scene at commons/artifacts/gallery_marker; the lookup_name fixes the label.",
    "scene": "res://commons/artifacts/gallery_marker/gallery_marker.tscn",
@@ -35,7 +35,8 @@
     ],
     "size_group": "tiny",
     "label": "SOFT BODY"
-   }
+   },
+   "qfep_connection": "a you-are-here anchor: bronze pedestal, glowing stake, a name in the air. Wayfinding furniture, never dominant — it marks the inhabited gallery without asserting content of its own."
   },
   "flex_cloth_pad": {
    "name": "Flex Cloth Pad",

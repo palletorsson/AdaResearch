@@ -15,10 +15,10 @@ clearance violations: **0 overlaps, 1 tight** — the law wants ≥1.2m to walk 
 no sibling kept — the move did not beat the ride (overlaps 0→0, tight 1→1). Note-only.
 
 ## The voice (qfep)
-2 of 3 cast members carry a theory-claim; 1 mute.
+3 of 3 cast members carry a theory-claim; 0 mute.
 - **jelly_cube** — Low stiffness = high Î» territory. Form becomes fluid, resists fixed categories. stiffness — at 0 the cube col
 - **science_screen** — Transformation here is projection: a 3D state is re-expressed in 2D while preserving selected structural relat
-- mute: softmill
+- **softmill** — oscillation: a soft mill — compliant blades behind frosted glass, turned by the same physics they yield to. Wh
 
 ## The text vs the space
 walked.md exists — the writing names 2/3 of the cast; dwells declared for 0.
