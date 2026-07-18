@@ -215,9 +215,19 @@ def shot(map_name, qidx):
           f"ti {ti_b}->{ti_a if pf_ok else '-'} "
           f"{'KEPT ' + sib if improved else 'note-only'}  "
           f"voices {len(voices)}/{len(cast)}")
+    viol_names = set(re.findall(r"[a-zA-Z0-9_]+", " ".join(viol_b)))
     return {"map": map_name, "improved": improved,
-            "overlaps": [ov_b, ov_a], "tight": [ti_b, ti_a],
-            "voices": len(voices), "cast": len(cast)}
+            "sibling": sib if improved else None,
+            "overlaps": [ov_b, ov_a if pf_ok else None],
+            "tight": [ti_b, ti_a if pf_ok else None],
+            "voices": len(voices), "cast": len(cast),
+            "mutes": mutes[:8],
+            "walked": walked_exists,
+            "mentioned": len(mentioned), "dwelled": dwelled,
+            "blocked": [a for a in mentioned if a in viol_names],
+            "unwritten": unmentioned[:6],
+            "decision": (ov_b > 0 or ti_b > 3) and not improved,
+            "note": body}
 
 
 def main():
@@ -229,14 +239,42 @@ def main():
     elif arg("seq"):
         d = json.loads((DRAFTS / f"{arg('seq')}.json").read_text(encoding="utf-8"))
         targets = [e["map"] for e in d["v1_tutorial"] if e.get("map")]
+    seq_of = {}
+    if "--threads" in sys.argv:
+        # every drafted V1 thread, the whole spine
+        for dp in sorted(DRAFTS.glob("*.json")):
+            d = json.loads(dp.read_text(encoding="utf-8"))
+            for e in d["v1_tutorial"]:
+                if e.get("map"):
+                    targets.append(e["map"])
+                    seq_of[e["map"]] = d["seq"]
+    elif arg("seq"):
+        for m in targets:
+            seq_of[m] = arg("seq")
     if not targets:
         print(__doc__)
         return 1
     print("building qfep index…")
     qidx = qfep_index()
     print(f"index: {len(qidx)} artifacts with critical text\n")
+    combined_p = ROOT.parent / "ada_encyclopedia" / "public" / "eye_shots.json"
+    combined = {"shots": {}}
+    if combined_p.exists():
+        try:
+            combined = json.loads(combined_p.read_text(encoding="utf-8"))
+        except json.JSONDecodeError:
+            pass
     for m in targets:
-        shot(m, qidx)
+        r = shot(m, qidx)
+        if r is None:
+            continue
+        r["seq"] = seq_of.get(m, "")
+        combined.setdefault("shots", {})[m] = r
+        # incremental write: the /eye-shots page fills as the run walks
+        combined_p.write_text(json.dumps(combined, indent=1,
+                                         ensure_ascii=False),
+                              encoding="utf-8", newline="\n")
+    print(f"\n-> eye_shots.json: {len(combined['shots'])} maps")
     return 0
 
 
