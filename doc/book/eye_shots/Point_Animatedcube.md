@@ -18,11 +18,11 @@ clearance violations: **0 overlaps, 4 tight** — the law wants ≥1.2m to walk 
 no sibling kept — the move did not beat the ride (overlaps 0→0, tight 4→4). Note-only.
 
 ## The voice (qfep)
-3 of 5 cast members carry a theory-claim; 2 mute.
+5 of 5 cast members carry a theory-claim; 0 mute.
+- **animatedcubebuilder** — The cube assembled in slow motion — vertices, then edges, then faces, with grab handles at each stage. The cha
 - **dark_sphere** — Transformation often needs an invariant reference to be legible. The sphere stays simple so surrounding change
 - **floating_sphere_field** — The void was never empty, only under-rendered. Replacing the lattice with a drift trades the comfort of fixed 
-- **science_screen** — Transformation here is projection: a 3D state is re-expressed in 2D while preserving selected structural relat
-- mute: animatedcubebuilder, polyhedron_nets_cube
+- **polyhedron_nets_cube** — A cube unfolded flat and folded again before you — the solid revealed as a hinged sheet of six quads. The net 
 
 ## The text vs the space
 walked.md exists — the writing names 4/5 of the cast; dwells declared for 2.

@@ -22,12 +22,12 @@ clearance violations: **0 overlaps, 42 tight** — the law wants ≥1.2m to walk
 no sibling kept — the move did not beat the ride (overlaps 0→0, tight 42→42). Note-only.
 
 ## The voice (qfep)
-9 of 20 cast members carry a theory-claim; 11 mute.
+17 of 20 cast members carry a theory-claim; 3 mute.
 - **cube_scene** — Transformation changes S while the cube serves as the invariant reference body. Because the base form is so le
 - **dark_sphere** — Transformation often needs an invariant reference to be legible. The sphere stays simple so surrounding change
+- **dgrid** — Dürer's perspective frame standing in the room — the drafting instrument that taught the Renaissance to projec
 - **floating_sphere_field** — The void was never empty, only under-rendered. Replacing the lattice with a drift trades the comfort of fixed 
-- **fontana_puncture** — The point given a radius and aimed at solid matter becomes the absence that defines the form. Subtraction as m
-- mute: dgrid, laser_exploding_sphere, laser_measure, lightrod, line, line_builder_3d, modulor_man_demo, parallel_line_puzzle
+- mute: perspective_lines, plus_line_puzzle, scale_lines
 
 ## The text vs the space
 walked.md exists — the writing names 12/20 of the cast; dwells declared for 2.

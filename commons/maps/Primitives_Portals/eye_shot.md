@@ -14,10 +14,11 @@ clearance violations: **0 overlaps, 0 tight** — the law wants ≥1.2m to walk 
 no sibling kept — the move did not beat the ride (overlaps 0→0, tight 0→0). Note-only.
 
 ## The voice (qfep)
-2 of 5 cast members carry a theory-claim; 3 mute.
+5 of 5 cast members carry a theory-claim; 0 mute.
+- **achilles_tortoise** — Zeno's race staged as steps that shrink toward a limit — Achilles gaining forever and arriving anyway. The par
+- **capsule** — A cylinder that rounded its ends — the primitive of the *organic*, the shape a body or a pill takes when it re
+- **combine_portals** — One torus duplicated down a hall, denser as it recedes — the primitive caught in the act of becoming a corrido
 - **dark_sphere** — Transformation often needs an invariant reference to be legible. The sphere stays simple so surrounding change
-- **floating_sphere_field** — The void was never empty, only under-rendered. Replacing the lattice with a drift trades the comfort of fixed 
-- mute: achilles_tortoise, capsule, combine_portals
 
 ## The text vs the space
 walked.md exists — the writing names 4/5 of the cast; dwells declared for 1.

@@ -22,12 +22,12 @@ clearance violations: **0 overlaps, 52 tight** — the law wants ≥1.2m to walk
 no sibling kept — the move did not beat the ride (overlaps 0→3, tight 52→23). Note-only.
 
 ## The voice (qfep)
-6 of 23 cast members carry a theory-claim; 17 mute.
+14 of 23 cast members carry a theory-claim; 9 mute.
+- **capsule** — A cylinder that rounded its ends — the primitive of the *organic*, the shape a body or a pill takes when it re
+- **capsule_radials_rings** — The capsule with its resolution exposed — radial segments and rings you can set. The reminder that every smoot
 - **cube_scene** — Transformation changes S while the cube serves as the invariant reference body. Because the base form is so le
 - **dark_sphere** — Transformation often needs an invariant reference to be legible. The sphere stays simple so surrounding change
-- **floating_sphere_field** — The void was never empty, only under-rendered. Replacing the lattice with a drift trades the comfort of fixed 
-- **library_rack** — the collection key — one word selects which registry to display a library is not the objects — it is the act o
-- mute: capsule, capsule_radials_rings, diamonds, grab_octahedron, hole_with_cones, lshape, platonic_grabbables, plus
+- mute: roughrock, snap_octahedron_puzzle, sphere, sphere_high, sphere_low, sphere_mid, star_primitive, torus_radials_rings
 
 ## The text vs the space
 walked.md exists — the writing names 14/23 of the cast; dwells declared for 1.

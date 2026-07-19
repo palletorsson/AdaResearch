@@ -22,12 +22,12 @@ clearance violations: **1 overlaps, 8 tight** — the law wants ≥1.2m to walk 
 no sibling kept — the move did not beat the ride (overlaps 1→1, tight 8→8). Note-only.
 
 ## The voice (qfep)
-5 of 10 cast members carry a theory-claim; 5 mute.
+9 of 10 cast members carry a theory-claim; 1 mute.
 - **CoordinateSystem3M** — Pure F — the coordinate system is the most fundamental structure, the frame from which all measurement begins.
 - **floating_sphere_field** — The void was never empty, only under-rendered. Replacing the lattice with a drift trades the comfort of fixed 
+- **folding_past** — An accordion collapsing — time made geometric, the past pleating into the present. The one primitive here that
 - **fontana_puncture** — The point given a radius and aimed at solid matter becomes the absence that defines the form. Subtraction as m
-- **lab_room** — accent_color — drives the strip, lights, signage tint, and sub-line color. Matches the QFEP phase of the workb
-- mute: , folding_past, frame_counter_display, interactive_point_origin_force, origin
+- mute: 
 
 ## The text vs the space
 walked.md exists — the writing names 10/10 of the cast; dwells declared for 3.

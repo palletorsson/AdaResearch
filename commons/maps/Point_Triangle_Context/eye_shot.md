@@ -22,12 +22,12 @@ clearance violations: **0 overlaps, 12 tight** — the law wants ≥1.2m to walk
 no sibling kept — the move did not beat the ride (overlaps 0→0, tight 12→12). Note-only.
 
 ## The voice (qfep)
-4 of 14 cast members carry a theory-claim; 10 mute.
+12 of 14 cast members carry a theory-claim; 2 mute.
 - **dark_sphere** — Transformation often needs an invariant reference to be legible. The sphere stays simple so surrounding change
+- **draw_triangle_faces** — fan_triangulate(loop) → a colored surface: the moment a closed loop of points stops being an outline and becom
 - **floating_sphere_field** — The void was never empty, only under-rendered. Replacing the lattice with a drift trades the comfort of fixed 
-- **lab_room** — accent_color — drives the strip, lights, signage tint, and sub-line color. Matches the QFEP phase of the workb
-- **science_screen** — Transformation here is projection: a 3D state is re-expressed in 2D while preserving selected structural relat
-- mute: draw_triangle_faces, folded_strip, interactivetriangle, parasol_triangle, pythagorean_triangle_angles, quad, quad_line_puzzle, triangle
+- **folded_strip** — triangle_strip(24) — a pleated ribbon of alternating heights, faces sharing edges down its length. The most ec
+- mute: triangle_line_puzzle, triangleprofiles
 
 ## The text vs the space
 walked.md exists — the writing names 10/14 of the cast; dwells declared for 1.
