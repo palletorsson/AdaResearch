@@ -40,6 +40,14 @@ const SPECIMENS := {
 	"cylinder_specimen": ["cylinder", "CYLINDER", "a line given a body"],
 	"torus_specimen":    ["torus",    "TORUS",    "a hole you cannot fill"],
 	"inventory_workbench": ["workbench", "INVENTORY", "parts before they are used"],
+	# The affordance family (Bricolage_Affordances): the SAME primitives,
+	# re-staged by what they DO — a part is defined by action, not category.
+	"cylinder_as_axle":   ["cylinder_axle",   "AXLE",   "laid down, it turns"],
+	"cylinder_as_column": ["cylinder_column", "COLUMN", "stood up, it bears"],
+	"plane_as_seat":      ["plane_seat",      "SEAT",   "held flat at knee height"],
+	"plane_as_wall":      ["plane_wall",      "WALL",   "stood on edge, it divides"],
+	"sphere_as_hub":      ["sphere_hub",      "HUB",    "everything radiates from it"],
+	"sphere_as_joint":    ["sphere_joint",    "JOINT",  "where two members bend"],
 }
 
 var _built := false
@@ -117,11 +125,159 @@ func _make_primitive(kind: String) -> MeshInstance3D:
 	match kind:
 		"workbench":
 			return _make_workbench()
+		"cylinder_axle":
+			return _make_axle()
+		"cylinder_column":
+			return _make_column()
+		"plane_seat":
+			return _make_seat()
+		"plane_wall":
+			return _make_wall()
+		"sphere_hub":
+			return _make_hub()
+		"sphere_joint":
+			return _make_joint()
 		_:
 			var mi := MeshInstance3D.new()
 			mi.mesh = _mesh_for(kind)
 			mi.material_override = _grid_material(primitive_color, Color(0.45, 0.85, 1.0), 2.0)
 			return mi
+
+
+# --- affordance compositions: the primitive staged by its USE ---------------
+# Each returns the primitive (bright) plus the minimal grey witness geometry
+# that makes the action legible — wheels for the axle, a lintel for the
+# column, legs for the seat, spokes for the hub, members for the joint.
+
+func _prim_mat() -> Material:
+	return _grid_material(primitive_color, Color(0.45, 0.85, 1.0), 2.0)
+
+
+func _witness_mat() -> Material:
+	return _grid_material(Color(0.30, 0.32, 0.38), Color(0.45, 0.50, 0.60), 0.5)
+
+
+func _make_axle() -> MeshInstance3D:
+	# the cylinder LYING DOWN, carrying two wheel discs — rotation as the use
+	var root := MeshInstance3D.new()
+	var axle := CylinderMesh.new()
+	axle.top_radius = 0.05
+	axle.bottom_radius = 0.05
+	axle.height = PRIM_SIZE * 2.6
+	root.mesh = axle
+	root.rotation_degrees = Vector3(0.0, 0.0, 90.0)   # lie along X
+	root.material_override = _prim_mat()
+	for side in [-1.0, 1.0]:
+		var wheel := MeshInstance3D.new()
+		var disc := CylinderMesh.new()
+		disc.top_radius = PRIM_SIZE * 0.8
+		disc.bottom_radius = PRIM_SIZE * 0.8
+		disc.height = 0.04
+		wheel.mesh = disc
+		wheel.position = Vector3(0.0, side * PRIM_SIZE * 1.1, 0.0)  # local: along the axle
+		wheel.material_override = _witness_mat()
+		root.add_child(wheel)
+	return root
+
+
+func _make_column() -> MeshInstance3D:
+	# the cylinder STANDING, bearing a lintel slab — load as the use
+	var root := MeshInstance3D.new()
+	var col := CylinderMesh.new()
+	col.top_radius = PRIM_SIZE * 0.45
+	col.bottom_radius = PRIM_SIZE * 0.45
+	col.height = PRIM_SIZE * 2.4
+	root.mesh = col
+	root.material_override = _prim_mat()
+	var lintel := MeshInstance3D.new()
+	var slab := BoxMesh.new()
+	slab.size = Vector3(PRIM_SIZE * 2.2, 0.07, PRIM_SIZE * 1.1)
+	lintel.mesh = slab
+	lintel.position = Vector3(0.0, PRIM_SIZE * 1.2 + 0.035, 0.0)
+	lintel.material_override = _witness_mat()
+	root.add_child(lintel)
+	return root
+
+
+func _make_seat() -> MeshInstance3D:
+	# the plane HELD FLAT at sitting height on two legs — support as the use
+	var root := MeshInstance3D.new()
+	var top := BoxMesh.new()
+	top.size = Vector3(PRIM_SIZE * 2.0, 0.03, PRIM_SIZE * 1.6)
+	root.mesh = top
+	root.material_override = _prim_mat()
+	for side in [-1.0, 1.0]:
+		var leg := MeshInstance3D.new()
+		var lm := BoxMesh.new()
+		lm.size = Vector3(0.05, PRIM_SIZE * 0.9, PRIM_SIZE * 1.4)
+		leg.mesh = lm
+		leg.position = Vector3(side * PRIM_SIZE * 0.85, -PRIM_SIZE * 0.45 - 0.015, 0.0)
+		leg.material_override = _witness_mat()
+		root.add_child(leg)
+	return root
+
+
+func _make_wall() -> MeshInstance3D:
+	# the plane STOOD ON EDGE — division as the use (nothing else needed)
+	var root := MeshInstance3D.new()
+	var slab := BoxMesh.new()
+	slab.size = Vector3(PRIM_SIZE * 2.2, PRIM_SIZE * 2.2, 0.03)
+	root.mesh = slab
+	root.material_override = _prim_mat()
+	return root
+
+
+func _make_hub() -> MeshInstance3D:
+	# the sphere with four spokes radiating — connection as the use
+	var root := MeshInstance3D.new()
+	var hub := SphereMesh.new()
+	hub.radius = PRIM_SIZE * 0.55
+	hub.height = PRIM_SIZE * 1.1
+	hub.radial_segments = 20
+	hub.rings = 10
+	root.mesh = hub
+	root.material_override = _prim_mat()
+	for ang in [0.0, 90.0, 180.0, 270.0]:
+		var spoke := MeshInstance3D.new()
+		var rod := CylinderMesh.new()
+		rod.top_radius = 0.025
+		rod.bottom_radius = 0.025
+		rod.height = PRIM_SIZE * 1.4
+		spoke.mesh = rod
+		spoke.rotation_degrees = Vector3(0.0, 0.0, 90.0)
+		spoke.position = Vector3(cos(deg_to_rad(ang)), 0.0, sin(deg_to_rad(ang))) * PRIM_SIZE * 1.0
+		spoke.rotation_degrees.y = -ang
+		spoke.material_override = _witness_mat()
+		root.add_child(spoke)
+	return root
+
+
+func _make_joint() -> MeshInstance3D:
+	# the sphere where two members meet at an angle — articulation as the use
+	var root := MeshInstance3D.new()
+	var ball := SphereMesh.new()
+	ball.radius = PRIM_SIZE * 0.5
+	ball.height = PRIM_SIZE * 1.0
+	ball.radial_segments = 20
+	ball.rings = 10
+	root.mesh = ball
+	root.material_override = _prim_mat()
+	var specs := [
+		{"rot": Vector3(0.0, 0.0, 90.0), "pos": Vector3(-PRIM_SIZE * 0.9, 0.0, 0.0)},
+		{"rot": Vector3(0.0, 0.0, 35.0), "pos": Vector3(PRIM_SIZE * 0.55, PRIM_SIZE * 0.75, 0.0)},
+	]
+	for s in specs:
+		var member := MeshInstance3D.new()
+		var rod := CylinderMesh.new()
+		rod.top_radius = 0.035
+		rod.bottom_radius = 0.035
+		rod.height = PRIM_SIZE * 1.8
+		member.mesh = rod
+		member.rotation_degrees = s["rot"]
+		member.position = s["pos"]
+		member.material_override = _witness_mat()
+		root.add_child(member)
+	return root
 
 
 func _mesh_for(kind: String) -> Mesh:

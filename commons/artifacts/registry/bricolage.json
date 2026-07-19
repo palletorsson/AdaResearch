@@ -147,6 +147,96 @@
     "bricolage"
    ],
    "qfep_connection": "The rack that holds them all: the eight primitives in a row, parts before they are used. This is the bricoleur's true instrument — not any single shape but the *inventory*, the held collection from which structure will be improvised. Construction without blueprint starts here, with everything laid out and nothing yet decided."
+  },
+  "cylinder_as_axle": {
+   "name": "Cylinder as Axle",
+   "lookup_name": "cylinder_as_axle",
+   "description": "The cylinder laid horizontal between two wheels — rotation as its use.",
+   "scene": "res://commons/artifacts/specimen_plinth/specimen_plinth.tscn",
+   "category": "bricolage",
+   "artifact_type": "specimen",
+   "complexity": "basic",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "bricolage"
+   ],
+   "qfep_connection": "The same cylinder from the inventory shelf, laid down — and lying down it becomes an axle, the part things turn around. First lesson of the affordance room: orientation is meaning. Nothing about the shape changed; its job did."
+  },
+  "cylinder_as_column": {
+   "name": "Cylinder as Column",
+   "lookup_name": "cylinder_as_column",
+   "description": "The cylinder stood upright bearing a lintel — load as its use.",
+   "scene": "res://commons/artifacts/specimen_plinth/specimen_plinth.tscn",
+   "category": "bricolage",
+   "artifact_type": "specimen",
+   "complexity": "basic",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "bricolage"
+   ],
+   "qfep_connection": "Stand the same cylinder up and it becomes a column, the part that bears. The lintel resting on it is the witness: a column is only a column under load. Category says cylinder twice; action says axle here, column there — and building is done with actions."
+  },
+  "plane_as_seat": {
+   "name": "Plane as Seat",
+   "lookup_name": "plane_as_seat",
+   "description": "The plane held flat at knee height on two legs — support as its use.",
+   "scene": "res://commons/artifacts/specimen_plinth/specimen_plinth.tscn",
+   "category": "bricolage",
+   "artifact_type": "specimen",
+   "complexity": "basic",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "bricolage"
+   ],
+   "qfep_connection": "The plane held flat at sitting height stops being geometry and becomes furniture: a seat is a plane at the height a body folds. The legs are witnesses, not the point — the point is that flatness plus a height plus a body equals an affordance."
+  },
+  "plane_as_wall": {
+   "name": "Plane as Wall",
+   "lookup_name": "plane_as_wall",
+   "description": "The plane stood on edge — division as its use.",
+   "scene": "res://commons/artifacts/specimen_plinth/specimen_plinth.tscn",
+   "category": "bricolage",
+   "artifact_type": "specimen",
+   "complexity": "basic",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "bricolage"
+   ],
+   "qfep_connection": "Stood on edge, the same plane divides: this side, that side, a before and after of a room. The wall needs no witness geometry at all — verticality alone converts a surface into a boundary. The cheapest affordance, and the most political."
+  },
+  "sphere_as_hub": {
+   "name": "Sphere as Hub",
+   "lookup_name": "sphere_as_hub",
+   "description": "The sphere with four spokes radiating — connection as its use.",
+   "scene": "res://commons/artifacts/specimen_plinth/specimen_plinth.tscn",
+   "category": "bricolage",
+   "artifact_type": "specimen",
+   "complexity": "basic",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "bricolage"
+   ],
+   "qfep_connection": "Give the sphere spokes and it becomes a hub — the part everything radiates from. Roundness that meant perfection on the inventory shelf here means omnidirectionality: a hub accepts members from any angle, which no cornered part can promise."
+  },
+  "sphere_as_joint": {
+   "name": "Sphere as Joint",
+   "lookup_name": "sphere_as_joint",
+   "description": "The sphere where two members meet at an angle — articulation as its use.",
+   "scene": "res://commons/artifacts/specimen_plinth/specimen_plinth.tscn",
+   "category": "bricolage",
+   "artifact_type": "specimen",
+   "complexity": "basic",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "bricolage"
+   ],
+   "qfep_connection": "Two members meet at the sphere and can re-decide their angle: a joint. Where the hub is many connections at rest, the joint is one connection in negotiation — the sphere as the part that lets a structure bend without breaking. The chair two maps later hinges on exactly this."
   }
  }
 }
