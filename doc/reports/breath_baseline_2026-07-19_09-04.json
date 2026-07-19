@@ -1,0 +1,29 @@
+{
+  "timestamp": "2026-07-19T09:04:00",
+  "phase": "baseline",
+  "mode": "full",
+  "pipeline_summary": {
+    "spine_sequences_scored": 24,
+    "complete": ["randomness"],
+    "at_stage_6_vr_testing": 23,
+    "global_avg": 6.0909,
+    "note": "Pipeline saturated. All spine sequences sit at stage-6 (vr_testing, 0%) except randomness COMPLETE. Per the THE-EDGE ruling, VR walking is not the real gate, so stage-6 saturation is expected and stable, not a defect."
+  },
+  "heat_map_top_5": [
+    {"item": "voice-coverage observability", "temperature": 60, "reason": "deep discovery (self-referential LOD entry, not real work)"},
+    {"item": "change voice", "temperature": 60, "reason": "placement-scoped voice metric; delta 0.0 in 2026-07-12 and 2026-07-18 breaths"},
+    {"item": "garden voice metric", "temperature": 60, "reason": "deep discovery (self-referential LOD entry, not real work)"}
+  ],
+  "garden_health": {
+    "growing": ["primitives 84/106", "wavefunctions 78/105", "hazards 80/84", "qfeplaboratory 43/55", "foundationscrisis 36/37"],
+    "reaching": ["fractals 49/56", "patterngeneration 49/53", "mosaicanalysis 40/43", "change 22/23 (95%)"],
+    "note": "Spine voice coverage plateaued at 62% project-wide. Remaining voiceless artifacts on spine sequences are shared display widgets (code_display, player_trace) or placement-scoped off-list scripted artifacts that structurally cannot move the coverage metric."
+  },
+  "release_gates": {
+    "overall": "PASS",
+    "A_sequence_contract": "PASS",
+    "B_artifact_registry": "PASS (missing_map_ready 17, non-blocking)",
+    "C_map_validation": "PASS (grade_F 0, grade_C 186 non-blocking)",
+    "D_lab_progression": "PASS"
+  }
+}

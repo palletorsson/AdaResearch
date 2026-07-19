@@ -72,7 +72,8 @@
       "expected_improvement": "Eliminates ~1 Evaluate-phase rediscovery per breath while the VR wall persists; routes straight to the highest available autonomous lever; prevents misreading stage-7 polish as owed work and prevents risky unattended Godot launches.",
       "breath_refs": [
         "2026-05-30T09:05",
-        "2026-05-31T09:05"
+        "2026-05-31T09:05",
+        "2026-07-19T09:04"
       ],
       "evidence_updates": [
         {
@@ -389,7 +390,8 @@
         "2026-07-04T09:00",
         "2026-07-05T09:00",
         "2026-07-06T09:00",
-        "2026-07-09T11:55"
+        "2026-07-09T11:55",
+        "2026-07-19T09:04"
       ],
       "evidence_updates": [
         {
@@ -415,9 +417,16 @@
       "breath_refs": [
         "2026-07-03T09:12",
         "2026-07-06T09:00",
-        "2026-07-12T09:10"
+        "2026-07-12T09:10",
+        "2026-07-18T14:22"
       ],
-      "evidence_updates": []
+      "evidence_updates": [
+        {
+          "date": "2026-07-18",
+          "source": "evening-harvest evolve-only (post morning breath 2026-07-18T14:22)",
+          "note": "FOURTH occurrence, and the SECOND to pollute global_avg_history. The 2026-07-18 morning `full` breath logged baseline_avg=post_avg=0.0 in breath_log.json (the true saturated value is 6.0909: 23 spine seqs at stage-6 vr_testing, randomness COMPLETE, gates PASS -- independently confirmed by voice coverage 62% and passing release gates). The morning breath's self-harvest then appended the garbage 0.0 straight into global_avg_history as an avg=0.0 point amid 6.0909 neighbors -- exactly the trend-series pollution this proposal predicts, and the same failure the 07-12 harvest had to correct by hand. This evening harvest CORRECTED the 07-18 point to 6.0909 (raw_scorer_read=0.0 retained), mirroring the 07-12 fix. Occurrence tally is now FOUR (07-03 0.0, 07-06 null, 07-12 0.0, 07-18 0.0) and the by-hand correction has been needed on the last TWO of them -- a clean demonstration that the BREATHER-side guard (part 1 of proposed_change: treat a 0.0/null read as SUSPECT, re-run once, and never append it to global_avg_history) is not yet applied and keeps costing a manual correction each saturated breath that trips it. STRENGTHENS the standing apply recommendation. The TOOL-side root cause (part 2: make sequence_pipeline_scorer.py emit a sentinel/non-zero exit on incomplete computation instead of a silent 0.0) remains uninvestigated. 0 content failures this breath -> this is a tool-reliability confirming occurrence, not a new content-failure proposal."
+        }
+      ]
     },
     {
       "id": "prop-voice-metric-scope",
@@ -432,7 +441,8 @@
         "2026-07-09T11:55",
         "2026-07-10T09:00",
         "2026-07-12T09:10",
-        "2026-07-18T14:22"
+        "2026-07-18T14:22",
+        "2026-07-19T09:04"
       ]
     }
   ]

@@ -3075,6 +3075,33 @@
       ],
       "commit": "057abfdf9",
       "duration_minutes": 18
+    },
+    {
+      "breath_id": "2026-07-19T09:04",
+      "mode": "full",
+      "baseline_avg": 6.0909,
+      "post_avg": 6.0909,
+      "delta": 0.0,
+      "items_attempted": [],
+      "items_succeeded": [],
+      "items_failed": [],
+      "failure_reasons": {},
+      "skills_used": [
+        "ada-breather"
+      ],
+      "skill_effectiveness": {},
+      "discoveries": [
+        "Heat map is a self-referential loop: heat_map_generator promotes stale 'deep discovery' LOD session entries into 60-degree heat items. All 3 of today's hot items ('voice-coverage observability', 'change voice', 'garden voice metric') are prior LOD notes ABOUT the voice metric, not real work. Writing a new lod_session_writer discovery would MANUFACTURE more false heat -- the exact overfitting loop the 2026-07-18 course correction named. Do not feed it.",
+        "Voice-coverage is structurally capped at 62%. The remaining voiceless spine artifacts are either shared display widgets (code_display = dressing-room display, player_trace = primitives/point) that must not carry sequence-specific truths, or off-list scripted artifacts the placement-scoped metric cannot count (change's 5 scripted artifacts: delta 0.0 across the 07-12 AND 07-18 breaths). Voice-coverage chasing is a saturated dead end until the book-walk introduces new on-list content.",
+        "Honest light-breath decision: project healthy (all 4 release gates PASS, grade_F 0, pipeline saturated at stage-6 which is not the real gate per THE-EDGE ruling). No genuine non-metric content gap surfaces headlessly without a Palle sentence. Per the STOP-building-instruments course correction, declined to manufacture @identity busywork. No project content changed."
+      ],
+      "files_changed": [
+        "doc/reports/breath_baseline_2026-07-19_09-04.json",
+        "doc/reports/breath_log.json",
+        "doc/reports/improvement_trajectory.json",
+        "doc/HEAT_MAP.json"
+      ],
+      "duration_minutes": 8
     }
   ]
 }
