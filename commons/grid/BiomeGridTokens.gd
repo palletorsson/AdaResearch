@@ -12,8 +12,14 @@
 #              rule= (algo param, e.g. CA rule) · any other k=v kept verbatim in mods
 #   reactions: on=<trigger>:<response>[/<response>...]
 #              triggers:  catalyst | catalyst.<mode> | touch | dwell | tick
+#                         | friend | friend.<power>
 #                         (mode ids are becoming_catalyst.MODES ids:
-#                          chromatic, fractal, branching, cellular, ...)
+#                          chromatic, fractal, branching, cellular, ...;
+#                          power slugs are CatalystCapabilityManager
+#                          FRIEND_POWERS: shield, porter, neutralizer,
+#                          launcher, calmer, decoy, replicator, splitter,
+#                          bridger, escort — a settled FRIEND fires its
+#                          power once per cell it enters)
 #              responses: seed | step | claim | mute | unmute | mutate.<channel>
 #                         (dot, not colon — ":" is the token separator; channels
 #                          color / visibility|hide / transform|rotate|lift /
@@ -80,8 +86,8 @@ static func parse(raw: Variant) -> Dictionary:
 					out["valid"] = false
 					return out
 				responses.append(rr)
-			var trig_ok: bool = trigger in ["catalyst", "touch", "dwell", "tick"] \
-				or trigger.begins_with("catalyst.")
+			var trig_ok: bool = trigger in ["catalyst", "touch", "dwell", "tick", "friend"] \
+				or trigger.begins_with("catalyst.") or trigger.begins_with("friend.")
 			if not trig_ok:
 				out["valid"] = false
 				return out

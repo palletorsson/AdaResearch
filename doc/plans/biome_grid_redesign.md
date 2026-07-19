@@ -134,6 +134,9 @@ Honesty and safety:
   in-world effects" partially lands — several powers ARE grid reactions
   (the neutralizer clearing toxic cells = mute on a hazard-adjacent layer;
   the bridger's tendril = a claimed row). One mechanism, two threads served.
+  LANDED 2026-07-19: triggers `friend` | `friend.<power>` (power slugs =
+  CatalystCapabilityManager FRIEND_POWERS); a settled FRIEND fires its slug
+  once per cell entered (catalyst_foe._friend_biome_tick, biome_grid group).
 
 ## Architecture (the consolidation, completed by this redesign)
 

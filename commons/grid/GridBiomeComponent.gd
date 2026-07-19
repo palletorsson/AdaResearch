@@ -47,6 +47,12 @@
 #       dwell = staying DWELL_SECONDS on it (fires once per visit); tick =
 #       every TICK_SECONDS on every tick-reactive cell. Headless runs have
 #       no camera: touch/dwell never fire; tick still does.
+#     - friend.<power>: a settled FRIEND creature (catalyst_foe) fires its
+#       lineage power slug (CatalystCapabilityManager FRIEND_POWERS:
+#       neutralizer, bridger, shield, ...) once per cell it enters — the
+#       catalyst thread's "friend powers need in-world effects" landing as
+#       grid reactions (neutralizer quiets biome = mute; bridger's tendril
+#       = a claimed row). Declared "friend" matches any typed power.
 #   Responses with teeth: `seed` now STAGES a newly-active unmuted cell
 #   (through the same dispatcher honesty guard — the vacuum that can be
 #   opened renders when opened); `mutate:<channel>` routes into the mutator
@@ -211,6 +217,12 @@ func react_at_world(world_pos: Vector3, trigger: String) -> Array:
 	return react(cell.x, cell.y, trigger)
 
 
+# Public cell query for once-per-cell sources (friends, future walkers):
+# lets a mover ask "which cell am I on" so it can gate its own re-fires.
+func cell_at_world(world_pos: Vector3) -> Vector2i:
+	return _world_to_cell(world_pos)
+
+
 func _world_to_cell(world_pos: Vector3) -> Vector2i:
 	var local: Vector3 = to_local(world_pos) if is_inside_tree() else world_pos
 	var step: float = _cube_size + _gutter
@@ -248,8 +260,10 @@ func _process(delta: float) -> void:
 func _trigger_matches(declared: String, fired: String) -> bool:
 	if declared == fired:
 		return true
-	# "catalyst" matches any typed "catalyst.<mode>"
-	return declared == "catalyst" and fired.begins_with("catalyst.")
+	# "catalyst" matches any typed "catalyst.<mode>"; "friend" any "friend.<power>"
+	if declared == "catalyst" and fired.begins_with("catalyst."):
+		return true
+	return declared == "friend" and fired.begins_with("friend.")
 
 
 func _apply_response(key: String, col: int, row: int, cell: Dictionary, response: String) -> void:

@@ -423,6 +423,10 @@
      "id": "catalyst-12",
      "text": "/editor web dropdown still only knows 4 foe kinds (VR has 8 + critter stages)",
      "done": false
+    },
+    {
+     "id": "catalyst-13",
+     "text": "Friend powers AS GRID REACTIONS - DONE 2026-07-19 (biome-7 landing, the cross-thread note in biome_grid_redesign.md): grammar triggers friend | friend.<power> (slugs = FRIEND_POWERS: shield/porter/neutralizer/launcher/calmer/decoy/replicator/splitter/bridger/escort); a settled FRIEND fires its slug once per cell entered (catalyst_foe._friend_biome_tick via biome_grid group - no-op on undeclared maps); wildcard friend matches any power. Declared cells answer: on=friend.neutralizer:mute quiets biome, on=friend.bridger:claim grows the tendril row (staged through the honesty guard). Probe probe_biome_friend.gd 10/10 END-TO-END (real CatalystFoe walked the 4-hit arc to friend and muted a declared cell; once-per-cell proven; mismatched power no-op); gate map Biome_FriendTest (foe placed among reactive cells) boots 0 invalid. Authoring now open: reactive tokens in Act II/III chambers make friend passage matter per room."
     }
    ],
    "links": [

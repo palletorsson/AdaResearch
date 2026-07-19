@@ -123,6 +123,28 @@ var _porter_platform: StaticBody3D = null
 const BRIDGER_TENDRIL_PATH: String = "res://commons/hazards/catalyst_foe/bridger_tendril.gd"
 var _bridger_scan_timer: float = 0.0
 var _bridger_next_grow: float = 0.0
+
+# GRID REACTIONS (all lineages, biome-7 landing): a settled FRIEND fires
+# "friend.<power>" into the declared biome layer once per cell it enters —
+# reactive cells answer (on=friend.neutralizer:mute quiets biome around a
+# hazard; on=friend.bridger:claim grows the tendril's grid-native row).
+# Power slugs mirror CatalystCapabilityManager.FRIEND_POWERS (kept local so
+# the foe works in probe contexts without autoloads). Found via the
+# "biome_grid" group — joined only by maps that declared layers.biome, so
+# everywhere else this is a group-miss no-op.
+const POWER_BY_MODE: Dictionary = {
+	"primitives":     "shield",
+	"transformation": "porter",
+	"chromatic":      "neutralizer",
+	"forces":         "launcher",
+	"waveform":       "calmer",
+	"chaos":          "decoy",
+	"cellular":       "replicator",
+	"fractal":        "splitter",
+	"branching":      "bridger",
+	"swarm":          "escort",
+}
+var _biome_cell: Vector2i = Vector2i(-9999, -9999)
 var _tendril_script = null
 var _tendril_checked: bool = false
 
@@ -434,6 +456,10 @@ func _physics_process(delta: float) -> void:
 
 
 func _process_friend_power(delta: float) -> void:
+	# EVERY lineage speaks to the grid (biome-7): once per cell entered,
+	# the friend's power slug fires as a reaction trigger. Declared cells
+	# answer; maps without a biome layer never join the group — no-op.
+	_friend_biome_tick()
 	# Per-lineage dispatch — a no-op for lineages without a frame power.
 	# (SHIELD orbit + ESCORT movement live in _process_friend_chase;
 	# SPLITTER + REPLICATOR fire from their event paths.)
@@ -448,6 +474,24 @@ func _process_friend_power(delta: float) -> void:
 			_bridger_tick(delta)
 		_:
 			pass
+
+
+## biome-7: the friend's grid voice. Fires "friend.<power>" on the biome
+## cell it just entered (once per cell — the brush's per-stroke discipline,
+## per visit). The component gates everything else: declared reactions only,
+## runtime copy only, honesty guard on any staged growth.
+func _friend_biome_tick() -> void:
+	if not is_inside_tree():
+		return  # no tree, no grid to speak to (probe _init / teardown)
+	var biome: Node = get_tree().get_first_node_in_group("biome_grid")
+	if biome == null or not biome.has_method("cell_at_world"):
+		return
+	var cell: Vector2i = biome.cell_at_world(global_position)
+	if cell == _biome_cell:
+		return
+	_biome_cell = cell
+	var power: String = String(POWER_BY_MODE.get(_locked_mode_id, "shield"))
+	biome.react(cell.x, cell.y, "friend." + power)
 
 
 # ── Catalyst hit contract ───────────────────────────────────────────
