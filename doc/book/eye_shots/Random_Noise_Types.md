@@ -16,13 +16,15 @@ clearance violations: **0 overlaps, 2 tight** — the law wants ≥1.2m to walk 
 no sibling kept — the move did not beat the ride (overlaps 0→0, tight 2→2). Note-only.
 
 ## The voice (qfep)
-2 of 4 cast members carry a theory-claim; 2 mute.
+4 of 4 cast members carry a theory-claim; 0 mute.
+- **NoiseColors3D** — Noise has colors: white forgets everything, pink remembers a little, brown wanders like a drunk with a heading
+- **WhiteNoiseGallery** — The baseline: pure white noise, every sample a stranger to its neighbors. This is randomness before it learns 
 - **randompoint** — area_half_extent — the size of the possible universe this point can inhabit white noise is the null hypothesis
 - **randompoints** — Pure E(S) — three distributions at three lambda values. Uniform is maximum entropy (lambda=0). Gaussian introd
-- mute: NoiseColors3D, WhiteNoiseGallery
 
 ## The text vs the space
-**no walked.md** — the space stands unwritten; this note is the first text this map has.
+walked.md exists — the writing names 4/4 of the cast; dwells declared for 0.
+- **the writing's subjects are blocked in space**: NoiseColors3D, WhiteNoiseGallery, randompoints sit in clearance violations — the text promises what the floor obstructs.
 
 ## The heuristic understanding
 The space already walks: the bodies keep the law without being told. What carries this map is its voice, not its floor.
