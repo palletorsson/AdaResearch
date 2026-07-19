@@ -17,10 +17,10 @@ clearance violations: **2 overlaps, 1 tight** — the law wants ≥1.2m to walk 
 no sibling kept — the move did not beat the ride (overlaps 2→2, tight 1→1). Note-only.
 
 ## The voice (qfep)
-2 of 3 cast members carry a theory-claim; 1 mute.
+3 of 3 cast members carry a theory-claim; 0 mute.
 - **dark_sphere** — Transformation often needs an invariant reference to be legible. The sphere stays simple so surrounding change
 - **mandelbrot_dive** — The Mandelbrot boundary is exactly lambda_edge — infinite complexity at the border between convergence (F) and
-- mute: mandelbrot_set
+- **mandelbrot_set** — The world's most famous boundary: for each point c, iterate z squared plus c and ask if it stays home. The set
 
 ## The text vs the space
 walked.md exists — the writing names 3/3 of the cast; dwells declared for 0.

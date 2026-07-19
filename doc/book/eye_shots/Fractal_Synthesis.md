@@ -22,12 +22,11 @@ clearance violations: **19 overlaps, 3 tight** — the law wants ≥1.2m to walk
 no sibling kept — the move did not beat the ride (overlaps 19→19, tight 3→3). Note-only.
 
 ## The voice (qfep)
-7 of 10 cast members carry a theory-claim; 3 mute.
+10 of 10 cast members carry a theory-claim; 0 mute.
 - **cantor_set** — max_iterations — at 5 iterations, each bar is 1/243 of the original, yet the set is still uncountably infinite
 - **dark_sphere** — Transformation often needs an invariant reference to be legible. The sphere stays simple so surrounding change
+- **fibonacci_sequences** — Recursion in its gentlest clothing: each term the sum of the last two, spiraling into the ratio the golden tur
 - **fractal_clouds** — density_threshold — too high makes the sky clear, too low makes the world grey fog; at 0.45 you get discrete c
-- **recursive_tree** — randomness_amount (0.15) — the variance injected into every angle and length, making each tree unique A tree i
-- mute: fibonacci_sequences, fractal_recursion_1, koch_curve
 
 ## The text vs the space
 walked.md exists — the writing names 7/10 of the cast; dwells declared for 0.

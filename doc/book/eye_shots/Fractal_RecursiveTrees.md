@@ -22,12 +22,11 @@ clearance violations: **11 overlaps, 5 tight** — the law wants ≥1.2m to walk
 no sibling kept — the move did not beat the ride (overlaps 11→11, tight 5→5). Note-only.
 
 ## The voice (qfep)
-6 of 10 cast members carry a theory-claim; 4 mute.
+10 of 10 cast members carry a theory-claim; 0 mute.
 - **cube_desk** — drawer_rows * drawer_cols — the grid resolution of the drawer unit determines storage granularity A desk is a 
 - **dark_sphere** — Transformation often needs an invariant reference to be legible. The sphere stays simple so surrounding change
-- **inverted_tree_cloud** — vertical_tilt range (-0.5 to -0.2) — controls how steeply branches plunge downward An inverted tree is not wro
-- **living_paper** — The paper that leans toward you and inks your wandering is the tenderest face of the same act the monitor perf
-- mute: fractal_lsystem_tree, fractal_scene, recursive_tree_2, small_subdivision_cube
+- **fractal_lsystem_tree** — The bridge to the next chapter grown early: a tree written as grammar, branches as rewrite rules. Standing amo
+- **fractal_scene** — A composed fractal tableau — the chapter's specimens arranged as one scene, self-similarity as scenography. re
 
 ## The text vs the space
 walked.md exists — the writing names 6/10 of the cast; dwells declared for 0.

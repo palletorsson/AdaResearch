@@ -14,12 +14,11 @@ clearance violations: **0 overlaps, 0 tight** — the law wants ≥1.2m to walk 
 no sibling kept — the move did not beat the ride (overlaps 0→0, tight 0→0). Note-only.
 
 ## The voice (qfep)
-4 of 5 cast members carry a theory-claim; 1 mute.
+5 of 5 cast members carry a theory-claim; 0 mute.
 - **dark_sphere** — Transformation often needs an invariant reference to be legible. The sphere stays simple so surrounding change
+- **fibonacci_sequences** — Recursion in its gentlest clothing: each term the sum of the last two, spiraling into the ratio the golden tur
 - **fibonacci_terrain** — prefer_center_lift — when true, mountains grow from the center outward; when false, peaks scatter randomly Ter
 - **golden_rectangle** — max_subdivisions — each step cuts a square and rotates direction (right→up→left→down); the spiral tightens wit
-- **romanesco** — GOLDEN_ANGLE (137.508 degrees) — the irrational rotation that prevents any two buds from aligning, maximizing 
-- mute: fibonacci_sequences
 
 ## The text vs the space
 walked.md exists — the writing names 4/5 of the cast; dwells declared for 0.
