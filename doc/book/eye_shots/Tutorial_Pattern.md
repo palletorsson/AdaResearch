@@ -14,23 +14,24 @@ clearance violations: **0 overlaps, 9 tight** — the law wants ≥1.2m to walk 
 - `[tight  ] pattern_tile_mirror:0:-0.5 <-> pattern_tile_puzzle:0:-0.5 gap +0.41m (centers 1.41m)`
 
 ## The move
-        new_placements = fn(room, artifacts, rng)
-      File "C:\Users\palle\Documents\GitHub\AdaResearch_46\tools\placement_research.py", line 1283, in strategy_humanoid_walker
-        for r in range(room.depth - d + 1):
-    TypeError: 'float' object cannot be interpreted as an integer
+    logged 1 entries to ada_run\placement_log.json
+    summary: 1 maps processed
+      constraint improved: 1/1  mean Δ=+0.102
+      walkability improved: 1/1  mean Δ=+0.003
 
-no sibling kept — the move did not beat the ride (overlaps 0→0, tight 9→9). Note-only.
+sibling **Trial_eye_Tutorial_Pattern** kept: overlaps 0→0, tight 9→6, pathfinder OK.
 
 ## The voice (qfep)
-3 of 10 cast members carry a theory-claim; 7 mute.
+5 of 10 cast members carry a theory-claim; 5 mute.
 - **dark_sphere** — Transformation often needs an invariant reference to be legible. The sphere stays simple so surrounding change
 - **grid_model** — max_model_size — the model dynamically scales so any map fits within this bounding dimension (default 1.0m); a
+- **panel_bridge_loom** — The oldest L-system in human hands: threading, tie-up, treadling — a weaving draft is a grammar, and the drawd
 - **pattern_maker_station** — wallpaper_group — the symmetry operator that transforms a 4x4 domain into a universe; 17 groups, exactly 17, a
-- mute: panel_bridge_loom, pattern_studio_plate, pattern_tile_mirror, pattern_tile_plate, pattern_tile_puzzle, pulsar_compact, script_runner
+- mute: pattern_studio_plate, pattern_tile_mirror, pattern_tile_plate, pattern_tile_puzzle, script_runner
 
 ## The text vs the space
 walked.md exists — the writing names 0/10 of the cast; dwells declared for 0.
 - space without text: dark_sphere, grid_model, panel_bridge_loom, pattern_maker_station, pattern_studio_plate, pattern_tile_mirror — standing in the room, absent from the walk.
 
 ## The heuristic understanding
-The violations are real but mechanical moving does not fix them — they are placement DECISIONS (which body yields?), not placement errors. This is verdict material, not tooling material.
+The floor was fighting the walk — bodies inside each other's clearance. The mover found a better seating; the ride confirms it in text. The voice column above says what the room is FOR; the next writing pass should say it in the walked page.

@@ -2,7 +2,7 @@
  "seq": "machinelearning",
  "phase": "integration",
  "truth": "Learning is optimization in a landscape you can't fully see.",
- "current_n": 8,
+ "current_n": 9,
  "tight_n": 8,
  "v1_tutorial": [
   {
@@ -12,7 +12,7 @@
    "hero_prov": "measured (dig load-bearing)",
    "slot_prov": "heuristic (position)",
    "lb": true,
-   "walked": false,
+   "walked": true,
    "cast_n": 7,
    "prov": "heuristic (provenance-ranked pick)"
   },
@@ -23,7 +23,7 @@
    "hero_prov": "measured (dig load-bearing)",
    "slot_prov": "heuristic (position)",
    "lb": true,
-   "walked": false,
+   "walked": true,
    "cast_n": 3,
    "prov": "ghost (slot-fill from unused pool)"
   },
@@ -34,7 +34,7 @@
    "hero_prov": "register (heroes.json)",
    "slot_prov": "heuristic (position)",
    "lb": false,
-   "walked": false,
+   "walked": true,
    "cast_n": 3,
    "prov": "heuristic (provenance-ranked pick)"
   },
@@ -45,7 +45,7 @@
    "hero_prov": "register (heroes.json)",
    "slot_prov": "heuristic (position)",
    "lb": false,
-   "walked": false,
+   "walked": true,
    "cast_n": 3,
    "prov": "heuristic (provenance-ranked pick)"
   },
@@ -56,7 +56,7 @@
    "hero_prov": "heuristic (cast default)",
    "slot_prov": "heuristic (position)",
    "lb": false,
-   "walked": false,
+   "walked": true,
    "cast_n": 2,
    "prov": "ghost (slot-fill from unused pool)"
   },
@@ -67,7 +67,7 @@
    "hero_prov": "heuristic (cast default)",
    "slot_prov": "heuristic (position)",
    "lb": false,
-   "walked": false,
+   "walked": true,
    "cast_n": 2,
    "prov": "ghost (slot-fill from unused pool)"
   },
@@ -78,26 +78,26 @@
    "hero_prov": "heuristic (cast default)",
    "slot_prov": "heuristic (position)",
    "lb": false,
-   "walked": false,
+   "walked": true,
    "cast_n": 1,
    "prov": "ghost (slot-fill from unused pool)"
   },
   {
    "slot": "close",
-   "map": "ML_Synthesis",
-   "hero": "train",
-   "hero_prov": "register (heroes.json)",
-   "slot_prov": "heuristic (position)",
-   "lb": false,
-   "walked": false,
-   "cast_n": 3,
-   "prov": "heuristic (provenance-ranked pick)"
-  },
-  {
-   "slot": "seed",
    "map": null,
    "gap": true,
    "prov": "declared gap — no existing map holds this slot"
+  },
+  {
+   "slot": "seed",
+   "map": "Chamber_ML",
+   "hero": "catalyst_target",
+   "hero_prov": "heuristic (cast default)",
+   "slot_prov": "register (chamber convention)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 3,
+   "prov": "register — Chamber_* closes the sequence"
   }
  ],
  "v2_anti": [
@@ -128,7 +128,7 @@
     "ML_Perception",
     "ML_Sequence_Memory",
     "ML_Generative",
-    "ML_Synthesis"
+    "Chamber_ML"
    ],
    "law": "the tutorial arc itself (V1 identity)",
    "tau_vs_tutorial": 1.0
@@ -138,7 +138,7 @@
     "ML_Gradient_Landscape",
     "ML_Classification",
     "ML_Neural_Networks",
-    "ML_Synthesis",
+    "Chamber_ML",
     "ML_Sequence_Memory",
     "ML_Generative",
     "ML_Perception",
@@ -155,7 +155,7 @@
     "ML_Gradient_Landscape",
     "ML_Classification",
     "ML_Neural_Networks",
-    "ML_Synthesis",
+    "Chamber_ML",
     "ML_Evolution"
    ],
    "law": "sparse -> dense; the world thickens",
@@ -168,7 +168,7 @@
     "ML_Perception",
     "ML_Sequence_Memory",
     "ML_Generative",
-    "ML_Synthesis",
+    "Chamber_ML",
     "ML_Evolution",
     "ML_Gradient_Landscape"
    ],

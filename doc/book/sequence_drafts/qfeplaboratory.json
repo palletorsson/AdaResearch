@@ -2,7 +2,7 @@
  "seq": "qfeplaboratory",
  "phase": "synthesis",
  "truth": "QFE = F âˆ’ Î»E(S) + Ï†Î”E(S,t). Life exists at Î» â‰ˆ 0.3-0.5.",
- "current_n": 8,
+ "current_n": 9,
  "tight_n": 8,
  "v1_tutorial": [
   {
@@ -84,20 +84,20 @@
   },
   {
    "slot": "close",
-   "map": "QFEP_Synthesis",
-   "hero": "the",
-   "hero_prov": "register (heroes.json)",
-   "slot_prov": "heuristic (position)",
-   "lb": false,
-   "walked": true,
-   "cast_n": 7,
-   "prov": "heuristic (provenance-ranked pick)"
-  },
-  {
-   "slot": "seed",
    "map": null,
    "gap": true,
    "prov": "declared gap — no existing map holds this slot"
+  },
+  {
+   "slot": "seed",
+   "map": "Chamber_QFEP",
+   "hero": "catalyst_target",
+   "hero_prov": "heuristic (cast default)",
+   "slot_prov": "register (chamber convention)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 3,
+   "prov": "register — Chamber_* closes the sequence"
   }
  ],
  "v2_anti": [
@@ -120,7 +120,7 @@
     "QFEP_Phi_Term",
     "QFEP_Edge_Of_Chaos",
     "QFEP_Sandbox",
-    "QFEP_Synthesis"
+    "Chamber_QFEP"
    ],
    "law": "the tutorial arc itself (V1 identity)",
    "tau_vs_tutorial": 1.0
@@ -132,26 +132,26 @@
     "QFEP_Phi_Term",
     "QFEP_Edge_Of_Chaos",
     "QFEP_Sandbox",
-    "QFEP_Synthesis",
     "QFEP_Introduction",
+    "Chamber_QFEP",
     "QFEP_Lambda_Spectrum"
    ],
    "law": "small meets you first — the gaze law's cousin",
-   "tau_vs_tutorial": 0.21
+   "tau_vs_tutorial": 0.29
   },
   "density-rising": {
    "order": [
+    "Chamber_QFEP",
     "QFEP_Phi_Term",
     "QFEP_Edge_Of_Chaos",
     "QFEP_Sandbox",
     "QFEP_Lambda_Spectrum",
     "QFEP_E_Term",
-    "QFEP_Synthesis",
     "QFEP_F_Term",
     "QFEP_Introduction"
    ],
    "law": "sparse -> dense; the world thickens",
-   "tau_vs_tutorial": -0.36
+   "tau_vs_tutorial": -0.71
   },
   "truth-earned": {
    "order": [
@@ -160,7 +160,7 @@
     "QFEP_Phi_Term",
     "QFEP_Edge_Of_Chaos",
     "QFEP_Sandbox",
-    "QFEP_Synthesis",
+    "Chamber_QFEP",
     "QFEP_Introduction",
     "QFEP_Lambda_Spectrum"
    ],

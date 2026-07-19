@@ -2,8 +2,8 @@
  "seq": "proceduralgeneration",
  "phase": "lambda_edge",
  "truth": "A world doesn't need an author. Rules and randomness are enough.",
- "current_n": 7,
- "tight_n": 7,
+ "current_n": 8,
+ "tight_n": 8,
  "v1_tutorial": [
   {
    "slot": "threshold",
@@ -12,7 +12,7 @@
    "hero_prov": "measured (dig load-bearing)",
    "slot_prov": "heuristic (position)",
    "lb": true,
-   "walked": false,
+   "walked": true,
    "cast_n": 2,
    "prov": "heuristic (provenance-ranked pick)"
   },
@@ -23,7 +23,7 @@
    "hero_prov": "heuristic (cast default)",
    "slot_prov": "heuristic (position)",
    "lb": false,
-   "walked": false,
+   "walked": true,
    "cast_n": 1,
    "prov": "ghost (slot-fill from unused pool)"
   },
@@ -34,7 +34,7 @@
    "hero_prov": "measured (dig load-bearing)",
    "slot_prov": "heuristic (position)",
    "lb": true,
-   "walked": false,
+   "walked": true,
    "cast_n": 2,
    "prov": "heuristic (provenance-ranked pick)"
   },
@@ -45,40 +45,40 @@
    "hero_prov": "register (heroes.json)",
    "slot_prov": "heuristic (position)",
    "lb": false,
-   "walked": false,
+   "walked": true,
    "cast_n": 3,
    "prov": "heuristic (provenance-ranked pick)"
   },
   {
    "slot": "turn",
-   "map": "PG_Percolation_Network",
-   "hero": "constraint",
-   "hero_prov": "register (heroes.json)",
-   "slot_prov": "heuristic (position)",
-   "lb": false,
-   "walked": false,
-   "cast_n": 2,
-   "prov": "ghost (slot-fill from unused pool)"
-  },
-  {
-   "slot": "critical",
    "map": "PG_Caves_Mazes",
    "hero": "wave",
    "hero_prov": "register (heroes.json)",
    "slot_prov": "heuristic (position)",
    "lb": false,
-   "walked": false,
+   "walked": true,
    "cast_n": 2,
    "prov": "ghost (slot-fill from unused pool)"
   },
   {
-   "slot": "world",
+   "slot": "critical",
    "map": "PG_Mirrored_Patterns",
    "hero": "adjacency",
    "hero_prov": "register (heroes.json)",
    "slot_prov": "heuristic (position)",
    "lb": false,
-   "walked": false,
+   "walked": true,
+   "cast_n": 2,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "world",
+   "map": "PG_Percolation_Network",
+   "hero": "constraint",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": true,
    "cast_n": 2,
    "prov": "ghost (slot-fill from unused pool)"
   },
@@ -90,15 +90,20 @@
   },
   {
    "slot": "seed",
-   "map": null,
-   "gap": true,
-   "prov": "declared gap — no existing map holds this slot"
+   "map": "Chamber_ProcGen",
+   "hero": "catalyst_target",
+   "hero_prov": "heuristic (cast default)",
+   "slot_prov": "register (chamber convention)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 3,
+   "prov": "register — Chamber_* closes the sequence"
   }
  ],
  "v2_anti": [
   {
    "slot": "turn",
-   "host_map": "PG_Percolation_Network",
+   "host_map": "PG_Caves_Mazes",
    "anti": "space_colonization_algorithm ⟷ branching_growth_algorithm",
    "why": "opposed on order/entropy (walked×walked)",
    "prov": "ghost — top sleeping counter-pair (L-021)",
@@ -107,7 +112,7 @@
   {
    "kind": "seam",
    "slot": "critical",
-   "host_map": "PG_Caves_Mazes",
+   "host_map": "PG_Mirrored_Patterns",
    "anti": "seed_world",
    "why": "the seed is the world — walk away and back — recreated identically from its seed",
    "prov": "register (seam catalog) — placement ghost"
@@ -120,9 +125,10 @@
     "PG_Space_Colonization",
     "PG_Branching_Growth",
     "PG_Sculpted_Forms",
-    "PG_Percolation_Network",
     "PG_Caves_Mazes",
-    "PG_Mirrored_Patterns"
+    "PG_Mirrored_Patterns",
+    "PG_Percolation_Network",
+    "Chamber_ProcGen"
    ],
    "law": "the tutorial arc itself (V1 identity)",
    "tau_vs_tutorial": 1.0
@@ -132,39 +138,42 @@
     "PG_Space_Colonization",
     "PG_Branching_Growth",
     "PG_Sculpted_Forms",
-    "PG_Percolation_Network",
     "PG_Caves_Mazes",
     "PG_Mirrored_Patterns",
+    "PG_Percolation_Network",
+    "Chamber_ProcGen",
     "PG_Genetic_Evolution"
    ],
    "law": "small meets you first — the gaze law's cousin",
-   "tau_vs_tutorial": 0.43
+   "tau_vs_tutorial": 0.5
   },
   "density-rising": {
    "order": [
     "PG_Space_Colonization",
     "PG_Genetic_Evolution",
     "PG_Branching_Growth",
-    "PG_Percolation_Network",
     "PG_Caves_Mazes",
     "PG_Mirrored_Patterns",
-    "PG_Sculpted_Forms"
+    "PG_Percolation_Network",
+    "PG_Sculpted_Forms",
+    "Chamber_ProcGen"
    ],
    "law": "sparse -> dense; the world thickens",
-   "tau_vs_tutorial": 0.62
+   "tau_vs_tutorial": 0.71
   },
   "truth-earned": {
    "order": [
     "PG_Space_Colonization",
     "PG_Sculpted_Forms",
-    "PG_Percolation_Network",
     "PG_Caves_Mazes",
     "PG_Mirrored_Patterns",
+    "PG_Percolation_Network",
+    "Chamber_ProcGen",
     "PG_Genetic_Evolution",
     "PG_Branching_Growth"
    ],
    "law": "load-bearing heroes arrive late — the walk earns them",
-   "tau_vs_tutorial": 0.14
+   "tau_vs_tutorial": 0.21
   }
  },
  "dig_counter_pool": [

@@ -2,8 +2,8 @@
  "seq": "array_tutorial",
  "phase": "F_order",
  "truth": "",
- "current_n": 7,
- "tight_n": 7,
+ "current_n": 8,
+ "tight_n": 8,
  "v1_tutorial": [
   {
    "slot": "threshold",
@@ -90,9 +90,14 @@
   },
   {
    "slot": "seed",
-   "map": null,
-   "gap": true,
-   "prov": "declared gap — no existing map holds this slot"
+   "map": "Chamber_Arrays",
+   "hero": "catalyst_target",
+   "hero_prov": "heuristic (cast default)",
+   "slot_prov": "register (chamber convention)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 3,
+   "prov": "register — Chamber_* closes the sequence"
   }
  ],
  "v2_anti": [
@@ -114,7 +119,8 @@
     "Tutorial_2D_Build",
     "Tutorial_Row",
     "Tutorial_3D",
-    "Tutorial_Disco"
+    "Tutorial_Disco",
+    "Chamber_Arrays"
    ],
    "law": "the tutorial arc itself (V1 identity)",
    "tau_vs_tutorial": 1.0
@@ -127,15 +133,17 @@
     "Tutorial_Row",
     "Tutorial_3D",
     "Tutorial_Disco",
-    "Tutorial_Pattern"
+    "Tutorial_Pattern",
+    "Chamber_Arrays"
    ],
    "law": "small meets you first — the gaze law's cousin",
-   "tau_vs_tutorial": 0.52
+   "tau_vs_tutorial": 0.64
   },
   "density-rising": {
    "order": [
     "Tutorial_Row",
     "Tutorial_Disco",
+    "Chamber_Arrays",
     "Tutorial_Single",
     "Tutorial_3D",
     "Tutorial_2D_Build",
@@ -143,7 +151,7 @@
     "Array_Patterns"
    ],
    "law": "sparse -> dense; the world thickens",
-   "tau_vs_tutorial": -0.33
+   "tau_vs_tutorial": -0.36
   },
   "truth-earned": {
    "order": [
@@ -153,10 +161,11 @@
     "Tutorial_Row",
     "Tutorial_3D",
     "Tutorial_Disco",
+    "Chamber_Arrays",
     "Tutorial_Pattern"
    ],
    "law": "load-bearing heroes arrive late — the walk earns them",
-   "tau_vs_tutorial": 0.52
+   "tau_vs_tutorial": 0.57
   }
  },
  "dig_counter_pool": [],
