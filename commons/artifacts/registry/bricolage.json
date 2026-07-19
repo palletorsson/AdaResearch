@@ -1,0 +1,140 @@
+{
+ "_comment": "Bricolage specimen/affordance family. All entries share one scene (specimen_plinth.tscn); the shape is read from the lookup_name meta the grid stamps before _ready(). Built 2026-07-19 as the reusable wrapper that unblocks Bricolage_Inventory + Bricolage_Affordances.",
+ "artifacts": {
+  "point_specimen": {
+   "name": "Point Specimen",
+   "lookup_name": "point_specimen",
+   "description": "The point primitive lifted onto a plinth as a labelled part.",
+   "scene": "res://commons/artifacts/specimen_plinth/specimen_plinth.tscn",
+   "category": "bricolage",
+   "artifact_type": "specimen",
+   "complexity": "basic",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "bricolage"
+   ],
+   "qfep_connection": "The point as stock: position without extension, shelved as the first part. Bricolage begins by refusing to use a shape and instead cataloguing it — the point held in reserve, a candidate before it is a commitment."
+  },
+  "line_specimen": {
+   "name": "Line Specimen",
+   "lookup_name": "line_specimen",
+   "description": "The line primitive on a plinth as a labelled part.",
+   "scene": "res://commons/artifacts/specimen_plinth/specimen_plinth.tscn",
+   "category": "bricolage",
+   "artifact_type": "specimen",
+   "complexity": "basic",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "bricolage"
+   ],
+   "qfep_connection": "The line as stock: a direction held in reserve. On the plinth it stops being a connection and becomes a *part* — the raw length the bricoleur reaches for when two things must be joined or spanned."
+  },
+  "triangle_specimen": {
+   "name": "Triangle Specimen",
+   "lookup_name": "triangle_specimen",
+   "description": "The triangle primitive on a plinth as a labelled part.",
+   "scene": "res://commons/artifacts/specimen_plinth/specimen_plinth.tscn",
+   "category": "bricolage",
+   "artifact_type": "specimen",
+   "complexity": "basic",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "bricolage"
+   ],
+   "qfep_connection": "The triangle as stock: the first rigid part. Shelved beside the others it advertises what it alone offers — triangulation, the one primitive that cannot be racked without stiffening whatever it joins. The dome three maps later is made of nothing else."
+  },
+  "plane_specimen": {
+   "name": "Plane Specimen",
+   "lookup_name": "plane_specimen",
+   "description": "The plane primitive on a plinth as a labelled part.",
+   "scene": "res://commons/artifacts/specimen_plinth/specimen_plinth.tscn",
+   "category": "bricolage",
+   "artifact_type": "specimen",
+   "complexity": "basic",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "bricolage"
+   ],
+   "qfep_connection": "The plane as stock: a surface waiting for a use. Category says 'flat thing'; the affordance room next door will make it a seat or a wall. Here it is neither yet — a part whose meaning is still open, which is the whole bricolage bet."
+  },
+  "cube_specimen": {
+   "name": "Cube Specimen",
+   "lookup_name": "cube_specimen",
+   "description": "The cube primitive on a plinth as a labelled part.",
+   "scene": "res://commons/artifacts/specimen_plinth/specimen_plinth.tscn",
+   "category": "bricolage",
+   "artifact_type": "specimen",
+   "complexity": "basic",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "bricolage"
+   ],
+   "qfep_connection": "The cube as stock: the block, the volume of the grid boxed and set aside. The most obviously useful part on the shelf, and therefore the one the bricoleur must be most careful not to reach for by habit."
+  },
+  "sphere_specimen": {
+   "name": "Sphere Specimen",
+   "lookup_name": "sphere_specimen",
+   "description": "The sphere primitive on a plinth as a labelled part.",
+   "scene": "res://commons/artifacts/specimen_plinth/specimen_plinth.tscn",
+   "category": "bricolage",
+   "artifact_type": "specimen",
+   "complexity": "basic",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "bricolage"
+   ],
+   "qfep_connection": "The sphere as stock: the joint, the hub, the pivot. Racked as a specimen it reads as potential rotation — the part you add where two struts must turn against each other. Not everything is a corner, and not every part wants to stay still."
+  },
+  "cylinder_specimen": {
+   "name": "Cylinder Specimen",
+   "lookup_name": "cylinder_specimen",
+   "description": "The cylinder primitive on a plinth as a labelled part.",
+   "scene": "res://commons/artifacts/specimen_plinth/specimen_plinth.tscn",
+   "category": "bricolage",
+   "artifact_type": "specimen",
+   "complexity": "basic",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "bricolage"
+   ],
+   "qfep_connection": "The cylinder as stock: the axle and the column at once. The specimen that most obviously changes meaning with orientation — lay it down and it spins, stand it up and it bears load. A part defined by which way you shelve it."
+  },
+  "torus_specimen": {
+   "name": "Torus Specimen",
+   "lookup_name": "torus_specimen",
+   "description": "The torus primitive on a plinth as a labelled part.",
+   "scene": "res://commons/artifacts/specimen_plinth/specimen_plinth.tscn",
+   "category": "bricolage",
+   "artifact_type": "specimen",
+   "complexity": "basic",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "bricolage"
+   ],
+   "qfep_connection": "The torus as stock: the ring, the loop, the hole you cannot fill. The oddest part on the shelf — useful precisely for its absence, the gap it carries. Bricolage's reminder that a part can be a thing that is mostly not-there."
+  },
+  "inventory_workbench": {
+   "name": "Inventory Workbench",
+   "lookup_name": "inventory_workbench",
+   "description": "The specimen rack — the eight primitives arrayed on one bench.",
+   "scene": "res://commons/artifacts/specimen_plinth/specimen_plinth.tscn",
+   "category": "bricolage",
+   "artifact_type": "specimen",
+   "complexity": "basic",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "bricolage"
+   ],
+   "qfep_connection": "The rack that holds them all: the eight primitives in a row, parts before they are used. This is the bricoleur's true instrument — not any single shape but the *inventory*, the held collection from which structure will be improvised. Construction without blueprint starts here, with everything laid out and nothing yet decided."
+  }
+ }
+}

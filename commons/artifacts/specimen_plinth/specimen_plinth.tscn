@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://b7specimenplinth01"]
+
+[ext_resource type="Script" path="res://commons/artifacts/specimen_plinth/specimen_plinth.gd" id="1_script"]
+
+; specimen_plinth.tscn — the bricolage specimen wrapper backed by
+; specimen_plinth.gd. One scene serves every specimen and affordance: the
+; shape is read from the lookup_name the grid stamps as metadata before
+; _ready(). Registered under point_specimen / cube_specimen / ... so bare map
+; tokens resolve without per-shape scenes.
+
+[node name="specimen_plinth" type="Node3D"]
+script = ExtResource("1_script")
