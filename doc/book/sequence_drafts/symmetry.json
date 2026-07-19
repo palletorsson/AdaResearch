@@ -2,8 +2,8 @@
  "seq": "symmetry",
  "phase": "F_order",
  "truth": "A pattern is not a picture — it is a rule performed. There are exactly seventeen ways a flat pattern can repeat: the one census in this book that CLOSES. The Alhambra's artisans exhausted it centuries before group theory existed to count it.",
- "current_n": 6,
- "tight_n": 6,
+ "current_n": 7,
+ "tight_n": 7,
  "v1_tutorial": [
   {
    "slot": "threshold",
@@ -85,9 +85,14 @@
   },
   {
    "slot": "seed",
-   "map": null,
-   "gap": true,
-   "prov": "declared gap — no existing map holds this slot"
+   "map": "Chamber_Symmetry",
+   "hero": "becoming_catalyst",
+   "hero_prov": "heuristic (cast default)",
+   "slot_prov": "register (chamber convention)",
+   "lb": false,
+   "walked": false,
+   "cast_n": 3,
+   "prov": "register — Chamber_* closes the sequence"
   }
  ],
  "v2_anti": [
@@ -108,13 +113,15 @@
     "Symmetry_Mirror_Rotor",
     "Symmetry_Group",
     "Symmetry_Glide",
-    "Symmetry_Seventeen"
+    "Symmetry_Seventeen",
+    "Chamber_Symmetry"
    ],
    "law": "the tutorial arc itself (V1 identity)",
    "tau_vs_tutorial": 1.0
   },
   "footprint-ascending": {
    "order": [
+    "Chamber_Symmetry",
     "Symmetry_Motif",
     "Symmetry_Translation",
     "Symmetry_Mirror_Rotor",
@@ -123,10 +130,11 @@
     "Symmetry_Group"
    ],
    "law": "small meets you first — the gaze law's cousin",
-   "tau_vs_tutorial": 0.73
+   "tau_vs_tutorial": 0.24
   },
   "density-rising": {
    "order": [
+    "Chamber_Symmetry",
     "Symmetry_Motif",
     "Symmetry_Translation",
     "Symmetry_Mirror_Rotor",
@@ -135,7 +143,7 @@
     "Symmetry_Seventeen"
    ],
    "law": "sparse -> dense; the world thickens",
-   "tau_vs_tutorial": 1.0
+   "tau_vs_tutorial": 0.43
   },
   "truth-earned": {
    "order": [
@@ -143,11 +151,12 @@
     "Symmetry_Translation",
     "Symmetry_Glide",
     "Symmetry_Seventeen",
+    "Chamber_Symmetry",
     "Symmetry_Mirror_Rotor",
     "Symmetry_Group"
    ],
    "law": "load-bearing heroes arrive late — the walk earns them",
-   "tau_vs_tutorial": 0.47
+   "tau_vs_tutorial": 0.43
   }
  },
  "dig_counter_pool": [],

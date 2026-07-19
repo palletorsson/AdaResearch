@@ -3,16 +3,15 @@
 > one pass: ride (gaze), move (place --only-improve), gate (pathfinder), voice (qfep). Field note, not a ruling.
 
 ## The ride (before)
-clearance violations: **1 overlaps, 0 tight** — the law wants ≥1.2m to walk between.
-- `[OVERLAP] verlet_workbench           <-> science_screen             gap -0.22m (centers 2.35m)`
+clearance violations: **0 overlaps, 0 tight** — the law wants ≥1.2m to walk between.
 
 ## The move
     logged 1 entries to ada_run\placement_log.json
     summary: 1 maps processed
-      constraint improved: 1/1  mean Δ=+0.079
-      walkability improved: 1/1  mean Δ=+0.067
+      constraint improved: 0/1  mean Δ=+0.000
+      walkability improved: 0/1  mean Δ=+0.000
 
-sibling **Trial_eye_FormFinding_Relaxation** kept: overlaps 1→0, tight 0→0, pathfinder OK.
+no sibling kept — the move did not beat the ride (overlaps 0→0, tight 0→0). Note-only.
 
 ## The voice (qfep)
 4 of 4 cast members carry a theory-claim; 0 mute.
@@ -23,8 +22,7 @@ sibling **Trial_eye_FormFinding_Relaxation** kept: overlaps 1→0, tight 0→0, 
 
 ## The text vs the space
 walked.md exists — the writing names 3/4 of the cast; dwells declared for 0.
-- **the writing's subjects are blocked in space**: verlet_workbench sit in clearance violations — the text promises what the floor obstructs.
 - space without text: science_screen — standing in the room, absent from the walk.
 
 ## The heuristic understanding
-The floor was fighting the walk — bodies inside each other's clearance. The mover found a better seating; the ride confirms it in text. The voice column above says what the room is FOR; the next writing pass should say it in the walked page.
+The space already walks: the bodies keep the law without being told. What carries this map is its voice, not its floor.

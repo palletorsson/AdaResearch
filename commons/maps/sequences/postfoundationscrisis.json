@@ -1,117 +1,141 @@
 {
-  "sequences": {
-	"postfoundationscrisis": {
-	  "name": "Post-Crisis: Applied Limits",
-	  "truth": "Knowing the limits of formalization, what do we build?",
-	  "qfep_term": "Edge",
-	  "qfep_connection": "After the foundations crisis, these maps explore what happens when incompleteness, bias, and rhizomatic thinking become design materials rather than problems to solve.",
-	  "formula": "limits → critical practice → new structures",
-	  "description": "The sequence that lands the thesis. The foundations crisis showed that every formal system has an outside. These maps walk what becomes possible once you stop demanding completeness: ethics as architecture, paraconsistent engineering, situated computation, the commons as a response to incompleteness, rhizomatic networks, molecular design, and a synthesis that treats the edge as ground rather than limit.",
-	  "layer": "synthesis",
-	  "prerequisites": [
-        "foundationscrisis"
-	  ],
-	  "unlocks": [],
-	  "difficulty": "advanced",
-	  "estimated_time": "30-40 minutes",
-	  "learning_objectives": [
-		"Algorithmic bias as structural incompleteness in classification systems",
-		"Ethics as the shape of the room, not a post-processing filter",
-		"Paraconsistent engineering — holding contradiction without collapse",
-		"Situated computation — knowledge always has a body, a place, a time",
-		"Collective knowledge and the commons as responses to incompleteness",
-		"Rhizomatic networks as non-hierarchical alternatives to tree structures",
-		"Molecular design as embodied formal systems",
-		"Synthesis: the edge is the ground, not the limit"
-	  ],
-	  "content": [
-		"CriticalAlgorithms_Algorithmic_Bias_Visualization: Bias as Structural Incompleteness",
-		"CriticalAlgorithms_Applied_Ethics: Ethical Design After Incompleteness",
-		"SpeculativeComputation_Paraconsistent_Engineering: Holding Contradiction in Production",
-		"SpeculativeComputation_Situated_Computation: Knowledge With a Body",
-		"SpeculativeComputation_Collective_Knowledge: The Commons as Response",
-		"SpeculativeComputation_Rhizome_Network: Networks Without Hierarchy",
-		"AdvancedLaboratory_Lab_Equipment_Simulation: Molecular Design After Crisis",
-		"PostCrisis_Synthesis: The Edge Is the Ground"
-	  ],
-	  "maps": [
-		"CriticalAlgorithms_Algorithmic_Bias_Visualization",
-		"CriticalAlgorithms_Applied_Ethics",
-		"SpeculativeComputation_Paraconsistent_Engineering",
-		"SpeculativeComputation_Situated_Computation",
-		"SpeculativeComputation_Collective_Knowledge",
-		"SpeculativeComputation_Rhizome_Network",
-		"AdvancedLaboratory_Lab_Equipment_Simulation",
-		"PostCrisis_Synthesis"
-	  ],
-	  "audio": {
-		"ambient_preset": "minimal_drone",
-		"volume": -10.0
-	  },
-	  "return_to": "lab",
-	  "completion_rewards": [
-        "critical_lens_badge"
-	  ],
-	  "artifact_groups": [
-		{
-		  "map": "CriticalAlgorithms_Algorithmic_Bias_Visualization",
-		  "position": "intro",
-		  "artifacts": [ "bias_visualizer" ],
-		  "size_budget": "compact_only",
-		  "rationale": "Single artifact in divided room; spatial inequality of the architecture carries the lesson about bias"
-		},
-		{
-		  "map": "CriticalAlgorithms_Applied_Ethics",
-		  "position": "response",
-		  "artifacts": ["ethical_design_clipboard", "excluded_class_visualizer", "room_shape_demonstrator"],
-		  "size_budget": "mixed",
-		  "rationale": "Three ethics-after-Gödel artifacts: the clipboard names the principles, the visualizer shows what classifiers miss, the room demonstrator shows that furniture layout is moral."
-		},
-		{
-		  "map": "SpeculativeComputation_Paraconsistent_Engineering",
-		  "position": "principle",
-		  "artifacts": ["merge_conflict_visualizer", "cap_theorem_walk", "florensky_in_production"],
-		  "size_budget": "compact_only",
-		  "rationale": "Paraconsistent logic as architecture: the merge-conflict junction holds two branches, the CAP triangle cycles trade-offs, Florensky's triptych refuses to resolve."
-		},
-		{
-		  "map": "SpeculativeComputation_Situated_Computation",
-		  "position": "principle",
-		  "artifacts": ["situated_sensor", "locatable_knowledge_station"],
-		  "size_budget": "compact_only",
-		  "rationale": "Two artifacts for placed knowledge: the sensor reports its own coordinates, the desk tags each claim with its source."
-		},
-		{
-		  "map": "SpeculativeComputation_Collective_Knowledge",
-		  "position": "principle",
-		  "artifacts": ["wiki_fragment_station", "peer_edit_ledger", "citation_graph_node"],
-		  "size_budget": "mixed",
-		  "rationale": "Three commons artifacts: the wiki gathers fragments, the ledger accumulates edits without overwriting, the citation graph shows that a claim's truth lives in its relations."
-		},
-		{
-		  "map": "SpeculativeComputation_Rhizome_Network",
-		  "position": "applied_form",
-		  "artifacts": [ "rhizome_cave_demo" ],
-		  "size_budget": "compact_only",
-		  "rationale": "Single artifact in four-chamber rhizomatic cave; non-hierarchical layout enacts Deleuze/Guattari spatial logic"
-		},
-		{
-		  "map": "AdvancedLaboratory_Lab_Equipment_Simulation",
-		  "position": "applied_form",
-		  "artifacts": [ "MolecularDesigner" ],
-		  "size_budget": "compact_only",
-		  "rationale": "Single artifact on clean lab benches; molecular design as constructive post-reductionist practice"
-		},
-		{
-		  "map": "PostCrisis_Synthesis",
-		  "position": "synthesis",
-		  "artifacts": ["edge_as_ground_capstone"],
-		  "size_budget": "environment",
-		  "rationale": "The spine's literal final artifact: raised central platform with rotating glass disc 'The edge is the ground' surrounded by seven stations, each recalling one prior map of the postfoundation arc. Thesis-landing closes here."
-		}
-	  ]
-	}
-  },
-  "world_phase": "beyond",
-  "artifact_groups": []
+ "sequences": {
+  "postfoundationscrisis": {
+   "name": "Post-Crisis: Applied Limits",
+   "truth": "Knowing the limits of formalization, what do we build?",
+   "qfep_term": "Edge",
+   "qfep_connection": "After the foundations crisis, these maps explore what happens when incompleteness, bias, and rhizomatic thinking become design materials rather than problems to solve.",
+   "formula": "limits → critical practice → new structures",
+   "description": "The sequence that lands the thesis. The foundations crisis showed that every formal system has an outside. These maps walk what becomes possible once you stop demanding completeness: ethics as architecture, paraconsistent engineering, situated computation, the commons as a response to incompleteness, rhizomatic networks, molecular design, and a synthesis that treats the edge as ground rather than limit.",
+   "layer": "synthesis",
+   "prerequisites": [
+    "foundationscrisis"
+   ],
+   "unlocks": [],
+   "difficulty": "advanced",
+   "estimated_time": "30-40 minutes",
+   "learning_objectives": [
+    "Algorithmic bias as structural incompleteness in classification systems",
+    "Ethics as the shape of the room, not a post-processing filter",
+    "Paraconsistent engineering — holding contradiction without collapse",
+    "Situated computation — knowledge always has a body, a place, a time",
+    "Collective knowledge and the commons as responses to incompleteness",
+    "Rhizomatic networks as non-hierarchical alternatives to tree structures",
+    "Molecular design as embodied formal systems",
+    "Synthesis: the edge is the ground, not the limit"
+   ],
+   "content": [
+    "CriticalAlgorithms_Algorithmic_Bias_Visualization: Bias as Structural Incompleteness",
+    "CriticalAlgorithms_Applied_Ethics: Ethical Design After Incompleteness",
+    "SpeculativeComputation_Paraconsistent_Engineering: Holding Contradiction in Production",
+    "SpeculativeComputation_Situated_Computation: Knowledge With a Body",
+    "SpeculativeComputation_Collective_Knowledge: The Commons as Response",
+    "SpeculativeComputation_Rhizome_Network: Networks Without Hierarchy",
+    "AdvancedLaboratory_Lab_Equipment_Simulation: Molecular Design After Crisis",
+    "PostCrisis_Synthesis: The Edge Is the Ground"
+   ],
+   "maps": [
+    "CriticalAlgorithms_Algorithmic_Bias_Visualization",
+    "CriticalAlgorithms_Applied_Ethics",
+    "SpeculativeComputation_Paraconsistent_Engineering",
+    "SpeculativeComputation_Situated_Computation",
+    "SpeculativeComputation_Collective_Knowledge",
+    "SpeculativeComputation_Rhizome_Network",
+    "AdvancedLaboratory_Lab_Equipment_Simulation",
+    "PostCrisis_Synthesis",
+    "Chamber_PostFoundations"
+   ],
+   "audio": {
+    "ambient_preset": "minimal_drone",
+    "volume": -10.0
+   },
+   "return_to": "lab",
+   "completion_rewards": [
+    "critical_lens_badge"
+   ],
+   "artifact_groups": [
+    {
+     "map": "CriticalAlgorithms_Algorithmic_Bias_Visualization",
+     "position": "intro",
+     "artifacts": [
+      "bias_visualizer"
+     ],
+     "size_budget": "compact_only",
+     "rationale": "Single artifact in divided room; spatial inequality of the architecture carries the lesson about bias"
+    },
+    {
+     "map": "CriticalAlgorithms_Applied_Ethics",
+     "position": "response",
+     "artifacts": [
+      "ethical_design_clipboard",
+      "excluded_class_visualizer",
+      "room_shape_demonstrator"
+     ],
+     "size_budget": "mixed",
+     "rationale": "Three ethics-after-Gödel artifacts: the clipboard names the principles, the visualizer shows what classifiers miss, the room demonstrator shows that furniture layout is moral."
+    },
+    {
+     "map": "SpeculativeComputation_Paraconsistent_Engineering",
+     "position": "principle",
+     "artifacts": [
+      "merge_conflict_visualizer",
+      "cap_theorem_walk",
+      "florensky_in_production"
+     ],
+     "size_budget": "compact_only",
+     "rationale": "Paraconsistent logic as architecture: the merge-conflict junction holds two branches, the CAP triangle cycles trade-offs, Florensky's triptych refuses to resolve."
+    },
+    {
+     "map": "SpeculativeComputation_Situated_Computation",
+     "position": "principle",
+     "artifacts": [
+      "situated_sensor",
+      "locatable_knowledge_station"
+     ],
+     "size_budget": "compact_only",
+     "rationale": "Two artifacts for placed knowledge: the sensor reports its own coordinates, the desk tags each claim with its source."
+    },
+    {
+     "map": "SpeculativeComputation_Collective_Knowledge",
+     "position": "principle",
+     "artifacts": [
+      "wiki_fragment_station",
+      "peer_edit_ledger",
+      "citation_graph_node"
+     ],
+     "size_budget": "mixed",
+     "rationale": "Three commons artifacts: the wiki gathers fragments, the ledger accumulates edits without overwriting, the citation graph shows that a claim's truth lives in its relations."
+    },
+    {
+     "map": "SpeculativeComputation_Rhizome_Network",
+     "position": "applied_form",
+     "artifacts": [
+      "rhizome_cave_demo"
+     ],
+     "size_budget": "compact_only",
+     "rationale": "Single artifact in four-chamber rhizomatic cave; non-hierarchical layout enacts Deleuze/Guattari spatial logic"
+    },
+    {
+     "map": "AdvancedLaboratory_Lab_Equipment_Simulation",
+     "position": "applied_form",
+     "artifacts": [
+      "MolecularDesigner"
+     ],
+     "size_budget": "compact_only",
+     "rationale": "Single artifact on clean lab benches; molecular design as constructive post-reductionist practice"
+    },
+    {
+     "map": "PostCrisis_Synthesis",
+     "position": "synthesis",
+     "artifacts": [
+      "edge_as_ground_capstone"
+     ],
+     "size_budget": "environment",
+     "rationale": "The spine's literal final artifact: raised central platform with rotating glass disc 'The edge is the ground' surrounded by seven stations, each recalling one prior map of the postfoundation arc. Thesis-landing closes here."
+    }
+   ]
+  }
+ },
+ "world_phase": "beyond",
+ "artifact_groups": []
 }

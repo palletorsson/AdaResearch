@@ -3,16 +3,15 @@
 > one pass: ride (gaze), move (place --only-improve), gate (pathfinder), voice (qfep). Field note, not a ruling.
 
 ## The ride (before)
-clearance violations: **0 overlaps, 1 tight** — the law wants ≥1.2m to walk between.
-- `[tight  ] max_q_basin_room           <-> science_screen             gap +0.28m (centers 2.35m)`
+clearance violations: **0 overlaps, 0 tight** — the law wants ≥1.2m to walk between.
 
 ## The move
     logged 1 entries to ada_run\placement_log.json
     summary: 1 maps processed
-      constraint improved: 1/1  mean Δ=+0.157
-      walkability improved: 1/1  mean Δ=+0.064
+      constraint improved: 0/1  mean Δ=+0.000
+      walkability improved: 0/1  mean Δ=+0.000
 
-sibling **Trial_eye_FormFinding_Annealing** kept: overlaps 0→0, tight 1→0, pathfinder OK.
+no sibling kept — the move did not beat the ride (overlaps 0→0, tight 0→0). Note-only.
 
 ## The voice (qfep)
 3 of 4 cast members carry a theory-claim; 1 mute.
@@ -23,7 +22,6 @@ sibling **Trial_eye_FormFinding_Annealing** kept: overlaps 0→0, tight 1→0, p
 
 ## The text vs the space
 walked.md exists — the writing names 3/4 of the cast; dwells declared for 0.
-- **the writing's subjects are blocked in space**: max_q_basin_room sit in clearance violations — the text promises what the floor obstructs.
 - space without text: science_screen — standing in the room, absent from the walk.
 
 ## The heuristic understanding
