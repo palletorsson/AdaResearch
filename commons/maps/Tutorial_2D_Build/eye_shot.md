@@ -17,12 +17,11 @@ clearance violations: **0 overlaps, 3 tight** — the law wants ≥1.2m to walk 
 no sibling kept — the move did not beat the ride (overlaps 0→4, tight 3→0). Note-only.
 
 ## The voice (qfep)
-6 of 8 cast members carry a theory-claim; 2 mute.
+8 of 8 cast members carry a theory-claim; 0 mute.
 - **column_3_z** — spacing — at 1.0 the cubes are adjacent and the array feels compact; at 2.0 they feel like separate objects; t
 - **dark_sphere** — Transformation often needs an invariant reference to be legible. The sphere stays simple so surrounding change
 - **grid_2d_4x4** — show_binary_table — when true, a BinaryTableDisplay appears beside the grid showing the same 4×4 structure as 
-- **pick_up_cube** — Pure S as carried displacement: the cube stays itself while its coordinates change. The artifact isolates tran
-- mute: gridagent, xyz_coordinates
+- **gridagent** — A creature that walks the array — traversing the grid cell by cell, copying and patterning as it steps. The ar
 
 ## The text vs the space
 walked.md exists — the writing names 1/8 of the cast; dwells declared for 0.

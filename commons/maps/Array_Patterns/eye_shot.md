@@ -22,11 +22,11 @@ clearance violations: **0 overlaps, 8 tight** — the law wants ≥1.2m to walk 
 no sibling kept — the move did not beat the ride (overlaps 0→1, tight 8→6). Note-only.
 
 ## The voice (qfep)
-3 of 13 cast members carry a theory-claim; 10 mute.
+13 of 13 cast members carry a theory-claim; 0 mute.
 - **dark_sphere** — Transformation often needs an invariant reference to be legible. The sphere stays simple so surrounding change
+- **facade_grammar_demo** — Architecture as array: Italian facades — Villa San Michele, the Certosa — read as grids of repeating elements,
 - **grid_model** — max_model_size — the model dynamically scales so any map fits within this bounding dimension (default 1.0m); a
-- **science_screen** — Transformation here is projection: a 3D state is re-expressed in 2D while preserving selected structural relat
-- mute: facade_grammar_demo, panel_bridge_loom, pattern_tile_4x4, pattern_tile_brick, pattern_tile_herringbone, pattern_tile_mirror, pattern_tile_plate, pattern_tunnel_machine
+- **panel_bridge_loom** — The oldest L-system in human hands: threading, tie-up, treadling — a weaving draft is a grammar, and the drawd
 
 ## The text vs the space
 walked.md exists — the writing names 0/13 of the cast; dwells declared for 0.

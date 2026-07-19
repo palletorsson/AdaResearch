@@ -1,1051 +1,1053 @@
 {
-	"_comment": "BarArray substrate \u2014 MultiMesh bar visualization with algorithm cartridges. Use #algorithm:<name> or named variants.",
-	"artifacts": {
-		"bar_array": {
-			"name": "BarArray Substrate",
-			"lookup_name": "bar_array",
-			"description": "Universal 1D array visualization. MultiMesh bars with emission and smooth transitions. Defaults to Bubble Sort. Use #algorithm:<name> to select cartridge.",
-			"scene": "res://commons/substrates/bar_array/bar_array_substrate.tscn",
-			"category": "substrate",
-			"artifact_type": "interactive_algorithm",
-			"sequence": "datastructures",
-			"tags": [
-				"substrate",
-				"bar_array",
-				"sorting",
-				"universal"
-			],
-			"complexity": "beginner",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"datastructures",
-				"randomness"
-			],
-			"dev_themes": [
-				"arrays",
-				"visualization"
-			],
-			"geometry_spec": {
-				"mesh_type": "instanced_particles",
-				"topology": "scattered",
-				"construction": {
-					"method": "multimesh_instancing",
-					"primitives": [],
-					"operations": [
-						"allocate_instances",
-						"set_transforms",
-						"update_per_frame"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "pbr",
-					"key_properties": []
-				},
-				"animation": {
-					"type": "transform",
-					"driven_by": "per_frame_update",
-					"affects": [
-						"transform"
-					]
-				},
-				"instance_strategy": "multimesh",
-				"vertex_estimate": "unknown"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 2,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [],
-				"preferred_zone": "entry",
-				"measured_footprint_cells": 2,
-				"footprint_source": "measured"
-			},
-			"measurements": {
-				"aabb_size": [
-					1.38,
-					0.02,
-					0.18
-				],
-				"aabb_center": [
-					0.0,
-					0.0,
-					0.0
-				],
-				"grid_cells": [
-					2.0,
-					1.0
-				],
-				"max_dimension_m": 1.38,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
-			},
-			"footprint_measured": [
-				2.0,
-				1,
-				1.0
-			],
-			"spatial_profile": {
-				"dir_group": "plane",
-				"range": 4,
-				"density": "medium",
-				"min_clearance": 1,
-				"stack_priority": 0.5,
-				"approach_dir": "any",
-				"derived_at": "2026-04-29T09:39:46.061521Z",
-				"derived_from": "aabb_size + category"
-			}
-		},
-		"bar_array_bubble_sort": {
-			"name": "BarArray \u2014 Bubble Sort",
-			"lookup_name": "bar_array_bubble_sort",
-			"description": "Bubble sort on a MultiMesh bar array. Adjacent comparisons, largest bubbles to the end. O(n\u00b2). The canonical first sort.",
-			"scene": "res://commons/substrates/bar_array/bar_array_substrate.tscn",
-			"category": "substrate",
-			"artifact_type": "interactive_algorithm",
-			"sequence": "datastructures",
-			"tags": [
-				"substrate",
-				"bar_array",
-				"bubble_sort",
-				"sorting",
-				"O(n\u00b2)"
-			],
-			"complexity": "beginner",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"testmaps"
-			],
-			"dev_themes": [
-				"arrays",
-				"visualization"
-			],
-			"geometry_spec": {
-				"mesh_type": "instanced_particles",
-				"topology": "scattered",
-				"construction": {
-					"method": "multimesh_instancing",
-					"primitives": [],
-					"operations": [
-						"allocate_instances",
-						"set_transforms",
-						"update_per_frame"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "pbr",
-					"key_properties": []
-				},
-				"animation": {
-					"type": "transform",
-					"driven_by": "per_frame_update",
-					"affects": [
-						"transform"
-					]
-				},
-				"instance_strategy": "multimesh",
-				"vertex_estimate": "unknown"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 2,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [],
-				"preferred_zone": "entry",
-				"measured_footprint_cells": 2,
-				"footprint_source": "measured"
-			},
-			"measurements": {
-				"aabb_size": [
-					1.38,
-					0.02,
-					0.18
-				],
-				"aabb_center": [
-					0.0,
-					0.0,
-					0.0
-				],
-				"grid_cells": [
-					2.0,
-					1.0
-				],
-				"max_dimension_m": 1.38,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
-			},
-			"footprint_measured": [
-				2.0,
-				1,
-				1.0
-			],
-			"spatial_profile": {
-				"dir_group": "plane",
-				"range": 4,
-				"density": "medium",
-				"min_clearance": 1,
-				"stack_priority": 0.5,
-				"approach_dir": "any",
-				"derived_at": "2026-04-29T09:39:46.061521Z",
-				"derived_from": "aabb_size + category"
-			}
-		},
-		"bar_array_insertion_sort": {
-			"name": "BarArray \u2014 Insertion Sort",
-			"lookup_name": "bar_array_insertion_sort",
-			"description": "Insertion sort \u2014 slides each element into its sorted position. O(n\u00b2) worst, O(n) best. The card-player sort.",
-			"scene": "res://commons/substrates/bar_array/bar_array_substrate.tscn",
-			"category": "substrate",
-			"artifact_type": "interactive_algorithm",
-			"sequence": "datastructures",
-			"tags": [
-				"substrate",
-				"bar_array",
-				"insertion_sort",
-				"sorting",
-				"O(n\u00b2)"
-			],
-			"complexity": "beginner",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"datastructures"
-			],
-			"dev_themes": [
-				"arrays",
-				"visualization"
-			],
-			"geometry_spec": {
-				"mesh_type": "instanced_particles",
-				"topology": "scattered",
-				"construction": {
-					"method": "multimesh_instancing",
-					"primitives": [],
-					"operations": [
-						"allocate_instances",
-						"set_transforms",
-						"update_per_frame"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "pbr",
-					"key_properties": []
-				},
-				"animation": {
-					"type": "transform",
-					"driven_by": "per_frame_update",
-					"affects": [
-						"transform"
-					]
-				},
-				"instance_strategy": "multimesh",
-				"vertex_estimate": "unknown"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 2,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [],
-				"preferred_zone": "entry",
-				"measured_footprint_cells": 2,
-				"footprint_source": "measured"
-			},
-			"measurements": {
-				"aabb_size": [
-					1.38,
-					0.02,
-					0.18
-				],
-				"aabb_center": [
-					0.0,
-					0.0,
-					0.0
-				],
-				"grid_cells": [
-					2.0,
-					1.0
-				],
-				"max_dimension_m": 1.38,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
-			},
-			"footprint_measured": [
-				2.0,
-				1,
-				1.0
-			],
-			"spatial_profile": {
-				"dir_group": "plane",
-				"range": 4,
-				"density": "medium",
-				"min_clearance": 1,
-				"stack_priority": 0.5,
-				"approach_dir": "any",
-				"derived_at": "2026-04-29T09:39:46.061521Z",
-				"derived_from": "aabb_size + category"
-			}
-		},
-		"bar_array_selection_sort": {
-			"name": "BarArray \u2014 Selection Sort",
-			"lookup_name": "bar_array_selection_sort",
-			"description": "Selection sort \u2014 find minimum, swap to front. O(n\u00b2) always. Simple and minimum swaps.",
-			"scene": "res://commons/substrates/bar_array/bar_array_substrate.tscn",
-			"category": "substrate",
-			"artifact_type": "interactive_algorithm",
-			"sequence": "datastructures",
-			"tags": [
-				"substrate",
-				"bar_array",
-				"selection_sort",
-				"sorting",
-				"O(n\u00b2)"
-			],
-			"complexity": "beginner",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"datastructures"
-			],
-			"dev_themes": [
-				"arrays",
-				"visualization"
-			],
-			"geometry_spec": {
-				"mesh_type": "instanced_particles",
-				"topology": "scattered",
-				"construction": {
-					"method": "multimesh_instancing",
-					"primitives": [],
-					"operations": [
-						"allocate_instances",
-						"set_transforms",
-						"update_per_frame"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "pbr",
-					"key_properties": []
-				},
-				"animation": {
-					"type": "transform",
-					"driven_by": "per_frame_update",
-					"affects": [
-						"transform"
-					]
-				},
-				"instance_strategy": "multimesh",
-				"vertex_estimate": "unknown"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 2,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [],
-				"preferred_zone": "entry",
-				"measured_footprint_cells": 2,
-				"footprint_source": "measured"
-			},
-			"measurements": {
-				"aabb_size": [
-					1.38,
-					0.02,
-					0.18
-				],
-				"aabb_center": [
-					0.0,
-					0.0,
-					0.0
-				],
-				"grid_cells": [
-					2.0,
-					1.0
-				],
-				"max_dimension_m": 1.38,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
-			},
-			"footprint_measured": [
-				2.0,
-				1,
-				1.0
-			],
-			"spatial_profile": {
-				"dir_group": "plane",
-				"range": 4,
-				"density": "medium",
-				"min_clearance": 1,
-				"stack_priority": 0.5,
-				"approach_dir": "any",
-				"derived_at": "2026-04-29T09:39:46.061521Z",
-				"derived_from": "aabb_size + category"
-			}
-		},
-		"bar_array_merge_sort": {
-			"name": "BarArray \u2014 Merge Sort",
-			"lookup_name": "bar_array_merge_sort",
-			"description": "Merge sort \u2014 iterative bottom-up divide and conquer. O(n log n) always. Stable. Watch halves merge.",
-			"scene": "res://commons/substrates/bar_array/bar_array_substrate.tscn",
-			"category": "substrate",
-			"artifact_type": "interactive_algorithm",
-			"sequence": "datastructures",
-			"tags": [
-				"substrate",
-				"bar_array",
-				"merge_sort",
-				"sorting",
-				"O(n log n)",
-				"divide_conquer"
-			],
-			"complexity": "intermediate",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"testmaps"
-			],
-			"dev_themes": [
-				"arrays",
-				"visualization"
-			],
-			"geometry_spec": {
-				"mesh_type": "instanced_particles",
-				"topology": "scattered",
-				"construction": {
-					"method": "multimesh_instancing",
-					"primitives": [],
-					"operations": [
-						"allocate_instances",
-						"set_transforms",
-						"update_per_frame"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "pbr",
-					"key_properties": []
-				},
-				"animation": {
-					"type": "transform",
-					"driven_by": "per_frame_update",
-					"affects": [
-						"transform"
-					]
-				},
-				"instance_strategy": "multimesh",
-				"vertex_estimate": "unknown"
-			},
-			"spatial_needs": {
-				"platform": "table",
-				"footprint_cells": 2,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [],
-				"preferred_zone": "any",
-				"measured_footprint_cells": 2,
-				"footprint_source": "measured"
-			},
-			"measurements": {
-				"aabb_size": [
-					1.38,
-					0.02,
-					0.18
-				],
-				"aabb_center": [
-					0.0,
-					0.0,
-					0.0
-				],
-				"grid_cells": [
-					2.0,
-					1.0
-				],
-				"max_dimension_m": 1.38,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
-			},
-			"footprint_measured": [
-				2.0,
-				1,
-				1.0
-			],
-			"spatial_profile": {
-				"dir_group": "plane",
-				"range": 4,
-				"density": "medium",
-				"min_clearance": 1,
-				"stack_priority": 0.5,
-				"approach_dir": "any",
-				"derived_at": "2026-04-29T09:39:46.061521Z",
-				"derived_from": "aabb_size + category"
-			}
-		},
-		"bar_array_quicksort": {
-			"name": "BarArray \u2014 Quicksort",
-			"lookup_name": "bar_array_quicksort",
-			"description": "Quicksort \u2014 pivot, partition, recurse. O(n log n) average. The practical fast sort.",
-			"scene": "res://commons/substrates/bar_array/bar_array_substrate.tscn",
-			"category": "substrate",
-			"artifact_type": "interactive_algorithm",
-			"sequence": "datastructures",
-			"tags": [
-				"substrate",
-				"bar_array",
-				"quicksort",
-				"sorting",
-				"O(n log n)",
-				"divide_conquer"
-			],
-			"complexity": "intermediate",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"testmaps"
-			],
-			"dev_themes": [
-				"arrays",
-				"visualization"
-			],
-			"geometry_spec": {
-				"mesh_type": "instanced_particles",
-				"topology": "scattered",
-				"construction": {
-					"method": "multimesh_instancing",
-					"primitives": [],
-					"operations": [
-						"allocate_instances",
-						"set_transforms",
-						"update_per_frame"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "pbr",
-					"key_properties": []
-				},
-				"animation": {
-					"type": "transform",
-					"driven_by": "per_frame_update",
-					"affects": [
-						"transform"
-					]
-				},
-				"instance_strategy": "multimesh",
-				"vertex_estimate": "unknown"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 2,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [],
-				"preferred_zone": "any",
-				"measured_footprint_cells": 2,
-				"footprint_source": "measured"
-			},
-			"measurements": {
-				"aabb_size": [
-					1.38,
-					0.02,
-					0.18
-				],
-				"aabb_center": [
-					0.0,
-					0.0,
-					0.0
-				],
-				"grid_cells": [
-					2.0,
-					1.0
-				],
-				"max_dimension_m": 1.38,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
-			},
-			"footprint_measured": [
-				2.0,
-				1,
-				1.0
-			],
-			"spatial_profile": {
-				"dir_group": "plane",
-				"range": 4,
-				"density": "medium",
-				"min_clearance": 1,
-				"stack_priority": 0.5,
-				"approach_dir": "any",
-				"derived_at": "2026-04-29T09:39:46.061521Z",
-				"derived_from": "aabb_size + category"
-			}
-		},
-		"bar_array_heap_sort": {
-			"name": "BarArray \u2014 Heap Sort",
-			"lookup_name": "bar_array_heap_sort",
-			"description": "Heap sort \u2014 build max-heap, extract maximums. O(n log n) always. In-place. Two visible phases.",
-			"scene": "res://commons/substrates/bar_array/bar_array_substrate.tscn",
-			"category": "substrate",
-			"artifact_type": "interactive_algorithm",
-			"sequence": "datastructures",
-			"tags": [
-				"substrate",
-				"bar_array",
-				"heap_sort",
-				"sorting",
-				"O(n log n)",
-				"heap"
-			],
-			"complexity": "intermediate",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"datastructures"
-			],
-			"dev_themes": [
-				"arrays",
-				"visualization"
-			],
-			"geometry_spec": {
-				"mesh_type": "instanced_particles",
-				"topology": "scattered",
-				"construction": {
-					"method": "multimesh_instancing",
-					"primitives": [],
-					"operations": [
-						"allocate_instances",
-						"set_transforms",
-						"update_per_frame"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "pbr",
-					"key_properties": []
-				},
-				"animation": {
-					"type": "transform",
-					"driven_by": "per_frame_update",
-					"affects": [
-						"transform"
-					]
-				},
-				"instance_strategy": "multimesh",
-				"vertex_estimate": "unknown"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 2,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [],
-				"preferred_zone": "any",
-				"measured_footprint_cells": 2,
-				"footprint_source": "measured"
-			},
-			"measurements": {
-				"aabb_size": [
-					1.38,
-					0.02,
-					0.18
-				],
-				"aabb_center": [
-					0.0,
-					0.0,
-					0.0
-				],
-				"grid_cells": [
-					2.0,
-					1.0
-				],
-				"max_dimension_m": 1.38,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
-			},
-			"footprint_measured": [
-				2.0,
-				1,
-				1.0
-			],
-			"spatial_profile": {
-				"dir_group": "plane",
-				"range": 4,
-				"density": "medium",
-				"min_clearance": 1,
-				"stack_priority": 0.5,
-				"approach_dir": "any",
-				"derived_at": "2026-04-29T09:39:46.061521Z",
-				"derived_from": "aabb_size + category"
-			}
-		},
-		"bar_array_histogram": {
-			"name": "BarArray \u2014 Histogram",
-			"lookup_name": "bar_array_histogram",
-			"description": "Gaussian histogram \u2014 bins random samples to form a bell curve. Watch the distribution emerge from noise.",
-			"scene": "res://commons/substrates/bar_array/bar_array_substrate.tscn",
-			"category": "substrate",
-			"artifact_type": "interactive_algorithm",
-			"sequence": "randomness",
-			"tags": [
-				"substrate",
-				"bar_array",
-				"histogram",
-				"distribution",
-				"gaussian",
-				"statistics"
-			],
-			"complexity": "beginner",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"testmaps"
-			],
-			"dev_themes": [
-				"arrays",
-				"visualization"
-			],
-			"geometry_spec": {
-				"mesh_type": "instanced_particles",
-				"topology": "scattered",
-				"construction": {
-					"method": "multimesh_instancing",
-					"primitives": [],
-					"operations": [
-						"allocate_instances",
-						"set_transforms",
-						"update_per_frame"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "pbr",
-					"key_properties": []
-				},
-				"animation": {
-					"type": "transform",
-					"driven_by": "per_frame_update",
-					"affects": [
-						"transform"
-					]
-				},
-				"instance_strategy": "multimesh",
-				"vertex_estimate": "unknown"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 2,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [],
-				"preferred_zone": "entry",
-				"measured_footprint_cells": 2,
-				"footprint_source": "measured"
-			},
-			"measurements": {
-				"aabb_size": [
-					1.38,
-					0.02,
-					0.18
-				],
-				"aabb_center": [
-					0.0,
-					0.0,
-					0.0
-				],
-				"grid_cells": [
-					2.0,
-					1.0
-				],
-				"max_dimension_m": 1.38,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
-			},
-			"footprint_measured": [
-				2.0,
-				1,
-				1.0
-			],
-			"spatial_profile": {
-				"dir_group": "plane",
-				"range": 4,
-				"density": "medium",
-				"min_clearance": 1,
-				"stack_priority": 0.5,
-				"approach_dir": "any",
-				"derived_at": "2026-04-29T09:39:46.061521Z",
-				"derived_from": "aabb_size + category"
-			}
-		},
-		"bar_array_fibonacci": {
-			"name": "BarArray \u2014 Fibonacci",
-			"lookup_name": "bar_array_fibonacci",
-			"description": "Fibonacci sequence \u2014 each bar = F(n), growing exponentially. Watch the golden ratio emerge.",
-			"scene": "res://commons/substrates/bar_array/bar_array_substrate.tscn",
-			"category": "substrate",
-			"artifact_type": "interactive_algorithm",
-			"sequence": "recursiveemergence",
-			"tags": [
-				"substrate",
-				"bar_array",
-				"fibonacci",
-				"sequence",
-				"golden_ratio",
-				"mathematical"
-			],
-			"complexity": "beginner",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"recursiveemergence"
-			],
-			"dev_themes": [
-				"arrays",
-				"visualization"
-			],
-			"geometry_spec": {
-				"mesh_type": "instanced_particles",
-				"topology": "scattered",
-				"construction": {
-					"method": "multimesh_instancing",
-					"primitives": [],
-					"operations": [
-						"allocate_instances",
-						"set_transforms",
-						"update_per_frame"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "pbr",
-					"key_properties": []
-				},
-				"animation": {
-					"type": "transform",
-					"driven_by": "per_frame_update",
-					"affects": [
-						"transform"
-					]
-				},
-				"instance_strategy": "multimesh",
-				"vertex_estimate": "unknown"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 2,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [],
-				"preferred_zone": "entry",
-				"measured_footprint_cells": 2,
-				"footprint_source": "measured"
-			},
-			"measurements": {
-				"aabb_size": [
-					1.38,
-					0.02,
-					0.18
-				],
-				"aabb_center": [
-					0.0,
-					0.0,
-					0.0
-				],
-				"grid_cells": [
-					2.0,
-					1.0
-				],
-				"max_dimension_m": 1.38,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
-			},
-			"footprint_measured": [
-				2.0,
-				1,
-				1.0
-			],
-			"spatial_profile": {
-				"dir_group": "plane",
-				"range": 4,
-				"density": "medium",
-				"min_clearance": 1,
-				"stack_priority": 0.5,
-				"approach_dir": "any",
-				"derived_at": "2026-04-29T09:39:46.061521Z",
-				"derived_from": "aabb_size + category"
-			}
-		},
-		"bar_array_prime_sieve": {
-			"name": "BarArray \u2014 Prime Sieve",
-			"lookup_name": "bar_array_prime_sieve",
-			"description": "Sieve of Eratosthenes \u2014 bars go dark when eliminated as composite. Watch the primes survive.",
-			"scene": "res://commons/substrates/bar_array/bar_array_substrate.tscn",
-			"category": "substrate",
-			"artifact_type": "interactive_algorithm",
-			"sequence": "criticalalgorithms",
-			"tags": [
-				"substrate",
-				"bar_array",
-				"prime_sieve",
-				"eratosthenes",
-				"number_theory",
-				"mathematical"
-			],
-			"complexity": "intermediate",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"testmaps"
-			],
-			"dev_themes": [
-				"arrays",
-				"visualization"
-			],
-			"geometry_spec": {
-				"mesh_type": "instanced_particles",
-				"topology": "scattered",
-				"construction": {
-					"method": "multimesh_instancing",
-					"primitives": [],
-					"operations": [
-						"allocate_instances",
-						"set_transforms",
-						"update_per_frame"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "pbr",
-					"key_properties": []
-				},
-				"animation": {
-					"type": "transform",
-					"driven_by": "per_frame_update",
-					"affects": [
-						"transform"
-					]
-				},
-				"instance_strategy": "multimesh",
-				"vertex_estimate": "unknown"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 2,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [],
-				"preferred_zone": "any",
-				"measured_footprint_cells": 2,
-				"footprint_source": "measured"
-			},
-			"measurements": {
-				"aabb_size": [
-					1.38,
-					0.02,
-					0.18
-				],
-				"aabb_center": [
-					0.0,
-					0.0,
-					0.0
-				],
-				"grid_cells": [
-					2.0,
-					1.0
-				],
-				"max_dimension_m": 1.38,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
-			},
-			"footprint_measured": [
-				2.0,
-				1,
-				1.0
-			],
-			"spatial_profile": {
-				"dir_group": "plane",
-				"range": 4,
-				"density": "medium",
-				"min_clearance": 1,
-				"stack_priority": 0.5,
-				"approach_dir": "any",
-				"derived_at": "2026-04-29T09:39:46.061521Z",
-				"derived_from": "aabb_size + category"
-			}
-		}
-	}
+ "_comment": "BarArray substrate — MultiMesh bar visualization with algorithm cartridges. Use #algorithm:<name> or named variants.",
+ "artifacts": {
+  "bar_array": {
+   "name": "BarArray Substrate",
+   "lookup_name": "bar_array",
+   "description": "Universal 1D array visualization. MultiMesh bars with emission and smooth transitions. Defaults to Bubble Sort. Use #algorithm:<name> to select cartridge.",
+   "scene": "res://commons/substrates/bar_array/bar_array_substrate.tscn",
+   "category": "substrate",
+   "artifact_type": "interactive_algorithm",
+   "sequence": "datastructures",
+   "tags": [
+    "substrate",
+    "bar_array",
+    "sorting",
+    "universal"
+   ],
+   "complexity": "beginner",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "datastructures",
+    "randomness"
+   ],
+   "dev_themes": [
+    "arrays",
+    "visualization"
+   ],
+   "geometry_spec": {
+    "mesh_type": "instanced_particles",
+    "topology": "scattered",
+    "construction": {
+     "method": "multimesh_instancing",
+     "primitives": [],
+     "operations": [
+      "allocate_instances",
+      "set_transforms",
+      "update_per_frame"
+     ]
+    },
+    "material": {
+     "type": "standard",
+     "shading_model": "pbr",
+     "key_properties": []
+    },
+    "animation": {
+     "type": "transform",
+     "driven_by": "per_frame_update",
+     "affects": [
+      "transform"
+     ]
+    },
+    "instance_strategy": "multimesh",
+    "vertex_estimate": "unknown"
+   },
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 2,
+    "clearance": {
+     "front": 1,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "face_approach",
+    "isolation": 0,
+    "cluster_with": [],
+    "preferred_zone": "entry",
+    "measured_footprint_cells": 2,
+    "footprint_source": "measured"
+   },
+   "measurements": {
+    "aabb_size": [
+     1.38,
+     0.02,
+     0.18
+    ],
+    "aabb_center": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grid_cells": [
+     2.0,
+     1.0
+    ],
+    "max_dimension_m": 1.38,
+    "measured_at": "2026-04-29T07:09:56.762620Z"
+   },
+   "footprint_measured": [
+    2.0,
+    1,
+    1.0
+   ],
+   "spatial_profile": {
+    "dir_group": "plane",
+    "range": 4,
+    "density": "medium",
+    "min_clearance": 1,
+    "stack_priority": 0.5,
+    "approach_dir": "any",
+    "derived_at": "2026-04-29T09:39:46.061521Z",
+    "derived_from": "aabb_size + category"
+   },
+   "qfep_connection": "The array itself, standing up: a row of bars whose heights ARE the values, index by index. The chapter's first primitive and its whole thesis in one object — that a list of numbers is a shape, and that to store data in order is already to draw it. Every sort, search, and histogram downstream is this row, rearranged."
+  },
+  "bar_array_bubble_sort": {
+   "name": "BarArray — Bubble Sort",
+   "lookup_name": "bar_array_bubble_sort",
+   "description": "Bubble sort on a MultiMesh bar array. Adjacent comparisons, largest bubbles to the end. O(n²). The canonical first sort.",
+   "scene": "res://commons/substrates/bar_array/bar_array_substrate.tscn",
+   "category": "substrate",
+   "artifact_type": "interactive_algorithm",
+   "sequence": "datastructures",
+   "tags": [
+    "substrate",
+    "bar_array",
+    "bubble_sort",
+    "sorting",
+    "O(n²)"
+   ],
+   "complexity": "beginner",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "testmaps"
+   ],
+   "dev_themes": [
+    "arrays",
+    "visualization"
+   ],
+   "geometry_spec": {
+    "mesh_type": "instanced_particles",
+    "topology": "scattered",
+    "construction": {
+     "method": "multimesh_instancing",
+     "primitives": [],
+     "operations": [
+      "allocate_instances",
+      "set_transforms",
+      "update_per_frame"
+     ]
+    },
+    "material": {
+     "type": "standard",
+     "shading_model": "pbr",
+     "key_properties": []
+    },
+    "animation": {
+     "type": "transform",
+     "driven_by": "per_frame_update",
+     "affects": [
+      "transform"
+     ]
+    },
+    "instance_strategy": "multimesh",
+    "vertex_estimate": "unknown"
+   },
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 2,
+    "clearance": {
+     "front": 1,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "face_approach",
+    "isolation": 0,
+    "cluster_with": [],
+    "preferred_zone": "entry",
+    "measured_footprint_cells": 2,
+    "footprint_source": "measured"
+   },
+   "measurements": {
+    "aabb_size": [
+     1.38,
+     0.02,
+     0.18
+    ],
+    "aabb_center": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grid_cells": [
+     2.0,
+     1.0
+    ],
+    "max_dimension_m": 1.38,
+    "measured_at": "2026-04-29T07:09:56.762620Z"
+   },
+   "footprint_measured": [
+    2.0,
+    1,
+    1.0
+   ],
+   "spatial_profile": {
+    "dir_group": "plane",
+    "range": 4,
+    "density": "medium",
+    "min_clearance": 1,
+    "stack_priority": 0.5,
+    "approach_dir": "any",
+    "derived_at": "2026-04-29T09:39:46.061521Z",
+    "derived_from": "aabb_size + category"
+   },
+   "qfep_connection": "The array in motion: bubble sort walking the bars, comparing neighbors, swapping, the largest rising to the end pass after pass. O(n²) and honest about it — the slowest useful sort, chosen here because you can SEE it think. The algorithm made a dance the eye can follow, index against index."
+  },
+  "bar_array_insertion_sort": {
+   "name": "BarArray — Insertion Sort",
+   "lookup_name": "bar_array_insertion_sort",
+   "description": "Insertion sort — slides each element into its sorted position. O(n²) worst, O(n) best. The card-player sort.",
+   "scene": "res://commons/substrates/bar_array/bar_array_substrate.tscn",
+   "category": "substrate",
+   "artifact_type": "interactive_algorithm",
+   "sequence": "datastructures",
+   "tags": [
+    "substrate",
+    "bar_array",
+    "insertion_sort",
+    "sorting",
+    "O(n²)"
+   ],
+   "complexity": "beginner",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "datastructures"
+   ],
+   "dev_themes": [
+    "arrays",
+    "visualization"
+   ],
+   "geometry_spec": {
+    "mesh_type": "instanced_particles",
+    "topology": "scattered",
+    "construction": {
+     "method": "multimesh_instancing",
+     "primitives": [],
+     "operations": [
+      "allocate_instances",
+      "set_transforms",
+      "update_per_frame"
+     ]
+    },
+    "material": {
+     "type": "standard",
+     "shading_model": "pbr",
+     "key_properties": []
+    },
+    "animation": {
+     "type": "transform",
+     "driven_by": "per_frame_update",
+     "affects": [
+      "transform"
+     ]
+    },
+    "instance_strategy": "multimesh",
+    "vertex_estimate": "unknown"
+   },
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 2,
+    "clearance": {
+     "front": 1,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "face_approach",
+    "isolation": 0,
+    "cluster_with": [],
+    "preferred_zone": "entry",
+    "measured_footprint_cells": 2,
+    "footprint_source": "measured"
+   },
+   "measurements": {
+    "aabb_size": [
+     1.38,
+     0.02,
+     0.18
+    ],
+    "aabb_center": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grid_cells": [
+     2.0,
+     1.0
+    ],
+    "max_dimension_m": 1.38,
+    "measured_at": "2026-04-29T07:09:56.762620Z"
+   },
+   "footprint_measured": [
+    2.0,
+    1,
+    1.0
+   ],
+   "spatial_profile": {
+    "dir_group": "plane",
+    "range": 4,
+    "density": "medium",
+    "min_clearance": 1,
+    "stack_priority": 0.5,
+    "approach_dir": "any",
+    "derived_at": "2026-04-29T09:39:46.061521Z",
+    "derived_from": "aabb_size + category"
+   }
+  },
+  "bar_array_selection_sort": {
+   "name": "BarArray — Selection Sort",
+   "lookup_name": "bar_array_selection_sort",
+   "description": "Selection sort — find minimum, swap to front. O(n²) always. Simple and minimum swaps.",
+   "scene": "res://commons/substrates/bar_array/bar_array_substrate.tscn",
+   "category": "substrate",
+   "artifact_type": "interactive_algorithm",
+   "sequence": "datastructures",
+   "tags": [
+    "substrate",
+    "bar_array",
+    "selection_sort",
+    "sorting",
+    "O(n²)"
+   ],
+   "complexity": "beginner",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "datastructures"
+   ],
+   "dev_themes": [
+    "arrays",
+    "visualization"
+   ],
+   "geometry_spec": {
+    "mesh_type": "instanced_particles",
+    "topology": "scattered",
+    "construction": {
+     "method": "multimesh_instancing",
+     "primitives": [],
+     "operations": [
+      "allocate_instances",
+      "set_transforms",
+      "update_per_frame"
+     ]
+    },
+    "material": {
+     "type": "standard",
+     "shading_model": "pbr",
+     "key_properties": []
+    },
+    "animation": {
+     "type": "transform",
+     "driven_by": "per_frame_update",
+     "affects": [
+      "transform"
+     ]
+    },
+    "instance_strategy": "multimesh",
+    "vertex_estimate": "unknown"
+   },
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 2,
+    "clearance": {
+     "front": 1,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "face_approach",
+    "isolation": 0,
+    "cluster_with": [],
+    "preferred_zone": "entry",
+    "measured_footprint_cells": 2,
+    "footprint_source": "measured"
+   },
+   "measurements": {
+    "aabb_size": [
+     1.38,
+     0.02,
+     0.18
+    ],
+    "aabb_center": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grid_cells": [
+     2.0,
+     1.0
+    ],
+    "max_dimension_m": 1.38,
+    "measured_at": "2026-04-29T07:09:56.762620Z"
+   },
+   "footprint_measured": [
+    2.0,
+    1,
+    1.0
+   ],
+   "spatial_profile": {
+    "dir_group": "plane",
+    "range": 4,
+    "density": "medium",
+    "min_clearance": 1,
+    "stack_priority": 0.5,
+    "approach_dir": "any",
+    "derived_at": "2026-04-29T09:39:46.061521Z",
+    "derived_from": "aabb_size + category"
+   }
+  },
+  "bar_array_merge_sort": {
+   "name": "BarArray — Merge Sort",
+   "lookup_name": "bar_array_merge_sort",
+   "description": "Merge sort — iterative bottom-up divide and conquer. O(n log n) always. Stable. Watch halves merge.",
+   "scene": "res://commons/substrates/bar_array/bar_array_substrate.tscn",
+   "category": "substrate",
+   "artifact_type": "interactive_algorithm",
+   "sequence": "datastructures",
+   "tags": [
+    "substrate",
+    "bar_array",
+    "merge_sort",
+    "sorting",
+    "O(n log n)",
+    "divide_conquer"
+   ],
+   "complexity": "intermediate",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "testmaps"
+   ],
+   "dev_themes": [
+    "arrays",
+    "visualization"
+   ],
+   "geometry_spec": {
+    "mesh_type": "instanced_particles",
+    "topology": "scattered",
+    "construction": {
+     "method": "multimesh_instancing",
+     "primitives": [],
+     "operations": [
+      "allocate_instances",
+      "set_transforms",
+      "update_per_frame"
+     ]
+    },
+    "material": {
+     "type": "standard",
+     "shading_model": "pbr",
+     "key_properties": []
+    },
+    "animation": {
+     "type": "transform",
+     "driven_by": "per_frame_update",
+     "affects": [
+      "transform"
+     ]
+    },
+    "instance_strategy": "multimesh",
+    "vertex_estimate": "unknown"
+   },
+   "spatial_needs": {
+    "platform": "table",
+    "footprint_cells": 2,
+    "clearance": {
+     "front": 1,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "face_approach",
+    "isolation": 0,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 2,
+    "footprint_source": "measured"
+   },
+   "measurements": {
+    "aabb_size": [
+     1.38,
+     0.02,
+     0.18
+    ],
+    "aabb_center": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grid_cells": [
+     2.0,
+     1.0
+    ],
+    "max_dimension_m": 1.38,
+    "measured_at": "2026-04-29T07:09:56.762620Z"
+   },
+   "footprint_measured": [
+    2.0,
+    1,
+    1.0
+   ],
+   "spatial_profile": {
+    "dir_group": "plane",
+    "range": 4,
+    "density": "medium",
+    "min_clearance": 1,
+    "stack_priority": 0.5,
+    "approach_dir": "any",
+    "derived_at": "2026-04-29T09:39:46.061521Z",
+    "derived_from": "aabb_size + category"
+   }
+  },
+  "bar_array_quicksort": {
+   "name": "BarArray — Quicksort",
+   "lookup_name": "bar_array_quicksort",
+   "description": "Quicksort — pivot, partition, recurse. O(n log n) average. The practical fast sort.",
+   "scene": "res://commons/substrates/bar_array/bar_array_substrate.tscn",
+   "category": "substrate",
+   "artifact_type": "interactive_algorithm",
+   "sequence": "datastructures",
+   "tags": [
+    "substrate",
+    "bar_array",
+    "quicksort",
+    "sorting",
+    "O(n log n)",
+    "divide_conquer"
+   ],
+   "complexity": "intermediate",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "testmaps"
+   ],
+   "dev_themes": [
+    "arrays",
+    "visualization"
+   ],
+   "geometry_spec": {
+    "mesh_type": "instanced_particles",
+    "topology": "scattered",
+    "construction": {
+     "method": "multimesh_instancing",
+     "primitives": [],
+     "operations": [
+      "allocate_instances",
+      "set_transforms",
+      "update_per_frame"
+     ]
+    },
+    "material": {
+     "type": "standard",
+     "shading_model": "pbr",
+     "key_properties": []
+    },
+    "animation": {
+     "type": "transform",
+     "driven_by": "per_frame_update",
+     "affects": [
+      "transform"
+     ]
+    },
+    "instance_strategy": "multimesh",
+    "vertex_estimate": "unknown"
+   },
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 2,
+    "clearance": {
+     "front": 1,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "face_approach",
+    "isolation": 0,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 2,
+    "footprint_source": "measured"
+   },
+   "measurements": {
+    "aabb_size": [
+     1.38,
+     0.02,
+     0.18
+    ],
+    "aabb_center": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grid_cells": [
+     2.0,
+     1.0
+    ],
+    "max_dimension_m": 1.38,
+    "measured_at": "2026-04-29T07:09:56.762620Z"
+   },
+   "footprint_measured": [
+    2.0,
+    1,
+    1.0
+   ],
+   "spatial_profile": {
+    "dir_group": "plane",
+    "range": 4,
+    "density": "medium",
+    "min_clearance": 1,
+    "stack_priority": 0.5,
+    "approach_dir": "any",
+    "derived_at": "2026-04-29T09:39:46.061521Z",
+    "derived_from": "aabb_size + category"
+   }
+  },
+  "bar_array_heap_sort": {
+   "name": "BarArray — Heap Sort",
+   "lookup_name": "bar_array_heap_sort",
+   "description": "Heap sort — build max-heap, extract maximums. O(n log n) always. In-place. Two visible phases.",
+   "scene": "res://commons/substrates/bar_array/bar_array_substrate.tscn",
+   "category": "substrate",
+   "artifact_type": "interactive_algorithm",
+   "sequence": "datastructures",
+   "tags": [
+    "substrate",
+    "bar_array",
+    "heap_sort",
+    "sorting",
+    "O(n log n)",
+    "heap"
+   ],
+   "complexity": "intermediate",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "datastructures"
+   ],
+   "dev_themes": [
+    "arrays",
+    "visualization"
+   ],
+   "geometry_spec": {
+    "mesh_type": "instanced_particles",
+    "topology": "scattered",
+    "construction": {
+     "method": "multimesh_instancing",
+     "primitives": [],
+     "operations": [
+      "allocate_instances",
+      "set_transforms",
+      "update_per_frame"
+     ]
+    },
+    "material": {
+     "type": "standard",
+     "shading_model": "pbr",
+     "key_properties": []
+    },
+    "animation": {
+     "type": "transform",
+     "driven_by": "per_frame_update",
+     "affects": [
+      "transform"
+     ]
+    },
+    "instance_strategy": "multimesh",
+    "vertex_estimate": "unknown"
+   },
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 2,
+    "clearance": {
+     "front": 1,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "face_approach",
+    "isolation": 0,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 2,
+    "footprint_source": "measured"
+   },
+   "measurements": {
+    "aabb_size": [
+     1.38,
+     0.02,
+     0.18
+    ],
+    "aabb_center": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grid_cells": [
+     2.0,
+     1.0
+    ],
+    "max_dimension_m": 1.38,
+    "measured_at": "2026-04-29T07:09:56.762620Z"
+   },
+   "footprint_measured": [
+    2.0,
+    1,
+    1.0
+   ],
+   "spatial_profile": {
+    "dir_group": "plane",
+    "range": 4,
+    "density": "medium",
+    "min_clearance": 1,
+    "stack_priority": 0.5,
+    "approach_dir": "any",
+    "derived_at": "2026-04-29T09:39:46.061521Z",
+    "derived_from": "aabb_size + category"
+   }
+  },
+  "bar_array_histogram": {
+   "name": "BarArray — Histogram",
+   "lookup_name": "bar_array_histogram",
+   "description": "Gaussian histogram — bins random samples to form a bell curve. Watch the distribution emerge from noise.",
+   "scene": "res://commons/substrates/bar_array/bar_array_substrate.tscn",
+   "category": "substrate",
+   "artifact_type": "interactive_algorithm",
+   "sequence": "randomness",
+   "tags": [
+    "substrate",
+    "bar_array",
+    "histogram",
+    "distribution",
+    "gaussian",
+    "statistics"
+   ],
+   "complexity": "beginner",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "testmaps"
+   ],
+   "dev_themes": [
+    "arrays",
+    "visualization"
+   ],
+   "geometry_spec": {
+    "mesh_type": "instanced_particles",
+    "topology": "scattered",
+    "construction": {
+     "method": "multimesh_instancing",
+     "primitives": [],
+     "operations": [
+      "allocate_instances",
+      "set_transforms",
+      "update_per_frame"
+     ]
+    },
+    "material": {
+     "type": "standard",
+     "shading_model": "pbr",
+     "key_properties": []
+    },
+    "animation": {
+     "type": "transform",
+     "driven_by": "per_frame_update",
+     "affects": [
+      "transform"
+     ]
+    },
+    "instance_strategy": "multimesh",
+    "vertex_estimate": "unknown"
+   },
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 2,
+    "clearance": {
+     "front": 1,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "face_approach",
+    "isolation": 0,
+    "cluster_with": [],
+    "preferred_zone": "entry",
+    "measured_footprint_cells": 2,
+    "footprint_source": "measured"
+   },
+   "measurements": {
+    "aabb_size": [
+     1.38,
+     0.02,
+     0.18
+    ],
+    "aabb_center": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grid_cells": [
+     2.0,
+     1.0
+    ],
+    "max_dimension_m": 1.38,
+    "measured_at": "2026-04-29T07:09:56.762620Z"
+   },
+   "footprint_measured": [
+    2.0,
+    1,
+    1.0
+   ],
+   "spatial_profile": {
+    "dir_group": "plane",
+    "range": 4,
+    "density": "medium",
+    "min_clearance": 1,
+    "stack_priority": 0.5,
+    "approach_dir": "any",
+    "derived_at": "2026-04-29T09:39:46.061521Z",
+    "derived_from": "aabb_size + category"
+   }
+  },
+  "bar_array_fibonacci": {
+   "name": "BarArray — Fibonacci",
+   "lookup_name": "bar_array_fibonacci",
+   "description": "Fibonacci sequence — each bar = F(n), growing exponentially. Watch the golden ratio emerge.",
+   "scene": "res://commons/substrates/bar_array/bar_array_substrate.tscn",
+   "category": "substrate",
+   "artifact_type": "interactive_algorithm",
+   "sequence": "recursiveemergence",
+   "tags": [
+    "substrate",
+    "bar_array",
+    "fibonacci",
+    "sequence",
+    "golden_ratio",
+    "mathematical"
+   ],
+   "complexity": "beginner",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "recursiveemergence"
+   ],
+   "dev_themes": [
+    "arrays",
+    "visualization"
+   ],
+   "geometry_spec": {
+    "mesh_type": "instanced_particles",
+    "topology": "scattered",
+    "construction": {
+     "method": "multimesh_instancing",
+     "primitives": [],
+     "operations": [
+      "allocate_instances",
+      "set_transforms",
+      "update_per_frame"
+     ]
+    },
+    "material": {
+     "type": "standard",
+     "shading_model": "pbr",
+     "key_properties": []
+    },
+    "animation": {
+     "type": "transform",
+     "driven_by": "per_frame_update",
+     "affects": [
+      "transform"
+     ]
+    },
+    "instance_strategy": "multimesh",
+    "vertex_estimate": "unknown"
+   },
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 2,
+    "clearance": {
+     "front": 1,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "face_approach",
+    "isolation": 0,
+    "cluster_with": [],
+    "preferred_zone": "entry",
+    "measured_footprint_cells": 2,
+    "footprint_source": "measured"
+   },
+   "measurements": {
+    "aabb_size": [
+     1.38,
+     0.02,
+     0.18
+    ],
+    "aabb_center": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grid_cells": [
+     2.0,
+     1.0
+    ],
+    "max_dimension_m": 1.38,
+    "measured_at": "2026-04-29T07:09:56.762620Z"
+   },
+   "footprint_measured": [
+    2.0,
+    1,
+    1.0
+   ],
+   "spatial_profile": {
+    "dir_group": "plane",
+    "range": 4,
+    "density": "medium",
+    "min_clearance": 1,
+    "stack_priority": 0.5,
+    "approach_dir": "any",
+    "derived_at": "2026-04-29T09:39:46.061521Z",
+    "derived_from": "aabb_size + category"
+   }
+  },
+  "bar_array_prime_sieve": {
+   "name": "BarArray — Prime Sieve",
+   "lookup_name": "bar_array_prime_sieve",
+   "description": "Sieve of Eratosthenes — bars go dark when eliminated as composite. Watch the primes survive.",
+   "scene": "res://commons/substrates/bar_array/bar_array_substrate.tscn",
+   "category": "substrate",
+   "artifact_type": "interactive_algorithm",
+   "sequence": "criticalalgorithms",
+   "tags": [
+    "substrate",
+    "bar_array",
+    "prime_sieve",
+    "eratosthenes",
+    "number_theory",
+    "mathematical"
+   ],
+   "complexity": "intermediate",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "testmaps"
+   ],
+   "dev_themes": [
+    "arrays",
+    "visualization"
+   ],
+   "geometry_spec": {
+    "mesh_type": "instanced_particles",
+    "topology": "scattered",
+    "construction": {
+     "method": "multimesh_instancing",
+     "primitives": [],
+     "operations": [
+      "allocate_instances",
+      "set_transforms",
+      "update_per_frame"
+     ]
+    },
+    "material": {
+     "type": "standard",
+     "shading_model": "pbr",
+     "key_properties": []
+    },
+    "animation": {
+     "type": "transform",
+     "driven_by": "per_frame_update",
+     "affects": [
+      "transform"
+     ]
+    },
+    "instance_strategy": "multimesh",
+    "vertex_estimate": "unknown"
+   },
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 2,
+    "clearance": {
+     "front": 1,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "face_approach",
+    "isolation": 0,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 2,
+    "footprint_source": "measured"
+   },
+   "measurements": {
+    "aabb_size": [
+     1.38,
+     0.02,
+     0.18
+    ],
+    "aabb_center": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grid_cells": [
+     2.0,
+     1.0
+    ],
+    "max_dimension_m": 1.38,
+    "measured_at": "2026-04-29T07:09:56.762620Z"
+   },
+   "footprint_measured": [
+    2.0,
+    1,
+    1.0
+   ],
+   "spatial_profile": {
+    "dir_group": "plane",
+    "range": 4,
+    "density": "medium",
+    "min_clearance": 1,
+    "stack_priority": 0.5,
+    "approach_dir": "any",
+    "derived_at": "2026-04-29T09:39:46.061521Z",
+    "derived_from": "aabb_size + category"
+   }
+  }
+ }
 }

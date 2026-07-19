@@ -22,12 +22,11 @@ clearance violations: **0 overlaps, 9 tight** — the law wants ≥1.2m to walk 
 sibling **Trial_eye_Tutorial_Pattern** kept: overlaps 0→0, tight 9→6, pathfinder OK.
 
 ## The voice (qfep)
-5 of 10 cast members carry a theory-claim; 5 mute.
+10 of 10 cast members carry a theory-claim; 0 mute.
 - **dark_sphere** — Transformation often needs an invariant reference to be legible. The sphere stays simple so surrounding change
 - **grid_model** — max_model_size — the model dynamically scales so any map fits within this bounding dimension (default 1.0m); a
 - **panel_bridge_loom** — The oldest L-system in human hands: threading, tie-up, treadling — a weaving draft is a grammar, and the drawd
 - **pattern_maker_station** — wallpaper_group — the symmetry operator that transforms a 4x4 domain into a universe; 17 groups, exactly 17, a
-- mute: pattern_studio_plate, pattern_tile_mirror, pattern_tile_plate, pattern_tile_puzzle, script_runner
 
 ## The text vs the space
 walked.md exists — the writing names 0/10 of the cast; dwells declared for 0.

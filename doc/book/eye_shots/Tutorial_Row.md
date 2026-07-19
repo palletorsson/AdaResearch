@@ -15,10 +15,10 @@ clearance violations: **0 overlaps, 1 tight** — the law wants ≥1.2m to walk 
 no sibling kept — the move did not beat the ride (overlaps 0→1, tight 1→2). Note-only.
 
 ## The voice (qfep)
-2 of 3 cast members carry a theory-claim; 1 mute.
+3 of 3 cast members carry a theory-claim; 0 mute.
 - **column_3_z** — spacing — at 1.0 the cubes are adjacent and the array feels compact; at 2.0 they feel like separate objects; t
 - **dark_sphere** — Transformation often needs an invariant reference to be legible. The sphere stays simple so surrounding change
-- mute: xyz_coordinates
+- **xyz_coordinates** — The addressing scheme laid bare — x, y, z, the three numbers that turn empty space into an array of positions.
 
 ## The text vs the space
 walked.md exists — the writing names 2/3 of the cast; dwells declared for 0.

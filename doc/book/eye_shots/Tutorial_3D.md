@@ -20,11 +20,11 @@ clearance violations: **1 overlaps, 5 tight** — the law wants ≥1.2m to walk 
 no sibling kept — the move did not beat the ride (overlaps 1→1, tight 5→5). Note-only.
 
 ## The voice (qfep)
-3 of 6 cast members carry a theory-claim; 3 mute.
+6 of 6 cast members carry a theory-claim; 0 mute.
+- **bar_array** — The array itself, standing up: a row of bars whose heights ARE the values, index by index. The chapter's first
+- **bar_array_bubble_sort** — The array in motion: bubble sort walking the bars, comparing neighbors, swapping, the largest rising to the en
 - **dark_sphere** — Transformation often needs an invariant reference to be legible. The sphere stays simple so surrounding change
-- **grid_3d_4x4x4** — spacing — at 1.0m the cubes form a compact volume you can reach into; increasing spacing makes the array a spa
-- **sorting_algorithm_race** — step_speed — controls ticks per second; at low speed you see every comparison, at high speed you see the emerg
-- mute: bar_array, bar_array_bubble_sort, grid3d
+- **grid3d** — The array grown a third dimension: a lattice of spheres and edges, traversed by BFS. Where the bar row was 1D 
 
 ## The text vs the space
 walked.md exists — the writing names 1/6 of the cast; dwells declared for 0.

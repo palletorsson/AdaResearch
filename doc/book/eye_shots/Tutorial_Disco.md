@@ -14,9 +14,10 @@ clearance violations: **0 overlaps, 0 tight** — the law wants ≥1.2m to walk 
 no sibling kept — the move did not beat the ride (overlaps 0→0, tight 0→0). Note-only.
 
 ## The voice (qfep)
-1 of 3 cast members carry a theory-claim; 2 mute.
+3 of 3 cast members carry a theory-claim; 0 mute.
 - **dark_sphere** — Transformation often needs an invariant reference to be legible. The sphere stays simple so surrounding change
-- mute: standalone_disco, step_sequencer
+- **standalone_disco** — The array as dancefloor — a grid of tiles lighting in programmed patterns, the 2D array turned nightclub. Proo
+- **step_sequencer** — The array played as music: a click-to-toggle grid where a playhead sweeps the indices left to right and trigge
 
 ## The text vs the space
 walked.md exists — the writing names 2/3 of the cast; dwells declared for 0.

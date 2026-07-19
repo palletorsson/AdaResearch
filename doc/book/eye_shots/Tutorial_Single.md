@@ -18,11 +18,11 @@ clearance violations: **0 overlaps, 4 tight** — the law wants ≥1.2m to walk 
 no sibling kept — the move did not beat the ride (overlaps 0→0, tight 4→4). Note-only.
 
 ## The voice (qfep)
-3 of 4 cast members carry a theory-claim; 1 mute.
+4 of 4 cast members carry a theory-claim; 0 mute.
 - **dark_sphere** — Transformation often needs an invariant reference to be legible. The sphere stays simple so surrounding change
 - **pick_up_cube** — Pure S as carried displacement: the cube stays itself while its coordinates change. The artifact isolates tran
 - **science_screen** — Transformation here is projection: a 3D state is re-expressed in 2D while preserving selected structural relat
-- mute: xyz_coordinates
+- **xyz_coordinates** — The addressing scheme laid bare — x, y, z, the three numbers that turn empty space into an array of positions.
 
 ## The text vs the space
 walked.md exists — the writing names 0/4 of the cast; dwells declared for 0.
