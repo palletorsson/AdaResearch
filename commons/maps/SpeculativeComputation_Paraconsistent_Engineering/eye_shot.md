@@ -14,11 +14,11 @@ clearance violations: **0 overlaps, 0 tight** — the law wants ≥1.2m to walk 
 no sibling kept — the move did not beat the ride (overlaps 0→0, tight 0→0). Note-only.
 
 ## The voice (qfep)
-3 of 4 cast members carry a theory-claim; 1 mute.
+4 of 4 cast members carry a theory-claim; 0 mute.
 - **florensky_sphere** — QFEP allows holding order (F) and disorder (-λE) without triviality
 - **schrodinger_box** — Observation collapses possibility - connects to Florensky's paraconsistent holding of A and not-A auto_reset_t
 - **superposition_display** — _speed — controls the oscillation frequency between basis states superposition is not uncertainty about which 
-- mute: tt
+- **tt** — The plate that speaks — in-world tutorial text as a framed 2D-in-3D board rather than a floating label. The pr
 
 ## The text vs the space
 walked.md exists — the writing names 4/4 of the cast; dwells declared for 0.

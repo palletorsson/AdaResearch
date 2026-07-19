@@ -15,11 +15,11 @@ clearance violations: **0 overlaps, 1 tight** — the law wants ≥1.2m to walk 
 no sibling kept — the move did not beat the ride (overlaps 0→0, tight 1→1). Note-only.
 
 ## The voice (qfep)
-3 of 4 cast members carry a theory-claim; 1 mute.
+4 of 4 cast members carry a theory-claim; 0 mute.
 - **pattern_loom** — F_order: the 17 wallpaper groups as a manufacturing program — constraint multiplied into endless fabric. loom_
+- **pattern_tile_puzzle** — Pattern-making as play: paint a small tile, watch it repeat across a carpet, adjust, repeat. Handmade meets co
 - **science_screen** — Transformation here is projection: a 3D state is re-expressed in 2D while preserving selected structural relat
 - **ten_print_textile** — a generative rule is a pattern that production never finishes printing the maze becomes cloth, woven forever, 
-- mute: pattern_tile_puzzle
 
 ## The text vs the space
 walked.md exists — the writing names 3/4 of the cast; dwells declared for 0.

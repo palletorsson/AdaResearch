@@ -15,11 +15,11 @@ clearance violations: **0 overlaps, 1 tight** — the law wants ≥1.2m to walk 
 no sibling kept — the move did not beat the ride (overlaps 0→2, tight 1→4). Note-only.
 
 ## The voice (qfep)
-3 of 4 cast members carry a theory-claim; 1 mute.
+4 of 4 cast members carry a theory-claim; 0 mute.
 - **kaleidoscope** — mirror_count — this IS the dihedral order. 3 mirrors a dihedral symmetry group is closure under N rotations an
 - **mill_persian_p4** — F_order: a named, editable carpet program.
+- **pattern_tile_mirror** — The 4×4 tile under mirror symmetry — paint one quadrant and the kaleidoscope fills the rest. The array meeting
 - **science_screen** — Transformation here is projection: a 3D state is re-expressed in 2D while preserving selected structural relat
-- mute: pattern_tile_mirror
 
 ## The text vs the space
 walked.md exists — the writing names 3/4 of the cast; dwells declared for 0.

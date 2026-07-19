@@ -15,10 +15,11 @@ clearance violations: **0 overlaps, 1 tight** — the law wants ≥1.2m to walk 
 no sibling kept — the move did not beat the ride (overlaps 0→2, tight 1→4). Note-only.
 
 ## The voice (qfep)
-2 of 4 cast members carry a theory-claim; 2 mute.
+4 of 4 cast members carry a theory-claim; 0 mute.
+- **pattern_tile_4x4** — The atom of pattern: a 4×4 grid you paint, set to repeat. The smallest complete lesson in the chapter — a tile
+- **pattern_tile_cube** — The unit you place — a grabbable color cube dragged into a cell of the pattern grid. The atom of the whole cha
 - **science_screen** — Transformation here is projection: a 3D state is re-expressed in 2D while preserving selected structural relat
 - **tile_meander_floor** — grid_cells — resolution of the tile grid the Greek key is a tiling problem — corners and straights compose the
-- mute: pattern_tile_4x4, pattern_tile_cube
 
 ## The text vs the space
 walked.md exists — the writing names 3/4 of the cast; dwells declared for 0.

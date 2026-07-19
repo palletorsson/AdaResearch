@@ -14,10 +14,11 @@ clearance violations: **0 overlaps, 0 tight** — the law wants ≥1.2m to walk 
 no sibling kept — the move did not beat the ride (overlaps 0→0, tight 0→5). Note-only.
 
 ## The voice (qfep)
-2 of 4 cast members carry a theory-claim; 2 mute.
+4 of 4 cast members carry a theory-claim; 0 mute.
 - **loom_escher_mirror** — F_order: a named carpet program.
 - **mill_escher_p4g** — F_order: a named, editable carpet program.
-- mute: pattern_tile_brick, pattern_tile_herringbone
+- **pattern_tile_brick** — The 4×4 tile with a half-drop offset — masonry's oldest trick, each row shifted so the seams don't line up. Th
+- **pattern_tile_herringbone** — The tile woven into herringbone — rectangles turned at right angles, the zigzag that floors and fabrics have u
 
 ## The text vs the space
 walked.md exists — the writing names 4/4 of the cast; dwells declared for 0.
