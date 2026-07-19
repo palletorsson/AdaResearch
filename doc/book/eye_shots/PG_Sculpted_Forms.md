@@ -14,12 +14,14 @@ clearance violations: **0 overlaps, 0 tight** — the law wants ≥1.2m to walk 
 no sibling kept — the move did not beat the ride (overlaps 0→0, tight 0→0). Note-only.
 
 ## The voice (qfep)
-1 of 3 cast members carry a theory-claim; 2 mute.
-- **layered_membrane** — undulation_amount — controls the amplitude of wave displacement; at 0 the layers are smooth cylinders, at high
-- mute: cube_mound_scene, dome
+3 of 3 cast members carry a theory-claim; 0 mute.
+- **cube_mound_scene** — A mound built by stacked cubes under cellular logic — deposit a cube where the local conditions say yes, and a
+- **dome** — A half-sphere cut from a solid by boolean subtraction — reference geometry for enclosure, the simplest roof. I
+- **layered_membrane** — Surfaces accreted in layers, each draping over the last — sediment, skin, stratum. Form as history made visibl
 
 ## The text vs the space
-**no walked.md** — the space stands unwritten; this note is the first text this map has.
+walked.md exists — the writing names 3/3 of the cast; dwells declared for 0.
+- the text and the space cover each other — the walk as written is the walk as built.
 
 ## The heuristic understanding
 The space already walks: the bodies keep the law without being told. What carries this map is its voice, not its floor.
