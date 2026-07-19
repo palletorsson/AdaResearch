@@ -7,7 +7,8 @@
       "width": 11,
       "depth": 7,
       "max_height": 2
-    }
+    },
+    "title": "Chamber_Noise"
   },
   "settings": {
     "cube_size": 1.0,
@@ -53,6 +54,15 @@
       [" "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "," "]
+    ],
+    "biome": [
+      ["","","","","","","","","","",""],
+      ["","","","","","","","","flora:scatter:field:on=dwell:seed","",""],
+      ["","flora:scatter:field:on=catalyst:seed","","flora:scatter:field:on=catalyst:seed","","","","flora:scatter:field:on=catalyst:seed","","flora:scatter:field:on=catalyst:seed",""],
+      ["","","","","","flora:scatter:field:on=touch:seed","","","","",""],
+      ["","","mineral:tint:field:on=touch:seed","","","","flora:scatter:field:on=touch:seed","","mineral:tint:field:on=touch:seed","",""],
+      ["","","","flora:scatter:field:on=touch:seed","","","flora:scatter:field:on=touch:seed","flora:scatter:field","flora:scatter:field:on=touch:seed/claim","flora:scatter:field",""],
+      ["","","","","","","","","flora:scatter:field","",""]
     ]
   }
 }

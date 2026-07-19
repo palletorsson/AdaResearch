@@ -1,458 +1,94 @@
 {
- "documentation": {
-  "biome_halotest": "biome-3 A/B: full halo perimeter (flora/fungus/water) replaces the ring; ground_ring data-gated off by the halo declaration"
- },
- "layers": {
-  "structure": [
-   [
-    "1",
-    "1",
-    "1",
-    "1",
-    "1",
-    "1",
-    "1",
-    "1"
-   ],
-   [
-    "1",
-    "1",
-    "1",
-    "1",
-    "1",
-    "1",
-    "1",
-    "1"
-   ],
-   [
-    "1",
-    "1",
-    "1",
-    "1",
-    "1",
-    "1",
-    "1",
-    "1"
-   ],
-   [
-    "1",
-    "1",
-    "1",
-    "1",
-    "1",
-    "1",
-    "1",
-    "1"
-   ],
-   [
-    "1",
-    "1",
-    "1",
-    "1",
-    "1",
-    "1",
-    "1",
-    "1"
-   ],
-   [
-    "1",
-    "1",
-    "1",
-    "1",
-    "1",
-    "1",
-    "1",
-    "1"
-   ],
-   [
-    "1",
-    "1",
-    "1",
-    "1",
-    "1",
-    "1",
-    "1",
-    "1"
-   ],
-   [
-    "1",
-    "1",
-    "1",
-    "1",
-    "1",
-    "1",
-    "1",
-    "1"
-   ],
-   [
-    "1",
-    "1",
-    "1",
-    "1",
-    "0",
-    "1",
-    "1",
-    "1"
-   ],
-   [
-    "1",
-    "1",
-    "1",
-    "1",
-    "1",
-    "1",
-    "1",
-    "1"
-   ]
-  ],
-  "utilities": [
-   [
-    " ",
-    " ",
-    " ",
-    " ",
-    "s",
-    " ",
-    " ",
-    " "
-   ],
-   [
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " "
-   ],
-   [
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " "
-   ],
-   [
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " "
-   ],
-   [
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " "
-   ],
-   [
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " "
-   ],
-   [
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " "
-   ],
-   [
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " "
-   ],
-   [
-    " ",
-    " ",
-    " ",
-    " ",
-    "t",
-    " ",
-    " ",
-    " "
-   ],
-   [
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " "
-   ]
-  ],
-  "interactables": [
-   [
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " "
-   ],
-   [
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " "
-   ],
-   [
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " "
-   ],
-   [
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " "
-   ],
-   [
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " "
-   ],
-   [
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " "
-   ],
-   [
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " "
-   ],
-   [
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " "
-   ],
-   [
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " "
-   ],
-   [
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " ",
-    " "
-   ]
-  ],
-  "biome": {
-   "_meta": {
-    "tick_seconds": 3,
-    "dwell_seconds": 2.0
-   },
-   "rows": [
-    [
-     "water:fog:halo:d=0.4",
-     "flora:scatter:halo:d=0.8",
-     "flora:scatter:halo:d=0.8",
-     "flora:scatter:halo:d=0.8",
-     "flora:scatter:halo:d=0.8",
-     "flora:scatter:halo:d=0.8",
-     "flora:scatter:halo:d=0.8",
-     "water:fog:halo:d=0.4"
+  "documentation": {
+    "biome_halotest": "biome-3 A/B: full halo perimeter (flora/fungus/water) replaces the ring; ground_ring data-gated off by the halo declaration"
+  },
+  "layers": {
+    "structure": [
+      ["1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","0","1","1","1"],
+      ["1","1","1","1","1","1","1","1"]
     ],
-    [
-     "fungus:ca:halo:d=0.6",
-     "",
-     "",
-     "",
-     "",
-     "",
-     "",
-     "fungus:ca:halo:d=0.6"
+    "utilities": [
+      [" "," "," "," ","s"," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," ","t"," "," "," "],
+      [" "," "," "," "," "," "," "," "]
     ],
-    [
-     "flora:scatter:halo:d=0.8",
-     "",
-     "fungus:ca:seed:rule=110:on=catalyst.fractal:step",
-     "",
-     "flora:scatter:seed:on=catalyst.chromatic:claim",
-     "flora:scatter:field",
-     "",
-     "flora:scatter:halo:d=0.8"
+    "interactables": [
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "],
+      [" "," "," "," "," "," "," "," "]
     ],
-    [
-     "fungus:ca:halo:d=0.6",
-     "",
-     "",
-     "::mute:on=catalyst.fractal:unmute/seed",
-     "",
-     "",
-     "",
-     "fungus:ca:halo:d=0.6"
-    ],
-    [
-     "flora:scatter:halo:d=0.8",
-     "",
-     "mineral:tint:seed:on=tick:step",
-     "",
-     "meta:glow:seed:on=dwell:mutate.color",
-     "",
-     "",
-     "flora:scatter:halo:d=0.8"
-    ],
-    [
-     "fungus:ca:halo:d=0.6",
-     "",
-     "",
-     "",
-     "",
-     "",
-     "",
-     "fungus:ca:halo:d=0.6"
-    ],
-    [
-     "flora:scatter:halo:d=0.8",
-     "",
-     "",
-     "",
-     "",
-     "",
-     "",
-     "flora:scatter:halo:d=0.8"
-    ],
-    [
-     "fungus:ca:halo:d=0.6",
-     "",
-     "",
-     "",
-     "",
-     "",
-     "",
-     "fungus:ca:halo:d=0.6"
-    ],
-    [
-     "flora:scatter:halo:d=0.8",
-     "",
-     "",
-     "",
-     "",
-     "",
-     "",
-     "flora:scatter:halo:d=0.8"
-    ],
-    [
-     "water:fog:halo:d=0.4",
-     "flora:scatter:halo:d=0.8",
-     "flora:scatter:halo:d=0.8",
-     "flora:scatter:halo:d=0.8",
-     "flora:scatter:halo:d=0.8",
-     "flora:scatter:halo:d=0.8",
-     "flora:scatter:halo:d=0.8",
-     "water:fog:halo:d=0.4"
-    ]
-   ]
+    "biome": {
+      "_meta": {
+        "tick_seconds": 3,
+        "dwell_seconds": 2.0
+      },
+      "rows": [
+        ["water:fog:halo:d=0.4","flora:scatter:halo:d=0.8","flora:scatter:halo:d=0.8","flora:scatter:halo:d=0.8","flora:scatter:halo:d=0.8","flora:scatter:halo:d=0.8","flora:scatter:halo:d=0.8","water:fog:halo:d=0.4"],
+        ["fungus:ca:halo:d=0.6","","","","","","","fungus:ca:halo:d=0.6"],
+        ["flora:scatter:halo:d=0.8","","fungus:ca:seed:rule=110:on=catalyst.fractal:step","","flora:scatter:seed:on=catalyst.chromatic:claim","flora:scatter:field","","flora:scatter:halo:d=0.8"],
+        ["fungus:ca:halo:d=0.6","","","::mute:on=catalyst.fractal:unmute/seed","","","","fungus:ca:halo:d=0.6"],
+        ["flora:scatter:halo:d=0.8","","mineral:tint:seed:on=tick:step","","meta:glow:seed:on=dwell:mutate.color","","","flora:scatter:halo:d=0.8"],
+        ["fungus:ca:halo:d=0.6","","","","","","","fungus:ca:halo:d=0.6"],
+        ["flora:scatter:halo:d=0.8","","","","","","","flora:scatter:halo:d=0.8"],
+        ["fungus:ca:halo:d=0.6","","","","","","","fungus:ca:halo:d=0.6"],
+        ["flora:scatter:halo:d=0.8","","","","","","","flora:scatter:halo:d=0.8"],
+        ["water:fog:halo:d=0.4","flora:scatter:halo:d=0.8","flora:scatter:halo:d=0.8","flora:scatter:halo:d=0.8","flora:scatter:halo:d=0.8","flora:scatter:halo:d=0.8","flora:scatter:halo:d=0.8","water:fog:halo:d=0.4"]
+      ]
+    }
+  },
+  "lighting": {},
+  "map_info": {
+    "dimensions": {
+      "width": 8,
+      "depth": 10,
+      "max_height": 3
+    },
+    "lookup_name": "Biome_HaloTest",
+    "name": "Biome_ReactTest",
+    "format": "json",
+    "description": "biome-7 gate map: reactive cells (catalyst.fractal step, chromatic claim, the openable vacuum, tick-stepped mineral, dwell-mutate) inside the halo wilderness. Sibling of Biome_HaloTest."
+  },
+  "settings": {
+    "background": {
+      "color": [0.08,0.1,0.18],
+      "type": "sky"
+    },
+    "cube_size": 1.0,
+    "gutter": 0.0,
+    "show_grid": true,
+    "grid_animation": {
+      "enabled": false
+    },
+    "initial_tile_visibility": "hidden_except_corners"
+  },
+  "utility_definitions": {
+    "sp": {
+      "type": "spawn"
+    },
+    "t": {
+      "type": "teleporter"
+    }
   }
- },
- "lighting": {},
- "map_info": {
-  "dimensions": {
-   "width": 8,
-   "depth": 10,
-   "max_height": 3
-  },
-  "lookup_name": "Biome_HaloTest",
-  "name": "Biome_ReactTest",
-  "format": "json",
-  "description": "biome-7 gate map: reactive cells (catalyst.fractal step, chromatic claim, the openable vacuum, tick-stepped mineral, dwell-mutate) inside the halo wilderness. Sibling of Biome_HaloTest."
- },
- "settings": {
-  "background": {
-   "color": [
-    0.08,
-    0.1,
-    0.18
-   ],
-   "type": "sky"
-  },
-  "cube_size": 1.0,
-  "gutter": 0.0,
-  "show_grid": true,
-  "grid_animation": {
-   "enabled": false
-  },
-  "initial_tile_visibility": "hidden_except_corners"
- },
- "utility_definitions": {
-  "sp": {
-   "type": "spawn"
-  },
-  "t": {
-   "type": "teleporter"
-  }
- }
 }
