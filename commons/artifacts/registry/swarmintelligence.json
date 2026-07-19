@@ -1,1478 +1,1479 @@
 {
-	"artifacts": {
-		"ant_colony_art": {
-			"name": "Ant Colony Art",
-			"lookup_name": "ant_colony_art",
-			"description": "Artistic visualization of ant colony optimization with pheromone trails.",
-			"scene": "res://algorithms/swarmintelligence/antcolonyoptimization/artmain.tscn",
-			"category": "swarmintelligence",
-			"tags": [
-				"ants",
-				"colony",
-				"pheromone",
-				"art",
-				"swarm"
-			],
-			"include_in_map_data": true,
-			"map_ready": false,
-			"map_sequences": [],
-			"sequence": "swarmintelligence",
-			"complexity": "advanced",
-			"dev_themes": [
-				"art",
-				"collective",
-				"emergence",
-				"swarm"
-			],
-			"geometry_spec": {
-				"mesh_type": "composed_primitives",
-				"topology": "manifold_closed",
-				"construction": {
-					"method": "primitive_assembly",
-					"primitives": [],
-					"operations": [
-						"create_primitives",
-						"position_children"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "pbr",
-					"key_properties": []
-				},
-				"animation": {
-					"type": "static",
-					"driven_by": null,
-					"affects": []
-				},
-				"instance_strategy": "few",
-				"vertex_estimate": "~20000"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 9,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [],
-				"preferred_zone": "end",
-				"measured_footprint_cells": 2950,
-				"footprint_source": "measured_capped"
-			},
-			"measurements": {
-				"aabb_size": [
-					50.0,
-					3.0,
-					58.13
-				],
-				"aabb_center": [
-					0.0,
-					0.0,
-					-3.99
-				],
-				"grid_cells": [
-					50.0,
-					59.0
-				],
-				"max_dimension_m": 58.13,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
-			},
-			"footprint_measured": [
-				50.0,
-				1,
-				59.0
-			],
-			"spatial_profile": {
-				"dir_group": "plane",
-				"range": 87,
-				"density": "field",
-				"min_clearance": 0,
-				"stack_priority": 0.3,
-				"approach_dir": "any",
-				"derived_at": "2026-04-29T09:39:46.285361Z",
-				"derived_from": "aabb_size + category"
-			}
-		},
-		"ant_agent": {
-			"name": "Ant Agent",
-			"lookup_name": "ant_agent",
-			"description": "Individual ant agent for colony optimization simulations.",
-			"scene": "res://algorithms/swarmintelligence/antcolonyoptimization/AntAgent.tscn",
-			"category": "swarmintelligence",
-			"tags": [
-				"ant",
-				"agent",
-				"swarm"
-			],
-			"include_in_map_data": true,
-			"map_ready": false,
-			"map_sequences": [],
-			"sequence": "swarmintelligence",
-			"complexity": "advanced",
-			"dev_themes": [
-				"collective",
-				"emergence",
-				"swarm"
-			],
-			"geometry_spec": {
-				"mesh_type": "composed_primitives",
-				"topology": "manifold_closed",
-				"construction": {
-					"method": "primitive_assembly",
-					"primitives": [
-						"sphere",
-						"cylinder",
-						"capsule"
-					],
-					"operations": [
-						"create_primitives",
-						"position_children"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "pbr",
-					"key_properties": []
-				},
-				"animation": {
-					"type": "static",
-					"driven_by": null,
-					"affects": []
-				},
-				"instance_strategy": "single",
-				"vertex_estimate": "unknown"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 1,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [],
-				"preferred_zone": "end",
-				"measured_footprint_cells": 1,
-				"footprint_source": "measured"
-			},
-			"measurements": {
-				"aabb_size": [
-					0.2,
-					0.5,
-					0.5
-				],
-				"aabb_center": [
-					0.0,
-					0.1,
-					0.0
-				],
-				"grid_cells": [
-					1.0,
-					1.0
-				],
-				"max_dimension_m": 0.5,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
-			},
-			"footprint_measured": [
-				1.0,
-				1,
-				1.0
-			],
-			"spatial_profile": {
-				"dir_group": "floor",
-				"range": 2,
-				"density": "medium",
-				"min_clearance": 1,
-				"stack_priority": 0.5,
-				"approach_dir": "any",
-				"derived_at": "2026-04-29T09:39:46.285361Z",
-				"derived_from": "aabb_size + category"
-			}
-		},
-		"particle_swarm_optimization_legacy": {
-			"name": "Particle Swarm Optimization (Legacy)",
-			"lookup_name": "particle_swarm_optimization_legacy",
-			"description": "Particle swarm optimization visualizing swarm convergence on optimal solutions.",
-			"scene": "res://algorithms/swarmintelligence/particleswarmoptimization/particle_swarm_optimization.tscn",
-			"category": "swarmintelligence",
-			"tags": [
-				"pso",
-				"particles",
-				"optimization",
-				"swarm"
-			],
-			"include_in_map_data": true,
-			"map_ready": false,
-			"map_sequences": [],
-			"sequence": "swarmintelligence",
-			"complexity": "intermediate",
-			"dev_themes": [
-				"collective",
-				"emergence",
-				"swarm"
-			],
-			"geometry_spec": {
-				"mesh_type": "composed_primitives",
-				"topology": "manifold_closed",
-				"construction": {
-					"method": "primitive_assembly",
-					"primitives": [
-						"sphere",
-						"plane"
-					],
-					"operations": [
-						"create_primitives",
-						"position_children"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "emissive",
-					"key_properties": [
-						"emission",
-						"transparency"
-					]
-				},
-				"animation": {
-					"type": "transform",
-					"driven_by": "per_frame_update",
-					"affects": [
-						"transform"
-					]
-				},
-				"instance_strategy": "array",
-				"vertex_estimate": "~800"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 9,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [],
-				"preferred_zone": "any",
-				"measured_footprint_cells": 420,
-				"footprint_source": "measured_capped"
-			},
-			"measurements": {
-				"aabb_size": [
-					20.06,
-					19.77,
-					20.0
-				],
-				"aabb_center": [
-					0.03,
-					-0.11,
-					0.0
-				],
-				"grid_cells": [
-					21.0,
-					20.0
-				],
-				"max_dimension_m": 20.06,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
-			},
-			"footprint_measured": [
-				21.0,
-				1,
-				20.0
-			],
-			"spatial_profile": {
-				"dir_group": "floor",
-				"range": 60,
-				"density": "low",
-				"min_clearance": 0,
-				"stack_priority": 0.1,
-				"approach_dir": "any",
-				"derived_at": "2026-04-29T09:39:46.285361Z",
-				"derived_from": "aabb_size + category"
-			}
-		},
-		"ant_colony_v2": {
-			"name": "Ant Colony V2",
-			"lookup_name": "ant_colony_v2",
-			"description": "Improved ant colony simulation with updated agent behavior and visuals.",
-			"scene": "res://algorithms/swarmintelligence/ants_v2/AntColonyV2.tscn",
-			"category": "swarmintelligence",
-			"tags": [
-				"ants",
-				"colony",
-				"simulation",
-				"swarm",
-				"v2"
-			],
-			"include_in_map_data": true,
-			"map_ready": false,
-			"map_sequences": [],
-			"sequence": "swarmintelligence",
-			"parameters": {
-				"footprint": [
-					11,
-					21,
-					6
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "advanced",
-			"dev_themes": [
-				"collective",
-				"emergence",
-				"swarm"
-			],
-			"geometry_spec": {
-				"mesh_type": "texture_plane",
-				"topology": "planar",
-				"construction": {
-					"method": "pixel_computation",
-					"primitives": [
-						"cylinder"
-					],
-					"operations": [
-						"create_image",
-						"compute_pixels",
-						"apply_texture"
-					]
-				},
-				"material": {
-					"type": "generated_texture",
-					"shading_model": "custom_fragment",
-					"key_properties": [
-						"emission",
-						"transparency"
-					]
-				},
-				"animation": {
-					"type": "static",
-					"driven_by": null,
-					"affects": []
-				},
-				"instance_strategy": "array",
-				"vertex_estimate": "~4 (quad)"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 9,
-				"clearance": {
-					"front": 2,
-					"back": 2,
-					"left": 2,
-					"right": 2
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [
-					"simpler",
-					"predecessor",
-					"quality",
-					"weighting",
-					"tandem"
-				],
-				"preferred_zone": "end",
-				"measured_footprint_cells": 2500,
-				"footprint_source": "measured_capped"
-			},
-			"measurements": {
-				"aabb_size": [
-					50.0,
-					2.0,
-					50.0
-				],
-				"aabb_center": [
-					0.0,
-					0.0,
-					0.0
-				],
-				"grid_cells": [
-					50.0,
-					50.0
-				],
-				"max_dimension_m": 50.0,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
-			},
-			"footprint_measured": [
-				50.0,
-				1,
-				50.0
-			],
-			"spatial_profile": {
-				"dir_group": "plane",
-				"range": 75,
-				"density": "field",
-				"min_clearance": 0,
-				"stack_priority": 0.3,
-				"approach_dir": "any",
-				"derived_at": "2026-04-29T09:39:46.285361Z",
-				"derived_from": "aabb_size + category"
-			}
-		},
-		"physarum_colony": {
-			"name": "Physarum Colony",
-			"lookup_name": "physarum_colony",
-			"description": "Physarum slime mold simulation demonstrating emergent network formation.",
-			"scene": "res://algorithms/swarmintelligence/physarum/PhysarumColony.tscn",
-			"category": "swarmintelligence",
-			"tags": [
-				"physarum",
-				"slime_mold",
-				"emergence",
-				"network",
-				"swarm"
-			],
-			"include_in_map_data": true,
-			"map_ready": false,
-			"map_sequences": [],
-			"sequence": "swarmintelligence",
-			"parameters": {
-				"footprint": [
-					11,
-					31,
-					1
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "beginner",
-			"dev_themes": [
-				"collective",
-				"emergence",
-				"swarm"
-			],
-			"geometry_spec": {
-				"mesh_type": "texture_plane",
-				"topology": "planar",
-				"construction": {
-					"method": "pixel_computation",
-					"primitives": [
-						"sphere"
-					],
-					"operations": [
-						"create_image",
-						"compute_pixels",
-						"apply_texture"
-					]
-				},
-				"material": {
-					"type": "generated_texture",
-					"shading_model": "custom_fragment",
-					"key_properties": [
-						"emission",
-						"transparency"
-					]
-				},
-				"animation": {
-					"type": "static",
-					"driven_by": null,
-					"affects": []
-				},
-				"instance_strategy": "array",
-				"vertex_estimate": "~4 (quad)"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 9,
-				"clearance": {
-					"front": 2,
-					"back": 2,
-					"left": 2,
-					"right": 2
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [
-					"unlocks",
-					"ant_colony_optimization",
-					"contrasts",
-					"external",
-					"field"
-				],
-				"preferred_zone": "entry",
-				"measured_footprint_cells": 2500,
-				"footprint_source": "measured_capped"
-			},
-			"measurements": {
-				"aabb_size": [
-					50.0,
-					6.4,
-					50.0
-				],
-				"aabb_center": [
-					0.0,
-					0.0,
-					0.0
-				],
-				"grid_cells": [
-					50.0,
-					50.0
-				],
-				"max_dimension_m": 50.0,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
-			},
-			"footprint_measured": [
-				50.0,
-				1,
-				50.0
-			],
-			"spatial_profile": {
-				"dir_group": "plane",
-				"range": 75,
-				"density": "field",
-				"min_clearance": 0,
-				"stack_priority": 0.3,
-				"approach_dir": "any",
-				"derived_at": "2026-04-29T09:39:46.285361Z",
-				"derived_from": "aabb_size + category"
-			}
-		},
-		"ant_colony_optimization": {
-			"name": "Ant Colony Optimization",
-			"lookup_name": "ant_colony_optimization",
-			"description": "Ant colony optimization with pheromone evaporation gradient heatmap, multi-source quality-weighted foraging, tandem running communication, and 3 modes (Colony/Communication/Multi-Source).",
-			"scene": "res://algorithms/swarmintelligence/ant_colony_optimization/ant_colony_optimization.tscn",
-			"category": "swarmintelligence",
-			"tags": [
-				"ants",
-				"optimization",
-				"pheromone",
-				"heatmap",
-				"foraging",
-				"communication",
-				"swarm"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"swarmintelligence"
-			],
-			"sequence": "swarmintelligence",
-			"parameters": {
-				"footprint": [
-					17,
-					19,
-					9
-				],
-				"size_group": "world_scale",
-				"config_schema": {
-					"ant_count": {
-						"type": "int",
-						"default": 40,
-						"min": 5,
-						"max": 80
-					},
-					"evaporation_rate": {
-						"type": "float",
-						"default": 0.02,
-						"min": 0.001,
-						"max": 0.1
-					},
-					"pheromone_deposit": {
-						"type": "float",
-						"default": 5.0,
-						"min": 1.0,
-						"max": 20.0
-					},
-					"alpha_weight": {
-						"type": "float",
-						"default": 1.0,
-						"min": 0.1,
-						"max": 5.0
-					},
-					"beta_weight": {
-						"type": "float",
-						"default": 2.0,
-						"min": 0.1,
-						"max": 5.0
-					},
-					"ant_speed": {
-						"type": "float",
-						"default": 3.0,
-						"min": 1.0,
-						"max": 8.0
-					},
-					"field_size": {
-						"type": "float",
-						"default": 6.0,
-						"min": 3.0,
-						"max": 10.0
-					},
-					"food_source_count": {
-						"type": "int",
-						"default": 4,
-						"min": 1,
-						"max": 8
-					},
-					"mode": {
-						"type": "string",
-						"default": "COLONY",
-						"enum": [
-							"COLONY",
-							"COMMUNICATION",
-							"MULTI_SOURCE"
-						]
-					}
-				}
-			},
-			"complexity": "advanced",
-			"dev_themes": [
-				"collective",
-				"emergence",
-				"swarm",
-				"communication"
-			],
-			"geometry_spec": {
-				"mesh_type": "delegated_scene",
-				"topology": "manifold_open",
-				"construction": {
-					"method": "scene_instantiation",
-					"primitives": [],
-					"operations": [
-						"load_scene",
-						"instantiate",
-						"configure"
-					]
-				},
-				"material": {
-					"type": "vertex_color",
-					"shading_model": "unshaded",
-					"key_properties": [
-						"transparency",
-						"double_sided"
-					]
-				},
-				"animation": {
-					"type": "vertex",
-					"driven_by": "per_frame_rebuild",
-					"affects": [
-						"vertex_positions"
-					]
-				},
-				"instance_strategy": "few",
-				"vertex_estimate": "varies"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 1,
-				"clearance": {
-					"front": 2,
-					"back": 2,
-					"left": 2,
-					"right": 2
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [],
-				"preferred_zone": "end",
-				"measured_footprint_cells": 1,
-				"footprint_source": "measured"
-			},
-			"measurements": {
-				"aabb_size": [
-					0.33,
-					0.2,
-					0.04
-				],
-				"aabb_center": [
-					-2.0,
-					-4.0,
-					0.02
-				],
-				"grid_cells": [
-					1.0,
-					1.0
-				],
-				"max_dimension_m": 0.33,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
-			},
-			"footprint_measured": [
-				1.0,
-				1,
-				1.0
-			],
-			"spatial_profile": {
-				"dir_group": "omni",
-				"range": 1,
-				"density": "medium",
-				"min_clearance": 1,
-				"stack_priority": 0.5,
-				"approach_dir": "any",
-				"derived_at": "2026-04-29T09:39:46.285361Z",
-				"derived_from": "aabb_size + category"
-			}
-		},
-		"particle_swarm_optimization": {
-			"name": "Particle Swarm Optimization",
-			"lookup_name": "particle_swarm_optimization",
-			"description": "Particle swarm optimization with visual representation of swarm search dynamics.",
-			"scene": "res://algorithms/swarmintelligence/particle_swarm_optimization/particle_swarm_optimization.tscn",
-			"category": "swarmintelligence",
-			"tags": [
-				"pso",
-				"particles",
-				"optimization",
-				"search",
-				"swarm"
-			],
-			"include_in_map_data": true,
-			"map_ready": false,
-			"map_sequences": [],
-			"sequence": "swarmintelligence",
-			"parameters": {
-				"footprint": [
-					17,
-					19,
-					9
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "intermediate",
-			"dev_themes": [
-				"collective",
-				"emergence",
-				"swarm"
-			],
-			"geometry_spec": {
-				"mesh_type": "boolean_composition",
-				"topology": "volumetric",
-				"construction": {
-					"method": "csg_boolean",
-					"primitives": [
-						"sphere"
-					],
-					"operations": [
-						"create_primitives",
-						"position_primitives",
-						"boolean_combine"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "emissive",
-					"key_properties": [
-						"emission",
-						"transparency"
-					]
-				},
-				"animation": {
-					"type": "transform",
-					"driven_by": "per_frame_update",
-					"affects": [
-						"transform"
-					]
-				},
-				"instance_strategy": "single",
-				"vertex_estimate": "~25"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 9,
-				"clearance": {
-					"front": 2,
-					"back": 2,
-					"left": 2,
-					"right": 2
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [],
-				"preferred_zone": "any",
-				"measured_footprint_cells": 51,
-				"footprint_source": "measured_capped"
-			},
-			"measurements": {
-				"aabb_size": [
-					16.9,
-					16.1,
-					2.54
-				],
-				"aabb_center": [
-					-0.05,
-					0.0,
-					-0.03
-				],
-				"grid_cells": [
-					17.0,
-					3.0
-				],
-				"max_dimension_m": 16.9,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
-			},
-			"footprint_measured": [
-				17.0,
-				1,
-				3.0
-			],
-			"spatial_profile": {
-				"dir_group": "panel",
-				"range": 35,
-				"density": "low",
-				"min_clearance": 0,
-				"stack_priority": 0.1,
-				"approach_dir": "front",
-				"derived_at": "2026-04-29T09:39:46.285361Z",
-				"derived_from": "aabb_size + category"
-			}
-		},
-		"boids_aquarium": {
-			"name": "Boids Aquarium",
-			"lookup_name": "boids_aquarium",
-			"description": "A 1m glass cube containing a school of 30 boids demonstrating emergent flocking behavior. Three simple rules (separation, alignment, cohesion) create lifelike collective motion.",
-			"scene": "res://commons/artifacts/boids_aquarium/boids_aquarium.tscn",
-			"category": "emergence",
-			"tags": [
-				"boids",
-				"flocking",
-				"emergence",
-				"swarm",
-				"reynolds",
-				"collective_behavior",
-				"self_organization"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"swarmintelligence"
-			],
-			"sequence": "swarmintelligence",
-			"interactions": [
-				"observe"
-			],
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"interaction": "observe",
-			"qfep_connection": "Emergence at \u00ce\u00bb\u00e2\u2030\u02c60.4 \u00e2\u20ac\u201d simple rules create complex, unpredictable behavior without central control",
-			"complexity": "intermediate",
-			"dev_themes": [
-				"collective",
-				"emergence",
-				"swarm"
-			],
-			"geometry_spec": {
-				"mesh_type": "instanced_particles",
-				"topology": "scattered",
-				"construction": {
-					"method": "multimesh_instancing",
-					"primitives": [
-						"box"
-					],
-					"operations": [
-						"allocate_instances",
-						"set_transforms",
-						"update_per_frame"
-					]
-				},
-				"material": {
-					"type": "vertex_color",
-					"shading_model": "emissive",
-					"key_properties": [
-						"emission",
-						"metallic",
-						"transparency",
-						"double_sided"
-					]
-				},
-				"animation": {
-					"type": "particle_lifecycle",
-					"driven_by": "cpu_simulation",
-					"affects": [
-						"transform",
-						"color"
-					]
-				},
-				"instance_strategy": "multimesh",
-				"vertex_estimate": "unknown"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 4,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [
-					"shares",
-					"rules",
-					"boid_manager",
-					"glass",
-					"scale"
-				],
-				"preferred_zone": "any",
-				"measured_footprint_cells": 4,
-				"footprint_source": "measured"
-			},
-			"measurements": {
-				"aabb_size": [
-					1.03,
-					1.17,
-					1.21
-				],
-				"aabb_center": [
-					0.0,
-					-0.08,
-					0.1
-				],
-				"grid_cells": [
-					2.0,
-					2.0
-				],
-				"max_dimension_m": 1.21,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
-			},
-			"footprint_measured": [
-				2.0,
-				1,
-				2.0
-			],
-			"spatial_profile": {
-				"dir_group": "omni",
-				"range": 4,
-				"density": "medium",
-				"min_clearance": 1,
-				"stack_priority": 0.5,
-				"approach_dir": "any",
-				"derived_at": "2026-04-29T09:39:46.285361Z",
-				"derived_from": "aabb_size + category"
-			}
-		},
-		"stigmergy_grid": {
-			"name": "Stigmergy Grid",
-			"lookup_name": "stigmergy_grid",
-			"description": "Ant pheromone grid with real-time evaporation and diffusion \u2014 ants deposit trails that fade over time, demonstrating indirect communication (stigmergy).",
-			"scene": "res://commons/artifacts/stigmergy_grid/stigmergy_grid.tscn",
-			"category": "swarmintelligence",
-			"tags": [
-				"stigmergy",
-				"pheromone",
-				"ants",
-				"emergence",
-				"indirect_communication",
-				"swarm"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"sequence": "swarmintelligence",
-			"complexity": "advanced",
-			"dev_themes": [
-				"collective",
-				"emergence",
-				"swarm"
-			],
-			"geometry_spec": {
-				"mesh_type": "texture_plane",
-				"topology": "planar",
-				"construction": {
-					"method": "pixel_computation",
-					"primitives": [
-						"plane"
-					],
-					"operations": [
-						"create_image",
-						"compute_pixels",
-						"apply_texture"
-					]
-				},
-				"material": {
-					"type": "generated_texture",
-					"shading_model": "emissive",
-					"key_properties": [
-						"emission",
-						"metallic"
-					]
-				},
-				"animation": {
-					"type": "transform",
-					"driven_by": "per_frame_update",
-					"affects": [
-						"transform"
-					]
-				},
-				"instance_strategy": "array",
-				"vertex_estimate": "~4 (quad)"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 1,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [
-					"demonstrates",
-					"environmental",
-					"memory",
-					"mechanism",
-					"pathfinding"
-				],
-				"preferred_zone": "end",
-				"measured_footprint_cells": 1,
-				"footprint_source": "measured"
-			},
-			"measurements": {
-				"aabb_size": [
-					0.8,
-					0.0,
-					0.8
-				],
-				"aabb_center": [
-					0.0,
-					0.0,
-					0.0
-				],
-				"grid_cells": [
-					1.0,
-					1.0
-				],
-				"max_dimension_m": 0.8,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
-			},
-			"footprint_measured": [
-				1.0,
-				1,
-				1.0
-			],
-			"spatial_profile": {
-				"dir_group": "plane",
-				"range": 2,
-				"density": "medium",
-				"min_clearance": 1,
-				"stack_priority": 0.5,
-				"approach_dir": "any",
-				"derived_at": "2026-04-29T09:39:46.285361Z",
-				"derived_from": "aabb_size + category"
-			}
-		},
-		"AntColonyV2": {
-			"lookup_name": "AntColonyV2",
-			"name": "AntColonyV2",
-			"description": "ant.move() = gradient_ascent(pheromone_grid) + wander; pheromone_grid *= decay + diffuse \u2014 ant and environment co-evolve",
-			"scene": "res://algorithms/swarmintelligence/ants_v2/AntColonyV2.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"swarmintelligence"
-			],
-			"footprint": [
-				11,
-				21,
-				6
-			],
-			"size_group": "world_scale",
-			"parameters": {
-				"footprint": [
-					11,
-					21,
-					6
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "beginner",
-			"dev_themes": [
-				"collective",
-				"emergence",
-				"swarm"
-			],
-			"tags": [
-				"swarm"
-			],
-			"geometry_spec": {
-				"mesh_type": "texture_plane",
-				"topology": "planar",
-				"construction": {
-					"method": "pixel_computation",
-					"primitives": [
-						"cylinder"
-					],
-					"operations": [
-						"create_image",
-						"compute_pixels",
-						"apply_texture"
-					]
-				},
-				"material": {
-					"type": "generated_texture",
-					"shading_model": "custom_fragment",
-					"key_properties": [
-						"emission",
-						"transparency"
-					]
-				},
-				"animation": {
-					"type": "static",
-					"driven_by": null,
-					"affects": []
-				},
-				"instance_strategy": "array",
-				"vertex_estimate": "~4 (quad)"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 9,
-				"clearance": {
-					"front": 2,
-					"back": 2,
-					"left": 2,
-					"right": 2
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [
-					"simpler",
-					"predecessor",
-					"quality",
-					"weighting",
-					"tandem"
-				],
-				"preferred_zone": "entry",
-				"measured_footprint_cells": 2500,
-				"footprint_source": "measured_capped"
-			},
-			"measurements": {
-				"aabb_size": [
-					50.0,
-					2.0,
-					50.0
-				],
-				"aabb_center": [
-					0.0,
-					0.0,
-					0.0
-				],
-				"grid_cells": [
-					50.0,
-					50.0
-				],
-				"max_dimension_m": 50.0,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
-			},
-			"spatial_profile": {
-				"dir_group": "plane",
-				"range": 75,
-				"density": "field",
-				"min_clearance": 0,
-				"stack_priority": 0.3,
-				"approach_dir": "any",
-				"derived_at": "2026-04-29T09:39:46.285361Z",
-				"derived_from": "aabb_size + category"
-			}
-		},
-		"fitness_landscape_politics": {
-			"name": "Fitness Landscape Politics",
-			"lookup_name": "fitness_landscape_politics",
-			"description": "30 PSO particles on 3 switchable fitness landscapes: convergence (corporate \u2014 minimize distance), spread (ecological \u2014 maximize diversity), novelty (artistic \u2014 seek the unvisited). Same agents, different power structures, different 'success.'",
-			"qfep_connection": "The fitness function IS the power structure. Switching landscapes does not change the agents' F-model \u2014 it changes what counts as low energy. Who defines the loss function defines the world.",
-			"scene": "res://commons/artifacts/fitness_landscape_politics/fitness_landscape_politics.tscn",
-			"category": "swarmintelligence",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"swarmintelligence"
-			],
-			"sequence": "swarmintelligence",
-			"parameters": {
-				"footprint": [
-					3,
-					2,
-					3
-				],
-				"size_group": "room_scale"
-			},
-			"complexity": "advanced",
-			"tags": [
-				"pso",
-				"particles",
-				"optimization",
-				"critical_theory",
-				"fitness",
-				"swarm"
-			],
-			"dev_themes": [
-				"collective",
-				"emergence",
-				"swarm",
-				"philosophy"
-			],
-			"geometry_spec": {
-				"mesh_type": "instanced_particles",
-				"topology": "scattered",
-				"construction": {
-					"method": "multimesh_instancing",
-					"primitives": [
-						"sphere"
-					],
-					"operations": [
-						"allocate_instances",
-						"set_transforms",
-						"update_per_frame"
-					]
-				},
-				"material": {
-					"type": "vertex_color",
-					"shading_model": "unshaded",
-					"key_properties": [
-						"emission",
-						"transparency"
-					]
-				},
-				"animation": {
-					"type": "particle_lifecycle",
-					"driven_by": "cpu_simulation",
-					"affects": [
-						"transform",
-						"color"
-					]
-				},
-				"instance_strategy": "multimesh",
-				"vertex_estimate": "~64"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 9,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [
-					"placed",
-					"alongside",
-					"self_organizing_patterns",
-					"responds",
-					"critical"
-				],
-				"preferred_zone": "end",
-				"measured_footprint_cells": 12,
-				"footprint_source": "measured_capped"
-			},
-			"measurements": {
-				"aabb_size": [
-					3.79,
-					1.27,
-					3.0
-				],
-				"aabb_center": [
-					0.39,
-					0.59,
-					0.0
-				],
-				"grid_cells": [
-					4.0,
-					3.0
-				],
-				"max_dimension_m": 3.79,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
-			},
-			"footprint_measured": [
-				4.0,
-				1,
-				3.0
-			],
-			"spatial_profile": {
-				"dir_group": "floor",
-				"range": 10,
-				"density": "medium",
-				"min_clearance": 2,
-				"stack_priority": 0.5,
-				"approach_dir": "any",
-				"derived_at": "2026-04-29T09:39:46.285361Z",
-				"derived_from": "aabb_size + category"
-			}
-		},
-		"PhysarumColony": {
-			"lookup_name": "PhysarumColony",
-			"name": "PhysarumColony",
-			"description": "trail(x,y) = deposit(agent_positions) * diffuse - evaporate \u2014 no neurons, no memory, just chemistry",
-			"scene": "res://algorithms/swarmintelligence/physarum/PhysarumColony.tscn",
-			"category": "unknown",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"swarmintelligence"
-			],
-			"footprint": [
-				11,
-				31,
-				1
-			],
-			"size_group": "world_scale",
-			"parameters": {
-				"footprint": [
-					11,
-					31,
-					1
-				],
-				"size_group": "world_scale"
-			},
-			"complexity": "beginner",
-			"dev_themes": [
-				"collective",
-				"emergence",
-				"swarm"
-			],
-			"tags": [
-				"swarm"
-			],
-			"geometry_spec": {
-				"mesh_type": "texture_plane",
-				"topology": "planar",
-				"construction": {
-					"method": "pixel_computation",
-					"primitives": [
-						"sphere"
-					],
-					"operations": [
-						"create_image",
-						"compute_pixels",
-						"apply_texture"
-					]
-				},
-				"material": {
-					"type": "generated_texture",
-					"shading_model": "custom_fragment",
-					"key_properties": [
-						"emission",
-						"transparency"
-					]
-				},
-				"animation": {
-					"type": "static",
-					"driven_by": null,
-					"affects": []
-				},
-				"instance_strategy": "array",
-				"vertex_estimate": "~4 (quad)"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 9,
-				"clearance": {
-					"front": 2,
-					"back": 2,
-					"left": 2,
-					"right": 2
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [
-					"unlocks",
-					"ant_colony_optimization",
-					"contrasts",
-					"external",
-					"field"
-				],
-				"preferred_zone": "entry",
-				"measured_footprint_cells": 2500,
-				"footprint_source": "measured_capped"
-			},
-			"measurements": {
-				"aabb_size": [
-					50.0,
-					6.4,
-					50.0
-				],
-				"aabb_center": [
-					0.0,
-					0.0,
-					0.0
-				],
-				"grid_cells": [
-					50.0,
-					50.0
-				],
-				"max_dimension_m": 50.0,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
-			},
-			"spatial_profile": {
-				"dir_group": "plane",
-				"range": 75,
-				"density": "field",
-				"min_clearance": 0,
-				"stack_priority": 0.3,
-				"approach_dir": "any",
-				"derived_at": "2026-04-29T09:39:46.285361Z",
-				"derived_from": "aabb_size + category"
-			}
-		},
-		"tick_flock": {
-			"category": "swarmintelligence",
-			"complexity": "intermediate",
-			"description": "The swarm-intelligence seam. A flock looks alive - emergence, a whole beyond its parts. Underneath: N agents, each reading neighbours and doing arithmetic, advanced one discrete tick at a time. Between ticks nothing moves; the glide is frozen frames the eye splices. Blue: each boid's positions, one per tick, visibly separated - it teleports, it does not fly. Amber: the arc we imagine. Slow the clock and the flock is a for-loop.",
-			"dev_themes": [
-				"digital_bias",
-				"seam"
-			],
-			"include_in_map_data": true,
-			"interaction": "ambient",
-			"lookup_name": "tick_flock",
-			"map_ready": true,
-			"map_sequences": [
-				"swarmintelligence"
-			],
-			"name": "Tick Flock",
-			"qfep_connection": "A station in the bias landscape (doc/SEAM_PER_SEQUENCE.md); the digital-bias seam for swarmintelligence. Bias is conserved; show the seam.",
-			"scene": "res://algorithms/swarmintelligence/tick_flock/tick_flock.tscn",
-			"sequence": "swarmintelligence",
-			"tags": [
-				"swarm",
-				"boids",
-				"emergence",
-				"discrete_tick",
-				"sampling",
-				"seam",
-				"digital_bias"
-			]
-		}
-	}
+ "artifacts": {
+  "ant_colony_art": {
+   "name": "Ant Colony Art",
+   "lookup_name": "ant_colony_art",
+   "description": "Artistic visualization of ant colony optimization with pheromone trails.",
+   "scene": "res://algorithms/swarmintelligence/antcolonyoptimization/artmain.tscn",
+   "category": "swarmintelligence",
+   "tags": [
+    "ants",
+    "colony",
+    "pheromone",
+    "art",
+    "swarm"
+   ],
+   "include_in_map_data": true,
+   "map_ready": false,
+   "map_sequences": [],
+   "sequence": "swarmintelligence",
+   "complexity": "advanced",
+   "dev_themes": [
+    "art",
+    "collective",
+    "emergence",
+    "swarm"
+   ],
+   "geometry_spec": {
+    "mesh_type": "composed_primitives",
+    "topology": "manifold_closed",
+    "construction": {
+     "method": "primitive_assembly",
+     "primitives": [],
+     "operations": [
+      "create_primitives",
+      "position_children"
+     ]
+    },
+    "material": {
+     "type": "standard",
+     "shading_model": "pbr",
+     "key_properties": []
+    },
+    "animation": {
+     "type": "static",
+     "driven_by": null,
+     "affects": []
+    },
+    "instance_strategy": "few",
+    "vertex_estimate": "~20000"
+   },
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 9,
+    "clearance": {
+     "front": 1,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "face_approach",
+    "isolation": 0,
+    "cluster_with": [],
+    "preferred_zone": "end",
+    "measured_footprint_cells": 2950,
+    "footprint_source": "measured_capped"
+   },
+   "measurements": {
+    "aabb_size": [
+     50.0,
+     3.0,
+     58.13
+    ],
+    "aabb_center": [
+     0.0,
+     0.0,
+     -3.99
+    ],
+    "grid_cells": [
+     50.0,
+     59.0
+    ],
+    "max_dimension_m": 58.13,
+    "measured_at": "2026-04-29T07:09:56.762620Z"
+   },
+   "footprint_measured": [
+    50.0,
+    1,
+    59.0
+   ],
+   "spatial_profile": {
+    "dir_group": "plane",
+    "range": 87,
+    "density": "field",
+    "min_clearance": 0,
+    "stack_priority": 0.3,
+    "approach_dir": "any",
+    "derived_at": "2026-04-29T09:39:46.285361Z",
+    "derived_from": "aabb_size + category"
+   }
+  },
+  "ant_agent": {
+   "name": "Ant Agent",
+   "lookup_name": "ant_agent",
+   "description": "Individual ant agent for colony optimization simulations.",
+   "scene": "res://algorithms/swarmintelligence/antcolonyoptimization/AntAgent.tscn",
+   "category": "swarmintelligence",
+   "tags": [
+    "ant",
+    "agent",
+    "swarm"
+   ],
+   "include_in_map_data": true,
+   "map_ready": false,
+   "map_sequences": [],
+   "sequence": "swarmintelligence",
+   "complexity": "advanced",
+   "dev_themes": [
+    "collective",
+    "emergence",
+    "swarm"
+   ],
+   "geometry_spec": {
+    "mesh_type": "composed_primitives",
+    "topology": "manifold_closed",
+    "construction": {
+     "method": "primitive_assembly",
+     "primitives": [
+      "sphere",
+      "cylinder",
+      "capsule"
+     ],
+     "operations": [
+      "create_primitives",
+      "position_children"
+     ]
+    },
+    "material": {
+     "type": "standard",
+     "shading_model": "pbr",
+     "key_properties": []
+    },
+    "animation": {
+     "type": "static",
+     "driven_by": null,
+     "affects": []
+    },
+    "instance_strategy": "single",
+    "vertex_estimate": "unknown"
+   },
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 1,
+    "clearance": {
+     "front": 1,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "face_approach",
+    "isolation": 0,
+    "cluster_with": [],
+    "preferred_zone": "end",
+    "measured_footprint_cells": 1,
+    "footprint_source": "measured"
+   },
+   "measurements": {
+    "aabb_size": [
+     0.2,
+     0.5,
+     0.5
+    ],
+    "aabb_center": [
+     0.0,
+     0.1,
+     0.0
+    ],
+    "grid_cells": [
+     1.0,
+     1.0
+    ],
+    "max_dimension_m": 0.5,
+    "measured_at": "2026-04-29T07:09:56.762620Z"
+   },
+   "footprint_measured": [
+    1.0,
+    1,
+    1.0
+   ],
+   "spatial_profile": {
+    "dir_group": "floor",
+    "range": 2,
+    "density": "medium",
+    "min_clearance": 1,
+    "stack_priority": 0.5,
+    "approach_dir": "any",
+    "derived_at": "2026-04-29T09:39:46.285361Z",
+    "derived_from": "aabb_size + category"
+   }
+  },
+  "particle_swarm_optimization_legacy": {
+   "name": "Particle Swarm Optimization (Legacy)",
+   "lookup_name": "particle_swarm_optimization_legacy",
+   "description": "Particle swarm optimization visualizing swarm convergence on optimal solutions.",
+   "scene": "res://algorithms/swarmintelligence/particleswarmoptimization/particle_swarm_optimization.tscn",
+   "category": "swarmintelligence",
+   "tags": [
+    "pso",
+    "particles",
+    "optimization",
+    "swarm"
+   ],
+   "include_in_map_data": true,
+   "map_ready": false,
+   "map_sequences": [],
+   "sequence": "swarmintelligence",
+   "complexity": "intermediate",
+   "dev_themes": [
+    "collective",
+    "emergence",
+    "swarm"
+   ],
+   "geometry_spec": {
+    "mesh_type": "composed_primitives",
+    "topology": "manifold_closed",
+    "construction": {
+     "method": "primitive_assembly",
+     "primitives": [
+      "sphere",
+      "plane"
+     ],
+     "operations": [
+      "create_primitives",
+      "position_children"
+     ]
+    },
+    "material": {
+     "type": "standard",
+     "shading_model": "emissive",
+     "key_properties": [
+      "emission",
+      "transparency"
+     ]
+    },
+    "animation": {
+     "type": "transform",
+     "driven_by": "per_frame_update",
+     "affects": [
+      "transform"
+     ]
+    },
+    "instance_strategy": "array",
+    "vertex_estimate": "~800"
+   },
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 9,
+    "clearance": {
+     "front": 1,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "face_approach",
+    "isolation": 0,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 420,
+    "footprint_source": "measured_capped"
+   },
+   "measurements": {
+    "aabb_size": [
+     20.06,
+     19.77,
+     20.0
+    ],
+    "aabb_center": [
+     0.03,
+     -0.11,
+     0.0
+    ],
+    "grid_cells": [
+     21.0,
+     20.0
+    ],
+    "max_dimension_m": 20.06,
+    "measured_at": "2026-04-29T07:09:56.762620Z"
+   },
+   "footprint_measured": [
+    21.0,
+    1,
+    20.0
+   ],
+   "spatial_profile": {
+    "dir_group": "floor",
+    "range": 60,
+    "density": "low",
+    "min_clearance": 0,
+    "stack_priority": 0.1,
+    "approach_dir": "any",
+    "derived_at": "2026-04-29T09:39:46.285361Z",
+    "derived_from": "aabb_size + category"
+   }
+  },
+  "ant_colony_v2": {
+   "name": "Ant Colony V2",
+   "lookup_name": "ant_colony_v2",
+   "description": "Improved ant colony simulation with updated agent behavior and visuals.",
+   "scene": "res://algorithms/swarmintelligence/ants_v2/AntColonyV2.tscn",
+   "category": "swarmintelligence",
+   "tags": [
+    "ants",
+    "colony",
+    "simulation",
+    "swarm",
+    "v2"
+   ],
+   "include_in_map_data": true,
+   "map_ready": false,
+   "map_sequences": [],
+   "sequence": "swarmintelligence",
+   "parameters": {
+    "footprint": [
+     11,
+     21,
+     6
+    ],
+    "size_group": "world_scale"
+   },
+   "complexity": "advanced",
+   "dev_themes": [
+    "collective",
+    "emergence",
+    "swarm"
+   ],
+   "geometry_spec": {
+    "mesh_type": "texture_plane",
+    "topology": "planar",
+    "construction": {
+     "method": "pixel_computation",
+     "primitives": [
+      "cylinder"
+     ],
+     "operations": [
+      "create_image",
+      "compute_pixels",
+      "apply_texture"
+     ]
+    },
+    "material": {
+     "type": "generated_texture",
+     "shading_model": "custom_fragment",
+     "key_properties": [
+      "emission",
+      "transparency"
+     ]
+    },
+    "animation": {
+     "type": "static",
+     "driven_by": null,
+     "affects": []
+    },
+    "instance_strategy": "array",
+    "vertex_estimate": "~4 (quad)"
+   },
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 9,
+    "clearance": {
+     "front": 2,
+     "back": 2,
+     "left": 2,
+     "right": 2
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "face_approach",
+    "isolation": 0,
+    "cluster_with": [
+     "simpler",
+     "predecessor",
+     "quality",
+     "weighting",
+     "tandem"
+    ],
+    "preferred_zone": "end",
+    "measured_footprint_cells": 2500,
+    "footprint_source": "measured_capped"
+   },
+   "measurements": {
+    "aabb_size": [
+     50.0,
+     2.0,
+     50.0
+    ],
+    "aabb_center": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grid_cells": [
+     50.0,
+     50.0
+    ],
+    "max_dimension_m": 50.0,
+    "measured_at": "2026-04-29T07:09:56.762620Z"
+   },
+   "footprint_measured": [
+    50.0,
+    1,
+    50.0
+   ],
+   "spatial_profile": {
+    "dir_group": "plane",
+    "range": 75,
+    "density": "field",
+    "min_clearance": 0,
+    "stack_priority": 0.3,
+    "approach_dir": "any",
+    "derived_at": "2026-04-29T09:39:46.285361Z",
+    "derived_from": "aabb_size + category"
+   }
+  },
+  "physarum_colony": {
+   "name": "Physarum Colony",
+   "lookup_name": "physarum_colony",
+   "description": "Physarum slime mold simulation demonstrating emergent network formation.",
+   "scene": "res://algorithms/swarmintelligence/physarum/PhysarumColony.tscn",
+   "category": "swarmintelligence",
+   "tags": [
+    "physarum",
+    "slime_mold",
+    "emergence",
+    "network",
+    "swarm"
+   ],
+   "include_in_map_data": true,
+   "map_ready": false,
+   "map_sequences": [],
+   "sequence": "swarmintelligence",
+   "parameters": {
+    "footprint": [
+     11,
+     31,
+     1
+    ],
+    "size_group": "world_scale"
+   },
+   "complexity": "beginner",
+   "dev_themes": [
+    "collective",
+    "emergence",
+    "swarm"
+   ],
+   "geometry_spec": {
+    "mesh_type": "texture_plane",
+    "topology": "planar",
+    "construction": {
+     "method": "pixel_computation",
+     "primitives": [
+      "sphere"
+     ],
+     "operations": [
+      "create_image",
+      "compute_pixels",
+      "apply_texture"
+     ]
+    },
+    "material": {
+     "type": "generated_texture",
+     "shading_model": "custom_fragment",
+     "key_properties": [
+      "emission",
+      "transparency"
+     ]
+    },
+    "animation": {
+     "type": "static",
+     "driven_by": null,
+     "affects": []
+    },
+    "instance_strategy": "array",
+    "vertex_estimate": "~4 (quad)"
+   },
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 9,
+    "clearance": {
+     "front": 2,
+     "back": 2,
+     "left": 2,
+     "right": 2
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "face_approach",
+    "isolation": 0,
+    "cluster_with": [
+     "unlocks",
+     "ant_colony_optimization",
+     "contrasts",
+     "external",
+     "field"
+    ],
+    "preferred_zone": "entry",
+    "measured_footprint_cells": 2500,
+    "footprint_source": "measured_capped"
+   },
+   "measurements": {
+    "aabb_size": [
+     50.0,
+     6.4,
+     50.0
+    ],
+    "aabb_center": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grid_cells": [
+     50.0,
+     50.0
+    ],
+    "max_dimension_m": 50.0,
+    "measured_at": "2026-04-29T07:09:56.762620Z"
+   },
+   "footprint_measured": [
+    50.0,
+    1,
+    50.0
+   ],
+   "spatial_profile": {
+    "dir_group": "plane",
+    "range": 75,
+    "density": "field",
+    "min_clearance": 0,
+    "stack_priority": 0.3,
+    "approach_dir": "any",
+    "derived_at": "2026-04-29T09:39:46.285361Z",
+    "derived_from": "aabb_size + category"
+   }
+  },
+  "ant_colony_optimization": {
+   "name": "Ant Colony Optimization",
+   "lookup_name": "ant_colony_optimization",
+   "description": "Ant colony optimization with pheromone evaporation gradient heatmap, multi-source quality-weighted foraging, tandem running communication, and 3 modes (Colony/Communication/Multi-Source).",
+   "scene": "res://algorithms/swarmintelligence/ant_colony_optimization/ant_colony_optimization.tscn",
+   "category": "swarmintelligence",
+   "tags": [
+    "ants",
+    "optimization",
+    "pheromone",
+    "heatmap",
+    "foraging",
+    "communication",
+    "swarm"
+   ],
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "swarmintelligence"
+   ],
+   "sequence": "swarmintelligence",
+   "parameters": {
+    "footprint": [
+     17,
+     19,
+     9
+    ],
+    "size_group": "world_scale",
+    "config_schema": {
+     "ant_count": {
+      "type": "int",
+      "default": 40,
+      "min": 5,
+      "max": 80
+     },
+     "evaporation_rate": {
+      "type": "float",
+      "default": 0.02,
+      "min": 0.001,
+      "max": 0.1
+     },
+     "pheromone_deposit": {
+      "type": "float",
+      "default": 5.0,
+      "min": 1.0,
+      "max": 20.0
+     },
+     "alpha_weight": {
+      "type": "float",
+      "default": 1.0,
+      "min": 0.1,
+      "max": 5.0
+     },
+     "beta_weight": {
+      "type": "float",
+      "default": 2.0,
+      "min": 0.1,
+      "max": 5.0
+     },
+     "ant_speed": {
+      "type": "float",
+      "default": 3.0,
+      "min": 1.0,
+      "max": 8.0
+     },
+     "field_size": {
+      "type": "float",
+      "default": 6.0,
+      "min": 3.0,
+      "max": 10.0
+     },
+     "food_source_count": {
+      "type": "int",
+      "default": 4,
+      "min": 1,
+      "max": 8
+     },
+     "mode": {
+      "type": "string",
+      "default": "COLONY",
+      "enum": [
+       "COLONY",
+       "COMMUNICATION",
+       "MULTI_SOURCE"
+      ]
+     }
+    }
+   },
+   "complexity": "advanced",
+   "dev_themes": [
+    "collective",
+    "emergence",
+    "swarm",
+    "communication"
+   ],
+   "geometry_spec": {
+    "mesh_type": "delegated_scene",
+    "topology": "manifold_open",
+    "construction": {
+     "method": "scene_instantiation",
+     "primitives": [],
+     "operations": [
+      "load_scene",
+      "instantiate",
+      "configure"
+     ]
+    },
+    "material": {
+     "type": "vertex_color",
+     "shading_model": "unshaded",
+     "key_properties": [
+      "transparency",
+      "double_sided"
+     ]
+    },
+    "animation": {
+     "type": "vertex",
+     "driven_by": "per_frame_rebuild",
+     "affects": [
+      "vertex_positions"
+     ]
+    },
+    "instance_strategy": "few",
+    "vertex_estimate": "varies"
+   },
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 1,
+    "clearance": {
+     "front": 2,
+     "back": 2,
+     "left": 2,
+     "right": 2
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "face_approach",
+    "isolation": 0,
+    "cluster_with": [],
+    "preferred_zone": "end",
+    "measured_footprint_cells": 1,
+    "footprint_source": "measured"
+   },
+   "measurements": {
+    "aabb_size": [
+     0.33,
+     0.2,
+     0.04
+    ],
+    "aabb_center": [
+     -2.0,
+     -4.0,
+     0.02
+    ],
+    "grid_cells": [
+     1.0,
+     1.0
+    ],
+    "max_dimension_m": 0.33,
+    "measured_at": "2026-04-29T07:09:56.762620Z"
+   },
+   "footprint_measured": [
+    1.0,
+    1,
+    1.0
+   ],
+   "spatial_profile": {
+    "dir_group": "omni",
+    "range": 1,
+    "density": "medium",
+    "min_clearance": 1,
+    "stack_priority": 0.5,
+    "approach_dir": "any",
+    "derived_at": "2026-04-29T09:39:46.285361Z",
+    "derived_from": "aabb_size + category"
+   },
+   "qfep_connection": "The colony as computer: ants lay pheromone on good routes, evaporation forgets the bad ones, and the shortest path emerges as the argument nobody made. Stigmergy at its purest — the environment is the message, memory kept in the world instead of the head."
+  },
+  "particle_swarm_optimization": {
+   "name": "Particle Swarm Optimization",
+   "lookup_name": "particle_swarm_optimization",
+   "description": "Particle swarm optimization with visual representation of swarm search dynamics.",
+   "scene": "res://algorithms/swarmintelligence/particle_swarm_optimization/particle_swarm_optimization.tscn",
+   "category": "swarmintelligence",
+   "tags": [
+    "pso",
+    "particles",
+    "optimization",
+    "search",
+    "swarm"
+   ],
+   "include_in_map_data": true,
+   "map_ready": false,
+   "map_sequences": [],
+   "sequence": "swarmintelligence",
+   "parameters": {
+    "footprint": [
+     17,
+     19,
+     9
+    ],
+    "size_group": "world_scale"
+   },
+   "complexity": "intermediate",
+   "dev_themes": [
+    "collective",
+    "emergence",
+    "swarm"
+   ],
+   "geometry_spec": {
+    "mesh_type": "boolean_composition",
+    "topology": "volumetric",
+    "construction": {
+     "method": "csg_boolean",
+     "primitives": [
+      "sphere"
+     ],
+     "operations": [
+      "create_primitives",
+      "position_primitives",
+      "boolean_combine"
+     ]
+    },
+    "material": {
+     "type": "standard",
+     "shading_model": "emissive",
+     "key_properties": [
+      "emission",
+      "transparency"
+     ]
+    },
+    "animation": {
+     "type": "transform",
+     "driven_by": "per_frame_update",
+     "affects": [
+      "transform"
+     ]
+    },
+    "instance_strategy": "single",
+    "vertex_estimate": "~25"
+   },
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 9,
+    "clearance": {
+     "front": 2,
+     "back": 2,
+     "left": 2,
+     "right": 2
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "face_approach",
+    "isolation": 0,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 51,
+    "footprint_source": "measured_capped"
+   },
+   "measurements": {
+    "aabb_size": [
+     16.9,
+     16.1,
+     2.54
+    ],
+    "aabb_center": [
+     -0.05,
+     0.0,
+     -0.03
+    ],
+    "grid_cells": [
+     17.0,
+     3.0
+    ],
+    "max_dimension_m": 16.9,
+    "measured_at": "2026-04-29T07:09:56.762620Z"
+   },
+   "footprint_measured": [
+    17.0,
+    1,
+    3.0
+   ],
+   "spatial_profile": {
+    "dir_group": "panel",
+    "range": 35,
+    "density": "low",
+    "min_clearance": 0,
+    "stack_priority": 0.1,
+    "approach_dir": "front",
+    "derived_at": "2026-04-29T09:39:46.285361Z",
+    "derived_from": "aabb_size + category"
+   }
+  },
+  "boids_aquarium": {
+   "name": "Boids Aquarium",
+   "lookup_name": "boids_aquarium",
+   "description": "A 1m glass cube containing a school of 30 boids demonstrating emergent flocking behavior. Three simple rules (separation, alignment, cohesion) create lifelike collective motion.",
+   "scene": "res://commons/artifacts/boids_aquarium/boids_aquarium.tscn",
+   "category": "emergence",
+   "tags": [
+    "boids",
+    "flocking",
+    "emergence",
+    "swarm",
+    "reynolds",
+    "collective_behavior",
+    "self_organization"
+   ],
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "swarmintelligence"
+   ],
+   "sequence": "swarmintelligence",
+   "interactions": [
+    "observe"
+   ],
+   "parameters": {
+    "footprint": [
+     1,
+     1,
+     1
+    ],
+    "size_group": "compact"
+   },
+   "interaction": "observe",
+   "qfep_connection": "Emergence at Î»â‰ˆ0.4 â€” simple rules create complex, unpredictable behavior without central control",
+   "complexity": "intermediate",
+   "dev_themes": [
+    "collective",
+    "emergence",
+    "swarm"
+   ],
+   "geometry_spec": {
+    "mesh_type": "instanced_particles",
+    "topology": "scattered",
+    "construction": {
+     "method": "multimesh_instancing",
+     "primitives": [
+      "box"
+     ],
+     "operations": [
+      "allocate_instances",
+      "set_transforms",
+      "update_per_frame"
+     ]
+    },
+    "material": {
+     "type": "vertex_color",
+     "shading_model": "emissive",
+     "key_properties": [
+      "emission",
+      "metallic",
+      "transparency",
+      "double_sided"
+     ]
+    },
+    "animation": {
+     "type": "particle_lifecycle",
+     "driven_by": "cpu_simulation",
+     "affects": [
+      "transform",
+      "color"
+     ]
+    },
+    "instance_strategy": "multimesh",
+    "vertex_estimate": "unknown"
+   },
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 4,
+    "clearance": {
+     "front": 1,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "face_approach",
+    "isolation": 0,
+    "cluster_with": [
+     "shares",
+     "rules",
+     "boid_manager",
+     "glass",
+     "scale"
+    ],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 4,
+    "footprint_source": "measured"
+   },
+   "measurements": {
+    "aabb_size": [
+     1.03,
+     1.17,
+     1.21
+    ],
+    "aabb_center": [
+     0.0,
+     -0.08,
+     0.1
+    ],
+    "grid_cells": [
+     2.0,
+     2.0
+    ],
+    "max_dimension_m": 1.21,
+    "measured_at": "2026-04-29T07:09:56.762620Z"
+   },
+   "footprint_measured": [
+    2.0,
+    1,
+    2.0
+   ],
+   "spatial_profile": {
+    "dir_group": "omni",
+    "range": 4,
+    "density": "medium",
+    "min_clearance": 1,
+    "stack_priority": 0.5,
+    "approach_dir": "any",
+    "derived_at": "2026-04-29T09:39:46.285361Z",
+    "derived_from": "aabb_size + category"
+   }
+  },
+  "stigmergy_grid": {
+   "name": "Stigmergy Grid",
+   "lookup_name": "stigmergy_grid",
+   "description": "Ant pheromone grid with real-time evaporation and diffusion — ants deposit trails that fade over time, demonstrating indirect communication (stigmergy).",
+   "scene": "res://commons/artifacts/stigmergy_grid/stigmergy_grid.tscn",
+   "category": "swarmintelligence",
+   "tags": [
+    "stigmergy",
+    "pheromone",
+    "ants",
+    "emergence",
+    "indirect_communication",
+    "swarm"
+   ],
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [],
+   "sequence": "swarmintelligence",
+   "complexity": "advanced",
+   "dev_themes": [
+    "collective",
+    "emergence",
+    "swarm"
+   ],
+   "geometry_spec": {
+    "mesh_type": "texture_plane",
+    "topology": "planar",
+    "construction": {
+     "method": "pixel_computation",
+     "primitives": [
+      "plane"
+     ],
+     "operations": [
+      "create_image",
+      "compute_pixels",
+      "apply_texture"
+     ]
+    },
+    "material": {
+     "type": "generated_texture",
+     "shading_model": "emissive",
+     "key_properties": [
+      "emission",
+      "metallic"
+     ]
+    },
+    "animation": {
+     "type": "transform",
+     "driven_by": "per_frame_update",
+     "affects": [
+      "transform"
+     ]
+    },
+    "instance_strategy": "array",
+    "vertex_estimate": "~4 (quad)"
+   },
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 1,
+    "clearance": {
+     "front": 1,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "face_approach",
+    "isolation": 0,
+    "cluster_with": [
+     "demonstrates",
+     "environmental",
+     "memory",
+     "mechanism",
+     "pathfinding"
+    ],
+    "preferred_zone": "end",
+    "measured_footprint_cells": 1,
+    "footprint_source": "measured"
+   },
+   "measurements": {
+    "aabb_size": [
+     0.8,
+     0.0,
+     0.8
+    ],
+    "aabb_center": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grid_cells": [
+     1.0,
+     1.0
+    ],
+    "max_dimension_m": 0.8,
+    "measured_at": "2026-04-29T07:09:56.762620Z"
+   },
+   "footprint_measured": [
+    1.0,
+    1,
+    1.0
+   ],
+   "spatial_profile": {
+    "dir_group": "plane",
+    "range": 2,
+    "density": "medium",
+    "min_clearance": 1,
+    "stack_priority": 0.5,
+    "approach_dir": "any",
+    "derived_at": "2026-04-29T09:39:46.285361Z",
+    "derived_from": "aabb_size + category"
+   }
+  },
+  "AntColonyV2": {
+   "lookup_name": "AntColonyV2",
+   "name": "AntColonyV2",
+   "description": "ant.move() = gradient_ascent(pheromone_grid) + wander; pheromone_grid *= decay + diffuse — ant and environment co-evolve",
+   "scene": "res://algorithms/swarmintelligence/ants_v2/AntColonyV2.tscn",
+   "category": "unknown",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "swarmintelligence"
+   ],
+   "footprint": [
+    11,
+    21,
+    6
+   ],
+   "size_group": "world_scale",
+   "parameters": {
+    "footprint": [
+     11,
+     21,
+     6
+    ],
+    "size_group": "world_scale"
+   },
+   "complexity": "beginner",
+   "dev_themes": [
+    "collective",
+    "emergence",
+    "swarm"
+   ],
+   "tags": [
+    "swarm"
+   ],
+   "geometry_spec": {
+    "mesh_type": "texture_plane",
+    "topology": "planar",
+    "construction": {
+     "method": "pixel_computation",
+     "primitives": [
+      "cylinder"
+     ],
+     "operations": [
+      "create_image",
+      "compute_pixels",
+      "apply_texture"
+     ]
+    },
+    "material": {
+     "type": "generated_texture",
+     "shading_model": "custom_fragment",
+     "key_properties": [
+      "emission",
+      "transparency"
+     ]
+    },
+    "animation": {
+     "type": "static",
+     "driven_by": null,
+     "affects": []
+    },
+    "instance_strategy": "array",
+    "vertex_estimate": "~4 (quad)"
+   },
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 9,
+    "clearance": {
+     "front": 2,
+     "back": 2,
+     "left": 2,
+     "right": 2
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "face_approach",
+    "isolation": 0,
+    "cluster_with": [
+     "simpler",
+     "predecessor",
+     "quality",
+     "weighting",
+     "tandem"
+    ],
+    "preferred_zone": "entry",
+    "measured_footprint_cells": 2500,
+    "footprint_source": "measured_capped"
+   },
+   "measurements": {
+    "aabb_size": [
+     50.0,
+     2.0,
+     50.0
+    ],
+    "aabb_center": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grid_cells": [
+     50.0,
+     50.0
+    ],
+    "max_dimension_m": 50.0,
+    "measured_at": "2026-04-29T07:09:56.762620Z"
+   },
+   "spatial_profile": {
+    "dir_group": "plane",
+    "range": 75,
+    "density": "field",
+    "min_clearance": 0,
+    "stack_priority": 0.3,
+    "approach_dir": "any",
+    "derived_at": "2026-04-29T09:39:46.285361Z",
+    "derived_from": "aabb_size + category"
+   }
+  },
+  "fitness_landscape_politics": {
+   "name": "Fitness Landscape Politics",
+   "lookup_name": "fitness_landscape_politics",
+   "description": "30 PSO particles on 3 switchable fitness landscapes: convergence (corporate — minimize distance), spread (ecological — maximize diversity), novelty (artistic — seek the unvisited). Same agents, different power structures, different 'success.'",
+   "qfep_connection": "The fitness function IS the power structure. Switching landscapes does not change the agents' F-model — it changes what counts as low energy. Who defines the loss function defines the world.",
+   "scene": "res://commons/artifacts/fitness_landscape_politics/fitness_landscape_politics.tscn",
+   "category": "swarmintelligence",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "swarmintelligence"
+   ],
+   "sequence": "swarmintelligence",
+   "parameters": {
+    "footprint": [
+     3,
+     2,
+     3
+    ],
+    "size_group": "room_scale"
+   },
+   "complexity": "advanced",
+   "tags": [
+    "pso",
+    "particles",
+    "optimization",
+    "critical_theory",
+    "fitness",
+    "swarm"
+   ],
+   "dev_themes": [
+    "collective",
+    "emergence",
+    "swarm",
+    "philosophy"
+   ],
+   "geometry_spec": {
+    "mesh_type": "instanced_particles",
+    "topology": "scattered",
+    "construction": {
+     "method": "multimesh_instancing",
+     "primitives": [
+      "sphere"
+     ],
+     "operations": [
+      "allocate_instances",
+      "set_transforms",
+      "update_per_frame"
+     ]
+    },
+    "material": {
+     "type": "vertex_color",
+     "shading_model": "unshaded",
+     "key_properties": [
+      "emission",
+      "transparency"
+     ]
+    },
+    "animation": {
+     "type": "particle_lifecycle",
+     "driven_by": "cpu_simulation",
+     "affects": [
+      "transform",
+      "color"
+     ]
+    },
+    "instance_strategy": "multimesh",
+    "vertex_estimate": "~64"
+   },
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 9,
+    "clearance": {
+     "front": 1,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "face_approach",
+    "isolation": 0,
+    "cluster_with": [
+     "placed",
+     "alongside",
+     "self_organizing_patterns",
+     "responds",
+     "critical"
+    ],
+    "preferred_zone": "end",
+    "measured_footprint_cells": 12,
+    "footprint_source": "measured_capped"
+   },
+   "measurements": {
+    "aabb_size": [
+     3.79,
+     1.27,
+     3.0
+    ],
+    "aabb_center": [
+     0.39,
+     0.59,
+     0.0
+    ],
+    "grid_cells": [
+     4.0,
+     3.0
+    ],
+    "max_dimension_m": 3.79,
+    "measured_at": "2026-04-29T07:09:56.762620Z"
+   },
+   "footprint_measured": [
+    4.0,
+    1,
+    3.0
+   ],
+   "spatial_profile": {
+    "dir_group": "floor",
+    "range": 10,
+    "density": "medium",
+    "min_clearance": 2,
+    "stack_priority": 0.5,
+    "approach_dir": "any",
+    "derived_at": "2026-04-29T09:39:46.285361Z",
+    "derived_from": "aabb_size + category"
+   }
+  },
+  "PhysarumColony": {
+   "lookup_name": "PhysarumColony",
+   "name": "PhysarumColony",
+   "description": "trail(x,y) = deposit(agent_positions) * diffuse - evaporate — no neurons, no memory, just chemistry",
+   "scene": "res://algorithms/swarmintelligence/physarum/PhysarumColony.tscn",
+   "category": "unknown",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "swarmintelligence"
+   ],
+   "footprint": [
+    11,
+    31,
+    1
+   ],
+   "size_group": "world_scale",
+   "parameters": {
+    "footprint": [
+     11,
+     31,
+     1
+    ],
+    "size_group": "world_scale"
+   },
+   "complexity": "beginner",
+   "dev_themes": [
+    "collective",
+    "emergence",
+    "swarm"
+   ],
+   "tags": [
+    "swarm"
+   ],
+   "geometry_spec": {
+    "mesh_type": "texture_plane",
+    "topology": "planar",
+    "construction": {
+     "method": "pixel_computation",
+     "primitives": [
+      "sphere"
+     ],
+     "operations": [
+      "create_image",
+      "compute_pixels",
+      "apply_texture"
+     ]
+    },
+    "material": {
+     "type": "generated_texture",
+     "shading_model": "custom_fragment",
+     "key_properties": [
+      "emission",
+      "transparency"
+     ]
+    },
+    "animation": {
+     "type": "static",
+     "driven_by": null,
+     "affects": []
+    },
+    "instance_strategy": "array",
+    "vertex_estimate": "~4 (quad)"
+   },
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 9,
+    "clearance": {
+     "front": 2,
+     "back": 2,
+     "left": 2,
+     "right": 2
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "face_approach",
+    "isolation": 0,
+    "cluster_with": [
+     "unlocks",
+     "ant_colony_optimization",
+     "contrasts",
+     "external",
+     "field"
+    ],
+    "preferred_zone": "entry",
+    "measured_footprint_cells": 2500,
+    "footprint_source": "measured_capped"
+   },
+   "measurements": {
+    "aabb_size": [
+     50.0,
+     6.4,
+     50.0
+    ],
+    "aabb_center": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grid_cells": [
+     50.0,
+     50.0
+    ],
+    "max_dimension_m": 50.0,
+    "measured_at": "2026-04-29T07:09:56.762620Z"
+   },
+   "spatial_profile": {
+    "dir_group": "plane",
+    "range": 75,
+    "density": "field",
+    "min_clearance": 0,
+    "stack_priority": 0.3,
+    "approach_dir": "any",
+    "derived_at": "2026-04-29T09:39:46.285361Z",
+    "derived_from": "aabb_size + category"
+   }
+  },
+  "tick_flock": {
+   "category": "swarmintelligence",
+   "complexity": "intermediate",
+   "description": "The swarm-intelligence seam. A flock looks alive - emergence, a whole beyond its parts. Underneath: N agents, each reading neighbours and doing arithmetic, advanced one discrete tick at a time. Between ticks nothing moves; the glide is frozen frames the eye splices. Blue: each boid's positions, one per tick, visibly separated - it teleports, it does not fly. Amber: the arc we imagine. Slow the clock and the flock is a for-loop.",
+   "dev_themes": [
+    "digital_bias",
+    "seam"
+   ],
+   "include_in_map_data": true,
+   "interaction": "ambient",
+   "lookup_name": "tick_flock",
+   "map_ready": true,
+   "map_sequences": [
+    "swarmintelligence"
+   ],
+   "name": "Tick Flock",
+   "qfep_connection": "A station in the bias landscape (doc/SEAM_PER_SEQUENCE.md); the digital-bias seam for swarmintelligence. Bias is conserved; show the seam.",
+   "scene": "res://algorithms/swarmintelligence/tick_flock/tick_flock.tscn",
+   "sequence": "swarmintelligence",
+   "tags": [
+    "swarm",
+    "boids",
+    "emergence",
+    "discrete_tick",
+    "sampling",
+    "seam",
+    "digital_bias"
+   ]
+  }
+ }
 }

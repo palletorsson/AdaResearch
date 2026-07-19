@@ -20,7 +20,8 @@ no sibling kept — the move did not beat the ride (overlaps 1→1, tight 0→0)
 - **science_screen** — Transformation here is projection: a 3D state is re-expressed in 2D while preserving selected structural relat
 
 ## The text vs the space
-**no walked.md** — the space stands unwritten; this note is the first text this map has.
+walked.md exists — the writing names 2/2 of the cast; dwells declared for 0.
+- **the writing's subjects are blocked in space**: PhysarumColony, science_screen sit in clearance violations — the text promises what the floor obstructs.
 
 ## The heuristic understanding
 The violations are real but mechanical moving does not fix them — they are placement DECISIONS (which body yields?), not placement errors. This is verdict material, not tooling material.
