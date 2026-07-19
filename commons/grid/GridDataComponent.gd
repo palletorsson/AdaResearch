@@ -287,6 +287,9 @@ func get_walls_layer() -> Array:
 # Get the optional living-biome layer (additive; P-8 grammar, see
 # BiomeGridTokens / doc/plans/biome_grid_redesign.md). Empty array if absent —
 # maps without a biome layer are unaffected. See GridBiomeComponent.
+# Two authoring forms (biome-6): plain rows Array (as before), or a dict
+# {"_meta": {...}, "rows": [...]} when the map bounds the layer (budget,
+# visibility range). Rows come back identical either way.
 func get_biome_layer() -> Array:
 	if json_loader and json_loader.map_data is Dictionary:
 		var layers = json_loader.map_data.get("layers", {})
@@ -294,7 +297,25 @@ func get_biome_layer() -> Array:
 			var biome = layers.get("biome", [])
 			if biome is Array:
 				return biome
+			if biome is Dictionary:
+				var rows = (biome as Dictionary).get("rows", [])
+				if rows is Array:
+					return rows
 	return []
+
+
+# The biome layer's optional _meta block (biome-6: budget_instances,
+# visibility_range). Empty for the plain-Array form — defaults apply.
+func get_biome_meta() -> Dictionary:
+	if json_loader and json_loader.map_data is Dictionary:
+		var layers = json_loader.map_data.get("layers", {})
+		if layers is Dictionary:
+			var biome = layers.get("biome", [])
+			if biome is Dictionary:
+				var meta = (biome as Dictionary).get("_meta", {})
+				if meta is Dictionary:
+					return meta
+	return {}
 
 # Raw structure layer grid (strings), for components that need per-cell
 # heights without the parsed instance (e.g. wall segment base elevation).

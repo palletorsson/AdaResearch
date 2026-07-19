@@ -239,7 +239,7 @@
     },
     {
      "id": "biome-6",
-     "text": "Perf gate: every spawn through ChunkManager; scrubber as harness; per-map budget in layer _meta",
+     "text": "Perf gate DONE 2026-07-18: halo strips/cover/markers batch into one MultiMesh per (kind,kingdom,recipe) - O(kingdoms) nodes, not O(cells) (synthetic 20x14: 1995 instances 10 nodes; Biome_HaloTest: 911 instances 7 nodes); per-map budget via layers.biome._meta {budget_instances, visibility_range} (dict form {_meta,rows}), even-stride clamp honestly printed - negative test bites (kept 99 of 1995 under budget 100); visibility_range_end on every batch. NOT through ChunkManager, deliberately: ChunkManager is the unique-DNA organism LOD (explicitly cannot batch); halo cover is identical geometry - the MultiMesh case. Its discipline (bounded counts, culling, budget) applied natively. Probe: commons/testing/probe_biome_batching.gd; gate maps Biome_HaloTest (regression) + Biome_HaloBudget (dict form, clamp visible in capture). Per-cell RNG unchanged - geometry identical to the per-cell path. Runtime claims after flush spawn direct (counted late_spawns).",
      "done": false
     }
    ],

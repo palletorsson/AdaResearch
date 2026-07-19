@@ -12,7 +12,18 @@
 #     layer kingdom route through BiomePaintDispatcher.spawn_cell — the SAME
 #     honesty guard + substrate ladder as painted cells (one dispatch law,
 #     two authoring surfaces). Kingdoms without a substrate (mineral/water/
-#     meta) keep the pilot marker. ChunkManager routing is the biome-6 gate.
+#     meta) keep the pilot marker.
+#   - Perf gate (biome-6): halo strips, ground-cover and pilot markers BATCH
+#     into one MultiMesh per (kind, kingdom, recipe) across the whole map —
+#     node count is O(kingdoms), not O(cells). Per-cell RNG streams are
+#     unchanged, so the geometry is identical to the per-cell path. A map
+#     may bound the layer via `layers.biome._meta` (dict form {_meta, rows}):
+#     budget_instances caps total batched instances (deterministic stride
+#     thinning, honestly printed), visibility_range sets GPU-side culling
+#     distance (the ChunkManager discipline; its organism LOD machinery
+#     cannot apply here — halo cover is identical geometry, the MultiMesh
+#     case ChunkManager explicitly is not). Runtime claims after the flush
+#     fall back to single spawns (few, honest).
 #   - Halo (biome-3): a halo cell on the grid boundary spills wilderness
 #     OUTWARD — a ground strip + kingdom ground-cover thinning into the dark.
 #     This is the old BiomeRingComponent reborn as a per-cell role; a map
@@ -55,6 +66,15 @@ var _halo_instances: int = 0     # total halo ground-cover instances
 var _grid_rows: int = 0
 var _grid_cols: int = 0
 
+# ── biome-6: batched rendering + per-map budget ──
+const DEFAULT_BUDGET_INSTANCES: int = 4000
+const DEFAULT_VISIBILITY_RANGE: float = 60.0
+var _budget_instances: int = DEFAULT_BUDGET_INSTANCES
+var _visibility_range: float = DEFAULT_VISIBILITY_RANGE
+var _batches: Dictionary = {}    # key -> {mesh, mat, transforms: Array}
+var _recipe_cache: Dictionary = {}  # kingdom -> cached recipe array (shared meshes)
+var _flushed: bool = false       # after flush, late (runtime) spawns go direct
+
 
 func initialize(grid_sys: Node3D, cube_size: float, gutter: float) -> void:
 	_grid_system = grid_sys
@@ -62,9 +82,11 @@ func initialize(grid_sys: Node3D, cube_size: float, gutter: float) -> void:
 	_gutter = gutter
 
 
-func generate(biome_layer: Array, structure_layer: Array, stage_order: int = 0) -> void:
+func generate(biome_layer: Array, structure_layer: Array, stage_order: int = 0, meta: Dictionary = {}) -> void:
 	_structure = structure_layer
 	_stage_order = stage_order
+	_budget_instances = int(meta.get("budget_instances", DEFAULT_BUDGET_INSTANCES))
+	_visibility_range = float(meta.get("visibility_range", DEFAULT_VISIBILITY_RANGE))
 	_grid_rows = _structure.size()
 	_grid_cols = 0
 	for r in _structure:
@@ -101,6 +123,7 @@ func generate(biome_layer: Array, structure_layer: Array, stage_order: int = 0) 
 				_stage_cell(col, row, parsed)
 			elif parsed["role"] == "halo":
 				_spawn_halo(col, row, parsed)
+	_flush_batches()
 	print("GridBiomeComponent: %d biome cells (%d seeds, %d fields, %d mutes, %d halos, %d reactive, %d invalid)" % [
 		_stats["cells"], _stats["seeds"], _stats["fields"], _stats["mutes"],
 		_stats["halos"], _stats["reactive"], _stats["invalid"]])
@@ -236,23 +259,22 @@ func _spawn_halo_band(col: int, row: int, cell: Dictionary, dir: Vector3,
 	var step: float = _cube_size + _gutter
 	var center: Vector3 = Vector3(col * step, 0.0, row * step)
 	var band_center: Vector3 = center + dir * (step * 0.5 + depth * 0.5)
-	# ground strip — visual only, no collision: the void stays the void
-	var ground: MeshInstance3D = MeshInstance3D.new()
-	var plane: PlaneMesh = PlaneMesh.new()
-	plane.size = Vector2(depth, step) if absf(dir.x) > 0.0 else Vector2(step, depth)
-	ground.mesh = plane
-	var gmat: StandardMaterial3D = StandardMaterial3D.new()
-	var kcolor: Color = KINGDOM_COLORS.get(cell["kingdom"], KINGDOM_COLORS[""])
-	gmat.albedo_color = Color(0.16, 0.15, 0.13).lerp(kcolor, 0.15)
-	gmat.roughness = 0.9
-	ground.material_override = gmat
-	ground.position = Vector3(band_center.x, surf_y + 0.005, band_center.z)
-	add_child(ground)
-	# ground-cover: one MultiMesh per recipe entry
+	var kingdom: String = String(cell["kingdom"])
+	# ground strip — visual only, no collision: the void stays the void.
+	# Batched (biome-6): a unit plane scaled per band, one node per kingdom.
+	var strip_xf: Transform3D = Transform3D.IDENTITY
+	var strip_scale: Vector3 = Vector3(depth, 1.0, step) if absf(dir.x) > 0.0 else Vector3(step, 1.0, depth)
+	strip_xf = strip_xf.scaled(strip_scale)
+	strip_xf.origin = Vector3(band_center.x, surf_y + 0.005, band_center.z)
+	var kcolor: Color = KINGDOM_COLORS.get(kingdom, KINGDOM_COLORS[""])
+	_batch_add("strip:" + kingdom, _unit_plane(), {
+		"albedo": Color(0.16, 0.15, 0.13).lerp(kcolor, 0.15), "roughness": 0.9,
+	}, strip_xf)
+	# ground-cover: transforms per recipe, batched map-wide per (kingdom, recipe)
 	var target: int = int(round(lerpf(10.0, 50.0, d)))
-	for recipe in _halo_recipes(String(cell["kingdom"])):
+	for recipe in _halo_recipes(kingdom):
 		var count: int = maxi(1, int(round(float(target) * float(recipe["fraction"]))))
-		var transforms: Array = []
+		var added: int = 0
 		for _i in count:
 			var t_out: float = rng.randf()   # 0 = grid edge, 1 = outer rim
 			if rng.randf() < t_out * t_out:  # quadratic thinning into the dark
@@ -269,31 +291,27 @@ func _spawn_halo_band(col: int, row: int, cell: Dictionary, dir: Vector3,
 			var sc: float = rng.randf_range(0.6, 1.2)
 			xf = xf.scaled(Vector3(sc, sc, sc))
 			xf.origin = pos
-			transforms.append(xf)
-		if transforms.is_empty():
-			continue
-		_halo_instances += transforms.size()
-		var mm: MultiMesh = MultiMesh.new()
-		mm.transform_format = MultiMesh.TRANSFORM_3D
-		mm.mesh = recipe["mesh"]
-		mm.instance_count = transforms.size()
-		for i in transforms.size():
-			mm.set_instance_transform(i, transforms[i])
-		var mmi: MultiMeshInstance3D = MultiMeshInstance3D.new()
-		mmi.name = "HaloCover_%d_%d_%s" % [col, row, String(recipe["name"])]
-		mmi.multimesh = mm
-		var mat: StandardMaterial3D = StandardMaterial3D.new()
-		mat.albedo_color = recipe["color"]
-		mat.cull_mode = BaseMaterial3D.CULL_DISABLED
-		mat.emission_enabled = true
-		mat.emission = (recipe["color"] as Color) * 0.25
-		mmi.material_override = mat
-		add_child(mmi)
+			_batch_add("cover:%s:%s" % [kingdom, String(recipe["name"])], recipe["mesh"], {
+				"albedo": recipe["color"], "cull_off": true,
+				"emission": (recipe["color"] as Color) * 0.25,
+			}, xf)
+			added += 1
+		_halo_instances += added
 
 
 # Ground-cover recipes per grammar kingdom — the halo's own look (grammar-
 # native), sized to the ring's old VR budget (low-poly primitives).
+# Cached per kingdom (biome-6): every cell of a kingdom shares ONE mesh per
+# recipe, so the map-wide batches carry a single mesh each.
 func _halo_recipes(kingdom: String) -> Array:
+	if _recipe_cache.has(kingdom):
+		return _recipe_cache[kingdom]
+	var recipes: Array = _build_halo_recipes(kingdom)
+	_recipe_cache[kingdom] = recipes
+	return recipes
+
+
+func _build_halo_recipes(kingdom: String) -> Array:
 	match kingdom:
 		"flora":
 			var grass: QuadMesh = QuadMesh.new()
@@ -343,25 +361,125 @@ func _halo_recipes(kingdom: String) -> Array:
 			return [{"name": "tuft", "mesh": tuft, "color": Color(0.35, 0.35, 0.3), "fraction": 1.0}]
 
 
-# ── pilot rendering: one small kingdom-tinted marker per active cell ──
+# ── pilot rendering: one small kingdom-tinted marker per active cell.
+#    Batched map-wide per kingdom (biome-6); a runtime claim arriving after
+#    the flush (react → claim) spawns direct — few, and honestly counted. ──
 
 func _spawn_marker(col: int, row: int, cell: Dictionary) -> void:
-	var marker: MeshInstance3D = MeshInstance3D.new()
-	var mesh: BoxMesh = BoxMesh.new()
 	var d: float = BiomeGridTokensScript.density_of(cell)
 	var s: float = 0.12 + 0.18 * d
-	mesh.size = Vector3(s, s, s)
-	marker.mesh = mesh
-	var mat: StandardMaterial3D = StandardMaterial3D.new()
-	var color: Color = KINGDOM_COLORS.get(cell["kingdom"], KINGDOM_COLORS[""])
-	mat.albedo_color = color
-	mat.emission_enabled = true
-	mat.emission = color * 0.4
-	marker.material_override = mat
+	var kingdom: String = String(cell["kingdom"])
+	var color: Color = KINGDOM_COLORS.get(kingdom, KINGDOM_COLORS[""])
 	var h: float = _cell_height(col, row)
 	var step: float = _cube_size + _gutter
-	marker.position = Vector3(col * step, h * _cube_size + s * 0.5 + 0.02, row * step)
-	add_child(marker)
+	var pos: Vector3 = Vector3(col * step, h * _cube_size + s * 0.5 + 0.02, row * step)
+	if _flushed:
+		var marker: MeshInstance3D = MeshInstance3D.new()
+		var mesh: BoxMesh = BoxMesh.new()
+		mesh.size = Vector3(s, s, s)
+		marker.mesh = mesh
+		var mat: StandardMaterial3D = StandardMaterial3D.new()
+		mat.albedo_color = color
+		mat.emission_enabled = true
+		mat.emission = color * 0.4
+		marker.material_override = mat
+		marker.position = pos
+		add_child(marker)
+		_stats["late_spawns"] = int(_stats.get("late_spawns", 0)) + 1
+		return
+	var xf: Transform3D = Transform3D.IDENTITY
+	xf = xf.scaled(Vector3(s, s, s))
+	xf.origin = pos
+	_batch_add("marker:" + kingdom, _unit_box(), {
+		"albedo": color, "emission": color * 0.4,
+	}, xf)
+
+
+# ── biome-6: the batch machinery. One MultiMesh per (kind, kingdom, recipe)
+#    across the whole map; budget thins by even stride, honestly printed. ──
+
+var _unit_plane_mesh: PlaneMesh = null
+var _unit_box_mesh: BoxMesh = null
+
+
+func _unit_plane() -> PlaneMesh:
+	if _unit_plane_mesh == null:
+		_unit_plane_mesh = PlaneMesh.new()
+		_unit_plane_mesh.size = Vector2(1.0, 1.0)
+	return _unit_plane_mesh
+
+
+func _unit_box() -> BoxMesh:
+	if _unit_box_mesh == null:
+		_unit_box_mesh = BoxMesh.new()
+		_unit_box_mesh.size = Vector3.ONE
+	return _unit_box_mesh
+
+
+func _batch_add(key: String, mesh: Mesh, mat_spec: Dictionary, xf: Transform3D) -> void:
+	if not _batches.has(key):
+		_batches[key] = {"mesh": mesh, "mat": mat_spec, "transforms": []}
+	(_batches[key]["transforms"] as Array).append(xf)
+
+
+func _flush_batches() -> void:
+	_flushed = true
+	if _batches.is_empty():
+		return
+	var total: int = 0
+	for key in _batches:
+		total += (_batches[key]["transforms"] as Array).size()
+	var keep_ratio: float = 1.0
+	if _budget_instances > 0 and total > _budget_instances:
+		keep_ratio = float(_budget_instances) / float(total)
+	var kept_total: int = 0
+	var nodes: int = 0
+	for key in _batches:
+		var batch: Dictionary = _batches[key]
+		var transforms: Array = batch["transforms"]
+		var keep_n: int = transforms.size()
+		if keep_ratio < 1.0:
+			keep_n = maxi(1, int(floor(float(transforms.size()) * keep_ratio)))
+		var mm: MultiMesh = MultiMesh.new()
+		mm.transform_format = MultiMesh.TRANSFORM_3D
+		mm.mesh = batch["mesh"]
+		mm.instance_count = keep_n
+		if keep_n == transforms.size():
+			for i in keep_n:
+				mm.set_instance_transform(i, transforms[i])
+		else:
+			# even-stride decimation — spatially uniform, deterministic
+			var stride: float = float(transforms.size()) / float(keep_n)
+			for i in keep_n:
+				mm.set_instance_transform(i, transforms[int(floor(float(i) * stride))])
+		kept_total += keep_n
+		var mmi: MultiMeshInstance3D = MultiMeshInstance3D.new()
+		mmi.name = "BiomeBatch_" + key.replace(":", "_")
+		mmi.multimesh = mm
+		var spec: Dictionary = batch["mat"]
+		var mat: StandardMaterial3D = StandardMaterial3D.new()
+		mat.albedo_color = spec["albedo"]
+		if spec.has("roughness"):
+			mat.roughness = float(spec["roughness"])
+		if spec.get("cull_off", false):
+			mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+		if spec.has("emission"):
+			mat.emission_enabled = true
+			mat.emission = spec["emission"]
+		mmi.material_override = mat
+		if _visibility_range > 0.0:
+			mmi.visibility_range_end = _visibility_range
+		add_child(mmi)
+		nodes += 1
+	_stats["instances"] = kept_total
+	_stats["nodes"] = nodes
+	_stats["budget_dropped"] = total - kept_total
+	if kept_total < total:
+		print("GridBiomeComponent: BUDGET CLAMP — %d instances wanted, budget %d, kept %d (dropped %d, even stride)" % [
+			total, _budget_instances, kept_total, total - kept_total])
+	print("GridBiomeComponent: batched %d instances into %d nodes (visibility range %.0fm)" % [
+		kept_total, nodes, _visibility_range])
+	_batches.clear()
 
 
 func _cell_height(col: int, row: int) -> float:

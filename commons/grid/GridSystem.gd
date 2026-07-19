@@ -668,7 +668,8 @@ func _handle_wall_generation():
 			biome_stage = int(eco_b.get_current_stage_order())
 		biome_grid_component.initialize(self, cube_size, gutter)
 		biome_grid_component.generate(
-			biome_layer, data_component.get_structure_layer_raw(), biome_stage)
+			biome_layer, data_component.get_structure_layer_raw(), biome_stage,
+			data_component.get_biome_meta())
 
 	if not wall_config.is_empty():
 		print("GridSystem: Generating walls...")
