@@ -1,81 +1,92 @@
 {
-	"sequences": {
-		"boolean_surfaces": {
-			"name": "Boolean Surfaces: CSG as Composition",
-			"v1_4_note": "Reactivated as a spine sequence (order 12.7). Constructive Solid Geometry — union, intersection, difference of primitives — as the algebra of composed solid form. Sits between isosurfaces and softbodies.",
-			"truth": "Composition is not addition. Boolean ops give us a lawful way to compose solids: A∪B, A∩B, A−B. Every architectural cavity is a difference; every joint is an intersection.",
-			"qfep_term": "F",
-			"qfep_connection": "Boolean operations are the smallest non-trivial calculus on solids. Pure F: deterministic composition without entropy term. Architectural cavity = difference; joint = intersection.",
-			"layer": "F_order",
-			"prerequisites": [
-				"isosurfaces"
-			],
-			"unlocks": [
-				"softbodies",
-				"facade_assembly"
-			],
-			"difficulty": "intermediate",
-			"estimated_time": "20-25 minutes",
-			"learning_objectives": [
-				"Union: A∪B as filled volume",
-				"Intersection: A∩B as shared volume",
-				"Difference: A−B as carved volume",
-				"Order matters: (A−B)−C ≠ A−(B−C) in general",
-				"CSG trees as expressions",
-				"Boolean composition vs. mesh assembly"
-			],
-			"content": [
-				"Boolean_Union: A ∪ B — the union operator made solid",
-				"Boolean_Intersection: A ∩ B — the overlap as lens",
-				"Boolean_Difference: A − B — the cavity-making operator",
-				"Boolean_Compose_Workbench: all three operators side by side; the csg-compose affordance home",
-				"Boolean_Architecture_Cavity: a habitable wall built by subtraction"
-			],
-			"maps": [
-				"Boolean_Union",
-				"Boolean_Intersection",
-				"Boolean_Difference",
-				"Boolean_Compose_Workbench",
-				"Boolean_Architecture_Cavity"
-			],
-			"artifact_groups": [
-				{
-					"map": "Boolean_Union",
-					"position": "intro",
-					"artifacts": ["csg_union_demo"],
-					"size_budget": "compact_only",
-					"rationale": "Single artifact: the union operator visualized as a single composite solid."
-				},
-				{
-					"map": "Boolean_Intersection",
-					"position": "foundation",
-					"artifacts": ["csg_intersection_demo"],
-					"size_budget": "compact_only",
-					"rationale": "Single artifact: A ∩ B as the lens-shaped solid showing where shapes agree."
-				},
-				{
-					"map": "Boolean_Difference",
-					"position": "foundation",
-					"artifacts": ["csg_difference_demo"],
-					"size_budget": "compact_only",
-					"rationale": "Single artifact: the subtractive operator. Architecture begins."
-				},
-				{
-					"map": "Boolean_Compose_Workbench",
-					"position": "exploration",
-					"artifacts": ["csg_compose_workbench"],
-					"size_budget": "mixed",
-					"rationale": "Workbench holding all three operators side by side. The home of the csg-compose affordance."
-				},
-				{
-					"map": "Boolean_Architecture_Cavity",
-					"position": "synthesis",
-					"artifacts": ["csg_architecture_cavity"],
-					"size_budget": "environment",
-					"rationale": "Habitable wall with doorway, porthole, arched window — Boolean composition as architecture."
-				}
-			],
-			"note": "2026-05-13: populated with 5 CSG maps wired to the new boolean_surfaces artifacts. Moved from λ_edge order 12.7 to F_order order 4.7 in the macro sieve."
-		}
-	}
+ "sequences": {
+  "boolean_surfaces": {
+   "name": "Boolean Surfaces: CSG as Composition",
+   "v1_4_note": "Reactivated as a spine sequence (order 12.7). Constructive Solid Geometry — union, intersection, difference of primitives — as the algebra of composed solid form. Sits between isosurfaces and softbodies.",
+   "truth": "Composition is not addition. Boolean ops give us a lawful way to compose solids: A∪B, A∩B, A−B. Every architectural cavity is a difference; every joint is an intersection.",
+   "qfep_term": "F",
+   "qfep_connection": "Boolean operations are the smallest non-trivial calculus on solids. Pure F: deterministic composition without entropy term. Architectural cavity = difference; joint = intersection.",
+   "layer": "F_order",
+   "prerequisites": [
+    "isosurfaces"
+   ],
+   "unlocks": [
+    "softbodies",
+    "facade_assembly"
+   ],
+   "difficulty": "intermediate",
+   "estimated_time": "20-25 minutes",
+   "learning_objectives": [
+    "Union: A∪B as filled volume",
+    "Intersection: A∩B as shared volume",
+    "Difference: A−B as carved volume",
+    "Order matters: (A−B)−C ≠ A−(B−C) in general",
+    "CSG trees as expressions",
+    "Boolean composition vs. mesh assembly"
+   ],
+   "content": [
+    "Boolean_Union: A ∪ B — the union operator made solid",
+    "Boolean_Intersection: A ∩ B — the overlap as lens",
+    "Boolean_Difference: A − B — the cavity-making operator",
+    "Boolean_Compose_Workbench: all three operators side by side; the csg-compose affordance home",
+    "Boolean_Architecture_Cavity: a habitable wall built by subtraction"
+   ],
+   "maps": [
+    "Boolean_Union",
+    "Boolean_Intersection",
+    "Boolean_Difference",
+    "Boolean_Compose_Workbench",
+    "Boolean_Architecture_Cavity",
+    "Chamber_Boolean"
+   ],
+   "artifact_groups": [
+    {
+     "map": "Boolean_Union",
+     "position": "intro",
+     "artifacts": [
+      "csg_union_demo"
+     ],
+     "size_budget": "compact_only",
+     "rationale": "Single artifact: the union operator visualized as a single composite solid."
+    },
+    {
+     "map": "Boolean_Intersection",
+     "position": "foundation",
+     "artifacts": [
+      "csg_intersection_demo"
+     ],
+     "size_budget": "compact_only",
+     "rationale": "Single artifact: A ∩ B as the lens-shaped solid showing where shapes agree."
+    },
+    {
+     "map": "Boolean_Difference",
+     "position": "foundation",
+     "artifacts": [
+      "csg_difference_demo"
+     ],
+     "size_budget": "compact_only",
+     "rationale": "Single artifact: the subtractive operator. Architecture begins."
+    },
+    {
+     "map": "Boolean_Compose_Workbench",
+     "position": "exploration",
+     "artifacts": [
+      "csg_compose_workbench"
+     ],
+     "size_budget": "mixed",
+     "rationale": "Workbench holding all three operators side by side. The home of the csg-compose affordance."
+    },
+    {
+     "map": "Boolean_Architecture_Cavity",
+     "position": "synthesis",
+     "artifacts": [
+      "csg_architecture_cavity"
+     ],
+     "size_budget": "environment",
+     "rationale": "Habitable wall with doorway, porthole, arched window — Boolean composition as architecture."
+    }
+   ],
+   "note": "2026-05-13: populated with 5 CSG maps wired to the new boolean_surfaces artifacts. Moved from λ_edge order 12.7 to F_order order 4.7 in the macro sieve."
+  }
+ }
 }
