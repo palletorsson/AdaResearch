@@ -123,7 +123,13 @@ def main():
                 slot, slot_prov = REGISTER_TO_SLOT[script[m]["register"]], "register (look script)"
             elif m in ghost:
                 slot, slot_prov = ghost[m], "ghost (2026-07-18 draft)"
-            elif m.startswith("Chamber_") or m.startswith("Lab"):
+            elif m.startswith("Chamber_"):
+                # Palle 2026-07-19 (Chamber_Random live walk): "the chambers
+                # should be in mid sequence but introduced logically" — the
+                # chamber is the sequence's TURN (apply the earned power),
+                # not its seed/close. Proposal-layer only; rulings still win.
+                slot, slot_prov = "turn", "heuristic (name; chambers mid-sequence per 2026-07-19 ruling)"
+            elif m.startswith("Lab"):
                 slot, slot_prov = "seed", "heuristic (name)"
             elif i == 0:
                 slot, slot_prov = "threshold", "heuristic (position)"
