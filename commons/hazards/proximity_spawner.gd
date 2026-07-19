@@ -34,6 +34,9 @@ const ENEMY_SCENES: Dictionary = {
 	"goomba_box": "res://commons/hazards/goomba_box/goomba_box.tscn",
 	"shell_roller": "res://commons/hazards/shell_roller/shell_roller.tscn",
 	"spring_hopper": "res://commons/hazards/spring_hopper/spring_hopper.tscn",
+	# The pink critter's octapod stage — scene existed and Chamber_Random
+	# already asked for it by name; the registration was the missing meeting.
+	"octapod_crawler": "res://commons/hazards/octapod_crawler/octapod_crawler.tscn",
 }
 
 
