@@ -3,18 +3,17 @@
 > one pass: ride (gaze), move (place --only-improve), gate (pathfinder), voice (qfep). Field note, not a ruling.
 
 ## The ride (before)
-clearance violations: **1 overlaps, 2 tight** — the law wants ≥1.2m to walk between.
-- `[tight  ] AnimatedTree               <-> ContextSensitiveTree       gap +0.23m (centers 4.00m)`
-- `[OVERLAP] ContextSensitiveTree       <-> lsystem_tree               gap -0.93m (centers 2.83m)`
-- `[tight  ] ContextSensitiveTree       <-> parametric_lsystem         gap +0.47m (centers 4.47m)`
+clearance violations: **0 overlaps, 2 tight** — the law wants ≥1.2m to walk between.
+- `[tight  ] ContextSensitiveTree       <-> AnimatedTree               gap +0.23m (centers 4.00m)`
+- `[tight  ] AnimatedTree               <-> lsystem_tree               gap +0.51m (centers 1.00m)`
 
 ## The move
     logged 1 entries to ada_run\placement_log.json
     summary: 1 maps processed
-      constraint improved: 1/1  mean Δ=+0.022
-      walkability improved: 1/1  mean Δ=+0.021
+      constraint improved: 0/1  mean Δ=+0.000
+      walkability improved: 0/1  mean Δ=+0.000
 
-sibling **Trial_eye_LSystems_Growth** kept: overlaps 1→0, tight 2→2, pathfinder OK.
+no sibling kept — the move did not beat the ride (overlaps 0→0, tight 2→2). Note-only.
 
 ## The voice (qfep)
 4 of 4 cast members carry a theory-claim; 0 mute.
@@ -24,7 +23,8 @@ sibling **Trial_eye_LSystems_Growth** kept: overlaps 1→0, tight 2→2, pathfin
 - **parametric_lsystem** — length_decay — how quickly branches shorten with depth, controlling the tree's overall proportion Randomness i
 
 ## The text vs the space
-**no walked.md** — the space stands unwritten; this note is the first text this map has.
+walked.md exists — the writing names 4/4 of the cast; dwells declared for 0.
+- **the writing's subjects are blocked in space**: AnimatedTree, ContextSensitiveTree, lsystem_tree sit in clearance violations — the text promises what the floor obstructs.
 
 ## The heuristic understanding
-The floor was fighting the walk — bodies inside each other's clearance. The mover found a better seating; the ride confirms it in text. The voice column above says what the room is FOR; the next writing pass should say it in the walked page.
+The space already walks: the bodies keep the law without being told. What carries this map is its voice, not its floor.
