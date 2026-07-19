@@ -21,7 +21,8 @@ no sibling kept — the move did not beat the ride (overlaps 0→0, tight 0→1)
 - **poincare_disk** — The parallel postulate is independent - geometry is a choice disk_radius — contains the entire infinite geomet
 
 ## The text vs the space
-**no walked.md** — the space stands unwritten; this note is the first text this map has.
+walked.md exists — the writing names 5/5 of the cast; dwells declared for 0.
+- the text and the space cover each other — the walk as written is the walk as built.
 
 ## The heuristic understanding
 The space already walks: the bodies keep the law without being told. What carries this map is its voice, not its floor.

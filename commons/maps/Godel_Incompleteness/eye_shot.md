@@ -22,7 +22,8 @@ no sibling kept — the move did not beat the ride (overlaps 0→0, tight 1→1)
 - **provability_sorter** — the provable is a proper subset of the true. The gold band is never two nested rings on a low plinth — an inne
 
 ## The text vs the space
-**no walked.md** — the space stands unwritten; this note is the first text this map has.
+walked.md exists — the writing names 4/4 of the cast; dwells declared for 0.
+- **the writing's subjects are blocked in space**: godel_statement_plaque, provability_sorter sit in clearance violations — the text promises what the floor obstructs.
 
 ## The heuristic understanding
 The space already walks: the bodies keep the law without being told. What carries this map is its voice, not its floor.
