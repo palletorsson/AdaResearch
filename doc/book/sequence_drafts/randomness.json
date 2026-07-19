@@ -12,7 +12,7 @@
    "hero_prov": "register (heroes.json)",
    "slot_prov": "heuristic (position)",
    "lb": false,
-   "walked": false,
+   "walked": true,
    "cast_n": 14,
    "prov": "heuristic (provenance-ranked pick)"
   },
@@ -23,7 +23,7 @@
    "hero_prov": "heuristic (cast default)",
    "slot_prov": "heuristic (position)",
    "lb": false,
-   "walked": false,
+   "walked": true,
    "cast_n": 3,
    "prov": "ghost (slot-fill from unused pool)"
   },
@@ -34,7 +34,7 @@
    "hero_prov": "measured (dig load-bearing)",
    "slot_prov": "heuristic (position)",
    "lb": true,
-   "walked": false,
+   "walked": true,
    "cast_n": 8,
    "prov": "heuristic (provenance-ranked pick)"
   },
@@ -45,7 +45,7 @@
    "hero_prov": "measured (dig load-bearing)",
    "slot_prov": "heuristic (position)",
    "lb": true,
-   "walked": false,
+   "walked": true,
    "cast_n": 5,
    "prov": "heuristic (provenance-ranked pick)"
   },
@@ -56,19 +56,19 @@
    "hero_prov": "register (heroes.json)",
    "slot_prov": "heuristic (position)",
    "lb": false,
-   "walked": false,
+   "walked": true,
    "cast_n": 9,
    "prov": "ghost (slot-fill from unused pool)"
   },
   {
    "slot": "critical",
    "map": "Random_Space_Geometry",
-   "hero": "",
+   "hero": "curl_noise_particles",
    "hero_prov": "heuristic (cast default)",
    "slot_prov": "heuristic (position)",
    "lb": false,
-   "walked": false,
-   "cast_n": 7,
+   "walked": true,
+   "cast_n": 6,
    "prov": "ghost (slot-fill from unused pool)"
   },
   {
@@ -78,7 +78,7 @@
    "hero_prov": "register (heroes.json)",
    "slot_prov": "heuristic (position)",
    "lb": false,
-   "walked": false,
+   "walked": true,
    "cast_n": 5,
    "prov": "ghost (slot-fill from unused pool)"
   },
@@ -95,18 +95,18 @@
    "hero_prov": "heuristic (cast default)",
    "slot_prov": "register (chamber convention)",
    "lb": false,
-   "walked": false,
+   "walked": true,
    "cast_n": 4,
    "prov": "register — Chamber_* closes the sequence"
   }
  ],
  "v2_anti": [
   {
-   "slot": "turn",
-   "host_map": "Random_Gaussian",
-   "anti": "slot_machine ⟷ monte_carlo_dartboard",
-   "why": "opposed on order/entropy (needs promotion)",
-   "prov": "ghost — top sleeping counter-pair (L-021)",
+   "slot": "critical",
+   "host_map": "Random_Space_Geometry",
+   "anti": "entropy_jar",
+   "why": "opposed on continuous/discrete (needs promotion)",
+   "prov": "ghost — counter-pair sleeping in dig (L-021)",
    "kind": "counter-pair"
   },
   {
@@ -136,16 +136,16 @@
   "footprint-ascending": {
    "order": [
     "Chamber_Random",
+    "Random_Space_Geometry",
     "Random_Walk",
     "Random_Remove",
     "Random_Definition",
     "Random_Gaussian",
-    "Random_Space_Geometry",
     "Randomness_Examples_of_Randomness",
     "Random_Rotate_Random_XYZ"
    ],
    "law": "small meets you first — the gaze law's cousin",
-   "tau_vs_tutorial": 0.07
+   "tau_vs_tutorial": -0.21
   },
   "density-rising": {
    "order": [

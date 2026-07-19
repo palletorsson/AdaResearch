@@ -3,7 +3,7 @@
  "phase": "synthesis",
  "truth": "QFE = F âˆ’ Î»E(S) + Ï†Î”E(S,t). Life exists at Î» â‰ˆ 0.3-0.5.",
  "current_n": 9,
- "tight_n": 8,
+ "tight_n": 9,
  "v1_tutorial": [
   {
    "slot": "threshold",
@@ -84,9 +84,14 @@
   },
   {
    "slot": "close",
-   "map": null,
-   "gap": true,
-   "prov": "declared gap — no existing map holds this slot"
+   "map": "QFEP_Synthesis",
+   "hero": "the",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": true,
+   "cast_n": 7,
+   "prov": "ghost (slot-fill from unused pool)"
   },
   {
    "slot": "seed",
@@ -95,7 +100,7 @@
    "hero_prov": "heuristic (cast default)",
    "slot_prov": "register (chamber convention)",
    "lb": false,
-   "walked": false,
+   "walked": true,
    "cast_n": 3,
    "prov": "register — Chamber_* closes the sequence"
   }
@@ -120,6 +125,7 @@
     "QFEP_Phi_Term",
     "QFEP_Edge_Of_Chaos",
     "QFEP_Sandbox",
+    "QFEP_Synthesis",
     "Chamber_QFEP"
    ],
    "law": "the tutorial arc itself (V1 identity)",
@@ -132,12 +138,13 @@
     "QFEP_Phi_Term",
     "QFEP_Edge_Of_Chaos",
     "QFEP_Sandbox",
+    "QFEP_Synthesis",
     "QFEP_Introduction",
     "Chamber_QFEP",
     "QFEP_Lambda_Spectrum"
    ],
    "law": "small meets you first — the gaze law's cousin",
-   "tau_vs_tutorial": 0.29
+   "tau_vs_tutorial": 0.33
   },
   "density-rising": {
    "order": [
@@ -147,11 +154,12 @@
     "QFEP_Sandbox",
     "QFEP_Lambda_Spectrum",
     "QFEP_E_Term",
+    "QFEP_Synthesis",
     "QFEP_F_Term",
     "QFEP_Introduction"
    ],
    "law": "sparse -> dense; the world thickens",
-   "tau_vs_tutorial": -0.71
+   "tau_vs_tutorial": -0.5
   },
   "truth-earned": {
    "order": [
@@ -160,12 +168,13 @@
     "QFEP_Phi_Term",
     "QFEP_Edge_Of_Chaos",
     "QFEP_Sandbox",
+    "QFEP_Synthesis",
     "Chamber_QFEP",
     "QFEP_Introduction",
     "QFEP_Lambda_Spectrum"
    ],
    "law": "load-bearing heroes arrive late — the walk earns them",
-   "tau_vs_tutorial": 0.21
+   "tau_vs_tutorial": 0.28
   }
  },
  "dig_counter_pool": [],

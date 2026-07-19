@@ -177,6 +177,15 @@ def build_seq(rz_seq: dict) -> dict:
         "world": lambda r: (1 if re.search(
             r"(arena|world|field|systems|applied)", r["map"], re.I) else 0,
             r.get("cast_n", 0)),
+        # close: a synthesis/cross-sequence map exists but rule-zero's position
+        # heuristic can collide two late maps onto one slot, dropping the 8th
+        # body map and leaving close empty (the ML_Synthesis case, 2026-07-19).
+        # Ghost-fill from the unused pool, name-hinted to synthesis-shaped maps;
+        # the position band (already close-affine for a last map) does the rest.
+        "close": lambda r: (1 if re.search(
+            r"(synth|cross.?seq|assemblage|conclu|coda|finale|reflect|close|summary)",
+            r["map"], re.I) else 0,
+            1 if r.get("walked") else 0),
     }
     # HOLLOWNESS GUARD (2026-07-19, found by the softbodies fold): maps whose
     # hero is a wayfinding anchor (gallery_marker_*) are 12x12 empty floors
@@ -210,11 +219,17 @@ def build_seq(rz_seq: dict) -> dict:
             cand = [r for r in rows.values()
                     if r.get("map") not in used and r.get("exists")
                     and not str(r.get("map", "")).startswith("Chamber_")]
-            # position band FIRST (a ruled order is evidence), name hints second
-            pool = sorted(cand, key=lambda r: (round(_band(r, slot), 2),
-                                               HINT[slot](r)),
-                          reverse=True)[:1]
-            ghost_fill = True
+            # close is OPTIONAL: fill it only from a synthesis-SHAPED map (the
+            # ML_Synthesis case), never pad it with an arbitrary late map — many
+            # chapters legitimately end at world+seed and their close must gap.
+            if slot == "close":
+                cand = [r for r in cand if HINT["close"](r)[0] == 1]
+            if cand:
+                # position band FIRST (a ruled order is evidence), name hints second
+                pool = sorted(cand, key=lambda r: (round(_band(r, slot), 2),
+                                                   HINT[slot](r)),
+                              reverse=True)[:1]
+                ghost_fill = True
         if not pool:
             v1.append({"slot": slot, "map": None, "gap": True,
                        "prov": "declared gap — no existing map holds this slot"})

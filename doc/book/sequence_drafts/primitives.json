@@ -46,7 +46,7 @@
    "slot_prov": "register (look script)",
    "lb": true,
    "walked": true,
-   "cast_n": 12,
+   "cast_n": 9,
    "prov": "heuristic (provenance-ranked pick)"
   },
   {
@@ -100,7 +100,7 @@
    "hero_prov": "heuristic (cast default)",
    "slot_prov": "register (chamber convention)",
    "lb": false,
-   "walked": false,
+   "walked": true,
    "cast_n": 4,
    "prov": "register — Chamber_* closes the sequence"
   }
@@ -159,9 +159,9 @@
     "Chamber_Primitives",
     "Point_Animatedcube",
     "Primitives_Portals",
+    "Primitives_Polythedra",
     "Point_One",
     "Primitives_Melencolia",
-    "Primitives_Polythedra",
     "Point_Triangle_Context",
     "Point_Lines",
     "Primitives_Ignorance"
