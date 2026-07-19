@@ -22,7 +22,8 @@ no sibling kept — the move did not beat the ride (overlaps 0→0, tight 1→1)
 - **evolvingflowers** — mutation_rate — shapes how quickly the aesthetic drifts; too high and beauty dissolves beauty is what survives
 
 ## The text vs the space
-**no walked.md** — the space stands unwritten; this note is the first text this map has.
+walked.md exists — the writing names 7/7 of the cast; dwells declared for 0.
+- **the writing's subjects are blocked in space**: 9_3_smart_rockets_vr, 9_5_evolving_bloops_vr sit in clearance violations — the text promises what the floor obstructs.
 
 ## The heuristic understanding
 The space already walks: the bodies keep the law without being told. What carries this map is its voice, not its floor.

@@ -3,7 +3,7 @@
   "9_1_ga_shakespeare_vr": {
    "category": "machinelearning",
    "complexity": "beginner",
-   "description": "Genetic algorithm evolving random strings toward a target phrase \u2014 selection, crossover, and mutation producing Shakespeare. Based on Nature of Code Ch.9.",
+   "description": "Genetic algorithm evolving random strings toward a target phrase — selection, crossover, and mutation producing Shakespeare. Based on Nature of Code Ch.9.",
    "dev_themes": [
     "ai",
     "biology",
@@ -107,7 +107,7 @@
   "9_2_smart_rockets_basic_vr": {
    "category": "machinelearning",
    "complexity": "beginner",
-   "description": "Basic smart rockets evolving thrust vectors to reach a target \u2014 simplified version of genetic algorithm-driven rocket navigation. Based on Nature of Code Ch.9.",
+   "description": "Basic smart rockets evolving thrust vectors to reach a target — simplified version of genetic algorithm-driven rocket navigation. Based on Nature of Code Ch.9.",
    "dev_themes": [
     "ai",
     "biology",
@@ -212,7 +212,7 @@
   "9_3_smart_rockets_vr": {
    "category": "machinelearning",
    "complexity": "beginner",
-   "description": "Rockets evolving to reach a target through genetic algorithm \u2014 selection, crossover, mutation visible in real-time. Based on Nature of Code Ch.9.",
+   "description": "Rockets evolving to reach a target through genetic algorithm — selection, crossover, mutation visible in real-time. Based on Nature of Code Ch.9.",
    "dev_themes": [
     "ai",
     "biology",
@@ -231,7 +231,7 @@
     "machinelearning"
    ],
    "name": "Smart Rockets (Genetic Algorithm)",
-   "qfep_connection": "Genetic algorithms as population-level F-minimization \u2014 fitness IS negative free energy. Mutation injects \u03bb (entropy); selection reduces F (keeps what works). The population explores the edge of chaos between exploitation and exploration.",
+   "qfep_connection": "Genetic algorithms as population-level F-minimization — fitness IS negative free energy. Mutation injects λ (entropy); selection reduces F (keeps what works). The population explores the edge of chaos between exploitation and exploration.",
    "scene": "res://algorithms/machinelearning/noc_ch09/9_3_smart_rockets_vr.tscn",
    "sequence": "machinelearning",
    "size_group": "standard",
@@ -330,7 +330,7 @@
   "9_4_interactive_selection_vr": {
    "category": "machinelearning",
    "complexity": "beginner",
-   "description": "User-driven evolutionary selection \u2014 choose which organisms survive and reproduce, experiencing artificial selection firsthand. Based on Nature of Code Ch.9.",
+   "description": "User-driven evolutionary selection — choose which organisms survive and reproduce, experiencing artificial selection firsthand. Based on Nature of Code Ch.9.",
    "dev_themes": [
     "ai",
     "art",
@@ -555,7 +555,7 @@
   "9_6_ga_shakespeare_annotated_vr": {
    "category": "machinelearning",
    "complexity": "beginner",
-   "description": "Annotated version of the genetic algorithm Shakespeare demo \u2014 with explanatory labels showing fitness, mutation rate, and generation progress. Based on Nature of Code Ch.9.",
+   "description": "Annotated version of the genetic algorithm Shakespeare demo — with explanatory labels showing fitness, mutation rate, and generation progress. Based on Nature of Code Ch.9.",
    "dev_themes": [
     "ai",
     "biology",
@@ -659,7 +659,7 @@
   "anomaly_detection": {
    "category": "machinelearning",
    "complexity": "intermediate",
-   "description": "Outlier detection algorithms \u2014 isolation forests, statistical boundaries, autoencoder reconstruction error. Finding what doesn't belong.",
+   "description": "Outlier detection algorithms — isolation forests, statistical boundaries, autoencoder reconstruction error. Finding what doesn't belong.",
    "dev_themes": [
     "ai",
     "machine_learning"
@@ -685,7 +685,7 @@
     ],
     "size_group": "xlarge"
    },
-   "qfep_connection": "Anomalies are high-F surprises \u2014 data points that the F-model cannot predict. Detection algorithms learn the boundary between expected E(S) and genuine novelty. The queer reading: who counts as anomalous depends on whose F-model defines normal.",
+   "qfep_connection": "Anomalies are high-F surprises — data points that the F-model cannot predict. Detection algorithms learn the boundary between expected E(S) and genuine novelty. The queer reading: who counts as anomalous depends on whose F-model defines normal.",
    "scene": "res://algorithms/machinelearning/anomaly_detection/anomaly_detection.tscn",
    "sequence": "machinelearning",
    "size_group": "xlarge",
@@ -775,7 +775,7 @@
   "attention_mechanisms": {
    "category": "machinelearning",
    "complexity": "advanced",
-   "description": "Transformer attention visualization \u2014 query-key-value matrices, attention weights as connection strengths. See what the model attends to.",
+   "description": "Transformer attention visualization — query-key-value matrices, attention weights as connection strengths. See what the model attends to.",
    "dev_themes": [
     "ai",
     "machine_learning"
@@ -796,7 +796,7 @@
     ],
     "size_group": "world_scale"
    },
-   "qfep_connection": "Attention IS selective F-allocation \u2014 the model learns which inputs to weight heavily (low F surprise) and which to ignore (high E(S) noise). Self-attention computes relevance dynamically, adapting the F-model to each input.",
+   "qfep_connection": "Attention IS selective F-allocation — the model learns which inputs to weight heavily (low F surprise) and which to ignore (high E(S) noise). Self-attention computes relevance dynamically, adapting the F-model to each input.",
    "scene": "res://algorithms/machinelearning/attention_mechanisms/attention_mechanisms.tscn",
    "sequence": "machinelearning",
    "tags": [
@@ -891,7 +891,7 @@
   "axiom_garden": {
    "category": "machinelearning",
    "complexity": "advanced",
-   "description": "An L-System garden game \u2014 grow plants from axiom strings, navigate a turtle through branching structures, overcome obstacles with evolved grammar rules. Formal languages become living landscapes.",
+   "description": "An L-System garden game — grow plants from axiom strings, navigate a turtle through branching structures, overcome obstacles with evolved grammar rules. Formal languages become living landscapes.",
    "dev_themes": [
     "ai",
     "machine_learning"
@@ -1001,7 +1001,7 @@
   "clustering_algorithms": {
    "category": "machinelearning",
    "complexity": "intermediate",
-   "description": "K-Means, Agglomerative, and DBSCAN clustering side by side \u2014 watch three different strategies for finding groups in data. Same points, different assumptions, different results.",
+   "description": "K-Means, Agglomerative, and DBSCAN clustering side by side — watch three different strategies for finding groups in data. Same points, different assumptions, different results.",
    "dev_themes": [
     "ai",
     "machine_learning"
@@ -1116,7 +1116,7 @@
   "computer_vision": {
    "category": "machinelearning",
    "complexity": "intermediate",
-   "description": "Computer vision pipeline visualization \u2014 from raw pixels through feature extraction to classification. See how machines learn to see: edges, textures, objects.",
+   "description": "Computer vision pipeline visualization — from raw pixels through feature extraction to classification. See how machines learn to see: edges, textures, objects.",
    "dev_themes": [
     "ai",
     "education",
@@ -1350,12 +1350,13 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.152292Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "Convolution made spatial — a filter sliding across an image, and you inside the sliding. The room where a machine first *sees*: not by understanding, but by sweeping the same small question (is there an edge here? a corner?) across every position until a picture becomes a field of answers."
   },
   "convolutional_neural_networks": {
    "category": "machinelearning",
    "complexity": "advanced",
-   "description": "CNN architecture visualization \u2014 convolutional filters, pooling layers, and feature maps. See how spatial hierarchies emerge from learned kernels scanning across input data.",
+   "description": "CNN architecture visualization — convolutional filters, pooling layers, and feature maps. See how spatial hierarchies emerge from learned kernels scanning across input data.",
    "dev_themes": [
     "ai",
     "education",
@@ -1580,12 +1581,13 @@
     "approach_dir": "front",
     "derived_at": "2026-04-29T09:39:46.152292Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "The walkable CNN — kernels you can grab, feature maps stacking from edges to textures to parts to faces. The architecture that taught machines to see by insisting the same detector works everywhere: translation invariance as a built-in belief, the eye's humility written into the weights."
   },
   "decision_boundary_viewer": {
    "category": "machinelearning",
    "complexity": "beginner",
-   "description": "2D classification with live decision boundary \u2014 two clusters of points separated by a linear classifier (w1*x + w2*y + bias > 0). Background colored by classification region, data points as bright dots, yellow boundary line. VR sliders for w1, w2, bias with live accuracy display.",
+   "description": "2D classification with live decision boundary — two clusters of points separated by a linear classifier (w1*x + w2*y + bias > 0). Background colored by classification region, data points as bright dots, yellow boundary line. VR sliders for w1, w2, bias with live accuracy display.",
    "dev_themes": [
     "ai",
     "machine_learning"
@@ -1688,7 +1690,7 @@
   "dimensionality_reduction": {
    "category": "machinelearning",
    "complexity": "intermediate",
-   "description": "High-dimensional data projected to lower dimensions \u2014 PCA, t-SNE, and UMAP approaches compared. Finding the essential structure hidden in high-dimensional chaos.",
+   "description": "High-dimensional data projected to lower dimensions — PCA, t-SNE, and UMAP approaches compared. Finding the essential structure hidden in high-dimensional chaos.",
    "dev_themes": [
     "ai",
     "machine_learning"
@@ -1831,7 +1833,7 @@
     ],
     "size_group": "xlarge"
    },
-   "qfep_connection": "K-means IS iterative F-minimization \u2014 centroids move to minimize within-cluster variance. Each step reduces the system's free energy until convergence. K itself is a \u03bb-like parameter: too few clusters = underfitting, too many = overfitting.",
+   "qfep_connection": "K-means IS iterative F-minimization — centroids move to minimize within-cluster variance. Each step reduces the system's free energy until convergence. K itself is a λ-like parameter: too few clusters = underfitting, too many = overfitting.",
    "scene": "res://algorithms/machinelearning/kmeansclustering/enhanced_kmeans.tscn",
    "sequence": "machinelearning",
    "size_group": "xlarge",
@@ -1933,7 +1935,7 @@
   "ensemble_methods": {
    "category": "machinelearning",
    "complexity": "intermediate",
-   "description": "Ensemble learning visualization \u2014 multiple weak learners combining into a strong one. Bagging, boosting, and stacking: the wisdom of crowds applied to algorithms.",
+   "description": "Ensemble learning visualization — multiple weak learners combining into a strong one. Bagging, boosting, and stacking: the wisdom of crowds applied to algorithms.",
    "dev_themes": [
     "ai",
     "education",
@@ -2052,7 +2054,7 @@
   "evolved_creatures": {
    "category": "machinelearning",
    "complexity": "advanced",
-   "description": "Physics-based creature evolution inspired by Karl Sims \u2014 bipedal bodies evolve locomotion through genetic algorithms. Morphology and behavior co-evolve, producing creatures that learn to walk through selection pressure.",
+   "description": "Physics-based creature evolution inspired by Karl Sims — bipedal bodies evolve locomotion through genetic algorithms. Morphology and behavior co-evolve, producing creatures that learn to walk through selection pressure.",
    "dev_themes": [
     "ai",
     "biology",
@@ -2171,7 +2173,7 @@
   "evolved_creatures_v2": {
    "category": "machinelearning",
    "complexity": "advanced",
-   "description": "Second-generation evolved creatures \u2014 improved physics-based creature evolution with more complex body plans and neural network controllers. Evolution as iterative design.",
+   "description": "Second-generation evolved creatures — improved physics-based creature evolution with more complex body plans and neural network controllers. Evolution as iterative design.",
    "dev_themes": [
     "ai",
     "biology",
@@ -2278,7 +2280,7 @@
   "evolving_creatures_ea": {
    "category": "machinelearning",
    "complexity": "intermediate",
-   "description": "Evolutionary algorithms demo \u2014 creatures evolving body plans and behaviors through selection, crossover, and mutation. A hands-on look at how evolution works as an optimization process.",
+   "description": "Evolutionary algorithms demo — creatures evolving body plans and behaviors through selection, crossover, and mutation. A hands-on look at how evolution works as an optimization process.",
    "dev_themes": [
     "ai",
     "biology",
@@ -2378,7 +2380,7 @@
   "evolving_flowers": {
    "category": "machinelearning",
    "complexity": "beginner",
-   "description": "Flowers evolving color, petal count, and shape through aesthetic selection \u2014 beauty as a fitness function. Interactive evolution where the user is the selection pressure.",
+   "description": "Flowers evolving color, petal count, and shape through aesthetic selection — beauty as a fitness function. Interactive evolution where the user is the selection pressure.",
    "dev_themes": [
     "ai",
     "art",
@@ -2618,7 +2620,7 @@
   "explainable_ai": {
    "category": "machinelearning",
    "complexity": "advanced",
-   "description": "Making AI decisions interpretable \u2014 feature importance, attention maps, and explanation methods. The critical question: not just what the model predicts, but why.",
+   "description": "Making AI decisions interpretable — feature importance, attention maps, and explanation methods. The critical question: not just what the model predicts, but why.",
    "dev_themes": [
     "ai",
     "machine_learning"
@@ -2849,12 +2851,13 @@
     "approach_dir": "front",
     "derived_at": "2026-04-29T09:39:46.152793Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "SHAP, LIME, Grad-CAM — the instruments that ask a black box *why*, and get partial, honest, contestable answers. The accountability room: after seven chambers of learning that works without understanding, this one insists the machine show its reasons. Not because the reasons are the truth, but because a decision no one can question is a decision no one can refuse."
   },
   "feature_engineering": {
    "category": "machinelearning",
    "complexity": "intermediate",
-   "description": "Feature engineering visualization \u2014 transforming raw data into useful representations. The art of asking the right questions of your data before the model does.",
+   "description": "Feature engineering visualization — transforming raw data into useful representations. The art of asking the right questions of your data before the model does.",
    "dev_themes": [
     "ai",
     "art",
@@ -2970,7 +2973,7 @@
   "fine_tuning": {
    "category": "machinelearning",
    "complexity": "advanced",
-   "description": "Transfer learning and fine-tuning visualization \u2014 taking a pre-trained model and adapting it to a new task by updating select layers. The efficient path from general knowledge to specific expertise.",
+   "description": "Transfer learning and fine-tuning visualization — taking a pre-trained model and adapting it to a new task by updating select layers. The efficient path from general knowledge to specific expertise.",
    "dev_themes": [
     "ai",
     "education",
@@ -3194,7 +3197,7 @@
   "gans": {
    "category": "machinelearning",
    "complexity": "advanced",
-   "description": "GAN visualization \u2014 generator and discriminator locked in adversarial training. One creates, the other critiques, and from this competition emerges the ability to generate realistic data.",
+   "description": "GAN visualization — generator and discriminator locked in adversarial training. One creates, the other critiques, and from this competition emerges the ability to generate realistic data.",
    "dev_themes": [
     "ai",
     "machine_learning"
@@ -3424,12 +3427,13 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.152793Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "Two networks locked in a duel — a generator forging samples, a discriminator calling the fakes — each making the other better until the forgeries pass. Creation as adversarial pressure, art from an arms race. The world room's unsettling proof that convincing can be reached without ever understanding."
   },
   "genetic_algorithm": {
    "category": "machinelearning",
    "complexity": "advanced",
-   "description": "Advanced neuroevolution ecosystem with speciation \u2014 populations split into species, compete for resources, and evolve distinct strategies. Punctuated equilibrium and adaptive radiation in code.",
+   "description": "Advanced neuroevolution ecosystem with speciation — populations split into species, compete for resources, and evolve distinct strategies. Punctuated equilibrium and adaptive radiation in code.",
    "dev_themes": [
     "ai",
     "biology",
@@ -3550,7 +3554,7 @@
   "gradient_descent": {
    "category": "machinelearning",
    "complexity": "intermediate",
-   "description": "Gradient descent optimization demo \u2014 a ball rolling downhill on a loss surface, following the steepest path to the minimum. The foundational optimization algorithm behind all of deep learning.",
+   "description": "Gradient descent optimization demo — a ball rolling downhill on a loss surface, following the steepest path to the minimum. The foundational optimization algorithm behind all of deep learning.",
    "dev_themes": [
     "ai",
     "education",
@@ -3662,7 +3666,7 @@
   "gradient_descent_landscape": {
    "category": "machinelearning",
    "complexity": "intermediate",
-   "description": "3D loss surface with a ball rolling down to the minimum \u2014 gradient descent visualization. ImmediateMesh surface colored green at minima, red at peaks. Adjustable learning rate slider and reset button. Trail of breadcrumb spheres shows the optimization path.",
+   "description": "3D loss surface with a ball rolling down to the minimum — gradient descent visualization. ImmediateMesh surface colored green at minima, red at peaks. Adjustable learning rate slider and reset button. Trail of breadcrumb spheres shows the optimization path.",
    "dev_themes": [
     "ai",
     "education",
@@ -3772,7 +3776,7 @@
   "joint_learn_walk": {
    "category": "machinelearning",
    "complexity": "advanced",
-   "description": "RL agent learning to walk \u2014 reward shaping, policy gradient, emergent locomotion. Joints discover coordinated movement through trial and error.",
+   "description": "RL agent learning to walk — reward shaping, policy gradient, emergent locomotion. Joints discover coordinated movement through trial and error.",
    "dev_themes": [
     "ai",
     "education",
@@ -3791,7 +3795,7 @@
     "machinelearning"
    ],
    "name": "Joint Learn Walk (Reinforcement Learning)",
-   "qfep_connection": "Reinforcement learning as embodied F-minimization \u2014 the agent builds an internal model through interaction, reducing surprise about its own body. Emergent locomotion is the system discovering its own edge of chaos: coordinated movement from noisy exploration.",
+   "qfep_connection": "Reinforcement learning as embodied F-minimization — the agent builds an internal model through interaction, reducing surprise about its own body. Emergent locomotion is the system discovering its own edge of chaos: coordinated movement from noisy exploration.",
    "scene": "res://algorithms/machinelearning/reinforcementlearning/joint_learn_walk.tscn",
    "sequence": "machinelearning",
    "size_group": "xlarge",
@@ -3880,7 +3884,7 @@
   "kmeans_simple": {
    "category": "machinelearning",
    "complexity": "beginner",
-   "description": "Simplified K-means clustering demonstration \u2014 a minimal version showing the core iterative assignment-and-update loop.",
+   "description": "Simplified K-means clustering demonstration — a minimal version showing the core iterative assignment-and-update loop.",
    "dev_themes": [
     "ai",
     "machine_learning"
@@ -3954,7 +3958,7 @@
   "learn_world_stacked": {
    "category": "machinelearning",
    "complexity": "advanced",
-   "description": "Stacked learning environment \u2014 multiple ML models layered together, each learning from the previous layer's output. Meta-learning through hierarchical composition.",
+   "description": "Stacked learning environment — multiple ML models layered together, each learning from the previous layer's output. Meta-learning through hierarchical composition.",
    "dev_themes": [
     "ai",
     "education",
@@ -4066,12 +4070,13 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.152793Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "Multiple models stacked, each learning from the layer below — the chapter's architecture-of-architectures, where one learner's output is another's raw world. Depth as the whole trick: no single layer understands anything, and the stack, somehow, does."
   },
   "loss_function_comparator": {
    "category": "machinelearning",
    "complexity": "intermediate",
-   "description": "Same dataset, three different loss functions applied simultaneously. MSE (smooth bowl), Huber (outlier-robust), and adversarial (deceptive valleys). Gradient descent balls roll on each surface, arriving at different answers. The landscape is not given \u2014 it is authored.",
+   "description": "Same dataset, three different loss functions applied simultaneously. MSE (smooth bowl), Huber (outlier-robust), and adversarial (deceptive valleys). Gradient descent balls roll on each surface, arriving at different answers. The landscape is not given — it is authored.",
    "dev_themes": [
     "ai",
     "education",
@@ -4198,7 +4203,7 @@
   "lstms": {
    "category": "machinelearning",
    "complexity": "advanced",
-   "description": "Long Short-Term Memory network visualization \u2014 gates (forget, input, output) controlling information flow through time. The architecture that solved vanishing gradients and enabled sequence modeling.",
+   "description": "Long Short-Term Memory network visualization — gates (forget, input, output) controlling information flow through time. The architecture that solved vanishing gradients and enabled sequence modeling.",
    "dev_themes": [
     "ai",
     "machine_learning"
@@ -4433,7 +4438,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.152793Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "A memory cell you can walk through — gates deciding what to keep, what to forget, what to let out. The LSTM is the chapter's answer to time: a network that carries a thread of context forward, forgetting on purpose so the important thing survives. Memory as a valve, not a vault."
   },
   "neural_network_visualization": {
    "category": "machinelearning",
@@ -4456,7 +4462,7 @@
     "machinelearning"
    ],
    "name": "Neural Network Visualization",
-   "qfep_connection": "Neural networks learn F-models through gradient descent \u2014 each weight update reduces prediction error. Overfitting = F too low (memorization); regularization = intentional \u03bb (noise tolerance). Generalization lives at the edge of chaos between memorization and randomness.",
+   "qfep_connection": "Neural networks learn F-models through gradient descent — each weight update reduces prediction error. Overfitting = F too low (memorization); regularization = intentional λ (noise tolerance). Generalization lives at the edge of chaos between memorization and randomness.",
    "scene": "res://algorithms/machinelearning/neuralnetworkvisualization/neural_network_visualization.tscn",
    "sequence": "machinelearning",
    "size_group": "xlarge",
@@ -4555,7 +4561,7 @@
   "neural_networks": {
    "category": "machinelearning",
    "complexity": "intermediate",
-   "description": "Feedforward neural network with configurable layer sizes \u2014 visible activations, weighted connections, and forward pass animation. Watch information transform through layers of weighted sums and activations.",
+   "description": "Feedforward neural network with configurable layer sizes — visible activations, weighted connections, and forward pass animation. Watch information transform through layers of weighted sums and activations.",
    "dev_themes": [
     "ai",
     "machine_learning"
@@ -4786,12 +4792,13 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.152793Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "The network turned inside out and made walkable — weights hanging in the air as visible thicknesses, activations lighting up as you pass, and backpropagation running the error backward through the whole structure like a confession travelling upstream. The primitive of deep learning shown honestly: not a brain, but a landscape of numbers that adjusts itself by measuring how wrong it just was."
   },
   "nlp": {
    "category": "machinelearning",
    "complexity": "intermediate",
-   "description": "NLP pipeline visualization \u2014 tokenization, embedding, and sequence modeling. How machines process text: from strings of characters to vectors of meaning.",
+   "description": "NLP pipeline visualization — tokenization, embedding, and sequence modeling. How machines process text: from strings of characters to vectors of meaning.",
    "dev_themes": [
     "ai",
     "machine_learning"
@@ -4908,7 +4915,7 @@
   "non_teleological_evolution": {
    "category": "machinelearning",
    "complexity": "intermediate",
-   "description": "Bodies exist in a space with no fitness function. They reproduce based on proximity and energy (gained by exploring, lost by existing). Forms diversify without goal or optimization \u2014 just drift, variation, and persistence. No best creature. No progress narrative.",
+   "description": "Bodies exist in a space with no fitness function. They reproduce based on proximity and energy (gained by exploring, lost by existing). Forms diversify without goal or optimization — just drift, variation, and persistence. No best creature. No progress narrative.",
    "dev_themes": [
     "ai",
     "biology",
@@ -5026,7 +5033,7 @@
   "optimization_algorithms": {
    "category": "machinelearning",
    "complexity": "intermediate",
-   "description": "Comparison of optimization algorithms \u2014 SGD, Adam, RMSprop, and others navigating loss landscapes. See why some optimizers dance while others plod.",
+   "description": "Comparison of optimization algorithms — SGD, Adam, RMSprop, and others navigating loss landscapes. See why some optimizers dance while others plod.",
    "dev_themes": [
     "ai",
     "machine_learning"
@@ -5145,7 +5152,7 @@
   "pca_visualization": {
    "category": "machinelearning",
    "complexity": "advanced",
-   "description": "Principal Component Analysis \u2014 high-dimensional data projected onto principal axes. Shows variance capture and dimensionality reduction in 3D.",
+   "description": "Principal Component Analysis — high-dimensional data projected onto principal axes. Shows variance capture and dimensionality reduction in 3D.",
    "dev_themes": [
     "ai",
     "machine_learning"
@@ -5171,7 +5178,7 @@
     ],
     "size_group": "xlarge"
    },
-   "qfep_connection": "PCA is pure F-minimization through dimensionality reduction \u2014 finding the axes of maximum variance and discarding the rest. Compression of high-dimensional E(S) into the most informative low-dimensional F-model.",
+   "qfep_connection": "PCA is pure F-minimization through dimensionality reduction — finding the axes of maximum variance and discarding the rest. Compression of high-dimensional E(S) into the most informative low-dimensional F-model.",
    "scene": "res://algorithms/machinelearning/pca/pca_visualization.tscn",
    "sequence": "machinelearning",
    "size_group": "xlarge",
@@ -5268,7 +5275,7 @@
   "perceptron_playground": {
    "category": "machinelearning",
    "complexity": "beginner",
-   "description": "Single neuron with adjustable weights \u2014 the simplest possible neural network. Drag sliders to change w1, w2, and bias, watch the decision boundary shift on a 2D scatter plot. Misclassified points get white corners so you can see the perceptron learning.",
+   "description": "Single neuron with adjustable weights — the simplest possible neural network. Drag sliders to change w1, w2, and bias, watch the decision boundary shift on a 2D scatter plot. Misclassified points get white corners so you can see the perceptron learning.",
    "dev_themes": [
     "ai",
     "education",
@@ -5382,7 +5389,7 @@
   "random_forest_visualization": {
    "category": "machinelearning",
    "complexity": "intermediate",
-   "description": "Visual representation of random forest ensemble \u2014 multiple decision trees voting on classification, showing how diversity improves accuracy.",
+   "description": "Visual representation of random forest ensemble — multiple decision trees voting on classification, showing how diversity improves accuracy.",
    "dev_themes": [
     "ai",
     "machine_learning"
@@ -5503,7 +5510,7 @@
   "random_walker_machine": {
    "category": "machinelearning",
    "complexity": "beginner",
-   "description": "Random walk simulation \u2014 agents taking stochastic steps, demonstrating how randomness underlies exploration in ML. From Brownian motion to Monte Carlo methods.",
+   "description": "Random walk simulation — agents taking stochastic steps, demonstrating how randomness underlies exploration in ML. From Brownian motion to Monte Carlo methods.",
    "dev_themes": [
     "ai",
     "machine_learning"
@@ -5618,7 +5625,7 @@
   "recommendation_systems": {
    "category": "machinelearning",
    "complexity": "intermediate",
-   "description": "Collaborative and content-based filtering \u2014 how algorithms predict what you'll like based on what similar people liked. The math behind Netflix suggestions.",
+   "description": "Collaborative and content-based filtering — how algorithms predict what you'll like based on what similar people liked. The math behind Netflix suggestions.",
    "dev_themes": [
     "ai",
     "machine_learning"
@@ -5733,7 +5740,7 @@
   "reinforcement_learning": {
    "category": "machinelearning",
    "complexity": "intermediate",
-   "description": "RL agent exploring an environment \u2014 reward signals, policy updates, and the exploration-exploitation tradeoff. Learning from consequences rather than examples.",
+   "description": "RL agent exploring an environment — reward signals, policy updates, and the exploration-exploitation tradeoff. Learning from consequences rather than examples.",
    "dev_themes": [
     "ai",
     "education",
@@ -5850,7 +5857,7 @@
   "shape_learner_2d": {
    "category": "machinelearning",
    "complexity": "advanced",
-   "description": "Genetic algorithm + cellular automaton hybrid learning target shapes in 2D. Evolution discovers the CA rules that produce desired patterns \u2014 emergence guided by selection.",
+   "description": "Genetic algorithm + cellular automaton hybrid learning target shapes in 2D. Evolution discovers the CA rules that produce desired patterns — emergence guided by selection.",
    "dev_themes": [
     "ai",
     "biology",
@@ -5946,7 +5953,7 @@
   "shape_learner_3d": {
    "category": "machinelearning",
    "complexity": "advanced",
-   "description": "3D version of the GA+CA shape learner \u2014 evolving cellular automaton rules to produce target 3D structures. Emergence in three dimensions guided by evolutionary pressure.",
+   "description": "3D version of the GA+CA shape learner — evolving cellular automaton rules to produce target 3D structures. Emergence in three dimensions guided by evolutionary pressure.",
    "dev_themes": [
     "ai",
     "biology",
@@ -6043,7 +6050,7 @@
   "spotlight_attention": {
    "category": "machinelearning",
    "complexity": "intermediate",
-   "description": "Spotlight model of attention \u2014 a focused beam illuminating selected elements while others fade. The cognitive psychology model that inspired transformer attention mechanisms.",
+   "description": "Spotlight model of attention — a focused beam illuminating selected elements while others fade. The cognitive psychology model that inspired transformer attention mechanisms.",
    "dev_themes": [
     "ai",
     "machine_learning"
@@ -6182,7 +6189,7 @@
     ],
     "size_group": "xlarge"
    },
-   "qfep_connection": "SVM finds the maximum-margin boundary \u2014 the F-minimal separation between classes. Support vectors are the critical data points where the decision boundary is defined. The kernel trick lifts data to higher dimensions for linear separability: same F-minimization strategy as homogeneous coordinates.",
+   "qfep_connection": "SVM finds the maximum-margin boundary — the F-minimal separation between classes. Support vectors are the critical data points where the decision boundary is defined. The kernel trick lifts data to higher dimensions for linear separability: same F-minimization strategy as homogeneous coordinates.",
    "scene": "res://algorithms/machinelearning/supportvectormachine/svm_visualization.tscn",
    "sequence": "machinelearning",
    "size_group": "xlarge",
@@ -6280,7 +6287,7 @@
   "switchboard_attention": {
    "category": "machinelearning",
    "complexity": "intermediate",
-   "description": "Switchboard model of attention \u2014 input-output connections routed dynamically, like a telephone operator connecting callers. Attention as learned routing rather than spotlight focusing.",
+   "description": "Switchboard model of attention — input-output connections routed dynamically, like a telephone operator connecting callers. Attention as learned routing rather than spotlight focusing.",
    "dev_themes": [
     "ai",
     "education",
@@ -6385,7 +6392,7 @@
   "time_series_analysis": {
    "category": "machinelearning",
    "complexity": "intermediate",
-   "description": "Temporal pattern recognition \u2014 sliding windows, autocorrelation, seasonal decomposition. Algorithms that learn from sequential data.",
+   "description": "Temporal pattern recognition — sliding windows, autocorrelation, seasonal decomposition. Algorithms that learn from sequential data.",
    "dev_themes": [
     "ai",
     "education",
@@ -6502,7 +6509,7 @@
   "transformers": {
    "category": "machinelearning",
    "complexity": "advanced",
-   "description": "Transformer architecture visualization \u2014 self-attention, multi-head attention, positional encoding. The architecture behind GPT, BERT, and the current AI revolution.",
+   "description": "Transformer architecture visualization — self-attention, multi-head attention, positional encoding. The architecture behind GPT, BERT, and the current AI revolution.",
    "dev_themes": [
     "ai",
     "biology",
@@ -6734,12 +6741,13 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.152793Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "Attention drawn as beams — every token reaching to every other, weighting what matters, and the whole sequence understood at once instead of in order. The architecture underneath the machine writing these very words: not memory marched step by step, but relevance computed all at once. The room where the curriculum quietly meets the intelligence walking it."
   },
   "vaes": {
    "category": "machinelearning",
    "complexity": "advanced",
-   "description": "VAE visualization \u2014 encoder compresses to latent space, decoder reconstructs. The bottleneck forces meaningful representations, and the variational bound enables generation of new samples.",
+   "description": "VAE visualization — encoder compresses to latent space, decoder reconstructs. The bottleneck forces meaningful representations, and the variational bound enables generation of new samples.",
    "dev_themes": [
     "ai",
     "machine_learning",
@@ -6975,8 +6983,8 @@
    "scene": "res://algorithms/machinelearning/adaboost/adaboost.tscn",
    "category": "machinelearning",
    "complexity": "intermediate",
-   "description": "Watch a sequence of weak learners focus on what the previous ones got wrong. Each decision stump is simple \u2014 a single threshold on one axis. But AdaBoost weights misclassified points heavier, so each new stump specializes on the hard cases. Points that keep getting misclassified visually grow larger. The ensemble decision boundary gets progressively more sophisticated from trivially simple components.",
-   "qfep_connection": "Lambda-tuning \u2014 the alpha weight per stump is the lambda that tunes how much each weak learner contributes. The ensemble is a weighted sum where lambda encodes earned trust.",
+   "description": "Watch a sequence of weak learners focus on what the previous ones got wrong. Each decision stump is simple — a single threshold on one axis. But AdaBoost weights misclassified points heavier, so each new stump specializes on the hard cases. Points that keep getting misclassified visually grow larger. The ensemble decision boundary gets progressively more sophisticated from trivially simple components.",
+   "qfep_connection": "Lambda-tuning — the alpha weight per stump is the lambda that tunes how much each weak learner contributes. The ensemble is a weighted sum where lambda encodes earned trust.",
    "gamwell_reference": "Boosting algorithms, Freund and Schapire 1997, ensemble learning, bias-variance tradeoff, weak learner aggregation",
    "interactions": [
     "watch stumps grow round by round",
@@ -7108,8 +7116,8 @@
    "scene": "res://algorithms/machinelearning/random_forest/random_forest.tscn",
    "category": "machinelearning",
    "complexity": "intermediate",
-   "description": "A forest of decision trees grows one by one, each trained on a random bootstrap sample with random feature selection. Individual trees overfit \u2014 their boundaries are jagged and noisy. But the majority vote of all trees produces a smooth, generalizing boundary. Tree columns light up as each tree joins the ensemble. The decision boundary visibly smooths with each addition. Democracy applied to prediction.",
-   "qfep_connection": "E(S) filtered through Form \u2014 each tree sees random entropy (bootstrap + feature randomness) but the ensemble vote is the Form that filters noise into signal. More trees = more stable Form.",
+   "description": "A forest of decision trees grows one by one, each trained on a random bootstrap sample with random feature selection. Individual trees overfit — their boundaries are jagged and noisy. But the majority vote of all trees produces a smooth, generalizing boundary. Tree columns light up as each tree joins the ensemble. The decision boundary visibly smooths with each addition. Democracy applied to prediction.",
+   "qfep_connection": "E(S) filtered through Form — each tree sees random entropy (bootstrap + feature randomness) but the ensemble vote is the Form that filters noise into signal. More trees = more stable Form.",
    "gamwell_reference": "Random forests, Breiman 2001, bagging, bootstrap aggregation, Gini impurity, ensemble diversity",
    "interactions": [
     "watch trees grow one by one",
