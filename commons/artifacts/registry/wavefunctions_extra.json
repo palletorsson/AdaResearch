@@ -1,7 +1,7 @@
 {
  "registry_info": {
   "name": "wavefunctions_extra",
-  "description": "Additional wavefunction artifacts not in the main wavefunctions.json \u2014 sine spaces, sound timelines, modulor constructions, and cochlear models.",
+  "description": "Additional wavefunction artifacts not in the main wavefunctions.json — sine spaces, sound timelines, modulor constructions, and cochlear models.",
   "category": "wavefunctions",
   "theoretical_grounding": "Wave mechanics, Fourier analysis, Le Corbusier's Modulor proportional system, cochlear mechanics, sound synthesis"
  },
@@ -10,8 +10,8 @@
    "lookup_name": "coshlea",
    "scene": "res://algorithms/wavefunctions/coshlea/coshlea.tscn",
    "name": "Cochlea Model",
-   "description": "Model of the cochlea \u2014 the spiral organ in the inner ear that performs a biological Fourier transform. Frequency-to-position mapping: high frequencies at the base, low at the apex.",
-   "category": "wavefunctions",
+   "description": "Model of the cochlea — the spiral organ in the inner ear that performs a biological Fourier transform. Frequency-to-position mapping: high frequencies at the base, low at the apex.",
+   "category": "waves",
    "complexity": "intermediate",
    "tags": [
     "cochlea",
@@ -123,8 +123,8 @@
    "lookup_name": "modulor_man",
    "scene": "res://algorithms/wavefunctions/line_builder_3d/modulor_man.tscn",
    "name": "Modulor Man",
-   "description": "Le Corbusier's Modulor proportional system in 3D \u2014 the human body as generator of harmonic measurements. Architecture derived from the golden ratio applied to human scale.",
-   "category": "wavefunctions",
+   "description": "Le Corbusier's Modulor proportional system in 3D — the human body as generator of harmonic measurements. Architecture derived from the golden ratio applied to human scale.",
+   "category": "waves",
    "complexity": "intermediate",
    "tags": [
     "modulor",
@@ -223,8 +223,8 @@
    "lookup_name": "modulor_man_interactive",
    "scene": "res://algorithms/wavefunctions/line_builder_3d/modulor_man_interactive.tscn",
    "name": "Modulor Man (Interactive)",
-   "description": "Interactive Modulor proportional system \u2014 adjust body proportions and see how architectural measurements change. The relationship between human form and designed space.",
-   "category": "wavefunctions",
+   "description": "Interactive Modulor proportional system — adjust body proportions and see how architectural measurements change. The relationship between human form and designed space.",
+   "category": "waves",
    "complexity": "intermediate",
    "tags": [
     "modulor",
@@ -324,8 +324,8 @@
    "lookup_name": "sine_space",
    "scene": "res://algorithms/wavefunctions/sine_space/sine_space.tscn",
    "name": "Sine Space",
-   "description": "3D space defined by sine waves \u2014 walls, floors, and ceilings undulate according to wave parameters. An environment where the sine function becomes architecture.",
-   "category": "wavefunctions",
+   "description": "3D space defined by sine waves — walls, floors, and ceilings undulate according to wave parameters. An environment where the sine function becomes architecture.",
+   "category": "waves",
    "complexity": "beginner",
    "tags": [
     "sine",
@@ -441,8 +441,8 @@
    "lookup_name": "sine_wall",
    "scene": "res://algorithms/wavefunctions/sine_wall/sine_wall.tscn",
    "name": "Sine Wall",
-   "description": "A wall of oscillating elements driven by sine functions \u2014 amplitude, frequency, and phase visible as physical displacement. Wave parameters you can see and feel.",
-   "category": "wavefunctions",
+   "description": "A wall of oscillating elements driven by sine functions — amplitude, frequency, and phase visible as physical displacement. Wave parameters you can see and feel.",
+   "category": "waves",
    "complexity": "beginner",
    "tags": [
     "sine",
@@ -559,8 +559,8 @@
    "lookup_name": "sine_oscillation",
    "scene": "res://algorithms/wavefunctions/sineoscillation/sine_oscillation.tscn",
    "name": "Sine Oscillation",
-   "description": "Expressive 3D sine oscillation \u2014 rotating unit circle with sine + cosine wave projection, phase trail, radius arm, color-coded dual waves, and VR parameter sliders for amplitude, frequency, and speed.",
-   "category": "wavefunctions",
+   "description": "Expressive 3D sine oscillation — rotating unit circle with sine + cosine wave projection, phase trail, radius arm, color-coded dual waves, and VR parameter sliders for amplitude, frequency, and speed.",
+   "category": "waves",
    "complexity": "beginner",
    "tags": [
     "sine",
@@ -661,8 +661,8 @@
    "lookup_name": "sound_timeline",
    "scene": "res://algorithms/wavefunctions/soundtimeline/sound_timeline.tscn",
    "name": "Sound Timeline",
-   "description": "Audio timeline controller \u2014 visualize and manipulate sound as a waveform in time. Scrub through audio, see frequency content evolve, understand sound as time-domain signal.",
-   "category": "wavefunctions",
+   "description": "Audio timeline controller — visualize and manipulate sound as a waveform in time. Scrub through audio, see frequency content evolve, understand sound as time-domain signal.",
+   "category": "waves",
    "complexity": "beginner",
    "tags": [
     "sound",
@@ -754,8 +754,8 @@
    "lookup_name": "vertical_wave_lines",
    "scene": "res://algorithms/wavefunctions/vertical_wave_lines/vertical_wave_lines.tscn",
    "name": "Vertical Wave Lines",
-   "description": "Array of vertical lines displaced by wave functions \u2014 interference, standing waves, and superposition made visible as a wall of oscillating rods.",
-   "category": "wavefunctions",
+   "description": "Array of vertical lines displaced by wave functions — interference, standing waves, and superposition made visible as a wall of oscillating rods.",
+   "category": "waves",
    "complexity": "beginner",
    "tags": [
     "wave",
@@ -862,8 +862,8 @@
    "lookup_name": "doppler_effect_demo",
    "scene": "res://commons/artifacts/doppler_effect_demo/doppler_effect_demo.tscn",
    "name": "Doppler Effect Demo",
-   "description": "Moving source emits concentric wave rings \u2014 compression ahead (blue shift) and stretching behind (red shift). Rings expand from emission positions, naturally demonstrating how relative motion changes observed frequency.",
-   "category": "wavefunctions",
+   "description": "Moving source emits concentric wave rings — compression ahead (blue shift) and stretching behind (red shift). Rings expand from emission positions, naturally demonstrating how relative motion changes observed frequency.",
+   "category": "waves",
    "complexity": "intermediate",
    "tags": [
     "doppler",
@@ -969,7 +969,7 @@
    }
   },
   "aliasing_wave": {
-   "category": "wavefunctions",
+   "category": "waves",
    "complexity": "intermediate",
    "description": "The waves seam (the sampling crack). A true 15-cycle wave, 16 sample dots on it, and the straight-line reconstruction those samples give: a clean 1-cycle wave. Above half the sample rate (Nyquist) a wave does not vanish, it folds back and impersonates a slower one. Plus a spoked wheel that, spun past the frame rate, turns backward - real aliasing, the display sampling itself.",
    "dev_themes": [

@@ -5,7 +5,7 @@
    "lookup_name": "gallery_marker_soft-body",
    "description": "Small bronze pedestal + glowing stake + Label3D reading SOFT BODY. Single-cell sub-gallery anchor used 24x across softbodies maps. Shared scene at commons/artifacts/gallery_marker; the lookup_name fixes the label.",
    "scene": "res://commons/artifacts/gallery_marker/gallery_marker.tscn",
-   "category": "softbodies",
+   "category": "soft_bodies",
    "sequence": "softbodies",
    "artifact_type": "marker",
    "qfep_term": "Indexing",
@@ -43,9 +43,9 @@
    "lookup_name": "flex_cloth_pad",
    "description": "Hanging cloth simulated as spring-mass vertices. The integration phase affordance: the bracelet's flex/drape mode nudges the cloth and watches it settle.",
    "scene": "res://algorithms/softbodies/affordance_demos/flex_cloth_pad.tscn",
-   "category": "softbodies",
+   "category": "soft_bodies",
    "sequence": "softbodies",
-   "artifact_type": "softbodies",
+   "artifact_type": "soft_bodies",
    "qfep_term": "Integration",
    "capacity": "FLEX a soft body",
    "dev_themes": [
@@ -75,7 +75,7 @@
    }
   },
   "spring_lattice": {
-   "category": "softbodies",
+   "category": "soft_bodies",
    "complexity": "intermediate",
    "description": "The soft-bodies seam. A jelly is an elastic continuum - infinitely divisible, smooth under any load. The machine cannot integrate a continuum; it replaces it with a finite mesh of point masses on springs. Left: the true smooth blob. Right: the same blob as a mass-spring lattice - a faceted polygon at a chosen resolution; stiffen the springs past the timestep and it detonates. The smoothness was lattice resolution in disguise.",
    "dev_themes": [

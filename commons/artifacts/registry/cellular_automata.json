@@ -5428,7 +5428,7 @@
     ],
     "size_group": "medium"
    },
-   "category": "cellularautomata",
+   "category": "cellular_automata",
    "interaction": "grab_slide",
    "sequence": "cellularautomata",
    "artifact_type": "workbench",
@@ -7339,7 +7339,7 @@
    }
   },
   "rule30_random": {
-   "category": "cellularautomata",
+   "category": "cellular_automata",
    "complexity": "intermediate",
    "description": "The cellular-automata seam. Rule 30 from one lit cell: its centre column passed the randomness tests and shipped as an RNG, yet it is a fixed rule on a fixed seed - rewind and every bit returns. Determinism wearing randomness.",
    "dev_themes": [

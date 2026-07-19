@@ -9932,7 +9932,7 @@
    }
   },
   "interactive_point_origin_force": {
-   "category": "primitive",
+   "category": "primitives",
    "complexity": "intermediate",
    "description": "Force-catalyst variant of interactive_point_origin. Starts as a plain point; on pickup a vertex shader morphs the surface into a pulsing 'force field' shell. While held with the morph engaged, nearby RigidBody3D objects feel an inverse-square pull toward the artifact. With both hands closed (the OrbGestureDetector two-hand gesture), the artifact spits a luminous projectile ball forward.",
    "dev_themes": [
@@ -23527,7 +23527,7 @@
    "lookup_name": "silhouette_gate",
    "description": "A ghost silhouette of a form. Take the drawing point and trace the form by passing through every vertex; complete it and the form dissolves as a sliding door opens. 2D forms (triangle, square/quad, pentagon, hexagon, circle) AND 3D forms — a cube is a green wireframe whose 8 corners must all be drawn through. Configurable: form, form_size, hit_radius, ordered, ring_points, rotation_offset_deg, door_tag.",
    "scene": "res://commons/artifacts/silhouette_gate/silhouette_gate.tscn",
-   "category": "puzzle",
+   "category": "puzzles",
    "footprint": [
     2,
     3,

@@ -9309,7 +9309,7 @@
    }
   },
   "oscilloscope": {
-   "category": "wavefunctions",
+   "category": "waves",
    "complexity": "intermediate",
    "description": "Multi-mode oscilloscope with VR sliders. Shows waveform, Lissajous patterns, and XY plots. Classic green phosphor CRT aesthetic. Controls: FREQ A/B, Amplitude, Phase, Time/Div.",
    "dev_themes": [
@@ -14960,10 +14960,10 @@
    "lookup_name": "transform_composition_workbench",
    "description": "Interactive 3D workbench. A slider selects one of 4 transformation pairs; the same base tetrahedron is shown after T1∘T2 (left) and T2∘T1 (right). Order matters — except for pair 2 (rotation × uniform scale around origin) which commutes. Paired with /transform-composition-gallery.",
    "scene": "res://commons/artifacts/transform_composition_workbench/transform_composition_workbench.tscn",
-   "category": "transformation",
+   "category": "transforms",
    "interaction": "grab_slide",
    "sequence": "transformation",
-   "artifact_type": "transformation",
+   "artifact_type": "transforms",
    "qfep_term": "F",
    "capacity": "WALK the non-commutativity of transformations",
    "dev_themes": [

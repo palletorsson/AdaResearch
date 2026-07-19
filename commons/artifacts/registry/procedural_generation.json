@@ -1,1560 +1,1560 @@
 {
-  "registry_info": {
-    "name": "procedural_generation",
-    "description": "Procedural-generation synthesis artifacts - the seed->world capstone and future generation-technique gap-fillers (the /procgen-map chapter).",
-    "created": "2026-06-21"
+ "registry_info": {
+  "name": "procedural_generation",
+  "description": "Procedural-generation synthesis artifacts - the seed->world capstone and future generation-technique gap-fillers (the /procgen-map chapter).",
+  "created": "2026-06-21"
+ },
+ "artifacts": {
+  "seed_world_toy": {
+   "lookup_name": "seed_world_toy",
+   "scene": "res://commons/artifacts/seed_world_toy/seed_world_toy.tscn",
+   "class_name": "SeedWorldToy",
+   "name": "Seed World Toy (a world in your hand)",
+   "description": "A whole tiny world held in the hand, grown from one number: a noise heightfield terrain, a sea, scattered trees, a hut - same seed, same world.",
+   "category": "procedural",
+   "complexity": "intermediate",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "proceduralgeneration"
+   ],
+   "tags": [
+    "procedural_generation",
+    "seed_world",
+    "synthesis",
+    "small"
+   ],
+   "parameters": {
+    "emissive": "Bool",
+    "world_seed": "Int"
+   },
+   "dev_themes": [
+    "procedural_generation",
+    "worlds",
+    "synthesis"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 2,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 2,
+    "footprint_source": "designed"
+   }
   },
-  "artifacts": {
-    "seed_world_toy": {
-      "lookup_name": "seed_world_toy",
-      "scene": "res://commons/artifacts/seed_world_toy/seed_world_toy.tscn",
-      "class_name": "SeedWorldToy",
-      "name": "Seed World Toy (a world in your hand)",
-      "description": "A whole tiny world held in the hand, grown from one number: a noise heightfield terrain, a sea, scattered trees, a hut - same seed, same world.",
-      "category": "procedural_generation",
-      "complexity": "intermediate",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "proceduralgeneration"
-      ],
-      "tags": [
-        "procedural_generation",
-        "seed_world",
-        "synthesis",
-        "small"
-      ],
-      "parameters": {
-        "emissive": "Bool",
-        "world_seed": "Int"
-      },
-      "dev_themes": [
-        "procedural_generation",
-        "worlds",
-        "synthesis"
-      ],
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 2,
-        "clearance": {
-          "front": 2,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "front",
-        "isolation": 1,
-        "cluster_with": [],
-        "preferred_zone": "any",
-        "measured_footprint_cells": 2,
-        "footprint_source": "designed"
-      }
+  "seed_world_bench": {
+   "lookup_name": "seed_world_bench",
+   "scene": "res://commons/artifacts/seed_world_bench/seed_world_bench.tscn",
+   "class_name": "SeedWorldBench",
+   "name": "Seed World Bench (the seed picks the noise)",
+   "description": "A generated world patch on a bench - the seed picks the noise, the noise the terrain, the terrain the structures, the structures the life. The whole stack, on a table.",
+   "category": "procedural",
+   "complexity": "intermediate",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "proceduralgeneration"
+   ],
+   "tags": [
+    "procedural_generation",
+    "seed_world",
+    "synthesis",
+    "medium"
+   ],
+   "parameters": {
+    "emissive": "Bool",
+    "world_seed": "Int"
+   },
+   "dev_themes": [
+    "procedural_generation",
+    "worlds",
+    "synthesis"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 9,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
     },
-    "seed_world_bench": {
-      "lookup_name": "seed_world_bench",
-      "scene": "res://commons/artifacts/seed_world_bench/seed_world_bench.tscn",
-      "class_name": "SeedWorldBench",
-      "name": "Seed World Bench (the seed picks the noise)",
-      "description": "A generated world patch on a bench - the seed picks the noise, the noise the terrain, the terrain the structures, the structures the life. The whole stack, on a table.",
-      "category": "procedural_generation",
-      "complexity": "intermediate",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "proceduralgeneration"
-      ],
-      "tags": [
-        "procedural_generation",
-        "seed_world",
-        "synthesis",
-        "medium"
-      ],
-      "parameters": {
-        "emissive": "Bool",
-        "world_seed": "Int"
-      },
-      "dev_themes": [
-        "procedural_generation",
-        "worlds",
-        "synthesis"
-      ],
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 9,
-        "clearance": {
-          "front": 2,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "front",
-        "isolation": 1,
-        "cluster_with": [],
-        "preferred_zone": "any",
-        "measured_footprint_cells": 4,
-        "footprint_source": "designed"
-      }
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 4,
+    "footprint_source": "designed"
+   }
+  },
+  "seed_world_room": {
+   "lookup_name": "seed_world_room",
+   "scene": "res://commons/artifacts/seed_world_room/seed_world_room.tscn",
+   "class_name": "SeedWorldRoom",
+   "name": "Seed World Room (design without a designer)",
+   "description": "A room-scale world you stand beside: terrain rising to the ceiling, forests, towers, a sea - no architect drew this, the seed did.",
+   "category": "procedural",
+   "complexity": "intermediate",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "proceduralgeneration"
+   ],
+   "tags": [
+    "procedural_generation",
+    "seed_world",
+    "synthesis",
+    "large"
+   ],
+   "parameters": {
+    "emissive": "Bool",
+    "world_seed": "Int"
+   },
+   "dev_themes": [
+    "procedural_generation",
+    "worlds",
+    "synthesis"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 9,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
     },
-    "seed_world_room": {
-      "lookup_name": "seed_world_room",
-      "scene": "res://commons/artifacts/seed_world_room/seed_world_room.tscn",
-      "class_name": "SeedWorldRoom",
-      "name": "Seed World Room (design without a designer)",
-      "description": "A room-scale world you stand beside: terrain rising to the ceiling, forests, towers, a sea - no architect drew this, the seed did.",
-      "category": "procedural_generation",
-      "complexity": "intermediate",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "proceduralgeneration"
-      ],
-      "tags": [
-        "procedural_generation",
-        "seed_world",
-        "synthesis",
-        "large"
-      ],
-      "parameters": {
-        "emissive": "Bool",
-        "world_seed": "Int"
-      },
-      "dev_themes": [
-        "procedural_generation",
-        "worlds",
-        "synthesis"
-      ],
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 9,
-        "clearance": {
-          "front": 2,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "front",
-        "isolation": 1,
-        "cluster_with": [],
-        "preferred_zone": "any",
-        "measured_footprint_cells": 9,
-        "footprint_source": "designed"
-      }
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 9,
+    "footprint_source": "designed"
+   }
+  },
+  "world_forge": {
+   "lookup_name": "world_forge",
+   "scene": "res://commons/artifacts/world_forge/world_forge.tscn",
+   "class_name": "WorldForge",
+   "name": "World Forge (a new world on tap)",
+   "description": "A device with a seed dial that regenerates the whole world every few seconds with the next seed - SEED -> NOISE -> TERRAIN -> LIFE, design without a designer on tap.",
+   "category": "procedural",
+   "complexity": "intermediate",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "proceduralgeneration"
+   ],
+   "tags": [
+    "procedural_generation",
+    "seed_world",
+    "synthesis",
+    "applied"
+   ],
+   "parameters": {
+    "emissive": "Bool",
+    "world_seed": "Int"
+   },
+   "dev_themes": [
+    "procedural_generation",
+    "worlds",
+    "synthesis"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 4,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
     },
-    "world_forge": {
-      "lookup_name": "world_forge",
-      "scene": "res://commons/artifacts/world_forge/world_forge.tscn",
-      "class_name": "WorldForge",
-      "name": "World Forge (a new world on tap)",
-      "description": "A device with a seed dial that regenerates the whole world every few seconds with the next seed - SEED -> NOISE -> TERRAIN -> LIFE, design without a designer on tap.",
-      "category": "procedural_generation",
-      "complexity": "intermediate",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "proceduralgeneration"
-      ],
-      "tags": [
-        "procedural_generation",
-        "seed_world",
-        "synthesis",
-        "applied"
-      ],
-      "parameters": {
-        "emissive": "Bool",
-        "world_seed": "Int"
-      },
-      "dev_themes": [
-        "procedural_generation",
-        "worlds",
-        "synthesis"
-      ],
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 4,
-        "clearance": {
-          "front": 2,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "front",
-        "isolation": 1,
-        "cluster_with": [],
-        "preferred_zone": "any",
-        "measured_footprint_cells": 4,
-        "footprint_source": "designed"
-      }
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 4,
+    "footprint_source": "designed"
+   }
+  },
+  "poisson_scatter_toy": {
+   "lookup_name": "poisson_scatter_toy",
+   "scene": "res://commons/artifacts/poisson_scatter_toy/poisson_scatter_toy.tscn",
+   "class_name": "PoissonScatterToy",
+   "name": "Poisson Scatter Toy (random, but never too close)",
+   "description": "The kernel of blue noise, hand-sized: a few points dart onto a patch, each surviving only if it respects every neighbor's exclusion radius - the rings show that no point ever falls inside another's circle.",
+   "category": "procedural",
+   "complexity": "beginner",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "proceduralgeneration"
+   ],
+   "tags": [
+    "procedural_generation",
+    "poisson",
+    "scatter",
+    "blue_noise",
+    "small"
+   ],
+   "parameters": {
+    "emissive": "Bool",
+    "point_seed": "Int"
+   },
+   "dev_themes": [
+    "procedural_generation",
+    "partition",
+    "scatter"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 2,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
     },
-    "poisson_scatter_toy": {
-      "lookup_name": "poisson_scatter_toy",
-      "scene": "res://commons/artifacts/poisson_scatter_toy/poisson_scatter_toy.tscn",
-      "class_name": "PoissonScatterToy",
-      "name": "Poisson Scatter Toy (random, but never too close)",
-      "description": "The kernel of blue noise, hand-sized: a few points dart onto a patch, each surviving only if it respects every neighbor's exclusion radius - the rings show that no point ever falls inside another's circle.",
-      "category": "procedural_generation",
-      "complexity": "beginner",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "proceduralgeneration"
-      ],
-      "tags": [
-        "procedural_generation",
-        "poisson",
-        "scatter",
-        "blue_noise",
-        "small"
-      ],
-      "parameters": {
-        "emissive": "Bool",
-        "point_seed": "Int"
-      },
-      "dev_themes": [
-        "procedural_generation",
-        "partition",
-        "scatter"
-      ],
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 2,
-        "clearance": {
-          "front": 2,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "front",
-        "isolation": 1,
-        "cluster_with": [],
-        "preferred_zone": "any",
-        "measured_footprint_cells": 2,
-        "footprint_source": "designed"
-      }
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 2,
+    "footprint_source": "designed"
+   }
+  },
+  "poisson_scatter_bench": {
+   "lookup_name": "poisson_scatter_bench",
+   "scene": "res://commons/artifacts/poisson_scatter_bench/poisson_scatter_bench.tscn",
+   "class_name": "PoissonScatterBench",
+   "name": "Poisson Scatter Bench (same count, different texture)",
+   "description": "Two trays, same number of points: uniform random clumps and leaves bare gaps, Poisson-disk spreads them evenly. The difference between random and blue noise, made visible side by side.",
+   "category": "procedural",
+   "complexity": "intermediate",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "proceduralgeneration"
+   ],
+   "tags": [
+    "procedural_generation",
+    "poisson",
+    "scatter",
+    "blue_noise",
+    "comparison",
+    "medium"
+   ],
+   "parameters": {
+    "emissive": "Bool",
+    "point_seed": "Int"
+   },
+   "dev_themes": [
+    "procedural_generation",
+    "partition",
+    "scatter"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 4,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
     },
-    "poisson_scatter_bench": {
-      "lookup_name": "poisson_scatter_bench",
-      "scene": "res://commons/artifacts/poisson_scatter_bench/poisson_scatter_bench.tscn",
-      "class_name": "PoissonScatterBench",
-      "name": "Poisson Scatter Bench (same count, different texture)",
-      "description": "Two trays, same number of points: uniform random clumps and leaves bare gaps, Poisson-disk spreads them evenly. The difference between random and blue noise, made visible side by side.",
-      "category": "procedural_generation",
-      "complexity": "intermediate",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "proceduralgeneration"
-      ],
-      "tags": [
-        "procedural_generation",
-        "poisson",
-        "scatter",
-        "blue_noise",
-        "comparison",
-        "medium"
-      ],
-      "parameters": {
-        "emissive": "Bool",
-        "point_seed": "Int"
-      },
-      "dev_themes": [
-        "procedural_generation",
-        "partition",
-        "scatter"
-      ],
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 4,
-        "clearance": {
-          "front": 2,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "front",
-        "isolation": 1,
-        "cluster_with": [],
-        "preferred_zone": "any",
-        "measured_footprint_cells": 4,
-        "footprint_source": "designed"
-      }
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 4,
+    "footprint_source": "designed"
+   }
+  },
+  "poisson_forest_scatter": {
+   "lookup_name": "poisson_forest_scatter",
+   "scene": "res://commons/artifacts/poisson_forest_scatter/poisson_forest_scatter.tscn",
+   "class_name": "PoissonForestScatter",
+   "name": "Poisson Forest Scatter (a forest that grew itself)",
+   "description": "Blue noise placing trees: a low-poly forest scattered by Poisson-disk so it reads as natural - never overlapping, never clumping, no grid. The applied payoff of even random scatter.",
+   "category": "procedural",
+   "complexity": "intermediate",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "proceduralgeneration"
+   ],
+   "tags": [
+    "procedural_generation",
+    "poisson",
+    "scatter",
+    "forest",
+    "vegetation",
+    "applied"
+   ],
+   "parameters": {
+    "emissive": "Bool",
+    "forest_seed": "Int"
+   },
+   "dev_themes": [
+    "procedural_generation",
+    "partition",
+    "scatter"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 4,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
     },
-    "poisson_forest_scatter": {
-      "lookup_name": "poisson_forest_scatter",
-      "scene": "res://commons/artifacts/poisson_forest_scatter/poisson_forest_scatter.tscn",
-      "class_name": "PoissonForestScatter",
-      "name": "Poisson Forest Scatter (a forest that grew itself)",
-      "description": "Blue noise placing trees: a low-poly forest scattered by Poisson-disk so it reads as natural - never overlapping, never clumping, no grid. The applied payoff of even random scatter.",
-      "category": "procedural_generation",
-      "complexity": "intermediate",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "proceduralgeneration"
-      ],
-      "tags": [
-        "procedural_generation",
-        "poisson",
-        "scatter",
-        "forest",
-        "vegetation",
-        "applied"
-      ],
-      "parameters": {
-        "emissive": "Bool",
-        "forest_seed": "Int"
-      },
-      "dev_themes": [
-        "procedural_generation",
-        "partition",
-        "scatter"
-      ],
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 4,
-        "clearance": {
-          "front": 2,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "front",
-        "isolation": 1,
-        "cluster_with": [],
-        "preferred_zone": "any",
-        "measured_footprint_cells": 4,
-        "footprint_source": "designed"
-      }
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 4,
+    "footprint_source": "designed"
+   }
+  },
+  "mc_field_bench": {
+   "lookup_name": "mc_field_bench",
+   "scene": "res://commons/artifacts/mc_field_bench/mc_field_bench.tscn",
+   "class_name": "McFieldBench",
+   "name": "MC Field Bench (a noise becomes a skin)",
+   "description": "A 3D scalar field sampled on a grid; the surface is stitched where inside meets outside - a noise becomes a skin.",
+   "category": "procedural",
+   "complexity": "beginner",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "proceduralgeneration"
+   ],
+   "tags": [
+    "procedural_generation",
+    "medium",
+    "marching"
+   ],
+   "parameters": {
+    "emissive": "Bool"
+   },
+   "dev_themes": [
+    "procedural_generation",
+    "techniques"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 1,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
     },
-    "mc_field_bench": {
-      "lookup_name": "mc_field_bench",
-      "scene": "res://commons/artifacts/mc_field_bench/mc_field_bench.tscn",
-      "class_name": "McFieldBench",
-      "name": "MC Field Bench (a noise becomes a skin)",
-      "description": "A 3D scalar field sampled on a grid; the surface is stitched where inside meets outside - a noise becomes a skin.",
-      "category": "procedural_generation",
-      "complexity": "beginner",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "proceduralgeneration"
-      ],
-      "tags": [
-        "procedural_generation",
-        "medium",
-        "marching"
-      ],
-      "parameters": {
-        "emissive": "Bool"
-      },
-      "dev_themes": [
-        "procedural_generation",
-        "techniques"
-      ],
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 1,
-        "clearance": {
-          "front": 2,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "front",
-        "isolation": 1,
-        "cluster_with": [],
-        "preferred_zone": "any",
-        "measured_footprint_cells": 4,
-        "footprint_source": "designed"
-      }
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 4,
+    "footprint_source": "designed"
+   }
+  },
+  "sdf_blob_toy": {
+   "lookup_name": "sdf_blob_toy",
+   "scene": "res://commons/artifacts/sdf_blob_toy/sdf_blob_toy.tscn",
+   "class_name": "SdfBlobToy",
+   "name": "SDF Blob Toy (the function crosses zero)",
+   "description": "A held blob that is just where a signed-distance function crosses zero - three spheres smooth-unioned into one body.",
+   "category": "procedural",
+   "complexity": "beginner",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "proceduralgeneration"
+   ],
+   "tags": [
+    "procedural_generation",
+    "small",
+    "sdf"
+   ],
+   "parameters": {
+    "emissive": "Bool"
+   },
+   "dev_themes": [
+    "procedural_generation",
+    "techniques"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 2,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
     },
-    "sdf_blob_toy": {
-      "lookup_name": "sdf_blob_toy",
-      "scene": "res://commons/artifacts/sdf_blob_toy/sdf_blob_toy.tscn",
-      "class_name": "SdfBlobToy",
-      "name": "SDF Blob Toy (the function crosses zero)",
-      "description": "A held blob that is just where a signed-distance function crosses zero - three spheres smooth-unioned into one body.",
-      "category": "procedural_generation",
-      "complexity": "beginner",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "proceduralgeneration"
-      ],
-      "tags": [
-        "procedural_generation",
-        "small",
-        "sdf"
-      ],
-      "parameters": {
-        "emissive": "Bool"
-      },
-      "dev_themes": [
-        "procedural_generation",
-        "techniques"
-      ],
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 2,
-        "clearance": {
-          "front": 2,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "front",
-        "isolation": 1,
-        "cluster_with": [],
-        "preferred_zone": "any",
-        "measured_footprint_cells": 2,
-        "footprint_source": "designed"
-      }
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 2,
+    "footprint_source": "designed"
+   }
+  },
+  "sdf_sculpt_bench": {
+   "lookup_name": "sdf_sculpt_bench",
+   "scene": "res://commons/artifacts/sdf_sculpt_bench/sdf_sculpt_bench.tscn",
+   "class_name": "SdfSculptBench",
+   "name": "SDF Sculpt Bench (add a blob, subtract a blob)",
+   "description": "Union several blobs and subtract one, and the surface re-forms - modelling by editing the function, not the mesh.",
+   "category": "procedural",
+   "complexity": "beginner",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "proceduralgeneration"
+   ],
+   "tags": [
+    "procedural_generation",
+    "medium",
+    "sdf"
+   ],
+   "parameters": {
+    "emissive": "Bool"
+   },
+   "dev_themes": [
+    "procedural_generation",
+    "techniques"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 1,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
     },
-    "sdf_sculpt_bench": {
-      "lookup_name": "sdf_sculpt_bench",
-      "scene": "res://commons/artifacts/sdf_sculpt_bench/sdf_sculpt_bench.tscn",
-      "class_name": "SdfSculptBench",
-      "name": "SDF Sculpt Bench (add a blob, subtract a blob)",
-      "description": "Union several blobs and subtract one, and the surface re-forms - modelling by editing the function, not the mesh.",
-      "category": "procedural_generation",
-      "complexity": "beginner",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "proceduralgeneration"
-      ],
-      "tags": [
-        "procedural_generation",
-        "medium",
-        "sdf"
-      ],
-      "parameters": {
-        "emissive": "Bool"
-      },
-      "dev_themes": [
-        "procedural_generation",
-        "techniques"
-      ],
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 1,
-        "clearance": {
-          "front": 2,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "front",
-        "isolation": 1,
-        "cluster_with": [],
-        "preferred_zone": "any",
-        "measured_footprint_cells": 4,
-        "footprint_source": "designed"
-      }
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 4,
+    "footprint_source": "designed"
+   }
+  },
+  "sdf_cavern_room": {
+   "lookup_name": "sdf_cavern_room",
+   "scene": "res://commons/artifacts/sdf_cavern_room/sdf_cavern_room.tscn",
+   "class_name": "SdfCavernRoom",
+   "name": "SDF Cavern Room (carve the function, walk the hollow)",
+   "description": "A room-scale cavern carved by subtracting spheres from a solid field - walk the negative space the function leaves behind.",
+   "category": "procedural",
+   "complexity": "intermediate",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "proceduralgeneration"
+   ],
+   "tags": [
+    "procedural_generation",
+    "large",
+    "sdf"
+   ],
+   "parameters": {
+    "emissive": "Bool"
+   },
+   "dev_themes": [
+    "procedural_generation",
+    "techniques"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 9,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
     },
-    "sdf_cavern_room": {
-      "lookup_name": "sdf_cavern_room",
-      "scene": "res://commons/artifacts/sdf_cavern_room/sdf_cavern_room.tscn",
-      "class_name": "SdfCavernRoom",
-      "name": "SDF Cavern Room (carve the function, walk the hollow)",
-      "description": "A room-scale cavern carved by subtracting spheres from a solid field - walk the negative space the function leaves behind.",
-      "category": "procedural_generation",
-      "complexity": "intermediate",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "proceduralgeneration"
-      ],
-      "tags": [
-        "procedural_generation",
-        "large",
-        "sdf"
-      ],
-      "parameters": {
-        "emissive": "Bool"
-      },
-      "dev_themes": [
-        "procedural_generation",
-        "techniques"
-      ],
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 9,
-        "clearance": {
-          "front": 2,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "front",
-        "isolation": 1,
-        "cluster_with": [],
-        "preferred_zone": "any",
-        "measured_footprint_cells": 9,
-        "footprint_source": "designed"
-      }
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 9,
+    "footprint_source": "designed"
+   }
+  },
+  "wfc_tile_bench": {
+   "lookup_name": "wfc_tile_bench",
+   "scene": "res://commons/artifacts/wfc_tile_bench/wfc_tile_bench.tscn",
+   "class_name": "WfcTileBench",
+   "name": "WFC Tile Bench (the tiles agree)",
+   "description": "Wave function collapse on a bench grid: collapse the least-uncertain cell, propagate the constraints, and the tiles agree on a world none chose alone.",
+   "category": "procedural",
+   "complexity": "beginner",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "proceduralgeneration"
+   ],
+   "tags": [
+    "procedural_generation",
+    "medium",
+    "wave"
+   ],
+   "parameters": {
+    "emissive": "Bool"
+   },
+   "dev_themes": [
+    "procedural_generation",
+    "techniques"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 4,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
     },
-    "wfc_tile_bench": {
-      "lookup_name": "wfc_tile_bench",
-      "scene": "res://commons/artifacts/wfc_tile_bench/wfc_tile_bench.tscn",
-      "class_name": "WfcTileBench",
-      "name": "WFC Tile Bench (the tiles agree)",
-      "description": "Wave function collapse on a bench grid: collapse the least-uncertain cell, propagate the constraints, and the tiles agree on a world none chose alone.",
-      "category": "procedural_generation",
-      "complexity": "beginner",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "proceduralgeneration"
-      ],
-      "tags": [
-        "procedural_generation",
-        "medium",
-        "wave"
-      ],
-      "parameters": {
-        "emissive": "Bool"
-      },
-      "dev_themes": [
-        "procedural_generation",
-        "techniques"
-      ],
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 4,
-        "clearance": {
-          "front": 2,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "front",
-        "isolation": 1,
-        "cluster_with": [],
-        "preferred_zone": "any",
-        "measured_footprint_cells": 4,
-        "footprint_source": "designed"
-      }
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 4,
+    "footprint_source": "designed"
+   }
+  },
+  "wfc_room_bench": {
+   "lookup_name": "wfc_room_bench",
+   "scene": "res://commons/artifacts/wfc_room_bench/wfc_room_bench.tscn",
+   "class_name": "WfcRoomBench",
+   "name": "WFC Room Bench (a corridor meets a door)",
+   "description": "WFC with floor/wall/door tiles: a corridor meets a door meets a room because the adjacency rules forbid anything else.",
+   "category": "procedural",
+   "complexity": "beginner",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "proceduralgeneration"
+   ],
+   "tags": [
+    "procedural_generation",
+    "medium",
+    "wfc"
+   ],
+   "parameters": {
+    "emissive": "Bool"
+   },
+   "dev_themes": [
+    "procedural_generation",
+    "techniques"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 4,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
     },
-    "wfc_room_bench": {
-      "lookup_name": "wfc_room_bench",
-      "scene": "res://commons/artifacts/wfc_room_bench/wfc_room_bench.tscn",
-      "class_name": "WfcRoomBench",
-      "name": "WFC Room Bench (a corridor meets a door)",
-      "description": "WFC with floor/wall/door tiles: a corridor meets a door meets a room because the adjacency rules forbid anything else.",
-      "category": "procedural_generation",
-      "complexity": "beginner",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "proceduralgeneration"
-      ],
-      "tags": [
-        "procedural_generation",
-        "medium",
-        "wfc"
-      ],
-      "parameters": {
-        "emissive": "Bool"
-      },
-      "dev_themes": [
-        "procedural_generation",
-        "techniques"
-      ],
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 4,
-        "clearance": {
-          "front": 2,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "front",
-        "isolation": 1,
-        "cluster_with": [],
-        "preferred_zone": "any",
-        "measured_footprint_cells": 4,
-        "footprint_source": "designed"
-      }
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 4,
+    "footprint_source": "designed"
+   }
+  },
+  "wfc_dungeon_room": {
+   "lookup_name": "wfc_dungeon_room",
+   "scene": "res://commons/artifacts/wfc_dungeon_room/wfc_dungeon_room.tscn",
+   "class_name": "WfcDungeonRoom",
+   "name": "WFC Dungeon Room (architecture as constraint)",
+   "description": "A room-scale WFC dungeon - rooms and corridors satisfied into existence by adjacency alone. Architecture as a satisfied constraint.",
+   "category": "procedural",
+   "complexity": "intermediate",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "proceduralgeneration"
+   ],
+   "tags": [
+    "procedural_generation",
+    "large",
+    "wfc"
+   ],
+   "parameters": {
+    "emissive": "Bool"
+   },
+   "dev_themes": [
+    "procedural_generation",
+    "techniques"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 9,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
     },
-    "wfc_dungeon_room": {
-      "lookup_name": "wfc_dungeon_room",
-      "scene": "res://commons/artifacts/wfc_dungeon_room/wfc_dungeon_room.tscn",
-      "class_name": "WfcDungeonRoom",
-      "name": "WFC Dungeon Room (architecture as constraint)",
-      "description": "A room-scale WFC dungeon - rooms and corridors satisfied into existence by adjacency alone. Architecture as a satisfied constraint.",
-      "category": "procedural_generation",
-      "complexity": "intermediate",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "proceduralgeneration"
-      ],
-      "tags": [
-        "procedural_generation",
-        "large",
-        "wfc"
-      ],
-      "parameters": {
-        "emissive": "Bool"
-      },
-      "dev_themes": [
-        "procedural_generation",
-        "techniques"
-      ],
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 9,
-        "clearance": {
-          "front": 2,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "front",
-        "isolation": 1,
-        "cluster_with": [],
-        "preferred_zone": "any",
-        "measured_footprint_cells": 9,
-        "footprint_source": "designed"
-      }
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 9,
+    "footprint_source": "designed"
+   }
+  },
+  "bsp_toy": {
+   "lookup_name": "bsp_toy",
+   "scene": "res://commons/artifacts/bsp_toy/bsp_toy.tscn",
+   "class_name": "BspToy",
+   "name": "BSP Toy (cut in two, then cut each half)",
+   "description": "A held binary space partition: cut a square in two, then cut each half, until a blank box has become a warren of rooms.",
+   "category": "procedural",
+   "complexity": "beginner",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "proceduralgeneration"
+   ],
+   "tags": [
+    "procedural_generation",
+    "small",
+    "boolean"
+   ],
+   "parameters": {
+    "emissive": "Bool"
+   },
+   "dev_themes": [
+    "procedural_generation",
+    "techniques"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 2,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
     },
-    "bsp_toy": {
-      "lookup_name": "bsp_toy",
-      "scene": "res://commons/artifacts/bsp_toy/bsp_toy.tscn",
-      "class_name": "BspToy",
-      "name": "BSP Toy (cut in two, then cut each half)",
-      "description": "A held binary space partition: cut a square in two, then cut each half, until a blank box has become a warren of rooms.",
-      "category": "procedural_generation",
-      "complexity": "beginner",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "proceduralgeneration"
-      ],
-      "tags": [
-        "procedural_generation",
-        "small",
-        "boolean"
-      ],
-      "parameters": {
-        "emissive": "Bool"
-      },
-      "dev_themes": [
-        "procedural_generation",
-        "techniques"
-      ],
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 2,
-        "clearance": {
-          "front": 2,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "front",
-        "isolation": 1,
-        "cluster_with": [],
-        "preferred_zone": "any",
-        "measured_footprint_cells": 2,
-        "footprint_source": "designed"
-      }
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 2,
+    "footprint_source": "designed"
+   }
+  },
+  "bsp_bench": {
+   "lookup_name": "bsp_bench",
+   "scene": "res://commons/artifacts/bsp_bench/bsp_bench.tscn",
+   "class_name": "BspBench",
+   "name": "BSP Bench (subtraction becomes architecture)",
+   "description": "A floor plan from recursive binary partition - rooms linked by corridors, subtraction become architecture.",
+   "category": "procedural",
+   "complexity": "beginner",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "proceduralgeneration"
+   ],
+   "tags": [
+    "procedural_generation",
+    "medium",
+    "boolean"
+   ],
+   "parameters": {
+    "emissive": "Bool"
+   },
+   "dev_themes": [
+    "procedural_generation",
+    "techniques"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 4,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
     },
-    "bsp_bench": {
-      "lookup_name": "bsp_bench",
-      "scene": "res://commons/artifacts/bsp_bench/bsp_bench.tscn",
-      "class_name": "BspBench",
-      "name": "BSP Bench (subtraction becomes architecture)",
-      "description": "A floor plan from recursive binary partition - rooms linked by corridors, subtraction become architecture.",
-      "category": "procedural_generation",
-      "complexity": "beginner",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "proceduralgeneration"
-      ],
-      "tags": [
-        "procedural_generation",
-        "medium",
-        "boolean"
-      ],
-      "parameters": {
-        "emissive": "Bool"
-      },
-      "dev_themes": [
-        "procedural_generation",
-        "techniques"
-      ],
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 4,
-        "clearance": {
-          "front": 2,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "front",
-        "isolation": 1,
-        "cluster_with": [],
-        "preferred_zone": "any",
-        "measured_footprint_cells": 4,
-        "footprint_source": "designed"
-      }
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 4,
+    "footprint_source": "designed"
+   }
+  },
+  "bsp_floorplan_tool": {
+   "lookup_name": "bsp_floorplan_tool",
+   "scene": "res://commons/artifacts/bsp_floorplan_tool/bsp_floorplan_tool.tscn",
+   "class_name": "BspFloorplanTool",
+   "name": "BSP Floorplan Tool (a new plan on tap)",
+   "description": "A device that regenerates a BSP floor plan on demand - a fresh split tree, a fresh building, every few seconds.",
+   "category": "procedural",
+   "complexity": "intermediate",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "proceduralgeneration"
+   ],
+   "tags": [
+    "procedural_generation",
+    "applied",
+    "boolean"
+   ],
+   "parameters": {
+    "emissive": "Bool"
+   },
+   "dev_themes": [
+    "procedural_generation",
+    "techniques"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 4,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
     },
-    "bsp_floorplan_tool": {
-      "lookup_name": "bsp_floorplan_tool",
-      "scene": "res://commons/artifacts/bsp_floorplan_tool/bsp_floorplan_tool.tscn",
-      "class_name": "BspFloorplanTool",
-      "name": "BSP Floorplan Tool (a new plan on tap)",
-      "description": "A device that regenerates a BSP floor plan on demand - a fresh split tree, a fresh building, every few seconds.",
-      "category": "procedural_generation",
-      "complexity": "intermediate",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "proceduralgeneration"
-      ],
-      "tags": [
-        "procedural_generation",
-        "applied",
-        "boolean"
-      ],
-      "parameters": {
-        "emissive": "Bool"
-      },
-      "dev_themes": [
-        "procedural_generation",
-        "techniques"
-      ],
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 4,
-        "clearance": {
-          "front": 2,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "front",
-        "isolation": 1,
-        "cluster_with": [],
-        "preferred_zone": "any",
-        "measured_footprint_cells": 4,
-        "footprint_source": "designed"
-      }
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 4,
+    "footprint_source": "designed"
+   }
+  },
+  "colonization_bench": {
+   "lookup_name": "colonization_bench",
+   "scene": "res://commons/artifacts/colonization_bench/colonization_bench.tscn",
+   "class_name": "ColonizationBench",
+   "name": "Colonization Bench (branches grow toward food)",
+   "description": "The space-colonization algorithm: scatter attractors, grow branches toward the nearest, retire the reached - a tree that drew itself toward what it feeds on.",
+   "category": "procedural",
+   "complexity": "beginner",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "proceduralgeneration"
+   ],
+   "tags": [
+    "procedural_generation",
+    "medium",
+    "space"
+   ],
+   "parameters": {
+    "emissive": "Bool"
+   },
+   "dev_themes": [
+    "procedural_generation",
+    "techniques"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 4,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
     },
-    "colonization_bench": {
-      "lookup_name": "colonization_bench",
-      "scene": "res://commons/artifacts/colonization_bench/colonization_bench.tscn",
-      "class_name": "ColonizationBench",
-      "name": "Colonization Bench (branches grow toward food)",
-      "description": "The space-colonization algorithm: scatter attractors, grow branches toward the nearest, retire the reached - a tree that drew itself toward what it feeds on.",
-      "category": "procedural_generation",
-      "complexity": "beginner",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "proceduralgeneration"
-      ],
-      "tags": [
-        "procedural_generation",
-        "medium",
-        "space"
-      ],
-      "parameters": {
-        "emissive": "Bool"
-      },
-      "dev_themes": [
-        "procedural_generation",
-        "techniques"
-      ],
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 4,
-        "clearance": {
-          "front": 2,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "front",
-        "isolation": 1,
-        "cluster_with": [],
-        "preferred_zone": "any",
-        "measured_footprint_cells": 4,
-        "footprint_source": "designed"
-      }
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 4,
+    "footprint_source": "designed"
+   }
+  },
+  "colonization_room": {
+   "lookup_name": "colonization_room",
+   "scene": "res://commons/artifacts/colonization_room/colonization_room.tscn",
+   "class_name": "ColonizationRoom",
+   "name": "Colonization Room (a network reaching)",
+   "description": "A room-scale space-colonization network reaching through the air toward its scattered food.",
+   "category": "procedural",
+   "complexity": "intermediate",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "proceduralgeneration"
+   ],
+   "tags": [
+    "procedural_generation",
+    "large",
+    "space"
+   ],
+   "parameters": {
+    "emissive": "Bool"
+   },
+   "dev_themes": [
+    "procedural_generation",
+    "techniques"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 9,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
     },
-    "colonization_room": {
-      "lookup_name": "colonization_room",
-      "scene": "res://commons/artifacts/colonization_room/colonization_room.tscn",
-      "class_name": "ColonizationRoom",
-      "name": "Colonization Room (a network reaching)",
-      "description": "A room-scale space-colonization network reaching through the air toward its scattered food.",
-      "category": "procedural_generation",
-      "complexity": "intermediate",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "proceduralgeneration"
-      ],
-      "tags": [
-        "procedural_generation",
-        "large",
-        "space"
-      ],
-      "parameters": {
-        "emissive": "Bool"
-      },
-      "dev_themes": [
-        "procedural_generation",
-        "techniques"
-      ],
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 9,
-        "clearance": {
-          "front": 2,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "front",
-        "isolation": 1,
-        "cluster_with": [],
-        "preferred_zone": "any",
-        "measured_footprint_cells": 9,
-        "footprint_source": "designed"
-      }
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 9,
+    "footprint_source": "designed"
+   }
+  },
+  "colonization_grower": {
+   "lookup_name": "colonization_grower",
+   "scene": "res://commons/artifacts/colonization_grower/colonization_grower.tscn",
+   "class_name": "ColonizationGrower",
+   "name": "Colonization Grower (watch it reach)",
+   "description": "A device growing a space-colonization structure live, node by node, then reseeding the food and growing again.",
+   "category": "procedural",
+   "complexity": "intermediate",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "proceduralgeneration"
+   ],
+   "tags": [
+    "procedural_generation",
+    "applied",
+    "space"
+   ],
+   "parameters": {
+    "emissive": "Bool"
+   },
+   "dev_themes": [
+    "procedural_generation",
+    "techniques"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 4,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
     },
-    "colonization_grower": {
-      "lookup_name": "colonization_grower",
-      "scene": "res://commons/artifacts/colonization_grower/colonization_grower.tscn",
-      "class_name": "ColonizationGrower",
-      "name": "Colonization Grower (watch it reach)",
-      "description": "A device growing a space-colonization structure live, node by node, then reseeding the food and growing again.",
-      "category": "procedural_generation",
-      "complexity": "intermediate",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "proceduralgeneration"
-      ],
-      "tags": [
-        "procedural_generation",
-        "applied",
-        "space"
-      ],
-      "parameters": {
-        "emissive": "Bool"
-      },
-      "dev_themes": [
-        "procedural_generation",
-        "techniques"
-      ],
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 4,
-        "clearance": {
-          "front": 2,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "front",
-        "isolation": 1,
-        "cluster_with": [],
-        "preferred_zone": "any",
-        "measured_footprint_cells": 4,
-        "footprint_source": "designed"
-      }
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 4,
+    "footprint_source": "designed"
+   }
+  },
+  "genome_toy": {
+   "lookup_name": "genome_toy",
+   "scene": "res://commons/artifacts/genome_toy/genome_toy.tscn",
+   "class_name": "GenomeToy",
+   "name": "Genome Toy (a body is a short string)",
+   "description": "A held creature decoded from a short gene vector - a body is just a short string read aloud.",
+   "category": "procedural",
+   "complexity": "beginner",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "proceduralgeneration"
+   ],
+   "tags": [
+    "procedural_generation",
+    "small",
+    "genetic"
+   ],
+   "parameters": {
+    "emissive": "Bool"
+   },
+   "dev_themes": [
+    "procedural_generation",
+    "techniques"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 2,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
     },
-    "genome_toy": {
-      "lookup_name": "genome_toy",
-      "scene": "res://commons/artifacts/genome_toy/genome_toy.tscn",
-      "class_name": "GenomeToy",
-      "name": "Genome Toy (a body is a short string)",
-      "description": "A held creature decoded from a short gene vector - a body is just a short string read aloud.",
-      "category": "procedural_generation",
-      "complexity": "beginner",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "proceduralgeneration"
-      ],
-      "tags": [
-        "procedural_generation",
-        "small",
-        "genetic"
-      ],
-      "parameters": {
-        "emissive": "Bool"
-      },
-      "dev_themes": [
-        "procedural_generation",
-        "techniques"
-      ],
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 2,
-        "clearance": {
-          "front": 2,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "front",
-        "isolation": 1,
-        "cluster_with": [],
-        "preferred_zone": "any",
-        "measured_footprint_cells": 2,
-        "footprint_source": "designed"
-      }
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 2,
+    "footprint_source": "designed"
+   }
+  },
+  "genetic_bench": {
+   "lookup_name": "genetic_bench",
+   "scene": "res://commons/artifacts/genetic_bench/genetic_bench.tscn",
+   "class_name": "GeneticBench",
+   "name": "Genetic Bench (variation and selection)",
+   "description": "A population of forms scored by fitness, the fittest glowing - variation and selection make shapes you never drew.",
+   "category": "procedural",
+   "complexity": "beginner",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "proceduralgeneration"
+   ],
+   "tags": [
+    "procedural_generation",
+    "medium",
+    "genetic"
+   ],
+   "parameters": {
+    "emissive": "Bool"
+   },
+   "dev_themes": [
+    "procedural_generation",
+    "techniques"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 4,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
     },
-    "genetic_bench": {
-      "lookup_name": "genetic_bench",
-      "scene": "res://commons/artifacts/genetic_bench/genetic_bench.tscn",
-      "class_name": "GeneticBench",
-      "name": "Genetic Bench (variation and selection)",
-      "description": "A population of forms scored by fitness, the fittest glowing - variation and selection make shapes you never drew.",
-      "category": "procedural_generation",
-      "complexity": "beginner",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "proceduralgeneration"
-      ],
-      "tags": [
-        "procedural_generation",
-        "medium",
-        "genetic"
-      ],
-      "parameters": {
-        "emissive": "Bool"
-      },
-      "dev_themes": [
-        "procedural_generation",
-        "techniques"
-      ],
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 4,
-        "clearance": {
-          "front": 2,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "front",
-        "isolation": 1,
-        "cluster_with": [],
-        "preferred_zone": "any",
-        "measured_footprint_cells": 4,
-        "footprint_source": "designed"
-      }
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 4,
+    "footprint_source": "designed"
+   }
+  },
+  "genetic_breeder": {
+   "lookup_name": "genetic_breeder",
+   "scene": "res://commons/artifacts/genetic_breeder/genetic_breeder.tscn",
+   "class_name": "GeneticBreeder",
+   "name": "Genetic Breeder (evolution on tap)",
+   "description": "A breeder that evolves forms toward a fitness over generations - select the best, cross and mutate, and watch the fitness climb.",
+   "category": "procedural",
+   "complexity": "intermediate",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "proceduralgeneration"
+   ],
+   "tags": [
+    "procedural_generation",
+    "applied",
+    "genetic"
+   ],
+   "parameters": {
+    "emissive": "Bool"
+   },
+   "dev_themes": [
+    "procedural_generation",
+    "techniques"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 4,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
     },
-    "genetic_breeder": {
-      "lookup_name": "genetic_breeder",
-      "scene": "res://commons/artifacts/genetic_breeder/genetic_breeder.tscn",
-      "class_name": "GeneticBreeder",
-      "name": "Genetic Breeder (evolution on tap)",
-      "description": "A breeder that evolves forms toward a fitness over generations - select the best, cross and mutate, and watch the fitness climb.",
-      "category": "procedural_generation",
-      "complexity": "intermediate",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "proceduralgeneration"
-      ],
-      "tags": [
-        "procedural_generation",
-        "applied",
-        "genetic"
-      ],
-      "parameters": {
-        "emissive": "Bool"
-      },
-      "dev_themes": [
-        "procedural_generation",
-        "techniques"
-      ],
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 4,
-        "clearance": {
-          "front": 2,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "front",
-        "isolation": 1,
-        "cluster_with": [],
-        "preferred_zone": "any",
-        "measured_footprint_cells": 4,
-        "footprint_source": "designed"
-      }
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 4,
+    "footprint_source": "designed"
+   }
+  },
+  "slime_toy": {
+   "lookup_name": "slime_toy",
+   "scene": "res://commons/artifacts/slime_toy/slime_toy.tscn",
+   "class_name": "SlimeToy",
+   "name": "Slime Toy (stick where you land)",
+   "description": "A held diffusion-limited aggregate: walkers random-walk until they touch the cluster and freeze - a frost that grew from pure chance.",
+   "category": "procedural",
+   "complexity": "beginner",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "proceduralgeneration"
+   ],
+   "tags": [
+    "procedural_generation",
+    "small",
+    "slime,"
+   ],
+   "parameters": {
+    "emissive": "Bool"
+   },
+   "dev_themes": [
+    "procedural_generation",
+    "techniques"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 2,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
     },
-    "slime_toy": {
-      "lookup_name": "slime_toy",
-      "scene": "res://commons/artifacts/slime_toy/slime_toy.tscn",
-      "class_name": "SlimeToy",
-      "name": "Slime Toy (stick where you land)",
-      "description": "A held diffusion-limited aggregate: walkers random-walk until they touch the cluster and freeze - a frost that grew from pure chance.",
-      "category": "procedural_generation",
-      "complexity": "beginner",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "proceduralgeneration"
-      ],
-      "tags": [
-        "procedural_generation",
-        "small",
-        "slime,"
-      ],
-      "parameters": {
-        "emissive": "Bool"
-      },
-      "dev_themes": [
-        "procedural_generation",
-        "techniques"
-      ],
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 2,
-        "clearance": {
-          "front": 2,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "front",
-        "isolation": 1,
-        "cluster_with": [],
-        "preferred_zone": "any",
-        "measured_footprint_cells": 2,
-        "footprint_source": "designed"
-      }
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 2,
+    "footprint_source": "designed"
+   }
+  },
+  "slime_bench": {
+   "lookup_name": "slime_bench",
+   "scene": "res://commons/artifacts/slime_bench/slime_bench.tscn",
+   "class_name": "SlimeBench",
+   "name": "Slime Bench (follow your own trail)",
+   "description": "A Physarum slime network: agents sense and follow their own trail, and a transport network self-organises from nothing but local rules.",
+   "category": "procedural",
+   "complexity": "beginner",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "proceduralgeneration"
+   ],
+   "tags": [
+    "procedural_generation",
+    "medium",
+    "slime,"
+   ],
+   "parameters": {
+    "emissive": "Bool"
+   },
+   "dev_themes": [
+    "procedural_generation",
+    "techniques"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 1,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
     },
-    "slime_bench": {
-      "lookup_name": "slime_bench",
-      "scene": "res://commons/artifacts/slime_bench/slime_bench.tscn",
-      "class_name": "SlimeBench",
-      "name": "Slime Bench (follow your own trail)",
-      "description": "A Physarum slime network: agents sense and follow their own trail, and a transport network self-organises from nothing but local rules.",
-      "category": "procedural_generation",
-      "complexity": "beginner",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "proceduralgeneration"
-      ],
-      "tags": [
-        "procedural_generation",
-        "medium",
-        "slime,"
-      ],
-      "parameters": {
-        "emissive": "Bool"
-      },
-      "dev_themes": [
-        "procedural_generation",
-        "techniques"
-      ],
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 1,
-        "clearance": {
-          "front": 2,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "front",
-        "isolation": 1,
-        "cluster_with": [],
-        "preferred_zone": "any",
-        "measured_footprint_cells": 4,
-        "footprint_source": "designed"
-      }
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 4,
+    "footprint_source": "designed"
+   }
+  },
+  "slime_farm": {
+   "lookup_name": "slime_farm",
+   "scene": "res://commons/artifacts/slime_farm/slime_farm.tscn",
+   "class_name": "SlimeFarm",
+   "name": "Slime Farm (a network growing)",
+   "description": "A device growing a slime/aggregation network live - particles accreting into a branching web, then reset and regrown.",
+   "category": "procedural",
+   "complexity": "intermediate",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "proceduralgeneration"
+   ],
+   "tags": [
+    "procedural_generation",
+    "applied",
+    "slime,"
+   ],
+   "parameters": {
+    "emissive": "Bool"
+   },
+   "dev_themes": [
+    "procedural_generation",
+    "techniques"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 4,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
     },
-    "slime_farm": {
-      "lookup_name": "slime_farm",
-      "scene": "res://commons/artifacts/slime_farm/slime_farm.tscn",
-      "class_name": "SlimeFarm",
-      "name": "Slime Farm (a network growing)",
-      "description": "A device growing a slime/aggregation network live - particles accreting into a branching web, then reset and regrown.",
-      "category": "procedural_generation",
-      "complexity": "intermediate",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "proceduralgeneration"
-      ],
-      "tags": [
-        "procedural_generation",
-        "applied",
-        "slime,"
-      ],
-      "parameters": {
-        "emissive": "Bool"
-      },
-      "dev_themes": [
-        "procedural_generation",
-        "techniques"
-      ],
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 4,
-        "clearance": {
-          "front": 2,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "front",
-        "isolation": 1,
-        "cluster_with": [],
-        "preferred_zone": "any",
-        "measured_footprint_cells": 4,
-        "footprint_source": "designed"
-      }
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 4,
+    "footprint_source": "designed"
+   }
+  },
+  "voronoi_bench": {
+   "lookup_name": "voronoi_bench",
+   "scene": "res://commons/artifacts/voronoi_bench/voronoi_bench.tscn",
+   "class_name": "VoronoiBench",
+   "name": "Voronoi Bench (claim the nearest)",
+   "description": "Every cell colored by its nearest site - Voronoi territories, how cracked mud and a giraffe's coat partition a plane.",
+   "category": "procedural",
+   "complexity": "beginner",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "proceduralgeneration"
+   ],
+   "tags": [
+    "procedural_generation",
+    "medium",
+    "voronoi"
+   ],
+   "parameters": {
+    "emissive": "Bool"
+   },
+   "dev_themes": [
+    "procedural_generation",
+    "techniques"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 1,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
     },
-    "voronoi_bench": {
-      "lookup_name": "voronoi_bench",
-      "scene": "res://commons/artifacts/voronoi_bench/voronoi_bench.tscn",
-      "class_name": "VoronoiBench",
-      "name": "Voronoi Bench (claim the nearest)",
-      "description": "Every cell colored by its nearest site - Voronoi territories, how cracked mud and a giraffe's coat partition a plane.",
-      "category": "procedural_generation",
-      "complexity": "beginner",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "proceduralgeneration"
-      ],
-      "tags": [
-        "procedural_generation",
-        "medium",
-        "voronoi"
-      ],
-      "parameters": {
-        "emissive": "Bool"
-      },
-      "dev_themes": [
-        "procedural_generation",
-        "techniques"
-      ],
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 1,
-        "clearance": {
-          "front": 2,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "front",
-        "isolation": 1,
-        "cluster_with": [],
-        "preferred_zone": "any",
-        "measured_footprint_cells": 4,
-        "footprint_source": "designed"
-      }
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 4,
+    "footprint_source": "designed"
+   }
+  },
+  "voronoi_shatter_tool": {
+   "lookup_name": "voronoi_shatter_tool",
+   "scene": "res://commons/artifacts/voronoi_shatter_tool/voronoi_shatter_tool.tscn",
+   "class_name": "VoronoiShatterTool",
+   "name": "Voronoi Shatter Tool (fracture on demand)",
+   "description": "A device that shatters a slab into Voronoi cells and re-shatters with new sites - fracture as a partition.",
+   "category": "procedural",
+   "complexity": "intermediate",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "proceduralgeneration"
+   ],
+   "tags": [
+    "procedural_generation",
+    "applied",
+    "voronoi"
+   ],
+   "parameters": {
+    "emissive": "Bool"
+   },
+   "dev_themes": [
+    "procedural_generation",
+    "techniques"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 4,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
     },
-    "voronoi_shatter_tool": {
-      "lookup_name": "voronoi_shatter_tool",
-      "scene": "res://commons/artifacts/voronoi_shatter_tool/voronoi_shatter_tool.tscn",
-      "class_name": "VoronoiShatterTool",
-      "name": "Voronoi Shatter Tool (fracture on demand)",
-      "description": "A device that shatters a slab into Voronoi cells and re-shatters with new sites - fracture as a partition.",
-      "category": "procedural_generation",
-      "complexity": "intermediate",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "proceduralgeneration"
-      ],
-      "tags": [
-        "procedural_generation",
-        "applied",
-        "voronoi"
-      ],
-      "parameters": {
-        "emissive": "Bool"
-      },
-      "dev_themes": [
-        "procedural_generation",
-        "techniques"
-      ],
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 4,
-        "clearance": {
-          "front": 2,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "front",
-        "isolation": 1,
-        "cluster_with": [],
-        "preferred_zone": "any",
-        "measured_footprint_cells": 4,
-        "footprint_source": "designed"
-      }
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 4,
+    "footprint_source": "designed"
+   }
+  },
+  "markov_generator": {
+   "lookup_name": "markov_generator",
+   "scene": "res://commons/artifacts/markov_generator/markov_generator.tscn",
+   "class_name": "MarkovGenerator",
+   "name": "Markov Generator (what usually follows)",
+   "description": "A device generating a sequence from a Markov chain - what comes next depends only on where you are.",
+   "category": "procedural",
+   "complexity": "intermediate",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "proceduralgeneration"
+   ],
+   "tags": [
+    "procedural_generation",
+    "applied",
+    "markov"
+   ],
+   "parameters": {
+    "emissive": "Bool"
+   },
+   "dev_themes": [
+    "procedural_generation",
+    "techniques"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 4,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
     },
-    "markov_generator": {
-      "lookup_name": "markov_generator",
-      "scene": "res://commons/artifacts/markov_generator/markov_generator.tscn",
-      "class_name": "MarkovGenerator",
-      "name": "Markov Generator (what usually follows)",
-      "description": "A device generating a sequence from a Markov chain - what comes next depends only on where you are.",
-      "category": "procedural_generation",
-      "complexity": "intermediate",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "proceduralgeneration"
-      ],
-      "tags": [
-        "procedural_generation",
-        "applied",
-        "markov"
-      ],
-      "parameters": {
-        "emissive": "Bool"
-      },
-      "dev_themes": [
-        "procedural_generation",
-        "techniques"
-      ],
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 4,
-        "clearance": {
-          "front": 2,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "front",
-        "isolation": 1,
-        "cluster_with": [],
-        "preferred_zone": "any",
-        "measured_footprint_cells": 4,
-        "footprint_source": "designed"
-      }
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 4,
+    "footprint_source": "designed"
+   }
+  },
+  "mesh_grammar_bench": {
+   "lookup_name": "mesh_grammar_bench",
+   "scene": "res://commons/artifacts/mesh_grammar_bench/mesh_grammar_bench.tscn",
+   "class_name": "MeshGrammarBench",
+   "name": "Mesh Grammar Bench (a mesh grows barnacles)",
+   "description": "Start with a box, apply a rule, apply it again - extrude, inset, split - and a plain mesh grows barnacles, coral, towers.",
+   "category": "procedural",
+   "complexity": "beginner",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "proceduralgeneration"
+   ],
+   "tags": [
+    "procedural_generation",
+    "medium",
+    "mesh"
+   ],
+   "parameters": {
+    "emissive": "Bool"
+   },
+   "dev_themes": [
+    "procedural_generation",
+    "techniques"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 4,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
     },
-    "mesh_grammar_bench": {
-      "lookup_name": "mesh_grammar_bench",
-      "scene": "res://commons/artifacts/mesh_grammar_bench/mesh_grammar_bench.tscn",
-      "class_name": "MeshGrammarBench",
-      "name": "Mesh Grammar Bench (a mesh grows barnacles)",
-      "description": "Start with a box, apply a rule, apply it again - extrude, inset, split - and a plain mesh grows barnacles, coral, towers.",
-      "category": "procedural_generation",
-      "complexity": "beginner",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "proceduralgeneration"
-      ],
-      "tags": [
-        "procedural_generation",
-        "medium",
-        "mesh"
-      ],
-      "parameters": {
-        "emissive": "Bool"
-      },
-      "dev_themes": [
-        "procedural_generation",
-        "techniques"
-      ],
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 4,
-        "clearance": {
-          "front": 2,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "front",
-        "isolation": 1,
-        "cluster_with": [],
-        "preferred_zone": "any",
-        "measured_footprint_cells": 4,
-        "footprint_source": "designed"
-      }
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 4,
+    "footprint_source": "designed"
+   }
+  },
+  "mesh_grammar_room": {
+   "lookup_name": "mesh_grammar_room",
+   "scene": "res://commons/artifacts/mesh_grammar_room/mesh_grammar_room.tscn",
+   "class_name": "MeshGrammarRoom",
+   "name": "Mesh Grammar Room (a tower grown by rule)",
+   "description": "A room-scale structure grown by shape-grammar rules - a building that assembled itself from extrude, inset, and split.",
+   "category": "procedural",
+   "complexity": "intermediate",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "proceduralgeneration"
+   ],
+   "tags": [
+    "procedural_generation",
+    "large",
+    "mesh"
+   ],
+   "parameters": {
+    "emissive": "Bool"
+   },
+   "dev_themes": [
+    "procedural_generation",
+    "techniques"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 9,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
     },
-    "mesh_grammar_room": {
-      "lookup_name": "mesh_grammar_room",
-      "scene": "res://commons/artifacts/mesh_grammar_room/mesh_grammar_room.tscn",
-      "class_name": "MeshGrammarRoom",
-      "name": "Mesh Grammar Room (a tower grown by rule)",
-      "description": "A room-scale structure grown by shape-grammar rules - a building that assembled itself from extrude, inset, and split.",
-      "category": "procedural_generation",
-      "complexity": "intermediate",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "proceduralgeneration"
-      ],
-      "tags": [
-        "procedural_generation",
-        "large",
-        "mesh"
-      ],
-      "parameters": {
-        "emissive": "Bool"
-      },
-      "dev_themes": [
-        "procedural_generation",
-        "techniques"
-      ],
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 9,
-        "clearance": {
-          "front": 2,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "front",
-        "isolation": 1,
-        "cluster_with": [],
-        "preferred_zone": "any",
-        "measured_footprint_cells": 9,
-        "footprint_source": "designed"
-      }
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 9,
+    "footprint_source": "designed"
+   }
+  },
+  "tiling_bench": {
+   "lookup_name": "tiling_bench",
+   "scene": "res://commons/artifacts/tiling_bench/tiling_bench.tscn",
+   "class_name": "TilingBench",
+   "name": "Tiling Bench (tiles that lock by rule)",
+   "description": "A Truchet tiling: randomly-rotated tiles whose arcs connect into continuous winding paths - a pattern no one drew.",
+   "category": "procedural",
+   "complexity": "beginner",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "proceduralgeneration"
+   ],
+   "tags": [
+    "procedural_generation",
+    "medium",
+    "tilings"
+   ],
+   "parameters": {
+    "emissive": "Bool"
+   },
+   "dev_themes": [
+    "procedural_generation",
+    "techniques"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 9,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
     },
-    "tiling_bench": {
-      "lookup_name": "tiling_bench",
-      "scene": "res://commons/artifacts/tiling_bench/tiling_bench.tscn",
-      "class_name": "TilingBench",
-      "name": "Tiling Bench (tiles that lock by rule)",
-      "description": "A Truchet tiling: randomly-rotated tiles whose arcs connect into continuous winding paths - a pattern no one drew.",
-      "category": "procedural_generation",
-      "complexity": "beginner",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "proceduralgeneration"
-      ],
-      "tags": [
-        "procedural_generation",
-        "medium",
-        "tilings"
-      ],
-      "parameters": {
-        "emissive": "Bool"
-      },
-      "dev_themes": [
-        "procedural_generation",
-        "techniques"
-      ],
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 9,
-        "clearance": {
-          "front": 2,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "front",
-        "isolation": 1,
-        "cluster_with": [],
-        "preferred_zone": "any",
-        "measured_footprint_cells": 4,
-        "footprint_source": "designed"
-      }
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 4,
+    "footprint_source": "designed"
+   }
+  },
+  "tesseract_bench": {
+   "lookup_name": "tesseract_bench",
+   "scene": "res://commons/artifacts/tesseract_bench/tesseract_bench.tscn",
+   "class_name": "TesseractBench",
+   "name": "Tesseract Bench (a shadow from 4D)",
+   "description": "A tesseract rotating in four dimensions and projected down - the shadow of a cube cast from a space you can't stand inside.",
+   "category": "procedural",
+   "complexity": "beginner",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "proceduralgeneration"
+   ],
+   "tags": [
+    "procedural_generation",
+    "medium",
+    "higher-dimensional"
+   ],
+   "parameters": {
+    "emissive": "Bool"
+   },
+   "dev_themes": [
+    "procedural_generation",
+    "techniques"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 4,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
     },
-    "tesseract_bench": {
-      "lookup_name": "tesseract_bench",
-      "scene": "res://commons/artifacts/tesseract_bench/tesseract_bench.tscn",
-      "class_name": "TesseractBench",
-      "name": "Tesseract Bench (a shadow from 4D)",
-      "description": "A tesseract rotating in four dimensions and projected down - the shadow of a cube cast from a space you can't stand inside.",
-      "category": "procedural_generation",
-      "complexity": "beginner",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "proceduralgeneration"
-      ],
-      "tags": [
-        "procedural_generation",
-        "medium",
-        "higher-dimensional"
-      ],
-      "parameters": {
-        "emissive": "Bool"
-      },
-      "dev_themes": [
-        "procedural_generation",
-        "techniques"
-      ],
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 4,
-        "clearance": {
-          "front": 2,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "front",
-        "isolation": 1,
-        "cluster_with": [],
-        "preferred_zone": "any",
-        "measured_footprint_cells": 4,
-        "footprint_source": "designed"
-      }
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 4,
+    "footprint_source": "designed"
+   }
+  },
+  "terrain_world_generator": {
+   "lookup_name": "terrain_world_generator",
+   "scene": "res://commons/artifacts/terrain_world_generator/terrain_world_generator.tscn",
+   "class_name": "TerrainWorldGenerator",
+   "name": "Terrain World Generator (a world from a few numbers)",
+   "description": "A device that meshes a terrain world live from a noise heightfield - height-banded land regenerated from a new seed every few seconds.",
+   "category": "procedural",
+   "complexity": "intermediate",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "proceduralgeneration"
+   ],
+   "tags": [
+    "procedural_generation",
+    "applied",
+    "generated"
+   ],
+   "parameters": {
+    "emissive": "Bool"
+   },
+   "dev_themes": [
+    "procedural_generation",
+    "techniques"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 4,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
     },
-    "terrain_world_generator": {
-      "lookup_name": "terrain_world_generator",
-      "scene": "res://commons/artifacts/terrain_world_generator/terrain_world_generator.tscn",
-      "class_name": "TerrainWorldGenerator",
-      "name": "Terrain World Generator (a world from a few numbers)",
-      "description": "A device that meshes a terrain world live from a noise heightfield - height-banded land regenerated from a new seed every few seconds.",
-      "category": "procedural_generation",
-      "complexity": "intermediate",
-      "include_in_map_data": true,
-      "map_ready": true,
-      "map_sequences": [
-        "proceduralgeneration"
-      ],
-      "tags": [
-        "procedural_generation",
-        "applied",
-        "generated"
-      ],
-      "parameters": {
-        "emissive": "Bool"
-      },
-      "dev_themes": [
-        "procedural_generation",
-        "techniques"
-      ],
-      "spatial_needs": {
-        "platform": "none",
-        "footprint_cells": 4,
-        "clearance": {
-          "front": 2,
-          "back": 1,
-          "left": 1,
-          "right": 1
-        },
-        "player_position": "front",
-        "wall_backing": false,
-        "orientation": "front",
-        "isolation": 1,
-        "cluster_with": [],
-        "preferred_zone": "any",
-        "measured_footprint_cells": 4,
-        "footprint_source": "designed"
-      }
-    },
-    "seed_world": {
-      "category": "proceduralgeneration",
-      "complexity": "intermediate",
-      "description": "The procedural-generation seam. An open world promises infinite variety; the truth is a finite formula fed one number. Nothing is stored - not the mountains, not the coastline - only the seed and the recipe. Walk away and the terrain is freed from memory; walk back and it rebuilds bit-for-bit from the same seed. Two visits to one seed, drawn identical, because they are not two worlds but one number run twice.",
-      "dev_themes": [
-        "digital_bias",
-        "seam"
-      ],
-      "include_in_map_data": true,
-      "interaction": "ambient",
-      "lookup_name": "seed_world",
-      "map_ready": true,
-      "map_sequences": [
-        "proceduralgeneration"
-      ],
-      "name": "Seed World",
-      "qfep_connection": "A station in the bias landscape (doc/SEAM_PER_SEQUENCE.md); the digital-bias seam for proceduralgeneration. Bias is conserved; show the seam.",
-      "scene": "res://algorithms/proceduralgeneration/seed_world/seed_world.tscn",
-      "sequence": "proceduralgeneration",
-      "tags": [
-        "procgen",
-        "seed",
-        "determinism",
-        "compression",
-        "on_demand",
-        "seam",
-        "digital_bias"
-      ]
-    }
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "front",
+    "isolation": 1,
+    "cluster_with": [],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 4,
+    "footprint_source": "designed"
+   }
+  },
+  "seed_world": {
+   "category": "procedural",
+   "complexity": "intermediate",
+   "description": "The procedural-generation seam. An open world promises infinite variety; the truth is a finite formula fed one number. Nothing is stored - not the mountains, not the coastline - only the seed and the recipe. Walk away and the terrain is freed from memory; walk back and it rebuilds bit-for-bit from the same seed. Two visits to one seed, drawn identical, because they are not two worlds but one number run twice.",
+   "dev_themes": [
+    "digital_bias",
+    "seam"
+   ],
+   "include_in_map_data": true,
+   "interaction": "ambient",
+   "lookup_name": "seed_world",
+   "map_ready": true,
+   "map_sequences": [
+    "proceduralgeneration"
+   ],
+   "name": "Seed World",
+   "qfep_connection": "A station in the bias landscape (doc/SEAM_PER_SEQUENCE.md); the digital-bias seam for proceduralgeneration. Bias is conserved; show the seam.",
+   "scene": "res://algorithms/proceduralgeneration/seed_world/seed_world.tscn",
+   "sequence": "proceduralgeneration",
+   "tags": [
+    "procgen",
+    "seed",
+    "determinism",
+    "compression",
+    "on_demand",
+    "seam",
+    "digital_bias"
+   ]
   }
+ }
 }

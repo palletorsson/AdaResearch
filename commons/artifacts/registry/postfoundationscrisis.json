@@ -1,428 +1,428 @@
 {
-	"artifacts": {
-		"ethical_design_clipboard": {
-			"name": "Ethical Design Clipboard",
-			"lookup_name": "ethical_design_clipboard",
-			"description": "Clipboard on a stand with three toggleable ethical design moves. The toggles shift the room around the clipboard.",
-			"scene": "res://algorithms/postfoundationscrisis/ethical_design_clipboard.tscn",
-			"category": "postfoundationscrisis",
-			"sequence": "postfoundationscrisis",
-			"artifact_type": "postfoundationscrisis",
-			"qfep_term": "Edge",
-			"capacity": "PRINCIPLE as shape",
-			"dev_themes": [
-				"postfoundationscrisis",
-				"sieve_2026_05_13"
-			],
-			"dev_category": "postfoundationscrisis",
-			"complexity": "intermediate",
-			"tags": [
-				"ethics",
-				"applied",
-				"architecture"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"postfoundationscrisis"
-			],
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			}
-		},
-		"excluded_class_visualizer": {
-			"name": "Excluded Class Visualizer",
-			"lookup_name": "excluded_class_visualizer",
-			"description": "Two clusters separated by a classifier boundary, plus a third red cluster ON the boundary. Bias as visible structural incompleteness.",
-			"scene": "res://algorithms/postfoundationscrisis/excluded_class_visualizer.tscn",
-			"category": "postfoundationscrisis",
-			"sequence": "postfoundationscrisis",
-			"artifact_type": "postfoundationscrisis",
-			"qfep_term": "Edge",
-			"capacity": "SEE what the model misses",
-			"dev_themes": [
-				"postfoundationscrisis",
-				"sieve_2026_05_13"
-			],
-			"dev_category": "postfoundationscrisis",
-			"complexity": "intermediate",
-			"tags": [
-				"bias",
-				"classifier",
-				"applied",
-				"incompleteness"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"postfoundationscrisis"
-			],
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			}
-		},
-		"room_shape_demonstrator": {
-			"name": "Room Shape Demonstrator",
-			"lookup_name": "room_shape_demonstrator",
-			"description": "Two scale-model rooms on pedestals: centralized vs distributed seating. Furniture layout as moral object.",
-			"scene": "res://algorithms/postfoundationscrisis/room_shape_demonstrator.tscn",
-			"category": "postfoundationscrisis",
-			"sequence": "postfoundationscrisis",
-			"artifact_type": "postfoundationscrisis",
-			"qfep_term": "Edge",
-			"capacity": "SHAPE is policy",
-			"dev_themes": [
-				"postfoundationscrisis",
-				"sieve_2026_05_13"
-			],
-			"dev_category": "postfoundationscrisis",
-			"complexity": "intermediate",
-			"tags": [
-				"architecture",
-				"ethics",
-				"spatial_politics"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"postfoundationscrisis"
-			],
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "mixed"
-			}
-		},
-		"merge_conflict_visualizer": {
-			"name": "Merge Conflict Visualizer",
-			"lookup_name": "merge_conflict_visualizer",
-			"description": "Two intersecting pillars (branch A, branch B) meeting at a glowing junction. Paraconsistent logic as architecture.",
-			"scene": "res://algorithms/postfoundationscrisis/merge_conflict_visualizer.tscn",
-			"category": "postfoundationscrisis",
-			"sequence": "postfoundationscrisis",
-			"artifact_type": "postfoundationscrisis",
-			"qfep_term": "Edge",
-			"capacity": "HOLD both branches",
-			"dev_themes": [
-				"postfoundationscrisis",
-				"sieve_2026_05_13"
-			],
-			"dev_category": "postfoundationscrisis",
-			"complexity": "intermediate",
-			"tags": [
-				"paraconsistent",
-				"merge_conflict",
-				"applied"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"postfoundationscrisis"
-			],
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			}
-		},
-		"cap_theorem_walk": {
-			"name": "CAP Theorem Walk",
-			"lookup_name": "cap_theorem_walk",
-			"description": "Three pillars in a triangle. A slow rotation lights two at a time. The CAP trade-off cycle made visible.",
-			"scene": "res://algorithms/postfoundationscrisis/cap_theorem_walk.tscn",
-			"category": "postfoundationscrisis",
-			"sequence": "postfoundationscrisis",
-			"artifact_type": "postfoundationscrisis",
-			"qfep_term": "Edge",
-			"capacity": "WALK the trade space",
-			"dev_themes": [
-				"postfoundationscrisis",
-				"sieve_2026_05_13"
-			],
-			"dev_category": "postfoundationscrisis",
-			"complexity": "intermediate",
-			"tags": [
-				"cap_theorem",
-				"distributed_systems",
-				"applied"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"postfoundationscrisis"
-			],
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			}
-		},
-		"florensky_in_production": {
-			"name": "Florensky in Production",
-			"lookup_name": "florensky_in_production",
-			"description": "Rotating triptych with three views of the same sphere: solid, hollow, both at once. Paraconsistent symbol made production-ready.",
-			"scene": "res://algorithms/postfoundationscrisis/florensky_in_production.tscn",
-			"category": "postfoundationscrisis",
-			"sequence": "postfoundationscrisis",
-			"artifact_type": "postfoundationscrisis",
-			"qfep_term": "Edge",
-			"capacity": "HOLD without resolve",
-			"dev_themes": [
-				"postfoundationscrisis",
-				"sieve_2026_05_13"
-			],
-			"dev_category": "postfoundationscrisis",
-			"complexity": "intermediate",
-			"tags": [
-				"paraconsistent",
-				"florensky",
-				"production"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"postfoundationscrisis"
-			],
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			}
-		},
-		"situated_sensor": {
-			"name": "Situated Sensor",
-			"lookup_name": "situated_sensor",
-			"description": "Instrument on a tripod whose readout displays its own coordinates. No view from nowhere.",
-			"scene": "res://algorithms/postfoundationscrisis/situated_sensor.tscn",
-			"category": "postfoundationscrisis",
-			"sequence": "postfoundationscrisis",
-			"artifact_type": "postfoundationscrisis",
-			"qfep_term": "Edge",
-			"capacity": "KNOW from somewhere",
-			"dev_themes": [
-				"postfoundationscrisis",
-				"sieve_2026_05_13"
-			],
-			"dev_category": "postfoundationscrisis",
-			"complexity": "intermediate",
-			"tags": [
-				"situated_computation",
-				"embodied_knowledge",
-				"applied"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"postfoundationscrisis"
-			],
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			}
-		},
-		"locatable_knowledge_station": {
-			"name": "Locatable Knowledge Station",
-			"lookup_name": "locatable_knowledge_station",
-			"description": "Study desk with three books, each claim tagged with its source. The tag is part of the claim.",
-			"scene": "res://algorithms/postfoundationscrisis/locatable_knowledge_station.tscn",
-			"category": "postfoundationscrisis",
-			"sequence": "postfoundationscrisis",
-			"artifact_type": "postfoundationscrisis",
-			"qfep_term": "Edge",
-			"capacity": "TAG knowledge",
-			"dev_themes": [
-				"postfoundationscrisis",
-				"sieve_2026_05_13"
-			],
-			"dev_category": "postfoundationscrisis",
-			"complexity": "intermediate",
-			"tags": [
-				"situated_knowledge",
-				"epistemology",
-				"applied"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"postfoundationscrisis"
-			],
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			}
-		},
-		"wiki_fragment_station": {
-			"name": "Wiki Fragment Station",
-			"lookup_name": "wiki_fragment_station",
-			"description": "Round table with drifting paper-thin fragments, each a partial claim. Above: a halo suggests their emergent gathering.",
-			"scene": "res://algorithms/postfoundationscrisis/wiki_fragment_station.tscn",
-			"category": "postfoundationscrisis",
-			"sequence": "postfoundationscrisis",
-			"artifact_type": "postfoundationscrisis",
-			"qfep_term": "Edge",
-			"capacity": "GATHER the commons",
-			"dev_themes": [
-				"postfoundationscrisis",
-				"sieve_2026_05_13"
-			],
-			"dev_category": "postfoundationscrisis",
-			"complexity": "intermediate",
-			"tags": [
-				"commons",
-				"wiki",
-				"collective",
-				"applied"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"postfoundationscrisis"
-			],
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			}
-		},
-		"peer_edit_ledger": {
-			"name": "Peer Edit Ledger",
-			"lookup_name": "peer_edit_ledger",
-			"description": "Stacked ledger of colored translucent layers. Edits accumulate without overwriting.",
-			"scene": "res://algorithms/postfoundationscrisis/peer_edit_ledger.tscn",
-			"category": "postfoundationscrisis",
-			"sequence": "postfoundationscrisis",
-			"artifact_type": "postfoundationscrisis",
-			"qfep_term": "Edge",
-			"capacity": "ACCUMULATE edits",
-			"dev_themes": [
-				"postfoundationscrisis",
-				"sieve_2026_05_13"
-			],
-			"dev_category": "postfoundationscrisis",
-			"complexity": "intermediate",
-			"tags": [
-				"commons",
-				"history",
-				"applied",
-				"memory"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"postfoundationscrisis"
-			],
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			}
-		},
-		"citation_graph_node": {
-			"name": "Citation Graph Node",
-			"lookup_name": "citation_graph_node",
-			"description": "Central glowing claim sphere surrounded by satellites green for supports red for refutes. A claim's truth lives in its relations.",
-			"scene": "res://algorithms/postfoundationscrisis/citation_graph_node.tscn",
-			"category": "postfoundationscrisis",
-			"sequence": "postfoundationscrisis",
-			"artifact_type": "postfoundationscrisis",
-			"qfep_term": "Edge",
-			"capacity": "RELATE the claim",
-			"dev_themes": [
-				"postfoundationscrisis",
-				"sieve_2026_05_13"
-			],
-			"dev_category": "postfoundationscrisis",
-			"complexity": "intermediate",
-			"tags": [
-				"citation",
-				"graph",
-				"epistemology",
-				"applied"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"postfoundationscrisis"
-			],
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			}
-		},
-		"edge_as_ground_capstone": {
-			"name": "Edge as Ground Capstone",
-			"lookup_name": "edge_as_ground_capstone",
-			"description": "Raised central platform with rotating glass disc inscribed 'The edge is the ground.' Seven stations ring it. The spine's literal last artifact.",
-			"scene": "res://algorithms/postfoundationscrisis/edge_as_ground_capstone.tscn",
-			"category": "postfoundationscrisis",
-			"sequence": "postfoundationscrisis",
-			"artifact_type": "postfoundationscrisis",
-			"qfep_term": "All",
-			"capacity": "STAND at the spine's end",
-			"dev_themes": [
-				"postfoundationscrisis",
-				"sieve_2026_05_13"
-			],
-			"dev_category": "postfoundationscrisis",
-			"complexity": "intermediate",
-			"tags": [
-				"capstone",
-				"synthesis",
-				"thesis_landing"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"postfoundationscrisis"
-			],
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "environment"
-			}
-		}
-	}
+ "artifacts": {
+  "ethical_design_clipboard": {
+   "name": "Ethical Design Clipboard",
+   "lookup_name": "ethical_design_clipboard",
+   "description": "Clipboard on a stand with three toggleable ethical design moves. The toggles shift the room around the clipboard.",
+   "scene": "res://algorithms/postfoundationscrisis/ethical_design_clipboard.tscn",
+   "category": "postfoundations",
+   "sequence": "postfoundationscrisis",
+   "artifact_type": "postfoundations",
+   "qfep_term": "Edge",
+   "capacity": "PRINCIPLE as shape",
+   "dev_themes": [
+    "postfoundationscrisis",
+    "sieve_2026_05_13"
+   ],
+   "dev_category": "postfoundationscrisis",
+   "complexity": "intermediate",
+   "tags": [
+    "ethics",
+    "applied",
+    "architecture"
+   ],
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "postfoundationscrisis"
+   ],
+   "parameters": {
+    "footprint": [
+     1,
+     1,
+     1
+    ],
+    "size_group": "compact"
+   }
+  },
+  "excluded_class_visualizer": {
+   "name": "Excluded Class Visualizer",
+   "lookup_name": "excluded_class_visualizer",
+   "description": "Two clusters separated by a classifier boundary, plus a third red cluster ON the boundary. Bias as visible structural incompleteness.",
+   "scene": "res://algorithms/postfoundationscrisis/excluded_class_visualizer.tscn",
+   "category": "postfoundations",
+   "sequence": "postfoundationscrisis",
+   "artifact_type": "postfoundations",
+   "qfep_term": "Edge",
+   "capacity": "SEE what the model misses",
+   "dev_themes": [
+    "postfoundationscrisis",
+    "sieve_2026_05_13"
+   ],
+   "dev_category": "postfoundationscrisis",
+   "complexity": "intermediate",
+   "tags": [
+    "bias",
+    "classifier",
+    "applied",
+    "incompleteness"
+   ],
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "postfoundationscrisis"
+   ],
+   "parameters": {
+    "footprint": [
+     1,
+     1,
+     1
+    ],
+    "size_group": "compact"
+   }
+  },
+  "room_shape_demonstrator": {
+   "name": "Room Shape Demonstrator",
+   "lookup_name": "room_shape_demonstrator",
+   "description": "Two scale-model rooms on pedestals: centralized vs distributed seating. Furniture layout as moral object.",
+   "scene": "res://algorithms/postfoundationscrisis/room_shape_demonstrator.tscn",
+   "category": "postfoundations",
+   "sequence": "postfoundationscrisis",
+   "artifact_type": "postfoundations",
+   "qfep_term": "Edge",
+   "capacity": "SHAPE is policy",
+   "dev_themes": [
+    "postfoundationscrisis",
+    "sieve_2026_05_13"
+   ],
+   "dev_category": "postfoundationscrisis",
+   "complexity": "intermediate",
+   "tags": [
+    "architecture",
+    "ethics",
+    "spatial_politics"
+   ],
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "postfoundationscrisis"
+   ],
+   "parameters": {
+    "footprint": [
+     1,
+     1,
+     1
+    ],
+    "size_group": "mixed"
+   }
+  },
+  "merge_conflict_visualizer": {
+   "name": "Merge Conflict Visualizer",
+   "lookup_name": "merge_conflict_visualizer",
+   "description": "Two intersecting pillars (branch A, branch B) meeting at a glowing junction. Paraconsistent logic as architecture.",
+   "scene": "res://algorithms/postfoundationscrisis/merge_conflict_visualizer.tscn",
+   "category": "postfoundations",
+   "sequence": "postfoundationscrisis",
+   "artifact_type": "postfoundations",
+   "qfep_term": "Edge",
+   "capacity": "HOLD both branches",
+   "dev_themes": [
+    "postfoundationscrisis",
+    "sieve_2026_05_13"
+   ],
+   "dev_category": "postfoundationscrisis",
+   "complexity": "intermediate",
+   "tags": [
+    "paraconsistent",
+    "merge_conflict",
+    "applied"
+   ],
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "postfoundationscrisis"
+   ],
+   "parameters": {
+    "footprint": [
+     1,
+     1,
+     1
+    ],
+    "size_group": "compact"
+   }
+  },
+  "cap_theorem_walk": {
+   "name": "CAP Theorem Walk",
+   "lookup_name": "cap_theorem_walk",
+   "description": "Three pillars in a triangle. A slow rotation lights two at a time. The CAP trade-off cycle made visible.",
+   "scene": "res://algorithms/postfoundationscrisis/cap_theorem_walk.tscn",
+   "category": "postfoundations",
+   "sequence": "postfoundationscrisis",
+   "artifact_type": "postfoundations",
+   "qfep_term": "Edge",
+   "capacity": "WALK the trade space",
+   "dev_themes": [
+    "postfoundationscrisis",
+    "sieve_2026_05_13"
+   ],
+   "dev_category": "postfoundationscrisis",
+   "complexity": "intermediate",
+   "tags": [
+    "cap_theorem",
+    "distributed_systems",
+    "applied"
+   ],
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "postfoundationscrisis"
+   ],
+   "parameters": {
+    "footprint": [
+     1,
+     1,
+     1
+    ],
+    "size_group": "compact"
+   }
+  },
+  "florensky_in_production": {
+   "name": "Florensky in Production",
+   "lookup_name": "florensky_in_production",
+   "description": "Rotating triptych with three views of the same sphere: solid, hollow, both at once. Paraconsistent symbol made production-ready.",
+   "scene": "res://algorithms/postfoundationscrisis/florensky_in_production.tscn",
+   "category": "postfoundations",
+   "sequence": "postfoundationscrisis",
+   "artifact_type": "postfoundations",
+   "qfep_term": "Edge",
+   "capacity": "HOLD without resolve",
+   "dev_themes": [
+    "postfoundationscrisis",
+    "sieve_2026_05_13"
+   ],
+   "dev_category": "postfoundationscrisis",
+   "complexity": "intermediate",
+   "tags": [
+    "paraconsistent",
+    "florensky",
+    "production"
+   ],
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "postfoundationscrisis"
+   ],
+   "parameters": {
+    "footprint": [
+     1,
+     1,
+     1
+    ],
+    "size_group": "compact"
+   }
+  },
+  "situated_sensor": {
+   "name": "Situated Sensor",
+   "lookup_name": "situated_sensor",
+   "description": "Instrument on a tripod whose readout displays its own coordinates. No view from nowhere.",
+   "scene": "res://algorithms/postfoundationscrisis/situated_sensor.tscn",
+   "category": "postfoundations",
+   "sequence": "postfoundationscrisis",
+   "artifact_type": "postfoundations",
+   "qfep_term": "Edge",
+   "capacity": "KNOW from somewhere",
+   "dev_themes": [
+    "postfoundationscrisis",
+    "sieve_2026_05_13"
+   ],
+   "dev_category": "postfoundationscrisis",
+   "complexity": "intermediate",
+   "tags": [
+    "situated_computation",
+    "embodied_knowledge",
+    "applied"
+   ],
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "postfoundationscrisis"
+   ],
+   "parameters": {
+    "footprint": [
+     1,
+     1,
+     1
+    ],
+    "size_group": "compact"
+   }
+  },
+  "locatable_knowledge_station": {
+   "name": "Locatable Knowledge Station",
+   "lookup_name": "locatable_knowledge_station",
+   "description": "Study desk with three books, each claim tagged with its source. The tag is part of the claim.",
+   "scene": "res://algorithms/postfoundationscrisis/locatable_knowledge_station.tscn",
+   "category": "postfoundations",
+   "sequence": "postfoundationscrisis",
+   "artifact_type": "postfoundations",
+   "qfep_term": "Edge",
+   "capacity": "TAG knowledge",
+   "dev_themes": [
+    "postfoundationscrisis",
+    "sieve_2026_05_13"
+   ],
+   "dev_category": "postfoundationscrisis",
+   "complexity": "intermediate",
+   "tags": [
+    "situated_knowledge",
+    "epistemology",
+    "applied"
+   ],
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "postfoundationscrisis"
+   ],
+   "parameters": {
+    "footprint": [
+     1,
+     1,
+     1
+    ],
+    "size_group": "compact"
+   }
+  },
+  "wiki_fragment_station": {
+   "name": "Wiki Fragment Station",
+   "lookup_name": "wiki_fragment_station",
+   "description": "Round table with drifting paper-thin fragments, each a partial claim. Above: a halo suggests their emergent gathering.",
+   "scene": "res://algorithms/postfoundationscrisis/wiki_fragment_station.tscn",
+   "category": "postfoundations",
+   "sequence": "postfoundationscrisis",
+   "artifact_type": "postfoundations",
+   "qfep_term": "Edge",
+   "capacity": "GATHER the commons",
+   "dev_themes": [
+    "postfoundationscrisis",
+    "sieve_2026_05_13"
+   ],
+   "dev_category": "postfoundationscrisis",
+   "complexity": "intermediate",
+   "tags": [
+    "commons",
+    "wiki",
+    "collective",
+    "applied"
+   ],
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "postfoundationscrisis"
+   ],
+   "parameters": {
+    "footprint": [
+     1,
+     1,
+     1
+    ],
+    "size_group": "compact"
+   }
+  },
+  "peer_edit_ledger": {
+   "name": "Peer Edit Ledger",
+   "lookup_name": "peer_edit_ledger",
+   "description": "Stacked ledger of colored translucent layers. Edits accumulate without overwriting.",
+   "scene": "res://algorithms/postfoundationscrisis/peer_edit_ledger.tscn",
+   "category": "postfoundations",
+   "sequence": "postfoundationscrisis",
+   "artifact_type": "postfoundations",
+   "qfep_term": "Edge",
+   "capacity": "ACCUMULATE edits",
+   "dev_themes": [
+    "postfoundationscrisis",
+    "sieve_2026_05_13"
+   ],
+   "dev_category": "postfoundationscrisis",
+   "complexity": "intermediate",
+   "tags": [
+    "commons",
+    "history",
+    "applied",
+    "memory"
+   ],
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "postfoundationscrisis"
+   ],
+   "parameters": {
+    "footprint": [
+     1,
+     1,
+     1
+    ],
+    "size_group": "compact"
+   }
+  },
+  "citation_graph_node": {
+   "name": "Citation Graph Node",
+   "lookup_name": "citation_graph_node",
+   "description": "Central glowing claim sphere surrounded by satellites green for supports red for refutes. A claim's truth lives in its relations.",
+   "scene": "res://algorithms/postfoundationscrisis/citation_graph_node.tscn",
+   "category": "postfoundations",
+   "sequence": "postfoundationscrisis",
+   "artifact_type": "postfoundations",
+   "qfep_term": "Edge",
+   "capacity": "RELATE the claim",
+   "dev_themes": [
+    "postfoundationscrisis",
+    "sieve_2026_05_13"
+   ],
+   "dev_category": "postfoundationscrisis",
+   "complexity": "intermediate",
+   "tags": [
+    "citation",
+    "graph",
+    "epistemology",
+    "applied"
+   ],
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "postfoundationscrisis"
+   ],
+   "parameters": {
+    "footprint": [
+     1,
+     1,
+     1
+    ],
+    "size_group": "compact"
+   }
+  },
+  "edge_as_ground_capstone": {
+   "name": "Edge as Ground Capstone",
+   "lookup_name": "edge_as_ground_capstone",
+   "description": "Raised central platform with rotating glass disc inscribed 'The edge is the ground.' Seven stations ring it. The spine's literal last artifact.",
+   "scene": "res://algorithms/postfoundationscrisis/edge_as_ground_capstone.tscn",
+   "category": "postfoundations",
+   "sequence": "postfoundationscrisis",
+   "artifact_type": "postfoundations",
+   "qfep_term": "All",
+   "capacity": "STAND at the spine's end",
+   "dev_themes": [
+    "postfoundationscrisis",
+    "sieve_2026_05_13"
+   ],
+   "dev_category": "postfoundationscrisis",
+   "complexity": "intermediate",
+   "tags": [
+    "capstone",
+    "synthesis",
+    "thesis_landing"
+   ],
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "postfoundationscrisis"
+   ],
+   "parameters": {
+    "footprint": [
+     1,
+     1,
+     1
+    ],
+    "size_group": "environment"
+   }
+  }
+ }
 }

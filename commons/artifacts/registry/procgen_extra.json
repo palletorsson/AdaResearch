@@ -5,7 +5,7 @@
    "scene": "res://commons/artifacts/pattern_tunnel/pattern_tunnel_machine.tscn",
    "name": "Pattern Tunnel Machine",
    "description": "A subway-tiled walkway tunnel that paints itself tile by tile (floor then walls then ceiling), driven by a pattern-maker console at the mouth. The console's GROUP / MOTIF / PALETTE / SPEED sliders re-skin the whole tube through any of the 17 wallpaper symmetry groups; touching a control surges the fill faster. Same WallpaperGroups engine as pattern_studio_plate.",
-   "category": "procgen",
+   "category": "procedural",
    "complexity": "advanced",
    "footprint": [
     3.0,
@@ -978,7 +978,7 @@
    }
   },
   "botanical_flower": {
-   "category": "proceduralgeneration",
+   "category": "procedural",
    "complexity": "beginner",
    "description": "Standalone procedural flower — configurable petal count, length, width, curve, stem height, color hue, leaf count, and symmetry. A lightweight wrapper around the BotanicalFlower generator for map placement without VR controls.",
    "dev_themes": [
@@ -1631,7 +1631,7 @@
    }
   },
   "cave_generator": {
-   "category": "proceduralgeneration",
+   "category": "procedural",
    "complexity": "intermediate",
    "description": "Cellular automaton cave generation with flood-fill connectivity â€” classic roguelike technique. 64x64 grid initialized with random walls, smoothed by CA rules (5+ neighbors = wall), then flood-filled to keep only the largest connected region. Entrance and exit markers placed at region extremes.",
    "dev_themes": [
@@ -4158,7 +4158,7 @@
    }
   },
   "flower_lab": {
-   "category": "proceduralgeneration",
+   "category": "procedural",
    "complexity": "beginner",
    "description": "Interactive botanical laboratory â€” VR sliders control petal count, length, width, curve, stem height, color hue, leaf count, and symmetry of a procedural BotanicalFlower. Randomize to discover unexpected morphologies, save presets to JSON. Teaches how parametric variation drives flower form.",
    "dev_themes": [
@@ -5385,7 +5385,7 @@
    "qfep_connection": "The recursive tree with dice in its grammar: every branch angle and length drawn from a distribution. Same rule, different tree each run — the fractal chapter shaking hands with the randomness chapter, determinism loosened just enough to look alive."
   },
   "genetic_programming": {
-   "category": "proceduralgeneration",
+   "category": "procedural",
    "complexity": "advanced",
    "description": "Genetic programming interface for evolving 3D shapes â€” populations of genomes (Primitives, CSG Trees, Parametric, Voxel, L-Systems) undergo selection, crossover, and mutation toward fitness goals like target volume, height, and symmetry. Visualizes the entire population in a grid with real-time evolution.",
    "dev_themes": [
@@ -7571,7 +7571,7 @@
    "qfep_connection": "A walkable maze carved by recursive backtracking — the algorithm drills forward at random, and when it hits a dead end it reverses just far enough to try a new direction, until every cell has been visited exactly once. The result is a perfect maze, one path between any two points, and no designer ever saw the whole of it. Getting lost in a corridor no mind laid out."
   },
   "maze_generator": {
-   "category": "proceduralgeneration",
+   "category": "procedural",
    "complexity": "beginner",
    "description": "Procedural maze generation â€” watch walls carve out paths through depth-first search, recursive backtracking, or randomized algorithms. Every maze is a spanning tree of a grid graph.",
    "dev_themes": [
@@ -8600,7 +8600,7 @@
    }
   },
   "penteract_double_projection": {
-   "category": "proceduralgeneration",
+   "category": "procedural",
    "complexity": "advanced",
    "description": "5D hypercube (penteract) projected twice â€” from 5D to 4D to 3D. The shadow of a shadow of a higher-dimensional object, revealing structure invisible from any single viewpoint.",
    "dev_themes": [
@@ -8867,7 +8867,7 @@
    }
   },
   "reaction_diffusion": {
-   "category": "proceduralgeneration",
+   "category": "procedural",
    "complexity": "intermediate",
    "description": "Turing pattern generation using reaction-diffusion systems â€” the Gray-Scott model on a 2D grid producing spots, stripes, and labyrinthine patterns from two interacting chemicals.",
    "dev_themes": [
@@ -8941,7 +8941,7 @@
    ]
   },
   "reaction_diffusion_vr": {
-   "category": "proceduralgeneration",
+   "category": "procedural",
    "complexity": "intermediate",
    "description": "Turing reaction-diffusion patterns in VR â€” two chemicals activating and inhibiting each other, producing spots, stripes, and labyrinthine patterns. The math behind animal markings.",
    "dev_themes": [
@@ -9709,7 +9709,7 @@
    }
   },
   "room_grammar": {
-   "category": "proceduralgeneration",
+   "category": "procedural",
    "complexity": "intermediate",
    "description": "Shape grammar for architectural floor plans â€” binary space partitioning recursively splits a rectangle into rooms, draws wall outlines, adds door gaps, and colors rooms by area. The algorithmic foundation behind roguelike dungeon generation.",
    "dev_themes": [
@@ -10364,7 +10364,7 @@
    "qfep_connection": "The stochastic tree with its variation pulled apart for inspection — rule and randomness shown as separable ingredients, so the eye can credit each with what it actually contributes."
   },
   "terrain_erosion": {
-   "category": "proceduralgeneration",
+   "category": "procedural",
    "complexity": "advanced",
    "description": "Hydraulic erosion on a procedural heightmap â€” layered sin-wave terrain eroded by 800 virtual water droplets flowing downhill, carrying and depositing sediment. ImmediateMesh surface colored by altitude: water, beach, grass, rock, snow.",
    "dev_themes": [
@@ -10628,7 +10628,7 @@
    }
   },
   "tesseract_tunnel": {
-   "category": "proceduralgeneration",
+   "category": "procedural",
    "complexity": "advanced",
    "description": "Fly through a tunnel of rotating tesseracts â€” 4D hypercubes projected into 3D, their inner and outer cubes visible simultaneously. Experience the shadow of a higher dimension.",
    "dev_themes": [
@@ -12104,7 +12104,7 @@
    }
   },
   "wfc": {
-   "category": "proceduralgeneration",
+   "category": "procedural",
    "complexity": "advanced",
    "description": "Wave Function Collapse algorithm â€” generating complex patterns from local adjacency constraints. Start with superposition of all possibilities, observe one tile, propagate constraints until the world resolves.",
    "dev_themes": [
@@ -12364,7 +12364,7 @@
    "name": "Gray-Scott Coral Garden",
    "description": "Walkable polyp forest grown from Gray-Scott reaction-diffusion. Two constants (F, K) — no designer placed the pillars, the rule did. Uses the commons/rd_grammar substrate from the DNA research loop.",
    "scene": "res://commons/artifacts/rd_coral_garden/rd_coral_garden.tscn",
-   "category": "procgen",
+   "category": "procedural",
    "include_in_map_data": true,
    "map_ready": true,
    "map_sequences": [
@@ -12452,7 +12452,7 @@
    "name": "Gray-Scott Comparison Garden",
    "description": "Nine mini-gardens arranged 3×3, each running the same reaction-diffusion equations with a different (F, K) preset. Walking between them teaches the thesis directly: same equations, different constants, different ecology. The pedagogical punchline of pattern formation.",
    "scene": "res://commons/artifacts/gray_scott_comparison/gray_scott_comparison.tscn",
-   "category": "procgen",
+   "category": "procedural",
    "include_in_map_data": true,
    "map_ready": true,
    "map_sequences": [
@@ -12542,9 +12542,9 @@
    "lookup_name": "seed_orb",
    "description": "The new λ_edge affordance for proceduralgeneration. Player throws a glowing seed; where it lands, procedural growth happens around it. Terrain bumps, tile constraints, L-system-like branches. The seed is input, the world is output — an author isn't needed for a world.",
    "scene": "res://algorithms/proceduralgeneration/affordance_demos/seed_orb.tscn",
-   "category": "proceduralgeneration",
+   "category": "procedural",
    "sequence": "proceduralgeneration",
-   "artifact_type": "proceduralgeneration",
+   "artifact_type": "procedural",
    "qfep_term": "λ",
    "capacity": "SEED a world",
    "dev_themes": [

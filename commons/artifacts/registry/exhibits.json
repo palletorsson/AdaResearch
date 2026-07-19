@@ -5,7 +5,7 @@
    "scene": "res://commons/artifacts/exhibits/exhibit_podium.tscn",
    "class_name": "ExhibitPodium",
    "name": "Exhibit Podium (empty, waiting)",
-   "category": "exhibits",
+   "category": "exhibit",
    "complexity": "beginner",
    "description": "An empty plinth with a soft top light - the exhibit affordance itself, before any exhibit. Planted by the gallery-DNA generator to mark hosting capacity; filled later by the Curator or placement engines. Config: size, height, kind (podium/dais)."
   },
@@ -14,7 +14,7 @@
    "scene": "res://commons/artifacts/exhibits/exhibit_vitrine.tscn",
    "class_name": "ExhibitVitrine",
    "name": "Exhibit Vitrine (empty, waiting)",
-   "category": "exhibits",
+   "category": "exhibit",
    "complexity": "beginner",
    "description": "An empty glass case on a dark base - the wall-side affordance for small precious things. Sets the visitor's pausing rhythm before the collection exists."
   },
@@ -23,7 +23,7 @@
    "scene": "res://commons/artifacts/exhibits/exhibit_furniture.tscn",
    "class_name": "ExhibitFurniture",
    "name": "Exhibit Furniture (the display family)",
-   "category": "exhibits",
+   "category": "exhibit",
    "complexity": "intermediate",
    "description": "The display-furniture family as one parametric artifact - kind selects the body: floating_wall (MoMA hover with contact-shadow accent), plinth s/m/l, hollow_plinth, platform, table_2m, vitrine_tall, cabinet, infoboard, sign_exit, sign_fire (with the little red cylinder). All empty, all waiting. Config: kind, size, w, h."
   },
