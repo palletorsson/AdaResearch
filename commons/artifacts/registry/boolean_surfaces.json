@@ -1,212 +1,217 @@
 {
-	"artifacts": {
-		"csg_union_demo": {
-			"name": "CSG Union Demo",
-			"lookup_name": "csg_union_demo",
-			"description": "Two CSG primitives combined with the union operator. Visualizes A union B as a single composite solid.",
-			"scene": "res://algorithms/boolean_surfaces/csg_union_demo.tscn",
-			"category": "boolean_surfaces",
-			"sequence": "boolean_surfaces",
-			"artifact_type": "boolean_surfaces",
-			"qfep_term": "F",
-			"capacity": "UNION as composition",
-			"dev_themes": [
-				"boolean_surfaces",
-				"sieve_2026_05_13"
-			],
-			"dev_category": "boolean_surfaces",
-			"complexity": "intermediate",
-			"tags": [
-				"csg",
-				"boolean",
-				"union",
-				"F_order"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"boolean_surfaces"
-			],
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			}
-		},
-		"csg_intersection_demo": {
-			"name": "CSG Intersection Demo",
-			"lookup_name": "csg_intersection_demo",
-			"description": "Two CSG primitives with intersection operator. Only the overlap survives.",
-			"scene": "res://algorithms/boolean_surfaces/csg_intersection_demo.tscn",
-			"category": "boolean_surfaces",
-			"sequence": "boolean_surfaces",
-			"artifact_type": "boolean_surfaces",
-			"qfep_term": "F",
-			"capacity": "INTERSECT as overlap",
-			"dev_themes": [
-				"boolean_surfaces",
-				"sieve_2026_05_13"
-			],
-			"dev_category": "boolean_surfaces",
-			"complexity": "intermediate",
-			"tags": [
-				"csg",
-				"boolean",
-				"intersection",
-				"F_order"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"boolean_surfaces"
-			],
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			}
-		},
-		"csg_difference_demo": {
-			"name": "CSG Difference Demo",
-			"lookup_name": "csg_difference_demo",
-			"description": "A box with a sphere subtracted. The operator that makes cavities and openings.",
-			"scene": "res://algorithms/boolean_surfaces/csg_difference_demo.tscn",
-			"category": "boolean_surfaces",
-			"sequence": "boolean_surfaces",
-			"artifact_type": "boolean_surfaces",
-			"qfep_term": "F",
-			"capacity": "SUBTRACT as cavity",
-			"dev_themes": [
-				"boolean_surfaces",
-				"sieve_2026_05_13"
-			],
-			"dev_category": "boolean_surfaces",
-			"complexity": "intermediate",
-			"tags": [
-				"csg",
-				"boolean",
-				"difference",
-				"F_order"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"boolean_surfaces"
-			],
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			}
-		},
-		"csg_compose_workbench": {
-			"name": "CSG Compose Workbench",
-			"lookup_name": "csg_compose_workbench",
-			"description": "Workbench holding all three CSG operators side by side. The introduction artifact for the csg-compose catalyst affordance.",
-			"scene": "res://algorithms/boolean_surfaces/csg_compose_workbench.tscn",
-			"category": "boolean_surfaces",
-			"sequence": "boolean_surfaces",
-			"artifact_type": "boolean_surfaces",
-			"qfep_term": "F",
-			"capacity": "COMPOSE with CSG ops",
-			"dev_themes": [
-				"boolean_surfaces",
-				"sieve_2026_05_13"
-			],
-			"dev_category": "boolean_surfaces",
-			"complexity": "intermediate",
-			"tags": [
-				"csg",
-				"catalyst_affordance",
-				"workbench"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"boolean_surfaces"
-			],
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "mixed"
-			}
-		},
-		"csg_architecture_cavity": {
-			"name": "CSG Architecture Cavity",
-			"lookup_name": "csg_architecture_cavity",
-			"description": "A solid wall with three openings cut through it. Architecture as Boolean composition.",
-			"scene": "res://algorithms/boolean_surfaces/csg_architecture_cavity.tscn",
-			"category": "boolean_surfaces",
-			"sequence": "boolean_surfaces",
-			"artifact_type": "boolean_surfaces",
-			"qfep_term": "F",
-			"capacity": "WALL minus openings",
-			"dev_themes": [
-				"boolean_surfaces",
-				"sieve_2026_05_13"
-			],
-			"dev_category": "boolean_surfaces",
-			"complexity": "intermediate",
-			"tags": [
-				"csg",
-				"architecture",
-				"boolean",
-				"wall"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"boolean_surfaces"
-			],
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "environment"
-			}
-		},
-		"coincident_face": {
-			"category": "boolean_surfaces",
-			"complexity": "intermediate",
-			"description": "The boolean-surfaces seam. CSG promises exact cuts; subtract one solid from another and the boundary is a clean surface. But when the cut plane lands on a coincident face, the two surfaces claim the same depth and the float grid cannot say which is in front - so the renderer flickers, awarding each pixel to whichever number rounded higher this frame. The clean boolean is exact everywhere except the one place you asked it to be.",
-			"dev_themes": [
-				"digital_bias",
-				"seam"
-			],
-			"include_in_map_data": true,
-			"interaction": "ambient",
-			"lookup_name": "coincident_face",
-			"map_ready": true,
-			"map_sequences": [
-				"boolean_surfaces"
-			],
-			"name": "Coincident Face",
-			"qfep_connection": "A station in the bias landscape (doc/SEAM_PER_SEQUENCE.md); the digital-bias seam for boolean_surfaces. Bias is conserved; show the seam.",
-			"scene": "res://algorithms/booleansurfaces/coincident_face/coincident_face.tscn",
-			"sequence": "boolean_surfaces",
-			"tags": [
-				"boolean",
-				"csg",
-				"z_fighting",
-				"coincident",
-				"float_precision",
-				"seam",
-				"digital_bias"
-			]
-		}
-	}
+ "artifacts": {
+  "csg_union_demo": {
+   "name": "CSG Union Demo",
+   "lookup_name": "csg_union_demo",
+   "description": "Two CSG primitives combined with the union operator. Visualizes A union B as a single composite solid.",
+   "scene": "res://algorithms/boolean_surfaces/csg_union_demo.tscn",
+   "category": "boolean_surfaces",
+   "sequence": "boolean_surfaces",
+   "artifact_type": "boolean_surfaces",
+   "qfep_term": "F",
+   "capacity": "UNION as composition",
+   "dev_themes": [
+    "boolean_surfaces",
+    "sieve_2026_05_13"
+   ],
+   "dev_category": "boolean_surfaces",
+   "complexity": "intermediate",
+   "tags": [
+    "csg",
+    "boolean",
+    "union",
+    "F_order"
+   ],
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "boolean_surfaces"
+   ],
+   "parameters": {
+    "footprint": [
+     1,
+     1,
+     1
+    ],
+    "size_group": "compact"
+   },
+   "qfep_connection": "A∪B: two solids declared one. The gentlest Boolean, and the one that hides the most — union looks like putting things next to each other, but it fuses them, the seam between them dissolved into a single skin. The chapter's opening insistence that composition is not a pile: the moment two forms join, their boundary is renegotiated, and the inside of the whole is more than the sum of the insides."
+  },
+  "csg_intersection_demo": {
+   "name": "CSG Intersection Demo",
+   "lookup_name": "csg_intersection_demo",
+   "description": "Two CSG primitives with intersection operator. Only the overlap survives.",
+   "scene": "res://algorithms/boolean_surfaces/csg_intersection_demo.tscn",
+   "category": "boolean_surfaces",
+   "sequence": "boolean_surfaces",
+   "artifact_type": "boolean_surfaces",
+   "qfep_term": "F",
+   "capacity": "INTERSECT as overlap",
+   "dev_themes": [
+    "boolean_surfaces",
+    "sieve_2026_05_13"
+   ],
+   "dev_category": "boolean_surfaces",
+   "complexity": "intermediate",
+   "tags": [
+    "csg",
+    "boolean",
+    "intersection",
+    "F_order"
+   ],
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "boolean_surfaces"
+   ],
+   "parameters": {
+    "footprint": [
+     1,
+     1,
+     1
+    ],
+    "size_group": "compact"
+   },
+   "qfep_connection": "A∩B: only the overlap survives. The strictest operator — intersection keeps solely the space both solids agreed to occupy and discards everything else, so two large forms can yield a tiny sliver or nothing at all. The primitive of the joint: where two things meet is not where they touch but where they *coincide*, and this operator is the chapter's tool for finding that shared interior."
+  },
+  "csg_difference_demo": {
+   "name": "CSG Difference Demo",
+   "lookup_name": "csg_difference_demo",
+   "description": "A box with a sphere subtracted. The operator that makes cavities and openings.",
+   "scene": "res://algorithms/boolean_surfaces/csg_difference_demo.tscn",
+   "category": "boolean_surfaces",
+   "sequence": "boolean_surfaces",
+   "artifact_type": "boolean_surfaces",
+   "qfep_term": "F",
+   "capacity": "SUBTRACT as cavity",
+   "dev_themes": [
+    "boolean_surfaces",
+    "sieve_2026_05_13"
+   ],
+   "dev_category": "boolean_surfaces",
+   "complexity": "intermediate",
+   "tags": [
+    "csg",
+    "boolean",
+    "difference",
+    "F_order"
+   ],
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "boolean_surfaces"
+   ],
+   "parameters": {
+    "footprint": [
+     1,
+     1,
+     1
+    ],
+    "size_group": "compact"
+   },
+   "qfep_connection": "A−B: the box remembers the sphere by its absence. Difference is the operator of cavities and openings — subtract one solid from another and what remains is shaped by a thing no longer there, the hollow a negative portrait of what was removed. The walk's central power: every window, every socket, every carved bowl is a subtraction, form defined by a precise act of taking-away."
+  },
+  "csg_compose_workbench": {
+   "name": "CSG Compose Workbench",
+   "lookup_name": "csg_compose_workbench",
+   "description": "Workbench holding all three CSG operators side by side. The introduction artifact for the csg-compose catalyst affordance.",
+   "scene": "res://algorithms/boolean_surfaces/csg_compose_workbench.tscn",
+   "category": "boolean_surfaces",
+   "sequence": "boolean_surfaces",
+   "artifact_type": "boolean_surfaces",
+   "qfep_term": "F",
+   "capacity": "COMPOSE with CSG ops",
+   "dev_themes": [
+    "boolean_surfaces",
+    "sieve_2026_05_13"
+   ],
+   "dev_category": "boolean_surfaces",
+   "complexity": "intermediate",
+   "tags": [
+    "csg",
+    "catalyst_affordance",
+    "workbench"
+   ],
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "boolean_surfaces"
+   ],
+   "parameters": {
+    "footprint": [
+     1,
+     1,
+     1
+    ],
+    "size_group": "mixed"
+   },
+   "qfep_connection": "All three operators on one bench — union, intersection, difference, side by side, the chapter's grammar laid out as a palette. The workbench where you learn that solids have an algebra: any complex form is a sentence in these three verbs, and constructive solid geometry is the claim that you can say any shape by combining primitives lawfully enough."
+  },
+  "csg_architecture_cavity": {
+   "name": "CSG Architecture Cavity",
+   "lookup_name": "csg_architecture_cavity",
+   "description": "A solid wall with three openings cut through it. Architecture as Boolean composition.",
+   "scene": "res://algorithms/boolean_surfaces/csg_architecture_cavity.tscn",
+   "category": "boolean_surfaces",
+   "sequence": "boolean_surfaces",
+   "artifact_type": "boolean_surfaces",
+   "qfep_term": "F",
+   "capacity": "WALL minus openings",
+   "dev_themes": [
+    "boolean_surfaces",
+    "sieve_2026_05_13"
+   ],
+   "dev_category": "boolean_surfaces",
+   "complexity": "intermediate",
+   "tags": [
+    "csg",
+    "architecture",
+    "boolean",
+    "wall"
+   ],
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "boolean_surfaces"
+   ],
+   "parameters": {
+    "footprint": [
+     1,
+     1,
+     1
+    ],
+    "size_group": "environment"
+   },
+   "qfep_connection": "A wall with three openings cut clean through it — architecture reduced to its Boolean truth. The turn's demonstration that building is subtraction: a doorway is a difference, a room is a void bounded by solid, and the mass of a wall exists to be selectively removed. Standing before it you read architecture the way this chapter teaches — not as material placed, but as space composed, the cavity the real subject and the wall merely its frame."
+  },
+  "coincident_face": {
+   "category": "boolean_surfaces",
+   "complexity": "intermediate",
+   "description": "The boolean-surfaces seam. CSG promises exact cuts; subtract one solid from another and the boundary is a clean surface. But when the cut plane lands on a coincident face, the two surfaces claim the same depth and the float grid cannot say which is in front - so the renderer flickers, awarding each pixel to whichever number rounded higher this frame. The clean boolean is exact everywhere except the one place you asked it to be.",
+   "dev_themes": [
+    "digital_bias",
+    "seam"
+   ],
+   "include_in_map_data": true,
+   "interaction": "ambient",
+   "lookup_name": "coincident_face",
+   "map_ready": true,
+   "map_sequences": [
+    "boolean_surfaces"
+   ],
+   "name": "Coincident Face",
+   "qfep_connection": "A station in the bias landscape (doc/SEAM_PER_SEQUENCE.md); the digital-bias seam for boolean_surfaces. Bias is conserved; show the seam.",
+   "scene": "res://algorithms/booleansurfaces/coincident_face/coincident_face.tscn",
+   "sequence": "boolean_surfaces",
+   "tags": [
+    "boolean",
+    "csg",
+    "z_fighting",
+    "coincident",
+    "float_precision",
+    "seam",
+    "digital_bias"
+   ]
+  }
+ }
 }
