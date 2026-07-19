@@ -103,8 +103,9 @@ Grammar addition — the reactive modifier:
   `touch` (player body), `dwell` (attention — the desire clock), `tick` (time)
 - **responses**: `seed` (activate this cell's algorithm), `step` (advance the
   local algorithm one generation), `claim` (expand into adjacent `field`
-  cells), `mutate:<channel>` (route into the mutator stack: color/lift/...),
-  `mute` / `unmute`
+  cells), `mutate.<channel>` (route into the mutator stack: color/lift/...;
+  token form uses a DOT — ":" is the token separator and would shear the
+  channel off in parse), `mute` / `unmute`
 
 Examples:
     fungus:ca:seed:rule=110:on=catalyst.branch:step     hit it, the CA grows

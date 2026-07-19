@@ -38,6 +38,7 @@ var _fields: Dictionary = {}         # element -> PackedFloat32Array (biome AREA
 var _element_artifacts: Dictionary = {}  # element -> Array[name] (the VR picker's lists)
 var _stroking: bool = false
 var _preview_tick: int = 0
+var _stroke_reacted: Dictionary = {}  # biome-7: cells already reacted this stroke
 
 var _ghost: MeshInstance3D = null
 var _ghost_mat: StandardMaterial3D = null
@@ -210,6 +211,7 @@ func paint_layers_payload() -> Array:
 
 # ── internals ─────────────────────────────────────────────────────────
 func _commit() -> void:
+	_stroke_reacted.clear()  # biome-7: next stroke may react the same cells again
 	if _grid == null or not _grid.has_method("repaint_biome"):
 		return
 	# Pass the brush margin so GridSystem sizes the substrate + scatter to the biome AREA
@@ -266,6 +268,16 @@ func _ray_cell(origin: Vector3, forward: Vector3) -> Vector2i:
 ##     ground never drops below 0.5.
 ##   • non-ground — the EXISTING 0..1 scatter density (add/subtract strength·falloff). UNCHANGED.
 func _stamp(cx: int, cz: int, erase: bool) -> void:
+	# biome-7: the declared layer answers the brush — once per cell per stroke
+	# (stamps land every frame while held; the reaction should not). The brush
+	# is a catalyst mode, so it fires its own typed trigger. Group-miss no-op
+	# on maps without a declared layer.
+	var rkey: String = "%d,%d" % [cx, cz]
+	if not _stroke_reacted.has(rkey):
+		_stroke_reacted[rkey] = true
+		var biome: Node = get_tree().get_first_node_in_group("biome_grid")
+		if biome != null and biome.has_method("react"):
+			biome.react(cx, cz, "catalyst.biome_brush")
 	var el: String = ELEMENTS[_elem_idx]
 	var need: int = _biome_w() * _biome_d()
 	if not _fields.has(el):

@@ -12,7 +12,12 @@
 #              rule= (algo param, e.g. CA rule) · any other k=v kept verbatim in mods
 #   reactions: on=<trigger>:<response>[/<response>...]
 #              triggers:  catalyst | catalyst.<mode> | touch | dwell | tick
-#              responses: seed | step | claim | mute | unmute | mutate:<channel>
+#                         (mode ids are becoming_catalyst.MODES ids:
+#                          chromatic, fractal, branching, cellular, ...)
+#              responses: seed | step | claim | mute | unmute | mutate.<channel>
+#                         (dot, not colon — ":" is the token separator; channels
+#                          color / visibility|hide / transform|rotate|lift /
+#                          glyph / part route to the GridMutatorBase family)
 #
 # Returned per token (always a Dictionary, never null):
 #   { "empty": bool, "valid": bool, "kingdom": String, "algo": String,

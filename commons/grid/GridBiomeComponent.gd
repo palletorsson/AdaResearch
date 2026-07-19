@@ -31,10 +31,29 @@
 #     gated in GridSystem). No collider — the halo is scenery, walkability
 #     untouched, and the un-celled space beyond stays unclaimed (sieve Q3).
 #
-# Reactivity (pilot subset of the addendum):
+# Reactivity (biome-7 — the addendum wired into play):
 #   react(col, row, trigger) applies the cell's matching responses to the
 #   RUNTIME copy only: seed / step (generation counter) / claim (expand into
-#   adjacent `field` cells) / mute / unmute. Play never rewrites the map file.
+#   adjacent `field` cells) / mute / unmute / mutate:<channel>. Play never
+#   rewrites the map file. Sources now CALL it:
+#     - catalyst: every CatalystProjectile impact and every biome-brush stamp
+#       fires react_at_world(pos, "catalyst.<mode id>") — mode ids are the
+#       real ones from becoming_catalyst.MODES (chromatic, fractal,
+#       branching, ...), found via the "biome_grid" group (joined only by
+#       maps that declared the layer — the additive gate).
+#     - touch / dwell / tick: a clock in _process, enabled ONLY when some
+#       declared cell asks for one of these triggers. touch = the camera
+#       (the body's honest proxy, ProximityLOD's pattern) entering a cell;
+#       dwell = staying DWELL_SECONDS on it (fires once per visit); tick =
+#       every TICK_SECONDS on every tick-reactive cell. Headless runs have
+#       no camera: touch/dwell never fire; tick still does.
+#   Responses with teeth: `seed` now STAGES a newly-active unmuted cell
+#   (through the same dispatcher honesty guard — the vacuum that can be
+#   opened renders when opened); `mutate:<channel>` routes into the mutator
+#   stack (GridMutatorBase family: color / visibility|hide / transform|
+#   rotate|lift / glyph / part) as one advance_to_next_pattern() call —
+#   unrouted channels are counted and said out loud, never silent.
+#   _meta knobs: tick_seconds (default 5), dwell_seconds (default 2.5).
 
 extends Node3D
 
@@ -75,11 +94,28 @@ var _batches: Dictionary = {}    # key -> {mesh, mat, transforms: Array}
 var _recipe_cache: Dictionary = {}  # kingdom -> cached recipe array (shared meshes)
 var _flushed: bool = false       # after flush, late (runtime) spawns go direct
 
+# ── biome-7: the clock (touch / dwell / tick) + mutate routing ──
+const DEFAULT_TICK_SECONDS: float = 5.0
+const DEFAULT_DWELL_SECONDS: float = 2.5
+var _tick_seconds: float = DEFAULT_TICK_SECONDS
+var _dwell_seconds: float = DEFAULT_DWELL_SECONDS
+var _tick_accum: float = 0.0
+var _tick_keys: Array = []           # "col,row" of cells with a tick trigger
+var _occupied: Vector2i = Vector2i(-9999, -9999)
+var _dwell_accum: float = 0.0
+var _dwell_fired: bool = false
+var _mutators: Array = []            # cached GridMutatorBase nodes (lazy)
+var _mutators_scanned: bool = false
+
 
 func initialize(grid_sys: Node3D, cube_size: float, gutter: float) -> void:
 	_grid_system = grid_sys
 	_cube_size = cube_size
 	_gutter = gutter
+	# biome-7: only maps that reach initialize (declared layer) join the group,
+	# so catalyst wiring finds the component exactly when there is one to find.
+	add_to_group("biome_grid")
+	set_process(false)  # the clock switches on in generate() only if asked for
 
 
 func generate(biome_layer: Array, structure_layer: Array, stage_order: int = 0, meta: Dictionary = {}) -> void:
@@ -87,6 +123,9 @@ func generate(biome_layer: Array, structure_layer: Array, stage_order: int = 0, 
 	_stage_order = stage_order
 	_budget_instances = int(meta.get("budget_instances", DEFAULT_BUDGET_INSTANCES))
 	_visibility_range = float(meta.get("visibility_range", DEFAULT_VISIBILITY_RANGE))
+	_tick_seconds = maxf(0.1, float(meta.get("tick_seconds", DEFAULT_TICK_SECONDS)))
+	_dwell_seconds = maxf(0.1, float(meta.get("dwell_seconds", DEFAULT_DWELL_SECONDS)))
+	var needs_clock: bool = false
 	_grid_rows = _structure.size()
 	_grid_cols = 0
 	for r in _structure:
@@ -119,11 +158,22 @@ func generate(biome_layer: Array, structure_layer: Array, stage_order: int = 0, 
 				"halo": _stats["halos"] += 1
 			if not (parsed["reactions"] as Array).is_empty():
 				_stats["reactive"] += 1
+				for reaction in parsed["reactions"]:
+					var trig: String = String(reaction["trigger"])
+					if trig == "tick":
+						_tick_keys.append(key)
+						needs_clock = true
+					elif trig == "touch" or trig == "dwell":
+						needs_clock = true
 			if parsed["role"] == "seed":
 				_stage_cell(col, row, parsed)
 			elif parsed["role"] == "halo":
 				_spawn_halo(col, row, parsed)
 	_flush_batches()
+	if needs_clock:
+		set_process(true)
+		print("GridBiomeComponent: clock ON (tick %.1fs, dwell %.1fs, %d tick cells)" % [
+			_tick_seconds, _dwell_seconds, _tick_keys.size()])
 	print("GridBiomeComponent: %d biome cells (%d seeds, %d fields, %d mutes, %d halos, %d reactive, %d invalid)" % [
 		_stats["cells"], _stats["seeds"], _stats["fields"], _stats["mutes"],
 		_stats["halos"], _stats["reactive"], _stats["invalid"]])
@@ -149,7 +199,50 @@ func react(col: int, row: int, trigger: String) -> Array:
 		for response in reaction["responses"]:
 			_apply_response(key, col, row, cell, String(response))
 			applied.append(response)
+	if not applied.is_empty():
+		_stats["reactions_fired"] = int(_stats.get("reactions_fired", 0)) + 1
 	return applied
+
+
+# biome-7: the one entry point every play source shares — a world position
+# (projectile impact, brush stamp, the walking body) mapped to its cell.
+func react_at_world(world_pos: Vector3, trigger: String) -> Array:
+	var cell: Vector2i = _world_to_cell(world_pos)
+	return react(cell.x, cell.y, trigger)
+
+
+func _world_to_cell(world_pos: Vector3) -> Vector2i:
+	var local: Vector3 = to_local(world_pos) if is_inside_tree() else world_pos
+	var step: float = _cube_size + _gutter
+	return Vector2i(roundi(local.x / step), roundi(local.z / step))
+
+
+# ── biome-7: the clock. Runs ONLY on maps whose declared cells ask for
+#    touch / dwell / tick (set_process gated in generate). The camera stands
+#    in for the body (ProximityLOD's pattern); headless has none, so only
+#    tick fires there. ──
+
+func _process(delta: float) -> void:
+	_tick_accum += delta
+	if _tick_accum >= _tick_seconds and not _tick_keys.is_empty():
+		_tick_accum = 0.0
+		for key in _tick_keys:
+			var parts: PackedStringArray = String(key).split(",")
+			react(int(parts[0]), int(parts[1]), "tick")
+	var cam: Camera3D = get_viewport().get_camera_3d() if is_inside_tree() else null
+	if cam == null:
+		return
+	var cell: Vector2i = _world_to_cell(cam.global_position)
+	if cell != _occupied:
+		_occupied = cell
+		_dwell_accum = 0.0
+		_dwell_fired = false
+		react(cell.x, cell.y, "touch")
+	else:
+		_dwell_accum += delta
+		if not _dwell_fired and _dwell_accum >= _dwell_seconds:
+			_dwell_fired = true
+			react(cell.x, cell.y, "dwell")
 
 
 func _trigger_matches(declared: String, fired: String) -> bool:
@@ -163,7 +256,14 @@ func _apply_response(key: String, col: int, row: int, cell: Dictionary, response
 	var state: Dictionary = _runtime[key]
 	match response:
 		"seed":
+			# biome-7: seeding a not-yet-active, unmuted cell now RENDERS it —
+			# through the same dispatcher honesty guard as declared seeds.
+			# Responses apply in declared order, so "unmute/seed" opens the
+			# vacuum and then grows in it.
+			var was_active: bool = bool(state["active"])
 			state["active"] = true
+			if not was_active and not bool(state["muted"]):
+				_stage_cell(col, row, cell)
 		"step":
 			state["generation"] = int(state["generation"]) + 1
 		"mute":
@@ -182,8 +282,69 @@ func _apply_response(key: String, col: int, row: int, cell: Dictionary, response
 						# and the honesty guard applies to triggered growth too.
 						_stage_cell(col + offset.x, row + offset.y, cell)
 		_:
-			# mutate:<channel> routes into the mutator stack at biome-2.
-			pass
+			# biome-7: mutate.<channel> routes into the mutator stack. Dot is
+			# the canonical token form (":" is the layer's token separator and
+			# would shear the channel off in parse); direct react() callers
+			# may still pass "mutate:<channel>".
+			if response.begins_with("mutate"):
+				var channel: String = response.substr(6)
+				if channel.begins_with(".") or channel.begins_with(":"):
+					channel = channel.substr(1)
+				_route_mutate(channel.strip_edges())
+
+
+# ── biome-7: mutate:<channel> → the mutator stack (GridMutatorBase family).
+#    One reaction = one advance_to_next_pattern() on every mutator whose class
+#    carries the channel. Unrouted channels are counted and printed once —
+#    "routes nowhere" is now a fact the map states, not a silence. ──
+
+const MUTATE_ALIASES: Dictionary = {
+	"hide": "visibility", "show": "visibility",
+	"rotate": "transform", "lift": "transform",
+}
+var _unrouted_warned: Dictionary = {}
+
+
+func _route_mutate(channel: String) -> void:
+	if not _mutators_scanned:
+		_mutators_scanned = true
+		# climb to the outermost ancestor rather than get_tree().root:
+		# equivalent in play, and honest in probe contexts where nodes are
+		# parented but not yet "inside the tree" (SceneTree _init).
+		var scan_root: Node = self
+		while scan_root.get_parent() != null:
+			scan_root = scan_root.get_parent()
+		_collect_mutators(scan_root)
+		_stats["mutators_found"] = _mutators.size()
+	var wanted: String = String(MUTATE_ALIASES.get(channel, channel)).to_lower()
+	var routed: bool = false
+	for m in _mutators:
+		if not is_instance_valid(m):
+			continue
+		var s: Script = m.get_script()
+		var cls: String = ""
+		if s != null:
+			cls = String(s.get_global_name()).to_lower()
+			if cls.is_empty():
+				cls = s.resource_path.get_file().get_basename().to_lower()
+		if cls.contains(wanted) and m.has_method("advance_to_next_pattern"):
+			m.advance_to_next_pattern()
+			routed = true
+	if routed:
+		_stats["mutations_routed"] = int(_stats.get("mutations_routed", 0)) + 1
+	else:
+		_stats["mutations_unrouted"] = int(_stats.get("mutations_unrouted", 0)) + 1
+		if not _unrouted_warned.has(channel):
+			_unrouted_warned[channel] = true
+			print("GridBiomeComponent: mutate:%s has no %s mutator in this scene (counted, not silent)" % [
+				channel, wanted])
+
+
+func _collect_mutators(node: Node) -> void:
+	if node is GridMutatorBase:
+		_mutators.append(node)
+	for child in node.get_children():
+		_collect_mutators(child)
 
 
 # ── staging (biome-2): substrate via the dispatcher when the kingdom maps,

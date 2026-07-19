@@ -214,7 +214,7 @@
     },
     {
      "id": "biome-7",
-     "text": "Reactivity grammar (on=trigger:response): catalyst modes route into cell events via repaint_biome path + mutator stack; CA step/claim expands into field cells at runtime only; honesty guard applies to triggered growth",
+     "text": "Reactivity runtime DONE 2026-07-19: play now CALLS react(). Catalyst: every CatalystProjectile impact fires react_at_world(pos, catalyst.<mode id>) (real MODES ids: chromatic/fractal/branching/...) via the biome_grid group (joined only when a layer is declared - group-miss no-op elsewhere); the biome brush fires catalyst.biome_brush once per cell per stroke. Clock: touch (camera cell-entry, ProximityLOD proxy) / dwell (once per visit) / tick - _process enabled ONLY when a declared cell asks; _meta tick_seconds/dwell_seconds. Responses got teeth: seed now STAGES a newly-active unmuted cell (unmute/seed opens the vacuum and renders it); mutate.<channel> (DOT - colon is the token separator, parser would shear it) routes to GridMutatorBase family (color/visibility|hide/transform|rotate|lift/glyph/part) as advance_to_next_pattern(); unrouted channels counted + printed, never silent. Probe probe_biome_reactivity.gd 14/14 (typed-trigger negative, world mapping, claim staging, vacuum, declared-only clock, mutate real+unrouted); gate map Biome_ReactTest boots clock ON tick 3s / 5 reactive / 0 invalid. GOTCHA for probes: is_inside_tree() is FALSE during SceneTree _init - mutator scan climbs ancestors instead of get_tree().root.",
      "done": false
     },
     {

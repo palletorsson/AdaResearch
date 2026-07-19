@@ -109,6 +109,16 @@ func _dispatch_transformation(body: Node3D) -> void:
 	elif body.has_method("hit_by_projectile"):
 		body.hit_by_projectile(color_primary)
 
+## biome-7: the grid answers the catalyst. The cell under the impact reacts
+## with the projectile's typed mode ("catalyst.fractal", "catalyst.swarm", …).
+## Only maps that declared layers.biome join the "biome_grid" group, so this
+## is a group-miss no-op everywhere else — the additive gate.
+func _dispatch_biome_reaction() -> void:
+	var biome: Node = get_tree().get_first_node_in_group("biome_grid")
+	if biome != null and biome.has_method("react_at_world"):
+		biome.react_at_world(global_position, "catalyst." + _infer_mode_id())
+
+
 ## Returns the projectile's mode id ("transformation", "swarm", …) by
 ## inspecting the script that was set on it. Each mode's create_projectile
 ## sets the script to res://.../modes/<mode>_projectile.gd; we extract the
@@ -149,6 +159,7 @@ func _on_body_entered(body: Node3D) -> void:
 	# Always dispatch transformation FIRST so subclasses can't accidentally
 	# skip it by overriding _on_hit for their own visuals.
 	_dispatch_transformation(body)
+	_dispatch_biome_reaction()
 	_on_hit(body)
 	_impact_effect()
 	_cleanup()
