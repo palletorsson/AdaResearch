@@ -630,6 +630,11 @@ func generate_interactables(interactable_data):
 				else:
 					placement_errors.append("Failed to place artifact '%s' at (%d,%d,%d)" % [lookup_name, x, y_pos, z])
 	
+	# Spine force-include overlay (additive; /artifact-editor writes the flag).
+	# Gated by data: with no spine_force_include entries in any registry this
+	# is a single in-memory scan and an early return — maps are untouched.
+	interactable_count += _apply_spine_force_includes(total_size)
+
 	# Report results
 	if placement_errors.size() > 0:
 		print("GridInteractablesComponent: Placement errors:")
@@ -644,6 +649,139 @@ func generate_interactables(interactable_data):
 	
 	print("GridInteractablesComponent: ✅ Successfully placed %d interactables" % interactable_count)
 	interactables_generation_complete.emit(interactable_count)
+
+# ── Spine force-include ─────────────────────────────────────────────────────
+# Registry entries may carry `spine_force_include: true` (+ optional
+# `spine_force_cell: "x,z"`), written by the encyclopedia's /artifact-editor.
+# After normal placement, every flagged artifact is injected into the current
+# map IF the map belongs to a spine sequence — a runtime overlay, no map file
+# is edited. Additive and data-gated: no flagged entries → early return.
+
+var _spine_maps_cache: Dictionary = {}   # map_name -> true (lazy, once)
+
+func _spine_map_set() -> Dictionary:
+	if not _spine_maps_cache.is_empty():
+		return _spine_maps_cache
+	var spine_file := FileAccess.open("res://commons/maps/curriculum_spine.json", FileAccess.READ)
+	if spine_file == null:
+		return _spine_maps_cache
+	var spine_json = JSON.parse_string(spine_file.get_as_text())
+	spine_file.close()
+	if not (spine_json is Dictionary):
+		return _spine_maps_cache
+	var seqs = spine_json.get("spine", {}).get("sequences", [])
+	if not (seqs is Array):
+		return _spine_maps_cache
+	for s in seqs:
+		if not (s is Dictionary):
+			continue
+		var seq_name := str(s.get("name", ""))
+		if seq_name.is_empty():
+			continue
+		var seq_file := FileAccess.open("res://commons/maps/sequences/%s.json" % seq_name, FileAccess.READ)
+		if seq_file == null:
+			continue
+		var seq_json = JSON.parse_string(seq_file.get_as_text())
+		seq_file.close()
+		if not (seq_json is Dictionary):
+			continue
+		var maps = seq_json.get("sequences", {}).get(seq_name, {}).get("maps", [])
+		if maps is Array:
+			for m in maps:
+				_spine_maps_cache[str(m)] = true
+	print("GridInteractablesComponent: spine map set loaded (%d maps)" % _spine_maps_cache.size())
+	return _spine_maps_cache
+
+func _apply_spine_force_includes(total_size: float) -> int:
+	# 1) cheap scan — the data gate
+	var flagged: Array[String] = []
+	for lookup_name in grid_artifact_registry.keys():
+		var info = grid_artifact_registry[lookup_name]
+		if info is Dictionary and info.get("spine_force_include", false):
+			flagged.append(str(lookup_name))
+	if flagged.is_empty():
+		return 0
+
+	# 2) only spine maps receive the overlay. Match on the map's IDENTIFIER
+	# (folder name / map_info.lookup_name), never map_info.name — that is a
+	# display title ("Bridges and Islands"), not the id the spine lists.
+	var map_name := ""
+	if map_data_component:
+		map_name = str(map_data_component.map_name)
+	if map_name.is_empty() and map_data_component and map_data_component.json_loader:
+		map_name = str(map_data_component.json_loader.map_data.get("map_info", {}).get("lookup_name", ""))
+	if map_name.is_empty() or not _spine_map_set().has(map_name):
+		return 0
+
+	# 3) collect lookups already present so forcing never doubles
+	var present := {}
+	for obj in interactable_objects.values():
+		if is_instance_valid(obj) and obj.has_meta("artifact_lookup_name"):
+			present[str(obj.get_meta("artifact_lookup_name"))] = true
+
+	# 4) walkable free cells from the map's own layers, centre-out
+	var layers = {}
+	if map_data_component and map_data_component.json_loader:
+		layers = map_data_component.json_loader.map_data.get("layers", {})
+	var structure = layers.get("structure", [])
+	var utilities = layers.get("utilities", [])
+	var inter = layers.get("interactables", [])
+	if structure.is_empty():
+		return 0
+	var depth: int = structure.size()
+	var width: int = 0
+	if structure[0] is Array:
+		width = (structure[0] as Array).size()
+	var free_cells: Array[Vector2i] = []
+	for z in range(depth):
+		for x in range(width):
+			var s_cell: String = ""
+			if structure[z] is Array and x < (structure[z] as Array).size():
+				s_cell = str((structure[z] as Array)[x]).strip_edges()
+			if not s_cell.is_valid_int() or int(s_cell) <= 0:
+				continue   # void or non-walkable
+			var u_cell: String = ""
+			if z < utilities.size() and utilities[z] is Array and x < (utilities[z] as Array).size():
+				u_cell = str((utilities[z] as Array)[x]).strip_edges()
+			if not u_cell.is_empty():
+				continue
+			var i_cell: String = ""
+			if z < inter.size() and inter[z] is Array and x < (inter[z] as Array).size():
+				i_cell = str((inter[z] as Array)[x]).strip_edges()
+			if not i_cell.is_empty():
+				continue
+			free_cells.append(Vector2i(x, z))
+	var centre := Vector2(float(width) * 0.5, float(depth) * 0.5)
+	free_cells.sort_custom(func(a, b):
+		return Vector2(a).distance_to(centre) < Vector2(b).distance_to(centre))
+
+	# 5) place each flagged artifact
+	var placed := 0
+	for lookup in flagged:
+		if present.has(lookup):
+			continue   # the map already carries it naturally
+		var cell := Vector2i(-1, -1)
+		var wanted := str(grid_artifact_registry[lookup].get("spine_force_cell", ""))
+		if not wanted.is_empty():
+			var parts := wanted.split(",")
+			if parts.size() == 2 and parts[0].strip_edges().is_valid_int() and parts[1].strip_edges().is_valid_int():
+				var cand := Vector2i(int(parts[0]), int(parts[1]))
+				if free_cells.has(cand):
+					cell = cand
+		if cell.x < 0 and not free_cells.is_empty():
+			cell = free_cells[0]
+		if cell.x < 0:
+			print("GridInteractablesComponent: force-include '%s' skipped — no free cell in '%s'" % [lookup, map_name])
+			continue
+		free_cells.erase(cell)
+		var y_pos = structure_component.find_highest_y_at(cell.x, cell.y)
+		if utilities_component and utilities_component.has_utility_at(cell.x, y_pos, cell.y):
+			y_pos += 1
+		if _place_artifact(cell.x, y_pos, cell.y, lookup, total_size):
+			placed += 1
+			print("GridInteractablesComponent: ✅ force-included '%s' at (%d,%d) in spine map '%s'" % [lookup, cell.x, cell.y, map_name])
+	return placed
+
 
 # Place a Marching Cubes object using API
 func _place_cluster(x: int, y: int, z: int, cluster_name: String, rotation: float, total_size: float) -> bool:
