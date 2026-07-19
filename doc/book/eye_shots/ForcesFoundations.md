@@ -10,10 +10,10 @@ clearance violations: **0 overlaps, 4 tight** — the law wants ≥1.2m to walk 
 - `[tight  ] catalyst_target:0:0:1#shape:cube#hits:3 <-> catalyst_target:0:0:1#shape:cube gap +1.00m (centers 2.00m)`
 
 ## The move
-        r = apply_to_map(m, engine=args.engine, in_place=args.in_place,
-      File "C:\Users\palle\Documents\GitHub\AdaResearch_46\tools\place.py", line 222, in apply_to_map
-        new_inter[r][c] = name_to_token.get(p.artifact.lookup_name,
-    TypeError: list indices must be integers or slices, not float
+    logged 1 entries to ada_run\placement_log.json
+    summary: 1 maps processed
+      constraint improved: 1/1  mean Δ=+0.058
+      walkability improved: 0/1  mean Δ=-0.100
 
 no sibling kept — the move did not beat the ride (overlaps 0→0, tight 4→4). Note-only.
 

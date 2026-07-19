@@ -6,12 +6,12 @@
 clearance violations: **0 overlaps, 0 tight** — the law wants ≥1.2m to walk between.
 
 ## The move
-        r = apply_to_map(m, engine=args.engine, in_place=args.in_place,
-      File "C:\Users\palle\Documents\GitHub\AdaResearch_46\tools\place.py", line 222, in apply_to_map
-        new_inter[r][c] = name_to_token.get(p.artifact.lookup_name,
-    TypeError: list indices must be integers or slices, not float
+    logged 1 entries to ada_run\placement_log.json
+    summary: 1 maps processed
+      constraint improved: 1/1  mean Δ=+0.010
+      walkability improved: 1/1  mean Δ=+0.229
 
-no sibling kept — the move did not beat the ride (overlaps 0→0, tight 0→0). Note-only.
+no sibling kept — the move did not beat the ride (overlaps 0→0, tight 0→2). Note-only.
 
 ## The voice (qfep)
 6 of 6 cast members carry a theory-claim; 0 mute.

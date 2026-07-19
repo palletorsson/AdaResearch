@@ -14,9 +14,9 @@ clearance violations: **0 overlaps, 0 tight** — the law wants ≥1.2m to walk 
 no sibling kept — the move did not beat the ride (overlaps 0→0, tight 0→0). Note-only.
 
 ## The voice (qfep)
-1 of 2 cast members carry a theory-claim; 1 mute.
+2 of 2 cast members carry a theory-claim; 0 mute.
 - **dark_sphere** — Transformation often needs an invariant reference to be legible. The sphere stays simple so surrounding change
-- mute:  percolationnetwork_ca
+- **percolationnetwork_ca** — Percolation: raise the density of open cells and, at one sharp threshold, disconnected pockets suddenly span t
 
 ## The text vs the space
 walked.md exists — the writing names 2/2 of the cast; dwells declared for 0.

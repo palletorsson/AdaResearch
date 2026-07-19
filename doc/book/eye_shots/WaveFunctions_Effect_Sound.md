@@ -14,20 +14,19 @@ clearance violations: **11 overlaps, 55 tight** — the law wants ≥1.2m to wal
 - `[tight  ] pick_up_cube               <-> GlassRack#config:simple_tube gap +0.25m (centers 1.00m)`
 
 ## The move
-        new_placements = fn(room, artifacts, rng)
-      File "C:\Users\palle\Documents\GitHub\AdaResearch_46\tools\placement_research.py", line 1283, in strategy_humanoid_walker
-        for r in range(room.depth - d + 1):
-    TypeError: 'float' object cannot be interpreted as an integer
+    logged 1 entries to ada_run\placement_log.json
+    summary: 1 maps processed
+      constraint improved: 1/1  mean Δ=+0.129
+      walkability improved: 1/1  mean Δ=+0.074
 
-no sibling kept — the move did not beat the ride (overlaps 11→11, tight 55→55). Note-only.
+sibling **Trial_eye_WaveFunctions_Effect_Sound** kept: overlaps 11→6, tight 55→26, pathfinder OK.
 
 ## The voice (qfep)
-19 of 22 cast members carry a theory-claim; 3 mute.
+22 of 22 cast members carry a theory-claim; 0 mute.
 - **AudioContr** — the audio controller — the room's mixing desk; infrastructure that routes the chapter's voices, never dominant
 - **BigPipeSystem** — oscillation: the organ's logic at room scale — pipes whose lengths ARE their pitches; geometry as tuning, the 
 - **DualBallFMController** — mod_index — controls harmonic richness from pure tone to metallic chaos All timbral complexity is phase modula
 - **GlassRack** — oscillation: the glass rack chassis — the eurorack made walkable; modules at body height, patching as architec
-- mute: audio_catalog_tablet, interactable_demo, mario_test_sound_ui
 
 ## The text vs the space
 walked.md exists — the writing names 14/22 of the cast; dwells declared for 0.
@@ -35,4 +34,4 @@ walked.md exists — the writing names 14/22 of the cast; dwells declared for 0.
 - space without text: dark_sphere, harmonic_distance_table, interactable_demo, lab_table, mario_test_sound_ui, pick_up_cube — standing in the room, absent from the walk.
 
 ## The heuristic understanding
-The violations are real but mechanical moving does not fix them — they are placement DECISIONS (which body yields?), not placement errors. This is verdict material, not tooling material.
+The floor was fighting the walk — bodies inside each other's clearance. The mover found a better seating; the ride confirms it in text. The voice column above says what the room is FOR; the next writing pass should say it in the walked page.

@@ -14,20 +14,19 @@ clearance violations: **0 overlaps, 42 tight** — the law wants ≥1.2m to walk
 - `[tight  ] cube_scene:0:1:0.600       <-> cube_scene:0:1:0.400       gap +0.00m (centers 1.00m)`
 
 ## The move
-        if not try_place_at(a, target_r, target_c):
-      File "C:\Users\palle\Documents\GitHub\AdaResearch_46\tools\placement_research.py", line 1578, in try_place_at
-        for radius in range(0, max(room.depth, room.width)):
-    TypeError: 'float' object cannot be interpreted as an integer
+    logged 1 entries to ada_run\placement_log.json
+    summary: 1 maps processed
+      constraint improved: 0/1  mean Δ=-0.217
+      walkability improved: 1/1  mean Δ=+0.261
 
 no sibling kept — the move did not beat the ride (overlaps 0→0, tight 42→42). Note-only.
 
 ## The voice (qfep)
-17 of 20 cast members carry a theory-claim; 3 mute.
+20 of 20 cast members carry a theory-claim; 0 mute.
 - **cube_scene** — Transformation changes S while the cube serves as the invariant reference body. Because the base form is so le
 - **dark_sphere** — Transformation often needs an invariant reference to be legible. The sphere stays simple so surrounding change
 - **dgrid** — Dürer's perspective frame standing in the room — the drafting instrument that taught the Renaissance to projec
 - **floating_sphere_field** — The void was never empty, only under-rendered. Replacing the lattice with a drift trades the comfort of fixed 
-- mute: perspective_lines, plus_line_puzzle, scale_lines
 
 ## The text vs the space
 walked.md exists — the writing names 12/20 of the cast; dwells declared for 2.
