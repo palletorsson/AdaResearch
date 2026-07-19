@@ -16,10 +16,11 @@ clearance violations: **0 overlaps, 2 tight** — the law wants ≥1.2m to walk 
 no sibling kept — the move did not beat the ride (overlaps 0→0, tight 2→6). Note-only.
 
 ## The voice (qfep)
-2 of 9 cast members carry a theory-claim; 7 mute.
-- **qfep_balance_workbench** — the (F, E, λ, φ) tuple — drives QFE numerically, picks the dominant phase by Manhattan distance against the ga
-- **science_screen** — Transformation here is projection: a 3D state is re-expressed in 2D while preserving selected structural relat
-- mute: grab_sphere_E, grab_sphere_F, grab_sphere_lambda, lambda_slider, phi_slider, qfep_formula_3d, tt
+9 of 9 cast members carry a theory-claim; 0 mute.
+- **grab_sphere_E** — E(S), entropy, glowing red — the freedom and the possibility space, everything F would tidy away. Grab it and 
+- **grab_sphere_F** — F, free energy, in your hand and glowing blue — the order-seeking, pattern-finding drive, the term that wants 
+- **grab_sphere_lambda** — λ, the entropy drive, glowing green — the dial that weighs how much freedom the system spends against order. G
+- **lambda_slider** — lambda_edge: the entropy drive dial itself — λ=0 pure order, 0.4 the edge of chaos, 1 dissolution. The project
 
 ## The text vs the space
 walked.md exists — the writing names 8/9 of the cast; dwells declared for 0.

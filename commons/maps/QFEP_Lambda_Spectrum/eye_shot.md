@@ -15,9 +15,11 @@ clearance violations: **0 overlaps, 1 tight** — the law wants ≥1.2m to walk 
 no sibling kept — the move did not beat the ride (overlaps 0→0, tight 1→2). Note-only.
 
 ## The voice (qfep)
-1 of 7 cast members carry a theory-claim; 6 mute.
+7 of 7 cast members carry a theory-claim; 0 mute.
 - **bifurcation_walkway** — The logistic map's r parameter IS the Î» drive. At râ‰ˆ3.57, chaos begins â€” this is Î»_edge, where life exis
-- mute: chaos_particles, complexity_pattern, crystal_formation, dissolving_form, edge_particles, ordered_grid
+- **chaos_particles** — λ=1: the dissolution zone, particles exploding outward with no coherence, pure entropy. The hot end of the spe
+- **complexity_pattern** — Conway's Game of Life running at the edge of chaos — self-organizing complexity from the simplest rules. The c
+- **crystal_formation** — The λ=0 zone as a grown crystal — order so complete nothing can move. It states the equation's left boundary: 
 
 ## The text vs the space
 walked.md exists — the writing names 7/7 of the cast; dwells declared for 0.

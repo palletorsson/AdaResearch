@@ -14,8 +14,11 @@ clearance violations: **0 overlaps, 0 tight** — the law wants ≥1.2m to walk 
 no sibling kept — the move did not beat the ride (overlaps 0→0, tight 0→0). Note-only.
 
 ## The voice (qfep)
-0 of 6 cast members carry a theory-claim; 6 mute.
-- mute: fluid_form, phi_slider, preserved_pattern, rigid_sculpture, transforming_pattern, tt
+6 of 6 cast members carry a theory-claim; 0 mute.
+- **fluid_form** — A morphing iridescent form for the φ>0 zone — a shape that embraces becoming, never settling, iridescence as t
+- **phi_slider** — lambda_edge: the sensitivity dial — φ below zero resists change, above zero embraces it. The second hand on th
+- **preserved_pattern** — A checkerboard that never changes — φ<0 made flat and eternal. Conservation as a value: the pattern that has d
+- **rigid_sculpture** — A static crystalline form for the φ<0 zone — not just ordered but *resisting* change, order that has taken a s
 
 ## The text vs the space
 walked.md exists — the writing names 6/6 of the cast; dwells declared for 0.

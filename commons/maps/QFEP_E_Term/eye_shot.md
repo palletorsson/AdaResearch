@@ -8,19 +8,19 @@ clearance violations: **0 overlaps, 2 tight** — the law wants ≥1.2m to walk 
 - `[tight  ] random_cubes:0:0.5         <-> possibility_space_cloud:0:1:1 gap +0.41m (centers 1.41m)`
 
 ## The move
-        new_placements = fn(room, artifacts, rng)
-      File "C:\Users\palle\Documents\GitHub\AdaResearch_46\tools\placement_research.py", line 1283, in strategy_humanoid_walker
-        for r in range(room.depth - d + 1):
-    TypeError: 'float' object cannot be interpreted as an integer
+    logged 1 entries to ada_run\placement_log.json
+    summary: 1 maps processed
+      constraint improved: 1/1  mean Δ=+0.033
+      walkability improved: 0/1  mean Δ=-0.034
 
-no sibling kept — the move did not beat the ride (overlaps 0→0, tight 2→2). Note-only.
+no sibling kept — the move did not beat the ride (overlaps 0→0, tight 2→7). Note-only.
 
 ## The voice (qfep)
-3 of 7 cast members carry a theory-claim; 4 mute.
+7 of 7 cast members carry a theory-claim; 0 mute.
 - **entropy_fan** — more ways to be is more entropy — possibility itself is what S measures.
+- **lambda_slider** — lambda_edge: the entropy drive dial itself — λ=0 pure order, 0.4 the edge of chaos, 1 dissolution. The project
 - **microstate_counter** — entropy counts the ways — S = k log W; one macrostate, astronomically many microstates.
-- **possibility_space_cloud** — entropy is the size of the space of what could be.
-- mute: lambda_slider, particle_chaos, random_cubes, tt
+- **particle_chaos** — A high-entropy particle system at maximum spread — random velocities, no structure, the λ=1 extreme where poss
 
 ## The text vs the space
 walked.md exists — the writing names 6/7 of the cast; dwells declared for 0.

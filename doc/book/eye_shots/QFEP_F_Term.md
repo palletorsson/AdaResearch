@@ -16,12 +16,11 @@ clearance violations: **0 overlaps, 2 tight** — the law wants ≥1.2m to walk 
 no sibling kept — the move did not beat the ride (overlaps 0→0, tight 2→4). Note-only.
 
 ## The voice (qfep)
-5 of 8 cast members carry a theory-claim; 3 mute.
+8 of 8 cast members carry a theory-claim; 0 mute.
+- **crystal_cluster** — λ=0 made solid: a crystalline formation, pure order, frozen pattern. The cold end of the spectrum where F has 
 - **dark_sphere** — Transformation often needs an invariant reference to be legible. The sphere stays simple so surrounding change
+- **lambda_slider** — lambda_edge: the entropy drive dial itself — λ=0 pure order, 0.4 the edge of chaos, 1 dissolution. The project
 - **science_screen** — Transformation here is projection: a 3D state is re-expressed in 2D while preserving selected structural relat
-- **shannon_workbench** — p — the only knob. Drives the sample distribution, the entropy readout, and the dot position on the hill betwe
-- **snap_cube_puzzle** — The rigid, ordered form that emerges when a system fully minimizes its free energy (F → minimum, S → low).
-- mute: crystal_cluster, lambda_slider, tt
 
 ## The text vs the space
 walked.md exists — the writing names 5/8 of the cast; dwells declared for 0.

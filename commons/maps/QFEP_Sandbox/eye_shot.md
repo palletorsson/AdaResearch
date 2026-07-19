@@ -14,8 +14,11 @@ clearance violations: **0 overlaps, 0 tight** — the law wants ≥1.2m to walk 
 no sibling kept — the move did not beat the ride (overlaps 0→0, tight 0→1). Note-only.
 
 ## The voice (qfep)
-0 of 6 cast members carry a theory-claim; 6 mute.
-- mute: lambda_slider, phi_slider, qfep_formula_3d, qfep_reactor, reactive_particles, tt
+6 of 6 cast members carry a theory-claim; 0 mute.
+- **lambda_slider** — lambda_edge: the entropy drive dial itself — λ=0 pure order, 0.4 the edge of chaos, 1 dissolution. The project
+- **phi_slider** — lambda_edge: the sensitivity dial — φ below zero resists change, above zero embraces it. The second hand on th
+- **qfep_formula_3d** — synthesis: the whole formula in the air — QFE = F − λE(S) + φΔE(S,t), each term glowing its signature color, a
+- **qfep_reactor** — The central orb that visualizes the whole QFEP state — pulsing and glowing as λ and φ move, blue toward order,
 
 ## The text vs the space
 walked.md exists — the writing names 5/6 of the cast; dwells declared for 0.
