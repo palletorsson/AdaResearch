@@ -109,7 +109,8 @@
     "approach_dir": "front",
     "derived_at": "2026-04-29T09:39:46.246444Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "The flat diagrams of chance — scatter plots, walks, histograms — stood upright in the room. The board bridges the textbook and the terrarium: what the page could only plot, the space around you performs."
   },
   "GaussianBlurCircle": {
    "category": "emergence",
@@ -217,7 +218,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.246444Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "The bell curve applied to sight: a circle dissolving under gaussian blur, each pixel averaged with its neighbors under the curve. The same mathematics that files the draws also softens the world — distribution as a way of seeing."
   },
   "GaussianBlurShader": {
    "category": "emergence",
@@ -871,7 +873,8 @@
     1.0,
     1,
     1.0
-   ]
+   ],
+   "qfep_connection": "The room's namesake engine: grid cubes spun by three independent draws, one per axis. Orientation surrendered to chance while position holds — the grid keeping order in one register and losing it in another, which is the whole trick of controlled entropy."
   },
   "RotateGridCubes": {
    "category": "procedural",
@@ -976,7 +979,7 @@
   "VoxelNoiseROIs": {
    "category": "procedural",
    "complexity": "intermediate",
-   "description": "Voxel noise with regions of interest (ROIs) \u2014 isolated volumes where different noise parameters or thresholds apply, useful for terrain biomes.",
+   "description": "Voxel noise with regions of interest (ROIs) — isolated volumes where different noise parameters or thresholds apply, useful for terrain biomes.",
    "dev_themes": [
     "probability",
     "procedural",
@@ -1083,7 +1086,7 @@
   "WhiteNoiseGallery": {
    "category": "procedural",
    "complexity": "intermediate",
-   "description": "A gallery showcasing pure white noise \u2014 uniform random values with no correlation between samples. The baseline for understanding structured noise types.",
+   "description": "A gallery showcasing pure white noise — uniform random values with no correlation between samples. The baseline for understanding structured noise types.",
    "dev_themes": [
     "art",
     "probability",
@@ -1416,7 +1419,7 @@
   "bubble_particles": {
    "category": "procedural",
    "complexity": "intermediate",
-   "description": "Movement-based procedural bubble system \u2014 bubbles spawn in a configurable area, rise with randomized speeds and sizes, fade over time, and pop with synthesized audio. Concurrent sound limiting and pitch variation create an organic underwater soundscape.",
+   "description": "Movement-based procedural bubble system — bubbles spawn in a configurable area, rise with randomized speeds and sizes, fade over time, and pop with synthesized audio. Concurrent sound limiting and pitch variation create an organic underwater soundscape.",
    "dev_themes": [
     "music",
     "probability",
@@ -1757,7 +1760,7 @@
     "randomness"
    ],
    "name": "Coin Toss",
-   "qfep_connection": "Bernoulli trial \u2014 the atom of probability. p = 0.5 as perfect symmetry.",
+   "qfep_connection": "Bernoulli trial — the atom of probability. p = 0.5 as perfect symmetry.",
    "scene": "res://algorithms/randomness/coin_toss/coin_toss.tscn",
    "sequence": "randomness",
    "tags": [
@@ -2078,7 +2081,7 @@
   "dice_throw": {
    "category": "randomness",
    "complexity": "beginner",
-   "description": "A VR dice on a felt table. Grab and throw the dice \u2014 roll a 6 and 100 balls rain from the sky, roll a 1 and just 1 ball falls. Tracks roll statistics showing convergence to discrete uniform distribution with expected value 3.5.",
+   "description": "A VR dice on a felt table. Grab and throw the dice — roll a 6 and 100 balls rain from the sky, roll a 1 and just 1 ball falls. Tracks roll statistics showing convergence to discrete uniform distribution with expected value 3.5.",
    "dev_themes": [
     "probability",
     "randomness"
@@ -2091,7 +2094,7 @@
     "randomness"
    ],
    "name": "Dice Throw",
-   "qfep_connection": "Equiprobability \u2014 each face equally likely. Fairness as geometric symmetry.",
+   "qfep_connection": "Equiprobability — each face equally likely. Fairness as geometric symmetry.",
    "scene": "res://algorithms/randomness/dice_throw/dice_throw.tscn",
    "sequence": "randomness",
    "tags": [
@@ -2296,7 +2299,8 @@
     ],
     "max_dimension_m": 0.0,
     "measured_at": "2026-04-29T07:09:56.762620Z"
-   }
+   },
+   "qfep_connection": "The glitch as digital matter showing its grain: corruption arranged as revelation. When bits misfire the smooth surface confesses it was always discrete underneath — randomness used as a solvent for the illusion of continuity."
   },
   "distribution_visualization": {
    "category": "emergence",
@@ -2533,7 +2537,7 @@
   "entropy_jar": {
    "category": "randomness",
    "complexity": "beginner",
-   "description": "A glass jar of red and blue particles on a pedestal. Grab and shake to mix them \u2014 they never unmix. Live Shannon entropy readout tracks disorder. The second law of thermodynamics felt physically through VR interaction.",
+   "description": "A glass jar of red and blue particles on a pedestal. Grab and shake to mix them — they never unmix. Live Shannon entropy readout tracks disorder. The second law of thermodynamics felt physically through VR interaction.",
    "dev_themes": [
     "probability",
     "randomness"
@@ -2546,7 +2550,7 @@
     "randomness"
    ],
    "name": "Entropy Jar",
-   "qfep_connection": "Irreversibility \u2014 mixing is easy, unmixing is impossible. The arrow of time made tangible through embodied interaction.",
+   "qfep_connection": "Irreversibility — mixing is easy, unmixing is impossible. The arrow of time made tangible through embodied interaction.",
    "scene": "res://algorithms/randomness/entropy_jar/entropy_jar.tscn",
    "sequence": "randomness",
    "tags": [
@@ -2764,7 +2768,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.246941Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "A whole environment kitbashed by draw: parts picked, placed, and joined by chance. The room-scale claim of the chapter — not an object randomized, but a *place* that entropy furnished."
   },
   "evolutionary_algorithms": {
    "category": "emergence",
@@ -2971,7 +2976,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.246941Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "Randomness at full amplitude: particles driven by draws with no damping, no distribution's comfort. The room's outer limit — past structure, past statistics-as-shape — where entropy stops being a resource and becomes weather."
   },
   "galton_board": {
    "category": "randomness",
@@ -2989,7 +2995,7 @@
     "randomness"
    ],
    "name": "Galton Board",
-   "qfep_connection": "CLT as convergence \u2014 many independent binary choices accumulate into Gaussian structure. Order from repetition.",
+   "qfep_connection": "CLT as convergence — many independent binary choices accumulate into Gaussian structure. Order from repetition.",
    "scene": "res://algorithms/randomness/galton_board/galton_board.tscn",
    "sequence": "randomness",
    "tags": [
@@ -3179,7 +3185,8 @@
     1.0,
     1,
     1.0
-   ]
+   ],
+   "qfep_connection": "The gaussian source itself — draws clustered around a mean, rare at the tails. Uniform chance says anywhere; gaussian chance says near here, mostly. The difference between noise and temperament."
   },
   "hardware_entropy_decay": {
    "category": "randomness",
@@ -3202,7 +3209,7 @@
     "randomness"
    ],
    "name": "Hardware Entropy Decay",
-   "qfep_connection": "Entropy from embodiment \u2014 the observer's physical presence is the source of randomness that degrades order.",
+   "qfep_connection": "Entropy from embodiment — the observer's physical presence is the source of randomness that degrades order.",
    "scene": "res://algorithms/randomness/hardware_entropy_decay/hardware_entropy_decay.tscn",
    "sequence": "randomness",
    "size_group": "xlarge",
@@ -3629,7 +3636,7 @@
     "randomness"
    ],
    "name": "Monte Carlo Dart Board",
-   "qfep_connection": "Computation through accumulation \u2014 random sampling converges to mathematical truth.",
+   "qfep_connection": "Computation through accumulation — random sampling converges to mathematical truth.",
    "scene": "res://algorithms/randomness/monte_carlo_dartboard/monte_carlo_dartboard.tscn",
    "sequence": "randomness",
    "tags": [
@@ -3845,7 +3852,7 @@
   "noise_mixer": {
    "category": "procedural",
    "complexity": "intermediate",
-   "description": "Fractal Brownian Motion noise mixer \u2014 layers multiple sin-based noise octaves with controllable lacunarity and persistence. 128x128 floor texture with earth-tone color ramp. VR sliders adjust octaves (1\u20138), lacunarity (1.5\u20133.0), and persistence (0.3\u20130.7) to explore how complexity emerges from layered simple functions.",
+   "description": "Fractal Brownian Motion noise mixer — layers multiple sin-based noise octaves with controllable lacunarity and persistence. 128x128 floor texture with earth-tone color ramp. VR sliders adjust octaves (1–8), lacunarity (1.5–3.0), and persistence (0.3–0.7) to explore how complexity emerges from layered simple functions.",
    "dev_themes": [
     "music",
     "probability",
@@ -5962,7 +5969,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.246941Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "The Windows Pipes screensaver reborn: a pipe growing by random turns, filling the volume with plumbing nobody designed. Idle-machine art — the desktop's oldest proof that a few dice and a growth rule can furnish a world."
   },
   "pixel_cloud": {
    "category": "procedural",
@@ -6636,7 +6644,7 @@
     "randomness"
    ],
    "name": "PRNG Crank Machine",
-   "qfep_connection": "Determinism masquerading as randomness \u2014 structure hidden in apparent chaos.",
+   "qfep_connection": "Determinism masquerading as randomness — structure hidden in apparent chaos.",
    "scene": "res://algorithms/randomness/prng_crank_machine/prng_crank_machine.tscn",
    "sequence": "randomness",
    "tags": [
@@ -6951,7 +6959,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.247436Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "The bell made object: samples piling into the curve that chance keeps its accounts in. No single draw knows about the bell; the bell knows about all of them."
   },
   "random_butterflies": {
    "category": "emergence",
@@ -7058,7 +7067,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.247436Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "Butterflies scattered by draw — position, wing-beat, drift all sampled. The prettiest argument in the room that entropy is freedom: nothing places them, and that is why they look alive."
   },
   "random_color_book_page_collection": {
    "category": "procedural",
@@ -7658,7 +7668,7 @@
   "random_number_book_page_1955": {
    "category": "procedural",
    "complexity": "beginner",
-   "description": "A single page from the RAND Corporation 1955 random digit table. Numbers cascade live top-to-bottom. Touch any 5-digit number to freeze it in amber \u2014 the rest keep flowing.",
+   "description": "A single page from the RAND Corporation 1955 random digit table. Numbers cascade live top-to-bottom. Touch any 5-digit number to freeze it in amber — the rest keep flowing.",
    "dev_themes": [
     "probability",
     "procedural",
@@ -7765,12 +7775,13 @@
     "approach_dir": "front",
     "derived_at": "2026-04-29T09:39:46.247436Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "A page from A Million Random Digits (RAND, 1955) — the book nobody reads and everybody trusted. Before hardware entropy, randomness was a print run: tables harvested from an electronic roulette, proofread for bias, sold to scientists who needed disorder they could cite. Chance with an ISBN — the moment entropy became infrastructure."
   },
   "random_number_book_page_collection": {
    "category": "procedural",
    "complexity": "beginner",
-   "description": "RAND Corporation 1955 random digit table brought to life. Numbers cascade top-to-bottom like a stock ticker. Touch any number in VR to freeze it \u2014 frozen numbers glow amber while the rest keep flowing. Demonstrates that randomness is a process, not a snapshot.",
+   "description": "RAND Corporation 1955 random digit table brought to life. Numbers cascade top-to-bottom like a stock ticker. Touch any number in VR to freeze it — frozen numbers glow amber while the rest keep flowing. Demonstrates that randomness is a process, not a snapshot.",
    "dev_themes": [
     "probability",
     "procedural",
@@ -7783,8 +7794,8 @@
    "map_sequences": [
     "randomness"
    ],
-   "name": "Random Number Book \u2014 Live Cascade",
-   "qfep_connection": "Randomness as flow \u2014 freezing a number is an act of observation that collapses possibility into fixed value.",
+   "name": "Random Number Book — Live Cascade",
+   "qfep_connection": "Randomness as flow — freezing a number is an act of observation that collapses possibility into fixed value.",
    "scene": "res://algorithms/randomness/randomnumbergeneration/scenes/random_number_book_page_collection.tscn",
    "sequence": "randomness",
    "tags": [
@@ -8151,7 +8162,8 @@
     1.0,
     1,
     1.0
-   ]
+   ],
+   "qfep_connection": "Geometry under dice: translate, rotate, scale, each parameter drawn. The form survives as a family resemblance across its own variations — identity loosened, not lost. Entropy applied to shape is variation; applied without bound, dissolution."
   },
   "random_transformations_matrices": {
    "artifact_type": "interactive_algorithm",
@@ -8579,7 +8591,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.247436Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "A walk at 128x128 grain: one wanderer, tiny steps, no memory. The fine grid turns the walk's statistics visible — dense scribble near the origin, thinning frontier — chance accumulating into a shape no single step intended."
   },
   "random_walk_collection": {
    "category": "procedural",
@@ -8689,7 +8702,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.247436Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "Many walks released together: each path senseless alone, the ensemble growing the square-root halo the mathematics promised. The collection is the lesson — randomness has laws, but only in the plural."
   },
   "random_walk_grab_paper": {
    "category": "procedural",
@@ -8810,7 +8824,7 @@
     "randomness"
    ],
    "name": "Random Walk Leash",
-   "qfep_connection": "Embodied randomness \u2014 the walk isn't watched, it's felt. Your arm becomes the accumulator of stochastic impulses.",
+   "qfep_connection": "Embodied randomness — the walk isn't watched, it's felt. Your arm becomes the accumulator of stochastic impulses.",
    "scene": "res://algorithms/randomness/random_walk_leash/random_walk_leash.tscn",
    "sequence": "randomness",
    "tags": [
@@ -9223,7 +9237,7 @@
    "capacity": "DISTINGUISH structured randomness from uniform randomness by seeing how a single constraint (minimum distance) transforms a point cloud from chaos to jazz",
    "category": "emergence",
    "complexity": "beginner",
-   "description": "Three distributions reveal three relationships with space. Uniform scatters without memory \u2014 each point ignores every other. Gaussian clusters around a center \u2014 proximity is destiny. Blue noise enforces minimum distance via dart-throwing rejection, structured randomness where emptiness is forbidden. The critical parameter is blue_noise_min_dist: the exclusion radius that converts white noise into jazz. Contrasts with randompoint (single white noise); prepares for Perlin noise (structured randomness with continuity).",
+   "description": "Three distributions reveal three relationships with space. Uniform scatters without memory — each point ignores every other. Gaussian clusters around a center — proximity is destiny. Blue noise enforces minimum distance via dart-throwing rejection, structured randomness where emptiness is forbidden. The critical parameter is blue_noise_min_dist: the exclusion radius that converts white noise into jazz. Contrasts with randompoint (single white noise); prepares for Perlin noise (structured randomness with continuity).",
    "dev_themes": [
     "emergence",
     "probability",
@@ -9259,7 +9273,7 @@
     "num_points": "Number of points to spawn (default: 30)",
     "size_group": "compact"
    },
-   "qfep_connection": "Pure E(S) \u2014 three distributions at three lambda values. Uniform is maximum entropy (lambda=0). Gaussian introduces spatial bias (lambda rising). Blue noise enforces a minimum-distance constraint that converts raw entropy into structured randomness \u2014 lambda at full strength, where constraint produces beauty, not order.",
+   "qfep_connection": "Pure E(S) — three distributions at three lambda values. Uniform is maximum entropy (lambda=0). Gaussian introduces spatial bias (lambda rising). Blue noise enforces a minimum-distance constraint that converts raw entropy into structured randomness — lambda at full strength, where constraint produces beauty, not order.",
    "scene": "res://algorithms/randomness/randompoints/randompoints.tscn",
    "sequence": "randomness",
    "size_group": "compact",
@@ -9657,7 +9671,7 @@
   "rejection_sampling_demo": {
    "category": "randomness",
    "complexity": "beginner",
-   "description": "Visual scatter plot of the accept/reject method for sampling arbitrary distributions. 2000 uniform random points plotted against a Gaussian target curve \u2014 green dots accepted (below curve), red dots rejected (above). Shows acceptance ratio.",
+   "description": "Visual scatter plot of the accept/reject method for sampling arbitrary distributions. 2000 uniform random points plotted against a Gaussian target curve — green dots accepted (below curve), red dots rejected (above). Shows acceptance ratio.",
    "dev_themes": [
     "probability",
     "randomness"
@@ -9851,7 +9865,8 @@
     1.0,
     1,
     1.0
-   ]
+   ],
+   "qfep_connection": "The demolition primitive: cubes deleted by chance, the grid thinned by dice. Where every other builder in this world adds, this one subtracts without a plan — and the room that remains is a negative sculpture of the sequence of draws. Entropy as an editor."
   },
   "rotate_grid_cubes": {
    "category": "procedural",
@@ -10154,12 +10169,13 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.247436Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "Sculpting by random modification: a form shaped by accepting the dice's suggestions. The sculptor keeps only the veto — chance proposes every stroke. Authorship as curation of accidents."
   },
   "shader_07_noise": {
    "category": "procedural",
    "complexity": "advanced",
-   "description": "Book of Shaders chapter 7 \u2014 value noise, gradient noise, simplex noise implemented as GPU shaders on a quad display.",
+   "description": "Book of Shaders chapter 7 — value noise, gradient noise, simplex noise implemented as GPU shaders on a quad display.",
    "dev_themes": [
     "probability",
     "procedural",
@@ -10213,7 +10229,7 @@
   "shader_08_cellularnoise": {
    "category": "procedural",
    "complexity": "advanced",
-   "description": "Book of Shaders chapter 8 \u2014 Voronoi and Worley noise patterns rendered as GPU shaders. Shows distance fields and cell boundaries.",
+   "description": "Book of Shaders chapter 8 — Voronoi and Worley noise patterns rendered as GPU shaders. Shows distance fields and cell boundaries.",
    "dev_themes": [
     "biology",
     "probability",
@@ -10383,7 +10399,7 @@
   "shannon_entropy_meter": {
    "category": "randomness",
    "complexity": "beginner",
-   "description": "Wall-mounted Shannon entropy gauge \u2014 generates a random sequence, computes symbol frequencies, and displays H = -\u03a3 p(x) log\u2082 p(x). Bar gauge fills from 0 to max entropy (~3.32 bits for 10 symbols). Frequency histogram shows symbol distribution.",
+   "description": "Wall-mounted Shannon entropy gauge — generates a random sequence, computes symbol frequencies, and displays H = -Σ p(x) log₂ p(x). Bar gauge fills from 0 to max entropy (~3.32 bits for 10 symbols). Frequency histogram shows symbol distribution.",
    "dev_themes": [
     "probability",
     "randomness"
@@ -10604,7 +10620,7 @@
   "slot_machine": {
    "category": "randomness",
    "complexity": "beginner",
-   "description": "A classic slot machine with 3 spinning reels. Pull the VR lever to spin \u2014 reels stop one by one, left to right. Tracks a histogram of symbol frequencies showing convergence to uniform distribution. Triple matches flash gold. AUTO mode for rapid sampling.",
+   "description": "A classic slot machine with 3 spinning reels. Pull the VR lever to spin — reels stop one by one, left to right. Tracks a histogram of symbol frequencies showing convergence to uniform distribution. Triple matches flash gold. AUTO mode for rapid sampling.",
    "dev_themes": [
     "probability",
     "randomness"
@@ -10617,7 +10633,7 @@
     "randomness"
    ],
    "name": "Slot Machine",
-   "qfep_connection": "Independence \u2014 each reel is an independent uniform trial. The combination space grows multiplicatively (6^3 = 216 outcomes).",
+   "qfep_connection": "Independence — each reel is an independent uniform trial. The combination space grows multiplicatively (6^3 = 216 outcomes).",
    "scene": "res://algorithms/randomness/slot_machine/slot_machine.tscn",
    "sequence": "randomness",
    "tags": [
@@ -11271,7 +11287,8 @@
     "approach_dir": "front",
     "derived_at": "2026-04-29T09:39:46.247932Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "The chapter's founding trial: the crank versus the harvest. A PRNG is determinism wearing a costume — same seed, same sequence, forever replayable. A TRNG listens to the world (decay, thermal hiss) and cannot repeat itself even if asked. Standing between them you learn that most computed randomness is a performance of freedom, and real entropy has to be gathered, not made."
   },
   "value_noise": {
    "category": "procedural",
@@ -11383,7 +11400,7 @@
   "voxelnoise": {
    "category": "procedural",
    "complexity": "intermediate",
-   "description": "3D noise visualized as voxels \u2014 cubes appear or disappear based on noise threshold, revealing the underlying scalar field as solid geometry.",
+   "description": "3D noise visualized as voxels — cubes appear or disappear based on noise threshold, revealing the underlying scalar field as solid geometry.",
    "dev_themes": [
     "probability",
     "procedural",
@@ -11800,7 +11817,7 @@
   "seed_replay_demo": {
    "name": "Seed Replay Demo",
    "lookup_name": "seed_replay_demo",
-   "description": "Demonstrates seed reproducibility \u2014 an 8x8 grid of colored cubes generated from a seed. Same seed always produces the same pattern. Slider changes seed, Replay regenerates identically, Random picks a new seed.",
+   "description": "Demonstrates seed reproducibility — an 8x8 grid of colored cubes generated from a seed. Same seed always produces the same pattern. Slider changes seed, Replay regenerates identically, Random picks a new seed.",
    "scene": "res://algorithms/randomness/seed_replay/seed_replay_demo.tscn",
    "category": "randomness",
    "complexity": "beginner",
@@ -11864,7 +11881,7 @@
   "distribution_comparator": {
    "name": "Distribution Comparator",
    "lookup_name": "distribution_comparator",
-   "description": "Side-by-side comparison of 3 probability distributions \u2014 Uniform (blue), Gaussian (green), Exponential (orange). Three columns of 16 histogram bars generated from the same sample count. Slider scales samples from 100 to 10000; resample button regenerates all three.",
+   "description": "Side-by-side comparison of 3 probability distributions — Uniform (blue), Gaussian (green), Exponential (orange). Three columns of 16 histogram bars generated from the same sample count. Slider scales samples from 100 to 10000; resample button regenerates all three.",
    "scene": "res://algorithms/randomness/distribution_comparator/distribution_comparator.tscn",
    "category": "randomness",
    "complexity": "intermediate",
@@ -11884,7 +11901,7 @@
    ],
    "map_ready": true,
    "include_in_map_data": true,
-   "qfep_connection": "Three distributions from one random source \u2014 the channeling rule (F) determines shape. Uniform is maximum entropy; Gaussian is the attractor of summation; Exponential is memoryless decay. Same randomness, different constraints, different forms.",
+   "qfep_connection": "Three distributions from one random source — the channeling rule (F) determines shape. Uniform is maximum entropy; Gaussian is the attractor of summation; Exponential is memoryless decay. Same randomness, different constraints, different forms.",
    "spatial_needs": {
     "platform": "pedestal",
     "footprint_cells": 1,
@@ -12030,7 +12047,7 @@
   "reaction_diffusion_intro": {
    "category": "emergence",
    "complexity": "intermediate",
-   "description": "A 32x32 Gray-Scott reaction-diffusion simulation rendered as an ImageTexture. Two chemicals U and V interact to produce spots, stripes, or coral patterns from random initial conditions \u2014 Turing morphogenesis made visible.",
+   "description": "A 32x32 Gray-Scott reaction-diffusion simulation rendered as an ImageTexture. Two chemicals U and V interact to produce spots, stripes, or coral patterns from random initial conditions — Turing morphogenesis made visible.",
    "dev_themes": [
     "emergence",
     "morphogenesis",
@@ -13622,7 +13639,7 @@
   "galton_friction": {
    "category": "randomness",
    "complexity": "intermediate",
-   "description": "Two solutions to the Galton bell side by side \u2014 THE HARVEST (real physics, a falling body, lumpy and never repeating) vs THE CRANK (pseudo, bin = sum(randf() < 0.5), instant and perfect and reproducible). The crank is smaller because it is cheaper: real randomness is too expensive or too specific to keep everywhere.",
+   "description": "Two solutions to the Galton bell side by side — THE HARVEST (real physics, a falling body, lumpy and never repeating) vs THE CRANK (pseudo, bin = sum(randf() < 0.5), instant and perfect and reproducible). The crank is smaller because it is cheaper: real randomness is too expensive or too specific to keep everywhere.",
    "dev_themes": [
     "probability",
     "randomness"
@@ -13635,7 +13652,7 @@
     "randomness"
    ],
    "name": "Galton Friction",
-   "qfep_connection": "The manufactured vs the harvested \u2014 real randomness is expensive and specific; what the system holds is the crank. The bell you trust is almost always made.",
+   "qfep_connection": "The manufactured vs the harvested — real randomness is expensive and specific; what the system holds is the crank. The bell you trust is almost always made.",
    "scene": "res://algorithms/randomness/galton_friction/galton_friction.tscn",
    "sequence": "randomness",
    "tags": [

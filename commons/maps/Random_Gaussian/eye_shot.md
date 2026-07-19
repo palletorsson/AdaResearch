@@ -22,15 +22,15 @@ clearance violations: **7 overlaps, 1 tight** — the law wants ≥1.2m to walk 
 no sibling kept — the move did not beat the ride (overlaps 7→7, tight 1→1). Note-only.
 
 ## The voice (qfep)
-6 of 9 cast members carry a theory-claim; 3 mute.
+9 of 9 cast members carry a theory-claim; 0 mute.
+- **GaussianBlurCircle** — The bell curve applied to sight: a circle dissolving under gaussian blur, each pixel averaged with its neighbo
 - **GaussianBlurShader** — max_blur_radius — controlled to 40 here vs 8 on CPU; GPU permits a wider kernel without lag The kernel is the 
 - **GaussianPaintSplatter** — stddev — the standard deviation that controls splatter spread vs concentration A bell curve drawn in the air, 
 - **dark_sphere** — Transformation often needs an invariant reference to be legible. The sphere stays simple so surrounding change
-- **distribution_comparator** — Three distributions from one random source — the channeling rule (F) determines shape. Uniform is maximum entr
-- mute: GaussianBlurCircle, gaussian_random, random_bell_curve
 
 ## The text vs the space
-**no walked.md** — the space stands unwritten; this note is the first text this map has.
+walked.md exists — the writing names 9/9 of the cast; dwells declared for 0.
+- **the writing's subjects are blocked in space**: GaussianBlurCircle, GaussianPaintSplatter, dark_sphere, distribution_comparator, distribution_sampler, galton_board, gaussian_random, random_bell_curve sit in clearance violations — the text promises what the floor obstructs.
 
 ## The heuristic understanding
 The violations are real but mechanical moving does not fix them — they are placement DECISIONS (which body yields?), not placement errors. This is verdict material, not tooling material.

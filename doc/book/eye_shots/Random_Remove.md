@@ -17,12 +17,14 @@ clearance violations: **2 overlaps, 1 tight** — the law wants ≥1.2m to walk 
 no sibling kept — the move did not beat the ride (overlaps 2→2, tight 1→1). Note-only.
 
 ## The voice (qfep)
-1 of 3 cast members carry a theory-claim; 2 mute.
+3 of 3 cast members carry a theory-claim; 0 mute.
 - **dark_sphere** — Transformation often needs an invariant reference to be legible. The sphere stays simple so surrounding change
-- mute: hazards_demo, remove_random
+- **hazards_demo** — The test arena where the danger fauna are let out together — plasma critters, crawlers, dormant egg-plants. Ch
+- **remove_random** — The demolition primitive: cubes deleted by chance, the grid thinned by dice. Where every other builder in this
 
 ## The text vs the space
-**no walked.md** — the space stands unwritten; this note is the first text this map has.
+walked.md exists — the writing names 3/3 of the cast; dwells declared for 0.
+- **the writing's subjects are blocked in space**: dark_sphere, hazards_demo, remove_random sit in clearance violations — the text promises what the floor obstructs.
 
 ## The heuristic understanding
 The violations are real but mechanical moving does not fix them — they are placement DECISIONS (which body yields?), not placement errors. This is verdict material, not tooling material.

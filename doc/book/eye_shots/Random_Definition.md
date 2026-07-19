@@ -22,15 +22,15 @@ clearance violations: **1 overlaps, 7 tight** — the law wants ≥1.2m to walk 
 no sibling kept — the move did not beat the ride (overlaps 1→1, tight 7→7). Note-only.
 
 ## The voice (qfep)
-9 of 14 cast members carry a theory-claim; 5 mute.
+14 of 14 cast members carry a theory-claim; 0 mute.
+- **2d_in_3d_randomness_vis** — The flat diagrams of chance — scatter plots, walks, histograms — stood upright in the room. The board bridges 
 - **catalyst_pickup** — sequence_name — IS the catalyst-bracelet mode this the chamber teaches the algorithm; the catalyst is the a pe
 - **clipboard** — Transformation changes the clipboard's state, page, and content while preserving a continuous reading object. 
 - **dark_sphere** — Transformation often needs an invariant reference to be legible. The sphere stays simple so surrounding change
-- **entropy_axiom** — max_randomness — how far points can drift from their lattice anchor at the chaos end entropy is not decay — it
-- mute: 2d_in_3d_randomness_vis, digital_materiality_glitch, random_butterflies, random_number_book_page_1955, trng_vs_prng
 
 ## The text vs the space
-**no walked.md** — the space stands unwritten; this note is the first text this map has.
+walked.md exists — the writing names 14/14 of the cast; dwells declared for 0.
+- **the writing's subjects are blocked in space**: 2d_in_3d_randomness_vis, catalyst_pickup, clipboard, dark_sphere, digital_materiality_glitch, entropy_axiom, entropy_jar, random_butterflies, seed_replay_demo, trng_vs_prng sit in clearance violations — the text promises what the floor obstructs.
 
 ## The heuristic understanding
 The violations are real but mechanical moving does not fix them — they are placement DECISIONS (which body yields?), not placement errors. This is verdict material, not tooling material.
