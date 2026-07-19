@@ -16,13 +16,14 @@ clearance violations: **2 overlaps, 0 tight** — the law wants ≥1.2m to walk 
 no sibling kept — the move did not beat the ride (overlaps 2→2, tight 0→0). Note-only.
 
 ## The voice (qfep)
-2 of 3 cast members carry a theory-claim; 1 mute.
+3 of 3 cast members carry a theory-claim; 0 mute.
 - **integral_area** — samples — the number of strips, the discretisation between coarse Riemann blocks and a smooth filled area the 
+- **riemann_pi** — integration: pi estimated by Riemann slices — the circle's area approached rectangle by rectangle; the constan
 - **riemann_pump** — n_strips — the partition fineness; at low counts the three panels' biases diverge visibly, at high counts they
-- mute: riemann_pi
 
 ## The text vs the space
-**no walked.md** — the space stands unwritten; this note is the first text this map has.
+walked.md exists — the writing names 3/3 of the cast; dwells declared for 0.
+- **the writing's subjects are blocked in space**: integral_area, riemann_pi, riemann_pump sit in clearance violations — the text promises what the floor obstructs.
 
 ## The heuristic understanding
 The violations are real but mechanical moving does not fix them — they are placement DECISIONS (which body yields?), not placement errors. This is verdict material, not tooling material.

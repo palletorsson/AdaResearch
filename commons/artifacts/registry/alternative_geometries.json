@@ -1,1902 +1,1903 @@
 {
-	"artifacts": {
-		"bulging_tunnel": {
-			"capacity": "FEEL how parametric distortion transforms a predictable corridor into an unpredictable cave",
-			"category": "geometry",
-			"complexity": "intermediate",
-			"description": "Walk into a cylinder that refuses to stay regular. CSG spheres bulge outward at irregular intervals, warping your sense of depth \u2014 the tunnel breathes. The num_bulges and bulge_max_radius parameters control how much chaos enters the geometry: low values produce a hallway, high values produce a cave. Contrasts with Klein bottle (closed non-orientable) and M\u00f6bius strip (twisted surface); prepares for hyperbolic spaces where distortion becomes the rule.",
-			"dev_themes": [
-				"geometry",
-				"non_euclidean"
-			],
-			"footprint": [
-				3,
-				3,
-				10
-			],
-			"gamwell_reference": "Non-Euclidean geometry, Riemannian manifolds, topology",
-			"include_in_map_data": true,
-			"interactions": [
-				"walk through tunnel",
-				"adjust num_bulges via export",
-				"change bulge_max_radius to control distortion intensity",
-				"toggle use_random_bulges for deterministic vs stochastic"
-			],
-			"lookup_name": "bulging_tunnel",
-			"map_ready": true,
-			"map_sequences": [],
-			"name": "Bulging Tunnel",
-			"parameters": {
-				"bulge_max_radius": "Maximum bulge radius (default: 2.0)",
-				"bulge_seed": "Random seed for reproducibility (default: 42)",
-				"footprint": [
-					3,
-					3,
-					10
-				],
-				"num_bulges": "Number of bulge deformations (default: 5)",
-				"size_group": "xlarge",
-				"tunnel_length": "Length of tunnel (default: 10.0)",
-				"tunnel_radius": "Base radius (default: 1.0)",
-				"use_random_bulges": "Stochastic vs sinusoidal bulge sizing (default: true)"
-			},
-			"qfep_connection": "Lambda applied to architecture \u2014 a regular cylinder is pure F (uniform, predictable). Each bulge introduces E (variation, surprise). The num_bulges parameter IS lambda: how much chaos do you let into your structure? At zero bulges the tunnel is Euclidean. At maximum, geometry becomes landscape.",
-			"scene": "res://algorithms/alternativegeometries/bulgingtunnel/bulging_tunnel.tscn",
-			"size_group": "xlarge",
-			"tags": [
-				"alternative_geometry",
-				"tunnel",
-				"distortion",
-				"non_euclidean",
-				"spatial",
-				"csg",
-				"procedural",
-				"cave",
-				"parametric"
-			],
-			"geometry_spec": {
-				"mesh_type": "boolean_composition",
-				"topology": "volumetric",
-				"construction": {
-					"method": "csg_boolean",
-					"primitives": [
-						"box",
-						"sphere",
-						"cylinder",
-						"torus"
-					],
-					"operations": [
-						"create_primitives",
-						"position_primitives",
-						"boolean_combine"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "pbr",
-					"key_properties": [
-						"metallic"
-					]
-				},
-				"animation": {
-					"type": "static",
-					"driven_by": null,
-					"affects": []
-				},
-				"instance_strategy": "single",
-				"vertex_estimate": "unknown"
-			},
-			"spatial_needs": {
-				"platform": "table",
-				"footprint_cells": 9,
-				"clearance": {
-					"front": 2,
-					"back": 2,
-					"left": 2,
-					"right": 2
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [
-					"contrasts",
-					"mobius_strip_altgeo",
-					"twisted",
-					"surface",
-					"pairs"
-				],
-				"preferred_zone": "any",
-				"measured_footprint_cells": 44,
-				"footprint_source": "measured_capped"
-			},
-			"measurements": {
-				"aabb_size": [
-					3.9,
-					3.9,
-					10.28
-				],
-				"aabb_center": [
-					0.0,
-					0.0,
-					5.14
-				],
-				"grid_cells": [
-					4.0,
-					11.0
-				],
-				"max_dimension_m": 10.28,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
-			},
-			"spatial_profile": {
-				"dir_group": "floor",
-				"range": 35,
-				"density": "high",
-				"min_clearance": 2,
-				"stack_priority": 0.85,
-				"approach_dir": "any",
-				"derived_at": "2026-04-29T09:39:46.045261Z",
-				"derived_from": "aabb_size + category"
-			}
-		},
-		"curvature_slider": {
-			"category": "geometry",
-			"complexity": "beginner",
-			"description": "VR slider controlling Gaussian curvature from negative (hyperbolic) through zero (flat/Euclidean) to positive (elliptic). Emits curvature_changed signal for linked surfaces.",
-			"dev_themes": [
-				"geometry",
-				"non_euclidean"
-			],
-			"include_in_map_data": true,
-			"lookup_name": "curvature_slider",
-			"map_ready": true,
-			"map_sequences": [
-				"foundationscrisis",
-				"testmaps"
-			],
-			"name": "Curvature Slider",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"scene": "res://commons/artifacts/curvature_slider/curvature_slider.tscn",
-			"tags": [
-				"curvature",
-				"non_euclidean",
-				"slider",
-				"interactive",
-				"alternative_geometry"
-			],
-			"geometry_spec": {
-				"mesh_type": "delegated_scene",
-				"topology": "manifold_closed",
-				"construction": {
-					"method": "scene_instantiation",
-					"primitives": [],
-					"operations": [
-						"load_scene",
-						"instantiate",
-						"configure"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "pbr",
-					"key_properties": []
-				},
-				"animation": {
-					"type": "static",
-					"driven_by": null,
-					"affects": []
-				},
-				"instance_strategy": "single",
-				"vertex_estimate": "varies"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 1,
-				"clearance": {
-					"front": 2,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [
-					"controls",
-					"hyperbolic_surface",
-					"elliptic_surface",
-					"depends",
-					"euclid_postulates_plaque"
-				],
-				"preferred_zone": "entry",
-				"measured_footprint_cells": 1,
-				"footprint_source": "measured"
-			},
-			"measurements": {
-				"aabb_size": [
-					0.18,
-					0.2,
-					0.04
-				],
-				"aabb_center": [
-					0.0,
-					0.0,
-					0.02
-				],
-				"grid_cells": [
-					1.0,
-					1.0
-				],
-				"max_dimension_m": 0.2,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
-			},
-			"footprint_measured": [
-				1.0,
-				1,
-				1.0
-			],
-			"spatial_profile": {
-				"dir_group": "omni",
-				"range": 1,
-				"density": "medium",
-				"min_clearance": 1,
-				"stack_priority": 0.5,
-				"approach_dir": "any",
-				"derived_at": "2026-04-29T09:39:46.045261Z",
-				"derived_from": "aabb_size + category"
-			}
-		},
-		"elliptic_surface": {
-			"category": "geometry",
-			"complexity": "intermediate",
-			"description": "Dome/sphere-like surface demonstrating positive Gaussian curvature (K > 0) \u2014 where parallel lines converge and triangle angles sum to more than 180 degrees.",
-			"dev_themes": [
-				"geometry",
-				"non_euclidean"
-			],
-			"include_in_map_data": true,
-			"lookup_name": "elliptic_surface",
-			"map_ready": true,
-			"map_sequences": [
-				"foundationscrisis"
-			],
-			"name": "Elliptic Surface",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"scene": "res://commons/artifacts/elliptic_surface/elliptic_surface.tscn",
-			"tags": [
-				"elliptic",
-				"positive_curvature",
-				"non_euclidean",
-				"surface",
-				"alternative_geometry"
-			],
-			"geometry_spec": {
-				"mesh_type": "composed_primitives",
-				"topology": "manifold_closed",
-				"construction": {
-					"method": "primitive_assembly",
-					"primitives": [
-						"sphere"
-					],
-					"operations": [
-						"create_primitives",
-						"position_children"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "pbr",
-					"key_properties": [
-						"metallic"
-					]
-				},
-				"animation": {
-					"type": "static",
-					"driven_by": null,
-					"affects": []
-				},
-				"instance_strategy": "single",
-				"vertex_estimate": "unknown"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 1,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [
-					"contrasts",
-					"hyperbolic_surface",
-					"lines",
-					"diverge",
-					"depends"
-				],
-				"preferred_zone": "any",
-				"measured_footprint_cells": 1,
-				"footprint_source": "measured"
-			},
-			"measurements": {
-				"aabb_size": [
-					0.79,
-					0.8,
-					0.79
-				],
-				"aabb_center": [
-					0.0,
-					-0.12,
-					0.0
-				],
-				"grid_cells": [
-					1.0,
-					1.0
-				],
-				"max_dimension_m": 0.8,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
-			},
-			"footprint_measured": [
-				1.0,
-				1,
-				1.0
-			],
-			"spatial_profile": {
-				"dir_group": "omni",
-				"range": 2,
-				"density": "medium",
-				"min_clearance": 1,
-				"stack_priority": 0.5,
-				"approach_dir": "any",
-				"derived_at": "2026-04-29T09:39:46.045261Z",
-				"derived_from": "aabb_size + category"
-			}
-		},
-		"entropy_morphogenesis": {
-			"category": "unknown",
-			"complexity": "beginner",
-			"description": "entropy_morphogenesis",
-			"dev_themes": [
-				"geometry",
-				"non_euclidean"
-			],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"include_in_map_data": true,
-			"lookup_name": "entropy_morphogenesis",
-			"map_ready": true,
-			"map_sequences": [
-				"softbodies"
-			],
-			"name": "entropy_morphogenesis",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"scene": "res://algorithms/spacetopology/entropy_morphogenesis/entropy_morphogenesis_vr.tscn",
-			"size_group": "compact",
-			"tags": [
-				"geometry"
-			],
-			"geometry_spec": {
-				"mesh_type": "shader_driven",
-				"topology": "planar",
-				"construction": {
-					"method": "shader_rendering",
-					"primitives": [],
-					"operations": [
-						"create_base_mesh",
-						"apply_shader",
-						"set_parameters"
-					]
-				},
-				"material": {
-					"type": "shader",
-					"shading_model": "wireframe",
-					"key_properties": [
-						"grid_overlay",
-						"metallic"
-					]
-				},
-				"animation": {
-					"type": "static",
-					"driven_by": null,
-					"affects": []
-				},
-				"instance_strategy": "single",
-				"vertex_estimate": "~4-24 (base mesh)"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 9,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [
-					"synthesis",
-					"softbodies",
-					"sequence",
-					"entropy",
-					"becoming"
-				],
-				"preferred_zone": "entry",
-				"measured_footprint_cells": 25,
-				"footprint_source": "measured_capped"
-			},
-			"measurements": {
-				"aabb_size": [
-					5.0,
-					5.0,
-					5.0
-				],
-				"aabb_center": [
-					0.0,
-					-2.5,
-					0.0
-				],
-				"grid_cells": [
-					5.0,
-					5.0
-				],
-				"max_dimension_m": 5.0,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
-			},
-			"spatial_profile": {
-				"dir_group": "floor",
-				"range": 10,
-				"density": "high",
-				"min_clearance": 2,
-				"stack_priority": 0.85,
-				"approach_dir": "any",
-				"derived_at": "2026-04-29T09:39:46.045261Z",
-				"derived_from": "aabb_size + category"
-			}
-		},
-		"gyroid_cheese": {
-			"category": "unknown",
-			"complexity": "beginner",
-			"description": "gyroid_cheese",
-			"dev_themes": [
-				"geometry",
-				"non_euclidean"
-			],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"include_in_map_data": true,
-			"lookup_name": "gyroid_cheese",
-			"map_ready": true,
-			"map_sequences": [],
-			"name": "gyroid_cheese",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"scene": "res://algorithms/spacetopology/gyroid_cheese/gyroid_cheese_vr.tscn",
-			"size_group": "compact",
-			"tags": [
-				"geometry"
-			],
-			"geometry_spec": {
-				"mesh_type": "shader_driven",
-				"topology": "planar",
-				"construction": {
-					"method": "shader_rendering",
-					"primitives": [],
-					"operations": [
-						"create_base_mesh",
-						"apply_shader",
-						"set_parameters"
-					]
-				},
-				"material": {
-					"type": "shader",
-					"shading_model": "wireframe",
-					"key_properties": [
-						"grid_overlay",
-						"metallic"
-					]
-				},
-				"animation": {
-					"type": "static",
-					"driven_by": null,
-					"affects": []
-				},
-				"instance_strategy": "single",
-				"vertex_estimate": "~4-24 (base mesh)"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 9,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [],
-				"preferred_zone": "entry",
-				"measured_footprint_cells": 256,
-				"footprint_source": "measured_capped"
-			},
-			"measurements": {
-				"aabb_size": [
-					16.0,
-					16.0,
-					16.0
-				],
-				"aabb_center": [
-					0.0,
-					0.0,
-					0.0
-				],
-				"grid_cells": [
-					16.0,
-					16.0
-				],
-				"max_dimension_m": 16.0,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
-			},
-			"spatial_profile": {
-				"dir_group": "floor",
-				"range": 35,
-				"density": "high",
-				"min_clearance": 2,
-				"stack_priority": 0.85,
-				"approach_dir": "any",
-				"derived_at": "2026-04-29T09:39:46.045261Z",
-				"derived_from": "aabb_size + category"
-			}
-		},
-		"hyperbolic_surface": {
-			"category": "geometry",
-			"complexity": "intermediate",
-			"description": "Saddle-shaped surface demonstrating negative Gaussian curvature (K < 0) \u2014 where parallel lines diverge and triangle angles sum to less than 180 degrees.",
-			"dev_themes": [
-				"geometry",
-				"non_euclidean"
-			],
-			"include_in_map_data": true,
-			"lookup_name": "hyperbolic_surface",
-			"map_ready": true,
-			"map_sequences": [
-				"foundationscrisis"
-			],
-			"name": "Hyperbolic Surface",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"scene": "res://commons/artifacts/hyperbolic_surface/hyperbolic_surface.tscn",
-			"tags": [
-				"hyperbolic",
-				"negative_curvature",
-				"non_euclidean",
-				"saddle",
-				"surface",
-				"alternative_geometry"
-			],
-			"geometry_spec": {
-				"mesh_type": "parametric_surface",
-				"topology": "manifold_open",
-				"construction": {
-					"method": "uv_grid_triangulation",
-					"primitives": [],
-					"operations": [
-						"compute_vertices",
-						"generate_triangles",
-						"compute_normals"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "pbr",
-					"key_properties": [
-						"metallic"
-					]
-				},
-				"animation": {
-					"type": "static",
-					"driven_by": null,
-					"affects": []
-				},
-				"instance_strategy": "single",
-				"vertex_estimate": "unknown"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 1,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [
-					"contrasts",
-					"elliptic_surface",
-					"lines",
-					"converge",
-					"depends"
-				],
-				"preferred_zone": "any",
-				"measured_footprint_cells": 1,
-				"footprint_source": "measured"
-			},
-			"measurements": {
-				"aabb_size": [
-					1.0,
-					0.25,
-					1.0
-				],
-				"aabb_center": [
-					0.0,
-					0.0,
-					0.0
-				],
-				"grid_cells": [
-					1.0,
-					1.0
-				],
-				"max_dimension_m": 1.0,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
-			},
-			"footprint_measured": [
-				1.0,
-				1,
-				1.0
-			],
-			"spatial_profile": {
-				"dir_group": "plane",
-				"range": 2,
-				"density": "medium",
-				"min_clearance": 1,
-				"stack_priority": 0.5,
-				"approach_dir": "any",
-				"derived_at": "2026-04-29T09:39:46.045261Z",
-				"derived_from": "aabb_size + category"
-			}
-		},
-		"marching_cubes": {
-			"category": "unknown",
-			"complexity": "advanced",
-			"description": "Test scene for marching cubes algorithm verification with basic sphere and voxel tests",
-			"dev_themes": [
-				"geometry",
-				"non_euclidean"
-			],
-			"footprint": [
-				1,
-				21,
-				11
-			],
-			"include_in_map_data": true,
-			"lookup_name": "marching_cubes",
-			"map_ready": true,
-			"map_sequences": [
-				"proceduralgeneration_all"
-			],
-			"name": "Marching Cubes Test",
-			"parameters": {
-				"footprint": [
-					1,
-					21,
-					11
-				],
-				"size_group": "world_scale"
-			},
-			"scene": "res://algorithms/spacetopology/marchingcubes/scenes/marching_cubes_terrain_demo.tscn",
-			"size_group": "world_scale",
-			"tags": [
-				"geometry"
-			],
-			"geometry_spec": {
-				"mesh_type": "parametric_surface",
-				"topology": "manifold_open",
-				"construction": {
-					"method": "uv_grid_triangulation",
-					"primitives": [],
-					"operations": [
-						"compute_vertices",
-						"generate_triangles",
-						"compute_normals"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "emissive",
-					"key_properties": [
-						"emission",
-						"transparency"
-					]
-				},
-				"animation": {
-					"type": "transform",
-					"driven_by": "per_frame_update",
-					"affects": [
-						"transform"
-					]
-				},
-				"instance_strategy": "array",
-				"vertex_estimate": "~256"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 1,
-				"clearance": {
-					"front": 2,
-					"back": 2,
-					"left": 2,
-					"right": 2
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [],
-				"preferred_zone": "entry",
-				"measured_footprint_cells": 1,
-				"footprint_source": "measured"
-			},
-			"measurements": {
-				"aabb_size": [
-					0.0,
-					0.0,
-					0.0
-				],
-				"aabb_center": [
-					0.0,
-					0.0,
-					0.0
-				],
-				"grid_cells": [
-					1.0,
-					1.0
-				],
-				"max_dimension_m": 0.0,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
-			}
-		},
-		"mobius_strip_altgeo": {
-			"category": "geometry",
-			"complexity": "beginner",
-			"description": "A walkable M\u00f6bius strip environment \u2014 traverse the one-sided surface and experience the topological twist firsthand. Non-orientability as lived experience.",
-			"dev_themes": [
-				"geometry",
-				"non_euclidean"
-			],
-			"include_in_map_data": true,
-			"lookup_name": "mobius_strip_altgeo",
-			"map_ready": true,
-			"map_sequences": [],
-			"name": "M\u00f6bius Strip (Walkable)",
-			"scene": "res://algorithms/alternativegeometries/mobiusstrip/mobius_strip.tscn",
-			"tags": [
-				"mobius",
-				"topology",
-				"non_orientable",
-				"walkable",
-				"alternative_geometry"
-			],
-			"parameters": {
-				"footprint": [
-					3,
-					1,
-					3
-				],
-				"reading_light": {
-					"type": "omni",
-					"direction": "+z",
-					"cone": 360,
-					"radius": 3
-				}
-			},
-			"geometry_spec": {
-				"mesh_type": "parametric_surface",
-				"topology": "manifold_open",
-				"construction": {
-					"method": "uv_grid_triangulation",
-					"primitives": [],
-					"operations": [
-						"compute_vertices",
-						"generate_triangles",
-						"compute_normals"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "emissive",
-					"key_properties": [
-						"emission",
-						"metallic",
-						"double_sided"
-					]
-				},
-				"animation": {
-					"type": "transform",
-					"driven_by": "per_frame_update",
-					"affects": [
-						"transform"
-					]
-				},
-				"instance_strategy": "single",
-				"vertex_estimate": "unknown"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 9,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "above",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [],
-				"preferred_zone": "entry",
-				"measured_footprint_cells": 9,
-				"footprint_source": "measured"
-			},
-			"measurements": {
-				"aabb_size": [
-					2.2,
-					0.4,
-					2.29
-				],
-				"aabb_center": [
-					0.1,
-					0.0,
-					0.0
-				],
-				"grid_cells": [
-					3.0,
-					3.0
-				],
-				"max_dimension_m": 2.29,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
-			},
-			"footprint_measured": [
-				3.0,
-				1,
-				3.0
-			],
-			"spatial_profile": {
-				"dir_group": "plane",
-				"range": 6,
-				"density": "field",
-				"min_clearance": 0,
-				"stack_priority": 0.3,
-				"approach_dir": "any",
-				"derived_at": "2026-04-29T09:39:46.045261Z",
-				"derived_from": "aabb_size + category"
-			}
-		},
-		"mobius_world": {
-			"category": "unknown",
-			"complexity": "intermediate",
-			"description": "Walkable M\u00c3\u00b6bius strip - non-orientable surface. Requires MovementWallWalk on player (collision layer 4).",
-			"dev_themes": [
-				"geometry",
-				"non_euclidean"
-			],
-			"footprint": [
-				69,
-				16,
-				72
-			],
-			"include_in_map_data": true,
-			"lookup_name": "mobius_world",
-			"map_ready": true,
-			"map_sequences": [
-				"fractals"
-			],
-			"name": "M\u00c3\u00b6bius World",
-			"parameters": {
-				"footprint": [
-					69,
-					16,
-					72
-				],
-				"size_group": "xlarge"
-			},
-			"scene": "res://algorithms/alternativegeometries/mobiusstrip/mobius_world.tscn",
-			"size_group": "xlarge",
-			"tags": [
-				"3d",
-				"physics"
-			],
-			"geometry_spec": {
-				"mesh_type": "parametric_surface",
-				"topology": "manifold_open",
-				"construction": {
-					"method": "uv_grid_triangulation",
-					"primitives": [],
-					"operations": [
-						"compute_vertices",
-						"generate_triangles",
-						"compute_normals"
-					]
-				},
-				"material": {
-					"type": "shader",
-					"shading_model": "wireframe",
-					"key_properties": [
-						"emission",
-						"grid_overlay",
-						"metallic",
-						"double_sided"
-					]
-				},
-				"animation": {
-					"type": "static",
-					"driven_by": null,
-					"affects": []
-				},
-				"instance_strategy": "array",
-				"vertex_estimate": "unknown"
-			},
-			"spatial_needs": {
-				"platform": "table",
-				"footprint_cells": 1,
-				"clearance": {
-					"front": 2,
-					"back": 2,
-					"left": 2,
-					"right": 2
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [
-					"alternative_geometries",
-					"sequence",
-					"contrasts",
-					"assumptions",
-					"other"
-				],
-				"preferred_zone": "any",
-				"measured_footprint_cells": 1,
-				"footprint_source": "measured"
-			},
-			"measurements": {
-				"aabb_size": [
-					0.0,
-					0.0,
-					0.0
-				],
-				"aabb_center": [
-					0.0,
-					0.0,
-					0.0
-				],
-				"grid_cells": [
-					1.0,
-					1.0
-				],
-				"max_dimension_m": 0.0,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
-			}
-		},
-		"non_euclidean_space": {
-			"category": "geometry",
-			"complexity": "advanced",
-			"description": "A space where Euclid's parallel postulate fails \u2014 rooms that are bigger inside than outside, corridors that loop impossibly. Hyperbolic and elliptic geometry made navigable.",
-			"dev_themes": [
-				"geometry",
-				"non_euclidean"
-			],
-			"include_in_map_data": true,
-			"lookup_name": "non_euclidean_space",
-			"map_ready": true,
-			"map_sequences": [],
-			"name": "Non-Euclidean Space",
-			"parameters": {
-				"footprint": [
-					7,
-					1,
-					8
-				],
-				"size_group": "environment"
-			},
-			"scene": "res://algorithms/alternativegeometries/noneuclideanspace/non_euclidean_space.tscn",
-			"tags": [
-				"non_euclidean",
-				"hyperbolic",
-				"elliptic",
-				"impossible_space",
-				"alternative_geometry"
-			],
-			"geometry_spec": {
-				"mesh_type": "composed_primitives",
-				"topology": "manifold_closed",
-				"construction": {
-					"method": "primitive_assembly",
-					"primitives": [],
-					"operations": [
-						"create_primitives",
-						"position_children"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "pbr",
-					"key_properties": []
-				},
-				"animation": {
-					"type": "transform",
-					"driven_by": "per_frame_update",
-					"affects": [
-						"transform"
-					]
-				},
-				"instance_strategy": "single",
-				"vertex_estimate": "unknown"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 9,
-				"clearance": {
-					"front": 2,
-					"back": 2,
-					"left": 2,
-					"right": 2
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [],
-				"preferred_zone": "end",
-				"measured_footprint_cells": 418,
-				"footprint_source": "measured_capped"
-			},
-			"measurements": {
-				"aabb_size": [
-					18.48,
-					3.95,
-					21.95
-				],
-				"aabb_center": [
-					-0.15,
-					1.32,
-					2.77
-				],
-				"grid_cells": [
-					19.0,
-					22.0
-				],
-				"max_dimension_m": 21.95,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
-			},
-			"footprint_measured": [
-				19.0,
-				1,
-				22.0
-			],
-			"spatial_profile": {
-				"dir_group": "plane",
-				"range": 60,
-				"density": "field",
-				"min_clearance": 0,
-				"stack_priority": 0.3,
-				"approach_dir": "any",
-				"derived_at": "2026-04-29T09:39:46.045261Z",
-				"derived_from": "aabb_size + category"
-			}
-		},
-		"organic_space": {
-			"category": "unknown",
-			"complexity": "expert",
-			"description": "An algorithmic exploration of organic geometries and natural forms, creating flowing, non-Euclidean spaces that challenge traditional geometric assumptions",
-			"dev_themes": [
-				"geometry",
-				"non_euclidean"
-			],
-			"footprint": [
-				1,
-				6,
-				13
-			],
-			"include_in_map_data": true,
-			"lookup_name": "organic_space",
-			"map_ready": true,
-			"map_sequences": [
-				"proceduralgeneration",
-				"proceduralgeneration_all"
-			],
-			"name": "Organic Space",
-			"parameters": {
-				"footprint": [
-					1,
-					6,
-					13
-				],
-				"size_group": "world_scale"
-			},
-			"scene": "res://algorithms/alternativegeometries/organicspace/organic_space.tscn",
-			"size_group": "world_scale",
-			"tags": [
-				"geometry"
-			],
-			"geometry_spec": {
-				"mesh_type": "boolean_composition",
-				"topology": "volumetric",
-				"construction": {
-					"method": "csg_boolean",
-					"primitives": [
-						"box",
-						"sphere",
-						"cylinder"
-					],
-					"operations": [
-						"create_primitives",
-						"position_primitives",
-						"boolean_combine"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "pbr",
-					"key_properties": []
-				},
-				"animation": {
-					"type": "static",
-					"driven_by": null,
-					"affects": []
-				},
-				"instance_strategy": "array",
-				"vertex_estimate": "unknown"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 9,
-				"clearance": {
-					"front": 2,
-					"back": 2,
-					"left": 2,
-					"right": 2
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [
-					"paired",
-					"branching_growth_algorithm",
-					"contrasts",
-					"deterministic",
-					"growth"
-				],
-				"preferred_zone": "any",
-				"measured_footprint_cells": 625,
-				"footprint_source": "measured_capped"
-			},
-			"measurements": {
-				"aabb_size": [
-					25.0,
-					25.0,
-					25.0
-				],
-				"aabb_center": [
-					0.0,
-					0.0,
-					0.0
-				],
-				"grid_cells": [
-					25.0,
-					25.0
-				],
-				"max_dimension_m": 25.0,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
-			},
-			"spatial_profile": {
-				"dir_group": "floor",
-				"range": 60,
-				"density": "high",
-				"min_clearance": 2,
-				"stack_priority": 0.85,
-				"approach_dir": "any",
-				"derived_at": "2026-04-29T09:39:46.045261Z",
-				"derived_from": "aabb_size + category"
-			}
-		},
-		"rhizomatic_maze_space": {
-			"category": "unknown",
-			"complexity": "intermediate",
-			"description": "A labyrinthine exploration of rhizomatic growth patterns, creating interconnected maze-like spaces that grow organically like fungal networks or plant root systems",
-			"dev_themes": [
-				"geometry",
-				"non_euclidean"
-			],
-			"footprint": [
-				50,
-				21,
-				50
-			],
-			"include_in_map_data": true,
-			"lookup_name": "rhizomatic_maze_space",
-			"map_ready": true,
-			"map_sequences": [
-				"proceduralgeneration",
-				"proceduralgeneration_all"
-			],
-			"name": "Rhizomatic Maze Space",
-			"parameters": {
-				"footprint": [
-					50,
-					21,
-					50
-				],
-				"size_group": "world_scale"
-			},
-			"scene": "res://algorithms/alternativegeometries/rhizomaticmazespace/RhizomaticMazeSpace.tscn",
-			"size_group": "world_scale",
-			"tags": [
-				"geometry"
-			],
-			"geometry_spec": {
-				"mesh_type": "hybrid",
-				"topology": "manifold_closed",
-				"construction": {
-					"method": "unknown",
-					"primitives": [
-						"sphere",
-						"cylinder"
-					],
-					"operations": []
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "pbr",
-					"key_properties": []
-				},
-				"animation": {
-					"type": "static",
-					"driven_by": null,
-					"affects": []
-				},
-				"instance_strategy": "array",
-				"vertex_estimate": "unknown"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 1,
-				"clearance": {
-					"front": 2,
-					"back": 2,
-					"left": 2,
-					"right": 2
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [
-					"paired",
-					"mirror_cellular_texture_for_3d",
-					"contrasts",
-					"maze_generation",
-					"structured"
-				],
-				"preferred_zone": "any",
-				"measured_footprint_cells": 1,
-				"footprint_source": "measured"
-			},
-			"measurements": {
-				"aabb_size": [
-					0.0,
-					0.0,
-					0.0
-				],
-				"aabb_center": [
-					0.0,
-					0.0,
-					0.0
-				],
-				"grid_cells": [
-					1.0,
-					1.0
-				],
-				"max_dimension_m": 0.0,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
-			}
-		},
-		"rhizomatic_structure": {
-			"category": "geometry",
-			"complexity": "intermediate",
-			"description": "Grow a network that refuses root, trunk, and leaves. Recursive branching creates a scaffold, then lateral reconnections turn that scaffold into a mesh where any point can connect to any other. Adjusting reconnection probability moves the artifact between tree and rhizome, making hierarchy versus multiplicity a concrete topological choice. It brings Deleuze and Guattari into graph theory by questioning when a tree is the wrong model.",
-			"dev_themes": [
-				"geometry",
-				"non_euclidean"
-			],
-			"footprint": [
-				20,
-				18,
-				14
-			],
-			"include_in_map_data": true,
-			"lookup_name": "rhizomatic_structure",
-			"map_ready": true,
-			"map_sequences": [
-				"graphtheory"
-			],
-			"name": "Rhizomatic Structure",
-			"scene": "res://algorithms/alternativegeometries/rhizomaticstructure/rhizomatic_structure.tscn",
-			"size_group": "xlarge",
-			"tags": [
-				"graph_theory",
-				"rhizome",
-				"non_hierarchical",
-				"cycles",
-				"topology",
-				"deleuze",
-				"network",
-				"alternative_geometry",
-				"critical_theory"
-			],
-			"qfep_connection": "A challenge to hierarchical F: lateral reconnection redistributes structure away from roots and trunks. It asks what graph order looks like when no center is privileged.",
-			"gamwell_reference": "Non-Euclidean geometry, Riemannian manifolds, topology, rhizome theory (Deleuze & Guattari), spatial perception",
-			"capacity": "COMPARE tree-like and rhizomatic topologies by tuning how often local branches reconnect laterally.",
-			"interactions": [
-				"regenerate the structure",
-				"tune connection_probability to move between tree and rhizome",
-				"change growth_direction_randomness to bias branching",
-				"inspect cycles formed by lateral reconnections"
-			],
-			"geometry_spec": {
-				"mesh_type": "composed_primitives",
-				"topology": "manifold_closed",
-				"construction": {
-					"method": "primitive_assembly",
-					"primitives": [
-						"cylinder"
-					],
-					"operations": [
-						"create_primitives",
-						"position_children"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "pbr",
-					"key_properties": []
-				},
-				"animation": {
-					"type": "static",
-					"driven_by": null,
-					"affects": []
-				},
-				"instance_strategy": "array",
-				"vertex_estimate": "unknown"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 9,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "above",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [
-					"appears",
-					"inspired",
-					"contrast",
-					"hierarchical",
-					"graph"
-				],
-				"preferred_zone": "any",
-				"measured_footprint_cells": 270,
-				"footprint_source": "measured_capped"
-			},
-			"measurements": {
-				"aabb_size": [
-					14.64,
-					15.02,
-					17.47
-				],
-				"aabb_center": [
-					-1.93,
-					-2.04,
-					-1.01
-				],
-				"grid_cells": [
-					15.0,
-					18.0
-				],
-				"max_dimension_m": 17.47,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
-			},
-			"spatial_profile": {
-				"dir_group": "floor",
-				"range": 35,
-				"density": "high",
-				"min_clearance": 2,
-				"stack_priority": 0.85,
-				"approach_dir": "any",
-				"derived_at": "2026-04-29T09:39:46.045261Z",
-				"derived_from": "aabb_size + category"
-			}
-		},
-		"riemann_pi": {
-			"category": "unknown",
-			"complexity": "beginner",
-			"description": "riemann_pi",
-			"dev_themes": [
-				"geometry",
-				"non_euclidean"
-			],
-			"footprint": [
-				23,
-				6,
-				4
-			],
-			"include_in_map_data": true,
-			"lookup_name": "riemann_pi",
-			"map_ready": true,
-			"map_sequences": [],
-			"name": "riemann_pi",
-			"parameters": {
-				"footprint": [
-					23,
-					6,
-					4
-				],
-				"size_group": "world_scale"
-			},
-			"scene": "res://algorithms/spacetopology/riemann_pi/pi_infinity_surface.tscn",
-			"size_group": "world_scale",
-			"tags": [
-				"geometry"
-			],
-			"geometry_spec": {
-				"mesh_type": "instanced_particles",
-				"topology": "scattered",
-				"construction": {
-					"method": "multimesh_instancing",
-					"primitives": [
-						"sphere",
-						"plane"
-					],
-					"operations": [
-						"allocate_instances",
-						"set_transforms",
-						"update_per_frame"
-					]
-				},
-				"material": {
-					"type": "shader",
-					"shading_model": "unshaded",
-					"key_properties": [
-						"emission",
-						"metallic",
-						"transparency"
-					]
-				},
-				"animation": {
-					"type": "particle_lifecycle",
-					"driven_by": "cpu_simulation",
-					"affects": [
-						"transform",
-						"color"
-					]
-				},
-				"instance_strategy": "multimesh",
-				"vertex_estimate": "~512"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 9,
-				"clearance": {
-					"front": 2,
-					"back": 2,
-					"left": 2,
-					"right": 2
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [],
-				"preferred_zone": "entry",
-				"measured_footprint_cells": 208,
-				"footprint_source": "measured_capped"
-			},
-			"measurements": {
-				"aabb_size": [
-					25.5,
-					15.65,
-					8.0
-				],
-				"aabb_center": [
-					10.75,
-					7.32,
-					0.0
-				],
-				"grid_cells": [
-					26.0,
-					8.0
-				],
-				"max_dimension_m": 25.5,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
-			},
-			"spatial_profile": {
-				"dir_group": "floor",
-				"range": 60,
-				"density": "high",
-				"min_clearance": 2,
-				"stack_priority": 0.85,
-				"approach_dir": "any",
-				"derived_at": "2026-04-29T09:39:46.045261Z",
-				"derived_from": "aabb_size + category"
-			}
-		},
-		"riemann_sphere": {
-			"category": "geometry",
-			"complexity": "advanced",
-			"description": "The Riemann sphere \u2014 compactified complex plane with stereographic projection lines, north pole at infinity, equator, and projection plane visible.",
-			"dev_themes": [
-				"geometry",
-				"non_euclidean"
-			],
-			"include_in_map_data": true,
-			"lookup_name": "riemann_sphere",
-			"map_ready": true,
-			"map_sequences": [
-				"foundationscrisis"
-			],
-			"name": "Riemann Sphere",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"scene": "res://commons/artifacts/riemann_sphere/riemann_sphere.tscn",
-			"tags": [
-				"riemann",
-				"complex_analysis",
-				"stereographic",
-				"projection",
-				"sphere",
-				"alternative_geometry"
-			],
-			"geometry_spec": {
-				"mesh_type": "composed_primitives",
-				"topology": "manifold_closed",
-				"construction": {
-					"method": "primitive_assembly",
-					"primitives": [
-						"sphere",
-						"torus",
-						"plane"
-					],
-					"operations": [
-						"create_primitives",
-						"position_children"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "emissive",
-					"key_properties": [
-						"emission",
-						"metallic",
-						"transparency"
-					]
-				},
-				"animation": {
-					"type": "static",
-					"driven_by": null,
-					"affects": []
-				},
-				"instance_strategy": "few",
-				"vertex_estimate": "~512"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 1,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [
-					"contrasts",
-					"poincare_disk",
-					"compactification",
-					"hyperbolic",
-					"complex"
-				],
-				"preferred_zone": "end",
-				"measured_footprint_cells": 1,
-				"footprint_source": "measured"
-			},
-			"measurements": {
-				"aabb_size": [
-					0.9,
-					0.63,
-					0.9
-				],
-				"aabb_center": [
-					0.0,
-					0.01,
-					0.0
-				],
-				"grid_cells": [
-					1.0,
-					1.0
-				],
-				"max_dimension_m": 0.9,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
-			},
-			"footprint_measured": [
-				1.0,
-				1,
-				1.0
-			],
-			"spatial_profile": {
-				"dir_group": "floor",
-				"range": 2,
-				"density": "medium",
-				"min_clearance": 1,
-				"stack_priority": 0.5,
-				"approach_dir": "any",
-				"derived_at": "2026-04-29T09:39:46.045762Z",
-				"derived_from": "aabb_size + category"
-			}
-		},
-		"triangle_curvature_workbench": {
-			"name": "Triangle Curvature Workbench",
-			"lookup_name": "triangle_curvature_workbench",
-			"description": "An interactive workbench for Gauss-Bonnet on a triangle. One slider drives Gaussian curvature K through seven detents {-2, -1, -0.5, 0, +0.5, +1, +2}; the host surface morphs with K's sign (Poincaré disk for K<0, flat cyan grid for K=0, violet sphere for K>0); three triangle vertices at canonical 30° geodesic separation stay fixed while their connecting edges become geodesics ON the active surface (arcs, lines, great-circle arcs); the readout shows α + β + γ in degrees, the Gauss-Bonnet excess (sphere) or defect (disk) as a signed angle, and a regime word. The slider IS Gauss-Bonnet — the parallel postulate exposed as a setting on K, not a truth about lines. Paired with /triangle-table-gallery's nine cells (3 surfaces × 3 sizes).",
-			"scene": "res://commons/artifacts/triangle_curvature_workbench/triangle_curvature_workbench.tscn",
-			"category": "limits-of-geometry",
-			"interaction": "grab_slide",
-			"sequence": "computationalgeometry",
-			"artifact_type": "geometry",
-			"qfep_term": "F",
-			"capacity": "WALK Gauss-Bonnet — angle sum is a property of the surface",
-			"dev_themes": [
-				"geometry",
-				"non_euclidean",
-				"gauss_bonnet",
-				"curvature",
-				"parallel_postulate"
-			],
-			"dev_category": "geometry",
-			"complexity": "intermediate",
-			"tags": [
-				"interactive",
-				"slider",
-				"geometry",
-				"non_euclidean",
-				"curvature",
-				"gauss_bonnet",
-				"triangle",
-				"poincare_disk",
-				"sphere",
-				"limits_of_geometry",
-				"parallel_postulate"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"computationalgeometry",
-				"higher_dimensions"
-			],
-			"parameters": {
-				"footprint": [
-					2,
-					3,
-					2
-				],
-				"size_group": "medium"
-			},
-			"spatial_needs": {
-				"platform": "floor",
-				"footprint_cells": 4,
-				"clearance": {
-					"front": 2,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [
-					"curvature_slider",
-					"hyperbolic_surface",
-					"elliptic_surface",
-					"riemann_sphere",
-					"euclid_postulates_plaque"
-				],
-				"preferred_zone": "any"
-			}
-		},
-		"riemann_torus": {
-			"category": "unknown",
-			"complexity": "beginner",
-			"description": "riemann_torus",
-			"dev_themes": [
-				"geometry",
-				"non_euclidean"
-			],
-			"footprint": [
-				15,
-				2,
-				2
-			],
-			"include_in_map_data": true,
-			"lookup_name": "riemann_torus",
-			"map_ready": true,
-			"map_sequences": [],
-			"name": "riemann_torus",
-			"parameters": {
-				"footprint": [
-					15,
-					2,
-					2
-				],
-				"size_group": "world_scale"
-			},
-			"scene": "res://algorithms/spacetopology/riemann_torus/torus_vr.tscn",
-			"size_group": "world_scale",
-			"tags": [
-				"geometry"
-			],
-			"geometry_spec": {
-				"mesh_type": "hybrid",
-				"topology": "manifold_closed",
-				"construction": {
-					"method": "unknown",
-					"primitives": [
-						"cylinder",
-						"torus",
-						"plane"
-					],
-					"operations": []
-				},
-				"material": {
-					"type": "shader",
-					"shading_model": "custom_fragment",
-					"key_properties": [
-						"emission",
-						"metallic",
-						"transparency"
-					]
-				},
-				"animation": {
-					"type": "particle_lifecycle",
-					"driven_by": "cpu_simulation",
-					"affects": [
-						"transform",
-						"color"
-					]
-				},
-				"instance_strategy": "multimesh",
-				"vertex_estimate": "~64"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 9,
-				"clearance": {
-					"front": 2,
-					"back": 2,
-					"left": 2,
-					"right": 2
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [],
-				"preferred_zone": "entry",
-				"measured_footprint_cells": 312,
-				"footprint_source": "measured_capped"
-			},
-			"measurements": {
-				"aabb_size": [
-					25.73,
-					0.65,
-					12.0
-				],
-				"aabb_center": [
-					6.87,
-					-0.09,
-					0.0
-				],
-				"grid_cells": [
-					26.0,
-					12.0
-				],
-				"max_dimension_m": 25.73,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
-			},
-			"spatial_profile": {
-				"dir_group": "plane",
-				"range": 60,
-				"density": "field",
-				"min_clearance": 0,
-				"stack_priority": 0.3,
-				"approach_dir": "any",
-				"derived_at": "2026-04-29T09:39:46.045762Z",
-				"derived_from": "aabb_size + category"
-			}
-		}
-	},
-	"registry_info": {
-		"category": "geometry",
-		"description": "Non-Euclidean and alternative geometry artifacts \u2014 M\u00f6bius strips, bulging tunnels, rhizomatic structures, and spaces where parallel lines meet or diverge. Geometry beyond the textbook.",
-		"name": "alternative_geometries",
-		"theoretical_grounding": "Non-Euclidean geometry, Riemannian manifolds, topology, rhizome theory (Deleuze & Guattari), spatial perception"
-	}
+ "artifacts": {
+  "bulging_tunnel": {
+   "capacity": "FEEL how parametric distortion transforms a predictable corridor into an unpredictable cave",
+   "category": "geometry",
+   "complexity": "intermediate",
+   "description": "Walk into a cylinder that refuses to stay regular. CSG spheres bulge outward at irregular intervals, warping your sense of depth — the tunnel breathes. The num_bulges and bulge_max_radius parameters control how much chaos enters the geometry: low values produce a hallway, high values produce a cave. Contrasts with Klein bottle (closed non-orientable) and Möbius strip (twisted surface); prepares for hyperbolic spaces where distortion becomes the rule.",
+   "dev_themes": [
+    "geometry",
+    "non_euclidean"
+   ],
+   "footprint": [
+    3,
+    3,
+    10
+   ],
+   "gamwell_reference": "Non-Euclidean geometry, Riemannian manifolds, topology",
+   "include_in_map_data": true,
+   "interactions": [
+    "walk through tunnel",
+    "adjust num_bulges via export",
+    "change bulge_max_radius to control distortion intensity",
+    "toggle use_random_bulges for deterministic vs stochastic"
+   ],
+   "lookup_name": "bulging_tunnel",
+   "map_ready": true,
+   "map_sequences": [],
+   "name": "Bulging Tunnel",
+   "parameters": {
+    "bulge_max_radius": "Maximum bulge radius (default: 2.0)",
+    "bulge_seed": "Random seed for reproducibility (default: 42)",
+    "footprint": [
+     3,
+     3,
+     10
+    ],
+    "num_bulges": "Number of bulge deformations (default: 5)",
+    "size_group": "xlarge",
+    "tunnel_length": "Length of tunnel (default: 10.0)",
+    "tunnel_radius": "Base radius (default: 1.0)",
+    "use_random_bulges": "Stochastic vs sinusoidal bulge sizing (default: true)"
+   },
+   "qfep_connection": "Lambda applied to architecture — a regular cylinder is pure F (uniform, predictable). Each bulge introduces E (variation, surprise). The num_bulges parameter IS lambda: how much chaos do you let into your structure? At zero bulges the tunnel is Euclidean. At maximum, geometry becomes landscape.",
+   "scene": "res://algorithms/alternativegeometries/bulgingtunnel/bulging_tunnel.tscn",
+   "size_group": "xlarge",
+   "tags": [
+    "alternative_geometry",
+    "tunnel",
+    "distortion",
+    "non_euclidean",
+    "spatial",
+    "csg",
+    "procedural",
+    "cave",
+    "parametric"
+   ],
+   "geometry_spec": {
+    "mesh_type": "boolean_composition",
+    "topology": "volumetric",
+    "construction": {
+     "method": "csg_boolean",
+     "primitives": [
+      "box",
+      "sphere",
+      "cylinder",
+      "torus"
+     ],
+     "operations": [
+      "create_primitives",
+      "position_primitives",
+      "boolean_combine"
+     ]
+    },
+    "material": {
+     "type": "standard",
+     "shading_model": "pbr",
+     "key_properties": [
+      "metallic"
+     ]
+    },
+    "animation": {
+     "type": "static",
+     "driven_by": null,
+     "affects": []
+    },
+    "instance_strategy": "single",
+    "vertex_estimate": "unknown"
+   },
+   "spatial_needs": {
+    "platform": "table",
+    "footprint_cells": 9,
+    "clearance": {
+     "front": 2,
+     "back": 2,
+     "left": 2,
+     "right": 2
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "face_approach",
+    "isolation": 0,
+    "cluster_with": [
+     "contrasts",
+     "mobius_strip_altgeo",
+     "twisted",
+     "surface",
+     "pairs"
+    ],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 44,
+    "footprint_source": "measured_capped"
+   },
+   "measurements": {
+    "aabb_size": [
+     3.9,
+     3.9,
+     10.28
+    ],
+    "aabb_center": [
+     0.0,
+     0.0,
+     5.14
+    ],
+    "grid_cells": [
+     4.0,
+     11.0
+    ],
+    "max_dimension_m": 10.28,
+    "measured_at": "2026-04-29T07:09:56.762620Z"
+   },
+   "spatial_profile": {
+    "dir_group": "floor",
+    "range": 35,
+    "density": "high",
+    "min_clearance": 2,
+    "stack_priority": 0.85,
+    "approach_dir": "any",
+    "derived_at": "2026-04-29T09:39:46.045261Z",
+    "derived_from": "aabb_size + category"
+   }
+  },
+  "curvature_slider": {
+   "category": "geometry",
+   "complexity": "beginner",
+   "description": "VR slider controlling Gaussian curvature from negative (hyperbolic) through zero (flat/Euclidean) to positive (elliptic). Emits curvature_changed signal for linked surfaces.",
+   "dev_themes": [
+    "geometry",
+    "non_euclidean"
+   ],
+   "include_in_map_data": true,
+   "lookup_name": "curvature_slider",
+   "map_ready": true,
+   "map_sequences": [
+    "foundationscrisis",
+    "testmaps"
+   ],
+   "name": "Curvature Slider",
+   "parameters": {
+    "footprint": [
+     1,
+     1,
+     1
+    ],
+    "size_group": "compact"
+   },
+   "scene": "res://commons/artifacts/curvature_slider/curvature_slider.tscn",
+   "tags": [
+    "curvature",
+    "non_euclidean",
+    "slider",
+    "interactive",
+    "alternative_geometry"
+   ],
+   "geometry_spec": {
+    "mesh_type": "delegated_scene",
+    "topology": "manifold_closed",
+    "construction": {
+     "method": "scene_instantiation",
+     "primitives": [],
+     "operations": [
+      "load_scene",
+      "instantiate",
+      "configure"
+     ]
+    },
+    "material": {
+     "type": "standard",
+     "shading_model": "pbr",
+     "key_properties": []
+    },
+    "animation": {
+     "type": "static",
+     "driven_by": null,
+     "affects": []
+    },
+    "instance_strategy": "single",
+    "vertex_estimate": "varies"
+   },
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 1,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "face_approach",
+    "isolation": 0,
+    "cluster_with": [
+     "controls",
+     "hyperbolic_surface",
+     "elliptic_surface",
+     "depends",
+     "euclid_postulates_plaque"
+    ],
+    "preferred_zone": "entry",
+    "measured_footprint_cells": 1,
+    "footprint_source": "measured"
+   },
+   "measurements": {
+    "aabb_size": [
+     0.18,
+     0.2,
+     0.04
+    ],
+    "aabb_center": [
+     0.0,
+     0.0,
+     0.02
+    ],
+    "grid_cells": [
+     1.0,
+     1.0
+    ],
+    "max_dimension_m": 0.2,
+    "measured_at": "2026-04-29T07:09:56.762620Z"
+   },
+   "footprint_measured": [
+    1.0,
+    1,
+    1.0
+   ],
+   "spatial_profile": {
+    "dir_group": "omni",
+    "range": 1,
+    "density": "medium",
+    "min_clearance": 1,
+    "stack_priority": 0.5,
+    "approach_dir": "any",
+    "derived_at": "2026-04-29T09:39:46.045261Z",
+    "derived_from": "aabb_size + category"
+   }
+  },
+  "elliptic_surface": {
+   "category": "geometry",
+   "complexity": "intermediate",
+   "description": "Dome/sphere-like surface demonstrating positive Gaussian curvature (K > 0) — where parallel lines converge and triangle angles sum to more than 180 degrees.",
+   "dev_themes": [
+    "geometry",
+    "non_euclidean"
+   ],
+   "include_in_map_data": true,
+   "lookup_name": "elliptic_surface",
+   "map_ready": true,
+   "map_sequences": [
+    "foundationscrisis"
+   ],
+   "name": "Elliptic Surface",
+   "parameters": {
+    "footprint": [
+     1,
+     1,
+     1
+    ],
+    "size_group": "compact"
+   },
+   "scene": "res://commons/artifacts/elliptic_surface/elliptic_surface.tscn",
+   "tags": [
+    "elliptic",
+    "positive_curvature",
+    "non_euclidean",
+    "surface",
+    "alternative_geometry"
+   ],
+   "geometry_spec": {
+    "mesh_type": "composed_primitives",
+    "topology": "manifold_closed",
+    "construction": {
+     "method": "primitive_assembly",
+     "primitives": [
+      "sphere"
+     ],
+     "operations": [
+      "create_primitives",
+      "position_children"
+     ]
+    },
+    "material": {
+     "type": "standard",
+     "shading_model": "pbr",
+     "key_properties": [
+      "metallic"
+     ]
+    },
+    "animation": {
+     "type": "static",
+     "driven_by": null,
+     "affects": []
+    },
+    "instance_strategy": "single",
+    "vertex_estimate": "unknown"
+   },
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 1,
+    "clearance": {
+     "front": 1,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "face_approach",
+    "isolation": 0,
+    "cluster_with": [
+     "contrasts",
+     "hyperbolic_surface",
+     "lines",
+     "diverge",
+     "depends"
+    ],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 1,
+    "footprint_source": "measured"
+   },
+   "measurements": {
+    "aabb_size": [
+     0.79,
+     0.8,
+     0.79
+    ],
+    "aabb_center": [
+     0.0,
+     -0.12,
+     0.0
+    ],
+    "grid_cells": [
+     1.0,
+     1.0
+    ],
+    "max_dimension_m": 0.8,
+    "measured_at": "2026-04-29T07:09:56.762620Z"
+   },
+   "footprint_measured": [
+    1.0,
+    1,
+    1.0
+   ],
+   "spatial_profile": {
+    "dir_group": "omni",
+    "range": 2,
+    "density": "medium",
+    "min_clearance": 1,
+    "stack_priority": 0.5,
+    "approach_dir": "any",
+    "derived_at": "2026-04-29T09:39:46.045261Z",
+    "derived_from": "aabb_size + category"
+   }
+  },
+  "entropy_morphogenesis": {
+   "category": "unknown",
+   "complexity": "beginner",
+   "description": "entropy_morphogenesis",
+   "dev_themes": [
+    "geometry",
+    "non_euclidean"
+   ],
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "include_in_map_data": true,
+   "lookup_name": "entropy_morphogenesis",
+   "map_ready": true,
+   "map_sequences": [
+    "softbodies"
+   ],
+   "name": "entropy_morphogenesis",
+   "parameters": {
+    "footprint": [
+     1,
+     1,
+     1
+    ],
+    "size_group": "compact"
+   },
+   "scene": "res://algorithms/spacetopology/entropy_morphogenesis/entropy_morphogenesis_vr.tscn",
+   "size_group": "compact",
+   "tags": [
+    "geometry"
+   ],
+   "geometry_spec": {
+    "mesh_type": "shader_driven",
+    "topology": "planar",
+    "construction": {
+     "method": "shader_rendering",
+     "primitives": [],
+     "operations": [
+      "create_base_mesh",
+      "apply_shader",
+      "set_parameters"
+     ]
+    },
+    "material": {
+     "type": "shader",
+     "shading_model": "wireframe",
+     "key_properties": [
+      "grid_overlay",
+      "metallic"
+     ]
+    },
+    "animation": {
+     "type": "static",
+     "driven_by": null,
+     "affects": []
+    },
+    "instance_strategy": "single",
+    "vertex_estimate": "~4-24 (base mesh)"
+   },
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 9,
+    "clearance": {
+     "front": 1,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "face_approach",
+    "isolation": 0,
+    "cluster_with": [
+     "synthesis",
+     "softbodies",
+     "sequence",
+     "entropy",
+     "becoming"
+    ],
+    "preferred_zone": "entry",
+    "measured_footprint_cells": 25,
+    "footprint_source": "measured_capped"
+   },
+   "measurements": {
+    "aabb_size": [
+     5.0,
+     5.0,
+     5.0
+    ],
+    "aabb_center": [
+     0.0,
+     -2.5,
+     0.0
+    ],
+    "grid_cells": [
+     5.0,
+     5.0
+    ],
+    "max_dimension_m": 5.0,
+    "measured_at": "2026-04-29T07:09:56.762620Z"
+   },
+   "spatial_profile": {
+    "dir_group": "floor",
+    "range": 10,
+    "density": "high",
+    "min_clearance": 2,
+    "stack_priority": 0.85,
+    "approach_dir": "any",
+    "derived_at": "2026-04-29T09:39:46.045261Z",
+    "derived_from": "aabb_size + category"
+   }
+  },
+  "gyroid_cheese": {
+   "category": "unknown",
+   "complexity": "beginner",
+   "description": "gyroid_cheese",
+   "dev_themes": [
+    "geometry",
+    "non_euclidean"
+   ],
+   "footprint": [
+    1,
+    1,
+    1
+   ],
+   "include_in_map_data": true,
+   "lookup_name": "gyroid_cheese",
+   "map_ready": true,
+   "map_sequences": [],
+   "name": "gyroid_cheese",
+   "parameters": {
+    "footprint": [
+     1,
+     1,
+     1
+    ],
+    "size_group": "compact"
+   },
+   "scene": "res://algorithms/spacetopology/gyroid_cheese/gyroid_cheese_vr.tscn",
+   "size_group": "compact",
+   "tags": [
+    "geometry"
+   ],
+   "geometry_spec": {
+    "mesh_type": "shader_driven",
+    "topology": "planar",
+    "construction": {
+     "method": "shader_rendering",
+     "primitives": [],
+     "operations": [
+      "create_base_mesh",
+      "apply_shader",
+      "set_parameters"
+     ]
+    },
+    "material": {
+     "type": "shader",
+     "shading_model": "wireframe",
+     "key_properties": [
+      "grid_overlay",
+      "metallic"
+     ]
+    },
+    "animation": {
+     "type": "static",
+     "driven_by": null,
+     "affects": []
+    },
+    "instance_strategy": "single",
+    "vertex_estimate": "~4-24 (base mesh)"
+   },
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 9,
+    "clearance": {
+     "front": 1,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "face_approach",
+    "isolation": 0,
+    "cluster_with": [],
+    "preferred_zone": "entry",
+    "measured_footprint_cells": 256,
+    "footprint_source": "measured_capped"
+   },
+   "measurements": {
+    "aabb_size": [
+     16.0,
+     16.0,
+     16.0
+    ],
+    "aabb_center": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grid_cells": [
+     16.0,
+     16.0
+    ],
+    "max_dimension_m": 16.0,
+    "measured_at": "2026-04-29T07:09:56.762620Z"
+   },
+   "spatial_profile": {
+    "dir_group": "floor",
+    "range": 35,
+    "density": "high",
+    "min_clearance": 2,
+    "stack_priority": 0.85,
+    "approach_dir": "any",
+    "derived_at": "2026-04-29T09:39:46.045261Z",
+    "derived_from": "aabb_size + category"
+   }
+  },
+  "hyperbolic_surface": {
+   "category": "geometry",
+   "complexity": "intermediate",
+   "description": "Saddle-shaped surface demonstrating negative Gaussian curvature (K < 0) — where parallel lines diverge and triangle angles sum to less than 180 degrees.",
+   "dev_themes": [
+    "geometry",
+    "non_euclidean"
+   ],
+   "include_in_map_data": true,
+   "lookup_name": "hyperbolic_surface",
+   "map_ready": true,
+   "map_sequences": [
+    "foundationscrisis"
+   ],
+   "name": "Hyperbolic Surface",
+   "parameters": {
+    "footprint": [
+     1,
+     1,
+     1
+    ],
+    "size_group": "compact"
+   },
+   "scene": "res://commons/artifacts/hyperbolic_surface/hyperbolic_surface.tscn",
+   "tags": [
+    "hyperbolic",
+    "negative_curvature",
+    "non_euclidean",
+    "saddle",
+    "surface",
+    "alternative_geometry"
+   ],
+   "geometry_spec": {
+    "mesh_type": "parametric_surface",
+    "topology": "manifold_open",
+    "construction": {
+     "method": "uv_grid_triangulation",
+     "primitives": [],
+     "operations": [
+      "compute_vertices",
+      "generate_triangles",
+      "compute_normals"
+     ]
+    },
+    "material": {
+     "type": "standard",
+     "shading_model": "pbr",
+     "key_properties": [
+      "metallic"
+     ]
+    },
+    "animation": {
+     "type": "static",
+     "driven_by": null,
+     "affects": []
+    },
+    "instance_strategy": "single",
+    "vertex_estimate": "unknown"
+   },
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 1,
+    "clearance": {
+     "front": 1,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "face_approach",
+    "isolation": 0,
+    "cluster_with": [
+     "contrasts",
+     "elliptic_surface",
+     "lines",
+     "converge",
+     "depends"
+    ],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 1,
+    "footprint_source": "measured"
+   },
+   "measurements": {
+    "aabb_size": [
+     1.0,
+     0.25,
+     1.0
+    ],
+    "aabb_center": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grid_cells": [
+     1.0,
+     1.0
+    ],
+    "max_dimension_m": 1.0,
+    "measured_at": "2026-04-29T07:09:56.762620Z"
+   },
+   "footprint_measured": [
+    1.0,
+    1,
+    1.0
+   ],
+   "spatial_profile": {
+    "dir_group": "plane",
+    "range": 2,
+    "density": "medium",
+    "min_clearance": 1,
+    "stack_priority": 0.5,
+    "approach_dir": "any",
+    "derived_at": "2026-04-29T09:39:46.045261Z",
+    "derived_from": "aabb_size + category"
+   }
+  },
+  "marching_cubes": {
+   "category": "unknown",
+   "complexity": "advanced",
+   "description": "Test scene for marching cubes algorithm verification with basic sphere and voxel tests",
+   "dev_themes": [
+    "geometry",
+    "non_euclidean"
+   ],
+   "footprint": [
+    1,
+    21,
+    11
+   ],
+   "include_in_map_data": true,
+   "lookup_name": "marching_cubes",
+   "map_ready": true,
+   "map_sequences": [
+    "proceduralgeneration_all"
+   ],
+   "name": "Marching Cubes Test",
+   "parameters": {
+    "footprint": [
+     1,
+     21,
+     11
+    ],
+    "size_group": "world_scale"
+   },
+   "scene": "res://algorithms/spacetopology/marchingcubes/scenes/marching_cubes_terrain_demo.tscn",
+   "size_group": "world_scale",
+   "tags": [
+    "geometry"
+   ],
+   "geometry_spec": {
+    "mesh_type": "parametric_surface",
+    "topology": "manifold_open",
+    "construction": {
+     "method": "uv_grid_triangulation",
+     "primitives": [],
+     "operations": [
+      "compute_vertices",
+      "generate_triangles",
+      "compute_normals"
+     ]
+    },
+    "material": {
+     "type": "standard",
+     "shading_model": "emissive",
+     "key_properties": [
+      "emission",
+      "transparency"
+     ]
+    },
+    "animation": {
+     "type": "transform",
+     "driven_by": "per_frame_update",
+     "affects": [
+      "transform"
+     ]
+    },
+    "instance_strategy": "array",
+    "vertex_estimate": "~256"
+   },
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 1,
+    "clearance": {
+     "front": 2,
+     "back": 2,
+     "left": 2,
+     "right": 2
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "face_approach",
+    "isolation": 0,
+    "cluster_with": [],
+    "preferred_zone": "entry",
+    "measured_footprint_cells": 1,
+    "footprint_source": "measured"
+   },
+   "measurements": {
+    "aabb_size": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "aabb_center": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grid_cells": [
+     1.0,
+     1.0
+    ],
+    "max_dimension_m": 0.0,
+    "measured_at": "2026-04-29T07:09:56.762620Z"
+   }
+  },
+  "mobius_strip_altgeo": {
+   "category": "geometry",
+   "complexity": "beginner",
+   "description": "A walkable Möbius strip environment — traverse the one-sided surface and experience the topological twist firsthand. Non-orientability as lived experience.",
+   "dev_themes": [
+    "geometry",
+    "non_euclidean"
+   ],
+   "include_in_map_data": true,
+   "lookup_name": "mobius_strip_altgeo",
+   "map_ready": true,
+   "map_sequences": [],
+   "name": "Möbius Strip (Walkable)",
+   "scene": "res://algorithms/alternativegeometries/mobiusstrip/mobius_strip.tscn",
+   "tags": [
+    "mobius",
+    "topology",
+    "non_orientable",
+    "walkable",
+    "alternative_geometry"
+   ],
+   "parameters": {
+    "footprint": [
+     3,
+     1,
+     3
+    ],
+    "reading_light": {
+     "type": "omni",
+     "direction": "+z",
+     "cone": 360,
+     "radius": 3
+    }
+   },
+   "geometry_spec": {
+    "mesh_type": "parametric_surface",
+    "topology": "manifold_open",
+    "construction": {
+     "method": "uv_grid_triangulation",
+     "primitives": [],
+     "operations": [
+      "compute_vertices",
+      "generate_triangles",
+      "compute_normals"
+     ]
+    },
+    "material": {
+     "type": "standard",
+     "shading_model": "emissive",
+     "key_properties": [
+      "emission",
+      "metallic",
+      "double_sided"
+     ]
+    },
+    "animation": {
+     "type": "transform",
+     "driven_by": "per_frame_update",
+     "affects": [
+      "transform"
+     ]
+    },
+    "instance_strategy": "single",
+    "vertex_estimate": "unknown"
+   },
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 9,
+    "clearance": {
+     "front": 1,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "above",
+    "wall_backing": false,
+    "orientation": "face_approach",
+    "isolation": 0,
+    "cluster_with": [],
+    "preferred_zone": "entry",
+    "measured_footprint_cells": 9,
+    "footprint_source": "measured"
+   },
+   "measurements": {
+    "aabb_size": [
+     2.2,
+     0.4,
+     2.29
+    ],
+    "aabb_center": [
+     0.1,
+     0.0,
+     0.0
+    ],
+    "grid_cells": [
+     3.0,
+     3.0
+    ],
+    "max_dimension_m": 2.29,
+    "measured_at": "2026-04-29T07:09:56.762620Z"
+   },
+   "footprint_measured": [
+    3.0,
+    1,
+    3.0
+   ],
+   "spatial_profile": {
+    "dir_group": "plane",
+    "range": 6,
+    "density": "field",
+    "min_clearance": 0,
+    "stack_priority": 0.3,
+    "approach_dir": "any",
+    "derived_at": "2026-04-29T09:39:46.045261Z",
+    "derived_from": "aabb_size + category"
+   }
+  },
+  "mobius_world": {
+   "category": "unknown",
+   "complexity": "intermediate",
+   "description": "Walkable MÃ¶bius strip - non-orientable surface. Requires MovementWallWalk on player (collision layer 4).",
+   "dev_themes": [
+    "geometry",
+    "non_euclidean"
+   ],
+   "footprint": [
+    69,
+    16,
+    72
+   ],
+   "include_in_map_data": true,
+   "lookup_name": "mobius_world",
+   "map_ready": true,
+   "map_sequences": [
+    "fractals"
+   ],
+   "name": "MÃ¶bius World",
+   "parameters": {
+    "footprint": [
+     69,
+     16,
+     72
+    ],
+    "size_group": "xlarge"
+   },
+   "scene": "res://algorithms/alternativegeometries/mobiusstrip/mobius_world.tscn",
+   "size_group": "xlarge",
+   "tags": [
+    "3d",
+    "physics"
+   ],
+   "geometry_spec": {
+    "mesh_type": "parametric_surface",
+    "topology": "manifold_open",
+    "construction": {
+     "method": "uv_grid_triangulation",
+     "primitives": [],
+     "operations": [
+      "compute_vertices",
+      "generate_triangles",
+      "compute_normals"
+     ]
+    },
+    "material": {
+     "type": "shader",
+     "shading_model": "wireframe",
+     "key_properties": [
+      "emission",
+      "grid_overlay",
+      "metallic",
+      "double_sided"
+     ]
+    },
+    "animation": {
+     "type": "static",
+     "driven_by": null,
+     "affects": []
+    },
+    "instance_strategy": "array",
+    "vertex_estimate": "unknown"
+   },
+   "spatial_needs": {
+    "platform": "table",
+    "footprint_cells": 1,
+    "clearance": {
+     "front": 2,
+     "back": 2,
+     "left": 2,
+     "right": 2
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "face_approach",
+    "isolation": 0,
+    "cluster_with": [
+     "alternative_geometries",
+     "sequence",
+     "contrasts",
+     "assumptions",
+     "other"
+    ],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 1,
+    "footprint_source": "measured"
+   },
+   "measurements": {
+    "aabb_size": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "aabb_center": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grid_cells": [
+     1.0,
+     1.0
+    ],
+    "max_dimension_m": 0.0,
+    "measured_at": "2026-04-29T07:09:56.762620Z"
+   }
+  },
+  "non_euclidean_space": {
+   "category": "geometry",
+   "complexity": "advanced",
+   "description": "A space where Euclid's parallel postulate fails — rooms that are bigger inside than outside, corridors that loop impossibly. Hyperbolic and elliptic geometry made navigable.",
+   "dev_themes": [
+    "geometry",
+    "non_euclidean"
+   ],
+   "include_in_map_data": true,
+   "lookup_name": "non_euclidean_space",
+   "map_ready": true,
+   "map_sequences": [],
+   "name": "Non-Euclidean Space",
+   "parameters": {
+    "footprint": [
+     7,
+     1,
+     8
+    ],
+    "size_group": "environment"
+   },
+   "scene": "res://algorithms/alternativegeometries/noneuclideanspace/non_euclidean_space.tscn",
+   "tags": [
+    "non_euclidean",
+    "hyperbolic",
+    "elliptic",
+    "impossible_space",
+    "alternative_geometry"
+   ],
+   "geometry_spec": {
+    "mesh_type": "composed_primitives",
+    "topology": "manifold_closed",
+    "construction": {
+     "method": "primitive_assembly",
+     "primitives": [],
+     "operations": [
+      "create_primitives",
+      "position_children"
+     ]
+    },
+    "material": {
+     "type": "standard",
+     "shading_model": "pbr",
+     "key_properties": []
+    },
+    "animation": {
+     "type": "transform",
+     "driven_by": "per_frame_update",
+     "affects": [
+      "transform"
+     ]
+    },
+    "instance_strategy": "single",
+    "vertex_estimate": "unknown"
+   },
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 9,
+    "clearance": {
+     "front": 2,
+     "back": 2,
+     "left": 2,
+     "right": 2
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "face_approach",
+    "isolation": 0,
+    "cluster_with": [],
+    "preferred_zone": "end",
+    "measured_footprint_cells": 418,
+    "footprint_source": "measured_capped"
+   },
+   "measurements": {
+    "aabb_size": [
+     18.48,
+     3.95,
+     21.95
+    ],
+    "aabb_center": [
+     -0.15,
+     1.32,
+     2.77
+    ],
+    "grid_cells": [
+     19.0,
+     22.0
+    ],
+    "max_dimension_m": 21.95,
+    "measured_at": "2026-04-29T07:09:56.762620Z"
+   },
+   "footprint_measured": [
+    19.0,
+    1,
+    22.0
+   ],
+   "spatial_profile": {
+    "dir_group": "plane",
+    "range": 60,
+    "density": "field",
+    "min_clearance": 0,
+    "stack_priority": 0.3,
+    "approach_dir": "any",
+    "derived_at": "2026-04-29T09:39:46.045261Z",
+    "derived_from": "aabb_size + category"
+   }
+  },
+  "organic_space": {
+   "category": "unknown",
+   "complexity": "expert",
+   "description": "An algorithmic exploration of organic geometries and natural forms, creating flowing, non-Euclidean spaces that challenge traditional geometric assumptions",
+   "dev_themes": [
+    "geometry",
+    "non_euclidean"
+   ],
+   "footprint": [
+    1,
+    6,
+    13
+   ],
+   "include_in_map_data": true,
+   "lookup_name": "organic_space",
+   "map_ready": true,
+   "map_sequences": [
+    "proceduralgeneration",
+    "proceduralgeneration_all"
+   ],
+   "name": "Organic Space",
+   "parameters": {
+    "footprint": [
+     1,
+     6,
+     13
+    ],
+    "size_group": "world_scale"
+   },
+   "scene": "res://algorithms/alternativegeometries/organicspace/organic_space.tscn",
+   "size_group": "world_scale",
+   "tags": [
+    "geometry"
+   ],
+   "geometry_spec": {
+    "mesh_type": "boolean_composition",
+    "topology": "volumetric",
+    "construction": {
+     "method": "csg_boolean",
+     "primitives": [
+      "box",
+      "sphere",
+      "cylinder"
+     ],
+     "operations": [
+      "create_primitives",
+      "position_primitives",
+      "boolean_combine"
+     ]
+    },
+    "material": {
+     "type": "standard",
+     "shading_model": "pbr",
+     "key_properties": []
+    },
+    "animation": {
+     "type": "static",
+     "driven_by": null,
+     "affects": []
+    },
+    "instance_strategy": "array",
+    "vertex_estimate": "unknown"
+   },
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 9,
+    "clearance": {
+     "front": 2,
+     "back": 2,
+     "left": 2,
+     "right": 2
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "face_approach",
+    "isolation": 0,
+    "cluster_with": [
+     "paired",
+     "branching_growth_algorithm",
+     "contrasts",
+     "deterministic",
+     "growth"
+    ],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 625,
+    "footprint_source": "measured_capped"
+   },
+   "measurements": {
+    "aabb_size": [
+     25.0,
+     25.0,
+     25.0
+    ],
+    "aabb_center": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grid_cells": [
+     25.0,
+     25.0
+    ],
+    "max_dimension_m": 25.0,
+    "measured_at": "2026-04-29T07:09:56.762620Z"
+   },
+   "spatial_profile": {
+    "dir_group": "floor",
+    "range": 60,
+    "density": "high",
+    "min_clearance": 2,
+    "stack_priority": 0.85,
+    "approach_dir": "any",
+    "derived_at": "2026-04-29T09:39:46.045261Z",
+    "derived_from": "aabb_size + category"
+   }
+  },
+  "rhizomatic_maze_space": {
+   "category": "unknown",
+   "complexity": "intermediate",
+   "description": "A labyrinthine exploration of rhizomatic growth patterns, creating interconnected maze-like spaces that grow organically like fungal networks or plant root systems",
+   "dev_themes": [
+    "geometry",
+    "non_euclidean"
+   ],
+   "footprint": [
+    50,
+    21,
+    50
+   ],
+   "include_in_map_data": true,
+   "lookup_name": "rhizomatic_maze_space",
+   "map_ready": true,
+   "map_sequences": [
+    "proceduralgeneration",
+    "proceduralgeneration_all"
+   ],
+   "name": "Rhizomatic Maze Space",
+   "parameters": {
+    "footprint": [
+     50,
+     21,
+     50
+    ],
+    "size_group": "world_scale"
+   },
+   "scene": "res://algorithms/alternativegeometries/rhizomaticmazespace/RhizomaticMazeSpace.tscn",
+   "size_group": "world_scale",
+   "tags": [
+    "geometry"
+   ],
+   "geometry_spec": {
+    "mesh_type": "hybrid",
+    "topology": "manifold_closed",
+    "construction": {
+     "method": "unknown",
+     "primitives": [
+      "sphere",
+      "cylinder"
+     ],
+     "operations": []
+    },
+    "material": {
+     "type": "standard",
+     "shading_model": "pbr",
+     "key_properties": []
+    },
+    "animation": {
+     "type": "static",
+     "driven_by": null,
+     "affects": []
+    },
+    "instance_strategy": "array",
+    "vertex_estimate": "unknown"
+   },
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 1,
+    "clearance": {
+     "front": 2,
+     "back": 2,
+     "left": 2,
+     "right": 2
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "face_approach",
+    "isolation": 0,
+    "cluster_with": [
+     "paired",
+     "mirror_cellular_texture_for_3d",
+     "contrasts",
+     "maze_generation",
+     "structured"
+    ],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 1,
+    "footprint_source": "measured"
+   },
+   "measurements": {
+    "aabb_size": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "aabb_center": [
+     0.0,
+     0.0,
+     0.0
+    ],
+    "grid_cells": [
+     1.0,
+     1.0
+    ],
+    "max_dimension_m": 0.0,
+    "measured_at": "2026-04-29T07:09:56.762620Z"
+   }
+  },
+  "rhizomatic_structure": {
+   "category": "geometry",
+   "complexity": "intermediate",
+   "description": "Grow a network that refuses root, trunk, and leaves. Recursive branching creates a scaffold, then lateral reconnections turn that scaffold into a mesh where any point can connect to any other. Adjusting reconnection probability moves the artifact between tree and rhizome, making hierarchy versus multiplicity a concrete topological choice. It brings Deleuze and Guattari into graph theory by questioning when a tree is the wrong model.",
+   "dev_themes": [
+    "geometry",
+    "non_euclidean"
+   ],
+   "footprint": [
+    20,
+    18,
+    14
+   ],
+   "include_in_map_data": true,
+   "lookup_name": "rhizomatic_structure",
+   "map_ready": true,
+   "map_sequences": [
+    "graphtheory"
+   ],
+   "name": "Rhizomatic Structure",
+   "scene": "res://algorithms/alternativegeometries/rhizomaticstructure/rhizomatic_structure.tscn",
+   "size_group": "xlarge",
+   "tags": [
+    "graph_theory",
+    "rhizome",
+    "non_hierarchical",
+    "cycles",
+    "topology",
+    "deleuze",
+    "network",
+    "alternative_geometry",
+    "critical_theory"
+   ],
+   "qfep_connection": "A challenge to hierarchical F: lateral reconnection redistributes structure away from roots and trunks. It asks what graph order looks like when no center is privileged.",
+   "gamwell_reference": "Non-Euclidean geometry, Riemannian manifolds, topology, rhizome theory (Deleuze & Guattari), spatial perception",
+   "capacity": "COMPARE tree-like and rhizomatic topologies by tuning how often local branches reconnect laterally.",
+   "interactions": [
+    "regenerate the structure",
+    "tune connection_probability to move between tree and rhizome",
+    "change growth_direction_randomness to bias branching",
+    "inspect cycles formed by lateral reconnections"
+   ],
+   "geometry_spec": {
+    "mesh_type": "composed_primitives",
+    "topology": "manifold_closed",
+    "construction": {
+     "method": "primitive_assembly",
+     "primitives": [
+      "cylinder"
+     ],
+     "operations": [
+      "create_primitives",
+      "position_children"
+     ]
+    },
+    "material": {
+     "type": "standard",
+     "shading_model": "pbr",
+     "key_properties": []
+    },
+    "animation": {
+     "type": "static",
+     "driven_by": null,
+     "affects": []
+    },
+    "instance_strategy": "array",
+    "vertex_estimate": "unknown"
+   },
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 9,
+    "clearance": {
+     "front": 1,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "above",
+    "wall_backing": false,
+    "orientation": "face_approach",
+    "isolation": 0,
+    "cluster_with": [
+     "appears",
+     "inspired",
+     "contrast",
+     "hierarchical",
+     "graph"
+    ],
+    "preferred_zone": "any",
+    "measured_footprint_cells": 270,
+    "footprint_source": "measured_capped"
+   },
+   "measurements": {
+    "aabb_size": [
+     14.64,
+     15.02,
+     17.47
+    ],
+    "aabb_center": [
+     -1.93,
+     -2.04,
+     -1.01
+    ],
+    "grid_cells": [
+     15.0,
+     18.0
+    ],
+    "max_dimension_m": 17.47,
+    "measured_at": "2026-04-29T07:09:56.762620Z"
+   },
+   "spatial_profile": {
+    "dir_group": "floor",
+    "range": 35,
+    "density": "high",
+    "min_clearance": 2,
+    "stack_priority": 0.85,
+    "approach_dir": "any",
+    "derived_at": "2026-04-29T09:39:46.045261Z",
+    "derived_from": "aabb_size + category"
+   }
+  },
+  "riemann_pi": {
+   "category": "unknown",
+   "complexity": "beginner",
+   "description": "riemann_pi",
+   "dev_themes": [
+    "geometry",
+    "non_euclidean"
+   ],
+   "footprint": [
+    23,
+    6,
+    4
+   ],
+   "include_in_map_data": true,
+   "lookup_name": "riemann_pi",
+   "map_ready": true,
+   "map_sequences": [],
+   "name": "riemann_pi",
+   "parameters": {
+    "footprint": [
+     23,
+     6,
+     4
+    ],
+    "size_group": "world_scale"
+   },
+   "scene": "res://algorithms/spacetopology/riemann_pi/pi_infinity_surface.tscn",
+   "size_group": "world_scale",
+   "tags": [
+    "geometry"
+   ],
+   "geometry_spec": {
+    "mesh_type": "instanced_particles",
+    "topology": "scattered",
+    "construction": {
+     "method": "multimesh_instancing",
+     "primitives": [
+      "sphere",
+      "plane"
+     ],
+     "operations": [
+      "allocate_instances",
+      "set_transforms",
+      "update_per_frame"
+     ]
+    },
+    "material": {
+     "type": "shader",
+     "shading_model": "unshaded",
+     "key_properties": [
+      "emission",
+      "metallic",
+      "transparency"
+     ]
+    },
+    "animation": {
+     "type": "particle_lifecycle",
+     "driven_by": "cpu_simulation",
+     "affects": [
+      "transform",
+      "color"
+     ]
+    },
+    "instance_strategy": "multimesh",
+    "vertex_estimate": "~512"
+   },
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 9,
+    "clearance": {
+     "front": 2,
+     "back": 2,
+     "left": 2,
+     "right": 2
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "face_approach",
+    "isolation": 0,
+    "cluster_with": [],
+    "preferred_zone": "entry",
+    "measured_footprint_cells": 208,
+    "footprint_source": "measured_capped"
+   },
+   "measurements": {
+    "aabb_size": [
+     25.5,
+     15.65,
+     8.0
+    ],
+    "aabb_center": [
+     10.75,
+     7.32,
+     0.0
+    ],
+    "grid_cells": [
+     26.0,
+     8.0
+    ],
+    "max_dimension_m": 25.5,
+    "measured_at": "2026-04-29T07:09:56.762620Z"
+   },
+   "spatial_profile": {
+    "dir_group": "floor",
+    "range": 60,
+    "density": "high",
+    "min_clearance": 2,
+    "stack_priority": 0.85,
+    "approach_dir": "any",
+    "derived_at": "2026-04-29T09:39:46.045261Z",
+    "derived_from": "aabb_size + category"
+   },
+   "qfep_connection": "integration: pi estimated by Riemann slices — the circle's area approached rectangle by rectangle; the constant everyone knows, earned the slow way. Accumulation auditioning for exactness."
+  },
+  "riemann_sphere": {
+   "category": "geometry",
+   "complexity": "advanced",
+   "description": "The Riemann sphere — compactified complex plane with stereographic projection lines, north pole at infinity, equator, and projection plane visible.",
+   "dev_themes": [
+    "geometry",
+    "non_euclidean"
+   ],
+   "include_in_map_data": true,
+   "lookup_name": "riemann_sphere",
+   "map_ready": true,
+   "map_sequences": [
+    "foundationscrisis"
+   ],
+   "name": "Riemann Sphere",
+   "parameters": {
+    "footprint": [
+     1,
+     1,
+     1
+    ],
+    "size_group": "compact"
+   },
+   "scene": "res://commons/artifacts/riemann_sphere/riemann_sphere.tscn",
+   "tags": [
+    "riemann",
+    "complex_analysis",
+    "stereographic",
+    "projection",
+    "sphere",
+    "alternative_geometry"
+   ],
+   "geometry_spec": {
+    "mesh_type": "composed_primitives",
+    "topology": "manifold_closed",
+    "construction": {
+     "method": "primitive_assembly",
+     "primitives": [
+      "sphere",
+      "torus",
+      "plane"
+     ],
+     "operations": [
+      "create_primitives",
+      "position_children"
+     ]
+    },
+    "material": {
+     "type": "standard",
+     "shading_model": "emissive",
+     "key_properties": [
+      "emission",
+      "metallic",
+      "transparency"
+     ]
+    },
+    "animation": {
+     "type": "static",
+     "driven_by": null,
+     "affects": []
+    },
+    "instance_strategy": "few",
+    "vertex_estimate": "~512"
+   },
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 1,
+    "clearance": {
+     "front": 1,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "face_approach",
+    "isolation": 0,
+    "cluster_with": [
+     "contrasts",
+     "poincare_disk",
+     "compactification",
+     "hyperbolic",
+     "complex"
+    ],
+    "preferred_zone": "end",
+    "measured_footprint_cells": 1,
+    "footprint_source": "measured"
+   },
+   "measurements": {
+    "aabb_size": [
+     0.9,
+     0.63,
+     0.9
+    ],
+    "aabb_center": [
+     0.0,
+     0.01,
+     0.0
+    ],
+    "grid_cells": [
+     1.0,
+     1.0
+    ],
+    "max_dimension_m": 0.9,
+    "measured_at": "2026-04-29T07:09:56.762620Z"
+   },
+   "footprint_measured": [
+    1.0,
+    1,
+    1.0
+   ],
+   "spatial_profile": {
+    "dir_group": "floor",
+    "range": 2,
+    "density": "medium",
+    "min_clearance": 1,
+    "stack_priority": 0.5,
+    "approach_dir": "any",
+    "derived_at": "2026-04-29T09:39:46.045762Z",
+    "derived_from": "aabb_size + category"
+   }
+  },
+  "triangle_curvature_workbench": {
+   "name": "Triangle Curvature Workbench",
+   "lookup_name": "triangle_curvature_workbench",
+   "description": "An interactive workbench for Gauss-Bonnet on a triangle. One slider drives Gaussian curvature K through seven detents {-2, -1, -0.5, 0, +0.5, +1, +2}; the host surface morphs with K's sign (Poincaré disk for K<0, flat cyan grid for K=0, violet sphere for K>0); three triangle vertices at canonical 30° geodesic separation stay fixed while their connecting edges become geodesics ON the active surface (arcs, lines, great-circle arcs); the readout shows α + β + γ in degrees, the Gauss-Bonnet excess (sphere) or defect (disk) as a signed angle, and a regime word. The slider IS Gauss-Bonnet — the parallel postulate exposed as a setting on K, not a truth about lines. Paired with /triangle-table-gallery's nine cells (3 surfaces × 3 sizes).",
+   "scene": "res://commons/artifacts/triangle_curvature_workbench/triangle_curvature_workbench.tscn",
+   "category": "limits-of-geometry",
+   "interaction": "grab_slide",
+   "sequence": "computationalgeometry",
+   "artifact_type": "geometry",
+   "qfep_term": "F",
+   "capacity": "WALK Gauss-Bonnet — angle sum is a property of the surface",
+   "dev_themes": [
+    "geometry",
+    "non_euclidean",
+    "gauss_bonnet",
+    "curvature",
+    "parallel_postulate"
+   ],
+   "dev_category": "geometry",
+   "complexity": "intermediate",
+   "tags": [
+    "interactive",
+    "slider",
+    "geometry",
+    "non_euclidean",
+    "curvature",
+    "gauss_bonnet",
+    "triangle",
+    "poincare_disk",
+    "sphere",
+    "limits_of_geometry",
+    "parallel_postulate"
+   ],
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "computationalgeometry",
+    "higher_dimensions"
+   ],
+   "parameters": {
+    "footprint": [
+     2,
+     3,
+     2
+    ],
+    "size_group": "medium"
+   },
+   "spatial_needs": {
+    "platform": "floor",
+    "footprint_cells": 4,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "face_approach",
+    "isolation": 0,
+    "cluster_with": [
+     "curvature_slider",
+     "hyperbolic_surface",
+     "elliptic_surface",
+     "riemann_sphere",
+     "euclid_postulates_plaque"
+    ],
+    "preferred_zone": "any"
+   }
+  },
+  "riemann_torus": {
+   "category": "unknown",
+   "complexity": "beginner",
+   "description": "riemann_torus",
+   "dev_themes": [
+    "geometry",
+    "non_euclidean"
+   ],
+   "footprint": [
+    15,
+    2,
+    2
+   ],
+   "include_in_map_data": true,
+   "lookup_name": "riemann_torus",
+   "map_ready": true,
+   "map_sequences": [],
+   "name": "riemann_torus",
+   "parameters": {
+    "footprint": [
+     15,
+     2,
+     2
+    ],
+    "size_group": "world_scale"
+   },
+   "scene": "res://algorithms/spacetopology/riemann_torus/torus_vr.tscn",
+   "size_group": "world_scale",
+   "tags": [
+    "geometry"
+   ],
+   "geometry_spec": {
+    "mesh_type": "hybrid",
+    "topology": "manifold_closed",
+    "construction": {
+     "method": "unknown",
+     "primitives": [
+      "cylinder",
+      "torus",
+      "plane"
+     ],
+     "operations": []
+    },
+    "material": {
+     "type": "shader",
+     "shading_model": "custom_fragment",
+     "key_properties": [
+      "emission",
+      "metallic",
+      "transparency"
+     ]
+    },
+    "animation": {
+     "type": "particle_lifecycle",
+     "driven_by": "cpu_simulation",
+     "affects": [
+      "transform",
+      "color"
+     ]
+    },
+    "instance_strategy": "multimesh",
+    "vertex_estimate": "~64"
+   },
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 9,
+    "clearance": {
+     "front": 2,
+     "back": 2,
+     "left": 2,
+     "right": 2
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "face_approach",
+    "isolation": 0,
+    "cluster_with": [],
+    "preferred_zone": "entry",
+    "measured_footprint_cells": 312,
+    "footprint_source": "measured_capped"
+   },
+   "measurements": {
+    "aabb_size": [
+     25.73,
+     0.65,
+     12.0
+    ],
+    "aabb_center": [
+     6.87,
+     -0.09,
+     0.0
+    ],
+    "grid_cells": [
+     26.0,
+     12.0
+    ],
+    "max_dimension_m": 25.73,
+    "measured_at": "2026-04-29T07:09:56.762620Z"
+   },
+   "spatial_profile": {
+    "dir_group": "plane",
+    "range": 60,
+    "density": "field",
+    "min_clearance": 0,
+    "stack_priority": 0.3,
+    "approach_dir": "any",
+    "derived_at": "2026-04-29T09:39:46.045762Z",
+    "derived_from": "aabb_size + category"
+   }
+  }
+ },
+ "registry_info": {
+  "category": "geometry",
+  "description": "Non-Euclidean and alternative geometry artifacts — Möbius strips, bulging tunnels, rhizomatic structures, and spaces where parallel lines meet or diverge. Geometry beyond the textbook.",
+  "name": "alternative_geometries",
+  "theoretical_grounding": "Non-Euclidean geometry, Riemannian manifolds, topology, rhizome theory (Deleuze & Guattari), spatial perception"
+ }
 }
