@@ -118,8 +118,9 @@ func _probe(entry: Dictionary, palette: Dictionary) -> Dictionary:
 			housing_aabb = wab
 			have_aabb = true
 	findings.append({
-		"rule": "G2-grounded", "ok": min_y < 0.06 and min_y > -0.20,
-		"detail": "lowest element y = %.3f" % min_y,
+		"rule": "G2-grounded", "ok": min_y < 0.06,
+		"detail": "lowest element y = %.3f%s" % [min_y,
+			" (pedestal below origin)" if min_y < -0.20 else ""],
 	})
 
 	# ── G1 no orphan text ────────────────────────────────────────────────
@@ -190,9 +191,11 @@ func _probe(entry: Dictionary, palette: Dictionary) -> Dictionary:
 	var pad: Node = _find_pad(inst)
 	if pad != null:
 		var py: float = (pad as Node3D).global_position.y
+		var above_floor: float = py - min_y      # min_y = the floor contact
 		findings.append({
-			"rule": "G5-reach", "ok": py >= 0.75 and py <= 1.35,
-			"detail": "keypad centre y = %.3f" % py,
+			"rule": "G5-reach", "ok": above_floor >= 0.75 and above_floor <= 1.35,
+			"detail": "keypad %.3f above the floor contact (base y = %.3f)" % [
+				above_floor, min_y],
 		})
 
 	# ── G6 screens seated ────────────────────────────────────────────────

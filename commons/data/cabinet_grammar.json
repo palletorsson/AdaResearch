@@ -146,7 +146,7 @@
    "id": "G2-grounded",
    "name": "The body meets the floor",
    "applies": "all",
-   "check": "lowest cabinet element within 0.06 m of y=0",
+   "check": "lowest element at or below y=0.06 — nothing hovers (a pedestal legitimately extends below the origin)",
    "tolerance_m": 0.06,
    "why": "A plinth, apron or skirt closes the silhouette; a hovering body reads as a prop, not furniture."
   },
@@ -170,12 +170,12 @@
    "id": "G5-reach",
    "name": "Controls in the reach band",
    "applies": "all",
-   "check": "keypad centre between 0.75 m and 1.35 m",
+   "check": "keypad centre between 0.75 m and 1.35 m ABOVE THE FLOOR CONTACT (not above the artifact origin)",
    "range_m": [
     0.75,
     1.35
    ],
-   "why": "VR ergonomics: below is a crouch, above is a stretch."
+   "why": "VR ergonomics: below is a crouch, above is a stretch. Measured from where the artifact meets the floor, because the fix for a low keypad is a PEDESTAL (HangarKit.plinth, built downward from y=0) — the face is already right, the object was simply too low."
   },
   {
    "id": "G6-screen-seated",
@@ -277,7 +277,8 @@
    "grime_band(length, height, z, base)": "age on SOLID faces",
    "dust_streaks(w, h, z, count)": "age — never over a window, it reads as smears on the phenomenon",
    "striped_mat() / hazard_stripe_texture()": "caution striping",
-   "emissive(c, energy)": "lit elements"
+   "emissive(c, energy)": "lit elements",
+   "plinth(w, d, h, finish, wear, accent, code)": "a pedestal built DOWNWARD from y=0 — raises an artifact into the reach band without touching a single authored coordinate; auto-grounding does the lift"
   },
   "gotcha": "grime_band/dust_streaks bake their Z into position — assign .position.x/.y only. grime_band is an OPAQUE dirt shadow: it belongs at the BASE of a light body where dirt collects, never floating mid-body and never on a dark face (it reads as a hanging slab) or over a window (smears on the phenomenon). And derive the near-black 'dark' from a fixed value, not panel.darkened() — 0.55 lands at ~0.31 grey and washes out every pocket, plinth and apron in the family."
  }

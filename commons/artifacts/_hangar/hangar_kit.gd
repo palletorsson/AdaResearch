@@ -191,6 +191,59 @@ static func bolts(a: Vector3, b: Vector3, count: int, radius: float, mat: Materi
 
 
 # ── Hazard stripes ────────────────────────────────────────────────────
+## A PEDESTAL built DOWNWARD from y = 0.
+##
+## The artifact keeps its own origin and every coordinate it already has; the
+## pedestal hangs below, and the grid's auto-grounding (base -> floor) lifts
+## the whole assembly so the pedestal's foot meets the ground. That is the
+## cheap way to fix an artifact whose controls sit below the VR reach band
+## (~0.75-1.35 m): raise the object, do not redesign its face.
+##
+## Reads as station furniture: recessed toe kick, a shaft inset from the cap,
+## a cap plate the machine stands on, an ember line under the lip, and an
+## optional asset code stencilled on the front.
+static func plinth(w: float, d: float, h: float, finish: String = "rams",
+		wear_amount: float = 0.10, accent_col: Color = BRAUN_ACCENT,
+		code_text: String = "") -> Node3D:
+	var root := Node3D.new()
+	root.name = "Plinth"
+	if h <= 0.05:
+		return root
+	var pal: Dictionary = finish_palette(finish)
+	var cap_mat: StandardMaterial3D = finish_body(finish, pal["body"], wear_amount)
+	var body_mat: StandardMaterial3D = finish_body(finish, pal["panel"], wear_amount)
+	var dark_mat: StandardMaterial3D = painted_metal(Color(0.09, 0.09, 0.105), wear_amount, 0.4, 0.5)
+
+	var cap_h: float = 0.035
+	var kick: float = 0.055
+	var shaft_h: float = maxf(h - cap_h - kick, 0.02)
+	var front_z: float = d * 0.5
+
+	# cap plate — the machine stands on this
+	root.add_child(box(Vector3(0, -cap_h * 0.5, 0), Vector3(w, cap_h, d), cap_mat))
+	# ember line under the cap lip
+	root.add_child(box(Vector3(0, -cap_h - 0.005, front_z - 0.004),
+		Vector3(w * 0.98, 0.006, 0.006), emissive(accent_col, 2.0)))
+	# shaft, inset so the cap reads as a lip
+	root.add_child(box(Vector3(0, -cap_h - shaft_h * 0.5, 0),
+		Vector3(w - 0.06, shaft_h, d - 0.06), body_mat))
+	# recessed toe kick
+	root.add_child(box(Vector3(0, -h + kick * 0.5, 0),
+		Vector3(w - 0.14, kick, d - 0.14), dark_mat))
+	# grime where the floor meets the base
+	var gb: MeshInstance3D = grime_band(w * 0.85, 0.05, (d - 0.06) * 0.5 + 0.004, pal["panel"])
+	if gb:
+		gb.position.y = -h + kick + 0.004
+		root.add_child(gb)
+	if code_text.strip_edges() != "":
+		var code: MeshInstance3D = stencil(code_text, Vector2(0.10, 0.026),
+			accent_col.lightened(0.25))
+		if code:
+			code.position = Vector3(-w * 0.5 + 0.10, -cap_h - 0.075, front_z - 0.028)
+			root.add_child(code)
+	return root
+
+
 ## Diagonal warning-stripe texture (caution yellow / dark), cached per colour pair.
 static var _stripe_cache: Dictionary = {}
 static func hazard_stripe_texture(a: Color = Color(0.95, 0.75, 0.05), b: Color = Color(0.10, 0.10, 0.12), bands: int = 8) -> ImageTexture:

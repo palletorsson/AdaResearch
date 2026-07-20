@@ -35,7 +35,8 @@ CABINETS = [
         "body": "squat vending machine",
         "no": 1,
         "sign": "GALTON BOARD / BINOMIAL CASCADE",
-        "note": "The first body. Balls fall behind glass; the stats that used to "
+        "plinth": 0.60,
+        "note": "The first body, now on a 0.60 m pedestal. Balls fall behind glass; the stats that used to "
                 "hang beside the board now print on the service column's screen, "
                 "the keypad sits on a wedge instead of hovering, and the title "
                 "that floated overhead is baked into the sign band. Everything the "
@@ -46,7 +47,8 @@ CABINETS = [
         "body": "tall street kiosk",
         "no": 2,
         "sign": "MONTE CARLO / AREA BY ACCIDENT",
-        "note": "Same anatomy, taller proportion. The live estimate (pi, darts, "
+        "plinth": 0.38,
+        "note": "Same anatomy, taller proportion, on a 0.38 m pedestal. The live estimate (pi, darts, "
                 "inside/outside, error) rides the column glass while darts keep "
                 "landing on the board — the readout is part of the machine that "
                 "produces it.",
@@ -56,7 +58,8 @@ CABINETS = [
         "body": "wide console",
         "no": 3,
         "sign": "DISTRIBUTION COMPARATOR / ONE SOURCE - THREE RULES",
-        "note": "The landscape variant. Three histograms share ONE window, and the "
+        "plinth": 0.83,
+        "note": "The landscape variant, on a 0.83 m pedestal — it was a knee-high console before. Three histograms share ONE window, and the "
                 "column headers — once floating labels — are signage baked on the "
                 "window's back wall in each column's colour. Flat, peaked, decaying: "
                 "the artifact's whole argument in a single look.",
@@ -115,6 +118,7 @@ def main() -> int:
                 "label": f"{art} — {view_label}",
                 "dna": {
                     "propagation": cab["no"],
+                    "plinth_m": cab.get("plinth", 0.0),
                     "body_type": cab["body"],
                     "sign_band": cab["sign"],
                     "view": view,
@@ -131,7 +135,9 @@ def main() -> int:
                        "readouts, titles and keypads into the air, rebuilt as single "
                        "appliances in one shared grammar. Five body types so far — "
                        "squat vending machine, tall kiosk, wide console, pedestal "
-                       "station, croupier table. Rebuild: python tools/build_cabinet_gallery.py",
+                       "station, croupier table. All five compose HangarKit, and three now stand "
+                       "on HangarKit.plinth pedestals that raise their controls into the VR reach "
+                       "band. Rebuild: python tools/build_cabinet_gallery.py",
         "entries": entries,
     }
     (PUB / "manifest.json").write_text(

@@ -29,6 +29,13 @@ const HangarKit = preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 @export var wear: float = 0.10
 @export var unit_code: String = "MC-02"
 
+## Pedestal height. These machines are authored at bench scale but ground
+## base-to-floor, which left their keypads at knee height (G5-reach). The
+## plinth hangs BELOW the origin, so every coordinate above stays as authored
+## and auto-grounding lifts the whole assembly. Set 0.0 for a floor-standing
+## build.
+@export var plinth_height: float = 0.38
+
 
 # ── Board ────────────────────────────────────────────────────────────────────
 @export var board_size: float = 0.6
@@ -621,6 +628,11 @@ func _create_cabinet() -> void:
 		gb.position.x = cx                  # keep the kit's baked z
 		cab.add_child(gb)
 
+	# ── Pedestal: raise the controls into the VR reach band ─────────────
+	var ped: Node3D = HangarKit.plinth(total_w, bd + 0.18, plinth_height, finish, ew,
+		col_accent, unit_code)
+	if ped:
+		cab.add_child(ped)
 
 func _make_wedge(w: float, h: float, d_bottom: float, d_top: float, mat: Material) -> MeshInstance3D:
 	var st := SurfaceTool.new()
