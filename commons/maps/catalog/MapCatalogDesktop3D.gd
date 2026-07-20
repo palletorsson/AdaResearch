@@ -223,6 +223,47 @@ func _walk_setup(map_name: String) -> void:
 	_frame_walk_camera()
 	_set_status("Walk-through: %s — F fly, WASD move, E/Q up/down, mouse look" % map_name)
 
+## Step focus to the next/previous placed artifact and frame it by its own
+## world AABB, so each member fills the view at a distance matched to its size.
+var _walk_focus: int = -1
+func _walk_focus_step(dir: int) -> void:
+	if not _preview_camera:
+		return
+	var arts := _collect_all_artifacts()
+	if arts.is_empty():
+		return
+	# order left-to-right so [ ] walks the row in the order it reads
+	arts.sort_custom(func(a, b): return (a as Node3D).global_position.x < (b as Node3D).global_position.x)
+	_walk_focus = wrapi(_walk_focus + dir, 0, arts.size())
+	var node: Node3D = arts[_walk_focus]
+	var aabb := _node_world_aabb(node)
+	var c := aabb.get_center()
+	var size := aabb.size
+	# stand back proportional to the larger of width/height, along -Z from
+	# the artifact's front (these bodies face roughly +Z in the row).
+	var reach: float = maxf(maxf(size.x, size.y), size.z) * 1.15 + 1.2
+	_preview_camera.global_position = Vector3(c.x, c.y + size.y * 0.10, c.z + reach)
+	_preview_camera.look_at(c, Vector3.UP)
+	_fly_yaw = _preview_camera.rotation.y
+	_fly_pitch = _preview_camera.rotation.x
+	var lookup: String = str(node.get_meta("artifact_lookup_name", node.name))
+	_set_status("Walk %d/%d: %s  ([ ] step · 0 overview)" % [_walk_focus + 1, arts.size(), lookup])
+
+## World-space AABB of an artifact subtree (union of its mesh AABBs).
+func _node_world_aabb(root_node: Node) -> AABB:
+	var acc := AABB()
+	var have := false
+	var stack: Array = [root_node]
+	while not stack.is_empty():
+		var n = stack.pop_back()
+		if n is MeshInstance3D:
+			var wab: AABB = (n as MeshInstance3D).global_transform * (n as MeshInstance3D).get_aabb()
+			acc = wab if not have else acc.merge(wab)
+			have = true
+		for c in n.get_children():
+			stack.append(c)
+	return acc if have else AABB((root_node as Node3D).global_position, Vector3.ONE)
+
 ## Position the first-person camera a few metres in front of the artifact
 ## row, at eye height, looking at its centroid — so the framing is correct
 ## regardless of the grid's map->world axis convention.
@@ -661,6 +702,20 @@ func _unhandled_input(event: InputEvent) -> void:
 	if _mapsim_bridge_on:
 		_mapsim_camera_input(event)
 		return
+
+	# Walk-through focus stepping: [ / ] snap to each artifact framed at ITS
+	# own size (so the billboard fills the view instead of sitting far off);
+	# 0 returns to the whole-row overview. Handled before edit-mode's E.
+	if _walk_mode and event is InputEventKey:
+		var wk := event as InputEventKey
+		if wk.pressed and not wk.echo:
+			var code := wk.keycode
+			if code == KEY_BRACKETRIGHT:
+				_walk_focus_step(1); get_viewport().set_input_as_handled(); return
+			elif code == KEY_BRACKETLEFT:
+				_walk_focus_step(-1); get_viewport().set_input_as_handled(); return
+			elif code == KEY_0:
+				_frame_walk_camera(); _set_status("Walk: row overview"); get_viewport().set_input_as_handled(); return
 
 	# E key toggles edit mode
 	if event is InputEventKey:
