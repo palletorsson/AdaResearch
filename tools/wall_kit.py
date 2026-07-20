@@ -185,6 +185,223 @@ WEIGHTS = {"field": 2, "pinwheel": 2, "court": 2, "ledge": 2,
            "street": 2, "cross": 1, "colonnade": 2, "chapel": 1}
 
 
+# ── the edge COLOUR: the Wang generalisation ─────────────────────────────────
+# The original contract said every boundary cell returns to sea level. In Wang
+# terms that is ONE colour — every block matches every block, which is why the
+# seams could never go wrong. It is also why this kit could not make the
+# KitBash platform structures: dressing a seeded map found cliff2+ = 0, not one
+# fall edge in the whole map, because nothing is ever allowed to leave h=2 at a
+# boundary.
+#
+# So the constant becomes a LABEL. An edge colour is the height of each of the
+# 8 boundary cells along one side, read west->east (n, s) or north->south (w,
+# e). Two blocks may abut iff the facing colours are equal — A.e == B.w, A.s ==
+# B.n. Sea level is now just the colour "22222222", so every block above keeps
+# the colour it always had and still matches everything it always matched.
+#
+# The colour is DERIVED from the block's own structure, never declared beside
+# it. A declared colour is a second source of truth that drifts from the first;
+# reading it off the floor means a block cannot lie about its own edge.
+FLAT = SEA * B
+
+
+def edges_of(bl):
+    """(n, e, s, w) colours of a block, read off its floor."""
+    st = bl["structure"]
+    n = "".join(str(st[0][c]) for c in range(B))
+    s = "".join(str(st[B - 1][c]) for c in range(B))
+    w = "".join(str(st[r][0]) for r in range(B))
+    e = "".join(str(st[r][B - 1]) for r in range(B))
+    return (n, e, s, w)
+
+
+# ── deck blocks: the vocabulary the flat contract could not hold ─────────────
+# OPT-IN (--decks). Without the flag KIT is untouched and every existing seed
+# reproduces byte-for-byte — the additive gate.
+
+def mk_deck():
+    """a whole plate lifted to h3 — the elevated deck. Colour '33333333' on
+    all four sides, so decks tile with decks and never with sea level."""
+    bl = blank()
+    for r in range(B):
+        for c in range(B):
+            bl["structure"][r][c] = "3"
+    return bl
+
+
+def mk_terrace():
+    """the height change made walkable: north half h3, south half h2, with the
+    stair at the step. Colours n='33333333', s='22222222' — so a terrace is the
+    only way a deck field can come down to a sea-level field. The kit's
+    transformer."""
+    bl = blank()
+    for r in range(4):
+        for c in range(B):
+            bl["structure"][r][c] = "3"
+    bl["utilities"][4][3] = "wp:180"       # rise north, onto the upper plate
+    bl["utilities"][4][4] = "wp:180"
+    return bl
+
+
+MOAT = SEA + "00" + "33" + "00" + SEA     # '20033002' — the causeway colour
+
+
+def mk_causeway():
+    """a raised walkway crossing open void — the cyber-district silhouette.
+
+    The first draft made the whole block void except the deck strip, which put
+    void on the east and west edges too. Nothing flat could ever sit beside it,
+    so the causeway became an island the seeder could not reach and the solver
+    spent its life proving grids unsatisfiable. Keeping the outer COLUMNS at sea
+    level fixes it: east and west read flat, so a causeway drops into any
+    existing hall, while north and south read MOAT so causeways chain into runs.
+    That is the edge colour doing the work it was added for — one block, two
+    colours, and the drop lives inside."""
+    bl = blank()
+    for r in range(B):
+        for c in range(B):
+            if c in (0, B - 1):
+                continue                   # the flat shoulders that let it tile
+            bl["structure"][r][c] = "3" if c in GATE else "0"
+    return bl
+
+
+def mk_landing():
+    """where a causeway run meets the ground: MOAT to the north, sea level to
+    the south, flat shoulders. The pier head — and the only way a causeway
+    comes down."""
+    bl = blank()
+    for c in range(1, B - 1):
+        bl["structure"][0][c] = "3" if c in GATE else "0"
+    for c in GATE:
+        bl["structure"][1][c] = "3"
+    bl["utilities"][2][3] = "wp:180"       # down off the deck onto the plate
+    bl["utilities"][2][4] = "wp:180"
+    return bl
+
+
+DECK_KIT = {"deck": mk_deck, "terrace": mk_terrace,
+            "causeway": mk_causeway, "landing": mk_landing}
+DECK_WEIGHTS = {"deck": 2, "terrace": 3, "causeway": 2, "landing": 3}
+KIT_ALL = {**KIT, **DECK_KIT}
+
+
+_ROT_WALL = {"n": "e", "e": "s", "s": "w", "w": "n"}    # one quarter-turn CW
+
+
+def rot_block(bl, k):
+    """rotate a block k quarter-turns clockwise — floor, walls and walkways.
+
+    Needed the moment edges carry colour: a terrace transitions north-south
+    only, so without rotation a deck plateau can never stop travelling east and
+    the deck family becomes an island no seed can reach. One authored block,
+    four orientations — the same move the enclosures already make.
+    """
+    k %= 4
+    if not k:
+        return bl
+    out = blank()
+    for _ in range(k):
+        for r in range(B):
+            for c in range(B):
+                out["structure"][r][c] = bl["structure"][B - 1 - c][r]
+                out["walls"][r][c] = "".join(
+                    _ROT_WALL[ch] for ch in bl["walls"][B - 1 - c][r] if ch in _ROT_WALL)
+                u = bl["utilities"][B - 1 - c][r]
+                if u.startswith("wp"):
+                    parts = u.split(":")
+                    ang = int(parts[1]) if len(parts) > 1 else 0
+                    u = f"wp:{(ang + 90) % 360}"
+                out["utilities"][r][c] = u
+        bl = {kk: [row[:] for row in vv] for kk, vv in out.items()}
+    return bl
+
+
+def choose_blocks(cols, rows, rng, names, weights, flat_first_last=True):
+    """Lay blocks so every seam's colours agree — the Wang solve.
+
+    Row-major with backtracking. Candidates at each cell are the blocks whose
+    west colour equals the left neighbour's east, and whose north colour equals
+    the upper neighbour's south. Weighted-random among the survivors, so the
+    dice still throw; the constraint only says which faces the dice may show.
+
+    Connectivity is no longer free. The flat contract guaranteed it by making
+    every seam identical; with colours a seam can agree on height and still be
+    a wall, or agree on void and be no seam at all. deck_dresser's traversal
+    pass is what closes that gap now — this function only promises the seams
+    LINE UP, not that you can walk them.
+    """
+    # a tile is a (block, rotation) pair; its colour is read off the rotated floor
+    tiles = [(n, k) for n in names for k in range(4)]
+    cache = {t: edges_of(rot_block(KIT_ALL[t[0]](), t[1])) for t in tiles}
+    wt = {n: weights[names.index(n)] for n in names}
+    grid = [[None] * cols for _ in range(rows)]
+
+    # WANT a plateau. Left to weighted chance the solve collapses to all-flat
+    # every time — flat outnumbers deck and, having placed one flat block, the
+    # cheapest continuation is always another. So one interior cell is planted
+    # as a deck and the colours propagate outward from it; the terraces that
+    # skirt it are not chosen, they are forced. The dice still throw for
+    # everything the plateau does not decide.
+    plant = None
+    if rows * cols > 1 and any(n in DECK_KIT for n in names):
+        plant = (rng.randrange(rows), rng.randrange(cols))
+        if plant == (0, 0) or plant == (rows - 1, cols - 1):
+            plant = (rng.randrange(rows), rng.randrange(cols))
+
+    def candidates(br, bc):
+        out = []
+        for t in tiles:
+            en, ee, es, ew = cache[t]
+            if bc > 0 and cache[grid[br][bc - 1]][1] != ew:
+                continue
+            if br > 0 and cache[grid[br - 1][bc]][2] != en:
+                continue
+            if flat_first_last and (br, bc) == (0, 0) and en + ee + es + ew != FLAT * 4:
+                continue          # calm arrival: spawn stands on sea level
+            if flat_first_last and (br, bc) == (rows - 1, cols - 1) \
+                    and es != FLAT:
+                continue          # the teleporter needs solid ground under it
+            if plant == (br, bc) and t[0] not in DECK_KIT:
+                continue          # the planted plateau
+            out.append(t)
+        return out
+
+    # A budget, because an unsatisfiable grid is not rare and proving it the
+    # honest way costs 48^(rows*cols). The first --decks sweep hung here.
+    budget = [200_000]
+
+    def solve(i):
+        if i == rows * cols:
+            return True
+        budget[0] -= 1
+        if budget[0] <= 0:
+            return False
+        br, bc = divmod(i, cols)
+        pool = candidates(br, bc)
+        while pool:
+            pick = rng.choices(pool, [wt[t[0]] for t in pool])[0]
+            grid[br][bc] = pick
+            if solve(i + 1):
+                return True
+            pool.remove(pick)          # that colour dead-ended; try another
+            grid[br][bc] = None
+            if budget[0] <= 0:
+                return False
+        return False
+
+    if not solve(0):
+        if plant is not None:          # the plateau was too greedy for this
+            plant = None               # grid — fall back to a flat colouring
+            budget[0] = 200_000
+            grid = [[None] * cols for _ in range(rows)]
+            if solve(0):
+                return grid
+        raise SystemExit("wall_kit: no colouring satisfies this grid — "
+                         "widen the kit or drop --decks")
+    return grid
+
+
 # ── the seeder ───────────────────────────────────────────────────────────────
 
 def spanning_tree(cols, rows, rng):
@@ -210,15 +427,23 @@ def spanning_tree(cols, rows, rng):
     return seams
 
 
-def seed_map(cols, rows, seed, name):
+def seed_map(cols, rows, seed, name, decks=False):
     rng = random.Random(seed)
-    names = list(KIT)
-    weights = [WEIGHTS[n] for n in names]
     enames = list(ENCLOSURES)
     eweights = [ENC_WEIGHTS[n] for n in enames]
-    chosen = [[rng.choices(names, weights)[0] for _ in range(cols)]
-              for _ in range(rows)]
-    chosen[0][0] = "field"                       # calm arrival
+    if decks:
+        # the coloured solve — deck blocks in play, seams must agree
+        names = list(KIT) + list(DECK_KIT)
+        weights = [WEIGHTS.get(n) or DECK_WEIGHTS[n] for n in names]
+        chosen = choose_blocks(cols, rows, rng, names, weights)
+    else:
+        # the original path, untouched: one colour, so no solve is needed and
+        # every seed ever thrown still lands exactly where it landed before
+        names = list(KIT)
+        weights = [WEIGHTS[n] for n in names]
+        chosen = [[rng.choices(names, weights)[0] for _ in range(cols)]
+                  for _ in range(rows)]
+        chosen[0][0] = "field"                   # calm arrival
     # enclosure + rotation per block
     encl = [[rot_sides(ENCLOSURES[rng.choices(enames, eweights)[0]],
                        rng.randrange(4)) for _ in range(cols)]
@@ -243,7 +468,11 @@ def seed_map(cols, rows, seed, name):
               "interactables": [[" "] * W for _ in range(H)]}
     for br in range(rows):
         for bc in range(cols):
-            bl = KIT[chosen[br][bc]]()
+            _pick = chosen[br][bc]
+            if isinstance(_pick, tuple):
+                bl = rot_block(KIT_ALL[_pick[0]](), _pick[1])
+            else:
+                bl = KIT_ALL[_pick]()
             perimeter(bl, encl[br][bc])
             for r in range(B):
                 for c in range(B):
@@ -265,7 +494,8 @@ def seed_map(cols, rows, seed, name):
                          "dimensions": {"width": W, "depth": H,
                                         "max_height": 3},
                          "wall_kit": {"seed": seed, "grid": f"{cols}x{rows}",
-                                      "blocks": chosen,
+                                      "blocks": [[list(b) if isinstance(b, tuple) else b for b in row]
+                                                 for row in chosen],
                                       "enclosures": [["".join(e) for e in row]
                                                      for row in encl]}},
             "settings": {"wall_segments": {"style": "labwall", "height": 3.2,
@@ -286,17 +516,23 @@ def main() -> int:
     if "--list" in sys.argv:
         for n in KIT:
             print(n)
+        for n in DECK_KIT:
+            print(f"{n}  (--decks)")
         return 0
     arg = lambda k, d: next((a.split("=", 1)[1] for a in sys.argv
                              if a.startswith(f"--{k}=")), d)
     cols, rows = (int(x) for x in arg("grid", "3x2").split("x"))
     seed = int(arg("seed", "7"))
     name = arg("name", f"WallKit_Seed_{seed}")
-    chosen, encl = seed_map(cols, rows, seed, name)
+    decks = "--decks" in sys.argv
+    chosen, encl = seed_map(cols, rows, seed, name, decks)
     print(f"{name}: {cols}x{rows} blocks ({cols*B}x{rows*B} cells), seed {seed}")
     for br, row in enumerate(chosen):
-        print("  " + " | ".join(f"{n:9s}[{''.join(encl[br][bc])}]"
-                                for bc, n in enumerate(row)))
+        cells = []
+        for bc, n in enumerate(row):
+            label = f"{n[0]}*{n[1]}" if isinstance(n, tuple) else n
+            cells.append(f"{label:11s}[{''.join(encl[br][bc])}]")
+        print("  " + " | ".join(cells))
     print(f"view: /map-viewer?map={name}")
     return 0
 
