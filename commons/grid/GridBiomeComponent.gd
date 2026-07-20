@@ -392,6 +392,10 @@ func _stage_cell(col: int, row: int, cell: Dictionary) -> void:
 		# exact world position against real structure heights — the painted
 		# path's flat-floor _cell_to_world cannot know these.
 		"world_pos": to_global(local) if is_inside_tree() else local,
+		# optional per-cell CA controls (fungus): `rule=` overrides the rule,
+		# `gen=` the generation the CA freezes at (its thin spreading front).
+		"rule": String((cell["mods"] as Dictionary).get("rule", "")),
+		"gen": String((cell["mods"] as Dictionary).get("gen", "")),
 	}
 	_get_dispatcher().spawn_cell(deposit, _stage_order, {"cube_size": _cube_size}, self)
 

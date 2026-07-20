@@ -233,19 +233,36 @@ func _spawn_fungus(deposit: Dictionary, ctx: Dictionary,
 	var dim_base: int = int(s.get("grid_dim_base", 6))
 	var dim_per: int = int(s.get("grid_dim_per_intensity", 3))
 	var cell_size: float = float(s.get("cell_size", 0.10))
-	var max_gens: int = int(s.get("max_generations", 30))
 	var dim: int = dim_base + intensity * dim_per
+	var cx: int = int(deposit.get("x", 0))
+	var cz: int = int(deposit.get("z", 0))
 	# Mycelial read: mould spreads FLAT and wide along the ground, not as a
 	# ball. A low grid (thin Y, full X/Z) + centre seed grows a network mat
 	# outward from a point. Thin enough to read as filaments, deep enough that
 	# the survive(4-6)/born(5-7) rule still sustains — floor the height at 4.
 	var flat_y: int = maxi(4, int(round(float(dim) / 3.0)))
+	# Generation FREEZE (rule-search finding, Biome_GenSearch): the default rule
+	# reads most mycelial at the SPREADING-FRONT phase (~gen 12-20 — a network
+	# ring with a hollow centre), not the filled (gen 26+) or collapsed (gen 34+)
+	# state the config's 30 left to capture timing. Freeze in that band, scaled
+	# by intensity, with a per-cell jitter so neighbouring colonies differ (the
+	# centre seed is deterministic — same gen would clone them).
+	var net_gen: int = 13 + intensity + ((cx * 7 + cz * 13) % 5)   # ~14..22
 
 	var mold := MoldNetworkScene.instantiate()
 	mold.grid_size = Vector3i(dim, flat_y, dim)
 	mold.cell_size = cell_size
-	mold.max_generations = max_gens
+	mold.max_generations = net_gen
 	mold.center_seed_on_start = true  # a colony that spreads from one point
+	# per-cell CA rule override (mods `rule=`); else the scene's mould default.
+	var rule: String = String(deposit.get("rule", ""))
+	if not rule.is_empty():
+		mold.rule_string = rule
+	# per-cell generation freeze (mods `gen=`): fewer generations = the thin
+	# spreading front, more = the filled colony. Overrides the config default.
+	var gen: String = String(deposit.get("gen", ""))
+	if gen.is_valid_int():
+		mold.max_generations = maxi(1, int(gen))
 	# Tint to the fungus kingdom's color so CA clusters read as fungus,
 	# not generic white. Pulled from biome_config.json:kingdoms.fungus.
 	mold.color_alive = BiomeConfigLoaderClass.get_kingdom_color(KINGDOM_FUNGUS)
