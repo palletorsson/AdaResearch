@@ -804,7 +804,7 @@ func _refresh_stats_tag(text: String) -> void:
 
 func _create_vr_controls() -> void:
 	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
-	_control_panel = RackTpl.create_panel("GALTON BOARD", [
+	_control_panel = RackTpl.create_panel("", [
 		[
 			{"type": "button", "label": "DROP"},
 			{"type": "button", "label": "AUTO"},
@@ -817,8 +817,9 @@ func _create_vr_controls() -> void:
 	# ALL-IN-ONE BODY (Palle 2026-07-20, Cyber District refs): the pad mounts
 	# INTO the cabinet's service column — a recessed pocket on the appliance
 	# face, not a floating stand in front.
-	_control_panel.position = Vector3(board_width / 2.0 + 0.115, 0.30, board_depth / 2.0 + 0.075)
+	_control_panel.position = Vector3(board_width / 2.0 + 0.115, 0.30, board_depth / 2.0 + 0.094)
 	_control_panel.rotation_degrees = Vector3(-15, 0, 0)
+	_control_panel.scale = Vector3(0.78, 0.78, 0.78)  # fit the service column; wedge carries it
 	add_child(_control_panel)
 	_create_cabinet()
 
@@ -958,14 +959,12 @@ func _create_cabinet() -> void:
 		_stats_last_text = ""
 		_refresh_stats_tag(txt)
 
-	# keypad pocket (mid column) — the pad sits recessed in the face
-	var pad_pocket := MeshInstance3D.new()
-	var pad_pocket_mesh := BoxMesh.new()
-	pad_pocket_mesh.size = Vector3(cw - 0.04, 0.17, 0.03)
-	pad_pocket.mesh = pad_pocket_mesh
-	pad_pocket.material_override = dark
-	pad_pocket.position = Vector3(colx, 0.30, face_z - 0.006)
-	cab.add_child(pad_pocket)
+	# keypad WEDGE (mid column) — the pad's tilt gets a solid shoulder: a
+	# right-triangle prism whose slope matches the pad's -15°, so the plate
+	# rests on the body instead of hanging in the air (kiosk keypad grammar).
+	var wedge := _make_wedge(cw - 0.03, 0.19, 0.070, 0.020, dark)
+	wedge.position = Vector3(colx, 0.30, bd / 2.0 + 0.045)
+	cab.add_child(wedge)
 
 	# vent grille (lower column) — ribbed slats
 	for gi in range(6):
@@ -1040,6 +1039,43 @@ func _create_cabinet() -> void:
 		foot.material_override = dark
 		foot.position = Vector3(cx + fx, -0.118, 0.0)
 		cab.add_child(foot)
+
+
+## A right-triangle prism: full width in X, back face flush at local z=0,
+## bottom depth > top depth so the front is a slope. Used as the keypad's
+## shoulder — the tilted pad rests on body, not air.
+func _make_wedge(w: float, h: float, d_bottom: float, d_top: float, mat: Material) -> MeshInstance3D:
+	var st := SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	var x0: float = -w / 2.0
+	var x1: float = w / 2.0
+	var y0: float = -h / 2.0
+	var y1: float = h / 2.0
+	# back face corners (z=0), front bottom (z=d_bottom), front top (z=d_top)
+	var bbl := Vector3(x0, y0, 0.0)
+	var bbr := Vector3(x1, y0, 0.0)
+	var btl := Vector3(x0, y1, 0.0)
+	var btr := Vector3(x1, y1, 0.0)
+	var fbl := Vector3(x0, y0, d_bottom)
+	var fbr := Vector3(x1, y0, d_bottom)
+	var ftl := Vector3(x0, y1, d_top)
+	var ftr := Vector3(x1, y1, d_top)
+	var faces := [
+		[fbl, fbr, ftr, ftl],    # slope (front)
+		[bbr, bbl, btl, btr],    # back
+		[bbl, fbl, ftl, btl],    # left
+		[fbr, bbr, btr, ftr],    # right
+		[btl, ftl, ftr, btr],    # top
+		[bbl, bbr, fbr, fbl],    # bottom
+	]
+	for f in faces:
+		st.add_vertex(f[0]); st.add_vertex(f[1]); st.add_vertex(f[2])
+		st.add_vertex(f[0]); st.add_vertex(f[2]); st.add_vertex(f[3])
+	st.generate_normals()
+	var mi := MeshInstance3D.new()
+	mi.mesh = st.commit()
+	mi.material_override = mat
+	return mi
 
 
 func _cycle_speed() -> void:
