@@ -3,23 +3,16 @@
 > one pass: ride (gaze), move (place --only-improve), gate (pathfinder), voice (qfep). Field note, not a ruling.
 
 ## The ride (before)
-clearance violations: **11 overlaps, 2 tight** — the law wants ≥1.2m to walk between.
-- `[tight  ] science_screen:180:1.5#mode:scatter <-> catalyst_target            gap +0.89m (centers 5.39m)`
-- `[OVERLAP] science_screen:180:1.5#mode:scatter <-> catalyst_target            gap -2.26m (centers 2.24m)`
-- `[OVERLAP] science_screen:180:1.5#mode:scatter <-> catalyst_target            gap -2.26m (centers 2.24m)`
-- `[OVERLAP] catalyst_target            <-> catalyst_target            gap -6.00m (centers 2.00m)`
-- `[OVERLAP] catalyst_target            <-> catalyst_target            gap -2.00m (centers 6.00m)`
-- `[tight  ] catalyst_target            <-> catalyst_target            gap +0.00m (centers 8.00m)`
-- `[OVERLAP] catalyst_target            <-> proximity_spawner#type:gradient_hunter gap -0.38m (centers 4.12m)`
-- `[OVERLAP] catalyst_target            <-> catalyst_target            gap -4.00m (centers 4.00m)`
+clearance violations: **1 overlaps, 0 tight** — the law wants ≥1.2m to walk between.
+- `[OVERLAP] science_screen:180:1.5#mode:scatter <-> catalyst_target            gap -0.03m (centers 4.47m)`
 
 ## The move
     logged 1 entries to ada_run\placement_log.json
     summary: 1 maps processed
       constraint improved: 0/1  mean Δ=+0.000
-      walkability improved: 0/1  mean Δ=-0.047
+      walkability improved: 0/1  mean Δ=-0.189
 
-no sibling kept — the move did not beat the ride (overlaps 11→11, tight 2→2). Note-only.
+no sibling kept — the move did not beat the ride (overlaps 1→1, tight 0→0). Note-only.
 
 ## The voice (qfep)
 3 of 3 cast members carry a theory-claim; 0 mute.
@@ -29,7 +22,7 @@ no sibling kept — the move did not beat the ride (overlaps 11→11, tight 2→
 
 ## The text vs the space
 walked.md exists — the writing names 3/3 of the cast; dwells declared for 0.
-- **the writing's subjects are blocked in space**: catalyst_target, proximity_spawner, science_screen sit in clearance violations — the text promises what the floor obstructs.
+- **the writing's subjects are blocked in space**: catalyst_target, science_screen sit in clearance violations — the text promises what the floor obstructs.
 
 ## The heuristic understanding
 The violations are real but mechanical moving does not fix them — they are placement DECISIONS (which body yields?), not placement errors. This is verdict material, not tooling material.

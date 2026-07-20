@@ -1,107 +1,630 @@
 {
-  "map_info": {
-    "description": "What if we can't use proof by contradiction? Brouwer rejected the law of excluded middle. Math must be constructed, not just proven to exist.",
-    "dimensions": {
-      "depth": 14.0,
-      "max_height": 2.0,
-      "width": 11.0
-    },
-    "format": "json",
-    "lookup_name": "Brouwer_Intuitionism",
-    "metadata": {
-      "category": "foundations",
-      "difficulty": "expert",
-      "estimated_time": "5-6 minutes",
-      "learning_objectives": ["Understand constructive vs classical logic","Experience the rejection of excluded middle","See how some proofs become impossible","Connect to computation: constructive proofs are programs"]
-    },
-    "name": "Brouwer's Intuitionism",
-    "version": "1.0",
-    "title": "Only What You Can Construct"
-  },
-  "utility_definitions": {
-    "t": {
-      "description": "To paraconsistent logic",
-      "name": "Continue",
-      "properties": {
-        "action": "next_in_sequence"
-      },
-      "type": "teleporter"
-    }
-  },
-  "audio": {
-    "ambient_preset": "construction_site",
-    "volume": -10.0
-  },
-  "documentation": {
-    "key_elements": ["Disconnected platforms across void (islands of certainty)","Auto-reveal: platforms appear as player approaches","Excluded middle demo and constructive proof on separate islands","Brouwer choice sequence on a central stepping stone","Visible gaps between platforms â€” things that cannot be constructed"],
-    "layout": "Fragmented stepping-stone platforms across void. Nothing is given â€” each platform is a small island that had to be 'built'. The path forward is not guaranteed. Uses auto_reveal so platforms appear as the player approaches â€” the space constructs itself. Scattered, incomplete, honestly showing its gaps.",
-    "spatial_pattern": "stepping_stones",
-    "summary": "Brouwer's Intuitionism â€” only what is constructed exists"
-  },
-  "lighting": {
-    "ambient_color": [0.18,0.2,0.15],
-    "ambient_energy": 0.5
-  },
-  "settings": {
-    "auto_reveal_on_entry": true,
-    "background": {
-      "color": [0.08,0.1,0.06],
-      "type": "sky"
-    },
-    "cube_size": 1.0,
-    "enable_physics": true,
-    "gutter": 0.0,
-    "initial_tile_visibility": "hidden_except_start",
-    "show_grid": true
-  },
-  "layers": {
-    "interactables": [
-      [" "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "],
-      [" "," ","excluded_middle_demo:0:0.8"," "," "," "," "," "," ","constructive_proof:0:0.8"," "],
-      [" "," "," "," "," "," "," "," ","constructive_staircase:0:1:1"," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," ","brouwer_choice_sequence:0:1"," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "]
-    ],
-    "structure": [
-      ["1","1","1","1","1","1","1","1","1","1","1"],
-      ["1","1","0","0","1","1","1","0","0","1","1"],
-      ["0","0","0","0","0","1","0","0","0","0","0"],
-      ["0","1","1","0","0","0","0","0","1","1","0"],
-      ["0","1","1","0","0","0","0","0","1","1","0"],
-      ["0","1","1","0","0","0","0","0","1","1","0"],
-      ["0","0","0","0","0","1","0","0","0","0","0"],
-      ["0","0","0","0","1","1","1","0","0","0","0"],
-      ["0","0","0","0","0","1","0","0","0","0","0"],
-      ["0","0","0","0","0","0","0","0","0","0","0"],
-      ["0","1","1","0","0","0","0","0","1","1","0"],
-      ["0","0","0","0","0","1","0","0","0","0","0"],
-      ["0","0","0","0","1","0","1","0","0","0","0"],
-      ["1","1","1","1","1","1","1","1","1","1","1"]
-    ],
-    "utilities": [
-      ["sp"," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," ","br:z:3"," "," "," "," "," "],
-      [" "," "," "," ","br:-x:2"," ","br:x:2"," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," ","sub:map"," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," ","br:z:2 "," "," "," "," "," "],
-      [" ","tt:brouwer_technical:180:0.5"," "," ","br:-x:2"," ","br:x:2"," "," ","tt:brouwer_critical:180:0.5"," "],
-      [" "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," ","t"," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "]
-    ]
-  }
+	"map_info": {
+		"description": "What if we can't use proof by contradiction? Brouwer rejected the law of excluded middle. Math must be constructed, not just proven to exist.\n\n[Placement applied humanoid_walker engine \u2014 constraint 0.964\u21920.962, walkability 0.641\u21920.883]",
+		"dimensions": {
+			"depth": 14.0,
+			"max_height": 2.0,
+			"width": 11.0
+		},
+		"format": "json",
+		"lookup_name": "Brouwer_Intuitionism",
+		"metadata": {
+			"category": "foundations",
+			"difficulty": "expert",
+			"estimated_time": "5-6 minutes",
+			"learning_objectives": [
+				"Understand constructive vs classical logic",
+				"Experience the rejection of excluded middle",
+				"See how some proofs become impossible",
+				"Connect to computation: constructive proofs are programs"
+			]
+		},
+		"name": "Brouwer's Intuitionism",
+		"version": "placed-humanoid_walker",
+		"title": "Only What You Can Construct"
+	},
+	"utility_definitions": {
+		"t": {
+			"description": "To paraconsistent logic",
+			"name": "Continue",
+			"properties": {
+				"action": "next_in_sequence"
+			},
+			"type": "teleporter"
+		}
+	},
+	"audio": {
+		"ambient_preset": "construction_site",
+		"volume": -10.0
+	},
+	"documentation": {
+		"key_elements": [
+			"Disconnected platforms across void (islands of certainty)",
+			"Auto-reveal: platforms appear as player approaches",
+			"Excluded middle demo and constructive proof on separate islands",
+			"Brouwer choice sequence on a central stepping stone",
+			"Visible gaps between platforms \u00e2\u20ac\u201d things that cannot be constructed"
+		],
+		"layout": "Fragmented stepping-stone platforms across void. Nothing is given \u00e2\u20ac\u201d each platform is a small island that had to be 'built'. The path forward is not guaranteed. Uses auto_reveal so platforms appear as the player approaches \u00e2\u20ac\u201d the space constructs itself. Scattered, incomplete, honestly showing its gaps.",
+		"spatial_pattern": "stepping_stones",
+		"summary": "Brouwer's Intuitionism \u00e2\u20ac\u201d only what is constructed exists"
+	},
+	"lighting": {
+		"ambient_color": [
+			0.18,
+			0.2,
+			0.15
+		],
+		"ambient_energy": 0.5
+	},
+	"settings": {
+		"auto_reveal_on_entry": true,
+		"background": {
+			"color": [
+				0.08,
+				0.1,
+				0.06
+			],
+			"type": "sky"
+		},
+		"cube_size": 1.0,
+		"enable_physics": true,
+		"gutter": 0.0,
+		"initial_tile_visibility": "hidden_except_start",
+		"show_grid": true
+	},
+	"layers": {
+		"interactables": [
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				"constructive_proof:0:0.8",
+				"brouwer_choice_sequence:0:1",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				"constructive_staircase:0:1:1",
+				"excluded_middle_demo:0:0.8",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			]
+		],
+		"structure": [
+			[
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1"
+			],
+			[
+				"1",
+				"1",
+				"0",
+				"0",
+				"1",
+				"1",
+				"1",
+				"0",
+				"0",
+				"1",
+				"1"
+			],
+			[
+				"0",
+				"0",
+				"0",
+				"0",
+				"0",
+				"1",
+				"0",
+				"0",
+				"0",
+				"0",
+				"0"
+			],
+			[
+				"0",
+				"1",
+				"1",
+				"0",
+				"0",
+				"0",
+				"0",
+				"0",
+				"1",
+				"1",
+				"0"
+			],
+			[
+				"0",
+				"1",
+				"1",
+				"0",
+				"0",
+				"0",
+				"0",
+				"0",
+				"1",
+				"1",
+				"0"
+			],
+			[
+				"0",
+				"1",
+				"1",
+				"0",
+				"0",
+				"0",
+				"0",
+				"0",
+				"1",
+				"1",
+				"0"
+			],
+			[
+				"0",
+				"0",
+				"0",
+				"0",
+				"0",
+				"1",
+				"0",
+				"0",
+				"0",
+				"0",
+				"0"
+			],
+			[
+				"0",
+				"0",
+				"0",
+				"0",
+				"1",
+				"1",
+				"1",
+				"0",
+				"0",
+				"0",
+				"0"
+			],
+			[
+				"0",
+				"0",
+				"0",
+				"0",
+				"0",
+				"1",
+				"0",
+				"0",
+				"0",
+				"0",
+				"0"
+			],
+			[
+				"0",
+				"0",
+				"0",
+				"0",
+				"0",
+				"0",
+				"0",
+				"0",
+				"0",
+				"0",
+				"0"
+			],
+			[
+				"0",
+				"1",
+				"1",
+				"0",
+				"0",
+				"0",
+				"0",
+				"0",
+				"1",
+				"1",
+				"0"
+			],
+			[
+				"0",
+				"0",
+				"0",
+				"0",
+				"0",
+				"1",
+				"0",
+				"0",
+				"0",
+				"0",
+				"0"
+			],
+			[
+				"0",
+				"0",
+				"0",
+				"0",
+				"1",
+				"0",
+				"1",
+				"0",
+				"0",
+				"0",
+				"0"
+			],
+			[
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1"
+			]
+		],
+		"utilities": [
+			[
+				"sp",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				"br:z:3",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				"br:-x:2",
+				" ",
+				"br:x:2",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				"sub:map",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				"br:z:2 ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				"tt:brouwer_technical:180:0.5",
+				" ",
+				" ",
+				"br:-x:2",
+				" ",
+				"br:x:2",
+				" ",
+				" ",
+				"tt:brouwer_critical:180:0.5",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				"t",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			]
+		]
+	}
 }

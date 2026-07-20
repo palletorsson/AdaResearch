@@ -1,132 +1,500 @@
 {
-  "map_info": {
-    "name": "Lambda Spectrum: Walking the Edge",
-    "lookup_name": "QFEP_Lambda_Spectrum",
-    "description": "Walk the spectrum from order to chaos. Your position IS the λ value. Find where complexity emerges — the edge of chaos at λ ≈ 0.4.",
-    "version": "1.0",
-    "format": "json",
-    "dimensions": {
-      "width": 5,
-      "depth": 20,
-      "max_height": 3
-    },
-    "metadata": {
-      "difficulty": "advanced",
-      "category": "qfep",
-      "estimated_time": "5-6 minutes",
-      "learning_objectives": ["λ = 0: crystal, rigid, dead","λ = 0.3-0.5: edge of chaos, complexity, life","λ = 1: dissolution, chaos, death","Walk the spectrum, feel the transitions"]
-    },
-    "title": "Walking Order to Chaos"
-  },
-  "utility_definitions": {
-    "t": {
-      "type": "teleporter",
-      "name": "Continue",
-      "description": "Now explore the φ term — rate of change.",
-      "properties": {
-        "action": "next_in_sequence"
-      }
-    }
-  },
-  "audio": {
-    "ambient_preset": "spectrum_shift",
-    "volume": -6.0
-  },
-  "documentation": {
-    "summary": "QFEP_Lambda_Spectrum - Walk the Parameter Space",
-    "layout": "Long corridor. Z position maps to λ (0 at start, 1 at end). World changes as you walk.",
-    "objective": "Experience λ as spatial. Your body position determines system behavior. Find the edge.",
-    "key_elements": ["Corridor from order (blue) to chaos (red)","Green zone in the middle = edge of chaos","Particles, shaders respond to position","Lambda slider that tracks your position"]
-  },
-  "lighting": {
-    "ambient_color": [0.2,0.2,0.3],
-    "ambient_energy": 0.5,
-    "directional_light": {
-      "enabled": true,
-      "direction": [-0.3,-0.7,-0.5],
-      "color": [0.9,0.9,1.0],
-      "energy": 0.8
-    }
-  },
-  "settings": {
-    "cube_size": 1.0,
-    "gutter": 0.0,
-    "show_grid": true,
-    "enable_physics": true,
-    "background": {
-      "type": "gradient",
-      "color_top": [0.1,0.1,0.3],
-      "color_bottom": [0.3,0.1,0.1]
-    },
-    "grid_animation": {
-      "enabled": true,
-      "type": "wave",
-      "duration": 0.3,
-      "delay_between": 0.05,
-      "order": "front_to_back",
-      "easing": "ease_out"
-    }
-  },
-  "layers": {
-    "structure": [
-      ["1","1","1","1","2"],
-      ["1","1","1","1","2"],
-      ["2","1","1","1","2"],
-      ["2","1","1","1","2"],
-      ["2","1","1","1","2"],
-      ["2","1","1","1","2"],
-      ["2","1","1","1","2"],
-      ["2","1","1","1","2"],
-      ["2","1","1","1","2"],
-      ["2","1","1","1","2"],
-      ["2","1","1","1","2"],
-      ["2","1","1","1","2"],
-      ["2","1","1","1","2"],
-      ["2","1","1","1","2"],
-      ["2","1","1","1","2"],
-      ["2","1","1","1","2"],
-      ["2","1","1","1","2"],
-      ["2","0","0","0","2"]
-    ],
-    "utilities": [
-      ["s"," "," "," "," "],
-      [" "," ","sub:map"," "," "],
-      [" "," "," "," "," "],
-      [" ","3t:λ=0.0 ORDER"," "," "," "],
-      [" "," "," "," "," "],
-      [" "," "," "," "," "],
-      [" ","3t:λ=0.3"," "," "," "],
-      [" "," "," "," "," "],
-      [" ","3t:EDGE OF CHAOS"," "," "," "],
-      [" "," "," "," "," "],
-      [" ","3t:λ=0.5"," "," "," "],
-      [" "," "," "," "," "],
-      [" "," "," "," "," "],
-      [" ","3t:λ=0.7"," "," "," "],
-      [" "," "," "," "," "],
-      [" "," "," "," "," "],
-      [" ","3t:λ=1.0 CHAOS"," "," "," "],
-      [" "," ","t"," "," "]
-    ],
-    "interactables": [
-      [" "," "," "," "," "],
-      [" "," ","crystal_formation:0:0.5"," "," "],
-      [" "," "," "," "," "],
-      [" "," "," "," "," "],
-      [" "," ","ordered_grid:0:0.5"," "," "],
-      [" "," "," "," "," "],
-      ["bifurcation_walkway:90:0:0.8"," "," "," "," "],
-      [" "," ","edge_particles:0:0.8"," "," "],
-      [" "," "," "," "," "],
-      [" "," ","complexity_pattern:0:0.8"," "," "],
-      [" "," "," "," "," "],
-      [" "," "," "," "," "],
-      [" "," ","dissolving_form:0:0.5"," "," "],
-      [" "," "," "," "," "],
-      [" "," "," "," "," "],
-      [" "," ","chaos_particles:0:0.8"," "," "],
-      [" "," "," "," "," "],
-      [" "," "," "," "," "]
-    ]
-  }
+	"map_info": {
+		"name": "Lambda Spectrum: Walking the Edge",
+		"lookup_name": "QFEP_Lambda_Spectrum",
+		"description": "Walk the spectrum from order to chaos. Your position IS the \u03bb value. Find where complexity emerges \u2014 the edge of chaos at \u03bb \u2248 0.4.\n\n[Placement applied promenade engine \u2014 constraint 0.645\u21920.754, walkability 0.420\u21920.612]",
+		"version": "placed-promenade",
+		"format": "json",
+		"dimensions": {
+			"width": 5,
+			"depth": 20,
+			"max_height": 3
+		},
+		"metadata": {
+			"difficulty": "advanced",
+			"category": "qfep",
+			"estimated_time": "5-6 minutes",
+			"learning_objectives": [
+				"\u03bb = 0: crystal, rigid, dead",
+				"\u03bb = 0.3-0.5: edge of chaos, complexity, life",
+				"\u03bb = 1: dissolution, chaos, death",
+				"Walk the spectrum, feel the transitions"
+			]
+		},
+		"title": "Walking Order to Chaos"
+	},
+	"utility_definitions": {
+		"t": {
+			"type": "teleporter",
+			"name": "Continue",
+			"description": "Now explore the \u03c6 term \u2014 rate of change.",
+			"properties": {
+				"action": "next_in_sequence"
+			}
+		}
+	},
+	"audio": {
+		"ambient_preset": "spectrum_shift",
+		"volume": -6.0
+	},
+	"documentation": {
+		"summary": "QFEP_Lambda_Spectrum - Walk the Parameter Space",
+		"layout": "Long corridor. Z position maps to \u03bb (0 at start, 1 at end). World changes as you walk.",
+		"objective": "Experience \u03bb as spatial. Your body position determines system behavior. Find the edge.",
+		"key_elements": [
+			"Corridor from order (blue) to chaos (red)",
+			"Green zone in the middle = edge of chaos",
+			"Particles, shaders respond to position",
+			"Lambda slider that tracks your position"
+		]
+	},
+	"lighting": {
+		"ambient_color": [
+			0.2,
+			0.2,
+			0.3
+		],
+		"ambient_energy": 0.5,
+		"directional_light": {
+			"enabled": true,
+			"direction": [
+				-0.3,
+				-0.7,
+				-0.5
+			],
+			"color": [
+				0.9,
+				0.9,
+				1.0
+			],
+			"energy": 0.8
+		}
+	},
+	"settings": {
+		"cube_size": 1.0,
+		"gutter": 0.0,
+		"show_grid": true,
+		"enable_physics": true,
+		"background": {
+			"type": "gradient",
+			"color_top": [
+				0.1,
+				0.1,
+				0.3
+			],
+			"color_bottom": [
+				0.3,
+				0.1,
+				0.1
+			]
+		},
+		"grid_animation": {
+			"enabled": true,
+			"type": "wave",
+			"duration": 0.3,
+			"delay_between": 0.05,
+			"order": "front_to_back",
+			"easing": "ease_out"
+		}
+	},
+	"layers": {
+		"structure": [
+			[
+				"1",
+				"1",
+				"1",
+				"1",
+				"2"
+			],
+			[
+				"1",
+				"1",
+				"1",
+				"1",
+				"2"
+			],
+			[
+				"2",
+				"1",
+				"1",
+				"1",
+				"2"
+			],
+			[
+				"2",
+				"1",
+				"1",
+				"1",
+				"2"
+			],
+			[
+				"2",
+				"1",
+				"1",
+				"1",
+				"2"
+			],
+			[
+				"2",
+				"1",
+				"1",
+				"1",
+				"2"
+			],
+			[
+				"2",
+				"1",
+				"1",
+				"1",
+				"2"
+			],
+			[
+				"2",
+				"1",
+				"1",
+				"1",
+				"2"
+			],
+			[
+				"2",
+				"1",
+				"1",
+				"1",
+				"2"
+			],
+			[
+				"2",
+				"1",
+				"1",
+				"1",
+				"2"
+			],
+			[
+				"2",
+				"1",
+				"1",
+				"1",
+				"2"
+			],
+			[
+				"2",
+				"1",
+				"1",
+				"1",
+				"2"
+			],
+			[
+				"2",
+				"1",
+				"1",
+				"1",
+				"2"
+			],
+			[
+				"2",
+				"1",
+				"1",
+				"1",
+				"2"
+			],
+			[
+				"2",
+				"1",
+				"1",
+				"1",
+				"2"
+			],
+			[
+				"2",
+				"1",
+				"1",
+				"1",
+				"2"
+			],
+			[
+				"2",
+				"1",
+				"1",
+				"1",
+				"2"
+			],
+			[
+				"2",
+				"0",
+				"0",
+				"0",
+				"2"
+			]
+		],
+		"utilities": [
+			[
+				"s",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				"sub:map",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				"3t:\u03bb=0.0 ORDER",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				"3t:\u03bb=0.3",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				"3t:EDGE OF CHAOS",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				"3t:\u03bb=0.5",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				"3t:\u03bb=0.7",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				"3t:\u03bb=1.0 CHAOS",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				"t",
+				" ",
+				" "
+			]
+		],
+		"interactables": [
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				"edge_particles:0:0.8",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				"chaos_particles:0:0.8",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				"bifurcation_walkway:90:0:0.8",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				"dissolving_form:0:0.5",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				"ordered_grid:0:0.5",
+				" "
+			],
+			[
+				"complexity_pattern:0:0.8",
+				"crystal_formation:0:0.5",
+				" ",
+				" ",
+				" "
+			]
+		]
+	}
 }

@@ -1,70 +1,400 @@
 {
-  "map_info": {
-    "name": "Flow Network",
-    "lookup_name": "GT_Flow",
-    "description": "A funnel narrows from wide entrance to tight exit â€” feel the flow constraints that push-relabel and min-cut algorithms navigate.",
-    "version": "1.0",
-    "format": "json",
-    "dimensions": {
-      "width": 10,
-      "depth": 10,
-      "max_height": 5
-    },
-    "metadata": {
-      "difficulty": "advanced",
-      "category": "graphtheory",
-      "estimated_time": "5-7 minutes",
-      "spatial_temperature": 0.75,
-      "design_notes": "Funnel/pipeline â€” wide entrance (width 8) narrows progressively to tight exit (width 2). Walls converge like a flow bottleneck. Two artifacts placed at wide and narrow sections. Player feels increasing constraint."
-    },
-    "title": "Maximum Flow, Minimum Cut"
-  },
-  "utility_definitions": {
-    "t": {
-      "type": "teleporter",
-      "name": "Next",
-      "description": "Continue to next step",
-      "properties": {
-        "action": "next_in_sequence"
-      }
-    }
-  },
-  "layers": {
-    "structure": [
-      ["1","1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1","1"],
-      ["5","1","1","1","1","1","1","1","1","5"],
-      ["5","5","1","1","1","1","1","1","5","5"],
-      ["5","5","1","1","1","1","1","1","5","5"],
-      ["5","5","5","1","1","1","1","5","5","5"],
-      ["5","5","5","1","1","1","1","5","5","5"],
-      ["5","5","5","5","1","1","1","5","5","5"],
-      ["5","5","5","5","1","0","1","5","5","5"],
-      ["5","5","5","5","1","1","1","5","5","5"]
-    ],
-    "utilities": [
-      ["s"," "," "," "," "," "," "," "," "," "],
-      [" ","an"," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," ","t"," "," "," "," "],
-      [" "," "," "," "," ","sp"," "," "," "," "]
-    ],
-    "interactables": [
-      [" "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "],
-      [" "," ","push_relabel_algorithm:0:0:0.6"," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," ","karger_algorithm:0:0:0.6"," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "]
-    ]
-  }
+	"map_info": {
+		"name": "Flow Network",
+		"lookup_name": "GT_Flow",
+		"description": "A funnel narrows from wide entrance to tight exit \u00e2\u20ac\u201d feel the flow constraints that push-relabel and min-cut algorithms navigate.\n\n[Placement applied hybrid engine \u2014 constraint 0.987\u21921.000, walkability 0.388\u21920.652]",
+		"version": "placed-hybrid",
+		"format": "json",
+		"dimensions": {
+			"width": 10,
+			"depth": 10,
+			"max_height": 5
+		},
+		"metadata": {
+			"difficulty": "advanced",
+			"category": "graphtheory",
+			"estimated_time": "5-7 minutes",
+			"spatial_temperature": 0.75,
+			"design_notes": "Funnel/pipeline \u00e2\u20ac\u201d wide entrance (width 8) narrows progressively to tight exit (width 2). Walls converge like a flow bottleneck. Two artifacts placed at wide and narrow sections. Player feels increasing constraint."
+		},
+		"title": "Maximum Flow, Minimum Cut"
+	},
+	"utility_definitions": {
+		"t": {
+			"type": "teleporter",
+			"name": "Next",
+			"description": "Continue to next step",
+			"properties": {
+				"action": "next_in_sequence"
+			}
+		}
+	},
+	"layers": {
+		"structure": [
+			[
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1"
+			],
+			[
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1"
+			],
+			[
+				"5",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"5"
+			],
+			[
+				"5",
+				"5",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"5",
+				"5"
+			],
+			[
+				"5",
+				"5",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"5",
+				"5"
+			],
+			[
+				"5",
+				"5",
+				"5",
+				"1",
+				"1",
+				"1",
+				"1",
+				"5",
+				"5",
+				"5"
+			],
+			[
+				"5",
+				"5",
+				"5",
+				"1",
+				"1",
+				"1",
+				"1",
+				"5",
+				"5",
+				"5"
+			],
+			[
+				"5",
+				"5",
+				"5",
+				"5",
+				"1",
+				"1",
+				"1",
+				"5",
+				"5",
+				"5"
+			],
+			[
+				"5",
+				"5",
+				"5",
+				"5",
+				"1",
+				"0",
+				"1",
+				"5",
+				"5",
+				"5"
+			],
+			[
+				"5",
+				"5",
+				"5",
+				"5",
+				"1",
+				"1",
+				"1",
+				"5",
+				"5",
+				"5"
+			]
+		],
+		"utilities": [
+			[
+				"s",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				"an",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				"t",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				"sp",
+				" ",
+				" ",
+				" ",
+				" "
+			]
+		],
+		"interactables": [
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				"karger_algorithm:0:0:0.6",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				"push_relabel_algorithm:0:0:0.6",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			]
+		]
+	}
 }

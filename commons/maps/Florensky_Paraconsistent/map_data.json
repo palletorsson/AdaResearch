@@ -1,99 +1,622 @@
 {
-  "map_info": {
-    "description": "What if contradictions don't destroy everything? Florensky's supralogic holds A and not-A without collapse. Quantum states exist in superposition.",
-    "dimensions": {
-      "depth": 12.0,
-      "max_height": 3.0,
-      "width": 13.0
-    },
-    "format": "json",
-    "lookup_name": "Florensky_Paraconsistent",
-    "metadata": {
-      "category": "foundations",
-      "difficulty": "expert",
-      "estimated_time": "5-6 minutes",
-      "learning_objectives": ["Experience paraconsistent logic viscerally","Hold contradictions without triviality","Connect to quantum superposition","QFEP: order (F) and disorder (-lambda E) coexist"]
-    },
-    "name": "Florensky's Paraconsistent Logic",
-    "version": "1.0",
-    "title": "Holding Contradiction Without Collapse"
-  },
-  "utility_definitions": {
-    "t": {
-      "description": "To the synthesis",
-      "name": "Continue",
-      "properties": {
-        "action": "next_in_sequence"
-      },
-      "type": "teleporter"
-    }
-  },
-  "audio": {
-    "ambient_preset": "quantum_chamber",
-    "volume": -8.0
-  },
-  "documentation": {
-    "key_elements": ["Left diamond: warm tones,lower heights — order (F)","Right diamond: cold tones,higher heights — disorder (E)","Central overlap: both heights present — A and not-A coexist","Florensky sphere at the center of overlap","Schrödinger box and superposition display in opposite wings"],
-    "layout": "Two overlapping diamond shapes. A left diamond (warm, ordered — heights 1-2) and a right diamond (cold, entropic — heights 2-3) share a central overlap zone where both coexist. The overlap zone holds the Florensky sphere. The contradiction is spatial: you are in BOTH rooms simultaneously in the center. Player enters from the top into the overlap.",
-    "spatial_pattern": "overlapping_diamonds",
-    "summary": "Florensky's Paraconsistent Logic — two rooms occupying the same space"
-  },
-  "lighting": {
-    "ambient_color": [0.15,0.1,0.2],
-    "ambient_energy": 0.4
-  },
-  "settings": {
-    "background": {
-      "color": [0.05,0.02,0.1],
-      "type": "sky"
-    },
-    "cube_size": 1.0,
-    "enable_physics": true,
-    "gutter": 0.0,
-    "show_grid": true
-  },
-  "layers": {
-    "interactables": [
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," ","florensky_sphere:0:1:1"," "," "," "," "," "," "],
-      [" "," "," "," "," ","both_true_gate:0:1:1"," "," "," "," "," "," "," "],
-      [" "," "," ","schrodinger_box:0:0.6"," "," "," "," "," ","superposition_display:0:0.6"," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "]
-    ],
-    "structure": [
-      ["1","1","0","0","0","1","1","1","0","0","1","1","1"],
-      ["1","1","0","0","1","1","1","1","1","0","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1","1","1","1","1"],
-      ["0","0","1","1","1","1","2","1","1","1","1","0","0"],
-      ["0","1","1","1","1","2","2","2","1","1","1","1","0"],
-      ["1","1","1","1","2","2","3","2","2","1","1","1","1"],
-      ["0","1","1","1","1","2","2","2","1","1","1","1","0"],
-      ["0","0","1","1","1","1","2","1","1","1","1","0","0"],
-      ["0","0","0","1","1","1","1","1","1","1","0","0","0"],
-      ["0","0","0","0","1","1","1","1","1","0","0","0","0"],
-      ["0","0","0","0","0","1","0","1","0","0","0","0","0"],
-      ["1","1","1","1","1","1","1","1","1","1","1","1","1"]
-    ],
-    "utilities": [
-      ["sp"," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," ","sub:map"," "," "," "," "," "," "],
-      [" "," "," "," "," "," ","wp"," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "],
-      [" "," "," "," ","tt:florensky_technical:180:0.5"," "," "," ","tt:florensky_critical:180:0.5"," "," "," "," "],
-      [" "," "," "," "," "," ","t"," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "," "," "," "," "]
-    ]
-  }
+	"map_info": {
+		"description": "What if contradictions don't destroy everything? Florensky's supralogic holds A and not-A without collapse. Quantum states exist in superposition.\n\n[Placement applied humanoid_walker engine \u2014 constraint 0.980\u21920.965, walkability 0.727\u21920.915]",
+		"dimensions": {
+			"depth": 12.0,
+			"max_height": 3.0,
+			"width": 13.0
+		},
+		"format": "json",
+		"lookup_name": "Florensky_Paraconsistent",
+		"metadata": {
+			"category": "foundations",
+			"difficulty": "expert",
+			"estimated_time": "5-6 minutes",
+			"learning_objectives": [
+				"Experience paraconsistent logic viscerally",
+				"Hold contradictions without triviality",
+				"Connect to quantum superposition",
+				"QFEP: order (F) and disorder (-lambda E) coexist"
+			]
+		},
+		"name": "Florensky's Paraconsistent Logic",
+		"version": "placed-humanoid_walker",
+		"title": "Holding Contradiction Without Collapse"
+	},
+	"utility_definitions": {
+		"t": {
+			"description": "To the synthesis",
+			"name": "Continue",
+			"properties": {
+				"action": "next_in_sequence"
+			},
+			"type": "teleporter"
+		}
+	},
+	"audio": {
+		"ambient_preset": "quantum_chamber",
+		"volume": -8.0
+	},
+	"documentation": {
+		"key_elements": [
+			"Left diamond: warm tones,lower heights \u2014 order (F)",
+			"Right diamond: cold tones,higher heights \u2014 disorder (E)",
+			"Central overlap: both heights present \u2014 A and not-A coexist",
+			"Florensky sphere at the center of overlap",
+			"Schr\u00f6dinger box and superposition display in opposite wings"
+		],
+		"layout": "Two overlapping diamond shapes. A left diamond (warm, ordered \u2014 heights 1-2) and a right diamond (cold, entropic \u2014 heights 2-3) share a central overlap zone where both coexist. The overlap zone holds the Florensky sphere. The contradiction is spatial: you are in BOTH rooms simultaneously in the center. Player enters from the top into the overlap.",
+		"spatial_pattern": "overlapping_diamonds",
+		"summary": "Florensky's Paraconsistent Logic \u2014 two rooms occupying the same space"
+	},
+	"lighting": {
+		"ambient_color": [
+			0.15,
+			0.1,
+			0.2
+		],
+		"ambient_energy": 0.4
+	},
+	"settings": {
+		"background": {
+			"color": [
+				0.05,
+				0.02,
+				0.1
+			],
+			"type": "sky"
+		},
+		"cube_size": 1.0,
+		"enable_physics": true,
+		"gutter": 0.0,
+		"show_grid": true
+	},
+	"layers": {
+		"interactables": [
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				"schrodinger_box:0:0.6",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				"both_true_gate:0:1:1",
+				"florensky_sphere:0:1:1",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				"superposition_display:0:0.6",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			]
+		],
+		"structure": [
+			[
+				"1",
+				"1",
+				"0",
+				"0",
+				"0",
+				"1",
+				"1",
+				"1",
+				"0",
+				"0",
+				"1",
+				"1",
+				"1"
+			],
+			[
+				"1",
+				"1",
+				"0",
+				"0",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"0",
+				"1",
+				"1",
+				"1"
+			],
+			[
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1"
+			],
+			[
+				"0",
+				"0",
+				"1",
+				"1",
+				"1",
+				"1",
+				"2",
+				"1",
+				"1",
+				"1",
+				"1",
+				"0",
+				"0"
+			],
+			[
+				"0",
+				"1",
+				"1",
+				"1",
+				"1",
+				"2",
+				"2",
+				"2",
+				"1",
+				"1",
+				"1",
+				"1",
+				"0"
+			],
+			[
+				"1",
+				"1",
+				"1",
+				"1",
+				"2",
+				"2",
+				"3",
+				"2",
+				"2",
+				"1",
+				"1",
+				"1",
+				"1"
+			],
+			[
+				"0",
+				"1",
+				"1",
+				"1",
+				"1",
+				"2",
+				"2",
+				"2",
+				"1",
+				"1",
+				"1",
+				"1",
+				"0"
+			],
+			[
+				"0",
+				"0",
+				"1",
+				"1",
+				"1",
+				"1",
+				"2",
+				"1",
+				"1",
+				"1",
+				"1",
+				"0",
+				"0"
+			],
+			[
+				"0",
+				"0",
+				"0",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"0",
+				"0",
+				"0"
+			],
+			[
+				"0",
+				"0",
+				"0",
+				"0",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"0",
+				"0",
+				"0",
+				"0"
+			],
+			[
+				"0",
+				"0",
+				"0",
+				"0",
+				"0",
+				"1",
+				"0",
+				"1",
+				"0",
+				"0",
+				"0",
+				"0",
+				"0"
+			],
+			[
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1"
+			]
+		],
+		"utilities": [
+			[
+				"sp",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				"sub:map",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				"wp",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				"tt:florensky_technical:180:0.5",
+				" ",
+				" ",
+				" ",
+				"tt:florensky_critical:180:0.5",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				"t",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			]
+		]
+	}
 }

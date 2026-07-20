@@ -1,82 +1,334 @@
 {
-  "map_info": {
-    "name": "Neural Network Pipeline",
-    "lookup_name": "ML_Neural_Networks",
-    "description": "Walk through a neural network â€” each chamber is a layer, narrow corridors are connections. Data flows from input to output as you move deeper.",
-    "version": "1.0",
-    "format": "json",
-    "dimensions": {
-      "width": 5,
-      "depth": 14,
-      "max_height": 3
-    },
-    "metadata": {
-      "difficulty": "advanced",
-      "category": "machinelearning",
-      "estimated_time": "5-7 minutes",
-      "spatial_temperature": 0.6,
-      "design_notes": "Narrow corridor pipeline â€” three wider chambers (h1) connected by bottleneck passages (width 1). Each chamber holds one artifact. Walls (h5) form the pipeline exterior. Player walks through 'layers' of the network."
-    },
-    "title": "Layers Learn Features"
-  },
-  "utility_definitions": {
-    "t": {
-      "type": "teleporter",
-      "name": "Next",
-      "description": "Continue to next step",
-      "properties": {
-        "action": "next_in_sequence"
-      }
-    }
-  },
-  "layers": {
-    "structure": [
-      ["1","1","1","3","3"],
-      ["1","1","1","3","3"],
-      ["3","2","3","3","3"],
-      ["3","2","3","3","3"],
-      ["2","2","2","2","3"],
-      ["2","2","2","2","3"],
-      ["2","2","2","2","3"],
-      ["3","3","2","3","3"],
-      ["3","3","2","3","3"],
-      ["3","2","2","2","3"],
-      ["3","2","2","2","3"],
-      ["3","2","2","2","1"],
-      ["3","3","2","0","1"],
-      ["3","3","1","1","1"]
-    ],
-    "utilities": [
-      ["s"," "," "," "," "],
-      [" ","an"," "," "," "],
-      [" ","wp"," "," "," "],
-      [" "," "," "," "," "],
-      [" "," "," "," "," "],
-      [" "," "," "," "," "],
-      [" "," "," "," "," "],
-      [" "," "," "," "," "],
-      [" "," "," "," "," "],
-      [" "," "," "," "," "],
-      [" "," "," "," "," "],
-      [" "," "," "," "," "],
-      [" "," "," ","t"," "],
-      [" "," "," ","sp"," "]
-    ],
-    "interactables": [
-      [" "," "," "," "," "],
-      [" ","neural_networks_vr:0:0:0.6"," "," "," "],
-      [" "," "," "," "," "],
-      [" "," "," "," "," "],
-      [" "," "," "," "," "],
-      [" "," ","neural_network_visualization:0:0:0.6"," "," "],
-      [" "," "," "," "," "],
-      [" "," "," "," "," "],
-      [" "," "," "," "," "],
-      [" "," "," "," "," "],
-      [" ","learn_world_stacked:0:0:0.6"," "," "," "],
-      [" "," "," "," "," "],
-      [" "," "," "," "," "],
-      [" "," "," "," "," "]
-    ]
-  }
+	"map_info": {
+		"name": "Neural Network Pipeline",
+		"lookup_name": "ML_Neural_Networks",
+		"description": "Walk through a neural network \u00e2\u20ac\u201d each chamber is a layer, narrow corridors are connections. Data flows from input to output as you move deeper.\n\n[Placement applied promenade engine \u2014 constraint 0.814\u21920.947, walkability 0.411\u21920.622]",
+		"version": "placed-promenade",
+		"format": "json",
+		"dimensions": {
+			"width": 5,
+			"depth": 14,
+			"max_height": 3
+		},
+		"metadata": {
+			"difficulty": "advanced",
+			"category": "machinelearning",
+			"estimated_time": "5-7 minutes",
+			"spatial_temperature": 0.6,
+			"design_notes": "Narrow corridor pipeline \u00e2\u20ac\u201d three wider chambers (h1) connected by bottleneck passages (width 1). Each chamber holds one artifact. Walls (h5) form the pipeline exterior. Player walks through 'layers' of the network."
+		},
+		"title": "Layers Learn Features"
+	},
+	"utility_definitions": {
+		"t": {
+			"type": "teleporter",
+			"name": "Next",
+			"description": "Continue to next step",
+			"properties": {
+				"action": "next_in_sequence"
+			}
+		}
+	},
+	"layers": {
+		"structure": [
+			[
+				"1",
+				"1",
+				"1",
+				"3",
+				"3"
+			],
+			[
+				"1",
+				"1",
+				"1",
+				"3",
+				"3"
+			],
+			[
+				"3",
+				"2",
+				"3",
+				"3",
+				"3"
+			],
+			[
+				"3",
+				"2",
+				"3",
+				"3",
+				"3"
+			],
+			[
+				"2",
+				"2",
+				"2",
+				"2",
+				"3"
+			],
+			[
+				"2",
+				"2",
+				"2",
+				"2",
+				"3"
+			],
+			[
+				"2",
+				"2",
+				"2",
+				"2",
+				"3"
+			],
+			[
+				"3",
+				"3",
+				"2",
+				"3",
+				"3"
+			],
+			[
+				"3",
+				"3",
+				"2",
+				"3",
+				"3"
+			],
+			[
+				"3",
+				"2",
+				"2",
+				"2",
+				"3"
+			],
+			[
+				"3",
+				"2",
+				"2",
+				"2",
+				"3"
+			],
+			[
+				"3",
+				"2",
+				"2",
+				"2",
+				"1"
+			],
+			[
+				"3",
+				"3",
+				"2",
+				"0",
+				"1"
+			],
+			[
+				"3",
+				"3",
+				"1",
+				"1",
+				"1"
+			]
+		],
+		"utilities": [
+			[
+				"s",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				"an",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				"wp",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				"t",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				"sp",
+				" "
+			]
+		],
+		"interactables": [
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				"neural_network_visualization:0:0:0.6",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				"neural_networks_vr:0:0:0.6",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			]
+		]
+	}
 }
