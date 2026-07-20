@@ -1,0 +1,36 @@
+{
+ "version": "1.0",
+ "format": "lab_artifacts",
+ "description": "Mycelium substrate spikes (thread: mycelium).",
+ "artifacts": {
+  "mycelium_spike": {
+   "category": "nature_system",
+   "complexity": "intermediate",
+   "description": "Mycelium render spike (thread milestone 1): an L-system string walked by a 3D turtle, each hypha step swept as a tapering MorphoSweep tube (radius thins with branch depth) + glowing spore tips. Proves the filament pipeline the fungus:mycelium substrate will use.",
+   "dev_themes": [
+    "mycelium",
+    "filament",
+    "lsystem",
+    "morpho_sweep"
+   ],
+   "include_in_map_data": false,
+   "interaction": "ambient",
+   "lookup_name": "mycelium_spike",
+   "map_ready": false,
+   "map_sequences": [
+    "noise"
+   ],
+   "name": "Mycelium Spike",
+   "qfep_connection": "The curve-based filament substrate beyond the CA's ceiling (doc/plans/mycelium_substrate.md).",
+   "scene": "res://algorithms/nature_system/mycelium/mycelium_spike.tscn",
+   "sequence": "noise",
+   "tags": [
+    "mycelium",
+    "hypha",
+    "lsystem",
+    "morpho_sweep",
+    "spike"
+   ]
+  }
+ }
+}
