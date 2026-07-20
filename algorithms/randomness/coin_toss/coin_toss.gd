@@ -20,6 +20,15 @@ extends Node3D
 class_name CoinToss
 
 const BakedText = preload("res://commons/utils/baked_text_albedo.gd")
+const HangarKit = preload("res://commons/artifacts/_hangar/hangar_kit.gd")
+
+## Housing finish — "rams" (light Braun default) or "terminal" (dark console).
+## Every colour derives from HangarKit.finish_palette(), so one word re-skins
+## the whole body instead of a dozen hand-typed constants.
+@export var finish: String = "rams"
+@export var wear: float = 0.10
+@export var unit_code: String = "CT-04"
+
 
 # ── Coin ─────────────────────────────────────────────────────────────────────
 @export var coin_radius: float = 0.025
@@ -494,29 +503,23 @@ func _create_cabinet() -> void:
 	cab.name = "Cabinet"
 	add_child(cab)
 
-	var shell := StandardMaterial3D.new()
-	shell.albedo_color = Color(0.58, 0.60, 0.63)
-	shell.roughness = 0.5
-	shell.metallic = 0.25
-	var dark := StandardMaterial3D.new()
-	dark.albedo_color = Color(0.07, 0.075, 0.09)
-	dark.roughness = 0.45
-	dark.metallic = 0.4
-	var maroon := StandardMaterial3D.new()
-	maroon.albedo_color = Color(0.30, 0.11, 0.09)
-	maroon.roughness = 0.55
-	maroon.metallic = 0.2
+	# ── One palette word drives every part (kit finish system) ──────────
+	var pal: Dictionary = HangarKit.finish_palette(finish)
+	var col_body: Color = pal["body"]
+	var col_panel: Color = pal["panel"]
+	var col_accent: Color = pal["accent"]
+	var ew: float = float(pal["wear"]) if finish.to_lower() == "terminal" else wear
+	var shell: StandardMaterial3D = HangarKit.finish_body(finish, col_body, ew)
+	var dark: StandardMaterial3D = HangarKit.painted_metal(Color(0.09, 0.09, 0.105), ew, 0.4, 0.5)
+	var maroon: StandardMaterial3D = HangarKit.painted_metal(Color(0.30, 0.11, 0.09), ew)
+	var steel: StandardMaterial3D = HangarKit.worn_metal(col_panel)
 	var glass_mat := StandardMaterial3D.new()
 	glass_mat.albedo_color = Color(0.04, 0.05, 0.08)
 	glass_mat.roughness = 0.15
 	glass_mat.emission_enabled = true
 	glass_mat.emission = Color(0.05, 0.08, 0.12)
 	glass_mat.emission_energy_multiplier = 0.6
-	var accent := StandardMaterial3D.new()
-	accent.albedo_color = Color(0.86, 0.30, 0.10)
-	accent.emission_enabled = true
-	accent.emission = Color(0.86, 0.30, 0.10)
-	accent.emission_energy_multiplier = 2.2
+	var accent: StandardMaterial3D = HangarKit.emissive(col_accent, 2.2)
 
 	# backboard slab
 	var bb := MeshInstance3D.new()
@@ -648,6 +651,27 @@ func _create_cabinet() -> void:
 
 
 ## Right-triangle prism shoulder (shared cabinet grammar — see galton_board).
+
+	# ── Kit details: the manufactured read the station props carry ──────
+	cab.add_child(HangarKit.bolts(
+		Vector3(bb_w / 2.0 + 0.02, bb_bot + 0.06, bb_z + 0.040),
+		Vector3(bb_w / 2.0 + 0.02, bb_top - 0.08, bb_z + 0.040),
+		7, 0.008, steel))
+	var bar: Node3D = HangarKit.three_color_bar(0.24, 0.015)
+	if bar:
+		bar.position = Vector3(0.0, scr_y - scr_h / 2.0 - 0.055, bb_z + 0.042)
+		cab.add_child(bar)
+	var code: MeshInstance3D = HangarKit.stencil(unit_code, Vector2(0.11, 0.028),
+		col_accent.lightened(0.25))
+	if code:
+		code.position = Vector3(-bb_w / 2.0 + 0.09, bb_bot + 0.10, bb_z + 0.040)
+		cab.add_child(code)
+	var gb: MeshInstance3D = HangarKit.grime_band(bb_w * 0.9, 0.05, bb_z + 0.038, col_body)
+	if gb:
+		gb.position.y = bb_bot              # keep the kit's baked z
+		cab.add_child(gb)
+
+
 func _make_wedge(w: float, h: float, d_bottom: float, d_top: float, mat: Material) -> MeshInstance3D:
 	var st := SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)

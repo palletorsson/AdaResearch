@@ -21,6 +21,15 @@ class_name DiceThrow
 
 # ── Dice ─────────────────────────────────────────────────────────────────────
 const BakedText = preload("res://commons/utils/baked_text_albedo.gd")
+const HangarKit = preload("res://commons/artifacts/_hangar/hangar_kit.gd")
+
+## Housing finish — "rams" (light Braun default) or "terminal" (dark console).
+## Every colour derives from HangarKit.finish_palette(), so one word re-skins
+## the whole body instead of a dozen hand-typed constants.
+@export var finish: String = "rams"
+@export var wear: float = 0.10
+@export var unit_code: String = "DT-05"
+
 
 @export var dice_size: float = 0.08
 @export var dice_mass: float = 0.15
@@ -558,25 +567,21 @@ func _create_console() -> void:
 	rail_mat.albedo_color = table_color.lightened(0.18)   # kin to the table's own wood
 	rail_mat.roughness = 0.6
 	rail_mat.metallic = 0.15
-	var dark := StandardMaterial3D.new()
-	dark.albedo_color = Color(0.07, 0.075, 0.09)
-	dark.roughness = 0.45
-	dark.metallic = 0.4
-	var maroon := StandardMaterial3D.new()
-	maroon.albedo_color = Color(0.30, 0.11, 0.09)
-	maroon.roughness = 0.55
-	maroon.metallic = 0.2
+	# ── Kit finish system (horizontal dialect keeps its own host woods) ──
+	var pal: Dictionary = HangarKit.finish_palette(finish)
+	var col_panel: Color = pal["panel"]
+	var col_accent: Color = pal["accent"]
+	var ew: float = float(pal["wear"]) if finish.to_lower() == "terminal" else wear
+	var dark: StandardMaterial3D = HangarKit.painted_metal(Color(0.09, 0.09, 0.105), ew, 0.4, 0.5)
+	var maroon: StandardMaterial3D = HangarKit.painted_metal(Color(0.30, 0.11, 0.09), ew)
+	var steel: StandardMaterial3D = HangarKit.worn_metal(col_panel)
 	var glass_mat := StandardMaterial3D.new()
 	glass_mat.albedo_color = Color(0.04, 0.05, 0.08)
 	glass_mat.roughness = 0.15
 	glass_mat.emission_enabled = true
 	glass_mat.emission = Color(0.05, 0.08, 0.12)
 	glass_mat.emission_energy_multiplier = 0.6
-	var accent := StandardMaterial3D.new()
-	accent.albedo_color = Color(0.86, 0.30, 0.10)
-	accent.emission_enabled = true
-	accent.emission = Color(0.86, 0.30, 0.10)
-	accent.emission_energy_multiplier = 2.2
+	var accent: StandardMaterial3D = HangarKit.emissive(col_accent, 2.2)
 
 	# ── the working RAIL ring — the horizontal answer to the back slab ──
 	var rails := [
@@ -721,6 +726,20 @@ func _create_console() -> void:
 		slat.position = Vector3(0.0, th - 0.072 + float(gi) * 0.013,
 			ring_cz + (ring_d - 0.08) / 2.0 + 0.002)
 		con.add_child(slat)
+
+	# ── Kit details, HORIZONTAL dialect: nothing climbs off the deck ────
+	con.add_child(HangarKit.bolts(
+		Vector3(-outer_w / 2.0 + 0.10, rail_y, z_out_near - 0.006),
+		Vector3(outer_w / 2.0 - 0.10, rail_y, z_out_near - 0.006),
+		9, 0.008, steel))
+	var code: MeshInstance3D = HangarKit.stencil(unit_code, Vector2(0.11, 0.028),
+		col_accent.lightened(0.25))
+	if code:
+		code.position = Vector3(-0.40, rail_top + 0.002, near_z + 0.055)
+		code.rotation_degrees = Vector3(-90, 0, 0)   # read by looking down
+		con.add_child(code)
+	# (no grime band here: the apron is already near-black, so an opaque
+	#  dirt shadow on it reads as a slab hanging under the table.)
 
 
 func _update_stats() -> void:

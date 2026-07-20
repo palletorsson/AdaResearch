@@ -883,7 +883,7 @@ func _create_cabinet() -> void:
 	var ew: float = float(pal["wear"]) if finish.to_lower() == "terminal" else wear
 
 	var shell: StandardMaterial3D = HangarKit.finish_body(finish, col_body, ew)
-	var dark: StandardMaterial3D = HangarKit.finish_body(finish, col_panel.darkened(0.55), ew)
+	var dark: StandardMaterial3D = HangarKit.painted_metal(Color(0.09, 0.09, 0.105), ew, 0.4, 0.5)
 	var maroon: StandardMaterial3D = HangarKit.painted_metal(Color(0.30, 0.11, 0.09), ew)
 	var steel: StandardMaterial3D = HangarKit.worn_metal(col_panel)
 	var accent: StandardMaterial3D = HangarKit.emissive(col_accent, 2.2)
@@ -981,11 +981,12 @@ func _create_cabinet() -> void:
 		cab.add_child(code)
 
 	# ── Age: the station props are used objects, not showroom stock ────
-	var gb: MeshInstance3D = HangarKit.grime_band(total_w * 0.55, 0.035,
-		bd / 2.0 + 0.074, col_body)
+	# grime_band is an opaque DIRT SHADOW, not a decorative panel — it
+	# belongs at the base, where dirt actually collects (see station_cabinet).
+	var gb: MeshInstance3D = HangarKit.grime_band(total_w * 0.9, 0.055,
+		bd / 2.0 + 0.058, col_body)
 	if gb:
-		gb.position.x = cx
-		gb.position.y = body_top - 0.035     # keep the kit's baked z
+		gb.position.x = cx                   # keep the kit's baked z and y
 		cab.add_child(gb)
 	# (dust_streaks omitted here: over a WINDOW they read as smears on the
 	#  phenomenon. Age belongs on solid faces — grime_band above.)

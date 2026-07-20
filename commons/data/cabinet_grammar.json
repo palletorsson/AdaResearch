@@ -215,7 +215,7 @@
    "body": "tall street kiosk",
    "scene": "res://algorithms/randomness/monte_carlo_dartboard/monte_carlo_dartboard.tscn",
    "propagation": 2,
-   "kit": false
+   "kit": true
   },
   {
    "artifact": "distribution_comparator",
@@ -223,7 +223,7 @@
    "body": "wide console",
    "scene": "res://algorithms/randomness/distribution_comparator/distribution_comparator.tscn",
    "propagation": 3,
-   "kit": false
+   "kit": true
   },
   {
    "artifact": "coin_toss",
@@ -231,7 +231,7 @@
    "body": "pedestal station",
    "scene": "res://algorithms/randomness/coin_toss/coin_toss.tscn",
    "propagation": 4,
-   "kit": false
+   "kit": true
   },
   {
    "artifact": "dice_throw",
@@ -239,7 +239,7 @@
    "body": "table console",
    "scene": "res://algorithms/randomness/dice_throw/dice_throw.tscn",
    "propagation": 5,
-   "kit": false
+   "kit": true
   }
  ],
  "queue": [
@@ -279,6 +279,6 @@
    "striped_mat() / hazard_stripe_texture()": "caution striping",
    "emissive(c, energy)": "lit elements"
   },
-  "gotcha": "grime_band/dust_streaks bake their Z into position — assign .position.x/.y only, or they land inside the body."
+  "gotcha": "grime_band/dust_streaks bake their Z into position — assign .position.x/.y only. grime_band is an OPAQUE dirt shadow: it belongs at the BASE of a light body where dirt collects, never floating mid-body and never on a dark face (it reads as a hanging slab) or over a window (smears on the phenomenon). And derive the near-black 'dark' from a fixed value, not panel.darkened() — 0.55 lands at ~0.31 grey and washes out every pocket, plinth and apron in the family."
  }
 }
