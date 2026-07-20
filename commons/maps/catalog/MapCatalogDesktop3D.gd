@@ -37,6 +37,11 @@ var _is_mouse_look_active: bool = false
 var _fly_yaw: float = 0.0
 var _fly_pitch: float = 0.0
 
+# Walk-through mode (opt-in via --walk=<Map>): a LIT, floored, first-person
+# view for looking at a map like a gallery, as opposed to the capture backdrop
+# or the near-black mapsim bridge. Additive — off unless the flag is passed.
+var _walk_mode: bool = false
+
 # Camera mode state
 var _camera_mode: CameraMode = CameraMode.SPIN
 var _spin_angle: float = 0.0
@@ -114,16 +119,32 @@ func _ready() -> void:
 	# Default to spin camera (suppressed in capture mode — see below).
 	call_deferred("_start_default_spin")
 
+	# Walk-through mode short-circuits the capture backdrop: it wants the
+	# normal lit world and the map's own floor, so parse the flag first.
+	var _walk_map := ""
+	for a in OS.get_cmdline_user_args():
+		if a == "--walk":
+			_walk_mode = true
+		elif a.begins_with("--walk="):
+			_walk_mode = true
+			_walk_map = a.substr(7)
+
 	# Capture-mode environment override: clean studio backdrop with no
 	# sun glare or sky gradient so spine-research thumbnails focus on
 	# the cube grid. Triggered via ada_run/runtime_flags.json (set by
-	# the Python capture wrapper).
-	_apply_capture_environment_if_active()
+	# the Python capture wrapper). Skipped in walk mode.
+	if not _walk_mode:
+		_apply_capture_environment_if_active()
 
 	_set_status("Loaded sequence registry catalog")
 
 	# Live map-simulator bridge — only if launched with --mapsim-bridge.
 	_mapsim_bridge_setup()
+
+	# Walk-through: lit, floored, first-person. Loads the map into the
+	# default (lit) world and drops the camera at eye height framing the row.
+	if _walk_mode and _walk_map != "":
+		call_deferred("_walk_setup", _walk_map)
 
 
 # ── Map-simulator live bridge ─────────────────────────────────────────
@@ -184,6 +205,57 @@ func _mapsim_clean_world() -> void:
 func _mapsim_lift_grid() -> void:
 	if _grid_system and is_instance_valid(_grid_system):
 		_grid_system.transform.origin.y = 0.5
+
+
+# ── Walk-through mode ─────────────────────────────────────────────────
+## Load a map into the LIT default world and frame it first-person, for
+## looking at a map like a gallery. Reuses load_map_fresh + PLAYER camera;
+## keeps the sky/lights (no capture backdrop, no near-black bridge world).
+func _walk_setup(map_name: String) -> void:
+	if not load_map_fresh(map_name):
+		_set_status("Walk: map '%s' not found" % map_name)
+		return
+	_mapsim_lift_grid()
+	# Let the interactables place, then frame the row.
+	await get_tree().create_timer(1.4).timeout
+	set_camera_mode(CameraMode.PLAYER)
+	fly_mode_enabled = true
+	_frame_walk_camera()
+	_set_status("Walk-through: %s — F fly, WASD move, E/Q up/down, mouse look" % map_name)
+
+## Position the first-person camera a few metres in front of the artifact
+## row, at eye height, looking at its centroid — so the framing is correct
+## regardless of the grid's map->world axis convention.
+func _frame_walk_camera() -> void:
+	if not _preview_camera:
+		return
+	var arts := _collect_all_artifacts()
+	if arts.is_empty():
+		return
+	var centroid := Vector3.ZERO
+	var lo := Vector3(INF, INF, INF)
+	var hi := Vector3(-INF, -INF, -INF)
+	for node in arts:
+		var p: Vector3 = (node as Node3D).global_position
+		centroid += p
+		lo = lo.min(p)
+		hi = hi.max(p)
+	centroid /= float(arts.size())
+	# Stand back along the SHORT axis of the row so the whole run is in view,
+	# far enough that the widest member (the billboard) fits the frame.
+	var span_x: float = hi.x - lo.x
+	var span_z: float = hi.z - lo.z
+	var eye_y: float = 1.6
+	var back: float = maxf(span_x, span_z) * 0.55 + 6.0
+	var cam_pos: Vector3
+	if span_x >= span_z:
+		cam_pos = Vector3(centroid.x, eye_y, centroid.z + back)   # row runs along X
+	else:
+		cam_pos = Vector3(centroid.x + back, eye_y, centroid.z)   # row runs along Z
+	_preview_camera.global_position = cam_pos
+	_preview_camera.look_at(Vector3(centroid.x, eye_y + 0.4, centroid.z), Vector3.UP)
+	_fly_yaw = _preview_camera.rotation.y
+	_fly_pitch = _preview_camera.rotation.x
 
 
 # ── Staged artifacts: each map artifact shown WITH its dressing-room prop ──
