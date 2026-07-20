@@ -3,21 +3,17 @@
 > one pass: ride (gaze), move (place --only-improve), gate (pathfinder), voice (qfep). Field note, not a ruling.
 
 ## The ride (before)
-clearance violations: **2 overlaps, 4 tight** — the law wants ≥1.2m to walk between.
-- `[OVERLAP] pick_up_cube               <-> grab_long_stick            gap -0.12m (centers 1.00m)`
-- `[OVERLAP] grab_long_stick            <-> pick_up_cube               gap -0.12m (centers 1.00m)`
-- `[tight  ] grab_long_stick            <-> grab_long_stick:180        gap +0.63m (centers 2.00m)`
-- `[tight  ] pick_up_cube               <-> grab_long_stick:180        gap +0.25m (centers 1.00m)`
-- `[tight  ] grab_long_stick:180        <-> pick_up_cube               gap +0.25m (centers 1.00m)`
-- `[tight  ] cloth_straps:0:-0.5        <-> cloth_straps:0:-0.5        gap +1.00m (centers 2.00m)`
+clearance violations: **1 overlaps, 1 tight** — the law wants ≥1.2m to walk between.
+- `[tight  ] pick_up_cube               <-> revolving_joy_ride:0:-0.5  gap +0.25m (centers 1.00m)`
+- `[OVERLAP] grab_long_stick            <-> soft_mushroom:0:-0.5       gap -0.37m (centers 1.00m)`
 
 ## The move
-        new_placements = fn(room, artifacts, rng)
-      File "C:\Users\palle\Documents\GitHub\AdaResearch_46\tools\placement_research.py", line 1283, in strategy_humanoid_walker
-        for r in range(room.depth - d + 1):
-    TypeError: 'float' object cannot be interpreted as an integer
+    logged 1 entries to ada_run\placement_log.json
+    summary: 1 maps processed
+      constraint improved: 0/1  mean Δ=+0.000
+      walkability improved: 1/1  mean Δ=+0.026
 
-no sibling kept — the move did not beat the ride (overlaps 2→2, tight 4→4). Note-only.
+no sibling kept — the move did not beat the ride (overlaps 1→1, tight 1→1). Note-only.
 
 ## The voice (qfep)
 5 of 5 cast members carry a theory-claim; 0 mute.
@@ -28,6 +24,7 @@ no sibling kept — the move did not beat the ride (overlaps 2→2, tight 4→4)
 
 ## The text vs the space
 walked.md exists — the writing names 1/5 of the cast; dwells declared for 0.
+- **the writing's subjects are blocked in space**: soft_mushroom sit in clearance violations — the text promises what the floor obstructs.
 - space without text: cloth_straps, grab_long_stick, pick_up_cube, revolving_joy_ride — standing in the room, absent from the walk.
 
 ## The heuristic understanding

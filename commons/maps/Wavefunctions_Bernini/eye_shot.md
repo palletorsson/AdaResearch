@@ -4,15 +4,15 @@
 
 ## The ride (before)
 clearance violations: **2 overlaps, 1 tight** — the law wants ≥1.2m to walk between.
-- `[OVERLAP] ElphabaDress               <-> bernini_columns            gap -3.97m (centers 2.00m)`
+- `[tight  ] vowel_sound_board:180:3#say:right here, right now#repeat:true <-> dark_sphere                gap +0.08m (centers 1.00m)`
+- `[OVERLAP] vowel_sound_board:180:3#say:right here, right now#repeat:true <-> bernini_columns            gap -4.58m (centers 1.41m)`
 - `[OVERLAP] dark_sphere                <-> bernini_columns            gap -4.91m (centers 1.00m)`
-- `[tight  ] bernini_columns            <-> vowel_sound_board:180:3#say:right here, right now#repeat:true gap +0.01m (centers 6.00m)`
 
 ## The move
     logged 1 entries to ada_run\placement_log.json
     summary: 1 maps processed
-      constraint improved: 1/1  mean Δ=+0.051
-      walkability improved: 1/1  mean Δ=+0.127
+      constraint improved: 0/1  mean Δ=+0.000
+      walkability improved: 0/1  mean Δ=+0.000
 
 no sibling kept — the move did not beat the ride (overlaps 2→2, tight 1→1). Note-only.
 
@@ -25,7 +25,7 @@ no sibling kept — the move did not beat the ride (overlaps 2→2, tight 1→1)
 
 ## The text vs the space
 walked.md exists — the writing names 4/4 of the cast; dwells declared for 0.
-- **the writing's subjects are blocked in space**: ElphabaDress, bernini_columns, dark_sphere, vowel_sound_board sit in clearance violations — the text promises what the floor obstructs.
+- **the writing's subjects are blocked in space**: bernini_columns, dark_sphere, vowel_sound_board sit in clearance violations — the text promises what the floor obstructs.
 
 ## The heuristic understanding
 The violations are real but mechanical moving does not fix them — they are placement DECISIONS (which body yields?), not placement errors. This is verdict material, not tooling material.

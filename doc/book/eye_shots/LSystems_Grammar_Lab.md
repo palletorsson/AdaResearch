@@ -4,17 +4,17 @@
 
 ## The ride (before)
 clearance violations: **5 overlaps, 0 tight** — the law wants ≥1.2m to walk between.
-- `[OVERLAP] science_screen:180:1.5#mode:trace <-> grammar_provenance         gap -2.96m (centers 6.32m)`
-- `[OVERLAP] lsystem_editor:0:0.5       <-> grammar_provenance         gap -6.12m (centers 3.16m)`
-- `[OVERLAP] grammar_provenance         <-> lsystem_tree               gap -7.61m (centers 1.41m)`
-- `[OVERLAP] grammar_provenance         <-> fractal_lsystem_string     gap -4.17m (centers 5.10m)`
-- `[OVERLAP] grammar_provenance         <-> dark_sphere                gap -4.96m (centers 4.24m)`
+- `[OVERLAP] dark_sphere                <-> grammar_provenance         gap -8.21m (centers 1.00m)`
+- `[OVERLAP] grammar_provenance         <-> science_screen:180:1.5#mode:trace gap -5.29m (centers 4.00m)`
+- `[OVERLAP] grammar_provenance         <-> lsystem_editor:0:0.5       gap -4.29m (centers 5.00m)`
+- `[OVERLAP] grammar_provenance         <-> lsystem_tree               gap -4.90m (centers 4.12m)`
+- `[OVERLAP] grammar_provenance         <-> fractal_lsystem_string     gap -4.79m (centers 4.47m)`
 
 ## The move
     logged 1 entries to ada_run\placement_log.json
     summary: 1 maps processed
-      constraint improved: 1/1  mean Δ=+0.106
-      walkability improved: 0/1  mean Δ=-0.079
+      constraint improved: 0/1  mean Δ=+0.000
+      walkability improved: 0/1  mean Δ=+0.000
 
 no sibling kept — the move did not beat the ride (overlaps 5→5, tight 0→0). Note-only.
 

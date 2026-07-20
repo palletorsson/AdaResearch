@@ -3,23 +3,22 @@
 > one pass: ride (gaze), move (place --only-improve), gate (pathfinder), voice (qfep). Field note, not a ruling.
 
 ## The ride (before)
-clearance violations: **0 overlaps, 8 tight** — the law wants ≥1.2m to walk between.
-- `[tight  ] pattern_tile_4x4:0:-0.5    <-> vr_tile_editor_mirror:0:-0.5 gap +1.00m (centers 2.00m)`
-- `[tight  ] pattern_tile_4x4:0:-0.5    <-> tiling_demo:180:-1.6       gap +1.00m (centers 2.00m)`
-- `[tight  ] vr_tile_editor_mirror:0:-0.5 <-> pattern_tile_mirror:0:-0.5 gap +1.00m (centers 2.00m)`
-- `[tight  ] pattern_tile_mirror:0:-0.5 <-> science_screen:180:1.5#mode:grid gap +1.00m (centers 2.00m)`
-- `[tight  ] dark_sphere                <-> pattern_tile_plate:0:-0.49#p4m gap +1.08m (centers 2.00m)`
-- `[tight  ] dark_sphere                <-> grid_model                 gap +1.08m (centers 2.00m)`
-- `[tight  ] pattern_tunnel_machine:0:0#tunnel_length:6 <-> panel_bridge_loom          gap +0.19m (centers 1.41m)`
-- `[tight  ] panel_bridge_loom          <-> grid_model                 gap +0.78m (centers 2.00m)`
+clearance violations: **1 overlaps, 6 tight** — the law wants ≥1.2m to walk between.
+- `[OVERLAP] panel_bridge_loom          <-> tiling_demo:180:-1.6       gap -0.22m (centers 1.00m)`
+- `[tight  ] panel_bridge_loom          <-> science_screen:180:1.5#mode:grid gap +0.19m (centers 1.41m)`
+- `[tight  ] dark_sphere                <-> pattern_tile_mirror:0:-0.5 gap +0.08m (centers 1.00m)`
+- `[tight  ] pattern_tile_4x4:0:-0.5    <-> grid_model                 gap +0.00m (centers 1.00m)`
+- `[tight  ] pattern_tile_4x4:0:-0.5    <-> pattern_tile_brick:0:-0.5  gap +1.00m (centers 2.00m)`
+- `[tight  ] grid_model                 <-> pattern_tile_herringbone:0:-0.5 gap +1.00m (centers 2.00m)`
+- `[tight  ] pattern_tile_brick:0:-0.5  <-> pattern_tile_herringbone:0:-0.5 gap +0.00m (centers 1.00m)`
 
 ## The move
     logged 1 entries to ada_run\placement_log.json
     summary: 1 maps processed
-      constraint improved: 1/1  mean Δ=+0.115
-      walkability improved: 1/1  mean Δ=+0.094
+      constraint improved: 0/1  mean Δ=+0.000
+      walkability improved: 0/1  mean Δ=+0.000
 
-no sibling kept — the move did not beat the ride (overlaps 0→1, tight 8→6). Note-only.
+no sibling kept — the move did not beat the ride (overlaps 1→1, tight 6→6). Note-only.
 
 ## The voice (qfep)
 13 of 13 cast members carry a theory-claim; 0 mute.

@@ -4,13 +4,13 @@
 
 ## The ride (before)
 clearance violations: **1 overlaps, 0 tight** — the law wants ≥1.2m to walk between.
-- `[OVERLAP] dark_sphere                <-> noise_space                gap -4.42m (centers 1.00m)`
+- `[OVERLAP] noise_space                <-> dark_sphere                gap -0.03m (centers 5.39m)`
 
 ## The move
     logged 1 entries to ada_run\placement_log.json
     summary: 1 maps processed
-      constraint improved: 1/1  mean Δ=+0.013
-      walkability improved: 1/1  mean Δ=+0.005
+      constraint improved: 0/1  mean Δ=+0.000
+      walkability improved: 0/1  mean Δ=-0.257
 
 no sibling kept — the move did not beat the ride (overlaps 1→1, tight 0→0). Note-only.
 

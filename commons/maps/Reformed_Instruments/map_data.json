@@ -1,85 +1,491 @@
 {
-  "map_info": {
-    "name": "Reformed Instruments",
-    "lookup_name": "Reformed_Instruments",
-    "description": "A hall of six teaching workbenches rebuilt on the canonical ControlConsole (2026-06-13 interface overhaul): transform composition, CA rules, the complexity dial, QFEP balance, the halting workbench, and Russell paradox. Walk the central aisle; each instrument now wears the same Braun console + smooth slider, its bespoke visualization kept above. Built to feature the recently-migrated artifacts. Paired with /interface-overhaul.",
-    "manual_file": "",
-    "version": "1.0",
-    "format": "json",
-    "dimensions": {
-      "width": 9,
-      "depth": 13,
-      "max_height": 2
-    },
-    "metadata": {
-      "difficulty": "advanced",
-      "category": "foundationscrisis",
-      "estimated_time": "5-10 minutes",
-      "learning_objectives": ["Six formal-systems instruments, one canonical interface","Same console + smooth slider across every workbench","The bespoke visualization is preserved; only the control board is unified"]
-    }
-  },
-  "utility_definitions": {
-    "t": "Next",
-    "s": "Spawn Point"
-  },
-  "spawn_points": {
-    "default": {
-      "position": [4.5,1.2,11.5],
-      "rotation": [0,180,0]
-    }
-  },
-  "lighting": {
-    "ambient_color": [0.4,0.4,0.5],
-    "ambient_energy": 0.55
-  },
-  "settings": {
-    "ambient_preset": "lab"
-  },
-  "layers": {
-    "structure": [
-      ["1","1","1","1","0","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1"],
-      ["1","1","1","1","1","1","1","1","1"]
-    ],
-    "utilities": [
-      [" "," "," "," ","t"," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "]
-    ],
-    "interactables": [
-      [" "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "],
-      [" "," ","transform_composition_workbench:0:0"," "," "," ","qfep_balance_workbench:0:0"," "," "],
-      [" "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "],
-      [" "," ","ca_rules_workbench:0:0"," "," "," ","halting_workbench:0:0"," "," "],
-      [" "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "],
-      [" "," ","complexity_dial_workbench:0:0"," "," "," ","russell_paradox_workbench:0:0"," "," "],
-      [" "," "," "," "," "," "," "," "," "],
-      [" "," "," "," "," "," "," "," "," "]
-    ]
-  }
+	"map_info": {
+		"name": "Reformed Instruments",
+		"lookup_name": "Reformed_Instruments",
+		"description": "A hall of six teaching workbenches rebuilt on the canonical ControlConsole (2026-06-13 interface overhaul): transform composition, CA rules, the complexity dial, QFEP balance, the halting workbench, and Russell paradox. Walk the central aisle; each instrument now wears the same Braun console + smooth slider, its bespoke visualization kept above. Built to feature the recently-migrated artifacts. Paired with /interface-overhaul.\n\n[Placement applied humanoid_walker engine \u2014 constraint 0.986\u21920.971, walkability 0.466\u21920.881]",
+		"manual_file": "",
+		"version": "placed-humanoid_walker",
+		"format": "json",
+		"dimensions": {
+			"width": 9,
+			"depth": 13,
+			"max_height": 2
+		},
+		"metadata": {
+			"difficulty": "advanced",
+			"category": "foundationscrisis",
+			"estimated_time": "5-10 minutes",
+			"learning_objectives": [
+				"Six formal-systems instruments, one canonical interface",
+				"Same console + smooth slider across every workbench",
+				"The bespoke visualization is preserved; only the control board is unified"
+			]
+		}
+	},
+	"utility_definitions": {
+		"t": "Next",
+		"s": "Spawn Point"
+	},
+	"spawn_points": {
+		"default": {
+			"position": [
+				4.5,
+				1.2,
+				11.5
+			],
+			"rotation": [
+				0,
+				180,
+				0
+			]
+		}
+	},
+	"lighting": {
+		"ambient_color": [
+			0.4,
+			0.4,
+			0.5
+		],
+		"ambient_energy": 0.55
+	},
+	"settings": {
+		"ambient_preset": "lab"
+	},
+	"layers": {
+		"structure": [
+			[
+				"1",
+				"1",
+				"1",
+				"1",
+				"0",
+				"1",
+				"1",
+				"1",
+				"1"
+			],
+			[
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1"
+			],
+			[
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1"
+			],
+			[
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1"
+			],
+			[
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1"
+			],
+			[
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1"
+			],
+			[
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1"
+			],
+			[
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1"
+			],
+			[
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1"
+			],
+			[
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1"
+			],
+			[
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1"
+			],
+			[
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1"
+			],
+			[
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1"
+			]
+		],
+		"utilities": [
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				"t",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			]
+		],
+		"interactables": [
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				"russell_paradox_workbench:0:0",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				"complexity_dial_workbench:0:0",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				"ca_rules_workbench:0:0",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				"halting_workbench:0:0",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				"qfep_balance_workbench:0:0",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				"transform_composition_workbench:0:0",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			]
+		]
+	}
 }

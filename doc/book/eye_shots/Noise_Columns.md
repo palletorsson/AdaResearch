@@ -4,13 +4,13 @@
 
 ## The ride (before)
 clearance violations: **1 overlaps, 0 tight** — the law wants ≥1.2m to walk between.
-- `[OVERLAP] dark_sphere                <-> MeltingBerniniScene        gap -4.75m (centers 2.00m)`
+- `[OVERLAP] MeltingBerniniScene        <-> dark_sphere                gap -1.37m (centers 5.39m)`
 
 ## The move
     logged 1 entries to ada_run\placement_log.json
     summary: 1 maps processed
       constraint improved: 0/1  mean Δ=+0.000
-      walkability improved: 1/1  mean Δ=+0.005
+      walkability improved: 0/1  mean Δ=-0.256
 
 no sibling kept — the move did not beat the ride (overlaps 1→1, tight 0→0). Note-only.
 

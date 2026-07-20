@@ -3,23 +3,21 @@
 > one pass: ride (gaze), move (place --only-improve), gate (pathfinder), voice (qfep). Field note, not a ruling.
 
 ## The ride (before)
-clearance violations: **0 overlaps, 9 tight** — the law wants ≥1.2m to walk between.
-- `[tight  ] grid_model:180:-0.8        <-> pattern_tile_plate:180:-0.49#p4m gap +1.00m (centers 2.00m)`
-- `[tight  ] pattern_studio_plate:0:-0.45 <-> pattern_tile_plate:180:-0.49#p4m gap +0.41m (centers 1.41m)`
-- `[tight  ] pattern_tile_plate:180:-0.49#p4m <-> pattern_tile_plate:180:-0.49#p4m gap +1.00m (centers 2.00m)`
-- `[tight  ] pattern_tile_plate:180:-0.49#p4m <-> pattern_tile_plate:180:-0.49#p4m gap +1.00m (centers 2.00m)`
-- `[tight  ] pattern_tile_plate:180:-0.49#p4m <-> dark_sphere                gap +0.08m (centers 1.00m)`
-- `[tight  ] pattern_tile_plate:180:-0.49#p4m <-> pattern_tile_mirror:0:-0.5 gap +1.00m (centers 2.00m)`
+clearance violations: **0 overlaps, 6 tight** — the law wants ≥1.2m to walk between.
+- `[tight  ] panel_bridge_loom:0:-0-49#shafts:8 <-> script_runner:0:-0.5       gap +0.00m (centers 1.00m)`
+- `[tight  ] panel_bridge_loom:0:-0-49#shafts:8 <-> pattern_tile_plate:180:-0.49#p4m gap +1.00m (centers 2.00m)`
 - `[tight  ] dark_sphere                <-> pattern_tile_mirror:0:-0.5 gap +0.08m (centers 1.00m)`
-- `[tight  ] pattern_tile_mirror:0:-0.5 <-> pattern_tile_puzzle:0:-0.5 gap +0.41m (centers 1.41m)`
+- `[tight  ] dark_sphere                <-> pattern_tile_puzzle:0:-0.5 gap +1.08m (centers 2.00m)`
+- `[tight  ] pattern_tile_mirror:0:-0.5 <-> pattern_tile_puzzle:0:-0.5 gap +0.00m (centers 1.00m)`
+- `[tight  ] grid_model:180:-0.8        <-> pulsar_compact:0:-0.5      gap +0.00m (centers 1.00m)`
 
 ## The move
     logged 1 entries to ada_run\placement_log.json
     summary: 1 maps processed
-      constraint improved: 1/1  mean Δ=+0.102
-      walkability improved: 1/1  mean Δ=+0.003
+      constraint improved: 0/1  mean Δ=+0.000
+      walkability improved: 1/1  mean Δ=+0.008
 
-sibling **Trial_eye_Tutorial_Pattern** kept: overlaps 0→0, tight 9→6, pathfinder OK.
+no sibling kept — the move did not beat the ride (overlaps 0→0, tight 6→6). Note-only.
 
 ## The voice (qfep)
 10 of 10 cast members carry a theory-claim; 0 mute.
@@ -33,4 +31,4 @@ walked.md exists — the writing names 0/10 of the cast; dwells declared for 0.
 - space without text: dark_sphere, grid_model, panel_bridge_loom, pattern_maker_station, pattern_studio_plate, pattern_tile_mirror — standing in the room, absent from the walk.
 
 ## The heuristic understanding
-The floor was fighting the walk — bodies inside each other's clearance. The mover found a better seating; the ride confirms it in text. The voice column above says what the room is FOR; the next writing pass should say it in the walked page.
+The violations are real but mechanical moving does not fix them — they are placement DECISIONS (which body yields?), not placement errors. This is verdict material, not tooling material.

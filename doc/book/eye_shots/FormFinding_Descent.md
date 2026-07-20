@@ -3,18 +3,19 @@
 > one pass: ride (gaze), move (place --only-improve), gate (pathfinder), voice (qfep). Field note, not a ruling.
 
 ## The ride (before)
-clearance violations: **3 overlaps, 0 tight** — the law wants ≥1.2m to walk between.
-- `[OVERLAP] descent_marble_toy         <-> gradient_descent           gap -5.80m (centers 4.70m)`
-- `[OVERLAP] gradient_descent           <-> gradient_descent_well      gap -4.85m (centers 5.65m)`
-- `[OVERLAP] gradient_descent           <-> science_screen             gap -9.22m (centers 2.35m)`
+clearance violations: **3 overlaps, 1 tight** — the law wants ≥1.2m to walk between.
+- `[OVERLAP] gradient_descent           <-> descent_marble_toy         gap -6.30m (centers 4.20m)`
+- `[OVERLAP] gradient_descent           <-> gradient_descent_well      gap -5.25m (centers 5.25m)`
+- `[OVERLAP] gradient_descent           <-> science_screen             gap -1.89m (centers 9.68m)`
+- `[tight  ] descent_marble_toy         <-> gradient_descent_well      gap +0.05m (centers 1.05m)`
 
 ## The move
     logged 1 entries to ada_run\placement_log.json
     summary: 1 maps processed
-      constraint improved: 1/1  mean Δ=+0.137
-      walkability improved: 1/1  mean Δ=+0.080
+      constraint improved: 0/1  mean Δ=+0.000
+      walkability improved: 0/1  mean Δ=+0.000
 
-no sibling kept — the move did not beat the ride (overlaps 3→3, tight 0→1). Note-only.
+no sibling kept — the move did not beat the ride (overlaps 3→3, tight 1→1). Note-only.
 
 ## The voice (qfep)
 4 of 4 cast members carry a theory-claim; 0 mute.

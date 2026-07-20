@@ -22,12 +22,11 @@ clearance violations: **0 overlaps, 12 tight** — the law wants ≥1.2m to walk
 no sibling kept — the move did not beat the ride (overlaps 0→0, tight 12→12). Note-only.
 
 ## The voice (qfep)
-12 of 14 cast members carry a theory-claim; 2 mute.
+14 of 14 cast members carry a theory-claim; 0 mute.
 - **dark_sphere** — Transformation often needs an invariant reference to be legible. The sphere stays simple so surrounding change
 - **draw_triangle_faces** — fan_triangulate(loop) → a colored surface: the moment a closed loop of points stops being an outline and becom
 - **floating_sphere_field** — The void was never empty, only under-rendered. Replacing the lattice with a drift trades the comfort of fixed 
 - **folded_strip** — triangle_strip(24) — a pleated ribbon of alternating heights, faces sharing edges down its length. The most ec
-- mute: triangle_line_puzzle, triangleprofiles
 
 ## The text vs the space
 walked.md exists — the writing names 10/14 of the cast; dwells declared for 1.

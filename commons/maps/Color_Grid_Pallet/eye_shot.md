@@ -4,13 +4,13 @@
 
 ## The ride (before)
 clearance violations: **0 overlaps, 1 tight** — the law wants ≥1.2m to walk between.
-- `[tight  ] dark_sphere                <-> spectrum_forest:0:2        gap +0.08m (centers 1.00m)`
+- `[tight  ] dark_sphere                <-> gridcolorizer              gap +0.08m (centers 1.00m)`
 
 ## The move
     logged 1 entries to ada_run\placement_log.json
     summary: 1 maps processed
-      constraint improved: 1/1  mean Δ=+0.088
-      walkability improved: 1/1  mean Δ=+0.143
+      constraint improved: 0/1  mean Δ=+0.000
+      walkability improved: 0/1  mean Δ=+0.000
 
 no sibling kept — the move did not beat the ride (overlaps 0→0, tight 1→1). Note-only.
 
@@ -23,7 +23,7 @@ no sibling kept — the move did not beat the ride (overlaps 0→0, tight 1→1)
 
 ## The text vs the space
 walked.md exists — the writing names 4/4 of the cast; dwells declared for 0.
-- **the writing's subjects are blocked in space**: dark_sphere, spectrum_forest sit in clearance violations — the text promises what the floor obstructs.
+- **the writing's subjects are blocked in space**: dark_sphere, gridcolorizer sit in clearance violations — the text promises what the floor obstructs.
 
 ## The heuristic understanding
 The space already walks: the bodies keep the law without being told. What carries this map is its voice, not its floor.

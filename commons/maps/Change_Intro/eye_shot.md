@@ -3,17 +3,16 @@
 > one pass: ride (gaze), move (place --only-improve), gate (pathfinder), voice (qfep). Field note, not a ruling.
 
 ## The ride (before)
-clearance violations: **0 overlaps, 2 tight** — the law wants ≥1.2m to walk between.
-- `[tight  ] science_screen             <-> derivative_pair            gap +0.76m (centers 2.83m)`
-- `[tight  ] science_screen             <-> code_display               gap +0.76m (centers 2.83m)`
+clearance violations: **0 overlaps, 1 tight** — the law wants ≥1.2m to walk between.
+- `[tight  ] derivative_pair            <-> slope_tangent_demo         gap +0.00m (centers 1.00m)`
 
 ## The move
-        new_placements = fn(room, artifacts, rng)
-      File "C:\Users\palle\Documents\GitHub\AdaResearch_46\tools\placement_research.py", line 1283, in strategy_humanoid_walker
-        for r in range(room.depth - d + 1):
-    TypeError: 'float' object cannot be interpreted as an integer
+    logged 1 entries to ada_run\placement_log.json
+    summary: 1 maps processed
+      constraint improved: 0/1  mean Δ=+0.000
+      walkability improved: 0/1  mean Δ=+0.000
 
-no sibling kept — the move did not beat the ride (overlaps 0→0, tight 2→2). Note-only.
+no sibling kept — the move did not beat the ride (overlaps 0→0, tight 1→1). Note-only.
 
 ## The voice (qfep)
 4 of 4 cast members carry a theory-claim; 0 mute.
@@ -24,7 +23,7 @@ no sibling kept — the move did not beat the ride (overlaps 0→0, tight 2→2)
 
 ## The text vs the space
 walked.md exists — the writing names 4/4 of the cast; dwells declared for 0.
-- **the writing's subjects are blocked in space**: code_display, derivative_pair, science_screen sit in clearance violations — the text promises what the floor obstructs.
+- **the writing's subjects are blocked in space**: derivative_pair, slope_tangent_demo sit in clearance violations — the text promises what the floor obstructs.
 
 ## The heuristic understanding
 The space already walks: the bodies keep the law without being told. What carries this map is its voice, not its floor.

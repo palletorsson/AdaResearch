@@ -7,14 +7,14 @@ clearance violations: **2 overlaps, 3 tight** — the law wants ≥1.2m to walk 
 - `[tight  ] cellular_automata_3d_stacked <-> Hilbert3D                  gap +1.09m (centers 2.24m)`
 - `[OVERLAP] cellular_automata_3d_stacked <-> space_filling_curve_gallery gap -0.36m (centers 2.24m)`
 - `[OVERLAP] Hilbert3D                  <-> space_filling_curve_gallery gap -0.34m (centers 1.41m)`
-- `[tight  ] space_filling_curve_gallery <-> dark_sphere                gap +1.14m (centers 3.16m)`
+- `[tight  ] space_filling_curve_gallery <-> dark_sphere                gap +0.98m (centers 3.00m)`
 - `[tight  ] dark_sphere                <-> fractal_stochastic_tree    gap +0.41m (centers 1.00m)`
 
 ## The move
     logged 1 entries to ada_run\placement_log.json
     summary: 1 maps processed
       constraint improved: 0/1  mean Δ=+0.000
-      walkability improved: 1/1  mean Δ=+0.018
+      walkability improved: 0/1  mean Δ=+0.000
 
 no sibling kept — the move did not beat the ride (overlaps 2→2, tight 3→3). Note-only.
 

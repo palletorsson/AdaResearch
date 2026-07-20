@@ -4,15 +4,15 @@
 
 ## The ride (before)
 clearance violations: **1 overlaps, 2 tight** — the law wants ≥1.2m to walk between.
-- `[tight  ] perlin_noise_bridge:0:-0.5 <-> env_one:0:4:0.5            gap +0.41m (centers 1.41m)`
+- `[tight  ] dark_sphere                <-> env_one:0:4:0.5            gap +0.49m (centers 1.41m)`
 - `[tight  ] env_one:0:4:0.5            <-> sculpt_one                 gap +0.96m (centers 3.61m)`
-- `[OVERLAP] random_transformations_geometric:0:1:0.2 <-> sculpt_one                 gap -1.24m (centers 1.41m)`
+- `[OVERLAP] perlin_noise_bridge:0:-0.5 <-> sculpt_one                 gap -1.24m (centers 1.41m)`
 
 ## The move
     logged 1 entries to ada_run\placement_log.json
     summary: 1 maps processed
-      constraint improved: 0/1  mean Δ=+0.000
-      walkability improved: 1/1  mean Δ=+0.100
+      constraint improved: 1/1  mean Δ=+0.003
+      walkability improved: 0/1  mean Δ=-0.034
 
 no sibling kept — the move did not beat the ride (overlaps 1→1, tight 2→2). Note-only.
 
@@ -25,7 +25,7 @@ no sibling kept — the move did not beat the ride (overlaps 1→1, tight 2→2)
 
 ## The text vs the space
 walked.md exists — the writing names 6/6 of the cast; dwells declared for 0.
-- **the writing's subjects are blocked in space**: env_one, perlin_noise_bridge, random_transformations_geometric, sculpt_one sit in clearance violations — the text promises what the floor obstructs.
+- **the writing's subjects are blocked in space**: dark_sphere, env_one, perlin_noise_bridge, sculpt_one sit in clearance violations — the text promises what the floor obstructs.
 
 ## The heuristic understanding
 The violations are real but mechanical moving does not fix them — they are placement DECISIONS (which body yields?), not placement errors. This is verdict material, not tooling material.

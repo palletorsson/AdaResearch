@@ -3,15 +3,21 @@
 > one pass: ride (gaze), move (place --only-improve), gate (pathfinder), voice (qfep). Field note, not a ruling.
 
 ## The ride (before)
-clearance violations: **0 overlaps, 0 tight** — the law wants ≥1.2m to walk between.
+clearance violations: **0 overlaps, 6 tight** — the law wants ≥1.2m to walk between.
+- `[tight  ] homogeneous_coordinates:0:-0.5 <-> rotation_gimbal:0:-0.5     gap +0.00m (centers 1.00m)`
+- `[tight  ] homogeneous_coordinates:0:-0.5 <-> transform_composition:0:-0.5 gap +1.00m (centers 2.00m)`
+- `[tight  ] invariants_demo:0:-0.5     <-> matrix_4x4_viewer:0:-0.5   gap +0.00m (centers 1.00m)`
+- `[tight  ] rotation_gimbal:0:-0.5     <-> transform_composition:0:-0.5 gap +0.00m (centers 1.00m)`
+- `[tight  ] rotation_gimbal:0:-0.5     <-> balance_puzzle:90:-0.5     gap +1.00m (centers 2.00m)`
+- `[tight  ] transform_composition:0:-0.5 <-> balance_puzzle:90:-0.5     gap +0.00m (centers 1.00m)`
 
 ## The move
-        new_placements = fn(room, artifacts, rng)
-      File "C:\Users\palle\Documents\GitHub\AdaResearch_46\tools\placement_research.py", line 1283, in strategy_humanoid_walker
-        for r in range(room.depth - d + 1):
-    TypeError: 'float' object cannot be interpreted as an integer
+    logged 1 entries to ada_run\placement_log.json
+    summary: 1 maps processed
+      constraint improved: 0/1  mean Δ=+0.000
+      walkability improved: 1/1  mean Δ=+0.077
 
-no sibling kept — the move did not beat the ride (overlaps 0→0, tight 0→0). Note-only.
+no sibling kept — the move did not beat the ride (overlaps 0→0, tight 6→6). Note-only.
 
 ## The voice (qfep)
 7 of 7 cast members carry a theory-claim; 0 mute.
@@ -22,7 +28,7 @@ no sibling kept — the move did not beat the ride (overlaps 0→0, tight 0→0)
 
 ## The text vs the space
 walked.md exists — the writing names 7/7 of the cast; dwells declared for 2.
-- the text and the space cover each other — the walk as written is the walk as built.
+- **the writing's subjects are blocked in space**: balance_puzzle, homogeneous_coordinates, invariants_demo, matrix_4x4_viewer, rotation_gimbal, transform_composition sit in clearance violations — the text promises what the floor obstructs.
 
 ## The heuristic understanding
-The space already walks: the bodies keep the law without being told. What carries this map is its voice, not its floor.
+The violations are real but mechanical moving does not fix them — they are placement DECISIONS (which body yields?), not placement errors. This is verdict material, not tooling material.

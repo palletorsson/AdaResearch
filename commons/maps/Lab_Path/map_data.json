@@ -1,73 +1,179 @@
 {
-  "map_info": {
-    "name": "Lab Path",
-    "title": "Return Corridor",
-    "lookup_name": "Lab_Path",
-    "description": "Transition corridor back to the lab. Shared endpoint for all sequences.",
-    "version": "1.0",
-    "format": "json",
-    "dimensions": {
-      "width": 5,
-      "depth": 5,
-      "max_height": 1
-    },
-    "metadata": {
-      "difficulty": "beginner",
-      "category": "transition",
-      "estimated_time": "15 seconds"
-    }
-  },
-  "utility_definitions": {
-    "t": {
-      "type": "teleporter",
-      "name": "Return to Lab",
-      "description": "Back to the lab",
-      "properties": {
-        "action": "next_in_sequence"
-      }
-    }
-  },
-  "lighting": {
-    "ambient_color": [0.3,0.3,0.4],
-    "ambient_energy": 0.4,
-    "directional_light": {
-      "enabled": true,
-      "direction": [-0.3,-0.8,-0.2],
-      "color": [0.9,0.9,1.0],
-      "energy": 0.6
-    }
-  },
-  "settings": {
-    "cube_size": 1.0,
-    "gutter": 0.0,
-    "show_grid": true,
-    "enable_physics": true,
-    "background": {
-      "type": "color",
-      "color": [0.02,0.02,0.03]
-    }
-  },
-  "layers": {
-    "structure": [
-      ["1","1","1","1","1"],
-      ["1","1","1","1","1"],
-      ["1","1","0","1","1"],
-      ["1","1","1","1","1"],
-      ["1","1","1","1","1"]
-    ],
-    "utilities": [
-      ["sp"," "," "," ","an:-90"],
-      [" "," "," "," "," "],
-      [" "," ","t"," "," "],
-      [" "," "," "," "," "],
-      [" "," "," "," "," "]
-    ],
-    "interactables": [
-      [" "," "," "," "," "],
-      [" "," "," "," "," "],
-      [" "," ","dark_sphere"," "," "],
-      [" "," "," "," "," "],
-      [" "," "," "," "," "]
-    ]
-  }
+	"map_info": {
+		"name": "Lab Path",
+		"title": "Return Corridor",
+		"lookup_name": "Lab_Path",
+		"description": "Transition corridor back to the lab. Shared endpoint for all sequences.\n\n[Placement applied hybrid engine \u2014 constraint 0.894\u21921.000, walkability 0.940\u21920.933]",
+		"version": "placed-hybrid",
+		"format": "json",
+		"dimensions": {
+			"width": 5,
+			"depth": 5,
+			"max_height": 1
+		},
+		"metadata": {
+			"difficulty": "beginner",
+			"category": "transition",
+			"estimated_time": "15 seconds"
+		}
+	},
+	"utility_definitions": {
+		"t": {
+			"type": "teleporter",
+			"name": "Return to Lab",
+			"description": "Back to the lab",
+			"properties": {
+				"action": "next_in_sequence"
+			}
+		}
+	},
+	"lighting": {
+		"ambient_color": [
+			0.3,
+			0.3,
+			0.4
+		],
+		"ambient_energy": 0.4,
+		"directional_light": {
+			"enabled": true,
+			"direction": [
+				-0.3,
+				-0.8,
+				-0.2
+			],
+			"color": [
+				0.9,
+				0.9,
+				1.0
+			],
+			"energy": 0.6
+		}
+	},
+	"settings": {
+		"cube_size": 1.0,
+		"gutter": 0.0,
+		"show_grid": true,
+		"enable_physics": true,
+		"background": {
+			"type": "color",
+			"color": [
+				0.02,
+				0.02,
+				0.03
+			]
+		}
+	},
+	"layers": {
+		"structure": [
+			[
+				"1",
+				"1",
+				"1",
+				"1",
+				"1"
+			],
+			[
+				"1",
+				"1",
+				"1",
+				"1",
+				"1"
+			],
+			[
+				"1",
+				"1",
+				"0",
+				"1",
+				"1"
+			],
+			[
+				"1",
+				"1",
+				"1",
+				"1",
+				"1"
+			],
+			[
+				"1",
+				"1",
+				"1",
+				"1",
+				"1"
+			]
+		],
+		"utilities": [
+			[
+				"sp",
+				" ",
+				" ",
+				" ",
+				"an:-90"
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				"t",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			]
+		],
+		"interactables": [
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				"dark_sphere",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			]
+		]
+	}
 }

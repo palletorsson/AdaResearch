@@ -3,23 +3,15 @@
 > one pass: ride (gaze), move (place --only-improve), gate (pathfinder), voice (qfep). Field note, not a ruling.
 
 ## The ride (before)
-clearance violations: **0 overlaps, 25 tight** — the law wants ≥1.2m to walk between.
-- `[tight  ] translation_cube_demo:180:0.5 <-> cube_scene:0:3             gap +0.41m (centers 1.41m)`
-- `[tight  ] translation_cube_demo:180:0.5 <-> cube_scene:0:3             gap +0.00m (centers 1.00m)`
-- `[tight  ] translation_cube_demo:180:0.5 <-> cube_scene:0:3             gap +0.41m (centers 1.41m)`
-- `[tight  ] cube_scene:0:3             <-> cube_scene:0:3             gap +0.00m (centers 1.00m)`
-- `[tight  ] cube_scene:0:3             <-> cube_scene:0:3             gap +1.00m (centers 2.00m)`
-- `[tight  ] cube_scene:0:3             <-> cube_scene:0:3             gap +0.00m (centers 1.00m)`
-- `[tight  ] cube_scene:0:3             <-> cube_scene:0:3             gap +1.00m (centers 2.00m)`
-- `[tight  ] cube_scene:0:3             <-> cube_scene:0:3             gap +0.00m (centers 1.00m)`
+clearance violations: **0 overlaps, 0 tight** — the law wants ≥1.2m to walk between.
 
 ## The move
     logged 1 entries to ada_run\placement_log.json
     summary: 1 maps processed
-      constraint improved: 1/1  mean Δ=+0.044
-      walkability improved: 1/1  mean Δ=+0.067
+      constraint improved: 1/1  mean Δ=+0.003
+      walkability improved: 0/1  mean Δ=-0.027
 
-sibling **Trial_eye_Trans_AxisDecomposition** kept: overlaps 0→0, tight 25→0, pathfinder OK.
+no sibling kept — the move did not beat the ride (overlaps 0→0, tight 0→0). Note-only.
 
 ## The voice (qfep)
 8 of 8 cast members carry a theory-claim; 0 mute.
@@ -30,7 +22,7 @@ sibling **Trial_eye_Trans_AxisDecomposition** kept: overlaps 0→0, tight 25→0
 
 ## The text vs the space
 walked.md exists — the writing names 8/8 of the cast; dwells declared for 1.
-- **the writing's subjects are blocked in space**: cube_scene, translation_cube_demo sit in clearance violations — the text promises what the floor obstructs.
+- the text and the space cover each other — the walk as written is the walk as built.
 
 ## The heuristic understanding
-The floor was fighting the walk — bodies inside each other's clearance. The mover found a better seating; the ride confirms it in text. The voice column above says what the room is FOR; the next writing pass should say it in the walked page.
+The space already walks: the bodies keep the law without being told. What carries this map is its voice, not its floor.

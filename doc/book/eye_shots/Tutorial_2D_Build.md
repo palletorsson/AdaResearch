@@ -3,18 +3,19 @@
 > one pass: ride (gaze), move (place --only-improve), gate (pathfinder), voice (qfep). Field note, not a ruling.
 
 ## The ride (before)
-clearance violations: **0 overlaps, 3 tight** — the law wants ≥1.2m to walk between.
-- `[tight  ] pick_up_cube               <-> row_3_x                    gap +0.24m (centers 2.24m)`
-- `[tight  ] row_3_x                    <-> column_3_z                 gap +0.97m (centers 4.47m)`
-- `[tight  ] dark_sphere                <-> grid_2d_4x4                gap +1.08m (centers 4.12m)`
+clearance violations: **4 overlaps, 0 tight** — the law wants ≥1.2m to walk between.
+- `[OVERLAP] xyz_coordinates            <-> grid_2d_4x4                gap -0.07m (centers 3.16m)`
+- `[OVERLAP] pick_up_cube               <-> grid_2d_4x4                gap -1.46m (centers 1.41m)`
+- `[OVERLAP] grid_2d_4x4                <-> row_3_x                    gap -1.38m (centers 3.00m)`
+- `[OVERLAP] row_3_x                    <-> column_3_z                 gap -0.50m (centers 3.00m)`
 
 ## The move
     logged 1 entries to ada_run\placement_log.json
     summary: 1 maps processed
-      constraint improved: 1/1  mean Δ=+0.035
-      walkability improved: 1/1  mean Δ=+0.031
+      constraint improved: 0/1  mean Δ=+0.000
+      walkability improved: 0/1  mean Δ=+0.000
 
-no sibling kept — the move did not beat the ride (overlaps 0→4, tight 3→0). Note-only.
+no sibling kept — the move did not beat the ride (overlaps 4→4, tight 0→0). Note-only.
 
 ## The voice (qfep)
 8 of 8 cast members carry a theory-claim; 0 mute.
@@ -25,6 +26,7 @@ no sibling kept — the move did not beat the ride (overlaps 0→4, tight 3→0)
 
 ## The text vs the space
 walked.md exists — the writing names 1/8 of the cast; dwells declared for 0.
+- **the writing's subjects are blocked in space**: xyz_coordinates sit in clearance violations — the text promises what the floor obstructs.
 - space without text: column_3_z, dark_sphere, grid_2d_4x4, gridagent, pick_up_cube, pulsar_visualizer — standing in the room, absent from the walk.
 
 ## The heuristic understanding

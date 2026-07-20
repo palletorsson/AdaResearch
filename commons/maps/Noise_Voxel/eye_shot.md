@@ -3,18 +3,19 @@
 > one pass: ride (gaze), move (place --only-improve), gate (pathfinder), voice (qfep). Field note, not a ruling.
 
 ## The ride (before)
-clearance violations: **3 overlaps, 0 tight** — the law wants ≥1.2m to walk between.
-- `[OVERLAP] perlin_terrain_sculptor:180:0.5:1#mount:shelf <-> voxelnoise                 gap -15.50m (centers 1.00m)`
-- `[OVERLAP] science_screen:180:1.5#mode:field <-> voxelnoise                 gap -6.45m (centers 10.05m)`
-- `[OVERLAP] voxelnoise                 <-> dark_sphere                gap -10.76m (centers 5.66m)`
+clearance violations: **3 overlaps, 1 tight** — the law wants ≥1.2m to walk between.
+- `[tight  ] science_screen:180:1.5#mode:field <-> dark_sphere                gap +1.08m (centers 2.00m)`
+- `[OVERLAP] science_screen:180:1.5#mode:field <-> voxelnoise                 gap -14.26m (centers 2.24m)`
+- `[OVERLAP] perlin_terrain_sculptor:180:0.5:1#mount:shelf <-> voxelnoise                 gap -13.34m (centers 3.16m)`
+- `[OVERLAP] dark_sphere                <-> voxelnoise                 gap -15.42m (centers 1.00m)`
 
 ## The move
     logged 1 entries to ada_run\placement_log.json
     summary: 1 maps processed
-      constraint improved: 1/1  mean Δ=+0.079
-      walkability improved: 1/1  mean Δ=+0.324
+      constraint improved: 0/1  mean Δ=+0.000
+      walkability improved: 0/1  mean Δ=+0.000
 
-no sibling kept — the move did not beat the ride (overlaps 3→3, tight 0→1). Note-only.
+no sibling kept — the move did not beat the ride (overlaps 3→3, tight 1→1). Note-only.
 
 ## The voice (qfep)
 4 of 4 cast members carry a theory-claim; 0 mute.

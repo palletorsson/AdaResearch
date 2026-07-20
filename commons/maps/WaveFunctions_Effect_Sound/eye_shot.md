@@ -3,35 +3,34 @@
 > one pass: ride (gaze), move (place --only-improve), gate (pathfinder), voice (qfep). Field note, not a ruling.
 
 ## The ride (before)
-clearance violations: **11 overlaps, 55 tight** — the law wants ≥1.2m to walk between.
-- `[tight  ] BigPipeSystem:0:-0.5       <-> pick_up_cube               gap +0.66m (centers 1.41m)`
-- `[tight  ] pick_up_cube               <-> AudioContr:-90#preset:basic_mono gap +0.25m (centers 1.00m)`
-- `[tight  ] pick_up_cube               <-> pick_up_cube               gap +0.50m (centers 1.00m)`
-- `[tight  ] pick_up_cube               <-> AudioContr:-90#config:mario_rack gap +0.66m (centers 1.41m)`
-- `[tight  ] AudioContr:-90#preset:basic_mono <-> pick_up_cube               gap +0.66m (centers 1.41m)`
-- `[tight  ] AudioContr:-90#preset:basic_mono <-> AudioContr:-90#config:mario_rack gap +0.00m (centers 1.00m)`
-- `[tight  ] pick_up_cube               <-> RackSineBasic:0:1          gap +0.25m (centers 1.00m)`
-- `[tight  ] pick_up_cube               <-> GlassRack#config:simple_tube gap +0.25m (centers 1.00m)`
+clearance violations: **6 overlaps, 26 tight** — the law wants ≥1.2m to walk between.
+- `[OVERLAP] lab_table                  <-> timbre_sculptor            gap -0.01m (centers 1.00m)`
+- `[tight  ] lab_table                  <-> DualBallFMController       gap +0.61m (centers 2.00m)`
+- `[tight  ] lab_table                  <-> chord_tension_spring       gap +1.13m (centers 2.24m)`
+- `[tight  ] timbre_sculptor            <-> DualBallFMController       gap +1.04m (centers 2.24m)`
+- `[tight  ] timbre_sculptor            <-> chord_tension_spring       gap +1.08m (centers 2.00m)`
+- `[tight  ] BigPipeSystem:0:-0.5       <-> pick_up_cube               gap +0.25m (centers 1.00m)`
+- `[tight  ] BigPipeSystem:0:-0.5       <-> GlassRack#config:simple_tube gap +1.00m (centers 2.00m)`
+- `[tight  ] BigPipeSystem:0:-0.5       <-> wave_interference_3d:0:-0.5 gap +1.00m (centers 2.00m)`
 
 ## The move
-        new_placements = fn(room, artifacts, rng)
-      File "C:\Users\palle\Documents\GitHub\AdaResearch_46\tools\placement_research.py", line 1283, in strategy_humanoid_walker
-        for r in range(room.depth - d + 1):
-    TypeError: 'float' object cannot be interpreted as an integer
+    logged 1 entries to ada_run\placement_log.json
+    summary: 1 maps processed
+      constraint improved: 0/1  mean Δ=+0.000
+      walkability improved: 0/1  mean Δ=+0.000
 
-no sibling kept — the move did not beat the ride (overlaps 11→11, tight 55→55). Note-only.
+no sibling kept — the move did not beat the ride (overlaps 6→6, tight 26→26). Note-only.
 
 ## The voice (qfep)
-19 of 22 cast members carry a theory-claim; 3 mute.
+22 of 22 cast members carry a theory-claim; 0 mute.
 - **AudioContr** — the audio controller — the room's mixing desk; infrastructure that routes the chapter's voices, never dominant
 - **BigPipeSystem** — oscillation: the organ's logic at room scale — pipes whose lengths ARE their pitches; geometry as tuning, the 
 - **DualBallFMController** — mod_index — controls harmonic richness from pure tone to metallic chaos All timbral complexity is phase modula
 - **GlassRack** — oscillation: the glass rack chassis — the eurorack made walkable; modules at body height, patching as architec
-- mute: audio_catalog_tablet, interactable_demo, mario_test_sound_ui
 
 ## The text vs the space
 walked.md exists — the writing names 14/22 of the cast; dwells declared for 0.
-- **the writing's subjects are blocked in space**: AudioContr, BigPipeSystem, GlassRack, RackSineBasic sit in clearance violations — the text promises what the floor obstructs.
+- **the writing's subjects are blocked in space**: BigPipeSystem, DualBallFMController, GlassRack, chord_tension_spring sit in clearance violations — the text promises what the floor obstructs.
 - space without text: dark_sphere, harmonic_distance_table, interactable_demo, lab_table, mario_test_sound_ui, pick_up_cube — standing in the room, absent from the walk.
 
 ## The heuristic understanding

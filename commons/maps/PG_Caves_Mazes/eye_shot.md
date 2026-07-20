@@ -8,8 +8,8 @@ clearance violations: **0 overlaps, 0 tight** — the law wants ≥1.2m to walk 
 ## The move
     logged 1 entries to ada_run\placement_log.json
     summary: 1 maps processed
-      constraint improved: 1/1  mean Δ=+0.034
-      walkability improved: 0/1  mean Δ=-0.018
+      constraint improved: 0/1  mean Δ=-0.021
+      walkability improved: 0/1  mean Δ=-0.357
 
 no sibling kept — the move did not beat the ride (overlaps 0→0, tight 0→0). Note-only.
 

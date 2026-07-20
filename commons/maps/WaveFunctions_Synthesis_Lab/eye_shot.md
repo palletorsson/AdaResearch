@@ -22,12 +22,11 @@ clearance violations: **3 overlaps, 28 tight** — the law wants ≥1.2m to walk
 no sibling kept — the move did not beat the ride (overlaps 3→3, tight 28→28). Note-only.
 
 ## The voice (qfep)
-23 of 24 cast members carry a theory-claim; 1 mute.
+24 of 24 cast members carry a theory-claim; 0 mute.
 - **GlassRack** — oscillation: the glass rack chassis — the eurorack made walkable; modules at body height, patching as architec
 - **SoundscapeRadioRack** — Lambda as tuning — the wheel angle IS lambda, sweeping through a spectrum of possible sounds. Between stations
 - **UnitCircleTrig** — rotation_speed — controls how fast the angle sweeps and waves extend Rotation is the generator of all oscillat
 - **additive_wave_demo** — harmonic_amplitudes[] — each slider adds one frequency component Any periodic function is a sum of sines; comp
-- mute: samplevialrack
 
 ## The text vs the space
 walked.md exists — the writing names 14/24 of the cast; dwells declared for 0.

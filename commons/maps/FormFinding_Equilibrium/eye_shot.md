@@ -8,14 +8,14 @@ clearance violations: **0 overlaps, 0 tight** — the law wants ≥1.2m to walk 
 ## The move
     logged 1 entries to ada_run\placement_log.json
     summary: 1 maps processed
-      constraint improved: 1/1  mean Δ=+0.093
-      walkability improved: 1/1  mean Δ=+0.023
+      constraint improved: 0/1  mean Δ=+0.000
+      walkability improved: 1/1  mean Δ=+0.024
 
 no sibling kept — the move did not beat the ride (overlaps 0→0, tight 0→0). Note-only.
 
 ## The voice (qfep)
 4 of 4 cast members carry a theory-claim; 0 mute.
-- **calder_mobile** — a mobile is the lever law made into art — Calder's genius was that the weights and a binary tree of steel arms
+- **calder_mobile** — A hanging Calder mobile that actually balances — every arm obeying the lever law, torque answering torque all 
 - **fractal_truss_tower** — "max strength, min material — a strut that is struts" A room-scale tower whose every strut is itself a little 
 - **science_screen** — Transformation here is projection: a 3D state is re-expressed in 2D while preserving selected structural relat
 - **tensegrity_triangle** — The triangle as relation made rigid - the first structure that holds itself up. Nature stabilises with triangl

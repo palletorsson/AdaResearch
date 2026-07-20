@@ -4,15 +4,15 @@
 
 ## The ride (before)
 clearance violations: **2 overlaps, 1 tight** — the law wants ≥1.2m to walk between.
-- `[OVERLAP] mandelbrot_set             <-> dark_sphere                gap -6.63m (centers 2.24m)`
-- `[OVERLAP] mandelbrot_set             <-> mandelbrot_dive:0:0.5:1    gap -5.34m (centers 3.61m)`
-- `[tight  ] dark_sphere                <-> mandelbrot_dive:0:0.5:1    gap +1.08m (centers 2.00m)`
+- `[OVERLAP] mandelbrot_set             <-> dark_sphere                gap -4.87m (centers 4.00m)`
+- `[OVERLAP] mandelbrot_set             <-> mandelbrot_dive:0:0.5:1    gap -3.95m (centers 5.00m)`
+- `[tight  ] dark_sphere                <-> mandelbrot_dive:0:0.5:1    gap +0.08m (centers 1.00m)`
 
 ## The move
     logged 1 entries to ada_run\placement_log.json
     summary: 1 maps processed
-      constraint improved: 1/1  mean Δ=+0.051
-      walkability improved: 1/1  mean Δ=+0.007
+      constraint improved: 0/1  mean Δ=+0.000
+      walkability improved: 0/1  mean Δ=+0.000
 
 no sibling kept — the move did not beat the ride (overlaps 2→2, tight 1→1). Note-only.
 

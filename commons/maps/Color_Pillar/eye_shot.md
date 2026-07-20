@@ -4,13 +4,13 @@
 
 ## The ride (before)
 clearance violations: **0 overlaps, 1 tight** — the law wants ≥1.2m to walk between.
-- `[tight  ] grab_rainbow_stick:-90:1   <-> grab_rainbow_stick:-90:1   gap +1.00m (centers 2.00m)`
+- `[tight  ] loom_drum_persian_p6       <-> pillarcolorcollection:0:-0.5 gap +0.41m (centers 1.41m)`
 
 ## The move
     logged 1 entries to ada_run\placement_log.json
     summary: 1 maps processed
-      constraint improved: 1/1  mean Δ=+0.010
-      walkability improved: 1/1  mean Δ=+0.054
+      constraint improved: 0/1  mean Δ=+0.000
+      walkability improved: 1/1  mean Δ=+0.015
 
 no sibling kept — the move did not beat the ride (overlaps 0→0, tight 1→1). Note-only.
 
@@ -23,7 +23,7 @@ no sibling kept — the move did not beat the ride (overlaps 0→0, tight 1→1)
 
 ## The text vs the space
 walked.md exists — the writing names 7/7 of the cast; dwells declared for 0.
-- **the writing's subjects are blocked in space**: grab_rainbow_stick sit in clearance violations — the text promises what the floor obstructs.
+- **the writing's subjects are blocked in space**: loom_drum_persian_p6, pillarcolorcollection sit in clearance violations — the text promises what the floor obstructs.
 
 ## The heuristic understanding
 The space already walks: the bodies keep the law without being told. What carries this map is its voice, not its floor.

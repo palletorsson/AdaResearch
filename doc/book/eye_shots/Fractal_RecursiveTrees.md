@@ -3,23 +3,23 @@
 > one pass: ride (gaze), move (place --only-improve), gate (pathfinder), voice (qfep). Field note, not a ruling.
 
 ## The ride (before)
-clearance violations: **11 overlaps, 5 tight** — the law wants ≥1.2m to walk between.
-- `[OVERLAP] living_paper:180#algorithm:mandelbrot <-> inverted_tree_cloud        gap -2.78m (centers 5.00m)`
-- `[tight  ] living_paper:180#algorithm:mandelbrot <-> inverted_tree_cloud        gap +0.28m (centers 8.06m)`
-- `[OVERLAP] fractal_lsystem_tree       <-> inverted_tree_cloud        gap -4.65m (centers 3.00m)`
-- `[OVERLAP] fractal_lsystem_tree       <-> inverted_tree_cloud        gap -0.65m (centers 7.00m)`
-- `[OVERLAP] recursive_tree_2           <-> inverted_tree_cloud        gap -4.65m (centers 2.83m)`
-- `[OVERLAP] recursive_tree_2           <-> inverted_tree_cloud        gap -1.16m (centers 6.32m)`
-- `[tight  ] small_subdivision_cube     <-> small_subdivision_cube     gap +0.90m (centers 1.00m)`
-- `[tight  ] small_subdivision_cube     <-> inverted_tree_cloud        gap +0.67m (centers 8.00m)`
+clearance violations: **3 overlaps, 8 tight** — the law wants ≥1.2m to walk between.
+- `[OVERLAP] inverted_tree_cloud        <-> recursive_tree:0:0:0.7     gap -3.66m (centers 4.12m)`
+- `[OVERLAP] inverted_tree_cloud        <-> fractal_scene              gap -2.78m (centers 5.00m)`
+- `[OVERLAP] inverted_tree_cloud        <-> dark_sphere                gap -1.30m (centers 6.40m)`
+- `[tight  ] inverted_tree_cloud        <-> recursive_tree_2           gap +0.33m (centers 7.81m)`
+- `[tight  ] fractal_scene              <-> dark_sphere                gap +0.49m (centers 1.41m)`
+- `[tight  ] dark_sphere                <-> recursive_tree_2           gap +0.79m (centers 1.41m)`
+- `[tight  ] small_subdivision_cube     <-> cube_desk                  gap +0.86m (centers 1.41m)`
+- `[tight  ] recursive_tree_2           <-> living_paper:180#algorithm:mandelbrot gap +0.71m (centers 1.41m)`
 
 ## The move
     logged 1 entries to ada_run\placement_log.json
     summary: 1 maps processed
-      constraint improved: 1/1  mean Δ=+0.072
-      walkability improved: 0/1  mean Δ=-0.266
+      constraint improved: 0/1  mean Δ=-0.004
+      walkability improved: 0/1  mean Δ=-0.256
 
-no sibling kept — the move did not beat the ride (overlaps 11→11, tight 5→5). Note-only.
+no sibling kept — the move did not beat the ride (overlaps 3→3, tight 8→8). Note-only.
 
 ## The voice (qfep)
 10 of 10 cast members carry a theory-claim; 0 mute.
@@ -30,7 +30,7 @@ no sibling kept — the move did not beat the ride (overlaps 11→11, tight 5→
 
 ## The text vs the space
 walked.md exists — the writing names 6/10 of the cast; dwells declared for 0.
-- **the writing's subjects are blocked in space**: fractal_lsystem_tree, inverted_tree_cloud, living_paper, recursive_tree_2 sit in clearance violations — the text promises what the floor obstructs.
+- **the writing's subjects are blocked in space**: inverted_tree_cloud, living_paper, recursive_tree, recursive_tree_2 sit in clearance violations — the text promises what the floor obstructs.
 - space without text: cube_desk, dark_sphere, fractal_scene, small_subdivision_cube — standing in the room, absent from the walk.
 
 ## The heuristic understanding

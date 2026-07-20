@@ -6,10 +6,10 @@
 clearance violations: **0 overlaps, 0 tight** — the law wants ≥1.2m to walk between.
 
 ## The move
-        r, c = best_pos(a)
-      File "C:\Users\palle\Documents\GitHub\AdaResearch_46\tools\placement_research.py", line 798, in best_pos
-        for r in range(room.depth - d + 1):
-    TypeError: 'float' object cannot be interpreted as an integer
+    logged 1 entries to ada_run\placement_log.json
+    summary: 1 maps processed
+      constraint improved: 0/1  mean Δ=+0.000
+      walkability improved: 1/1  mean Δ=+0.332
 
 no sibling kept — the move did not beat the ride (overlaps 0→0, tight 0→0). Note-only.
 

@@ -4,13 +4,13 @@
 
 ## The ride (before)
 clearance violations: **0 overlaps, 1 tight** — the law wants ≥1.2m to walk between.
-- `[tight  ] balance_puzzle             <-> science_screen             gap +0.43m (centers 2.35m)`
+- `[tight  ] balance_puzzle             <-> self_shaping_forge         gap +0.21m (centers 1.05m)`
 
 ## The move
     logged 1 entries to ada_run\placement_log.json
     summary: 1 maps processed
-      constraint improved: 1/1  mean Δ=+0.044
-      walkability improved: 1/1  mean Δ=+0.179
+      constraint improved: 0/1  mean Δ=+0.000
+      walkability improved: 1/1  mean Δ=+0.068
 
 no sibling kept — the move did not beat the ride (overlaps 0→0, tight 1→1). Note-only.
 
@@ -23,7 +23,7 @@ no sibling kept — the move did not beat the ride (overlaps 0→0, tight 1→1)
 
 ## The text vs the space
 walked.md exists — the writing names 3/4 of the cast; dwells declared for 0.
-- **the writing's subjects are blocked in space**: balance_puzzle sit in clearance violations — the text promises what the floor obstructs.
+- **the writing's subjects are blocked in space**: balance_puzzle, self_shaping_forge sit in clearance violations — the text promises what the floor obstructs.
 - space without text: science_screen — standing in the room, absent from the walk.
 
 ## The heuristic understanding

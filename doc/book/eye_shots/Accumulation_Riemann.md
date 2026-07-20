@@ -3,17 +3,18 @@
 > one pass: ride (gaze), move (place --only-improve), gate (pathfinder), voice (qfep). Field note, not a ruling.
 
 ## The ride (before)
-clearance violations: **2 overlaps, 0 tight** — the law wants ≥1.2m to walk between.
-- `[OVERLAP] riemann_pi                 <-> integral_area              gap -9.25m (centers 4.00m)`
-- `[OVERLAP] riemann_pi                 <-> riemann_pump               gap -10.42m (centers 2.83m)`
+clearance violations: **2 overlaps, 1 tight** — the law wants ≥1.2m to walk between.
+- `[tight  ] riemann_pump               <-> integral_area              gap +0.00m (centers 1.00m)`
+- `[OVERLAP] riemann_pump               <-> riemann_pi                 gap -11.25m (centers 2.00m)`
+- `[OVERLAP] integral_area              <-> riemann_pi                 gap -12.25m (centers 1.00m)`
 
 ## The move
-        r = apply_to_map(m, engine=args.engine, in_place=args.in_place,
-      File "C:\Users\palle\Documents\GitHub\AdaResearch_46\tools\place.py", line 222, in apply_to_map
-        new_inter[r][c] = name_to_token.get(p.artifact.lookup_name,
-    TypeError: list indices must be integers or slices, not float
+    logged 1 entries to ada_run\placement_log.json
+    summary: 1 maps processed
+      constraint improved: 0/1  mean Δ=+0.000
+      walkability improved: 1/1  mean Δ=+0.150
 
-no sibling kept — the move did not beat the ride (overlaps 2→2, tight 0→0). Note-only.
+no sibling kept — the move did not beat the ride (overlaps 2→2, tight 1→1). Note-only.
 
 ## The voice (qfep)
 3 of 3 cast members carry a theory-claim; 0 mute.

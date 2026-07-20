@@ -1,108 +1,678 @@
 {
-  "map_info": {
-	"description": "Explore audio reactivity and simple waveform visualization",
-	"dimensions": {
-	  "depth": 14.0,
-	  "max_height": 4.0,
-	  "width": 12.0
+	"map_info": {
+		"description": "Explore audio reactivity and simple waveform visualization\n\n[Placement applied humanoid_walker engine \u2014 constraint 0.803\u21920.933, walkability 0.464\u21920.538]",
+		"dimensions": {
+			"depth": 14.0,
+			"max_height": 4.0,
+			"width": 12.0
+		},
+		"format": "json",
+		"lookup_name": "WaveFunctions_Effect_Sound",
+		"metadata": {
+			"category": "wavefunctions",
+			"difficulty": "intermediate",
+			"estimated_time": "8-12 minutes",
+			"learning_objectives": [
+				"Audio bus and amplitude analysis",
+				"FFT spectrum: breaking waveforms into frequencies",
+				"Frequency bands: bass,mids,highs",
+				"Quantization noise and sampling gaps",
+				"Critical: Latency as reacting to the past,not present",
+				"Biological sounds: heartbeat rhythm",
+				"Ambient soundscapes: lab hum"
+			]
+		},
+		"name": "Audio Reactive Mario",
+		"title": "Sound as Waveform",
+		"version": "placed-humanoid_walker"
 	},
-	"format": "json",
-	"lookup_name": "WaveFunctions_Effect_Sound",
-	"metadata": {
-	  "category": "wavefunctions",
-	  "difficulty": "intermediate",
-	  "estimated_time": "8-12 minutes",
-	  "learning_objectives": ["Audio bus and amplitude analysis","FFT spectrum: breaking waveforms into frequencies","Frequency bands: bass,mids,highs","Quantization noise and sampling gaps","Critical: Latency as reacting to the past,not present","Biological sounds: heartbeat rhythm","Ambient soundscapes: lab hum"]
+	"utility_definitions": {
+		"s": {
+			"properties": {
+				"height": 5.5
+			}
+		},
+		"t": {
+			"description": "Continue to the next wavefunctions demonstration",
+			"name": "Next Lesson",
+			"properties": {
+				"action": "next_in_sequence"
+			},
+			"type": "teleporter"
+		}
 	},
-	"name": "Audio Reactive Mario",
-	"title": "Sound as Waveform",
-	"version": "1.0"
-  },
-  "utility_definitions": {
-	"s": {
-	  "properties": {
-		"height": 5.5
-	  }
+	"lighting": {
+		"ambient_color": [
+			0.1,
+			0.1,
+			0.2
+		],
+		"ambient_energy": 0.8,
+		"directional_light": {
+			"color": [
+				1.0,
+				0.9,
+				0.8
+			],
+			"direction": [
+				-0.4,
+				-0.7,
+				-0.4
+			],
+			"enabled": true,
+			"energy": 1.2
+		}
 	},
-	"t": {
-	  "description": "Continue to the next wavefunctions demonstration",
-	  "name": "Next Lesson",
-	  "properties": {
-		"action": "next_in_sequence"
-	  },
-	  "type": "teleporter"
+	"settings": {
+		"auto_reveal_on_entry": false,
+		"background": {
+			"color": [
+				0.05,
+				0.05,
+				0.1
+			],
+			"type": "sky"
+		},
+		"cube_size": 1.0,
+		"enable_physics": true,
+		"gutter": 0.0,
+		"initial_tile_visibility": "hidden_except_corners",
+		"show_grid": true
+	},
+	"layers": {
+		"interactables": [
+			[
+				" ",
+				"lab_table",
+				"timbre_sculptor",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				"BigPipeSystem:0:-0.5",
+				"pick_up_cube",
+				"GlassRack#config:simple_tube",
+				"dark_sphere",
+				"RackMoogBass:0:1",
+				"RackDX7Piano:0:1",
+				"cable_builder",
+				" "
+			],
+			[
+				" ",
+				"DualBallFMController",
+				"chord_tension_spring",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				"wave_interference_3d:0:-0.5",
+				"harmonic_distance_table",
+				"MelodyChaser3D:90:0.4#scale:fifths_circle#tempo:60",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				"RackSineBasic:0:1",
+				"interactable_demo",
+				" ",
+				" ",
+				"AudioContr:-90#preset:basic_mono",
+				"Rack303Acid:0:1",
+				"mario_test_sound_ui",
+				"audio_catalog_tablet:90",
+				"MarioSoundController#mode:techno_kick",
+				" ",
+				" ",
+				"VRAudioMonitor"
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			]
+		],
+		"structure": [
+			[
+				"1",
+				"1",
+				"3",
+				"3",
+				"3",
+				"3",
+				"3",
+				"3",
+				"3",
+				"3",
+				"3",
+				"3"
+			],
+			[
+				"1",
+				"1",
+				"2",
+				"1",
+				"2",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"2",
+				"3"
+			],
+			[
+				"1",
+				"1",
+				"1",
+				"1",
+				"2",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"2",
+				"3"
+			],
+			[
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"2",
+				"2",
+				"1",
+				"3"
+			],
+			[
+				"1",
+				"1",
+				"1",
+				"2",
+				"2",
+				"1",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"3"
+			],
+			[
+				"4",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1"
+			],
+			[
+				"3",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"3"
+			],
+			[
+				"4",
+				"1",
+				"2",
+				"1",
+				"2",
+				"1",
+				"1",
+				"1",
+				"2",
+				"1",
+				"1",
+				"4"
+			],
+			[
+				"3",
+				"1",
+				"2",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"3"
+			],
+			[
+				"4",
+				"2",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"2",
+				"1",
+				"1",
+				"4"
+			],
+			[
+				"3",
+				"2",
+				"1",
+				"1",
+				"2",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"2",
+				"3"
+			],
+			[
+				"3",
+				"2",
+				"1",
+				"2",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"1",
+				"4"
+			],
+			[
+				"3",
+				"3",
+				"3",
+				"3",
+				"3",
+				"1",
+				"0",
+				"1",
+				"3",
+				"3",
+				"3",
+				"3"
+			],
+			[
+				"3",
+				"3",
+				"3",
+				"3",
+				"3",
+				"1",
+				"1",
+				"1",
+				"3",
+				"3",
+				"3",
+				"3"
+			]
+		],
+		"utilities": [
+			[
+				"s",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				"sub:map",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				"wp:90",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				"",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				"t",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			]
+		]
 	}
-  },
-  "lighting": {
-	"ambient_color": [0.1,0.1,0.2],
-	"ambient_energy": 0.8,
-	"directional_light": {
-	  "color": [1.0,0.9,0.8],
-	  "direction": [-0.4,-0.7,-0.4],
-	  "enabled": true,
-	  "energy": 1.2
-	}
-  },
-  "settings": {
-	"auto_reveal_on_entry": false,
-	"background": {
-	  "color": [0.05,0.05,0.1],
-	  "type": "sky"
-	},
-	"cube_size": 1.0,
-	"enable_physics": true,
-	"gutter": 0.0,
-	"initial_tile_visibility": "hidden_except_corners",
-	"show_grid": true
-  },
-  "layers": {
-	"interactables": [
-	  ["BigPipeSystem:0:-0.5"," "," "," "," "," "," "," "," "," "," "," "],
-	  [" ","pick_up_cube","AudioContr:-90#preset:basic_mono"," ","pick_up_cube"," "," "," "," ","pick_up_cube","GlassRack#config:simple_tube"," "],
-	  [" ","pick_up_cube","AudioContr:-90#config:mario_rack"," ","RackSineBasic:0:1"," "," "," "," ","cable_builder","VRAudioMonitor"," "],
-	  [" "," "," "," "," "," ","pick_up_cube","pick_up_cube","pick_up_cube","dark_sphere"," "," "],
-	  [" "," "," ","DualBallFMController","Rack303Acid:0:1"," ","RackMoogBass:0:1","RackDX7Piano:0:1","AudioContr:-90#config:heartbeat_rack","audio_catalog_tablet:90","AudioContr#config:slider_rack"," "],
-	  [" "," "," "," "," ","wave_interference_3d:0:-0.5"," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "," "," "," "," "," "],
-	  [" "," ","harmonic_distance_table"," ","chord_tension_spring"," "," "," ","timbre_sculptor"," "," "," "],
-	  [" "," ","GlassRack:0:0.7#config:distillation_rack"," "," "," "," "," "," "," "," "," "],
-	  [" ","MarioSoundController#mode:techno_kick"," "," "," "," "," "," ","mario_test_sound_ui"," "," "," "],
-	  [" ","MarioSoundController#mode:laser_zap"," "," ","MelodyChaser3D:90:0.4#scale:fifths_circle#tempo:60"," "," "," "," "," ","interactable_demo"," "],
-	  [" ","MarioSoundController#mode:sine_bell"," ","lab_table"," "," "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "," "," "," "," "," "]
-	],
-	"structure": [
-	  ["1","1","3","3","3","3","3","3","3","3","3","3"],
-	  ["1","1","2","1","2","1","1","1","1","1","2","3"],
-	  ["1","1","1","1","2","1","1","1","1","1","2","3"],
-	  ["1","1","1","1","1","1","1","1","2","2","1","3"],
-	  ["1","1","1","2","2","1","2","2","2","2","2","3"],
-	  ["4","1","1","1","1","1","1","1","1","1","1","1"],
-	  ["3","1","1","1","1","1","1","1","1","1","1","3"],
-	  ["4","1","2","1","2","1","1","1","2","1","1","4"],
-	  ["3","1","2","1","1","1","1","1","1","1","1","3"],
-	  ["4","2","1","1","1","1","1","1","2","1","1","4"],
-	  ["3","2","1","1","2","1","1","1","1","1","2","3"],
-	  ["3","2","1","2","1","1","1","1","1","1","1","4"],
-	  ["3","3","3","3","3","1","0","1","3","3","3","3"],
-	  ["3","3","3","3","3","1","1","1","3","3","3","3"]
-	],
-	"utilities": [
-	  ["s"," "," "," "," "," "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "," "," "," "," "," "],
-	  [" "," ","sub:map"," "," "," "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "," "," "," "," "," "],
-	  [" "," "," ","wp:90"," "," "," "," "," "," "," "," "],
-	  [" "," "," ",""," "," "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "," "," "," "," "," "],
-	  [" "," "," "," "," "," ","t"," "," "," "," "," "],
-	  [" "," "," "," "," "," "," "," "," "," "," "," "]
-	]
-  }
 }

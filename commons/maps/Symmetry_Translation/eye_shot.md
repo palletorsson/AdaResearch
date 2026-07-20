@@ -4,13 +4,13 @@
 
 ## The ride (before)
 clearance violations: **0 overlaps, 1 tight** — the law wants ≥1.2m to walk between.
-- `[tight  ] pattern_loom               <-> science_screen             gap +0.28m (centers 2.35m)`
+- `[tight  ] pattern_loom               <-> pattern_tile_puzzle        gap +0.13m (centers 1.05m)`
 
 ## The move
     logged 1 entries to ada_run\placement_log.json
     summary: 1 maps processed
-      constraint improved: 1/1  mean Δ=+0.049
-      walkability improved: 1/1  mean Δ=+0.036
+      constraint improved: 0/1  mean Δ=+0.000
+      walkability improved: 1/1  mean Δ=+0.068
 
 no sibling kept — the move did not beat the ride (overlaps 0→0, tight 1→1). Note-only.
 
@@ -23,7 +23,7 @@ no sibling kept — the move did not beat the ride (overlaps 0→0, tight 1→1)
 
 ## The text vs the space
 walked.md exists — the writing names 3/4 of the cast; dwells declared for 0.
-- **the writing's subjects are blocked in space**: pattern_loom sit in clearance violations — the text promises what the floor obstructs.
+- **the writing's subjects are blocked in space**: pattern_loom, pattern_tile_puzzle sit in clearance violations — the text promises what the floor obstructs.
 - space without text: science_screen — standing in the room, absent from the walk.
 
 ## The heuristic understanding
