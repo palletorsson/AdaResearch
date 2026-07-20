@@ -368,7 +368,15 @@ func _stage_cell(col: int, row: int, cell: Dictionary) -> void:
 	var kid: int = BiomeGridTokensScript.dispatch_kingdom_of(cell)
 	if kid < 0:
 		_marker_only += 1
-		_spawn_marker(col, row, cell)
+		# mineral / water / meta have no dispatcher substrate — but they are
+		# not nothing. Give them a real procedural specimen (crystal / pool /
+		# glyph) instead of a solid pilot cube. Few per map (seeds), so direct
+		# spawn is fine; unknown kingdoms keep the box.
+		var kingdom: String = String(cell["kingdom"])
+		if kingdom in ["mineral", "water", "meta"]:
+			_spawn_specimen(col, row, cell, kingdom)
+		else:
+			_spawn_marker(col, row, cell)
 		return
 	_routed += 1
 	var step: float = _cube_size + _gutter
@@ -463,12 +471,13 @@ func _spawn_halo_band(col: int, row: int, cell: Dictionary, dir: Vector3,
 				pos = Vector3(center.x + along, surf_y, center.z + dir.z * outward)
 			var xf: Transform3D = Transform3D.IDENTITY
 			xf = xf.rotated(Vector3.UP, rng.randf_range(0.0, TAU))
-			var sc: float = rng.randf_range(0.6, 1.2)
+			var sc: float = rng.randf_range(0.7, 1.4)  # wider spread = varied heights
 			xf = xf.scaled(Vector3(sc, sc, sc))
-			xf.origin = pos
+			# base sits ON the ground: lift by the recipe's own half-height
+			xf.origin = pos + Vector3(0.0, float(recipe.get("y_off", 0.0)) * sc, 0.0)
 			_batch_add("cover:%s:%s" % [kingdom, String(recipe["name"])], recipe["mesh"], {
 				"albedo": recipe["color"], "cull_off": true,
-				"emission": (recipe["color"] as Color) * 0.25,
+				"emission": (recipe["color"] as Color) * float(recipe.get("emission_mul", 0.25)),
 			}, xf)
 			added += 1
 		_halo_instances += added
@@ -487,48 +496,80 @@ func _halo_recipes(kingdom: String) -> Array:
 
 
 func _build_halo_recipes(kingdom: String) -> Array:
+	# Each recipe is ONE self-contained mesh (batched scatter can't assemble
+	# multi-part objects); y_off lifts its base onto the ground; emission_mul
+	# overrides glow. Meshes stand at varied heights, not a uniform carpet.
 	match kingdom:
 		"flora":
-			var grass: QuadMesh = QuadMesh.new()
-			grass.size = Vector2(0.12, 0.4)
-			grass.center_offset = Vector3(0, 0.2, 0)
+			# a tapered blade (tall triangle) + a bright bloom on a point
+			var blade: PrismMesh = PrismMesh.new()
+			blade.size = Vector3(0.07, 0.45, 0.02)
 			var bloom: SphereMesh = SphereMesh.new()
-			bloom.radius = 0.06
-			bloom.height = 0.12
+			bloom.radius = 0.055
+			bloom.height = 0.11
 			bloom.radial_segments = 6
 			bloom.rings = 3
 			return [
-				{"name": "grass", "mesh": grass, "color": Color(0.25, 0.45, 0.15), "fraction": 0.8},
-				{"name": "bloom", "mesh": bloom, "color": Color(0.85, 0.5, 0.4), "fraction": 0.2},
+				{"name": "blade", "mesh": blade, "color": Color(0.3, 0.55, 0.2), "fraction": 0.75, "y_off": 0.225},
+				{"name": "bloom", "mesh": bloom, "color": Color(0.95, 0.6, 0.5), "fraction": 0.25, "y_off": 0.16, "emission_mul": 0.45},
 			]
 		"fungus":
-			var cap: CylinderMesh = CylinderMesh.new()
-			cap.top_radius = 0.15
-			cap.bottom_radius = 0.03
-			cap.height = 0.18
-			cap.radial_segments = 6
-			return [{"name": "mushroom", "mesh": cap, "color": Color(0.5, 0.35, 0.55), "fraction": 1.0}]
+			# a low dome cap + a taller toadstool cone, both grounded
+			var dome: SphereMesh = SphereMesh.new()
+			dome.radius = 0.11
+			dome.height = 0.14
+			dome.radial_segments = 8
+			dome.rings = 4
+			var stalk: CylinderMesh = CylinderMesh.new()
+			stalk.top_radius = 0.13
+			stalk.bottom_radius = 0.02
+			stalk.height = 0.24
+			stalk.radial_segments = 7
+			return [
+				{"name": "cap", "mesh": dome, "color": Color(0.55, 0.38, 0.62), "fraction": 0.6, "y_off": 0.03, "emission_mul": 0.35},
+				{"name": "toadstool", "mesh": stalk, "color": Color(0.7, 0.32, 0.42), "fraction": 0.4, "y_off": 0.12, "emission_mul": 0.3},
+			]
 		"fauna":
-			var body: CapsuleMesh = CapsuleMesh.new()
-			body.radius = 0.12
-			body.height = 0.35
-			return [{"name": "silhouette", "mesh": body, "color": Color(0.6, 0.4, 0.2), "fraction": 1.0}]
+			# earthy burrow mounds + low track-pebbles — NOT floating orange pills
+			var mound: SphereMesh = SphereMesh.new()
+			mound.radius = 0.1
+			mound.height = 0.09
+			mound.radial_segments = 8
+			mound.rings = 3
+			var pebble: BoxMesh = BoxMesh.new()
+			pebble.size = Vector3(0.06, 0.03, 0.09)
+			return [
+				{"name": "mound", "mesh": mound, "color": Color(0.34, 0.25, 0.17), "fraction": 0.55, "y_off": 0.0},
+				{"name": "track", "mesh": pebble, "color": Color(0.26, 0.2, 0.15), "fraction": 0.45, "y_off": 0.015},
+			]
 		"mineral":
-			var stone: BoxMesh = BoxMesh.new()
-			stone.size = Vector3(0.18, 0.12, 0.15)
-			return [{"name": "stone", "mesh": stone, "color": Color(0.5, 0.5, 0.55), "fraction": 1.0}]
+			# angular shards fanning up — faceted, not a rounded box
+			var shard: PrismMesh = PrismMesh.new()
+			shard.size = Vector3(0.1, 0.26, 0.1)
+			return [{"name": "shard", "mesh": shard, "color": Color(0.6, 0.66, 0.82), "fraction": 1.0, "y_off": 0.13, "emission_mul": 0.4}]
 		"water":
+			# slender reeds + flat lily discs on the surface
 			var reed: CylinderMesh = CylinderMesh.new()
-			reed.top_radius = 0.008
-			reed.bottom_radius = 0.015
-			reed.height = 0.7
-			reed.radial_segments = 3
-			return [{"name": "reed", "mesh": reed, "color": Color(0.3, 0.45, 0.4), "fraction": 1.0}]
+			reed.top_radius = 0.007
+			reed.bottom_radius = 0.014
+			reed.height = 0.6
+			reed.radial_segments = 4
+			var lily: CylinderMesh = CylinderMesh.new()
+			lily.top_radius = 0.09
+			lily.bottom_radius = 0.09
+			lily.height = 0.015
+			return [
+				{"name": "reed", "mesh": reed, "color": Color(0.32, 0.5, 0.42), "fraction": 0.6, "y_off": 0.3},
+				{"name": "lily", "mesh": lily, "color": Color(0.24, 0.42, 0.32), "fraction": 0.4, "y_off": 0.01},
+			]
 		"meta":
-			var glyph: QuadMesh = QuadMesh.new()
-			glyph.size = Vector2(0.1, 0.1)
-			glyph.center_offset = Vector3(0, 0.15, 0)
-			return [{"name": "glyph", "mesh": glyph, "color": Color(0.9, 0.9, 0.95), "fraction": 1.0}]
+			# floating emissive motes — small glowing points hovering in the ring
+			var mote: SphereMesh = SphereMesh.new()
+			mote.radius = 0.05
+			mote.height = 0.1
+			mote.radial_segments = 8
+			mote.rings = 4
+			return [{"name": "mote", "mesh": mote, "color": Color(0.7, 0.9, 1.0), "fraction": 1.0, "y_off": 0.3, "emission_mul": 2.2}]
 		_:
 			var tuft: QuadMesh = QuadMesh.new()
 			tuft.size = Vector2(0.12, 0.3)
@@ -539,6 +580,136 @@ func _build_halo_recipes(kingdom: String) -> Array:
 # ── pilot rendering: one small kingdom-tinted marker per active cell.
 #    Batched map-wide per kingdom (biome-6); a runtime claim arriving after
 #    the flush (react → claim) spawns direct — few, and honestly counted. ──
+
+# ── biome-visual (2026-07-19): real specimens for the substrate-less kingdoms.
+#    mineral = a faceted crystal cluster; water = a still reflective pool with
+#    ripple rings and reeds; meta = a hovering emissive glyph. Tier scales size.
+#    Deterministic RNG per cell so the look is stable across runs. ──
+
+func _spawn_specimen(col: int, row: int, cell: Dictionary, kingdom: String) -> void:
+	var step: float = _cube_size + _gutter
+	var surf_y: float = _cell_height(col, row) * _cube_size
+	var base: Vector3 = Vector3(col * step, surf_y, row * step)
+	var tier: int = BiomeGridTokensScript.tier_of(cell)
+	var scale: float = 0.5 + 0.12 * float(tier)
+	var rng: RandomNumberGenerator = RandomNumberGenerator.new()
+	rng.seed = hash("specimen:%s:%d,%d" % [kingdom, col, row])
+	var holder: Node3D = Node3D.new()
+	holder.name = "BiomeSpecimen_%s_%d_%d" % [kingdom, col, row]
+	holder.position = base
+	add_child(holder)
+	match kingdom:
+		"mineral":
+			_build_crystal(holder, scale, rng)
+		"water":
+			_build_pool(holder, scale, rng)
+		"meta":
+			_build_glyph(holder, scale, rng)
+
+
+func _build_crystal(holder: Node3D, scale: float, rng: RandomNumberGenerator) -> void:
+	# a cluster of elongated faceted prisms fanning up from a common base
+	var shards: int = rng.randi_range(4, 6)
+	for _i in range(shards):
+		var mi := MeshInstance3D.new()
+		var pm := PrismMesh.new()
+		var hgt: float = rng.randf_range(0.18, 0.42) * scale
+		pm.size = Vector3(0.09 * scale, hgt, 0.09 * scale)
+		mi.mesh = pm
+		var tint: float = rng.randf_range(-0.04, 0.14)
+		var col := Color(0.58 + tint, 0.66 + tint, 0.86 + tint * 0.4)
+		var mat := StandardMaterial3D.new()
+		mat.albedo_color = col
+		mat.metallic = 0.4
+		mat.roughness = 0.22
+		mat.emission_enabled = true
+		mat.emission = col * 0.5
+		mi.material_override = mat
+		var off: Vector2 = Vector2(rng.randf_range(-0.09, 0.09), rng.randf_range(-0.09, 0.09)) * scale
+		mi.position = Vector3(off.x, hgt * 0.5, off.y)
+		mi.rotation = Vector3(rng.randf_range(-0.35, 0.35), rng.randf_range(0.0, TAU), rng.randf_range(-0.35, 0.35))
+		holder.add_child(mi)
+
+
+func _build_pool(holder: Node3D, scale: float, rng: RandomNumberGenerator) -> void:
+	# a still reflective disc + two ripple rings, a few reeds at the rim
+	var disc := MeshInstance3D.new()
+	var cm := CylinderMesh.new()
+	var r: float = 0.34 * scale
+	cm.top_radius = r
+	cm.bottom_radius = r
+	cm.height = 0.02
+	disc.mesh = cm
+	var wmat := StandardMaterial3D.new()
+	wmat.albedo_color = Color(0.16, 0.34, 0.62, 0.8)
+	wmat.metallic = 0.7
+	wmat.roughness = 0.08
+	wmat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	wmat.emission_enabled = true
+	wmat.emission = Color(0.1, 0.3, 0.5) * 0.25
+	disc.material_override = wmat
+	disc.position = Vector3(0.0, 0.02, 0.0)
+	holder.add_child(disc)
+	for k in range(2):
+		var ring := MeshInstance3D.new()
+		var tm := TorusMesh.new()
+		tm.inner_radius = r * (0.4 + 0.28 * float(k))
+		tm.outer_radius = r * (0.46 + 0.28 * float(k))
+		ring.mesh = tm
+		var rmat := StandardMaterial3D.new()
+		rmat.albedo_color = Color(0.5, 0.75, 0.9, 0.5)
+		rmat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+		rmat.emission_enabled = true
+		rmat.emission = Color(0.4, 0.7, 0.95) * 0.4
+		ring.material_override = rmat
+		ring.position = Vector3(0.0, 0.03, 0.0)
+		holder.add_child(ring)
+	var reeds: int = rng.randi_range(2, 4)
+	for _i in range(reeds):
+		var reed := MeshInstance3D.new()
+		var rc := CylinderMesh.new()
+		rc.top_radius = 0.008 * scale
+		rc.bottom_radius = 0.014 * scale
+		var rh: float = rng.randf_range(0.25, 0.5) * scale
+		rc.height = rh
+		reed.mesh = rc
+		var remat := StandardMaterial3D.new()
+		remat.albedo_color = Color(0.3, 0.5, 0.42)
+		reed.material_override = remat
+		var a: float = rng.randf_range(0.0, TAU)
+		reed.position = Vector3(cos(a) * r * 0.85, rh * 0.5, sin(a) * r * 0.85)
+		holder.add_child(reed)
+
+
+func _build_glyph(holder: Node3D, scale: float, rng: RandomNumberGenerator) -> void:
+	# a hovering emissive rune: a ring with two crossing strokes, unshaded glow
+	var hover: float = 0.4 * scale
+	var glow := Color(0.7, 0.92, 1.0)
+	var ring := MeshInstance3D.new()
+	var tm := TorusMesh.new()
+	tm.inner_radius = 0.12 * scale
+	tm.outer_radius = 0.16 * scale
+	ring.mesh = tm
+	var gmat := StandardMaterial3D.new()
+	gmat.albedo_color = glow
+	gmat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	gmat.emission_enabled = true
+	gmat.emission = glow
+	gmat.emission_energy_multiplier = 2.0
+	ring.material_override = gmat
+	ring.rotation = Vector3(PI * 0.5, 0.0, 0.0)
+	ring.position = Vector3(0.0, hover, 0.0)
+	holder.add_child(ring)
+	for j in range(2):
+		var stroke := MeshInstance3D.new()
+		var bm := BoxMesh.new()
+		bm.size = Vector3(0.025 * scale, 0.26 * scale, 0.025 * scale)
+		stroke.mesh = bm
+		stroke.material_override = gmat
+		stroke.position = Vector3(0.0, hover, 0.0)
+		stroke.rotation = Vector3(0.0, 0.0, PI * (0.25 + 0.5 * float(j)))
+		holder.add_child(stroke)
+
 
 func _spawn_marker(col: int, row: int, cell: Dictionary) -> void:
 	var d: float = BiomeGridTokensScript.density_of(cell)
