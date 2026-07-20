@@ -814,157 +814,207 @@ func _create_vr_controls() -> void:
 			{"type": "button", "label": "SPEED"},
 		],
 	])
-	_control_panel.position = Vector3(0, -0.06, board_depth / 2.0 + 0.15)
-	_control_panel.rotation_degrees = Vector3(-30, 0, 0)
+	# ALL-IN-ONE BODY (Palle 2026-07-20, Cyber District refs): the pad mounts
+	# INTO the cabinet's service column — a recessed pocket on the appliance
+	# face, not a floating stand in front.
+	_control_panel.position = Vector3(board_width / 2.0 + 0.115, 0.30, board_depth / 2.0 + 0.075)
+	_control_panel.rotation_degrees = Vector3(-15, 0, 0)
 	add_child(_control_panel)
-	_create_kiosk()
-
-
-## The info kiosk — the 2026-07-20 interface ruling made body: the running
-## census (n / mean / std / theory) and the button pad become ONE housed
-## terminal at the board's front, sci-fi street-kiosk grammar (dark metal
-## housing, recessed bezel screen, stencil header, ember accent stripe —
-## the station family's terminal finish). The button pad keeps its exact
-## VR position; the kiosk builds the body AROUND it and raises the screen
-## above, so nothing floats.
-func _create_kiosk() -> void:
-	var kiosk := Node3D.new()
-	kiosk.name = "InfoKiosk"
-	var panel_z: float = board_depth / 2.0 + 0.15
-	kiosk.position = Vector3(0.0, 0.0, panel_z)
-	add_child(kiosk)
-
-	var metal := StandardMaterial3D.new()
-	metal.albedo_color = Color(0.10, 0.11, 0.14)
-	metal.roughness = 0.55
-	metal.metallic = 0.35
-	var bezel_mat := StandardMaterial3D.new()
-	bezel_mat.albedo_color = Color(0.055, 0.06, 0.075)
-	bezel_mat.roughness = 0.4
-	bezel_mat.metallic = 0.5
-	var glass_mat := StandardMaterial3D.new()
-	glass_mat.albedo_color = Color(0.04, 0.05, 0.08)
-	glass_mat.roughness = 0.15
-	glass_mat.metallic = 0.1
-	glass_mat.emission_enabled = true
-	glass_mat.emission = Color(0.05, 0.08, 0.12)
-	glass_mat.emission_energy_multiplier = 0.6
-	var accent_mat := StandardMaterial3D.new()
-	accent_mat.albedo_color = Color(0.86, 0.30, 0.10)
-	accent_mat.emission_enabled = true
-	accent_mat.emission = Color(0.86, 0.30, 0.10)
-	accent_mat.emission_energy_multiplier = 2.2
-
-	# Slim head: the census must never upstage the bins — the board's payoff
-	# stays visible past the kiosk's shoulders, and the full 2x2 button pad
-	# clears the screen's lower housing edge.
-	var kw: float = 0.30            # kiosk width
-	var pedestal_h: float = 0.14    # column under the button pad
-	var screen_w: float = kw - 0.05
-	var screen_h: float = 0.22
-	var screen_base_y: float = 0.15 # bottom of screen housing (above the pad)
-	var tilt := deg_to_rad(-12.0)
-
-	# ── pedestal: the column the button pad rests on ──
-	var pedestal := MeshInstance3D.new()
-	var ped_mesh := BoxMesh.new()
-	ped_mesh.size = Vector3(kw, pedestal_h, 0.16)
-	pedestal.mesh = ped_mesh
-	pedestal.material_override = metal
-	pedestal.position = Vector3(0.0, -0.06 - pedestal_h * 0.5 - 0.02, 0.0)
-	kiosk.add_child(pedestal)
-
-	# ── spine: connects pedestal to the screen head, hides the gap ──
-	var spine := MeshInstance3D.new()
-	var spine_mesh := BoxMesh.new()
-	spine_mesh.size = Vector3(kw * 0.55, screen_base_y + 0.20, 0.05)
-	spine.mesh = spine_mesh
-	spine.material_override = metal
-	spine.position = Vector3(0.0, -0.02 + (screen_base_y + 0.20) * 0.5 - 0.10, -0.055)
-	kiosk.add_child(spine)
-
-	# ── screen head: housing + bezel + glass, tilted like the pad ──
-	var head := Node3D.new()
-	head.name = "ScreenHead"
-	head.position = Vector3(0.0, screen_base_y + screen_h * 0.5, -0.03)
-	head.rotation.x = tilt
-	kiosk.add_child(head)
-
-	var housing := MeshInstance3D.new()
-	var housing_mesh := BoxMesh.new()
-	housing_mesh.size = Vector3(kw, screen_h + 0.07, 0.045)
-	housing.mesh = housing_mesh
-	housing.material_override = metal
-	housing.position = Vector3(0.0, 0.0, -0.012)
-	head.add_child(housing)
-
-	var bezel := MeshInstance3D.new()
-	var bezel_mesh := BoxMesh.new()
-	bezel_mesh.size = Vector3(screen_w + 0.02, screen_h + 0.02, 0.018)
-	bezel.mesh = bezel_mesh
-	bezel.material_override = bezel_mat
-	bezel.position = Vector3(0.0, -0.008, 0.008)
-	head.add_child(bezel)
-
-	var glass := MeshInstance3D.new()
-	var glass_mesh := BoxMesh.new()
-	glass_mesh.size = Vector3(screen_w, screen_h, 0.006)
-	glass.mesh = glass_mesh
-	glass.material_override = glass_mat
-	glass.position = Vector3(0.0, -0.008, 0.016)
-	head.add_child(glass)
-
-	# ── header: stencil title + ember accent stripe (terminal finish) ──
-	var header_tag: Node3D = BakedText.make_tag(
-		"CENSUS", Color(0.92, 0.93, 0.97), 0.028,
-		Color(0.055, 0.06, 0.075), true, Color(0.86, 0.30, 0.10))
-	if header_tag:
-		header_tag.name = "KioskHeader"
-		header_tag.position = Vector3(0.0, screen_h * 0.5 + 0.018, 0.024)
-		head.add_child(header_tag)
-	var stripe := MeshInstance3D.new()
-	var stripe_mesh := BoxMesh.new()
-	stripe_mesh.size = Vector3(screen_w + 0.02, 0.006, 0.004)
-	stripe.mesh = stripe_mesh
-	stripe.material_override = accent_mat
-	stripe.position = Vector3(0.0, screen_h * 0.5 - 0.002, 0.022)
-	head.add_child(stripe)
-
-	# ── the stats mount point, just in front of the glass ──
-	var screen_anchor := Node3D.new()
-	screen_anchor.name = "StatsScreen"
-	screen_anchor.position = Vector3(0.0, -0.02, 0.022)
-	head.add_child(screen_anchor)
-	_kiosk_screen = screen_anchor
-	# re-home an already-built stats stack onto the screen
-	if _stats_tag != null and is_instance_valid(_stats_tag):
-		var txt := _stats_last_text
-		_stats_last_text = ""
-		_refresh_stats_tag(txt)
+	_create_cabinet()
 
 	var drop_btn: Node = _control_panel.find_child("Btn_0", true, false)
 	if drop_btn:
-		var area: Node = drop_btn.get_node_or_null("InteractableAreaButton")
-		if area:
-			area.button_pressed.connect(func(_b): _spawn_ball())
-
+		var area1: Node = drop_btn.get_node_or_null("InteractableAreaButton")
+		if area1:
+			area1.button_pressed.connect(func(_b): _spawn_ball())
 	var auto_btn: Node = _control_panel.find_child("Btn_1", true, false)
 	if auto_btn:
 		var area2: Node = auto_btn.get_node_or_null("InteractableAreaButton")
 		if area2:
 			area2.button_pressed.connect(func(_b): auto_drop = not auto_drop)
-
 	var reset_btn: Node = _control_panel.find_child("Btn_2", true, false)
 	if reset_btn:
 		var area3: Node = reset_btn.get_node_or_null("InteractableAreaButton")
 		if area3:
 			area3.button_pressed.connect(func(_b): _reset_board())
-
 	var speed_btn: Node = _control_panel.find_child("Btn_3", true, false)
 	if speed_btn:
 		var area4: Node = speed_btn.get_node_or_null("InteractableAreaButton")
 		if area4:
 			area4.button_pressed.connect(func(_b): _cycle_speed())
+
+
+## THE CABINET — the artifact as ONE appliance (the 2026-07-20 interface
+## ruling, KitBash3D Cyber District grammar): the pin field is the poster
+## window of a vending-machine body. Light two-tone steel shell, a maroon
+## service flank, a right-hand service column carrying the inset CENSUS
+## screen + the recessed keypad pocket + a ribbed vent grille, a header cap
+## wearing the board's name, a base plinth on feet, ember accent stripes.
+## Nothing floats; every interface element is a face of the same volume.
+func _create_cabinet() -> void:
+	var bw: float = board_width
+	var hh: float = board_height + bin_height          # window top
+	var bd: float = board_depth
+	var cw: float = 0.23                               # service column width
+	var colx: float = bw / 2.0 + cw / 2.0              # column centre x
+	var face_z: float = bd / 2.0 + 0.055               # column face plane
+
+	var cab := Node3D.new()
+	cab.name = "Cabinet"
+	add_child(cab)
+
+	var shell := StandardMaterial3D.new()
+	shell.albedo_color = Color(0.58, 0.60, 0.63)
+	shell.roughness = 0.5
+	shell.metallic = 0.25
+	var dark := StandardMaterial3D.new()
+	dark.albedo_color = Color(0.07, 0.075, 0.09)
+	dark.roughness = 0.45
+	dark.metallic = 0.4
+	var maroon := StandardMaterial3D.new()
+	maroon.albedo_color = Color(0.30, 0.11, 0.09)
+	maroon.roughness = 0.55
+	maroon.metallic = 0.2
+	var glass_mat := StandardMaterial3D.new()
+	glass_mat.albedo_color = Color(0.04, 0.05, 0.08)
+	glass_mat.roughness = 0.15
+	glass_mat.emission_enabled = true
+	glass_mat.emission = Color(0.05, 0.08, 0.12)
+	glass_mat.emission_energy_multiplier = 0.6
+	var accent := StandardMaterial3D.new()
+	accent.albedo_color = Color(0.86, 0.30, 0.10)
+	accent.emission_enabled = true
+	accent.emission = Color(0.86, 0.30, 0.10)
+	accent.emission_energy_multiplier = 2.2
+
+	var total_w: float = bw + cw + 0.10                # left jamb 0.10
+	var cx: float = (bw / 2.0 + cw) - (total_w / 2.0)  # cabinet centre offset
+
+	# back slab — one plate behind everything
+	var back := MeshInstance3D.new()
+	var back_mesh := BoxMesh.new()
+	back_mesh.size = Vector3(total_w, hh + 0.02, 0.05)
+	back.mesh = back_mesh
+	back.material_override = shell
+	back.position = Vector3(cx, hh / 2.0, -bd / 2.0 - 0.028)
+	cab.add_child(back)
+
+	# left flank — the maroon service side (ref 1's redwood panel)
+	var flank := MeshInstance3D.new()
+	var flank_mesh := BoxMesh.new()
+	flank_mesh.size = Vector3(0.10, hh + 0.02, bd + 0.11)
+	flank.mesh = flank_mesh
+	flank.material_override = maroon
+	flank.position = Vector3(-bw / 2.0 - 0.05, hh / 2.0, -0.01)
+	cab.add_child(flank)
+
+	# right service column — the appliance's interface face
+	var col := MeshInstance3D.new()
+	var col_mesh := BoxMesh.new()
+	col_mesh.size = Vector3(cw, hh + 0.02, bd + 0.11)
+	col.mesh = col_mesh
+	col.material_override = shell
+	col.position = Vector3(colx, hh / 2.0, -0.01)
+	cab.add_child(col)
+
+	# inset CENSUS screen (upper column)
+	var scr_w: float = cw - 0.05
+	var scr_h: float = 0.26
+	var scr_y: float = hh * 0.70
+	var pocket := MeshInstance3D.new()
+	var pocket_mesh := BoxMesh.new()
+	pocket_mesh.size = Vector3(scr_w + 0.02, scr_h + 0.045, 0.015)
+	pocket.mesh = pocket_mesh
+	pocket.material_override = dark
+	pocket.position = Vector3(colx, scr_y, face_z + 0.002)
+	cab.add_child(pocket)
+	var glass := MeshInstance3D.new()
+	var glass_mesh := BoxMesh.new()
+	glass_mesh.size = Vector3(scr_w, scr_h, 0.006)
+	glass.mesh = glass_mesh
+	glass.material_override = glass_mat
+	glass.position = Vector3(colx, scr_y - 0.008, face_z + 0.010)
+	cab.add_child(glass)
+	var head_tag: Node3D = BakedText.make_tag(
+		"CENSUS", Color(0.92, 0.93, 0.97), 0.020,
+		Color(0.055, 0.06, 0.075), true, Color(0.86, 0.30, 0.10))
+	if head_tag:
+		head_tag.position = Vector3(colx, scr_y + scr_h / 2.0 + 0.010, face_z + 0.014)
+		cab.add_child(head_tag)
+	var stripe := MeshInstance3D.new()
+	var stripe_mesh := BoxMesh.new()
+	stripe_mesh.size = Vector3(scr_w + 0.02, 0.005, 0.004)
+	stripe.mesh = stripe_mesh
+	stripe.material_override = accent
+	stripe.position = Vector3(colx, scr_y + scr_h / 2.0 - 0.002, face_z + 0.012)
+	cab.add_child(stripe)
+	var anchor := Node3D.new()
+	anchor.name = "StatsScreen"
+	anchor.position = Vector3(colx, scr_y - 0.012, face_z + 0.014)
+	cab.add_child(anchor)
+	_kiosk_screen = anchor
+	if _stats_tag != null and is_instance_valid(_stats_tag):
+		var txt := _stats_last_text
+		_stats_last_text = ""
+		_refresh_stats_tag(txt)
+
+	# keypad pocket (mid column) — the pad sits recessed in the face
+	var pad_pocket := MeshInstance3D.new()
+	var pad_pocket_mesh := BoxMesh.new()
+	pad_pocket_mesh.size = Vector3(cw - 0.04, 0.17, 0.03)
+	pad_pocket.mesh = pad_pocket_mesh
+	pad_pocket.material_override = dark
+	pad_pocket.position = Vector3(colx, 0.30, face_z - 0.006)
+	cab.add_child(pad_pocket)
+
+	# vent grille (lower column) — ribbed slats
+	for gi in range(6):
+		var slat := MeshInstance3D.new()
+		var slat_mesh := BoxMesh.new()
+		slat_mesh.size = Vector3(cw - 0.06, 0.010, 0.012)
+		slat.mesh = slat_mesh
+		slat.material_override = dark
+		slat.position = Vector3(colx, 0.055 + float(gi) * 0.022, face_z + 0.002)
+		cab.add_child(slat)
+
+	# header cap — the appliance wears its name
+	var cap := MeshInstance3D.new()
+	var cap_mesh := BoxMesh.new()
+	cap_mesh.size = Vector3(total_w, 0.11, bd + 0.13)
+	cap.mesh = cap_mesh
+	cap.material_override = shell
+	cap.position = Vector3(cx, hh + 0.055, -0.005)
+	cab.add_child(cap)
+	var cap_stripe := MeshInstance3D.new()
+	var cap_stripe_mesh := BoxMesh.new()
+	cap_stripe_mesh.size = Vector3(total_w, 0.006, 0.004)
+	cap_stripe.mesh = cap_stripe_mesh
+	cap_stripe.material_override = accent
+	cap_stripe.position = Vector3(cx, hh + 0.004, bd / 2.0 + 0.062)
+	cab.add_child(cap_stripe)
+	# re-seat the board's name tags onto the cap face
+	if _title_tag != null and is_instance_valid(_title_tag):
+		_title_tag.position = Vector3(cx, hh + 0.068, bd / 2.0 + 0.068)
+	var sub: Node = get_node_or_null("SubtitleTag")
+	if sub is Node3D:
+		(sub as Node3D).position = Vector3(cx, hh + 0.030, bd / 2.0 + 0.068)
+
+	# base plinth + feet
+	var plinth := MeshInstance3D.new()
+	var plinth_mesh := BoxMesh.new()
+	plinth_mesh.size = Vector3(total_w, 0.10, bd + 0.15)
+	plinth.mesh = plinth_mesh
+	plinth.material_override = dark
+	plinth.position = Vector3(cx, -0.052, 0.005)
+	cab.add_child(plinth)
+	for fx in [-total_w / 2.0 + 0.07, total_w / 2.0 - 0.07]:
+		var foot := MeshInstance3D.new()
+		var foot_mesh := BoxMesh.new()
+		foot_mesh.size = Vector3(0.09, 0.035, bd + 0.10)
+		foot.mesh = foot_mesh
+		foot.material_override = dark
+		foot.position = Vector3(cx + fx, -0.118, 0.0)
+		cab.add_child(foot)
 
 
 func _cycle_speed() -> void:
