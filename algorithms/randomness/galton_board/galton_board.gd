@@ -71,6 +71,10 @@ var _ball_bin_assigned: Dictionary = {}  # ball instance_id → bin_index
 var _stats_tag: Node3D
 var _stats_tag_pos: Vector3 = Vector3.ZERO
 var _stats_last_text: String = ""
+# The info kiosk (2026-07-20 ruling): readout + buttons live in ONE housed
+# interface body — no floating stat plates. When the kiosk exists, the stats
+# lines mount on its screen; _stats_tag_pos is only the legacy fallback.
+var _kiosk_screen: Node3D = null
 var _title_tag: Node3D
 var _bell_curve_mesh: MeshInstance3D
 var _control_panel: Node3D
@@ -763,27 +767,35 @@ func _refresh_stats_tag(text: String) -> void:
 		_stats_tag.queue_free()
 		_stats_tag = null
 
+	var on_kiosk: bool = _kiosk_screen != null and is_instance_valid(_kiosk_screen)
 	var lines := text.split("\n")
-	var line_h: float = 0.03
-	var pitch: float = line_h * 1.1
+	var line_h: float = 0.021 if on_kiosk else 0.03
+	var pitch: float = line_h * 1.15
 	var count: int = lines.size()
 	var top: float = (float(count) - 1.0) * 0.5 * pitch
 
 	_stats_tag = Node3D.new()
 	_stats_tag.name = "StatsTag"
-	_stats_tag.position = _stats_tag_pos
 	for i in range(count):
 		var line := str(lines[i]).strip_edges()
 		if line == "":
 			continue
-		# Each non-empty line becomes an integrated board tag (make_tag).
+		# Each non-empty line becomes an integrated board tag (make_tag). On
+		# the kiosk the lines sit INSIDE the recessed screen (no per-line
+		# backing — the glass is the backing); floating fallback keeps the
+		# old framed look for scenes built before the kiosk exists.
 		var line_tag: Node3D = BakedText.make_tag(
-			line, Color(0.8, 0.85, 0.9), line_h,
-			Color(0.08, 0.09, 0.11), true, Color(0, 0, 0, 0))
+			line, Color(0.80, 0.88, 0.95), line_h,
+			Color(0.04, 0.05, 0.08) if on_kiosk else Color(0.08, 0.09, 0.11),
+			not on_kiosk, Color(0, 0, 0, 0))
 		if line_tag:
 			line_tag.position = Vector3(0, top - float(i) * pitch, 0)
 			_stats_tag.add_child(line_tag)
-	add_child(_stats_tag)
+	if on_kiosk:
+		_kiosk_screen.add_child(_stats_tag)
+	else:
+		_stats_tag.position = _stats_tag_pos
+		add_child(_stats_tag)
 
 
 # ═════════════════════════════════════════════════════════════════════════════
@@ -805,6 +817,130 @@ func _create_vr_controls() -> void:
 	_control_panel.position = Vector3(0, -0.06, board_depth / 2.0 + 0.15)
 	_control_panel.rotation_degrees = Vector3(-30, 0, 0)
 	add_child(_control_panel)
+	_create_kiosk()
+
+
+## The info kiosk — the 2026-07-20 interface ruling made body: the running
+## census (n / mean / std / theory) and the button pad become ONE housed
+## terminal at the board's front, sci-fi street-kiosk grammar (dark metal
+## housing, recessed bezel screen, stencil header, ember accent stripe —
+## the station family's terminal finish). The button pad keeps its exact
+## VR position; the kiosk builds the body AROUND it and raises the screen
+## above, so nothing floats.
+func _create_kiosk() -> void:
+	var kiosk := Node3D.new()
+	kiosk.name = "InfoKiosk"
+	var panel_z: float = board_depth / 2.0 + 0.15
+	kiosk.position = Vector3(0.0, 0.0, panel_z)
+	add_child(kiosk)
+
+	var metal := StandardMaterial3D.new()
+	metal.albedo_color = Color(0.10, 0.11, 0.14)
+	metal.roughness = 0.55
+	metal.metallic = 0.35
+	var bezel_mat := StandardMaterial3D.new()
+	bezel_mat.albedo_color = Color(0.055, 0.06, 0.075)
+	bezel_mat.roughness = 0.4
+	bezel_mat.metallic = 0.5
+	var glass_mat := StandardMaterial3D.new()
+	glass_mat.albedo_color = Color(0.04, 0.05, 0.08)
+	glass_mat.roughness = 0.15
+	glass_mat.metallic = 0.1
+	glass_mat.emission_enabled = true
+	glass_mat.emission = Color(0.05, 0.08, 0.12)
+	glass_mat.emission_energy_multiplier = 0.6
+	var accent_mat := StandardMaterial3D.new()
+	accent_mat.albedo_color = Color(0.86, 0.30, 0.10)
+	accent_mat.emission_enabled = true
+	accent_mat.emission = Color(0.86, 0.30, 0.10)
+	accent_mat.emission_energy_multiplier = 2.2
+
+	# Slim head: the census must never upstage the bins — the board's payoff
+	# stays visible past the kiosk's shoulders, and the full 2x2 button pad
+	# clears the screen's lower housing edge.
+	var kw: float = 0.30            # kiosk width
+	var pedestal_h: float = 0.14    # column under the button pad
+	var screen_w: float = kw - 0.05
+	var screen_h: float = 0.22
+	var screen_base_y: float = 0.15 # bottom of screen housing (above the pad)
+	var tilt := deg_to_rad(-12.0)
+
+	# ── pedestal: the column the button pad rests on ──
+	var pedestal := MeshInstance3D.new()
+	var ped_mesh := BoxMesh.new()
+	ped_mesh.size = Vector3(kw, pedestal_h, 0.16)
+	pedestal.mesh = ped_mesh
+	pedestal.material_override = metal
+	pedestal.position = Vector3(0.0, -0.06 - pedestal_h * 0.5 - 0.02, 0.0)
+	kiosk.add_child(pedestal)
+
+	# ── spine: connects pedestal to the screen head, hides the gap ──
+	var spine := MeshInstance3D.new()
+	var spine_mesh := BoxMesh.new()
+	spine_mesh.size = Vector3(kw * 0.55, screen_base_y + 0.20, 0.05)
+	spine.mesh = spine_mesh
+	spine.material_override = metal
+	spine.position = Vector3(0.0, -0.02 + (screen_base_y + 0.20) * 0.5 - 0.10, -0.055)
+	kiosk.add_child(spine)
+
+	# ── screen head: housing + bezel + glass, tilted like the pad ──
+	var head := Node3D.new()
+	head.name = "ScreenHead"
+	head.position = Vector3(0.0, screen_base_y + screen_h * 0.5, -0.03)
+	head.rotation.x = tilt
+	kiosk.add_child(head)
+
+	var housing := MeshInstance3D.new()
+	var housing_mesh := BoxMesh.new()
+	housing_mesh.size = Vector3(kw, screen_h + 0.07, 0.045)
+	housing.mesh = housing_mesh
+	housing.material_override = metal
+	housing.position = Vector3(0.0, 0.0, -0.012)
+	head.add_child(housing)
+
+	var bezel := MeshInstance3D.new()
+	var bezel_mesh := BoxMesh.new()
+	bezel_mesh.size = Vector3(screen_w + 0.02, screen_h + 0.02, 0.018)
+	bezel.mesh = bezel_mesh
+	bezel.material_override = bezel_mat
+	bezel.position = Vector3(0.0, -0.008, 0.008)
+	head.add_child(bezel)
+
+	var glass := MeshInstance3D.new()
+	var glass_mesh := BoxMesh.new()
+	glass_mesh.size = Vector3(screen_w, screen_h, 0.006)
+	glass.mesh = glass_mesh
+	glass.material_override = glass_mat
+	glass.position = Vector3(0.0, -0.008, 0.016)
+	head.add_child(glass)
+
+	# ── header: stencil title + ember accent stripe (terminal finish) ──
+	var header_tag: Node3D = BakedText.make_tag(
+		"CENSUS", Color(0.92, 0.93, 0.97), 0.028,
+		Color(0.055, 0.06, 0.075), true, Color(0.86, 0.30, 0.10))
+	if header_tag:
+		header_tag.name = "KioskHeader"
+		header_tag.position = Vector3(0.0, screen_h * 0.5 + 0.018, 0.024)
+		head.add_child(header_tag)
+	var stripe := MeshInstance3D.new()
+	var stripe_mesh := BoxMesh.new()
+	stripe_mesh.size = Vector3(screen_w + 0.02, 0.006, 0.004)
+	stripe.mesh = stripe_mesh
+	stripe.material_override = accent_mat
+	stripe.position = Vector3(0.0, screen_h * 0.5 - 0.002, 0.022)
+	head.add_child(stripe)
+
+	# ── the stats mount point, just in front of the glass ──
+	var screen_anchor := Node3D.new()
+	screen_anchor.name = "StatsScreen"
+	screen_anchor.position = Vector3(0.0, -0.02, 0.022)
+	head.add_child(screen_anchor)
+	_kiosk_screen = screen_anchor
+	# re-home an already-built stats stack onto the screen
+	if _stats_tag != null and is_instance_valid(_stats_tag):
+		var txt := _stats_last_text
+		_stats_last_text = ""
+		_refresh_stats_tag(txt)
 
 	var drop_btn: Node = _control_panel.find_child("Btn_0", true, false)
 	if drop_btn:
