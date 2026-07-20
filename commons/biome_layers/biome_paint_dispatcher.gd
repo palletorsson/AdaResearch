@@ -322,20 +322,23 @@ func _spawn_creature(deposit: Dictionary, ctx: Dictionary,
 	var z: int = int(deposit.get("z", 0))
 	var seed: int = (x * 41 + z * 23) & 0xFFFF
 
-	# Scale params from biome_config.json:intensity_scaling.creature.
+	# Mobility from biome_config.json:intensity_scaling.creature.
 	var s := BiomeConfigLoaderClass.get_intensity_scaling("creature")
-	var seg_base: float = float(s.get("segments_base", 3.0))
-	var seg_per: float = float(s.get("segments_per_intensity", 1.0))
-	var scale_base: float = float(s.get("scale_base", 0.6))
-	var scale_per: float = float(s.get("scale_per_intensity", 0.25))
 	var mob_base: float = float(s.get("mobility_base", 0.4))
 	var mob_per: float = float(s.get("mobility_per_intensity", 0.1))
 
-	# Shared walker recipe (symmetry, temperament, HSV colours, finish);
-	# override the intensity-scaled fields from intensity_scaling.creature.
+	# Shared walker recipe (symmetry, temperament, HSV colours, finish). We take
+	# control of the four GEOMETRY genes so a cell's creature reads as a small
+	# compact grub, not the multi-metre thread the raw seed DNA produces:
+	#   body_length = part_length * scale * 0.5 * segments  (was ~15 m, off-cell)
+	#   max_radius  = part_width  * scale * 0.12            (was thread-thin)
+	# Temperament / colour / mobility stay from the shared recipe + config. This
+	# is the biome dispatch only — Pokemon Studio spawns from its own DNA.
 	var dna: CritterDNA = SpawnService.creature_dna_from_seed(seed)
-	dna.segments = seg_base + seg_per * float(intensity)
-	dna.scale = scale_base + scale_per * float(intensity)
+	dna.segments = 3.0 + 0.5 * float(intensity)      # 3.5..5.5 body rings
+	dna.scale = 0.55 + 0.07 * float(intensity)        # 0.62..0.9
+	dna.part_length = 0.30 + 0.03 * float(intensity)  # short — stays in its cell
+	dna.part_width = 0.85 + 0.03 * float(intensity)   # chunky, not thread-thin
 	dna.mobility = mob_base + mob_per * float(intensity)
 	dna.iridescence = 0.1 + 0.1 * float(intensity) / 5.0
 
