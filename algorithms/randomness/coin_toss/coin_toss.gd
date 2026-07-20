@@ -78,6 +78,7 @@ func _ready() -> void:
 	_create_landing_pad()
 	_create_labels()
 	_create_vr_controls()
+	_create_cabinet()
 	_spawn_coins_in_tray()
 
 
@@ -442,6 +443,7 @@ func _create_labels() -> void:
 		["COIN TOSS", "Bernoulli Trial   p = 0.5"],
 		Color(0.9, 0.92, 0.97), 0.045, 0.36, 0.014, true)
 	if title_board:
+		title_board.name = "TitleBoard"
 		# Sub line reads dimmer — tint just the second quad.
 		var kids := title_board.get_children()
 		if kids.size() >= 2 and kids[1] is MeshInstance3D:
@@ -473,6 +475,210 @@ func _create_labels() -> void:
 	_rebuild_readout()
 	_rebuild_history()
 	_rebuild_result()
+
+
+## THE CABINET — propagation no. 4: the coin-toss console. The tray keeps
+## its pedestal (the machine's leg); a BACKBOARD rises behind it carrying
+## the readout screen (the floating board stack re-homes onto the glass),
+## the result flash, and the sign band; the REFILL/CLEAR pad seats on a
+## wedge beside the tray; vents, maroon trim, base skirt. One body.
+func _create_cabinet() -> void:
+	var ph: float = pedestal_height
+	var bb_w: float = 0.56
+	var bb_z: float = -0.205
+	var bb_bot: float = ph - 0.12
+	var bb_top: float = ph + 0.78
+	var cap_h: float = 0.10
+
+	var cab := Node3D.new()
+	cab.name = "Cabinet"
+	add_child(cab)
+
+	var shell := StandardMaterial3D.new()
+	shell.albedo_color = Color(0.58, 0.60, 0.63)
+	shell.roughness = 0.5
+	shell.metallic = 0.25
+	var dark := StandardMaterial3D.new()
+	dark.albedo_color = Color(0.07, 0.075, 0.09)
+	dark.roughness = 0.45
+	dark.metallic = 0.4
+	var maroon := StandardMaterial3D.new()
+	maroon.albedo_color = Color(0.30, 0.11, 0.09)
+	maroon.roughness = 0.55
+	maroon.metallic = 0.2
+	var glass_mat := StandardMaterial3D.new()
+	glass_mat.albedo_color = Color(0.04, 0.05, 0.08)
+	glass_mat.roughness = 0.15
+	glass_mat.emission_enabled = true
+	glass_mat.emission = Color(0.05, 0.08, 0.12)
+	glass_mat.emission_energy_multiplier = 0.6
+	var accent := StandardMaterial3D.new()
+	accent.albedo_color = Color(0.86, 0.30, 0.10)
+	accent.emission_enabled = true
+	accent.emission = Color(0.86, 0.30, 0.10)
+	accent.emission_energy_multiplier = 2.2
+
+	# backboard slab
+	var bb := MeshInstance3D.new()
+	var bb_mesh := BoxMesh.new()
+	bb_mesh.size = Vector3(bb_w, bb_top - bb_bot, 0.07)
+	bb.mesh = bb_mesh
+	bb.material_override = shell
+	bb.position = Vector3(0.0, (bb_bot + bb_top) / 2.0, bb_z)
+	cab.add_child(bb)
+	# maroon side trims
+	for sx in [-1.0, 1.0]:
+		var trim := MeshInstance3D.new()
+		var trim_mesh := BoxMesh.new()
+		trim_mesh.size = Vector3(0.05, bb_top - bb_bot, 0.09)
+		trim.mesh = trim_mesh
+		trim.material_override = maroon
+		trim.position = Vector3(sx * (bb_w / 2.0 + 0.025), (bb_bot + bb_top) / 2.0, bb_z)
+		cab.add_child(trim)
+
+	# inset readout screen — the board stack re-homes onto this glass
+	var scr_w: float = 0.42
+	var scr_h: float = 0.40
+	var scr_y: float = ph + 0.26
+	var face_z: float = bb_z + 0.037
+	var pocket := MeshInstance3D.new()
+	var pocket_mesh := BoxMesh.new()
+	pocket_mesh.size = Vector3(scr_w + 0.02, scr_h + 0.04, 0.014)
+	pocket.mesh = pocket_mesh
+	pocket.material_override = dark
+	pocket.position = Vector3(0.0, scr_y, face_z + 0.002)
+	cab.add_child(pocket)
+	var glass := MeshInstance3D.new()
+	var glass_mesh := BoxMesh.new()
+	glass_mesh.size = Vector3(scr_w, scr_h, 0.006)
+	glass.mesh = glass_mesh
+	glass.material_override = glass_mat
+	glass.position = Vector3(0.0, scr_y - 0.006, face_z + 0.010)
+	cab.add_child(glass)
+	var head_tag: Node3D = BakedText.make_tag(
+		"TALLY", Color(0.92, 0.93, 0.97), 0.020,
+		Color(0.055, 0.06, 0.075), true, Color(0.86, 0.30, 0.10))
+	if head_tag:
+		head_tag.position = Vector3(0.0, scr_y + scr_h / 2.0 + 0.012, face_z + 0.014)
+		cab.add_child(head_tag)
+	var stripe := MeshInstance3D.new()
+	var stripe_mesh := BoxMesh.new()
+	stripe_mesh.size = Vector3(scr_w + 0.02, 0.005, 0.004)
+	stripe.mesh = stripe_mesh
+	stripe.material_override = accent
+	stripe.position = Vector3(0.0, scr_y + scr_h / 2.0 - 0.002, face_z + 0.012)
+	cab.add_child(stripe)
+
+	# retire the floating title (the cap sign owns the name now); re-home the
+	# live boards INTO the screen, result flash to the backboard's crown
+	if _board_anchor != null and is_instance_valid(_board_anchor):
+		var tb: Node = _board_anchor.get_node_or_null("TitleBoard")
+		if tb != null:
+			tb.queue_free()
+		_board_anchor.position = Vector3(0.0, scr_y - 0.04, face_z + 0.014)
+	if _result_holder != null and is_instance_valid(_result_holder):
+		_result_holder.position = Vector3(0.0, bb_top + cap_h + 0.10, bb_z + 0.02)
+
+	# keypad wedge (left of the tray, on the console deck)
+	var wedge := _make_wedge(0.20, 0.13, 0.060, 0.018, dark)
+	wedge.position = Vector3(-0.205, ph + 0.055, -0.005)
+	cab.add_child(wedge)
+	# deck under wedge + tray shoulder — ties pedestal, tray and pad together
+	var deck := MeshInstance3D.new()
+	var deck_mesh := BoxMesh.new()
+	deck_mesh.size = Vector3(0.62, 0.05, 0.34)
+	deck.mesh = deck_mesh
+	deck.material_override = shell
+	deck.position = Vector3(-0.04, ph - 0.028, -0.02)
+	cab.add_child(deck)
+
+	# vent slats at the backboard base
+	for gi in range(5):
+		var slat := MeshInstance3D.new()
+		var slat_mesh := BoxMesh.new()
+		slat_mesh.size = Vector3(0.30, 0.008, 0.010)
+		slat.mesh = slat_mesh
+		slat.material_override = dark
+		slat.position = Vector3(0.0, bb_bot + 0.03 + float(gi) * 0.020, face_z + 0.002)
+		cab.add_child(slat)
+
+	# sign cap
+	var cap := MeshInstance3D.new()
+	var cap_mesh := BoxMesh.new()
+	cap_mesh.size = Vector3(bb_w + 0.10, cap_h, 0.11)
+	cap.mesh = cap_mesh
+	cap.material_override = shell
+	cap.position = Vector3(0.0, bb_top + cap_h / 2.0, bb_z)
+	cab.add_child(cap)
+	var cap_stripe := MeshInstance3D.new()
+	var cap_stripe_mesh := BoxMesh.new()
+	cap_stripe_mesh.size = Vector3(bb_w + 0.10, 0.006, 0.004)
+	cap_stripe.mesh = cap_stripe_mesh
+	cap_stripe.material_override = accent
+	cap_stripe.position = Vector3(0.0, bb_top + 0.004, bb_z + 0.058)
+	cab.add_child(cap_stripe)
+	var sign := MeshInstance3D.new()
+	var sign_mesh := BoxMesh.new()
+	sign_mesh.size = Vector3(bb_w - 0.02, 0.066, 0.012)
+	sign.mesh = sign_mesh
+	sign.material_override = dark
+	sign.position = Vector3(0.0, bb_top + cap_h / 2.0, bb_z + 0.056)
+	cab.add_child(sign)
+	var sign_title: Node3D = BakedText.make_tag(
+		"COIN TOSS", Color(0.93, 0.94, 0.97), 0.030,
+		Color(0.07, 0.075, 0.09), false, Color(0, 0, 0, 0))
+	if sign_title:
+		sign_title.position = Vector3(0.0, bb_top + cap_h / 2.0 + 0.012, bb_z + 0.064)
+		cab.add_child(sign_title)
+	var sign_sub: Node3D = BakedText.make_tag(
+		"BERNOULLI TRIAL  P = 0.5", Color(0.55, 0.58, 0.66), 0.014,
+		Color(0.07, 0.075, 0.09), false, Color(0, 0, 0, 0))
+	if sign_sub:
+		sign_sub.position = Vector3(0.0, bb_top + cap_h / 2.0 - 0.018, bb_z + 0.064)
+		cab.add_child(sign_sub)
+
+	# base skirt around the pedestal foot
+	var skirt := MeshInstance3D.new()
+	var skirt_mesh := BoxMesh.new()
+	skirt_mesh.size = Vector3(0.40, 0.07, 0.40)
+	skirt.mesh = skirt_mesh
+	skirt.material_override = dark
+	skirt.position = Vector3(0.0, 0.035, -0.06)
+	cab.add_child(skirt)
+
+
+## Right-triangle prism shoulder (shared cabinet grammar — see galton_board).
+func _make_wedge(w: float, h: float, d_bottom: float, d_top: float, mat: Material) -> MeshInstance3D:
+	var st := SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	var x0: float = -w / 2.0
+	var x1: float = w / 2.0
+	var y0: float = -h / 2.0
+	var y1: float = h / 2.0
+	var bbl := Vector3(x0, y0, 0.0)
+	var bbr := Vector3(x1, y0, 0.0)
+	var btl := Vector3(x0, y1, 0.0)
+	var btr := Vector3(x1, y1, 0.0)
+	var fbl := Vector3(x0, y0, d_bottom)
+	var fbr := Vector3(x1, y0, d_bottom)
+	var ftl := Vector3(x0, y1, d_top)
+	var ftr := Vector3(x1, y1, d_top)
+	var faces := [
+		[fbl, fbr, ftr, ftl],
+		[bbr, bbl, btl, btr],
+		[bbl, fbl, ftl, btl],
+		[fbr, bbr, btr, ftr],
+		[btl, ftl, ftr, btr],
+		[bbl, bbr, fbr, fbl],
+	]
+	for f in faces:
+		st.add_vertex(f[0]); st.add_vertex(f[1]); st.add_vertex(f[2])
+		st.add_vertex(f[0]); st.add_vertex(f[2]); st.add_vertex(f[3])
+	st.generate_normals()
+	var mi := MeshInstance3D.new()
+	mi.mesh = st.commit()
+	mi.material_override = mat
+	return mi
 
 
 func _update_display() -> void:
@@ -549,14 +755,16 @@ func _rebuild_result() -> void:
 
 func _create_vr_controls() -> void:
 	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
-	var panel: Node3D = RackTpl.create_panel("COIN TOSS", [
+	var panel: Node3D = RackTpl.create_panel("", [
 		[
 			{"type": "button", "label": "REFILL"},
 			{"type": "button", "label": "CLEAR"},
 		],
 	])
-	panel.position = Vector3(-0.15, pedestal_height + 0.05, 0.12)
-	panel.rotation_degrees = Vector3(-25, 0, 0)
+	# seated on the console's wedge shoulder (all-in-one body)
+	panel.position = Vector3(-0.205, pedestal_height + 0.06, 0.055)
+	panel.rotation_degrees = Vector3(-18, 0, 0)
+	panel.scale = Vector3(0.8, 0.8, 0.8)
 	add_child(panel)
 
 	# REFILL (Btn_0)
