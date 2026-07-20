@@ -78,7 +78,7 @@ func _ready() -> void:
 	_create_labels()
 	_create_dock()
 	_create_vr_controls()
-	_jar_spawn_pos = Vector3(0, pedestal_height + 0.02 + jar_height / 2.0, 0)
+	_settle_specimen()
 	_initial_entropy = _measure_entropy()
 	_current_entropy = _initial_entropy
 	_update_display()
@@ -477,9 +477,50 @@ func _update_display() -> void:
 # VR INTERACTION
 # ═════════════════════════════════════════════════════════════════════════════
 
+## Seat the jar in the dock's cradle and freeze it — the specimen rests on
+## display (no gravity drop) until it is grabbed. Without this the jar and its
+## 80 particles simply fall: there is nothing under a pickable RigidBody in a
+## static viewer, and even in a map it should read as SEATED, not fallen.
+func _settle_specimen() -> void:
+	var seat_y: float = pedestal_height + 0.07
+	var dock: Node = get_node_or_null("SpecimenDock")
+	if dock != null and dock.has_meta("seat_y"):
+		seat_y = float(dock.get_meta("seat_y"))
+	_jar_spawn_pos = Vector3(0, seat_y + jar_height / 2.0, 0)
+	if _jar_body != null and is_instance_valid(_jar_body):
+		_jar_body.global_position = global_position + _jar_spawn_pos
+		_jar_body.global_rotation = Vector3.ZERO
+		_jar_body.linear_velocity = Vector3.ZERO
+		_jar_body.angular_velocity = Vector3.ZERO
+		_jar_body.freeze = true
+	_seed_particles()
+
+## Place the particles inside the jar (A in the lower half, B in the upper) and
+## freeze them, so the specimen is still until shaken.
+func _seed_particles() -> void:
+	var inner_r: float = jar_radius - jar_wall_thickness - particle_radius
+	var half_h: float = jar_height / 2.0 - particle_radius * 2.0
+	var groups := [[_particles_a, -half_h, 0.0], [_particles_b, 0.0, half_h]]
+	for g in groups:
+		for p in g[0]:
+			if is_instance_valid(p):
+				p.freeze = true
+				p.linear_velocity = Vector3.ZERO
+				p.angular_velocity = Vector3.ZERO
+				var angle := randf() * TAU
+				var r := randf() * inner_r
+				p.position = Vector3(cos(angle) * r, randf_range(g[1], g[2]), sin(angle) * r)
+
+
 func _on_jar_picked_up(_pickable) -> void:
 	_is_held = true
 	_prev_velocity = Vector3.ZERO
+	# wake the frozen display specimen so it can be shaken
+	if _jar_body != null and is_instance_valid(_jar_body):
+		_jar_body.freeze = false
+	for p in (_particles_a + _particles_b):
+		if is_instance_valid(p):
+			p.set_deferred("freeze", false)
 
 
 func _on_jar_dropped(_pickable) -> void:
