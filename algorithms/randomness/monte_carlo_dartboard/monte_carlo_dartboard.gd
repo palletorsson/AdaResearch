@@ -57,6 +57,9 @@ var _circle_mesh: MeshInstance3D
 const _READOUT_LINE_H: float = 0.045
 const _READOUT_WIDTH: float = 0.40
 const _READOUT_GAP: float = 0.014
+# live metrics (cabinet compacts these so the readout fits its column screen)
+var _readout_line_h: float = _READOUT_LINE_H
+var _readout_width: float = _READOUT_WIDTH
 
 
 
@@ -69,6 +72,7 @@ func _ready() -> void:
 	_create_circle_overlay()
 	_create_labels()
 	_create_vr_controls()
+	_create_cabinet()
 
 
 func _process(delta: float) -> void:
@@ -277,6 +281,7 @@ func _create_labels() -> void:
 		["MONTE CARLO", "Estimating π with random darts"],
 		Color(0.9, 0.9, 0.95), 0.05, board_size + 0.1, 0.012, true)
 	if title_block:
+		title_block.name = "TitleBlock"
 		title_block.position = Vector3(0, board_height + board_size / 2.0 + 0.09, label_z)
 		add_child(title_block)
 
@@ -292,6 +297,7 @@ func _create_labels() -> void:
 		"", Color(0.06, 0.07, 0.10), Color.WHITE,
 		Vector2(_READOUT_WIDTH + 0.06, 0.44), 1400, false)
 	if plate:
+		plate.name = "ReadoutPlate"
 		plate.position = Vector3(0, 0, -0.006)
 		_readout_root.add_child(plate)
 
@@ -303,6 +309,7 @@ func _create_labels() -> void:
 		 "π ≈ 4 × (inside / total)"],
 		Color(0.6, 0.6, 0.68), 0.04, board_size + 0.14, 0.012, true)
 	if formula_block:
+		formula_block.name = "FormulaBlock"
 		formula_block.position = Vector3(0, board_height - board_size / 2.0 - 0.1, label_z)
 		add_child(formula_block)
 
@@ -313,7 +320,7 @@ func _rebuild_readout(lines: Array) -> void:
 	if _readout_block and is_instance_valid(_readout_block):
 		_readout_block.queue_free()
 	_readout_block = BakedText.make_text_block(
-		lines, _readout_color, _READOUT_LINE_H, _READOUT_WIDTH, _READOUT_GAP, true)
+		lines, _readout_color, _readout_line_h, _readout_width, _READOUT_GAP, true)
 	if _readout_block:
 		_readout_block.position = Vector3(0, 0, 0.002)
 		_readout_root.add_child(_readout_block)
@@ -360,17 +367,282 @@ func _update_display() -> void:
 # VR CONTROLS
 # ═════════════════════════════════════════════════════════════════════════════
 
+## THE CABINET — the 2026-07-20 interface ruling propagated (2nd artifact):
+## the dartboard becomes ONE appliance, vending-machine grammar. The board
+## is the poster window; the pi census lives on an inset column screen; the
+## THROW/AUTO/RESET pad seats on a wedge; sign band in the cap; maroon
+## flank; vent grille; plinth on feet. The free-floating title, formula and
+## readout plates are retired — every interface element is a face of the
+## same volume.
+func _create_cabinet() -> void:
+	var half: float = board_size / 2.0
+	var bd: float = board_thickness
+	var cw: float = 0.27
+	var colx: float = half + cw / 2.0
+	var face_z: float = 0.09
+	var win_bot: float = board_height - half
+	var win_top: float = board_height + half
+	var total_w: float = board_size + cw + 0.10
+	var cx: float = (half + cw) - (total_w / 2.0)
+	var cap_h: float = 0.12
+	var body_top: float = win_top + 0.06
+
+	var cab := Node3D.new()
+	cab.name = "Cabinet"
+	add_child(cab)
+
+	var shell := StandardMaterial3D.new()
+	shell.albedo_color = Color(0.58, 0.60, 0.63)
+	shell.roughness = 0.5
+	shell.metallic = 0.25
+	var dark := StandardMaterial3D.new()
+	dark.albedo_color = Color(0.07, 0.075, 0.09)
+	dark.roughness = 0.45
+	dark.metallic = 0.4
+	var maroon := StandardMaterial3D.new()
+	maroon.albedo_color = Color(0.30, 0.11, 0.09)
+	maroon.roughness = 0.55
+	maroon.metallic = 0.2
+	var glass_mat := StandardMaterial3D.new()
+	glass_mat.albedo_color = Color(0.04, 0.05, 0.08)
+	glass_mat.roughness = 0.15
+	glass_mat.emission_enabled = true
+	glass_mat.emission = Color(0.05, 0.08, 0.12)
+	glass_mat.emission_energy_multiplier = 0.6
+	var accent := StandardMaterial3D.new()
+	accent.albedo_color = Color(0.86, 0.30, 0.10)
+	accent.emission_enabled = true
+	accent.emission = Color(0.86, 0.30, 0.10)
+	accent.emission_energy_multiplier = 2.2
+
+	# back slab — full height
+	var back := MeshInstance3D.new()
+	var back_mesh := BoxMesh.new()
+	back_mesh.size = Vector3(total_w, body_top, 0.05)
+	back.mesh = back_mesh
+	back.material_override = shell
+	back.position = Vector3(cx, body_top / 2.0, -bd / 2.0 - 0.035)
+	cab.add_child(back)
+
+	# maroon flank (left, full height)
+	var flank := MeshInstance3D.new()
+	var flank_mesh := BoxMesh.new()
+	flank_mesh.size = Vector3(0.10, body_top, 0.16)
+	flank.mesh = flank_mesh
+	flank.material_override = maroon
+	flank.position = Vector3(-half - 0.05, body_top / 2.0, -0.005)
+	cab.add_child(flank)
+
+	# front shell panels around the window (below + above, window width)
+	var below := MeshInstance3D.new()
+	var below_mesh := BoxMesh.new()
+	below_mesh.size = Vector3(board_size, win_bot, 0.05)
+	below.mesh = below_mesh
+	below.material_override = shell
+	below.position = Vector3(0.0, win_bot / 2.0, bd / 2.0 - 0.010)
+	cab.add_child(below)
+	var above := MeshInstance3D.new()
+	var above_mesh := BoxMesh.new()
+	above_mesh.size = Vector3(board_size, body_top - win_top, 0.05)
+	above.mesh = above_mesh
+	above.material_override = shell
+	above.position = Vector3(0.0, (win_top + body_top) / 2.0, bd / 2.0 - 0.010)
+	cab.add_child(above)
+
+	# FORMULA — signage in the below-window panel (was a floating block)
+	var f_band := MeshInstance3D.new()
+	var f_band_mesh := BoxMesh.new()
+	f_band_mesh.size = Vector3(board_size - 0.06, 0.11, 0.012)
+	f_band.mesh = f_band_mesh
+	f_band.material_override = dark
+	f_band.position = Vector3(0.0, win_bot - 0.12, bd / 2.0 + 0.012)
+	cab.add_child(f_band)
+	var f1: Node3D = BakedText.make_tag(
+		"PI/4 = AREA(CIRCLE) / AREA(SQUARE)", Color(0.62, 0.64, 0.72), 0.020,
+		Color(0.07, 0.075, 0.09), false, Color(0, 0, 0, 0))
+	if f1:
+		f1.position = Vector3(0.0, win_bot - 0.095, bd / 2.0 + 0.020)
+		cab.add_child(f1)
+	var f2: Node3D = BakedText.make_tag(
+		"PI ~ 4 x (INSIDE / TOTAL)", Color(0.85, 0.75, 0.35), 0.024,
+		Color(0.07, 0.075, 0.09), false, Color(0, 0, 0, 0))
+	if f2:
+		f2.position = Vector3(0.0, win_bot - 0.140, bd / 2.0 + 0.020)
+		cab.add_child(f2)
+
+	# right service column
+	var col := MeshInstance3D.new()
+	var col_mesh := BoxMesh.new()
+	col_mesh.size = Vector3(cw, body_top, 0.16)
+	col.mesh = col_mesh
+	col.material_override = shell
+	col.position = Vector3(colx, body_top / 2.0, -0.005)
+	cab.add_child(col)
+
+	# inset PI screen (upper column) — the readout re-homes here
+	var scr_w: float = cw - 0.05
+	var scr_h: float = 0.46
+	var scr_y: float = board_height + 0.10
+	var pocket := MeshInstance3D.new()
+	var pocket_mesh := BoxMesh.new()
+	pocket_mesh.size = Vector3(scr_w + 0.02, scr_h + 0.05, 0.015)
+	pocket.mesh = pocket_mesh
+	pocket.material_override = dark
+	pocket.position = Vector3(colx, scr_y, face_z + 0.002)
+	cab.add_child(pocket)
+	var glass := MeshInstance3D.new()
+	var glass_mesh := BoxMesh.new()
+	glass_mesh.size = Vector3(scr_w, scr_h, 0.006)
+	glass.mesh = glass_mesh
+	glass.material_override = glass_mat
+	glass.position = Vector3(colx, scr_y - 0.008, face_z + 0.010)
+	cab.add_child(glass)
+	var head_tag: Node3D = BakedText.make_tag(
+		"PI CENSUS", Color(0.92, 0.93, 0.97), 0.020,
+		Color(0.055, 0.06, 0.075), true, Color(0.86, 0.30, 0.10))
+	if head_tag:
+		head_tag.position = Vector3(colx, scr_y + scr_h / 2.0 + 0.014, face_z + 0.014)
+		cab.add_child(head_tag)
+	var stripe := MeshInstance3D.new()
+	var stripe_mesh := BoxMesh.new()
+	stripe_mesh.size = Vector3(scr_w + 0.02, 0.005, 0.004)
+	stripe.mesh = stripe_mesh
+	stripe.material_override = accent
+	stripe.position = Vector3(colx, scr_y + scr_h / 2.0 - 0.002, face_z + 0.012)
+	cab.add_child(stripe)
+
+	# retire the floats; re-home the live readout INTO the screen
+	var tb: Node = get_node_or_null("TitleBlock")
+	if tb != null:
+		tb.queue_free()
+	var fb: Node = get_node_or_null("FormulaBlock")
+	if fb != null:
+		fb.queue_free()
+	if _readout_root != null and is_instance_valid(_readout_root):
+		var old_plate: Node = _readout_root.get_node_or_null("ReadoutPlate")
+		if old_plate != null:
+			old_plate.queue_free()
+		_readout_root.position = Vector3(colx, scr_y - 0.01, face_z + 0.014)
+		_readout_line_h = 0.026
+		_readout_width = scr_w - 0.02
+		_readout_cache = ""
+		_rebuild_readout(["PI ~ ?", "", "darts: 0", "inside: 0", "outside: 0"])
+
+	# keypad wedge + (pad repositioned in _create_vr_controls)
+	var wedge := _make_wedge(cw - 0.03, 0.16, 0.062, 0.018, dark)
+	wedge.position = Vector3(colx, 0.62, face_z - 0.045)
+	cab.add_child(wedge)
+
+	# vent grille (lower column)
+	for gi in range(7):
+		var slat := MeshInstance3D.new()
+		var slat_mesh := BoxMesh.new()
+		slat_mesh.size = Vector3(cw - 0.06, 0.010, 0.012)
+		slat.mesh = slat_mesh
+		slat.material_override = dark
+		slat.position = Vector3(colx, 0.18 + float(gi) * 0.024, face_z + 0.002)
+		cab.add_child(slat)
+
+	# header cap with the integrated sign band
+	var cap := MeshInstance3D.new()
+	var cap_mesh := BoxMesh.new()
+	cap_mesh.size = Vector3(total_w, cap_h, 0.20)
+	cap.mesh = cap_mesh
+	cap.material_override = shell
+	cap.position = Vector3(cx, body_top + cap_h / 2.0, -0.005)
+	cab.add_child(cap)
+	var cap_stripe := MeshInstance3D.new()
+	var cap_stripe_mesh := BoxMesh.new()
+	cap_stripe_mesh.size = Vector3(total_w, 0.006, 0.004)
+	cap_stripe.mesh = cap_stripe_mesh
+	cap_stripe.material_override = accent
+	cap_stripe.position = Vector3(cx, body_top + 0.004, 0.093)
+	cab.add_child(cap_stripe)
+	var sign := MeshInstance3D.new()
+	var sign_mesh := BoxMesh.new()
+	sign_mesh.size = Vector3(total_w - 0.08, 0.078, 0.012)
+	sign.mesh = sign_mesh
+	sign.material_override = dark
+	sign.position = Vector3(cx, body_top + cap_h / 2.0, 0.096)
+	cab.add_child(sign)
+	var sign_title: Node3D = BakedText.make_tag(
+		"MONTE CARLO", Color(0.93, 0.94, 0.97), 0.032,
+		Color(0.07, 0.075, 0.09), false, Color(0, 0, 0, 0))
+	if sign_title:
+		sign_title.position = Vector3(cx, body_top + cap_h / 2.0 + 0.014, 0.104)
+		cab.add_child(sign_title)
+	var sign_sub: Node3D = BakedText.make_tag(
+		"ESTIMATING PI WITH RANDOM DARTS", Color(0.55, 0.58, 0.66), 0.015,
+		Color(0.07, 0.075, 0.09), false, Color(0, 0, 0, 0))
+	if sign_sub:
+		sign_sub.position = Vector3(cx, body_top + cap_h / 2.0 - 0.020, 0.104)
+		cab.add_child(sign_sub)
+
+	# plinth + feet
+	var plinth := MeshInstance3D.new()
+	var plinth_mesh := BoxMesh.new()
+	plinth_mesh.size = Vector3(total_w, 0.10, 0.24)
+	plinth.mesh = plinth_mesh
+	plinth.material_override = dark
+	plinth.position = Vector3(cx, 0.05, 0.0)
+	cab.add_child(plinth)
+	for fx in [-total_w / 2.0 + 0.08, total_w / 2.0 - 0.08]:
+		var foot := MeshInstance3D.new()
+		var foot_mesh := BoxMesh.new()
+		foot_mesh.size = Vector3(0.10, 0.035, 0.20)
+		foot.mesh = foot_mesh
+		foot.material_override = dark
+		foot.position = Vector3(cx + fx, 0.017, 0.0)
+		cab.add_child(foot)
+
+
+## Right-triangle prism shoulder (shared cabinet grammar — see galton_board).
+func _make_wedge(w: float, h: float, d_bottom: float, d_top: float, mat: Material) -> MeshInstance3D:
+	var st := SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	var x0: float = -w / 2.0
+	var x1: float = w / 2.0
+	var y0: float = -h / 2.0
+	var y1: float = h / 2.0
+	var bbl := Vector3(x0, y0, 0.0)
+	var bbr := Vector3(x1, y0, 0.0)
+	var btl := Vector3(x0, y1, 0.0)
+	var btr := Vector3(x1, y1, 0.0)
+	var fbl := Vector3(x0, y0, d_bottom)
+	var fbr := Vector3(x1, y0, d_bottom)
+	var ftl := Vector3(x0, y1, d_top)
+	var ftr := Vector3(x1, y1, d_top)
+	var faces := [
+		[fbl, fbr, ftr, ftl],
+		[bbr, bbl, btl, btr],
+		[bbl, fbl, ftl, btl],
+		[fbr, bbr, btr, ftr],
+		[btl, ftl, ftr, btr],
+		[bbl, bbr, fbr, fbl],
+	]
+	for f in faces:
+		st.add_vertex(f[0]); st.add_vertex(f[1]); st.add_vertex(f[2])
+		st.add_vertex(f[0]); st.add_vertex(f[2]); st.add_vertex(f[3])
+	st.generate_normals()
+	var mi := MeshInstance3D.new()
+	mi.mesh = st.commit()
+	mi.material_override = mat
+	return mi
+
+
 func _create_vr_controls() -> void:
 	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
-	var panel: Node3D = RackTpl.create_panel("DARTBOARD", [
+	var panel: Node3D = RackTpl.create_panel("", [
 		[
 			{"type": "button", "label": "THROW"},
 			{"type": "button", "label": "AUTO"},
 			{"type": "button", "label": "RESET"},
 		],
 	])
-	panel.position = Vector3(0, board_height - board_size / 2.0 - 0.18, 0.12)
-	panel.rotation_degrees = Vector3(-30, 0, 0)
+	# seated on the service column's wedge (all-in-one cabinet)
+	panel.position = Vector3(board_size / 2.0 + 0.135, 0.62, 0.105)
+	panel.rotation_degrees = Vector3(-15, 0, 0)
+	panel.scale = Vector3(0.72, 0.72, 0.72)
 	add_child(panel)
 
 	# THROW button (Btn_0)
