@@ -601,12 +601,20 @@ func _create_console() -> void:
 		mi.position = r[0]
 		con.add_child(mi)
 
-	# maroon edge banding — the flank, laid flat around the outer lip
+	# Maroon edge INLAY — a routed line just under the rail's top edge,
+	# following the whole perimeter. The vertical dialect's flank is a mass
+	# (a whole painted side); laid flat on furniture the same mass becomes a
+	# stripe of paint, which is what it read as at 0.030 on a 0.055 rail —
+	# over half the visible edge face. Banding on a table is a LINE: it
+	# states the colour without claiming the surface, and it pairs with the
+	# ember inlay running the rail's inner edge.
+	var band_y: float = rail_top - 0.015
+	var band_h: float = 0.009
 	var bands := [
-		[Vector3(0, rail_y, z_out_far + 0.004), Vector3(outer_w, 0.030, 0.008)],
-		[Vector3(0, rail_y, z_out_near - 0.004), Vector3(outer_w, 0.030, 0.008)],
-		[Vector3(-(outer_w / 2.0) + 0.004, rail_y, ring_cz), Vector3(0.008, 0.030, ring_d)],
-		[Vector3((outer_w / 2.0) - 0.004, rail_y, ring_cz), Vector3(0.008, 0.030, ring_d)],
+		[Vector3(0, band_y, z_out_far + 0.004), Vector3(outer_w, band_h, 0.008)],
+		[Vector3(0, band_y, z_out_near - 0.004), Vector3(outer_w, band_h, 0.008)],
+		[Vector3(-(outer_w / 2.0) + 0.004, band_y, ring_cz), Vector3(0.008, band_h, ring_d)],
+		[Vector3((outer_w / 2.0) - 0.004, band_y, ring_cz), Vector3(0.008, band_h, ring_d)],
 	]
 	for b in bands:
 		var mi2 := MeshInstance3D.new()
