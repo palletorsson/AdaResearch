@@ -244,6 +244,40 @@ static func plinth(w: float, d: float, h: float, finish: String = "rams",
 	return root
 
 
+## A right-triangle prism SHOULDER: a sloped shelf a control pad rests on, so
+## the pad meets the body instead of hanging in air. Faces +Z, origin at the
+## centre; `d_bottom` > `d_top` gives the forward-leaning console slope.
+## (Palle 2026-07-19: "the buttons interface part need a wedge profile so it
+## does not hang in the air.")
+static func wedge(w: float, h: float, d_bottom: float, d_top: float, mat: Material) -> MeshInstance3D:
+	var st := SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	var x0: float = -w / 2.0
+	var x1: float = w / 2.0
+	var y0: float = -h / 2.0
+	var y1: float = h / 2.0
+	var bbl := Vector3(x0, y0, 0.0)
+	var bbr := Vector3(x1, y0, 0.0)
+	var btl := Vector3(x0, y1, 0.0)
+	var btr := Vector3(x1, y1, 0.0)
+	var fbl := Vector3(x0, y0, d_bottom)
+	var fbr := Vector3(x1, y0, d_bottom)
+	var ftl := Vector3(x0, y1, d_top)
+	var ftr := Vector3(x1, y1, d_top)
+	var faces := [
+		[fbl, fbr, ftr, ftl], [bbr, bbl, btl, btr], [bbl, fbl, ftl, btl],
+		[fbr, bbr, btr, ftr], [btl, ftl, ftr, btr], [bbl, bbr, fbr, fbl],
+	]
+	for f in faces:
+		st.add_vertex(f[0]); st.add_vertex(f[1]); st.add_vertex(f[2])
+		st.add_vertex(f[0]); st.add_vertex(f[2]); st.add_vertex(f[3])
+	st.generate_normals()
+	var mi := MeshInstance3D.new()
+	mi.mesh = st.commit()
+	mi.material_override = mat
+	return mi
+
+
 ## Diagonal warning-stripe texture (caution yellow / dark), cached per colour pair.
 static var _stripe_cache: Dictionary = {}
 static func hazard_stripe_texture(a: Color = Color(0.95, 0.75, 0.05), b: Color = Color(0.10, 0.10, 0.12), bands: int = 8) -> ImageTexture:

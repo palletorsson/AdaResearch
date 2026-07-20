@@ -102,7 +102,8 @@
     "squat vending machine",
     "tall street kiosk",
     "wide console",
-    "pedestal station"
+    "pedestal station",
+    "three-bay rig"
    ]
   },
   "horizontal": {
@@ -240,10 +241,17 @@
    "scene": "res://algorithms/randomness/dice_throw/dice_throw.tscn",
    "propagation": 5,
    "kit": true
+  },
+  {
+   "artifact": "hardware_entropy_decay",
+   "dialect": "vertical",
+   "body": "three-bay rig",
+   "scene": "res://algorithms/randomness/hardware_entropy_decay/hardware_entropy_decay.tscn",
+   "propagation": 6,
+   "kit": true
   }
  ],
  "queue": [
-  "hardware_entropy_decay",
   "trng_vs_prng",
   "entropy_jar",
   "bell_alley",
@@ -278,7 +286,8 @@
    "dust_streaks(w, h, z, count)": "age — never over a window, it reads as smears on the phenomenon",
    "striped_mat() / hazard_stripe_texture()": "caution striping",
    "emissive(c, energy)": "lit elements",
-   "plinth(w, d, h, finish, wear, accent, code)": "a pedestal built DOWNWARD from y=0 — raises an artifact into the reach band without touching a single authored coordinate; auto-grounding does the lift"
+   "plinth(w, d, h, finish, wear, accent, code)": "a pedestal built DOWNWARD from y=0 — raises an artifact into the reach band without touching a single authored coordinate; auto-grounding does the lift",
+   "wedge(w, h, d_bottom, d_top, mat)": "the sloped shoulder a control pad rests on — vertical dialect only; the horizontal dialect recesses its pad flush instead"
   },
   "gotcha": "grime_band/dust_streaks bake their Z into position — assign .position.x/.y only. grime_band is an OPAQUE dirt shadow: it belongs at the BASE of a light body where dirt collects, never floating mid-body and never on a dark face (it reads as a hanging slab) or over a window (smears on the phenomenon). And derive the near-black 'dark' from a fixed value, not panel.darkened() — 0.55 lands at ~0.31 grey and washes out every pocket, plinth and apron in the family."
  }

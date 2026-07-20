@@ -22,6 +22,7 @@ extends Node3D
 
 const DECAY_SHADER = preload("res://algorithms/randomness/hardware_entropy_decay/hardware_decay.gdshader")
 const BakedText = preload("res://commons/utils/baked_text_albedo.gd")
+const HangarKit = preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 
 # --- Export tunables ---
 @export_category("Decay Rates")
@@ -37,6 +38,12 @@ const BakedText = preload("res://commons/utils/baked_text_albedo.gd")
 @export var panel_spacing: float = 1.4
 @export var pedestal_height: float = 0.7
 @export var show_readouts: bool = true
+
+## Housing (cabinet grammar — see commons/data/cabinet_grammar.json).
+@export var finish: String = "rams"
+@export var wear: float = 0.12
+@export var unit_code: String = "HE-06"
+@export var plinth_height: float = 0.0
 @export var base_surface_color: Color = Color(0.65, 0.68, 0.72)
 @export var rust_color: Color = Color(0.45, 0.18, 0.05)
 @export var dirt_color: Color = Color(0.22, 0.18, 0.12)
@@ -96,6 +103,7 @@ func _ready() -> void:
 		_build_readout_panel()
 	_build_vr_controls()
 	_build_source_indicator()
+	_build_rig()
 
 
 func _process(delta: float) -> void:
@@ -398,12 +406,13 @@ func _build_display_surfaces() -> void:
 
 func _build_title() -> void:
 	# Title board — integrated 2D-in-3D tag, painted onto its own face.
-	var title := BakedText.make_tag(
+	var title: Node3D = BakedText.make_tag(
 		"HARDWARE ENTROPY DECAY",
 		Color(0.95, 0.85, 0.65), 0.13,
 		Color(0.10, 0.06, 0.03), false,
 		Color(0.86, 0.40, 0.16))
 	if title:
+		title.name = "FloatTitle"
 		title.position = Vector3(0, pedestal_height + 1.55, 0)
 		add_child(title)
 
@@ -414,6 +423,7 @@ func _build_title() -> void:
 		Color(0.06, 0.06, 0.08), false,
 		Color(0, 0, 0, 0))
 	if subtitle:
+		subtitle.name = "FloatSub"
 		subtitle.position = Vector3(0, pedestal_height + 1.36, 0)
 		add_child(subtitle)
 
@@ -457,6 +467,8 @@ func _build_readout_panel() -> void:
 func _build_source_indicator() -> void:
 	# Small status board showing whether we're reading real VR or fallback.
 	# Held in its own anchor, spaced below the subtitle; rebuilt only on change.
+	# re-homed onto the service bay by _build_rig (the cabinet grammar: no
+	# text outside the body). Seeded here so the anchor exists first.
 	_source_pos = Vector3(0, pedestal_height + 1.21, 0)
 	_source_anchor = Node3D.new()
 	_source_anchor.name = "SourceIndicator"
@@ -474,7 +486,8 @@ func _build_vr_controls() -> void:
 		],
 	])
 	var panel_x := -float(panel_count) * panel_spacing * 0.5 - 0.8
-	panel.position = Vector3(panel_x, pedestal_height + 0.3, 0.5)
+	panel.position = Vector3(panel_x, pedestal_height + 0.345, -0.13)
+	panel.rotation_degrees = Vector3(-15, 0, 0)
 	panel.rotation_degrees = Vector3(-25, 20, 0)
 	add_child(panel)
 
@@ -620,3 +633,119 @@ func _exit_tree() -> void:
 
 func apply_grid_config(config: Dictionary) -> void:
 	pass
+
+
+## THE THREE-BAY RIG — the cabinet grammar in its widest vertical body.
+## Three decaying specimens each get a BAY of one continuous back slab,
+## divided by mullions; the readout takes a service bay on the right; the
+## name moves from air into a sign band; a plinth closes the base.
+func _build_rig() -> void:
+	var span: float = float(panel_count) * panel_spacing
+	var start_x: float = -(span - panel_spacing) * 0.5
+	var readout_x: float = span * 0.5 + 0.85
+	var control_x: float = -span * 0.5 - 0.8      # matches _build_vr_controls
+	var left: float = control_x - 0.42
+	var right: float = readout_x + 0.42
+	var total_w: float = right - left
+	var cx: float = (left + right) * 0.5
+	var body_top: float = pedestal_height + 0.96
+	var cap_h: float = 0.14
+	var back_z: float = -0.42
+
+	var rig := Node3D.new()
+	rig.name = "Cabinet"
+	add_child(rig)
+
+	var pal: Dictionary = HangarKit.finish_palette(finish)
+	var col_body: Color = pal["body"]
+	var col_panel: Color = pal["panel"]
+	var col_accent: Color = pal["accent"]
+	var ew: float = float(pal["wear"]) if finish.to_lower() == "terminal" else wear
+	var shell: StandardMaterial3D = HangarKit.finish_body(finish, col_body, ew)
+	var dark: StandardMaterial3D = HangarKit.painted_metal(Color(0.09, 0.09, 0.105), ew, 0.4, 0.5)
+	var maroon: StandardMaterial3D = HangarKit.painted_metal(Color(0.30, 0.11, 0.09), ew)
+	var steel: StandardMaterial3D = HangarKit.worn_metal(col_panel)
+	var accent: StandardMaterial3D = HangarKit.emissive(col_accent, 2.2)
+
+	# back slab + maroon flank + mullions between the bays
+	rig.add_child(HangarKit.box(Vector3(cx, body_top * 0.5, back_z),
+		Vector3(total_w, body_top, 0.06), shell))
+	rig.add_child(HangarKit.box(Vector3(left + 0.05, body_top * 0.5, back_z + 0.06),
+		Vector3(0.10, body_top, 0.20), maroon))
+	for i in range(panel_count + 1):
+		var mx: float = start_x - panel_spacing * 0.5 + float(i) * panel_spacing
+		rig.add_child(HangarKit.box(Vector3(mx, body_top * 0.5, back_z + 0.07),
+			Vector3(0.05, body_top, 0.16), shell))
+		rig.add_child(HangarKit.bolts(
+			Vector3(mx, 0.22, back_z + 0.16),
+			Vector3(mx, body_top - 0.16, back_z + 0.16), 6, 0.008, steel))
+
+	# control bay (left) — the pad's own bay, mirroring the service bay
+	rig.add_child(HangarKit.box(Vector3(control_x, body_top * 0.5, back_z + 0.10),
+		Vector3(0.80, body_top, 0.22), shell))
+	rig.add_child(HangarKit.wedge(0.52, 0.26, 0.13, 0.035, dark))
+	var w_node: Node = rig.get_child(rig.get_child_count() - 1)
+	(w_node as Node3D).position = Vector3(control_x, pedestal_height + 0.30, back_z + 0.212)
+
+	# service bay behind the readout column
+	rig.add_child(HangarKit.box(Vector3(readout_x, body_top * 0.5, back_z + 0.10),
+		Vector3(0.80, body_top, 0.22), shell))
+	for gi in range(6):
+		rig.add_child(HangarKit.box(
+			Vector3(readout_x, 0.24 + float(gi) * 0.030, back_z + 0.215),
+			Vector3(0.52, 0.012, 0.014), dark))
+	var bar: Node3D = HangarKit.three_color_bar(0.46, 0.020)
+	if bar:
+		bar.position = Vector3(readout_x, pedestal_height + 0.06, back_z + 0.215)
+		rig.add_child(bar)
+
+	# the source indicator is text too — seat it on the service bay
+	if _source_anchor != null and is_instance_valid(_source_anchor):
+		_source_pos = Vector3(readout_x, pedestal_height - 0.10, back_z + 0.222)
+		_source_anchor.position = _source_pos
+
+	# retire the floating name — the sign band owns it now
+	for n in ["FloatTitle", "FloatSub"]:
+		var f: Node = get_node_or_null(n)
+		if f != null:
+			f.queue_free()
+
+	# sign cap over a full-width ember line
+	rig.add_child(HangarKit.box(Vector3(cx, body_top + cap_h * 0.5, back_z + 0.02),
+		Vector3(total_w + 0.10, cap_h, 0.24), shell))
+	rig.add_child(HangarKit.box(Vector3(cx, body_top + 0.006, back_z + 0.145),
+		Vector3(total_w + 0.10, 0.008, 0.005), accent))
+	rig.add_child(HangarKit.box(Vector3(cx, body_top + cap_h * 0.5, back_z + 0.142),
+		Vector3(total_w - 0.12, 0.095, 0.014), dark))
+	var sign_title: Node3D = BakedText.make_tag(
+		"HARDWARE ENTROPY DECAY", Color(0.93, 0.94, 0.97), 0.038,
+		Color(0.07, 0.075, 0.09), false, Color(0, 0, 0, 0))
+	if sign_title:
+		sign_title.position = Vector3(cx, body_top + cap_h * 0.5 + 0.016, back_z + 0.152)
+		rig.add_child(sign_title)
+	var sign_sub: Node3D = BakedText.make_tag(
+		"WEAR IS INFORMATION - THE SURFACE REMEMBERS", Color(0.55, 0.58, 0.66), 0.017,
+		Color(0.07, 0.075, 0.09), false, Color(0, 0, 0, 0))
+	if sign_sub:
+		sign_sub.position = Vector3(cx, body_top + cap_h * 0.5 - 0.026, back_z + 0.152)
+		rig.add_child(sign_sub)
+
+	# asset code + grime at the foot
+	var code: MeshInstance3D = HangarKit.stencil(unit_code, Vector2(0.14, 0.034),
+		col_accent.lightened(0.25))
+	if code:
+		code.position = Vector3(left + 0.22, 0.20, back_z + 0.165)
+		rig.add_child(code)
+	var gb: MeshInstance3D = HangarKit.grime_band(total_w * 0.9, 0.06, back_z + 0.162, col_body)
+	if gb:
+		gb.position.x = cx
+		rig.add_child(gb)
+
+	# plinth strip under the whole rig, and feet
+	rig.add_child(HangarKit.box(Vector3(cx, 0.055, back_z + 0.08),
+		Vector3(total_w, 0.11, 0.30), dark))
+	var ped: Node3D = HangarKit.plinth(total_w, 0.30, plinth_height, finish, ew,
+		col_accent, unit_code)
+	if ped:
+		ped.position = Vector3(cx, 0.0, back_z + 0.08)
+		rig.add_child(ped)

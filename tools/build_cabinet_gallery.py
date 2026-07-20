@@ -90,6 +90,19 @@ CABINETS = [
                 "IS the faceplate), maroon as edge banding, vents in the apron. "
                 "Nothing rises more than a hand's width above the deck.",
     },
+    {
+        "artifact": "hardware_entropy_decay",
+        "body": "three-bay rig",
+        "no": 6,
+        "sign": "HARDWARE ENTROPY DECAY / WEAR IS INFORMATION - THE SURFACE REMEMBERS",
+        "note": "The widest vertical body: three decaying specimens each get a BAY "
+                "of one continuous back slab, divided by mullions with bolt rows. "
+                "A control bay at the left holds the pad on a kit wedge, a service "
+                "bay at the right holds the live HARDWARE INPUTS readout and the "
+                "source indicator — both of which used to hang in air along with "
+                "the title, now in the sign band. First artifact built entirely "
+                "from the kit rather than retrofitted onto it.",
+    },
 ]
 
 ANATOMY = ["back slab", "maroon flank", "window + glass", "service screen",
