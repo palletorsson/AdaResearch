@@ -235,11 +235,17 @@ func _spawn_fungus(deposit: Dictionary, ctx: Dictionary,
 	var cell_size: float = float(s.get("cell_size", 0.10))
 	var max_gens: int = int(s.get("max_generations", 30))
 	var dim: int = dim_base + intensity * dim_per
+	# Mycelial read: mould spreads FLAT and wide along the ground, not as a
+	# ball. A low grid (thin Y, full X/Z) + centre seed grows a network mat
+	# outward from a point. Thin enough to read as filaments, deep enough that
+	# the survive(4-6)/born(5-7) rule still sustains — floor the height at 4.
+	var flat_y: int = maxi(4, int(round(float(dim) / 3.0)))
 
 	var mold := MoldNetworkScene.instantiate()
-	mold.grid_size = Vector3i(dim, dim, dim)
+	mold.grid_size = Vector3i(dim, flat_y, dim)
 	mold.cell_size = cell_size
 	mold.max_generations = max_gens
+	mold.center_seed_on_start = true  # a colony that spreads from one point
 	# Tint to the fungus kingdom's color so CA clusters read as fungus,
 	# not generic white. Pulled from biome_config.json:kingdoms.fungus.
 	mold.color_alive = BiomeConfigLoaderClass.get_kingdom_color(KINGDOM_FUNGUS)
