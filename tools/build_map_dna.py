@@ -41,6 +41,19 @@ SKIP = {"", "cluster", "tt", "sub", "tc", "e", "an", "3t",
         "sp", "t", "s", "r", "m", "ds", "n", "0"}
 
 
+def load_voice_index() -> set:
+    """Lookup names with a critical voice ANYWHERE (@identity in .gd or
+    registry qfep_connection) — the project's real definition, via the same
+    index eye_shot uses. Falls back to empty (registry-only) if unavailable."""
+    try:
+        sys.path.insert(0, str(REPO / "tools"))
+        from qfep_signal import build_critical_index  # type: ignore
+        return {k for k, v in build_critical_index().items()
+                if str(v.get("crit_text", "") or "").strip()}
+    except Exception:
+        return set()
+
+
 def load_registry() -> dict:
     reg: dict = {}
     for f in REGISTRY.glob("*.json"):
@@ -99,7 +112,7 @@ def genome_of(lookup: str, token: str, reg: dict) -> dict:
     return g
 
 
-def build_map(map_dir: Path, reg: dict) -> dict | None:
+def build_map(map_dir: Path, reg: dict, voiced_idx: set) -> dict | None:
     cast = cast_of(map_dir)
     if not cast:
         return None
@@ -118,7 +131,8 @@ def build_map(map_dir: Path, reg: dict) -> dict | None:
         if has_room:
             n_room += 1
         voice = str(e.get("qfep_connection", "") or "")
-        if voice:
+        is_voiced = bool(voice) or lk in voiced_idx
+        if is_voiced:
             n_voice += 1
         promoted = str(e.get("category", "")) == "dna_promoted" or lk.startswith("dna_")
         if promoted:
@@ -133,7 +147,7 @@ def build_map(map_dir: Path, reg: dict) -> dict | None:
                 "registered": lk in reg,
                 "captured": bool(img),
                 "dressing_room": has_room,
-                "voiced": bool(voice),
+                "voiced": is_voiced,
                 "promoted": promoted,
             },
         })
@@ -159,6 +173,7 @@ def main() -> int:
         if a.startswith("--map="):
             want = a.split("=", 1)[1]
     reg = load_registry()
+    voiced_idx = load_voice_index()
     OUT.mkdir(parents=True, exist_ok=True)
     index: list[dict] = []
     n = 0
@@ -167,7 +182,7 @@ def main() -> int:
             continue
         if want and map_dir.name != want:
             continue
-        m = build_map(map_dir, reg)
+        m = build_map(map_dir, reg, voiced_idx)
         if m is None:
             continue
         d = OUT / map_dir.name
