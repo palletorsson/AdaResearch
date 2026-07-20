@@ -1,105 +1,105 @@
 {
-	"approach": "south",
-	"artifact_offset": [
-		0.0,
-		0.0,
-		0.0
-	],
-	"clearance": [
-		3.0,
-		3.0,
-		3.0
-	],
-	"exit": "north",
-	"extras": [],
-	"footing": {
-		"anchor": [
-			3.0,
-			3.0
-		],
-		"tiles": [
-			[
-				1.0,
-				1.0,
-				1.0,
-				1.0,
-				1.0,
-				1.0,
-				1.0
-			],
-			[
-				1.0,
-				1,
-				1,
-				1,
-				1,
-				1,
-				1.0
-			],
-			[
-				1.0,
-				1,
-				1,
-				1,
-				1,
-				1,
-				1.0
-			],
-			[
-				1.0,
-				1,
-				2.0,
-				2.0,
-				2.0,
-				1,
-				1.0
-			],
-			[
-				1.0,
-				1,
-				1,
-				1,
-				1,
-				1,
-				1.0
-			],
-			[
-				1.0,
-				1,
-				1,
-				1,
-				1,
-				1,
-				1.0
-			],
-			[
-				1.0,
-				1.0,
-				1.0,
-				1.0,
-				1.0,
-				1.0,
-				1.0
-			]
-		]
-	},
-	"footprint": [
-		1.0,
-		1.0,
-		2.0
-	],
-	"lookup_name": "2d_in_3d_vectors_vis",
-	"notes": {
-		"tags": [
-			"artifact-needs-fix"
-		],
-		"text": "[auto] AABB.y min = -1.00 — body sinks into / floats above floor"
-	},
-	"posture": "platform",
-	"rotations": [
-		"0",
-		"90",
-		"180",
-		"270"
-	]
+ "approach": "south",
+ "artifact_offset": [
+  0.0,
+  0.0,
+  0.0
+ ],
+ "clearance": [
+  3.0,
+  3.0,
+  3.0
+ ],
+ "exit": "north",
+ "extras": [],
+ "footing": {
+  "anchor": [
+   3.0,
+   3.0
+  ],
+  "tiles": [
+   [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   [
+    1.0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1.0
+   ],
+   [
+    1.0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1.0
+   ],
+   [
+    1.0,
+    1,
+    2.0,
+    2.0,
+    2.0,
+    1,
+    1.0
+   ],
+   [
+    1.0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1.0
+   ],
+   [
+    1.0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1.0
+   ],
+   [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ]
+  ]
+ },
+ "footprint": [
+  4,
+  1,
+  2.0
+ ],
+ "lookup_name": "2d_in_3d_vectors_vis",
+ "notes": {
+  "tags": [
+   "artifact-needs-fix"
+  ],
+  "text": "[auto] AABB.y min = -1.00 \u2014 body sinks into / floats above floor"
+ },
+ "posture": "platform",
+ "rotations": [
+  "0",
+  "90",
+  "180",
+  "270"
+ ]
 }

@@ -1,51 +1,51 @@
 {
-  "lookup_name": "particle_randomness_evolutionary",
-  "footprint": [
+ "lookup_name": "particle_randomness_evolutionary",
+ "footprint": [
+  3,
+  1,
+  1
+ ],
+ "rotations": [
+  "0",
+  "90",
+  "180",
+  "270"
+ ],
+ "approach": "south",
+ "exit": "north",
+ "footing": {
+  "anchor": [
+   1,
+   1
+  ],
+  "tiles": [
+   [
     1,
     1,
     1
-  ],
-  "rotations": [
-    "0",
-    "90",
-    "180",
-    "270"
-  ],
-  "approach": "south",
-  "exit": "north",
-  "footing": {
-    "anchor": [
-      1,
-      1
-    ],
-    "tiles": [
-      [
-        1,
-        1,
-        1
-      ],
-      [
-        1,
-        1,
-        1
-      ],
-      [
-        1,
-        1,
-        1
-      ]
-    ]
-  },
-  "extras": [],
-  "artifact_offset": [
-    0.0,
-    1.5,
-    0.0
-  ],
-  "clearance": [
-    3,
-    3,
-    3
-  ],
-  "posture": "float"
+   ],
+   [
+    1,
+    1,
+    1
+   ],
+   [
+    1,
+    1,
+    1
+   ]
+  ]
+ },
+ "extras": [],
+ "artifact_offset": [
+  0.0,
+  1.5,
+  0.0
+ ],
+ "clearance": [
+  3,
+  3,
+  3
+ ],
+ "posture": "float"
 }

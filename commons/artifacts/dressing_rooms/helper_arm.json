@@ -1,57 +1,57 @@
 {
-  "approach": "south",
-  "artifact_offset": [
-    1.6503,
-    0.0,
-    0.0
+ "approach": "south",
+ "artifact_offset": [
+  1.6503,
+  0.0,
+  0.0
+ ],
+ "clearance": [
+  3.0,
+  3.0,
+  3.0
+ ],
+ "exit": "north",
+ "extras": [],
+ "footing": {
+  "anchor": [
+   1,
+   1
   ],
-  "clearance": [
-    3.0,
-    3.0,
-    3.0
+  "tiles": [
+   [
+    1,
+    1,
+    1
+   ],
+   [
+    1,
+    3,
+    1
+   ],
+   [
+    1,
+    1,
+    1
+   ]
+  ]
+ },
+ "footprint": [
+  2,
+  1,
+  6
+ ],
+ "lookup_name": "helper_arm",
+ "notes": {
+  "tags": [
+   "artifact-needs-fix"
   ],
-  "exit": "north",
-  "extras": [],
-  "footing": {
-    "anchor": [
-      1,
-      1
-    ],
-    "tiles": [
-      [
-        1,
-        1,
-        1
-      ],
-      [
-        1,
-        3,
-        1
-      ],
-      [
-        1,
-        1,
-        1
-      ]
-    ]
-  },
-  "footprint": [
-    6,
-    6,
-    6
-  ],
-  "lookup_name": "helper_arm",
-  "notes": {
-    "tags": [
-      "artifact-needs-fix"
-    ],
-    "text": "[auto] AABB centre offset on X by -1.65 m \u2014 recentre mesh in artifact"
-  },
-  "rotations": [
-    "0",
-    "90",
-    "180",
-    "270"
-  ],
-  "posture": "pedestal"
+  "text": "[auto] AABB centre offset on X by -1.65 m \u2014 recentre mesh in artifact"
+ },
+ "rotations": [
+  "0",
+  "90",
+  "180",
+  "270"
+ ],
+ "posture": "pedestal"
 }
