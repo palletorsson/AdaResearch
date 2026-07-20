@@ -29,6 +29,9 @@ const HangarKit = preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 @export var finish: String = "rams"
 @export var wear: float = 0.10
 @export var unit_code: String = "GB-01"
+## When false the board renders WITHOUT its own cabinet housing — for embedding
+## the bare board inside another artifact's bay (e.g. galton_friction's harvest).
+@export var show_cabinet: bool = true
 
 ## Pedestal height. These machines are authored at bench scale but ground
 ## base-to-floor, which left their keypads at knee height (G5-reach). The
@@ -737,23 +740,23 @@ func _update_stats() -> void:
 # ═════════════════════════════════════════════════════════════════════════════
 
 func _create_labels() -> void:
-	# Title — integrated board tag
-	_title_tag = BakedText.make_tag(
-		"GALTON BOARD", Color(0.9, 0.9, 0.95), 0.045,
-		Color(0.08, 0.09, 0.11), true, Color(0.86, 0.40, 0.16))
-	if _title_tag:
-		_title_tag.name = "TitleTag"
-		_title_tag.position = Vector3(0, board_height + bin_height + 0.06, 0)
-		add_child(_title_tag)
-
-	# Subtitle — integrated board tag
-	var sub_tag: Node3D = BakedText.make_tag(
-		"Central Limit Theorem", Color(0.6, 0.6, 0.7), 0.028,
-		Color(0.08, 0.09, 0.11), true, Color(0, 0, 0, 0))
-	if sub_tag:
-		sub_tag.name = "SubtitleTag"
-		sub_tag.position = Vector3(0, board_height + bin_height + 0.03, 0)
-		add_child(sub_tag)
+	# Title/subtitle only in BARE mode — with the cabinet, its sign-band cap
+	# owns the name and these tags would be buried duplicates inside the shell.
+	if not show_cabinet:
+		_title_tag = BakedText.make_tag(
+			"GALTON BOARD", Color(0.9, 0.9, 0.95), 0.045,
+			Color(0.08, 0.09, 0.11), true, Color(0.86, 0.40, 0.16))
+		if _title_tag:
+			_title_tag.name = "TitleTag"
+			_title_tag.position = Vector3(0, board_height + bin_height + 0.06, 0)
+			add_child(_title_tag)
+		var sub_tag: Node3D = BakedText.make_tag(
+			"Central Limit Theorem", Color(0.6, 0.6, 0.7), 0.028,
+			Color(0.08, 0.09, 0.11), true, Color(0, 0, 0, 0))
+		if sub_tag:
+			sub_tag.name = "SubtitleTag"
+			sub_tag.position = Vector3(0, board_height + bin_height + 0.03, 0)
+			add_child(sub_tag)
 
 	# Stats panel — right side. Rebuilt on change via _refresh_stats_tag().
 	_stats_tag_pos = Vector3(board_width / 2.0 + 0.12, board_height * 0.5, 0)
@@ -833,11 +836,13 @@ func _create_vr_controls() -> void:
 	# ALL-IN-ONE BODY (Palle 2026-07-20, Cyber District refs): the pad mounts
 	# INTO the cabinet's service column — a recessed pocket on the appliance
 	# face, not a floating stand in front.
-	_control_panel.position = Vector3(board_width / 2.0 + 0.18, 0.26, board_depth / 2.0 + 0.094)
+	# seated ON the wedge, not cantilevered forward over the bin ledge
+	_control_panel.position = Vector3(board_width / 2.0 + 0.18, 0.275, board_depth / 2.0 + 0.052)
 	_control_panel.rotation_degrees = Vector3(-15, 0, 0)
-	_control_panel.scale = Vector3(0.92, 0.92, 0.92)  # fit the service column; wedge carries it
+	_control_panel.scale = Vector3(0.86, 0.86, 0.86)  # fit within the wedge footprint
 	add_child(_control_panel)
-	_create_cabinet()
+	if show_cabinet:
+		_create_cabinet()
 
 	var drop_btn: Node = _control_panel.find_child("Btn_0", true, false)
 	if drop_btn:
@@ -951,7 +956,7 @@ func _create_cabinet() -> void:
 
 	var bar: Node3D = HangarKit.three_color_bar(cw - 0.06, 0.018)
 	if bar:
-		bar.position = Vector3(colx, scr_y - scr_h / 2.0 - 0.035, face_z + 0.004)
+		bar.position = Vector3(colx, scr_y + scr_h / 2.0 + 0.028, face_z + 0.004)  # above the screen, clear of the keypad
 		cab.add_child(bar)
 
 	# vent grille (lower column)
@@ -998,12 +1003,14 @@ func _create_cabinet() -> void:
 	# (dust_streaks omitted here: over a WINDOW they read as smears on the
 	#  phenomenon. Age belongs on solid faces — grime_band above.)
 
-	# ── Plinth + feet ──────────────────────────────────────────────────
-	cab.add_child(HangarKit.box(Vector3(cx, 0.045, 0.0),
-		Vector3(total_w, 0.09, bd + 0.16), dark))
-	for fx in [-total_w / 2.0 + 0.09, total_w / 2.0 - 0.09]:
-		cab.add_child(HangarKit.box(Vector3(cx + fx, 0.012, 0.0),
-			Vector3(0.11, 0.024, bd + 0.12), dark))
+	# ── Plinth + feet — floor-standing build only (the pedestal below is the
+	#    sole base otherwise; two bases stranded a dark slab mid-body). ──
+	if plinth_height <= 0.0:
+		cab.add_child(HangarKit.box(Vector3(cx, 0.045, 0.0),
+			Vector3(total_w, 0.09, bd + 0.16), dark))
+		for fx in [-total_w / 2.0 + 0.09, total_w / 2.0 - 0.09]:
+			cab.add_child(HangarKit.box(Vector3(cx + fx, 0.012, 0.0),
+				Vector3(0.11, 0.024, bd + 0.12), dark))
 
 	# ── Pedestal: raise the controls into the VR reach band ─────────────
 	var ped: Node3D = HangarKit.plinth(total_w, bd + 0.18, plinth_height, finish, ew,

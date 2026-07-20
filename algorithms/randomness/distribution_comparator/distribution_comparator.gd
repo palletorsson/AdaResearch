@@ -350,22 +350,25 @@ func _create_cabinet() -> void:
 		sign_sub.position = Vector3(cx, body_top + cap_h / 2.0 - 0.018, 0.078)
 		cab.add_child(sign_sub)
 
-	# plinth + feet
-	var plinth := MeshInstance3D.new()
-	var plinth_mesh := BoxMesh.new()
-	plinth_mesh.size = Vector3(total_w, 0.09, 0.22)
-	plinth.mesh = plinth_mesh
-	plinth.material_override = dark
-	plinth.position = Vector3(cx, 0.045, -0.01)
-	cab.add_child(plinth)
-	for fx in [-total_w / 2.0 + 0.08, total_w / 2.0 - 0.08]:
-		var foot := MeshInstance3D.new()
-		var foot_mesh := BoxMesh.new()
-		foot_mesh.size = Vector3(0.10, 0.03, 0.18)
-		foot.mesh = foot_mesh
-		foot.material_override = dark
-		foot.position = Vector3(cx + fx, 0.015, -0.01)
-		cab.add_child(foot)
+	# plinth + feet — ONLY for a floor-standing build. On a pedestal build the
+	# HangarKit.plinth below is the sole base; this block would strand a second
+	# base at the top of the pedestal (the double-base the review caught).
+	if plinth_height <= 0.0:
+		var plinth := MeshInstance3D.new()
+		var plinth_mesh := BoxMesh.new()
+		plinth_mesh.size = Vector3(total_w, 0.09, 0.22)
+		plinth.mesh = plinth_mesh
+		plinth.material_override = dark
+		plinth.position = Vector3(cx, 0.045, -0.01)
+		cab.add_child(plinth)
+		for fx in [-total_w / 2.0 + 0.08, total_w / 2.0 - 0.08]:
+			var foot := MeshInstance3D.new()
+			var foot_mesh := BoxMesh.new()
+			foot_mesh.size = Vector3(0.10, 0.03, 0.18)
+			foot.mesh = foot_mesh
+			foot.material_override = dark
+			foot.position = Vector3(cx + fx, 0.015, -0.01)
+			cab.add_child(foot)
 
 
 ## Right-triangle prism shoulder (shared cabinet grammar — see galton_board).

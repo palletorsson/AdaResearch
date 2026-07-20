@@ -43,6 +43,10 @@ const BakedTextDV = preload("res://commons/utils/baked_text_albedo.gd")
 @export var wear: float = 0.10
 @export var unit_code: String = "DV-09"
 
+## Sill top (see _create_billboard) — bars and the PDF curve stand on this so
+## nothing floats mid-slab.
+const BAR_BASE_Y := -3.24
+
 var _title_label: Label3D
 var _dist_label: Label3D
 var _param_label: Label3D
@@ -123,8 +127,11 @@ func _create_buttons() -> void:
 	var panel: Node3D = RackTpl.create_panel("DISTRIBUTION", [
 		[{"type": "button", "label": "PREV"}, {"type": "button", "label": "NEXT"}],
 	])
-	panel.position = Vector3(0, -2.5, 3.0)
-	panel.rotation_degrees = Vector3(-25, 0, 0)
+	# just in front of the bar plane (was 4m out front, floating), in the
+	# lower reach band; scaled up so it reads at this wall body's scale
+	panel.position = Vector3(3.6, -2.7, 0.45)
+	panel.rotation_degrees = Vector3(-18, 0, 0)
+	panel.scale = Vector3.ONE * 2.2
 	add_child(panel)
 
 	var prev_btn: Node = panel.find_child("Btn_0", true, false)
@@ -154,7 +161,7 @@ func create_histogram_bars() -> void:
 	for i in range(bin_count):
 		var bar := CSGBox3D.new()
 		bar.size = Vector3(0.3, 0.1, 0.3)
-		bar.position = Vector3(-6 + i * 0.6, -1, 0)
+		bar.position = Vector3(-6 + i * 0.6, BAR_BASE_Y + 0.05, 0)  # standing on the sill
 		bar.material_override = _mat_histogram
 		hist_parent.add_child(bar)
 		histogram_bars.append(bar)
@@ -164,7 +171,8 @@ func create_statistical_curve() -> void:
 	for i in range(50):
 		var point := CSGSphere3D.new()
 		point.radius = 0.05
-		point.position = Vector3(-6 + i * 0.24, 1, -2)
+		# z=+0.15 so the PDF reads IN FRONT of the slab (was z=-2, occluded behind it)
+		point.position = Vector3(-6 + i * 0.24, BAR_BASE_Y + 2.0, 0.15)
 		point.material_override = _mat_curve
 		curve_parent.add_child(point)
 		curve_points.append(point)
@@ -364,7 +372,7 @@ func update_histogram(samples: Array[float]) -> void:
 		var height: float = (count / float(max_count)) * 3.0 + 0.1
 
 		bar.size.y = height
-		bar.position.y = -1 + height / 2
+		bar.position.y = BAR_BASE_Y + height / 2   # grow up from the sill, not mid-air
 
 		var intensity: float = count / float(max_count)
 		_mat_histogram.albedo_color = Color(
@@ -425,16 +433,20 @@ func animate_indicators() -> void:
 		type_mat.albedo_color = colors[current_distribution]
 		type_mat.emission = type_mat.albedo_color * 0.3
 
-	var count_height: float = (sample_count / 1000.0) * 2.0 + 0.5
+	# All gauges STAND ON THE SILL (top ~y=-3.24) growing upward — they were
+	# scattered (SampleCount above the cap, others mid-slab) and read as floating.
+	const SILL_Y := -3.24
+	var count_height: float = (sample_count / 1000.0) * 1.4 + 0.4
 	$SampleCount.height = count_height
-	$SampleCount.position.y = 4 + count_height / 2
+	$SampleCount.position.y = SILL_Y + count_height / 2
 
 	var p1h: float = abs(param1) * 0.5 + 0.5
 	$Parameter1.height = p1h
-	$Parameter1.position.y = -3 + p1h / 2
+	$Parameter1.position.y = SILL_Y + p1h / 2
 	var p2h: float = abs(param2) * 0.5 + 0.5
 	$Parameter2.height = p2h
-	$Parameter2.position.y = -3 + p2h / 2
+	$Parameter2.position.y = SILL_Y + p2h / 2
+	$DistributionType.position.y = SILL_Y + 0.5
 
 	var pulse: float = 1.0 + sin(time * 4.0) * 0.1
 	$Parameter1.scale.x = pulse
@@ -542,14 +554,13 @@ func _create_billboard() -> void:
 		gb.position.y = bot
 		cab.add_child(gb)
 
-	# The three parameter gauges (SampleCount / Parameter1 / Parameter2) stood
-	# out in open air either side of the bars. They are readouts too, so they
-	# come onto the body: a row of standing gauges on the sill.
-	var gauges := ["SampleCount", "Parameter1", "Parameter2"]
+	# All FOUR gauges stood out in open air (DistributionType floated off the
+	# left edge entirely). They are readouts too, so they line up on the sill.
+	var gauges := ["DistributionType", "SampleCount", "Parameter1", "Parameter2"]
 	for gi in range(gauges.size()):
 		var g: Node = get_node_or_null(NodePath(gauges[gi]))
 		if g != null and g is Node3D:
-			var gx: float = half_w - 1.5 - float(gi) * 1.0
+			var gx: float = half_w - 1.4 - float(gi) * 1.0
 			(g as Node3D).position.x = gx
 			(g as Node3D).position.z = z_back + 0.62
 

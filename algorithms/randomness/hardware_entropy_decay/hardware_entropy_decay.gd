@@ -305,18 +305,20 @@ func _input(event: InputEvent) -> void:
 # ============================================================
 
 func _build_pedestal() -> void:
-	# Low platform base
+	# A slim spine strip UNDER the specimen columns only — the rig's own canon
+	# plinth (_build_rig) supplies the base that meets the floor. The old full
+	# 1.8m-deep slab jutted ~0.9m forward of the body and doubled the base read.
 	var base := MeshInstance3D.new()
 	var base_mesh := BoxMesh.new()
-	var total_width := float(panel_count) * panel_spacing + 0.6
-	base_mesh.size = Vector3(total_width, 0.06, 1.8)
+	var total_width := float(panel_count) * panel_spacing + 0.4
+	base_mesh.size = Vector3(total_width, 0.05, 0.30)
 	base.mesh = base_mesh
 	var base_mat := StandardMaterial3D.new()
-	base_mat.albedo_color = Color(0.12, 0.12, 0.14)
+	base_mat.albedo_color = Color(0.09, 0.09, 0.105)
 	base_mat.metallic = 0.3
 	base_mat.roughness = 0.7
 	base.material_override = base_mat
-	base.position = Vector3(0, 0.03, 0)
+	base.position = Vector3(0, 0.03, -0.34)   # align with the rig plinth (back_z + 0.08)
 	add_child(base)
 
 

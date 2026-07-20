@@ -639,8 +639,8 @@ func _create_dock() -> void:
 			_entropy_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		if _stats_label != null and is_instance_valid(_stats_label):
 			_stats_label.reparent(panel)
-			_stats_label.pixel_size = 0.00065
-			_stats_label.position = Vector3(0.0, -0.008, 0.022)
+			_stats_label.pixel_size = 0.00100
+			_stats_label.position = Vector3(0.0, -0.028, 0.022)
 			_stats_label.rotation_degrees = Vector3.ZERO
 			_stats_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 
@@ -648,7 +648,7 @@ func _create_dock() -> void:
 	# Band it the way the station props band a tall body: a lighter mid
 	# section between two dark collars, bolt rows, and a foot ring.
 	var pal: Dictionary = HangarKit.finish_palette(finish)
-	var col_mid: StandardMaterial3D = HangarKit.finish_body(finish, pal["panel"], wear)
+	var col_mid: StandardMaterial3D = HangarKit.finish_body(finish, pal["body"], wear)  # off-white body dominates (family signature)
 	var col_dark: StandardMaterial3D = HangarKit.painted_metal(
 		Color(0.09, 0.09, 0.105), wear, 0.45, 0.5)
 	var steel: StandardMaterial3D = HangarKit.worn_metal(pal["panel"])
@@ -657,11 +657,11 @@ func _create_dock() -> void:
 	var band_mesh := CylinderMesh.new()
 	band_mesh.top_radius = br * 0.965
 	band_mesh.bottom_radius = br * 0.985
-	band_mesh.height = pedestal_height * 0.42
+	band_mesh.height = pedestal_height * 0.62   # widen the off-white body over the dark collars
 	band_mesh.radial_segments = 32
 	band.mesh = band_mesh
 	band.material_override = col_mid
-	band.position = Vector3(0, pedestal_height * 0.50, 0)
+	band.position = Vector3(0, pedestal_height * 0.52, 0)
 	add_child(band)
 	for sy in [pedestal_height * 0.285, pedestal_height * 0.715]:
 		var collar := MeshInstance3D.new()

@@ -81,6 +81,7 @@ func _build_harvest() -> void:
 	# size it to sit inside its bay. Properties are set BEFORE add_child so
 	# _ready sees them.
 	board.set("plinth_height", 0.0)
+	board.set("show_cabinet", false)   # bare board — the twin-bay IS the housing
 	board.position = Vector3(-0.40, 0.02, 0.0)
 	board.scale = Vector3(0.42, 0.42, 0.42)
 	add_child(board)
@@ -121,7 +122,7 @@ func _build_crank() -> void:
 	_bell_overlay(n)
 	_plate("THE CRANK",
 		"pseudo — bin = sum(randf() < 0.5)\nformula · instant · perfect · same seed same bell",
-		Vector3(0.42, 0.46, 0.0), color_bar)
+		Vector3(0.42, 0.56, 0.0), color_bar)  # match THE HARVEST plate height (twin symmetry)
 	_readout = Label3D.new()
 	_readout.text = "0 balls"
 	_readout.font_size = 44

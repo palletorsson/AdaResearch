@@ -373,9 +373,11 @@ static func specimen_dock(base_r: float, dock_r: float, base_h: float,
 	panel.add_child(box(Vector3(0, 0.070, 0.016),
 		Vector3(base_r * 1.05, 0.005, 0.005), emissive(accent_col, 2.0)))
 	for i in range(3):
+		# One warm ember + two neutral keys (family rule: one ember, no stray
+		# cool/warm saturated accents on structural surfaces).
 		var lamp := box(Vector3(-base_r * 0.36 + float(i) * base_r * 0.36, -0.048, 0.016),
 			Vector3(0.016, 0.016, 0.006),
-			emissive([accent_col, glow_col, Color(1.0, 0.78, 0.20)][i], 2.2))
+			emissive([accent_col, Color(0.55, 0.57, 0.62), Color(0.30, 0.31, 0.35)][i], 1.6))
 		panel.add_child(lamp)
 
 	# feet

@@ -203,7 +203,10 @@ func _create_circle_overlay() -> void:
 	mat.albedo_color = Color(0.4, 0.6, 1.0, 0.6)
 	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-	mat.no_depth_test = true
+	# no_depth_test was ON, so the ring composited OVER the frame above the
+	# board — a teal seam at the aperture top (off-family). Depth-test it so it
+	# stays on the board face.
+	mat.no_depth_test = false
 	_circle_mesh.material_override = mat
 
 	_circle_mesh.position = Vector3(0, board_height, board_thickness / 2.0 + 0.002)

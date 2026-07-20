@@ -47,7 +47,7 @@ const HangarKit = preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 @export var table_width: float = 0.8
 @export var table_depth: float = 0.6
 @export var table_height: float = 0.85
-@export var table_color: Color = Color(0.15, 0.12, 0.1)
+@export var table_color: Color = Color(0.70, 0.68, 0.64)  # family panel grey (was dark brown, off-family)
 @export var felt_color: Color = Color(0.08, 0.35, 0.12)
 
 # ── Internal ─────────────────────────────────────────────────────────────────
@@ -191,7 +191,7 @@ func _create_rim() -> void:
 	var rim_y := table_height + 0.015 + rim_height / 2.0
 
 	var rim_mat := StandardMaterial3D.new()
-	rim_mat.albedo_color = Color(0.25, 0.18, 0.12)
+	rim_mat.albedo_color = Color(0.30, 0.11, 0.09)  # maroon rim (family accent flank), not brown
 	rim_mat.metallic = 0.2
 	rim_mat.roughness = 0.6
 

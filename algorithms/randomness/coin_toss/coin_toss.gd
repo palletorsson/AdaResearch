@@ -46,7 +46,7 @@ const HangarKit = preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 
 # ── Landing Pad ──────────────────────────────────────────────────────────────
 @export var pad_radius: float = 0.2
-@export var pad_color: Color = Color(0.08, 0.3, 0.1)  # Green felt
+@export var pad_color: Color = Color(0.12, 0.12, 0.135)  # anthracite landing felt (family palette; green is off-family)
 
 # ── Internal ─────────────────────────────────────────────────────────────────
 var _coins: Array[RigidBody3D] = []
@@ -580,7 +580,7 @@ func _create_cabinet() -> void:
 			tb.queue_free()
 		_board_anchor.position = Vector3(0.0, scr_y - 0.04, face_z + 0.014)
 	if _result_holder != null and is_instance_valid(_result_holder):
-		_result_holder.position = Vector3(0.0, bb_top + cap_h + 0.10, bb_z + 0.02)
+		_result_holder.position = Vector3(0.0, bb_top - 0.06, bb_z + 0.06)  # seated on the crown, not floating above the cap
 
 	# keypad wedge (left of the tray, on the console deck)
 	var wedge := _make_wedge(0.20, 0.13, 0.060, 0.018, dark)
