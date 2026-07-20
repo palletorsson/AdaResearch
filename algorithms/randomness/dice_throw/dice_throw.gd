@@ -555,7 +555,7 @@ func _create_console() -> void:
 	add_child(con)
 
 	var rail_mat := StandardMaterial3D.new()
-	rail_mat.albedo_color = Color(0.22, 0.16, 0.11)
+	rail_mat.albedo_color = table_color.lightened(0.18)   # kin to the table's own wood
 	rail_mat.roughness = 0.6
 	rail_mat.metallic = 0.15
 	var dark := StandardMaterial3D.new()
@@ -680,17 +680,25 @@ func _create_console() -> void:
 	pad_pocket.rotation_degrees = Vector3(-80, 0, 0)
 	con.add_child(pad_pocket)
 
+	# retire the floating title/sub — the rail inlay owns the name now
+	var t: Node = get_node_or_null("TitleLabel")
+	if t != null:
+		t.queue_free()
+	var sub: Node = get_node_or_null("SubLabel")
+	if sub != null:
+		sub.queue_free()
+
 	# the name is read by looking down, the way a table is read
 	var name_tag: Node3D = BakedText.make_tag(
 		"DICE THROW", Color(0.93, 0.94, 0.97), 0.030,
-		Color(0.16, 0.11, 0.08), false, Color(0, 0, 0, 0))
+		Color(0.07, 0.075, 0.09), false, Color(0, 0, 0, 0))
 	if name_tag:
 		name_tag.position = Vector3(0.20, rail_top + 0.002, near_z - 0.030)
 		name_tag.rotation_degrees = Vector3(-90, 0, 0)
 		con.add_child(name_tag)
 	var name_sub: Node3D = BakedText.make_tag(
 		"DISCRETE UNIFORM DISTRIBUTION", Color(0.58, 0.50, 0.44), 0.013,
-		Color(0.16, 0.11, 0.08), false, Color(0, 0, 0, 0))
+		Color(0.07, 0.075, 0.09), false, Color(0, 0, 0, 0))
 	if name_sub:
 		name_sub.position = Vector3(0.20, rail_top + 0.002, near_z + 0.010)
 		name_sub.rotation_degrees = Vector3(-90, 0, 0)

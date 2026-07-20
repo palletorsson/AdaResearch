@@ -1,0 +1,225 @@
+{
+ "version": 1,
+ "title": "The cabinet grammar",
+ "one_line": "An artifact's interface is part of its body — and the body's shape follows the plane you read it on.",
+ "provenance": [
+  "Palle 2026-07-19: the object interface and text has to be one very good looking interface-text body, like a sci info kiosk",
+  "Palle 2026-07-19: think info kiosk, all in one body",
+  "Palle 2026-07-19: the overhead title is still not integrated",
+  "Palle 2026-07-19: the buttons interface part need a wedge profile so it does not hang in the air",
+  "Palle 2026-07-20: if the interface is horizontal then the integration also need to be in that thinking, so this feature is not transferable from the vertical kiosk"
+ ],
+ "palette": {
+  "_comment": "Exact canon. A near-miss reads as a different machine — the checker flags drift beyond tolerance 0.02.",
+  "shell": [
+   0.58,
+   0.6,
+   0.63
+  ],
+  "dark": [
+   0.07,
+   0.075,
+   0.09
+  ],
+  "maroon": [
+   0.3,
+   0.11,
+   0.09
+  ],
+  "accent": [
+   0.86,
+   0.3,
+   0.1
+  ],
+  "text_primary": [
+   0.93,
+   0.94,
+   0.97
+  ],
+  "text_secondary": [
+   0.55,
+   0.58,
+   0.66
+  ],
+  "rail_wood": [
+   0.3,
+   0.28,
+   0.26
+  ],
+  "_rail_wood_note": "DERIVED, not chosen: the host furniture's own albedo lightened 0.18 — a rail must be kin to its table, never an imported brown. The constant here is the value for dice_throw's wood; a second horizontal host with different wood will trip G4, and that is the signal to teach the checker derivations rather than to repaint the artifact.",
+  "glass_screen": [
+   0.04,
+   0.05,
+   0.08
+  ],
+  "_glass_note": "TWO glasses, and they are not interchangeable. glass_screen (dark, emissive) covers a READOUT — text must read against it. window_glass (pale, transparent) covers the PHENOMENON — balls, histograms, darts must read through it. Surfaced by the checker 2026-07-20: the canon named only one.",
+  "window_glass": [
+   0.5,
+   0.6,
+   0.75
+  ]
+ },
+ "dialects": {
+  "vertical": {
+   "when": "The interface plane is vertical — you FACE the artifact standing up.",
+   "silhouette": "A machine: mass rises, the sign is overhead, the reading surface meets the eye.",
+   "parts": {
+    "ground": "back slab (shell) spanning the full body width",
+    "flank": "maroon side flank or side trims, full height",
+    "field": "window: dark backdrop + glass over the artifact's live phenomenon",
+    "readout": "screen inset in a service column or backboard, dark pocket + glass, ember lip",
+    "controls": "keypad on a WEDGE shoulder (right-triangle prism) so it never hangs in air",
+    "signage": "sign band in the cap, baked flush, over a full-width ember stripe",
+    "service": "vent slats on the shell face",
+    "footing": "plinth + feet"
+   },
+   "bodies": [
+    "squat vending machine",
+    "tall street kiosk",
+    "wide console",
+    "pedestal station"
+   ]
+  },
+  "horizontal": {
+   "when": "The interface plane is horizontal — you look DOWN at a table, deck, board or plinth top.",
+   "silhouette": "Furniture: the deck stays the deck. Nothing rises more than a hand's width above it.",
+   "parts": {
+    "ground": "broad working RAIL ring around the play field (the back slab, laid flat)",
+    "flank": "maroon EDGE BANDING on the rail's outer lip",
+    "field": "the deck itself — felt, board, surface — framed by the rail",
+    "readout": "screen SUNK into the far rail, ~14 degrees off the deck plane, tilted toward the reader",
+    "controls": "keypad recessed FLUSH in a milled pocket, face-up, pressed downward (frameless: the pocket IS the faceplate)",
+    "signage": "name INLAID FLAT in the near rail, read by looking down as you approach",
+    "service": "vents in the APRON, seen from below",
+    "footing": "apron + the furniture's own legs"
+   },
+   "bodies": [
+    "table console"
+   ]
+  }
+ },
+ "translation_table": {
+  "_comment": "Parts translate between dialects; they do not transfer. Reusing a vertical part on a horizontal artifact produces two objects pretending to be one.",
+  "back slab": "broad working rail ring",
+  "inset window / screen": "readout sunk in the far rail, 14 deg off the deck",
+  "sign band overhead": "name inlaid flat, read looking down",
+  "keypad on a wedge": "keypad recessed flush, face-up",
+  "maroon flank": "maroon edge banding on the outer lip",
+  "vent slats on the back": "vents in the apron, seen from below",
+  "plinth / feet": "apron + legs"
+ },
+ "rules": [
+  {
+   "id": "G1-no-orphan-text",
+   "name": "No text outside the body",
+   "applies": "all",
+   "check": "every Label3D and baked text tag sits inside the housing AABB (inflated 0.12 m)",
+   "tolerance_m": 0.12,
+   "why": "The founding ruling: readouts and titles that float beside an artifact make the interface a separate object."
+  },
+  {
+   "id": "G2-grounded",
+   "name": "The body meets the floor",
+   "applies": "all",
+   "check": "lowest cabinet element within 0.06 m of y=0",
+   "tolerance_m": 0.06,
+   "why": "A plinth, apron or skirt closes the silhouette; a hovering body reads as a prop, not furniture."
+  },
+  {
+   "id": "G3-silhouette",
+   "name": "Horizontal stays horizontal",
+   "applies": "horizontal",
+   "check": "no console element rises more than 0.10 m above the deck surface",
+   "tolerance_m": 0.1,
+   "why": "The moment it does, it has become a vertical machine wearing a table."
+  },
+  {
+   "id": "G4-palette",
+   "name": "One palette",
+   "applies": "all",
+   "check": "every material albedo is within 0.02 of a canon colour, or is artifact-native (felt, dice, balls, phenomenon colours)",
+   "tolerance": 0.02,
+   "why": "Near-miss greys read as a different manufacturer. Consistency is the whole point of a family."
+  },
+  {
+   "id": "G5-reach",
+   "name": "Controls in the reach band",
+   "applies": "all",
+   "check": "keypad centre between 0.75 m and 1.35 m",
+   "range_m": [
+    0.75,
+    1.35
+   ],
+   "why": "VR ergonomics: below is a crouch, above is a stretch."
+  },
+  {
+   "id": "G6-screen-seated",
+   "name": "Screens are seated, not floating",
+   "applies": "all",
+   "check": "each glass panel has a dark pocket within 0.03 m behind it",
+   "tolerance_m": 0.03,
+   "why": "A pocket makes a screen inset; without it the glass is a poster taped on."
+  },
+  {
+   "id": "G7-accent-present",
+   "name": "The ember line",
+   "applies": "all",
+   "check": "at least one emissive accent element present",
+   "why": "The family's signature: one warm line in a cool machine."
+  }
+ ],
+ "members": [
+  {
+   "artifact": "galton_board",
+   "dialect": "vertical",
+   "body": "squat vending machine",
+   "scene": "res://algorithms/randomness/galton_board/galton_board.tscn",
+   "propagation": 1
+  },
+  {
+   "artifact": "monte_carlo_dartboard",
+   "dialect": "vertical",
+   "body": "tall street kiosk",
+   "scene": "res://algorithms/randomness/monte_carlo_dartboard/monte_carlo_dartboard.tscn",
+   "propagation": 2
+  },
+  {
+   "artifact": "distribution_comparator",
+   "dialect": "vertical",
+   "body": "wide console",
+   "scene": "res://algorithms/randomness/distribution_comparator/distribution_comparator.tscn",
+   "propagation": 3
+  },
+  {
+   "artifact": "coin_toss",
+   "dialect": "vertical",
+   "body": "pedestal station",
+   "scene": "res://algorithms/randomness/coin_toss/coin_toss.tscn",
+   "propagation": 4
+  },
+  {
+   "artifact": "dice_throw",
+   "dialect": "horizontal",
+   "body": "table console",
+   "scene": "res://algorithms/randomness/dice_throw/dice_throw.tscn",
+   "propagation": 5
+  }
+ ],
+ "queue": [
+  "hardware_entropy_decay",
+  "trng_vs_prng",
+  "entropy_jar",
+  "bell_alley",
+  "DistributionVisualization",
+  "galton_friction"
+ ],
+ "process": [
+  "1. READ the artifact: which plane is its interface on? That picks the dialect before anything else.",
+  "2. PICK the body type from that dialect's list, or name a new one.",
+  "3. BUILD from the dialect's parts — never from another dialect's parts.",
+  "4. RE-HOME the live text into the housing; retire floating titles (the signage owns the name).",
+  "5. CAPTURE and look. The capture is the gate, not the code.",
+  "6. CHECK: python tools/check_cabinet_grammar.py — every element measured against the rules above.",
+  "7. RECORD: if the improvement has a reach, write its class-condition in doc/transfer_ledger.md."
+ ]
+}
