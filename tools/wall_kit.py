@@ -229,17 +229,37 @@ def mk_deck():
     return bl
 
 
-def mk_terrace():
+def mk_terrace(variant="gate"):
     """the height change made walkable: north half h3, south half h2, with the
     stair at the step. Colours n='33333333', s='22222222' — so a terrace is the
     only way a deck field can come down to a sea-level field. The kit's
-    transformer."""
+    transformer.
+
+    The fold sits between r3 and r4 on EVERY terrace — moving it would rewrite
+    the west/east colours ('33332222') and the block would stop tiling. So the
+    two plateaus are fixed; the VARIANT is only which cells of the fold you may
+    climb, placed in the utilities layer, which the edge colour never sees.
+    That is the interior freedom the contract was meant to buy: four readings
+    of one colour, interchangeable at every seam.
+
+      gate    the 2-cell centred stair (the original)
+      broad   a 4-cell grand stair — the plateau opens wide
+      ledge   ONE stair; the rest of the fold is a drop you take but cannot
+              climb back, so the upper deck drains freely and returns only here
+      split   two stairs at the flanks, an untenanted overlook between them
+
+    ledge and split make the fold a one-way membrane — genuinely a different
+    walk, not just a different look. deck_dresser adds the fewest walkways for
+    reachability, so as long as one stair connects the plate it leaves the
+    asymmetry standing."""
     bl = blank()
     for r in range(4):
         for c in range(B):
             bl["structure"][r][c] = "3"
-    bl["utilities"][4][3] = "wp:180"       # rise north, onto the upper plate
-    bl["utilities"][4][4] = "wp:180"
+    stairs = {"gate": (3, 4), "broad": (2, 3, 4, 5),
+              "ledge": (3,), "split": (1, 6)}.get(variant, (3, 4))
+    for c in stairs:
+        bl["utilities"][4][c] = "wp:180"   # rise north, onto the upper plate
     return bl
 
 
@@ -266,17 +286,32 @@ def mk_causeway():
     return bl
 
 
-def mk_landing():
+def mk_landing(variant="stair"):
     """where a causeway run meets the ground: MOAT to the north, sea level to
     the south, flat shoulders. The pier head — and the only way a causeway
-    comes down."""
+    comes down.
+
+    row 0 must stay MOAT and the outer columns / south edge stay flat, or the
+    landing stops tiling. Everything the variant touches lives in the interior
+    at the gate columns, so the deck TONGUE — the h3 strip descending from the
+    moat — can run short or deep before it steps down:
+
+      stair   tongue r0-1, a 2-cell step at r2 (the original pier head)
+      pier    tongue r0-3, the step at r4 — a long jetty before the descent
+      broad   short tongue, a 4-cell step splayed across the base
+
+    The tongue is h3 flanked by sea; dropping off its sides is a single step
+    (a curb, not a cliff) so it needs no rail and stays walkable all round."""
     bl = blank()
     for c in range(1, B - 1):
         bl["structure"][0][c] = "3" if c in GATE else "0"
-    for c in GATE:
-        bl["structure"][1][c] = "3"
-    bl["utilities"][2][3] = "wp:180"       # down off the deck onto the plate
-    bl["utilities"][2][4] = "wp:180"
+    depth = {"stair": 2, "pier": 4, "broad": 2}.get(variant, 2)
+    for r in range(1, depth):
+        for c in GATE:
+            bl["structure"][r][c] = "3"    # the tongue
+    step = {"broad": (2, 3, 4, 5)}.get(variant, GATE)
+    for c in step:
+        bl["utilities"][depth][c] = "wp:180"   # down off the deck onto the plate
     return bl
 
 
@@ -284,6 +319,35 @@ DECK_KIT = {"deck": mk_deck, "terrace": mk_terrace,
             "causeway": mk_causeway, "landing": mk_landing}
 DECK_WEIGHTS = {"deck": 2, "terrace": 3, "causeway": 2, "landing": 3}
 KIT_ALL = {**KIT, **DECK_KIT}
+
+# named transition variants (edge-preserving, so they SHARE a block's colour and
+# cost the solver nothing). "few and named" — sub-templates, not sliders; a
+# terrace#ledge is a different room from a terrace, and still says its name.
+VARIANTS = {"terrace": ["gate", "broad", "ledge", "split"],
+            "landing": ["stair", "pier", "broad"]}
+
+
+def make_block(name):
+    """build a block from a name that may carry a #variant."""
+    base, _, var = name.partition("#")
+    return KIT_ALL[base](var) if var else KIT_ALL[base]()
+
+
+def deck_pool():
+    """(names, weights) for the --decks pool, variants expanded. A block's
+    weight is SPLIT across its variants, so adding transition variety does not
+    make terraces more common — the family keeps its budget."""
+    names, weights = [], []
+    for n in DECK_KIT:
+        vs = VARIANTS.get(n)
+        if vs:
+            for v in vs:
+                names.append(f"{n}#{v}")
+                weights.append(DECK_WEIGHTS[n] / len(vs))
+        else:
+            names.append(n)
+            weights.append(DECK_WEIGHTS[n])
+    return names, weights
 
 
 _ROT_WALL = {"n": "e", "e": "s", "s": "w", "w": "n"}    # one quarter-turn CW
@@ -333,21 +397,44 @@ def choose_blocks(cols, rows, rng, names, weights, flat_first_last=True):
     """
     # a tile is a (block, rotation) pair; its colour is read off the rotated floor
     tiles = [(n, k) for n in names for k in range(4)]
-    cache = {t: edges_of(rot_block(KIT_ALL[t[0]](), t[1])) for t in tiles}
+    cache = {t: edges_of(rot_block(make_block(t[0]), t[1])) for t in tiles}
     wt = {n: weights[names.index(n)] for n in names}
     grid = [[None] * cols for _ in range(rows)]
 
-    # WANT a plateau. Left to weighted chance the solve collapses to all-flat
+    # WANT a plateau, and left to weighted chance the solve collapses to all-flat
     # every time — flat outnumbers deck and, having placed one flat block, the
-    # cheapest continuation is always another. So one interior cell is planted
-    # as a deck and the colours propagate outward from it; the terraces that
-    # skirt it are not chosen, they are forced. The dice still throw for
-    # everything the plateau does not decide.
-    plant = None
-    if rows * cols > 1 and any(n in DECK_KIT for n in names):
-        plant = (rng.randrange(rows), rng.randrange(cols))
-        if plant == (0, 0) or plant == (rows - 1, cols - 1):
-            plant = (rng.randrange(rows), rng.randrange(cols))
+    # cheapest continuation is another. A deck's colour is all-h3 on all four
+    # sides, so a deck can only neighbour a deck east-west: deck REGIONS are
+    # full-width bands, and a single planted cell rarely grows into one on a wide
+    # grid (every cell of its row would have to independently choose deck). So
+    # the plant is the whole band — one interior row forced to deck, the rows
+    # that skirt it forced to the terrace rotation that caps a plateau (a
+    # different transition VARIANT per cell, so the four readings appear across
+    # the width). The dice still throw for every row the band does not claim.
+    #
+    #   row bR-1   terrace*2   flat above -> deck below   (the north cap)
+    #   row bR     deck        the plateau
+    #   row bR+1   terrace*0   deck above -> flat below    (the south cap)
+    #
+    # bR-1 >= 1 keeps the north cap off the spawn row (which must stay flat);
+    # bR+1 may be the last row, since a terrace*0's south edge IS flat and so
+    # satisfies the teleporter's footing. Needs rows >= 4.
+    forced = {}
+    tvars = VARIANTS.get("terrace") or [""]
+    if any(n in DECK_KIT for n in names):
+        if rows >= 4:
+            bR = rng.randrange(2, rows - 1)
+            def _terr(rot):
+                v = rng.choice(tvars)
+                return (f"terrace#{v}" if v else "terrace", rot)
+            for bc in range(cols):
+                forced[(bR - 1, bc)] = _terr(2)
+                forced[(bR, bc)] = ("deck", 0)
+                forced[(bR + 1, bc)] = _terr(0)
+        elif rows * cols > 1:
+            p = (rng.randrange(rows), rng.randrange(cols))   # the old point plant
+            if p not in ((0, 0), (rows - 1, cols - 1)):
+                forced[p] = None            # None = "any DECK_KIT tile"
 
     def candidates(br, bc):
         out = []
@@ -362,8 +449,13 @@ def choose_blocks(cols, rows, rng, names, weights, flat_first_last=True):
             if flat_first_last and (br, bc) == (rows - 1, cols - 1) \
                     and es != FLAT:
                 continue          # the teleporter needs solid ground under it
-            if plant == (br, bc) and t[0] not in DECK_KIT:
-                continue          # the planted plateau
+            if (br, bc) in forced:
+                want = forced[(br, bc)]
+                if want is None:
+                    if t[0] not in DECK_KIT:
+                        continue  # point plant: any deck block
+                elif t != want:
+                    continue      # band plant: this exact tile
             out.append(t)
         return out
 
@@ -391,8 +483,8 @@ def choose_blocks(cols, rows, rng, names, weights, flat_first_last=True):
         return False
 
     if not solve(0):
-        if plant is not None:          # the plateau was too greedy for this
-            plant = None               # grid — fall back to a flat colouring
+        if forced:                     # the plateau was too greedy for this
+            forced.clear()             # grid — fall back to a flat colouring
             budget[0] = 200_000
             grid = [[None] * cols for _ in range(rows)]
             if solve(0):
@@ -433,8 +525,9 @@ def seed_map(cols, rows, seed, name, decks=False):
     eweights = [ENC_WEIGHTS[n] for n in enames]
     if decks:
         # the coloured solve — deck blocks in play, seams must agree
-        names = list(KIT) + list(DECK_KIT)
-        weights = [WEIGHTS.get(n) or DECK_WEIGHTS[n] for n in names]
+        dnames, dweights = deck_pool()
+        names = list(KIT) + dnames
+        weights = [WEIGHTS[n] for n in KIT] + dweights
         chosen = choose_blocks(cols, rows, rng, names, weights)
     else:
         # the original path, untouched: one colour, so no solve is needed and
@@ -470,9 +563,9 @@ def seed_map(cols, rows, seed, name, decks=False):
         for bc in range(cols):
             _pick = chosen[br][bc]
             if isinstance(_pick, tuple):
-                bl = rot_block(KIT_ALL[_pick[0]](), _pick[1])
+                bl = rot_block(make_block(_pick[0]), _pick[1])
             else:
-                bl = KIT_ALL[_pick]()
+                bl = make_block(_pick)
             perimeter(bl, encl[br][bc])
             for r in range(B):
                 for c in range(B):
