@@ -78,7 +78,7 @@ func _ready() -> void:
 	_create_dice()
 	_create_labels()
 	_create_vr_controls()
-	_create_cabinet()
+	_create_console()
 
 	_dice_spawn_pos = Vector3(0, table_height + dice_size, 0)
 
@@ -512,28 +512,52 @@ func _create_labels() -> void:
 	add_child(_stats_label)
 
 
-## THE CABINET — propagation no. 5: the croupier table. The felt keeps its
-## table; a BACKBOARD rises at the rear edge carrying the sign band and an
-## inset TALLY screen (the live result "?" and stats Label3Ds re-home onto
-## the glass — Label3D stays, the housing changes); RESET/CLEAR seats on an
-## apron wedge at the front edge; maroon trims, vents, apron skirt. One body.
-func _create_cabinet() -> void:
+## THE TABLE CONSOLE — the HORIZONTAL dialect of the interface ruling.
+##
+## The kiosk grammar (back slab, standing window, sign band overhead) answers
+## a VERTICAL question: an artifact you face. A table is a horizontal
+## instrument — you look DOWN at it — so its interface has to be integrated in
+## that thinking: everything inset into the rail and the deck, nothing rising
+## above the table silhouette. The parts translate, they do not transfer:
+##
+##   vertical               horizontal
+##   ─────────────────────  ────────────────────────────────────────
+##   back slab              broad working RAIL around the play field
+##   inset window/screen    readout sunk in the FAR rail, tilted up to
+##                          the player (22 deg from the deck plane)
+##   sign band overhead     name INLAID FLAT in the near rail, read
+##                          by looking down as you approach
+##   keypad on a wedge      keypad recessed FLUSH in the near rail,
+##                          face-up, pressed downward
+##   maroon flank           maroon EDGE BANDING on the rail's outer lip
+##   vent slats on the back vents in the APRON, seen from below
+##
+## Nothing here breaks the plane of a table. It reads as one piece of casino
+## furniture, not as a machine standing behind a table.
+func _create_console() -> void:
 	var th: float = table_height
-	var bb_w: float = table_width + 0.10
-	var bb_z: float = -table_depth / 2.0 - 0.065
-	var bb_bot: float = th - 0.10
-	var bb_top: float = th + 0.72
-	var cap_h: float = 0.10
-	var face_z: float = bb_z + 0.042
+	var rail_far: float = 0.18                    # far rail — carries the readout
+	var rail_near: float = 0.24                   # near rail — deeper: the player leans here
+	var rail_side: float = 0.10
+	var rail_th: float = 0.055
+	var rail_top: float = th + 0.048
+	var rail_y: float = rail_top - rail_th / 2.0
+	var outer_w: float = table_width + 2.0 * rail_side
+	var far_z: float = -(table_depth / 2.0 + rail_far / 2.0)
+	var near_z: float = table_depth / 2.0 + rail_near / 2.0
+	var z_out_far: float = -(table_depth / 2.0 + rail_far)
+	var z_out_near: float = table_depth / 2.0 + rail_near
+	var ring_cz: float = (z_out_far + z_out_near) / 2.0
+	var ring_d: float = z_out_near - z_out_far
 
-	var cab := Node3D.new()
-	cab.name = "Cabinet"
-	add_child(cab)
+	var con := Node3D.new()
+	con.name = "TableConsole"
+	add_child(con)
 
-	var shell := StandardMaterial3D.new()
-	shell.albedo_color = Color(0.58, 0.60, 0.63)
-	shell.roughness = 0.5
-	shell.metallic = 0.25
+	var rail_mat := StandardMaterial3D.new()
+	rail_mat.albedo_color = Color(0.22, 0.16, 0.11)
+	rail_mat.roughness = 0.6
+	rail_mat.metallic = 0.15
 	var dark := StandardMaterial3D.new()
 	dark.albedo_color = Color(0.07, 0.075, 0.09)
 	dark.roughness = 0.45
@@ -554,160 +578,141 @@ func _create_cabinet() -> void:
 	accent.emission = Color(0.86, 0.30, 0.10)
 	accent.emission_energy_multiplier = 2.2
 
-	# backboard
-	var bb := MeshInstance3D.new()
-	var bb_mesh := BoxMesh.new()
-	bb_mesh.size = Vector3(bb_w, bb_top - bb_bot, 0.07)
-	bb.mesh = bb_mesh
-	bb.material_override = shell
-	bb.position = Vector3(0.0, (bb_bot + bb_top) / 2.0, bb_z)
-	cab.add_child(bb)
-	for sx in [-1.0, 1.0]:
-		var trim := MeshInstance3D.new()
-		var trim_mesh := BoxMesh.new()
-		trim_mesh.size = Vector3(0.05, bb_top - bb_bot, 0.09)
-		trim.mesh = trim_mesh
-		trim.material_override = maroon
-		trim.position = Vector3(sx * (bb_w / 2.0 + 0.025), (bb_bot + bb_top) / 2.0, bb_z)
-		cab.add_child(trim)
+	# ── the working RAIL ring — the horizontal answer to the back slab ──
+	var rails := [
+		[Vector3(0, rail_y, far_z), Vector3(outer_w, rail_th, rail_far)],
+		[Vector3(0, rail_y, near_z), Vector3(outer_w, rail_th, rail_near)],
+		[Vector3(-(table_width / 2.0 + rail_side / 2.0), rail_y, 0),
+			Vector3(rail_side, rail_th, table_depth)],
+		[Vector3(table_width / 2.0 + rail_side / 2.0, rail_y, 0),
+			Vector3(rail_side, rail_th, table_depth)],
+	]
+	for r in rails:
+		var mi := MeshInstance3D.new()
+		var bm := BoxMesh.new()
+		bm.size = r[1]
+		mi.mesh = bm
+		mi.material_override = rail_mat
+		mi.position = r[0]
+		con.add_child(mi)
 
-	# inset TALLY screen — result + stats re-home here
-	var scr_w: float = bb_w - 0.22
-	var scr_h: float = 0.42
-	var scr_y: float = th + 0.30
+	# maroon edge banding — the flank, laid flat around the outer lip
+	var bands := [
+		[Vector3(0, rail_y, z_out_far + 0.004), Vector3(outer_w, 0.030, 0.008)],
+		[Vector3(0, rail_y, z_out_near - 0.004), Vector3(outer_w, 0.030, 0.008)],
+		[Vector3(-(outer_w / 2.0) + 0.004, rail_y, ring_cz), Vector3(0.008, 0.030, ring_d)],
+		[Vector3((outer_w / 2.0) - 0.004, rail_y, ring_cz), Vector3(0.008, 0.030, ring_d)],
+	]
+	for b in bands:
+		var mi2 := MeshInstance3D.new()
+		var bm2 := BoxMesh.new()
+		bm2.size = b[1]
+		mi2.mesh = bm2
+		mi2.material_override = maroon
+		mi2.position = b[0]
+		con.add_child(mi2)
+
+	# ember inlay routed along the rail's inner edge
+	for sz in [-1.0, 1.0]:
+		var inlay := MeshInstance3D.new()
+		var inlay_mesh := BoxMesh.new()
+		inlay_mesh.size = Vector3(table_width + 2.0 * rail_side, 0.003, 0.006)
+		inlay.mesh = inlay_mesh
+		inlay.material_override = accent
+		inlay.position = Vector3(0, rail_top + 0.001, sz * (table_depth / 2.0 + 0.014))
+		con.add_child(inlay)
+
+	# ── READOUT sunk into the FAR rail, 14 deg off the deck ──
+	# Nearly flat: an inlaid dealer's screen, read by looking down. Steeper
+	# than this and it stands up like a monitor — which is the vertical
+	# dialect wearing a table.
+	var tilt: float = -76.0
+	var norm := Vector3(0.0, 0.970, 0.242)        # glass face normal
+	var loc_up := Vector3(0.0, 0.242, -0.970)     # glass local up, in world
+	var scr_w: float = 0.56
+	var scr_h: float = 0.15
+	var scr_c := Vector3(0.0, rail_top + 0.016, far_z + 0.004)
+
 	var pocket := MeshInstance3D.new()
 	var pocket_mesh := BoxMesh.new()
-	pocket_mesh.size = Vector3(scr_w + 0.02, scr_h + 0.04, 0.014)
+	pocket_mesh.size = Vector3(scr_w + 0.030, scr_h + 0.025, 0.014)
 	pocket.mesh = pocket_mesh
 	pocket.material_override = dark
-	pocket.position = Vector3(0.0, scr_y, face_z + 0.002)
-	cab.add_child(pocket)
+	pocket.position = scr_c - Vector3(0, 0.005, 0.003)
+	pocket.rotation_degrees = Vector3(tilt, 0, 0)
+	con.add_child(pocket)
+
 	var glass := MeshInstance3D.new()
 	var glass_mesh := BoxMesh.new()
 	glass_mesh.size = Vector3(scr_w, scr_h, 0.006)
 	glass.mesh = glass_mesh
 	glass.material_override = glass_mat
-	glass.position = Vector3(0.0, scr_y - 0.006, face_z + 0.010)
-	cab.add_child(glass)
-	var head_tag: Node3D = BakedText.make_tag(
-		"TALLY", Color(0.92, 0.93, 0.97), 0.020,
-		Color(0.055, 0.06, 0.075), true, Color(0.86, 0.30, 0.10))
-	if head_tag:
-		head_tag.position = Vector3(0.0, scr_y + scr_h / 2.0 + 0.012, face_z + 0.014)
-		cab.add_child(head_tag)
-	var stripe := MeshInstance3D.new()
-	var stripe_mesh := BoxMesh.new()
-	stripe_mesh.size = Vector3(scr_w + 0.02, 0.005, 0.004)
-	stripe.mesh = stripe_mesh
-	stripe.material_override = accent
-	stripe.position = Vector3(0.0, scr_y + scr_h / 2.0 - 0.002, face_z + 0.012)
-	cab.add_child(stripe)
+	glass.position = scr_c
+	glass.rotation_degrees = Vector3(tilt, 0, 0)
+	con.add_child(glass)
 
-	# retire floating title/sub (cap sign owns the name); re-home live labels
-	var t: Node = get_node_or_null("TitleLabel")
-	if t != null:
-		t.queue_free()
-	var sub: Node = get_node_or_null("SubLabel")
-	if sub != null:
-		sub.queue_free()
+	var scr_stripe := MeshInstance3D.new()
+	var scr_stripe_mesh := BoxMesh.new()
+	scr_stripe_mesh.size = Vector3(scr_w + 0.030, 0.004, 0.005)
+	scr_stripe.mesh = scr_stripe_mesh
+	scr_stripe.material_override = accent
+	scr_stripe.position = scr_c + loc_up * (scr_h / 2.0 + 0.005) + norm * 0.003
+	scr_stripe.rotation_degrees = Vector3(tilt, 0, 0)
+	con.add_child(scr_stripe)
+
+	# the live figures ride the inlaid glass (housing changes, text tech stays)
 	if _result_label != null and is_instance_valid(_result_label):
-		_result_label.position = Vector3(-scr_w / 2.0 + 0.11, scr_y + 0.10, face_z + 0.016)
+		_result_label.pixel_size = 0.0018
+		_result_label.position = scr_c + Vector3(-0.21, 0, 0) + norm * 0.006
+		_result_label.rotation_degrees = Vector3(tilt, 0, 0)
 	if _stats_label != null and is_instance_valid(_stats_label):
-		_stats_label.position = Vector3(-scr_w / 2.0 + 0.20, scr_y + 0.06, face_z + 0.016)
+		_stats_label.pixel_size = 0.0010
+		_stats_label.position = scr_c + Vector3(-0.13, 0, 0) + loc_up * 0.060 + norm * 0.006
+		_stats_label.rotation_degrees = Vector3(tilt, 0, 0)
 
-	# apron wedge for the pad (front edge)
-	var wedge := _make_wedge(0.22, 0.12, 0.058, 0.016, dark)
-	wedge.position = Vector3(0.0, th + 0.035, table_depth / 2.0 + 0.030)
-	wedge.rotation_degrees = Vector3(0, 180, 0)
-	cab.add_child(wedge)
+	# ── NEAR rail: keypad recessed flush (left) + name INLAID FLAT (right) ──
+	var pad_pocket := MeshInstance3D.new()
+	var pad_pocket_mesh := BoxMesh.new()
+	pad_pocket_mesh.size = Vector3(0.28, 0.200, 0.012)
+	pad_pocket.mesh = pad_pocket_mesh
+	pad_pocket.material_override = dark
+	pad_pocket.position = Vector3(-0.22, rail_top + 0.008, table_depth / 2.0 + 0.120)
+	pad_pocket.rotation_degrees = Vector3(-80, 0, 0)
+	con.add_child(pad_pocket)
 
-	# vent slats at backboard base
+	# the name is read by looking down, the way a table is read
+	var name_tag: Node3D = BakedText.make_tag(
+		"DICE THROW", Color(0.93, 0.94, 0.97), 0.030,
+		Color(0.16, 0.11, 0.08), false, Color(0, 0, 0, 0))
+	if name_tag:
+		name_tag.position = Vector3(0.20, rail_top + 0.002, near_z - 0.030)
+		name_tag.rotation_degrees = Vector3(-90, 0, 0)
+		con.add_child(name_tag)
+	var name_sub: Node3D = BakedText.make_tag(
+		"DISCRETE UNIFORM DISTRIBUTION", Color(0.58, 0.50, 0.44), 0.013,
+		Color(0.16, 0.11, 0.08), false, Color(0, 0, 0, 0))
+	if name_sub:
+		name_sub.position = Vector3(0.20, rail_top + 0.002, near_z + 0.010)
+		name_sub.rotation_degrees = Vector3(-90, 0, 0)
+		con.add_child(name_sub)
+
+	# ── APRON under the rail, vents where a table hides them ──
+	var apron := MeshInstance3D.new()
+	var apron_mesh := BoxMesh.new()
+	apron_mesh.size = Vector3(outer_w - 0.08, 0.08, ring_d - 0.08)
+	apron.mesh = apron_mesh
+	apron.material_override = dark
+	apron.position = Vector3(0, th - 0.045, ring_cz)
+	con.add_child(apron)
 	for gi in range(5):
 		var slat := MeshInstance3D.new()
 		var slat_mesh := BoxMesh.new()
-		slat_mesh.size = Vector3(0.34, 0.008, 0.010)
+		slat_mesh.size = Vector3(0.30, 0.007, 0.008)
 		slat.mesh = slat_mesh
-		slat.material_override = dark
-		slat.position = Vector3(0.0, bb_bot + 0.03 + float(gi) * 0.020, face_z + 0.002)
-		cab.add_child(slat)
-
-	# sign cap
-	var cap := MeshInstance3D.new()
-	var cap_mesh := BoxMesh.new()
-	cap_mesh.size = Vector3(bb_w + 0.10, cap_h, 0.11)
-	cap.mesh = cap_mesh
-	cap.material_override = shell
-	cap.position = Vector3(0.0, bb_top + cap_h / 2.0, bb_z)
-	cab.add_child(cap)
-	var cap_stripe := MeshInstance3D.new()
-	var cap_stripe_mesh := BoxMesh.new()
-	cap_stripe_mesh.size = Vector3(bb_w + 0.10, 0.006, 0.004)
-	cap_stripe.mesh = cap_stripe_mesh
-	cap_stripe.material_override = accent
-	cap_stripe.position = Vector3(0.0, bb_top + 0.004, bb_z + 0.058)
-	cab.add_child(cap_stripe)
-	var sign := MeshInstance3D.new()
-	var sign_mesh := BoxMesh.new()
-	sign_mesh.size = Vector3(bb_w - 0.02, 0.066, 0.012)
-	sign.mesh = sign_mesh
-	sign.material_override = dark
-	sign.position = Vector3(0.0, bb_top + cap_h / 2.0, bb_z + 0.056)
-	cab.add_child(sign)
-	var sign_title: Node3D = BakedText.make_tag(
-		"DICE THROW", Color(0.93, 0.94, 0.97), 0.030,
-		Color(0.07, 0.075, 0.09), false, Color(0, 0, 0, 0))
-	if sign_title:
-		sign_title.position = Vector3(0.0, bb_top + cap_h / 2.0 + 0.012, bb_z + 0.064)
-		cab.add_child(sign_title)
-	var sign_sub: Node3D = BakedText.make_tag(
-		"DISCRETE UNIFORM DISTRIBUTION", Color(0.55, 0.58, 0.66), 0.014,
-		Color(0.07, 0.075, 0.09), false, Color(0, 0, 0, 0))
-	if sign_sub:
-		sign_sub.position = Vector3(0.0, bb_top + cap_h / 2.0 - 0.018, bb_z + 0.064)
-		cab.add_child(sign_sub)
-
-	# apron skirt under the table lip
-	var skirt := MeshInstance3D.new()
-	var skirt_mesh := BoxMesh.new()
-	skirt_mesh.size = Vector3(table_width + 0.06, 0.09, table_depth + 0.06)
-	skirt.mesh = skirt_mesh
-	skirt.material_override = dark
-	skirt.position = Vector3(0.0, th - 0.075, 0.0)
-	cab.add_child(skirt)
-
-
-## Right-triangle prism shoulder (shared cabinet grammar — see galton_board).
-func _make_wedge(w: float, h: float, d_bottom: float, d_top: float, mat: Material) -> MeshInstance3D:
-	var st := SurfaceTool.new()
-	st.begin(Mesh.PRIMITIVE_TRIANGLES)
-	var x0: float = -w / 2.0
-	var x1: float = w / 2.0
-	var y0: float = -h / 2.0
-	var y1: float = h / 2.0
-	var bbl := Vector3(x0, y0, 0.0)
-	var bbr := Vector3(x1, y0, 0.0)
-	var btl := Vector3(x0, y1, 0.0)
-	var btr := Vector3(x1, y1, 0.0)
-	var fbl := Vector3(x0, y0, d_bottom)
-	var fbr := Vector3(x1, y0, d_bottom)
-	var ftl := Vector3(x0, y1, d_top)
-	var ftr := Vector3(x1, y1, d_top)
-	var faces := [
-		[fbl, fbr, ftr, ftl],
-		[bbr, bbl, btl, btr],
-		[bbl, fbl, ftl, btl],
-		[fbr, bbr, btr, ftr],
-		[btl, ftl, ftr, btr],
-		[bbl, bbr, fbr, fbl],
-	]
-	for f in faces:
-		st.add_vertex(f[0]); st.add_vertex(f[1]); st.add_vertex(f[2])
-		st.add_vertex(f[0]); st.add_vertex(f[2]); st.add_vertex(f[3])
-	st.generate_normals()
-	var mi := MeshInstance3D.new()
-	mi.mesh = st.commit()
-	mi.material_override = mat
-	return mi
+		slat.material_override = rail_mat
+		slat.position = Vector3(0.0, th - 0.072 + float(gi) * 0.013,
+			ring_cz + (ring_d - 0.08) / 2.0 + 0.002)
+		con.add_child(slat)
 
 
 func _update_stats() -> void:
@@ -742,11 +747,12 @@ func _create_vr_controls() -> void:
 			{"type": "button", "label": "RESET"},
 			{"type": "button", "label": "CLEAR"},
 		],
-	])
-	# seated on the table-apron wedge (all-in-one body)
-	panel.position = Vector3(0, table_height + 0.035, table_depth / 2.0 + 0.085)
-	panel.rotation_degrees = Vector3(-18, 0, 0)
-	panel.scale = Vector3(0.8, 0.8, 0.8)
+	], true)  # frameless — the rail pocket is the faceplate
+	# recessed flush into the near rail, face-up — a table's controls are
+	# pressed downward, not faced (see _create_console for the ruling)
+	panel.position = Vector3(-0.22, table_height + 0.068, table_depth / 2.0 + 0.122)
+	panel.rotation_degrees = Vector3(-80, 0, 0)
+	panel.scale = Vector3(0.78, 0.78, 0.78)
 	add_child(panel)
 
 	# RESET (Btn_0)

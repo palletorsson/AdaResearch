@@ -19,6 +19,38 @@
 | **Integrated info kiosk** (readout + buttons in ONE housed terminal body — dark metal housing, recessed bezel screen, stencil header, ember accent stripe; no floating stat plates) | any artifact whose stats/readout text floats beside the body (BakedText/Label3D stacks positioned outside a housing) — Palle 2026-07-20: "the object interface and text has to be one very good looking interface-text body, like a sci info kiosk" | galton_board = first propagation, v2 ALL-IN-ONE cabinet (`_create_cabinet()`: the artifact IS the appliance — poster-window + service column with inset screen/keypad/vents/cap/plinth); class is large (every make_tag stats stack) | OPEN (pattern proven) |
 | **Placement re-optimization** (`place.py --in-place --only-improve` + pathfinder gate) | any map whose placement predates the engines | spine complete: 269 maps, 138 improved, 0 rollbacks | PROPAGATED (re-runnable) |
 | **Dressing room from template** | registered artifact with no `dressing_rooms/<lookup>.json` (viewer can't jump to it) | 15 bricolage rooms made; residual class ≈ registry minus 2,585 roomed | OPEN (generate on demand) |
+| **Horizontal dialect of the kiosk ruling** (rail + inlay + flush pocket instead of back slab + standing window + overhead sign) | an artifact whose **interface plane is horizontal** — a table, deck, floor field, plinth top, board you look DOWN at. Palle 2026-07-20: *"if the interface is horizontal then the integration also need to be in that thinking, so this feature is not transferable from the vertical kiosk."* | dice_throw rebuilt (backboard deleted); class = every table/deck artifact in the corpus | OPEN (dialect proven) |
+
+## Plane-relativity — the correction that made the ledger honest
+
+The kiosk ruling was written as if it were plane-neutral, and it is not.
+Bolting a standing backboard onto the dice table produced **two objects
+pretending to be one** — the exact failure the ruling exists to prevent.
+
+An improvement that changes *housing* is only transferable to artifacts
+that share the **interface plane**. The parts translate; they do not carry:
+
+| vertical (you face it) | horizontal (you look down at it) |
+|---|---|
+| back slab | broad working RAIL around the field |
+| inset window / screen | readout sunk in the far rail, ~14° off the deck |
+| sign band overhead | name INLAID FLAT, read by looking down |
+| keypad on a wedge | keypad recessed FLUSH, face-up, pressed downward |
+| maroon flank | maroon EDGE BANDING on the outer lip |
+| vent slats on the back | vents in the APRON, seen from below |
+| plinth / feet | apron + legs |
+
+**Test before transferring any housing improvement:** does the artifact's
+interface plane match the donor's? If not, the correct move is to write the
+dialect, not to reuse the parts. A silhouette rule falls out of this: in the
+horizontal dialect nothing may rise more than ~0.1 m above the deck — the
+moment it does, it has become a vertical machine wearing a table.
+
+Corollary won here: `RackTemplates.create_panel(title, rows, true)` —
+`frameless` drops the white faceplate, so a milled pocket can BE the plate.
+That is the horizontal answer to the standing "keypad plate is
+RackTemplates-white" complaint, and it applies to any recessed control
+cluster in either dialect.
 
 ## The discipline
 

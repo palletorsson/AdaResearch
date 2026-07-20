@@ -74,13 +74,18 @@ CABINETS = [
     },
     {
         "artifact": "dice_throw",
-        "body": "croupier table",
+        "body": "table console (HORIZONTAL dialect)",
         "no": 5,
-        "sign": "DICE THROW / DISCRETE UNIFORM DISTRIBUTION",
-        "note": "The felt keeps its legs; the backboard rises at the rear edge. "
-                "This one proves the ruling is about HOUSING, not text technology — "
-                "the live result and running tally are still Label3Ds, they just "
-                "live on the glass now instead of in the air.",
+        "sign": "DICE THROW / DISCRETE UNIFORM DISTRIBUTION (inlaid flat in the rail)",
+        "note": "The correction that made the family honest. This first got a "
+                "standing backboard — and a kiosk behind a table is two objects "
+                "pretending to be one. A table's interface plane is horizontal, so "
+                "the integration had to be too: a broad working RAIL instead of a "
+                "back slab, the readout sunk into the far rail at 14 degrees off "
+                "the deck, the name INLAID FLAT to be read looking down, the keypad "
+                "recessed FLUSH and pressed downward (frameless — the milled pocket "
+                "IS the faceplate), maroon as edge banding, vents in the apron. "
+                "Nothing rises more than a hand's width above the deck.",
     },
 ]
 
