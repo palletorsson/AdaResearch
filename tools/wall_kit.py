@@ -315,10 +315,27 @@ def mk_landing(variant="stair"):
     return bl
 
 
+def mk_deckcorner():
+    """the OUTER corner of a deck rectangle — h3 in the SE quadrant, flat
+    elsewhere. Authored as the north-west-of-deck corner; the seeder rotates it
+    for the other three. This is the piece a full-width band never needed: it
+    lets a deck region STOP mid-grid and turn, so plateaus become free-standing
+    rectangles instead of stripes. Its edges (flat, 22223333, 22223333, flat)
+    are exactly what the terrace caps present at the corners of the frame, so a
+    deck rect ringed by terrace*2/0/1/3 caps and four rotated corners tiles by
+    construction. Placed only by the plaza-plant, never drawn at random."""
+    bl = blank()
+    for r in range(4, B):
+        for c in range(4, B):
+            bl["structure"][r][c] = "3"
+    return bl
+
+
 DECK_KIT = {"deck": mk_deck, "terrace": mk_terrace,
             "causeway": mk_causeway, "landing": mk_landing}
 DECK_WEIGHTS = {"deck": 2, "terrace": 3, "causeway": 2, "landing": 3}
-KIT_ALL = {**KIT, **DECK_KIT}
+CORNER_KIT = {"deckcorner": mk_deckcorner}   # frame-only, never in the pool
+KIT_ALL = {**KIT, **DECK_KIT, **CORNER_KIT}
 
 # named transition variants (edge-preserving, so they SHARE a block's colour and
 # cost the solver nothing). "few and named" — sub-templates, not sliders; a
@@ -395,10 +412,14 @@ def choose_blocks(cols, rows, rng, names, weights, flat_first_last=True):
     pass is what closes that gap now — this function only promises the seams
     LINE UP, not that you can walk them.
     """
-    # a tile is a (block, rotation) pair; its colour is read off the rotated floor
-    tiles = [(n, k) for n in names for k in range(4)]
+    # a tile is a (block, rotation) pair; its colour is read off the rotated
+    # floor. Corner tiles ride along in the cache so the plaza-plant can force
+    # them, but they are never offered to the dice (see candidates).
+    pool_names = list(names)
+    all_names = pool_names + [n for n in CORNER_KIT if n not in pool_names]
+    tiles = [(n, k) for n in all_names for k in range(4)]
     cache = {t: edges_of(rot_block(make_block(t[0]), t[1])) for t in tiles}
-    wt = {n: weights[names.index(n)] for n in names}
+    wt = {n: weights[names.index(n)] for n in pool_names}
     grid = [[None] * cols for _ in range(rows)]
 
     # WANT a plateau, and left to weighted chance the solve collapses to all-flat
@@ -419,19 +440,58 @@ def choose_blocks(cols, rows, rng, names, weights, flat_first_last=True):
     # bR-1 >= 1 keeps the north cap off the spawn row (which must stay flat);
     # bR+1 may be the last row, since a terrace*0's south edge IS flat and so
     # satisfies the teleporter's footing. Needs rows >= 4.
+    # The BAND (above) makes a full-width plateau. The PLAZA makes a free-standing
+    # one: a deck rectangle ringed by terrace caps (*2 north, *0 south, *1 west,
+    # *3 east) with a rotated deckcorner at each of the four corners — the shape
+    # the band could never make because a deck could not stop mid-row. Corners
+    # are what let it stop. One is chosen per seed when there is room; the frame
+    # only has to avoid the spawn and teleporter cells.
     forced = {}
     tvars = VARIANTS.get("terrace") or [""]
+
+    def _terr(rot):
+        v = rng.choice(tvars)
+        return (f"terrace#{v}" if v else "terrace", rot)
+
+    def plaza_plant():
+        # framed region is (deck rect) + a one-block ring. Fit it in the grid so
+        # neither spawn (0,0) nor teleporter (last) falls inside.
+        for _ in range(20):
+            fh = rng.randint(3, min(rows, 5))     # framed height incl. the ring
+            fw = rng.randint(3, min(cols, 5))
+            fy = rng.randint(0, rows - fh)
+            fx = rng.randint(0, cols - fw)
+            box = {(r, c) for r in range(fy, fy + fh) for c in range(fx, fx + fw)}
+            if (0, 0) in box or (rows - 1, cols - 1) in box:
+                continue
+            f = {}
+            y1, x1 = fy + fh - 1, fx + fw - 1
+            f[(fy, fx)] = ("deckcorner", 0)       # NW
+            f[(fy, x1)] = ("deckcorner", 1)       # NE
+            f[(y1, fx)] = ("deckcorner", 3)       # SW
+            f[(y1, x1)] = ("deckcorner", 2)       # SE
+            for c in range(fx + 1, x1):
+                f[(fy, c)] = _terr(2)             # north cap
+                f[(y1, c)] = _terr(0)             # south cap
+            for r in range(fy + 1, y1):
+                f[(r, fx)] = _terr(1)             # west cap
+                f[(r, x1)] = _terr(3)             # east cap
+                for c in range(fx + 1, x1):
+                    f[(r, c)] = ("deck", 0)       # the plateau
+            return f
+        return {}
+
     if any(n in DECK_KIT for n in names):
-        if rows >= 4:
+        # plaza when it fits and the coin says so; else the full-width band
+        if rows >= 3 and cols >= 3 and rng.random() < 0.5:
+            forced = plaza_plant()
+        if not forced and rows >= 4:
             bR = rng.randrange(2, rows - 1)
-            def _terr(rot):
-                v = rng.choice(tvars)
-                return (f"terrace#{v}" if v else "terrace", rot)
             for bc in range(cols):
                 forced[(bR - 1, bc)] = _terr(2)
                 forced[(bR, bc)] = ("deck", 0)
                 forced[(bR + 1, bc)] = _terr(0)
-        elif rows * cols > 1:
+        elif not forced and rows * cols > 1:
             p = (rng.randrange(rows), rng.randrange(cols))   # the old point plant
             if p not in ((0, 0), (rows - 1, cols - 1)):
                 forced[p] = None            # None = "any DECK_KIT tile"
@@ -455,7 +515,9 @@ def choose_blocks(cols, rows, rng, names, weights, flat_first_last=True):
                     if t[0] not in DECK_KIT:
                         continue  # point plant: any deck block
                 elif t != want:
-                    continue      # band plant: this exact tile
+                    continue      # band/plaza plant: this exact tile
+            elif t[0] in CORNER_KIT:
+                continue          # corners are frame-only, never drawn at random
             out.append(t)
         return out
 
@@ -472,7 +534,7 @@ def choose_blocks(cols, rows, rng, names, weights, flat_first_last=True):
         br, bc = divmod(i, cols)
         pool = candidates(br, bc)
         while pool:
-            pick = rng.choices(pool, [wt[t[0]] for t in pool])[0]
+            pick = rng.choices(pool, [wt.get(t[0], 1) for t in pool])[0]
             grid[br][bc] = pick
             if solve(i + 1):
                 return True
