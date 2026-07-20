@@ -992,12 +992,37 @@ func _create_cabinet() -> void:
 	cap_stripe.material_override = accent
 	cap_stripe.position = Vector3(cx, hh + 0.004, bd / 2.0 + 0.062)
 	cab.add_child(cap_stripe)
-	# re-seat the board's name tags onto the cap face
+	# THE SIGN — the name is signage IN the cap, not a plate near it: a dark
+	# inset band across the cap face, title + subtitle baked flush inside it.
+	# The free-floating tags from _create_labels are retired.
 	if _title_tag != null and is_instance_valid(_title_tag):
-		_title_tag.position = Vector3(cx, hh + 0.068, bd / 2.0 + 0.068)
-	var sub: Node = get_node_or_null("SubtitleTag")
-	if sub is Node3D:
-		(sub as Node3D).position = Vector3(cx, hh + 0.030, bd / 2.0 + 0.068)
+		_title_tag.queue_free()
+		_title_tag = null
+	var old_sub: Node = get_node_or_null("SubtitleTag")
+	if old_sub != null:
+		old_sub.queue_free()
+	var sign_w: float = total_w - 0.08
+	var sign := MeshInstance3D.new()
+	var sign_mesh := BoxMesh.new()
+	sign_mesh.size = Vector3(sign_w, 0.072, 0.012)
+	sign.mesh = sign_mesh
+	sign.material_override = dark
+	sign.position = Vector3(cx, hh + 0.055, bd / 2.0 + 0.060)
+	cab.add_child(sign)
+	var sign_title: Node3D = BakedText.make_tag(
+		"GALTON BOARD", Color(0.93, 0.94, 0.97), 0.030,
+		Color(0.07, 0.075, 0.09), false, Color(0, 0, 0, 0))
+	if sign_title:
+		sign_title.name = "CapSignTitle"
+		sign_title.position = Vector3(cx, hh + 0.066, bd / 2.0 + 0.068)
+		cab.add_child(sign_title)
+	var sign_sub: Node3D = BakedText.make_tag(
+		"CENTRAL LIMIT THEOREM", Color(0.55, 0.58, 0.66), 0.016,
+		Color(0.07, 0.075, 0.09), false, Color(0, 0, 0, 0))
+	if sign_sub:
+		sign_sub.name = "CapSignSub"
+		sign_sub.position = Vector3(cx, hh + 0.036, bd / 2.0 + 0.068)
+		cab.add_child(sign_sub)
 
 	# base plinth + feet
 	var plinth := MeshInstance3D.new()
