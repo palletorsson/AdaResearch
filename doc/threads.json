@@ -2,7 +2,7 @@
  "_meta": {
   "description": "Development threads — the project's long-running lines of work, tracked as first-class rows. Rendered at /threads in the encyclopedia; git activity is matched live via each thread's regex patterns. Seeded 2026-07-13 from the four-month blog synthesis; deepened same day from doc/plans, doc/book/STATE.md, doc/reports, memory, the pipeline scorer, and the uncommitted working tree. Hand-edit freely: progress numbers, open items, and match patterns are all data.",
   "version": "1.0",
-  "last_updated": "2026-07-16"
+  "last_updated": "2026-07-19"
  },
  "threads": [
   {
@@ -792,6 +792,52 @@
     }
    ],
    "links": []
+  },
+  {
+   "id": "mycelium",
+   "title": "Mycelium substrate (filaments beyond the CA)",
+   "status": "simmering",
+   "summary": "Scoped 2026-07-19 out of the biome visual loop. fungus:ca (the MoldNetwork CA) hit its ceiling in the rule-search: it renders a spreading voxel NETWORK when gen-frozen, but fundamentally FILLS OR DIES — it cannot hold hair-thin branching filaments. True mycelium (hyphae thinning to their tips, an irregular ground web) needs a CURVE renderer. Plan: a new fungus algo `fungus:mycelium:seed` that generates branching paths (prototype L-system turtle, target space-colonization toward ground attractors) and renders each hypha as a tapering MorphoSweep tube, batched (biome-6). REUSE: morpho_sweep.gd (the tube-along-curve = a hypha), Turtle/tree_walker (branching), grammar_seed (the walk); fungus_morphology.gd = MUSHROOMS (fruiting body), NOT the web — optional dressing at dense nodes. Plugs into biome_paint_dispatcher._spawn_fungus as an algo branch — `ca` unchanged (additive), `mycelium` new. Design: doc/plans/mycelium_substrate.md.",
+   "match": [
+    "\b(mycelium|myceli|hypha|hyphae|filament|space.?coloni[sz]ation|morpho.?sweep)\b"
+   ],
+   "progress": {
+    "done": 0,
+    "total": 6,
+    "unit": "milestones"
+   },
+   "openItems": [
+    {
+     "id": "mycelium-1",
+     "text": "Filament render spike: one L-system branch string -> MorphoSweep tapering tubes -> capture on a probe map. Proves the pipeline (morpho_sweep + Turtle/tree_walker already exist).",
+     "done": false
+    },
+    {
+     "id": "mycelium-2",
+     "text": "Space-colonization generator: attractors scattered on a ground disc, grow-to-attractor with attractor-kill, emergent branching web; capture; compare to the L-system spike and pick the generator (space colonization = the organic irregular look; L-system = the fast scaffold).",
+     "done": false
+    },
+    {
+     "id": "mycelium-3",
+     "text": "Batch the tube segments into MultiMesh under the biome-6 per-map budget; O(kingdoms) nodes + a negative budget-clamp test (a colony is hundreds of segments — batching is mandatory).",
+     "done": false
+    },
+    {
+     "id": "mycelium-4",
+     "text": "Wire into biome_paint_dispatcher._spawn_fungus as the `fungus:mycelium` algo branch; additive negative test (fungus:ca maps byte-identical); reuse t=/d=/gen= mods (tier->radius, density->attractor count, gen->iterations) + per-cell deterministic seed & jitter.",
+     "done": false
+    },
+    {
+     "id": "mycelium-5",
+     "text": "Tune the mycelial read at biome scale: min radius so filaments survive VR distance, emission for the bioluminescent look, per-cell variation; before/after vs the CA network on Biome_VisualBench (THE EDGE: rulings over captures, language+desktop observation).",
+     "done": false
+    },
+    {
+     "id": "mycelium-6",
+     "text": "Ruling: does fungus:mycelium become the default fungus look, or ship both (ca=voxel network, mycelium=filaments) as an authoring choice? Optional fruiting bodies (fungus_morphology mushrooms) at dense nodes.",
+     "done": false
+    }
+   ]
   }
  ]
 }
