@@ -331,11 +331,64 @@ def mk_deckcorner():
     return bl
 
 
+def mk_deckinner():
+    """the REFLEX (inner) corner of a deck region — the armpit of an L, where
+    the deck wraps the WEST and SOUTH of this cell. h3 everywhere except the NE
+    quadrant (c<4 or r>=4). This is what lets a plateau be an L instead of only
+    a rectangle: at the concave corner the deck folds around a single flat cell,
+    and this block is that fold. Its edges (33332222, 22223333, 33333333,
+    33333333) match a west-cap to the north and a north-cap to the east exactly.
+    Rotations give the other three armpits. Frame-only, like the outer corner."""
+    bl = blank()
+    for r in range(B):
+        for c in range(B):
+            if c < 4 or r >= 4:
+                bl["structure"][r][c] = "3"
+    return bl
+
+
 DECK_KIT = {"deck": mk_deck, "terrace": mk_terrace,
             "causeway": mk_causeway, "landing": mk_landing}
 DECK_WEIGHTS = {"deck": 2, "terrace": 3, "causeway": 2, "landing": 3}
-CORNER_KIT = {"deckcorner": mk_deckcorner}   # frame-only, never in the pool
+CORNER_KIT = {"deckcorner": mk_deckcorner,   # frame-only, never in the pool
+              "deckinner": mk_deckinner}
 KIT_ALL = {**KIT, **DECK_KIT, **CORNER_KIT}
+
+# framing a deck region: which tile a frame cell needs, by where the deck lies.
+_ORTHO = {"N": (-1, 0), "E": (0, 1), "S": (1, 0), "W": (0, -1)}
+_DIAG = {"NE": (-1, 1), "SE": (1, 1), "SW": (1, -1), "NW": (-1, -1)}
+_CAP = {"S": 2, "N": 0, "E": 1, "W": 3}          # deck in dir -> terrace rot
+_OUTER = {"SE": 0, "SW": 1, "NW": 2, "NE": 3}    # deck diagonal -> deckcorner rot
+_INNER = {frozenset({"W", "S"}): 0, frozenset({"N", "W"}): 1,
+          frozenset({"N", "E"}): 2, frozenset({"E", "S"}): 3}
+
+
+def frame_deck(deck, terr):
+    """Given a set of deck cells, return {(r,c): (block, rot)} covering the deck
+    AND the ring of caps/corners that seals it — or None if the shape has a
+    frame cell no single tile can serve (an opposite pair, three deck sides, a
+    one-wide gap). The caller keeps only shapes that classify cleanly.
+
+    `terr` is a callable rot -> (name, rot) that picks a terrace variant, so the
+    frame's stairs vary the same way the band's do."""
+    out = {p: ("deck", 0) for p in deck}
+    frame = set()
+    for (r, c) in deck:
+        for dr, dc in list(_ORTHO.values()) + list(_DIAG.values()):
+            if (r + dr, c + dc) not in deck:
+                frame.add((r + dr, c + dc))
+    for (r, c) in frame:
+        od = {d for d, (dr, dc) in _ORTHO.items() if (r + dr, c + dc) in deck}
+        dd = {d for d, (dr, dc) in _DIAG.items() if (r + dr, c + dc) in deck}
+        if len(od) == 1:
+            out[(r, c)] = terr(_CAP[next(iter(od))])
+        elif len(od) == 2 and frozenset(od) in _INNER:
+            out[(r, c)] = ("deckinner", _INNER[frozenset(od)])
+        elif len(od) == 0 and len(dd) == 1:
+            out[(r, c)] = ("deckcorner", _OUTER[next(iter(dd))])
+        else:
+            return None
+    return out
 
 # named transition variants (edge-preserving, so they SHARE a block's colour and
 # cost the solver nothing). "few and named" — sub-templates, not sliders; a
@@ -454,30 +507,36 @@ def choose_blocks(cols, rows, rng, names, weights, flat_first_last=True):
         return (f"terrace#{v}" if v else "terrace", rot)
 
     def plaza_plant():
-        # framed region is (deck rect) + a one-block ring. Fit it in the grid so
-        # neither spawn (0,0) nor teleporter (last) falls inside.
-        for _ in range(20):
-            fh = rng.randint(3, min(rows, 5))     # framed height incl. the ring
-            fw = rng.randint(3, min(cols, 5))
-            fy = rng.randint(0, rows - fh)
-            fx = rng.randint(0, cols - fw)
-            box = {(r, c) for r in range(fy, fy + fh) for c in range(fx, fx + fw)}
+        # A deck region — a rectangle, or an L (a rectangle with one corner
+        # quadrant bitten out) — dropped inside a one-block frame margin so its
+        # caps never land on the spawn or teleporter. frame_deck seals it.
+        for _ in range(30):
+            dh = rng.randint(1, min(rows - 2, 3))     # deck rect, interior only
+            dw = rng.randint(1, min(cols - 2, 3))
+            dy = rng.randint(1, rows - 1 - dh)        # >=1 leaves the north ring
+            dx = rng.randint(1, cols - 1 - dw)
+            deck = {(r, c) for r in range(dy, dy + dh)
+                    for c in range(dx, dx + dw)}
+            # bite a corner to make an L, when the rect is big enough to stay
+            # connected and still leave a reflex corner
+            if dh >= 2 and dw >= 2 and rng.random() < 0.55:
+                bh = rng.randint(1, dh - 1)
+                bw = rng.randint(1, dw - 1)
+                corner = rng.choice([(dy, dx), (dy, dx + dw - bw),
+                                     (dy + dh - bh, dx),
+                                     (dy + dh - bh, dx + dw - bw)])
+                deck -= {(corner[0] + r, corner[1] + c)
+                         for r in range(bh) for c in range(bw)}
+            if not deck:
+                continue
+            f = frame_deck(deck, _terr)
+            if f is None:
+                continue                          # a shape with a bad frame cell
+            box = set(f)
             if (0, 0) in box or (rows - 1, cols - 1) in box:
                 continue
-            f = {}
-            y1, x1 = fy + fh - 1, fx + fw - 1
-            f[(fy, fx)] = ("deckcorner", 0)       # NW
-            f[(fy, x1)] = ("deckcorner", 1)       # NE
-            f[(y1, fx)] = ("deckcorner", 3)       # SW
-            f[(y1, x1)] = ("deckcorner", 2)       # SE
-            for c in range(fx + 1, x1):
-                f[(fy, c)] = _terr(2)             # north cap
-                f[(y1, c)] = _terr(0)             # south cap
-            for r in range(fy + 1, y1):
-                f[(r, fx)] = _terr(1)             # west cap
-                f[(r, x1)] = _terr(3)             # east cap
-                for c in range(fx + 1, x1):
-                    f[(r, c)] = ("deck", 0)       # the plateau
+            if any(not (0 <= r < rows and 0 <= c < cols) for r, c in box):
+                continue                          # frame must fit the grid
             return f
         return {}
 
