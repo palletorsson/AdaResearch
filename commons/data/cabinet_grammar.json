@@ -7,57 +7,82 @@
   "Palle 2026-07-19: think info kiosk, all in one body",
   "Palle 2026-07-19: the overhead title is still not integrated",
   "Palle 2026-07-19: the buttons interface part need a wedge profile so it does not hang in the air",
-  "Palle 2026-07-20: if the interface is horizontal then the integration also need to be in that thinking, so this feature is not transferable from the vertical kiosk"
+  "Palle 2026-07-20: if the interface is horizontal then the integration also need to be in that thinking, so this feature is not transferable from the vertical kiosk",
+  "Palle 2026-07-20: learn from good artifacts, the second half of props-dna-gallery"
  ],
  "palette": {
-  "_comment": "Exact canon. A near-miss reads as a different machine — the checker flags drift beyond tolerance 0.02.",
-  "shell": [
-   0.58,
-   0.6,
-   0.63
+  "_comment": "DEFERS TO THE KIT. These mirror HangarKit's constants so the checker and the code cannot disagree; the kit file is the source of truth. Change it there.",
+  "body": [
+   0.81,
+   0.79,
+   0.75
   ],
-  "dark": [
-   0.07,
-   0.075,
-   0.09
+  "panel": [
+   0.7,
+   0.68,
+   0.64
+  ],
+  "accent": [
+   0.86,
+   0.34,
+   0.11
+  ],
+  "screen": [
+   0.12,
+   0.12,
+   0.135
+  ],
+  "text_display": [
+   0.9,
+   0.89,
+   0.85
+  ],
+  "text_dark": [
+   0.17,
+   0.17,
+   0.19
+  ],
+  "terminal_body": [
+   0.14,
+   0.14,
+   0.155
+  ],
+  "terminal_panel": [
+   0.09,
+   0.09,
+   0.1
+  ],
+  "terminal_accent": [
+   0.85,
+   0.3,
+   0.12
+  ],
+  "terminal_screen": [
+   0.05,
+   0.1,
+   0.06
+  ],
+  "terminal_text": [
+   0.45,
+   0.95,
+   0.5
+  ],
+  "window_glass": [
+   0.62,
+   0.72,
+   0.85
   ],
   "maroon": [
    0.3,
    0.11,
    0.09
   ],
-  "accent": [
-   0.86,
-   0.3,
-   0.1
+  "dark": [
+   0.07,
+   0.075,
+   0.09
   ],
-  "text_primary": [
-   0.93,
-   0.94,
-   0.97
-  ],
-  "text_secondary": [
-   0.55,
-   0.58,
-   0.66
-  ],
-  "rail_wood": [
-   0.3,
-   0.28,
-   0.26
-  ],
-  "_rail_wood_note": "DERIVED, not chosen: the host furniture's own albedo lightened 0.18 — a rail must be kin to its table, never an imported brown. The constant here is the value for dice_throw's wood; a second horizontal host with different wood will trip G4, and that is the signal to teach the checker derivations rather than to repaint the artifact.",
-  "glass_screen": [
-   0.04,
-   0.05,
-   0.08
-  ],
-  "_glass_note": "TWO glasses, and they are not interchangeable. glass_screen (dark, emissive) covers a READOUT — text must read against it. window_glass (pale, transparent) covers the PHENOMENON — balls, histograms, darts must read through it. Surfaced by the checker 2026-07-20: the canon named only one.",
-  "window_glass": [
-   0.5,
-   0.6,
-   0.75
-  ]
+  "_glass_note": "TWO glasses. screen (anthracite, lit) covers a READOUT — text reads AGAINST it. window_glass (pale, ~0.055 alpha) covers the PHENOMENON — balls and histograms must read THROUGH it. A milky window hides the artifact."
  },
  "dialects": {
   "vertical": {
@@ -166,6 +191,13 @@
    "applies": "all",
    "check": "at least one emissive accent element present",
    "why": "The family's signature: one warm line in a cool machine."
+  },
+  {
+   "id": "G8-composes-kit",
+   "name": "Compose the kit, don't retype it",
+   "applies": "all",
+   "check": "the artifact's .gd references HangarKit (source-level check in check_cabinet_grammar.py)",
+   "why": "Every hand-rolled box is a chance to drift. The station props look manufactured because they share one vocabulary; a bespoke cabinet cannot stay in family by memory."
   }
  ],
  "members": [
@@ -174,35 +206,40 @@
    "dialect": "vertical",
    "body": "squat vending machine",
    "scene": "res://algorithms/randomness/galton_board/galton_board.tscn",
-   "propagation": 1
+   "propagation": 1,
+   "kit": true
   },
   {
    "artifact": "monte_carlo_dartboard",
    "dialect": "vertical",
    "body": "tall street kiosk",
    "scene": "res://algorithms/randomness/monte_carlo_dartboard/monte_carlo_dartboard.tscn",
-   "propagation": 2
+   "propagation": 2,
+   "kit": false
   },
   {
    "artifact": "distribution_comparator",
    "dialect": "vertical",
    "body": "wide console",
    "scene": "res://algorithms/randomness/distribution_comparator/distribution_comparator.tscn",
-   "propagation": 3
+   "propagation": 3,
+   "kit": false
   },
   {
    "artifact": "coin_toss",
    "dialect": "vertical",
    "body": "pedestal station",
    "scene": "res://algorithms/randomness/coin_toss/coin_toss.tscn",
-   "propagation": 4
+   "propagation": 4,
+   "kit": false
   },
   {
    "artifact": "dice_throw",
    "dialect": "horizontal",
    "body": "table console",
    "scene": "res://algorithms/randomness/dice_throw/dice_throw.tscn",
-   "propagation": 5
+   "propagation": 5,
+   "kit": false
   }
  ],
  "queue": [
@@ -214,12 +251,34 @@
   "galton_friction"
  ],
  "process": [
+  "0. LOOK at the good ones first: /props-dna-gallery second half (the station family) and /cabinet-gallery.",
   "1. READ the artifact: which plane is its interface on? That picks the dialect before anything else.",
   "2. PICK the body type from that dialect's list, or name a new one.",
-  "3. BUILD from the dialect's parts — never from another dialect's parts.",
-  "4. RE-HOME the live text into the housing; retire floating titles (the signage owns the name).",
-  "5. CAPTURE and look. The capture is the gate, not the code.",
-  "6. CHECK: python tools/check_cabinet_grammar.py — every element measured against the rules above.",
-  "7. RECORD: if the improvement has a reach, write its class-condition in doc/transfer_ledger.md."
- ]
+  "3. COMPOSE HangarKit — finish_palette, box, readout, bolts, stencil, three_color_bar, grime_band. Never re-type its geometry.",
+  "4. BUILD from the dialect's parts — never from another dialect's parts.",
+  "5. RE-HOME the live text into the housing; retire floating titles (the signage owns the name).",
+  "6. CAPTURE and look. The capture is the gate, not the code.",
+  "7. CHECK: python tools/check_cabinet_grammar.py — every element measured against the rules above.",
+  "8. RECORD: if the improvement has a reach, write its class-condition in doc/transfer_ledger.md."
+ ],
+ "kit": {
+  "_ruling": "THE CABINET IS NOT BESPOKE. commons/artifacts/_hangar/hangar_kit.gd already carries this family's vocabulary — its readout() docstring names cabinets as a client, and its signage() exists so text 'reads as PART of the artifact rather than floating beside it', which is the founding ruling, implemented before I hand-rolled it five times. The station props in the second half of /props-dna-gallery look manufactured because they COMPOSE this kit. Build from it; do not re-type its geometry.",
+  "path": "res://commons/artifacts/_hangar/hangar_kit.gd",
+  "vocabulary": {
+   "finish_palette(finish)": "one word ('rams' | 'terminal') drives body/panel/accent/screen/text/header/wear",
+   "finish_body(finish, c, wear)": "the housing surface — wear darkens and roughens",
+   "box(center, size, mat)": "the box helper; hand-writing MeshInstance3D+BoxMesh is the smell",
+   "readout(header, lines, size, bg, text, header_col)": "the framed instrument screen: matte bezel, lit face, coloured header",
+   "signage(header, lines, size, reach, dir, tilt)": "a bracketed sign — text mounted ON the artifact",
+   "bolts(a, b, count, radius, mat)": "fastener rows — the manufactured read",
+   "stencil(text, size, color)": "the asset code (GB-01). A machine carries a unit number, not only a title",
+   "brand_patch(text, size, bg, fg)": "printed identity plate",
+   "three_color_bar(length, thickness)": "the Rams accent triad",
+   "grime_band(length, height, z, base)": "age on SOLID faces",
+   "dust_streaks(w, h, z, count)": "age — never over a window, it reads as smears on the phenomenon",
+   "striped_mat() / hazard_stripe_texture()": "caution striping",
+   "emissive(c, energy)": "lit elements"
+  },
+  "gotcha": "grime_band/dust_streaks bake their Z into position — assign .position.x/.y only, or they land inside the body."
+ }
 }

@@ -4,30 +4,30 @@
 			"artifact": "galton_board",
 			"body": "squat vending machine",
 			"dialect": "vertical",
-			"element_count": 166,
+			"element_count": 189,
 			"findings": [
 				{
-					"detail": "lowest element y = -0.135",
+					"detail": "lowest element y = -0.032",
 					"ok": true,
 					"rule": "G2-grounded"
 				},
 				{
-					"detail": "all 15 text nodes inside the body",
+					"detail": "all 14 text nodes inside the body",
 					"ok": true,
 					"rule": "G1-no-orphan-text"
 				},
 				{
-					"detail": "23 canon materials, no near-miss drift",
+					"detail": "42 canon materials, no near-miss drift",
 					"ok": true,
 					"rule": "G4-palette"
 				},
 				{
-					"detail": "keypad centre y = 0.300",
+					"detail": "keypad centre y = 0.260",
 					"ok": false,
 					"rule": "G5-reach"
 				},
 				{
-					"detail": "1 glass panels, all pocketed",
+					"detail": "0 glass panels, all pocketed",
 					"ok": true,
 					"rule": "G6-screen-seated"
 				},
@@ -66,7 +66,7 @@
 					"rule": "G5-reach"
 				},
 				{
-					"detail": "unpocketed: Cabinet/@Node3D@410/@MeshInstance3D@407",
+					"detail": "unpocketed: Cabinet/@Node3D@429/@MeshInstance3D@426",
 					"ok": false,
 					"rule": "G6-screen-seated"
 				},
@@ -173,7 +173,7 @@
 					"rule": "G1-no-orphan-text"
 				},
 				{
-					"detail": "deck 0.850, tallest 0.939 = TableConsole/@MeshInstance3D@727 (-0.011 vs the 0.10 allowance)",
+					"detail": "deck 0.850, tallest 0.939 = TableConsole/@MeshInstance3D@746 (-0.011 vs the 0.10 allowance)",
 					"ok": true,
 					"rule": "G3-silhouette"
 				},

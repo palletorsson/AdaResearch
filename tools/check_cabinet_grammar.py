@@ -54,15 +54,30 @@ def main() -> int:
         print(json.dumps(rep, indent=1))
         return 0
 
+    # G8 is a SOURCE-level rule — "does this artifact compose the shared kit?"
+    # cannot be measured from geometry, only from the code that made it.
+    kit_state: dict[str, bool] = {}
+    for m in canon.get("members", []):
+        gd = REPO / str(m.get("scene", "")).replace("res://", "").replace(".tscn", ".gd")
+        try:
+            kit_state[m["artifact"]] = "HangarKit" in gd.read_text(encoding="utf-8")
+        except Exception:
+            kit_state[m["artifact"]] = False
+
     hard = 0
     soft = 0
     print(f"\ncabinet grammar — canon v{rep.get('canon_version')} · "
           f"{len(rep.get('artifacts', []))} artifacts\n")
     for a in rep.get("artifacts", []):
         fails = [f for f in a.get("findings", []) if not f.get("ok")]
+        on_kit = kit_state.get(a["artifact"], False)
+        if not on_kit:
+            fails = fails + [{"rule": "G8-composes-kit",
+                              "detail": "bespoke geometry — does not compose HangarKit"}]
         mark = "OK  " if not fails else "FAIL"
         print(f"  [{mark}] {a['artifact']:<26} {a['dialect']:<11} "
-              f"{a.get('element_count', '?'):>4} elements")
+              f"{a.get('element_count', '?'):>4} elements  "
+              f"{'kit' if on_kit else '---'}")
         for f in fails:
             rid = f.get("rule", "?")
             tag = "advisory" if rid in ADVISORY else "VIOLATION"

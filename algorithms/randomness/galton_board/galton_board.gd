@@ -21,6 +21,14 @@ extends Node3D
 class_name GaltonBoard
 
 const BakedText = preload("res://commons/utils/baked_text_albedo.gd")
+const HangarKit = preload("res://commons/artifacts/_hangar/hangar_kit.gd")
+
+## Housing finish — "rams" (light Braun default) or "terminal" (dark console).
+## The whole cabinet derives from HangarKit.finish_palette(), so one word
+## re-skins every part consistently instead of 12 hand-typed colours.
+@export var finish: String = "rams"
+@export var wear: float = 0.10
+@export var unit_code: String = "GB-01"
 
 # ── Board Frame ──────────────────────────────────────────────────────────────
 @export var board_width: float = 0.5
@@ -75,6 +83,7 @@ var _stats_last_text: String = ""
 # interface body — no floating stat plates. When the kiosk exists, the stats
 # lines mount on its screen; _stats_tag_pos is only the legacy fallback.
 var _kiosk_screen: Node3D = null
+var _screen_size: Vector2 = Vector2(0.185, 0.40)
 var _title_tag: Node3D
 var _bell_curve_mesh: MeshInstance3D
 var _control_panel: Node3D
@@ -768,39 +777,39 @@ func _refresh_stats_tag(text: String) -> void:
 		_stats_tag = null
 
 	var on_kiosk: bool = _kiosk_screen != null and is_instance_valid(_kiosk_screen)
-	var lines := text.split("\n")
-	var line_h: float = 0.021 if on_kiosk else 0.03
-	var pitch: float = line_h * 1.15
-	var count: int = lines.size()
-	var top: float = (float(count) - 1.0) * 0.5 * pitch
+	var raw := text.split("\n")
+	var lines: Array = []
+	for l in raw:
+		var t := str(l).strip_edges()
+		if t != "":
+			lines.append(t)
 
+	if on_kiosk:
+		# The kit's framed screen: matte bezel, softly-lit face, amber header
+		# and green CRT body. A powered instrument, not a printed plate.
+		var pal: Dictionary = HangarKit.finish_palette(finish)
+		_stats_tag = HangarKit.readout("CENSUS", lines, _screen_size,
+			pal["screen"], pal["text"], pal["header"])
+		_kiosk_screen.add_child(_stats_tag)
+		return
+
+	# Fallback for scenes built before the cabinet exists: keep the old
+	# framed board stack so nothing regresses.
+	var line_h: float = 0.03
+	var pitch: float = line_h * 1.15
+	var top: float = (float(lines.size()) - 1.0) * 0.5 * pitch
 	_stats_tag = Node3D.new()
 	_stats_tag.name = "StatsTag"
-	for i in range(count):
-		var line := str(lines[i]).strip_edges()
-		if line == "":
-			continue
-		# Each non-empty line becomes an integrated board tag (make_tag). On
-		# the kiosk the lines sit INSIDE the recessed screen (no per-line
-		# backing — the glass is the backing); floating fallback keeps the
-		# old framed look for scenes built before the kiosk exists.
+	for i in range(lines.size()):
 		var line_tag: Node3D = BakedText.make_tag(
-			line, Color(0.80, 0.88, 0.95), line_h,
-			Color(0.04, 0.05, 0.08) if on_kiosk else Color(0.08, 0.09, 0.11),
-			not on_kiosk, Color(0, 0, 0, 0))
+			str(lines[i]), Color(0.80, 0.88, 0.95), line_h,
+			Color(0.08, 0.09, 0.11), true, Color(0, 0, 0, 0))
 		if line_tag:
 			line_tag.position = Vector3(0, top - float(i) * pitch, 0)
 			_stats_tag.add_child(line_tag)
-	if on_kiosk:
-		_kiosk_screen.add_child(_stats_tag)
-	else:
-		_stats_tag.position = _stats_tag_pos
-		add_child(_stats_tag)
+	_stats_tag.position = _stats_tag_pos
+	add_child(_stats_tag)
 
-
-# ═════════════════════════════════════════════════════════════════════════════
-# VR CONTROLS
-# ═════════════════════════════════════════════════════════════════════════════
 
 func _create_vr_controls() -> void:
 	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
@@ -817,9 +826,9 @@ func _create_vr_controls() -> void:
 	# ALL-IN-ONE BODY (Palle 2026-07-20, Cyber District refs): the pad mounts
 	# INTO the cabinet's service column — a recessed pocket on the appliance
 	# face, not a floating stand in front.
-	_control_panel.position = Vector3(board_width / 2.0 + 0.115, 0.30, board_depth / 2.0 + 0.094)
+	_control_panel.position = Vector3(board_width / 2.0 + 0.18, 0.26, board_depth / 2.0 + 0.094)
 	_control_panel.rotation_degrees = Vector3(-15, 0, 0)
-	_control_panel.scale = Vector3(0.78, 0.78, 0.78)  # fit the service column; wedge carries it
+	_control_panel.scale = Vector3(0.92, 0.92, 0.92)  # fit the service column; wedge carries it
 	add_child(_control_panel)
 	_create_cabinet()
 
@@ -852,11 +861,13 @@ func _create_vr_controls() -> void:
 ## screen + the recessed keypad pocket + a ribbed vent grille, a header cap
 ## wearing the board's name, a base plinth on feet, ember accent stripes.
 ## Nothing floats; every interface element is a face of the same volume.
+
+
 func _create_cabinet() -> void:
 	var bw: float = board_width
 	var hh: float = board_height + bin_height          # window top
 	var bd: float = board_depth
-	var cw: float = 0.23                               # service column width
+	var cw: float = 0.36                               # service column width (sized to host a kit readout)
 	var colx: float = bw / 2.0 + cw / 2.0              # column centre x
 	var face_z: float = bd / 2.0 + 0.055               # column face plane
 
@@ -864,186 +875,129 @@ func _create_cabinet() -> void:
 	cab.name = "Cabinet"
 	add_child(cab)
 
-	var shell := StandardMaterial3D.new()
-	shell.albedo_color = Color(0.58, 0.60, 0.63)
-	shell.roughness = 0.5
-	shell.metallic = 0.25
-	var dark := StandardMaterial3D.new()
-	dark.albedo_color = Color(0.07, 0.075, 0.09)
-	dark.roughness = 0.45
-	dark.metallic = 0.4
-	var maroon := StandardMaterial3D.new()
-	maroon.albedo_color = Color(0.30, 0.11, 0.09)
-	maroon.roughness = 0.55
-	maroon.metallic = 0.2
+	# ── One palette word drives every part (kit finish system) ──────────
+	var pal: Dictionary = HangarKit.finish_palette(finish)
+	var col_body: Color = pal["body"]
+	var col_panel: Color = pal["panel"]
+	var col_accent: Color = pal["accent"]
+	var ew: float = float(pal["wear"]) if finish.to_lower() == "terminal" else wear
+
+	var shell: StandardMaterial3D = HangarKit.finish_body(finish, col_body, ew)
+	var dark: StandardMaterial3D = HangarKit.finish_body(finish, col_panel.darkened(0.55), ew)
+	var maroon: StandardMaterial3D = HangarKit.painted_metal(Color(0.30, 0.11, 0.09), ew)
+	var steel: StandardMaterial3D = HangarKit.worn_metal(col_panel)
+	var accent: StandardMaterial3D = HangarKit.emissive(col_accent, 2.2)
 	var glass_mat := StandardMaterial3D.new()
-	glass_mat.albedo_color = Color(0.04, 0.05, 0.08)
-	glass_mat.roughness = 0.15
-	glass_mat.emission_enabled = true
-	glass_mat.emission = Color(0.05, 0.08, 0.12)
-	glass_mat.emission_energy_multiplier = 0.6
-	var accent := StandardMaterial3D.new()
-	accent.albedo_color = Color(0.86, 0.30, 0.10)
-	accent.emission_enabled = true
-	accent.emission = Color(0.86, 0.30, 0.10)
-	accent.emission_energy_multiplier = 2.2
+	glass_mat.albedo_color = Color(0.62, 0.72, 0.85, 0.055)
+	glass_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	glass_mat.roughness = 0.1
 
-	var total_w: float = bw + cw + 0.10                # left jamb 0.10
-	var cx: float = (bw / 2.0 + cw) - (total_w / 2.0)  # cabinet centre offset
+	# ── Body: back slab, flank, window frame, service column ───────────
+	var body_top: float = hh + 0.10
+	var cap_h: float = 0.12
+	var total_w: float = bw + cw + 0.12
+	var cx: float = (bw / 2.0 + cw) - total_w / 2.0
 
-	# back slab — one plate behind everything
-	var back := MeshInstance3D.new()
-	var back_mesh := BoxMesh.new()
-	back_mesh.size = Vector3(total_w, hh + 0.02, 0.05)
-	back.mesh = back_mesh
-	back.material_override = shell
-	back.position = Vector3(cx, hh / 2.0, -bd / 2.0 - 0.028)
-	cab.add_child(back)
+	cab.add_child(HangarKit.box(Vector3(cx, body_top / 2.0, -bd / 2.0 - 0.03),
+		Vector3(total_w, body_top, 0.05), shell))
+	cab.add_child(HangarKit.box(Vector3(-bw / 2.0 - 0.06, body_top / 2.0, 0.0),
+		Vector3(0.12, body_top, bd + 0.10), maroon))
+	cab.add_child(HangarKit.box(Vector3(colx, body_top / 2.0, 0.0),
+		Vector3(cw, body_top, bd + 0.10), shell))
+	# window glass over the phenomenon (balls must read THROUGH it)
+	cab.add_child(HangarKit.box(Vector3(0.0, hh / 2.0, bd / 2.0 + 0.052),
+		Vector3(bw, hh, 0.004), glass_mat))
+	# frame band above the window
+	cab.add_child(HangarKit.box(Vector3(0.0, (hh + body_top) / 2.0, 0.0),
+		Vector3(bw, body_top - hh, bd + 0.06), shell))
 
-	# left flank — the maroon service side (ref 1's redwood panel)
-	var flank := MeshInstance3D.new()
-	var flank_mesh := BoxMesh.new()
-	flank_mesh.size = Vector3(0.10, hh + 0.02, bd + 0.11)
-	flank.mesh = flank_mesh
-	flank.material_override = maroon
-	flank.position = Vector3(-bw / 2.0 - 0.05, hh / 2.0, -0.01)
-	cab.add_child(flank)
+	# bolt rows down the flank and the column edge — the kit's fastener read
+	cab.add_child(HangarKit.bolts(
+		Vector3(-bw / 2.0 - 0.06, 0.16, bd / 2.0 + 0.052),
+		Vector3(-bw / 2.0 - 0.06, body_top - 0.10, bd / 2.0 + 0.052),
+		7, 0.009, steel))
+	cab.add_child(HangarKit.bolts(
+		Vector3(colx + cw / 2.0 - 0.02, 0.16, face_z - 0.004),
+		Vector3(colx + cw / 2.0 - 0.02, body_top - 0.10, face_z - 0.004),
+		7, 0.009, steel))
 
-	# right service column — the appliance's interface face
-	var col := MeshInstance3D.new()
-	var col_mesh := BoxMesh.new()
-	col_mesh.size = Vector3(cw, hh + 0.02, bd + 0.11)
-	col.mesh = col_mesh
-	col.material_override = shell
-	col.position = Vector3(colx, hh / 2.0, -0.01)
-	cab.add_child(col)
-
-	# inset CENSUS screen (upper column)
-	var scr_w: float = cw - 0.05
-	var scr_h: float = 0.26
-	var scr_y: float = hh * 0.70
-	var pocket := MeshInstance3D.new()
-	var pocket_mesh := BoxMesh.new()
-	pocket_mesh.size = Vector3(scr_w + 0.02, scr_h + 0.045, 0.015)
-	pocket.mesh = pocket_mesh
-	pocket.material_override = dark
-	pocket.position = Vector3(colx, scr_y, face_z + 0.002)
-	cab.add_child(pocket)
-	var glass := MeshInstance3D.new()
-	var glass_mesh := BoxMesh.new()
-	glass_mesh.size = Vector3(scr_w, scr_h, 0.006)
-	glass.mesh = glass_mesh
-	glass.material_override = glass_mat
-	glass.position = Vector3(colx, scr_y - 0.008, face_z + 0.010)
-	cab.add_child(glass)
-	var head_tag: Node3D = BakedText.make_tag(
-		"CENSUS", Color(0.92, 0.93, 0.97), 0.020,
-		Color(0.055, 0.06, 0.075), true, Color(0.86, 0.30, 0.10))
-	if head_tag:
-		head_tag.position = Vector3(colx, scr_y + scr_h / 2.0 + 0.010, face_z + 0.014)
-		cab.add_child(head_tag)
-	var stripe := MeshInstance3D.new()
-	var stripe_mesh := BoxMesh.new()
-	stripe_mesh.size = Vector3(scr_w + 0.02, 0.005, 0.004)
-	stripe.mesh = stripe_mesh
-	stripe.material_override = accent
-	stripe.position = Vector3(colx, scr_y + scr_h / 2.0 - 0.002, face_z + 0.012)
-	cab.add_child(stripe)
+	# ── The READOUT is the kit's, not a hand-built pocket ──────────────
+	# Green-on-dark, lit face, matte bezel: it reads as a powered instrument
+	# instead of a printed plate. Rebuilt on change by _refresh_stats_tag.
+	var scr_w: float = cw - 0.06
+	var scr_h: float = 0.30
+	var scr_y: float = hh - 0.26
 	var anchor := Node3D.new()
 	anchor.name = "StatsScreen"
-	anchor.position = Vector3(colx, scr_y - 0.012, face_z + 0.014)
+	anchor.position = Vector3(colx, scr_y, face_z + 0.012)
 	cab.add_child(anchor)
 	_kiosk_screen = anchor
-	if _stats_tag != null and is_instance_valid(_stats_tag):
-		var txt := _stats_last_text
-		_stats_last_text = ""
-		_refresh_stats_tag(txt)
+	_screen_size = Vector2(scr_w, scr_h)
+	var txt := _stats_last_text
+	_stats_last_text = ""
+	_refresh_stats_tag(txt if txt != "" else "n = 0")
 
-	# keypad WEDGE (mid column) — the pad's tilt gets a solid shoulder: a
-	# right-triangle prism whose slope matches the pad's -15°, so the plate
-	# rests on the body instead of hanging in the air (kiosk keypad grammar).
+	# ── Controls: wedge shoulder + the Rams three-colour bar ───────────
 	var wedge := _make_wedge(cw - 0.03, 0.19, 0.070, 0.020, dark)
-	wedge.position = Vector3(colx, 0.30, bd / 2.0 + 0.045)
+	wedge.position = Vector3(colx, 0.26, bd / 2.0 + 0.045)
 	cab.add_child(wedge)
 
-	# vent grille (lower column) — ribbed slats
-	for gi in range(6):
-		var slat := MeshInstance3D.new()
-		var slat_mesh := BoxMesh.new()
-		slat_mesh.size = Vector3(cw - 0.06, 0.010, 0.012)
-		slat.mesh = slat_mesh
-		slat.material_override = dark
-		slat.position = Vector3(colx, 0.055 + float(gi) * 0.022, face_z + 0.002)
-		cab.add_child(slat)
+	var bar: Node3D = HangarKit.three_color_bar(cw - 0.06, 0.018)
+	if bar:
+		bar.position = Vector3(colx, scr_y - scr_h / 2.0 - 0.035, face_z + 0.004)
+		cab.add_child(bar)
 
-	# header cap — the appliance wears its name
-	var cap := MeshInstance3D.new()
-	var cap_mesh := BoxMesh.new()
-	cap_mesh.size = Vector3(total_w, 0.11, bd + 0.13)
-	cap.mesh = cap_mesh
-	cap.material_override = shell
-	cap.position = Vector3(cx, hh + 0.055, -0.005)
-	cab.add_child(cap)
-	var cap_stripe := MeshInstance3D.new()
-	var cap_stripe_mesh := BoxMesh.new()
-	cap_stripe_mesh.size = Vector3(total_w, 0.006, 0.004)
-	cap_stripe.mesh = cap_stripe_mesh
-	cap_stripe.material_override = accent
-	cap_stripe.position = Vector3(cx, hh + 0.004, bd / 2.0 + 0.062)
-	cab.add_child(cap_stripe)
-	# THE SIGN — the name is signage IN the cap, not a plate near it: a dark
-	# inset band across the cap face, title + subtitle baked flush inside it.
-	# The free-floating tags from _create_labels are retired.
-	if _title_tag != null and is_instance_valid(_title_tag):
-		_title_tag.queue_free()
-		_title_tag = null
-	var old_sub: Node = get_node_or_null("SubtitleTag")
-	if old_sub != null:
-		old_sub.queue_free()
-	var sign_w: float = total_w - 0.08
-	var sign := MeshInstance3D.new()
-	var sign_mesh := BoxMesh.new()
-	sign_mesh.size = Vector3(sign_w, 0.072, 0.012)
-	sign.mesh = sign_mesh
-	sign.material_override = dark
-	sign.position = Vector3(cx, hh + 0.055, bd / 2.0 + 0.060)
-	cab.add_child(sign)
+	# vent grille (lower column)
+	for gi in range(6):
+		cab.add_child(HangarKit.box(
+			Vector3(colx, 0.07 + float(gi) * 0.024, face_z + 0.002),
+			Vector3(cw - 0.06, 0.010, 0.012), dark))
+
+	# ── Cap: sign band over a full-width ember line ────────────────────
+	cab.add_child(HangarKit.box(Vector3(cx, body_top + cap_h / 2.0, 0.0),
+		Vector3(total_w, cap_h, bd + 0.14), shell))
+	cab.add_child(HangarKit.box(Vector3(cx, body_top + 0.005, bd / 2.0 + 0.072),
+		Vector3(total_w, 0.007, 0.004), accent))
+	cab.add_child(HangarKit.box(Vector3(cx, body_top + cap_h / 2.0, bd / 2.0 + 0.070),
+		Vector3(total_w - 0.10, 0.078, 0.012), dark))
 	var sign_title: Node3D = BakedText.make_tag(
 		"GALTON BOARD", Color(0.93, 0.94, 0.97), 0.030,
 		Color(0.07, 0.075, 0.09), false, Color(0, 0, 0, 0))
 	if sign_title:
-		sign_title.name = "CapSignTitle"
-		sign_title.position = Vector3(cx, hh + 0.066, bd / 2.0 + 0.068)
+		sign_title.position = Vector3(cx, body_top + cap_h / 2.0 + 0.014, bd / 2.0 + 0.078)
 		cab.add_child(sign_title)
 	var sign_sub: Node3D = BakedText.make_tag(
-		"CENTRAL LIMIT THEOREM", Color(0.55, 0.58, 0.66), 0.016,
+		"CENTRAL LIMIT THEOREM", Color(0.55, 0.58, 0.66), 0.014,
 		Color(0.07, 0.075, 0.09), false, Color(0, 0, 0, 0))
 	if sign_sub:
-		sign_sub.name = "CapSignSub"
-		sign_sub.position = Vector3(cx, hh + 0.036, bd / 2.0 + 0.068)
+		sign_sub.position = Vector3(cx, body_top + cap_h / 2.0 - 0.020, bd / 2.0 + 0.078)
 		cab.add_child(sign_sub)
 
-	# base plinth + feet
-	var plinth := MeshInstance3D.new()
-	var plinth_mesh := BoxMesh.new()
-	plinth_mesh.size = Vector3(total_w, 0.10, bd + 0.15)
-	plinth.mesh = plinth_mesh
-	plinth.material_override = dark
-	plinth.position = Vector3(cx, -0.052, 0.005)
-	cab.add_child(plinth)
-	for fx in [-total_w / 2.0 + 0.07, total_w / 2.0 - 0.07]:
-		var foot := MeshInstance3D.new()
-		var foot_mesh := BoxMesh.new()
-		foot_mesh.size = Vector3(0.09, 0.035, bd + 0.10)
-		foot.mesh = foot_mesh
-		foot.material_override = dark
-		foot.position = Vector3(cx + fx, -0.118, 0.0)
-		cab.add_child(foot)
+	# ── Unit number: a machine carries an asset code, not just a title ──
+	var code: MeshInstance3D = HangarKit.stencil(unit_code, Vector2(0.13, 0.032),
+		col_accent.lightened(0.25))
+	if code:
+		code.position = Vector3(-bw / 2.0 + 0.10, 0.115, bd / 2.0 + 0.056)
+		cab.add_child(code)
+
+	# ── Age: the station props are used objects, not showroom stock ────
+	var gb: MeshInstance3D = HangarKit.grime_band(total_w * 0.55, 0.035,
+		bd / 2.0 + 0.074, col_body)
+	if gb:
+		gb.position.x = cx
+		gb.position.y = body_top - 0.035     # keep the kit's baked z
+		cab.add_child(gb)
+	# (dust_streaks omitted here: over a WINDOW they read as smears on the
+	#  phenomenon. Age belongs on solid faces — grime_band above.)
+
+	# ── Plinth + feet ──────────────────────────────────────────────────
+	cab.add_child(HangarKit.box(Vector3(cx, 0.045, 0.0),
+		Vector3(total_w, 0.09, bd + 0.16), dark))
+	for fx in [-total_w / 2.0 + 0.09, total_w / 2.0 - 0.09]:
+		cab.add_child(HangarKit.box(Vector3(cx + fx, 0.012, 0.0),
+			Vector3(0.11, 0.024, bd + 0.12), dark))
 
 
-## A right-triangle prism: full width in X, back face flush at local z=0,
-## bottom depth > top depth so the front is a slope. Used as the keypad's
-## shoulder — the tilted pad rests on body, not air.
 func _make_wedge(w: float, h: float, d_bottom: float, d_top: float, mat: Material) -> MeshInstance3D:
 	var st := SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
