@@ -277,8 +277,86 @@
 				}
 			],
 			"violations": 0
+		},
+		{
+			"artifact": "galton_friction",
+			"body": "twin-bay comparison",
+			"dialect": "vertical",
+			"element_count": 254,
+			"findings": [
+				{
+					"detail": "lowest element y = -1.150 (pedestal below origin)",
+					"ok": true,
+					"rule": "G2-grounded"
+				},
+				{
+					"detail": "all 21 text nodes inside the body",
+					"ok": true,
+					"rule": "G1-no-orphan-text"
+				},
+				{
+					"detail": "79 canon materials, no near-miss drift",
+					"ok": true,
+					"rule": "G4-palette"
+				},
+				{
+					"detail": "keypad 1.279 above the floor contact (base y = -1.150)",
+					"ok": true,
+					"rule": "G5-reach"
+				},
+				{
+					"detail": "0 glass panels, all pocketed",
+					"ok": true,
+					"rule": "G6-screen-seated"
+				},
+				{
+					"detail": "5 ember elements",
+					"ok": true,
+					"rule": "G7-accent-present"
+				}
+			],
+			"violations": 0
+		},
+		{
+			"artifact": "distribution_visualization",
+			"body": "billboard",
+			"dialect": "vertical",
+			"element_count": 57,
+			"findings": [
+				{
+					"detail": "lowest element y = -4.040 (pedestal below origin)",
+					"ok": true,
+					"rule": "G2-grounded"
+				},
+				{
+					"detail": "all 8 text nodes inside the body",
+					"ok": true,
+					"rule": "G1-no-orphan-text"
+				},
+				{
+					"detail": "36 canon materials, no near-miss drift",
+					"ok": true,
+					"rule": "G4-palette"
+				},
+				{
+					"detail": "keypad 1.540 above the floor contact (base y = -4.040)",
+					"ok": false,
+					"rule": "G5-reach"
+				},
+				{
+					"detail": "0 glass panels, all pocketed",
+					"ok": true,
+					"rule": "G6-screen-seated"
+				},
+				{
+					"detail": "2 ember elements",
+					"ok": true,
+					"rule": "G7-accent-present"
+				}
+			],
+			"violations": 1
 		}
 	],
 	"canon_version": 1.0,
-	"total_violations": 1
+	"total_violations": 2
 }

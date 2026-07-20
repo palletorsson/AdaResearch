@@ -117,6 +117,30 @@ CABINETS = [
                 "mid-section between dark collars, bolt rows — because a single "
                 "0.9 m near-black cylinder reads as a bin.",
     },
+    {
+        "artifact": "galton_friction",
+        "body": "twin-bay comparison",
+        "no": 8,
+        "sign": "GALTON - FRICTION vs FORMULA / ONE BELL, TWO ROADS TO IT",
+        "note": "The body says what the artifact says. This piece is an argument "
+                "between two methods, so it gets TWO BAYS of one slab with a "
+                "mullion between them — the comparison is structural, not a "
+                "caption. The left bay holds a REAL galton board (its own cabinet, "
+                "inner pedestal suppressed so two do not stack); the right holds "
+                "the formula's instant bell.",
+    },
+    {
+        "artifact": "distribution_visualization",
+        "body": "billboard",
+        "no": 9,
+        "sign": "PROBABILITY DISTRIBUTIONS / SAME SAMPLES, DIFFERENT LAW",
+        "note": "The widest body in the family, because this artifact is authored "
+                "at WALL scale — bars 3 m tall, captions out to y=5.5. Same anatomy "
+                "at ten times the size: one slab behind the bars, maroon flanks with "
+                "bolts, a sign band overhead, a screen the stats print on, a sill "
+                "with the parameter gauges standing on it instead of floating in "
+                "open air either side.",
+    },
 ]
 
 ANATOMY = ["back slab", "maroon flank", "window + glass", "service screen",

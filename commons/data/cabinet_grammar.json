@@ -104,7 +104,9 @@
     "wide console",
     "pedestal station",
     "three-bay rig",
-    "specimen dock"
+    "specimen dock",
+    "twin-bay comparison",
+    "billboard"
    ]
   },
   "horizontal": {
@@ -258,12 +260,25 @@
    "scene": "res://algorithms/randomness/entropy_jar/entropy_jar.tscn",
    "propagation": 7,
    "kit": true
+  },
+  {
+   "artifact": "galton_friction",
+   "dialect": "vertical",
+   "body": "twin-bay comparison",
+   "scene": "res://algorithms/randomness/galton_friction/galton_friction.tscn",
+   "propagation": 8,
+   "kit": true
+  },
+  {
+   "artifact": "distribution_visualization",
+   "dialect": "vertical",
+   "body": "billboard",
+   "scene": "res://algorithms/randomness/distribution_visualization/distribution_visualization.tscn",
+   "propagation": 9,
+   "kit": true
   }
  ],
- "queue": [
-  "DistributionVisualization",
-  "galton_friction"
- ],
+ "queue": [],
  "process": [
   "0. LOOK at the good ones first: /props-dna-gallery second half (the station family) and /cabinet-gallery.",
   "1. READ the artifact: which plane is its interface on? That picks the dialect before anything else.",
@@ -297,5 +312,6 @@
    "specimen_dock(base_r, dock_r, base_h, collar_h, …)": "the containment-tank idiom for a specimen you can still LIFT OUT — tapered base, lit cradle ring, strut cage to an OPEN collar, readout inset in the base. A dome would seal shut a pickable specimen, so the dock omits it."
   },
   "gotcha": "grime_band/dust_streaks bake their Z into position — assign .position.x/.y only. grime_band is an OPAQUE dirt shadow: it belongs at the BASE of a light body where dirt collects, never floating mid-body and never on a dark face (it reads as a hanging slab) or over a window (smears on the phenomenon). And derive the near-black 'dark' from a fixed value, not panel.darkened() — 0.55 lands at ~0.31 grey and washes out every pocket, plinth and apron in the family. grime_band is also a FLAT plate: on a cylindrical body it juts out as a slab instead of lying on the surface — round bodies take their age from banding (light mid-section between dark collars) and bolt rows instead."
- }
+ },
+ "queue_note": "EMPTY — the randomness family is complete at 9 members. The original queue also listed trng_vs_prng and bell_alley, which do not exist in the repo; it was aspirational, not a work list. Check the artifact exists before queueing it."
 }

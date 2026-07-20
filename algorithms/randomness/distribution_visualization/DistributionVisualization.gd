@@ -34,6 +34,15 @@ var _mat_histogram: StandardMaterial3D
 var _mat_curve: StandardMaterial3D
 
 # --- Labels ---
+const HangarKit = preload("res://commons/artifacts/_hangar/hangar_kit.gd")
+const BakedTextDV = preload("res://commons/utils/baked_text_albedo.gd")
+
+## Housing (cabinet grammar). This one is authored at WALL scale — bars 3 m
+## tall, labels out to y=5.5 — so its body is a billboard, not a kiosk.
+@export var finish: String = "rams"
+@export var wear: float = 0.10
+@export var unit_code: String = "DV-09"
+
 var _title_label: Label3D
 var _dist_label: Label3D
 var _param_label: Label3D
@@ -44,6 +53,7 @@ func _ready() -> void:
 	_create_shared_materials()
 	_create_labels()
 	_create_buttons()
+	_create_billboard()
 	create_histogram_bars()
 	create_statistical_curve()
 	setup_indicator_materials()
@@ -437,3 +447,112 @@ func _exit_tree() -> void:
 
 func apply_grid_config(config: Dictionary) -> void:
 	pass
+
+
+## THE BILLBOARD — the widest body in the family, because this artifact is
+## authored at wall scale (bars 3 m tall, captions out to y = 5.5). Same
+## anatomy, ten times the size: one slab behind the bars, a maroon flank, a
+## sign band overhead, a readout the stats print on, a sill and a plinth.
+func _create_billboard() -> void:
+	var half_w: float = 6.2
+	var bot: float = -3.6
+	var top: float = 5.1
+	var cap_h: float = 0.9
+	var z_back: float = -1.2
+
+	var cab := Node3D.new()
+	cab.name = "Cabinet"
+	cab.set_meta("housing", true)
+	add_child(cab)
+
+	var pal: Dictionary = HangarKit.finish_palette(finish)
+	var col_body: Color = pal["body"]
+	var col_panel: Color = pal["panel"]
+	var col_accent: Color = pal["accent"]
+	var ew: float = float(pal["wear"]) if finish.to_lower() == "terminal" else wear
+	var shell: StandardMaterial3D = HangarKit.finish_body(finish, col_body, ew)
+	var dark: StandardMaterial3D = HangarKit.painted_metal(Color(0.09, 0.09, 0.105), ew, 0.4, 0.5)
+	var maroon: StandardMaterial3D = HangarKit.painted_metal(Color(0.30, 0.11, 0.09), ew)
+	var steel: StandardMaterial3D = HangarKit.worn_metal(col_panel)
+	var accent: StandardMaterial3D = HangarKit.emissive(col_accent, 2.2)
+
+	cab.add_child(HangarKit.box(Vector3(0, (bot + top) * 0.5, z_back),
+		Vector3(half_w * 2.0, top - bot, 0.35), shell))
+	for sx in [-1.0, 1.0]:
+		cab.add_child(HangarKit.box(Vector3(sx * (half_w - 0.28), (bot + top) * 0.5, z_back + 0.20),
+			Vector3(0.55, top - bot, 0.55), maroon))
+		cab.add_child(HangarKit.bolts(
+			Vector3(sx * (half_w - 0.28), bot + 0.7, z_back + 1.00),
+			Vector3(sx * (half_w - 0.28), top - 0.7, z_back + 1.00), 8, 0.075, steel))
+
+	# the stats caption gets a screen instead of open air
+	var scr_w: float = 5.2
+	var scr_h: float = 1.5
+	var scr_c := Vector3(0.0, -2.6, z_back + 0.26)
+	cab.add_child(HangarKit.box(scr_c - Vector3(0, 0, 0.03),
+		Vector3(scr_w + 0.20, scr_h + 0.18, 0.10), dark))
+	cab.add_child(HangarKit.box(scr_c, Vector3(scr_w, scr_h, 0.05),
+		HangarKit.emissive(Color(0.12, 0.12, 0.135), 0.45)))
+	cab.add_child(HangarKit.box(scr_c + Vector3(0, scr_h * 0.5 + 0.05, 0.03),
+		Vector3(scr_w + 0.20, 0.04, 0.04), accent))
+	if _stats_label != null and is_instance_valid(_stats_label):
+		_stats_label.position = Vector3(0, -2.6, z_back + 0.34)
+	# the distribution name and parameters ride the slab, not the air
+	if _dist_label != null and is_instance_valid(_dist_label):
+		_dist_label.position = Vector3(0, 4.5, z_back + 0.26)
+	if _param_label != null and is_instance_valid(_param_label):
+		_param_label.position = Vector3(0, 3.8, z_back + 0.26)
+	# the title moves into the sign band
+	if _title_label != null and is_instance_valid(_title_label):
+		_title_label.queue_free()
+
+	# sill the bars stand on + vents
+	cab.add_child(HangarKit.box(Vector3(0, bot + 0.18, z_back + 0.45),
+		Vector3(half_w * 2.0, 0.36, 1.1), dark))
+	for gi in range(6):
+		cab.add_child(HangarKit.box(
+			Vector3(-half_w * 0.55, bot + 0.55 + float(gi) * 0.22, z_back + 0.26),
+			Vector3(2.0, 0.09, 0.10), dark))
+
+	# sign cap
+	cab.add_child(HangarKit.box(Vector3(0, top + cap_h * 0.5, z_back + 0.06),
+		Vector3(half_w * 2.0 + 0.4, cap_h, 0.9), shell))
+	cab.add_child(HangarKit.box(Vector3(0, top + 0.05, z_back + 0.96),
+		Vector3(half_w * 2.0 + 0.4, 0.05, 0.04), accent))
+	cab.add_child(HangarKit.box(Vector3(0, top + cap_h * 0.5, z_back + 0.94),
+		Vector3(half_w * 2.0 - 0.5, 0.62, 0.10), dark))
+	var st: Node3D = BakedTextDV.make_tag("PROBABILITY DISTRIBUTIONS",
+		Color(0.93, 0.94, 0.97), 0.30, Color(0.07, 0.075, 0.09), false, Color(0, 0, 0, 0))
+	if st:
+		st.position = Vector3(0, top + cap_h * 0.5 + 0.10, z_back + 1.00)
+		cab.add_child(st)
+	var ss: Node3D = BakedTextDV.make_tag("SAME SAMPLES, DIFFERENT LAW",
+		Color(0.55, 0.58, 0.66), 0.14, Color(0.07, 0.075, 0.09), false, Color(0, 0, 0, 0))
+	if ss:
+		ss.position = Vector3(0, top + cap_h * 0.5 - 0.20, z_back + 1.00)
+		cab.add_child(ss)
+
+	var code: MeshInstance3D = HangarKit.stencil(unit_code, Vector2(0.9, 0.24),
+		col_accent.lightened(0.25))
+	if code:
+		code.position = Vector3(-half_w + 1.1, bot + 0.55, z_back + 1.00)
+		cab.add_child(code)
+	var gb: MeshInstance3D = HangarKit.grime_band(half_w * 1.7, 0.42, z_back + 0.50, col_body)
+	if gb:
+		gb.position.y = bot
+		cab.add_child(gb)
+
+	# The three parameter gauges (SampleCount / Parameter1 / Parameter2) stood
+	# out in open air either side of the bars. They are readouts too, so they
+	# come onto the body: a row of standing gauges on the sill.
+	var gauges := ["SampleCount", "Parameter1", "Parameter2"]
+	for gi in range(gauges.size()):
+		var g: Node = get_node_or_null(NodePath(gauges[gi]))
+		if g != null and g is Node3D:
+			var gx: float = half_w - 1.5 - float(gi) * 1.0
+			(g as Node3D).position.x = gx
+			(g as Node3D).position.z = z_back + 0.62
+
+	# plinth
+	cab.add_child(HangarKit.box(Vector3(0, bot - 0.22, z_back + 0.30),
+		Vector3(half_w * 2.0 + 0.3, 0.44, 1.4), dark))

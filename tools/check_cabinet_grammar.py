@@ -58,11 +58,20 @@ def main() -> int:
     # cannot be measured from geometry, only from the code that made it.
     kit_state: dict[str, bool] = {}
     for m in canon.get("members", []):
-        gd = REPO / str(m.get("scene", "")).replace("res://", "").replace(".tscn", ".gd")
-        try:
-            kit_state[m["artifact"]] = "HangarKit" in gd.read_text(encoding="utf-8")
-        except Exception:
-            kit_state[m["artifact"]] = False
+        scene = REPO / str(m.get("scene", "")).replace("res://", "")
+        gd = scene.with_suffix(".gd")
+        # scene and script names do not always match case (DistributionVisualization.gd
+        # beside distribution_visualization.tscn), so fall back to the folder.
+        candidates = [gd] if gd.exists() else sorted(scene.parent.glob("*.gd"))
+        found = False
+        for c in candidates:
+            try:
+                if "HangarKit" in c.read_text(encoding="utf-8"):
+                    found = True
+                    break
+            except Exception:
+                continue
+        kit_state[m["artifact"]] = found
 
     hard = 0
     soft = 0

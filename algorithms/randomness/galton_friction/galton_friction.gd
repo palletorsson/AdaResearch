@@ -22,6 +22,16 @@ class_name GaltonFriction
 
 const PHYS_BOARD := preload("res://algorithms/randomness/galton_board/galton_board.tscn")
 
+const HangarKit = preload("res://commons/artifacts/_hangar/hangar_kit.gd")
+const BakedTextGF = preload("res://commons/utils/baked_text_albedo.gd")
+
+## Housing (cabinet grammar). Two bays, because the artifact IS a comparison:
+## the harvest on the left, the crank on the right, one body holding both.
+@export var finish: String = "rams"
+@export var wear: float = 0.10
+@export var unit_code: String = "GF-08"
+@export var plinth_height: float = 0.95
+
 @export var rows: int = 8
 @export var rng_seed: int = 1955
 @export var balls_per_second: float = 12.0
@@ -47,6 +57,7 @@ func _ready() -> void:
 		_bins.append(0)
 	_build_harvest()
 	_build_crank()
+	_build_twin_bay()
 	set_process(not Engine.is_editor_hint())
 
 
@@ -63,12 +74,19 @@ func apply_grid_config(config_data: Dictionary) -> void:
 func _build_harvest() -> void:
 	var board: Node3D = PHYS_BOARD.instantiate()
 	board.name = "Harvest"
-	board.position = Vector3(-0.62, 0.0, 0.0)
-	board.scale = Vector3(0.62, 0.62, 0.62)
+	# The harvest is a REAL galton_board — the artifact's whole argument is
+	# that the left bay holds the actual apparatus. It now carries its own
+	# cabinet and pedestal, so: suppress the inner plinth (the twin-bay
+	# supplies one; two stacked pedestals is a mistake, not a machine) and
+	# size it to sit inside its bay. Properties are set BEFORE add_child so
+	# _ready sees them.
+	board.set("plinth_height", 0.0)
+	board.position = Vector3(-0.40, 0.02, 0.0)
+	board.scale = Vector3(0.42, 0.42, 0.42)
 	add_child(board)
 	_plate("THE HARVEST",
 		"physics — chance from a falling body\napparatus · slow · biased · never repeats",
-		Vector3(-0.62, 0.46, 0.0), color_bell)
+		Vector3(-0.42, 0.56, 0.0), color_bell)
 
 
 # ── RIGHT: the crank (pseudo, the cheap formula) ─────────────────────────────
@@ -208,3 +226,101 @@ func _binom(n: int, k: int) -> float:
 	for i in range(k):
 		r = r * float(n - i) / float(i + 1)
 	return r
+
+
+## THE TWIN-BAY COMPARISON — the body says what the artifact says.
+## This piece is an argument between two methods: real physics on the left,
+## the formula on the right. So it gets TWO BAYS of one slab with a mullion
+## between them — the comparison is structural, not a caption.
+func _build_twin_bay() -> void:
+	var half_w: float = 0.80
+	var bot: float = -0.20
+	var top: float = 0.74
+	var cap_h: float = 0.10
+	var z_back: float = -0.06
+
+	var cab := Node3D.new()
+	cab.name = "Cabinet"
+	cab.set_meta("housing", true)
+	add_child(cab)
+
+	var pal: Dictionary = HangarKit.finish_palette(finish)
+	var col_body: Color = pal["body"]
+	var col_panel: Color = pal["panel"]
+	var col_accent: Color = pal["accent"]
+	var ew: float = float(pal["wear"]) if finish.to_lower() == "terminal" else wear
+	var shell: StandardMaterial3D = HangarKit.finish_body(finish, col_body, ew)
+	var dark: StandardMaterial3D = HangarKit.painted_metal(Color(0.09, 0.09, 0.105), ew, 0.4, 0.5)
+	var maroon: StandardMaterial3D = HangarKit.painted_metal(Color(0.30, 0.11, 0.09), ew)
+	var steel: StandardMaterial3D = HangarKit.worn_metal(col_panel)
+	var accent: StandardMaterial3D = HangarKit.emissive(col_accent, 2.2)
+
+	# back slab + the mullion that makes it a comparison
+	cab.add_child(HangarKit.box(Vector3(0, (bot + top) * 0.5, z_back),
+		Vector3(half_w * 2.0, top - bot, 0.05), shell))
+	cab.add_child(HangarKit.box(Vector3(0, (bot + top) * 0.5, z_back + 0.035),
+		Vector3(0.045, top - bot, 0.06), dark))
+	for sx in [-1.0, 1.0]:
+		cab.add_child(HangarKit.box(Vector3(sx * (half_w - 0.025), (bot + top) * 0.5, z_back + 0.02),
+			Vector3(0.05, top - bot, 0.09), maroon))
+		cab.add_child(HangarKit.bolts(
+			Vector3(sx * (half_w - 0.025), bot + 0.08, z_back + 0.068),
+			Vector3(sx * (half_w - 0.025), top - 0.08, z_back + 0.068), 6, 0.008, steel))
+
+	# the readout leaves the air and takes a screen on the left bay's sill
+	var scr_w: float = 0.34
+	var scr_h: float = 0.13
+	var scr_c := Vector3(-0.42, bot + 0.10, z_back + 0.036)
+	cab.add_child(HangarKit.box(scr_c - Vector3(0, 0, 0.004),
+		Vector3(scr_w + 0.03, scr_h + 0.025, 0.014), dark))
+	cab.add_child(HangarKit.box(scr_c, Vector3(scr_w, scr_h, 0.006),
+		HangarKit.emissive(Color(0.12, 0.12, 0.135), 0.45)))
+	cab.add_child(HangarKit.box(scr_c + Vector3(0, scr_h * 0.5 + 0.005, 0.004),
+		Vector3(scr_w + 0.03, 0.005, 0.005), accent))
+	if _readout != null and is_instance_valid(_readout):
+		_readout.pixel_size = 0.00042
+		_readout.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		_readout.position = scr_c + Vector3(0, 0.0, 0.010)
+
+	# sill under both bays + vents on the right bay
+	cab.add_child(HangarKit.box(Vector3(0, bot + 0.015, z_back + 0.05),
+		Vector3(half_w * 2.0, 0.03, 0.13), dark))
+	for gi in range(5):
+		cab.add_child(HangarKit.box(
+			Vector3(0.42, bot + 0.055 + float(gi) * 0.022, z_back + 0.036),
+			Vector3(0.26, 0.010, 0.012), dark))
+
+	# sign cap over the ember line
+	cab.add_child(HangarKit.box(Vector3(0, top + cap_h * 0.5, z_back + 0.01),
+		Vector3(half_w * 2.0 + 0.06, cap_h, 0.14), shell))
+	cab.add_child(HangarKit.box(Vector3(0, top + 0.005, z_back + 0.075),
+		Vector3(half_w * 2.0 + 0.06, 0.006, 0.004), accent))
+	cab.add_child(HangarKit.box(Vector3(0, top + cap_h * 0.5, z_back + 0.072),
+		Vector3(half_w * 2.0 - 0.06, 0.072, 0.012), dark))
+	var st: Node3D = BakedTextGF.make_tag("GALTON — FRICTION vs FORMULA",
+		Color(0.93, 0.94, 0.97), 0.030, Color(0.07, 0.075, 0.09), false, Color(0, 0, 0, 0))
+	if st:
+		st.position = Vector3(0, top + cap_h * 0.5 + 0.012, z_back + 0.080)
+		cab.add_child(st)
+	var ss: Node3D = BakedTextGF.make_tag("ONE BELL, TWO ROADS TO IT",
+		Color(0.55, 0.58, 0.66), 0.014, Color(0.07, 0.075, 0.09), false, Color(0, 0, 0, 0))
+	if ss:
+		ss.position = Vector3(0, top + cap_h * 0.5 - 0.019, z_back + 0.080)
+		cab.add_child(ss)
+
+	var code: MeshInstance3D = HangarKit.stencil(unit_code, Vector2(0.11, 0.028),
+		col_accent.lightened(0.25))
+	if code:
+		code.position = Vector3(-half_w + 0.13, bot + 0.055, z_back + 0.070)
+		cab.add_child(code)
+	var gb: MeshInstance3D = HangarKit.grime_band(half_w * 1.7, 0.05, z_back + 0.070, col_body)
+	if gb:
+		gb.position.y = bot
+		cab.add_child(gb)
+
+	# pedestal — the whole piece is authored around y=0, i.e. on the floor
+	var ped: Node3D = HangarKit.plinth(half_w * 2.0, 0.24, plinth_height, finish, ew,
+		col_accent, unit_code)
+	if ped:
+		ped.position = Vector3(0, bot, z_back + 0.05)
+		cab.add_child(ped)
