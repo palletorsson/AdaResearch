@@ -204,7 +204,7 @@
 			"artifact": "hardware_entropy_decay",
 			"body": "three-bay rig",
 			"dialect": "vertical",
-			"element_count": 90,
+			"element_count": 92,
 			"findings": [
 				{
 					"detail": "lowest element y = 0.000",
@@ -217,12 +217,51 @@
 					"rule": "G1-no-orphan-text"
 				},
 				{
-					"detail": "47 canon materials, no near-miss drift",
+					"detail": "49 canon materials, no near-miss drift",
 					"ok": true,
 					"rule": "G4-palette"
 				},
 				{
-					"detail": "keypad 1.000 above the floor contact (base y = 0.000)",
+					"detail": "keypad 1.045 above the floor contact (base y = 0.000)",
+					"ok": true,
+					"rule": "G5-reach"
+				},
+				{
+					"detail": "0 glass panels, all pocketed",
+					"ok": true,
+					"rule": "G6-screen-seated"
+				},
+				{
+					"detail": "2 ember elements",
+					"ok": true,
+					"rule": "G7-accent-present"
+				}
+			],
+			"violations": 0
+		},
+		{
+			"artifact": "entropy_jar",
+			"body": "specimen dock",
+			"dialect": "vertical",
+			"element_count": 131,
+			"findings": [
+				{
+					"detail": "lowest element y = -0.000",
+					"ok": true,
+					"rule": "G2-grounded"
+				},
+				{
+					"detail": "all 3 text nodes inside the body",
+					"ok": true,
+					"rule": "G1-no-orphan-text"
+				},
+				{
+					"detail": "13 canon materials, no near-miss drift",
+					"ok": true,
+					"rule": "G4-palette"
+				},
+				{
+					"detail": "keypad 0.811 above the floor contact (base y = -0.000)",
 					"ok": true,
 					"rule": "G5-reach"
 				},

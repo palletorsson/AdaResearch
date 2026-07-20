@@ -38,6 +38,13 @@ class_name EntropyJar
 @export var pedestal_height: float = 0.9
 @export var pedestal_color: Color = Color(0.12, 0.1, 0.08)
 
+## Housing (cabinet grammar). A jar is a SPECIMEN, so it gets the containment
+## vocabulary rather than a kiosk — but an open DOCK, because this specimen is
+## meant to be lifted out and shaken.
+@export var finish: String = "rams"
+@export var wear: float = 0.10
+@export var unit_code: String = "EJ-07"
+
 # ── Shake Detection ─────────────────────────────────────────────────────────
 @export var shake_threshold: float = 1.5  ## velocity magnitude to count as shake
 
@@ -55,6 +62,7 @@ var _shake_cooldown: float = 0.0
 var _initial_entropy: float = 0.0
 var _current_entropy: float = 0.0
 
+const HangarKit = preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 const PICKABLE_SCENE = preload("res://addons/godot-xr-tools/objects/pickable.tscn")
 const HIGHLIGHT_RING_SCENE = preload("res://addons/godot-xr-tools/objects/highlight/highlight_ring.tscn")
 
@@ -68,6 +76,7 @@ func _ready() -> void:
 	_create_jar()
 	_create_particles()
 	_create_labels()
+	_create_dock()
 	_create_vr_controls()
 	_jar_spawn_pos = Vector3(0, pedestal_height + 0.02 + jar_height / 2.0, 0)
 	_initial_entropy = _measure_entropy()
@@ -483,11 +492,12 @@ func _on_jar_dropped(_pickable) -> void:
 
 func _create_vr_controls() -> void:
 	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
-	var panel: Node3D = RackTpl.create_panel("ENTROPY JAR", [
+	var panel: Node3D = RackTpl.create_panel("", [
 		[{"type": "button", "label": "RESET"}],
 	])
-	panel.position = Vector3(0, pedestal_height + 0.05, jar_radius + 0.12)
-	panel.rotation_degrees = Vector3(-25, 0, 0)
+	panel.position = Vector3(0, pedestal_height * 0.90, jar_radius * 2.4 + 0.012)
+	panel.rotation_degrees = Vector3(-18, 0, 0)
+	panel.scale = Vector3(0.78, 0.78, 0.78)
 	add_child(panel)
 
 	# RESET button (Btn_0)
@@ -546,3 +556,100 @@ func _exit_tree() -> void:
 
 func apply_grid_config(config: Dictionary) -> void:
 	pass
+
+
+## THE SPECIMEN DOCK — a jar is a jar, so it gets the containment-tank idiom
+## (Palle 2026-07-20, pointing at lab_specimen_4cf36): tapered base, lit
+## cradle ring, strut cage, readout inset in the base. With the cap left OFF,
+## because this specimen is an XRToolsPickable — a dome would seal shut the
+## one thing the artifact is for.
+func _create_dock() -> void:
+	var dock: Node3D = HangarKit.specimen_dock(
+		jar_radius * 2.4, jar_radius * 1.25, pedestal_height, jar_height * 0.55,
+		finish, wear, Color(0.86, 0.34, 0.11), Color(0.35, 0.78, 0.95))
+	if dock == null:
+		return
+	add_child(dock)
+
+	# the old cylinder pedestal is replaced by the dock's own base
+	var old: Node = get_node_or_null("Pedestal")
+	if old != null:
+		for c in old.get_children():
+			if c is MeshInstance3D:
+				c.queue_free()          # keep the collider, drop the plain cylinder
+
+	# retire the floating title/subtitle — the base plate carries the name
+	for n in ["TitleLabel"]:
+		var t: Node = get_node_or_null(n)
+		if t != null:
+			t.queue_free()
+	for c in get_children():
+		if c is Label3D and str((c as Label3D).text).begins_with("Second Law"):
+			c.queue_free()
+
+	# the live figures move onto the dock's readout screen
+	var panel: Node3D = dock.get_node_or_null("DockReadout")
+	if panel != null:
+		if _entropy_label != null and is_instance_valid(_entropy_label):
+			_entropy_label.reparent(panel)
+			_entropy_label.pixel_size = 0.0011
+			_entropy_label.position = Vector3(0.0, 0.030, 0.022)
+			_entropy_label.rotation_degrees = Vector3.ZERO
+			_entropy_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		if _stats_label != null and is_instance_valid(_stats_label):
+			_stats_label.reparent(panel)
+			_stats_label.pixel_size = 0.00065
+			_stats_label.position = Vector3(0.0, -0.008, 0.022)
+			_stats_label.rotation_degrees = Vector3.ZERO
+			_stats_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+
+	# The column was a single 0.9 m near-black mass, which reads as a bin.
+	# Band it the way the station props band a tall body: a lighter mid
+	# section between two dark collars, bolt rows, and a foot ring.
+	var pal: Dictionary = HangarKit.finish_palette(finish)
+	var col_mid: StandardMaterial3D = HangarKit.finish_body(finish, pal["panel"], wear)
+	var col_dark: StandardMaterial3D = HangarKit.painted_metal(
+		Color(0.09, 0.09, 0.105), wear, 0.45, 0.5)
+	var steel: StandardMaterial3D = HangarKit.worn_metal(pal["panel"])
+	var br: float = jar_radius * 2.4
+	var band := MeshInstance3D.new()
+	var band_mesh := CylinderMesh.new()
+	band_mesh.top_radius = br * 0.965
+	band_mesh.bottom_radius = br * 0.985
+	band_mesh.height = pedestal_height * 0.42
+	band_mesh.radial_segments = 32
+	band.mesh = band_mesh
+	band.material_override = col_mid
+	band.position = Vector3(0, pedestal_height * 0.50, 0)
+	add_child(band)
+	for sy in [pedestal_height * 0.285, pedestal_height * 0.715]:
+		var collar := MeshInstance3D.new()
+		var cmesh := CylinderMesh.new()
+		cmesh.top_radius = br * 1.01
+		cmesh.bottom_radius = br * 1.01
+		cmesh.height = 0.022
+		cmesh.radial_segments = 32
+		collar.mesh = cmesh
+		collar.material_override = col_dark
+		collar.position = Vector3(0, sy, 0)
+		add_child(collar)
+	for i in range(4):
+		var ang: float = TAU * (float(i) / 4.0) + 0.4
+		add_child(HangarKit.bolts(
+			Vector3(cos(ang) * br * 0.99, pedestal_height * 0.31, sin(ang) * br * 0.99),
+			Vector3(cos(ang) * br * 0.99, pedestal_height * 0.69, sin(ang) * br * 0.99),
+			4, 0.007, steel))
+	# (no grime_band: it is a FLAT plate and this body is a cylinder — it
+	#  would jut out as a slab. Round bodies take their age from banding.)
+
+	# name plate on the base, read on approach
+	var plate: MeshInstance3D = HangarKit.brand_patch("ENTROPY JAR",
+		Vector2(0.20, 0.036), Color(0.07, 0.075, 0.09), Color(0.93, 0.94, 0.97))
+	if plate:
+		plate.position = Vector3(0.0, pedestal_height * 0.30, jar_radius * 2.4 - 0.004)
+		add_child(plate)
+	var code: MeshInstance3D = HangarKit.stencil(unit_code, Vector2(0.075, 0.020),
+		Color(0.86, 0.34, 0.11).lightened(0.25))
+	if code:
+		code.position = Vector3(0.0, pedestal_height * 0.16, jar_radius * 2.4 - 0.004)
+		add_child(code)

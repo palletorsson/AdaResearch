@@ -207,6 +207,7 @@ static func plinth(w: float, d: float, h: float, finish: String = "rams",
 		code_text: String = "") -> Node3D:
 	var root := Node3D.new()
 	root.name = "Plinth"
+	root.set_meta("housing", true)
 	if h <= 0.05:
 		return root
 	var pal: Dictionary = finish_palette(finish)
@@ -276,6 +277,125 @@ static func wedge(w: float, h: float, d_bottom: float, d_top: float, mat: Materi
 	mi.mesh = st.commit()
 	mi.material_override = mat
 	return mi
+
+
+## A SPECIMEN DOCK — the containment-tank vocabulary for a specimen you can
+## still LIFT OUT.
+##
+## The sealed tank (see surreal_lab's specimen mode: tapered base, strut cage,
+## domed cap, rim lights) is the right idiom for a jar — but a dome traps the
+## specimen, and some specimens are meant to be picked up and shaken. So the
+## dock is that vocabulary with the cap removed: a tapered base, a lit cradle
+## ring the vessel seats into, struts rising to an OPEN collar, an angled
+## readout inset in the base front, a glowing seal ring, and feet.
+##
+## Origin at floor level; the cradle seat is returned via `seat_y` in the
+## node's meta so the caller can sit its vessel exactly on it.
+static func specimen_dock(base_r: float, dock_r: float, base_h: float,
+		collar_h: float, finish: String = "rams", wear_amount: float = 0.10,
+		accent_col: Color = BRAUN_ACCENT, glow_col: Color = Color(0.35, 0.75, 0.95)) -> Node3D:
+	var root := Node3D.new()
+	root.name = "SpecimenDock"
+	var pal: Dictionary = finish_palette(finish)
+	var dark := painted_metal(Color(0.09, 0.09, 0.105), wear_amount, 0.5, 0.5)
+	var mid := painted_metal(pal["panel"].darkened(0.35), wear_amount, 0.45, 0.55)
+	var steel := worn_metal(pal["panel"])
+
+	# tapered base
+	var base := MeshInstance3D.new()
+	var bm := CylinderMesh.new()
+	bm.top_radius = base_r * 0.92
+	bm.bottom_radius = base_r
+	bm.height = base_h
+	bm.radial_segments = 32
+	base.mesh = bm
+	base.material_override = dark
+	base.position = Vector3(0, base_h * 0.5, 0)
+	root.add_child(base)
+
+	# cradle shoulder the vessel sits in
+	var seat_y: float = base_h + 0.035
+	var shoulder := MeshInstance3D.new()
+	var sm := CylinderMesh.new()
+	sm.top_radius = dock_r + 0.02
+	sm.bottom_radius = base_r * 0.88
+	sm.height = 0.07
+	sm.radial_segments = 32
+	shoulder.mesh = sm
+	shoulder.material_override = mid
+	shoulder.position = Vector3(0, base_h + 0.035, 0)
+	root.add_child(shoulder)
+
+	# glowing seal ring at the cradle — the "powered dock" read
+	var ring := MeshInstance3D.new()
+	var tm := TorusMesh.new()
+	tm.inner_radius = dock_r
+	tm.outer_radius = dock_r + 0.018
+	ring.mesh = tm
+	ring.material_override = emissive(glow_col, 2.4)
+	ring.position = Vector3(0, seat_y + 0.030, 0)
+	root.add_child(ring)
+
+	# struts to an OPEN collar — the cage that does not close
+	var collar_y: float = seat_y + collar_h
+	for i in range(3):
+		var ang: float = TAU * (float(i) / 3.0) + 0.5
+		var sx: float = cos(ang) * (dock_r + 0.045)
+		var sz: float = sin(ang) * (dock_r + 0.045)
+		var strut := MeshInstance3D.new()
+		var cm := CylinderMesh.new()
+		cm.top_radius = 0.010
+		cm.bottom_radius = 0.012
+		cm.height = collar_h
+		cm.radial_segments = 10
+		strut.mesh = cm
+		strut.material_override = steel
+		strut.position = Vector3(sx, seat_y + collar_h * 0.5, sz)
+		root.add_child(strut)
+	var collar := MeshInstance3D.new()
+	var cot := TorusMesh.new()
+	cot.inner_radius = dock_r + 0.030
+	cot.outer_radius = dock_r + 0.055
+	collar.mesh = cot
+	collar.material_override = steel
+	collar.position = Vector3(0, collar_y, 0)
+	root.add_child(collar)
+
+	# angled readout inset in the base front
+	var panel := Node3D.new()
+	panel.name = "DockReadout"
+	panel.position = Vector3(0.0, base_h * 0.62, base_r - 0.012)
+	panel.rotation_degrees = Vector3(-22.0, 0.0, 0.0)
+	root.add_child(panel)
+	panel.add_child(box(Vector3.ZERO, Vector3(base_r * 1.15, 0.135, 0.025), dark))
+	panel.add_child(box(Vector3(0, 0.012, 0.016),
+		Vector3(base_r * 0.92, 0.088, 0.006), emissive(DISPLAY_DARK, 0.45)))
+	panel.add_child(box(Vector3(0, 0.070, 0.016),
+		Vector3(base_r * 1.05, 0.005, 0.005), emissive(accent_col, 2.0)))
+	for i in range(3):
+		var lamp := box(Vector3(-base_r * 0.36 + float(i) * base_r * 0.36, -0.048, 0.016),
+			Vector3(0.016, 0.016, 0.006),
+			emissive([accent_col, glow_col, Color(1.0, 0.78, 0.20)][i], 2.2))
+		panel.add_child(lamp)
+
+	# feet
+	for i in range(3):
+		var ang2: float = TAU * (float(i) / 3.0) + 0.4
+		var foot := MeshInstance3D.new()
+		var fm := CylinderMesh.new()
+		fm.top_radius = 0.032
+		fm.bottom_radius = 0.040
+		fm.height = 0.035
+		fm.radial_segments = 12
+		foot.mesh = fm
+		foot.material_override = dark
+		foot.position = Vector3(cos(ang2) * base_r * 0.78, 0.017, sin(ang2) * base_r * 0.78)
+		root.add_child(foot)
+
+	root.set_meta("housing", true)      # so the grammar probe scopes its rules here
+	root.set_meta("seat_y", seat_y + 0.035)
+	root.set_meta("readout_path", "DockReadout")
+	return root
 
 
 ## Diagonal warning-stripe texture (caution yellow / dark), cached per colour pair.

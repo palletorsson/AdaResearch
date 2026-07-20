@@ -309,7 +309,7 @@ func _walk(n: Node, meshes: Array, texts: Array, mats: Array,
 		housing: Array, in_housing: bool, in_tag: bool = false) -> void:
 	var nm: String = str(n.name)
 	var is_tag: bool = in_tag or nm.ends_with("Tag") or nm.begins_with("BakedText")
-	if nm == "Cabinet" or nm == "TableConsole":
+	if nm == "Cabinet" or nm == "TableConsole" or n.has_meta("housing"):
 		in_housing = true
 
 	if n is MeshInstance3D:

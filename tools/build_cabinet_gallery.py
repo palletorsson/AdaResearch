@@ -103,6 +103,20 @@ CABINETS = [
                 "the title, now in the sign band. First artifact built entirely "
                 "from the kit rather than retrofitted onto it.",
     },
+    {
+        "artifact": "entropy_jar",
+        "body": "specimen dock",
+        "no": 7,
+        "sign": "ENTROPY JAR (brand patch on the column)",
+        "note": "A jar is a jar — so it gets the containment-tank idiom rather "
+                "than a kiosk: tapered column, lit cradle ring, strut cage, an "
+                "angled readout inset in the body carrying S and the shake count. "
+                "But the cap is left OFF, because this specimen is an "
+                "XRToolsPickable you lift out and shake; a dome would seal shut "
+                "the one thing the artifact is for. The column is banded — light "
+                "mid-section between dark collars, bolt rows — because a single "
+                "0.9 m near-black cylinder reads as a bin.",
+    },
 ]
 
 ANATOMY = ["back slab", "maroon flank", "window + glass", "service screen",

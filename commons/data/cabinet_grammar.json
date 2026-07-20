@@ -103,7 +103,8 @@
     "tall street kiosk",
     "wide console",
     "pedestal station",
-    "three-bay rig"
+    "three-bay rig",
+    "specimen dock"
    ]
   },
   "horizontal": {
@@ -249,12 +250,17 @@
    "scene": "res://algorithms/randomness/hardware_entropy_decay/hardware_entropy_decay.tscn",
    "propagation": 6,
    "kit": true
+  },
+  {
+   "artifact": "entropy_jar",
+   "dialect": "vertical",
+   "body": "specimen dock",
+   "scene": "res://algorithms/randomness/entropy_jar/entropy_jar.tscn",
+   "propagation": 7,
+   "kit": true
   }
  ],
  "queue": [
-  "trng_vs_prng",
-  "entropy_jar",
-  "bell_alley",
   "DistributionVisualization",
   "galton_friction"
  ],
@@ -270,7 +276,7 @@
   "8. RECORD: if the improvement has a reach, write its class-condition in doc/transfer_ledger.md."
  ],
  "kit": {
-  "_ruling": "THE CABINET IS NOT BESPOKE. commons/artifacts/_hangar/hangar_kit.gd already carries this family's vocabulary — its readout() docstring names cabinets as a client, and its signage() exists so text 'reads as PART of the artifact rather than floating beside it', which is the founding ruling, implemented before I hand-rolled it five times. The station props in the second half of /props-dna-gallery look manufactured because they COMPOSE this kit. Build from it; do not re-type its geometry.",
+  "_ruling": "THE CABINET IS NOT BESPOKE. commons/artifacts/_hangar/hangar_kit.gd already carries this family's vocabulary — its readout() docstring names cabinets as a client, and its signage() exists so text 'reads as PART of the artifact rather than floating beside it', which is the founding ruling, implemented before I hand-rolled it five times. The station props in the second half of /props-dna-gallery look manufactured because they COMPOSE this kit. Build from it; do not re-type its geometry. And check for a KIN idiom before assuming the kiosk: a jar is a specimen, not an appliance. Palle 2026-07-20 pointed at lab_specimen_4cf36 — the containment tank in surreal_lab's specimen mode — which is the correct ancestor for any vessel artifact.",
   "path": "res://commons/artifacts/_hangar/hangar_kit.gd",
   "vocabulary": {
    "finish_palette(finish)": "one word ('rams' | 'terminal') drives body/panel/accent/screen/text/header/wear",
@@ -287,8 +293,9 @@
    "striped_mat() / hazard_stripe_texture()": "caution striping",
    "emissive(c, energy)": "lit elements",
    "plinth(w, d, h, finish, wear, accent, code)": "a pedestal built DOWNWARD from y=0 — raises an artifact into the reach band without touching a single authored coordinate; auto-grounding does the lift",
-   "wedge(w, h, d_bottom, d_top, mat)": "the sloped shoulder a control pad rests on — vertical dialect only; the horizontal dialect recesses its pad flush instead"
+   "wedge(w, h, d_bottom, d_top, mat)": "the sloped shoulder a control pad rests on — vertical dialect only; the horizontal dialect recesses its pad flush instead",
+   "specimen_dock(base_r, dock_r, base_h, collar_h, …)": "the containment-tank idiom for a specimen you can still LIFT OUT — tapered base, lit cradle ring, strut cage to an OPEN collar, readout inset in the base. A dome would seal shut a pickable specimen, so the dock omits it."
   },
-  "gotcha": "grime_band/dust_streaks bake their Z into position — assign .position.x/.y only. grime_band is an OPAQUE dirt shadow: it belongs at the BASE of a light body where dirt collects, never floating mid-body and never on a dark face (it reads as a hanging slab) or over a window (smears on the phenomenon). And derive the near-black 'dark' from a fixed value, not panel.darkened() — 0.55 lands at ~0.31 grey and washes out every pocket, plinth and apron in the family."
+  "gotcha": "grime_band/dust_streaks bake their Z into position — assign .position.x/.y only. grime_band is an OPAQUE dirt shadow: it belongs at the BASE of a light body where dirt collects, never floating mid-body and never on a dark face (it reads as a hanging slab) or over a window (smears on the phenomenon). And derive the near-black 'dark' from a fixed value, not panel.darkened() — 0.55 lands at ~0.31 grey and washes out every pocket, plinth and apron in the family. grime_band is also a FLAT plate: on a cylindrical body it juts out as a slab instead of lying on the surface — round bodies take their age from banding (light mid-section between dark collars) and bolt rows instead."
  }
 }
