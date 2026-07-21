@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: a Dieter Rams-styled cream control plate that lets the player paint a 4×4 fundamental domain, pick one of the 17 wallpaper symmetry groups, and watch a 6×4-repeat carpet generate live on the floor in front of them — an interactive proof that "infinite tiled pattern" is fully determined by (small_grid, group_choice)
+# desire: to be the project's argument that mathematical symmetry groups are not academic abstractions but design controls — to put the 17 wallpaper groups in the player's hands as buttons next to a paint grid, so the player feels p4m, p6m, cmm, pgg as distinct *gestures* rather than letter-codes
+# critical_parameter: wallpaper_group — the int (0–16) selecting one of WallpaperGroups.Group.{P1, P2, PM, PG, CM, ..., P6M}; default is 11 (P4M, the canonical floor-tile symmetry); changing this single value retiles the entire 6×4 carpet preview without touching the 4×4 painted source — the same input mapped through a different symmetry produces a categorically different pattern
+# triggers: _ready() initializes _grid_data (4×4 array of color indices), _paint_demo_pattern() seeds a cross motif, then builds the eye-height plate (PLATE_Y=1.0, tilted -15° toward player) with paint grid + 9-color palette + symmetry controls + floor carpet (CARPET_Y=-0.5, CARPET_Z=-1.0); cell paint emits cell_changed signal, group selection emits group_changed; every change calls _update_preview() which retiles the 6×4 carpet via the selected wallpaper group's transform set
+# emerges: a workbench experience — the player paints a few cells in the 4×4, watches the carpet on the floor reflect their gesture, then taps "P6M" and the same 16 painted cells become a hexagonal mandala; the Rams-cream palette, COPPER accent, and recessed groove buttons create a "studio instrument" feel that says "this is your tool" rather than "this is a demo"
+# needs: WallpaperGroups module at res://commons/primitives/arrays/wallpaper_groups.gd [has, preloaded const]; RackTemplates palette colors (CREAM, CREAM_LIGHT, WARM_DARK, COPPER, RECESS, DARK) [has, hardcoded constants]; 9-color tile palette [has, hardcoded Array[Color]]; Label3D for mode display [has]; signals cell_changed + group_changed for external listening [has]
+# relationships: the interactive companion to the wallpaper_groups.gd math module — the plate is what makes the 17-group classification *playable*; sibling to xyz_slider_plate (also Dieter Rams-styled, also "your tool" framing) in the Rams-instrument family; precedes the lattice_snap and pattern_maker artifacts by establishing "fundamental domain + group action = infinite pattern" as the curriculum's tile-pattern logic; the 6×4 carpet preview prefigures the mosaicanalysis sequence's larger floor compositions
+# truth: a wallpaper group is a verb you apply to a small drawing. The drawing is your handwriting; the group is the language it gets translated into.
+
 ## Pattern Tile Plate - Dieter Rams integrated interface
 ##
 ## A single cream panel containing:

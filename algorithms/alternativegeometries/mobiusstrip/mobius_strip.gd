@@ -1,5 +1,15 @@
 extends Node3D
 
+# @identity
+# essence: a procedurally generated Möbius strip — a 2D ribbon swept around a circle while its width axis rotates by half-turn(s) per loop, so the surface has only one side and one edge; a closed loop that lies about being closed
+# desire: to be the alternativegeometries sequence's first artifact that breaks the player's "inside vs outside" intuition — to make orientability stop being a math word and start being a thing the player watches: drag a finger along the ribbon and you end up on the other side without crossing an edge
+# critical_parameter: twists — the int default of 1 produces the canonical Möbius (single half-twist, one-sided); twists=2 produces an orientable doubly-twisted band (two-sided, like a regular ribbon); twists=3 returns to non-orientability — odd values break orientation, even values restore it; this single parameter holds the entire teaching about parity
+# triggers: _ready() builds the ArrayMesh once via generate_mobius_strip() (segments+1 × width_segments+1 vertex grid); _process(delta) auto-rotates the whole node around Y at rotation_speed if auto_rotate=true so the player sees the twist from every angle without input; cull_mode=DISABLED renders both sides as the same surface — the technical commitment to "one side" is in the material as much as the geometry
+# emerges: a single luminous ribbon hovering and slowly turning — the player walks around it and tries to find "the back" but there isn't one; the emission glow makes the twist legible at distance; raising twists by one toggles orientability, which the player feels as "now I can find the back, now I can't" without ever being told what orientability means
+# needs: ArrayMesh + PackedVector3Array/PackedInt32Array [native, has]; StandardMaterial3D with cull_mode=DISABLED + emission_enabled [has, mandatory for one-sided rendering]; auto-rotation in _process [has, provides motion without controls]; apply_grid_config no-op [has, present but pass-through]
+# relationships: the alternativegeometries sequence's anchor — sibling to klein_bottle, hyperbolic_plane, projective_plane in that lineage; precedes the topology track by establishing "orientability is a parameter you can flip" before introducing genus, Euler characteristic, or homology; the twist-angle math (theta * 0.5 * twists) is the same trick used in the wavefunctions sequence's helical eigenfunctions — a shared "half-angle parameterization" technique
+# truth: a surface is one-sided when traveling along it returns you to your starting point with your "up" pointing down. The Möbius is what happens when you give the universe a chance to be honest about that.
+
 @export var major_radius := 1.0
 @export var minor_radius := 0.2
 @export var segments := 64

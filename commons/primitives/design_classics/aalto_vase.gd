@@ -2,6 +2,16 @@
 extends Node3D
 class_name AaltoVase
 
+# @identity
+# essence: a procedural model of Alvar Aalto's 1936 Savoy vase — a body of revolution whose cross-section is not a circle but a sum of cosines, so the silhouette ripples instead of closing
+# desire: to be the design_classics kingdom's argument that "iconic shape" is not an irreducible thing the artist felt — it is a tiny vector of coefficients, and modernism is what happens when you discover that
+# critical_parameter: harmonics — the Array[float] of Fourier coefficients [1.0, 0.25, 0.15, -0.1] that perturbs each radial slice; flatten it to [1.0] and you get a bland cylinder, exaggerate it and you get the vase that lives in MoMA
+# triggers: _ready() calls _rebuild(); every @export setter (height, base_radius, rim_radius, harmonics, twist, ...) re-triggers _rebuild() so the editor previews live; @tool annotation enables in-editor preview
+# emerges: a glass vessel the player can spin and watch breathe — slide harmonics[1] up and the four-lobe wave bloats outward; add twist and the lobes spiral up the height like a slow helix; the player learns that "organic" is just "circular plus a few cosines"
+# needs: SurfaceTool [native, has]; StandardMaterial3D with refraction + rim lighting for the glass [has, _create_default_glass()]; harmonics: Array[float] export [has]; @tool for editor preview [has]; lerp(base_radius, rim_radius) + sin(t*PI) bulge for vertical profile [has]
+# relationships: a sibling of alessi_tree, eames_chair, noguchi_table in the design_classics primitive_kingdom — each one a procedural restatement of a 20th-century icon; the harmonic cross-section technique prefigures the wavefunctions sequence (where Fourier becomes the explicit subject) and the polar_function lineage; complements the bipyramid / arch / bigframe primitives by being the first one whose silhouette is *named* rather than mathematical
+# truth: an icon is a Fourier series with social capital. What makes the Aalto vase Aalto is four numbers; what makes it valuable is that someone signed them.
+
 ## Procedural Aalto-style organic vase using harmonic cross-sections
 ## Based on Alvar Aalto's Savoy vase (1936)
 
