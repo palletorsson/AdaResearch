@@ -128,14 +128,21 @@ KIND_OFFSET = {"instrument": 1, "performer": 2, "specimen": 2,
                "tableau": 2, "terrain": 0}
 
 
-def germinate(cast, hero_i, counter_i, script, target, seed):
+def germinate(cast, hero_i, counter_i, script, target, seed, axis=False):
     rng = random.Random(seed)
     n_art = len(cast)
     depth_span = max(26.0, 2.0 * n_art + 14.0)
     cx = 8.0
     food = sow_food(target, depth_span, cx, rng)
     nodes, parents, consumed = grow(food, cx, rng)
-    trunk = trunk_of(nodes, parents)
+    if axis:
+        # the hybrid (ruled 2026-07-21): the flesh grows toward the food,
+        # but the SPINE is the reading line (L-010) — a straight view
+        # corridor, so the vanishing point always shows the promise.
+        max_z = max(n[1] for n in nodes)
+        trunk = [(cx, float(z)) for z in range(1, int(max_z) + 1)]
+    else:
+        trunk = trunk_of(nodes, parents)
 
     # bounding box -> grid
     xs = [n[0] for n in nodes]
@@ -223,7 +230,7 @@ def germinate(cast, hero_i, counter_i, script, target, seed):
 # ── assembly (sibling-only) ──────────────────────────────────────────────
 
 def build(source, name, width, depth, floor, placements, spawn, exit_xy,
-          exit_tok, script, seed, stats):
+          exit_tok, script, seed, stats, axis=False):
     utils = [[" "] * width for _ in range(depth)]
     inter = [[" "] * width for _ in range(depth)]
     utils[spawn[1]][spawn[0]] = "s"
@@ -240,7 +247,7 @@ def build(source, name, width, depth, floor, placements, spawn, exit_xy,
         "documentation": {
             "composer": {
                 "tool": "germinate.py",
-                "strategy": "germination — grown, not searched (edge e-germination)",
+                "strategy": ("germination+axis — grown flesh, straight spine (the hybrid)" if axis else "germination — grown, not searched (edge e-germination)"),
                 "register": script["register"],
                 "seed": seed,
                 "growth": stats,
@@ -259,7 +266,7 @@ def build(source, name, width, depth, floor, placements, spawn, exit_xy,
     }, dropped
 
 
-def germinate_map(map_name, scripts, seeds, prefix):
+def germinate_map(map_name, scripts, seeds, prefix, axis=False):
     script = scripts["maps"][map_name]
     source, cast, exit_tok = read_cast(map_name)
     for pin in script.get("pins", []):
@@ -276,9 +283,9 @@ def germinate_map(map_name, scripts, seeds, prefix):
     cand = f"GermCand_{map_name}"
     for seed in range(seeds):
         w, dep, floor, pl, sp, ex, stats = germinate(
-            cast, hero_i, counter_i, script, target, seed)
+            cast, hero_i, counter_i, script, target, seed, axis=axis)
         data, dropped = build(source, cand, w, dep, floor, pl, sp, ex,
-                              exit_tok, script, seed, stats)
+                              exit_tok, script, seed, stats, axis=axis)
         write_map(cand, data)
         s, detail = score_candidate(cand, cast, hero_i, dropped, target)
         g = f"{stats['consumed']}/{stats['food']} food, {stats['trunk']} trunk"
@@ -306,13 +313,15 @@ def main():
     ap.add_argument("--scripts", default="doc/book/look_scripts/transformation.json")
     ap.add_argument("--seeds", type=int, default=3)
     ap.add_argument("--prefix", default="Germ_")
+    ap.add_argument("--axis", action="store_true",
+                    help="hybrid: grown flesh, straight view-corridor spine (L-010)")
     args = ap.parse_args()
     scripts = json.load(open(os.path.join(ROOT, args.scripts), encoding="utf-8"))
     targets = [args.map] if args.map else list(scripts["maps"].keys())
     ok = 0
     for m in targets:
         print(f"== {m} ==")
-        ok += germinate_map(m, scripts, args.seeds, args.prefix)
+        ok += germinate_map(m, scripts, args.seeds, args.prefix, axis=args.axis)
     print(f"done: {ok}/{len(targets)} germinated")
 
 
