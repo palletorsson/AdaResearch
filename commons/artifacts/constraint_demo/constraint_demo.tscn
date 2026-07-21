@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://c9constraintdemo01"]
+
+[ext_resource type="Script" path="res://commons/artifacts/constraint_demo/constraint_demo.gd" id="1_script"]
+
+; constraint_demo.tscn — paired structural vignettes for the bricolage
+; sequence, backed by constraint_demo.gd. One scene serves all six artifacts
+; (gravity/balance/triangulation × fail/pass); the pair is read from the
+; lookup_name the grid stamps as metadata before _ready(), same wrapper
+; pattern as specimen_plinth.
+
+[node name="constraint_demo" type="Node3D"]
+script = ExtResource("1_script")

@@ -297,6 +297,96 @@
     "bricolage"
    ],
    "qfep_connection": "The stack array: the same seven parts placed by a law of ABOVES, each element resting on the one before. The tower, the pile, the undo history. The only arrangement where order is load-bearing — remove the middle and everything above it matters. Exhaustion with consequences."
+  },
+  "balance_fail_demo": {
+   "name": "Balance — Fail",
+   "lookup_name": "balance_fail_demo",
+   "description": "A stack whose courses creep outward until the mass leaves the base; it leans.",
+   "scene": "res://commons/artifacts/constraint_demo/constraint_demo.tscn",
+   "category": "bricolage",
+   "artifact_type": "demonstration",
+   "complexity": "basic",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "bricolage"
+   ],
+   "qfep_connection": "Balance as the second thing that pushes back: each course steps a little further out, and there is a moment — invisible, arithmetical — when the centre of mass crosses the edge of the footing and the stack stops being a stack. Nothing is broken. It simply leaned past a number."
+  },
+  "balance_pass_demo": {
+   "name": "Balance — Pass",
+   "lookup_name": "balance_pass_demo",
+   "description": "The same courses stacked over the footing, upright and stable.",
+   "scene": "res://commons/artifacts/constraint_demo/constraint_demo.tscn",
+   "category": "bricolage",
+   "artifact_type": "demonstration",
+   "complexity": "basic",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "bricolage"
+   ],
+   "qfep_connection": "The same blocks, centred. Balance is the cheapest constraint to satisfy and the easiest to lose: it asks only that the mass stay over the base, and it is indifferent to how beautiful the leaning version looked. The sculpture room two maps later is this constraint made into a practice."
+  },
+  "gravity_fail_demo": {
+   "name": "Gravity — Fail",
+   "lookup_name": "gravity_fail_demo",
+   "description": "An unsupported span, dropped, with the load it could not carry lying on the pad.",
+   "scene": "res://commons/artifacts/constraint_demo/constraint_demo.tscn",
+   "category": "bricolage",
+   "artifact_type": "demonstration",
+   "complexity": "basic",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "bricolage"
+   ],
+   "qfep_connection": "Gravity as the first thing that pushes back: the span reaches past its post and there is nothing under the far end, so the far end is on the floor. The bricoleur's first discovery is not a shape but an absence — the member that was never there. You cannot argue with a fallen beam."
+  },
+  "gravity_pass_demo": {
+   "name": "Gravity — Pass",
+   "lookup_name": "gravity_pass_demo",
+   "description": "The same span carried by two posts, level, bearing its load.",
+   "scene": "res://commons/artifacts/constraint_demo/constraint_demo.tscn",
+   "category": "bricolage",
+   "artifact_type": "demonstration",
+   "complexity": "basic",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "bricolage"
+   ],
+   "qfep_connection": "The same members, one addition: a second post under the far end. Nothing about the beam changed — only what stands beneath it. This is the whole lesson of support in one comparison: structure is not a property of the part, it is a relation between parts."
+  },
+  "triangulation_fail_demo": {
+   "name": "Triangulation — Fail",
+   "lookup_name": "triangulation_fail_demo",
+   "description": "A four-member frame racked into a parallelogram — the quad hinges.",
+   "scene": "res://commons/artifacts/constraint_demo/constraint_demo.tscn",
+   "category": "bricolage",
+   "artifact_type": "demonstration",
+   "complexity": "basic",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "bricolage"
+   ],
+   "qfep_connection": "Connectivity as the third thing that pushes back: four members pinned into a square are not a square, they are a hinge that happens to be square right now. Push it and it becomes a parallelogram. The frame has enough parts and still no rigidity — quantity was never the missing thing."
+  },
+  "triangulation_pass_demo": {
+   "name": "Triangulation — Pass",
+   "lookup_name": "triangulation_pass_demo",
+   "description": "The same frame with one diagonal — two triangles, rigid.",
+   "scene": "res://commons/artifacts/constraint_demo/constraint_demo.tscn",
+   "category": "bricolage",
+   "artifact_type": "demonstration",
+   "complexity": "basic",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "bricolage"
+   ],
+   "qfep_connection": "One diagonal, and the hinge dies. The quad becomes two triangles, and a triangle cannot deform without changing the length of a side. This is the member the dome room is entirely made of: triangulation is what struts want to become, and the whole geodesic payoff is this single comparison, repeated over a sphere."
   }
  }
 }
