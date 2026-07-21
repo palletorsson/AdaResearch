@@ -408,7 +408,7 @@ func _stage_cell(col: int, row: int, cell: Dictionary) -> void:
 	_routed += 1
 	var step: float = _cube_size + _gutter
 	var local: Vector3 = Vector3(
-		col * step, _cell_height(col, row) * _cube_size + 0.02, row * step)
+		col * step, _surface_y(col, row) + 0.02, row * step)
 	var deposit: Dictionary = {
 		"x": col, "z": row, "kingdom": kid,
 		# tier (1..5) IS the painted intensity ladder; strength = intensity/5
@@ -466,7 +466,7 @@ func _spawn_halo(col: int, row: int, cell: Dictionary) -> void:
 	_halo_cells += 1
 	var d: float = BiomeGridTokensScript.density_of(cell)
 	var depth: float = lerpf(2.0, 6.0, d)  # like the ring: thin when sparse, wide when dense
-	var surf_y: float = _cell_height(col, row) * _cube_size
+	var surf_y: float = _surface_y(col, row)
 	var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 	rng.seed = hash("halo:%d,%d" % [col, row])
 	for dir in dirs:
@@ -624,7 +624,7 @@ func _build_halo_recipes(kingdom: String) -> Array:
 
 func _spawn_specimen(col: int, row: int, cell: Dictionary, kingdom: String) -> void:
 	var step: float = _cube_size + _gutter
-	var surf_y: float = _cell_height(col, row) * _cube_size
+	var surf_y: float = _surface_y(col, row)
 	var base: Vector3 = Vector3(col * step, surf_y, row * step)
 	var tier: int = BiomeGridTokensScript.tier_of(cell)
 	var scale: float = 0.5 + 0.12 * float(tier)
@@ -752,9 +752,8 @@ func _spawn_marker(col: int, row: int, cell: Dictionary) -> void:
 	var s: float = 0.12 + 0.18 * d
 	var kingdom: String = String(cell["kingdom"])
 	var color: Color = KINGDOM_COLORS.get(kingdom, KINGDOM_COLORS[""])
-	var h: float = _cell_height(col, row)
 	var step: float = _cube_size + _gutter
-	var pos: Vector3 = Vector3(col * step, h * _cube_size + s * 0.5 + 0.02, row * step)
+	var pos: Vector3 = Vector3(col * step, _surface_y(col, row) + s * 0.5 + 0.02, row * step)
 	if _flushed:
 		var marker: MeshInstance3D = MeshInstance3D.new()
 		var mesh: BoxMesh = BoxMesh.new()
@@ -877,12 +876,17 @@ func _rebuild_presence_overlay() -> void:
 		var xf: Transform3D = Transform3D.IDENTITY
 		xf = xf.scaled(Vector3(step, 1.0, step))
 		xf.origin = Vector3(cell.x * step,
-			_cell_height(cell.x, cell.y) * _cube_size + 0.012, cell.y * step)
+			_surface_y(cell.x, cell.y) + 0.012, cell.y * step)
 		mm.set_instance_transform(i, xf)
 		mm.set_instance_custom_data(i, Color(float(cell.x), float(cell.y), 0.0, 0.0))
 	_presence_mmi = MultiMeshInstance3D.new()
 	_presence_mmi.name = "BiomePresenceOverlay"
 	_presence_mmi.multimesh = mm
+	# a stain must never cast shadows: alpha-blended geometry still renders
+	# OPAQUE into the shadow map, and the resulting slab reads as a dark
+	# rectangle in the volumetric fog past the grid edge (found on the wide
+	# ladder stage — the bisect capture without presence was clean)
+	_presence_mmi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	var shader: Shader = load("res://commons/resourses/shaders/biome_presence.gdshader")
 	var mat: ShaderMaterial = ShaderMaterial.new()
 	mat.shader = shader
@@ -983,6 +987,19 @@ func _flush_batches() -> void:
 	print("GridBiomeComponent: batched %d instances into %d nodes (visibility range %.0fm)" % [
 		kept_total, nodes, _visibility_range])
 	_batches.clear()
+
+
+# The walkable surface of a cell, per GridCommon.surface_world_y: cubes are
+# CENTER-origin, so a height-h stack's top sits at (h-1)*step + half a cube —
+# NOT h*cube. The component's original h*cube math floated every spawn half a
+# cube above the floor; iso captures hid it until the presence stain's
+# elevated quads poked past the floor silhouette on the wide ladder stage
+# (the "dark rectangle"). One helper, every y computation goes through it.
+func _surface_y(col: int, row: int) -> float:
+	var h: float = _cell_height(col, row)
+	if h <= 0.0:
+		return 0.0
+	return (h - 1.0) * (_cube_size + _gutter) + _cube_size * 0.5
 
 
 func _cell_height(col: int, row: int) -> float:
