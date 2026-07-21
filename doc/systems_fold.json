@@ -429,9 +429,11 @@
     {
      "id": "edge-compose-strategy",
      "title": "Composition strategies",
-     "detail": "Two families now: search-and-judge (script_compose, tournament) and DEVELOPMENT (germinate.py — food map from the desire target, space-colonization growth, habitats by staging kind, thickness from consumed food). Piloted on transformation: grown wins FIT 6/7, fixes the Spectacle.",
+     "detail": "Three families under one judge — search (script_compose), grown (germinate), hybrid (germinate --axis) — and a temperament selector: compose_auto.py runs all three per map and keeps the winner as Auto_<Map>, every family's score recorded in the manifest (place.py's no-winner lesson, taught to composition). Transformation: search 4 / grown 3; grown fixed both maps search was stuck on (Spectacle 7.95, Translation 5.65).",
      "paths": [
+      "tools/compose_auto.py",
       "tools/germinate.py",
+      "tools/script_compose.py",
       "doc/systems_fold.json (connections)"
      ]
     }
