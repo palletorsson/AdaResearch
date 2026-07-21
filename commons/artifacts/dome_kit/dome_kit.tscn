@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://d8domekit0001"]
+
+[ext_resource type="Script" path="res://commons/artifacts/dome_kit/dome_kit.gd" id="1_script"]
+
+; dome_kit.tscn — the geodesic kit for the bricolage sequence, backed by
+; dome_kit.gd. One scene serves all five stations of Bricolage_Dome
+; (icosahedron_base / subdivision_demo / strut_inventory / dome_builder /
+; geodesic_dome); the station is read from the lookup_name the grid stamps as
+; metadata before _ready(), same wrapper pattern as specimen_plinth.
+
+[node name="dome_kit" type="Node3D"]
+script = ExtResource("1_script")

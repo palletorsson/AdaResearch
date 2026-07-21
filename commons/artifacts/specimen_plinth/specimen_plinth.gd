@@ -106,17 +106,20 @@ func _add_plinth() -> void:
 
 func _add_label() -> void:
 	# Canonical 2D-in-3D plate (TextScreen) in PAD mode — a reclined museum
-	# plaque on a low wedge, sat on the plinth top's front edge. Add to the tree
-	# first so its own _ready() builds before we drive it (its export setters
-	# touch child nodes that only exist post-_ready).
+	# plaque on a low wedge, sat on the plinth top's front edge.
+	# CONFIGURE BEFORE add_child: TextScreen's setters are guarded with
+	# `if is_inside_tree(): _rebuild()`, so driving them after the node enters
+	# the tree forces a full queue_free/rebuild per property — which left the
+	# renderer holding freed materials ("Parameter material is null" ×40 per
+	# map, measured 2026-07-21). Set first, add last: _ready() then builds once.
 	var ts := TextScreenScript.new()
 	ts.name = "NamePlate"
-	add_child(ts)
 	ts.mode = 2                      # Mode.PAD (SCREEN=0, STAND=1, PAD=2)
 	ts.width_m = 0.34
 	ts.position = Vector3(0.0, PLINTH_H + 0.005, PLINTH_W * 0.5 - 0.06)
 	if ts.has_method("set_text"):
 		ts.set_text(specimen_label, specimen_note)
+	add_child(ts)
 
 
 # --- primitive meshes ------------------------------------------------------
@@ -141,7 +144,18 @@ func _make_primitive(kind: String) -> MeshInstance3D:
 			var mi := MeshInstance3D.new()
 			mi.mesh = _mesh_for(kind)
 			mi.material_override = _grid_material(primitive_color, Color(0.45, 0.85, 1.0), 2.0)
+			_seal_surface_material(mi)
 			return mi
+
+
+# A SurfaceTool-built ArrayMesh (our triangle) carries no SURFACE material.
+# material_override paints it correctly, but the renderer still queries the
+# surface during its shadow/dependency passes and logs "Parameter material is
+# null" — 40 per map, measured 2026-07-21. Stamp the surface too.
+func _seal_surface_material(mi: MeshInstance3D) -> void:
+	var am := mi.mesh as ArrayMesh
+	if am != null and am.get_surface_count() > 0 and mi.material_override != null:
+		am.surface_set_material(0, mi.material_override)
 
 
 # --- affordance compositions: the primitive staged by its USE ---------------
@@ -360,6 +374,7 @@ func _make_workbench() -> MeshInstance3D:
 		mi.scale = Vector3(0.45, 0.45, 0.45)
 		mi.position = Vector3(-0.7 + float(i) * 0.2, 0.12, 0.0)
 		mi.material_override = _grid_material(primitive_color, Color(0.45, 0.85, 1.0), 1.6)
+		_seal_surface_material(mi)
 		root.add_child(mi)
 		i += 1
 	return root

@@ -95,14 +95,17 @@ func _add_pad() -> void:
 
 
 func _add_label() -> void:
+	# Configure BEFORE add_child — TextScreen's setters rebuild only when
+	# already in-tree, so driving them post-add forces a queue_free/rebuild per
+	# property and leaves the renderer holding freed materials. Set first, add last.
 	var ts := TextScreenScript.new()
 	ts.name = "ConstraintPlate"
-	add_child(ts)
 	ts.mode = 2                       # Mode.PAD — reclined plaque
 	ts.width_m = 0.36
 	ts.position = Vector3(0.0, 0.045, PAD_W * 0.5 - 0.06)
 	if ts.has_method("set_text"):
 		ts.set_text(demo_label, demo_note)
+	add_child(ts)
 
 
 # A rectangular member. Subject material unless witness is true.

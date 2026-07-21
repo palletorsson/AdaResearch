@@ -387,6 +387,81 @@
     "bricolage"
    ],
    "qfep_connection": "One diagonal, and the hinge dies. The quad becomes two triangles, and a triangle cannot deform without changing the length of a side. This is the member the dome room is entirely made of: triangulation is what struts want to become, and the whole geodesic payoff is this single comparison, repeated over a sphere."
+  },
+  "icosahedron_base": {
+   "name": "Icosahedron Base",
+   "lookup_name": "icosahedron_base",
+   "description": "The twenty-face seed solid, rendered as a strut frame.",
+   "scene": "res://commons/artifacts/dome_kit/dome_kit.tscn",
+   "category": "bricolage",
+   "artifact_type": "demonstration",
+   "complexity": "intermediate",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "bricolage"
+   ],
+   "qfep_connection": "The seed: twenty identical triangles, the most faces a regular solid can have. Every geodesic dome in the world starts here — not because the icosahedron is dome-shaped, but because it is the closest a perfectly regular thing gets to a sphere. Bricolage begins with the best available part, not the ideal one."
+  },
+  "subdivision_demo": {
+   "name": "Subdivision",
+   "lookup_name": "subdivision_demo",
+   "description": "One icosahedron face at frequency 1, 2 and 3 — the multiplication, left to right.",
+   "scene": "res://commons/artifacts/dome_kit/dome_kit.tscn",
+   "category": "bricolage",
+   "artifact_type": "demonstration",
+   "complexity": "intermediate",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "bricolage"
+   ],
+   "qfep_connection": "The operation that turns a solid into a sphere: split each triangle into four, push the new corners out to the sphere, repeat. Frequency is the only dial. Left to right you watch a face become four and then nine — and the curve is not drawn at any point, it is what the projection leaves behind."
+  },
+  "strut_inventory": {
+   "name": "Strut Inventory",
+   "lookup_name": "strut_inventory",
+   "description": "The rack of distinct strut lengths a subdivided dome resolves to.",
+   "scene": "res://commons/artifacts/dome_kit/dome_kit.tscn",
+   "category": "bricolage",
+   "artifact_type": "demonstration",
+   "complexity": "intermediate",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "bricolage"
+   ],
+   "qfep_connection": "The stock, and the reason domes are buildable: a subdivided sphere has hundreds of edges but only a handful of distinct LENGTHS. Sort them, cut them, and the whole curve is orderable from a short list. This is the moment bricolage becomes manufacture — the sphere reduced to a parts order."
+  },
+  "dome_builder": {
+   "name": "Dome Builder",
+   "lookup_name": "dome_builder",
+   "description": "The frame half raised: the base band standing, the remaining struts still stock.",
+   "scene": "res://commons/artifacts/dome_kit/dome_kit.tscn",
+   "category": "bricolage",
+   "artifact_type": "demonstration",
+   "complexity": "intermediate",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "bricolage"
+   ],
+   "qfep_connection": "Assembly caught in the middle — the lower band triangulated and standing, the rest still lying flat as lengths. The half-built state is the honest one: a dome is not placed, it is closed, ring by ring, and until the last ring goes in every triangle below is already carrying itself."
+  },
+  "geodesic_dome": {
+   "name": "Geodesic Dome",
+   "lookup_name": "geodesic_dome",
+   "description": "A 2V hemisphere standing on its ring — the payoff of the sequence.",
+   "scene": "res://commons/artifacts/dome_kit/dome_kit.tscn",
+   "category": "bricolage",
+   "artifact_type": "demonstration",
+   "complexity": "intermediate",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "bricolage"
+   ],
+   "qfep_connection": "What triangulated struts want to become. Nobody designed this curve: someone chose a seed solid and a subdivision frequency, and the sphere did the rest. It is the constraint room's lesson repeated over a whole surface — every quad would hinge, every triangle cannot — and it is bricolage formalised, the point where recombination stops being improvisation and becomes a method you can hand to someone else."
   }
  }
 }
