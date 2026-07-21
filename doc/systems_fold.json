@@ -429,8 +429,9 @@
     {
      "id": "edge-compose-strategy",
      "title": "Composition strategies",
-     "detail": "The open seat. Everything so far is search-and-judge (generate candidates, score, keep champion). The connections layer proposes a second family: development - germinate from nodes, grow toward the desire curve, resolve conflicts by kinship. See the proposed edges.",
+     "detail": "Two families now: search-and-judge (script_compose, tournament) and DEVELOPMENT (germinate.py — food map from the desire target, space-colonization growth, habitats by staging kind, thickness from consumed food). Piloted on transformation: grown wins FIT 6/7, fixes the Spectacle.",
      "paths": [
+      "tools/germinate.py",
       "doc/systems_fold.json (connections)"
      ]
     }
@@ -642,12 +643,12 @@
    },
    {
     "id": "e-germination",
-    "kind": "proposed",
+    "kind": "piloted",
     "shape": "same-shape",
     "from": "biome-halo",
     "to": "edge-compose-strategy",
     "title": "Germination: grow the map around its artifacts",
-    "detail": "The halo grows wilderness around the MAP as node; invert the scale and grow the MAP around its ARTIFACTS as nodes. Plant the hero at the register's climax cell, plant the pins, then let each artifact accrete its habitat outward from its staging DNA - composition as development, not search. The tournament stays as judge, but stops being the author."
+    "detail": "The halo grows wilderness around the MAP as node; invert the scale and grow the MAP around its ARTIFACTS as nodes. Plant the hero at the register's climax cell, plant the pins, then let each artifact accrete its habitat outward from its staging DNA - composition as development, not search. The tournament stays as judge, but stops being the author. PILOTED 2026-07-21 (tools/germinate.py): grown maps win FIT 6/7 vs the search champions and total score 3/7 — headline: Trans_RotationSpectacle 4.59->7.93 (the map search couldn't fix, FIT 0.36->0.87); Trans_Pit 7.76->7.81 with pins held. Same judge, same court."
    },
    {
     "id": "e-desire-food",
