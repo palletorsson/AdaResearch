@@ -29,8 +29,10 @@ KINGDOMS = [
     {"id": "fungus", "name": "Fungus", "color": "#a674cc",
      "blurb": "Mould. A 3D cellular automaton frozen at its spreading front — a network ring with a hollow centre and gappy edges, not a ball. `rule=` overrides the CA rule, `gen=` the generation it freezes at.",
      "algos": [
-         {"algo": "ca", "renders": "MoldNetwork CA, gen-frozen as a spreading mycelial network", "token": "fungus:ca:seed:t=5"},
+         {"algo": "ca", "renders": "MoldNetwork CA, gen-frozen as a spreading voxel network", "token": "fungus:ca:seed:t=5"},
          {"algo": "ca (tuned)", "renders": "same CA, per-cell rule and freeze generation", "token": "fungus:ca:seed:rule=4-6/5-7/10/M:gen=16"},
+         {"algo": "mycelium", "renders": "space-colonised filaments — tapering hyphae, trunks thickening inward, tips hair-thin (the taper a voxel grid cannot hold)", "token": "fungus:mycelium:seed:t=5:d=1.0"},
+         {"algo": "mycelium (sparse)", "renders": "same web, thinned — d= sets how densely the mat fills its disc", "token": "fungus:mycelium:seed:t=5:d=0.3"},
      ]},
     {"id": "fauna", "name": "Fauna", "color": "#e5994d",
      "blurb": "Creatures. A DNA-driven CritterEntity built from the shared morphology, with biome-compact geometry so a cell's creature is a grub that fits its cell rather than a fifteen-metre thread.",
