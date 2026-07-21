@@ -46,6 +46,19 @@ const MorphoSweepClass = preload("res://algorithms/nature_system/morphology/morp
 # are MERGED into a single ArrayMesh: exact tapers kept, one node, one draw call.
 # Spores are uniform spheres, so they DO batch as a MultiMesh.
 @export var budget_segments: int = 2400      # 0 = unbounded; clamp thins by even stride
+# milestone 5 — ANASTOMOSIS. Space colonization can only ever attach a new node
+# to ONE parent, so the colony it grows is a TREE: strictly radial, no cycles, a
+# starburst. Real mycelium fuses — hyphae that meet join, and the mat becomes a
+# WEB with loops. So after growing, we look for tips that pass close to a strand
+# they are not related to and bridge them. Fusions are thin by nature (a fresh
+# cross-connection, not a trunk), which is also what they look like.
+@export var fuse: bool = true
+@export var fuse_radius: float = 0.055       # how close counts as "they met"
+@export var fuse_lineage_guard: int = 6      # don't fuse with your own recent ancestors
+@export var fuse_max_fraction: float = 0.18  # cap fusions relative to node count — a web, not a mesh
+# biome-scale legibility: a 2 mm strand is invisible at walking distance, so the
+# tip radius has a floor and the web carries its own light (bioluminescent).
+@export var emission_energy: float = 0.9
 
 var _rng := RandomNumberGenerator.new()
 
@@ -60,9 +73,84 @@ func _ready() -> void:
 	_grow(attractors)
 	var weight: Array[float] = _subtree_weights()
 	var radius: Array[float] = _radii(weight)
+	if fuse:
+		_anastomose()
 	_render_web(radius)
 	if draw_spores:
 		_render_spores(weight, radius)
+
+
+# --- milestone 5: anastomosis -------------------------------------------------
+# Bridge strands that grew close to each other but are not kin. The spatial hash
+# built during growth already buckets nodes by influence-radius cells, so the
+# neighbour lookup is cheap; the lineage guard stops a strand fusing with its own
+# recent ancestors (which would just thicken it, not close a loop).
+
+var _fusions: Array[Vector2i] = []
+
+
+func _anastomose() -> void:
+	var cap: int = int(round(float(_nodes.size()) * fuse_max_fraction))
+	if cap <= 0:
+		return
+	var r2: float = fuse_radius * fuse_radius
+	var taken := {}          # node -> already fused once, so bridges spread out
+	for i in range(1, _nodes.size()):
+		if _fusions.size() >= cap:
+			break
+		if taken.has(i):
+			continue
+		var j: int = _nearest_unrelated(i, r2)
+		if j < 0:
+			continue
+		_fusions.append(Vector2i(i, j))
+		taken[i] = true
+		taken[j] = true
+	if not _fusions.is_empty():
+		print("MyceliumColony: %d anastomoses — the tree closed into a web" % _fusions.size())
+
+
+## Nearest node to i within r2 that is NOT one of i's recent ancestors or
+## descendants — the guard is what makes the result a loop instead of a bulge.
+func _nearest_unrelated(i: int, r2: float) -> int:
+	var kin := {}
+	var a: int = i
+	for _k in range(fuse_lineage_guard):
+		if a < 0:
+			break
+		kin[a] = true
+		a = _parent[a] if a < _parent.size() else -1
+	var p: Vector3 = _nodes[i]
+	var base: Vector3i = _cell_of(p)
+	var best: int = -1
+	var best_d: float = r2
+	for dx in range(-1, 2):
+		for dy in range(-1, 2):
+			for dz in range(-1, 2):
+				var c := Vector3i(base.x + dx, base.y + dy, base.z + dz)
+				if not _hash.has(c):
+					continue
+				for n in (_hash[c] as Array):
+					var nj: int = int(n)
+					if nj == i or kin.has(nj):
+						continue
+					# also skip anything whose recent lineage includes i
+					var b: int = nj
+					var related: bool = false
+					for _k2 in range(fuse_lineage_guard):
+						if b < 0:
+							break
+						if b == i:
+							related = true
+							break
+						b = _parent[b] if b < _parent.size() else -1
+					if related:
+						continue
+					var d: float = p.distance_squared_to(_nodes[nj])
+					if d < best_d:
+						best_d = d
+						best = nj
+	return best
 
 
 # --- milestone 3: the batch --------------------------------------------------
@@ -93,6 +181,16 @@ func _render_web(radius: Array[float]) -> void:
 		if mesh == null or mesh.get_surface_count() == 0:
 			continue
 		st.append_from(mesh, 0, Transform3D.IDENTITY)
+		merged_in += 1
+	# the fusion bridges (milestone 5). A fresh cross-connection is thinner than
+	# either strand it joins, so it renders at the slimmer of the two radii —
+	# which is also what closes the loop visually without faking a trunk.
+	for f in _fusions:
+		var ra: float = minf(radius[f.x], radius[f.y]) * 0.8
+		var fmesh: Mesh = _hypha_mesh(_nodes[f.x], _nodes[f.y], ra, ra)
+		if fmesh == null or fmesh.get_surface_count() == 0:
+			continue
+		st.append_from(fmesh, 0, Transform3D.IDENTITY)
 		merged_in += 1
 	if merged_in == 0:
 		return
@@ -264,7 +362,9 @@ func _hypha_material() -> StandardMaterial3D:
 	mat.roughness = 0.6
 	mat.emission_enabled = true
 	mat.emission = color_hypha
-	mat.emission_energy_multiplier = 0.35
+	# milestone 5: the web carries its own light. A hypha at biome scale is a
+	# couple of millimetres across — at walking distance it is lit or it is gone.
+	mat.emission_energy_multiplier = emission_energy
 	_mat_cache = mat
 	return mat
 

@@ -310,6 +310,12 @@ func _spawn_mycelium(deposit: Dictionary, ctx: Dictionary,
 	colony.max_nodes = 150 + 110 * intensity
 	colony.max_steps = 220 + 40 * intensity
 	colony.budget_segments = 900          # per-cell ceiling; clamp prints if hit
+	# biome-scale legibility (milestone 5): the showcase's hair-thin tips are a
+	# hero-capture luxury — at walking distance a 2 mm strand is simply gone. The
+	# mat keeps its taper but the floor rises, and the web carries its own light.
+	colony.base_radius = 0.0062
+	colony.min_radius = 0.0040
+	colony.emission_energy = 1.15
 	colony.rng_seed = hash("mycelium:%d,%d" % [cx, cz]) & 0x7FFFFFFF
 	var gen: String = String(deposit.get("gen", ""))
 	if gen.is_valid_int():

@@ -797,12 +797,12 @@
    "id": "mycelium",
    "title": "Mycelium substrate (filaments beyond the CA)",
    "status": "active",
-   "summary": "Scoped 2026-07-19 out of the biome visual loop. fungus:ca (the MoldNetwork CA) hit its ceiling in the rule-search: it renders a spreading voxel NETWORK when gen-frozen, but fundamentally FILLS OR DIES — it cannot hold hair-thin branching filaments. True mycelium (hyphae thinning to their tips, an irregular ground web) needs a CURVE renderer. Plan: a new fungus algo `fungus:mycelium:seed` that generates branching paths (prototype L-system turtle, target space-colonization toward ground attractors) and renders each hypha as a tapering MorphoSweep tube, batched (biome-6). REUSE: morpho_sweep.gd (the tube-along-curve = a hypha), Turtle/tree_walker (branching), grammar_seed (the walk); fungus_morphology.gd = MUSHROOMS (fruiting body), NOT the web — optional dressing at dense nodes. Plugs into biome_paint_dispatcher._spawn_fungus as an algo branch — `ca` unchanged (additive), `mycelium` new. Design: doc/plans/mycelium_substrate.md.",
+   "summary": "Scoped 2026-07-19 out of the biome visual loop. fungus:ca (the MoldNetwork CA) hit its ceiling in the rule-search: it renders a spreading voxel NETWORK when gen-frozen, but fundamentally FILLS OR DIES — it cannot hold hair-thin branching filaments. True mycelium (hyphae thinning to their tips, an irregular ground web) needs a CURVE renderer. Plan: a new fungus algo `fungus:mycelium:seed` that generates branching paths (prototype L-system turtle, target space-colonization toward ground attractors) and renders each hypha as a tapering MorphoSweep tube, batched (biome-6). REUSE: morpho_sweep.gd (the tube-along-curve = a hypha), Turtle/tree_walker (branching), grammar_seed (the walk); fungus_morphology.gd = MUSHROOMS (fruiting body), NOT the web — optional dressing at dense nodes. Plugs into biome_paint_dispatcher._spawn_fungus as an algo branch — `ca` unchanged (additive), `mycelium` new. Design: doc/plans/mycelium_substrate.md. ALL 6 MILESTONES DONE 2026-07-21 — the substrate ships: fungus:mycelium renders an anastomosed filament web (loops, not a starburst), batched to one merged mesh, tuned to read at walking distance, beside fungus:ca as an authoring choice. What remains is USE: author it into rooms.",
    "match": [
     "\b(mycelium|myceli|hypha|hyphae|filament|space.?coloni[sz]ation|morpho.?sweep)\b"
    ],
    "progress": {
-    "done": 5,
+    "done": 6,
     "total": 6,
     "unit": "milestones"
    },
@@ -833,8 +833,9 @@
     },
     {
      "id": "mycelium-5",
-     "text": "Tune the mycelial read at biome scale: min radius so filaments survive VR distance, emission for the bioluminescent look, per-cell variation; before/after vs the CA network on Biome_VisualBench (THE EDGE: rulings over captures, language+desktop observation). PLUS anastomosis: fuse tips that pass within a radius so the mat reads as a web, not a starburst, and run the thickness solver on a graph rather than a tree (opened by milestone 2's ruling).",
-     "done": false
+     "text": "Tune the mycelial read at biome scale: min radius so filaments survive VR distance, emission for the bioluminescent look, per-cell variation; before/after vs the CA network on Biome_VisualBench (THE EDGE: rulings over captures, language+desktop observation). PLUS anastomosis: fuse tips that pass within a radius so the mat reads as a web, not a starburst, and run the thickness solver on a graph rather than a tree (opened by milestone 2's ruling). — DONE 2026-07-21. ANASTOMOSIS closed the gap the m2 ruling opened: after growth, tips that pass within fuse_radius of an UNRELATED strand bridge to it (lineage guard walks back fuse_lineage_guard ancestors so a strand cannot fuse with its own kin and merely bulge; fusions capped at fuse_max_fraction so it stays a web, not a mesh; the growth spatial hash makes the lookup cheap). Bridges render at the SLIMMER of the two radii — a fresh cross-connection is thin, which is also what closes a loop without faking a trunk. Capture shows real cycles (triangles/diamonds between strands). BIOME-SCALE TUNING: base_radius 0.0042->0.0062, min_radius 0.0022->0.0040, emission 0.35->1.15 at the dispatcher — a 2mm strand is invisible at walking distance, so the mat keeps its taper but the floor rises and the web carries its own light; verified on Biome_MyceliumTest (faint hairlines -> legible glowing webs). HONEST SIMPLIFICATION: thickness still solves on the growth TREE (subtree weight); a true graph flow-solve would redistribute through the loops — the fusions are structural and visual, not yet load-bearing for thickness.",
+     "done": true,
+     "completed": "2026-07-21"
     },
     {
      "id": "mycelium-6",
