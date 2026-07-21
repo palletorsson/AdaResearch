@@ -3,7 +3,7 @@
  "phase": "F_order",
  "truth": "Define a field, extract a surface. The boundary between inside and outside becomes geometry.",
  "current_n": 13,
- "tight_n": 8,
+ "tight_n": 9,
  "v1_tutorial": [
   {
    "slot": "threshold",
@@ -51,13 +51,13 @@
   },
   {
    "slot": "turn",
-   "map": "ISO_PortalLandscape",
-   "hero": "marchingcubes_portal_landscape",
-   "hero_prov": "heuristic (cast default)",
+   "map": "ISO_FlatTerrain",
+   "hero": "resolution",
+   "hero_prov": "register (heroes.json)",
    "slot_prov": "heuristic (position)",
    "lb": false,
-   "walked": false,
-   "cast_n": 1,
+   "walked": true,
+   "cast_n": 3,
    "prov": "ghost (slot-fill from unused pool)"
   },
   {
@@ -73,20 +73,25 @@
   },
   {
    "slot": "world",
-   "map": "ISO_AnimatedNoise",
-   "hero": "sample",
-   "hero_prov": "register (heroes.json)",
+   "map": "ISO_CaveGeneration",
+   "hero": "marchingcave",
+   "hero_prov": "heuristic (cast default)",
    "slot_prov": "heuristic (position)",
    "lb": false,
-   "walked": false,
+   "walked": true,
    "cast_n": 2,
    "prov": "ghost (slot-fill from unused pool)"
   },
   {
    "slot": "close",
-   "map": null,
-   "gap": true,
-   "prov": "declared gap — no existing map holds this slot"
+   "map": "ISO_ImplicitModeling",
+   "hero": "implicit_surface_modeling",
+   "hero_prov": "heuristic (cast default)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": true,
+   "cast_n": 1,
+   "prov": "heuristic (provenance-ranked pick)"
   },
   {
    "slot": "seed",
@@ -117,9 +122,10 @@
     "ISO_LookupTable",
     "ISO_ShapesGallery",
     "ISO_Sculpting",
-    "ISO_PortalLandscape",
+    "ISO_FlatTerrain",
     "ISO_Caves",
-    "ISO_AnimatedNoise",
+    "ISO_CaveGeneration",
+    "ISO_ImplicitModeling",
     "Chamber_Isosurfaces"
    ],
    "law": "the tutorial arc itself (V1 identity)",
@@ -132,40 +138,43 @@
     "ISO_LookupTable",
     "ISO_ShapesGallery",
     "ISO_Sculpting",
-    "ISO_PortalLandscape",
+    "ISO_FlatTerrain",
     "ISO_Caves",
-    "ISO_AnimatedNoise"
+    "ISO_CaveGeneration",
+    "ISO_ImplicitModeling"
    ],
    "law": "small meets you first — the gaze law's cousin",
-   "tau_vs_tutorial": 0.5
+   "tau_vs_tutorial": 0.56
   },
   "density-rising": {
    "order": [
-    "ISO_PortalLandscape",
+    "ISO_ImplicitModeling",
     "ISO_Introduction",
     "ISO_LookupTable",
     "ISO_Sculpting",
-    "ISO_AnimatedNoise",
+    "ISO_CaveGeneration",
     "ISO_ShapesGallery",
+    "ISO_FlatTerrain",
     "ISO_Caves",
     "Chamber_Isosurfaces"
    ],
    "law": "sparse -> dense; the world thickens",
-   "tau_vs_tutorial": 0.5
+   "tau_vs_tutorial": 0.39
   },
   "truth-earned": {
    "order": [
     "ISO_Introduction",
     "ISO_ShapesGallery",
     "ISO_Sculpting",
-    "ISO_PortalLandscape",
+    "ISO_FlatTerrain",
     "ISO_Caves",
-    "ISO_AnimatedNoise",
+    "ISO_CaveGeneration",
+    "ISO_ImplicitModeling",
     "Chamber_Isosurfaces",
     "ISO_LookupTable"
    ],
    "law": "load-bearing heroes arrive late — the walk earns them",
-   "tau_vs_tutorial": 0.57
+   "tau_vs_tutorial": 0.61
   }
  },
  "dig_counter_pool": [],

@@ -13,7 +13,7 @@
    "slot_prov": "heuristic (position)",
    "lb": true,
    "walked": true,
-   "cast_n": 7,
+   "cast_n": 5,
    "prov": "heuristic (provenance-ranked pick)"
   },
   {
@@ -46,7 +46,7 @@
    "slot_prov": "heuristic (position)",
    "lb": false,
    "walked": true,
-   "cast_n": 3,
+   "cast_n": 2,
    "prov": "heuristic (provenance-ranked pick)"
   },
   {
@@ -91,7 +91,7 @@
    "lb": false,
    "walked": true,
    "cast_n": 3,
-   "prov": "ghost (slot-fill from unused pool)"
+   "prov": "heuristic (provenance-ranked pick)"
   },
   {
    "slot": "seed",
@@ -157,11 +157,11 @@
   "density-rising": {
    "order": [
     "ML_Generative",
+    "ML_Neural_Networks",
     "ML_Perception",
     "ML_Sequence_Memory",
     "ML_Gradient_Landscape",
     "ML_Classification",
-    "ML_Neural_Networks",
     "ML_Synthesis",
     "Chamber_ML",
     "ML_Evolution"

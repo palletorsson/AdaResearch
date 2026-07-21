@@ -40,22 +40,22 @@
   },
   {
    "slot": "walk2",
-   "map": "Boolean_Architecture_Cavity",
-   "hero": "csg_architecture_cavity",
-   "hero_prov": "measured (dig load-bearing)",
+   "map": "Boolean_Compose_Workbench",
+   "hero": "compose",
+   "hero_prov": "register (heroes.json)",
    "slot_prov": "heuristic (position)",
-   "lb": true,
+   "lb": false,
    "walked": true,
    "cast_n": 1,
    "prov": "heuristic (provenance-ranked pick)"
   },
   {
    "slot": "turn",
-   "map": "Boolean_Compose_Workbench",
-   "hero": "compose",
-   "hero_prov": "register (heroes.json)",
+   "map": "Boolean_Architecture_Cavity",
+   "hero": "csg_architecture_cavity",
+   "hero_prov": "measured (dig load-bearing)",
    "slot_prov": "heuristic (position)",
-   "lb": false,
+   "lb": true,
    "walked": true,
    "cast_n": 1,
    "prov": "ghost (slot-fill from unused pool)"
@@ -93,10 +93,10 @@
  "v2_anti": [
   {
    "slot": "turn",
-   "host_map": "Boolean_Compose_Workbench",
-   "anti": "csg_union_demo ⟷ csg_difference_demo",
+   "host_map": "Boolean_Architecture_Cavity",
+   "anti": "csg_union_demo",
    "why": "opposed on build/remove (walked×walked)",
-   "prov": "ghost — top sleeping counter-pair (L-021)",
+   "prov": "ghost — counter-pair sleeping in dig (L-021)",
    "kind": "counter-pair"
   }
  ],
@@ -106,8 +106,8 @@
     "Boolean_Union",
     "Boolean_Intersection",
     "Boolean_Difference",
-    "Boolean_Architecture_Cavity",
     "Boolean_Compose_Workbench",
+    "Boolean_Architecture_Cavity",
     "Chamber_Boolean"
    ],
    "law": "the tutorial arc itself (V1 identity)",
@@ -119,8 +119,8 @@
     "Boolean_Union",
     "Boolean_Intersection",
     "Boolean_Difference",
-    "Boolean_Architecture_Cavity",
-    "Boolean_Compose_Workbench"
+    "Boolean_Compose_Workbench",
+    "Boolean_Architecture_Cavity"
    ],
    "law": "small meets you first — the gaze law's cousin",
    "tau_vs_tutorial": 0.33
@@ -130,8 +130,8 @@
     "Boolean_Union",
     "Boolean_Intersection",
     "Boolean_Difference",
-    "Boolean_Architecture_Cavity",
     "Boolean_Compose_Workbench",
+    "Boolean_Architecture_Cavity",
     "Chamber_Boolean"
    ],
    "law": "sparse -> dense; the world thickens",
@@ -147,7 +147,7 @@
     "Boolean_Architecture_Cavity"
    ],
    "law": "load-bearing heroes arrive late — the walk earns them",
-   "tau_vs_tutorial": 0.47
+   "tau_vs_tutorial": 0.6
   }
  },
  "dig_counter_pool": [

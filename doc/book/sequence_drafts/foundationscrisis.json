@@ -3,7 +3,7 @@
  "phase": "synthesis",
  "truth": "Every formal system has an outside. Complete order is impossible.",
  "current_n": 9,
- "tight_n": 8,
+ "tight_n": 9,
  "v1_tutorial": [
   {
    "slot": "threshold",
@@ -29,13 +29,13 @@
   },
   {
    "slot": "walk",
-   "map": "Crisis_Synthesis",
+   "map": "Russell_Paradox",
    "hero": "the",
    "hero_prov": "register (heroes.json)",
    "slot_prov": "heuristic (position)",
    "lb": false,
    "walked": true,
-   "cast_n": 8,
+   "cast_n": 4,
    "prov": "heuristic (provenance-ranked pick)"
   },
   {
@@ -84,9 +84,14 @@
   },
   {
    "slot": "close",
-   "map": null,
-   "gap": true,
-   "prov": "declared gap — no existing map holds this slot"
+   "map": "Crisis_Synthesis",
+   "hero": "the",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": true,
+   "cast_n": 8,
+   "prov": "heuristic (provenance-ranked pick)"
   },
   {
    "slot": "seed",
@@ -106,11 +111,12 @@
    "order": [
     "Euclid_Parallel",
     "NonEuclidean_Spaces",
-    "Crisis_Synthesis",
+    "Russell_Paradox",
     "Godel_Incompleteness",
     "Escher_Impossible",
     "Brouwer_Intuitionism",
     "Florensky_Paraconsistent",
+    "Crisis_Synthesis",
     "Chamber_Foundations"
    ],
    "law": "the tutorial arc itself (V1 identity)",
@@ -121,19 +127,21 @@
     "Euclid_Parallel",
     "Brouwer_Intuitionism",
     "NonEuclidean_Spaces",
-    "Crisis_Synthesis",
+    "Russell_Paradox",
     "Godel_Incompleteness",
     "Florensky_Paraconsistent",
+    "Crisis_Synthesis",
     "Escher_Impossible",
     "Chamber_Foundations"
    ],
    "law": "small meets you first — the gaze law's cousin",
-   "tau_vs_tutorial": 0.64
+   "tau_vs_tutorial": 0.67
   },
   "density-rising": {
    "order": [
     "Chamber_Foundations",
     "Euclid_Parallel",
+    "Russell_Paradox",
     "Godel_Incompleteness",
     "Escher_Impossible",
     "Brouwer_Intuitionism",
@@ -142,21 +150,22 @@
     "Crisis_Synthesis"
    ],
    "law": "sparse -> dense; the world thickens",
-   "tau_vs_tutorial": -0.07
+   "tau_vs_tutorial": 0.28
   },
   "truth-earned": {
    "order": [
-    "Crisis_Synthesis",
+    "Russell_Paradox",
     "Godel_Incompleteness",
     "Escher_Impossible",
     "Brouwer_Intuitionism",
     "Florensky_Paraconsistent",
+    "Crisis_Synthesis",
     "Chamber_Foundations",
     "Euclid_Parallel",
     "NonEuclidean_Spaces"
    ],
    "law": "load-bearing heroes arrive late — the walk earns them",
-   "tau_vs_tutorial": 0.14
+   "tau_vs_tutorial": 0.22
   }
  },
  "dig_counter_pool": [],

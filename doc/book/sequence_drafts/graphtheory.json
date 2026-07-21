@@ -3,7 +3,7 @@
  "phase": "relation",
  "truth": "Everything is a graph if you squint hard enough.",
  "current_n": 9,
- "tight_n": 8,
+ "tight_n": 9,
  "v1_tutorial": [
   {
    "slot": "threshold",
@@ -51,6 +51,17 @@
   },
   {
    "slot": "turn",
+   "map": "GT_Pathfinding",
+   "hero": "shortest",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": true,
+   "cast_n": 1,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "critical",
    "map": "GT_Spanning_Trees",
    "hero": "mst_visualization",
    "hero_prov": "heuristic (cast default)",
@@ -61,7 +72,7 @@
    "prov": "ghost (slot-fill from unused pool)"
   },
   {
-   "slot": "critical",
+   "slot": "world",
    "map": "GT_Flow",
    "hero": "karger_algorithm",
    "hero_prov": "heuristic (cast default)",
@@ -72,7 +83,7 @@
    "prov": "ghost (slot-fill from unused pool)"
   },
   {
-   "slot": "world",
+   "slot": "close",
    "map": "GT_Matching",
    "hero": "edmonds_algorithm",
    "hero_prov": "heuristic (cast default)",
@@ -80,13 +91,7 @@
    "lb": false,
    "walked": true,
    "cast_n": 1,
-   "prov": "ghost (slot-fill from unused pool)"
-  },
-  {
-   "slot": "close",
-   "map": null,
-   "gap": true,
-   "prov": "declared gap — no existing map holds this slot"
+   "prov": "heuristic (provenance-ranked pick)"
   },
   {
    "slot": "seed",
@@ -102,17 +107,17 @@
  ],
  "v2_anti": [
   {
-   "slot": "critical",
-   "host_map": "GT_Flow",
-   "anti": "KonigsbergBridge",
+   "slot": "turn",
+   "host_map": "GT_Pathfinding",
+   "anti": "KonigsbergBridge ⟷ rhizomatic_structure",
    "why": "opposed on determinism/chance (walked×walked)",
-   "prov": "ghost — counter-pair sleeping in dig (L-021)",
+   "prov": "ghost — top sleeping counter-pair (L-021)",
    "kind": "counter-pair"
   },
   {
    "kind": "seam",
    "slot": "critical",
-   "host_map": "GT_Flow",
+   "host_map": "GT_Spanning_Trees",
    "anti": "node_snap",
    "why": "space to graph — you can only be at a node, never between",
    "prov": "register (seam catalog) — placement ghost"
@@ -125,6 +130,7 @@
     "GT_Layout",
     "GT_Network_Analysis",
     "GT_Connectivity",
+    "GT_Pathfinding",
     "GT_Spanning_Trees",
     "GT_Flow",
     "GT_Matching",
@@ -140,16 +146,18 @@
     "GT_Foundations",
     "GT_Layout",
     "GT_Connectivity",
+    "GT_Pathfinding",
     "GT_Matching",
     "GT_Network_Analysis",
     "GT_Spanning_Trees"
    ],
    "law": "small meets you first — the gaze law's cousin",
-   "tau_vs_tutorial": -0.07
+   "tau_vs_tutorial": 0.0
   },
   "density-rising": {
    "order": [
     "GT_Layout",
+    "GT_Pathfinding",
     "GT_Spanning_Trees",
     "GT_Matching",
     "GT_Foundations",
@@ -159,12 +167,13 @@
     "Chamber_GraphTheory"
    ],
    "law": "sparse -> dense; the world thickens",
-   "tau_vs_tutorial": 0.29
+   "tau_vs_tutorial": 0.28
   },
   "truth-earned": {
    "order": [
     "GT_Layout",
     "GT_Connectivity",
+    "GT_Pathfinding",
     "GT_Spanning_Trees",
     "GT_Flow",
     "GT_Matching",
@@ -173,7 +182,7 @@
     "GT_Network_Analysis"
    ],
    "law": "load-bearing heroes arrive late — the walk earns them",
-   "tau_vs_tutorial": 0.21
+   "tau_vs_tutorial": 0.28
   }
  },
  "dig_counter_pool": [

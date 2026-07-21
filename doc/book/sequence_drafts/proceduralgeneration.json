@@ -51,6 +51,17 @@
   },
   {
    "slot": "turn",
+   "map": "PG_Percolation_Network",
+   "hero": "constraint",
+   "hero_prov": "register (heroes.json)",
+   "slot_prov": "heuristic (position)",
+   "lb": false,
+   "walked": true,
+   "cast_n": 2,
+   "prov": "ghost (slot-fill from unused pool)"
+  },
+  {
+   "slot": "critical",
    "map": "PG_Caves_Mazes",
    "hero": "wave",
    "hero_prov": "register (heroes.json)",
@@ -61,20 +72,9 @@
    "prov": "ghost (slot-fill from unused pool)"
   },
   {
-   "slot": "critical",
+   "slot": "world",
    "map": "PG_Mirrored_Patterns",
    "hero": "adjacency",
-   "hero_prov": "register (heroes.json)",
-   "slot_prov": "heuristic (position)",
-   "lb": false,
-   "walked": true,
-   "cast_n": 2,
-   "prov": "ghost (slot-fill from unused pool)"
-  },
-  {
-   "slot": "world",
-   "map": "PG_Percolation_Network",
-   "hero": "constraint",
    "hero_prov": "register (heroes.json)",
    "slot_prov": "heuristic (position)",
    "lb": false,
@@ -103,7 +103,7 @@
  "v2_anti": [
   {
    "slot": "turn",
-   "host_map": "PG_Caves_Mazes",
+   "host_map": "PG_Percolation_Network",
    "anti": "space_colonization_algorithm ⟷ branching_growth_algorithm",
    "why": "opposed on order/entropy (walked×walked)",
    "prov": "ghost — top sleeping counter-pair (L-021)",
@@ -112,7 +112,7 @@
   {
    "kind": "seam",
    "slot": "critical",
-   "host_map": "PG_Mirrored_Patterns",
+   "host_map": "PG_Caves_Mazes",
    "anti": "seed_world",
    "why": "the seed is the world — walk away and back — recreated identically from its seed",
    "prov": "register (seam catalog) — placement ghost"
@@ -125,9 +125,9 @@
     "PG_Space_Colonization",
     "PG_Branching_Growth",
     "PG_Sculpted_Forms",
+    "PG_Percolation_Network",
     "PG_Caves_Mazes",
     "PG_Mirrored_Patterns",
-    "PG_Percolation_Network",
     "Chamber_ProcGen"
    ],
    "law": "the tutorial arc itself (V1 identity)",
@@ -138,9 +138,9 @@
     "PG_Space_Colonization",
     "PG_Branching_Growth",
     "PG_Sculpted_Forms",
+    "PG_Percolation_Network",
     "PG_Caves_Mazes",
     "PG_Mirrored_Patterns",
-    "PG_Percolation_Network",
     "Chamber_ProcGen",
     "PG_Genetic_Evolution"
    ],
@@ -152,9 +152,9 @@
     "PG_Space_Colonization",
     "PG_Genetic_Evolution",
     "PG_Branching_Growth",
+    "PG_Percolation_Network",
     "PG_Caves_Mazes",
     "PG_Mirrored_Patterns",
-    "PG_Percolation_Network",
     "PG_Sculpted_Forms",
     "Chamber_ProcGen"
    ],
@@ -165,9 +165,9 @@
    "order": [
     "PG_Space_Colonization",
     "PG_Sculpted_Forms",
+    "PG_Percolation_Network",
     "PG_Caves_Mazes",
     "PG_Mirrored_Patterns",
-    "PG_Percolation_Network",
     "Chamber_ProcGen",
     "PG_Genetic_Evolution",
     "PG_Branching_Growth"

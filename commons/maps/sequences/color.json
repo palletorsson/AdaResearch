@@ -1,194 +1,194 @@
 {
-  "sequences": {
-	"color": {
-	  "name": "Color and Composition",
-	  "v1_3_note": "Renamed from 'Color: Perception, Not Physics'. As of spine v1.3, this sequence absorbs the composition study and is sourced from three auto-research galleries: primitive-stack, pattern, and facade.",
-	  "composition_sources": [
-		{
-		  "gallery": "primitive-stack-gallery",
-		  "path": "ada_encyclopedia/public/primitive-stack-gallery/manifest.json",
-		  "role": "vertical compositions \u2014 stacks of primitives as raw composition vocabulary"
-		},
-		{
-		  "gallery": "pattern-gallery",
-		  "path": "ada_encyclopedia/public/pattern-gallery/manifest.json",
-		  "role": "plane compositions \u2014 wallpaper-group repetitions across the grid"
-		},
-		{
-		  "gallery": "facade-gallery",
-		  "path": "ada_encyclopedia/public/facade-gallery/manifest.json",
-		  "role": "architectural compositions \u2014 facades as composed parts within a frame"
-		}
-	  ],
-	  "truth": "Color is perception, not physics. RGB is a lie we agree on. What you see depends on context, not wavelength alone.",
-	  "qfep_term": "S",
-	  "qfep_connection": "Color is a system state\u00e2\u20ac\u201dpart of the S term in QFEP. But unlike vectors, color is fundamentally perceptual: the same wavelength can appear different colors depending on surrounding context. Color reveals the gap between ontology (photons) and experience (qualia).",
-	  "formula": "RGB = (r, g, b) \u00e2\u02c6\u02c6 [0,1]\u00c2\u00b3, HSV = (h, s, v) \u00e2\u02c6\u02c6 [0,360)\u00c3\u2014[0,1]\u00c2\u00b2",
-	  "demonstration": "Mix RGB to create colors. See how context changes perception. Watch gradients reveal interpolation. Paint and observe.",
-	  "description": "The physics and perception of color. Light has wavelength, but color is what brains make of it. Explore RGB, HSV, and the gap between objective light and subjective experience.",
-	  "layer": "F_order",
-	  "prerequisites": [
-        "primitives"
-	  ],
-	  "unlocks": [
-		"proceduralgeneration",
-        "machinelearning"
-	  ],
-	  "difficulty": "beginner",
-	  "estimated_time": "20-25 minutes",
-	  "learning_objectives": [
-		"RGB color space: additive mixing of red, green, blue",
-		"HSV color space: hue, saturation, value\u00e2\u20ac\u201dmore intuitive",
-		"Color mixing: additive vs subtractive",
-		"Perception theory: color constancy, simultaneous contrast",
-		"Digital materiality: how screens create color",
-		"Gradients: interpolation between colors",
-        "Color as function: every gradient is a function from t \u2208 [0,1] to a color. Color is your first encounter with a continuous mapping \u2014 the move that sets up wavefunctions (functions of time) and forces (vector-valued functions of position) as already-familiar."
-	  ],
-	  "content": [
-		"Color_Nails: Nail Salon Color Selection",
-		"Color_Grid_Pallet: Grid as Color Canvas",
-		"Color_Rainbow: Walking Through the Spectrum",
-		"Color_Pillar: Color Mixing and Collection",
-		"Color_Paint: Gestural Action Painting",
-		"Color_Walls: Gradient Color Fields",
-        "Color_Flashlight: Light Reveals Color"
-	  ],
-	  "maps": [
-		"Pattern_Foundry", 
-		"Color_Context_Placed", 
-		"Color_Nails",
-		"Color_Grid_Pallet",
-		"Color_Rainbow",
-		"Color_Pillar",
-		"Color_Paint",
-		"Color_Walls",
-        "Color_Flashlight",
-        "Chamber_Color"
-	  ],
-	  "deferred_maps": [
-		"Color_Context",
-		"Color_Grabbable",
-		"Color_Overlay",
-		"Color_Spectrum",
-        "Color_Sphere"
-	  ],
-	  "deferred_reason": "Removed from active sequence to tighten progression. Color_Context is a 30-artifact showcase map \u00e2\u20ac\u201d potential future standalone or advanced color sequence.",
-	  "axiom_files": [
-		"res://commons/context/clipboard/tutorial_text/color_axioms.md",
-		"res://commons/context/clipboard/tutorial_text/rgb_axioms.md",
-        "res://commons/context/clipboard/tutorial_text/perception_axioms.md"
-	  ],
-	  "algorithm_paths": {
-		"Color_Paint": "res://algorithms/color/paint/",
-		"Color_Grid_Pallet": "res://algorithms/color/palette/",
-		"Color_Patch_Palette_Overview": "res://algorithms/color/grabcolor/color_sets_overview.tscn"
-	  },
-	  "return_to": "lab",
-	  "lab_map": "Lab/map_data_post_color",
-	  "unlock_requirements": [
-        "primitives"
-	  ],
-	  "completion_rewards": [
-		"chromatic_badge",
-        "perception_badge"
-	  ],
-	  "artifact_groups": [
-		{
-		  "map": "Color_Nails",
-		  "position": "intro",
-		  "artifacts": [
-			"nail_color_controller",
-			"hand_model",
-			"hand_color_controller",
-			"dark_sphere",
-			"dark_side_prism",
-			"grab_stick_scanner",
-			"colorballs",
-            "brick_wall_factory"
-		  ],
-		  "size_budget": "compact_only",
-		  "rationale": "Nail salon studio: precise color selection on a digital body. Introduces color as interaction.",
-		  "grammar": "linear"
-		},
-		{
-		  "map": "Color_Grid_Pallet",
-		  "position": "foundation",
-		  "artifacts": [
-			"gridcolorizer",
-			"dark_sphere",
-            "spectrum_forest"
-		  ],
-		  "size_budget": "compact_only",
-		  "rationale": "Grid becomes canvas: systematic color assignment cell by cell with spectrum visualization.",
-		  "grammar": "linear"
-		},
-		{
-		  "map": "Color_Rainbow",
-		  "position": "foundation",
-		  "artifacts": [
-			"mario_cube",
-			"dark_sphere",
-			"rainbow",
-            "pick_up_cube"
-		  ],
-		  "size_budget": "compact_only",
-		  "rationale": "Walking through light: spectrum progression with animated rainbow emitters along a corridor.",
-		  "grammar": "florence"
-		},
-		{
-		  "map": "Color_Pillar",
-		  "position": "exploration",
-		  "artifacts": [
-			"pillarcolorcollection",
-			"visual_color_mixing",
-			"color_sets_overview",
-			"dark_sphere",
-			"grab_rainbow_stick",
-            "SpectrumVisualizer"
-		  ],
-		  "size_budget": "mixed",
-		  "rationale": "Pillar gauntlet: color collection, mixing, and spectrum analysis in a columned runway.",
-		  "grammar": "zelda"
-		},
-		{
-		  "map": "Color_Paint",
-		  "position": "exploration",
-		  "artifacts": [
-			"ball_painting_demo",
-			"albers_wall_gallery",
-            "dark_sphere"
-		  ],
-		  "size_budget": "mixed",
-		  "rationale": "Action painting studio: gestural color application meets structured Albers color studies.",
-		  "grammar": "zelda"
-		},
-		{
-		  "map": "Color_Walls",
-		  "position": "integration",
-		  "artifacts": [
-			"color_constellation_office",
-			"rainbow_hallway",
-            "dark_sphere"
-		  ],
-		  "size_budget": "environment",
-		  "rationale": "Gradient environment: continuous color transitions dissolving categorical boundaries.",
-		  "grammar": "zelda"
-		},
-		{
-		  "map": "Color_Flashlight",
-		  "position": "synthesis",
-		  "artifacts": [
-			"flashlight_demo",
-            "dark_sphere"
-		  ],
-		  "size_budget": "compact_only",
-		  "rationale": "MultiMesh color cycling test: pattern progression through flashlight interaction. Synthesis of color systems.",
-		  "grammar": "vatican"
-		}
-	  ]
-	}
-  },
-  "world_phase": "grid",
-  "artifact_groups": []
+ "sequences": {
+  "color": {
+   "name": "Color and Composition",
+   "v1_3_note": "Renamed from 'Color: Perception, Not Physics'. As of spine v1.3, this sequence absorbs the composition study and is sourced from three auto-research galleries: primitive-stack, pattern, and facade.",
+   "composition_sources": [
+    {
+     "gallery": "primitive-stack-gallery",
+     "path": "ada_encyclopedia/public/primitive-stack-gallery/manifest.json",
+     "role": "vertical compositions — stacks of primitives as raw composition vocabulary"
+    },
+    {
+     "gallery": "pattern-gallery",
+     "path": "ada_encyclopedia/public/pattern-gallery/manifest.json",
+     "role": "plane compositions — wallpaper-group repetitions across the grid"
+    },
+    {
+     "gallery": "facade-gallery",
+     "path": "ada_encyclopedia/public/facade-gallery/manifest.json",
+     "role": "architectural compositions — facades as composed parts within a frame"
+    }
+   ],
+   "truth": "Color is perception, not physics. RGB is a lie we agree on. What you see depends on context, not wavelength alone.",
+   "qfep_term": "S",
+   "qfep_connection": "Color is a system stateâ€”part of the S term in QFEP. But unlike vectors, color is fundamentally perceptual: the same wavelength can appear different colors depending on surrounding context. Color reveals the gap between ontology (photons) and experience (qualia).",
+   "formula": "RGB = (r, g, b) âˆˆ [0,1]Â³, HSV = (h, s, v) âˆˆ [0,360)Ã—[0,1]Â²",
+   "demonstration": "Mix RGB to create colors. See how context changes perception. Watch gradients reveal interpolation. Paint and observe.",
+   "description": "The physics and perception of color. Light has wavelength, but color is what brains make of it. Explore RGB, HSV, and the gap between objective light and subjective experience.",
+   "layer": "F_order",
+   "prerequisites": [
+    "primitives"
+   ],
+   "unlocks": [
+    "proceduralgeneration",
+    "machinelearning"
+   ],
+   "difficulty": "beginner",
+   "estimated_time": "20-25 minutes",
+   "learning_objectives": [
+    "RGB color space: additive mixing of red, green, blue",
+    "HSV color space: hue, saturation, valueâ€”more intuitive",
+    "Color mixing: additive vs subtractive",
+    "Perception theory: color constancy, simultaneous contrast",
+    "Digital materiality: how screens create color",
+    "Gradients: interpolation between colors",
+    "Color as function: every gradient is a function from t ∈ [0,1] to a color. Color is your first encounter with a continuous mapping — the move that sets up wavefunctions (functions of time) and forces (vector-valued functions of position) as already-familiar."
+   ],
+   "content": [
+    "Color_Nails: Nail Salon Color Selection",
+    "Color_Grid_Pallet: Grid as Color Canvas",
+    "Color_Rainbow: Walking Through the Spectrum",
+    "Color_Pillar: Color Mixing and Collection",
+    "Color_Paint: Gestural Action Painting",
+    "Color_Walls: Gradient Color Fields",
+    "Color_Flashlight: Light Reveals Color"
+   ],
+   "maps": [
+    "Pattern_Foundry",
+    "Color_Context_Placed",
+    "Color_Nails",
+    "Color_Grid_Pallet",
+    "Color_Rainbow",
+    "Color_Pillar",
+    "Chamber_Color",
+    "Color_Paint",
+    "Color_Walls",
+    "Color_Flashlight"
+   ],
+   "deferred_maps": [
+    "Color_Context",
+    "Color_Grabbable",
+    "Color_Overlay",
+    "Color_Spectrum",
+    "Color_Sphere"
+   ],
+   "deferred_reason": "Removed from active sequence to tighten progression. Color_Context is a 30-artifact showcase map â€” potential future standalone or advanced color sequence.",
+   "axiom_files": [
+    "res://commons/context/clipboard/tutorial_text/color_axioms.md",
+    "res://commons/context/clipboard/tutorial_text/rgb_axioms.md",
+    "res://commons/context/clipboard/tutorial_text/perception_axioms.md"
+   ],
+   "algorithm_paths": {
+    "Color_Paint": "res://algorithms/color/paint/",
+    "Color_Grid_Pallet": "res://algorithms/color/palette/",
+    "Color_Patch_Palette_Overview": "res://algorithms/color/grabcolor/color_sets_overview.tscn"
+   },
+   "return_to": "lab",
+   "lab_map": "Lab/map_data_post_color",
+   "unlock_requirements": [
+    "primitives"
+   ],
+   "completion_rewards": [
+    "chromatic_badge",
+    "perception_badge"
+   ],
+   "artifact_groups": [
+    {
+     "map": "Color_Nails",
+     "position": "intro",
+     "artifacts": [
+      "nail_color_controller",
+      "hand_model",
+      "hand_color_controller",
+      "dark_sphere",
+      "dark_side_prism",
+      "grab_stick_scanner",
+      "colorballs",
+      "brick_wall_factory"
+     ],
+     "size_budget": "compact_only",
+     "rationale": "Nail salon studio: precise color selection on a digital body. Introduces color as interaction.",
+     "grammar": "linear"
+    },
+    {
+     "map": "Color_Grid_Pallet",
+     "position": "foundation",
+     "artifacts": [
+      "gridcolorizer",
+      "dark_sphere",
+      "spectrum_forest"
+     ],
+     "size_budget": "compact_only",
+     "rationale": "Grid becomes canvas: systematic color assignment cell by cell with spectrum visualization.",
+     "grammar": "linear"
+    },
+    {
+     "map": "Color_Rainbow",
+     "position": "foundation",
+     "artifacts": [
+      "mario_cube",
+      "dark_sphere",
+      "rainbow",
+      "pick_up_cube"
+     ],
+     "size_budget": "compact_only",
+     "rationale": "Walking through light: spectrum progression with animated rainbow emitters along a corridor.",
+     "grammar": "florence"
+    },
+    {
+     "map": "Color_Pillar",
+     "position": "exploration",
+     "artifacts": [
+      "pillarcolorcollection",
+      "visual_color_mixing",
+      "color_sets_overview",
+      "dark_sphere",
+      "grab_rainbow_stick",
+      "SpectrumVisualizer"
+     ],
+     "size_budget": "mixed",
+     "rationale": "Pillar gauntlet: color collection, mixing, and spectrum analysis in a columned runway.",
+     "grammar": "zelda"
+    },
+    {
+     "map": "Color_Paint",
+     "position": "exploration",
+     "artifacts": [
+      "ball_painting_demo",
+      "albers_wall_gallery",
+      "dark_sphere"
+     ],
+     "size_budget": "mixed",
+     "rationale": "Action painting studio: gestural color application meets structured Albers color studies.",
+     "grammar": "zelda"
+    },
+    {
+     "map": "Color_Walls",
+     "position": "integration",
+     "artifacts": [
+      "color_constellation_office",
+      "rainbow_hallway",
+      "dark_sphere"
+     ],
+     "size_budget": "environment",
+     "rationale": "Gradient environment: continuous color transitions dissolving categorical boundaries.",
+     "grammar": "zelda"
+    },
+    {
+     "map": "Color_Flashlight",
+     "position": "synthesis",
+     "artifacts": [
+      "flashlight_demo",
+      "dark_sphere"
+     ],
+     "size_budget": "compact_only",
+     "rationale": "MultiMesh color cycling test: pattern progression through flashlight interaction. Synthesis of color systems.",
+     "grammar": "vatican"
+    }
+   ]
+  }
+ },
+ "world_phase": "grid",
+ "artifact_groups": []
 }
