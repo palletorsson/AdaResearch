@@ -802,7 +802,7 @@
     "\b(mycelium|myceli|hypha|hyphae|filament|space.?coloni[sz]ation|morpho.?sweep)\b"
    ],
    "progress": {
-    "done": 1,
+    "done": 2,
     "total": 6,
     "unit": "milestones"
    },
@@ -815,8 +815,9 @@
     },
     {
      "id": "mycelium-2",
-     "text": "Space-colonization generator: attractors scattered on a ground disc, grow-to-attractor with attractor-kill, emergent branching web; capture; compare to the L-system spike and pick the generator (space colonization = the organic irregular look; L-system = the fast scaffold).",
-     "done": false
+     "text": "Space-colonization generator: attractors scattered on a ground disc, grow-to-attractor with attractor-kill, emergent branching web; capture; compare to the L-system spike and pick the generator (space colonization = the organic irregular look; L-system = the fast scaffold). — DONE 2026-07-21: mycelium_colony.gd (attractors on a ground disc, grow-to-attractor with attractor-kill, spatial hash so 900 attractors / 2600 nodes run in the same 12s as the naive 260/900). RULING: space colonization is the generator; the L-system spike stays the scaffold — it branches on schedule, the colony branches because local food runs out. Two findings: thickness must come from SUBTREE WEIGHT (flow toward the seed), not branch depth; the spatial hash is load-bearing, not an optimisation. GAP OPENED: the colony is a TREE — real mycelium anastomoses (hyphae fuse into loops) and space colonization cannot make a cycle; needs a fusion pass (folded into milestone 5).",
+     "done": true,
+     "completed": "2026-07-21"
     },
     {
      "id": "mycelium-3",
@@ -830,7 +831,7 @@
     },
     {
      "id": "mycelium-5",
-     "text": "Tune the mycelial read at biome scale: min radius so filaments survive VR distance, emission for the bioluminescent look, per-cell variation; before/after vs the CA network on Biome_VisualBench (THE EDGE: rulings over captures, language+desktop observation).",
+     "text": "Tune the mycelial read at biome scale: min radius so filaments survive VR distance, emission for the bioluminescent look, per-cell variation; before/after vs the CA network on Biome_VisualBench (THE EDGE: rulings over captures, language+desktop observation). PLUS anastomosis: fuse tips that pass within a radius so the mat reads as a web, not a starburst, and run the thickness solver on a graph rather than a tree (opened by milestone 2's ruling).",
      "done": false
     },
     {

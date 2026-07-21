@@ -78,6 +78,42 @@ dense.
    (`ca` = voxel network, `mycelium` = filaments) as an authoring choice? Optional
    fruiting bodies (`fungus_morphology`) at dense nodes.
 
+## Ruling: the generator is space colonization (2026-07-21, milestone 2)
+
+Both generators now exist and capture side by side — `mycelium_spike` (L-system
+turtle) and `mycelium_colony` (space colonization). **The substrate takes space
+colonization.** The L-system stays as what it was scoped to be: the scaffold that
+proved the render path, not the destination.
+
+The difference is not tuning. The L-system branches on *schedule* — every `F` at
+a given depth splits the same way, so the fan is symmetric and reads as a
+decoration of a rule. The colony branches because *food nearby runs out* and a
+tip has to go somewhere else; the irregularity is inherited from the scatter, not
+sprinkled on afterwards. That is the mycelial read.
+
+Two things came out of building it that the plan did not anticipate:
+
+- **Thickness should come from subtree weight, not branch depth.** The spike
+  thinned by depth, which puts a thick strand anywhere shallow and a thin one
+  anywhere deep regardless of what the strand carries. A mat is a *flow network*:
+  everything a tip absorbs travels home through its parent. Weighting each node
+  by its downstream segment count gives trunks that thicken inward and tips that
+  all end hair-thin — the taper a voxel grid cannot hold at all, and the reason
+  this substrate exists.
+- **The spatial hash is load-bearing, not an optimisation.** The naive nearest-node
+  search is O(steps x attractors x nodes); at the densities a mat actually needs it
+  is hundreds of millions of distance checks and the generator stops being
+  runnable. Bucketing nodes by influence-radius cells took 900 attractors /
+  2600 nodes to the same 12s headless run as the 260/900 first pass.
+
+**The gap this opens (not closable by tuning):** the colony is a *tree* — one
+seed, strictly radial, no cycles. Real mycelium **anastomoses**: hyphae that meet
+fuse, so the network has loops, and the mat reads as a *web* rather than a
+starburst. Space colonization cannot produce a loop; it only ever attaches a new
+node to one parent. Closing this needs an explicit fusion pass (join tips that
+pass within some radius, and let the thickness solver run on a graph rather than
+a tree). Folded into milestone 5 as its own item rather than left implicit.
+
 ## Risks / gotchas
 
 - **Perf** — many thin segments; batching is mandatory, not optional. A colony is

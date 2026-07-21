@@ -3,6 +3,34 @@
  "format": "lab_artifacts",
  "description": "Mycelium substrate spikes (thread: mycelium).",
  "artifacts": {
+  "mycelium_colony": {
+   "category": "nature_system",
+   "complexity": "intermediate",
+   "description": "Mycelium space-colonization generator (thread milestone 2): attractors scattered on a ground disc, hyphae grown toward whichever are in range, attractors killed as tips reach them. Branching is emergent, not scheduled. Strand thickness comes from subtree weight (flow toward the seed), so trunks thicken inward and every tip ends hair-thin — the taper neither the L-system spike nor the fungus:ca voxel grid can hold.",
+   "dev_themes": [
+    "mycelium",
+    "filament",
+    "space_colonization",
+    "morpho_sweep"
+   ],
+   "include_in_map_data": false,
+   "interaction": "ambient",
+   "lookup_name": "mycelium_colony",
+   "map_ready": false,
+   "map_sequences": [
+    "noise"
+   ],
+   "name": "Mycelium Colony",
+   "qfep_connection": "The organic irregular web the scheduled grammar cannot reach: form here is not a rule unfolding but a negotiation with what the ground happens to offer (doc/plans/mycelium_substrate.md).",
+   "scene": "res://algorithms/nature_system/mycelium/mycelium_colony.tscn",
+   "sequence": "noise",
+   "tags": [
+    "mycelium",
+    "hypha",
+    "space_colonization",
+    "morpho_sweep"
+   ]
+  },
   "mycelium_spike": {
    "category": "nature_system",
    "complexity": "intermediate",
