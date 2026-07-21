@@ -38,6 +38,14 @@ const MoldNetworkScene = preload("res://algorithms/cellularautomata/cellular_aut
 # rendered as tapering MorphoSweep tubes, merged into one mesh. Only reached by
 # cells that declare `fungus:mycelium`, so the CA path is untouched.
 const MyceliumColonyScene = preload("res://algorithms/nature_system/mycelium/mycelium_colony.tscn")
+# The third fungus substrate (2026-07-21): REAL mushrooms — FungusMorphology
+# (cap + stem + gills + spores, the softbody_flora / fungus-dna-gallery
+# builder) fed by the 60 curated fd_*.json presets copied into
+# algorithms/nature_system/morphology/fungus_presets/. Grid cells that
+# declare `fungus:dna` route here; `fd=<family>` picks the family
+# (alien_lumen / button_dome / fairy_ring / parasol_tall / shelf_bracket),
+# the cell seed picks the variant within it.
+const FungusMorphologyClass = preload("res://algorithms/nature_system/morphology/fungus_morphology.gd")
 # TreeMorphology.build takes a CritterDNA + CritterTraitMapper and
 # produces a real DNA-driven L-system tree. Both are RefCounteds we
 # construct on demand. The mapper is shared (one per dispatcher),
@@ -235,6 +243,9 @@ func _spawn_fungus(deposit: Dictionary, ctx: Dictionary,
 	#              hair-thin tapering strands, which is why the substrate exists)
 	# Anything else (including the painted layer, which declares no algo) keeps
 	# the CA — additive: existing fungus:ca maps render byte-identical.
+	if String(deposit.get("algo", "")) == "dna":
+		_spawn_fungus_dna(deposit, ctx, parent)
+		return
 	if String(deposit.get("algo", "")) == "mycelium":
 		_spawn_mycelium(deposit, ctx, parent)
 		return
@@ -323,6 +334,58 @@ func _spawn_mycelium(deposit: Dictionary, ctx: Dictionary,
 	# add_child runs _ready (which grows + renders), then we place the whole node
 	parent.add_child(colony)
 	colony.global_position = _cell_to_world(deposit, ctx)
+
+
+# Fungus DNA substrate — real mushrooms (fungus:dna). One curated fd preset
+# per cell: family from the fd= mod (else seed-picked), variant NN from the
+# cell seed, applied via CritterDNA.from_dict exactly as the gallery lab
+# does. Tier scales the whole organism; LOD follows intensity like trees.
+const FD_FAMILIES: Array = ["alien_lumen", "button_dome", "fairy_ring", "parasol_tall", "shelf_bracket"]
+const FD_VARIANTS_PER_FAMILY: int = 12
+const FD_PRESET_DIR := "res://algorithms/nature_system/morphology/fungus_presets"
+
+
+func _spawn_fungus_dna(deposit: Dictionary, ctx: Dictionary, parent: Node3D) -> void:
+	var strength: float = float(deposit.get("strength", 1.0))
+	var intensity: int = clampi(int(round(strength * 5.0)), 1, 5)
+	var x: int = int(deposit.get("x", 0))
+	var z: int = int(deposit.get("z", 0))
+	var seed: int = (x * 53 + z * 29) & 0xFFFF
+	var family: String = String(deposit.get("fd", ""))
+	if not FD_FAMILIES.has(family):
+		family = FD_FAMILIES[seed % FD_FAMILIES.size()]
+	var variant: int = 1 + (seed >> 3) % FD_VARIANTS_PER_FAMILY
+	var path: String = "%s/fd_%s_%02d.json" % [FD_PRESET_DIR, family, variant]
+	var f: FileAccess = FileAccess.open(path, FileAccess.READ)
+	if f == null:
+		push_warning("biome fungus:dna — missing preset %s, primitive fallback" % path)
+		_spawn_primitive_fallback(deposit, ctx, parent)
+		return
+	var parsed: Variant = JSON.parse_string(f.get_as_text())
+	f.close()
+	if not (parsed is Dictionary):
+		_spawn_primitive_fallback(deposit, ctx, parent)
+		return
+	var cfg: Dictionary = parsed
+	cfg.erase("_cluster")
+	cfg.erase("_id")
+	for k in ["primary_color", "secondary_color", "tertiary_color"]:
+		if cfg.has(k) and cfg[k] is Array and (cfg[k] as Array).size() >= 3:
+			var v: Array = cfg[k]
+			cfg[k] = Color(float(v[0]), float(v[1]), float(v[2]))
+	var dna: CritterDNA = CritterDNAClass.new()
+	dna.from_dict(cfg)
+	dna.body_type = 3.0
+	# tier scales the curated organism. The presets are calibrated for the
+	# gallery lab's close camera (~0.15m organisms); a biome cell wants the
+	# mushroom at ~half a cell, so the base multiplier is generous.
+	dna.scale = dna.scale * (2.2 + 0.6 * float(intensity))
+	var holder: Node3D = Node3D.new()
+	holder.name = "BiomeFungusDNA_%s_%d_%d" % [family, x, z]
+	parent.add_child(holder)
+	holder.global_position = _cell_to_world(deposit, ctx)
+	var lod: int = clampi(intensity - 1, 0, 3)
+	FungusMorphologyClass.build(dna, holder, _get_trait_mapper(), lod)
 
 
 # Tree kingdom — wraps TreeMorphology.build (production DNA-driven

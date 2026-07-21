@@ -428,6 +428,9 @@ func _stage_cell(col: int, row: int, cell: Dictionary) -> void:
 		# `gen=` the generation the CA freezes at (its thin spreading front).
 		"rule": String((cell["mods"] as Dictionary).get("rule", "")),
 		"gen": String((cell["mods"] as Dictionary).get("gen", "")),
+		# fungus:dna — fd=<family> picks the curated mushroom family
+		# (alien_lumen / button_dome / fairy_ring / parasol_tall / shelf_bracket)
+		"fd": String((cell["mods"] as Dictionary).get("fd", "")),
 	}
 	_get_dispatcher().spawn_cell(deposit, _stage_order, {"cube_size": _cube_size}, self)
 

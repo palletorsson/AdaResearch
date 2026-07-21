@@ -27,12 +27,13 @@ KINGDOMS = [
          {"algo": "scatter", "renders": "botanical flower, preset by tier", "token": "flora:scatter:seed:t=3"},
      ]},
     {"id": "fungus", "name": "Fungus", "color": "#a674cc",
-     "blurb": "Two substrates ship, and neither is the default (ruled 2026-07-21) — the map picks. `ca` is a 3D cellular automaton frozen at its spreading front: a voxel network, visibly computed. `mycelium` is space-colonised filaments: tapering hyphae, trunks thickening inward, tips hair-thin, visibly grown.",
+     "blurb": "Three substrates ship, and none is the default — the map picks. `ca` is a 3D cellular automaton frozen at its spreading front: a voxel network, visibly computed. `mycelium` is space-colonised filaments: tapering hyphae, visibly grown. `dna` is the real mushroom — FungusMorphology cap+stem+gills fed by 60 curated presets in five families; fd= picks the family, the cell seed the variant.",
      "algos": [
          {"algo": "ca", "renders": "MoldNetwork CA, gen-frozen as a spreading voxel network", "token": "fungus:ca:seed:t=5"},
          {"algo": "ca (tuned)", "renders": "same CA, per-cell rule and freeze generation", "token": "fungus:ca:seed:rule=4-6/5-7/10/M:gen=16"},
          {"algo": "mycelium", "renders": "space-colonised filaments — tapering hyphae, trunks thickening inward, tips hair-thin (the taper a voxel grid cannot hold)", "token": "fungus:mycelium:seed:t=5:d=1.0"},
          {"algo": "mycelium (sparse)", "renders": "same web, thinned — d= sets how densely the mat fills its disc", "token": "fungus:mycelium:seed:t=5:d=0.3"},
+         {"algo": "dna", "renders": "a real mushroom — cap, stem, gills, spores from a curated DNA preset (fd= family, seed-picked variant)", "token": "fungus:dna:seed:fd=fairy_ring:t=3"},
      ]},
     {"id": "fauna", "name": "Fauna", "color": "#e5994d",
      "blurb": "Creatures. A DNA-driven CritterEntity built from the shared morphology, with biome-compact geometry so a cell's creature is a grub that fits its cell rather than a fifteen-metre thread.",
@@ -71,6 +72,7 @@ MODS = [
     {"mod": "clk=", "what": "clock: static | dwell | walk"},
     {"mod": "rule=", "what": "fungus only — override the CA rule string"},
     {"mod": "gen=", "what": "fungus only — the generation the CA freezes at (its thin spreading front)"},
+    {"mod": "fd=", "what": "fungus:dna only — the curated mushroom family: alien_lumen, button_dome, fairy_ring, parasol_tall, shelf_bracket (12 variants each, cell-seed picked)"},
 ]
 
 TRIGGERS = [
@@ -108,6 +110,8 @@ EXAMPLES = [
      "caption": "the mycelium web — space-colonised tapering filaments"},
     {"slug": "fungus_mycelium_sparse", "group": "substrate", "token": "fungus:mycelium:seed:t=5:d=0.3",
      "caption": "the same web, thinned by d="},
+    {"slug": "fungus_dna", "group": "substrate", "token": "fungus:dna:seed:fd=fairy_ring:t=3",
+     "caption": "the real mushroom — FungusMorphology cap+stem+gills from a curated preset"},
     {"slug": "fauna_grub", "group": "substrate", "token": "fauna:dna:seed:t=4",
      "caption": "the creature — a cell-sized DNA grub"},
     {"slug": "mineral_crystal", "group": "substrate", "token": "mineral:vein:seed:t=4",
@@ -144,6 +148,43 @@ LADDERS = [
      "caption": "CA size — the voxel network's grid dimension grows with t="},
 ]
 
+# The flora & fauna DETAIL CATALOG (asked 2026-07-21): the species level.
+# Where the principals show WHAT a token grows, the details show the RANGE
+# within it — flower species, position-seeded tree and grub individuals,
+# and the five curated mushroom families. cell = where the seed stands on
+# the stage (position IS the DNA seed for tree/fauna, so moving the cell
+# is how you meet a different individual).
+DETAILS = [
+    {"slug": "flower_bluebell", "kingdom": "flora", "token": "flora:scatter:seed:t=1",
+     "caption": "bluebell — the tier-1 species"},
+    {"slug": "flower_orchid", "kingdom": "flora", "token": "flora:scatter:seed:t=3",
+     "caption": "orchid — the tier-3 species"},
+    {"slug": "flower_daisy", "kingdom": "flora", "token": "flora:scatter:seed:t=5",
+     "caption": "daisy — the tier-5 species"},
+    {"slug": "tree_a", "kingdom": "flora", "token": "flora:lsystem:seed:t=4", "cell": [1, 1],
+     "caption": "tree individual A — DNA seeded by its cell"},
+    {"slug": "tree_b", "kingdom": "flora", "token": "flora:lsystem:seed:t=4", "cell": [3, 2],
+     "caption": "tree individual B — same token, different cell, different tree"},
+    {"slug": "tree_c", "kingdom": "flora", "token": "flora:lsystem:seed:t=4", "cell": [2, 3],
+     "caption": "tree individual C — the grammar varies, the species holds"},
+    {"slug": "fd_alien_lumen", "kingdom": "fungus", "token": "fungus:dna:seed:fd=alien_lumen:t=3",
+     "caption": "alien lumen — bioluminescent caps (12 curated variants)"},
+    {"slug": "fd_button_dome", "kingdom": "fungus", "token": "fungus:dna:seed:fd=button_dome:t=3",
+     "caption": "button dome — low round caps (12 curated variants)"},
+    {"slug": "fd_fairy_ring", "kingdom": "fungus", "token": "fungus:dna:seed:fd=fairy_ring:t=3",
+     "caption": "fairy ring — colony in a circle (12 curated variants)"},
+    {"slug": "fd_parasol_tall", "kingdom": "fungus", "token": "fungus:dna:seed:fd=parasol_tall:t=3",
+     "caption": "tall parasol — high stem, wide cap (12 curated variants)"},
+    {"slug": "fd_shelf_bracket", "kingdom": "fungus", "token": "fungus:dna:seed:fd=shelf_bracket:t=3",
+     "caption": "shelf bracket — stacked ledges (12 curated variants)"},
+    {"slug": "grub_a", "kingdom": "fauna", "token": "fauna:dna:seed:t=4", "cell": [1, 1],
+     "caption": "grub individual A — DNA seeded by its cell"},
+    {"slug": "grub_b", "kingdom": "fauna", "token": "fauna:dna:seed:t=4", "cell": [3, 2],
+     "caption": "grub individual B — same species logic as the trees"},
+    {"slug": "grub_c", "kingdom": "fauna", "token": "fauna:dna:seed:t=4", "cell": [2, 3],
+     "caption": "grub individual C"},
+]
+
 META = [
     {"key": "presence", "what": "the ground stain — every active unmuted cell stamps a breathing kingdom-tinted stain into the floor (radial falloff, spreads with claims, muted cells stay dry). true by default; false switches it off"},
     {"key": "budget_instances", "what": "cap on batched instances; over budget the layer thins by even stride and says so"},
@@ -165,12 +206,15 @@ def main() -> int:
         img = os.path.join(IMG_DIR, "ex", f"ladder_{l['slug']}.png")
         l["image"] = f"/biome-gallery/ex/ladder_{l['slug']}.png" if os.path.exists(img) else None
         l["tokens"] = [l["token_fmt"].format(t=t) for t in range(1, 6)]
+    for d in DETAILS:
+        img = os.path.join(IMG_DIR, "ex", f"detail_{d['slug']}.png")
+        d["image"] = f"/biome-gallery/ex/detail_{d['slug']}.png" if os.path.exists(img) else None
     data = {
         "title": "The biome",
         "subtitle": "Everything the living layer can grow. Each kingdom shot from its own gallery map: every algo at tiers 1, 3 and 5, a halo edge behind, a mute cell in front.",
         "grammar": "kingdom:algo:role[:mod=val…][:on=trigger:response[/response…]]",
         "kingdoms": KINGDOMS, "examples": EXAMPLES, "ladders": LADDERS,
-        "roles": ROLES, "mods": MODS,
+        "details": DETAILS, "roles": ROLES, "mods": MODS,
         "triggers": TRIGGERS, "responses": RESPONSES, "meta": META,
     }
     os.makedirs(os.path.dirname(OUT), exist_ok=True)

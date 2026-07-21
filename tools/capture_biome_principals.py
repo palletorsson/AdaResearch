@@ -18,7 +18,7 @@ import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "tools"))
-from build_biome_gallery import EXAMPLES, LADDERS  # noqa: E402
+from build_biome_gallery import EXAMPLES, LADDERS, DETAILS  # noqa: E402
 
 STAGE = "Biome_Ex_Stage"
 STAGE_DIR = os.path.join(ROOT, "commons", "maps", STAGE)
@@ -38,10 +38,12 @@ def stage_map(example):
     # the marker cube falls out of frame instead of standing over the subject
     utilities[N - 1][N - 1] = "sp"
     biome = [[""] * N for _ in range(N)]
-    if example["group"] == "halo":
+    if example.get("group") == "halo":
         biome[0][N // 2] = example["token"]   # rim cell: spills off the top edge
     else:
-        biome[N // 2][N // 2] = example["token"]
+        # details may pin the cell — for tree/fauna the position IS the DNA seed
+        c, r = example.get("cell", [N // 2, N // 2])
+        biome[r][c] = example["token"]
     return {
         "map_info": {
             "name": STAGE, "title": STAGE,
@@ -117,10 +119,22 @@ def capture(slug):
 def main():
     args = sys.argv[1:]
     ladders_mode = "--ladders" in args
+    details_mode = "--details" in args
     only = set(a for a in args if not a.startswith("--"))
     os.makedirs(EX_IMG_DIR, exist_ok=True)
     os.makedirs(STAGE_DIR, exist_ok=True)
     ok = 0
+    if details_mode:
+        todo = [d for d in DETAILS if not only or d["slug"] in only]
+        for i, d in enumerate(todo, 1):
+            with open(os.path.join(STAGE_DIR, "map_data.json"), "w", encoding="utf-8") as f:
+                json.dump(stage_map(d), f, indent=1)
+            print(f"[{i}/{len(todo)}] detail_{d['slug']}  {d['token']}")
+            if capture("detail_" + d["slug"]):
+                ok += 1
+                print("  ok -> public/biome-gallery/ex/detail_%s.png" % d["slug"])
+        print(f"{ok}/{len(todo)} captured. Now: python tools/build_biome_gallery.py")
+        return 0 if ok == len(todo) else 1
     if ladders_mode:
         todo = [l for l in LADDERS if not only or l["slug"] in only]
         for i, l in enumerate(todo, 1):
