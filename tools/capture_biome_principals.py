@@ -18,7 +18,7 @@ import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "tools"))
-from build_biome_gallery import EXAMPLES  # noqa: E402
+from build_biome_gallery import EXAMPLES, LADDERS  # noqa: E402
 
 STAGE = "Biome_Ex_Stage"
 STAGE_DIR = os.path.join(ROOT, "commons", "maps", STAGE)
@@ -67,6 +67,36 @@ def stage_map(example):
     }
 
 
+def ladder_map(ladder):
+    """The ladder stage: five seeds in a row, t=1..5, one shot for the whole
+    ladder. Wide floor so the t=5 specimen doesn't crowd its neighbor."""
+    w, d = 11, 5
+    structure = [["1"] * w for _ in range(d)]
+    utilities = [[""] * w for _ in range(d)]
+    utilities[d - 1][w - 1] = "sp"
+    biome = [[""] * w for _ in range(d)]
+    for t in range(1, 6):
+        biome[2][(t - 1) * 2 + 1] = ladder["token_fmt"].format(t=t)
+    return {
+        "map_info": {
+            "name": STAGE, "title": STAGE,
+            "description": "Scratch stage — tier ladder %s (t=1..5 left to right). "
+                           "Rewritten by tools/capture_biome_principals.py. Not spine." % ladder["slug"],
+            "dimensions": {"width": w, "depth": d},
+        },
+        "layers": {
+            "structure": structure,
+            "utilities": utilities,
+            "interactables": [[""] * w for _ in range(d)],
+            "biome": biome,
+        },
+        "settings": {
+            "disable_biome": True,
+            "background": {"color": [0.05, 0.06, 0.1], "type": "sky"},
+        },
+    }
+
+
 def capture(slug):
     if os.path.isdir(SHOTS):
         shutil.rmtree(SHOTS)
@@ -85,19 +115,31 @@ def capture(slug):
 
 
 def main():
-    only = set(sys.argv[1:])
-    todo = [e for e in EXAMPLES if not only or e["slug"] in only]
+    args = sys.argv[1:]
+    ladders_mode = "--ladders" in args
+    only = set(a for a in args if not a.startswith("--"))
     os.makedirs(EX_IMG_DIR, exist_ok=True)
     os.makedirs(STAGE_DIR, exist_ok=True)
     ok = 0
-    for i, e in enumerate(todo, 1):
-        with open(os.path.join(STAGE_DIR, "map_data.json"), "w", encoding="utf-8") as f:
-            json.dump(stage_map(e), f, indent=1)
-        print(f"[{i}/{len(todo)}] {e['slug']}  {e['token']}")
-        if capture(e["slug"]):
-            ok += 1
-            print("  ok -> public/biome-gallery/ex/%s.png" % e["slug"])
-    print(f"{ok}/{len(todo)} principals captured. Now: python tools/build_biome_gallery.py")
+    if ladders_mode:
+        todo = [l for l in LADDERS if not only or l["slug"] in only]
+        for i, l in enumerate(todo, 1):
+            with open(os.path.join(STAGE_DIR, "map_data.json"), "w", encoding="utf-8") as f:
+                json.dump(ladder_map(l), f, indent=1)
+            print(f"[{i}/{len(todo)}] ladder_{l['slug']}  {l['token_fmt']} t=1..5")
+            if capture("ladder_" + l["slug"]):
+                ok += 1
+                print("  ok -> public/biome-gallery/ex/ladder_%s.png" % l["slug"])
+    else:
+        todo = [e for e in EXAMPLES if not only or e["slug"] in only]
+        for i, e in enumerate(todo, 1):
+            with open(os.path.join(STAGE_DIR, "map_data.json"), "w", encoding="utf-8") as f:
+                json.dump(stage_map(e), f, indent=1)
+            print(f"[{i}/{len(todo)}] {e['slug']}  {e['token']}")
+            if capture(e["slug"]):
+                ok += 1
+                print("  ok -> public/biome-gallery/ex/%s.png" % e["slug"])
+    print(f"{ok}/{len(todo)} captured. Now: python tools/build_biome_gallery.py")
     return 0 if ok == len(todo) else 1
 
 

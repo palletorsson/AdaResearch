@@ -132,6 +132,18 @@ EXAMPLES = [
      "caption": "the declared vacuum — nothing grows here on purpose; a reaction can open it"},
 ]
 
+# The tier ladders (ruled next-step 2026-07-21): for the substrates where t=
+# matters most, five seeds stand in a row at t=1..5 on one wide stage — the
+# whole ladder reads in a single shot (ex/ladder_<slug>.png).
+LADDERS = [
+    {"slug": "tree", "token_fmt": "flora:lsystem:seed:t={t}",
+     "caption": "tree depth — segments, scale and leaf density climb with t="},
+    {"slug": "flower", "token_fmt": "flora:scatter:seed:t={t}",
+     "caption": "flower presets — the tier picks the species and the scale (bluebell → orchid → daisy)"},
+    {"slug": "ca", "token_fmt": "fungus:ca:seed:t={t}",
+     "caption": "CA size — the voxel network's grid dimension grows with t="},
+]
+
 META = [
     {"key": "budget_instances", "what": "cap on batched instances; over budget the layer thins by even stride and says so"},
     {"key": "visibility_range", "what": "GPU culling distance for every batch"},
@@ -148,11 +160,16 @@ def main() -> int:
     for e in EXAMPLES:
         img = os.path.join(IMG_DIR, "ex", f"{e['slug']}.png")
         e["image"] = f"/biome-gallery/ex/{e['slug']}.png" if os.path.exists(img) else None
+    for l in LADDERS:
+        img = os.path.join(IMG_DIR, "ex", f"ladder_{l['slug']}.png")
+        l["image"] = f"/biome-gallery/ex/ladder_{l['slug']}.png" if os.path.exists(img) else None
+        l["tokens"] = [l["token_fmt"].format(t=t) for t in range(1, 6)]
     data = {
         "title": "The biome",
         "subtitle": "Everything the living layer can grow. Each kingdom shot from its own gallery map: every algo at tiers 1, 3 and 5, a halo edge behind, a mute cell in front.",
         "grammar": "kingdom:algo:role[:mod=val…][:on=trigger:response[/response…]]",
-        "kingdoms": KINGDOMS, "examples": EXAMPLES, "roles": ROLES, "mods": MODS,
+        "kingdoms": KINGDOMS, "examples": EXAMPLES, "ladders": LADDERS,
+        "roles": ROLES, "mods": MODS,
         "triggers": TRIGGERS, "responses": RESPONSES, "meta": META,
     }
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
