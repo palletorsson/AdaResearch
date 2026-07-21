@@ -2,6 +2,17 @@ extends Node3D
 
 ## VR UI panel for ContextFreeGrammars
 ## Provides sliders and buttons to control grammar type, speed, and derivation stepping.
+##
+## SUPERSEDED 2026-07-21 — DO NOT RE-WIRE THIS SCRIPT.
+## context_free_grammars.tscn loads ContextFreeGrammars.gd alone; nothing in the
+## repo instantiates this node, so the pad and its two Label3Ds have never
+## existed in game. Under the cabinet grammar an artifact's interface is part of
+## its BODY, so the panel now lives in ContextFreeGrammars._mount_controls(),
+## seated on the wedge shoulder of the chart case's service band, and the two
+## floating Label3Ds became lines of the STATE readout inset in that band.
+## Attaching this script again would put a second, competing pad in the scene —
+## exactly the floating interface the ruling retired. Kept only so the path in
+## doc/startpacks/text-systems.json still resolves.
 
 var cfg_node: Node = null
 var _control_panel: Node3D

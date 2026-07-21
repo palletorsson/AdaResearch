@@ -8,7 +8,8 @@
   "Palle 2026-07-19: the overhead title is still not integrated",
   "Palle 2026-07-19: the buttons interface part need a wedge profile so it does not hang in the air",
   "Palle 2026-07-20: if the interface is horizontal then the integration also need to be in that thinking, so this feature is not transferable from the vertical kiosk",
-  "Palle 2026-07-20: learn from good artifacts, the second half of props-dna-gallery"
+  "Palle 2026-07-20: learn from good artifacts, the second half of props-dna-gallery",
+  "Palle 2026-07-21: run multi agent to upgrade more hero artifacts"
  ],
  "palette": {
   "_comment": "DEFERS TO THE KIT. These mirror HangarKit's constants so the checker and the code cannot disagree; the kit file is the source of truth. Change it there.",
@@ -106,7 +107,11 @@
     "three-bay rig",
     "specimen dock",
     "twin-bay comparison",
-    "billboard"
+    "billboard",
+    "gantry post",
+    "correspondence console",
+    "taxonomy vitrine",
+    "chart case"
    ]
   },
   "horizontal": {
@@ -123,7 +128,10 @@
     "footing": "apron + the furniture's own legs"
    },
    "bodies": [
-    "table console"
+    "table console",
+    "relief survey table",
+    "compression bench",
+    "plotting table"
    ]
   }
  },
@@ -276,6 +284,63 @@
    "scene": "res://algorithms/randomness/distribution_visualization/distribution_visualization.tscn",
    "propagation": 9,
    "kit": true
+  },
+  {
+   "artifact": "simulated_annealing",
+   "dialect": "horizontal",
+   "body": "relief survey table",
+   "scene": "res://algorithms/optimization/simulatedannealing/simulated_annealing_visualization.tscn",
+   "propagation": 10,
+   "kit": true
+  },
+  {
+   "artifact": "random_walk_leash",
+   "dialect": "vertical",
+   "body": "gantry post",
+   "scene": "res://algorithms/randomness/random_walk_leash/random_walk_leash.tscn",
+   "propagation": 11,
+   "kit": true
+  },
+  {
+   "artifact": "matrix_4x4_viewer",
+   "dialect": "vertical",
+   "body": "correspondence console",
+   "scene": "res://algorithms/transforms/matrix_viewer/matrix_4x4_viewer.tscn",
+   "propagation": 12,
+   "kit": true
+  },
+  {
+   "artifact": "rounded_softbody",
+   "dialect": "horizontal",
+   "body": "compression bench",
+   "scene": "res://algorithms/softbodies/rounded_softbody.tscn",
+   "propagation": 13,
+   "kit": true,
+   "_note": "registry name softbody_gallery_part2 resolves elsewhere; the upgrade landed on rounded_softbody.gd. rounded_softbody_test.tscn is a TEST HARNESS (own camera+light) and must not be the member — a harness in a map is the demo-as-artifact UI leak."
+  },
+  {
+   "artifact": "bias_visualizer",
+   "dialect": "vertical",
+   "body": "taxonomy vitrine",
+   "scene": "res://commons/artifacts/bias_visualizer/bias_visualizer.tscn",
+   "propagation": 14,
+   "kit": true
+  },
+  {
+   "artifact": "gradient_descent_visualization",
+   "dialect": "horizontal",
+   "body": "plotting table",
+   "scene": "res://algorithms/numericalmethods/gradientdescent/gradient_descent_visualization.tscn",
+   "propagation": 15,
+   "kit": true
+  },
+  {
+   "artifact": "ContextFreeGrammars",
+   "dialect": "vertical",
+   "body": "chart case",
+   "scene": "res://algorithms/lsystems/context_free_grammars/context_free_grammars.tscn",
+   "propagation": 16,
+   "kit": true
   }
  ],
  "queue": [],
@@ -313,5 +378,6 @@
   },
   "gotcha": "grime_band/dust_streaks bake their Z into position — assign .position.x/.y only. grime_band is an OPAQUE dirt shadow: it belongs at the BASE of a light body where dirt collects, never floating mid-body and never on a dark face (it reads as a hanging slab) or over a window (smears on the phenomenon). And derive the near-black 'dark' from a fixed value, not panel.darkened() — 0.55 lands at ~0.31 grey and washes out every pocket, plinth and apron in the family. grime_band is also a FLAT plate: on a cylindrical body it juts out as a slab instead of lying on the surface — round bodies take their age from banding (light mid-section between dark collars) and bolt rows instead."
  },
- "queue_note": "EMPTY — the randomness family is complete at 9 members. The original queue also listed trng_vs_prng and bell_alley, which do not exist in the repo; it was aspirational, not a work list. Check the artifact exists before queueing it."
+ "queue_note": "EMPTY — the randomness family is complete at 9 members. The original queue also listed trng_vs_prng and bell_alley, which do not exist in the repo; it was aspirational, not a work list. Check the artifact exists before queueing it.",
+ "_hero_wave": "2026-07-21: a 14-agent design->build pipeline upgraded 7 hero artifacts beyond the randomness family, selected by the transfer class-condition (floating text + a control panel + not yet on the kit) over the 196 tiered heroes. The agents chose the PLANE themselves: simulated_annealing, gradient_descent_visualization and rounded_softbody_test came back HORIZONTAL (landscapes/decks you look down at), and four named new bodies. NOTE softbody_gallery_part2 was NOT upgraded — the scan's .gd fallback mis-resolved it to rounded_softbody.gd, so rounded_softbody_test got the body instead."
 }

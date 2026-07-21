@@ -26,8 +26,43 @@ enum Mode { STRAIN, COLLISION, VOLUME }
 
 const MODE_NAMES := ["Strain Energy", "Collision Forces", "Volume Preservation"]
 
+# ── Cabinet grammar (HORIZONTAL dialect) ─────────────────────────────
+const BakedText = preload("res://commons/utils/baked_text_albedo.gd")
+const HangarKit = preload("res://commons/artifacts/_hangar/hangar_kit.gd")
+
+@export var show_cabinet: bool = true
+@export var finish: String = "rams"
+@export var wear: float = 0.10
+@export var unit_code: String = "RS-01"
+## How far the bench legs reach BELOW the deck plane. The grid's auto-grounding
+## lifts the assembly by exactly this, so the deck arrives at working height.
+@export var bench_drop: float = 0.84
+## The G3 datum. The working surface IS the artifact's own origin plane — the
+## specimen already lives above it — so the bench hangs below and not one
+## authored physics coordinate moves. probe_cabinet_grammar reads this property
+## by name; without it the rule silently falls back to 0.85 and never bites.
+@export var deck_height: float = 0.0
+## RESCUE FLAG, off by default — see _seat_specimen_on_deck().
+@export var seat_specimen: bool = false
+
 # Controls built via RackTemplates
 var _rack_panel: Node3D
+
+# ── Bench (housing) ──────────────────────────────────────────────────
+var _bench: Node3D = null
+var _readout_anchor: Node3D = null
+var _readout_node: Node3D = null
+var _readout_size := Vector2(0.52, 0.105)
+var _readout_last := ""
+var _readout_accum := 0.0
+var _mode_header := "STRAIN ENERGY"
+
+# Volume strip-chart geometry — free-standing defaults, overridden by the bench
+# builder which routes the chart FLAT into the deck.
+var _chart_origin := Vector3(0.8, 0.3, 0.0)
+var _chart_w := 0.6
+var _chart_h := 0.4
+var _chart_flat := false
 
 # ── Colors ───────────────────────────────────────────────────────────
 const COL_LOW_STRAIN := Color(0.15, 0.55, 0.95)     # blue — relaxed
@@ -117,6 +152,10 @@ func _ready() -> void:
 	_create_labels()
 	_create_controls()
 	_init_mode()
+	# LAST: the bench re-homes the keypad and the live figures onto itself.
+	# _capture_rest_state() awaits two process frames, so the deck collider
+	# built here exists well before the specimen's rest state is recorded.
+	_create_bench()
 
 
 # ── VR controller detection ─────────────────────────────────────────
@@ -232,6 +271,9 @@ func _capture_rest_state() -> void:
 	if not rid.is_valid():
 		return
 
+	if seat_specimen and show_cabinet:
+		_seat_specimen_on_deck()
+
 	_vertex_count = _soft_body.get_point_count()
 	_rest_positions.resize(_vertex_count)
 	_prev_positions.resize(_vertex_count)
@@ -291,7 +333,9 @@ func _create_mesh_instances() -> void:
 	mat_s.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	mat_s.vertex_color_use_as_albedo = true
 	mat_s.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-	mat_s.no_depth_test = true
+	# Depth-test ONLY in bare mode. With a bench under the specimen the strain
+	# diamonds would otherwise draw straight through the platen and the rails.
+	mat_s.no_depth_test = not show_cabinet
 	_strain_mi.material_override = mat_s
 	add_child(_strain_mi)
 
@@ -353,6 +397,13 @@ func _create_hand_visual() -> void:
 # ── Labels ───────────────────────────────────────────────────────────
 
 func _create_labels() -> void:
+	# BARE MODE ONLY. With the bench, the far-rail readout carries the live
+	# figures and the near-rail inlay carries the name — these three billboards
+	# hanging at y = 1.25 … 1.60 are exactly the orphan text the cabinet
+	# grammar exists to retire (G1).
+	if show_cabinet:
+		return
+
 	_label_title = Label3D.new()
 	_label_title.font_size = 48
 	_label_title.position = Vector3(0, 1.6, 0)
@@ -379,7 +430,11 @@ func _create_labels() -> void:
 
 func _create_controls() -> void:
 	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
-	_rack_panel = RackTpl.create_panel("SOFT BODY", [
+	# HORIZONTAL dialect: the milled pocket in the near rail IS the faceplate,
+	# so the pad is FRAMELESS and its title goes empty — the rail inlay owns
+	# the name. Bare mode keeps the old framed panel exactly as it was.
+	var pad_title: String = "" if show_cabinet else "SOFT BODY"
+	_rack_panel = RackTpl.create_panel(pad_title, [
 		[
 			{"type": "slider_h", "label": "STIFFNESS", "default": -1.0},
 			{"type": "slider_h", "label": "PRESSURE", "default": -1.0},
@@ -388,7 +443,9 @@ func _create_controls() -> void:
 		[
 			{"type": "button", "label": "MODE"},
 		],
-	])
+	], show_cabinet)
+	# Bare placement — hanging off the front-left corner BELOW the origin.
+	# _create_bench() re-homes it flush into the near rail.
 	_rack_panel.position = Vector3(-0.5, -0.3, 0.3)
 	_rack_panel.rotation_degrees = Vector3(-25, 0, 0)
 	add_child(_rack_panel)
@@ -449,12 +506,21 @@ func _init_mode() -> void:
 	_max_strain = 0.001
 	match _mode:
 		Mode.STRAIN:
-			_label_title.text = "Strain Energy"
+			_mode_header = "STRAIN ENERGY"
 		Mode.COLLISION:
-			_label_title.text = "Collision Forces"
+			_mode_header = "COLLISION FORCES"
 		Mode.VOLUME:
-			_label_title.text = "Volume Preservation"
+			_mode_header = "VOLUME PRESERVATION"
 			_volume_history.clear()
+
+	# The mode name used to be a billboard overhead; it is now the HEADER strip
+	# of the readout sunk in the far rail. The Label3D survives in bare mode.
+	if _label_title != null and is_instance_valid(_label_title):
+		_label_title.text = str(MODE_NAMES[_mode])
+
+	# Force the next refresh through the throttle so the header changes at once.
+	_readout_last = ""
+	_readout_accum = 99.0
 
 
 # ── Process loop ─────────────────────────────────────────────────────
@@ -474,7 +540,7 @@ func _process(delta: float) -> void:
 		_apply_volume_correction()
 
 	_draw_all()
-	_update_labels()
+	_refresh_readout(delta)
 
 	# Store previous positions
 	var rid := _soft_body.get_physics_rid()
@@ -714,44 +780,47 @@ func _draw_collision_forces() -> void:
 
 
 func _draw_volume_chart() -> void:
-	if _volume_history.size() < 2 or _rest_volume <= 0.0001:
+	if _rest_volume <= 0.0001:
 		return
-
-	# Draw chart to the right of the body
-	var chart_origin := Vector3(0.8, 0.3, 0)
-	var chart_w := 0.6
-	var chart_h := 0.4
 
 	_volume_im.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
 
-	# Chart background frame
-	_im_line_3d(_volume_im, chart_origin, chart_origin + Vector3(chart_w, 0, 0), COL_GRID)
-	_im_line_3d(_volume_im, chart_origin, chart_origin + Vector3(0, chart_h, 0), COL_GRID)
-
-	# Target line at 100%
-	var target_y := chart_origin.y + chart_h * 0.5
+	# Frame + the 100% target line, drawn even before there is history, so the
+	# routed deck channel reads as a live instrument and not an empty slot.
+	_im_line_3d(_volume_im, _chart_pt(0.0, 0.0), _chart_pt(_chart_w, 0.0), COL_GRID)
+	_im_line_3d(_volume_im, _chart_pt(0.0, 0.0), _chart_pt(0.0, _chart_h), COL_GRID)
 	_im_line_3d(_volume_im,
-		Vector3(chart_origin.x, target_y, 0),
-		Vector3(chart_origin.x + chart_w, target_y, 0),
+		_chart_pt(0.0, _chart_h * 0.5),
+		_chart_pt(_chart_w, _chart_h * 0.5),
 		COL_VOLUME_OK)
 
 	# Plot volume history
 	var n := _volume_history.size()
 	for i in range(1, n):
-		var x0 := chart_origin.x + (float(i - 1) / float(VOLUME_HISTORY_SIZE)) * chart_w
-		var x1 := chart_origin.x + (float(i) / float(VOLUME_HISTORY_SIZE)) * chart_w
+		var x0: float = (float(i - 1) / float(VOLUME_HISTORY_SIZE)) * _chart_w
+		var x1: float = (float(i) / float(VOLUME_HISTORY_SIZE)) * _chart_w
 
-		var r0 := _volume_history[i - 1] / maxf(_rest_volume, 0.0001)
-		var r1 := _volume_history[i] / maxf(_rest_volume, 0.0001)
+		var r0: float = _volume_history[i - 1] / maxf(_rest_volume, 0.0001)
+		var r1: float = _volume_history[i] / maxf(_rest_volume, 0.0001)
 
-		var y0 := chart_origin.y + clampf(r0 * 0.5, 0.0, 1.0) * chart_h
-		var y1 := chart_origin.y + clampf(r1 * 0.5, 0.0, 1.0) * chart_h
+		var y0: float = clampf(r0 * 0.5, 0.0, 1.0) * _chart_h
+		var y1: float = clampf(r1 * 0.5, 0.0, 1.0) * _chart_h
 
-		var deviation := absf(r1 - _volume_target_ratio)
-		var col := COL_VOLUME_OK if deviation < 0.05 else (COL_VOLUME_WARN if deviation < 0.15 else COL_VOLUME_BAD)
-		_im_line_3d(_volume_im, Vector3(x0, y0, 0), Vector3(x1, y1, 0), col)
+		var deviation: float = absf(r1 - _volume_target_ratio)
+		var col: Color = COL_VOLUME_OK if deviation < 0.05 else (COL_VOLUME_WARN if deviation < 0.15 else COL_VOLUME_BAD)
+		_im_line_3d(_volume_im, _chart_pt(x0, y0), _chart_pt(x1, y1), col)
 
 	_volume_im.surface_end()
+
+
+## One chart point in the artifact's LOCAL space. `u` runs the time axis, `v`
+## the value axis. On the bench the strip chart is ROUTED FLAT INTO THE DECK,
+## so the value axis lies in the deck plane (+Z, growing toward the reader)
+## instead of standing up in +Y beside the body.
+func _chart_pt(u: float, v: float) -> Vector3:
+	if _chart_flat:
+		return _chart_origin + Vector3(u, 0.0, v)
+	return _chart_origin + Vector3(u, v, 0.0)
 
 
 func _draw_volume_wireframe() -> void:
@@ -804,9 +873,63 @@ func _draw_squeeze_field() -> void:
 	_force_im.surface_end()
 
 
-# ── Label updates ────────────────────────────────────────────────────
+# ── Readout / label updates ──────────────────────────────────────────
+
+## The live figures. On the bench they are the body lines of the framed
+## instrument screen sunk in the far rail; in bare mode they fall back to the
+## old billboards. Baked text is fixed at build time and these floats move every
+## frame, so the screen is rebuilt at most 5x a second — rebuilding at 90 Hz
+## would tank the map.
+func _refresh_readout(delta: float) -> void:
+	if _readout_anchor == null or not is_instance_valid(_readout_anchor):
+		_update_labels()
+		return
+
+	_readout_accum += delta
+	if _readout_accum < 0.20:
+		return
+	_readout_accum = 0.0
+
+	var lines: Array = []
+	match _mode:
+		Mode.STRAIN:
+			lines.append("TOTAL %.4f" % _total_strain)
+			lines.append("PEAK  %.4f" % _max_strain)
+			lines.append("VERTS %d   K %.2f" % [_vertex_count, _stiffness])
+			if _hand_active:
+				lines.append("SQUEEZING")
+		Mode.COLLISION:
+			lines.append("EVENTS %d" % _collision_forces.size())
+			lines.append("K %.2f   P %.2f" % [_stiffness, _pressure])
+			lines.append("VERTS %d" % _vertex_count)
+		Mode.VOLUME:
+			var ratio: float = _current_volume / maxf(_rest_volume, 0.0001)
+			lines.append("VOL  %.1f%%" % (ratio * 100.0))
+			lines.append("TGT  %.0f%%" % (_volume_target_ratio * 100.0))
+			lines.append("CORR %.2f  P %.2f" % [
+				_volume_correction_strength, _soft_body.pressure_coefficient])
+
+	var joined: String = _mode_header
+	for l in lines:
+		joined += "\n" + str(l)
+	if joined == _readout_last and _readout_node != null and is_instance_valid(_readout_node):
+		return
+	_readout_last = joined
+
+	if _readout_node != null and is_instance_valid(_readout_node):
+		_readout_node.queue_free()
+		_readout_node = null
+
+	var pal: Dictionary = HangarKit.finish_palette(finish)
+	_readout_node = HangarKit.readout(_mode_header, lines, _readout_size,
+		pal["screen"], pal["text"], pal["header"])
+	if _readout_node != null:
+		_readout_anchor.add_child(_readout_node)
+
 
 func _update_labels() -> void:
+	if _label_info == null or not is_instance_valid(_label_info):
+		return
 	match _mode:
 		Mode.STRAIN:
 			_label_info.text = "Total strain: %.4f  Max: %.4f" % [_total_strain, _max_strain]
@@ -905,6 +1028,281 @@ func _im_arrow_3d(im: ImmediateMesh, origin: Vector3, dir: Vector3, length: floa
 	im.surface_add_vertex(tip)
 	im.surface_add_vertex(head_base + perp)
 	im.surface_add_vertex(head_base - perp)
+
+
+# ═════════════════════════════════════════════════════════════════════
+# THE COMPRESSION BENCH — cabinet grammar, HORIZONTAL dialect
+# ═════════════════════════════════════════════════════════════════════
+#
+# THE PLANE PICKS THE BODY. This artifact's desire is "to let you squeeze a
+# soft body with your VR hand and see the stress field bloom red under your
+# grip". The vertical dialect's defining move is a WINDOW — a dark backdrop
+# plus pale glass over the live phenomenon — and glass here would seal off the
+# one thing the artifact exists for. So the plane is horizontal: the field is
+# the deck itself, open to the hand from above, and the keypad is pressed
+# DOWNWARD, which is the squeeze gesture.
+#
+# NOT the canon "table console". A card table is a play field things move
+# ACROSS — thrown dice, felt, a rail as bumper. This is the opposite premise: a
+# specimen held STILL under your hand and measured. The deck is a collider and
+# a platen, the near rail is a wrist rest you lean on while pressing, and an
+# inlaid strip-chart channel runs the volume trace flat in the far strip. A
+# materials-test bench.
+#
+# THE FLOOR PLANE IS y = 0 (deck_height). The specimen already lives above the
+# origin, so the deck surface IS the artifact's own origin plane and the bench
+# hangs BELOW it, down to -bench_drop. Not one authored physics coordinate
+# changes; auto-grounding lifts the whole assembly and the deck arrives at
+# working height, putting the specimen's centre at ~1.15 m — hand height for a
+# squeeze instead of the ~0.30 m knee height it used to settle at.
+#
+# Translation table applied (never transfer, always translate):
+#   back slab             -> broad working RAIL ring around the deck
+#   maroon flank (a mass) -> maroon EDGE INLAY LINE under the rail's top edge
+#   inset window/screen   -> readout SUNK in the far rail, 14 deg off the deck
+#   sign band overhead    -> name INLAID FLAT in the near rail, read looking down
+#   keypad on a wedge     -> keypad recessed FLUSH in a milled pocket, face-up
+#   vent slats on a back  -> vents in the APRON, seen from below
+#   plinth + feet         -> apron + the furniture's own legs
+
+func _create_bench() -> void:
+	if not show_cabinet:
+		return
+
+	# Every dimension derives from the artifact's OWN variables, so the bench
+	# fits the specimen and the hand that squeezes it.
+	var reach: float = _size * 0.5 + _squeeze_radius       # how far the hand travels
+	var deck_w: float = reach * 2.0 + 0.04                 # rail lands at full squeeze
+	var platen_s: float = _size * 1.20                     # the specimen seat
+	var strip_d: float = _size * 0.28                      # instrument strip, each side
+	var deck_d: float = platen_s + strip_d * 2.0 + 0.04
+	var rail_far: float = _size * 0.34                     # deeper: it carries the screen
+	var rail_near: float = _size * 0.38                    # deeper still: you lean here
+	var rail_side: float = _size * 0.18
+	var rail_th: float = 0.055
+	var rail_top: float = deck_height + 0.048
+	var rail_y: float = rail_top - rail_th * 0.5
+	var outer_w: float = deck_w + rail_side * 2.0
+	var far_z: float = -(deck_d * 0.5 + rail_far * 0.5)
+	var near_z: float = deck_d * 0.5 + rail_near * 0.5
+	var z_out_far: float = -(deck_d * 0.5 + rail_far)
+	var z_out_near: float = deck_d * 0.5 + rail_near
+	var ring_cz: float = (z_out_far + z_out_near) * 0.5
+	var ring_d: float = z_out_near - z_out_far
+
+	_bench = Node3D.new()
+	_bench.name = "CompressionBench"
+	# The grammar probe scopes its rules by this meta (or the names Cabinet /
+	# TableConsole) — without it nothing here is measured.
+	_bench.set_meta("housing", true)
+	add_child(_bench)
+
+	# ── one word drives every colour ──
+	var pal: Dictionary = HangarKit.finish_palette(finish)
+	var col_body: Color = pal["body"]
+	var col_panel: Color = pal["panel"]
+	var col_accent: Color = pal["accent"]
+	var ew: float = float(pal["wear"]) if finish.to_lower() == "terminal" else wear
+	var shell: StandardMaterial3D = HangarKit.finish_body(finish, col_body, ew)
+	var deckmat: StandardMaterial3D = HangarKit.finish_body(finish, col_panel, ew)
+	var dark: StandardMaterial3D = HangarKit.painted_metal(Color(0.09, 0.09, 0.105), ew, 0.4, 0.5)
+	var maroon: StandardMaterial3D = HangarKit.painted_metal(Color(0.30, 0.11, 0.09), ew)
+	var steel: StandardMaterial3D = HangarKit.worn_metal(col_panel)
+	var accent: StandardMaterial3D = HangarKit.emissive(col_accent, 2.2)
+
+	# ── the working RAIL ring — the horizontal answer to the back slab ──
+	# Warm off-white dominates the mass.
+	_bench.add_child(HangarKit.box(Vector3(0.0, rail_y, far_z),
+		Vector3(outer_w, rail_th, rail_far), shell))
+	_bench.add_child(HangarKit.box(Vector3(0.0, rail_y, near_z),
+		Vector3(outer_w, rail_th, rail_near), shell))
+	for i in range(2):
+		var sx: float = -1.0 if i == 0 else 1.0
+		_bench.add_child(HangarKit.box(
+			Vector3(sx * (deck_w * 0.5 + rail_side * 0.5), rail_y, 0.0),
+			Vector3(rail_side, rail_th, deck_d), shell))
+
+	# ── maroon as an EDGE INLAY LINE, not a band ──
+	# The vertical flank is a MASS; laid flat on furniture the same mass becomes
+	# a stripe of paint. On a bench the colour is stated by a line.
+	var band_y: float = rail_top - 0.015
+	var band_h: float = 0.009
+	_bench.add_child(HangarKit.box(Vector3(0.0, band_y, z_out_far + 0.004),
+		Vector3(outer_w, band_h, 0.008), maroon))
+	_bench.add_child(HangarKit.box(Vector3(0.0, band_y, z_out_near - 0.004),
+		Vector3(outer_w, band_h, 0.008), maroon))
+	for i in range(2):
+		var sx2: float = -1.0 if i == 0 else 1.0
+		_bench.add_child(HangarKit.box(
+			Vector3(sx2 * (outer_w * 0.5 - 0.004), band_y, ring_cz),
+			Vector3(0.008, band_h, ring_d), maroon))
+
+	# ── the ember line (G7) — one warm line, framing the field ──
+	for i in range(2):
+		var sz: float = -1.0 if i == 0 else 1.0
+		_bench.add_child(HangarKit.box(
+			Vector3(0.0, rail_top + 0.001, sz * (deck_d * 0.5 + 0.014)),
+			Vector3(outer_w, 0.003, 0.006), accent))
+
+	# ── deck slab, platen, and the colliders that make the housing REAL ──
+	# The slab runs the full rail-ring footprint so the rails sit ON it instead
+	# of floating over a shadow gap; its top face is the deck plane.
+	_bench.add_child(HangarKit.box(Vector3(0.0, deck_height - 0.030, ring_cz),
+		Vector3(outer_w, 0.060, ring_d), deckmat))
+	# The near-black milled platen the specimen is pressed against. A pocket is
+	# where near-black is allowed, and it gives the strain diamonds a ground.
+	_bench.add_child(HangarKit.box(Vector3(0.0, deck_height + 0.006, 0.0),
+		Vector3(platen_s, 0.014, platen_s), dark))
+	# This is the whole argument for the horizontal dialect, made structural:
+	# _soft_body spawns at y = 0.5 and FALLS. It used to fall past the artifact
+	# onto the map floor; now it lands on the platen at hand height.
+	_bench.add_child(HangarKit.box_collider(
+		Vector3(platen_s, 0.060, platen_s),
+		Vector3(0.0, deck_height + 0.013 - 0.030, 0.0)))
+	_bench.add_child(HangarKit.box_collider(
+		Vector3(outer_w, 0.060, ring_d),
+		Vector3(0.0, deck_height - 0.030, ring_cz)))
+
+	# ── the volume strip chart, ROUTED FLAT INTO THE DECK ──
+	# It used to be a 2D graph hanging in mid-air off the +X side — the largest
+	# floating element on the artifact. Now it is an inlaid instrument channel
+	# in the far strip, directly beyond the readout, read by looking down.
+	_chart_flat = true
+	_chart_w = deck_w * 0.62
+	_chart_h = strip_d
+	_chart_origin = Vector3(-_chart_w * 0.5, deck_height + 0.003,
+		-deck_d * 0.5 + 0.010)
+	_bench.add_child(HangarKit.box(
+		Vector3(0.0, deck_height - 0.004, -deck_d * 0.5 + 0.010 + _chart_h * 0.5),
+		Vector3(_chart_w + 0.030, 0.010, _chart_h + 0.016), dark))
+
+	# ── READOUT sunk into the FAR rail, 14 deg off the deck ──
+	# Nearly flat: an inlaid instrument screen, read by looking down. Steeper
+	# than this and it stands up like a monitor — the vertical dialect wearing
+	# a table. The constants match dice_throw so the two horizontal bodies agree.
+	var tilt: float = -76.0
+	var norm := Vector3(0.0, 0.970, 0.242)        # screen face normal
+	var loc_up := Vector3(0.0, 0.242, -0.970)     # screen local up, in world
+	var scr_w: float = deck_w * 0.46
+	var scr_h: float = 0.105
+	var scr_c := Vector3(0.0, rail_top - 0.008, far_z)
+
+	# G6: a dark pocket within 0.03 m behind the lit face — a screen without one
+	# is a poster taped on.
+	var pocket: MeshInstance3D = HangarKit.box(scr_c - norm * 0.010,
+		Vector3(scr_w + 0.034, scr_h + 0.028, 0.014), dark)
+	pocket.rotation_degrees = Vector3(tilt, 0.0, 0.0)
+	_bench.add_child(pocket)
+
+	var lip: MeshInstance3D = HangarKit.box(
+		scr_c + loc_up * (scr_h * 0.5 + 0.005) + norm * 0.003,
+		Vector3(scr_w + 0.030, 0.004, 0.005), accent)
+	lip.rotation_degrees = Vector3(tilt, 0.0, 0.0)
+	_bench.add_child(lip)
+
+	_readout_anchor = Node3D.new()
+	_readout_anchor.name = "BenchReadout"
+	_readout_anchor.position = scr_c + norm * 0.004
+	_readout_anchor.rotation_degrees = Vector3(tilt, 0.0, 0.0)
+	_bench.add_child(_readout_anchor)
+	_readout_size = Vector2(scr_w, scr_h)
+
+	# ── NEAR rail: keypad recessed FLUSH in a milled pocket ──
+	var pad_pocket: MeshInstance3D = HangarKit.box(
+		Vector3(-deck_w * 0.28, rail_top + 0.008, deck_d * 0.5 + 0.100),
+		Vector3(0.40, 0.175, 0.012), dark)
+	pad_pocket.rotation_degrees = Vector3(-80.0, 0.0, 0.0)
+	_bench.add_child(pad_pocket)
+	if _rack_panel != null and is_instance_valid(_rack_panel):
+		# 10 degrees off the deck, pressed downward — the squeeze gesture.
+		_rack_panel.position = Vector3(-deck_w * 0.28, rail_top + 0.020,
+			deck_d * 0.5 + 0.102)
+		_rack_panel.rotation_degrees = Vector3(-80.0, 0.0, 0.0)
+		_rack_panel.scale = Vector3(0.80, 0.80, 0.80)
+
+	# ── the name INLAID FLAT in the near rail, read by looking down ──
+	var name_tag: Node3D = BakedText.make_tag(
+		"ROUNDED SOFTBODY", Color(0.93, 0.94, 0.97), 0.030,
+		Color(0.07, 0.075, 0.09), false, Color(0, 0, 0, 0))
+	if name_tag != null:
+		name_tag.position = Vector3(deck_w * 0.24, rail_top + 0.002, near_z - 0.032)
+		name_tag.rotation_degrees = Vector3(-90.0, 0.0, 0.0)
+		_bench.add_child(name_tag)
+	var name_sub: Node3D = BakedText.make_tag(
+		"STRAIN ENERGY FIELD", Color(0.58, 0.50, 0.44), 0.013,
+		Color(0.07, 0.075, 0.09), false, Color(0, 0, 0, 0))
+	if name_sub != null:
+		name_sub.position = Vector3(deck_w * 0.24, rail_top + 0.002, near_z + 0.008)
+		name_sub.rotation_degrees = Vector3(-90.0, 0.0, 0.0)
+		_bench.add_child(name_sub)
+
+	# A machine carries an asset code, not only a title.
+	var code: MeshInstance3D = HangarKit.stencil(unit_code, Vector2(0.11, 0.028),
+		col_accent.lightened(0.25))
+	if code != null:
+		code.position = Vector3(-outer_w * 0.5 + 0.075, rail_top + 0.002,
+			near_z + 0.058)
+		code.rotation_degrees = Vector3(-90.0, 0.0, 0.0)
+		_bench.add_child(code)
+
+	# ── APRON, vents seen from below, and a bolted near face ──
+	_bench.add_child(HangarKit.box(Vector3(0.0, deck_height - 0.125, ring_cz),
+		Vector3(outer_w - 0.09, 0.130, ring_d - 0.09), dark))
+	for gi in range(5):
+		_bench.add_child(HangarKit.box(
+			Vector3(0.0, deck_height - 0.170 + float(gi) * 0.013,
+				ring_cz + (ring_d - 0.09) * 0.5 + 0.002),
+			Vector3(0.30, 0.007, 0.008), steel))
+	_bench.add_child(HangarKit.bolts(
+		Vector3(-outer_w * 0.5 + 0.10, rail_y, z_out_near - 0.006),
+		Vector3(outer_w * 0.5 - 0.10, rail_y, z_out_near - 0.006),
+		9, 0.008, steel))
+	# No grime_band and no dust_streaks: the apron is already near-black, where
+	# an opaque dirt shadow reads as a slab hanging under the bench, and the
+	# legs are gapped posts a flat plate cannot lie across. Age comes from
+	# `wear` on the materials plus the bolt row — the ruling dice_throw made.
+
+	# ── LEGS and FEET: the furniture's own footing, never a second plinth ──
+	var leg_h: float = maxf(bench_drop - 0.190, 0.10)
+	for xi in range(2):
+		var lx: float = (-1.0 if xi == 0 else 1.0) * (outer_w * 0.5 - 0.115)
+		for zi in range(2):
+			var lz: float = ring_cz + (-1.0 if zi == 0 else 1.0) * (ring_d * 0.5 - 0.115)
+			_bench.add_child(HangarKit.box(
+				Vector3(lx, deck_height - 0.190 - leg_h * 0.5, lz),
+				Vector3(0.085, leg_h, 0.085), steel))
+			_bench.add_child(HangarKit.box(
+				Vector3(lx, deck_height - bench_drop + 0.011, lz),
+				Vector3(0.115, 0.022, 0.115), dark))
+
+	# Light the screen at once — _process bails until the soft body reports
+	# vertices, and a capture taken before then would show a blank face.
+	_refresh_readout(99.0)
+
+
+## RESCUE FLAG, off by default (`seat_specimen`). SoftBody3D simulates in GLOBAL
+## space. If the engine does not carry the simulated points when the grid's
+## auto-grounding translates the artifact, the specimen falls past the bench to
+## the map floor and ends up UNDER the deck. Flip this on only if the capture
+## shows that: it lifts every point (never drops one) until the lowest rests on
+## the platen, once, before the rest state is recorded.
+func _seat_specimen_on_deck() -> void:
+	var rid: RID = _soft_body.get_physics_rid()
+	if not rid.is_valid():
+		return
+	var n: int = _soft_body.get_point_count()
+	if n == 0:
+		return
+	var lowest: float = INF
+	for i in range(n):
+		lowest = minf(lowest, _soft_body.get_point_global_position(i).y)
+	var platen_top: float = to_global(Vector3(0.0, deck_height + 0.013, 0.0)).y
+	var lift: float = platen_top - lowest
+	if lift <= 0.02 or lift > 5.0:
+		return
+	for i in range(n):
+		var p: Vector3 = _soft_body.get_point_global_position(i)
+		PhysicsServer3D.soft_body_move_point(rid, i, p + Vector3(0.0, lift, 0.0))
 
 
 # ── Grid config ──────────────────────────────────────────────────────

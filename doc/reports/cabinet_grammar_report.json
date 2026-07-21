@@ -4,7 +4,7 @@
 			"artifact": "galton_board",
 			"body": "squat vending machine",
 			"dialect": "vertical",
-			"element_count": 195,
+			"element_count": 185,
 			"findings": [
 				{
 					"detail": "lowest element y = -0.600 (pedestal below origin)",
@@ -12,17 +12,17 @@
 					"rule": "G2-grounded"
 				},
 				{
-					"detail": "all 14 text nodes inside the body",
+					"detail": "all 5 text nodes inside the body",
 					"ok": true,
 					"rule": "G1-no-orphan-text"
 				},
 				{
-					"detail": "48 canon materials, no near-miss drift",
+					"detail": "45 canon materials, no near-miss drift",
 					"ok": true,
 					"rule": "G4-palette"
 				},
 				{
-					"detail": "keypad 0.860 above the floor contact (base y = -0.600)",
+					"detail": "keypad 0.875 above the floor contact (base y = -0.600)",
 					"ok": true,
 					"rule": "G5-reach"
 				},
@@ -66,7 +66,7 @@
 					"rule": "G5-reach"
 				},
 				{
-					"detail": "unpocketed: Cabinet/@Node3D@435/@MeshInstance3D@432",
+					"detail": "unpocketed: Cabinet/@Node3D@425/@MeshInstance3D@422",
 					"ok": false,
 					"rule": "G6-screen-seated"
 				},
@@ -82,7 +82,7 @@
 			"artifact": "distribution_comparator",
 			"body": "wide console",
 			"dialect": "vertical",
-			"element_count": 121,
+			"element_count": 118,
 			"findings": [
 				{
 					"detail": "lowest element y = -0.830 (pedestal below origin)",
@@ -95,7 +95,7 @@
 					"rule": "G1-no-orphan-text"
 				},
 				{
-					"detail": "40 canon materials, no near-miss drift",
+					"detail": "37 canon materials, no near-miss drift",
 					"ok": true,
 					"rule": "G4-palette"
 				},
@@ -173,7 +173,7 @@
 					"rule": "G1-no-orphan-text"
 				},
 				{
-					"detail": "deck 0.850, tallest 0.939 = TableConsole/@MeshInstance3D@803 (-0.011 vs the 0.10 allowance)",
+					"detail": "deck 0.850, tallest 0.939 = TableConsole/@MeshInstance3D@790 (-0.011 vs the 0.10 allowance)",
 					"ok": true,
 					"rule": "G3-silhouette"
 				},
@@ -256,7 +256,7 @@
 					"rule": "G1-no-orphan-text"
 				},
 				{
-					"detail": "13 canon materials, no near-miss drift",
+					"detail": "15 canon materials, no near-miss drift",
 					"ok": true,
 					"rule": "G4-palette"
 				},
@@ -282,7 +282,7 @@
 			"artifact": "galton_friction",
 			"body": "twin-bay comparison",
 			"dialect": "vertical",
-			"element_count": 254,
+			"element_count": 209,
 			"findings": [
 				{
 					"detail": "lowest element y = -1.150 (pedestal below origin)",
@@ -290,17 +290,17 @@
 					"rule": "G2-grounded"
 				},
 				{
-					"detail": "all 21 text nodes inside the body",
+					"detail": "all 26 text nodes inside the body",
 					"ok": true,
 					"rule": "G1-no-orphan-text"
 				},
 				{
-					"detail": "79 canon materials, no near-miss drift",
+					"detail": "36 canon materials, no near-miss drift",
 					"ok": true,
 					"rule": "G4-palette"
 				},
 				{
-					"detail": "keypad 1.279 above the floor contact (base y = -1.150)",
+					"detail": "keypad 1.286 above the floor contact (base y = -1.150)",
 					"ok": true,
 					"rule": "G5-reach"
 				},
@@ -310,7 +310,7 @@
 					"rule": "G6-screen-seated"
 				},
 				{
-					"detail": "5 ember elements",
+					"detail": "3 ember elements",
 					"ok": true,
 					"rule": "G7-accent-present"
 				}
@@ -339,8 +339,8 @@
 					"rule": "G4-palette"
 				},
 				{
-					"detail": "keypad 1.540 above the floor contact (base y = -4.040)",
-					"ok": false,
+					"detail": "keypad 1.340 above the floor contact (base y = -4.040)",
+					"ok": true,
 					"rule": "G5-reach"
 				},
 				{
@@ -354,9 +354,292 @@
 					"rule": "G7-accent-present"
 				}
 			],
-			"violations": 1
+			"violations": 0
+		},
+		{
+			"artifact": "simulated_annealing",
+			"body": "relief survey table",
+			"dialect": "horizontal",
+			"element_count": 98,
+			"findings": [
+				{
+					"detail": "lowest element y = 0.000",
+					"ok": true,
+					"rule": "G2-grounded"
+				},
+				{
+					"detail": "all 12 text nodes inside the body",
+					"ok": true,
+					"rule": "G1-no-orphan-text"
+				},
+				{
+					"detail": "deck 0.900, tallest 0.986 = TableConsole/@MeshInstance3D@1925 (-0.014 vs the 0.10 allowance)",
+					"ok": true,
+					"rule": "G3-silhouette"
+				},
+				{
+					"detail": "65 canon materials, no near-miss drift",
+					"ok": true,
+					"rule": "G4-palette"
+				},
+				{
+					"detail": "keypad 0.960 above the floor contact (base y = 0.000)",
+					"ok": true,
+					"rule": "G5-reach"
+				},
+				{
+					"detail": "1 glass panels, all pocketed",
+					"ok": true,
+					"rule": "G6-screen-seated"
+				},
+				{
+					"detail": "5 ember elements",
+					"ok": true,
+					"rule": "G7-accent-present"
+				}
+			],
+			"violations": 0
+		},
+		{
+			"artifact": "random_walk_leash",
+			"body": "gantry post",
+			"dialect": "vertical",
+			"element_count": 99,
+			"findings": [
+				{
+					"detail": "lowest element y = 0.000",
+					"ok": true,
+					"rule": "G2-grounded"
+				},
+				{
+					"detail": "all 11 text nodes inside the body",
+					"ok": true,
+					"rule": "G1-no-orphan-text"
+				},
+				{
+					"detail": "63 canon materials, no near-miss drift",
+					"ok": true,
+					"rule": "G4-palette"
+				},
+				{
+					"detail": "keypad 0.975 above the floor contact (base y = 0.000)",
+					"ok": true,
+					"rule": "G5-reach"
+				},
+				{
+					"detail": "0 glass panels, all pocketed",
+					"ok": true,
+					"rule": "G6-screen-seated"
+				},
+				{
+					"detail": "4 ember elements",
+					"ok": true,
+					"rule": "G7-accent-present"
+				}
+			],
+			"violations": 0
+		},
+		{
+			"artifact": "matrix_4x4_viewer",
+			"body": "correspondence console",
+			"dialect": "vertical",
+			"element_count": 121,
+			"findings": [
+				{
+					"detail": "lowest element y = -0.600 (pedestal below origin)",
+					"ok": true,
+					"rule": "G2-grounded"
+				},
+				{
+					"detail": "all 31 text nodes inside the body",
+					"ok": true,
+					"rule": "G1-no-orphan-text"
+				},
+				{
+					"detail": "55 canon materials, no near-miss drift",
+					"ok": true,
+					"rule": "G4-palette"
+				},
+				{
+					"detail": "0 glass panels, all pocketed",
+					"ok": true,
+					"rule": "G6-screen-seated"
+				},
+				{
+					"detail": "6 ember elements",
+					"ok": true,
+					"rule": "G7-accent-present"
+				}
+			],
+			"violations": 0
+		},
+		{
+			"artifact": "rounded_softbody",
+			"body": "compression bench",
+			"dialect": "horizontal",
+			"element_count": 83,
+			"findings": [
+				{
+					"detail": "lowest element y = -0.840 (pedestal below origin)",
+					"ok": true,
+					"rule": "G2-grounded"
+				},
+				{
+					"detail": "all 11 text nodes inside the body",
+					"ok": true,
+					"rule": "G1-no-orphan-text"
+				},
+				{
+					"detail": "deck 0.000, tallest 0.088 = CompressionBench/BenchReadout/Readout/@MeshInstance3D@2226 (-0.012 vs the 0.10 allowance)",
+					"ok": true,
+					"rule": "G3-silhouette"
+				},
+				{
+					"detail": "46 canon materials, no near-miss drift",
+					"ok": true,
+					"rule": "G4-palette"
+				},
+				{
+					"detail": "keypad 0.908 above the floor contact (base y = -0.840)",
+					"ok": true,
+					"rule": "G5-reach"
+				},
+				{
+					"detail": "0 glass panels, all pocketed",
+					"ok": true,
+					"rule": "G6-screen-seated"
+				},
+				{
+					"detail": "3 ember elements",
+					"ok": true,
+					"rule": "G7-accent-present"
+				}
+			],
+			"violations": 0
+		},
+		{
+			"artifact": "bias_visualizer",
+			"body": "taxonomy vitrine",
+			"dialect": "vertical",
+			"element_count": 184,
+			"findings": [
+				{
+					"detail": "lowest element y = -0.720 (pedestal below origin)",
+					"ok": true,
+					"rule": "G2-grounded"
+				},
+				{
+					"detail": "all 10 text nodes inside the body",
+					"ok": true,
+					"rule": "G1-no-orphan-text"
+				},
+				{
+					"detail": "58 canon materials, no near-miss drift",
+					"ok": true,
+					"rule": "G4-palette"
+				},
+				{
+					"detail": "keypad 0.885 above the floor contact (base y = -0.720)",
+					"ok": true,
+					"rule": "G5-reach"
+				},
+				{
+					"detail": "0 glass panels, all pocketed",
+					"ok": true,
+					"rule": "G6-screen-seated"
+				},
+				{
+					"detail": "4 ember elements",
+					"ok": true,
+					"rule": "G7-accent-present"
+				}
+			],
+			"violations": 0
+		},
+		{
+			"artifact": "gradient_descent_visualization",
+			"body": "plotting table",
+			"dialect": "horizontal",
+			"element_count": 181,
+			"findings": [
+				{
+					"detail": "lowest element y = -0.920 (pedestal below origin)",
+					"ok": true,
+					"rule": "G2-grounded"
+				},
+				{
+					"detail": "all 10 text nodes inside the body",
+					"ok": true,
+					"rule": "G1-no-orphan-text"
+				},
+				{
+					"detail": "deck 0.000, tallest 0.083 = TableConsole/InfoScreen/@Node3D@2601/@MeshInstance3D@2589 (-0.017 vs the 0.10 allowance)",
+					"ok": true,
+					"rule": "G3-silhouette"
+				},
+				{
+					"detail": "120 canon materials, no near-miss drift",
+					"ok": true,
+					"rule": "G4-palette"
+				},
+				{
+					"detail": "keypad 0.946 above the floor contact (base y = -0.920)",
+					"ok": true,
+					"rule": "G5-reach"
+				},
+				{
+					"detail": "1 glass panels, all pocketed",
+					"ok": true,
+					"rule": "G6-screen-seated"
+				},
+				{
+					"detail": "6 ember elements",
+					"ok": true,
+					"rule": "G7-accent-present"
+				}
+			],
+			"violations": 0
+		},
+		{
+			"artifact": "ContextFreeGrammars",
+			"body": "chart case",
+			"dialect": "vertical",
+			"element_count": 162,
+			"findings": [
+				{
+					"detail": "lowest element y = -1.560 (pedestal below origin)",
+					"ok": true,
+					"rule": "G2-grounded"
+				},
+				{
+					"detail": "all 11 text nodes inside the body",
+					"ok": true,
+					"rule": "G1-no-orphan-text"
+				},
+				{
+					"detail": "93 canon materials, no near-miss drift",
+					"ok": true,
+					"rule": "G4-palette"
+				},
+				{
+					"detail": "keypad 0.950 above the floor contact (base y = -1.560)",
+					"ok": true,
+					"rule": "G5-reach"
+				},
+				{
+					"detail": "0 glass panels, all pocketed",
+					"ok": true,
+					"rule": "G6-screen-seated"
+				},
+				{
+					"detail": "8 ember elements",
+					"ok": true,
+					"rule": "G7-accent-present"
+				}
+			],
+			"violations": 0
 		}
 	],
 	"canon_version": 1.0,
-	"total_violations": 2
+	"total_violations": 1
 }

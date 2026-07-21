@@ -78,7 +78,7 @@ func _probe(entry: Dictionary, palette: Dictionary) -> Dictionary:
 	await process_frame
 	await process_frame
 
-	if inst.get_script() == null:
+	if not _has_any_script(inst):
 		out["findings"] = [{"rule": "-", "ok": false,
 			"detail": "scene instantiated SCRIPTLESS — the .gd failed to compile"}]
 		out["violations"] = 1
@@ -305,6 +305,18 @@ func _short(n: Node) -> String:
 ## `in_housing` tracks whether we are inside the Cabinet / TableConsole
 ## subtree — the part the grammar governs. Baked text tags are skipped for
 ## material purposes: their backing plates are typography, not housing.
+## A composed scene (a harness, or a wrapper instancing the real artifact) can
+## legitimately have an UNSCRIPTED root — only a subtree with no script at all
+## means the .gd failed to compile. (Probe false positive, 2026-07-21.)
+func _has_any_script(n: Node) -> bool:
+	if n.get_script() != null:
+		return true
+	for c in n.get_children():
+		if _has_any_script(c):
+			return true
+	return false
+
+
 func _walk(n: Node, meshes: Array, texts: Array, mats: Array,
 		housing: Array, in_housing: bool, in_tag: bool = false) -> void:
 	var nm: String = str(n.name)
