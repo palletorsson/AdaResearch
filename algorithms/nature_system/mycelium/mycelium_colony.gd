@@ -39,6 +39,13 @@ const MorphoSweepClass = preload("res://algorithms/nature_system/morphology/morp
 @export var rng_seed: int = 20260721         # per-cell seed at biome scale
 @export var color_hypha: Color = Color(0.62, 0.85, 0.78)
 @export var draw_spores: bool = true
+# milestone 3 — the batch. Every hypha is a DIFFERENT taper (radius comes from
+# subtree weight), and an affine per-instance transform cannot vary a taper
+# ratio, so a shared-mesh MultiMesh would flatten every strand to a cylinder and
+# throw away the one thing this substrate exists for. Instead the swept tubes
+# are MERGED into a single ArrayMesh: exact tapers kept, one node, one draw call.
+# Spores are uniform spheres, so they DO batch as a MultiMesh.
+@export var budget_segments: int = 2400      # 0 = unbounded; clamp thins by even stride
 
 var _rng := RandomNumberGenerator.new()
 
@@ -53,10 +60,57 @@ func _ready() -> void:
 	_grow(attractors)
 	var weight: Array[float] = _subtree_weights()
 	var radius: Array[float] = _radii(weight)
-	for i in range(1, _nodes.size()):
-		_render_hypha(_nodes[_parent[i]], _nodes[i], radius[_parent[i]], radius[i])
+	_render_web(radius)
 	if draw_spores:
 		_render_spores(weight, radius)
+
+
+# --- milestone 3: the batch --------------------------------------------------
+# One merged ArrayMesh for the whole web. SurfaceTool.append_from copies each
+# swept tube's surface in, so the per-strand taper survives batching; the node
+# count stops scaling with the colony (thousands -> one).
+
+func _render_web(radius: Array[float]) -> void:
+	var idx: Array[int] = []
+	for i in range(1, _nodes.size()):
+		if _nodes[_parent[i]].distance_squared_to(_nodes[i]) > 0.0000001:
+			idx.append(i)
+	var wanted: int = idx.size()
+	if budget_segments > 0 and wanted > budget_segments:
+		# even-stride thinning, deterministic and spatially uniform (biome-6's rule)
+		var keep: Array[int] = []
+		var stride: float = float(wanted) / float(budget_segments)
+		for k in range(budget_segments):
+			keep.append(idx[int(floor(float(k) * stride))])
+		idx = keep
+		print("MyceliumColony: BUDGET CLAMP — %d hyphae wanted, budget %d, kept %d (dropped %d, even stride)" % [
+			wanted, budget_segments, idx.size(), wanted - idx.size()])
+	var st := SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	var merged_in: int = 0
+	for i in idx:
+		var mesh: Mesh = _hypha_mesh(_nodes[_parent[i]], _nodes[i], radius[_parent[i]], radius[i])
+		if mesh == null or mesh.get_surface_count() == 0:
+			continue
+		st.append_from(mesh, 0, Transform3D.IDENTITY)
+		merged_in += 1
+	if merged_in == 0:
+		return
+	var web := MeshInstance3D.new()
+	web.name = "MyceliumWeb"
+	web.mesh = st.commit()
+	web.material_override = _hypha_material()
+	add_child(web)
+	print("MyceliumColony: %d hyphae merged into 1 mesh node (tapers preserved)" % merged_in)
+
+
+## One hypha as a tapering swept tube — the mesh only; the caller merges it.
+func _hypha_mesh(a: Vector3, b: Vector3, r_from: float, r_to: float) -> Mesh:
+	return MorphoSweepClass.sweep(
+		MorphoSweepClass.profile_circle(6),
+		MorphoSweepClass.path_line(a, b),
+		MorphoSweepClass.radius_taper(r_from, r_to),
+		0.0, 4, false)
 
 
 # --- the food ----------------------------------------------------------------
@@ -200,22 +254,6 @@ func _radii(weight: Array[float]) -> Array[float]:
 
 # --- the render (same MorphoSweep path the spike proved) ---------------------
 
-func _render_hypha(a: Vector3, b: Vector3, r_from: float, r_to: float) -> void:
-	if a.distance_squared_to(b) < 0.0000001:
-		return
-	var mesh: Mesh = MorphoSweepClass.sweep(
-		MorphoSweepClass.profile_circle(6),
-		MorphoSweepClass.path_line(a, b),
-		MorphoSweepClass.radius_taper(r_from, r_to),
-		0.0, 4, false)
-	if mesh == null:
-		return
-	var mi := MeshInstance3D.new()
-	mi.mesh = mesh
-	mi.material_override = _hypha_material()
-	add_child(mi)
-
-
 var _mat_cache: StandardMaterial3D = null
 
 func _hypha_material() -> StandardMaterial3D:
@@ -239,17 +277,32 @@ func _render_spores(weight: Array[float], radius: Array[float]) -> void:
 	mat.emission_enabled = true
 	mat.emission = glow
 	mat.emission_energy_multiplier = 2.0
+	# Spores are uniform spheres, so unlike the tapering hyphae they batch:
+	# ONE unit sphere, per-instance transforms scaling each tip's radius.
+	var tips: Array[int] = []
 	for i in range(1, _nodes.size()):
-		if weight[i] > 1.5:
-			continue
-		var mi := MeshInstance3D.new()
-		var sm := SphereMesh.new()
+		if weight[i] <= 1.5:
+			tips.append(i)
+	if tips.is_empty():
+		return
+	var unit := SphereMesh.new()
+	unit.radius = 1.0
+	unit.height = 2.0
+	unit.radial_segments = 6
+	unit.rings = 4
+	var mm := MultiMesh.new()
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	mm.mesh = unit
+	mm.instance_count = tips.size()
+	for k in tips.size():
+		var i: int = tips[k]
 		var r: float = radius[i] * 1.7
-		sm.radius = r
-		sm.height = r * 2.0
-		sm.radial_segments = 6
-		sm.rings = 4
-		mi.mesh = sm
-		mi.material_override = mat
-		mi.position = _nodes[i]
-		add_child(mi)
+		var xf := Transform3D.IDENTITY.scaled(Vector3(r, r, r))
+		xf.origin = _nodes[i]
+		mm.set_instance_transform(k, xf)
+	var mmi := MultiMeshInstance3D.new()
+	mmi.name = "MyceliumSpores"
+	mmi.multimesh = mm
+	mmi.material_override = mat
+	add_child(mmi)
+	print("MyceliumColony: %d spores batched into 1 MultiMesh node" % tips.size())

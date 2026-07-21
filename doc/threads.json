@@ -802,7 +802,7 @@
     "\b(mycelium|myceli|hypha|hyphae|filament|space.?coloni[sz]ation|morpho.?sweep)\b"
    ],
    "progress": {
-    "done": 2,
+    "done": 3,
     "total": 6,
     "unit": "milestones"
    },
@@ -821,8 +821,9 @@
     },
     {
      "id": "mycelium-3",
-     "text": "Batch the tube segments into MultiMesh under the biome-6 per-map budget; O(kingdoms) nodes + a negative budget-clamp test (a colony is hundreds of segments — batching is mandatory).",
-     "done": false
+     "text": "Batch the tube segments into MultiMesh under the biome-6 per-map budget; O(kingdoms) nodes + a negative budget-clamp test (a colony is hundreds of segments — batching is mandatory). — DONE 2026-07-21: NOT a shared-mesh MultiMesh — every hypha has a DIFFERENT taper (radius from subtree weight) and an affine per-instance transform cannot vary a taper ratio, so a shared mesh would flatten every strand to a cylinder and throw away the thing the substrate exists for. Instead SurfaceTool.append_from MERGES the swept tubes into ONE ArrayMesh (exact tapers kept, 1 node, 1 draw call); spores ARE uniform so they batch as a real MultiMesh. budget_segments clamps by even stride with an honest print. probe_mycelium_batch.gd 9/9: 2 children for a 500-node colony AND for a 1600-node one (O(1) not O(segments)), geometry survives the merge, clamp bites (20730->3600 verts) and is deterministic. Capture confirms the look is unchanged.",
+     "done": true,
+     "completed": "2026-07-21"
     },
     {
      "id": "mycelium-4",
