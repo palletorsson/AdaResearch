@@ -462,6 +462,81 @@
     "bricolage"
    ],
    "qfep_connection": "What triangulated struts want to become. Nobody designed this curve: someone chose a seed solid and a subdivision frequency, and the sphere did the rest. It is the constraint room's lesson repeated over a whole surface — every quad would hinge, every triangle cannot — and it is bricolage formalised, the point where recombination stops being improvisation and becomes a method you can hand to someone else."
+  },
+  "counterweight_demo": {
+   "name": "Counterweight",
+   "lookup_name": "counterweight_demo",
+   "description": "A beam on a fulcrum: the large mass close in, the small mass far out — the lever law, sized so the arithmetic holds.",
+   "scene": "res://commons/artifacts/sculpture_kit/sculpture_kit.tscn",
+   "category": "bricolage",
+   "artifact_type": "demonstration",
+   "complexity": "intermediate",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "bricolage"
+   ],
+   "qfep_connection": "The principle the whole room negotiates with: mass times distance, both sides, equal. The big block sits a quarter of the way out because it is four times the volume of the small one — the beam is not balanced by care, it is balanced by arithmetic. What the sculptor gets in return is everything else: once that one number is satisfied, the form above the fulcrum is free."
+  },
+  "tension_demo": {
+   "name": "Tension",
+   "lookup_name": "tension_demo",
+   "description": "The same load held two ways — a thin tie pulling from above, a thick strut pushing from below.",
+   "scene": "res://commons/artifacts/sculpture_kit/sculpture_kit.tscn",
+   "category": "bricolage",
+   "artifact_type": "demonstration",
+   "complexity": "intermediate",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "bricolage"
+   ],
+   "qfep_connection": "A tie pulls where a strut pushes. Both carry the same load, and the tie can be a fraction of the thickness because pulling never buckles — which is why suspension outperforms propping wherever you can hang instead of stack. Set side by side, the pair explains why sculpture that hangs looks impossibly thin and is not cheating."
+  },
+  "sculpture_builder": {
+   "name": "Sculpture Bench",
+   "lookup_name": "sculpture_builder",
+   "description": "The fulcrum with a composition part-made, the remaining parts still loose on the pad.",
+   "scene": "res://commons/artifacts/sculpture_kit/sculpture_kit.tscn",
+   "category": "bricolage",
+   "artifact_type": "demonstration",
+   "complexity": "intermediate",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "bricolage"
+   ],
+   "qfep_connection": "Balance caught mid-negotiation: a beam resting askew, one mass placed, three more waiting. This is the honest state of the practice — you do not calculate a sculpture and then build it, you place, watch it tip, and move something. The bench is where the constraint stops being a rule and becomes a conversation."
+  },
+  "balanced_sculpture_1": {
+   "name": "Work I",
+   "lookup_name": "balanced_sculpture_1",
+   "description": "A finished piece balanced the counterweight way: a heavy mass near the post, a long arm reaching to a small one.",
+   "scene": "res://commons/artifacts/sculpture_kit/sculpture_kit.tscn",
+   "category": "bricolage",
+   "artifact_type": "demonstration",
+   "complexity": "intermediate",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "bricolage"
+   ],
+   "qfep_connection": "The first solution — the lever answer. A tall mass sits close to the post and a long arm reaches out to a small one, with an accent hung below to settle it. It reads as asymmetric and is exactly balanced; the eye registers imbalance and the arithmetic disagrees. That gap is where the pleasure of the form lives."
+  },
+  "balanced_sculpture_2": {
+   "name": "Work II",
+   "lookup_name": "balanced_sculpture_2",
+   "description": "The other solution: three members leaning into one another, none of which stands alone.",
+   "scene": "res://commons/artifacts/sculpture_kit/sculpture_kit.tscn",
+   "category": "bricolage",
+   "artifact_type": "demonstration",
+   "complexity": "intermediate",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "bricolage"
+   ],
+   "qfep_connection": "The second answer to the same problem, and it shares no strategy with the first. Three members lean into a shared cap; remove any one and the other two fall. Nothing here is counterweighted — the balance is mutual, meaning through relation exactly as the room's title claims. Two works, both upright, disagreeing about how: which is what makes balance a craft and not a rule."
   }
  }
 }
