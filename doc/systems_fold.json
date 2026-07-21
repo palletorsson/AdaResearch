@@ -429,7 +429,7 @@
     {
      "id": "edge-compose-strategy",
      "title": "Composition strategies",
-     "detail": "Three families under one judge — search (script_compose), grown (germinate), hybrid (germinate --axis) — and a temperament selector: compose_auto.py runs all three per map and keeps the winner as Auto_<Map>, every family's score recorded in the manifest (place.py's no-winner lesson, taught to composition). Transformation: search 4 / grown 3; grown fixed both maps search was stuck on (Spectacle 7.95, Translation 5.65).",
+     "detail": "Three families under one judge — search (script_compose), grown (germinate), hybrid (germinate --axis) — and a temperament selector: compose_auto.py runs all three per map and keeps the winner as Auto_<Map>, every family's score recorded in the manifest (place.py's no-winner lesson, taught to composition). Temperaments are CHAPTER-SHAPED: transformation search 4 / grown 3; primitives INVERTS to grown 6 / search 2 / hybrid 1 (Melencolia grown 7.87 vs search 6.07). Grown fixed every map search was stuck on. Aggregate 16 maps: grown 9 / search 6 / hybrid 1.",
      "paths": [
       "tools/compose_auto.py",
       "tools/germinate.py",
