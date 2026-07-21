@@ -34,6 +34,10 @@ const BotanicalFlowerScene = preload("res://commons/flora/botanical_flower.tscn"
 # We instantiate it per painted u-cell and downsize the grid so each
 # CA cluster fits a single biome cell (~0.5–1.0m).
 const MoldNetworkScene = preload("res://algorithms/cellularautomata/cellular_automata_3d/MoldNetwork.tscn")
+# The second fungus substrate (mycelium milestone 4): space-colonised filaments
+# rendered as tapering MorphoSweep tubes, merged into one mesh. Only reached by
+# cells that declare `fungus:mycelium`, so the CA path is untouched.
+const MyceliumColonyScene = preload("res://algorithms/nature_system/mycelium/mycelium_colony.tscn")
 # TreeMorphology.build takes a CritterDNA + CritterTraitMapper and
 # produces a real DNA-driven L-system tree. Both are RefCounteds we
 # construct on demand. The mapper is shared (one per dispatcher),
@@ -225,6 +229,15 @@ func _spawn_flower(deposit: Dictionary, ctx: Dictionary,
 # stays sub-meter.
 func _spawn_fungus(deposit: Dictionary, ctx: Dictionary,
 		parent: Node3D) -> void:
+	# ALGO BRANCH (mycelium milestone 4). The fungus kingdom has two substrates:
+	#   ca       — the MoldNetwork CA, gen-frozen as a spreading voxel network
+	#   mycelium — space-colonised filaments (curve renderer; the CA cannot hold
+	#              hair-thin tapering strands, which is why the substrate exists)
+	# Anything else (including the painted layer, which declares no algo) keeps
+	# the CA — additive: existing fungus:ca maps render byte-identical.
+	if String(deposit.get("algo", "")) == "mycelium":
+		_spawn_mycelium(deposit, ctx, parent)
+		return
 	var strength: float = float(deposit.get("strength", 1.0))
 	var intensity: int = clampi(int(round(strength * 5.0)), 1, 5)
 	# Scale params from biome_config.json:intensity_scaling.fungus —
@@ -270,6 +283,40 @@ func _spawn_fungus(deposit: Dictionary, ctx: Dictionary,
 	# add_child before global_position (see _spawn_flower note).
 	parent.add_child(mold)
 	mold.global_position = _cell_to_world(deposit, ctx)
+
+
+# Mycelium substrate — space-colonised filaments (fungus:mycelium).
+#
+# The showcase colony is tuned for a single hero capture (900 attractors, 2600
+# nodes, ~12 s). A biome cell cannot pay that: a map may hold dozens of fungus
+# cells, and each one generates at load. So the biome sizes the colony DOWN and
+# scales it by the cell's own mods:
+#   t= tier    → colony radius, node ceiling, food count (a bigger, older mat)
+#   d= density → attractor count (how densely the web fills its disc)
+#   gen=       → growth steps (an arrested colony vs a finished one)
+# The seed is per-cell so neighbouring mats differ but a map reloads identically.
+func _spawn_mycelium(deposit: Dictionary, ctx: Dictionary,
+		parent: Node3D) -> void:
+	var strength: float = float(deposit.get("strength", 1.0))
+	var intensity: int = clampi(int(round(strength * 5.0)), 1, 5)
+	var density: float = clampf(float(deposit.get("density", 1.0)), 0.05, 1.0)
+	var cx: int = int(deposit.get("x", 0))
+	var cz: int = int(deposit.get("z", 0))
+
+	var colony: Node3D = MyceliumColonyScene.instantiate()
+	# biome-scale geometry — a mat that sits in its cell, not a hero specimen
+	colony.colony_radius = 0.34 + 0.13 * float(intensity)
+	colony.attractor_count = int(round((60.0 + 45.0 * float(intensity)) * density))
+	colony.max_nodes = 150 + 110 * intensity
+	colony.max_steps = 220 + 40 * intensity
+	colony.budget_segments = 900          # per-cell ceiling; clamp prints if hit
+	colony.rng_seed = hash("mycelium:%d,%d" % [cx, cz]) & 0x7FFFFFFF
+	var gen: String = String(deposit.get("gen", ""))
+	if gen.is_valid_int():
+		colony.max_steps = maxi(20, int(gen) * 12)
+	# add_child runs _ready (which grows + renders), then we place the whole node
+	parent.add_child(colony)
+	colony.global_position = _cell_to_world(deposit, ctx)
 
 
 # Tree kingdom — wraps TreeMorphology.build (production DNA-driven

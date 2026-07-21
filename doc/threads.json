@@ -802,7 +802,7 @@
     "\b(mycelium|myceli|hypha|hyphae|filament|space.?coloni[sz]ation|morpho.?sweep)\b"
    ],
    "progress": {
-    "done": 3,
+    "done": 4,
     "total": 6,
     "unit": "milestones"
    },
@@ -827,8 +827,9 @@
     },
     {
      "id": "mycelium-4",
-     "text": "Wire into biome_paint_dispatcher._spawn_fungus as the `fungus:mycelium` algo branch; additive negative test (fungus:ca maps byte-identical); reuse t=/d=/gen= mods (tier->radius, density->attractor count, gen->iterations) + per-cell deterministic seed & jitter.",
-     "done": false
+     "text": "Wire into biome_paint_dispatcher._spawn_fungus as the `fungus:mycelium` algo branch; additive negative test (fungus:ca maps byte-identical); reuse t=/d=/gen= mods (tier->radius, density->attractor count, gen->iterations) + per-cell deterministic seed & jitter. — DONE 2026-07-21: _spawn_fungus branches on the ALGO — `mycelium` routes to the colony, anything else (incl. the painted layer, which declares no algo) keeps the CA. Deposit gained algo + density. Biome-scale sizing: the showcase colony (900 attractors/2600 nodes/~12s) is far too slow per cell, so t= drives radius/nodes/food, d= the attractor count, gen= the growth steps, seed hashed per cell. probe_mycelium_dispatch.gd 9/9 incl. the ADDITIVE NEGATIVE (fungus:ca still renders its voxel MultiMesh and produces NO web). Gate map Biome_MyceliumTest: the CA beside four filament mats, all different. TEST GOTCHA: vert count measures SIZE not shape (two colonies both hitting max_nodes have identical counts) — fingerprint by mesh AABB. Probes must run at stage_order 99 or the curriculum guard locks the kingdom and nothing spawns.",
+     "done": true,
+     "completed": "2026-07-21"
     },
     {
      "id": "mycelium-5",
