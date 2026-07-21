@@ -92,6 +92,46 @@ RESPONSES = [
     {"response": "mutate.<channel>", "what": "route into the mutator stack — colour, visibility, transform, glyph, part. NOTE the dot: ':' is the token separator"},
 ]
 
+# The principals: every distinct thing the layer can grow, one token each,
+# each shot alone on the scratch stage (tools/capture_biome_principals.py).
+# group: substrate (seeds), halo (the rim spill per kingdom), vacuum.
+EXAMPLES = [
+    {"slug": "flora_tree", "group": "substrate", "token": "flora:lsystem:seed:t=4",
+     "caption": "the tree — DNA-driven L-system morphology"},
+    {"slug": "flora_flower", "group": "substrate", "token": "flora:scatter:seed:t=3",
+     "caption": "the flower — botanical preset by tier"},
+    {"slug": "fungus_ca", "group": "substrate", "token": "fungus:ca:seed:t=5",
+     "caption": "the voxel network — CA frozen at its spreading front"},
+    {"slug": "fungus_ca_tuned", "group": "substrate", "token": "fungus:ca:seed:rule=4-6/5-7/10/M:gen=16",
+     "caption": "the same CA, per-cell rule= and gen= — visibly computed"},
+    {"slug": "fungus_mycelium", "group": "substrate", "token": "fungus:mycelium:seed:t=5:d=1.0",
+     "caption": "the mycelium web — space-colonised tapering filaments"},
+    {"slug": "fungus_mycelium_sparse", "group": "substrate", "token": "fungus:mycelium:seed:t=5:d=0.3",
+     "caption": "the same web, thinned by d="},
+    {"slug": "fauna_grub", "group": "substrate", "token": "fauna:dna:seed:t=4",
+     "caption": "the creature — a cell-sized DNA grub"},
+    {"slug": "mineral_crystal", "group": "substrate", "token": "mineral:vein:seed:t=4",
+     "caption": "the crystal cluster — faceted prisms, inner light"},
+    {"slug": "water_pool", "group": "substrate", "token": "water:pool:seed:t=4",
+     "caption": "the pool — reflective disc, ripple rings, reeds"},
+    {"slug": "meta_glyph", "group": "substrate", "token": "meta:glyph:seed:t=4",
+     "caption": "the glyph — a hovering rune of light, not alive"},
+    {"slug": "halo_flora", "group": "halo", "token": "flora:scatter:halo:d=0.8",
+     "caption": "flora spills off the rim — grass and blooms into the dark"},
+    {"slug": "halo_fungus", "group": "halo", "token": "fungus:scatter:halo:d=0.8",
+     "caption": "fungus rim — mushroom caps thinning outward"},
+    {"slug": "halo_fauna", "group": "halo", "token": "fauna:scatter:halo:d=0.8",
+     "caption": "fauna rim — earthy mounds at the edge"},
+    {"slug": "halo_mineral", "group": "halo", "token": "mineral:scatter:halo:d=0.8",
+     "caption": "mineral rim — scattered stones"},
+    {"slug": "halo_water", "group": "halo", "token": "water:scatter:halo:d=0.8",
+     "caption": "water rim — reeds at the shore"},
+    {"slug": "halo_meta", "group": "halo", "token": "meta:scatter:halo:d=0.8",
+     "caption": "meta rim — small lights past the edge"},
+    {"slug": "mute", "group": "vacuum", "token": "::mute",
+     "caption": "the declared vacuum — nothing grows here on purpose; a reaction can open it"},
+]
+
 META = [
     {"key": "budget_instances", "what": "cap on batched instances; over budget the layer thins by even stride and says so"},
     {"key": "visibility_range", "what": "GPU culling distance for every batch"},
@@ -105,18 +145,23 @@ def main() -> int:
         img = os.path.join(IMG_DIR, f"{k['id']}.png")
         k["image"] = f"/biome-gallery/{k['id']}.png" if os.path.exists(img) else None
         k["map"] = f"Biome_Gallery_{k['id'].capitalize()}"
+    for e in EXAMPLES:
+        img = os.path.join(IMG_DIR, "ex", f"{e['slug']}.png")
+        e["image"] = f"/biome-gallery/ex/{e['slug']}.png" if os.path.exists(img) else None
     data = {
         "title": "The biome",
         "subtitle": "Everything the living layer can grow. Each kingdom shot from its own gallery map: every algo at tiers 1, 3 and 5, a halo edge behind, a mute cell in front.",
         "grammar": "kingdom:algo:role[:mod=val…][:on=trigger:response[/response…]]",
-        "kingdoms": KINGDOMS, "roles": ROLES, "mods": MODS,
+        "kingdoms": KINGDOMS, "examples": EXAMPLES, "roles": ROLES, "mods": MODS,
         "triggers": TRIGGERS, "responses": RESPONSES, "meta": META,
     }
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     with open(OUT, "w", encoding="utf-8", newline="\n") as f:
         json.dump(data, f, indent=1, ensure_ascii=False)
     shot = sum(1 for k in KINGDOMS if k["image"])
+    ex_shot = sum(1 for e in EXAMPLES if e["image"])
     print(f"biome_gallery.json: {len(KINGDOMS)} kingdoms ({shot} captured), "
+          f"{len(EXAMPLES)} principals ({ex_shot} captured), "
           f"{len(ROLES)} roles, {len(TRIGGERS)} triggers -> {OUT}")
     return 0
 

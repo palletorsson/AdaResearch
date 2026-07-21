@@ -7,6 +7,13 @@
       "runtimeArgs": ["/c", "cd /d C:\\Users\\palle\\Documents\\GitHub\\ada_encyclopedia && npm run dev"],
       "port": 3003,
       "autoPort": false
+    },
+    {
+      "name": "encyclopedia-alt",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": ["/c", "cd /d C:\\Users\\palle\\Documents\\GitHub\\ada_encyclopedia && npx next dev -p 3013"],
+      "port": 3013,
+      "autoPort": false
     }
   ]
 }
