@@ -412,6 +412,13 @@ func _run_artifact_capture() -> void:
 		quit(1)
 		return
 
+	# Stamp the lookup name BEFORE _ready(), the same contract the grid honours
+	# (GridInteractablesComponent). One-scene-many-names artifacts (array_probe,
+	# specimen_plinth, the bricolage affordances) read it to pick their variant;
+	# without it every name in the family captures as the fallback. Single-name
+	# artifacts never read the meta, so this is inert for them.
+	artifact.set_meta("artifact_lookup_name", _target)
+
 	scene_root.add_child(artifact)
 	print("capture_multi_angle [artifact]: Instantiated from %s" % scene_path)
 

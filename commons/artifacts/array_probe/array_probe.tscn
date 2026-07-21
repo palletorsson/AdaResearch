@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://b7arrayprobe0001"]
+
+[ext_resource type="Script" path="res://commons/artifacts/array_probe/array_probe.gd" id="1_script"]
+
+; array_probe.tscn — the four array demos (linear/radial/grid/stack) share
+; this one scene; the mode is read from the lookup_name meta the grid stamps
+; before _ready(). Same one-scene-many-names pattern as specimen_plinth
+; (see doc/transfer_ledger.md).
+
+[node name="array_probe" type="Node3D"]
+script = ExtResource("1_script")

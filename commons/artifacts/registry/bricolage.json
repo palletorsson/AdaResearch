@@ -237,6 +237,66 @@
     "bricolage"
    ],
    "qfep_connection": "Two members meet at the sphere and can re-decide their angle: a joint. Where the hub is many connections at rest, the joint is one connection in negotiation — the sphere as the part that lets a structure bend without breaking. The chair two maps later hinges on exactly this."
+  },
+  "linear_array_demo": {
+   "name": "Linear Array Probe",
+   "lookup_name": "linear_array_demo",
+   "description": "Seven cubes under a law of nexts — the queue.",
+   "scene": "res://commons/artifacts/array_probe/array_probe.tscn",
+   "category": "bricolage",
+   "artifact_type": "demonstration",
+   "complexity": "basic",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "bricolage"
+   ],
+   "qfep_connection": "The linear array: the same seven parts placed by a law of NEXTS, each element defined by following the last. The queue, the sentence, the timeline — the first and plainest way a count becomes a form. Bricolage reads it as a probe: what does this inventory look like exhausted one-after-another?"
+  },
+  "radial_array_demo": {
+   "name": "Radial Array Probe",
+   "lookup_name": "radial_array_demo",
+   "description": "Seven cubes under a law of angles — the council.",
+   "scene": "res://commons/artifacts/array_probe/array_probe.tscn",
+   "category": "bricolage",
+   "artifact_type": "demonstration",
+   "complexity": "basic",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "bricolage"
+   ],
+   "qfep_connection": "The radial array: the same seven parts placed by a law of ANGLES, each element defined by its share of the circle. No first, no last — the council, the clock, the rose window. The probe that shows order without precedence: exhaust the same count around a center and hierarchy dissolves into membership."
+  },
+  "grid_array_demo": {
+   "name": "Grid Array Probe",
+   "lookup_name": "grid_array_demo",
+   "description": "Seven cubes under a law of rows and columns — the field.",
+   "scene": "res://commons/artifacts/array_probe/array_probe.tscn",
+   "category": "bricolage",
+   "artifact_type": "demonstration",
+   "complexity": "basic",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "bricolage"
+   ],
+   "qfep_connection": "The grid array: the same seven parts placed by a law of ROWS AND COLUMNS, each element addressed twice. The field, the city block, this project entire floor system. The probe closest to home — exhaust a count in two indices and you get the space every map here is made of."
+  },
+  "stack_array_demo": {
+   "name": "Stack Array Probe",
+   "lookup_name": "stack_array_demo",
+   "description": "Seven cubes under a law of aboves — the tower.",
+   "scene": "res://commons/artifacts/array_probe/array_probe.tscn",
+   "category": "bricolage",
+   "artifact_type": "demonstration",
+   "complexity": "basic",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "bricolage"
+   ],
+   "qfep_connection": "The stack array: the same seven parts placed by a law of ABOVES, each element resting on the one before. The tower, the pile, the undo history. The only arrangement where order is load-bearing — remove the middle and everything above it matters. Exhaustion with consequences."
   }
  }
 }
