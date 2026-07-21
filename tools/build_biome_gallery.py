@@ -145,6 +145,7 @@ LADDERS = [
 ]
 
 META = [
+    {"key": "presence", "what": "the ground stain — every active unmuted cell stamps a breathing kingdom-tinted stain into the floor (radial falloff, spreads with claims, muted cells stay dry). true by default; false switches it off"},
     {"key": "budget_instances", "what": "cap on batched instances; over budget the layer thins by even stride and says so"},
     {"key": "visibility_range", "what": "GPU culling distance for every batch"},
     {"key": "tick_seconds", "what": "how often `tick` fires (default 5)"},

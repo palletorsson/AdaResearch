@@ -53,6 +53,16 @@
 #       catalyst thread's "friend powers need in-world effects" landing as
 #       grid reactions (neutralizer quiets biome = mute; bridger's tendril
 #       = a claimed row). Declared "friend" matches any typed power.
+# Presence (2026-07-21 — "make the shader responsive to non-moving life"):
+#   every ACTIVE, UNMUTED cell (seed / halo / claimed field / reaction-opened
+#   vacuum) stamps a kingdom-tinted influence into a small presence texture
+#   (one texel per cell, radial falloff — the dormant PresenceGrid's idea,
+#   grid-native). biome_presence.gdshader draws it as a breathing ground
+#   stain on ONE batched MultiMesh of per-cell quads seated on real heights.
+#   Rebuilt on every state-changing reaction, so a CA claim visibly spreads
+#   its ground. Muted cells contribute NOTHING — the vacuum stays dry.
+#   Opt-out: layers.biome._meta.presence = false.
+#
 #   Responses with teeth: `seed` now STAGES a newly-active unmuted cell
 #   (through the same dispatcher honesty guard — the vacuum that can be
 #   opened renders when opened); `mutate:<channel>` routes into the mutator
@@ -113,6 +123,14 @@ var _dwell_fired: bool = false
 var _mutators: Array = []            # cached GridMutatorBase nodes (lazy)
 var _mutators_scanned: bool = false
 
+# ── presence: the ground answers the standing life ──
+const PRESENCE_RADIUS: float = 2.4   # influence radius in cells
+const PRESENCE_MIN_A: float = 0.03   # below this, no quad
+var _presence_enabled: bool = true
+var _presence_img: Image = null
+var _presence_tex: ImageTexture = null
+var _presence_mmi: MultiMeshInstance3D = null
+
 
 func initialize(grid_sys: Node3D, cube_size: float, gutter: float) -> void:
 	_grid_system = grid_sys
@@ -131,6 +149,7 @@ func generate(biome_layer: Array, structure_layer: Array, stage_order: int = 0, 
 	_visibility_range = float(meta.get("visibility_range", DEFAULT_VISIBILITY_RANGE))
 	_tick_seconds = maxf(0.1, float(meta.get("tick_seconds", DEFAULT_TICK_SECONDS)))
 	_dwell_seconds = maxf(0.1, float(meta.get("dwell_seconds", DEFAULT_DWELL_SECONDS)))
+	_presence_enabled = bool(meta.get("presence", true))
 	var needs_clock: bool = false
 	_grid_rows = _structure.size()
 	_grid_cols = 0
@@ -152,7 +171,8 @@ func generate(biome_layer: Array, structure_layer: Array, stage_order: int = 0, 
 				continue
 			_declared[key] = parsed
 			_runtime[key] = {
-				"active": parsed["role"] == "seed",
+				# seeds AND halos live from load (both render); fields wake on claim
+				"active": parsed["role"] == "seed" or parsed["role"] == "halo",
 				"muted": parsed["role"] == "mute",
 				"generation": 0,
 				"claimed_by": "",
@@ -176,6 +196,7 @@ func generate(biome_layer: Array, structure_layer: Array, stage_order: int = 0, 
 			elif parsed["role"] == "halo":
 				_spawn_halo(col, row, parsed)
 	_flush_batches()
+	_refresh_presence()
 	if needs_clock:
 		set_process(true)
 		print("GridBiomeComponent: clock ON (tick %.1fs, dwell %.1fs, %d tick cells)" % [
@@ -207,6 +228,12 @@ func react(col: int, row: int, trigger: String) -> Array:
 			applied.append(response)
 	if not applied.is_empty():
 		_stats["reactions_fired"] = int(_stats.get("reactions_fired", 0)) + 1
+		# the ground answers: any state-changing response reshapes the stain,
+		# so a claim visibly SPREADS its territory underfoot
+		for r in applied:
+			if String(r) in ["seed", "claim", "mute", "unmute"]:
+				_refresh_presence()
+				break
 	return applied
 
 
@@ -748,6 +775,127 @@ func _spawn_marker(col: int, row: int, cell: Dictionary) -> void:
 	_batch_add("marker:" + kingdom, _unit_box(), {
 		"albedo": color, "emission": color * 0.4,
 	}, xf)
+
+
+# ── presence: bake the standing life into a texture, stain the ground.
+#    One texel per cell; sources = every ACTIVE unmuted cell, radial falloff
+#    over PRESENCE_RADIUS. Rebuilt whole on any state change — cols×rows
+#    texels, trivially cheap at reaction frequency. ──
+
+func _refresh_presence() -> void:
+	if not _presence_enabled or _grid_cols == 0 or _grid_rows == 0:
+		return
+	# gather sources from runtime truth (declared file never consulted alone —
+	# what stains is what LIVES, including reaction-opened vacuums and claims)
+	var sources: Array = []
+	for key in _runtime:
+		var state: Dictionary = _runtime[key]
+		if bool(state["muted"]) or not bool(state["active"]):
+			continue
+		var cell: Dictionary = _declared[key]
+		var parts: PackedStringArray = String(key).split(",")
+		var strength: float = BiomeGridTokensScript.density_of(cell) \
+			* (0.4 + 0.12 * float(BiomeGridTokensScript.tier_of(cell)))
+		if cell["role"] == "halo":
+			strength *= 0.7  # the rim stains inward more faintly — it spills outward
+		# claimed-by color: claimed fields stain as the CLAIMING seed's kingdom
+		var kingdom: String = String(cell["kingdom"])
+		var claimer: String = String(state["claimed_by"])
+		if kingdom.is_empty() and not claimer.is_empty() and _declared.has(claimer):
+			kingdom = String(_declared[claimer]["kingdom"])
+		sources.append({
+			"col": int(parts[0]), "row": int(parts[1]),
+			"color": KINGDOM_COLORS.get(kingdom, KINGDOM_COLORS[""]),
+			"strength": strength,
+		})
+	if sources.is_empty():
+		if _presence_mmi != null:
+			_presence_mmi.visible = false
+		return
+	# accumulate weighted kingdom color per cell
+	var acc_rgb: Array = []
+	var acc_w: Array = []
+	acc_rgb.resize(_grid_cols * _grid_rows)
+	acc_w.resize(_grid_cols * _grid_rows)
+	for i in acc_rgb.size():
+		acc_rgb[i] = Vector3.ZERO
+		acc_w[i] = 0.0
+	var r_cells: int = int(ceil(PRESENCE_RADIUS))
+	for src in sources:
+		for dr in range(-r_cells, r_cells + 1):
+			for dc in range(-r_cells, r_cells + 1):
+				var c: int = int(src["col"]) + dc
+				var r: int = int(src["row"]) + dr
+				if c < 0 or r < 0 or c >= _grid_cols or r >= _grid_rows:
+					continue
+				var dist: float = Vector2(dc, dr).length()
+				if dist > PRESENCE_RADIUS:
+					continue
+				var w: float = pow(1.0 - dist / PRESENCE_RADIUS, 2.0) * float(src["strength"])
+				var idx: int = r * _grid_cols + c
+				var col3: Color = src["color"]
+				acc_rgb[idx] += Vector3(col3.r, col3.g, col3.b) * w
+				acc_w[idx] += w
+	if _presence_img == null:
+		_presence_img = Image.create(_grid_cols, _grid_rows, false, Image.FORMAT_RGBA8)
+	for r in _grid_rows:
+		for c in _grid_cols:
+			var idx: int = r * _grid_cols + c
+			var w: float = acc_w[idx]
+			# the void is never stained — no ground, no moisture
+			if w <= 0.0 or _cell_height(c, r) <= 0.0:
+				_presence_img.set_pixel(c, r, Color(0, 0, 0, 0))
+				continue
+			var rgb: Vector3 = (acc_rgb[idx] as Vector3) / w
+			_presence_img.set_pixel(c, r, Color(rgb.x, rgb.y, rgb.z, clampf(w, 0.0, 1.0)))
+	if _presence_tex == null:
+		_presence_tex = ImageTexture.create_from_image(_presence_img)
+	else:
+		_presence_tex.update(_presence_img)
+	_rebuild_presence_overlay()
+
+
+func _rebuild_presence_overlay() -> void:
+	if _presence_mmi != null:
+		_presence_mmi.queue_free()
+		_presence_mmi = null
+	var step: float = _cube_size + _gutter
+	var cells: Array = []
+	for r in _grid_rows:
+		for c in _grid_cols:
+			if _presence_img.get_pixel(c, r).a >= PRESENCE_MIN_A and _cell_height(c, r) > 0.0:
+				cells.append(Vector2i(c, r))
+	if cells.is_empty():
+		return
+	var mm: MultiMesh = MultiMesh.new()
+	mm.transform_format = MultiMesh.TRANSFORM_3D
+	mm.use_custom_data = true
+	mm.mesh = _unit_plane()
+	mm.instance_count = cells.size()
+	for i in cells.size():
+		var cell: Vector2i = cells[i]
+		var xf: Transform3D = Transform3D.IDENTITY
+		xf = xf.scaled(Vector3(step, 1.0, step))
+		xf.origin = Vector3(cell.x * step,
+			_cell_height(cell.x, cell.y) * _cube_size + 0.012, cell.y * step)
+		mm.set_instance_transform(i, xf)
+		mm.set_instance_custom_data(i, Color(float(cell.x), float(cell.y), 0.0, 0.0))
+	_presence_mmi = MultiMeshInstance3D.new()
+	_presence_mmi.name = "BiomePresenceOverlay"
+	_presence_mmi.multimesh = mm
+	var shader: Shader = load("res://commons/resourses/shaders/biome_presence.gdshader")
+	var mat: ShaderMaterial = ShaderMaterial.new()
+	mat.shader = shader
+	mat.set_shader_parameter("presence_tex", _presence_tex)
+	mat.set_shader_parameter("grid_cols", float(_grid_cols))
+	mat.set_shader_parameter("grid_rows", float(_grid_rows))
+	_presence_mmi.material_override = mat
+	if _visibility_range > 0.0:
+		_presence_mmi.visibility_range_end = _visibility_range
+	add_child(_presence_mmi)
+	if int(_stats.get("presence_cells", 0)) != cells.size():
+		_stats["presence_cells"] = cells.size()
+		print("GridBiomeComponent: presence stain over %d cells (the ground answers the standing life)" % cells.size())
 
 
 # ── biome-6: the batch machinery. One MultiMesh per (kind, kingdom, recipe)
