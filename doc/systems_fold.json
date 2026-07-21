@@ -1,171 +1,699 @@
 {
-	"_readme": "The systems fold — the project's architecture as a navigable fractal (Palle, 2026-07-17). This is the SYSTEMS lens: where /fractal folds the content (sequences, maps, artifacts), this folds the machine that runs them. Every node: title + blurb; leaves carry a small detailed description (detail) and their source paths. Rendered by /systems in the encyclopedia (GET /api/systems-fold). Hand-curated — update this file when a system changes shape, not a new tracker.",
-	"version": "2026-07-17",
-	"domains": [
-		{
-			"id": "grid",
-			"title": "The Grid",
-			"blurb": "The world machine: every map is three text layers compiled into a walkable room. Core system — changes allowed but disciplined (additive, gated by new data, tested headless + live).",
-			"children": [
-				{
-					"id": "grid-layers",
-					"title": "The three layers",
-					"blurb": "map_data.json is the whole contract: structure, utilities, interactables.",
-					"children": [
-						{ "id": "grid-structure", "title": "structure", "detail": "Geometry as character rows: floor heights 0-5, void, walls. Cubes are center-origin (top at +0.5); GridCommon.surface_world_y seats props on the cube top.", "paths": ["commons/grid/GridSystem.gd", "commons/grid/GridCommon.gd"] },
-						{ "id": "grid-utilities", "title": "utilities", "blurb": "", "detail": "Spawn (sp), teleporters (t), ramps, transport cubes, labels, danger zones (h:fire, h:death...). One-letter codes resolved by UtilityRegistry.", "paths": ["commons/grid/UtilityRegistry.gd"] },
-						{ "id": "grid-interactables", "title": "interactables", "detail": "Artifacts by lookup name with rotation and y-offset (token:rot:y). Spawned by GridInteractablesComponent: auto-grounding base-to-floor (opt out auto_ground:false), embedded demo-chrome suppression.", "paths": ["commons/grid/GridInteractablesComponent.gd"] },
-						{ "id": "grid-walls", "title": "walls (interior)", "detail": "Optional layers.walls: per-cell wall segments n/e/s/w; UPPERCASE = door opening. A map without the layer is untouched — the additive-hook discipline in action.", "paths": ["commons/grid/GridWallSegmentsComponent.gd"] }
-					]
-				},
-				{
-					"id": "grid-data",
-					"title": "Data & loading",
-					"blurb": "Map JSON in, room out — plus the Quest override path.",
-					"children": [
-						{ "id": "grid-datacomp", "title": "GridDataComponent", "detail": "Loads map_data.json; supports a vrStaging override poll so a standalone Quest can hot-reload edited maps with no APK rebuild (push_map_to_quest.ps1).", "paths": ["commons/grid/GridDataComponent.gd", "tools/push_map_to_quest.ps1"] },
-						{ "id": "grid-audiocomp", "title": "Grid audio", "detail": "GridAudioComponent + GridSoundSuiteSequencer give each map a sound suite driven from the same data file as everything else.", "paths": ["commons/grid/GridAudioComponent.gd", "commons/grid/SoundSuiteSequencer.gd"] }
-					]
-				},
-				{
-					"id": "grid-validation",
-					"title": "Pathfinder & rules",
-					"blurb": "The map is not real until the walker can cross it.",
-					"children": [
-						{ "id": "grid-pathfinder", "title": "map_pathfinder.py", "detail": "Reachability + rule validation (spawn exists, exit reachable, exit cell void — Rule 5, wall-aware). The gate every map edit passes before commit; coverage must stay green.", "paths": ["tools/map_pathfinder.py"] }
-					]
-				}
-			]
-		},
-		{
-			"id": "biome",
-			"title": "Biome & Ecology",
-			"blurb": "The living layer that grows around the taught rooms — density, kingdoms, and terrain unlock with the curriculum, never ahead of it.",
-			"children": [
-				{ "id": "biome-dispatcher", "title": "Biome dispatcher", "detail": "Kingdom x substrate x sequence routing: seeds route through one dispatcher (one law, two surfaces), ground types compiled per cell.", "paths": ["commons/biome_layers/ground_layer_component.gd", "commons/biome_layers/ground_types.json"] },
-				{ "id": "biome-halo", "title": "The halo", "detail": "Per-cell wilderness replaced the old ring around maps — foliage and organisms placed cell-by-cell, A/B proven. The accrual default compiles declared kingdoms into rows.", "paths": ["commons/managers/BiomeAccrualManager.gd"] },
-				{ "id": "biome-stages", "title": "Soft stages", "detail": "soft_stages.json declares creature density, kingdoms, terrain per sequence stage: seq 1-2 grey/sterile, seq 3 first flowers, seq 11 creatures, seq 12+ full evolution. Also carries story data — the transformation catalyst unlocks at map_completed: Trans_Pit.", "paths": ["commons/maps/soft_stages.json"] },
-				{ "id": "biome-nature", "title": "Nature system", "detail": "CritterDNA, morphology, evolution, spawner — living organisms with genes (including six fold genes); EvolutionSystem + TransmutationManager drive self-generation; NatureRenderer does fog, sky, particles.", "paths": ["algorithms/nature_system/", "commons/managers/EcosystemManager.gd"] },
-				{ "id": "biome-honesty", "title": "Curriculum honesty", "detail": "The biome may only use concepts the player has walked: no randf() before seq 7, no noise before seq 8, no trees before seq 11. The grid IS the aesthetic of seqs 1-6.", "paths": ["doc/book/RULINGS.md"] }
-			]
-		},
-		{
-			"id": "artifacts",
-			"title": "Artifacts",
-			"blurb": "~750 registered interactables — every taught idea embodied as a thing in a room. Three files each: .gd, .tscn, registry entry.",
-			"children": [
-				{ "id": "artifacts-pattern", "title": "The 3-file pattern", "detail": "extends Node3D, class_name PascalCase, procedural build in _ready(), apply_grid_config(config) for per-map tuning. Registered by category JSON; token collisions resolved per-domain.", "paths": ["commons/artifacts/registry/"] },
-				{ "id": "artifacts-staging", "title": "Staging DNA (7 types)", "detail": "Every artifact is one of SEVEN staging types — specimen, instrument, performer, terrain, apparition, well, tableau — each a full environment template (footing + support prop + dressing). Improve a type by editing its DNA, not per-room.", "paths": ["commons/data/staging_dna.json"] },
-				{ "id": "artifacts-sizes", "title": "Size & dwell oracles", "detail": "artifact_sizes.json: measured AABBs feeding gaze_ride and placement (viewing distance scales with size). artifact_dwell.json: per-artifact dwell in seconds (L-013) — one cycle of the artifact's own process; declarations beat measurements.", "paths": ["commons/data/artifact_sizes.json", "commons/data/artifact_dwell.json"] },
-				{ "id": "artifacts-families", "title": "Prop families", "detail": "Station kit (10 curation pieces), packaging family (sci-fi grounding furniture, gated resolver, default off), HangarKit and Lab Portal DNA families, facade parts (42).", "paths": ["commons/artifacts/station/", "commons/artifacts/registry/packaging.json", "commons/facade_parts/"] }
-			]
-		},
-		{
-			"id": "catalyst",
-			"title": "Catalyst & Friend/Foe",
-			"blurb": "The player's one worn power, and the enemies that can be turned. Change you wear.",
-			"children": [
-				{ "id": "catalyst-bracelet", "title": "The becoming catalyst", "detail": "Bracelet on a wireframe pedestal, three stones: cube (voxel block), wedge (walkable prism), off. Cardinal placement 2 cells out; trigger=place, grip=remove, rotate bracelet to switch stone. Placed blocks persist across maps in a session. Unlocks by surviving Trans_Pit — the game's own data says crossing the fire IS transformation.", "paths": ["commons/hazards/becoming_catalyst/"] },
-				{ "id": "catalyst-foe", "title": "Catalyst foes", "detail": "Cube foes spawn from vents and hunt; the catalyst phase-shifts them to friends — the FOE-to-FRIEND arc staged across the Catalyst_01..10 chambers. Headline gap on record: friends grant the player no power yet.", "paths": ["commons/hazards/catalyst_foe/", "doc/plans/catalyst_ability_hazard_map.md"] },
-				{ "id": "catalyst-hazards", "title": "Hazards", "detail": "DangerZone utility codes in map data: h:fire (35 dmg / 0.3s tick), h:death (instant), h:electric, h:toxic, h:vacuum; lasers at 100 dps. Only Trans_Pit carries in-spine hazards so far.", "paths": ["commons/hazards/"] }
-			]
-		},
-		{
-			"id": "health",
-			"title": "Health, Death & Progression",
-			"blurb": "One health bar, one theatrical death, and the ledgers that survive it.",
-			"children": [
-				{ "id": "health-gm", "title": "GameManager health", "detail": "player_health 0-100 with health_updated / player_damaged signals; death resets level state but preserves score and game config — dying costs the room, not the run.", "paths": ["commons/managers/GameManager.gd"] },
-				{ "id": "health-death", "title": "DeathEffect", "detail": "Autoload death sequence: red flash overlay, time freeze, camera shake, particles, haptic pulse, fade to black, map reload.", "paths": ["commons/managers/DeathEffect.gd"] },
-				{ "id": "health-progression", "title": "Progression managers", "detail": "MapProgressionManager tracks map completion (the biome and catalyst read it); LabManager drives lab state transitions between sequences; AdaSceneManager owns scene flow.", "paths": ["commons/managers/MapProgressionManager.gd", "commons/managers/LabManager.gd", "commons/managers/AdaSceneManager.gd"] }
-			]
-		},
-		{
-			"id": "menu",
-			"title": "Menu & Overlays",
-			"blurb": "The desktop control room laid over the game — switchers, editors, and the feedback pipe back to the AI.",
-			"children": [
-				{ "id": "menu-switcher", "title": "Map switcher + feedback bridge", "detail": "DesktopMapSwitcherOverlay switches maps in-session and takes typed comments during play; comments land in ada_run/desktop_feedback.md/.json and codex_change_requests.md for the AI to read.", "paths": ["commons/maps/catalog/DesktopMapSwitcherOverlay.gd", "ada_run/desktop_feedback.md"] },
-				{ "id": "menu-editors", "title": "In-game editor overlays", "detail": "MapLayerEditorOverlay, MapGridEditorOverlay, MapDataEditorOverlay, ProjectDashboardOverlay — edit the three layers and inspect project status without leaving the runtime. The @tool map_tool_editor edits layers in the Godot viewport itself.", "paths": ["commons/maps/catalog/", "commons/scenes/map_tool_editor.tscn"] },
-				{ "id": "menu-vr-ui", "title": "Canonical VR UI", "detail": "TextScreen is the canonical text surface (Label3D migration ongoing); sliders (slider_moved signal), push buttons, laser_point endpoints (layer 21) for XL benches; SubtitleOverlay for truth-beat subtitles.", "paths": ["commons/ui/text_screen.gd", "commons/ui/subtitles/SubtitleOverlay.gd"] },
-				{ "id": "menu-desktop", "title": "Desktop interaction", "detail": "Centre-dot crosshair: LMB press/drag, RMB carry-grab with wheel distance — the whole desktop hand.", "paths": ["commons/context/DesktopInteractionPointer.gd"] }
-			]
-		},
-		{
-			"id": "sound",
-			"title": "Sound System",
-			"blurb": "The largest quiet domain — ~380 scripts from per-map suites to a full song studio.",
-			"children": [
-				{ "id": "sound-grid", "title": "Per-map sound", "detail": "GridAudioComponent + GridSoundSuiteSequencer sequence a map's suite from map data; AmbientSoundController and SoundBankSingleton carry the base layer.", "paths": ["commons/grid/GridAudioComponent.gd", "commons/audio/AmbientSoundController.gd"] },
-				{ "id": "sound-catalog", "title": "Song catalog & studio", "detail": "A full in-game studio: SongRuntimeEngine, synth browsers, drum/bass/chord/arp pattern editors, MIDI piano roll, stem editor, sound identity panels — the audio counterpart of the map catalog.", "paths": ["commons/audio/catalog/"] },
-				{ "id": "sound-eurorack", "title": "Eurorack & cables", "detail": "EurorackRack/EurorackModule with patchable synth cables (jack/plug/manager); module faces are live 2D SubViewport textures — the 2D-in-3D principle applied to audio. Web twin: /audio-rack-3d with Tone.js.", "paths": ["commons/audio/EurorackRack.gd", "commons/audio/cables/"] },
-				{ "id": "sound-airpoints", "title": "Air points & compositions", "detail": "AirPoint oscillator/synth/listener chain for spatial tones; composition players and systems (track layers, pattern sequencer, effects rack) for authored music.", "paths": ["commons/audio/airpoints/", "commons/audio/compositions/"] },
-				{ "id": "sound-hazard", "title": "Known hazard", "detail": "Duplicate class_name SoundSuiteSequencer flagged in the 2026-02-13 audio audit — load-order dependent; the grid one is GridSoundSuiteSequencer.", "paths": ["docs/reports/2026-02-13_audio_system_audit.md"] }
-			]
-		},
-		{
-			"id": "text",
-			"title": "The Text System (the book)",
-			"blurb": "Every map carries its own literature; rulings are the source, prose is compiled.",
-			"children": [
-				{ "id": "text-permap", "title": "Per-map files", "detail": "blurb.md, intent.md, tutorial.md (the teaching text), walked.md (the walker's voice with per-artifact dwells), critical.md, technical.md — the map's whole verbal body lives next to its data.", "paths": ["commons/maps/<Map>/"] },
-				{ "id": "text-rulings", "title": "The rulings ledgers", "detail": "RULINGS.md (R-numbers) and LOOK_RULINGS.md (L-000..L-019, compiled to properties P-1..P-8): Palle's verbatim rulings are the law; six intents per map (soul/curriculum/ontology/experience/world/page — rule the lead, never average; connective heroes exempt from all scoring).", "paths": ["doc/book/RULINGS.md", "doc/book/LOOK_RULINGS.md", "doc/book/map_intents.json"] },
-				{ "id": "text-heroes", "title": "Heroes & digs", "detail": "heroes.json holds each map's hero/anti pair and tension; dig_report.py excavates a sequence's depth for load-bearers, counter-pairs, promotions, and honest blanks.", "paths": ["doc/book/heroes.json", "tools/dig_report.py"] },
-				{ "id": "text-readers", "title": "Readers & the manuscript", "detail": "/tutorial is THE path (NOC-style 8 pages per spine sequence, auto-assembled); /chapter reads aloud with register-aware TTS (walk/dwell/turn voices, 1.5x default); build_manuscript.py folds it all into one ~194k manuscript for InDesign.", "paths": ["tools/build_critical_tutorial.py", "tools/build_manuscript.py"] }
-			]
-		},
-		{
-			"id": "edge",
-			"title": "Maps ⇄ Text (the edge compiler)",
-			"blurb": "The finish line: the edge between autogenerated and composed, closed by language and observation — word → time → contract → space → observation → ruling.",
-			"children": [
-				{ "id": "edge-forward", "title": "Forward transform", "detail": "desire_timeline.py reads a walked map into desire curves — the EYE (angular presence ahead) and the HAND (operable within reach) over the walk as a timeline; desire cycles (promise, approach, inspect, consummation) fork by artifact kind; runtime = walk + sum of dwells.", "paths": ["tools/desire_timeline.py", "tools/gaze_ride.py"] },
-				{ "id": "edge-inverse", "title": "Inverse transform", "detail": "text_to_target.py compiles a map's tutorial text into target curves (reading loads, TRY-paragraphs contract hand spikes); script_compose.py searches layouts to match them — FIT, weight 3.0: the drawn curve leads. Pins (L-011) force ruled artifacts into the cast, never dropped.", "paths": ["tools/text_to_target.py", "tools/script_compose.py", "doc/book/look_scripts/"] },
-				{ "id": "edge-tournament", "title": "The tournament", "detail": "pearl_factory's 14 generative recipes (wfc, antrooms, halls, rooms, physarum...) judged by the experience fitness: encounter-order tau, coverage, promise, dolly-in, cycles, FIT. Champions kept as Trial_ maps, losers deleted. The judge relearns as the chapter's knowledge grows.", "paths": ["tools/pearl_factory.py", "tools/map_tournament.py", "doc/reports/"] },
-				{ "id": "edge-templates", "title": "Templates & growers", "detail": "The other generators: template patterns (painted placement contracts — podium gallery, open floor...), grow_map (5 stages from spatial_needs), zone grammar (5 archetypes), place.py (auto-selects placement engine per map).", "paths": ["commons/data/template_patterns.json", "tools/grow_map.py", "tools/zone_grammar.py", "tools/place.py"] }
-			]
-		},
-		{
-			"id": "maps",
-			"title": "Maps & Sequences",
-			"blurb": "~503 maps in ~42 sequences, 24 on the spine — the curriculum as geography.",
-			"children": [
-				{ "id": "maps-spine", "title": "The spine", "detail": "curriculum_spine.json orders the 24 core sequences (spine.sequences); sequence JSONs define map order, unlock requirements, lab transitions.", "paths": ["commons/maps/curriculum_spine.json", "commons/maps/sequences/"] },
-				{ "id": "maps-narrative", "title": "Map as narrative", "detail": "Five phases per map: entry (spawn + context), teaching (main artifact), exploration, reflection (text + darkness), exit (teleporter). Registers from the look scripts: arrival (the void first), promenade (scenes at wings), close (hero last).", "paths": ["doc/MAP_BUILDING_GUIDE.md"] },
-				{ "id": "maps-pipeline", "title": "The 7-stage pipeline", "detail": "Structure, Documentation, Artifacts, Maps, Validation, VR Testing, Polish. HEAD = lowest incomplete stage; work at the head. Scored by sequence_pipeline_scorer.py.", "paths": ["tools/sequence_pipeline_scorer.py"] }
-			]
-		},
-		{
-			"id": "runtime",
-			"title": "VR & Desktop Runtime",
-			"blurb": "One data format, four bodies: VR headset, desktop walker, standalone Quest, and a Source 2 export.",
-			"children": [
-				{ "id": "runtime-vr", "title": "OpenXR", "detail": "Full VR locomotion; the action map (11 profiles) is a known clobber target — a dead thumbstick means git checkout the .tres and restart.", "paths": ["openxr_action_map.tres"] },
-				{ "id": "runtime-desktop", "title": "Desktop walker", "detail": "The same maps walked flat-screen with the crosshair hand — the primary observation instrument under THE EDGE ruling (walking desktop + language does the whole work; VR adds nothing to the diagnosis).", "paths": ["commons/scenes/desktop_map_tester.tscn"] },
-				{ "id": "runtime-quest", "title": "Quest hot-reload", "detail": "push_map_to_quest.ps1 pushes edited map JSON to a standalone Quest via adb run-as; GridDataComponent polls vrStaging — map=data, artifacts=code, no APK rebuild.", "paths": ["tools/push_map_to_quest.ps1"] },
-				{ "id": "runtime-bridge", "title": "Live bridges", "detail": "/map-simulator drives a live Godot viewer (gated --mapsim-bridge): web edits write map_data, the window re-renders. The window shows, the web steers. s&box export rebuilds map_data.json in Source 2 VR — the format is engine-agnostic.", "paths": ["commons/maps/catalog/MapCatalogDesktop3D.gd", "export/sbox_ada_vr/"] }
-			]
-		},
-		{
-			"id": "capture",
-			"title": "Capture & Verification",
-			"blurb": "Nothing is believed until a headless run renders it or a walker crosses it.",
-			"children": [
-				{ "id": "capture-multi", "title": "Multi-angle capture", "detail": "capture_multi_angle.gd renders any artifact or map from 4 angles headless (--xr-mode off --no-window); capture_all batches with manifest-based skip. Output to Roaming user://multi_shots.", "paths": ["commons/testing/capture_multi_angle.gd", "commons/testing/capture_all.gd"] },
-				{ "id": "capture-watchdog", "title": "The 16-second rule", "detail": "No capture may halt the pipeline: godot_watchdog.py kills the process tree if boot exceeds 45s grace or output stalls 16s. Never two Godot instances at once — the second dies silently on the user:// lock.", "paths": ["tools/godot_watchdog.py"] },
-				{ "id": "capture-gates", "title": "Gates & scorers", "detail": "Release gates for launch quality; walk_evaluator scores placement walkability (detour, encounter order, backtrack); the pathfinder coverage gate runs on map-touching commits.", "paths": ["tools/run_release_gates.py", "tools/walk_evaluator.py"] }
-			]
-		},
-		{
-			"id": "web",
-			"title": "Encyclopedia & Web Tools",
-			"blurb": "The project's second body: 578 routes of editors, atlases, and APIs — including the content fractal this fold is the sibling of.",
-			"children": [
-				{ "id": "web-fractal", "title": "The fractal database", "detail": "GET /api/fractal: the whole project (1500+ nodes) at any depth through six lenses (structural, semantic, pedagogical, code, critical, biome). Fold-first navigation, 5.9x fewer tokens than file-walking. /systems (this fold) is its architecture-lens sibling.", "paths": ["ada_encyclopedia /api/fractal", "ada_encyclopedia /fractal"] },
-				{ "id": "web-editors", "title": "Editors", "detail": "/map-builder, /map-studio, /voxel-editor, /grid-editor, /pattern-maker, /template-pattern-editor, /desire-timeline, /space-time, /spine-graph — the 2D hands that shape the 3D rooms.", "paths": ["ada_encyclopedia src/app/"] },
-				{ "id": "web-trackers", "title": "Trackers & atlases", "detail": "/threads (development threads + live git), /seams (the bias landscape), /concept-maps (ten ladders), /atlas (artifact distance), /final-lap, /order-of-things, /book + /tutorial readers.", "paths": ["doc/threads.json", "ada_encyclopedia src/app/"] },
-				{ "id": "web-find", "title": "Agent search", "detail": "GET /api/find?q= — one call over every route and full-text content; the server-side twin of the nav search bar.", "paths": ["ada_encyclopedia /api/find"] }
-			]
-		}
-	]
+ "_readme": "The systems fold — the project's architecture as a navigable fractal (Palle, 2026-07-17). This is the SYSTEMS lens: where /fractal folds the content (sequences, maps, artifacts), this folds the machine that runs them. Every node: title + blurb; leaves carry a small detailed description (detail) and their source paths. Rendered by /systems-fold in the encyclopedia (GET /api/systems-fold). Hand-curated — update this file when a system changes shape, not a new tracker. 2026-07-21: connections added (Palle: 'many of these systems should know of each other') — typed cross-domain edges between leaves; kind=wired (exists on disk) or proposed (a pattern found, awaiting a ruling); shape=feeds/judges/same-shape/reacts. The proposed same-shape edges are the interesting ones: candidate strategies, not commitments.",
+ "version": "2026-07-21",
+ "domains": [
+  {
+   "id": "grid",
+   "title": "The Grid",
+   "blurb": "The world machine: every map is three text layers compiled into a walkable room. Core system — changes allowed but disciplined (additive, gated by new data, tested headless + live).",
+   "children": [
+    {
+     "id": "grid-layers",
+     "title": "The three layers",
+     "blurb": "map_data.json is the whole contract: structure, utilities, interactables.",
+     "children": [
+      {
+       "id": "grid-structure",
+       "title": "structure",
+       "detail": "Geometry as character rows: floor heights 0-5, void, walls. Cubes are center-origin (top at +0.5); GridCommon.surface_world_y seats props on the cube top.",
+       "paths": [
+        "commons/grid/GridSystem.gd",
+        "commons/grid/GridCommon.gd"
+       ]
+      },
+      {
+       "id": "grid-utilities",
+       "title": "utilities",
+       "blurb": "",
+       "detail": "Spawn (sp), teleporters (t), ramps, transport cubes, labels, danger zones (h:fire, h:death...). One-letter codes resolved by UtilityRegistry.",
+       "paths": [
+        "commons/grid/UtilityRegistry.gd"
+       ]
+      },
+      {
+       "id": "grid-interactables",
+       "title": "interactables",
+       "detail": "Artifacts by lookup name with rotation and y-offset (token:rot:y). Spawned by GridInteractablesComponent: auto-grounding base-to-floor (opt out auto_ground:false), embedded demo-chrome suppression.",
+       "paths": [
+        "commons/grid/GridInteractablesComponent.gd"
+       ]
+      },
+      {
+       "id": "grid-walls",
+       "title": "walls (interior)",
+       "detail": "Optional layers.walls: per-cell wall segments n/e/s/w; UPPERCASE = door opening. A map without the layer is untouched — the additive-hook discipline in action.",
+       "paths": [
+        "commons/grid/GridWallSegmentsComponent.gd"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "grid-data",
+     "title": "Data & loading",
+     "blurb": "Map JSON in, room out — plus the Quest override path.",
+     "children": [
+      {
+       "id": "grid-datacomp",
+       "title": "GridDataComponent",
+       "detail": "Loads map_data.json; supports a vrStaging override poll so a standalone Quest can hot-reload edited maps with no APK rebuild (push_map_to_quest.ps1).",
+       "paths": [
+        "commons/grid/GridDataComponent.gd",
+        "tools/push_map_to_quest.ps1"
+       ]
+      },
+      {
+       "id": "grid-audiocomp",
+       "title": "Grid audio",
+       "detail": "GridAudioComponent + GridSoundSuiteSequencer give each map a sound suite driven from the same data file as everything else.",
+       "paths": [
+        "commons/grid/GridAudioComponent.gd",
+        "commons/grid/SoundSuiteSequencer.gd"
+       ]
+      }
+     ]
+    },
+    {
+     "id": "grid-validation",
+     "title": "Pathfinder & rules",
+     "blurb": "The map is not real until the walker can cross it.",
+     "children": [
+      {
+       "id": "grid-pathfinder",
+       "title": "map_pathfinder.py",
+       "detail": "Reachability + rule validation (spawn exists, exit reachable, exit cell void — Rule 5, wall-aware). The gate every map edit passes before commit; coverage must stay green.",
+       "paths": [
+        "tools/map_pathfinder.py"
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "biome",
+   "title": "Biome & Ecology",
+   "blurb": "The living layer that grows around the taught rooms — density, kingdoms, and terrain unlock with the curriculum, never ahead of it.",
+   "children": [
+    {
+     "id": "biome-dispatcher",
+     "title": "Biome dispatcher",
+     "detail": "Kingdom x substrate x sequence routing: seeds route through one dispatcher (one law, two surfaces), ground types compiled per cell.",
+     "paths": [
+      "commons/biome_layers/ground_layer_component.gd",
+      "commons/biome_layers/ground_types.json"
+     ]
+    },
+    {
+     "id": "biome-halo",
+     "title": "The halo",
+     "detail": "Per-cell wilderness replaced the old ring around maps — foliage and organisms placed cell-by-cell, A/B proven. The accrual default compiles declared kingdoms into rows.",
+     "paths": [
+      "commons/managers/BiomeAccrualManager.gd"
+     ]
+    },
+    {
+     "id": "biome-stages",
+     "title": "Soft stages",
+     "detail": "soft_stages.json declares creature density, kingdoms, terrain per sequence stage: seq 1-2 grey/sterile, seq 3 first flowers, seq 11 creatures, seq 12+ full evolution. Also carries story data — the transformation catalyst unlocks at map_completed: Trans_Pit.",
+     "paths": [
+      "commons/maps/soft_stages.json"
+     ]
+    },
+    {
+     "id": "biome-nature",
+     "title": "Nature system",
+     "detail": "CritterDNA, morphology, evolution, spawner — living organisms with genes (including six fold genes); EvolutionSystem + TransmutationManager drive self-generation; NatureRenderer does fog, sky, particles.",
+     "paths": [
+      "algorithms/nature_system/",
+      "commons/managers/EcosystemManager.gd"
+     ]
+    },
+    {
+     "id": "biome-honesty",
+     "title": "Curriculum honesty",
+     "detail": "The biome may only use concepts the player has walked: no randf() before seq 7, no noise before seq 8, no trees before seq 11. The grid IS the aesthetic of seqs 1-6.",
+     "paths": [
+      "doc/book/RULINGS.md"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "artifacts",
+   "title": "Artifacts",
+   "blurb": "~750 registered interactables — every taught idea embodied as a thing in a room. Three files each: .gd, .tscn, registry entry.",
+   "children": [
+    {
+     "id": "artifacts-pattern",
+     "title": "The 3-file pattern",
+     "detail": "extends Node3D, class_name PascalCase, procedural build in _ready(), apply_grid_config(config) for per-map tuning. Registered by category JSON; token collisions resolved per-domain.",
+     "paths": [
+      "commons/artifacts/registry/"
+     ]
+    },
+    {
+     "id": "artifacts-staging",
+     "title": "Staging DNA (7 types)",
+     "detail": "Every artifact is one of SEVEN staging types — specimen, instrument, performer, terrain, apparition, well, tableau — each a full environment template (footing + support prop + dressing). Improve a type by editing its DNA, not per-room.",
+     "paths": [
+      "commons/data/staging_dna.json"
+     ]
+    },
+    {
+     "id": "artifacts-sizes",
+     "title": "Size & dwell oracles",
+     "detail": "artifact_sizes.json: measured AABBs feeding gaze_ride and placement (viewing distance scales with size). artifact_dwell.json: per-artifact dwell in seconds (L-013) — one cycle of the artifact's own process; declarations beat measurements.",
+     "paths": [
+      "commons/data/artifact_sizes.json",
+      "commons/data/artifact_dwell.json"
+     ]
+    },
+    {
+     "id": "artifacts-families",
+     "title": "Prop families",
+     "detail": "Station kit (10 curation pieces), packaging family (sci-fi grounding furniture, gated resolver, default off), HangarKit and Lab Portal DNA families, facade parts (42).",
+     "paths": [
+      "commons/artifacts/station/",
+      "commons/artifacts/registry/packaging.json",
+      "commons/facade_parts/"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "catalyst",
+   "title": "Catalyst & Friend/Foe",
+   "blurb": "The player's one worn power, and the enemies that can be turned. Change you wear.",
+   "children": [
+    {
+     "id": "catalyst-bracelet",
+     "title": "The becoming catalyst",
+     "detail": "Bracelet on a wireframe pedestal, three stones: cube (voxel block), wedge (walkable prism), off. Cardinal placement 2 cells out; trigger=place, grip=remove, rotate bracelet to switch stone. Placed blocks persist across maps in a session. Unlocks by surviving Trans_Pit — the game's own data says crossing the fire IS transformation.",
+     "paths": [
+      "commons/hazards/becoming_catalyst/"
+     ]
+    },
+    {
+     "id": "catalyst-foe",
+     "title": "Catalyst foes",
+     "detail": "Cube foes spawn from vents and hunt; the catalyst phase-shifts them to friends — the FOE-to-FRIEND arc staged across the Catalyst_01..10 chambers. Headline gap on record: friends grant the player no power yet.",
+     "paths": [
+      "commons/hazards/catalyst_foe/",
+      "doc/plans/catalyst_ability_hazard_map.md"
+     ]
+    },
+    {
+     "id": "catalyst-hazards",
+     "title": "Hazards",
+     "detail": "DangerZone utility codes in map data: h:fire (35 dmg / 0.3s tick), h:death (instant), h:electric, h:toxic, h:vacuum; lasers at 100 dps. Only Trans_Pit carries in-spine hazards so far.",
+     "paths": [
+      "commons/hazards/"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "health",
+   "title": "Health, Death & Progression",
+   "blurb": "One health bar, one theatrical death, and the ledgers that survive it.",
+   "children": [
+    {
+     "id": "health-gm",
+     "title": "GameManager health",
+     "detail": "player_health 0-100 with health_updated / player_damaged signals; death resets level state but preserves score and game config — dying costs the room, not the run.",
+     "paths": [
+      "commons/managers/GameManager.gd"
+     ]
+    },
+    {
+     "id": "health-death",
+     "title": "DeathEffect",
+     "detail": "Autoload death sequence: red flash overlay, time freeze, camera shake, particles, haptic pulse, fade to black, map reload.",
+     "paths": [
+      "commons/managers/DeathEffect.gd"
+     ]
+    },
+    {
+     "id": "health-progression",
+     "title": "Progression managers",
+     "detail": "MapProgressionManager tracks map completion (the biome and catalyst read it); LabManager drives lab state transitions between sequences; AdaSceneManager owns scene flow.",
+     "paths": [
+      "commons/managers/MapProgressionManager.gd",
+      "commons/managers/LabManager.gd",
+      "commons/managers/AdaSceneManager.gd"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "menu",
+   "title": "Menu & Overlays",
+   "blurb": "The desktop control room laid over the game — switchers, editors, and the feedback pipe back to the AI.",
+   "children": [
+    {
+     "id": "menu-switcher",
+     "title": "Map switcher + feedback bridge",
+     "detail": "DesktopMapSwitcherOverlay switches maps in-session and takes typed comments during play; comments land in ada_run/desktop_feedback.md/.json and codex_change_requests.md for the AI to read.",
+     "paths": [
+      "commons/maps/catalog/DesktopMapSwitcherOverlay.gd",
+      "ada_run/desktop_feedback.md"
+     ]
+    },
+    {
+     "id": "menu-editors",
+     "title": "In-game editor overlays",
+     "detail": "MapLayerEditorOverlay, MapGridEditorOverlay, MapDataEditorOverlay, ProjectDashboardOverlay — edit the three layers and inspect project status without leaving the runtime. The @tool map_tool_editor edits layers in the Godot viewport itself.",
+     "paths": [
+      "commons/maps/catalog/",
+      "commons/scenes/map_tool_editor.tscn"
+     ]
+    },
+    {
+     "id": "menu-vr-ui",
+     "title": "Canonical VR UI",
+     "detail": "TextScreen is the canonical text surface (Label3D migration ongoing); sliders (slider_moved signal), push buttons, laser_point endpoints (layer 21) for XL benches; SubtitleOverlay for truth-beat subtitles.",
+     "paths": [
+      "commons/ui/text_screen.gd",
+      "commons/ui/subtitles/SubtitleOverlay.gd"
+     ]
+    },
+    {
+     "id": "menu-desktop",
+     "title": "Desktop interaction",
+     "detail": "Centre-dot crosshair: LMB press/drag, RMB carry-grab with wheel distance — the whole desktop hand.",
+     "paths": [
+      "commons/context/DesktopInteractionPointer.gd"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "sound",
+   "title": "Sound System",
+   "blurb": "The largest quiet domain — ~380 scripts from per-map suites to a full song studio.",
+   "children": [
+    {
+     "id": "sound-grid",
+     "title": "Per-map sound",
+     "detail": "GridAudioComponent + GridSoundSuiteSequencer sequence a map's suite from map data; AmbientSoundController and SoundBankSingleton carry the base layer.",
+     "paths": [
+      "commons/grid/GridAudioComponent.gd",
+      "commons/audio/AmbientSoundController.gd"
+     ]
+    },
+    {
+     "id": "sound-catalog",
+     "title": "Song catalog & studio",
+     "detail": "A full in-game studio: SongRuntimeEngine, synth browsers, drum/bass/chord/arp pattern editors, MIDI piano roll, stem editor, sound identity panels — the audio counterpart of the map catalog.",
+     "paths": [
+      "commons/audio/catalog/"
+     ]
+    },
+    {
+     "id": "sound-eurorack",
+     "title": "Eurorack & cables",
+     "detail": "EurorackRack/EurorackModule with patchable synth cables (jack/plug/manager); module faces are live 2D SubViewport textures — the 2D-in-3D principle applied to audio. Web twin: /audio-rack-3d with Tone.js.",
+     "paths": [
+      "commons/audio/EurorackRack.gd",
+      "commons/audio/cables/"
+     ]
+    },
+    {
+     "id": "sound-airpoints",
+     "title": "Air points & compositions",
+     "detail": "AirPoint oscillator/synth/listener chain for spatial tones; composition players and systems (track layers, pattern sequencer, effects rack) for authored music.",
+     "paths": [
+      "commons/audio/airpoints/",
+      "commons/audio/compositions/"
+     ]
+    },
+    {
+     "id": "sound-hazard",
+     "title": "Known hazard",
+     "detail": "Duplicate class_name SoundSuiteSequencer flagged in the 2026-02-13 audio audit — load-order dependent; the grid one is GridSoundSuiteSequencer.",
+     "paths": [
+      "docs/reports/2026-02-13_audio_system_audit.md"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "text",
+   "title": "The Text System (the book)",
+   "blurb": "Every map carries its own literature; rulings are the source, prose is compiled.",
+   "children": [
+    {
+     "id": "text-permap",
+     "title": "Per-map files",
+     "detail": "blurb.md, intent.md, tutorial.md (the teaching text), walked.md (the walker's voice with per-artifact dwells), critical.md, technical.md — the map's whole verbal body lives next to its data.",
+     "paths": [
+      "commons/maps/<Map>/"
+     ]
+    },
+    {
+     "id": "text-rulings",
+     "title": "The rulings ledgers",
+     "detail": "RULINGS.md (R-numbers) and LOOK_RULINGS.md (L-000..L-019, compiled to properties P-1..P-8): Palle's verbatim rulings are the law; six intents per map (soul/curriculum/ontology/experience/world/page — rule the lead, never average; connective heroes exempt from all scoring).",
+     "paths": [
+      "doc/book/RULINGS.md",
+      "doc/book/LOOK_RULINGS.md",
+      "doc/book/map_intents.json"
+     ]
+    },
+    {
+     "id": "text-heroes",
+     "title": "Heroes & digs",
+     "detail": "heroes.json holds each map's hero/anti pair and tension; dig_report.py excavates a sequence's depth for load-bearers, counter-pairs, promotions, and honest blanks.",
+     "paths": [
+      "doc/book/heroes.json",
+      "tools/dig_report.py"
+     ]
+    },
+    {
+     "id": "text-readers",
+     "title": "Readers & the manuscript",
+     "detail": "/tutorial is THE path (NOC-style 8 pages per spine sequence, auto-assembled); /chapter reads aloud with register-aware TTS (walk/dwell/turn voices, 1.5x default); build_manuscript.py folds it all into one ~194k manuscript for InDesign.",
+     "paths": [
+      "tools/build_critical_tutorial.py",
+      "tools/build_manuscript.py"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "edge",
+   "title": "Maps ⇄ Text (the edge compiler)",
+   "blurb": "The finish line: the edge between autogenerated and composed, closed by language and observation — word → time → contract → space → observation → ruling.",
+   "children": [
+    {
+     "id": "edge-forward",
+     "title": "Forward transform",
+     "detail": "desire_timeline.py reads a walked map into desire curves — the EYE (angular presence ahead) and the HAND (operable within reach) over the walk as a timeline; desire cycles (promise, approach, inspect, consummation) fork by artifact kind; runtime = walk + sum of dwells.",
+     "paths": [
+      "tools/desire_timeline.py",
+      "tools/gaze_ride.py"
+     ]
+    },
+    {
+     "id": "edge-inverse",
+     "title": "Inverse transform",
+     "detail": "text_to_target.py compiles a map's tutorial text into target curves (reading loads, TRY-paragraphs contract hand spikes); script_compose.py searches layouts to match them — FIT, weight 3.0: the drawn curve leads. Pins (L-011) force ruled artifacts into the cast, never dropped.",
+     "paths": [
+      "tools/text_to_target.py",
+      "tools/script_compose.py",
+      "doc/book/look_scripts/"
+     ]
+    },
+    {
+     "id": "edge-tournament",
+     "title": "The tournament",
+     "detail": "pearl_factory's 14 generative recipes (wfc, antrooms, halls, rooms, physarum...) judged by the experience fitness: encounter-order tau, coverage, promise, dolly-in, cycles, FIT. Champions kept as Trial_ maps, losers deleted. The judge relearns as the chapter's knowledge grows.",
+     "paths": [
+      "tools/pearl_factory.py",
+      "tools/map_tournament.py",
+      "doc/reports/"
+     ]
+    },
+    {
+     "id": "edge-templates",
+     "title": "Templates & growers",
+     "detail": "The other generators: template patterns (painted placement contracts — podium gallery, open floor...), grow_map (5 stages from spatial_needs), zone grammar (5 archetypes), place.py (auto-selects placement engine per map).",
+     "paths": [
+      "commons/data/template_patterns.json",
+      "tools/grow_map.py",
+      "tools/zone_grammar.py",
+      "tools/place.py"
+     ]
+    },
+    {
+     "id": "edge-compose-strategy",
+     "title": "Composition strategies",
+     "detail": "The open seat. Everything so far is search-and-judge (generate candidates, score, keep champion). The connections layer proposes a second family: development - germinate from nodes, grow toward the desire curve, resolve conflicts by kinship. See the proposed edges.",
+     "paths": [
+      "doc/systems_fold.json (connections)"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "maps",
+   "title": "Maps & Sequences",
+   "blurb": "~503 maps in ~42 sequences, 24 on the spine — the curriculum as geography.",
+   "children": [
+    {
+     "id": "maps-spine",
+     "title": "The spine",
+     "detail": "curriculum_spine.json orders the 24 core sequences (spine.sequences); sequence JSONs define map order, unlock requirements, lab transitions.",
+     "paths": [
+      "commons/maps/curriculum_spine.json",
+      "commons/maps/sequences/"
+     ]
+    },
+    {
+     "id": "maps-narrative",
+     "title": "Map as narrative",
+     "detail": "Five phases per map: entry (spawn + context), teaching (main artifact), exploration, reflection (text + darkness), exit (teleporter). Registers from the look scripts: arrival (the void first), promenade (scenes at wings), close (hero last).",
+     "paths": [
+      "doc/MAP_BUILDING_GUIDE.md"
+     ]
+    },
+    {
+     "id": "maps-pipeline",
+     "title": "The 7-stage pipeline",
+     "detail": "Structure, Documentation, Artifacts, Maps, Validation, VR Testing, Polish. HEAD = lowest incomplete stage; work at the head. Scored by sequence_pipeline_scorer.py.",
+     "paths": [
+      "tools/sequence_pipeline_scorer.py"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "runtime",
+   "title": "VR & Desktop Runtime",
+   "blurb": "One data format, four bodies: VR headset, desktop walker, standalone Quest, and a Source 2 export.",
+   "children": [
+    {
+     "id": "runtime-vr",
+     "title": "OpenXR",
+     "detail": "Full VR locomotion; the action map (11 profiles) is a known clobber target — a dead thumbstick means git checkout the .tres and restart.",
+     "paths": [
+      "openxr_action_map.tres"
+     ]
+    },
+    {
+     "id": "runtime-desktop",
+     "title": "Desktop walker",
+     "detail": "The same maps walked flat-screen with the crosshair hand — the primary observation instrument under THE EDGE ruling (walking desktop + language does the whole work; VR adds nothing to the diagnosis).",
+     "paths": [
+      "commons/scenes/desktop_map_tester.tscn"
+     ]
+    },
+    {
+     "id": "runtime-quest",
+     "title": "Quest hot-reload",
+     "detail": "push_map_to_quest.ps1 pushes edited map JSON to a standalone Quest via adb run-as; GridDataComponent polls vrStaging — map=data, artifacts=code, no APK rebuild.",
+     "paths": [
+      "tools/push_map_to_quest.ps1"
+     ]
+    },
+    {
+     "id": "runtime-bridge",
+     "title": "Live bridges",
+     "detail": "/map-simulator drives a live Godot viewer (gated --mapsim-bridge): web edits write map_data, the window re-renders. The window shows, the web steers. s&box export rebuilds map_data.json in Source 2 VR — the format is engine-agnostic.",
+     "paths": [
+      "commons/maps/catalog/MapCatalogDesktop3D.gd",
+      "export/sbox_ada_vr/"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "capture",
+   "title": "Capture & Verification",
+   "blurb": "Nothing is believed until a headless run renders it or a walker crosses it.",
+   "children": [
+    {
+     "id": "capture-multi",
+     "title": "Multi-angle capture",
+     "detail": "capture_multi_angle.gd renders any artifact or map from 4 angles headless (--xr-mode off --no-window); capture_all batches with manifest-based skip. Output to Roaming user://multi_shots.",
+     "paths": [
+      "commons/testing/capture_multi_angle.gd",
+      "commons/testing/capture_all.gd"
+     ]
+    },
+    {
+     "id": "capture-watchdog",
+     "title": "The 16-second rule",
+     "detail": "No capture may halt the pipeline: godot_watchdog.py kills the process tree if boot exceeds 45s grace or output stalls 16s. Never two Godot instances at once — the second dies silently on the user:// lock.",
+     "paths": [
+      "tools/godot_watchdog.py"
+     ]
+    },
+    {
+     "id": "capture-gates",
+     "title": "Gates & scorers",
+     "detail": "Release gates for launch quality; walk_evaluator scores placement walkability (detour, encounter order, backtrack); the pathfinder coverage gate runs on map-touching commits.",
+     "paths": [
+      "tools/run_release_gates.py",
+      "tools/walk_evaluator.py"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "web",
+   "title": "Encyclopedia & Web Tools",
+   "blurb": "The project's second body: 578 routes of editors, atlases, and APIs — including the content fractal this fold is the sibling of.",
+   "children": [
+    {
+     "id": "web-fractal",
+     "title": "The fractal database",
+     "detail": "GET /api/fractal: the whole project (1500+ nodes) at any depth through six lenses (structural, semantic, pedagogical, code, critical, biome). Fold-first navigation, 5.9x fewer tokens than file-walking. /systems (this fold) is its architecture-lens sibling.",
+     "paths": [
+      "ada_encyclopedia /api/fractal",
+      "ada_encyclopedia /fractal"
+     ]
+    },
+    {
+     "id": "web-editors",
+     "title": "Editors",
+     "detail": "/map-builder, /map-studio, /voxel-editor, /grid-editor, /pattern-maker, /template-pattern-editor, /desire-timeline, /space-time, /spine-graph — the 2D hands that shape the 3D rooms.",
+     "paths": [
+      "ada_encyclopedia src/app/"
+     ]
+    },
+    {
+     "id": "web-trackers",
+     "title": "Trackers & atlases",
+     "detail": "/threads (development threads + live git), /seams (the bias landscape), /concept-maps (ten ladders), /atlas (artifact distance), /final-lap, /order-of-things, /book + /tutorial readers.",
+     "paths": [
+      "doc/threads.json",
+      "ada_encyclopedia src/app/"
+     ]
+    },
+    {
+     "id": "web-find",
+     "title": "Agent search",
+     "detail": "GET /api/find?q= — one call over every route and full-text content; the server-side twin of the nav search bar.",
+     "paths": [
+      "ada_encyclopedia /api/find"
+     ]
+    }
+   ]
+  }
+ ],
+ "connections": {
+  "_note": "Edges between leaves of different domains. wired = the pipe exists on disk today. proposed = a pattern this fold surfaced, sleeping until ruled. shape: feeds (data flows), judges (one gates the other), same-shape (the deep ones - two systems running the same algorithm in different kingdoms), reacts (runtime coupling).",
+  "edges": [
+   {
+    "id": "e-dna-staging",
+    "kind": "wired",
+    "shape": "feeds",
+    "from": "artifacts-staging",
+    "to": "edge-templates",
+    "title": "Staging DNA stages the room",
+    "detail": "DressingRoomBuilder renders every artifact inside its type's environment template - the artifact already carries a genome for its own habitat (footing, support, dressing)."
+   },
+   {
+    "id": "e-text-target",
+    "kind": "wired",
+    "shape": "feeds",
+    "from": "text-permap",
+    "to": "edge-inverse",
+    "title": "The text compiles the room",
+    "detail": "tutorial.md segments become desire targets (reading loads, TRY-paragraphs contract hand spikes); script_compose chases them with FIT weight 3.0. The writing times and shapes the space."
+   },
+   {
+    "id": "e-sizes-ride",
+    "kind": "wired",
+    "shape": "feeds",
+    "from": "artifacts-sizes",
+    "to": "edge-forward",
+    "title": "Size and dwell feed the walk",
+    "detail": "artifact_sizes.json drives gaze_ride's angular maths (viewing distance scales with size); artifact_dwell.json fills the timeline - runtime = walk + sum of dwells."
+   },
+   {
+    "id": "e-path-judge",
+    "kind": "wired",
+    "shape": "judges",
+    "from": "grid-pathfinder",
+    "to": "edge-tournament",
+    "title": "The walker gates the tournament",
+    "detail": "No candidate map survives judging if the pathfinder cannot cross it; experience fitness is scored on the ride log of an actual crossing."
+   },
+   {
+    "id": "e-stages-spine",
+    "kind": "wired",
+    "shape": "feeds",
+    "from": "biome-stages",
+    "to": "maps-spine",
+    "title": "The curriculum gates the ecology",
+    "detail": "soft_stages.json keys density, kingdoms, and unlocks to sequence progress - down to single events (the catalyst arrives at map_completed: Trans_Pit)."
+   },
+   {
+    "id": "e-catalyst-biome",
+    "kind": "wired",
+    "shape": "reacts",
+    "from": "catalyst-bracelet",
+    "to": "biome-dispatcher",
+    "title": "The catalyst touches the living layer",
+    "detail": "Typed catalyst hits, touch, dwell, and tick call react() on the biome; mutate channels route into GridMutatorBase. Play already reshapes the grown layer (biome-7)."
+   },
+   {
+    "id": "e-germination",
+    "kind": "proposed",
+    "shape": "same-shape",
+    "from": "biome-halo",
+    "to": "edge-compose-strategy",
+    "title": "Germination: grow the map around its artifacts",
+    "detail": "The halo grows wilderness around the MAP as node; invert the scale and grow the MAP around its ARTIFACTS as nodes. Plant the hero at the register's climax cell, plant the pins, then let each artifact accrete its habitat outward from its staging DNA - composition as development, not search. The tournament stays as judge, but stops being the author."
+   },
+   {
+    "id": "e-desire-food",
+    "kind": "proposed",
+    "shape": "same-shape",
+    "from": "edge-inverse",
+    "to": "biome-nature",
+    "title": "The desire curve is a food map",
+    "detail": "Mycelium's ruled generator (space colonization) grows toward food; the text compiler already produces attention-over-walk-time. Feed the desire target to a space-colonization pass as its nutrient field and the corridor grows toward what the text promises. Same algorithm, two kingdoms."
+   },
+   {
+    "id": "e-anastomosis",
+    "kind": "proposed",
+    "shape": "same-shape",
+    "from": "edge-forward",
+    "to": "biome-nature",
+    "title": "Desire cycles are anastomosis",
+    "detail": "Space colonization makes a tree; mycelium makes loops (anastomosis) - and a walk whose desire returns to consummate an early promise is exactly a loop closing. Grown walk-networks could close cycles where the desire timeline returns, instead of scoring cycle-completion after the fact."
+   },
+   {
+    "id": "e-keystone",
+    "kind": "proposed",
+    "shape": "feeds",
+    "from": "text-heroes",
+    "to": "biome-dispatcher",
+    "title": "The soul hero as keystone species",
+    "detail": "Ruled heroes are exempt from scoring but could be VISIBLE to growth: the biome bends around a keystone (density, kingdom, light differ near the nails). Protection and habitat are different relations - the register could feed the dispatcher without ever feeding a metric."
+   },
+   {
+    "id": "e-accretion",
+    "kind": "proposed",
+    "shape": "reacts",
+    "from": "biome-dispatcher",
+    "to": "edge-templates",
+    "title": "Placement keeps growing in play",
+    "detail": "The biome already reacts to touch and dwell at runtime; a germinated map need not freeze at compose time. Player dwell as light: rooms thicken where bodies actually stop. The dressing layer accretes across sessions the way the colony grows between rains."
+   },
+   {
+    "id": "e-kinship",
+    "kind": "proposed",
+    "shape": "judges",
+    "from": "artifacts-families",
+    "to": "edge-templates",
+    "title": "Grammar as local kinship rules",
+    "detail": "The cabinet grammar resolves composition by measured local rules (kinship, seating, colour) with live compliance - no global fitness search. Placement conflicts between neighbouring artifacts could resolve the same way: local law instead of tournament, checkable per pair."
+   }
+  ]
+ }
 }
