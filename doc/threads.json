@@ -802,7 +802,7 @@
     "\b(mycelium|myceli|hypha|hyphae|filament|space.?coloni[sz]ation|morpho.?sweep)\b"
    ],
    "progress": {
-    "done": 4,
+    "done": 5,
     "total": 6,
     "unit": "milestones"
    },
@@ -838,8 +838,9 @@
     },
     {
      "id": "mycelium-6",
-     "text": "Ruling: does fungus:mycelium become the default fungus look, or ship both (ca=voxel network, mycelium=filaments) as an authoring choice? Optional fruiting bodies (fungus_morphology mushrooms) at dense nodes.",
-     "done": false
+     "text": "RULED 2026-07-21 — Palle verbatim: \"both should ship as an authoring choice.\" The fungus kingdom carries TWO substrates and NO default: fungus:ca (MoldNetwork CA, gen-frozen — a voxel network, visibly computed) and fungus:mycelium (space-colonised filaments — tapering hyphae, visibly grown). Not better/worse versions of one thing; two readings of fungus, and the map picks. Landed where authoring happens: /template-maps kingdom palette gained `fungus · mycelium web` + `fungus · mycelium (sparse)` brushes beside the CA ones; /biome-gallery lists all four fungus tokens; BiomeGridTokens header documents the algo as the chooser. Honest asymmetry left standing: a cell declaring NO algo keeps the CA — not a default in disguise, that is the painted layer (no algo field), and switching its substrate silently would break maps that never asked. Optional fruiting bodies (fungus_morphology mushrooms at dense nodes) remain unbuilt — folded into milestone 5 if wanted.",
+     "done": true,
+     "completed": "2026-07-21"
     }
    ]
   }

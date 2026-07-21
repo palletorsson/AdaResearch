@@ -8,6 +8,14 @@
 #
 #   kingdoms:  flora fungus fauna mineral water meta
 #   roles:     seed field edge halo mute
+#
+#   ALGO — within a kingdom the algo picks the substrate:
+#     flora:lsystem  → a DNA-driven tree      flora:scatter → a botanical flower
+#     fungus:ca      → the MoldNetwork CA, gen-frozen as a spreading voxel network
+#     fungus:mycelium→ space-colonised filaments, tapering hyphae (curve-rendered)
+#   The two fungus substrates BOTH SHIP as an authoring choice (Palle,
+#   2026-07-21) — neither is "the default"; pick by what the room needs. A cell
+#   that declares no algo (the painted layer) keeps the CA.
 #   mods:      d= density 0..1 · t= tier 1..5 · p= palette · clk= static|dwell|walk
 #              rule= (algo param, e.g. CA rule) · any other k=v kept verbatim in mods
 #   reactions: on=<trigger>:<response>[/<response>...]

@@ -114,6 +114,30 @@ node to one parent. Closing this needs an explicit fusion pass (join tips that
 pass within some radius, and let the thickness solver run on a graph rather than
 a tree). Folded into milestone 5 as its own item rather than left implicit.
 
+## Ruling: both substrates ship (2026-07-21, milestone 6)
+
+**Palle, verbatim: "both should ship as an authoring choice."**
+
+Milestone 6 asked whether `fungus:mycelium` replaces the fungus look or joins it.
+It joins it. The kingdom carries **two substrates and no default**:
+
+- `fungus:ca` — the MoldNetwork cellular automaton, gen-frozen at its spreading
+  front: a voxel network, blocky, algorithmic, visibly *computed*.
+- `fungus:mycelium` — space-colonised filaments: tapering hyphae, trunks
+  thickening inward, tips hair-thin, visibly *grown*.
+
+They are not better and worse versions of one thing; they are two different
+readings of fungus, and the map picks. That makes the choice an authoring act,
+so it has to exist where authoring happens — the `/template-maps` kingdom palette
+now carries `fungus · mycelium web` and `fungus · mycelium (sparse)` brushes
+beside the CA ones, `/biome-gallery` lists all four fungus tokens, and the token
+grammar header documents the algo as the chooser.
+
+One honest asymmetry the ruling leaves standing: a cell that declares **no** algo
+keeps the CA. That is not a default in disguise — it is the painted biome layer,
+which has no algo field at all, and changing its substrate silently would break
+maps that never asked. Grid cells always declare.
+
 ## Risks / gotchas
 
 - **Perf** — many thin segments; batching is mandatory, not optional. A colony is

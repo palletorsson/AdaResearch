@@ -27,7 +27,7 @@ KINGDOMS = [
          {"algo": "scatter", "renders": "botanical flower, preset by tier", "token": "flora:scatter:seed:t=3"},
      ]},
     {"id": "fungus", "name": "Fungus", "color": "#a674cc",
-     "blurb": "Mould. A 3D cellular automaton frozen at its spreading front — a network ring with a hollow centre and gappy edges, not a ball. `rule=` overrides the CA rule, `gen=` the generation it freezes at.",
+     "blurb": "Two substrates ship, and neither is the default (ruled 2026-07-21) — the map picks. `ca` is a 3D cellular automaton frozen at its spreading front: a voxel network, visibly computed. `mycelium` is space-colonised filaments: tapering hyphae, trunks thickening inward, tips hair-thin, visibly grown.",
      "algos": [
          {"algo": "ca", "renders": "MoldNetwork CA, gen-frozen as a spreading voxel network", "token": "fungus:ca:seed:t=5"},
          {"algo": "ca (tuned)", "renders": "same CA, per-cell rule and freeze generation", "token": "fungus:ca:seed:rule=4-6/5-7/10/M:gen=16"},
