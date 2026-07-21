@@ -30,15 +30,19 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
 MAPS = REPO / "commons" / "maps"
+SEQUENCES = REPO / "commons" / "maps" / "sequences"
 REGISTRY = REPO / "commons" / "artifacts" / "registry"
 ROOMS = REPO / "commons" / "artifacts" / "dressing_rooms"
 ENC = REPO.parent / "ada_encyclopedia" / "public"
 CAPTURES = ENC / "artifact-gallery" / "captures"
 OUT = ENC / "map-dna"
 
-# tokens that are grid chrome, not artifacts
+# tokens that are grid chrome, not artifacts. mc:/criticalinfo: are runtime
+# prefixes handled by GridInteractablesComponent; test_scene_* are dead
+# placeholders in throwaway test maps.
 SKIP = {"", ",", "cluster", "tt", "sub", "tc", "e", "an", "3t",
-        "sp", "t", "s", "r", "m", "ds", "n", "0"}
+        "sp", "t", "s", "r", "m", "ds", "n", "0",
+        "mc", "criticalinfo", "test_scene_1", "test_scene_2"}
 
 
 def load_voice_index() -> set:
@@ -52,6 +56,27 @@ def load_voice_index() -> set:
                 if str(v.get("crit_text", "") or "").strip()}
     except Exception:
         return set()
+
+
+def load_sequence_index() -> dict:
+    """map name -> [sequence ids] from the sequence definitions (active
+    `maps` lists only — deferred_maps stay unattributed)."""
+    out: dict = {}
+    for f in SEQUENCES.glob("*.json"):
+        try:
+            data = json.loads(f.read_text(encoding="utf-8"))
+        except Exception:
+            continue
+        seqs = data.get("sequences", {})
+        if not isinstance(seqs, dict):  # sequence_index.json is a list summary
+            continue
+        for seq_id, seq in seqs.items():
+            if not isinstance(seq, dict):
+                continue
+            for m in seq.get("maps", []):
+                if isinstance(m, str):
+                    out.setdefault(m, []).append(seq_id)
+    return out
 
 
 def load_registry() -> dict:
@@ -118,10 +143,14 @@ def build_map(map_dir: Path, reg: dict, voiced_idx: set) -> dict | None:
         return None
     name = map_dir.name
     entries = []
+    types: set = set()
     n_img = n_room = n_voice = n_promoted = 0
     for c in cast:
         lk = c["lookup"]
         e = reg.get(lk, {})
+        a_type = str(e.get("artifact_type", "") or "")
+        if a_type:
+            types.add(a_type)
         img = ""
         cap = CAPTURES / lk / "front.png"
         if cap.exists():
@@ -157,6 +186,7 @@ def build_map(map_dir: Path, reg: dict, voiced_idx: set) -> dict | None:
         "description": f"Every artifact in {name}, promoted to a DNA entry — "
                        "current genome shown; auto research varies it from here.",
         "entries": entries,
+        "types": sorted(types),
         "coverage": {
             "cast": len(entries),
             "captured": n_img,
@@ -174,6 +204,7 @@ def main() -> int:
             want = a.split("=", 1)[1]
     reg = load_registry()
     voiced_idx = load_voice_index()
+    seq_index = load_sequence_index()
     OUT.mkdir(parents=True, exist_ok=True)
     index: list[dict] = []
     n = 0
@@ -192,6 +223,8 @@ def main() -> int:
             encoding="utf-8", newline="\n")
         cov = m["coverage"]
         index.append({"map": map_dir.name, **cov,
+                      "seqs": seq_index.get(map_dir.name, []),
+                      "types": m["types"],
                       "gap": cov["cast"] * 3 - cov["captured"] - cov["rooms"] - cov["voiced"]})
         n += 1
     if not want:

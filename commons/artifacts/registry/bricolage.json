@@ -537,6 +537,63 @@
     "bricolage"
    ],
    "qfep_connection": "The second answer to the same problem, and it shares no strategy with the first. Three members lean into a shared cap; remove any one and the other two fall. Nothing here is counterweighted — the balance is mutual, meaning through relation exactly as the room's title claims. Two works, both upright, disagreeing about how: which is what makes balance a craft and not a rule."
+  },
+  "chair_parts_inventory": {
+   "name": "Chair Parts Inventory",
+   "lookup_name": "chair_parts_inventory",
+   "description": "Four cylinder legs racked as stock, seat and back planes leaning — the chair before anyone decides it is one.",
+   "qfep_connection": "Stock is a claim withheld: the same cylinders the affordance plinths named 'column' wait here without a verdict.",
+   "scene": "res://commons/artifacts/chair_kit/chair_kit.tscn",
+   "category": "bricolage",
+   "artifact_type": "demonstration",
+   "complexity": "intermediate",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "bricolage"
+   ],
+   "footprint": [
+    1,
+    1
+   ]
+  },
+  "chair_builder": {
+   "name": "Chair Builder",
+   "lookup_name": "chair_builder",
+   "description": "Legs standing at their corners, the seat lowered halfway — assembly caught at the moment affordance becomes commitment.",
+   "qfep_connection": "The joint is the decision made rigid: between stock and chair there is a moment where the plane could still be a wall.",
+   "scene": "res://commons/artifacts/chair_kit/chair_kit.tscn",
+   "category": "bricolage",
+   "artifact_type": "demonstration",
+   "complexity": "intermediate",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "bricolage"
+   ],
+   "footprint": [
+    1,
+    1
+   ]
+  },
+  "chair_assembled": {
+   "name": "Chair Assembled",
+   "lookup_name": "chair_assembled",
+   "description": "The finished chair — a plane at knee height on four columns, the back risen. Nothing here that was not already in the inventory.",
+   "qfep_connection": "A chair is a treaty between a plane and four columns; sitting was never invented, only noticed and made rigid.",
+   "scene": "res://commons/artifacts/chair_kit/chair_kit.tscn",
+   "category": "bricolage",
+   "artifact_type": "demonstration",
+   "complexity": "intermediate",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "bricolage"
+   ],
+   "footprint": [
+    1,
+    1
+   ]
   }
  }
 }

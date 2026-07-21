@@ -10846,6 +10846,21 @@
     "seam",
     "digital_bias"
    ]
+  },
+  "gallery_marker_pattern": {
+   "name": "Gallery Marker — Pattern",
+   "lookup_name": "gallery_marker_pattern",
+   "description": "Bronze pedestal + glowing stake + Label3D reading PATTERN. Single-cell sub-gallery anchor for the Pattern_pt01..pt10 wallpaper-group maps. Shared scene at commons/artifacts/gallery_marker; the lookup_name fixes the label per gallery_marker_<sequence> alias pattern.",
+   "scene": "res://commons/artifacts/gallery_marker/gallery_marker.tscn",
+   "category": "patterns",
+   "sequence": "patterns",
+   "artifact_type": "marker",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "footprint": [
+    1,
+    1
+   ]
   }
  }
 }

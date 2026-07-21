@@ -38,7 +38,7 @@
     "summary": "BodyProg_Hands - Introduction to VR embodiment through floating hands",
     "layout": "Dark void room with a central mirror and color picker",
     "objective": "See your hands in the mirror. Customize nail color. Experience the body as fragments.",
-    "key_elements": ["mirror_artifact - reflects player's floating hands","color_picker - nail color customization"]
+    "key_elements": ["mirror_artifact - reflects player's floating hands","nail_color_controller - nail color customization"]
   },
   "lighting": {
     "ambient_color": [0.15,0.1,0.2],
@@ -91,7 +91,7 @@
       [" "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "],
-      [" "," "," ","color_picker"," ","mirror_artifact"," "," "," "," "],
+      [" "," "," ","nail_color_controller"," ","mirror_artifact"," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "],
       [" "," "," "," "," "," "," "," "," "," "],

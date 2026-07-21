@@ -23570,6 +23570,21 @@
     "primitives",
     "archimedes"
    ]
+  },
+  "rotating_prisme": {
+   "name": "Rotating Prisme",
+   "lookup_name": "rotating_prisme",
+   "description": "A slowly rotating prism — continuous rotation makes orientation legible without interaction. Sibling of prism_block; used in the 2D-colour tutorial as ambient motion reference.",
+   "scene": "res://commons/primitives/prismes/rotating_prisme.tscn",
+   "category": "primitives",
+   "artifact_type": "demonstration",
+   "complexity": "beginner",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "footprint": [
+    1,
+    1
+   ]
   }
  },
  "registry_info": {

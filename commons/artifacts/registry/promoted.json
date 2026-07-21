@@ -2141,6 +2141,37 @@
         "spec_file": "commons\\primitives\\promoted\\_specs\\grammar_tessellation_field_alhambra_truncated_square_488.compose.json"
       },
       "scene": "res://commons/primitives/promoted/grammar_tessellation_field_alhambra_truncated_square_488/grammar_tessellation_field_alhambra_truncated_square_488.tscn"
+    },
+    "parametric-mesh-gallery__cylinder_r16": {
+      "name": "Cylinder r16 (parametric mesh crown jewel)",
+      "lookup_name": "parametric-mesh-gallery__cylinder_r16",
+      "description": "Promoted parametric cylinder (16 radial segments) from the parametric-mesh gallery, rated crown_jewel. Base generator cylinder_radials_rings.",
+      "scene": "res://commons/primitives/promoted/parametric-mesh-gallery__cylinder_r16/cylinder_r16.tscn",
+      "category": "primitives",
+      "artifact_type": "specimen",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "footprint": [
+        1,
+        1
+      ]
+    },
+    "totem": {
+      "name": "Totem",
+      "lookup_name": "totem",
+      "description": "Canonical totem prop — alias for the promoted grammar_totem_pole_rainbow_taper composition. Eight Archetype_* maps place 'totem' as scenery; this entry resolves it via delegate_to rather than renaming every map.",
+      "delegate_to": "grammar_totem_pole_rainbow_taper",
+      "category": "primitives",
+      "artifact_type": "specimen",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "footprint": [
+        1,
+        1,
+        1
+      ]
     }
   }
 }
