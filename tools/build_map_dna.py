@@ -37,7 +37,7 @@ CAPTURES = ENC / "artifact-gallery" / "captures"
 OUT = ENC / "map-dna"
 
 # tokens that are grid chrome, not artifacts
-SKIP = {"", "cluster", "tt", "sub", "tc", "e", "an", "3t",
+SKIP = {"", ",", "cluster", "tt", "sub", "tc", "e", "an", "3t",
         "sp", "t", "s", "r", "m", "ds", "n", "0"}
 
 

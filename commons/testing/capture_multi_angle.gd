@@ -392,7 +392,20 @@ func _run_artifact_capture() -> void:
 		quit(1)
 		return
 
+	# delegate_to support, same contract as GridInteractablesComponent:
+	# an entry without `scene` may name another artifact whose scene is
+	# instantiated, with delegate_params applied as config after _ready().
+	var delegate_params: Dictionary = {}
 	var scene_path: String = str(artifact_info.get("scene", "")).strip_edges()
+	if scene_path.is_empty() and str(artifact_info.get("delegate_to", "")).strip_edges() != "":
+		var target_lookup: String = str(artifact_info.get("delegate_to", "")).strip_edges()
+		var target_info: Dictionary = _find_artifact(target_lookup)
+		if not target_info.is_empty():
+			var dp: Variant = artifact_info.get("delegate_params", {})
+			if dp is Dictionary:
+				delegate_params = dp
+			scene_path = str(target_info.get("scene", "")).strip_edges()
+			print("capture_multi_angle [artifact]: %s delegates to %s" % [_target, target_lookup])
 	if scene_path.is_empty() or not ResourceLoader.exists(scene_path):
 		push_error("capture_multi_angle: Scene not found: %s" % scene_path)
 		quit(1)
@@ -421,6 +434,11 @@ func _run_artifact_capture() -> void:
 
 	scene_root.add_child(artifact)
 	print("capture_multi_angle [artifact]: Instantiated from %s" % scene_path)
+
+	# Delegated entries configure the host scene after _ready(), the same
+	# deferred contract the grid honours (delegate_params → apply_grid_config).
+	if not delegate_params.is_empty() and artifact.has_method("apply_grid_config"):
+		artifact.call_deferred("apply_grid_config", delegate_params.duplicate(true))
 
 	# Let the artifact run _ready()
 	await process_frame
