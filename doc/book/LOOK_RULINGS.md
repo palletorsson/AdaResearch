@@ -92,7 +92,20 @@ Contradictions between rulings are content, not errors.
 
 **L-023 (Palle, 2026-07-21, verbatim):** "If we lock x to 13, that is 2+3+3+3+2 or 2+4+1+4+2 or 2+9+2 etc. Since the game is moving into z the gaze and speed move into z, imagine we build on the principal like a modular system with fitting parts like a railway system. But in the game it's a walking path, like in New York walking path, or in a space ship corridor. The path corridor can be filled with a different template that becomes a structure that we place and have preconfigured places to put our artifact in. Imagine we have a menu with the templates and we drag them in like we are making a track."
 
+**L-024 (Palle, 2026-07-21, verbatim):** "we do not need the train for real I mean it more a metaphore if you can dig anything from that?"
+
 ## Compiled properties (grows as rulings land)
+
+**P-10a. Fold the track (from L-024).** The train metaphor's cargo was the coupling, the slots,
+and the grammar — never the line. The timeline stays linear (the walk, the film); the FLOOR is
+the timeline folded (L-016 read in the right direction). Sections keep their bodies and slots and
+gain PORTS at the locked cross-section: corner sections (a corner is a cut — the hard edit),
+plaza sections (the profile opens into a court; the arrival was always a plaza), T-junctions
+(the three-orders branch point, spatialized: a side-pool the walk may take). Occlusion becomes
+the instrument of desire — around a corner the promise is a glow, not a speck, and arrival is
+discovery. The mined grammar survives (it orders the walk, not the compass); only the router
+changes: the train becomes a route laid on the grid. Folding also restores the composed density
+a straight strip can never have: walls arise from the fold, not as applique.
 
 **P-10. The track (from L-023).** Lock the cross-section (x=13) and decompose it into LANE
 PROFILES — 2+3+3+3+2, 2+4+1+4+2, 2+9+2: edge walks, bays, aisle — the street section, the
