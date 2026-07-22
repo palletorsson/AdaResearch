@@ -117,21 +117,44 @@ def compose(map_name, scripts, seeds):
         train_log.append({"id": exit_sec["id"], "z": z})  # the exit couples last, always
         z += exit_sec["z_len"]
         depth = z + 1
-        # floor: full width; arrival_void carves the plate; shrunken narrows
+        # floor: full width; arrival_void carves the plate; shrunken narrows;
+        # BODIES: podium plinths (height 2) under display slots, wall segments
+        # on the corridor edges, pillar columns (height 3) at the gates.
         floor = [["1"] * WIDTH for _ in range(depth)]
-        zz = 0
+        walls = [[""] * WIDTH for _ in range(depth)]
+        slot_cells = {(x, z2) for x, z2, _ in placements}
         for sec in train_log:
             s = next(x for x in KIT["sections"] if x["id"] == sec["id"])
+            z0, z1 = sec["z"], min(depth, sec["z"] + s["z_len"])
             if s["id"] == "arrival_void":
-                for r in range(sec["z"], sec["z"] + s["z_len"]):
+                for r in range(z0, z1):
                     for x in range(WIDTH):
                         floor[r][x] = "1" if 5 <= x <= 7 else "0"
             if s["id"] == "shrunken_void":
-                for r in range(sec["z"], min(depth, sec["z"] + s["z_len"])):
+                for r in range(z0, z1):
                     for x in range(WIDTH):
                         floor[r][x] = "1" if 3 <= x <= 9 else "0"
+            body = s.get("body", {})
+            if body.get("podiums"):
+                for slot in s.get("slots", []):
+                    x, r = lane_x(slot["lane"]), sec["z"] + slot["dz"]
+                    if r < depth and (x, r) in slot_cells and floor[r][x] == "1":
+                        floor[r][x] = "2"  # the plinth; the artifact seats on top
+            wall = body.get("wall")
+            if wall in ("left", "both"):
+                for r in range(z0, z1):
+                    walls[r][0] += "w"
+            if wall in ("right", "both"):
+                for r in range(z0, z1):
+                    walls[r][WIDTH - 1] += "e"
+            for px, pdz in body.get("pillars", []):
+                r = sec["z"] + pdz
+                if r < depth and floor[r][px] == "1":
+                    floor[r][px] = "3"  # gate column
         data, dropped = sc.build_map(source, cand, WIDTH, depth, floor, placements,
                                      (6, 0), (6, depth - 1), exit_tok, script, seed)
+        if any(any(c for c in row) for row in walls):
+            data["layers"]["walls"] = walls
         data["documentation"]["composer"]["tool"] = "track_compose.py"
         data["documentation"]["composer"]["train"] = [t["id"] for t in train_log]
         sc.write_map(cand, data)

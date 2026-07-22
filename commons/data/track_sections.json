@@ -1,12 +1,30 @@
 {
-	"_readme": "The track's section kit (L-023/P-10). Cross-section locked at x=13; every section couples with every section along z (Wang collapsed to 1D — the contract is the width). Each section: a lane profile (widths summing to 13), a z length, and SLOTS — preconfigured artifact places (lane center x, dz, size class, kind affinity). 'mined_as' links kit sections to the categories the miner reads off composed corridors, so the learned grammar can pick kit sections. Hand-edit freely; the template-authoring editor comes later (Palle 2026-07-21).",
+	"_readme": "The track's section kit (L-023/P-10). Cross-section locked at x=13; every section couples with every section along z (Wang collapsed to 1D — the contract is the width). Each section: a lane profile (widths summing to 13), a z length, and SLOTS — preconfigured artifact places (lane center x, dz, size class, kind affinity). 'mined_as' links kit sections to the categories the miner reads off composed corridors, so the learned grammar can pick kit sections. Hand-edit freely; the template-authoring editor comes later (Palle 2026-07-21). BODIES (2026-07-21): sections render furniture — 'podiums' raises a height-2 plinth under specimen/tableau slots (artifacts auto-seat on the cube top), 'wall' adds wall-segment runs on the corridor edge(s) for those rows (layers.walls, lowercase w/e), 'pillars' plants height-3 columns (gates).",
 	"width": 13,
 	"lanes": {
-		"L_edge": [0, 1],
-		"L_bay": [2, 3, 4],
-		"axis": [5, 6, 7],
-		"R_bay": [8, 9, 10],
-		"R_edge": [11, 12]
+		"L_edge": [
+			0,
+			1
+		],
+		"L_bay": [
+			2,
+			3,
+			4
+		],
+		"axis": [
+			5,
+			6,
+			7
+		],
+		"R_bay": [
+			8,
+			9,
+			10
+		],
+		"R_edge": [
+			11,
+			12
+		]
 	},
 	"sections": [
 		{
@@ -23,8 +41,30 @@
 			"profile": "2+3+3+3+2",
 			"z_len": 3,
 			"mined_as": "axis_moment",
-			"slots": [{"lane": "axis", "dz": 1, "size": "small", "kinds": ["specimen", "tableau"]}],
-			"note": "one small thing on the axis — the first mark"
+			"slots": [
+				{
+					"lane": "axis",
+					"dz": 1,
+					"size": "small",
+					"kinds": [
+						"specimen",
+						"tableau"
+					]
+				}
+			],
+			"note": "one small thing on the axis — the first mark",
+			"body": {
+				"pillars": [
+					[
+						4,
+						1
+					],
+					[
+						8,
+						1
+					]
+				]
+			}
 		},
 		{
 			"id": "edge_walk",
@@ -32,10 +72,27 @@
 			"z_len": 4,
 			"mined_as": "edge_walk",
 			"slots": [
-				{"lane": "L_edge", "dz": 1, "size": "small", "kinds": ["specimen"]},
-				{"lane": "R_edge", "dz": 3, "size": "small", "kinds": ["specimen"]}
+				{
+					"lane": "L_edge",
+					"dz": 1,
+					"size": "small",
+					"kinds": [
+						"specimen"
+					]
+				},
+				{
+					"lane": "R_edge",
+					"dz": 3,
+					"size": "small",
+					"kinds": [
+						"specimen"
+					]
+				}
 			],
-			"note": "the sidewalk: smalls at the edges, axis clear (P-1)"
+			"note": "the sidewalk: smalls at the edges, axis clear (P-1)",
+			"body": {
+				"podiums": true
+			}
 		},
 		{
 			"id": "podium_gallery",
@@ -43,11 +100,38 @@
 			"z_len": 6,
 			"mined_as": "side_bay",
 			"slots": [
-				{"lane": "L_bay", "dz": 1, "size": "medium", "kinds": ["specimen", "performer"]},
-				{"lane": "R_bay", "dz": 3, "size": "medium", "kinds": ["specimen", "performer"]},
-				{"lane": "L_bay", "dz": 5, "size": "small", "kinds": ["specimen"]}
+				{
+					"lane": "L_bay",
+					"dz": 1,
+					"size": "medium",
+					"kinds": [
+						"specimen",
+						"performer"
+					]
+				},
+				{
+					"lane": "R_bay",
+					"dz": 3,
+					"size": "medium",
+					"kinds": [
+						"specimen",
+						"performer"
+					]
+				},
+				{
+					"lane": "L_bay",
+					"dz": 5,
+					"size": "small",
+					"kinds": [
+						"specimen"
+					]
+				}
 			],
-			"note": "L-018's podium gallery: staggered podiums in the bays"
+			"note": "L-018's podium gallery: staggered podiums in the bays",
+			"body": {
+				"podiums": true,
+				"wall": "both"
+			}
 		},
 		{
 			"id": "mirror_aisle",
@@ -55,10 +139,30 @@
 			"z_len": 5,
 			"mined_as": "mirror_bay",
 			"slots": [
-				{"lane": "L_bay", "dz": 2, "size": "medium", "kinds": ["specimen", "tableau"]},
-				{"lane": "R_bay", "dz": 2, "size": "medium", "kinds": ["specimen", "tableau"]}
+				{
+					"lane": "L_bay",
+					"dz": 2,
+					"size": "medium",
+					"kinds": [
+						"specimen",
+						"tableau"
+					]
+				},
+				{
+					"lane": "R_bay",
+					"dz": 2,
+					"size": "medium",
+					"kinds": [
+						"specimen",
+						"tableau"
+					]
+				}
 			],
-			"note": "L-018's aisle mirror: facing pair across a one-lane aisle"
+			"note": "L-018's aisle mirror: facing pair across a one-lane aisle",
+			"body": {
+				"podiums": true,
+				"wall": "both"
+			}
 		},
 		{
 			"id": "reading_bay",
@@ -66,10 +170,28 @@
 			"z_len": 5,
 			"mined_as": "mirror_bay",
 			"slots": [
-				{"lane": "L_bay", "dz": 2, "size": "medium", "kinds": ["tableau"]},
-				{"lane": "R_bay", "dz": 3, "size": "small", "kinds": ["specimen"]}
+				{
+					"lane": "L_bay",
+					"dz": 2,
+					"size": "medium",
+					"kinds": [
+						"tableau"
+					]
+				},
+				{
+					"lane": "R_bay",
+					"dz": 3,
+					"size": "small",
+					"kinds": [
+						"specimen"
+					]
+				}
 			],
-			"note": "a board to read, off-axis, with a small rest-beat across (P-6)"
+			"note": "a board to read, off-axis, with a small rest-beat across (P-6)",
+			"body": {
+				"podiums": true,
+				"wall": "left"
+			}
 		},
 		{
 			"id": "try_bench",
@@ -77,10 +199,27 @@
 			"z_len": 4,
 			"mined_as": "side_bay",
 			"slots": [
-				{"lane": "L_bay", "dz": 2, "size": "medium", "kinds": ["instrument"]},
-				{"lane": "R_bay", "dz": 2, "size": "medium", "kinds": ["instrument"]}
+				{
+					"lane": "L_bay",
+					"dz": 2,
+					"size": "medium",
+					"kinds": [
+						"instrument"
+					]
+				},
+				{
+					"lane": "R_bay",
+					"dz": 2,
+					"size": "medium",
+					"kinds": [
+						"instrument"
+					]
+				}
 			],
-			"note": "TRY's contract: instruments at arm's reach off the walk (P-3/P-6)"
+			"note": "TRY's contract: instruments at arm's reach off the walk (P-3/P-6)",
+			"body": {
+				"wall": "both"
+			}
 		},
 		{
 			"id": "performer_pocket",
@@ -88,9 +227,19 @@
 			"z_len": 5,
 			"mined_as": "side_bay",
 			"slots": [
-				{"lane": "L_bay", "dz": 2, "size": "medium", "kinds": ["performer"]}
+				{
+					"lane": "L_bay",
+					"dz": 2,
+					"size": "medium",
+					"kinds": [
+						"performer"
+					]
+				}
 			],
-			"note": "a dwell pocket: floor to stand on, sightline held (P-3a)"
+			"note": "a dwell pocket: floor to stand on, sightline held (P-3a)",
+			"body": {
+				"wall": "left"
+			}
 		},
 		{
 			"id": "random_podiums",
@@ -98,12 +247,43 @@
 			"z_len": 6,
 			"mined_as": "side_bay",
 			"slots": [
-				{"lane": "L_bay", "dz": 1, "size": "small", "kinds": ["specimen"]},
-				{"lane": "R_bay", "dz": 2, "size": "small", "kinds": ["specimen"]},
-				{"lane": "L_bay", "dz": 4, "size": "small", "kinds": ["specimen"]},
-				{"lane": "R_edge", "dz": 5, "size": "small", "kinds": ["specimen"]}
+				{
+					"lane": "L_bay",
+					"dz": 1,
+					"size": "small",
+					"kinds": [
+						"specimen"
+					]
+				},
+				{
+					"lane": "R_bay",
+					"dz": 2,
+					"size": "small",
+					"kinds": [
+						"specimen"
+					]
+				},
+				{
+					"lane": "L_bay",
+					"dz": 4,
+					"size": "small",
+					"kinds": [
+						"specimen"
+					]
+				},
+				{
+					"lane": "R_edge",
+					"dz": 5,
+					"size": "small",
+					"kinds": [
+						"specimen"
+					]
+				}
 			],
-			"note": "L-018's random podiums with density — scattered, axis clear"
+			"note": "L-018's random podiums with density — scattered, axis clear",
+			"body": {
+				"podiums": true
+			}
 		},
 		{
 			"id": "wall_line",
@@ -111,11 +291,39 @@
 			"z_len": 5,
 			"mined_as": "edge_walk",
 			"slots": [
-				{"lane": "L_edge", "dz": 0, "size": "small", "kinds": ["specimen", "tableau"]},
-				{"lane": "L_edge", "dz": 2, "size": "small", "kinds": ["specimen", "tableau"]},
-				{"lane": "L_edge", "dz": 4, "size": "small", "kinds": ["specimen", "tableau"]}
+				{
+					"lane": "L_edge",
+					"dz": 0,
+					"size": "small",
+					"kinds": [
+						"specimen",
+						"tableau"
+					]
+				},
+				{
+					"lane": "L_edge",
+					"dz": 2,
+					"size": "small",
+					"kinds": [
+						"specimen",
+						"tableau"
+					]
+				},
+				{
+					"lane": "L_edge",
+					"dz": 4,
+					"size": "small",
+					"kinds": [
+						"specimen",
+						"tableau"
+					]
+				}
 			],
-			"note": "L-018's wall with podium cubes along it — the HELD law, one side"
+			"note": "L-018's wall with podium cubes along it — the HELD law, one side",
+			"body": {
+				"podiums": true,
+				"wall": "left"
+			}
 		},
 		{
 			"id": "breather",
@@ -139,17 +347,53 @@
 			"z_len": 6,
 			"mined_as": "axis_moment",
 			"slots": [
-				{"lane": "axis", "dz": 3, "size": "large", "kinds": ["hero"]},
-				{"lane": "L_bay", "dz": 1, "size": "small", "kinds": ["counter"]}
+				{
+					"lane": "axis",
+					"dz": 3,
+					"size": "large",
+					"kinds": [
+						"hero"
+					]
+				},
+				{
+					"lane": "L_bay",
+					"dz": 1,
+					"size": "small",
+					"kinds": [
+						"counter"
+					]
+				}
 			],
-			"note": "the hero on the axis in a vacuum band; the counter facing from the wing"
+			"note": "the hero on the axis in a vacuum band; the counter facing from the wing",
+			"body": {
+				"pillars": [
+					[
+						3,
+						0
+					],
+					[
+						9,
+						0
+					]
+				]
+			}
 		},
 		{
 			"id": "shrunken_void",
 			"profile": "2+1+7+1+2",
 			"z_len": 4,
 			"mined_as": "axis_moment",
-			"slots": [{"lane": "axis", "dz": 2, "size": "medium", "kinds": ["specimen", "performer"]}],
+			"slots": [
+				{
+					"lane": "axis",
+					"dz": 2,
+					"size": "medium",
+					"kinds": [
+						"specimen",
+						"performer"
+					]
+				}
+			],
 			"note": "L-018's shrunken void: the floor narrows, one thing holds the middle"
 		},
 		{
@@ -157,8 +401,21 @@
 			"profile": "2+9+2",
 			"z_len": 4,
 			"mined_as": "breather",
-			"slots": [{"lane": "R_edge", "dz": 2, "size": "small", "kinds": ["specimen", "tableau"]}],
-			"note": "after the climax: low, quiet, one footnote at the edge"
+			"slots": [
+				{
+					"lane": "R_edge",
+					"dz": 2,
+					"size": "small",
+					"kinds": [
+						"specimen",
+						"tableau"
+					]
+				}
+			],
+			"note": "after the climax: low, quiet, one footnote at the edge",
+			"body": {
+				"podiums": true
+			}
 		},
 		{
 			"id": "exit_gate",
