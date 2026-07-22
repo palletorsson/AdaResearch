@@ -1,0 +1,495 @@
+{
+	"map_info": {
+		"name": "Grown_Applied_Lsystem",
+		"lookup_name": "Grown_Applied_Lsystem",
+		"description": "A map grown by the walker laying floor as it placed artifacts. Started at spawn with no structure; the floor and tables emerged as a byproduct of the walk. Constraint score: 0.751, placed: 13/13 artifacts, laid: 92 floor cells + 0 table cells.\n\n[Placement applied humanoid_walker engine \u2014 constraint 0.751\u21920.926, walkability 0.432\u21920.478]",
+		"version": "placed-humanoid_walker",
+		"format": "json",
+		"created_from": "tools/grow_map.py 2026-05-15",
+		"dimensions": {
+			"width": 11,
+			"depth": 10,
+			"max_height": 3
+		},
+		"metadata": {
+			"category": "grown_map",
+			"estimated_time": "1 minute",
+			"auto_research_strategy": "grow_walker",
+			"artifacts_placed": [
+				"growth_animator",
+				"parse_tree_tool",
+				"turtle_plotter",
+				"koch_loom",
+				"curve_plotter",
+				"bracket_pruner",
+				"tree_nursery",
+				"fern_press",
+				"vine_grower",
+				"stochastic_seeder",
+				"parametric_designer",
+				"context_pruner",
+				"substrate_switcher"
+			],
+			"laid_floor_cells": 92,
+			"table_cells": 0,
+			"constraint_score": 0.751
+		},
+		"title": "Grown: Applied_Lsystem"
+	},
+	"utility_definitions": {
+		"sp": {
+			"name": "Spawn",
+			"description": "Player spawn point",
+			"type": "spawn"
+		},
+		"t": {
+			"name": "Exit Portal",
+			"description": "Step here to leave",
+			"type": "teleporter",
+			"properties": {
+				"action": "next_in_sequence"
+			}
+		}
+	},
+	"documentation": {
+		"summary": "Grown_Applied_Lsystem \u2014 map emerged from walker's path",
+		"layout": "11\u00d710 bounding box. The walker entered at spawn and laid 92 floor cells + 0 table cells as it placed 13 artifacts. The teleporter is where the walk ended.",
+		"objective": "Walk the map. The map IS the walk's record.",
+		"key_elements": [
+			"Spawn at (9, 3)",
+			"Teleporter at (0, 10)",
+			"growth_animator at (0, 3)",
+			"parse_tree_tool at (0, 6)",
+			"turtle_plotter at (0, 9)",
+			"koch_loom at (3, 3)",
+			"curve_plotter at (3, 6)",
+			"bracket_pruner at (3, 9)",
+			"tree_nursery at (6, 3)",
+			"fern_press at (6, 8)",
+			"vine_grower at (6, 5)",
+			"stochastic_seeder at (8, 8)",
+			"parametric_designer at (8, 4)",
+			"context_pruner at (8, 6)",
+			"substrate_switcher at (0, 2)"
+		]
+	},
+	"lighting": {
+		"ambient_color": [
+			0.32,
+			0.34,
+			0.4
+		],
+		"ambient_energy": 0.9,
+		"directional_light": {
+			"enabled": true,
+			"direction": [
+				-0.3,
+				-1.0,
+				-0.2
+			],
+			"energy": 0.7
+		}
+	},
+	"settings": {
+		"player_spawn_height": 0.5,
+		"floor_tile_size": 1.0
+	},
+	"layers": {
+		"structure": [
+			[
+				"0",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2"
+			],
+			[
+				"0",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2"
+			],
+			[
+				"0",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2"
+			],
+			[
+				"0",
+				"0",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2"
+			],
+			[
+				"0",
+				"0",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2"
+			],
+			[
+				"0",
+				"0",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2"
+			],
+			[
+				"0",
+				"0",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2"
+			],
+			[
+				"0",
+				"0",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2"
+			],
+			[
+				"0",
+				"0",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2"
+			],
+			[
+				"0",
+				"0",
+				"0",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2"
+			]
+		],
+		"utilities": [
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				"t"
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				"sp",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			]
+		],
+		"interactables": [
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				"koch_loom:180:0.0",
+				" ",
+				"turtle_plotter:180:0.0",
+				" ",
+				" ",
+				"curve_plotter:180:0.0",
+				" ",
+				" ",
+				"bracket_pruner:180:0.0",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				"parse_tree_tool:180:0.0",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				"tree_nursery:180:0.0",
+				" ",
+				" ",
+				" ",
+				" ",
+				"vine_grower:180:0.0",
+				" ",
+				" ",
+				"fern_press:180:0.0",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				"growth_animator:180:0.0",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				"parametric_designer:180:0.0",
+				" ",
+				"substrate_switcher:180:0.0",
+				" ",
+				" ",
+				"context_pruner:180:0.0",
+				" ",
+				" ",
+				"stochastic_seeder:180:0.0",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			]
+		]
+	}
+}

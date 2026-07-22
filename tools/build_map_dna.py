@@ -58,10 +58,12 @@ def load_voice_index() -> set:
         return set()
 
 
-def load_sequence_index() -> dict:
-    """map name -> [sequence ids] from the sequence definitions (active
-    `maps` lists only — deferred_maps stay unattributed)."""
+def load_sequence_index() -> tuple:
+    """(map name -> [sequence ids], map name -> spine rank). Rank orders the
+    spine walk: sequence position in curriculum_spine.json × 1000 + the map's
+    slot in its sequence's `maps` list. Non-spine maps get no rank."""
     out: dict = {}
+    slot: dict = {}   # map -> (seq_id, index in maps list)
     for f in SEQUENCES.glob("*.json"):
         try:
             data = json.loads(f.read_text(encoding="utf-8"))
@@ -73,10 +75,23 @@ def load_sequence_index() -> dict:
         for seq_id, seq in seqs.items():
             if not isinstance(seq, dict):
                 continue
-            for m in seq.get("maps", []):
+            for i, m in enumerate(seq.get("maps", [])):
                 if isinstance(m, str):
                     out.setdefault(m, []).append(seq_id)
-    return out
+                    slot.setdefault(m, (seq_id, i))
+    spine_order: dict = {}
+    try:
+        spine = json.loads((MAPS / "curriculum_spine.json").read_text(encoding="utf-8"))
+        for s in spine.get("spine", {}).get("sequences", []):
+            if isinstance(s, dict) and s.get("name"):
+                spine_order[str(s["name"])] = int(s.get("order", len(spine_order) + 1))
+    except Exception:
+        pass
+    rank: dict = {}
+    for m, (seq_id, i) in slot.items():
+        if seq_id in spine_order:
+            rank[m] = spine_order[seq_id] * 1000 + i
+    return out, rank
 
 
 def load_registry() -> dict:
@@ -204,7 +219,7 @@ def main() -> int:
             want = a.split("=", 1)[1]
     reg = load_registry()
     voiced_idx = load_voice_index()
-    seq_index = load_sequence_index()
+    seq_index, spine_rank = load_sequence_index()
     OUT.mkdir(parents=True, exist_ok=True)
     index: list[dict] = []
     n = 0
@@ -222,10 +237,14 @@ def main() -> int:
             json.dumps(m, indent=1, ensure_ascii=False) + "\n",
             encoding="utf-8", newline="\n")
         cov = m["coverage"]
-        index.append({"map": map_dir.name, **cov,
-                      "seqs": seq_index.get(map_dir.name, []),
-                      "types": m["types"],
-                      "gap": cov["cast"] * 3 - cov["captured"] - cov["rooms"] - cov["voiced"]})
+        row = {"map": map_dir.name, **cov,
+               "seqs": seq_index.get(map_dir.name, []),
+               "types": m["types"],
+               "mtime": int((map_dir / "map_data.json").stat().st_mtime),
+               "gap": cov["cast"] * 3 - cov["captured"] - cov["rooms"] - cov["voiced"]}
+        if map_dir.name in spine_rank:
+            row["spine"] = spine_rank[map_dir.name]
+        index.append(row)
         n += 1
     if not want:
         index.sort(key=lambda r: -r["gap"])  # weakest coverage first = agenda

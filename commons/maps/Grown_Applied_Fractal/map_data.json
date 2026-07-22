@@ -1,0 +1,461 @@
+{
+	"map_info": {
+		"name": "Grown_Applied_Fractal",
+		"lookup_name": "Grown_Applied_Fractal",
+		"description": "A map grown by the walker laying floor as it placed artifacts. Started at spawn with no structure; the floor and tables emerged as a byproduct of the walk. Constraint score: 0.835, placed: 11/11 artifacts, laid: 89 floor cells + 0 table cells.\n\n[Placement applied humanoid_walker engine \u2014 constraint 0.835\u21920.935, walkability 0.493\u21920.623]",
+		"version": "placed-humanoid_walker",
+		"format": "json",
+		"created_from": "tools/grow_map.py 2026-05-15",
+		"dimensions": {
+			"width": 10,
+			"depth": 10,
+			"max_height": 3
+		},
+		"metadata": {
+			"category": "grown_map",
+			"estimated_time": "1 minute",
+			"auto_research_strategy": "grow_walker",
+			"artifacts_placed": [
+				"recursion_animator",
+				"dimension_meter",
+				"koch_snowflake_press",
+				"sierpinski_stamp",
+				"menger_filter",
+				"newton_fractal_tool",
+				"chaos_game_tool",
+				"dla_grower",
+				"attractor_plotter",
+				"terrain_forge",
+				"fractal_antenna"
+			],
+			"laid_floor_cells": 89,
+			"table_cells": 0,
+			"constraint_score": 0.835
+		},
+		"title": "Grown: Applied_Fractal"
+	},
+	"utility_definitions": {
+		"sp": {
+			"name": "Spawn",
+			"description": "Player spawn point",
+			"type": "spawn"
+		},
+		"t": {
+			"name": "Exit Portal",
+			"description": "Step here to leave",
+			"type": "teleporter",
+			"properties": {
+				"action": "next_in_sequence"
+			}
+		}
+	},
+	"documentation": {
+		"summary": "Grown_Applied_Fractal \u2014 map emerged from walker's path",
+		"layout": "10\u00d710 bounding box. The walker entered at spawn and laid 89 floor cells + 0 table cells as it placed 11 artifacts. The teleporter is where the walk ended.",
+		"objective": "Walk the map. The map IS the walk's record.",
+		"key_elements": [
+			"Spawn at (9, 2)",
+			"Teleporter at (0, 9)",
+			"recursion_animator at (0, 2)",
+			"dimension_meter at (0, 5)",
+			"koch_snowflake_press at (0, 8)",
+			"sierpinski_stamp at (3, 2)",
+			"menger_filter at (3, 5)",
+			"newton_fractal_tool at (3, 8)",
+			"chaos_game_tool at (6, 2)",
+			"dla_grower at (6, 7)",
+			"attractor_plotter at (6, 4)",
+			"terrain_forge at (8, 7)",
+			"fractal_antenna at (8, 3)"
+		]
+	},
+	"lighting": {
+		"ambient_color": [
+			0.32,
+			0.34,
+			0.4
+		],
+		"ambient_energy": 0.9,
+		"directional_light": {
+			"enabled": true,
+			"direction": [
+				-0.3,
+				-1.0,
+				-0.2
+			],
+			"energy": 0.7
+		}
+	},
+	"settings": {
+		"player_spawn_height": 0.5,
+		"floor_tile_size": 1.0
+	},
+	"layers": {
+		"structure": [
+			[
+				"0",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2"
+			],
+			[
+				"0",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2"
+			],
+			[
+				"0",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2"
+			],
+			[
+				"0",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2"
+			],
+			[
+				"0",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2"
+			],
+			[
+				"0",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2"
+			],
+			[
+				"0",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2"
+			],
+			[
+				"0",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2"
+			],
+			[
+				"0",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2"
+			],
+			[
+				"0",
+				"0",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2"
+			]
+		],
+		"utilities": [
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				"t"
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				"sp",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			]
+		],
+		"interactables": [
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				"terrain_forge:180:0.0",
+				" ",
+				"sierpinski_stamp:180:0.0",
+				" ",
+				" ",
+				"menger_filter:180:0.0",
+				" ",
+				" ",
+				"newton_fractal_tool:180:0.0",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				"koch_snowflake_press:180:0.0",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				"chaos_game_tool:180:0.0",
+				" ",
+				" ",
+				"attractor_plotter:180:0.0",
+				" "
+			],
+			[
+				" ",
+				" ",
+				"dimension_meter:180:0.0",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				"recursion_animator:180:0.0",
+				" ",
+				" ",
+				"dla_grower:180:0.0",
+				" ",
+				" ",
+				"fractal_antenna:180:0.0",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			]
+		]
+	}
+}

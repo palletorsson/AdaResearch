@@ -1,0 +1,481 @@
+{
+	"map_info": {
+		"name": "Grown_Applied_VectorForces",
+		"lookup_name": "Grown_Applied_VectorForces",
+		"description": "A map grown by the walker laying floor as it placed artifacts. Started at spawn with no structure; the floor and tables emerged as a byproduct of the walk. Constraint score: 0.826, placed: 6/6 artifacts, laid: 72 floor cells + 0 table cells.\n\n[Placement applied humanoid_walker engine \u2014 constraint 0.826\u21920.934, walkability 0.536\u21920.952]",
+		"version": "placed-humanoid_walker",
+		"format": "json",
+		"created_from": "tools/grow_map.py 2026-05-15",
+		"dimensions": {
+			"width": 11,
+			"depth": 10,
+			"max_height": 3
+		},
+		"metadata": {
+			"category": "grown_map",
+			"estimated_time": "1 minute",
+			"auto_research_strategy": "grow_walker",
+			"artifacts_placed": [
+				"river_crossing",
+				"coordinate_locator",
+				"route_vector",
+				"tug_of_war",
+				"brake_skid",
+				"throttle_gain"
+			],
+			"laid_floor_cells": 72,
+			"table_cells": 0,
+			"constraint_score": 0.826
+		},
+		"title": "Grown: Applied_VectorForces"
+	},
+	"utility_definitions": {
+		"sp": {
+			"name": "Spawn",
+			"description": "Player spawn point",
+			"type": "spawn"
+		},
+		"t": {
+			"name": "Exit Portal",
+			"description": "Step here to leave",
+			"type": "teleporter",
+			"properties": {
+				"action": "next_in_sequence"
+			}
+		}
+	},
+	"documentation": {
+		"summary": "Grown_Applied_VectorForces \u2014 map emerged from walker's path",
+		"layout": "11\u00d710 bounding box. The walker entered at spawn and laid 72 floor cells + 0 table cells as it placed 6 artifacts. The teleporter is where the walk ended.",
+		"objective": "Walk the map. The map IS the walk's record.",
+		"key_elements": [
+			"Spawn at (9, 3)",
+			"Teleporter at (0, 10)",
+			"river_crossing at (0, 3)",
+			"coordinate_locator at (0, 6)",
+			"route_vector at (0, 9)",
+			"tug_of_war at (3, 2)",
+			"brake_skid at (3, 5)",
+			"throttle_gain at (3, 8)"
+		]
+	},
+	"lighting": {
+		"ambient_color": [
+			0.32,
+			0.34,
+			0.4
+		],
+		"ambient_energy": 0.9,
+		"directional_light": {
+			"enabled": true,
+			"direction": [
+				-0.3,
+				-1.0,
+				-0.2
+			],
+			"energy": 0.7
+		}
+	},
+	"settings": {
+		"player_spawn_height": 0.5,
+		"floor_tile_size": 1.0
+	},
+	"layers": {
+		"structure": [
+			[
+				"0",
+				"0",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2"
+			],
+			[
+				"0",
+				"0",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2"
+			],
+			[
+				"0",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2"
+			],
+			[
+				"0",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2"
+			],
+			[
+				"0",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2"
+			],
+			[
+				"0",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2",
+				"2"
+			],
+			[
+				"0",
+				"0",
+				"0",
+				"2",
+				"0",
+				"0",
+				"0",
+				"0",
+				"2",
+				"2",
+				"2"
+			],
+			[
+				"0",
+				"0",
+				"0",
+				"2",
+				"0",
+				"0",
+				"0",
+				"0",
+				"2",
+				"2",
+				"2"
+			],
+			[
+				"0",
+				"0",
+				"0",
+				"2",
+				"0",
+				"0",
+				"0",
+				"0",
+				"0",
+				"2",
+				"2"
+			],
+			[
+				"0",
+				"0",
+				"0",
+				"2",
+				"0",
+				"0",
+				"0",
+				"0",
+				"0",
+				"2",
+				"2"
+			]
+		],
+		"utilities": [
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				"t"
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				"sp",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			]
+		],
+		"interactables": [
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				"tug_of_war:180:0.0",
+				" ",
+				" ",
+				" ",
+				" ",
+				"brake_skid:180:0.0",
+				" ",
+				" ",
+				"throttle_gain:180:0.0",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				"route_vector:180:0.0",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				"coordinate_locator:180:0.0",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				"river_crossing:180:0.0",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			],
+			[
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" ",
+				" "
+			]
+		]
+	}
+}
