@@ -1,5 +1,5 @@
 {
-	"_readme": "The track's section kit (L-023/P-10). Cross-section locked at x=13; every section couples with every section along z (Wang collapsed to 1D — the contract is the width). Each section: a lane profile (widths summing to 13), a z length, and SLOTS — preconfigured artifact places (lane center x, dz, size class, kind affinity). 'mined_as' links kit sections to the categories the miner reads off composed corridors, so the learned grammar can pick kit sections. Hand-edit freely; the template-authoring editor comes later (Palle 2026-07-21). BODIES (2026-07-21): sections render furniture — 'podiums' raises a height-2 plinth under specimen/tableau slots (artifacts auto-seat on the cube top), 'wall' adds wall-segment runs on the corridor edge(s) for those rows (layers.walls, lowercase w/e), 'pillars' plants height-3 columns (gates).",
+	"_readme": "The track's section kit (L-023/P-10). Cross-section locked at x=13; every section couples with every section along z (Wang collapsed to 1D — the contract is the width). Each section: a lane profile (widths summing to 13), a z length, and SLOTS — preconfigured artifact places (lane center x, dz, size class, kind affinity). 'mined_as' links kit sections to the categories the miner reads off composed corridors, so the learned grammar can pick kit sections. Hand-edit freely; the template-authoring editor comes later (Palle 2026-07-21). BODIES (2026-07-21): sections render furniture — 'podiums' raises a height-2 plinth under specimen/tableau slots (artifacts auto-seat on the cube top), 'wall' adds wall-segment runs on the corridor edge(s) for those rows (layers.walls, lowercase w/e), 'pillars' plants height-3 columns (gates). FOLD (2026-07-21, L-024/P-10a): corner_turn and climax_plaza are 13x13 node sections; the router lays the route with 90-degree turns (a corner is a cut), the plaza replaces the hall as the authored climax — discovered, not sighted from the start.",
 	"width": 13,
 	"lanes": {
 		"L_edge": [
@@ -425,6 +425,74 @@
 			"register": "exit",
 			"slots": [],
 			"note": "the teleporter on the axis; sightline to the next map"
+		},
+		{
+			"id": "corner_turn",
+			"profile": "13x13",
+			"z_len": 13,
+			"mined_as": "corner",
+			"authored": true,
+			"slots": [
+				{
+					"lane": "axis",
+					"dz": 6,
+					"size": "small",
+					"kinds": [
+						"specimen",
+						"tableau"
+					]
+				}
+			],
+			"note": "the fold (P-10a): a corner is a cut — the walk turns 90 deg; one small thing at the elbow rewards the glance; outer faces walled",
+			"body": {
+				"wall": "outer"
+			}
+		},
+		{
+			"id": "climax_plaza",
+			"profile": "13x13",
+			"z_len": 13,
+			"mined_as": "plaza",
+			"authored": true,
+			"slots": [
+				{
+					"lane": "axis",
+					"dz": 6,
+					"size": "large",
+					"kinds": [
+						"hero"
+					]
+				},
+				{
+					"lane": "L_bay",
+					"dz": 3,
+					"size": "small",
+					"kinds": [
+						"counter"
+					]
+				},
+				{
+					"lane": "R_bay",
+					"dz": 9,
+					"size": "small",
+					"kinds": [
+						"specimen"
+					]
+				}
+			],
+			"note": "the held wide shot: the hero at the center of a court, discovered around the fold; pillars at the mouth",
+			"body": {
+				"pillars": [
+					[
+						4,
+						0
+					],
+					[
+						8,
+						0
+					]
+				]
+			}
 		}
 	]
 }
