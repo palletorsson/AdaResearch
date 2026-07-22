@@ -25,7 +25,15 @@ const FungusMorphologyClass = preload(
 )
 const GroundPatchClass = preload("res://commons/testing/ground_patch.gd")
 
-const GALLERY_DIR := "C:/Users/palle/Documents/GitHub/ada_encyclopedia/public/fungus-dna-gallery"
+const GALLERY_DIR_DEFAULT := "C:/Users/palle/Documents/GitHub/ada_encyclopedia/public/fungus-dna-gallery"
+
+# --gallery-dir=<abs path> overrides the target (the auto-improve loop points
+# it at a scratch candidate dir). Absent → the curated gallery, unchanged.
+static func _gallery_dir() -> String:
+	for arg in OS.get_cmdline_user_args():
+		if arg.begins_with("--gallery-dir="):
+			return arg.substr(len("--gallery-dir="))
+	return GALLERY_DIR_DEFAULT
 
 const SETTLE_SECONDS := 0.4
 
@@ -39,9 +47,13 @@ func _initialize() -> void:
 	call_deferred("_run")
 
 
+var _gallery_dir_cached: String = ""
+
+
 func _run() -> void:
-	if not DirAccess.dir_exists_absolute(GALLERY_DIR):
-		push_error("[fungus_gallery] gallery dir missing: %s" % GALLERY_DIR)
+	_gallery_dir_cached = _gallery_dir()
+	if not DirAccess.dir_exists_absolute(_gallery_dir_cached):
+		push_error("[fungus_gallery] gallery dir missing: %s" % _gallery_dir_cached)
 		quit(1); return
 
 	_setup_scene()
@@ -50,7 +62,7 @@ func _run() -> void:
 	await process_frame
 
 	# Walk every fd_*.json
-	var dir := DirAccess.open(GALLERY_DIR)
+	var dir := DirAccess.open(_gallery_dir_cached)
 	dir.list_dir_begin()
 	var configs: Array[String] = []
 	var fname := dir.get_next()
@@ -109,7 +121,7 @@ func _setup_scene() -> void:
 
 func _render_one(cfg_name: String) -> bool:
 	var cfg_id := cfg_name.replace(".json", "")
-	var cfg_path := GALLERY_DIR + "/" + cfg_name
+	var cfg_path := _gallery_dir_cached + "/" + cfg_name
 
 	var f := FileAccess.open(cfg_path, FileAccess.READ)
 	if f == null:
@@ -199,7 +211,7 @@ func _render_one(cfg_name: String) -> bool:
 		push_warning("[fungus_gallery] viewport image null for %s" % cfg_id)
 		return false
 
-	var out_path := GALLERY_DIR + "/" + cfg_id + ".png"
+	var out_path := _gallery_dir_cached + "/" + cfg_id + ".png"
 	var save_err := img.save_png(out_path)
 	if save_err != OK:
 		push_warning("[fungus_gallery] save_png failed for %s: %s"

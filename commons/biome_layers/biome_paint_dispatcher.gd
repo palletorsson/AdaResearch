@@ -246,6 +246,9 @@ func _spawn_fungus(deposit: Dictionary, ctx: Dictionary,
 	if String(deposit.get("algo", "")) == "dna":
 		_spawn_fungus_dna(deposit, ctx, parent)
 		return
+	if String(deposit.get("algo", "")) == "softbody":
+		_spawn_fungus_softbody(deposit, ctx, parent)
+		return
 	if String(deposit.get("algo", "")) == "mycelium":
 		_spawn_mycelium(deposit, ctx, parent)
 		return
@@ -336,39 +339,33 @@ func _spawn_mycelium(deposit: Dictionary, ctx: Dictionary,
 	colony.global_position = _cell_to_world(deposit, ctx)
 
 
-# Fungus DNA substrate — real mushrooms (fungus:dna). One curated fd preset
-# per cell: family from the fd= mod (else seed-picked), variant NN from the
-# cell seed, applied via CritterDNA.from_dict exactly as the gallery lab
-# does. Tier scales the whole organism; LOD follows intensity like trees.
+# Fungus DNA substrates — real mushrooms from the curated galleries.
+#   fungus:dna      — rigid mushroom (fd= family, seed-picked variant of 12)
+#   fungus:softbody — same, plus the gallery's _deform pose (sf= family)
+# One curated preset per cell, applied via CritterDNA.from_dict exactly as the
+# gallery labs do. Tier scales the whole organism; LOD follows intensity.
 const FD_FAMILIES: Array = ["alien_lumen", "button_dome", "fairy_ring", "parasol_tall", "shelf_bracket"]
+const SF_FAMILIES: Array = ["gravity_droop", "inflate_bloat", "squash_settle", "wilt_collapse", "wind_lean"]
 const FD_VARIANTS_PER_FAMILY: int = 12
 const FD_PRESET_DIR := "res://algorithms/nature_system/morphology/fungus_presets"
+const SF_PRESET_DIR := "res://algorithms/nature_system/morphology/fungus_presets_softbody"
 
 
-func _spawn_fungus_dna(deposit: Dictionary, ctx: Dictionary, parent: Node3D) -> void:
-	var strength: float = float(deposit.get("strength", 1.0))
-	var intensity: int = clampi(int(round(strength * 5.0)), 1, 5)
-	var x: int = int(deposit.get("x", 0))
-	var z: int = int(deposit.get("z", 0))
-	var seed: int = (x * 53 + z * 29) & 0xFFFF
-	var family: String = String(deposit.get("fd", ""))
-	if not FD_FAMILIES.has(family):
-		family = FD_FAMILIES[seed % FD_FAMILIES.size()]
-	var variant: int = 1 + (seed >> 3) % FD_VARIANTS_PER_FAMILY
-	var path: String = "%s/fd_%s_%02d.json" % [FD_PRESET_DIR, family, variant]
+# Load a curated fungus preset → {dna, deform}. deform is the softbody pose
+# block (empty for rigid presets). Returns null on any failure.
+func _load_fungus_preset(path: String) -> Dictionary:
 	var f: FileAccess = FileAccess.open(path, FileAccess.READ)
 	if f == null:
-		push_warning("biome fungus:dna — missing preset %s, primitive fallback" % path)
-		_spawn_primitive_fallback(deposit, ctx, parent)
-		return
+		return {}
 	var parsed: Variant = JSON.parse_string(f.get_as_text())
 	f.close()
 	if not (parsed is Dictionary):
-		_spawn_primitive_fallback(deposit, ctx, parent)
-		return
+		return {}
 	var cfg: Dictionary = parsed
+	var deform: Dictionary = cfg.get("_deform", {})
 	cfg.erase("_cluster")
 	cfg.erase("_id")
+	cfg.erase("_deform")
 	for k in ["primary_color", "secondary_color", "tertiary_color"]:
 		if cfg.has(k) and cfg[k] is Array and (cfg[k] as Array).size() >= 3:
 			var v: Array = cfg[k]
@@ -376,16 +373,48 @@ func _spawn_fungus_dna(deposit: Dictionary, ctx: Dictionary, parent: Node3D) -> 
 	var dna: CritterDNA = CritterDNAClass.new()
 	dna.from_dict(cfg)
 	dna.body_type = 3.0
+	return {"dna": dna, "deform": deform}
+
+
+func _spawn_fungus_dna(deposit: Dictionary, ctx: Dictionary, parent: Node3D) -> void:
+	_spawn_fungus_preset(deposit, ctx, parent, "fd", FD_FAMILIES, FD_PRESET_DIR)
+
+
+func _spawn_fungus_softbody(deposit: Dictionary, ctx: Dictionary, parent: Node3D) -> void:
+	_spawn_fungus_preset(deposit, ctx, parent, "sf", SF_FAMILIES, SF_PRESET_DIR)
+
+
+func _spawn_fungus_preset(deposit: Dictionary, ctx: Dictionary, parent: Node3D,
+		mod_key: String, families: Array, preset_dir: String) -> void:
+	var strength: float = float(deposit.get("strength", 1.0))
+	var intensity: int = clampi(int(round(strength * 5.0)), 1, 5)
+	var x: int = int(deposit.get("x", 0))
+	var z: int = int(deposit.get("z", 0))
+	var seed: int = (x * 53 + z * 29) & 0xFFFF
+	var family: String = String(deposit.get(mod_key, ""))
+	if not families.has(family):
+		family = families[seed % families.size()]
+	var variant: int = 1 + (seed >> 3) % FD_VARIANTS_PER_FAMILY
+	var path: String = "%s/%s_%s_%02d.json" % [preset_dir, mod_key, family, variant]
+	var loaded: Dictionary = _load_fungus_preset(path)
+	if loaded.is_empty():
+		push_warning("biome fungus preset missing/bad: %s — primitive fallback" % path)
+		_spawn_primitive_fallback(deposit, ctx, parent)
+		return
+	var dna: CritterDNA = loaded["dna"]
 	# tier scales the curated organism. The presets are calibrated for the
 	# gallery lab's close camera (~0.15m organisms); a biome cell wants the
 	# mushroom at ~half a cell, so the base multiplier is generous.
 	dna.scale = dna.scale * (2.2 + 0.6 * float(intensity))
 	var holder: Node3D = Node3D.new()
-	holder.name = "BiomeFungusDNA_%s_%d_%d" % [family, x, z]
+	holder.name = "BiomeFungus_%s_%s_%d_%d" % [mod_key, family, x, z]
 	parent.add_child(holder)
 	holder.global_position = _cell_to_world(deposit, ctx)
 	var lod: int = clampi(intensity - 1, 0, 3)
-	FungusMorphologyClass.build(dna, holder, _get_trait_mapper(), lod)
+	var fungus: Node3D = FungusMorphologyClass.build(dna, holder, _get_trait_mapper(), lod)
+	# softbody: strike the static pose (gravity droop / wind lean / …)
+	if not (loaded["deform"] as Dictionary).is_empty():
+		FungusMorphologyClass.apply_softbody_deform(fungus, loaded["deform"])
 
 
 # Tree kingdom — wraps TreeMorphology.build (production DNA-driven

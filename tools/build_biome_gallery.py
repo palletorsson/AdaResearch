@@ -34,6 +34,7 @@ KINGDOMS = [
          {"algo": "mycelium", "renders": "space-colonised filaments — tapering hyphae, trunks thickening inward, tips hair-thin (the taper a voxel grid cannot hold)", "token": "fungus:mycelium:seed:t=5:d=1.0"},
          {"algo": "mycelium (sparse)", "renders": "same web, thinned — d= sets how densely the mat fills its disc", "token": "fungus:mycelium:seed:t=5:d=0.3"},
          {"algo": "dna", "renders": "a real mushroom — cap, stem, gills, spores from a curated DNA preset (fd= family, seed-picked variant)", "token": "fungus:dna:seed:fd=fairy_ring:t=3"},
+         {"algo": "softbody", "renders": "the same mushroom under a soft-body pose — gravity droop, wind lean, squash, wilt, inflate (sf= pose family). Static, no physics; the cap and stem scale and tilt as if they had settled.", "token": "fungus:softbody:seed:sf=wind_lean:t=3"},
      ]},
     {"id": "fauna", "name": "Fauna", "color": "#e5994d",
      "blurb": "Creatures. A DNA-driven CritterEntity built from the shared morphology, with biome-compact geometry so a cell's creature is a grub that fits its cell rather than a fifteen-metre thread.",
@@ -73,6 +74,7 @@ MODS = [
     {"mod": "rule=", "what": "fungus only — override the CA rule string"},
     {"mod": "gen=", "what": "fungus only — the generation the CA freezes at (its thin spreading front)"},
     {"mod": "fd=", "what": "fungus:dna only — the curated mushroom family: alien_lumen, button_dome, fairy_ring, parasol_tall, shelf_bracket (12 variants each, cell-seed picked)"},
+    {"mod": "sf=", "what": "fungus:softbody only — the pose family: gravity_droop, inflate_bloat, squash_settle, wilt_collapse, wind_lean (12 variants each)"},
 ]
 
 TRIGGERS = [
@@ -177,6 +179,16 @@ DETAILS = [
      "caption": "tall parasol — high stem, wide cap (12 curated variants)"},
     {"slug": "fd_shelf_bracket", "kingdom": "fungus", "token": "fungus:dna:seed:fd=shelf_bracket:t=3",
      "caption": "shelf bracket — stacked ledges (12 curated variants)"},
+    {"slug": "sf_gravity_droop", "kingdom": "fungus", "token": "fungus:softbody:seed:sf=gravity_droop:t=3",
+     "caption": "gravity droop — the cap sags under its own weight (softbody pose)"},
+    {"slug": "sf_wind_lean", "kingdom": "fungus", "token": "fungus:softbody:seed:sf=wind_lean:t=3",
+     "caption": "wind lean — stem bent, cap turned downwind (softbody pose)"},
+    {"slug": "sf_squash_settle", "kingdom": "fungus", "token": "fungus:softbody:seed:sf=squash_settle:t=3",
+     "caption": "squash settle — flattened as if pressed (softbody pose)"},
+    {"slug": "sf_wilt_collapse", "kingdom": "fungus", "token": "fungus:softbody:seed:sf=wilt_collapse:t=3",
+     "caption": "wilt collapse — past its prime, folding down (softbody pose)"},
+    {"slug": "sf_inflate_bloat", "kingdom": "fungus", "token": "fungus:softbody:seed:sf=inflate_bloat:t=3",
+     "caption": "inflate bloat — swollen cap and stem (softbody pose)"},
     {"slug": "grub_a", "kingdom": "fauna", "token": "fauna:dna:seed:t=4", "cell": [1, 1],
      "caption": "grub individual A — DNA seeded by its cell"},
     {"slug": "grub_b", "kingdom": "fauna", "token": "fauna:dna:seed:t=4", "cell": [3, 2],

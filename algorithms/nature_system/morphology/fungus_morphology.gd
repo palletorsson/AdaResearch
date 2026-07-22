@@ -56,6 +56,49 @@ static func build(dna: CritterDNA, parent: Node3D, trait_mapper: CritterTraitMap
 	return fungus_root
 
 
+# Apply a soft-body pose to a built fungus: scale + tilt Cap / Stem, with
+# Gills / Spores / StemRing following the cap's XZ. The `_deform` block is
+# the softbody-fungus-gallery schema (cap_scale_*, cap_tilt_*, cap_offset_y,
+# stem_scale_*, stem_tilt_*; tilts in DEGREES). No physics — a static pose
+# that reads as gravity droop / wind lean / squash / wilt / inflate.
+# Recurses so colonies (Colony_i / Bracket_i wrappers) deform per mushroom.
+# ONE truth: softbody_fungus_gallery_lab used to inline this; the biome
+# dispatcher (fungus:softbody) and the lab both call here now.
+static func apply_softbody_deform(node: Node, deform: Dictionary) -> void:
+	if deform.is_empty():
+		return
+	for child in node.get_children():
+		if child is Node3D:
+			var n3d := child as Node3D
+			match n3d.name:
+				"Stem":
+					n3d.scale = Vector3(
+						float(deform.get("stem_scale_x", 1.0)),
+						float(deform.get("stem_scale_y", 1.0)),
+						float(deform.get("stem_scale_z", 1.0)))
+					# stem mesh sits at +h/2, so node-rotation tilts about the base
+					n3d.rotation = Vector3(
+						deg_to_rad(float(deform.get("stem_tilt_x", 0.0))),
+						n3d.rotation.y,
+						deg_to_rad(float(deform.get("stem_tilt_z", 0.0))))
+				"Cap":
+					n3d.scale = Vector3(
+						float(deform.get("cap_scale_x", 1.0)),
+						float(deform.get("cap_scale_y", 1.0)),
+						float(deform.get("cap_scale_z", 1.0)))
+					n3d.rotation = Vector3(
+						deg_to_rad(float(deform.get("cap_tilt_x", 0.0))),
+						n3d.rotation.y,
+						deg_to_rad(float(deform.get("cap_tilt_z", 0.0))))
+					n3d.position.y += float(deform.get("cap_offset_y", 0.0))
+				"Gills", "Spores", "StemRing":
+					# follow the cap in XZ; never squash Y or gills vanish
+					n3d.scale = Vector3(
+						float(deform.get("cap_scale_x", 1.0)), 1.0,
+						float(deform.get("cap_scale_z", 1.0)))
+		apply_softbody_deform(child, deform)
+
+
 # ═══════════════════════════════════════════════════════════════
 # SINGLE MUSHROOM — cap + stem + gills
 # ═══════════════════════════════════════════════════════════════
