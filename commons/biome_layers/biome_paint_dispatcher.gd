@@ -53,6 +53,8 @@ const FungusMorphologyClass = preload("res://algorithms/nature_system/morphology
 const CritterDNAClass = preload("res://algorithms/nature_system/dna/critter_dna.gd")
 const CritterTraitMapperClass = preload("res://algorithms/nature_system/dna/critter_trait_mapper.gd")
 const TreeMorphologyClass = preload("res://algorithms/nature_system/morphology/tree_morphology.gd")
+# SDF creature body (2026-07-21): a continuous smooth-unioned grub, no joint holes.
+const CreatureSdfMorphologyClass = preload("res://algorithms/nature_system/morphology/creature_sdf_morphology.gd")
 # CritterSpawner takes a world_root + DNA and produces a full DNA-driven
 # CritterEntity (mesh + shader + bond/age/breed lifecycle). Pokemon Studio
 # uses this directly. We share one spawner across all creature deposits
@@ -510,8 +512,18 @@ func _spawn_creature(deposit: Dictionary, ctx: Dictionary,
 	dna.mobility = mob_base + mob_per * float(intensity)
 	dna.iridescence = 0.1 + 0.1 * float(intensity) / 5.0
 
-	var spawner: CritterSpawner = _get_critter_spawner(parent)
-	spawner.spawn(dna, _cell_to_world(deposit, ctx))
+	# Continuous body (2026-07-21): the biome grub renders as an SDF —
+	# spine capsules + head + leg nubs smooth-unioned into ONE watertight
+	# surface — instead of the segmented CritterSpawner entity whose separate
+	# tube meshes left gaps ("holes") at the joints. The biome grub is
+	# decorative scenery (like the mushrooms), so it wants a static body, not
+	# the full CritterEntity lifecycle — Pokemon Studio keeps its own spawner.
+	var holder: Node3D = Node3D.new()
+	holder.name = "BiomeCreature_%d_%d" % [x, z]
+	parent.add_child(holder)
+	holder.global_position = _cell_to_world(deposit, ctx)
+	var lod: int = clampi(intensity - 1, 0, 3)
+	CreatureSdfMorphologyClass.build(dna, holder, _get_trait_mapper(), lod)
 
 
 # When no substrate dispatch is available (kingdom locked, table miss,
