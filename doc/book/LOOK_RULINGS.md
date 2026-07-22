@@ -90,7 +90,21 @@ Contradictions between rulings are content, not errors.
 
 **L-022 (Palle, 2026-07-18, verbatim):** "also a note the bound should not be superficial, I mean what we are doing here is further archaeology we are trying to discover relations so the bound does not be to be made up it should be the real bound, get me? … also where do we put the heuristic limit. I mean the rules are discovered and the build makes an informed decision?"
 
+**L-023 (Palle, 2026-07-21, verbatim):** "If we lock x to 13, that is 2+3+3+3+2 or 2+4+1+4+2 or 2+9+2 etc. Since the game is moving into z the gaze and speed move into z, imagine we build on the principal like a modular system with fitting parts like a railway system. But in the game it's a walking path, like in New York walking path, or in a space ship corridor. The path corridor can be filled with a different template that becomes a structure that we place and have preconfigured places to put our artifact in. Imagine we have a menu with the templates and we drag them in like we are making a track."
+
 ## Compiled properties (grows as rulings land)
+
+**P-10. The track (from L-023).** Lock the cross-section (x=13) and decompose it into LANE
+PROFILES — 2+3+3+3+2, 2+4+1+4+2, 2+9+2: edge walks, bays, aisle — the street section, the
+spaceship corridor. Because the width is locked, every segment couples with every segment: Wang
+tiles collapsed to one dimension; the contract is the cross-section, the interior varies per
+template. A map becomes a TRAIN of section-modules along z (which is gaze, speed, film-time —
+L-010), each module a placement contract with preconfigured slots (P-7). The track and the
+filmstrip are the same object: composing a map = cutting a film = coupling a train. Evidence the
+hand already speaks this: composed corridors put 42% of artifacts on edges, 30% in bays, 26% on
+axis, one lane per z-row in 2/3 of rows. Auto-research follows: mine composed maps into
+section-trains, learn the section-transition grammar, sample/mutate/judge trains with the
+experience fitness, Claude reads the champions' captures in language, Palle rules the frontier.
 
 **P-10. The ontological flower — real bounds only (from L-021, L-022).** Each map is an object
 that wants to express every aspect of itself and is bound by its selfness. Every pipeline output
