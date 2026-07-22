@@ -42,6 +42,14 @@ static func sd_capsule_tapered(p: Vector3, a: Vector3, b: Vector3, ra: float, rb
 	return (pa - ba * h).length() - lerpf(ra, rb, h)
 
 
+# an ellipsoid (squashed/stretched sphere): radii r per axis. iq's approximation.
+static func sd_ellipsoid(p: Vector3, c: Vector3, r: Vector3) -> float:
+	var q: Vector3 = p - c
+	var k0: float = (Vector3(q.x / r.x, q.y / r.y, q.z / r.z)).length()
+	var k1: float = (Vector3(q.x / (r.x * r.x), q.y / (r.y * r.y), q.z / (r.z * r.z))).length()
+	return k0 * (k0 - 1.0) / maxf(k1, 1e-6)
+
+
 static func smin(a: float, b: float, k: float) -> float:
 	if k <= 0.0:
 		return minf(a, b)

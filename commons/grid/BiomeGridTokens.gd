@@ -124,7 +124,8 @@ static func dispatch_kingdom_of(cell: Dictionary) -> int:
 	match String(cell.get("kingdom", "")):
 		"flora":
 			var algo: String = String(cell.get("algo", ""))
-			return 0 if algo in ["lsystem", "tree", "dna"] else 2
+			# woody algos (incl. the SDF tree) → tree(0); everything else → flower(2)
+			return 0 if algo in ["lsystem", "tree", "dna", "sdf"] else 2
 		"fungus":
 			return 3
 		"fauna":

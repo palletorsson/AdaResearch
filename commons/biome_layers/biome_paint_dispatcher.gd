@@ -53,8 +53,10 @@ const FungusMorphologyClass = preload("res://algorithms/nature_system/morphology
 const CritterDNAClass = preload("res://algorithms/nature_system/dna/critter_dna.gd")
 const CritterTraitMapperClass = preload("res://algorithms/nature_system/dna/critter_trait_mapper.gd")
 const TreeMorphologyClass = preload("res://algorithms/nature_system/morphology/tree_morphology.gd")
-# SDF creature body (2026-07-21): a continuous smooth-unioned grub, no joint holes.
+# SDF bodies (2026-07-21): continuous smooth-unioned organisms, no joint holes.
 const CreatureSdfMorphologyClass = preload("res://algorithms/nature_system/morphology/creature_sdf_morphology.gd")
+const FungusSdfMorphologyClass = preload("res://algorithms/nature_system/morphology/fungus_sdf_morphology.gd")
+const FloraSdfMorphologyClass = preload("res://algorithms/nature_system/morphology/flora_sdf_morphology.gd")
 # CritterSpawner takes a world_root + DNA and produces a full DNA-driven
 # CritterEntity (mesh + shader + bond/age/breed lifecycle). Pokemon Studio
 # uses this directly. We share one spawner across all creature deposits
@@ -251,6 +253,9 @@ func _spawn_fungus(deposit: Dictionary, ctx: Dictionary,
 	if String(deposit.get("algo", "")) == "softbody":
 		_spawn_fungus_softbody(deposit, ctx, parent)
 		return
+	if String(deposit.get("algo", "")) == "sdf":
+		_spawn_sdf_organism(deposit, ctx, parent, FungusSdfMorphologyClass)
+		return
 	if String(deposit.get("algo", "")) == "mycelium":
 		_spawn_mycelium(deposit, ctx, parent)
 		return
@@ -378,6 +383,36 @@ func _load_fungus_preset(path: String) -> Dictionary:
 	return {"dna": dna, "deform": deform}
 
 
+# flora:sdf / fungus:sdf — build a continuous SDF organism at the cell. The
+# morphology class (FloraSdf / FungusSdf) takes (dna, holder, mapper, lod) and
+# returns one watertight mesh. If a DNA is supplied (tree path) it is reused;
+# otherwise a fungus DNA is derived from the cell so the mushroom varies.
+func _spawn_sdf_organism(deposit: Dictionary, ctx: Dictionary, parent: Node3D,
+		morphology_class, dna: CritterDNA = null) -> void:
+	var strength: float = float(deposit.get("strength", 1.0))
+	var intensity: int = clampi(int(round(strength * 5.0)), 1, 5)
+	var x: int = int(deposit.get("x", 0))
+	var z: int = int(deposit.get("z", 0))
+	if dna == null:
+		# fungus SDF: a mushroom-tuned DNA seeded by the cell
+		var seed: int = (x * 53 + z * 29) & 0xFFFF
+		dna = CritterDNAClass.new()
+		dna.body_type = 3.0
+		dna.scale = (0.6 + 0.12 * float(intensity)) * (0.85 + 0.3 * float(seed % 7) / 7.0)
+		dna.part_length = 0.5 + 0.4 * float((seed >> 3) % 5) / 5.0
+		dna.part_width = 0.5 + 0.5 * float((seed >> 6) % 5) / 5.0
+		dna.part_curve = 0.3 + 0.6 * float((seed >> 9) % 5) / 5.0
+		dna.part_taper = 0.2 + 0.5 * float((seed >> 4) % 5) / 5.0
+		dna.primary_color = Color.from_hsv(0.06 + 0.12 * float(seed % 11) / 11.0, 0.35, 0.85)
+		dna.roughness = 0.6
+	var holder: Node3D = Node3D.new()
+	holder.name = "BiomeSdf_%d_%d" % [x, z]
+	parent.add_child(holder)
+	holder.global_position = _cell_to_world(deposit, ctx)
+	var lod: int = clampi(intensity - 1, 0, 3)
+	morphology_class.build(dna, holder, _get_trait_mapper(), lod)
+
+
 func _spawn_fungus_dna(deposit: Dictionary, ctx: Dictionary, parent: Node3D) -> void:
 	_spawn_fungus_preset(deposit, ctx, parent, "fd", FD_FAMILIES, FD_PRESET_DIR)
 
@@ -466,6 +501,11 @@ func _spawn_tree(deposit: Dictionary, ctx: Dictionary,
 	dna.secondary_color = Color(0.14, 0.45 + 0.1 * float(intensity) / 5.0, 0.12)
 
 	var lod: int = clampi(intensity - 2, 0, 3)  # 0,0,1,2,3 for i=1..5
+	# flora:sdf → the continuous SDF tree (branches weld into the trunk, no
+	# seams); any other woody algo keeps the production L-system tube tree.
+	if String(deposit.get("algo", "")) == "sdf":
+		_spawn_sdf_organism(deposit, ctx, parent, FloraSdfMorphologyClass, dna)
+		return
 	SpawnService.build_tree(dna, parent, _get_trait_mapper(), lod,
 		"PaintedTree_%d_%d" % [x, z], _cell_to_world(deposit, ctx))
 
