@@ -1,0 +1,394 @@
+{
+ "_readme": "Empirical section-coupling grammar mined from the composed corridors (track_mine.py). Counts, not probabilities \u2014 normalize at sample time. The hand's grammar: archaeology, not invention (L-022).",
+ "starts": {
+  "breather": 4,
+  "axis_moment": 2,
+  "edge_walk": 2,
+  "mirror_bay": 1
+ },
+ "transitions": {
+  "breather": {
+   "edge_walk": 6,
+   "side_bay": 4,
+   "axis_moment": 5,
+   "mirror_bay": 1
+  },
+  "edge_walk": {
+   "breather": 7,
+   "mirror_bay": 2,
+   "axis_moment": 6,
+   "side_bay": 1
+  },
+  "side_bay": {
+   "breather": 3,
+   "mirror_bay": 1,
+   "axis_moment": 1
+  },
+  "axis_moment": {
+   "breather": 8,
+   "edge_walk": 5,
+   "mirror_bay": 1
+  },
+  "mirror_bay": {
+   "edge_walk": 3,
+   "breather": 2
+  }
+ },
+ "run_lengths": {
+  "breather": [
+   1,
+   1,
+   1,
+   1,
+   2,
+   2,
+   2,
+   2,
+   2,
+   2,
+   3,
+   3,
+   3,
+   3,
+   4,
+   5,
+   5,
+   5,
+   5,
+   6,
+   7,
+   9,
+   12,
+   17
+  ],
+  "edge_walk": [
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   2,
+   2,
+   2,
+   2,
+   3,
+   5
+  ],
+  "side_bay": [
+   1,
+   1,
+   1,
+   2,
+   3
+  ],
+  "axis_moment": [
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   2,
+   2,
+   2,
+   4,
+   6
+  ],
+  "mirror_bay": [
+   1,
+   1,
+   1,
+   1,
+   1,
+   1
+  ]
+ },
+ "trains": {
+  "Point_One": [
+   [
+    "breather",
+    9
+   ],
+   [
+    "edge_walk",
+    1
+   ],
+   [
+    "breather",
+    2
+   ],
+   [
+    "side_bay",
+    3
+   ],
+   [
+    "breather",
+    5
+   ]
+  ],
+  "Point_Lines": [
+   [
+    "axis_moment",
+    1
+   ],
+   [
+    "breather",
+    17
+   ],
+   [
+    "side_bay",
+    2
+   ],
+   [
+    "mirror_bay",
+    1
+   ],
+   [
+    "edge_walk",
+    5
+   ],
+   [
+    "mirror_bay",
+    1
+   ]
+  ],
+  "Point_Trace": [
+   [
+    "breather",
+    2
+   ],
+   [
+    "edge_walk",
+    1
+   ],
+   [
+    "axis_moment",
+    2
+   ],
+   [
+    "edge_walk",
+    1
+   ],
+   [
+    "breather",
+    12
+   ]
+  ],
+  "Point_Line_Grid": [
+   [
+    "breather",
+    1
+   ],
+   [
+    "side_bay",
+    1
+   ],
+   [
+    "breather",
+    7
+   ],
+   [
+    "axis_moment",
+    2
+   ],
+   [
+    "breather",
+    3
+   ]
+  ],
+  "Point_Triangle_Context": [
+   [
+    "edge_walk",
+    1
+   ],
+   [
+    "breather",
+    5
+   ],
+   [
+    "edge_walk",
+    1
+   ],
+   [
+    "axis_moment",
+    1
+   ],
+   [
+    "breather",
+    2
+   ],
+   [
+    "side_bay",
+    1
+   ],
+   [
+    "axis_moment",
+    1
+   ],
+   [
+    "edge_walk",
+    2
+   ],
+   [
+    "mirror_bay",
+    1
+   ],
+   [
+    "edge_walk",
+    2
+   ],
+   [
+    "axis_moment",
+    1
+   ],
+   [
+    "breather",
+    4
+   ]
+  ],
+  "Primitives_Polythedra": [
+   [
+    "mirror_bay",
+    1
+   ],
+   [
+    "edge_walk",
+    2
+   ],
+   [
+    "breather",
+    5
+   ],
+   [
+    "axis_moment",
+    2
+   ],
+   [
+    "breather",
+    2
+   ]
+  ],
+  "Point_Animatedcube": [
+   [
+    "edge_walk",
+    1
+   ],
+   [
+    "breather",
+    3
+   ],
+   [
+    "mirror_bay",
+    1
+   ],
+   [
+    "breather",
+    1
+   ],
+   [
+    "edge_walk",
+    1
+   ],
+   [
+    "axis_moment",
+    1
+   ],
+   [
+    "mirror_bay",
+    1
+   ],
+   [
+    "breather",
+    1
+   ],
+   [
+    "axis_moment",
+    1
+   ],
+   [
+    "breather",
+    3
+   ]
+  ],
+  "Primitives_Ignorance": [
+   [
+    "breather",
+    3
+   ],
+   [
+    "edge_walk",
+    1
+   ],
+   [
+    "side_bay",
+    1
+   ],
+   [
+    "breather",
+    1
+   ],
+   [
+    "edge_walk",
+    1
+   ],
+   [
+    "breather",
+    2
+   ],
+   [
+    "axis_moment",
+    4
+   ],
+   [
+    "edge_walk",
+    3
+   ],
+   [
+    "axis_moment",
+    6
+   ],
+   [
+    "breather",
+    5
+   ]
+  ],
+  "Primitives_Melencolia": [
+   [
+    "axis_moment",
+    1
+   ],
+   [
+    "edge_walk",
+    2
+   ],
+   [
+    "axis_moment",
+    1
+   ],
+   [
+    "edge_walk",
+    1
+   ],
+   [
+    "breather",
+    2
+   ],
+   [
+    "axis_moment",
+    1
+   ],
+   [
+    "breather",
+    6
+   ]
+  ]
+ }
+}

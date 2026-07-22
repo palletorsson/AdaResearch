@@ -1,0 +1,173 @@
+{
+	"_readme": "The track's section kit (L-023/P-10). Cross-section locked at x=13; every section couples with every section along z (Wang collapsed to 1D — the contract is the width). Each section: a lane profile (widths summing to 13), a z length, and SLOTS — preconfigured artifact places (lane center x, dz, size class, kind affinity). 'mined_as' links kit sections to the categories the miner reads off composed corridors, so the learned grammar can pick kit sections. Hand-edit freely; the template-authoring editor comes later (Palle 2026-07-21).",
+	"width": 13,
+	"lanes": {
+		"L_edge": [0, 1],
+		"L_bay": [2, 3, 4],
+		"axis": [5, 6, 7],
+		"R_bay": [8, 9, 10],
+		"R_edge": [11, 12]
+	},
+	"sections": [
+		{
+			"id": "arrival_void",
+			"profile": "2+9+2",
+			"z_len": 5,
+			"mined_as": "breather",
+			"register": "arrival",
+			"slots": [],
+			"note": "the void plate: awe needs a vacuum; floor only on the walk spine"
+		},
+		{
+			"id": "threshold",
+			"profile": "2+3+3+3+2",
+			"z_len": 3,
+			"mined_as": "axis_moment",
+			"slots": [{"lane": "axis", "dz": 1, "size": "small", "kinds": ["specimen", "tableau"]}],
+			"note": "one small thing on the axis — the first mark"
+		},
+		{
+			"id": "edge_walk",
+			"profile": "2+9+2",
+			"z_len": 4,
+			"mined_as": "edge_walk",
+			"slots": [
+				{"lane": "L_edge", "dz": 1, "size": "small", "kinds": ["specimen"]},
+				{"lane": "R_edge", "dz": 3, "size": "small", "kinds": ["specimen"]}
+			],
+			"note": "the sidewalk: smalls at the edges, axis clear (P-1)"
+		},
+		{
+			"id": "podium_gallery",
+			"profile": "2+3+3+3+2",
+			"z_len": 6,
+			"mined_as": "side_bay",
+			"slots": [
+				{"lane": "L_bay", "dz": 1, "size": "medium", "kinds": ["specimen", "performer"]},
+				{"lane": "R_bay", "dz": 3, "size": "medium", "kinds": ["specimen", "performer"]},
+				{"lane": "L_bay", "dz": 5, "size": "small", "kinds": ["specimen"]}
+			],
+			"note": "L-018's podium gallery: staggered podiums in the bays"
+		},
+		{
+			"id": "mirror_aisle",
+			"profile": "2+4+1+4+2",
+			"z_len": 5,
+			"mined_as": "mirror_bay",
+			"slots": [
+				{"lane": "L_bay", "dz": 2, "size": "medium", "kinds": ["specimen", "tableau"]},
+				{"lane": "R_bay", "dz": 2, "size": "medium", "kinds": ["specimen", "tableau"]}
+			],
+			"note": "L-018's aisle mirror: facing pair across a one-lane aisle"
+		},
+		{
+			"id": "reading_bay",
+			"profile": "2+4+1+4+2",
+			"z_len": 5,
+			"mined_as": "mirror_bay",
+			"slots": [
+				{"lane": "L_bay", "dz": 2, "size": "medium", "kinds": ["tableau"]},
+				{"lane": "R_bay", "dz": 3, "size": "small", "kinds": ["specimen"]}
+			],
+			"note": "a board to read, off-axis, with a small rest-beat across (P-6)"
+		},
+		{
+			"id": "try_bench",
+			"profile": "2+3+3+3+2",
+			"z_len": 4,
+			"mined_as": "side_bay",
+			"slots": [
+				{"lane": "L_bay", "dz": 2, "size": "medium", "kinds": ["instrument"]},
+				{"lane": "R_bay", "dz": 2, "size": "medium", "kinds": ["instrument"]}
+			],
+			"note": "TRY's contract: instruments at arm's reach off the walk (P-3/P-6)"
+		},
+		{
+			"id": "performer_pocket",
+			"profile": "2+3+3+3+2",
+			"z_len": 5,
+			"mined_as": "side_bay",
+			"slots": [
+				{"lane": "L_bay", "dz": 2, "size": "medium", "kinds": ["performer"]}
+			],
+			"note": "a dwell pocket: floor to stand on, sightline held (P-3a)"
+		},
+		{
+			"id": "random_podiums",
+			"profile": "2+9+2",
+			"z_len": 6,
+			"mined_as": "side_bay",
+			"slots": [
+				{"lane": "L_bay", "dz": 1, "size": "small", "kinds": ["specimen"]},
+				{"lane": "R_bay", "dz": 2, "size": "small", "kinds": ["specimen"]},
+				{"lane": "L_bay", "dz": 4, "size": "small", "kinds": ["specimen"]},
+				{"lane": "R_edge", "dz": 5, "size": "small", "kinds": ["specimen"]}
+			],
+			"note": "L-018's random podiums with density — scattered, axis clear"
+		},
+		{
+			"id": "wall_line",
+			"profile": "2+9+2",
+			"z_len": 5,
+			"mined_as": "edge_walk",
+			"slots": [
+				{"lane": "L_edge", "dz": 0, "size": "small", "kinds": ["specimen", "tableau"]},
+				{"lane": "L_edge", "dz": 2, "size": "small", "kinds": ["specimen", "tableau"]},
+				{"lane": "L_edge", "dz": 4, "size": "small", "kinds": ["specimen", "tableau"]}
+			],
+			"note": "L-018's wall with podium cubes along it — the HELD law, one side"
+		},
+		{
+			"id": "breather",
+			"profile": "2+9+2",
+			"z_len": 3,
+			"mined_as": "breather",
+			"slots": [],
+			"note": "temporal void: a rest beat nothing claims (P-4)"
+		},
+		{
+			"id": "vacuum_approach",
+			"profile": "2+9+2",
+			"z_len": 5,
+			"mined_as": "breather",
+			"slots": [],
+			"note": "the emptiness before the climax — the dolly-in's runway (P-1)"
+		},
+		{
+			"id": "climax_hall",
+			"profile": "2+3+3+3+2",
+			"z_len": 6,
+			"mined_as": "axis_moment",
+			"slots": [
+				{"lane": "axis", "dz": 3, "size": "large", "kinds": ["hero"]},
+				{"lane": "L_bay", "dz": 1, "size": "small", "kinds": ["counter"]}
+			],
+			"note": "the hero on the axis in a vacuum band; the counter facing from the wing"
+		},
+		{
+			"id": "shrunken_void",
+			"profile": "2+1+7+1+2",
+			"z_len": 4,
+			"mined_as": "axis_moment",
+			"slots": [{"lane": "axis", "dz": 2, "size": "medium", "kinds": ["specimen", "performer"]}],
+			"note": "L-018's shrunken void: the floor narrows, one thing holds the middle"
+		},
+		{
+			"id": "release",
+			"profile": "2+9+2",
+			"z_len": 4,
+			"mined_as": "breather",
+			"slots": [{"lane": "R_edge", "dz": 2, "size": "small", "kinds": ["specimen", "tableau"]}],
+			"note": "after the climax: low, quiet, one footnote at the edge"
+		},
+		{
+			"id": "exit_gate",
+			"profile": "2+3+3+3+2",
+			"z_len": 3,
+			"mined_as": "axis_moment",
+			"register": "exit",
+			"slots": [],
+			"note": "the teleporter on the axis; sightline to the next map"
+		}
+	]
+}
