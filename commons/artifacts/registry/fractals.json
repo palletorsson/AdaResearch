@@ -948,7 +948,8 @@
     "preferred_zone": "any",
     "measured_footprint_cells": 2,
     "footprint_source": "designed"
-   }
+   },
+   "qfep_connection": "Depth-3 in the hand: each pass discards seven of twenty-seven cells and recurses on the remainder, so you hold a cube that is mostly its own absence. Infinite surface closing over vanishing volume, at pocket scale."
   },
   "menger_bench": {
    "lookup_name": "menger_bench",
@@ -993,7 +994,8 @@
     "preferred_zone": "any",
     "measured_footprint_cells": 4,
     "footprint_source": "designed"
-   }
+   },
+   "qfep_connection": "The carving shown as a sequence: iterations 0 through 3 sit in a row, volume draining toward zero while surface area climbs without bound. The rule never changes between steps, only its patience."
   },
   "menger_filter": {
    "lookup_name": "menger_filter",
@@ -1898,7 +1900,7 @@
   "depth_cap": {
    "category": "fractals",
    "complexity": "intermediate",
-   "description": "The fractals seam. A Koch curve is infinitely deep; the machine renders to iteration N and stops. Magnify one smallest segment and the endless detail is gone \u2014 a straight line. Infinity faked to a budget.",
+   "description": "The fractals seam. A Koch curve is infinitely deep; the machine renders to iteration N and stops. Magnify one smallest segment and the endless detail is gone — a straight line. Infinity faked to a budget.",
    "dev_themes": [
     "digital_bias",
     "seam"

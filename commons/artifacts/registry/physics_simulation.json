@@ -5494,7 +5494,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.174608Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "Grabbing is implemented as a six-degree-of-freedom joint snapped between hand and body: physics has no concept of holding, only constraint, so possession is staged as a temporary contract the solver keeps honoring."
   },
   "example_6_7_bridge_vr": {
    "category": "unknown",
@@ -6133,7 +6134,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.174608Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "Two arms and one gravity constant are enough to break prediction: the second bob drags a trail that is sensitivity to initial angles made watchable at arm's length, entropy drawn in the air."
   },
   "exercise_3_1_baton_vr": {
    "category": "unknown",
@@ -8448,7 +8450,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.175158Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "Three thousand particles obey eight attractors that exist only as shader uniforms; the rays are never drawn, just their consequences. Force made visible exclusively through the bodies it disturbs — you reconstruct the beam from the behaviour of the crowd."
   },
   "rigid_body": {
    "category": "physics",

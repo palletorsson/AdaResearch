@@ -5,14 +5,14 @@
    "complexity": "intermediate",
    "description": "Context-Free Grammars visualizer \u2014 animated parse trees showing Chomsky hierarchy (regular \u2192 context-free \u2192 context-sensitive \u2192 unrestricted) with leftmost derivation step-by-step.",
    "dev_themes": [
-    "grammar",
-    "parsing",
+	"grammar",
+	"parsing",
     "formal_languages"
    ],
    "footprint": [
-    1.0,
-    1.0,
-    1.0
+	1.0,
+	1.0,
+	1.0
    ],
    "include_in_map_data": true,
    "lookup_name": "ContextFreeGrammars",
@@ -22,49 +22,49 @@
    ],
    "name": "Context-Free Grammars",
    "parameters": {
-    "footprint": [
-     1.0,
-     1.0,
-     1.0
-    ],
-    "size_group": "compact"
+	"footprint": [
+	 1.0,
+	 1.0,
+	 1.0
+	],
+	"size_group": "compact"
    },
    "scene": "res://algorithms/lsystems/context_free_grammars/context_free_grammars.tscn",
    "size_group": "compact",
    "tags": [
-    "grammar",
-    "chomsky",
-    "parse_tree",
+	"grammar",
+	"chomsky",
+	"parse_tree",
     "formal_language"
    ],
    "qfep_connection": "The formal hierarchy of grammars \u2014 L-systems are a subset of parallel grammars; this artifact locates where rewriting rules sit in the Chomsky tower.",
    "measurements": {
-    "aabb_size": [
-     1.28,
-     0.0,
-     0.96
-    ],
-    "aabb_center": [
-     0.0,
-     -0.44,
-     0.0
-    ],
-    "grid_cells": [
-     2.0,
-     1.0
-    ],
-    "max_dimension_m": 1.28,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
+	"aabb_size": [
+	 1.28,
+	 0.0,
+	 0.96
+	],
+	"aabb_center": [
+	 0.0,
+	 -0.44,
+	 0.0
+	],
+	"grid_cells": [
+	 2.0,
+	 1.0
+	],
+	"max_dimension_m": 1.28,
+	"measured_at": "2026-04-29T07:09:56.762620Z"
    },
    "spatial_profile": {
-    "dir_group": "plane",
-    "range": 4,
-    "density": "medium",
-    "min_clearance": 1,
-    "stack_priority": 0.5,
-    "approach_dir": "any",
-    "derived_at": "2026-04-29T09:39:46.147725Z",
-    "derived_from": "aabb_size + category"
+	"dir_group": "plane",
+	"range": 4,
+	"density": "medium",
+	"min_clearance": 1,
+	"stack_priority": 0.5,
+	"approach_dir": "any",
+	"derived_at": "2026-04-29T09:39:46.147725Z",
+	"derived_from": "aabb_size + category"
    }
   },
   "AnimatedTree": {
@@ -72,8 +72,8 @@
    "complexity": "advanced",
    "description": "Time-sliced L-System interpretation showing organic growth animation",
    "dev_themes": [
-    "grammar",
-    "l_systems",
+	"grammar",
+	"l_systems",
     "procedural"
    ],
    "include_in_map_data": true,
@@ -84,76 +84,76 @@
    ],
    "name": "Animated Tree Growth",
    "parameters": {
-    "footprint": [
-     1.0,
-     8.0,
-     9.0
-    ],
-    "size_group": "environment"
+	"footprint": [
+	 1.0,
+	 8.0,
+	 9.0
+	],
+	"size_group": "environment"
    },
    "qfep_connection": "Grammar rules as F generating E(S) over time \u2014 a tiny production rule unfolds into a branching tree. Branching angle IS the \u03bb parameter: small angle = ordered growth, large angle = sprawling chaos.",
    "scene": "res://algorithms/lsystems/Growth/AnimatedTree.tscn",
    "tags": [
-    "l_system",
-    "procedural",
-    "simulation",
+	"l_system",
+	"procedural",
+	"simulation",
     "tree"
    ],
    "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 1,
-    "clearance": {
-     "front": 2,
-     "back": 2,
-     "left": 2,
-     "right": 2
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [
-     "lsystem_tree",
-     "static",
-     "animated",
+	"platform": "none",
+	"footprint_cells": 1,
+	"clearance": {
+	 "front": 2,
+	 "back": 2,
+	 "left": 2,
+	 "right": 2
+	},
+	"player_position": "front",
+	"wall_backing": false,
+	"orientation": "face_approach",
+	"isolation": 0,
+	"cluster_with": [
+	 "lsystem_tree",
+	 "static",
+	 "animated",
      "create_fractal_plant"
-    ],
-    "preferred_zone": "end",
-    "measured_footprint_cells": 1,
-    "footprint_source": "measured"
+	],
+	"preferred_zone": "end",
+	"measured_footprint_cells": 1,
+	"footprint_source": "measured"
    },
    "measurements": {
-    "aabb_size": [
-     0.5,
-     0.8,
-     0.5
-    ],
-    "aabb_center": [
-     0.0,
-     0.38,
-     0.0
-    ],
-    "grid_cells": [
-     1.0,
-     1.0
-    ],
-    "max_dimension_m": 0.8,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
+	"aabb_size": [
+	 0.5,
+	 0.8,
+	 0.5
+	],
+	"aabb_center": [
+	 0.0,
+	 0.38,
+	 0.0
+	],
+	"grid_cells": [
+	 1.0,
+	 1.0
+	],
+	"max_dimension_m": 0.8,
+	"measured_at": "2026-04-29T07:09:56.762620Z"
    },
    "footprint_measured": [
-    1.0,
-    1,
-    1.0
+	1.0,
+	1,
+	1.0
    ],
    "spatial_profile": {
-    "dir_group": "floor",
-    "range": 2,
-    "density": "medium",
-    "min_clearance": 1,
-    "stack_priority": 0.5,
-    "approach_dir": "any",
-    "derived_at": "2026-04-29T09:39:46.147725Z",
-    "derived_from": "aabb_size + category"
+	"dir_group": "floor",
+	"range": 2,
+	"density": "medium",
+	"min_clearance": 1,
+	"stack_priority": 0.5,
+	"approach_dir": "any",
+	"derived_at": "2026-04-29T09:39:46.147725Z",
+	"derived_from": "aabb_size + category"
    }
   },
   "CityGenerator": {
@@ -161,117 +161,117 @@
    "complexity": "advanced",
    "description": "Procedural pipe network using orthogonal L-System rules",
    "dev_themes": [
-    "grammar",
-    "l_systems",
+	"grammar",
+	"l_systems",
     "procedural"
    ],
    "include_in_map_data": true,
    "lookup_name": "CityGenerator",
    "map_ready": true,
    "map_sequences": [
-    "grammar_systems",
+	"grammar_systems",
     "lsystems"
    ],
    "name": "City Generator",
    "parameters": {
-    "footprint": [
-     1.0,
-     6.0,
-     11.0
-    ],
-    "size_group": "world_scale"
+	"footprint": [
+	 1.0,
+	 6.0,
+	 11.0
+	],
+	"size_group": "world_scale"
    },
    "scene": "res://algorithms/lsystems/Architecture/CityGenerator.tscn",
    "sequence": "grammar_systems",
    "tags": [
-    "graph",
-    "l_system",
-    "procedural",
+	"graph",
+	"l_system",
+	"procedural",
     "simulation"
    ],
    "geometry_spec": {
-    "mesh_type": "composed_primitives",
-    "topology": "manifold_closed",
-    "construction": {
-     "method": "primitive_assembly",
-     "primitives": [],
-     "operations": [
-      "create_primitives",
+	"mesh_type": "composed_primitives",
+	"topology": "manifold_closed",
+	"construction": {
+	 "method": "primitive_assembly",
+	 "primitives": [],
+	 "operations": [
+	  "create_primitives",
       "position_children"
-     ]
-    },
-    "material": {
-     "type": "standard",
-     "shading_model": "emissive",
-     "key_properties": [
-      "emission",
+	 ]
+	},
+	"material": {
+	 "type": "standard",
+	 "shading_model": "emissive",
+	 "key_properties": [
+	  "emission",
       "metallic"
-     ]
-    },
-    "animation": {
-     "type": "transform",
-     "driven_by": "per_frame_update",
-     "affects": [
+	 ]
+	},
+	"animation": {
+	 "type": "transform",
+	 "driven_by": "per_frame_update",
+	 "affects": [
       "transform"
-     ]
-    },
-    "instance_strategy": "single",
-    "vertex_estimate": "unknown"
+	 ]
+	},
+	"instance_strategy": "single",
+	"vertex_estimate": "unknown"
    },
    "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 9,
-    "clearance": {
-     "front": 2,
-     "back": 2,
-     "left": 2,
-     "right": 2
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [
-     "lsystem_dungeon",
-     "growth",
+	"platform": "none",
+	"footprint_cells": 9,
+	"clearance": {
+	 "front": 2,
+	 "back": 2,
+	 "left": 2,
+	 "right": 2
+	},
+	"player_position": "front",
+	"wall_backing": false,
+	"orientation": "face_approach",
+	"isolation": 0,
+	"cluster_with": [
+	 "lsystem_dungeon",
+	 "growth",
      "floor"
-    ],
-    "preferred_zone": "end",
-    "measured_footprint_cells": 289,
-    "footprint_source": "measured_capped"
+	],
+	"preferred_zone": "end",
+	"measured_footprint_cells": 289,
+	"footprint_source": "measured_capped"
    },
    "measurements": {
-    "aabb_size": [
-     16.12,
-     21.53,
-     16.12
-    ],
-    "aabb_center": [
-     0.0,
-     9.24,
-     0.0
-    ],
-    "grid_cells": [
-     17.0,
-     17.0
-    ],
-    "max_dimension_m": 21.53,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
+	"aabb_size": [
+	 16.12,
+	 21.53,
+	 16.12
+	],
+	"aabb_center": [
+	 0.0,
+	 9.24,
+	 0.0
+	],
+	"grid_cells": [
+	 17.0,
+	 17.0
+	],
+	"max_dimension_m": 21.53,
+	"measured_at": "2026-04-29T07:09:56.762620Z"
    },
    "footprint_measured": [
-    17.0,
-    1,
-    17.0
+	17.0,
+	1,
+	17.0
    ],
    "spatial_profile": {
-    "dir_group": "floor",
-    "range": 60,
-    "density": "high",
-    "min_clearance": 2,
-    "stack_priority": 0.85,
-    "approach_dir": "any",
-    "derived_at": "2026-04-29T09:39:46.147725Z",
-    "derived_from": "aabb_size + category"
+	"dir_group": "floor",
+	"range": 60,
+	"density": "high",
+	"min_clearance": 2,
+	"stack_priority": 0.85,
+	"approach_dir": "any",
+	"derived_at": "2026-04-29T09:39:46.147725Z",
+	"derived_from": "aabb_size + category"
    }
   },
   "ContextSensitiveTree": {
@@ -279,15 +279,15 @@
    "complexity": "advanced",
    "description": "L-System tree with physics-based environmental awareness and branch pruning",
    "dev_themes": [
-    "grammar",
-    "l_systems",
+	"grammar",
+	"l_systems",
     "procedural"
    ],
    "include_in_map_data": true,
    "lookup_name": "ContextSensitiveTree",
    "map_ready": true,
    "map_sequences": [
-    "grammar_systems",
+	"grammar_systems",
     "lsystems"
    ],
    "name": "Context-Sensitive Tree",
@@ -295,97 +295,97 @@
    "scene": "res://algorithms/lsystems/ContextSensitive/ContextSensitiveTree.tscn",
    "sequence": "grammar_systems",
    "tags": [
-    "l_system",
-    "procedural",
-    "simulation",
+	"l_system",
+	"procedural",
+	"simulation",
     "tree"
    ],
    "geometry_spec": {
-    "mesh_type": "composed_primitives",
-    "topology": "manifold_open",
-    "construction": {
-     "method": "primitive_assembly",
-     "primitives": [
-      "box",
+	"mesh_type": "composed_primitives",
+	"topology": "manifold_open",
+	"construction": {
+	 "method": "primitive_assembly",
+	 "primitives": [
+	  "box",
       "cylinder"
-     ],
-     "operations": [
-      "create_primitives",
+	 ],
+	 "operations": [
+	  "create_primitives",
       "position_children"
-     ]
-    },
-    "material": {
-     "type": "standard",
-     "shading_model": "pbr",
-     "key_properties": [
-      "transparency",
+	 ]
+	},
+	"material": {
+	 "type": "standard",
+	 "shading_model": "pbr",
+	 "key_properties": [
+	  "transparency",
       "double_sided"
-     ]
-    },
-    "animation": {
-     "type": "static",
-     "driven_by": null,
-     "affects": []
-    },
-    "instance_strategy": "few",
-    "vertex_estimate": "unknown"
+	 ]
+	},
+	"animation": {
+	 "type": "static",
+	 "driven_by": null,
+	 "affects": []
+	},
+	"instance_strategy": "few",
+	"vertex_estimate": "unknown"
    },
    "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 8,
-    "clearance": {
-     "front": 1,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [
-     "lsystem_tree",
-     "blind",
-     "growth",
-     "environmentally",
+	"platform": "none",
+	"footprint_cells": 8,
+	"clearance": {
+	 "front": 1,
+	 "back": 1,
+	 "left": 1,
+	 "right": 1
+	},
+	"player_position": "front",
+	"wall_backing": false,
+	"orientation": "face_approach",
+	"isolation": 0,
+	"cluster_with": [
+	 "lsystem_tree",
+	 "blind",
+	 "growth",
+	 "environmentally",
      "aware"
-    ],
-    "preferred_zone": "end",
-    "measured_footprint_cells": 8,
-    "footprint_source": "measured"
+	],
+	"preferred_zone": "end",
+	"measured_footprint_cells": 8,
+	"footprint_source": "measured"
    },
    "measurements": {
-    "aabb_size": [
-     7.04,
-     9.52,
-     1.0
-    ],
-    "aabb_center": [
-     -1.08,
-     4.74,
-     0.0
-    ],
-    "grid_cells": [
-     8.0,
-     1.0
-    ],
-    "max_dimension_m": 9.52,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
+	"aabb_size": [
+	 7.04,
+	 9.52,
+	 1.0
+	],
+	"aabb_center": [
+	 -1.08,
+	 4.74,
+	 0.0
+	],
+	"grid_cells": [
+	 8.0,
+	 1.0
+	],
+	"max_dimension_m": 9.52,
+	"measured_at": "2026-04-29T07:09:56.762620Z"
    },
    "footprint_measured": [
-    8.0,
-    1,
-    1.0
+	8.0,
+	1,
+	1.0
    ],
    "spatial_profile": {
-    "dir_group": "panel",
-    "range": 18,
-    "density": "high",
-    "min_clearance": 1,
-    "stack_priority": 0.85,
-    "approach_dir": "front",
-    "derived_at": "2026-04-29T09:39:46.147725Z",
-    "derived_from": "aabb_size + category"
+	"dir_group": "panel",
+	"range": 18,
+	"density": "high",
+	"min_clearance": 1,
+	"stack_priority": 0.85,
+	"approach_dir": "front",
+	"derived_at": "2026-04-29T09:39:46.147725Z",
+	"derived_from": "aabb_size + category"
    }
   },
   "ForestCompetition": {
@@ -393,8 +393,8 @@
    "complexity": "advanced",
    "description": "Multiple L-System trees with competing growth strategies and health mechanics",
    "dev_themes": [
-    "grammar",
-    "l_systems",
+	"grammar",
+	"l_systems",
     "procedural"
    ],
    "include_in_map_data": true,
@@ -405,106 +405,106 @@
    ],
    "name": "Forest Ecosystem",
    "parameters": {
-    "footprint": [
-     4.0,
-     6.0,
-     6.0
-    ],
-    "size_group": "environment"
+	"footprint": [
+	 4.0,
+	 6.0,
+	 6.0
+	],
+	"size_group": "environment"
    },
    "qfep_connection": "Competition as multi-agent F-minimization \u2014 each tree's growth strategy (its F-model) competes for shared resources. The ecosystem emerges from local growth rules interacting through environmental constraints.",
    "scene": "res://algorithms/lsystems/Ecosystem/ForestCompetition.tscn",
    "tags": [
-    "l_system",
-    "procedural",
+	"l_system",
+	"procedural",
     "simulation"
    ],
    "geometry_spec": {
-    "mesh_type": "procedural_line",
-    "topology": "non_manifold",
-    "construction": {
-     "method": "l_system_turtle",
-     "primitives": [],
-     "operations": [
-      "string_rewrite",
-      "turtle_interpret",
+	"mesh_type": "procedural_line",
+	"topology": "non_manifold",
+	"construction": {
+	 "method": "l_system_turtle",
+	 "primitives": [],
+	 "operations": [
+	  "string_rewrite",
+	  "turtle_interpret",
       "emit_lines"
-     ]
-    },
-    "material": {
-     "type": "vertex_color",
-     "shading_model": "unshaded",
-     "key_properties": [
-      "transparency",
+	 ]
+	},
+	"material": {
+	 "type": "vertex_color",
+	 "shading_model": "unshaded",
+	 "key_properties": [
+	  "transparency",
       "double_sided"
-     ]
-    },
-    "animation": {
-     "type": "vertex",
-     "driven_by": "per_frame_rebuild",
-     "affects": [
+	 ]
+	},
+	"animation": {
+	 "type": "vertex",
+	 "driven_by": "per_frame_rebuild",
+	 "affects": [
       "vertex_positions"
-     ]
-    },
-    "instance_strategy": "array",
-    "vertex_estimate": "unknown"
+	 ]
+	},
+	"instance_strategy": "array",
+	"vertex_estimate": "unknown"
    },
    "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 9,
-    "clearance": {
-     "front": 2,
-     "back": 2,
-     "left": 2,
-     "right": 2
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [
-     "lsystem_tree",
-     "single",
-     "competing",
-     "forest",
+	"platform": "none",
+	"footprint_cells": 9,
+	"clearance": {
+	 "front": 2,
+	 "back": 2,
+	 "left": 2,
+	 "right": 2
+	},
+	"player_position": "front",
+	"wall_backing": false,
+	"orientation": "face_approach",
+	"isolation": 0,
+	"cluster_with": [
+	 "lsystem_tree",
+	 "single",
+	 "competing",
+	 "forest",
      "allometric"
-    ],
-    "preferred_zone": "end",
-    "measured_footprint_cells": 56,
-    "footprint_source": "measured_capped"
+	],
+	"preferred_zone": "end",
+	"measured_footprint_cells": 56,
+	"footprint_source": "measured_capped"
    },
    "measurements": {
-    "aabb_size": [
-     7.44,
-     1.59,
-     7.0
-    ],
-    "aabb_center": [
-     0.22,
-     0.78,
-     0.0
-    ],
-    "grid_cells": [
-     8.0,
-     7.0
-    ],
-    "max_dimension_m": 7.44,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
+	"aabb_size": [
+	 7.44,
+	 1.59,
+	 7.0
+	],
+	"aabb_center": [
+	 0.22,
+	 0.78,
+	 0.0
+	],
+	"grid_cells": [
+	 8.0,
+	 7.0
+	],
+	"max_dimension_m": 7.44,
+	"measured_at": "2026-04-29T07:09:56.762620Z"
    },
    "footprint_measured": [
-    8.0,
-    1,
-    7.0
+	8.0,
+	1,
+	7.0
    ],
    "spatial_profile": {
-    "dir_group": "plane",
-    "range": 18,
-    "density": "field",
-    "min_clearance": 0,
-    "stack_priority": 0.3,
-    "approach_dir": "any",
-    "derived_at": "2026-04-29T09:39:46.147725Z",
-    "derived_from": "aabb_size + category"
+	"dir_group": "plane",
+	"range": 18,
+	"density": "field",
+	"min_clearance": 0,
+	"stack_priority": 0.3,
+	"approach_dir": "any",
+	"derived_at": "2026-04-29T09:39:46.147725Z",
+	"derived_from": "aabb_size + category"
    }
   },
   "Hilbert3D": {
@@ -512,14 +512,14 @@
    "complexity": "advanced",
    "description": "Space-filling curve visualization demonstrating efficient 3D traversal",
    "dev_themes": [
-    "grammar",
-    "l_systems",
+	"grammar",
+	"l_systems",
     "procedural"
    ],
    "footprint": [
-    6,
-    8,
-    6
+	6,
+	8,
+	6
    ],
    "include_in_map_data": true,
    "lookup_name": "Hilbert3D",
@@ -529,68 +529,68 @@
    ],
    "name": "3D Hilbert Curve",
    "parameters": {
-    "footprint": [
-     6,
-     8,
-     6
-    ],
-    "size_group": "xlarge"
+	"footprint": [
+	 6,
+	 8,
+	 6
+	],
+	"size_group": "xlarge"
    },
    "qfep_connection": "A 1D path that visits every point in 3D space \u2014 maximum E(S) coverage from minimum F-description. The curve's grammar rule is tiny; the space it fills is infinite. Recursion as F-compression of complexity.",
    "scene": "res://algorithms/lsystems/Hilbert3D.tscn",
    "size_group": "xlarge",
    "tags": [
-    "3d",
+	"3d",
     "procedural"
    ],
    "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 1,
-    "clearance": {
-     "front": 2,
-     "back": 2,
-     "left": 2,
-     "right": 2
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 2,
-    "cluster_with": [
-     "space_filling_curve_gallery",
+	"platform": "none",
+	"footprint_cells": 1,
+	"clearance": {
+	 "front": 2,
+	 "back": 2,
+	 "left": 2,
+	 "right": 2
+	},
+	"player_position": "front",
+	"wall_backing": false,
+	"orientation": "face_approach",
+	"isolation": 2,
+	"cluster_with": [
+	 "space_filling_curve_gallery",
      "gallery"
-    ],
-    "preferred_zone": "end",
-    "measured_footprint_cells": 1,
-    "footprint_source": "measured"
+	],
+	"preferred_zone": "end",
+	"measured_footprint_cells": 1,
+	"footprint_source": "measured"
    },
    "measurements": {
-    "aabb_size": [
-     0.3,
-     1.18,
-     0.3
-    ],
-    "aabb_center": [
-     0.0,
-     -0.44,
-     0.0
-    ],
-    "grid_cells": [
-     1.0,
-     1.0
-    ],
-    "max_dimension_m": 1.18,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
+	"aabb_size": [
+	 0.3,
+	 1.18,
+	 0.3
+	],
+	"aabb_center": [
+	 0.0,
+	 -0.44,
+	 0.0
+	],
+	"grid_cells": [
+	 1.0,
+	 1.0
+	],
+	"max_dimension_m": 1.18,
+	"measured_at": "2026-04-29T07:09:56.762620Z"
    },
    "spatial_profile": {
-    "dir_group": "floor",
-    "range": 4,
-    "density": "medium",
-    "min_clearance": 1,
-    "stack_priority": 0.5,
-    "approach_dir": "any",
-    "derived_at": "2026-04-29T09:39:46.147725Z",
-    "derived_from": "aabb_size + category"
+	"dir_group": "floor",
+	"range": 4,
+	"density": "medium",
+	"min_clearance": 1,
+	"stack_priority": 0.5,
+	"approach_dir": "any",
+	"derived_at": "2026-04-29T09:39:46.147725Z",
+	"derived_from": "aabb_size + category"
    }
   },
   "branching_coral": {
@@ -598,8 +598,8 @@
    "complexity": "intermediate",
    "description": "Marine L-system coral colony \u2014 multiple shoots with wide branching angles produce organic fan and staghorn forms. Color gradient from deep purple-brown base to bright pink coral tips on a rock base.",
    "dev_themes": [
-    "grammar",
-    "l_systems",
+	"grammar",
+	"l_systems",
     "procedural"
    ],
    "include_in_map_data": true,
@@ -611,97 +611,97 @@
    "name": "Branching Coral",
    "scene": "res://commons/artifacts/branching_coral/branching_coral.tscn",
    "tags": [
-    "color",
-    "l_system",
-    "procedural",
-    "simulation",
+	"color",
+	"l_system",
+	"procedural",
+	"simulation",
     "swarm"
    ],
    "geometry_spec": {
-    "mesh_type": "procedural_line",
-    "topology": "non_manifold",
-    "construction": {
-     "method": "l_system_turtle",
-     "primitives": [
+	"mesh_type": "procedural_line",
+	"topology": "non_manifold",
+	"construction": {
+	 "method": "l_system_turtle",
+	 "primitives": [
       "box"
-     ],
-     "operations": [
-      "string_rewrite",
-      "turtle_interpret",
+	 ],
+	 "operations": [
+	  "string_rewrite",
+	  "turtle_interpret",
       "emit_lines"
-     ]
-    },
-    "material": {
-     "type": "vertex_color",
-     "shading_model": "unshaded",
-     "key_properties": [
+	 ]
+	},
+	"material": {
+	 "type": "vertex_color",
+	 "shading_model": "unshaded",
+	 "key_properties": [
       "metallic"
-     ]
-    },
-    "animation": {
-     "type": "static",
-     "driven_by": null,
-     "affects": []
-    },
-    "instance_strategy": "single",
-    "vertex_estimate": "unknown"
+	 ]
+	},
+	"animation": {
+	 "type": "static",
+	 "driven_by": null,
+	 "affects": []
+	},
+	"instance_strategy": "single",
+	"vertex_estimate": "unknown"
    },
    "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 1,
-    "clearance": {
-     "front": 1,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [
-     "lsystem_tree",
-     "single",
-     "trunk",
-     "multi",
+	"platform": "none",
+	"footprint_cells": 1,
+	"clearance": {
+	 "front": 1,
+	 "back": 1,
+	 "left": 1,
+	 "right": 1
+	},
+	"player_position": "front",
+	"wall_backing": false,
+	"orientation": "face_approach",
+	"isolation": 0,
+	"cluster_with": [
+	 "lsystem_tree",
+	 "single",
+	 "trunk",
+	 "multi",
      "shoot"
-    ],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 1,
-    "footprint_source": "measured"
+	],
+	"preferred_zone": "any",
+	"measured_footprint_cells": 1,
+	"footprint_source": "measured"
    },
    "measurements": {
-    "aabb_size": [
-     0.35,
-     0.53,
-     0.28
-    ],
-    "aabb_center": [
-     0.0,
-     0.23,
-     0.0
-    ],
-    "grid_cells": [
-     1.0,
-     1.0
-    ],
-    "max_dimension_m": 0.53,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
+	"aabb_size": [
+	 0.35,
+	 0.53,
+	 0.28
+	],
+	"aabb_center": [
+	 0.0,
+	 0.23,
+	 0.0
+	],
+	"grid_cells": [
+	 1.0,
+	 1.0
+	],
+	"max_dimension_m": 0.53,
+	"measured_at": "2026-04-29T07:09:56.762620Z"
    },
    "footprint_measured": [
-    1.0,
-    1,
-    1.0
+	1.0,
+	1,
+	1.0
    ],
    "spatial_profile": {
-    "dir_group": "floor",
-    "range": 2,
-    "density": "medium",
-    "min_clearance": 1,
-    "stack_priority": 0.5,
-    "approach_dir": "any",
-    "derived_at": "2026-04-29T09:39:46.147725Z",
-    "derived_from": "aabb_size + category"
+	"dir_group": "floor",
+	"range": 2,
+	"density": "medium",
+	"min_clearance": 1,
+	"stack_priority": 0.5,
+	"approach_dir": "any",
+	"derived_at": "2026-04-29T09:39:46.147725Z",
+	"derived_from": "aabb_size + category"
    }
   },
   "dark_sphere": {
@@ -709,149 +709,149 @@
    "complexity": "intermediate",
    "description": "A simple dark sphere used as an atmospheric and geometric reference. Its silhouette, rotation, and low-emission surface make nearby shifts in scale, position, and lighting easier to perceive. Because it changes very little itself, it stabilizes the viewer's sense of what other transformed objects are doing. It functions as a neutral anchor.",
    "dev_themes": [
-    "grammar",
-    "l_systems",
+	"grammar",
+	"l_systems",
     "procedural"
    ],
    "include_in_map_data": true,
    "lookup_name": "dark_sphere",
    "map_ready": true,
    "map_sequences": [
-    "array_tutorial",
-    "bricolage",
-    "cellularautomata",
-    "color",
-    "constraint_solvers",
-    "forces",
-    "fractals",
-    "isosurfaces",
-    "lsystems",
-    "noise",
-    "particles",
-    "patterngeneration",
-    "physicssimulation",
-    "primitives",
-    "proceduralgeneration",
-    "proceduralgeneration_all",
-    "qfeplaboratory",
-    "randomness",
-    "testmaps",
-    "transformation",
-    "unused",
+	"array_tutorial",
+	"bricolage",
+	"cellularautomata",
+	"color",
+	"constraint_solvers",
+	"forces",
+	"fractals",
+	"isosurfaces",
+	"lsystems",
+	"noise",
+	"particles",
+	"patterngeneration",
+	"physicssimulation",
+	"primitives",
+	"proceduralgeneration",
+	"proceduralgeneration_all",
+	"qfeplaboratory",
+	"randomness",
+	"testmaps",
+	"transformation",
+	"unused",
     "wavefunctions"
    ],
    "name": "Dark Sphere",
    "parameters": {
-    "footprint": [
-     1.0,
-     1.0,
-     1.0
-    ],
-    "size_group": "compact"
+	"footprint": [
+	 1.0,
+	 1.0,
+	 1.0
+	],
+	"size_group": "compact"
    },
    "scene": "res://commons/artifacts/dark_sphere/dark_sphere.tscn",
    "tags": [
-    "reference",
-    "atmosphere",
-    "sphere",
-    "scale_marker",
-    "lighting",
-    "geometry",
+	"reference",
+	"atmosphere",
+	"sphere",
+	"scale_marker",
+	"lighting",
+	"geometry",
     "procedural"
    ],
    "qfep_connection": "Transformation often needs an invariant reference to be legible. The sphere stays simple so surrounding changes in S can be felt against it.",
    "gamwell_reference": "",
    "capacity": "USE a neutral sphere as a reference for scale, silhouette, and atmospheric change.",
    "interactions": [
-    "observe the pulsing sphere against transformed geometry",
-    "use it as a scale and occlusion reference in the room",
-    "compare its stable silhouette with more dynamic artifacts nearby",
+	"observe the pulsing sphere against transformed geometry",
+	"use it as a scale and occlusion reference in the room",
+	"compare its stable silhouette with more dynamic artifacts nearby",
     "treat it as an atmospheric marker when reading spatial change"
    ],
    "geometry_spec": {
-    "mesh_type": "composed_primitives",
-    "topology": "manifold_closed",
-    "construction": {
-     "method": "primitive_assembly",
-     "primitives": [
-      "sphere",
+	"mesh_type": "composed_primitives",
+	"topology": "manifold_closed",
+	"construction": {
+	 "method": "primitive_assembly",
+	 "primitives": [
+	  "sphere",
       "cylinder"
-     ],
-     "operations": [
-      "create_primitives",
+	 ],
+	 "operations": [
+	  "create_primitives",
       "position_children"
-     ]
-    },
-    "material": {
-     "type": "unlit",
-     "shading_model": "unshaded",
-     "key_properties": [
-      "emission",
-      "metallic",
-      "transparency",
+	 ]
+	},
+	"material": {
+	 "type": "unlit",
+	 "shading_model": "unshaded",
+	 "key_properties": [
+	  "emission",
+	  "metallic",
+	  "transparency",
       "double_sided"
-     ]
-    },
-    "animation": {
-     "type": "transform",
-     "driven_by": "per_frame_update",
-     "affects": [
+	 ]
+	},
+	"animation": {
+	 "type": "transform",
+	 "driven_by": "per_frame_update",
+	 "affects": [
       "transform"
-     ]
-    },
-    "instance_strategy": "single",
-    "vertex_estimate": "~1536"
+	 ]
+	},
+	"instance_strategy": "single",
+	"vertex_estimate": "~1536"
    },
    "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 1,
-    "clearance": {
-     "front": 1,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 1,
-    "footprint_source": "measured"
+	"platform": "none",
+	"footprint_cells": 1,
+	"clearance": {
+	 "front": 1,
+	 "back": 1,
+	 "left": 1,
+	 "right": 1
+	},
+	"player_position": "front",
+	"wall_backing": false,
+	"orientation": "face_approach",
+	"isolation": 0,
+	"cluster_with": [],
+	"preferred_zone": "any",
+	"measured_footprint_cells": 1,
+	"footprint_source": "measured"
    },
    "measurements": {
-    "aabb_size": [
-     0.84,
-     0.94,
-     0.84
-    ],
-    "aabb_center": [
-     0.0,
-     0.48,
-     0.0
-    ],
-    "grid_cells": [
-     1.0,
-     1.0
-    ],
-    "max_dimension_m": 0.94,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
+	"aabb_size": [
+	 0.84,
+	 0.94,
+	 0.84
+	],
+	"aabb_center": [
+	 0.0,
+	 0.48,
+	 0.0
+	],
+	"grid_cells": [
+	 1.0,
+	 1.0
+	],
+	"max_dimension_m": 0.94,
+	"measured_at": "2026-04-29T07:09:56.762620Z"
    },
    "footprint_measured": [
-    1.0,
-    1,
-    1.0
+	1.0,
+	1,
+	1.0
    ],
    "spatial_profile": {
-    "dir_group": "omni",
-    "range": 2,
-    "density": "medium",
-    "min_clearance": 1,
-    "stack_priority": 0.5,
-    "approach_dir": "any",
-    "derived_at": "2026-04-29T09:39:46.147725Z",
-    "derived_from": "aabb_size + category"
+	"dir_group": "omni",
+	"range": 2,
+	"density": "medium",
+	"min_clearance": 1,
+	"stack_priority": 0.5,
+	"approach_dir": "any",
+	"derived_at": "2026-04-29T09:39:46.147725Z",
+	"derived_from": "aabb_size + category"
    }
   },
   "fractal_lsystem_string": {
@@ -859,8 +859,8 @@
    "complexity": "advanced",
    "description": "Visualizes the L-system rewriting process \u2014 shows how the axiom string expands through each generation, making the grammar visible as text.",
    "dev_themes": [
-    "grammar",
-    "l_systems",
+	"grammar",
+	"l_systems",
     "procedural"
    ],
    "include_in_map_data": true,
@@ -871,104 +871,104 @@
    ],
    "name": "L-System String Expansion",
    "parameters": {
-    "footprint": [
-     1.0,
-     3.0,
-     3.0
-    ],
-    "size_group": "room_scale"
+	"footprint": [
+	 1.0,
+	 3.0,
+	 3.0
+	],
+	"size_group": "room_scale"
    },
    "qfep_connection": "The F-description made visible: each generation shows the string growing exponentially from a tiny axiom. You see the compression ratio directly \u2014 one rule produces pages of instructions.",
    "scene": "res://commons/artifacts/fractal_lsystem_string/fractal_lsystem_string.tscn",
    "tags": [
-    "fractal",
-    "l_system",
-    "procedural",
-    "simulation",
+	"fractal",
+	"l_system",
+	"procedural",
+	"simulation",
     "string"
    ],
    "geometry_spec": {
-    "mesh_type": "composed_primitives",
-    "topology": "manifold_closed",
-    "construction": {
-     "method": "primitive_assembly",
-     "primitives": [
+	"mesh_type": "composed_primitives",
+	"topology": "manifold_closed",
+	"construction": {
+	 "method": "primitive_assembly",
+	 "primitives": [
       "box"
-     ],
-     "operations": [
-      "create_primitives",
+	 ],
+	 "operations": [
+	  "create_primitives",
       "position_children"
-     ]
-    },
-    "material": {
-     "type": "standard",
-     "shading_model": "pbr",
-     "key_properties": [
+	 ]
+	},
+	"material": {
+	 "type": "standard",
+	 "shading_model": "pbr",
+	 "key_properties": [
       "metallic"
-     ]
-    },
-    "animation": {
-     "type": "static",
-     "driven_by": null,
-     "affects": []
-    },
-    "instance_strategy": "single",
-    "vertex_estimate": "unknown"
+	 ]
+	},
+	"animation": {
+	 "type": "static",
+	 "driven_by": null,
+	 "affects": []
+	},
+	"instance_strategy": "single",
+	"vertex_estimate": "unknown"
    },
    "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 1,
-    "clearance": {
-     "front": 1,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [
-     "lsystem_tree",
-     "string",
+	"platform": "none",
+	"footprint_cells": 1,
+	"clearance": {
+	 "front": 1,
+	 "back": 1,
+	 "left": 1,
+	 "right": 1
+	},
+	"player_position": "front",
+	"wall_backing": false,
+	"orientation": "face_approach",
+	"isolation": 0,
+	"cluster_with": [
+	 "lsystem_tree",
+	 "string",
      "geometry"
-    ],
-    "preferred_zone": "end",
-    "measured_footprint_cells": 1,
-    "footprint_source": "measured"
+	],
+	"preferred_zone": "end",
+	"measured_footprint_cells": 1,
+	"footprint_source": "measured"
    },
    "measurements": {
-    "aabb_size": [
-     0.96,
-     0.03,
-     0.24
-    ],
-    "aabb_center": [
-     0.0,
-     -0.01,
-     0.0
-    ],
-    "grid_cells": [
-     1.0,
-     1.0
-    ],
-    "max_dimension_m": 0.96,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
+	"aabb_size": [
+	 0.96,
+	 0.03,
+	 0.24
+	],
+	"aabb_center": [
+	 0.0,
+	 -0.01,
+	 0.0
+	],
+	"grid_cells": [
+	 1.0,
+	 1.0
+	],
+	"max_dimension_m": 0.96,
+	"measured_at": "2026-04-29T07:09:56.762620Z"
    },
    "footprint_measured": [
-    1.0,
-    1,
-    1.0
+	1.0,
+	1,
+	1.0
    ],
    "spatial_profile": {
-    "dir_group": "plane",
-    "range": 2,
-    "density": "medium",
-    "min_clearance": 1,
-    "stack_priority": 0.5,
-    "approach_dir": "any",
-    "derived_at": "2026-04-29T09:39:46.147725Z",
-    "derived_from": "aabb_size + category"
+	"dir_group": "plane",
+	"range": 2,
+	"density": "medium",
+	"min_clearance": 1,
+	"stack_priority": 0.5,
+	"approach_dir": "any",
+	"derived_at": "2026-04-29T09:39:46.147725Z",
+	"derived_from": "aabb_size + category"
    }
   },
   "genetic_tree_sculptor": {
@@ -976,9 +976,9 @@
    "complexity": "advanced",
    "description": "Evolutionary L-system tree that uses genetic algorithm selection to sculpt tree forms \u2014 combines grammar-based growth with fitness-driven optimization.",
    "dev_themes": [
-    "biology",
-    "grammar",
-    "l_systems",
+	"biology",
+	"grammar",
+	"l_systems",
     "procedural"
    ],
    "include_in_map_data": true,
@@ -991,95 +991,95 @@
    "qfep_connection": "Evolution as F-search: genetic algorithms explore the space of possible L-system parameters, selecting trees by fitness criteria. Natural selection as a meta-grammar operating on grammars.",
    "scene": "res://commons/artifacts/genetic_tree_sculptor/genetic_tree_sculptor.tscn",
    "tags": [
-    "l_system",
-    "procedural",
-    "simulation",
-    "sorting",
+	"l_system",
+	"procedural",
+	"simulation",
+	"sorting",
     "tree"
    ],
    "geometry_spec": {
-    "mesh_type": "delegated_scene",
-    "topology": "manifold_closed",
-    "construction": {
-     "method": "scene_instantiation",
-     "primitives": [
+	"mesh_type": "delegated_scene",
+	"topology": "manifold_closed",
+	"construction": {
+	 "method": "scene_instantiation",
+	 "primitives": [
       "cylinder"
-     ],
-     "operations": [
-      "load_scene",
-      "instantiate",
+	 ],
+	 "operations": [
+	  "load_scene",
+	  "instantiate",
       "configure"
-     ]
-    },
-    "material": {
-     "type": "standard",
-     "shading_model": "pbr",
-     "key_properties": []
-    },
-    "animation": {
-     "type": "transform",
-     "driven_by": "per_frame_update",
-     "affects": [
+	 ]
+	},
+	"material": {
+	 "type": "standard",
+	 "shading_model": "pbr",
+	 "key_properties": []
+	},
+	"animation": {
+	 "type": "transform",
+	 "driven_by": "per_frame_update",
+	 "affects": [
       "transform"
-     ]
-    },
-    "instance_strategy": "single",
-    "vertex_estimate": "varies"
+	 ]
+	},
+	"instance_strategy": "single",
+	"vertex_estimate": "varies"
    },
    "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 9,
-    "clearance": {
-     "front": 1,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [
-     "systems",
-     "evolution",
+	"platform": "none",
+	"footprint_cells": 9,
+	"clearance": {
+	 "front": 1,
+	 "back": 1,
+	 "left": 1,
+	 "right": 1
+	},
+	"player_position": "front",
+	"wall_backing": false,
+	"orientation": "face_approach",
+	"isolation": 0,
+	"cluster_with": [
+	 "systems",
+	 "evolution",
      "concepts"
-    ],
-    "preferred_zone": "end",
-    "measured_footprint_cells": 9,
-    "footprint_source": "measured"
+	],
+	"preferred_zone": "end",
+	"measured_footprint_cells": 9,
+	"footprint_source": "measured"
    },
    "measurements": {
-    "aabb_size": [
-     2.72,
-     3.79,
-     2.64
-    ],
-    "aabb_center": [
-     -0.54,
-     1.3,
-     0.72
-    ],
-    "grid_cells": [
-     3.0,
-     3.0
-    ],
-    "max_dimension_m": 3.79,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
+	"aabb_size": [
+	 2.72,
+	 3.79,
+	 2.64
+	],
+	"aabb_center": [
+	 -0.54,
+	 1.3,
+	 0.72
+	],
+	"grid_cells": [
+	 3.0,
+	 3.0
+	],
+	"max_dimension_m": 3.79,
+	"measured_at": "2026-04-29T07:09:56.762620Z"
    },
    "footprint_measured": [
-    3.0,
-    1,
-    3.0
+	3.0,
+	1,
+	3.0
    ],
    "spatial_profile": {
-    "dir_group": "floor",
-    "range": 10,
-    "density": "medium",
-    "min_clearance": 2,
-    "stack_priority": 0.5,
-    "approach_dir": "any",
-    "derived_at": "2026-04-29T09:39:46.147725Z",
-    "derived_from": "aabb_size + category"
+	"dir_group": "floor",
+	"range": 10,
+	"density": "medium",
+	"min_clearance": 2,
+	"stack_priority": 0.5,
+	"approach_dir": "any",
+	"derived_at": "2026-04-29T09:39:46.147725Z",
+	"derived_from": "aabb_size + category"
    }
   },
   "grammar_provenance": {
@@ -1087,9 +1087,9 @@
    "complexity": "advanced",
    "description": "Side-by-side L-system trees from three cultural/historical sources \u2014 Lindenmayer 1968 botanical, Islamic geometric subdivision, Aboriginal kinship recursion. Same engine, different axioms, different worlds. Asks: whose grammar?",
    "dev_themes": [
-    "grammar",
-    "l_systems",
-    "procedural",
+	"grammar",
+	"l_systems",
+	"procedural",
     "philosophy"
    ],
    "include_in_map_data": true,
@@ -1100,107 +1100,107 @@
    ],
    "name": "Grammar Provenance",
    "parameters": {
-    "footprint": [
-     4.0,
-     2.0,
-     2.0
-    ],
-    "size_group": "room_scale"
+	"footprint": [
+	 4.0,
+	 2.0,
+	 2.0
+	],
+	"size_group": "room_scale"
    },
    "qfep_connection": "The axiom is never neutral \u2014 every grammar encodes a worldview. Three F-descriptions produce three radically different E(S) landscapes. The engine is the same; the politics are in the rules.",
    "scene": "res://commons/artifacts/grammar_provenance/grammar_provenance.tscn",
    "tags": [
-    "l_system",
-    "procedural",
-    "critical_theory",
-    "provenance",
+	"l_system",
+	"procedural",
+	"critical_theory",
+	"provenance",
     "comparison"
    ],
    "geometry_spec": {
-    "mesh_type": "procedural_line",
-    "topology": "non_manifold",
-    "construction": {
-     "method": "l_system_turtle",
-     "primitives": [
+	"mesh_type": "procedural_line",
+	"topology": "non_manifold",
+	"construction": {
+	 "method": "l_system_turtle",
+	 "primitives": [
       "cylinder"
-     ],
-     "operations": [
-      "string_rewrite",
-      "turtle_interpret",
+	 ],
+	 "operations": [
+	  "string_rewrite",
+	  "turtle_interpret",
       "emit_lines"
-     ]
-    },
-    "material": {
-     "type": "vertex_color",
-     "shading_model": "unshaded",
-     "key_properties": [
+	 ]
+	},
+	"material": {
+	 "type": "vertex_color",
+	 "shading_model": "unshaded",
+	 "key_properties": [
       "metallic"
-     ]
-    },
-    "animation": {
-     "type": "static",
-     "driven_by": null,
-     "affects": []
-    },
-    "instance_strategy": "array",
-    "vertex_estimate": "~1"
+	 ]
+	},
+	"animation": {
+	 "type": "static",
+	 "driven_by": null,
+	 "affects": []
+	},
+	"instance_strategy": "array",
+	"vertex_estimate": "~1"
    },
    "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 9,
-    "clearance": {
-     "front": 1,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [
-     "placed",
-     "alongside",
-     "lsystem_editor",
-     "lsystem_tree",
+	"platform": "none",
+	"footprint_cells": 9,
+	"clearance": {
+	 "front": 1,
+	 "back": 1,
+	 "left": 1,
+	 "right": 1
+	},
+	"player_position": "front",
+	"wall_backing": false,
+	"orientation": "face_approach",
+	"isolation": 0,
+	"cluster_with": [
+	 "placed",
+	 "alongside",
+	 "lsystem_editor",
+	 "lsystem_tree",
      "responds"
-    ],
-    "preferred_zone": "end",
-    "measured_footprint_cells": 18,
-    "footprint_source": "measured_capped"
+	],
+	"preferred_zone": "end",
+	"measured_footprint_cells": 18,
+	"footprint_source": "measured_capped"
    },
    "measurements": {
-    "aabb_size": [
-     17.57,
-     9.19,
-     0.7
-    ],
-    "aabb_center": [
-     7.24,
-     -1.23,
-     0.0
-    ],
-    "grid_cells": [
-     18.0,
-     1.0
-    ],
-    "max_dimension_m": 17.57,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
+	"aabb_size": [
+	 17.57,
+	 9.19,
+	 0.7
+	],
+	"aabb_center": [
+	 7.24,
+	 -1.23,
+	 0.0
+	],
+	"grid_cells": [
+	 18.0,
+	 1.0
+	],
+	"max_dimension_m": 17.57,
+	"measured_at": "2026-04-29T07:09:56.762620Z"
    },
    "footprint_measured": [
-    18.0,
-    1,
-    1.0
+	18.0,
+	1,
+	1.0
    ],
    "spatial_profile": {
-    "dir_group": "panel",
-    "range": 35,
-    "density": "high",
-    "min_clearance": 1,
-    "stack_priority": 0.85,
-    "approach_dir": "front",
-    "derived_at": "2026-04-29T09:39:46.147725Z",
-    "derived_from": "aabb_size + category"
+	"dir_group": "panel",
+	"range": 35,
+	"density": "high",
+	"min_clearance": 1,
+	"stack_priority": 0.85,
+	"approach_dir": "front",
+	"derived_at": "2026-04-29T09:39:46.147725Z",
+	"derived_from": "aabb_size + category"
    }
   },
   "lsystem_dungeon": {
@@ -1208,8 +1208,8 @@
    "complexity": "advanced",
    "description": "Procedural dungeon floor plan generated from L-system grammar rules \u2014 corridors and rooms emerge from string rewriting, rendered as a miniature architectural model.",
    "dev_themes": [
-    "grammar",
-    "l_systems",
+	"grammar",
+	"l_systems",
     "procedural"
    ],
    "include_in_map_data": true,
@@ -1220,104 +1220,104 @@
    ],
    "name": "L-System Dungeon",
    "parameters": {
-    "footprint": [
-     1.0,
-     1.0,
-     1.0
-    ],
-    "size_group": "compact"
+	"footprint": [
+	 1.0,
+	 1.0,
+	 1.0
+	],
+	"size_group": "compact"
    },
    "qfep_connection": "Architecture from grammar: the dungeon layout emerges from rewriting rules on the XZ plane. Rooms and corridors are emergent properties of the string \u2014 spatial E(S) from textual F-description.",
    "scene": "res://commons/artifacts/lsystem_dungeon/lsystem_dungeon.tscn",
    "tags": [
-    "2d",
-    "l_system",
-    "procedural",
-    "simulation",
+	"2d",
+	"l_system",
+	"procedural",
+	"simulation",
     "string"
    ],
    "geometry_spec": {
-    "mesh_type": "composed_primitives",
-    "topology": "manifold_closed",
-    "construction": {
-     "method": "primitive_assembly",
-     "primitives": [
-      "box",
+	"mesh_type": "composed_primitives",
+	"topology": "manifold_closed",
+	"construction": {
+	 "method": "primitive_assembly",
+	 "primitives": [
+	  "box",
       "cylinder"
-     ],
-     "operations": [
-      "create_primitives",
+	 ],
+	 "operations": [
+	  "create_primitives",
       "position_children"
-     ]
-    },
-    "material": {
-     "type": "standard",
-     "shading_model": "pbr",
-     "key_properties": [
+	 ]
+	},
+	"material": {
+	 "type": "standard",
+	 "shading_model": "pbr",
+	 "key_properties": [
       "metallic"
-     ]
-    },
-    "animation": {
-     "type": "static",
-     "driven_by": null,
-     "affects": []
-    },
-    "instance_strategy": "few",
-    "vertex_estimate": "~1"
+	 ]
+	},
+	"animation": {
+	 "type": "static",
+	 "driven_by": null,
+	 "affects": []
+	},
+	"instance_strategy": "few",
+	"vertex_estimate": "~1"
    },
    "spatial_needs": {
-    "platform": "sunken",
-    "footprint_cells": 1,
-    "clearance": {
-     "front": 1,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [
-     "growth",
+	"platform": "sunken",
+	"footprint_cells": 1,
+	"clearance": {
+	 "front": 1,
+	 "back": 1,
+	 "left": 1,
+	 "right": 1
+	},
+	"player_position": "front",
+	"wall_backing": false,
+	"orientation": "face_approach",
+	"isolation": 0,
+	"cluster_with": [
+	 "growth",
      "proceduralgeneration"
-    ],
-    "preferred_zone": "end",
-    "measured_footprint_cells": 1,
-    "footprint_source": "measured"
+	],
+	"preferred_zone": "end",
+	"measured_footprint_cells": 1,
+	"footprint_source": "measured"
    },
    "measurements": {
-    "aabb_size": [
-     0.84,
-     0.08,
-     0.84
-    ],
-    "aabb_center": [
-     0.0,
-     0.01,
-     0.0
-    ],
-    "grid_cells": [
-     1.0,
-     1.0
-    ],
-    "max_dimension_m": 0.84,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
+	"aabb_size": [
+	 0.84,
+	 0.08,
+	 0.84
+	],
+	"aabb_center": [
+	 0.0,
+	 0.01,
+	 0.0
+	],
+	"grid_cells": [
+	 1.0,
+	 1.0
+	],
+	"max_dimension_m": 0.84,
+	"measured_at": "2026-04-29T07:09:56.762620Z"
    },
    "footprint_measured": [
-    1.0,
-    1,
-    1.0
+	1.0,
+	1,
+	1.0
    ],
    "spatial_profile": {
-    "dir_group": "plane",
-    "range": 2,
-    "density": "medium",
-    "min_clearance": 1,
-    "stack_priority": 0.5,
-    "approach_dir": "any",
-    "derived_at": "2026-04-29T09:39:46.147725Z",
-    "derived_from": "aabb_size + category"
+	"dir_group": "plane",
+	"range": 2,
+	"density": "medium",
+	"min_clearance": 1,
+	"stack_priority": 0.5,
+	"approach_dir": "any",
+	"derived_at": "2026-04-29T09:39:46.147725Z",
+	"derived_from": "aabb_size + category"
    }
   },
   "lsystem_tree": {
@@ -1325,119 +1325,119 @@
    "complexity": "advanced",
    "description": "Classic deterministic L-system tree \u2014 the foundational teaching example showing how a simple grammar rule produces organic branching structure.",
    "dev_themes": [
-    "education",
-    "grammar",
-    "l_systems",
+	"education",
+	"grammar",
+	"l_systems",
     "procedural"
    ],
    "include_in_map_data": true,
    "lookup_name": "lsystem_tree",
    "map_ready": true,
    "map_sequences": [
-    "lsystems",
-    "proceduralgeneration",
+	"lsystems",
+	"proceduralgeneration",
     "proceduralgeneration_all"
    ],
    "name": "L-System Tree",
    "parameters": {
-    "footprint": [
-     1.0,
-     1.0,
-     1.0
-    ],
-    "size_group": "compact"
+	"footprint": [
+	 1.0,
+	 1.0,
+	 1.0
+	],
+	"size_group": "compact"
    },
    "qfep_connection": "The simplest demonstration of F generating E(S): one rule F->F[+F]F[-F]F unfolds a single line into a complex branching tree. Minimal description, maximum emergent structure.",
    "scene": "res://commons/artifacts/lsystem_tree/lsystem_tree.tscn",
    "tags": [
-    "l_system",
-    "procedural",
-    "simulation",
+	"l_system",
+	"procedural",
+	"simulation",
     "tree"
    ],
    "geometry_spec": {
-    "mesh_type": "procedural_line",
-    "topology": "non_manifold",
-    "construction": {
-     "method": "l_system_turtle",
-     "primitives": [
+	"mesh_type": "procedural_line",
+	"topology": "non_manifold",
+	"construction": {
+	 "method": "l_system_turtle",
+	 "primitives": [
       "cylinder"
-     ],
-     "operations": [
-      "string_rewrite",
-      "turtle_interpret",
+	 ],
+	 "operations": [
+	  "string_rewrite",
+	  "turtle_interpret",
       "emit_lines"
-     ]
-    },
-    "material": {
-     "type": "vertex_color",
-     "shading_model": "unshaded",
-     "key_properties": [
+	 ]
+	},
+	"material": {
+	 "type": "vertex_color",
+	 "shading_model": "unshaded",
+	 "key_properties": [
       "metallic"
-     ]
-    },
-    "animation": {
-     "type": "static",
-     "driven_by": null,
-     "affects": []
-    },
-    "instance_strategy": "single",
-    "vertex_estimate": "unknown"
+	 ]
+	},
+	"animation": {
+	 "type": "static",
+	 "driven_by": null,
+	 "affects": []
+	},
+	"instance_strategy": "single",
+	"vertex_estimate": "unknown"
    },
    "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 1,
-    "clearance": {
-     "front": 1,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [
-     "reference",
-     "whole",
+	"platform": "none",
+	"footprint_cells": 1,
+	"clearance": {
+	 "front": 1,
+	 "back": 1,
+	 "left": 1,
+	 "right": 1
+	},
+	"player_position": "front",
+	"wall_backing": false,
+	"orientation": "face_approach",
+	"isolation": 0,
+	"cluster_with": [
+	 "reference",
+	 "whole",
      "sequence"
-    ],
-    "preferred_zone": "end",
-    "measured_footprint_cells": 1,
-    "footprint_source": "measured"
+	],
+	"preferred_zone": "end",
+	"measured_footprint_cells": 1,
+	"footprint_source": "measured"
    },
    "measurements": {
-    "aabb_size": [
-     0.48,
-     0.48,
-     0.48
-    ],
-    "aabb_center": [
-     0.0,
-     0.21,
-     0.0
-    ],
-    "grid_cells": [
-     1.0,
-     1.0
-    ],
-    "max_dimension_m": 0.48,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
+	"aabb_size": [
+	 0.48,
+	 0.48,
+	 0.48
+	],
+	"aabb_center": [
+	 0.0,
+	 0.21,
+	 0.0
+	],
+	"grid_cells": [
+	 1.0,
+	 1.0
+	],
+	"max_dimension_m": 0.48,
+	"measured_at": "2026-04-29T07:09:56.762620Z"
    },
    "footprint_measured": [
-    1.0,
-    1,
-    1.0
+	1.0,
+	1,
+	1.0
    ],
    "spatial_profile": {
-    "dir_group": "omni",
-    "range": 2,
-    "density": "medium",
-    "min_clearance": 1,
-    "stack_priority": 0.5,
-    "approach_dir": "any",
-    "derived_at": "2026-04-29T09:39:46.147725Z",
-    "derived_from": "aabb_size + category"
+	"dir_group": "omni",
+	"range": 2,
+	"density": "medium",
+	"min_clearance": 1,
+	"stack_priority": 0.5,
+	"approach_dir": "any",
+	"derived_at": "2026-04-29T09:39:46.147725Z",
+	"derived_from": "aabb_size + category"
    }
   },
   "parametric_lsystem": {
@@ -1445,8 +1445,8 @@
    "complexity": "advanced",
    "description": "L-system with continuous angle and length parameters \u2014 branch depth controls parametric decay for organic, naturalistic tree and plant forms. More organic than discrete rules.",
    "dev_themes": [
-    "grammar",
-    "l_systems",
+	"grammar",
+	"l_systems",
     "procedural"
    ],
    "include_in_map_data": true,
@@ -1458,96 +1458,96 @@
    "name": "Parametric L-System",
    "scene": "res://commons/artifacts/parametric_lsystem/parametric_lsystem.tscn",
    "tags": [
-    "l_system",
-    "procedural",
-    "simulation",
+	"l_system",
+	"procedural",
+	"simulation",
     "tree"
    ],
    "geometry_spec": {
-    "mesh_type": "procedural_line",
-    "topology": "non_manifold",
-    "construction": {
-     "method": "l_system_turtle",
-     "primitives": [
+	"mesh_type": "procedural_line",
+	"topology": "non_manifold",
+	"construction": {
+	 "method": "l_system_turtle",
+	 "primitives": [
       "cylinder"
-     ],
-     "operations": [
-      "string_rewrite",
-      "turtle_interpret",
+	 ],
+	 "operations": [
+	  "string_rewrite",
+	  "turtle_interpret",
       "emit_lines"
-     ]
-    },
-    "material": {
-     "type": "vertex_color",
-     "shading_model": "unshaded",
-     "key_properties": [
+	 ]
+	},
+	"material": {
+	 "type": "vertex_color",
+	 "shading_model": "unshaded",
+	 "key_properties": [
       "metallic"
-     ]
-    },
-    "animation": {
-     "type": "static",
-     "driven_by": null,
-     "affects": []
-    },
-    "instance_strategy": "single",
-    "vertex_estimate": "unknown"
+	 ]
+	},
+	"animation": {
+	 "type": "static",
+	 "driven_by": null,
+	 "affects": []
+	},
+	"instance_strategy": "single",
+	"vertex_estimate": "unknown"
    },
    "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 1,
-    "clearance": {
-     "front": 1,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [
-     "lsystem_tree",
-     "fixed",
-     "angle",
-     "parametric",
+	"platform": "none",
+	"footprint_cells": 1,
+	"clearance": {
+	 "front": 1,
+	 "back": 1,
+	 "left": 1,
+	 "right": 1
+	},
+	"player_position": "front",
+	"wall_backing": false,
+	"orientation": "face_approach",
+	"isolation": 0,
+	"cluster_with": [
+	 "lsystem_tree",
+	 "fixed",
+	 "angle",
+	 "parametric",
      "decay"
-    ],
-    "preferred_zone": "end",
-    "measured_footprint_cells": 1,
-    "footprint_source": "measured"
+	],
+	"preferred_zone": "end",
+	"measured_footprint_cells": 1,
+	"footprint_source": "measured"
    },
    "measurements": {
-    "aabb_size": [
-     0.96,
-     0.93,
-     0.96
-    ],
-    "aabb_center": [
-     0.0,
-     0.44,
-     0.0
-    ],
-    "grid_cells": [
-     1.0,
-     1.0
-    ],
-    "max_dimension_m": 0.96,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
+	"aabb_size": [
+	 0.96,
+	 0.93,
+	 0.96
+	],
+	"aabb_center": [
+	 0.0,
+	 0.44,
+	 0.0
+	],
+	"grid_cells": [
+	 1.0,
+	 1.0
+	],
+	"max_dimension_m": 0.96,
+	"measured_at": "2026-04-29T07:09:56.762620Z"
    },
    "footprint_measured": [
-    1.0,
-    1,
-    1.0
+	1.0,
+	1,
+	1.0
    ],
    "spatial_profile": {
-    "dir_group": "omni",
-    "range": 2,
-    "density": "medium",
-    "min_clearance": 1,
-    "stack_priority": 0.5,
-    "approach_dir": "any",
-    "derived_at": "2026-04-29T09:39:46.147725Z",
-    "derived_from": "aabb_size + category"
+	"dir_group": "omni",
+	"range": 2,
+	"density": "medium",
+	"min_clearance": 1,
+	"stack_priority": 0.5,
+	"approach_dir": "any",
+	"derived_at": "2026-04-29T09:39:46.147725Z",
+	"derived_from": "aabb_size + category"
    }
   },
   "space_filling_curve_gallery": {
@@ -1555,15 +1555,15 @@
    "complexity": "advanced",
    "description": "Triptych of classic space-filling curves \u2014 Hilbert, Peano, and Moore \u2014 generated via L-system rules and turtle graphics on a floor display. Curves that visit every point in a 2D region.",
    "dev_themes": [
-    "art",
-    "grammar",
-    "l_systems",
+	"art",
+	"grammar",
+	"l_systems",
     "procedural"
    ],
    "footprint": [
-    4,
-    1,
-    2
+	4,
+	1,
+	2
    ],
    "include_in_map_data": true,
    "lookup_name": "space_filling_curve_gallery",
@@ -1576,90 +1576,90 @@
    "scene": "res://commons/artifacts/space_filling_curve_gallery/space_filling_curve_gallery.tscn",
    "size_group": "large",
    "tags": [
-    "2d",
-    "l_system",
-    "procedural",
-    "simulation",
+	"2d",
+	"l_system",
+	"procedural",
+	"simulation",
     "visualization"
    ],
    "geometry_spec": {
-    "mesh_type": "texture_plane",
-    "topology": "planar",
-    "construction": {
-     "method": "pixel_computation",
-     "primitives": [
+	"mesh_type": "texture_plane",
+	"topology": "planar",
+	"construction": {
+	 "method": "pixel_computation",
+	 "primitives": [
       "plane"
-     ],
-     "operations": [
-      "create_image",
-      "compute_pixels",
+	 ],
+	 "operations": [
+	  "create_image",
+	  "compute_pixels",
       "apply_texture"
-     ]
-    },
-    "material": {
-     "type": "generated_texture",
-     "shading_model": "emissive",
-     "key_properties": [
-      "emission",
+	 ]
+	},
+	"material": {
+	 "type": "generated_texture",
+	 "shading_model": "emissive",
+	 "key_properties": [
+	  "emission",
       "metallic"
-     ]
-    },
-    "animation": {
-     "type": "static",
-     "driven_by": null,
-     "affects": []
-    },
-    "instance_strategy": "single",
-    "vertex_estimate": "~4 (quad)"
+	 ]
+	},
+	"animation": {
+	 "type": "static",
+	 "driven_by": null,
+	 "affects": []
+	},
+	"instance_strategy": "single",
+	"vertex_estimate": "~4 (quad)"
    },
    "spatial_needs": {
-    "platform": "sunken",
-    "footprint_cells": 8,
-    "clearance": {
-     "front": 1,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": true,
-    "orientation": "face_approach",
-    "isolation": 0,
-    "cluster_with": [
-     "gallery",
+	"platform": "sunken",
+	"footprint_cells": 8,
+	"clearance": {
+	 "front": 1,
+	 "back": 1,
+	 "left": 1,
+	 "right": 1
+	},
+	"player_position": "front",
+	"wall_backing": true,
+	"orientation": "face_approach",
+	"isolation": 0,
+	"cluster_with": [
+	 "gallery",
      "walkthrough"
-    ],
-    "preferred_zone": "end",
-    "measured_footprint_cells": 8,
-    "footprint_source": "measured"
+	],
+	"preferred_zone": "end",
+	"measured_footprint_cells": 8,
+	"footprint_source": "measured"
    },
    "measurements": {
-    "aabb_size": [
-     3.2,
-     0.0,
-     1.2
-    ],
-    "aabb_center": [
-     0.0,
-     0.0,
-     0.0
-    ],
-    "grid_cells": [
-     4.0,
-     2.0
-    ],
-    "max_dimension_m": 3.2,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
+	"aabb_size": [
+	 3.2,
+	 0.0,
+	 1.2
+	],
+	"aabb_center": [
+	 0.0,
+	 0.0,
+	 0.0
+	],
+	"grid_cells": [
+	 4.0,
+	 2.0
+	],
+	"max_dimension_m": 3.2,
+	"measured_at": "2026-04-29T07:09:56.762620Z"
    },
    "spatial_profile": {
-    "dir_group": "plane",
-    "range": 10,
-    "density": "field",
-    "min_clearance": 0,
-    "stack_priority": 0.3,
-    "approach_dir": "any",
-    "derived_at": "2026-04-29T09:39:46.148229Z",
-    "derived_from": "aabb_size + category"
+	"dir_group": "plane",
+	"range": 10,
+	"density": "field",
+	"min_clearance": 0,
+	"stack_priority": 0.3,
+	"approach_dir": "any",
+	"derived_at": "2026-04-29T09:39:46.148229Z",
+	"derived_from": "aabb_size + category"
    }
   },
   "lindenmayer_tube_tree": {
@@ -1675,81 +1675,81 @@
    ],
    "sequence": "lsystems",
    "parameters": {
-    "footprint": [
-     3,
-     3,
-     3
-    ],
-    "size_group": "medium"
+	"footprint": [
+	 3,
+	 3,
+	 3
+	],
+	"size_group": "medium"
    },
    "footprint": [
-    3,
-    3,
-    3
+	3,
+	3,
+	3
    ],
    "size_group": "medium",
    "complexity": "beginner",
    "tags": [
-    "lsystems",
-    "lindenmayer",
-    "tree",
-    "walkable",
-    "procedural",
+	"lsystems",
+	"lindenmayer",
+	"tree",
+	"walkable",
+	"procedural",
     "dna_bridge"
    ],
    "dev_themes": [
-    "lsystems",
-    "procedural",
+	"lsystems",
+	"procedural",
     "dna_bridge"
    ],
    "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 5,
-    "clearance": {
-     "front": 2,
-     "back": 2,
-     "left": 2,
-     "right": 2
-    },
-    "player_position": "around",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 1,
-    "cluster_with": [
-     "lsystem_tree",
+	"platform": "none",
+	"footprint_cells": 5,
+	"clearance": {
+	 "front": 2,
+	 "back": 2,
+	 "left": 2,
+	 "right": 2
+	},
+	"player_position": "around",
+	"wall_backing": false,
+	"orientation": "face_approach",
+	"isolation": 1,
+	"cluster_with": [
+	 "lsystem_tree",
      "genetic_tree_sculptor"
-    ],
-    "preferred_zone": "entry",
-    "measured_footprint_cells": 5,
-    "footprint_source": "measured"
+	],
+	"preferred_zone": "entry",
+	"measured_footprint_cells": 5,
+	"footprint_source": "measured"
    },
    "measurements": {
-    "aabb_size": [
-     4.91,
-     22.68,
-     0.08
-    ],
-    "aabb_center": [
-     -0.1,
-     11.34,
-     0.0
-    ],
-    "grid_cells": [
-     5.0,
-     1.0
-    ],
-    "max_dimension_m": 22.68,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
+	"aabb_size": [
+	 4.91,
+	 22.68,
+	 0.08
+	],
+	"aabb_center": [
+	 -0.1,
+	 11.34,
+	 0.0
+	],
+	"grid_cells": [
+	 5.0,
+	 1.0
+	],
+	"max_dimension_m": 22.68,
+	"measured_at": "2026-04-29T07:09:56.762620Z"
    },
    "spatial_profile": {
-    "dir_group": "panel",
-    "range": 60,
-    "density": "high",
-    "min_clearance": 1,
-    "stack_priority": 0.85,
-    "approach_dir": "front",
-    "derived_at": "2026-04-29T09:39:46.148229Z",
-    "derived_from": "aabb_size + category"
+	"dir_group": "panel",
+	"range": 60,
+	"density": "high",
+	"min_clearance": 1,
+	"stack_priority": 0.85,
+	"approach_dir": "front",
+	"derived_at": "2026-04-29T09:39:46.148229Z",
+	"derived_from": "aabb_size + category"
    }
   },
   "modulor_cypress": {
@@ -1761,87 +1761,87 @@
    "include_in_map_data": true,
    "map_ready": true,
    "map_sequences": [
-    "lsystems",
+	"lsystems",
     "fractals"
    ],
    "sequence": "lsystems",
    "parameters": {
-    "footprint": [
-     3,
-     3,
-     3
-    ],
-    "size_group": "medium"
+	"footprint": [
+	 3,
+	 3,
+	 3
+	],
+	"size_group": "medium"
    },
    "footprint": [
-    3,
-    3,
-    3
+	3,
+	3,
+	3
    ],
    "size_group": "medium",
    "complexity": "intermediate",
    "tags": [
-    "lsystems",
-    "modulor",
-    "composition",
-    "walkable",
-    "fractal",
+	"lsystems",
+	"modulor",
+	"composition",
+	"walkable",
+	"fractal",
     "dna_bridge"
    ],
    "dev_themes": [
-    "lsystems",
-    "modulor",
-    "dna_bridge",
+	"lsystems",
+	"modulor",
+	"dna_bridge",
     "composition"
    ],
    "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 5,
-    "clearance": {
-     "front": 2,
-     "back": 2,
-     "left": 2,
-     "right": 2
-    },
-    "player_position": "around",
-    "wall_backing": false,
-    "orientation": "face_approach",
-    "isolation": 1,
-    "cluster_with": [
-     "lindenmayer_tube_tree",
+	"platform": "none",
+	"footprint_cells": 5,
+	"clearance": {
+	 "front": 2,
+	 "back": 2,
+	 "left": 2,
+	 "right": 2
+	},
+	"player_position": "around",
+	"wall_backing": false,
+	"orientation": "face_approach",
+	"isolation": 1,
+	"cluster_with": [
+	 "lindenmayer_tube_tree",
      "lsystem_tree"
-    ],
-    "preferred_zone": "end",
-    "measured_footprint_cells": 5,
-    "footprint_source": "measured"
+	],
+	"preferred_zone": "end",
+	"measured_footprint_cells": 5,
+	"footprint_source": "measured"
    },
    "measurements": {
-    "aabb_size": [
-     4.34,
-     19.52,
-     0.11
-    ],
-    "aabb_center": [
-     -0.1,
-     9.76,
-     0.0
-    ],
-    "grid_cells": [
-     5.0,
-     1.0
-    ],
-    "max_dimension_m": 19.52,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
+	"aabb_size": [
+	 4.34,
+	 19.52,
+	 0.11
+	],
+	"aabb_center": [
+	 -0.1,
+	 9.76,
+	 0.0
+	],
+	"grid_cells": [
+	 5.0,
+	 1.0
+	],
+	"max_dimension_m": 19.52,
+	"measured_at": "2026-04-29T07:09:56.762620Z"
    },
    "spatial_profile": {
-    "dir_group": "panel",
-    "range": 35,
-    "density": "high",
-    "min_clearance": 1,
-    "stack_priority": 0.85,
-    "approach_dir": "front",
-    "derived_at": "2026-04-29T09:39:46.148229Z",
-    "derived_from": "aabb_size + category"
+	"dir_group": "panel",
+	"range": 35,
+	"density": "high",
+	"min_clearance": 1,
+	"stack_priority": 0.85,
+	"approach_dir": "front",
+	"derived_at": "2026-04-29T09:39:46.148229Z",
+	"derived_from": "aabb_size + category"
    }
   },
   "axiom_bench": {
@@ -1858,35 +1858,35 @@
     "lsystems"
    ],
    "tags": [
-    "lsystem",
-    "medium",
+	"lsystem",
+	"medium",
     "axiom"
    ],
    "parameters": {
-    "emissive": "Bool"
+	"emissive": "Bool"
    },
    "dev_themes": [
-    "lsystems",
-    "grammar",
+	"lsystems",
+	"grammar",
     "biome"
    ],
    "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 4,
-    "clearance": {
-     "front": 2,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "front",
-    "isolation": 1,
-    "cluster_with": [],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 4,
-    "footprint_source": "designed"
+	"platform": "none",
+	"footprint_cells": 4,
+	"clearance": {
+	 "front": 2,
+	 "back": 1,
+	 "left": 1,
+	 "right": 1
+	},
+	"player_position": "front",
+	"wall_backing": false,
+	"orientation": "front",
+	"isolation": 1,
+	"cluster_with": [],
+	"preferred_zone": "any",
+	"measured_footprint_cells": 4,
+	"footprint_source": "designed"
    }
   },
   "axiom_room": {
@@ -1903,35 +1903,35 @@
     "lsystems"
    ],
    "tags": [
-    "lsystem",
-    "large",
+	"lsystem",
+	"large",
     "axiom"
    ],
    "parameters": {
-    "emissive": "Bool"
+	"emissive": "Bool"
    },
    "dev_themes": [
-    "lsystems",
-    "grammar",
+	"lsystems",
+	"grammar",
     "biome"
    ],
    "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 9,
-    "clearance": {
-     "front": 2,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "front",
-    "isolation": 1,
-    "cluster_with": [],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 9,
-    "footprint_source": "designed"
+	"platform": "none",
+	"footprint_cells": 9,
+	"clearance": {
+	 "front": 2,
+	 "back": 1,
+	 "left": 1,
+	 "right": 1
+	},
+	"player_position": "front",
+	"wall_backing": false,
+	"orientation": "front",
+	"isolation": 1,
+	"cluster_with": [],
+	"preferred_zone": "any",
+	"measured_footprint_cells": 9,
+	"footprint_source": "designed"
    }
   },
   "generations_bench": {
@@ -1948,35 +1948,35 @@
     "lsystems"
    ],
    "tags": [
-    "lsystem",
-    "medium",
+	"lsystem",
+	"medium",
     "parallel"
    ],
    "parameters": {
-    "emissive": "Bool"
+	"emissive": "Bool"
    },
    "dev_themes": [
-    "lsystems",
-    "grammar",
+	"lsystems",
+	"grammar",
     "biome"
    ],
    "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 9,
-    "clearance": {
-     "front": 2,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "front",
-    "isolation": 1,
-    "cluster_with": [],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 4,
-    "footprint_source": "designed"
+	"platform": "none",
+	"footprint_cells": 9,
+	"clearance": {
+	 "front": 2,
+	 "back": 1,
+	 "left": 1,
+	 "right": 1
+	},
+	"player_position": "front",
+	"wall_backing": false,
+	"orientation": "front",
+	"isolation": 1,
+	"cluster_with": [],
+	"preferred_zone": "any",
+	"measured_footprint_cells": 4,
+	"footprint_source": "designed"
    }
   },
   "generations_room": {
@@ -1993,35 +1993,35 @@
     "lsystems"
    ],
    "tags": [
-    "lsystem",
-    "large",
+	"lsystem",
+	"large",
     "parallel"
    ],
    "parameters": {
-    "emissive": "Bool"
+	"emissive": "Bool"
    },
    "dev_themes": [
-    "lsystems",
-    "grammar",
+	"lsystems",
+	"grammar",
     "biome"
    ],
    "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 9,
-    "clearance": {
-     "front": 2,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "front",
-    "isolation": 1,
-    "cluster_with": [],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 9,
-    "footprint_source": "designed"
+	"platform": "none",
+	"footprint_cells": 9,
+	"clearance": {
+	 "front": 2,
+	 "back": 1,
+	 "left": 1,
+	 "right": 1
+	},
+	"player_position": "front",
+	"wall_backing": false,
+	"orientation": "front",
+	"isolation": 1,
+	"cluster_with": [],
+	"preferred_zone": "any",
+	"measured_footprint_cells": 9,
+	"footprint_source": "designed"
    }
   },
   "growth_animator": {
@@ -2038,35 +2038,35 @@
     "lsystems"
    ],
    "tags": [
-    "lsystem",
-    "applied",
+	"lsystem",
+	"applied",
     "parallel"
    ],
    "parameters": {
-    "emissive": "Bool"
+	"emissive": "Bool"
    },
    "dev_themes": [
-    "lsystems",
-    "grammar",
+	"lsystems",
+	"grammar",
     "biome"
    ],
    "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 4,
-    "clearance": {
-     "front": 2,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "front",
-    "isolation": 1,
-    "cluster_with": [],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 4,
-    "footprint_source": "designed"
+	"platform": "none",
+	"footprint_cells": 4,
+	"clearance": {
+	 "front": 2,
+	 "back": 1,
+	 "left": 1,
+	 "right": 1
+	},
+	"player_position": "front",
+	"wall_backing": false,
+	"orientation": "front",
+	"isolation": 1,
+	"cluster_with": [],
+	"preferred_zone": "any",
+	"measured_footprint_cells": 4,
+	"footprint_source": "designed"
    }
   },
   "grammar_bench": {
@@ -2083,35 +2083,35 @@
     "lsystems"
    ],
    "tags": [
-    "lsystem",
-    "medium",
+	"lsystem",
+	"medium",
     "formal"
    ],
    "parameters": {
-    "emissive": "Bool"
+	"emissive": "Bool"
    },
    "dev_themes": [
-    "lsystems",
-    "grammar",
+	"lsystems",
+	"grammar",
     "biome"
    ],
    "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 4,
-    "clearance": {
-     "front": 2,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "front",
-    "isolation": 1,
-    "cluster_with": [],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 4,
-    "footprint_source": "designed"
+	"platform": "none",
+	"footprint_cells": 4,
+	"clearance": {
+	 "front": 2,
+	 "back": 1,
+	 "left": 1,
+	 "right": 1
+	},
+	"player_position": "front",
+	"wall_backing": false,
+	"orientation": "front",
+	"isolation": 1,
+	"cluster_with": [],
+	"preferred_zone": "any",
+	"measured_footprint_cells": 4,
+	"footprint_source": "designed"
    }
   },
   "chomsky_room": {
@@ -2128,35 +2128,35 @@
     "lsystems"
    ],
    "tags": [
-    "lsystem",
-    "large",
+	"lsystem",
+	"large",
     "formal"
    ],
    "parameters": {
-    "emissive": "Bool"
+	"emissive": "Bool"
    },
    "dev_themes": [
-    "lsystems",
-    "grammar",
+	"lsystems",
+	"grammar",
     "biome"
    ],
    "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 9,
-    "clearance": {
-     "front": 2,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "front",
-    "isolation": 1,
-    "cluster_with": [],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 9,
-    "footprint_source": "designed"
+	"platform": "none",
+	"footprint_cells": 9,
+	"clearance": {
+	 "front": 2,
+	 "back": 1,
+	 "left": 1,
+	 "right": 1
+	},
+	"player_position": "front",
+	"wall_backing": false,
+	"orientation": "front",
+	"isolation": 1,
+	"cluster_with": [],
+	"preferred_zone": "any",
+	"measured_footprint_cells": 9,
+	"footprint_source": "designed"
    }
   },
   "parse_tree_tool": {
@@ -2173,35 +2173,35 @@
     "lsystems"
    ],
    "tags": [
-    "lsystem",
-    "applied",
+	"lsystem",
+	"applied",
     "formal"
    ],
    "parameters": {
-    "emissive": "Bool"
+	"emissive": "Bool"
    },
    "dev_themes": [
-    "lsystems",
-    "grammar",
+	"lsystems",
+	"grammar",
     "biome"
    ],
    "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 4,
-    "clearance": {
-     "front": 2,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "front",
-    "isolation": 1,
-    "cluster_with": [],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 4,
-    "footprint_source": "designed"
+	"platform": "none",
+	"footprint_cells": 4,
+	"clearance": {
+	 "front": 2,
+	 "back": 1,
+	 "left": 1,
+	 "right": 1
+	},
+	"player_position": "front",
+	"wall_backing": false,
+	"orientation": "front",
+	"isolation": 1,
+	"cluster_with": [],
+	"preferred_zone": "any",
+	"measured_footprint_cells": 4,
+	"footprint_source": "designed"
    }
   },
   "turtle_bench": {
@@ -2218,35 +2218,35 @@
     "lsystems"
    ],
    "tags": [
-    "lsystem",
-    "medium",
+	"lsystem",
+	"medium",
     "turtle"
    ],
    "parameters": {
-    "emissive": "Bool"
+	"emissive": "Bool"
    },
    "dev_themes": [
-    "lsystems",
-    "grammar",
+	"lsystems",
+	"grammar",
     "biome"
    ],
    "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 4,
-    "clearance": {
-     "front": 2,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "front",
-    "isolation": 1,
-    "cluster_with": [],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 4,
-    "footprint_source": "designed"
+	"platform": "none",
+	"footprint_cells": 4,
+	"clearance": {
+	 "front": 2,
+	 "back": 1,
+	 "left": 1,
+	 "right": 1
+	},
+	"player_position": "front",
+	"wall_backing": false,
+	"orientation": "front",
+	"isolation": 1,
+	"cluster_with": [],
+	"preferred_zone": "any",
+	"measured_footprint_cells": 4,
+	"footprint_source": "designed"
    }
   },
   "turtle_room": {
@@ -2263,35 +2263,35 @@
     "lsystems"
    ],
    "tags": [
-    "lsystem",
-    "large",
+	"lsystem",
+	"large",
     "turtle"
    ],
    "parameters": {
-    "emissive": "Bool"
+	"emissive": "Bool"
    },
    "dev_themes": [
-    "lsystems",
-    "grammar",
+	"lsystems",
+	"grammar",
     "biome"
    ],
    "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 9,
-    "clearance": {
-     "front": 2,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "front",
-    "isolation": 1,
-    "cluster_with": [],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 9,
-    "footprint_source": "designed"
+	"platform": "none",
+	"footprint_cells": 9,
+	"clearance": {
+	 "front": 2,
+	 "back": 1,
+	 "left": 1,
+	 "right": 1
+	},
+	"player_position": "front",
+	"wall_backing": false,
+	"orientation": "front",
+	"isolation": 1,
+	"cluster_with": [],
+	"preferred_zone": "any",
+	"measured_footprint_cells": 9,
+	"footprint_source": "designed"
    }
   },
   "turtle_plotter": {
@@ -2308,35 +2308,35 @@
     "lsystems"
    ],
    "tags": [
-    "lsystem",
-    "applied",
+	"lsystem",
+	"applied",
     "turtle"
    ],
    "parameters": {
-    "emissive": "Bool"
+	"emissive": "Bool"
    },
    "dev_themes": [
-    "lsystems",
-    "grammar",
+	"lsystems",
+	"grammar",
     "biome"
    ],
    "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 4,
-    "clearance": {
-     "front": 2,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "front",
-    "isolation": 1,
-    "cluster_with": [],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 4,
-    "footprint_source": "designed"
+	"platform": "none",
+	"footprint_cells": 4,
+	"clearance": {
+	 "front": 2,
+	 "back": 1,
+	 "left": 1,
+	 "right": 1
+	},
+	"player_position": "front",
+	"wall_backing": false,
+	"orientation": "front",
+	"isolation": 1,
+	"cluster_with": [],
+	"preferred_zone": "any",
+	"measured_footprint_cells": 4,
+	"footprint_source": "designed"
    }
   },
   "koch_loom": {
@@ -2353,35 +2353,35 @@
     "lsystems"
    ],
    "tags": [
-    "lsystem",
-    "applied",
+	"lsystem",
+	"applied",
     "koch"
    ],
    "parameters": {
-    "emissive": "Bool"
+	"emissive": "Bool"
    },
    "dev_themes": [
-    "lsystems",
-    "grammar",
+	"lsystems",
+	"grammar",
     "biome"
    ],
    "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 4,
-    "clearance": {
-     "front": 2,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "front",
-    "isolation": 1,
-    "cluster_with": [],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 4,
-    "footprint_source": "designed"
+	"platform": "none",
+	"footprint_cells": 4,
+	"clearance": {
+	 "front": 2,
+	 "back": 1,
+	 "left": 1,
+	 "right": 1
+	},
+	"player_position": "front",
+	"wall_backing": false,
+	"orientation": "front",
+	"isolation": 1,
+	"cluster_with": [],
+	"preferred_zone": "any",
+	"measured_footprint_cells": 4,
+	"footprint_source": "designed"
    }
   },
   "dragon_bench": {
@@ -2398,35 +2398,35 @@
     "lsystems"
    ],
    "tags": [
-    "lsystem",
-    "medium",
+	"lsystem",
+	"medium",
     "dragon"
    ],
    "parameters": {
-    "emissive": "Bool"
+	"emissive": "Bool"
    },
    "dev_themes": [
-    "lsystems",
-    "grammar",
+	"lsystems",
+	"grammar",
     "biome"
    ],
    "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 9,
-    "clearance": {
-     "front": 2,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "front",
-    "isolation": 1,
-    "cluster_with": [],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 4,
-    "footprint_source": "designed"
+	"platform": "none",
+	"footprint_cells": 9,
+	"clearance": {
+	 "front": 2,
+	 "back": 1,
+	 "left": 1,
+	 "right": 1
+	},
+	"player_position": "front",
+	"wall_backing": false,
+	"orientation": "front",
+	"isolation": 1,
+	"cluster_with": [],
+	"preferred_zone": "any",
+	"measured_footprint_cells": 4,
+	"footprint_source": "designed"
    }
   },
   "dragon_room": {
@@ -2443,35 +2443,35 @@
     "lsystems"
    ],
    "tags": [
-    "lsystem",
-    "large",
+	"lsystem",
+	"large",
     "dragon"
    ],
    "parameters": {
-    "emissive": "Bool"
+	"emissive": "Bool"
    },
    "dev_themes": [
-    "lsystems",
-    "grammar",
+	"lsystems",
+	"grammar",
     "biome"
    ],
    "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 9,
-    "clearance": {
-     "front": 2,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "front",
-    "isolation": 1,
-    "cluster_with": [],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 9,
-    "footprint_source": "designed"
+	"platform": "none",
+	"footprint_cells": 9,
+	"clearance": {
+	 "front": 2,
+	 "back": 1,
+	 "left": 1,
+	 "right": 1
+	},
+	"player_position": "front",
+	"wall_backing": false,
+	"orientation": "front",
+	"isolation": 1,
+	"cluster_with": [],
+	"preferred_zone": "any",
+	"measured_footprint_cells": 9,
+	"footprint_source": "designed"
    }
   },
   "curve_plotter": {
@@ -2488,35 +2488,35 @@
     "lsystems"
    ],
    "tags": [
-    "lsystem",
-    "applied",
+	"lsystem",
+	"applied",
     "dragon"
    ],
    "parameters": {
-    "emissive": "Bool"
+	"emissive": "Bool"
    },
    "dev_themes": [
-    "lsystems",
-    "grammar",
+	"lsystems",
+	"grammar",
     "biome"
    ],
    "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 4,
-    "clearance": {
-     "front": 2,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "front",
-    "isolation": 1,
-    "cluster_with": [],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 4,
-    "footprint_source": "designed"
+	"platform": "none",
+	"footprint_cells": 4,
+	"clearance": {
+	 "front": 2,
+	 "back": 1,
+	 "left": 1,
+	 "right": 1
+	},
+	"player_position": "front",
+	"wall_backing": false,
+	"orientation": "front",
+	"isolation": 1,
+	"cluster_with": [],
+	"preferred_zone": "any",
+	"measured_footprint_cells": 4,
+	"footprint_source": "designed"
    }
   },
   "hilbert_bench": {
@@ -2533,35 +2533,35 @@
     "lsystems"
    ],
    "tags": [
-    "lsystem",
-    "medium",
+	"lsystem",
+	"medium",
     "space-filling"
    ],
    "parameters": {
-    "emissive": "Bool"
+	"emissive": "Bool"
    },
    "dev_themes": [
-    "lsystems",
-    "grammar",
+	"lsystems",
+	"grammar",
     "biome"
    ],
    "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 4,
-    "clearance": {
-     "front": 2,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "front",
-    "isolation": 1,
-    "cluster_with": [],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 4,
-    "footprint_source": "designed"
+	"platform": "none",
+	"footprint_cells": 4,
+	"clearance": {
+	 "front": 2,
+	 "back": 1,
+	 "left": 1,
+	 "right": 1
+	},
+	"player_position": "front",
+	"wall_backing": false,
+	"orientation": "front",
+	"isolation": 1,
+	"cluster_with": [],
+	"preferred_zone": "any",
+	"measured_footprint_cells": 4,
+	"footprint_source": "designed"
    }
   },
   "hilbert_room": {
@@ -2578,35 +2578,35 @@
     "lsystems"
    ],
    "tags": [
-    "lsystem",
-    "large",
+	"lsystem",
+	"large",
     "space-filling"
    ],
    "parameters": {
-    "emissive": "Bool"
+	"emissive": "Bool"
    },
    "dev_themes": [
-    "lsystems",
-    "grammar",
+	"lsystems",
+	"grammar",
     "biome"
    ],
    "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 9,
-    "clearance": {
-     "front": 2,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "front",
-    "isolation": 1,
-    "cluster_with": [],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 9,
-    "footprint_source": "designed"
+	"platform": "none",
+	"footprint_cells": 9,
+	"clearance": {
+	 "front": 2,
+	 "back": 1,
+	 "left": 1,
+	 "right": 1
+	},
+	"player_position": "front",
+	"wall_backing": false,
+	"orientation": "front",
+	"isolation": 1,
+	"cluster_with": [],
+	"preferred_zone": "any",
+	"measured_footprint_cells": 9,
+	"footprint_source": "designed"
    }
   },
   "bracket_bench": {
@@ -2623,35 +2623,35 @@
     "lsystems"
    ],
    "tags": [
-    "lsystem",
-    "medium",
+	"lsystem",
+	"medium",
     "bracketed"
    ],
    "parameters": {
-    "emissive": "Bool"
+	"emissive": "Bool"
    },
    "dev_themes": [
-    "lsystems",
-    "grammar",
+	"lsystems",
+	"grammar",
     "biome"
    ],
    "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 4,
-    "clearance": {
-     "front": 2,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "front",
-    "isolation": 1,
-    "cluster_with": [],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 4,
-    "footprint_source": "designed"
+	"platform": "none",
+	"footprint_cells": 4,
+	"clearance": {
+	 "front": 2,
+	 "back": 1,
+	 "left": 1,
+	 "right": 1
+	},
+	"player_position": "front",
+	"wall_backing": false,
+	"orientation": "front",
+	"isolation": 1,
+	"cluster_with": [],
+	"preferred_zone": "any",
+	"measured_footprint_cells": 4,
+	"footprint_source": "designed"
    }
   },
   "bracket_room": {
@@ -2668,35 +2668,35 @@
     "lsystems"
    ],
    "tags": [
-    "lsystem",
-    "large",
+	"lsystem",
+	"large",
     "bracketed"
    ],
    "parameters": {
-    "emissive": "Bool"
+	"emissive": "Bool"
    },
    "dev_themes": [
-    "lsystems",
-    "grammar",
+	"lsystems",
+	"grammar",
     "biome"
    ],
    "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 9,
-    "clearance": {
-     "front": 2,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "front",
-    "isolation": 1,
-    "cluster_with": [],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 9,
-    "footprint_source": "designed"
+	"platform": "none",
+	"footprint_cells": 9,
+	"clearance": {
+	 "front": 2,
+	 "back": 1,
+	 "left": 1,
+	 "right": 1
+	},
+	"player_position": "front",
+	"wall_backing": false,
+	"orientation": "front",
+	"isolation": 1,
+	"cluster_with": [],
+	"preferred_zone": "any",
+	"measured_footprint_cells": 9,
+	"footprint_source": "designed"
    }
   },
   "bracket_pruner": {
@@ -2713,35 +2713,35 @@
     "lsystems"
    ],
    "tags": [
-    "lsystem",
-    "applied",
+	"lsystem",
+	"applied",
     "bracketed"
    ],
    "parameters": {
-    "emissive": "Bool"
+	"emissive": "Bool"
    },
    "dev_themes": [
-    "lsystems",
-    "grammar",
+	"lsystems",
+	"grammar",
     "biome"
    ],
    "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 4,
-    "clearance": {
-     "front": 2,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "front",
-    "isolation": 1,
-    "cluster_with": [],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 4,
-    "footprint_source": "designed"
+	"platform": "none",
+	"footprint_cells": 4,
+	"clearance": {
+	 "front": 2,
+	 "back": 1,
+	 "left": 1,
+	 "right": 1
+	},
+	"player_position": "front",
+	"wall_backing": false,
+	"orientation": "front",
+	"isolation": 1,
+	"cluster_with": [],
+	"preferred_zone": "any",
+	"measured_footprint_cells": 4,
+	"footprint_source": "designed"
    }
   },
   "lsystem_tree_room": {
@@ -2758,35 +2758,35 @@
     "lsystems"
    ],
    "tags": [
-    "lsystem",
-    "large",
+	"lsystem",
+	"large",
     "l-system"
    ],
    "parameters": {
-    "emissive": "Bool"
+	"emissive": "Bool"
    },
    "dev_themes": [
-    "lsystems",
-    "grammar",
+	"lsystems",
+	"grammar",
     "biome"
    ],
    "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 9,
-    "clearance": {
-     "front": 2,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "front",
-    "isolation": 1,
-    "cluster_with": [],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 9,
-    "footprint_source": "designed"
+	"platform": "none",
+	"footprint_cells": 9,
+	"clearance": {
+	 "front": 2,
+	 "back": 1,
+	 "left": 1,
+	 "right": 1
+	},
+	"player_position": "front",
+	"wall_backing": false,
+	"orientation": "front",
+	"isolation": 1,
+	"cluster_with": [],
+	"preferred_zone": "any",
+	"measured_footprint_cells": 9,
+	"footprint_source": "designed"
    }
   },
   "tree_nursery": {
@@ -2803,35 +2803,35 @@
     "lsystems"
    ],
    "tags": [
-    "lsystem",
-    "applied",
+	"lsystem",
+	"applied",
     "l-system"
    ],
    "parameters": {
-    "emissive": "Bool"
+	"emissive": "Bool"
    },
    "dev_themes": [
-    "lsystems",
-    "grammar",
+	"lsystems",
+	"grammar",
     "biome"
    ],
    "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 4,
-    "clearance": {
-     "front": 2,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "front",
-    "isolation": 1,
-    "cluster_with": [],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 4,
-    "footprint_source": "designed"
+	"platform": "none",
+	"footprint_cells": 4,
+	"clearance": {
+	 "front": 2,
+	 "back": 1,
+	 "left": 1,
+	 "right": 1
+	},
+	"player_position": "front",
+	"wall_backing": false,
+	"orientation": "front",
+	"isolation": 1,
+	"cluster_with": [],
+	"preferred_zone": "any",
+	"measured_footprint_cells": 4,
+	"footprint_source": "designed"
    }
   },
   "fern_bench": {
@@ -2848,35 +2848,35 @@
     "lsystems"
    ],
    "tags": [
-    "lsystem",
-    "medium",
+	"lsystem",
+	"medium",
     "ferns"
    ],
    "parameters": {
-    "emissive": "Bool"
+	"emissive": "Bool"
    },
    "dev_themes": [
-    "lsystems",
-    "grammar",
+	"lsystems",
+	"grammar",
     "biome"
    ],
    "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 4,
-    "clearance": {
-     "front": 2,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "front",
-    "isolation": 1,
-    "cluster_with": [],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 4,
-    "footprint_source": "designed"
+	"platform": "none",
+	"footprint_cells": 4,
+	"clearance": {
+	 "front": 2,
+	 "back": 1,
+	 "left": 1,
+	 "right": 1
+	},
+	"player_position": "front",
+	"wall_backing": false,
+	"orientation": "front",
+	"isolation": 1,
+	"cluster_with": [],
+	"preferred_zone": "any",
+	"measured_footprint_cells": 4,
+	"footprint_source": "designed"
    }
   },
   "fern_room": {
@@ -2893,35 +2893,35 @@
     "lsystems"
    ],
    "tags": [
-    "lsystem",
-    "large",
+	"lsystem",
+	"large",
     "ferns"
    ],
    "parameters": {
-    "emissive": "Bool"
+	"emissive": "Bool"
    },
    "dev_themes": [
-    "lsystems",
-    "grammar",
+	"lsystems",
+	"grammar",
     "biome"
    ],
    "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 9,
-    "clearance": {
-     "front": 2,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "front",
-    "isolation": 1,
-    "cluster_with": [],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 9,
-    "footprint_source": "designed"
+	"platform": "none",
+	"footprint_cells": 9,
+	"clearance": {
+	 "front": 2,
+	 "back": 1,
+	 "left": 1,
+	 "right": 1
+	},
+	"player_position": "front",
+	"wall_backing": false,
+	"orientation": "front",
+	"isolation": 1,
+	"cluster_with": [],
+	"preferred_zone": "any",
+	"measured_footprint_cells": 9,
+	"footprint_source": "designed"
    }
   },
   "fern_press": {
@@ -2938,35 +2938,35 @@
     "lsystems"
    ],
    "tags": [
-    "lsystem",
-    "applied",
+	"lsystem",
+	"applied",
     "ferns"
    ],
    "parameters": {
-    "emissive": "Bool"
+	"emissive": "Bool"
    },
    "dev_themes": [
-    "lsystems",
-    "grammar",
+	"lsystems",
+	"grammar",
     "biome"
    ],
    "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 4,
-    "clearance": {
-     "front": 2,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "front",
-    "isolation": 1,
-    "cluster_with": [],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 4,
-    "footprint_source": "designed"
+	"platform": "none",
+	"footprint_cells": 4,
+	"clearance": {
+	 "front": 2,
+	 "back": 1,
+	 "left": 1,
+	 "right": 1
+	},
+	"player_position": "front",
+	"wall_backing": false,
+	"orientation": "front",
+	"isolation": 1,
+	"cluster_with": [],
+	"preferred_zone": "any",
+	"measured_footprint_cells": 4,
+	"footprint_source": "designed"
    }
   },
   "coral_bench": {
@@ -2983,35 +2983,35 @@
     "lsystems"
    ],
    "tags": [
-    "lsystem",
-    "medium",
+	"lsystem",
+	"medium",
     "coral"
    ],
    "parameters": {
-    "emissive": "Bool"
+	"emissive": "Bool"
    },
    "dev_themes": [
-    "lsystems",
-    "grammar",
+	"lsystems",
+	"grammar",
     "biome"
    ],
    "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 4,
-    "clearance": {
-     "front": 2,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "front",
-    "isolation": 1,
-    "cluster_with": [],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 4,
-    "footprint_source": "designed"
+	"platform": "none",
+	"footprint_cells": 4,
+	"clearance": {
+	 "front": 2,
+	 "back": 1,
+	 "left": 1,
+	 "right": 1
+	},
+	"player_position": "front",
+	"wall_backing": false,
+	"orientation": "front",
+	"isolation": 1,
+	"cluster_with": [],
+	"preferred_zone": "any",
+	"measured_footprint_cells": 4,
+	"footprint_source": "designed"
    }
   },
   "coral_room": {
@@ -3028,35 +3028,35 @@
     "lsystems"
    ],
    "tags": [
-    "lsystem",
-    "large",
+	"lsystem",
+	"large",
     "coral"
    ],
    "parameters": {
-    "emissive": "Bool"
+	"emissive": "Bool"
    },
    "dev_themes": [
-    "lsystems",
-    "grammar",
+	"lsystems",
+	"grammar",
     "biome"
    ],
    "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 9,
-    "clearance": {
-     "front": 2,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "front",
-    "isolation": 1,
-    "cluster_with": [],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 9,
-    "footprint_source": "designed"
+	"platform": "none",
+	"footprint_cells": 9,
+	"clearance": {
+	 "front": 2,
+	 "back": 1,
+	 "left": 1,
+	 "right": 1
+	},
+	"player_position": "front",
+	"wall_backing": false,
+	"orientation": "front",
+	"isolation": 1,
+	"cluster_with": [],
+	"preferred_zone": "any",
+	"measured_footprint_cells": 9,
+	"footprint_source": "designed"
    }
   },
   "vine_grower": {
@@ -3073,35 +3073,35 @@
     "lsystems"
    ],
    "tags": [
-    "lsystem",
-    "applied",
+	"lsystem",
+	"applied",
     "coral"
    ],
    "parameters": {
-    "emissive": "Bool"
+	"emissive": "Bool"
    },
    "dev_themes": [
-    "lsystems",
-    "grammar",
+	"lsystems",
+	"grammar",
     "biome"
    ],
    "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 4,
-    "clearance": {
-     "front": 2,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "front",
-    "isolation": 1,
-    "cluster_with": [],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 4,
-    "footprint_source": "designed"
+	"platform": "none",
+	"footprint_cells": 4,
+	"clearance": {
+	 "front": 2,
+	 "back": 1,
+	 "left": 1,
+	 "right": 1
+	},
+	"player_position": "front",
+	"wall_backing": false,
+	"orientation": "front",
+	"isolation": 1,
+	"cluster_with": [],
+	"preferred_zone": "any",
+	"measured_footprint_cells": 4,
+	"footprint_source": "designed"
    }
   },
   "stochastic_toy": {
@@ -3118,35 +3118,35 @@
     "lsystems"
    ],
    "tags": [
-    "lsystem",
-    "small",
+	"lsystem",
+	"small",
     "stochastic"
    ],
    "parameters": {
-    "emissive": "Bool"
+	"emissive": "Bool"
    },
    "dev_themes": [
-    "lsystems",
-    "grammar",
+	"lsystems",
+	"grammar",
     "biome"
    ],
    "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 2,
-    "clearance": {
-     "front": 2,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "front",
-    "isolation": 1,
-    "cluster_with": [],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 2,
-    "footprint_source": "designed"
+	"platform": "none",
+	"footprint_cells": 2,
+	"clearance": {
+	 "front": 2,
+	 "back": 1,
+	 "left": 1,
+	 "right": 1
+	},
+	"player_position": "front",
+	"wall_backing": false,
+	"orientation": "front",
+	"isolation": 1,
+	"cluster_with": [],
+	"preferred_zone": "any",
+	"measured_footprint_cells": 2,
+	"footprint_source": "designed"
    }
   },
   "stochastic_bench": {
@@ -3163,35 +3163,35 @@
     "lsystems"
    ],
    "tags": [
-    "lsystem",
-    "medium",
+	"lsystem",
+	"medium",
     "stochastic"
    ],
    "parameters": {
-    "emissive": "Bool"
+	"emissive": "Bool"
    },
    "dev_themes": [
-    "lsystems",
-    "grammar",
+	"lsystems",
+	"grammar",
     "biome"
    ],
    "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 4,
-    "clearance": {
-     "front": 2,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "front",
-    "isolation": 1,
-    "cluster_with": [],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 4,
-    "footprint_source": "designed"
+	"platform": "none",
+	"footprint_cells": 4,
+	"clearance": {
+	 "front": 2,
+	 "back": 1,
+	 "left": 1,
+	 "right": 1
+	},
+	"player_position": "front",
+	"wall_backing": false,
+	"orientation": "front",
+	"isolation": 1,
+	"cluster_with": [],
+	"preferred_zone": "any",
+	"measured_footprint_cells": 4,
+	"footprint_source": "designed"
    }
   },
   "stochastic_room": {
@@ -3208,35 +3208,35 @@
     "lsystems"
    ],
    "tags": [
-    "lsystem",
-    "large",
+	"lsystem",
+	"large",
     "stochastic"
    ],
    "parameters": {
-    "emissive": "Bool"
+	"emissive": "Bool"
    },
    "dev_themes": [
-    "lsystems",
-    "grammar",
+	"lsystems",
+	"grammar",
     "biome"
    ],
    "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 9,
-    "clearance": {
-     "front": 2,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "front",
-    "isolation": 1,
-    "cluster_with": [],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 9,
-    "footprint_source": "designed"
+	"platform": "none",
+	"footprint_cells": 9,
+	"clearance": {
+	 "front": 2,
+	 "back": 1,
+	 "left": 1,
+	 "right": 1
+	},
+	"player_position": "front",
+	"wall_backing": false,
+	"orientation": "front",
+	"isolation": 1,
+	"cluster_with": [],
+	"preferred_zone": "any",
+	"measured_footprint_cells": 9,
+	"footprint_source": "designed"
    }
   },
   "stochastic_seeder": {
@@ -3253,35 +3253,35 @@
     "lsystems"
    ],
    "tags": [
-    "lsystem",
-    "applied",
+	"lsystem",
+	"applied",
     "stochastic"
    ],
    "parameters": {
-    "emissive": "Bool"
+	"emissive": "Bool"
    },
    "dev_themes": [
-    "lsystems",
-    "grammar",
+	"lsystems",
+	"grammar",
     "biome"
    ],
    "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 4,
-    "clearance": {
-     "front": 2,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "front",
-    "isolation": 1,
-    "cluster_with": [],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 4,
-    "footprint_source": "designed"
+	"platform": "none",
+	"footprint_cells": 4,
+	"clearance": {
+	 "front": 2,
+	 "back": 1,
+	 "left": 1,
+	 "right": 1
+	},
+	"player_position": "front",
+	"wall_backing": false,
+	"orientation": "front",
+	"isolation": 1,
+	"cluster_with": [],
+	"preferred_zone": "any",
+	"measured_footprint_cells": 4,
+	"footprint_source": "designed"
    }
   },
   "parametric_bench": {
@@ -3298,35 +3298,35 @@
     "lsystems"
    ],
    "tags": [
-    "lsystem",
-    "medium",
+	"lsystem",
+	"medium",
     "parametric"
    ],
    "parameters": {
-    "emissive": "Bool"
+	"emissive": "Bool"
    },
    "dev_themes": [
-    "lsystems",
-    "grammar",
+	"lsystems",
+	"grammar",
     "biome"
    ],
    "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 16,
-    "clearance": {
-     "front": 2,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "front",
-    "isolation": 1,
-    "cluster_with": [],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 4,
-    "footprint_source": "designed"
+	"platform": "none",
+	"footprint_cells": 16,
+	"clearance": {
+	 "front": 2,
+	 "back": 1,
+	 "left": 1,
+	 "right": 1
+	},
+	"player_position": "front",
+	"wall_backing": false,
+	"orientation": "front",
+	"isolation": 1,
+	"cluster_with": [],
+	"preferred_zone": "any",
+	"measured_footprint_cells": 4,
+	"footprint_source": "designed"
    }
   },
   "parametric_room": {
@@ -3343,35 +3343,35 @@
     "lsystems"
    ],
    "tags": [
-    "lsystem",
-    "large",
+	"lsystem",
+	"large",
     "parametric"
    ],
    "parameters": {
-    "emissive": "Bool"
+	"emissive": "Bool"
    },
    "dev_themes": [
-    "lsystems",
-    "grammar",
+	"lsystems",
+	"grammar",
     "biome"
    ],
    "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 9,
-    "clearance": {
-     "front": 2,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "front",
-    "isolation": 1,
-    "cluster_with": [],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 9,
-    "footprint_source": "designed"
+	"platform": "none",
+	"footprint_cells": 9,
+	"clearance": {
+	 "front": 2,
+	 "back": 1,
+	 "left": 1,
+	 "right": 1
+	},
+	"player_position": "front",
+	"wall_backing": false,
+	"orientation": "front",
+	"isolation": 1,
+	"cluster_with": [],
+	"preferred_zone": "any",
+	"measured_footprint_cells": 9,
+	"footprint_source": "designed"
    }
   },
   "parametric_designer": {
@@ -3388,35 +3388,35 @@
     "lsystems"
    ],
    "tags": [
-    "lsystem",
-    "applied",
+	"lsystem",
+	"applied",
     "parametric"
    ],
    "parameters": {
-    "emissive": "Bool"
+	"emissive": "Bool"
    },
    "dev_themes": [
-    "lsystems",
-    "grammar",
+	"lsystems",
+	"grammar",
     "biome"
    ],
    "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 4,
-    "clearance": {
-     "front": 2,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "front",
-    "isolation": 1,
-    "cluster_with": [],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 4,
-    "footprint_source": "designed"
+	"platform": "none",
+	"footprint_cells": 4,
+	"clearance": {
+	 "front": 2,
+	 "back": 1,
+	 "left": 1,
+	 "right": 1
+	},
+	"player_position": "front",
+	"wall_backing": false,
+	"orientation": "front",
+	"isolation": 1,
+	"cluster_with": [],
+	"preferred_zone": "any",
+	"measured_footprint_cells": 4,
+	"footprint_source": "designed"
    }
   },
   "context_toy": {
@@ -3433,35 +3433,35 @@
     "lsystems"
    ],
    "tags": [
-    "lsystem",
-    "small",
+	"lsystem",
+	"small",
     "context-sensitive"
    ],
    "parameters": {
-    "emissive": "Bool"
+	"emissive": "Bool"
    },
    "dev_themes": [
-    "lsystems",
-    "grammar",
+	"lsystems",
+	"grammar",
     "biome"
    ],
    "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 2,
-    "clearance": {
-     "front": 2,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "front",
-    "isolation": 1,
-    "cluster_with": [],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 2,
-    "footprint_source": "designed"
+	"platform": "none",
+	"footprint_cells": 2,
+	"clearance": {
+	 "front": 2,
+	 "back": 1,
+	 "left": 1,
+	 "right": 1
+	},
+	"player_position": "front",
+	"wall_backing": false,
+	"orientation": "front",
+	"isolation": 1,
+	"cluster_with": [],
+	"preferred_zone": "any",
+	"measured_footprint_cells": 2,
+	"footprint_source": "designed"
    }
   },
   "context_room": {
@@ -3478,35 +3478,35 @@
     "lsystems"
    ],
    "tags": [
-    "lsystem",
-    "large",
+	"lsystem",
+	"large",
     "context-sensitive"
    ],
    "parameters": {
-    "emissive": "Bool"
+	"emissive": "Bool"
    },
    "dev_themes": [
-    "lsystems",
-    "grammar",
+	"lsystems",
+	"grammar",
     "biome"
    ],
    "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 9,
-    "clearance": {
-     "front": 2,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "front",
-    "isolation": 1,
-    "cluster_with": [],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 9,
-    "footprint_source": "designed"
+	"platform": "none",
+	"footprint_cells": 9,
+	"clearance": {
+	 "front": 2,
+	 "back": 1,
+	 "left": 1,
+	 "right": 1
+	},
+	"player_position": "front",
+	"wall_backing": false,
+	"orientation": "front",
+	"isolation": 1,
+	"cluster_with": [],
+	"preferred_zone": "any",
+	"measured_footprint_cells": 9,
+	"footprint_source": "designed"
    }
   },
   "context_pruner": {
@@ -3523,35 +3523,35 @@
     "lsystems"
    ],
    "tags": [
-    "lsystem",
-    "applied",
+	"lsystem",
+	"applied",
     "context-sensitive"
    ],
    "parameters": {
-    "emissive": "Bool"
+	"emissive": "Bool"
    },
    "dev_themes": [
-    "lsystems",
-    "grammar",
+	"lsystems",
+	"grammar",
     "biome"
    ],
    "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 4,
-    "clearance": {
-     "front": 2,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "front",
-    "isolation": 1,
-    "cluster_with": [],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 4,
-    "footprint_source": "designed"
+	"platform": "none",
+	"footprint_cells": 4,
+	"clearance": {
+	 "front": 2,
+	 "back": 1,
+	 "left": 1,
+	 "right": 1
+	},
+	"player_position": "front",
+	"wall_backing": false,
+	"orientation": "front",
+	"isolation": 1,
+	"cluster_with": [],
+	"preferred_zone": "any",
+	"measured_footprint_cells": 4,
+	"footprint_source": "designed"
    }
   },
   "substrate_bench": {
@@ -3568,35 +3568,35 @@
     "lsystems"
    ],
    "tags": [
-    "lsystem",
-    "medium",
+	"lsystem",
+	"medium",
     "many"
    ],
    "parameters": {
-    "emissive": "Bool"
+	"emissive": "Bool"
    },
    "dev_themes": [
-    "lsystems",
-    "grammar",
+	"lsystems",
+	"grammar",
     "biome"
    ],
    "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 9,
-    "clearance": {
-     "front": 2,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "front",
-    "isolation": 1,
-    "cluster_with": [],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 4,
-    "footprint_source": "designed"
+	"platform": "none",
+	"footprint_cells": 9,
+	"clearance": {
+	 "front": 2,
+	 "back": 1,
+	 "left": 1,
+	 "right": 1
+	},
+	"player_position": "front",
+	"wall_backing": false,
+	"orientation": "front",
+	"isolation": 1,
+	"cluster_with": [],
+	"preferred_zone": "any",
+	"measured_footprint_cells": 4,
+	"footprint_source": "designed"
    }
   },
   "substrate_room": {
@@ -3613,35 +3613,35 @@
     "lsystems"
    ],
    "tags": [
-    "lsystem",
-    "large",
+	"lsystem",
+	"large",
     "many"
    ],
    "parameters": {
-    "emissive": "Bool"
+	"emissive": "Bool"
    },
    "dev_themes": [
-    "lsystems",
-    "grammar",
+	"lsystems",
+	"grammar",
     "biome"
    ],
    "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 9,
-    "clearance": {
-     "front": 2,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "front",
-    "isolation": 1,
-    "cluster_with": [],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 9,
-    "footprint_source": "designed"
+	"platform": "none",
+	"footprint_cells": 9,
+	"clearance": {
+	 "front": 2,
+	 "back": 1,
+	 "left": 1,
+	 "right": 1
+	},
+	"player_position": "front",
+	"wall_backing": false,
+	"orientation": "front",
+	"isolation": 1,
+	"cluster_with": [],
+	"preferred_zone": "any",
+	"measured_footprint_cells": 9,
+	"footprint_source": "designed"
    }
   },
   "substrate_switcher": {
@@ -3658,35 +3658,35 @@
     "lsystems"
    ],
    "tags": [
-    "lsystem",
-    "applied",
+	"lsystem",
+	"applied",
     "many"
    ],
    "parameters": {
-    "emissive": "Bool"
+	"emissive": "Bool"
    },
    "dev_themes": [
-    "lsystems",
-    "grammar",
+	"lsystems",
+	"grammar",
     "biome"
    ],
    "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 4,
-    "clearance": {
-     "front": 2,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "front",
-    "isolation": 1,
-    "cluster_with": [],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 4,
-    "footprint_source": "designed"
+	"platform": "none",
+	"footprint_cells": 4,
+	"clearance": {
+	 "front": 2,
+	 "back": 1,
+	 "left": 1,
+	 "right": 1
+	},
+	"player_position": "front",
+	"wall_backing": false,
+	"orientation": "front",
+	"isolation": 1,
+	"cluster_with": [],
+	"preferred_zone": "any",
+	"measured_footprint_cells": 4,
+	"footprint_source": "designed"
    }
   },
   "city_toy": {
@@ -3703,35 +3703,35 @@
     "lsystems"
    ],
    "tags": [
-    "lsystem",
-    "small",
+	"lsystem",
+	"small",
     "grammar"
    ],
    "parameters": {
-    "emissive": "Bool"
+	"emissive": "Bool"
    },
    "dev_themes": [
-    "lsystems",
-    "grammar",
+	"lsystems",
+	"grammar",
     "biome"
    ],
    "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 2,
-    "clearance": {
-     "front": 2,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "front",
-    "isolation": 1,
-    "cluster_with": [],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 2,
-    "footprint_source": "designed"
+	"platform": "none",
+	"footprint_cells": 2,
+	"clearance": {
+	 "front": 2,
+	 "back": 1,
+	 "left": 1,
+	 "right": 1
+	},
+	"player_position": "front",
+	"wall_backing": false,
+	"orientation": "front",
+	"isolation": 1,
+	"cluster_with": [],
+	"preferred_zone": "any",
+	"measured_footprint_cells": 2,
+	"footprint_source": "designed"
    }
   },
   "city_bench": {
@@ -3748,35 +3748,35 @@
     "lsystems"
    ],
    "tags": [
-    "lsystem",
-    "medium",
+	"lsystem",
+	"medium",
     "grammar"
    ],
    "parameters": {
-    "emissive": "Bool"
+	"emissive": "Bool"
    },
    "dev_themes": [
-    "lsystems",
-    "grammar",
+	"lsystems",
+	"grammar",
     "biome"
    ],
    "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 6,
-    "clearance": {
-     "front": 2,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "front",
-    "isolation": 1,
-    "cluster_with": [],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 4,
-    "footprint_source": "designed"
+	"platform": "none",
+	"footprint_cells": 6,
+	"clearance": {
+	 "front": 2,
+	 "back": 1,
+	 "left": 1,
+	 "right": 1
+	},
+	"player_position": "front",
+	"wall_backing": false,
+	"orientation": "front",
+	"isolation": 1,
+	"cluster_with": [],
+	"preferred_zone": "any",
+	"measured_footprint_cells": 4,
+	"footprint_source": "designed"
    }
   },
   "city_room": {
@@ -3793,35 +3793,35 @@
     "lsystems"
    ],
    "tags": [
-    "lsystem",
-    "large",
+	"lsystem",
+	"large",
     "grammar"
    ],
    "parameters": {
-    "emissive": "Bool"
+	"emissive": "Bool"
    },
    "dev_themes": [
-    "lsystems",
-    "grammar",
+	"lsystems",
+	"grammar",
     "biome"
    ],
    "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 9,
-    "clearance": {
-     "front": 2,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "front",
-    "isolation": 1,
-    "cluster_with": [],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 9,
-    "footprint_source": "designed"
+	"platform": "none",
+	"footprint_cells": 9,
+	"clearance": {
+	 "front": 2,
+	 "back": 1,
+	 "left": 1,
+	 "right": 1
+	},
+	"player_position": "front",
+	"wall_backing": false,
+	"orientation": "front",
+	"isolation": 1,
+	"cluster_with": [],
+	"preferred_zone": "any",
+	"measured_footprint_cells": 9,
+	"footprint_source": "designed"
    }
   },
   "sapling_toy": {
@@ -3838,35 +3838,35 @@
     "lsystems"
    ],
    "tags": [
-    "lsystem",
-    "small",
+	"lsystem",
+	"small",
     "forest"
    ],
    "parameters": {
-    "emissive": "Bool"
+	"emissive": "Bool"
    },
    "dev_themes": [
-    "lsystems",
-    "grammar",
+	"lsystems",
+	"grammar",
     "biome"
    ],
    "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 2,
-    "clearance": {
-     "front": 2,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "front",
-    "isolation": 1,
-    "cluster_with": [],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 2,
-    "footprint_source": "designed"
+	"platform": "none",
+	"footprint_cells": 2,
+	"clearance": {
+	 "front": 2,
+	 "back": 1,
+	 "left": 1,
+	 "right": 1
+	},
+	"player_position": "front",
+	"wall_backing": false,
+	"orientation": "front",
+	"isolation": 1,
+	"cluster_with": [],
+	"preferred_zone": "any",
+	"measured_footprint_cells": 2,
+	"footprint_source": "designed"
    }
   },
   "forest_bench": {
@@ -3883,35 +3883,35 @@
     "lsystems"
    ],
    "tags": [
-    "lsystem",
-    "medium",
+	"lsystem",
+	"medium",
     "forest"
    ],
    "parameters": {
-    "emissive": "Bool"
+	"emissive": "Bool"
    },
    "dev_themes": [
-    "lsystems",
-    "grammar",
+	"lsystems",
+	"grammar",
     "biome"
    ],
    "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 12,
-    "clearance": {
-     "front": 2,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "front",
-    "isolation": 1,
-    "cluster_with": [],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 4,
-    "footprint_source": "designed"
+	"platform": "none",
+	"footprint_cells": 12,
+	"clearance": {
+	 "front": 2,
+	 "back": 1,
+	 "left": 1,
+	 "right": 1
+	},
+	"player_position": "front",
+	"wall_backing": false,
+	"orientation": "front",
+	"isolation": 1,
+	"cluster_with": [],
+	"preferred_zone": "any",
+	"measured_footprint_cells": 4,
+	"footprint_source": "designed"
    }
   },
   "grove_room": {
@@ -3928,35 +3928,35 @@
     "lsystems"
    ],
    "tags": [
-    "lsystem",
-    "large",
+	"lsystem",
+	"large",
     "forest"
    ],
    "parameters": {
-    "emissive": "Bool"
+	"emissive": "Bool"
    },
    "dev_themes": [
-    "lsystems",
-    "grammar",
+	"lsystems",
+	"grammar",
     "biome"
    ],
    "spatial_needs": {
-    "platform": "none",
-    "footprint_cells": 9,
-    "clearance": {
-     "front": 2,
-     "back": 1,
-     "left": 1,
-     "right": 1
-    },
-    "player_position": "front",
-    "wall_backing": false,
-    "orientation": "front",
-    "isolation": 1,
-    "cluster_with": [],
-    "preferred_zone": "any",
-    "measured_footprint_cells": 9,
-    "footprint_source": "designed"
+	"platform": "none",
+	"footprint_cells": 9,
+	"clearance": {
+	 "front": 2,
+	 "back": 1,
+	 "left": 1,
+	 "right": 1
+	},
+	"player_position": "front",
+	"wall_backing": false,
+	"orientation": "front",
+	"isolation": 1,
+	"cluster_with": [],
+	"preferred_zone": "any",
+	"measured_footprint_cells": 9,
+	"footprint_source": "designed"
    }
   },
   "grammar_seed": {
@@ -3964,7 +3964,7 @@
    "complexity": "intermediate",
    "description": "The L-systems seam and the compression thesis made literal. This plant is not stored - it is a tiny grammar (axiom + two rewrite rules) expanded a few times and walked by a turtle. A handful of bytes become a forest: a short seed with a costly branching run. The cost of the gift is reproducibility - run the same grammar again and the tree returns leaf for leaf. The organic was a formula.",
    "dev_themes": [
-    "digital_bias",
+	"digital_bias",
     "seam"
    ],
    "include_in_map_data": true,
@@ -3979,12 +3979,12 @@
    "scene": "res://algorithms/lsystems/grammar_seed/grammar_seed.tscn",
    "sequence": "lsystems",
    "tags": [
-    "lsystem",
-    "grammar",
-    "turtle",
-    "compression",
-    "determinism",
-    "seam",
+	"lsystem",
+	"grammar",
+	"turtle",
+	"compression",
+	"determinism",
+	"seam",
     "digital_bias"
    ]
   }

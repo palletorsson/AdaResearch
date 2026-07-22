@@ -192,7 +192,8 @@
     1.0,
     1,
     1.0
-   ]
+   ],
+   "qfep_connection": "Fairness as an algorithm: a plain queue guarantees every node is reached at its shortest hop-distance from the source, and the green-and-yellow wavefront is what that guarantee looks like in motion."
   },
   "grid3d_dfs": {
    "name": "Grid3D — DFS",
@@ -481,7 +482,8 @@
     1.0,
     1,
     1.0
-   ]
+   ],
+   "qfep_connection": "Edges arrive pre-sorted by cheapness and Union-Find asks a single question — would this close a loop? — so the red rejections are the visible price of insisting the network remain a tree."
   },
   "grid3d_prim": {
    "name": "Grid3D — Prim's MST",
@@ -673,7 +675,8 @@
     1.0,
     1,
     1.0
-   ]
+   ],
+   "qfep_connection": "No node is told where to stand; pairwise repulsion, spring edges, and a cooling temperature negotiate the layout, so legibility arrives as a truce E_flux settles into rather than a plan F_order issued."
   },
   "grid3d_random_graph": {
    "name": "Grid3D — Random Graph",
@@ -768,7 +771,8 @@
     1.0,
     1,
     1.0
-   ]
+   ],
+   "qfep_connection": "Erdős–Rényi dealt one edge at a time, nodes recoloring as their degree climbs: hubs are not designed, they are what repeated coin flips look like once you agree to keep score."
   },
   "grid3d_entropy": {
    "name": "Grid3D — Entropy Field",
@@ -863,7 +867,8 @@
     1.0,
     1,
     1.0
-   ]
+   ],
+   "qfep_connection": "Disorder administered layer by layer: each z-slice jitters its nodes by entropy squared and slides the hue from blue toward red. Walk the cloud lengthwise and you cross from a grid that is legible to one that is only statistical."
   }
  }
 }
