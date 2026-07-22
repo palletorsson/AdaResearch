@@ -83,6 +83,7 @@ static func build(dna: CritterDNA, parent: Node3D, _trait_mapper: CritterTraitMa
 		var mat := StandardMaterial3D.new()
 		mat.albedo_color = dna.primary_color
 		mat.roughness = 0.9
+		mat.cull_mode = BaseMaterial3D.CULL_DISABLED  # never see-through
 		mi.material_override = mat
 		root.add_child(mi)
 
@@ -106,6 +107,7 @@ static func build(dna: CritterDNA, parent: Node3D, _trait_mapper: CritterTraitMa
 			var lmat := StandardMaterial3D.new()
 			lmat.albedo_color = dna.secondary_color if dna.secondary_color.g > 0.0 else Color(0.2, 0.5, 0.2)
 			lmat.roughness = 0.85
+			lmat.cull_mode = BaseMaterial3D.CULL_DISABLED  # never see-through
 			lmi.material_override = lmat
 			root.add_child(lmi)
 	return root

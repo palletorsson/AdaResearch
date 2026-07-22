@@ -18,8 +18,9 @@ extends RefCounted
 const SpineSource = preload("res://algorithms/nature_system/morphology/creature_morphology.gd")
 const Mesher = preload("res://algorithms/nature_system/morphology/sdf_mesher.gd")
 
-# grid resolution by LOD — a cell-sized grub needs little
-const RES_BY_LOD: Array = [16, 22, 30, 40]
+# grid resolution by LOD. Higher than before: a thin-necked grub needs enough
+# cells that the neck/tail are captured (each feature clamped to >=1.6 cells).
+const RES_BY_LOD: Array = [24, 32, 42, 52]
 
 
 static func build(dna: CritterDNA, parent: Node3D, trait_mapper: CritterTraitMapper, lod: int = 2) -> Node3D:
@@ -38,36 +39,39 @@ static func build(dna: CritterDNA, parent: Node3D, trait_mapper: CritterTraitMap
 		max_r = maxf(max_r, float((s as Dictionary)["radius"]))
 	if max_r <= 0.0:
 		max_r = 0.05
-	var smooth_k: float = max_r * 0.9   # generous blend: joints disappear
 	var head_c: Vector3 = spine[0]["position"]
-	var head_r: float = float(spine[0]["radius"]) * 1.35   # a rounded head bulge
 
-	# a few leg nubs blended into the body (aggression/mobility gate their size)
+	# bounds first, so we can size the grid step and forbid any feature thinner
+	# than it can resolve (that was the "partly invisible" bug — the thin neck
+	# and tail fell below one grid cell and simply weren't meshed).
 	var legs: Array = _leg_nubs(dna, spine)
+	var lo := Vector3(1e9, 1e9, 1e9)
+	var hi := Vector3(-1e9, -1e9, -1e9)
+	for s in spine:
+		lo = lo.min(s["position"]); hi = hi.max(s["position"])
+	for leg in legs:
+		lo = lo.min(leg["b"]); hi = hi.max(leg["b"])
+	var res: int = RES_BY_LOD[lod]
+	var span: Vector3 = (hi - lo) + Vector3.ONE * max_r * 4.0
+	var step: float = maxf(span.x, maxf(span.y, span.z)) / float(res)
+	# EVERY radius clamped to at least ~1.6 cells → always captured, never a gap
+	var min_r: float = step * 1.6
+	var head_r: float = maxf(float(spine[0]["radius"]) * 1.35, min_r * 1.3)
+	var smooth_k: float = maxf(max_r, min_r) * 0.9
 
-	# the field: smin over body capsules + head + legs. Negative inside.
 	var field := func(p: Vector3) -> float:
 		var d: float = Mesher.sd_sphere(p, head_c, head_r)
 		for i in range(spine.size() - 1):
 			var a: Vector3 = spine[i]["position"]
 			var b: Vector3 = spine[i + 1]["position"]
-			var ra: float = float(spine[i]["radius"])
-			var rb: float = float(spine[i + 1]["radius"])
+			var ra: float = maxf(float(spine[i]["radius"]), min_r)
+			var rb: float = maxf(float(spine[i + 1]["radius"]), min_r)
 			d = Mesher.smin(d, Mesher.sd_capsule_tapered(p, a, b, ra, rb), smooth_k)
 		for leg in legs:
-			d = Mesher.smin(d, Mesher.sd_capsule(p, leg["a"], leg["b"], leg["r"]), smooth_k * 0.7)
+			d = Mesher.smin(d, Mesher.sd_capsule(p, leg["a"], leg["b"], maxf(float(leg["r"]), min_r)), smooth_k * 0.7)
 		return d
 
-	# sample volume = spine bounds padded by head/leg reach + a couple cells
-	var lo := Vector3(1e9, 1e9, 1e9)
-	var hi := Vector3(-1e9, -1e9, -1e9)
-	for s in spine:
-		lo = lo.min(s["position"])
-		hi = hi.max(s["position"])
-	for leg in legs:
-		lo = lo.min(leg["b"]); hi = hi.max(leg["b"])
 	var pad: Vector3 = Vector3.ONE * (max_r * 2.0 + head_r)
-	var res: int = RES_BY_LOD[lod]
 	var mesh: ArrayMesh = Mesher.mesh_field(field, lo - pad, hi + pad, res)
 	if mesh == null:
 		return root
@@ -111,6 +115,9 @@ static func _skin(dna: CritterDNA) -> StandardMaterial3D:
 	mat.albedo_color = dna.primary_color
 	mat.roughness = clampf(dna.roughness, 0.3, 0.95)
 	mat.metallic = clampf(dna.iridescence * 0.4, 0.0, 0.5)
+	# double-sided: insurance so no thin or edge triangle can read as a hole,
+	# whatever the mesh resolution — an organic body should never be see-through
+	mat.cull_mode = BaseMaterial3D.CULL_DISABLED
 	if dna.iridescence > 0.4:
 		mat.emission_enabled = true
 		mat.emission = dna.primary_color * 0.25

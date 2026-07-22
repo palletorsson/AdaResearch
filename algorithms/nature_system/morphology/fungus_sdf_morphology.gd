@@ -56,6 +56,7 @@ static func build(dna: CritterDNA, parent: Node3D, _trait_mapper: CritterTraitMa
 	var mat := StandardMaterial3D.new()
 	mat.albedo_color = dna.primary_color
 	mat.roughness = clampf(dna.roughness, 0.4, 0.95)
+	mat.cull_mode = BaseMaterial3D.CULL_DISABLED  # never see-through
 	if dna.iridescence > 0.4:
 		mat.emission_enabled = true
 		mat.emission = dna.primary_color * 0.3
