@@ -81,6 +81,7 @@ class Router:
         self.floor = {}    # (x,z) -> height str
         self.walls = {}    # (x,z) -> letters
         self.arts = {}     # (x,z) -> token
+        self.utils = {}    # (x,z) -> utility token (wp ramps from paint)
         self.pos = (0, 0)
         self.d = (0, 1)    # walking +z
         self.route = []
@@ -103,8 +104,15 @@ class Router:
         """fills: list of (u, v, token) resolved by the caller."""
         pos, d, ru = self.pos, self.d, self.ru()
         body = sec.get("body", {})
+        paint = sec.get("paint")
         for c, u, v in self.cells_of(sec, pos, d):
             h = "1"
+            if paint:
+                px = paint["heights"][v][u]
+                h = "1" if px == "." else px
+                urow = paint.get("utilities")
+                if urow and urow[v][u] == "w":
+                    self.utils[c] = "wp"
             if sec["id"] == "arrival_void" and not (5 <= u <= 7):
                 h = "0"
             if sec["id"] == "shrunken_void" and not (3 <= u <= 9):
@@ -274,6 +282,8 @@ def compose(map_name, scripts, seeds):
         ex = (last["pos"][0] + rud[0] * 6 + last["dir"][0] * (secl["z_len"] - 1) - x0,
               last["pos"][1] + rud[1] * 6 + last["dir"][1] * (secl["z_len"] - 1) - z0)
         utils = [[" "] * W for _ in range(D)]
+        for (x, z), u in router.utils.items():
+            utils[z - z0][x - x0] = u
         utils[sp[1]][sp[0]] = "s"
         utils[ex[1]][ex[0]] = exit_tok
         data = {

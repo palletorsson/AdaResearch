@@ -94,7 +94,19 @@ Contradictions between rulings are content, not errors.
 
 **L-024 (Palle, 2026-07-21, verbatim):** "we do not need the train for real I mean it more a metaphore if you can dig anything from that?"
 
+**L-025 (Palle, 2026-07-21, verbatim):** "the template editor should be a pixel or 3d editor for level 0,1,2,3,4 and bridges and levels slopes etc"
+
 ## Compiled properties (grows as rulings land)
+
+**P-10b. The template is a painted height patch (from L-025).** A section's body generalizes from
+shorthand (podiums/walls/pillars) to a PAINTED PATCH: a pixel grid of heights 0-4 per cell ('.'=
+floor 1, '0'=void), plus ramp cells (wp — the only climb the pathfinder knows) and slot markers.
+Bridges = elevated floor rows spanning void, reached by ramps; slopes = terraced steps with wp at
+each rise. The pixel editor and the 3D editor are two views of one patch — paint heights as
+colors top-down, or sculpt the extruded voxels; the patch JSON in track_sections.json is the file
+format both views save. Sections carrying 'paint' override the shorthand body; the composer
+rasterizes patch heights and ramps through the router's transform, so painted templates fold,
+couple, and get judged like every other car.
 
 **P-10a. Fold the track (from L-024).** The train metaphor's cargo was the coupling, the slots,
 and the grammar — never the line. The timeline stays linear (the walk, the film); the FLOOR is

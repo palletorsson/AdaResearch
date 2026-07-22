@@ -1,5 +1,5 @@
 {
-	"_readme": "The track's section kit (L-023/P-10). Cross-section locked at x=13; every section couples with every section along z (Wang collapsed to 1D — the contract is the width). Each section: a lane profile (widths summing to 13), a z length, and SLOTS — preconfigured artifact places (lane center x, dz, size class, kind affinity). 'mined_as' links kit sections to the categories the miner reads off composed corridors, so the learned grammar can pick kit sections. Hand-edit freely; the template-authoring editor comes later (Palle 2026-07-21). BODIES (2026-07-21): sections render furniture — 'podiums' raises a height-2 plinth under specimen/tableau slots (artifacts auto-seat on the cube top), 'wall' adds wall-segment runs on the corridor edge(s) for those rows (layers.walls, lowercase w/e), 'pillars' plants height-3 columns (gates). FOLD (2026-07-21, L-024/P-10a): corner_turn and climax_plaza are 13x13 node sections; the router lays the route with 90-degree turns (a corner is a cut), the plaza replaces the hall as the authored climax — discovered, not sighted from the start.",
+	"_readme": "The track's section kit (L-023/P-10). Cross-section locked at x=13; every section couples with every section along z (Wang collapsed to 1D — the contract is the width). Each section: a lane profile (widths summing to 13), a z length, and SLOTS — preconfigured artifact places (lane center x, dz, size class, kind affinity). 'mined_as' links kit sections to the categories the miner reads off composed corridors, so the learned grammar can pick kit sections. Hand-edit freely; the template-authoring editor comes later (Palle 2026-07-21). BODIES (2026-07-21): sections render furniture — 'podiums' raises a height-2 plinth under specimen/tableau slots (artifacts auto-seat on the cube top), 'wall' adds wall-segment runs on the corridor edge(s) for those rows (layers.walls, lowercase w/e), 'pillars' plants height-3 columns (gates). FOLD (2026-07-21, L-024/P-10a): corner_turn and climax_plaza are 13x13 node sections; the router lays the route with 90-degree turns (a corner is a cut), the plaza replaces the hall as the authored climax — discovered, not sighted from the start. PAINT (2026-07-21, L-025/P-10b): sections may carry 'paint' — a pixel grid of heights 0-4 ('.'=floor 1) plus a utilities grid ('w'=wp ramp). Bridges and slopes paint as pixels; the future pixel/3D template editor reads and writes exactly this format.",
 	"width": 13,
 	"lanes": {
 		"L_edge": [
@@ -491,6 +491,96 @@
 						8,
 						0
 					]
+				]
+			}
+		},
+		{
+			"id": "bridge_span",
+			"profile": "painted",
+			"z_len": 9,
+			"mined_as": "breather",
+			"slots": [
+				{
+					"lane": "axis",
+					"dz": 4,
+					"size": "small",
+					"kinds": [
+						"specimen",
+						"tableau"
+					]
+				}
+			],
+			"note": "L-025: a chasm crossed on a level-3 bridge — the walk rises, the void reads below",
+			"paint": {
+				"heights": [
+					".............",
+					".............",
+					"00000...00000",
+					"0000033300000",
+					"0000033300000",
+					"0000033300000",
+					"00000...00000",
+					".............",
+					"............."
+				],
+				"utilities": [
+					".............",
+					".............",
+					"......w......",
+					".............",
+					".............",
+					".............",
+					"......w......",
+					".............",
+					"............."
+				]
+			}
+		},
+		{
+			"id": "terrace_slope",
+			"profile": "painted",
+			"z_len": 8,
+			"mined_as": "side_bay",
+			"slots": [
+				{
+					"lane": "L_bay",
+					"dz": 2,
+					"size": "small",
+					"kinds": [
+						"specimen"
+					]
+				},
+				{
+					"lane": "R_bay",
+					"dz": 5,
+					"size": "small",
+					"kinds": [
+						"specimen",
+						"performer"
+					]
+				}
+			],
+			"note": "L-025: stepped terraces 1-2-3 with ramps — the slope as display architecture",
+			"paint": {
+				"heights": [
+					".............",
+					"222.......222",
+					"222.......222",
+					"33322...22333",
+					"33322...22333",
+					"222.......222",
+					"222.......222",
+					"............."
+				],
+				"utilities": [
+					".............",
+					"...w.....w...",
+					".............",
+					".....w.w.....",
+					".............",
+					".............",
+					"...w.....w...",
+					"............."
 				]
 			}
 		}

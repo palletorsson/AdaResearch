@@ -103,7 +103,7 @@
     },
     {
      "id": "edge-16",
-     "text": "Template-authoring editor (Palle 2026-07-21: 'later also want an editor where I can make templates') — drag sections onto a track, author new sections; AFTER the FREEZE lifts, extending /template-maps rather than a new surface",
+     "text": "Template-authoring editor (L-025 spec): a PIXEL or 3D editor over the painted height patch — levels 0-4 as colors, bridges, slopes, wp ramps, slots — two views of one patch; the 'paint' format in track_sections.json is its file format (bridge_span + terrace_slope are the first painted sections, composer rasterizes them through the fold). Build AFTER the FREEZE lifts, extending /template-maps",
      "done": false
     },
     {
