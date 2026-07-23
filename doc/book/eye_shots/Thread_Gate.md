@@ -21,8 +21,8 @@ no sibling kept — the move did not beat the ride (overlaps 0→0, tight 0→0)
 - **geodesic_dome** — What triangulated struts want to become. Nobody designed this curve: someone chose a seed solid and a subdivis
 
 ## The text vs the space
-walked.md exists — the writing names 7/8 of the cast; dwells declared for 0.
-- space without text: laser_measure — standing in the room, absent from the walk.
+walked.md exists — the writing names 8/8 of the cast; dwells declared for 0.
+- the text and the space cover each other — the walk as written is the walk as built.
 
 ## The heuristic understanding
 The space already walks: the bodies keep the law without being told. What carries this map is its voice, not its floor.
