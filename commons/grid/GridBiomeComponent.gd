@@ -144,7 +144,13 @@ func initialize(grid_sys: Node3D, cube_size: float, gutter: float) -> void:
 
 func generate(biome_layer: Array, structure_layer: Array, stage_order: int = 0, meta: Dictionary = {}) -> void:
 	_structure = structure_layer
-	_stage_order = stage_order
+	# stage_order normally comes from the live EcosystemManager (the running
+	# sequence). A gate/test map has no sequence context, so it defaults to 0 and
+	# every kingdom would fall back to a primitive cube — a probe map for the
+	# fungus/creature substrates could never SHOW them. A map may pin the stage it
+	# wants to be read at via `_meta.stage_order`; absent the key nothing changes,
+	# so real sequence maps are untouched (additive, gated by new data).
+	_stage_order = int(meta.get("stage_order", stage_order))
 	_budget_instances = int(meta.get("budget_instances", DEFAULT_BUDGET_INSTANCES))
 	_visibility_range = float(meta.get("visibility_range", DEFAULT_VISIBILITY_RANGE))
 	_tick_seconds = maxf(0.1, float(meta.get("tick_seconds", DEFAULT_TICK_SECONDS)))

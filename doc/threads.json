@@ -251,6 +251,11 @@
      "id": "living-3",
      "text": "Chamber_Noise live walk: window launched, choreography probe-verified, walked.md slot open",
      "done": false
+    },
+    {
+     "id": "living-4",
+     "done": true,
+     "text": "SDF BODY GATE 2026-07-23: the SDF morphology system (creature default + flora:sdf/fungus:sdf opt-in, one continuous smooth-unioned body via SdfMesher marching-tetrahedra) had NO probe and ZERO authored use — not one map used a :sdf: cell — while every sibling substrate has both, and its two shipped bugs (see-through / partly-invisible body) were caught by eye with nothing locking them. Closed: (1) probe_biome_sdf.gd builds all three bodies at the real LODs and gates the VISIBLE contract — outward winding (signed volume V>0, the see-through lock) + manifold (no edge on 3+ faces) + solid vert count; PASS 9/9. (2) FOUND + FIXED a real defect: grid-aligned bodies (fungus stem, creature head both at the origin) landed edge crossings ON grid vertices, welding edges into non-manifold hubs (garbage averaged normals, speckle even double-sided) — isolevel bias in sdf_mesher.mesh_field (nudge near-zero samples just outside) drops non-manifold 30/144/175 -> 0/0/0 on the worst-case sphere and 0 on every real body. (3) _meta.stage_order lets a gate/test map pin the curriculum stage it is read at (additive, gated by new data) so the fungus/creature substrates SHOW instead of falling back to a cube at stage 0 — was blocking every biome gate map on capture. (4) Biome_SdfTest gate map (3 substrates x tier ladders, stage 12): routing verified end-to-end (6 sdf-organism + 3 grub, 0 fallback, all three morphology roots), negative test proves the guard still bites at stage 0 (0 bodies), pathfinder clean. KNOWN SIMPLIFICATION documented in the mesher + probe headers: the skin is NOT watertight (marching-tet non-conforming, ~half the edges are hairline cracks growing with res) but INVISIBLE under cull_mode=DISABLED; true closure = a conforming re-mesh, not chased for decorative bodies. PENDING: live capture (a Godot v4.6 window held the user:// lock — not fought per the serialize rule)."
     }
    ],
    "links": [

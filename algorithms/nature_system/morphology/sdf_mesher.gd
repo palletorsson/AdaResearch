@@ -9,8 +9,20 @@
 #
 # Marching TETRAHEDRA (not cubes): each grid cube splits into 6 tetrahedra;
 # each tet has only 16 sign cases, handled by a tiny edge table — no 256-entry
-# cube table to transcribe, and always watertight. A little more geometry than
-# marching cubes, negligible for a cell-sized creature.
+# cube table to transcribe. A little more geometry than marching cubes,
+# negligible for a cell-sized creature.
+#
+# KNOWN SIMPLIFICATION — the skin is NOT watertight (probe_biome_sdf measures the
+# crack load). This extraction is not conforming: adjacent tets triangulate a
+# shared face with mismatched diagonals, so the surface carries a lattice of
+# hairline boundary edges (~half the edges, growing with resolution). It does not
+# matter here because every SDF skin renders cull_mode = DISABLED (double-sided):
+# a crack shows the backface, never a see-through hole. True closure would need a
+# conforming re-mesh; not worth the risk for decorative bodies that already read
+# solid. What IS guaranteed and probe-locked: every triangle faces outward
+# (positive enclosed volume) and — since the isolevel bias below — no crossing
+# lands on a grid vertex, so the mesh is manifold (no edge shared by 3+ faces,
+# which would poison the averaged normals even under double-siding).
 #
 # SDF PRIMITIVES here are the ones a body needs: capsule (a fattened line
 # segment — the body between two spine points) and sphere (the head). smin
@@ -85,7 +97,17 @@ static func mesh_field(field: Callable, aabb_min: Vector3, aabb_max: Vector3, re
 	var nx: int = int(ceil(size.x / step)) + 1
 	var ny: int = int(ceil(size.y / step)) + 1
 	var nz: int = int(ceil(size.z / step)) + 1
-	# sample the field once per grid vertex (shared across cubes/tets)
+	# sample the field once per grid vertex (shared across cubes/tets).
+	# ISOLEVEL BIAS: a sample sitting exactly on the surface makes an edge
+	# crossing land ON a grid vertex, where the several edges meeting there
+	# collapse to one welded point and the mesh turns non-manifold (an edge
+	# shared by 3+ faces → a meaningless averaged normal, visible speckle even
+	# double-sided). Nudge any near-zero sample just OUTSIDE so every crossing is
+	# strictly interior to its edge. Grid-aligned bodies — the fungus stem and
+	# creature head both sit at the origin — are exactly the ones that hit this,
+	# so it is not a corner case. Bias is a thousandth of a cell: below any
+	# visible geometry, above float noise.
+	var iso: float = step * 1e-3
 	var vals: PackedFloat32Array = PackedFloat32Array()
 	vals.resize(nx * ny * nz)
 	var pos: PackedVector3Array = PackedVector3Array()
@@ -96,7 +118,8 @@ static func mesh_field(field: Callable, aabb_min: Vector3, aabb_max: Vector3, re
 			for ix in range(nx):
 				var p: Vector3 = aabb_min + Vector3(ix, iy, iz) * step
 				pos[vi] = p
-				vals[vi] = float(field.call(p))
+				var v: float = float(field.call(p))
+				vals[vi] = v if absf(v) >= iso else iso
 				vi += 1
 	var idx := func(ix: int, iy: int, iz: int) -> int:
 		return (iz * ny + iy) * nx + ix
