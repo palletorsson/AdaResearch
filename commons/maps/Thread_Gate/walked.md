@@ -1,20 +1,22 @@
 # Thread_Gate — walked
 
 > ghost-drafted from the working map (the instrument gate, no sequence); Palle rules the voice.
-> Built 2026-07-23 BY the new tools, AS their test: if this map is ever imperfect, a tool broke.
+> v1 built 2026-07-23 by the data unfold — valid and dead. v2 composed the same day
+> through the GENERATIVE unfold after Palle's correction: "the right search space
+> must be able to create a great map."
 
 ## The cast
 
-helicoid · script_runner · crystal_cluster · csg_difference_demo · geodesic_dome · bar_array · branching_growth_algorithm
+line · laser_measure · helicoid · crystal_cluster · csg_difference_demo · geodesic_dome · branching_growth_algorithm · mold_network
 
 ## The walk
 
-A single gallery line, west to east, seven artifacts in a size crescendo — the 0.2 m helicoid first, the 3.35 m branching growth last. Every placement was computed, not judged: cell positions derive from each artifact's *measured* union-AABB half-extent plus a guaranteed two-metre walkway, ceil-rounded so the grid can only widen a gap, never narrow it. The cast was chosen by query, not memory: voiced ∧ measured, one representative per element vocabulary — a minimal surface, a Label3D code plate, a pure-mesh crystal, a CSG subtraction, a 66-strut wrapper variant, a MultiMesh bar row, a grown form.
+**Measurement and its limit.** You enter past the smallest act of measuring — a line held between two points, its distance live. Then the hero: the laser measure, turned so its fifty-metre beam fires east down the whole gallery — the instrument measuring the room you are about to walk. The exploration is a size crescendo, helicoid to crystal to carved box to dome to grown branching, each piece set back from your path in proportion to its own size, so the walk keeps every exhibit at its right viewing distance. And then the turn: across a ring of void, on a quarantined island, the mold — the growth that exceeds its own at-rest measurement, blooming to the edge of a moat sized not by its AABB but by its observed runtime envelope. You watch it test the fence. Then the exit.
 
-## What it gates
+## What it gates, and what it learned
 
-The map is the instrument stack testing itself, and its first runs earned the name. The placement engine initially *disagreed* with the measured construction — its registry footprints called the 3.35 m branching growth one cell — and reconciling the seven entries from probe truth brought every instrument to unanimity: ride 0 overlaps, 0 tight; voices 7/7; pathfinder clean; the engine proposing nothing. The render then caught what no static instrument could: a growth-class artifact (mold_network) blooming past its at-rest measurement and swallowing the walkway — swapped for a runtime-stable kin, and the lesson recorded: static measurement is not runtime envelope.
+v1 proved the data unfold: cast by vocabulary coverage, placement by measured clearance — zero overlaps, all instruments agreeing, and no reason for any of it. A row. Perfect and dead.
 
-The flake was then hunted to a law (29 bisection captures): every cast member clean in isolation ×3; a cast-free map clean cold and warm; any artifact-bearing map exactly 40 renderer material-nulls on the **cold first run only** — both disjoint half-casts alike — and 0 on every warm re-run. Verdict: a cold-start warm-up race in first-frame material queries (mesh created, material a frame behind, renderer's four query sites × ~10 objects), exactly-once, self-clearing, zero visual impact. The gate's discipline follows: **judge captures on warm runs; a cold-run 40 is the warm-up signature, not a defect.**
+v2 is the same measured rigor descended through design choices instead of data: a concept (the thing the gate itself discovered — measurement and its limit), a hero, a threshold, kin ordered as a lesson, an anti performing the counter-truth, phases laid as space. Composing it forced three laws the data unfold never needed, each learned from an honest failure: **FIT** (scale_lines measures 100 m — the honest layout exploded to a 190 m corridor; a piece whose envelope exceeds the room belongs to another room, excluded with its reason recorded); **REACH** (the laser's 50 m beam is reach, not body — space by the body, aim the reach along the walk on purpose); and **the moat as hypothesis** (the bloom escaped its first quarantine — runtime growth is stochastic, so containment is a claim each run re-tests, and the map says so).
 
-Perfect here means: every claim on every rung of the thread is checked against measured truth, and the disagreements the checking surfaced were fixed at their source. The gate stands so the next tool change has something to break against.
+The gate's standard therefore doubles: the instruments must agree (ov 0, ti 0, voices 8/8, pathfinder clean, warm capture) — and the map must be able to say *why each thing stands where it stands*. The design block in its map_info carries every reason. If this map is ever imperfect, a tool broke; if it is ever mute about its reasons, the unfold broke.
