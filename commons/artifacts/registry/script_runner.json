@@ -75,7 +75,10 @@
    },
    "spatial_needs": {
     "platform": "none",
-    "footprint_cells": 1,
+    "footprint_cells": [
+     1.0,
+     1.0
+    ],
     "clearance": {
      "front": 1,
      "back": 1,
@@ -95,25 +98,26 @@
     ],
     "preferred_zone": "any",
     "measured_footprint_cells": 1,
-    "footprint_source": "measured"
+    "footprint_source": "probe_artifact_elements"
    },
    "measurements": {
     "aabb_size": [
      0.73,
-     0.4,
-     0.03
+     0.54,
+     0.033
     ],
     "aabb_center": [
-     0.06,
-     0.0,
-     0.01
+     0.065,
+     -0.07,
+     0.015
     ],
     "grid_cells": [
      1.0,
      1.0
     ],
     "max_dimension_m": 0.73,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
+    "measured_at": "2026-07-23T13:31:22Z",
+    "source": "probe_artifact_elements"
    },
    "footprint_measured": [
     1.0,

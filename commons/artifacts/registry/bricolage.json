@@ -461,7 +461,38 @@
    "map_sequences": [
     "bricolage"
    ],
-   "qfep_connection": "What triangulated struts want to become. Nobody designed this curve: someone chose a seed solid and a subdivision frequency, and the sphere did the rest. It is the constraint room's lesson repeated over a whole surface — every quad would hinge, every triangle cannot — and it is bricolage formalised, the point where recombination stops being improvisation and becomes a method you can hand to someone else."
+   "qfep_connection": "What triangulated struts want to become. Nobody designed this curve: someone chose a seed solid and a subdivision frequency, and the sphere did the rest. It is the constraint room's lesson repeated over a whole surface — every quad would hinge, every triangle cannot — and it is bricolage formalised, the point where recombination stops being improvisation and becomes a method you can hand to someone else.",
+   "measurements": {
+    "aabb_size": [
+     1.7,
+     0.835,
+     1.749
+    ],
+    "aabb_center": [
+     0.0,
+     0.418,
+     0.024
+    ],
+    "grid_cells": [
+     2,
+     2
+    ],
+    "max_dimension_m": 1.749,
+    "measured_at": "2026-07-23T10:42:46Z",
+    "source": "probe_artifact_elements"
+   },
+   "footprint_measured": [
+    2,
+    1,
+    2
+   ],
+   "spatial_needs": {
+    "footprint_cells": [
+     2,
+     2
+    ],
+    "footprint_source": "probe_artifact_elements"
+   }
   },
   "counterweight_demo": {
    "name": "Counterweight",

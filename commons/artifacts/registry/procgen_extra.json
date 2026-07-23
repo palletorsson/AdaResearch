@@ -1188,7 +1188,10 @@
    ],
    "spatial_needs": {
     "platform": "none",
-    "footprint_cells": 1,
+    "footprint_cells": [
+     4,
+     4
+    ],
     "clearance": {
      "front": 1,
      "back": 1,
@@ -1208,27 +1211,33 @@
     ],
     "preferred_zone": "any",
     "measured_footprint_cells": 1,
-    "footprint_source": "measured"
+    "footprint_source": "probe_artifact_elements"
    },
    "measurements": {
     "aabb_size": [
-     0.0,
-     0.0,
-     0.0
+     3.346,
+     2.732,
+     3.346
     ],
     "aabb_center": [
      0.0,
-     0.0,
+     5.0,
      0.0
     ],
     "grid_cells": [
-     1.0,
-     1.0
+     4,
+     4
     ],
-    "max_dimension_m": 0.0,
-    "measured_at": "2026-04-29T07:09:56.762620Z"
+    "max_dimension_m": 3.346,
+    "measured_at": "2026-07-23T13:17:18Z",
+    "source": "probe_artifact_elements"
    },
-   "qfep_connection": "Growth as a rule iterated — a tip that splits, angles, and splits again, each branch a smaller copy of the decision that made it. The engine behind the organic_space beside it: structure accumulating from a repeated local choice, the procedural chapter's handshake with the fractal one next door."
+   "qfep_connection": "Growth as a rule iterated — a tip that splits, angles, and splits again, each branch a smaller copy of the decision that made it. The engine behind the organic_space beside it: structure accumulating from a repeated local choice, the procedural chapter's handshake with the fractal one next door.",
+   "footprint_measured": [
+    4,
+    1,
+    4
+   ]
   },
   "branching_growth_algorithm_continued": {
    "category": "unknown",
