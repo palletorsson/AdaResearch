@@ -1,0 +1,92 @@
+{
+ "map": "Dream_Strip",
+ "refined": "Refined_Dream_Strip",
+ "trajectory": [
+  {
+   "gen": 0,
+   "score": 6.97,
+   "detail": {
+    "exp": 6.57,
+    "fit": 0.13,
+    "tau": 0.33,
+    "cov": 1.0,
+    "promise": 1.0,
+    "dolly": 1.0,
+    "rank1": 1.0,
+    "cycles": "23/24",
+    "runtime_s": 162.7,
+    "heroDeg": 161,
+    "hero": "diamonds",
+    "score": 6.57
+   },
+   "mutation": "base"
+  },
+  {
+   "gen": 1,
+   "score": 7.16,
+   "detail": {
+    "exp": 6.79,
+    "fit": 0.13,
+    "tau": 0.43,
+    "cov": 1.0,
+    "promise": 1.0,
+    "dolly": 1.0,
+    "rank1": 1.0,
+    "cycles": "23/24",
+    "runtime_s": 162.7,
+    "heroDeg": 161,
+    "hero": "diamonds",
+    "score": 6.79
+   },
+   "mutation": "swap wiki_fragment <-> prism_block"
+  },
+  {
+   "gen": 2,
+   "score": 7.17,
+   "detail": {
+    "exp": 6.79,
+    "fit": 0.13,
+    "tau": 0.43,
+    "cov": 1.0,
+    "promise": 1.0,
+    "dolly": 1.0,
+    "rank1": 1.0,
+    "cycles": "23/24",
+    "runtime_s": 162.7,
+    "heroDeg": 161,
+    "hero": "diamonds",
+    "score": 6.79
+   },
+   "mutation": "nudge righttriangle (10,13)->(12,13)"
+  },
+  {
+   "gen": 3,
+   "score": 7.35,
+   "detail": {
+    "exp": 6.96,
+    "fit": 0.13,
+    "tau": 0.52,
+    "cov": 1.0,
+    "promise": 1.0,
+    "dolly": 1.0,
+    "rank1": 1.0,
+    "cycles": "23/24",
+    "runtime_s": 163.2,
+    "heroDeg": 161,
+    "hero": "diamonds",
+    "score": 6.96
+   },
+   "mutation": "nudge sphere (1,2)->(2,4)"
+  },
+  {
+   "gen": 4,
+   "score": 7.35,
+   "mutation": "plateau"
+  },
+  {
+   "gen": 5,
+   "score": 7.35,
+   "mutation": "plateau"
+  }
+ ]
+}

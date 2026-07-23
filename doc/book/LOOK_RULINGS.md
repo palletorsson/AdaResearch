@@ -96,7 +96,19 @@ Contradictions between rulings are content, not errors.
 
 **L-025 (Palle, 2026-07-21, verbatim):** "the template editor should be a pixel or 3d editor for level 0,1,2,3,4 and bridges and levels slopes etc"
 
+**L-026 (Palle, 2026-07-21, verbatim):** "can you auto research the map like we auto research the artifacts? also Can we use sdf to make the maps?"
+
 ## Compiled properties (grows as rulings land)
+
+**P-11. The map researches itself; the floor is a level set of desire (from L-026).** Two engines:
+(a) map_chamber.py — the artifact chamber's loop applied to a map: mutate (nudge/swap/podium),
+gate (connectivity + pathfinder), judge (experience + FIT), keep strict improvements, log the
+trajectory; complements the /map-dna agenda as its inner loop. First run: Dream_Strip 6.97->7.35
+in three mutations, then an honest plateau — and the judge tried to swap the authored summit hero
+for the accidental mast, the craft coefficient live. (b) gen_sdf_map.py — the map as SDF: the
+walk is a spine, the text-compiled desire curve is the radius, the floor is the tube
+dist(p, spine) < desire(t); the climax is a bulge, the vacuum a pinch, the tube climbs 1..4 with
+ramps. A new species of floor: curved, lobed, terraced — the organic register.
 
 **P-10b. The template is a painted height patch (from L-025).** A section's body generalizes from
 shorthand (podiums/walls/pillars) to a PAINTED PATCH: a pixel grid of heights 0-4 per cell ('.'=
