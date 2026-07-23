@@ -2,14 +2,16 @@
   "map_info": {
     "name": "Biome_Gallery_Fungus",
     "title": "Biome_Gallery_Fungus",
-    "description": "Biome gallery: the fungus kingdom — the voxel CA network beside the mycelium filament web (dense and sparse) and the SDF mushroom (cap and stem as one continuous surface) at tiers 1/3/5, a halo edge, a mute cell. Not spine.",
+    "description": "Biome gallery: the fungus kingdom — every substrate the layer can grow, front to back: the real DNA mushroom in three families (fairy ring / tall parasol / shelf bracket), the same mushroom under three soft-body poses (wind lean / gravity droop / squash settle), the SDF mushroom (cap into stem, one surface) at tiers 1/3/5, and the CA voxel network beside the mycelium filament web (dense and sparse). A halo edge, a mute cell. Not spine.",
     "dimensions": {
       "width": 12,
-      "depth": 9
+      "depth": 11
     }
   },
   "layers": {
     "structure": [
+      ["1","1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1","1"],
       ["1","1","1","1","1","1","1","1","1","1","1","1"],
       ["1","1","1","1","1","1","1","1","1","1","1","1"],
       ["1","1","1","1","1","1","1","1","1","1","1","1"],
@@ -29,9 +31,13 @@
       ["","","","","","","","","","","",""],
       ["","","","","","","","","","","",""],
       ["","","","","","","","","","","",""],
+      ["","","","","","","","","","","",""],
+      ["","","","","","","","","","","",""],
       ["","","","","","","","","","","t",""]
     ],
     "interactables": [
+      ["","","","","","","","","","","",""],
+      ["","","","","","","","","","","",""],
       ["","","","","","","","","","","",""],
       ["","","","","","","","","","","",""],
       ["","","","","","","","","","","",""],
@@ -45,13 +51,15 @@
     "biome": [
       ["","fungus:scatter:halo:d=0.8","","fungus:scatter:halo:d=0.8","","fungus:scatter:halo:d=0.8","","fungus:scatter:halo:d=0.8","","fungus:scatter:halo:d=0.8","",""],
       ["","","","","","","","","","","",""],
-      ["","","","","","","","","","","",""],
       ["","","fungus:ca:seed:t=5","","","fungus:mycelium:seed:t=5:d=1.0","","","fungus:mycelium:seed:t=5:d=0.3","","",""],
       ["","","","","","","","","","","",""],
       ["","","fungus:sdf:seed:t=1","","","fungus:sdf:seed:t=3","","","fungus:sdf:seed:t=5","","",""],
-      ["","","","::mute","","","","","","","",""],
       ["","","","","","","","","","","",""],
-      ["","","","","","","","","","","",""]
+      ["","","fungus:softbody:seed:sf=wind_lean:t=3","","","fungus:softbody:seed:sf=gravity_droop:t=3","","","fungus:softbody:seed:sf=squash_settle:t=3","","",""],
+      ["","","","","","","","","","","",""],
+      ["","","fungus:dna:seed:fd=fairy_ring:t=3","","","fungus:dna:seed:fd=parasol_tall:t=3","","","fungus:dna:seed:fd=shelf_bracket:t=3","","",""],
+      ["","","","","","","","","","","",""],
+      ["","","","","","::mute","","","","","",""]
     ]
   }
 }
