@@ -559,6 +559,15 @@
      ]
     },
     {
+     "id": "web-fractal-thread",
+     "title": "The thread (zoom axis)",
+     "detail": "GET /api/fractal/thread?at=<addr> + /fractal-thread: ONE search path connecting the layers — project -> sequence -> map -> placement/relations on the surface -> artifact configure+look -> the elements inside it (wrapper station dicts, geometry_spec.construction, measured body, dressing-room contract). Any address enters mid-ladder and the whole chain hangs from it; every name recenters. The vertical complement to the six horizontal lenses.",
+     "paths": [
+      "ada_encyclopedia /api/fractal/thread",
+      "ada_encyclopedia /fractal-thread"
+     ]
+    },
+    {
      "id": "web-editors",
      "title": "Editors",
      "detail": "/map-builder, /map-studio, /voxel-editor, /grid-editor, /pattern-maker, /template-pattern-editor, /desire-timeline, /space-time, /spine-graph — the 2D hands that shape the 3D rooms.",
@@ -696,6 +705,24 @@
     "to": "edge-templates",
     "title": "Grammar as local kinship rules",
     "detail": "The cabinet grammar resolves composition by measured local rules (kinship, seating, colour) with live compliance - no global fitness search. Placement conflicts between neighbouring artifacts could resolve the same way: local law instead of tournament, checkable per pair."
+   },
+   {
+    "id": "e-thread-maps",
+    "kind": "wired",
+    "shape": "feeds",
+    "from": "maps-spine",
+    "to": "web-fractal-thread",
+    "title": "Map truth feeds the thread's middle rungs",
+    "detail": "The thread's sequence/map/placement rungs read curriculum_spine.json, sequences/*.json + drafts, map_data interactables (cells, rotations, params, nearest-relations) and eye_shots.json - the surface layers of the zoom."
+   },
+   {
+    "id": "e-thread-artifacts",
+    "kind": "wired",
+    "shape": "feeds",
+    "from": "artifacts-pattern",
+    "to": "web-fractal-thread",
+    "title": "The registry bottoms the zoom out inside the artifact",
+    "detail": "The thread's artifact/elements rungs read the registry union (scene, voice, measurements, spatial_profile), geometry_spec.construction, wrapper station dicts parsed from the scene .gd, and dressing_rooms contracts - the last placement of elements inside each artifact."
    }
   ]
  }
