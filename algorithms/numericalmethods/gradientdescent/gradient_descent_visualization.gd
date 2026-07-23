@@ -414,6 +414,22 @@ func _create_console() -> void:
 	var steel: StandardMaterial3D = HangarKit.worn_metal(pal_panel)
 	var accent: StandardMaterial3D = HangarKit.emissive(pal_accent, 2.2)
 
+	# ── 0. THE BASIN — a milled well the surface sits IN ────────────────
+	# Without this the loss surface (floor at y=0) hangs over open air framed
+	# by the curb, reading as a membrane on a frame. A dark floor plate just
+	# below the deck + low inner walls make it a well — the horizontal
+	# translation of the vertical dialect's dark window backdrop.
+	var basin_depth: float = 0.10
+	con.add_child(HangarKit.box(Vector3(cxm, deck_height - basin_depth - 0.008, czm),
+		Vector3(fw + 0.02, 0.016, fd + 0.02), dark))
+	for wall in [
+		[Vector3(cxm, deck_height - basin_depth * 0.5, z0), Vector3(fw + 0.02, basin_depth, 0.012)],
+		[Vector3(cxm, deck_height - basin_depth * 0.5, z1), Vector3(fw + 0.02, basin_depth, 0.012)],
+		[Vector3(x0, deck_height - basin_depth * 0.5, czm), Vector3(0.012, basin_depth, fd + 0.02)],
+		[Vector3(x1, deck_height - basin_depth * 0.5, czm), Vector3(0.012, basin_depth, fd + 0.02)],
+	]:
+		con.add_child(HangarKit.box(wall[0], wall[1], dark))
+
 	# ── 1. CURB RING — the back slab, laid flat ─────────────────────────
 	# The near side is interrupted by the instrument bay, so it comes in two
 	# slabs either side of it.

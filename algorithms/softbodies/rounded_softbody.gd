@@ -181,7 +181,12 @@ func _create_soft_body() -> void:
 	_soft_body.pressure_coefficient = _pressure
 	_soft_body.damping_coefficient = _damping
 	_soft_body.total_mass = _mass
-	_soft_body.position = Vector3(0, 0.5, 0)
+	# Spawn already RESTING on the platen (top ~deck_height+0.013, specimen
+	# half-height ~_size*0.5), not 0.5 m up: a soft body settles slowly, so a
+	# tall drop leaves it hovering above the deck in any still shorter than a
+	# few seconds. A tiny 0.02 m gap settles in a frame or two.
+	var _rest_y: float = deck_height + 0.013 + _size * 0.5 + 0.02 if show_cabinet else 0.5
+	_soft_body.position = Vector3(0, _rest_y, 0)
 	add_child(_soft_body)
 
 	_build_rounded_cube_mesh()

@@ -560,7 +560,7 @@
 			"artifact": "gradient_descent_visualization",
 			"body": "plotting table",
 			"dialect": "horizontal",
-			"element_count": 181,
+			"element_count": 186,
 			"findings": [
 				{
 					"detail": "lowest element y = -0.920 (pedestal below origin)",
@@ -573,12 +573,12 @@
 					"rule": "G1-no-orphan-text"
 				},
 				{
-					"detail": "deck 0.000, tallest 0.083 = TableConsole/InfoScreen/@Node3D@2601/@MeshInstance3D@2589 (-0.017 vs the 0.10 allowance)",
+					"detail": "deck 0.000, tallest 0.083 = TableConsole/InfoScreen/@Node3D@2606/@MeshInstance3D@2594 (-0.017 vs the 0.10 allowance)",
 					"ok": true,
 					"rule": "G3-silhouette"
 				},
 				{
-					"detail": "120 canon materials, no near-miss drift",
+					"detail": "125 canon materials, no near-miss drift",
 					"ok": true,
 					"rule": "G4-palette"
 				},
