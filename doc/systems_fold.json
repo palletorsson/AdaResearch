@@ -561,7 +561,7 @@
     {
      "id": "web-fractal-thread",
      "title": "The thread (zoom axis)",
-     "detail": "GET /api/fractal/thread?at=<addr> + /fractal-thread: ONE search path connecting the layers — project -> sequence -> map -> placement/relations on the surface -> artifact configure+look -> the elements inside it (wrapper station dicts, geometry_spec.construction, measured body, dressing-room contract). Any address enters mid-ladder and the whole chain hangs from it; every name recenters. The vertical complement to the six horizontal lenses.",
+     "detail": "GET /api/fractal/thread?at=<addr> + /fractal-thread: ONE search path connecting the layers - project -> sequence -> map -> placement/relations -> artifact configure+look -> the MEASURED elements inside it (probe_artifact_elements.gd sweeps real instantiated scenes: element names, mesh classes, positions in artifact-root space, AABBs -> commons/data/artifact_elements.json). Every rung also has a STEP-OUT: /api/fractal/thread/open?level=X&q= searches the horizontal plane at that altitude only (elements/artifact/placement-co-occurrence/map/sequence), each a bounded index that reports its space_size - inference placed at the right task. The vertical complement to the six horizontal lenses.",
      "paths": [
       "ada_encyclopedia /api/fractal/thread",
       "ada_encyclopedia /fractal-thread"
