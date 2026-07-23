@@ -167,9 +167,9 @@
    "id": "G3-silhouette",
    "name": "Horizontal stays horizontal",
    "applies": "horizontal",
-   "check": "no console element rises more than 0.10 m above the deck surface",
+   "check": "no HOUSING element (rail, readout, keypad, sign, apron) rises more than 0.10 m above the deck surface. The PHENOMENON is exempt — a bar chart, a loss bowl, a soft specimen may rise as tall as it needs — but it must be BASED in the basin (its low point / footing seated in the well), never hovering over open deck.",
    "tolerance_m": 0.1,
-   "why": "The moment it does, it has become a vertical machine wearing a table."
+   "why": "The moment the HOUSING rises, it has become a vertical machine wearing a table. The phenomenon is what you came to see, so it may stand up — as long as it grows FROM the well and does not float above it."
   },
   {
    "id": "G4-palette",

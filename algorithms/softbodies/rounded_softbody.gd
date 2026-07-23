@@ -1286,7 +1286,7 @@ func _create_bench() -> void:
 			var lz: float = ring_cz + (-1.0 if zi == 0 else 1.0) * (ring_d * 0.5 - 0.115)
 			_bench.add_child(HangarKit.box(
 				Vector3(lx, deck_height - 0.190 - leg_h * 0.5, lz),
-				Vector3(0.085, leg_h, 0.085), steel))
+				Vector3(0.085, leg_h, 0.085), dark))   # near-black legs — the horizontal-family standard
 			_bench.add_child(HangarKit.box(
 				Vector3(lx, deck_height - bench_drop + 0.011, lz),
 				Vector3(0.115, 0.022, 0.115), dark))

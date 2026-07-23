@@ -156,7 +156,11 @@ func _create_table() -> void:
 	body_mesh.material_override = table_mat
 	surface.add_child(body_mesh)
 
-	# Legs
+	# Legs — near-black, the horizontal-family standard (not the body colour)
+	var leg_mat := StandardMaterial3D.new()
+	leg_mat.albedo_color = Color(0.09, 0.09, 0.105)
+	leg_mat.metallic = 0.3
+	leg_mat.roughness = 0.6
 	for x_sign in [-1, 1]:
 		for z_sign in [-1, 1]:
 			var leg := MeshInstance3D.new()
@@ -165,7 +169,7 @@ func _create_table() -> void:
 			leg_mesh.bottom_radius = 0.025
 			leg_mesh.height = table_height
 			leg.mesh = leg_mesh
-			leg.material_override = table_mat
+			leg.material_override = leg_mat
 			leg.position = Vector3(
 				x_sign * (table_width / 2.0 - 0.05),
 				-table_height / 2.0,
