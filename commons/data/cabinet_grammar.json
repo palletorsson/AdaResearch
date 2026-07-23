@@ -120,7 +120,7 @@
    "parts": {
     "ground": "broad working RAIL ring around the play field (the back slab, laid flat)",
     "flank": "maroon EDGE INLAY — a routed LINE (~0.009 m) just under the rail's top edge, running the whole perimeter. Not a band: the vertical flank is a mass, and a mass laid flat becomes a stripe of paint. On furniture the colour is stated by a line, never by claiming the surface.",
-    "field": "the deck itself — felt, board, surface — framed by the rail",
+    "field": "a milled WELL the phenomenon SITS IN — a dark basin floor set below the deck plane with low inner walls, framed by the rail. NOT merely framed by the rail: a phenomenon that is only ringed hangs over open air on the legs (gradient_descent, rounded_softbody both did this). The basin floor is the horizontal translation of the vertical dialect's dark window backdrop — the surface the phenomenon reads AGAINST. And whatever the phenomenon is must START seated in the well, not spawn above it and fall (a slow-settling body reads as floating in any still).",
     "readout": "screen SUNK into the far rail, ~14 degrees off the deck plane, tilted toward the reader",
     "controls": "keypad recessed FLUSH in a milled pocket, face-up, pressed downward (frameless: the pocket IS the faceplate)",
     "signage": "name INLAID FLAT in the near rail, read by looking down as you approach",
@@ -138,6 +138,7 @@
  "translation_table": {
   "_comment": "Parts translate between dialects; they do not transfer. Reusing a vertical part on a horizontal artifact produces two objects pretending to be one.",
   "back slab": "broad working rail ring",
+  "window backdrop (dark, behind the phenomenon)": "milled BASIN FLOOR the phenomenon sits in (dark plate below the deck + low inner walls) — ring alone is not enough",
   "inset window / screen": "readout sunk in the far rail, 14 deg off the deck",
   "sign band overhead": "name inlaid flat, read looking down",
   "keypad on a wedge": "keypad recessed flush, face-up",

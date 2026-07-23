@@ -88,6 +88,7 @@ var _damping := 0.01
 var _mass := 1.0
 
 # ── Simulation state ────────────────────────────────────────────────
+var _sb_rid: RID = RID()
 var _soft_body: SoftBody3D
 var _rest_positions: PackedVector3Array   # vertex positions at rest
 var _prev_positions: PackedVector3Array   # previous frame for velocity
@@ -171,6 +172,15 @@ func _find_vr_controller() -> void:
 
 # ── Soft body creation ───────────────────────────────────────────────
 
+
+## Godot 4 has no SoftBody3D.get_point_count(); the physics point count equals
+## the (indexed) mesh vertex count. Positions come from
+## PhysicsServer3D.soft_body_get_point_global_position(rid, i).
+func _sb_point_count() -> int:
+	if _soft_body != null and _soft_body.mesh is ArrayMesh:
+		return (_soft_body.mesh as ArrayMesh).surface_get_array_len(Mesh.ARRAY_VERTEX)
+	return 0
+
 func _create_soft_body() -> void:
 	_soft_body = SoftBody3D.new()
 	_soft_body.ray_pickable = false
@@ -188,6 +198,7 @@ func _create_soft_body() -> void:
 	var _rest_y: float = deck_height + 0.013 + _size * 0.5 + 0.02 if show_cabinet else 0.5
 	_soft_body.position = Vector3(0, _rest_y, 0)
 	add_child(_soft_body)
+	_sb_rid = _soft_body.get_physics_rid()
 
 	_build_rounded_cube_mesh()
 	_capture_rest_state()
@@ -250,15 +261,15 @@ func _build_rounded_cube_mesh() -> void:
 			add_quad.call(i, j, func(u, v): return Vector3i(gs - 1, v, gs - 1 - u)) # +X
 			add_quad.call(i, j, func(u, v): return Vector3i(0, v, u))                # -X
 
+	st.index()   # dedup verts -> physics point count == vertex count
 	st.generate_normals()
 	var new_mesh := st.commit()
+	# Assigning .mesh rebuilds the SoftBody3D's own physics representation, so
+	# the rendered mesh and the simulated points stay unified. A redundant
+	# PhysicsServer3D.soft_body_set_mesh(rid, ...) here SPLIT them — the node
+	# rendered the mesh at its transform while the server simulated a second
+	# body that fell, so the strain/ghost overlays drew a cloud below the bench.
 	_soft_body.mesh = new_mesh
-
-	# Apply to physics
-	if _soft_body.is_inside_tree():
-		var rid := _soft_body.get_physics_rid()
-		if rid.is_valid():
-			PhysicsServer3D.soft_body_set_mesh(rid, new_mesh)
 
 	# Unshaded vertex-color material for strain visualization
 	var mat := StandardMaterial3D.new()
@@ -279,13 +290,13 @@ func _capture_rest_state() -> void:
 	if seat_specimen and show_cabinet:
 		_seat_specimen_on_deck()
 
-	_vertex_count = _soft_body.get_point_count()
+	_vertex_count = _sb_point_count()
 	_rest_positions.resize(_vertex_count)
 	_prev_positions.resize(_vertex_count)
 	_vertex_strain.resize(_vertex_count)
 
 	for i in range(_vertex_count):
-		var p: Vector3 = _soft_body.get_point_global_position(i)
+		var p: Vector3 = PhysicsServer3D.soft_body_get_point_global_position(_sb_rid, i)
 		_rest_positions[i] = p - _soft_body.global_position
 		_prev_positions[i] = p
 		_vertex_strain[i] = 0.0
@@ -551,7 +562,7 @@ func _process(delta: float) -> void:
 	var rid := _soft_body.get_physics_rid()
 	if rid.is_valid():
 		for i in range(_vertex_count):
-			_prev_positions[i] = _soft_body.get_point_global_position(i)
+			_prev_positions[i] = PhysicsServer3D.soft_body_get_point_global_position(_sb_rid, i)
 
 
 # ── VR hand interaction ──────────────────────────────────────────────
@@ -584,7 +595,7 @@ func _apply_squeeze() -> void:
 		return
 
 	for i in range(_vertex_count):
-		var vpos: Vector3 = _soft_body.get_point_global_position(i)
+		var vpos: Vector3 = PhysicsServer3D.soft_body_get_point_global_position(_sb_rid, i)
 		var to_hand: Vector3 = _hand_pos - vpos
 		var dist: float = to_hand.length()
 		if dist < _squeeze_radius and dist > 0.001:
@@ -606,7 +617,7 @@ func _compute_strain() -> void:
 	var sb_origin := _soft_body.global_position
 
 	for i in range(_vertex_count):
-		var current: Vector3 = _soft_body.get_point_global_position(i)
+		var current: Vector3 = PhysicsServer3D.soft_body_get_point_global_position(_sb_rid, i)
 		var rest: Vector3 = _rest_positions[i] + sb_origin
 		var displacement: float = (current - rest).length()
 
@@ -641,7 +652,7 @@ func _detect_collisions(delta: float) -> void:
 
 	# Detect large velocity changes as collision proxies
 	for vi in range(_vertex_count):
-		var current: Vector3 = _soft_body.get_point_global_position(vi)
+		var current: Vector3 = PhysicsServer3D.soft_body_get_point_global_position(_sb_rid, vi)
 		var prev: Variant = _prev_positions[vi]
 		var vel: Vector3 = (current - prev) / maxf(delta, 0.001)
 		var speed: float = vel.length()
@@ -667,7 +678,7 @@ func _compute_volume() -> float:
 	var mx := Vector3(-INF, -INF, -INF)
 
 	for i in range(_vertex_count):
-		var p: Vector3 = _soft_body.get_point_global_position(i)
+		var p: Vector3 = PhysicsServer3D.soft_body_get_point_global_position(_sb_rid, i)
 		mn = mn.min(p)
 		mx = mx.max(p)
 
@@ -730,7 +741,7 @@ func _draw_strain_overlay() -> void:
 
 	# Draw small diamond at each vertex colored by strain
 	for i in range(_vertex_count):
-		var p: Vector3 = _soft_body.get_point_global_position(i)
+		var p: Vector3 = PhysicsServer3D.soft_body_get_point_global_position(_sb_rid, i)
 		var t: float = clampf(_vertex_strain[i] / maxf(_max_strain, 0.001), 0.0, 1.0)
 		var col: Color = _strain_color(t)
 		var sz := 0.008 + t * 0.012
@@ -837,7 +848,7 @@ func _draw_volume_wireframe() -> void:
 	var mn := Vector3(INF, INF, INF)
 	var mx := Vector3(-INF, -INF, -INF)
 	for i in range(_vertex_count):
-		var p: Vector3 = _soft_body.get_point_global_position(i)
+		var p: Vector3 = PhysicsServer3D.soft_body_get_point_global_position(_sb_rid, i)
 		mn = mn.min(p)
 		mx = mx.max(p)
 
@@ -1295,18 +1306,18 @@ func _seat_specimen_on_deck() -> void:
 	var rid: RID = _soft_body.get_physics_rid()
 	if not rid.is_valid():
 		return
-	var n: int = _soft_body.get_point_count()
+	var n: int = _sb_point_count()
 	if n == 0:
 		return
 	var lowest: float = INF
 	for i in range(n):
-		lowest = minf(lowest, _soft_body.get_point_global_position(i).y)
+		lowest = minf(lowest, PhysicsServer3D.soft_body_get_point_global_position(_sb_rid, i).y)
 	var platen_top: float = to_global(Vector3(0.0, deck_height + 0.013, 0.0)).y
 	var lift: float = platen_top - lowest
 	if lift <= 0.02 or lift > 5.0:
 		return
 	for i in range(n):
-		var p: Vector3 = _soft_body.get_point_global_position(i)
+		var p: Vector3 = PhysicsServer3D.soft_body_get_point_global_position(_sb_rid, i)
 		PhysicsServer3D.soft_body_move_point(rid, i, p + Vector3(0.0, lift, 0.0))
 
 
