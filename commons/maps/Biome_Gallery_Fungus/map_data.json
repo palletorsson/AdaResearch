@@ -2,7 +2,7 @@
   "map_info": {
     "name": "Biome_Gallery_Fungus",
     "title": "Biome_Gallery_Fungus",
-    "description": "Biome gallery: the fungus kingdom — the voxel CA network beside the mycelium filament web (dense and sparse), a halo edge, a mute cell. Not spine.",
+    "description": "Biome gallery: the fungus kingdom — the voxel CA network beside the mycelium filament web (dense and sparse) and the SDF mushroom (cap and stem as one continuous surface) at tiers 1/3/5, a halo edge, a mute cell. Not spine.",
     "dimensions": {
       "width": 12,
       "depth": 9
@@ -48,7 +48,7 @@
       ["","","","","","","","","","","",""],
       ["","","fungus:ca:seed:t=5","","","fungus:mycelium:seed:t=5:d=1.0","","","fungus:mycelium:seed:t=5:d=0.3","","",""],
       ["","","","","","","","","","","",""],
-      ["","","","","","","","","","","",""],
+      ["","","fungus:sdf:seed:t=1","","","fungus:sdf:seed:t=3","","","fungus:sdf:seed:t=5","","",""],
       ["","","","::mute","","","","","","","",""],
       ["","","","","","","","","","","",""],
       ["","","","","","","","","","","",""]
