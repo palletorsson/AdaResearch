@@ -143,8 +143,52 @@ CABINETS = [
     },
 ]
 
+# The 2026-07-21 hero wave — 7 more artifacts joined the family (a design->build
+# multi-agent pipeline). These have single front shots from the bench
+# (cabinet_family/<art>.png), not the 3-angle multi_shots the first nine have.
+CABINETS += [
+    {"artifact": "simulated_annealing", "body": "relief survey table (HORIZONTAL)", "no": 10,
+     "sign": "SIMULATED ANNEALING / THERMAL ESCAPE FROM LOCAL MINIMA",
+     "note": "A map table whose energy relief is milled INTO the deck — peaks flush with "
+             "the top, valleys sunk below. The ember rim glows with temperature: bright "
+             "when hot, dim as the machine cools. Read the plane right and the housing "
+             "follows."},
+    {"artifact": "random_walk_leash", "body": "gantry post", "no": 11,
+     "sign": "RANDOM WALK / TETHERED DRIFT",
+     "note": "The pedestal re-clad as a post, a service column beside it, and a gantry arm "
+             "reaching over to the tether eye — the one point where the leash constraint, "
+             "the drawn string and the housing agree. One machine, not a post next to a kiosk."},
+    {"artifact": "matrix_4x4_viewer", "body": "correspondence console", "no": 12,
+     "sign": "MATRIX 4x4 / NUMBERS AND THE SHAPE THEY MOVE",
+     "note": "The artifact is a correspondence, so the body is two equal bays across a "
+             "mullion: the identity matrix glowing green-on-dark on the left, the wireframe "
+             "it transforms framed on the right, one cap over both. A new body the agent "
+             "named itself."},
+    {"artifact": "rounded_softbody", "body": "compression bench (HORIZONTAL)", "no": 13,
+     "sign": "SOFT BODY / STRAIN MADE VISIBLE",
+     "note": "A soft rounded specimen seated on the platen of a press bench, the volume "
+             "chart routed flat into the deck. Two stacked bugs fixed here: the dead "
+             "Godot-4 point API and a mesh/simulation split that made it look inert."},
+    {"artifact": "bias_visualizer", "body": "taxonomy vitrine", "no": 14,
+     "sign": "BIAS / THE SHAPE OF A SKEWED SAMPLE",
+     "note": "A specimen vitrine — the sampled distribution under glass over a dark backdrop, "
+             "an anthracite readout with an ember header, the name in the cap band. The "
+             "phenomenon speaks in its own colour; the housing stays off-white and calm."},
+    {"artifact": "gradient_descent_visualization", "body": "plotting table (HORIZONTAL)", "no": 15,
+     "sign": "GRADIENT DESCENT / DOWNHILL IS THE ONLY LOCAL TRUTH",
+     "note": "A wall-scale plotting table: the loss bowl sits in a milled basin with the "
+             "descent trace pooling at its minimum, the parameter gauges standing on the "
+             "sill, the keypad pulled in from the air it used to float in."},
+    {"artifact": "ContextFreeGrammars", "body": "chart case", "no": 16,
+     "sign": "CONTEXT-FREE GRAMMARS / RULES THAT BRANCH",
+     "note": "The L-system's derivation graph under glass, an inset readout, wedge keypad, "
+             "cap sign band, plinth — the vertical grammar applied cleanly to a fourth new "
+             "artifact with nothing left floating."},
+]
+
 ANATOMY = ["back slab", "maroon flank", "window + glass", "service screen",
            "wedge-mounted keypad", "vent slats", "sign-band cap", "plinth / skirt"]
+CABINET_FAMILY = SHOTS.parent / "cabinet_family"   # single-front bench shots
 
 
 def main() -> int:
@@ -156,8 +200,15 @@ def main() -> int:
         art = cab["artifact"]
         for view, view_label in VIEWS:
             src = SHOTS / art / f"{view}.png"
+            # fall back to the single bench front shot (the hero-wave members
+            # only have that, not the 3-angle multi_shots)
+            if not src.exists() and view == "front":
+                fb = CABINET_FAMILY / f"{art}.png"
+                if fb.exists():
+                    src = fb
             if not src.exists():
-                missing.append(f"{art}/{view}.png")
+                if view == "front":
+                    missing.append(f"{art}/{view}.png")
                 continue
             idx += 1
             dst_name = f"{art}__{view}.png"
@@ -182,13 +233,13 @@ def main() -> int:
 
     manifest = {
         "version": 1,
-        "description": "The cabinet family: artifacts that used to scatter their "
+        "description": "The cabinet family: 16 artifacts that used to scatter their "
                        "readouts, titles and keypads into the air, rebuilt as single "
-                       "appliances in one shared grammar. Five body types so far — "
-                       "squat vending machine, tall kiosk, wide console, pedestal "
-                       "station, croupier table. All five compose HangarKit, and three now stand "
-                       "on HangarKit.plinth pedestals that raise their controls into the VR reach "
-                       "band. Rebuild: python tools/build_cabinet_gallery.py",
+                       "appliances in one shared grammar. Thirteen body types across TWO "
+                       "dialects — vertical (you face it) and horizontal (you look down at "
+                       "it). All compose HangarKit; the first nine have three views each, "
+                       "the seven hero-wave members a single front. Rebuild: python "
+                       "tools/build_cabinet_gallery.py",
         "entries": entries,
     }
     (PUB / "manifest.json").write_text(
