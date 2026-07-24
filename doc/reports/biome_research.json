@@ -140,6 +140,61 @@
    "score": 3,
    "note": "Scattered white points of light - exactly 'small lights past the edge', but the most minimal halo (just dots); right for the not-alive kingdom, thin as a card visual.",
    "date": "2026-07-24"
+  },
+  "fungus_ca_tuned": {
+   "score": 4,
+   "note": "Teal voxel cubes - reads as the computed CA network frozen at a set rule/gen. Small but clearly a voxel structure, visibly computed.",
+   "date": "2026-07-24"
+  },
+  "meta_glyph": {
+   "score": 4,
+   "note": "Cyan ring-and-cross rune hovering over its presence glow - reads clearly as the not-alive glyph, a rune of light.",
+   "date": "2026-07-24"
+  },
+  "flower_bluebell": {
+   "score": 4,
+   "note": "Small blue bell bloom - reads as the tier-1 species. Tiny (right for t=1); the species colour/form differentiates cleanly.",
+   "date": "2026-07-24"
+  },
+  "flower_orchid": {
+   "score": 4,
+   "note": "Pink blooms up a thin stem - reads as the tier-3 orchid species, distinct from bluebell/daisy. Small but legible.",
+   "date": "2026-07-24"
+  },
+  "flower_daisy": {
+   "score": 4,
+   "note": "Yellow-centred bloom with petals and leaves - reads as the tier-5 daisy. The three-species ladder differentiates well by colour.",
+   "date": "2026-07-24"
+  },
+  "fungus_sdf": {
+   "score": 3,
+   "note": "Clean small SDF mushroom, cap flows into stem with no seam - but renders notably SMALLER than fungus:dna at comparable tier. Normalize the sdf tier->size.",
+   "date": "2026-07-24"
+  },
+  "mineral_crystal": {
+   "score": 3,
+   "note": "Correct faceted shard but renders as a single small chip - the promised 'cluster of prism shards' does not read at this size. Grow/size up the cluster.",
+   "date": "2026-07-24"
+  },
+  "flora_tree": {
+   "score": 3,
+   "note": "DNA lsystem tree - branch structure reads but sparse and canopy-less (twiggy); much less tree-like than flora:sdf with its solid canopy. Leaf mass would lift it.",
+   "date": "2026-07-24"
+  },
+  "tree_a": {
+   "score": 3,
+   "note": "lsystem individual A - twiggy sparse branching, cell-seeded. Reads as a sapling, no foliage.",
+   "date": "2026-07-24"
+  },
+  "tree_b": {
+   "score": 3,
+   "note": "lsystem individual B - slightly more spread, still canopy-less. Family reads consistent but thin.",
+   "date": "2026-07-24"
+  },
+  "tree_c": {
+   "score": 3,
+   "note": "lsystem individual C - the most developed of the trio (clear trunk, feathery tips) but still no leaf mass. Best-reading tree, still a 3.",
+   "date": "2026-07-24"
   }
  }
 }
