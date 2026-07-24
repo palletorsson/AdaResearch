@@ -376,6 +376,13 @@ static func _build_cap(dna: CritterDNA, root: Node3D, mapper: CritterTraitMapper
 		mat.set_shader_parameter("transparency", dna.transparency * 0.5)
 	if dna.iridescence > 0.3:
 		mat.set_shader_parameter("emission_energy", dna.iridescence * 0.4)
+	# The cap defaulted to the MEMBRANE surface (surface_type 3), whose thin-film
+	# iridescence — a fresnel (pow(1-NdotV,4)) times a UV-derived rainbow — banded
+	# into cyan RADIAL striping at the cap edge, the family's cap-edge tell.
+	# PETAL (surface_type 2) gives the same soft, edge-translucent organic cap via
+	# subsurface scatter, smooth and matte, with no rainbow. Bioluminescent caps
+	# keep their glow through emission_energy above.
+	mat.set_shader_parameter("surface_type", 2.0)
 
 	cap_inst.material_override = mat
 	root.add_child(cap_inst)
@@ -435,11 +442,14 @@ static func _build_gills(dna: CritterDNA, root: Node3D, mapper: CritterTraitMapp
 	mmi.multimesh = mm
 	mmi.position = Vector3(0.0, stem_height, 0.0)
 
-	# Gill material: tertiary color, slightly translucent
+	# Gill material: tertiary color, slightly translucent. Force PETAL surface
+	# (not the GENERIC membrane) so the radial fins under the cap stop thin-film
+	# rainbow-banding — the same cap-edge tell, here on the gills in shadow.
 	var mat: ShaderMaterial = mapper.create_material_from_dna(dna, seed_val)
 	mat.set_shader_parameter("primary_color", dna.tertiary_color)
 	mat.set_shader_parameter("secondary_color", dna.tertiary_color.darkened(0.15))
-	mat.set_shader_parameter("roughness", 0.3)
+	mat.set_shader_parameter("surface_type", 2.0)
+	mat.set_shader_parameter("roughness", 0.5)
 	if dna.leaf_density > 0.6:
 		mat.set_shader_parameter("emission_energy", dna.leaf_density * 0.1)
 	mmi.material_override = mat

@@ -67,8 +67,8 @@
    "date": "2026-07-24"
   },
   "fd_shelf_bracket": {
-   "score": 3,
-   "note": "Stacked ledges legible; the cyan striping sits at the CAP-LAYER edges (between the stacked plates) - thin geometry catching the dark background in shadow, NOT the gills. Tried gill iridescence-off + gill de-coplanar; neither removed it (reverted). Next: cap-edge/shader diagnosis.",
+   "score": 4,
+   "note": "STRIPING FIXED: the cap-edge cyan rainbow was the shader MEMBRANE surface (thin-film iridescence: fresnel x a UV rainbow), NOT the iridescence uniform - which is why zeroing that did nothing. Cap + gills switched to PETAL surface -> clean matte stacked shelves, no rainbow.",
    "date": "2026-07-24"
   },
   "sf_wind_lean": {
@@ -92,8 +92,8 @@
    "date": "2026-07-24"
   },
   "sf_wilt_collapse": {
-   "score": 3,
-   "note": "Wrinkled collapsing cap reads; the blue under-cap streaks are thin blades in shadow picking up the scene background, not gill iridescence. Tried gill iridescence-off + de-coplanar thickness; no change on recapture (reverted). Open: cap/gill-in-shadow shading.",
+   "score": 4,
+   "note": "STRIPING FIXED: same membrane->petal surface fix on cap + gills. The under-cap gill fan is matte now, no cyan banding. Reads as a clean wilted cap.",
    "date": "2026-07-24"
   },
   "grub_a": {
