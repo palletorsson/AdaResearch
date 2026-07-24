@@ -1,0 +1,34 @@
+{
+ "name": "Trial_gate2_27",
+ "date": "2026-07-24",
+ "spec": {
+  "cast": [
+   "line",
+   "laser_measure",
+   "helicoid",
+   "crystal_cluster",
+   "csg_difference_demo",
+   "geodesic_dome",
+   "branching_growth_algorithm"
+  ],
+  "hero": "laser_measure",
+  "anti": "mold_network",
+  "walls": {
+   "dressing": {}
+  },
+  "yard": {
+   "enabled": true
+  },
+  "trim_approach": false,
+  "order": {
+   "strategy": "narrative"
+  },
+  "typology": "courtyard",
+  "grower": "sdf_disc",
+  "elevation": "procession"
+ },
+ "score_soft": 0.75,
+ "metrics": null,
+ "pathfinder": null,
+ "note": "seeded from research round 2 winner \u2014 the courtyard organism"
+}

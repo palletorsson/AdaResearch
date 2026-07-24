@@ -1,0 +1,34 @@
+{
+ "name": "Trial_gate3_41",
+ "date": "2026-07-24",
+ "spec": {
+  "cast": [
+   "line",
+   "laser_measure",
+   "helicoid",
+   "crystal_cluster",
+   "csg_difference_demo",
+   "geodesic_dome",
+   "branching_growth_algorithm"
+  ],
+  "hero": "laser_measure",
+  "anti": "mold_network",
+  "walls": {
+   "dressing": {}
+  },
+  "yard": {
+   "enabled": true
+  },
+  "trim_approach": false,
+  "order": {
+   "strategy": "rhythm"
+  },
+  "typology": "hall_wings",
+  "grower": "rect",
+  "elevation": "procession"
+ },
+ "score_soft": 0.652,
+ "metrics": null,
+ "pathfinder": null,
+ "note": "seeded from research round 3 winner \u2014 fair wings, yard-as-slot"
+}

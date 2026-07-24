@@ -1,0 +1,47 @@
+{
+ "name": "Wizard_Gate",
+ "date": "2026-07-24",
+ "spec": {
+  "cast": [
+   "line",
+   "laser_measure",
+   "helicoid",
+   "crystal_cluster",
+   "csg_difference_demo",
+   "geodesic_dome",
+   "branching_growth_algorithm"
+  ],
+  "hero": "laser_measure",
+  "anti": "mold_network",
+  "order": {
+   "strategy": "narrative"
+  },
+  "typology": "courtyard",
+  "grower": "rect",
+  "walls": {
+   "dressing": {
+    "line": "pw_point_lines"
+   }
+  },
+  "yard": {
+   "enabled": true
+  },
+  "elevation": "procession",
+  "trim_approach": false
+ },
+ "score_soft": 0.547,
+ "metrics": {
+  "room_band": 0.6,
+  "enclosure": 0.13,
+  "hall": 0.53,
+  "arrival": 0.7,
+  "elevation": 1.0,
+  "compact": 0.64,
+  "tissue": 0.81
+ },
+ "pathfinder": {
+  "ok": true,
+  "reach": 0.78,
+  "tail": "OK    Wizard_Gate  (266/339 reachable, 9 artifacts, 1 teleport(s))\n  Rule 4 [WARN] Artifact 'mold_network' at (8,6) h=1 unreachable\n\n=== 1 maps checked: 1 OK, 0 FAIL (0 issues) ==="
+ }
+}

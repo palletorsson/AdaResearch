@@ -71,9 +71,14 @@
    "note": "r3: width-2 passages with width-3 pulse; longest-naked-run penalised (tissue metric)"
   }
  ],
+ "interfaces": {
+  "wizard": "/map-wizard (encyclopedia) — the order of operations as a walkable wizard; every step shows its own abstraction (order=1D strip, typology=three frames, elevation=SECTION, paths=plan); engine tools/wizard_compose.py reads THIS file",
+  "recipes": "commons/data/wizard_recipes/*.json — saved runs (spec+score+pathfinder); the wizard as memory; seeded from research rounds 2+3 winners",
+  "dressing": "stage 4b: hangar wall system enters composition as cluster:<name>:<rot> on the room's back wall, facing the artifact (45 curated clusters)"
+ },
  "laws": [
   "FIT: a piece whose envelope exceeds the room belongs to another room (exclude, record why)",
-  "REACH: high-aspect envelopes are reach, not body — space by body, aim reach along the walk",
+  "REACH: high-aspect envelopes are reach, not body — space by body, aim reach along the walk (ENFORCED since wizard_compose: aspect>4 rooms sized by body; rounds 1-3 paid the cost instead)",
   "MOAT-AS-HYPOTHESIS: runtime growth is stochastic; containment is re-tested every run",
   "spawn token is exactly 's'; teleporter stands on void; climbing requires wp; a door must open onto floor",
   "static measurement is not runtime envelope (growth-class artifacts need settle-time probing)"

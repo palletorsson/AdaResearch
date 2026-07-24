@@ -599,6 +599,17 @@
      "paths": [
       "ada_encyclopedia /api/find"
      ]
+    },
+    {
+     "id": "web-map-wizard",
+     "title": "Map wizard — the order of operations, drivable",
+     "detail": "/map-wizard walks the composition canon step by step, each stage in its own abstraction: order = 1D strip, typology = three frames, rooms = growing plan, walls = segments + hangar cluster dressing, elevation = SECTION along the walk, paths = tissue. Engine tools/wizard_compose.py (canon-reading, stage-emitting, REACH law enforced). Saved runs become recipes in commons/data/wizard_recipes/ — the wizard as memory.",
+     "paths": [
+      "ada_encyclopedia/src/app/map-wizard/page.tsx",
+      "ada_encyclopedia/src/app/api/map-wizard/route.ts",
+      "tools/wizard_compose.py",
+      "commons/data/wizard_recipes/"
+     ]
     }
    ]
   }
@@ -740,6 +751,24 @@
     "to": "web-fractal-thread",
     "title": "The grammar judges what the thread composes",
     "detail": "Composition research (gate_research*.py) reads stages, weights and bands from the grammar canon; its winners and falsified metrics are written back as rounds history. The generative unfold's choice space is governed here."
+   },
+   {
+    "id": "e-compgrammar-wizard",
+    "kind": "wired",
+    "shape": "feeds",
+    "from": "maps-composition-grammar",
+    "to": "web-map-wizard",
+    "title": "The canon drives the wizard",
+    "detail": "wizard_compose.py reads stages, weights and bands from composition_grammar.json; editing the canon changes every step's options and scoring. The wizard is the grammar's face."
+   },
+   {
+    "id": "e-hangar-wizard",
+    "kind": "wired",
+    "shape": "feeds",
+    "from": "web-map-wizard",
+    "to": "maps-spine",
+    "title": "Wizard saves become maps + recipes",
+    "detail": "Save writes commons/maps/<Name>/map_data.json (pathfinder-gated) with hangar cluster dressing tokens (cluster:<name>:<rot>), plus a recipe JSON capturing the full spec — replayable memory of the composition."
    }
   ]
  }
