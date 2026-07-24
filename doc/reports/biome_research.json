@@ -177,23 +177,23 @@
    "date": "2026-07-24"
   },
   "flora_tree": {
-   "score": 3,
-   "note": "DNA lsystem tree - branch structure reads but sparse and canopy-less (twiggy); much less tree-like than flora:sdf with its solid canopy. Leaf mass would lift it.",
+   "score": 4,
+   "note": "CANOPY FIX: bare twig -> fresh-green foliage mass on a short trunk. Sphere-blob leaves for lod<=2 (flat quads vanished at biome scale), leaves sized to the tree not the tip radius, leaf primary_color set to a living green. Reads as a leafy tree.",
    "date": "2026-07-24"
   },
   "tree_a": {
-   "score": 3,
-   "note": "lsystem individual A - twiggy sparse branching, cell-seeded. Reads as a sapling, no foliage.",
+   "score": 4,
+   "note": "Canopy fix - cell-seeded individual reads as a small leafy tree (blob canopy, visible trunk).",
    "date": "2026-07-24"
   },
   "tree_b": {
-   "score": 3,
-   "note": "lsystem individual B - slightly more spread, still canopy-less. Family reads consistent but thin.",
+   "score": 4,
+   "note": "Canopy fix - consistent leafy read across individuals.",
    "date": "2026-07-24"
   },
   "tree_c": {
-   "score": 3,
-   "note": "lsystem individual C - the most developed of the trio (clear trunk, feathery tips) but still no leaf mass. Best-reading tree, still a 3.",
+   "score": 4,
+   "note": "Canopy fix - best-developed of the trio, full blob canopy.",
    "date": "2026-07-24"
   }
  }

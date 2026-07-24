@@ -486,12 +486,15 @@ static func _collect_leaf_placements(dna: CritterDNA, seed_val: int,
 		pos: Vector3, _dir: Vector3, branch_radius: float, lod: int,
 		placements: Array[Dictionary]) -> void:
 
-	# Leaf size relative to branch radius and DNA scale
-	var leaf_size: float = branch_radius * 3.0 + 0.02 * dna.scale
-	var leaf_count: int = clampi(roundi(dna.leaf_density * 4.0), 1, 6)
+	# Leaf size: a canopy needs leaves sized to the TREE, not just the hair-thin
+	# tip radius. The old 0.02*scale absolute term made every tip leaf vanish,
+	# leaving a bare twig — the "canopy-less" tell. A larger scale-tied term gives
+	# clusters that read as foliage at any tree size.
+	var leaf_size: float = branch_radius * 3.0 + 0.09 * dna.scale
+	var leaf_count: int = clampi(roundi(dna.leaf_density * 6.0), 2, 10)
 
-	if lod <= 1:
-		leaf_count = 1  # Fewer leaves at low LOD
+	if lod == 0:
+		leaf_count = maxi(leaf_count / 2, 1)  # thin only the smallest/most-distant LOD
 
 	var rng := RandomNumberGenerator.new()
 	rng.seed = seed_val
@@ -588,15 +591,17 @@ static func _build_leaf_multimesh(dna: CritterDNA, root: Node3D, mapper: Critter
 
 
 ## Create a canonical leaf mesh (unit-size, to be scaled per instance).
-## High LOD: flat quad with curvature. Low LOD: simple sphere billboard.
+## Sphere-blob leaves up to lod 2 — a mushroom-tree canopy that reads as MASS at
+## biome scale, where flat quads vanish edge-on (the "canopy-less" tell). Only
+## the highest LOD (close-up trees) gets the detailed curved quad.
 static func _create_leaf_mesh(dna: CritterDNA, lod: int) -> Mesh:
-	if lod < 2:
-		# Low LOD: simple sphere billboard
+	if lod <= 2:
+		# Blob canopy: rounded sphere billboard, reads as foliage mass at distance
 		var sphere := SphereMesh.new()
-		sphere.radius = 0.5
-		sphere.height = 1.0
-		sphere.radial_segments = 4
-		sphere.rings = 2
+		sphere.radius = 0.6
+		sphere.height = 1.1
+		sphere.radial_segments = 6
+		sphere.rings = 4
 		return sphere
 
 	# High LOD: flat quad leaf with curvature (unit-size)

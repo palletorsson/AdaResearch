@@ -499,6 +499,9 @@ func _spawn_tree(deposit: Dictionary, ctx: Dictionary,
 	dna.branch_angle = ang_base + float(seed % int(max(ang_jit, 1.0)))
 	dna.leaf_density = leaf_base + leaf_per * float(intensity)
 	dna.secondary_color = Color(0.14, 0.45 + 0.1 * float(intensity) / 5.0, 0.12)
+	# Leaves read from primary_color — a fresher, lighter green than the dark
+	# branch bark so the blob canopy looks like living foliage, not a dark clump.
+	dna.primary_color = Color(0.26, 0.58 + 0.10 * float(intensity) / 5.0, 0.22)
 
 	var lod: int = clampi(intensity - 2, 0, 3)  # 0,0,1,2,3 for i=1..5
 	# flora:sdf → the continuous SDF tree (branches weld into the trunk, no
