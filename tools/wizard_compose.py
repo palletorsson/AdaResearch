@@ -425,7 +425,7 @@ def compose(spec):
             I[pz0][px0] = f"{k0}:270" if k0 == hero else k0
     U[spawn_a[1]][spawn_a[0]] = "s"
     tp = None
-    parapet = set()
+    parapet = set(); parapet_side = None
     if yard_on:
         tx, tz = yard_c[0] + YARD_R + 2, yard_c[1]
         if tx >= W: tx = W - 1
@@ -438,22 +438,43 @@ def compose(spec):
         for z in range(min(yard_c[1], yard_c[1] + YARD_R + 1), max(yard_c[1], yard_c[1] + YARD_R + 1) + 1):
             x = yard_c[0] - YARD_R - 1
             if 0 <= x < W and 0 <= z < D and S[z][x] == "0": S[z][x] = "1"
-        # overview parapet: three walkway cells rise to h2 behind a wall lowered
-        # 4→3 — from up there (eye ~3.7m) you look over into the quarantine.
-        # wp pairs at both ends make the climb legal; the yard stays sealed.
+        # overview parapet, GUARANTEED (r6): search sides s→w→n for a legal
+        # 3-cell landing (east is the teleporter's). All-or-nothing per side:
+        # landing only on void/plain floor (never rooms), wall lowered 4→3
+        # behind it, approach ONLY from existing connected floor, wp pairs on
+        # the climb. From h2 (eye ~3.7m) you look over the h3 wall; the yard
+        # stays sealed.
         if over_mode == "parapet":
-            pz = yard_c[1] + YARD_R + 1
-            wz = yard_c[1] + YARD_R
-            for px in (yard_c[0] - 1, yard_c[0], yard_c[0] + 1):
-                if 0 <= px < W and 0 <= pz < D and S[pz][px] == "1":
-                    S[pz][px] = "2"; parapet.add((px, pz))
-                if 0 <= px < W and 0 <= wz < D and S[wz][px] == "4":
-                    S[wz][px] = "3"
-            if parapet:
-                for ax2, first in ((yard_c[0] - 2, yard_c[0] - 1), (yard_c[0] + 2, yard_c[0] + 1)):
-                    if (0 <= ax2 < W and S[pz][ax2] == "1" and U[pz][ax2] == " "
-                            and (first, pz) in parapet and U[pz][first] == " "):
-                        U[pz][ax2] = "wp"; U[pz][first] = "wp"
+            roomcells = set()
+            for _, cells_, _, _ in rooms: roomcells |= cells_
+            yx, yz = yard_c
+            SIDES = [
+                ("s", [(yx - 1, yz + YARD_R + 1), (yx, yz + YARD_R + 1), (yx + 1, yz + YARD_R + 1)],
+                       [(yx - 1, yz + YARD_R), (yx, yz + YARD_R), (yx + 1, yz + YARD_R)],
+                       [(yx - 2, yz + YARD_R + 1), (yx + 2, yz + YARD_R + 1)]),
+                ("w", [(yx - YARD_R - 1, yz - 1), (yx - YARD_R - 1, yz), (yx - YARD_R - 1, yz + 1)],
+                       [(yx - YARD_R, yz - 1), (yx - YARD_R, yz), (yx - YARD_R, yz + 1)],
+                       [(yx - YARD_R - 1, yz - 2), (yx - YARD_R - 1, yz + 2)]),
+                ("n", [(yx - 1, yz - YARD_R - 1), (yx, yz - YARD_R - 1), (yx + 1, yz - YARD_R - 1)],
+                       [(yx - 1, yz - YARD_R), (yx, yz - YARD_R), (yx + 1, yz - YARD_R)],
+                       [(yx - 2, yz - YARD_R - 1), (yx + 2, yz - YARD_R - 1)]),
+            ]
+            for side, land, wallc, approach in SIDES:
+                if not all(0 <= x < W and 0 <= z < D for (x, z) in land + wallc): continue
+                if not all(S[z][x] in ("0", "1") and (x, z) not in roomcells for (x, z) in land): continue
+                ap = [(x, z) for (x, z) in approach
+                      if 0 <= x < W and 0 <= z < D and S[z][x] == "1" and (x, z) not in roomcells]
+                if not ap: continue
+                for (x, z) in land: S[z][x] = "2"
+                for (x, z) in wallc:
+                    if S[z][x] == "4": S[z][x] = "3"
+                parapet = set(land)
+                parapet_side = side
+                for (ax2, az2) in ap[:2]:
+                    end = min(land, key=lambda c: abs(c[0] - ax2) + abs(c[1] - az2))
+                    if U[az2][ax2] == " " and U[end[1]][end[0]] == " ":
+                        U[az2][ax2] = "wp"; U[end[1]][end[0]] = "wp"
+                break
     else:
         lastr = rooms[-1]
         bx = max(c[0] for c in lastr[1]) + 2
@@ -481,7 +502,7 @@ def compose(spec):
     story_score = sum(story.values()) / 4.0
     stages.append({"op": "arrival",
                    "chosen": {"threshold": thr_mode, "prologue": prologue_on, "overview": over_mode},
-                   "threshold": cl(threshold), "parapet": cl(parapet),
+                   "threshold": cl(threshold), "parapet": cl(parapet), "parapet_side": parapet_side,
                    "prologue": ({"artifact": order[0], "cell": list(prologue_cell)} if prologue_cell else None),
                    "story": {k: round(v, 2) for k, v in story.items()}})
 

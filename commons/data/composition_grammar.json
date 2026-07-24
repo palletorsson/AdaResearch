@@ -81,7 +81,7 @@
     "compression+parapet",
     "compression+prologue+parapet"
    ],
-   "note": "r5: story metric = mean(pinch, release, prologue, overlook); the threshold costs compact (bbox grows) — the search arbitrates narrative vs tightness"
+   "note": "r5: story metric = mean(pinch, release, prologue, overlook); the threshold costs compact — the search arbitrates. r6: parapet GUARANTEED by side-search s→w→n (east = teleporter's), all-or-nothing landing, approach from existing floor only — 54/54 requested, 0 misses."
   }
  ],
  "interfaces": {
@@ -151,6 +151,13 @@
    "finding": "ARRIVAL AS STORY — v3's hand-composed arc (compression threshold, prologue artifact in the corridor, release, overview parapet) became op 8 + a story metric (canon v5, weight 0.12). STORY PAYS +0.180: best bare 0.613 vs best full-story 0.793 on identical geometry; full-story configs sweep the entire top 16. The threshold's compact cost was absorbed (28x25 unchanged from r4 — the corridor fit the bbox slack). Engine lesson: the corridor must be carved AFTER rooms (west of all floor in its rows) and mouth into a DOOR when it meets a room — carving before rooms sealed the courtyard spawn (1/249 reachable, caught by reach not by FAIL). Caveat recorded: parapet silently no-ops when the yard's ring slot leaves no walkway cells (crescendo/narrative courtyards) — placement is position-dependent, not guaranteed.",
    "results": "commons/data/gate_research_round5.json",
    "promoted": "Thread_Gate v5 (standing gate) — Palle's ruling 2026-07-24; the machine composition now carries the narrative arc that was v3's last exclusive claim"
+  },
+  {
+   "round": 6,
+   "combos": 135,
+   "winner": "crescendo/sdf_blob/courtyard/thr+pro+par 0.800 (Trial_gate6_039, 31x25)",
+   "finding": "GUARANTEED PARAPET (engine-fix round, rubric unchanged) — the parapet now side-searches s→w→n with all-or-nothing placement, never stomps rooms, approach from existing connected floor only. 54 parapet-requested variants, 0 overlook misses. THE FIX CHANGED THE RANKING: r5's casualties became the winners — crescendo/narrative full-story courtyards (0.754 without their parapet in r5) found a WEST-side parapet and hit 0.800, edging the standing gate's rhythm packing (0.793). Story pays +0.187. Lesson: a guarantee is not a repair, it is a re-ranking — variants that lost to a position accident were better all along.",
+   "results": "commons/data/gate_research_round6.json"
   }
  ]
 }

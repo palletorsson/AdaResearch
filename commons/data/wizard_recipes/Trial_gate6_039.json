@@ -1,0 +1,51 @@
+{
+ "name": "Trial_gate6_039",
+ "date": "2026-07-24",
+ "spec": {
+  "cast": [
+   "line",
+   "laser_measure",
+   "helicoid",
+   "crystal_cluster",
+   "csg_difference_demo",
+   "geodesic_dome",
+   "branching_growth_algorithm"
+  ],
+  "hero": "laser_measure",
+  "anti": "mold_network",
+  "order": {
+   "strategy": "crescendo"
+  },
+  "typology": "courtyard",
+  "grower": "sdf_blob",
+  "walls": {
+   "dressing": {}
+  },
+  "yard": {
+   "enabled": true
+  },
+  "elevation": "procession",
+  "trim_approach": false,
+  "arrival": {
+   "threshold": "compression",
+   "prologue": true,
+   "overview": "parapet"
+  }
+ },
+ "score_soft": 0.8,
+ "metrics": {
+  "room_band": 1.0,
+  "enclosure": 0.24,
+  "hall": 1.0,
+  "arrival": 0.48,
+  "elevation": 1.0,
+  "compact": 0.5,
+  "tissue": 1.0,
+  "story": 1.0
+ },
+ "pathfinder": {
+  "ok": true,
+  "reach": 0.9
+ },
+ "note": "round 6 winner \u2014 guaranteed parapet (side-search s/w/n)"
+}
