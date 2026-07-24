@@ -578,15 +578,26 @@ def metrics(data, rooms, hall, passage, floor, door_info, story_score=0.0):
     # run from the anchor; required = 0.8 x max dimension.
     aura = 0.0
     if rooms:
+        _EDGE = {(1, 0): ("e", "w"), (-1, 0): ("w", "e"), (0, 1): ("s", "n"), (0, -1): ("n", "s")}
+        def _sight_blocked(x, z, dx, dz):
+            # a lowercase wall segment blocks sight; a door (uppercase) is an opening
+            a, b = _EDGE[(dx, dz)]
+            if a in WL[z][x]: return True
+            nx, nz = x + dx, z + dz
+            if 0 <= nx < W and 0 <= nz < D and b in WL[nz][nx]: return True
+            return False
         tot = 0.0
         for k, cells, (ax, az), _ in rooms:
             w_, d_, h_ = union(k)
             req = max(1.0, 0.8 * max(w_, d_, h_))
             best = 0
             for dx, dz in ((1, 0), (-1, 0), (0, 1), (0, -1)):
-                run, x, z = 0, ax + dx, az + dz
-                while 0 <= x < W and 0 <= z < D and S[z][x] in "12":
-                    run += 1; x += dx; z += dz
+                run, x, z = 0, ax, az
+                while True:
+                    if _sight_blocked(x, z, dx, dz): break
+                    nx, nz = x + dx, z + dz
+                    if not (0 <= nx < W and 0 <= nz < D and S[nz][nx] in "12"): break
+                    run += 1; x, z = nx, nz
                 best = max(best, run)
             tot += min(1.0, best / req)
         aura = tot / len(rooms)

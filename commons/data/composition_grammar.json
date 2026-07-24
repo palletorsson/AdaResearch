@@ -1,6 +1,6 @@
 {
  "_comment": "THE ORDER OF OPERATIONS for map composition — canon, editable. Palle 2026-07-24: 'this is about order of operation, what is included in what order... then auto research to create the best combination or new strategies.' The research engines READ this file (stages, metric weights, bands): edit here, re-run, the search changes. Rounds history at the bottom. Sibling canons: cabinet_grammar.json, systems_fold.json.",
- "version": 5,
+ "version": 6,
  "operations": [
   {
    "n": 1,
@@ -109,15 +109,16 @@
   "hi_pad": 6
  },
  "metric_weights": {
-  "room_band": 0.16,
-  "enclosure": 0.15,
+  "room_band": 0.14,
+  "enclosure": 0.13,
   "hall": 0.08,
-  "arrival": 0.14,
+  "arrival": 0.13,
   "elevation": 0.07,
   "reach": 0.13,
-  "compact": 0.1,
-  "tissue": 0.05,
-  "story": 0.12
+  "compact": 0.09,
+  "tissue": 0.04,
+  "story": 0.12,
+  "aura": 0.07
  },
  "compact_target": 0.5,
  "tissue_free_run": 8,
@@ -181,6 +182,13 @@
    "finding": "TYPE-ROUTED PLACEMENT — postures (classify_postures) route artifacts to ROLE segments; two new segments (terrain_field: walk THROUGH the artifact-as-ground; tableau_face: artifact against a wall band with standoff — first draft violated the SEAM law with a full wall band and cut the track, caught by reach again). THREE findings: (1) THE POSTURE SOURCE WAS STALE — classify reads artifact_sizes.json while the composer reads the probe floor; measured-size postures re-type 8/23 symmetry artifacts (looms/mills pedestal->platform; atlas gallery pedestal->FLOOR — the role change firing for real). Cross-tool: dressing rooms inherit the same staleness. (2) The rubric cannot see role-fit: type-routed tracks tie (0.649) or lose slightly (change 0.668 vs 0.686; typeM 0.619) while being SHORTER and architecturally differentiated — scoring open-role architecture needs a grounded metric, not a circular one. (3) AURA added at weight 0 (standoff vs 0.8x max-dim, gaze law): it SATURATES at 1.0 in track mode (open bands always grant standoff) — it will only discriminate in gate-mode rooms; weighting it now would be noise. Verdict deferred to the eye (captures of size vs typeM); promotion of measured postures into classify_postures = the actionable next.",
    "results": "commons/data/gate_research_round8.json",
    "actioned": "2026-07-24 same day, Palle's ruling: classify_postures now reads the MEASURED floor — load_sizes() overlays artifact_elements.json union AABBs over the stale oracle (1569/2660 probe-sourced), and a table/pedestal HINT on a body taller than a person or broader than furniture is overruled by measurement (the tool's own name-beats-hint precedent, measured edition; posture_overrides still supreme). 447/2660 postures corrected (flows: pedestal->platform 95, pedestal->monument 59, pedestal->floor 53...). Diff: commons/data/posture_probe_diff.json. Dressing rooms NOT regenerated (--write stays explicit)."
+  },
+  {
+   "round": 9,
+   "combos": 54,
+   "winner": "crescendo/sdf_blob/courtyard 0.82 — the standing gate's own combo; no new map kept",
+   "finding": "AURA IN GATE MODE — the gaze law (standoff >= 0.8 x max dimension) measured with honest sight: the scan now stops at wall segments and passes through doors (it previously saw through walls). Spread real but modest: 0.84-1.00, sd 0.07 — most gate rooms already grant standoff, chiefly through their doorways into the hall; the dips are narrative-order variants whose large pieces sit blind. ADOPTED at weight 0.07 (canon v6, weights rebalanced sum 1.0): the ranking's top is stable under it (standing combo rank 1 in both phases, 0.80 -> 0.82) while mid-table shifts +/-7-9 ranks — discrimination without upheaval. Aura still saturates in track mode (open bands grant standoff by construction) — there it is a format truth, not a free ride. The rubric is now ready for gate-mode real casts where big bodies will actually starve for viewing distance.",
+   "results": "commons/data/gate_research_round9.json"
   }
  ]
 }
