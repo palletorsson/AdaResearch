@@ -90,7 +90,8 @@
   "wizard": "/map-wizard (encyclopedia) — the order of operations as a walkable wizard; every step shows its own abstraction (order=1D strip, typology=three frames, elevation=SECTION, paths=plan); engine tools/wizard_compose.py reads THIS file",
   "recipes": "commons/data/wizard_recipes/*.json — saved runs (spec+score+pathfinder); the wizard as memory; seeded from research rounds 2+3 winners",
   "dressing": "stage 4b: hangar wall system enters composition as cluster:<name>:<rot> on the room's back wall, facing the artifact (45 curated clusters)",
-  "track": "track_13 mode: spec.track {enabled, plan:auto|[segments], kin_fill}; engine compose_track in tools/wizard_compose.py; segments editable in wizard_track_templates.json — author a segment, it becomes vocabulary"
+  "track": "track_13 mode: spec.track {enabled, plan:auto|[segments], kin_fill}; engine compose_track in tools/wizard_compose.py; segments editable in wizard_track_templates.json — author a segment, it becomes vocabulary",
+  "laws_prose": "doc/COMPOSITION_LAWS.md — the laws WITH their stories + meta-laws + the large-artifact frontier (type-routed placement proposal); this canon holds the what, the doc holds the why"
  },
  "laws": [
   "FIT: a piece whose envelope exceeds the room belongs to another room (exclude, record why)",
