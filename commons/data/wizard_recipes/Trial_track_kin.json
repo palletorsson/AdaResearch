@@ -1,0 +1,67 @@
+{
+ "name": "Trial_track_kin",
+ "date": "2026-07-24",
+ "spec": {
+  "cast": [
+   "line",
+   "laser_measure",
+   "helicoid",
+   "crystal_cluster",
+   "csg_difference_demo",
+   "geodesic_dome",
+   "branching_growth_algorithm"
+  ],
+  "hero": "laser_measure",
+  "anti": "mold_network",
+  "order": {
+   "strategy": "narrative"
+  },
+  "typology": "hall_wings",
+  "grower": "rect",
+  "walls": {
+   "dressing": {}
+  },
+  "yard": {
+   "enabled": true
+  },
+  "elevation": "procession",
+  "trim_approach": false,
+  "arrival": {
+   "threshold": "none",
+   "prologue": false,
+   "overview": "none"
+  },
+  "track": {
+   "enabled": true,
+   "plan": [
+    "gate_in",
+    "gallery_pair",
+    "chamber_big",
+    "court_open",
+    "chamber_big",
+    "chamber_big",
+    "gallery_pair",
+    "spine_niches",
+    "yard_seg",
+    "gate_out"
+   ],
+   "kin_fill": true
+  }
+ },
+ "score_soft": 0.518,
+ "metrics": {
+  "room_band": 0.71,
+  "enclosure": 0.1,
+  "hall": 0.26,
+  "arrival": 0.46,
+  "elevation": 0.5,
+  "compact": 0.82,
+  "tissue": 1.0,
+  "story": 1.0
+ },
+ "pathfinder": {
+  "ok": true,
+  "reach": 0.95,
+  "tail": "OK    Trial_track_kin  (577/608 reachable, 12 artifacts, 1 teleport(s))\n  Rule 2 [WARN] Teleport at (6,67) \u2014 row z=68 has no floor cubes to catch player\n  Rule 4 [WARN] Artifact 'Rack303Acid' at (2,52) h=2 unreachable\n  Rule 4 [WARN] Artifact 'RackAmbientDrone' at (10,52) h=2 unreachable\n  Rule 4 [WARN] Artifact 'mold_network' at (3,59) h=1 unreachable\n\n=== 1 maps checked: 1 OK, 0 FAIL (0 issues) ==="
+ }
+}

@@ -54,6 +54,9 @@ DEFAULT_SPEC = {
     "trim_approach": False,
     # round 5 — arrival as story: compression threshold, prologue artifact, overview parapet
     "arrival": {"threshold": "none", "prologue": False, "overview": "none"},
+    # the TRACK (Palle 2026-07-24): 13-wide, as-long-as-needed-in-z concatenation of
+    # authored 13x7 template segments; order poured into slots; kin-fill extra slots
+    "track": {"enabled": False, "plan": "auto", "kin_fill": True},
 }
 
 # ---------- measured floor ----------
@@ -209,6 +212,8 @@ def cl(cells):  # cell set → sorted [[x,z],...] for JSON
 
 # ---------- the staged composition ----------
 def compose(spec):
+    if (spec.get("track") or {}).get("enabled"):
+        return compose_track(spec)
     stages = []
     cast, hero, anti = spec["cast"], spec.get("hero", ""), spec.get("anti", "")
     gname, tname, ename = spec["grower"], spec["typology"], spec["elevation"]
@@ -627,6 +632,255 @@ def main():
     else:
         sys.stdout.reconfigure(encoding="utf-8")
         print(txt)
+
+
+
+# ---------- TRACK MODE (Palle 2026-07-24) ----------
+# x fixed at 13, z as long as needed: concatenate authored 13x7 template
+# segments (commons/data/wizard_track_templates.json, role grammar shared with
+# template_patterns.json), pour the order into the slots walk-order (FIT law at
+# slot: artifact fits room, the inverse direction of the grower), kin-fill
+# leftover slots with registry-category relatives.
+TRACKS_PATH = ROOT / "commons/data/wizard_track_templates.json"
+
+def _registry_categories():
+    cats = {}
+    for f in sorted((ROOT / "commons/artifacts/registry").glob("*.json")):
+        if ".bak" in f.name:
+            continue
+        try:
+            d = json.loads(f.read_text(encoding="utf-8"))
+        except Exception:
+            continue
+        if isinstance(d, dict):
+            for k in d:
+                if isinstance(k, str) and not k.startswith("_"):
+                    cats.setdefault(k, f.stem)
+    return cats
+
+def compose_track(spec):
+    T = json.loads(TRACKS_PATH.read_text(encoding="utf-8"))
+    SEG = T["segments"]; CYCLE = T["content_cycle"]
+    stages = []
+    cast, hero, anti = spec["cast"], spec.get("hero", ""), spec.get("anti", "")
+    ename = spec["elevation"]
+    trk = spec.get("track") or {}
+    kin_fill = bool(trk.get("kin_fill", True))
+    order = resolve_order(spec)
+
+    plan = trk.get("plan", "auto")
+    if plan == "auto":
+        # ORDER-DRIVEN plan: segments are chosen to fit each artifact as it
+        # comes, so the order survives exactly (no misfits by construction)
+        plan = ["gate_in"]
+        open_caps = [sl.get("cap", 4) for sl in SEG["gate_in"]["slots"] if not sl.get("anti")]
+        used_count = {n: 0 for n in CYCLE}
+        for k in order:
+            need = afp_cells(k)
+            i = next((j for j, c in enumerate(open_caps) if c >= need), None)
+            if i is None:
+                cands = [n for n in CYCLE
+                         if any(sl.get("cap", 4) >= need for sl in SEG[n]["slots"] if not sl.get("anti"))]
+                seg = min(cands, key=lambda n: (used_count[n], CYCLE.index(n)))
+                used_count[seg] += 1
+                plan.append(seg)
+                open_caps += [sl.get("cap", 4) for sl in SEG[seg]["slots"] if not sl.get("anti")]
+                i = next(j for j, c in enumerate(open_caps) if c >= need)
+            open_caps.pop(i)
+        if anti: plan.append("yard_seg")
+        plan.append("gate_out")
+    plan = [s for s in plan if s in SEG]
+
+    W, D = 13, 7 * len(plan)
+    S = [["0"] * W for _ in range(D)]
+    U = [[" "] * W for _ in range(D)]
+    I = [[" "] * W for _ in range(D)]
+    WL = [[""] * W for _ in range(D)]
+    slots, walls_auth = [], []
+    threshold, parapet = set(), set()
+    hallc, yardc = set(), set()
+    seg_rooms = []          # (si, set of room cells)
+    spawn, tp = None, None
+    for si, name in enumerate(plan):
+        sg = SEG[name]; z0 = si * 7
+        rcells = set()
+        for z in range(7):
+            for x in range(W):
+                c = sg["rows"][z][x]
+                gz = z0 + z
+                if c == "": continue
+                if c in ("1", "1s"): S[gz][x] = "1"; hallc.add((x, gz))
+                elif c == "s": S[gz][x] = "1"; U[gz][x] = "s"; spawn = (x, gz); hallc.add((x, gz))
+                elif c in ("r", "rs"): S[gz][x] = "1"; rcells.add((x, gz))
+                elif c in ("y", "ys"): S[gz][x] = "1"; yardc.add((x, gz))
+                elif c == "2": S[gz][x] = "2"
+                elif c == "p": S[gz][x] = "2"; parapet.add((x, gz))
+                elif c == "3": S[gz][x] = "3"
+                elif c == "4": S[gz][x] = "4"
+                elif c == "m": S[gz][x] = "0"
+                elif c == "t": S[gz][x] = "0"; U[gz][x] = "t"; tp = (x, gz)
+        seg_rooms.append((si, rcells))
+        for sl in sg.get("slots", []):
+            slots.append({"cell": (sl["cell"][0], z0 + sl["cell"][1]), "cap": sl.get("cap", 4),
+                          "prologue": sl.get("prologue", False), "anti": sl.get("anti", False),
+                          "seg": si, "segname": name})
+        for (x, z) in sg.get("threshold", []): threshold.add((x, z0 + z))
+        for w in sg.get("walls", []): walls_auth.append((w[0], z0 + w[1], w[2], bool(w[3]), si))
+
+    # elevation BEFORE walls/wp: procession lifts the later half of content segments
+    content_idx = [i for i, n in enumerate(plan) if n in CYCLE]
+    lifted = set()
+    if ename == "procession" and content_idx:
+        for si in content_idx[len(content_idx) // 2:]:
+            lifted.add(si)
+            for (x, z) in seg_rooms[si][1]:
+                S[z][x] = "2"
+
+    # slot assignment: FIT at slot, walk order; then kin-fill
+    content_slots = sorted([s for s in slots if not s["anti"]],
+                           key=lambda s: (s["cell"][1], s["cell"][0]))
+    remaining = list(order)
+    placed = []
+    for sl in content_slots:
+        pick = next((k for k in remaining if afp_cells(k) <= sl["cap"]), None)
+        if pick is not None: remaining.remove(pick)
+        placed.append([pick, sl, False])
+    misfit = list(remaining)
+    kin_added = []
+    if kin_fill and any(a is None for a, _, _ in placed):
+        cats = _registry_categories()
+        cast_cats = []
+        for k in order:
+            c = cats.get(k)
+            if c and c not in cast_cats: cast_cats.append(c)
+        pool = [k for k in elems if k not in order and cats.get(k) in cast_cats]
+        pool.sort(key=lambda k: (cast_cats.index(cats.get(k)), fp(k)))
+        for rec in placed:
+            if rec[0] is None:
+                pick = next((k for k in pool if afp_cells(k) <= rec[1]["cap"]), None)
+                if pick is not None:
+                    pool.remove(pick); rec[0] = pick; rec[2] = True; kin_added.append(pick)
+
+    prologue_cell = None
+    for a, sl, iskin in placed:
+        if a is None: continue
+        x, z = sl["cell"]
+        I[z][x] = (a + ":0") if a == hero else a     # hero beam aims along the track (+z)
+        if sl["prologue"]: prologue_cell = (x, z)
+    if anti:
+        ys = next((s for s in slots if s["anti"]), None)
+        if ys: I[ys["cell"][1]][ys["cell"][0]] = anti
+
+    # walls + doors (+wp on height difference), parapet wp at both ends
+    NB = {"n": (0, -1), "s": (0, 1), "e": (1, 0), "w": (-1, 0)}
+    raw_doors = []
+    for (x, z, d, door, si) in walls_auth:
+        WL[z][x] += d.upper() if door else d
+        if door:
+            dx, dz = NB[d]; nb = (x + dx, z + dz)
+            if 0 <= nb[1] < D and 0 <= nb[0] < W:
+                raw_doors.append(((x, z), nb))
+                if S[z][x] != S[nb[1]][nb[0]] and S[z][x] in "12" and S[nb[1]][nb[0]] in "12":
+                    U[z][x] = "wp"; U[nb[1]][nb[0]] = "wp"
+    for (x, z) in parapet:
+        for nx in (x - 1, x + 1):
+            if 0 <= nx < W and (nx, z) not in parapet and S[z][nx] == "1":
+                if U[z][nx] == " " and U[z][x] == " ":
+                    U[z][nx] = "wp"; U[z][x] = "wp"
+
+    # metrics geometry: rooms = slot regions; open slots get a 3x3 region
+    rooms = []
+    for a, sl, iskin in placed:
+        if a is None: continue
+        si = sl["seg"]; rc = seg_rooms[si][1]
+        ax, az = sl["cell"]
+        if rc:
+            start = min(rc, key=lambda c: abs(c[0] - ax) + abs(c[1] - az))
+            comp, stack = set(), [start]
+            while stack:
+                c = stack.pop()
+                if c in comp or c not in rc: continue
+                comp.add(c)
+                stack += [(c[0] + 1, c[1]), (c[0] - 1, c[1]), (c[0], c[1] + 1), (c[0], c[1] - 1)]
+            cells = comp if (ax, az) in comp else {(xx, zz) for xx in range(ax - 1, ax + 2)
+                                                  for zz in range(az - 1, az + 2)}
+        else:
+            cells = {(xx, zz) for xx in range(ax - 1, ax + 2) for zz in range(az - 1, az + 2)
+                     if (xx, zz) in hallc}
+        rooms.append([a, cells, (ax, az), (0, 1)])
+    floor = set(hallc)
+    for _, cells, _, _ in rooms: floor |= cells
+    passage = set()
+    # doors mapped to the artifact whose room they open (metrics contract)
+    door_info = []
+    for cell, nb in raw_doors:
+        art = next((k for k, cells, _, _ in rooms if cell in cells or nb in cells), None)
+        if art is not None:
+            door_info.append((cell, nb, art))
+
+    # ---- stages, canonical op order ----
+    strip = []
+    for a, sl, iskin in placed:
+        if a is None: continue
+        w, d_, h = union(a); _, _, _, reach = body(a)
+        strip.append({"name": a, "w": round(w, 2), "d": round(d_, 2), "h": round(h, 2),
+                      "cells": afp_cells(a), "reach": reach, "measured": a in elems, "kin": iskin})
+    stages.append({"op": "order", "chosen": spec["order"].get("strategy", "narrative"),
+                   "strip": strip, "kin_added": kin_added, "misfit": misfit,
+                   "previews": {s: (order_crescendo(cast) if s == "crescendo" else
+                                    order_rhythm(cast) if s == "rhythm" else
+                                    order_narrative(cast, hero)) for s in ("crescendo", "narrative", "rhythm")}})
+    stages.append({"op": "typology", "chosen": "track_13",
+                   "plan": [{"seg": n, "desc": SEG[n].get("desc", "")} for n in plan],
+                   "options": {}})
+    stages.append({"op": "room", "chosen": "template", "hall": cl(hallc),
+                   "rooms": [{"name": k, "cells": cl(c), "anchor": list(a)} for k, c, a, _ in rooms]})
+    segs = []
+    for z in range(D):
+        for x in range(W):
+            for ch in WL[z][x]:
+                segs.append({"x": x, "z": z, "d": ch.lower(), "door": ch.isupper()})
+    stages.append({"op": "walls", "segments": segs, "dressing": [], "floor": cl(floor),
+                   "hall": cl(hallc), "rooms": [{"name": k, "cells": cl(c)} for k, c, _, _ in rooms],
+                   "doors": [{"room": k, "cell": list(b), "to": list(nb)} for b, nb, k in door_info]})
+    stages.append({"op": "templates_fixed", "enabled": bool(anti and yardc),
+                   "yard": {"center": None, "r": 0, "cells": cl(yardc)} if yardc else None})
+    profile = [{"i": i, "name": a, "h": (2 if sl["seg"] in lifted else 1), "art_h": round(union(a)[2], 2)}
+               for i, (a, sl, _) in enumerate(placed) if a is not None]
+    stages.append({"op": "elevation", "chosen": ename, "profile": profile})
+    stages.append({"op": "paths", "passage": [], "spawn": list(spawn) if spawn else None,
+                   "teleporter": list(tp) if tp else None, "trimmed_cells": 0,
+                   "floor": cl(floor), "yard": cl(yardc)})
+    story = {"pinch": 1.0 if len(threshold) >= 8 else 0.0, "release": 0.0,
+             "prologue": 1.0 if prologue_cell else 0.0, "overlook": 1.0 if parapet else 0.0}
+    if threshold:
+        ez = max(z for (_, z) in threshold) + 1
+        open9 = sum(1 for dx in (-1, 0, 1) for dz in (-1, 0, 1) if (6 + dx, ez + dz) in floor)
+        story["release"] = min(open9 / 6.0, 1.0)
+    story_score = sum(story.values()) / 4.0
+    first_placed = next((a for a, _, _ in placed if a is not None), None)
+    stages.append({"op": "arrival", "chosen": {"threshold": "template", "prologue": bool(prologue_cell),
+                                               "overview": "template" if parapet else "none"},
+                   "threshold": cl(threshold), "parapet": cl(parapet),
+                   "parapet_side": "s" if parapet else None,
+                   "prologue": ({"artifact": first_placed, "cell": list(prologue_cell)} if prologue_cell else None),
+                   "story": {k: round(v, 2) for k, v in story.items()}})
+
+    data = {"map_info": {"name": "X", "lookup_name": "X", "title": "X",
+        "description": "wizard track: " + "+".join(plan),
+        "dimensions": {"width": W, "depth": D, "max_height": 4},
+        "version": "wizard-track-v1",
+        "design": {"mode": "track_13", "plan": plan, "order": spec["order"], "elevation": ename,
+                   "kin": kin_added, "misfit": misfit, "yard": bool(anti)}},
+        "settings": {"cube_size": 1.0, "gutter": 0.0, "show_grid": True, "enable_physics": True, "enter_type": "I",
+                     "wall_segments": {"height": 2.2, "thickness": 0.12}},
+        "utility_definitions": {"t": {"type": "teleporter", "name": "Track passed", "description": "",
+                                      "properties": {"action": "next_in_sequence"}}},
+        "layers": {"structure": S, "utilities": U, "walls": WL, "interactables": I}}
+    m = metrics(data, rooms, hallc, passage, floor, door_info, story_score)
+    stages.append({"op": "final", "W": W, "D": D, "metrics": m["parts"], "score_soft": m["soft"],
+                   "weights": MW})
+    return data, stages
 
 if __name__ == "__main__":
     main()

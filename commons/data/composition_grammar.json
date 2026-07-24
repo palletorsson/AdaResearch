@@ -27,9 +27,11 @@
    "strategies": [
     "gallery_spine",
     "courtyard",
-    "hall_wings"
+    "hall_wings",
+    "track_13"
    ],
-   "ruling": "Palle r2: templates earlier — YES, decisive; typology dominated the ranking (courtyard swept top 9)"
+   "ruling": "Palle r2: templates earlier — YES, decisive; typology dominated the ranking (courtyard swept top 9)",
+   "track_note": "track_13 (Palle 2026-07-24): x fixed 13, z as long as needed — concatenated authored 13x7 segments (commons/data/wizard_track_templates.json, role grammar shared with template_patterns.json). INVERTS op 3: rooms are authored, the artifact fits the room (FIT law at slot). The auto-plan grows FROM the order (segment chosen per artifact as it comes — order survives exactly, no misfits by construction). Kin-fill: spare slots take registry-category relatives of the cast. Arrival ops are template properties (gate_in = threshold+prologue, yard_seg = parapet). SEAM LAW: segment rows z0/z6 hold only walk or void, with the center columns x5-7 walkable — learned twice (yard wall row cut the track at reach 0.22; chamber's full-width room made z0 a dead pocket)."
   },
   {
    "n": 3,
@@ -87,14 +89,16 @@
  "interfaces": {
   "wizard": "/map-wizard (encyclopedia) — the order of operations as a walkable wizard; every step shows its own abstraction (order=1D strip, typology=three frames, elevation=SECTION, paths=plan); engine tools/wizard_compose.py reads THIS file",
   "recipes": "commons/data/wizard_recipes/*.json — saved runs (spec+score+pathfinder); the wizard as memory; seeded from research rounds 2+3 winners",
-  "dressing": "stage 4b: hangar wall system enters composition as cluster:<name>:<rot> on the room's back wall, facing the artifact (45 curated clusters)"
+  "dressing": "stage 4b: hangar wall system enters composition as cluster:<name>:<rot> on the room's back wall, facing the artifact (45 curated clusters)",
+  "track": "track_13 mode: spec.track {enabled, plan:auto|[segments], kin_fill}; engine compose_track in tools/wizard_compose.py; segments editable in wizard_track_templates.json — author a segment, it becomes vocabulary"
  },
  "laws": [
   "FIT: a piece whose envelope exceeds the room belongs to another room (exclude, record why)",
   "REACH: high-aspect envelopes are reach, not body — space by body, aim reach along the walk (ENFORCED since wizard_compose: aspect>4 rooms sized by body; rounds 1-3 paid the cost instead)",
   "MOAT-AS-HYPOTHESIS: runtime growth is stochastic; containment is re-tested every run",
   "spawn token is exactly 's'; teleporter stands on void; climbing requires wp; a door must open onto floor",
-  "static measurement is not runtime envelope (growth-class artifacts need settle-time probing)"
+  "static measurement is not runtime envelope (growth-class artifacts need settle-time probing)",
+  "SEAM (track): segment seam rows carry walk at the shared center columns; a wall or a room on the seam cuts the world (reach tells, the OK label does not)"
  ],
  "room_band": {
   "lo_x_artifact_cells": 3,
