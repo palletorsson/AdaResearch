@@ -54,7 +54,7 @@ const ADAM_EPS     := 1e-8
 ## Every colour derives from HangarKit.finish_palette(), so one word re-skins
 ## the whole body instead of a dozen hand-typed constants.
 @export var show_console: bool = true
-@export var finish: String = "rams"
+@export var finish: String = "terminal"
 @export var wear: float = 0.10
 @export var unit_code: String = "GD-01"
 ## The deck plane, in the artifact's own coordinates. It is 0.0 and that is

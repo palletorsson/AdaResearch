@@ -47,7 +47,7 @@ const POST_TAPER: float = 0.02
 # ── Cabinet — the TETHER POST (cabinet grammar, vertical dialect) ────────────
 ## One word drives every housing colour via HangarKit.finish_palette():
 ## "rams" (light Braun default) or "terminal" (dark console).
-@export var finish: String = "rams"
+@export var finish: String = "terminal"
 @export var wear: float = 0.10
 @export var unit_code: String = "RW-10"
 

@@ -26,7 +26,7 @@ const HangarKit = preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 ## Housing finish — "rams" (light Braun default) or "terminal" (dark console).
 ## The whole cabinet derives from HangarKit.finish_palette(), so one word
 ## re-skins every part consistently instead of 12 hand-typed colours.
-@export var finish: String = "rams"
+@export var finish: String = "terminal"
 @export var wear: float = 0.10
 @export var unit_code: String = "GB-01"
 ## When false the board renders WITHOUT its own cabinet housing — for embedding

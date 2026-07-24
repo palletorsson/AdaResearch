@@ -40,7 +40,7 @@ const HangarKit = preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 @export var show_readouts: bool = true
 
 ## Housing (cabinet grammar — see commons/data/cabinet_grammar.json).
-@export var finish: String = "rams"
+@export var finish: String = "terminal"
 @export var wear: float = 0.12
 @export var unit_code: String = "HE-06"
 @export var plinth_height: float = 0.0

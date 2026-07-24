@@ -39,7 +39,7 @@ const BakedTextDV = preload("res://commons/utils/baked_text_albedo.gd")
 
 ## Housing (cabinet grammar). This one is authored at WALL scale — bars 3 m
 ## tall, labels out to y=5.5 — so its body is a billboard, not a kiosk.
-@export var finish: String = "rams"
+@export var finish: String = "terminal"
 @export var wear: float = 0.10
 @export var unit_code: String = "DV-09"
 

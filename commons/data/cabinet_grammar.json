@@ -2,6 +2,8 @@
  "version": 1,
  "title": "The cabinet grammar",
  "one_line": "An artifact's interface is part of its body — and the body's shape follows the plane you read it on.",
+ "default_finish": "terminal",
+ "default_finish_note": "Terminal is the family default as of 2026-07-24: dark worn-metal body, signal-orange accent, green CRT screen. Every member's `@export var finish` defaults to \"terminal\"; pass finish=\"rams\" for the light Braun dialect. Both finishes are gate-clean; the choice is aesthetic, not structural.",
  "provenance": [
   "Palle 2026-07-19: the object interface and text has to be one very good looking interface-text body, like a sci info kiosk",
   "Palle 2026-07-19: think info kiosk, all in one body",

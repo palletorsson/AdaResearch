@@ -31,7 +31,7 @@ const BakedText = preload("res://commons/utils/baked_text_albedo.gd")
 const HangarKit = preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 
 @export var show_cabinet: bool = true
-@export var finish: String = "rams"
+@export var finish: String = "terminal"
 @export var wear: float = 0.10
 @export var unit_code: String = "RS-01"
 ## How far the bench legs reach BELOW the deck plane. The grid's auto-grounding

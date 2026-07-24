@@ -41,7 +41,7 @@ class_name EntropyJar
 ## Housing (cabinet grammar). A jar is a SPECIMEN, so it gets the containment
 ## vocabulary rather than a kiosk — but an open DOCK, because this specimen is
 ## meant to be lifted out and shaken.
-@export var finish: String = "rams"
+@export var finish: String = "terminal"
 @export var wear: float = 0.10
 @export var unit_code: String = "EJ-07"
 

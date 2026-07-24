@@ -20,7 +20,7 @@ const RAIL_LIFT := 0.040
 @export_category("Cabinet — relief survey table")
 ## Housing finish — "rams" (light Braun default) or "terminal" (dark console).
 ## One word drives every colour via HangarKit.finish_palette().
-@export var finish: String = "rams"
+@export var finish: String = "terminal"
 @export var wear: float = 0.10
 @export var unit_code: String = "SA-01"
 @export var show_console: bool = true

@@ -29,7 +29,7 @@ const HangarKit = preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 ## Housing finish — "rams" (light Braun default) or "terminal" (dark console).
 ## The whole case derives from HangarKit.finish_palette(), so one word re-skins
 ## every part instead of a dozen hand-typed colours.
-@export var finish: String = "rams"
+@export var finish: String = "terminal"
 @export var wear: float = 0.10
 @export var unit_code: String = "BV-01"
 ## Pedestal height. The case is authored from y=0 up; the plinth hangs BELOW the

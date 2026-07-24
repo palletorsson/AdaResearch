@@ -27,7 +27,7 @@ const BakedTextGF = preload("res://commons/utils/baked_text_albedo.gd")
 
 ## Housing (cabinet grammar). Two bays, because the artifact IS a comparison:
 ## the harvest on the left, the crank on the right, one body holding both.
-@export var finish: String = "rams"
+@export var finish: String = "terminal"
 @export var wear: float = 0.10
 @export var unit_code: String = "GF-08"
 @export var plinth_height: float = 0.95

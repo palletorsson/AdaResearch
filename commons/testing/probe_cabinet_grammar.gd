@@ -206,7 +206,9 @@ func _probe(entry: Dictionary, palette: Dictionary) -> Dictionary:
 		var mat: Material = m2.material_override
 		if mat is StandardMaterial3D:
 			var sc: Color = (mat as StandardMaterial3D).albedo_color
-			if absf(sc.r - 0.04) < 0.03 and absf(sc.g - 0.05) < 0.03 and absf(sc.b - 0.08) < 0.04:
+			# Glass/screen is blue-shifted (b noticeably > r); the darkened structural trim of the
+			# terminal palette is neutral (r≈g≈b), so this keeps trim out of the screen bucket.
+			if sc.b > sc.r + 0.02 and absf(sc.r - 0.04) < 0.03 and absf(sc.g - 0.05) < 0.03 and absf(sc.b - 0.08) < 0.04:
 				glass_nodes.append(m2)
 			elif absf(sc.r - 0.07) < 0.02 and absf(sc.g - 0.075) < 0.02 and absf(sc.b - 0.09) < 0.02:
 				pockets.append(m2)

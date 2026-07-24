@@ -27,7 +27,7 @@ const HangarKit = preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 ## The whole case derives from HangarKit.finish_palette(), so one word re-skins
 ## every part instead of a dozen hand-typed colours.
 @export var show_case: bool = true
-@export var finish: String = "rams"
+@export var finish: String = "terminal"
 @export var wear: float = 0.10
 @export var unit_code: String = "CG-10"
 ## Pedestal height. The case is authored around the artifact's own origin and

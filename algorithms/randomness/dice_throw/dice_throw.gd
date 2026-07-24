@@ -26,7 +26,7 @@ const HangarKit = preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 ## Housing finish — "rams" (light Braun default) or "terminal" (dark console).
 ## Every colour derives from HangarKit.finish_palette(), so one word re-skins
 ## the whole body instead of a dozen hand-typed constants.
-@export var finish: String = "rams"
+@export var finish: String = "terminal"
 @export var wear: float = 0.10
 @export var unit_code: String = "DT-05"
 

@@ -40,7 +40,7 @@ const HangarKit = preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 # ── Housing finish ────────────────────────────────────────────────────
 ## "rams" (light Braun default) or "terminal" (dark console). One word drives
 ## every colour through HangarKit.finish_palette().
-@export var finish: String = "rams"
+@export var finish: String = "terminal"
 @export var wear: float = 0.10
 @export var unit_code: String = "MX-01"
 ## Pedestal height. The plinth hangs BELOW the origin, so every authored
