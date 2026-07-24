@@ -1,0 +1,70 @@
+{
+ "name": "Trial_gate10_21",
+ "date": "2026-07-24",
+ "spec": {
+  "cast": [
+   "pattern_tile_4x4",
+   "pattern_tile_cube",
+   "tile_meander_floor",
+   "science_screen",
+   "ten_print_textile",
+   "pattern_loom",
+   "pattern_tile_puzzle",
+   "mill_persian_p4",
+   "pattern_tile_mirror",
+   "kaleidoscope",
+   "mill_escher_p4g",
+   "loom_escher_mirror",
+   "pattern_tile_brick",
+   "pattern_tile_herringbone",
+   "loom_bolt_memphis_p4g",
+   "pattern_artifact",
+   "pattern_maker_station",
+   "catalyst_target",
+   "wall_pattern_gallery",
+   "loom_alhambra_p6m",
+   "vr_tile_editor",
+   "mill_alhambra_p6m",
+   "pattern_atlas_gallery"
+  ],
+  "hero": "",
+  "anti": "",
+  "order": {
+   "strategy": "rhythm"
+  },
+  "typology": "gallery_spine",
+  "grower": "sdf_disc",
+  "walls": {
+   "dressing": {}
+  },
+  "yard": {
+   "enabled": false
+  },
+  "elevation": "procession",
+  "arrival": {
+   "threshold": "compression",
+   "prologue": true,
+   "overview": "none"
+  },
+  "track": {
+   "enabled": false
+  }
+ },
+ "score_soft": 0.745,
+ "metrics": {
+  "room_band": 1.0,
+  "enclosure": 0.11,
+  "hall": 1.0,
+  "arrival": 0.45,
+  "elevation": 0.5,
+  "compact": 0.5,
+  "tissue": 1.0,
+  "story": 0.75,
+  "aura": 1.0
+ },
+ "pathfinder": {
+  "ok": true,
+  "reach": 0.99
+ },
+ "note": "round 10 winner \u2014 the symmetry real cast in gate mode, rubric v6"
+}
