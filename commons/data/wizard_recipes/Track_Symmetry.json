@@ -1,0 +1,97 @@
+{
+ "name": "Track_Symmetry",
+ "date": "2026-07-24",
+ "spec": {
+  "cast": [
+   "pattern_tile_4x4",
+   "pattern_tile_cube",
+   "tile_meander_floor",
+   "science_screen",
+   "ten_print_textile",
+   "pattern_loom",
+   "pattern_tile_puzzle",
+   "mill_persian_p4",
+   "pattern_tile_mirror",
+   "kaleidoscope",
+   "mill_escher_p4g",
+   "loom_escher_mirror",
+   "pattern_tile_brick",
+   "pattern_tile_herringbone",
+   "loom_bolt_memphis_p4g",
+   "pattern_artifact",
+   "pattern_maker_station",
+   "catalyst_target",
+   "wall_pattern_gallery",
+   "loom_alhambra_p6m",
+   "vr_tile_editor",
+   "mill_alhambra_p6m",
+   "pattern_atlas_gallery"
+  ],
+  "hero": "",
+  "anti": "",
+  "order": {
+   "strategy": "manual",
+   "list": [
+    "pattern_tile_4x4",
+    "pattern_tile_cube",
+    "tile_meander_floor",
+    "science_screen",
+    "ten_print_textile",
+    "pattern_loom",
+    "pattern_tile_puzzle",
+    "mill_persian_p4",
+    "pattern_tile_mirror",
+    "kaleidoscope",
+    "mill_escher_p4g",
+    "loom_escher_mirror",
+    "pattern_tile_brick",
+    "pattern_tile_herringbone",
+    "loom_bolt_memphis_p4g",
+    "pattern_artifact",
+    "pattern_maker_station",
+    "catalyst_target",
+    "wall_pattern_gallery",
+    "loom_alhambra_p6m",
+    "vr_tile_editor",
+    "mill_alhambra_p6m",
+    "pattern_atlas_gallery"
+   ]
+  },
+  "typology": "hall_wings",
+  "grower": "rect",
+  "walls": {
+   "dressing": {}
+  },
+  "yard": {
+   "enabled": false
+  },
+  "elevation": "procession",
+  "trim_approach": false,
+  "arrival": {
+   "threshold": "none",
+   "prologue": false,
+   "overview": "none"
+  },
+  "track": {
+   "enabled": true,
+   "plan": "auto",
+   "kin_fill": true
+  }
+ },
+ "score_soft": 0.593,
+ "metrics": {
+  "room_band": 0.82,
+  "enclosure": 0.07,
+  "hall": 1.0,
+  "arrival": 0.69,
+  "elevation": 0.5,
+  "compact": 0.9,
+  "tissue": 1.0,
+  "story": 0.75
+ },
+ "pathfinder": {
+  "ok": true,
+  "reach": 0.99,
+  "tail": "OK    Track_Symmetry  (1580/1588 reachable, 24 artifacts, 1 teleport(s))\n  Rule 2 [WARN] Teleport at (6,161) \u2014 row z=162 has no floor cubes to catch player\n\n=== 1 maps checked: 1 OK, 0 FAIL (0 issues) ==="
+ }
+}

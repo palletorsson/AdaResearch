@@ -681,8 +681,14 @@ def compose_track(spec):
             if i is None:
                 cands = [n for n in CYCLE
                          if any(sl.get("cap", 4) >= need for sl in SEG[n]["slots"] if not sl.get("anti"))]
-                seg = min(cands, key=lambda n: (used_count[n], CYCLE.index(n)))
-                used_count[seg] += 1
+                if not cands:
+                    cands = [n for n in SEG if n not in ("gate_in", "gate_out", "yard_seg")
+                             and any(sl.get("cap", 4) >= need for sl in SEG[n]["slots"] if not sl.get("anti"))]
+                if not cands:
+                    continue                     # FIT: nothing holds it — recorded as misfit downstream
+                seg = min(cands, key=lambda n: (used_count.get(n, 0),
+                                                CYCLE.index(n) if n in CYCLE else 99))
+                used_count[seg] = used_count.get(seg, 0) + 1
                 plan.append(seg)
                 open_caps += [sl.get("cap", 4) for sl in SEG[seg]["slots"] if not sl.get("anti")]
                 i = next(j for j, c in enumerate(open_caps) if c >= need)
@@ -691,7 +697,12 @@ def compose_track(spec):
         plan.append("gate_out")
     plan = [s for s in plan if s in SEG]
 
-    W, D = 13, 7 * len(plan)
+    W = 13
+    depths = [len(SEG[n]["rows"]) for n in plan]
+    bases = []
+    _b = 0
+    for dd in depths: bases.append(_b); _b += dd
+    D = _b
     S = [["0"] * W for _ in range(D)]
     U = [[" "] * W for _ in range(D)]
     I = [[" "] * W for _ in range(D)]
@@ -702,9 +713,9 @@ def compose_track(spec):
     seg_rooms = []          # (si, set of room cells)
     spawn, tp = None, None
     for si, name in enumerate(plan):
-        sg = SEG[name]; z0 = si * 7
+        sg = SEG[name]; z0 = bases[si]
         rcells = set()
-        for z in range(7):
+        for z in range(len(sg["rows"])):
             for x in range(W):
                 c = sg["rows"][z][x]
                 gz = z0 + z

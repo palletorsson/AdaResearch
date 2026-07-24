@@ -1,0 +1,159 @@
+{
+ "winner": "Trial_trksym_auto",
+ "cast": [
+  "pattern_tile_4x4",
+  "pattern_tile_cube",
+  "tile_meander_floor",
+  "science_screen",
+  "ten_print_textile",
+  "pattern_loom",
+  "pattern_tile_puzzle",
+  "mill_persian_p4",
+  "pattern_tile_mirror",
+  "kaleidoscope",
+  "mill_escher_p4g",
+  "loom_escher_mirror",
+  "pattern_tile_brick",
+  "pattern_tile_herringbone",
+  "loom_bolt_memphis_p4g",
+  "pattern_artifact",
+  "pattern_maker_station",
+  "catalyst_target",
+  "wall_pattern_gallery",
+  "loom_alhambra_p6m",
+  "vr_tile_editor",
+  "mill_alhambra_p6m",
+  "pattern_atlas_gallery"
+ ],
+ "results": [
+  {
+   "tag": "Trial_trksym_dense0",
+   "ok": true,
+   "unreach": 0,
+   "reach": 0.99,
+   "score": 0.698,
+   "D": 164,
+   "kin": [
+    "2d_in_3d_randomness_vis",
+    "GaussianBlurShader",
+    "Rack303Acid"
+   ],
+   "misfit": [],
+   "story": {
+    "pinch": 1.0,
+    "release": 1.0,
+    "prologue": 1.0,
+    "overlook": 0.0
+   }
+  },
+  {
+   "tag": "Trial_trksym_dense2",
+   "ok": true,
+   "unreach": 0,
+   "reach": 1.0,
+   "score": 0.694,
+   "D": 171,
+   "kin": [
+    "2d_in_3d_randomness_vis",
+    "GaussianBlurShader",
+    "Rack303Acid",
+    "RackAmbientDrone",
+    "RackDX7Piano"
+   ],
+   "misfit": [],
+   "story": {
+    "pinch": 1.0,
+    "release": 1.0,
+    "prologue": 1.0,
+    "overlook": 0.0
+   }
+  },
+  {
+   "tag": "Trial_trksym_auto",
+   "ok": true,
+   "unreach": 0,
+   "reach": 0.99,
+   "score": 0.722,
+   "D": 164,
+   "kin": [
+    "2d_in_3d_randomness_vis"
+   ],
+   "misfit": [],
+   "story": {
+    "pinch": 1.0,
+    "release": 1.0,
+    "prologue": 1.0,
+    "overlook": 0.0
+   }
+  }
+ ],
+ "winner_spec": {
+  "cast": [
+   "pattern_tile_4x4",
+   "pattern_tile_cube",
+   "tile_meander_floor",
+   "science_screen",
+   "ten_print_textile",
+   "pattern_loom",
+   "pattern_tile_puzzle",
+   "mill_persian_p4",
+   "pattern_tile_mirror",
+   "kaleidoscope",
+   "mill_escher_p4g",
+   "loom_escher_mirror",
+   "pattern_tile_brick",
+   "pattern_tile_herringbone",
+   "loom_bolt_memphis_p4g",
+   "pattern_artifact",
+   "pattern_maker_station",
+   "catalyst_target",
+   "wall_pattern_gallery",
+   "loom_alhambra_p6m",
+   "vr_tile_editor",
+   "mill_alhambra_p6m",
+   "pattern_atlas_gallery"
+  ],
+  "hero": "",
+  "anti": "",
+  "order": {
+   "strategy": "manual",
+   "list": [
+    "pattern_tile_4x4",
+    "pattern_tile_cube",
+    "tile_meander_floor",
+    "science_screen",
+    "ten_print_textile",
+    "pattern_loom",
+    "pattern_tile_puzzle",
+    "mill_persian_p4",
+    "pattern_tile_mirror",
+    "kaleidoscope",
+    "mill_escher_p4g",
+    "loom_escher_mirror",
+    "pattern_tile_brick",
+    "pattern_tile_herringbone",
+    "loom_bolt_memphis_p4g",
+    "pattern_artifact",
+    "pattern_maker_station",
+    "catalyst_target",
+    "wall_pattern_gallery",
+    "loom_alhambra_p6m",
+    "vr_tile_editor",
+    "mill_alhambra_p6m",
+    "pattern_atlas_gallery"
+   ]
+  },
+  "elevation": "procession",
+  "walls": {
+   "dressing": {}
+  },
+  "yard": {
+   "enabled": false
+  },
+  "track": {
+   "enabled": true,
+   "plan": "auto",
+   "kin_fill": true
+  }
+ }
+}
