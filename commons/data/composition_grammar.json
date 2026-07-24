@@ -92,7 +92,8 @@
   "dressing": "stage 4b: hangar wall system enters composition as cluster:<name>:<rot> on the room's back wall, facing the artifact (45 curated clusters)",
   "track": "track_13 mode: spec.track {enabled, plan:auto|[segments], kin_fill}; engine compose_track in tools/wizard_compose.py; segments editable in wizard_track_templates.json — author a segment, it becomes vocabulary",
   "laws_prose": "doc/COMPOSITION_LAWS.md — the laws WITH their stories + meta-laws + the large-artifact frontier (type-routed placement proposal); this canon holds the what, the doc holds the why",
-  "arc_lens": "doc/ARC_ORGANIZATION.md — organization = inducibility (ARC-AGI lens): the canon ops as a DSL, sequences as few-shot tasks, priors↔laws table, the compression caution (band not maximand), round-11 candidates (inverse composer grammar_fit first)"
+  "arc_lens": "doc/ARC_ORGANIZATION.md — organization = inducibility (ARC-AGI lens): the canon ops as a DSL, sequences as few-shot tasks, priors↔laws table, the compression caution (band not maximand), round-11 candidates (inverse composer grammar_fit first)",
+  "grammar_fit": "tools/grammar_fit.py — the INVERSE composer (ARC lens): map -> induced rule sentence (frame/order/elevation/symmetry/rooms/arrival clauses), organization as a BAND not a maximand, residual = the protected irreducible; index commons/data/grammar_fit_index.json (1,987 maps)"
  },
  "laws": [
   "FIT: a piece whose envelope exceeds the room belongs to another room (exclude, record why)",
@@ -197,6 +198,13 @@
    "winner": "rhythm/sdf_disc/gallery_spine 0.745 (Trial_gate10_21, 135x25)",
    "finding": "THE REAL CAST MEETS GATE MODE (rubric v6, symmetry 23) — and the runner's own summary lied the way round 7 taught us to catch: it printed 27/27 passing from the pathfinder's OK label while all NINE courtyard variants hard-failed on unreachable artifacts (score 0). TRUE pass 18/27. (1) COURTYARD HAS A SCALE CEILING: at 24 ring slots the rooms overlap and bury each other — compact 0.8, pretty and broken; the ring is a small-cast form. (2) THE FORMATS CONVERGE: at 23 artifacts the surviving gate typologies stretch to 130-135 wide — the gate at real scale IS a band with grown rooms; gate and track meet in the middle. (3) AURA IS A GUARD-RAIL, NOT A JUDGE: 0.82-1.00 even for the giants (doorway sightlines + big grown rooms satisfy the gaze law by construction); it disciplines blind side-wall placements and nothing else. (4) PEDAGOGY IS AFFORDABLE: the sequence's own order scores within 2% of rhythm (0.481 vs 0.491 mean) — curriculum maps can keep their teaching order. Cross-format under v6: best gate ~0.745 vs track ~0.68 — the rubric prefers grown enclosure; the track's virtues (fixed width, VR band) remain partly unpriced.",
    "results": "commons/data/gate_research_round10.json"
+  },
+  {
+   "round": 11,
+   "combos": 1987,
+   "winner": "no winner — a measurement round: every map got its rule sentence",
+   "finding": "THE INVERSE COMPOSER (ARC lens: organization = inducibility) — grammar_fit reads any map and induces its rule in the canon's vocabulary. VALIDATION: it re-induced Trial_gate10_21's generating spec exactly (frame:spine + order:rhythm(1.0) + elevation:procession(0.87) + rooms:banded(0.95)) — the forward program recovered by inverse fit. Corpus sweep: 1,987 maps, mean organization 0.48; bands 1,596 alive / 383 noise-risk (the triage list) / 8 monotone-risk (ceremonial courts at 1.00 — ring+mirror+compression, correctly flagged as pattern-saturated). Thread_Gate reads frame:ring + rooms:banded + arrival:compression. KNOWN LIMITS recorded: BFS encounter order is bidirectional on rings (a real walker picks one direction — crescendo-on-ring under-detected); ring redefined as court-with-petals via artifact angular spread (not annulus). Organization stays a BAND per the compression thesis: the residual of hand maps is protected, not demolished.",
+   "results": "commons/data/grammar_fit_index.json"
   }
  ]
 }
