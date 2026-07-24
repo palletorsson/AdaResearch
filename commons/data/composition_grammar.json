@@ -1,0 +1,121 @@
+{
+ "_comment": "THE ORDER OF OPERATIONS for map composition — canon, editable. Palle 2026-07-24: 'this is about order of operation, what is included in what order... then auto research to create the best combination or new strategies.' The research engines READ this file (stages, metric weights, bands): edit here, re-run, the search changes. Rounds history at the bottom. Sibling canons: cabinet_grammar.json, systems_fold.json.",
+ "version": 3,
+ "operations": [
+  {
+   "n": 1,
+   "op": "order",
+   "what": "sequence the artifacts",
+   "strategies": [
+    "crescendo",
+    "narrative",
+    "rhythm"
+   ],
+   "note": "narrative (threshold, hero, kin ascending) edges crescendo in r1+r2"
+  },
+  {
+   "n": 2,
+   "op": "footprint",
+   "what": "measured union-AABBs from the probe floor",
+   "source": "commons/data/artifact_elements.json",
+   "note": "never registry guesses; probe truth only"
+  },
+  {
+   "n": 2.5,
+   "op": "typology",
+   "what": "TEMPLATE FIRST — the frame rooms grow into",
+   "strategies": [
+    "gallery_spine",
+    "courtyard",
+    "hall_wings"
+   ],
+   "ruling": "Palle r2: templates earlier — YES, decisive; typology dominated the ranking (courtyard swept top 9)"
+  },
+  {
+   "n": 3,
+   "op": "room",
+   "what": "grow the room AROUND the artifact (SDF/fractal thinking)",
+   "strategies": [
+    "rect",
+    "sdf_disc",
+    "sdf_blob"
+   ],
+   "note": "SDF beats rect ~2x on fit (r1); grow clearance until area lands in the band"
+  },
+  {
+   "n": 4,
+   "op": "walls",
+   "what": "thin wall segments + doors (layers.walls: nesw lower=wall, UPPER=door)",
+   "note": "one door per room toward the hall; wp on door pair when heights differ"
+  },
+  {
+   "n": 5,
+   "op": "templates_fixed",
+   "what": "the quarantine yard and other set pieces",
+   "note": "r3: yard INTEGRATED as a composition slot, not an island across a runway"
+  },
+  {
+   "n": 6,
+   "op": "elevation",
+   "what": "heights along the walk",
+   "strategies": [
+    "flat",
+    "procession"
+   ],
+   "note": "procession scored only after r2 gave elevation a metric"
+  },
+  {
+   "n": 7,
+   "op": "paths",
+   "what": "connective tissue LAST — and cared for",
+   "note": "r3: width-2 passages with width-3 pulse; longest-naked-run penalised (tissue metric)"
+  }
+ ],
+ "laws": [
+  "FIT: a piece whose envelope exceeds the room belongs to another room (exclude, record why)",
+  "REACH: high-aspect envelopes are reach, not body — space by body, aim reach along the walk",
+  "MOAT-AS-HYPOTHESIS: runtime growth is stochastic; containment is re-tested every run",
+  "spawn token is exactly 's'; teleporter stands on void; climbing requires wp; a door must open onto floor",
+  "static measurement is not runtime envelope (growth-class artifacts need settle-time probing)"
+ ],
+ "room_band": {
+  "lo_x_artifact_cells": 3,
+  "hi_x_artifact_cells": 8,
+  "hi_pad": 6
+ },
+ "metric_weights": {
+  "room_band": 0.18,
+  "enclosure": 0.16,
+  "hall": 0.12,
+  "arrival": 0.15,
+  "elevation": 0.08,
+  "reach": 0.13,
+  "compact": 0.12,
+  "tissue": 0.06
+ },
+ "compact_target": 0.5,
+ "tissue_free_run": 8,
+ "rounds": [
+  {
+   "round": 1,
+   "combos": 36,
+   "winner": "narrative/sdf_disc/flat/spine 0.593",
+   "finding": "METRIC BLIND — room_fit optimized closets; score could not see enclosure/arrival/hall. Falsified its own scorer.",
+   "results": "commons/data/gate_research_results.json"
+  },
+  {
+   "round": 2,
+   "combos": 54,
+   "winner": "narrative/sdf_disc/courtyard/procession 0.75",
+   "finding": "templates-early decisive (courtyard swept top 9); score+eye agree; weakness = naked connective tissue; hall_wings starved by one-sided implementation.",
+   "results": "commons/data/gate_research_round2.json"
+  },
+  {
+   "round": 3,
+   "combos": 54,
+   "winner": "rhythm/rect/hall_wings/procession 0.652 (Trial_gate3_41)",
+   "finding": "YARD-AS-SLOT works — tissue 1.0 everywhere, the runway to quarantine is gone by construction; fair two-sided hall_wings competitive; procession sweeps. NEW LEAK FOUND: the hall's spawn approach became the runway (compact only 0.17-0.24) — the plane hid inside the typology. Round-4 target: hall trimmed to room extent / chain wrapped into L or square; best-of-breed recipe = courtyard ring (r2) + yard-as-ring-slot (r3) + banded SDF rooms + trimmed approach.",
+   "results": "commons/data/gate_research_round3.json"
+  }
+ ]
+}
