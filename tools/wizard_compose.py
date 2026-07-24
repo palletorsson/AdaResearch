@@ -787,6 +787,30 @@ def compose_track(spec):
             if 0 <= nx < W and (nx, z) not in parapet and S[z][nx] == "1":
                 if U[z][nx] == " " and U[z][x] == " ":
                     U[z][nx] = "wp"; U[z][x] = "wp"
+    # LIFT LAW: no lift without a step — a procession-lifted room with no door
+    # gets a wp pair at its mouth, or its artifact strands at h2 (r7 bug: spine
+    # niches lifted doorless -> unreach 2 across every +4 plan)
+    for si in lifted:
+        if any(w[4] == si and w[3] for w in walls_auth):
+            continue
+        rc = seg_rooms[si][1]
+        seen_comp = set()
+        for (x, z) in sorted(rc):
+            if (x, z) in seen_comp: continue
+            comp, stack = set(), [(x, z)]
+            while stack:
+                c = stack.pop()
+                if c in comp or c not in rc: continue
+                comp.add(c)
+                stack += [(c[0]+1, c[1]), (c[0]-1, c[1]), (c[0], c[1]+1), (c[0], c[1]-1)]
+            seen_comp |= comp
+            pair = next((((cx, cz), (cx+dx, cz+dz)) for (cx, cz) in sorted(comp)
+                         for dx, dz in ((1, 0), (-1, 0), (0, 1), (0, -1))
+                         if (cx+dx, cz+dz) in hallc), None)
+            if pair:
+                (rx, rz), (hx, hz) = pair
+                if U[rz][rx] == " " and U[hz][hx] == " ":
+                    U[rz][rx] = "wp"; U[hz][hx] = "wp"
 
     # metrics geometry: rooms = slot regions; open slots get a 3x3 region
     rooms = []

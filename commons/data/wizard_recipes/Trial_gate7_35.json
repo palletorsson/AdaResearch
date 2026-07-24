@@ -1,0 +1,68 @@
+{
+ "name": "Trial_gate7_35",
+ "date": "2026-07-24",
+ "spec": {
+  "cast": [
+   "line",
+   "laser_measure",
+   "helicoid",
+   "crystal_cluster",
+   "csg_difference_demo",
+   "geodesic_dome",
+   "branching_growth_algorithm"
+  ],
+  "hero": "laser_measure",
+  "anti": "mold_network",
+  "order": {
+   "strategy": "rhythm"
+  },
+  "typology": "hall_wings",
+  "grower": "rect",
+  "walls": {
+   "dressing": {}
+  },
+  "yard": {
+   "enabled": true
+  },
+  "elevation": "procession",
+  "trim_approach": false,
+  "arrival": {
+   "threshold": "none",
+   "prologue": false,
+   "overview": "none"
+  },
+  "track": {
+   "enabled": true,
+   "plan": [
+    "gate_in",
+    "chamber_big",
+    "gallery_pair",
+    "chamber_big",
+    "gallery_pair",
+    "chamber_big",
+    "gallery_pair",
+    "gallery_pair",
+    "spine_niches",
+    "yard_seg",
+    "gate_out"
+   ],
+   "kin_fill": true
+  }
+ },
+ "score_soft": 0.67,
+ "metrics": {
+  "room_band": 0.74,
+  "enclosure": 0.13,
+  "hall": 0.5,
+  "arrival": 0.43,
+  "elevation": 0.5,
+  "compact": 0.8,
+  "tissue": 1.0,
+  "story": 1.0
+ },
+ "pathfinder": {
+  "ok": true,
+  "reach": 0.98
+ },
+ "note": "round 7 winner \u2014 track plan policies (best segment grammar)"
+}

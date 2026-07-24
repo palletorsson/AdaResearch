@@ -98,7 +98,8 @@
   "MOAT-AS-HYPOTHESIS: runtime growth is stochastic; containment is re-tested every run",
   "spawn token is exactly 's'; teleporter stands on void; climbing requires wp; a door must open onto floor",
   "static measurement is not runtime envelope (growth-class artifacts need settle-time probing)",
-  "SEAM (track): segment seam rows carry walk at the shared center columns; a wall or a room on the seam cuts the world (reach tells, the OK label does not)"
+  "SEAM (track): segment seam rows carry walk at the shared center columns; a wall or a room on the seam cuts the world (reach tells, the OK label does not)",
+  "LIFT (track/elevation): no lift without a step — every procession-raised room needs a wp climb at its mouth; a doorless lifted room strands its artifact (r7: spine niches at h2, unreach 2 across every +4 plan — the first leaderboard was a lie the LIFT law exposed)"
  ],
  "room_band": {
   "lo_x_artifact_cells": 3,
@@ -163,6 +164,13 @@
    "finding": "GUARANTEED PARAPET (engine-fix round, rubric unchanged) — the parapet now side-searches s→w→n with all-or-nothing placement, never stomps rooms, approach from existing connected floor only. 54 parapet-requested variants, 0 overlook misses. THE FIX CHANGED THE RANKING: r5's casualties became the winners — crescendo/narrative full-story courtyards (0.754 without their parapet in r5) found a WEST-side parapet and hit 0.800, edging the standing gate's rhythm packing (0.793). Story pays +0.187. Lesson: a guarantee is not a repair, it is a re-ranking — variants that lost to a position accident were better all along.",
    "results": "commons/data/gate_research_round6.json",
    "promoted": "Thread_Gate v6 (standing gate) — Palle's ruling 2026-07-24; the guarantee's re-ranking honored: the crescendo spiral holds the gate"
+  },
+  {
+   "round": 7,
+   "combos": 45,
+   "winner": "rhythm/dense/+4 0.670 (Trial_gate7_35, 13x77, 7 kin)",
+   "finding": "TRACK PLANS AS SEARCH SPACE — five plan policies (auto/dense/breath/monument/pairs) x kin extension (+0/+2/+4) x three orders. FIRST RUN WAS POISONED: procession lifted the doorless spine niches with no wp climb -> unreach 2 on every +4 plan; the leaderboard read '+4 kills, auto worst' and both were the bug. LIFT law added (no lift without a step), re-run: 45/45 pass, and the findings INVERTED — kin +4 pays (mean 0.646 vs 0.638) and DENSE (walled-only grammar) sweeps the top 9 (mean 0.666 > auto 0.644 > monument 0.642 > breath 0.625 ~ pairs 0.624). Enclosure and walls, not open breath, are what the rubric rewards in a band. Track ceiling ~0.67 vs the courtyard gate's 0.800: the hall/enclosure shares are structural to the format — the track is a curriculum band format, not a gate rival. Never trust a leaderboard whose failures share one number.",
+   "results": "commons/data/gate_research_round7.json"
   }
  ]
 }
