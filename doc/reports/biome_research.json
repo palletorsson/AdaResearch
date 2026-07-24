@@ -1,0 +1,100 @@
+{
+ "_readme": "biome look-research judgments (tools/biome_research.py). score 1-5: 1=broken, 3=reads, 5=hero. Weakest sort to the agenda top.",
+ "reviewed": {
+  "fungus_mycelium": {
+   "score": 5,
+   "note": "hero — tapering filaments read as grown",
+   "date": "2026-07-23"
+  },
+  "mute": {
+   "score": 5,
+   "note": "correct empty vacuum, honest",
+   "date": "2026-07-23"
+  },
+  "fauna_grub": {
+   "score": 4,
+   "note": "solid continuous SDF body now",
+   "date": "2026-07-23"
+  },
+  "flora_sdf_tree": {
+   "score": 4,
+   "note": "solid trunk+canopy; minor canopy window at low LOD",
+   "date": "2026-07-23"
+  },
+  "water_pool": {
+   "score": 4,
+   "note": "reflective disc + ripple rings read",
+   "date": "2026-07-23"
+  },
+  "fungus_dna": {
+   "score": 4,
+   "note": "solid domed mushroom after auto-improve",
+   "date": "2026-07-23"
+  },
+  "flora_flower": {
+   "score": 4,
+   "note": "small but reads as flower",
+   "date": "2026-07-23"
+  },
+  "fungus_mycelium_sparse": {
+   "score": 4,
+   "note": "thinner web, reads",
+   "date": "2026-07-23"
+  },
+  "fungus_ca": {
+   "score": 4,
+   "note": "voxel network, visibly computed",
+   "date": "2026-07-23"
+  },
+  "fd_alien_lumen": {
+   "score": 4,
+   "note": "Bioluminescent cracked cap reads instantly; glowing magenta cell-pattern is the family signature. Cap slightly lumpy but characterful.",
+   "date": "2026-07-24"
+  },
+  "fd_fairy_ring": {
+   "score": 4,
+   "note": "Six pale caps in a legible ring - the colony-in-a-circle reads exactly. Individual mushrooms simple but clean.",
+   "date": "2026-07-24"
+  },
+  "fd_parasol_tall": {
+   "score": 4,
+   "note": "Wide flat spiral-topped cap on a tall stem - parasol silhouette clear. Minor specks at the cap-stem junction.",
+   "date": "2026-07-24"
+  },
+  "fd_button_dome": {
+   "score": 4,
+   "note": "Low rounded dome with a concentric top - the button reads cleanly; the humblest of the family, correctly so.",
+   "date": "2026-07-24"
+  },
+  "fd_shelf_bracket": {
+   "score": 3,
+   "note": "Stacked ledges legible; the cyan striping sits at the CAP-LAYER edges (between the stacked plates) - thin geometry catching the dark background in shadow, NOT the gills. Tried gill iridescence-off + gill de-coplanar; neither removed it (reverted). Next: cap-edge/shader diagnosis.",
+   "date": "2026-07-24"
+  },
+  "sf_wind_lean": {
+   "score": 4,
+   "note": "Stem leans hard at ~45deg, cap turned - the wind pose reads dramatically. Minor gill striping under the cap edge.",
+   "date": "2026-07-24"
+  },
+  "sf_gravity_droop": {
+   "score": 4,
+   "note": "Wide heavy cap sags at the edges over a short stem - the droop reads. Cap large but that is the pose.",
+   "date": "2026-07-24"
+  },
+  "sf_inflate_bloat": {
+   "score": 4,
+   "note": "Swollen bulbous balloon cap over a short stem - the bloat reads convincingly.",
+   "date": "2026-07-24"
+  },
+  "sf_squash_settle": {
+   "score": 3,
+   "note": "Reads as a chunky domed mushroom, but the flattened/pressed squash pose does not distinguish itself from a normal cap. Weakest-reading pose.",
+   "date": "2026-07-24"
+  },
+  "sf_wilt_collapse": {
+   "score": 3,
+   "note": "Wrinkled collapsing cap reads; the blue under-cap streaks are thin blades in shadow picking up the scene background, not gill iridescence. Tried gill iridescence-off + de-coplanar thickness; no change on recapture (reverted). Open: cap/gill-in-shadow shading.",
+   "date": "2026-07-24"
+  }
+ }
+}
