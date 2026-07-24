@@ -22,7 +22,7 @@ recipe in each room (.bak backup, overrides + hand-authored rooms respected).
   python tools/classify_postures.py --write         # regenerate rooms (backs up)
 """
 from __future__ import annotations
-import argparse, json, glob, os, collections
+import argparse, json, glob, math, os, collections
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 REG_DIR = os.path.join(REPO, "commons", "artifacts", "registry")
@@ -47,10 +47,45 @@ TABLE_KW = ("slider", "plate", "panel", "screen", "display", "counter", "console
             "keyboard", "dial", "gauge", "meter", "readout", "board", "desk", "workbench")
 
 
+MEASURED = os.path.join(REPO, "commons", "data", "artifact_elements.json")
+
+
 def load_sizes() -> dict:
-    if not os.path.exists(SIZES):
-        return {}
-    return json.load(open(SIZES, encoding="utf-8")).get("sizes", {})
+    """Size oracle for classification — the PROBE-MEASURED floor first.
+
+    Round 8 of the composition research (2026-07-24) found the static
+    artifact_sizes.json oracle stale exactly for the largest bodies (an 8 m
+    screen typed as a 'table', a 10 m gallery as a 'pedestal'). The measured
+    union AABBs from commons/data/artifact_elements.json are the primary
+    truth; the old oracle fills artifacts the probe has not measured.
+    Probe-derived entries carry source='probe' (visible in --explain).
+    """
+    sizes = {}
+    if os.path.exists(SIZES):
+        sizes = json.load(open(SIZES, encoding="utf-8")).get("sizes", {})
+    if os.path.exists(MEASURED):
+        try:
+            arts = json.load(open(MEASURED, encoding="utf-8")).get("artifacts", {})
+        except Exception:
+            arts = {}
+        for name, a in arts.items():
+            s = (a.get("union_aabb") or {}).get("size")
+            if not s or len(s) < 3:
+                continue
+            w, h, d = float(s[0]), float(s[1]), float(s[2])
+            if max(w, h, d) <= 0:
+                continue
+            e = dict(sizes.get(name, {}))
+            e.update({
+                "aabb_size": [w, h, d],
+                "base_m": max(w, d),
+                "height_m": h,
+                "max_dimension_m": max(w, h, d),
+                "grid_cells": [max(1, math.ceil(w)), max(1, math.ceil(d))],
+                "source": "probe",
+            })
+            sizes[name] = e
+    return sizes
 
 
 def load_overrides() -> dict:
@@ -97,7 +132,16 @@ def classify(name: str, entry: dict, size: dict, overrides: dict) -> tuple[str, 
         # mosaics / floors LIE on the ground. Name beats the sunken hint here.
         if plat == "sunken" and any(k in hay for k in FLOOR_KW):
             return "floor", "floor-name over sunken hint"
-        return PLATFORM_MAP[plat], f"spatial_needs.platform={plat}"
+        # Same precedent, measured edition (r8): a table/pedestal hint on a
+        # body taller than a person or broader than furniture is mis-authored
+        # — an 8 m cube does not sit on a desk. The measured floor overrules
+        # the hint; explicit posture_overrides.json still always wins above.
+        _mh = float(size.get("height_m", 0) or 0)
+        _mb = float(size.get("base_m", 0) or 0)
+        if plat in ("table", "pedestal") and (_mh > 2.5 or _mb > 6.0):
+            pass  # fall through to the size logic below
+        else:
+            return PLATFORM_MAP[plat], f"spatial_needs.platform={plat}"
 
     aabb = size.get("aabb_size")
     base = float(size.get("base_m", 0) or 0)
