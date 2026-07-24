@@ -68,18 +68,21 @@ def coerce(v: str):
         return v
 
 
+def canon_members() -> list[tuple[str, str]]:
+    ms = json.loads(CANON.read_text(encoding="utf-8")).get("members", [])
+    return [(m["artifact"], m["scene"]) for m in ms]
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("artifact")
+    ap.add_argument("artifact", nargs="?", default=None)
+    ap.add_argument("--all", action="store_true",
+                    help="sweep EVERY canon member across the axes (cross-member sheet)")
     ap.add_argument("--set", action="append", default=[], metavar="KEY=V1,V2")
     ap.add_argument("--scene", default="")
-    ap.add_argument("--max", type=int, default=24)
+    ap.add_argument("--max", type=int, default=40)
     args = ap.parse_args()
 
-    scene = args.scene or resolve_scene(args.artifact)
-    if not scene:
-        print(f"could not resolve a scene for '{args.artifact}'")
-        return 1
     if not args.set:
         print("nothing to sweep — pass at least one --set KEY=V1,V2,...")
         return 1
@@ -91,22 +94,40 @@ def main() -> int:
             return 1
         key, vals = spec.split("=", 1)
         axes.append((key.strip(), [coerce(v.strip()) for v in vals.split(",") if v.strip()]))
-
     keys = [k for k, _ in axes]
     combos = list(itertools.product(*[vs for _, vs in axes]))
-    if len(combos) > args.max:
-        print(f"{len(combos)} variants exceeds --max {args.max}; narrow the sweep")
-        return 1
+
+    # targets: every canon member (--all), or the single named artifact
+    if args.all:
+        targets = canon_members()
+        sweep_name = "family_" + "_".join(keys)
+    else:
+        if not args.artifact:
+            print("name an artifact, or pass --all")
+            return 1
+        sc = args.scene or resolve_scene(args.artifact)
+        if not sc:
+            print(f"could not resolve a scene for '{args.artifact}'")
+            return 1
+        targets = [(args.artifact, sc)]
+        sweep_name = args.artifact
 
     variants = []
-    for combo in combos:
-        params = dict(zip(keys, combo))
-        label = "__".join(f"{k}-{combo[i]}" for i, k in enumerate(keys))
-        variants.append({"label": label, "params": params})
+    for art, sc in targets:
+        for combo in combos:
+            params = dict(zip(keys, combo))
+            axtag = "__".join(f"{k}-{combo[i]}" for i, k in enumerate(keys))
+            variants.append({
+                "label": f"{art}__{axtag}", "artifact": art,
+                "scene": sc, "params": params,
+            })
+    if len(variants) > args.max:
+        print(f"{len(variants)} variants exceeds --max {args.max}; raise --max or narrow")
+        return 1
 
     SPEC.parent.mkdir(exist_ok=True)
     SPEC.write_text(json.dumps({
-        "scene": scene,
+        "scene": targets[0][1],
         "out_dir": "res://ada_run/sweep",
         "variants": variants,
     }, indent=1), encoding="utf-8")
@@ -117,10 +138,14 @@ def main() -> int:
             p.unlink()
     (SWEEP_OUT / "_done.txt").unlink() if (SWEEP_OUT / "_done.txt").exists() else None
 
-    print(f"· sweeping {args.artifact}: {len(variants)} variants, one boot …")
+    print(f"· sweeping {sweep_name}: {len(variants)} variants, one boot …")
     done = SWEEP_OUT / "_done.txt"
+    SWEEP_OUT.mkdir(parents=True, exist_ok=True)
+    # Watch the sweep DIR, not the final _done.txt: each variant's PNG counts
+    # as progress, so a long batch (32 variants ~46s) doesn't trip the 45s
+    # boot-grace before the last shot lands.
     cmd = [sys.executable, str(REPO / "tools" / "godot_watchdog.py"),
-           f"--expect={done}", "--",
+           f"--expect={SWEEP_OUT}", "--",
            GODOT, "--path", str(REPO), "--xr-mode", "off", "--no-window",
            "--script", "res://commons/testing/capture_config_sweep.gd",
            "--", f"--spec={SPEC}"]
@@ -129,38 +154,44 @@ def main() -> int:
         print("sweep failed (no _done.txt) — check the Godot log")
         return 1
 
-    return tile(args.artifact, variants, keys)
+    return tile(sweep_name, variants, keys, cross_member=args.all)
 
 
-def tile(artifact: str, variants: list[dict], keys: list[str]) -> int:
+def tile(sweep_name: str, variants: list[dict], keys: list[str],
+         cross_member: bool = False) -> int:
     try:
         from PIL import Image, ImageDraw
     except ImportError:
         print(f"  (Pillow missing — shots in {SWEEP_OUT})")
         return 0
-    shots = [(v["label"], v["params"], SWEEP_OUT / f"{v['label']}.png")
+    shots = [(v.get("artifact", ""), v["params"], SWEEP_OUT / f"{v['label']}.png")
              for v in variants if (SWEEP_OUT / f"{v['label']}.png").exists()]
     if not shots:
         print("  no shots produced")
         return 1
-    cols = min(len(keys) == 1 and 4 or len(variants), 4)
-    # if exactly two axes, lay it out as a grid: axis-0 rows x axis-1 cols
     n = len(shots)
-    cols = 4 if n > 4 else n
+    # cross-member sweep: one ROW per member, its finishes side by side, so
+    # cols = combos-per-member. Single artifact: up to 4 wide.
+    if cross_member:
+        distinct = len({s[0] for s in shots}) or 1
+        cols = max(1, n // distinct)
+    else:
+        cols = 4 if n > 4 else n
     rows = (n + cols - 1) // cols
-    cell, lab = 380, 30
+    cell, lab = 360, 28
     sheet = Image.new("RGB", (cols * cell, rows * (cell + lab)), (18, 18, 22))
     draw = ImageDraw.Draw(sheet)
-    for i, (label, params, path) in enumerate(shots):
+    for i, (art, params, path) in enumerate(shots):
         im = Image.open(path).convert("RGB")
         im.thumbnail((cell, cell))
         cx = (i % cols) * cell + (cell - im.width) // 2
         cy = (i // cols) * (cell + lab) + lab + (cell - im.height) // 2
         sheet.paste(im, (cx, cy))
-        cap = "  ".join(f"{k}={params[k]}" for k in keys)
+        pcap = "  ".join(f"{k}={params[k]}" for k in keys)
+        cap = f"{art}  ·  {pcap}" if art else pcap
         draw.text(((i % cols) * cell + 6, (i // cols) * (cell + lab) + 7),
                   cap, fill=(220, 224, 232))
-    out = REPO / "doc" / "reports" / f"sweep_{artifact}.png"
+    out = REPO / "doc" / "reports" / f"sweep_{sweep_name}.png"
     out.parent.mkdir(parents=True, exist_ok=True)
     sheet.save(out)
     print(f"  sweep sheet: {out}  ({len(shots)} variants)")

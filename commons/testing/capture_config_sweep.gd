@@ -54,12 +54,20 @@ func _run() -> void:
 	_stage(vp)
 	var cam: Camera3D = vp.get_node("Cam")
 
-	var packed: PackedScene = load(scene_path)
+	var packed_cache: Dictionary = {}   # scene path -> PackedScene (multi-scene sweeps)
 	var shot := 0
 	for v in variants:
 		var variant: Dictionary = v
 		var label: String = str(variant.get("label", "v%d" % shot))
 		var params: Dictionary = variant.get("params", {})
+		# a variant may name its own scene (cross-member sweeps); else the top one
+		var vscene: String = str(variant.get("scene", scene_path))
+		if not packed_cache.has(vscene):
+			if not ResourceLoader.exists(vscene):
+				print("MISS ", label, " (", vscene, ")")
+				continue
+			packed_cache[vscene] = load(vscene)
+		var packed: PackedScene = packed_cache[vscene]
 
 		var inst: Node = packed.instantiate()
 		# Set every swept @export BEFORE add_child, so _ready() builds with it.
