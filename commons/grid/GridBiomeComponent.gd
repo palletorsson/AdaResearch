@@ -106,6 +106,13 @@ const DEFAULT_BUDGET_INSTANCES: int = 4000
 const DEFAULT_VISIBILITY_RANGE: float = 60.0
 var _budget_instances: int = DEFAULT_BUDGET_INSTANCES
 var _visibility_range: float = DEFAULT_VISIBILITY_RANGE
+# chunk_lod (opt-in via layers.biome._meta.chunk_lod): route the SEED organisms
+# (dispatcher-built trees/mushrooms/creatures — the individual, unbatched nodes)
+# into a ChunkManager in adoption mode, so they get the ecosystem's LOD machinery
+# (mesh-merge draw-call reduction + camera-distance visibility ranges + a far
+# process-freeze). Off by default → seeds spawn exactly as before, untouched.
+var _chunk_lod: bool = false
+var _chunk_mgr = null  # lazy adopt-only ChunkManager (loaded, not class_name)
 var _batches: Dictionary = {}    # key -> {mesh, mat, transforms: Array}
 var _recipe_cache: Dictionary = {}  # kingdom -> cached recipe array (shared meshes)
 var _flushed: bool = false       # after flush, late (runtime) spawns go direct
@@ -156,6 +163,7 @@ func generate(biome_layer: Array, structure_layer: Array, stage_order: int = 0, 
 	_tick_seconds = maxf(0.1, float(meta.get("tick_seconds", DEFAULT_TICK_SECONDS)))
 	_dwell_seconds = maxf(0.1, float(meta.get("dwell_seconds", DEFAULT_DWELL_SECONDS)))
 	_presence_enabled = bool(meta.get("presence", true))
+	_chunk_lod = bool(meta.get("chunk_lod", false))
 	var needs_clock: bool = false
 	_grid_rows = _structure.size()
 	_grid_cols = 0
@@ -453,6 +461,26 @@ func _get_dispatcher() -> Node3D:
 		_dispatcher.name = "BiomeGridDispatcher"
 		add_child(_dispatcher)
 	return _dispatcher
+
+
+# chunk_lod: adopt a dispatcher-built SEED organism into an adopt-only
+# ChunkManager (mesh-merge + camera-distance visibility ranges + a far process-
+# freeze). Gated on _meta.chunk_lod — a no-op, and no manager is ever created,
+# otherwise, so maps without the flag are byte-identical. The dispatcher offers
+# every newly-built organism; the gate lives HERE (one source of truth).
+func adopt_biome_organism(node: Node3D) -> void:
+	if not _chunk_lod or node == null or not is_instance_valid(node):
+		return
+	if _chunk_mgr == null or not is_instance_valid(_chunk_mgr):
+		# load (not class_name): keep the ecosystem subsystem off the grid's
+		# static dependency graph — only chunk_lod maps pay for it.
+		var ChunkManagerScript = load("res://commons/managers/ChunkManager.gd")
+		_chunk_mgr = ChunkManagerScript.new()
+		_chunk_mgr.name = "BiomeChunkLOD"
+		_chunk_mgr.adopt_only = true
+		add_child(_chunk_mgr)
+		print("GridBiomeComponent: chunk_lod ON — seed organisms adopt into BiomeChunkLOD (ChunkManager, adopt_only)")
+	_chunk_mgr.adopt(node)
 
 
 # ── halo (biome-3): the cell spills wilderness OUTWARD — the old ring,

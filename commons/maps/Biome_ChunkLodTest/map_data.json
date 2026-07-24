@@ -1,0 +1,88 @@
+{
+  "documentation": {
+    "biome_chunklodtest": "chunk_lod gate: layers.biome._meta.chunk_lod=true routes the dispatcher-built SEED organisms (trees/mushrooms/creatures) into a ChunkManager in adopt-only mode. Sibling schema of Biome_HaloBudget. Boot log must print the chunk_lod line; headless (no camera) keeps organisms full-detail."
+  },
+  "layers": {
+    "structure": [
+      ["1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1","1","0"]
+    ],
+    "utilities": [
+      ["sp","","","","","","","","","",""],
+      ["","","","","","","","","","",""],
+      ["","","","","","","","","","",""],
+      ["","","","","","","","","","",""],
+      ["","","","","","","","","","",""],
+      ["","","","","","","","","","",""],
+      ["","","","","","","","","","",""],
+      ["","","","","","","","","","",""],
+      ["","","","","","","","","","","t"]
+    ],
+    "interactables": [
+      ["","","","","","","","","","",""],
+      ["","","","","","","","","","",""],
+      ["","","","","","","","","","",""],
+      ["","","","","","","","","","",""],
+      ["","","","","","","","","","",""],
+      ["","","","","","","","","","",""],
+      ["","","","","","","","","","",""],
+      ["","","","","","","","","","",""],
+      ["","","","","","","","","","",""]
+    ],
+    "biome": {
+      "_meta": {
+        "stage_order": 99,
+        "chunk_lod": true
+      },
+      "rows": [
+        ["","","","","","","","","","",""],
+        ["","","","","","","","","","",""],
+        ["","","flora:lsystem:seed:t=4","","","fungus:dna:seed:fd=fairy_ring:t=4","","","fungus:sdf:seed:t=4","",""],
+        ["","","","","","","","","","",""],
+        ["","","fauna:dna:seed:t=4","","","flora:sdf:seed:t=4","","","fungus:softbody:seed:sf=wind_lean:t=4","",""],
+        ["","","","","","","","","","",""],
+        ["","","flora:lsystem:seed:t=5","","","fungus:dna:seed:fd=parasol_tall:t=4","","","fauna:dna:seed:t=4","",""],
+        ["","","","","","","","","","",""],
+        ["","","","","","","","","","",""]
+      ]
+    }
+  },
+  "lighting": {},
+  "map_info": {
+    "dimensions": {
+      "width": 11,
+      "depth": 9,
+      "max_height": 3
+    },
+    "name": "Biome_ChunkLodTest",
+    "format": "json",
+    "description": "chunk_lod gate map: nine seed organisms (tree/mushroom/creature mix) under a dict-form layers.biome with _meta.chunk_lod=true. On load they adopt into a ChunkManager (adopt_only) for LOD. Not spine."
+  },
+  "settings": {
+    "background": {
+      "color": [0.08,0.1,0.18],
+      "type": "sky"
+    },
+    "cube_size": 1.0,
+    "gutter": 0.0,
+    "show_grid": true,
+    "grid_animation": {
+      "enabled": false
+    }
+  },
+  "utility_definitions": {
+    "sp": {
+      "type": "spawn"
+    },
+    "t": {
+      "type": "teleporter"
+    }
+  }
+}

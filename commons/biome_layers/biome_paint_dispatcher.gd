@@ -160,6 +160,10 @@ func _spawn_for_deposit(deposit: Dictionary, stage_order: int,
 	if kingdom < 0:
 		return
 
+	# Remember the parent's children so the adopt hook below can find whatever
+	# this deposit builds, whichever branch it takes.
+	var before: int = parent.get_child_count()
+
 	# 3.a — kingdom unlock guard: a flower painted on a sequence-1
 	# (primitives) map shouldn't render as a flower yet because the
 	# curriculum hasn't unlocked flowers. Fall back to a small kingdom-
@@ -169,27 +173,37 @@ func _spawn_for_deposit(deposit: Dictionary, stage_order: int,
 	var unlock_at: int = BiomeConfigLoaderClass.get_unlock_order(kingdom)
 	if stage_order < unlock_at:
 		_spawn_primitive_fallback(deposit, ctx, parent)
-		return
+	else:
+		# 3.b–3.e — substrate dispatch by kingdom. Each branch wraps a
+		# production builder from elsewhere in the project: BotanicalFlower
+		# (commons/flora) for flower, TreeMorphology + CritterSpawner for
+		# tree/creature when DNA paths are wired (later session),
+		# CellularAutomata3D_Flexible for fungus mycelium (later). Branches
+		# without a wired substrate fall through to primitive_fallback.
+		# This match is the dispatcher's seam — adding a per-kingdom
+		# substrate = one new branch.
+		match kingdom:
+			KINGDOM_FLOWER:
+				_spawn_flower(deposit, ctx, parent)
+			KINGDOM_FUNGUS:
+				_spawn_fungus(deposit, ctx, parent)
+			KINGDOM_TREE:
+				_spawn_tree(deposit, ctx, parent)
+			KINGDOM_CREATURE:
+				_spawn_creature(deposit, ctx, parent)
+			_:
+				_spawn_primitive_fallback(deposit, ctx, parent)
 
-	# 3.b–3.e — substrate dispatch by kingdom. Each branch wraps a
-	# production builder from elsewhere in the project: BotanicalFlower
-	# (commons/flora) for flower, TreeMorphology + CritterSpawner for
-	# tree/creature when DNA paths are wired (later session),
-	# CellularAutomata3D_Flexible for fungus mycelium (later). Branches
-	# without a wired substrate fall through to primitive_fallback.
-	# This match is the dispatcher's seam — adding a per-kingdom
-	# substrate = one new branch.
-	match kingdom:
-		KINGDOM_FLOWER:
-			_spawn_flower(deposit, ctx, parent)
-		KINGDOM_FUNGUS:
-			_spawn_fungus(deposit, ctx, parent)
-		KINGDOM_TREE:
-			_spawn_tree(deposit, ctx, parent)
-		KINGDOM_CREATURE:
-			_spawn_creature(deposit, ctx, parent)
-		_:
-			_spawn_primitive_fallback(deposit, ctx, parent)
+	# chunk_lod: offer every newly-built seed organism to the owner for LOD
+	# adoption (mesh-merge + camera-distance visibility + far freeze). Guarded by
+	# has_method, so painted-cell parents and non-chunk_lod maps are untouched —
+	# the gate itself lives in GridBiomeComponent.adopt_biome_organism.
+	if parent.has_method("adopt_biome_organism"):
+		var added: int = parent.get_child_count()
+		for i in range(before, added):
+			var child = parent.get_child(i)
+			if child is Node3D:
+				parent.adopt_biome_organism(child)
 
 
 # Flower kingdom — wraps commons/flora/BotanicalFlower. Anatomically-

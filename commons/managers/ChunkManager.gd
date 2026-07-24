@@ -114,6 +114,19 @@ var _lod_timer: float = 0.0
 ## Whether we've done the initial population.
 var _has_populated: bool = false
 
+# ── Adoption mode (biome seed organisms) ─────────────────────────────
+# The ecosystem scatter above OWNS its organisms (random placement by density,
+# explicitly OFF the grid). Grid-placed biome seed organisms are built elsewhere
+# (BiomePaintDispatcher, at deterministic cells) and just need the SAME LOD
+# machinery. `adopt_only` makes this manager skip the scatter entirely and only
+# LOD-manage externally-built, externally-placed nodes registered via adopt().
+var adopt_only: bool = false
+
+## Adopted organisms: [{root: Node3D, tier: int}]. Their tier updates from the
+## camera (the body's honest proxy) exactly like the scatter chunks; visibility
+## ranges + process throttle follow, and meshes are merged once at adopt time.
+var _adopted: Array = []
+
 # ── Performance monitoring ──────────────────────────────────────────
 var _perf_timer: float = 0.0
 const PERF_LOG_INTERVAL: float = 3.0  # seconds between perf logs
@@ -126,6 +139,10 @@ var _perf_build_count: int = 0  # morphology builds since last log
 # ═══════════════════════════════════════════════════════════════
 
 func _ready() -> void:
+	if adopt_only:
+		# Adoption mode: no scatter, no CritterSpawner, no EcosystemManager.
+		# _process routes to _adopt_tick, which LOD-manages adopted organisms.
+		return
 	_nature_root = Node3D.new()
 	_nature_root.name = "ChunkPopulation"
 	add_child(_nature_root)
@@ -164,6 +181,9 @@ func _on_vegetation_changed(_config: Dictionary) -> void:
 
 
 func _process(delta: float) -> void:
+	if adopt_only:
+		_adopt_tick(delta)
+		return
 	# Track frame times for perf monitoring
 	_perf_frame_times.append(delta)
 
@@ -645,6 +665,63 @@ func _throttle_creatures() -> void:
 				if entity.get_meta("animation_throttled", false):
 					entity.set_physics_process(true)
 					entity.set_meta("animation_throttled", false)
+
+
+# ═══════════════════════════════════════════════════════════════
+# ADOPTION (biome seed organisms — externally built + placed)
+# ═══════════════════════════════════════════════════════════════
+
+## Register an externally-built organism for LOD management. Merges its mesh
+## children once (the same draw-call reduction the scatter path gets), then
+## tracks it so visibility ranges + a process-freeze follow the camera. Safe to
+## call before final positioning — tiering reads global_position live each tick.
+func adopt(root: Node3D, merge: bool = true) -> void:
+	if root == null or not is_instance_valid(root):
+		return
+	if merge:
+		VisibilityRangeHelper.merge_mesh_children(root)
+	_adopted.append({"root": root, "tier": -1})
+
+
+## Live adopted-organism count (test / telemetry).
+func adopted_count() -> int:
+	return _adopted.size()
+
+
+func _adopt_tick(delta: float) -> void:
+	_lod_timer += delta
+	if _lod_timer < lod_update_interval:
+		return
+	_lod_timer = 0.0
+	# The camera is the body's honest proxy (ProximityLOD's pattern). Headless /
+	# no camera → never LOD, so captures and probes see full-detail organisms.
+	var cam := get_viewport().get_camera_3d()
+	if cam == null:
+		return
+	_player_position = cam.global_position
+	_update_adopted_lod()
+
+
+## Recompute each adopted organism's tier from camera distance; on change apply
+## visibility ranges and, at the farthest tier, freeze the subtree. Prunes freed.
+func _update_adopted_lod() -> void:
+	var write: int = 0
+	for i in range(_adopted.size()):
+		var e: Dictionary = _adopted[i]
+		var root = e.get("root")
+		if root == null or not is_instance_valid(root):
+			continue  # freed — drop it
+		_adopted[write] = e
+		write += 1
+		var new_tier: int = _calculate_tier_with_hysteresis(root.global_position, int(e["tier"]))
+		if new_tier == int(e["tier"]):
+			continue
+		e["tier"] = new_tier
+		VisibilityRangeHelper.apply_lod_tier_ranges(root, new_tier)
+		# Freeze the whole organism subtree only at the farthest tier
+		# (process_mode disables descendants too). Static trees have no sim, so
+		# this only bites organisms that actually compute per frame.
+		root.process_mode = Node.PROCESS_MODE_DISABLED if new_tier == 0 else Node.PROCESS_MODE_INHERIT
 
 
 # ═══════════════════════════════════════════════════════════════
