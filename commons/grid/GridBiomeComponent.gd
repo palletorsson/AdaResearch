@@ -578,17 +578,26 @@ func _build_halo_recipes(kingdom: String) -> Array:
 				{"name": "toadstool", "mesh": stalk, "color": Color(0.7, 0.32, 0.42), "fraction": 0.4, "y_off": 0.12, "emission_mul": 0.3},
 			]
 		"fauna":
-			# earthy burrow mounds + low track-pebbles — NOT floating orange pills
+			# earthy burrow mounds + track-pebbles + a pale creature-sign (an egg).
+			# Was dark-brown-on-dark and vanished into the strip; now warmer, lighter
+			# earth for tonal contrast plus a pale emissive egg so the rim reads as
+			# "a creature passed here" instead of a flat brown smear.
 			var mound: SphereMesh = SphereMesh.new()
-			mound.radius = 0.1
-			mound.height = 0.09
+			mound.radius = 0.11
+			mound.height = 0.1
 			mound.radial_segments = 8
 			mound.rings = 3
 			var pebble: BoxMesh = BoxMesh.new()
 			pebble.size = Vector3(0.06, 0.03, 0.09)
+			var egg: SphereMesh = SphereMesh.new()
+			egg.radius = 0.05
+			egg.height = 0.13
+			egg.radial_segments = 8
+			egg.rings = 4
 			return [
-				{"name": "mound", "mesh": mound, "color": Color(0.34, 0.25, 0.17), "fraction": 0.55, "y_off": 0.0},
-				{"name": "track", "mesh": pebble, "color": Color(0.26, 0.2, 0.15), "fraction": 0.45, "y_off": 0.015},
+				{"name": "mound", "mesh": mound, "color": Color(0.47, 0.35, 0.23), "fraction": 0.45, "y_off": 0.0},
+				{"name": "track", "mesh": pebble, "color": Color(0.4, 0.35, 0.29), "fraction": 0.35, "y_off": 0.015},
+				{"name": "egg", "mesh": egg, "color": Color(0.79, 0.72, 0.55), "fraction": 0.2, "y_off": 0.06, "emission_mul": 0.25},
 			]
 		"mineral":
 			# angular shards fanning up — faceted, not a rounded box
