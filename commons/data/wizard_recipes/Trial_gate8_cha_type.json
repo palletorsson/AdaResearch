@@ -1,0 +1,86 @@
+{
+ "name": "Trial_gate8_cha_type",
+ "date": "2026-07-24",
+ "spec": {
+  "cast": [
+   "derivative_pair",
+   "slope_tangent_demo",
+   "science_screen",
+   "code_display",
+   "velocity_arrow",
+   "player_trace",
+   "partial_derivative_terrain",
+   "integral_area",
+   "riemann_pump",
+   "riemann_pi",
+   "vector_field_grid",
+   "particle_flow_swarm",
+   "ftc_bridge"
+  ],
+  "hero": "",
+  "anti": "",
+  "order": {
+   "strategy": "manual",
+   "list": [
+    "derivative_pair",
+    "slope_tangent_demo",
+    "science_screen",
+    "code_display",
+    "velocity_arrow",
+    "player_trace",
+    "partial_derivative_terrain",
+    "integral_area",
+    "riemann_pump",
+    "riemann_pi",
+    "vector_field_grid",
+    "particle_flow_swarm",
+    "ftc_bridge"
+   ]
+  },
+  "elevation": "procession",
+  "walls": {
+   "dressing": {}
+  },
+  "yard": {
+   "enabled": false
+  },
+  "track": {
+   "enabled": true,
+   "plan": "auto",
+   "kin_fill": true,
+   "routing": "type",
+   "postures": {
+    "derivative_pair": "pedestal",
+    "slope_tangent_demo": "pedestal",
+    "science_screen": "table",
+    "code_display": "table",
+    "velocity_arrow": "pedestal",
+    "player_trace": "pedestal",
+    "partial_derivative_terrain": "floor",
+    "integral_area": "pedestal",
+    "riemann_pump": "pedestal",
+    "riemann_pi": "monument",
+    "vector_field_grid": "pedestal",
+    "particle_flow_swarm": "float",
+    "ftc_bridge": "pedestal"
+   }
+  }
+ },
+ "score_soft": 0.668,
+ "metrics": {
+  "room_band": 0.82,
+  "enclosure": 0.08,
+  "hall": 0.47,
+  "arrival": 0.6,
+  "elevation": 0.5,
+  "compact": 0.87,
+  "tissue": 1.0,
+  "story": 0.75,
+  "aura": 1.0
+ },
+ "pathfinder": {
+  "ok": true,
+  "reach": 0.99
+ },
+ "note": "round 8 \u2014 type-routed placement (postures from classify_postures)"
+}

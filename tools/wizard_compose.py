@@ -573,13 +573,30 @@ def metrics(data, rooms, hall, passage, floor, door_info, story_score=0.0):
             while (cx_, cz_) in passage: L += 1; cx_ += dx; cz_ += dz
             longest = max(longest, L)
     tissue = max(0.0, 1.0 - max(0, longest - TISSUE_FREE) / 16.0)
+    # AURA (r8, observed at weight 0 unless the canon weights it): the gaze
+    # law — viewing distance scales with size. standoff = longest free-floor
+    # run from the anchor; required = 0.8 x max dimension.
+    aura = 0.0
+    if rooms:
+        tot = 0.0
+        for k, cells, (ax, az), _ in rooms:
+            w_, d_, h_ = union(k)
+            req = max(1.0, 0.8 * max(w_, d_, h_))
+            best = 0
+            for dx, dz in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+                run, x, z = 0, ax + dx, az + dz
+                while 0 <= x < W and 0 <= z < D and S[z][x] in "12":
+                    run += 1; x += dx; z += dz
+                best = max(best, run)
+            tot += min(1.0, best / req)
+        aura = tot / len(rooms)
     parts = {"room_band": round(rb, 2), "enclosure": round(enc, 2), "hall": round(hs, 2),
              "arrival": round(arr, 2), "elevation": round(elev, 2),
              "compact": round(compact, 2), "tissue": round(tissue, 2),
-             "story": round(story_score, 2)}
+             "story": round(story_score, 2), "aura": round(aura, 2)}
     soft = (MW['room_band'] * rb + MW['enclosure'] * enc + MW['hall'] * hs + MW['arrival'] * arr
             + MW['elevation'] * elev + MW['compact'] * min(compact / COMPACT_T, 1) + MW['tissue'] * tissue
-            + MW.get('story', 0) * story_score)
+            + MW.get('story', 0) * story_score + MW.get('aura', 0) * aura)
     return {"parts": parts, "soft": round(soft, 3)}
 
 def pathfind(name):
@@ -643,6 +660,22 @@ def main():
 # leftover slots with registry-category relatives.
 TRACKS_PATH = ROOT / "commons/data/wizard_track_templates.json"
 
+# ROLE ROUTING (round 8): staging posture -> preferred segments. Past a size,
+# an artifact stops being furniture and becomes architecture: floor IS the
+# ground (terrain_field), monument IS the room (hall_grand), wall IS the wall
+# (tableau_face). Postures arrive via spec.track.postures (runner-computed
+# from tools/classify_postures.classify — the composer stays dependency-free).
+POSTURE_ROUTE = {
+    "pedestal": ["gallery_pair", "spine_niches"],
+    "table": ["spine_niches", "gallery_pair"],
+    "platform": ["court_open"],
+    "floor": ["terrain_field"],
+    "monument": ["hall_grand"],
+    "wall": ["tableau_face"],
+    "float": ["court_open"],
+    "pit": ["court_open"],
+}
+
 def _registry_categories():
     cats = {}
     for f in sorted((ROOT / "commons/artifacts/registry").glob("*.json")):
@@ -675,12 +708,19 @@ def compose_track(spec):
         plan = ["gate_in"]
         open_caps = [sl.get("cap", 4) for sl in SEG["gate_in"]["slots"] if not sl.get("anti")]
         used_count = {n: 0 for n in CYCLE}
+        postures = trk.get("postures") or {}
+        routing = trk.get("routing", "size")
         for k in order:
             need = afp_cells(k)
             i = next((j for j, c in enumerate(open_caps) if c >= need), None)
             if i is None:
-                cands = [n for n in CYCLE
-                         if any(sl.get("cap", 4) >= need for sl in SEG[n]["slots"] if not sl.get("anti"))]
+                cands = []
+                if routing == "type" and postures.get(k) in POSTURE_ROUTE:
+                    cands = [n for n in POSTURE_ROUTE[postures[k]] if n in SEG
+                             and any(sl.get("cap", 4) >= need for sl in SEG[n]["slots"] if not sl.get("anti"))]
+                if not cands:
+                    cands = [n for n in CYCLE
+                             if any(sl.get("cap", 4) >= need for sl in SEG[n]["slots"] if not sl.get("anti"))]
                 if not cands:
                     cands = [n for n in SEG if n not in ("gate_in", "gate_out", "yard_seg")
                              and any(sl.get("cap", 4) >= need for sl in SEG[n]["slots"] if not sl.get("anti"))]

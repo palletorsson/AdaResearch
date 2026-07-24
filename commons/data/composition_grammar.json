@@ -100,7 +100,8 @@
   "spawn token is exactly 's'; teleporter stands on void; climbing requires wp; a door must open onto floor",
   "static measurement is not runtime envelope (growth-class artifacts need settle-time probing)",
   "SEAM (track): segment seam rows carry walk at the shared center columns; a wall or a room on the seam cuts the world (reach tells, the OK label does not)",
-  "LIFT (track/elevation): no lift without a step — every procession-raised room needs a wp climb at its mouth; a doorless lifted room strands its artifact (r7: spine niches at h2, unreach 2 across every +4 plan — the first leaderboard was a lie the LIFT law exposed)"
+  "LIFT (track/elevation): no lift without a step — every procession-raised room needs a wp climb at its mouth; a doorless lifted room strands its artifact (r7: spine niches at h2, unreach 2 across every +4 plan — the first leaderboard was a lie the LIFT law exposed)",
+  "ROLE: past a threshold an artifact stops being furniture and becomes architecture — floor IS the ground (terrain_field), monument IS the room (hall_grand pass-through), wall IS the wall (tableau_face); route by staging posture, and derive the posture from the MEASURED floor, not a stale oracle"
  ],
  "room_band": {
   "lo_x_artifact_cells": 3,
@@ -172,6 +173,13 @@
    "winner": "rhythm/dense/+4 0.670 (Trial_gate7_35, 13x77, 7 kin)",
    "finding": "TRACK PLANS AS SEARCH SPACE — five plan policies (auto/dense/breath/monument/pairs) x kin extension (+0/+2/+4) x three orders. FIRST RUN WAS POISONED: procession lifted the doorless spine niches with no wp climb -> unreach 2 on every +4 plan; the leaderboard read '+4 kills, auto worst' and both were the bug. LIFT law added (no lift without a step), re-run: 45/45 pass, and the findings INVERTED — kin +4 pays (mean 0.646 vs 0.638) and DENSE (walled-only grammar) sweeps the top 9 (mean 0.666 > auto 0.644 > monument 0.642 > breath 0.625 ~ pairs 0.624). Enclosure and walls, not open breath, are what the rubric rewards in a band. Track ceiling ~0.67 vs the courtyard gate's 0.800: the hall/enclosure shares are structural to the format — the track is a curriculum band format, not a gate rival. Never trust a leaderboard whose failures share one number.",
    "results": "commons/data/gate_research_round7.json"
+  },
+  {
+   "round": 8,
+   "combos": 5,
+   "winner": "no score winner declared — the rubric is role-blind; the eye rules",
+   "finding": "TYPE-ROUTED PLACEMENT — postures (classify_postures) route artifacts to ROLE segments; two new segments (terrain_field: walk THROUGH the artifact-as-ground; tableau_face: artifact against a wall band with standoff — first draft violated the SEAM law with a full wall band and cut the track, caught by reach again). THREE findings: (1) THE POSTURE SOURCE WAS STALE — classify reads artifact_sizes.json while the composer reads the probe floor; measured-size postures re-type 8/23 symmetry artifacts (looms/mills pedestal->platform; atlas gallery pedestal->FLOOR — the role change firing for real). Cross-tool: dressing rooms inherit the same staleness. (2) The rubric cannot see role-fit: type-routed tracks tie (0.649) or lose slightly (change 0.668 vs 0.686; typeM 0.619) while being SHORTER and architecturally differentiated — scoring open-role architecture needs a grounded metric, not a circular one. (3) AURA added at weight 0 (standoff vs 0.8x max-dim, gaze law): it SATURATES at 1.0 in track mode (open bands always grant standoff) — it will only discriminate in gate-mode rooms; weighting it now would be noise. Verdict deferred to the eye (captures of size vs typeM); promotion of measured postures into classify_postures = the actionable next.",
+   "results": "commons/data/gate_research_round8.json"
   }
  ]
 }

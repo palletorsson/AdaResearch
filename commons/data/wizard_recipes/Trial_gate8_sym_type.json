@@ -1,0 +1,116 @@
+{
+ "name": "Trial_gate8_sym_type",
+ "date": "2026-07-24",
+ "spec": {
+  "cast": [
+   "pattern_tile_4x4",
+   "pattern_tile_cube",
+   "tile_meander_floor",
+   "science_screen",
+   "ten_print_textile",
+   "pattern_loom",
+   "pattern_tile_puzzle",
+   "mill_persian_p4",
+   "pattern_tile_mirror",
+   "kaleidoscope",
+   "mill_escher_p4g",
+   "loom_escher_mirror",
+   "pattern_tile_brick",
+   "pattern_tile_herringbone",
+   "loom_bolt_memphis_p4g",
+   "pattern_artifact",
+   "pattern_maker_station",
+   "catalyst_target",
+   "wall_pattern_gallery",
+   "loom_alhambra_p6m",
+   "vr_tile_editor",
+   "mill_alhambra_p6m",
+   "pattern_atlas_gallery"
+  ],
+  "hero": "",
+  "anti": "",
+  "order": {
+   "strategy": "manual",
+   "list": [
+    "pattern_tile_4x4",
+    "pattern_tile_cube",
+    "tile_meander_floor",
+    "science_screen",
+    "ten_print_textile",
+    "pattern_loom",
+    "pattern_tile_puzzle",
+    "mill_persian_p4",
+    "pattern_tile_mirror",
+    "kaleidoscope",
+    "mill_escher_p4g",
+    "loom_escher_mirror",
+    "pattern_tile_brick",
+    "pattern_tile_herringbone",
+    "loom_bolt_memphis_p4g",
+    "pattern_artifact",
+    "pattern_maker_station",
+    "catalyst_target",
+    "wall_pattern_gallery",
+    "loom_alhambra_p6m",
+    "vr_tile_editor",
+    "mill_alhambra_p6m",
+    "pattern_atlas_gallery"
+   ]
+  },
+  "elevation": "procession",
+  "walls": {
+   "dressing": {}
+  },
+  "yard": {
+   "enabled": false
+  },
+  "track": {
+   "enabled": true,
+   "plan": "auto",
+   "kin_fill": true,
+   "routing": "type",
+   "postures": {
+    "pattern_tile_4x4": "pedestal",
+    "pattern_tile_cube": "pedestal",
+    "tile_meander_floor": "floor",
+    "science_screen": "table",
+    "ten_print_textile": "pedestal",
+    "pattern_loom": "floor",
+    "pattern_tile_puzzle": "pedestal",
+    "mill_persian_p4": "pedestal",
+    "pattern_tile_mirror": "pedestal",
+    "kaleidoscope": "table",
+    "mill_escher_p4g": "pedestal",
+    "loom_escher_mirror": "pedestal",
+    "pattern_tile_brick": "pedestal",
+    "pattern_tile_herringbone": "pedestal",
+    "loom_bolt_memphis_p4g": "pedestal",
+    "pattern_artifact": "pedestal",
+    "pattern_maker_station": "table",
+    "catalyst_target": "floor",
+    "wall_pattern_gallery": "pedestal",
+    "loom_alhambra_p6m": "pedestal",
+    "vr_tile_editor": "table",
+    "mill_alhambra_p6m": "pedestal",
+    "pattern_atlas_gallery": "pedestal"
+   }
+  }
+ },
+ "score_soft": 0.649,
+ "metrics": {
+  "room_band": 0.75,
+  "enclosure": 0.07,
+  "hall": 0.35,
+  "arrival": 0.61,
+  "elevation": 0.5,
+  "compact": 0.88,
+  "tissue": 1.0,
+  "story": 0.75,
+  "aura": 1.0
+ },
+ "pathfinder": {
+  "ok": true,
+  "reach": 0.99
+ },
+ "note": "round 8 \u2014 type-routed placement (postures from classify_postures)"
+}
