@@ -167,13 +167,13 @@
    "date": "2026-07-24"
   },
   "fungus_sdf": {
-   "score": 3,
-   "note": "Clean small SDF mushroom, cap flows into stem with no seam - but renders notably SMALLER than fungus:dna at comparable tier. Normalize the sdf tier->size.",
+   "score": 4,
+   "note": "SIZE FIX: scale ~4x (was a chip next to fungus:dna's x4.6 boost) -> now a proper mushroom, cap flowing into stem as one continuous SDF surface.",
    "date": "2026-07-24"
   },
   "mineral_crystal": {
-   "score": 3,
-   "note": "Correct faceted shard but renders as a single small chip - the promised 'cluster of prism shards' does not read at this size. Grow/size up the cluster.",
+   "score": 4,
+   "note": "CLUSTER FIX: 6-9 shards, x1.4 size, wider spread (was 4-6 tight 0.09-wide shards that merged) -> reads as a faceted crystal cluster of distinct prisms.",
    "date": "2026-07-24"
   },
   "flora_tree": {

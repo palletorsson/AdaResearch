@@ -398,7 +398,9 @@ func _spawn_sdf_organism(deposit: Dictionary, ctx: Dictionary, parent: Node3D,
 		var seed: int = (x * 53 + z * 29) & 0xFFFF
 		dna = CritterDNAClass.new()
 		dna.body_type = 3.0
-		dna.scale = (0.6 + 0.12 * float(intensity)) * (0.85 + 0.3 * float(seed % 7) / 7.0)
+		# ~4x the old scale: fungus:sdf rendered as a chip next to fungus:dna,
+		# which gets a x(2.2+0.6*intensity) boost. Match its apparent size.
+		dna.scale = (1.7 + 0.6 * float(intensity)) * (0.85 + 0.3 * float(seed % 7) / 7.0)
 		dna.part_length = 0.5 + 0.4 * float((seed >> 3) % 5) / 5.0
 		dna.part_width = 0.5 + 0.5 * float((seed >> 6) % 5) / 5.0
 		dna.part_curve = 0.3 + 0.6 * float((seed >> 9) % 5) / 5.0

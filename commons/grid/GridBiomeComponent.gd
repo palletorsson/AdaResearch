@@ -656,13 +656,16 @@ func _spawn_specimen(col: int, row: int, cell: Dictionary, kingdom: String) -> v
 
 
 func _build_crystal(holder: Node3D, scale: float, rng: RandomNumberGenerator) -> void:
-	# a cluster of elongated faceted prisms fanning up from a common base
-	var shards: int = rng.randi_range(4, 6)
+	# a cluster of elongated faceted prisms fanning up from a common base.
+	# Bigger, more numerous and more spread than before (was 4-6 shards 0.09 wide
+	# packed within +/-0.09 — they merged into one chip); now reads as a CLUSTER.
+	scale *= 1.4
+	var shards: int = rng.randi_range(6, 9)
 	for _i in range(shards):
 		var mi := MeshInstance3D.new()
 		var pm := PrismMesh.new()
-		var hgt: float = rng.randf_range(0.18, 0.42) * scale
-		pm.size = Vector3(0.09 * scale, hgt, 0.09 * scale)
+		var hgt: float = rng.randf_range(0.24, 0.62) * scale
+		pm.size = Vector3(0.11 * scale, hgt, 0.11 * scale)
 		mi.mesh = pm
 		var tint: float = rng.randf_range(-0.04, 0.14)
 		var col := Color(0.58 + tint, 0.66 + tint, 0.86 + tint * 0.4)
@@ -673,9 +676,9 @@ func _build_crystal(holder: Node3D, scale: float, rng: RandomNumberGenerator) ->
 		mat.emission_enabled = true
 		mat.emission = col * 0.5
 		mi.material_override = mat
-		var off: Vector2 = Vector2(rng.randf_range(-0.09, 0.09), rng.randf_range(-0.09, 0.09)) * scale
+		var off: Vector2 = Vector2(rng.randf_range(-0.17, 0.17), rng.randf_range(-0.17, 0.17)) * scale
 		mi.position = Vector3(off.x, hgt * 0.5, off.y)
-		mi.rotation = Vector3(rng.randf_range(-0.35, 0.35), rng.randf_range(0.0, TAU), rng.randf_range(-0.35, 0.35))
+		mi.rotation = Vector3(rng.randf_range(-0.42, 0.42), rng.randf_range(0.0, TAU), rng.randf_range(-0.42, 0.42))
 		holder.add_child(mi)
 
 
