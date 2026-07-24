@@ -52,6 +52,8 @@ DEFAULT_SPEC = {
     "yard": {"enabled": True},
     "elevation": "procession",
     "trim_approach": False,
+    # round 5 — arrival as story: compression threshold, prologue artifact, overview parapet
+    "arrival": {"threshold": "none", "prologue": False, "overview": "none"},
 }
 
 # ---------- measured floor ----------
@@ -227,24 +229,55 @@ def compose(spec):
                                     order_narrative(cast, hero))
                                 for s in ("crescendo", "narrative", "rhythm")}})
 
+    # 8 ARRIVAL (resolved early — it shapes the frame): compression threshold,
+    # prologue artifact standing IN the threshold, overview parapet at the yard
+    arrv = spec.get("arrival") or {}
+    thr_mode = arrv.get("threshold", "none")
+    prologue_on = bool(arrv.get("prologue")) and thr_mode == "compression"
+    over_mode = arrv.get("overview", "none")
+    room_order = order[1:] if (prologue_on and len(order) > 1) else order
+
     # 2 FOOTPRINT lives inside the strip (probe truth) — no geometry yet
     # 2.5 TYPOLOGY — compute ALL THREE frames so options are visible, then choose
     typo_prev = {}
     for tn, fn in TYPOLOGIES.items():
-        h, sl, sp, yc = fn(order)
+        h, sl, sp, yc = fn(room_order)
         typo_prev[tn] = {"hall": cl(h), "slots": [[round(a, 1), round(b, 1)] for a, b, _ in sl],
                          "spawn": list(sp), "yard": list(yc)}
-    hall, slots, spawn_a, yard_c = TYPOLOGIES[tname](order)
+    hall, slots, spawn_a, yard_c = TYPOLOGIES[tname](room_order)
     stages.append({"op": "typology", "chosen": tname, "options": typo_prev})
+
+    threshold = set(); prologue_cell = None; mouth_door = None
 
     # 3 ROOM grown around each artifact
     rooms = []
-    for k, (cx, cz, dd) in zip(order, slots):
+    for k, (cx, cz, dd) in zip(room_order, slots):
         dn = (1 if dd[0] > 0 else -1, 0) if abs(dd[0]) >= abs(dd[1]) else (0, 1 if dd[1] > 0 else -1)
         cells = grow_banded(gname, cx, cz, k, dn) - hall
         rooms.append([k, cells, (round(cx), round(cz)), dn])
     stages.append({"op": "room", "chosen": gname, "hall": cl(hall),
                    "rooms": [{"name": k, "cells": cl(c), "anchor": list(a)} for k, c, a, _ in rooms]})
+
+    # threshold: a two-wide walled corridor CARVED AFTER the rooms, west of all
+    # floor in its rows — compression before the release (v3's entry, composable).
+    # If it mouths into a room rather than the hall, that edge becomes a DOOR.
+    if thr_mode == "compression":
+        sz = spawn_a[1]
+        floorish = set(hall)
+        for _, cells, _, _ in rooms: floorish |= cells
+        rows = (sz, sz + 1)
+        in_rows = [x for (x, z) in floorish if z in rows]
+        if in_rows:
+            wx = min(in_rows)
+            L = 5
+            threshold = {(x, z) for x in range(wx - L, wx) for z in rows}
+            spawn_a = (wx - L, sz)
+            if prologue_on:
+                prologue_cell = (wx - 3, sz)
+            for z in rows:
+                if (wx, z) in floorish:
+                    mouth_door = ((wx, z), "w", (wx - 1, z))   # room/hall cell, its west edge
+                    break
 
     # 5-pre YARD geometry (needed before normalisation)
     yard_cells = set()
@@ -258,8 +291,9 @@ def compose(spec):
         passage -= yard_cells
 
     # TRIM (round-4 lever): cut the hall approach to the composed extent
+    # (skipped under compression — the threshold hangs off the untrimmed spawn)
     trimmed = 0
-    if spec.get("trim_approach") and tname in ("gallery_spine", "hall_wings"):
+    if spec.get("trim_approach") and thr_mode == "none" and tname in ("gallery_spine", "hall_wings"):
         roomx = [c[0] for _, cells, _, _ in rooms for c in cells]
         if roomx:
             keep_from = min(roomx) - 2
@@ -269,16 +303,18 @@ def compose(spec):
             trimmed = len(drop)
             hall -= drop
 
-    floor = set(hall) | passage
+    floor = set(hall) | passage | threshold
     for _, cells, _, _ in rooms: floor |= cells
     allc = floor | yard_cells
     xs = [c[0] for c in allc]; zs = [c[1] for c in allc]
     offx, offz = 2 - min(xs), 2 - min(zs)
     N = lambda c: (c[0] + offx, c[1] + offz)
     hall = {N(c) for c in hall}; passage = {N(c) for c in passage}
-    floor = {N(c) for c in floor}
+    floor = {N(c) for c in floor}; threshold = {N(c) for c in threshold}
     rooms = [[k, {N(c) for c in cells}, N(a), d] for k, cells, a, d in rooms]
     spawn_a = N(spawn_a); yard_c = N(yard_c)
+    if prologue_cell: prologue_cell = N(prologue_cell)
+    if mouth_door: mouth_door = (N(mouth_door[0]), mouth_door[1], N(mouth_door[2]))
     yard_cells = {N(c) for c in yard_cells}
     W = max(c[0] for c in allc) + offx + 4; D = max(c[1] for c in allc) + offz + 4
 
@@ -328,6 +364,12 @@ def compose(spec):
         for (cx_, cz_), cd, nb_ in boundary:
             if not (0 <= cx_ < W and 0 <= cz_ < D): continue
             if ((cx_, cz_), cd) == ((bx, bz), code): WL[cz_][cx_] += cd.upper()
+            elif mouth_door and ((cx_, cz_), cd) == (mouth_door[0], mouth_door[1]):
+                WL[cz_][cx_] += cd.upper()      # the threshold mouths into this room: a door
+                if hmap.get((cx_, cz_), 1) != hmap.get(mouth_door[2], 1):
+                    U[cz_][cx_] = "wp"
+                    mx2, mz2 = mouth_door[2]
+                    if 0 <= mx2 < W and 0 <= mz2 < D: U[mz2][mx2] = "wp"
             elif nb_ in floor: WL[cz_][cx_] += cd
         if hmap.get((bx, bz), 1) != hmap.get(nb, 1):
             U[bz][bx] = "wp"
@@ -350,6 +392,12 @@ def compose(spec):
             I[cz_][cx_] = f"cluster:{cname}:{rot}"
             dressed.append({"room": k, "cluster": cname, "cell": [cx_, cz_], "rot": rot})
 
+    # threshold flanks: walls both long sides — the compression is the walls
+    if threshold:
+        thrz0 = min(z for (_, z) in threshold)
+        for (x, z) in threshold:
+            WL[z][x] += ("n" if z == thrz0 else "s")
+
     segs = []
     for z in range(D):
         for x in range(W):
@@ -370,8 +418,14 @@ def compose(spec):
     for k, cells, (ax, az), _ in rooms:
         tok = f"{k}:270" if k == hero else k
         if 0 <= ax < W and 0 <= az < D: I[az][ax] = tok
+    if prologue_cell:
+        k0 = order[0]
+        px0, pz0 = prologue_cell
+        if 0 <= px0 < W and 0 <= pz0 < D and I[pz0][px0] == " ":
+            I[pz0][px0] = f"{k0}:270" if k0 == hero else k0
     U[spawn_a[1]][spawn_a[0]] = "s"
     tp = None
+    parapet = set()
     if yard_on:
         tx, tz = yard_c[0] + YARD_R + 2, yard_c[1]
         if tx >= W: tx = W - 1
@@ -384,6 +438,22 @@ def compose(spec):
         for z in range(min(yard_c[1], yard_c[1] + YARD_R + 1), max(yard_c[1], yard_c[1] + YARD_R + 1) + 1):
             x = yard_c[0] - YARD_R - 1
             if 0 <= x < W and 0 <= z < D and S[z][x] == "0": S[z][x] = "1"
+        # overview parapet: three walkway cells rise to h2 behind a wall lowered
+        # 4→3 — from up there (eye ~3.7m) you look over into the quarantine.
+        # wp pairs at both ends make the climb legal; the yard stays sealed.
+        if over_mode == "parapet":
+            pz = yard_c[1] + YARD_R + 1
+            wz = yard_c[1] + YARD_R
+            for px in (yard_c[0] - 1, yard_c[0], yard_c[0] + 1):
+                if 0 <= px < W and 0 <= pz < D and S[pz][px] == "1":
+                    S[pz][px] = "2"; parapet.add((px, pz))
+                if 0 <= px < W and 0 <= wz < D and S[wz][px] == "4":
+                    S[wz][px] = "3"
+            if parapet:
+                for ax2, first in ((yard_c[0] - 2, yard_c[0] - 1), (yard_c[0] + 2, yard_c[0] + 1)):
+                    if (0 <= ax2 < W and S[pz][ax2] == "1" and U[pz][ax2] == " "
+                            and (first, pz) in parapet and U[pz][first] == " "):
+                        U[pz][ax2] = "wp"; U[pz][first] = "wp"
     else:
         lastr = rooms[-1]
         bx = max(c[0] for c in lastr[1]) + 2
@@ -398,6 +468,23 @@ def compose(spec):
                    "teleporter": list(tp) if tp else None, "trimmed_cells": trimmed,
                    "floor": cl(floor), "yard": cl(yard_cells)})
 
+    # 8 ARRIVAL — the entry as story: pinch, release, prologue, overlook
+    story = {"pinch": 1.0 if len(threshold) >= 8 else 0.0,
+             "release": 0.0,
+             "prologue": 1.0 if prologue_cell else 0.0,
+             "overlook": 1.0 if parapet else 0.0}
+    if threshold:
+        ex, ez = mouth_door[0] if mouth_door else (max(x for (x, _) in threshold) + 1,
+                                                   min(z for (_, z) in threshold))
+        open9 = sum(1 for dx in (-1, 0, 1) for dz in (-1, 0, 1) if (ex + dx, ez + dz) in floor)
+        story["release"] = min(open9 / 6.0, 1.0)
+    story_score = sum(story.values()) / 4.0
+    stages.append({"op": "arrival",
+                   "chosen": {"threshold": thr_mode, "prologue": prologue_on, "overview": over_mode},
+                   "threshold": cl(threshold), "parapet": cl(parapet),
+                   "prologue": ({"artifact": order[0], "cell": list(prologue_cell)} if prologue_cell else None),
+                   "story": {k: round(v, 2) for k, v in story.items()}})
+
     data = {"map_info": {"name": "X", "lookup_name": "X", "title": "X",
         "description": "wizard: " + "/".join([spec["order"].get("strategy", "?"), gname, tname, ename]),
         "dimensions": {"width": W, "depth": D, "max_height": 4},
@@ -411,12 +498,12 @@ def compose(spec):
                                       "properties": {"action": "next_in_sequence"}}},
         "layers": {"structure": S, "utilities": U, "walls": WL, "interactables": I}}
 
-    m = metrics(data, rooms, hall, passage, floor, door_info)
+    m = metrics(data, rooms, hall, passage, floor, door_info, story_score)
     stages.append({"op": "final", "W": W, "D": D, "metrics": m["parts"], "score_soft": m["soft"],
                    "weights": MW})
     return data, stages
 
-def metrics(data, rooms, hall, passage, floor, door_info):
+def metrics(data, rooms, hall, passage, floor, door_info, story_score=0.0):
     S = data["layers"]["structure"]; WL = data["layers"]["walls"]
     W = len(S[0]); D = len(S)
     fset = floor
@@ -462,9 +549,11 @@ def metrics(data, rooms, hall, passage, floor, door_info):
     tissue = max(0.0, 1.0 - max(0, longest - TISSUE_FREE) / 16.0)
     parts = {"room_band": round(rb, 2), "enclosure": round(enc, 2), "hall": round(hs, 2),
              "arrival": round(arr, 2), "elevation": round(elev, 2),
-             "compact": round(compact, 2), "tissue": round(tissue, 2)}
+             "compact": round(compact, 2), "tissue": round(tissue, 2),
+             "story": round(story_score, 2)}
     soft = (MW['room_band'] * rb + MW['enclosure'] * enc + MW['hall'] * hs + MW['arrival'] * arr
-            + MW['elevation'] * elev + MW['compact'] * min(compact / COMPACT_T, 1) + MW['tissue'] * tissue)
+            + MW['elevation'] * elev + MW['compact'] * min(compact / COMPACT_T, 1) + MW['tissue'] * tissue
+            + MW.get('story', 0) * story_score)
     return {"parts": parts, "soft": round(soft, 3)}
 
 def pathfind(name):

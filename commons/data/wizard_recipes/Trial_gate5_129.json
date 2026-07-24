@@ -1,0 +1,51 @@
+{
+ "name": "Trial_gate5_129",
+ "date": "2026-07-24",
+ "spec": {
+  "cast": [
+   "line",
+   "laser_measure",
+   "helicoid",
+   "crystal_cluster",
+   "csg_difference_demo",
+   "geodesic_dome",
+   "branching_growth_algorithm"
+  ],
+  "hero": "laser_measure",
+  "anti": "mold_network",
+  "order": {
+   "strategy": "rhythm"
+  },
+  "typology": "courtyard",
+  "grower": "sdf_blob",
+  "walls": {
+   "dressing": {}
+  },
+  "yard": {
+   "enabled": true
+  },
+  "elevation": "procession",
+  "trim_approach": false,
+  "arrival": {
+   "threshold": "compression",
+   "prologue": true,
+   "overview": "parapet"
+  }
+ },
+ "score_soft": 0.793,
+ "metrics": {
+  "room_band": 1.0,
+  "enclosure": 0.25,
+  "hall": 1.0,
+  "arrival": 0.45,
+  "elevation": 1.0,
+  "compact": 0.56,
+  "tissue": 1.0,
+  "story": 1.0
+ },
+ "pathfinder": {
+  "ok": true,
+  "reach": 0.87
+ },
+ "note": "round 5 winner \u2014 arrival as story (canon v5, story metric 0.12)"
+}

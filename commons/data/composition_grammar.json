@@ -1,6 +1,6 @@
 {
  "_comment": "THE ORDER OF OPERATIONS for map composition — canon, editable. Palle 2026-07-24: 'this is about order of operation, what is included in what order... then auto research to create the best combination or new strategies.' The research engines READ this file (stages, metric weights, bands): edit here, re-run, the search changes. Rounds history at the bottom. Sibling canons: cabinet_grammar.json, systems_fold.json.",
- "version": 3,
+ "version": 5,
  "operations": [
   {
    "n": 1,
@@ -69,6 +69,19 @@
    "op": "paths",
    "what": "connective tissue LAST — and cared for",
    "note": "r3: width-2 passages with width-3 pulse; longest-naked-run penalised (tissue metric)"
+  },
+  {
+   "n": 8,
+   "op": "arrival",
+   "what": "the entry as STORY — compression threshold, prologue artifact in the corridor, release into the court, overview parapet at the yard (v3's hand-composed arc, made composable)",
+   "strategies": [
+    "none",
+    "compression",
+    "compression+prologue",
+    "compression+parapet",
+    "compression+prologue+parapet"
+   ],
+   "note": "r5: story metric = mean(pinch, release, prologue, overlook); the threshold costs compact (bbox grows) — the search arbitrates narrative vs tightness"
   }
  ],
  "interfaces": {
@@ -89,14 +102,15 @@
   "hi_pad": 6
  },
  "metric_weights": {
-  "room_band": 0.18,
-  "enclosure": 0.16,
-  "hall": 0.12,
-  "arrival": 0.15,
-  "elevation": 0.08,
+  "room_band": 0.16,
+  "enclosure": 0.15,
+  "hall": 0.08,
+  "arrival": 0.14,
+  "elevation": 0.07,
   "reach": 0.13,
-  "compact": 0.12,
-  "tissue": 0.06
+  "compact": 0.1,
+  "tissue": 0.05,
+  "story": 0.12
  },
  "compact_target": 0.5,
  "tissue_free_run": 8,
@@ -129,6 +143,13 @@
    "finding": "RUN THROUGH THE WIZARD ENGINE (tools/wizard_compose) — research and wizard now share one composer; the winner recipe lands in wizard_recipes automatically. THE RIBBON IS DEAD: compact min 0.45 / median 0.52 / max 0.66 over 90 passing (was 0.17-0.24 in r3), 66/90 at/over target, 90/90 pass pathfinder. Credit goes to the REACH LAW, not the trim lever: every trim pair scored IDENTICAL (trim never fired — body-sized rooms leave no approach slack). The round-3 ribbon was reach-cost in disguise: laser_measure's 51-cell envelope inflated every layout; body-sizing removed it everywhere at once. sdf_blob wins its first round (organic petals on the courtyard ring at body scale); courtyard/procession sweeps top 3. Tightest winner of any round.",
    "results": "commons/data/gate_research_round4.json",
    "promoted": "Thread_Gate v4 (standing gate) — Palle's ruling 2026-07-24, eye+score both met; v3's narrative arc (compression corridor, measuring hall) remains the open edge for round 5"
+  },
+  {
+   "round": 5,
+   "combos": 135,
+   "winner": "rhythm/sdf_blob/courtyard/thr+pro+par 0.793 (Trial_gate5_129, 28x25)",
+   "finding": "ARRIVAL AS STORY — v3's hand-composed arc (compression threshold, prologue artifact in the corridor, release, overview parapet) became op 8 + a story metric (canon v5, weight 0.12). STORY PAYS +0.180: best bare 0.613 vs best full-story 0.793 on identical geometry; full-story configs sweep the entire top 16. The threshold's compact cost was absorbed (28x25 unchanged from r4 — the corridor fit the bbox slack). Engine lesson: the corridor must be carved AFTER rooms (west of all floor in its rows) and mouth into a DOOR when it meets a room — carving before rooms sealed the courtyard spawn (1/249 reachable, caught by reach not by FAIL). Caveat recorded: parapet silently no-ops when the yard's ring slot leaves no walkway cells (crescendo/narrative courtyards) — placement is position-dependent, not guaranteed.",
+   "results": "commons/data/gate_research_round5.json"
   }
  ]
 }
