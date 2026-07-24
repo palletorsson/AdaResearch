@@ -91,7 +91,8 @@
   "recipes": "commons/data/wizard_recipes/*.json — saved runs (spec+score+pathfinder); the wizard as memory; seeded from research rounds 2+3 winners",
   "dressing": "stage 4b: hangar wall system enters composition as cluster:<name>:<rot> on the room's back wall, facing the artifact (45 curated clusters)",
   "track": "track_13 mode: spec.track {enabled, plan:auto|[segments], kin_fill}; engine compose_track in tools/wizard_compose.py; segments editable in wizard_track_templates.json — author a segment, it becomes vocabulary",
-  "laws_prose": "doc/COMPOSITION_LAWS.md — the laws WITH their stories + meta-laws + the large-artifact frontier (type-routed placement proposal); this canon holds the what, the doc holds the why"
+  "laws_prose": "doc/COMPOSITION_LAWS.md — the laws WITH their stories + meta-laws + the large-artifact frontier (type-routed placement proposal); this canon holds the what, the doc holds the why",
+  "arc_lens": "doc/ARC_ORGANIZATION.md — organization = inducibility (ARC-AGI lens): the canon ops as a DSL, sequences as few-shot tasks, priors↔laws table, the compression caution (band not maximand), round-11 candidates (inverse composer grammar_fit first)"
  },
  "laws": [
   "FIT: a piece whose envelope exceeds the room belongs to another room (exclude, record why)",
