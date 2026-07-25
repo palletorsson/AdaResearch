@@ -1,0 +1,79 @@
+{
+ "name": "Trial_harvest_track",
+ "date": "2026-07-25",
+ "spec": {
+  "cast": [
+   "line",
+   "laser_measure",
+   "helicoid",
+   "crystal_cluster",
+   "csg_difference_demo",
+   "geodesic_dome",
+   "branching_growth_algorithm"
+  ],
+  "hero": "laser_measure",
+  "anti": "mold_network",
+  "order": {
+   "strategy": "narrative"
+  },
+  "typology": "hall_wings",
+  "grower": "rect",
+  "walls": {
+   "dressing": {}
+  },
+  "yard": {
+   "enabled": true
+  },
+  "elevation": "procession",
+  "trim_approach": false,
+  "arrival": {
+   "threshold": "none",
+   "prologue": false,
+   "overview": "none"
+  },
+  "track": {
+   "enabled": true,
+   "harvest": true
+  },
+  "spans": {
+   "enabled": true,
+   "railings": true
+  },
+  "landmark": {
+   "enabled": true,
+   "height": 4
+  },
+  "lights": {
+   "enabled": true,
+   "every": 7
+  },
+  "principal_wall": {
+   "enabled": true,
+   "style": "hangar",
+   "cluster": "pw_primitives_portals",
+   "props": [
+    "hangar_podium",
+    "hangar_worktable",
+    "hangar_supply_pile"
+   ],
+   "kin": []
+  }
+ },
+ "score_soft": 0.463,
+ "metrics": {
+  "room_band": 0.57,
+  "enclosure": 0.11,
+  "hall": 0.0,
+  "arrival": 0.42,
+  "elevation": 0.0,
+  "compact": 0.72,
+  "tissue": 1.0,
+  "story": 1.0,
+  "aura": 0.9
+ },
+ "pathfinder": {
+  "ok": true,
+  "reach": 0.91,
+  "tail": "OK    Trial_harvest_track  (391/432 reachable, 9 artifacts, 1 teleport(s))\n  Rule 2 [WARN] Teleport at (6,46) \u2014 row z=47 has no floor cubes to catch player\n  Rule 4 [WARN] Artifact 'mold_network' at (3,38) h=1 unreachable\n\n=== 1 maps checked: 1 OK, 0 FAIL (0 issues) ==="
+ }
+}

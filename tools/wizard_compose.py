@@ -1140,9 +1140,25 @@ def _registry_categories():
                     cats.setdefault(k, f.stem)
     return cats
 
+HARVEST_PATH = ROOT / "commons/data/wizard_track_harvested.json"
+
+
 def compose_track(spec):
     T = json.loads(TRACKS_PATH.read_text(encoding="utf-8"))
-    SEG = T["segments"]; CYCLE = T["content_cycle"]
+    SEG = dict(T["segments"]); CYCLE = list(T["content_cycle"])
+    # HARVESTED segments (tools/harvest_segments.py): windows cut from the
+    # best-organized hand maps, spine-aligned to x=6 so they concatenate.
+    # spec.track.harvest = false to compose from authored segments only.
+    if (spec.get("track") or {}).get("harvest", True) and HARVEST_PATH.exists():
+        try:
+            H = json.loads(HARVEST_PATH.read_text(encoding="utf-8"))["segments"]
+        except Exception:
+            H = {}
+        for k, v in H.items():
+            if k not in SEG:
+                SEG[k] = v
+                if v.get("slots"):
+                    CYCLE.append(k)
     stages = []
     cast, hero, anti = spec["cast"], spec.get("hero", ""), spec.get("anti", "")
     ename = spec["elevation"]
