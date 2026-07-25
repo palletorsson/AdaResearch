@@ -113,6 +113,22 @@ var _visibility_range: float = DEFAULT_VISIBILITY_RANGE
 # process-freeze). Off by default → seeds spawn exactly as before, untouched.
 var _chunk_lod: bool = false
 var _chunk_mgr = null  # lazy adopt-only ChunkManager (loaded, not class_name)
+# living_ground (opt-in via layers.biome._meta.living_ground): the declared layer
+# feeds the project's REAL ecology loop instead of only a static stamp —
+# PresenceGrid (a pheromone field with decay + diffusion) seeded from the
+# declared cells, and GroundSpawner (presence accumulates → fertile ground grows
+# NEW organisms). The loop existed but was switched off wholesale in
+# NatureRenderer ("should_be_active = false") because its living-ground PLANE
+# rendered black in VR — a visual-overlay bug, not a simulation bug. Here the
+# simulation is revived WITHOUT that plane: the biome already draws its own
+# presence stain, which works.
+var _living_ground: bool = false
+var _presence_sim = null      # PresenceGrid — the live diffusing field
+var _ground_spawner = null    # GroundSpawner — spontaneous growth from fertility
+var _ground_holder: Node3D = null
+var _ground_pop: int = 12     # _meta.living_ground_population
+var _ground_marks: Array = [] # standing life re-marks the ground each tick
+var _ground_mark_accum: float = 0.0
 var _batches: Dictionary = {}    # key -> {mesh, mat, transforms: Array}
 var _recipe_cache: Dictionary = {}  # kingdom -> cached recipe array (shared meshes)
 var _flushed: bool = false       # after flush, late (runtime) spawns go direct
@@ -164,6 +180,8 @@ func generate(biome_layer: Array, structure_layer: Array, stage_order: int = 0, 
 	_dwell_seconds = maxf(0.1, float(meta.get("dwell_seconds", DEFAULT_DWELL_SECONDS)))
 	_presence_enabled = bool(meta.get("presence", true))
 	_chunk_lod = bool(meta.get("chunk_lod", false))
+	_living_ground = bool(meta.get("living_ground", false))
+	_ground_pop = int(meta.get("living_ground_population", 12))
 	var needs_clock: bool = false
 	_grid_rows = _structure.size()
 	_grid_cols = 0
@@ -211,6 +229,9 @@ func generate(biome_layer: Array, structure_layer: Array, stage_order: int = 0, 
 				_spawn_halo(col, row, parsed)
 	_flush_batches()
 	_refresh_presence()
+	if _living_ground:
+		_start_living_ground()
+		needs_clock = true  # the loop needs the per-frame tick
 	if needs_clock:
 		set_process(true)
 		print("GridBiomeComponent: clock ON (tick %.1fs, dwell %.1fs, %d tick cells)" % [
@@ -224,6 +245,129 @@ func generate(biome_layer: Array, structure_layer: Array, stage_order: int = 0, 
 	if _halo_cells > 0:
 		print("GridBiomeComponent: halo spill from %d cells -> %d ground-cover instances (grid-native ring)" % [
 			_halo_cells, _halo_instances])
+
+
+# ── living_ground: the declared layer feeds the real ecology loop ──
+#
+# PresenceGrid is a pheromone field (R=tree, G=creature, B=flower, A=fungus)
+# that decays and diffuses every tick; GroundSpawner watches it and grows NEW
+# organisms where presence crosses `spawn_threshold`. Seeding it from the
+# declared cells makes the biome's own vocabulary the ecology's input: a mat of
+# `fungus:mycelium:seed` cells becomes fertile fungus ground, and the ground
+# answers by growing more — the `field`/`claim` grammar, but emergent.
+#
+# NOTE the kingdom ints line up already: BiomeGridTokens.dispatch_kingdom_of
+# returns the painted-layer ids (tree 0, creature 1, flower 2, fungus 3), which
+# is exactly PresenceGrid's channel order. No remap.
+#
+# CURRICULUM HONESTY is enforced through the DATA: only kingdoms unlocked at
+# this map's stage_order are ever deposited, so GroundSpawner — which can only
+# grow what the field carries — can never grow a creature on a sequence-2 map.
+func _start_living_ground() -> void:
+	var PresenceGridScript = load("res://algorithms/nature_system/systems/presence_grid.gd")
+	var GroundSpawnerScript = load("res://algorithms/nature_system/systems/ground_spawner.gd")
+	var ConfigLoader = load("res://commons/biome_layers/biome_config_loader.gd")
+	if PresenceGridScript == null or GroundSpawnerScript == null:
+		push_warning("GridBiomeComponent: living_ground requested but the ecology scripts are missing")
+		return
+	var step: float = _cube_size + _gutter
+	var span_x: float = maxf(float(_grid_cols) * step, 1.0)
+	var span_z: float = maxf(float(_grid_rows) * step, 1.0)
+	var span: float = maxf(span_x, span_z)
+	# Resolution follows PresenceGrid's OWN tuned spatial scale (its defaults are
+	# 128 texels over 50m ≈ 2.6 texels/metre). Sizing a small grid map at a fixed
+	# 96 gave 6cm texels — 6x finer — and diffusion, which spreads one texel per
+	# tick, then crawls and never reaches the next cell. Keep the metres-per-texel
+	# constant instead, so the field diffuses at cell scale on any map size.
+	var res: int = clampi(roundi(span * 2.6), 16, 128)
+	_presence_sim = PresenceGridScript.new(res, Vector2(span, span))
+	# PresenceGrid centres its field on world_offset; the grid's own centre is
+	# ((cols-1)/2*step, (rows-1)/2*step) in local space, mapped to world.
+	var centre_local := Vector3((float(_grid_cols) - 1.0) * step * 0.5, 0.0,
+		(float(_grid_rows) - 1.0) * step * 0.5)
+	var centre: Vector3 = to_global(centre_local) if is_inside_tree() else centre_local
+	_presence_sim.world_offset = Vector2(centre.x, centre.z)
+
+	# seed the field from the declared cells (unlocked kingdoms only). The list is
+	# KEPT: PresenceGrid decays (0.98/tick), so a one-shot seed would fade below
+	# GroundSpawner's fertility threshold in seconds and nothing could ever grow.
+	# Standing organisms keep marking the ground — so the cells re-deposit a
+	# maintenance dose every tick, and decay erases only where nothing stands.
+	_ground_marks.clear()
+	var seeded: int = 0
+	for key in _runtime.keys():
+		var state: Dictionary = _runtime[key]
+		if bool(state.get("muted", false)) or not bool(state.get("active", true)):
+			continue
+		# state carries live/muted; the DECLARED cell carries kingdom/algo/mods
+		if not _declared.has(key):
+			continue
+		var cell: Dictionary = _declared[key]
+		var kid: int = BiomeGridTokensScript.dispatch_kingdom_of(cell)
+		if kid < 0:
+			continue  # mineral / water / meta carry no ecology channel
+		if ConfigLoader != null and _stage_order < int(ConfigLoader.get_unlock_order(kid)):
+			continue  # curriculum guard — an unwalked kingdom never becomes fertile
+		var parts: PackedStringArray = String(key).split(",")
+		if parts.size() < 2:
+			continue
+		var col: int = int(parts[0])
+		var row: int = int(parts[1])
+		var local := Vector3(col * step, _surface_y(col, row), row * step)
+		var wpos: Vector3 = to_global(local) if is_inside_tree() else local
+		var tier: int = BiomeGridTokensScript.tier_of(cell)
+		var strength: float = clampf(BiomeGridTokensScript.density_of(cell) * (0.35 + 0.13 * float(tier)), 0.05, 1.0)
+		_presence_sim.deposit(wpos, kid, strength, step * 1.2)
+		_ground_marks.append({"pos": wpos, "kid": kid, "strength": strength, "radius": step * 1.2})
+		seeded += 1
+
+	# the grower: fertile ground raises new organisms, bounded and parented here
+	_ground_holder = Node3D.new()
+	_ground_holder.name = "BiomeGroundGrown"
+	add_child(_ground_holder)
+	_ground_spawner = GroundSpawnerScript.new()
+	_ground_spawner.presence = _presence_sim
+	_ground_spawner.terrain_size = span
+	_ground_spawner.max_ground_population = _ground_pop
+	_ground_spawner.spawner = CritterSpawner.new(_ground_holder)
+	_ground_spawner.spawner.max_population = _ground_pop
+	print("GridBiomeComponent: living_ground ON — PresenceGrid seeded from %d cells (span %.1fm), GroundSpawner cap %d" % [
+		seeded, span, _ground_pop])
+
+
+# Tick the ecology. The FIELD always diffuses (deterministic, allocates nothing
+# new). GROWTH additionally requires a camera — the body's honest proxy, the
+# same rule ProximityLOD and chunk_lod use — so headless captures stay stable
+# and the ground only answers a witness.
+func _tick_living_ground(delta: float) -> void:
+	if _presence_sim == null:
+		return
+	# standing life keeps marking its ground (the maintenance dose above)
+	_ground_mark_accum += delta
+	if _ground_mark_accum >= 0.5:
+		_ground_mark_accum = 0.0
+		for m in _ground_marks:
+			_presence_sim.deposit(m["pos"], int(m["kid"]), float(m["strength"]) * 0.5, float(m["radius"]))
+	_presence_sim.process(delta)
+	if _ground_spawner == null:
+		return
+	if get_viewport() == null or get_viewport().get_camera_3d() == null:
+		return
+	_ground_spawner.process(delta)
+
+
+## Live pheromone reading at a world position (test / telemetry).
+func living_ground_presence(world_pos: Vector3) -> float:
+	if _presence_sim == null:
+		return 0.0
+	return float(_presence_sim.get_total_presence(world_pos))
+
+
+## Count of organisms the ground has grown on its own (test / telemetry).
+func living_ground_grown() -> int:
+	if _ground_spawner == null:
+		return 0
+	return int(_ground_spawner.get_ground_spawned_count())
 
 
 # ── reactivity (runtime only; the map file is never rewritten) ──
@@ -276,6 +420,8 @@ func _world_to_cell(world_pos: Vector3) -> Vector2i:
 #    tick fires there. ──
 
 func _process(delta: float) -> void:
+	if _living_ground:
+		_tick_living_ground(delta)
 	_tick_accum += delta
 	if _tick_accum >= _tick_seconds and not _tick_keys.is_empty():
 		_tick_accum = 0.0

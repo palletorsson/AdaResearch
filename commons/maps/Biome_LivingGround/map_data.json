@@ -1,0 +1,85 @@
+{
+  "documentation": {
+    "biome_livingground": "living_ground gate: layers.biome._meta.living_ground=true feeds the declared cells into the project's real ecology loop — PresenceGrid (pheromone field, decay + diffusion) + GroundSpawner (fertile ground grows NEW organisms). The loop existed but was switched off wholesale in NatureRenderer because its living-ground PLANE rendered black in VR; here the simulation runs without that plane. Growth requires a camera (a witness), so headless captures stay stable."
+  },
+  "layers": {
+    "structure": [
+      ["1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","1"],
+      ["1","1","1","1","1","1","1","1","0"]
+    ],
+    "utilities": [
+      ["sp","","","","","","","",""],
+      ["","","","","","","","",""],
+      ["","","","","","","","",""],
+      ["","","","","","","","",""],
+      ["","","","","","","","",""],
+      ["","","","","","","","",""],
+      ["","","","","","","","",""],
+      ["","","","","","","","","t"]
+    ],
+    "interactables": [
+      ["","","","","","","","",""],
+      ["","","","","","","","",""],
+      ["","","","","","","","",""],
+      ["","","","","","","","",""],
+      ["","","","","","","","",""],
+      ["","","","","","","","",""],
+      ["","","","","","","","",""],
+      ["","","","","","","","",""]
+    ],
+    "biome": {
+      "_meta": {
+        "stage_order": 99,
+        "living_ground": true,
+        "living_ground_population": 10
+      },
+      "rows": [
+        ["","","","","","","","",""],
+        ["","fungus:mycelium:seed:t=5:d=1.0","","fungus:mycelium:seed:t=5:d=1.0","","fungus:mycelium:seed:t=5:d=1.0","","",""],
+        ["","","","","","","","",""],
+        ["","fungus:mycelium:seed:t=5:d=1.0","","fungus:mycelium:seed:t=5:d=1.0","","fungus:mycelium:seed:t=5:d=1.0","","",""],
+        ["","","","","","","","",""],
+        ["","flora:lsystem:seed:t=4","","fungus:dna:seed:fd=fairy_ring:t=4","","flora:lsystem:seed:t=4","","",""],
+        ["","","","","","","","",""],
+        ["","","","","","","","",""]
+      ]
+    }
+  },
+  "lighting": {},
+  "map_info": {
+    "dimensions": {
+      "width": 9,
+      "depth": 8,
+      "max_height": 3
+    },
+    "name": "Biome_LivingGround",
+    "format": "json",
+    "description": "living_ground gate map: a mycelium mat plus trees seeds a live pheromone field; fertile ground grows new organisms on its own. Not spine."
+  },
+  "settings": {
+    "background": {
+      "color": [0.06,0.09,0.14],
+      "type": "sky"
+    },
+    "cube_size": 1.0,
+    "gutter": 0.0,
+    "show_grid": true,
+    "grid_animation": {
+      "enabled": false
+    }
+  },
+  "utility_definitions": {
+    "sp": {
+      "type": "spawn"
+    },
+    "t": {
+      "type": "teleporter"
+    }
+  }
+}
