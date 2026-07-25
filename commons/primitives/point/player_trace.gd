@@ -31,6 +31,45 @@ extends Node3D
 ## Show where the writing began (start) and where the live nib is now (now).
 @export var show_endpoints: bool = true
 
+# ── THE LINE SEAM ────────────────────────────────────────────────────────────
+# doc/CONSERVATION_OF_THE_IRREDUCIBLE.md, § the map of seams:
+#
+#   seam            promised                      shipped                        cross by
+#   the drawn line  a continuous path             a staircase of samples         dropping the
+#                   following the hand            (space AND time quantized)     sample rate
+#
+# That doc names this "the next clearest" seam after randomness, and this artifact
+# is where the curriculum first hands you the pen — so this is its home.
+#
+# The seam is ALREADY HERE and always was: a point is only kept once you have moved
+# min_segment_distance (1 cm), sampled at whatever the frame rate happens to be. The
+# line you read as continuous is a decision to stop looking between the samples. It
+# is invisible because 1 cm at 90 Hz sits one notch below perception, which per that
+# doc is precisely the craft: "the machine does not remove the bias, it hides it
+# below perception — and below perception is exactly where power operates unexamined."
+#
+# These knobs let you CROSS the threshold rather than be told about it. Raise the
+# grid or drop the rate and your own smooth walk becomes a staircase; the ghost line
+# shows the path your body actually took, and the gap between them is the discarded
+# irreducible — reported as numbers rather than a mood by space_discard_mean() /
+# space_discard_max() (the lattice's lie) and time_discard_m() (the motion that
+# happened while the sample clock was shut). Two numbers, because the line is
+# quantised twice and the two losses do not share a unit.
+#
+# All three DEFAULT TO OFF so the 20 existing placements are untouched: the seams
+# that matter are the ones you have to choose to see.
+
+## Snap each kept point to a lattice of this size, in metres. 0 = no spatial
+## quantisation. 0.25 makes the staircase unmistakable at room scale.
+@export var seam_grid: float = 0.0
+## Record at most this many points per second. 0 = every frame permits a point.
+## 2.0 is slow enough that a walked curve becomes a chain of chords.
+@export var seam_sample_hz: float = 0.0
+## Draw the unquantised path your body actually took as a faint ghost beside the
+## kept line. The area between the two IS what the machine threw away.
+@export var show_discarded: bool = false
+@export var discarded_color: Color = Color(0.95, 0.35, 0.85, 0.45)
+
 var _xr_origin: Node3D
 var _trail_mesh: ImmediateMesh
 var _trail_instance: MeshInstance3D
@@ -42,6 +81,22 @@ var _reference_frame: MeshInstance3D
 var _time_elapsed: float = 0.0
 var _start_marker: MeshInstance3D
 var _now_marker: MeshInstance3D
+
+# The line seam: the path as walked (every frame, unquantised) against the path as
+# kept. _truth_points is the reference the discard is measured from.
+var _truth_points: Array[Vector3] = []
+var _ghost_mesh: ImmediateMesh
+var _ghost_instance: MeshInstance3D
+var _sample_clock: float = 0.0
+var _truth_length: float = 0.0
+# space loss: how far each kept point had to move to land on a lattice address
+var _snap_err_sum: float = 0.0
+var _snap_err_max: float = 0.0
+var _snap_n: int = 0
+# time loss: path walked while the sample clock was closed
+var _unrecorded_m: float = 0.0
+var _gate_last_pos: Vector3 = Vector3.ZERO
+var _gate_has_last: bool = false
 
 func _ready() -> void:
 	# Find XR Origin
@@ -174,6 +229,37 @@ func _process(delta: float) -> void:
 
 	var current_global = _xr_origin.global_position
 
+	# ── the path as WALKED — recorded every frame, unquantised, before any of the
+	# thresholds below get to decide what is worth keeping. This is the reference
+	# the discard is measured against; without it the seam has nothing to be a seam
+	# from, because you cannot see what was dropped by looking at what was kept.
+	if show_discarded:
+		var truth_local: Vector3 = to_local(current_global)
+		truth_local.y += trace_height_offset
+		if _truth_points.is_empty() or _truth_points[-1].distance_to(truth_local) > 0.0005:
+			if not _truth_points.is_empty():
+				_truth_length += _truth_points[-1].distance_to(truth_local)
+			_truth_points.append(truth_local)
+			if _truth_points.size() > trail_max_points * 4:
+				_truth_points.pop_front()
+		_rebuild_ghost()
+
+	# ── TIME quantisation: the frame rate is not the sample rate. Between two
+	# permitted samples the body still moves; the line simply does not record it.
+	_sample_clock += delta
+	if seam_sample_hz > 0.0:
+		var interval: float = 1.0 / seam_sample_hz
+		if _sample_clock < interval:
+			# the body kept moving; the line did not. Bank the distance as time loss.
+			if _gate_has_last:
+				_unrecorded_m += _gate_last_pos.distance_to(current_global)
+			_gate_last_pos = current_global
+			_gate_has_last = true
+			return
+		_sample_clock = 0.0
+	_gate_last_pos = current_global
+	_gate_has_last = true
+
 	# Check if we've moved enough to record a new point
 	var step_distance = current_global.distance_to(_last_global_position)
 	if step_distance < min_segment_distance:
@@ -186,6 +272,20 @@ func _process(delta: float) -> void:
 	# Convert to local space and add height offset
 	var local_point = to_local(current_global)
 	local_point.y += trace_height_offset  # Offset trail above ground
+
+	# ── SPACE quantisation: the kept point is not where you were, it is the nearest
+	# address the lattice can name. This is the staircase, and it is the same
+	# operation a raster performs on every line it has ever drawn.
+	if seam_grid > 0.0:
+		var unsnapped: Vector3 = local_point
+		local_point.x = roundf(local_point.x / seam_grid) * seam_grid
+		local_point.z = roundf(local_point.z / seam_grid) * seam_grid
+		var err: float = unsnapped.distance_to(local_point)
+		_snap_err_sum += err
+		_snap_err_max = maxf(_snap_err_max, err)
+		_snap_n += 1
+		if not _trail_points.is_empty() and _trail_points[-1].is_equal_approx(local_point):
+			return   # the lattice has no new address for this motion: nothing is kept
 	_trail_points.append(local_point)
 	_trail_times.append(_time_elapsed)
 	_trail_speeds.append(step_speed)
@@ -202,6 +302,65 @@ func _process(delta: float) -> void:
 
 	_rebuild_trail()
 	_update_endpoints()
+
+## The path as walked, drawn faint behind the path as kept. Built lazily so the
+## artifact costs nothing extra until a map opts into showing the seam.
+func _rebuild_ghost() -> void:
+	if _ghost_mesh == null:
+		_ghost_mesh = ImmediateMesh.new()
+		_ghost_instance = MeshInstance3D.new()
+		_ghost_instance.name = "WalkedPath"
+		_ghost_instance.mesh = _ghost_mesh
+		var gm := StandardMaterial3D.new()
+		gm.albedo_color = discarded_color
+		gm.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+		gm.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+		gm.vertex_color_use_as_albedo = false
+		_ghost_instance.material_override = gm
+		add_child(_ghost_instance)
+	_ghost_mesh.clear_surfaces()
+	if _truth_points.size() < 2:
+		return
+	_ghost_mesh.surface_begin(Mesh.PRIMITIVE_LINE_STRIP)
+	for p in _truth_points:
+		_ghost_mesh.surface_add_vertex(p)
+	_ghost_mesh.surface_end()
+
+
+## THE CONSERVED QUANTITY, LOCATED — as TWO numbers, because the line is quantised
+## twice and the two quantisations lose different things.
+##
+## Do not measure this as a length difference. A lattice-snapped path is LONGER than
+## the curve it replaces, not shorter: a staircase across a diagonal measures |dx|+|dz|
+## where the hypotenuse measures less. Subtracting lengths therefore reports a snapped
+## path as lossless, which is how the first version of this function scored a 0.25 m
+## grid at 0.0% discard while visibly destroying the curve. The losses do not share a
+## unit, so they do not share a number.
+
+## SPACE loss: mean metres between where the body actually was and the nearest address
+## the lattice could name. Zero when seam_grid is 0.
+func space_discard_mean() -> float:
+	if _snap_n <= 0:
+		return 0.0
+	return _snap_err_sum / float(_snap_n)
+
+
+## SPACE loss, worst case — the largest single lie the lattice told.
+func space_discard_max() -> float:
+	return _snap_err_max
+
+
+## TIME loss: metres of path walked while the sample clock was closed, so the motion
+## happened and was never recorded. This is the "decision to stop looking between the
+## samples" as a distance.
+func time_discard_m() -> float:
+	return _unrecorded_m
+
+
+## Total path walked, for scale.
+func walked_length() -> float:
+	return _truth_length
+
 
 func _velocity_to_color(speed: float) -> Color:
 	"""Slow → cool (trail_color), fast → warm (velocity_fast_color). Speed is the ink."""
@@ -273,6 +432,18 @@ func clear_trail() -> void:
 	_trail_points.clear()
 	_trail_times.clear()
 	_trail_speeds.clear()
+	# the seam's own state resets with the trail, or the discard measurement would
+	# keep counting metres from a walk that is no longer on screen
+	_truth_points.clear()
+	_truth_length = 0.0
+	_snap_err_sum = 0.0
+	_snap_err_max = 0.0
+	_snap_n = 0
+	_unrecorded_m = 0.0
+	_gate_has_last = false
+	_sample_clock = 0.0
+	if _ghost_mesh:
+		_ghost_mesh.clear_surfaces()
 	if _trail_mesh:
 		_trail_mesh.clear_surfaces()
 	if _start_marker:
