@@ -129,6 +129,10 @@ var _ground_holder: Node3D = null
 var _ground_pop: int = 12     # _meta.living_ground_population
 var _ground_marks: Array = [] # standing life re-marks the ground each tick
 var _ground_mark_accum: float = 0.0
+# build_budget (opt-in via layers.biome._meta.build_budget): organisms per frame.
+# 0 = build everything synchronously in generate() (the default — unchanged).
+var _build_budget: int = 0
+var _build_queue: Array = []
 var _batches: Dictionary = {}    # key -> {mesh, mat, transforms: Array}
 var _recipe_cache: Dictionary = {}  # kingdom -> cached recipe array (shared meshes)
 var _flushed: bool = false       # after flush, late (runtime) spawns go direct
@@ -182,6 +186,8 @@ func generate(biome_layer: Array, structure_layer: Array, stage_order: int = 0, 
 	_chunk_lod = bool(meta.get("chunk_lod", false))
 	_living_ground = bool(meta.get("living_ground", false))
 	_ground_pop = int(meta.get("living_ground_population", 12))
+	_build_budget = maxi(0, int(meta.get("build_budget", 0)))
+	_build_queue.clear()
 	var needs_clock: bool = false
 	_grid_rows = _structure.size()
 	_grid_cols = 0
@@ -232,6 +238,10 @@ func generate(biome_layer: Array, structure_layer: Array, stage_order: int = 0, 
 	if _living_ground:
 		_start_living_ground()
 		needs_clock = true  # the loop needs the per-frame tick
+	if not _build_queue.is_empty():
+		needs_clock = true  # the queue drains on the same clock
+		print("GridBiomeComponent: %d organisms queued, %d/frame (deferred build)" % [
+			_build_queue.size(), _build_budget])
 	if needs_clock:
 		set_process(true)
 		print("GridBiomeComponent: clock ON (tick %.1fs, dwell %.1fs, %d tick cells)" % [
@@ -420,6 +430,8 @@ func _world_to_cell(world_pos: Vector3) -> Vector2i:
 #    tick fires there. ──
 
 func _process(delta: float) -> void:
+	if not _build_queue.is_empty():
+		_drain_build_queue()
 	if _living_ground:
 		_tick_living_ground(delta)
 	_tick_accum += delta
@@ -595,7 +607,40 @@ func _stage_cell(col: int, row: int, cell: Dictionary) -> void:
 		# squash_settle / wilt_collapse / wind_lean)
 		"sf": String((cell["mods"] as Dictionary).get("sf", "")),
 	}
+	# build_budget: a dense seed field builds SYNCHRONOUSLY inside generate() —
+	# measured at ~210ms per organism, so 70 seeds froze the load for ~15s. With a
+	# budget the deposits queue and drain N per frame, turning one long hang into
+	# a world that grows in around the player. The deposit is fully resolved here,
+	# so queueing changes nothing about WHAT gets built — only when.
+	if _build_budget > 0:
+		_build_queue.append(deposit)
+		return
 	_get_dispatcher().spawn_cell(deposit, _stage_order, {"cube_size": _cube_size}, self)
+
+
+## Build every queued organism NOW (captures, probes, tools that need the whole
+## map present before they measure or shoot). No-op when the queue is empty.
+func flush_build_queue() -> int:
+	var n: int = _build_queue.size()
+	while not _build_queue.is_empty():
+		_get_dispatcher().spawn_cell(_build_queue.pop_front(), _stage_order,
+			{"cube_size": _cube_size}, self)
+	return n
+
+
+## Organisms still waiting to be built (test / telemetry).
+func pending_builds() -> int:
+	return _build_queue.size()
+
+
+func _drain_build_queue() -> void:
+	var n: int = 0
+	while not _build_queue.is_empty() and n < _build_budget:
+		_get_dispatcher().spawn_cell(_build_queue.pop_front(), _stage_order,
+			{"cube_size": _cube_size}, self)
+		n += 1
+	if _build_queue.is_empty() and n > 0:
+		print("GridBiomeComponent: build queue drained (budget %d/frame)" % _build_budget)
 
 
 func _get_dispatcher() -> Node3D:
