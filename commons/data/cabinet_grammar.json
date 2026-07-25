@@ -116,7 +116,8 @@
     "chart case",
     "ledger column",
     "slider lectern",
-    "terrarium case"
+    "terrarium case",
+    "reel cabinet"
    ]
   },
   "horizontal": {
@@ -379,6 +380,14 @@
    "body": "terrarium case",
    "scene": "res://commons/artifacts/random_walk_terrarium/random_walk_terrarium.tscn",
    "propagation": 3,
+   "kit": true
+  },
+  {
+   "artifact": "slot_machine",
+   "dialect": "vertical",
+   "body": "reel cabinet",
+   "scene": "res://algorithms/randomness/slot_machine/slot_machine.tscn",
+   "propagation": 4,
    "kit": true
   }
  ],
