@@ -1486,6 +1486,95 @@
    },
    "qfep_connection": "Squeeze it and the strain field blooms red under your grip, E = ½k·d² kept per vertex — the body's ledger of every displacement from rest. In volume mode the far side bulges as you press, conservation arriving as a felt refusal."
   },
+  "rounded_softbody": {
+   "name": "Rounded SoftBody — Compression Bench",
+   "lookup_name": "rounded_softbody",
+   "description": "Deformable rounded cube seated in a milled well on a terminal-finish compression bench (cabinet grammar, horizontal dialect). Strain-energy heatmap, collision-force arrows, and volume-preservation readout. The canon member; rounded_softbody_test is the bare harness.",
+   "scene": "res://algorithms/softbodies/rounded_softbody.tscn",
+   "category": "physics",
+   "include_in_map_data": true,
+   "map_ready": true,
+   "map_sequences": [
+    "softbodies"
+   ],
+   "sequence": "softbodies",
+   "interactions": [
+    "squeeze"
+   ],
+   "parameters": {
+    "footprint": [
+     9,
+     7,
+     6
+    ],
+    "size_group": "environment"
+   },
+   "complexity": "advanced",
+   "tags": [
+    "physics",
+    "soft_body",
+    "strain",
+    "deformable",
+    "interactive"
+   ],
+   "dev_themes": [
+    "physics",
+    "soft_body",
+    "visualization"
+   ],
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 4,
+    "clearance": {
+     "front": 2,
+     "back": 2,
+     "left": 2,
+     "right": 2
+    },
+    "player_position": "front",
+    "wall_backing": false,
+    "orientation": "face_approach",
+    "isolation": 0,
+    "cluster_with": [],
+    "preferred_zone": "end",
+    "measured_footprint_cells": 4,
+    "footprint_source": "measured"
+   },
+   "measurements": {
+    "aabb_size": [
+     2.0,
+     3.55,
+     2.0
+    ],
+    "aabb_center": [
+     0.0,
+     1.52,
+     0.0
+    ],
+    "grid_cells": [
+     2.0,
+     2.0
+    ],
+    "max_dimension_m": 3.55,
+    "measured_at": "2026-04-29T07:09:56.762620Z"
+   },
+   "footprint_measured": [
+    2.0,
+    1,
+    2.0
+   ],
+   "spatial_profile": {
+    "dir_group": "floor",
+    "range": 10,
+    "density": "medium",
+    "min_clearance": 2,
+    "stack_priority": 0.5,
+    "approach_dir": "any",
+    "derived_at": "2026-04-29T09:39:46.273850Z",
+    "derived_from": "aabb_size + category"
+   },
+   "qfep_connection": "Squeeze it and the strain field blooms red under your grip, E = ½k·d² kept per vertex — the body's ledger of every displacement from rest. In volume mode the far side bulges as you press, conservation arriving as a felt refusal."
+  },
   "jelly_cube": {
    "name": "Jelly Cube",
    "lookup_name": "jelly_cube",
