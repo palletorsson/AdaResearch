@@ -41,9 +41,9 @@ const HangarKit = preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 @export var male_color: Color = Color(0.3, 0.5, 1.0)
 ## Color for female-gendered words (woman, she, queen)
 @export var female_color: Color = Color(1.0, 0.4, 0.6)
-## Color for trait words (strong, gentle, logical, etc.)
+## Category tints, kept for the connection lines and legend. The word spheres are
+## NOT coloured by category any more — see the note in _create_word_cloud().
 @export var neutral_color: Color = Color(0.5, 0.9, 0.4)
-## Color for profession words (doctor, nurse, engineer, etc.)
 @export var profession_color: Color = Color(1.0, 0.8, 0.2)
 
 ## Current analogy
@@ -52,6 +52,11 @@ const HangarKit = preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 		analogy_type = clampi(value, 0, 2)
 		if is_inside_tree():  # Only update if node is ready
 			_show_analogy()
+
+## Half-extent of the gender axis in authored units: man sits at -AXIS_HALF and
+## woman at +AXIS_HALF, and every other word is placed between them by the
+## embedding. This is the axis the cloud is coloured along.
+const AXIS_HALF: float = 0.4
 
 const WORD_DATA = {
 	"man": {"pos": Vector3(-0.4, 0.0, 0.0), "category": "gender_m"},
@@ -347,18 +352,22 @@ func _create_word_cloud():
 		var data = WORD_DATA[word]
 		var pos = data.pos * display_size
 
-		var color: Color
-		match data.category:
-			"gender_m":
-				color = male_color
-			"gender_f":
-				color = female_color
-			"profession":
-				color = profession_color
-			"trait":
-				color = neutral_color
-			_:
-				color = neutral_color
+		# COLOUR BY POSITION ON THE GENDER AXIS — not by category.
+		#
+		# The whole finding lives in x: the embedding put engineer at -0.30 and nurse
+		# at +0.25, CEO at -0.35 and homemaker at +0.35, with man/woman as the poles.
+		# Colouring by category threw that away — all eight professions rendered the
+		# same yellow, so nurse and CEO were indistinguishable, and the one axis that
+		# carries the prejudice got no colour support at all. The viewer had to read
+		# eight small labels and do the sorting in their head to see what the model
+		# had already done. Category was decorated; the bias was hidden.
+		#
+		# Interpolating the two anchor colours across the axis reproduces them exactly
+		# at the poles (man sits at -0.4 -> male_color, woman at +0.4 -> female_color),
+		# so nothing is special-cased and nothing is invented: every word simply wears
+		# the gender the model assigned it.
+		var t: float = clampf((data.pos.x + AXIS_HALF) / (AXIS_HALF * 2.0), 0.0, 1.0)
+		var color: Color = male_color.lerp(female_color, t)
 
 		# Start hidden (zero scale)
 		var xf := Transform3D()
