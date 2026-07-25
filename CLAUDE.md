@@ -72,7 +72,7 @@ Godot 4 VR/desktop project. Algorithms taught through maps and interactable arti
 - `utilities`: spawn, teleporter, ramps, transport cubes, labels
 - `interactables`: artifacts by lookup name
 
-**Scale:** ~42 sequences, ~503 maps, ~752 artifacts, 18 spine sequences
+**Scale:** ~42 sequences, ~503 maps, ~752 artifacts, 24 spine sequences
 
 ## CLI Tools
 
@@ -81,7 +81,7 @@ Run from repo root:
 ### Steering & Status
 | Tool | Command | Purpose |
 |------|---------|---------|
-| **Pipeline Scorer** | `python tools/sequence_pipeline_scorer.py` | Score all 19 spine sequences through 7 completion stages |
+| **Pipeline Scorer** | `python tools/sequence_pipeline_scorer.py` | Score all 24 spine sequences through 7 completion stages |
 | **Pipeline (single)** | `python tools/sequence_pipeline_scorer.py <seq_id>` | Score one sequence |
 | **Dashboard** | `powershell -ExecutionPolicy Bypass -File commons/tools/project_dashboard_cli.ps1 -Mode status` | Project status, recommendations |
 | **Heat Map** | `python tools/heat_map_generator.py` | Temperature-based priority scoring |
@@ -298,7 +298,7 @@ See `doc/MAP_BUILDING_GUIDE.md` for full details. Key points:
 
 **Map Studio:** `/map-studio` in the encyclopedia — 3-layer visual editor built from scratch.
 
-**Spine sequences are the priority** — 19 sequences forming the core curriculum.
+**Spine sequences are the priority** — 24 sequences forming the core curriculum.
 
 ## Heat Map
 
