@@ -65,6 +65,7 @@ DEFAULT_SPEC = {
     # _hangar/hangar_kit.gd): hangar_wall_panel IS the wall, hangar props stand
     # in front of it. style "cluster" = a curated Wall-Hangar-Editor cluster.
     # op 6.5 spans (bridge/causeway) · op 9.5 landmark + lights
+    "doors": {"enabled": True, "accent": ""},
     "spans": {"enabled": True, "railings": True},
     "landmark": {"enabled": True, "height": 4},
     "lights": {"enabled": True, "every": 7},
@@ -464,6 +465,26 @@ def compose(spec):
                    "rooms": [{"name": k, "cells": cl(c)} for k, c, _, _ in rooms],
                    "doors": [{"room": k, "cell": list(b), "to": list(nb)} for b, nb, k in door_info]})
 
+    # 4c DOORS — a frame in every opening, state from the door's own truth
+    _dspec = spec.get("doors") or {}
+    _door_list = []
+    for (bxz, nb, _k) in door_info:
+        kind = "corridor" if (mouth_door and bxz == mouth_door[0]) else "invitation"
+        _door_list.append((bxz, nb, kind))
+    if threshold:
+        # the arrival's own door: the last cell of the compression corridor,
+        # opening east into the release — CORRIDOR state, you must pass through
+        _tx = max(x for (x, _z) in threshold)
+        _trow = sorted([c for c in threshold if c[0] == _tx], key=lambda c: c[1])
+        if _trow:
+            _tc = _trow[0]
+            _door_list.append((_tc, (_tc[0] + 1, _tc[1]), "corridor"))
+    if yard_on:
+        notch = (yard_c[0] - YARD_R, yard_c[1])          # the yard's view notch
+        if 0 <= notch[0] < W and 0 <= notch[1] < D:
+            _door_list.append((notch, (notch[0] - 1, notch[1]), "boundary"))
+    stages.append(place_doors(I, U, S, W, D, _door_list, _dspec))
+
     # 5 TEMPLATES_FIXED — the yard as a composition slot
     stages.append({"op": "templates_fixed", "enabled": yard_on,
                    "yard": {"center": list(yard_c), "r": YARD_R, "cells": cl(yard_cells)} if yard_on else None})
@@ -736,6 +757,48 @@ def place_principal_wall(S, U, I, WL, W, D, floor, spawn, targets, dist,
     return {"op": "wall_hangar", "placed": False, "style": style, "wall": [], "front": [],
             "cluster": None, "kin": [], "pieces": [],
             "why": "no candidate run had standoff and survived the reachability veto"}
+
+
+# ---------- OP 4c: DOORS — the frame, and the logic ----------
+# Palle 2026-07-25: "door a frame and logic" — the look is `sliding_door` from
+# /props-dna-gallery: a two-panel pneumatic frame (Portal/Half-Life vocabulary),
+# facing +Z, panels sliding in ±X. Its own @identity states the logic, so the
+# composer obeys the artifact instead of inventing a rule:
+#   "Closed, it is wall. Open, it is corridor. Half-open, it is invitation."
+# → walk-through thresholds OPEN, side-room doors HALF-OPEN, the quarantine
+# face CLOSED. `exit_sign` is its declared partner (the sign names the passage).
+DOOR_TOKEN = "lab_sliding_door"
+DOOR_STATE = {"corridor": 1.0, "invitation": 0.45, "boundary": 0.0}
+
+
+def place_doors(I, U, S, W, D, doors, spec_doors):
+    """doors: list of (cell, toward, kind) — cell hosts the frame, `toward` is the
+    neighbour it opens onto, kind picks the open amount."""
+    if not spec_doors.get("enabled", True):
+        return {"op": "doors", "placed": 0, "doors": [], "why": "disabled"}
+    accent = spec_doors.get("accent", "")
+    out = []
+    for cell, toward, kind in doors:
+        x, z = cell
+        if not (0 <= x < W and 0 <= z < D): continue
+        if str(I[z][x]).strip(): continue
+        d = (toward[0] - x, toward[1] - z)
+        rot = ROT_FOR_DIR.get(d)
+        if rot is None: continue
+        amt = DOOR_STATE.get(kind, 0.45)
+        # NOT "sliding_door": that lookup name is claimed by a translation
+        # primitive demo (commons/primitives/translation) which wins resolution
+        # and renders an orange "Slide ->" panel. lab_sliding_door is the alias
+        # registered for the lab door — the one in /props-dna-gallery.
+        tok = "%s:%d#panels_open_amount:%.2f" % (DOOR_TOKEN, rot, amt)
+        if accent:
+            tok += "#accent_color:%s" % accent
+        I[z][x] = tok
+        out.append({"cell": [x, z], "rot": rot, "kind": kind, "open": amt})
+    return {"op": "doors", "placed": len(out), "doors": out,
+            "states": DOOR_STATE,
+            "why": ("sliding_door frames in every opening; the artifact's own truth is the "
+                    "logic — corridor 1.0, invitation 0.45, boundary 0.0")}
 
 
 # ---------- OP 6.5 SPANS · OP 9.5 LANDMARK + LIGHTS ----------
@@ -1380,6 +1443,9 @@ def compose_track(spec):
     stages.append({"op": "walls", "segments": segs, "dressing": [], "floor": cl(floor),
                    "hall": cl(hallc), "rooms": [{"name": k, "cells": cl(c)} for k, c, _, _ in rooms],
                    "doors": [{"room": k, "cell": list(b), "to": list(nb)} for b, nb, k in door_info]})
+    _dspec = spec.get("doors") or {}
+    stages.append(place_doors(I, U, S, W, D,
+                              [(b, nb, "invitation") for b, nb, _k in door_info], _dspec))
     stages.append({"op": "templates_fixed", "enabled": bool(anti and yardc),
                    "yard": {"center": None, "r": 0, "cells": cl(yardc)} if yardc else None})
     profile = [{"i": i, "name": a, "h": (2 if sl["seg"] in lifted else 1), "art_h": round(union(a)[2], 2)}

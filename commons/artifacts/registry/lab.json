@@ -9258,6 +9258,91 @@
         1,
         1
       ]
+    },
+    "lab_sliding_door": {
+      "lookup_name": "lab_sliding_door",
+      "scene": "res://commons/artifacts/sliding_door/sliding_door.tscn",
+      "class_name": "SlidingDoor",
+      "name": "Sliding Door (lab)",
+      "description": "Two-panel pneumatic sliding door — Portal 2 / Half-Life airlock vocabulary. Dark metal frame, near-white panels with thin orange accent stripe at chest height. Static by default; panels_open_amount drives the slide from closed (0) to fully open (1). — REGISTERED TWICE UNDER 'sliding_door': commons/primitives/translation/sliding_door.tscn (a translation teaching demo, labelled 'Slide →') claims the same lookup name and wins resolution. This alias is the unambiguous handle for THIS door; the map wizard uses it.",
+      "category": "lab_prop",
+      "complexity": "beginner",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [],
+      "tags": [
+        "prop",
+        "lab",
+        "door",
+        "threshold",
+        "portal",
+        "half-life"
+      ],
+      "parameters": {
+        "door_width": "Opening width when closed (default 1.8)",
+        "door_height": "Door height in meters (default 2.4)",
+        "frame_thickness": "Frame border thickness (default 0.08)",
+        "frame_color": "Dark metal frame color",
+        "panel_color": "Panel face color (default near-white)",
+        "accent_color": "Stripe color (default Portal orange)",
+        "gap_width": "Seam between panels when closed (default 0.04)",
+        "panels_open_amount": "0 = closed, 1 = fully open"
+      },
+      "dev_themes": [
+        "environment",
+        "lab",
+        "threshold"
+      ],
+      "dev_category": "lab_prop",
+      "geometry_spec": {
+        "mesh_type": "composed_primitives",
+        "topology": "manifold_closed",
+        "construction": {
+          "method": "primitive_assembly",
+          "primitives": [
+            "box"
+          ],
+          "operations": [
+            "create_primitives",
+            "position_children"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "emissive",
+          "key_properties": [
+            "emission",
+            "metallic"
+          ]
+        },
+        "animation": {
+          "type": "static",
+          "driven_by": null,
+          "affects": []
+        },
+        "instance_strategy": "single",
+        "vertex_estimate": "~128"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 2,
+        "clearance": {
+          "front": 1,
+          "back": 1,
+          "left": 0,
+          "right": 0
+        },
+        "player_position": "front",
+        "wall_backing": true,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [
+          "exit_sign"
+        ],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 2,
+        "footprint_source": "designed"
+      }
     }
   }
 }

@@ -1,6 +1,6 @@
 {
  "_comment": "THE ORDER OF OPERATIONS for map composition — canon, editable. Palle 2026-07-24: 'this is about order of operation, what is included in what order... then auto research to create the best combination or new strategies.' The research engines READ this file (stages, metric weights, bands): edit here, re-run, the search changes. Rounds history at the bottom. Sibling canons: cabinet_grammar.json, systems_fold.json.",
- "version": 8,
+ "version": 9,
  "operations": [
   {
    "n": 1,
@@ -50,6 +50,15 @@
    "op": "walls",
    "what": "thin wall segments + doors (layers.walls: nesw lower=wall, UPPER=door)",
    "note": "one door per room toward the hall; wp on door pair when heights differ"
+  },
+  {
+   "n": 4.3,
+   "op": "doors",
+   "what": "DOORS — a frame in every opening and the logic of its state (Palle 2026-07-25: 'door a frame and logic'; look = sliding_door from /props-dna-gallery, Portal/Half-Life pneumatic vocabulary)",
+   "strategies": [
+    "state_from_role"
+   ],
+   "note": "the artifact's own @identity IS the logic — 'Closed, it is wall. Open, it is corridor. Half-open, it is invitation.' So: the arrival threshold's mouth = corridor (1.0, you must pass), side-room doors = invitation (0.45), the quarantine's view notch = boundary (0.0). Token: lab_sliding_door:<rot>#panels_open_amount:<v>, rot from the cell toward what it opens onto. NAME COLLISION (the hangar mistake's twin): 'sliding_door' is registered by BOTH commons/artifacts/sliding_door (the lab door) and commons/primitives/translation (a teaching demo that renders an orange 'Slide ->' panel) — the primitive wins resolution, so an alias lab_sliding_door was added to registry/lab.json as the unambiguous handle. Verified by capture: dark frame, two near-white panels, centre seam, accent stripe."
   },
   {
    "n": 5,
