@@ -115,7 +115,8 @@
   "SEAM (track): segment seam rows carry walk at the shared center columns; a wall or a room on the seam cuts the world (reach tells, the OK label does not)",
   "LIFT (track/elevation): no lift without a step — every procession-raised room needs a wp climb at its mouth; a doorless lifted room strands its artifact (r7: spine niches at h2, unreach 2 across every +4 plan — the first leaderboard was a lie the LIFT law exposed)",
   "ROLE: past a threshold an artifact stops being furniture and becomes architecture — floor IS the ground (terrain_field), monument IS the room (hall_grand pass-through), wall IS the wall (tableau_face); route by staging posture, and derive the posture from the MEASURED floor, not a stale oracle",
-  "WALL-VETO (op 9): a composed wall is legal only if the walk survives it — verify reachability of every artifact and the exit landing BEFORE writing, and target the landing not the teleporter cell"
+  "WALL-VETO (op 9): a composed wall is legal only if the walk survives it — verify reachability of every artifact and the exit landing BEFORE writing, and target the landing not the teleporter cell",
+  "WEDGE-YAW: `wp` takes its yaw as parameter 0 and belongs on the LOW cell of a step, rising toward the high one — N:180 E:90 S:0 W:270 (validated by yaw-sweep probe Probe_WedgeYaw + the deck maps). A bare `wp` is always yaw 0, so three of four steps misalign — the wizard wrote bare wp until 2026-07-25"
  ],
  "room_band": {
   "lo_x_artifact_cells": 3,
@@ -218,5 +219,14 @@
    "finding": "THE INVERSE COMPOSER (ARC lens: organization = inducibility) — grammar_fit reads any map and induces its rule in the canon's vocabulary. VALIDATION: it re-induced Trial_gate10_21's generating spec exactly (frame:spine + order:rhythm(1.0) + elevation:procession(0.87) + rooms:banded(0.95)) — the forward program recovered by inverse fit. Corpus sweep: 1,987 maps, mean organization 0.48; bands 1,596 alive / 383 noise-risk (the triage list) / 8 monotone-risk (ceremonial courts at 1.00 — ring+mirror+compression, correctly flagged as pattern-saturated). Thread_Gate reads frame:ring + rooms:banded + arrival:compression. KNOWN LIMITS recorded: BFS encounter order is bidirectional on rings (a real walker picks one direction — crescendo-on-ring under-detected); ring redefined as court-with-petals via artifact angular spread (not annulus). Organization stays a BAND per the compression thesis: the residual of hand maps is protected, not demolished.",
    "results": "commons/data/grammar_fit_index.json"
   }
- ]
+ ],
+ "vertical_vocabulary": {
+  "wedge": "wp:<yaw> on the low cell (N:180 E:90 S:0 W:270) — the +1 step",
+  "lift": "l:<height> platform_lift — vertical travel beyond one step (UNUSED by the wizard)",
+  "move_player": "m — displacement without geometry (UNUSED)",
+  "teleport": "t on void — the exit, and long jumps",
+  "door": "d — a transition that reads as a threshold (UNUSED; the wizard uses UPPERCASE wall segments instead)",
+  "railing": "hb horizontal_border — the bridge/parapet edge piece (UNUSED)",
+  "bridge": "NO dedicated code: hand maps build bridges as raised structure (h2/h3) over void with wp at each end and hb along the flanks (see Deck_Bridge_Dressed) — a candidate op 6.5 for the wizard"
+ }
 }

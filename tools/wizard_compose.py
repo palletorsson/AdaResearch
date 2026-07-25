@@ -89,6 +89,43 @@ def fp(k):
 def afp_cells(k):
     w, d, _, _ = body(k); return max(1, math.ceil(w) * math.ceil(d))
 
+# ---------- VERTICAL VOCABULARY (the wedge, aligned) ----------
+# `wp` (walkableprism) takes its yaw as parameter 0: "wp:<deg>". Convention read
+# off the hand-authored deck maps (DeckCity_6x5_s8 is self-consistent):
+#   0 rises toward +z (S) · 90 toward +x (E) · 180 toward -z (N) · 270 toward -x (W)
+# The wedge belongs on the LOW cell, rising toward the high one — a bare "wp"
+# (what the wizard wrote before) is always yaw 0, so three out of four steps
+# were misaligned.
+WEDGE_YAW = {(0, 1): 0, (1, 0): 90, (0, -1): 180, (-1, 0): 270}
+
+
+def wedge_token(low, high):
+    d = (high[0] - low[0], high[1] - low[1])
+    if d not in WEDGE_YAW:
+        return None
+    return "wp:%d" % WEDGE_YAW[d]
+
+
+def place_wedge(S, U, a, b, W, D):
+    """Seat one aligned wedge between neighbouring cells of different height.
+
+    Returns the (cell, token) actually written, or None. Only the LOW cell gets
+    the prism; the high side needs nothing.
+    """
+    def h(c):
+        if not (0 <= c[0] < W and 0 <= c[1] < D): return -1
+        try: return int(float(str(S[c[1]][c[0]]).strip() or 0))
+        except Exception: return -1
+    ha, hb = h(a), h(b)
+    if ha == hb or ha < 0 or hb < 0: return None
+    low, high = (a, b) if ha < hb else (b, a)
+    tok = wedge_token(low, high)
+    if not tok: return None
+    if str(U[low[1]][low[0]]).strip(): return None
+    U[low[1]][low[0]] = tok
+    return (low, tok)
+
+
 # ---------- stage 1: order ----------
 def order_crescendo(c): return sorted(c, key=fp)
 def order_narrative(c, hero):
@@ -388,8 +425,7 @@ def compose(spec):
                     if 0 <= mx2 < W and 0 <= mz2 < D: U[mz2][mx2] = "wp"
             elif nb_ in floor: WL[cz_][cx_] += cd
         if hmap.get((bx, bz), 1) != hmap.get(nb, 1):
-            U[bz][bx] = "wp"
-            if 0 <= nb[0] < W and 0 <= nb[1] < D: U[nb[1]][nb[0]] = "wp"
+            place_wedge(S, U, (bx, bz), nb, W, D)      # aligned: low cell, yaw toward the rise
         door_info.append(((bx, bz), nb, k))
 
     # 4b DRESSING — the hangar wall system enters the composition
@@ -488,8 +524,7 @@ def compose(spec):
                 parapet_side = side
                 for (ax2, az2) in ap[:2]:
                     end = min(land, key=lambda c: abs(c[0] - ax2) + abs(c[1] - az2))
-                    if U[az2][ax2] == " " and U[end[1]][end[0]] == " ":
-                        U[az2][ax2] = "wp"; U[end[1]][end[0]] = "wp"
+                    place_wedge(S, U, (ax2, az2), end, W, D)
                 break
     else:
         lastr = rooms[-1]
@@ -997,12 +1032,11 @@ def compose_track(spec):
             if 0 <= nb[1] < D and 0 <= nb[0] < W:
                 raw_doors.append(((x, z), nb))
                 if S[z][x] != S[nb[1]][nb[0]] and S[z][x] in "12" and S[nb[1]][nb[0]] in "12":
-                    U[z][x] = "wp"; U[nb[1]][nb[0]] = "wp"
+                    place_wedge(S, U, (x, z), nb, W, D)
     for (x, z) in parapet:
         for nx in (x - 1, x + 1):
             if 0 <= nx < W and (nx, z) not in parapet and S[z][nx] == "1":
-                if U[z][nx] == " " and U[z][x] == " ":
-                    U[z][nx] = "wp"; U[z][x] = "wp"
+                place_wedge(S, U, (nx, z), (x, z), W, D)
     # LIFT LAW: no lift without a step — a procession-lifted room with no door
     # gets a wp pair at its mouth, or its artifact strands at h2 (r7 bug: spine
     # niches lifted doorless -> unreach 2 across every +4 plan)
@@ -1024,9 +1058,7 @@ def compose_track(spec):
                          for dx, dz in ((1, 0), (-1, 0), (0, 1), (0, -1))
                          if (cx+dx, cz+dz) in hallc), None)
             if pair:
-                (rx, rz), (hx, hz) = pair
-                if U[rz][rx] == " " and U[hz][hx] == " ":
-                    U[rz][rx] = "wp"; U[hz][hx] = "wp"
+                place_wedge(S, U, pair[0], pair[1], W, D)
 
     # metrics geometry: rooms = slot regions; open slots get a 3x3 region
     rooms = []
