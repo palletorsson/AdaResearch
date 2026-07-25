@@ -31,6 +31,8 @@ CLI:
                                                           # + wizard_recipes/MyMap.json
 """
 import json, math, subprocess, sys, argparse, pathlib, datetime
+from collections import deque
+from statistics import mean
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 elems = json.loads((ROOT / "commons/data/artifact_elements.json").read_text(encoding="utf-8"))["artifacts"]
@@ -57,6 +59,9 @@ DEFAULT_SPEC = {
     # the TRACK (Palle 2026-07-24): 13-wide, as-long-as-needed-in-z concatenation of
     # authored 13x7 template segments; order poured into slots; kin-fill extra slots
     "track": {"enabled": False, "plan": "auto", "kin_fill": True},
+    # op 9 — the principal hangar wall: one dressed wall with related artifacts,
+    # spot found by search, reachability as a veto
+    "principal_wall": {"enabled": True, "cluster": "pw_primitives_portals", "kin": []},
 }
 
 # ---------- measured floor ----------
@@ -511,6 +516,34 @@ def compose(spec):
                    "prologue": ({"artifact": order[0], "cell": list(prologue_cell)} if prologue_cell else None),
                    "story": {k: round(v, 2) for k, v in story.items()}})
 
+    dist_map = {}
+    _dq = deque([spawn_a]); dist_map[spawn_a] = 0
+    while _dq:
+        _x, _z = _dq.popleft()
+        for _nb in ((_x + 1, _z), (_x - 1, _z), (_x, _z + 1), (_x, _z - 1)):
+            if _nb in floor and _nb not in dist_map:
+                dist_map[_nb] = dist_map[(_x, _z)] + 1; _dq.append(_nb)
+
+    # 9 WALL HANGAR PRINCIPAL — the last operation
+    pw = spec.get("principal_wall") or {}
+    if pw.get("enabled", True):
+        kin_pool = list(pw.get("kin") or [])
+        if not kin_pool:
+            cats = _registry_categories()
+            cast_cats = [c for c in (cats.get(k) for k in order) if c]
+            pool = [k for k in elems if k not in order and cats.get(k) in cast_cats
+                    and afp_cells(k) <= 2]
+            kin_pool = sorted(pool, key=fp)[:2]
+        # the teleporter stands on VOID by law, so it can never be in the
+        # walkable set — the target is its LANDING (the floor beside it)
+        wtargets = [a for _, _, a, _ in rooms]
+        if tp:
+            wtargets += [n for n in ((tp[0] + 1, tp[1]), (tp[0] - 1, tp[1]),
+                                     (tp[0], tp[1] + 1), (tp[0], tp[1] - 1)) if n in floor]
+        stages.append(place_principal_wall(S, U, I, WL, W, D, floor, spawn_a, wtargets,
+                                           {c: 0 for c in floor} if not dist_map else dist_map,
+                                           pw.get("cluster", "pw_primitives_portals"), kin_pool))
+
     data = {"map_info": {"name": "X", "lookup_name": "X", "title": "X",
         "description": "wizard: " + "/".join([spec["order"].get("strategy", "?"), gname, tname, ename]),
         "dimensions": {"width": W, "depth": D, "max_height": 4},
@@ -528,6 +561,98 @@ def compose(spec):
     stages.append({"op": "final", "W": W, "D": D, "metrics": m["parts"], "score_soft": m["soft"],
                    "weights": MW})
     return data, stages
+
+# ---------- OP 9: THE PRINCIPAL HANGAR WALL (Palle 2026-07-24) ----------
+# "in the end of the order add wall hangar principal (wall with props and
+# related artifacts), you need to find good spot to add wall and not brake
+# the path" — the LAST operation: one principal wall, dressed with a hangar
+# cluster and flanked by related artifacts, placed by SEARCH over candidate
+# runs and gated by a reachability veto (never breaks the walk).
+def _reaches_all(floor, blocked, spawn, targets):
+    open_ = floor - blocked
+    if spawn in blocked or spawn not in open_: return False
+    seen = {spawn}
+    dq = deque([spawn])
+    while dq:
+        x, z = dq.popleft()
+        for nb in ((x + 1, z), (x - 1, z), (x, z + 1), (x, z - 1)):
+            if nb in open_ and nb not in seen:
+                seen.add(nb); dq.append(nb)
+    return all(t in seen for t in targets if t)
+
+
+def place_principal_wall(S, U, I, WL, W, D, floor, spawn, targets, dist,
+                         cluster_name, kin_pool, run_len=3):
+    """Find the best legal spot for a principal wall and build it.
+
+    A candidate is a straight run of cells (floor or void) with walkable
+    standoff on one side. Score prefers LATE in the walk (the wall you meet
+    at the end), OPEN FRONT (standoff = the gaze law), and a DEAD BACK (so
+    nothing is sealed behind it). Reachability is a veto, not a term:
+    candidates that would strand the teleporter or any artifact are dropped.
+    Returns a stage dict (never raises; may report placed=False).
+    """
+    maxd = max([d for d in dist.values() if d < 10 ** 6] or [1])
+    cands = []
+    for (dx, dz) in ((1, 0), (0, 1)):
+        fx, fz = (0, 1) if dx else (1, 0)           # front normal
+        for z in range(1, D - 1):
+            for x in range(1, W - 1):
+                cells = [(x + dx * i, z + dz * i) for i in range(run_len)]
+                if any(not (0 <= cx < W and 0 <= cz < D) for cx, cz in cells): continue
+                if any(S[cz][cx] not in ("0", "1") for cx, cz in cells): continue
+                for sgn in (1, -1):
+                    front = [(cx + fx * sgn, cz + fz * sgn) for cx, cz in cells]
+                    back = [(cx - fx * sgn, cz - fz * sgn) for cx, cz in cells]
+                    if not all(0 <= a < W and 0 <= b < D for a, b in front): continue
+                    if not all(c in floor for c in front): continue
+                    if any(str(I[b][a]).strip() or str(U[b][a]).strip() for a, b in front): continue
+                    stand = 0
+                    for c in front:
+                        n = 0
+                        cx2, cz2 = c
+                        while True:
+                            cx2, cz2 = cx2 + fx * sgn, cz2 + fz * sgn
+                            if (cx2, cz2) not in floor: break
+                            n += 1
+                        stand = max(stand, n)
+                    if stand < 2: continue           # no room to stand back and look
+                    late = mean([dist.get(c, 0) for c in front]) / maxd
+                    back_dead = sum(1 for a, b in back
+                                    if not (0 <= a < W and 0 <= b < D) or S[b][a] == "0") / len(back)
+                    open_front = min(1.0, stand / 4.0)
+                    score = 0.4 * late + 0.4 * open_front + 0.2 * back_dead
+                    cands.append((score, cells, front, (fx * sgn, fz * sgn), round(late, 2),
+                                  stand, round(back_dead, 2)))
+    cands.sort(key=lambda c: -c[0])
+    for score, cells, front, normal, late, stand, back_dead in cands[:60]:
+        blocked = {c for c in cells if c in floor}
+        if not _reaches_all(floor, blocked, spawn, targets):
+            continue                                  # the veto: never break the path
+        for (cx, cz) in cells:
+            S[cz][cx] = "4"
+        floor -= blocked
+        rot = ROT_FOR_DIR.get((normal[0], normal[1]), 0)
+        mid = front[len(front) // 2]
+        I[mid[1]][mid[0]] = f"cluster:{cluster_name}:{rot}"
+        kin_placed = []
+        flanks = [front[0], front[-1]] if len(front) >= 3 else []
+        for cell, k in zip(flanks, kin_pool):
+            if cell == mid: continue
+            if str(I[cell[1]][cell[0]]).strip(): continue
+            I[cell[1]][cell[0]] = k
+            kin_placed.append({"artifact": k, "cell": list(cell)})
+        return {"op": "wall_hangar", "placed": True, "wall": cl(set(cells)),
+                "front": cl(set(front)), "cluster": {"name": cluster_name,
+                "cell": list(mid), "rot": rot}, "kin": kin_placed,
+                "spot": {"score": round(score, 3), "late": late, "standoff": stand,
+                         "back_dead": back_dead},
+                "why": ("late in the walk, %d cells of standoff, %.0f%% dead behind — "
+                        "reachability verified" % (stand, back_dead * 100))}
+    return {"op": "wall_hangar", "placed": False, "wall": [], "front": [],
+            "cluster": None, "kin": [],
+            "why": "no candidate run had standoff and survived the reachability veto"}
+
 
 def metrics(data, rooms, hall, passage, floor, door_info, story_score=0.0):
     S = data["layers"]["structure"]; WL = data["layers"]["walls"]
@@ -951,6 +1076,35 @@ def compose_track(spec):
                    "parapet_side": "s" if parapet else None,
                    "prologue": ({"artifact": first_placed, "cell": list(prologue_cell)} if prologue_cell else None),
                    "story": {k: round(v, 2) for k, v in story.items()}})
+
+    dist_map = {}
+    if spawn:
+        _dq = deque([spawn]); dist_map[spawn] = 0
+        while _dq:
+            _x, _z = _dq.popleft()
+            for _nb in ((_x + 1, _z), (_x - 1, _z), (_x, _z + 1), (_x, _z - 1)):
+                if _nb in floor and _nb not in dist_map:
+                    dist_map[_nb] = dist_map[(_x, _z)] + 1; _dq.append(_nb)
+
+    # 9 WALL HANGAR PRINCIPAL — the last operation
+    pw = spec.get("principal_wall") or {}
+    if pw.get("enabled", True):
+        kin_pool = list(pw.get("kin") or [])
+        if not kin_pool:
+            cats = _registry_categories()
+            cast_cats = [c for c in (cats.get(k) for k in order) if c]
+            pool = [k for k in elems if k not in order and cats.get(k) in cast_cats
+                    and afp_cells(k) <= 2]
+            kin_pool = sorted(pool, key=fp)[:2]
+        # the teleporter stands on VOID by law, so it can never be in the
+        # walkable set — the target is its LANDING (the floor beside it)
+        wtargets = [a for _, _, a, _ in rooms]
+        if tp:
+            wtargets += [n for n in ((tp[0] + 1, tp[1]), (tp[0] - 1, tp[1]),
+                                     (tp[0], tp[1] + 1), (tp[0], tp[1] - 1)) if n in floor]
+        stages.append(place_principal_wall(S, U, I, WL, W, D, floor, spawn, wtargets,
+                                           {c: 0 for c in floor} if not dist_map else dist_map,
+                                           pw.get("cluster", "pw_primitives_portals"), kin_pool))
 
     data = {"map_info": {"name": "X", "lookup_name": "X", "title": "X",
         "description": "wizard track: " + "+".join(plan),
