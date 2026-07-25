@@ -81,10 +81,12 @@
    "op": "spans",
    "what": "SPANS — a gap you cross instead of floor you fill: bridge over a causeway, or (Minecraft's mineshaft logic) a CARVED chasm with the deck left spanning it",
    "strategies": [
-    "causeway",
-    "carve"
+    "carve+br",
+    "carve+tc",
+    "carve+deck",
+    "causeway"
    ],
-   "note": "deck rises one step, aligned wedges at BOTH ends (LIFT law — a one-wedge bridge scored reach 0.51), hb railings on the void flanks (first use of hb in 1,987 maps). Preconditions beat reverts: check the climbs are placeable and the chain is WALL-FREE before mutating — the first carve landed against a chamber's north wall segment and severed the track (the SEAM law's cousin: consult layers.walls, not just floor)."
+   "note": "deck rises one step, aligned wedges at BOTH ends (LIFT law — a one-wedge bridge scored reach 0.51), hb railings on the void flanks (first use of hb in 1,987 maps). Preconditions beat reverts: check the climbs are placeable and the chain is WALL-FREE before mutating — the first carve landed against a chamber's north wall segment and severed the track (the SEAM law's cousin: consult layers.walls, not just floor). CORRECTION 2026-07-25: I built decks-and-wedges on the belief that 'bridges have no code'. They do, and the pathfinder models them natively: br:AXIS:LENGTH (transparent grid walkway over void, 24 corpus uses) and tc:DIST:AXIS[:auto] (transport cube ferry, 481 uses, modelled as a bidirectional tc_adj edge pos<->pos±dist). Default is now style='br'; 'tc' ferries; 'deck' keeps the raised-deck+wedge build. All three verified at reach 0.97 on the same track."
   },
   {
    "n": 7,
@@ -251,12 +253,13 @@
   }
  ],
  "vertical_vocabulary": {
-  "wedge": "wp:<yaw> on the low cell (N:180 E:90 S:0 W:270) — the +1 step",
-  "lift": "l:<height> platform_lift — vertical travel beyond one step (UNUSED by the wizard)",
-  "move_player": "m — displacement without geometry (UNUSED)",
-  "teleport": "t on void — the exit, and long jumps",
-  "door": "d — a transition that reads as a threshold (UNUSED; the wizard uses UPPERCASE wall segments instead)",
-  "railing": "hb horizontal_border — the bridge/parapet edge piece (UNUSED)",
-  "bridge": "NO dedicated code: hand maps build bridges as raised structure (h2/h3) over void with wp at each end and hb along the flanks (see Deck_Bridge_Dressed) — a candidate op 6.5 for the wizard"
+  "wedge": "wp:<yaw> on the LOW cell (N:180 E:90 S:0 W:270) — the +1 step. USED",
+  "bridge": "br:<axis>:<len> transparent grid walkway over void, pathfinder-native. USED (op 6.5 default)",
+  "transport_cube": "tc:<dist>:<axis>[:auto] carries the player ±dist along the axis. USED (op 6.5 style tc)",
+  "jump_pad": "jp:<tx>:<tz>[:arc] one-way parabolic launch, pathfinder-native (jp_edges). NOT USED — the only transport primitive the wizard still ignores",
+  "lift": "l:<height> platform_lift — DEAD PARAMETER: the scene exports lift_height but GridUtilitiesComponent's 'l' handler sets `height`, so the property check fails and every l:<n> is silently ignored (default 5.0 always). Pattern_Foundry passes a LABEL ('l:KALEIDOSCOPE MILL'), so a naive fix that calls float() would flatten those lifts to 0 — any fix must require is_valid_float() and >0. NOT USED, reported not fixed",
+  "move_player": "m — displacement without geometry. NOT USED",
+  "door": "lab_sliding_door frame + exit_sign (op 4.3). USED",
+  "railing": "hb horizontal_border on the void flanks of a span. USED"
  }
 }

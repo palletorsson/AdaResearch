@@ -66,7 +66,9 @@ DEFAULT_SPEC = {
     # in front of it. style "cluster" = a curated Wall-Hangar-Editor cluster.
     # op 6.5 spans (bridge/causeway) · op 9.5 landmark + lights
     "doors": {"enabled": True, "accent": ""},
-    "spans": {"enabled": True, "railings": True},
+    # style "br" = the project's own bridge primitive (transparent grid walkway,
+    # pathfinder-native); "deck" = raised deck + aligned wedges (the first build)
+    "spans": {"enabled": True, "railings": True, "style": "br"},
     "landmark": {"enabled": True, "height": 4},
     "lights": {"enabled": True, "every": 7},
     "principal_wall": {"enabled": True, "style": "hangar",
@@ -600,7 +602,8 @@ def compose(spec):
                               hall if isinstance(hall, set) else set(hall),
                               passage if isinstance(passage, set) else set(passage),
                               enabled=_sp.get("enabled", True),
-                              railings=_sp.get("railings", True)))
+                              railings=_sp.get("railings", True),
+                              style=_sp.get("style", "br")))
     _lm = spec.get("landmark") or {}
     stages.append(place_landmark(S, W, D, floor, dist_map,
                                  enabled=_lm.get("enabled", True),
@@ -863,7 +866,7 @@ def wall_between(WL, a, b, W, D):
 
 
 def place_spans(S, U, I, WL, W, D, floor, spawn, targets, hall, passage, enabled=True,
-                railings=True):
+                railings=True, style="br"):
     """Turn one straight causeway into a BRIDGE: the deck rises a step, the walk
     climbs it on aligned wedges, and (optionally) railings mark the edge.
 
@@ -941,19 +944,48 @@ def place_spans(S, U, I, WL, W, D, floor, spawn, targets, hall, passage, enabled
                 tok = wedge_token(e, into)
                 if tok and not str(U[e[1]][e[0]]).strip():
                     plan_wedges.append((e, tok))
-            if len(plan_wedges) < 2:
+            if style not in ("br", "tc") and len(plan_wedges) < 2:
                 return {"op": "spans", "placed": False,
                         "why": "chasm found but both climbs are not placeable "
                                "(LIFT law) — left the walk whole"}
+            if style in ("br", "tc") and str(U[ends[0][1]][ends[0][0]]).strip():
+                return {"op": "spans", "placed": False,
+                        "why": "chasm found but the bridge's near end is occupied"}
             for c in chasm:
                 S[c[1]][c[0]] = "0"
             floor -= set(chasm)
-            for c in deck:
-                S[c[1]][c[0]] = "2"
             wedges = []
-            for e, tok in plan_wedges:
-                U[e[1]][e[0]] = tok
-                wedges.append({"cell": list(e), "token": tok})
+            bridge_tok = None
+            if style == "tc":
+                # THE TRANSPORT CUBE as a ferry: the whole cut (deck included)
+                # becomes void and a cube at the near lip carries the walker
+                # across. Pathfinder-native via tc_adj (pos <-> pos +/- dist).
+                for c in deck:
+                    S[c[1]][c[0]] = "0"
+                floor -= set(deck)
+                axis = "z" if dz else "x"
+                dist = len(deck) + 1
+                start = ends[0]
+                bridge_tok = "tc:%d:%s:auto" % (dist, axis)
+                U[start[1]][start[0]] = bridge_tok
+            elif style == "br":
+                # THE PROJECT'S OWN BRIDGE: br:AXIS:LENGTH, a transparent grid
+                # walkway over void, native to the pathfinder. The deck cells
+                # become void too — the bridge IS the crossing, nothing raised.
+                for c in deck:
+                    S[c[1]][c[0]] = "0"
+                floor -= set(deck)
+                span_len = len(deck)
+                axis = ("z" if dz else "x") if (dx + dz) >= 0 else ("-z" if dz else "-x")
+                start = ends[0]
+                bridge_tok = "br:%s:%d" % (axis, span_len)
+                U[start[1]][start[0]] = bridge_tok
+            else:
+                for c in deck:
+                    S[c[1]][c[0]] = "2"
+                for e, tok in plan_wedges:
+                    U[e[1]][e[0]] = tok
+                    wedges.append({"cell": list(e), "token": tok})
             rail = []
             if railings:
                 for c in deck:
@@ -961,12 +993,19 @@ def place_spans(S, U, I, WL, W, D, floor, spawn, targets, hall, passage, enabled
                         nb = (c[0] + perp[0] * s, c[1] + perp[1] * s)
                         if 0 <= nb[0] < W and 0 <= nb[1] < D and S[nb[1]][nb[0]] == "0"                                 and not str(U[nb[1]][nb[0]]).strip():
                             U[nb[1]][nb[0]] = "hb"; rail.append(list(nb))
-            return {"op": "spans", "placed": True, "strategy": "carve",
+            return {"op": "spans", "placed": True,
+                    "strategy": "carve+" + style,
                     "deck": cl(set(deck)), "chasm": cl(set(chasm)), "wedges": wedges,
+                    "bridge": bridge_tok, "bridge_at": list(ends[0]) if bridge_tok else None,
                     "railings": rail, "reach_ok": _reaches_all(floor, set(), spawn, targets),
-                    "why": ("CARVED a %d-wide chasm across the walk and left the bridge: "
-                            "deck +1, %d aligned wedges, %d railings — the crossing is now "
-                            "the only way through, verified" % (width, len(wedges), len(rail)))}
+                    "why": (("CARVED a %d-wide chasm and crossed it with the project's own "
+                             "%s (%s at %s), %d railings — no deck raise, no wedges: both are "
+                             "pathfinder-native" % (width, "bridge" if style == "br" else "transport cube",
+                                                    bridge_tok, ends[0], len(rail)))
+                            if style in ("br", "tc") else
+                            ("CARVED a %d-wide chasm across the walk and left the bridge: "
+                             "deck +1, %d aligned wedges, %d railings — the crossing is now "
+                             "the only way through, verified" % (width, len(wedges), len(rail))))}
         return {"op": "spans", "placed": False,
                 "why": "no causeway and no chasm that the walk survives"}
     cands.sort(key=lambda c: -c[0])
@@ -1510,7 +1549,8 @@ def compose_track(spec):
                               hallc,
                               set(),
                               enabled=_sp.get("enabled", True),
-                              railings=_sp.get("railings", True)))
+                              railings=_sp.get("railings", True),
+                              style=_sp.get("style", "br")))
     _lm = spec.get("landmark") or {}
     stages.append(place_landmark(S, W, D, floor, dist_map,
                                  enabled=_lm.get("enabled", True),
