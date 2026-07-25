@@ -64,6 +64,10 @@ DEFAULT_SPEC = {
     # style "hangar" = THE HANGAR WALL SYSTEM (commons/artifacts/hangar_*, kit
     # _hangar/hangar_kit.gd): hangar_wall_panel IS the wall, hangar props stand
     # in front of it. style "cluster" = a curated Wall-Hangar-Editor cluster.
+    # op 6.5 spans (bridge/causeway) · op 9.5 landmark + lights
+    "spans": {"enabled": True, "railings": True},
+    "landmark": {"enabled": True, "height": 4},
+    "lights": {"enabled": True, "every": 7},
     "principal_wall": {"enabled": True, "style": "hangar",
                        "cluster": "pw_primitives_portals",
                        "props": ["hangar_podium", "hangar_worktable", "hangar_supply_pile"],
@@ -565,6 +569,22 @@ def compose(spec):
             if _nb in floor and _nb not in dist_map:
                 dist_map[_nb] = dist_map[(_x, _z)] + 1; _dq.append(_nb)
 
+
+    # 6.5 SPANS + 9.5 LANDMARK/LIGHTS — the vertical & legibility vocabulary
+    _sp = spec.get("spans") or {}
+    stages.append(place_spans(S, U, I, WL, W, D, floor, spawn_a, [a for _, _, a, _ in rooms],
+                              hall if isinstance(hall, set) else set(hall),
+                              passage if isinstance(passage, set) else set(passage),
+                              enabled=_sp.get("enabled", True),
+                              railings=_sp.get("railings", True)))
+    _lm = spec.get("landmark") or {}
+    stages.append(place_landmark(S, W, D, floor, dist_map,
+                                 enabled=_lm.get("enabled", True),
+                                 height=int(_lm.get("height", 4))))
+    _li = spec.get("lights") or {}
+    stages.append(place_lights(U, W, D, floor, dist_map, spawn_a, tp,
+                               every=int(_li.get("every", 7)),
+                               enabled=_li.get("enabled", True)))
     # 9 WALL HANGAR PRINCIPAL — the last operation
     pw = spec.get("principal_wall") or {}
     if pw.get("enabled", True):
@@ -716,6 +736,235 @@ def place_principal_wall(S, U, I, WL, W, D, floor, spawn, targets, dist,
     return {"op": "wall_hangar", "placed": False, "style": style, "wall": [], "front": [],
             "cluster": None, "kin": [], "pieces": [],
             "why": "no candidate run had standoff and survived the reachability veto"}
+
+
+# ---------- OP 6.5 SPANS · OP 9.5 LANDMARK + LIGHTS ----------
+# Palle 2026-07-25: transport cubes, slopes and bridges from the utility layer;
+# Minecraft's legible grammar (the mineshaft's deliberate break, the village
+# landmark, lit paths). Spans give the composer a THIRD dimension of
+# circulation: a gap you cross instead of floor you fill.
+def _straight_runs(cells, min_len=5):
+    runs = []
+    for (dx, dz) in ((1, 0), (0, 1)):
+        seen = set()
+        for c in sorted(cells):
+            if c in seen: continue
+            if (c[0] - dx, c[1] - dz) in cells: continue
+            run, cur = [], c
+            while cur in cells:
+                run.append(cur); seen.add(cur); cur = (cur[0] + dx, cur[1] + dz)
+            if len(run) >= min_len:
+                runs.append((run, (dx, dz)))
+    return runs
+
+
+_WALL_EDGE = {(1, 0): ("e", "w"), (-1, 0): ("w", "e"), (0, 1): ("s", "n"), (0, -1): ("n", "s")}
+
+
+def wall_between(WL, a, b, W, D):
+    """True if a lowercase wall segment separates neighbouring cells a and b.
+    Uppercase = door = an opening. The SEAM law's cousin: a crossing that lands
+    against a wall is not a crossing (the carve learned this the hard way)."""
+    d = (b[0] - a[0], b[1] - a[1])
+    if d not in _WALL_EDGE: return False
+    ea, eb = _WALL_EDGE[d]
+    for (cx, cz), e in ((a, ea), (b, eb)):
+        if 0 <= cx < W and 0 <= cz < D and cz < len(WL) and cx < len(WL[cz]):
+            if e in (WL[cz][cx] or ""):
+                return True
+    return False
+
+
+def place_spans(S, U, I, WL, W, D, floor, spawn, targets, hall, passage, enabled=True,
+                railings=True):
+    """Turn one straight causeway into a BRIDGE: the deck rises a step, the walk
+    climbs it on aligned wedges, and (optionally) railings mark the edge.
+
+    Chosen run must be flanked by void on both sides for at least its middle —
+    a causeway, not a corridor through rooms. Reachability is verified after.
+    """
+    if not enabled:
+        return {"op": "spans", "placed": False, "why": "disabled"}
+    cands = []
+    for run, (dx, dz) in _straight_runs((hall | passage) & floor, 6):
+        px, pz = (0, 1) if dx else (1, 0)
+        mid = run[len(run) // 2 - 1:len(run) // 2 + 2]
+        if len(mid) < 3: continue
+        openness = 0
+        for c in mid:
+            for s in (1, -1):
+                nb = (c[0] + px * s, c[1] + pz * s)
+                if nb not in floor: openness += 1
+        if openness < 4: continue                     # not a causeway
+        ends = (run[len(run) // 2 - 2], run[len(run) // 2 + 2])
+        if any(e not in floor for e in ends): continue
+        chain_c = [ends[0]] + mid + [ends[1]]
+        if any(wall_between(WL, chain_c[i], chain_c[i + 1], W, D) for i in range(len(chain_c) - 1)):
+            continue
+        cands.append((openness, mid, (dx, dz), (px, pz), ends))
+    if not cands:
+        # THE DELIBERATE BREAK (Minecraft's mineshaft logic): if no causeway
+        # exists, CARVE one — cut a chasm across a wide walk and leave a single
+        # bridge deck spanning it. The veto then proves the walk survives.
+        best = None
+        for run, (dx, dz) in _straight_runs((hall | passage) & floor, 7):
+            px, pz = (0, 1) if dx else (1, 0)
+            perp = (px, pz)
+            k = len(run) // 2
+            cut_at = run[k - 1:k + 1]
+            if len(cut_at) < 2: continue
+            band, width = [], 0
+            for c in cut_at:
+                col = [c]
+                for s in (1, -1):
+                    n = (c[0] + px * s, c[1] + pz * s)
+                    while n in floor:
+                        col.append(n); n = (n[0] + px * s, n[1] + pz * s)
+                band.append(col)
+                width = max(width, len(col))
+            if width < 3: continue
+            # the bridge belongs on the band's MIDLINE, not on whichever column
+            # the run happened to start from (that put it at the map edge)
+            deck = []
+            for col in band:
+                s_col = sorted(col, key=lambda c: (c[0] * perp[0] + c[1] * perp[1]))
+                deck.append(s_col[len(s_col) // 2])
+            chasm = [c for col in band for c in col if c not in deck]
+            if not chasm: continue
+            d0 = min(deck, key=lambda c: c[0] * dx + c[1] * dz)
+            d1 = max(deck, key=lambda c: c[0] * dx + c[1] * dz)
+            ends = ((d0[0] - dx, d0[1] - dz), (d1[0] + dx, d1[1] + dz))
+            if any(e not in floor for e in ends): continue
+            chain = [ends[0]] + sorted(deck, key=lambda c: c[0] * dx + c[1] * dz) + [ends[1]]
+            if any(wall_between(WL, chain[i], chain[i + 1], W, D) for i in range(len(chain) - 1)):
+                continue                      # lands against a wall — not a crossing
+            if not _reaches_all(floor, set(chasm), spawn, list(targets) + [ends[0], ends[1]]):
+                continue                      # the bridge must be the crossing, not a cut
+            if best is None or width > best[0]:
+                best = (width, deck, chasm, (dx, dz), (px, pz), ends)
+        if best:
+            width, deck, chasm, axis, perp, ends = best
+            # LIFT LAW, my own: a raised deck needs a climb at BOTH ends or the
+            # far side is stranded (a one-wedge bridge scored reach 0.51). Check
+            # the climbs are POSSIBLE before mutating anything — preconditions
+            # beat reverts.
+            plan_wedges = []
+            for e in ends:
+                into = min(deck, key=lambda c: abs(c[0] - e[0]) + abs(c[1] - e[1]))
+                tok = wedge_token(e, into)
+                if tok and not str(U[e[1]][e[0]]).strip():
+                    plan_wedges.append((e, tok))
+            if len(plan_wedges) < 2:
+                return {"op": "spans", "placed": False,
+                        "why": "chasm found but both climbs are not placeable "
+                               "(LIFT law) — left the walk whole"}
+            for c in chasm:
+                S[c[1]][c[0]] = "0"
+            floor -= set(chasm)
+            for c in deck:
+                S[c[1]][c[0]] = "2"
+            wedges = []
+            for e, tok in plan_wedges:
+                U[e[1]][e[0]] = tok
+                wedges.append({"cell": list(e), "token": tok})
+            rail = []
+            if railings:
+                for c in deck:
+                    for s in (1, -1):
+                        nb = (c[0] + perp[0] * s, c[1] + perp[1] * s)
+                        if 0 <= nb[0] < W and 0 <= nb[1] < D and S[nb[1]][nb[0]] == "0"                                 and not str(U[nb[1]][nb[0]]).strip():
+                            U[nb[1]][nb[0]] = "hb"; rail.append(list(nb))
+            return {"op": "spans", "placed": True, "strategy": "carve",
+                    "deck": cl(set(deck)), "chasm": cl(set(chasm)), "wedges": wedges,
+                    "railings": rail, "reach_ok": _reaches_all(floor, set(), spawn, targets),
+                    "why": ("CARVED a %d-wide chasm across the walk and left the bridge: "
+                            "deck +1, %d aligned wedges, %d railings — the crossing is now "
+                            "the only way through, verified" % (width, len(wedges), len(rail)))}
+        return {"op": "spans", "placed": False,
+                "why": "no causeway and no chasm that the walk survives"}
+    cands.sort(key=lambda c: -c[0])
+    openness, mid, axis, perp, ends = cands[0]
+    for c in mid:
+        S[c[1]][c[0]] = "2"                           # the deck rises one step
+    wedges = []
+    for e in ends:
+        step_into = (e[0] + axis[0] * (1 if e == ends[0] else -1),
+                     e[1] + axis[1] * (1 if e == ends[0] else -1))
+        w = place_wedge(S, U, e, step_into, W, D)
+        if w: wedges.append({"cell": list(w[0]), "token": w[1]})
+    rail = []
+    if railings:
+        for c in mid:
+            for s in (1, -1):
+                nb = (c[0] + perp[0] * s, c[1] + perp[1] * s)
+                if 0 <= nb[0] < W and 0 <= nb[1] < D and nb not in floor \
+                        and S[nb[1]][nb[0]] == "0" and not str(U[nb[1]][nb[0]]).strip():
+                    U[nb[1]][nb[0]] = "hb"
+                    rail.append(list(nb))
+    ok = _reaches_all(floor, set(), spawn, targets)
+    return {"op": "spans", "placed": True, "deck": cl(set(mid)),
+            "wedges": wedges, "railings": rail, "openness": openness,
+            "reach_ok": ok,
+            "why": ("bridge on the openest causeway (%d void flanks): deck +1, %d aligned "
+                    "wedges, %d railings" % (openness, len(wedges), len(rail)))}
+
+
+def place_landmark(S, W, D, floor, dist, enabled=True, height=4):
+    """A village-square landmark: one stepped tower, visible from the whole walk,
+    built on VOID beside the busiest floor so it never costs a walkable cell."""
+    if not enabled:
+        return {"op": "landmark", "placed": False, "why": "disabled"}
+    maxd = max([d for d in dist.values() if d < 10 ** 6] or [1])
+    best = None
+    for (x, z) in floor:
+        for (dx, dz) in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+            c = (x + dx, z + dz)
+            if not (1 <= c[0] < W - 1 and 1 <= c[1] < D - 1): continue
+            if S[c[1]][c[0]] != "0": continue
+            around = sum(1 for ax in range(-2, 3) for az in range(-2, 3)
+                         if (c[0] + ax, c[1] + az) in floor)
+            mid_walk = 1.0 - abs(dist.get((x, z), 0) / maxd - 0.5) * 2
+            score = around / 24.0 * 0.6 + mid_walk * 0.4
+            if best is None or score > best[0]:
+                best = (score, c, around)
+    if not best:
+        return {"op": "landmark", "placed": False, "why": "no void cell beside the walk"}
+    score, c, around = best
+    S[c[1]][c[0]] = str(height)
+    skirt = []
+    for (dx, dz) in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+        n = (c[0] + dx, c[1] + dz)
+        if 0 <= n[0] < W and 0 <= n[1] < D and S[n[1]][n[0]] == "0":
+            S[n[1]][n[0]] = str(max(2, height - 2))
+            skirt.append(list(n))
+    return {"op": "landmark", "placed": True, "cell": list(c), "height": height,
+            "skirt": skirt, "seen_from": around,
+            "why": "stepped tower h%d on void beside the walk (%d floor cells within 2), "
+                   "mid-walk so it reads as a homing mark" % (height, around)}
+
+
+def place_lights(U, W, D, floor, dist, spawn, tp, every=7, enabled=True):
+    """`el` overhead lights along the walk — the cheapest legibility tool in the
+    grid, and the wizard never used one. Lit at the spawn, the exit landing, and
+    every `every` cells of walk distance."""
+    if not enabled:
+        return {"op": "lights", "placed": 0, "cells": [], "why": "disabled"}
+    want = []
+    by_d = sorted(((d, c) for c, d in dist.items() if d < 10 ** 6), key=lambda t: t[0])
+    next_at = 0
+    for d, c in by_d:
+        if d >= next_at:
+            want.append(c); next_at = d + every
+    for extra in (spawn,) + ((tp,) if tp else ()):
+        if extra and extra in floor and extra not in want: want.append(extra)
+    placed = []
+    for c in want:
+        if not (0 <= c[0] < W and 0 <= c[1] < D): continue
+        if str(U[c[1]][c[0]]).strip(): continue
+        U[c[1]][c[0]] = "el"
+        placed.append(list(c))
+    return {"op": "lights", "placed": len(placed), "cells": placed, "every": every,
+            "why": "one overhead light every %d cells of walk, plus spawn and exit" % every}
 
 
 def metrics(data, rooms, hall, passage, floor, door_info, story_score=0.0):
@@ -1147,6 +1396,22 @@ def compose_track(spec):
                 if _nb in floor and _nb not in dist_map:
                     dist_map[_nb] = dist_map[(_x, _z)] + 1; _dq.append(_nb)
 
+
+    # 6.5 SPANS + 9.5 LANDMARK/LIGHTS — the vertical & legibility vocabulary
+    _sp = spec.get("spans") or {}
+    stages.append(place_spans(S, U, I, WL, W, D, floor, spawn, [a for _, _, a, _ in rooms],
+                              hallc,
+                              set(),
+                              enabled=_sp.get("enabled", True),
+                              railings=_sp.get("railings", True)))
+    _lm = spec.get("landmark") or {}
+    stages.append(place_landmark(S, W, D, floor, dist_map,
+                                 enabled=_lm.get("enabled", True),
+                                 height=int(_lm.get("height", 4))))
+    _li = spec.get("lights") or {}
+    stages.append(place_lights(U, W, D, floor, dist_map, spawn, tp,
+                               every=int(_li.get("every", 7)),
+                               enabled=_li.get("enabled", True)))
     # 9 WALL HANGAR PRINCIPAL — the last operation
     pw = spec.get("principal_wall") or {}
     if pw.get("enabled", True):

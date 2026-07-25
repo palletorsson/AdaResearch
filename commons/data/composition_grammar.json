@@ -1,6 +1,6 @@
 {
  "_comment": "THE ORDER OF OPERATIONS for map composition — canon, editable. Palle 2026-07-24: 'this is about order of operation, what is included in what order... then auto research to create the best combination or new strategies.' The research engines READ this file (stages, metric weights, bands): edit here, re-run, the search changes. Rounds history at the bottom. Sibling canons: cabinet_grammar.json, systems_fold.json.",
- "version": 7,
+ "version": 8,
  "operations": [
   {
    "n": 1,
@@ -67,6 +67,16 @@
    "note": "procession scored only after r2 gave elevation a metric"
   },
   {
+   "n": 6.5,
+   "op": "spans",
+   "what": "SPANS — a gap you cross instead of floor you fill: bridge over a causeway, or (Minecraft's mineshaft logic) a CARVED chasm with the deck left spanning it",
+   "strategies": [
+    "causeway",
+    "carve"
+   ],
+   "note": "deck rises one step, aligned wedges at BOTH ends (LIFT law — a one-wedge bridge scored reach 0.51), hb railings on the void flanks (first use of hb in 1,987 maps). Preconditions beat reverts: check the climbs are placeable and the chain is WALL-FREE before mutating — the first carve landed against a chamber's north wall segment and severed the track (the SEAM law's cousin: consult layers.walls, not just floor)."
+  },
+  {
    "n": 7,
    "op": "paths",
    "what": "connective tissue LAST — and cared for",
@@ -94,6 +104,15 @@
     "search+cluster"
    ],
    "note": "candidate = a straight 3-cell run (floor or void) with walkable standoff on one side; score = 0.4 late-in-walk + 0.4 open-front (the gaze law) + 0.2 dead-back (seals nothing); REACHABILITY IS A VETO not a term — a candidate that would strand the teleporter landing or any artifact is dropped, so the wall can never break the path. Dressing = cluster token rotated to face the standoff; flanks take small kin of the cast. GOTCHA the veto taught: the teleporter stands on VOID by law, so it is never in the walkable set — the target is its LANDING (first version rejected all 427 candidates by asking the impossible). CORRECTION (Palle: 'but did you find the hangar wall system?') — v1 used the Wall Hangar EDITOR's curated cluster files (station_* pieces). THE HANGAR WALL SYSTEM is commons/artifacts/hangar_* with the kit _hangar/hangar_kit.gd: hangar_wall_panel (the backing wall that stands ON the floor, plane facing +Z — so no h4 cubes: the panel IS the wall) plus hangar_podium / worktable / supply_pile / barrier_fence / cabinet_cluster / step_base as the props, all map_ready and — until now — placed in ZERO maps. style='hangar' (default) composes panel run + props in front + kin one row further into the standoff; style='cluster' keeps the old curated-cluster behaviour."
+  },
+  {
+   "n": 9.5,
+   "op": "landmark_lights",
+   "what": "LANDMARK + LIGHTS — Minecraft's village square: one stepped tower on void beside the walk (visible from everywhere, costs no walkable cell) and `el` overhead lights every N cells of walk distance",
+   "strategies": [
+    "tower+lit"
+   ],
+   "note": "el was used 193 times in hand maps and NEVER by the wizard; the landmark scores on floor-cells-within-2 (visibility) x mid-walk position (homing). Cheapest legibility per cell in VR."
   }
  ],
  "interfaces": {
