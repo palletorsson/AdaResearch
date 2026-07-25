@@ -938,7 +938,7 @@ func _refresh_readout(delta: float) -> void:
 
 	var pal: Dictionary = HangarKit.finish_palette(finish)
 	_readout_node = HangarKit.readout(_mode_header, lines, _readout_size,
-		pal["screen"], pal["text"], pal["header"])
+		pal["screen"], pal["text"], pal["header"], finish)
 	if _readout_node != null:
 		_readout_anchor.add_child(_readout_node)
 

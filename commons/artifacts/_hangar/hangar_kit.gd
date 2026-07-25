@@ -522,14 +522,20 @@ static func brand_patch(text: String, world_size: Vector2, bg: Color = Color(0.1
 ## artifact_readout_screen and by cabinets/consoles. `lines` is an Array of short strings.
 static func readout(header: String, lines: Array, size: Vector2 = Vector2(0.5, 0.34),
 		screen_bg: Color = DISPLAY_DARK, text_color: Color = TEXT_DISPLAY,
-		header_color: Color = BRAUN_ACCENT) -> Node3D:
+		header_color: Color = BRAUN_ACCENT, bezel_finish: String = "rams") -> Node3D:
 	var root := Node3D.new()
 	root.name = "Readout"
 	var w: float = size.x
 	var h: float = size.y
 	var ft: float = maxf(w, h) * 0.06          # frame bar thickness
 	var fd: float = 0.05                         # frame depth
-	var bez := rams_body(PANEL_TRIM, 0.06)       # light matte bezel (Braun, recedes)
+	# Bezel follows `bezel_finish`. It DEFAULTS to rams because the station props and
+	# wall panels that call this are Braun-bodied and want the light matte trim. A
+	# dark terminal cabinet must pass its own finish, or it gets a pale Braun frame
+	# bolted to a charcoal body — the same second-manufacturer read that harmonize()
+	# exists to correct on imported panels.
+	var bez: StandardMaterial3D = finish_body(
+		bezel_finish, finish_palette(bezel_finish)["panel"], 0.10)
 	# four bezel bars
 	root.add_child(box(Vector3(0, h * 0.5 + ft * 0.5, 0), Vector3(w + ft * 2.0, ft, fd), bez))
 	root.add_child(box(Vector3(0, -h * 0.5 - ft * 0.5, 0), Vector3(w + ft * 2.0, ft, fd), bez))

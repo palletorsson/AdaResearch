@@ -285,7 +285,7 @@ func _rebuild_header(title: String, equation: String, explanation: String) -> vo
 			equation,
 			"MODE %d/3" % (analogy_type + 1),
 			"WORDS %d" % shown.size(),
-		], _screen_size, pal["screen"], pal["text"], pal["accent"])
+		], _screen_size, pal["screen"], pal["text"], pal["accent"], finish)
 	if screen:
 		_analogy_screen.add_child(screen)
 

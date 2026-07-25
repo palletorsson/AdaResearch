@@ -799,7 +799,7 @@ func _refresh_stats_tag(text: String) -> void:
 		# and green CRT body. A powered instrument, not a printed plate.
 		var pal: Dictionary = HangarKit.finish_palette(finish)
 		_stats_tag = HangarKit.readout("CENSUS", lines, _screen_size,
-			pal["screen"], pal["text"], pal["header"])
+			pal["screen"], pal["text"], pal["header"], finish)
 		_kiosk_screen.add_child(_stats_tag)
 		return
 

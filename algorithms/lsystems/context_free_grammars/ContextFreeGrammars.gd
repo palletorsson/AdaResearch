@@ -974,7 +974,7 @@ func _make_board(header: String, lines: Array, size: Vector2, pos: Vector3) -> N
 	root.add_child(HangarKit.box(Vector3(0, 0, -0.022),
 		Vector3(size.x + 0.075, size.y + 0.075, 0.03), dark))
 	var screen: Node3D = HangarKit.readout(header, lines, size,
-		screen_c, text_c, head_c)
+		screen_c, text_c, head_c, finish)
 	if screen:
 		screen.position = Vector3(0, 0, 0.008)
 		root.add_child(screen)

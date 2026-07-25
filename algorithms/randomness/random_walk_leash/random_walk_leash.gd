@@ -415,7 +415,7 @@ func _refresh_screen(lines: Array) -> void:
 	_stats_tag = null
 	var pal: Dictionary = HangarKit.finish_palette(finish)
 	var scr: Node3D = HangarKit.readout("WALK", lines, _screen_size,
-		pal["screen"], pal["text"], pal["header"])
+		pal["screen"], pal["text"], pal["header"], finish)
 	if scr != null:
 		scr.position = Vector3.ZERO
 		_screen_anchor.add_child(scr)

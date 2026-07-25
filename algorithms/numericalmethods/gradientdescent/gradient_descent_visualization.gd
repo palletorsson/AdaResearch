@@ -1404,7 +1404,7 @@ func _rebuild_info(header: String, text: String) -> void:
 		var pal_text: Color = pal["text"]
 		var pal_accent: Color = pal["accent"]
 		block = HangarKit.readout(header, Array(text.split("\n")),
-			Vector2(1.30, 0.30), Color(0.04, 0.05, 0.08), pal_text, pal_accent)
+			Vector2(1.30, 0.30), Color(0.04, 0.05, 0.08), pal_text, pal_accent, finish)
 	else:
 		block = _make_billboard_block(text, INFO_COLOR, 0.18, 4.4)
 	if block:
