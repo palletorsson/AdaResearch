@@ -433,10 +433,13 @@ func _draw_parse_tree() -> void:
 	var g := grammars[grammar_index]
 	var nonterminals: Array = g["nonterminals"]
 
-	# Draw edges first
-	_tree_mesh.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
-	_draw_tree_edges(_tree_root, scale, nonterminals)
-	_tree_mesh.surface_end()
+	# Draw edges first — ONLY if the tree has any. surface_end() on an empty surface errors
+	# ("No vertices...") AND leaves the surface open, so the next surface_begin() cascades
+	# ("Already creating..."). Root having children means at least one edge.
+	if _tree_root is Dictionary and not (_tree_root.get("children", []) as Array).is_empty():
+		_tree_mesh.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
+		_draw_tree_edges(_tree_root, scale, nonterminals)
+		_tree_mesh.surface_end()
 
 	# Draw nodes
 	_tree_mesh.surface_begin(Mesh.PRIMITIVE_TRIANGLES)
