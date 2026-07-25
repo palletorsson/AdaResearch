@@ -366,6 +366,16 @@ func _spawn_mycelium(deposit: Dictionary, ctx: Dictionary,
 # One curated preset per cell, applied via CritterDNA.from_dict exactly as the
 # gallery labs do. Tier scales the whole organism; LOD follows intensity.
 const FD_FAMILIES: Array = ["alien_lumen", "button_dome", "fairy_ring", "parasol_tall", "shelf_bracket"]
+## Ceiling on the LOD handed to the FUNGUS SDF morphology at biome scale (see
+## _spawn_sdf_organism). 1 = res 22, measured 57ms vs 283ms at lod 3 — and a
+## capture at the cap is indistinguishable, because a mushroom is a CHUNKY form.
+##
+## Deliberately fungus-only: capping flora:sdf the same way thinned its trunk to
+## a hairline — the documented "partly-invisible body" failure, where a feature
+## narrower than one grid cell stops being meshed. Thin forms need resolution;
+## blobby ones do not. Any new SDF substrate must be captured before it joins.
+const BIOME_SDF_MAX_LOD_FUNGUS: int = 1
+
 const SF_FAMILIES: Array = ["gravity_droop", "inflate_bloat", "squash_settle", "wilt_collapse", "wind_lean"]
 const FD_VARIANTS_PER_FAMILY: int = 12
 const FD_PRESET_DIR := "res://algorithms/nature_system/morphology/fungus_presets"
@@ -425,7 +435,15 @@ func _spawn_sdf_organism(deposit: Dictionary, ctx: Dictionary, parent: Node3D,
 	holder.name = "BiomeSdf_%d_%d" % [x, z]
 	parent.add_child(holder)
 	holder.global_position = _cell_to_world(deposit, ctx)
+	# SDF bodies are meshed by marching tetrahedra, whose cost is ~res^3, and
+	# RES_BY_LOD tops out at 38. MEASURED per body: lod0 27ms, lod1 57ms,
+	# lod2 136ms, lod3 283ms — while a non-SDF mushroom costs 1.5ms and an
+	# lsystem tree 10ms. The SDF tiers ARE the dense-field build cost.
+	# The fungus body is chunky enough to cap (verified by capture); the flora
+	# body is NOT — its thin trunk needs the cells. Form decides, not scale.
 	var lod: int = clampi(intensity - 1, 0, 3)
+	if morphology_class == FungusSdfMorphologyClass:
+		lod = mini(lod, BIOME_SDF_MAX_LOD_FUNGUS)
 	morphology_class.build(dna, holder, _get_trait_mapper(), lod)
 
 
