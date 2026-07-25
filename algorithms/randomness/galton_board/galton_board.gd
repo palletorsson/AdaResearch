@@ -939,6 +939,15 @@ func _create_cabinet() -> void:
 	var scr_w: float = cw - 0.06
 	var scr_h: float = 0.30
 	var scr_y: float = hh - 0.26
+	# A MILLED POCKET behind it. HangarKit.readout() supplies the bezel and the lit
+	# face but not the recess, so this screen sat proud of the column — the exact
+	# "poster taped on" the seating rule is about. It went unnoticed because the rule
+	# only looked for canonical glass and this readout has none.
+	cab.add_child(HangarKit.box(
+		Vector3(colx, scr_y, face_z + 0.002),
+		Vector3(scr_w + 0.030, scr_h + 0.034, 0.014),
+		HangarKit.painted_metal(Color(0.07, 0.075, 0.09), ew, 0.35, 0.55)))
+
 	var anchor := Node3D.new()
 	anchor.name = "StatsScreen"
 	anchor.position = Vector3(colx, scr_y, face_z + 0.012)

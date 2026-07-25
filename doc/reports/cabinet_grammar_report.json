@@ -4,7 +4,7 @@
 			"artifact": "galton_board",
 			"body": "squat vending machine",
 			"dialect": "vertical",
-			"element_count": 185,
+			"element_count": 186,
 			"findings": [
 				{
 					"detail": "lowest element y = -0.600 (pedestal below origin)",
@@ -17,7 +17,7 @@
 					"rule": "G1-no-orphan-text"
 				},
 				{
-					"detail": "45 canon materials, no near-miss drift",
+					"detail": "46 canon materials, no near-miss drift",
 					"ok": true,
 					"rule": "G4-palette"
 				},
@@ -27,7 +27,7 @@
 					"rule": "G5-reach"
 				},
 				{
-					"detail": "0 glass panels, all pocketed",
+					"detail": "1 glass panels, all pocketed",
 					"ok": true,
 					"rule": "G6-screen-seated"
 				},
@@ -43,7 +43,7 @@
 			"artifact": "monte_carlo_dartboard",
 			"body": "tall street kiosk",
 			"dialect": "vertical",
-			"element_count": 98,
+			"element_count": 99,
 			"findings": [
 				{
 					"detail": "lowest element y = -0.380 (pedestal below origin)",
@@ -66,8 +66,8 @@
 					"rule": "G5-reach"
 				},
 				{
-					"detail": "unpocketed: Cabinet/@Node3D@425/@MeshInstance3D@422",
-					"ok": false,
+					"detail": "1 glass panels, all pocketed",
+					"ok": true,
 					"rule": "G6-screen-seated"
 				},
 				{
@@ -76,7 +76,7 @@
 					"rule": "G7-accent-present"
 				}
 			],
-			"violations": 1
+			"violations": 0
 		},
 		{
 			"artifact": "distribution_comparator",
@@ -173,7 +173,7 @@
 					"rule": "G1-no-orphan-text"
 				},
 				{
-					"detail": "deck 0.850, tallest 0.939 = TableConsole/@MeshInstance3D@790 (-0.011 vs the 0.10 allowance)",
+					"detail": "deck 0.850, tallest 0.939 = TableConsole/@MeshInstance3D@791 (-0.011 vs the 0.10 allowance)",
 					"ok": true,
 					"rule": "G3-silhouette"
 				},
@@ -266,7 +266,7 @@
 					"rule": "G5-reach"
 				},
 				{
-					"detail": "0 glass panels, all pocketed",
+					"detail": "1 glass panels, all pocketed",
 					"ok": true,
 					"rule": "G6-screen-seated"
 				},
@@ -305,7 +305,7 @@
 					"rule": "G5-reach"
 				},
 				{
-					"detail": "0 glass panels, all pocketed",
+					"detail": "1 glass panels, all pocketed",
 					"ok": true,
 					"rule": "G6-screen-seated"
 				},
@@ -344,7 +344,7 @@
 					"rule": "G5-reach"
 				},
 				{
-					"detail": "0 glass panels, all pocketed",
+					"detail": "1 glass panels, all pocketed",
 					"ok": true,
 					"rule": "G6-screen-seated"
 				},
@@ -373,7 +373,7 @@
 					"rule": "G1-no-orphan-text"
 				},
 				{
-					"detail": "deck 0.900, tallest 0.986 = TableConsole/@MeshInstance3D@1925 (-0.014 vs the 0.10 allowance)",
+					"detail": "deck 0.900, tallest 0.986 = TableConsole/@MeshInstance3D@1926 (-0.014 vs the 0.10 allowance)",
 					"ok": true,
 					"rule": "G3-silhouette"
 				},
@@ -427,7 +427,7 @@
 					"rule": "G5-reach"
 				},
 				{
-					"detail": "0 glass panels, all pocketed",
+					"detail": "1 glass panels, all pocketed",
 					"ok": true,
 					"rule": "G6-screen-seated"
 				},
@@ -461,7 +461,7 @@
 					"rule": "G4-palette"
 				},
 				{
-					"detail": "0 glass panels, all pocketed",
+					"detail": "1 glass panels, all pocketed",
 					"ok": true,
 					"rule": "G6-screen-seated"
 				},
@@ -490,7 +490,7 @@
 					"rule": "G1-no-orphan-text"
 				},
 				{
-					"detail": "deck 0.000, tallest 0.088 = CompressionBench/BenchReadout/Readout/@MeshInstance3D@2225 (-0.012 vs the 0.10 allowance)",
+					"detail": "deck 0.000, tallest 0.088 = CompressionBench/BenchReadout/Readout/@MeshInstance3D@2226 (-0.012 vs the 0.10 allowance)",
 					"ok": true,
 					"rule": "G3-silhouette"
 				},
@@ -505,7 +505,7 @@
 					"rule": "G5-reach"
 				},
 				{
-					"detail": "0 glass panels, all pocketed",
+					"detail": "1 glass panels, all pocketed",
 					"ok": true,
 					"rule": "G6-screen-seated"
 				},
@@ -544,7 +544,7 @@
 					"rule": "G5-reach"
 				},
 				{
-					"detail": "0 glass panels, all pocketed",
+					"detail": "1 glass panels, all pocketed",
 					"ok": true,
 					"rule": "G6-screen-seated"
 				},
@@ -573,7 +573,7 @@
 					"rule": "G1-no-orphan-text"
 				},
 				{
-					"detail": "deck 0.000, tallest 0.083 = TableConsole/InfoScreen/@Node3D@2605/@MeshInstance3D@2593 (-0.017 vs the 0.10 allowance)",
+					"detail": "deck 0.000, tallest 0.083 = TableConsole/InfoScreen/@Node3D@2606/@MeshInstance3D@2594 (-0.017 vs the 0.10 allowance)",
 					"ok": true,
 					"rule": "G3-silhouette"
 				},
@@ -627,7 +627,7 @@
 					"rule": "G5-reach"
 				},
 				{
-					"detail": "0 glass panels, all pocketed",
+					"detail": "3 glass panels, all pocketed",
 					"ok": true,
 					"rule": "G6-screen-seated"
 				},
@@ -666,7 +666,7 @@
 					"rule": "G5-reach"
 				},
 				{
-					"detail": "3 glass panels, all pocketed",
+					"detail": "4 glass panels, all pocketed",
 					"ok": true,
 					"rule": "G6-screen-seated"
 				},
@@ -700,7 +700,7 @@
 					"rule": "G4-palette"
 				},
 				{
-					"detail": "1 glass panels, all pocketed",
+					"detail": "2 glass panels, all pocketed",
 					"ok": true,
 					"rule": "G6-screen-seated"
 				},
@@ -729,7 +729,7 @@
 					"rule": "G1-no-orphan-text"
 				},
 				{
-					"detail": "deck 0.950, tallest 0.977 = TableConsole/CoordsPanel/@MeshInstance3D@2980 (-0.073 vs the 0.10 allowance)",
+					"detail": "deck 0.950, tallest 0.977 = TableConsole/CoordsPanel/@MeshInstance3D@2981 (-0.073 vs the 0.10 allowance)",
 					"ok": true,
 					"rule": "G3-silhouette"
 				},
@@ -783,7 +783,7 @@
 					"rule": "G5-reach"
 				},
 				{
-					"detail": "1 glass panels, all pocketed",
+					"detail": "2 glass panels, all pocketed",
 					"ok": true,
 					"rule": "G6-screen-seated"
 				},
@@ -822,7 +822,7 @@
 					"rule": "G5-reach"
 				},
 				{
-					"detail": "2 glass panels, all pocketed",
+					"detail": "4 glass panels, all pocketed",
 					"ok": true,
 					"rule": "G6-screen-seated"
 				},
@@ -856,7 +856,7 @@
 					"rule": "G4-palette"
 				},
 				{
-					"detail": "1 glass panels, all pocketed",
+					"detail": "2 glass panels, all pocketed",
 					"ok": true,
 					"rule": "G6-screen-seated"
 				},
@@ -870,5 +870,5 @@
 		}
 	],
 	"canon_version": 1.0,
-	"total_violations": 1
+	"total_violations": 0
 }

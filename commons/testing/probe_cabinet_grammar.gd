@@ -212,12 +212,21 @@ func _probe(entry: Dictionary, palette: Dictionary) -> Dictionary:
 		var mat: Material = m2.material_override
 		if mat is StandardMaterial3D:
 			var sc: Color = (mat as StandardMaterial3D).albedo_color
-			# Glass/screen is blue-shifted (b noticeably > r); the darkened structural trim of the
-			# terminal palette is neutral (r≈g≈b), so this keeps trim out of the screen bucket.
-			if sc.b > sc.r + 0.02 and absf(sc.r - 0.04) < 0.03 and absf(sc.g - 0.05) < 0.03 and absf(sc.b - 0.08) < 0.04:
+			# Glass/screen is MARKEDLY blue-shifted: the family's canonical glass is
+			# (0.04,0.05,0.08), so b - r is about 0.04. Two other dark near-neutrals live
+			# nearby and are NOT screens — the terminal palette's darkened structural trim
+			# (r≈g≈b, b-r≈0) and baked header-tag backgrounds like (0.055,0.060,0.075)
+			# where b-r is only 0.02. Requiring b > r + 0.03 admits glass and excludes both.
+			if sc.b > sc.r + 0.03 and absf(sc.r - 0.04) < 0.03 and absf(sc.g - 0.05) < 0.03 and absf(sc.b - 0.08) < 0.04:
 				glass_nodes.append(m2)
 			elif absf(sc.r - 0.07) < 0.02 and absf(sc.g - 0.075) < 0.02 and absf(sc.b - 0.09) < 0.02:
 				pockets.append(m2)
+			elif _is_lit_display(m2, mat as StandardMaterial3D):
+				# A LIT DISPLAY FACE also counts as a screen, even with no glass over it.
+				# Checking only for canonical glass made this rule pass VACUOUSLY on half the
+				# family: members that build a readout as an emissive face (HangarKit.readout)
+				# reported "0 glass panels" and were never examined at all.
+				glass_nodes.append(m2)
 	var unseated: Array = []
 	for g in glass_nodes:
 		var gp: Vector3 = (g as MeshInstance3D).global_position
@@ -323,6 +332,22 @@ func _has_any_script(n: Node) -> bool:
 		if _has_any_script(c):
 			return true
 	return false
+
+
+## A lit display FACE: self-illuminated, dark-bodied, and broad enough to be read.
+## The two size gates matter — an ember stripe is emissive but thin, and an indicator
+## lamp is emissive but tiny; neither is a screen, and neither needs a pocket. Only a
+## panel whose two largest dimensions both exceed 6 cm is treated as a display.
+func _is_lit_display(m: MeshInstance3D, sm: StandardMaterial3D) -> bool:
+	if not sm.emission_enabled:
+		return false
+	var c: Color = sm.albedo_color
+	if c.get_luminance() > 0.22:
+		return false     # the ember accent is emissive too, and it is not a screen
+	var s: Vector3 = (m.global_transform * m.get_aabb()).size
+	var dims: Array = [s.x, s.y, s.z]
+	dims.sort()
+	return dims[1] > 0.06 and dims[2] > 0.06
 
 
 ## True when `n` sits inside a subtree an artifact marked as its PHENOMENON.

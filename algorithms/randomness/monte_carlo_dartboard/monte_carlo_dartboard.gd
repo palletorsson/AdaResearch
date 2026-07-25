@@ -312,6 +312,17 @@ func _create_labels() -> void:
 	_readout_root.position = Vector3(board_size / 2.0 + 0.34, board_height, label_z)
 	add_child(_readout_root)
 
+	# A MILLED POCKET behind the plate. Without it this readout is a plate taped to
+	# the body — the one thing G6 exists to catch, and it was catching it here: the
+	# family's only standing advisory was this panel, correctly flagged.
+	var recess: MeshInstance3D = HangarKit.box(
+		Vector3(0, 0, -0.014),
+		Vector3(_READOUT_WIDTH + 0.088, 0.468, 0.014),
+		HangarKit.painted_metal(Color(0.07, 0.075, 0.09), wear, 0.35, 0.55))
+	if recess:
+		recess.name = "ReadoutPocket"
+		_readout_root.add_child(recess)
+
 	var plate := BakedText.make_panel_mesh(
 		"", Color(0.06, 0.07, 0.10), Color.WHITE,
 		Vector2(_READOUT_WIDTH + 0.06, 0.44), 1400, false)
