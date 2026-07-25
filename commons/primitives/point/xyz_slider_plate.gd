@@ -15,6 +15,22 @@ class_name XYZSliderPlate
 ## The point is a glowing sphere that moves in world space as you adjust sliders.
 ## Coordinate label updates live. Uses RackTemplates for the Rams aesthetic.
 
+const HangarKit = preload("res://commons/artifacts/_hangar/hangar_kit.gd")
+
+@export_group("Housing")
+## Cabinet grammar (vertical dialect, body = "slider lectern"). The slider panel
+## used to hang in mid-air at waist height with nothing beneath it; the lectern
+## is the body it stands on, so the interface is part of an object rather than a
+## floating widget. Set false to recover the old bare-panel behaviour.
+@export var console_body: bool = true
+@export var finish: String = "terminal"
+@export var wear: float = 0.10
+@export var unit_code: String = "XY-03"
+## The billboard coordinate readout that used to hover above the moving point.
+## Off by default: text belongs to the body (G1), and the lectern's own readout
+## carries the same numbers. Set true to restore the in-place label.
+@export var billboard_coords: bool = false
+
 @export_group("Range")
 ## Workspace coordinate range. Default 0..4 aligns with CoordinateSystem3M's
 ## one-sided axes (+X +Y +Z from origin), so the point moves in a 4m cube
@@ -111,6 +127,8 @@ func _build_point() -> void:
 
 
 func _build_coord_label() -> void:
+	if not billboard_coords:
+		return
 	_coord_label = Label3D.new()
 	_coord_label.name = "CoordLabel"
 	_coord_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
@@ -160,6 +178,11 @@ func _build_coordinate_system() -> void:
 		return
 	var wrapper := Node3D.new()
 	wrapper.name = "CoordinateAxes"
+	# THE PHENOMENON, not the interface. Its axis tick labels ("X", "Y", "Z", the
+	# unit marks) are pinned to axis geometry 4 m out — they belong to the measured
+	# frame, exactly as the dice and balls belong to their own artifacts. Marked so
+	# the grammar's no-orphan-text rule measures the interface, not the subject.
+	wrapper.set_meta("phenomenon", true)
 	wrapper.scale = Vector3.ONE * coord_system_scale
 	add_child(wrapper)
 	_coord_system = scene.instantiate()
@@ -176,26 +199,32 @@ func _build_panel() -> void:
 	var y_norm := _val_to_norm(start_position.y)
 	var z_norm := _val_to_norm(start_position.z)
 
-	_panel = RackTpl.create_panel("COORDINATES", [
+	# Frameless when housed: the lectern's wedge shoulder IS the faceplate, and the
+	# cap's sign band already says COORDINATES. RackTemplates' _add_panel ships a
+	# cream plate and a copper accent strip (0.75,0.38,0.13) that reads as a second
+	# manufacturer once the panel sits inside this body (G4).
+	_panel = RackTpl.create_panel("" if console_body else "COORDINATES", [
 		[{"type": "slider_h", "label": "X", "default": x_norm}],
 		[{"type": "slider_h", "label": "Y", "default": y_norm}],
 		[{"type": "slider_h", "label": "Z", "default": z_norm}],
-	])
-	_panel.position = panel_offset
-	_panel.rotation_degrees.x = panel_tilt
+	], console_body)
 	# Scale up for VR-hand-comfortable controls
 	_panel.scale = Vector3.ONE * panel_scale
-	add_child(_panel)
 
-	# Add Rams text display above the panel for coordinate readout
-	_display_container = Node3D.new()
-	_display_container.name = "CoordDisplay"
-	# Position above the panel title
-	_display_container.position = Vector3(0, 0.16, 0.006)
-	_panel.add_child(_display_container)
-	RackPassive.build_text_display_static(_display_container, 1, "(0.00, 0.00, 0.00)")
-	# Get the label reference so we can update it
-	_display_label = _display_container.find_child("TextContent", true, false) as Label3D
+	if console_body:
+		# The panel is seated on a lectern that stands on the floor; the readout
+		# is seated in the lectern's backboard. _build_console() parents both.
+		_build_console(RackPassive)
+	else:
+		_panel.position = panel_offset
+		_panel.rotation_degrees.x = panel_tilt
+		add_child(_panel)
+		_display_container = Node3D.new()
+		_display_container.name = "CoordDisplay"
+		_display_container.position = Vector3(0, 0.16, 0.006)
+		_panel.add_child(_display_container)
+		RackPassive.build_text_display_static(_display_container, 1, "(0.00, 0.00, 0.00)")
+		_display_label = _display_container.find_child("TextContent", true, false) as Label3D
 
 	# Find sliders by child index (Param_0, Param_1, Param_2)
 	_slider_x = _panel.find_child("Param_0", true, false)
@@ -214,6 +243,128 @@ func _build_panel() -> void:
 	_color_slider_label(_slider_x, Color(1.0, 0.3, 0.3))  # X = red
 	_color_slider_label(_slider_y, Color(0.3, 1.0, 0.3))  # Y = green
 	_color_slider_label(_slider_z, Color(0.3, 0.5, 1.0))  # Z = blue
+
+
+## THE LECTERN. A body for the sliders to stand on: a column from the floor up to
+## the working height, a wedge shoulder the panel is seated on, and a backboard
+## carrying the coordinate readout in a milled pocket under a sign band. Built at
+## panel_offset's x/z so the console stands where the panel used to hover, and the
+## player still reads past it into the coordinate frame.
+func _build_console(RackPassive: GDScript) -> void:
+	var pal: Dictionary = HangarKit.finish_palette(finish)
+	var col_body: Color = pal["body"]
+	var col_accent: Color = pal["accent"]
+	var shell: StandardMaterial3D = HangarKit.finish_body(finish, col_body, wear)
+	var steel: StandardMaterial3D = HangarKit.worn_metal(col_body.lightened(0.10))
+	var dark: StandardMaterial3D = HangarKit.painted_metal(
+		Color(0.07, 0.075, 0.09), wear, 0.35, 0.55)
+	var accent: StandardMaterial3D = HangarKit.emissive(col_accent, 2.2)
+
+	# Panel footprint in world metres (RackTemplates records its own size).
+	var pw: float = float(_panel.get_meta("panel_w", 0.22)) * panel_scale
+	var ph: float = float(_panel.get_meta("panel_h", 0.30)) * panel_scale
+	var body_w: float = pw + 0.10
+	var body_d: float = maxf(ph * 0.55, 0.30)
+	var work_h: float = maxf(panel_offset.y, 0.80)   # slider height above floor
+
+	var cab := Node3D.new()
+	cab.name = "Cabinet"
+	cab.set_meta("housing", true)
+	cab.position = Vector3(panel_offset.x, 0.0, panel_offset.z)
+	add_child(cab)
+
+	var face_z: float = body_d * 0.5
+
+	# column — the mass that reaches the floor (G2)
+	cab.add_child(HangarKit.box(
+		Vector3(0, work_h * 0.5, 0), Vector3(body_w, work_h, body_d), shell))
+	# recessed toe kick + grime where it meets the floor
+	cab.add_child(HangarKit.box(
+		Vector3(0, 0.028, 0), Vector3(body_w - 0.10, 0.056, body_d - 0.10), dark))
+	var gb: MeshInstance3D = HangarKit.grime_band(body_w * 0.88, 0.05, face_z + 0.003, col_body)
+	if gb:
+		gb.position.y = 0.072
+		cab.add_child(gb)
+	# side flanks
+	for sx in [-1.0, 1.0]:
+		cab.add_child(HangarKit.box(
+			Vector3(sx * (body_w * 0.5 + 0.016), work_h * 0.5, 0.0),
+			Vector3(0.032, work_h, body_d + 0.018), steel))
+	# ember line under the working lip (G7)
+	cab.add_child(HangarKit.box(
+		Vector3(0, work_h - 0.012, face_z + 0.004),
+		Vector3(body_w * 0.98, 0.007, 0.006), accent))
+	# asset code stencilled on the column
+	var code: MeshInstance3D = HangarKit.stencil(
+		unit_code, Vector2(0.10, 0.026), col_accent.lightened(0.25))
+	if code:
+		code.position = Vector3(-body_w * 0.5 + 0.09, work_h - 0.10, face_z + 0.004)
+		cab.add_child(code)
+
+	# wedge shoulder — the sloped shelf the slider panel rests on, so the
+	# controls meet the body instead of hanging in air
+	var shoulder: MeshInstance3D = HangarKit.wedge(
+		body_w * 0.94, 0.10, body_d * 0.92, body_d * 0.30, steel)
+	if shoulder:
+		shoulder.position = Vector3(0.0, work_h + 0.04, -body_d * 0.42)
+		cab.add_child(shoulder)
+
+	# seat the panel on the shoulder, keeping its authored rake. Imported panels
+	# ship Braun cream + copper; harmonize before seating so the controls speak
+	# this body's palette (the X/Y/Z label colours are saturated and survive).
+	_panel.position = Vector3(0.0, work_h + 0.10, face_z * 0.10)
+	_panel.rotation_degrees.x = panel_tilt
+	HangarKit.harmonize(_panel, finish)
+	cab.add_child(_panel)
+
+	# Backboard rising behind the sliders — carries the readout and the sign. It
+	# must CLEAR the seated panel, which is panel_scale times its authored size:
+	# sized from the panel's real height, or the sliders hide the readout.
+	var clear: float = ph * 0.55 + 0.06
+	var back_h: float = clear + 0.30
+	var back_y: float = work_h + back_h * 0.5
+	var back_z: float = -body_d * 0.5 + 0.035
+	cab.add_child(HangarKit.box(
+		Vector3(0, back_y, back_z), Vector3(body_w, back_h, 0.07), shell))
+	# cap + sign band baked flush into it (G1: the title is part of the body)
+	cab.add_child(HangarKit.box(
+		Vector3(0, work_h + back_h + 0.026, back_z),
+		Vector3(body_w + 0.04, 0.052, 0.10), steel))
+	var sign: MeshInstance3D = HangarKit.stencil(
+		"COORDINATES", Vector2(body_w * 0.80, 0.028), col_accent.lightened(0.35))
+	if sign:
+		sign.position = Vector3(0, work_h + back_h + 0.026, back_z + 0.052)
+		cab.add_child(sign)
+
+	# readout seated in a milled pocket on the backboard: pocket, lit face,
+	# canonical glass, ember lip — then the live Label3D reads against it
+	var scr_w: float = body_w * 0.78
+	var scr_h: float = 0.15
+	var scr_y: float = work_h + clear + 0.14      # above the panel it reports on
+	var scr_z: float = back_z + 0.035
+	cab.add_child(HangarKit.box(
+		Vector3(0, scr_y, scr_z + 0.002), Vector3(scr_w + 0.026, scr_h + 0.030, 0.014), dark))
+	cab.add_child(HangarKit.box(
+		Vector3(0, scr_y, scr_z + 0.009),
+		Vector3(scr_w, scr_h, 0.005), HangarKit.emissive(pal["screen"], 0.45)))
+	var glass := StandardMaterial3D.new()
+	glass.albedo_color = Color(0.04, 0.05, 0.08)
+	glass.roughness = 0.15
+	glass.emission_enabled = true
+	glass.emission = Color(0.05, 0.08, 0.12)
+	glass.emission_energy_multiplier = 0.5
+	cab.add_child(HangarKit.box(
+		Vector3(0, scr_y, scr_z + 0.0135), Vector3(scr_w, scr_h, 0.004), glass))
+	cab.add_child(HangarKit.box(
+		Vector3(0, scr_y + scr_h * 0.5 + 0.010, scr_z + 0.011),
+		Vector3(scr_w + 0.026, 0.005, 0.005), accent))
+
+	_display_container = Node3D.new()
+	_display_container.name = "CoordDisplay"
+	_display_container.position = Vector3(0, scr_y, scr_z + 0.020)
+	cab.add_child(_display_container)
+	RackPassive.build_text_display_static(_display_container, 1, "(0.00, 0.00, 0.00)")
+	_display_label = _display_container.find_child("TextContent", true, false) as Label3D
 
 
 func _color_slider_label(slider: Node, color: Color) -> void:
@@ -301,3 +452,9 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		show_coordinate_system = bool(config_data["show_coordinate_system"])
 	if config_data.has("coord_system_scale"):
 		coord_system_scale = float(config_data["coord_system_scale"])
+	if config_data.has("console_body"):
+		console_body = bool(config_data["console_body"])
+	if config_data.has("finish"):
+		finish = str(config_data["finish"])
+	if config_data.has("billboard_coords"):
+		billboard_coords = bool(config_data["billboard_coords"])

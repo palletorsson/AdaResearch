@@ -677,6 +677,40 @@
 				}
 			],
 			"violations": 0
+		},
+		{
+			"artifact": "xyz_slider_plate",
+			"body": "slider lectern",
+			"dialect": "vertical",
+			"element_count": 81,
+			"findings": [
+				{
+					"detail": "lowest element y = -0.601 (pedestal below origin)",
+					"ok": true,
+					"rule": "G2-grounded"
+				},
+				{
+					"detail": "all 14 text nodes inside the body",
+					"ok": true,
+					"rule": "G1-no-orphan-text"
+				},
+				{
+					"detail": "15 canon materials, no near-miss drift",
+					"ok": true,
+					"rule": "G4-palette"
+				},
+				{
+					"detail": "1 glass panels, all pocketed",
+					"ok": true,
+					"rule": "G6-screen-seated"
+				},
+				{
+					"detail": "2 ember elements",
+					"ok": true,
+					"rule": "G7-accent-present"
+				}
+			],
+			"violations": 0
 		}
 	],
 	"canon_version": 1.0,

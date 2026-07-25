@@ -114,7 +114,8 @@
     "correspondence console",
     "taxonomy vitrine",
     "chart case",
-    "ledger column"
+    "ledger column",
+    "slider lectern"
    ]
   },
   "horizontal": {
@@ -154,9 +155,9 @@
    "id": "G1-no-orphan-text",
    "name": "No text outside the body",
    "applies": "all",
-   "check": "every Label3D and baked text tag sits inside the housing AABB (inflated 0.12 m)",
+   "check": "every Label3D and baked text tag sits inside the housing AABB (inflated 0.12 m). EXEMPT: text inside a subtree the artifact marked set_meta(\"phenomenon\", true) — an axis tick label is pinned to the measured frame's own geometry, not floating beside the interface. Opt-in, mirroring set_meta(\"housing\", true).",
    "tolerance_m": 0.12,
-   "why": "The founding ruling: readouts and titles that float beside an artifact make the interface a separate object."
+   "why": "The founding ruling: readouts and titles that float beside an artifact make the interface a separate object. The subject may carry its own labels; the INTERFACE may not float."
   },
   {
    "id": "G2-grounded",
@@ -351,6 +352,14 @@
    "dialect": "vertical",
    "body": "ledger column",
    "scene": "res://algorithms/randomness/prng_crank_machine/prng_crank_machine.tscn",
+   "propagation": 3,
+   "kit": true
+  },
+  {
+   "artifact": "xyz_slider_plate",
+   "dialect": "vertical",
+   "body": "slider lectern",
+   "scene": "res://commons/primitives/point/xyz_slider_plate.tscn",
    "propagation": 3,
    "kit": true
   }

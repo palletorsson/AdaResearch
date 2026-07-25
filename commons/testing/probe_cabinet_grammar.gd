@@ -128,6 +128,12 @@ func _probe(entry: Dictionary, palette: Dictionary) -> Dictionary:
 	var orphans: Array = []
 	for t in texts:
 		var n: Node3D = t
+		# Text inside a subtree marked phenomenon is EXEMPT: an axis tick label is
+		# pinned to the measured frame's own geometry, not floating beside the
+		# interface. Same exemption G3 grants the phenomenon's height and G4 grants
+		# its colours — opt-in via set_meta("phenomenon", true), mirroring "housing".
+		if _in_phenomenon(n, inst):
+			continue
 		if not inflated.has_point(n.global_position):
 			orphans.append("%s @ %.2f,%.2f,%.2f" % [n.name,
 				n.global_position.x, n.global_position.y, n.global_position.z])
@@ -316,6 +322,22 @@ func _has_any_script(n: Node) -> bool:
 	for c in n.get_children():
 		if _has_any_script(c):
 			return true
+	return false
+
+
+## True when `n` sits inside a subtree an artifact marked as its PHENOMENON.
+## Opt-in, mirroring set_meta("housing", true): the artifact declares which of its
+## parts are the subject rather than the interface, and the text rule steps around
+## them. Walks up to `stop` (the artifact root) so a stray meta elsewhere in the
+## scene tree cannot silently exempt a whole artifact.
+func _in_phenomenon(n: Node, stop: Node) -> bool:
+	var cur: Node = n
+	while cur != null:
+		if cur.has_meta("phenomenon") and bool(cur.get_meta("phenomenon")):
+			return true
+		if cur == stop:
+			return false
+		cur = cur.get_parent()
 	return false
 
 

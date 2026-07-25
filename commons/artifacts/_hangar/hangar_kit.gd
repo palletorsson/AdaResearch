@@ -135,6 +135,80 @@ static func worn_metal(base: Color) -> StandardMaterial3D:
 	return m
 
 
+## Bring an IMPORTED control panel into this family's palette.
+##
+## Shared components (RackTemplates panels, passive displays) ship with their own
+## Braun-era colours: a cream faceplate and a copper accent (0.75,0.38,0.13). Bolted
+## onto a dark terminal body those read as a second manufacturer — which is exactly
+## what G4-palette flags. Rather than each cabinet hand-rolling its own retint pass,
+## call this on the panel subtree before seating it.
+##
+## Retints only NEAR-NEUTRAL greys and the copper accent. Saturated colours are left
+## alone, because they are carrying meaning: the X/Y/Z slider labels are red/green/
+## blue on purpose, and a lit screen is a screen. Under "rams" the cream IS canon, so
+## only the copper is corrected.
+static func harmonize(root: Node, finish: String) -> void:
+	var pal: Dictionary = finish_palette(finish)
+	var to_panel: Color = pal["panel"]
+	var to_accent: Color = pal["accent"]
+	var dark_family: bool = finish.to_lower() == "terminal"
+	_harmonize_walk(root, to_panel, to_accent, dark_family)
+
+
+static func _harmonize_walk(n: Node, to_panel: Color, to_accent: Color,
+		dark_family: bool) -> void:
+	if n is MeshInstance3D:
+		var mi: MeshInstance3D = n
+		# material_override wins over everything, so handle it alone when present.
+		var ov: Material = mi.material_override
+		if ov is StandardMaterial3D:
+			var fixed: StandardMaterial3D = _harmonize_mat(
+				ov as StandardMaterial3D, to_panel, to_accent, dark_family)
+			if fixed != null:
+				mi.material_override = fixed
+		elif mi.mesh != null:
+			# Imported scenes (the VR slider, passive displays) carry their colours on
+			# the MESH SURFACES, not as an override — reach those too, or a whole
+			# instanced control stays Braun cream on a terminal body.
+			for i in range(mi.mesh.get_surface_count()):
+				var cur: Material = mi.get_surface_override_material(i)
+				if cur == null:
+					cur = mi.mesh.surface_get_material(i)
+				if cur is StandardMaterial3D:
+					var f2: StandardMaterial3D = _harmonize_mat(
+						cur as StandardMaterial3D, to_panel, to_accent, dark_family)
+					if f2 != null:
+						mi.set_surface_override_material(i, f2)
+	for child in n.get_children():
+		_harmonize_walk(child, to_panel, to_accent, dark_family)
+
+
+## Returns a corrected copy, or null when the material already belongs to the family.
+static func _harmonize_mat(sm: StandardMaterial3D, to_panel: Color, to_accent: Color,
+		dark_family: bool) -> StandardMaterial3D:
+	var c: Color = sm.albedo_color
+	var hi: float = maxf(maxf(c.r, c.g), c.b)
+	var lo: float = minf(minf(c.r, c.g), c.b)
+	var chroma: float = hi - lo
+	var target: Color
+	var swap: bool = false
+	# copper accent: warm, mid-red, low blue
+	if c.r > 0.55 and c.g > 0.25 and c.g < 0.55 and c.b < 0.30:
+		swap = true
+		target = to_accent
+	# cream / light grey faceplate — only wrong on a dark body
+	elif dark_family and lo > 0.55 and chroma < 0.14:
+		swap = true
+		target = to_panel
+	if not swap:
+		return null
+	var fresh: StandardMaterial3D = sm.duplicate()
+	fresh.albedo_color = target
+	if fresh.emission_enabled:
+		fresh.emission = target
+	return fresh
+
+
 ## Self-lit accent (status lights, screen glow, edge strips).
 static func emissive(c: Color, energy: float = 1.6) -> StandardMaterial3D:
 	var m := StandardMaterial3D.new()
