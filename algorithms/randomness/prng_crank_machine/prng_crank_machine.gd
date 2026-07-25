@@ -21,12 +21,20 @@ extends Node3D
 class_name PrngCrankMachine
 
 const BakedText = preload("res://commons/utils/baked_text_albedo.gd")
+const HangarKit = preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 
-# ── Machine Body ─────────────────────────────────────────────────────────────
-@export var body_width: float = 0.4
-@export var body_height: float = 0.5
-@export var body_depth: float = 0.2
-@export var pedestal_height: float = 0.7
+# ── Machine Body (cabinet grammar, vertical dialect: "ledger column") ────────
+# You FACE this machine: mass rises, the sign sits in the cap, the three
+# readouts stack down the front, the keypad rests on a wedge shoulder.
+@export var body_width: float = 0.44
+@export var body_height: float = 0.95
+@export var body_depth: float = 0.24
+## Lifts the whole machine so the keypad lands in the VR reach band (0.75-1.35 m).
+## Built DOWNWARD from y=0 by HangarKit.plinth, so auto-grounding does the lift.
+@export var plinth_height: float = 0.62
+@export var finish: String = "terminal"
+@export var wear: float = 0.10
+@export var unit_code: String = "PR-17"
 
 # ── LCG Parameters ───────────────────────────────────────────────────────────
 @export var lcg_multiplier: int = 1664525
@@ -35,11 +43,20 @@ const BakedText = preload("res://commons/utils/baked_text_albedo.gd")
 @export var initial_seed: int = 42
 
 # ── Colors ───────────────────────────────────────────────────────────────────
-@export var color_body: Color = Color(0.12, 0.12, 0.15)
-@export var color_accent: Color = Color(0.6, 0.4, 0.1)  # Brass
-@export var color_display_bg: Color = Color(0.02, 0.05, 0.02)
-@export var color_display_text: Color = Color(0.2, 1.0, 0.3)  # Green LED
-@export var color_formula: Color = Color(0.8, 0.8, 0.9)
+# Derived from HangarKit.finish_palette(finish) in _ready(), so one word
+# ("rams" / "terminal") re-skins the whole machine and the family stays one set.
+# The screen GLASS keeps the family's canonical blue-shifted tone regardless of
+# finish — glass is glass; only body/panel/accent follow the dialect.
+var color_body: Color = Color(0.14, 0.14, 0.155)
+var color_accent: Color = Color(0.85, 0.30, 0.12)
+var color_display_bg: Color = Color(0.05, 0.10, 0.06)
+var color_display_text: Color = Color(0.45, 0.95, 0.50)
+var color_formula: Color = Color(0.72, 0.74, 0.80)
+const GLASS_TONE := Color(0.04, 0.05, 0.08)
+
+# Front-face geometry, filled by _create_cabinet() and read by the screen seats.
+var _face_z: float = 0.12
+var _cab: Node3D
 
 # ── Internal ─────────────────────────────────────────────────────────────────
 var _state: int = 42
@@ -78,13 +95,24 @@ const PHASE_DURATION := 0.6  # Seconds per animation phase
 
 func _ready() -> void:
 	_state = initial_seed
-	_create_pedestal()
+	_resolve_palette()
+	_create_plinth()
 	_create_machine_body()
 	_create_display_panel()
 	_create_formula_display()
 	_create_history_panel()
 	_create_vr_controls()
 	_update_display()
+
+
+## One palette word drives every part (kit finish system).
+func _resolve_palette() -> void:
+	var pal: Dictionary = HangarKit.finish_palette(finish)
+	color_body = pal["body"]
+	color_accent = pal["accent"]
+	color_display_bg = pal["screen"]
+	color_display_text = pal["text"]
+	color_formula = pal["panel"].lightened(0.55)
 
 
 func _process(delta: float) -> void:
@@ -178,93 +206,88 @@ func _advance_animation() -> void:
 # MACHINE BODY
 # ═════════════════════════════════════════════════════════════════════════════
 
-func _create_pedestal() -> void:
-	var mesh := MeshInstance3D.new()
-	var cyl := CylinderMesh.new()
-	cyl.top_radius = 0.08
-	cyl.bottom_radius = 0.12
-	cyl.height = pedestal_height
-	mesh.mesh = cyl
-
-	var mat := StandardMaterial3D.new()
-	mat.albedo_color = Color(0.18, 0.18, 0.2)
-	mat.metallic = 0.5
-	mat.roughness = 0.4
-	mesh.material_override = mat
-	mesh.position = Vector3(0, pedestal_height / 2.0, 0)
-	add_child(mesh)
+## The footing. HangarKit.plinth builds DOWNWARD from y=0, so every authored
+## body coordinate stays put and auto-grounding supplies the lift that puts the
+## keypad in the reach band (G5) — the plinth is not a redesign of the face.
+func _create_plinth() -> void:
+	var p: Node3D = HangarKit.plinth(
+		body_width + 0.06, body_depth + 0.10, plinth_height,
+		finish, wear, color_accent, unit_code)
+	if p:
+		add_child(p)
 
 
+## The body. One shell, side flanks, a service column of vent slats, and a cap
+## carrying the sign band — the title is BAKED INTO the cap, not floating above
+## it (G1: no text outside the body).
 func _create_machine_body() -> void:
-	var body := Node3D.new()
-	body.name = "MachineBody"
-	body.position = Vector3(0, pedestal_height, 0)
-	add_child(body)
+	var cab := Node3D.new()
+	cab.name = "Cabinet"
+	cab.set_meta("housing", true)
+	add_child(cab)
+	_cab = cab
+	_face_z = body_depth * 0.5
 
-	# Main housing
-	var housing := MeshInstance3D.new()
-	var box := BoxMesh.new()
-	box.size = Vector3(body_width, body_height, body_depth)
-	housing.mesh = box
+	var shell: StandardMaterial3D = HangarKit.finish_body(finish, color_body, wear)
+	var panel: StandardMaterial3D = HangarKit.painted_metal(
+		Color(0.09, 0.09, 0.105), wear, 0.4, 0.5)
+	var steel: StandardMaterial3D = HangarKit.worn_metal(color_body.lightened(0.10))
+	var accent: StandardMaterial3D = HangarKit.emissive(color_accent, 2.2)
 
-	var mat := StandardMaterial3D.new()
-	mat.albedo_color = color_body
-	mat.metallic = 0.6
-	mat.roughness = 0.35
-	housing.material_override = mat
-	housing.position = Vector3(0, body_height / 2.0, 0)
-	body.add_child(housing)
+	# main shell
+	cab.add_child(HangarKit.box(
+		Vector3(0, body_height * 0.5, 0),
+		Vector3(body_width, body_height, body_depth), shell))
 
-	# Brass trim strips (top and bottom)
-	var trim_mat := StandardMaterial3D.new()
-	trim_mat.albedo_color = color_accent
-	trim_mat.metallic = 0.8
-	trim_mat.roughness = 0.2
-	trim_mat.emission_enabled = true
-	trim_mat.emission = color_accent * 0.15
-	trim_mat.emission_energy_multiplier = 0.1
+	# side flanks, full height — the vertical dialect's shoulders
+	for sx in [-1.0, 1.0]:
+		cab.add_child(HangarKit.box(
+			Vector3(sx * (body_width * 0.5 + 0.018), body_height * 0.5, 0.0),
+			Vector3(0.036, body_height, body_depth + 0.02), steel))
 
-	for y_offset in [0.01, body_height - 0.01]:
-		var trim := MeshInstance3D.new()
-		var trim_box := BoxMesh.new()
-		trim_box.size = Vector3(body_width + 0.005, 0.012, body_depth + 0.005)
-		trim.mesh = trim_box
-		trim.material_override = trim_mat
-		trim.position = Vector3(0, y_offset, 0)
-		body.add_child(trim)
+	# cap plate + the sign band baked flush into it, over a full-width ember line
+	var cap_y: float = body_height + 0.028
+	cab.add_child(HangarKit.box(
+		Vector3(0, cap_y, 0), Vector3(body_width + 0.05, 0.056, body_depth + 0.03), steel))
+	var sign: MeshInstance3D = HangarKit.stencil(
+		"PSEUDO-RANDOM GENERATOR", Vector2(body_width * 0.92, 0.030),
+		color_accent.lightened(0.35))
+	if sign:
+		sign.position = Vector3(0, cap_y, (body_depth + 0.03) * 0.5 + 0.003)
+		cab.add_child(sign)
+	# ember stripe under the cap lip (G7)
+	cab.add_child(HangarKit.box(
+		Vector3(0, body_height - 0.006, _face_z + 0.004),
+		Vector3(body_width * 0.98, 0.007, 0.006), accent))
 
-	# Side decorative bolts
-	var bolt_mesh := SphereMesh.new()
-	bolt_mesh.radius = 0.008
-	bolt_mesh.height = 0.016
+	# service: vent slats low on the shell face, beside the keypad shoulder
+	for i in range(4):
+		cab.add_child(HangarKit.box(
+			Vector3(0.0, 0.075 + float(i) * 0.022, _face_z + 0.002),
+			Vector3(body_width * 0.52, 0.010, 0.005), panel))
 
-	for x_sign in [-1, 1]:
-		for y in [0.08, body_height - 0.08]:
-			var bolt := MeshInstance3D.new()
-			bolt.mesh = bolt_mesh
-			bolt.material_override = trim_mat
-			bolt.position = Vector3(
-				x_sign * (body_width / 2.0 + 0.001),
-				y,
-				0
-			)
-			body.add_child(bolt)
+	# bolted panel line down each flank
+	cab.add_child(HangarKit.bolts(
+		Vector3(-body_width * 0.5 + 0.022, 0.10, _face_z + 0.004),
+		Vector3(-body_width * 0.5 + 0.022, body_height - 0.10, _face_z + 0.004),
+		5, 0.0055, steel))
+	cab.add_child(HangarKit.bolts(
+		Vector3(body_width * 0.5 - 0.022, 0.10, _face_z + 0.004),
+		Vector3(body_width * 0.5 - 0.022, body_height - 0.10, _face_z + 0.004),
+		5, 0.0055, steel))
 
-	# Nameplate — a brass tag riveted to the front lip, just above the body.
-	var nameplate := BakedText.make_tag(
-		"LCG-32", color_accent, 0.028,
-		Color(0.10, 0.09, 0.06), false, color_accent)
-	if nameplate:
-		nameplate.position = Vector3(0, body_height + 0.03, body_depth / 2.0 + 0.004)
-		body.add_child(nameplate)
+	# the family's three-colour bar, low on the face
+	var bar: Node3D = HangarKit.three_color_bar(body_width * 0.42, 0.013)
+	if bar:
+		bar.position = Vector3(0.0, 0.040, _face_z + 0.005)
+		cab.add_child(bar)
 
-	# Title above — two spaced lines on one board, clear of the nameplate below.
-	var title := BakedText.make_text_block(
-		["PSEUDO-RANDOM", "NUMBER GENERATOR"],
-		Color(0.85, 0.85, 0.9), 0.032, body_width * 1.15, 0.008, false)
-	if title:
-		title.position = Vector3(0, body_height + 0.13, 0.0)
-		body.add_child(title)
+	# grime where the shell meets the plinth cap
+	var gb: MeshInstance3D = HangarKit.grime_band(
+		body_width * 0.9, 0.05, _face_z + 0.003, color_body)
+	if gb:
+		gb.position.y = 0.026
+		cab.add_child(gb)
 
 
 # ═════════════════════════════════════════════════════════════════════════════
@@ -272,72 +295,84 @@ func _create_machine_body() -> void:
 # ═════════════════════════════════════════════════════════════════════════════
 
 func _create_display_panel() -> void:
-	# READOUT board — one screen carrying the whole instrument readout:
-	# seed + step on the header row, the current number + its 0-1 float below.
-	# Previously four separate Label3D nodes; now one rebuilt text block.
-	var panel_y := pedestal_height + body_height * 0.66
-	var panel_z := body_depth / 2.0 + 0.002
-	_readout_width = body_width * 0.82
-
-	_make_screen(Vector3(_readout_width, 0.11, 0.003),
-		color_display_bg, Vector3(0, panel_y, panel_z), 0.05)
-
-	_readout_board = Node3D.new()
-	_readout_board.name = "ReadoutBoard"
-	_readout_board.position = Vector3(0, panel_y, panel_z + 0.004)
-	add_child(_readout_board)
+	# READOUT board — the instrument's answer: seed + step on the header row,
+	# the current number and its 0-1 float below. Seated at eye height.
+	_readout_width = body_width * 0.78
+	_readout_board = _seat_screen(
+		"Readout", "NUMBER", 0.74, Vector2(_readout_width, 0.17), true)
 	_rebuild_readout_board()
 
 
 func _create_formula_display() -> void:
-	# FORMULA board — the arithmetic. One screen: the formula line, the live
-	# per-phase computation (colour-coded via the compute line), and the LCG
-	# parameters. Rebuilt each animation phase so the crank drives the numbers.
-	var formula_y := pedestal_height + body_height * 0.42
-	var panel_z := body_depth / 2.0 + 0.002
-	_formula_width = body_width * 0.82
-
-	_make_screen(Vector3(_formula_width, 0.10, 0.003),
-		Color(0.04, 0.04, 0.06), Vector3(0, formula_y, panel_z), 0.0)
-
-	_formula_board = Node3D.new()
-	_formula_board.name = "FormulaBoard"
-	_formula_board.position = Vector3(0, formula_y, panel_z + 0.004)
-	add_child(_formula_board)
+	# FORMULA board — the arithmetic. The formula line, the live per-phase
+	# computation (colour-coded), and the LCG parameters. Rebuilt each phase.
+	_formula_width = body_width * 0.78
+	_formula_board = _seat_screen(
+		"Formula", "ARITHMETIC", 0.55, Vector2(_formula_width, 0.15), false)
 	_rebuild_formula_board()
 
 
 func _create_history_panel() -> void:
-	# HISTORY board — the emitted sequence. Header + numbers on one screen.
-	var hist_y := pedestal_height + body_height * 0.16
-	var panel_z := body_depth / 2.0 + 0.002
-	_history_width = body_width * 0.82
-
-	_make_screen(Vector3(_history_width, 0.10, 0.003),
-		Color(0.03, 0.03, 0.05), Vector3(0, hist_y, panel_z), 0.0)
-
-	_history_board = Node3D.new()
-	_history_board.name = "HistoryBoard"
-	_history_board.position = Vector3(0, hist_y, panel_z + 0.004)
-	add_child(_history_board)
+	# HISTORY board — the emitted sequence, where periodicity becomes visible.
+	_history_width = body_width * 0.78
+	_history_board = _seat_screen(
+		"History", "SEQUENCE", 0.36, Vector2(_history_width, 0.15), false)
 	_rebuild_history_board()
 
 
-## Opaque backing screen behind a board (the dark LCD plate).
-func _make_screen(size: Vector3, bg: Color, pos: Vector3, emit_energy: float) -> void:
-	var screen := MeshInstance3D.new()
-	var screen_box := BoxMesh.new()
-	screen_box.size = size
-	screen.mesh = screen_box
-	var mat := StandardMaterial3D.new()
-	mat.albedo_color = bg
-	if emit_energy > 0.0:
-		mat.emission_enabled = true
-		mat.emission = bg
-		mat.emission_energy_multiplier = emit_energy
-	screen.material_override = mat
-	screen.position = pos
-	add_child(screen)
+## Seats one screen INTO the shell: a milled dark pocket, the lit display face,
+## the family's glass over it, a header tag and an ember lip. Returns the board
+## container the text block is repainted onto. A screen without a pocket is a
+## poster taped to the body (G6) — the pocket is what makes it an instrument.
+func _seat_screen(node_name: String, header: String, y: float,
+		size: Vector2, lit: bool) -> Node3D:
+	var w: float = size.x
+	var h: float = size.y
+	var dark: StandardMaterial3D = HangarKit.painted_metal(
+		Color(0.07, 0.075, 0.09), wear, 0.35, 0.55)
+	var accent: StandardMaterial3D = HangarKit.emissive(color_accent, 2.0)
+
+	# milled pocket — the recess the screen sits in
+	_cab.add_child(HangarKit.box(
+		Vector3(0.0, y, _face_z + 0.002),
+		Vector3(w + 0.026, h + 0.030, 0.014), dark))
+
+	# display face (self-lit when it carries the live number)
+	var face_mat: StandardMaterial3D
+	if lit:
+		face_mat = HangarKit.emissive(color_display_bg, 0.45)
+	else:
+		face_mat = HangarKit.painted_metal(color_display_bg, 0.05, 0.1, 0.5)
+	_cab.add_child(HangarKit.box(
+		Vector3(0.0, y, _face_z + 0.008), Vector3(w, h, 0.005), face_mat))
+
+	# glass over the screen — the family's canonical tone, finish-independent
+	var glass := StandardMaterial3D.new()
+	glass.albedo_color = GLASS_TONE
+	glass.roughness = 0.15
+	glass.emission_enabled = true
+	glass.emission = Color(0.05, 0.08, 0.12)
+	glass.emission_energy_multiplier = 0.5
+	_cab.add_child(HangarKit.box(
+		Vector3(0.0, y, _face_z + 0.0125), Vector3(w, h, 0.004), glass))
+
+	# ember lip along the pocket's top edge
+	_cab.add_child(HangarKit.box(
+		Vector3(0.0, y + h * 0.5 + 0.010, _face_z + 0.010),
+		Vector3(w + 0.026, 0.005, 0.005), accent))
+
+	# header tag, stencilled onto the shell just above the pocket
+	var tag: MeshInstance3D = HangarKit.stencil(
+		header, Vector2(w * 0.44, 0.017), color_accent.lightened(0.30))
+	if tag:
+		tag.position = Vector3(-w * 0.26, y + h * 0.5 + 0.026, _face_z + 0.004)
+		_cab.add_child(tag)
+
+	var board := Node3D.new()
+	board.name = node_name + "Board"
+	board.position = Vector3(0.0, y, _face_z + 0.016)
+	_cab.add_child(board)
+	return board
 
 
 # ═════════════════════════════════════════════════════════════════════════════
@@ -437,17 +472,36 @@ func _update_display() -> void:
 # ═════════════════════════════════════════════════════════════════════════════
 
 func _create_vr_controls() -> void:
+	# The keypad rests on a WEDGE SHOULDER cantilevered off the shell, so the
+	# controls meet the body instead of hanging in air. The plinth below puts
+	# this shoulder inside the VR reach band (G5).
+	var shoulder_y: float = 0.18
+	var wedge_w: float = body_width * 0.82
+	var wedge_d: float = 0.17
+	var steel: StandardMaterial3D = HangarKit.worn_metal(color_body.lightened(0.10))
+	var shoulder: MeshInstance3D = HangarKit.wedge(
+		wedge_w, 0.13, wedge_d, 0.055, steel)
+	if shoulder:
+		shoulder.position = Vector3(0.0, shoulder_y, _face_z - 0.002)
+		_cab.add_child(shoulder)
+
+	# FRAMELESS: the wedge shoulder IS the faceplate, so the panel contributes
+	# only its controls. RackTemplates' own cream plate + copper accent strip live
+	# in _add_panel(); skipping it keeps a light Braun faceplate from being bolted
+	# onto a dark terminal body, and removes the off-family accent at the source.
 	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
-	var panel: Node3D = RackTpl.create_panel("PRNG CRANK", [
+	var panel: Node3D = RackTpl.create_panel("", [
 		[
 			{"type": "button", "label": "CRANK"},
 			{"type": "button", "label": "RESET"},
 			{"type": "button", "label": "SEED"},
 		],
-	])
-	panel.position = Vector3(0, pedestal_height - 0.05, body_depth / 2.0 + 0.12)
-	panel.rotation_degrees = Vector3(-25, 0, 0)
-	add_child(panel)
+	], true)
+	# Seated ON the wedge's sloped top face, tilted to match its rake.
+	panel.position = Vector3(0.0, shoulder_y + 0.062, _face_z + wedge_d * 0.52)
+	panel.rotation_degrees = Vector3(-32, 0, 0)
+	_align_panel_to_family(panel)
+	_cab.add_child(panel)
 
 	# CRANK button (Btn_0)
 	var crank_btn: Node = panel.find_child("Btn_0", true, false)
@@ -469,6 +523,29 @@ func _create_vr_controls() -> void:
 		var area = seed_btn.get_node_or_null("InteractableAreaButton")
 		if area:
 			area.button_pressed.connect(func(_b): _randomize_seed())
+
+
+## RackTemplates panels ship with their own COPPER accent (0.75,0.38,0.13) — a
+## near-miss of the family accent, which reads as a different manufacturer bolted
+## onto the machine (G4). Because the panel is seated INSIDE the housing here, it
+## is part of this body and must speak its palette: retint the imported accent
+## rather than parenting the panel outside the cabinet to hide it from the rule.
+func _align_panel_to_family(node: Node) -> void:
+	if node is MeshInstance3D:
+		var mi: MeshInstance3D = node
+		var mat: Material = mi.material_override
+		if mat is StandardMaterial3D:
+			var sm: StandardMaterial3D = mat
+			var c: Color = sm.albedo_color
+			# copper-ish: warm, mid-red, low blue — the RackTemplates accent family
+			if c.r > 0.55 and c.g > 0.25 and c.g < 0.55 and c.b < 0.30:
+				var fresh: StandardMaterial3D = sm.duplicate()
+				fresh.albedo_color = color_accent
+				if fresh.emission_enabled:
+					fresh.emission = color_accent
+				mi.material_override = fresh
+	for child in node.get_children():
+		_align_panel_to_family(child)
 
 
 # ═════════════════════════════════════════════════════════════════════════════

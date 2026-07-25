@@ -113,7 +113,8 @@
     "gantry post",
     "correspondence console",
     "taxonomy vitrine",
-    "chart case"
+    "chart case",
+    "ledger column"
    ]
   },
   "horizontal": {
@@ -343,6 +344,14 @@
    "body": "chart case",
    "scene": "res://algorithms/lsystems/context_free_grammars/context_free_grammars.tscn",
    "propagation": 16,
+   "kit": true
+  },
+  {
+   "artifact": "prng_crank_machine",
+   "dialect": "vertical",
+   "body": "ledger column",
+   "scene": "res://algorithms/randomness/prng_crank_machine/prng_crank_machine.tscn",
+   "propagation": 3,
    "kit": true
   }
  ],

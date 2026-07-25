@@ -638,6 +638,45 @@
 				}
 			],
 			"violations": 0
+		},
+		{
+			"artifact": "prng_crank_machine",
+			"body": "ledger column",
+			"dialect": "vertical",
+			"element_count": 65,
+			"findings": [
+				{
+					"detail": "lowest element y = -0.620 (pedestal below origin)",
+					"ok": true,
+					"rule": "G2-grounded"
+				},
+				{
+					"detail": "all 1 text nodes inside the body",
+					"ok": true,
+					"rule": "G1-no-orphan-text"
+				},
+				{
+					"detail": "41 canon materials, no near-miss drift",
+					"ok": true,
+					"rule": "G4-palette"
+				},
+				{
+					"detail": "keypad 0.862 above the floor contact (base y = -0.620)",
+					"ok": true,
+					"rule": "G5-reach"
+				},
+				{
+					"detail": "3 glass panels, all pocketed",
+					"ok": true,
+					"rule": "G6-screen-seated"
+				},
+				{
+					"detail": "6 ember elements",
+					"ok": true,
+					"rule": "G7-accent-present"
+				}
+			],
+			"violations": 0
 		}
 	],
 	"canon_version": 1.0,
