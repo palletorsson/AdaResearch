@@ -48,6 +48,10 @@ const HangarKit = preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 @export var max_darts: int = 500
 @export var auto_throw: bool = true
 @export var darts_per_second: float = 3.0
+## How many darts are already on the board when the artifact appears. Enough that
+## the ratio reads as a ratio, few enough that the estimate is still visibly rough
+## and keeps tightening while you watch.
+@export var preseed_darts: int = 140
 
 # ── Colors ───────────────────────────────────────────────────────────────────
 @export var color_board: Color = Color(0.15, 0.15, 0.18)
@@ -58,6 +62,7 @@ const HangarKit = preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 
 # ── Internal ─────────────────────────────────────────────────────────────────
 var _inside_count: int = 0
+var _seeding: bool = false   # suppress per-dart readout rebuilds while pre-seeding
 var _total_count: int = 0
 var _throw_timer: float = 0.0
 var _dart_meshes: Array[MeshInstance3D] = []
@@ -89,6 +94,28 @@ func _ready() -> void:
 	_create_labels()
 	_create_vr_controls()
 	_create_cabinet()
+	_preseed()
+
+
+## ARRIVE WITH A SAMPLE ALREADY THROWN.
+##
+## The estimate needs a crowd to mean anything: pi is read off the RATIO of green
+## darts to all darts, and a ratio of two darts is not a ratio. At 3 darts/second
+## a visitor waited most of a minute before the board said anything, the readout sat
+## at "pi = ?", and every still ever taken of this artifact — contact sheet, gallery,
+## the book — showed an empty square. The algorithm was never wrong; it just had no
+## opening state, so the thing you came to see was absent exactly when you arrived.
+##
+## Seeding is not faking: these are the same randf() draws _throw_dart() makes, run
+## without waiting. Live throwing continues on top of them.
+func _preseed() -> void:
+	if preseed_darts <= 0:
+		return
+	_seeding = true
+	for _i in range(mini(preseed_darts, max_darts)):
+		_throw_dart()
+	_seeding = false
+	_update_display()
 
 
 func _process(delta: float) -> void:
@@ -285,7 +312,8 @@ func _throw_dart() -> void:
 		if old:
 			old.queue_free()
 
-	_update_display()
+	if not _seeding:
+		_update_display()
 
 
 # ═════════════════════════════════════════════════════════════════════════════

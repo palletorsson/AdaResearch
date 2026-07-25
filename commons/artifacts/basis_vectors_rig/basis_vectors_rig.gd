@@ -24,7 +24,7 @@ class_name BasisVectorsRig
 # --- Extracted constants ---
 const LABEL_PIXEL_SIZE_LARGE := 0.003
 const LABEL_PIXEL_SIZE_SMALL := 0.002
-const COMPONENT_LINE_RADIUS := 0.008
+const COMPONENT_LINE_RADIUS := 0.013   # was 0.008 — a hairline beside the arrows
 const GLOW_SPHERE_RADIUS := 0.065
 const PANEL_DEPTH := 0.012
 const RADIAL_SEGMENTS := 12
@@ -368,12 +368,16 @@ func _create_component_lines():
 	_component_mmi.name = "ComponentLines"
 	_component_mmi.multimesh = _component_mm
 
+	# The staircase from origin to point IS the lesson (P = x*i + y*j + z*k), so it
+	# has to be the clearest thing here, and each leg has to say WHICH axis it is.
+	# It was doing the opposite: a uniform grey emission glowed all three legs the
+	# same colour, erasing the axis correspondence at exactly the moment it should
+	# read. UNSHADED lets the per-instance vertex colour carry it at full strength
+	# regardless of room lighting — the same trick the arrows' own glow uses.
 	var mat := StandardMaterial3D.new()
 	mat.vertex_color_use_as_albedo = true
 	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-	mat.emission_enabled = true
-	mat.emission = Color(0.5, 0.5, 0.5)
-	mat.emission_energy_multiplier = 0.3
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	_component_mmi.material_override = mat
 
 	_stage().add_child(_component_mmi)
@@ -588,9 +592,12 @@ func _update_component_lines(coords: Vector3):
 	var p2 = p1 + _basis.y * coords.y
 	var p3 = p2 + _basis.z * coords.z
 
-	_set_component_line(0, p0, p1, color_i * 0.6)
-	_set_component_line(1, p1, p2, color_j * 0.6)
-	_set_component_line(2, p2, p3, color_k * 0.6)
+	# Full axis hue, slight transparency so the legs read as measurement rather than
+	# structure. `color_i * 0.6` scaled the ALPHA channel too, which is why these were
+	# both dark and see-through.
+	_set_component_line(0, p0, p1, Color(color_i.r, color_i.g, color_i.b, 0.92))
+	_set_component_line(1, p1, p2, Color(color_j.r, color_j.g, color_j.b, 0.92))
+	_set_component_line(2, p2, p3, Color(color_k.r, color_k.g, color_k.b, 0.92))
 
 # Positions a MultiMesh instance as a cylinder between start and end
 func _set_component_line(index: int, start: Vector3, end: Vector3, color: Color):
