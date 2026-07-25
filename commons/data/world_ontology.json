@@ -1,0 +1,651 @@
+{
+ "_readme": "world_ontology.py — THE LEDGER OF WHAT EXISTS.",
+ "_intent": "Palle 2026-07-25: 'what exist is both what we created but also (queer) ontology of the world.' This ledger asks the world instead of asking ourselves. The GAP is what exists and we do not compose; the RESIDUAL is what exists and resists composition — it is not a backlog.",
+ "maps_scanned": 2027,
+ "artifacts_registered": 2661,
+ "artifacts_map_ready": 2592,
+ "registries": {
+  "adder_board": 1,
+  "agreement_gauge": 1,
+  "algorithms_misc": 79,
+  "alternative_geometries": 17,
+  "array_substrates": 3,
+  "arrays": 101,
+  "bar_array": 10,
+  "boolean_surfaces": 6,
+  "bricolage": 38,
+  "buren_columns": 16,
+  "catapult": 1,
+  "cellular_automata": 97,
+  "change": 13,
+  "chaos": 5,
+  "color": 35,
+  "commons_artifacts": 163,
+  "composition_artifact": 1,
+  "computational_biology": 8,
+  "concept_architecture": 4,
+  "control_console": 1,
+  "curator": 3,
+  "datastructures": 15,
+  "dna_grammar_artifacts": 5,
+  "dna_promoted": 16,
+  "exhibits": 4,
+  "force_pad": 2,
+  "force_vortex": 1,
+  "formfinding": 1,
+  "foundations": 17,
+  "foundations_crisis": 23,
+  "fractals": 43,
+  "furniture": 27,
+  "gallery_preview": 3,
+  "grammar_systems": 2,
+  "graphtheory": 1,
+  "grid2d": 11,
+  "grid3d": 9,
+  "grid_brush_demo": 1,
+  "grid_ops_demo": 1,
+  "hazards": 97,
+  "human_catapult": 1,
+  "image_billboard": 1,
+  "instruments": 24,
+  "isosurfaces": 23,
+  "jspace": 4,
+  "lab": 110,
+  "length_lantern": 1,
+  "living_paper": 34,
+  "lsystems": 65,
+  "machinelearning": 65,
+  "machinelearning_extra": 0,
+  "mesh_grammar": 21,
+  "modifier_grid_demo": 1,
+  "mortar_vector_siege": 1,
+  "museum": 1,
+  "mycelium": 2,
+  "nature_system": 3,
+  "neuroscience": 2,
+  "noise": 1,
+  "packaging": 8,
+  "panel_bridge": 1,
+  "parametric": 15,
+  "pattern_atlas": 2,
+  "pattern_loom": 13,
+  "pattern_machine_a": 1,
+  "pattern_machine_b": 4,
+  "pattern_machine_c": 5,
+  "pattern_machine_d": 1,
+  "pattern_mill": 10,
+  "physics_simulation": 91,
+  "postfoundations_crisis": 24,
+  "postfoundationscrisis": 12,
+  "prebaked_loader": 1,
+  "primitive_assembler": 1,
+  "primitive_combo_puzzle": 1,
+  "primitives": 254,
+  "procedural_generation": 35,
+  "procgen_extra": 130,
+  "profile": 17,
+  "progression_debug": 2,
+  "promoted": 98,
+  "qfep": 58,
+  "qfeplaboratory": 1,
+  "quantumalgorithms": 2,
+  "random_cubes": 1,
+  "randomness": 151,
+  "reflection_hall": 1,
+  "resourcemanagement": 6,
+  "script_runner": 1,
+  "sdf_gallery": 10,
+  "self_portrait": 3,
+  "shaders": 40,
+  "soft_bodies": 70,
+  "softbodies": 3,
+  "speech": 4,
+  "station": 22,
+  "statistics": 10,
+  "steering": 16,
+  "stretch_bench": 1,
+  "substrate_vectors": 448,
+  "swarmintelligence": 13,
+  "symmetry": 1,
+  "transforms": 22,
+  "vector_arena": 1,
+  "vectors": 60,
+  "vectors_demos": 66,
+  "wavefunctions": 140,
+  "wavefunctions_extra": 10
+ },
+ "utilities": [
+  {
+   "code": "3t",
+   "name": "text_display",
+   "category": "ui",
+   "modelled": false,
+   "corpus_uses": 143,
+   "composed": false
+  },
+  {
+   "code": "a",
+   "name": "wall",
+   "category": "structure",
+   "modelled": false,
+   "corpus_uses": 0,
+   "composed": false
+  },
+  {
+   "code": "an",
+   "name": "annotation_cube",
+   "category": "ui",
+   "modelled": false,
+   "corpus_uses": 409,
+   "composed": false
+  },
+  {
+   "code": "b",
+   "name": "table",
+   "category": "furniture",
+   "modelled": false,
+   "corpus_uses": 0,
+   "composed": false
+  },
+  {
+   "code": "bp",
+   "name": "big_pipe",
+   "category": "structure",
+   "modelled": false,
+   "corpus_uses": 1,
+   "composed": false
+  },
+  {
+   "code": "br",
+   "name": "bridge_path",
+   "category": "transport",
+   "modelled": true,
+   "corpus_uses": 27,
+   "composed": true
+  },
+  {
+   "code": "cp",
+   "name": "checkpoint",
+   "category": "safety",
+   "modelled": false,
+   "corpus_uses": 0,
+   "composed": false
+  },
+  {
+   "code": "d",
+   "name": "door",
+   "category": "transport",
+   "modelled": false,
+   "corpus_uses": 0,
+   "composed": true
+  },
+  {
+   "code": "ds",
+   "name": "dark_sphere",
+   "category": "atmosphere",
+   "modelled": false,
+   "corpus_uses": 0,
+   "composed": false
+  },
+  {
+   "code": "e",
+   "name": "catalyst_vent",
+   "category": "hazard",
+   "modelled": false,
+   "corpus_uses": 10,
+   "composed": false
+  },
+  {
+   "code": "el",
+   "name": "extra_light",
+   "category": "visual",
+   "modelled": false,
+   "corpus_uses": 241,
+   "composed": true
+  },
+  {
+   "code": "f",
+   "name": "force_field",
+   "category": "hazard",
+   "modelled": false,
+   "corpus_uses": 0,
+   "composed": false
+  },
+  {
+   "code": "h",
+   "name": "hazard_zone",
+   "category": "hazard",
+   "modelled": false,
+   "corpus_uses": 49,
+   "composed": false
+  },
+  {
+   "code": "hb",
+   "name": "horizontal_border",
+   "category": "structure",
+   "modelled": false,
+   "corpus_uses": 16,
+   "composed": true
+  },
+  {
+   "code": "i",
+   "name": "info_board",
+   "category": "educational",
+   "modelled": false,
+   "corpus_uses": 0,
+   "composed": false
+  },
+  {
+   "code": "ib",
+   "name": "info_board_handheld",
+   "category": "educational",
+   "modelled": false,
+   "corpus_uses": 7,
+   "composed": false
+  },
+  {
+   "code": "jp",
+   "name": "jump_pad",
+   "category": "transport",
+   "modelled": true,
+   "corpus_uses": 10,
+   "composed": false
+  },
+  {
+   "code": "l",
+   "name": "platform_lift",
+   "category": "transport",
+   "modelled": false,
+   "corpus_uses": 10,
+   "composed": false
+  },
+  {
+   "code": "la",
+   "name": "label",
+   "category": "ui",
+   "modelled": false,
+   "corpus_uses": 2,
+   "composed": false
+  },
+  {
+   "code": "m",
+   "name": "move_player",
+   "category": "transport",
+   "modelled": false,
+   "corpus_uses": 38,
+   "composed": true
+  },
+  {
+   "code": "n",
+   "name": "next_cube",
+   "category": "interactive",
+   "modelled": false,
+   "corpus_uses": 3,
+   "composed": false
+  },
+  {
+   "code": "p",
+   "name": "pick_up",
+   "category": "interactive",
+   "modelled": false,
+   "corpus_uses": 0,
+   "composed": false
+  },
+  {
+   "code": "pb",
+   "name": "player_body_trigger",
+   "category": "interactive",
+   "modelled": false,
+   "corpus_uses": 4,
+   "composed": false
+  },
+  {
+   "code": "q",
+   "name": "quit_cube",
+   "category": "game_control",
+   "modelled": false,
+   "corpus_uses": 0,
+   "composed": false
+  },
+  {
+   "code": "r",
+   "name": "reset_cube",
+   "category": "safety",
+   "modelled": false,
+   "corpus_uses": 0,
+   "composed": false
+  },
+  {
+   "code": "rc",
+   "name": "rotation_cube",
+   "category": "transport",
+   "modelled": false,
+   "corpus_uses": 3,
+   "composed": false
+  },
+  {
+   "code": "rg",
+   "name": "regenerate_cube",
+   "category": "interactive",
+   "modelled": false,
+   "corpus_uses": 1,
+   "composed": false
+  },
+  {
+   "code": "s",
+   "name": "spawn_point",
+   "category": "transport",
+   "modelled": false,
+   "corpus_uses": 1363,
+   "composed": true
+  },
+  {
+   "code": "sc",
+   "name": "scale_cube",
+   "category": "transport",
+   "modelled": false,
+   "corpus_uses": 3,
+   "composed": false
+  },
+  {
+   "code": "sp",
+   "name": "score points",
+   "category": "score",
+   "modelled": false,
+   "corpus_uses": 779,
+   "composed": false
+  },
+  {
+   "code": "sr",
+   "name": "speed_reader",
+   "category": "ui",
+   "modelled": false,
+   "corpus_uses": 2,
+   "composed": false
+  },
+  {
+   "code": "sub",
+   "name": "subtitle_trigger",
+   "category": "ui",
+   "modelled": false,
+   "corpus_uses": 89,
+   "composed": false
+  },
+  {
+   "code": "t",
+   "name": "teleport",
+   "category": "transport",
+   "modelled": false,
+   "corpus_uses": 2165,
+   "composed": true
+  },
+  {
+   "code": "tc",
+   "name": "transport_cube",
+   "category": "transport",
+   "modelled": true,
+   "corpus_uses": 481,
+   "composed": true
+  },
+  {
+   "code": "tts",
+   "name": "text_to_speech",
+   "category": "audio",
+   "modelled": false,
+   "corpus_uses": 0,
+   "composed": false
+  },
+  {
+   "code": "w",
+   "name": "window",
+   "category": "visual",
+   "modelled": false,
+   "corpus_uses": 0,
+   "composed": false
+  },
+  {
+   "code": "wp",
+   "name": "walkway",
+   "category": "transport",
+   "modelled": true,
+   "corpus_uses": 1266,
+   "composed": true
+  },
+  {
+   "code": "x",
+   "name": "xp_label",
+   "category": "ui",
+   "modelled": false,
+   "corpus_uses": 0,
+   "composed": false
+  }
+ ],
+ "gap": [
+  {
+   "code": "3t",
+   "name": "text_display",
+   "category": "ui",
+   "modelled": false,
+   "corpus_uses": 143,
+   "composed": false
+  },
+  {
+   "code": "an",
+   "name": "annotation_cube",
+   "category": "ui",
+   "modelled": false,
+   "corpus_uses": 409,
+   "composed": false
+  },
+  {
+   "code": "bp",
+   "name": "big_pipe",
+   "category": "structure",
+   "modelled": false,
+   "corpus_uses": 1,
+   "composed": false
+  },
+  {
+   "code": "e",
+   "name": "catalyst_vent",
+   "category": "hazard",
+   "modelled": false,
+   "corpus_uses": 10,
+   "composed": false
+  },
+  {
+   "code": "h",
+   "name": "hazard_zone",
+   "category": "hazard",
+   "modelled": false,
+   "corpus_uses": 49,
+   "composed": false
+  },
+  {
+   "code": "ib",
+   "name": "info_board_handheld",
+   "category": "educational",
+   "modelled": false,
+   "corpus_uses": 7,
+   "composed": false
+  },
+  {
+   "code": "jp",
+   "name": "jump_pad",
+   "category": "transport",
+   "modelled": true,
+   "corpus_uses": 10,
+   "composed": false
+  },
+  {
+   "code": "l",
+   "name": "platform_lift",
+   "category": "transport",
+   "modelled": false,
+   "corpus_uses": 10,
+   "composed": false
+  },
+  {
+   "code": "la",
+   "name": "label",
+   "category": "ui",
+   "modelled": false,
+   "corpus_uses": 2,
+   "composed": false
+  },
+  {
+   "code": "n",
+   "name": "next_cube",
+   "category": "interactive",
+   "modelled": false,
+   "corpus_uses": 3,
+   "composed": false
+  },
+  {
+   "code": "pb",
+   "name": "player_body_trigger",
+   "category": "interactive",
+   "modelled": false,
+   "corpus_uses": 4,
+   "composed": false
+  },
+  {
+   "code": "rc",
+   "name": "rotation_cube",
+   "category": "transport",
+   "modelled": false,
+   "corpus_uses": 3,
+   "composed": false
+  },
+  {
+   "code": "rg",
+   "name": "regenerate_cube",
+   "category": "interactive",
+   "modelled": false,
+   "corpus_uses": 1,
+   "composed": false
+  },
+  {
+   "code": "sc",
+   "name": "scale_cube",
+   "category": "transport",
+   "modelled": false,
+   "corpus_uses": 3,
+   "composed": false
+  },
+  {
+   "code": "sp",
+   "name": "score points",
+   "category": "score",
+   "modelled": false,
+   "corpus_uses": 779,
+   "composed": false
+  },
+  {
+   "code": "sr",
+   "name": "speed_reader",
+   "category": "ui",
+   "modelled": false,
+   "corpus_uses": 2,
+   "composed": false
+  },
+  {
+   "code": "sub",
+   "name": "subtitle_trigger",
+   "category": "ui",
+   "modelled": false,
+   "corpus_uses": 89,
+   "composed": false
+  }
+ ],
+ "residual": {
+  "maps_fitted": 1987,
+  "mean_residual": 0.52,
+  "high_residual_maps": 353,
+  "note_high_residual": "maps the grammar can barely express — hand-craft or noise; the tool cannot tell intention from accident, so these are protected, not queued",
+  "measured_artifacts": 1668
+ },
+ "composer_codes": [
+  "br",
+  "d",
+  "el",
+  "hb",
+  "m",
+  "s",
+  "t",
+  "tc",
+  "wp"
+ ],
+ "composer_artifacts": [
+  "cable_tray",
+  "ceiling_vent",
+  "exit_sign",
+  "hangar_podium",
+  "hangar_supply_pile",
+  "hangar_wall_panel",
+  "hangar_worktable",
+  "lab_sliding_door"
+ ],
+ "top_artifacts_in_corpus": [
+  [
+   ",",
+   1988
+  ],
+  [
+   "exhibit_furniture",
+   1077
+  ],
+  [
+   "request_note",
+   716
+  ],
+  [
+   "0",
+   599
+  ],
+  [
+   "curation_station",
+   451
+  ],
+  [
+   "fire_hose_box",
+   439
+  ],
+  [
+   "dark_sphere",
+   312
+  ],
+  [
+   "fire_extinguisher",
+   302
+  ],
+  [
+   "info_board",
+   247
+  ],
+  [
+   "exhibit_podium",
+   226
+  ],
+  [
+   "science_screen",
+   215
+  ],
+  [
+   "exhibit_vitrine",
+   162
+  ],
+  [
+   "cube_scene",
+   155
+  ],
+  [
+   "pick_up_cube",
+   154
+  ],
+  [
+   "station_crates",
+   139
+  ]
+ ]
+}
