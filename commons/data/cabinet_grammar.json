@@ -115,7 +115,8 @@
     "taxonomy vitrine",
     "chart case",
     "ledger column",
-    "slider lectern"
+    "slider lectern",
+    "terrarium case"
    ]
   },
   "horizontal": {
@@ -369,6 +370,14 @@
    "dialect": "horizontal",
    "body": "decomposition table",
    "scene": "res://commons/artifacts/basis_vectors_rig/basis_vectors_rig.tscn",
+   "propagation": 3,
+   "kit": true
+  },
+  {
+   "artifact": "random_walk_terrarium",
+   "dialect": "vertical",
+   "body": "terrarium case",
+   "scene": "res://commons/artifacts/random_walk_terrarium/random_walk_terrarium.tscn",
    "propagation": 3,
    "kit": true
   }

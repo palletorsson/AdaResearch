@@ -43,6 +43,21 @@ const BTN_SCALE := Vector3(0.7, 0.7, 0.7)
 const PANEL_SIZE := Vector3(0.35, 0.1, 0.01)
 const MAX_CATCHUP_STEPS := 5
 
+const HangarKit = preload("res://commons/artifacts/_hangar/hangar_kit.gd")
+
+## Housing — cabinet grammar, VERTICAL dialect (body = "terrarium case").
+## You stand and peer INTO the glass, so the plane is vertical: the tank is a
+## specimen displayed at viewing height on a cabinet base that carries the sign,
+## the stats readout and the keypad. Before this the tank sat on the floor with a
+## title floating above it, stats floating beside it, and the keypad at y=-0.08 —
+## below the floor.
+@export var case_body: bool = true
+@export var finish: String = "terminal"
+@export var wear: float = 0.10
+@export var unit_code: String = "RW-11"
+## Height of the cabinet top — the shelf the glass tank stands on.
+@export var base_height: float = 0.92
+
 ## Half-extents of the terrarium box (x, y, z)
 @export var terrarium_size: Vector3 = Vector3(0.5, 0.4, 0.5)
 
@@ -79,6 +94,8 @@ var _total_steps: int = 0
 
 # Visuals
 var _glass_box: Node3D
+var _cab: Node3D    # the cabinet base
+var _tank: Node3D   # lifted stage: glass box + walkers + trails
 var _walker_mm: MultiMesh
 var _trail_meshes: Array[MeshInstance3D] = []
 var _trail_ims: Array[ImmediateMesh] = []
@@ -90,6 +107,8 @@ var _reset_area: Node
 
 
 func _ready():
+	if case_body:
+		_create_case()
 	_create_terrarium()
 	_create_walkers()
 	_create_labels()
@@ -100,11 +119,126 @@ func _exit_tree():
 	if _reset_area and _reset_area.button_pressed.is_connected(_reset_walkers):
 		_reset_area.button_pressed.disconnect(_reset_walkers)
 
+## Where the specimen lives. The tank, its walkers and their trails all ride one
+## container lifted to the cabinet top, so the whole exhibit moves together.
+## Marked phenomenon: the walkers ARE the subject, and the grammar's no-orphan-text
+## rule should measure the cabinet's interface, not the specimen's own space.
+func _stage() -> Node3D:
+	if not case_body:
+		return self
+	if _tank == null:
+		_tank = Node3D.new()
+		_tank.name = "Tank"
+		_tank.set_meta("phenomenon", true)
+		_tank.position = Vector3(0, base_height, 0)
+		add_child(_tank)
+	return _tank
+
+
+## THE CASE. Vertical dialect: a cabinet base the glass tank stands on, carrying
+## the sign band under its cap, the stats readout seated in a milled pocket, and
+## the keypad on a wedge shoulder — so the exhibit is ONE body, not a tank with
+## three things hovering around it.
+func _create_case() -> void:
+	var pal: Dictionary = HangarKit.finish_palette(finish)
+	var col_body: Color = pal["body"]
+	var col_accent: Color = pal["accent"]
+	var shell: StandardMaterial3D = HangarKit.finish_body(finish, col_body, wear)
+	var steel: StandardMaterial3D = HangarKit.worn_metal(col_body.lightened(0.10))
+	var dark: StandardMaterial3D = HangarKit.painted_metal(
+		Color(0.07, 0.075, 0.09), wear, 0.35, 0.55)
+	var accent: StandardMaterial3D = HangarKit.emissive(col_accent, 2.2)
+
+	var w: float = terrarium_size.x + 0.14
+	var d: float = terrarium_size.z + 0.14
+	var h: float = base_height
+	var face_z: float = d * 0.5
+
+	var cab := Node3D.new()
+	cab.name = "Cabinet"
+	cab.set_meta("housing", true)
+	add_child(cab)
+	_cab = cab
+
+	# body + cap the tank stands on
+	cab.add_child(HangarKit.box(Vector3(0, h * 0.5, 0), Vector3(w, h, d), shell))
+	cab.add_child(HangarKit.box(
+		Vector3(0, h - 0.018, 0), Vector3(w + 0.045, 0.036, d + 0.045), steel))
+	# ember stripe under the cap lip (G7)
+	cab.add_child(HangarKit.box(
+		Vector3(0, h - 0.046, face_z + 0.006),
+		Vector3(w * 0.98, 0.007, 0.006), accent))
+	# side flanks
+	for sx in [-1.0, 1.0]:
+		cab.add_child(HangarKit.box(
+			Vector3(sx * (w * 0.5 + 0.016), h * 0.5, 0.0),
+			Vector3(0.032, h, d + 0.018), steel))
+	# recessed toe kick + grime at the floor (G2)
+	cab.add_child(HangarKit.box(
+		Vector3(0, 0.03, 0), Vector3(w - 0.10, 0.06, d - 0.10), dark))
+	var gb: MeshInstance3D = HangarKit.grime_band(w * 0.88, 0.05, face_z + 0.003, col_body)
+	if gb:
+		gb.position.y = 0.075
+		cab.add_child(gb)
+	# bolted flank lines
+	cab.add_child(HangarKit.bolts(
+		Vector3(-w * 0.5 + 0.024, 0.14, face_z + 0.004),
+		Vector3(-w * 0.5 + 0.024, h - 0.10, face_z + 0.004), 5, 0.0055, steel))
+	cab.add_child(HangarKit.bolts(
+		Vector3(w * 0.5 - 0.024, 0.14, face_z + 0.004),
+		Vector3(w * 0.5 - 0.024, h - 0.10, face_z + 0.004), 5, 0.0055, steel))
+
+	# sign band, baked flush into the fascia just under the cap — a case label
+	var sign: MeshInstance3D = HangarKit.stencil(
+		"RANDOM WALK", Vector2(w * 0.80, 0.030), col_accent.lightened(0.35))
+	if sign:
+		sign.position = Vector3(0, h - 0.085, face_z + 0.004)
+		cab.add_child(sign)
+	var code: MeshInstance3D = HangarKit.stencil(
+		unit_code, Vector2(0.10, 0.024), col_accent.lightened(0.20))
+	if code:
+		code.position = Vector3(-w * 0.5 + 0.09, 0.17, face_z + 0.004)
+		cab.add_child(code)
+	# the family's three-colour bar, low on the fascia
+	var bar: Node3D = HangarKit.three_color_bar(w * 0.40, 0.013)
+	if bar:
+		bar.position = Vector3(0.0, 0.30, face_z + 0.005)
+		cab.add_child(bar)
+
+	# stats readout seated in a milled pocket: pocket, lit face, canonical glass,
+	# ember lip. The live Label3D reads against it (see _create_labels).
+	var scr_w: float = w * 0.72
+	var scr_h: float = 0.17
+	var scr_y: float = h * 0.62
+	cab.add_child(HangarKit.box(
+		Vector3(0, scr_y, face_z + 0.002),
+		Vector3(scr_w + 0.026, scr_h + 0.030, 0.014), dark))
+	cab.add_child(HangarKit.box(
+		Vector3(0, scr_y, face_z + 0.008),
+		Vector3(scr_w, scr_h, 0.005), HangarKit.emissive(pal["screen"], 0.45)))
+	var glass_mat := StandardMaterial3D.new()
+	glass_mat.albedo_color = Color(0.04, 0.05, 0.08)
+	glass_mat.roughness = 0.15
+	glass_mat.emission_enabled = true
+	glass_mat.emission = Color(0.05, 0.08, 0.12)
+	glass_mat.emission_energy_multiplier = 0.5
+	cab.add_child(HangarKit.box(
+		Vector3(0, scr_y, face_z + 0.0125), Vector3(scr_w, scr_h, 0.004), glass_mat))
+	cab.add_child(HangarKit.box(
+		Vector3(0, scr_y + scr_h * 0.5 + 0.010, face_z + 0.010),
+		Vector3(scr_w + 0.026, 0.005, 0.005), accent))
+	var tag: MeshInstance3D = HangarKit.stencil(
+		"DISPLACEMENT", Vector2(scr_w * 0.46, 0.016), col_accent.lightened(0.30))
+	if tag:
+		tag.position = Vector3(-scr_w * 0.25, scr_y + scr_h * 0.5 + 0.026, face_z + 0.004)
+		cab.add_child(tag)
+
+
 ## Builds the glass box enclosure: base slab and four transparent walls.
 func _create_terrarium():
 	_glass_box = Node3D.new()
 	_glass_box.name = "GlassBox"
-	add_child(_glass_box)
+	_stage().add_child(_glass_box)
 
 	# Base (solid)
 	var base = MeshInstance3D.new()
@@ -171,7 +305,7 @@ func _create_walkers():
 	walker_mat.emission = Color.WHITE
 	walker_mat.emission_energy_multiplier = EMISSION_ENERGY
 	mmi.material_override = walker_mat
-	add_child(mmi)
+	_stage().add_child(mmi)
 
 	# Shared trail material (reused every frame)
 	_trail_mat = StandardMaterial3D.new()
@@ -194,42 +328,78 @@ func _create_walkers():
 		trail_mi.mesh = im
 		trail_mi.material_override = _trail_mat
 		_trail_meshes[i] = trail_mi
-		add_child(trail_mi)
+		_stage().add_child(trail_mi)
 
 		_walker_positions[i] = Vector3.ZERO
 		_walker_trails[i] = PackedVector3Array()
 
 ## Adds the title and statistics labels above / beside the terrarium.
 func _create_labels():
-	_info_label = Label3D.new()
-	_info_label.name = "InfoLabel"
-	_info_label.pixel_size = LABEL_PIXEL_SIZE
-	_info_label.font_size = 16
-	_info_label.position = Vector3(0, terrarium_size.y + 0.08, 0)
-	_info_label.text = "RANDOM WALK"
-	add_child(_info_label)
+	if not case_body:
+		_info_label = Label3D.new()
+		_info_label.name = "InfoLabel"
+		_info_label.pixel_size = LABEL_PIXEL_SIZE
+		_info_label.font_size = 16
+		_info_label.position = Vector3(0, terrarium_size.y + 0.08, 0)
+		_info_label.text = "RANDOM WALK"
+		add_child(_info_label)
 
+		_stats_label = Label3D.new()
+		_stats_label.name = "StatsLabel"
+		_stats_label.pixel_size = STATS_PIXEL_SIZE
+		_stats_label.font_size = 12
+		_stats_label.position = Vector3(terrarium_size.x / 2.0 + 0.1, terrarium_size.y / 2.0, 0)
+		add_child(_stats_label)
+		return
+
+	# The title is the cabinet's own sign band (baked in _create_case), so there is
+	# no floating title. The stats read AGAINST the seated screen instead of hanging
+	# beside the tank — inside the body, which is what the rule asks for.
+	var w: float = terrarium_size.x + 0.14
+	var d: float = terrarium_size.z + 0.14
 	_stats_label = Label3D.new()
 	_stats_label.name = "StatsLabel"
 	_stats_label.pixel_size = STATS_PIXEL_SIZE
 	_stats_label.font_size = 12
-	_stats_label.position = Vector3(terrarium_size.x / 2.0 + 0.1, terrarium_size.y / 2.0, 0)
-	add_child(_stats_label)
+	_stats_label.modulate = HangarKit.finish_palette(finish)["text"]
+	_stats_label.position = Vector3(0, base_height * 0.62, d * 0.5 + 0.020)
+	_cab.add_child(_stats_label)
 
 ## Creates the VR button panel with mode-switch and reset buttons.
 func _create_vr_controls():
 	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
-	_control_panel = RackTpl.create_panel("RANDOM WALK", [
+	# Frameless when housed: the wedge shoulder is the faceplate, and RackTemplates'
+	# cream plate + copper strip would read as a second manufacturer (G4).
+	_control_panel = RackTpl.create_panel("" if case_body else "RANDOM WALK", [
 		[
 			{"type": "button", "label": "2D"},
 			{"type": "button", "label": "3D"},
 			{"type": "button", "label": "LEVY"},
 		],
 		[{"type": "button", "label": "RESET"}],
-	])
-	_control_panel.position = Vector3(0, -0.08, terrarium_size.z / 2.0 + 0.15)
-	_control_panel.rotation_degrees = Vector3(-30, 0, 0)
-	add_child(_control_panel)
+	], case_body)
+	if case_body:
+		# Keypad on a WEDGE SHOULDER cantilevered off the fascia just under the cap,
+		# so the controls meet the body. Previously this panel sat at y=-0.08 — below
+		# the floor, and nowhere near the VR reach band.
+		var d: float = terrarium_size.z + 0.14
+		var w: float = terrarium_size.x + 0.14
+		var face_z: float = d * 0.5
+		var shoulder_y: float = base_height - 0.20   # clears the sign band above
+		var steel: StandardMaterial3D = HangarKit.worn_metal(
+			HangarKit.finish_palette(finish)["body"].lightened(0.10))
+		var shoulder: MeshInstance3D = HangarKit.wedge(w * 0.72, 0.11, 0.15, 0.05, steel)
+		if shoulder:
+			shoulder.position = Vector3(0.0, shoulder_y, face_z - 0.002)
+			_cab.add_child(shoulder)
+		_control_panel.position = Vector3(0.0, shoulder_y + 0.055, face_z + 0.076)
+		_control_panel.rotation_degrees = Vector3(-32, 0, 0)
+		HangarKit.harmonize(_control_panel, finish)
+		_cab.add_child(_control_panel)
+	else:
+		_control_panel.position = Vector3(0, -0.08, terrarium_size.z / 2.0 + 0.15)
+		_control_panel.rotation_degrees = Vector3(-30, 0, 0)
+		add_child(_control_panel)
 
 	# Mode buttons: 2D (Btn_0), 3D (Btn_1), LEVY (Btn_2)
 	for i in range(3):
