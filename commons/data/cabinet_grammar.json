@@ -135,7 +135,8 @@
     "table console",
     "relief survey table",
     "compression bench",
-    "plotting table"
+    "plotting table",
+    "decomposition table"
    ]
   }
  },
@@ -360,6 +361,14 @@
    "dialect": "vertical",
    "body": "slider lectern",
    "scene": "res://commons/primitives/point/xyz_slider_plate.tscn",
+   "propagation": 3,
+   "kit": true
+  },
+  {
+   "artifact": "basis_vectors_rig",
+   "dialect": "horizontal",
+   "body": "decomposition table",
+   "scene": "res://commons/artifacts/basis_vectors_rig/basis_vectors_rig.tscn",
    "propagation": 3,
    "kit": true
   }

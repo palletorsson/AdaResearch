@@ -29,6 +29,22 @@ const GLOW_SPHERE_RADIUS := 0.065
 const PANEL_DEPTH := 0.012
 const RADIAL_SEGMENTS := 12
 
+const HangarKit = preload("res://commons/artifacts/_hangar/hangar_kit.gd")
+
+## Housing — cabinet grammar, HORIZONTAL dialect (body = "decomposition table").
+## You reach INTO this rig to grab handles, so its plane is a deck you look down
+## at, not a face you stand before. The basis arrows are the PHENOMENON: they rise
+## from a milled well in the deck (G3 exempts a phenomenon based in the well).
+## Before this, the title, the coordinate readout and the eight-button keypad all
+## hung in mid-air — the keypad 6 cm off the floor, far under the VR reach band.
+@export var table_body: bool = true
+@export var finish: String = "terminal"
+@export var wear: float = 0.10
+@export var unit_code: String = "BV-08"
+## Deck (work surface) height. The well floor sits just below it and the arrows
+## stand in the well, so the rig reads at a table you work over.
+@export var deck_height: float = 0.95
+
 ## Display settings
 @export var axis_length: float = 0.6
 @export var arrow_thickness: float = 0.01  # Thin like y_oscillation_cube
@@ -59,6 +75,9 @@ var _title_panel: Node3D
 var _coords_panel: Node3D
 var _control_panel: Node3D
 var _ground: Node3D
+var _cab: Node3D          # the table housing
+var _rig: Node3D          # the phenomenon: arrows, point, component lines
+var _well_y: float = 0.0  # well floor height, where the rig is based
 
 # Shared material templates
 var _arrow_mat_template: StandardMaterial3D
@@ -72,6 +91,8 @@ var _time: float = 0.0
 
 func _ready():
 	_init_material_templates()
+	if table_body:
+		_create_table()
 	_create_ground()
 	_create_basis_arrows()
 	_create_component_lines()
@@ -92,17 +113,157 @@ func _init_material_templates():
 	_glow_mat_template.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	_glow_mat_template.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 
+## THE TABLE. Horizontal dialect: a broad working rail ring around a milled well,
+## on an apron and legs. Every part is the flat translation of a vertical part —
+## the back slab becomes the rail, the window backdrop becomes the basin floor the
+## arrows read against, the sign band becomes a name inlaid flat in the near rail.
+## Nothing in the HOUSING rises more than a hand's width above the deck (G3).
+func _create_table() -> void:
+	var pal: Dictionary = HangarKit.finish_palette(finish)
+	var col_body: Color = pal["body"]
+	var col_accent: Color = pal["accent"]
+	var shell: StandardMaterial3D = HangarKit.finish_body(finish, col_body, wear)
+	var steel: StandardMaterial3D = HangarKit.worn_metal(col_body.lightened(0.10))
+	var dark: StandardMaterial3D = HangarKit.painted_metal(
+		Color(0.07, 0.075, 0.09), wear, 0.35, 0.55)
+	var legs_mat: StandardMaterial3D = HangarKit.painted_metal(
+		Color(0.09, 0.09, 0.105), wear, 0.4, 0.5)
+	var maroon: StandardMaterial3D = HangarKit.painted_metal(Color(0.30, 0.11, 0.09), wear)
+	var accent: StandardMaterial3D = HangarKit.emissive(col_accent, 2.2)
+
+	var half_field: float = axis_length * 0.95
+	var rail_w: float = 0.11
+	var half_out: float = half_field + rail_w
+	var rail_h: float = 0.05
+	var well_depth: float = 0.055
+	var deck_y: float = deck_height
+	_well_y = deck_y - well_depth
+
+	var cab := Node3D.new()
+	cab.name = "TableConsole"
+	cab.set_meta("housing", true)
+	add_child(cab)
+	_cab = cab
+
+	# ── rail ring: four bars framing the field (the back slab, laid flat) ──
+	var rail_y: float = deck_y - rail_h * 0.5
+	for i in range(4):
+		var along_x: bool = i < 2
+		var sgn: float = -1.0 if i % 2 == 0 else 1.0
+		var ctr: Vector3
+		var siz: Vector3
+		if along_x:
+			ctr = Vector3(0.0, rail_y, sgn * (half_field + rail_w * 0.5))
+			siz = Vector3(half_out * 2.0, rail_h, rail_w)
+		else:
+			ctr = Vector3(sgn * (half_field + rail_w * 0.5), rail_y, 0.0)
+			siz = Vector3(rail_w, rail_h, half_field * 2.0)
+		cab.add_child(HangarKit.box(ctr, siz, shell))
+		# maroon EDGE INLAY — a routed LINE under the rail's top edge, not a band.
+		# The vertical dialect's flank is a mass; a mass laid flat becomes a stripe.
+		var inl_c: Vector3 = ctr
+		var inl_s: Vector3
+		if along_x:
+			inl_c.z += sgn * (rail_w * 0.5 + 0.001)
+			inl_s = Vector3(half_out * 2.0, 0.009, 0.004)
+		else:
+			inl_c.x += sgn * (rail_w * 0.5 + 0.001)
+			inl_s = Vector3(0.004, 0.009, half_field * 2.0)
+		inl_c.y = deck_y - 0.012
+		cab.add_child(HangarKit.box(inl_c, inl_s, maroon))
+
+	# ── the WELL: a dark basin the phenomenon sits in, below the deck plane ──
+	cab.add_child(HangarKit.box(
+		Vector3(0, _well_y - 0.008, 0),
+		Vector3(half_field * 2.0, 0.016, half_field * 2.0), dark))
+	# low inner walls closing the basin up to the deck
+	for i in range(4):
+		var along_x2: bool = i < 2
+		var sgn2: float = -1.0 if i % 2 == 0 else 1.0
+		if along_x2:
+			cab.add_child(HangarKit.box(
+				Vector3(0.0, _well_y + well_depth * 0.5, sgn2 * (half_field - 0.008)),
+				Vector3(half_field * 2.0, well_depth, 0.016), dark))
+		else:
+			cab.add_child(HangarKit.box(
+				Vector3(sgn2 * (half_field - 0.008), _well_y + well_depth * 0.5, 0.0),
+				Vector3(0.016, well_depth, half_field * 2.0), dark))
+	# ember line along the well's near lip (G7)
+	cab.add_child(HangarKit.box(
+		Vector3(0, deck_y - 0.004, half_field - 0.014),
+		Vector3(half_field * 1.9, 0.005, 0.005), accent))
+
+	# ── apron + legs: the furniture's own footing ──
+	var apron_y: float = deck_y - rail_h - 0.055
+	for i in range(4):
+		var along_x3: bool = i < 2
+		var sgn3: float = -1.0 if i % 2 == 0 else 1.0
+		if along_x3:
+			cab.add_child(HangarKit.box(
+				Vector3(0.0, apron_y, sgn3 * (half_out - 0.02)),
+				Vector3(half_out * 1.94, 0.075, 0.03), steel))
+		else:
+			cab.add_child(HangarKit.box(
+				Vector3(sgn3 * (half_out - 0.02), apron_y, 0.0),
+				Vector3(0.03, 0.075, half_out * 1.94), steel))
+	# vents in the APRON, seen from below
+	for i in range(5):
+		cab.add_child(HangarKit.box(
+			Vector3(-0.22 + float(i) * 0.11, apron_y, half_out - 0.004),
+			Vector3(0.055, 0.012, 0.006), dark))
+	var leg_h: float = apron_y - 0.037
+	for sx in [-1.0, 1.0]:
+		for sz in [-1.0, 1.0]:
+			cab.add_child(HangarKit.box(
+				Vector3(sx * (half_out - 0.055), leg_h * 0.5, sz * (half_out - 0.055)),
+				Vector3(0.045, leg_h, 0.045), legs_mat))
+
+	# ── name INLAID FLAT in the near rail, read by looking down as you approach ──
+	var name_tag: MeshInstance3D = HangarKit.stencil(
+		"BASIS VECTORS", Vector2(0.34, 0.030), col_accent.lightened(0.35))
+	if name_tag:
+		name_tag.position = Vector3(-0.10, deck_y + 0.002, half_field + rail_w * 0.5)
+		name_tag.rotation_degrees = Vector3(-90, 0, 0)
+		cab.add_child(name_tag)
+	var code_tag: MeshInstance3D = HangarKit.stencil(
+		unit_code, Vector2(0.10, 0.024), col_accent.lightened(0.20))
+	if code_tag:
+		code_tag.position = Vector3(half_field - 0.06, deck_y + 0.002, half_field + rail_w * 0.5)
+		code_tag.rotation_degrees = Vector3(-90, 0, 0)
+		cab.add_child(code_tag)
+
+
 func _create_ground():
+	if table_body:
+		return   # the well's basin floor IS the ground the arrows read against
 	_ground = VectorVisuals.create_ground(self, axis_length * 3)
+
+## Where the phenomenon lives. On a table the arrows are BASED in the well and
+## rise from it; without a table they keep their original origin. Marked
+## phenomenon so the grammar's no-orphan-text rule measures the interface and not
+## the subject — î, ĵ, k̂ are pinned to the arrows' own geometry, and a basis
+## vector's label belongs to the vector.
+func _stage() -> Node3D:
+	if not table_body:
+		return self
+	if _rig == null:
+		_rig = Node3D.new()
+		_rig.name = "BasisRig"
+		_rig.set_meta("phenomenon", true)
+		_rig.position = Vector3(0, _well_y, 0)
+		add_child(_rig)
+	return _rig
+
 
 func _create_basis_arrows():
 	_arrow_i = _create_basis_arrow("ArrowI", color_i, "î", "X")
 	_arrow_j = _create_basis_arrow("ArrowJ", color_j, "ĵ", "Y")
 	_arrow_k = _create_basis_arrow("ArrowK", color_k, "k̂", "Z")
 
-	add_child(_arrow_i)
-	add_child(_arrow_j)
-	add_child(_arrow_k)
+	var stage: Node3D = _stage()
+	stage.add_child(_arrow_i)
+	stage.add_child(_arrow_j)
+	stage.add_child(_arrow_k)
 
 # Assembles a single basis arrow: shaft, head, glow shell, two labels
 func _create_basis_arrow(arrow_name: String, color: Color, unit_label: String, axis_label: String) -> Node3D:
@@ -215,7 +376,7 @@ func _create_component_lines():
 	mat.emission_energy_multiplier = 0.3
 	_component_mmi.material_override = mat
 
-	add_child(_component_mmi)
+	_stage().add_child(_component_mmi)
 
 func _create_point_marker():
 	_point_marker = MeshInstance3D.new()
@@ -234,7 +395,7 @@ func _create_point_marker():
 	mat.metallic = 0.5
 	mat.roughness = 0.3
 	_point_marker.material_override = mat
-	add_child(_point_marker)
+	_stage().add_child(_point_marker)
 
 	_point_glow = MeshInstance3D.new()
 	_point_glow.name = "PointGlow"
@@ -246,25 +407,79 @@ func _create_point_marker():
 	var glow_mat = _glow_mat_template.duplicate() as StandardMaterial3D
 	glow_mat.albedo_color = Color(color_point.r, color_point.g, color_point.b, 0.15)
 	_point_glow.material_override = glow_mat
-	add_child(_point_glow)
+	_stage().add_child(_point_glow)
 
-	_handle_point = VectorVisuals.create_handle(self, "HandlePoint", color_point, 0.05)
+	_handle_point = VectorVisuals.create_handle(_stage(), "HandlePoint", color_point, 0.05)
 	_handle_point.position = target_point
 
 func _create_labels():
-	_title_panel = VectorVisuals.create_panel(self, "TitlePanel",
-		"BASIS VECTORS",
-		Vector3(0, axis_length + 0.35, -axis_length - 0.15),
-		Vector2(0.38, 0.08), 22)
+	if not table_body:
+		_title_panel = VectorVisuals.create_panel(self, "TitlePanel",
+			"BASIS VECTORS",
+			Vector3(0, axis_length + 0.35, -axis_length - 0.15),
+			Vector2(0.38, 0.08), 22)
 
-	_coords_panel = VectorVisuals.create_panel(self, "CoordsPanel", "",
-		Vector3(axis_length + 0.2, axis_length * 0.5, 0),
-		Vector2(0.48, 0.18), 13, HORIZONTAL_ALIGNMENT_LEFT)
-	_coords_panel.rotation_degrees = Vector3(0, -90, 0)
+		_coords_panel = VectorVisuals.create_panel(self, "CoordsPanel", "",
+			Vector3(axis_length + 0.2, axis_length * 0.5, 0),
+			Vector2(0.48, 0.18), 13, HORIZONTAL_ALIGNMENT_LEFT)
+		_coords_panel.rotation_degrees = Vector3(0, -90, 0)
+		return
+
+	# The title is already INLAID FLAT in the near rail by _create_table(), so no
+	# floating title panel. The coordinate readout is SUNK INTO THE FAR RAIL, 14
+	# degrees off the deck plane and tilted toward the reader — the horizontal
+	# translation of the vertical dialect's inset screen.
+	var deck_y: float = deck_height
+	var half_field: float = axis_length * 0.95
+	var rail_w: float = 0.11
+	var scr_w: float = 0.46
+	var scr_h: float = 0.15
+	var far_z: float = -(half_field + rail_w * 0.5)
+	var tilt: float = -90.0 + 14.0
+
+	var pal: Dictionary = HangarKit.finish_palette(finish)
+	var dark: StandardMaterial3D = HangarKit.painted_metal(
+		Color(0.07, 0.075, 0.09), wear, 0.35, 0.55)
+	var accent: StandardMaterial3D = HangarKit.emissive(pal["accent"], 2.0)
+
+	# milled pocket, sunk into the rail's top face
+	var pocket: MeshInstance3D = HangarKit.box(
+		Vector3(0, deck_y - 0.012, far_z),
+		Vector3(scr_w + 0.028, 0.016, scr_h + 0.026), dark)
+	_cab.add_child(pocket)
+	# lit face + the family's canonical glass, both laid at the rail's rake
+	var face: MeshInstance3D = HangarKit.box(
+		Vector3(0, deck_y - 0.004, far_z),
+		Vector3(scr_w, scr_h, 0.005), HangarKit.emissive(pal["screen"], 0.45))
+	face.rotation_degrees = Vector3(tilt, 0, 0)
+	_cab.add_child(face)
+	var glass_mat := StandardMaterial3D.new()
+	glass_mat.albedo_color = Color(0.04, 0.05, 0.08)
+	glass_mat.roughness = 0.15
+	glass_mat.emission_enabled = true
+	glass_mat.emission = Color(0.05, 0.08, 0.12)
+	glass_mat.emission_energy_multiplier = 0.5
+	var glass: MeshInstance3D = HangarKit.box(
+		Vector3(0, deck_y - 0.001, far_z), Vector3(scr_w, scr_h, 0.004), glass_mat)
+	glass.rotation_degrees = Vector3(tilt, 0, 0)
+	_cab.add_child(glass)
+	# ember lip along the pocket's far edge
+	_cab.add_child(HangarKit.box(
+		Vector3(0, deck_y - 0.006, far_z - scr_h * 0.5 - 0.008),
+		Vector3(scr_w + 0.028, 0.005, 0.005), accent))
+
+	# the live readout itself, lying in the pocket at the same rake
+	_coords_panel = VectorVisuals.create_panel(_cab, "CoordsPanel", "",
+		Vector3(0, deck_y + 0.004, far_z),
+		Vector2(scr_w * 0.94, scr_h * 0.92), 13, HORIZONTAL_ALIGNMENT_LEFT)
+	_coords_panel.rotation_degrees = Vector3(tilt, 0, 0)
+	HangarKit.harmonize(_coords_panel, finish)
 
 func _create_vr_controls():
 	var RackTpl: GDScript = load("res://commons/audio/rack_templates/RackTemplates.gd")
-	_control_panel = RackTpl.create_panel("BASIS", [
+	# Frameless on a table: the milled pocket is the faceplate, and RackTemplates'
+	# own cream plate + copper strip would read as a second manufacturer (G4).
+	_control_panel = RackTpl.create_panel("" if table_body else "BASIS", [
 		[
 			{"type": "button", "label": "PURE X"},
 			{"type": "button", "label": "PURE Y"},
@@ -277,10 +492,31 @@ func _create_vr_controls():
 			{"type": "button", "label": "TILT"},
 			{"type": "button", "label": "SPIN"},
 		],
-	])
-	_control_panel.position = Vector3(0, 0.06, axis_length + 0.35)
-	_control_panel.rotation_degrees = Vector3(-30, 0, 0)
-	add_child(_control_panel)
+	], table_body)
+	if table_body:
+		# Keypad recessed FLUSH in a milled pocket in the near rail, face-up and
+		# pressed downward — frameless, because on furniture the pocket IS the
+		# faceplate. Previously this panel floated at y=0.06, a hand's width off
+		# the floor and nowhere near the reach band.
+		var deck_y: float = deck_height
+		var half_field: float = axis_length * 0.95
+		var rail_w: float = 0.11
+		var near_z: float = half_field + rail_w * 0.5
+		var pad_w: float = float(_control_panel.get_meta("panel_w", 0.34))
+		var pad_d: float = float(_control_panel.get_meta("panel_h", 0.16))
+		var dark2: StandardMaterial3D = HangarKit.painted_metal(
+			Color(0.07, 0.075, 0.09), wear, 0.35, 0.55)
+		_cab.add_child(HangarKit.box(
+			Vector3(0.16, deck_y - 0.014, near_z),
+			Vector3(pad_w + 0.030, 0.020, pad_d + 0.026), dark2))
+		_control_panel.position = Vector3(0.16, deck_y - 0.002, near_z)
+		_control_panel.rotation_degrees = Vector3(-90, 0, 0)
+		HangarKit.harmonize(_control_panel, finish)
+		_cab.add_child(_control_panel)
+	else:
+		_control_panel.position = Vector3(0, 0.06, axis_length + 0.35)
+		_control_panel.rotation_degrees = Vector3(-30, 0, 0)
+		add_child(_control_panel)
 
 	# Point preset buttons (row 0: Btn_0 .. Btn_4)
 	var point_presets: Array[Vector3] = [
