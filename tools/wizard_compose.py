@@ -68,6 +68,7 @@ DEFAULT_SPEC = {
     "doors": {"enabled": True, "accent": ""},
     # style "br" = the project's own bridge primitive (transparent grid walkway,
     # pathfinder-native); "deck" = raised deck + aligned wedges (the first build)
+    "service": {"enabled": True, "in_cycle": True},
     "spans": {"enabled": True, "railings": True, "style": "br"},
     "landmark": {"enabled": True, "height": 4},
     "lights": {"enabled": True, "every": 7},
@@ -605,9 +606,13 @@ def compose(spec):
                               railings=_sp.get("railings", True),
                               style=_sp.get("style", "br")))
     _lm = spec.get("landmark") or {}
+    _span_stage = next((s for s in stages if s.get("op") == "spans"), {})
+    _avoid = [tuple(c) for c in (_span_stage.get("chasm") or [])] + \
+             [tuple(c) for c in (_span_stage.get("deck") or [])]
     stages.append(place_landmark(S, W, D, floor, dist_map,
                                  enabled=_lm.get("enabled", True),
-                                 height=int(_lm.get("height", 4))))
+                                 height=int(_lm.get("height", 4)),
+                                 avoid=_avoid))
     _li = spec.get("lights") or {}
     stages.append(place_lights(U, W, D, floor, dist_map, spawn_a, tp,
                                every=int(_li.get("every", 7)),
@@ -925,6 +930,19 @@ def place_spans(S, U, I, WL, W, D, floor, spawn, targets, hall, passage, enabled
             d1 = max(deck, key=lambda c: c[0] * dx + c[1] * dz)
             ends = ((d0[0] - dx, d0[1] - dz), (d1[0] + dx, d1[1] + dz))
             if any(e not in floor for e in ends): continue
+            if style in ("br", "tc"):
+                # the corpus idiom: void-crossings join FLAT floors of equal
+                # height; a procession-raised far side is a climb off a void
+                # bridge, which severs (learned at reach 0.51)
+                def _h(c):
+                    try: return int(float(str(S[c[1]][c[0]]).strip() or 0))
+                    except Exception: return 0
+                if _h(ends[0]) != _h(ends[1]): continue
+                # br cells are walkable AT HEIGHT 1 (pathfinder's own rule), so a
+                # bridge between raised floors is a climb off the deck — ground
+                # level only. tc jumps lip-to-lip and does not care.
+                if style == "br" and _h(ends[0]) != 1: continue
+                if str(U[ends[0][1]][ends[0][0]]).strip(): continue
             chain = [ends[0]] + sorted(deck, key=lambda c: c[0] * dx + c[1] * dz) + [ends[1]]
             if any(wall_between(WL, chain[i], chain[i + 1], W, D) for i in range(len(chain) - 1)):
                 continue                      # lands against a wall — not a crossing
@@ -948,9 +966,6 @@ def place_spans(S, U, I, WL, W, D, floor, spawn, targets, hall, passage, enabled
                 return {"op": "spans", "placed": False,
                         "why": "chasm found but both climbs are not placeable "
                                "(LIFT law) — left the walk whole"}
-            if style in ("br", "tc") and str(U[ends[0][1]][ends[0][0]]).strip():
-                return {"op": "spans", "placed": False,
-                        "why": "chasm found but the bridge's near end is occupied"}
             for c in chasm:
                 S[c[1]][c[0]] = "0"
             floor -= set(chasm)
@@ -964,7 +979,7 @@ def place_spans(S, U, I, WL, W, D, floor, spawn, targets, hall, passage, enabled
                     S[c[1]][c[0]] = "0"
                 floor -= set(deck)
                 axis = "z" if dz else "x"
-                dist = len(deck) + 1
+                dist = len(deck) + 1          # lip -> lip across the whole cut
                 start = ends[0]
                 bridge_tok = "tc:%d:%s:auto" % (dist, axis)
                 U[start[1]][start[0]] = bridge_tok
@@ -975,9 +990,12 @@ def place_spans(S, U, I, WL, W, D, floor, spawn, targets, hall, passage, enabled
                 for c in deck:
                     S[c[1]][c[0]] = "0"
                 floor -= set(deck)
+                # THE CORPUS IDIOM (Brouwer_Intuitionism): the br token sits ON
+                # a void cell and spans void; the floors it joins are flat and
+                # equal. Length counts the void cells still to cross after it.
+                axis = "z" if dz else "x"
+                start = (ends[0][0] + dx, ends[0][1] + dz)       # first void cell
                 span_len = len(deck)
-                axis = ("z" if dz else "x") if (dx + dz) >= 0 else ("-z" if dz else "-x")
-                start = ends[0]
                 bridge_tok = "br:%s:%d" % (axis, span_len)
                 U[start[1]][start[0]] = bridge_tok
             else:
@@ -1035,7 +1053,7 @@ def place_spans(S, U, I, WL, W, D, floor, spawn, targets, hall, passage, enabled
                     "wedges, %d railings" % (openness, len(wedges), len(rail)))}
 
 
-def place_landmark(S, W, D, floor, dist, enabled=True, height=4):
+def place_landmark(S, W, D, floor, dist, enabled=True, height=4, avoid=None):
     """A village-square landmark: one stepped tower, visible from the whole walk,
     built on VOID beside the busiest floor so it never costs a walkable cell."""
     if not enabled:
@@ -1047,6 +1065,8 @@ def place_landmark(S, W, D, floor, dist, enabled=True, height=4):
             c = (x + dx, z + dz)
             if not (1 <= c[0] < W - 1 and 1 <= c[1] < D - 1): continue
             if S[c[1]][c[0]] != "0": continue
+            if avoid and any(abs(c[0] - a[0]) <= 1 and abs(c[1] - a[1]) <= 1 for a in avoid):
+                continue            # never fill the span's gorge
             around = sum(1 for ax in range(-2, 3) for az in range(-2, 3)
                          if (c[0] + ax, c[1] + az) in floor)
             mid_walk = 1.0 - abs(dist.get((x, z), 0) / maxd - 0.5) * 2
@@ -1272,6 +1292,11 @@ HARVEST_PATH = ROOT / "commons/data/wizard_track_harvested.json"
 def compose_track(spec):
     T = json.loads(TRACKS_PATH.read_text(encoding="utf-8"))
     SEG = dict(T["segments"]); CYCLE = list(T["content_cycle"])
+    # the SERVICE REGISTER joins the cycle regardless of harvest (back-of-house
+    # is not an optional extra — it is what a service corridor is made of)
+    for _k in ("service_riser", "loading_bay", "plant_room"):
+        if _k in SEG and _k not in CYCLE and (spec.get("service") or {}).get("in_cycle", True):
+            CYCLE.append(_k)
     # HARVESTED segments (tools/harvest_segments.py): windows cut from the
     # best-organized hand maps, spine-aligned to x=6 so they concatenate.
     # spec.track.harvest = false to compose from authored segments only.
@@ -1342,6 +1367,7 @@ def compose_track(spec):
     threshold, parapet = set(), set()
     hallc, yardc = set(), set()
     seg_rooms = []          # (si, set of room cells)
+    service_placed = []     # back-of-house dressing (trays, vents, hangar props)
     spawn, tp = None, None
     for si, name in enumerate(plan):
         sg = SEG[name]; z0 = bases[si]
@@ -1366,6 +1392,25 @@ def compose_track(spec):
             slots.append({"cell": (sl["cell"][0], z0 + sl["cell"][1]), "cap": sl.get("cap", 4),
                           "prologue": sl.get("prologue", False), "anti": sl.get("anti", False),
                           "seg": si, "segname": name})
+        # SERVICE REGISTER: cable trays along the walk, vents overhead, hangar
+        # props against the wall — the back-of-house dressing a segment declares.
+        svc = sg.get("service") or {}
+        if (spec.get("service") or {}).get("enabled", True):
+            for (sx, sz) in svc.get("trays", []):
+                gz = z0 + sz
+                if 0 <= sx < W and 0 <= gz < D and not str(I[gz][sx]).strip():
+                    I[gz][sx] = "cable_tray"
+                    service_placed.append({"token": "cable_tray", "cell": [sx, gz]})
+            for (sx, sz) in svc.get("vents", []):
+                gz = z0 + sz
+                if 0 <= sx < W and 0 <= gz < D and not str(I[gz][sx]).strip():
+                    I[gz][sx] = "ceiling_vent:0:2.6"
+                    service_placed.append({"token": "ceiling_vent", "cell": [sx, gz]})
+            for tok, (sx, sz) in svc.get("props", []):
+                gz = z0 + sz
+                if 0 <= sx < W and 0 <= gz < D and not str(I[gz][sx]).strip():
+                    I[gz][sx] = tok
+                    service_placed.append({"token": tok, "cell": [sx, gz]})
         for (x, z) in sg.get("threshold", []): threshold.add((x, z0 + z))
         for w in sg.get("walls", []): walls_auth.append((w[0], z0 + w[1], w[2], bool(w[3]), si))
 
@@ -1506,6 +1551,9 @@ def compose_track(spec):
     stages.append({"op": "walls", "segments": segs, "dressing": [], "floor": cl(floor),
                    "hall": cl(hallc), "rooms": [{"name": k, "cells": cl(c)} for k, c, _, _ in rooms],
                    "doors": [{"room": k, "cell": list(b), "to": list(nb)} for b, nb, k in door_info]})
+    stages.append({"op": "service", "placed": len(service_placed), "items": service_placed,
+                   "why": ("back-of-house dressing declared by the segments: cable trays along the "
+                           "walk, ceiling vents overhead, hangar props against the wall")})
     _dspec = spec.get("doors") or {}
     stages.append(place_doors(I, U, S, W, D,
                               [(b, nb, "invitation") for b, nb, _k in door_info], _dspec,
@@ -1552,9 +1600,13 @@ def compose_track(spec):
                               railings=_sp.get("railings", True),
                               style=_sp.get("style", "br")))
     _lm = spec.get("landmark") or {}
+    _span_stage = next((s for s in stages if s.get("op") == "spans"), {})
+    _avoid = [tuple(c) for c in (_span_stage.get("chasm") or [])] + \
+             [tuple(c) for c in (_span_stage.get("deck") or [])]
     stages.append(place_landmark(S, W, D, floor, dist_map,
                                  enabled=_lm.get("enabled", True),
-                                 height=int(_lm.get("height", 4))))
+                                 height=int(_lm.get("height", 4)),
+                                 avoid=_avoid))
     _li = spec.get("lights") or {}
     stages.append(place_lights(U, W, D, floor, dist_map, spawn, tp,
                                every=int(_li.get("every", 7)),

@@ -1,6 +1,6 @@
 {
  "_comment": "THE ORDER OF OPERATIONS for map composition — canon, editable. Palle 2026-07-24: 'this is about order of operation, what is included in what order... then auto research to create the best combination or new strategies.' The research engines READ this file (stages, metric weights, bands): edit here, re-run, the search changes. Rounds history at the bottom. Sibling canons: cabinet_grammar.json, systems_fold.json.",
- "version": 9,
+ "version": 10,
  "operations": [
   {
    "n": 1,
@@ -86,7 +86,7 @@
     "carve+deck",
     "causeway"
    ],
-   "note": "deck rises one step, aligned wedges at BOTH ends (LIFT law — a one-wedge bridge scored reach 0.51), hb railings on the void flanks (first use of hb in 1,987 maps). Preconditions beat reverts: check the climbs are placeable and the chain is WALL-FREE before mutating — the first carve landed against a chamber's north wall segment and severed the track (the SEAM law's cousin: consult layers.walls, not just floor). CORRECTION 2026-07-25: I built decks-and-wedges on the belief that 'bridges have no code'. They do, and the pathfinder models them natively: br:AXIS:LENGTH (transparent grid walkway over void, 24 corpus uses) and tc:DIST:AXIS[:auto] (transport cube ferry, 481 uses, modelled as a bidirectional tc_adj edge pos<->pos±dist). Default is now style='br'; 'tc' ferries; 'deck' keeps the raised-deck+wedge build. All three verified at reach 0.97 on the same track."
+   "note": "deck rises one step, aligned wedges at BOTH ends (LIFT law — a one-wedge bridge scored reach 0.51), hb railings on the void flanks (first use of hb in 1,987 maps). Preconditions beat reverts: check the climbs are placeable and the chain is WALL-FREE before mutating — the first carve landed against a chamber's north wall segment and severed the track (the SEAM law's cousin: consult layers.walls, not just floor). CORRECTION 2026-07-25: I built decks-and-wedges on the belief that 'bridges have no code'. They do, and the pathfinder models them natively: br:AXIS:LENGTH (transparent grid walkway over void, 24 corpus uses) and tc:DIST:AXIS[:auto] (transport cube ferry, 481 uses, modelled as a bidirectional tc_adj edge pos<->pos±dist). Default is now style='br'; 'tc' ferries; 'deck' keeps the raised-deck+wedge build. All three verified at reach 0.97 on the same track. BR IDIOM (learned from Brouwer_Intuitionism, the only corpus map using br): the token sits ON a void cell, spans void, and the pathfinder walks its cells AT HEIGHT 1 — so a br between procession-raised (h2) floors is a climb off the deck and severs (reach 0.51 twice). br now requires ground-level ends; tc jumps lip-to-lip and only requires equal heights. The landmark is also forbidden from filling a span's gorge."
   },
   {
    "n": 7,
@@ -261,5 +261,6 @@
   "move_player": "m — displacement without geometry. NOT USED",
   "door": "lab_sliding_door frame + exit_sign (op 4.3). USED",
   "railing": "hb horizontal_border on the void flanks of a span. USED"
- }
+ },
+ "_intent": "Palle 2026-07-25, naming what this composes: 'the service corridor of life, just between the big stage and nothing, the supportive structure of a big mall, a middle abstract world, but the consort are real, the world is trying to learn from the outside thing to put it together, a threshold investing itself but salvage what it already knows in a corridor space.' READ THIS BEFORE ADDING OPERATIONS. It settles what the machine is for: (1) the TRACK is the corridor — 13 wide, as long as needed, between the show and the void; (2) HARVEST is the salvage — the corpus's own maps cut into segments rather than invented; (3) ARRIVAL + DOORS + SIGNS are the threshold investing itself; (4) the MEASURED FLOOR keeps the consort real — the frame is abstract, the artifacts are not; (5) the SERVICE REGISTER (service_riser, loading_bay, plant_room + cable trays, vents, supply piles, cabinets) is the back-of-house: this is the spine BEHIND the mall, not another showroom. Front-of-house segments (gallery_pair, court_open) remain available but are not the point."
 }
