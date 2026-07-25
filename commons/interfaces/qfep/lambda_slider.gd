@@ -35,6 +35,20 @@ signal slider_released()
 		_update_visuals()
 		emit_signal("lambda_changed", lambda)
 
+## Housing — cabinet grammar, VERTICAL dialect (body = "scale lectern").
+## This was the purest case of the pattern the grammar exists to fix: a bare rail
+## lying at y=0 with its ORDER / EDGE / CHAOS marks at y=-0.05, BELOW the floor, and
+## the λ value billboarding in the air above it. Nothing to stand at, nothing to
+## reach. The lectern gives the rail a body: the slider rides a wedge shoulder in
+## the reach band, the scale marks are inlaid on the fascia beneath it, and the
+## value reads from a screen seated in the backboard.
+@export var console_body: bool = true
+@export var finish: String = "terminal"
+@export var wear: float = 0.10
+@export var unit_code: String = "LM-02"
+## Height of the shoulder the rail rides on.
+@export var deck_height: float = 0.95
+
 ## Visual size of the slider rail
 @export var rail_length: float = 0.5
 @export var rail_height: float = 0.02
@@ -62,6 +76,9 @@ var _particles: GPUParticles3D
 var _rail_material: StandardMaterial3D
 var _handle_material: StandardMaterial3D
 var _is_grabbed: bool = false
+const HangarKit = preload("res://commons/artifacts/_hangar/hangar_kit.gd")
+var _cab: Node3D     # the lectern
+var _rig: Node3D     # the rail assembly, lifted onto the shoulder
 
 # Glow parameters (like grab_sphere)
 const GLOW_EMISSION_ENERGY: float = 2.0
@@ -72,6 +89,8 @@ const COLOR_EDGE = Color(0.2, 0.9, 0.4, 1.0)       # Green - edge of chaos (λ�
 const COLOR_CHAOS = Color(0.9, 0.2, 0.2, 1.0)      # Red - pure chaos (λ=1)
 
 func _ready() -> void:
+	if console_body:
+		_create_console()
 	_build_slider()
 	_build_visuals()
 	_update_visuals()
@@ -81,6 +100,112 @@ func _ready() -> void:
 		add_to_group("qfep_lambda_controllers")
 	
 	print("LambdaSlider ready at λ = %.2f" % lambda)
+
+## Where the rail rides. The slider is authored from x=0 to x=rail_length at y=0,
+## so the stage centres it on the shoulder and lifts it into the reach band without
+## touching a single authored coordinate.
+func _stage() -> Node3D:
+	if not console_body:
+		return self
+	if _rig == null:
+		_rig = Node3D.new()
+		_rig.name = "RailAssembly"
+		_rig.position = Vector3(-rail_length * 0.5, deck_height + 0.055, 0.055)
+		add_child(_rig)
+	return _rig
+
+
+## THE LECTERN. A column to the floor, a wedge shoulder the rail rides on, and a
+## backboard carrying the λ readout under a sign band.
+func _create_console() -> void:
+	var pal: Dictionary = HangarKit.finish_palette(finish)
+	var col_body: Color = pal["body"]
+	var col_accent: Color = pal["accent"]
+	var shell: StandardMaterial3D = HangarKit.finish_body(finish, col_body, wear)
+	var steel: StandardMaterial3D = HangarKit.worn_metal(col_body.lightened(0.10))
+	var dark: StandardMaterial3D = HangarKit.painted_metal(
+		Color(0.07, 0.075, 0.09), wear, 0.35, 0.55)
+	var accent: StandardMaterial3D = HangarKit.emissive(col_accent, 2.2)
+
+	var w: float = rail_length + 0.13
+	var d: float = 0.30
+	var h: float = deck_height
+	var face_z: float = d * 0.5
+
+	var cab := Node3D.new()
+	cab.name = "Cabinet"
+	cab.set_meta("housing", true)
+	add_child(cab)
+	_cab = cab
+
+	# column to the floor (G2)
+	cab.add_child(HangarKit.box(Vector3(0, h * 0.5, 0), Vector3(w, h, d), shell))
+	cab.add_child(HangarKit.box(
+		Vector3(0, 0.03, 0), Vector3(w - 0.10, 0.06, d - 0.10), dark))
+	var gb: MeshInstance3D = HangarKit.grime_band(w * 0.88, 0.05, face_z + 0.003, col_body)
+	if gb:
+		gb.position.y = 0.075
+		cab.add_child(gb)
+	for sx in [-1.0, 1.0]:
+		cab.add_child(HangarKit.box(
+			Vector3(sx * (w * 0.5 + 0.015), h * 0.5, 0.0),
+			Vector3(0.030, h, d + 0.016), steel))
+	# ember line under the working lip (G7)
+	cab.add_child(HangarKit.box(
+		Vector3(0, h - 0.012, face_z + 0.004),
+		Vector3(w * 0.98, 0.007, 0.006), accent))
+	var code: MeshInstance3D = HangarKit.stencil(
+		unit_code, Vector2(0.10, 0.024), col_accent.lightened(0.22))
+	if code:
+		code.position = Vector3(-w * 0.5 + 0.09, h - 0.10, face_z + 0.004)
+		cab.add_child(code)
+	var bar: Node3D = HangarKit.three_color_bar(w * 0.34, 0.013)
+	if bar:
+		bar.position = Vector3(0.0, 0.30, face_z + 0.005)
+		cab.add_child(bar)
+
+	# wedge shoulder — the sloped shelf the rail rides on
+	var shoulder: MeshInstance3D = HangarKit.wedge(w * 0.94, 0.11, d * 0.86, d * 0.30, steel)
+	if shoulder:
+		shoulder.position = Vector3(0.0, h + 0.045, -d * 0.40)
+		cab.add_child(shoulder)
+
+	# backboard + cap sign band (G1: the title is part of the body)
+	var back_h: float = 0.30
+	var back_z: float = -d * 0.5 + 0.035
+	cab.add_child(HangarKit.box(
+		Vector3(0, h + back_h * 0.5, back_z), Vector3(w, back_h, 0.07), shell))
+	cab.add_child(HangarKit.box(
+		Vector3(0, h + back_h + 0.026, back_z), Vector3(w + 0.04, 0.052, 0.10), steel))
+	var sign: MeshInstance3D = HangarKit.stencil(
+		"LAMBDA", Vector2(w * 0.52, 0.030), col_accent.lightened(0.35))
+	if sign:
+		sign.position = Vector3(0, h + back_h + 0.026, back_z + 0.052)
+		cab.add_child(sign)
+
+	# λ readout seated in a milled pocket on the backboard
+	var scr_w: float = w * 0.52
+	var scr_h: float = 0.14
+	var scr_y: float = h + back_h * 0.52
+	var scr_z: float = back_z + 0.035
+	cab.add_child(HangarKit.box(
+		Vector3(0, scr_y, scr_z + 0.002),
+		Vector3(scr_w + 0.026, scr_h + 0.030, 0.014), dark))
+	cab.add_child(HangarKit.box(
+		Vector3(0, scr_y, scr_z + 0.009),
+		Vector3(scr_w, scr_h, 0.005), HangarKit.emissive(pal["screen"], 0.45)))
+	var glass := StandardMaterial3D.new()
+	glass.albedo_color = Color(0.04, 0.05, 0.08)
+	glass.roughness = 0.15
+	glass.emission_enabled = true
+	glass.emission = Color(0.05, 0.08, 0.12)
+	glass.emission_energy_multiplier = 0.5
+	cab.add_child(HangarKit.box(
+		Vector3(0, scr_y, scr_z + 0.0135), Vector3(scr_w, scr_h, 0.004), glass))
+	cab.add_child(HangarKit.box(
+		Vector3(0, scr_y + scr_h * 0.5 + 0.010, scr_z + 0.011),
+		Vector3(scr_w + 0.026, 0.005, 0.005), accent))
+
 
 func _build_slider() -> void:
 	# Create the XR Tools slider - horizontal along X axis
@@ -132,7 +257,7 @@ func _build_slider() -> void:
 	_slider.add_child(handle_origin)
 	
 	# NOW add to tree - slider._ready() will find and hook the handle
-	add_child(_slider)
+	_stage().add_child(_slider)
 	
 	# Connect our own signals after hierarchy is set up
 	if _slider.has_signal("slider_moved"):
@@ -156,7 +281,7 @@ func _build_visuals() -> void:
 	_rail_material.metallic = 0.3
 	_rail_material.roughness = 0.7
 	_rail_mesh.material_override = _rail_material
-	add_child(_rail_mesh)
+	_stage().add_child(_rail_mesh)
 	
 	# Build gradient overlay on rail
 	_build_rail_gradient()
@@ -183,9 +308,15 @@ func _build_visuals() -> void:
 		_label.text = "λ = 0.40"
 		_label.font_size = 48
 		_label.pixel_size = 0.001
-		_label.position = Vector3(rail_length / 2, rail_height + 0.05, 0)
-		_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-		add_child(_label)
+		if console_body:
+			# Reads AGAINST the screen seated in the backboard — no billboard, because
+			# a value that turns to follow you is not part of the instrument.
+			_label.position = Vector3(0, deck_height + 0.30 * 0.52, -0.30 * 0.5 + 0.055)
+			_cab.add_child(_label)
+		else:
+			_label.position = Vector3(rail_length / 2, rail_height + 0.05, 0)
+			_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+			add_child(_label)
 		
 		# Add sublabels for scale
 		_build_scale_labels()
@@ -218,7 +349,7 @@ func _build_rail_gradient() -> void:
 		mat.albedo_color.a = 0.6
 		segment.material_override = mat
 		
-		add_child(segment)
+		_stage().add_child(segment)
 
 func _build_scale_labels() -> void:
 	# Order label (λ=0)
@@ -228,7 +359,7 @@ func _build_scale_labels() -> void:
 	label_order.pixel_size = 0.001
 	label_order.position = Vector3(0, -rail_height - 0.03, 0)
 	label_order.modulate = COLOR_ORDER
-	add_child(label_order)
+	_stage().add_child(label_order)
 	
 	# Edge label (λ≈0.4)
 	var label_edge = Label3D.new()
@@ -237,7 +368,7 @@ func _build_scale_labels() -> void:
 	label_edge.pixel_size = 0.001
 	label_edge.position = Vector3(rail_length * 0.4, -rail_height - 0.03, 0)
 	label_edge.modulate = COLOR_EDGE
-	add_child(label_edge)
+	_stage().add_child(label_edge)
 	
 	# Chaos label (λ=1)
 	var label_chaos = Label3D.new()
@@ -246,7 +377,7 @@ func _build_scale_labels() -> void:
 	label_chaos.pixel_size = 0.001
 	label_chaos.position = Vector3(rail_length, -rail_height - 0.03, 0)
 	label_chaos.modulate = COLOR_CHAOS
-	add_child(label_chaos)
+	_stage().add_child(label_chaos)
 
 func _build_particles() -> void:
 	_particles = GPUParticles3D.new()
@@ -272,7 +403,7 @@ func _build_particles() -> void:
 	particle_mesh.height = 0.01
 	_particles.draw_pass_1 = particle_mesh
 	
-	add_child(_particles)
+	_stage().add_child(_particles)
 
 func _on_slider_moved(position: float) -> void:
 	# Convert slider position to lambda value

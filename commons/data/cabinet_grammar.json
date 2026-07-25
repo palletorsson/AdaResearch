@@ -117,7 +117,8 @@
     "ledger column",
     "slider lectern",
     "terrarium case",
-    "reel cabinet"
+    "reel cabinet",
+    "scale lectern"
    ]
   },
   "horizontal": {
@@ -387,6 +388,14 @@
    "dialect": "vertical",
    "body": "reel cabinet",
    "scene": "res://algorithms/randomness/slot_machine/slot_machine.tscn",
+   "propagation": 4,
+   "kit": true
+  },
+  {
+   "artifact": "lambda_slider",
+   "dialect": "vertical",
+   "body": "scale lectern",
+   "scene": "res://commons/interfaces/qfep/lambda_slider.tscn",
    "propagation": 4,
    "kit": true
   }
