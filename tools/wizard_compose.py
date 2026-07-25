@@ -467,10 +467,11 @@ def compose(spec):
 
     # 4c DOORS — a frame in every opening, state from the door's own truth
     _dspec = spec.get("doors") or {}
-    _door_list = []
+    _door_list, _names = [], {}
     for (bxz, nb, _k) in door_info:
         kind = "corridor" if (mouth_door and bxz == mouth_door[0]) else "invitation"
         _door_list.append((bxz, nb, kind))
+        _names[tuple(bxz)] = str(_k).replace("_", " ")
     if threshold:
         # the arrival's own door: the last cell of the compression corridor,
         # opening east into the release — CORRIDOR state, you must pass through
@@ -479,11 +480,13 @@ def compose(spec):
         if _trow:
             _tc = _trow[0]
             _door_list.append((_tc, (_tc[0] + 1, _tc[1]), "corridor"))
+            _names[tuple(_tc)] = "THRESHOLD"
     if yard_on:
         notch = (yard_c[0] - YARD_R, yard_c[1])          # the yard's view notch
         if 0 <= notch[0] < W and 0 <= notch[1] < D:
             _door_list.append((notch, (notch[0] - 1, notch[1]), "boundary"))
-    stages.append(place_doors(I, U, S, W, D, _door_list, _dspec))
+            _names[tuple(notch)] = "QUARANTINE"
+    stages.append(place_doors(I, U, S, W, D, _door_list, _dspec, _names))
 
     # 5 TEMPLATES_FIXED — the yard as a composition slot
     stages.append({"op": "templates_fixed", "enabled": yard_on,
@@ -771,7 +774,7 @@ DOOR_TOKEN = "lab_sliding_door"
 DOOR_STATE = {"corridor": 1.0, "invitation": 0.45, "boundary": 0.0}
 
 
-def place_doors(I, U, S, W, D, doors, spec_doors):
+def place_doors(I, U, S, W, D, doors, spec_doors, names=None):
     """doors: list of (cell, toward, kind) — cell hosts the frame, `toward` is the
     neighbour it opens onto, kind picks the open amount."""
     if not spec_doors.get("enabled", True):
@@ -795,10 +798,31 @@ def place_doors(I, U, S, W, D, doors, spec_doors):
             tok += "#accent_color:%s" % accent
         I[z][x] = tok
         out.append({"cell": [x, z], "rot": rot, "kind": kind, "open": amt})
-    return {"op": "doors", "placed": len(out), "doors": out,
+        # THE SIGN NAMES THE DOOR (exit_sign's declared relationship to
+        # sliding_door). Its truth: "a sign is the PROMISE that there IS a way
+        # out" — so green only for real egress, red for the quarantine warning,
+        # accent tint for a named room. Mounted on the wall BESIDE the opening
+        # (perpendicular to the swing) at head height, never floating in a hall.
+        if not spec_doors.get("signs", True):
+            continue
+        label = (names or {}).get(tuple(cell), "")
+        if not label:
+            continue
+        col = {"corridor": "0.20,0.80,0.30", "boundary": "0.85,0.20,0.18"}.get(kind, "0.35,0.60,0.95")
+        for perp in ((d[1], d[0]), (-d[1], -d[0])):
+            sx, sz = x + perp[0], z + perp[1]
+            if not (0 <= sx < W and 0 <= sz < D): continue
+            if str(I[sz][sx]).strip() or str(U[sz][sx]).strip(): continue
+            if str(S[sz][sx]).strip() in ("", "0"): continue
+            I[sz][sx] = "exit_sign:%d:2.0#text:%s#sign_color:%s" % (rot, label[:16].upper(), col)
+            out[-1]["sign"] = {"cell": [sx, sz], "text": label[:16].upper(), "color": col}
+            break
+    signs = sum(1 for e in out if e.get("sign"))
+    return {"op": "doors", "placed": len(out), "signs": signs, "doors": out,
             "states": DOOR_STATE,
             "why": ("sliding_door frames in every opening; the artifact's own truth is the "
-                    "logic — corridor 1.0, invitation 0.45, boundary 0.0")}
+                    "logic — corridor 1.0, invitation 0.45, boundary 0.0. %d exit_signs name "
+                    "the passages (green = egress, red = quarantine, accent = named room)" % signs)}
 
 
 # ---------- OP 6.5 SPANS · OP 9.5 LANDMARK + LIGHTS ----------
@@ -1445,7 +1469,8 @@ def compose_track(spec):
                    "doors": [{"room": k, "cell": list(b), "to": list(nb)} for b, nb, k in door_info]})
     _dspec = spec.get("doors") or {}
     stages.append(place_doors(I, U, S, W, D,
-                              [(b, nb, "invitation") for b, nb, _k in door_info], _dspec))
+                              [(b, nb, "invitation") for b, nb, _k in door_info], _dspec,
+                              {tuple(b): str(k).replace("_", " ") for b, _nb, k in door_info}))
     stages.append({"op": "templates_fixed", "enabled": bool(anti and yardc),
                    "yard": {"center": None, "r": 0, "cells": cl(yardc)} if yardc else None})
     profile = [{"i": i, "name": a, "h": (2 if sl["seg"] in lifted else 1), "art_h": round(union(a)[2], 2)}
