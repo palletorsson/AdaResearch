@@ -500,7 +500,7 @@ func _create_vr_controls() -> void:
 	# Seated ON the wedge's sloped top face, tilted to match its rake.
 	panel.position = Vector3(0.0, shoulder_y + 0.062, _face_z + wedge_d * 0.52)
 	panel.rotation_degrees = Vector3(-32, 0, 0)
-	_align_panel_to_family(panel)
+	HangarKit.harmonize(panel, finish)
 	_cab.add_child(panel)
 
 	# CRANK button (Btn_0)
@@ -523,29 +523,6 @@ func _create_vr_controls() -> void:
 		var area = seed_btn.get_node_or_null("InteractableAreaButton")
 		if area:
 			area.button_pressed.connect(func(_b): _randomize_seed())
-
-
-## RackTemplates panels ship with their own COPPER accent (0.75,0.38,0.13) — a
-## near-miss of the family accent, which reads as a different manufacturer bolted
-## onto the machine (G4). Because the panel is seated INSIDE the housing here, it
-## is part of this body and must speak its palette: retint the imported accent
-## rather than parenting the panel outside the cabinet to hide it from the rule.
-func _align_panel_to_family(node: Node) -> void:
-	if node is MeshInstance3D:
-		var mi: MeshInstance3D = node
-		var mat: Material = mi.material_override
-		if mat is StandardMaterial3D:
-			var sm: StandardMaterial3D = mat
-			var c: Color = sm.albedo_color
-			# copper-ish: warm, mid-red, low blue — the RackTemplates accent family
-			if c.r > 0.55 and c.g > 0.25 and c.g < 0.55 and c.b < 0.30:
-				var fresh: StandardMaterial3D = sm.duplicate()
-				fresh.albedo_color = color_accent
-				if fresh.emission_enabled:
-					fresh.emission = color_accent
-				mi.material_override = fresh
-	for child in node.get_children():
-		_align_panel_to_family(child)
 
 
 # ═════════════════════════════════════════════════════════════════════════════
