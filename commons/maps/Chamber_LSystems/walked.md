@@ -17,3 +17,30 @@ The chamber's verb is **to rewrite**. An L-system never adds from nothing — it
 ## The close (missing)
 
 The thread runs world → seed with no close between: after Assemblage_Same_Desire the grammars never gather — editor, curves, city, forest, and breeder meet no final room before the chamber plants the verb. The same inverted gap as randomness; it joins the one bench call.
+
+## The living floor (authored 2026-07-24)
+
+The map's own description already stated the chapter: *"Two grammars producing
+structure."* The floor now stages that argument instead of decorating it — and it
+is the same argument the mycelium thread settled last week.
+
+**The scheduled.** Around the practice target, `flora:lsystem` cells wake only to
+`catalyst.branching` — the mode this room's pedestal hands you. They sit as
+mirrored pairs about the target's row, because that is what a grammar *is*: it
+branches on schedule, so the fan comes out symmetric, a decorated rule. A swarm
+shot does nothing here; the room wants its own grammar.
+
+**The starved.** Everywhere the converted creatures pass, `fungus:mycelium` —
+which branches because *local food ran out*. Two muted vacuums flank the vent and
+open only under a `friend.bridger`; the irregularity is inherited from the
+scatter, not sprinkled on afterwards.
+
+**The tendril.** A bridger's power is literally a claimed row, so the south trail
+seeds *and* claims its way toward the door as the flock escorts you out.
+
+Same branching filaments, two generators, and the room does not say which is
+truer — it puts them on one floor and lets the walk decide. 13 cells, all dormant
+at boot (0 seeds, 2 mutes); verified 7/7 in walk order including the wrong-mode
+no-op; pathfinder clean.
+
+> AWAITING the live walk sentence.
