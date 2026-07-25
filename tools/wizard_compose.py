@@ -61,7 +61,13 @@ DEFAULT_SPEC = {
     "track": {"enabled": False, "plan": "auto", "kin_fill": True},
     # op 9 — the principal hangar wall: one dressed wall with related artifacts,
     # spot found by search, reachability as a veto
-    "principal_wall": {"enabled": True, "cluster": "pw_primitives_portals", "kin": []},
+    # style "hangar" = THE HANGAR WALL SYSTEM (commons/artifacts/hangar_*, kit
+    # _hangar/hangar_kit.gd): hangar_wall_panel IS the wall, hangar props stand
+    # in front of it. style "cluster" = a curated Wall-Hangar-Editor cluster.
+    "principal_wall": {"enabled": True, "style": "hangar",
+                       "cluster": "pw_primitives_portals",
+                       "props": ["hangar_podium", "hangar_worktable", "hangar_supply_pile"],
+                       "kin": []},
 }
 
 # ---------- measured floor ----------
@@ -542,7 +548,9 @@ def compose(spec):
                                      (tp[0], tp[1] + 1), (tp[0], tp[1] - 1)) if n in floor]
         stages.append(place_principal_wall(S, U, I, WL, W, D, floor, spawn_a, wtargets,
                                            {c: 0 for c in floor} if not dist_map else dist_map,
-                                           pw.get("cluster", "pw_primitives_portals"), kin_pool))
+                                           pw.get("cluster", "pw_primitives_portals"), kin_pool,
+                                           style=pw.get("style", "hangar"),
+                                           props=pw.get("props")))
 
     data = {"map_info": {"name": "X", "lookup_name": "X", "title": "X",
         "description": "wizard: " + "/".join([spec["order"].get("strategy", "?"), gname, tname, ename]),
@@ -582,7 +590,7 @@ def _reaches_all(floor, blocked, spawn, targets):
 
 
 def place_principal_wall(S, U, I, WL, W, D, floor, spawn, targets, dist,
-                         cluster_name, kin_pool, run_len=3):
+                         cluster_name, kin_pool, run_len=3, style="hangar", props=None):
     """Find the best legal spot for a principal wall and build it.
 
     A candidate is a straight run of cells (floor or void) with walkable
@@ -600,7 +608,10 @@ def place_principal_wall(S, U, I, WL, W, D, floor, spawn, targets, dist,
             for x in range(1, W - 1):
                 cells = [(x + dx * i, z + dz * i) for i in range(run_len)]
                 if any(not (0 <= cx < W and 0 <= cz < D) for cx, cz in cells): continue
-                if any(S[cz][cx] not in ("0", "1") for cx, cz in cells): continue
+                ok_cells = (("1", "2") if style == "hangar" else ("0", "1"))
+                if any(S[cz][cx] not in ok_cells for cx, cz in cells): continue
+                if style == "hangar" and any(str(I[cz][cx]).strip() or str(U[cz][cx]).strip()
+                                             for cx, cz in cells): continue
                 for sgn in (1, -1):
                     front = [(cx + fx * sgn, cz + fz * sgn) for cx, cz in cells]
                     back = [(cx - fx * sgn, cz - fz * sgn) for cx, cz in cells]
@@ -629,28 +640,46 @@ def place_principal_wall(S, U, I, WL, W, D, floor, spawn, targets, dist,
         blocked = {c for c in cells if c in floor}
         if not _reaches_all(floor, blocked, spawn, targets):
             continue                                  # the veto: never break the path
-        for (cx, cz) in cells:
-            S[cz][cx] = "4"
-        floor -= blocked
         rot = ROT_FOR_DIR.get((normal[0], normal[1]), 0)
         mid = front[len(front) // 2]
-        I[mid[1]][mid[0]] = f"cluster:{cluster_name}:{rot}"
+        pieces = []
+        if style == "hangar":
+            # THE HANGAR WALL SYSTEM: the panel IS the wall (origin at the
+            # floor, plane facing +Z), so it stands ON floor cells — no h4
+            # cubes. Props from the same kit stand in front of it.
+            for (cx, cz) in cells:
+                if (cx, cz) in floor and not str(I[cz][cx]).strip():
+                    I[cz][cx] = f"hangar_wall_panel:{rot}"
+                    pieces.append({"token": "hangar_wall_panel", "cell": [cx, cz], "rot": rot})
+            for cell, prop in zip(front, props or []):
+                if str(I[cell[1]][cell[0]]).strip(): continue
+                I[cell[1]][cell[0]] = f"{prop}:{rot}"
+                pieces.append({"token": prop, "cell": list(cell), "rot": rot})
+        else:
+            for (cx, cz) in cells:
+                S[cz][cx] = "4"
+            floor -= blocked
+            I[mid[1]][mid[0]] = f"cluster:{cluster_name}:{rot}"
+            pieces.append({"token": f"cluster:{cluster_name}", "cell": list(mid), "rot": rot})
+        # related artifacts: the row one step further into the standoff
         kin_placed = []
-        flanks = [front[0], front[-1]] if len(front) >= 3 else []
-        for cell, k in zip(flanks, kin_pool):
-            if cell == mid: continue
-            if str(I[cell[1]][cell[0]]).strip(): continue
+        second = [(c[0] + normal[0], c[1] + normal[1]) for c in front]
+        for cell, k in zip([c for c in second if c in floor], kin_pool):
+            if str(I[cell[1]][cell[0]]).strip() or str(U[cell[1]][cell[0]]).strip(): continue
             I[cell[1]][cell[0]] = k
             kin_placed.append({"artifact": k, "cell": list(cell)})
-        return {"op": "wall_hangar", "placed": True, "wall": cl(set(cells)),
-                "front": cl(set(front)), "cluster": {"name": cluster_name,
-                "cell": list(mid), "rot": rot}, "kin": kin_placed,
+        return {"op": "wall_hangar", "placed": True, "style": style,
+                "wall": cl(set(cells)), "front": cl(set(front)),
+                "pieces": pieces, "kin": kin_placed,
+                "cluster": ({"name": cluster_name, "cell": list(mid), "rot": rot}
+                            if style != "hangar" else None),
                 "spot": {"score": round(score, 3), "late": late, "standoff": stand,
                          "back_dead": back_dead},
-                "why": ("late in the walk, %d cells of standoff, %.0f%% dead behind — "
-                        "reachability verified" % (stand, back_dead * 100))}
-    return {"op": "wall_hangar", "placed": False, "wall": [], "front": [],
-            "cluster": None, "kin": [],
+                "why": ("%s wall: %d pieces, late in the walk, %d cells of standoff, "
+                        "%.0f%% dead behind — reachability verified"
+                        % (style, len(pieces), stand, back_dead * 100))}
+    return {"op": "wall_hangar", "placed": False, "style": style, "wall": [], "front": [],
+            "cluster": None, "kin": [], "pieces": [],
             "why": "no candidate run had standoff and survived the reachability veto"}
 
 
@@ -1104,7 +1133,9 @@ def compose_track(spec):
                                      (tp[0], tp[1] + 1), (tp[0], tp[1] - 1)) if n in floor]
         stages.append(place_principal_wall(S, U, I, WL, W, D, floor, spawn, wtargets,
                                            {c: 0 for c in floor} if not dist_map else dist_map,
-                                           pw.get("cluster", "pw_primitives_portals"), kin_pool))
+                                           pw.get("cluster", "pw_primitives_portals"), kin_pool,
+                                           style=pw.get("style", "hangar"),
+                                           props=pw.get("props")))
 
     data = {"map_info": {"name": "X", "lookup_name": "X", "title": "X",
         "description": "wizard track: " + "+".join(plan),

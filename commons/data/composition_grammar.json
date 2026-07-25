@@ -90,9 +90,10 @@
    "op": "wall_hangar",
    "what": "THE PRINCIPAL HANGAR WALL — one wall with props and related artifacts, LAST in the order (Palle 2026-07-24: 'add wall hangar principal... find good spot to add wall and not brake the path')",
    "strategies": [
-    "search"
+    "search+hangar",
+    "search+cluster"
    ],
-   "note": "candidate = a straight 3-cell run (floor or void) with walkable standoff on one side; score = 0.4 late-in-walk + 0.4 open-front (the gaze law) + 0.2 dead-back (seals nothing); REACHABILITY IS A VETO not a term — a candidate that would strand the teleporter landing or any artifact is dropped, so the wall can never break the path. Dressing = cluster token rotated to face the standoff; flanks take small kin of the cast. GOTCHA the veto taught: the teleporter stands on VOID by law, so it is never in the walkable set — the target is its LANDING (first version rejected all 427 candidates by asking the impossible)."
+   "note": "candidate = a straight 3-cell run (floor or void) with walkable standoff on one side; score = 0.4 late-in-walk + 0.4 open-front (the gaze law) + 0.2 dead-back (seals nothing); REACHABILITY IS A VETO not a term — a candidate that would strand the teleporter landing or any artifact is dropped, so the wall can never break the path. Dressing = cluster token rotated to face the standoff; flanks take small kin of the cast. GOTCHA the veto taught: the teleporter stands on VOID by law, so it is never in the walkable set — the target is its LANDING (first version rejected all 427 candidates by asking the impossible). CORRECTION (Palle: 'but did you find the hangar wall system?') — v1 used the Wall Hangar EDITOR's curated cluster files (station_* pieces). THE HANGAR WALL SYSTEM is commons/artifacts/hangar_* with the kit _hangar/hangar_kit.gd: hangar_wall_panel (the backing wall that stands ON the floor, plane facing +Z — so no h4 cubes: the panel IS the wall) plus hangar_podium / worktable / supply_pile / barrier_fence / cabinet_cluster / step_base as the props, all map_ready and — until now — placed in ZERO maps. style='hangar' (default) composes panel run + props in front + kin one row further into the standoff; style='cluster' keeps the old curated-cluster behaviour."
   }
  ],
  "interfaces": {
@@ -102,7 +103,8 @@
   "track": "track_13 mode: spec.track {enabled, plan:auto|[segments], kin_fill}; engine compose_track in tools/wizard_compose.py; segments editable in wizard_track_templates.json — author a segment, it becomes vocabulary",
   "laws_prose": "doc/COMPOSITION_LAWS.md — the laws WITH their stories + meta-laws + the large-artifact frontier (type-routed placement proposal); this canon holds the what, the doc holds the why",
   "arc_lens": "doc/ARC_ORGANIZATION.md — organization = inducibility (ARC-AGI lens): the canon ops as a DSL, sequences as few-shot tasks, priors↔laws table, the compression caution (band not maximand), round-11 candidates (inverse composer grammar_fit first)",
-  "grammar_fit": "tools/grammar_fit.py — the INVERSE composer (ARC lens): map -> induced rule sentence (frame/order/elevation/symmetry/rooms/arrival clauses), organization as a BAND not a maximand, residual = the protected irreducible; index commons/data/grammar_fit_index.json (1,987 maps)"
+  "grammar_fit": "tools/grammar_fit.py — the INVERSE composer (ARC lens): map -> induced rule sentence (frame/order/elevation/symmetry/rooms/arrival clauses), organization as a BAND not a maximand, residual = the protected irreducible; index commons/data/grammar_fit_index.json (1,987 maps)",
+  "hangar_wall_system": "commons/artifacts/hangar_* (7 props) + commons/artifacts/_hangar/hangar_kit.gd; registry/packaging.json; resolver _hangar/packaging_resolver.gd is GATED off by default (auto_spawn), which is why the family was invisible — op 9 places them EXPLICITLY as map tokens instead"
  },
  "laws": [
   "FIT: a piece whose envelope exceeds the room belongs to another room (exclude, record why)",
