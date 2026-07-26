@@ -131,11 +131,32 @@ def score_window(rows, slots):
         "walk_cells": walkish}
 
 
-def harvest(md, name, depth=7):
+def signature(rows):
+    """Collapse a window to a comparable shape string (dedup key). Slots and
+    heights matter; which artifact stood there does not."""
+    return "|".join("".join(c or "." for c in row) for row in rows)
+
+
+def harvest(md, name, depths=(5, 7, 9, 11), per_map=3):
     S = md["layers"].get("structure") or []
     if not S: return []
     D, W = len(S), max(len(r) for r in S)
-    if W < WIDTH or D < depth: return []
+    if W < WIDTH: return []
+    out = []
+    for depth in depths:
+        out.extend(_harvest_depth(md, name, depth, D, W))
+    out.sort(key=lambda r: -r["score"])
+    # dedup inside one map first (a wide map yields near-identical neighbours)
+    seen, keep = set(), []
+    for c in out:
+        s = signature(c["rows"])
+        if s in seen: continue
+        seen.add(s); keep.append(c)
+    return keep[:per_map]
+
+
+def _harvest_depth(md, name, depth, D, W):
+    if D < depth: return []
     out = []
     for z0 in range(0, D - depth + 1, max(2, depth // 2)):
         for x0 in range(0, W - WIDTH + 1, 3):
@@ -153,10 +174,10 @@ def harvest(md, name, depth=7):
             sc, stats = score_window(rows, slots)
             if sc <= 0: continue
             out.append({"score": round(sc, 3), "src": name, "at": [x0, z0],
-                        "rows": rows, "slots": slots, "walls": walls,
+                        "depth": depth, "rows": rows, "slots": slots, "walls": walls,
                         "sockets": sockets_of(rows), "stats": stats})
     out.sort(key=lambda r: -r["score"])
-    return out[:2]                      # at most two windows per source map
+    return out
 
 
 def main():
@@ -164,7 +185,9 @@ def main():
     ap.add_argument("--scan", action="store_true")
     ap.add_argument("--write", action="store_true")
     ap.add_argument("--take", type=int, default=8)
-    ap.add_argument("--pool", type=int, default=120)
+    ap.add_argument("--pool", type=int, default=0, help="0 = the whole ALIVE band")
+    ap.add_argument("--per-source", dest="per_source", type=int, default=1,
+                    help="max segments harvested from any one map")
     ap.add_argument("--out", default=str(OUT_DEFAULT))
     a = ap.parse_args()
     import sys; sys.stdout.reconfigure(encoding="utf-8")
@@ -175,7 +198,8 @@ def main():
             if r["band"] == "alive" and r["artifacts"] >= 2
             and not r["map"].startswith(SKIP_PREFIX)]
     pool.sort(key=lambda r: -r["organization"])
-    pool = pool[:a.pool]
+    if a.pool > 0:
+        pool = pool[:a.pool]                     # --pool 0 = the whole ALIVE band
     cands = []
     for r in pool:
         p = MAPS / r["map"] / "map_data.json"
@@ -187,11 +211,25 @@ def main():
             c["rule"] = r["rule"]
             cands.append(c)
     cands.sort(key=lambda c: -(c["score"] * 0.7 + c["organization"] * 0.3))
-    print(f"pool {len(pool)} maps -> {len(cands)} windows")
+    # DIVERSITY: one segment per source map, and never two of the same shape.
+    # (The first harvest's top-8 was three maps repeated — a library of clones
+    # teaches the composer nothing.)
+    picked, seen_src, seen_shape = [], collections.Counter(), set()
+    for c in cands:
+        if seen_src[c["src"]] >= a.per_source: continue
+        s = signature(c["rows"])
+        if s in seen_shape: continue
+        seen_src[c["src"]] += 1; seen_shape.add(s)
+        picked.append(c)
+        if len(picked) >= a.take: break
+    by_depth = collections.Counter(c["depth"] for c in picked)
+    print(f"pool {len(pool)} maps -> {len(cands)} windows -> {len(picked)} picked "
+          f"from {len(seen_src)} distinct maps | depths {dict(sorted(by_depth.items()))}")
+    cands = picked
     for c in cands[:a.take]:
-        print(f"  {c['score']:.3f} org {c['organization']:.2f} {c['src']:32s} at {c['at']} "
-              f"slots {c['stats']['slots']} walls {c['stats']['walled_share']} "
-              f"spine {c['sockets']['spine'][:4]}")
+        print(f"  {c['score']:.3f} org {c['organization']:.2f} {c['src']:30s} "
+              f"d{c['depth']:<2d} at {c['at']} slots {c['stats']['slots']} "
+              f"walls {c['stats']['walled_share']} spine {c['sockets']['spine'][:4]}")
     if not a.write:
         return
     segs = {}
@@ -203,8 +241,10 @@ def main():
             "desc": f"harvested from {c['src']} at {c['at']} (organization {c['organization']}, "
                     f"rule: {' + '.join(c['rule']) or 'none'})",
             "rows": c["rows"], "slots": c["slots"], "walls": c["walls"],
-            "sockets": c["sockets"], "harvest": {"src": c["src"], "at": c["at"],
-                                                  "score": c["score"]},
+            "sockets": c["sockets"], "depth": c["depth"],
+            "harvest": {"src": c["src"], "at": c["at"], "score": c["score"],
+                        "organization": c["organization"],
+                        "walled_share": c["stats"]["walled_share"]},
         }
     pathlib.Path(a.out).write_text(json.dumps({
         "_readme": "HARVESTED track segments — 13-wide windows cut from the best-organized hand "

@@ -1,0 +1,102 @@
+{
+ "name": "Trial_harvest24",
+ "date": "2026-07-26",
+ "spec": {
+  "cast": [
+   "line",
+   "laser_measure",
+   "helicoid",
+   "crystal_cluster",
+   "csg_difference_demo",
+   "geodesic_dome",
+   "branching_growth_algorithm"
+  ],
+  "hero": "laser_measure",
+  "anti": "mold_network",
+  "order": {
+   "strategy": "narrative"
+  },
+  "typology": "hall_wings",
+  "grower": "rect",
+  "walls": {
+   "dressing": {}
+  },
+  "yard": {
+   "enabled": true
+  },
+  "elevation": "procession",
+  "trim_approach": false,
+  "arrival": {
+   "threshold": "none",
+   "prologue": false,
+   "overview": "none"
+  },
+  "track": {
+   "enabled": true,
+   "harvest": true
+  },
+  "doors": {
+   "enabled": true,
+   "accent": ""
+  },
+  "voice": {
+   "enabled": true,
+   "board": true,
+   "words": true,
+   "subtitles": true
+  },
+  "hazard": {
+   "enabled": true,
+   "kind": "toxic"
+  },
+  "reward": {
+   "enabled": true,
+   "count": 4
+  },
+  "service": {
+   "enabled": true,
+   "in_cycle": true
+  },
+  "spans": {
+   "enabled": true,
+   "railings": true,
+   "style": "br"
+  },
+  "landmark": {
+   "enabled": true,
+   "height": 4
+  },
+  "lights": {
+   "enabled": true,
+   "every": 7
+  },
+  "principal_wall": {
+   "enabled": true,
+   "style": "hangar",
+   "cluster": "pw_primitives_portals",
+   "props": [
+    "hangar_podium",
+    "hangar_worktable",
+    "hangar_supply_pile"
+   ],
+   "kin": []
+  }
+ },
+ "score_soft": 0.456,
+ "metrics": {
+  "room_band": 0.51,
+  "enclosure": 0.12,
+  "hall": 0.0,
+  "arrival": 0.42,
+  "elevation": 0.0,
+  "compact": 0.73,
+  "tissue": 1.0,
+  "story": 1.0,
+  "aura": 0.91
+ },
+ "pathfinder": {
+  "ok": true,
+  "reach": 0.89,
+  "tail": "OK    Trial_harvest24  (421/473 reachable, 23 artifacts, 1 teleport(s))\n  Hazards: 5 cell(s) \u2014 toxic x5 [(2,41), (4,41), (3,42), (2,43), (4,43)]\n  Path spawn->teleport avoids all hazard cells\n  Rule 2 [WARN] Teleport at (6,50) \u2014 row z=51 has no floor cubes to catch player\n  Rule 4 [WARN] Artifact 'branching_growth_algorithm' at (3,36) h=3 unreachable\n  Rule 4 [WARN] Artifact '2d_in_3d_randomness_vis' at (6,36) h=3 unreachable\n  Rule 4 [WARN] Artifact 'GaussianBlurShader' at (9,36) h=3 unreachable\n  Rule 4 [WARN] Artifact 'mold_network' at (3,42) h=1 unreachable\n\n=== 1 maps checked: 1 OK, 0 FAIL (0 issues) ==="
+ }
+}
