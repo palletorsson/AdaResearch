@@ -1,0 +1,103 @@
+{
+ "name": "Trial_terrace_gate",
+ "date": "2026-07-26",
+ "spec": {
+  "cast": [
+   "line",
+   "laser_measure",
+   "helicoid",
+   "crystal_cluster",
+   "csg_difference_demo",
+   "geodesic_dome",
+   "branching_growth_algorithm"
+  ],
+  "hero": "laser_measure",
+  "anti": "mold_network",
+  "order": {
+   "strategy": "narrative"
+  },
+  "typology": "hall_wings",
+  "grower": "rect",
+  "walls": {
+   "dressing": {}
+  },
+  "yard": {
+   "enabled": true
+  },
+  "elevation": "terrace",
+  "trim_approach": false,
+  "arrival": {
+   "threshold": "compression",
+   "prologue": true,
+   "overview": "parapet"
+  },
+  "track": {
+   "enabled": false,
+   "plan": "auto",
+   "kin_fill": true
+  },
+  "doors": {
+   "enabled": true,
+   "accent": ""
+  },
+  "voice": {
+   "enabled": true,
+   "board": true,
+   "words": true,
+   "subtitles": true
+  },
+  "hazard": {
+   "enabled": true,
+   "kind": "toxic"
+  },
+  "reward": {
+   "enabled": true,
+   "count": 4
+  },
+  "service": {
+   "enabled": true,
+   "in_cycle": true
+  },
+  "spans": {
+   "enabled": true,
+   "railings": true,
+   "style": "br"
+  },
+  "landmark": {
+   "enabled": true,
+   "height": 4
+  },
+  "lights": {
+   "enabled": true,
+   "every": 7
+  },
+  "principal_wall": {
+   "enabled": true,
+   "style": "hangar",
+   "cluster": "pw_primitives_portals",
+   "props": [
+    "hangar_podium",
+    "hangar_worktable",
+    "hangar_supply_pile"
+   ],
+   "kin": []
+  }
+ },
+ "score_soft": 0.633,
+ "metrics": {
+  "room_band": 0.87,
+  "enclosure": 0.1,
+  "hall": 1.0,
+  "arrival": 0.48,
+  "elevation": 1.0,
+  "compact": 0.53,
+  "tissue": 1.0,
+  "story": 1.0,
+  "aura": 0.52
+ },
+ "pathfinder": {
+  "ok": true,
+  "reach": 0.81,
+  "tail": "OK    Trial_terrace_gate  (297/366 reachable, 32 artifacts, 1 teleport(s))\n  Hazards: 12 cell(s) \u2014 toxic x12 [(36,5), (37,5), (36,6), (39,6), (38,7), (39,7), (37,8), (38,8), (38,9), (36,10), (36,11), (37,11)]\n  Rule 3 [WARN] Teleport at (45,8) is NOT reachable from spawn via walking\n  Rule 4 [WARN] Artifact 'mold_network' at (39,8) h=1 unreachable\n\n=== 1 maps checked: 1 OK, 0 FAIL (0 issues) ==="
+ }
+}

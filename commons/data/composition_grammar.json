@@ -82,9 +82,10 @@
    "what": "heights along the walk",
    "strategies": [
     "flat",
-    "procession"
+    "procession",
+    "terrace"
    ],
-   "note": "procession scored only after r2 gave elevation a metric"
+   "note": "procession scored only after r2 gave elevation a metric terrace added 2026-07-25: three levels (1/2/3) along the walk, so rises of TWO steps occur — which is what a lift is for. The climb chooser now picks by rise: 1 step = wp:<yaw> aligned wedge, 2+ = l:<rise> platform lift on the low cell (a prism spanning two cubes reads as a ramp you cannot walk). Both are pathfinder-modelled — the lift only since the validator learned it (probe: a 2-step rise with l:2 scored 28/64 before, 64/64 after)."
   },
   {
    "n": 6.5,
@@ -279,7 +280,7 @@
   "bridge": "br:<axis>:<len> transparent grid walkway over void, pathfinder-native. USED (op 6.5 default)",
   "transport_cube": "tc:<dist>:<axis>[:auto] carries the player ±dist along the axis. USED (op 6.5 style tc)",
   "jump_pad": "jp:<tx>:<tz>[:arc] one-way parabolic launch (pathfinder jp_edges); USED as span style jp — paired pads keep the crossing two-way",
-  "lift": "l:<height> platform_lift — FIXED 2026-07-25 (was a dead parameter: platform.gd exports lift_height while the handler set `height`, so every l:<n> was ignored and lifts always ran the 5.0 default). Now: a valid POSITIVE number sets lift_height; a non-numeric parameter is kept as meta lift_label and the height is left alone — Pattern_Foundry's 'l:KALEIDOSCOPE MILL' labels would have flattened to 0.0 under a naive float() fix. Probe_Lift is the gate map (l:2, l:7.5, l:LABEL, bare l).",
+  "lift": "l:<height> platform_lift — FIXED 2026-07-25 (was a dead parameter: platform.gd exports lift_height while the handler set `height`, so every l:<n> was ignored and lifts always ran the 5.0 default). Now: a valid POSITIVE number sets lift_height; a non-numeric parameter is kept as meta lift_label and the height is left alone — Pattern_Foundry's 'l:KALEIDOSCOPE MILL' labels would have flattened to 0.0 under a naive float() fix. Probe_Lift is the gate map (l:2, l:7.5, l:LABEL, bare l). USED by the wizard since 2026-07-25 for every rise of 2+ steps (elevation=terrace makes them); tools/map_pathfinder.py now models l as a vertical connector (lift_adj, bidirectional, |Δh| <= lift height).",
   "move_player": "m — displacement without geometry. NOT USED",
   "door": "lab_sliding_door frame + exit_sign (op 4.3). USED",
   "railing": "hb horizontal_border on the void flanks of a span. USED"

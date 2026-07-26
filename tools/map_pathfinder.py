@@ -313,6 +313,10 @@ class MapGraph:
         self.jp_edges: dict[tuple[int, int], set[tuple[int, int]]] = {}
         self._parse_jp()
 
+        # l (platform lift) vertical connections
+        self.lift_adj: dict[tuple[int, int], set[tuple[int, int]]] = {}
+        self._parse_lift()
+
         # Walkable set
         self.walkable: set[tuple[int, int]] = set()
         for pos, h in self.hmap.items():
@@ -435,6 +439,39 @@ class MapGraph:
                 if 0 <= br[0] < self.rows and 0 <= br[1] < self.cols:
                     self.br_cells.add(br)
 
+    def _parse_lift(self):
+        """Parse l[:HEIGHT] platform lifts.
+
+        A lift stands on a cell and carries the player up to HEIGHT units
+        (platform.gd: lift_height, default 5.0), so it connects its cell to any
+        orthogonal neighbour whose height differs by no more than that — both
+        ways, since the platform returns. A non-numeric parameter is a label
+        (Pattern_Foundry passes "l:KALEIDOSCOPE MILL"), not a height.
+        """
+        for pos, cell in self.util_map.items():
+            if not (cell == "l" or cell.startswith("l:")):
+                continue
+            height = 5.0
+            parts = cell.split(":")
+            if len(parts) > 1:
+                raw = parts[1].strip()
+                try:
+                    v = float(raw)
+                    if v > 0:
+                        height = v
+                except ValueError:
+                    pass                      # label, keep the default
+            r, c = pos
+            here = self.hmap.get(pos, 0)
+            for dr, dc in ((-1, 0), (1, 0), (0, -1), (0, 1)):
+                nb = (r + dr, c + dc)
+                nb_h = self.hmap.get(nb, 0)
+                if nb_h <= 0:
+                    continue
+                if abs(nb_h - here) <= height + 0.001:
+                    self.lift_adj.setdefault(pos, set()).add(nb)
+                    self.lift_adj.setdefault(nb, set()).add(pos)
+
     def _parse_jp(self):
         """Parse jp:X:Z[:H] jump pad utilities.
 
@@ -514,6 +551,11 @@ class MapGraph:
             elif nb_h > cur_h and (pos in self.wp_cells or nb in self.wp_cells):
                 # Climbing up — requires wp ramp
                 result.append(nb)
+        # lift edges (a platform carries you between its neighbours)
+        if pos in self.lift_adj:
+            for dest in self.lift_adj[pos]:
+                if dest in self.walkable:
+                    result.append(dest)
         # tc bridges
         if pos in self.tc_adj:
             for dest in self.tc_adj[pos]:
@@ -1222,7 +1264,7 @@ def generate_fix_text(map_name: str, issues: list[dict]) -> str:
 
     for iss in manual:
         if iss["rule"] == 3:
-            parts.append(f"  Manual: Teleport unreachable — connect with wp ramp, tc transport, br bridge, or jp jump pad")
+            parts.append(f"  Manual: Teleport unreachable — connect with wp ramp, tc transport, br bridge, l lift, or jp jump pad")
         elif iss["rule"] == 4:
             parts.append(f"  Manual: {iss['msg']} — add wp/tc/br/jp to connect, or move artifact to reachable cell")
 

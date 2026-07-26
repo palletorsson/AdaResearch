@@ -118,10 +118,15 @@ def wedge_token(low, high):
 
 
 def place_wedge(S, U, a, b, W, D):
-    """Seat one aligned wedge between neighbouring cells of different height.
+    """Seat the right climb between neighbouring cells of different height.
 
-    Returns the (cell, token) actually written, or None. Only the LOW cell gets
-    the prism; the high side needs nothing.
+    A wedge is a ONE-STEP affordance: a prism spanning two cubes reads as a
+    ramp you cannot walk. So the rise chooses the machine —
+      rise 1  -> wp:<yaw> on the LOW cell (the aligned wedge)
+      rise 2+ -> l:<rise> platform lift on the LOW cell
+    Both are modelled by the pathfinder (the lift since 2026-07-25; before that
+    a composed lift stranded the walker at 28/64 on the probe).
+    Returns the (cell, token) actually written, or None.
     """
     def h(c):
         if not (0 <= c[0] < W and 0 <= c[1] < D): return -1
@@ -130,9 +135,14 @@ def place_wedge(S, U, a, b, W, D):
     ha, hb = h(a), h(b)
     if ha == hb or ha < 0 or hb < 0: return None
     low, high = (a, b) if ha < hb else (b, a)
+    rise = abs(ha - hb)
+    if str(U[low[1]][low[0]]).strip(): return None
+    if rise >= 2:
+        tok = "l:%d" % rise                 # the machine, not a two-cube ramp
+        U[low[1]][low[0]] = tok
+        return (low, tok)
     tok = wedge_token(low, high)
     if not tok: return None
-    if str(U[low[1]][low[0]]).strip(): return None
     U[low[1]][low[0]] = tok
     return (low, tok)
 
@@ -388,8 +398,22 @@ def compose(spec):
         for i, (k, cells, a, d) in enumerate(rooms):
             if i >= len(rooms) // 2:
                 for c in cells: hmap[c] = 2
-    profile = [{"i": i, "name": k, "h": (2 if (ename == "procession" and i >= len(rooms) // 2) else 1),
-                "art_h": round(union(k)[2], 2)} for i, (k, _, _, _) in enumerate(rooms)]
+    elif ename == "terrace":
+        # THREE levels along the walk (1 / 2 / 3): the rises between the upper
+        # terraces are two steps, which is what a lift is for.
+        n = max(1, len(rooms))
+        for i, (k, cells, a, d) in enumerate(rooms):
+            lvl = 1 + min(2, (i * 3) // n)
+            if lvl > 1:
+                for c in cells: hmap[c] = lvl
+    def _lvl_of(i):
+        if ename == "procession":
+            return 2 if i >= len(rooms) // 2 else 1
+        if ename == "terrace":
+            return 1 + min(2, (i * 3) // max(1, len(rooms)))
+        return 1
+    profile = [{"i": i, "name": k, "h": _lvl_of(i), "art_h": round(union(k)[2], 2)}
+               for i, (k, _, _, _) in enumerate(rooms)]
 
     S = [["0"] * W for _ in range(D)]
     U = [[" "] * W for _ in range(D)]
@@ -526,7 +550,8 @@ def compose(spec):
     stages.append({"op": "templates_fixed", "enabled": yard_on,
                    "yard": {"center": list(yard_c), "r": YARD_R, "cells": cl(yard_cells)} if yard_on else None})
 
-    stages.append({"op": "elevation", "chosen": ename, "profile": profile})
+    stages.append({"op": "elevation", "chosen": ename, "profile": profile,
+                   "levels": sorted({p["h"] for p in profile})})
 
     # artifacts + spawn + teleporter
     for k, cells, (ax, az), _ in rooms:
