@@ -129,13 +129,37 @@ def main():
         print(f"fixed {done}/{len(rows)} maps")
         return
     if a.worst:
+        # measure EVERY affected map, then report the N worst. Ranking a
+        # convenient alphabetical slice would be a lie about the corpus — the
+        # first attempt did exactly that and produced an all-A-names table.
         scored = []
-        for r in rows[:a.worst]:
-            scored.append((reach_of(r["map"]) or 0.0, r["map"], r["sp"]))
+        for i, r in enumerate(rows, 1):
+            scored.append((reach_of(r["map"]) or 0.0, r["map"], r["sp"],
+                           r["origin_walkable"]))
+            if i % 100 == 0:
+                print(f"  measured {i}/{len(rows)}...", flush=True)
         scored.sort()
-        print(f"\nworst {len(scored)} by reachability:")
-        for reach, name, sp in scored:
-            print(f"  {reach:5.2f}  {name:44s} sp at {sp}")
+        dead = [s for s in scored if s[0] <= 0.02]
+        crippled = [s for s in scored if 0.02 < s[0] < 0.5]
+        intact = len(scored) - len(dead) - len(crippled)
+        print(f"\nmeasured all {len(scored)}: {len(dead)} DEAD (<=0.02 reach), "
+              f"{len(crippled)} crippled (<0.5), {intact} largely intact")
+        print(f"\nworst {min(a.worst, len(scored))} by reachability:")
+        for reach, name, sp, ok_origin in scored[:a.worst]:
+            print(f"  {reach:5.2f}  {name:46s} sp {str(sp):10s}"
+                  f"{'' if ok_origin else '  origin VOID'}")
+        out = ROOT / "commons/data/spawn_sp_audit.json"
+        out.write_text(json.dumps({
+            "_readme": ("maps carrying `sp` and no `s`: their spawn falls back to (0,0). "
+                        "reach measured with tools/map_pathfinder.py check --verbose. "
+                        "NOTHING was modified — tools/audit_spawn_sp.py --fix NAME / "
+                        "--fix-all repairs on request only."),
+            "total": len(scored), "dead": len(dead), "crippled": len(crippled),
+            "intact": intact,
+            "rows": [{"map": n, "reach": round(rr, 3), "sp": list(s),
+                      "origin_walkable": ow} for rr, n, s, ow in scored]},
+            indent=1), encoding="utf-8")
+        print(f"\nwrote commons/data/spawn_sp_audit.json")
     else:
         print("\nfirst 12:")
         for r in rows[:12]:

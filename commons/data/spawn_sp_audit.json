@@ -1,0 +1,4896 @@
+{
+ "_readme": "maps carrying `sp` and no `s`: their spawn falls back to (0,0). reach measured with tools/map_pathfinder.py check --verbose. NOTHING was modified \u2014 tools/audit_spawn_sp.py --fix NAME / --fix-all repairs on request only.",
+ "total": 543,
+ "dead": 84,
+ "crippled": 25,
+ "intact": 434,
+ "rows": [
+  {
+   "map": "DeckKit_Catalog",
+   "reach": 0.001,
+   "sp": [
+    3,
+    3
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "DeckKit_Gallery",
+   "reach": 0.001,
+   "sp": [
+    3,
+    3
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Room_Random_Definition",
+   "reach": 0.001,
+   "sp": [
+    16,
+    32
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Room_Random_Rotate_Random_XYZ",
+   "reach": 0.001,
+   "sp": [
+    16,
+    32
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Room_Random_Space_Geometry",
+   "reach": 0.001,
+   "sp": [
+    16,
+    32
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Room_Randomness_10_PRINT_Algorithm",
+   "reach": 0.001,
+   "sp": [
+    16,
+    32
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Dollhouse_Random_Definition",
+   "reach": 0.001,
+   "sp": [
+    15,
+    31
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Room_Random_Gaussian",
+   "reach": 0.001,
+   "sp": [
+    15,
+    31
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Room_Random_Pheromone",
+   "reach": 0.001,
+   "sp": [
+    15,
+    30
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Room_Random_Space",
+   "reach": 0.001,
+   "sp": [
+    15,
+    30
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Dollhouse_Random_Gaussian",
+   "reach": 0.001,
+   "sp": [
+    14,
+    29
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Room_Random_Remove",
+   "reach": 0.002,
+   "sp": [
+    14,
+    28
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Archetype_Constellation",
+   "reach": 0.002,
+   "sp": [
+    5,
+    3
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Archetype_Amphitheater",
+   "reach": 0.003,
+   "sp": [
+    11,
+    22
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Archetype_Theater",
+   "reach": 0.003,
+   "sp": [
+    10,
+    19
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Room_Random_Mushrooms",
+   "reach": 0.003,
+   "sp": [
+    10,
+    21
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Room_Randomness_Examples_of_Randomness",
+   "reach": 0.003,
+   "sp": [
+    10,
+    20
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Room_Random_Game",
+   "reach": 0.004,
+   "sp": [
+    9,
+    18
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Archetype_Cathedral",
+   "reach": 0.005,
+   "sp": [
+    7,
+    28
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Workstation_distribution_sampler",
+   "reach": 0.006,
+   "sp": [
+    8,
+    15
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Archetype_HubSpokes",
+   "reach": 0.008,
+   "sp": [
+    12,
+    23
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Facade_bernini_colonnade",
+   "reach": 0.008,
+   "sp": [
+    1,
+    10
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Facade_capri_whitewash",
+   "reach": 0.008,
+   "sp": [
+    1,
+    10
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Facade_continuous_monument",
+   "reach": 0.008,
+   "sp": [
+    1,
+    10
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Facade_decon_fragment",
+   "reach": 0.008,
+   "sp": [
+    1,
+    10
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Facade_florentine_polychrome",
+   "reach": 0.008,
+   "sp": [
+    1,
+    10
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Facade_galleria_vittorio_emanuele",
+   "reach": 0.008,
+   "sp": [
+    1,
+    10
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Facade_gothic_portal",
+   "reach": 0.008,
+   "sp": [
+    1,
+    10
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Facade_memphis_totem",
+   "reach": 0.008,
+   "sp": [
+    1,
+    10
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Facade_naples_diamond_rustication",
+   "reach": 0.008,
+   "sp": [
+    1,
+    10
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Facade_painted_vault",
+   "reach": 0.008,
+   "sp": [
+    1,
+    10
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Facade_pompeii_black_room",
+   "reach": 0.008,
+   "sp": [
+    1,
+    10
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Facade_pompeii_ceiling_coffers",
+   "reach": 0.008,
+   "sp": [
+    1,
+    10
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Facade_pompeii_ceiling_medallion",
+   "reach": 0.008,
+   "sp": [
+    1,
+    10
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Facade_pompeii_fourth_style",
+   "reach": 0.008,
+   "sp": [
+    1,
+    10
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Facade_pompeii_red_room",
+   "reach": 0.008,
+   "sp": [
+    1,
+    10
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Facade_pompeii_second_style",
+   "reach": 0.008,
+   "sp": [
+    1,
+    10
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Facade_superstudio_grid",
+   "reach": 0.008,
+   "sp": [
+    1,
+    10
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Facade_villa_boscoreale",
+   "reach": 0.008,
+   "sp": [
+    1,
+    10
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Facade_villa_mysteries",
+   "reach": 0.008,
+   "sp": [
+    1,
+    10
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Facade_villa_san_michele",
+   "reach": 0.008,
+   "sp": [
+    1,
+    10
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Facade_villa_san_michele_exact",
+   "reach": 0.008,
+   "sp": [
+    1,
+    10
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Grown_Applied_Softbody",
+   "reach": 0.009,
+   "sp": [
+    5,
+    9
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "SoftBody_gl01_classic_bulb",
+   "reach": 0.01,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "SoftBody_gl02_long_bottle",
+   "reach": 0.01,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "SoftBody_gl03_wide_bowl",
+   "reach": 0.01,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "SoftBody_gl04_lopsided_vase",
+   "reach": 0.01,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "SoftBody_gl05_collapsed_sag",
+   "reach": 0.01,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "SoftBody_gm01_bottle_in_cylinder_mould",
+   "reach": 0.01,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "SoftBody_gm02_vase_in_tapered_mould",
+   "reach": 0.01,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "SoftBody_gm03_box_in_cube_mould",
+   "reach": 0.01,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "SoftBody_gm04_pressed_onto_sphere",
+   "reach": 0.01,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "SoftBody_sb01_cloth_drape_corners",
+   "reach": 0.01,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "SoftBody_sb02_cloth_drape_top_row",
+   "reach": 0.01,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "SoftBody_sb03_cloth_flag_sideways",
+   "reach": 0.01,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "SoftBody_sb04_cloth_tablecloth",
+   "reach": 0.01,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "SoftBody_sb05_jelly_box_bounce",
+   "reach": 0.01,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "SoftBody_sb06_jelly_grid_settle",
+   "reach": 0.01,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "SoftBody_sb07_jelly_grid_tall_stiff",
+   "reach": 0.01,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "SoftBody_sb08_jelly_grid_floppy",
+   "reach": 0.01,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "SoftBody_sb_ca01_conway_cloth",
+   "reach": 0.01,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "SoftBody_sb_ca02_life_without_death_cloth",
+   "reach": 0.01,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "SoftBody_sb_ls01_plant_skeleton",
+   "reach": 0.01,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "SoftBody_sb_ls02_plant_wind_collapse",
+   "reach": 0.01,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "SoftBody_sb_noise01_jelly_crystal",
+   "reach": 0.01,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "SoftBody_sb_rd01_coral_cloth",
+   "reach": 0.01,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "SoftBody_sb_rd02_stripes_flag",
+   "reach": 0.01,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Dollhouse_Random_Walk",
+   "reach": 0.01,
+   "sp": [
+    6,
+    13
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Room_Random_Cubes",
+   "reach": 0.01,
+   "sp": [
+    6,
+    13
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Goomba_Arena_edit048",
+   "reach": 0.012,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "PromptDemo_Trans_Translation_Echo",
+   "reach": 0.013,
+   "sp": [
+    6,
+    22
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Goomba_Arena",
+   "reach": 0.013,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Grown_Applied_VectorForces",
+   "reach": 0.014,
+   "sp": [
+    3,
+    9
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Pattern_pt01_p1_bauhaus",
+   "reach": 0.015,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Pattern_pt02_p2_escher",
+   "reach": 0.015,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Pattern_pt03_p4m_alhambra",
+   "reach": 0.015,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Pattern_pt04_p6m_persian",
+   "reach": 0.015,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Pattern_pt05_p3_memphis",
+   "reach": 0.015,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Pattern_pt06_pmm_tatami",
+   "reach": 0.015,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Pattern_pt07_p4g_pastel",
+   "reach": 0.015,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Pattern_pt08_p6_monochrome",
+   "reach": 0.015,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Pattern_pt09_pgg_bauhaus",
+   "reach": 0.015,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Pattern_pt10_p3m1_alhambra",
+   "reach": 0.015,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Grown_primitives_w1",
+   "reach": 0.017,
+   "sp": [
+    3,
+    7
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Room_Random_Walk",
+   "reach": 0.02,
+   "sp": [
+    6,
+    8
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Noise_Space_10",
+   "reach": 0.021,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Noise_Inside_Noise",
+   "reach": 0.111,
+   "sp": [
+    4,
+    12
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "WangDeck_Variants",
+   "reach": 0.113,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Archetype_Pit",
+   "reach": 0.162,
+   "sp": [
+    10,
+    2
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "WaveFunctions_3D_Wave_Propagation",
+   "reach": 0.165,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "WaveFunctions_3D_Wave_Propagation_p1",
+   "reach": 0.165,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "WaveFunctions_3D_Wave_Propagation_p2",
+   "reach": 0.165,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "WaveFunctions_3D_Wave_Propagation_p3",
+   "reach": 0.165,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Facade_nyc_tenement",
+   "reach": 0.167,
+   "sp": [
+    4,
+    5
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Archetype_Atrium",
+   "reach": 0.181,
+   "sp": [
+    10,
+    19
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Archetype_Stacks",
+   "reach": 0.183,
+   "sp": [
+    1,
+    17
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Archetype_Citadel",
+   "reach": 0.188,
+   "sp": [
+    11,
+    21
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Archetype_Crossroads",
+   "reach": 0.189,
+   "sp": [
+    11,
+    22
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Trans_AxisDecomposition",
+   "reach": 0.196,
+   "sp": [
+    8,
+    8
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "CA_BeyondBinary",
+   "reach": 0.208,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "CA_EdgeOfChaos",
+   "reach": 0.211,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Archetype_Quadrants",
+   "reach": 0.227,
+   "sp": [
+    3,
+    3
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "VectorOperations",
+   "reach": 0.298,
+   "sp": [
+    6,
+    5
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Archetype_Tower",
+   "reach": 0.345,
+   "sp": [
+    10,
+    19
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Escher_Impossible",
+   "reach": 0.359,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Archetype_Ziggurat",
+   "reach": 0.365,
+   "sp": [
+    10,
+    20
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "CA_Introduction",
+   "reach": 0.437,
+   "sp": [
+    1,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "WaveFunctions_Synthesis_Lab",
+   "reach": 0.488,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "WaveFunctions_Synthesis_Lab_Placed",
+   "reach": 0.488,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Russell_Paradox",
+   "reach": 0.518,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "WaveFunctions_Sine_Space",
+   "reach": 0.519,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "WaveFunctions_Unit_Circle",
+   "reach": 0.528,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Archetype_Maze",
+   "reach": 0.544,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Random_Rotate_Random_XYZ",
+   "reach": 0.558,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Color_Nails",
+   "reach": 0.56,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Tutorial_App",
+   "reach": 0.588,
+   "sp": [
+    7,
+    19
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Array_Patterns",
+   "reach": 0.595,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Archetype_Dungeon",
+   "reach": 0.595,
+   "sp": [
+    5,
+    5
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Noise_One",
+   "reach": 0.615,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "WaveFunctions_AirMusic",
+   "reach": 0.63,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "WaveFunctions_Intro",
+   "reach": 0.631,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Zone_ArchiveofMachines",
+   "reach": 0.639,
+   "sp": [
+    6,
+    11
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "WaveFunctions_AirMusic_p1",
+   "reach": 0.642,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "WaveFunctions_AirMusic_p3",
+   "reach": 0.642,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Godel_Incompleteness",
+   "reach": 0.658,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Euclid_Parallel",
+   "reach": 0.667,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Zone_ForbiddenWetLab",
+   "reach": 0.667,
+   "sp": [
+    6,
+    11
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Tutorial_2D_Build",
+   "reach": 0.681,
+   "sp": [
+    7,
+    19
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Wavefunctions_Bernini",
+   "reach": 0.733,
+   "sp": [
+    1,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Wavefunctions_Bernini_p1",
+   "reach": 0.733,
+   "sp": [
+    1,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Wavefunctions_Bernini_p2",
+   "reach": 0.733,
+   "sp": [
+    1,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Wavefunctions_Bernini_p3",
+   "reach": 0.733,
+   "sp": [
+    1,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Archetype_Cave",
+   "reach": 0.734,
+   "sp": [
+    11,
+    3
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "AdvancedLaboratory_Lab_Equipment_Simulation_v5_symmetric",
+   "reach": 0.749,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Chamber_Primitives",
+   "reach": 0.75,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Chamber_Primitives_HumanoidWalker",
+   "reach": 0.75,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Chamber_Primitives_Hybrid",
+   "reach": 0.75,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Chamber_Primitives_Placed",
+   "reach": 0.75,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Chamber_Primitives_SimulatedAnnealing",
+   "reach": 0.75,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Noise_Columns",
+   "reach": 0.75,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Trans_RotationSpectacle",
+   "reach": 0.767,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Biome_Spine",
+   "reach": 0.772,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Crisis_Synthesis",
+   "reach": 0.776,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Trial_eye_Crisis_Synthesis",
+   "reach": 0.776,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Point_Triangle",
+   "reach": 0.778,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "SoftBodies_Soft_Body_Deformation",
+   "reach": 0.778,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "SoftBodies_Soft_Body_Deformation_p1",
+   "reach": 0.778,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "SoftBodies_Soft_Body_Deformation_p2",
+   "reach": 0.778,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "SoftBodies_Soft_Body_Deformation_p3",
+   "reach": 0.778,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Zone_TemporalStorage",
+   "reach": 0.778,
+   "sp": [
+    6,
+    11
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Noise_Perlin_Simplex",
+   "reach": 0.8,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Noise_Perlin_Simplex_HumanoidWalker",
+   "reach": 0.8,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Noise_Perlin_Simplex_Hybrid",
+   "reach": 0.8,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Noise_Perlin_Simplex_Placed",
+   "reach": 0.8,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Noise_Perlin_Simplex_SimulatedAnnealing",
+   "reach": 0.8,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Random_Noise_Types",
+   "reach": 0.808,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Brouwer_Intuitionism",
+   "reach": 0.809,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "WaveFunctions_John_Cage",
+   "reach": 0.811,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Wavefunctions_Sky_Stairs",
+   "reach": 0.814,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "WangDeck_City",
+   "reach": 0.822,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Grammar_metropolitan",
+   "reach": 0.824,
+   "sp": [
+    2,
+    1
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "WaveFunctions_John_Cage_p1",
+   "reach": 0.826,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "WaveFunctions_John_Cage_p2",
+   "reach": 0.826,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "WaveFunctions_John_Cage_p3",
+   "reach": 0.826,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "VectorMotion",
+   "reach": 0.827,
+   "sp": [
+    7,
+    6
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "WaveFunctions_AirMusic_p2",
+   "reach": 0.835,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "_Example_Island",
+   "reach": 0.838,
+   "sp": [
+    1,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Array_Soane_Plaza",
+   "reach": 0.847,
+   "sp": [
+    11,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Point_Triangle_Context",
+   "reach": 0.848,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "CA_GameOfLife",
+   "reach": 0.852,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Primitives_Ignorance",
+   "reach": 0.854,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Facade_Critique",
+   "reach": 0.857,
+   "sp": [
+    6,
+    3
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "VectorProjectionReflection",
+   "reach": 0.857,
+   "sp": [
+    7,
+    6
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Zone_WarehouseLab",
+   "reach": 0.861,
+   "sp": [
+    6,
+    11
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Vectors_5",
+   "reach": 0.865,
+   "sp": [
+    7,
+    6
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "VectorCrossProduct",
+   "reach": 0.875,
+   "sp": [
+    7,
+    6
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Lab_Death",
+   "reach": 0.877,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "PG_Percolation_Network",
+   "reach": 0.877,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "PG_Percolation_Network_p1",
+   "reach": 0.877,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "PG_Percolation_Network_p2",
+   "reach": 0.877,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "PG_Percolation_Network_p3",
+   "reach": 0.877,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "VectorSubtraction",
+   "reach": 0.878,
+   "sp": [
+    7,
+    6
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Forces_2",
+   "reach": 0.882,
+   "sp": [
+    7,
+    6
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Color_Walls",
+   "reach": 0.883,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "WaveFunctions_Sine_Space_p1",
+   "reach": 0.887,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "WaveFunctions_Sine_Space_p3",
+   "reach": 0.887,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Oscillation_Animated_Cube",
+   "reach": 0.888,
+   "sp": [
+    6,
+    12
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "WaveFunctions_Unit_Circle_p1",
+   "reach": 0.888,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "WaveFunctions_Unit_Circle_p2",
+   "reach": 0.888,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "WaveFunctions_Unit_Circle_p3",
+   "reach": 0.888,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Wavefunctions_Sky_Stairs_p1",
+   "reach": 0.891,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Wavefunctions_Sky_Stairs_p2",
+   "reach": 0.891,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Wavefunctions_Sky_Stairs_p3",
+   "reach": 0.891,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Primitives_Polythedra",
+   "reach": 0.892,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "WaveFunctions_Sine_Space_p2",
+   "reach": 0.893,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Trans_Pit",
+   "reach": 0.893,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "ForcesComposition",
+   "reach": 0.897,
+   "sp": [
+    9,
+    2
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "CA_ElementaryRules",
+   "reach": 0.902,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Vectors_1",
+   "reach": 0.904,
+   "sp": [
+    7,
+    6
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Vectors_6",
+   "reach": 0.904,
+   "sp": [
+    4,
+    5
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "RoundTrip_Random_Definition_v2",
+   "reach": 0.91,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "VectorBasics",
+   "reach": 0.914,
+   "sp": [
+    7,
+    6
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "VectorAdvanced",
+   "reach": 0.914,
+   "sp": [
+    5,
+    5
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Random_Definition",
+   "reach": 0.92,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "WaveFunctions_Synthesis_Lab_p1",
+   "reach": 0.921,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Point_Trace",
+   "reach": 0.926,
+   "sp": [
+    1,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "VectorApplied",
+   "reach": 0.929,
+   "sp": [
+    5,
+    6
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "VectorForces",
+   "reach": 0.931,
+   "sp": [
+    7,
+    6
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Fractal_Recursion",
+   "reach": 0.932,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Random_Space",
+   "reach": 0.933,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Point_Animatedcube",
+   "reach": 0.934,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Grown_primitives_w2",
+   "reach": 0.938,
+   "sp": [
+    4,
+    4
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "SoftBodies_Cloth_Physics",
+   "reach": 0.939,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Forces_1",
+   "reach": 0.941,
+   "sp": [
+    7,
+    6
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Forces_3",
+   "reach": 0.941,
+   "sp": [
+    7,
+    6
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "WaveFunctions_Synthesis_Lab_p2",
+   "reach": 0.945,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "WaveFunctions_Synthesis_Lab_p3",
+   "reach": 0.945,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Archetype_Forum",
+   "reach": 0.947,
+   "sp": [
+    1,
+    23
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Point_Line",
+   "reach": 0.95,
+   "sp": [
+    1,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Random_Walk",
+   "reach": 0.95,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "SoftBodies_Cloth_Physics_p1",
+   "reach": 0.955,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "SoftBodies_Cloth_Physics_p2",
+   "reach": 0.955,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "SoftBodies_Cloth_Physics_p3",
+   "reach": 0.955,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Archetype_Bridge",
+   "reach": 0.955,
+   "sp": [
+    4,
+    34
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Grown_Point_Lines",
+   "reach": 0.957,
+   "sp": [
+    7,
+    9
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Hangar_Fractals_Walk",
+   "reach": 0.961,
+   "sp": [
+    14,
+    165
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Fractal_MengerSponge",
+   "reach": 0.963,
+   "sp": [
+    1,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "PS_Breeding_Lab",
+   "reach": 0.966,
+   "sp": [
+    2,
+    2
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "PS_Ecosystem",
+   "reach": 0.966,
+   "sp": [
+    2,
+    2
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "PS_Evolution_Arena",
+   "reach": 0.966,
+   "sp": [
+    2,
+    2
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "PS_Growth_Chamber",
+   "reach": 0.966,
+   "sp": [
+    2,
+    2
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "PS_Hybrid_Workshop",
+   "reach": 0.966,
+   "sp": [
+    2,
+    2
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "PS_Kingdom_Safari",
+   "reach": 0.966,
+   "sp": [
+    2,
+    2
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "PS_Release",
+   "reach": 0.966,
+   "sp": [
+    2,
+    2
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "PS_Seed_Lab",
+   "reach": 0.966,
+   "sp": [
+    2,
+    2
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "ProceduralGenerationMarchingcubesPortalLandscape",
+   "reach": 0.966,
+   "sp": [
+    2,
+    2
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "ProceduralGeneration_MarchingCave",
+   "reach": 0.966,
+   "sp": [
+    2,
+    2
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Grown_Primitives_Polythedra",
+   "reach": 0.968,
+   "sp": [
+    7,
+    9
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Trans_Scale",
+   "reach": 0.971,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "WaveFunctions_Pendulum",
+   "reach": 0.971,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Random_Remove",
+   "reach": 0.974,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Grown_Primitives_Ignorance",
+   "reach": 0.975,
+   "sp": [
+    7,
+    9
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Grown_Point_Line_Grid",
+   "reach": 0.979,
+   "sp": [
+    3,
+    9
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "WallKit2_Big",
+   "reach": 0.979,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "WallKit_Seed_23",
+   "reach": 0.979,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Grown_Primitives_Melencolia",
+   "reach": 0.98,
+   "sp": [
+    5,
+    9
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Forces_4",
+   "reach": 0.98,
+   "sp": [
+    7,
+    6
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Fractal_CrossSequence",
+   "reach": 0.981,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Fractal_RecursiveTrees",
+   "reach": 0.982,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "VectorFieldFlow",
+   "reach": 0.983,
+   "sp": [
+    7,
+    6
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Grown_PointTestsClone",
+   "reach": 0.984,
+   "sp": [
+    7,
+    9
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Mission_Primitives",
+   "reach": 0.984,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Mission_Randomness",
+   "reach": 0.984,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Fractal_JuliaSet",
+   "reach": 0.987,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Fractal_MandelbrotSet",
+   "reach": 0.987,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Grown_Point_Trace",
+   "reach": 0.988,
+   "sp": [
+    7,
+    9
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Hangar_Primitives",
+   "reach": 0.988,
+   "sp": [
+    11,
+    180
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Noise_Voxel",
+   "reach": 0.989,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Fractal_KochSierpinski",
+   "reach": 0.989,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "WallKit3_13",
+   "reach": 0.99,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "WallKit_Seed_1",
+   "reach": 0.99,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "WaveFunctions_Intro_p1",
+   "reach": 0.99,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "WaveFunctions_Intro_p2",
+   "reach": 0.99,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "WaveFunctions_Intro_p3",
+   "reach": 0.99,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "WaveFunctions_Pendulum_p1",
+   "reach": 0.99,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "WaveFunctions_Pendulum_p2",
+   "reach": 0.99,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "WaveFunctions_Pendulum_p3",
+   "reach": 0.99,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Grammar_florence",
+   "reach": 0.99,
+   "sp": [
+    2,
+    1
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Grammar_venice",
+   "reach": 0.99,
+   "sp": [
+    2,
+    1
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Grown_MultiDisplay",
+   "reach": 0.99,
+   "sp": [
+    4,
+    11
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Florensky_Paraconsistent",
+   "reach": 0.991,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "CatalystLab_01_Home",
+   "reach": 0.992,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "CatalystLab_02_Pair_Primitives",
+   "reach": 0.992,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "CatalystLab_03_Pair_Transform",
+   "reach": 0.992,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "CatalystLab_04_Pair_Waveform",
+   "reach": 0.992,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "CatalystLab_05_Mismatch",
+   "reach": 0.992,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "CatalystLab_06_Chain",
+   "reach": 0.992,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Catalyst_01_Primitives",
+   "reach": 0.992,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Catalyst_02_Transformation",
+   "reach": 0.992,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Catalyst_03_Chromatic",
+   "reach": 0.992,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Catalyst_04_Forces",
+   "reach": 0.992,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Catalyst_05_Waveform",
+   "reach": 0.992,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Catalyst_06_Chaos",
+   "reach": 0.992,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Catalyst_07_Cellular",
+   "reach": 0.992,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Catalyst_08_Fractal",
+   "reach": 0.992,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Catalyst_09_Branching",
+   "reach": 0.992,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Catalyst_10_Swarm",
+   "reach": 0.992,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Grammar_linear",
+   "reach": 0.992,
+   "sp": [
+    2,
+    1
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Grammar_zelda",
+   "reach": 0.992,
+   "sp": [
+    2,
+    1
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Color_Flashlight",
+   "reach": 0.992,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "NonEuclidean_Spaces",
+   "reach": 0.993,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "WangDeck_LPlaza",
+   "reach": 0.994,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Fractal_GoldenSpiral",
+   "reach": 0.995,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "WallKit_Big_42",
+   "reach": 0.995,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Fractal_Synthesis",
+   "reach": 0.997,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Archetype_Spiral",
+   "reach": 0.998,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Archetype_Promenade",
+   "reach": 1.0,
+   "sp": [
+    4,
+    31
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Array_Buren_Courtyard",
+   "reach": 1.0,
+   "sp": [
+    7,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Astar_T00",
+   "reach": 1.0,
+   "sp": [
+    7,
+    1
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Astar_T03",
+   "reach": 1.0,
+   "sp": [
+    7,
+    1
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Astar_T08",
+   "reach": 1.0,
+   "sp": [
+    7,
+    1
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Biome_ChunkLodTest",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Biome_CritterProbe",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Biome_Ex_Stage",
+   "reach": 1.0,
+   "sp": [
+    4,
+    4
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Biome_Gallery_Fauna",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Biome_Gallery_Flora",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Biome_Gallery_Fungus",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Biome_Gallery_Meta",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Biome_Gallery_Mineral",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Biome_Gallery_Water",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Biome_GenSearch",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Biome_Kingdom_Matrix",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Biome_LivingGround",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Biome_MoldProbe",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Biome_MyceliumTest",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Biome_RuleSearch",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Biome_SdfTest",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Biome_VisualBench",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Biome_Zoo",
+   "reach": 1.0,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "CA_AgentsCircuits",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "CA_ExpandingSpace",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "CA_SoftRules",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Cabinet_Gallery",
+   "reach": 1.0,
+   "sp": [
+    1,
+    12
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Canon_Conveyor_Showcase",
+   "reach": 1.0,
+   "sp": [
+    8,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Chamber_Arrays",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Chamber_Boolean",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Chamber_CA",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Chamber_Color.bak.20260429T110640",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Chamber_Facade",
+   "reach": 1.0,
+   "sp": [
+    3,
+    5
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Chamber_Forces",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Chamber_FormFinding",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Chamber_Foundations",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Chamber_Fractals",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Chamber_GraphTheory",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Chamber_Isosurfaces",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Chamber_LSystems",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Chamber_ML",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Chamber_Noise",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Chamber_PostFoundations",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Chamber_ProcGen",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Chamber_ProcGen_p1",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Chamber_ProcGen_p2",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Chamber_ProcGen_p3",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Chamber_QFEP",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Chamber_Random",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Chamber_SoftBodies",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Chamber_SoftBodies_p1",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Chamber_SoftBodies_p2",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Chamber_SoftBodies_p3",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Chamber_Swarm",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Chamber_Symmetry",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Chamber_Transformation",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Chamber_Waves",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Chamber_Waves_p1",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Chamber_Waves_p2",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Chamber_Waves_p3",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Color_Showcase",
+   "reach": 1.0,
+   "sp": [
+    11,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Creature_Gallery",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "CubeTest",
+   "reach": 1.0,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "DeckCity_6x5_s8",
+   "reach": 1.0,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Deck_Bridge_Dressed",
+   "reach": 1.0,
+   "sp": [
+    4,
+    34
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Deck_Promenade_Dressed",
+   "reach": 1.0,
+   "sp": [
+    4,
+    31
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Deck_Stacks_Dressed",
+   "reach": 1.0,
+   "sp": [
+    1,
+    17
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Facade_Assembly_Principle",
+   "reach": 1.0,
+   "sp": [
+    4,
+    5
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Facade_Italian_Presets",
+   "reach": 1.0,
+   "sp": [
+    13,
+    13
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Facade_Rustication",
+   "reach": 1.0,
+   "sp": [
+    5,
+    5
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Facade_Showcase",
+   "reach": 1.0,
+   "sp": [
+    15,
+    15
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Facade_baroque",
+   "reach": 1.0,
+   "sp": [
+    5,
+    5
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Facade_classical",
+   "reach": 1.0,
+   "sp": [
+    5,
+    5
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Facade_florence_marble",
+   "reach": 1.0,
+   "sp": [
+    5,
+    5
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Facade_venetian_gothic",
+   "reach": 1.0,
+   "sp": [
+    5,
+    5
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Florence_Gallery",
+   "reach": 1.0,
+   "sp": [
+    17,
+    17
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Fold_Theatre",
+   "reach": 1.0,
+   "sp": [
+    2,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Fractal_CantorSet",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Gallery_Arrays_1",
+   "reach": 1.0,
+   "sp": [
+    1,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Gallery_Arrays_2",
+   "reach": 1.0,
+   "sp": [
+    1,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Gallery_Arrays_3",
+   "reach": 1.0,
+   "sp": [
+    1,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Gallery_BarArray",
+   "reach": 1.0,
+   "sp": [
+    1,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Gallery_CellularAutomata",
+   "reach": 1.0,
+   "sp": [
+    1,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Gallery_Chaos",
+   "reach": 1.0,
+   "sp": [
+    1,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Gallery_Color",
+   "reach": 1.0,
+   "sp": [
+    1,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Gallery_Commons_1",
+   "reach": 1.0,
+   "sp": [
+    1,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Gallery_Commons_2",
+   "reach": 1.0,
+   "sp": [
+    1,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Gallery_Commons_3",
+   "reach": 1.0,
+   "sp": [
+    1,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Gallery_Commons_4",
+   "reach": 1.0,
+   "sp": [
+    1,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Gallery_ComputationalBiology",
+   "reach": 1.0,
+   "sp": [
+    1,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Gallery_DataStructures",
+   "reach": 1.0,
+   "sp": [
+    1,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Gallery_Foundations",
+   "reach": 1.0,
+   "sp": [
+    1,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Gallery_Furniture",
+   "reach": 1.0,
+   "sp": [
+    1,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Gallery_Grid2D",
+   "reach": 1.0,
+   "sp": [
+    1,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Gallery_Grid3D",
+   "reach": 1.0,
+   "sp": [
+    1,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Gallery_Hazards",
+   "reach": 1.0,
+   "sp": [
+    1,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Gallery_Laboratory",
+   "reach": 1.0,
+   "sp": [
+    1,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Gallery_LivingPaper",
+   "reach": 1.0,
+   "sp": [
+    1,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Gallery_Loader_Demo",
+   "reach": 1.0,
+   "sp": [
+    9,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Gallery_MachineLearning",
+   "reach": 1.0,
+   "sp": [
+    1,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Gallery_MeshGrammar",
+   "reach": 1.0,
+   "sp": [
+    1,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Gallery_Misc",
+   "reach": 1.0,
+   "sp": [
+    1,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Gallery_Misc_Placed",
+   "reach": 1.0,
+   "sp": [
+    1,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Gallery_Nature",
+   "reach": 1.0,
+   "sp": [
+    1,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Gallery_Neuroscience",
+   "reach": 1.0,
+   "sp": [
+    1,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Gallery_Parametric",
+   "reach": 1.0,
+   "sp": [
+    1,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Gallery_PhysicsSimulation",
+   "reach": 1.0,
+   "sp": [
+    1,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Gallery_Primitives_1",
+   "reach": 1.0,
+   "sp": [
+    1,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Gallery_Primitives_2",
+   "reach": 1.0,
+   "sp": [
+    1,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Gallery_Primitives_3",
+   "reach": 1.0,
+   "sp": [
+    1,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Gallery_Primitives_4",
+   "reach": 1.0,
+   "sp": [
+    1,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Gallery_ProceduralGeneration",
+   "reach": 1.0,
+   "sp": [
+    1,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Gallery_Profile",
+   "reach": 1.0,
+   "sp": [
+    1,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Gallery_QFEP",
+   "reach": 1.0,
+   "sp": [
+    1,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Gallery_Quantum",
+   "reach": 1.0,
+   "sp": [
+    1,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Gallery_Randomness",
+   "reach": 1.0,
+   "sp": [
+    1,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Gallery_Shaders",
+   "reach": 1.0,
+   "sp": [
+    1,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Gallery_SpaceTopology",
+   "reach": 1.0,
+   "sp": [
+    1,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Gallery_Speech",
+   "reach": 1.0,
+   "sp": [
+    1,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Gallery_Statistics",
+   "reach": 1.0,
+   "sp": [
+    1,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Gallery_Steering",
+   "reach": 1.0,
+   "sp": [
+    1,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Gallery_SwarmIntelligence",
+   "reach": 1.0,
+   "sp": [
+    1,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Gallery_Transforms",
+   "reach": 1.0,
+   "sp": [
+    1,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Gallery_Vectors",
+   "reach": 1.0,
+   "sp": [
+    1,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Gallery_WaveFunctions",
+   "reach": 1.0,
+   "sp": [
+    1,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Grammar_halflife",
+   "reach": 1.0,
+   "sp": [
+    2,
+    1
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Grammar_vatican",
+   "reach": 1.0,
+   "sp": [
+    5,
+    1
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Grand_Pattern_Museum",
+   "reach": 1.0,
+   "sp": [
+    20,
+    20
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Grown_Applied_Ca",
+   "reach": 1.0,
+   "sp": [
+    4,
+    9
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Grown_Applied_Foundations",
+   "reach": 1.0,
+   "sp": [
+    2,
+    9
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Grown_Applied_Fractal",
+   "reach": 1.0,
+   "sp": [
+    2,
+    9
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Grown_Applied_Lsystem",
+   "reach": 1.0,
+   "sp": [
+    3,
+    9
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Grown_Applied_Postcrisis",
+   "reach": 1.0,
+   "sp": [
+    6,
+    9
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Grown_Applied_Primitives",
+   "reach": 1.0,
+   "sp": [
+    2,
+    9
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Grown_Applied_Procgen",
+   "reach": 1.0,
+   "sp": [
+    3,
+    9
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Grown_Applied_Qfep",
+   "reach": 1.0,
+   "sp": [
+    2,
+    9
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Grown_Applied_Randomness",
+   "reach": 1.0,
+   "sp": [
+    2,
+    9
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Grown_Point_Animatedcube",
+   "reach": 1.0,
+   "sp": [
+    3,
+    9
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "Grown_Point_One",
+   "reach": 1.0,
+   "sp": [
+    7,
+    9
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Grown_Point_Triangle_Context",
+   "reach": 1.0,
+   "sp": [
+    7,
+    9
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Grown_primitives_w0",
+   "reach": 1.0,
+   "sp": [
+    7,
+    8
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Hall_Random_Cubes",
+   "reach": 1.0,
+   "sp": [
+    13,
+    13
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Hall_Random_Definition",
+   "reach": 1.0,
+   "sp": [
+    13,
+    13
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Hangar_Fractals",
+   "reach": 1.0,
+   "sp": [
+    14,
+    38
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Historical_Periods_Gallery",
+   "reach": 1.0,
+   "sp": [
+    27,
+    27
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Immersive_Pattern_Rooms",
+   "reach": 1.0,
+   "sp": [
+    15,
+    15
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "JumpPadTest",
+   "reach": 1.0,
+   "sp": [
+    1,
+    2
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "LabWall_Walk",
+   "reach": 1.0,
+   "sp": [
+    6,
+    8
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Lab_Path",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "MANN_Corridor_Test",
+   "reach": 1.0,
+   "sp": [
+    10,
+    10
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "MANN_Gallery_Museum",
+   "reach": 1.0,
+   "sp": [
+    15,
+    15
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Mega_Pattern_Museum",
+   "reach": 1.0,
+   "sp": [
+    25,
+    25
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "MiniScene_Oscillation_Trio",
+   "reach": 1.0,
+   "sp": [
+    0,
+    3
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Modern_Canon_Showcase",
+   "reach": 1.0,
+   "sp": [
+    14,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Morphogenesis_Intro",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Mosaic_Byzantine_Gold",
+   "reach": 1.0,
+   "sp": [
+    10,
+    10
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Mosaic_Capri_Villa",
+   "reach": 1.0,
+   "sp": [
+    10,
+    10
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Mosaic_Facade_Ornament",
+   "reach": 1.0,
+   "sp": [
+    11,
+    11
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Mosaic_Majolica_Tiles",
+   "reach": 1.0,
+   "sp": [
+    9,
+    9
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Mosaic_Pattern_Maker",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Mosaic_Pompeii_Floors",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Mosaic_WFC_Reconstruction",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Naples_Street_Museum",
+   "reach": 1.0,
+   "sp": [
+    17,
+    17
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Noise_6_Wall",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Path_Block_01",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Path_Block_02",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Pattern_Maker_Showcase",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Pattern_Showcase",
+   "reach": 1.0,
+   "sp": [
+    13,
+    13
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Pattern_Walls_Gallery",
+   "reach": 1.0,
+   "sp": [
+    20,
+    20
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Pixel_Art_Gallery",
+   "reach": 1.0,
+   "sp": [
+    12,
+    12
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Placement_Circle_Packing",
+   "reach": 1.0,
+   "sp": [
+    5,
+    5
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Placement_Fold",
+   "reach": 1.0,
+   "sp": [
+    5,
+    5
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Placement_Hybrid",
+   "reach": 1.0,
+   "sp": [
+    5,
+    5
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Placement_Paradoxical",
+   "reach": 1.0,
+   "sp": [
+    5,
+    5
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Placement_Random",
+   "reach": 1.0,
+   "sp": [
+    5,
+    5
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Placement_Rule_Based",
+   "reach": 1.0,
+   "sp": [
+    5,
+    5
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Placement_Sdf",
+   "reach": 1.0,
+   "sp": [
+    5,
+    5
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Placement_Simulated_Annealing",
+   "reach": 1.0,
+   "sp": [
+    5,
+    5
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Placement_Voronoi",
+   "reach": 1.0,
+   "sp": [
+    5,
+    5
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Placement_Warehouse",
+   "reach": 1.0,
+   "sp": [
+    5,
+    5
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Pompeii_Mural_Rooms",
+   "reach": 1.0,
+   "sp": [
+    15,
+    12
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Pompeii_Villa_Paintings",
+   "reach": 1.0,
+   "sp": [
+    12,
+    12
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Postmodern_Gallery",
+   "reach": 1.0,
+   "sp": [
+    15,
+    15
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Primitives_Melencolia",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "PromptDemo_Tweaked",
+   "reach": 1.0,
+   "sp": [
+    5,
+    26
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Props_Demo_Lab",
+   "reach": 1.0,
+   "sp": [
+    3,
+    3
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Randomness_10_PRINT_Algorithm",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Roman_Villa",
+   "reach": 1.0,
+   "sp": [
+    15,
+    15
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "RoundTrip_Random_Definition",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "SearchPathfinding_Intro",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Shader_Arch_Gallery",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "SoftBodies_Affect_Theory_Visualization",
+   "reach": 1.0,
+   "sp": [
+    2,
+    7
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "SoftBodies_Affect_Theory_Visualization_p1",
+   "reach": 1.0,
+   "sp": [
+    2,
+    7
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "SoftBodies_Affect_Theory_Visualization_p2",
+   "reach": 1.0,
+   "sp": [
+    2,
+    7
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "SoftBodies_Affect_Theory_Visualization_p3",
+   "reach": 1.0,
+   "sp": [
+    2,
+    7
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "SoftBodies_Carusell",
+   "reach": 1.0,
+   "sp": [
+    10,
+    12
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "SoftBodies_Carusell_p1",
+   "reach": 1.0,
+   "sp": [
+    10,
+    12
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "SoftBodies_Carusell_p2",
+   "reach": 1.0,
+   "sp": [
+    10,
+    12
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "SoftBodies_Carusell_p3",
+   "reach": 1.0,
+   "sp": [
+    10,
+    12
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "SoftBodies_Obsticals",
+   "reach": 1.0,
+   "sp": [
+    10,
+    12
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "SoftBodies_Obsticals_Part1",
+   "reach": 1.0,
+   "sp": [
+    10,
+    12
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "SoftBodies_Obsticals_Part2",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "SoftBodies_Obsticals_Part2_p1",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "SoftBodies_Obsticals_Part2_p2",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "SoftBodies_Obsticals_Part2_p3",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "SoftBodies_Obsticals_Part3",
+   "reach": 1.0,
+   "sp": [
+    10,
+    12
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "SoftBodies_Obsticals_p1",
+   "reach": 1.0,
+   "sp": [
+    10,
+    12
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "SoftBodies_Obsticals_p2",
+   "reach": 1.0,
+   "sp": [
+    10,
+    12
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "SoftBodies_Obsticals_p3",
+   "reach": 1.0,
+   "sp": [
+    10,
+    12
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "SoftBodies_Playground_of_Joy",
+   "reach": 1.0,
+   "sp": [
+    8,
+    9
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "SoftBodies_Playground_of_Joy_HumanoidWalker",
+   "reach": 1.0,
+   "sp": [
+    8,
+    9
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "SoftBodies_Playground_of_Joy_Hybrid",
+   "reach": 1.0,
+   "sp": [
+    8,
+    9
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "SoftBodies_Playground_of_Joy_Placed",
+   "reach": 1.0,
+   "sp": [
+    8,
+    9
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "SoftBodies_Playground_of_Joy_SimulatedAnnealing",
+   "reach": 1.0,
+   "sp": [
+    8,
+    9
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "SoftBodies_Playground_of_Joy_p1",
+   "reach": 1.0,
+   "sp": [
+    8,
+    9
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "SoftBodies_Playground_of_Joy_p2",
+   "reach": 1.0,
+   "sp": [
+    8,
+    9
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "SoftBodies_Playground_of_Joy_p3",
+   "reach": 1.0,
+   "sp": [
+    8,
+    9
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Study_Room",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Tile_Shapes_Gallery",
+   "reach": 1.0,
+   "sp": [
+    17,
+    17
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Trans_Introduction",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Trans_Rotation",
+   "reach": 1.0,
+   "sp": [
+    6,
+    39
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Trial_eye_Chamber_Noise",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Turrell_Walk",
+   "reach": 1.0,
+   "sp": [
+    13,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Vectors_Intro",
+   "reach": 1.0,
+   "sp": [
+    0,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "WallKit2_42",
+   "reach": 1.0,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "WallKit2_7",
+   "reach": 1.0,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "WallKit2_99",
+   "reach": 1.0,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "WallKit3_Field",
+   "reach": 1.0,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "WallKit_LightStrip",
+   "reach": 1.0,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "WallKit_Seed_7",
+   "reach": 1.0,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Wallpaper_Groups_Gallery",
+   "reach": 1.0,
+   "sp": [
+    22,
+    22
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Walls_Primitives",
+   "reach": 1.0,
+   "sp": [
+    74,
+    33
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "WangDeck_City_Dressed",
+   "reach": 1.0,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "WangDeck_District",
+   "reach": 1.0,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "WangDeck_District_Dressed",
+   "reach": 1.0,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "WangDeck_LPlaza_Dressed",
+   "reach": 1.0,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "WangDeck_LPlaza_Props",
+   "reach": 1.0,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "WangDeck_Plaza",
+   "reach": 1.0,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "WangDeck_Plaza_Dressed",
+   "reach": 1.0,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "WangDeck_Probe",
+   "reach": 1.0,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "WangDeck_Probe_Dressed",
+   "reach": 1.0,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "WangDeck_TerraceDemo",
+   "reach": 1.0,
+   "sp": [
+    1,
+    22
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "WangDeck_Variants_Dressed",
+   "reach": 1.0,
+   "sp": [
+    1,
+    1
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Zone_ObservationChamber",
+   "reach": 1.0,
+   "sp": [
+    6,
+    11
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "Zone_WarehouseLab_Packed",
+   "reach": 1.0,
+   "sp": [
+    0,
+    5
+   ],
+   "origin_walkable": false
+  },
+  {
+   "map": "_Example_Branch",
+   "reach": 1.0,
+   "sp": [
+    1,
+    0
+   ],
+   "origin_walkable": true
+  },
+  {
+   "map": "_Example_Linear",
+   "reach": 1.0,
+   "sp": [
+    1,
+    0
+   ],
+   "origin_walkable": true
+  }
+ ]
+}
