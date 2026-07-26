@@ -7600,6 +7600,60 @@
     "measured_at": "2026-04-29T07:09:56.762620Z"
    }
   },
+  "multiple_ring": {
+   "category": "display",
+   "description": "A ring of one ordinary prop, cast in a single matte colour and repeated. Removing a member never leaves a gap: the survivors redistribute to a fresh even spacing, so no position ever belonged to anyone. Config: #subject:fire_extinguisher#count:14#removed:0",
+   "include_in_map_data": true,
+   "lookup_name": "multiple_ring",
+   "map_ready": true,
+   "name": "Multiple Ring",
+   "scene": "res://commons/artifacts/multiple_ring/multiple_ring.tscn",
+   "complexity": "intermediate",
+   "tags": ["readymade", "multiple", "meta", "display"],
+   "dna": {
+    "promoted": "2026-07-26", "stage": "2 - variation",
+    "axes": {"count": [6, 14, 24], "removed": [0, 3, 7], "face_inward": [true, false]},
+    "default": "subject=fire_extinguisher, count=14, removed=0"
+   },
+   "spatial_needs": {"platform": "none", "footprint_cells": 3,
+    "clearance": {"front": 1, "back": 1, "left": 1, "right": 1}}
+  },
+  "default_body_bay": {
+   "category": "display",
+   "description": "A chroma-key bay with a figure in the engine's own default state. Each click of the dial accepts one unmarked convention (skin tone, proportion, rig, idle, finish), stencils its provenance on the wall, and retires a fifth of the blue. The bay is honest at 0 and looks finished at 5. Config: #defaults_applied:0",
+   "include_in_map_data": true,
+   "lookup_name": "default_body_bay",
+   "map_ready": true,
+   "name": "Default Body Bay",
+   "scene": "res://commons/artifacts/default_body_bay/default_body_bay.tscn",
+   "complexity": "advanced",
+   "tags": ["bias", "default", "body", "meta", "display"],
+   "dna": {
+    "promoted": "2026-07-26", "stage": "2 - variation",
+    "axes": {"defaults_applied": [0, 1, 2, 3, 4, 5]},
+    "default": "defaults_applied=0 - fully chroma, nothing decided yet"
+   },
+   "spatial_needs": {"platform": "none", "footprint_cells": 3,
+    "clearance": {"front": 2, "back": 1, "left": 1, "right": 1}}
+  },
+  "operational_eye": {
+   "category": "display",
+   "description": "A service rack of machine views - A* cost field, the player as a capsule and velocity vector, camera frustum, collision hulls, the capture rig's AABB, the LOD ramp. Flat false colour, no composition: operational images, made to run the world rather than to be looked at. Config: #channel:1#cols:3",
+   "include_in_map_data": true,
+   "lookup_name": "operational_eye",
+   "map_ready": true,
+   "name": "Operational Eye",
+   "scene": "res://commons/artifacts/operational_eye/operational_eye.tscn",
+   "complexity": "advanced",
+   "tags": ["machine-vision", "meta", "rack", "display"],
+   "dna": {
+    "promoted": "2026-07-26", "stage": "2 - variation",
+    "axes": {"channel": [0, 1, 2, 3, 4, 5], "cols": [2, 3, 6]},
+    "default": "channel=1 - the subject view foregrounded: you, as the system holds you"
+   },
+   "spatial_needs": {"platform": "none", "footprint_cells": 3,
+    "clearance": {"front": 2, "back": 1, "left": 1, "right": 1}}
+  },
   "stock_stratum": {
    "category": "display",
    "description": "A core sample under glass whose strata are the project's own most-placed props, live-instanced and frozen in the seam. Bed thickness is proportional to placement count, thickest at the base, so the core reads bottom-up: what gets placed most is the ground everything else stands on. Reads commons/data/placement_census.json. Config: #max_bands:6#reveal:0.74#live_props:true",
