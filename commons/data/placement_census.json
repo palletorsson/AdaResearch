@@ -1,8 +1,8 @@
 {
  "_note": "The project's own frequency distribution. Bed thickness in stock_stratum is proportional to `placements` \u2014 what gets placed most becomes the ground everything else stands on.",
- "maps_counted": 2045,
- "distinct_tokens": 2154,
- "total_placements": 11775,
+ "maps_counted": 2046,
+ "distinct_tokens": 2160,
+ "total_placements": 11787,
  "ranked": [
   {
    "token": "exhibit_furniture",
@@ -11,7 +11,7 @@
   },
   {
    "token": "request_note",
-   "placements": 716,
+   "placements": 722,
    "scene": "res://commons/artifacts/request_note/request_note.tscn"
   },
   {
@@ -103,6 +103,26 @@
    "token": "station_wall",
    "placements": 53,
    "scene": "res://commons/artifacts/station/station_wall.tscn"
+  },
+  {
+   "token": "branching_growth_algorithm",
+   "placements": 52,
+   "scene": "res://algorithms/proceduralgeneration/growth_systems/branchinggrowthalgorithm/BranchingGrowthAlgorithm.tscn"
+  },
+  {
+   "token": "floating_sphere_field",
+   "placements": 51,
+   "scene": "res://commons/primitives/sphere_field/floating_sphere_field.tscn"
+  },
+  {
+   "token": "exit_sign",
+   "placements": 51,
+   "scene": "res://commons/artifacts/exit_sign/exit_sign.tscn"
+  },
+  {
+   "token": "lab_sliding_door",
+   "placements": 51,
+   "scene": "res://commons/artifacts/sliding_door/sliding_door.tscn"
   }
  ]
 }
