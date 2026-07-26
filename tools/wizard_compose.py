@@ -680,6 +680,7 @@ def compose(spec):
                      "wall_segments": {"height": 2.2, "thickness": 0.12}},
         "utility_definitions": {"t": {"type": "teleporter", "name": "Gate passed", "description": "",
                                       "properties": {"action": "next_in_sequence"}}},
+        "subtitles": _subs,
         "layers": {"structure": S, "utilities": U, "walls": WL, "interactables": I}}
 
     m = metrics(data, rooms, hall, passage, floor, door_info, story_score)
@@ -908,9 +909,16 @@ def place_voice(S, U, W, D, spec_voice, board_at, board_rot, words, door_cells, 
     if spec_voice.get("subtitles", True):
         descs = _registry_descriptions()
         for (cell, artifact) in door_cells:
-            x, z = cell
-            if not (0 <= x < W and 0 <= z < D): continue
-            if str(U[z][x]).strip(): continue
+            # the trigger wants the cell you cross; if that one is taken (lights,
+            # ramps), step outward along the crossing until a free cell is found
+            cands = [cell] + [(cell[0] + dx, cell[1] + dz)
+                              for dx, dz in ((1, 0), (-1, 0), (0, 1), (0, -1))]
+            x = z = None
+            for (cx, cz) in cands:
+                if 0 <= cx < W and 0 <= cz < D and S[cz][cx] in ("1", "2")                         and not str(U[cz][cx]).strip():
+                    x, z = cx, cz
+                    break
+            if x is None: continue
             key = str(artifact).replace(" ", "_").lower()[:32]
             if not key: continue
             line = descs.get(str(artifact).replace(" ", "_"), "")

@@ -1,6 +1,6 @@
 {
  "_comment": "THE ORDER OF OPERATIONS for map composition — canon, editable. Palle 2026-07-24: 'this is about order of operation, what is included in what order... then auto research to create the best combination or new strategies.' The research engines READ this file (stages, metric weights, bands): edit here, re-run, the search changes. Rounds history at the bottom. Sibling canons: cabinet_grammar.json, systems_fold.json.",
- "version": 11,
+ "version": 12,
  "operations": [
   {
    "n": 1,
@@ -59,6 +59,16 @@
     "state_from_role"
    ],
    "note": "the artifact's own @identity IS the logic — 'Closed, it is wall. Open, it is corridor. Half-open, it is invitation.' So: the arrival threshold's mouth = corridor (1.0, you must pass), side-room doors = invitation (0.45), the quarantine's view notch = boundary (0.0). Token: lab_sliding_door:<rot>#panels_open_amount:<v>, rot from the cell toward what it opens onto. NAME COLLISION (the hangar mistake's twin): 'sliding_door' is registered by BOTH commons/artifacts/sliding_door (the lab door) and commons/primitives/translation (a teaching demo that renders an orange 'Slide ->' panel) — the primitive wins resolution, so an alias lab_sliding_door was added to registry/lab.json as the unambiguous handle. Verified by capture: dark frame, two near-white panels, centre seam, accent stripe. SIGNS: exit_sign is the door's declared partner (cluster_with) and its truth is 'the sign is the PROMISE that there IS a way out' — so every opening is NAMED by the artifact behind it (exit_sign:<rot>:2.0#text:<NAME>#sign_color:<c>), mounted on the wall BESIDE the frame at head height, never floating: green for egress, red for QUARANTINE, accent-blue for a named room. 8 doors / 8 signs on the test gate."
+  },
+  {
+   "n": 4.6,
+   "op": "voice_hazard",
+   "what": "VOICE + HAZARD — closing four ontology gaps Palle named: annotation (an), text (3t), subtitles (sub), hazard (h)",
+   "strategies": [
+    "board+words+subs",
+    "hazard_sealed_only"
+   ],
+   "note": "grammar read from the corpus, never invented: an[:rot|:seq] briefing board, 3t:<TEXT> a word standing in space, sub:<key> whose LINES live in a top-level 'subtitles' dict (Point_Line is the reference), h:fire|electric|toxic|vacuum|death. PLACEMENT: the board stands at the arrival (the corridor briefs you before it shows you anything); words name the service bays and the hero; every named door carries a sub trigger whose text is the artifact's OWN registry description — the corridor says what the consort says about itself; and HAZARD goes only inside the sealed quarantine — danger seen from the parapet, unreachable by construction. A composed map must never put a hazard on the walk it composed. Gate: board + 2 words + 6 subtitles + 12 toxic cells, reach 0.92. Track: board + LOADING/QUARANTINE + 3 subtitles + 5 toxic, reach 0.89."
   },
   {
    "n": 5,

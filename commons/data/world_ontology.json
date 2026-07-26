@@ -1,7 +1,7 @@
 {
  "_readme": "world_ontology.py — THE LEDGER OF WHAT EXISTS.",
  "_intent": "Palle 2026-07-25: 'what exist is both what we created but also (queer) ontology of the world.' This ledger asks the world instead of asking ourselves. The GAP is what exists and we do not compose; the RESIDUAL is what exists and resists composition — it is not a backlog.",
- "maps_scanned": 2027,
+ "maps_scanned": 2029,
  "artifacts_registered": 2661,
  "artifacts_map_ready": 2592,
  "registries": {
@@ -120,8 +120,8 @@
    "name": "text_display",
    "category": "ui",
    "modelled": false,
-   "corpus_uses": 143,
-   "composed": false
+   "corpus_uses": 147,
+   "composed": true
   },
   {
    "code": "a",
@@ -136,8 +136,8 @@
    "name": "annotation_cube",
    "category": "ui",
    "modelled": false,
-   "corpus_uses": 409,
-   "composed": false
+   "corpus_uses": 411,
+   "composed": true
   },
   {
    "code": "b",
@@ -177,7 +177,7 @@
    "category": "transport",
    "modelled": false,
    "corpus_uses": 0,
-   "composed": true
+   "composed": false
   },
   {
    "code": "ds",
@@ -200,7 +200,7 @@
    "name": "extra_light",
    "category": "visual",
    "modelled": false,
-   "corpus_uses": 241,
+   "corpus_uses": 252,
    "composed": true
   },
   {
@@ -216,15 +216,15 @@
    "name": "hazard_zone",
    "category": "hazard",
    "modelled": false,
-   "corpus_uses": 49,
-   "composed": false
+   "corpus_uses": 66,
+   "composed": true
   },
   {
    "code": "hb",
    "name": "horizontal_border",
    "category": "structure",
    "modelled": false,
-   "corpus_uses": 16,
+   "corpus_uses": 20,
    "composed": true
   },
   {
@@ -248,8 +248,8 @@
    "name": "jump_pad",
    "category": "transport",
    "modelled": true,
-   "corpus_uses": 10,
-   "composed": false
+   "corpus_uses": 12,
+   "composed": true
   },
   {
    "code": "l",
@@ -273,7 +273,7 @@
    "category": "transport",
    "modelled": false,
    "corpus_uses": 38,
-   "composed": true
+   "composed": false
   },
   {
    "code": "n",
@@ -336,7 +336,7 @@
    "name": "spawn_point",
    "category": "transport",
    "modelled": false,
-   "corpus_uses": 1363,
+   "corpus_uses": 1365,
    "composed": true
   },
   {
@@ -368,15 +368,15 @@
    "name": "subtitle_trigger",
    "category": "ui",
    "modelled": false,
-   "corpus_uses": 89,
-   "composed": false
+   "corpus_uses": 98,
+   "composed": true
   },
   {
    "code": "t",
    "name": "teleport",
    "category": "transport",
    "modelled": false,
-   "corpus_uses": 2165,
+   "corpus_uses": 2167,
    "composed": true
   },
   {
@@ -408,7 +408,7 @@
    "name": "walkway",
    "category": "transport",
    "modelled": true,
-   "corpus_uses": 1266,
+   "corpus_uses": 1274,
    "composed": true
   },
   {
@@ -421,22 +421,6 @@
   }
  ],
  "gap": [
-  {
-   "code": "3t",
-   "name": "text_display",
-   "category": "ui",
-   "modelled": false,
-   "corpus_uses": 143,
-   "composed": false
-  },
-  {
-   "code": "an",
-   "name": "annotation_cube",
-   "category": "ui",
-   "modelled": false,
-   "corpus_uses": 409,
-   "composed": false
-  },
   {
    "code": "bp",
    "name": "big_pipe",
@@ -454,27 +438,11 @@
    "composed": false
   },
   {
-   "code": "h",
-   "name": "hazard_zone",
-   "category": "hazard",
-   "modelled": false,
-   "corpus_uses": 49,
-   "composed": false
-  },
-  {
    "code": "ib",
    "name": "info_board_handheld",
    "category": "educational",
    "modelled": false,
    "corpus_uses": 7,
-   "composed": false
-  },
-  {
-   "code": "jp",
-   "name": "jump_pad",
-   "category": "transport",
-   "modelled": true,
-   "corpus_uses": 10,
    "composed": false
   },
   {
@@ -491,6 +459,14 @@
    "category": "ui",
    "modelled": false,
    "corpus_uses": 2,
+   "composed": false
+  },
+  {
+   "code": "m",
+   "name": "move_player",
+   "category": "transport",
+   "modelled": false,
+   "corpus_uses": 38,
    "composed": false
   },
   {
@@ -548,14 +524,6 @@
    "modelled": false,
    "corpus_uses": 2,
    "composed": false
-  },
-  {
-   "code": "sub",
-   "name": "subtitle_trigger",
-   "category": "ui",
-   "modelled": false,
-   "corpus_uses": 89,
-   "composed": false
   }
  ],
  "residual": {
@@ -566,15 +534,67 @@
   "measured_artifacts": 1668
  },
  "composer_codes": [
+  "0",
+  "1",
+  "12",
+  "1s",
+  "2",
+  "3t",
+  "an",
+  "anti",
+  "aura",
+  "auto",
   "br",
-  "d",
+  "cap",
+  "cast",
+  "cell",
+  "date",
+  "deck",
+  "desc",
+  "door",
   "el",
+  "h",
+  "hall",
   "hb",
-  "m",
+  "hero",
+  "jp",
+  "kin",
+  "kind",
+  "late",
+  "line",
+  "list",
+  "mode",
+  "name",
+  "none",
+  "ok",
+  "op",
+  "open",
+  "pit",
+  "plan",
+  "rect",
+  "room",
+  "rot",
+  "rows",
+  "rs",
   "s",
+  "seg",
+  "sign",
+  "size",
+  "soft",
+  "spec",
+  "spot",
+  "sub",
   "t",
+  "tail",
   "tc",
-  "wp"
+  "text",
+  "to",
+  "type",
+  "wall",
+  "why",
+  "wp",
+  "yard",
+  "ys"
  ],
  "composer_artifacts": [
   "cable_tray",

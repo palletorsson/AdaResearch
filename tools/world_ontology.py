@@ -107,8 +107,21 @@ def practised(codes):
 def composed():
     """What the wizard engine references (its own declared vocabulary)."""
     src = (ROOT / "tools/wizard_compose.py").read_text(encoding="utf-8", errors="ignore")
-    codes = set(re.findall(r'"(?:wp|tc|br|jp|hb|el|s|t|d|l|m)(?::[^"]*)?"', src))
-    plain = {c.strip('"').split(":")[0] for c in codes}
+    # detect what the composer WRITES into the utilities layer, rather than a
+    # hardcoded list — the instrument must not under-report its own subject
+    # (it listed an/3t/sub/h as gaps the day they were composed).
+    plain = set()
+    # multi-char codes are unambiguous anywhere they are built as a token
+    for m in re.finditer(r'"([a-z0-9]{2,4})(?::|")', src):
+        plain.add(m.group(1))
+    for m in re.finditer(r'"([a-z0-9]{2,4}):%', src):
+        plain.add(m.group(1))
+    # single-char codes only count when written INTO the utilities layer, or
+    # they would collide with ordinary strings ("s", "t", "d" …)
+    for line in src.splitlines():
+        if "U[" in line and "=" in line:
+            for m in re.finditer(r'"([a-z0-9])(?::|")', line):
+                plain.add(m.group(1))
     arts = set(re.findall(r'"((?:lab_|hangar_|cable_|ceiling_|exit_)[a-z_]+)', src))
     return plain, arts
 
