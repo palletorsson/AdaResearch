@@ -506,8 +506,27 @@ func _apply_utility_parameters(utility_object: Node3D, utility_type: String, par
 
 				print("GridUtilitiesComponent: Set teleporter height offset to: %f" % height_offset)
 		"l":  # Lift
-			if parameters.size() > 0 and "height" in utility_object:
-				utility_object.height = float(parameters[0])
+			# DEAD PARAMETER, fixed 2026-07-25: platform.gd exports `lift_height`,
+			# not `height`, so the old property check never matched and every
+			# `l:<n>` in the project was silently ignored (lifts always ran the
+			# 5.0 default). Guarded two ways so the fix cannot break what worked:
+			#   * only a valid, positive number sets the height — Pattern_Foundry
+			#     passes a LABEL ("l:KALEIDOSCOPE MILL") and float() would flatten
+			#     those lifts to 0.0;
+			#   * labels are preserved as metadata instead of being dropped.
+			if parameters.size() > 0:
+				var raw_lift: String = str(parameters[0]).strip_edges()
+				if raw_lift.is_valid_float() and float(raw_lift) > 0.0:
+					var lift_h: float = float(raw_lift)
+					if "lift_height" in utility_object:
+						utility_object.lift_height = lift_h
+						print("GridUtilitiesComponent: Set lift_height to %.2f" % lift_h)
+					elif "height" in utility_object:
+						utility_object.height = lift_h
+						print("GridUtilitiesComponent: Set lift height to %.2f" % lift_h)
+				elif not raw_lift.is_empty():
+					utility_object.set_meta("lift_label", raw_lift)
+					print("GridUtilitiesComponent: Lift label '%s' (height left at default)" % raw_lift)
 		"s":  # Spawn point
 			if parameters.size() >= 3:
 				# Format: s:x:y:z (grid coordinates)
