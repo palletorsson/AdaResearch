@@ -1,6 +1,6 @@
 {
  "_comment": "THE ORDER OF OPERATIONS for map composition — canon, editable. Palle 2026-07-24: 'this is about order of operation, what is included in what order... then auto research to create the best combination or new strategies.' The research engines READ this file (stages, metric weights, bands): edit here, re-run, the search changes. Rounds history at the bottom. Sibling canons: cabinet_grammar.json, systems_fold.json.",
- "version": 12,
+ "version": 13,
  "operations": [
   {
    "n": 1,
@@ -136,6 +136,15 @@
     "tower+lit"
    ],
    "note": "el was used 193 times in hand maps and NEVER by the wizard; the landmark scores on floor-cells-within-2 (visibility) x mid-walk position (homing). Cheapest legibility per cell in VR."
+  },
+  {
+   "n": 9.7,
+   "op": "reward",
+   "what": "SCORE POINTS (sp) — the optional, marked: what stepping off the spine yields",
+   "strategies": [
+    "off_spine_pockets"
+   ],
+   "note": "Palle: 'close the score points gap too' (779 corpus uses, the largest gap). The rule comes from what a score cube IS: the spine is the task, sp marks what the walk does NOT require. Candidates are cells 2+ steps off the spine (BFS depth from the walk), ranked by enclosure — never on the line, never required to finish. A first attempt used local maxima of walk distance: right for pockets in a gate, found NOTHING in a linear band; depth-off-spine works in both. Gate 5 cubes (incl. one offered on the parapet), track 4."
   }
  ],
  "interfaces": {

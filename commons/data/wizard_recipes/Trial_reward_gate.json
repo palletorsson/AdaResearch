@@ -1,5 +1,5 @@
 {
- "name": "Track_Service_Corridor",
+ "name": "Trial_reward_gate",
  "date": "2026-07-26",
  "spec": {
   "cast": [
@@ -27,22 +27,14 @@
   "elevation": "procession",
   "trim_approach": false,
   "arrival": {
-   "threshold": "none",
-   "prologue": false,
-   "overview": "none"
+   "threshold": "compression",
+   "prologue": true,
+   "overview": "parapet"
   },
   "track": {
-   "enabled": true,
-   "harvest": false,
-   "plan": [
-    "gate_in",
-    "service_riser",
-    "loading_bay",
-    "plant_room",
-    "chamber_big",
-    "yard_seg",
-    "gate_out"
-   ]
+   "enabled": false,
+   "plan": "auto",
+   "kin_fill": true
   },
   "doors": {
    "enabled": true,
@@ -91,21 +83,21 @@
    "kin": []
   }
  },
- "score_soft": 0.525,
+ "score_soft": 0.621,
  "metrics": {
-  "room_band": 0.92,
-  "enclosure": 0.12,
-  "hall": 0.0,
-  "arrival": 0.27,
+  "room_band": 0.87,
+  "enclosure": 0.1,
+  "hall": 1.0,
+  "arrival": 0.48,
   "elevation": 0.5,
-  "compact": 0.71,
+  "compact": 0.53,
   "tissue": 1.0,
   "story": 1.0,
-  "aura": 0.87
+  "aura": 0.85
  },
  "pathfinder": {
   "ok": true,
-  "reach": 0.89,
-  "tail": "OK    Track_Service_Corridor  (289/324 reachable, 25 artifacts, 1 teleport(s))\n  Hazards: 5 cell(s) \u2014 toxic x5 [(2,32), (4,32), (3,33), (2,34), (4,34)]\n  Path spawn->teleport avoids all hazard cells\n  Rule 2 [WARN] Teleport at (6,41) \u2014 row z=42 has no floor cubes to catch player\n  Rule 4 [WARN] Artifact 'mold_network' at (3,33) h=1 unreachable\n\n=== 1 maps checked: 1 OK, 0 FAIL (0 issues) ==="
+  "reach": 0.92,
+  "tail": "OK    Trial_reward_gate  (337/366 reachable, 32 artifacts, 1 teleport(s))\n  Hazards: 12 cell(s) \u2014 toxic x12 [(36,5), (37,5), (36,6), (39,6), (38,7), (39,7), (37,8), (38,8), (38,9), (36,10), (36,11), (37,11)]\n  Rule 3 [WARN] Teleport at (45,8) is NOT reachable from spawn via walking\n  Rule 4 [WARN] Artifact 'mold_network' at (39,8) h=1 unreachable\n\n=== 1 maps checked: 1 OK, 0 FAIL (0 issues) ==="
  }
 }

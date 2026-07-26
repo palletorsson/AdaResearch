@@ -68,6 +68,7 @@ DEFAULT_SPEC = {
     "doors": {"enabled": True, "accent": ""},
     "voice": {"enabled": True, "board": True, "words": True, "subtitles": True},
     "hazard": {"enabled": True, "kind": "toxic"},
+    "reward": {"enabled": True, "count": 4},
     # style "br" = the project's own bridge primitive (transparent grid walkway,
     # pathfinder-native); "deck" = raised deck + aligned wedges (the first build)
     "service": {"enabled": True, "in_cycle": True},
@@ -647,6 +648,12 @@ def compose(spec):
     stages.append(place_lights(U, W, D, floor, dist_map, spawn_a, tp,
                                every=int(_li.get("every", 7)),
                                enabled=_li.get("enabled", True)))
+    # 9.7 REWARD — score points where the walk never has to go
+    _rw = spec.get("reward") or {}
+    _extras = []
+    _par = next((s for s in stages if s.get("op") == "arrival"), {}).get("parapet") or []
+    if _par: _extras.append(tuple(_par[len(_par) // 2]))
+    stages.append(place_rewards(S, U, W, D, floor, dist_map, hall, _extras, _rw))
     # 9 WALL HANGAR PRINCIPAL — the last operation
     pw = spec.get("principal_wall") or {}
     if pw.get("enabled", True):
@@ -950,6 +957,60 @@ def place_hazard(S, U, W, D, cells, kind, spec_hazard):
             "why": ("h:%s inside the sealed quarantine only — visible from the parapet, "
                     "unreachable by construction; the composer never puts a hazard on its "
                     "own walk" % kind)}
+
+
+# ---------- OP 9.7: REWARD (sp) — the optional, marked ----------
+def place_rewards(S, U, W, D, floor, dist, spine, extras, spec_reward):
+    """`sp` score cubes on cells the walk never needs: the deepest corner of each
+    off-spine pocket, plus any explicitly offered extras (a parapet, a far lip).
+
+    A reward on the spine is not a reward, it is decoration; so every candidate
+    must be OFF the main line and at a local maximum of walk distance — the end
+    of a detour, not a step along the way."""
+    if not spec_reward.get("enabled", True):
+        return {"op": "reward", "placed": 0, "cells": [], "why": "disabled"}
+    want = int(spec_reward.get("count", 4))
+    spine_set = set(spine)
+    # DEPTH OFF THE LINE: BFS out from the spine. A reward belongs where the walk
+    # does not pass — 2+ steps aside — not merely at a local maximum (that rule
+    # suited pockets in a gate and found nothing in a linear band).
+    sdist = {c: 0 for c in spine_set if c in floor}
+    frontier = deque(sdist.keys())
+    while frontier:
+        c = frontier.popleft()
+        for dx, dz in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+            nb = (c[0] + dx, c[1] + dz)
+            if nb in floor and nb not in sdist:
+                sdist[nb] = sdist[c] + 1
+                frontier.append(nb)
+    cands = []
+    for c in floor:
+        if c in spine_set: continue
+        if str(U[c[1]][c[0]]).strip(): continue
+        off = sdist.get(c, 0)
+        if off < 2: continue                      # still on the line's shoulder
+        walls_around = sum(1 for dx, dz in ((1, 0), (-1, 0), (0, 1), (0, -1))
+                           if (c[0] + dx, c[1] + dz) not in floor)
+        cands.append((walls_around, off, c))
+    cands.sort(key=lambda t: (-t[0], -t[1]))
+    placed = []
+    taken = set()
+    for _w, _d, c in cands:
+        if len(placed) >= want: break
+        if any(abs(c[0] - p2[0]) + abs(c[1] - p2[1]) < 4 for p2 in taken): continue
+        U[c[1]][c[0]] = "sp"
+        taken.add(c)
+        placed.append({"cell": list(c), "off_spine": _d, "enclosed": _w, "kind": "pocket"})
+    for c in (extras or []):
+        if len(placed) >= want + 2: break
+        if not (0 <= c[0] < W and 0 <= c[1] < D): continue
+        if str(U[c[1]][c[0]]).strip(): continue
+        U[c[1]][c[0]] = "sp"
+        placed.append({"cell": list(c), "walk_dist": dist.get(tuple(c)), "kind": "offered"})
+    return {"op": "reward", "placed": len(placed), "cells": placed,
+            "why": ("sp score cubes at the end of off-spine pockets (local maxima of walk "
+                    "distance, most enclosed first) — the corridor's spine is the task, the "
+                    "cubes are what stepping aside yields; never on the line, never required")}
 
 
 # ---------- OP 6.5 SPANS · OP 9.5 LANDMARK + LIGHTS ----------
@@ -1763,6 +1824,8 @@ def compose_track(spec):
     stages.append(place_lights(U, W, D, floor, dist_map, spawn, tp,
                                every=int(_li.get("every", 7)),
                                enabled=_li.get("enabled", True)))
+    _rw = spec.get("reward") or {}
+    stages.append(place_rewards(S, U, W, D, floor, dist_map, hallc, [], _rw))
     # 9 WALL HANGAR PRINCIPAL — the last operation
     pw = spec.get("principal_wall") or {}
     if pw.get("enabled", True):
