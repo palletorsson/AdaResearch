@@ -110,6 +110,19 @@ MAPS: list[dict] = [
         ],
         "summary": "Chain: swarm lineage propagates peer-to-peer into an escort flock.",
     },
+    {
+        "slug": "07_Lease",
+        # Real pedestal (not a raw crystal) so the return is visible: the
+        # cage fades on pickup, the crystal dissolves after 20s, and the
+        # cage re-materializes with a fresh crystal ~1.5s later.
+        "pedestal": {"sequence": "primitives", "lease_s": 20},
+        "use_pedestal": True,
+        "vents": [
+            {"r": 5, "c": 6, "rate": 2.0, "wave": 5, "delay": 3.0,
+             "extra": {"sequence": "primitives"}},
+        ],
+        "summary": "Timed lease: 20s of catalyst, then it returns to its pedestal.",
+    },
 ]
 
 
@@ -156,10 +169,14 @@ def cfg_token(base: str, cfg: dict) -> str:
     return base + ("#" + "#".join(parts) if parts else "")
 
 
-def place_pedestal(m: dict, r: int, c: int, cfg: dict) -> None:
+def place_pedestal(m: dict, r: int, c: int, cfg: dict,
+                   use_pedestal: bool = False) -> None:
     # Height-2 plinth so the bracelet sits at hand-grab height.
     m["layers"]["structure"][r][c] = "2"
-    m["layers"]["interactables"][r][c] = cfg_token("becoming_catalyst", cfg)
+    # Raw crystal by default; the wireframe display case when the map
+    # tests pedestal behavior (e.g. the timed-lease return).
+    base = "catalyst_pedestal:0:0" if use_pedestal else "becoming_catalyst"
+    m["layers"]["interactables"][r][c] = cfg_token(base, cfg)
 
 
 def place_vent(m: dict, v: dict) -> None:
@@ -176,7 +193,8 @@ def place_vent(m: dict, v: dict) -> None:
 def build_one(map_def: dict, next_map: str) -> tuple[str, dict]:
     name = map_name(map_def["slug"])
     m = base_map(name)
-    place_pedestal(m, 2, 2, map_def["pedestal"])
+    place_pedestal(m, 2, 2, map_def["pedestal"],
+                   map_def.get("use_pedestal", False))
     for v in map_def["vents"]:
         place_vent(m, v)
     # Teleporter convention (pathfinder rule 5): the teleport cell is void.

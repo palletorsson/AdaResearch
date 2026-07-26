@@ -38,7 +38,20 @@ var _crystal_base_y: float = 0.0
 var _fading: bool = false
 var _fade_progress: float = 0.0
 
+# Timed lease — when lease_s > 0 the pedestal survives the pickup: the
+# cage fades and hides instead of queue_free, and re-materializes with a
+# fresh crystal once the lease (plus a grace beat) has run out. The
+# crystal's dissolve is driven by CatalystCapabilityManager's clock; this
+# countdown is the pedestal's own, started at pickup, so the return works
+# even though the crystal may dissolve in a different map.
+const RETURN_GRACE := 1.5       # seconds after lease end before the cage returns
+var _lease_s: float = 0.0
+var _leased_out: bool = false
+var _return_left: float = 0.0
+var _last_crystal_cfg: Dictionary = {}   # re-applied to the respawned crystal
+
 signal catalyst_taken()
+signal catalyst_returned()
 
 func _ready() -> void:
 	_build_cage()
@@ -61,7 +74,16 @@ func _process(delta: float) -> void:
 	if _fading:
 		_fade_progress += delta / CAGE_FADE_TIME
 		if _fade_progress >= 1.0:
-			queue_free()
+			if _lease_s > 0.0:
+				# Leased crystal: the pedestal stays, hidden, awaiting return.
+				_fading = false
+				_leased_out = true
+				if _cage:
+					_cage.visible = false
+				if _cage_light:
+					_cage_light.visible = false
+			else:
+				queue_free()
 			return
 		var alpha := 1.0 - _fade_progress
 		for mat in _edge_materials:
@@ -69,6 +91,12 @@ func _process(delta: float) -> void:
 			mat.emission_energy_multiplier = (1.0 - _fade_progress) * 2.0
 		if _cage_light:
 			_cage_light.light_energy = (1.0 - _fade_progress) * 1.5
+
+	# Timed-lease return countdown (ticks through fade + hidden states).
+	if _return_left > 0.0:
+		_return_left -= delta
+		if _return_left <= 0.0:
+			_rematerialize()
 
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -204,7 +232,35 @@ func _on_crystal_taken(_pickable) -> void:
 	_fading = true
 	_fade_progress = 0.0
 	catalyst_taken.emit()
-	print("[CatalystPedestal] Crystal taken — fading cage")
+	if _lease_s > 0.0:
+		# Start the return countdown. The crystal dissolves on the
+		# manager's clock (~lease_s after absorb); the cage returns a
+		# grace beat later so the two never overlap.
+		_return_left = _lease_s + RETURN_GRACE
+		print("[CatalystPedestal] Crystal taken on a %.0fs lease — return countdown started" % _lease_s)
+	else:
+		print("[CatalystPedestal] Crystal taken — fading cage")
+
+
+## Lease over: restore the cage and grow a fresh crystal with the same
+## config the original had (sequence binding, lease, mode seeds).
+func _rematerialize() -> void:
+	_return_left = 0.0
+	_leased_out = false
+	_fading = false
+	_fade_progress = 0.0
+	if _cage:
+		_cage.visible = true
+	for mat in _edge_materials:
+		mat.albedo_color.a = 0.8
+		mat.emission_energy_multiplier = 2.0
+	if _cage_light:
+		_cage_light.visible = true
+		_cage_light.light_energy = 1.5
+	_pending_crystal_cfg = _last_crystal_cfg.duplicate()
+	_spawn_crystal()
+	catalyst_returned.emit()
+	print("[CatalystPedestal] Lease over — cage re-materialized, crystal returned")
 
 
 # ═══════════════════════════════════════════════════════════════════════════
@@ -223,12 +279,14 @@ var _pending_crystal_cfg: Dictionary = {}
 #   active_mode    — set current_mode_index to point at this mode_id
 #   sequence       — bind the crystal to a sequence (name or "auto"); arms
 #                    the native mode via catalyst_sequence_binding.gd
+#   lease_s        — timed lease: crystal dissolves after N seconds and the
+#                    pedestal re-materializes it (also pedestal-handled)
 # Pedestal-handled keys:
 #   cage_color     — RGBA wireframe tint
 #   clear_modes    — call CatalystCapabilityManager.reset_progression() first
 const _CATALYST_FORWARD_KEYS = [
 	"all_modes", "start_mode", "unlock_to",
-	"shooting_only", "active_mode", "sequence",
+	"shooting_only", "active_mode", "sequence", "lease_s",
 ]
 
 
@@ -266,6 +324,10 @@ func apply_grid_config(config_data: Dictionary) -> void:
 				cap_mgr.call("save_state")
 		print("[CatalystPedestal] clear_modes ran — freed %d ghost catalysts; bracelet preserved" % freed)
 
+	# lease_s: the pedestal needs it too (return countdown + survive fade).
+	if config_data.has("lease_s"):
+		_lease_s = float(str(config_data["lease_s"]))
+
 	# Forward catalyst-related keys to the spawned crystal.
 	var crystal_cfg: Dictionary = {}
 	for k in _CATALYST_FORWARD_KEYS:
@@ -273,6 +335,9 @@ func apply_grid_config(config_data: Dictionary) -> void:
 			crystal_cfg[k] = config_data[k]
 	if crystal_cfg.is_empty():
 		return
+	# Remember for lease respawns — the returned crystal gets the same
+	# sequence binding / lease / mode seeds the original had.
+	_last_crystal_cfg = crystal_cfg.duplicate()
 	if is_instance_valid(_crystal) and _crystal.has_method("apply_grid_config"):
 		_crystal.call("apply_grid_config", crystal_cfg)
 		_pending_crystal_cfg = {}

@@ -57,6 +57,12 @@ var unlocked_modes: Array[String] = ["voxel_editor", "wedge_placer", "artifact_e
 # _ready (knowledge only) or armed explicitly via the `sequence:` config
 # key. Empty = no sequence context (standalone map, tests).
 var home_sequence: String = ""
+# Timed lease — seconds the player may hold this catalyst before it
+# dissolves and returns to its pedestal. 0 = keep forever (default).
+# The CLOCK lives in CatalystCapabilityManager (the crystal node is freed
+# and recreated on map transitions); this crystal only reports the lease
+# on absorb. Set via `lease_s:` config (pedestal forwards it).
+var lease_s: float = 0.0
 var current_mode_index: int = 0
 var fire_cooldown: float = 0.0
 var is_held: bool = false
@@ -3187,6 +3193,13 @@ func _replace_existing_catalyst(ctrl: XRController3D) -> void:
 func _absorb_into_hand() -> void:
 	_absorbed = true
 
+	# Timed lease: report to the manager, which owns the clock (this node
+	# is freed and recreated on map transitions, so it can't keep time).
+	if lease_s > 0.0:
+		var lease_mgr := _find_capability_manager()
+		if lease_mgr and lease_mgr.has_method("begin_lease"):
+			lease_mgr.call("begin_lease", lease_s)
+
 	# If controller reference was lost, try to recover — prefer the SAME hand
 	if not is_instance_valid(controller):
 		print("[Catalyst] Controller lost since pickup, recovering...")
@@ -3437,6 +3450,10 @@ func configure(config_data: Dictionary) -> void:
 	# sequence from AdaSceneManager first. Maps without the key: untouched.
 	if config_data.has("sequence"):
 		bind_to_sequence(str(config_data["sequence"]))
+	# Timed lease: `lease_s:<seconds>` — the catalyst serves for a bounded
+	# window after pickup, then dissolves back to its pedestal.
+	if config_data.has("lease_s"):
+		lease_s = float(str(config_data["lease_s"]))
 
 # ═════════════════════════════════════════════════════════════════════════
 # SEQUENCE BINDING — the catalyst knows what sequence it belongs to
@@ -3476,3 +3493,22 @@ func get_home_sequence() -> String:
 ## The mode this catalyst's home sequence maps to ("" when unbound).
 func get_native_mode_id() -> String:
 	return SequenceBinding.mode_for_sequence(home_sequence)
+
+# ═════════════════════════════════════════════════════════════════════════
+# TIMED LEASE — the catalyst returns to its pedestal
+# ═════════════════════════════════════════════════════════════════════════
+
+func _find_capability_manager() -> Node:
+	var mgr := get_node_or_null("/root/CatalystCapabilityManager")
+	if mgr == null:
+		mgr = get_node_or_null("/root/CatalystCapability")
+	return mgr
+
+## Called by CatalystCapabilityManager when the lease expires. A farewell
+## haptic on the holding hand, then the crystal is gone — the pedestal
+## (if still in this map) re-materializes on its own clock.
+func end_lease_dissolve() -> void:
+	if is_instance_valid(controller):
+		controller.trigger_haptic_pulse("haptic", 0.0, 0.4, 0.7, 0.0)
+	print("[Catalyst] Lease expired — dissolving from hand")
+	queue_free()

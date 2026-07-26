@@ -83,25 +83,46 @@ via interactables tokens — including the original `Catalyst_01..10` ring.
 The authored tunables now actually apply. (The `e:` utility tokens went
 through a different parser and were unaffected.)
 
-## Next: placement in the spine (the timed lease)
+## The timed lease (BUILT 2026-07-26)
 
-The stated plan: place the catalyst at the beginning or middle of each
-sequence and let the player hold it for a bounded time. Design sketch,
-deliberately NOT built yet:
+Token: `catalyst_pedestal:0:0#sequence:auto#lease_s:20`. Test map:
+`CatalystLab_07_Lease`. Smoke: `smoke_catalyst_lease.gd`.
 
-1. **Placement** — one pedestal per spine sequence, early-to-mid map,
-   token simply `catalyst_pedestal:0:0#sequence:auto`. The binding table
-   already arms the right mode per sequence; sequences without a binding
-   entry (11 of them) need modes designed first, or the pedestal grants
+How it works — three actors, one handshake:
+
+1. **Crystal** (`becoming_catalyst.gd`): takes `lease_s` config (pedestal
+   forwards it). On absorb it reports the lease to the manager and does
+   nothing else — the crystal can't keep time because it is freed and
+   recreated on every map transition. On expiry the manager calls its
+   `end_lease_dissolve()`: farewell haptic, gone from the hand.
+2. **Manager** (`CatalystCapabilityManager.gd`): owns the clock
+   (`begin_lease` / `is_lease_running` / `get_lease_remaining` /
+   `end_lease_now`, signals `lease_started` / `lease_ended`). Haptic
+   ticks the last 3 seconds. On expiry it dissolves absorbed crystals,
+   frees the bracelet, and clears `_bracelet_activated` so scene
+   transitions stop respawning them. **The lease returns the TOOL, not
+   the knowledge** — unlocked modes, friend powers, capacity all persist.
+3. **Pedestal** (`catalyst_pedestal.gd`): with `lease_s` set it survives
+   the pickup — cage fades and hides instead of `queue_free`. Its own
+   return countdown (lease + 1.5s grace, started at pickup) re-materializes
+   the cage and grows a fresh crystal carrying the remembered config
+   (sequence binding, lease, mode seeds). Re-pickup restarts the window.
+   If the player leaves the map mid-lease, the crystal still dissolves on
+   the manager's clock; the pedestal comes back fresh with the map.
+
+## Next: placement in the spine
+
+1. **Placement** — one pedestal per spine sequence, early-to-mid map:
+   `catalyst_pedestal:0:0#sequence:auto#lease_s:<N>`. The binding table
+   arms the right mode per sequence; sequences without a binding entry
+   (11 of them) need modes designed first, or the pedestal grants
    knowledge only.
-2. **Lease** — a `lease_s:<seconds>` config on the pedestal: after pickup
-   the crystal serves for the lease window, then de-absorbs back to the
-   pedestal (cage re-materializes). Keeps early sequences from carrying
-   late-game power; repeated leases per map are fine.
-3. **Counterpart pairing** — the same maps place vents with
+2. **Counterpart pairing** — the same maps place vents with
    `sequence:auto`, so the encounter is always the matched pair; mismatch
    encounters (foreign-mode catalyst vs local brood) become a deliberate
    late-game device, not an accident.
-4. Chamber_* capstones (already inserted after theme events) stay the
+3. Chamber_* capstones (already inserted after theme events) stay the
    full vent/foe loop homes; the lease pedestals are the APPETIZER at
    sequence start, the chamber is the meal.
+4. Later polish: countdown readout on the bracelet/mode label; a
+   lease-aware vent that winds down when the lease ends.

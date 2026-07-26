@@ -47,6 +47,14 @@ var _current_stage_order: int = 0
 var _launcher_check_accum: float = 0.0
 var _launcher_cooldown_left: float = 0.0
 
+# Timed lease runtime state — the clock lives HERE (not on the crystal)
+# because the absorbed crystal is freed and recreated on every map
+# transition. 0 = no lease running. The lease returns the TOOL, not the
+# knowledge: unlocked modes / friend powers / capacity all persist.
+var _lease_left: float = 0.0
+var _lease_total: float = 0.0
+var _lease_last_whole: int = -1   # for once-per-second countdown feedback
+
 # Bracelet state — persists across scenes
 var _bracelet: Node = null
 var _bracelet_activated: bool = false        # True once first catalyst is picked up
@@ -60,6 +68,8 @@ signal hand_verbs_changed(verbs: Array[String])
 signal movement_ability_unlocked(ability: String)
 signal catalyst_mode_registered(mode_id: String)
 signal friend_power_granted(mode_id: String, power: String)
+signal lease_started(seconds: float)
+signal lease_ended()
 
 func _ready():
 	_load_stages()
@@ -73,6 +83,7 @@ func _ready():
 	])
 
 func _process(delta: float) -> void:
+	_tick_lease(delta)
 	# Launcher friend power (forces lineage): friends clustered underfoot boost
 	# the player's jump. Lightweight timer — the real work only runs every
 	# LAUNCHER_CHECK_INTERVAL_S and only while catalyst creatures exist at all.
@@ -338,6 +349,69 @@ func spawn_bracelet_on_controller(controller: XRController3D) -> void:
 		_bracelet.get_parent().name if _bracelet.get_parent() else "NONE",
 		_bracelet.global_position
 	])
+
+# ---------------------------------------------------------------------------
+# Timed lease — the catalyst returns to its pedestal
+# ---------------------------------------------------------------------------
+
+## Start (or restart) the lease clock. Called by BecomingCatalyst on absorb
+## when its `lease_s` config is set. Re-pickup restarts the window.
+func begin_lease(seconds: float) -> void:
+	if seconds <= 0.0:
+		return
+	_lease_total = seconds
+	_lease_left = seconds
+	_lease_last_whole = int(ceil(seconds)) + 1
+	lease_started.emit(seconds)
+	print("CatalystCapabilityManager: Lease started — %.0fs on the catalyst" % seconds)
+
+func is_lease_running() -> bool:
+	return _lease_left > 0.0
+
+func get_lease_remaining() -> float:
+	return maxf(_lease_left, 0.0)
+
+## End the lease immediately: dissolve the absorbed crystal(s) and the
+## bracelet, and deactivate bracelet state so scene transitions stop
+## respawning them. The lease returns the TOOL, not the knowledge —
+## unlocked modes, friend powers, and capacity are untouched.
+func end_lease_now() -> void:
+	_lease_left = 0.0
+	_lease_total = 0.0
+	_lease_last_whole = -1
+	var dissolved: int = 0
+	var tree := get_tree()
+	if tree:
+		for cat in tree.get_nodes_in_group("catalyst"):
+			var p: Node = cat.get_parent()
+			if p != null and p is XRController3D:
+				if cat.has_method("end_lease_dissolve"):
+					cat.call("end_lease_dissolve")
+				else:
+					cat.queue_free()
+				dissolved += 1
+	if is_instance_valid(_bracelet):
+		_bracelet.queue_free()
+	_bracelet = null
+	_bracelet_controller = null
+	_bracelet_activated = false
+	_bracelet_tracker = ""
+	save_state()
+	lease_ended.emit()
+	print("CatalystCapabilityManager: Lease ended — %d crystal(s) dissolved; progression retained" % dissolved)
+
+func _tick_lease(delta: float) -> void:
+	if _lease_left <= 0.0:
+		return
+	_lease_left -= delta
+	var whole: int = int(ceil(maxf(_lease_left, 0.0)))
+	if whole != _lease_last_whole:
+		_lease_last_whole = whole
+		# Final-seconds feedback: haptic ticks on the holding hand.
+		if whole <= 3 and whole > 0 and is_instance_valid(_bracelet_controller):
+			_bracelet_controller.trigger_haptic_pulse("haptic", 0.0, 0.1, 0.3, 0.0)
+	if _lease_left <= 0.0:
+		end_lease_now()
 
 ## Get the current bracelet instance (or null).
 func get_bracelet() -> Node:

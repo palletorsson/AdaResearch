@@ -85,7 +85,7 @@ const CONFIG_PARAM_NAMES = [
 	"emit_interval_s", "wave_size", "start_delay_s", "damage_percent",
 	"require_catalyst_armed", "initial_state", "foe_mode", "critter_stage",
 	"sequence", "all_modes", "start_mode", "unlock_to", "shooting_only",
-	"active_mode", "clear_modes", "cage_color",
+	"active_mode", "clear_modes", "cage_color", "lease_s",
 	# tentacle_placer params — same issue as lab_room: without these
 	# listed, e.g. "travel_speed:0.6" gets misparsed as a transform
 	# shorthand and the value becomes the boolean `true`, which then

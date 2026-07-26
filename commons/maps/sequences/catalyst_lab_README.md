@@ -7,7 +7,7 @@ to the same sequence name via
 (10 projectile modes vs. one foe) is covered by `catalyst_test`; this
 ring covers **who knows what sequence, and what that knowledge arms**.
 
-Maps loop 01 → 02 → … → 06 → 01.
+Maps loop 01 → 02 → … → 07 → 01.
 
 | Map | Tests | Expected |
 |---|---|---|
@@ -17,6 +17,7 @@ Maps loop 01 → 02 → … → 06 → 01.
 | `CatalystLab_04_Pair_Waveform` | `sequence:wavefunctions` | Waveform native; wave brood — friends slow-pulse. **Calmer** power. |
 | `CatalystLab_05_Mismatch` | Catalyst pinned `color` (chromatic), vents pinned `cellularautomata` (drainfriend) | **Who names whom.** Vent A's raw foes: first chromatic hit re-locks lineage → chromatic friends. Vent B's `curious` creatures are past "foe" → they keep the drainfriend lineage. The catalyst names only the unformed. |
 | `CatalystLab_06_Chain` | `sequence:swarmintelligence`, one vent, wave 10 | Convert one foe; escort lineage propagates peer-to-peer; flock forms the shield-wall around the player. |
+| `CatalystLab_07_Lease` | Real wireframe pedestal, `sequence:primitives#lease_s:20` | **Timed lease.** Pickup starts a 20s clock (owned by CatalystCapabilityManager, survives map transitions). Haptic ticks in the last 3s; crystal dissolves from the hand; ~1.5s later the cage re-materializes with a fresh crystal carrying the same config. Progression (modes/powers) is retained — the lease returns the tool, not the knowledge. |
 
 ## Token grammar exercised
 
@@ -24,6 +25,7 @@ Maps loop 01 → 02 → … → 06 → 01.
 becoming_catalyst#sequence:<name|auto>          — pin/auto-bind the crystal; arms its native mode
 catalyst_vent:0:0#sequence:<name|auto>#...      — brood kind resolved from the same table
 catalyst_vent:0:0#foe_mode:auto                 — same as sequence:auto (matches e:R:W:D:auto)
+catalyst_pedestal:0:0#sequence:auto#lease_s:20  — timed lease: crystal returns to the pedestal
 ```
 
 Regenerate: `python tools/generate_catalyst_lab_maps.py` then
