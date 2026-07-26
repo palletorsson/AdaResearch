@@ -7600,6 +7600,61 @@
     "measured_at": "2026-04-29T07:09:56.762620Z"
    }
   },
+  "adjacency_shelf": {
+   "category": "display",
+   "description": "A two-tone laminate wedge shelf holding three stock props. The shelf answers to its own contents: a coherent triptych fuses the laminate into one surface, an incoherent one splits it and runs a seam down the wedge. Display furniture is never neutral. Config: #slot_a:fire_extinguisher#coherence:0.85",
+   "include_in_map_data": true,
+   "lookup_name": "adjacency_shelf",
+   "map_ready": true,
+   "name": "Adjacency Shelf",
+   "scene": "res://commons/artifacts/adjacency_shelf/adjacency_shelf.tscn",
+   "complexity": "intermediate",
+   "tags": ["readymade", "arrangement", "shelf", "display"],
+   "dna": {
+    "promoted": "2026-07-26", "stage": "2 - variation",
+    "axes": {"coherence": [0.0, 0.5, 1.0]},
+    "default": "coherence=0.85"
+   },
+   "spatial_needs": {"platform": "none", "footprint_cells": 2,
+    "clearance": {"front": 2, "back": 1, "left": 1, "right": 1}}
+  },
+  "poor_image_gate": {
+   "category": "display",
+   "description": "A doorway with a different bargain on each side: high resolution behind a gilt frame and a rope, or a coarse quantised sample you can walk straight out of. The degradation is real geometry at a lower sample rate, not a blur over a fine mesh. Config: #side:rich#poor_samples:4",
+   "include_in_map_data": true,
+   "lookup_name": "poor_image_gate",
+   "map_ready": true,
+   "name": "Poor Image Gate",
+   "scene": "res://commons/artifacts/poor_image_gate/poor_image_gate.tscn",
+   "complexity": "advanced",
+   "tags": ["seam", "resolution", "threshold", "display"],
+   "dna": {
+    "promoted": "2026-07-26", "stage": "2 - variation",
+    "axes": {"poor_samples": [2, 4, 8], "rich_samples": [14, 26]},
+    "default": "poor_samples=4, rich_samples=26"
+   },
+   "spatial_needs": {"platform": "none", "footprint_cells": 3,
+    "clearance": {"front": 3, "back": 3, "left": 1, "right": 1}}
+  },
+  "unfinishable_terrarium": {
+   "category": "display",
+   "description": "A sealed vivarium on a steel stand with a brass hour meter bolted to the frame. State persists to user:// across sessions and the meter reads the wall clock; growth is a function of hours and hours only increase. No reset control exists anywhere in the artifact or its config, which is the piece. Config: #preview_hours:120",
+   "include_in_map_data": true,
+   "lookup_name": "unfinishable_terrarium",
+   "map_ready": true,
+   "name": "Unfinishable Terrarium",
+   "scene": "res://commons/artifacts/unfinishable_terrarium/unfinishable_terrarium.tscn",
+   "complexity": "advanced",
+   "tags": ["persistence", "ecology", "meta", "display"],
+   "dna": {
+    "promoted": "2026-07-26", "stage": "2 - variation",
+    "axes": {"preview_hours": [0, 24, 120, 600]},
+    "default": "preview_hours=-1 - read the real meter",
+    "note": "preview_hours is for capture only. It previews a later reading; it does not reset anything, because nothing here resets."
+   },
+   "spatial_needs": {"platform": "none", "footprint_cells": 1,
+    "clearance": {"front": 2, "back": 1, "left": 1, "right": 1}}
+  },
   "multiple_ring": {
    "category": "display",
    "description": "A ring of one ordinary prop, cast in a single matte colour and repeated. Removing a member never leaves a gap: the survivors redistribute to a fresh even spacing, so no position ever belonged to anyone. Config: #subject:fire_extinguisher#count:14#removed:0",

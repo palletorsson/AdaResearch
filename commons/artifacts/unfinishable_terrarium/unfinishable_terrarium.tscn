@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/artifacts/unfinishable_terrarium/unfinishable_terrarium.gd" id="1_main"]
+
+[node name="Root" type="Node3D"]
+script = ExtResource("1_main")
+
+[node name="SceneLight" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 2.1, 1.3)
+light_energy = 2.0
+omni_range = 9.0
