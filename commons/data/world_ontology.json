@@ -1,7 +1,7 @@
 {
  "_readme": "world_ontology.py — THE LEDGER OF WHAT EXISTS.",
  "_intent": "Palle 2026-07-25: 'what exist is both what we created but also (queer) ontology of the world.' This ledger asks the world instead of asking ourselves. The GAP is what exists and we do not compose; the RESIDUAL is what exists and resists composition — it is not a backlog.",
- "maps_scanned": 2029,
+ "maps_scanned": 2030,
  "artifacts_registered": 2661,
  "artifacts_map_ready": 2592,
  "registries": {
@@ -120,7 +120,7 @@
    "name": "text_display",
    "category": "ui",
    "modelled": false,
-   "corpus_uses": 147,
+   "corpus_uses": 149,
    "composed": true
   },
   {
@@ -136,7 +136,7 @@
    "name": "annotation_cube",
    "category": "ui",
    "modelled": false,
-   "corpus_uses": 411,
+   "corpus_uses": 412,
    "composed": true
   },
   {
@@ -200,7 +200,7 @@
    "name": "extra_light",
    "category": "visual",
    "modelled": false,
-   "corpus_uses": 252,
+   "corpus_uses": 257,
    "composed": true
   },
   {
@@ -216,7 +216,7 @@
    "name": "hazard_zone",
    "category": "hazard",
    "modelled": false,
-   "corpus_uses": 66,
+   "corpus_uses": 78,
    "composed": true
   },
   {
@@ -336,7 +336,7 @@
    "name": "spawn_point",
    "category": "transport",
    "modelled": false,
-   "corpus_uses": 1365,
+   "corpus_uses": 1366,
    "composed": true
   },
   {
@@ -352,8 +352,8 @@
    "name": "score points",
    "category": "score",
    "modelled": false,
-   "corpus_uses": 779,
-   "composed": false
+   "corpus_uses": 788,
+   "composed": true
   },
   {
    "code": "sr",
@@ -368,7 +368,7 @@
    "name": "subtitle_trigger",
    "category": "ui",
    "modelled": false,
-   "corpus_uses": 98,
+   "corpus_uses": 104,
    "composed": true
   },
   {
@@ -376,7 +376,7 @@
    "name": "teleport",
    "category": "transport",
    "modelled": false,
-   "corpus_uses": 2167,
+   "corpus_uses": 2168,
    "composed": true
   },
   {
@@ -408,7 +408,7 @@
    "name": "walkway",
    "category": "transport",
    "modelled": true,
-   "corpus_uses": 1274,
+   "corpus_uses": 1279,
    "composed": true
   },
   {
@@ -510,14 +510,6 @@
    "composed": false
   },
   {
-   "code": "sp",
-   "name": "score points",
-   "category": "score",
-   "modelled": false,
-   "corpus_uses": 779,
-   "composed": false
-  },
-  {
    "code": "sr",
    "name": "speed_reader",
    "category": "ui",
@@ -581,6 +573,7 @@
   "sign",
   "size",
   "soft",
+  "sp",
   "spec",
   "spot",
   "sub",
