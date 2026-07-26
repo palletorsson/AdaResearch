@@ -7600,6 +7600,55 @@
     "measured_at": "2026-04-29T07:09:56.762620Z"
    }
   },
+  "stock_stratum": {
+   "category": "display",
+   "description": "A core sample under glass whose strata are the project's own most-placed props, live-instanced and frozen in the seam. Bed thickness is proportional to placement count, thickest at the base, so the core reads bottom-up: what gets placed most is the ground everything else stands on. Reads commons/data/placement_census.json. Config: #max_bands:6#reveal:0.74#live_props:true",
+   "include_in_map_data": true,
+   "lookup_name": "stock_stratum",
+   "map_ready": true,
+   "name": "Stock Stratum",
+   "scene": "res://commons/artifacts/stock_stratum/stock_stratum.tscn",
+   "complexity": "advanced",
+   "tags": [
+    "readymade",
+    "census",
+    "meta",
+    "core",
+    "display"
+   ],
+   "dna": {
+    "promoted": "2026-07-26",
+    "stage": "2 - variation",
+    "axes": {
+     "max_bands": [
+      3,
+      6,
+      9
+     ],
+     "live_props": [
+      true,
+      false
+     ],
+     "reveal": [
+      0.4,
+      0.74,
+      1.0
+     ]
+    },
+    "default": "max_bands=6, live_props=true, reveal=0.74",
+    "note": "A readymade: nothing in the strata is modelled for the piece. The surrealism is compression, not invention."
+   },
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 1,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    }
+   }
+  },
   "sturtevant_bench": {
    "category": "display",
    "description": "An artifact beside the same artifact rebuilt from its own @identity prose, on two identical plinths. A deterministic copyist reads the claim, knows twelve shapes and cannot see the source; where the words named nothing buildable the twin comes out smooth and confident. The readout counts both sides. Config: #subject:galton_board#subject_scale:0.42",
