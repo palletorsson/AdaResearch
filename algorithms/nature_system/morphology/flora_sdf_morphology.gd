@@ -63,18 +63,35 @@ static func build(dna: CritterDNA, parent: Node3D, _trait_mapper: CritterTraitMa
 			spread = maxf(spread, (lf["c"] as Vector3).distance_to(cen))
 		leaves.append({"c": cen, "r": maxf(spread * 0.85, trunk_r * 4.0)})
 
+	# bounds from the skeleton (needed BEFORE the field, so the grid clamp below
+	# can be computed from the real sample step)
+	var lo := Vector3(1e9, 0.0, 1e9)
+	var hi := Vector3(-1e9, 0.0, -1e9)
+	for c in caps:
+		lo = lo.min(c["a"]).min(c["b"]); hi = hi.max(c["a"]).max(c["b"])
+	var pad := Vector3.ONE * (trunk_r * 3.0)
+
+	# CLAMP EVERY RADIUS TO THE GRID — the same law CreatureSdfMorphology already
+	# follows. Branch radius decays 0.68 per fork, so a depth-4 twig is ~0.21 of
+	# the trunk; below one sample cell the marching field never crosses zero there
+	# and the feature is simply not meshed — the "partly-invisible body". That is
+	# why lowering this builder's LOD used to thin the trunk to a hairline. With
+	# the clamp the thinnest branch is always ~1.6 cells wide, so the tree keeps
+	# its whole skeleton at a coarser resolution and can afford a cheaper tier.
+	var span: Vector3 = (hi + pad) - (lo - pad)
+	var res: int = RES_BY_LOD[lod]
+	var step: float = maxf(span.x, maxf(span.y, span.z)) / float(res)
+	var min_r: float = step * 1.6
+	for c in caps:
+		c["ra"] = maxf(float(c["ra"]), min_r)
+		c["rb"] = maxf(float(c["rb"]), min_r)
+
 	var field := func(p: Vector3) -> float:
 		var d: float = 1e9
 		for c in caps:
 			d = Mesher.smin(d, Mesher.sd_capsule_tapered(p, c["a"], c["b"], c["ra"], c["rb"]), k)
 		return d
 
-	# bounds from the skeleton
-	var lo := Vector3(1e9, 0.0, 1e9)
-	var hi := Vector3(-1e9, 0.0, -1e9)
-	for c in caps:
-		lo = lo.min(c["a"]).min(c["b"]); hi = hi.max(c["a"]).max(c["b"])
-	var pad := Vector3.ONE * (trunk_r * 3.0)
 	var mesh: ArrayMesh = Mesher.mesh_field(field, lo - pad, hi + pad, RES_BY_LOD[lod])
 	if mesh != null:
 		var mi := MeshInstance3D.new()
