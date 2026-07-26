@@ -7600,6 +7600,47 @@
     "measured_at": "2026-04-29T07:09:56.762620Z"
    }
   },
+  "sturtevant_bench": {
+   "category": "display",
+   "description": "An artifact beside the same artifact rebuilt from its own @identity prose, on two identical plinths. A deterministic copyist reads the claim, knows twelve shapes and cannot see the source; where the words named nothing buildable the twin comes out smooth and confident. The readout counts both sides. Config: #subject:galton_board#subject_scale:0.42",
+   "include_in_map_data": true,
+   "lookup_name": "sturtevant_bench",
+   "map_ready": true,
+   "name": "Sturtevant Bench",
+   "scene": "res://commons/artifacts/sturtevant_bench/sturtevant_bench.tscn",
+   "complexity": "advanced",
+   "tags": [
+    "meta",
+    "identity",
+    "critique",
+    "bench",
+    "display"
+   ],
+   "dna": {
+    "promoted": "2026-07-26",
+    "stage": "2 - variation",
+    "axes": {
+     "subject": [
+      "galton_board",
+      "monte_carlo_dartboard",
+      "bias_visualizer",
+      "request_note"
+     ]
+    },
+    "default": "subject=galton_board",
+    "note": "The enforcement arm of the @identity convention: 817 artifacts carry a claim, and this puts one of them next to what its claim actually builds."
+   },
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 3,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    }
+   }
+  },
   "lineage_vitrine": {
    "category": "display",
    "description": "An object shown beside the siblings it did not become. Reads a subject artifact's declared dna.axes from the registry, instantiates one sibling per value along a rail, and keeps exactly ONE of them solid while the rest stand as ghosts. Stepping the axis moves which sibling is real; nothing else changes. Config: #subject:request_note#axis:mode#axis_index:0",

@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://commons/artifacts/sturtevant_bench/sturtevant_bench.gd" id="1_main"]
+
+[node name="SturtevantBench" type="Node3D"]
+script = ExtResource("1_main")
+
+[node name="SceneLight" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0, 2.3, 1.4)
+light_energy = 2.2
+omni_range = 10.0
