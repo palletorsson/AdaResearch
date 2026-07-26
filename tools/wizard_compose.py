@@ -66,6 +66,8 @@ DEFAULT_SPEC = {
     # in front of it. style "cluster" = a curated Wall-Hangar-Editor cluster.
     # op 6.5 spans (bridge/causeway) · op 9.5 landmark + lights
     "doors": {"enabled": True, "accent": ""},
+    "voice": {"enabled": True, "board": True, "words": True, "subtitles": True},
+    "hazard": {"enabled": True, "kind": "toxic"},
     # style "br" = the project's own bridge primitive (transparent grid walkway,
     # pathfinder-native); "deck" = raised deck + aligned wedges (the first build)
     "service": {"enabled": True, "in_cycle": True},
@@ -491,6 +493,34 @@ def compose(spec):
             _names[tuple(notch)] = "QUARANTINE"
     stages.append(place_doors(I, U, S, W, D, _door_list, _dspec, _names))
 
+    # 4.6 VOICE + HAZARD — the gap Palle named: annotation, text, subtitles, hazard
+    _subs = {}
+    _vspec = spec.get("voice") or {}
+    _board = None
+    if threshold:
+        _bx = min(x for (x, _z) in threshold)
+        _brow = sorted([c for c in threshold if c[0] == _bx], key=lambda c: c[1])
+        if _brow: _board = _brow[-1]
+    elif spawn_a:
+        _board = (spawn_a[0], spawn_a[1] + 1)
+    _words = []
+    if yard_on:
+        _words.append(((yard_c[0] - YARD_R - 1, yard_c[1] + YARD_R + 1), "QUARANTINE"))
+    if rooms:
+        _hero_room = next((r for r in rooms if r[0] == hero), None)
+        if _hero_room:
+            _words.append(((_hero_room[2][0], _hero_room[2][1] + 1), str(hero).replace("_", " ")))
+    stages.append(place_voice(S, U, W, D, _vspec, _board, 90,
+                              _words, [(nb, k) for _b, nb, k in door_info], _subs))
+    _hz = []
+    if yard_on:
+        for _x in range(yard_c[0] - YARD_R + 1, yard_c[0] + YARD_R):
+            for _z in range(yard_c[1] - YARD_R + 1, yard_c[1] + YARD_R):
+                if 0 <= _x < W and 0 <= _z < D and S[_z][_x] == "1" and (_x, _z) != yard_c:
+                    _hz.append((_x, _z))
+    stages.append(place_hazard(S, U, W, D, _hz[:12], (spec.get("hazard") or {}).get("kind", "toxic"),
+                               spec.get("hazard") or {}))
+
     # 5 TEMPLATES_FIXED — the yard as a composition slot
     stages.append({"op": "templates_fixed", "enabled": yard_on,
                    "yard": {"center": list(yard_c), "r": YARD_R, "cells": cl(yard_cells)} if yard_on else None})
@@ -833,6 +863,87 @@ def place_doors(I, U, S, W, D, doors, spec_doors, names=None):
                     "the passages (green = egress, red = quarantine, accent = named room)" % signs)}
 
 
+# ---------- OP 4.6: VOICE (an / 3t / sub) + HAZARD (h) ----------
+def _registry_descriptions():
+    out = {}
+    for f in sorted((ROOT / "commons/artifacts/registry").glob("*.json")):
+        if ".bak" in f.name:
+            continue
+        try:
+            d = json.loads(f.read_text(encoding="utf-8"))
+        except Exception:
+            continue
+        arts = d.get("artifacts", d)
+        if not isinstance(arts, dict):
+            continue
+        for k, v in arts.items():
+            if isinstance(v, dict) and k not in out:
+                desc = str(v.get("description") or "").strip()
+                if desc:
+                    out[k] = desc
+    return out
+
+
+def place_voice(S, U, W, D, spec_voice, board_at, board_rot, words, door_cells, subtitles_out):
+    """The corridor's voice: a board at the arrival, words in the bays, and a
+    subtitle on every named threshold (text pulled from the artifact's own
+    registry description — the world speaking about itself)."""
+    if not spec_voice.get("enabled", True):
+        return {"op": "voice", "board": None, "words": [], "subtitles": 0, "why": "disabled"}
+    placed_board = None
+    if spec_voice.get("board", True) and board_at:
+        bx, bz = board_at
+        if 0 <= bx < W and 0 <= bz < D and not str(U[bz][bx]).strip():
+            U[bz][bx] = "an:%d" % int(board_rot)
+            placed_board = {"cell": [bx, bz], "rot": int(board_rot)}
+    placed_words = []
+    if spec_voice.get("words", True):
+        for (cell, text) in words:
+            x, z = cell
+            if not (0 <= x < W and 0 <= z < D): continue
+            if str(U[z][x]).strip(): continue
+            U[z][x] = "3t:%s" % str(text).upper()[:24]
+            placed_words.append({"cell": [x, z], "text": str(text).upper()[:24]})
+    subs = 0
+    if spec_voice.get("subtitles", True):
+        descs = _registry_descriptions()
+        for (cell, artifact) in door_cells:
+            x, z = cell
+            if not (0 <= x < W and 0 <= z < D): continue
+            if str(U[z][x]).strip(): continue
+            key = str(artifact).replace(" ", "_").lower()[:32]
+            if not key: continue
+            line = descs.get(str(artifact).replace(" ", "_"), "")
+            if not line:
+                line = "%s — the corridor names what it holds." % str(artifact).title()
+            line = line.split(". ")[0].strip()
+            if len(line) > 180: line = line[:177] + "..."
+            subtitles_out[key] = line
+            U[z][x] = "sub:%s" % key
+            subs += 1
+    return {"op": "voice", "board": placed_board, "words": placed_words,
+            "subtitles": subs,
+            "why": ("an board at the arrival, %d 3t words in the bays, %d sub triggers speaking "
+                    "the artifacts' own registry lines" % (len(placed_words), subs))}
+
+
+def place_hazard(S, U, W, D, cells, kind, spec_hazard):
+    """h:<kind> ONLY where the walk cannot reach — danger seen, never stepped in."""
+    if not spec_hazard.get("enabled", True) or not cells:
+        return {"op": "hazard", "placed": 0, "cells": [], "kind": kind,
+                "why": "disabled or no sealed area"}
+    out = []
+    for (x, z) in cells:
+        if not (0 <= x < W and 0 <= z < D): continue
+        if str(U[z][x]).strip(): continue
+        U[z][x] = "h:%s" % kind
+        out.append([x, z])
+    return {"op": "hazard", "placed": len(out), "cells": out, "kind": kind,
+            "why": ("h:%s inside the sealed quarantine only — visible from the parapet, "
+                    "unreachable by construction; the composer never puts a hazard on its "
+                    "own walk" % kind)}
+
+
 # ---------- OP 6.5 SPANS · OP 9.5 LANDMARK + LIGHTS ----------
 # Palle 2026-07-25: transport cubes, slopes and bridges from the utility layer;
 # Minecraft's legible grammar (the mineshaft's deliberate break, the village
@@ -962,7 +1073,7 @@ def place_spans(S, U, I, WL, W, D, floor, spawn, targets, hall, passage, enabled
                 tok = wedge_token(e, into)
                 if tok and not str(U[e[1]][e[0]]).strip():
                     plan_wedges.append((e, tok))
-            if style not in ("br", "tc") and len(plan_wedges) < 2:
+            if style not in ("br", "tc", "jp") and len(plan_wedges) < 2:
                 return {"op": "spans", "placed": False,
                         "why": "chasm found but both climbs are not placeable "
                                "(LIFT law) — left the walk whole"}
@@ -971,7 +1082,17 @@ def place_spans(S, U, I, WL, W, D, floor, spawn, targets, hall, passage, enabled
             floor -= set(chasm)
             wedges = []
             bridge_tok = None
-            if style == "tc":
+            if style == "jp":
+                # THE JUMP PAD: one-way by nature (pathfinder jp_edges), so a
+                # pad on each lip aimed at the other keeps the walk two-way.
+                for c in deck:
+                    S[c[1]][c[0]] = "0"
+                floor -= set(deck)
+                a, b = ends
+                U[a[1]][a[0]] = "jp:%d:%d:6" % (b[0], b[1])
+                U[b[1]][b[0]] = "jp:%d:%d:6" % (a[0], a[1])
+                bridge_tok = "jp x2 (%s <-> %s)" % (a, b)
+            elif style == "tc":
                 # THE TRANSPORT CUBE as a ferry: the whole cut (deck included)
                 # becomes void and a cube at the near lip carries the walker
                 # across. Pathfinder-native via tc_adj (pos <-> pos +/- dist).
@@ -1017,10 +1138,11 @@ def place_spans(S, U, I, WL, W, D, floor, spawn, targets, hall, passage, enabled
                     "bridge": bridge_tok, "bridge_at": list(ends[0]) if bridge_tok else None,
                     "railings": rail, "reach_ok": _reaches_all(floor, set(), spawn, targets),
                     "why": (("CARVED a %d-wide chasm and crossed it with the project's own "
-                             "%s (%s at %s), %d railings — no deck raise, no wedges: both are "
-                             "pathfinder-native" % (width, "bridge" if style == "br" else "transport cube",
-                                                    bridge_tok, ends[0], len(rail)))
-                            if style in ("br", "tc") else
+                             "%s (%s), %d railings — no deck raise, no wedges: all are "
+                             "pathfinder-native" % (width, {"br": "bridge", "tc": "transport cube",
+                                                            "jp": "jump pads"}[style],
+                                                    bridge_tok, len(rail)))
+                            if style in ("br", "tc", "jp") else
                             ("CARVED a %d-wide chasm across the walk and left the bridge: "
                              "deck +1, %d aligned wedges, %d railings — the crossing is now "
                              "the only way through, verified" % (width, len(wedges), len(rail))))}
@@ -1558,6 +1680,28 @@ def compose_track(spec):
     stages.append(place_doors(I, U, S, W, D,
                               [(b, nb, "invitation") for b, nb, _k in door_info], _dspec,
                               {tuple(b): str(k).replace("_", " ") for b, _nb, k in door_info}))
+
+    # 4.6 VOICE + HAZARD (track): the board at the spawn vestibule, a word per
+    # service bay, subtitles on the doors, hazard inside the sealed yard
+    _subs = {}
+    _vspec = spec.get("voice") or {}
+    _board = (spawn[0] + 1, spawn[1] + 1) if spawn else None
+    _words = []
+    _SERVICE_WORD = {"service_riser": "RISER", "loading_bay": "LOADING", "plant_room": "PLANT",
+                     "yard_seg": "QUARANTINE"}
+    for _si, _name in enumerate(plan):
+        _w = _SERVICE_WORD.get(_name)
+        if not _w: continue
+        _z = bases[_si] + 1
+        for _x in (2, 10):
+            if 0 <= _x < W and 0 <= _z < D and S[_z][_x] in ("1", "2") and not str(U[_z][_x]).strip():
+                _words.append(((_x, _z), _w))
+                break
+    stages.append(place_voice(S, U, W, D, _vspec, _board, 0, _words,
+                              [(nb, k) for _b, nb, k in door_info], _subs))
+    _hz = [(x, z) for (x, z) in yardc if S[z][x] == "1"][:12]
+    stages.append(place_hazard(S, U, W, D, _hz, (spec.get("hazard") or {}).get("kind", "toxic"),
+                               spec.get("hazard") or {}))
     stages.append({"op": "templates_fixed", "enabled": bool(anti and yardc),
                    "yard": {"center": None, "r": 0, "cells": cl(yardc)} if yardc else None})
     profile = [{"i": i, "name": a, "h": (2 if sl["seg"] in lifted else 1), "art_h": round(union(a)[2], 2)}
@@ -1643,6 +1787,7 @@ def compose_track(spec):
                      "wall_segments": {"height": 2.2, "thickness": 0.12}},
         "utility_definitions": {"t": {"type": "teleporter", "name": "Track passed", "description": "",
                                       "properties": {"action": "next_in_sequence"}}},
+        "subtitles": _subs,
         "layers": {"structure": S, "utilities": U, "walls": WL, "interactables": I}}
     m = metrics(data, rooms, hallc, passage, floor, door_info, story_score)
     stages.append({"op": "final", "W": W, "D": D, "metrics": m["parts"], "score_soft": m["soft"],
