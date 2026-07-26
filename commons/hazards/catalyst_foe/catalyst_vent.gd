@@ -47,6 +47,13 @@ const FOE_SCENE := preload("res://commons/hazards/catalyst_foe/catalyst_foe.tscn
 @export var critter_stage: float = -1.0
 
 const CritterMorphology := preload("res://commons/hazards/catalyst_foe/critter_morphology.gd")
+const SequenceBinding := preload("res://commons/hazards/catalyst_sequence_binding.gd")
+
+# Sequence binding for the brood: when non-empty, the vent resolves its
+# spawned foes' kind from this sequence's binding table entry ("auto" =
+# the sequence running at first emit). Set via `sequence:` config or the
+# `e:RATE:WAVE:DELAY:auto` utility token. Explicit default_foe_mode wins.
+@export var bind_sequence: String = ""
 
 var _emitted: int = 0
 var _timer: float = 0.0          # accumulates dt
@@ -161,7 +168,26 @@ func _is_catalyst_armed() -> bool:
 	return false
 
 
+# Resolve the brood's kind from the bound sequence. Lazy (called per
+# emit) so AdaSceneManager has its sequence data by the time we ask;
+# keeps retrying while no sequence is resolvable, settles once one is.
+func _resolve_brood_kind() -> void:
+	if bind_sequence.is_empty() or not default_foe_mode.is_empty():
+		return
+	var seq: String = SequenceBinding.resolve(bind_sequence, get_tree())
+	if seq.is_empty():
+		return  # no sequence context yet — retry on next emit
+	var kind: String = SequenceBinding.foe_kind_for_sequence(seq)
+	if not kind.is_empty():
+		default_foe_mode = kind
+		print("[CatalystVent] sequence '%s' -> brood kind '%s'" % [seq, kind])
+	else:
+		print("[CatalystVent] sequence '%s' has no binding — brood stays default" % seq)
+	bind_sequence = ""  # settled; don't re-resolve
+
+
 func _emit_one() -> void:
+	_resolve_brood_kind()
 	# Cast via Node3D rather than CatalystFoe so this script parses
 	# in isolation (class_name lookup isn't always available during
 	# headless --check-only). At runtime the instantiated node IS a
@@ -232,9 +258,20 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	if config_data.has("initial_state"):
 		initial_state = String(config_data.get("initial_state"))
 	# foe_mode: optional kind seed applied to every foe this vent spawns
-	# (see default_foe_mode above). Empty string clears it.
+	# (see default_foe_mode above). Empty string clears it. The special
+	# value "auto" routes through the sequence binding instead — so the
+	# editor token e:RATE:WAVE:DELAY:auto means "kind of the running
+	# sequence", the counterpart of the catalyst's sequence:auto.
 	if config_data.has("foe_mode"):
-		default_foe_mode = String(config_data.get("foe_mode")).to_lower()
+		var fm: String = String(config_data.get("foe_mode")).to_lower()
+		if fm == "auto":
+			bind_sequence = "auto"
+			default_foe_mode = ""
+		else:
+			default_foe_mode = fm
+	# sequence: bind the brood kind to a named sequence (or "auto").
+	if config_data.has("sequence"):
+		bind_sequence = String(config_data.get("sequence")).to_lower()
 	# critter_stage: pin the evolving critter's stage for this vent's brood.
 	if config_data.has("critter_stage"):
 		critter_stage = float(config_data.get("critter_stage", -1.0))

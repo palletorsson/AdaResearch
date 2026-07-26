@@ -221,12 +221,14 @@ var _pending_crystal_cfg: Dictionary = {}
 #   unlock_to      — unlock all modes up to a given order
 #   shooting_only  — unlock only order >= 1 (skip voxel/wedge placement)
 #   active_mode    — set current_mode_index to point at this mode_id
+#   sequence       — bind the crystal to a sequence (name or "auto"); arms
+#                    the native mode via catalyst_sequence_binding.gd
 # Pedestal-handled keys:
 #   cage_color     — RGBA wireframe tint
 #   clear_modes    — call CatalystCapabilityManager.reset_progression() first
 const _CATALYST_FORWARD_KEYS = [
 	"all_modes", "start_mode", "unlock_to",
-	"shooting_only", "active_mode",
+	"shooting_only", "active_mode", "sequence",
 ]
 
 

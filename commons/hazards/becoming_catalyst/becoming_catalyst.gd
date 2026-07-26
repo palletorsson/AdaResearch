@@ -46,8 +46,17 @@ const MODE_DEFS: Array[Dictionary] = [
 	{"id": "swarm",          "order": 14, "name": "Swarm",          "sequence": "swarmintelligence",  "script": "res://commons/hazards/becoming_catalyst/modes/mode_swarm.gd"},
 ]
 
+# Sequence binding — sequence -> (mode, foe_kind, friend_power) triple,
+# shared with CatalystVent so the catalyst and its counterpart resolve
+# the SAME sequence to a matched pair.
+const SequenceBinding := preload("res://commons/hazards/catalyst_sequence_binding.gd")
+
 # ── State ─────────────────────────────────────────────────────────────────
 var unlocked_modes: Array[String] = ["voxel_editor", "wedge_placer", "artifact_edit", "lab_edit", "biome_brush", "modifier", "utility_edit", "off"]
+# The curriculum sequence this catalyst belongs to. Resolved passively at
+# _ready (knowledge only) or armed explicitly via the `sequence:` config
+# key. Empty = no sequence context (standalone map, tests).
+var home_sequence: String = ""
 var current_mode_index: int = 0
 var fire_cooldown: float = 0.0
 var is_held: bool = false
@@ -231,6 +240,11 @@ func _ready() -> void:
 
 	# Try to connect to progression managers
 	call_deferred("_connect_progression_signals")
+
+	# Passive sequence knowledge: even without a `sequence:` config key the
+	# catalyst records which sequence was running when it spawned. Knowledge
+	# only — no mode is armed unless a map opts in via `sequence:` config.
+	call_deferred("_resolve_home_sequence_passive")
 
 	print("[Catalyst] Ready — modes: %s" % [unlocked_modes])
 
@@ -3418,3 +3432,47 @@ func configure(config_data: Dictionary) -> void:
 		var idx: int = unlocked_modes.find(target_id)
 		if idx >= 0:
 			current_mode_index = idx
+	# Sequence binding: `sequence:<name>` pins the catalyst's home sequence
+	# and arms its native mode; `sequence:auto` resolves the running
+	# sequence from AdaSceneManager first. Maps without the key: untouched.
+	if config_data.has("sequence"):
+		bind_to_sequence(str(config_data["sequence"]))
+
+# ═════════════════════════════════════════════════════════════════════════
+# SEQUENCE BINDING — the catalyst knows what sequence it belongs to
+# ═════════════════════════════════════════════════════════════════════════
+
+## Record the running sequence without arming anything. Called deferred
+## from _ready so AdaSceneManager has its sequence data by the time we ask.
+func _resolve_home_sequence_passive() -> void:
+	if not home_sequence.is_empty():
+		return  # explicit config already bound us
+	home_sequence = SequenceBinding.current_sequence(get_tree())
+	if not home_sequence.is_empty():
+		print("[Catalyst] home sequence (passive): '%s'" % home_sequence)
+
+## Bind to a sequence and arm the native mode it maps to. `sequence_token`
+## is an explicit sequence name, or "auto" to ask the scene manager.
+## Sequences with no entry in the binding table set knowledge only.
+func bind_to_sequence(sequence_token: String) -> void:
+	var seq: String = SequenceBinding.resolve(sequence_token, get_tree())
+	if seq.is_empty():
+		print("[Catalyst] sequence binding requested ('%s') but no sequence resolved" % sequence_token)
+		return
+	home_sequence = seq
+	var native: String = SequenceBinding.mode_for_sequence(seq)
+	if native.is_empty():
+		print("[Catalyst] home sequence '%s' has no bound mode — knowledge only" % seq)
+		return
+	_unlock_mode(native, false)
+	var idx: int = unlocked_modes.find(native)
+	if idx >= 0:
+		current_mode_index = idx
+	print("[Catalyst] bound to sequence '%s' — native mode '%s' armed" % [seq, native])
+
+func get_home_sequence() -> String:
+	return home_sequence
+
+## The mode this catalyst's home sequence maps to ("" when unbound).
+func get_native_mode_id() -> String:
+	return SequenceBinding.mode_for_sequence(home_sequence)

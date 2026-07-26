@@ -78,6 +78,14 @@ const CONFIG_PARAM_NAMES = [
 	"glass_color", "seam_color", "grout_color", "plinth_color",
 	"mounted_artifact_scene", "mounted_lab_json",
 	"lab_offset_z", "signage_wall", "show_chalkboard", "chalkboard_lookup",
+	# catalyst family (vent / foe / crystal) — same issue as lab_room:
+	# without these listed, "wave_size:5" became boolean `true` (= wave
+	# of 1) and "emit_interval_s:2.0" collapsed to 1.0s. Applies to the
+	# Catalyst_* / CatalystLab_* rings and any pedestal token.
+	"emit_interval_s", "wave_size", "start_delay_s", "damage_percent",
+	"require_catalyst_armed", "initial_state", "foe_mode", "critter_stage",
+	"sequence", "all_modes", "start_mode", "unlock_to", "shooting_only",
+	"active_mode", "clear_modes", "cage_color",
 	# tentacle_placer params — same issue as lab_room: without these
 	# listed, e.g. "travel_speed:0.6" gets misparsed as a transform
 	# shorthand and the value becomes the boolean `true`, which then

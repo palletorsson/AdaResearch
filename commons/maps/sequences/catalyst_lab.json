@@ -1,0 +1,20 @@
+{
+  "sequences": {
+    "catalyst_lab": {
+      "name": "Catalyst Lab: sequence binding",
+      "truth": "the catalyst and its counterpart are the same becoming seen from two sides",
+      "description": "6 arenas testing the catalyst's sequence-binding logic: passive knowledge, matched pairs (native mode + brood kind from one sequence name), the mismatch case (who names whom), and lineage chain propagation. The mode roster itself is covered by catalyst_test.",
+      "layer": "test",
+      "maps": [
+        "CatalystLab_01_Home",
+        "CatalystLab_02_Pair_Primitives",
+        "CatalystLab_03_Pair_Transform",
+        "CatalystLab_04_Pair_Waveform",
+        "CatalystLab_05_Mismatch",
+        "CatalystLab_06_Chain"
+      ],
+      "prerequisites": [],
+      "unlocks": []
+    }
+  }
+}

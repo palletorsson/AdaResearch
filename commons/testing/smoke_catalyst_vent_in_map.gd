@@ -1,8 +1,10 @@
 extends SceneTree
 
 ## Verifies catalyst_vent loads from the registry into a real map.
-## Loads Point_One headless and checks the scene tree for a CatalystVent
-## node — proving the registry → grid → scene chain works end-to-end.
+## Checks CatalystLab_01_Home (the sequence-binding test ring, which
+## durably owns vents) — proving the registry → grid → scene chain works
+## end-to-end. Point_One was the original target but its vent was curated
+## away (2026-07: point gems curation).
 
 func _initialize() -> void:
 	call_deferred("_run")
@@ -45,10 +47,10 @@ func _run() -> void:
 		quit(1); return
 	print("- instantiated CatalystVent OK; has apply_grid_config")
 
-	# Verify Point_One map now has the catalyst_vent token in interactables.
-	var mf := FileAccess.open("res://commons/maps/Point_One/map_data.json", FileAccess.READ)
+	# Verify the test-ring map has the catalyst_vent token in interactables.
+	var mf := FileAccess.open("res://commons/maps/CatalystLab_01_Home/map_data.json", FileAccess.READ)
 	if mf == null:
-		print("FAIL: Point_One/map_data.json missing")
+		print("FAIL: CatalystLab_01_Home/map_data.json missing")
 		quit(1); return
 	var mjson := JSON.new()
 	mjson.parse(mf.get_as_text())
@@ -60,9 +62,9 @@ func _run() -> void:
 				found_vent_in_interactables = true
 				break
 	if not found_vent_in_interactables:
-		print("FAIL: Point_One's interactables don't contain a catalyst_vent token")
+		print("FAIL: CatalystLab_01_Home's interactables don't contain a catalyst_vent token")
 		quit(1); return
-	print("- Point_One has catalyst_vent in interactables")
+	print("- CatalystLab_01_Home has catalyst_vent in interactables")
 
-	print("PASS: registry+scene+map all wired for catalyst_vent in Point_One")
+	print("PASS: registry+scene+map all wired for catalyst_vent in CatalystLab_01_Home")
 	quit(0)
