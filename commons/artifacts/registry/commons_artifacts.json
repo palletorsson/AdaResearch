@@ -7600,6 +7600,51 @@
     "measured_at": "2026-04-29T07:09:56.762620Z"
    }
   },
+  "lineage_vitrine": {
+   "category": "display",
+   "description": "An object shown beside the siblings it did not become. Reads a subject artifact's declared dna.axes from the registry, instantiates one sibling per value along a rail, and keeps exactly ONE of them solid while the rest stand as ghosts. Stepping the axis moves which sibling is real; nothing else changes. Config: #subject:request_note#axis:mode#axis_index:0",
+   "include_in_map_data": true,
+   "lookup_name": "lineage_vitrine",
+   "map_ready": true,
+   "name": "Lineage Vitrine",
+   "scene": "res://commons/artifacts/lineage_vitrine/lineage_vitrine.tscn",
+   "complexity": "advanced",
+   "tags": [
+    "dna",
+    "lineage",
+    "meta",
+    "vitrine",
+    "display"
+   ],
+   "dna": {
+    "promoted": "2026-07-26",
+    "stage": "2 - variation",
+    "axes": {
+     "subject": [
+      "request_note",
+      "curation_station"
+     ],
+     "axis_index": [
+      0,
+      1,
+      2,
+      3
+     ]
+    },
+    "default": "subject=request_note, axis=mode - the first artifact promoted in stage 2",
+    "note": "The first artifact whose subject is the DNA system itself. Displays a family and lets the realised member move within it."
+   },
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 3,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    }
+   }
+  },
   "library_rack": {
    "category": "display",
    "description": "Universal collection display wall. Reads any artifact registry and builds a grid of cubes, each containing a scaled-down artifact or shader. Config: #collection:shaders#cols:6#rows:4",
