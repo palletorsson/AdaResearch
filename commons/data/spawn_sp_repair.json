@@ -1,0 +1,663 @@
+{
+ "_readme": "repairs applied by tools/audit_spawn_sp.py --fix-damaged: an `s` added beside each map's existing `sp` (the score cube is kept). before/after reach measured with map_pathfinder check --verbose.",
+ "threshold": 0.5,
+ "repaired": 108,
+ "failed": [
+  [
+   "Facade_bernini_colonnade",
+   "already has spawn"
+  ]
+ ],
+ "improved": 91,
+ "unchanged": 17,
+ "rows": [
+  {
+   "map": "DeckKit_Catalog",
+   "before": 0.001,
+   "after": 0.055,
+   "how": "added s at (3,4) beside sp at (3,3) (surgical text edit, format preserved)"
+  },
+  {
+   "map": "DeckKit_Gallery",
+   "before": 0.001,
+   "after": 0.055,
+   "how": "added s at (3,4) beside sp at (3,3) (surgical text edit, format preserved)"
+  },
+  {
+   "map": "Room_Random_Definition",
+   "before": 0.001,
+   "after": 1.0,
+   "how": "added s at (16,31) beside sp at (16,32)"
+  },
+  {
+   "map": "Room_Random_Rotate_Random_XYZ",
+   "before": 0.001,
+   "after": 1.0,
+   "how": "added s at (16,31) beside sp at (16,32)"
+  },
+  {
+   "map": "Room_Random_Space_Geometry",
+   "before": 0.001,
+   "after": 1.0,
+   "how": "added s at (16,31) beside sp at (16,32)"
+  },
+  {
+   "map": "Room_Randomness_10_PRINT_Algorithm",
+   "before": 0.001,
+   "after": 1.0,
+   "how": "added s at (16,31) beside sp at (16,32) (surgical text edit, format preserved)"
+  },
+  {
+   "map": "Dollhouse_Random_Definition",
+   "before": 0.001,
+   "after": 1.0,
+   "how": "added s at (15,30) beside sp at (15,31)"
+  },
+  {
+   "map": "Room_Random_Gaussian",
+   "before": 0.001,
+   "after": 1.0,
+   "how": "added s at (15,30) beside sp at (15,31)"
+  },
+  {
+   "map": "Room_Random_Pheromone",
+   "before": 0.001,
+   "after": 1.0,
+   "how": "added s at (15,29) beside sp at (15,30)"
+  },
+  {
+   "map": "Room_Random_Space",
+   "before": 0.001,
+   "after": 1.0,
+   "how": "added s at (15,29) beside sp at (15,30)"
+  },
+  {
+   "map": "Dollhouse_Random_Gaussian",
+   "before": 0.001,
+   "after": 1.0,
+   "how": "added s at (14,28) beside sp at (14,29)"
+  },
+  {
+   "map": "Room_Random_Remove",
+   "before": 0.002,
+   "after": 1.0,
+   "how": "added s at (14,27) beside sp at (14,28)"
+  },
+  {
+   "map": "Archetype_Constellation",
+   "before": 0.002,
+   "after": 0.946,
+   "how": "added s at (6,3) beside sp at (5,3)"
+  },
+  {
+   "map": "Archetype_Amphitheater",
+   "before": 0.003,
+   "after": 0.224,
+   "how": "added s at (11,21) beside sp at (11,22)"
+  },
+  {
+   "map": "Archetype_Theater",
+   "before": 0.003,
+   "after": 0.099,
+   "how": "added s at (11,19) beside sp at (10,19)"
+  },
+  {
+   "map": "Room_Random_Mushrooms",
+   "before": 0.003,
+   "after": 1.0,
+   "how": "added s at (10,20) beside sp at (10,21)"
+  },
+  {
+   "map": "Room_Randomness_Examples_of_Randomness",
+   "before": 0.003,
+   "after": 1.0,
+   "how": "added s at (10,19) beside sp at (10,20) (surgical text edit, format preserved)"
+  },
+  {
+   "map": "Room_Random_Game",
+   "before": 0.004,
+   "after": 1.0,
+   "how": "added s at (9,17) beside sp at (9,18)"
+  },
+  {
+   "map": "Archetype_Cathedral",
+   "before": 0.005,
+   "after": 0.607,
+   "how": "added s at (8,28) beside sp at (7,28)"
+  },
+  {
+   "map": "Workstation_distribution_sampler",
+   "before": 0.006,
+   "after": 1.0,
+   "how": "added s at (8,14) beside sp at (8,15)"
+  },
+  {
+   "map": "Archetype_HubSpokes",
+   "before": 0.008,
+   "after": 0.84,
+   "how": "added s at (13,23) beside sp at (12,23)"
+  },
+  {
+   "map": "Facade_capri_whitewash",
+   "before": 0.008,
+   "after": 0.9,
+   "how": "added s at (2,10) beside sp at (1,10)"
+  },
+  {
+   "map": "Facade_continuous_monument",
+   "before": 0.008,
+   "after": 0.9,
+   "how": "added s at (2,10) beside sp at (1,10)"
+  },
+  {
+   "map": "Facade_decon_fragment",
+   "before": 0.008,
+   "after": 0.9,
+   "how": "added s at (2,10) beside sp at (1,10)"
+  },
+  {
+   "map": "Facade_florentine_polychrome",
+   "before": 0.008,
+   "after": 0.9,
+   "how": "added s at (2,10) beside sp at (1,10)"
+  },
+  {
+   "map": "Facade_galleria_vittorio_emanuele",
+   "before": 0.008,
+   "after": 0.9,
+   "how": "added s at (2,10) beside sp at (1,10)"
+  },
+  {
+   "map": "Facade_gothic_portal",
+   "before": 0.008,
+   "after": 0.9,
+   "how": "added s at (2,10) beside sp at (1,10)"
+  },
+  {
+   "map": "Facade_memphis_totem",
+   "before": 0.008,
+   "after": 0.9,
+   "how": "added s at (2,10) beside sp at (1,10)"
+  },
+  {
+   "map": "Facade_naples_diamond_rustication",
+   "before": 0.008,
+   "after": 0.9,
+   "how": "added s at (2,10) beside sp at (1,10)"
+  },
+  {
+   "map": "Facade_painted_vault",
+   "before": 0.008,
+   "after": 0.9,
+   "how": "added s at (2,10) beside sp at (1,10)"
+  },
+  {
+   "map": "Facade_pompeii_black_room",
+   "before": 0.008,
+   "after": 0.9,
+   "how": "added s at (2,10) beside sp at (1,10)"
+  },
+  {
+   "map": "Facade_pompeii_ceiling_coffers",
+   "before": 0.008,
+   "after": 0.9,
+   "how": "added s at (2,10) beside sp at (1,10)"
+  },
+  {
+   "map": "Facade_pompeii_ceiling_medallion",
+   "before": 0.008,
+   "after": 0.9,
+   "how": "added s at (2,10) beside sp at (1,10)"
+  },
+  {
+   "map": "Facade_pompeii_fourth_style",
+   "before": 0.008,
+   "after": 0.9,
+   "how": "added s at (2,10) beside sp at (1,10)"
+  },
+  {
+   "map": "Facade_pompeii_red_room",
+   "before": 0.008,
+   "after": 0.9,
+   "how": "added s at (2,10) beside sp at (1,10)"
+  },
+  {
+   "map": "Facade_pompeii_second_style",
+   "before": 0.008,
+   "after": 0.9,
+   "how": "added s at (2,10) beside sp at (1,10)"
+  },
+  {
+   "map": "Facade_superstudio_grid",
+   "before": 0.008,
+   "after": 0.9,
+   "how": "added s at (2,10) beside sp at (1,10)"
+  },
+  {
+   "map": "Facade_villa_boscoreale",
+   "before": 0.008,
+   "after": 0.9,
+   "how": "added s at (2,10) beside sp at (1,10)"
+  },
+  {
+   "map": "Facade_villa_mysteries",
+   "before": 0.008,
+   "after": 0.9,
+   "how": "added s at (2,10) beside sp at (1,10)"
+  },
+  {
+   "map": "Facade_villa_san_michele",
+   "before": 0.008,
+   "after": 0.9,
+   "how": "added s at (2,10) beside sp at (1,10)"
+  },
+  {
+   "map": "Facade_villa_san_michele_exact",
+   "before": 0.008,
+   "after": 0.9,
+   "how": "added s at (2,10) beside sp at (1,10)"
+  },
+  {
+   "map": "Grown_Applied_Softbody",
+   "before": 0.009,
+   "after": 1.0,
+   "how": "added s at (4,9) beside sp at (5,9) (surgical text edit, format preserved)"
+  },
+  {
+   "map": "SoftBody_gl01_classic_bulb",
+   "before": 0.01,
+   "after": 1.0,
+   "how": "added s at (2,1) beside sp at (1,1)"
+  },
+  {
+   "map": "SoftBody_gl02_long_bottle",
+   "before": 0.01,
+   "after": 1.0,
+   "how": "added s at (2,1) beside sp at (1,1)"
+  },
+  {
+   "map": "SoftBody_gl03_wide_bowl",
+   "before": 0.01,
+   "after": 1.0,
+   "how": "added s at (2,1) beside sp at (1,1)"
+  },
+  {
+   "map": "SoftBody_gl04_lopsided_vase",
+   "before": 0.01,
+   "after": 1.0,
+   "how": "added s at (2,1) beside sp at (1,1)"
+  },
+  {
+   "map": "SoftBody_gl05_collapsed_sag",
+   "before": 0.01,
+   "after": 1.0,
+   "how": "added s at (2,1) beside sp at (1,1)"
+  },
+  {
+   "map": "SoftBody_gm01_bottle_in_cylinder_mould",
+   "before": 0.01,
+   "after": 1.0,
+   "how": "added s at (2,1) beside sp at (1,1)"
+  },
+  {
+   "map": "SoftBody_gm02_vase_in_tapered_mould",
+   "before": 0.01,
+   "after": 1.0,
+   "how": "added s at (2,1) beside sp at (1,1)"
+  },
+  {
+   "map": "SoftBody_gm03_box_in_cube_mould",
+   "before": 0.01,
+   "after": 1.0,
+   "how": "added s at (2,1) beside sp at (1,1)"
+  },
+  {
+   "map": "SoftBody_gm04_pressed_onto_sphere",
+   "before": 0.01,
+   "after": 1.0,
+   "how": "added s at (2,1) beside sp at (1,1)"
+  },
+  {
+   "map": "SoftBody_sb01_cloth_drape_corners",
+   "before": 0.01,
+   "after": 1.0,
+   "how": "added s at (2,1) beside sp at (1,1)"
+  },
+  {
+   "map": "SoftBody_sb02_cloth_drape_top_row",
+   "before": 0.01,
+   "after": 1.0,
+   "how": "added s at (2,1) beside sp at (1,1)"
+  },
+  {
+   "map": "SoftBody_sb03_cloth_flag_sideways",
+   "before": 0.01,
+   "after": 1.0,
+   "how": "added s at (2,1) beside sp at (1,1)"
+  },
+  {
+   "map": "SoftBody_sb04_cloth_tablecloth",
+   "before": 0.01,
+   "after": 1.0,
+   "how": "added s at (2,1) beside sp at (1,1)"
+  },
+  {
+   "map": "SoftBody_sb05_jelly_box_bounce",
+   "before": 0.01,
+   "after": 1.0,
+   "how": "added s at (2,1) beside sp at (1,1)"
+  },
+  {
+   "map": "SoftBody_sb06_jelly_grid_settle",
+   "before": 0.01,
+   "after": 1.0,
+   "how": "added s at (2,1) beside sp at (1,1)"
+  },
+  {
+   "map": "SoftBody_sb07_jelly_grid_tall_stiff",
+   "before": 0.01,
+   "after": 1.0,
+   "how": "added s at (2,1) beside sp at (1,1)"
+  },
+  {
+   "map": "SoftBody_sb08_jelly_grid_floppy",
+   "before": 0.01,
+   "after": 1.0,
+   "how": "added s at (2,1) beside sp at (1,1)"
+  },
+  {
+   "map": "SoftBody_sb_ca01_conway_cloth",
+   "before": 0.01,
+   "after": 1.0,
+   "how": "added s at (2,1) beside sp at (1,1)"
+  },
+  {
+   "map": "SoftBody_sb_ca02_life_without_death_cloth",
+   "before": 0.01,
+   "after": 1.0,
+   "how": "added s at (2,1) beside sp at (1,1)"
+  },
+  {
+   "map": "SoftBody_sb_ls01_plant_skeleton",
+   "before": 0.01,
+   "after": 1.0,
+   "how": "added s at (2,1) beside sp at (1,1)"
+  },
+  {
+   "map": "SoftBody_sb_ls02_plant_wind_collapse",
+   "before": 0.01,
+   "after": 1.0,
+   "how": "added s at (2,1) beside sp at (1,1)"
+  },
+  {
+   "map": "SoftBody_sb_noise01_jelly_crystal",
+   "before": 0.01,
+   "after": 1.0,
+   "how": "added s at (2,1) beside sp at (1,1)"
+  },
+  {
+   "map": "SoftBody_sb_rd01_coral_cloth",
+   "before": 0.01,
+   "after": 1.0,
+   "how": "added s at (2,1) beside sp at (1,1)"
+  },
+  {
+   "map": "SoftBody_sb_rd02_stripes_flag",
+   "before": 0.01,
+   "after": 1.0,
+   "how": "added s at (2,1) beside sp at (1,1)"
+  },
+  {
+   "map": "Dollhouse_Random_Walk",
+   "before": 0.01,
+   "after": 1.0,
+   "how": "added s at (6,12) beside sp at (6,13)"
+  },
+  {
+   "map": "Room_Random_Cubes",
+   "before": 0.01,
+   "after": 1.0,
+   "how": "added s at (6,12) beside sp at (6,13)"
+  },
+  {
+   "map": "Goomba_Arena_edit048",
+   "before": 0.012,
+   "after": 0.918,
+   "how": "added s at (2,1) beside sp at (1,1)"
+  },
+  {
+   "map": "PromptDemo_Trans_Translation_Echo",
+   "before": 0.013,
+   "after": 0.963,
+   "how": "replaced sp with s at (6,22) (no free neighbour)"
+  },
+  {
+   "map": "Goomba_Arena",
+   "before": 0.013,
+   "after": 0.905,
+   "how": "added s at (2,1) beside sp at (1,1)"
+  },
+  {
+   "map": "Grown_Applied_VectorForces",
+   "before": 0.014,
+   "after": 1.0,
+   "how": "added s at (3,8) beside sp at (3,9) (surgical text edit, format preserved)"
+  },
+  {
+   "map": "Pattern_pt01_p1_bauhaus",
+   "before": 0.015,
+   "after": 1.0,
+   "how": "added s at (2,1) beside sp at (1,1)"
+  },
+  {
+   "map": "Pattern_pt02_p2_escher",
+   "before": 0.015,
+   "after": 1.0,
+   "how": "added s at (2,1) beside sp at (1,1)"
+  },
+  {
+   "map": "Pattern_pt03_p4m_alhambra",
+   "before": 0.015,
+   "after": 1.0,
+   "how": "added s at (2,1) beside sp at (1,1)"
+  },
+  {
+   "map": "Pattern_pt04_p6m_persian",
+   "before": 0.015,
+   "after": 1.0,
+   "how": "added s at (2,1) beside sp at (1,1)"
+  },
+  {
+   "map": "Pattern_pt05_p3_memphis",
+   "before": 0.015,
+   "after": 1.0,
+   "how": "added s at (2,1) beside sp at (1,1)"
+  },
+  {
+   "map": "Pattern_pt06_pmm_tatami",
+   "before": 0.015,
+   "after": 1.0,
+   "how": "added s at (2,1) beside sp at (1,1)"
+  },
+  {
+   "map": "Pattern_pt07_p4g_pastel",
+   "before": 0.015,
+   "after": 1.0,
+   "how": "added s at (2,1) beside sp at (1,1)"
+  },
+  {
+   "map": "Pattern_pt08_p6_monochrome",
+   "before": 0.015,
+   "after": 1.0,
+   "how": "added s at (2,1) beside sp at (1,1)"
+  },
+  {
+   "map": "Pattern_pt09_pgg_bauhaus",
+   "before": 0.015,
+   "after": 1.0,
+   "how": "added s at (2,1) beside sp at (1,1)"
+  },
+  {
+   "map": "Pattern_pt10_p3m1_alhambra",
+   "before": 0.015,
+   "after": 1.0,
+   "how": "added s at (2,1) beside sp at (1,1)"
+  },
+  {
+   "map": "Grown_primitives_w1",
+   "before": 0.017,
+   "after": 1.0,
+   "how": "added s at (4,7) beside sp at (3,7)"
+  },
+  {
+   "map": "Room_Random_Walk",
+   "before": 0.02,
+   "after": 1.0,
+   "how": "added s at (6,7) beside sp at (6,8)"
+  },
+  {
+   "map": "Noise_Space_10",
+   "before": 0.021,
+   "after": 0.021,
+   "how": "added s at (1,0) beside sp at (0,0) (surgical text edit, format preserved)"
+  },
+  {
+   "map": "Noise_Inside_Noise",
+   "before": 0.111,
+   "after": 0.556,
+   "how": "added s at (5,12) beside sp at (4,12) (surgical text edit, format preserved)"
+  },
+  {
+   "map": "WangDeck_Variants",
+   "before": 0.113,
+   "after": 0.113,
+   "how": "added s at (2,1) beside sp at (1,1)"
+  },
+  {
+   "map": "Archetype_Pit",
+   "before": 0.162,
+   "after": 0.69,
+   "how": "added s at (11,2) beside sp at (10,2)"
+  },
+  {
+   "map": "WaveFunctions_3D_Wave_Propagation",
+   "before": 0.165,
+   "after": 0.165,
+   "how": "added s at (1,0) beside sp at (0,0) (surgical text edit, format preserved)"
+  },
+  {
+   "map": "WaveFunctions_3D_Wave_Propagation_p1",
+   "before": 0.165,
+   "after": 0.165,
+   "how": "added s at (1,0) beside sp at (0,0)"
+  },
+  {
+   "map": "WaveFunctions_3D_Wave_Propagation_p2",
+   "before": 0.165,
+   "after": 0.165,
+   "how": "added s at (1,0) beside sp at (0,0)"
+  },
+  {
+   "map": "WaveFunctions_3D_Wave_Propagation_p3",
+   "before": 0.165,
+   "after": 0.165,
+   "how": "added s at (1,0) beside sp at (0,0)"
+  },
+  {
+   "map": "Facade_nyc_tenement",
+   "before": 0.167,
+   "after": 0.833,
+   "how": "added s at (5,5) beside sp at (4,5)"
+  },
+  {
+   "map": "Archetype_Atrium",
+   "before": 0.181,
+   "after": 0.755,
+   "how": "added s at (11,19) beside sp at (10,19)"
+  },
+  {
+   "map": "Archetype_Stacks",
+   "before": 0.183,
+   "after": 0.474,
+   "how": "added s at (2,17) beside sp at (1,17)"
+  },
+  {
+   "map": "Archetype_Citadel",
+   "before": 0.188,
+   "after": 0.533,
+   "how": "added s at (12,21) beside sp at (11,21)"
+  },
+  {
+   "map": "Archetype_Crossroads",
+   "before": 0.189,
+   "after": 0.057,
+   "how": "added s at (12,22) beside sp at (11,22)"
+  },
+  {
+   "map": "Trans_AxisDecomposition",
+   "before": 0.196,
+   "after": 0.176,
+   "how": "added s at (8,9) beside sp at (8,8) (surgical text edit, format preserved)"
+  },
+  {
+   "map": "CA_BeyondBinary",
+   "before": 0.208,
+   "after": 0.208,
+   "how": "added s at (1,0) beside sp at (0,0) (surgical text edit, format preserved)"
+  },
+  {
+   "map": "CA_EdgeOfChaos",
+   "before": 0.211,
+   "after": 0.211,
+   "how": "added s at (1,0) beside sp at (0,0)"
+  },
+  {
+   "map": "Archetype_Quadrants",
+   "before": 0.227,
+   "after": 0.756,
+   "how": "added s at (4,3) beside sp at (3,3)"
+  },
+  {
+   "map": "VectorOperations",
+   "before": 0.298,
+   "after": 0.298,
+   "how": "added s at (7,5) beside sp at (6,5) (surgical text edit, format preserved)"
+  },
+  {
+   "map": "Archetype_Tower",
+   "before": 0.345,
+   "after": 0.345,
+   "how": "added s at (11,19) beside sp at (10,19)"
+  },
+  {
+   "map": "Escher_Impossible",
+   "before": 0.359,
+   "after": 0.359,
+   "how": "added s at (1,0) beside sp at (0,0) (surgical text edit, format preserved)"
+  },
+  {
+   "map": "Archetype_Ziggurat",
+   "before": 0.365,
+   "after": 0.365,
+   "how": "added s at (11,20) beside sp at (10,20)"
+  },
+  {
+   "map": "CA_Introduction",
+   "before": 0.437,
+   "after": 0.437,
+   "how": "added s at (1,1) beside sp at (1,0) (surgical text edit, format preserved)"
+  },
+  {
+   "map": "WaveFunctions_Synthesis_Lab",
+   "before": 0.488,
+   "after": 0.488,
+   "how": "added s at (1,0) beside sp at (0,0) (surgical text edit, format preserved)"
+  },
+  {
+   "map": "WaveFunctions_Synthesis_Lab_Placed",
+   "before": 0.488,
+   "after": 0.488,
+   "how": "added s at (1,0) beside sp at (0,0)"
+  }
+ ]
+}

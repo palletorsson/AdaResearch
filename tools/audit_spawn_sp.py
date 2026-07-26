@@ -23,10 +23,32 @@ The fix ADDS an `s` on a walkable cell at/next to the sp cell; it never removes
 the sp (the score cube may well be wanted) and never touches maps that already
 have a spawn.
 """
-import json, argparse, pathlib, subprocess, sys
+import json, argparse, importlib.util, pathlib, subprocess, sys
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 MAPS = ROOT / "commons/maps"
+AUDIT = ROOT / "commons/data/spawn_sp_audit.json"
+
+
+def _house_writer():
+    """The project's compact-rows serialiser (tools/compact_map_json.py). Maps are
+    stored as readable metadata + ONE LINE PER GRID ROW; a plain json.dump would
+    collapse every repaired file into a single line and produce a useless diff."""
+    spec = importlib.util.spec_from_file_location("compact_map_json",
+                                                  ROOT / "tools/compact_map_json.py")
+    m = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(m)
+    return m
+
+
+_CMJ = None
+
+
+def write_map(path: pathlib.Path, data: dict):
+    global _CMJ
+    if _CMJ is None:
+        _CMJ = _house_writer()
+    path.write_text(_CMJ._ser(data, 0) + "\n", encoding="utf-8")
 
 
 def scan():
@@ -75,6 +97,12 @@ def fix(name):
     p = MAPS / name / "map_data.json"
     d = json.loads(p.read_text(encoding="utf-8"))
     L = d["layers"]; U = L["utilities"]; S = L["structure"]
+    # IDEMPOTENT: a map that already has a spawn is never touched — otherwise a
+    # second run would add a second `s` beside the first.
+    for row in U:
+        for c in row:
+            if str(c).strip() == "s":
+                return "already has spawn"
     target = None
     for z, row in enumerate(U):
         for x, c in enumerate(row):
@@ -95,11 +123,11 @@ def fix(name):
             if (cx, cz) == (x, z):
                 continue
             U[cz][cx] = "s"
-            p.write_text(json.dumps(d), encoding="utf-8")
+            write_map(p, d)
             return f"added s at ({cx},{cz}) beside sp at ({x},{z})"
     if walkable(x, z):
         U[z][x] = "s"
-        p.write_text(json.dumps(d), encoding="utf-8")
+        write_map(p, d)
         return f"replaced sp with s at ({x},{z}) (no free neighbour)"
     return "no walkable cell at or beside the sp"
 
@@ -109,6 +137,9 @@ def main():
     ap.add_argument("--worst", type=int, default=0, help="measure reach for the first N and rank")
     ap.add_argument("--fix", default="")
     ap.add_argument("--fix-all", action="store_true")
+    ap.add_argument("--fix-damaged", type=float, default=0.0, metavar="REACH",
+                    help="repair only maps whose measured reach is below this "
+                         "(reads commons/data/spawn_sp_audit.json)")
     a = ap.parse_args()
     sys.stdout.reconfigure(encoding="utf-8")
 
@@ -119,6 +150,45 @@ def main():
 
     if a.fix:
         print(a.fix, "->", fix(a.fix))
+        return
+    if a.fix_damaged:
+        if not AUDIT.exists():
+            print("no audit yet — run --worst N first"); return
+        data = json.loads(AUDIT.read_text(encoding="utf-8"))
+        target = [r for r in data["rows"] if r["reach"] < a.fix_damaged]
+        print(f"repairing {len(target)} maps with reach < {a.fix_damaged} "
+              f"(of {data['total']} affected)\n")
+        fixed, failed, better, same = [], [], 0, 0
+        for i, r in enumerate(target, 1):
+            msg = fix(r["map"])
+            if not (msg.startswith("added") or msg.startswith("replaced")):
+                failed.append((r["map"], msg))
+                continue
+            after = reach_of(r["map"])
+            fixed.append({"map": r["map"], "before": r["reach"],
+                          "after": round(after or 0.0, 3), "how": msg})
+            if (after or 0) > r["reach"] + 0.01: better += 1
+            else: same += 1
+            if i % 25 == 0:
+                print(f"  {i}/{len(target)} repaired...", flush=True)
+        print(f"\nrepaired {len(fixed)}, failed {len(failed)}; "
+              f"reach improved on {better}, unchanged on {same}")
+        worst_after = sorted(fixed, key=lambda f: f["after"])[:12]
+        print("\nlowest reach AFTER repair (the ones still worth a human look):")
+        for f in worst_after:
+            print(f"  {f['before']:.2f} -> {f['after']:.2f}  {f['map']}")
+        if failed:
+            print("\nfailed:")
+            for n, m in failed[:10]: print(f"  {n}: {m}")
+        out = ROOT / "commons/data/spawn_sp_repair.json"
+        out.write_text(json.dumps({
+            "_readme": ("repairs applied by tools/audit_spawn_sp.py --fix-damaged: an `s` added "
+                        "beside each map's existing `sp` (the score cube is kept). before/after "
+                        "reach measured with map_pathfinder check --verbose."),
+            "threshold": a.fix_damaged, "repaired": len(fixed), "failed": failed,
+            "improved": better, "unchanged": same, "rows": fixed}, indent=1),
+            encoding="utf-8")
+        print("\nwrote commons/data/spawn_sp_repair.json")
         return
     if a.fix_all:
         done = 0
