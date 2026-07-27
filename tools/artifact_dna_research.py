@@ -256,15 +256,37 @@ def research(token: str, reg: dict, max_variants: int) -> int:
     led["artifacts"].append(rec)
     save_ledger(led)
     if rec.get("time_domain_only"):
-        # Do not call this a result. Every tile on that sheet is identical, because a
-        # still cannot hold a rate. Saying "published" here would file an answered
-        # question over an unasked one.
-        print(f"  {token}: TIME-DOMAIN ONLY — every knob it exposes is a rate or a duration,"
-              f" so the sheet is {rec['variants']} identical tiles. Needs a temporal probe,"
-              f" or a hand promotion that gives it a spatial axis.")
+        # A still cannot hold a rate, so a sweep of duration knobs is guaranteed to
+        # produce identical tiles. That used to be reported as a dead end. It is not one
+        # any more: photograph the artifact at N moments instead and let the strip say
+        # whether anything happens over time.
+        print(f"  {token}: TIME-DOMAIN ONLY — every knob is a rate or a duration."
+              f" Sweeping cannot answer this; running the temporal probe instead.")
+        strip = _time_strip(token)
+        rec["time_strip"] = str(strip) if strip else None
+        if strip:
+            print(f"  {token}: time strip -> {strip}")
+        else:
+            print(f"  {token}: temporal probe produced nothing — see the Godot log")
     else:
         print(f"  {token}: {'sheet published' if sheet else 'SWEEP PRODUCED NO SHEET'} -> {rec['url']}")
     return 0 if sheet else 1
+
+
+## The way out of the time-domain dead end: same artifact, same camera, N moments.
+## A strip that comes back identical is a FINDING about the artifact — it means nothing
+## is animating — rather than a limitation of the instrument, which is the distinction
+## the sweep alone could never draw.
+def _time_strip(token: str, frames: int = 6, window: float = 12.0) -> str | None:
+    r = subprocess.run(
+        [sys.executable, str(REPO / "tools" / "time_strip.py"), token,
+         f"--frames={frames}", f"--window={window}"],
+        cwd=REPO, capture_output=True, text=True, timeout=int(window) + 300)
+    out = REPO / "doc" / "reports" / f"strip_{token}.png"
+    if out.exists():
+        return f"doc/reports/strip_{token}.png"
+    sys.stdout.write((r.stdout or r.stderr or "")[-300:])
+    return None
 
 
 def agenda_tokens() -> list[str]:
