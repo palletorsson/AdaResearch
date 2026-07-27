@@ -1,0 +1,139 @@
+{
+ "_note": "Per-axis bite: mean pixel change between variants differing in that axis alone. An axis whose renders are identical is decoration.",
+ "gallery": "station-dna",
+ "thresholds": {
+  "inert_focus": 0.03,
+  "weak_focus": 0.12,
+  "frame_local_ceiling": 0.02
+ },
+ "axes": [
+  {
+   "artifact": "curation_station",
+   "axis": "bay",
+   "frame": 0.00769,
+   "focus": 0.02522,
+   "verdict": "INERT",
+   "pairs": 24
+  },
+  {
+   "artifact": "curation_station",
+   "axis": "duty",
+   "frame": 0.00938,
+   "focus": 0.05809,
+   "verdict": "WEAK",
+   "pairs": 24
+  },
+  {
+   "artifact": "fire_hose_box",
+   "axis": "station",
+   "frame": 0.03062,
+   "focus": 0.29986,
+   "verdict": "bites",
+   "pairs": 12
+  },
+  {
+   "artifact": "fire_hose_box",
+   "axis": "statute",
+   "frame": 0.02633,
+   "focus": 0.26877,
+   "verdict": "bites",
+   "pairs": 18
+  },
+  {
+   "artifact": "fire_extinguisher",
+   "axis": "station",
+   "frame": 0.02741,
+   "focus": 0.27671,
+   "verdict": "bites",
+   "pairs": 12
+  },
+  {
+   "artifact": "fire_extinguisher",
+   "axis": "statute",
+   "frame": 0.02345,
+   "focus": 0.23701,
+   "verdict": "bites",
+   "pairs": 18
+  },
+  {
+   "artifact": "info_board",
+   "axis": "carriage",
+   "frame": 0.06388,
+   "focus": 0.33213,
+   "verdict": "bites",
+   "pairs": 15
+  },
+  {
+   "artifact": "info_board",
+   "axis": "voice",
+   "frame": 0.07854,
+   "focus": 0.44983,
+   "verdict": "bites",
+   "pairs": 30
+  },
+  {
+   "artifact": "pick_up_cube",
+   "axis": "custody",
+   "frame": 0.01708,
+   "focus": 0.18275,
+   "verdict": "local",
+   "pairs": 15
+  },
+  {
+   "artifact": "pick_up_cube",
+   "axis": "stock",
+   "frame": 0.02672,
+   "focus": 0.31393,
+   "verdict": "bites",
+   "pairs": 30
+  },
+  {
+   "artifact": "station_pillar",
+   "axis": "upkeep",
+   "frame": 0.03896,
+   "focus": 0.248,
+   "verdict": "bites",
+   "pairs": 6
+  },
+  {
+   "artifact": "station_crates",
+   "axis": "upkeep",
+   "frame": 0.05405,
+   "focus": 0.40179,
+   "verdict": "bites",
+   "pairs": 6
+  },
+  {
+   "artifact": "exhibit_furniture",
+   "axis": "guard",
+   "frame": 0.0316,
+   "focus": 0.3103,
+   "verdict": "bites",
+   "pairs": 6
+  },
+  {
+   "artifact": "exhibit_furniture",
+   "axis": "house",
+   "frame": 0.04139,
+   "focus": 0.36416,
+   "verdict": "bites",
+   "pairs": 30
+  },
+  {
+   "artifact": "exhibit_podium",
+   "axis": "house",
+   "frame": 0.03448,
+   "focus": 0.36158,
+   "verdict": "bites",
+   "pairs": 30
+  },
+  {
+   "artifact": "exhibit_podium",
+   "axis": "reserve",
+   "frame": 0.02956,
+   "focus": 0.31422,
+   "verdict": "bites",
+   "pairs": 6
+  }
+ ]
+}

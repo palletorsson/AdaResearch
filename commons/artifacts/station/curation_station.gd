@@ -16,12 +16,65 @@ const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
 # @identity
 # essence: the COMPOSER — give it 1 to 5 artifact lookup-names and it assembles a whole curation bay on the 1 m grid: a step-stage sized to the set, a plinth per item in an even row, a tiling backing wall with end caps, framing pillars, and each artifact grounded inert on its plinth. Origin at the stage centre on the floor.
 # desire: to turn a loose handful of artifacts into a presented set — to place them, lift them, back them, and frame them so a viewer reads "these belong together, here, on purpose", with everything landing on grid lines.
-# critical_parameter: artifacts (1..5) — the set being curated; their count drives the stage width, the plinth row, and the wall length, all snapped to whole cells.
+# critical_parameter: artifacts (1..5) — the set being curated; their count drives the stage width, the plinth row, and the wall length, all snapped to whole cells. bay — how much architecture wraps the set (hall | apse | gate | none). duty — what the bay is FOR (show | depot | handling | watch). upkeep — which moment the kit is caught in, passed down to every pillar and crate stack this bay builds.
 # triggers: _ready builds the kit, then defers artifact loading so each item enters a settled tree; apply_grid_config re-curates with a new set.
 # emerges: one item reads "a single specimen on show"; five read "a collection, a comparison, a shelf made architecture"; the tiling wall + pillars turn the floor into a bay.
 # needs: a [[station_stage]] [present]; N [[station_plinth]] columns [present]; a [[station_wall]] backing [present]; framing [[station_pillar]] uprights [present]; the artifacts themselves, inert and grounded [present].
 # relationships: the assembler of the whole station family; loads any registered artifact by lookup_name the way [[artifact_review_station]] does; the multi-item sibling of that single-item review tool.
 # truth: curation is an argument made with placement. To choose five things, raise them to a line, and put a wall behind is to say they share a question. The grid keeps the argument honest — measured, repeatable, buildable.
+
+# ─────────────────────────────────────────────────────────────────────────────
+# STAGE-2 DNA PROMOTION (2026-07-27). 656 placements across 360 maps, 36 @export
+# knobs, and not one of them ever varied — because only 12 of the 36 were ever
+# readable from map data in the first place. What the corpus DID vary was three
+# booleans, always together, in exactly three states:
+#
+#     with_wall:false  with_pillars:false  with_barrier:false   244 maps
+#     with_wall:true   with_pillars:true   with_barrier:true    205 maps
+#     (no tokens at all — which is the same all-true state)     205 maps
+#     with_wall:true   with_pillars:false  with_barrier:true      2 maps
+#
+# That is not three independent flags. That is one axis with two well-worn ends
+# and no name, hand-spelled three times per placement, 451 times over. So the
+# promotion here is SELECTION, not invention:
+#
+#   bay    HOW MUCH ARCHITECTURE   hall · apse · gate · none          (body / mass)
+#   duty   WHAT THE BAY IS FOR     show · depot · handling · watch    (register)
+#   upkeep WHICH MOMENT, PASSED ON service · works · store · scrap    (the kit's own)
+#
+# `bay` DERIVES the three booleans and never overrides them: an explicit
+# with_wall / with_pillars / with_barrier token in the map still wins, so all 451
+# hand-spelled placements are byte-identical and the two odd (true,false,true)
+# maps keep their odd state. bay=hall is (true,true,true) — the export defaults —
+# so the 205 un-tokened placements are byte-identical too.
+#
+# `duty` is the other 33 exports finally admitting they were a family. The kit
+# already ships a cabinet, a crate stack, an overhead gantry and an operator
+# console, every one of them wired into _build_kit and every one of them dead:
+# with_cabinets / with_crates / with_gantry / with_console appear in ZERO maps.
+# Turning them on in named combinations — plus the palette, which no map could
+# reach either — is the difference between a gallery, a store, a handling bay and
+# a control room. Same set of objects, four institutions.
+#
+# What it cost: the three colour exports are no longer the source of truth for a
+# station's palette — duty writes them, so an author setting body_color in the
+# inspector must also leave duty at "show" or their colour is overwritten on the
+# next _read_overrides(). The alternative (only writing colours when they are at
+# their literal defaults) would have made duty silently inert half the time,
+# which is worse.
+#
+# Deliberately NOT routed through duty: the stage geometry, the plinth heights,
+# the artifact grounding maths, _make_inert's INTERACT_LAYERS mask, and the
+# START/EXIT pads. Nothing in this station has a collider — the whole kit is
+# meshes — but the pads are wayfinding and the grounding is load-bearing for
+# every curated artifact, so both stay outside the family.
+#
+# NOT routed through `finish` either, though the HangarKit family has exactly
+# such an axis (rams | terminal): only 4 of the 9 kit pieces this composer builds
+# honour a finish token (stage, pillar, barrier, cabinet — plinth, wall, crates,
+# gantry and console do not), so passing it would half-repaint the bay and read
+# as a bug. duty carries the palette by colour instead, which all 9 honour.
+# ─────────────────────────────────────────────────────────────────────────────
 
 @export_group("Set")
 ## 1 to 5 artifact lookup-names to curate. Missing names leave an empty plinth.
@@ -29,6 +82,26 @@ const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
 ## on a 4x4 platform — and keeps two INTERACTIVE artifacts (ca_rule_explorer, distribution_sampler) so
 ## you can test the desktop crosshair / VR pointer out of the box. Swap in any registered artifact.
 @export var artifacts: Array[String] = ["point", "ca_rule_explorer", "", "distribution_sampler", "grid_3d_4x4x4"]
+
+@export_group("Family (DNA)")
+## AXIS 1 — how much architecture wraps the set. DERIVES with_wall / with_pillars /
+## with_barrier: a map token for any of those still wins, but an inspector tick does
+## NOT — _read_overrides re-derives from bay every time, so change bay, not the flags.
+## hall (legacy default: backed, framed and thresholded) | apse (the backing wall alone) |
+## gate (uprights + rail, open sky behind) | none (the stage and the plinths, nothing else).
+@export var bay: String = "hall"
+## AXIS 2 — what the bay is FOR. Chooses which of the kit's dead furniture wakes up and
+## repaints the whole composition (body / panel / accent below are written by duty).
+## show (legacy default: the gallery) | depot (the store behind it) |
+## handling (the works bay) | watch (the control room).
+## NOT store/works: station_pillar and station_crates already own those two words on
+## `upkeep`, and there they mean the opposite — a sealed bale, not an active depot.
+@export var duty: String = "show"
+## AXIS 3 — WHICH MOMENT the kit is caught in, handed straight to every station_pillar
+## and station_crates this bay builds. Deliberately NOT derived from duty: duty says what
+## the room is for, upkeep says what time it is, and duty:depot (an active store) is the
+## opposite of upkeep:store (a sealed bale). service | works | store | scrap.
+@export var upkeep: String = "service"
 
 @export_group("Layout (grid cells)")
 ## Cells between plinth centres along the row.
@@ -91,6 +164,76 @@ const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
 
 const CELL := 1.0
 
+# AXIS 1 — bay. Each value is just the three booleans, named. Nothing else moves:
+# the stage, the plinth row and the artifact grounding are identical across all
+# four, so a map can change how enclosed a set reads without shifting a single
+# curated object by a millimetre.
+const BAYS := {
+	# The legacy lineage — the export defaults, and what 410 placements already
+	# build (205 by naming all three true, 205 by naming nothing at all).
+	"hall": {"wall": true, "pillars": true, "barrier": true},
+	# Backed but not framed: the 2.6 m tiling wall stands behind the row and
+	# nothing stands in front of it. You walk straight in from three sides.
+	"apse": {"wall": true, "pillars": false, "barrier": false},
+	# The threshold without the room: two lit 2.6 m uprights at the front corners
+	# with the rail strung between them, and open air where the wall was.
+	"gate": {"wall": false, "pillars": true, "barrier": true},
+	# The read 244 maps already hand-spell: the step, the plinths, the set, and
+	# no architecture at all.
+	"none": {"wall": false, "pillars": false, "barrier": false},
+}
+
+# AXIS 2 — duty. Every entry writes the four furniture booleans, the text-frame
+# flag, the barrier style, the three colours and the two strings the stage and
+# the wall screen print. "show" is the legacy lineage: every value below is
+# lifted verbatim from the export defaults it replaces, including the two
+# slightly different greys of body and panel.
+const DUTIES := {
+	# THE GALLERY. Nothing but the set: plinths, plaques, and a framed readout
+	# hovering over each item on a lit accent rod. Warm off-white Braun body,
+	# grey-beige panels, one orange accent. Open rail across the front.
+	"show": {
+		"cabinets": false, "crates": false, "gantry": false, "console": false,
+		"text_frames": true, "barrier_style": "rail",
+		"body": Color(0.81, 0.79, 0.75), "panel": Color(0.70, 0.68, 0.64),
+		"accent": Color(0.86, 0.34, 0.11),
+		"stencil": "CURATION", "verb": "ON SHOW",
+	},
+	# THE STORE. Two glass-fronted cabinets with lit shelves flank the back wall,
+	# crate stacks fill both back corners, the front rail goes solid panelled, and
+	# the hovering readouts go dark — a store keeps things, it does not interpret
+	# them. Repainted raw-ply brown with a safety-orange stripe.
+	"depot": {
+		"cabinets": true, "crates": true, "gantry": false, "console": false,
+		"text_frames": false, "barrier_style": "panel",
+		"body": Color(0.66, 0.50, 0.30), "panel": Color(0.48, 0.35, 0.21),
+		"accent": Color(0.98, 0.62, 0.05),
+		"stencil": "STORE", "verb": "IN STORE",
+	},
+	# THE HANDLING BAY. A double-portal gantry throws a beam clear over the whole
+	# bay at 2.8 m with a drop hoist and a lit underside, crates in the corners, an
+	# operator desk at the front, solid barrier, no readouts. Cold steel body,
+	# graphite panels, hazard yellow.
+	"handling": {
+		"cabinets": false, "crates": true, "gantry": true, "console": true,
+		"text_frames": false, "barrier_style": "panel",
+		"body": Color(0.55, 0.58, 0.62), "panel": Color(0.30, 0.32, 0.35),
+		"accent": Color(0.95, 0.78, 0.06),
+		"stencil": "HANDLING", "verb": "IN TRANSIT",
+	},
+	# THE CONTROL ROOM. The same set, watched instead of shown: the operator desk
+	# is there, the readouts stay lit, and the entire composition drops into the
+	# HangarKit terminal register — near-black housing where every edge light, lit
+	# seam, plaque groove and connector rod burns green.
+	"watch": {
+		"cabinets": false, "crates": false, "gantry": false, "console": true,
+		"text_frames": true, "barrier_style": "rail",
+		"body": Color(0.14, 0.14, 0.155), "panel": Color(0.09, 0.09, 0.10),
+		"accent": Color(0.36, 0.94, 0.44),
+		"stencil": "CONTROL", "verb": "MONITORED",
+	},
+}
+
 var _name_scene: Dictionary = {}
 var _name_disp: Dictionary = {}   # lookup_name -> human display name
 var _plinth_tops: Array = []   # [{x, z, top_y}] per item, set during kit build
@@ -127,6 +270,15 @@ func _read_overrides() -> void:
 				artifacts.append(a.strip_edges())
 	if has_meta("config_plinth_spacing_cells"): plinth_spacing_cells = int(str(get_meta("config_plinth_spacing_cells")))
 	if has_meta("config_plinth_height"): plinth_height = float(str(get_meta("config_plinth_height")))
+	# ── the two family axes, read and DERIVED BEFORE the low-level flags below, so
+	# that any with_* / barrier_style a map spells out by hand still has the last
+	# word. This ordering is the whole promise of the promotion: 451 placements
+	# name those flags explicitly and none of them may move.
+	if has_meta("config_bay"): bay = str(get_meta("config_bay")).to_lower()
+	if has_meta("config_duty"): duty = str(get_meta("config_duty")).to_lower()
+	if has_meta("config_upkeep"): upkeep = str(get_meta("config_upkeep")).to_lower()
+	_apply_bay()
+	_apply_duty()
 	if has_meta("config_with_wall"): with_wall = _b(get_meta("config_with_wall"))
 	if has_meta("config_with_pillars"): with_pillars = _b(get_meta("config_with_pillars"))
 	if has_meta("config_with_barrier"): with_barrier = _b(get_meta("config_with_barrier"))
@@ -136,6 +288,59 @@ func _read_overrides() -> void:
 	if has_meta("config_with_gantry"): with_gantry = _b(get_meta("config_with_gantry"))
 	if has_meta("config_with_console"): with_console = _b(get_meta("config_with_console"))
 	if has_meta("config_layout"): layout = str(get_meta("config_layout")).to_lower()
+
+
+# ── the family axes ──────────────────────────────────────────────────────────
+
+# An unknown bay / duty falls back to the legacy lineage rather than to nothing,
+# so a typo in a map token degrades to today's station instead of a bare stage.
+func _bay_spec() -> Dictionary:
+	var s: Dictionary = BAYS.get(bay, BAYS["hall"])
+	return s
+
+
+func _duty_spec() -> Dictionary:
+	var s: Dictionary = DUTIES.get(duty, DUTIES["show"])
+	return s
+
+
+func _duty_col(slot: String, fallback: Color) -> Color:
+	var v: Variant = _duty_spec().get(slot, fallback)
+	if v is Color:
+		var c: Color = v
+		return c
+	return fallback
+
+
+func _duty_str(slot: String, fallback: String) -> String:
+	return str(_duty_spec().get(slot, fallback))
+
+
+# AXIS 1 — name the enclosure, derive the three flags. Idempotent: _read_overrides
+# may run twice (once from _ready, once from apply_grid_config) and this writes the
+# same values both times, after which the explicit config_with_* reads run again.
+func _apply_bay() -> void:
+	var s: Dictionary = _bay_spec()
+	with_wall = bool(s.get("wall", true))
+	with_pillars = bool(s.get("pillars", true))
+	with_barrier = bool(s.get("barrier", true))
+
+
+# AXIS 2 — name the institution, wake the furniture it needs and repaint the kit.
+# The colours are written unconditionally (they are unreachable from map data, so
+# there is nothing to defer to); barrier_style IS reachable, so the explicit read
+# that follows in _read_overrides still overrides this.
+func _apply_duty() -> void:
+	var s: Dictionary = _duty_spec()
+	with_cabinets = bool(s.get("cabinets", false))
+	with_crates = bool(s.get("crates", false))
+	with_gantry = bool(s.get("gantry", false))
+	with_console = bool(s.get("console", false))
+	with_text_frames = bool(s.get("text_frames", true))
+	barrier_style = str(s.get("barrier_style", "rail"))
+	body_color = _duty_col("body", Color(0.81, 0.79, 0.75))
+	panel_color = _duty_col("panel", Color(0.70, 0.68, 0.64))
+	accent_color = _duty_col("accent", Color(0.86, 0.34, 0.11))
 
 
 func _count() -> int:
@@ -222,7 +427,7 @@ func _build_kit(items: Array) -> void:
 	stage.apply_grid_config({
 		"width_cells": int(L["w_cells"]), "depth_cells": int(L["d_cells"]),
 		"step_height": stage_step_height, "hazard_edge": bool(L["hazard"]), "edge_light": true,
-		"stencil_text": "CURATION", "body_color": _cs(body_color),
+		"stencil_text": _duty_str("stencil", "CURATION"), "body_color": _cs(body_color),
 		"panel_color": _cs(panel_color), "accent_color": _cs(accent_color),
 	})
 
@@ -281,7 +486,8 @@ func _build_kit(items: Array) -> void:
 			wall.apply_grid_config({
 				"length_cells": int(seg["length_cells"]), "start_cap": bool(seg["start_cap"]), "end_cap": bool(seg["end_cap"]),
 				"height": wall_height, "panel_style": "panel", "screen_slot": with_wall_screen and bool(seg.get("screen", false)),
-				"screen_header": "CURATION", "screen_lines": ["%d ON SHOW" % slots.size(), "LINK  OK"],
+				"screen_header": _duty_str("stencil", "CURATION"),
+				"screen_lines": ["%d %s" % [slots.size(), _duty_str("verb", "ON SHOW")], "LINK  OK"],
 				"lit_seam": true, "body_color": _cs(body_color), "panel_color": _cs(panel_color),
 				"accent_color": _cs(accent_color),
 			})
@@ -295,6 +501,7 @@ func _build_kit(items: Array) -> void:
 			pil.apply_grid_config({
 				"height": wall_height, "lit_groove": true, "body_color": _cs(body_color),
 				"panel_color": _cs(panel_color), "accent_color": _cs(accent_color),
+				"upkeep": upkeep,
 			})
 
 	# Barrier(s) — a low front rail, SPLIT to leave a gap where each bridge crosses out to a platform.
@@ -352,7 +559,9 @@ func _build_kit(items: Array) -> void:
 				var cr: Node3D = StationCratesScene.instantiate()
 				add_child(cr)
 				cr.position = Vector3(sx2 * (half_w - 0.55), 0, back_z + 0.6)
-				cr.apply_grid_config({"footprint_cells": 1, "crate_count": 4, "palette": "metal", "seed_index": int(sx2) + 3})
+				cr.apply_grid_config({"footprint_cells": 1, "crate_count": 4,
+					"palette": "wood" if duty == "depot" else "metal",
+					"upkeep": upkeep, "seed_index": int(sx2) + 3})
 
 
 # Dispatch to a layout builder. Each returns {layout, w_cells, d_cells, hazard, slots, segments, pillars, barriers}.
@@ -475,7 +684,12 @@ func _build_console(L: Dictionary) -> void:
 	add_child(c)
 	var hw: float = float(int(L["w_cells"])) * 0.5 * CELL
 	var fz: float = float(int(L["d_cells"])) * 0.5 * CELL
-	c.position = Vector3(hw - 0.9, 0, fz - 0.7)
+	# Was (hw - 0.9, 0, fz - 0.7), which put the 1.2 x 0.7 desk straight through the
+	# right framing pillar (0.42 square at hw - 0.45, fz - 0.45). Never seen, because
+	# with_console has never been true in any map; duty:handling / duty:watch are the
+	# first things to build it. Moved inboard so the desk clears the pillar by 0.49 m
+	# and still sits in front of the plinth line (which _layout_row fixes at fz - 0.9).
+	c.position = Vector3(hw - 1.75, 0, fz - 0.45)
 	if c.has_method("apply_grid_config"):
 		c.apply_grid_config({
 			"body_color": _cs(body_color), "panel_color": _cs(panel_color), "accent_color": _cs(accent_color),

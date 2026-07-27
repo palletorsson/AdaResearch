@@ -154,6 +154,16 @@
       }
     },
     "station_pillar": {
+      "dna": {
+       "axes": {
+       "upkeep": [
+       "service",
+       "works",
+       "store",
+       "scrap"
+       ]
+       }
+      },
       "lookup_name": "station_pillar",
       "scene": "res://commons/artifacts/station/station_pillar.tscn",
       "class_name": "StationPillar",
@@ -192,6 +202,22 @@
       }
     },
     "curation_station": {
+      "dna": {
+       "axes": {
+        "bay": [
+         "hall",
+         "apse",
+         "gate",
+         "none"
+        ],
+        "duty": [
+         "show",
+         "depot",
+         "handling",
+         "watch"
+        ]
+       }
+      },
       "lookup_name": "curation_station",
       "scene": "res://commons/artifacts/station/curation_station.tscn",
       "class_name": "CurationStation",
@@ -345,6 +371,16 @@
       }
     },
     "station_crates": {
+      "dna": {
+       "axes": {
+       "upkeep": [
+       "service",
+       "store",
+       "scrap",
+       "works"
+       ]
+       }
+      },
       "lookup_name": "station_crates",
       "scene": "res://commons/artifacts/station/station_crates.tscn",
       "class_name": "StationCrates",

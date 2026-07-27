@@ -10119,6 +10119,23 @@
    }
   },
   "pick_up_cube": {
+   "dna": {
+    "axes": {
+    "stock": [
+    "wire",
+    "foam",
+    "crate",
+    "steel",
+    "clay"
+    ],
+    "custody": [
+    "none",
+    "tally",
+    "seal",
+    "wear"
+    ]
+    }
+   },
    "capacity": "MOVE an object through space and understand translation as carried displacement.",
    "category": "unknown",
    "complexity": "intermediate",

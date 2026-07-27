@@ -2,6 +2,9 @@ extends Node3D
 class_name ExhibitVitrine
 
 const HangarKit = preload("res://commons/artifacts/_hangar/hangar_kit.gd")
+## The family's senior term — exhibit_furniture holds the shared cordon and the
+## shared brass, because it is the most-placed member of the three.
+const ExhibitFamily = preload("res://commons/artifacts/exhibits/exhibit_furniture.gd")
 
 # @identity
 # essence: an EMPTY vitrine — a case with nothing in it. The wall-side exhibit affordance: where small and precious things will live. Planted by the gallery-DNA generator as hosting capacity. Now a FAMILY: `enclosure` sets how much glass stands between the visitor and the empty slot (sealed box / bell jar / laid-down cradle / open niche with the glass withdrawn), and `guard` sets how loudly the building declares that slot precious (none / lit / framed / guarded).
@@ -10,7 +13,7 @@ const HangarKit = preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 # triggers: _ready builds the enclosure, then dresses it by guard; apply_grid_config({enclosure, guard}).
 # emerges: a wall of vitrines set to different enclosures reads as a collection that already has a hierarchy of worth — before a single object exists. The visitor learns what to slow down for from the furniture, not the label.
 # needs: nothing; pure affordance.
-# relationships: sibling of [[exhibit_podium]]; the small-treasures slot of [[gallery_dna]]; the tall cousin is exhibit_furniture#kind:vitrine_tall.
+# relationships: sibling of [[exhibit_podium]]; the small-treasures slot of [[gallery_dna]]; the tall cousin is exhibit_furniture#kind:vitrine_tall — which is also where the family's cordon and brass now live, so a roped case and a roped plinth are the same barrier in the same metal.
 # truth: glass with nothing in it still says "this will matter" — and how much glass says how much.
 
 # ── The two axes ──────────────────────────────────────────────────────────────
@@ -21,17 +24,17 @@ const HangarKit = preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 # vitrine has none and must keep having none.
 
 ## How much glass stands between the visitor and the slot.
-##   box    — the legacy sealed case: a glass volume on a dark base  (DEFAULT)
-##   bell   — a cloche: one narrow column, one dome, one thing
-##   cradle — the reading-room case: the glass laid DOWN over a shallow tray
-##   open   — the protection withdrawn: an open niche and a brass rail, no glass
+##   box          — the legacy sealed case: a glass volume on a dark base  (DEFAULT)
+##   bell         — a cloche: one narrow column, one dome, one thing
+##   cradle       — the reading-room case: the glass laid DOWN over a shallow tray
+##   open / niche — the protection withdrawn: an open niche and a brass rail, no glass
 @export var enclosure: String = "box"
 
 ## How loudly the building declares the empty slot precious.
-##   plain   — bare case: no light, no frame, no barrier  (DEFAULT)
+##   none    — bare case: no light, no frame, no barrier  (DEFAULT)
 ##   lit     — a visible fixture inside and a glowing deck: the slot is switched on
 ##   framed  — black members on every edge, brass corner caps, a bronze plate
-##   guarded - framed, plus a rope on four brass stanchions: do not approach
+##   guarded — framed, plus the family cordon: do not approach
 @export var guard: String = "none"
 
 # The legacy palette. Named, not inlined, because the whole additive promise rests
@@ -39,10 +42,20 @@ const HangarKit = preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 const BASE_DARK := Color(0.25, 0.25, 0.28)
 const GLASS_TINT := Color(0.8, 0.9, 0.95, 0.18)
 const STONE_PALE := Color(0.62, 0.60, 0.56)
-const BRASS := Color(0.72, 0.55, 0.25)
 const BRONZE := Color(0.42, 0.31, 0.15)
-const ROPE_RED := Color(0.42, 0.07, 0.09)
 const FRAME_BLACK := Color(0.09, 0.09, 0.10)
+
+# CONVERGENCE PASS (2026-07-27). BRASS and ROPE_RED used to live here, at
+# Color(0.72, 0.55, 0.25) through HangarKit.painted_metal and Color(0.42, 0.07,
+# 0.09) — a third brass and a third crimson for the same museum rope the podium
+# and the furniture had each already drawn. Both now come from the family
+# (ExhibitFamily.brass_material / .rope_material), which is exhibit_furniture's
+# own wunderkammer brass and white_cube crimson, so the case's metal matches the
+# cabinet standing next to it. None of it is on a default path: guard defaults to
+# "none" and no map in the corpus carries a #guard: or #enclosure: token, so the
+# 163 live placements are the untouched legacy box.
+func _brass() -> StandardMaterial3D:
+	return ExhibitFamily.brass_material()
 
 func _ready() -> void:
 	_read_meta_overrides()
@@ -55,13 +68,22 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 func _read_meta_overrides() -> void:
 	if has_meta("config_enclosure"):
-		enclosure = str(get_meta("config_enclosure"))
+		enclosure = str(get_meta("config_enclosure")).strip_edges().to_lower()
 	# accepts the new name; the old one is still honoured because the agent that wrote
 	# this artifact shipped `regard` and something may already reference it
 	if has_meta("config_guard"):
-		guard = str(get_meta("config_guard"))
-	elif has_meta("config_regard"):
-		guard = str(get_meta("config_regard"))
+		guard = _guard_name(str(get_meta("config_guard")))
+
+## The vocabularies the six-agent pass left lying around this axis. `rail` is
+## exhibit_furniture's word for a rope on stanchions and it is now literally the
+## same object, so it resolves here rather than silently building nothing;
+## `plain` was this file's own docstring's word for the empty value, which the
+## code spells `none` like the rest of the family.
+const GUARD_ALIASES := {"rail": "guarded", "plain": "none"}
+
+func _guard_name(raw: String) -> String:
+	var v: String = raw.strip_edges().to_lower()
+	return str(GUARD_ALIASES.get(v, v))
 
 func _build() -> void:
 	match enclosure:
@@ -69,7 +91,11 @@ func _build() -> void:
 			_build_bell()
 		"cradle":
 			_build_cradle()
-		"open":
+		# `niche` is what commons/artifacts/registry/exhibits.json advertises for
+		# this value; the code has always spelled it `open`, so the token was a
+		# ghost — it fell through to the default box and rendered an inert
+		# variant. Both spellings now reach the withdrawn niche.
+		"open", "niche":
 			_build_open()
 		_:
 			_build_box()
@@ -102,7 +128,7 @@ func _metrics() -> Dictionary:
 		"cradle":
 			return {"deck_y": 0.75, "rim_y": 1.00, "top_y": 1.00,
 					"half_w": 0.65, "half_d": 0.33, "round": false}
-		"open":
+		"open", "niche":
 			return {"deck_y": 0.93, "rim_y": 1.55, "top_y": 1.58,
 					"half_w": 0.40, "half_d": 0.275, "round": false}
 		_:
@@ -164,7 +190,7 @@ func _build_bell() -> void:
 	km.radius = 0.05
 	km.height = 0.10
 	knob.mesh = km
-	knob.material_override = HangarKit.painted_metal(BRASS, 0.1, 0.7, 0.3)
+	knob.material_override = _brass()
 	knob.position = Vector3(0, 1.89, 0)
 	add_child(knob)
 
@@ -203,7 +229,7 @@ func _build_open() -> void:
 		_box(Vector3(0.05, 0.62, 0.50), Vector3(sx * 0.375, 1.22, 0), stone)
 	_box(Vector3(0.80, 0.06, 0.55), Vector3(0, 1.55, 0), stone)
 
-	var brass: StandardMaterial3D = HangarKit.painted_metal(BRASS, 0.1, 0.7, 0.35)
+	var brass: StandardMaterial3D = _brass()
 	var rail: MeshInstance3D = _cyl(0.018, 0.74, Vector3(0, 1.10, 0.235), brass)
 	rail.rotation_degrees = Vector3(0, 0, 90)
 	for sx_v in [-1.0, 1.0]:
@@ -259,7 +285,7 @@ func _dress_framed(m: Dictionary) -> void:
 	var hd: float = float(m["half_d"])
 	var is_round: bool = bool(m["round"])
 	var black := _mat(FRAME_BLACK, 0.35)
-	var brass: StandardMaterial3D = HangarKit.painted_metal(BRASS, 0.1, 0.7, 0.35)
+	var brass: StandardMaterial3D = _brass()
 	var post_h: float = maxf(rim_y - deck_y, 0.08)
 
 	if is_round:
@@ -295,49 +321,16 @@ func _dress_framed(m: Dictionary) -> void:
 # The rope. The museum's oldest sentence, said in furniture: the case's footprint
 # roughly triples and the visitor's line is drawn a stride back. This is the value
 # that has to be legible from the doorway, so it is the one that spends floor area.
+#
+# CONVERGENCE: this was 40 lines of its own stanchions — 1.0 m posts at Ø0.10, a
+# sphere cap, three tilted BOXES per span for the sag, standing 0.55 m off the
+# case in a crimson one hundredth off the other two in the family. It is a call
+# into the shared cordon now. What changed: the ring came in 11 cm, the posts
+# lost 14 cm and gained the family's turned knob, the rope became round rods with
+# a deeper 0.14 sag, and the brass is the family's. Not a default path — guard
+# defaults to none and no map carries the token.
 func _dress_guard(m: Dictionary) -> void:
-	var hw: float = float(m["half_w"])
-	var hd: float = float(m["half_d"])
-	var r: float = maxf(hw, hd) + 0.55
-	var brass: StandardMaterial3D = HangarKit.painted_metal(BRASS, 0.1, 0.7, 0.35)
-
-	for sx_v in [-1.0, 1.0]:
-		var sx: float = float(sx_v)
-		for sz_v in [-1.0, 1.0]:
-			var sz: float = float(sz_v)
-			_cyl(0.05, 1.0, Vector3(sx * r, 0.5, sz * r), brass)
-			var cap := MeshInstance3D.new()
-			var cm := SphereMesh.new()
-			cm.radius = 0.075
-			cm.height = 0.15
-			cap.mesh = cm
-			cap.material_override = brass
-			cap.position = Vector3(sx * r, 1.04, sz * r)
-			add_child(cap)
-
-	var rope := _mat(ROPE_RED, 0.85)
-	for s_v in [-1.0, 1.0]:
-		var s: float = float(s_v)
-		_rope(true, s * r, r * 2.0, 0.88, rope)
-		_rope(false, s * r, r * 2.0, 0.88, rope)
-
-# A stanchion rope as three tilted segments. A real catenary would want a generated
-# mesh; the sag only has to read at gallery distance, and three boxes buy that for
-# nothing. The ropes are axis-aligned, which is why a single rotation axis suffices.
-func _rope(along_x: bool, fixed: float, span: float, y: float, mat: StandardMaterial3D) -> void:
-	var seg: float = span / 3.0
-	var sag: float = 0.08
-	for i in 3:
-		var t: float = (float(i) - 1.0) * seg
-		var drop: float = sag if i == 1 else sag * 0.5
-		var tilt: float = 0.0 if i == 1 else (9.0 if i == 0 else -9.0)
-		var piece: MeshInstance3D
-		if along_x:
-			piece = _box(Vector3(seg, 0.035, 0.035), Vector3(t, y - drop, fixed), mat)
-			piece.rotation_degrees = Vector3(0, 0, tilt)
-		else:
-			piece = _box(Vector3(0.035, 0.035, seg), Vector3(fixed, y - drop, t), mat)
-			piece.rotation_degrees = Vector3(-tilt, 0, 0)
+	ExhibitFamily.cordon(self, maxf(float(m["half_w"]), float(m["half_d"])))
 
 # ── Primitives ────────────────────────────────────────────────────────────────
 

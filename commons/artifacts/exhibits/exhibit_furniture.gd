@@ -6,7 +6,7 @@ const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
 # @identity
 # essence: the display-furniture FAMILY as one parametric artifact — kind decides the body: floating_wall (MoMA: a hanging wall hovering above the floor, a soft shadow in the gap — the cheap accent that makes a room expensive), plinth (s/m/l), hollow_plinth, platform, table_2m, vitrine_tall, cabinet, infoboard, sign_exit, sign_fire. All empty; all waiting.
 # desire: to give the gallery-DNA a full vocabulary of hosting — every footprint size, every display posture, plus the wayfinding that says someone cares for this building.
-# critical_parameter: kind — selects the body; w/h/size scale it; house — which institution the body belongs to (white_cube | wunderkammer | depot | forensic); guard — how far back that institution keeps you (none | label | rail | hood).
+# critical_parameter: kind — selects the body; w/h/size scale it; house — which institution the body belongs to (white_cube | wunderkammer | depot | forensic | didactic | derelict); guard — how far back that institution keeps you (none | label | rail | hood).
 # triggers: _ready builds by kind; apply_grid_config({kind, w, h, size, house, guard, label}).
 # emerges: a room furnished from one family reads coherent; the floating wall's shadow line is the museum's signature written in light; change house and the same collection becomes a different claim about knowledge.
 # needs: BakedText for signage, infoboard, tombstone labels and depot stencils.
@@ -47,6 +47,35 @@ const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
 # building's legal obligations do not follow curatorial taste, and pretending
 # they do would be the wrong joke).
 # ─────────────────────────────────────────────────────────────────────────────
+#
+# CONVERGENCE PASS (2026-07-27, same day). Six agents promoted the exhibits
+# family in parallel and could not see each other's work. Two collisions came
+# out of it, and this pass pays both:
+#
+#   1. exhibit_podium shipped `regard` (plain · reliquary · didactic · derelict)
+#      for the exact idea `house` names here — which institution's register the
+#      object belongs to — in a disjoint vocabulary. `house` is the senior term
+#      (1077 placements against 226) so the podium adopts it, but the podium's
+#      list carried two registers this one lacked, so `house` WIDENS to six:
+#
+#        white_cube · wunderkammer · depot · forensic · didactic · derelict
+#
+#      didactic is the teaching museum — the grey civic institution that captions
+#      everything, and the exact opposite of the white cube's frameless silence,
+#      not a variant of it. derelict is the register withdrawn: the building used
+#      to think meaning belonged here. Neither is a fifth flavour of the same
+#      claim, which is why widening beat squeezing them into forensic and depot.
+#      The old value names survive as aliases (plain→white_cube,
+#      reliquary→wunderkammer) through house_name(), and BOTH files parse tokens
+#      through that one function, so #house: and #regard: are now the same word.
+#
+#   2. The cordon existed three times (see the CORDON block below).
+#
+# Nothing here is on a default path: guard defaults to none, house to white_cube,
+# and a scan of all 1693 map_data.json files finds ZERO placements carrying a
+# #house:, #guard:, #regard:, #enclosure: or #reserve: token. Every one of the
+# family's 1465 placements is legacy-default, and every one still is.
+# ─────────────────────────────────────────────────────────────────────────────
 
 @export var kind: String = "plinth"
 @export var size_class: String = "m"      # s | m | l
@@ -56,7 +85,8 @@ const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
 @export var mount: String = ""            # a lookup_name to seat on the bed's surface
 
 ## AXIS 1 — the institution the furniture belongs to. Drives every surface:
-## white_cube (legacy default) | wunderkammer | depot | forensic.
+## white_cube (legacy default) | wunderkammer | depot | forensic | didactic | derelict.
+## Also answers to #regard: — exhibit_podium's word for the same axis.
 @export var house: String = "white_cube"
 ## AXIS 2 — how the institution mediates the distance to the object.
 ## none (legacy default) | label (a tombstone lectern) | rail (posts and rope) | hood (glass).
@@ -177,7 +207,83 @@ const HOUSES := {
 		"band_at": 0.52,
 		"band_th": 0.018,
 	},
+	# ── the two registers exhibit_podium brought to the convergence ──────────
+	# The teaching museum. Cool civic grey, everything captioned, a printed card
+	# screwed to the front of the furniture itself. Not a softer white cube — the
+	# white cube's whole ideology is the ABSENCE of this apparatus, so the read is
+	# the caption arriving on a body that has gone from warm 0.85 to cool 0.70.
+	"didactic": {
+		"body": {"c": Color(0.70, 0.71, 0.74), "r": 0.82},
+		"cap": {"c": Color(0.78, 0.79, 0.82), "r": 0.72},
+		"cap_wide": {"c": Color(0.78, 0.79, 0.82), "r": 0.72},
+		"trim": {"c": Color(0.28, 0.28, 0.31), "r": 0.50, "m": 0.25},
+		"shelf": {"c": Color(0.74, 0.75, 0.78), "r": 0.80},
+		"glass": {"c": Color(0.84, 0.88, 0.92, 0.14), "r": 0.06},
+		"wall": {"c": Color(0.88, 0.89, 0.91), "r": 0.80},
+		"wood": {"c": Color(0.72, 0.73, 0.75), "r": 0.70},
+		"metal": {"c": Color(0.46, 0.47, 0.50), "r": 0.45, "m": 0.40},
+		"pad": {"c": Color(0.38, 0.39, 0.42), "r": 0.85},
+		"stud": {"c": Color(0.85, 0.86, 0.88), "r": 0.50},
+		"lip": {"c": Color(0.66, 0.67, 0.70), "r": 0.75},
+		"recess": {"c": Color(0.10, 0.10, 0.12), "r": 0.60},
+		"rope": {"c": Color(0.36, 0.38, 0.42), "r": 0.90},
+		"uplight": Color(0.88, 0.93, 1.00),
+		"note": Color(0.94, 0.95, 0.96),
+		"mark": "plate",
+		"mark_bg": Color(0.94, 0.94, 0.93),
+		"mark_fg": Color(0.15, 0.15, 0.17),
+		"card_bg": Color(0.95, 0.95, 0.94),
+		"card_fg": Color(0.12, 0.12, 0.14),
+		"band": {"c": Color(0.34, 0.35, 0.38), "r": 0.60},
+		"band_at": 0.14,
+		"band_th": 0.030,
+	},
+	# The register withdrawn. Everything the other five houses spend on presence,
+	# this one spends on having stopped: albedo drops from 0.85 to 0.26, the
+	# corner studs stop glowing, the glass goes dusty and half-opaque, and the
+	# only dressing is a 10 cm grime line where the neglected base meets the
+	# floor. A room set to derelict is a room the institution has left.
+	"derelict": {
+		"body": {"c": Color(0.26, 0.25, 0.23), "r": 0.97},
+		"cap": {"c": Color(0.30, 0.29, 0.27), "r": 0.95},
+		"cap_wide": {"c": Color(0.30, 0.29, 0.27), "r": 0.95},
+		"trim": {"c": Color(0.14, 0.13, 0.12), "r": 0.95},
+		"shelf": {"c": Color(0.24, 0.23, 0.21), "r": 0.98},
+		"glass": {"c": Color(0.52, 0.55, 0.50, 0.30), "r": 0.42},
+		"wall": {"c": Color(0.34, 0.33, 0.31), "r": 0.95},
+		"wood": {"c": Color(0.28, 0.25, 0.21), "r": 0.95},
+		"metal": {"c": Color(0.32, 0.28, 0.24), "r": 0.80, "m": 0.35},
+		"pad": {"c": Color(0.20, 0.19, 0.18), "r": 0.98},
+		"stud": {"c": Color(0.34, 0.31, 0.27), "r": 0.90},
+		"lip": {"c": Color(0.30, 0.29, 0.27), "r": 0.95},
+		"recess": {"c": Color(0.02, 0.02, 0.02), "r": 0.90},
+		"rope": {"c": Color(0.24, 0.22, 0.20), "r": 0.98},
+		"uplight": Color(0.55, 0.58, 0.55),
+		"note": Color(0.44, 0.43, 0.40),
+		"mark": "stencil",
+		"mark_fg": Color(0.13, 0.12, 0.11),
+		"card_bg": Color(0.52, 0.50, 0.46),
+		"card_fg": Color(0.20, 0.19, 0.17),
+		"band": {"c": Color(0.15, 0.145, 0.135), "r": 0.98},
+		"band_at": 0.03,
+		"band_th": 0.100,
+	},
 }
+
+## The vocabularies the six-agent pass left behind. exhibit_podium spelled this
+## same axis `regard` and named its two shared values differently; both files
+## normalise through house_name(), so one word now means one thing across the
+## family and no map that learned the old spelling breaks.
+const HOUSE_ALIASES := {
+	"plain": "white_cube",        # exhibit_podium's name for the bare register
+	"reliquary": "wunderkammer",  # dark body, brass cap, a cordon: the same claim
+}
+
+## The family's one reader for an institution token. Static so exhibit_podium
+## parses #house: / #regard: through this exact function rather than its own.
+static func house_name(raw: String) -> String:
+	var v: String = raw.strip_edges().to_lower()
+	return str(HOUSE_ALIASES.get(v, v))
 
 # Where the house dressing (stencil / tag / band) can land: kinds with a solid,
 # flat, front-facing body. Legs, floors and hanging walls get nothing — a crate
@@ -206,8 +312,11 @@ func _read_meta_overrides() -> void:
 		panel_h = float(str(get_meta("config_h")))
 	if has_meta("config_mount"):
 		mount = str(get_meta("config_mount"))
+	# #house: is the family's word; #regard: is exhibit_podium's word for the same
+	# axis and is honoured here so one vocabulary works on either artifact. house
+	# wins when a map somehow carries both.
 	if has_meta("config_house"):
-		house = str(get_meta("config_house"))
+		house = house_name(str(get_meta("config_house")))
 	if has_meta("config_guard"):
 		guard = str(get_meta("config_guard"))
 	if has_meta("config_label"):
@@ -609,32 +718,11 @@ func _guard_label(r: float) -> void:
 		add_child(card)
 
 # DISTANCE. Posts and a sagging rope, set well outside the footprint so the ring
-# is legible as a ring. For a wall kind it collapses to a single line in front,
-# which is what galleries actually do to a painting.
+# is legible as a ring. The geometry lives in cordon() below — this file, this
+# podium and this vitrine all draw the SAME barrier now — and the only thing the
+# rail still decides for itself is that its metal and its rope follow the house.
 func _guard_rail(r: float) -> void:
-	var post: StandardMaterial3D = _pm("metal")
-	var rope: StandardMaterial3D = _pm("rope")
-	var d: float = r + 0.44
-	var top_y: float = 0.86
-	var corners: Array = []
-	if _is_wall_kind():
-		corners = [Vector3(-d, 0, 0.95), Vector3(d, 0, 0.95)]
-	else:
-		corners = [Vector3(-d, 0, -d), Vector3(d, 0, -d), Vector3(d, 0, d), Vector3(-d, 0, d)]
-	for c in corners:
-		var at: Vector3 = c
-		_cyl(Vector3(at.x, 0.015, at.z), 0.10, 0.03, post)             # weighted base
-		_cyl(Vector3(at.x, top_y * 0.5, at.z), 0.028, top_y, post)     # stanchion
-		_cyl(Vector3(at.x, top_y + 0.035, at.z), 0.045, 0.07, post)    # knob
-	# The sag is two straight segments per span, not a curve — from three metres
-	# away a dogleg reads as a hanging rope and costs one mesh instead of eight.
-	var spans: int = corners.size() if corners.size() > 2 else 1
-	for i in spans:
-		var a: Vector3 = corners[i]
-		var b: Vector3 = corners[(i + 1) % corners.size()]
-		var hang: Vector3 = (a + b) * 0.5 + Vector3(0, top_y - 0.14, 0)
-		_rod(a + Vector3(0, top_y, 0), hang, 0.018, rope)
-		_rod(hang, b + Vector3(0, top_y, 0), 0.018, rope)
+	cordon(self, r, {"post": _pm("metal"), "rope": _pm("rope"), "line_only": _is_wall_kind()})
 
 # GLASS. A hood over the bed, or a glazed pane in front of a wall. The rims are
 # solid so the guard still reads in a still — a pure transparent box would be an
@@ -665,7 +753,106 @@ func _guard_hood(r: float) -> void:
 			_box(Vector3(0.035, hh, 0.035),
 					Vector3(sx * half, base_y + 0.05 + hh * 0.5, sz * half), rim)
 
-func _cyl(pos: Vector3, radius: float, height: float, mat: StandardMaterial3D) -> MeshInstance3D:
+# ── the family's cordon ──────────────────────────────────────────────────────
+#
+# CONVERGENCE DEBT 2, paid. The posts-and-rope barrier existed three times, in
+# three files, at three standoffs (0.44 here, 0.62 on the podium, 0.55 on the
+# vitrine), over three brasses, under three crimsons that differed by one
+# hundredth in a single channel — the signature of three agents drawing the same
+# museum object on the same afternoon without seeing each other.
+#
+# The canon below IS this file's rail, number for number: standoff 0.44, post
+# 0.86 m, foot Ø0.20, knob Ø0.09, rope Ø0.036 hung from the post tops and sagging
+# 0.14 into a dogleg. The senior term (1077 placements) does not move; the other
+# two adopt it, which is what "converge" has to mean if it is to mean anything.
+#
+# Consequences worth knowing before changing a number here: the ring stands
+# 0.44 m outside the bed's half-extent and 0.86 m tall in THREE artifacts now, so
+# a change is a change to the whole family's floor budget. And the podium's ring
+# shrank (it stood 0.62 m off, with a 0.98 m floor) — which was the right way
+# round, because a plinth m under exhibit_furniture and an exhibit_podium at its
+# default size now produce rings within 5 mm of each other instead of 27% apart.
+const CORDON := {
+	"standoff": 0.44,   # how far outside the bed's half-extent the posts stand
+	"post_h": 0.86,     # top of the stanchion; the rope hangs from here
+	"post_r": 0.028,
+	"foot_r": 0.10, "foot_h": 0.03,
+	"knob_r": 0.045, "knob_h": 0.07,
+	"rope_r": 0.018,
+	"sag": 0.14,        # how far the rope's midpoint falls below its ends
+	"wall_z": 0.95,     # a wall-hung work gets a LINE in front, not a ring
+}
+
+## The family's brass, for callers with no house of their own to ask. Lifted from
+## HOUSES.wunderkammer.metal — this file's own brass, unchanged — so a podium's
+## cordon and a wunderkammer plinth's cap are now literally the same metal.
+static func brass_material() -> StandardMaterial3D:
+	return _family_mat(Color(0.74, 0.56, 0.22), 0.26, 0.90)
+
+## The family's crimson, lifted unchanged from HOUSES.white_cube.rope. The two
+## other crimsons in the family were (0.42, 0.06, 0.09) and (0.42, 0.07, 0.09);
+## this one is the senior file's, so the senior file's rail does not move.
+static func rope_material() -> StandardMaterial3D:
+	return _family_mat(Color(0.42, 0.06, 0.10), 0.90, 0.0)
+
+## The barrier. `extent` is the bed's half-footprint; the ring stands standoff
+## outside it. opts: {post, rope} override the materials (exhibit_furniture feeds
+## its house's metal and rope in, so the rail stays house-coloured), `line_only`
+## collapses the ring to a single span in front for wall-hung work.
+static func cordon(host: Node3D, extent: float, opts: Dictionary = {}) -> void:
+	if host == null:
+		return
+	var post: StandardMaterial3D = opts.get("post") as StandardMaterial3D
+	if post == null:
+		post = brass_material()
+	var rope: StandardMaterial3D = opts.get("rope") as StandardMaterial3D
+	if rope == null:
+		rope = rope_material()
+	var d: float = extent + float(CORDON["standoff"])
+	var top_y: float = float(CORDON["post_h"])
+	var corners: Array = []
+	if bool(opts.get("line_only", false)):
+		var wz: float = float(CORDON["wall_z"])
+		corners = [Vector3(-d, 0, wz), Vector3(d, 0, wz)]
+	else:
+		corners = [Vector3(-d, 0, -d), Vector3(d, 0, -d), Vector3(d, 0, d), Vector3(-d, 0, d)]
+	for c in corners:
+		var at: Vector3 = c
+		var fh: float = float(CORDON["foot_h"])
+		_family_cyl(host, Vector3(at.x, fh * 0.5, at.z),
+				float(CORDON["foot_r"]), fh, post)                       # weighted base
+		_family_cyl(host, Vector3(at.x, top_y * 0.5, at.z),
+				float(CORDON["post_r"]), top_y, post)                    # stanchion
+		var kh: float = float(CORDON["knob_h"])
+		_family_cyl(host, Vector3(at.x, top_y + kh * 0.5, at.z),
+				float(CORDON["knob_r"]), kh, post)                       # knob
+	# The sag is two straight segments per span, not a curve — from three metres
+	# away a dogleg reads as a hanging rope and costs one mesh instead of eight.
+	var spans: int = corners.size() if corners.size() > 2 else 1
+	var rr: float = float(CORDON["rope_r"])
+	for i in spans:
+		var a: Vector3 = corners[i]
+		var b: Vector3 = corners[(i + 1) % corners.size()]
+		var hang: Vector3 = (a + b) * 0.5 + Vector3(0, top_y - float(CORDON["sag"]), 0)
+		_family_rod(host, a + Vector3(0, top_y, 0), hang, rr, rope)
+		_family_rod(host, hang, b + Vector3(0, top_y, 0), rr, rope)
+
+# Static twins of the instance primitives, so cordon() can be called by artifacts
+# that are not this class. Kept byte-identical to what _guard_rail used to do —
+# note that radial_segments is deliberately left at CylinderMesh's default, which
+# is what the 1077-placement lineage has always rendered.
+static func _family_mat(c: Color, rough: float, metal: float) -> StandardMaterial3D:
+	var m := StandardMaterial3D.new()
+	m.albedo_color = c
+	m.roughness = rough
+	if metal > 0.0:
+		m.metallic = metal
+	if c.a < 1.0:
+		m.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	return m
+
+static func _family_cyl(host: Node3D, pos: Vector3, radius: float, height: float,
+		mat: Material) -> MeshInstance3D:
 	var mi := MeshInstance3D.new()
 	var cm := CylinderMesh.new()
 	cm.top_radius = radius
@@ -674,17 +861,18 @@ func _cyl(pos: Vector3, radius: float, height: float, mat: StandardMaterial3D) -
 	mi.mesh = cm
 	mi.material_override = mat
 	mi.position = pos
-	add_child(mi)
+	host.add_child(mi)
 	return mi
 
 # A cylinder spanning two points. CylinderMesh runs along +Y, so the basis is
 # built from the rotation that carries UP onto the span direction.
-func _rod(a: Vector3, b: Vector3, radius: float, mat: StandardMaterial3D) -> void:
+static func _family_rod(host: Node3D, a: Vector3, b: Vector3, radius: float,
+		mat: Material) -> void:
 	var dir: Vector3 = b - a
 	var span: float = dir.length()
 	if span < 0.001:
 		return
-	var mi: MeshInstance3D = _cyl((a + b) * 0.5, radius, span, mat)
+	var mi: MeshInstance3D = _family_cyl(host, (a + b) * 0.5, radius, span, mat)
 	var u: Vector3 = dir / span
 	if absf(u.dot(Vector3.UP)) < 0.999:
 		var axis: Vector3 = Vector3.UP.cross(u).normalized()

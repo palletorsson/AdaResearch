@@ -132,6 +132,21 @@
       ]
     },
     "fire_hose_box": {
+      "dna": {
+       "axes": {
+       "station": [
+       "bracket",
+       "cabinet",
+       "stand"
+       ],
+       "statute": [
+       "issue",
+       "notice",
+       "joinery",
+       "lapse"
+       ]
+       }
+      },
       "lookup_name": "fire_hose_box",
       "scene": "res://commons/artifacts/fire_hose_box/fire_hose_box.tscn",
       "class_name": "FireHoseBox",
@@ -3093,6 +3108,23 @@
       }
     },
     "info_board": {
+      "dna": {
+       "axes": {
+       "voice": [
+       "system",
+       "directory",
+       "noticeboard",
+       "flap",
+       "taped"
+       ],
+       "carriage": [
+       "none",
+       "easel",
+       "case",
+       "pylon"
+       ]
+       }
+      },
       "lookup_name": "info_board",
       "scene": "res://commons/scenes/mapobjects/info_board.tscn",
       "name": "Annotation Board",
@@ -6141,6 +6173,21 @@
       }
     },
     "fire_extinguisher": {
+      "dna": {
+       "axes": {
+       "station": [
+       "bracket",
+       "cabinet",
+       "stand"
+       ],
+       "statute": [
+       "issue",
+       "notice",
+       "joinery",
+       "lapse"
+       ]
+       }
+      },
       "lookup_name": "fire_extinguisher",
       "scene": "res://commons/artifacts/fire_extinguisher/fire_extinguisher.tscn",
       "class_name": "FireExtinguisher",

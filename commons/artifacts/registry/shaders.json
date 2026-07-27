@@ -1929,20 +1929,20 @@
 			 "stage": "2 - variation",
 			 "axes": {
 			  "housing": [
-			   "none",
-			   "bezel",
-			   "hooded",
-			   "cabinet"
+			   "stand",
+			   "wall",
+			   "console",
+			   "rig"
 			  ],
 			  "surface": [
-			   "flat",
-			   "curved",
-			   "tiles",
-			   "frosted"
+			   "plane",
+			   "curve",
+			   "triptych",
+			   "tiles"
 			  ]
 			 },
-			 "default": "housing=none + surface=flat is the legacy lineage; uv1 scale/offset resolve to StandardMaterial3D's own defaults.",
-			 "note": "The face is now wrapped in a Face Node3D; GridInteractablesComponent._compute_local_aabb recurses into Node3D children and multiplies by their transform, so grounding is unaffected. surface:tiles is the thinnest margin in the set (~4-5% area) but the changed pixels go bright green to dark grey."
+			 "default": "housing=stand + surface=plane is the legacy lineage; uv1 scale/offset resolve to StandardMaterial3D's own defaults.",
+			 "note": "CORRECTED 2026-07-27. This block first shipped with FABRICATED values (housing none|bezel|hooded|cabinet, surface flat|curved|tiles|frosted) that were never in the code's @export_enum. Nothing failed loudly: the sweep set an invalid value, the artifact fell back to its default, 16 identical frames were published, and the critic measured them and called the axis INERT at 0.69% focus. The declaration was wrong, not the design. Only 'tiles' survived, because it happens to appear in both lists, which is why surface scored a nonzero 0.29% instead of zero. A fabricated declaration produces a complete-looking experiment whose verdict is secretly about the registry. tools/check_dna_declarations.py now diffs every declared axis against its code enum, and build_dna_gallery.py refuses to sweep one that fails. The face is wrapped in a Face Node3D; GridInteractablesComponent._compute_local_aabb recurses into Node3D children and multiplies by their transform, so grounding is unaffected."
 			},
 			"category": "shaders",
 			"complexity": "intermediate",

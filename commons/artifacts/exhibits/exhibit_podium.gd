@@ -9,13 +9,18 @@ class_name ExhibitPodium
 ## podium into the maintenance-bay family, which is a different building.
 const HangarKit = preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 const BakedText = preload("res://commons/utils/baked_text_albedo.gd")
+## The family's senior term. exhibit_furniture holds the shared institution
+## vocabulary (house_name) and the shared cordon, because it is the most-placed
+## member and its identity block already claims to grow the other two into a
+## family. Borrowed for those two things only — the podium keeps its own body.
+const ExhibitFamily = preload("res://commons/artifacts/exhibits/exhibit_furniture.gd")
 
 # @identity
-# essence: an EMPTY podium — the exhibit affordance itself, before any exhibit. A stone plinth with a soft top light and nothing on it: a promise, a slot, a place where an artifact will one day stand. The gallery-DNA generator plants these to mark hosting capacity. Since the stage-2 promotion it is a FAMILY: `regard` chooses which opinion the architecture is holding (plain / reliquary / didactic / derelict) and `reserve` chooses how the empty volume above the plate is declared (none / armature / ghost / shroud).
+# essence: an EMPTY podium — the exhibit affordance itself, before any exhibit. A stone plinth with a soft top light and nothing on it: a promise, a slot, a place where an artifact will one day stand. The gallery-DNA generator plants these to mark hosting capacity. Since the stage-2 promotion it is a FAMILY: `house` chooses which institution's opinion the architecture is holding (white_cube / wunderkammer / depot / forensic / didactic / derelict) and `reserve` chooses how the empty volume above the plate is declared (none / armature / ghost / shroud).
 # desire: to hold something later — architecture rehearsing its collection.
-# critical_parameter: regard — the register of the institution's claim on this spot; reserve — how loudly the absence is announced. Size/height/kind still set proportion.
-# triggers: _ready builds plinth + downlight + regard apparatus + reserve declaration; apply_grid_config({height, size, kind, regard, reserve, label, reserve_h}).
-# emerges: a room of empty podiums reads as anticipation, not absence — the space is FOR something, visibly. Mix the regards and the room stops being uniform: one spot is sacred, one is catalogued, one has been given up on, and the visitor reads the institution's hierarchy off the furniture alone.
+# critical_parameter: house — the register of the institution's claim on this spot, the same axis and the same word exhibit_furniture uses; reserve — how loudly the absence is announced. Size/height/kind still set proportion.
+# triggers: _ready builds plinth + downlight + house apparatus + reserve declaration; apply_grid_config({height, size, kind, house, reserve, label, reserve_h}). #regard: is still read as house.
+# emerges: a room of empty podiums reads as anticipation, not absence — the space is FOR something, visibly. Mix the houses and the room stops being uniform: one spot is sacred, one is catalogued, one has been given up on, and the visitor reads the institution's hierarchy off the furniture alone — and reads it off a plinth from exhibit_furniture standing beside it in the same register, because the two now speak one vocabulary.
 # needs: nothing; pure affordance. No colliders, no triggers — the podium has never been solid and still isn't.
 # relationships: the atom of [[gallery_dna]]; sibling of [[exhibit_vitrine]]; the empty half of [[exhibit_furniture]]'s vocabulary; filled later by the Curator or place.py.
 # truth: an empty podium is not nothing — it is the architecture's opinion about where meaning should stand. And an opinion has a REGISTER: reverence, instruction, or neglect are all the same box with a different claim attached, which is why the axis had to be the claim and not the box.
@@ -28,13 +33,14 @@ const BakedText = preload("res://commons/utils/baked_text_albedo.gd")
 ## "the architecture's OPINION about where meaning should stand". An opinion is
 ## not a size. So the axes were taken from the truth statement instead:
 ##
-##   regard   which opinion is being held    plain · reliquary · didactic · derelict
+##   house    which opinion is being held    the institution's register
 ##   reserve  how the emptiness is declared  none · armature · ghost · shroud
 ##
-## regard="plain" + reserve="none" is the old build, number for number, and it is
-## the default — all 226 existing placements are untouched and a visitor cannot
-## tell this file changed. Every value on both axes is mass, colour, silhouette
-## or light; nothing here animates, because a still is what this project judges by.
+## house="white_cube" + reserve="none" is the old build, number for number, and
+## it is the default — all 226 existing placements are untouched and a visitor
+## cannot tell this file changed. Every value on both axes is mass, colour,
+## silhouette or light; nothing here animates, because a still is what this
+## project judges by.
 ##
 ## What it cost: the podium is no longer only about hosting capacity. A derelict
 ## podium hosts nothing and says so, which means the artifact can now be used to
@@ -42,19 +48,49 @@ const BakedText = preload("res://commons/utils/baked_text_albedo.gd")
 ## and can misuse. That is the trade, and it is deliberate: an affordance that
 ## can only ever mean "something good will go here" is a very obedient object.
 ##
+## ── CONVERGENCE PASS (2026-07-27, same day) ─────────────────────────────────
+##
+## This axis shipped as `regard` with its own four values. exhibit_furniture
+## shipped `house` for the identical idea — which institution's register the
+## object belongs to — with four different ones, because six agents promoted the
+## exhibits family in parallel that afternoon. house is the senior term (1077
+## placements against 226) so this file adopts the WORD, and the two values only
+## this file had (didactic, derelict) widened house rather than being squeezed
+## into it, so the family's institution axis is now six-valued everywhere:
+##
+##   white_cube · wunderkammer · depot · forensic · didactic · derelict
+##
+##   plain      → white_cube    the bare register; same numbers, still default
+##   reliquary  → wunderkammer  dark body, brass plate, a cordon: one claim, and
+##                              this file's brass plate (0.74, 0.57, 0.24) was
+##                              already within 0.01 of exhibit_furniture's
+##                              wunderkammer cap. Two agents drew the same metal.
+##   didactic, derelict         kept, and given to exhibit_furniture as well
+##   depot, forensic            new here, taken from exhibit_furniture's palette
+##                              colour for colour, so a podium and a plinth in
+##                              the same house are the same object's two sizes
+##
+## Both spellings still work: #regard:reliquary and #house:wunderkammer are the
+## same podium, parsed through ExhibitFamily.house_name() — ONE reader for the
+## whole family, so the vocabularies cannot drift apart again.
+##
 ## Usage in map_data.json:
 ##   "exhibit_podium"                                     (unchanged, legacy)
-##   "exhibit_podium#regard:reliquary"
-##   "exhibit_podium#regard:didactic#label:UNTITLED"
-##   "exhibit_podium#regard:derelict#kind:dais"
+##   "exhibit_podium#house:wunderkammer"                  (was #regard:reliquary)
+##   "exhibit_podium#house:didactic#label:UNTITLED"
+##   "exhibit_podium#house:derelict#kind:dais"
+##   "exhibit_podium#house:depot"
 ##   "exhibit_podium#reserve:ghost"
-##   "exhibit_podium#regard:reliquary#reserve:shroud"
+##   "exhibit_podium#house:wunderkammer#reserve:shroud"
 
 @export var plinth_size: float = 0.55
 @export var plinth_height: float = 0.95
 @export var kind: String = "podium"      # podium | dais
-## The register of the architecture's claim on this spot.
-@export var regard: String = "plain"     # plain | reliquary | didactic | derelict
+## The register of the architecture's claim on this spot — the family's `house`
+## axis. white_cube (legacy default) | wunderkammer | depot | forensic |
+## didactic | derelict. Still answers to the older #regard: token and to its two
+## older value names (plain, reliquary).
+@export var house: String = "white_cube"
 ## How the reserved volume above the plate is declared.
 @export var reserve: String = "none"     # none | armature | ghost | shroud
 ## The reserved volume's height, for armature/ghost/shroud.
@@ -70,19 +106,23 @@ const SIZE_CLASSES := {
 	"l": Vector2(0.85, 0.60),
 }
 
-## Every number under "plain" is the old hardcoded value. Do not tidy them into
-## rounder figures — they ARE the regression test for the 226 live placements.
-const REGARDS := {
-	"plain": {
+## Every number under "white_cube" is the old hardcoded value. Do not tidy them
+## into rounder figures — they ARE the regression test for the 226 live
+## placements. (The key was called "plain" until the convergence pass; only the
+## key changed, and #regard:plain still lands here.)
+const HOUSES := {
+	"white_cube": {
 		"body": Color(0.82, 0.80, 0.75), "body_rough": 0.6, "body_metal": 0.0,
 		"plate": Color(0.90, 0.88, 0.84), "plate_rough": 0.4, "plate_metal": 0.0,
 		"lit": true, "beam": 26.0, "reach": 3.2, "energy": 1.1,
 		"light": Color(1.0, 0.97, 0.9),
 	},
-	# Reverence: a dark polished base so the object floats out of shadow, a gilt
-	# lip, a cordon that makes you stand back, and a beam tight enough to be a
-	# spotlight rather than room light.
-	"reliquary": {
+	# Reverence and curiosity: a dark polished base so the object floats out of
+	# shadow, a gilt lip, a cordon that makes you stand back, and a beam tight
+	# enough to be a spotlight rather than room light. Was "reliquary" — the
+	# convergence renamed it to the family's word for this register, and the
+	# plate colour needed no adjustment at all to match the cabinet's brass.
+	"wunderkammer": {
 		"body": Color(0.12, 0.11, 0.13), "body_rough": 0.22, "body_metal": 0.12,
 		"plate": Color(0.74, 0.57, 0.24), "plate_rough": 0.26, "plate_metal": 0.85,
 		"lit": true, "beam": 13.0, "reach": 4.2, "energy": 3.6,
@@ -105,6 +145,34 @@ const REGARDS := {
 		"plate": Color(0.30, 0.29, 0.27), "plate_rough": 0.95, "plate_metal": 0.0,
 		"lit": false, "beam": 26.0, "reach": 3.2, "energy": 0.0,
 		"light": Color(1.0, 0.97, 0.9),
+	},
+	# ── the two registers exhibit_furniture brought to the convergence ───────
+	# The store. Raw ply, a safety-orange shipping strap round the shaft, the
+	# thing stencilled with its own name because nobody has decided yet that what
+	# stands here is art. Colour for colour this is exhibit_furniture's depot, so
+	# a podium and a plinth in this house read as one delivery.
+	"depot": {
+		"body": Color(0.72, 0.52, 0.28), "body_rough": 0.88, "body_metal": 0.0,
+		"plate": Color(0.68, 0.49, 0.26), "plate_rough": 0.90, "plate_metal": 0.0,
+		"lit": true, "beam": 52.0, "reach": 4.0, "energy": 1.3,
+		"light": Color(1.0, 0.92, 0.78),
+		"band": Color(0.88, 0.44, 0.09), "band_rough": 0.55,
+		"band_at": 0.62, "band_th": 0.075,
+		"mark": "stencil", "mark_fg": Color(0.16, 0.12, 0.09),
+	},
+	# The evidence room. Brushed steel at metallic 0.88 — almost no diffuse
+	# return, so it reads far darker and far shinier than the white cube though
+	# the albedo is only a quarter lower — a thin emissive cyan datum line, cold
+	# light, and a tag where a museum would put a title.
+	"forensic": {
+		"body": Color(0.60, 0.62, 0.65), "body_rough": 0.24, "body_metal": 0.88,
+		"plate": Color(0.88, 0.90, 0.92), "plate_rough": 0.18, "plate_metal": 0.60,
+		"lit": true, "beam": 30.0, "reach": 4.4, "energy": 2.2,
+		"light": Color(0.72, 0.86, 1.0),
+		"band": Color(0.20, 0.64, 0.74), "band_rough": 0.30, "band_emit": 0.6,
+		"band_at": 0.52, "band_th": 0.018,
+		"mark": "plate", "mark_bg": Color(0.09, 0.10, 0.12),
+		"mark_fg": Color(0.45, 0.90, 0.98),
 	},
 }
 
@@ -144,13 +212,24 @@ func _read_meta_overrides() -> void:
 			if not has_meta("config_height"):
 				plinth_height = dims.y
 		else:
-			plinth_size = raw.to_float()
+			# Only a POSITIVE number is a size. Any other word — "xl" is the one
+			# waiting to happen, since exhibit_furniture accepts it for platforms
+			# and this table has no such class — used to reach String.to_float()
+			# and come back 0.0, i.e. a zero-width plinth with a light over
+			# nothing. No map carries it today; it now leaves the default alone.
+			var f: float = raw.to_float()
+			if f > 0.0:
+				plinth_size = f
 	if has_meta("config_height"):
 		plinth_height = float(str(get_meta("config_height")))
 	if has_meta("config_kind"):
 		kind = str(get_meta("config_kind"))
-	if has_meta("config_regard"):
-		regard = str(get_meta("config_regard")).strip_edges().to_lower()
+	# The family's institution axis. #house: is the word; #regard: was this
+	# file's word for it and is still read. Both go through the one normaliser
+	# on exhibit_furniture, which also maps the old value names (plain,
+	# reliquary) onto the shared ones.
+	if has_meta("config_house"):
+		house = ExhibitFamily.house_name(str(get_meta("config_house")))
 	if has_meta("config_reserve"):
 		reserve = str(get_meta("config_reserve")).strip_edges().to_lower()
 	if has_meta("config_reserve_h"):
@@ -161,7 +240,7 @@ func _read_meta_overrides() -> void:
 
 func _signature() -> String:
 	return "%s|%s|%s|%.3f|%.3f|%.3f|%s" % [
-		kind, regard, reserve, plinth_size, plinth_height, reserve_height, label_text]
+		kind, house, reserve, plinth_size, plinth_height, reserve_height, label_text]
 
 
 func _rebuild() -> void:
@@ -182,7 +261,7 @@ func _build() -> void:
 		s = maxf(s, 1.6)
 		h = 0.22
 
-	var r: Dictionary = REGARDS.get(regard, REGARDS["plain"])
+	var r: Dictionary = HOUSES.get(house, HOUSES["white_cube"])
 	var body_col: Color = r["body"]
 	var plate_col: Color = r["plate"]
 
@@ -212,7 +291,7 @@ func _build() -> void:
 	plate.position = Vector3(0, h + 0.02, 0)
 	add_child(plate)
 
-	# the waiting light — absent entirely when the regard is derelict, because a
+	# the waiting light — absent entirely when the house is derelict, because a
 	# dead fixture that still emits is a lit ruin, which is a different claim
 	if bool(r["lit"]):
 		var light_col: Color = r["light"]
@@ -225,13 +304,20 @@ func _build() -> void:
 		light.light_color = light_col
 		add_child(light)
 
-	match regard:
-		"reliquary":
+	# The apparatus each institution brings with it. Note this file binds the
+	# apparatus to the house where exhibit_furniture keeps mediation on a second
+	# axis (guard) — deliberate, and recorded as the family's remaining seam: a
+	# podium is allowed two axes, and #regard:reliquary has always meant "and a
+	# cordon", so splitting them here would silently disarm the older token.
+	match house:
+		"wunderkammer":
 			_cordon(s)
 		"didactic":
 			_lectern(s, h)
 		"derelict":
 			_withdraw(plate, s, h)
+		"depot", "forensic":
+			_house_marks(s, h, r)
 
 	# The plate's upper face — where the missing thing would rest.
 	var top_y: float = h + 0.04
@@ -244,49 +330,82 @@ func _build() -> void:
 			_shroud(s, top_y)
 
 
-# ── regard apparatus ──────────────────────────────────────────────────
+# ── house apparatus ───────────────────────────────────────────────────
 
-## RELIQUARY — the cordon. It is the whole point of this regard: the podium can
-## be reverent in its own colours, but only a barrier standing well off the base
-## actually changes the visitor's body, and only a barrier reads as reverence
-## from across a room. Ropes are built as two sagging segments rather than one
-## straight bar, because a taut rope reads as a fence and a slack one as ceremony.
+## WUNDERKAMMER — the cordon. It is the whole point of this register: the podium
+## can be reverent in its own colours, but only a barrier standing well off the
+## base actually changes the visitor's body, and only a barrier reads as
+## reverence from across a room.
+##
+## CONVERGENCE: this used to be 32 lines of its own posts-and-rope — brass
+## (0.62, 0.48, 0.20), crimson (0.42, 0.06, 0.09), standing 0.62 m off the base
+## with a 0.98 m floor and 0.92 m posts. exhibit_furniture and exhibit_vitrine
+## each had one too, at their own radii, in their own near-identical crimsons.
+## There is one barrier in the family now and this is a call into it. What
+## changed here: the ring came IN (the standoff is 0.44 m and the floor is gone,
+## which puts a default podium's rope within 5 mm of a plinth m's), the posts
+## dropped 6 cm, the ball finial became the family's turned knob, and the metal
+## became the family brass — which is exhibit_furniture's wunderkammer brass,
+## the same metal as this podium's own plate. Nothing above is on a default path.
 func _cordon(s: float) -> void:
-	var brass: StandardMaterial3D = _mat(Color(0.62, 0.48, 0.20), 0.30, 0.85)
-	var rope: StandardMaterial3D = _mat(Color(0.42, 0.06, 0.09), 0.92, 0.0)
-	var reach: float = maxf(s * 0.5 + 0.62, 0.98)
-	var post_h: float = 0.92
-	var sxs := PackedFloat32Array([-1.0, 1.0, 1.0, -1.0])
-	var szs := PackedFloat32Array([-1.0, -1.0, 1.0, 1.0])
-	var tops: Array[Vector3] = []
-	for i in range(4):
-		var p := Vector3(sxs[i] * reach, 0.0, szs[i] * reach)
-		_cyl(0.030, 0.030, post_h, p + Vector3(0, post_h * 0.5, 0), brass, 14)
-		# weighted foot, so the post stands rather than sprouts
-		_cyl(0.075, 0.110, 0.05, p + Vector3(0, 0.025, 0), brass, 16)
-		# ball finial
-		var ball := MeshInstance3D.new()
-		var sm := SphereMesh.new()
-		sm.radius = 0.045
-		sm.height = 0.09
-		sm.radial_segments = 12
-		sm.rings = 6
-		ball.mesh = sm
-		ball.material_override = brass
-		ball.position = p + Vector3(0, post_h + 0.03, 0)
-		add_child(ball)
-		tops.append(p + Vector3(0, post_h - 0.12, 0))
-	for i in range(4):
-		var a: Vector3 = tops[i]
-		var b: Vector3 = tops[(i + 1) % 4]
-		var mid: Vector3 = (a + b) * 0.5 - Vector3(0, 0.14, 0)
-		add_child(_rod(a, mid, 0.019, rope))
-		add_child(_rod(mid, b, 0.019, rope))
+	ExhibitFamily.cordon(self, s * 0.5)
+
+
+## DEPOT / FORENSIC — the strap and the datum. Both institutions mark furniture
+## rather than lighting it: a band round the shaft at the height that register
+## puts it, and the object's own name written on the front. Mirrors
+## exhibit_furniture._house_dressing() slot for slot and constant for constant —
+## same 0.72-of-width mark, same 0.30-of-height cap, same 16 mm standoff — so the
+## two artifacts letter themselves the same way in the same house.
+func _house_marks(s: float, h: float, r: Dictionary) -> void:
+	if r.has("band"):
+		var bc: Color = r["band"]
+		var bmat: StandardMaterial3D
+		if float(r.get("band_emit", 0.0)) > 0.0:
+			bmat = _emissive(bc, float(r["band_emit"]))
+		else:
+			bmat = _mat(bc, float(r.get("band_rough", 0.6)), 0.0)
+		var th: float = minf(float(r.get("band_th", 0.05)), h * 0.5)
+		# clamped so a strap on a dais cannot sink through the floor
+		var by: float = clampf(h * float(r.get("band_at", 0.5)), th * 0.5, h - th * 0.5)
+		_box(Vector3(s + 0.014, th, s + 0.014), Vector3(0, by, 0), bmat)
+
+	var style: String = str(r.get("mark", ""))
+	if style == "":
+		return
+	var mw: float = minf(s * 0.72, 0.62)
+	var mh: float = minf(minf(mw * 0.30, h * 0.55), h * 0.30)
+	if mw < 0.12 or mh < 0.04:
+		return                                   # too thin a face to letter
+	# Sit opposite the band, or the strap covers the word it stands next to.
+	var band_high: bool = r.has("band") and float(r.get("band_at", 0.5)) > 0.40
+	var y: float = h * (0.30 if band_high else 0.58)
+	var z: float = s * 0.5 + 0.016
+	var mark_bg: Color = r.get("mark_bg", Color(0.10, 0.10, 0.10))
+	var mark_fg: Color = r.get("mark_fg", Color(0.15, 0.12, 0.09))
+	var q: MeshInstance3D = null
+	if style == "plate":
+		q = BakedText.make_panel_mesh(_mark_text(), mark_bg, mark_fg,
+			Vector2(mw, mh), 1400, false)
+	else:
+		q = BakedText.make_label_mesh(_mark_text(), mark_fg,
+			Vector2(mw, mh), 1400, false)
+	if q:
+		q.position = Vector3(0, y, z)
+		q.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		add_child(q)
+
+
+## What the store stencils on the furniture: the furniture's own name, not the
+## absent work's. The didactic lectern prints the WORK (or "UNTITLED"); a depot
+## inventories the shelf. That difference is most of what the house axis claims.
+func _mark_text() -> String:
+	return kind.replace("_", " ").to_upper()
 
 
 ## DIDACTIC — the label lectern. Stands beside the podium rather than on it, so
 ## the plate stays empty: the institution speaks NEXT to the work, never on its
-## surface. The lectern is what carries this regard across a room — the cool
+## surface. The lectern is what carries this house across a room — the cool
 ## grey and the flat wash alone are a colour change, and a colour change is the
 ## kind of axis that gets called decoration.
 func _lectern(s: float, h: float) -> void:
@@ -319,7 +438,7 @@ func _lectern(s: float, h: float) -> void:
 		add_child(block)
 
 	# A catalogue number printed on the plinth front — the object reduced to an
-	# accession, which is the didactic regard's actual opinion of it.
+	# accession, which is the didactic house's actual opinion of it.
 	var code: MeshInstance3D = BakedText.make_label_mesh(
 		"CAT. 001", Color(0.30, 0.30, 0.33), Vector2(minf(s * 0.55, 0.30), 0.055), 1400, false)
 	if code:
@@ -540,19 +659,5 @@ func _cyl(top_r: float, bot_r: float, height: float, pos: Vector3,
 	return mi
 
 
-## A cylinder spanning a -> b in any orientation (the rope segments).
-func _rod(a: Vector3, b: Vector3, radius: float, mat: StandardMaterial3D) -> MeshInstance3D:
-	var mi := MeshInstance3D.new()
-	var cm := CylinderMesh.new()
-	cm.top_radius = radius
-	cm.bottom_radius = radius
-	cm.height = maxf(a.distance_to(b), 0.001)
-	cm.radial_segments = 8
-	mi.mesh = cm
-	mi.material_override = mat
-	var yv: Vector3 = (b - a).normalized()
-	var ref: Vector3 = Vector3.UP if absf(yv.dot(Vector3.UP)) < 0.985 else Vector3.RIGHT
-	var xv: Vector3 = ref.cross(yv).normalized()
-	var zv: Vector3 = xv.cross(yv).normalized()
-	mi.transform = Transform3D(Basis(xv, yv, zv), (a + b) * 0.5)
-	return mi
+## (The rope-segment rod that used to live here went with the cordon — it is
+## ExhibitFamily._family_rod now, shared with the vitrine and the furniture.)

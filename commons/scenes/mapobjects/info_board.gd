@@ -1,5 +1,32 @@
 # InfoBoard.gd
 # Map-specific info board that loads data from map_data.json
+#
+# ─────────────────────────────────────────────────────────────────────────────
+# ORPHANED — THIS FILE IS NOT LOADED BY ANYTHING (found 2026-07-27).
+#
+# Nothing in the repository references it. Its uid (uid://bo7fb2yiasu40, see
+# info_board.gd.uid) appears in zero .tscn files. The scene everybody actually
+# places — commons/scenes/mapobjects/info_board.tscn, which is both the
+# `info_board` artifact (247 placements) and the `an` utility (415 placements) —
+# runs commons/scenes/mapobjects/AnnotationInfoBoard.gd instead.
+#
+# This matters because it explains a measurement. The DNA sweep that swept
+# base_display_time / chars_per_second / min_display_time / max_display_time /
+# fade_duration below and got six identical tiles was reading THIS file. Those
+# exports were never on the running node. The follow-up temporal probe then
+# photographed the live board at six moments over 14 seconds and also got six
+# identical frames — correctly, because the live script has no animation at all.
+# Two different reasons, one conclusion; only the second one was about the board.
+#
+# The live artifact's @identity block and its promoted axes (voice, carriage)
+# live in AnnotationInfoBoard.gd. Do not add behaviour here expecting it to run.
+#
+# Left in place rather than deleted: deciding between deleting it and re-pointing
+# info_board.tscn at it is a content call, not a DNA call. Note also that
+# info_board.tscn:236-237 wire Area3D's body_entered/body_exited to
+# _on_area_entered/_on_area_exited — methods that exist ONLY in this dead file,
+# so those two connections currently resolve to nothing on the live node.
+# ─────────────────────────────────────────────────────────────────────────────
 extends Node3D
 
 # References to UI elements
