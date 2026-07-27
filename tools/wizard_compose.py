@@ -715,10 +715,39 @@ def compose(spec):
         "subtitles": _subs,
         "layers": {"structure": S, "utilities": U, "walls": WL, "interactables": I}}
 
+    stages.append(run_dwell(data, spec.get("dwell")))
+
     m = metrics(data, rooms, hall, passage, floor, door_info, story_score)
     stages.append({"op": "final", "W": W, "D": D, "metrics": m["parts"], "score_soft": m["soft"],
                    "weights": MW})
     return data, stages
+
+
+# ---------- OP 10: DWELL, THE OCCUPANT PASS ----------
+# The pass lives in tools/walk_polish.py and is CALLED here, never copied. A
+# recipe has to be able to regenerate the map it names, and until this hook
+# existed a furnished map could only be made by running a second tool by hand —
+# so the recipe described one map and the repo held another. One composer, one
+# memory. Off unless the spec asks: a recipe without a dwell block composes
+# exactly the map it composed yesterday.
+def run_dwell(data, spec_dwell):
+    sd = spec_dwell or {}
+    if not sd.get("enabled", False):
+        return {"op": "dwell", "placed": 0, "why": "disabled"}
+    try:
+        import walk_polish
+    except Exception as exc:                       # the composer still ships a map
+        return {"op": "dwell", "placed": 0, "why": "walk_polish unavailable: %s" % exc}
+    name = (data.get("map_info") or {}).get("name", "X")
+    props, stations = walk_polish.inspect(data, name)
+    placed = walk_polish.apply(data, props, int(sd.get("budget", 14)))
+    from collections import Counter
+    return {"op": "dwell", "placed": len(placed), "wants": len(props),
+            "stations": stations, "cells": [p["cell"] for p in placed],
+            "kinds": dict(Counter(p["kind"] for p in placed)),
+            "why": "walked %d stations, %d positions wanted something, furnished %d"
+                   % (stations, len(props), len(placed))}
+
 
 # ---------- OP 9: THE PRINCIPAL HANGAR WALL (Palle 2026-07-24) ----------
 # "in the end of the order add wall hangar principal (wall with props and
@@ -1885,6 +1914,7 @@ def compose_track(spec):
                                       "properties": {"action": "next_in_sequence"}}},
         "subtitles": _subs,
         "layers": {"structure": S, "utilities": U, "walls": WL, "interactables": I}}
+    stages.append(run_dwell(data, spec.get("dwell")))
     m = metrics(data, rooms, hallc, passage, floor, door_info, story_score)
     stages.append({"op": "final", "W": W, "D": D, "metrics": m["parts"], "score_soft": m["soft"],
                    "weights": MW})

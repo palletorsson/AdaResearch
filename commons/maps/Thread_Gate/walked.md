@@ -9,6 +9,8 @@
 > round 5 made v3's arc composable (threshold, prologue, parapet) and the score agreed with the hand: +0.180.
 > v6 (2026-07-24, Palle: "make Trial_gate6_039 the standing gate"): the guaranteed parapet re-ranked the
 > field and the crescendo spiral won — order legible as architecture; the parapet stands west, found not fixed.
+> v7 (2026-07-27, Palle: "yes"): the occupant pass furnished it — twelve small edits placed by walking,
+> not by planning. Same frame, same walls, same path; the difference is that someone lives here now.
 
 ## The cast
 
@@ -29,3 +31,25 @@ The gate's standard, third revision: the instruments must agree (ov 0, ti 0, voi
 **v5 — the answer.** Round 5 took v3's last exclusive claim — the arc — and made it three operations in the grammar: a compression threshold carved after the rooms (carved before them it sealed the courtyard spawn: one cell reachable of 249, a failure the pathfinder's verdict called "OK" and only the reach score caught — trust the number that counts, not the label that summarises), a prologue artifact standing in the corridor, a parapet at the yard with the wall lowered four-to-three. Then the experiment: the same geometry scored 0.613 bare and 0.793 with its story — the arc is worth +0.180 under a rubric that also pays for tightness, and full-story variants swept the entire top sixteen. The machine composition now carries everything v3 argued: the measured rooms, the enforced laws, and the entry that means something. What remains hand-only is nothing structural — it is taste, and taste now edits weights in a canon file instead of moving cells by hand. The gate's standard, fifth revision, unchanged in spirit: if it is ever imperfect, a tool broke; if it is ever mute, the unfold broke; if it is ever flat, someone turned the story off.
 
 **v6 — the found parapet.** Round 6 changed no weights and no strategies; it only kept a promise. The parapet, which round 5 placed by habit on the yard's south side and lost whenever a room happened to stand there, now searches its sides — south, west, north — and places all-or-nothing, approaching only from floor that already connects. Fifty-four variants asked for an overlook; fifty-four got one. And the guarantee re-ranked the field: the crescendo courtyard, which had been losing to a position accident, was the better gate all along — 0.800, the order readable as a spiral. The lesson joins the canon beside its siblings: a law enforced beats a lever added, and a guarantee is not a repair — it is a re-ranking.
+
+**v7 — the furnished gate.** Every version until now was composed in plan: top-down, metric, the map as a
+shape. This one was composed standing up. The occupant pass walked 205 stations in encounter order and
+found twelve positions that wanted something — a rest beside a body with nowhere to set anything down, a
+worked back for a bare wall, a light in a dark stretch — and placed one small prop per finding from what
+the project already owned. Structure and walls came through byte-identical: by op 10 the frame is decided
+and polish has no business in it.
+
+Two things the promotion settled that the score could not. The pass now has EYES: each finding is also a
+camera station, and `capture_eye_stations.gd` stands there at 1.65 m with a 90° field of view, so a claim
+the walker reasons to can be looked at. The pictures confirmed the blank-vista finding and corrected its
+cure — the dull walk faced off the map edge, where a light would have landed outside the room — and they
+exposed what the walker still cannot say: that a body can be the right thing in the wrong scale, small on
+a floor too wide for it. Cells measure relations between things; only the view measures how big a thing
+reads.
+
+And a quieter finding, which is a debt rather than an achievement. This gate has been called regenerable
+from its recipe since v4, and today it is not. The drift is not the furnishing — it is that every
+operation added since v6 (doors, exit signs, the hazard vent) defaults to ENABLED, so replaying the same
+spec through today's composer produces a map with sixty cells the promoted gate never had. The recipe now
+says so in writing. A recipe is a time capsule only if new operations are gated off by default; that
+discipline held for the map layers and was never applied to the grammar itself.

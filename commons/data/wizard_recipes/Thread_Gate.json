@@ -1,6 +1,6 @@
 {
  "name": "Thread_Gate",
- "date": "2026-07-24",
+ "date": "2026-07-27",
  "spec": {
   "cast": [
    "line",
@@ -30,6 +30,10 @@
    "threshold": "compression",
    "prologue": true,
    "overview": "parapet"
+  },
+  "dwell": {
+   "enabled": true,
+   "budget": 14
   }
  },
  "score_soft": 0.8,
@@ -47,5 +51,12 @@
   "ok": true,
   "reach": 0.9
  },
- "note": "THE STANDING GATE \u2014 round-6 winner promoted by Palle's ruling 2026-07-24 (guaranteed parapet, legible crescendo)"
+ "note": "THE STANDING GATE — round-6 winner promoted by Palle's ruling 2026-07-24 (guaranteed parapet, legible crescendo)",
+ "furnished": {
+  "op": 10,
+  "tool": "tools/walk_polish.py",
+  "placed": 12,
+  "note": "v7: the occupant pass furnished the standing gate — 11 interactables + 1 light. Structure and walls are byte-identical to v6; op 10 never touches the frame."
+ },
+ "regeneration_warning": "This recipe no longer reproduces the map on disk BIT-FOR-BIT, and that drift predates the dwell hook: ops added after v6 was promoted (doors + exit signs, h:toxic hazard) default to ENABLED, so replaying an old spec through today's composer adds 36 utility and 24 interactable cells the promoted map never had. A recipe is not a time capsule unless new ops are gated off by default. Verified 2026-07-27 by replaying this spec through the pre-hook composer."
 }
