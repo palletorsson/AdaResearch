@@ -1,6 +1,6 @@
 {
  "_comment": "THE ORDER OF OPERATIONS for map composition — canon, editable. Palle 2026-07-24: 'this is about order of operation, what is included in what order... then auto research to create the best combination or new strategies.' The research engines READ this file (stages, metric weights, bands): edit here, re-run, the search changes. Rounds history at the bottom. Sibling canons: cabinet_grammar.json, systems_fold.json.",
- "version": 13,
+ "version": 14,
  "operations": [
   {
    "n": 1,
@@ -146,6 +146,17 @@
     "off_spine_pockets"
    ],
    "note": "Palle: 'close the score points gap too' (779 corpus uses, the largest gap). The rule comes from what a score cube IS: the spine is the task, sp marks what the walk does NOT require. Candidates are cells 2+ steps off the spine (BFS depth from the walk), ranked by enclosure — never on the line, never required to finish. A first attempt used local maxima of walk distance: right for pockets in a gate, found NOTHING in a linear band; depth-off-spine works in both. Gate 5 cubes (incl. one offered on the parapet), track 4."
+  },
+  {
+   "n": 10,
+   "op": "dwell",
+   "what": "THE OCCUPANT PASS — after the map is composed, WALK it and improve every position (Palle 2026-07-26: 'as a last move when the map is ready, walk around in the map, imagine the space and try to improve and make it nice at every position')",
+   "strategies": [
+    "punch_list",
+    "apply"
+   ],
+   "tool": "tools/walk_polish.py",
+   "note": "every other op composes in PLAN (top-down, metric); this one composes in FIRST PERSON. It BFS-walks the finished map in encounter order and asks what only exists while standing somewhere: dead corner (3 sides closed, nothing in it) / bare wall (>=4 blank cells) / dark stretch (>=9 cells from a light) / a body with nowhere to work at it. Places one small prop per finding from what the project already has (hangar podium, worktable, supply pile, wall panel, el). STRUCTURE IS NEVER TOUCHED — by op 10 the frame, walls and path are verified. TWO LESSONS from its first run: the naive pass proposed a bench at EVERY cell around a body and a panel at EVERY cell of a wall — cell enumeration is plan-thinking; an occupant places ONE rest, on the side you arrive from, and spaces panels >=4 apart. And the pass is a MEASURE OF THE PIPELINE: Thread_Gate v6 (composed before doors/lights/signs existed) wants 12 things; a freshly composed terrace gate wants 4 — the later ops already did the work."
   }
  ],
  "interfaces": {
