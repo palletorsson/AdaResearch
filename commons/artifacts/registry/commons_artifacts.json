@@ -7630,8 +7630,9 @@
    "tags": ["seam", "resolution", "threshold", "display"],
    "dna": {
     "promoted": "2026-07-26", "stage": "2 - variation",
-    "axes": {"poor_samples": [2, 4, 8], "rich_samples": [14, 26]},
-    "default": "poor_samples=4, rich_samples=26"
+    "axes": {"poor_samples": [2, 4, 8]},
+    "default": "poor_samples=4, rich_samples=26",
+    "retired_axis": "rich_samples - measured INERT (focus 1.9%): 14 and 26 subdivisions both read as fine, so the knob varied nothing. The argument of this artifact lives on the POOR side; declaring an axis that does not move is how a sweep comes to look like evidence."
    },
    "spatial_needs": {"platform": "none", "footprint_cells": 3,
     "clearance": {"front": 3, "back": 3, "left": 1, "right": 1}}

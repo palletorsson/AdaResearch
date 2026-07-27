@@ -1,0 +1,107 @@
+{
+ "_note": "Per-axis bite: mean pixel change between variants differing in that axis alone. An axis whose renders are identical is decoration.",
+ "gallery": "readymades-dna",
+ "thresholds": {
+  "inert_focus": 0.03,
+  "weak_focus": 0.12,
+  "frame_local_ceiling": 0.02
+ },
+ "axes": [
+  {
+   "artifact": "stock_stratum",
+   "axis": "live_props",
+   "frame": 0.01822,
+   "focus": 0.03616,
+   "verdict": "WEAK",
+   "pairs": 3
+  },
+  {
+   "artifact": "stock_stratum",
+   "axis": "max_bands",
+   "frame": 0.022,
+   "focus": 0.10194,
+   "verdict": "WEAK",
+   "pairs": 6
+  },
+  {
+   "artifact": "multiple_ring",
+   "axis": "count",
+   "frame": 0.02048,
+   "focus": 0.06856,
+   "verdict": "WEAK",
+   "pairs": 6
+  },
+  {
+   "artifact": "multiple_ring",
+   "axis": "removed",
+   "frame": 0.01954,
+   "focus": 0.05137,
+   "verdict": "WEAK",
+   "pairs": 3
+  },
+  {
+   "artifact": "adjacency_shelf",
+   "axis": "coherence",
+   "frame": 0.04309,
+   "focus": 0.20459,
+   "verdict": "bites",
+   "pairs": 3
+  },
+  {
+   "artifact": "lineage_vitrine",
+   "axis": "axis_index",
+   "frame": 0.01815,
+   "focus": 0.03111,
+   "verdict": "WEAK",
+   "pairs": 6
+  },
+  {
+   "artifact": "lineage_vitrine",
+   "axis": "subject",
+   "frame": 0.05348,
+   "focus": 0.45991,
+   "verdict": "bites",
+   "pairs": 3
+  },
+  {
+   "artifact": "sturtevant_bench",
+   "axis": "subject",
+   "frame": 0.04041,
+   "focus": 0.28388,
+   "verdict": "bites",
+   "pairs": 6
+  },
+  {
+   "artifact": "default_body_bay",
+   "axis": "defaults_applied",
+   "frame": 0.03566,
+   "focus": 0.17863,
+   "verdict": "bites",
+   "pairs": 15
+  },
+  {
+   "artifact": "poor_image_gate",
+   "axis": "poor_samples",
+   "frame": 0.03611,
+   "focus": 0.04827,
+   "verdict": "WEAK",
+   "pairs": 3
+  },
+  {
+   "artifact": "unfinishable_terrarium",
+   "axis": "preview_hours",
+   "frame": 0.02647,
+   "focus": 0.03309,
+   "verdict": "WEAK",
+   "pairs": 6
+  },
+  {
+   "artifact": "operational_eye",
+   "axis": "channel",
+   "frame": 0.01909,
+   "focus": 0.04928,
+   "verdict": "WEAK",
+   "pairs": 15
+  }
+ ]
+}

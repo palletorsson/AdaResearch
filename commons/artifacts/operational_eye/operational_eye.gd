@@ -34,6 +34,9 @@ const VIEWS := ["COST FIELD", "SUBJECT", "FRUSTUM", "COLLISION", "AABB", "LOD"]
 @export var finish: String = "terminal"
 @export var unit_code: String = "OE-01"
 
+# set while a screen's contents are being drawn, so _px knows whether this feed is live
+var _drawing_fore: bool = false
+
 
 func _ready() -> void:
 	_build_rack()
@@ -92,7 +95,20 @@ func _build_screen(i: int) -> void:
 	back.albedo_color = Color(0.035, 0.038, 0.042)
 	back.roughness = 0.95
 	holder.add_child(HangarKit.box(Vector3.ZERO, Vector3(screen_w, screen_h, 0.014), back))
+	# THE LIVE CHANNEL IS UNMISTAKABLE. The first build only pushed the selected screen
+	# 3.5 cm forward, which the critic measured at 2.6% focus — an axis that changed
+	# nothing anyone could see. A patch bay does not whisper which feed is up: the live
+	# one gets a lit surround, the rest are dimmed to standby.
+	if fore:
+		var live := HangarKit.emissive(Color(0.30, 0.95, 0.55), 1.8)
+		for e in [[0.0, screen_h * 0.5 + 0.008, screen_w + 0.02, 0.006],
+				[0.0, -screen_h * 0.5 - 0.008, screen_w + 0.02, 0.006],
+				[-screen_w * 0.5 - 0.008, 0.0, 0.006, screen_h + 0.02],
+				[screen_w * 0.5 + 0.008, 0.0, 0.006, screen_h + 0.02]]:
+			holder.add_child(HangarKit.box(Vector3(e[0], e[1], 0.004),
+				Vector3(e[2], e[3], 0.006), live))
 
+	_drawing_fore = fore
 	match i:
 		0: _draw_cost_field(holder)
 		1: _draw_subject(holder)
@@ -110,10 +126,13 @@ func _build_screen(i: int) -> void:
 
 func _px(host: Node3D, x: float, y: float, w: float, h: float, c: Color, glow: float = 1.0) -> void:
 	var m := StandardMaterial3D.new()
-	m.albedo_color = c
+	# Standby screens keep running — they are operational images, not decoration that
+	# switches off — but they run dim, so the live feed reads from across the room.
+	var dim: float = 1.0 if _drawing_fore else 0.34
+	m.albedo_color = Color(c.r * dim, c.g * dim, c.b * dim)
 	m.emission_enabled = true
-	m.emission = c
-	m.emission_energy_multiplier = glow
+	m.emission = m.albedo_color
+	m.emission_energy_multiplier = glow * (1.0 if _drawing_fore else 0.45)
 	m.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	host.add_child(HangarKit.box(Vector3(x, y, 0.009), Vector3(w, h, 0.002), m))
 

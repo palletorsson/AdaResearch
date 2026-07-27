@@ -103,8 +103,22 @@ def main() -> int:
 
     reg = registry()
     OUT.mkdir(parents=True, exist_ok=True)
+
+    # --only REBUILDS A ROW, it does not rebuild the gallery. Writing a fresh manifest
+    # from just the swept artifacts silently dropped the other 38 variants the first
+    # time this ran — a partial rebuild that looks like a complete one is the same
+    # failure mode as a sweep of identical tiles.
     entries: list[dict] = []
-    idx = 0
+    if only:
+        mf_old = OUT / "manifest.json"
+        if mf_old.exists():
+            try:
+                kept = json.loads(mf_old.read_text(encoding="utf-8")).get("entries", [])
+                entries = [e for e in kept if str(e.get("prop")) not in only]
+                print(f"  (keeping {len(entries)} variant(s) from artifacts not rebuilt)")
+            except Exception:
+                entries = []
+    idx = len(entries)
     for token, artist, line in SET:
         if only and token not in only:
             continue
@@ -134,6 +148,11 @@ def main() -> int:
             })
             idx += 1
         print(f"  {token}: {len(frames)} variant(s)")
+
+    order = {tok: i for i, (tok, _a, _l) in enumerate(SET)}
+    entries.sort(key=lambda e: (order.get(str(e.get("prop")), 99), str(e.get("id"))))
+    for i, e in enumerate(entries):
+        e["index"] = i
 
     manifest = {
         "version": 1,
