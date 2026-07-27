@@ -40,6 +40,37 @@ CORNER = "hangar_supply_pile"   # a dead corner becomes a stored corner
 BENCH = "hangar_worktable"      # a body to work at
 LIGHT = "el"                    # the cheapest legibility in the grid
 
+# WHAT THE BODY WANTS BESIDE IT, by its staging posture (classify_postures).
+# None means the honest answer is nothing: you do not put a crate on terrain you
+# walk across, and you do not prop up a thing that floats.
+POSTURE_WANTS = {
+    "table": "hangar_worktable",        # an instrument — something to work at
+    # PEDESTAL is half the corpus (1326 of 2660), so one answer here IS a new
+    # uniform. A specimen's companion is chosen per ARTIFACT — stable (the same
+    # body always gets the same neighbour) but varied across a map.
+    "pedestal": ("hangar_cabinet_cluster", "hangar_podium", "hangar_step_base"),
+    "platform": "hangar_step_base",     # a staged body — a step to come up to it
+    "monument": "hangar_barrier_fence",  # architecture — stand back from it
+    "floor": None,                      # the ground itself: leave it clear
+    "float": None,                      # hovering: furniture underneath is noise
+    "pit": "hangar_barrier_fence",      # an edge — protect it
+    "wall": None,                       # already against a surface
+}
+CORNER_CYCLE = ("hangar_supply_pile", "hangar_cabinet_cluster")
+
+
+def postures():
+    """token -> posture, from the project's own classifier (measured floor)."""
+    try:
+        import importlib.util
+        sp = importlib.util.spec_from_file_location(
+            "classify_postures", ROOT / "tools" / "classify_postures.py")
+        cp = importlib.util.module_from_spec(sp); sp.loader.exec_module(cp)
+        reg, sizes, ovr = cp.load_registry(), cp.load_sizes(), cp.load_overrides()
+        return {k: cp.classify(k, v, sizes.get(k, {}), ovr)[0] for k, v in reg.items()}
+    except Exception:
+        return {}
+
 DIRS = {(1, 0): ("e", "w"), (-1, 0): ("w", "e"), (0, 1): ("s", "n"), (0, -1): ("n", "s")}
 
 
@@ -111,6 +142,7 @@ def inspect(md, name):
     lights = [c for c, t in utils.items() if t.startswith("el")]
     bodies = [(x, z) for z, row in enumerate(I) for x, c in enumerate(row)
               if str(c).strip() and not str(c).strip().startswith(PRE)]
+    POSTURES = postures()
 
     def solid(c):                      # a wall face or the world's edge
         return h_at(S, *c) >= 4 or h_at(S, *c) < 0
@@ -128,7 +160,8 @@ def inspect(md, name):
         closed = sum(1 for nb in nbs if solid(nb) or nb not in floor or wall_between(WL, c, nb))
         if closed >= 3 and free(c) and dist.get(c, 0) > 2:
             props.append({"cell": list(c), "why": "dead corner (3 sides closed, nothing in it)",
-                          "place": CORNER, "layer": "interactables", "kind": "corner"})
+                          "place": CORNER_CYCLE[len([q for q in props if q["kind"] == "corner"]) % 2],
+                          "layer": "interactables", "kind": "corner"})
             continue
 
         # 2 BARE WALL — a run of >=4 wall cells with nothing standing against it
@@ -154,16 +187,24 @@ def inspect(md, name):
                 props.append({"cell": list(c), "why": "dark stretch (%d cells from the nearest light)" % near,
                               "place": LIGHT, "layer": "utilities", "kind": "light"})
 
-        # 4 NOTHING TO STAND AT — a body with no rest beside it
+        # 4 NOTHING TO STAND AT — a body with no companion beside it. WHAT it
+        # wants is decided by its posture, not by the parity of its coordinates.
         for b in bodies:
             if abs(b[0] - x) + abs(b[1] - z) != 1: continue
             around = [(b[0] + d[0], b[1] + d[1]) for d in DIRS]
             if any(a in occupied for a in around if a != c): continue
             if free(c) and dist.get(c, 0) > 1:
                 tok = str(I[b[1]][b[0]]).strip().split(":")[0]
-                props.append({"cell": list(c), "why": "%s stands alone — nowhere to work at it" % tok,
-                              "place": BENCH if (x + z) % 2 == 0 else REST,
-                              "layer": "interactables", "kind": "rest", "beside": tok})
+                pos = POSTURES.get(tok, "pedestal")
+                want = POSTURE_WANTS.get(pos, REST)
+                if isinstance(want, tuple):
+                    want = want[sum(ord(ch) for ch in tok) % len(want)]
+                if want is None:
+                    break                      # the honest answer is nothing
+                props.append({"cell": list(c),
+                              "why": "%s is a %s standing alone — wants %s" % (tok, pos, want.replace("hangar_", "")),
+                              "place": want, "layer": "interactables", "kind": "rest",
+                              "beside": tok, "posture": pos})
             break
 
     # ONE proposal per TARGET, not per cell. The first version offered a bench
