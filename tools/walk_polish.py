@@ -274,8 +274,19 @@ def inspect(md, name):
                               "place": SURFACE, "layer": "interactables", "kind": "wall",
                               "rot": {(0, 1): 0, (1, 0): 90, (0, -1): 180, (-1, 0): 270}[d]})
 
-        # 3 DARK STRETCH — far from any light
-        if lights and free(c):
+        # 3 DARK STRETCH — far from the map's OWN lighting idiom.
+        #
+        # This was `if lights and free(c)`, which reads as caution and is in
+        # fact backwards: a map with no placed lights was judged perfectly lit,
+        # because the guard skipped it entirely. Promoting the furnished gate
+        # exposed it — Thread_Gate v6 had zero `el`, the pass placed the first
+        # one, and the next run reported 22 dark stretches. Adding a light made
+        # the map look worse, and the pass stopped converging on its own output.
+        #
+        # You cannot call a stretch dark RELATIVE TO A SCHEME that does not
+        # exist. Below three lights there is no scheme to be far from, and the
+        # map's legibility belongs to its environment, not to op 10.
+        if len(lights) >= 3 and free(c):
             near = min(abs(c[0] - l[0]) + abs(c[1] - l[1]) for l in lights)
             if near >= 9 and dist.get(c, 0) % 5 == 0:
                 props.append({"facing": list(route_dir(c) or (0, 1)),
@@ -351,6 +362,53 @@ def inspect(md, name):
                                          % (run_len, int(MIN_DEG)),
                                   "place": LIGHT, "layer": "utilities"})
                     run_len = 0
+
+    # 6 NEVER ANNOUNCED — a body you only ever meet by arriving at it.
+    #
+    # The first version of this check asked how big a body READS: angular size
+    # over the width of its room, small-in-a-wide-room = lost. An eye shot
+    # killed it before it shipped. Archetype_Cathedral's rack scored 0.24 —
+    # among the worst in the corpus — and the picture showed it perfectly
+    # legible: a small bright thing at the end of a long nave, dead on the
+    # axis, the only colour in a grey corridor. Angular size is not presence.
+    # Being ON THE WALK is presence, and the pass already knows how to ask
+    # that: walk the route and see whether the body ever enters the cone.
+    #
+    # So the complaint is not "too small" — it is "never seen coming".
+    announced = {}
+    for i, c in enumerate(route[:-1]):
+        nxt = route[i + 1]
+        facing = (nxt[0] - c[0], nxt[1] - c[1])
+        if facing not in DIRS:
+            continue
+        fx, fz = facing
+        for (bx, bz), tok in bodies_xy.items():
+            dx, dz = bx - c[0], bz - c[1]
+            d = math.hypot(dx, dz)
+            if d < 0.5 or d > 20:
+                continue
+            if (dx * fx + dz * fz) / d < math.cos(math.radians(CONE)):
+                continue
+            deg = math.degrees(2 * math.atan2(SIZES.get(tok, 1.0) / 2.0, d))
+            if deg > announced.get((bx, bz), 0.0):
+                announced[(bx, bz)] = deg
+    for (bx, bz), tok in bodies_xy.items():
+        if announced.get((bx, bz), 0.0) >= MIN_DEG:
+            continue                       # you saw it coming: nothing to fix
+        # A detail beside a larger body is meant to be discovered up close.
+        # Only the biggest thing in its neighbourhood can fail to announce.
+        near_big = max((SIZES.get(t, 0.0) for (o, t) in bodies_xy.items()
+                        if o != (bx, bz) and abs(o[0] - bx) <= 6 and abs(o[1] - bz) <= 6),
+                       default=0.0)
+        if SIZES.get(tok, 1.0) < near_big:
+            continue
+        if str(U[bz][bx]).strip():
+            continue                       # already has something over it
+        props.append({"cell": [bx, bz], "kind": "beacon", "facing": [0, 1],
+                      "eye": list(back_off((bx, bz), (0, 1), 4)),
+                      "why": "%s is never seen coming — it never fills %d deg of the walk's "
+                             "view, you only meet it by arriving" % (tok, int(MIN_DEG)),
+                      "place": LIGHT, "layer": "utilities"})
 
     # ONE proposal per TARGET, not per cell. The first version offered a bench
     # at every cell around a body and a panel at every cell along a wall — that
