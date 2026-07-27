@@ -1183,6 +1183,20 @@
   "bias_from_inside": {
    "category": "critical",
    "complexity": "intermediate",
+   "dna": {
+    "promoted": "2026-07-27",
+    "stage": "2 - variation",
+    "axes": {
+     "perspective_blend": [
+      0.0,
+      0.5,
+      1.0
+     ]
+    },
+    "default": "perspective_blend=0.0 - the pre-promotion state, so its three existing placements are unchanged",
+    "was": "perspective_blend is this artifact's declared critical_parameter and was a PRIVATE var pinned at 0.0, with apply_grid_config() an empty pass. Every placement showed the god's-eye view; the compressed perspective the artifact exists to deliver was reachable only by grabbing a VR slider, and appeared in no capture, gallery or still.",
+    "note": "Hero artifact of postfoundationscrisis, the spine-terminal sequence, where it recurs across three maps."
+   },
    "description": "Visualizes a word embedding space from the perspective of a marginalized term. Instead of the usual god's-eye view, this artifact places you INSIDE the compressed region. A slider shifts between default perspective (everything looks evenly distributed) and compressed perspective (reveals how uneven the space really is).",
    "dev_themes": [
     "algorithms",

@@ -37,6 +37,23 @@ var _default_terms: Array[String] = [
 ]
 
 # --- Configuration ---
+## THE ARTIFACT'S OWN CRITICAL PARAMETER, finally reachable.
+##
+## The @identity block above names perspective_blend as this artifact's critical
+## parameter — 0.0 the default view, 1.0 the compressed one — and until now it was a
+## PRIVATE var pinned at 0.0, with apply_grid_config() an empty `pass`. So every one of
+## its placements in the terminal spine sequence has shown the evenly-distributed,
+## god's-eye arrangement, and the compressed view this artifact exists to deliver — the
+## one where you are crowded into a corner and the "default" terms are tiny and
+## unreachable — was behind a VR slider, absent from every capture, gallery and still
+## in the project.
+##
+## An artifact whose truth is "the embedding space is not a fact, it is a map drawn by
+## the powerful" was shipping the powerful's map as its only visible state.
+##
+## Exported at 0.0 so existing placements are unchanged. A map that wants the other
+## perspective can now ask for it: bias_from_inside#perspective_blend:1.0
+@export_range(0.0, 1.0, 0.05) var perspective_blend: float = 0.0
 @export var sphere_radius: float = 0.025
 @export var label_font_size: int = 12
 @export var compressed_cluster_radius: float = 0.15
@@ -74,11 +91,24 @@ func _ready() -> void:
 	_create_labels()
 	_create_title()
 	_create_controls()
-	_apply_perspective(0.0)
+	# was _apply_perspective(0.0) — a hardcoded zero that made the export below
+	# unreachable even after it existed
+	_perspective_blend = clampf(perspective_blend, 0.0, 1.0)
+	_apply_perspective(_perspective_blend)
 
 
+## Was `pass`. An artifact placed in three maps of the terminal sequence could not be
+## configured by any of them, which is why every placement looks identical.
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	if config.has("perspective_blend"):
+		perspective_blend = clampf(float(config["perspective_blend"]), 0.0, 1.0)
+		_perspective_blend = perspective_blend
+		if is_inside_tree():
+			_apply_perspective(_perspective_blend)
+	if config.has("compressed_cluster_radius"):
+		compressed_cluster_radius = float(config["compressed_cluster_radius"])
+	if config.has("default_spread_radius"):
+		default_spread_radius = float(config["default_spread_radius"])
 
 
 # ------------------------------------------------------------------
