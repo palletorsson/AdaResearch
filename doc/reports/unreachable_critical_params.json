@@ -1,0 +1,2269 @@
+{
+ "_note": "Artifacts whose @identity names a critical_parameter that is not an @export. CONFIDENT = the name also exists as a private var, so it is a real internal knob no map can reach \u2014 the bias_from_inside defect. SPECULATIVE = the first token of the critical_parameter line may be prose ('rng', 'spinning'), not an identifier; these need eyes before they are findings.",
+ "found_by": "the bias_from_inside promotion, 2026-07-27",
+ "confident": [
+  {
+   "placements": 63,
+   "token": "becoming_catalyst",
+   "critical_parameter": "current_mode_index",
+   "private_var": true,
+   "gd": "commons/hazards/becoming_catalyst/becoming_catalyst.gd"
+  },
+  {
+   "placements": 30,
+   "token": "tt",
+   "critical_parameter": "current_tutorial_id",
+   "private_var": true,
+   "gd": "commons/context/clipboard/codeDisplay.gd"
+  },
+  {
+   "placements": 19,
+   "token": "code_display",
+   "critical_parameter": "current_tutorial_id",
+   "private_var": true,
+   "gd": "commons/context/clipboard/codeDisplay.gd"
+  },
+  {
+   "placements": 18,
+   "token": "lab_table",
+   "critical_parameter": "base_color",
+   "private_var": true,
+   "gd": "commons/lab/table/table.gd"
+  },
+  {
+   "placements": 15,
+   "token": "colorballs",
+   "critical_parameter": "current_palette_index",
+   "private_var": true,
+   "gd": "algorithms/color/colorballs/colorballs.gd"
+  },
+  {
+   "placements": 15,
+   "token": "interactive_point_origin_force",
+   "critical_parameter": "morph_t",
+   "private_var": true,
+   "gd": "commons/primitives/point/interactive_point_origin_force.gd"
+  },
+  {
+   "placements": 13,
+   "token": "qfep_formula_3d",
+   "critical_parameter": "highlighted_term",
+   "private_var": true,
+   "gd": "commons/interfaces/qfep/formula_display/qfep_formula_3d.gd"
+  },
+  {
+   "placements": 12,
+   "token": "FlowFieldMain",
+   "critical_parameter": "sequence_mode",
+   "private_var": true,
+   "gd": "algorithms/pathfinding/flow_field/FlowFieldMain.gd"
+  },
+  {
+   "placements": 11,
+   "token": "plus",
+   "critical_parameter": "arm_length",
+   "private_var": true,
+   "gd": "commons/primitives/plus/plus.gd"
+  },
+  {
+   "placements": 11,
+   "token": "truncatedtetrahedron",
+   "critical_parameter": "base_color",
+   "private_var": true,
+   "gd": "commons/primitives/truncatedtetrahedron/truncatedtetrahedron.gd"
+  },
+  {
+   "placements": 10,
+   "token": "pillarcolorcollection",
+   "critical_parameter": "current_palette_index",
+   "private_var": true,
+   "gd": "algorithms/color/pillarcolorcollection/pillarcolorcollection.gd"
+  },
+  {
+   "placements": 9,
+   "token": "miura_crawler",
+   "critical_parameter": "_fold_amount",
+   "private_var": true,
+   "gd": "commons/hazards/miura_crawler/miura_crawler.gd"
+  },
+  {
+   "placements": 8,
+   "token": "transform_composition_workbench",
+   "critical_parameter": "pair_index",
+   "private_var": true,
+   "gd": "commons/artifacts/transform_composition_workbench/transform_composition_workbench.gd"
+  },
+  {
+   "placements": 8,
+   "token": "kaleidocycle_enemy",
+   "critical_parameter": "_rotation_phase",
+   "private_var": true,
+   "gd": "commons/hazards/kaleidocycle/kaleidocycle_enemy.gd"
+  },
+  {
+   "placements": 8,
+   "token": "scissor_stalker",
+   "critical_parameter": "_leg_extension",
+   "private_var": true,
+   "gd": "commons/hazards/scissor_stalker/scissor_stalker.gd"
+  },
+  {
+   "placements": 8,
+   "token": "SphericalHarmonics",
+   "critical_parameter": "orbit_speed_phi",
+   "private_var": true,
+   "gd": "algorithms/wavefunctions/spherical_harmonics/SphericalHarmonics.gd"
+  },
+  {
+   "placements": 7,
+   "token": "additive_wave_demo",
+   "critical_parameter": "harmonic_amplitudes",
+   "private_var": true,
+   "gd": "commons/artifacts/additive_wave_demo/additive_wave_demo.gd"
+  },
+  {
+   "placements": 7,
+   "token": "spring_demo",
+   "critical_parameter": "damping_c",
+   "private_var": true,
+   "gd": "commons/artifacts/spring_demo/spring_demo.gd"
+  },
+  {
+   "placements": 7,
+   "token": "kresling_spire",
+   "critical_parameter": "_twist",
+   "private_var": true,
+   "gd": "commons/hazards/kresling_spire/kresling_spire.gd"
+  },
+  {
+   "placements": 7,
+   "token": "catalyst_foe",
+   "critical_parameter": "foe_mode",
+   "private_var": true,
+   "gd": "commons/hazards/catalyst_foe/catalyst_foe.gd"
+  },
+  {
+   "placements": 7,
+   "token": "vector_magnitude_demo",
+   "critical_parameter": "vector_v",
+   "private_var": true,
+   "gd": "commons/artifacts/vector_magnitude_demo/vector_magnitude_demo.gd"
+  },
+  {
+   "placements": 6,
+   "token": "platonicsolids",
+   "critical_parameter": "pride_colors",
+   "private_var": true,
+   "gd": "algorithms/primitives/platonicsolids/platonicsolids.gd"
+  },
+  {
+   "placements": 6,
+   "token": "example_2_5_fluid_resistance_vr",
+   "critical_parameter": "drag_coefficient",
+   "private_var": true,
+   "gd": "algorithms/forces/example_2_5_fluid_resistance_vr.gd"
+  },
+  {
+   "placements": 6,
+   "token": "pyramidlong",
+   "critical_parameter": "pyramid_height",
+   "private_var": true,
+   "gd": "commons/primitives/pyramid/pyramidlong.gd"
+  },
+  {
+   "placements": 6,
+   "token": "weather_vector_field",
+   "critical_parameter": "gravity_strength",
+   "private_var": true,
+   "gd": "algorithms/vectors/weather_vector_field/weather_vector_field.gd"
+  },
+  {
+   "placements": 5,
+   "token": "forcedirected3d",
+   "critical_parameter": "temperature",
+   "private_var": true,
+   "gd": "algorithms/graphtheory/forcedirected3d/forcedirected3d.gd"
+  },
+  {
+   "placements": 5,
+   "token": "example_2_3_gravity_scaled_by_mass_vr",
+   "critical_parameter": "gravity_strength",
+   "private_var": true,
+   "gd": "algorithms/forces/example_2_3_gravity_scaled_by_mass_vr.gd"
+  },
+  {
+   "placements": 5,
+   "token": "three_body_problem",
+   "critical_parameter": "gravitational_constant",
+   "private_var": true,
+   "gd": "algorithms/physicssimulation/threebodyproblem/threebodyproblem.gd"
+  },
+  {
+   "placements": 5,
+   "token": "VectorSubtraction",
+   "critical_parameter": "negative_b",
+   "private_var": true,
+   "gd": "algorithms/vectors/04_vector_subtraction/VectorSubtraction.gd"
+  },
+  {
+   "placements": 5,
+   "token": "normal_force_demo",
+   "critical_parameter": "surface_angle",
+   "private_var": true,
+   "gd": "algorithms/vectors/07_vector_projection_reflection/NormalForceDemo.gd"
+  },
+  {
+   "placements": 5,
+   "token": "SoundscapeRadioRack",
+   "critical_parameter": "station_width",
+   "private_var": true,
+   "gd": "commons/audio/rack_configs/SoundscapeRadioRack.gd"
+  },
+  {
+   "placements": 5,
+   "token": "chladni_plate",
+   "critical_parameter": "mode_pairs",
+   "private_var": true,
+   "gd": "commons/artifacts/chladni_plate/chladni_plate.gd"
+  },
+  {
+   "placements": 5,
+   "token": "john_cage_tech_noir",
+   "critical_parameter": "num_effect_players",
+   "private_var": true,
+   "gd": "algorithms/wavefunctions/technoirgameaudio/john_cage_tech_noir.gd"
+  },
+  {
+   "placements": 4,
+   "token": "geometric_transformations",
+   "critical_parameter": "stage_interval",
+   "private_var": true,
+   "gd": "algorithms/primitives/geometric_transformations/geometric_transformations.gd"
+  },
+  {
+   "placements": 4,
+   "token": "push_relabel_algorithm",
+   "critical_parameter": "height",
+   "private_var": true,
+   "gd": "algorithms/graphtheory/push_relabel/push_relabel.gd"
+  },
+  {
+   "placements": 4,
+   "token": "shannon_workbench",
+   "critical_parameter": "p",
+   "private_var": true,
+   "gd": "commons/artifacts/shannon_workbench/shannon_workbench.gd"
+  },
+  {
+   "placements": 4,
+   "token": "superposition_display",
+   "critical_parameter": "_speed",
+   "private_var": true,
+   "gd": "commons/artifacts/superposition_display/superposition_display.gd"
+  },
+  {
+   "placements": 4,
+   "token": "VectorAddition",
+   "critical_parameter": "piston_gadget",
+   "private_var": true,
+   "gd": "algorithms/vectors/02_vector_addition/VectorAddition.gd"
+  },
+  {
+   "placements": 4,
+   "token": "DualBallFMController",
+   "critical_parameter": "mod_index",
+   "private_var": true,
+   "gd": "algorithms/wavefunctions/mariocontrol/DualBallFMController.gd"
+  },
+  {
+   "placements": 4,
+   "token": "beat_frequency_demo",
+   "critical_parameter": "freq_a",
+   "private_var": true,
+   "gd": "algorithms/wavefunctions/beat_frequency/beat_frequency_demo.gd"
+  },
+  {
+   "placements": 4,
+   "token": "wave_interference_3d",
+   "critical_parameter": "separation",
+   "private_var": true,
+   "gd": "algorithms/wavefunctions/wave_interference_3d/wave_interference_3d.gd"
+  },
+  {
+   "placements": 3,
+   "token": "ecosystem_simulation",
+   "critical_parameter": "mutation_rate",
+   "private_var": true,
+   "gd": "algorithms/emergentsystems/ecosystemsimulation/ecosystem.gd"
+  },
+  {
+   "placements": 3,
+   "token": "nature_system_demo",
+   "critical_parameter": "_hybrid_mode",
+   "private_var": true,
+   "gd": "algorithms/nature_system/demo/nature_system_demo.gd"
+  },
+  {
+   "placements": 3,
+   "token": "stretch_bench",
+   "critical_parameter": "k",
+   "private_var": true,
+   "gd": "commons/artifacts/stretch_bench/stretch_bench.gd"
+  },
+  {
+   "placements": 3,
+   "token": "torque_demo",
+   "critical_parameter": "force_offset",
+   "private_var": true,
+   "gd": "algorithms/vectors/06_vector_cross_product/TorqueDemo.gd"
+  },
+  {
+   "placements": 2,
+   "token": "homagetothesquare",
+   "critical_parameter": "square_sizes",
+   "private_var": true,
+   "gd": "algorithms/primitives/homagetothesquare/homagetothesquare.gd"
+  },
+  {
+   "placements": 2,
+   "token": "pattern_tile_plate",
+   "critical_parameter": "wallpaper_group",
+   "private_var": true,
+   "gd": "commons/primitives/arrays/pattern_tile_plate.gd"
+  },
+  {
+   "placements": 2,
+   "token": "crossway_ca",
+   "critical_parameter": "rule_change_interval",
+   "private_var": true,
+   "gd": "algorithms/cellularautomata/crossway_ca/CrosswayCA.gd"
+  },
+  {
+   "placements": 2,
+   "token": "ca_rules_workbench",
+   "critical_parameter": "rule",
+   "private_var": true,
+   "gd": "commons/artifacts/ca_rules_workbench/ca_rules_workbench.gd"
+  },
+  {
+   "placements": 2,
+   "token": "tangent_slope_workbench",
+   "critical_parameter": "x",
+   "private_var": true,
+   "gd": "commons/artifacts/tangent_slope_workbench/tangent_slope_workbench.gd"
+  },
+  {
+   "placements": 2,
+   "token": "mario_cube",
+   "critical_parameter": "_activated",
+   "private_var": true,
+   "gd": "commons/artifacts/mario_cube/mario_cube.gd"
+  },
+  {
+   "placements": 2,
+   "token": "magritte_pipe",
+   "critical_parameter": "layers",
+   "private_var": true,
+   "gd": "commons/interfaces/foundations/magritte_pipe.gd"
+  },
+  {
+   "placements": 2,
+   "token": "penrose_triangle",
+   "critical_parameter": "_is_at_sweet_spot",
+   "private_var": true,
+   "gd": "commons/artifacts/penrose_triangle/penrose_triangle.gd"
+  },
+  {
+   "placements": 2,
+   "token": "brouwer_choice_sequence",
+   "critical_parameter": "time",
+   "private_var": true,
+   "gd": "commons/artifacts/brouwer_choice_sequence/brouwer_choice_sequence.gd"
+  },
+  {
+   "placements": 2,
+   "token": "halting_workbench",
+   "critical_parameter": "machine_index",
+   "private_var": true,
+   "gd": "commons/artifacts/halting_workbench/halting_workbench.gd"
+  },
+  {
+   "placements": 2,
+   "token": "edible_mushroom",
+   "critical_parameter": "_dissolve_timer",
+   "private_var": true,
+   "gd": "commons/hazards/mushroom/edible_mushroom.gd"
+  },
+  {
+   "placements": 2,
+   "token": "index_sentinel",
+   "critical_parameter": "_current_row",
+   "private_var": true,
+   "gd": "commons/hazards/index_sentinel/index_sentinel.gd"
+  },
+  {
+   "placements": 2,
+   "token": "convolutional_neural_networks_cnns_vr",
+   "critical_parameter": "kernel_weights",
+   "private_var": true,
+   "gd": "algorithms/machinelearning/convolutional_neural_networks_CNNs/ConvolutionalNeuralNetworksCNNs_VR.gd"
+  },
+  {
+   "placements": 2,
+   "token": "explainable_ai_xai_vr",
+   "critical_parameter": "feature_importance",
+   "private_var": true,
+   "gd": "algorithms/machinelearning/explainable_AI_XAI/ExplainableAIXAI_VR.gd"
+  },
+  {
+   "placements": 2,
+   "token": "generative_adversarial_networks_gans_vr",
+   "critical_parameter": "competition_level",
+   "private_var": true,
+   "gd": "algorithms/machinelearning/generative_adversarial_networks_GANs/GenerativeAdversarialNetworksGANs_VR.gd"
+  },
+  {
+   "placements": 2,
+   "token": "lstms_vr",
+   "critical_parameter": "forget_gate_activation",
+   "private_var": true,
+   "gd": "algorithms/machinelearning/LSTMs/LSTMs_VR.gd"
+  },
+  {
+   "placements": 2,
+   "token": "example_2_2_forces_mass_variation_vr",
+   "critical_parameter": "wind_strength",
+   "private_var": true,
+   "gd": "algorithms/forces/example_2_2_forces_mass_variation_vr.gd"
+  },
+  {
+   "placements": 2,
+   "token": "verlet_integration",
+   "critical_parameter": "dt",
+   "private_var": true,
+   "gd": "algorithms/physicssimulation/verletintegration/verlet_integration.gd"
+  },
+  {
+   "placements": 2,
+   "token": "russell_paradox_workbench",
+   "critical_parameter": "cell",
+   "private_var": true,
+   "gd": "commons/artifacts/russell_paradox_workbench/russell_paradox_workbench.gd"
+  },
+  {
+   "placements": 2,
+   "token": "perlin_noise_bridge",
+   "critical_parameter": "frequency",
+   "private_var": true,
+   "gd": "algorithms/randomness/perlin_noise_bridge/perlin_noise_bridge.gd"
+  },
+  {
+   "placements": 2,
+   "token": "PhysarumColony",
+   "critical_parameter": "emission_centers",
+   "private_var": true,
+   "gd": "algorithms/swarmintelligence/physarum/PhysarumColony.gd"
+  },
+  {
+   "placements": 2,
+   "token": "VectorWorkbench",
+   "critical_parameter": "current_mode",
+   "private_var": true,
+   "gd": "algorithms/vectors/vector_workbench/VectorWorkbench.gd"
+  },
+  {
+   "placements": 2,
+   "token": "vector_arena",
+   "critical_parameter": "force_gain",
+   "private_var": true,
+   "gd": "commons/artifacts/vector_arena/vector_arena.gd"
+  },
+  {
+   "placements": 1,
+   "token": "psychoacoustics",
+   "critical_parameter": "masker_frequency",
+   "private_var": true,
+   "gd": "algorithms/proceduralaudio/psychoacoustics/psychoacoustics.gd"
+  },
+  {
+   "placements": 1,
+   "token": "sorting_algorithm_race",
+   "critical_parameter": "step_speed",
+   "private_var": true,
+   "gd": "algorithms/arrays/sorting_race/sorting_algorithm_race.gd"
+  },
+  {
+   "placements": 1,
+   "token": "CrosswayCA",
+   "critical_parameter": "rule_change_interval",
+   "private_var": true,
+   "gd": "algorithms/cellularautomata/crossway_ca/CrosswayCA.gd"
+  },
+  {
+   "placements": 1,
+   "token": "ca_chair_test",
+   "critical_parameter": "strategy_type",
+   "private_var": true,
+   "gd": "algorithms/cellularautomata/CAchairtests/Main.gd"
+  },
+  {
+   "placements": 1,
+   "token": "blockbuilderentity",
+   "critical_parameter": "navigation_agent",
+   "private_var": true,
+   "gd": "commons/hazards/blockbuilderentity/blockbuilderentity.gd"
+  },
+  {
+   "placements": 1,
+   "token": "branching_vine",
+   "critical_parameter": "_rules",
+   "private_var": true,
+   "gd": "commons/hazards/branching_vine/branching_vine.gd"
+  },
+  {
+   "placements": 1,
+   "token": "chromatic_field",
+   "critical_parameter": "_hue_phase",
+   "private_var": true,
+   "gd": "commons/hazards/chromatic_field/chromatic_field.gd"
+  },
+  {
+   "placements": 1,
+   "token": "constraint_web",
+   "critical_parameter": "_tile_domains",
+   "private_var": true,
+   "gd": "commons/hazards/constraint_web/constraint_web.gd"
+  },
+  {
+   "placements": 1,
+   "token": "escher_stairwalker",
+   "critical_parameter": "_loop_phase",
+   "private_var": true,
+   "gd": "commons/hazards/escher_stairwalker/escher_stairwalker.gd"
+  },
+  {
+   "placements": 1,
+   "token": "fallingblocks",
+   "critical_parameter": "_spawn_timer",
+   "private_var": true,
+   "gd": "commons/hazards/fallingblocks/fallingblocks.gd"
+  },
+  {
+   "placements": 1,
+   "token": "folding_zoo",
+   "critical_parameter": "_global_fold",
+   "private_var": true,
+   "gd": "commons/fold_system/zoo/folding_zoo.gd"
+  },
+  {
+   "placements": 1,
+   "token": "goomba_box",
+   "critical_parameter": "_flatten",
+   "private_var": true,
+   "gd": "commons/hazards/goomba_box/goomba_box.gd"
+  },
+  {
+   "placements": 1,
+   "token": "gradient_hunter",
+   "critical_parameter": "_sample_positions",
+   "private_var": true,
+   "gd": "commons/hazards/gradient_hunter/gradient_hunter.gd"
+  },
+  {
+   "placements": 1,
+   "token": "grammar_markov",
+   "critical_parameter": "_markov_state",
+   "private_var": true,
+   "gd": "commons/hazards/grammar_markov/grammar_markov.gd"
+  },
+  {
+   "placements": 1,
+   "token": "graph_weaver",
+   "critical_parameter": "_edges",
+   "private_var": true,
+   "gd": "commons/hazards/graph_weaver/graph_weaver.gd"
+  },
+  {
+   "placements": 1,
+   "token": "isosurface_trap",
+   "critical_parameter": "_charges",
+   "private_var": true,
+   "gd": "commons/hazards/isosurface_trap/isosurface_trap.gd"
+  },
+  {
+   "placements": 1,
+   "token": "lifeform_walker",
+   "critical_parameter": "_grid",
+   "private_var": true,
+   "gd": "commons/hazards/lifeform_walker/lifeform_walker.gd"
+  },
+  {
+   "placements": 1,
+   "token": "maze_spinner",
+   "critical_parameter": "_maze_grid",
+   "private_var": true,
+   "gd": "commons/hazards/maze_spinner/maze_spinner.gd"
+  },
+  {
+   "placements": 1,
+   "token": "mesh_morpher",
+   "critical_parameter": "_current_topo",
+   "private_var": true,
+   "gd": "commons/hazards/mesh_morpher/mesh_morpher.gd"
+  },
+  {
+   "placements": 1,
+   "token": "origami_pyre_plane",
+   "critical_parameter": "_current_phase",
+   "private_var": true,
+   "gd": "commons/hazards/origami_pyre_plane/origami_pyre_plane.gd"
+  },
+  {
+   "placements": 1,
+   "token": "paradox_stalker",
+   "critical_parameter": "_a_is_real",
+   "private_var": true,
+   "gd": "commons/hazards/paradox_stalker/paradox_stalker.gd"
+  },
+  {
+   "placements": 1,
+   "token": "particle_emitter_hazard",
+   "critical_parameter": "_current_pattern",
+   "private_var": true,
+   "gd": "commons/hazards/particle_emitter_hazard/particle_emitter_hazard.gd"
+  },
+  {
+   "placements": 1,
+   "token": "plasma_critter",
+   "critical_parameter": "current_form",
+   "private_var": true,
+   "gd": "commons/hazards/plasma/plasma_critter.gd"
+  },
+  {
+   "placements": 1,
+   "token": "qfep_calibrator",
+   "critical_parameter": "_phi",
+   "private_var": true,
+   "gd": "commons/hazards/qfep_calibrator/qfep_calibrator.gd"
+  },
+  {
+   "placements": 1,
+   "token": "shell_roller",
+   "critical_parameter": "_spin_speed",
+   "private_var": true,
+   "gd": "commons/hazards/shell_roller/shell_roller.gd"
+  },
+  {
+   "placements": 1,
+   "token": "spatial_voronoi",
+   "critical_parameter": "_seed_positions",
+   "private_var": true,
+   "gd": "commons/hazards/spatial_voronoi/spatial_voronoi.gd"
+  },
+  {
+   "placements": 1,
+   "token": "spring_hopper",
+   "critical_parameter": "_compression",
+   "private_var": true,
+   "gd": "commons/hazards/spring_hopper/spring_hopper.gd"
+  },
+  {
+   "placements": 1,
+   "token": "stick_tool",
+   "critical_parameter": "attached_plasma",
+   "private_var": true,
+   "gd": "commons/hazards/plasma/stick_tool.gd"
+  },
+  {
+   "placements": 1,
+   "token": "tentacle_cube",
+   "critical_parameter": "_health",
+   "private_var": true,
+   "gd": "commons/hazards/tentacle_cube/tentacle_cube.gd"
+  },
+  {
+   "placements": 1,
+   "token": "tesseract_phaser",
+   "critical_parameter": "_angle_xw",
+   "private_var": true,
+   "gd": "commons/hazards/tesseract_phaser/tesseract_phaser.gd"
+  },
+  {
+   "placements": 1,
+   "token": "two_leg_critter",
+   "critical_parameter": "_foot_L",
+   "private_var": true,
+   "gd": "commons/hazards/octapod_crawler/two_leg_critter.gd"
+  },
+  {
+   "placements": 1,
+   "token": "waterbomb_enemy",
+   "critical_parameter": "deployment",
+   "private_var": true,
+   "gd": "commons/hazards/armadillo_droideka/waterbomb_enemy.gd"
+  },
+  {
+   "placements": 1,
+   "token": "waterbomb_hopper",
+   "critical_parameter": "_health",
+   "private_var": true,
+   "gd": "commons/hazards/waterbomb_hopper/waterbomb_hopper.gd"
+  },
+  {
+   "placements": 1,
+   "token": "wave_rider",
+   "critical_parameter": "_base_frequency",
+   "private_var": true,
+   "gd": "commons/hazards/wave_rider/wave_rider.gd"
+  },
+  {
+   "placements": 1,
+   "token": "jspace_count_plates",
+   "critical_parameter": "next_index",
+   "private_var": true,
+   "gd": "commons/artifacts/jspace/jspace_count_plates.gd"
+  },
+  {
+   "placements": 1,
+   "token": "perceptron_playground",
+   "critical_parameter": "w1",
+   "private_var": true,
+   "gd": "commons/artifacts/perceptron_playground/perceptron_playground.gd"
+  },
+  {
+   "placements": 1,
+   "token": "example_4_3_particle_emitter_vr",
+   "critical_parameter": "emitter",
+   "private_var": true,
+   "gd": "algorithms/particles/example_4_3_particle_emitter_vr.gd"
+  },
+  {
+   "placements": 1,
+   "token": "example_4_5_inheritance_polymorphism_vr",
+   "critical_parameter": "spawn_confetti_mode",
+   "private_var": true,
+   "gd": "algorithms/particles/example_4_5_inheritance_polymorphism_vr.gd"
+  },
+  {
+   "placements": 1,
+   "token": "simulation_instability",
+   "critical_parameter": "dt",
+   "private_var": true,
+   "gd": "algorithms/physicssimulation/simulation_instability/simulation_instability.gd"
+  },
+  {
+   "placements": 1,
+   "token": "arch",
+   "critical_parameter": "arch_segments",
+   "private_var": true,
+   "gd": "commons/primitives/arch/arch.gd"
+  },
+  {
+   "placements": 1,
+   "token": "mesh_builder_demo",
+   "critical_parameter": "vertex_positions",
+   "private_var": true,
+   "gd": "algorithms/primitives/mesh_builder/mesh_builder_demo.gd"
+  },
+  {
+   "placements": 1,
+   "token": "SierpinskiPyramid",
+   "critical_parameter": "max_level",
+   "private_var": true,
+   "gd": "algorithms/fractals/sierpinski_pyramid/SierpinskiPyramid.gd"
+  },
+  {
+   "placements": 1,
+   "token": "necklace_anchor",
+   "critical_parameter": "pendant",
+   "private_var": true,
+   "gd": "commons/artifacts/necklace_anchor/necklace_anchor.gd"
+  },
+  {
+   "placements": 1,
+   "token": "dissolving_form",
+   "critical_parameter": "dissolve_amount",
+   "private_var": true,
+   "gd": "commons/interfaces/qfep/dissolving_form.gd"
+  },
+  {
+   "placements": 1,
+   "token": "rounded_softbody",
+   "critical_parameter": "_stiffness",
+   "private_var": true,
+   "gd": "algorithms/softbodies/rounded_softbody.gd"
+  },
+  {
+   "placements": 1,
+   "token": "physarum_colony",
+   "critical_parameter": "emission_centers",
+   "private_var": true,
+   "gd": "algorithms/swarmintelligence/physarum/PhysarumColony.gd"
+  },
+  {
+   "placements": 1,
+   "token": "tech_noir_audio",
+   "critical_parameter": "num_effect_players",
+   "private_var": true,
+   "gd": "algorithms/wavefunctions/technoirgameaudio/john_cage_tech_noir.gd"
+  }
+ ],
+ "speculative": [
+  {
+   "placements": 100,
+   "token": "catalyst_target",
+   "critical_parameter": "shape",
+   "private_var": false,
+   "gd": "commons/hazards/becoming_catalyst/catalyst_target.gd"
+  },
+  {
+   "placements": 27,
+   "token": "crystal_cluster",
+   "critical_parameter": "rng",
+   "private_var": false,
+   "gd": "commons/primitives/crystalcluster/crystalcluster.gd"
+  },
+  {
+   "placements": 15,
+   "token": "wedge_skill_pickup",
+   "critical_parameter": "unlock",
+   "private_var": false,
+   "gd": "commons/hazards/becoming_catalyst/wedge_skill_pickup.gd"
+  },
+  {
+   "placements": 14,
+   "token": "sphere_low",
+   "critical_parameter": "rings",
+   "private_var": false,
+   "gd": "commons/primitives/godotmeshes/sphere_low.gd"
+  },
+  {
+   "placements": 13,
+   "token": "origin",
+   "critical_parameter": "spinning",
+   "private_var": false,
+   "gd": "commons/primitives/origin/origin.gd"
+  },
+  {
+   "placements": 13,
+   "token": "sphere_high",
+   "critical_parameter": "rings",
+   "private_var": false,
+   "gd": "commons/primitives/godotmeshes/sphere_high.gd"
+  },
+  {
+   "placements": 12,
+   "token": "catalyst_pedestal",
+   "critical_parameter": "cage_color",
+   "private_var": false,
+   "gd": "commons/hazards/becoming_catalyst/catalyst_pedestal.gd"
+  },
+  {
+   "placements": 12,
+   "token": "roughrock",
+   "critical_parameter": "noise_seed",
+   "private_var": false,
+   "gd": "commons/primitives/roughrock/roughrock.gd"
+  },
+  {
+   "placements": 12,
+   "token": "sphere_mid",
+   "critical_parameter": "rings",
+   "private_var": false,
+   "gd": "commons/primitives/godotmeshes/sphere_mid.gd"
+  },
+  {
+   "placements": 11,
+   "token": "grab_octahedron",
+   "critical_parameter": "button",
+   "private_var": false,
+   "gd": "commons/primitives/octahedron/grab_octahedron.gd"
+  },
+  {
+   "placements": 11,
+   "token": "pyramid",
+   "critical_parameter": "grid",
+   "private_var": false,
+   "gd": "commons/primitives/pyramid/pyramid.gd"
+  },
+  {
+   "placements": 11,
+   "token": "pyramid_edit",
+   "critical_parameter": "apex",
+   "private_var": false,
+   "gd": "commons/primitives/pyramid/pyramid_edit.gd"
+  },
+  {
+   "placements": 11,
+   "token": "distribution_comparator",
+   "critical_parameter": "sample",
+   "private_var": false,
+   "gd": "algorithms/randomness/distribution_comparator/distribution_comparator.gd"
+  },
+  {
+   "placements": 10,
+   "token": "pattern_maker_station",
+   "critical_parameter": "wallpaper_group",
+   "private_var": false,
+   "gd": "commons/artifacts/pattern_maker_station/pattern_maker_station.gd"
+  },
+  {
+   "placements": 10,
+   "token": "hole_with_cones",
+   "critical_parameter": "hole_segments",
+   "private_var": false,
+   "gd": "commons/primitives/combines/hole_with_cones.gd"
+  },
+  {
+   "placements": 10,
+   "token": "invariants_demo",
+   "critical_parameter": "shear",
+   "private_var": false,
+   "gd": "algorithms/transforms/invariants/invariants_demo.gd"
+  },
+  {
+   "placements": 8,
+   "token": "armadillo_eggling",
+   "critical_parameter": "contact_damage",
+   "private_var": false,
+   "gd": "commons/hazards/armadillo_droideka/armadillo_eggling.gd"
+  },
+  {
+   "placements": 8,
+   "token": "force_fields",
+   "critical_parameter": "gravity",
+   "private_var": false,
+   "gd": "algorithms/physicssimulation/forcefields/forcefields.gd"
+  },
+  {
+   "placements": 8,
+   "token": "triangleprofiles",
+   "critical_parameter": "grab_point_count",
+   "private_var": false,
+   "gd": "commons/primitives/triangleprofiles/triangleprofiles.gd"
+  },
+  {
+   "placements": 8,
+   "token": "botanical_flower",
+   "critical_parameter": "petal_count",
+   "private_var": false,
+   "gd": "commons/artifacts/botanical_flower/botanical_flower.gd"
+  },
+  {
+   "placements": 8,
+   "token": "progression_driver",
+   "critical_parameter": "STAGES_PATH",
+   "private_var": false,
+   "gd": "commons/artifacts/progression_driver/progression_driver.gd"
+  },
+  {
+   "placements": 8,
+   "token": "vector_normalize_demo",
+   "critical_parameter": "input",
+   "private_var": false,
+   "gd": "commons/artifacts/vector_normalize_demo/vector_normalize_demo.gd"
+  },
+  {
+   "placements": 7,
+   "token": "mass_spring_damper",
+   "critical_parameter": "damping",
+   "private_var": false,
+   "gd": "algorithms/physicssimulation/massspringdamper/massspringdamper.gd"
+  },
+  {
+   "placements": 7,
+   "token": "particle_systems",
+   "critical_parameter": "gravity",
+   "private_var": false,
+   "gd": "algorithms/physicssimulation/particlesystems/particlesystems.gd"
+  },
+  {
+   "placements": 7,
+   "token": "draw_dot",
+   "critical_parameter": "trail_length",
+   "private_var": false,
+   "gd": "commons/primitives/point/draw_dot.gd"
+  },
+  {
+   "placements": 7,
+   "token": "interactivetriangle",
+   "critical_parameter": "random",
+   "private_var": false,
+   "gd": "commons/primitives/interactivetriangle/interactivetriangle.gd"
+  },
+  {
+   "placements": 7,
+   "token": "triangle_line_puzzle",
+   "critical_parameter": "closure",
+   "private_var": false,
+   "gd": "commons/primitives/line/puzzles/triangle_line_puzzle.gd"
+  },
+  {
+   "placements": 7,
+   "token": "perlin_noise",
+   "critical_parameter": "octaves",
+   "private_var": false,
+   "gd": "algorithms/randomness/perlinnoise/perlinnoise.gd"
+  },
+  {
+   "placements": 7,
+   "token": "simplex_noise",
+   "critical_parameter": "persistence",
+   "private_var": false,
+   "gd": "algorithms/randomness/simplexnoise/simplexnoise.gd"
+  },
+  {
+   "placements": 6,
+   "token": "rainbow",
+   "critical_parameter": "SECONDARY_FADE",
+   "private_var": false,
+   "gd": "algorithms/primitives/rainbow/rainbow.gd"
+  },
+  {
+   "placements": 6,
+   "token": "force_field_visualizer",
+   "critical_parameter": "Field",
+   "private_var": false,
+   "gd": "commons/artifacts/force_field_visualizer/force_field_visualizer.gd"
+  },
+  {
+   "placements": 6,
+   "token": "folded_strip",
+   "critical_parameter": "alternating",
+   "private_var": false,
+   "gd": "commons/primitives/folded_strip/folded_strip.gd"
+  },
+  {
+   "placements": 6,
+   "token": "grab_trihedron",
+   "critical_parameter": "button",
+   "private_var": false,
+   "gd": "commons/primitives/trihedron/grab_trihedron.gd"
+  },
+  {
+   "placements": 6,
+   "token": "rotate_grid_cubes",
+   "critical_parameter": "PATTERN",
+   "private_var": false,
+   "gd": "algorithms/randomness/RotateGridCubes.gd"
+  },
+  {
+   "placements": 6,
+   "token": "matrix_4x4_viewer",
+   "critical_parameter": "rotation",
+   "private_var": false,
+   "gd": "algorithms/transforms/matrix_viewer/matrix_4x4_viewer.gd"
+  },
+  {
+   "placements": 6,
+   "token": "exercise_1_3_solution_3_d_bouncing_ball_vr",
+   "critical_parameter": "_elasticity",
+   "private_var": false,
+   "gd": "algorithms/vectors/noc_ch01/exercise_1_3_solution_3_d_bouncing_ball_vr.gd"
+  },
+  {
+   "placements": 6,
+   "token": "sine_cylinder_staircase",
+   "critical_parameter": "SINE_MODULATION",
+   "private_var": false,
+   "gd": "algorithms/wavefunctions/sine_cylinder_staircase/sine_cylinder_staircase.gd"
+  },
+  {
+   "placements": 5,
+   "token": "ContextSensitiveTree",
+   "critical_parameter": "obstacle",
+   "private_var": false,
+   "gd": "algorithms/lsystems/ContextSensitive/ContextSensitiveTree.gd"
+  },
+  {
+   "placements": 5,
+   "token": "example_2_8_two_body_attraction_vr",
+   "critical_parameter": "gravitational_constant",
+   "private_var": false,
+   "gd": "algorithms/forces/example_2_8_two_body_attraction_vr.gd"
+  },
+  {
+   "placements": 5,
+   "token": "example_2_9_n_body_attraction_vr",
+   "critical_parameter": "body",
+   "private_var": false,
+   "gd": "algorithms/forces/example_2_9_n_body_attraction_vr.gd"
+  },
+  {
+   "placements": 5,
+   "token": "queer_cylinder_target",
+   "critical_parameter": "ring",
+   "private_var": false,
+   "gd": "commons/primitives/targets/queer_cylinder_target.gd"
+  },
+  {
+   "placements": 5,
+   "token": "percolationnetwork_ca",
+   "critical_parameter": "PERCOLATION_THRESHOLD",
+   "private_var": false,
+   "gd": "algorithms/proceduralgeneration/growth_systems/percolationnetwork_ca/percolationnetwork_ca.gd"
+  },
+  {
+   "placements": 5,
+   "token": "VectorForces",
+   "critical_parameter": "DRAG_COEFFICIENT",
+   "private_var": false,
+   "gd": "algorithms/vectors/05_vector_forces/VectorForces.gd"
+  },
+  {
+   "placements": 5,
+   "token": "chord_tension_spring",
+   "critical_parameter": "spring",
+   "private_var": false,
+   "gd": "commons/artifacts/chord_tension_spring/chord_tension_spring.gd"
+  },
+  {
+   "placements": 4,
+   "token": "agreement_gauge",
+   "critical_parameter": "angle",
+   "private_var": false,
+   "gd": "commons/artifacts/agreement_gauge/agreement_gauge.gd"
+  },
+  {
+   "placements": 4,
+   "token": "KonigsbergBridge",
+   "critical_parameter": "odd_degree_count",
+   "private_var": false,
+   "gd": "algorithms/graphtheory/graphspace3d/konigsberg3d.gd"
+  },
+  {
+   "placements": 4,
+   "token": "situated_readout",
+   "critical_parameter": "global_position",
+   "private_var": false,
+   "gd": "commons/artifacts/situated_readout/situated_readout.gd"
+  },
+  {
+   "placements": 4,
+   "token": "column_3_z",
+   "critical_parameter": "spacing",
+   "private_var": false,
+   "gd": "algorithms/arrays/column_3_z.gd"
+  },
+  {
+   "placements": 4,
+   "token": "box_counting_dimension",
+   "critical_parameter": "Grid",
+   "private_var": false,
+   "gd": "algorithms/fractals/box_counting_dimension/box_counting_dimension.gd"
+  },
+  {
+   "placements": 4,
+   "token": "audio_catalog_tablet",
+   "critical_parameter": "sound_key",
+   "private_var": false,
+   "gd": "commons/audio/catalog/AudioCatalogTablet3D.gd"
+  },
+  {
+   "placements": 4,
+   "token": "origami_bird",
+   "critical_parameter": "fold_amount",
+   "private_var": false,
+   "gd": "commons/fold_system/origami_bird.gd"
+  },
+  {
+   "placements": 4,
+   "token": "space_filling_curve_gallery",
+   "critical_parameter": "iteration",
+   "private_var": false,
+   "gd": "commons/artifacts/space_filling_curve_gallery/space_filling_curve_gallery.gd"
+  },
+  {
+   "placements": 4,
+   "token": "museum_hall_shell",
+   "critical_parameter": "width",
+   "private_var": false,
+   "gd": "commons/artifacts/museum/museum_hall_shell.gd"
+  },
+  {
+   "placements": 4,
+   "token": "inverted_tree_cloud",
+   "critical_parameter": "vertical_tilt",
+   "private_var": false,
+   "gd": "algorithms/fractals/recursive_tree/inverted_tree_cloud.gd"
+  },
+  {
+   "placements": 4,
+   "token": "vowel_sound_board",
+   "critical_parameter": "formant",
+   "private_var": false,
+   "gd": "algorithms/speech/phoneme_cloud/vowel_sound_board.gd"
+  },
+  {
+   "placements": 4,
+   "token": "VectorMotion",
+   "critical_parameter": "acceleration",
+   "private_var": false,
+   "gd": "algorithms/vectors/08_vector_motion/VectorMotion.gd"
+  },
+  {
+   "placements": 4,
+   "token": "ElphabaDress",
+   "critical_parameter": "wave_intensity",
+   "private_var": false,
+   "gd": "algorithms/wavefunctions/dancing_body/ElphabaDress.gd"
+  },
+  {
+   "placements": 3,
+   "token": "health_display",
+   "critical_parameter": "signal",
+   "private_var": false,
+   "gd": "commons/visualaid/gameplay/health_display.gd"
+  },
+  {
+   "placements": 3,
+   "token": "hits_reset_display",
+   "critical_parameter": "GameManager",
+   "private_var": false,
+   "gd": "commons/visualaid/gameplay/hits_reset_display.gd"
+  },
+  {
+   "placements": 3,
+   "token": "MolecularDesigner",
+   "critical_parameter": "assembly_name",
+   "private_var": false,
+   "gd": "algorithms/computationalbiology/molecular_framework/MolecularDesigner.gd"
+  },
+  {
+   "placements": 3,
+   "token": "angle_sum_triangle",
+   "critical_parameter": "curvature",
+   "private_var": false,
+   "gd": "commons/artifacts/angle_sum_triangle/angle_sum_triangle.gd"
+  },
+  {
+   "placements": 3,
+   "token": "hazards_demo",
+   "critical_parameter": "force_intensity",
+   "private_var": false,
+   "gd": "commons/hazards/hazards_demo/hazards_demo.gd"
+  },
+  {
+   "placements": 3,
+   "token": "genetic_tree_sculptor",
+   "critical_parameter": "branch_angle",
+   "private_var": false,
+   "gd": "commons/artifacts/genetic_tree_sculptor/genetic_tree_sculptor.gd"
+  },
+  {
+   "placements": 3,
+   "token": "mortar_vector_siege",
+   "critical_parameter": "aim_dir",
+   "private_var": false,
+   "gd": "commons/artifacts/mortar_vector_siege/mortar_vector_siege.gd"
+  },
+  {
+   "placements": 3,
+   "token": "mamma_monster_gallery",
+   "critical_parameter": "g_dream",
+   "private_var": false,
+   "gd": "commons/artifacts/mamma_monster_gallery/mamma_monster_gallery.gd"
+  },
+  {
+   "placements": 3,
+   "token": "pattern_machine_c",
+   "critical_parameter": "wallpaper_group",
+   "private_var": false,
+   "gd": "commons/artifacts/pattern_machine_c/pattern_machine_c.gd"
+  },
+  {
+   "placements": 3,
+   "token": "example_2_1_forces_vr",
+   "critical_parameter": "drag",
+   "private_var": false,
+   "gd": "algorithms/forces/example_2_1_forces_vr.gd"
+  },
+  {
+   "placements": 3,
+   "token": "example_2_6_single_attractor_vr",
+   "critical_parameter": "gravity",
+   "private_var": false,
+   "gd": "algorithms/forces/example_2_6_single_attractor_vr.gd"
+  },
+  {
+   "placements": 3,
+   "token": "VectorDotProduct",
+   "critical_parameter": "angle",
+   "private_var": false,
+   "gd": "algorithms/vectors/03_dot_product/VectorDotProduct.gd"
+  },
+  {
+   "placements": 2,
+   "token": "grid_3d_4x4x4",
+   "critical_parameter": "spacing",
+   "private_var": false,
+   "gd": "algorithms/arrays/grid_3d_4x4x4.gd"
+  },
+  {
+   "placements": 2,
+   "token": "cellular_automata_3d_stacked",
+   "critical_parameter": "GrowthPhase",
+   "private_var": false,
+   "gd": "algorithms/cellularautomata/cellular_automata_3d_stacked/CellularAutomata3DStacked.gd"
+  },
+  {
+   "placements": 2,
+   "token": "mandelbrot_dive",
+   "critical_parameter": "Zoom",
+   "private_var": false,
+   "gd": "commons/artifacts/mandelbrot_dive/mandelbrot_dive.gd"
+  },
+  {
+   "placements": 2,
+   "token": "loving_triangle",
+   "critical_parameter": "catalyst",
+   "private_var": false,
+   "gd": "commons/hazards/loving_triangle/loving_triangle.gd"
+  },
+  {
+   "placements": 2,
+   "token": "evolvingflowers",
+   "critical_parameter": "mutation_rate",
+   "private_var": false,
+   "gd": "algorithms/machinelearning/evolvingflowers/evolvingflowers.gd"
+  },
+  {
+   "placements": 2,
+   "token": "hangar_step_base",
+   "critical_parameter": "footprint",
+   "private_var": false,
+   "gd": "commons/artifacts/hangar_step_base/hangar_step_base.gd"
+  },
+  {
+   "placements": 2,
+   "token": "pattern_mill",
+   "critical_parameter": "wallpaper_group",
+   "private_var": false,
+   "gd": "commons/artifacts/pattern_mill/pattern_mill.gd"
+  },
+  {
+   "placements": 2,
+   "token": "ChainSwing",
+   "critical_parameter": "link_count",
+   "private_var": false,
+   "gd": "algorithms/joint/07_chain_swing/ChainSwing.gd"
+  },
+  {
+   "placements": 2,
+   "token": "ConeTwistBag",
+   "critical_parameter": "swing_span",
+   "private_var": false,
+   "gd": "algorithms/joint/06_cone_twist_bag/ConeTwistBag.gd"
+  },
+  {
+   "placements": 2,
+   "token": "HingeCrank",
+   "critical_parameter": "hinge",
+   "private_var": false,
+   "gd": "algorithms/joint/03_hinge_crank/HingeCrank.gd"
+  },
+  {
+   "placements": 2,
+   "token": "SliderPress",
+   "critical_parameter": "Motor",
+   "private_var": false,
+   "gd": "algorithms/joint/04_slider_press/SliderPress.gd"
+  },
+  {
+   "placements": 2,
+   "token": "cloth_simulation",
+   "critical_parameter": "k",
+   "private_var": false,
+   "gd": "algorithms/physicssimulation/clothsimulation/clothsimulation.gd"
+  },
+  {
+   "placements": 2,
+   "token": "example_2_7_multiple_attractors_vr",
+   "critical_parameter": "attractor",
+   "private_var": false,
+   "gd": "algorithms/forces/example_2_7_multiple_attractors_vr.gd"
+  },
+  {
+   "placements": 2,
+   "token": "momentum_collision",
+   "critical_parameter": "Coefficient",
+   "private_var": false,
+   "gd": "algorithms/physicssimulation/momentum_collision/momentum_collision.gd"
+  },
+  {
+   "placements": 2,
+   "token": "cube_chalkboard",
+   "critical_parameter": "lines",
+   "private_var": false,
+   "gd": "commons/primitives/cube_chalkboard/cube_chalkboard.gd"
+  },
+  {
+   "placements": 2,
+   "token": "dress_selector",
+   "critical_parameter": "OUTFIT_DATA",
+   "private_var": false,
+   "gd": "commons/artifacts/dress_selector/dress_selector.gd"
+  },
+  {
+   "placements": 2,
+   "token": "romanesco",
+   "critical_parameter": "GOLDEN_ANGLE",
+   "private_var": false,
+   "gd": "algorithms/fractals/romanesco/romanesco.gd"
+  },
+  {
+   "placements": 2,
+   "token": "water_flowers",
+   "critical_parameter": "wave_strength",
+   "private_var": false,
+   "gd": "commons/artifacts/water_flowers/water_flowers.gd"
+  },
+  {
+   "placements": 2,
+   "token": "qfep_reactor",
+   "critical_parameter": "lambda",
+   "private_var": false,
+   "gd": "commons/interfaces/qfep/qfep_reactor.gd"
+  },
+  {
+   "placements": 2,
+   "token": "particle_chaos",
+   "critical_parameter": "spread",
+   "private_var": false,
+   "gd": "commons/interfaces/qfep/particle_chaos.gd"
+  },
+  {
+   "placements": 2,
+   "token": "complexity_pattern",
+   "critical_parameter": "initial",
+   "private_var": false,
+   "gd": "commons/interfaces/qfep/complexity_pattern.gd"
+  },
+  {
+   "placements": 2,
+   "token": "edge_core",
+   "critical_parameter": "lambda",
+   "private_var": false,
+   "gd": "commons/interfaces/qfep/edge_core.gd"
+  },
+  {
+   "placements": 2,
+   "token": "reaction_diffusion_intro",
+   "critical_parameter": "feed_rate",
+   "private_var": false,
+   "gd": "algorithms/randomness/reaction_diffusion_intro/reaction_diffusion_intro.gd"
+  },
+  {
+   "placements": 2,
+   "token": "vector_addition_walk",
+   "critical_parameter": "Grid",
+   "private_var": false,
+   "gd": "commons/artifacts/vector_addition_walk/vector_addition_walk.gd"
+  },
+  {
+   "placements": 2,
+   "token": "vectorline",
+   "critical_parameter": "grab",
+   "private_var": false,
+   "gd": "algorithms/vectors/vectorline/vectorline.gd"
+  },
+  {
+   "placements": 1,
+   "token": "konigsberg_bridge",
+   "critical_parameter": "node",
+   "private_var": false,
+   "gd": "algorithms/graphtheory/graphspace/KonigsbergBridge.gd"
+  },
+  {
+   "placements": 1,
+   "token": "triangle_curvature_workbench",
+   "critical_parameter": "K",
+   "private_var": false,
+   "gd": "commons/artifacts/triangle_curvature_workbench/triangle_curvature_workbench.gd"
+  },
+  {
+   "placements": 1,
+   "token": "disease_spread_ca",
+   "critical_parameter": "INFECTION_RATE",
+   "private_var": false,
+   "gd": "algorithms/cellularautomata/ca_showcase/disease_spread_ca.gd"
+  },
+  {
+   "placements": 1,
+   "token": "self_organization_ca",
+   "critical_parameter": "LAMBDA",
+   "private_var": false,
+   "gd": "algorithms/cellularautomata/ca_showcase/self_organization_ca.gd"
+  },
+  {
+   "placements": 1,
+   "token": "lyapunov_fractal",
+   "critical_parameter": "PATTERN",
+   "private_var": false,
+   "gd": "commons/artifacts/lyapunov_fractal/lyapunov_fractal.gd"
+  },
+  {
+   "placements": 1,
+   "token": "dark_side_prism",
+   "critical_parameter": "fan_length",
+   "private_var": false,
+   "gd": "algorithms/color/dark_side_prism.gd"
+  },
+  {
+   "placements": 1,
+   "token": "subpixel_display",
+   "critical_parameter": "emission_energy",
+   "private_var": false,
+   "gd": "algorithms/color/subpixel_display/subpixel_display.gd"
+  },
+  {
+   "placements": 1,
+   "token": "gradient_interpolator",
+   "critical_parameter": "interpolation",
+   "private_var": false,
+   "gd": "algorithms/color/gradient_interpolator/gradient_interpolator.gd"
+  },
+  {
+   "placements": 1,
+   "token": "julia_set_explorer",
+   "critical_parameter": "c",
+   "private_var": false,
+   "gd": "commons/artifacts/julia_set_explorer/julia_set_explorer.gd"
+  },
+  {
+   "placements": 1,
+   "token": "orb_test_rig",
+   "critical_parameter": "spawn_creatures",
+   "private_var": false,
+   "gd": "commons/hazards/becoming_catalyst/orb_test_rig.gd"
+  },
+  {
+   "placements": 1,
+   "token": "armadillo_droideka",
+   "critical_parameter": "deployment",
+   "private_var": false,
+   "gd": "commons/hazards/armadillo_droideka/armadillo_droideka.gd"
+  },
+  {
+   "placements": 1,
+   "token": "bricoleur_golem",
+   "critical_parameter": "available",
+   "private_var": false,
+   "gd": "commons/hazards/bricoleur_golem/bricoleur_golem.gd"
+  },
+  {
+   "placements": 1,
+   "token": "data_tree_walker",
+   "critical_parameter": "tree",
+   "private_var": false,
+   "gd": "commons/hazards/data_tree_walker/data_tree_walker.gd"
+  },
+  {
+   "placements": 1,
+   "token": "deltahedron_creature",
+   "critical_parameter": "fold_amount",
+   "private_var": false,
+   "gd": "commons/fold_system/deltahedron_creature.gd"
+  },
+  {
+   "placements": 1,
+   "token": "deltahedron_stages",
+   "critical_parameter": "spacing",
+   "private_var": false,
+   "gd": "commons/fold_system/deltahedron_stages.gd"
+  },
+  {
+   "placements": 1,
+   "token": "fibonacci_snake",
+   "critical_parameter": "fold_amount",
+   "private_var": false,
+   "gd": "commons/fold_system/fibonacci_snake.gd"
+  },
+  {
+   "placements": 1,
+   "token": "fibonacci_snake_stages",
+   "critical_parameter": "STAGE_FOLDS",
+   "private_var": false,
+   "gd": "commons/fold_system/fibonacci_snake_stages.gd"
+  },
+  {
+   "placements": 1,
+   "token": "five_leg_critter",
+   "critical_parameter": "asymmetric",
+   "private_var": false,
+   "gd": "commons/hazards/octapod_crawler/five_leg_critter.gd"
+  },
+  {
+   "placements": 1,
+   "token": "fold_demo_critter",
+   "critical_parameter": "fold_amount",
+   "private_var": false,
+   "gd": "commons/fold_system/fold_demo_critter.gd"
+  },
+  {
+   "placements": 1,
+   "token": "fold_wall",
+   "critical_parameter": "fold_amount",
+   "private_var": false,
+   "gd": "commons/fold_system/fold_wall.gd"
+  },
+  {
+   "placements": 1,
+   "token": "force_field",
+   "critical_parameter": "mediator_object",
+   "private_var": false,
+   "gd": "commons/hazards/force_field/force_field.gd"
+  },
+  {
+   "placements": 1,
+   "token": "four_leg_critter",
+   "critical_parameter": "diagonal",
+   "private_var": false,
+   "gd": "commons/hazards/octapod_crawler/four_leg_critter.gd"
+  },
+  {
+   "placements": 1,
+   "token": "fractal_hydra",
+   "critical_parameter": "fractal",
+   "private_var": false,
+   "gd": "commons/hazards/fractal_hydra/fractal_hydra.gd"
+  },
+  {
+   "placements": 1,
+   "token": "helix_cylinder",
+   "critical_parameter": "fold_amount",
+   "private_var": false,
+   "gd": "commons/fold_system/helix_cylinder.gd"
+  },
+  {
+   "placements": 1,
+   "token": "helix_cylinder_creature",
+   "critical_parameter": "fold_amount",
+   "private_var": false,
+   "gd": "commons/fold_system/helix_cylinder_creature.gd"
+  },
+  {
+   "placements": 1,
+   "token": "helix_fold",
+   "critical_parameter": "fold_amount",
+   "private_var": false,
+   "gd": "commons/fold_system/helix_fold.gd"
+  },
+  {
+   "placements": 1,
+   "token": "hull_crusher",
+   "critical_parameter": "vertex",
+   "private_var": false,
+   "gd": "commons/hazards/hull_crusher/hull_crusher.gd"
+  },
+  {
+   "placements": 1,
+   "token": "inflate_flock",
+   "critical_parameter": "fold_amount",
+   "private_var": false,
+   "gd": "commons/fold_system/inflate_flock.gd"
+  },
+  {
+   "placements": 1,
+   "token": "joint_articulator",
+   "critical_parameter": "joint",
+   "private_var": false,
+   "gd": "commons/hazards/joint_articulator/joint_articulator.gd"
+  },
+  {
+   "placements": 1,
+   "token": "noise_field",
+   "critical_parameter": "FastNoiseLite",
+   "private_var": false,
+   "gd": "commons/hazards/noise_field/noise_field.gd"
+  },
+  {
+   "placements": 1,
+   "token": "octapod_crawler",
+   "critical_parameter": "IK",
+   "private_var": false,
+   "gd": "commons/hazards/octapod_crawler/octapod_crawler.gd"
+  },
+  {
+   "placements": 1,
+   "token": "one_leg",
+   "critical_parameter": "single",
+   "private_var": false,
+   "gd": "commons/hazards/octapod_crawler/one_leg.gd"
+  },
+  {
+   "placements": 1,
+   "token": "pattern_mine",
+   "critical_parameter": "mine",
+   "private_var": false,
+   "gd": "commons/hazards/pattern_mine/pattern_mine.gd"
+  },
+  {
+   "placements": 1,
+   "token": "recursion_spiral",
+   "critical_parameter": "golden",
+   "private_var": false,
+   "gd": "commons/hazards/recursion_spiral/recursion_spiral.gd"
+  },
+  {
+   "placements": 1,
+   "token": "resonance_chamber",
+   "critical_parameter": "frequency",
+   "private_var": false,
+   "gd": "commons/hazards/resonance_chamber/resonance_chamber.gd"
+  },
+  {
+   "placements": 1,
+   "token": "six_leg_critter",
+   "critical_parameter": "alternating",
+   "private_var": false,
+   "gd": "commons/hazards/octapod_crawler/six_leg_critter.gd"
+  },
+  {
+   "placements": 1,
+   "token": "sphere_droideka",
+   "critical_parameter": "deployment",
+   "private_var": false,
+   "gd": "commons/hazards/sphere_droideka/sphere_droideka.gd"
+  },
+  {
+   "placements": 1,
+   "token": "spring_mass_bouncer",
+   "critical_parameter": "spring",
+   "private_var": false,
+   "gd": "commons/hazards/spring_mass_bouncer/spring_mass_bouncer.gd"
+  },
+  {
+   "placements": 1,
+   "token": "swarm_hive",
+   "critical_parameter": "boid",
+   "private_var": false,
+   "gd": "commons/hazards/swarm_hive/swarm_hive.gd"
+  },
+  {
+   "placements": 1,
+   "token": "techstrider",
+   "critical_parameter": "leg",
+   "private_var": false,
+   "gd": "commons/hazards/techstrider/techstrider.gd"
+  },
+  {
+   "placements": 1,
+   "token": "three_leg_critter",
+   "critical_parameter": "tripod",
+   "private_var": false,
+   "gd": "commons/hazards/octapod_crawler/three_leg_critter.gd"
+  },
+  {
+   "placements": 1,
+   "token": "jspace_zoom_chamber",
+   "critical_parameter": "stress1",
+   "private_var": false,
+   "gd": "commons/artifacts/jspace/jspace_zoom_chamber.gd"
+  },
+  {
+   "placements": 1,
+   "token": "jspace_feature_field",
+   "critical_parameter": "density",
+   "private_var": false,
+   "gd": "commons/artifacts/jspace/jspace_feature_field.gd"
+  },
+  {
+   "placements": 1,
+   "token": "jspace_ring",
+   "critical_parameter": "player",
+   "private_var": false,
+   "gd": "commons/artifacts/jspace/jspace_ring.gd"
+  },
+  {
+   "placements": 1,
+   "token": "evolving_flowers",
+   "critical_parameter": "mutation_rate",
+   "private_var": false,
+   "gd": "algorithms/machinelearning/evolvingflowers/evolvingflowers.gd"
+  },
+  {
+   "placements": 1,
+   "token": "adaboost",
+   "critical_parameter": "n_rounds",
+   "private_var": false,
+   "gd": "algorithms/machinelearning/adaboost/adaboost.gd"
+  },
+  {
+   "placements": 1,
+   "token": "random_forest",
+   "critical_parameter": "n_trees",
+   "private_var": false,
+   "gd": "algorithms/machinelearning/random_forest/random_forest.gd"
+  },
+  {
+   "placements": 1,
+   "token": "pattern_machine_b",
+   "critical_parameter": "wallpaper_group",
+   "private_var": false,
+   "gd": "commons/artifacts/pattern_machine_b/pattern_machine_b.gd"
+  },
+  {
+   "placements": 1,
+   "token": "pattern_machine_d",
+   "critical_parameter": "wallpaper_group",
+   "private_var": false,
+   "gd": "commons/artifacts/pattern_machine_d/pattern_machine_d.gd"
+  },
+  {
+   "placements": 1,
+   "token": "CharacterRagdoll",
+   "critical_parameter": "swing_span",
+   "private_var": false,
+   "gd": "algorithms/joint/08_character_ragdoll/CharacterRagdoll.gd"
+  },
+  {
+   "placements": 1,
+   "token": "DrawbridgeHinge",
+   "critical_parameter": "motor",
+   "private_var": false,
+   "gd": "algorithms/joint/09_drawbridge_hinge/DrawbridgeHinge.gd"
+  },
+  {
+   "placements": 1,
+   "token": "GimbalStabilizer",
+   "critical_parameter": "pitch",
+   "private_var": false,
+   "gd": "algorithms/joint/10_gimbal_stabilizer/GimbalStabilizer.gd"
+  },
+  {
+   "placements": 1,
+   "token": "IKArm",
+   "critical_parameter": "Target",
+   "private_var": false,
+   "gd": "algorithms/joint/11_ik_arm/IKArm.gd"
+  },
+  {
+   "placements": 1,
+   "token": "PendulumPin",
+   "critical_parameter": "linear_damp",
+   "private_var": false,
+   "gd": "algorithms/joint/01_pendulum_pin/PendulumPin.gd"
+  },
+  {
+   "placements": 1,
+   "token": "SpringSuspension",
+   "critical_parameter": "spring_stiffness",
+   "private_var": false,
+   "gd": "algorithms/joint/05_spring_suspension/SpringSuspension.gd"
+  },
+  {
+   "placements": 1,
+   "token": "example_2_4_friction_vr",
+   "critical_parameter": "coeff",
+   "private_var": false,
+   "gd": "algorithms/forces/example_2_4_friction_vr.gd"
+  },
+  {
+   "placements": 1,
+   "token": "example_4_1_single_particle_vr",
+   "critical_parameter": "force",
+   "private_var": false,
+   "gd": "algorithms/particles/example_4_1_single_particle_vr.gd"
+  },
+  {
+   "placements": 1,
+   "token": "example_4_4_multiple_emitters_vr",
+   "critical_parameter": "per",
+   "private_var": false,
+   "gd": "algorithms/particles/example_4_4_multiple_emitters_vr.gd"
+  },
+  {
+   "placements": 1,
+   "token": "example_4_6_particle_repeller_vr",
+   "critical_parameter": "force",
+   "private_var": false,
+   "gd": "algorithms/particles/example_4_6_particle_repeller_vr.gd"
+  },
+  {
+   "placements": 1,
+   "token": "example_particle_body",
+   "critical_parameter": "particle",
+   "private_var": false,
+   "gd": "algorithms/particles/example_particle_body.gd"
+  },
+  {
+   "placements": 1,
+   "token": "particle_campfire",
+   "critical_parameter": "Wind",
+   "private_var": false,
+   "gd": "algorithms/particles/particle_campfire/particle_campfire.gd"
+  },
+  {
+   "placements": 1,
+   "token": "soft_bodies",
+   "critical_parameter": "stiffness",
+   "private_var": false,
+   "gd": "algorithms/physicssimulation/softbodies/softbodies.gd"
+  },
+  {
+   "placements": 1,
+   "token": "sub_emitters",
+   "critical_parameter": "Burst",
+   "private_var": false,
+   "gd": "algorithms/particles/sub_emitters/sub_emitters.gd"
+  },
+  {
+   "placements": 1,
+   "token": "crystalcluster",
+   "critical_parameter": "rng",
+   "private_var": false,
+   "gd": "commons/primitives/crystalcluster/crystalcluster.gd"
+  },
+  {
+   "placements": 1,
+   "token": "folding_cube_interactive",
+   "critical_parameter": "handle",
+   "private_var": false,
+   "gd": "commons/primitives/cubes/folding_cube_interactive.gd"
+  },
+  {
+   "placements": 1,
+   "token": "line_demo",
+   "critical_parameter": "SnapConnectionManager",
+   "private_var": false,
+   "gd": "commons/primitives/snappoint/demos/line_demo.gd"
+  },
+  {
+   "placements": 1,
+   "token": "prismblock",
+   "critical_parameter": "ridge",
+   "private_var": false,
+   "gd": "commons/primitives/prismblock/prismblock.gd"
+  },
+  {
+   "placements": 1,
+   "token": "tensegrity_triangle",
+   "critical_parameter": "strut",
+   "private_var": false,
+   "gd": "commons/primitives/tensegrity_triangle/tensegrity_triangle.gd"
+  },
+  {
+   "placements": 1,
+   "token": "point_chalkboard",
+   "critical_parameter": "lines",
+   "private_var": false,
+   "gd": "commons/primitives/point_chalkboard/point_chalkboard.gd"
+  },
+  {
+   "placements": 1,
+   "token": "triangle_chalkboard",
+   "critical_parameter": "lines",
+   "private_var": false,
+   "gd": "commons/primitives/triangle_chalkboard/triangle_chalkboard.gd"
+  },
+  {
+   "placements": 1,
+   "token": "line_chalkboard",
+   "critical_parameter": "lines",
+   "private_var": false,
+   "gd": "commons/primitives/line_chalkboard/line_chalkboard.gd"
+  },
+  {
+   "placements": 1,
+   "token": "trace_chalkboard",
+   "critical_parameter": "lines",
+   "private_var": false,
+   "gd": "commons/primitives/trace_chalkboard/trace_chalkboard.gd"
+  },
+  {
+   "placements": 1,
+   "token": "grid_chalkboard",
+   "critical_parameter": "lines",
+   "private_var": false,
+   "gd": "commons/primitives/grid_chalkboard/grid_chalkboard.gd"
+  },
+  {
+   "placements": 1,
+   "token": "ignorance_chalkboard",
+   "critical_parameter": "lines",
+   "private_var": false,
+   "gd": "commons/primitives/ignorance_chalkboard/ignorance_chalkboard.gd"
+  },
+  {
+   "placements": 1,
+   "token": "melencolia_chalkboard",
+   "critical_parameter": "lines",
+   "private_var": false,
+   "gd": "commons/primitives/melencolia_chalkboard/melencolia_chalkboard.gd"
+  },
+  {
+   "placements": 1,
+   "token": "flower_lab",
+   "critical_parameter": "petal",
+   "private_var": false,
+   "gd": "commons/artifacts/flower_lab/flower_lab.gd"
+  },
+  {
+   "placements": 1,
+   "token": "mirror_artifact",
+   "critical_parameter": "metallic",
+   "private_var": false,
+   "gd": "commons/artifacts/mirror_artifact/mirror_artifact.gd"
+  },
+  {
+   "placements": 1,
+   "token": "parametric-mesh-gallery__cylinder_r16",
+   "critical_parameter": "radial_segments",
+   "private_var": false,
+   "gd": "commons/primitives/promoted/parametric-mesh-gallery__cylinder_r16/cylinder_r16.gd"
+  },
+  {
+   "placements": 1,
+   "token": "crystal_formation",
+   "critical_parameter": "rng",
+   "private_var": false,
+   "gd": "commons/primitives/crystalcluster/crystalcluster.gd"
+  },
+  {
+   "placements": 1,
+   "token": "shader_07_noise",
+   "critical_parameter": "warp_strength",
+   "private_var": false,
+   "gd": "algorithms/shaders/book_of_shaders/shader_07_noise.gd"
+  },
+  {
+   "placements": 1,
+   "token": "shader_08_cellularnoise",
+   "critical_parameter": "scale",
+   "private_var": false,
+   "gd": "algorithms/shaders/book_of_shaders/shader_08_cellularnoise.gd"
+  },
+  {
+   "placements": 1,
+   "token": "data_locality_caching",
+   "critical_parameter": "latency",
+   "private_var": false,
+   "gd": "algorithms/resourcemanagement/data_locality_caching/data_locality_caching.gd"
+  },
+  {
+   "placements": 1,
+   "token": "version_control_tree",
+   "critical_parameter": "HEAD",
+   "private_var": false,
+   "gd": "algorithms/resourcemanagement/version_control_tree/version_control_tree.gd"
+  },
+  {
+   "placements": 1,
+   "token": "hardware_cross_section",
+   "critical_parameter": "throughput",
+   "private_var": false,
+   "gd": "algorithms/resourcemanagement/hardware_cross_section/hardware_cross_section.gd"
+  },
+  {
+   "placements": 1,
+   "token": "shader_01_shaping",
+   "critical_parameter": "threshold",
+   "private_var": false,
+   "gd": "algorithms/shaders/book_of_shaders/shader_01_shaping.gd"
+  },
+  {
+   "placements": 1,
+   "token": "shader_02_colors",
+   "critical_parameter": "hue_offset",
+   "private_var": false,
+   "gd": "algorithms/shaders/book_of_shaders/shader_02_colors.gd"
+  },
+  {
+   "placements": 1,
+   "token": "shader_03_shapes",
+   "critical_parameter": "radius",
+   "private_var": false,
+   "gd": "algorithms/shaders/book_of_shaders/shader_03_shapes.gd"
+  },
+  {
+   "placements": 1,
+   "token": "shader_04_matrices",
+   "critical_parameter": "rotation",
+   "private_var": false,
+   "gd": "algorithms/shaders/book_of_shaders/shader_04_matrices.gd"
+  },
+  {
+   "placements": 1,
+   "token": "shader_05_patterns",
+   "critical_parameter": "grid_size",
+   "private_var": false,
+   "gd": "algorithms/shaders/book_of_shaders/shader_05_patterns.gd"
+  },
+  {
+   "placements": 1,
+   "token": "shader_06_random",
+   "critical_parameter": "scale",
+   "private_var": false,
+   "gd": "algorithms/shaders/book_of_shaders/shader_06_random.gd"
+  },
+  {
+   "placements": 1,
+   "token": "shader_09_fbm",
+   "critical_parameter": "lacunarity",
+   "private_var": false,
+   "gd": "algorithms/shaders/book_of_shaders/shader_09_fbm.gd"
+  },
+  {
+   "placements": 1,
+   "token": "shader_10_reactiondiffusion",
+   "critical_parameter": "growth",
+   "private_var": false,
+   "gd": "algorithms/shaders/book_of_shaders/shader_10_reactiondiffusion.gd"
+  },
+  {
+   "placements": 1,
+   "token": "shader_11_queerrubber",
+   "critical_parameter": "rotation_speed",
+   "private_var": false,
+   "gd": "algorithms/shaders/book_of_shaders/shader_11_queerrubber.gd"
+  },
+  {
+   "placements": 1,
+   "token": "shader_12_pinkextravaganza",
+   "critical_parameter": "rotation_speed",
+   "private_var": false,
+   "gd": "algorithms/shaders/book_of_shaders/shader_12_pinkextravaganza.gd"
+  },
+  {
+   "placements": 1,
+   "token": "frozen_glass_vessel",
+   "critical_parameter": "steps",
+   "private_var": false,
+   "gd": "commons/artifacts/frozen_glass_vessel/frozen_glass_vessel.gd"
+  },
+  {
+   "placements": 1,
+   "token": "fitness_landscape_politics",
+   "critical_parameter": "landscape_mode",
+   "private_var": false,
+   "gd": "commons/artifacts/fitness_landscape_politics/fitness_landscape_politics.gd"
+  },
+  {
+   "placements": 1,
+   "token": "cross_product_demo",
+   "critical_parameter": "angle",
+   "private_var": false,
+   "gd": "commons/artifacts/cross_product_demo/cross_product_demo.gd"
+  },
+  {
+   "placements": 1,
+   "token": "HarmonicBuilder",
+   "critical_parameter": "per",
+   "private_var": false,
+   "gd": "algorithms/wavefunctions/harmonic_builder/HarmonicBuilder.gd"
+  },
+  {
+   "placements": 1,
+   "token": "OscillatingWave",
+   "critical_parameter": "angular",
+   "private_var": false,
+   "gd": "algorithms/wavefunctions/oscillating_wave/OscillatingWave.gd"
+  },
+  {
+   "placements": 0,
+   "token": "CellularAutomata3DStacked",
+   "critical_parameter": "GrowthPhase",
+   "private_var": false,
+   "gd": "algorithms/cellularautomata/cellular_automata_3d_stacked/CellularAutomata3DStacked.gd"
+  },
+  {
+   "placements": 0,
+   "token": "unfinishable_terrarium",
+   "critical_parameter": "elapsed_hours",
+   "private_var": false,
+   "gd": "commons/artifacts/unfinishable_terrarium/unfinishable_terrarium.gd"
+  },
+  {
+   "placements": 0,
+   "token": "snap_socket",
+   "critical_parameter": "snap",
+   "private_var": false,
+   "gd": "commons/interactables/snap_socket.gd"
+  },
+  {
+   "placements": 0,
+   "token": "climb_grip",
+   "critical_parameter": "placement",
+   "private_var": false,
+   "gd": "commons/interactables/climb_grip.gd"
+  },
+  {
+   "placements": 0,
+   "token": "gadget_wall",
+   "critical_parameter": "GADGETS",
+   "private_var": false,
+   "gd": "commons/interactables/gadget_wall.gd"
+  },
+  {
+   "placements": 0,
+   "token": "quad_chalkboard",
+   "critical_parameter": "lines",
+   "private_var": false,
+   "gd": "commons/primitives/quad_chalkboard/quad_chalkboard.gd"
+  },
+  {
+   "placements": 0,
+   "token": "qfep_chalkboard",
+   "critical_parameter": "lines",
+   "private_var": false,
+   "gd": "commons/primitives/qfep_chalkboard/qfep_chalkboard.gd"
+  },
+  {
+   "placements": 0,
+   "token": "endlessness_chalkboard",
+   "critical_parameter": "lines",
+   "private_var": false,
+   "gd": "commons/primitives/endlessness_chalkboard/endlessness_chalkboard.gd"
+  },
+  {
+   "placements": 0,
+   "token": "thrownness_chalkboard",
+   "critical_parameter": "lines",
+   "private_var": false,
+   "gd": "commons/primitives/thrownness_chalkboard/thrownness_chalkboard.gd"
+  },
+  {
+   "placements": 0,
+   "token": "network_chalkboard",
+   "critical_parameter": "lines",
+   "private_var": false,
+   "gd": "commons/primitives/network_chalkboard/network_chalkboard.gd"
+  },
+  {
+   "placements": 0,
+   "token": "mesh_chalkboard",
+   "critical_parameter": "lines",
+   "private_var": false,
+   "gd": "commons/primitives/mesh_chalkboard/mesh_chalkboard.gd"
+  },
+  {
+   "placements": 0,
+   "token": "polyhedra_chalkboard",
+   "critical_parameter": "lines",
+   "private_var": false,
+   "gd": "commons/primitives/polyhedra_chalkboard/polyhedra_chalkboard.gd"
+  },
+  {
+   "placements": 0,
+   "token": "circle_chalkboard",
+   "critical_parameter": "lines",
+   "private_var": false,
+   "gd": "commons/primitives/circle_chalkboard/circle_chalkboard.gd"
+  },
+  {
+   "placements": 0,
+   "token": "tutorial_wall",
+   "critical_parameter": "map",
+   "private_var": false,
+   "gd": "commons/artifacts/tutorial_wall/tutorial_wall.gd"
+  },
+  {
+   "placements": 0,
+   "token": "vector_reflection_demo",
+   "critical_parameter": "surface_angle",
+   "private_var": false,
+   "gd": "algorithms/vectors/vector_reflection/vector_reflection_demo.gd"
+  }
+ ]
+}
