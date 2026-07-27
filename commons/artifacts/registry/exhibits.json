@@ -1,6 +1,26 @@
 {
  "artifacts": {
   "exhibit_podium": {
+   "dna": {
+    "promoted": "2026-07-27",
+    "stage": "2 - variation",
+    "axes": {
+     "regard": [
+      "plain",
+      "reliquary",
+      "didactic",
+      "derelict"
+     ],
+     "reserve": [
+      "none",
+      "armature",
+      "ghost",
+      "shroud"
+     ]
+    },
+    "default": "regard=plain + reserve=none is the legacy lineage for the 223 bare placements.",
+    "note": "ONE DEFAULT-PATH CHANGE, accepted knowingly: #size:s|m|l previously hit float(\"s\")==0.0 and built a degenerate ZERO-WIDTH box; it now resolves to real dimensions. Blast radius verified as exactly 3 auto-generated preview maps (Prop_podium_s/m/l); the other 223 placements carry no size token. Invisible-to-visible, but it does redefine #size: for future maps. NAMING DEBT: regard here means institutional REGISTER, which is exhibit_furniture.house; it should converge on house once the vocabularies are aligned."
+   },
    "lookup_name": "exhibit_podium",
    "scene": "res://commons/artifacts/exhibits/exhibit_podium.tscn",
    "class_name": "ExhibitPodium",
@@ -10,6 +30,26 @@
    "description": "An empty plinth with a soft top light - the exhibit affordance itself, before any exhibit. Planted by the gallery-DNA generator to mark hosting capacity; filled later by the Curator or placement engines. Config: size, height, kind (podium/dais)."
   },
   "exhibit_vitrine": {
+   "dna": {
+    "promoted": "2026-07-27",
+    "stage": "2 - variation",
+    "axes": {
+     "enclosure": [
+      "box",
+      "bell",
+      "cradle",
+      "niche"
+     ],
+     "guard": [
+      "none",
+      "lit",
+      "framed",
+      "guarded"
+     ]
+    },
+    "default": "enclosure=box + guard=none rebuilds HEAD statement for statement; 162 placements unchanged.",
+    "note": "RENAMED from `regard` to `guard` after the review: on exhibit_podium `regard` names the institutional register, while here it named the barrier between visitor and slot - which is exactly exhibit_furniture.guard. One word cannot mean both across three artifacts standing in the same room. The old #regard: token is still honoured. Empty value spelled `none`, matching the rest of the family."
+   },
    "lookup_name": "exhibit_vitrine",
    "scene": "res://commons/artifacts/exhibits/exhibit_vitrine.tscn",
    "class_name": "ExhibitVitrine",
@@ -19,6 +59,26 @@
    "description": "An empty glass case on a dark base - the wall-side affordance for small precious things. Sets the visitor's pausing rhythm before the collection exists."
   },
   "exhibit_furniture": {
+   "dna": {
+    "promoted": "2026-07-27",
+    "stage": "2 - variation",
+    "axes": {
+     "house": [
+      "white_cube",
+      "wunderkammer",
+      "depot",
+      "forensic"
+     ],
+     "guard": [
+      "none",
+      "label",
+      "rail",
+      "hood"
+     ]
+    },
+    "default": "house=white_cube + guard=none is the legacy lineage; 1077 placements unchanged.",
+    "note": "Order matters: kind: must stay the FIRST config segment (tools/furnish_gallery.py classifies slots with startswith). guard:rail and guard:hood grow the footprint past the artifact's own cell. house does not apply to kind:sign_exit/sign_fire - statutory colours are the building's obligation, not the curator's."
+   },
    "lookup_name": "exhibit_furniture",
    "scene": "res://commons/artifacts/exhibits/exhibit_furniture.tscn",
    "class_name": "ExhibitFurniture",

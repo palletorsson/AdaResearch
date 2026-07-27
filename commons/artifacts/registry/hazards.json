@@ -1509,6 +1509,26 @@
    }
   },
   "catalyst_target": {
+   "dna": {
+    "promoted": "2026-07-27",
+    "stage": "2 - variation",
+    "axes": {
+     "rig": [
+      "free",
+      "cradle",
+      "frame",
+      "gantry"
+     ],
+     "mark": [
+      "none",
+      "bullseye",
+      "grid",
+      "nimbus"
+     ]
+    },
+    "default": "rig=free + mark=none returns before allocating anything; 100 placements unchanged.",
+    "note": "APPEARANCE ONLY - collision, damage, timing and triggers are untouched, because existing maps depend on this artifact's hazard behaviour. RENAMED from `mount` to `rig` after the review: exhibit_furniture#mount:<lookup_name> already means the artifact seated ON that bed across 500+ placements, and this meant the rig holding the target - two opposite senses of one token is a trap for whoever writes the next map."
+   },
    "category": "tools",
    "complexity": "beginner",
    "description": "A practice target that flashes, explodes, and respawns when struck. Its visible states change quickly, but the target remains recognizably the same object across idle, hit, destroyed, and restored phases. Movement options add patrol and orbit patterns without changing that core identity. It is a compact lesson in state transition.",

@@ -1924,6 +1924,26 @@
 			}
 		},
 		"science_screen": {
+			"dna": {
+			 "promoted": "2026-07-27",
+			 "stage": "2 - variation",
+			 "axes": {
+			  "housing": [
+			   "none",
+			   "bezel",
+			   "hooded",
+			   "cabinet"
+			  ],
+			  "surface": [
+			   "flat",
+			   "curved",
+			   "tiles",
+			   "frosted"
+			  ]
+			 },
+			 "default": "housing=none + surface=flat is the legacy lineage; uv1 scale/offset resolve to StandardMaterial3D's own defaults.",
+			 "note": "The face is now wrapped in a Face Node3D; GridInteractablesComponent._compute_local_aabb recurses into Node3D children and multiplies by their transform, so grounding is unaffected. surface:tiles is the thinnest margin in the set (~4-5% area) but the changed pixels go bright green to dark grey."
+			},
 			"category": "shaders",
 			"complexity": "intermediate",
 			"description": "A large display that projects nearby 3D artifacts into simplified 2D abstractions. The screen keeps the structure of the source object but changes its representational state, turning embodied experience into diagram. That makes it a useful bridge between moving through a form and reasoning about it. It stages projection as a transformation with both gains and losses.",

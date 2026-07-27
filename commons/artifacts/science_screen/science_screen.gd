@@ -16,6 +16,8 @@
 ##   highlight      - Highlight color as "r,g,b" (0–1 floats)
 ##   border         - Border color as "r,g,b"
 ##   bg             - Background color as "r,g,b"
+##   housing        - stand | wall | console | rig   (stage-2 DNA, default stand)
+##   surface        - plane | curve | triptych | tiles (stage-2 DNA, default plane)
 
 # @identity
 # essence: a SubViewport renders the grid-state of nearby artifacts as a 2D pixel-map on a large wall-mounted screen — you stand in the 3D world and see its cellular logic flattened beside you
@@ -33,6 +35,11 @@ class_name ScienceScreen
 ## Integrated 2D-in-3D text helper — replaces floating Label3D signage with a
 ## framed dark board (baked, billboarded, lit accent edge). Drop-in for Label3D.
 const BakedText = preload("res://commons/utils/baked_text_albedo.gd")
+
+## Shared station-furniture parts. The housings are cut from the same kit as the
+## benches and cabinets they stand beside, so a console-bodied screen reads as
+## belonging to the room rather than arriving from another project.
+const HangarKit = preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 
 
 # Spine-corridor contract — see doc/SPINE_HINTS_CONTRACT.md
@@ -63,10 +70,82 @@ func spine_hints() -> Dictionary:
 @export var scan_radius: float = 8.0
 @export var scan_interval: float = 1.0
 
+
+# ═══════════════════════════════════════════════════════════════════
+# STAGE-2 DNA — two axes, both cut from this artifact's own question
+# ═══════════════════════════════════════════════════════════════════
+#
+# @identity says the screen exists to hold open the gap between the algorithm
+# you are standing inside and the flattened picture of it beside you: "the map
+# is not the territory ... the difference between the two is where understanding
+# lives." Both axes are that difference, made into geometry.
+#
+#   housing — what apparatus the flattening is INSTALLED in, which is a claim
+#     about who is speaking. A monitor someone wheeled in is provisional. A slab
+#     the building owns is architecture. A console is an instrument you operate.
+#     A rig admits out loud that this is staging. Same image, four institutions.
+#
+#   surface — how flat the flattening actually IS. A perfect plane is the
+#     strongest possible claim to map-ness: no angle, no thickness, no body.
+#     Bending, folding or tiling the image lets the territory back in — the
+#     picture starts to have a shape of its own, and reading it costs you a
+#     position to read it from.
+#
+# What this costs: a folded or tiled face is harder to read straight on, and the
+# console housing gives up the wall-panel reading entirely. That is the trade —
+# these are not four skins, they are four different arguments.
+#
+# Defaults (stand / plane) rebuild the pre-DNA screen node-for-node. The 215
+# existing placements must not be able to tell this was written.
+const HOUSINGS: PackedStringArray = ["stand", "wall", "console", "rig"]
+const SURFACES: PackedStringArray = ["plane", "curve", "triptych", "tiles"]
+
+@export_enum("stand", "wall", "console", "rig") var housing: String = "stand"
+@export_enum("plane", "curve", "triptych", "tiles") var surface: String = "plane"
+
+## Curve: metres the outer edges reach toward the viewer. Big on purpose — at
+## 0.40 m on a 3 m screen the edge normals swing ~28°, which is the difference
+## between a curved monitor and a still that looks identical to the flat one.
+## A polite 5 cm bow would have been invisible and therefore worthless.
+const CURVE_BOW: float = 0.40
+const CURVE_SEGS: int = 14
+
+## Triptych: wing hinge angle, and the seam left open at each hinge so the three
+## panels read as three panels and not as one creased sheet.
+const FOLD_DEG: float = 38.0
+const FOLD_SEAM: float = 0.06
+
+## Tiles: a video wall cut out of one image. The gap is what the seams eat —
+## the flattening is lossy and this is where it shows you.
+const TILE_COLS: int = 4
+const TILE_ROWS: int = 3
+const TILE_GAP: float = 0.045
+const TILE_RELIEF: float = 0.026
+
+## Console: how far the cabinet lifts the face, and how far the face then leans
+## back off its own bottom edge. Kept modest — screen_height is author-set up to
+## 3.0 m and a taller lift would push the assembly through low ceilings.
+const CONSOLE_LIFT: float = 0.55
+const CONSOLE_LEAN_DEG: float = 11.0
+
 ## Internal nodes
 var _screen_mesh: MeshInstance3D
 var _border_mesh: MeshInstance3D
 var _stand_mesh: MeshInstance3D
+
+## Everything belonging to the display FACE hangs off one root, so a housing can
+## lift or lean the whole display without a single panel coordinate knowing it.
+var _face_root: Node3D
+
+## Every surface mode is just a list of quads carrying a sub-rectangle of the one
+## SubViewport — which is why curve/triptych/tiles cost geometry and not a second
+## rendering path. Entries: {mesh, uv_offset, uv_scale}.
+var _screen_panels: Array[Dictionary] = []
+
+## The face's real outline, which the folded and bent surfaces move. The LED and
+## the brand mark hang off these instead of off screen_width.
+var _face_half_w: float = 0.0
+var _brand_half_w: float = 0.0
 var _viewport: SubViewport
 var _canvas: Control
 var _label_name: String = ""
@@ -470,56 +549,56 @@ func _spawn_point_particles() -> void:
 
 func _build_screen() -> void:
 	var screen_y: float = screen_height * 0.5 + 0.05
+	_screen_panels.clear()
+	# Cleared, not just overwritten: after a _rebuild() these still point at freed
+	# nodes, which compare unequal to null and would defeat the "first panel wins"
+	# assignments below.
+	_screen_mesh = null
+	_border_mesh = null
 
-	# ── Outer bevel (dark, larger border for depth) ──
-	var outer_bevel: MeshInstance3D = MeshInstance3D.new()
-	var outer_plane: PlaneMesh = PlaneMesh.new()
-	var outer_margin: float = 0.07
-	outer_plane.size = Vector2(screen_width + outer_margin * 2, screen_height + outer_margin * 2)
-	outer_plane.orientation = PlaneMesh.FACE_Z
-	outer_bevel.mesh = outer_plane
-	outer_bevel.position = Vector3(0, screen_y, -0.012)
-	add_child(outer_bevel)
+	# The face gets its own root so a housing can lift or lean the entire display
+	# without touching a panel coordinate. `stand` leaves it at identity, which is
+	# why the legacy build comes out unchanged despite the extra node.
+	_face_root = Node3D.new()
+	_face_root.name = "Face"
+	var lift: float = _housing_lift()
+	_face_root.position = Vector3(0, lift, 0)
+	if housing == "console":
+		# Rotation pivots on the root's own origin, which after the lift sits at
+		# the screen's bottom edge — so the face leans back OFF the cabinet lip
+		# instead of swinging through it.
+		_face_root.rotation_degrees = Vector3(-CONSOLE_LEAN_DEG, 0, 0)
+	add_child(_face_root)
 
-	var outer_mat: StandardMaterial3D = StandardMaterial3D.new()
-	outer_mat.albedo_color = Color(0.08, 0.08, 0.1)
-	outer_mat.metallic = 0.8
-	outer_mat.roughness = 0.2
-	outer_bevel.material_override = outer_mat
+	_build_face(screen_y)
+	_build_housing(screen_y, lift)
 
-	# ── Inner border frame (lighter) ──
-	_border_mesh = MeshInstance3D.new()
-	var border_plane: PlaneMesh = PlaneMesh.new()
+
+## Metres the housing raises the display face. Only the console lifts: the wall
+## slab and the rig reach the floor on their own, and raising their base would
+## fight the grid's base→floor auto-grounding rather than read as height.
+func _housing_lift() -> float:
+	return CONSOLE_LIFT if housing == "console" else 0.0
+
+
+# ── The face: bevel, border, image, glow, marks ───────────────────────
+
+func _build_face(screen_y: float) -> void:
 	var border_margin: float = 0.04
-	border_plane.size = Vector2(screen_width + border_margin * 2, screen_height + border_margin * 2)
-	border_plane.orientation = PlaneMesh.FACE_Z
-	_border_mesh.mesh = border_plane
-	_border_mesh.position = Vector3(0, screen_y, -0.008)
-	add_child(_border_mesh)
+	var outer_margin: float = 0.07
 
-	var border_mat: StandardMaterial3D = StandardMaterial3D.new()
-	border_mat.albedo_color = border_color
-	border_mat.metallic = 0.6
-	border_mat.roughness = 0.3
-	_border_mesh.material_override = border_mat
-
-	# ── Screen quad (standing upright, face toward +Z) ──
-	_screen_mesh = MeshInstance3D.new()
-	var plane: PlaneMesh = PlaneMesh.new()
-	plane.size = Vector2(screen_width, screen_height)
-	plane.orientation = PlaneMesh.FACE_Z
-	_screen_mesh.mesh = plane
-	_screen_mesh.position = Vector3(0, screen_y, 0)
-	add_child(_screen_mesh)
-
-	# Screen base material (will be replaced by viewport texture)
-	var mat: StandardMaterial3D = StandardMaterial3D.new()
-	mat.albedo_color = screen_color
-	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-	_screen_mesh.material_override = mat
+	match surface:
+		"curve":
+			_build_face_curve(screen_y, border_margin, outer_margin)
+		"triptych":
+			_build_face_triptych(screen_y)
+		"tiles":
+			_build_face_tiles(screen_y, border_margin, outer_margin)
+		_:
+			_build_face_plane(screen_y, border_margin, outer_margin)
 
 	# ── Screen glow light — makes the screen cast green light into the room ──
-	var screen_light := OmniLight3D.new()
+	var screen_light: OmniLight3D = OmniLight3D.new()
 	screen_light.name = "ScreenGlow"
 	screen_light.light_color = Color(0.3, 0.9, 0.5)  # green tint
 	screen_light.light_energy = 0.6
@@ -527,16 +606,129 @@ func _build_screen() -> void:
 	screen_light.omni_attenuation = 1.5
 	screen_light.position = Vector3(0, screen_y, -0.3)  # slightly in front of screen
 	screen_light.shadow_enabled = false
-	add_child(screen_light)
+	_face_root.add_child(screen_light)
 
+	_build_face_marks(screen_y, border_margin)
+
+
+## Legacy face, node for node: a flat quad behind a flat border behind a flat
+## bevel. The strongest claim to map-ness the artifact can make — no angle, no
+## thickness, nothing of the room in it.
+func _build_face_plane(screen_y: float, border_margin: float, outer_margin: float) -> void:
+	# ── Outer bevel (dark, larger border for depth) ──
+	var outer_bevel: MeshInstance3D = _flat_quad(
+		Vector2(screen_width + outer_margin * 2, screen_height + outer_margin * 2), _bevel_mat())
+	outer_bevel.position = Vector3(0, screen_y, -0.012)
+	_face_root.add_child(outer_bevel)
+
+	# ── Inner border frame (lighter) ──
+	_border_mesh = _flat_quad(
+		Vector2(screen_width + border_margin * 2, screen_height + border_margin * 2), _border_mat())
+	_border_mesh.position = Vector3(0, screen_y, -0.008)
+	_face_root.add_child(_border_mesh)
+
+	# ── Screen quad (standing upright, face toward +Z) ──
+	_screen_mesh = _image_panel(Vector2(screen_width, screen_height), Vector2.ZERO, Vector2.ONE)
+	_screen_mesh.position = Vector3(0, screen_y, 0)
+	_face_root.add_child(_screen_mesh)
+
+	_face_half_w = screen_width * 0.5
+	_brand_half_w = screen_width * 0.5
+
+
+## The image gives up being a plane: the outer thirds bend toward the body, so
+## the map admits it is being read from somewhere. The frame bends with it — a
+## flat bezel behind a bent sheet reads as a bug, not as a decision.
+func _build_face_curve(screen_y: float, border_margin: float, outer_margin: float) -> void:
+	_bend_run(screen_y, screen_width + outer_margin * 2, screen_height + outer_margin * 2,
+		CURVE_BOW * 1.06, -0.012, _bevel_mat(), false)
+	_border_mesh = _bend_run(screen_y, screen_width + border_margin * 2, screen_height + border_margin * 2,
+		CURVE_BOW * 1.03, -0.008, _border_mat(), false)
+	_screen_mesh = _bend_run(screen_y, screen_width, screen_height,
+		CURVE_BOW, 0.0, _placeholder_mat(), true)
+
+	_face_half_w = screen_width * 0.5
+	_brand_half_w = screen_width * 0.5
+
+
+## One image, three framed panels, the wings hinged toward the viewer. You can
+## no longer take the whole map in from one angle — the seams cost you the
+## single glance and charge you a walk for it.
+func _build_face_triptych(screen_y: float) -> void:
+	var fold: float = deg_to_rad(FOLD_DEG)
+	var mid_w: float = screen_width * 0.5
+	var wing_w: float = screen_width * 0.25
+	var hinge_x: float = mid_w * 0.5 + FOLD_SEAM
+
+	_screen_mesh = _framed_panel(Vector3(0, screen_y, 0), 0.0,
+		Vector2(mid_w, screen_height), Vector2(0.25, 0.0), Vector2(0.5, 1.0))
+
+	for si in range(2):
+		var s: float = -1.0 if si == 0 else 1.0
+		# Local +X of each wing runs outward-and-forward, so the image continues
+		# across the hinge instead of mirroring back on itself.
+		var cx: float = s * (hinge_x + cos(fold) * wing_w * 0.5)
+		var cz: float = sin(fold) * wing_w * 0.5
+		var uo: float = 0.0 if s < 0.0 else 0.75
+		_framed_panel(Vector3(cx, screen_y, cz), -s * fold,
+			Vector2(wing_w, screen_height), Vector2(uo, 0.0), Vector2(0.25, 1.0))
+
+	_face_half_w = hinge_x + cos(fold) * wing_w
+	_brand_half_w = mid_w * 0.5
+
+
+## The map arrives as a mosaic — one picture cut into a video wall with the
+## seams left in. The gaps eat real image, which is the honest version: the
+## flattening was always lossy and here it shows you exactly where.
+func _build_face_tiles(screen_y: float, border_margin: float, outer_margin: float) -> void:
+	var outer_bevel: MeshInstance3D = _flat_quad(
+		Vector2(screen_width + outer_margin * 2, screen_height + outer_margin * 2), _bevel_mat())
+	outer_bevel.position = Vector3(0, screen_y, -0.012)
+	_face_root.add_child(outer_bevel)
+
+	_border_mesh = _flat_quad(
+		Vector2(screen_width + border_margin * 2, screen_height + border_margin * 2), _border_mat())
+	_border_mesh.position = Vector3(0, screen_y, -0.008)
+	_face_root.add_child(_border_mesh)
+
+	var tw: float = (screen_width - TILE_GAP * float(TILE_COLS - 1)) / float(TILE_COLS)
+	var th: float = (screen_height - TILE_GAP * float(TILE_ROWS - 1)) / float(TILE_ROWS)
+	var top_y: float = screen_y + screen_height * 0.5
+
+	for r in range(TILE_ROWS):
+		for c in range(TILE_COLS):
+			var px: float = -screen_width * 0.5 + tw * 0.5 + float(c) * (tw + TILE_GAP)
+			var py: float = top_y - th * 0.5 - float(r) * (th + TILE_GAP)
+			# UV sub-rect measured off the tile's own place in the full image, so
+			# the gaps subtract from the picture rather than squeezing it.
+			var uo: Vector2 = Vector2(
+				(px - tw * 0.5 + screen_width * 0.5) / screen_width,
+				(top_y - py - th * 0.5) / screen_height)
+			var us: Vector2 = Vector2(tw / screen_width, th / screen_height)
+			var relief: float = TILE_RELIEF if (r + c) % 2 == 0 else 0.0
+			var tile: MeshInstance3D = _image_panel(Vector2(tw, th), uo, us)
+			tile.position = Vector3(px, py, 0.004 + relief)
+			_face_root.add_child(tile)
+			if _screen_mesh == null:
+				_screen_mesh = tile
+
+	_face_half_w = screen_width * 0.5
+	_brand_half_w = screen_width * 0.5
+
+
+## LED and brand mark, placed against the face's REAL outline rather than against
+## screen_width — otherwise a folded face leaves them hanging in the air where
+## the flat one used to end. For `plane` these resolve to the legacy numbers.
+func _build_face_marks(screen_y: float, border_margin: float) -> void:
 	# ── LED indicator dot (top-right corner, small green sphere) ──
+	var led_x: float = _face_half_w + border_margin + 0.01
 	var led: MeshInstance3D = MeshInstance3D.new()
 	var led_sphere: SphereMesh = SphereMesh.new()
 	led_sphere.radius = 0.012
 	led_sphere.height = 0.024
 	led.mesh = led_sphere
-	led.position = Vector3(screen_width * 0.5 + border_margin + 0.01, screen_y + screen_height * 0.5 + border_margin - 0.01, 0.005)
-	add_child(led)
+	led.position = Vector3(led_x, screen_y + screen_height * 0.5 + border_margin - 0.01, _face_z_at(led_x) + 0.005)
+	_face_root.add_child(led)
 
 	var led_mat: StandardMaterial3D = StandardMaterial3D.new()
 	led_mat.albedo_color = Color(0.2, 1.0, 0.3)
@@ -562,13 +754,148 @@ func _build_screen() -> void:
 		# make_tag auto-fits width ≈ world_h * (0.9 + 0.66*len); left-align the
 		# board where the old Label3D's left edge sat.
 		var brand_w: float = brand_h * (0.9 + 0.66 * float("ADA RESEARCH".length()))
+		var brand_x: float = -_brand_half_w + 0.15 + brand_w * 0.5
 		brand_tag.position = Vector3(
-			-screen_width * 0.5 + 0.15 + brand_w * 0.5,
+			brand_x,
 			screen_y - screen_height * 0.5 - border_margin - 0.015,
-			0.006
+			_face_z_at(brand_x) + 0.006
 		)
-		add_child(brand_tag)
+		_face_root.add_child(brand_tag)
 
+
+# ── Face parts ────────────────────────────────────────────────────────
+
+func _bevel_mat() -> StandardMaterial3D:
+	var m: StandardMaterial3D = StandardMaterial3D.new()
+	m.albedo_color = Color(0.08, 0.08, 0.1)
+	m.metallic = 0.8
+	m.roughness = 0.2
+	return m
+
+
+func _border_mat() -> StandardMaterial3D:
+	var m: StandardMaterial3D = StandardMaterial3D.new()
+	m.albedo_color = border_color
+	m.metallic = 0.6
+	m.roughness = 0.3
+	return m
+
+
+## Screen base material — replaced by the viewport texture one frame later.
+func _placeholder_mat() -> StandardMaterial3D:
+	var m: StandardMaterial3D = StandardMaterial3D.new()
+	m.albedo_color = screen_color
+	m.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	return m
+
+
+func _flat_quad(size: Vector2, mat: Material) -> MeshInstance3D:
+	var mi: MeshInstance3D = MeshInstance3D.new()
+	var pm: PlaneMesh = PlaneMesh.new()
+	pm.size = size
+	pm.orientation = PlaneMesh.FACE_Z
+	mi.mesh = pm
+	mi.material_override = mat
+	return mi
+
+
+## A quad carrying one sub-rectangle of the SubViewport. PlaneMesh FACE_Z maps
+## u left→right along +X and v top→bottom, so the sub-rects can be read straight
+## off world positions without a flip.
+func _image_panel(size: Vector2, uv_offset: Vector2, uv_scale: Vector2) -> MeshInstance3D:
+	var mi: MeshInstance3D = _flat_quad(size, _placeholder_mat())
+	_screen_panels.append({"mesh": mi, "uv_offset": uv_offset, "uv_scale": uv_scale})
+	return mi
+
+
+## One panel of a folded face, with its own bevel and border, so each leaf reads
+## as a framed screen rather than as a torn corner of a big one.
+func _framed_panel(center: Vector3, rot_y: float, size: Vector2,
+		uv_offset: Vector2, uv_scale: Vector2) -> MeshInstance3D:
+	var holder: Node3D = Node3D.new()
+	holder.position = center
+	holder.rotation = Vector3(0, rot_y, 0)
+	_face_root.add_child(holder)
+
+	var bevel: MeshInstance3D = _flat_quad(size + Vector2(0.10, 0.10), _bevel_mat())
+	bevel.position = Vector3(0, 0, -0.012)
+	holder.add_child(bevel)
+
+	var border: MeshInstance3D = _flat_quad(size + Vector2(0.056, 0.056), _border_mat())
+	border.position = Vector3(0, 0, -0.008)
+	holder.add_child(border)
+	if _border_mesh == null:
+		_border_mesh = border
+
+	var img: MeshInstance3D = _image_panel(size, uv_offset, uv_scale)
+	holder.add_child(img)
+	return img
+
+
+## Lay a rectangle out as vertical strips bent into a shallow parabola whose
+## edges reach `bow` metres toward the viewer. Strips rather than a hand-built
+## ArrayMesh: PlaneMesh already gets the winding and the UVs right, and the
+## faceting is invisible on an unshaded emissive face. Returns the middle strip.
+func _bend_run(screen_y: float, w: float, h: float, bow: float, z_off: float,
+		mat: StandardMaterial3D, is_image: bool) -> MeshInstance3D:
+	var mid: MeshInstance3D = null
+	var seg_w: float = w / float(CURVE_SEGS)
+	var half: float = w * 0.5
+	for i in range(CURVE_SEGS):
+		var t: float = (float(i) + 0.5) / float(CURVE_SEGS)
+		var a: float = (t - 0.5) * 2.0                    # -1 at the left edge, +1 at the right
+		var x: float = -half + w * t
+		var z: float = bow * a * a
+		var slope: float = 4.0 * bow * a / w              # dz/dx of the parabola
+		var tilt: float = atan(slope)
+		# A tilted strip covers only cos(tilt) of the x-slot it owns, so at the
+		# bent edges uniform-width strips tear open into dark hairlines. Widen
+		# each strip by 1/cos(tilt) — plus 3% — so every slot stays covered.
+		var strip_w: float = seg_w * 1.03 / maxf(cos(tilt), 0.25)
+		var strip: MeshInstance3D
+		if is_image:
+			strip = _image_panel(Vector2(strip_w, h),
+				Vector2(float(i) / float(CURVE_SEGS), 0.0),
+				Vector2(1.0 / float(CURVE_SEGS), 1.0))
+		else:
+			strip = _flat_quad(Vector2(strip_w, h), mat)
+		strip.position = Vector3(x, screen_y, z + z_off)
+		strip.rotation = Vector3(0, -tilt, 0)
+		_face_root.add_child(strip)
+		if i == int(CURVE_SEGS / 2):
+			mid = strip
+	return mid
+
+
+## The z the face reaches at a given x. Lets the LED and the brand mark sit ON
+## whatever shape the surface has instead of floating where the flat one was.
+func _face_z_at(x: float) -> float:
+	if surface == "curve":
+		var a: float = x / maxf(screen_width * 0.5, 0.001)
+		return CURVE_BOW * a * a
+	if surface == "triptych":
+		var hinge_x: float = screen_width * 0.25 + FOLD_SEAM
+		return maxf(absf(x) - hinge_x, 0.0) * tan(deg_to_rad(FOLD_DEG))
+	return 0.0
+
+
+# ── The housing: what the flattening is installed in ─────────────────
+
+func _build_housing(screen_y: float, lift: float) -> void:
+	match housing:
+		"wall":
+			_build_housing_wall(screen_y)
+		"console":
+			_build_housing_console(lift)
+		"rig":
+			_build_housing_rig(screen_y)
+		_:
+			_build_housing_stand(screen_y)
+
+
+## Legacy housing: a thin pole and a small foot behind the panel. Provisional —
+## something wheeled into the room for the duration of a lesson.
+func _build_housing_stand(screen_y: float) -> void:
 	# ── Stand pole ──
 	_stand_mesh = MeshInstance3D.new()
 	var stand_box: BoxMesh = BoxMesh.new()
@@ -597,6 +924,121 @@ func _build_screen() -> void:
 	base_mat.roughness = 0.2
 	base_mesh.material_override = base_mat
 
+
+## No pole, no foot: the display is not visiting the room, the room admits it.
+## A floor-to-lintel slab with the screen set into a shadow reveal. The image is
+## unchanged and the claim is completely different — the building is speaking.
+func _build_housing_wall(screen_y: float) -> void:
+	var top: float = screen_y + screen_height * 0.5 + 0.07
+	var slab_w: float = screen_width + 0.9
+	var slab_h: float = top + 0.34
+	var slab_d: float = 0.16
+	var front_z: float = -0.02
+
+	var slab_mat: StandardMaterial3D = HangarKit.painted_metal(Color(0.17, 0.17, 0.20), 0.2, 0.28, 0.68)
+	add_child(HangarKit.box(Vector3(0, slab_h * 0.5, front_z - slab_d * 0.5),
+		Vector3(slab_w, slab_h, slab_d), slab_mat))
+
+	# The reveal: a dark rim just proud of the slab, so the screen reads as SET
+	# INTO the wall. A shadow gap does what a heavier bezel would, without adding
+	# a second frame in front of the one the face already carries.
+	var reveal_mat: StandardMaterial3D = HangarKit.painted_metal(Color(0.06, 0.06, 0.07), 0.1, 0.2, 0.8)
+	add_child(HangarKit.box(Vector3(0, screen_y, front_z - 0.004),
+		Vector3(screen_width + 0.30, screen_height + 0.30, 0.012), reveal_mat))
+
+	var bolt_mat: StandardMaterial3D = HangarKit.worn_metal(Color(0.30, 0.31, 0.34))
+	for si in range(2):
+		var s: float = -1.0 if si == 0 else 1.0
+		add_child(HangarKit.bolts(
+			Vector3(s * (slab_w * 0.5 - 0.09), 0.22, front_z + 0.005),
+			Vector3(s * (slab_w * 0.5 - 0.09), slab_h - 0.22, front_z + 0.005),
+			6, 0.014, bolt_mat))
+
+	var gb: MeshInstance3D = HangarKit.grime_band(slab_w * 0.9, 0.09, front_z + 0.005, Color(0.17, 0.17, 0.20))
+	if gb:
+		add_child(gb)
+
+	var code: MeshInstance3D = HangarKit.stencil("VIEW 02", Vector2(0.26, 0.06), Color(0.42, 0.90, 0.55))
+	if code:
+		code.position = Vector3(-slab_w * 0.5 + 0.24, slab_h - 0.17, front_z + 0.007)
+		add_child(code)
+
+
+## The screen stops being a picture and becomes an instrument you stand at: a
+## cabinet takes the floor, the face leans back off its lip at working height.
+## What it costs is the wall reading — nothing here can pass for architecture.
+func _build_housing_console(lift: float) -> void:
+	var cab_h: float = maxf(lift - 0.02, 0.2)
+	var cab_w: float = screen_width * 0.94
+	var cab_d: float = 0.62
+	var front_z: float = 0.22
+	var cz: float = front_z - cab_d * 0.5
+	var kick_h: float = 0.09
+
+	var body_mat: StandardMaterial3D = HangarKit.painted_metal(Color(0.20, 0.21, 0.24), 0.16, 0.4, 0.55)
+	var dark_mat: StandardMaterial3D = HangarKit.painted_metal(Color(0.09, 0.09, 0.11), 0.1, 0.4, 0.5)
+	var trim_mat: StandardMaterial3D = HangarKit.worn_metal(Color(0.34, 0.35, 0.38))
+
+	# Recessed toe kick first, then the body standing on it — the inset is what
+	# makes the mass read as furniture instead of as a crate.
+	add_child(HangarKit.box(Vector3(0, kick_h * 0.5, cz),
+		Vector3(cab_w - 0.14, kick_h, cab_d - 0.10), dark_mat))
+	add_child(HangarKit.box(Vector3(0, kick_h + (cab_h - kick_h) * 0.5, cz),
+		Vector3(cab_w, cab_h - kick_h, cab_d), body_mat))
+	# Cap lip the face sits on
+	add_child(HangarKit.box(Vector3(0, cab_h + 0.018, cz),
+		Vector3(cab_w + 0.06, 0.036, cab_d + 0.05), trim_mat))
+	# Ember line under the lip — the same green the screen throws into the room
+	add_child(HangarKit.box(Vector3(0, cab_h - 0.014, front_z + 0.004),
+		Vector3(cab_w * 0.9, 0.008, 0.008), HangarKit.emissive(Color(0.2, 1.0, 0.3), 2.0)))
+
+	# Sloped operator shelf, so the console has somewhere a hand would go
+	var shelf: MeshInstance3D = HangarKit.wedge(cab_w * 0.66, 0.13, 0.26, 0.07, body_mat)
+	shelf.position = Vector3(0, cab_h - 0.12, front_z)
+	add_child(shelf)
+
+	for si in range(2):
+		var s: float = -1.0 if si == 0 else 1.0
+		add_child(HangarKit.box(Vector3(s * cab_w * 0.30, cab_h * 0.45, front_z + 0.03),
+			Vector3(0.18, 0.035, 0.06), trim_mat))
+
+
+## Exhibition scaffolding: the display admits out loud that it is staged. Two
+## posts overtop the screen and tie back behind it — no furniture, no building,
+## just a rig that could be struck tomorrow.
+func _build_housing_rig(screen_y: float) -> void:
+	var top: float = screen_y + screen_height * 0.5 + 0.07
+	var post_h: float = top + 0.40
+	var post_x: float = screen_width * 0.5 + 0.20
+	var post_z: float = -0.07
+
+	var post_mat: StandardMaterial3D = HangarKit.painted_metal(Color(0.22, 0.23, 0.26), 0.22, 0.5, 0.5)
+	var clamp_mat: StandardMaterial3D = HangarKit.worn_metal(Color(0.33, 0.34, 0.37))
+	var collar_y: PackedFloat32Array = PackedFloat32Array([
+		screen_y - screen_height * 0.32, screen_y + screen_height * 0.32])
+	var brace_y: PackedFloat32Array = PackedFloat32Array([top * 0.26, top * 0.90])
+
+	for si in range(2):
+		var s: float = -1.0 if si == 0 else 1.0
+		add_child(HangarKit.box(Vector3(s * post_x, post_h * 0.5, post_z),
+			Vector3(0.10, post_h, 0.10), post_mat))
+		add_child(HangarKit.box(Vector3(s * post_x, 0.016, post_z),
+			Vector3(0.36, 0.032, 0.32), clamp_mat))
+		for cy in collar_y:
+			# Collars reach in toward the frame edge — the rig visibly grips the
+			# panel rather than the panel floating between two poles.
+			add_child(HangarKit.box(Vector3(s * (post_x - 0.07), cy, post_z),
+				Vector3(0.16, 0.11, 0.14), clamp_mat))
+
+	for by in brace_y:
+		add_child(HangarKit.box(Vector3(0, by, post_z - 0.11),
+			Vector3(post_x * 2.0, 0.06, 0.06), post_mat))
+
+	# Top tie bar, above the screen — what makes it read as truss and not as two
+	# unrelated poles that happen to stand there.
+	add_child(HangarKit.box(Vector3(0, post_h - 0.06, post_z),
+		Vector3(post_x * 2.0 + 0.10, 0.08, 0.08), clamp_mat))
+
 func _build_viewport() -> void:
 	_viewport = SubViewport.new()
 	_viewport.size = Vector2i(VP_WIDTH, VP_HEIGHT)
@@ -611,15 +1053,27 @@ func _build_viewport() -> void:
 	_viewport.add_child(_canvas)
 
 func _apply_viewport_to_screen() -> void:
-	if not _viewport or not _screen_mesh:
+	if not _viewport or _screen_panels.is_empty():
 		return
-	var mat := StandardMaterial3D.new()
-	mat.albedo_texture = _viewport.get_texture()
-	mat.emission_enabled = true
-	mat.emission_texture = _viewport.get_texture()
-	mat.emission_energy_multiplier = 4.0
-	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-	_screen_mesh.material_override = mat
+	var tex: ViewportTexture = _viewport.get_texture()
+	for entry in _screen_panels:
+		var mi: MeshInstance3D = entry["mesh"]
+		if not is_instance_valid(mi):
+			continue
+		var mat: StandardMaterial3D = StandardMaterial3D.new()
+		mat.albedo_texture = tex
+		mat.emission_enabled = true
+		mat.emission_texture = tex
+		mat.emission_energy_multiplier = 4.0
+		mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+		# One SubViewport, many panels: each panel samples its own sub-rectangle,
+		# so a folded or tiled face shows ONE image broken across surfaces rather
+		# than N copies of the same picture. Identity remap on the flat default.
+		var uo: Vector2 = entry["uv_offset"]
+		var us: Vector2 = entry["uv_scale"]
+		mat.uv1_scale = Vector3(us.x, us.y, 1.0)
+		mat.uv1_offset = Vector3(uo.x, uo.y, 0.0)
+		mi.material_override = mat
 
 
 # ═══════════════════════════════════════════════════════════════════
@@ -964,6 +1418,12 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	if config_data.has("bg"):
 		screen_color = _parse_color(str(config_data["bg"]), screen_color)
 
+	# Stage-2 DNA axes — #housing:console, #surface:triptych
+	if config_data.has("housing"):
+		housing = _pick_axis(str(config_data["housing"]), HOUSINGS, housing)
+	if config_data.has("surface"):
+		surface = _pick_axis(str(config_data["surface"]), SURFACES, surface)
+
 	# Explicit mode from map JSON — skips all scanning
 	if config_data.has("mode"):
 		var mode_str: String = str(config_data["mode"]).to_lower().strip_edges()
@@ -971,7 +1431,16 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 	# Rebuild with new dimensions
 	_rebuild()
-	print("[ScienceScreen] Config applied — %sx%s, mode=%s" % [screen_width, screen_height, _get_active_mode()])
+	print("[ScienceScreen] Config applied — %sx%s, mode=%s, housing=%s, surface=%s" % [
+		screen_width, screen_height, _get_active_mode(), housing, surface])
+
+
+## Accept an axis value only if it names something we actually build. A typo in a
+## map token has to fall back to the legacy look — a half-recognised value would
+## strand a placement with no housing at all.
+func _pick_axis(raw: String, allowed: PackedStringArray, fallback: String) -> String:
+	var v: String = raw.to_lower().strip_edges()
+	return v if allowed.has(v) else fallback
 
 func _parse_color(s: String, fallback: Color) -> Color:
 	var parts := s.split(",")

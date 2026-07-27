@@ -1,10 +1,10 @@
 # @identity
 # essence: a destructible practice target for catalyst projectiles — 7 configurable shapes (cube, fireball, apple, banana, barrel, crystal, ring) that explode on hit and respawn after a delay
 # desire: to give the player something to hit — practice targets make the catalyst bracelet legible by providing immediate feedback: you fire, the target breaks, it returns, you try again
-# critical_parameter: shape (via apply_grid_config) — changes mesh, collision, and color palette at runtime; hits_to_destroy controls difficulty; moving/orbit enable patrol patterns
-# triggers: _ready() builds visual + collision + explosion particles; hit_by_projectile() drives flash→explode→respawn cycle; _rebuild_after_config() called deferred after shape change
-# emerges: the return — targets respawn with an elastic bounce animation that reads as resilience, not reset; the player learns that the system is cyclical, not final
-# needs: apply_grid_config [has]; projectile collision [has via collision_layer 2]; shape variants [has — 7 shapes]; moving patrol [has]; orbit mode [has]
+# critical_parameter: shape (via apply_grid_config) — changes mesh, collision, and color palette at runtime; rig is how the target is HELD in space (free/cradle/frame/gantry) and mark is the field it is JUDGED IN (none/bullseye/grid/nimbus); hits_to_destroy controls difficulty; moving/orbit enable patrol patterns
+# triggers: _ready() builds visual + fixture + collision + explosion particles; hit_by_projectile() drives flash→explode→respawn cycle; _rebuild_after_config() called deferred after a config change
+# emerges: the return — targets respawn with an elastic bounce animation that reads as resilience, not reset; the player learns that the system is cyclical, not final; with a fixture, the rig and the mark stay standing while the body is gone, so the empty holder is what you look at during the respawn
+# needs: apply_grid_config [has]; projectile collision [has via collision_layer 2]; shape variants [has — 7 shapes]; moving patrol [has]; orbit mode [has]; a frame of reference for the question [has — rig + mark]
 # relationships: placed in Chamber_* maps (one per sequence end); receives projectiles from becoming_catalyst; groups under "catalyst_target" for GameManager collision routing
 # truth: a target is not an enemy — it is a question; catalyst_target asks whether you can place a projectile in space, and answers with color, destruction, and return
 
@@ -12,7 +12,21 @@
 # Destructible practice target for catalyst projectiles.
 # Supports multiple shapes via grid config: cube, fireball, apple, banana, default.
 # Explodes on hit with particle burst, respawns after delay.
+#
+# FAMILY (stage-2 DNA). The body is only half a target. Placing a projectile in space
+# is a judgement, and a judgement needs a frame of reference — something that HOLDS the
+# object (so you read its height and its facing) and something the miss lands ON (so you
+# read how far off you were). Ninety-odd placements had neither: a 40 cm bauble hovering
+# in an empty cell, its own size the only clue to the scale of the question. Two axes
+# supply the reference frame:
+#   rig = free | cradle | frame | gantry   — the rig that holds it
+#   mark  = none | bullseye | grid | nimbus  — the ground it is judged in
+# Both default to "nothing", which is exactly today's build, so the existing maps are
+# untouched. Both are pure appearance: the fixture carries NO collision shape, so the
+# projectile flies straight through it and hit detection is bit-for-bit what it was.
 extends StaticBody3D
+
+const HangarKit = preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 
 # ── Shape Definitions ─────────────────────────────────────────────────
 const SHAPES := {
@@ -25,11 +39,51 @@ const SHAPES := {
 	"crystal": { "color": Color(0.3, 0.7, 0.9),   "emission": Color(0.4, 0.8, 1.0),   "scale": 0.4 },
 }
 
+# ── Family axes (stage-2 DNA) ─────────────────────────────────────────
+# "free"/"none" reproduce the legacy build exactly: _build_fixture() returns before
+# creating a single node, so an untouched map gets the same scene tree it got before.
+
+## How the target is HELD in space. free = nothing (legacy, a body alone in the air);
+## cradle = a wide low pad with three struts gripping it, an object PRESENTED;
+## frame = an upright rectangle standing around it, an object BRACKETED;
+## gantry = tall uprights and an overhead beam with a drop rod, an object SUSPENDED.
+## Note the one place this leaks: `moving`/`orbit` patrol by writing this node's position,
+## so a rig travels with the body instead of standing still. Counter-translating the
+## fixture was the alternative and it is worse — the body drifts clean out of its own
+## frame. Two of the hundred placements patrol and neither sets a rig; left alone.
+@export_enum("free", "cradle", "frame", "gantry") var rig: String = "free"
+
+## The field the shot is JUDGED IN — a mark on the floor the body stands at the centre of.
+## none = nothing (legacy); bullseye = painted concentric rings, the fairground register;
+## grid = a dark calibration pad with pale rules, the range-instrument register;
+## nimbus = concentric glowing gold rings, the votive register.
+## It lies flat rather than standing behind the body for a mundane reason worth knowing:
+## these targets are grounded to the cell surface, so their centre IS the floor line. A
+## vertical backboard would have to start at the body's feet and rise, leaving the body
+## stranded at the bottom edge of its own bullseye. Flat, the body sits at the centre of
+## the mark, which is what a target means. The straight-down capture angle gets it for free.
+@export_enum("none", "bullseye", "grid", "nimbus") var mark: String = "none"
+
+const RIGS := ["free", "cradle", "frame", "gantry"]
+const MARKS := ["none", "bullseye", "grid", "nimbus"]
+
+# Fixture palette. Deliberately cool and unlit against the body's warm emissive shapes —
+# the rig is furniture and must not compete with the thing you are aiming at. The one
+# exception is nimbus, which is meant to glow.
+const RIG_STEEL := Color(0.34, 0.35, 0.38)
+const RIG_DARK := Color(0.15, 0.155, 0.17)
+const MARK_PALE := Color(0.87, 0.86, 0.82)
+const MARK_RED := Color(0.78, 0.15, 0.11)
+const MARK_GOLD := Color(1.0, 0.80, 0.42)
+
 # ── State ─────────────────────────────────────────────────────────────
 var _shape_id: String = "default"
 var _visual: Node3D  # Container for all visuals
+var _fixture: Node3D  # Mount + mark. Sibling of _visual, NOT a child — see _build_fixture().
 var _col_shape: CollisionShape3D
 var _particles: GPUParticles3D
+var _rebuild_queued: bool = false
+var _rebuild_body_pending: bool = false
 
 # Movement
 var _moving: bool = false
@@ -57,6 +111,7 @@ func _ready() -> void:
 	collision_mask = 0
 	_start_pos = position
 	_build_visual()
+	_build_fixture()
 	_build_collision()
 	_build_explosion_particles()
 	add_to_group("catalyst_target")
@@ -437,6 +492,298 @@ func _build_default_target() -> void:
 
 
 # ═══════════════════════════════════════════════════════════════════════
+# FIXTURE — rig (how it is held) + mark (the field it is judged in)
+# ═══════════════════════════════════════════════════════════════════════
+#
+# Three rules govern everything below, and each one is a constraint, not a taste:
+#
+# 1. The fixture is a SIBLING of _visual, parented to self. That is what makes the
+#    respawn loop legible: _explode() tweens _visual to zero scale, so a child fixture
+#    would vanish with the body and the whole cell would go empty. As a sibling the rig
+#    and the mark stay put and you spend the four-second respawn looking at an empty
+#    holder — the cycle the identity calls "resilience, not reset". It also means the
+#    two loops that walk _visual.get_children() (the projectile-colour tint and the
+#    emission flash) skip the fixture for free: the body takes the hit colour, the
+#    furniture keeps its own, and the contrast is what makes the hit readable.
+#
+# 2. No fixture piece may sit below the body's own lowest point. The grid auto-grounds
+#    artifacts by their local AABB, and that grounding pass and this build are both
+#    deferred — the order between them is not something we control. Anchoring every
+#    fixture piece to the body's measured base keeps the local AABB floor exactly where
+#    it was, so grounding lands identically whichever runs first. The price is that
+#    nothing here can be a tall floor pedestal lifting the body to eye height; the rigs
+#    grow upward and outward from the body's own feet instead.
+#
+# 3. No CollisionShape3D, anywhere. The target is gameplay-critical — projectiles test
+#    against collision_layer 2 and the single body shape built in _build_collision().
+#    A rig that could block or absorb a shot would silently change every map it appears
+#    in. Everything below is mesh only; projectiles pass straight through it.
+
+## Mesh-only local AABB of the body. GPUParticles3D are skipped on purpose: the
+## fireball's fire emitter reports a huge visibility box and would inflate every rig
+## built around it by an order of magnitude.
+func _body_aabb() -> AABB:
+	var fallback: AABB = AABB(Vector3(-0.2, -0.2, -0.2), Vector3(0.4, 0.4, 0.4))
+	if not is_instance_valid(_visual):
+		return fallback
+	var out: AABB = AABB()
+	var found: bool = false
+	for child in _visual.get_children():
+		if not (child is MeshInstance3D):
+			continue
+		var mi: MeshInstance3D = child
+		if mi.mesh == null:
+			continue
+		var a: AABB = mi.transform * mi.mesh.get_aabb()
+		if found:
+			out = out.merge(a)
+		else:
+			out = a
+			found = true
+	return out if found else fallback
+
+
+func _build_fixture() -> void:
+	# The legacy build makes no fixture node at all — not an empty one. A visitor
+	# diffing the scene tree of an untouched map must find nothing added.
+	var m: String = rig if RIGS.has(rig) else "free"
+	var k: String = mark if MARKS.has(mark) else "none"
+	if m == "free" and k == "none":
+		return
+
+	_fixture = Node3D.new()
+	_fixture.name = "Fixture"
+	add_child(_fixture)
+
+	var body: AABB = _body_aabb()
+	var base_y: float = body.position.y          # the body's feet — every piece starts here
+	var span: float = maxf(maxf(body.size.x, body.size.z), 0.28)
+	var tall: float = maxf(body.size.y, 0.28)
+
+	# Mark first so the rig reads as standing ON it.
+	match k:
+		"bullseye": _mark_bullseye(base_y, span)
+		"grid": _mark_grid(base_y, span)
+		"nimbus": _mark_nimbus(base_y, span)
+	match m:
+		"cradle": _mount_cradle(base_y, span, tall)
+		"frame": _mount_frame(base_y, span, tall)
+		"gantry": _mount_gantry(base_y, span, tall)
+
+
+func _fx(mesh: Mesh, mat: StandardMaterial3D, pos: Vector3, rot: Vector3 = Vector3.ZERO) -> MeshInstance3D:
+	var mi := MeshInstance3D.new()
+	mi.mesh = mesh
+	mi.material_override = mat
+	mi.position = pos
+	mi.rotation = rot
+	_fixture.add_child(mi)
+	return mi
+
+
+## A cylinder spanning two points. Built by hand rather than with look_at() because the
+## fixture is assembled before the node is in a usable global transform.
+func _fx_strut(a: Vector3, b: Vector3, radius: float, mat: StandardMaterial3D) -> void:
+	var d: Vector3 = b - a
+	var seg_len: float = d.length()
+	if seg_len < 0.005:
+		return
+	var cyl := CylinderMesh.new()
+	cyl.top_radius = radius
+	cyl.bottom_radius = radius
+	cyl.height = seg_len
+	cyl.radial_segments = 6
+	var mi := MeshInstance3D.new()
+	mi.mesh = cyl
+	mi.material_override = mat
+	var up: Vector3 = d.normalized()
+	var ref: Vector3 = Vector3.RIGHT if absf(up.dot(Vector3.RIGHT)) < 0.9 else Vector3.FORWARD
+	var x_axis: Vector3 = ref.cross(up).normalized()
+	mi.transform = Transform3D(Basis(x_axis, up, x_axis.cross(up)), (a + b) * 0.5)
+	_fixture.add_child(mi)
+
+
+func _flat_box(size: Vector3, mat: StandardMaterial3D, x: float, base_y: float, z: float, yaw: float = 0.0) -> void:
+	# Bottom-anchored: the caller gives the floor line, not the centre, because rule 2
+	# above is about floors and doing that arithmetic at every call site invites a slip.
+	var mesh := BoxMesh.new()
+	mesh.size = size
+	_fx(mesh, mat, Vector3(x, base_y + size.y * 0.5, z), Vector3(0, yaw, 0))
+
+
+func _disc(radius: float, height: float, mat: StandardMaterial3D, base_y: float, segments: int = 24) -> void:
+	var cyl := CylinderMesh.new()
+	cyl.top_radius = radius
+	cyl.bottom_radius = radius
+	cyl.height = height
+	cyl.radial_segments = segments
+	_fx(cyl, mat, Vector3(0, base_y + height * 0.5, 0))
+
+
+# ── rig: cradle — the object PRESENTED ──────────────────────────────
+# A wide two-step pad at the body's feet with three struts leaning in to grip its waist.
+# The pad cannot go UNDER the body (rule 2), so it reaches outward instead: roughly twice
+# the body's own width of floor claimed, which is what makes a 40 cm bauble read as a
+# thing on display rather than a thing dropped.
+func _mount_cradle(base_y: float, span: float, tall: float) -> void:
+	var steel: StandardMaterial3D = HangarKit.painted_metal(RIG_STEEL, 0.2, 0.45, 0.5)
+	var dark: StandardMaterial3D = HangarKit.painted_metal(RIG_DARK, 0.15, 0.6, 0.4)
+	# Upper clamps everywhere in this section keep a fixture inside roughly a 2-cell
+	# footprint (cells are 1 m). The registry already declares range 2 for this artifact;
+	# a cube-shaped body scaled by pure ratio would have thrown a 2 m pad across four
+	# neighbours' cells and quietly broken their placement.
+	var r_out: float = clampf(span * 1.05, 0.38, 0.85)
+
+	_disc(r_out, 0.045, dark, base_y)
+	_disc(r_out * 0.74, 0.075, steel, base_y + 0.045)
+
+	var top_y: float = base_y + tall * 0.85
+	var r_top: float = span * 0.34
+	for i in 3:
+		var ang: float = TAU * float(i) / 3.0 + 0.4
+		var foot: Vector3 = Vector3(cos(ang) * r_out * 0.88, base_y + 0.06, sin(ang) * r_out * 0.88)
+		var grip: Vector3 = Vector3(cos(ang) * r_top, top_y, sin(ang) * r_top)
+		_fx_strut(foot, grip, 0.024, steel)
+
+
+# ── rig: frame — the object BRACKETED ───────────────────────────────
+# An upright rectangle standing around the body: two posts, a head beam, a foot rail,
+# and one red bar across the head. Body-height, so it reads as a doorway the target
+# happens to be standing in — the silhouette a cradle cannot make.
+func _mount_frame(base_y: float, span: float, tall: float) -> void:
+	var steel: StandardMaterial3D = HangarKit.painted_metal(RIG_STEEL, 0.2, 0.45, 0.5)
+	var dark: StandardMaterial3D = HangarKit.painted_metal(RIG_DARK, 0.15, 0.6, 0.4)
+	var red: StandardMaterial3D = HangarKit.painted_metal(MARK_RED, 0.1, 0.2, 0.55)
+	var hw: float = clampf(span * 1.1, 0.36, 0.9)
+	var h: float = clampf(tall * 3.2, 1.0, 2.0)
+	var t: float = 0.06
+
+	for side in [-1.0, 1.0]:
+		var sx: float = side
+		_flat_box(Vector3(t, h, t), steel, hw * sx, base_y, 0.0)
+		_flat_box(Vector3(0.22, 0.035, 0.22), dark, hw * sx, base_y, 0.0)
+	_flat_box(Vector3(hw * 2.0 + t, t, t), steel, 0.0, base_y + h - t, 0.0)
+	_flat_box(Vector3(hw * 2.0 - t, t * 0.7, t * 0.7), steel, 0.0, base_y + 0.02, 0.0)
+	# One warm bar so the frame is not a grey blank at a distance.
+	_flat_box(Vector3(hw * 1.7, 0.03, 0.014), red, 0.0, base_y + h - t * 0.55, t * 0.55)
+
+
+# ── rig: gantry — the object SUSPENDED ──────────────────────────────
+# Uprights well above head height, a spanning beam, knee braces, and a drop rod down to
+# the crown of the body. The tallest of the three by a wide margin, which is the point:
+# across a room you read gantry vs frame vs cradle from the silhouette alone.
+func _mount_gantry(base_y: float, span: float, tall: float) -> void:
+	var steel: StandardMaterial3D = HangarKit.painted_metal(RIG_STEEL, 0.25, 0.5, 0.48)
+	var dark: StandardMaterial3D = HangarKit.painted_metal(RIG_DARK, 0.15, 0.6, 0.4)
+	var hw: float = clampf(span * 1.3, 0.48, 1.0)
+	var h: float = clampf(tall * 5.0, 1.7, 2.5)
+	var t: float = 0.075
+
+	for side in [-1.0, 1.0]:
+		var sx: float = side
+		_flat_box(Vector3(t, h - t, t), steel, hw * sx, base_y, 0.0)
+		_flat_box(Vector3(0.26, 0.04, 0.26), dark, hw * sx, base_y, 0.0)
+		_fx_strut(
+			Vector3(hw * sx, base_y + h * 0.74, 0.0),
+			Vector3(hw * sx * 0.42, base_y + h - t, 0.0),
+			0.026, steel)
+	_flat_box(Vector3(hw * 2.0 + t, t, t), steel, 0.0, base_y + h - t, 0.0)
+
+	# Drop rod to the crown of the body, with a collar where it meets it.
+	var crown: float = base_y + tall
+	_fx_strut(Vector3(0, base_y + h - t, 0), Vector3(0, crown + 0.02, 0), 0.014, dark)
+	_disc(0.055, 0.03, dark, crown + 0.01, 10)
+
+
+# ── mark: bullseye — the fairground register ──────────────────────────
+# Painted concentric rings with a raised kerb. Stacked in Y by 4 mm a ring so the
+# coplanar discs cannot z-fight; from any angle that reads as flat paint.
+func _mark_bullseye(base_y: float, span: float) -> void:
+	var r: float = clampf(span * 1.9, 0.78, 1.05)
+	var pale: StandardMaterial3D = HangarKit.painted_metal(MARK_PALE, 0.08, 0.05, 0.72)
+	var red: StandardMaterial3D = HangarKit.painted_metal(MARK_RED, 0.08, 0.05, 0.7)
+	var dark: StandardMaterial3D = HangarKit.painted_metal(RIG_DARK, 0.1, 0.4, 0.5)
+
+	var radii: Array = [1.0, 0.78, 0.56, 0.34, 0.15]
+	for i in radii.size():
+		var mat: StandardMaterial3D = red if i % 2 == 1 else pale
+		if i == radii.size() - 1:
+			mat = dark
+		_disc(r * float(radii[i]), 0.012, mat, base_y + float(i) * 0.004, 32)
+
+	# Kerb — segmented rather than a torus so the ring still has height at a grazing
+	# camera angle, where a flat mark all but disappears. Yaw turns each segment's long
+	# axis tangential: a +Y rotation of θ sends local +X to (cos θ, -sin θ) in the XZ
+	# plane, so the tangent at azimuth a wants θ = -(a + π/2).
+	for i in 24:
+		var ang: float = TAU * float(i) / 24.0
+		_flat_box(Vector3(0.075, 0.055, 0.05), dark, cos(ang) * r, base_y, sin(ang) * r, -ang - PI * 0.5)
+
+
+# ── mark: grid — the range-instrument register ────────────────────────
+# A dark square calibration pad, pale rules, corner ticks, and a red centre box around
+# the body's feet. Opposite polarity to the bullseye on purpose: dark where that is
+# pale, orthogonal where that is radial, so the two never get confused in a still.
+func _mark_grid(base_y: float, span: float) -> void:
+	var half: float = clampf(span * 1.75, 0.72, 1.05)
+	var pad: StandardMaterial3D = HangarKit.painted_metal(RIG_DARK, 0.2, 0.3, 0.62)
+	var rule: StandardMaterial3D = HangarKit.painted_metal(MARK_PALE, 0.05, 0.05, 0.7)
+	var red: StandardMaterial3D = HangarKit.painted_metal(MARK_RED, 0.08, 0.05, 0.7)
+
+	_flat_box(Vector3(half * 2.0, 0.022, half * 2.0), pad, 0.0, base_y, 0.0)
+	var step: float = half * 2.0 / 6.0
+	for i in range(1, 6):
+		var o: float = -half + step * float(i)
+		_flat_box(Vector3(half * 2.0, 0.008, 0.014), rule, 0.0, base_y + 0.022, o)
+		_flat_box(Vector3(0.014, 0.008, half * 2.0), rule, o, base_y + 0.022, 0.0)
+	for side_x in [-1.0, 1.0]:
+		for side_z in [-1.0, 1.0]:
+			var sx: float = side_x
+			var sz: float = side_z
+			_flat_box(Vector3(0.16, 0.012, 0.028), rule, (half - 0.09) * sx, base_y + 0.022, (half - 0.04) * sz)
+			_flat_box(Vector3(0.028, 0.012, 0.16), rule, (half - 0.04) * sx, base_y + 0.022, (half - 0.09) * sz)
+	# Red centre box around the body's feet — the only warm thing on a cold pad, so the
+	# eye lands where the shot is supposed to.
+	var c: float = clampf(span * 0.62, 0.2, half - 0.12)
+	for side in [-1.0, 1.0]:
+		var s: float = side
+		_flat_box(Vector3(c * 2.0, 0.014, 0.03), red, 0.0, base_y + 0.022, c * s)
+		_flat_box(Vector3(0.03, 0.014, c * 2.0), red, c * s, base_y + 0.022, 0.0)
+
+
+# ── mark: nimbus — the votive register ────────────────────────────────
+# Two concentric glowing gold rings and eight radial pips. No plate at all: this one is
+# light rather than paint, which is why it survives a dark room where the other two go
+# muddy. Emissive on the floor also throws the body's silhouette, so it changes the
+# picture even where the mark itself is out of frame.
+func _mark_nimbus(base_y: float, span: float) -> void:
+	var r: float = clampf(span * 1.8, 0.74, 1.0)
+	var glow: StandardMaterial3D = HangarKit.emissive(MARK_GOLD, 2.6)
+	var glow_dim: StandardMaterial3D = HangarKit.emissive(MARK_GOLD.darkened(0.2), 1.5)
+
+	var outer := TorusMesh.new()
+	outer.inner_radius = r - 0.05
+	outer.outer_radius = r + 0.05
+	outer.rings = 40
+	outer.ring_segments = 8
+	_fx(outer, glow, Vector3(0, base_y + 0.05, 0))
+
+	var inner := TorusMesh.new()
+	inner.inner_radius = r * 0.55 - 0.03
+	inner.outer_radius = r * 0.55 + 0.03
+	inner.rings = 32
+	inner.ring_segments = 6
+	_fx(inner, glow_dim, Vector3(0, base_y + 0.03, 0))
+
+	# Radial pips. These want their long axis (local +Z) pointing outward, and +Y rotation
+	# sends local +Z to (sin θ, cos θ) in XZ — hence θ = π/2 - a, not the tangential yaw
+	# the kerb uses. Two different rotations for two different intents.
+	for i in 8:
+		var ang: float = TAU * float(i) / 8.0 + PI / 8.0
+		_flat_box(Vector3(0.05, 0.045, 0.13), glow_dim, cos(ang) * r * 0.78, base_y, sin(ang) * r * 0.78, PI * 0.5 - ang)
+
+
+# ═══════════════════════════════════════════════════════════════════════
 # COLLISION
 # ═══════════════════════════════════════════════════════════════════════
 
@@ -517,13 +864,26 @@ func _build_explosion_particles() -> void:
 # GRID CONFIG
 # ═══════════════════════════════════════════════════════════════════════
 
+## Token values arrive as whatever the grid parser made of them, and a token written
+## without a value (`#rig`) arrives as boolean true. Anything not in the allowed list
+## falls back to the legacy value rather than building a half-formed rig — a typo in a
+## map should look like today, not like a bug.
+func _axis(config_data: Dictionary, key: String, allowed: Array, current: String) -> String:
+	if not config_data.has(key):
+		return current
+	var want: String = str(config_data[key]).strip_edges().to_lower()
+	return want if allowed.has(want) else current
+
+
 func apply_grid_config(config_data: Dictionary) -> void:
 	# Shape must be set before _ready builds visuals, but grid config runs after.
 	# So if shape changes, rebuild.
+	var body_changed: bool = false
 	if config_data.has("shape"):
 		var new_shape := str(config_data["shape"])
 		if new_shape != _shape_id:
 			_shape_id = new_shape
+			body_changed = true
 			# Rebuild everything
 			if _visual:
 				_visual.queue_free()
@@ -536,6 +896,26 @@ func apply_grid_config(config_data: Dictionary) -> void:
 			if _particles:
 				_particles.queue_free()
 				_particles = null
+
+	# The fixture is rebuilt whenever either axis moves OR the body changed under it —
+	# every rig is dimensioned from the body's measured AABB, so a cube's frame is not
+	# an apple's frame and a stale one would hang in the wrong place.
+	var new_mount: String = _axis(config_data, "rig", RIGS, rig)
+	var new_mark: String = _axis(config_data, "mark", MARKS, mark)
+	var fixture_changed: bool = new_mount != rig or new_mark != mark
+	rig = new_mount
+	mark = new_mark
+
+	if body_changed or fixture_changed:
+		if is_instance_valid(_fixture):
+			_fixture.queue_free()
+		_fixture = null
+		# One deferred rebuild however many axes moved — two would double the geometry.
+		# The body flag accumulates rather than riding on the deferred call's argument, so
+		# a second config pass in the same frame cannot cancel a pending body rebuild.
+		_rebuild_body_pending = _rebuild_body_pending or body_changed
+		if not _rebuild_queued:
+			_rebuild_queued = true
 			call_deferred("_rebuild_after_config")
 
 	if config_data.has("hits"):
@@ -551,6 +931,10 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 
 func _rebuild_after_config() -> void:
-	_build_visual()
-	_build_collision()
-	_build_explosion_particles()
+	_rebuild_queued = false
+	if _rebuild_body_pending:
+		_rebuild_body_pending = false
+		_build_visual()
+		_build_collision()
+		_build_explosion_particles()
+	_build_fixture()

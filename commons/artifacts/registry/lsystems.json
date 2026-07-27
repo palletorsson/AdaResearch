@@ -705,6 +705,26 @@
    }
   },
   "dark_sphere": {
+   "dna": {
+    "promoted": "2026-07-27",
+    "stage": "2 - variation",
+    "axes": {
+     "presence": [
+      "hush",
+      "witness",
+      "beacon",
+      "eclipse"
+     ],
+     "body": [
+      "orb",
+      "swarm",
+      "caged",
+      "cairn"
+     ]
+    },
+    "default": "presence=witness + body=orb is the legacy lineage; every witness multiplier is 1.0.",
+    "note": "The agent DEMOTED pulse_speed rather than exposing it: the identity named a rate as critical_parameter, but its own justification was about how much room the sphere takes - the rate was a proxy for presence. presence spends part of its delta on radius, which self-cancels under an AABB-fitted camera; judge hush vs witness at a fixed camera."
+   },
    "category": "procedural",
    "complexity": "intermediate",
    "description": "A simple dark sphere used as an atmospheric and geometric reference. Its silhouette, rotation, and low-emission surface make nearby shifts in scale, position, and lighting easier to perceive. Because it changes very little itself, it stabilizes the viewer's sense of what other transformed objects are doing. It functions as a neutral anchor.",
