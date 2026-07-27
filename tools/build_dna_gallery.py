@@ -178,7 +178,13 @@ def main() -> int:
                 "index": 0,
                 "label": axis_txt or "default",
                 "subtitle": str(e.get("name", token)),
-                "notes": str(e.get("description", "") or e.get("name", token))[:240],
+                # The axis reading FIRST. GalleryView shows `notes` as the tile subtitle,
+                # and the artifact's description is identical across every variant of that
+                # artifact — so leading with it makes sixteen distinct renders caption
+                # themselves identically, which is the sheet-of-identical-tiles failure
+                # moved into the UI. What varies goes first; the description is context.
+                "notes": (f"{token} — {axis_txt}" if axis_txt else f"{token} — default")
+                         + f"  ·  {str(e.get('description', '') or '')[:150]}",
                 "image": f"/{slug}/{fid}.png",
                 "dna": f["params"],
             })
