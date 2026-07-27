@@ -13,13 +13,25 @@ class_name FireExtinguisher
 
 # ─────────────────────────────────────────────────────────────────────────────
 # STAGE-2 DNA PROMOTION (2026-07-27) — SHARED VOCABULARY WITH fire_hose_box.
+#
+# CONVERGENCE PASS (2026-07-27): THE TOKEN `station` IS RETIRED. This axis is now
+# `support`, and it is THE SAME EIGHT WORDS wherever it appears in the project —
+# here, on fire_hose_box, on info_board (was `carriage`), on catalyst_target (was
+# `rig`) and on science_screen (was `housing`). Four private vocabularies for one
+# question became one vocabulary. `station` had to go because it names the SITE,
+# the post, the place — everything has a location, so "this cylinder's station is
+# none" is incoherent. The question is what APPARATUS holds the thing up.
+#
 # 302 placements here, 439 there. These two are the same institution's safety
 # equipment; they are promoted together and they answer to THE SAME TWO TOKENS
 # with THE SAME VALUE NAMES. If you add a value to one file, add it to the other
 # in the same commit or the family forks. The long comment in fire_hose_box.gd is
 # the canonical statement of the axis; this is the short form.
 #
-#   station   HOW IT IS HELD        bracket · cabinet · stand
+#   support   WHAT APPARATUS        none · bracket · stand · cradle · frame ·
+#             HOLDS IT UP           gantry · cabinet · pylon
+#                                   (the shared eight; this cylinder BUILDS three
+#                                   of them — bracket, stand, cabinet)
 #   statute   WHAT THE BUILDING     issue · notice · joinery · lapse
 #             DID WITH THE LAW
 #
@@ -33,17 +45,50 @@ class_name FireExtinguisher
 # cabinetwork, one small engraved plate instead of the shout. `lapse` is the
 # promise left to rot — chalked paint, rust, an expired service tag.
 #
-# `station` is body: the steel bracket (legacy), a glazed wall cabinet, or a
-# free-standing weighted post — the site fire point, safety wheeled in.
+# `support` is body: the steel bracket (legacy), a free-standing weighted post —
+# the site fire point, safety wheeled in — or a glazed wall cabinet.
 #
-# station=bracket and statute=issue are the legacy lineage exactly: _build_station()
+# THE OTHER FIVE ARE ACCEPTED, NEVER SILENT. Under one shared vocabulary the old
+# behaviour — an unrecognised value falling through to the default — IS the defect:
+# `support:gantry` on an extinguisher would quietly become a bracket and the sweep
+# would publish two identical frames. So every canonical value this cylinder does
+# not build is resolved through DEGRADE before anything is built:
+#   none   -> bracket   OPEN CONFLICT, DECLARED RATHER THAN HIDDEN. This artifact
+#                       does have a real unheld state — the separate
+#                       `wall_bracket: bool` export, false = a free-standing
+#                       cylinder on the floor. Making `support:none` native would
+#                       mean the new axis silently overriding an older export, so
+#                       for this pass it degrades and the precedence question stays
+#                       open on its own terms.
+#   cradle -> stand     _support_stand() already grips: a retaining strap across
+#                       the cylinder's shoulder tied back to the post, over a
+#                       hazard-rimmed base plate. The nearest hold-from-below it
+#                       owns.
+#   frame  -> stand     The 1.55 m post plus strap is its only open floor
+#                       structure.
+#   gantry -> stand     Same post; it carries a double-sided sign above head
+#                       height, the only thing it builds over the object.
+#   pylon  -> cabinet   The glazed red wall cabinet converts the silhouette from a
+#                       cylinder into a door — the heaviest building-owned reading
+#                       available.
+# Only a value outside all eight takes the export default, and that case is a typo,
+# not a sibling.
+#
+# RESOLVE ONCE. Two consumers switch on this axis — _build_support() and
+# _ground_y() — and degrading at each site independently is a trap: `support:gantry`
+# would build a stand while _ground_y() returned the bracket floor, and
+# auto-grounding would bury the base plate. _resolve_support() runs at the end of
+# every config read and both consumers read the stored _support.
+#
+# support=bracket and statute=issue are the legacy lineage exactly: _build_support()
 # and _build_statute() return on the first line for those values, _lv()/_ink() are
 # identity functions unless the statute entry carries a tint, and NOTHING mutates
 # body_color / accent_color / label_color (a rebuild must not compound a fade, and
 # an explicit #body_color: override must still be the colour that gets faded). All
-# 302 existing placements — none of which sets a single config token today, and
-# including the ones this scene is instantiated INTO by shelf_wedge and the prop
-# ring — are untouched.
+# 302 existing placements — none of which sets a single config token today, none of
+# which carried the retired `station` token either (census over 2048 maps: zero),
+# and including the ones this scene is instantiated INTO by shelf_wedge and the
+# prop ring — are untouched.
 #
 # Deliberately NOT retinted: SIGN_RED. A sign is the law speaking, and the law is
 # not the building's decorator (exhibit_furniture makes the same carve-out for
@@ -88,11 +133,16 @@ class_name FireExtinguisher
 @export_range(0.0, 1.0, 0.01) var label_uv_y: float = 0.5
 
 @export_group("Family")
-## AXIS 1 — how the building HOLDS the equipment. Shared verbatim with
-## fire_hose_box: bracket (legacy default, the steel bracket against the wall) |
-## cabinet (a glazed red wall cabinet around the cylinder) | stand (a weighted
-## free-standing post with a sign, safety wheeled in rather than built in).
-@export var station: String = "bracket"
+## AXIS 1 — SUPPORT: what apparatus holds this object up. ONE vocabulary, shared
+## word-for-word with fire_hose_box and with the wider family (info_board,
+## catalyst_target, science_screen); the eight canonical values are in SUPPORTS.
+## This cylinder BUILDS three of them, and they are the three enumerated here:
+## bracket (legacy default, the steel bracket against the wall) | stand (a
+## weighted free-standing post with a sign, safety wheeled in rather than built
+## in) | cabinet (a glazed red wall cabinet around the cylinder). The other five
+## canonical values are ACCEPTED as tokens and resolved through DEGRADE — never
+## silently ignored.
+@export_enum("bracket", "stand", "cabinet") var support: String = "bracket"
 ## AXIS 2 — what the building did with the law that specifies this object's
 ## appearance. Shared verbatim with fire_hose_box: issue (legacy default, as
 ## delivered, nothing added) | notice (full submission — backing board, mandatory
@@ -125,6 +175,25 @@ const LABEL_FONT_SIZE: int = 40
 
 # ── Family axes ───────────────────────────────────────────────────────
 
+## THE SHARED EIGHT — the whole `support` vocabulary, in canonical order, held
+## identically by fire_hose_box.gd. This is the ALLOW-LIST: a token inside it
+## always builds something (see DEGRADE); a token outside it is a typo and takes
+## the export default.
+const SUPPORTS: Array = ["none", "bracket", "stand", "cradle", "frame", "gantry",
+		"cabinet", "pylon"]
+
+## Every canonical value this cylinder does not build natively, resolved to the
+## nearest one it does. The reasoning per row is in the convergence note at the top
+## of the file. Consulted ONCE, at config-read time, so _build_support() and
+## _ground_y() can never disagree about which structure is standing.
+const DEGRADE: Dictionary = {
+	"none": "bracket",
+	"cradle": "stand",
+	"frame": "stand",
+	"gantry": "stand",
+	"pylon": "cabinet",
+}
+
 ## The statute's own colours. NOT routed through `statute` — see the note above.
 ## Kept numerically identical to fire_hose_box.gd: the two must sign in one hand.
 const SIGN_RED: Color = Color(0.70, 0.09, 0.10)
@@ -155,6 +224,12 @@ const STAND_POST: float = 1.55     # sign post height — the thing you see over
 # ── Internal state ────────────────────────────────────────────────────
 
 var _built: bool = false
+
+## `support` after DEGRADE — the value this cylinder will actually build. EVERY
+## consumer reads this, never the export, so the axis is degraded exactly once per
+## build. Seeded with the export default so a build that somehow skips the config
+## read still lands on the legacy lineage.
+var _support: String = "bracket"
 
 # ── Lifecycle ─────────────────────────────────────────────────────────
 
@@ -192,10 +267,26 @@ func _read_metadata_overrides() -> void:
 		wall_bracket = wb in ["true", "1", "yes", "on"]
 	if has_meta("config_label_text"):
 		label_text = str(get_meta("config_label_text"))
-	if has_meta("config_station"):
-		station = str(get_meta("config_station"))
+	if has_meta("config_support"):
+		support = str(get_meta("config_support"))
 	if has_meta("config_statute"):
 		statute = str(get_meta("config_statute"))
+	# LAST, and only here: one resolution per config read, for every consumer.
+	_resolve_support()
+
+
+## Resolve the shared vocabulary down to something this cylinder can actually
+## build. A canonical value degrades to its nearest native (DEGRADE); a value
+## outside the canonical eight is a typo, not a sibling, and takes the export
+## default.
+func _resolve_support() -> void:
+	# Normalise BEFORE the allow-list test: "#support: stand" (with the space a
+	# human types after a colon) otherwise fails SUPPORTS.has and silently takes
+	# the default.
+	var v: String = support.strip_edges().to_lower()
+	if not SUPPORTS.has(v):
+		v = "bracket"                  # the export default — a typo is not a sibling
+	_support = str(DEGRADE.get(v, v))
 
 
 func _clear_built_children() -> void:
@@ -224,8 +315,8 @@ func _build_extinguisher() -> void:
 	else:
 		_build_label()
 	# Both return on their first line for the legacy values — see the promotion
-	# note at the top. station=bracket + statute=issue adds not one mesh.
-	_build_station()
+	# note at the top. support=bracket + statute=issue adds not one mesh.
+	_build_support()
 	_build_statute()
 
 
@@ -558,8 +649,9 @@ func _unit_top() -> float:
 ## Local Y of the floor this assembly stands on. For `bracket` that is 0.0 — the
 ## cylinder's own foot, which is already what auto-grounding puts on the floor,
 ## so nothing built at this height can shift the artifact.
+## Reads the RESOLVED value, like every other consumer — see _resolve_support().
 func _ground_y() -> float:
-	match station:
+	match _support:
 		"cabinet":
 			return -CAB_PLINTH
 		"stand":
@@ -568,14 +660,17 @@ func _ground_y() -> float:
 			return 0.0
 
 
-# ── Family axis 1: station — how the building holds it ────────────────
+# ── Family axis 1: support — what apparatus holds it up ───────────────
 
-func _build_station() -> void:
-	match station:
+## Dispatches on the RESOLVED value, so the `_:` arm can only ever be reached by
+## `bracket` itself. No canonical value silently no-ops here: the other five were
+## already mapped onto a native one by _resolve_support().
+func _build_support() -> void:
+	match _support:
 		"cabinet":
-			_station_cabinet()
+			_support_cabinet()
 		"stand":
-			_station_stand()
+			_support_stand()
 		_:
 			pass                       # "bracket" — the legacy lineage, nothing added
 
@@ -584,7 +679,7 @@ func _build_station() -> void:
 ## is what a corridor does to an object it wants seen but not carried off. The
 ## silhouette stops being a cylinder and becomes a door — the same conversion the
 ## hose box's `cabinet` performs, from the other side.
-func _station_cabinet() -> void:
+func _support_cabinet() -> void:
 	var shell: StandardMaterial3D = _surface(_lv(body_color), _lv_rough(0.5), _lv_metal(0.4))
 	var w: float = extinguisher_radius * 4.6
 	var h: float = _unit_top() + 0.145
@@ -627,7 +722,7 @@ func _station_cabinet() -> void:
 ## sign well above head height, a strap across the cylinder. The cylinder stays
 ## exactly where it was; what changes is that it is now standing in the room
 ## rather than attached to it.
-func _station_stand() -> void:
+func _support_stand() -> void:
 	var steel: StandardMaterial3D = _surface(Color(0.20, 0.21, 0.23), 0.5, 0.7)
 	var hazard: StandardMaterial3D = _surface(Color(0.82, 0.68, 0.08), 0.7, 0.1)
 	var g: float = _ground_y()

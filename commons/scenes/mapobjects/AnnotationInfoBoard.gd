@@ -8,8 +8,8 @@ class_name AnnotationInfoBoard
 # @identity
 # essence: the room reading its own paperwork aloud — a 1.2 x 1.6 m panel standing on the floor with nothing holding it up, filled at runtime from the map's own map_data.json and blurb.md: a serial number, a sequence position, the title, the blurb, a hashed barcode, and the player's XP and health tacked underneath.
 # desire: to make a space able to say what it is without an author having to write anything twice — the caption is the metadata, so the caption can never drift from the map.
-# critical_parameter: voice — whose institution is speaking, and therefore who is allowed to write on it (system | directory | noticeboard | flap | taped); carriage — how much building the institution puts behind that sentence (none | easel | case | pylon).
-# triggers: _ready dresses the board from voice/carriage, then defers to the GridSystem; map_loaded refills the text; apply_grid_config({voice, carriage}).
+# critical_parameter: voice — whose institution is speaking, and therefore who is allowed to write on it (system | directory | noticeboard | flap | tape); support — what apparatus holds the sheet up, on the vocabulary the whole family now shares (none | bracket | stand | cradle | frame | gantry | cabinet | pylon), of which this board builds none, stand, cabinet and pylon with its own geometry and degrades the other four.
+# triggers: _ready dresses the board from voice/support, then defers to the GridSystem; map_loaded refills the text; apply_grid_config({voice, support}).
 # emerges: the same sentence changes authority with its surface — pinned to cork it reads as provisional and amendable, milled into a lit monolith it reads as the building's official position, taped up crooked it reads as one person's stopgap.
 # needs: a GridSystem with a GridDataComponent to read map_info from; MapProgressionManager for the sequence index; GameManager for the XP and health line.
 # relationships: the scene behind the 'an' utility (415 placements) and the 'info_board' artifact (247 placements) — the same board twice; captioned successor is [[wall_placard]], which drops the XP/health chrome; sibling to [[exhibit_furniture]]'s 'infoboard' kind, which is the furniture without the text.
@@ -29,8 +29,8 @@ class_name AnnotationInfoBoard
 #
 # So the family gets the two axes the object already argued for:
 #
-#   voice     WHO MAY WRITE ON IT   system · directory · noticeboard · flap · taped
-#   carriage  HOW MUCH BUILDING     none · easel · case · pylon
+#   voice    WHO MAY WRITE ON IT   system · directory · noticeboard · flap · tape
+#   support  WHAT HOLDS IT UP      none · stand · cabinet · pylon  (of eight)
 #
 # `voice` repaints the board's own face (the StyleBoxFlat behind the labels and
 # every label colour) and adds the two or three pieces of face furniture that make
@@ -41,12 +41,35 @@ class_name AnnotationInfoBoard
 # near-white (directory) or 0.035 black with amber ink (flap): the largest read in
 # the family, and it lands on every pixel of the panel.
 #
-# `carriage` is mass. Nothing, then a leaning easel with a picture ledge, then a
-# glazed case with hinges and a lock, then a 1.92 x 2.20 m monolith with the panel
-# sunk into a reveal. Read as a ladder it is personal, institutional, civic — how
-# expensive it is to contradict what the board says.
+# `support` is mass. Nothing, then a stand — a leaning easel with a picture ledge
+# — then a glazed cabinet with hinges and a lock, then a 1.92 x 2.20 m monolith
+# with the panel sunk into a reveal. Read as a ladder it is personal,
+# institutional, civic — how expensive it is to contradict what the board says.
 #
-# voice=system and carriage=none are the legacy lineage. Both are hard-guarded to
+# ── CONVERGENCE PASS (2026-07-27) ────────────────────────────────────────────
+# This axis shipped as `carriage`. The same question shipped as `station` on
+# fire_hose_box and fire_extinguisher, `rig` on catalyst_target and `housing` on
+# science_screen: one question, four names, and inside one of them (`rig`) the
+# same word naming both a category and one of its members. All four are now the
+# single token `support` on one eight-value vocabulary:
+#
+#   none · bracket · stand · cradle · frame · gantry · cabinet · pylon
+#
+# THE VALUE RENAMES HERE: easel -> stand (an easel IS a stand — hyponym folded
+# into hypernym, no gesture lost) and case -> cabinet (converging with the fire
+# pieces' glazed box). `none` and `pylon` were already canonical. On the other
+# axis, voice's `taped` -> `tape`: a participle is not a noun, and every value in
+# this grammar is a lowercase snake_case noun. All three old spellings, plus the
+# token `carriage` itself, still resolve — see SUPPORT_ALIAS / VOICE_ALIAS.
+#
+# THE FOUR VALUES THIS BOARD DOES NOT BUILD are the actual subject of the pass.
+# Before it, `carriage:gantry` fell through `match carriage:`'s `_:` arm to
+# `pass`, built nothing, and said nothing about having done so — a shared
+# vocabulary makes that silence a bug rather than a curiosity, because the word
+# is now one an author legitimately learned somewhere else. The DEGRADE table
+# names the substitution out loud and is consulted BEFORE the build match.
+#
+# voice=system and support=none are the legacy lineage. Both are hard-guarded to
 # return before touching anything: no theme override is added, no node is created,
 # the Sprite3D's authored transform is never assigned. All 662 live instances
 # (247 artifact placements + 415 'an' utility placements) are byte-identical.
@@ -74,7 +97,7 @@ class_name AnnotationInfoBoard
 #      info_board.gd, not here. Any body on collision layer 2 entering the trigger
 #      raises "nonexistent function" at emit time.
 #   3. info_board.tscn:218 "Board" is a MeshInstance3D with no mesh — it draws
-#      nothing. Left alone; the new carriage geometry does not reuse it.
+#      nothing. Left alone; the new support geometry does not reuse it.
 #   4. @export animate_text (line ~21 below) is set true by the .tscn and read by
 #      nothing. set_animation_enabled() writes it and nothing reads that either.
 # ─────────────────────────────────────────────────────────────────────────────
@@ -101,15 +124,32 @@ class_name AnnotationInfoBoard
 ##   directory   near-white backlit field, aluminium header + light slot, dark ink
 ##   noticeboard cork-tan field, dark ink, four brass drawing pins
 ##   flap        black field, amber ink, header rail + two split-flap seams
-##   taped       paper-white field, black ink, four tape tabs, listing 2.5 degrees
+##   tape        paper-white field, black ink, four tape tabs, listing 2.5 degrees
+##               (spelled `taped` before 2026-07-27; the old spelling still works)
 @export var voice: String = "system"
 
-## AXIS 2 — how much building the institution puts behind the sentence.
-##   none   (legacy default) the panel stands on the floor, nothing holds it
-##   easel  the board leans back 11 degrees on splayed legs with a picture ledge
-##   case   a glazed bezel with hinges, a lock and a weather pediment
-##   pylon  a 1.92 x 2.20 m monolith with the panel sunk into a reveal
-@export var carriage: String = "none"
+## AXIS 2 — `support`: what apparatus holds this object up. ONE token and ONE
+## vocabulary across the family, replacing this board's `carriage`, the fire
+## pieces' `station`, catalyst_target's `rig` and science_screen's `housing`.
+## The eight canonical values, in ascending order of how much building they put
+## behind the object:
+##   none     no apparatus — the object meets the room on its own
+##   bracket  minimal hardware fixing it to a vertical surface
+##   stand    a slender floor member under it — pole, splayed legs, easel
+##   cradle   a low wide base at its feet, grips reaching up to touch its body
+##   frame    an open upright structure standing around it
+##   gantry   an open structure over it; the load comes from above
+##   cabinet  a body of cabinetwork takes the floor or wall and serves it
+##   pylon    a mass of building; the object is sunk into a slab with a reveal
+##
+## THIS BOARD BUILDS FOUR OF THE EIGHT with its own geometry:
+##   none     (legacy default) the panel stands on the floor, nothing holds it
+##   stand    the board leans back 11 degrees on splayed legs with a picture ledge
+##   cabinet  a glazed bezel with hinges, a lock and a weather pediment
+##   pylon    a 1.92 x 2.20 m monolith with the panel sunk into a reveal
+## The other four are neither refused nor silently dropped: the DEGRADE table
+## maps each to the nearest thing this artifact actually builds, and says so.
+@export var support: String = "none"
 
 # ── the two axes' data ───────────────────────────────────────────────────────
 
@@ -125,14 +165,14 @@ const PANEL_TOP := SPRITE_Y + PANEL_HH
 const DNA_NODE := "InfoBoardDNA"
 
 # Every surface either axis can reach, keyed by voice. `field` and the ink colours
-# dress the SubViewport UI; `body` / `trim` / `glass` dress the carriage. The
-# "system" entry exists only so a carriage built under the legacy voice has
-# somewhere to get its charcoal from — with carriage:none nothing reads it.
+# dress the SubViewport UI; `body` / `trim` / `glass` dress the support. The
+# "system" entry exists only so a support built under the legacy voice has
+# somewhere to get its charcoal from — with support:none nothing reads it.
 const VOICES := {
 	# The legacy lineage. These numbers are lifted from info_board.tscn's
 	# StyleBoxFlat_yc54e and the label defaults; they are never APPLIED (the
 	# guard in _dress_face returns first) — they are here as the record of what
-	# the board was, and as the palette for a carriage under the legacy voice.
+	# the board was, and as the palette for a support under the legacy voice.
 	"system": {
 		"field": Color(0.12, 0.12, 0.12), "border_w": 3, "border_c": Color(0.8, 0.0, 0.0),
 		"ink": Color(1, 1, 1), "dim": Color(0.72, 0.72, 0.74),
@@ -177,8 +217,10 @@ const VOICES := {
 		"face": "seams",
 	},
 	# A4, printed at somebody's desk, taped up crooked. The most amendable
-	# surface in the set and the only one whose author is a person.
-	"taped": {
+	# surface in the set and the only one whose author is a person. Spelled
+	# "taped" until the 2026-07-27 grammar pass; a value is a noun, not a
+	# participle, so the tape is the value and the old spelling is an alias.
+	"tape": {
 		"field": Color(0.95, 0.94, 0.90), "border_w": 0, "border_c": Color(0.80, 0.79, 0.76),
 		"ink": Color(0.06, 0.06, 0.07), "dim": Color(0.32, 0.32, 0.32),
 		"accent": Color(0.55, 0.10, 0.10), "sep": Color(0.62, 0.61, 0.58),
@@ -191,10 +233,65 @@ const VOICES := {
 
 # How far the sheet leans/lists per axis value. Both are 0.0 on the legacy path,
 # so the Sprite3D's authored transform is never written.
-const LEAN_DEG := {"easel": -11.0}
-const LIST_DEG := {"taped": 2.5}
+#
+# THE LEAN KEY IS READ FROM TWO PLACES — here via LEAN_DEG.get(support) in
+# _sheet_xform(), and again as a literal inside _support_stand() where the legs
+# have to be built in the leaned frame. Both moved from "easel" to "stand"
+# together. Split them and the stand keeps its splayed legs but loses its
+# 11-degree tip, which is the entire read.
+const LEAN_DEG := {"stand": -11.0}
+const LIST_DEG := {"tape": 2.5}
 
-var _dressed_as: String = ""               # "<voice>|<carriage>" actually built
+# ── the shared support vocabulary ────────────────────────────────────────────
+
+# The whole eight. A value in this list is a sibling — something a map author
+# learned on another artifact in the family and is entitled to type here. A value
+# NOT in this list is a typo, and only a typo falls back to the export default.
+const SUPPORTS: Array = ["none", "bracket", "stand", "cradle", "frame", "gantry",
+		"cabinet", "pylon"]
+
+# The four this board builds with its own geometry. Everything else routes here.
+const NATIVE: Array = ["none", "stand", "cabinet", "pylon"]
+
+# THE ANTI-SILENCE TABLE — the point of the convergence pass. Every canonical
+# value this artifact does not build names the nearest one it does, and is
+# resolved BEFORE the build match, so no shared word can land on a `_:` arm and
+# quietly produce nothing.
+#   bracket -> none    The board is placed free in a cell; it has no wall relation
+#                      anywhere in its build, so the least-apparatus state it owns
+#                      is its legacy one.
+#   cradle  -> stand   The easel's picture ledge and splayed feet are its only
+#                      hold-from-below.
+#   frame   -> stand   Cut on FORM, not on nearness. The stand's two uprights plus
+#                      top rail are OPEN where the cabinet is glazed, so the open
+#                      value maps to the open build even though the cabinet's
+#                      bezel is geometrically the closer object.
+#   gantry  -> pylon   The only value carrying real structure ABOVE the sheet: the
+#                      monolith stands 11.0 local against a panel top of 8.02 and
+#                      adds a cap course at 11.15. The stand's top rail sits BELOW
+#                      the panel head at 7.30, and the cabinet's pediment belongs
+#                      to an enclosure, not to an open span.
+const DEGRADE: Dictionary = {
+	"bracket": "none",
+	"cradle": "stand",
+	"frame": "stand",
+	"gantry": "pylon",
+}
+
+# Spellings that predate the convergence, kept so nothing valid yesterday breaks
+# today. `easel` and `case` were this board's own words; `carriage` was the token
+# (read as config_carriage in _read_dna_meta); `taped` was a voice.
+#
+# READ THROUGH A HELPER, NEVER AS `TABLE.get(support)`, ON PURPOSE. The value list
+# in the registry is DERIVED from this file by tools/apply_dna_block.py, which
+# harvests the keys of any constant indexed by the axis variable. Index these
+# tables that way and the dead spellings come back as declared values — the sweep
+# would then render `easel` and `stand` as two tiles of the same geometry and the
+# critic would report the axis inert. An alias must never become a variant.
+const SUPPORT_ALIAS := {"easel": "stand", "case": "cabinet"}
+const VOICE_ALIAS := {"taped": "tape"}
+
+var _dressed_as: String = ""               # "<voice>|<support>" actually built
 
 # Current map info
 var current_map_name: String = ""
@@ -722,7 +819,7 @@ func get_current_info() -> Dictionary:
 	}
 
 # ═════════════════════════════════════════════════════════════════════════════
-# DNA — voice (who may write on it) x carriage (how much building behind it)
+# DNA — voice (who may write on it) x support (what apparatus holds it up)
 # ═════════════════════════════════════════════════════════════════════════════
 
 func apply_grid_config(config_data: Dictionary) -> void:
@@ -733,18 +830,51 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 func _read_dna_meta() -> void:
 	if has_meta("config_voice"):
-		voice = str(get_meta("config_voice"))
-	if has_meta("config_carriage"):
-		carriage = str(get_meta("config_carriage"))
+		voice = _canon_voice(str(get_meta("config_voice")))
+	if has_meta("config_support"):
+		support = _resolve_support(str(get_meta("config_support")))
 
-# THE LEGACY GUARD. voice=system + carriage=none returns before touching a single
+# RESOLVE ONCE, HERE, AND STORE IT IN `support`.
+#
+# Two consumers switch on this axis: _sheet_xform(), which decides whether the
+# sheet leans, and _build_support(), which decides what geometry appears under it.
+# Resolve the degrade independently at each site — or at one and not the other —
+# and `support:frame` tips the board 11 degrees onto nothing. So the alias fold and
+# the degrade both happen at this single point, and every consumer downstream reads
+# the stored native value. The function is idempotent (a native value resolves to
+# itself), so calling it again on a later apply_grid_config is safe.
+func _resolve_support(v: String) -> String:
+	# Normalise FIRST. "#support: stand" — with the space a human types after a colon —
+	# otherwise misses the alias table and the allow-list and silently returns "none"
+	# across 662 live instances. The same silent no-op this pass exists to remove,
+	# relocated from the dispatcher into the parser.
+	var s: String = str(SUPPORT_ALIAS.get(v.strip_edges().to_lower(), v.strip_edges().to_lower()))
+	if not SUPPORTS.has(s):
+		return "none"                                # outside the eight: a typo
+	if DEGRADE.has(s):
+		s = str(DEGRADE[s])                          # canonical, but not built here
+	return s if NATIVE.has(s) else "none"
+
+# Same shape on the other axis, but only one entry: `taped` was a participle where
+# the grammar wants a noun.
+func _canon_voice(v: String) -> String:
+	var s: String = str(VOICE_ALIAS.get(v, v))
+	return s if VOICES.has(s) else "system"
+
+# THE LEGACY GUARD. voice=system + support=none returns before touching a single
 # node: no theme override, no child, no transform write. That is the path all 662
 # existing instances take.
 func _dress() -> void:
-	var want: String = "%s|%s" % [voice, carriage]
+	# Both axes normalised before anything reads them, so a value set in the
+	# inspector or written straight to the property (rather than routed through
+	# apply_grid_config) resolves the same way a map token does. Both calls are
+	# identity on the defaults, so the guard below still fires unchanged.
+	voice = _canon_voice(voice)
+	support = _resolve_support(support)
+	var want: String = "%s|%s" % [voice, support]
 	if want == _dressed_as:
 		return
-	if voice == "system" and carriage == "none":
+	if voice == "system" and support == "none":
 		_dressed_as = want
 		return
 	var old: Node = get_node_or_null(DNA_NODE)
@@ -753,8 +883,8 @@ func _dress() -> void:
 	var holder := Node3D.new()
 	holder.name = DNA_NODE
 	add_child(holder)
-	# The sheet's plane: the easel's lean composed with the taped sheet's list.
-	# Applied here rather than inside _dress_face so that carriage:easel leans the
+	# The sheet's plane: the stand's lean composed with the taped sheet's list.
+	# Applied here rather than inside _dress_face so that support:stand leans the
 	# board even under the legacy voice, which returns early from the face pass.
 	var xf: Transform3D = _sheet_xform()
 	if xf != Transform3D.IDENTITY:
@@ -766,7 +896,7 @@ func _dress() -> void:
 	face.transform = xf
 	holder.add_child(face)
 	_dress_face(face)
-	_build_carriage(holder)
+	_build_support(holder)
 	_dressed_as = want
 
 # ── the sheet's own plane ────────────────────────────────────────────────────
@@ -776,11 +906,12 @@ func _dress() -> void:
 func _about(pivot: Vector3, b: Basis) -> Transform3D:
 	return Transform3D(b, pivot - b * pivot)
 
-# lean (easel) composed with list (taped). Identity on every other combination,
-# and _dress_face/_build_carriage only assign the Sprite3D transform when this is
-# NOT identity — so the authored transform survives untouched by default.
+# lean (stand) composed with list (tape). Identity on every other combination, and
+# _dress() only assigns the Sprite3D transform when this is NOT identity — so the
+# authored transform survives untouched by default. `support` has already been
+# resolved to a native value by the time this runs.
 func _sheet_xform() -> Transform3D:
-	var lean: float = float(LEAN_DEG.get(carriage, 0.0))
+	var lean: float = float(LEAN_DEG.get(support, 0.0))
 	var list: float = float(LIST_DEG.get(voice, 0.0))
 	var t := Transform3D.IDENTITY
 	if lean != 0.0:
@@ -847,7 +978,7 @@ func _dress_face(face: Node3D) -> void:
 		(sep as ColorRect).color = _col("sep", Color(0.5, 0.5, 0.5))
 
 	# `face` already carries the sheet's plane (set in _dress), so the furniture
-	# stays coplanar when the easel leans or the taped sheet lists.
+	# stays coplanar when the stand leans or the taped sheet lists.
 	match str(_pal().get("face", "")):
 		"header":
 			_face_header(face)
@@ -923,30 +1054,41 @@ func _face_tape(face: Node3D) -> void:
 			face.add_child(mi)
 			i += 1
 
-# ── carriage: the body ───────────────────────────────────────────────────────
+# ── support: the body ────────────────────────────────────────────────────────
 
-func _build_carriage(holder: Node3D) -> void:
-	match carriage:
-		"easel":
-			_carriage_easel(holder)
-		"case":
-			_carriage_case(holder)
+# `support` reaches this match ALREADY RESOLVED to one of NATIVE — aliases
+# folded, degrades applied, typos collapsed to the default — so no canonical value
+# can fall through to the wildcard and quietly build nothing. The only value that
+# lands on `_:` is "none", where building nothing IS the value: it is the reference
+# state the other seven are measured against, not a variant that has to bite.
+func _build_support(holder: Node3D) -> void:
+	match support:
+		"stand":
+			_support_stand(holder)
+		"cabinet":
+			_support_cabinet(holder)
 		"pylon":
-			_carriage_pylon(holder)
+			_support_pylon(holder)
 		_:
 			pass                                  # "none" — the legacy lineage
 
-# EASEL. The board leans back 11 degrees (applied in _dress_face via the shared
-# sheet transform) onto two splayed legs and a rear strut, with a picture ledge
-# under the front edge. The lean is what carries the read: a 1.2 x 1.6 m bright
-# rectangle tipping 0.31 m back changes the silhouette everywhere.
-func _carriage_easel(holder: Node3D) -> void:
+# STAND. An easel: the board leans back 11 degrees (applied in _dress via the
+# shared sheet transform) onto two splayed legs and a rear strut, with a picture
+# ledge under the front edge. Slender floor members, open air under and around the
+# sheet, demountable — the board is visiting the room rather than built into it.
+# The lean is what carries the read: a 1.2 x 1.6 m bright rectangle tipping 0.31 m
+# back changes the silhouette everywhere.
+#
+# THE SECOND LEAN SITE. _sheet_xform() tips the sheet; this tips the legs to match.
+# The key is "stand" in both (it was "easel" in both before the convergence) and
+# they must move together or the board leans off its own frame.
+func _support_stand(holder: Node3D) -> void:
 	var wood: StandardMaterial3D = _vm("body")
 	var trim: StandardMaterial3D = _vm("trim")
 	var lean := Node3D.new()
 	lean.name = "Lean"
 	holder.add_child(lean)
-	var lean_deg: float = float(LEAN_DEG.get("easel", -11.0))
+	var lean_deg: float = float(LEAN_DEG.get("stand", -11.0))
 	lean.transform = _about(Vector3(0, PANEL_BOT, 0), Basis(Vector3.RIGHT, deg_to_rad(lean_deg)))
 	# Uprights running the panel plane, splayed out beyond the sheet. They stop
 	# 0.30 short at the bottom: the 11-degree lean swings their rear corner down,
@@ -967,10 +1109,12 @@ func _carriage_easel(holder: Node3D) -> void:
 	for sx in [-1.0, 1.0]:
 		_vbox(holder, Vector3(0.90, 0.26, 2.6), Vector3(sx * 3.05, 0.13, 0.20), trim)
 
-# CASE. A glazed bezel with two hinge barrels, a lock and a sloped pediment — the
-# parish/university board you may read but not open. The bezel alone puts 0.56 m2
-# of new solid outside the panel's silhouette.
-func _carriage_case(holder: Node3D) -> void:
+# CABINET. A glazed bezel with two hinge barrels, a lock and a sloped pediment —
+# the parish/university board you may read but not open. Joinery integrated with
+# the object: a door, a pane, a head rail, a sill, so the outline stops being the
+# board and becomes a box. The bezel alone puts 0.56 m2 of new solid outside the
+# panel's silhouette.
+func _support_cabinet(holder: Node3D) -> void:
 	var body: StandardMaterial3D = _vm("body")
 	var trim: StandardMaterial3D = _vm("trim")
 	var glass: StandardMaterial3D = _vm("glass")
@@ -1001,8 +1145,9 @@ func _carriage_case(holder: Node3D) -> void:
 # PYLON. 1.92 x 2.20 m of monolith with the panel sunk into a reveal, on a stepped
 # base with a capping course. Nearly 3x the object's projected area — the heaviest
 # thing the family can say, and the point at which contradicting the board costs
-# money.
-func _carriage_pylon(holder: Node3D) -> void:
+# money. Also where `gantry` lands: the cap course at 11.15 against a panel top of
+# 8.02 is the only real structure this artifact carries ABOVE the sheet.
+func _support_pylon(holder: Node3D) -> void:
 	var body: StandardMaterial3D = _vm("body")
 	var trim: StandardMaterial3D = _vm("trim")
 	_vbox(holder, Vector3(9.6, 11.0, 1.20), Vector3(0, 5.50, -0.66), body)       # slab

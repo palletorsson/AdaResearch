@@ -29,10 +29,15 @@ class_name DarkSphere
 ## is made of the things a still can hold: size, glow, opacity, the pool on the floor.
 ##
 ##   presence  how much of the room it claims    hush · witness · beacon · eclipse
-##   body      the form the darkness takes       orb · swarm · caged · cairn
+##   body      the form the darkness takes       orb · swarm · cage · cairn
 ##
 ## presence=witness + body=orb is the old behaviour, byte for byte, and it is the
 ## default — all 312 existing placements are untouched.
+##
+## GRAMMAR FIX (2026-07-27). `body=caged` was a participle, and in this grammar values
+## are nouns: `cage` names the apparatus, `caged` describes what happened to the sphere.
+## The old spelling is still accepted — see BODY_ALIASES — because a spelling that was
+## valid yesterday should not become an empty cell today. The default did not move.
 ##
 ## What it cost: eclipse and beacon are wider than one grid cell once their floor
 ## pool is counted (~1.5 cells). That is deliberate — a thing that claims the room
@@ -84,7 +89,7 @@ func spine_hints() -> Dictionary:
 @export var presence: String = "witness"
 
 ## AXIS 2 — the form the darkness takes. orb is the single legacy sphere; swarm
-## scatters the same mass into a ring of small ones; caged puts it in lab apparatus;
+## scatters the same mass into a ring of small ones; cage puts it in lab apparatus;
 ## cairn stacks it into a marker that meets the ground.
 @export var body: String = "orb"
 
@@ -98,6 +103,15 @@ const PRESENCE: Dictionary = {
 	"beacon":  {"radius": 1.15, "emit": 3.60, "alpha": 1.00, "tint": 1.60, "halo_a": 2.60, "halo_r": 1.45, "lamp": "glow"},
 	"eclipse": {"radius": 1.50, "emit": 0.00, "alpha": 1.00, "tint": 0.30, "halo_a": 2.20, "halo_r": 1.25, "lamp": "drink"},
 }
+
+## The forms this artifact builds. Nouns, lowercase, one word each.
+const BODIES: Array[String] = ["orb", "swarm", "cage", "cairn"]
+
+## Retired spellings, still accepted. Kept OUT of the match block on purpose: an alias
+## resolved by a second case would be declared as its own variant when the registry is
+## derived from this code, and a sweep would then render two identical frames and report
+## the axis inert. Fold it here, dispatch on the canonical value only.
+const BODY_ALIASES: Dictionary = {"caged": "cage"}
 
 var _sphere_mesh: Node3D
 var _halo_ring: MeshInstance3D
@@ -218,15 +232,28 @@ func _sphere_of(r: float) -> MeshInstance3D:
 	return mi
 
 
+## Fold a retired spelling onto the form it names, and anything unrecognised onto the
+## legacy orb. Takes the raw string rather than reading `body` so the fold can never be
+## mistaken for a dispatch table when the registry declaration is derived from this file.
+func _canonical_body(raw: String) -> String:
+	var b: String = str(BODY_ALIASES.get(raw, raw))
+	return b if BODIES.has(b) else "orb"
+
+
 func _create_sphere() -> void:
+	# RESOLVE ONCE, before anything reads it. Two consumers below look at `body` — the
+	# halo widening inside _resolve_presence() and the match that picks a builder — and
+	# folding the alias at only one of them is how `caged` would build the apparatus over
+	# an orb-sized pool of light, or the reverse.
+	body = _canonical_body(body)
 	_resolve_presence()
 	_sphere_material = _build_material()
 
 	match body:
 		"swarm":
 			_build_swarm()
-		"caged":
-			_build_caged()
+		"cage":
+			_build_cage()
 		"cairn":
 			_build_cairn()
 		_:
@@ -270,7 +297,7 @@ func _build_swarm() -> void:
 ## palette — deliberately NOT the sphere's own material, because the point of this
 ## lineage is that the apparatus and the thing it contains are different orders of
 ## object. The cage does not rotate with the sphere; only the sphere is alive.
-func _build_caged() -> void:
+func _build_cage() -> void:
 	var centre: float = float_height + _radius
 	_sphere_mesh = _sphere_of(_radius)
 	_sphere_mesh.name = "SphereDisplay"
@@ -440,8 +467,7 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		var want_p: String = str(config_data["presence"])
 		presence = want_p if PRESENCE.has(want_p) else "witness"
 	if config_data.has("body"):
-		var want_b: String = str(config_data["body"])
-		body = want_b if want_b in ["orb", "swarm", "caged", "cairn"] else "orb"
+		body = _canonical_body(str(config_data["body"]))
 
 	# Rebuild with new parameters
 	for child in get_children():

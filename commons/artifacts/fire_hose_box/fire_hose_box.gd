@@ -15,26 +15,68 @@ const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
 
 # ─────────────────────────────────────────────────────────────────────────────
 # STAGE-2 DNA PROMOTION (2026-07-27) — SHARED VOCABULARY WITH fire_extinguisher.
+#
+# CONVERGENCE PASS (2026-07-27): THE TOKEN `station` IS RETIRED. This axis is now
+# `support`, and it is THE SAME EIGHT WORDS wherever it appears in the project —
+# here, on fire_extinguisher, on info_board (was `carriage`), on catalyst_target
+# (was `rig`) and on science_screen (was `housing`). Four private vocabularies for
+# one question became one vocabulary. `station` had to go because it names the
+# SITE, the post, the place — everything has a location, so "this box's station is
+# none" is incoherent. The question is what APPARATUS holds the thing up.
+#
 # 439 placements here, 302 there, and between them exactly one look each. These
 # two are the same institution's safety equipment; they are promoted together and
 # they answer to THE SAME TWO TOKENS with THE SAME VALUE NAMES. If you add a value
 # to one file, add it to the other in the same commit or the family forks.
 #
-# The axis comes out of both identity blocks, which say the same thing twice:
+# `statute` comes out of both identity blocks, which say the same thing twice:
 # "VISIBLE and FINDABLE", "the window makes the promise auditable" here; "visible
 # from across the room", "you will see me before you need me" there. Both are
 # about how LEGIBLE the promise is made — and safety equipment is the one class of
 # object in a building whose appearance is written down in law rather than chosen.
-# So the question the axis asks is: what did this building DO with that law?
+# So the question that axis asks is: what did this building DO with that law?
 #
-#   station   HOW IT IS HELD        bracket · cabinet · stand
+#   support   WHAT APPARATUS        none · bracket · stand · cradle · frame ·
+#             HOLDS IT UP           gantry · cabinet · pylon
+#                                   (the shared eight; this box BUILDS three of
+#                                   them — bracket, stand, cabinet)
 #   statute   WHAT THE BUILDING     issue · notice · joinery · lapse
 #             DID WITH THE LAW
 #
-# `station` is body and mass: bolted flat to the wall (legacy), swallowed into a
-# full-height fire-point cabinet with a glazed niche below for the extinguisher
-# that ought to be beside it, or lifted onto a free-standing weighted stand — the
-# temporary site fire point, safety as something wheeled in rather than built in.
+# `support` is body and mass: bolted flat to the wall (bracket, legacy), lifted
+# onto a free-standing weighted stand — the temporary site fire point, safety as
+# something wheeled in rather than built in — or swallowed into a full-height
+# fire-point cabinet with a glazed niche below for the extinguisher that ought to
+# be beside it.
+#
+# THE OTHER FIVE ARE ACCEPTED, NEVER SILENT. Under one shared vocabulary the old
+# behaviour — an unrecognised value falling through to the default — IS the defect:
+# `support:gantry` on a hose box would quietly become a bracket and the sweep would
+# publish two identical frames. So every canonical value this box does not build is
+# resolved through DEGRADE before anything is built:
+#   none   -> bracket   The box IS its own fixing: the origin is the centre of the
+#                       back face and there is no unmounted state. A floor-set,
+#                       unfitted box is a real future native build; today `none`
+#                       and `bracket` are the same still here, and that is DECLARED
+#                       rather than silent.
+#   cradle -> stand     The weighted hazard-rimmed base plate in _support_stand()
+#                       is the only floor-borne base it owns.
+#   frame  -> stand     Its stand's two legs, cross rail and 0.26 m mast are its
+#                       only open floor structure; nothing else it builds is
+#                       see-through.
+#   gantry -> stand     Same structure; the mast carrying the double-sided sign
+#                       above the box is the nearest it comes to anything overhead.
+#   pylon  -> cabinet   _support_cabinet() is a full-height FIRE POINT surround
+#                       with crown, floor plate, header valance and glazed niche —
+#                       the heaviest, most building-owned thing it builds.
+# Only a value outside all eight takes the export default, and that case is a typo,
+# not a sibling.
+#
+# RESOLVE ONCE. Two consumers switch on this axis — _build_support() and
+# _ground_y() — and degrading at each site independently is a trap: `support:gantry`
+# would build a stand while _ground_y() returned the bracket floor, and
+# auto-grounding would bury the legs. _resolve_support() runs at the end of every
+# config read and both consumers read the stored _support.
 #
 # `statute` is register. `issue` is the object exactly as delivered: red, lettered,
 # and nothing added — the building met the code in the equipment's own body and
@@ -47,11 +89,12 @@ const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
 # gone by. The identity says "the answer to the worst day is already waiting";
 # `lapse` is the variant where it is not.
 #
-# station=bracket and statute=issue are the legacy lineage, exactly: _build_station()
+# support=bracket and statute=issue are the legacy lineage, exactly: _build_support()
 # and _build_statute() return on the first line for those values, and _lv()/_ink()
 # are pure identity functions unless the statute entry carries a tint. All 439
-# existing placements — none of which sets a single config token today — are
-# untouched.
+# existing placements — none of which sets a single config token today, and none of
+# which carried the retired `station` token either (census over 2048 maps: zero) —
+# are untouched.
 #
 # Deliberately NOT retinted by `statute`: the statutory sign red on the notice
 # board, the flag and the stand's topper. Following exhibit_furniture's carve-out —
@@ -95,11 +138,15 @@ const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
 @export var show_pictogram: bool = true
 
 @export_group("Family")
-## AXIS 1 — how the building HOLDS the equipment. Shared verbatim with
-## fire_extinguisher: bracket (legacy default, bolted flat to the wall) |
-## cabinet (a full-height fire point, glazed niche below) | stand (a weighted
-## free-standing post, safety wheeled in rather than built in).
-@export var station: String = "bracket"
+## AXIS 1 — SUPPORT: what apparatus holds this object up. ONE vocabulary, shared
+## word-for-word with fire_extinguisher and with the wider family (info_board,
+## catalyst_target, science_screen); the eight canonical values are in SUPPORTS.
+## This box BUILDS three of them, and they are the three enumerated here:
+## bracket (legacy default, bolted flat to the wall) | stand (a weighted
+## free-standing post, safety wheeled in rather than built in) | cabinet (a
+## full-height fire point, glazed niche below). The other five canonical values
+## are ACCEPTED as tokens and resolved through DEGRADE — never silently ignored.
+@export_enum("bracket", "stand", "cabinet") var support: String = "bracket"
 ## AXIS 2 — what the building did with the law that specifies this object's
 ## appearance. Shared verbatim with fire_extinguisher: issue (legacy default,
 ## as delivered, nothing added) | notice (full submission — backing board, sign,
@@ -128,6 +175,25 @@ const PICTO_PIXEL_SIZE: float = 0.0016
 const PICTO_FONT_SIZE: int = 24
 
 # ── Family axes ───────────────────────────────────────────────────────
+
+## THE SHARED EIGHT — the whole `support` vocabulary, in canonical order, held
+## identically by fire_extinguisher.gd. This is the ALLOW-LIST: a token inside it
+## always builds something (see DEGRADE); a token outside it is a typo and takes
+## the export default.
+const SUPPORTS: Array = ["none", "bracket", "stand", "cradle", "frame", "gantry",
+		"cabinet", "pylon"]
+
+## Every canonical value this box does not build natively, resolved to the nearest
+## one it does. The reasoning per row is in the convergence note at the top of the
+## file. Consulted ONCE, at config-read time, so _build_support() and _ground_y()
+## can never disagree about which structure is standing.
+const DEGRADE: Dictionary = {
+	"none": "bracket",
+	"cradle": "stand",
+	"frame": "stand",
+	"gantry": "stand",
+	"pylon": "cabinet",
+}
 
 ## The statute's own colours. NOT routed through `statute` — a sign is the law
 ## speaking, and the law is not the building's decorator (same carve-out
@@ -160,6 +226,12 @@ const CAB_NICHE: float = 0.72      # height of the empty lower niche — the ext
 # ── Internal state ────────────────────────────────────────────────────
 
 var _built: bool = false
+
+## `support` after DEGRADE — the value this box will actually build. EVERY
+## consumer reads this, never the export, so the axis is degraded exactly once per
+## build. Seeded with the export default so a build that somehow skips the config
+## read still lands on the legacy lineage.
+var _support: String = "bracket"
 
 # ── Lifecycle ─────────────────────────────────────────────────────────
 
@@ -204,10 +276,25 @@ func _read_metadata_overrides() -> void:
 	if has_meta("config_show_pictogram"):
 		var pv := str(get_meta("config_show_pictogram")).to_lower()
 		show_pictogram = pv in ["true", "1", "yes", "on"]
-	if has_meta("config_station"):
-		station = str(get_meta("config_station"))
+	if has_meta("config_support"):
+		support = str(get_meta("config_support"))
 	if has_meta("config_statute"):
 		statute = str(get_meta("config_statute"))
+	# LAST, and only here: one resolution per config read, for every consumer.
+	_resolve_support()
+
+
+## Resolve the shared vocabulary down to something this box can actually build.
+## A canonical value degrades to its nearest native (DEGRADE); a value outside the
+## canonical eight is a typo, not a sibling, and takes the export default.
+func _resolve_support() -> void:
+	# Normalise BEFORE the allow-list test: "#support: stand" (with the space a
+	# human types after a colon) otherwise fails SUPPORTS.has and silently takes
+	# the default.
+	var v: String = support.strip_edges().to_lower()
+	if not SUPPORTS.has(v):
+		v = "bracket"                  # the export default — a typo is not a sibling
+	_support = str(DEGRADE.get(v, v))
 
 
 func _clear_built_children() -> void:
@@ -225,8 +312,8 @@ func _build_box() -> void:
 	_build_label()
 	_build_side_pictogram()
 	# Both return on their first line for the legacy values — see the promotion
-	# note at the top. station=bracket + statute=issue adds not one mesh.
-	_build_station()
+	# note at the top. support=bracket + statute=issue adds not one mesh.
+	_build_support()
 	_build_statute()
 
 
@@ -633,8 +720,9 @@ func _slab(size: Vector3, pos: Vector3, mat: StandardMaterial3D, parent: Node3D 
 ## nothing built at this height can shift the artifact. `cabinet` and `stand`
 ## deliberately reach BELOW it: auto-grounding then lifts the whole assembly and
 ## the reel arrives at working height, which is the point of both.
+## Reads the RESOLVED value, like every other consumer — see _resolve_support().
 func _ground_y() -> float:
-	match station:
+	match _support:
 		"cabinet":
 			return -box_height * 0.5 - CAB_NICHE - 0.06
 		"stand":
@@ -643,14 +731,17 @@ func _ground_y() -> float:
 			return -box_height * 0.5
 
 
-# ── Family axis 1: station — how the building holds it ────────────────
+# ── Family axis 1: support — what apparatus holds it up ───────────────
 
-func _build_station() -> void:
-	match station:
+## Dispatches on the RESOLVED value, so the `_:` arm can only ever be reached by
+## `bracket` itself. No canonical value silently no-ops here: the other five were
+## already mapped onto a native one by _resolve_support().
+func _build_support() -> void:
+	match _support:
 		"cabinet":
-			_station_cabinet()
+			_support_cabinet()
 		"stand":
-			_station_stand()
+			_support_stand()
 		_:
 			pass                       # "bracket" — the legacy lineage, bolted flat, nothing added
 
@@ -659,7 +750,7 @@ func _build_station() -> void:
 ## and a glazed empty niche opens below it — the place where the extinguisher
 ## ought to be. The identity says a hose box with no extinguisher nearby is half
 ## a promise; this variant builds the other half as a hole.
-func _station_cabinet() -> void:
+func _support_cabinet() -> void:
 	var shell: StandardMaterial3D = _surface(_lv(box_color), _lv_rough(0.5), _lv_metal(0.42))
 	var w: float = box_width + CAB_MARGIN * 2.0
 	var d: float = box_depth + 0.045
@@ -700,7 +791,7 @@ func _station_cabinet() -> void:
 ## THE TEMPORARY POINT. Two steel legs off a hazard-rimmed base plate carry the
 ## reel at working height, a double-sided sign on a short mast above it. Safety
 ## wheeled in rather than built in — the site hut, the marquee, the works.
-func _station_stand() -> void:
+func _support_stand() -> void:
 	var steel: StandardMaterial3D = _surface(Color(0.20, 0.21, 0.23), 0.5, 0.7)
 	var hazard: StandardMaterial3D = _surface(Color(0.82, 0.68, 0.08), 0.7, 0.1)
 	var g: float = _ground_y()

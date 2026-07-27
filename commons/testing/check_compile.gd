@@ -47,11 +47,25 @@ func _initialize() -> void:
 			print("MISSING  %s" % p)
 			failed.append(p)
 			continue
-		# CACHE_MODE_IGNORE so a script already loaded by an autoload or a preload
-		# elsewhere in the project is re-parsed from disk rather than handed back from
-		# the resource cache — otherwise a broken edit can report OK.
-		var res: Resource = ResourceLoader.load(p, "GDScript", ResourceLoader.CACHE_MODE_IGNORE)
-		if res == null:
+		# COMPILE IT, do not merely LOAD it. ResourceLoader.load() on a syntactically
+		# broken GDScript still hands back a GDScript resource — it reports the parse
+		# error to the console and returns a non-null object — so a null check passes a
+		# file that cannot run. This version of the probe reported "ok" for a file whose
+		# comment was missing its leading '#', the sweep then rendered an empty scene
+		# sixteen times, and the DNA critic dutifully called two working axes INERT at
+		# 0.69%. The instrument was the fault, again.
+		#
+		# The signal that actually separates them is can_instantiate(). Measured on a
+		# known-broken file and a known-good one rather than assumed:
+		#     broken   load=obj  can_instantiate=false  reload=43
+		#     good     load=obj  can_instantiate=true   reload=0
+		# NOT `GDScript.new()` + source_code + reload(): a script built that way has no
+		# resource_path, so its own preload() calls cannot resolve and it reports a parse
+		# error for every file including the healthy ones. That second attempt failed both
+		# files and would have sent me hunting a bug in dark_sphere that did not exist.
+		# CACHE_MODE_IGNORE so a script already held by an autoload is re-read from disk.
+		var gd := ResourceLoader.load(p, "GDScript", ResourceLoader.CACHE_MODE_IGNORE) as GDScript
+		if gd == null or not gd.can_instantiate():
 			print("FAIL     %s" % p)
 			failed.append(p)
 		else:

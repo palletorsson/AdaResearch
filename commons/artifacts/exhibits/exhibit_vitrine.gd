@@ -7,10 +7,10 @@ const HangarKit = preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 const ExhibitFamily = preload("res://commons/artifacts/exhibits/exhibit_furniture.gd")
 
 # @identity
-# essence: an EMPTY vitrine — a case with nothing in it. The wall-side exhibit affordance: where small and precious things will live. Planted by the gallery-DNA generator as hosting capacity. Now a FAMILY: `enclosure` sets how much glass stands between the visitor and the empty slot (sealed box / bell jar / laid-down cradle / open niche with the glass withdrawn), and `guard` sets how loudly the building declares that slot precious (none / lit / framed / guarded).
+# essence: an EMPTY vitrine — a case with nothing in it. The wall-side exhibit affordance: where small and precious things will live. Planted by the gallery-DNA generator as hosting capacity. Now a FAMILY: `enclosure` sets how much glass stands between the visitor and the empty slot (sealed box / bell jar / laid-down cradle / open niche with the glass withdrawn), and `guard` sets how much apparatus the institution puts between a body and the thing — one ordered ladder shared with exhibit_furniture (none < label < fixture < frame < hood < cordon).
 # desire: to protect something later — and to be caught deciding how much protection the nothing deserves.
-# critical_parameter: enclosure (the degree of the glass) × guard (the volume of the claim). Both are readable across a room; both are pure appearance.
-# triggers: _ready builds the enclosure, then dresses it by guard; apply_grid_config({enclosure, guard}).
+# critical_parameter: enclosure (the degree of the glass) × guard (the rung of apparatus). Both are readable across a room; both are pure appearance.
+# triggers: _ready builds the enclosure, then dresses it by guard; apply_grid_config({enclosure, guard, label}).
 # emerges: a wall of vitrines set to different enclosures reads as a collection that already has a hierarchy of worth — before a single object exists. The visitor learns what to slow down for from the furniture, not the label.
 # needs: nothing; pure affordance.
 # relationships: sibling of [[exhibit_podium]]; the small-treasures slot of [[gallery_dna]]; the tall cousin is exhibit_furniture#kind:vitrine_tall — which is also where the family's cordon and brass now live, so a roped case and a roped plinth are the same barrier in the same metal.
@@ -30,12 +30,24 @@ const ExhibitFamily = preload("res://commons/artifacts/exhibits/exhibit_furnitur
 ##   open / niche — the protection withdrawn: an open niche and a brass rail, no glass
 @export var enclosure: String = "box"
 
-## How loudly the building declares the empty slot precious.
-##   none    — bare case: no light, no frame, no barrier  (DEFAULT)
-##   lit     — a visible fixture inside and a glowing deck: the slot is switched on
-##   framed  — black members on every edge, brass corner caps, a bronze plate
-##   guarded — framed, plus the family cordon: do not approach
+## How much apparatus the institution puts between a body and the thing. ONE
+## ordered ladder, shared with exhibit_furniture and monotone in apparatus — rungs
+## 1-2 declare without stopping you, rungs 3-5 put material between:
+##   none    — bare case: no word, no light, no frame, no barrier  (DEFAULT)
+##   label   — a floor-standing lectern beside the case, with a printed card
+##   fixture — a visible housing and a glowing deck: the slot is switched on
+##   frame   — black members on every edge, brass corner caps, a bronze plate
+##   hood    — degrades to frame: this body IS glass, so what "glass round it"
+##             still has to give here is the hardware, not a second pane
+##   cordon  — the family barrier: brass stanchions and a crimson rope, alone
+## Old spellings (lit, framed, guarded, rail, plain) all still parse — see
+## ExhibitFamily.GUARD_ALIASES, which is the family's single table.
 @export var guard: String = "none"
+
+## The line printed on the lectern's card at guard=label. Empty falls back to the
+## family's default text. Additive and off the default path — nothing reads it
+## unless a map both sets #guard:label and writes #label:.
+@export var label_text: String = ""
 
 # The legacy palette. Named, not inlined, because the whole additive promise rests
 # on these three values staying exactly what they were.
@@ -69,21 +81,16 @@ func apply_grid_config(config_data: Dictionary) -> void:
 func _read_meta_overrides() -> void:
 	if has_meta("config_enclosure"):
 		enclosure = str(get_meta("config_enclosure")).strip_edges().to_lower()
-	# accepts the new name; the old one is still honoured because the agent that wrote
-	# this artifact shipped `regard` and something may already reference it
+	# CONVERGENCE: the private GUARD_ALIASES table and _guard_name() that used to sit
+	# below are gone. Both artifacts read #guard: through the ONE family reader now,
+	# so all ten spellings work on either body and the two vocabularies cannot drift
+	# apart again. Two of them resolve differently than they did this morning:
+	# `rail` and `guarded` land on `cordon` (one hop further than the local table's
+	# rail -> guarded), and they no longer drag the frame along with the rope.
 	if has_meta("config_guard"):
-		guard = _guard_name(str(get_meta("config_guard")))
-
-## The vocabularies the six-agent pass left lying around this axis. `rail` is
-## exhibit_furniture's word for a rope on stanchions and it is now literally the
-## same object, so it resolves here rather than silently building nothing;
-## `plain` was this file's own docstring's word for the empty value, which the
-## code spells `none` like the rest of the family.
-const GUARD_ALIASES := {"rail": "guarded", "plain": "none"}
-
-func _guard_name(raw: String) -> String:
-	var v: String = raw.strip_edges().to_lower()
-	return str(GUARD_ALIASES.get(v, v))
+		guard = ExhibitFamily.guard_name(str(get_meta("config_guard")))
+	if has_meta("config_label"):
+		label_text = str(get_meta("config_label"))
 
 func _build() -> void:
 	match enclosure:
@@ -102,17 +109,44 @@ func _build() -> void:
 
 	# The dressing reads the enclosure's measurements rather than hardcoding four
 	# sets of numbers — otherwise every new enclosure would owe four new dressings.
+	#
+	# THE LADDER (see the @export docstring): none < label < fixture < frame < hood
+	# < cordon. Five are native; `hood` degrades DOWN one rung to `frame`, because
+	# this body already IS glass — box, bell and cradle all keep a transparent
+	# shell, and `niche` is defined as that shell withdrawn. A second glass shell
+	# over a glass case is the least legible thing this artifact can do and would
+	# measure near zero against frame anyway. What "glass round it" still has to
+	# give here is precisely the hood's rim cage — members on every edge, brass at
+	# the corners — minus the pane the case already owns. One rung, exact.
 	var m: Dictionary = _metrics()
+	var extent: float = maxf(float(m["half_w"]), float(m["half_d"]))
 	match guard:
-		"lit":
-			_dress_lit(m)
-		"framed":
+		"none":
+			pass                          # rung 0 — the legacy lineage, 162 rooms
+		"label":
+			# No new geometry: the lectern is the family's now, at the family's
+			# defaults, which are white_cube's — i.e. exactly the object
+			# exhibit_furniture has always drawn. This case has no house palette to
+			# feed it and needs none.
+			ExhibitFamily.lectern(self, extent, {"text": label_text,
+					"card_bg": Color(0.93, 0.91, 0.86), "card_fg": Color(0.12, 0.12, 0.12)})
+		"fixture":
+			# This file's own lamp, now family canon (nothing else in the family had
+			# one), called back from where it lives.
+			ExhibitFamily.fixture(self, m)
+		"frame":
 			_dress_framed(m)
-		"guarded":
-			_dress_framed(m)
-			_dress_guard(m)
+		"hood":
+			_dress_framed(m)              # degrade: the pane is already here — see above
+		"cordon":
+			# UNBUNDLED. `guarded` used to build the frame AND the rope; canonical
+			# cordon is the rope alone on every sibling. Declared cost: a map can no
+			# longer ask for frame and cordon in one token. Accepted — a rung that
+			# silently contains a lower rung on one sibling only is not one axis,
+			# which is the disease this pass exists to cure. Zero rooms affected.
+			ExhibitFamily.cordon(self, extent)
 		_:
-			pass
+			pass                          # an unrecognised word is the absence
 
 # Where the case's surfaces are, so `guard` can dress any enclosure:
 #   deck_y — the shelf the absent object would sit on
@@ -238,46 +272,22 @@ func _build_open() -> void:
 
 # ── Dressing (guard) ─────────────────────────────────────────────────────────
 
-# Switched on. Deliberately NOT a light-energy knob: info_board proved that a knob
-# a still cannot see is decoration. So the value ships hardware — a glowing deck
-# plate, a fixture housing with a lens, the stems holding it — and the OmniLight is
-# only the seasoning on top of geometry that would still read in a fullbright shot.
-func _dress_lit(m: Dictionary) -> void:
-	var deck_y: float = float(m["deck_y"])
-	var rim_y: float = float(m["rim_y"])
-	var hw: float = float(m["half_w"])
-	var hd: float = float(m["half_d"])
-	var is_round: bool = bool(m["round"])
-	var glow: StandardMaterial3D = HangarKit.emissive(Color(1.0, 0.96, 0.88), 1.4)
-	var lens: StandardMaterial3D = HangarKit.emissive(Color(1.0, 0.97, 0.90), 3.2)
-	var dark := _mat(FRAME_BLACK, 0.4)
-
-	if is_round:
-		_cyl(hw - 0.05, 0.02, Vector3(0, deck_y + 0.015, 0), glow)
-		_cyl(0.022, rim_y - deck_y - 0.14, Vector3(0, (deck_y + rim_y - 0.10) * 0.5, 0), dark)
-		_cyl(0.075, 0.05, Vector3(0, rim_y - 0.10, 0), lens)
-	else:
-		_box(Vector3(hw * 2.0 - 0.08, 0.02, hd * 2.0 - 0.08), Vector3(0, deck_y + 0.015, 0), glow)
-		var z_back: float = -hd + 0.07
-		_box(Vector3(hw * 2.0 - 0.12, 0.05, 0.06), Vector3(0, rim_y - 0.09, z_back), dark)
-		_box(Vector3(hw * 2.0 - 0.18, 0.02, 0.04), Vector3(0, rim_y - 0.12, z_back), lens)
-		var stem_h: float = maxf(rim_y - deck_y - 0.12, 0.06)
-		for sx_v in [-1.0, 1.0]:
-			var sx: float = float(sx_v)
-			_box(Vector3(0.022, stem_h, 0.022),
-					Vector3(sx * (hw - 0.05), deck_y + stem_h * 0.5, z_back), dark)
-
-	var lamp := OmniLight3D.new()
-	lamp.position = Vector3(0, deck_y + (rim_y - deck_y) * 0.55, 0)
-	lamp.omni_range = maxf(1.6, hw * 4.0)
-	lamp.light_energy = 2.4
-	lamp.light_color = Color(1.0, 0.95, 0.85)
-	add_child(lamp)
+# CONVERGENCE: `_dress_lit` used to live here — the glowing deck plate, the housing
+# with its emissive lens, the stems, the OmniLight. It is ExhibitFamily.fixture()
+# now, number for number, because the family's rule out of this pass is that a
+# builder becomes canon exactly when TWO members build it, and exhibit_furniture
+# had no lamp of its own to offer its `fixture` rung. Nothing moved but the file.
+# (The lens and the glow are built through the family's own emissive material
+# rather than HangarKit's, which is the same material with the same energies.)
 
 # Museum-grade. The frame is the institution's signature written in extrusion: black
 # members on every edge the glass has, brass at the corners, a bronze plate on the
 # front. It costs the legacy vitrine's frameless calm — which is the trade, since
 # frameless calm is exactly what "this is ordinary" looks like.
+#
+# Stays PRIVATE, unlike the lamp: only this member builds a frame (a plinth has no
+# glazing to edge, so exhibit_furniture answers `frame` with its hood), and a
+# builder only one member builds is not family canon.
 func _dress_framed(m: Dictionary) -> void:
 	var deck_y: float = float(m["deck_y"])
 	var rim_y: float = float(m["rim_y"])
@@ -318,19 +328,20 @@ func _dress_framed(m: Dictionary) -> void:
 			Vector3(0, deck_y * 0.55, hd + 0.06), HangarKit.painted_metal(BRONZE, 0.2, 0.8, 0.4))
 	plate.rotation_degrees = Vector3(-32, 0, 0)
 
-# The rope. The museum's oldest sentence, said in furniture: the case's footprint
-# roughly triples and the visitor's line is drawn a stride back. This is the value
-# that has to be legible from the doorway, so it is the one that spends floor area.
+# The rope — rung 5, and the top of the ladder — is ExhibitFamily.cordon(), called
+# straight from the match block above. The museum's oldest sentence, said in
+# furniture: the case's footprint roughly triples and the visitor's line is drawn a
+# stride back. It is the rung that spends floor area, which is why it is the one
+# legible from the doorway.
 #
 # CONVERGENCE: this was 40 lines of its own stanchions — 1.0 m posts at Ø0.10, a
-# sphere cap, three tilted BOXES per span for the sag, standing 0.55 m off the
-# case in a crimson one hundredth off the other two in the family. It is a call
-# into the shared cordon now. What changed: the ring came in 11 cm, the posts
-# lost 14 cm and gained the family's turned knob, the rope became round rods with
-# a deeper 0.14 sag, and the brass is the family's. Not a default path — guard
-# defaults to none and no map carries the token.
-func _dress_guard(m: Dictionary) -> void:
-	ExhibitFamily.cordon(self, maxf(float(m["half_w"]), float(m["half_d"])))
+# sphere cap, three tilted BOXES per span for the sag, standing 0.55 m off the case
+# in a crimson one hundredth off the other two in the family. What changed when it
+# became a call into the shared cordon: the ring came in 11 cm, the posts lost
+# 14 cm and gained the family's turned knob, the rope became round rods with a
+# deeper 0.14 sag, and the brass is the family's. What changed today: it arrives
+# WITHOUT the frame. Not a default path — guard defaults to none, and no map in the
+# corpus carries the token.
 
 # ── Primitives ────────────────────────────────────────────────────────────────
 

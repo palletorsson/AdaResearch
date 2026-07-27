@@ -6,7 +6,7 @@ const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
 # @identity
 # essence: the display-furniture FAMILY as one parametric artifact — kind decides the body: floating_wall (MoMA: a hanging wall hovering above the floor, a soft shadow in the gap — the cheap accent that makes a room expensive), plinth (s/m/l), hollow_plinth, platform, table_2m, vitrine_tall, cabinet, infoboard, sign_exit, sign_fire. All empty; all waiting.
 # desire: to give the gallery-DNA a full vocabulary of hosting — every footprint size, every display posture, plus the wayfinding that says someone cares for this building.
-# critical_parameter: kind — selects the body; w/h/size scale it; house — which institution the body belongs to (white_cube | wunderkammer | depot | forensic | didactic | derelict); guard — how far back that institution keeps you (none | label | rail | hood).
+# critical_parameter: kind — selects the body; w/h/size scale it; house — which institution the body belongs to (white_cube | wunderkammer | depot | forensic | didactic | derelict); guard — how much apparatus the institution puts between a body and the thing, one ordered ladder (none | label | fixture | frame | hood | cordon).
 # triggers: _ready builds by kind; apply_grid_config({kind, w, h, size, house, guard, label}).
 # emerges: a room furnished from one family reads coherent; the floating wall's shadow line is the museum's signature written in light; change house and the same collection becomes a different claim about knowledge.
 # needs: BakedText for signage, infoboard, tombstone labels and depot stencils.
@@ -71,6 +71,21 @@ const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
 #
 #   2. The cordon existed three times (see the CORDON block below).
 #
+#   3. `guard` was TWO disjoint vocabularies for one idea. This file shipped
+#      none · label · rail · hood ("how far back the institution keeps you",
+#      read from the body); exhibit_vitrine shipped none · lit · framed · guarded
+#      ("how loudly the building declares the slot precious", read from the
+#      wall). Those are the same axis from two positions, so the union is now ONE
+#      ORDERED LADDER, monotone in apparatus (see GUARD_ALIASES below):
+#
+#        none  <  label  <  fixture  <  frame  <  hood  <  cordon
+#
+#      The order is the load-bearing part. Without it the degrade table is a
+#      taste call; with it, a value an artifact cannot build resolves to the
+#      ADJACENT rung it can, and every degrade is arguable from the geometry.
+#      Both files now parse #guard: through guard_name(), so all ten spellings
+#      work on either artifact and the two lists cannot drift apart again.
+#
 # Nothing here is on a default path: guard defaults to none, house to white_cube,
 # and a scan of all 1693 map_data.json files finds ZERO placements carrying a
 # #house:, #guard:, #regard:, #enclosure: or #reserve: token. Every one of the
@@ -88,8 +103,14 @@ const BakedText := preload("res://commons/utils/baked_text_albedo.gd")
 ## white_cube (legacy default) | wunderkammer | depot | forensic | didactic | derelict.
 ## Also answers to #regard: — exhibit_podium's word for the same axis.
 @export var house: String = "white_cube"
-## AXIS 2 — how the institution mediates the distance to the object.
-## none (legacy default) | label (a tombstone lectern) | rail (posts and rope) | hood (glass).
+## AXIS 2 — how much apparatus the institution puts between a body and the thing.
+## One ordered ladder, monotone in apparatus. Rungs 1-2 declare without stopping
+## you (a word, then light); rungs 3-5 put material between (an edge, then glass,
+## then floor):
+##   none (legacy default) < label (a lectern) < fixture (a lamp) < frame (an edge)
+##   < hood (glass) < cordon (posts and rope)
+## Five are native here; `frame` degrades one rung to `hood` (see _build_guard).
+## `rail` is this file's old spelling of cordon and still parses — GUARD_ALIASES.
 @export var guard: String = "none"
 ## Text for the tombstone label and the depot stencil. Empty falls back to the
 ## mounted artifact's name, then to the kind — furniture that names itself.
@@ -285,6 +306,34 @@ static func house_name(raw: String) -> String:
 	var v: String = raw.strip_edges().to_lower()
 	return str(HOUSE_ALIASES.get(v, v))
 
+## The same convergence on the second axis. Every spelling either file shipped
+## still parses; none of them is canon any more, because four of the five broke
+## the family's own grammar (an absence is spelled `none`, a value is a lowercase
+## snake_case NOUN — `lit`, `framed` and `guarded` are participles, and `guarded`
+## restates its own token name, guard:guarded).
+##
+## `cordon` wins over `rail` even though rail is the senior spelling (1077 against
+## 162), because `rail` already names three other real objects inside this family:
+## the brass rail across exhibit_vitrine's niche, the four top rails of its frame,
+## the side rails of its cradle. The shared geometry, meanwhile, has been called
+## cordon in every place it exists — the CORDON constant, the static cordon(), the
+## podium's _cordon(). The family's code named this thing before its tokens did;
+## the token converges on the code, and no spelling dies.
+const GUARD_ALIASES := {
+	"rail": "cordon",      # this file's word for posts-and-rope — it already called cordon()
+	"guarded": "cordon",   # exhibit_vitrine's participle for the same object
+	"lit": "fixture",      # participle; the content is a housing, a lens and stems — a noun
+	"framed": "frame",     # participle
+	"plain": "none",       # exhibit_vitrine's docstring word for the empty value
+}
+
+## The family's one reader for a guard token, the twin of house_name(). Static so
+## exhibit_vitrine parses #guard: through this exact function rather than its own
+## private table — which is how two vocabularies stop being two.
+static func guard_name(raw: String) -> String:
+	var v: String = raw.strip_edges().to_lower()
+	return str(GUARD_ALIASES.get(v, v))
+
 # Where the house dressing (stencil / tag / band) can land: kinds with a solid,
 # flat, front-facing body. Legs, floors and hanging walls get nothing — a crate
 # stencil on a shadow gap would be worse than no stencil at all.
@@ -317,8 +366,13 @@ func _read_meta_overrides() -> void:
 	# wins when a map somehow carries both.
 	if has_meta("config_house"):
 		house = house_name(str(get_meta("config_house")))
+	# #guard: goes through the family reader, which also closes a quiet bug: this
+	# line used to take the raw string, so `#guard: rail` (with a space) or
+	# `#guard:HOOD` matched no case and silently built nothing on the family's
+	# most-placed artifact. Still off the default path — the branch is only entered
+	# when a map carries the token, and none does.
 	if has_meta("config_guard"):
-		guard = str(get_meta("config_guard"))
+		guard = guard_name(str(get_meta("config_guard")))
 	if has_meta("config_label"):
 		label_text = str(get_meta("config_label"))
 
@@ -642,7 +696,25 @@ func _house_dressing() -> void:
 		q.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 		add_child(q)
 
-# ── guard: naming, distance, glass ───────────────────────────────────────────
+# ── guard: the ladder of apparatus ───────────────────────────────────────────
+#
+#   none  <  label  <  fixture  <  frame  <  hood  <  cordon
+#
+# Five of the six are native here. `frame` degrades UP one rung to `hood`, and the
+# reason is in the bodies: a frame is hardware on the edges of a GLAZED volume, and
+# a plinth, a table or a platform has no glazing to edge. Its only edged volume is
+# the one the hood encloses — whose bottom rim, top rim and four corner mullions
+# ARE that hardware. A superset, not a stub.
+#
+# Deliberately NOT ported: exhibit_vitrine._dress_framed onto a bare bed. Four
+# uprights plus top rails over an empty plinth is exhibit_podium#reserve:armature —
+# a different axis on a third sibling — so rebuilding it here would open the next
+# collision instead of closing this one.
+#
+# The cost of the degrade, declared rather than discovered: on this artifact
+# `frame` and `hood` render the same object, so the critic will measure that one
+# pair at ~0%. The vitrine's pair is the mirror image (hood == frame there), which
+# is why across a room the same token never goes quiet on both siblings at once.
 
 # Kinds whose body is a wall or a sign — a ring of rope round them makes no
 # sense, so the guard flattens into a line in front / a glazed pane.
@@ -685,48 +757,60 @@ func _bed_height() -> float:
 func _build_guard() -> void:
 	var r: float = _bed_extent()
 	match guard:
+		"none":
+			pass                                  # rung 0 — the legacy lineage, 1077 rooms
 		"label":
-			_guard_label(r)
-		"rail":
-			_guard_rail(r)
+			# The lectern is family canon now (numbers unchanged, see lectern()), so
+			# the vitrine can ask for a word without being handed a lamp. Only the
+			# materials and the card's line are this artifact's own.
+			lectern(self, r, {
+					"body": _pm("body"), "trim": _pm("trim"),
+					"card_bg": _pcolor("card_bg", Color(0.93, 0.91, 0.86)),
+					"card_fg": _pcolor("card_fg", Color(0.12, 0.12, 0.12)),
+					"text": _display_text(), "wall": _is_wall_kind()})
+		"fixture":
+			_guard_fixture(r)
+		"frame":
+			_guard_hood(r)                        # degrade: no glazing to edge — see above
 		"hood":
 			_guard_hood(r)
+		"cordon":
+			_guard_cordon(r)
 		_:
-			pass                                  # "none" — the legacy lineage
+			pass                                  # an unrecognised word is the absence
 
-# NAMING. A reading lectern at the work's right shoulder with a printed card.
-# Deliberately built at body scale (1.05 m, a 0.34 m top) rather than as a small
-# swatch: a museum label is furniture, and a label you cannot see from the door
-# is not doing the institution's job of telling you this counts.
-func _guard_label(r: float) -> void:
-	var mat: StandardMaterial3D = _pm("body")
-	var trim: StandardMaterial3D = _pm("trim")
-	var x: float = r + 0.46
-	var z: float = 0.18 if _is_wall_kind() else r * 0.35
-	_box(Vector3(0.30, 0.025, 0.24), Vector3(x, 0.012, z), trim)      # foot
-	_box(Vector3(0.07, 1.02, 0.07), Vector3(x, 0.51, z), mat)         # stalk
-	var top := _box(Vector3(0.36, 0.26, 0.035), Vector3(x, 1.10, z + 0.05), trim)
-	top.rotation_degrees = Vector3(-34, 0, 0)
-	var card: MeshInstance3D = BakedText.make_panel_mesh(_display_text(),
-			_pcolor("card_bg", Color(0.93, 0.91, 0.86)),
-			_pcolor("card_fg", Color(0.12, 0.12, 0.12)),
-			Vector2(0.30, 0.20), 1400, false)
-	if card:
-		card.position = Vector3(x, 1.115, z + 0.078)
-		card.rotation_degrees = Vector3(-34, 0, 0)
-		card.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
-		add_child(card)
+# LIGHT. No new geometry: the lamp is exhibit_vitrine's, lifted into the family,
+# and this artifact only supplies the volume to light. deck_y and rim_y below are
+# the HOOD's own expressions, so `fixture` and `hood` declare exactly the same
+# volume — the slot switched on, then the slot glazed. A wall-hung work instead
+# gets the housing above the work with the wash falling below it, which is what a
+# picture light is.
+func _guard_fixture(r: float) -> void:
+	var m: Dictionary = {}
+	if _is_wall_kind():
+		m = {"deck_y": 0.02, "rim_y": _bed_height(),
+				"half_w": r, "half_d": 0.20, "round": false}
+	else:
+		var deck_y: float = maxf(_surface_y(), 0.02)
+		m = {"deck_y": deck_y,
+				"rim_y": deck_y + 0.05 + clampf(_bed_extent() * 2.1, 0.75, 1.9),
+				"half_w": r, "half_d": r, "round": false}
+	fixture(self, m, {"light": _pcolor("uplight", Color(1.0, 0.95, 0.85))})
 
-# DISTANCE. Posts and a sagging rope, set well outside the footprint so the ring
-# is legible as a ring. The geometry lives in cordon() below — this file, this
-# podium and this vitrine all draw the SAME barrier now — and the only thing the
-# rail still decides for itself is that its metal and its rope follow the house.
-func _guard_rail(r: float) -> void:
+# FLOOR. Posts and a sagging rope, set well outside the footprint so the ring is
+# legible as a ring. The geometry lives in cordon() below — this file, the podium
+# and the vitrine all draw the SAME barrier now — and the only thing this rung
+# still decides for itself is that its metal and its rope follow the house.
+func _guard_cordon(r: float) -> void:
 	cordon(self, r, {"post": _pm("metal"), "rope": _pm("rope"), "line_only": _is_wall_kind()})
 
 # GLASS. A hood over the bed, or a glazed pane in front of a wall. The rims are
 # solid so the guard still reads in a still — a pure transparent box would be an
 # inert axis, which is the failure mode this whole promotion is written against.
+#
+# Stays PRIVATE, unlike the lectern and the lamp below: only this member builds a
+# hood (the vitrine already owns a pane), and the family's rule out of this pass is
+# that a builder becomes canon exactly when TWO members build it.
 func _guard_hood(r: float) -> void:
 	var glass: StandardMaterial3D = _pm("glass")
 	var rim: StandardMaterial3D = _pm("trim")
@@ -752,6 +836,112 @@ func _guard_hood(r: float) -> void:
 		for sz in [-1.0, 1.0]:
 			_box(Vector3(0.035, hh, 0.035),
 					Vector3(sx * half, base_y + 0.05 + hh * 0.5, sz * half), rim)
+
+# ── the family's lectern and lamp ────────────────────────────────────────────
+#
+# THE RULE THIS PASS PRODUCED: a builder becomes family canon exactly when TWO
+# members build it; a builder only one member builds stays private. The cordon
+# qualified this morning. The lectern (rung `label`) and the lamp (rung `fixture`)
+# qualify now — each existed in exactly one file and was missing from the other,
+# which is why `label` used to degrade into a lamp on the vitrine and `fixture`
+# into a word here: an author asking for a caption and being handed a light.
+#
+# Neither lift invents geometry. Every number below is the one the original file
+# already drew, so no existing look moves — the objects just stopped being private
+# to the sibling that happened to draw them first.
+
+## The card's line when a caller has nothing to print. A tombstone with no text is
+## a blank rectangle, which reads as a bug rather than as an institution.
+const LECTERN_TEXT := "EXHIBIT"
+
+## RUNG 1 — a word beside it. A reading lectern at the work's right shoulder with a
+## printed card: the institution names the thing and thereby claims it, without
+## stopping your body. Built at body scale (a 1.02 m stalk, a 0.36 m top) rather
+## than as a small swatch, because a label you cannot read from the door is not
+## doing the institution's job. Lifted verbatim from _guard_label.
+## `extent` is the host's half-footprint. opts: {body, trim} materials,
+## {card_bg, card_fg} colours, {text} the card's line, {wall} true when the host's
+## body is a wall or a sign, which tucks the lectern in front instead of beside.
+static func lectern(host: Node3D, extent: float, opts: Dictionary = {}) -> void:
+	if host == null:
+		return
+	var mat: StandardMaterial3D = opts.get("body") as StandardMaterial3D
+	if mat == null:
+		mat = _family_mat(Color(0.85, 0.83, 0.78), 0.6, 0.0)     # white_cube body
+	var trim: StandardMaterial3D = opts.get("trim") as StandardMaterial3D
+	if trim == null:
+		trim = _family_mat(Color(0.22, 0.22, 0.24), 0.6, 0.0)    # white_cube trim
+	var x: float = extent + 0.46
+	var z: float = 0.18 if bool(opts.get("wall", false)) else extent * 0.35
+	_family_box(host, Vector3(0.30, 0.025, 0.24), Vector3(x, 0.012, z), trim)   # foot
+	_family_box(host, Vector3(0.07, 1.02, 0.07), Vector3(x, 0.51, z), mat)      # stalk
+	var top: MeshInstance3D = _family_box(host, Vector3(0.36, 0.26, 0.035),
+			Vector3(x, 1.10, z + 0.05), trim)
+	top.rotation_degrees = Vector3(-34, 0, 0)
+	var text: String = str(opts.get("text", ""))
+	if text == "":
+		text = LECTERN_TEXT
+	var card_bg: Color = opts.get("card_bg", Color(0.93, 0.91, 0.86))
+	var card_fg: Color = opts.get("card_fg", Color(0.12, 0.12, 0.12))
+	var card: MeshInstance3D = BakedText.make_panel_mesh(
+			text, card_bg, card_fg, Vector2(0.30, 0.20), 1400, false)
+	if card:
+		card.position = Vector3(x, 1.115, z + 0.078)
+		card.rotation_degrees = Vector3(-34, 0, 0)
+		card.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		host.add_child(card)
+
+## RUNG 2 — light on it: the slot switched on. Lifted from
+## exhibit_vitrine._dress_lit, whose numbers become family canon because nothing
+## else in the family had a lamp. Switched on as HARDWARE, not as a light-energy
+## number — info_board proved that a knob a still cannot see is decoration — so the
+## rung ships a glowing deck plate, a dark housing with an emissive lens, and the
+## stems holding it up. The OmniLight is seasoning on geometry that would still
+## read in a fullbright shot.
+## `m` is the host's metrics: deck_y (the surface the absent object would sit on),
+## rim_y (where the vertical structure stops), half_w / half_d (horizontal
+## half-extents), round (true when the body has no corners, e.g. a bell jar).
+## opts: {light} the lamp's colour, so a caller with a palette can follow it.
+static func fixture(host: Node3D, m: Dictionary, opts: Dictionary = {}) -> void:
+	if host == null:
+		return
+	var deck_y: float = float(m.get("deck_y", 0.90))
+	var rim_y: float = float(m.get("rim_y", 1.50))
+	var hw: float = float(m.get("half_w", 0.37))
+	var hd: float = float(m.get("half_d", 0.25))
+	var is_round: bool = bool(m.get("round", false))
+	# The emissive twin of _mat(), built here rather than pulled from HangarKit: the
+	# senior file gains no new preload, and the maintenance-bay look stays out.
+	var glow: StandardMaterial3D = _family_mat(Color(1.0, 0.96, 0.88), 1.0, 0.0, 1.4)
+	var lens: StandardMaterial3D = _family_mat(Color(1.0, 0.97, 0.90), 1.0, 0.0, 3.2)
+	var dark: StandardMaterial3D = _family_mat(Color(0.09, 0.09, 0.10), 0.4, 0.0)
+
+	if is_round:
+		_family_cyl(host, Vector3(0, deck_y + 0.015, 0), hw - 0.05, 0.02, glow)
+		_family_cyl(host, Vector3(0, (deck_y + rim_y - 0.10) * 0.5, 0),
+				0.022, rim_y - deck_y - 0.14, dark)
+		_family_cyl(host, Vector3(0, rim_y - 0.10, 0), 0.075, 0.05, lens)
+	else:
+		_family_box(host, Vector3(hw * 2.0 - 0.08, 0.02, hd * 2.0 - 0.08),
+				Vector3(0, deck_y + 0.015, 0), glow)
+		var z_back: float = -hd + 0.07
+		_family_box(host, Vector3(hw * 2.0 - 0.12, 0.05, 0.06),
+				Vector3(0, rim_y - 0.09, z_back), dark)
+		_family_box(host, Vector3(hw * 2.0 - 0.18, 0.02, 0.04),
+				Vector3(0, rim_y - 0.12, z_back), lens)
+		var stem_h: float = maxf(rim_y - deck_y - 0.12, 0.06)
+		for sx_v in [-1.0, 1.0]:
+			var sx: float = float(sx_v)
+			_family_box(host, Vector3(0.022, stem_h, 0.022),
+					Vector3(sx * (hw - 0.05), deck_y + stem_h * 0.5, z_back), dark)
+
+	var lamp := OmniLight3D.new()
+	lamp.position = Vector3(0, deck_y + (rim_y - deck_y) * 0.55, 0)
+	lamp.omni_range = maxf(1.6, hw * 4.0)
+	lamp.light_energy = 2.4
+	var lc: Color = opts.get("light", Color(1.0, 0.95, 0.85))
+	lamp.light_color = lc
+	host.add_child(lamp)
 
 # ── the family's cordon ──────────────────────────────────────────────────────
 #
@@ -837,11 +1027,16 @@ static func cordon(host: Node3D, extent: float, opts: Dictionary = {}) -> void:
 		_family_rod(host, a + Vector3(0, top_y, 0), hang, rr, rope)
 		_family_rod(host, hang, b + Vector3(0, top_y, 0), rr, rope)
 
-# Static twins of the instance primitives, so cordon() can be called by artifacts
-# that are not this class. Kept byte-identical to what _guard_rail used to do —
-# note that radial_segments is deliberately left at CylinderMesh's default, which
-# is what the 1077-placement lineage has always rendered.
-static func _family_mat(c: Color, rough: float, metal: float) -> StandardMaterial3D:
+# Static twins of the instance primitives, so cordon(), lectern() and fixture() can
+# be called by artifacts that are not this class. Kept byte-identical to what the
+# cordon used to do — note that radial_segments is deliberately left at
+# CylinderMesh's default, which is what the 1077-placement lineage has rendered.
+# `emit` is the branch _mat() always had and this twin lacked, added so fixture()
+# can build its glow and its lens here instead of reaching for HangarKit. Optional
+# and defaulted to 0.0, so brass_material() and rope_material() — and therefore the
+# cordon in all three files — produce byte-identical materials to before.
+static func _family_mat(c: Color, rough: float, metal: float,
+		emit: float = 0.0) -> StandardMaterial3D:
 	var m := StandardMaterial3D.new()
 	m.albedo_color = c
 	m.roughness = rough
@@ -849,7 +1044,22 @@ static func _family_mat(c: Color, rough: float, metal: float) -> StandardMateria
 		m.metallic = metal
 	if c.a < 1.0:
 		m.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	if emit > 0.0:
+		m.emission_enabled = true
+		m.emission = Color(c.r, c.g, c.b)
+		m.emission_energy_multiplier = emit
 	return m
+
+static func _family_box(host: Node3D, size: Vector3, pos: Vector3,
+		mat: Material) -> MeshInstance3D:
+	var mi := MeshInstance3D.new()
+	var bm := BoxMesh.new()
+	bm.size = size
+	mi.mesh = bm
+	mi.material_override = mat
+	mi.position = pos
+	host.add_child(mi)
+	return mi
 
 static func _family_cyl(host: Node3D, pos: Vector3, radius: float, height: float,
 		mat: Material) -> MeshInstance3D:

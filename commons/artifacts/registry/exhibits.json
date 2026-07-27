@@ -44,9 +44,11 @@
      ],
      "guard": [
       "none",
-      "lit",
-      "framed",
-      "guarded"
+      "label",
+      "fixture",
+      "frame",
+      "hood",
+      "cordon"
      ]
     },
     "default": "enclosure=box + guard=none rebuilds HEAD statement for statement; 162 placements unchanged.",
@@ -76,8 +78,10 @@
      "guard": [
       "none",
       "label",
-      "rail",
-      "hood"
+      "fixture",
+      "frame",
+      "hood",
+      "cordon"
      ]
     },
     "default": "house=white_cube + guard=none is the legacy lineage; 1077 placements unchanged.",

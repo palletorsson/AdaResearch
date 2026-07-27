@@ -16,7 +16,16 @@
 ##   highlight      - Highlight color as "r,g,b" (0–1 floats)
 ##   border         - Border color as "r,g,b"
 ##   bg             - Background color as "r,g,b"
-##   housing        - stand | wall | console | rig   (stage-2 DNA, default stand)
+##   support        - none | bracket | stand | cradle | frame | gantry | cabinet | pylon
+##                    (stage-2 DNA, default stand). The shared support vocabulary —
+##                    what apparatus holds this object up. Built natively here:
+##                    stand, frame, cabinet, pylon. The other four DEGRADE to the
+##                    nearest native rather than silently no-opping.
+##                    Retired VALUE spellings still accepted: console -> cabinet and
+##                    wall -> pylon. The retired TOKEN `housing` is not: a retired token
+##                    that still resolves is how `regard` came to select two different
+##                    axes in the exhibits family, so the shim was deleted rather than
+##                    kept. Corpus census for `housing`: zero.
 ##   surface        - plane | curve | triptych | tiles (stage-2 DNA, default plane)
 
 # @identity
@@ -36,8 +45,8 @@ class_name ScienceScreen
 ## framed dark board (baked, billboarded, lit accent edge). Drop-in for Label3D.
 const BakedText = preload("res://commons/utils/baked_text_albedo.gd")
 
-## Shared station-furniture parts. The housings are cut from the same kit as the
-## benches and cabinets they stand beside, so a console-bodied screen reads as
+## Shared station-furniture parts. The supports are cut from the same kit as the
+## benches and cabinets they stand beside, so a cabinet-bodied screen reads as
 ## belonging to the room rather than arriving from another project.
 const HangarKit = preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 
@@ -80,10 +89,11 @@ func spine_hints() -> Dictionary:
 # is not the territory ... the difference between the two is where understanding
 # lives." Both axes are that difference, made into geometry.
 #
-#   housing — what apparatus the flattening is INSTALLED in, which is a claim
-#     about who is speaking. A monitor someone wheeled in is provisional. A slab
-#     the building owns is architecture. A console is an instrument you operate.
-#     A rig admits out loud that this is staging. Same image, four institutions.
+#   support — what apparatus holds the flattening up, which is a claim about who
+#     is speaking. A monitor someone wheeled in is provisional. A slab the
+#     building owns is architecture. A cabinet is an instrument you stand at. An
+#     open frame around it says out loud that this is staging and could be struck
+#     tomorrow. Same image, four institutions.
 #
 #   surface — how flat the flattening actually IS. A perfect plane is the
 #     strongest possible claim to map-ness: no angle, no thickness, no body.
@@ -92,15 +102,86 @@ func spine_hints() -> Dictionary:
 #     position to read it from.
 #
 # What this costs: a folded or tiled face is harder to read straight on, and the
-# console housing gives up the wall-panel reading entirely. That is the trade —
+# cabinet support gives up the architectural reading entirely. That is the trade —
 # these are not four skins, they are four different arguments.
 #
 # Defaults (stand / plane) rebuild the pre-DNA screen node-for-node. The 215
 # existing placements must not be able to tell this was written.
-const HOUSINGS: PackedStringArray = ["stand", "wall", "console", "rig"]
+#
+# ── The shared support vocabulary ────────────────────────────────────
+# `support` is not this artifact's private axis. It is the one word every artifact
+# now uses for "what apparatus holds this object up", replacing four local names
+# that all asked the same question (`station` on the fire pieces, `carriage` on the
+# info board, `rig` on catalyst_target, `housing` here). Eight canonical values,
+# every one of them a lowercase noun and every one of them visible in a still:
+#
+#   none     no apparatus — the object meets the room on its own
+#   bracket  minimal hardware fixing it to a vertical surface; the wall takes it
+#   stand    a slender floor member — pole, legs, base plate; demountable
+#   cradle   a low wide base with grips reaching up; presented from below, not lifted
+#   frame    an open upright structure standing AROUND it; you see the room through it
+#   gantry   an open structure OVER it; the load comes from above
+#   cabinet  a body of cabinetwork takes the floor or wall and serves the object
+#   pylon    a mass of building; the object is sunk into a slab with a reveal
+#
+# ALL EIGHT ARE ACCEPTED HERE. This screen natively builds four of them; the other
+# four resolve through DEGRADE to the nearest thing it does build. That table is the
+# point of the convergence pass — under a shared vocabulary an unrecognised value
+# falling through to the default is a silent lie, because `support:gantry` on this
+# screen would quietly become a stand instead of the frame it most resembles.
+const SUPPORTS: PackedStringArray = [
+	"none", "bracket", "stand", "cradle", "frame", "gantry", "cabinet", "pylon"]
+
+## The four this artifact has real geometry for. Everything else lands on one of
+## these — declared, never silent.
+const SUPPORTS_NATIVE: PackedStringArray = ["stand", "frame", "cabinet", "pylon"]
+
+## Every canonical value with no builder here, mapped to its nearest native.
+##
+##   none    -> stand. No bare-panel build exists, and stripping the 0.06 m pole
+##             plus the 0.3 x 0.02 x 0.2 foot would very likely miss the 3% bite
+##             bar — so `none` stays a declared degrade rather than being promoted
+##             into a variant the critic would rightly call inert.
+##   bracket -> stand. Deliberately NOT pylon. `bracket` and `stand` share the
+##             provisional-hardware register; `pylon` makes an architectural claim
+##             ("the building is speaking") that a bracket explicitly refuses.
+##             Understating by a pole is a smaller lie than overstating by a
+##             floor-to-lintel slab, and degrading ACROSS a register boundary is
+##             worse than degrading within one.
+##   cradle  -> stand. The stand's wider foot is its only floor-borne base under
+##             the face.
+##   gantry  -> frame. The frame carries a top tie bar above the panel plus posts
+##             either side — the nearest overhead structure this screen owns.
+const DEGRADE: Dictionary = {
+	"none": "stand",
+	"bracket": "stand",
+	"cradle": "stand",
+	"gantry": "frame",
+}
+
+## Retired spellings, kept readable forever. The pre-convergence names were cut on
+## register and on room-element; the canonical ones are cut on FORM.
+##   console -> cabinet  (the 1960s console television is the type specimen — a
+##                        screen and a cabinet are one object)
+##   wall    -> pylon    (`wall` named WHERE rather than WHAT, and collided with
+##                        the map's own layers.walls)
+## `rig` is retired from the grammar ENTIRELY — neither token nor value, and not even an
+## alias, because an alias would keep it alive as a second spelling of `frame`. What it
+## used to name here (two posts, side collars, cross braces, a top tie bar) is a frame,
+## not a suspension. Its old meaning on catalyst_target is now the token `support`.
+const SUPPORT_ALIASES: Dictionary = {
+	"console": "cabinet",
+	"wall": "pylon",
+}
+
 const SURFACES: PackedStringArray = ["plane", "curve", "triptych", "tiles"]
 
-@export_enum("stand", "wall", "console", "rig") var housing: String = "stand"
+## DECLARED = what this artifact BUILDS NATIVELY, not the whole canonical vocabulary.
+## The full eight live in `const SUPPORTS` and _pick_support still accepts every one of
+## them; they degrade to a native. Declaring all eight here would advertise four variants
+## that render pixel-identical to another tile, which is the inert-axis failure the
+## declaration checker exists to catch.
+@export_enum("stand", "frame", "cabinet", "pylon") var support: String = "stand"
 @export_enum("plane", "curve", "triptych", "tiles") var surface: String = "plane"
 
 ## Curve: metres the outer edges reach toward the viewer. Big on purpose — at
@@ -122,9 +203,11 @@ const TILE_ROWS: int = 3
 const TILE_GAP: float = 0.045
 const TILE_RELIEF: float = 0.026
 
-## Console: how far the cabinet lifts the face, and how far the face then leans
-## back off its own bottom edge. Kept modest — screen_height is author-set up to
-## 3.0 m and a taller lift would push the assembly through low ceilings.
+## Cabinet: how far the cabinetwork lifts the face, and how far the face then
+## leans back off its own bottom edge. Kept modest — screen_height is author-set up
+## to 3.0 m and a taller lift would push the assembly through low ceilings.
+## The names keep CONSOLE_ because the console television is the type specimen for
+## `cabinet`, and renaming a private constant buys nothing a reader needs.
 const CONSOLE_LIFT: float = 0.55
 const CONSOLE_LEAN_DEG: float = 11.0
 
@@ -133,7 +216,15 @@ var _screen_mesh: MeshInstance3D
 var _border_mesh: MeshInstance3D
 var _stand_mesh: MeshInstance3D
 
-## Everything belonging to the display FACE hangs off one root, so a housing can
+## The support value RESOLVED THROUGH DEGRADE — i.e. one of SUPPORTS_NATIVE. Three
+## consumers read it (the face lift, the face lean, the build match) and they must
+## all read the SAME resolution: if each degraded on its own, or one of them missed
+## the table, `support:gantry` could lean like a cabinet while building a frame.
+## Resolve once, store, read the store. Initialised to the export default so the
+## legacy value is already correct before anything calls _resolve_support().
+var _support_native: String = "stand"
+
+## Everything belonging to the display FACE hangs off one root, so a support can
 ## lift or lean the whole display without a single panel coordinate knowing it.
 var _face_root: Node3D
 
@@ -556,14 +647,19 @@ func _build_screen() -> void:
 	_screen_mesh = null
 	_border_mesh = null
 
-	# The face gets its own root so a housing can lift or lean the entire display
+	# Resolve the shared vocabulary to something this artifact actually builds, ONCE,
+	# before any consumer looks. Cheap and idempotent, so calling it from both here
+	# and apply_grid_config costs nothing and covers the .tscn-authored path too.
+	_resolve_support()
+
+	# The face gets its own root so a support can lift or lean the entire display
 	# without touching a panel coordinate. `stand` leaves it at identity, which is
 	# why the legacy build comes out unchanged despite the extra node.
 	_face_root = Node3D.new()
 	_face_root.name = "Face"
-	var lift: float = _housing_lift()
+	var lift: float = _support_lift()
 	_face_root.position = Vector3(0, lift, 0)
-	if housing == "console":
+	if _support_native == "cabinet":
 		# Rotation pivots on the root's own origin, which after the lift sits at
 		# the screen's bottom edge — so the face leans back OFF the cabinet lip
 		# instead of swinging through it.
@@ -571,14 +667,34 @@ func _build_screen() -> void:
 	add_child(_face_root)
 
 	_build_face(screen_y)
-	_build_housing(screen_y, lift)
+	_build_support(screen_y, lift)
 
 
-## Metres the housing raises the display face. Only the console lifts: the wall
-## slab and the rig reach the floor on their own, and raising their base would
+## Collapse the eight-value shared vocabulary onto the four this artifact builds.
+## A value already native maps to itself (it is absent from DEGRADE), so the
+## default `stand` comes out of here as `stand` and the legacy path is untouched.
+## Anything outside all eight never reaches here — _pick_support rejects it to the
+## current value first, because that case is a typo and not a sibling's gesture.
+func _resolve_support() -> void:
+	# Fold the alias HERE, not only in _pick_support, so every route agrees. Its two
+	# siblings fold in the resolver; this file folded only on the map-token path, so a
+	# value assigned directly to the property resolved differently from the same value
+	# written as a map token — an asymmetry in a pass whose point is that these five
+	# files behave identically.
+	var v: String = str(SUPPORT_ALIASES.get(support.strip_edges().to_lower(), support))
+	v = str(DEGRADE.get(v, v))
+	# Enforce the invariant the three consumers rely on rather than assume it: after
+	# this line _support_native is ALWAYS one of SUPPORTS_NATIVE. If a future value
+	# is added to SUPPORTS and forgotten in DEGRADE, it lands on the legacy stand
+	# here instead of falling through _build_support's wildcard unnoticed.
+	_support_native = v if SUPPORTS_NATIVE.has(v) else "stand"
+
+
+## Metres the support raises the display face. Only the cabinet lifts: the pylon
+## slab and the frame reach the floor on their own, and raising their base would
 ## fight the grid's base→floor auto-grounding rather than read as height.
-func _housing_lift() -> float:
-	return CONSOLE_LIFT if housing == "console" else 0.0
+func _support_lift() -> float:
+	return CONSOLE_LIFT if _support_native == "cabinet" else 0.0
 
 
 # ── The face: bevel, border, image, glow, marks ───────────────────────
@@ -879,23 +995,32 @@ func _face_z_at(x: float) -> float:
 	return 0.0
 
 
-# ── The housing: what the flattening is installed in ─────────────────
+# ── The support: what apparatus holds the flattening up ──────────────
 
-func _build_housing(screen_y: float, lift: float) -> void:
-	match housing:
-		"wall":
-			_build_housing_wall(screen_y)
-		"console":
-			_build_housing_console(lift)
-		"rig":
-			_build_housing_rig(screen_y)
+## Dispatch on the RESOLVED value, never on the authored one. Every arm names a
+## value this artifact really builds, and DEGRADE has already folded the other four
+## canonical values onto one of them — so no member of the shared vocabulary can
+## reach the wildcard. That wildcard is the pre-convergence legacy fallback and is
+## now unreachable in practice; it is kept, and kept calling the stand builder
+## rather than `pass`, so that a future ninth value fails visible rather than
+## invisible.
+func _build_support(screen_y: float, lift: float) -> void:
+	match _support_native:
+		"pylon":
+			_build_support_pylon(screen_y)
+		"cabinet":
+			_build_support_cabinet(lift)
+		"frame":
+			_build_support_frame(screen_y)
+		"stand":
+			_build_support_stand(screen_y)
 		_:
-			_build_housing_stand(screen_y)
+			_build_support_stand(screen_y)
 
 
-## Legacy housing: a thin pole and a small foot behind the panel. Provisional —
+## Legacy support: a thin pole and a small foot behind the panel. Provisional —
 ## something wheeled into the room for the duration of a lesson.
-func _build_housing_stand(screen_y: float) -> void:
+func _build_support_stand(screen_y: float) -> void:
 	# ── Stand pole ──
 	_stand_mesh = MeshInstance3D.new()
 	var stand_box: BoxMesh = BoxMesh.new()
@@ -926,9 +1051,10 @@ func _build_housing_stand(screen_y: float) -> void:
 
 
 ## No pole, no foot: the display is not visiting the room, the room admits it.
-## A floor-to-lintel slab with the screen set into a shadow reveal. The image is
-## unchanged and the claim is completely different — the building is speaking.
-func _build_housing_wall(screen_y: float) -> void:
+## A mass of building — a floor-to-lintel slab with the screen sunk into a shadow
+## reveal, a base course and a capping course. The image is unchanged and the claim
+## is completely different: the building owns it, and contradicting it costs money.
+func _build_support_pylon(screen_y: float) -> void:
 	var top: float = screen_y + screen_height * 0.5 + 0.07
 	var slab_w: float = screen_width + 0.9
 	var slab_h: float = top + 0.34
@@ -964,10 +1090,12 @@ func _build_housing_wall(screen_y: float) -> void:
 		add_child(code)
 
 
-## The screen stops being a picture and becomes an instrument you stand at: a
-## cabinet takes the floor, the face leans back off its lip at working height.
-## What it costs is the wall reading — nothing here can pass for architecture.
-func _build_housing_console(lift: float) -> void:
+## The screen stops being a picture and becomes an instrument you stand at: a body
+## of cabinetwork takes the floor, the face leans back off its lip at working
+## height. The console television is the type specimen — a screen and a cabinet as
+## one object. What it costs is the architectural reading: a door, a cap lip and a
+## recessed toe kick cannot pass for building.
+func _build_support_cabinet(lift: float) -> void:
 	var cab_h: float = maxf(lift - 0.02, 0.2)
 	var cab_w: float = screen_width * 0.94
 	var cab_d: float = 0.62
@@ -1003,10 +1131,12 @@ func _build_housing_console(lift: float) -> void:
 			Vector3(0.18, 0.035, 0.06), trim_mat))
 
 
-## Exhibition scaffolding: the display admits out loud that it is staged. Two
-## posts overtop the screen and tie back behind it — no furniture, no building,
-## just a rig that could be struck tomorrow.
-func _build_housing_rig(screen_y: float) -> void:
+## An open upright structure standing AROUND the screen: posts either side, side
+## collars gripping the panel, cross braces and a head beam. Bracketed, not
+## enclosed — you can see the room straight through it, which is what makes it
+## admit out loud that this is staged. No furniture, no building, and it could be
+## struck tomorrow.
+func _build_support_frame(screen_y: float) -> void:
 	var top: float = screen_y + screen_height * 0.5 + 0.07
 	var post_h: float = top + 0.40
 	var post_x: float = screen_width * 0.5 + 0.20
@@ -1025,8 +1155,8 @@ func _build_housing_rig(screen_y: float) -> void:
 		add_child(HangarKit.box(Vector3(s * post_x, 0.016, post_z),
 			Vector3(0.36, 0.032, 0.32), clamp_mat))
 		for cy in collar_y:
-			# Collars reach in toward the frame edge — the rig visibly grips the
-			# panel rather than the panel floating between two poles.
+			# Collars reach in toward the panel edge — the structure visibly grips
+			# the panel rather than the panel floating between two poles.
 			add_child(HangarKit.box(Vector3(s * (post_x - 0.07), cy, post_z),
 				Vector3(0.16, 0.11, 0.14), clamp_mat))
 
@@ -1034,8 +1164,8 @@ func _build_housing_rig(screen_y: float) -> void:
 		add_child(HangarKit.box(Vector3(0, by, post_z - 0.11),
 			Vector3(post_x * 2.0, 0.06, 0.06), post_mat))
 
-	# Top tie bar, above the screen — what makes it read as truss and not as two
-	# unrelated poles that happen to stand there.
+	# Top tie bar, above the screen — the head beam that makes it read as one frame
+	# and not as two unrelated poles that happen to stand there.
 	add_child(HangarKit.box(Vector3(0, post_h - 0.06, post_z),
 		Vector3(post_x * 2.0 + 0.10, 0.08, 0.08), clamp_mat))
 
@@ -1418,11 +1548,18 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	if config_data.has("bg"):
 		screen_color = _parse_color(str(config_data["bg"]), screen_color)
 
-	# Stage-2 DNA axes — #housing:console, #surface:triptych
-	if config_data.has("housing"):
-		housing = _pick_axis(str(config_data["housing"]), HOUSINGS, housing)
+	# Stage-2 DNA axes — #support:cabinet, #surface:triptych
+	# No `#housing:` fallback. The census found zero maps carrying it, and a retired
+	# token that still resolves is exactly how one word came to select two different
+	# axes in the exhibits family. Retired means gone.
+	if config_data.has("support"):
+		support = _pick_support(str(config_data["support"]))
 	if config_data.has("surface"):
 		surface = _pick_axis(str(config_data["surface"]), SURFACES, surface)
+
+	# Resolve here as well as in _build_screen so the log line below reports what
+	# will actually be built — _rebuild() is deferred a frame.
+	_resolve_support()
 
 	# Explicit mode from map JSON — skips all scanning
 	if config_data.has("mode"):
@@ -1431,13 +1568,29 @@ func apply_grid_config(config_data: Dictionary) -> void:
 
 	# Rebuild with new dimensions
 	_rebuild()
-	print("[ScienceScreen] Config applied — %sx%s, mode=%s, housing=%s, surface=%s" % [
-		screen_width, screen_height, _get_active_mode(), housing, surface])
+	# Report both when they differ, so a degrade is stated in the log rather than
+	# discovered by looking at a screenshot and wondering.
+	var support_str: String = support
+	if support != _support_native:
+		support_str = "%s -> %s" % [support, _support_native]
+	print("[ScienceScreen] Config applied — %sx%s, mode=%s, support=%s, surface=%s" % [
+		screen_width, screen_height, _get_active_mode(), support_str, surface])
+
+
+## Read a `support` token: fold a retired spelling onto its canonical one, then
+## accept it if it names any of the eight shared values. The allow-list is the FULL
+## vocabulary, not just what this screen builds — a sibling's gesture is a real
+## request and gets answered by DEGRADE, not thrown away. Only a value outside all
+## eight falls back, and that case is a typo.
+func _pick_support(raw: String) -> String:
+	var v: String = raw.to_lower().strip_edges()
+	v = str(SUPPORT_ALIASES.get(v, v))
+	return _pick_axis(v, SUPPORTS, support)
 
 
 ## Accept an axis value only if it names something we actually build. A typo in a
 ## map token has to fall back to the legacy look — a half-recognised value would
-## strand a placement with no housing at all.
+## strand a placement with no support at all.
 func _pick_axis(raw: String, allowed: PackedStringArray, fallback: String) -> String:
 	var v: String = raw.to_lower().strip_edges()
 	return v if allowed.has(v) else fallback
