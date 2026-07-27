@@ -26,7 +26,7 @@ instrument for angular size and view order.
   python tools/walk_polish.py <MapName> --apply    # place the safe proposals
   python tools/walk_polish.py <MapName> --apply --budget 12
 """
-import json, argparse, pathlib, sys
+import json, math, argparse, pathlib, sys
 from collections import deque
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
@@ -57,6 +57,45 @@ POSTURE_WANTS = {
     "wall": None,                       # already against a surface
 }
 CORNER_CYCLE = ("hangar_supply_pile", "hangar_cabinet_cluster")
+
+MIN_DEG = 8.0        # smaller than this in the cone and the eye does not count it
+VISTA = 5            # consecutive blank stations before the walk is dull
+CONE = 45.0          # half-angle of the forward view
+
+
+def measured_sizes():
+    """Real body sizes from the probe floor — the same source gaze_ride trusts."""
+    try:
+        el = json.loads((ROOT / "commons/data/artifact_elements.json").read_text(encoding="utf-8"))
+        out = {}
+        for k, a in el.get("artifacts", {}).items():
+            s = (a.get("union_aabb") or {}).get("size") or [1.0, 1.0, 1.0]
+            out[k] = max(0.2, max(float(s[0]), float(s[2])))
+        return out
+    except Exception:
+        return {}
+
+
+def seen_from(cell, facing, bodies_xy, sizes, solid, limit=14):
+    """Biggest angular size in the forward cone, and the wall the walk faces."""
+    fx, fz = facing
+    best_deg, blocked_at = 0.0, None
+    for step in range(1, limit + 1):
+        cx, cz = cell[0] + fx * step, cell[1] + fz * step
+        if solid((cx, cz)):
+            blocked_at = (cx, cz)
+            limit = step                      # the wall ends the vista
+            break
+    for (bx, bz), tok in bodies_xy.items():
+        dx, dz = bx - cell[0], bz - cell[1]
+        dist = math.hypot(dx, dz)
+        if dist < 0.5 or dist > limit: continue
+        dot = (dx * fx + dz * fz) / dist
+        if dot < math.cos(math.radians(CONE)): continue
+        size = sizes.get(tok, 1.0)
+        deg = math.degrees(2 * math.atan2(size / 2.0, dist))
+        best_deg = max(best_deg, deg)
+    return best_deg, blocked_at
 
 
 def postures():
@@ -114,7 +153,7 @@ def walk(md):
     if spawn is None or spawn not in floor:
         spawn = min(floor) if floor else None
     if spawn is None: return [], floor, {}
-    order, dist = [], {spawn: 0}
+    order, dist, parent = [], {spawn: 0}, {}
     dq = deque([spawn])
     while dq:
         c = dq.popleft(); order.append(c)
@@ -127,15 +166,35 @@ def walk(md):
                 if not (u.startswith("wp") or u.startswith("l") or "tc" in u):
                     continue
             dist[nb] = dist[c] + 1
+            parent[nb] = c
             dq.append(nb)
-    return order, floor, dist
+    # THE ROUTE: BFS order is a frontier, not a walk — a vista only means
+    # something along a real path, so reconstruct spawn -> exit (or the
+    # farthest station if the map has no teleporter landing).
+    goal = None
+    for z, row in enumerate(U):
+        for x, cc in enumerate(row):
+            if str(cc).strip().startswith("t"):
+                for d in DIRS:
+                    nb = (x + d[0], z + d[1])
+                    if nb in dist and (goal is None or dist[nb] > dist.get(goal, -1)):
+                        goal = nb
+    if goal is None and dist:
+        goal = max(dist, key=lambda k: dist[k])
+    route = []
+    cur = goal
+    while cur is not None:
+        route.append(cur)
+        cur = parent.get(cur)
+    route.reverse()
+    return order, floor, dist, route
 
 
 def inspect(md, name):
     """Stand on every station and note what the position lacks."""
     S, U, I, WL = grids(md)
     D = len(S); W = max((len(r) for r in S), default=0)
-    stations, floor, dist = walk(md)
+    stations, floor, dist, route = walk(md)
     occupied = {(x, z) for z, row in enumerate(I) for x, c in enumerate(row) if str(c).strip()}
     utils = {(x, z): str(c).strip() for z, row in enumerate(U)
              for x, c in enumerate(row) if str(c).strip()}
@@ -149,6 +208,14 @@ def inspect(md, name):
 
     def free(c):
         return c in floor and c not in occupied and c not in utils
+
+    SIZES = measured_sizes()
+    bodies_xy = {(x, z): str(I[z][x]).strip().split(":")[0]
+                 for z, row in enumerate(I) for x, c in enumerate(row)
+                 if str(c).strip() and not str(c).strip().startswith(PRE)}
+    nxt_of = {route[i]: route[i + 1] for i in range(len(route) - 1)}
+    on_route = set(route)
+    blank_run = {}
 
     props = []
     seen_wall_runs = set()
@@ -207,6 +274,50 @@ def inspect(md, name):
                               "beside": tok, "posture": pos})
             break
 
+    # 5 BLANK VISTA — walked as a WALK, in route order. (The first version
+    # incremented its run counter inside the BFS loop, so consecutive steps
+    # never formed a run and it reported nothing on ten maps: a walker's
+    # question must be asked in walking order.)
+    run_len, run_facing = 0, None
+    for i in range(len(route) - 1):
+        c, nxt = route[i], route[i + 1]
+        facing = (nxt[0] - c[0], nxt[1] - c[1])
+        if facing not in DIRS:
+            run_len, run_facing = 0, None
+            continue
+        deg, wall_at = seen_from(c, facing, bodies_xy, SIZES, solid)
+        if wall_at is not None and not (0 <= wall_at[1] < len(I)
+                                        and 0 <= wall_at[0] < len(I[wall_at[1]])):
+            wall_at = None
+        if deg >= MIN_DEG:
+            run_len, run_facing = 0, facing
+            continue
+        run_len = run_len + 1 if facing == run_facing else 1
+        run_facing = facing
+        if run_len >= VISTA:
+            # A blank walk has two cures, and which one depends on whether the
+            # view ends on anything. Facing a wall: give the wall a surface.
+            # Facing open space: put a light IN the view — something to walk
+            # toward. (Requiring a wall was why this fired nowhere: when the
+            # view is dull it is usually dull because it is empty, not walled.)
+            if wall_at is not None and not str(I[wall_at[1]][wall_at[0]]).strip():
+                rot = {(0, 1): 0, (1, 0): 90, (0, -1): 180, (-1, 0): 270}[facing]
+                props.append({"cell": list(c), "kind": "vista",
+                              "why": "blank vista — %d steps facing a wall, nothing over %d deg in view"
+                                     % (run_len, int(MIN_DEG)),
+                              "place": SURFACE, "layer": "interactables",
+                              "rot": (rot + 180) % 360, "at_wall": list(wall_at)})
+                run_len = 0
+            else:
+                ahead = route[min(i + 4, len(route) - 1)]
+                if (ahead in floor and not str(I[ahead[1]][ahead[0]]).strip()
+                        and not str(U[ahead[1]][ahead[0]]).strip()):
+                    props.append({"cell": list(ahead), "kind": "vista",
+                                  "why": "blank walk — %d open steps with nothing over %d deg in view"
+                                         % (run_len, int(MIN_DEG)),
+                                  "place": LIGHT, "layer": "utilities"})
+                    run_len = 0
+
     # ONE proposal per TARGET, not per cell. The first version offered a bench
     # at every cell around a body and a panel at every cell along a wall — that
     # is a plan-thinker enumerating neighbours, not an occupant standing
@@ -229,6 +340,8 @@ def inspect(md, name):
                    for q in out):
                 continue
             tgt = ("wall", p.get("rot"))
+        elif p["kind"] == "vista":
+            tgt = ("vista", tuple(p.get("at_wall") or p["cell"]))
         else:
             tgt = ("solo", k)
         cap = 1 if p["kind"] == "rest" else (3 if p["kind"] == "wall" else 2)
@@ -243,6 +356,12 @@ def apply(md, props, budget):
     placed = []
     for p in props[:budget]:
         x, z = p["cell"]
+        if p.get("kind") == "vista" and p.get("at_wall"):
+            wx, wz = p["at_wall"]
+            if str(I[wz][wx]).strip(): continue
+            I[wz][wx] = p["place"] + ":%d" % p["rot"]
+            placed.append(p)
+            continue
         if p["layer"] == "utilities":
             if str(U[z][x]).strip(): continue
             U[z][x] = p["place"]
