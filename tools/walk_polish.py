@@ -217,6 +217,28 @@ def inspect(md, name):
     on_route = set(route)
     blank_run = {}
 
+    def route_dir(c):
+        """Which way the walk leaves this station — the eye's default heading."""
+        n = nxt_of.get(c)
+        return (n[0] - c[0], n[1] - c[1]) if n else None
+
+    def back_off(c, facing, k):
+        """Step back from what you are judging, so you can see it.
+
+        The finding cell is where the PROP goes — flush against the wall, right
+        beside the body. A camera there sees only the thing it is standing on:
+        the first wall shots were a single grey plane edge to edge. An occupant
+        reads a surface from across the room, so the eye backs up along its own
+        heading while the floor allows it.
+        """
+        cur = c
+        for _ in range(k):
+            nb = (cur[0] - facing[0], cur[1] - facing[1])
+            if nb not in floor or wall_between(WL, cur, nb):
+                break
+            cur = nb
+        return cur
+
     props = []
     seen_wall_runs = set()
     for c in stations:
@@ -226,7 +248,11 @@ def inspect(md, name):
         # 1 DEAD CORNER — three sides closed, nothing in it, nothing to do
         closed = sum(1 for nb in nbs if solid(nb) or nb not in floor or wall_between(WL, c, nb))
         if closed >= 3 and free(c) and dist.get(c, 0) > 2:
-            props.append({"cell": list(c), "why": "dead corner (3 sides closed, nothing in it)",
+            opens = [d for d in DIRS if (x + d[0], z + d[1]) in floor
+                     and not wall_between(WL, c, (x + d[0], z + d[1]))]
+            face = opens[0] if opens else (route_dir(c) or (0, 1))
+            props.append({"facing": list(face), "eye": list(back_off(c, face, 2)),
+                          "cell": list(c), "why": "dead corner (3 sides closed, nothing in it)",
                           "place": CORNER_CYCLE[len([q for q in props if q["kind"] == "corner"]) % 2],
                           "layer": "interactables", "kind": "corner"})
             continue
@@ -243,7 +269,8 @@ def inspect(md, name):
                 key = (nb, d)
                 if key in seen_wall_runs: continue
                 seen_wall_runs.add(key)
-                props.append({"cell": list(c), "why": "bare wall (%d cells of blank surface)" % run,
+                props.append({"facing": list(d), "eye": list(back_off(c, d, 3)),
+                              "cell": list(c), "why": "bare wall (%d cells of blank surface)" % run,
                               "place": SURFACE, "layer": "interactables", "kind": "wall",
                               "rot": {(0, 1): 0, (1, 0): 90, (0, -1): 180, (-1, 0): 270}[d]})
 
@@ -251,7 +278,8 @@ def inspect(md, name):
         if lights and free(c):
             near = min(abs(c[0] - l[0]) + abs(c[1] - l[1]) for l in lights)
             if near >= 9 and dist.get(c, 0) % 5 == 0:
-                props.append({"cell": list(c), "why": "dark stretch (%d cells from the nearest light)" % near,
+                props.append({"facing": list(route_dir(c) or (0, 1)),
+                              "cell": list(c), "why": "dark stretch (%d cells from the nearest light)" % near,
                               "place": LIGHT, "layer": "utilities", "kind": "light"})
 
         # 4 NOTHING TO STAND AT — a body with no companion beside it. WHAT it
@@ -268,7 +296,9 @@ def inspect(md, name):
                     want = want[sum(ord(ch) for ch in tok) % len(want)]
                 if want is None:
                     break                      # the honest answer is nothing
-                props.append({"cell": list(c),
+                bf = (b[0] - x, b[1] - z)
+                props.append({"facing": list(bf), "eye": list(back_off(c, bf, 2)),
+                              "cell": list(c),
                               "why": "%s is a %s standing alone — wants %s" % (tok, pos, want.replace("hangar_", "")),
                               "place": want, "layer": "interactables", "kind": "rest",
                               "beside": tok, "posture": pos})
@@ -302,7 +332,8 @@ def inspect(md, name):
             # view is dull it is usually dull because it is empty, not walled.)
             if wall_at is not None and not str(I[wall_at[1]][wall_at[0]]).strip():
                 rot = {(0, 1): 0, (1, 0): 90, (0, -1): 180, (-1, 0): 270}[facing]
-                props.append({"cell": list(c), "kind": "vista",
+                props.append({"cell": list(c), "kind": "vista", "facing": list(facing),
+                              "eye": list(back_off(c, facing, 3)),
                               "why": "blank vista — %d steps facing a wall, nothing over %d deg in view"
                                      % (run_len, int(MIN_DEG)),
                               "place": SURFACE, "layer": "interactables",
@@ -312,7 +343,10 @@ def inspect(md, name):
                 ahead = route[min(i + 4, len(route) - 1)]
                 if (ahead in floor and not str(I[ahead[1]][ahead[0]]).strip()
                         and not str(U[ahead[1]][ahead[0]]).strip()):
+                    # the LIGHT goes ahead; the EYE stays where the walker is
+                    # bored, looking at the stretch the light is meant to fix.
                     props.append({"cell": list(ahead), "kind": "vista",
+                                  "eye": list(c), "facing": list(facing),
                                   "why": "blank walk — %d open steps with nothing over %d deg in view"
                                          % (run_len, int(MIN_DEG)),
                                   "place": LIGHT, "layer": "utilities"})
@@ -377,6 +411,8 @@ def main():
     ap.add_argument("map")
     ap.add_argument("--apply", action="store_true")
     ap.add_argument("--budget", type=int, default=14)
+    ap.add_argument("--shots", default="", help="write an eye-station file for "
+                    "commons/testing/capture_eye_stations.gd (see it with your own eyes)")
     a = ap.parse_args()
     sys.stdout.reconfigure(encoding="utf-8")
 
@@ -389,6 +425,31 @@ def main():
     print("  by kind:", dict(Counter(p["kind"] for p in props)))
     for p in props[:20]:
         print(f"  {str(p['cell']):10s} {p['kind']:6s} {p['place']:22s} {p['why']}")
+    if a.shots:
+        # EVERY FINDING IS A CAMERA STATION. The pass reasons about the view;
+        # this hands the same positions to Godot so the view can be SEEN
+        # (commons/testing/capture_eye_stations.gd stands at eye height there).
+        # The station carries the FACING VECTOR, not a yaw. A yaw is only
+        # meaningful inside one convention, and the grid's prop rotation and
+        # Godot's camera yaw are not the same convention (they differ by 180
+        # deg, and each mirrors x differently). Hand over the direction; let
+        # the engine that owns the camera do its own trigonometry.
+        S, U, I, WL = grids(md)
+        stations = []
+        for n, pr in enumerate(props):
+            cx, cz = pr.get("eye") or pr["cell"]
+            face = pr.get("facing")
+            if not face and pr.get("at_wall"):
+                dx, dz = pr["at_wall"][0] - cx, pr["at_wall"][1] - cz
+                face = [0 if dx == 0 else (1 if dx > 0 else -1),
+                        0 if dz == 0 else (1 if dz > 0 else -1)]
+            stations.append({"cell": [cx, cz], "facing": [int(v) for v in (face or [0, 1])],
+                             "y": max(0, h_at(S, cx, cz)),
+                             "tag": "%02d_%s" % (n, pr["kind"]), "why": pr["why"]})
+        pathlib.Path(a.shots).write_text(json.dumps(
+            {"map": a.map, "stations": stations}, indent=1), encoding="utf-8")
+        print("wrote %d eye stations -> %s" % (len(stations), a.shots))
+
     if not a.apply:
         print("\n(dry run — pass --apply to place the first %d)" % a.budget)
         return 0
