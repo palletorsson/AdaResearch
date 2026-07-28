@@ -464,8 +464,15 @@ func _run_artifact_capture() -> void:
 
 	if aabb.size.length() > 0:
 		orbit_focus = aabb.get_center()
-		var max_dim: float = max(aabb.size.x, max(aabb.size.y, aabb.size.z))
-		base_distance = max_dim * 1.0
+		# Fit the BOUNDING SPHERE, not the widest axis. Framing on max_dim
+		# is an orthographic assumption: under perspective the geometry
+		# nearest the camera is magnified by d/(d - depth/2) and runs out of
+		# frame, which is why deep artifacts (cap_theorem_walk's triangle of
+		# pillars) lost their front pillar off the bottom edge. The sphere
+		# radius is orientation-independent, so every orbit angle fits.
+		var radius: float = aabb.size.length() * 0.5
+		var half_fov: float = deg_to_rad(camera.fov) * 0.5
+		base_distance = radius / max(0.05, sin(half_fov))
 		print("capture_multi_angle [artifact]: AABB size=%s center=%s base_dist=%.1f" % [
 			aabb.size, orbit_focus, base_distance
 		])
@@ -526,8 +533,10 @@ func _run_artifact_capture() -> void:
 			if not shot_path.is_empty():
 				print("capture_multi_angle [artifact]:   %s @ dist=%.1f -> %s" % [suffix, dist, shot_path])
 
-		# Save the wide zoom (full artifact visible) as the default
-		var sweet_dist: float = base_distance * zoom_factors[0]
+		# Save the default shot just outside the just-fits distance. base_distance
+		# is now a guaranteed fit, so this only needs breathing room — the old
+		# 1.4 wide factor would push every artifact needlessly far away.
+		var sweet_dist: float = base_distance * 1.06
 		var cam_offset := Vector3(
 			sin(yaw) * cos(pitch),
 			sin(pitch),

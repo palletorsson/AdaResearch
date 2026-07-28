@@ -127,12 +127,12 @@ func _build_all() -> void:
 
 		var label := Label3D.new()
 		label.text = PILLAR_NAMES[i]
-		label.font_size = 22
-		label.outline_size = 5
+		label.font_size = 15
+		label.outline_size = 4
 		label.modulate = pillar_color_on
 		# The label follows the top it names. On a stump it drops with the pillar, so the
 		# fall is readable in the text row as well as in the silhouette.
-		label.position = foot + Vector3(0, h + 0.25, 0)
+		label.position = foot + Vector3(0, h + 0.16, 0)
 		label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
 		add_child(label)
 		_labels.append(label)
