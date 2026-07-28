@@ -135,7 +135,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.214642Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "Majority rule run five generations over random rock: solid survives with four neighbours, void turns solid at five. Only the rock gets instanced — the cave is never built, it is everywhere the multimesh declined to place a cube."
   },
   "GeneticProgramming": {
    "category": "unknown",
@@ -536,7 +537,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.214642Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "Socket-grammar collapse where the Rainbow_Dance_Floor's weight of 6 outbids the plain Floor's 5: the tile library is a constitution, and one number legislates what kind of room is statistically likely to exist. Joy doesn't emerge from constraint propagation — it has to be given majority weight before the dice are allowed to find it."
   },
   "WFCCav": {
    "category": "unknown",
@@ -604,7 +606,8 @@
     ],
     "max_dimension_m": 0.0,
     "measured_at": "2026-04-29T07:09:56.762620Z"
-   }
+   },
+   "qfep_connection": "Twenty hand-written tile types — tunnels, corners, T-junctions, stalactites — each with a dictionary declaring which directions it will speak to. The 'organic' cavern is adjacency bureaucracy: nature specified as a plumbing catalogue, then rolled until the paperwork is consistent."
   },
   "WFCSculptureGenerator": {
    "category": "unknown",
@@ -675,7 +678,8 @@
     ],
     "max_dimension_m": 0.0,
     "measured_at": "2026-04-29T07:09:56.762620Z"
-   }
+   },
+   "qfep_connection": "Every cell knows its distance to center and to surface before any collapse, and the voxel weights bend to that geography — so the 'discovered' sculpture is a CORE_SOLID-to-SURFACE_POROUS gradient decided ahead of the randomness. hollow_intensity is the honest export: a slider for how much absence the form is permitted to contain."
   },
   "animalpatterns": {
    "category": "unknown",
@@ -1638,7 +1642,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.214642Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "Inside Cave, Flat Landscape, Torus Sculpture, Dense Caves — five presets that are only parking spots in one continuous parameter space, and the sliders let you drive between them. The miniature proves the categories were never in the noise, only in where someone stopped scrolling."
   },
   "cave_generator": {
    "category": "procedural",
@@ -1931,7 +1936,8 @@
     ],
     "max_dimension_m": 0.0,
     "measured_at": "2026-04-29T07:09:56.762620Z"
-   }
+   },
+   "qfep_connection": "Random walks on an inner grid, doubled by a reflection rule, then bred: every tenth of a second the rows shift down and neighboring patterns mate into offspring. Ornament with a genetics — less a texture than a small population under glass."
   },
   "color_pattern_texture_for_3d": {
    "category": "unknown",
@@ -2418,7 +2424,8 @@
     ],
     "max_dimension_m": 0.0,
     "measured_at": "2026-04-29T07:09:56.762620Z"
-   }
+   },
+   "qfep_connection": "Eleven scaled boxes arrive at 0.3-second intervals — seat, back, four legs, armrests — and nothing else happens. Watching the schedule makes furniture legible as ordered proportions; non-uniform scaling is the only carpentry."
   },
   "cube_desk": {
    "category": "unknown",
@@ -3099,7 +3106,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.214642Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "Fifty leaf clusters, refractive droplets — then the reach: it instantiates its own sun and writes an Environment straight onto the viewport camera. A garden that annexes the weather; the dew never falls, but the morning light is compulsory."
   },
   "diffusion_limited_aggregation": {
    "category": "unknown",
@@ -3773,7 +3781,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.214642Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "Shiffman's branching rule carried into VR with exactly one degree of freedom handed to the body: a graspable angle between 10 and 60 degrees. Move it and the whole tree is deleted and re-derived — the angle is not an adjustment but the tree's entire genome."
   },
   "fabrics": {
    "category": "unknown",
@@ -3853,7 +3862,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.214642Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "Wallpaper, stone, terrain, tartan — one turbulence trick wearing different costumes across planes and boxes, the same shader reparametrized from wall covering to landscape. Cloth here is a claim made by three floats; materials are positions in parameter space, not substances."
   },
   "fatwireframe": {
    "category": "unknown",
@@ -3933,7 +3943,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.214642Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "Faces are discarded and only edges survive, their thickness faked from barycentric distance in the fragment shader. A debug convention promoted to matter: the wireframe was always the diagram under the surface, here it is granted glow and bulk and asked to stand as the thing itself."
   },
   "fibonacci_pagoda": {
    "category": "unknown",
@@ -5176,7 +5187,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.215359Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "Growth staged as re-execution: each animation level clears every branch and reruns the recursion one depth deeper. Nothing accumulates; the tree has no past, only a function called with a larger argument — development impersonated by recomputation."
   },
   "fractal_scene": {
    "category": "unknown",
@@ -5554,7 +5566,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.215359Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "Three freestanding partitions — stand, panel, frosted-glass shader — the cubicle's minimal unit, tripled. Frost is order applied to sight alone: the panel stops no body, only detail, keeping the person beyond it present enough to be monitored and blurred enough to be denied — the office's actual proposal, adjacency without particulars."
   },
   "golden_rectangle": {
    "category": "unknown",
@@ -5748,7 +5761,8 @@
     "approach_dir": "front",
     "derived_at": "2026-04-29T09:39:46.215359Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "Checkers, line grids, diagonal stripes, an Albers nod — modernism's flat pattern vocabulary redone as a few step functions and a UV scale per box. F_order at its cheapest: the shader supplies thresholds and the eye volunteers the loom."
   },
   "ik_arm_demo": {
    "category": "body",
@@ -6567,7 +6581,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.215359Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "Water, oil and honey diffuse while a floating label reports the Shannon entropy of the mix — but the normalising ceiling is hard-coded for two species at 50/50, so three liquids can overflow the scale built to measure them. Irreversibility, metered by an instrument that undercounts it."
   },
   "mandelbrot_set": {
    "category": "unknown",
@@ -6761,7 +6776,8 @@
     "isolation": 0,
     "cluster_with": [],
     "preferred_zone": "entry"
-   }
+   },
+   "qfep_connection": "Human, chair, house, bottle, cup, computer — six everyday nouns rewritten as signed-distance fields and pushed through one mesher at body scale. The levelling is the point: under the isosurface regime a person and their furniture are the same kind of object, the zero-set of a function."
   },
   "marching_cubes_gallery": {
    "category": "unknown",
@@ -6810,7 +6826,8 @@
     "isolation": 0,
     "cluster_with": [],
     "preferred_zone": "entry"
-   }
+   },
+   "qfep_connection": "Filed in the WFC sculpture folder, but the script it loads is the marching-cubes gallery, with trace_individual_elements splitting each result into connected components. A room whose name outlived its mechanism — what it actually stages is the mesher's habit of shedding islands, promoted here to curatorial method."
   },
   "marching_cubes_sculpt_vr": {
    "category": "unknown",
@@ -6925,7 +6942,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.215359Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "Both triggers write density straight into a 64-cubed field and the isosurface chases your hands at frame rate; erase mode is the same brush with the sign reversed. The algorithm that elsewhere authors whole terrains is here demoted to rendering intent — matter and void as one channel a body can scribble in."
   },
   "marchingcave": {
    "category": "unknown",
@@ -7215,7 +7233,8 @@
     ],
     "max_dimension_m": 0.0,
     "measured_at": "2026-04-29T07:09:56.762620Z"
-   }
+   },
+   "qfep_connection": "The threshold sits at 0.05 where the cave variant holds 0.88 — landscape and cavern are the same density field read at different iso-levels, ground and rock separated by one float. When the compute shader fails, sine-summed hills quietly stand in, and the ontology swap goes unnoticed."
   },
   "marchingcubes_inside_cave": {
    "category": "unknown",
@@ -7311,7 +7330,8 @@
     ],
     "max_dimension_m": 0.0,
     "measured_at": "2026-04-29T07:09:56.762620Z"
-   }
+   },
+   "qfep_connection": "The fallback tunnel manufactures interiority with a sign flip — every normal pointed inward — while the compute path earns it by raising the iso-level until void outnumbers rock. Being enclosed is something the mesh asserts, not somewhere you are."
   },
   "marchingcubes_portal_landscape": {
    "category": "unknown",
@@ -7506,7 +7526,8 @@
     ],
     "max_dimension_m": 0.0,
     "measured_at": "2026-04-29T07:09:56.762620Z"
-   }
+   },
+   "qfep_connection": "The compute shader carves its torus out of a density field; the fallback just calls TorusMesh.new(). Same genus, opposite politics — one earns the hole, the other declares it."
   },
   "maze_generation": {
    "category": "unknown",
@@ -8248,7 +8269,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.215359Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "Breuer, Mies, Eames, Bertoia — a canon reduced to ten constructors instantiated in a circle, every chair rotated to face a center where no sitter ever arrives. Design history survives here exactly as far as it can be rewritten as a class hierarchy with a Label3D for provenance."
   },
   "mushrooms": {
    "category": "morphogenesis",
@@ -8670,7 +8692,8 @@
     1.0,
     1,
     1.0
-   ]
+   ],
+   "qfep_connection": "Thirty-two vertices, an edge wherever two indices differ by one bit, then two flattenings in a row before anything is drawable. What orbits in front of you is a compression of a compression, recomputed every frame — the penteract never arrives, only its loss schedule."
   },
   "percolationnetwork_ca": {
    "category": "unknown",
@@ -10255,7 +10278,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.215897Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "Habitable space made purely by subtraction: CSG carves walkway bores out of solid spheres and the pipes between them, so everywhere you could stand is exactly where material was revoked. Architecture as negative accounting — the corridor is the deficit."
   },
   "stochastic_tree_separated": {
    "category": "unknown",
@@ -10474,7 +10498,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.215897Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "Eight hundred droplets rewrite a heightmap that admits, in its own comment, to being layered sines impersonating Perlin — and the RNG is pinned to seed 42, so every visitor inherits the identical island with the identical scars. Erosion as history, but a history that already happened, once, for everyone."
   },
   "tessellating_portal_demo": {
    "category": "unknown",
@@ -10636,7 +10661,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.215897Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "A tesseract can only visit 3-space unfolded, so the room is bricked from its nets — Dalí crosses rotated and offset like masonry, the center deliberately left hollow. You stand inside an absence framed by flattened higher dimension; the fourth axis appears only as the fold that never happens."
   },
   "tesseract_tunnel": {
    "category": "procedural",
@@ -11119,7 +11145,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.215897Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "The description still reads 'this is the test' while the scene grows the finished recursive tree. Scaffolding promoted to content without renaming: place the token in a map and a whole tree rises under a label that confesses it was never meant to stay — the registry's dark spot, walkable."
   },
   "test_scene_6": {
    "category": "unknown",
@@ -11573,7 +11600,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.215897Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "One floor cut into four quadrants, each running a different fragment shader — quarter-arcs, diagonal split, dots, zigzag — with a sample solid hovering above wearing the same program. The quarter-arc corner states the Truchet bargain plainly: a single tile plus one orientation bit per cell is enough to produce unbounded corridor, pattern as the cheapest possible seed."
   },
   "voronoi_diagram_3d": {
    "category": "unknown",
@@ -11773,7 +11801,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.215897Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "The seeds are real but the instruments are theatre: uniformity_score is elapsed time times 0.85, coverage times 0.9, climbing regardless of what the cells do. A lesson in partitioning space wearing a scoreboard that measures nothing but duration."
   },
   "voronoi_grid_3d": {
    "category": "unknown",
@@ -12032,7 +12061,8 @@
     "approach_dir": "front",
     "derived_at": "2026-04-29T09:39:46.215897Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "Each cell wears its entropy as a floating number and its possible futures as mini-tiles, and collapse always picks on whoever has the fewest options left. Certainty spreads not by decree but by neighbors deleting each other's possibilities — constraint propagation slowed to watching speed."
   },
   "waves": {
    "category": "unknown",
@@ -12112,7 +12142,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.215897Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "Water as the sum of its tells: noise textures for swell, a normal map for glitter, Beer's-law fade for depth, edge foam for shore — four quads, none of them wet. Convincingness assembled from parts, each shader a different bet on which cue the body will believe."
   },
   "wfc": {
    "category": "procedural",
@@ -12186,7 +12217,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.215897Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "Every cell begins holding all tiles at once, and the world exists only as options are deleted — collapse leaves a single survivor and propagation prunes the neighbours. Compatibility is nothing deeper than one edge-string equalling another reversed: global coherence rented entirely from local string-matching."
   },
   "wfc_3d_demo": {
    "category": "unknown",

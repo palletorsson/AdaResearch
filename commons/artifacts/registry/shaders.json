@@ -79,7 +79,8 @@
         "approach_dir": "any",
         "derived_at": "2026-04-29T09:39:46.268381Z",
         "derived_from": "aabb_size + category"
-      }
+      },
+      "qfep_connection": "Leather, velvet fur, pop plastic, super green, techno fungus: identical spheres in a row, differing only in surface program. Identity staged as pure material performance — the mesh beneath never changes and never needed to, which is the whole argument."
     },
     "alphahash": {
       "category": "unknown",
@@ -190,7 +191,8 @@
         "approach_dir": "any",
         "derived_at": "2026-04-29T09:39:46.268381Z",
         "derived_from": "aabb_size + category"
-      }
+      },
+      "qfep_connection": "Transparency without blending: each fragment flips a screen-space coin against its alpha and is drawn entirely or not at all. Ghostliness as statistics — opaque everywhere it exists, translucent only in aggregate, the way a population can be half-present while every member is binary."
     },
     "art_history_gallery": {
       "category": "shaders",
@@ -402,7 +404,8 @@
         "approach_dir": "any",
         "derived_at": "2026-04-29T09:39:46.268381Z",
         "derived_from": "aabb_size + category"
-      }
+      },
+      "qfep_connection": "Ten thousand particles as one ArrayMesh whose drift, size, and lifecycle run in the vertex shader from attributes fixed at build time — after upload nothing is simulated, only replayed on a mod(TIME) loop. The swarm's whole future sits in the buffer; motion as pre-commitment."
     },
     "buffergeometryparticles": {
       "category": "unknown",
@@ -512,7 +515,8 @@
         "approach_dir": "any",
         "derived_at": "2026-04-29T09:39:46.268381Z",
         "derived_from": "aabb_size + category"
-      }
+      },
+      "qfep_connection": "Positions, velocities, and lifetimes are packed into the mesh's vertex attributes once; after that, motion is an equation of TIME evaluated in the vertex shader. Ten thousand particles and no events — nothing updates, the same frozen data merely reads differently each frame."
     },
     "carpet_cove_gallery": {
       "category": "shaders",
@@ -618,7 +622,8 @@
         "approach_dir": "any",
         "derived_at": "2026-04-29T09:39:46.268381Z",
         "derived_from": "aabb_size + category"
-      }
+      },
+      "qfep_connection": "Twenty-four coves in facing rows, RNG seeded to 77: a gallery of wallpaper symmetries that is itself deterministic wallpaper, variety exhibited by a process with no variance left in it. The three-metre aisle is where comparison actually happens — in the walking."
     },
     "clippingplanes": {
       "category": "unknown",
@@ -688,7 +693,8 @@
         ],
         "max_dimension_m": 0.0,
         "measured_at": "2026-04-29T07:09:56.762620Z"
-      }
+      },
+      "qfep_connection": "Nothing is cut: the geometry stays whole while the fragment shader refuses to draw one side of a moving plane, glowing cyan along the line of refusal. Section drawing as pure ideology — the interior was always there; visibility is what the plane legislates."
     },
     "cove_display": {
       "category": "shaders",
@@ -788,7 +794,8 @@
         "approach_dir": "any",
         "derived_at": "2026-04-29T09:39:46.268381Z",
         "derived_from": "aabb_size + category"
-      }
+      },
+      "qfep_connection": "SurfaceTool bends floor into wall through one continuous UV run, so the pattern never meets a corner: the photo studio's trick of abolishing the horizon, rebuilt as geometry any shader can rent. It makes the seam thinkable by being the surface where one is conspicuously missing."
     },
     "degrading_shader_demo": {
       "category": "shaders",
@@ -871,7 +878,8 @@
         "approach_dir": "any",
         "derived_at": "2026-04-29T09:39:46.268381Z",
         "derived_from": "aabb_size + category"
-      }
+      },
+      "qfep_connection": "The surface keeps a 512-pixel memory of everywhere hands have been, while a clock increments the ruin at 0.005 per second regardless. Touch is recorded as damage and neglect accrues anyway — wear is the one texture the player authors just by existing near it."
     },
     "dynamic_cubemap": {
       "category": "shaders",
@@ -976,7 +984,8 @@
         "approach_dir": "any",
         "derived_at": "2026-04-29T09:39:46.268877Z",
         "derived_from": "aabb_size + category"
-      }
+      },
+      "qfep_connection": "Each reflective object carries its own ReflectionProbe set to UPDATE_ALWAYS — the room re-rendered per surface, reflection as every object's private subscription to its surroundings. Fidelity is then tiered by i % 3, so which mirror deserves the sharper world is decided by position in a list."
     },
     "dynamiccubemap": {
       "category": "unknown",
@@ -1086,7 +1095,8 @@
         "approach_dir": "any",
         "derived_at": "2026-04-29T09:39:46.268877Z",
         "derived_from": "aabb_size + category"
-      }
+      },
+      "qfep_connection": "Eight metallic objects with no appearance of their own — each frame their surfaces are refreshed with captures of the surrounding room, fresnel deciding how much borrowed world shows through. Identity as pure reflection: blank the environment and the objects go mute."
     },
     "filter_screen": {
       "category": "shaders",
@@ -1205,7 +1215,8 @@
         "approach_dir": "front",
         "derived_at": "2026-04-29T09:39:46.268877Z",
         "derived_from": "aabb_size + category"
-      }
+      },
+      "qfep_connection": "A real Camera3D flattens the live scene onto 640x480, and each filter mode confesses a different loss — depth keeps distance and discards color, silhouette keeps outline and discards everything else. Projection taught as the first lossy compression, with the discard menu made switchable."
     },
     "flashlight_demo": {
       "category": "unknown",
@@ -1393,7 +1404,8 @@
         "approach_dir": "any",
         "derived_at": "2026-04-29T09:39:46.268877Z",
         "derived_from": "aabb_size + category"
-      }
+      },
+      "qfep_connection": "The glass never transmits anything; it samples the already-rendered screen behind it and bends the UVs by the refraction the surface normal implies. Transparency staged as a lie the GPU tells honestly — you see through the object only because the frame was finished before it asked."
     },
     "materialstransmission": {
       "category": "unknown",
@@ -1506,7 +1518,8 @@
         "approach_dir": "any",
         "derived_at": "2026-04-29T09:39:46.268877Z",
         "derived_from": "aabb_size + category"
-      }
+      },
+      "qfep_connection": "Fresnel makes the glass most present at the grazing angle, where you see it least directly — face it head-on and it nearly vanishes into what it refracts. A material legible only at its own edges, presence as boundary condition rather than substance."
     },
     "pattern_compositor": {
       "category": "shaders",
@@ -1615,7 +1628,8 @@
         "approach_dir": "any",
         "derived_at": "2026-04-29T09:39:46.268877Z",
         "derived_from": "aabb_size + category"
-      }
+      },
+      "qfep_connection": "A carpet is a jurisdiction map: field, border, medallion, gutter each ruled by a different wallpaper group with its own palette and seed. F_order as zoning law — the composition holds not because the patterns agree but because their borders are drawn first."
     },
     "pixel_carpet_gallery": {
       "category": "shaders",
@@ -1721,7 +1735,8 @@
         "approach_dir": "any",
         "derived_at": "2026-04-29T09:39:46.268877Z",
         "derived_from": "aabb_size + category"
-      }
+      },
+      "qfep_connection": "Sixty-nine carpets from one shader: seventeen symmetry groups crossed with ten neon palettes cover a thirty-metre corridor floor-to-ceiling without repeating. A demonstration that a small F_order plus seeded E_flux can outproduce a warehouse of unique assets — and that 'unique' was always a parameter count."
     },
     "postprocessing_bloom": {
       "category": "unknown",
@@ -1839,7 +1854,8 @@
         "approach_dir": "any",
         "derived_at": "2026-04-29T09:39:46.268877Z",
         "derived_from": "aabb_size + category"
-      }
+      },
+      "qfep_connection": "Bloom is the camera's confession, not the object's property: whatever exceeds the threshold leaks light into its neighbors' pixels. The scene arranges its bodies purely to overdrive that leak — a hierarchy of importance measured in emission energy."
     },
     "queer_collection_gallery_a": {
       "category": "shaders",
@@ -1922,7 +1938,8 @@
         "approach_dir": "any",
         "derived_at": "2026-04-29T09:39:46.268877Z",
         "derived_from": "aabb_size + category"
-      }
+      },
+      "qfep_connection": "Five identical spheres, five affects compiled to fragment math — bruises as two noise fields intersecting, tears as scrolling roughness, melting as vertex displacement. Geometry is held constant so that all difference is skin, which is the claim: identity lives in the surface program, not the mesh."
     },
     "science_screen": {
       "dna": {
@@ -3732,7 +3749,8 @@
         "approach_dir": "any",
         "derived_at": "2026-04-29T09:39:46.268877Z",
         "derived_from": "aabb_size + category"
-      }
+      },
+      "qfep_connection": "Leather, velvet fur, pop plastic, techno fungus — spheres labeled like vitrines, a taxonomy of surfaces on one repeated mesh. The Degrading Rust holds its decay pinned at 0.65: even entropy is exhibited here as a dialed uniform rather than a process, decomposition curated into stillness."
     },
     "tiles_explained": {
       "category": "shaders",
@@ -3842,7 +3860,8 @@
         "approach_dir": "any",
         "derived_at": "2026-04-29T09:39:46.268877Z",
         "derived_from": "aabb_size + category"
-      }
+      },
+      "qfep_connection": "Five boxes freeze five stages of one shader — raw UV, tiling, rotation, rotated pattern, finished surface — so the final image stands beside its own workings. The pipeline laid out as archaeology, revoking the shader's usual right to show only its conclusion."
     },
     "wall_cove": {
       "category": "shaders",
@@ -3944,7 +3963,8 @@
         "approach_dir": "any",
         "derived_at": "2026-04-29T09:39:46.268877Z",
         "derived_from": "aabb_size + category"
-      }
+      },
+      "qfep_connection": "The right angle between floor and wall is a decision, not a fact; a twenty-four-segment quarter-circle unmakes it, and the continuous UVs let one pattern flow across what building code insists are two surfaces. The corner dissolved by mesh topology."
     },
     "wall_pattern_colorizer": {
       "category": "shaders",
@@ -4039,7 +4059,8 @@
         1.0,
         1,
         1.0
-      ]
+      ],
+      "qfep_connection": "The architecture is conscripted as display: every wall cube above y=0 becomes a pixel whose color is settled by symmetry-group arithmetic on its own grid coordinates. The wall does not carry a pattern — it is one, and the map's structure layer was the image buffer all along."
     },
     "wall_pattern_gallery": {
       "category": "shaders",
@@ -4238,7 +4259,8 @@
         1.0,
         1,
         1.0
-      ]
+      ],
+      "qfep_connection": "The room's whole material is revealed to be one slot: voronoi, tartan, rothko rotate through the GridMultiMesh override every few seconds while the geometry never moves. The original material is kept aside for restoration — the grid's look was always a swap-in, held in place by nothing but not-yet-being-replaced."
     }
   }
 }

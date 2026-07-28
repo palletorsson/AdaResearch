@@ -100,7 +100,8 @@
         "approach_dir": "any",
         "derived_at": "2026-04-29T09:39:46.280749Z",
         "derived_from": "aabb_size + category"
-      }
+      },
+      "qfep_connection": "Desire reduced to one subtraction: desired velocity minus current velocity, clamped by max_force. The agent can never overshoot its own ambition — its wanting has a ceiling, and the ceiling is a slider you can grab."
     },
     "noc_5_02_arrive": {
       "name": "Arrive Steering Behavior",
@@ -203,7 +204,8 @@
         "approach_dir": "any",
         "derived_at": "2026-04-29T09:39:46.280749Z",
         "derived_from": "aabb_size + category"
-      }
+      },
+      "qfep_connection": "Seek plus the one thing seek lacks: a radius inside which desire decelerates. The torus drawn around the target gives the slowdown zone a body — restraint made into geometry you can resize by hand."
     },
     "noc_5_03_stay_within_walls": {
       "name": "Stay Within Walls",
@@ -305,7 +307,8 @@
         "approach_dir": "front",
         "derived_at": "2026-04-29T09:39:46.280749Z",
         "derived_from": "aabb_size + category"
-      }
+      },
+      "qfep_connection": "The vehicle steers off a position it does not yet occupy: its velocity projected lookahead seconds forward is what the four walls repel. Containment operates on the imagined future, not the present body — the wall is obeyed before it is ever reached."
     },
     "noc_5_04_flow_field": {
       "name": "Flow Field Following",
@@ -508,7 +511,8 @@
         "approach_dir": "front",
         "derived_at": "2026-04-29T09:39:46.280749Z",
         "derived_from": "aabb_size + category"
-      }
+      },
+      "qfep_connection": "Two vehicles, one path, different max_speed and max_force: the fast one weaves, the slow one hugs. The radius slider widens or narrows how much deviation still counts as following — obedience defined as a tolerance band, never a line."
     },
     "noc_5_07_separation": {
       "name": "Separation Steering",
@@ -610,7 +614,8 @@
         "approach_dir": "front",
         "derived_at": "2026-04-29T09:39:46.280749Z",
         "derived_from": "aabb_size + category"
-      }
+      },
+      "qfep_connection": "Twenty agents governed by a single rule: get away from each other. No goal, no path, only weighted mutual repulsion — and out of pure avoidance comes even spacing, an order built entirely of refusals."
     },
     "noc_5_08_path_following": {
       "name": "Path Following",
@@ -712,7 +717,8 @@
         "approach_dir": "front",
         "derived_at": "2026-04-29T09:39:46.280749Z",
         "derived_from": "aabb_size + category"
-      }
+      },
+      "qfep_connection": "Each of twelve vehicles predicts its own future position, projects it onto the path's spine, and corrects only when the projection escapes the radius. Following is lazy by design — as long as the imagined self stays inside the tube, no force is spent at all."
     },
     "noc_5_08_separation_and_seek": {
       "name": "Separation and Seek",
@@ -815,7 +821,8 @@
         "approach_dir": "front",
         "derived_at": "2026-04-29T09:39:46.280749Z",
         "derived_from": "aabb_size + category"
-      }
+      },
+      "qfep_connection": "Everyone wants the same target and wants distance from everyone else wanting it; two sliders weigh the contradiction. The ring that stabilizes around the goal is neither desire nor refusal but their arithmetic sum — a shape no single agent intends."
     },
     "example_5_9_flocking": {
       "name": "Flocking Simulation",
@@ -918,7 +925,8 @@
         "approach_dir": "any",
         "derived_at": "2026-04-29T09:39:46.280749Z",
         "derived_from": "aabb_size + category"
-      }
+      },
+      "qfep_connection": "Three of forty boids are recolored predator and every agent wears its perception radius as a drawn ring: identical steering arithmetic split into chase and flee by role alone. The ring is the flock's real constitution — nobody knows anything beyond their own circle."
     },
     "example_5_9_flocking_with_binning": {
       "name": "Flocking with Spatial Binning",
@@ -1021,7 +1029,8 @@
         "approach_dir": "front",
         "derived_at": "2026-04-29T09:39:46.280749Z",
         "derived_from": "aabb_size + category"
-      }
+      },
+      "qfep_connection": "Same three desires, but neighborhood is resolved by bucket address instead of measured pairwise distance — bin_size decides who exists for whom. The flock behaves the same and cheaper, which is the uncomfortable lesson: perception can be replaced by bookkeeping without the collective noticing."
     },
     "example_5_12_sine_cosine_lookup": {
       "name": "Sine Cosine Lookup Table",
@@ -1121,7 +1130,8 @@
         "approach_dir": "any",
         "derived_at": "2026-04-29T09:39:46.280749Z",
         "derived_from": "aabb_size + category"
-      }
+      },
+      "qfep_connection": "Sine is evaluated 360 times at _ready and never again; every later undulation is recall from a PackedFloat32Array, not computation. Smoothness as an archive being replayed — F_order's favorite trade, memory spent now so no future moment requires thought."
     },
     "exercise_5_2_pursuit": {
       "name": "Pursuit Exercise",
@@ -1223,7 +1233,8 @@
         "approach_dir": "any",
         "derived_at": "2026-04-29T09:39:46.280749Z",
         "derived_from": "aabb_size + category"
-      }
+      },
+      "qfep_connection": "Filed as pursuit, but the code only arrives: the chaser steers at where the target is, never at where its velocity says it will be. The gap between label and mechanism is the actual lesson — prediction is the one ingredient that would turn approach into hunting."
     },
     "exercise_5_4_wander": {
       "name": "Wander Steering",
@@ -1327,7 +1338,8 @@
         "approach_dir": "front",
         "derived_at": "2026-04-29T09:39:46.280749Z",
         "derived_from": "aabb_size + category"
-      }
+      },
+      "qfep_connection": "Randomness is smoothed twice before it may steer: a hand-shuffled permutation table feeds value noise, the noise picks a point on a circle projected ahead, and only that offset becomes force. Wander is chance on a fixed-radius leash — and the seek slider can drown it in purpose at any moment."
     },
     "exercise_5_9_angle_between": {
       "name": "Angle Between Vectors",
@@ -1533,7 +1545,8 @@
         "approach_dir": "front",
         "derived_at": "2026-04-29T09:39:46.280749Z",
         "derived_from": "aabb_size + category"
-      }
+      },
+      "qfep_connection": "Twenty vehicles with individually randomized top speeds and force budgets share one tube of tolerance; follow pulls them into file while separation keeps them from collapsing into one body. A crowd, operationally, is a corridor plus a repulsion term."
     },
     "flocking_controls": {
       "name": "Flocking Controls",

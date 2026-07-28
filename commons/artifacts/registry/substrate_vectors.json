@@ -111,7 +111,8 @@
     },
     "time": {
       "continuous": 0.4
-    }
+    },
+    "qfep_connection": "The tubes are frozen sine — animation_speed sits at zero and the geometry never moves; all the travel happens in the fragment shader, where a gradient slides along a static curve. Motion is revealed as an attribution: the wave stands still and light does the flowing, and a walking body can't tell the difference."
   },
   "ContextSensitiveTree": {
     "algorithm": {
@@ -148,7 +149,8 @@
     },
     "time": {
       "continuous": 0.6
-    }
+    },
+    "qfep_connection": "The choreography is administered per bone: sine to the left arm, cosine to the right — the same oscillation a quarter-phase apart — while trace balls write each limb's curve into fading trails. What reads as expression is quadrature; the skeleton becomes a plotter of its own driving functions, and the dance is where the phase difference lives."
   },
   "DoublePendulum": {
     "algorithm": {
@@ -217,7 +219,8 @@
     },
     "time": {
       "continuous": 0.6
-    }
+    },
+    "qfep_connection": "A rigged glTF body has its bones bent by sine functions while a parametric gown is re-parented to whichever bone answers to 'hips' — the code tries seven names before falling back. Choreography as oscillation, costume as attachment: the dance survives only if the skeleton's naming convention cooperates."
   },
   "ElphabaDress": {
     "algorithm": {
@@ -414,7 +417,8 @@
     },
     "time": {
       "continuous": 0.6
-    }
+    },
+    "qfep_connection": "Three sine functions, one per axis, never consult each other — and the ball's path ties a knot anyway. The present is only a dot; the figure exists in a thousand-point memory buffer, so the knot is literally what persistence makes of independence: coordination nobody performed, read off after the fact."
   },
   "MarioSoundController": {
     "algorithm": {
@@ -477,7 +481,8 @@
     },
     "time": {
       "continuous": 0.4
-    }
+    },
+    "qfep_connection": "Pitch space literalized: twelve semitones become an X axis, octaves a Y axis, and Ode to Joy becomes an itinerary a marker walks through the room. Once melody is trajectory, a wrong note is just a place — the scale's authority turns out to be geography."
   },
   "NoiseColors3D": {
     "algorithm": {
@@ -573,7 +578,8 @@
     },
     "time": {
       "continuous": 0.6
-    }
+    },
+    "qfep_connection": "Two clocks that cannot hear each other — gravity's damped pendulum and a motor's constant circle — and the trail is their negotiation, drawn out along a conveyor of time. Neither driver contains the curve; the compound is real and belongs to no one."
   },
   "PendulumGrid3x3": {
     "algorithm": {
@@ -594,7 +600,8 @@
     },
     "time": {
       "continuous": 0.6
-    }
+    },
+    "qfep_connection": "Nine identical double pendulums seeded a few degrees apart, publicly diverging in a lineup. Sameness of law does not deliver sameness of life — the irreducible lives in the decimals of the starting angle."
   },
   "PendulumWave": {
     "algorithm": {
@@ -636,7 +643,8 @@
     },
     "time": {
       "continuous": 0.3
-    }
+    },
+    "qfep_connection": "Five phonemes drone continuously at fixed positions; the cursor never utters anything, it only reweights their volumes by distance. Speech recast as a field you stand in rather than a sequence you emit — articulation becomes a matter of where you are."
   },
   "Rack303Acid": {
     "algorithm": {
@@ -682,7 +690,8 @@
     },
     "time": {
       "continuous": 0.4
-    }
+    },
+    "qfep_connection": "The genre-founding boom is the tamest signal there is — one sine with a falling pitch envelope — governed by a single decay fader, with a VU needle trembling for frequencies the ear can't confirm. Sub-bass authority is felt order, and its whole constitution is decay time."
   },
   "RackAmbientDrone": {
     "algorithm": {
@@ -751,7 +760,8 @@
     },
     "time": {
       "continuous": 0.3
-    }
+    },
+    "qfep_connection": "The coin sound stripped to its mechanism: a start frequency, an end frequency, and the sweep between them, surrendered as two faders. A reward stimulus turns out to have a slope in hertz — and here you are allowed to bend it."
   },
   "RackMoogBass": {
     "algorithm": {
@@ -900,7 +910,8 @@
     },
     "time": {
       "continuous": 0.4
-    }
+    },
+    "qfep_connection": "Nine buttons of sounds that refuse to end — drones, pads, a lift loop, a riser — with STOP ALL enthroned above them. The long sound's politics is occupancy: once triggered it holds the room until you legislate silence."
   },
   "SoundBoxShort": {
     "algorithm": {
@@ -920,7 +931,8 @@
     },
     "time": {
       "continuous": 0.4
-    }
+    },
+    "qfep_connection": "Kicks, snares, hats, glitches — each one-shot offered twice, so a two-finger rhythm is physically possible. The short sound never occupies the room; it punctuates it, and the punctuation's tempo is your own body."
   },
   "SoundscapeRadioRack": {
     "algorithm": {
@@ -988,7 +1000,8 @@
     "time": {
       "continuous": 0.4,
       "static": 0.6
-    }
+    },
+    "qfep_connection": "A cable never computes its catenary — gravity solved that once and left the answer hanging; the tube mesh here just samples the verdict along whatever Path3D someone laid down, form authored elsewhere and worn as infrastructure."
   },
   "StaticCables": {
     "algorithm": {
@@ -1006,7 +1019,8 @@
     "time": {
       "continuous": 0.4,
       "static": 0.6
-    }
+    },
+    "qfep_connection": "Eight identical tubes, each drooping by the same −sin(πt) sag — gravity impersonated by a sine because the true catenary was more curve than the room needed. The look of weight, purchased at the cost of the physics."
   },
   "SystemsMusicTest": {
     "algorithm": {
@@ -1182,7 +1196,8 @@
     },
     "time": {
       "continuous": 0.4
-    }
+    },
+    "qfep_connection": "Grab the stick and your locomotion is confiscated: the player body is switched off and an invisible carpet under your feet ferries you around an ellipse you cannot steer. Riding the wave means consenting to become a parameter of someone else's function."
   },
   "WhiteNoiseGallery": {
     "algorithm": {
@@ -2130,7 +2145,8 @@
     },
     "time": {
       "continuous": 0.6
-    }
+    },
+    "qfep_connection": "The ball only ever goes in circles; the helix appears because a conveyor of time refuses to let the past be overwritten. The spiral was never in the motion — it is in the memory."
   },
   "circularradarmonitor": {
     "containment": {
@@ -2282,7 +2298,8 @@
     },
     "time": {
       "continuous": 0.4
-    }
+    },
+    "qfep_connection": "Two coordinates in, one flaring helicoid out: sinh's exponential growth is read directly off how fast the ramp's outer edge outruns its spine. The mesh is the growth rate made visible."
   },
   "coupled_oscillator_lattice": {
     "algorithm": {
@@ -2605,7 +2622,8 @@
     },
     "time": {
       "continuous": 0.6
-    }
+    },
+    "qfep_connection": "One pivot, two balls locked 180 degrees apart, and time stretches their shared circle into cyan and magenta strands that never touch yet cannot vary independently. The icon of heredity staged as the least free structure in the room: perfect complementarity is one driver wearing two colors."
   },
   "double_helix_scene": {
     "algorithm": {
@@ -2646,7 +2664,8 @@
     },
     "time": {
       "continuous": 0.4
-    }
+    },
+    "qfep_connection": "Every slider nudge throws the whole helix away and regrows it from parameters — the molecule that stores heredity staged as a thing with no history, only a recipe. The seed is short; the body is always re-derived."
   },
   "dual_display_test": {
     "algorithm": {
@@ -3922,7 +3941,8 @@
     },
     "time": {
       "continuous": 0.4
-    }
+    },
+    "qfep_connection": "Sixteen synthetic choir voices, a dorian mode table, and an audio bus literally named Cathedral_Reverb: the numinous rendered as DSP routing, awe revealed as an acoustics parameter that a background thread can generate from randf()."
   },
   "living_paper": {
     "algorithm": {
@@ -4770,7 +4790,8 @@
     },
     "time": {
       "continuous": 0.4
-    }
+    },
+    "qfep_connection": "An 8-by-16 grid where any cell you light must land on one of eight pre-chosen notes — even the RANDOM button can only produce melancholy. Genre as constraint surface: the mood was decided in the scale table, before the first note."
   },
   "noise_terrain": {
     "algorithm": {
@@ -5022,7 +5043,8 @@
     "time": {
       "continuous": 0.4,
       "discrete_step": 0.5
-    }
+    },
+    "qfep_connection": "Every four seconds a new body — circle, cone, sphere, torus — but always the same two dials underneath. Form as itinerary: the shape is whatever a pair of parameters (u,v) visits when told the order to go in, and the red and blue markers keep pointing at the dials so the body can't pass itself off as given."
   },
   "particle_chaos": {
     "geometry": {
@@ -5765,7 +5787,8 @@
     },
     "time": {
       "continuous": 0.5
-    }
+    },
+    "qfep_connection": "The lattice towers hold only the endpoints; everything between is surrendered to gravity, which collects a parabolic sag proportional to span length, and to wind, which renegotiates the curve every frame. F_order pays for the ends of the line — the middle belongs to E_flux, until the last cable drops and grounds it in a transformer box."
   },
   "qfep_formula_3d": {
     "geometry": {
@@ -6428,7 +6451,8 @@
     },
     "time": {
       "continuous": 0.4
-    }
+    },
+    "qfep_connection": "Five harmonics stacked with amplitude decaying 0.7 per overtone, and the marked positions are the nodes — points where the medium refuses every frequency at once. The counter-intuition staged: structure appears not where motion is strongest but where the cancellations agree."
   },
   "resonance_frequencies_visualizer": {
     "algorithm": {
@@ -6637,7 +6661,8 @@
     },
     "time": {
       "continuous": 0.7
-    }
+    },
+    "qfep_connection": "The same A·sin(ωt) that once lifted a cube now turns one — position swapped for angle while the mathematics stands still, the arc on the floor marking amplitude's new units. One toggle tips oscillation into endless spin: a pendulum and a wheel separated by a single branch in the update rule."
   },
   "rounded_softbody_test": {
     "geometry": {
@@ -7072,7 +7097,8 @@
     },
     "time": {
       "continuous": 0.4
-    }
+    },
+    "qfep_connection": "The wave never exists outside the shader: a fragment program measures each pixel's distance to sin(x·f + t) and lights the ones close enough, dressing them in scanlines and vignette. An oscilloscope with no signal behind it — the instrument's authority, fully divorced from measurement."
   },
   "sine_cylinder_staircase": {
     "algorithm": {
@@ -7181,7 +7207,8 @@
     "time": {
       "continuous": 0.6,
       "static": 0.6
-    }
+    },
+    "qfep_connection": "Three sine layers summed and then built as masonry: a waveform with the time variable amputated, color-graded from blue floor to orange crest. What remains when oscillation is denied its delta — pure spatial frequency, made load-bearing."
   },
   "snappable_wood_cube": {
     "geometry": {
@@ -7503,7 +7530,8 @@
     },
     "time": {
       "static": 1.0
-    }
+    },
+    "qfep_connection": "The one body whose job is to refuse the frame update: y stays zero so every oscillation nearby has something to be measured against. Motion is differential — someone has to hold still, and holding still is work assigned, not work absent."
   },
   "step_sequencer": {
     "algorithm": {
@@ -8239,7 +8267,8 @@
     },
     "time": {
       "continuous": 0.4
-    }
+    },
+    "qfep_connection": "The graph of sin refuses to stay notation: 120 segments of collision mesh make amplitude a slope your legs must pay for, and the scene even spawns its own walker rather than wait for a body to arrive."
   },
   "walkingsphere": {
     "algorithm": {

@@ -1467,7 +1467,8 @@
     1.0,
     1,
     1.0
-   ]
+   ],
+   "qfep_connection": "A 3x3 window drags across the input grid and feature maps light up beneath it; pooling then discards most of what was computed, keeping only maxima. This is what a CNN calls seeing: one small prejudice — the kernel — applied everywhere, followed by aggressive forgetting."
   },
   "convolutional_neural_networks_cnns_vr": {
    "category": "unknown",
@@ -3205,7 +3206,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.152793Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "A network as a tower with padlocks: frozen storeys keep their inherited weights while gradients flow only through the unlocked top. Transfer learning staged as property law — most of the model is estate, and 'learning' happens in the floors you are permitted to renovate."
   },
   "gans": {
    "category": "machinelearning",
@@ -5641,7 +5643,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.152793Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "Three hundred walkers, each carrying twelve weights, ranked by fitness every two hundred frames while temperature dilutes their conviction with noise. Evolution as a leaderboard with amnesia: only the top twenty are drawn, the rest walk unseen, and the targets themselves drift on noise."
   },
   "recommendation_systems": {
    "category": "machinelearning",
@@ -7005,7 +7008,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.152793Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "Latent space at body scale: a sphere you walk into, sample points you grab, encoder and decoder tunnels compressing on one side and reconstructing on the other. The reparameterization trick is staged too — even here, chance must be smuggled past the optimizer in a differentiable envelope."
   },
   "adaboost": {
    "lookup_name": "adaboost",
