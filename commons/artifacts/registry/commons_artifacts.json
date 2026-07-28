@@ -1100,7 +1100,7 @@
     ],
     "size_group": "compact"
    },
-   "scene": "res://commons/artifacts/agnes_martin_grid_painting/agnes_martin_grid_painting.tscn",
+   "scene": "res://commons/context/agnesnatringrid/agnes_grid_3d.tscn",
    "sequence": "artmathematics",
    "size_group": "compact",
    "tags": [
@@ -8018,13 +8018,13 @@
   "library_rack": {
    "dna": {
     "axes": {
-    "guard": [
-    "none",
-    "label",
-    "fixture",
-    "hood",
-    "cordon"
-    ]
+     "guard": [
+      "none",
+      "label",
+      "fixture",
+      "hood",
+      "cordon"
+     ]
     }
    },
    "category": "display",
@@ -10764,9 +10764,9 @@
     1.0,
     1.0
    ],
-   "include_in_map_data": true,
+   "include_in_map_data": false,
    "lookup_name": "player_position_to_console",
-   "map_ready": true,
+   "map_ready": false,
    "map_sequences": [],
    "name": "player_position_to_console",
    "parameters": {
@@ -10777,7 +10777,7 @@
     ],
     "size_group": "compact"
    },
-   "scene": "res://commons/displays/player_position_to_console.tscn",
+   "scene": "res://commons/displays/player_position_console_display.tscn",
    "size_group": "compact",
    "tags": [
     "commons"
@@ -10817,7 +10817,8 @@
     ],
     "max_dimension_m": 0.0,
     "measured_at": "2026-04-29T07:09:56.762620Z"
-   }
+   },
+   "registry_note": "Headless console printer — scene root is Node, not Node3D, so it cannot be placed in a map. Kept for direct scene use only."
   },
   "player_presence_indicator": {
    "category": "unknown",
@@ -15163,12 +15164,12 @@
   "tt": {
    "dna": {
     "axes": {
-    "support": [
-    "none",
-    "stand",
-    "frame",
-    "pylon"
-    ]
+     "support": [
+      "none",
+      "stand",
+      "frame",
+      "pylon"
+     ]
     }
    },
    "name": "Tutorial Text Display",

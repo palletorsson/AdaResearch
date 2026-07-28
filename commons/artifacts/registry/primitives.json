@@ -87,12 +87,12 @@
   "floating_sphere_field": {
    "dna": {
     "axes": {
-    "density": [
-    "sparse",
-    "scarce",
-    "dense",
-    "fog"
-    ]
+     "density": [
+      "sparse",
+      "scarce",
+      "dense",
+      "fog"
+     ]
     }
    },
    "category": "primitives",
@@ -141,12 +141,12 @@
   "xyz_slider_plate": {
    "dna": {
     "axes": {
-    "readout": [
-    "numeral",
-    "none",
-    "gradation",
-    "lattice"
-    ]
+     "readout": [
+      "numeral",
+      "none",
+      "gradation",
+      "lattice"
+     ]
     }
    },
    "category": "primitives",
@@ -868,7 +868,7 @@
     ],
     "size_group": "compact"
    },
-   "scene": "res://commons/primitives/cubes/animated_cube.tscn",
+   "scene": "res://commons/primitives/cubes/animationsine/animated_cube.tscn",
    "size_group": "compact",
    "tags": [
     "simulation"
@@ -1851,7 +1851,7 @@
     ],
     "size_group": "compact"
    },
-   "scene": "res://commons/primitives/plants/bucket_of_tulips.tscn",
+   "scene": "res://algorithms/computationalbiology/bucketoftulips/bucket_of_tulips.tscn",
    "size_group": "compact",
    "tags": [
     "primitive"
@@ -10978,12 +10978,12 @@
   "line": {
    "dna": {
     "axes": {
-    "readout": [
-    "numeral",
-    "none",
-    "gradation",
-    "lattice"
-    ]
+     "readout": [
+      "numeral",
+      "none",
+      "gradation",
+      "lattice"
+     ]
     }
    },
    "category": "unknown",
