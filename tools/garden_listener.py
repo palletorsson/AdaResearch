@@ -171,7 +171,9 @@ def get_sequence_artifacts(seq_name):
         for row in md.get("layers", {}).get("interactables", []):
             for cell in row:
                 if cell and str(cell).strip() and str(cell) != "0":
-                    name = str(cell).split(":")[0].strip()
+                    # strip both :grid-config and #param suffixes — a token
+                    # like becoming_catalyst#start_mode is still becoming_catalyst
+                    name = str(cell).split(":")[0].split("#")[0].strip()
                     if name not in SKIP_ARTS and name not in arts:
                         arts.append(name)
         result.append((map_name, title, arts))

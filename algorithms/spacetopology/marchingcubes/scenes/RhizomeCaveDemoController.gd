@@ -1,6 +1,16 @@
 # RhizomeCaveDemoController.gd
 # Simplified cave generation controller - no UI, camera, or VR controls
 # Only generates caves automatically
+#
+# @identity
+# essence: a cave system grown live by the rhizome generator — chambers connected without a trunk, any passage reachable from any other, marched into walkable rock at load
+# desire: to let the player stand inside Deleuze and Guattari's figure instead of reading it; the network room needs a space whose topology is the argument
+# critical_parameter: the connectivity of the generated graph — no chamber is root, no passage is main; delete any tunnel and the rest still connects, which is the rhizome's whole claim
+# triggers: _ready() defers generate_cave_async so the marching-cubes pass builds the cave without blocking entry; progress and completion arrive by signal
+# emerges: navigation without hierarchy — you cannot ask which way is forward, only which opening is next, and orientation becomes relational rather than rooted
+# needs: RhizomeCaveGenerator [algorithms/spacetopology/marchingcubes]; async generation [the cave must not gate the map load]; the surrounding 3t labels stating the principles the space enacts
+# relationships: the teaching centre of Rhizome_Network — rhizome_grower beside it shows the same figure growing at hand scale while this one is inhabited at body scale
+# truth: a rhizome cannot be toured, only entered somewhere. Any point connects to any other, so the map of this cave and the cave itself never agree — and the disagreement is the lesson.
 
 extends Node3D
 
