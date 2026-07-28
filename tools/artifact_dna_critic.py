@@ -67,6 +67,47 @@ def diff(a: list[int], b: list[int]) -> tuple[float, float]:
     return frame, focus
 
 
+def subject_fraction(img: list[int]) -> float:
+    """How much of the frame has ANYTHING in it, 0..1.
+
+    WHY THIS EXISTS. library_rack was swept across five `guard` values and reported
+    INERT at 2.20% frame / 2.20% focus. Those two numbers being EQUAL to two decimals
+    is the tell: a real localised change makes focus far exceed frame, because focus
+    is the hottest 5% and frame is the mean. Equal means the difference is uniform,
+    i.e. there is no subject at all. The artifact had rendered NOTHING — five files of
+    identical 3428 bytes, flat background — because library_rack deliberately refuses
+    to build until a collection arrives via apply_grid_config, and cabinet_sweep sets
+    @export properties without ever calling it.
+
+    So the critic confidently reported a fact about an artifact's design when the truth
+    was that its own harness never gave the artifact anything to draw. That is the same
+    disease this whole loop keeps finding: an instrument reporting a fact about itself
+    as a fact about the thing it measures. A verdict on an empty picture is not a weak
+    verdict, it is not a verdict.
+
+    Measured against the corner pixel, which is background by construction in these
+    captures (the subject is centred by the auto-framing camera).
+    """
+    if not img:
+        return 0.0
+    bg = img[0]
+    return sum(1 for v in img if abs(v - bg) > 10) / float(len(img))
+
+
+# Below this share of the frame carrying any subject at all, the render FAILED and no
+# verdict is honest.
+#
+# CALIBRATED, NOT GUESSED, and the first guess was wrong. 1% seemed "deliberately
+# generous" and immediately produced a FALSE POSITIVE on floating_sphere_field, which is
+# a legitimately sparse artifact — eighteen small spheres drifting in a void, 0.83% of
+# the frame, and every one of them really there. A blank frame is not "a small subject",
+# it is NO subject: library_rack measured 0.000. So the bar sits between the two, far
+# closer to zero than to anything that has ever rendered. Sparse is not empty, and an
+# instrument that cannot tell them apart would have introduced a new false verdict while
+# fixing an old one.
+BLANK_SUBJECT = 0.002
+
+
 def main() -> int:
     gallery = "readymades-dna"
     out_json = None
@@ -123,10 +164,16 @@ def main() -> int:
                 fo.append(f2)
             frame = sum(fr) / len(fr)
             focus = sum(fo) / len(fo)
+            # Did the artifact draw ANYTHING? Checked before any verdict, because a
+            # verdict on an empty picture is a statement about the harness, not the axis.
+            seen = {str(e["id"]) for pair in pairs for e in pair}
+            subject = max((subject_fraction(cache[f]) for f in seen), default=0.0)
             # Judged on FOCUS. A knob that is connected to something changes its hottest
             # pixels a lot even when the frame barely moves; a knob connected to nothing
             # is flat everywhere.
-            if focus < INERT_FOCUS:
+            if subject < BLANK_SUBJECT:
+                verdict = "NO RENDER"
+            elif focus < INERT_FOCUS:
                 verdict = "INERT"
             elif focus < WEAK_FOCUS:
                 verdict = "WEAK"
@@ -137,15 +184,24 @@ def main() -> int:
             print(f"{prop:24} {axis:22} {frame*100:6.2f}% {focus*100:7.2f}%  {verdict}")
             report.append({"artifact": prop, "axis": axis, "frame": round(frame, 5),
                            "focus": round(focus, 5), "verdict": verdict,
-                           "pairs": len(pairs)})
+                           "subject": round(subject, 5), "pairs": len(pairs)})
 
     inert = [r for r in report if r["verdict"] == "INERT"]
     weak = [r for r in report if r["verdict"] == "WEAK"]
+    blank = [r for r in report if r["verdict"] == "NO RENDER"]
     print("-" * 74)
     local = [r for r in report if r["verdict"] == "local"]
     bites = [r for r in report if r["verdict"] == "bites"]
     print(f"{len(report)} axes measured · {len(bites)} bite · {len(local)} local"
-          f" · {len(weak)} weak · {len(inert)} inert")
+          f" · {len(weak)} weak · {len(inert)} inert · {len(blank)} not rendered")
+    if blank:
+        print("\nNO RENDER — the frames are empty, so NOTHING here is a verdict about the"
+              " axis. The artifact drew nothing in the sweep. Usual causes: it builds only"
+              " on apply_grid_config (which cabinet_sweep never calls, it sets @exports),"
+              " or it needs map context. Fix the harness, then re-measure:")
+        for r in blank:
+            print(f"  {r['artifact']}.{r['axis']}"
+                  f"  subject {r['subject']*100:.2f}% of frame")
     if inert:
         print("\nINERT — these knobs are not connected to anything you can see:")
         for r in inert:
