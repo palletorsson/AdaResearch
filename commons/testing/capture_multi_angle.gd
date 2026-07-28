@@ -715,6 +715,14 @@ func _get_combined_aabb(node: Node3D) -> AABB:
 			if mm and mm.instance_count > 0:
 				child_aabb = child.transform * mm.get_aabb()
 				has_aabb = true
+		elif child is Label3D:
+			# Text beside an artifact is part of what it is. Without this the
+			# framing math sees only meshes and the camera crops the words
+			# that name the thing (cap_theorem_walk, merge_conflict_visualizer).
+			var label_aabb: AABB = (child as Label3D).get_aabb()
+			if label_aabb.size.length() > 0:
+				child_aabb = child.transform * label_aabb
+				has_aabb = true
 		elif child is CSGShape3D:
 			# CSG nodes have get_meshes() which returns [Transform3D, Mesh] pairs
 			var meshes = (child as CSGShape3D).get_meshes()
