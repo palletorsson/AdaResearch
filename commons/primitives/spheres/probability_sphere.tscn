@@ -1,3 +1,11 @@
-[gd_scene format=3]
+[gd_scene load_steps=2 format=3 uid="uid://cprobsphere0001"]
 
-[node name="Root" type="Node3D"]
+[ext_resource type="Script" path="res://commons/primitives/spheres/probability_sphere.gd" id="1_script"]
+
+; probability_sphere.tscn — a caged sample space with a fixed Halton point table
+; inside it, backed by probability_sphere.gd. Everything is built procedurally in
+; _ready(); this scene carries the script and nothing else. No RNG runs anywhere
+; in it, which is why it is safe in the `structure` sequence.
+
+[node name="probability_sphere" type="Node3D"]
+script = ExtResource("1_script")

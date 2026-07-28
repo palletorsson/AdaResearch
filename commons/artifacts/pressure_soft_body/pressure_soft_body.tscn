@@ -1,3 +1,11 @@
-[gd_scene format=3]
+[gd_scene load_steps=2 format=3 uid="uid://cpresssoftb01"]
 
-[node name="Root" type="Node3D"]
+[ext_resource type="Script" path="res://commons/artifacts/pressure_soft_body/pressure_soft_body.gd" id="1_script"]
+
+; pressure_soft_body.tscn — one closed SoftBody3D sphere on a plinth with its
+; pressure_coefficient on a single slider, backed by pressure_soft_body.gd.
+; Plinth, cap StaticBody3D, inflatable and slider are all built in _ready();
+; the south-pole pin is deferred until both body and cap are in the tree.
+
+[node name="pressure_soft_body" type="Node3D"]
+script = ExtResource("1_script")

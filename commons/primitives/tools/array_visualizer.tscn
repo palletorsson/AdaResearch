@@ -1,3 +1,11 @@
-[gd_scene format=3]
+[gd_scene load_steps=2 format=3 uid="uid://carrayvis00001"]
 
-[node name="Root" type="Node3D"]
+[ext_resource type="Script" path="res://commons/primitives/tools/array_visualizer.gd" id="1_script"]
+
+; array_visualizer.tscn — a row of value-height cells with engraved indices and a
+; read-head that walks them on a clock, backed by array_visualizer.gd. Same
+; mechanism as the bar_array family with the algorithm removed; everything is
+; built procedurally in _ready(), so this scene carries the script and nothing else.
+
+[node name="array_visualizer" type="Node3D"]
+script = ExtResource("1_script")

@@ -1,3 +1,12 @@
-[gd_scene format=3]
+[gd_scene load_steps=2 format=3 uid="uid://c4latentwalk001"]
 
-[node name="Root" type="Node3D"]
+[ext_resource type="Script" path="res://commons/artifacts/latent_space_walk/latent_space_walk.gd" id="1_script"]
+
+; latent_space_walk.tscn — 3 x 3 m walkable interpolation plate, backed by
+; latent_space_walk.gd. A 7 x 7 lattice of decoded forms, each the bilinear
+; blend of four corner genotypes (spire / drum / helix / bloom). No trained
+; model: the decoder is four vectors and a blend. Built procedurally in
+; _ready(); nothing is authored here.
+
+[node name="latent_space_walk" type="Node3D"]
+script = ExtResource("1_script")

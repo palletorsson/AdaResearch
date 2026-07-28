@@ -1,3 +1,6 @@
-[gd_scene format=3]
+[gd_scene load_steps=2 format=3]
 
-[node name="Root" type="Node3D"]
+[ext_resource type="Script" path="res://commons/artifacts/dimensional_analogy/dimensional_analogy.gd" id="1_script"]
+
+[node name="DimensionalAnalogy" type="Node3D"]
+script = ExtResource("1_script")

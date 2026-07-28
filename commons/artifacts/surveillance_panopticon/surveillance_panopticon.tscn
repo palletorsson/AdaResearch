@@ -1,3 +1,12 @@
-[gd_scene format=3]
+[gd_scene load_steps=2 format=3 uid="uid://cpanopticon0001"]
 
-[node name="Root" type="Node3D"]
+[ext_resource type="Script" path="res://commons/artifacts/surveillance_panopticon/surveillance_panopticon.gd" id="1_script"]
+
+; surveillance_panopticon.tscn — a 4 x 3 x 4 m opaque tower ringed by inward-facing
+; open cells, each held in a translucent cone thrown from a sealed glowing window
+; band, backed by surveillance_panopticon.gd. The asymmetry of sight is geometry:
+; every tower surface is opaque, every cone unshaded and translucent. Built
+; procedurally in _ready(); this scene carries the script and nothing else.
+
+[node name="surveillance_panopticon" type="Node3D"]
+script = ExtResource("1_script")

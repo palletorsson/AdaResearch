@@ -1,3 +1,11 @@
-[gd_scene format=3]
+[gd_scene load_steps=2 format=3 uid="uid://battnecon0001"]
 
-[node name="Root" type="Node3D"]
+[ext_resource type="Script" path="res://commons/artifacts/attention_economy_sim/attention_economy_sim.gd" id="1_script"]
+
+; attention_economy_sim.tscn — five unbounded bidders against one finite bar,
+; backed by attention_economy_sim.gd. All geometry is procedural in _ready();
+; nothing is authored here on purpose, so the market state can never be
+; half-baked into the scene file.
+
+[node name="attention_economy_sim" type="Node3D"]
+script = ExtResource("1_script")

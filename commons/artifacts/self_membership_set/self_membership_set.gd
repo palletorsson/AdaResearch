@@ -19,6 +19,44 @@ class_name SelfMembershipSet
 @export var contradiction_red: Color = Color(0.902, 0.224, 0.275)
 @export var levels: int = 5
 
+## Stage-2 DNA axis — how far the membership chain is allowed to descend into
+## itself, and where the theory puts the contradiction: beside the diagram,
+## inside it, or behind a bar.
+##
+##   nested      the shipped nest. 5 braces of side 0.52 x 0.62^i centred from
+##               y = 0.62 drifting up to 0.72, an ∈ between each pair, and the
+##               glowing red 0.34 x 0.30 x 0.015 m R panel standing at x = 0.42,
+##               y = 0.78 inside its wire frame. The paradox as warning poster.
+##   stratified  not nested at all — 5 braces at a UNIFORM 0.30 m side stacked at
+##               0.27 m pitch from y = 0.35 to y = 1.43, joined by four 0.008 m
+##               corner uprights, ∈ on the risers between rungs. Russell's theory
+##               of types: a set holds only sets from the rung below, and nothing
+##               can hold itself. A 1.1 m ladder where the nest was — the largest
+##               silhouette delta on the axis, which is why it is on it.
+##   barred      only 3 braces are built — this value IGNORES `levels` on purpose,
+##               because the axiom of foundation is precisely a bound on the
+##               chain, and letting the map lengthen it would un-draw the axiom.
+##               A cool-white 0.34 x 0.26 x 0.02 m plate carrying ∉ is fixed
+##               across the mouth of the third at y = 0.72; the R panel is matte
+##               dark red with no glow and no wire frame. Filed as settled.
+##   swallowed   no R panel and no wire frame beside the nest. A 0.14 m red cube
+##               sits at the centre of the innermost brace at y = 0.72 inside a
+##               red torus of radius 0.20 m, and a second ∈ stands beside each
+##               level, outward. The contradiction is in the object rather than
+##               quarantined next to it.
+@export_enum("nested", "stratified", "barred", "swallowed") var descent: String = "nested"
+
+const DESCENTS: PackedStringArray = ["nested", "stratified", "barred", "swallowed"]
+
+## `barred` is the axiom of foundation drawn: the descending chain stops. Three
+## braces, always — see the note on the axis above.
+const BARRED_LEVELS: int = 3
+
+## Deterministic. Nothing in the build reads _rng today, but a randomize() here
+## would make two builds of one value differ and the pixel critic would read the
+## noise as signal.
+const BUILD_SEED: int = 731773
+
 var _epsilons: Array[Label3D] = []
 var _r_panel: MeshInstance3D
 var _r_mat: StandardMaterial3D
@@ -26,35 +64,184 @@ var _r_label: Label3D
 var _braces: Array[Node3D] = []
 var _t: float = 0.0
 
+## Only nodes THIS script created. Freeing get_children() would take the grid's
+## label plates, packaging and tag markers with it.
+var _owned: Array[Node] = []
+## Every material whose emission this artifact drives, with its lit/unlit energy,
+## so `emissive` can be re-applied WITHOUT a rebuild (curation_station calls
+## apply_grid_config({"emissive": false}) one line after framing the labels).
+var _lit: Array[Dictionary] = []
+var _built: bool = false
+## `barred` files the paradox as settled — the red panel does not flicker and the
+## question does not blink.
+var _flicker_r: bool = true
+
 
 func _ready() -> void:
-	_rng.randomize()
+	_rng.seed = BUILD_SEED
+	descent = _pick_axis(descent, DESCENTS, "nested")
 	_build()
+	_built = true
 	set_process(not Engine.is_editor_hint())
 
 
 func apply_grid_config(config: Dictionary) -> void:
+	var before_descent: String = descent
+	var before_levels: int = levels
+	var before_emissive: bool = emissive
+
 	if config.has("emissive"):
 		emissive = bool(config["emissive"])
-	for c in get_children():
-		remove_child(c)
-		c.queue_free()
-	_build()
+	if config.has("levels"):
+		levels = clampi(int(config["levels"]), 2, 8)
+	if config.has("descent"):
+		descent = _pick_axis(str(config["descent"]), DESCENTS, descent)
 
+	if not _built:
+		return
+	if descent == before_descent and levels == before_levels:
+		# No geometry key moved. curation_station's {"emissive": false} lands here:
+		# retint in place, keep every child, say nothing.
+		if emissive != before_emissive:
+			_apply_emissive()
+		return
+
+	_rebuild_now()
+	print("[SelfMembershipSet] Config applied — descent=%s, levels=%d" % [descent, levels])
+
+
+## Accept an axis value only if it names something we actually build. A typo in a
+## map token falls back to the value already in place rather than stranding the
+## placement with no diagram at all.
+func _pick_axis(raw: String, allowed: PackedStringArray, fallback: String) -> String:
+	var v: String = raw.to_lower().strip_edges()
+	return v if allowed.has(v) else fallback
+
+
+func _rebuild_now() -> void:
+	for c in _owned:
+		if is_instance_valid(c):
+			remove_child(c)      # leaves the tree synchronously — no double render
+			c.queue_free()
+	_owned.clear()
+	_build()                     # SYNCHRONOUS: _auto_ground_artifact runs after us
+
+
+# ═══════════════════════════════════════════════════════════════════
+# BUILD
+# ═══════════════════════════════════════════════════════════════════
 
 func _build() -> void:
 	_epsilons.clear()
 	_braces.clear()
+	_lit.clear()
+	_r_panel = null
+	_r_mat = null
+	_r_label = null
+	_flicker_r = true
+	descent = _pick_axis(descent, DESCENTS, "nested")
 
 	# --- floor plate (no bench — the diagram stands on the ground) ---
-	var plate_mat := _steel_mat(Color(0.30, 0.32, 0.38))
-	add_child(_cylinder(Vector3(0.0, 0.01, 0.0), 0.30, 0.02, plate_mat))
-	var ring_mat := _glow_mat(wire_purple, 0.5)
-	add_child(_torus(Vector3(0.0, 0.025, 0.0), 0.30, 0.010, ring_mat))
+	var plate_mat: StandardMaterial3D = _lit_steel(Color(0.30, 0.32, 0.38))
+	_own(_cylinder(Vector3(0.0, 0.01, 0.0), 0.30, 0.02, plate_mat))
+	var ring_mat: StandardMaterial3D = _lit_glow(wire_purple, 0.5)
+	_own(_torus(Vector3(0.0, 0.025, 0.0), 0.30, 0.010, ring_mat))
 
-	# --- nested braces: each contains a smaller copy of itself ---
-	# Outer brace centered around y ~0.62, shrinking inward and upward a touch.
+	var title_y: float = 1.5
+	match descent:
+		"stratified":
+			_build_stratified()
+			title_y = 1.78     # clear the top rung at y = 1.43 + its 0.15 m half-side
+		"barred":
+			_build_barred()
+		"swallowed":
+			_build_swallowed()
+		_:
+			_build_nested()
+
+	# --- billboard title ---
+	_own(_billboard_label("SELF-MEMBERSHIP SET", Vector3(0.0, title_y, 0.0), 32, cool_white))
+	_own(_billboard_label(_subtitle(), Vector3(0.0, title_y - 0.14, 0.0), 16, wire_purple))
+
+
+func _subtitle() -> String:
+	match descent:
+		"stratified":
+			return "types: each rung holds only the rung below"
+		"barred":
+			return "foundation: the descending chain is forbidden"
+		"swallowed":
+			return "the contradiction is inside, not beside"
+	return "a set inside itself, all the way down"
+
+
+## nested — the shipped look, unchanged.
+func _build_nested() -> void:
+	_build_nest(maxi(levels, 2), false)
+	_build_r_panel(true)
+
+
+## stratified — Russell's answer. The nest is unrolled into a type hierarchy:
+## uniform rungs, no containment, nothing able to hold itself.
+func _build_stratified() -> void:
 	var n: int = maxi(levels, 2)
+	var rung: float = 0.30
+	var pitch: float = 0.27
+	var y0: float = 0.35
+	for i in range(n):
+		var cy: float = y0 + float(i) * pitch
+		var bright: float = 1.4 - (float(i) / float(n)) * 0.6
+		var brace: Node3D = _make_brace(Vector3(0.0, cy, 0.0), rung, _lit_glow(brace_blue, bright))
+		_own(brace)
+		_braces.append(brace)
+		# ∈ on the RISER: membership runs from a rung to the one above it, never back.
+		if i < n - 1:
+			var eps: Label3D = _billboard_label("∈", Vector3(0.0, cy + pitch * 0.5, 0.02), 26, cool_white)
+			_own(eps)
+			_epsilons.append(eps)
+
+	# four corner uprights tie the rungs into one ladder
+	var top: float = y0 + float(n - 1) * pitch + rung * 0.5
+	var bot: float = y0 - rung * 0.5
+	var h: float = top - bot
+	var mid: float = (top + bot) * 0.5
+	var post_mat: StandardMaterial3D = _lit_glow(brace_blue, 0.7)
+	for k in range(4):
+		var sx: float = -1.0 if (k % 2) == 0 else 1.0
+		var sz: float = -1.0 if k < 2 else 1.0
+		_own(_box(Vector3(sx * 0.17, mid, sz * 0.06), Vector3(0.008, h, 0.008), post_mat))
+
+	_build_r_panel(true)
+
+
+## barred — the axiom of foundation. Three braces, a ∉ plate across the mouth of
+## the third, and the paradox demoted from live warning to closed file.
+func _build_barred() -> void:
+	_build_nest(BARRED_LEVELS, false)
+
+	var bar_mat: StandardMaterial3D = _lit_glow(cool_white, 0.8)
+	_own(_box(Vector3(0.0, 0.72, 0.06), Vector3(0.34, 0.26, 0.02), bar_mat))
+	_own(_billboard_label("∉", Vector3(0.0, 0.72, 0.09), 30, contradiction_red))
+
+	_flicker_r = false
+	_build_r_panel(false)
+
+
+## swallowed — the red panel is not beside the nest. It is a cube at the centre
+## of the innermost brace, ringed, with a second ∈ beside every level pointing out.
+func _build_swallowed() -> void:
+	_build_nest(maxi(levels, 2), true)
+
+	_r_mat = _lit_glow(contradiction_red, 1.2)
+	_r_panel = _box(Vector3(0.0, 0.72, 0.0), Vector3(0.14, 0.14, 0.14), _r_mat)
+	_own(_r_panel)
+	_own(_torus(Vector3(0.0, 0.72, 0.0), 0.20, 0.012, _lit_glow(contradiction_red, 1.6)))
+	_own(_billboard_label("R ∈ R", Vector3(0.0, 0.92, 0.02), 18, contradiction_red))
+
+
+## The nest proper: each brace holds a smaller copy of itself, drifting up.
+## `outward` adds the second, outward-facing membership glyph beside each level.
+func _build_nest(n: int, outward: bool) -> void:
 	var base_size: float = 0.52
 	var base_y: float = 0.62
 	for i in range(n):
@@ -62,34 +249,42 @@ func _build() -> void:
 		var s: float = base_size * pow(0.62, float(i))     # shrink each level
 		var cy: float = base_y + f * 0.10                  # drift up slightly
 		var bright: float = 1.4 - f * 0.6
-		var brace: Node3D = _make_brace(Vector3(0.0, cy, 0.0), s, _glow_mat(brace_blue, bright))
-		add_child(brace)
+		var brace: Node3D = _make_brace(Vector3(0.0, cy, 0.0), s, _lit_glow(brace_blue, bright))
+		_own(brace)
 		_braces.append(brace)
 		# a glowing ∈ between this level and the next-inner one
 		if i < n - 1:
-			var eps := _billboard_label("∈", Vector3(0.0, cy - s * 0.30, 0.02), 26, cool_white)
-			add_child(eps)
+			var eps: Label3D = _billboard_label("∈", Vector3(0.0, cy - s * 0.30, 0.02), 26, cool_white)
+			_own(eps)
 			_epsilons.append(eps)
+		if outward:
+			var out_eps: Label3D = _billboard_label("∈", Vector3(s * 0.5 + 0.06, cy, 0.02), 22, cool_white)
+			_own(out_eps)
+			_epsilons.append(out_eps)
 
-	# --- the red R = { x : x ∉ x } panel, standing beside the nest ---
+
+## The red R = { x : x ∉ x } panel, standing beside the nest.
+## `live` = glowing material inside a wire frame (the paradox still open).
+## Otherwise: matte dark red, no frame — the same claim, filed.
+func _build_r_panel(live: bool) -> void:
 	var panel_x: float = 0.42
 	var panel_y: float = 0.78
-	_r_mat = _glow_mat(contradiction_red, 1.2)
+	if live:
+		_r_mat = _lit_glow(contradiction_red, 1.2)
+	else:
+		_r_mat = _matte_mat(Color(0.20, 0.02, 0.05), 0.85, 0.0)
 	_r_panel = _box(Vector3(panel_x, panel_y, 0.0), Vector3(0.34, 0.30, 0.015), _r_mat)
-	add_child(_r_panel)
-	# wire frame around it
-	var fr := _glow_mat(contradiction_red, 1.6)
-	add_child(_box(Vector3(panel_x, panel_y + 0.15, 0.01), Vector3(0.34, 0.008, 0.008), fr))
-	add_child(_box(Vector3(panel_x, panel_y - 0.15, 0.01), Vector3(0.34, 0.008, 0.008), fr))
-	add_child(_box(Vector3(panel_x - 0.17, panel_y, 0.01), Vector3(0.008, 0.30, 0.008), fr))
-	add_child(_box(Vector3(panel_x + 0.17, panel_y, 0.01), Vector3(0.008, 0.30, 0.008), fr))
-	add_child(_billboard_label("R = { x : x ∉ x }", Vector3(panel_x, panel_y + 0.05, 0.02), 16, cool_white))
-	_r_label = _billboard_label("is R ∈ R ?", Vector3(panel_x, panel_y - 0.07, 0.02), 18, contradiction_red)
-	add_child(_r_label)
-
-	# --- billboard title ---
-	add_child(_billboard_label("SELF-MEMBERSHIP SET", Vector3(0.0, 1.5, 0.0), 32, cool_white))
-	add_child(_billboard_label("a set inside itself, all the way down", Vector3(0.0, 1.36, 0.0), 16, wire_purple))
+	_own(_r_panel)
+	if live:
+		# wire frame around it
+		var fr: StandardMaterial3D = _lit_glow(contradiction_red, 1.6)
+		_own(_box(Vector3(panel_x, panel_y + 0.15, 0.01), Vector3(0.34, 0.008, 0.008), fr))
+		_own(_box(Vector3(panel_x, panel_y - 0.15, 0.01), Vector3(0.34, 0.008, 0.008), fr))
+		_own(_box(Vector3(panel_x - 0.17, panel_y, 0.01), Vector3(0.008, 0.30, 0.008), fr))
+		_own(_box(Vector3(panel_x + 0.17, panel_y, 0.01), Vector3(0.008, 0.30, 0.008), fr))
+	_own(_billboard_label("R = { x : x ∉ x }", Vector3(panel_x, panel_y + 0.05, 0.02), 16, cool_white))
+	_r_label = _billboard_label("is R ∈ R ?" if live else "R is not a set.", Vector3(panel_x, panel_y - 0.07, 0.02), 18, contradiction_red)
+	_own(_r_label)
 
 
 func _make_brace(center: Vector3, size: float, mat: Material) -> Node3D:
@@ -109,6 +304,33 @@ func _make_brace(center: Vector3, size: float, mat: Material) -> Node3D:
 	root.add_child(_box(Vector3(-half + ret * 0.5, -half, 0.0), Vector3(ret, t * 2.0, t * 2.0), mat))
 	root.add_child(_box(Vector3(half - ret * 0.5, -half, 0.0), Vector3(ret, t * 2.0, t * 2.0), mat))
 	return root
+
+
+# --- ownership + lighting ----------------------------------------------------
+
+func _own(n: Node) -> Node:
+	add_child(n)
+	_owned.append(n)
+	return n
+
+
+func _lit_glow(c: Color, energy: float) -> StandardMaterial3D:
+	var m: StandardMaterial3D = _glow_mat(c, energy)
+	_lit.append({"mat": m, "on": energy, "off": energy * 0.3})
+	return m
+
+
+func _lit_steel(c: Color) -> StandardMaterial3D:
+	var m: StandardMaterial3D = _steel_mat(c)
+	_lit.append({"mat": m, "on": 0.1, "off": 0.0})
+	return m
+
+
+func _apply_emissive() -> void:
+	for e in _lit:
+		var m: StandardMaterial3D = e["mat"]
+		if is_instance_valid(m):
+			m.emission_energy_multiplier = float(e["on"]) if emissive else float(e["off"])
 
 
 func _process(delta: float) -> void:
@@ -133,6 +355,8 @@ func _process(delta: float) -> void:
 		var s: float = 1.0 + 0.02 * sin(_t * 2.0 - float(i) * 0.7)
 		b.scale = Vector3(s, s, s)
 
+	if not _flicker_r:
+		return
 	# the red R-panel flickers — the unresolvable "is R ∈ R?"
 	if is_instance_valid(_r_mat):
 		var flick: float = 0.5 + 0.5 * sin(_t * 7.0) * (0.6 + 0.4 * sin(_t * 2.3))

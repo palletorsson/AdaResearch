@@ -1,3 +1,12 @@
-[gd_scene format=3]
+[gd_scene load_steps=2 format=3 uid="uid://cbriley000001"]
 
-[node name="Root" type="Node3D"]
+[ext_resource type="Script" path="res://commons/artifacts/bridget_riley_op_art/bridget_riley_op_art.gd" id="1_script"]
+
+; bridget_riley_op_art.tscn — a 2 x 2 m upright plate running the existing
+; res://commons/artifacts/pattern_atlas_gallery/shaders/atlas_riley.gdshader:
+; parallel lines sinusoidally displaced through a soft band. Geometry and
+; material are built procedurally in the .gd; a map may drive "scale", "weight"
+; and "wobble" through grid config — wobble is the critical parameter.
+
+[node name="bridget_riley_op_art" type="Node3D"]
+script = ExtResource("1_script")

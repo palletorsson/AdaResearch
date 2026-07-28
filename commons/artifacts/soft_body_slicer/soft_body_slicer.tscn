@@ -1,3 +1,11 @@
-[gd_scene format=3]
+[gd_scene load_steps=2 format=3 uid="uid://csoftbslicr01"]
 
-[node name="Root" type="Node3D"]
+[ext_resource type="Script" path="res://commons/artifacts/soft_body_slicer/soft_body_slicer.gd" id="1_script"]
+
+; soft_body_slicer.tscn — a spring-mass jelly on a bench and a grabbable plane
+; that deletes every spring straddling it, backed by soft_body_slicer.gd. Bench,
+; jelly (commons/soft_body), blade handle (grab_cube.tscn) and readout are all
+; built in _ready(); there are no editor-authored children.
+
+[node name="soft_body_slicer" type="Node3D"]
+script = ExtResource("1_script")

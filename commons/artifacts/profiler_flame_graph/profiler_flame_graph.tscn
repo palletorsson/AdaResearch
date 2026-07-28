@@ -1,3 +1,11 @@
-[gd_scene format=3]
+[gd_scene load_steps=2 format=3 uid="uid://cflamegraph001"]
 
-[node name="Root" type="Node3D"]
+[ext_resource type="Script" path="res://commons/artifacts/profiler_flame_graph/profiler_flame_graph.gd" id="1_script"]
+
+; profiler_flame_graph.tscn — a single profiled frame cut into a stacked-bar
+; relief on a standing board, backed by profiler_flame_graph.gd. Observe-only:
+; every bar, tint and caption is built procedurally in _ready() from the
+; hardcoded call tree; there are no editor-authored children.
+
+[node name="profiler_flame_graph" type="Node3D"]
+script = ExtResource("1_script")

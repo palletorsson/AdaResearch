@@ -1,3 +1,11 @@
-[gd_scene format=3]
+[gd_scene load_steps=2 format=3 uid="uid://bdatalabor001"]
 
-[node name="Root" type="Node3D"]
+[ext_resource type="Script" path="res://commons/artifacts/data_labor_counter/data_labor_counter.gd" id="1_script"]
+
+; data_labor_counter.tscn — the ghost-work readout, backed by
+; data_labor_counter.gd. Panel, stand and tally wall are all built in _ready();
+; the scene file holds no authored children so the counter can never ship with a
+; frozen number baked into it.
+
+[node name="data_labor_counter" type="Node3D"]
+script = ExtResource("1_script")

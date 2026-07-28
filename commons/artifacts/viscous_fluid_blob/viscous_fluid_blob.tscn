@@ -1,3 +1,14 @@
-[gd_scene format=3]
+[gd_scene load_steps=2 format=3 uid="uid://dviscblob00001"]
 
-[node name="Root" type="Node3D"]
+[ext_resource type="Script" path="res://commons/artifacts/viscous_fluid_blob/viscous_fluid_blob.gd" id="1_script"]
+
+; viscous_fluid_blob.tscn — pedestal artifact, 1x1x1, backed by
+; viscous_fluid_blob.gd. soft_body_shapes.make_jelly_box at low stiffness and
+; high damping, driven by soft_body_sim.gd and rendered through to_node3d, on a
+; bare plinth (no tray, no bench — the dressing room specifies posture pedestal).
+; A press plate runs a slow-then-fast cycle; effective stiffness is recomputed
+; from strain rate every frame, so the same blob flows under the slow press and
+; stops the fast one dead.
+
+[node name="viscous_fluid_blob" type="Node3D"]
+script = ExtResource("1_script")

@@ -1,3 +1,11 @@
-[gd_scene format=3]
+[gd_scene load_steps=2 format=3 uid="uid://b7knowprism001"]
 
-[node name="Root" type="Node3D"]
+[ext_resource type="Script" path="res://commons/primitives/prisms/knowledge_prism.gd" id="1_script"]
+
+; knowledge_prism.tscn — pedestal-scale dispersion wedge, backed by
+; knowledge_prism.gd. One white beam enters the near face of a triangular
+; PrismMesh, seven spectral beams leave the far face at ordered deviations.
+; All geometry is built procedurally in _ready(); nothing is authored here.
+
+[node name="knowledge_prism" type="Node3D"]
+script = ExtResource("1_script")
