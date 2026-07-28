@@ -79,6 +79,40 @@ var _right_pos: Vector3 = Vector3(0.42, 0.62, 0.0)
 var _owned: Array[Node] = []
 var _built: bool = false
 
+## Every emissive material this artifact made, with the energy it carries lit and dimmed.
+##
+## WHY THIS EXISTS. `emissive` is the parent's @export and the parent bakes it into the
+## material AT CREATION (embodied_prop.gd:30 and :50). Before promotion apply_grid_config
+## freed every child and rebuilt, so a new `emissive` value was picked up by the new
+## materials. The Stage-2 early-return correctly stopped that rebuild — and silently took
+## `emissive` with it, because nothing re-reads it. curation_station.gd:372,
+## artifact_runner.gd:206 and artifact_review_station.gd:520 all pass exactly
+## {"emissive": false}, so three call sites were being ignored.
+##
+## Overriding the two parent factories rather than editing eight call sites means every
+## material is registered wherever it is made, including any added later.
+var _emissive_mats: Array[Dictionary] = []
+
+
+func _glow_mat(c: Color, energy: float) -> StandardMaterial3D:
+	var m: StandardMaterial3D = super._glow_mat(c, energy)
+	_emissive_mats.append({"m": m, "on": energy, "off": energy * 0.3})
+	return m
+
+
+func _steel_mat(c: Color) -> StandardMaterial3D:
+	var m: StandardMaterial3D = super._steel_mat(c)
+	_emissive_mats.append({"m": m, "on": 0.1, "off": 0.0})
+	return m
+
+
+## Retint in place. The same numbers the parent bakes, applied without a rebuild.
+func _apply_emissive() -> void:
+	for e in _emissive_mats:
+		var m: StandardMaterial3D = e["m"]
+		if is_instance_valid(m):
+			m.emission_energy_multiplier = float(e["on"]) if emissive else float(e["off"])
+
 
 func _ready() -> void:
 	_rng.seed = BUILD_SEED
@@ -102,13 +136,18 @@ func apply_grid_config(config: Dictionary) -> void:
 	if config.has("flip_period"):
 		flip_period = maxf(0.05, float(config["flip_period"]))
 
+	# Retint BEFORE the early return: emissive changes no geometry, so it must not
+	# trigger a rebuild, but it must still be applied. Skipping this was a silent
+	# no-op on the three call sites that pass {"emissive": false}.
+	_apply_emissive()
+
 	if not _built:
 		return   # _ready has not run yet; it will build with these values.
 
 	if roster == before_roster:
-		# `emissive` and `flip_period` need no geometry — emissive is baked into
-		# materials at build time and the next frame reads flip_period. Rebuilding
-		# for them is the regression that broke curated placements.
+		# `emissive` and `flip_period` need no geometry — emissive was just applied in
+		# place above, and the next frame reads flip_period. Rebuilding for either is
+		# the regression that broke curated placements.
 		return
 
 	_rebuild_now()
@@ -129,6 +168,8 @@ func _rebuild_now() -> void:
 			remove_child(c)
 			c.queue_free()
 	_owned.clear()
+	# The old materials die with the nodes; keeping them would retint freed objects.
+	_emissive_mats.clear()
 	_token = null
 	_arrow_root = null
 	_qmark = null

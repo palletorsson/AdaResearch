@@ -255,6 +255,17 @@
    }
   },
   "elliptic_surface": {
+   "dna": {
+    "axes": {
+    "postulate": [
+    "bare",
+    "parallels",
+    "triangle",
+    "net",
+    "euclid"
+    ]
+    }
+   },
    "category": "geometry",
    "complexity": "intermediate",
    "description": "Dome/sphere-like surface demonstrating positive Gaussian curvature (K > 0) — where parallel lines converge and triangle angles sum to more than 180 degrees.",
@@ -593,6 +604,17 @@
    "qfep_connection": "sin·cos summed three ways yields a surface with no rooms, only two interlocked corridors that never touch — and marching cubes plus a generated collision body commits that implicit equation to something your feet must negotiate."
   },
   "hyperbolic_surface": {
+   "dna": {
+    "axes": {
+    "postulate": [
+    "bare",
+    "parallels",
+    "triangle",
+    "net",
+    "euclid"
+    ]
+    }
+   },
    "category": "geometry",
    "complexity": "intermediate",
    "description": "Saddle-shaped surface demonstrating negative Gaussian curvature (K < 0) — where parallel lines diverge and triangle angles sum to less than 180 degrees.",
@@ -1597,6 +1619,23 @@
    "qfep_connection": "integration: pi estimated by Riemann slices — the circle's area approached rectangle by rectangle; the constant everyone knows, earned the slow way. Accumulation auditioning for exactness."
   },
   "riemann_sphere": {
+   "dna": {
+    "axes": {
+    "postulate": [
+    "bare",
+    "parallels",
+    "triangle",
+    "net",
+    "euclid"
+    ],
+    "infinity": [
+    "pole",
+    "rays",
+    "open",
+    "none"
+    ]
+    }
+   },
    "category": "geometry",
    "complexity": "advanced",
    "description": "The Riemann sphere — compactified complex plane with stereographic projection lines, north pole at infinity, equator, and projection plane visible.",

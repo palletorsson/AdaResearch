@@ -65,6 +65,39 @@ var _built: bool = false
 ## else, so grid-added label plates, packaging and tag markers survive a rebuild.
 var _created: Array[Node] = []
 
+## Every emissive material this artifact made, with the energy it carries lit and dimmed.
+##
+## WHY THIS EXISTS. `emissive` is the parent's @export and the parent bakes it into the
+## material AT CREATION (embodied_prop.gd:30 and :50). Before promotion apply_grid_config
+## freed every child and rebuilt, so a new `emissive` value reached the new materials. The
+## Stage-2 early-return correctly stopped that rebuild — and silently took `emissive` with
+## it. curation_station.gd:372, artifact_runner.gd:206 and artifact_review_station.gd:520
+## all pass exactly {"emissive": false}, so three call sites were being ignored.
+##
+## Overriding the two parent factories rather than editing six call sites means every
+## material is registered wherever it is made, including any added later.
+var _emissive_mats: Array[Dictionary] = []
+
+
+func _glow_mat(c: Color, energy: float) -> StandardMaterial3D:
+	var m: StandardMaterial3D = super._glow_mat(c, energy)
+	_emissive_mats.append({"m": m, "on": energy, "off": energy * 0.3})
+	return m
+
+
+func _steel_mat(c: Color) -> StandardMaterial3D:
+	var m: StandardMaterial3D = super._steel_mat(c)
+	_emissive_mats.append({"m": m, "on": 0.1, "off": 0.0})
+	return m
+
+
+## Retint in place. The same numbers the parent bakes, applied without a rebuild.
+func _apply_emissive() -> void:
+	for e in _emissive_mats:
+		var m: StandardMaterial3D = e["m"]
+		if is_instance_valid(m):
+			m.emission_energy_multiplier = float(e["on"]) if emissive else float(e["off"])
+
 # Geometry of the figure (local to _body, which is lifted onto the floor).
 const SPAN: float = 0.62          # half-width of the channel
 const Y_TOP: float = 0.46         # top of the prongs
@@ -107,6 +140,11 @@ func apply_grid_config(config_data: Dictionary) -> void:
 	if config_data.has("fault"):
 		fault = _pick_axis(str(config_data["fault"]), FAULTS, fault)
 
+	# Retint BEFORE the early return: emissive changes no geometry, so it must not
+	# trigger a rebuild, but it must still be applied. Skipping this was a silent
+	# no-op on the three call sites that pass {"emissive": false}.
+	_apply_emissive()
+
 	if not _built:
 		# Called before _ready — nothing exists to tear down, and _build_all will
 		# use the values just resolved.
@@ -134,6 +172,8 @@ func _rebuild_now() -> void:
 			remove_child(c)
 			c.queue_free()
 	_created.clear()
+	# The old materials die with the nodes; keeping them would retint freed objects.
+	_emissive_mats.clear()
 	_body = null
 	_trace_root = null
 	_build_all()

@@ -6,6 +6,16 @@
   },
   "artifacts": {
     "barber_paradox": {
+      "dna": {
+       "axes": {
+       "roster": [
+       "pair",
+       "exception",
+       "blanket",
+       "none"
+       ]
+       }
+      },
       "lookup_name": "barber_paradox",
       "scene": "res://commons/artifacts/barber_paradox/barber_paradox.tscn",
       "class_name": "BarberParadox",
@@ -50,6 +60,16 @@
       }
     },
     "liar_loop": {
+      "dna": {
+       "axes": {
+       "valuation": [
+       "flip",
+       "neither",
+       "both",
+       "tiered"
+       ]
+       }
+      },
       "lookup_name": "liar_loop",
       "scene": "res://commons/artifacts/liar_loop/liar_loop.tscn",
       "class_name": "LiarLoop",
@@ -94,6 +114,16 @@
       }
     },
     "self_membership_set": {
+      "dna": {
+       "axes": {
+       "descent": [
+       "nested",
+       "stratified",
+       "barred",
+       "swallowed"
+       ]
+       }
+      },
       "lookup_name": "self_membership_set",
       "scene": "res://commons/artifacts/self_membership_set/self_membership_set.tscn",
       "class_name": "SelfMembershipSet",
@@ -138,6 +168,16 @@
       }
     },
     "godel_sentence_machine": {
+      "dna": {
+       "axes": {
+       "verdict": [
+       "honest",
+       "proved",
+       "silent",
+       "harmless"
+       ]
+       }
+      },
       "lookup_name": "godel_sentence_machine",
       "scene": "res://commons/artifacts/godel_sentence_machine/godel_sentence_machine.tscn",
       "class_name": "GodelSentenceMachine",
@@ -182,6 +222,17 @@
       }
     },
     "provability_sorter": {
+      "dna": {
+       "axes": {
+       "reach": [
+       "proper",
+       "complete",
+       "hairline",
+       "chasm",
+       "total"
+       ]
+       }
+      },
       "lookup_name": "provability_sorter",
       "scene": "res://commons/artifacts/provability_sorter/provability_sorter.tscn",
       "class_name": "ProvabilitySorter",
@@ -226,6 +277,16 @@
       }
     },
     "incompleteness_tower": {
+      "dna": {
+       "axes": {
+       "regress": [
+       "taper",
+       "endless",
+       "capped",
+       "column"
+       ]
+       }
+      },
       "lookup_name": "incompleteness_tower",
       "scene": "res://commons/artifacts/incompleteness_tower/incompleteness_tower.tscn",
       "class_name": "IncompletenessTower",
@@ -270,6 +331,16 @@
       }
     },
     "impossible_trident": {
+      "dna": {
+       "axes": {
+       "fault": [
+       "global",
+       "confessed",
+       "none",
+       "doubled"
+       ]
+       }
+      },
       "lookup_name": "impossible_trident",
       "scene": "res://commons/artifacts/impossible_trident/impossible_trident.tscn",
       "class_name": "ImpossibleTrident",

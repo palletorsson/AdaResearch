@@ -1748,6 +1748,16 @@
       }
     },
     "brouwer_choice_sequence": {
+      "dna": {
+       "axes": {
+       "horizon": [
+       "question",
+       "spread",
+       "law",
+       "closed"
+       ]
+       }
+      },
       "lookup_name": "brouwer_choice_sequence",
       "scene": "res://commons/artifacts/brouwer_choice_sequence/brouwer_choice_sequence.tscn",
       "class_name": "BrouwerChoiceSequence",
@@ -1874,6 +1884,16 @@
       }
     },
     "excluded_middle_demo": {
+      "dna": {
+       "axes": {
+       "middle": [
+       "classical",
+       "third",
+       "spectrum",
+       "half"
+       ]
+       }
+      },
       "lookup_name": "excluded_middle_demo",
       "scene": "res://commons/artifacts/excluded_middle_demo/excluded_middle_demo.tscn",
       "class_name": "ExcludedMiddleDemo",

@@ -40,10 +40,25 @@ INERT_FOCUS = 0.030    # even the hottest 5% barely moved: the knob is decoratio
 WEAK_FOCUS = 0.120
 
 
-def load_img(p: Path):
+def _subject_bbox(p: Path):
+    """The box containing everything that is not background, or None if the frame is empty.
+
+    Background is read from a corner, which is background by construction in these
+    captures: the camera is auto-framed on the subject, so it is always centred.
+    """
+    from PIL import Image, ImageChops
+    im = Image.open(p).convert("RGB")
+    bg = Image.new("RGB", im.size, im.getpixel((3, 3)))
+    mask = ImageChops.difference(im, bg).convert("L").point(lambda v: 255 if v > 10 else 0)
+    return mask.getbbox()
+
+
+def load_img(p: Path, box=None):
     from PIL import Image
-    im = Image.open(p).convert("L").resize((160, 160))
-    return list(im.getdata())
+    im = Image.open(p).convert("L")
+    if box is not None:
+        im = im.crop(box)
+    return list(im.resize((160, 160)).getdata())
 
 
 def diff(a: list[int], b: list[int]) -> tuple[float, float]:
@@ -129,6 +144,7 @@ def main() -> int:
         by_prop[str(e.get("prop", "?"))].append(e)
 
     cache: dict[str, list[int]] = {}
+    boxes: dict[str, object] = {}
     report: list[dict] = []
     print(f"{'artifact':24} {'axis':22} {'frame':>7} {'focus':>8}  verdict")
     print("-" * 74)
@@ -153,13 +169,46 @@ def main() -> int:
                 continue
             fr: list[float] = []
             fo: list[float] = []
+            # MEASURE THE ARTIFACT, NOT THE MARGIN. capture_config_sweep frames the
+            # camera on the bounding SPHERE (the AABB diagonal) and then multiplies the
+            # distance by PAD = 1.9, so a tile is roughly three-quarters empty
+            # background by area. Diffing the whole frame therefore divides every real
+            # change by the padding, and the padding is a property of the harness, not
+            # of the artifact.
+            #
+            # This was found by hand three waves running and corrected by hand each
+            # time: the postcrisis capstone (assertion 11.8 -> 39.9 focus, rim 21.3 ->
+            # 44.6), lab_room.witness (6.0 -> 16.8), and then SIX of the thirteen
+            # foundationscrisis axes at once, every one of which crossed from WEAK to
+            # bites on the same crop with nothing redesigned. A correction that has to
+            # be applied by hand every time is a bug in the instrument.
+            #
+            # Cropping to the union of the two frames' subject boxes makes the verdict
+            # scale-invariant and changes no rendered image. PAD is deliberately left
+            # alone: lowering it would re-render every gallery and invalidate the
+            # thresholds below, which were calibrated at 1.9.
             for x, y in pairs:
                 for e in (x, y):
                     fid = str(e["id"])
                     if fid not in cache:
                         p = mdir / f"{fid}.png"
-                        cache[fid] = load_img(p) if p.exists() else []
-                f1, f2 = diff(cache[str(x["id"])], cache[str(y["id"])])
+                        if p.exists():
+                            boxes[fid] = _subject_bbox(p)
+                            cache[fid] = load_img(p)
+                        else:
+                            boxes[fid] = None
+                            cache[fid] = []
+                xid, yid = str(x["id"]), str(y["id"])
+                bx, byy = boxes.get(xid), boxes.get(yid)
+                if bx and byy:
+                    box = (min(bx[0], byy[0]), min(bx[1], byy[1]),
+                           max(bx[2], byy[2]), max(bx[3], byy[3]))
+                    px, py = mdir / f"{xid}.png", mdir / f"{yid}.png"
+                    f1, f2 = diff(load_img(px, box), load_img(py, box))
+                else:
+                    # No subject in one of them — the frame is empty. Diff it whole so
+                    # the NO RENDER check below still sees near-zero everything.
+                    f1, f2 = diff(cache[xid], cache[yid])
                 fr.append(f1)
                 fo.append(f2)
             frame = sum(fr) / len(fr)

@@ -1,0 +1,128 @@
+{
+ "_note": "Per-axis bite: mean pixel change between variants differing in that axis alone. An axis whose renders are identical is decoration.",
+ "gallery": "foundations-dna",
+ "thresholds": {
+  "inert_focus": 0.03,
+  "weak_focus": 0.12,
+  "frame_local_ceiling": 0.02
+ },
+ "axes": [
+  {
+   "artifact": "godel_sentence_machine",
+   "axis": "verdict",
+   "frame": 0.04034,
+   "focus": 0.31131,
+   "verdict": "bites",
+   "subject": 0.0407,
+   "pairs": 6
+  },
+  {
+   "artifact": "incompleteness_tower",
+   "axis": "regress",
+   "frame": 0.08719,
+   "focus": 0.41597,
+   "verdict": "bites",
+   "subject": 0.08332,
+   "pairs": 6
+  },
+  {
+   "artifact": "provability_sorter",
+   "axis": "reach",
+   "frame": 0.05457,
+   "focus": 0.35078,
+   "verdict": "bites",
+   "subject": 0.10242,
+   "pairs": 10
+  },
+  {
+   "artifact": "self_membership_set",
+   "axis": "descent",
+   "frame": 0.08965,
+   "focus": 0.42783,
+   "verdict": "bites",
+   "subject": 0.1284,
+   "pairs": 6
+  },
+  {
+   "artifact": "barber_paradox",
+   "axis": "roster",
+   "frame": 0.08152,
+   "focus": 0.4014,
+   "verdict": "bites",
+   "subject": 0.06164,
+   "pairs": 6
+  },
+  {
+   "artifact": "liar_loop",
+   "axis": "valuation",
+   "frame": 0.0824,
+   "focus": 0.50583,
+   "verdict": "bites",
+   "subject": 0.09086,
+   "pairs": 6
+  },
+  {
+   "artifact": "impossible_trident",
+   "axis": "fault",
+   "frame": 0.07169,
+   "focus": 0.36001,
+   "verdict": "bites",
+   "subject": 0.09504,
+   "pairs": 6
+  },
+  {
+   "artifact": "hyperbolic_surface",
+   "axis": "postulate",
+   "frame": 0.03836,
+   "focus": 0.2297,
+   "verdict": "bites",
+   "subject": 0.03629,
+   "pairs": 10
+  },
+  {
+   "artifact": "elliptic_surface",
+   "axis": "postulate",
+   "frame": 0.06043,
+   "focus": 0.36522,
+   "verdict": "bites",
+   "subject": 0.06387,
+   "pairs": 10
+  },
+  {
+   "artifact": "riemann_sphere",
+   "axis": "infinity",
+   "frame": 0.04813,
+   "focus": 0.26496,
+   "verdict": "bites",
+   "subject": 0.06285,
+   "pairs": 15
+  },
+  {
+   "artifact": "riemann_sphere",
+   "axis": "postulate",
+   "frame": 0.05907,
+   "focus": 0.35321,
+   "verdict": "bites",
+   "subject": 0.06285,
+   "pairs": 30
+  },
+  {
+   "artifact": "excluded_middle_demo",
+   "axis": "middle",
+   "frame": 0.042,
+   "focus": 0.26385,
+   "verdict": "bites",
+   "subject": 0.02078,
+   "pairs": 6
+  },
+  {
+   "artifact": "brouwer_choice_sequence",
+   "axis": "horizon",
+   "frame": 0.04481,
+   "focus": 0.24788,
+   "verdict": "bites",
+   "subject": 0.01352,
+   "pairs": 6
+  }
+ ]
+}
