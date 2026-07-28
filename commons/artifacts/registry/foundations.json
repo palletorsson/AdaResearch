@@ -1226,6 +1226,22 @@
       }
     },
     "schrodinger_box": {
+      "dna": {
+       "axes": {
+       "remainder": [
+       "core",
+       "twin",
+       "seam",
+       "haze",
+       "witness"
+       ],
+       "vantage": [
+       "specimen",
+       "stele",
+       "chamber"
+       ]
+       }
+      },
       "lookup_name": "schrodinger_box",
       "scene": "res://commons/artifacts/schrodinger_box/schrodinger_box.tscn",
       "class_name": "SchrodingerBox",

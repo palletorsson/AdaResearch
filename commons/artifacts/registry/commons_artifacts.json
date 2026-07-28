@@ -8016,6 +8016,17 @@
    }
   },
   "library_rack": {
+   "dna": {
+    "axes": {
+    "guard": [
+    "none",
+    "label",
+    "fixture",
+    "hood",
+    "cordon"
+    ]
+    }
+   },
    "category": "display",
    "description": "Universal collection display wall. Reads any artifact registry and builds a grid of cubes, each containing a scaled-down artifact or shader. Config: #collection:shaders#cols:6#rows:4",
    "include_in_map_data": true,
@@ -15150,6 +15161,16 @@
    "qfep_connection": "Nothing here is new — every compound is the same slider and meter repeated at 0.03-metre intervals — yet 'mixer', 'console', 'monitoring rig' appear anyway. The higher-order instrument lives entirely in spacing: adjacency is the only ingredient, which makes the panel an argument that composition is a place, not a part."
   },
   "tt": {
+   "dna": {
+    "axes": {
+    "support": [
+    "none",
+    "stand",
+    "frame",
+    "pylon"
+    ]
+    }
+   },
    "name": "Tutorial Text Display",
    "lookup_name": "tt",
    "description": "In-world tutorial text panel using codeDisplay scene. Format: tt:tutorial_name[:rotation[:y_offset[:scale]]]. Loads text from tutorial_text_library by key. Used across all sequences for contextual learning text.",

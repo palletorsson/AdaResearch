@@ -9,9 +9,9 @@
 # @identity
 # essence: x_{n+1} = (a·x_n + c) mod m — linear congruential generator
 # desire: crank the machine, watch arithmetic unfold, feel determinism wearing randomness as a mask
-# critical_parameter: initial_seed — same seed reproduces the entire sequence
+# critical_parameter: initial_seed — same seed reproduces the entire sequence; disclosure — how much of that reproducibility the machine ADMITS on its face (oracle | tally | ledger | works | origin)
 # triggers: _crank() → 4-phase animation (multiply, add, mod, result) with color-coded transitions
-# emerges: the history panel reveals periodicity — given enough cranks, the sequence must repeat
+# emerges: the history panel reveals periodicity — given enough cranks, the sequence must repeat; at disclosure:oracle the same periodicity is still there and nothing on the machine will tell you
 # needs: VR push buttons [has] for CRANK/RESET/SEED
 # relationships: contrasts with trng_vs_prng; feeds slot_machine understanding of pseudo-randomness
 # truth: Determinism is not the opposite of randomness — it is randomness with a forgotten origin.
@@ -22,6 +22,123 @@ class_name PrngCrankMachine
 
 const BakedText = preload("res://commons/utils/baked_text_albedo.gd")
 const HangarKit = preload("res://commons/artifacts/_hangar/hangar_kit.gd")
+
+# ─────────────────────────────────────────────────────────────────────────────
+# STAGE-2 DNA PROMOTION (2026-07-27). THE KIN PAIR: prng_crank_machine and
+# coin_toss, 98 placements between them, and together they are this project's
+# whole claim about randomness. A coin is the canonical FAIR source. An LCG is a
+# DETERMINISTIC machine wearing randomness as a costume. The gap between those
+# two sentences is the artifact — and until today neither machine had a knob for
+# it, because every promotion pass in this corpus so far has landed on the same
+# question: what is the housing made of, which institution does it belong to.
+# That is the right question for a plinth. It is the wrong question for a thing
+# with a crank on it.
+#
+# For an instrument the register is nearly irrelevant. The axis that matters is
+# epistemic — what the machine makes legible and what it hides:
+#
+#   disclosure   how much of its own workings the machine ADMITS
+#
+#     oracle  <  tally  <  ledger  <  works  <  origin
+#
+#   oracle  a number arrives. No seed, no step, no arithmetic, no history: the
+#           two lower screen seats are covered by bolted blanking plates and the
+#           readout carries ONE large number and nothing else. This is the API
+#           call, the slot machine, the RNG behind the loot box. It computes
+#           exactly what the default computes and tells you none of it.
+#   tally   + the spread. The middle seat becomes a DISTRIBUTION pocket: eight
+#           bins of the 32-bit output space, drawn as lit bars over a ruled
+#           baseline. What ten thousand trials look like — never how one
+#           happened. The statistical alibi: "the output is uniform" is a true
+#           sentence that answers a different question.
+#   ledger  + the record. The SEQUENCE pocket returns: every emitted value in
+#           order, which is where periodicity becomes visible at all.
+#   works   + the mechanism. The ARITHMETIC pocket returns with the recurrence,
+#           the live per-phase computation and a, c, m — and the seed comes back
+#           onto the readout header. THIS IS THE LEGACY LINEAGE, byte for byte.
+#   origin  + the substrate. A backlit register window across the top of the
+#           face: SEED 42 / STATE 0x0000002A and thirty-two bit lamps, MSB left.
+#           The formula is a promise; the register is the evidence. At this rung
+#           the machine's "random" number is thirty-two lamps you could copy down
+#           by hand and replay tomorrow, and it says so before you touch it.
+#
+# WHAT IS DELIBERATELY NOT THE AXIS. PHASE_DURATION is the obvious knob — 0.6 s
+# per animation phase, four phases, a machine's most tempting parameter is always
+# its speed. It is invisible to a still frame (info_board was swept across five
+# duration exports and produced six identical tiles), and worse, it is not what
+# the identity is about: "watch arithmetic unfold" is a claim about legibility,
+# not tempo. So the rate stays a const and the spatial axis its justification
+# actually describes is what got built. initial_seed is likewise NOT promoted: it
+# changes digits, not form, and sweeping it would produce five tiles that differ
+# only in which numerals are painted on the same machine.
+#
+# WHAT IS FORECLOSED. There is no rung at which the machine shows nothing —
+# `oracle` still emits its answer, because an instrument that reports nothing is
+# not a quieter instrument, it is a broken one, and the curriculum needs the
+# number. So this axis has no `none`, on purpose.
+#
+# NOT TOUCHED, AND NOT NEGOTIABLE: the LCG itself. state = (state × a + c) mod
+# 2^32 runs identically at every rung, the same seed still reproduces the same
+# sequence, and the crank still takes the same four phases whether or not anyone
+# is being shown them. This axis changes what the machine SAYS about its work,
+# never the work.
+# ─────────────────────────────────────────────────────────────────────────────
+
+## THE AXIS — how much of its own workings this machine admits. One ordered
+## ladder, monotone in disclosure: each rung shows everything the rung below it
+## shows, plus one more kind of account. `works` is the legacy default.
+@export_enum("oracle", "tally", "ledger", "works", "origin") var disclosure: String = "works"
+
+## The allow-list, in ladder order — the same five words the @export_enum above
+## declares, in the same spelling and the same sequence. This is what _pick_axis
+## checks a map token against; DISCLOSURE_RUNGS below is the same set carrying
+## its rank. Two shapes of one table because the ladder is BOTH a membership test
+## and an order, and the gates in this file are all `_rung() >= n`.
+const DISCLOSURES: PackedStringArray = ["oracle", "tally", "ledger", "works", "origin"]
+
+## The ladder, as rank. The family's canonical table — coin_toss reads its rung
+## through THIS dictionary and THIS function (see disclosure_name below), so the
+## two artifacts cannot drift into two vocabularies for one idea the way
+## exhibit_furniture and exhibit_vitrine did with `guard`.
+const DISCLOSURE_RUNGS := {
+	"oracle": 0,   # the answer, nothing else
+	"tally": 1,    # + the aggregate
+	"ledger": 2,   # + the per-trial record
+	"works": 3,    # + the mechanism           ← legacy default
+	"origin": 4,   # + the state that produced it
+}
+
+## The family's one reader for a disclosure token. Static so coin_toss parses
+## #disclosure: through this exact function rather than its own private copy.
+## An unreadable word resolves to the legacy default rather than to silence —
+## a typo must not quietly seal a machine that 112 rooms expect to be open.
+static func disclosure_name(raw: String) -> String:
+	var v: String = raw.strip_edges().to_lower()
+	if DISCLOSURE_RUNGS.has(v):
+		return v
+	if v != "":
+		push_warning("disclosure: unknown rung '%s' — falling back to 'works'" % v)
+	return "works"
+
+
+## The house-pattern reader, for this instance. Same rule as disclosure_name — lower,
+## strip, fall back on anything unrecognised — but instance-scoped and generic over
+## the allow-list, which is the shape apply_grid_config wires every axis through.
+## Kept alongside the static one rather than folded into it because coin_toss calls
+## disclosure_name WITHOUT an instance; a static method cannot become an instance
+## method without breaking the kin link that keeps the two machines on one vocabulary.
+func _pick_axis(raw: String, allowed: PackedStringArray, fallback: String) -> String:
+	var v: String = raw.strip_edges().to_lower()
+	if allowed.has(v):
+		return v
+	if v != "":
+		push_warning("prng_crank_machine: unknown value '%s' — keeping '%s'" % [v, fallback])
+	return fallback
+
+
+## Rank of the current rung, 0..4. Every gate in this file is `_rung() >= n`.
+func _rung() -> int:
+	return int(DISCLOSURE_RUNGS.get(disclosure, 3))
 
 # ── Machine Body (cabinet grammar, vertical dialect: "ledger column") ────────
 # You FACE this machine: mass rises, the sign sits in the cap, the three
@@ -58,6 +175,16 @@ const GLASS_TONE := Color(0.04, 0.05, 0.08)
 var _face_z: float = 0.12
 var _cab: Node3D
 
+# ── Lifecycle bookkeeping ────────────────────────────────────────────────────
+## True once _build_all() has run. apply_grid_config arriving BEFORE this is a
+## value change with no geometry to answer it — _ready will use the new value.
+var _built: bool = false
+## The top-level nodes THIS script added: the plinth and the cabinet (everything
+## else is parented under the cabinet). A rebuild frees exactly these and nothing
+## else — get_children() here would also destroy the grid's own label plates,
+## packaging and tag markers, which are added by other systems after we build.
+var _owned: Array[Node] = []
+
 # ── Internal ─────────────────────────────────────────────────────────────────
 var _state: int = 42
 var _step_count: int = 0
@@ -68,11 +195,14 @@ var _history: Array[int] = []
 var _readout_board: Node3D    # main number + normalized + step + seed
 var _formula_board: Node3D    # formula line + live computation + params
 var _history_board: Node3D    # sequence header + numbers
+var _dist_board: Node3D       # disclosure:tally|ledger — the bar chart of the output spread
+var _register_board: Node3D   # disclosure:origin — the seed line + 32 bit lamps
 
 # Board face geometry (metres) reused by the rebuild helpers.
 var _readout_width: float = 0.34
 var _formula_width: float = 0.34
 var _history_width: float = 0.34
+var _dist_width: float = 0.34
 
 # Animation state
 var _is_animating: bool = false
@@ -86,7 +216,13 @@ var _compute_line: String = ""
 var _compute_color: Color = Color(0.7, 0.7, 0.75)
 
 const MAX_HISTORY := 12
-const PHASE_DURATION := 0.6  # Seconds per animation phase
+const PHASE_DURATION := 0.6  # Seconds per animation phase — NOT a DNA axis; see the promotion block
+
+## disclosure:tally|ledger — bins of the 32-bit output space on the DISTRIBUTION board.
+const DIST_BINS := 8
+## disclosure:origin — the register window: 32 bits, MSB first, two rows of 16.
+const REGISTER_BITS := 32
+const REGISTER_ROW := 16
 
 
 # ═════════════════════════════════════════════════════════════════════════════
@@ -94,13 +230,30 @@ const PHASE_DURATION := 0.6  # Seconds per animation phase
 # ═════════════════════════════════════════════════════════════════════════════
 
 func _ready() -> void:
+	# The grid sets config_* metadata SYNCHRONOUSLY before add_child (see
+	# GridInteractablesComponent._apply_artifact_config, line 1162 vs 1187), so the
+	# meta read must happen here, before any geometry exists. apply_grid_config()
+	# arrives call_deferred — i.e. after this — and is a re-read, not the read.
+	_read_meta_overrides()
 	_state = initial_seed
+	_build_all()
+	_built = true
+
+
+## The whole machine, SYNCHRONOUSLY. Every child this script owns exists by the time
+## this returns, which is what lets _auto_ground_artifact measure a real AABB in the
+## same deferred pass. Called once from _ready and again from _rebuild_now; it reads
+## `disclosure` and nothing else, so calling it twice with the same rung produces the
+## same geometry (no randf anywhere in this path — the machine's only entropy is the
+## LCG, and that is state, not shape).
+func _build_all() -> void:
 	_resolve_palette()
 	_create_plinth()
 	_create_machine_body()
 	_create_display_panel()
 	_create_formula_display()
 	_create_history_panel()
+	_create_state_register()
 	_create_vr_controls()
 	_update_display()
 
@@ -215,6 +368,7 @@ func _create_plinth() -> void:
 		finish, wear, color_accent, unit_code)
 	if p:
 		add_child(p)
+		_owned.append(p)
 
 
 ## The body. One shell, side flanks, a service column of vent slats, and a cap
@@ -225,6 +379,7 @@ func _create_machine_body() -> void:
 	cab.name = "Cabinet"
 	cab.set_meta("housing", true)
 	add_child(cab)
+	_owned.append(cab)
 	_cab = cab
 	_face_z = body_depth * 0.5
 
@@ -304,20 +459,97 @@ func _create_display_panel() -> void:
 
 
 func _create_formula_display() -> void:
-	# FORMULA board — the arithmetic. The formula line, the live per-phase
-	# computation (colour-coded), and the LCG parameters. Rebuilt each phase.
-	_formula_width = body_width * 0.78
-	_formula_board = _seat_screen(
-		"Formula", "ARITHMETIC", 0.55, Vector2(_formula_width, 0.15), false)
-	_rebuild_formula_board()
+	# The MIDDLE SEAT — the machine's account of itself, and the rung that decides
+	# which account. works/origin get the arithmetic (the legacy path, untouched);
+	# tally/ledger get the distribution instead (the spread without the cause);
+	# oracle gets a bolted plate over the hole.
+	var r: int = _rung()
+	if r >= 3:
+		# FORMULA board — the arithmetic. The formula line, the live per-phase
+		# computation (colour-coded), and the LCG parameters. Rebuilt each phase.
+		_formula_width = body_width * 0.78
+		_formula_board = _seat_screen(
+			"Formula", "ARITHMETIC", 0.55, Vector2(_formula_width, 0.15), false)
+		_rebuild_formula_board()
+	elif r >= 1:
+		_dist_width = body_width * 0.78
+		_dist_board = _seat_screen(
+			"Distribution", "DISTRIBUTION", 0.55, Vector2(_dist_width, 0.15), false)
+		_rebuild_distribution_board()
+	else:
+		_blank_seat(0.55, Vector2(body_width * 0.78, 0.15))
 
 
 func _create_history_panel() -> void:
-	# HISTORY board — the emitted sequence, where periodicity becomes visible.
-	_history_width = body_width * 0.78
-	_history_board = _seat_screen(
-		"History", "SEQUENCE", 0.36, Vector2(_history_width, 0.15), false)
-	_rebuild_history_board()
+	# The LOWER SEAT — the record. Present from `ledger` up; blanked below it,
+	# because a machine that keeps no visible tape is a machine whose period you
+	# cannot find.
+	if _rung() >= 2:
+		# HISTORY board — the emitted sequence, where periodicity becomes visible.
+		_history_width = body_width * 0.78
+		_history_board = _seat_screen(
+			"History", "SEQUENCE", 0.36, Vector2(_history_width, 0.15), false)
+		_rebuild_history_board()
+	else:
+		_blank_seat(0.36, Vector2(body_width * 0.78, 0.15))
+
+
+## A screwed-down cover where a screen seat would be. The seat still exists — the
+## rebate, the plate, the two bolt lines — the instrument simply declines to fill
+## it, which is a different statement from never having had one. No emissive lip,
+## no header stencil: everything this seat contributed to the face's light is
+## gone, which is exactly the read.
+func _blank_seat(y: float, size: Vector2) -> void:
+	var w: float = size.x + 0.026
+	var h: float = size.y + 0.030
+	var shell: StandardMaterial3D = HangarKit.finish_body(finish, color_body, wear)
+	var steel: StandardMaterial3D = HangarKit.worn_metal(color_body.lightened(0.10))
+	var rebate: StandardMaterial3D = HangarKit.painted_metal(
+		Color(0.07, 0.075, 0.09), wear, 0.35, 0.55)
+	# the shadow rebate, so the plate reads as ADDED rather than as bare shell
+	_cab.add_child(HangarKit.box(
+		Vector3(0.0, y, _face_z + 0.001), Vector3(w + 0.012, h + 0.012, 0.004), rebate))
+	_cab.add_child(HangarKit.box(
+		Vector3(0.0, y, _face_z + 0.004), Vector3(w, h, 0.008), shell))
+	for sx in [-1.0, 1.0]:
+		_cab.add_child(HangarKit.bolts(
+			Vector3(float(sx) * (w * 0.5 - 0.015), y - h * 0.5 + 0.018, _face_z + 0.010),
+			Vector3(float(sx) * (w * 0.5 - 0.015), y + h * 0.5 - 0.018, _face_z + 0.010),
+			3, 0.005, steel))
+
+
+## disclosure:origin — the register window across the top of the face. Seated like
+## every other pocket (milled surround, backlit plate, ember rule) so it reads as
+## part of the machine and not as a sticker: the claim is that this was always
+## inside, not that something was bolted on.
+func _create_state_register() -> void:
+	if _rung() < 4:
+		return
+	var w: float = body_width * 0.94
+	var strip_y: float = 0.899
+	var strip_h: float = 0.058
+	var dark: StandardMaterial3D = HangarKit.painted_metal(
+		Color(0.07, 0.075, 0.09), wear, 0.35, 0.55)
+	var accent: StandardMaterial3D = HangarKit.emissive(color_accent, 2.0)
+	# milled surround — sits between the READOUT's header stencil (top edge 0.8595)
+	# and the shell's cap ember stripe (0.9405). Those two numbers are why the
+	# window is 58 mm tall and not the 90 the band looks like it has.
+	_cab.add_child(HangarKit.box(
+		Vector3(0.0, strip_y, _face_z + 0.002), Vector3(w + 0.020, strip_h + 0.014, 0.014), dark))
+	# backlit plate — the bits are read OFF a lit window, like a nixie bank
+	_cab.add_child(HangarKit.box(
+		Vector3(0.0, strip_y, _face_z + 0.008), Vector3(w, strip_h, 0.005),
+		HangarKit.emissive(color_display_bg, 0.5)))
+	# ember rule along the window's top edge (G7, same as every pocket lip)
+	_cab.add_child(HangarKit.box(
+		Vector3(0.0, strip_y + strip_h * 0.5 + 0.006, _face_z + 0.010),
+		Vector3(w + 0.020, 0.004, 0.005), accent))
+	var board := Node3D.new()
+	board.name = "RegisterBoard"
+	board.position = Vector3(0.0, strip_y, _face_z + 0.014)
+	_cab.add_child(board)
+	_register_board = board
+	_rebuild_register()
 
 
 ## Seats one screen INTO the shell: a milled dark pocket, the lit display face,
@@ -391,16 +623,123 @@ func _rebuild_readout_board() -> void:
 		return
 	_clear_board(_readout_board)
 	var normalized := float(_state & 0xFFFFFFFF) / 4294967296.0
-	var header := "seed: %d      step: %d" % [initial_seed, _step_count]
-	var lines := [
-		header,
-		"%d" % (_state & 0xFFFFFFFF),
-		"%.6f" % normalized,
-	]
+	var r: int = _rung()
+	if r <= 0:
+		# ORACLE — the answer at three times the size and nothing to check it
+		# against. No seed (where it came from), no step (how far in), no float
+		# (what range it lives in). One number, filling the whole pocket, which is
+		# how every random source most people actually use presents itself.
+		var big := BakedText.make_text_block(
+			["%d" % (_state & 0xFFFFFFFF)], color_display_text, 0.09,
+			_readout_width * 0.94, 0.0, true)
+		if big:
+			_readout_board.add_child(big)
+		return
+	var lines: Array = []
+	if r <= 2:
+		# TALLY / LEDGER — how many and where in 0-1 it landed. Still no seed: the
+		# origin is precisely what these two rungs withhold.
+		lines = [
+			"step: %d" % _step_count,
+			"%d" % (_state & 0xFFFFFFFF),
+			"%.6f" % normalized,
+		]
+	else:
+		# WORKS / ORIGIN — the legacy three lines, byte for byte, six spaces and all.
+		var header := "seed: %d      step: %d" % [initial_seed, _step_count]
+		lines = [
+			header,
+			"%d" % (_state & 0xFFFFFFFF),
+			"%.6f" % normalized,
+		]
 	var block := BakedText.make_text_block(
 		lines, color_display_text, 0.03, _readout_width * 0.94, 0.006, true)
 	if block:
 		_readout_board.add_child(block)
+
+
+## disclosure:tally|ledger — eight bins of the 32-bit output space. The aggregate
+## claim: "the output is uniform." True, and an answer to a different question
+## than the one the machine is being asked, which is why this rung sits BELOW the
+## arithmetic rather than beside it.
+func _dist_counts() -> Array:
+	var counts: Array = []
+	for i in range(DIST_BINS):
+		counts.append(0)
+	var samples: Array = []
+	if _history.is_empty():
+		samples.append(_state)     # at rest the machine's only sample is its seed
+	else:
+		for v in _history:
+			samples.append(v)
+	for s in samples:
+		var u: int = int(s) & 0xFFFFFFFF
+		var b: int = clampi(int(float(u) / 4294967296.0 * float(DIST_BINS)), 0, DIST_BINS - 1)
+		counts[b] = int(counts[b]) + 1
+	return counts
+
+
+func _rebuild_distribution_board() -> void:
+	if _dist_board == null:
+		return
+	_clear_board(_dist_board)
+	var counts: Array = _dist_counts()
+	var top: int = 1
+	for c in counts:
+		if int(c) > top:
+			top = int(c)
+	var w: float = _dist_width * 0.94
+	var h: float = 0.100
+	var base_y: float = -h * 0.5 - 0.008
+	var slot: float = w / float(DIST_BINS)
+	var trough: StandardMaterial3D = HangarKit.painted_metal(
+		Color(0.06, 0.07, 0.06), wear, 0.20, 0.70)
+	var lit: StandardMaterial3D = HangarKit.emissive(color_display_text, 1.9)
+	var rail: StandardMaterial3D = HangarKit.emissive(color_accent, 1.6)
+	# the ruled baseline — an instrument at rest is still ruled, and an empty
+	# chart that shows its own axis is honest where a blank pocket is not
+	_dist_board.add_child(HangarKit.box(
+		Vector3(0.0, base_y, 0.001), Vector3(w, 0.004, 0.004), rail))
+	for i in range(DIST_BINS):
+		var cx: float = -w * 0.5 + slot * (float(i) + 0.5)
+		_dist_board.add_child(HangarKit.box(
+			Vector3(cx, base_y + h * 0.5, 0.0), Vector3(slot * 0.62, h, 0.004), trough))
+		var frac: float = float(int(counts[i])) / float(top)
+		var bh: float = maxf(0.006, h * frac)
+		_dist_board.add_child(HangarKit.box(
+			Vector3(cx, base_y + bh * 0.5, 0.003), Vector3(slot * 0.52, bh, 0.005), lit))
+
+
+## disclosure:origin — the seed line and the thirty-two bit lamps. MSB left, high
+## half on the upper row. Rebuilt with the state, because a register that does not
+## move while the machine runs would be a decoration pretending to be evidence.
+func _rebuild_register() -> void:
+	if _register_board == null:
+		return
+	_clear_board(_register_board)
+	var v: int = _state & 0xFFFFFFFF
+	var hex: String = String.num_int64(v, 16).to_upper()
+	while hex.length() < 8:
+		hex = "0" + hex
+	var line: MeshInstance3D = BakedText.make_label_mesh(
+		"SEED %d    STATE 0x%s" % [initial_seed, hex],
+		color_display_text, Vector2(body_width * 0.80, 0.020), 1400, true)
+	if line:
+		line.position = Vector3(0.0, 0.0155, 0.003)
+		_register_board.add_child(line)
+	var on_mat: StandardMaterial3D = HangarKit.emissive(color_display_text, 2.6)
+	var off_mat: StandardMaterial3D = HangarKit.painted_metal(
+		Color(0.05, 0.08, 0.05), wear, 0.10, 0.75)
+	for row in range(2):                               # REGISTER_BITS / REGISTER_ROW
+		for col in range(REGISTER_ROW):
+			var idx: int = row * REGISTER_ROW + col
+			var bit: int = REGISTER_BITS - 1 - idx     # MSB at the top left
+			var on: bool = ((v >> bit) & 1) == 1
+			var x: float = -0.180 + 0.024 * float(col)
+			var y: float = -0.009 - 0.014 * float(row)
+			_register_board.add_child(HangarKit.box(
+				Vector3(x, y, 0.002), Vector3(0.016, 0.010, 0.004),
+				on_mat if on else off_mat))
 
 
 func _rebuild_formula_board() -> void:
@@ -460,11 +799,16 @@ func _rebuild_history_board() -> void:
 
 func _update_display() -> void:
 	# Idle state — clear the live computation line and repaint all boards.
+	# Every rebuild below is null-guarded, so a rung that did not build a board
+	# simply skips it: the crank still runs, the state still advances, the machine
+	# just says less about it.
 	_compute_line = ""
 	_formula_line = "state = (state × a + c) mod m"
 	_rebuild_readout_board()
 	_rebuild_formula_board()
 	_rebuild_history_board()
+	_rebuild_distribution_board()
+	_rebuild_register()
 
 
 # ═════════════════════════════════════════════════════════════════════════════
@@ -553,5 +897,70 @@ func _exit_tree() -> void:
 			child.queue_free()
 
 
+## LATENT BUG PAID (2026-07-27): this was `pass`. Every `#token: value` a map put
+## on a prng_crank_machine placement was parsed, printed to the log by
+## GridInteractablesComponent, stashed as metadata — and then silently discarded,
+## because nothing on this artifact ever read the metadata back. The registry now
+## derives its DNA block from this file, so a token that does nothing is a
+## declaration that lies. It reads its metadata now.
+##
+## Ordering, which is the whole reason this is not just a setter: the grid sets
+## config_* metadata BEFORE add_child and calls this method call_deferred, i.e.
+## after _ready has already built the body. So _ready does the real read; this is
+## the re-read for direct callers (packaging, tools, tests) AND the path that makes
+## a late rung actually move the geometry.
+##
+## THE EARLY RETURNS ARE LOAD-BEARING — both of them, and the second one especially.
+## curation_station.gd:367-372 calls apply_grid_config({"emissive": false}) on every
+## artifact it curates, one line after _hide_labels() has turned billboarding off,
+## darkened the modulate, zeroed outlines and hidden the back-plates. That dict
+## carries no disclosure key. An unconditional rebuild there would free every child
+## and build fresh billboarded, outlined labels, throwing away framing that is never
+## re-applied — a silent regression on every curated shelf. So: unchanged rung means
+## touch nothing and say nothing.
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	# Snapshot every value that decides geometry. `disclosure` is the only one —
+	# the LCG parameters and body dimensions are @export-only and no config key
+	# reads them, so nothing else can change under us here.
+	var before_disclosure: String = disclosure
+
+	for k in config.keys():
+		set_meta("config_%s" % str(k), config[k])
+	_read_meta_overrides()
+
+	if not _built:
+		return                      # nothing built yet; _ready will use these values
+	if disclosure == before_disclosure:
+		return                      # curation_station's {"emissive": false} lands here
+	_rebuild_now()
+	print("[PrngCrankMachine] Config applied — disclosure=%s" % [disclosure])
+
+
+## Tear down what this script built and build it again, INLINE. No call_deferred:
+## a deferred rebuild would leave the node empty for a frame, and _auto_ground_artifact
+## — which runs later in the same deferred queue — would measure a zero AABB, return
+## early, and leave the machine ungrounded.
+func _rebuild_now() -> void:
+	for c in _owned:
+		if is_instance_valid(c):
+			remove_child(c)         # leaves the tree synchronously — no double-render
+			c.queue_free()
+	_owned.clear()
+	# Cached refs point at freed nodes now. The board rebuilds are all null-guarded,
+	# so clearing these is what keeps a rung that drops a pocket from repainting into
+	# a corpse.
+	_cab = null
+	_readout_board = null
+	_formula_board = null
+	_history_board = null
+	_dist_board = null
+	_register_board = null
+	_build_all()
+
+
+func _read_meta_overrides() -> void:
+	if has_meta("config_disclosure"):
+		# Fallback is the LEGACY rung, not the current value: an unreadable word must
+		# not quietly seal a machine that 50 rooms expect open. Same rule, same table,
+		# same result as the static disclosure_name() coin_toss reads through.
+		disclosure = _pick_axis(str(get_meta("config_disclosure")), DISCLOSURES, "works")

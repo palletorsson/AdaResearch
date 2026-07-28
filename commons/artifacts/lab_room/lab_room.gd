@@ -4,9 +4,9 @@ class_name LabRoom
 # @identity
 # essence: a procedurally-generated white modern test chamber that frames a workbench. The room IS the staging — white tile floor, walls, accent-colored strip naming the QFEP phase, signage, observation glass, and a central plinth where the instrument sits. Half-Life test chamber as architectural vocabulary
 # desire: every workbench gets a stage that signals "this is the instrument; the room exists to display it"
-# critical_parameter: accent_color — drives the strip, lights, signage tint, and sub-line color. Matches the QFEP phase of the workbench inside.
-# triggers: _ready() builds floor, walls, ceiling, accent strip, plinth, signage, and annotations from exports
-# emerges: a generic room becomes a specific chamber by changing DNA. Same script, different DNA = different room.
+# critical_parameter: premises — what kind of knowledge-place the room declares itself to be (chamber | workshop | theatre | ruin); witness — how much of the observation boundary is glazed, i.e. whether a result made here can be checked from outside or must be taken on report (none | port | sash | pane); accent_color — the QFEP phase of the workbench inside, which belongs to the instrument and not to the room, and which neither axis touches.
+# triggers: _ready() builds floor, walls, ceiling, accent strip, plinth, signage, and annotations from exports; apply_grid_config({premises, witness, …}) re-reads and rebuilds.
+# emerges: a generic room becomes a specific chamber by changing DNA. Same script, different DNA = different room. Change premises and the same instrument is being proved, made, taught, or abandoned.
 # needs: signage placeholder text [present]; QFEP phase color palette [present in PHASE_COLORS]; mount_point for workbench attachment [present]
 # relationships: parent-shape for all workbench artifacts; consumes the same QFEP color palette as the timeline ribbon; sibling to grid maps (the lab IS the stage where the grid's lessons get measured)
 # truth: the room is not the experiment. The room is the SIGNAL that an experiment is about to happen.
@@ -31,6 +31,124 @@ class_name LabRoom
 ##   integration  Color(0.608, 0.365, 0.835)  # #9B5DE5 — purple
 ##   relation     Color(0.984, 0.890, 0.541)  # #FBE38A — pale yellow
 ##   synthesis    Color(1.0,   1.0,   1.0)    # #FFFFFF — white
+
+# ─────────────────────────────────────────────────────────────────────────────
+# STAGE-2 DNA PROMOTION (2026-07-27). 41 placements and 98 @export lines — 80
+# knobs across 18 groups, the largest surface in the corpus — producing exactly
+# ONE look. Every lab in this project is the same near-white Half-Life test
+# chamber: floor 0.94, walls 0.96, a tiled ceiling, black grout, one wall of
+# glass. Nothing in 41 placements ever changed that.
+#
+# THE 80 KNOBS ARE NOT THE FAMILY, and saying so plainly is half this pass:
+#
+#   12 of the 80 cannot be reached from map data at all — no config_ read
+#      exists for them (ceiling_color, plinth_size, plinth_color, light_energy,
+#      accent_strip_energy, show_floor_tiles, floor_tile_count, grout_color,
+#      glass_color, window_size, single_door, stairs_color). They have never
+#      been anything but their defaults in any room ever built.
+#   ~45 are PER-ROOM MEASUREMENTS — where the door is, how wide the window is,
+#      which wall the sign hangs on, how many sprinklers, how deep the treads.
+#      Every placement sets these differently and none of them says what KIND of
+#      room this is. A door at x=-2.4 is not a different institution.
+#   ~14 are CONTENT — signage_top, signage_sub, annotation_top/_bottom,
+#      mounted_artifact_scene, mounted_lab_json, chalkboard_lookup. These are
+#      the room's text, authored per map, and they are the one thing the corpus
+#      DOES vary — which is exactly why they are not an axis: they are already
+#      doing their job.
+#    3 are the QFEP phase — accent_color, accent_strip_energy, light_warmth.
+#      accent_color is this artifact's declared critical_parameter and seven
+#      different values of it are already live in maps. It belongs to the
+#      INSTRUMENT inside, not to the room, and this pass does not touch it.
+#
+# That leaves the roughly twenty surface knobs that no map has ever set, and
+# read together they are two questions nobody had named:
+#
+#   premises  WHAT KIND OF KNOWLEDGE-PLACE   chamber · workshop · theatre · ruin
+#   witness   WHO CAN CHECK THE RESULT       none · port · sash · pane
+#
+# PREMISES is the double meaning: a room's premises are its floor AND its
+# assumptions. Each value is a different claim about how knowledge gets made:
+#   chamber  — the sealed clean room. Whatever happens is attributable to the
+#              apparatus alone; the room has no history and contributes nothing;
+#              its own whiteness IS the warrant. (LEGACY — all 41 placements.)
+#   workshop — knowledge is made by hand and by repetition. The room accumulates;
+#              the yellow bay lines painted on the floor and the kicked kickplate
+#              are evidence of work, not contamination of it.
+#   theatre  — knowledge is not made here, it is DELIVERED. There is a front, an
+#              audience, and a result that existed before you walked in. The dado
+#              rail is the giveaway: this room was built for sitting and listening.
+#   ruin     — the claim has lapsed. This was a knowledge-place; the institution
+#              that warranted it has gone, the cornice has come down, and the
+#              instrument on the plinth is still running anyway.
+#
+# WITNESS is the boundary: how much of the room is glazed — which is the same
+# question as whether a result made here can be checked from outside, or has to
+# be taken on report. One ordered ladder, monotone in glazed area:
+#
+#     none (0 m²)  <  port (~2 m²)  <  sash (~11 m²)  <  pane (~30 m²)
+#
+#   none — sealed. What happens here leaves as a report. You cannot check it.
+#   port — a 0.9 m square in the observation wall plus one lit, framed aperture
+#          in the east wall. Sight is rationed AND positioned: there is exactly
+#          one place you may look from, and the building chose it.
+#   sash — a 5.0 × 2.2 m picture window trimmed into an otherwise solid wall.
+#          The view is published: defined, framed, and shaped by whoever cut it.
+#   pane — the entire +Z wall is one sheet of glass. Continuous exposure; the
+#          room needs no report because the report is the view. (LEGACY.)
+#
+# WHY NOT A THIRD AXIS. The obvious candidate was the lighting — flood vs. a
+# single pool over the plinth is a real epistemic claim ("there is nothing here
+# you cannot see" vs. "only this matters"). It is folded into premises instead
+# (each register carries its own light_warmth / light_energy) because splitting
+# it out would have made two axes that repaint the same photons, and the critic
+# would have measured the pair twice.
+#
+# STRICTLY ADDITIVE. premises=chamber writes every one of its twenty-five slots
+# back to the literal export default it replaces; witness=pane writes
+# south_wall_is_glass=true and the two window flags false, which are also the
+# defaults. Both run BEFORE every individual config_ read in
+# _read_metadata_overrides, so a map token still wins over the axis — the
+# Turing lab's south_wall_is_glass:false / show_back_window:true and the Random
+# Walk lab's show_observation_window:true are re-applied after the axis and come
+# out byte-identical. lab_room.tscn carries no property overrides at all, so
+# there is nothing else for the axis to clobber. A scan of every map_data.json
+# and every commons/labs/*.lab.json finds ZERO #premises: or #witness: tokens:
+# all 41 placements are legacy-default, and all 41 still are.
+#
+# DELIBERATELY NOT ROUTED THROUGH EITHER AXIS: room_width/depth/height,
+# plinth_size, every door / stair / ramp measurement, _build_colliders (the
+# colliders already seal all four sides regardless of what mesh exists there, so
+# witness cannot make a room walkable or unwalkable), mount_point's height, and
+# the signage and annotation text. The room's register may not move a mounted
+# instrument by a millimetre or edit a word of what the map says.
+#
+# WHAT IT COST: floor_color / wall_color are reachable from map tokens AND
+# written by premises. An author who wants a custom wall colour must now either
+# leave premises at chamber or pass the colour as a token — an inspector edit to
+# the .tscn would be overwritten on the next _read_metadata_overrides(). That is
+# the same trade curation_station made, for the same reason: writing the colours
+# only when they happen to equal their defaults would make the axis silently
+# inert half the time, which is worse than a rule you can state.
+#
+# TWO LATENT BUGS FOUND ON THE DEFAULT PATH, reported not hidden — see
+# LATENT BUGS at the foot of the const tables below.
+# ─────────────────────────────────────────────────────────────────────────────
+
+@export_group("Family (DNA)")
+## AXIS 1 — what kind of knowledge-place the room declares itself to be. Writes the
+## twenty-five surface slots listed in PREMISES below (floor / wall / ceiling / plinth
+## colours, the tile grid, the wall pattern, the ceiling style, the three wall bands,
+## and the key-light warmth and energy). A config token for any of those still wins,
+## because the axis is applied before every token read.
+## chamber (LEGACY default: the white test chamber) | workshop | theatre | ruin.
+@export_enum("chamber", "workshop", "theatre", "ruin") var premises: String = "chamber"
+## AXIS 2 — how much of the observation boundary is glazed, i.e. whether what happens
+## in this room can be checked from outside it. One ordered ladder, monotone in glazed
+## area: none < port < sash < pane. Writes south_wall_is_glass, show_back_window,
+## back_window_size, show_observation_window, window_wall and window_size; an explicit
+## token for any of those still wins.
+## none (sealed) | port (rationed) | sash (published) | pane (LEGACY default: exposed).
+@export_enum("none", "port", "sash", "pane") var witness: String = "pane"
 
 # ── DNA: dimensions ───────────────────────────────────────────────────
 
@@ -266,10 +384,233 @@ var _fixture_cell_d: float = 1.2
 const FLOOR_THICKNESS: float = 0.05
 const CEILING_THICKNESS: float = 0.05
 
+# ── AXIS 1 — premises ─────────────────────────────────────────────────
+#
+# Every surface literal the room can wear, keyed by the knowledge-place it is
+# claiming to be. All four entries spell all twenty-five slots, so no value can
+# half-inherit another's look and no slot silently keeps whatever the previous
+# register left behind.
+#
+# The slots, once, so the tables below can stay dense:
+#   floor / wall / ceiling / plinth  the four big albedos
+#   tiles / tile_count / grout       the floor grid (grout is UNSHADED — it reads
+#                                    at full value regardless of the lighting)
+#   pattern / columns / seam         "smooth" | "panels" | "concrete"; panels also
+#                                    overlays real seam strips on three walls
+#   ceiling_style                    "tile_grid" | "exposed" | "skylight"
+#   header/_h/_c, footer/_h/_c,      the three horizontal bands, painted into the
+#   band/_y/_h/_c                    wall shader so they wrap window strips, door
+#                                    cutouts and the OUTSIDE faces too
+#   warmth / energy                  the key light's colour mix and brightness
+#   stairs / glass                   the entry flight, and the observation glazing
+const PREMISES := {
+	# THE CLEAN ROOM. The legacy lineage, and every number here is lifted verbatim
+	# from the export default it replaces — including ceiling 0.88 against wall
+	# 0.96 against floor 0.94, three near-whites that were never meant to match.
+	# Do not "tidy" them; 41 rooms are these numbers.
+	"chamber": {
+		"floor": Color(0.94, 0.94, 0.95), "wall": Color(0.96, 0.96, 0.97),
+		"ceiling": Color(0.88, 0.88, 0.90), "plinth": Color(0.20, 0.20, 0.22),
+		"tiles": true, "tile_count": 6, "grout": Color(0.05, 0.05, 0.06),
+		"pattern": "smooth", "columns": 6, "seam": Color(0.18, 0.18, 0.22),
+		"ceiling_style": "tile_grid",
+		"header": true, "header_h": 0.18, "header_c": Color(0.32, 0.36, 0.34),
+		"footer": true, "footer_h": 0.22, "footer_c": Color(0.20, 0.22, 0.24),
+		"band": false, "band_y": 1.2, "band_h": 0.15, "band_c": Color(0.16, 0.42, 0.62),
+		"warmth": 0.5, "energy": 0.8,
+		"stairs": Color(0.30, 0.30, 0.34), "glass": Color(0.85, 0.92, 0.98, 0.20),
+	},
+	# THE WORKSHOP. Sealed grey-green slab, painted block walls, an exposed ceiling
+	# of cable trays and strip lights. The loud read is the FOOTER: a 45 cm
+	# safety-yellow kickplate wrapping every wall inside and out, four times the
+	# chamber's discreet 22 cm charcoal skirting, with a bumper rail at 1.15 m
+	# above it. The floor grid drops to 3 — two painted bay lines each way instead
+	# of a tile grid, because a workshop marks its floor for standing in, not for
+	# cleaning.
+	"workshop": {
+		"floor": Color(0.38, 0.40, 0.37), "wall": Color(0.60, 0.58, 0.52),
+		"ceiling": Color(0.30, 0.30, 0.31), "plinth": Color(0.36, 0.38, 0.40),
+		"tiles": true, "tile_count": 3, "grout": Color(0.90, 0.66, 0.05),
+		"pattern": "concrete", "columns": 6, "seam": Color(0.30, 0.29, 0.27),
+		"ceiling_style": "exposed",
+		"header": true, "header_h": 0.10, "header_c": Color(0.15, 0.16, 0.17),
+		"footer": true, "footer_h": 0.45, "footer_c": Color(0.86, 0.62, 0.06),
+		"band": true, "band_y": 1.15, "band_h": 0.10, "band_c": Color(0.22, 0.23, 0.24),
+		"warmth": 0.18, "energy": 0.95,
+		"stairs": Color(0.40, 0.36, 0.28), "glass": Color(0.80, 0.86, 0.78, 0.24),
+	},
+	# THE LECTURE THEATRE. Dark oak parquet (tile_count 12), deep green paint above
+	# a timber dado, a brass cornice line at the top, panelled walls with real seam
+	# strips, a dark coffered ceiling and the house lights down to 0.62 at full
+	# warm. The dado rail at 1.05 m is the signature — no laboratory has one; every
+	# room built for an audience does.
+	"theatre": {
+		"floor": Color(0.31, 0.22, 0.14), "wall": Color(0.22, 0.29, 0.25),
+		"ceiling": Color(0.13, 0.13, 0.15), "plinth": Color(0.27, 0.19, 0.12),
+		"tiles": true, "tile_count": 12, "grout": Color(0.20, 0.14, 0.09),
+		"pattern": "panels", "columns": 8, "seam": Color(0.15, 0.10, 0.06),
+		"ceiling_style": "tile_grid",
+		"header": true, "header_h": 0.14, "header_c": Color(0.58, 0.44, 0.18),
+		"footer": true, "footer_h": 0.30, "footer_c": Color(0.20, 0.14, 0.09),
+		"band": true, "band_y": 1.05, "band_h": 0.22, "band_c": Color(0.33, 0.23, 0.14),
+		"warmth": 0.05, "energy": 0.62,
+		"stairs": Color(0.28, 0.20, 0.13), "glass": Color(0.92, 0.88, 0.72, 0.22),
+	},
+	# THE RUIN. Everything the other three spend on presence, this one spends on
+	# having stopped. The header goes FALSE — the only register that loses a band
+	# rather than recolouring it, because a fallen cornice is the cheapest way a
+	# building says nobody is maintaining it — and the footer grows to 60 cm of
+	# grime where damp has climbed the wall. Cold, dim (0.45), the ceiling tiles
+	# gone and the trays showing, and the tile grid still there under dirt-coloured
+	# grout instead of black. The instrument on the plinth keeps running.
+	"ruin": {
+		"floor": Color(0.33, 0.33, 0.30), "wall": Color(0.44, 0.45, 0.41),
+		"ceiling": Color(0.19, 0.19, 0.18), "plinth": Color(0.25, 0.24, 0.22),
+		"tiles": true, "tile_count": 6, "grout": Color(0.20, 0.19, 0.16),
+		"pattern": "concrete", "columns": 6, "seam": Color(0.26, 0.25, 0.22),
+		"ceiling_style": "exposed",
+		"header": false, "header_h": 0.18, "header_c": Color(0.24, 0.24, 0.22),
+		"footer": true, "footer_h": 0.60, "footer_c": Color(0.19, 0.18, 0.15),
+		"band": false, "band_y": 1.2, "band_h": 0.15, "band_c": Color(0.26, 0.25, 0.22),
+		"warmth": 0.72, "energy": 0.45,
+		"stairs": Color(0.26, 0.25, 0.23), "glass": Color(0.56, 0.60, 0.52, 0.34),
+	},
+}
+
+## Spellings that resolve to a canonical premises. `theater` is the American
+## spelling of a value this file spells British; `derelict` is exhibit_furniture's
+## word for the same withdrawn register, honoured here so one vocabulary crosses
+## the two families; `lab` and `clean_room` are what an author is likely to type
+## for the legacy look before finding out it is called chamber.
+const PREMISES_ALIASES := {
+	"theater": "theatre",
+	"lecture": "theatre",
+	"derelict": "ruin",
+	"lab": "chamber",
+	"clean_room": "chamber",
+	"shop": "workshop",
+}
+
+## The one reader for a premises token. Static so a sibling could parse through
+## this exact function rather than growing a second private table.
+static func premises_name(raw: String) -> String:
+	var v: String = raw.strip_edges().to_lower()
+	return str(PREMISES_ALIASES.get(v, v))
+
+
+# ── AXIS 2 — witness ──────────────────────────────────────────────────
+#
+# Which of the four existing +Z-wall builders runs, and whether the east wall
+# grows a lit observation port. Nothing here is new geometry except the solid
+# back wall, and even that is one call into _build_back_side_strip, which the
+# picture-window path has been using to cut wall around a door since it was
+# written.
+#
+#   glass_wall   -> south_wall_is_glass       (full-wall tinted sheet)
+#   back_window  -> show_back_window          (solid wall, window cut into it)
+#   solid_back   -> _back_solid               (solid wall, nothing cut into it)
+#   port         -> show_observation_window   (a lit framed pane on a side wall)
+const WITNESSES := {
+	# SEALED. All four boundaries solid — including the +Z wall, which NO config
+	# could build before this axis existed: with both flags false the old code
+	# left that side as an open gap, so "a lab you cannot see into" was simply not
+	# expressible. The sliding door stays where the map put it; sealing is about
+	# glazing, not about entry.
+	"none": {
+		"glass_wall": false, "back_window": false, "solid_back": true, "port": false,
+	},
+	# RATIONED. A 0.9 m square light in the observation wall, and one 1.4 × 0.9
+	# backlit pane in a dark metal frame on the east wall. Two small authorised
+	# sightlines instead of a boundary you can see through.
+	"port": {
+		"glass_wall": false, "back_window": true, "solid_back": false,
+		"back_size": Vector2(0.9, 0.9),
+		"port": true, "port_wall": "east", "port_size": Vector2(1.4, 0.9),
+	},
+	# PUBLISHED. The 5.0 × 2.2 picture window, trimmed, in an otherwise solid
+	# wall — which is exactly back_window_size's own default, so this rung costs
+	# the file nothing but a name.
+	"sash": {
+		"glass_wall": false, "back_window": true, "solid_back": false,
+		"back_size": Vector2(5.0, 2.2), "port": false,
+	},
+	# EXPOSED. The legacy lineage: the whole +Z wall is one tinted sheet with a
+	# dark frame strip top and bottom. All 41 placements.
+	"pane": {
+		"glass_wall": true, "back_window": false, "solid_back": false, "port": false,
+	},
+}
+
+## Spellings that resolve to a canonical witness. `sealed` and `glazed` are
+## participles and so cannot be canon under the family's grammar, but an author
+## reaching for them should still land somewhere sensible.
+const WITNESS_ALIASES := {
+	"sealed": "none",
+	"blind": "none",
+	"porthole": "port",
+	"observation": "port",
+	"window": "sash",
+	"glass": "pane",
+	"glazed": "pane",
+}
+
+static func witness_name(raw: String) -> String:
+	var v: String = raw.strip_edges().to_lower()
+	return str(WITNESS_ALIASES.get(v, v))
+
+
+# ── LATENT BUGS (found while reading all 80 knobs; reported, not hidden) ──────
+#
+# 1. wall_pattern:"concrete" NEVER DELIVERS ITS COLOUR. _make_wall_material()
+#    returns the band ShaderMaterial whenever any of header / footer / band is on
+#    (lab_room.gd:1732) — and header and footer both default TRUE, so the
+#    StandardMaterial3D branch below it is dead on every room ever built. That
+#    branch is the only place the documented concrete albedo Color(0.55, 0.53,
+#    0.50) lives (lab_room.gd:1737); the shader path passes wall_color straight
+#    through as base_color (lab_room.gd:1758) and reads wall_pattern only for
+#    roughness. So a map writing #wall_pattern:concrete gets a rougher WHITE
+#    wall. Not fixed here — the fix is to feed the concrete albedo into
+#    base_color, which would change the look of any room that has already asked
+#    for concrete, and that is a separate decision from this promotion. The two
+#    premises values that want concrete set wall_color themselves, so they are
+#    unaffected.
+#
+# 2. single_door IS UNREACHABLE AND SEVEN LAB JSONs SET IT. There is no
+#    has_meta("config_single_door") read anywhere in _read_metadata_overrides,
+#    yet base / point_line / point_one / point_triangle / primitives_polythedra /
+#    primitives_test / trace .lab.json all carry "single_door" in their lab_room
+#    block. _lift_lab_room_block_into_meta faithfully copies it into meta and
+#    nothing ever looks at it. It is silent today only because all seven set
+#    `true`, which is the export default — the first lab that asks for a
+#    two-panel door will get a one-panel door and no warning. Not fixed here
+#    because adding the read would change what those seven labs build the moment
+#    anyone edits one, which belongs in its own change with its own test.
+#
+# 3. THE WALL CUT AND THE DOOR DISAGREE ABOUT door_offset_x. _build_sliding_door
+#    clamps it to ±(half_width − door_width/2 − 0.2); _build_back_solid_with_window
+#    uses the RAW value to decide where to leave the hole. Push a door past the
+#    clamp and the panels sit at the clamped position while the wall opening is
+#    cut somewhere else — a door in front of solid wall, and a hole beside it.
+#    Latent today: the seven lab JSONs that set it all use 2.6 against a 3.10
+#    limit. _build_back_solid (below) copies the unclamped arithmetic on purpose,
+#    so the seal and the picture window stay consistent with each other rather
+#    than one of them being quietly half-fixed.
+
 # ── Internal state ────────────────────────────────────────────────────
 
 var mount_point: Node3D
 var _built: bool = false
+## AXIS 2, rung `none`: build the +Z wall as a solid panel. Not an @export — it is
+## derived from witness only, so it can never collide with a map token, and it sits
+## LAST in _build_walls' priority chain so an explicit south_wall_is_glass or
+## show_back_window token still beats it.
+var _back_solid: bool = false
+## Exactly the nodes THIS SCRIPT added as its own children, so a rebuild frees the
+## room it made and nothing else. We are not the only thing that parents children
+## to us: GridInteractablesComponent hangs label plates, packaging and tag markers
+## off the artifact root after apply_grid_config returns, and a teardown that walked
+## get_children() would destroy them on the next config that touched an axis.
+var _built_nodes: Array[Node] = []
 
 # ── Lifecycle ─────────────────────────────────────────────────────────
 
@@ -306,6 +647,19 @@ func _read_metadata_overrides() -> void:
 		mounted_lab_json = str(get_meta("config_mounted_lab_json"))
 	if mounted_lab_json != "":
 		_lift_lab_room_block_into_meta(mounted_lab_json)
+
+	# SECOND: the two DNA axes, applied BEFORE every individual key read below.
+	# That order is the whole strictly-additive guarantee — the axis lays down a
+	# complete register, then any config_ token a map (or a lifted lab JSON) also
+	# carries overwrites the slot it names. Idempotent on purpose: this function
+	# runs once from _ready and again from apply_grid_config, and both axes write
+	# the same values each time.
+	if has_meta("config_premises"):
+		premises = premises_name(str(get_meta("config_premises")))
+	if has_meta("config_witness"):
+		witness = witness_name(str(get_meta("config_witness")))
+	_apply_premises()
+	_apply_witness()
 
 	# Strings — direct mapping.
 	if has_meta("config_signage_top"):
@@ -456,19 +810,149 @@ func _read_metadata_overrides() -> void:
 		south_wall_is_glass = _parse_bool(str(get_meta("config_south_wall_is_glass")), south_wall_is_glass)
 
 
+# ── DNA axes: application ─────────────────────────────────────────────
+
+## Typed reader for a colour slot. Mirrors exhibit_furniture._pcolor: an entry
+## that is somehow not a Color degrades to the caller's fallback (which is always
+## the legacy literal) rather than to something arbitrary.
+static func _col(spec: Dictionary, slot: String, fallback: Color) -> Color:
+	var v: Variant = spec.get(slot, fallback)
+	if v is Color:
+		var c: Color = v
+		return c
+	return fallback
+
+
+## AXIS 1 — name the knowledge-place, wear its surfaces. Twenty-five slots, all
+## appearance: not one line here moves a wall, a door, a stair, a collider or the
+## mount point, so a room can change what it claims to be without shifting the
+## instrument standing in it by a millimetre.
+##
+## An unrecognised word falls back to chamber — the legacy register — because the
+## failure mode of a typo should be "the room you already had", never a blank one.
+func _apply_premises() -> void:
+	var s: Dictionary = PREMISES.get(premises, PREMISES["chamber"])
+	floor_color = _col(s, "floor", Color(0.94, 0.94, 0.95))
+	wall_color = _col(s, "wall", Color(0.96, 0.96, 0.97))
+	ceiling_color = _col(s, "ceiling", Color(0.88, 0.88, 0.90))
+	plinth_color = _col(s, "plinth", Color(0.20, 0.20, 0.22))
+	show_floor_tiles = bool(s.get("tiles", true))
+	floor_tile_count = int(s.get("tile_count", 6))
+	grout_color = _col(s, "grout", Color(0.05, 0.05, 0.06))
+	wall_pattern = str(s.get("pattern", "smooth"))
+	panel_columns = int(s.get("columns", 6))
+	seam_color = _col(s, "seam", Color(0.18, 0.18, 0.22))
+	ceiling_style = str(s.get("ceiling_style", "tile_grid"))
+	show_wall_header = bool(s.get("header", true))
+	wall_header_height = float(s.get("header_h", 0.18))
+	wall_header_color = _col(s, "header_c", Color(0.32, 0.36, 0.34))
+	show_wall_footer = bool(s.get("footer", true))
+	wall_footer_height = float(s.get("footer_h", 0.22))
+	wall_footer_color = _col(s, "footer_c", Color(0.20, 0.22, 0.24))
+	show_wall_band = bool(s.get("band", false))
+	wall_band_y_centre = float(s.get("band_y", 1.2))
+	wall_band_height = float(s.get("band_h", 0.15))
+	wall_band_color = _col(s, "band_c", Color(0.16, 0.42, 0.62))
+	light_warmth = clampf(float(s.get("warmth", 0.5)), 0.0, 1.0)
+	light_energy = float(s.get("energy", 0.8))
+	stairs_color = _col(s, "stairs", Color(0.30, 0.30, 0.34))
+	# The one place the two axes touch: premises owns the TINT of the observation
+	# glazing, witness owns whether any glazing exists. A ruin's glass should be
+	# dusty and half-opaque even though the ruin has no opinion about how wide it is.
+	glass_color = _col(s, "glass", Color(0.85, 0.92, 0.98, 0.20))
+
+
+## AXIS 2 — name the witness, choose which boundary builder runs. back_size /
+## port_wall / port_size are written only by the rungs that declare them, so the
+## legacy `pane` leaves back_window_size, window_wall and window_size exactly where
+## the inspector and the map left them.
+func _apply_witness() -> void:
+	var s: Dictionary = WITNESSES.get(witness, WITNESSES["pane"])
+	south_wall_is_glass = bool(s.get("glass_wall", true))
+	show_back_window = bool(s.get("back_window", false))
+	show_observation_window = bool(s.get("port", false))
+	_back_solid = bool(s.get("solid_back", false))
+	if s.has("back_size"):
+		var bs: Vector2 = s["back_size"]
+		back_window_size = bs
+	if s.has("port_wall"):
+		window_wall = str(s["port_wall"])
+	if s.has("port_size"):
+		var ps: Vector2 = s["port_size"]
+		window_size = ps
+
+
 func apply_grid_config(config_data: Dictionary) -> void:
+	# Snapshot BEFORE the read so a pass-through caller can be told apart from a
+	# real change. This is not a nicety: commons/artifacts/station/curation_station.gd
+	# calls apply_grid_config({"emissive": false}) on every artifact it curates, one
+	# line after _hide_labels() has de-billboarded and darkened our label plates.
+	# The dict names no axis and no key this room reads, so an unconditional rebuild
+	# there would throw that framing away and put fresh billboarded, outlined labels
+	# back — a regression on a shipped look, caused by a config that changed nothing.
+	var before_premises: String = premises
+	var before_witness: String = witness
+	var before_sig: String = _config_signature()
+
 	# Re-read everything in case metadata wasn't populated before _ready().
-	# If the room is already built, rebuild it from scratch so the
-	# changes are visible immediately.
 	for k in config_data.keys():
 		set_meta("config_%s" % str(k), config_data[k])
 	_read_metadata_overrides()
-	if _built:
-		_clear_built_children()
-		_built = false
-		_build_room()
-		# Rebuild created new wall materials — re-patch the world-Y offset.
-		call_deferred("_patch_band_shader_world_y_offset")
+
+	if not _built:
+		# _ready() has not run yet. It will build from exactly what we just read,
+		# so there is nothing to tear down and nothing to report.
+		return
+	if premises == before_premises and witness == before_witness \
+			and _config_signature() == before_sig:
+		# Nothing this room builds from moved. Touch nothing, say nothing.
+		return
+
+	_rebuild_now()
+	print("[LabRoom] Config applied — premises=%s, witness=%s" % [premises, witness])
+
+
+## Every non-private, non-Object script property as one string — the state the
+## build reads, in one comparable value.
+##
+## Derived from the script's own property list rather than a hand-written roll of
+## the eighty exports, because the two failure modes are not symmetric: a stale
+## hand-list that MISSES a key silently ignores a map token forever, while this
+## one gains new exports the day they are declared. Objects are skipped (mount_point
+## is a node reference whose string identity says nothing about what was configured).
+func _config_signature() -> String:
+	var script_ref: Script = get_script()
+	if script_ref == null:
+		return ""
+	var parts: PackedStringArray = PackedStringArray()
+	for p in script_ref.get_script_property_list():
+		var usage: int = int(p.get("usage", 0))
+		if (usage & PROPERTY_USAGE_SCRIPT_VARIABLE) == 0:
+			continue
+		var n: String = str(p.get("name", ""))
+		if n.is_empty() or n.begins_with("_"):
+			continue
+		var v: Variant = get(n)
+		if v is Object:
+			continue
+		parts.append("%s=%s" % [n, str(v)])
+	return "|".join(parts)
+
+
+## Free what this build made and build the room again, INLINE and synchronously.
+##
+## No call_deferred on this path. The grid queues _auto_ground_artifact behind
+## apply_grid_config in the same deferred queue; a rebuild that emptied us now and
+## refilled us next frame would hand that pass a zero AABB, which it reads as
+## "nothing to ground" and returns early — the room would never be seated on the
+## floor. _patch_band_shader_world_y_offset stays deferred because it only writes a
+## uniform and genuinely needs a settled global_position; it moves no geometry.
+func _rebuild_now() -> void:
+	_clear_built_children()
+	_built = false
+	_build_room()
+	# Rebuild created new wall materials — re-patch the world-Y offset.
+	call_deferred("_patch_band_shader_world_y_offset")
 
 
 ## Read the lab_room block from the lab JSON and copy each key into
@@ -512,9 +996,20 @@ func _clear_built_children() -> void:
 	# Removing first (which also exits groups) guarantees the rebuild's
 	# scanner only ever finds the fresh door. Same fix as palm_scanner's
 	# own _clear_built_children.
-	for c in get_children():
-		remove_child(c)
+	#
+	# ONLY the nodes this script built (_built_nodes), never get_children(): by the
+	# time a rebuild can happen the grid has also parented label plates, packaging
+	# and tag markers to us, and those are not ours to destroy.
+	for c in _built_nodes:
+		if not is_instance_valid(c):
+			continue
+		if c.get_parent() == self:
+			remove_child(c)
 		c.queue_free()
+	_built_nodes.clear()
+	# Cached ref into what we just freed. _build_room re-assigns it on the very
+	# next line of _rebuild_now, so it is never null to anyone outside this call.
+	mount_point = null
 
 
 # ── Build ─────────────────────────────────────────────────────────────
@@ -1276,14 +1771,23 @@ func _build_walls() -> void:
 	west.position = Vector3(-room_width * 0.5 + WALL_THICKNESS * 0.5, room_height * 0.5, 0.0)
 	walls.add_child(west)
 
-	# Back wall (+Z) — three options, in priority order:
+	# Back wall (+Z) — four options, in priority order:
 	#  1. show_back_window: solid wall with a LARGE window cut into it (NEW)
 	#  2. south_wall_is_glass: full-wall glass (legacy)
-	#  3. neither: nothing — open observation gap
+	#  3. _back_solid: solid wall, nothing cut into it (witness:none)
+	#  4. none of the above: nothing — open observation gap
+	# _back_solid sits BELOW the two token-backed flags on purpose. witness:none
+	# sets south_wall_is_glass=false and _back_solid=true, but a map that also
+	# writes #south_wall_is_glass:true or #show_back_window:true is re-read after
+	# the axis, so its wall wins and the seal is simply not applied. Priority
+	# order IS the "explicit token beats the axis" contract here — there is no
+	# extra bookkeeping to get out of step.
 	if show_back_window:
 		_build_back_solid_with_window(walls)
 	elif south_wall_is_glass:
 		_build_back_glass(walls)
+	elif _back_solid:
+		_build_back_solid(walls)
 
 	# Front-wall window is now drawn by _build_front_solid_with_window
 	# above (called when show_front_window is true and replaces the
@@ -3239,3 +3743,28 @@ func _build_back_glass(parent: Node3D) -> void:
 	bottom_frame.material_override = frame_mat
 	bottom_frame.position = Vector3(0.0, frame_thickness * 0.5, room_depth * 0.5)
 	parent.add_child(bottom_frame)
+
+
+# AXIS 2, rung `none`: the +Z wall as a solid panel in the room's own wall
+# material — the header, footer and mid-band paint straight across it like every
+# other wall, which is the point: a sealed lab reads as a building from outside,
+# not as a missing face.
+#
+# Deliberately NOT new geometry. This is one call into _build_back_side_strip,
+# the helper the picture-window path already uses to cut a full-height wall
+# segment around a door, spanning the whole width instead of one side strip. The
+# door arithmetic (d_left / d_right from door_offset_x ± door_width * 0.5) is
+# copied from _build_back_solid_with_window so the two paths cannot drift.
+#
+# Colliders are untouched and always were: _add_wall_collider builds a solid
+# "south" barrier with a door-shaped gap regardless of what mesh exists there, so
+# sealing this wall cannot make a room more or less walkable than it is today.
+func _build_back_solid(parent: Node3D) -> void:
+	var door_here: bool = show_sliding_door and door_wall == "south"
+	_build_back_side_strip(parent, _make_wall_material(), "BackWallSolid",
+		-room_width * 0.5, room_width * 0.5,
+		room_depth * 0.5 - WALL_THICKNESS * 0.5,
+		door_here,
+		door_offset_x - door_width * 0.5,
+		door_offset_x + door_width * 0.5,
+		door_height)

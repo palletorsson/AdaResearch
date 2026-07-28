@@ -13,20 +13,266 @@ extends Node3D
 # Tutorial Text Display component
 # Supports tt:name format to display tutorial text from tutorial_text.json
 
+const HANGAR = preload("res://commons/artifacts/_hangar/hangar_kit.gd")
+
+# ═══════════════════════════════════════════════════════════════════
+# STAGE-2 DNA — `support`
+# ═══════════════════════════════════════════════════════════════════
+#
+# The identity line above says it plainly: *a tutorial is a placement-of-words.*
+# The library holds the words; this placard holds the PLACEMENT. Until now only
+# half of that was ever built. The whole script below is about WHICH text
+# (current_tutorial_id) and not one line of it was about how the text stands —
+# so across 30 placements, in every sequence, authored language hung in mid-air
+# with no relationship to the room it was speaking in.
+#
+# `support` is the project's one word for "what apparatus holds this thing up".
+# Same ladder, same meaning, same spelling as on exit_sign and science_screen:
+# two panels, one question, one vocabulary. What varies is MASS and PRESENCE —
+# nothing here is time-domain, and every value is legible in a single still.
+#
+#   none   the bare panel. No apparatus. What all 30 shipped placements are.
+#   stand  a slender post to a disc foot — demountable, provisional furniture;
+#          the room shows through beside it.
+#   frame  a bezel and a back panel — the screen reads as a hung SIGN rather
+#          than as floating light.
+#   pylon  a pier of building, floor to over-head, with the panel sunk into a
+#          reveal cut in its face — the building itself is speaking.
+#
+# The four make genuinely different claims about who is talking. That is the
+# axis: not decoration, but the authority the words are delivered with.
+const SUPPORTS: PackedStringArray = ["none", "stand", "frame", "pylon"]
+
+## Default is `none` — the exact pre-promotion look, zero nodes added. Promotion
+## is not permission to move 30 shipped placements.
+@export_enum("none", "stand", "frame", "pylon") var support: String = "none"
+
+# ── Panel geometry, read off codeDisplay.tscn ────────────────────────
+# Viewport2Din3D: screen_size 1.0 x 1.2, sitting a few mm off local origin.
+# Everything the axis builds is dimensioned from these so the apparatus stays
+# registered to the face if the scene is ever re-seated.
+const PANEL_W: float = 1.0
+const PANEL_H: float = 1.2
+const PANEL_CY: float = 0.0045     ## Viewport2Din3D's own y offset in the scene
+const PANEL_CZ: float = -0.0013    ## ...and its z offset; the face looks down +Z
+
+# ── stand ──
+const STAND_POST: float = 0.05     ## square post section
+const STAND_DROP: float = 1.10     ## panel bottom edge → floor
+const STAND_BASE_R: float = 0.21   ## 0.42 m diameter disc
+const STAND_BASE_T: float = 0.04
+
+# ── frame ──
+const BEZEL_W: float = 0.06        ## outer becomes 1.12 x 1.32
+const BEZEL_D: float = 0.03
+const BACK_T: float = 0.02
+
+# ── pylon ──
+const PIER_DEPTH: float = 0.30
+const PIER_DROP: float = 1.10      ## panel bottom edge → floor
+const PIER_RISE: float = 0.35      ## panel top edge → head of the pier
+const PIER_REVEAL: float = 0.03    ## how far the panel is sunk behind the face
+const PIER_JAMB: float = 0.15      ## face left standing either side of the opening
+
 @onready var viewport_2d: Node = $Viewport2Din3D
 var tutorial_library: TutorialTextLibrary
 var current_tutorial_id: String = ""
 var rich_text_label: RichTextLabel
 
+## Nodes THIS script created. The teardown walks this list and nothing else —
+## the grid adds label plates, packaging and tag markers as siblings, and a
+## get_children() sweep would take them with it.
+var _support_nodes: Array[Node3D] = []
+var _built: bool = false
+
 func _ready() -> void:
 	# Initialize tutorial library
 	tutorial_library = TutorialTextLibrary.new()
-	
+
+	# Support geometry is built SYNCHRONOUSLY: children exist by the time the
+	# first await below yields, which is what apply_grid_config (call_deferred,
+	# ahead of grounding and label framing) and curation_station both count on.
+	_build_all()
+	_built = true
+
 	# Wait a frame for Viewport2Din3D to set up its scene
 	await get_tree().process_frame
-	
+
 	# Find the RichTextLabel in the Viewport2Din3D's scene
 	_find_rich_text_label()
+
+
+# ═══════════════════════════════════════════════════════════════════
+# SUPPORT BUILD
+# ═══════════════════════════════════════════════════════════════════
+
+func _panel_bottom() -> float:
+	return PANEL_CY - PANEL_H * 0.5
+
+func _panel_top() -> float:
+	return PANEL_CY + PANEL_H * 0.5
+
+## Track and parent in one step so nothing this script makes can escape teardown.
+func _add_support_node(n: Node3D) -> void:
+	add_child(n)
+	_support_nodes.append(n)
+
+func _build_all() -> void:
+	match support:
+		"stand":
+			_build_support_stand()
+		"frame":
+			_build_support_frame()
+		"pylon":
+			_build_support_pylon()
+		_:
+			pass  # "none" — the bare panel and its HandPoseArea. Zero nodes.
+
+
+## A 0.05 m post from the centre of the panel's bottom edge down to a 0.42 m
+## disc. Hardware you could carry in one hand: the words are visiting the room
+## for the duration of a lesson, and the room shows through on both sides.
+func _build_support_stand() -> void:
+	var post_mat: StandardMaterial3D = HANGAR.painted_metal(Color(0.16, 0.16, 0.19), 0.18, 0.55, 0.34)
+	var post_top: float = _panel_bottom()
+	var post_bottom: float = post_top - STAND_DROP
+	_add_support_node(HANGAR.box(
+		Vector3(0.0, post_top - STAND_DROP * 0.5, PANEL_CZ),
+		Vector3(STAND_POST, STAND_DROP, STAND_POST),
+		post_mat))
+
+	var base: MeshInstance3D = MeshInstance3D.new()
+	var disc: CylinderMesh = CylinderMesh.new()
+	disc.top_radius = STAND_BASE_R
+	disc.bottom_radius = STAND_BASE_R
+	disc.height = STAND_BASE_T
+	disc.radial_segments = 28
+	base.mesh = disc
+	base.position = Vector3(0.0, post_bottom - STAND_BASE_T * 0.5, PANEL_CZ)
+	base.material_override = HANGAR.worn_metal(Color(0.22, 0.22, 0.25))
+	_add_support_node(base)
+
+
+## A 0.06 m bezel around all four edges (outer 1.12 x 1.32) and a back panel
+## behind the viewport. Nothing touches the floor — but the text stops being
+## light in the air and becomes a hung sign, a made object with an edge and a
+## back, fixed to something.
+func _build_support_frame() -> void:
+	var bezel_mat: StandardMaterial3D = HANGAR.painted_metal(Color(0.19, 0.20, 0.23), 0.14, 0.4, 0.5)
+	var back_mat: StandardMaterial3D = HANGAR.painted_metal(Color(0.10, 0.10, 0.12), 0.2, 0.3, 0.7)
+
+	var outer_w: float = PANEL_W + BEZEL_W * 2.0
+	var outer_h: float = PANEL_H + BEZEL_W * 2.0
+	var half_bez: float = BEZEL_W * 0.5
+
+	# Head and sill run the full outer width; the stiles fill between them.
+	_add_support_node(HANGAR.box(
+		Vector3(0.0, _panel_top() + half_bez, PANEL_CZ),
+		Vector3(outer_w, BEZEL_W, BEZEL_D), bezel_mat))
+	_add_support_node(HANGAR.box(
+		Vector3(0.0, _panel_bottom() - half_bez, PANEL_CZ),
+		Vector3(outer_w, BEZEL_W, BEZEL_D), bezel_mat))
+	for i in range(2):
+		var s: float = -1.0 if i == 0 else 1.0
+		_add_support_node(HANGAR.box(
+			Vector3(s * (PANEL_W * 0.5 + half_bez), PANEL_CY, PANEL_CZ),
+			Vector3(BEZEL_W, outer_h, BEZEL_D), bezel_mat))
+
+	_add_support_node(HANGAR.box(
+		Vector3(0.0, PANEL_CY, PANEL_CZ - BACK_T),
+		Vector3(outer_w, outer_h, BACK_T), back_mat))
+
+
+## A pier of building: 0.30 m deep, running 1.1 m below the panel to the floor
+## and 0.35 m above its head, with the panel sunk 0.03 m into a reveal cut in
+## the front face. Contradicting a stand costs a screwdriver; contradicting this
+## costs money. Same words, entirely different authority.
+func _build_support_pylon() -> void:
+	var pier_mat: StandardMaterial3D = HANGAR.painted_metal(Color(0.17, 0.17, 0.20), 0.2, 0.26, 0.7)
+	var reveal_mat: StandardMaterial3D = HANGAR.painted_metal(Color(0.07, 0.07, 0.08), 0.1, 0.2, 0.82)
+
+	var pier_top: float = _panel_top() + PIER_RISE
+	var pier_bottom: float = _panel_bottom() - PIER_DROP
+	var pier_h: float = pier_top - pier_bottom
+	var pier_cy: float = (pier_top + pier_bottom) * 0.5
+	var pier_w: float = PANEL_W + PIER_JAMB * 2.0
+
+	# Opening: the panel plus a hairline margin, so the face frames it rather
+	# than clipping it.
+	var open_w: float = PANEL_W + 0.04
+	var open_h: float = PANEL_H + 0.04
+	var open_top: float = PANEL_CY + open_h * 0.5
+	var open_bottom: float = PANEL_CY - open_h * 0.5
+
+	# Mass behind: front face lands exactly on the panel plane, so the panel is
+	# seated against building rather than floating in a hole.
+	var mass_d: float = PIER_DEPTH - PIER_REVEAL
+	_add_support_node(HANGAR.box(
+		Vector3(0.0, pier_cy, PANEL_CZ - mass_d * 0.5),
+		Vector3(pier_w, pier_h, mass_d), pier_mat))
+
+	# Front skin, PIER_REVEAL proud of the panel — the four returns that make
+	# the recess read as a recess.
+	var skin_cz: float = PANEL_CZ + PIER_REVEAL * 0.5
+	for i in range(2):
+		var s: float = -1.0 if i == 0 else 1.0
+		_add_support_node(HANGAR.box(
+			Vector3(s * (open_w + pier_w) * 0.25, pier_cy, skin_cz),
+			Vector3((pier_w - open_w) * 0.5, pier_h, PIER_REVEAL), pier_mat))
+	_add_support_node(HANGAR.box(
+		Vector3(0.0, (pier_top + open_top) * 0.5, skin_cz),
+		Vector3(open_w, pier_top - open_top, PIER_REVEAL), pier_mat))
+	_add_support_node(HANGAR.box(
+		Vector3(0.0, (open_bottom + pier_bottom) * 0.5, skin_cz),
+		Vector3(open_w, open_bottom - pier_bottom, PIER_REVEAL), pier_mat))
+
+	# A shadow rim on the reveal's inner return, so the depth survives flat light.
+	_add_support_node(HANGAR.box(
+		Vector3(0.0, PANEL_CY, PANEL_CZ + 0.004),
+		Vector3(open_w + 0.012, open_h + 0.012, 0.008), reveal_mat))
+
+
+## Accept an axis value only if it names something we actually build. A typo in
+## a map token has to fall back to the shipped look, not strand a placement with
+## half an apparatus.
+func _pick_axis(raw: String, allowed: PackedStringArray, fallback: String) -> String:
+	var v: String = raw.to_lower().strip_edges()
+	return v if allowed.has(v) else fallback
+
+
+## Resolve the axis from a grid config and rebuild ONLY if it actually moved.
+##
+## curation_station calls apply_grid_config({"emissive": false}) on every artifact
+## it curates — one line after it has un-billboarded, dimmed and back-plated the
+## labels. An unconditional rebuild there throws that framing away and it is never
+## re-applied. So: no support key, or the same value, means touch nothing and say
+## nothing.
+func _apply_support_config(config_data: Dictionary) -> void:
+	var before_support: String = support
+	if config_data.has("support"):
+		support = _pick_axis(str(config_data["support"]), SUPPORTS, support)
+
+	if not _built:
+		return  # nothing built yet — _ready() will use the value we just resolved
+	if support == before_support:
+		return
+
+	_rebuild_now()
+	print("[CodeDisplay] Config applied — support=%s" % [support])
+
+
+## Synchronous teardown + rebuild. remove_child() takes the old nodes out of the
+## tree in this same frame (queue_free alone would leave them rendering), and
+## nothing is deferred: a deferred rebuild would have the grid's auto-ground pass
+## measure an empty AABB and skip grounding entirely.
+func _rebuild_now() -> void:
+	for c in _support_nodes:
+		if is_instance_valid(c):
+			if c.get_parent() == self:
+				remove_child(c)
+			c.queue_free()
+	_support_nodes.clear()
+	_build_all()
 
 func _find_rich_text_label() -> void:
 	"""Find the RichTextLabel within the Viewport2Din3D's viewport scene"""

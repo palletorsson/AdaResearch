@@ -9,7 +9,7 @@
 # @identity
 # essence: Binomial(n, 0.5) → N(n/2, n/4) as n → ∞ — the Central Limit Theorem
 # desire: watch balls cascade through pegs and see the bell curve assemble itself from binary choices
-# critical_parameter: peg_rows — more rows means tighter Gaussian convergence; 8 rows gives 9 bins
+# critical_parameter: evidence — how many trials the machine is standing on when you find it (none | anecdote | sample | census); derivation — whether the pin field shows where the shape comes from (none | field | paths); peg_rows still sets n — 8 rows gives 9 bins — but n is the curriculum, not a knob
 # triggers: auto_drop spawns balls at balls_per_second rate; peg collisions create the L/R branching
 # emerges: the bell curve overlay converges to match the histogram — theory becomes visible fact
 # needs: VR push buttons for DROP/AUTO/RESET/SPEED [has]; ball pool recycling [has]
@@ -22,6 +22,103 @@ class_name GaltonBoard
 
 const BakedText = preload("res://commons/utils/baked_text_albedo.gd")
 const HangarKit = preload("res://commons/artifacts/_hangar/hangar_kit.gd")
+
+# ─────────────────────────────────────────────────────────────────────────────
+# STAGE-2 DNA PROMOTION (2026-07-27). 101 placements, 25 exports, and not one of
+# them reachable from a map: apply_grid_config() was a one-line `pass`, so every
+# #token:value written on a galton_board was accepted, logged, and thrown away.
+#
+# The harder finding is what a PHOTOGRAPH of this artifact shows. The machine
+# animates — beads fall for about twelve seconds — but the still is taken at
+# build time, and at build time the bins are empty, the bars are one millimetre
+# tall, the bell-curve overlay does not exist yet (it waits for n >= 5) and the
+# screen reads "n = 0 / Drop balls!". The flagship demonstrator of the Central
+# Limit Theorem photographs as an empty box. Its entire epistemic content is in
+# a tense the camera cannot reach.
+#
+# So the axes are not about what the cabinet is MADE OF. They are about what
+# this machine makes legible about its own claim, and both are legible in ONE
+# FRAME:
+#
+#   evidence     HOW MANY TRIALS IT STANDS ON   none · anecdote · sample · census
+#   derivation   WHERE THE SHAPE COMES FROM     none · field · paths
+#
+# `evidence` is the machine's own argument turned into a knob. One bead is
+# noise; ten thousand is a law; the whole truth line ("the inevitable shape of
+# accumulated independence") is a statement about the count of trials, and until
+# now that count was always zero at the moment anyone looked. The rungs are
+# quantities of the SAME process, not different processes: _seed_evidence()
+# walks peg_rows fair binary choices per bead, exactly the L/R the physics
+# performs, and drops the result in a bin. Nothing computed changes — the
+# binomial is the binomial. These beads simply fell before you arrived, which is
+# the true state of every galton board in every science museum on earth.
+#   none      the machine has been reset. Empty bins, no curve, "Drop balls!".
+#   anecdote  n=1. ONE bin holds a full-height bar and the readout says
+#             std = 0.00 next to theory std = 1.41 — a sample of one, claiming
+#             certainty. The most dishonest picture the machine can take.
+#   sample    n=12. Five or six ragged bars, outer bins still empty, and the
+#             fitted Gaussian visibly off-centre and the wrong width.
+#   census    n=4000. Nine graded bars in a smooth symmetric bell.
+#
+# `derivation` answers a separate audit finding: the @identity essence is
+# "Binomial(n,0.5) -> N(n/2,n/4)", a claim no reader could build from, because
+# the machine never shows WHY the middle bin is likelier. The binomial
+# coefficient is a count of routes, and routes are drawable.
+#   none      the pin field as built — 36 identical dots.
+#   field     Pascal's triangle painted on the back panel behind the pegs, one
+#             cell per peg, brightness = C(row,col)/35. The apex is nearly
+#             black; the bottom middle is bright. The gradient IS the answer.
+#   paths     all 2^peg_rows routes drawn as additive amber lines. 256 equally
+#             likely journeys; where they overlap the board saturates, so the
+#             DENSITY of the fan is the distribution, drawn before a single
+#             bead has fallen.
+#
+# THE DEFAULT IS UNTOUCHED. evidence=none seeds zero trials and returns before
+# touching a counter; derivation=none returns before creating a node; the new
+# _read_meta_overrides() finds no metas on any of the 101 placements (a scan of
+# all 1693 map_data.json files finds no #evidence: or #derivation: token, and
+# no galton_board placement carries any config token at all). Frame one is
+# byte-identical to yesterday's frame one.
+#
+# Deliberately NOT built: a `pascal` rung printing the coefficients 1 8 28 56 70
+# as glyphs on the pegs. At 48 mm pitch the numbers would be 20 mm tall — a
+# caption you cannot read is worse than a gradient you can. And deliberately NOT
+# promoted: balls_per_second, the machine's most tempting knob, which a still
+# cannot see at all (see the LATENT BUGS note at the foot of this file).
+#
+# The vocabulary of `evidence` is SHARED with shannon_workbench, which asks the
+# same question of a different sample (bits in a grid, not beads in bins) and
+# answers it from a different resting place: it defaults to `sample`, because a
+# shannon bench always shows you 256 draws, where a galton board shows you
+# nothing until someone presses DROP. Same ladder, different rung — and that
+# difference is itself the finding.
+# ─────────────────────────────────────────────────────────────────────────────
+
+## AXIS 1 — how many trials this machine is standing on when you find it.
+## Shared vocabulary with shannon_workbench. none (legacy default) = the bins
+## are empty and the readout says "Drop balls!".
+@export_enum("none", "anecdote", "sample", "census") var evidence: String = "none"
+## AXIS 2 — whether the pin field shows where the bell comes from, or only that
+## it arrived. none (legacy default) = 36 identical pegs and no explanation.
+@export_enum("none", "field", "paths") var derivation: String = "none"
+## Seed for the prior trials and for the sampled path fan, so a variant renders
+## the same histogram every time it is photographed. Off the default path
+## entirely: with evidence=none and derivation=none no RNG is ever constructed.
+@export var evidence_seed: int = 20260727
+
+## The ladder, as counts of the SAME fair-coin walk the physics runs. Read by
+## _seed_evidence(); the keys are the axis values.
+const EVIDENCE_TRIALS := {
+	"none": 0,        # the legacy lineage — 101 placements, all of them
+	"anecdote": 1,    # one bead: a full-height bar and a claim of std = 0
+	"sample": 12,     # enough to be ragged, few enough to count by eye
+	"census": 4000,   # the law
+}
+
+## Pascal-field ramp. Cold is the apex (one route in); hot is the centre of the
+## bottom row (35 routes in).
+const PASCAL_COLD := Color(0.06, 0.09, 0.17)
+const PASCAL_HOT := Color(0.62, 0.84, 1.00)
 
 ## Housing finish — "rams" (light Braun default) or "terminal" (dark console).
 ## The whole cabinet derives from HangarKit.finish_palette(), so one word
@@ -110,6 +207,11 @@ var _funnel_top_y: float = 0.0
 # ═════════════════════════════════════════════════════════════════════════════
 
 func _ready() -> void:
+	# Map tokens arrive as metadata BEFORE the node enters the tree
+	# (GridInteractablesComponent._apply_artifact_config at :1162, add_child at
+	# :1187), so both axes are known here — before anything is built.
+	_read_meta_overrides()
+
 	num_bins = peg_rows + 1
 	_bin_counts.resize(num_bins)
 	_bin_counts.fill(0)
@@ -127,6 +229,18 @@ func _ready() -> void:
 	_create_labels()
 	_create_vr_controls()
 	_init_ball_pool()
+
+	# ── DNA, both strictly after the legacy build ───────────────────────────
+	# At the default (evidence=none, derivation=none) both of these return
+	# before touching a counter or creating a node, and the third call is not
+	# made at all — so frame one is exactly what it was before the promotion.
+	_seed_evidence()
+	_build_derivation()
+	if _total_dropped > 0:
+		# The bars, the curve and the readout are normally driven from _process,
+		# which means a capture taken on frame zero would show seeded counts
+		# behind an unchanged display. Push them once so the still is honest.
+		_refresh_evidence_visuals()
 
 
 func _process(delta: float) -> void:
@@ -1103,5 +1217,226 @@ func _exit_tree() -> void:
 			child.queue_free()
 
 
+# ═════════════════════════════════════════════════════════════════════════════
+# DNA — evidence and derivation
+# ═════════════════════════════════════════════════════════════════════════════
+
+## The family's reader for an axis token. Strips and lower-cases before matching,
+## and falls back to the CURRENT value rather than to a hardcoded one, so an
+## unrecognised word is the absence of a token and never a silent third state.
+## (exhibit_furniture found the same bug the hard way: a raw `#guard: rail` with
+## a space matched no case and built nothing on 1077 placements.)
+static func _axis_value(raw: String, allowed, fallback: String) -> String:
+	var v: String = raw.strip_edges().to_lower()
+	return v if v in allowed else fallback
+
+
+func _read_meta_overrides() -> void:
+	if has_meta("config_evidence"):
+		evidence = _axis_value(str(get_meta("config_evidence")),
+				EVIDENCE_TRIALS.keys(), evidence)
+	if has_meta("config_derivation"):
+		derivation = _axis_value(str(get_meta("config_derivation")),
+				["none", "field", "paths"], derivation)
+
+
+## The prior run. Each trial is peg_rows fair binary choices — the SAME process
+## the rigid bodies perform, minus the twelve seconds — so the histogram carries
+## real sampling noise rather than a drawn curve. What the machine computes is
+## untouched: this only decides how many times it had already computed it when
+## you walked up.
+func _seed_evidence() -> void:
+	var trials: int = int(EVIDENCE_TRIALS.get(evidence, 0))
+	if trials <= 0:
+		return
+	var rng := RandomNumberGenerator.new()
+	rng.seed = evidence_seed
+	for _t: int in range(trials):
+		var bin_index: int = 0
+		for _r: int in range(peg_rows):
+			if rng.randf() < 0.5:
+				bin_index += 1
+		_bin_counts[bin_index] += 1
+	_total_dropped += trials
+
+
+func _refresh_evidence_visuals() -> void:
+	_update_bin_bars()
+	_update_bell_curve()
+	# The stats board is REBUILT rather than edited (its text is baked), and
+	# _refresh_stats_tag disposes of the old one with queue_free(), which defers to
+	# the end of the frame. On the seeded path the "n = 0 / Drop balls!" board that
+	# _create_cabinet just mounted would therefore share the screen with the seeded
+	# one for exactly one frame — long enough for a frame-zero capture to
+	# photograph both, stacked. Take it out of the tree now; queue_free() on the
+	# orphan still runs.
+	if _stats_tag != null and is_instance_valid(_stats_tag) and _stats_tag.get_parent() != null:
+		_stats_tag.get_parent().remove_child(_stats_tag)
+	_update_stats()
+
+
+func _build_derivation() -> void:
+	if derivation == "none":
+		return
+	var root := Node3D.new()
+	root.name = "DerivationOverlay"
+	add_child(root)
+	match derivation:
+		"field":
+			_derivation_field(root)
+		"paths":
+			_derivation_paths(root)
+		_:
+			pass                     # an unrecognised word is the absence
+
+
+## C(n, k) as a float — small n, so the multiplicative form is exact enough and
+## cannot overflow the way a factorial would at peg_rows = 20.
+static func _binomial(n: int, k: int) -> float:
+	if k < 0 or k > n:
+		return 0.0
+	var kk: int = mini(k, n - k)
+	var acc: float = 1.0
+	for i: int in range(kk):
+		acc = acc * float(n - i) / float(i + 1)
+	return acc
+
+
+## FIELD — Pascal's triangle painted on the back panel, one cell per peg,
+## brightness = C(row,col) normalised by the widest row's centre. Sits at
+## z = -board_depth/2 + 4 mm: in front of the back slab, behind the pegs and the
+## balls, so nothing occludes the phenomenon and no collider moves.
+func _derivation_field(root: Node3D) -> void:
+	var row_height: float = peg_spacing * 0.866
+	var first_peg_y: float = board_height - 0.06
+	var peak: float = _binomial(peg_rows - 1, (peg_rows - 1) / 2)
+	if peak <= 0.0:
+		return
+	var cell: float = peg_spacing * 0.82
+	var z: float = -board_depth * 0.5 + 0.004
+	for r: int in range(peg_rows):
+		var y: float = first_peg_y - float(r) * row_height
+		for c: int in range(r + 1):
+			var t: float = sqrt(_binomial(r, c) / peak)
+			var mi := MeshInstance3D.new()
+			mi.name = "Pascal_%d_%d" % [r, c]
+			var qm := QuadMesh.new()
+			qm.size = Vector2(cell, cell)
+			mi.mesh = qm
+			var mat := StandardMaterial3D.new()
+			mat.albedo_color = PASCAL_COLD.lerp(PASCAL_HOT, t)
+			mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+			mi.material_override = mat
+			mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+			mi.position = Vector3((float(c) - float(r) * 0.5) * peg_spacing, y, z)
+			root.add_child(mi)
+
+
+## PATHS — every route through the pin field, drawn additively. The lattice is
+## the pegs' own: x(r,c) = (c - r/2)·spacing, which at r = peg_rows lands exactly
+## on the bin centres, so a route ends where its bead would. Alpha is normalised
+## by route count, so the centre saturates and the edges stay faint: the fan's
+## DENSITY is C(peg_rows,k) and the bell is visible before anything falls.
+func _derivation_paths(root: Node3D) -> void:
+	var row_height: float = peg_spacing * 0.866
+	var first_peg_y: float = board_height - 0.06
+	var z: float = -board_depth * 0.5 + 0.006
+	# Exhaustive while it is cheap; a seeded Monte Carlo of the same walk beyond
+	# that, so peg_rows = 20 cannot ask for a million polylines.
+	var exact: bool = peg_rows <= 12
+	var routes: int = (1 << peg_rows) if exact else 4096
+	var rng := RandomNumberGenerator.new()
+	rng.seed = evidence_seed
+	var im := ImmediateMesh.new()
+	im.surface_begin(Mesh.PRIMITIVE_LINES)
+	for route: int in range(routes):
+		var c: int = 0
+		var prev := Vector3(0.0, _funnel_top_y, z)
+		for r: int in range(peg_rows + 1):
+			var pt := Vector3((float(c) - float(r) * 0.5) * peg_spacing,
+					first_peg_y - float(r) * row_height, z)
+			im.surface_add_vertex(prev)
+			im.surface_add_vertex(pt)
+			prev = pt
+			if r < peg_rows:
+				var right: bool = (((route >> r) & 1) == 1) if exact else (rng.randf() < 0.5)
+				if right:
+					c += 1
+	im.surface_end()
+
+	var mi := MeshInstance3D.new()
+	mi.name = "PathFan"
+	mi.mesh = im
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color(1.0, 0.78, 0.30, clampf(24.0 / float(routes), 0.03, 0.35))
+	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	mat.blend_mode = BaseMaterial3D.BLEND_MODE_ADD
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+	mi.material_override = mat
+	mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	root.add_child(mi)
+
+
+## THE LATE PATH. This method used to be a one-line `pass`, which was worse than
+## having no method at all: GridInteractablesComponent checks has_method() first
+## (:1582), so every #token:value ever written on a galton_board was parsed, set
+## as metadata, logged as "Called apply_grid_config()" — and discarded.
+##
+## In the real grid path the metas are already set before add_child, so _ready()
+## has read both axes and this DEFERRED call re-reads the same two words and does
+## nothing. It matters for a caller that instantiates the scene by hand.
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	for k in config.keys():
+		set_meta("config_%s" % str(k), config[k])
+	var prev_evidence: String = evidence
+	var prev_derivation: String = derivation
+	_read_meta_overrides()
+	if derivation != prev_derivation:
+		var old: Node = get_node_or_null("DerivationOverlay")
+		if old != null:
+			# remove BEFORE freeing: queue_free() defers, and Godot would rename the
+			# replacement to DerivationOverlay2 while the corpse still holds the name.
+			remove_child(old)
+			old.queue_free()
+		_build_derivation()
+	# Only seed a machine that has counted nothing — re-seeding a running board
+	# would add trials to a tally that is already someone's reading.
+	if evidence != prev_evidence and _total_dropped == 0:
+		_seed_evidence()
+		if _total_dropped > 0:
+			_refresh_evidence_visuals()
+
+
+# ═════════════════════════════════════════════════════════════════════════════
+# LATENT BUGS FOUND DURING THE DNA PASS — reported, NOT fixed
+# ═════════════════════════════════════════════════════════════════════════════
+#
+# Both live in _update_bell_curve() and both are on the DEFAULT path (auto_drop
+# is true, so an untouched placement reaches n >= 5 after about three seconds and
+# draws the overlay). Fixing them changes how every existing placement looks a
+# few seconds in, which is outside a promotion whose whole contract is that the
+# default does not move. They want their own change and their own review.
+#
+#   1. THE THEORY CURVE IS DRAWN ROUGHLY FOUR TIMES TOO SHORT.
+#      `var peak_height := float(max_count) / float(_total_dropped)` scales the
+#      Gaussian by the tallest bin's SHARE of the sample (0.27 at n = 4000),
+#      while the bars are normalised so the tallest is 1.0. The overlay
+#      therefore peaks at about a quarter of the histogram it is supposed to sit
+#      on, at every n, and can never do what the @identity claims it does —
+#      "the bell curve overlay converges to match the histogram". It should be
+#      scaled to 1.0, i.e. y = gauss * bin_height * 0.85.
+#
+#   2. THE CURVE SITS HALF A BIN TO THE LEFT.
+#      `var bin_t := t * float(num_bins)` maps the polyline's parameter onto bin
+#      EDGES (bin_t = i is the left edge of bin i), but the mean and variance
+#      above it are computed over integer bin INDICES, which are drawn at bin
+#      CENTRES. The fitted peak lands 24 mm (half a bin) left of the bar it
+#      belongs over. The fix is bin_t = t * num_bins - 0.5.
+#
+#   3. The `finish` docstring near the top of this file says "rams (light Braun
+#      default)"; the export default is "terminal". Comment only.
+#
+# NOT a bug, but the reason `evidence` exists: balls_per_second and _cycle_speed
+# are invisible to a still. The temporal probe was built on this artifact, and a
+# camera cannot photograph a rate.

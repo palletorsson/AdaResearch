@@ -4678,6 +4678,22 @@
       }
     },
     "lab_room": {
+      "dna": {
+       "axes": {
+       "premises": [
+       "chamber",
+       "workshop",
+       "theatre",
+       "ruin"
+       ],
+       "witness": [
+       "pane",
+       "none",
+       "port",
+       "sash"
+       ]
+       }
+      },
       "lookup_name": "lab_room",
       "scene": "res://commons/artifacts/lab_room/lab_room.tscn",
       "class_name": "LabRoom",
@@ -4769,6 +4785,16 @@
       }
     },
     "exit_sign": {
+      "dna": {
+       "axes": {
+       "support": [
+       "none",
+       "bracket",
+       "frame",
+       "gantry"
+       ]
+       }
+      },
       "lookup_name": "exit_sign",
       "scene": "res://commons/artifacts/exit_sign/exit_sign.tscn",
       "class_name": "ExitSign",

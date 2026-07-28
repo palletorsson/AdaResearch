@@ -17,6 +17,83 @@ class_name XYZSliderPlate
 
 const HangarKit = preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 
+# ─────────────────────────────────────────────────────────────────────────────
+# STAGE-2 DNA PROMOTION (2026-07-27) — THE KIN PAIR AXIS.
+# Twin file: commons/primitives/line/line.gd. One vocabulary, two apparatuses.
+#
+# These two are the project's most basic machines: a plate you drag a point
+# around on, and a line you pull between two hands. They are not furniture, so
+# the corpus's usual promotion axes (what the housing is made of, which
+# institution it belongs to) are the wrong question here — this thing has a
+# crank on it. The right question is EPISTEMIC, and both identity blocks
+# already ask it out loud:
+#
+#   xyz_slider_plate  critical_parameter: "the live coordinate display —
+#                     numbers change as sliders move, connecting gesture to math"
+#   line              critical_parameter: "the glitch/haptic resistance when
+#                     length is near an integer — whole numbers resist"
+#
+# Both name the same thing from two sides: WHAT THE APPARATUS TELLS YOU ABOUT
+# THE VALUE YOU ARE SETTING. So the axis is `readout`, and it is one ordered
+# ladder, monotone in evidence:
+#
+#   none  <  numeral (legacy default)  <  gradation  <  lattice
+#
+#   none       nothing. No reference frame, no tether from the origin, no
+#              number: a glowing dot and three handles in an empty room. You
+#              move it and the world says nothing back. A coordinate is a
+#              feeling in the hand.
+#   numeral    the reference frame is standing and the console's lit pocket
+#              prints (1.50, 1.50, 1.50) — a number, and you take its word for
+#              it. This is what all 35 placements have rendered.
+#   gradation  the number, plus a graduated ground to check it against: three
+#              ruled rails standing off the X/Y/Z axes, running the whole
+#              VISIBLE length of the frame, numbered at every station, with a
+#              bright REACH collar at max_value where the sliders actually
+#              stop — plus the coordinate STAIRCASE, three axis-parallel legs
+#              from the origin to the point whose lengths ARE x, y and z. Two
+#              claims: the number is a position on a public scale, and it
+#              decomposes exactly the way the truth line says it does.
+#   lattice    all of that, plus the privileged set drawn: a node at every
+#              whole-number triple across the graduated extent, with the three
+#              coordinate-plane grids wired between them. The claim: your
+#              continuous point is one dot in a countable set the apparatus
+#              treats as clean. This is the LINE's claim ("the privilege of
+#              whole numbers") imported into the plate, which is why the pair
+#              shares one word.
+#
+# WHY NOT A RATE. The tempting knob on a machine is always its speed, and this
+# file has plenty (update cadence, glitch decay on the twin). A still cannot
+# see any of them — info_board was swept across all five of its duration
+# exports and produced six identical tiles. Every rung above is FORM: bars,
+# teeth, glyphs, nodes, one frame standing or absent.
+#
+# THE RUNGS ARE SIZED TO THE FRAME, NOT TO THE HAND. Every dimension below is a
+# RATIO of the graduated extent rather than a metre. That is not tidiness: this
+# artifact is captured whole, and "whole" here means a ~12 m coordinate frame
+# (the latent scale bug documented on coord_system_scale), so a 5 mm tick would
+# be a third of a pixel and the axis would report inert for reasons that have
+# nothing to do with its design. At the honest 4 m workspace the same ratios
+# give a 12 cm blade and 40 cm teeth, which is right for a body standing in it.
+#
+# WHAT IS NOT ROUTED THROUGH IT. No rung RESTYLES the embedded CoordinateSystem3M
+# — it is another artifact and it keeps its own look. Rung 0 does SUPPRESS it,
+# which is a different act and an argued one: the frame is the apparatus that
+# makes a position legible at all, so an instrument committing to nothing cannot
+# keep it. Rungs 1-3 leave it exactly as it stands today. Nor does any rung
+# change a number the machine computes: the sliders map through the same
+# _norm_to_val(), the point lands in the same place, and the printed string is
+# character-for-character what it always was.
+#
+# WHAT IT COST. Rung 0 overrides two older knobs, `line_to_origin` and
+# `show_coordinate_system`, so three switches now speak about the same subject.
+# That is deliberate: a rod drawn from the origin to the point is a readout (the
+# crudest one, a magnitude asserted geometrically) and a labelled axis frame is
+# a readout (the most basic one, a reference), and an apparatus that commits to
+# nothing can keep neither. The rung wins at `none`; the older bools govern
+# rungs 1-3 exactly as before.
+# ─────────────────────────────────────────────────────────────────────────────
+
 @export_group("Housing")
 ## Cabinet grammar (vertical dialect, body = "slider lectern"). The slider panel
 ## used to hang in mid-air at waist height with nothing beneath it; the lectern
@@ -49,6 +126,17 @@ const HangarKit = preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 @export var point_color: Color = Color(0.3, 0.8, 1.0)  # cyan
 @export var line_to_origin: bool = true
 
+@export_group("Readout")
+## AXIS — what the apparatus commits to about the coordinate you are setting.
+## One ordered ladder, monotone in evidence. Rung 0 says nothing; rung 1 says a
+## number; rung 2 puts that number on a public scale; rung 3 draws the values
+## the apparatus counts as clean. Shared verbatim with the twin primitive,
+## commons/primitives/line/line.gd — see the promotion block at the top.
+##   none < numeral (legacy default) < gradation < lattice
+## Anything unrecognised builds as `numeral`, NOT as `none`: a typo must not
+## silently delete the readout from a live room.
+@export_enum("none", "numeral", "gradation", "lattice") var readout: String = "numeral"
+
 @export_group("Display")
 @export var panel_tilt: float = -25.0  # degrees, angled toward player
 ## Default puts the panel at waist height (1.0m) just outside the +Z corner
@@ -68,9 +156,83 @@ const HangarKit = preload("res://commons/artifacts/_hangar/hangar_kit.gd")
 ## ≈ 4m axes — matching the default workspace range, so each axis is exactly
 ## the boundary of its slider. The whole frame stands on the ground (artifact
 ## root at y=0) with the Y axis rising 4m straight up.
+##
+## LATENT, FOUND 2026-07-27 DURING THE DNA PASS, REPORTED NOT FIXED. The
+## paragraph above is no longer true. CoordinateSystem3M.gd:33 now reads
+## `@export var display_scale: float = 1.5` — it self-scales to 1.5, not 0.5 —
+## so the embedded frame is 3.0 × 1.5 × 2.67 ≈ 12 m, three times the workspace,
+## and the point can never leave the innermost third of the visible axes. The
+## claim "each axis is exactly the boundary of its slider" is false in every one
+## of the 35 rooms this stands in. Left alone on purpose: the correct value is
+## coord_system_scale ≈ 0.89, and changing it would move the whole subject in
+## every live placement, which is not a DNA promotion's business. The
+## `gradation` rung below is drawn at the SLIDERS' range, not the frame's, so it
+## quietly shows the discrepancy rather than inheriting it.
 @export var coord_system_scale: float = 2.67
 
+# ── the readout vocabulary (canon for the kin pair) ──────────────────────────
+#
+# This file owns the vocabulary and line.gd parses through readout_name() here,
+# so one word means one thing on both primitives and the two lists cannot drift
+# apart the way `house`/`regard` and `guard`/`lit` did in the exhibits family.
+# The dependency runs one way only: line.gd -> XYZSliderPlate -> HangarKit, and
+# HangarKit is a class_name global that the project already parses.
+
+## Spellings the axis answers to. None of these is canon — the canon is the
+## @export_enum above — but an author reaching for "ticks" or "bare" should get
+## the rung they meant instead of the silent legacy fallback. Also closes the
+## whitespace/case hole the exhibits pass found: `#readout: Rule ` parses.
+const READOUT_ALIASES := {
+	"plain": "none", "bare": "none", "blank": "none", "off": "none",
+	"number": "numeral", "figure": "numeral", "digit": "numeral",
+	"tick": "gradation", "ticks": "gradation", "rule": "gradation",
+	"grid": "lattice", "integer": "lattice", "integers": "lattice",
+}
+
+## The pair's one reader for a readout token. Static so line.gd calls THIS,
+## rather than keeping a private copy that will eventually disagree.
+static func readout_name(raw: String) -> String:
+	var v: String = raw.strip_edges().to_lower()
+	return str(READOUT_ALIASES.get(v, v))
+
+# Geometry of the graduated ground, every value a RATIO of the graduated extent
+# (see _readout_extent). At the frame's real ~12 m that gives a 36 cm blade and
+# 1.2 m teeth — coarse in the hand, but this artifact is captured whole and a
+# centimetre tick at that framing is a third of a pixel. At a bare 4 m workspace
+# the same ratios give a 12 cm blade and 40 cm teeth, which is body scale.
+const RAIL_OFFSET_R := 0.028     # how far off-axis the rule stands, clear of the frame's own rods
+const RAIL_BLADE_R := 0.030      # the rule's flat width
+const RAIL_THICK_R := 0.010
+const TOOTH_MINOR_R := 0.045
+const TOOTH_MAJOR_R := 0.100     # the numbered stations
+const TOOTH_SECTION_R := 0.012
+const REACH_R := 0.055           # the collar marking where the sliders actually stop
+const STAIR_T_R := 0.015         # the coordinate staircase's square section
+const LATTICE_NODE_R := 0.022    # a whole-number station, drawn
+const LATTICE_WIRE_R := 0.008
+const GLYPH_R := 0.0016          # Label3D pixel_size per unit of extent, at font 48
+## Roughly how many numbered stations a rail carries. Six reads as a scale; two
+## reads as an accident and twenty reads as noise.
+const RAIL_STATIONS := 6
+## Per-axis cap on lattice stations. The default 0..4 workspace gives 5 (125
+## nodes); a map that sets min_value -50 / max_value 50 would otherwise ask for
+## a million boxes, so the lattice thins its step instead of exploding.
+const LATTICE_MAX_STATIONS := 7
+
+const AXIS_RED := Color(1.00, 0.30, 0.30)
+const AXIS_GREEN := Color(0.30, 1.00, 0.35)
+const AXIS_BLUE := Color(0.35, 0.55, 1.00)
+const LATTICE_TINT := Color(0.86, 0.92, 1.00)
+
 # Internal
+var _gradation: Node3D          # the three ruled rails + their numerals
+var _lattice: Node3D            # the integer nodes + the coordinate-plane wires
+var _stair_x: MeshInstance3D    # the coordinate staircase: three axis-parallel legs
+var _stair_y: MeshInstance3D
+var _stair_z: MeshInstance3D
+var _stair_knee_a: MeshInstance3D
+var _stair_knee_b: MeshInstance3D
+var _stair_t: float = 0.07      # leg section, set from the extent at build time
 var _panel: Node3D
 var _slider_x: Node
 var _slider_y: Node
@@ -88,15 +250,43 @@ var _current_pos: Vector3
 
 
 func _ready() -> void:
+	_read_readout()
 	_current_pos = start_position
 	_build_point()
 	_build_coord_label()
-	if line_to_origin:
+	# Rung 0 overrides the two older switches. The rod from the origin to the
+	# point is a readout (a magnitude asserted geometrically) and the embedded
+	# frame is a readout (the reference that makes a position legible at all), so
+	# an apparatus that commits to nothing can keep neither. Rungs 1-3 leave both
+	# bools in charge exactly as before — `readout != "none"` is true for all 35
+	# existing placements, so both lines read as they always did.
+	if line_to_origin and readout != "none":
 		_build_origin_line()
-	if show_coordinate_system:
+	if show_coordinate_system and readout != "none":
 		_build_coordinate_system()    # embed CoordinateSystem3M visual axes
 	_build_panel()
+	_build_readout()
 	_update_point()
+
+
+## The token read, and it has to happen HERE rather than in apply_grid_config.
+## GridInteractablesComponent sets every `#key:value` as `config_<key>` metadata
+## BEFORE the artifact enters the tree (_apply_artifact_config, ~line 1575) and
+## only calls apply_grid_config a frame LATER via call_deferred — so a knob that
+## SHAPES the build is one frame too late if it is read there. Metadata is also
+## how the sibling primitive receives the token, since its scene root carries no
+## script at all (see the LATENT note in line.gd).
+##
+## A value set directly on the @export (the property path the sweep harness
+## uses: capture_config_sweep.gd sets exports before add_child) is left alone
+## except for normalisation, so both paths land on the same rung.
+func _read_readout() -> void:
+	var raw: String = readout
+	if has_meta("config_readout"):
+		raw = str(get_meta("config_readout"))
+	elif has_meta("readout"):
+		raw = str(get_meta("readout"))
+	readout = readout_name(raw)
 
 
 func _process(_delta: float) -> void:
@@ -219,12 +409,15 @@ func _build_panel() -> void:
 		_panel.position = panel_offset
 		_panel.rotation_degrees.x = panel_tilt
 		add_child(_panel)
-		_display_container = Node3D.new()
-		_display_container.name = "CoordDisplay"
-		_display_container.position = Vector3(0, 0.16, 0.006)
-		_panel.add_child(_display_container)
-		RackPassive.build_text_display_static(_display_container, 1, "(0.00, 0.00, 0.00)")
-		_display_label = _display_container.find_child("TextContent", true, false) as Label3D
+		# rung 0 gets no strip at all — a bare-panel plate with three handles and
+		# nothing that says what they mean
+		if readout != "none":
+			_display_container = Node3D.new()
+			_display_container.name = "CoordDisplay"
+			_display_container.position = Vector3(0, 0.16, 0.006)
+			_panel.add_child(_display_container)
+			RackPassive.build_text_display_static(_display_container, 1, "(0.00, 0.00, 0.00)")
+			_display_label = _display_container.find_child("TextContent", true, false) as Label3D
 
 	# Find sliders by child index (Param_0, Param_1, Param_2)
 	_slider_x = _panel.find_child("Param_0", true, false)
@@ -337,34 +530,353 @@ func _build_console(RackPassive: GDScript) -> void:
 		cab.add_child(sign)
 
 	# readout seated in a milled pocket on the backboard: pocket, lit face,
-	# canonical glass, ember lip — then the live Label3D reads against it
-	var scr_w: float = body_w * 0.78
-	var scr_h: float = 0.15
-	var scr_y: float = work_h + clear + 0.14      # above the panel it reports on
-	var scr_z: float = back_z + 0.035
-	cab.add_child(HangarKit.box(
-		Vector3(0, scr_y, scr_z + 0.002), Vector3(scr_w + 0.026, scr_h + 0.030, 0.014), dark))
-	cab.add_child(HangarKit.box(
-		Vector3(0, scr_y, scr_z + 0.009),
-		Vector3(scr_w, scr_h, 0.005), HangarKit.emissive(pal["screen"], 0.45)))
-	var glass := StandardMaterial3D.new()
-	glass.albedo_color = Color(0.04, 0.05, 0.08)
-	glass.roughness = 0.15
-	glass.emission_enabled = true
-	glass.emission = Color(0.05, 0.08, 0.12)
-	glass.emission_energy_multiplier = 0.5
-	cab.add_child(HangarKit.box(
-		Vector3(0, scr_y, scr_z + 0.0135), Vector3(scr_w, scr_h, 0.004), glass))
-	cab.add_child(HangarKit.box(
-		Vector3(0, scr_y + scr_h * 0.5 + 0.010, scr_z + 0.011),
-		Vector3(scr_w + 0.026, 0.005, 0.005), accent))
+	# canonical glass, ember lip — then the live Label3D reads against it.
+	#
+	# AXIS `readout`, rung 0: at `none` the pocket is never milled. The backboard
+	# and its COORDINATES sign band stay (that is the body naming itself, G1, not
+	# a readout), but the console's one emissive feature goes out and the machine
+	# stops telling you what you set. That single unlit rectangle is the whole
+	# difference between an instrument and a handle.
+	if readout != "none":
+		var scr_w: float = body_w * 0.78
+		var scr_h: float = 0.15
+		var scr_y: float = work_h + clear + 0.14      # above the panel it reports on
+		var scr_z: float = back_z + 0.035
+		cab.add_child(HangarKit.box(
+			Vector3(0, scr_y, scr_z + 0.002), Vector3(scr_w + 0.026, scr_h + 0.030, 0.014), dark))
+		cab.add_child(HangarKit.box(
+			Vector3(0, scr_y, scr_z + 0.009),
+			Vector3(scr_w, scr_h, 0.005), HangarKit.emissive(pal["screen"], 0.45)))
+		var glass := StandardMaterial3D.new()
+		glass.albedo_color = Color(0.04, 0.05, 0.08)
+		glass.roughness = 0.15
+		glass.emission_enabled = true
+		glass.emission = Color(0.05, 0.08, 0.12)
+		glass.emission_energy_multiplier = 0.5
+		cab.add_child(HangarKit.box(
+			Vector3(0, scr_y, scr_z + 0.0135), Vector3(scr_w, scr_h, 0.004), glass))
+		cab.add_child(HangarKit.box(
+			Vector3(0, scr_y + scr_h * 0.5 + 0.010, scr_z + 0.011),
+			Vector3(scr_w + 0.026, 0.005, 0.005), accent))
 
-	_display_container = Node3D.new()
-	_display_container.name = "CoordDisplay"
-	_display_container.position = Vector3(0, scr_y, scr_z + 0.020)
-	cab.add_child(_display_container)
-	RackPassive.build_text_display_static(_display_container, 1, "(0.00, 0.00, 0.00)")
-	_display_label = _display_container.find_child("TextContent", true, false) as Label3D
+		_display_container = Node3D.new()
+		_display_container.name = "CoordDisplay"
+		_display_container.position = Vector3(0, scr_y, scr_z + 0.020)
+		cab.add_child(_display_container)
+		RackPassive.build_text_display_static(_display_container, 1, "(0.00, 0.00, 0.00)")
+		_display_label = _display_container.find_child("TextContent", true, false) as Label3D
+
+
+# ── Readout ──────────────────────────────────────────────────────────────────
+#
+#   none  <  numeral  <  gradation  <  lattice
+#
+# Rungs 0 and 1 are decided upstream: rung 0 skips the frame (_ready), the
+# origin rod (_ready) and the console's lit pocket (_build_console); rung 1 is
+# the lineage. Rungs 2 and 3 ADD to the workspace and are built here. Nothing
+# below this line executes on the legacy path — the match falls straight
+# through for "numeral" and every handle stays null.
+
+func _build_readout() -> void:
+	match readout:
+		"none":
+			pass                      # rung 0 — subtractions only, all made upstream
+		"numeral":
+			pass                      # rung 1 — the legacy lineage, 35 rooms
+		"gradation":
+			_build_gradation()
+		"lattice":
+			_build_gradation()
+			_build_lattice()
+		_:
+			pass                      # an unrecognised word reads as the legacy numeral
+
+
+## How far the graduated ground runs. A rule should graduate the space the
+## player can SEE, not only the interval the sliders can reach — and on this
+## artifact those two are not the same: the embedded frame draws ~12 m of axis
+## while the sliders stop at 4 (the latent scale bug documented on
+## coord_system_scale). Rather than hide that, the rails run the whole visible
+## axis and plant a REACH collar where the instrument actually stops, so the gap
+## between what is shown and what can be set becomes a thing you can point at.
+## With no frame embedded the rails simply end at max_value, which is the honest
+## answer in that case too.
+func _readout_extent() -> float:
+	var hi: float = maxf(min_value, max_value)
+	if _coord_system == null:
+		return hi
+	var axis_len: float = 0.0
+	var self_scale: float = 1.0
+	var a: Variant = _coord_system.get("axis_length")
+	if a is float or a is int:
+		axis_len = float(a)
+	var s: Variant = _coord_system.get("display_scale")
+	if s is float or s is int:
+		self_scale = float(s)
+	if axis_len <= 0.0 or self_scale <= 0.0:
+		return hi
+	return maxf(hi, axis_len * self_scale * coord_system_scale)
+
+
+## A step that lands on 1, 2 or 5 times a power of ten, so the numbered stations
+## read as a scale a person would draw rather than as span/6.
+func _nice_step(span: float, target: int) -> float:
+	var raw: float = maxf(span / float(maxi(target, 1)), 0.0001)
+	var mag: float = pow(10.0, floor(log(raw) / log(10.0)))
+	var n: float = raw / mag
+	var mult: float = 1.0
+	if n > 5.0:
+		mult = 10.0
+	elif n > 2.0:
+		mult = 5.0
+	elif n > 1.0:
+		mult = 2.0
+	return mult * mag
+
+
+## RUNG 2 — the number put on a public scale. Three ruled rails standing off the
+## X, Y and Z axes across the whole graduated extent, numbered at roughly six
+## stations each, with a bright collar at max_value marking where the sliders
+## stop; plus the coordinate staircase.
+func _build_gradation() -> void:
+	var lo: float = minf(min_value, max_value)
+	var hi: float = maxf(min_value, max_value)
+	var outer: float = _readout_extent()
+	if outer - lo < 0.01:
+		return                        # a zero-width scale has nothing to graduate
+	_gradation = Node3D.new()
+	_gradation.name = "Gradation"
+	# The rails and their numerals belong to the MEASURED FRAME, like the embedded
+	# coordinate axes — not to the console. Marked so the cabinet grammar's
+	# no-orphan-text rule keeps measuring the interface, not the subject.
+	_gradation.set_meta("phenomenon", true)
+	add_child(_gradation)
+	var off: float = outer * RAIL_OFFSET_R
+	_build_rail(Vector3.RIGHT, Vector3(0.0, outer * 0.002, -off), Vector3.BACK,
+			AXIS_RED, lo, hi, outer)
+	_build_rail(Vector3.UP, Vector3(-off, 0.0, -off), Vector3.RIGHT,
+			AXIS_GREEN, lo, hi, outer)
+	_build_rail(Vector3.BACK, Vector3(-off, outer * 0.002, 0.0), Vector3.RIGHT,
+			AXIS_BLUE, lo, hi, outer)
+	_build_stair(outer)
+
+
+## One graduated rail: a blade running `along` the axis, standing off it at
+## `base`, with teeth growing back toward the axis in `teeth`. Short tooth at
+## every half-station, long tooth plus a numeral at every station, and a fat
+## emissive collar at `reach` — the last value the sliders can produce.
+func _build_rail(along: Vector3, base: Vector3, teeth: Vector3, tint: Color,
+		lo: float, reach: float, outer: float) -> void:
+	var span: float = outer - lo
+	var blade_w: float = outer * RAIL_BLADE_R
+	var blade_t: float = outer * RAIL_THICK_R
+	var sect: float = outer * TOOTH_SECTION_R
+	var blade: StandardMaterial3D = _readout_mat(tint.darkened(0.45), 0.55)
+	var mark: StandardMaterial3D = _readout_mat(tint, 1.8)
+	_readout_box(_gradation, _section(along, span, teeth, blade_w, blade_t),
+			base + along * (lo + span * 0.5), blade)
+	var major: float = _nice_step(span, RAIL_STATIONS)
+	var minor: float = major * 0.5
+	var steps: int = int(floor(span / minor + 0.0001))
+	for i in range(steps + 1):
+		var d: float = lo + float(i) * minor
+		var numbered: bool = absf(d / major - round(d / major)) < 0.001
+		var length: float = outer * (TOOTH_MAJOR_R if numbered else TOOTH_MINOR_R)
+		_readout_box(_gradation,
+				_section(teeth, length, along, sect, sect * 0.5),
+				base + along * d + teeth * (blade_w * 0.5 + length * 0.5), mark)
+		if not numbered:
+			continue
+		var glyph := Label3D.new()
+		glyph.text = ("%d" % int(round(d))) if absf(d - round(d)) < 0.001 else ("%.1f" % d)
+		glyph.modulate = tint
+		glyph.font_size = 48
+		glyph.pixel_size = outer * GLYPH_R
+		glyph.outline_size = 8
+		glyph.outline_modulate = Color(0.0, 0.0, 0.0, 0.85)
+		glyph.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+		glyph.position = base + along * d - teeth * (blade_w * 0.5 + outer * 0.02)
+		_gradation.add_child(glyph)
+	# THE REACH COLLAR. Everything past this point on the rail is space the frame
+	# draws and the sliders cannot enter — the single most useful fact this rung
+	# has to report, and one no number on the console has ever said.
+	if reach <= lo + 0.001 or reach >= outer - 0.001:
+		return
+	_readout_box(_gradation,
+			_section(along, outer * REACH_R, teeth, blade_w * 1.9, blade_t * 2.2),
+			base + along * reach, _readout_mat(tint.lightened(0.25), 3.0))
+
+
+## The coordinate staircase: origin -> (x,0,0) -> (x,y,0) -> (x,y,z). Three
+## axis-parallel legs, colour-matched to the rails, so each leg's LENGTH is one
+## of the three numbers and can be read straight off the rail beside it. This is
+## the file's truth line drawn — "a coordinate is three independent
+## measurements" — and it is why the origin line stays: the diagonal is |p|, the
+## staircase is its components, and having both on screen is the lesson.
+func _build_stair(outer: float) -> void:
+	var t: float = outer * STAIR_T_R
+	_stair_t = t
+	_stair_x = _readout_box(_gradation, Vector3.ONE * 0.001, Vector3.ZERO,
+			_readout_mat(AXIS_RED, 1.6))
+	_stair_y = _readout_box(_gradation, Vector3.ONE * 0.001, Vector3.ZERO,
+			_readout_mat(AXIS_GREEN, 1.6))
+	_stair_z = _readout_box(_gradation, Vector3.ONE * 0.001, Vector3.ZERO,
+			_readout_mat(AXIS_BLUE, 1.6))
+	var knee: StandardMaterial3D = _readout_mat(Color(1.0, 0.95, 0.85), 1.2)
+	_stair_knee_a = _readout_box(_gradation, Vector3.ONE * (t * 1.55),
+			Vector3.ZERO, knee)
+	_stair_knee_b = _readout_box(_gradation, Vector3.ONE * (t * 1.55),
+			Vector3.ZERO, knee)
+
+
+func _update_stair() -> void:
+	var p: Vector3 = _current_pos
+	var t: float = _stair_t
+	_leg(_stair_x, Vector3(absf(p.x), t, t), Vector3(p.x * 0.5, 0.0, 0.0))
+	_leg(_stair_y, Vector3(t, absf(p.y), t), Vector3(p.x, p.y * 0.5, 0.0))
+	_leg(_stair_z, Vector3(t, t, absf(p.z)), Vector3(p.x, p.y, p.z * 0.5))
+	if _stair_knee_a:
+		_stair_knee_a.position = Vector3(p.x, 0.0, 0.0)
+	if _stair_knee_b:
+		_stair_knee_b.position = Vector3(p.x, p.y, 0.0)
+
+
+func _leg(mi: MeshInstance3D, size: Vector3, pos: Vector3) -> void:
+	if mi == null:
+		return
+	var bm: BoxMesh = mi.mesh as BoxMesh
+	if bm == null:
+		return
+	bm.size = Vector3(maxf(size.x, 0.001), maxf(size.y, 0.001), maxf(size.z, 0.001))
+	mi.position = pos
+
+
+## RUNG 3 — the privileged set drawn. A node at every whole-number triple across
+## the graduated extent, with the three coordinate-plane grids wired between
+## them, so the continuous point you are dragging is visibly ONE dot inside a
+## countable set. This is the twin primitive's claim — "the privilege of whole
+## numbers" — said in the plate's own geometry; on line.gd the same rung paints
+## the zones where a length physically resists.
+##
+## COST, stated rather than discovered: this is the family's only heavy rung.
+## Seven stations cubed is 343 node boxes plus 42 wires, each its own
+## MeshInstance3D, all sharing two materials. Fine for a still and for a desktop
+## room; think before putting `readout: lattice` on more than one plate in a map
+## a headset has to hold at 90 Hz.
+func _build_lattice() -> void:
+	var lo: float = minf(min_value, max_value)
+	var outer: float = _readout_extent()
+	var first: float = ceilf(lo)
+	var last: float = floorf(outer)
+	if last < first:
+		return                        # a range containing no whole number has no lattice
+	var count: int = int(last - first) + 1
+	var step: int = 1
+	# Thin the lattice rather than let it explode: at the frame's real 12 m this
+	# settles on every second whole number, and min -50 / max 50 would otherwise
+	# ask for a million boxes.
+	while count > LATTICE_MAX_STATIONS and step < 64:
+		step += 1
+		count = int((last - first) / float(step)) + 1
+	var stations: Array = []
+	for i in range(count):
+		stations.append(first + float(i * step))
+	_lattice = Node3D.new()
+	_lattice.name = "Lattice"
+	_lattice.set_meta("phenomenon", true)
+	add_child(_lattice)
+	var node_size: float = outer * LATTICE_NODE_R
+	var wire: float = outer * LATTICE_WIRE_R
+	var node_mat: StandardMaterial3D = _readout_mat(LATTICE_TINT, 1.5)
+	var wire_mat: StandardMaterial3D = _readout_mat(LATTICE_TINT.darkened(0.55), 0.5)
+	for sx in stations:
+		for sy in stations:
+			for sz in stations:
+				_readout_box(_lattice, Vector3.ONE * node_size,
+						Vector3(float(sx), float(sy), float(sz)), node_mat)
+	var floor_v: float = float(stations[0])
+	var top_v: float = float(stations[count - 1])
+	var span: float = top_v - floor_v
+	if span < 0.01:
+		return
+	var mid: float = (floor_v + top_v) * 0.5
+	# graph paper on the three walls of the octant — the grid the nodes sit on
+	for s in stations:
+		var v: float = float(s)
+		_readout_box(_lattice, Vector3(wire, span, wire),
+				Vector3(v, mid, floor_v), wire_mat)
+		_readout_box(_lattice, Vector3(span, wire, wire),
+				Vector3(mid, v, floor_v), wire_mat)
+		_readout_box(_lattice, Vector3(wire, span, wire),
+				Vector3(floor_v, mid, v), wire_mat)
+		_readout_box(_lattice, Vector3(wire, wire, span),
+				Vector3(floor_v, v, mid), wire_mat)
+		_readout_box(_lattice, Vector3(span, wire, wire),
+				Vector3(mid, floor_v, v), wire_mat)
+		_readout_box(_lattice, Vector3(wire, wire, span),
+				Vector3(v, floor_v, mid), wire_mat)
+
+
+## A box size for a bar that runs `length` along one basis vector and is `width`
+## wide across a second; the remaining direction takes `thick`. Only meaningful
+## for axis-aligned unit vectors, which is all this file ever passes.
+func _section(along: Vector3, length: float, across: Vector3, width: float,
+		thick: float) -> Vector3:
+	var third: Vector3 = along.cross(across).abs()
+	return along.abs() * length + across.abs() * width + third * thick
+
+
+func _readout_mat(c: Color, energy: float) -> StandardMaterial3D:
+	var m := StandardMaterial3D.new()
+	m.albedo_color = c
+	m.roughness = 0.42
+	m.emission_enabled = true
+	m.emission = Color(c.r, c.g, c.b)
+	m.emission_energy_multiplier = energy
+	return m
+
+
+func _readout_box(host: Node3D, size: Vector3, pos: Vector3,
+		mat: Material) -> MeshInstance3D:
+	var mi := MeshInstance3D.new()
+	var bm := BoxMesh.new()
+	bm.size = size
+	mi.mesh = bm
+	mi.material_override = mat
+	mi.position = pos
+	mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	host.add_child(mi)
+	return mi
+
+
+## apply_grid_config lands a frame AFTER _ready(), so the body is already built
+## when it arrives. Rather than pretend otherwise, this re-does what can be
+## re-done: the workspace additions are torn down and rebuilt, and what rung 0
+## suppresses is hidden rather than un-built. It is deliberately NOT identical to
+## reading the token at _ready — the console's pocket hardware stays milled,
+## merely dark and empty — which is precisely why _read_readout() exists.
+func _apply_readout_late() -> void:
+	if _gradation:
+		remove_child(_gradation)
+		_gradation.queue_free()
+		_gradation = null
+	if _lattice:
+		remove_child(_lattice)
+		_lattice.queue_free()
+		_lattice = null
+	_stair_x = null
+	_stair_y = null
+	_stair_z = null
+	_stair_knee_a = null
+	_stair_knee_b = null
+	var silent: bool = readout == "none"
+	if _display_container:
+		_display_container.visible = not silent
+	if _origin_line:
+		_origin_line.visible = not silent
+	if _coord_system:
+		_coord_system.visible = not silent
+	_build_readout()
 
 
 func _color_slider_label(slider: Node, color: Color) -> void:
@@ -421,7 +933,10 @@ func _update_point() -> void:
 		if dist < 0.001:
 			_origin_line.visible = false
 		else:
-			_origin_line.visible = true
+			# `readout != "none"` is TRUE on every legacy path, so this reads
+			# `visible = true` for all 35 existing placements. It only bites when
+			# apply_grid_config drops the rung AFTER the rod was already built.
+			_origin_line.visible = readout != "none"
 			_origin_cylinder.height = dist
 			var midpoint := _current_pos / 2.0
 			_origin_line.position = midpoint
@@ -431,6 +946,11 @@ func _update_point() -> void:
 				up = Vector3.RIGHT
 			_origin_line.look_at(_current_pos, up)
 			_origin_line.rotate_object_local(Vector3.RIGHT, PI / 2.0)
+
+	# Coordinate staircase — null on the legacy path, so this is one null test
+	# per frame for the 35 rooms that never asked for it.
+	if _stair_x:
+		_update_stair()
 
 
 # ── Grid Config ──────────────────────────────────────────────────────
@@ -458,3 +978,11 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		finish = str(config_data["finish"])
 	if config_data.has("billboard_coords"):
 		billboard_coords = bool(config_data["billboard_coords"])
+	# AXIS `readout`. Also read from metadata in _read_readout() at _ready time,
+	# which is the path a map token actually takes; this branch serves callers
+	# that hand the dictionary over directly (cluster_resolver, the dwell pass).
+	if config_data.has("readout"):
+		var want: String = readout_name(str(config_data["readout"]))
+		if want != readout:
+			readout = want
+			_apply_readout_late()

@@ -85,6 +85,16 @@
    "qfep_connection": "The thumb says yes in the grammar of the grid — the catalyst's foe-to-friend arc made into a solid object."
   },
   "floating_sphere_field": {
+   "dna": {
+    "axes": {
+    "density": [
+    "sparse",
+    "scarce",
+    "dense",
+    "fog"
+    ]
+    }
+   },
    "category": "primitives",
    "complexity": "beginner",
    "description": "A sparse field of soft glowing spheres drifting in the void on a single GPUParticles3D. The subtle successor to the Kusama dot-grid biome layer — presence-by-scarcity instead of overwhelming repetition. Ambient atmosphere for the void around the player.",
@@ -129,6 +139,16 @@
    "qfep_connection": "The void was never empty, only under-rendered. Replacing the lattice with a drift trades the comfort of fixed coordinates for the truth that presence does not require a position — the F term loosening before λE(S)."
   },
   "xyz_slider_plate": {
+   "dna": {
+    "axes": {
+    "readout": [
+    "numeral",
+    "none",
+    "gradation",
+    "lattice"
+    ]
+    }
+   },
    "category": "primitives",
    "complexity": "beginner",
    "description": "Dieter Rams plate with three sliders (X, Y, Z) that move a glowing point through space. Live coordinate display and line to origin. Teaches axis independence — moving one slider doesn't affect the others.",
@@ -10956,6 +10976,16 @@
    "qfep_connection": "Glowing verticals at set spacing — the line standing up and repeating. Rhythm from the simplest rule: same element, even interval. The primitive learning that pattern is just a primitive plus a beat."
   },
   "line": {
+   "dna": {
+    "axes": {
+    "readout": [
+    "numeral",
+    "none",
+    "gradation",
+    "lattice"
+    ]
+    }
+   },
    "category": "unknown",
    "complexity": "beginner",
    "description": "Interactive measuring line linking two grab spheres and rendering a cylinder with live distance text.",

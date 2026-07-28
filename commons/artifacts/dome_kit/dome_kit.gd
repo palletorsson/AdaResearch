@@ -20,6 +20,29 @@ class_name DomeKit
 @export var kit_label: String = ""
 @export var kit_note: String = ""
 
+## Stage-2 DNA axis — the geodesic FREQUENCY the dome is derived at.
+##
+## The artifact's own truth line says a geodesic dome is not designed but derived:
+## "someone chose a seed solid and a subdivision, and the sphere did the rest." Until
+## now that subdivision was the literal integer 2, hardcoded inside _build_dome, in all
+## 23 placements. The artifact named its generating parameter in prose and then put it
+## out of reach — bias from the inside. This axis is the reach.
+##
+## Same radius, same hemisphere cut, same struts. Only the resolution of the curve
+## changes: v1 is the raw icosahedral cap at 15 members, v4 is a 242-member mesh. Every
+## step roughly doubles the count and halves the member, so no value is inert.
+##
+## Named `subdivision`, not `frequency` — in geodesic practice the word is spatial
+## (1V / 2V / 3V), but `frequency` reads as Hz, and a time-domain axis cannot be
+## photographed. The VALUES keep the domain's own notation.
+##
+## Class I ("alternate") frequency: each icosahedron edge is cut into n parts. n=2 is
+## exactly one midpoint halving, so v2 IS the shipped call and the default look is
+## untouched. n=3 is not reachable by halving at all — that is why _geo_faces exists.
+@export_enum("v1", "v2", "v3", "v4") var subdivision: String = "v2"
+
+const SUBDIVISIONS: PackedStringArray = ["v1", "v2", "v3", "v4"]
+
 const SHADER_PATH := "res://commons/resourses/shaders/Grid.gdshader"
 const TextScreenScript := preload("res://commons/ui/text_screen.gd")
 
@@ -36,10 +59,16 @@ const STATIONS := {
 
 var _built := false
 
+## Every node THIS script parents onto itself. The teardown walks this and nothing
+## else. The old _build() freed get_children(), which would also have destroyed the
+## label plates, packaging and tag markers the grid adds after us.
+var _created: Array[Node] = []
+
 
 func _ready() -> void:
 	_resolve_identity()
-	_build()
+	_build_all()          # synchronous — children exist when _ready returns
+	_built = true
 
 
 func _resolve_identity() -> void:
@@ -59,12 +88,14 @@ func _resolve_identity() -> void:
 		kit_label = station.to_upper()
 
 
-func _build() -> void:
-	if _built:
-		for c in get_children():
-			c.queue_free()
-	_built = true
+## Parent a node we made, and remember we made it.
+func _own(n: Node) -> Node:
+	_created.append(n)
+	add_child(n)
+	return n
 
+
+func _build_all() -> void:
 	var pad_w := 1.7 if station == "dome" else 0.95
 	_add_pad(pad_w)
 	match station:
@@ -133,6 +164,57 @@ func _sphere_faces(freq: int) -> Array:
 	return tris
 
 
+# The axis as an integer frequency. "v3" -> 3. Anything unrecognised has already
+# been folded to the default by _pick_axis, so this cannot return a surprise.
+func _freq() -> int:
+	var n: int = int(SUBDIVISIONS.find(subdivision)) + 1
+	return n if n >= 1 else 2
+
+
+# Triangles at a Class I frequency n: each icosahedron edge cut into n equal parts,
+# the barycentric lattice on the flat face, every point pushed out to the sphere.
+#
+# n = 1 and n = 2 are handed straight back to _sphere_faces. They are the two the
+# halving recursion can reach, they are what shipped, and delegating means the default
+# path runs the SAME arithmetic it ran before this axis existed rather than a
+# reimplementation that agrees to within a float. n = 3 has no halving that reaches it
+# at all — three is not a power of two — which is the whole reason this function is here.
+func _geo_faces(freq: int) -> Array:
+	var n: int = maxi(1, freq)
+	if n <= 2:
+		return _sphere_faces(n)
+	var verts := _ico_verts()
+	var tris := []
+	for f in _ico_faces():
+		var a: Vector3 = verts[f[0]]
+		var b: Vector3 = verts[f[1]]
+		var c: Vector3 = verts[f[2]]
+		var grid := []
+		for i in range(n + 1):
+			var row := []
+			for j in range(n + 1 - i):
+				var p: Vector3 = a \
+					+ (b - a) * (float(i) / float(n)) \
+					+ (c - a) * (float(j) / float(n))
+				row.append(p.normalized())
+			grid.append(row)
+		for i in range(n):
+			var lo: Array = grid[i]
+			var hi: Array = grid[i + 1]
+			for j in range(n - i):
+				tris.append([lo[j], hi[j], lo[j + 1]])
+				if j < n - i - 1:
+					tris.append([hi[j], hi[j + 1], lo[j + 1]])
+	return tris
+
+
+# Member diameter tracks member length, so slenderness stays at the shipped 12.5:1 at
+# every frequency — the stock a real kit would order once its struts halve. At v2 this
+# returns STRUT_R unchanged, to the bit.
+func _strut_radius(freq: int) -> float:
+	return STRUT_R * 2.0 / float(maxi(1, freq))
+
+
 # Unique edges of a triangle set, optionally keeping only the upper hemisphere.
 func _edges(tris: Array, hemisphere: bool = false) -> Array:
 	var seen := {}
@@ -159,7 +241,7 @@ func _build_icosahedron() -> void:
 	var r := 0.34
 	var root := Node3D.new()
 	root.position = Vector3(0.0, 0.06 + r, 0.0)
-	add_child(root)
+	_own(root)
 	for e in _edges(_sphere_faces(1)):
 		root.add_child(_strut(e[0] * r, e[1] * r, STRUT_R, _subject_mat()))
 
@@ -171,7 +253,7 @@ func _build_subdivision() -> void:
 	for i in 3:
 		var holder := Node3D.new()
 		holder.position = Vector3(float(xs[i]), 0.06 + tri_scale * 0.55, 0.0)
-		add_child(holder)
+		_own(holder)
 		# a single icosahedron face, subdivided i+1 times, laid flat-on to the viewer
 		var tri: Array = _sphere_faces(1)[0]
 		var sub := [[tri[0], tri[1], tri[2]]]
@@ -200,41 +282,66 @@ func _build_struts() -> void:
 	rack.mesh = bar
 	rack.position = Vector3(0.0, 0.085, 0.0)
 	rack.material_override = _witness_mat()
-	add_child(rack)
+	_own(rack)
 	var lengths := [0.30, 0.38, 0.46]
 	for i in 3:
 		var l := float(lengths[i])
 		var z := -0.16 + float(i) * 0.16
-		add_child(_strut(Vector3(-l * 0.5, 0.15, z), Vector3(l * 0.5, 0.15, z),
+		_own(_strut(Vector3(-l * 0.5, 0.15, z), Vector3(l * 0.5, 0.15, z),
 			STRUT_R * 1.3, _subject_mat()))
 
 
 # The frame half raised: the dome's lower band standing, the rest still stock.
+#
+# Reads the SAME axis as the dome. The two stations stand in one room, and a 2V frame
+# beside a 4V dome would say the builder was assembling a different building. The band
+# cut stays at mid.y < 0.45, so "half raised" is a proportion of the sphere and holds
+# at every frequency: 10 members up at v1, 30 at v2, 60 at v3, 112 at v4.
 func _build_builder() -> void:
 	var r := 0.42
+	var n := _freq()
+	var rad := _strut_radius(n)
+	var mat := _subject_mat()
+	var stock_mat := _witness_mat()
 	var root := Node3D.new()
 	root.position = Vector3(0.0, 0.06, 0.0)
-	add_child(root)
+	_own(root)
 	# only the struts whose midpoint is low on the sphere — the base band, built
-	for e in _edges(_sphere_faces(2), true):
+	for e in _edges(_geo_faces(n), true):
 		var mid: Vector3 = ((e[0] + e[1]) * 0.5)
 		if mid.y < 0.45:
-			root.add_child(_strut(e[0] * r, e[1] * r, STRUT_R, _subject_mat()))
-	# the remainder, still lying on the pad as stock
+			root.add_child(_strut(e[0] * r, e[1] * r, rad, mat))
+	# the remainder, still lying on the pad as stock. Cut to the same length the raised
+	# members are — members shorten as 1/n, so the loose stock does too. The 2.0/n
+	# factor returns the shipped 0.26 m exactly at the default.
+	var stock_len: float = 0.26 * 2.0 / float(n)
 	for i in 3:
 		var z := -0.12 + float(i) * 0.12
-		add_child(_strut(Vector3(0.20, 0.075, z), Vector3(0.20 + 0.26, 0.075, z),
-			STRUT_R * 1.2, _witness_mat()))
+		_own(_strut(Vector3(0.20, 0.075, z), Vector3(0.20 + stock_len, 0.075, z),
+			rad * 1.2, stock_mat))
 
 
-# The payoff: a 2V hemisphere, standing on its ring.
+# The payoff: a hemisphere at the chosen frequency, standing on its ring.
+#
+# Radius 0.76 m and the y >= -0.01 cut are fixed — this is always the same dome, always
+# 1.52 m across and 0.76 m tall. What the axis moves is the resolution of the curve:
+#   v1   15 members, every one 0.799 m — a faceted shelter, visibly polyhedral
+#   v2   60 members, 0.415-0.470 m — the shipped dome, unchanged
+#   v3  139 members, 0.265-0.313 m — the facets stop reading as facets
+#   v4  242 members, 0.192-0.247 m — a fine mesh; a surface made of line
 func _build_dome() -> void:
 	var r := 0.76
+	var n := _freq()
+	var rad := _strut_radius(n)
+	# One material for the whole frame instead of one per member. Same shader, same
+	# constants, same pixels — but v4 raises the member count fourfold and there is no
+	# reason to mint 242 identical ShaderMaterials to draw one dome.
+	var mat := _subject_mat()
 	var root := Node3D.new()
 	root.position = Vector3(0.0, 0.06, 0.0)
-	add_child(root)
-	for e in _edges(_sphere_faces(2), true):
-		root.add_child(_strut(e[0] * r, e[1] * r, STRUT_R, _subject_mat()))
+	_own(root)
+	for e in _edges(_geo_faces(n), true):
+		root.add_child(_strut(e[0] * r, e[1] * r, rad, mat))
 
 
 # --- pieces ---------------------------------------------------------------
@@ -318,13 +425,52 @@ func _grid_material(fill: Color, wire: Color, emit: float) -> Material:
 	return fallback
 
 
-## Grid config. Keys: "station", "label", "note".
+## Accept an axis value only if it names something we actually build. A typo in a map
+## token has to land on the shipped look whole — a half-recognised value would strand a
+## placement with a frequency nobody chose.
+func _pick_axis(raw: String, allowed: PackedStringArray, fallback: String) -> String:
+	var v: String = raw.to_lower().strip_edges()
+	return v if allowed.has(v) else fallback
+
+
+## Tear down only what this script made, then build again — synchronously and in place.
+## No call_deferred: a deferred rebuild that removes children first makes the grid's
+## _auto_ground_artifact measure a zero AABB, return early, and never ground the dome.
+func _rebuild_now() -> void:
+	for c in _created:
+		if is_instance_valid(c) and c.get_parent() == self:
+			remove_child(c)
+			c.queue_free()
+	_created.clear()
+	_build_all()
+
+
+## Grid config. Keys: "station", "label", "note", and the DNA axis "subdivision".
 func apply_grid_config(config_data: Dictionary) -> void:
+	var before_station: String = station
+	var before_label: String = kit_label
+	var before_note: String = kit_note
+	var before_subdivision: String = subdivision
+
 	if config_data.has("station"):
 		station = str(config_data["station"])
 	if config_data.has("label"):
 		kit_label = str(config_data["label"])
 	if config_data.has("note"):
 		kit_note = str(config_data["note"])
-	if _built:
-		_build()
+	# Stage-2 DNA axis — #subdivision:v3
+	if config_data.has("subdivision"):
+		subdivision = _pick_axis(str(config_data["subdivision"]), SUBDIVISIONS, subdivision)
+
+	if not _built:
+		# _ready has not run yet; it will build with the values just resolved.
+		return
+	if (station == before_station and kit_label == before_label
+			and kit_note == before_note and subdivision == before_subdivision):
+		# Nothing geometric changed. curation_station hands every artifact it curates
+		# {"emissive": false} one line after framing our labels — rebuilding here would
+		# throw that framing away, and it is never re-applied. Say nothing, touch nothing.
+		return
+
+	_rebuild_now()
+	print("[DomeKit] Config applied — station=%s, subdivision=%s" % [station, subdivision])

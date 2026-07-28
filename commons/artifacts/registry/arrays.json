@@ -3207,6 +3207,16 @@
    "qfep_connection": "The gallery of Italian tiling motifs — seventeen wallpaper groups, multi-layer compositions, from plain checkerboard to intricate cosmatesque inlay. The historical proof that this chapter's mathematics is old: the array tiled under symmetry is what medieval floors already were, computed by hand centuries before the grid was a data type."
   },
   "gallery_marker_facade": {
+   "dna": {
+    "axes": {
+    "mode": [
+    "stake",
+    "float",
+    "plate",
+    "decal"
+    ]
+    }
+   },
    "name": "Gallery Marker — Facade",
    "lookup_name": "gallery_marker_facade",
    "description": "Bronze pedestal + glowing stake + Label3D reading FACADE. Single-cell sub-gallery anchor used 20+ times across facade maps. Shared scene at commons/artifacts/gallery_marker; the lookup_name fixes the label per gallery_marker_<sequence> alias pattern.",

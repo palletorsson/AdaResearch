@@ -2987,6 +2987,21 @@
    "qfep_connection": "Randomness at full amplitude: particles driven by draws with no damping, no distribution's comfort. The room's outer limit — past structure, past statistics-as-shape — where entropy stops being a resource and becomes weather."
   },
   "galton_board": {
+   "dna": {
+    "axes": {
+    "derivation": [
+    "none",
+    "field",
+    "paths"
+    ],
+    "evidence": [
+    "none",
+    "anecdote",
+    "sample",
+    "census"
+    ]
+    }
+   },
    "category": "randomness",
    "complexity": "intermediate",
    "description": "Balls drop through a triangular peg array. Each peg deflects left or right with equal probability. After many rows, the bin counts form a binomial distribution converging to a Gaussian bell curve. VR buttons: DROP, AUTO, RESET, SPEED.",
@@ -6659,6 +6674,17 @@
    "qfep_connection": "Pools eat the terrain on a half-second growth timer while the shader hands out identity by altitude alone — below one threshold you are deep water, above another you are shore. Classification by height cut: the ground has no kinds, only elevations that get read as kinds."
   },
   "prng_crank_machine": {
+   "dna": {
+    "axes": {
+    "disclosure": [
+    "works",
+    "oracle",
+    "tally",
+    "ledger",
+    "origin"
+    ]
+    }
+   },
    "category": "randomness",
    "complexity": "intermediate",
    "description": "A physical pseudo-random number generator machine. Press CRANK to step the LCG formula: state = (state * 1664525 + 1013904223) mod 2^32. Each step animates multiply, add, mod phases. Shows deterministic sequence, normalized 0-1 output, and full history.",

@@ -4,7 +4,7 @@ class_name ShannonWorkbench
 # @identity
 # essence: an interactive Shannon-bound workbench — the player turns a slider for p and watches the binary entropy hill H(p) light up at their position, sees the 16×16 sample grid regenerate, and reads the compression bound that those bits cannot fall below. At p=0.5, the slider sits at the peak of the hill, the sample grid looks like salt-and-pepper, and the readout says "incompressible: 256/256 bits"
 # desire: learner viscerally locates the lambda_edge between F (order) and E (entropy) — the slope of H(p) is the rate at which structure becomes possible, and the peak is where it's maximally absent
-# critical_parameter: p — the only knob. Drives the sample distribution, the entropy readout, and the dot position on the hill
+# critical_parameter: p — the operating knob, drives the sample distribution, the entropy readout, and the dot position on the hill; evidence — how many draws the bench is standing on when you find it (none | anecdote | sample | census), which decides whether the grid is an anecdote you can count or a texture you cannot
 # triggers: _ready() builds slider + grid + readout panel + hill curve + marker; _on_slider_changed regenerates the sample grid (with fixed seed), recomputes H(p), updates the readout, slides the marker dot
 # emerges: the binary entropy formula made into a physical landscape — the player walks the hill with their hand
 # needs: slider_horizontal [present]; ImmediateMesh for the curve [present]; BakedText boards for the readouts [present]; shannon_entropy_meter as conceptual sibling [present]
@@ -30,8 +30,77 @@ class_name ShannonWorkbench
 @export var plate_offset_z: float = 0.0
 @export var plate_scale: float = 2.0
 
+# ─────────────────────────────────────────────────────────────────────────────
+# STAGE-2 DNA PROMOTION (2026-07-27), shared with galton_board.
+#
+# This bench draws 256 Bernoulli(p) bits and prints a bound those bits cannot
+# fall below. It has always drawn exactly 256, and it has never said so — the
+# claim "incompressible: 256/256 bits" is stated in the same flat voice whether
+# it rests on sixteen draws or a thousand. That is the machine's blind spot, and
+# it is the same blind spot the galton board has from the other side: a still of
+# the galton board shows an empty apparatus, and a still of this one shows a
+# sample whose size is not part of the argument.
+#
+# So both machines take the same axis, with the same four words in the same
+# order — how many independent trials the instrument is standing on:
+#
+#   evidence   none · anecdote · sample · census
+#
+#   none      the apparatus with no measurement taken. Every cell goes NEUTRAL
+#             GREY — not the zero-colour, because an unmeasured cell is not a
+#             cell that measured zero, and collapsing those two is the exact
+#             mistake this axis exists to name. The hill, the marker and H(p)
+#             stay: perfect theory standing over an empty field.
+#   anecdote  a 4×4 grid. Sixteen draws, each cell 150 mm across — you can count
+#             the whole sample by eye and the lit fraction will not be p.
+#   sample    16×16 = 256 draws, 37.5 mm cells. THE LEGACY DEFAULT, unchanged.
+#   census    32×32 = 1024 draws, 19 mm cells. The speckle stops resolving into
+#             countable squares and becomes the texture the readout describes.
+#
+# The two machines default to DIFFERENT rungs and that is the finding, not an
+# inconsistency: this bench always shows you a sample, the galton board shows
+# you nothing until someone presses DROP. `sample` here is 256 bits; `sample`
+# there is twelve beads, which is 96 binary choices — the same order of
+# evidence, reached by different machinery.
+#
+# The panel does NOT change size across the rungs: grid_width, the monitor it
+# mounts on and the hill screen stacked above it are all untouched, so the
+# artifact's silhouette, footprint and reach band are identical at every value.
+# Only the sample changes. `evidence` now owns grid_side (the "sample" entry is
+# 16, byte-identical to the export default it replaces, and neither the .tscn
+# nor any of the 5 placements sets grid_side).
+#
+# Nothing computed moves. H(p) is the same formula, the draws come from the same
+# seeded generator in the same order — census simply reads further down the
+# sequence, anecdote stops after sixteen.
+#
+# Deliberately NOT promoted: p itself. It is the operating knob, it is already
+# readable from a map through apply_grid_config("initial_p"), and moving it
+# changes what the machine asserts rather than how much it has looked.
+# ─────────────────────────────────────────────────────────────────────────────
+
+@export_group("Evidence")
+## AXIS — how many independent draws this bench is standing on when you find it.
+## Shared vocabulary with galton_board. sample (legacy default) = 256 bits.
+@export_enum("none", "anecdote", "sample", "census") var evidence: String = "sample"
+
+## The ladder. `side` sets grid_side; `drawn` false means the field was never
+## sampled at all, which is a different picture from a field of zeros.
+const EVIDENCE_DRAWS := {
+	"none": {"side": 16, "drawn": false},
+	"anecdote": {"side": 4, "drawn": true},
+	"sample": {"side": 16, "drawn": true},     # the legacy lineage
+	"census": {"side": 32, "drawn": true},
+}
+
+## The colour of a cell that holds no measurement — deliberately far from
+## color_zero (near-black) so "we did not look" cannot be misread as "we looked
+## and found a zero".
+@export var color_unsampled: Color = Color(0.20, 0.20, 0.23)
+
 @export_group("Bit Grid")
-## Side count of the bit grid. 16 → 256 cells.
+## Side count of the bit grid. 16 → 256 cells. OWNED BY `evidence` since the
+## 2026-07-27 promotion — set the axis, not this.
 @export var grid_side: int = 16
 ## Total width of the bit grid display (meters, before plate scale).
 @export var grid_width: float = 0.6
@@ -97,6 +166,11 @@ var _hill_origin_node: Node3D  # parent for hill geometry — gives stable local
 @export var initial_p: float = 0.5
 
 func _ready() -> void:
+	# Map tokens land as metadata BEFORE the node enters the tree
+	# (GridInteractablesComponent._apply_artifact_config at :1162, add_child at
+	# :1187), so the axis is known here — before the grid is sized.
+	_read_meta_overrides()
+	_apply_evidence()
 	_p = clampf(initial_p, 0.0, 1.0)
 	_initialize_draws()
 	_build_plate_and_slider()
@@ -175,7 +249,14 @@ func _build_bit_grid() -> void:
 	# the content root's X-Y plane — unchanged layout.
 	_grid_root = _plate_root.add_monitor(Vector2(grid_width + 0.10, grid_width + 0.10))
 	_grid_root.name = "BitGrid"
+	_populate_bit_grid()
 
+
+## The cells themselves, split out of _build_bit_grid so the sample can be
+## re-drawn at a different size without minting a second monitor. The monitor
+## and its backplate are sized from grid_width, which `evidence` never touches:
+## the panel is the same panel at every rung, only the sample on it changes.
+func _populate_bit_grid() -> void:
 	var cell_size := grid_width / float(grid_side)
 	var cell_visible := cell_size * 0.86  # leave a little dark gutter between cells
 	var origin_x := -grid_width * 0.5 + cell_size * 0.5
@@ -211,10 +292,18 @@ func _build_bit_grid() -> void:
 func _refresh_bit_grid() -> void:
 	if _grid_materials.is_empty():
 		return
+	var drawn: bool = _sample_drawn()
 	var n: int = _grid_materials.size()
 	for i in range(n):
-		var bit: bool = _draws[i] < _p
 		var mat := _grid_materials[i]
+		if not drawn:
+			# evidence=none: the field was never measured. Neutral grey, no
+			# emission — visibly not the near-black a zero-bit gets.
+			mat.albedo_color = color_unsampled
+			mat.emission = Color(0, 0, 0)
+			mat.emission_energy_multiplier = 0.0
+			continue
+		var bit: bool = _draws[i] < _p
 		if bit:
 			mat.albedo_color = color_one
 			mat.emission = color_one
@@ -233,6 +322,13 @@ func _refresh_readout() -> void:
 	if _plate_readout == null:
 		return
 	var h: float = _binary_entropy(_p)
+	if not _sample_drawn():
+		# The bound is a fact about p, not about a sample — so H still prints.
+		# What cannot be printed is a bit count, because no bits were drawn, and
+		# printing "min 128/256" over an unmeasured field would be the machine
+		# claiming evidence it does not have.
+		_plate_readout.text = "H = %.3f bits/sym\nno sample drawn" % h
+		return
 	var total_bits: int = grid_side * grid_side
 	var min_bits: float = h * float(total_bits)
 	var ratio: float = 1.0 - h  # fraction compressible
@@ -437,9 +533,69 @@ func _refresh_all() -> void:
 	_refresh_marker()
 
 
+# ── DNA: evidence ─────────────────────────────────────────────────────
+
+## The family's reader for an axis token. Strips and lower-cases before
+## matching, and falls back to the CURRENT value, so an unrecognised word is the
+## absence of a token and never a silent third state. Same function, same
+## contract, in galton_board — the two files are in different domains
+## (algorithms/ and commons/artifacts/) and neither should preload the other, so
+## the VOCABULARY is shared by canon rather than by inheritance: same four
+## words, same order, same meaning.
+static func _axis_value(raw: String, allowed, fallback: String) -> String:
+	var v: String = raw.strip_edges().to_lower()
+	return v if v in allowed else fallback
+
+
+func _read_meta_overrides() -> void:
+	if has_meta("config_evidence"):
+		evidence = _axis_value(str(get_meta("config_evidence")),
+				EVIDENCE_DRAWS.keys(), evidence)
+
+
+func _evidence_entry() -> Dictionary:
+	var e: Dictionary = EVIDENCE_DRAWS.get(evidence, EVIDENCE_DRAWS["sample"])
+	return e
+
+
+func _sample_drawn() -> bool:
+	return bool(_evidence_entry().get("drawn", true))
+
+
+## Hand grid_side to the axis. At the default rung this writes 16 — the same
+## value the export already held — so the build does not move.
+func _apply_evidence() -> void:
+	grid_side = int(_evidence_entry().get("side", 16))
+
+
+## Re-draw the sample at a new size. Reuses the existing monitor (calling
+## _build_bit_grid again would mount a second one) and rebuilds only the cells.
+func _rebuild_sample() -> void:
+	_apply_evidence()
+	_initialize_draws()
+	if _grid_root != null:
+		for child in _grid_root.get_children():
+			# remove BEFORE freeing: queue_free() defers, and the new cells would
+			# spend a frame overlapping the old ones at a different pitch.
+			_grid_root.remove_child(child)
+			child.queue_free()
+		_grid_materials.clear()
+		_populate_bit_grid()
+	_refresh_all()
+
+
 # ── Grid system integration ───────────────────────────────────────────
 
 func apply_grid_config(config_data: Dictionary) -> void:
+	# The late path for `evidence`: in the real grid flow the metadata is set
+	# before add_child, so _ready() has already sized the grid and this deferred
+	# call finds nothing changed. It matters for a caller holding the scene by
+	# hand.
+	if config_data.has("evidence"):
+		var prev: String = evidence
+		evidence = _axis_value(str(config_data["evidence"]), EVIDENCE_DRAWS.keys(), evidence)
+		if evidence != prev:
+			_rebuild_sample()
 	if config_data.has("draw_seed"):
 		draw_seed = int(config_data["draw_seed"])
 		_initialize_draws()
@@ -458,3 +614,21 @@ func apply_grid_config(config_data: Dictionary) -> void:
 		if _slider and _slider.has_method("set_normalized_value"):
 			_slider.call("set_normalized_value", _p)
 		_refresh_all()
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# LATENT BUG FOUND DURING THE DNA PASS — reported, NOT fixed
+#
+# `plate_scale` (@export = 2.0, near the top of this file) is never read by the
+# build path. _build_plate_and_slider() calls InterfacePresets.build() and never
+# touches scale, so every one of the 5 placements renders at scale 1 while the
+# export advertises 2.0. The only reader is the apply_grid_config branch above,
+# which means a map that writes the export's OWN DEFAULT — #plate_scale:2.0 —
+# instantly doubles the artifact, and a map that writes nothing gets a bench
+# half the documented size.
+#
+# Not fixed here for the obvious reason: honouring the export in _ready() would
+# double every existing placement, which is the opposite of what a promotion is
+# allowed to do. It needs its own change — most likely defaulting the export to
+# 1.0 and applying it at build time — and its own look at the five rooms.
+# ─────────────────────────────────────────────────────────────────────────────

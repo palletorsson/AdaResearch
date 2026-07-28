@@ -1,0 +1,157 @@
+{
+ "_note": "Per-axis bite: mean pixel change between variants differing in that axis alone. An axis whose renders are identical is decoration.",
+ "gallery": "batch2-dna",
+ "thresholds": {
+  "inert_focus": 0.03,
+  "weak_focus": 0.12,
+  "frame_local_ceiling": 0.02
+ },
+ "axes": [
+  {
+   "artifact": "lab_room",
+   "axis": "premises",
+   "frame": 0.02295,
+   "focus": 0.26452,
+   "verdict": "bites",
+   "pairs": 24
+  },
+  {
+   "artifact": "lab_room",
+   "axis": "witness",
+   "frame": 0.0092,
+   "focus": 0.05985,
+   "verdict": "WEAK",
+   "pairs": 24
+  },
+  {
+   "artifact": "library_rack",
+   "axis": "guard",
+   "frame": 0.02196,
+   "focus": 0.02196,
+   "verdict": "INERT",
+   "pairs": 10
+  },
+  {
+   "artifact": "prng_crank_machine",
+   "axis": "disclosure",
+   "frame": 0.02122,
+   "focus": 0.033,
+   "verdict": "WEAK",
+   "pairs": 10
+  },
+  {
+   "artifact": "floating_sphere_field",
+   "axis": "density",
+   "frame": 0.02847,
+   "focus": 0.04903,
+   "verdict": "WEAK",
+   "pairs": 6
+  },
+  {
+   "artifact": "exit_sign",
+   "axis": "support",
+   "frame": 0.04862,
+   "focus": 0.34362,
+   "verdict": "bites",
+   "pairs": 6
+  },
+  {
+   "artifact": "tt",
+   "axis": "support",
+   "frame": 0.05003,
+   "focus": 0.35329,
+   "verdict": "bites",
+   "pairs": 6
+  },
+  {
+   "artifact": "geodesic_dome",
+   "axis": "subdivision",
+   "frame": 0.02609,
+   "focus": 0.02764,
+   "verdict": "INERT",
+   "pairs": 6
+  },
+  {
+   "artifact": "gallery_marker_facade",
+   "axis": "mode",
+   "frame": 0.04058,
+   "focus": 0.20492,
+   "verdict": "bites",
+   "pairs": 6
+  }
+ ],
+ "reread": {
+  "_note": "THE PUBLISHED TABLE IS WRONG IN THREE PLACES, AND ALL THREE ARE FACTS ABOUT THE INSTRUMENT. This batch was cut off mid-flight by a usage limit: 4 of 14 agents finished, 10 died, 7 of them after editing their file but before reporting. The verdicts below were re-derived by hand afterwards. Two of the three bad verdicts are measurement failures, not design failures.",
+  "measurement_traps_found": [
+   {
+    "trap": "THE SWEEP RENDERS THE DEFAULT CONFIGURATION",
+    "case": "geodesic_dome.subdivision",
+    "detail": "dome_kit is a five-station artifact whose station comes from the artifact_lookup_name meta the grid stamps before _ready. cabinet_sweep sets @export properties only, so station fell back to 'icosahedron' - the seed solid, the ONE station subdivision provably cannot affect. Re-sweeping with station=dome pinned moves the axis from 2.76% focus (INERT) to 15.91% (bites). An axis that only bites in a non-default mode reads as dead.",
+    "published": {
+     "frame": 0.0261,
+     "focus": 0.0276,
+     "verdict": "INERT"
+    },
+    "corrected": {
+     "frame": 0.0338,
+     "focus": 0.1591,
+     "verdict": "bites",
+     "config": "station=dome"
+    }
+   },
+   {
+    "trap": "A BLANK RENDER IS SCORED AS AN INERT AXIS",
+    "case": "library_rack.guard",
+    "detail": "library_rack._ready() is a deliberate `pass` - it refuses to build until a collection key arrives via apply_grid_config, so it does not stand an empty titled grid in every room. cabinet_sweep sets exports and never calls apply_grid_config, so all five variants rendered an EMPTY FRAME: five files of identical 3428 bytes, uniform background, nothing in them. The critic reported INERT. Its frame and focus were EQUAL to two decimals (2.20% / 2.20%), which is the signature - a real localised change makes focus far exceed frame. THE CRITIC CANNOT TELL 'the axis does nothing' FROM 'the artifact rendered nothing', and it should: near-zero variance plus a near-uniform image is a FAILED RENDER, not a verdict.",
+    "published": {
+     "frame": 0.022,
+     "focus": 0.022,
+     "verdict": "INERT"
+    },
+    "corrected": {
+     "verdict": "UNMEASURABLE",
+     "reason": "not sweepable standalone; needs map context"
+    }
+   },
+   {
+    "trap": "FRAME DILUTION (already recorded for the postcrisis capstone)",
+    "case": "lab_room.witness",
+    "detail": "lab_room is a whole test chamber; a window is a small feature in a wide auto-framed shot. Re-running the critic's own diff on the same renders auto-cropped to the artifact's non-background bounding box moves it from 5.99% to 16.75% focus, with nothing redesigned.",
+    "published": {
+     "frame": 0.0092,
+     "focus": 0.0599,
+     "verdict": "WEAK"
+    },
+    "corrected": {
+     "frame": 0.0257,
+     "focus": 0.1675,
+     "verdict": "bites"
+    }
+   }
+  ],
+  "crop_recheck_other": [
+   {
+    "axis": "prng_crank_machine.disclosure",
+    "full": {
+     "focus": 0.033
+    },
+    "cropped": {
+     "focus": 0.1102
+    },
+    "verdict": "WEAK - genuinely near the bar, 11.0% against a 12% threshold. Not a measurement artifact."
+   },
+   {
+    "axis": "floating_sphere_field.density",
+    "full": {
+     "focus": 0.049
+    },
+    "cropped": {
+     "focus": 0.0661
+    },
+    "verdict": "WEAK - GENUINE. Cropping barely helped, which is the tell that this one is a real design problem: the four counts are too close to separate as a still. Wants a redesign, not a tighter camera."
+   }
+  ],
+  "honest_tally": "9 axes: 6 bite (lab_room.premises, lab_room.witness, exit_sign.support, tt.support, gallery_marker_facade.mode, geodesic_dome.subdivision), 2 weak (prng_crank_machine.disclosure at the bar, floating_sphere_field.density genuinely), 1 unmeasurable (library_rack.guard). 0 genuinely inert.",
+  "incomplete": "clipboard and soundboxes were never written - their agents died before the first edit. cube_scene.gd and prism_block.gd were WRITTEN but their .tscn files do not attach them, so both are inert on disk pending a decision about touching the project's reference primitives (233 placements)."
+ }
+}

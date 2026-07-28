@@ -4878,6 +4878,16 @@
    "qfep_connection": "Five glowing nodes, each pinned to the sequence where its term was first walked — F to forces, E(S) to randomness, λ to the automata. The formula is staged as memory rather than revelation: every earlier room was secretly a variable, and standing at the centre is just noticing."
   },
   "shannon_workbench": {
+   "dna": {
+    "axes": {
+    "evidence": [
+    "sample",
+    "none",
+    "anecdote",
+    "census"
+    ]
+    }
+   },
    "name": "Shannon Workbench",
    "lookup_name": "shannon_workbench",
    "description": "An interactive workbench for the binary entropy function. One slider drives p ∈ [0,1]; a 16×16 Bernoulli(p) bit grid regenerates from a fixed seed (same draws, migrating threshold), a live readout shows H(p) bits/symbol and the theoretical-min bit count, and a glowing red marker rides the entropy hill H(p) = -p log₂ p - (1-p) log₂(1-p) above the table. The slope of H is the rate at which structure becomes possible; the peak (p=0.5) is where structure is maximally absent. Sister to shannon_entropy_meter (this is the source side; that is the measurement side).",
