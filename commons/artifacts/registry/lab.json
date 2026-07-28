@@ -4615,8 +4615,8 @@
       "description": "entropy_visualization",
       "scene": "res://algorithms/advancedlaboratory/entropy_visualization/entropy_visualization.tscn",
       "category": "unknown",
-      "include_in_map_data": true,
-      "map_ready": true,
+      "include_in_map_data": false,
+      "map_ready": false,
       "map_sequences": [],
       "footprint": [
         1,
@@ -4675,24 +4675,26 @@
         ],
         "max_dimension_m": 0.0,
         "measured_at": "2026-04-29T07:09:56.762620Z"
-      }
+      },
+      "deprecated": true,
+      "registry_note": "RETIRED 2026-07-29 (build-or-retire triage): Registered scene is an empty stub; entropy already has real instruments elsewhere."
     },
     "lab_room": {
       "dna": {
-       "axes": {
-       "premises": [
-       "chamber",
-       "workshop",
-       "theatre",
-       "ruin"
-       ],
-       "witness": [
-       "pane",
-       "none",
-       "port",
-       "sash"
-       ]
-       }
+        "axes": {
+          "premises": [
+            "chamber",
+            "workshop",
+            "theatre",
+            "ruin"
+          ],
+          "witness": [
+            "pane",
+            "none",
+            "port",
+            "sash"
+          ]
+        }
       },
       "lookup_name": "lab_room",
       "scene": "res://commons/artifacts/lab_room/lab_room.tscn",
@@ -4786,14 +4788,14 @@
     },
     "exit_sign": {
       "dna": {
-       "axes": {
-       "support": [
-       "none",
-       "bracket",
-       "frame",
-       "gantry"
-       ]
-       }
+        "axes": {
+          "support": [
+            "none",
+            "bracket",
+            "frame",
+            "gantry"
+          ]
+        }
       },
       "lookup_name": "exit_sign",
       "scene": "res://commons/artifacts/exit_sign/exit_sign.tscn",

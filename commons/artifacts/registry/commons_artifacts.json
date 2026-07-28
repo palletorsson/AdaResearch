@@ -2023,9 +2023,9 @@
     1.0,
     1.0
    ],
-   "include_in_map_data": true,
+   "include_in_map_data": false,
    "lookup_name": "camera_context",
-   "map_ready": true,
+   "map_ready": false,
    "map_sequences": [],
    "name": "Camera Context",
    "parameters": {
@@ -2076,7 +2076,9 @@
     ],
     "max_dimension_m": 0.0,
     "measured_at": "2026-04-29T07:09:56.762620Z"
-   }
+   },
+   "deprecated": true,
+   "registry_note": "RETIRED 2026-07-29 (build-or-retire triage): Scene-composition helper (a bare Node3D named Camera) swept into the artifact registry; never an artifact."
   },
   "cctv": {
    "category": "unknown",
@@ -6752,13 +6754,13 @@
     1.0,
     1.0
    ],
-   "include_in_map_data": true,
+   "include_in_map_data": false,
    "interaction": "observe",
    "interactions": [
     "observe"
    ],
    "lookup_name": "hypercube_rotation",
-   "map_ready": true,
+   "map_ready": false,
    "map_sequences": [
     "higher_dimensions"
    ],
@@ -6815,7 +6817,9 @@
     ],
     "max_dimension_m": 0.0,
     "measured_at": "2026-04-29T07:09:56.762620Z"
-   }
+   },
+   "deprecated": true,
+   "registry_note": "RETIRED 2026-07-29 (build-or-retire triage): Registered scene is an empty stub; the working 4D machinery lives in tesseract_bench."
   },
   "impulse_collision_demo": {
    "category": "physics",
@@ -10928,9 +10932,9 @@
     1.0,
     1.0
    ],
-   "include_in_map_data": true,
+   "include_in_map_data": false,
    "lookup_name": "point_is",
-   "map_ready": true,
+   "map_ready": false,
    "map_sequences": [],
    "name": "point_is",
    "parameters": {
@@ -10982,7 +10986,9 @@
     "max_dimension_m": 0.0,
     "measured_at": "2026-04-29T07:09:56.762620Z"
    },
-   "content": "text"
+   "content": "text",
+   "deprecated": true,
+   "registry_note": "RETIRED 2026-07-29 (build-or-retire triage): Registered scene is an empty stub; `point` already carries the coordinate reading."
   },
   "polyhedron_nets_cube": {
    "category": "unknown",

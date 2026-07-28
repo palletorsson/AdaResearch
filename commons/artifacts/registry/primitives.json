@@ -3033,9 +3033,9 @@
     1,
     1
    ],
-   "include_in_map_data": true,
+   "include_in_map_data": false,
    "lookup_name": "concept_synthesizer",
-   "map_ready": true,
+   "map_ready": false,
    "map_sequences": [],
    "name": "Concept Synthesizer",
    "parameters": {
@@ -3086,7 +3086,9 @@
     ],
     "max_dimension_m": 0.0,
     "measured_at": "2026-04-29T07:09:56.762620Z"
-   }
+   },
+   "deprecated": true,
+   "registry_note": "RETIRED 2026-07-29 (build-or-retire triage): Registered scene is an empty stub and no implementation exists anywhere in the repo."
   },
   "coordinate_axes_xy": {
    "category": "unknown",
@@ -5029,9 +5031,9 @@
     1,
     1
    ],
-   "include_in_map_data": true,
+   "include_in_map_data": false,
    "lookup_name": "dimension_lens",
-   "map_ready": true,
+   "map_ready": false,
    "map_sequences": [],
    "name": "Dimension Lens",
    "parameters": {
@@ -5082,7 +5084,9 @@
     ],
     "max_dimension_m": 0.0,
     "measured_at": "2026-04-29T07:09:56.762620Z"
-   }
+   },
+   "deprecated": true,
+   "registry_note": "RETIRED 2026-07-29 (build-or-retire triage): Registered scene is an empty stub and no implementation exists anywhere in the repo."
   },
   "dodecahedron": {
    "category": "unknown",
@@ -6952,9 +6956,9 @@
     1,
     1
    ],
-   "include_in_map_data": true,
+   "include_in_map_data": false,
    "lookup_name": "geometric_crystal",
-   "map_ready": true,
+   "map_ready": false,
    "map_sequences": [],
    "name": "Geometric Crystal",
    "parameters": {
@@ -7005,7 +7009,9 @@
     ],
     "max_dimension_m": 0.0,
     "measured_at": "2026-04-29T07:09:56.762620Z"
-   }
+   },
+   "deprecated": true,
+   "registry_note": "RETIRED 2026-07-29 (build-or-retire triage): Registered scene is an empty stub; the crystals directory holds nothing else."
   },
   "glass_planes_2_5d": {
    "category": "unknown",
@@ -16141,9 +16147,9 @@
     1,
     1
    ],
-   "include_in_map_data": true,
+   "include_in_map_data": false,
    "lookup_name": "reality_modifier",
-   "map_ready": true,
+   "map_ready": false,
    "map_sequences": [],
    "name": "Reality Modifier",
    "parameters": {
@@ -16194,7 +16200,9 @@
     ],
     "max_dimension_m": 0.0,
     "measured_at": "2026-04-29T07:09:56.762620Z"
-   }
+   },
+   "deprecated": true,
+   "registry_note": "RETIRED 2026-07-29 (build-or-retire triage): Registered scene is an empty stub and no implementation exists anywhere in the repo."
   },
   "rectcube": {
    "category": "unknown",
@@ -18566,9 +18574,9 @@
     1,
     1
    ],
-   "include_in_map_data": true,
+   "include_in_map_data": false,
    "lookup_name": "spatial_compass",
-   "map_ready": true,
+   "map_ready": false,
    "map_sequences": [],
    "name": "Spatial Compass",
    "parameters": {
@@ -18619,7 +18627,9 @@
     ],
     "max_dimension_m": 0.0,
     "measured_at": "2026-04-29T07:09:56.762620Z"
-   }
+   },
+   "deprecated": true,
+   "registry_note": "RETIRED 2026-07-29 (build-or-retire triage): Registered scene is an empty stub and no implementation exists anywhere in the repo."
   },
   "sphere": {
    "category": "unknown",

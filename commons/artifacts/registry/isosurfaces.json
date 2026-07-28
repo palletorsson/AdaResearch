@@ -2267,8 +2267,8 @@
    "description": "Static marching cubes demonstration",
    "scene": "res://algorithms/marchingcubes/Scenes/Marching Cubes Static.tscn",
    "category": "unknown",
-   "include_in_map_data": true,
-   "map_ready": true,
+   "include_in_map_data": false,
+   "map_ready": false,
    "map_sequences": [],
    "footprint": [
     1,
@@ -2328,7 +2328,9 @@
     ],
     "max_dimension_m": 0.0,
     "measured_at": "2026-04-29T07:09:56.762620Z"
-   }
+   },
+   "deprecated": true,
+   "registry_note": "RETIRED 2026-07-29 (build-or-retire triage): Registered scene is an empty stub; the marching-cubes family is implemented under algorithms/."
   },
   "marching_squares": {
    "category": "isosurfaces",
