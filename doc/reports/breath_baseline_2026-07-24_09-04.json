@@ -1,0 +1,35 @@
+{
+  "timestamp": "2026-07-24T09:04:00",
+  "phase": "baseline",
+  "pipeline_summary": {
+    "spine_sequences_scored": 24,
+    "mean_head": 6.083,
+    "complete": ["randomness"],
+    "at_stage_6_vr_testing": 23,
+    "note": "All 23 non-complete spine sequences sit at stage-6 (vr_testing), a human-gated stage. Doc/Art/Map/Val all OK across the board — no stage-2 doc regressions (the 07-20/07-23 Chamber_* rescue holds)."
+  },
+  "heat_map_top_5": [
+    "command 65 [active recent commit]",
+    "capture 65 [active recent commit]",
+    "floor 65 [active recent commit]",
+    "garden voice metric 60 [structurally capped ~64%]",
+    "pipeline documentation head 60 [saturated]"
+  ],
+  "garden_health": {
+    "voice_coverage": 0.64,
+    "embodiment_rate": 0.31,
+    "phantom_limbs": 1051,
+    "note": "voice_coverage up 0.62->0.64 vs 07-19; still placement-scoped and structurally capped. Not an autonomous lever."
+  },
+  "release_gates": {
+    "A_sequence_contract": "PASS",
+    "B_artifact_registry": "PASS",
+    "C_map_validation": "PASS (grade_F 0, grade_A 1649, grade_B 175, grade_C 178)",
+    "D_lab_progression": "PASS"
+  },
+  "git_status_read": {
+    "stranded_real_content": "none (no untracked .gd/.tscn/blurb/intent/technical docs)",
+    "churn_nature": "auto-telemetry only: eye_shot.md gaze_ride field notes + primitives map_data.json score/ride re-scores from the map-dna research loop",
+    "verdict": "saturated + healthy; light protective breath, no content manufactured"
+  }
+}

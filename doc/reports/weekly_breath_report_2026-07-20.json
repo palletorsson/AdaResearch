@@ -1,0 +1,247 @@
+{
+  "report_date": "2026-07-20",
+  "generated": "2026-07-20T00:00:00",
+  "period": "2026-07-06 to 2026-07-20",
+  "period_note": "14 days, not 7 — the 2026-07-13 weekly audit did not run. This report covers two weeks.",
+  "trigger": "scheduled-task: ada-weekly-audit",
+  "previous_report": "doc/reports/weekly_breath_report_2026-07-06.json",
+  "mode": "audit (dry-run breather + release gates + trajectory diff). No project content changed.",
+
+  "headline": "The flat-week streak BROKE, but the aggregate number went slightly DOWN — and both facts have the same cause. The spine grew from 22 to 24 scored sequences. The two newcomers (plus four existing sequences whose closing Chamber_* rooms arrived undocumented) entered the scorer at stage 2, dropping the aggregate to 5.083 on the morning of 07-20. That same breath wrote the 6 missing Chamber blurbs and pushed all six back to stage 6 in a single pass — a genuine +1.0 within-day head-sum advance, the first real structural movement in roughly three months. Week-over-week the aggregate reads 6.0909 -> 6.083 (-0.008), which trips the literal 'has not improved in 7 days' stall test, but this is a DENOMINATOR ARTIFACT, not a regression: no sequence lost a stage, and the per-sequence picture strictly improved. The binding constraint is unchanged and is not a stall the breather can clear: 23 of 24 spine sequences sit at HEAD 6 (vr_testing), which only a human VR walk advances. Gates hold 4/4 PASS with grade_F at 0. The other significant event of the period is editorial, not numeric: the 2026-07-18 STOP-building-instruments course correction, which the 07-19 breath honored by deliberately changing nothing rather than manufacturing @identity busywork against a metric known to be structurally capped.",
+
+  "total_breaths_in_period": 6,
+  "breaths_in_period": [
+    "2026-07-09T11:55",
+    "2026-07-10T09:00",
+    "2026-07-12T09:10",
+    "2026-07-18T14:22",
+    "2026-07-19T09:04",
+    "2026-07-20T09:00"
+  ],
+  "note_breath_count": "6 logged breaths across 14 days (vs 6 across 7 days last period) — cadence roughly halved. A 5-day gap sits between 07-12 and 07-18, coinciding with heavy human-led work on other threads (bricolage build, biome grid layer, rule-zero sweep).",
+
+  "pipeline_snapshot": {
+    "global_avg_pipeline_head_sum_now": 6.083,
+    "global_avg_pipeline_head_sum_last_week": 6.0909,
+    "global_avg_pipeline_delta_period": -0.008,
+    "computation_now": "(23 spine sequences at stage 6 * 6) + (randomness COMPLETE * 8) = 138 + 8 = 146; 146 / 24 = 6.083",
+    "computation_last_week": "(21 spine sequences at stage 6 * 6) + (randomness COMPLETE * 8) = 126 + 8 = 134; 134 / 22 = 6.0909",
+    "scored_sequences_now": 24,
+    "scored_sequences_last_week": 22,
+    "sequences_complete": ["randomness"],
+    "sequences_below_stage_6": [],
+    "all_sequences_pass_str_doc_art_map_val": true,
+    "regression_status": "CLEAN. No sequence regressed. The -0.008 is entirely the denominator moving 22 -> 24; every previously-scored sequence holds at or above its prior stage.",
+    "within_period_low": 5.083,
+    "within_period_low_cause": "6 sequences (symmetry, formfinding, isosurfaces, boolean_surfaces, graphtheory, postfoundationscrisis) entered/held at stage 2 because their closing Chamber_* map had no blurb.md. Closed same day."
+  },
+
+  "sequences_improved": [
+    {
+      "sequence": "symmetry",
+      "from_stage": 2,
+      "to_stage": 6,
+      "how": "Chamber_Symmetry blurb.md written (compressed from existing walked.md 'The seed' paragraph)",
+      "breath": "2026-07-20T09:00"
+    },
+    {
+      "sequence": "formfinding",
+      "from_stage": 2,
+      "to_stage": 6,
+      "how": "Chamber_FormFinding blurb.md written",
+      "breath": "2026-07-20T09:00"
+    },
+    {
+      "sequence": "isosurfaces",
+      "from_stage": 2,
+      "to_stage": 6,
+      "how": "Chamber_Isosurfaces blurb.md written",
+      "breath": "2026-07-20T09:00"
+    },
+    {
+      "sequence": "boolean_surfaces",
+      "from_stage": 2,
+      "to_stage": 6,
+      "how": "Chamber_Boolean blurb.md written",
+      "breath": "2026-07-20T09:00"
+    },
+    {
+      "sequence": "graphtheory",
+      "from_stage": 2,
+      "to_stage": 6,
+      "how": "Chamber_GraphTheory blurb.md written",
+      "breath": "2026-07-20T09:00"
+    },
+    {
+      "sequence": "postfoundationscrisis",
+      "from_stage": 2,
+      "to_stage": 6,
+      "how": "Chamber_PostFoundations blurb.md written",
+      "breath": "2026-07-20T09:00"
+    }
+  ],
+
+  "total_delta": {
+    "head_sum_aggregate_week_over_week": -0.008,
+    "head_sum_aggregate_interpretation": "Negative for denominator reasons only. The honest structural delta is +6 sequence-stages (6 sequences x 4 stages recovered, stage 2 -> stage 6) plus 2 net new sequences entering the scored spine.",
+    "largest_single_breath_delta_in_period": 1.0,
+    "largest_single_breath_delta_breath": "2026-07-20T09:00",
+    "voice_coverage_start": 0.62,
+    "voice_coverage_end": 0.63,
+    "voice_coverage_delta": 0.01,
+    "voice_coverage_note": "garden_listener --diagnosis now reads 63% voice coverage, 31% embodiment, 1050 phantom limbs. Voice work in this period (07-18: 10 stranded @identity blocks committed + 4 new combine/folding blocks) was largely metric-invisible; see the placement-scope finding below.",
+    "gate_status": "4/4 PASS, unchanged from last period. grade_F 0."
+  },
+
+  "skill_effectiveness_changes": {
+    "period_calls": 15,
+    "period_successes": 15,
+    "period_failures": 0,
+    "engine_health": "100% success rate across the period. Fourth consecutive audit period with zero Test-phase failures.",
+    "by_skill": {
+      "ada-breather": {"calls": 6, "succeeded": 6, "failed": 0, "note": "One of the six (07-19) succeeded by deliberately changing nothing — a correct null result, not a no-op failure."},
+      "documentation_writing": {"calls": 6, "succeeded": 6, "failed": 0, "note": "Six Chamber_* blurbs, all passing stage-2 scoring. Cumulative documentation_writing now 77/77 (100%). Still the single most reliable lever in the system."},
+      "identity_writing": {"calls": 14, "succeeded": 14, "failed": 0, "note": "10 stranded prior-breath blocks committed + 4 new. Test-phase clean, but see 'metric-invisible work' — success here does not imply measurable coverage gain."},
+      "ada-artifact-improver(pattern)": {"calls": 1, "succeeded": 1, "failed": 0},
+      "ada-map-expert(patterns)": {"calls": 1, "succeeded": 1, "failed": 0},
+      "ada-humanizer(voice)": {"calls": 1, "succeeded": 1, "failed": 0}
+    },
+    "no_skill_below_50_percent": true,
+    "level_3_fired": false,
+    "level_3_note": "Zero failures in the period, so the 3-failures-on-one-pattern trigger for a new skill-evolution proposal did not fire. One new proposal (prop-voice-metric-scope) was nonetheless written on 07-18 from a DISCOVERY rather than a failure."
+  },
+
+  "proposals_pending_review": {
+    "total": 11,
+    "all_status": "proposed",
+    "applied_this_period": 0,
+    "new_this_period": ["prop-voice-metric-scope"],
+    "list": [
+      {"id": "prop-001", "created": "2026-04-20", "skill": "ada-breather", "gist": "Pre-check candidate voiceless artifacts before selecting garden-identity work", "age_days": 91},
+      {"id": "prop-002", "created": "2026-05-29", "skill": "ada-breather", "gist": "Deferral re-validation step in Read/Evaluate", "age_days": 52},
+      {"id": "prop-003", "created": "2026-05-31", "skill": "ada-breather", "gist": "Wall detection: auto-rotate lever when every spine sequence is at HEAD >= 6", "age_days": 50},
+      {"id": "prop-004", "created": "2026-06-06", "skill": "ada-breather", "gist": "Crash-safe-write rule for breath_log.json / improvement_trajectory.json", "age_days": 44},
+      {"id": "prop-005", "created": "2026-06-11", "skill": "ada-breather", "gist": "Convention-drift cross-check before concluding a HEAD/gap is real", "age_days": 39},
+      {"id": "prop-006", "created": "2026-06-15", "skill": "ada-breather", "gist": "Recent-commit regression re-scan in Read phase", "age_days": 35},
+      {"id": "prop-008", "created": "2026-06-28", "skill": "ada-breather", "gist": "Explicit lever-rotation step when global_avg flat >= 3 breaths", "age_days": 22},
+      {"id": "prop-009", "created": "2026-07-06", "skill": "ada-breather", "gist": "Metric-observability pre-check: don't bank a success on a metric that cannot resolve the edited file", "age_days": 14},
+      {"id": "prop-heatmap-voice-coolability", "created": "2026-07-09", "skill": "heat_map_generator.py + cooling filter", "gist": "Compute voice heat from ENRICHABLE-voiceless only, so voice items can actually cool", "age_days": 11},
+      {"id": "prop-scorer-read-reliability", "created": "2026-07-12", "skill": "sequence_pipeline_scorer.py + Baseline/Harvest", "gist": "Treat a 0.0/null pipeline read as SUSPECT and re-read rather than logging it", "age_days": 8},
+      {"id": "prop-voice-metric-scope", "created": "2026-07-18", "skill": "ada-breather", "gist": "Before selecting @identity work to move voice coverage, resolve whether the artifact is on a sequence's OFFICIAL map list — off-list enrichment cannot move the metric", "age_days": 2}
+    ],
+    "flag": "ELEVEN proposals, zero applied, oldest 91 days. The proposal queue is now the single largest unactioned backlog in the breath system, and three of them (prop-003 wall detection, prop-008 lever rotation, prop-009 metric observability) would have prevented specific wasted breaths in this very period. The breather is correctly forbidden from applying its own proposals; this needs one human pass with /ada-skill-updater. Recommend triaging 003/008/009 first — they are mutually reinforcing and address the exact failure mode (chasing a saturated metric) that the 07-18 course correction named independently.",
+    "prop_005_status_note": "prop-005 has a confirmed second occurrence and was partially FIXED in practice on 07-04 (garden_listener.find_gd resolver), but the proposal itself remains open — the SKILL.md-side cross-check was never added."
+  },
+
+  "stall_analysis": {
+    "literal_criterion_triggered": true,
+    "literal_criterion_detail": "global_avg 6.0909 (2026-07-06) -> 6.083 (2026-07-20). Not an improvement over 7 days, so the scheduled task's stall test fires.",
+    "verdict": "FALSE STALL on the aggregate metric — but a TRUE and unchanged structural wall underneath it.",
+    "why_the_number_fell": "The scored spine grew from 22 to 24 sequences. A stage-6 newcomer drags a mean whose incumbents are also at 6 only because randomness (the single COMPLETE sequence, scored 8) is diluted across a larger denominator. Arithmetic, not decay.",
+    "why_it_is_nonetheless_flat_in_substance": [
+      "23 of 24 sequences are pinned at HEAD 6 = vr_testing. Stage 6 advances ONLY when a human walks the sequence in a headset and files feedback through the desktop bridge. No headless breath can move it. This has been the binding constraint for 19+ consecutive breaths.",
+      "The secondary lever — voice coverage — is structurally capped near 62-63%. The 07-19 breath established the remaining voiceless spine artifacts are either shared display widgets that must not carry sequence-specific truths, or off-list scripted artifacts the placement-scoped metric cannot count. Enriching them is real work that the metric cannot see.",
+      "The heat map has become partly self-referential: heat_map_generator promotes stale LOD 'deep discovery' session notes into 60-degree items. Three of this week's four heat items ('change voice', 'garden voice metric', and the now-resolved 'pipeline documentation head') are notes ABOUT the voice metric rather than content gaps. Writing a new LOD discovery would manufacture more false heat.",
+      "Per the 2026-07-18 STOP-building-instruments course correction and the earlier THE-EDGE ruling, the real finish line is the autogenerated-vs-composed look-edge, which closes on Palle's sentences about specific maps — not on any number this audit can compute."
+    ],
+    "counter_evidence_against_declaring_a_stall": "This period contained the largest single-breath head-sum advance since roughly April (+1.0 on 07-20) and the first stage-2 -> stage-6 movement in months. The engine is not stuck; the metric is badly shaped for the phase of work the project is actually in.",
+    "recommended_metric_change": "Stop treating the head-sum mean as the headline. It is denominator-sensitive, saturated at 6, and gated on a human act. Suggest the weekly audit headline on (a) count of sequences at HEAD >= 6, (b) gate pass/fail with grade_F, and (c) a walk-count metric once VR walking resumes."
+  },
+
+  "release_gates": {
+    "overall": "PASS",
+    "enabled": "4/4 passing",
+    "A_sequence_contract": {"pass": true, "missing_declared_maps": 0, "duplicate_entries_within_sequence": 0, "undeclared_map_folders": 1278},
+    "B_artifact_registry_integrity": {"pass": true, "unresolved_scene_files": 0, "missing_scene_path": 0, "unsupported_scene_path": 0, "missing_map_ready": 17, "missing_include_in_map_data": 17},
+    "C_map_validation": {"pass": true, "grade_A": 1565, "grade_B": 150, "grade_C": 197, "grade_F": 0},
+    "D_lab_progression_continuity": {"pass": true, "lost_count": 0, "changed_count": 12, "total_issues": 39, "ok_superset_pairs": 5},
+    "new_this_period": [
+      "Gate B metrics moved 0 -> 17 on both missing_map_ready and missing_include_in_map_data. The persisted doc/reports/RELEASE_GATES.json still records 0/0, so this is a FRESH, uncommitted-to-report regression — 17 spine-placed artifacts have entered the registry without the map_ready / include_in_map_data fields. Non-blocking (the gate still passes) but it is real, bounded, and headlessly fixable. Most likely source: the in-flight bricolage artifact build and recent registry reformatting.",
+      "A broader scan finds 465 registry entries project-wide lacking these two fields; the gate scopes to placed artifacts, hence 17. The 465 is not itself an error — many are gallery/substrate entries outside map placement — but it means the gate's 17 will grow as those entries get placed."
+    ],
+    "standing_concerns": [
+      "undeclared_map_folders 1278 — unchanged in character, still growing. Needs a human triage pass; the breather cannot decide which folders are abandoned experiments vs unregistered real maps.",
+      "grade_C 197 maps — currently non-blocking (max_grade_c: None). If a future release toggles grade-C blocking on, this becomes a 197-item wall overnight."
+    ]
+  },
+
+  "dry_run_work_plan": {
+    "note": "Produced by the Evaluate phase. NOT executed — this was a dry-run audit. This is what the next full breath should do.",
+    "focus_vector_primary": "Rebuild all primitives maps using Map Studio (FOCUS_VECTOR last updated 2026-03-28 — now 114 days stale; the primitives subtitle and voice levers it points at are both exhausted. Flagging for human refresh.)",
+    "trajectory": "flat-with-a-real-jump (see stall_analysis)",
+    "items": [
+      {
+        "rank": 1,
+        "item": "Gate B regression: 17 placed artifacts missing map_ready / include_in_map_data",
+        "temperature": "n/a (not on heat map — found via gate diff)",
+        "reason": "Fresh, bounded, concrete, verifiable by re-running gate B. Exactly the kind of real content gap the heat map is currently blind to. Highest-confidence work available headlessly.",
+        "dispatch_to": "ada-breather direct registry edit + run_release_gates verification",
+        "expected_outcome": "Gate B metrics return to 0/0."
+      },
+      {
+        "rank": 2,
+        "item": "Refresh FOCUS_VECTOR.json (human action — breather is forbidden from editing it)",
+        "temperature": "n/a",
+        "reason": "The primary goal has been unchanged since 2026-03-28 and points at two exhausted levers. Every recent breath has had to improvise a target because the steering file no longer steers.",
+        "dispatch_to": "HUMAN",
+        "expected_outcome": "Breaths get a real target again instead of auto-selecting."
+      },
+      {
+        "rank": 3,
+        "item": "Triage the 11-proposal backlog, starting with prop-003 / prop-008 / prop-009",
+        "temperature": "n/a",
+        "reason": "Oldest is 91 days. Three of them would have prevented wasted breaths this period.",
+        "dispatch_to": "HUMAN via /ada-skill-updater",
+        "expected_outcome": "Breather stops chasing saturated metrics by construction rather than by ad-hoc judgement."
+      },
+      {
+        "rank": 4,
+        "item": "Spine-scoped grade_C map cleanup (subset of the 197, spine maps only)",
+        "temperature": "n/a",
+        "reason": "Real headless work with a real validator. Lower priority than gate B because it is currently non-blocking.",
+        "dispatch_to": "ada-map-expert + map_pathfinder",
+        "expected_outcome": "grade_C count drops; grade_B/A rise."
+      }
+    ],
+    "cooled_skipped": [
+      {"item": "change voice (60 degrees)", "reason": "Self-referential heat — a prior LOD note about the voice metric, not a content gap. Confirmed uncoolable by @identity enrichment on 07-18 (placement-scope) and 07-19."},
+      {"item": "garden voice metric (60 degrees)", "reason": "Same. Feeding it manufactures more false heat."},
+      {"item": "pipeline documentation head (60 degrees)", "reason": "RESOLVED by the 07-20 breath (6 Chamber blurbs). Stale heat entry; will cool on next heat_map regeneration."},
+      {"item": "stage-6 vr_testing for all 23 sequences", "reason": "Human gate. Cannot be advanced headlessly by any skill."},
+      {"item": "undeclared_map_folders (1278)", "reason": "Requires human judgement on which folders are abandoned. Not a headless decision."}
+    ]
+  },
+
+  "discoveries_this_period": [
+    "The heat map was blind to the lowest pipeline head: 6 spine sequences sat at stage 2 while heat showed only 60-degree voice items. READ THE PIPELINE SCORER, NOT JUST THE HEAT MAP, when picking a target. (07-20)",
+    "Every stage-2 sequence was blocked by exactly ONE map — its closing Chamber_* room — and each already had a rich walked.md 'The seed' paragraph. The blurb was a COMPRESSION job, not a writing job. When docs are missing, check walked.md first; the voice may already exist in longer form. (07-20)",
+    "The pipeline scorer accepts blurb.md OR intent.md; most maps ship blurb.md only. Do not write both to satisfy stage 2. (07-20)",
+    "STRANDED WORK: breaths 07-10 and 07-12 completed 10 @identity blocks but never committed them. The morning breath should git-status-check algorithms/ and commons/primitives/ for uncommitted prior-breath edits BEFORE starting fresh. (07-18)",
+    "VOICE METRIC PLACEMENT SCOPE: garden_listener counts @identity only on artifacts placed in a sequence's OFFICIAL map list. Enriching off-list artifacts cannot move the metric — this is why 'primitives voice' and 'change voice' are uncoolable. No parser bug; the format is fine. (07-18)",
+    "Honest light-breath precedent set 07-19: changing nothing is a valid breath outcome when every hot item is self-referential and the project is healthy. Recorded so future breaths do not treat delta 0.0 with zero items as an engine failure."
+  ],
+
+  "anomaly_watch": {
+    "scorer_garbage_reads": {
+      "occurrences": 4,
+      "dates": ["2026-07-03 (0.0)", "2026-07-06 (null)", "2026-07-12 (0.0)", "2026-07-18 (0.0)"],
+      "status": "Proposal prop-scorer-read-reliability open since 07-12. Did NOT recur on 07-19 or 07-20 (both read clean). Every occurrence was caught and corrected in the evening harvest, so the trend series is uncontaminated — but the correction is manual and depends on someone knowing the true saturated value.",
+      "risk": "Once the head-sum is no longer a memorable constant (it just moved off 6.0909), a garbage read becomes much harder to spot by eye. Applying prop-scorer-read-reliability is now more urgent than when it was filed."
+    },
+    "release_gates_json_staleness": {
+      "detail": "doc/reports/RELEASE_GATES.json on disk reports gate B at 0/0 while a live run reports 17/17. The persisted report is not being refreshed by every run, or is written from a different toggle path.",
+      "recommendation": "Worth a look — a stale gates report silently hides regressions from anyone reading the file instead of running the tool."
+    }
+  },
+
+  "summary_for_human": {
+    "is_the_project_healthy": "Yes. All 4 release gates pass, grade_F is 0, no sequence regressed, and the breath engine ran 15/15 clean.",
+    "did_it_improve": "Structurally yes — 6 sequences advanced four stages each and the spine grew by 2. Numerically the headline mean fell 0.008 for pure denominator reasons.",
+    "is_it_stalled": "Not in the way the criterion means. The aggregate metric is saturated and mis-shaped for the current phase. The genuine constraint is that 23 of 24 sequences need a human VR walk, and the genuine finish line (per THE EDGE ruling) is the look-edge, which needs your sentences about specific maps.",
+    "three_things_that_need_you": [
+      "FOCUS_VECTOR.json is 114 days stale and points at two exhausted levers.",
+      "11 skill-evolution proposals are queued unreviewed, oldest 91 days. Three of them would stop the breather chasing saturated metrics.",
+      "1278 undeclared map folders need a human triage decision the breather cannot make."
+    ]
+  }
+}

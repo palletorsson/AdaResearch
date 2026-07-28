@@ -43,7 +43,7 @@
 			"artifact": "monte_carlo_dartboard",
 			"body": "tall street kiosk",
 			"dialect": "vertical",
-			"element_count": 99,
+			"element_count": 242,
 			"findings": [
 				{
 					"detail": "lowest element y = -0.380 (pedestal below origin)",
@@ -173,7 +173,7 @@
 					"rule": "G1-no-orphan-text"
 				},
 				{
-					"detail": "deck 0.850, tallest 0.939 = TableConsole/@MeshInstance3D@791 (-0.011 vs the 0.10 allowance)",
+					"detail": "deck 0.850, tallest 0.939 = TableConsole/@MeshInstance3D@939 (-0.011 vs the 0.10 allowance)",
 					"ok": true,
 					"rule": "G3-silhouette"
 				},
@@ -373,7 +373,7 @@
 					"rule": "G1-no-orphan-text"
 				},
 				{
-					"detail": "deck 0.900, tallest 0.986 = TableConsole/@MeshInstance3D@1926 (-0.014 vs the 0.10 allowance)",
+					"detail": "deck 0.900, tallest 0.986 = TableConsole/@MeshInstance3D@2074 (-0.014 vs the 0.10 allowance)",
 					"ok": true,
 					"rule": "G3-silhouette"
 				},
@@ -490,7 +490,7 @@
 					"rule": "G1-no-orphan-text"
 				},
 				{
-					"detail": "deck 0.000, tallest 0.088 = CompressionBench/BenchReadout/Readout/@MeshInstance3D@2226 (-0.012 vs the 0.10 allowance)",
+					"detail": "deck 0.000, tallest 0.088 = CompressionBench/BenchReadout/Readout/@MeshInstance3D@2374 (-0.012 vs the 0.10 allowance)",
 					"ok": true,
 					"rule": "G3-silhouette"
 				},
@@ -573,7 +573,7 @@
 					"rule": "G1-no-orphan-text"
 				},
 				{
-					"detail": "deck 0.000, tallest 0.083 = TableConsole/InfoScreen/@Node3D@2606/@MeshInstance3D@2594 (-0.017 vs the 0.10 allowance)",
+					"detail": "deck 0.000, tallest 0.083 = TableConsole/InfoScreen/@Node3D@2754/@MeshInstance3D@2742 (-0.017 vs the 0.10 allowance)",
 					"ok": true,
 					"rule": "G3-silhouette"
 				},
@@ -729,7 +729,7 @@
 					"rule": "G1-no-orphan-text"
 				},
 				{
-					"detail": "deck 0.950, tallest 0.977 = TableConsole/CoordsPanel/@MeshInstance3D@2981 (-0.073 vs the 0.10 allowance)",
+					"detail": "deck 0.950, tallest 0.977 = TableConsole/CoordsPanel/@MeshInstance3D@3129 (-0.073 vs the 0.10 allowance)",
 					"ok": true,
 					"rule": "G3-silhouette"
 				},

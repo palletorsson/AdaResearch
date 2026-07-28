@@ -1,0 +1,352 @@
+{
+  "report_date": "2026-07-27",
+  "generated": "2026-07-27T10:30:00",
+  "period": "2026-07-20 to 2026-07-27",
+  "period_note": "7 days. Previous report covered 2026-07-06 to 2026-07-20 and included breath 2026-07-20T09:00, so that breath is not re-counted here.",
+  "trigger": "scheduled-task: ada-weekly-audit",
+  "previous_report": "doc/reports/weekly_breath_report_2026-07-20.json",
+  "mode": "audit (dry-run breather: Baseline + Read + Evaluate only; release gates; trajectory diff). No project content changed. The only file written by this run is this report.",
+
+  "headline": "global_avg is flat at 6.083 for the second consecutive week, so the literal stall test fires — but this audit establishes that 6.083 is the ARITHMETIC CEILING of the metric, not a plateau within it. 23 of 24 spine sequences sit at HEAD 6 (vr_testing); stage 6 is scored by a single substring match of a declared map name against ada_run/desktop_feedback.md, so no headless work of any kind can raise the mean. It is mathematically impossible for the number to improve without a human VR comment. Two sharper findings sit underneath. FIRST: the stage-6 wall is partly an EVIDENCE-LINKAGE artifact. Real VR feedback exists for 9 sequences, but the last entry is dated 2026-02-20 (158 days ago) and every walked map except one has since been dropped from its sequence's declared cast (VectorForces, One_Primitives, LSystems_Tree_L_Systems, Array_Basics still exist on disk but are no longer declared; Fractals_9's folder is gone). randomness is the project's ONE 'COMPLETE' sequence solely because Random_Rotate_Random_XYZ survived the re-cast under its original name. The entire non-6 term of the headline mean rests on one 158-day-old comment about one map. SECOND: the ask to break the wall is far smaller than previously framed — ONE feedback line naming ONE declared map per sequence would move 4 sequences to COMPLETE and 19 to stage 7, taking global_avg 6.083 -> 7.208 (+1.125), the largest jump in project history, in a single VR session. Last week's 'FRESH gate-B regression' is CORRECTED: doc/reports/RELEASE_GATES.json is a 2026-06-10 snapshot because run_release_gates.py defaults --json-out to empty and never refreshes it; the 17 flagged artifacts date to the 2026-07-08 curator/jspace/museum/pattern_atlas wave and have been stable at 17 all week. Gates hold 4/4 PASS, grade_F 0, and grade_C actually FELL 197 -> 181 while the map corpus grew 7%. The week was the most productive on record by commit volume (~200 commits) but breath cadence dropped to 3 and then stopped entirely for the last 3 days.",
+
+  "total_breaths_in_period": 3,
+  "breaths_in_period": [
+    "2026-07-21T09:00",
+    "2026-07-23T09:00",
+    "2026-07-24T09:04"
+  ],
+  "note_breath_count": "3 logged breaths in 7 days (vs 6 across 14 days last period). NO breath logged for 2026-07-25, 2026-07-26, or 2026-07-27 — a 3-day gap that coincides with the heaviest human commit activity in project history (~200 commits: cabinet grammar family to 22 members, catalyst timed lease into the spine, wizard compose ops, artifact-DNA stage 2, the Artist_Readymades gallery, biome SDF caps, the 543-map spawn audit). The daily morning breather appears not to have fired on 25/26/27. Worth checking whether the scheduled task is still enabled.",
+
+  "pipeline_snapshot": {
+    "global_avg_pipeline_head_sum_now": 6.0833,
+    "global_avg_pipeline_head_sum_last_week": 6.083,
+    "global_avg_pipeline_delta_period": 0.0,
+    "computation_now": "(23 spine sequences at stage 6 * 6) + (randomness COMPLETE * 8) = 138 + 8 = 146; 146 / 24 = 6.0833",
+    "scored_sequences_now": 24,
+    "scored_sequences_last_week": 24,
+    "sequences_complete": ["randomness"],
+    "sequences_below_stage_6": [],
+    "all_sequences_pass_str_doc_art_map_val": true,
+    "doc_stage_holds": "Doc=OK across all 24. The 07-20/07-23 Chamber_* blurb rescue holds — no recurrence of the 6-sequence stage-2 regression.",
+    "regression_status": "CLEAN. No sequence regressed. Scorer read clean on the first attempt (no 0.0/null garbage read).",
+    "arithmetic_ceiling": 6.0833,
+    "arithmetic_ceiling_proof": "Stage 7 is unreachable without stage 6, and stage 6 is gated on human VR feedback. With 23 sequences pinned at 6 and randomness at 8, (23*6 + 8)/24 = 6.0833 is the MAXIMUM value achievable by headless work. The metric is not stalled; it is completed as far as autonomous work can take it.",
+    "ceiling_if_vr_unblocked": 7.2083,
+    "ceiling_if_vr_unblocked_computation": "4 sequences with 100% stage-7 polish (transformation, change, cellularautomata, softbodies) would go COMPLETE=8; the other 19 would advance to stage 7. (5*8 + 19*7)/24 = 173/24 = 7.2083.",
+    "ceiling_if_vr_unblocked_delta": 1.125
+  },
+
+  "sequences_improved": [],
+  "sequences_improved_note": "No sequence changed stage this period, and none could have: all 24 were already at or above their headless maximum on 2026-07-20. The three breaths in the period were correctly protective/preservative rather than advancing (see skill_effectiveness_changes).",
+
+  "total_delta": {
+    "head_sum_aggregate_week_over_week": 0.0,
+    "head_sum_aggregate_interpretation": "Zero, and honestly zero — not a denominator artifact this time (denominator held at 24). The metric is at its headless ceiling.",
+    "largest_single_breath_delta_in_period": 0.0,
+    "voice_coverage_start": 0.63,
+    "voice_coverage_end": 0.64,
+    "voice_coverage_delta": 0.01,
+    "voice_coverage_note": "garden_listener --diagnosis now reads 64% voice coverage, 32% embodiment, 1051 phantom limbs across 2535 artifacts. The +1pp came from human-led work (commit 84e09d256 'first auto-research voice wave — 119 artifacts speak' and 23a28298f 'close the gap — annotation, text, subtitles, hazard'), NOT from a breath. Breaths correctly declined the voice lever per the 2026-07-18 STOP-building-instruments correction.",
+    "gate_status": "4/4 PASS, unchanged. grade_F 0.",
+    "genuine_quality_delta_this_period": "grade_C maps FELL 197 -> 181 (-16) while the scored corpus GREW 1912 -> 2048 (+136 maps, +7%). Attributable to human commits 22092da71 (audit all 543 sp-only maps: 84 dead, 25 crippled, 434 intact) and 17b904801 (give the 109 dead and crippled maps a spawn). This is the period's largest real quality improvement and it is invisible to the headline metric."
+  },
+
+  "skill_effectiveness_changes": {
+    "period_calls": 7,
+    "period_successes": 7,
+    "period_failures": 0,
+    "engine_health": "100% success rate across the period. Fifth consecutive audit period with zero Test-phase failures.",
+    "by_skill": {
+      "ada-breather": {
+        "calls": 3,
+        "succeeded": 3,
+        "failed": 0,
+        "note": "3 breaths, 7 items, 7/7 passed. One (07-24) succeeded by verifying saturation and deliberately changing nothing — the second recorded honest null breath after 07-19."
+      },
+      "stranded_work_rescue": {
+        "calls": 2,
+        "succeeded": 2,
+        "failed": 0,
+        "note": "07-21 landed the array_probe family (registry committed, scenes untracked); 07-23 committed the 6 stranded Chamber_* blurbs written on 07-20. Emerging as the highest-value autonomous lever now that content stages are saturated — it prevents regressions rather than creating advances, so it scores 0.0 delta while doing real work."
+      },
+      "tool_bug_fix": {
+        "calls": 1,
+        "succeeded": 1,
+        "failed": 0,
+        "note": "07-21 fixed the capture_multi_angle.gd lookup-name stamp — every one-scene-many-names artifact (array_probe x4, specimen_plinth x11, bricolage affordances x6) had been capturing as its FALLBACK variant, shipping identical images to gallery/book/artifact-md. One line before add_child fixed the whole family pattern. Highest-leverage single change of the period."
+      },
+      "documentation_writing": {
+        "calls": 0,
+        "succeeded": 0,
+        "failed": 0,
+        "note": "Not called this period — nothing to document; Doc=OK across all 24. Cumulative holds at 71/71 (raw) / 77/77 (including 07-20 batch). Still the most reliable lever, but currently no substrate for it."
+      },
+      "identity_writing": {
+        "calls": 0,
+        "succeeded": 0,
+        "failed": 0,
+        "note": "Deliberately not called. Correct per STOP-building-instruments; the voice metric is placement-scoped and structurally capped."
+      }
+    },
+    "no_skill_below_50_percent": true,
+    "level_3_fired": false,
+    "level_3_note": "Zero Test-phase failures, so the 3-failures-on-one-pattern trigger did not fire. However TWO new proposals are OWED from discoveries rather than failures (see proposals_owed_not_yet_written) — the same discovery-driven route that produced prop-voice-metric-scope on 07-18.",
+    "cumulative_note": "improvement_trajectory.skill_effectiveness_cumulative was last recomputed 2026-05-13 and has not been re-summed since; the per-skill totals in it now lag the raw breath log by roughly 20 breaths. Not a data-integrity problem (the raw log is intact) but the cumulative block should not be quoted as current."
+  },
+
+  "proposals_pending_review": {
+    "total": 12,
+    "all_status": "proposed",
+    "applied_this_period": 0,
+    "new_this_period": ["prop-010"],
+    "list": [
+      {"id": "prop-001", "created": "2026-04-20", "skill": "ada-breather", "gist": "Pre-check candidate voiceless artifacts before selecting garden-identity work", "age_days": 98},
+      {"id": "prop-002", "created": "2026-05-29", "skill": "ada-breather", "gist": "Deferral re-validation step in Read/Evaluate", "age_days": 59},
+      {"id": "prop-003", "created": "2026-05-31", "skill": "ada-breather", "gist": "Wall detection: auto-rotate lever when every spine sequence is at HEAD >= 6", "age_days": 57},
+      {"id": "prop-004", "created": "2026-06-06", "skill": "ada-breather", "gist": "Crash-safe-write rule for breath_log.json / improvement_trajectory.json", "age_days": 51},
+      {"id": "prop-005", "created": "2026-06-11", "skill": "ada-breather", "gist": "Convention-drift cross-check before concluding a HEAD/gap is real", "age_days": 46},
+      {"id": "prop-006", "created": "2026-06-15", "skill": "ada-breather", "gist": "Recent-commit regression re-scan in Read phase", "age_days": 42},
+      {"id": "prop-008", "created": "2026-06-28", "skill": "ada-breather", "gist": "Explicit lever-rotation step when global_avg flat >= 3 breaths", "age_days": 29},
+      {"id": "prop-009", "created": "2026-07-06", "skill": "ada-breather", "gist": "Metric-observability pre-check: don't bank a success on a metric that cannot resolve the edited file", "age_days": 21},
+      {"id": "prop-heatmap-voice-coolability", "created": "2026-07-09", "skill": "heat_map_generator.py + cooling filter", "gist": "Compute voice heat from ENRICHABLE-voiceless only, so voice items can actually cool", "age_days": 18},
+      {"id": "prop-scorer-read-reliability", "created": "2026-07-12", "skill": "sequence_pipeline_scorer.py + Baseline/Harvest", "gist": "Treat a 0.0/null pipeline read as SUSPECT and re-read rather than logging it", "age_days": 15},
+      {"id": "prop-voice-metric-scope", "created": "2026-07-18", "skill": "ada-breather", "gist": "Resolve whether an artifact is on a sequence's OFFICIAL map list before selecting @identity work", "age_days": 9},
+      {"id": "prop-010", "created": "2026-07-23", "skill": "ada-breather", "gist": "Commit what you wrote: an item may only be marked succeeded if its files are git-committed, not merely written to the working tree", "age_days": 4}
+    ],
+    "flag": "TWELVE proposals, zero applied, oldest 98 days. Unchanged in character from last week except that the backlog grew by one and aged by seven. prop-003 (wall detection) and prop-008 (lever rotation) are now directly vindicated by this audit's ceiling proof: the breather has spent 20+ breaths confirming a metric that CANNOT move. prop-010 recurred within 24 hours of being filed (see below). Recommended triage order is now 010, 003, 008, 009 — 010 first because it is actively producing new debt.",
+    "prop_010_recurrence": {
+      "severity": "third occurrence, and the first on the breath system's OWN bookkeeping",
+      "detail": "The 2026-07-24 breath's entire Harvest output is UNCOMMITTED and has sat in the working tree for 3 days. HEAD's breath_log.json ends at 2026-07-23T09:00; HEAD's improvement_trajectory.json reads last_updated 2026-07-23T09:00 / total_breaths 61. The working tree has the 07-24 entry, total_breaths 62, last_updated 2026-07-24T18:55, and a rewritten stall_reason. A clean checkout would erase the 07-24 breath from the record entirely.",
+      "implication": "prop-010 was filed on 07-23 about content files and the very next breath reproduced it on its own log files. This is no longer a proposal about tidiness; the breath system is losing its own audit trail. This audit deliberately did NOT commit these files (out of scope for a report-only task) but they should be committed."
+    },
+    "proposals_owed_not_yet_written": [
+      {
+        "working_id": "prop-stage6-evidence-linkage",
+        "skill": "sequence_pipeline_scorer.py (stage 6) + ada-breather Read phase",
+        "evidence": "Stage 6 matches declared map names as substrings against ada_run/desktop_feedback.md. Real VR feedback exists for 9 sequences (2026-02-12 to 2026-02-20) but 8 of them now score 0% because their walked maps were dropped from the declared cast during subsequent re-casting. randomness scores COMPLETE only because one walked map kept its name. The scorer cannot distinguish 'never walked' from 'walked, then re-cast' from 'walked under a since-renamed name'.",
+        "proposed_change": "(1) Make stage 6 read a durable per-sequence walk ledger keyed by sequence, not by current map-name substring match, so evidence survives re-casting. (2) Have the scorer report the DATE of the newest matching feedback entry alongside the pass, so a 158-day-old pass is visibly stale. (3) In the breather's Read phase, distinguish 'stage 6 unreachable (no feedback at all)' from 'stage 6 has stale/orphaned evidence' — the second is a reportable finding, the first is not.",
+        "why_not_written_here": "This audit is report-only and does not modify skill_evolution_proposals.json. Recommend filing on the next full breath."
+      },
+      {
+        "working_id": "prop-gates-report-persistence",
+        "skill": "run_release_gates.py + ada-breather Baseline phase",
+        "evidence": "run_release_gates.py defaults --json-out to the empty string, so doc/reports/RELEASE_GATES.json is only ever written when a caller explicitly asks. It has not been refreshed since 2026-06-10 (47 days). The 2026-07-20 audit compared a live run against that stale file and concluded gate B had a 'FRESH, uncommitted-to-report regression'; it did not.",
+        "proposed_change": "Have the breather's Baseline phase always pass --json-out doc/reports/RELEASE_GATES.json (and --md-out) so the persisted report tracks reality, OR make the tool default to writing it. Either way, never diff a live run against the persisted file without checking its mtime.",
+        "why_not_written_here": "Same as above."
+      }
+    ]
+  },
+
+  "stall_analysis": {
+    "literal_criterion_triggered": true,
+    "literal_criterion_detail": "global_avg 6.083 (2026-07-20) -> 6.0833 (2026-07-27). No improvement in 7 days, so the scheduled task's stall test fires. This is the second consecutive week it has fired, and the third consecutive weekly audit with a non-positive headline delta (6.0909 -> 6.083 -> 6.0833).",
+    "verdict": "NOT A STALL. The metric is at its arithmetic ceiling for headless work. This is a SATURATED METRIC, and the correct response is to retire it as the headline, not to work harder against it.",
+    "why_the_number_cannot_move": [
+      "Stage 7 is unreachable without stage 6. Stage 6 is a binary: does any declared map name of the sequence appear as a substring in ada_run/desktop_feedback.md (tools/sequence_pipeline_scorer.py:222-238). That file is written only by the in-VR DesktopMapSwitcherOverlay comment writer.",
+      "With 23 sequences pinned at 6 and randomness at 8, (23*6 + 8)/24 = 6.0833 is the exact maximum. No skill, tool, or agent in the project can produce a higher number. Twenty-plus consecutive breaths have now confirmed this.",
+      "The secondary lever (voice coverage) is placement-scoped and structurally capped near 62-64%; the +1pp this week came from human commits, not breaths.",
+      "The heat map is down to 4 items, three of which are self-referential LOD notes about the breath system itself ('garden voice metric', 'pipeline documentation head' — already resolved on 07-20, 'breath-harvest-commits'). Only 'capture' (65 degrees) points at content. The heat map is now largely reporting on the auditor."
+    ],
+    "the_deeper_finding": {
+      "title": "The stage-6 wall is partly an evidence-linkage artifact, and the one COMPLETE sequence is complete by accident of naming",
+      "vr_feedback_file": "ada_run/desktop_feedback.md — 21 entries, 2026-02-12T21:54 to 2026-02-20T13:25. Last VR feedback: 158 days ago.",
+      "sequences_named_in_feedback": ["array_tutorial", "forces", "foundationscrisis", "fractals", "isosurfaces", "lsystems", "primitives", "randomness", "swarmintelligence", "vectors", "unused"],
+      "maps_named_in_feedback": ["Array_Basics", "Fractals_9", "LSystems_Tree_L_Systems", "One_Primitives", "Random_Rotate_Random_XYZ", "VectorForces"],
+      "match_results": {
+        "randomness": "PASSES — Random_Rotate_Random_XYZ is still in the declared cast under that exact name.",
+        "forces": "FAILS — VectorForces folder still exists on disk but is no longer in the declared 30-map cast (now VFM_* / Vectors_Act* / Forces*).",
+        "primitives": "FAILS — One_Primitives folder still exists but the declared cast is now Point_* / Primitives_* / Chamber_Primitives.",
+        "lsystems": "FAILS — LSystems_Tree_L_Systems folder still exists but is not declared.",
+        "array_tutorial": "FAILS — Array_Basics folder still exists but the declared cast is now Tutorial_* / Array_Patterns / Chamber_Arrays.",
+        "fractals": "FAILS — Fractals_9 folder no longer exists at all; the cast is now Fractal_*."
+      },
+      "honest_reading": "The current casts genuinely have not been walked — the sequences were rebuilt around different maps since February, so voiding the old evidence is defensible. But two things follow that were not visible before. (a) randomness's COMPLETE status, the sole non-6 term in the headline mean, rests on ONE 158-day-old comment about ONE map that happened to survive its sequence's re-cast. It is not evidence of a thorough walk. (b) The scorer cannot tell 'never walked' from 'walked, then re-cast', so a project-wide 0% VR column reads as total neglect when it partly records churn. This is the prop-005 family (a depressed reading trusted as structural fact) reaching stage 6.",
+      "consequence_for_this_report": "The headline mean should not be quoted as a measure of project health at all. Its only moving part is a single stale substring match."
+    },
+    "the_small_ask_that_breaks_the_wall": {
+      "cost": "One in-VR comment naming one DECLARED map, per sequence. 23 comments total. The overlay writes them; no code, no docs, no captures.",
+      "effect": "4 sequences (transformation, change, cellularautomata, softbodies — all at 100% stage-7 polish) go COMPLETE=8. The other 19 advance to stage 7. global_avg 6.0833 -> 7.2083.",
+      "delta": 1.125,
+      "context": "That would be the largest single jump in project history — larger than the 2026-04-18 (+1.00) and 2026-07-20 (+1.00) milestones combined-scale. It is also the ONLY way the number moves.",
+      "caveat": "The comment must name a map on the sequence's CURRENT declared list, or the scorer will not see it — exactly the failure mode that voided the February walks. If prop-stage6-evidence-linkage is applied first, this becomes robust to future re-casting."
+    },
+    "counter_evidence_against_declaring_a_stall": "This was the most productive week in project history by commit volume (~200 commits). Real, substantial, verifiable work landed: cabinet grammar family to 22 members with 0 hard/0 advisory violations, the catalyst timed lease placed across all 10 bound sequences, the wizard compose op ladder (doors, spans, lifts, landmarks, hangar walls), artifact-DNA stage 2 opened, the Artist_Readymades gallery, biome SDF tier caps, and a spawn audit that repaired 109 dead/crippled maps. grade_C fell while the corpus grew 7%. Nothing about this project is stalled. One saturated number is flat.",
+    "recommended_metric_change": {
+      "retire": "global_avg pipeline head-sum as the weekly headline. It is denominator-sensitive, capped at 6.0833 for all headless work, and its only variable term is a single 158-day-old substring match.",
+      "adopt": [
+        "(a) Count of sequences at HEAD >= 6 (currently 24/24) — states saturation plainly instead of encoding it in a decimal.",
+        "(b) Gate pass/fail with grade_F and the grade_C trend (currently 4/4 PASS, grade_F 0, grade_C 181 and falling) — this DID move this week and the headline hid it.",
+        "(c) Age of the newest VR feedback entry (currently 158 days) — the actual binding constraint, expressed as a number that gets worse when ignored.",
+        "(d) Uncommitted-breath-output count (currently 1 breath's harvest, 3 days old) — makes prop-010's debt visible weekly."
+      ],
+      "note": "This is the third consecutive weekly report to recommend a metric change and the third to be read against the old one. Suggest updating the scheduled task's stall test itself so it stops firing on a provably capped quantity."
+    }
+  },
+
+  "release_gates": {
+    "overall": "PASS",
+    "enabled": "4/4 passing",
+    "toggles": "doc/reports/RELEASE_GATES_TOGGLES.json (A,B,C,D all true)",
+    "A_sequence_contract": {"pass": true, "missing_declared_maps": 0, "duplicate_entries_within_sequence": 0, "undeclared_map_folders": 1407},
+    "B_artifact_registry_integrity": {"pass": true, "unresolved_scene_files": 0, "missing_scene_path": 0, "unsupported_scene_path": 0, "missing_map_ready": 17, "missing_include_in_map_data": 17},
+    "C_map_validation": {"pass": true, "grade_A": 1684, "grade_B": 183, "grade_C": 181, "grade_F": 0, "max_grade_c": null, "grade_c_blocking": false},
+    "D_lab_progression_continuity": {"pass": true, "lost_count": 0, "changed_count": 12, "total_issues": 39, "ok_superset_pairs": 5},
+    "week_over_week": {
+      "A_undeclared_map_folders": "1278 -> 1407 (+129). Cause identified: untracked research output in the working tree — Trial_antrooms_*, Trial_ants_*, Trial_derive_*, Trial_dla_*, Trial_erosion_*, Trial_eye_*, Trial_flock_*, Probe_Rise_*, Deck*_Dressed, DeckCity_6x5_s8, TemplateLab_Live, SpProbe. These are gate/composition research artifacts from the wizard and gate rounds, not abandoned maps. 2073 folders now exist under commons/maps.",
+      "B_missing_map_ready": "17 -> 17. UNCHANGED all week. Not growing.",
+      "C_grade_A": "1565 -> 1684 (+119)",
+      "C_grade_B": "150 -> 183 (+33)",
+      "C_grade_C": "197 -> 181 (-16) — an absolute IMPROVEMENT while total scored maps rose 1912 -> 2048 (+136).",
+      "C_grade_F": "0 -> 0",
+      "D": "unchanged in every metric"
+    },
+    "gate_b_root_cause_CORRECTION": {
+      "last_week_claim": "The 2026-07-20 report called gate B's 17/17 a 'FRESH, uncommitted-to-report regression', likely from 'the in-flight bricolage artifact build and recent registry reformatting'.",
+      "correction": "Both halves were wrong. (1) It is not fresh: the 17 entries live in registry files whose introducing commits are dated 2026-07-08 (curator.json 2852f817b, jspace.json a4521598d, museum.json ca54467f0, pattern_atlas.json daebb4e0e), i.e. they predate the 07-20 audit. (2) It is not bricolage: none of the 17 is a bricolage artifact. (3) The apparent 0 -> 17 jump was an artifact of comparing a live run against doc/reports/RELEASE_GATES.json, which is a 2026-06-10 snapshot — 47 days old, and older than the registry files themselves.",
+      "the_17_named": [
+        "mode_crown (curator.json)",
+        "mode_dialogue (curator.json)",
+        "mode_witness_wall (curator.json)",
+        "exhibit_podium (exhibits.json)",
+        "exhibit_vitrine (exhibits.json)",
+        "exhibit_furniture (exhibits.json)",
+        "sim_cube (exhibits.json)",
+        "edge_zone_crystal (hazards.json)",
+        "edge_zone_dissolve (hazards.json)",
+        "jspace_zoom_chamber (jspace.json)",
+        "jspace_feature_field (jspace.json)",
+        "jspace_count_plates (jspace.json)",
+        "jspace_ring (jspace.json)",
+        "museum_hall_shell (museum.json)",
+        "pattern_atlas_gallery (pattern_atlas.json)",
+        "mamma_monster_gallery (pattern_atlas.json)",
+        "tutorial_wall (station.json)"
+      ],
+      "fix_shape": "Add has_map_ready / include_in_map_data fields to these 17 entries. Bounded, headless, verifiable by re-running gate B. NOTE the registry is a token-keyed dict — edit surgically, never re-dump (a full re-dump reformats ~15k lines).",
+      "wider_context": "Other artifact-audit metrics not gated: missing_map_sequences_field 125, empty_map_sequences 782, algorithm_without_curation 6, disallowed_scene_prefix 1. None blocking; none tracked week over week. Worth putting on the weekly diff so they cannot drift unobserved."
+    },
+    "standing_concerns": [
+      "undeclared_map_folders 1407 and rising — now measurably driven by uncommitted research trial output, so the human triage question is sharper than last week: are the Trial_* / Probe_* families meant to be committed as maps, gitignored as scratch, or written to the scratchpad instead of commons/maps? The breather cannot decide this.",
+      "grade_C 181 — still non-blocking (max_grade_c null). Falling, which is new and good. If a future release toggles grade-C blocking on, this becomes a 181-item wall.",
+      "13 Trial_eye_* map_data.json files are DELETED in the working tree but the deletion is uncommitted."
+    ]
+  },
+
+  "dry_run_work_plan": {
+    "note": "Produced by the Evaluate phase. NOT executed — this was a dry-run audit. This is what the next full breath should do.",
+    "focus_vector_primary": "Rebuild all primitives maps using Map Studio. FOCUS_VECTOR.json still reads updated 2026-03-28 — now 121 days stale (was 114 last week). The primitives subtitle lever was declared exhausted 2026-07-03 and the primitives voice lever 2026-07-09. The steering file has not steered a breath in over three months; every recent breath auto-selects.",
+    "trajectory": "flat-at-ceiling (see stall_analysis)",
+    "items": [
+      {
+        "rank": 1,
+        "item": "Commit the 2026-07-24 breath's harvest (breath_log.json, improvement_trajectory.json)",
+        "temperature": "n/a (found via HEAD-vs-worktree diff)",
+        "reason": "prop-010's third occurrence, and the first on the breath system's own audit trail. Uncommitted 3 days; a clean checkout erases the 07-24 breath. Cheapest possible fix, prevents record loss.",
+        "dispatch_to": "ada-breather (scoped git add of exactly those two files — never git add -A; the tree carries ada_run/ runtime state and .lock files)",
+        "expected_outcome": "HEAD breath_log ends at 2026-07-24T09:04; trajectory total_breaths 62."
+      },
+      {
+        "rank": 2,
+        "item": "Gate B: add map_ready / include_in_map_data to the 17 named registry entries",
+        "temperature": "n/a (not on heat map — found via gate run)",
+        "reason": "Carried over unactioned from last week's rank 1, now fully root-caused and enumerated. Bounded (17 entries across 7 registry files), headless, verifiable by re-running gate B. The only concrete content gap the heat map is blind to.",
+        "dispatch_to": "ada-breather direct registry edit (surgical, token-keyed dict) + run_release_gates verification",
+        "expected_outcome": "Gate B missing_map_ready and missing_include_in_map_data return to 0/0."
+      },
+      {
+        "rank": 3,
+        "item": "File the two owed proposals (prop-stage6-evidence-linkage, prop-gates-report-persistence)",
+        "temperature": "n/a",
+        "reason": "Both are discovery-driven findings from this audit with concrete evidence and a concrete change. The stage-6 one is the most consequential proposal in the queue: it addresses why the project's single headline metric is unreadable.",
+        "dispatch_to": "ada-breather Evolve phase",
+        "expected_outcome": "Two proposals in skill_evolution_proposals.json for human review."
+      },
+      {
+        "rank": 4,
+        "item": "Refresh FOCUS_VECTOR.json (HUMAN — breather is forbidden from editing it)",
+        "temperature": "n/a",
+        "reason": "121 days stale and pointing at two levers declared exhausted three weeks ago. Second week running as a flagged human item. Given the actual shape of current work, candidate primaries: the composition-canon wizard ladder, the cabinet grammar family, or the look-edge per THE EDGE ruling.",
+        "dispatch_to": "HUMAN",
+        "expected_outcome": "Breaths get a real target instead of auto-selecting."
+      },
+      {
+        "rank": 5,
+        "item": "Triage the 12-proposal backlog — order 010, 003, 008, 009",
+        "temperature": "n/a",
+        "reason": "Oldest 98 days. This audit's ceiling proof independently vindicates prop-003 (wall detection) and prop-008 (lever rotation): the breather has spent 20+ breaths verifying a provably capped number. prop-010 goes first because it recurred within 24 hours of filing and is now costing the system its own log.",
+        "dispatch_to": "HUMAN via /ada-skill-updater",
+        "expected_outcome": "Breather stops confirming a saturated metric by construction rather than by ad-hoc judgement."
+      }
+    ],
+    "cooled_skipped": [
+      {"item": "capture (65 degrees)", "reason": "The only content-pointing heat item. Left for a full breath with a Godot slot — captures must be serialized (one instance, 16s watchdog) and the dr-viewer / map_dna_research.lock may hold the lock. ada_run/map_dna_research.lock is present in the working tree right now."},
+      {"item": "garden voice metric (60 degrees)", "reason": "Self-referential LOD note about the metric, not a content gap. Confirmed uncoolable 07-18 (placement scope) and 07-19. Feeding it manufactures more false heat. prop-heatmap-voice-coolability open since 07-09."},
+      {"item": "pipeline documentation head (60 degrees)", "reason": "STALE — resolved by the 07-20 breath (6 Chamber blurbs) and confirmed held by the 07-24 and today's reads (Doc=OK across all 24). Has now survived two heat_map regenerations without cooling, which is itself evidence for prop-heatmap-voice-coolability."},
+      {"item": "breath-harvest-commits (60 degrees)", "reason": "A prior breath's own LOD discovery note. Interestingly, the underlying issue is REAL and is this plan's rank 1 — but the heat item is a note about it, not the gap itself."},
+      {"item": "stage-6 vr_testing for 23 sequences", "reason": "Human gate. Provably unreachable headlessly (see arithmetic_ceiling_proof). Not a failure to route around."},
+      {"item": "undeclared_map_folders (1407)", "reason": "Requires a human decision about whether Trial_* / Probe_* research output belongs in commons/maps at all."},
+      {"item": "voice coverage / @identity enrichment", "reason": "Declined per the 2026-07-18 STOP-building-instruments correction. The +1pp this week came from human work; the breather correctly stayed out."}
+    ]
+  },
+
+  "working_tree_audit": {
+    "note": "Run because prop-006 and prop-010 both concern the gap between the working tree and committed HEAD, and because the scorer reads the working tree.",
+    "stranded_real_work": [
+      "doc/reports/breath_log.json (+42 lines) and doc/reports/improvement_trajectory.json — the 2026-07-24 breath's harvest, uncommitted 3 days. See proposals_pending_review.prop_010_recurrence."
+    ],
+    "cosmetic_only_verified_safe": [
+      "commons/maps/curriculum_spine.json — 642-line diff, but json.loads comparison against HEAD confirms it is SEMANTICALLY IDENTICAL (sequence blocks reordered/reindented). Not a spine change.",
+      "commons/maps/sequences/noise.json — 236-line diff, SEMANTICALLY IDENTICAL (4-space indentation replaced by tabs). Almost certainly a web-editor save. Not a sequence change."
+    ],
+    "cosmetic_note": "Both were verified by parsing rather than by reading the diff. A 642-line diff on curriculum_spine.json is exactly the shape that looks like an emergency and is not one — worth remembering before a future breath panics or reverts it.",
+    "auto_telemetry_churn": "ada_run/* state files, eye_shot.md gaze_ride field notes, primitives map_data.json score/ride re-scores from the map-dna research loop, doc/reports/sweep_*.png regenerations, tools/__pycache__. Committing this would be noise. Consistent with the 07-24 breath's finding.",
+    "uncommitted_deletions": "13 commons/maps/Trial_eye_*/map_data.json deleted in the working tree, uncommitted. Research trial cleanup; harmless but should be committed or restored rather than left pending.",
+    "untracked_research_output": "~30 untracked map folders (Trial_antrooms_*, Trial_ants_*, Trial_derive_*, Trial_dla_*, Trial_erosion_*, Trial_eye_*, Trial_flock_*, Probe_Rise_*, Deck*_Dressed, DeckCity_6x5_s8, TemplateLab_Live, SpProbe) plus commons/data/wizard_recipes/Trial_gate7_33.json and Trial_service.json. This is the mechanical cause of undeclared_map_folders 1278 -> 1407."
+  },
+
+  "discoveries_this_period": [
+    "THE HEADLINE METRIC IS AT ITS ARITHMETIC CEILING, NOT ON A PLATEAU. Stage 7 requires stage 6; stage 6 is a human-written substring in ada_run/desktop_feedback.md; so (23*6 + 8)/24 = 6.0833 is the maximum any amount of headless work can produce. A weekly stall test on this quantity can only ever fire from here on. (2026-07-27)",
+    "STAGE 6 IS EVIDENCE-LINKAGE, NOT WALK-HISTORY. Real VR feedback exists for 9 sequences (2026-02-12..2026-02-20) but only randomness scores a pass, because it alone kept a walked map in its declared cast. VectorForces, One_Primitives, LSystems_Tree_L_Systems and Array_Basics still exist on disk but were dropped from their sequences during re-casting; Fractals_9 is gone. The scorer cannot distinguish 'never walked' from 'walked, then re-cast'. (2026-07-27)",
+    "THE ONE COMPLETE SEQUENCE IS COMPLETE BY ACCIDENT OF NAMING. randomness scores 8 on the strength of a single 158-day-old comment about Random_Rotate_Random_XYZ. It is the only non-6 term in the headline mean. (2026-07-27)",
+    "THE VR ASK IS 23 COMMENTS, NOT 23 SESSIONS. One line naming one DECLARED map per sequence moves global_avg 6.0833 -> 7.2083 (+1.125), the largest jump in project history. The comment must name a currently-declared map or the scorer will not see it. (2026-07-27)",
+    "run_release_gates.py NEVER REFRESHES doc/reports/RELEASE_GATES.json — --json-out defaults to empty. The persisted report is a 2026-06-10 snapshot. Last week's 'fresh gate-B regression' was an artifact of diffing a live run against a 47-day-old file; the 17 flagged artifacts date to 2026-07-08. Always check mtime before treating the persisted gates report as a baseline. (2026-07-27)",
+    "prop-010 RECURRED WITHIN 24 HOURS OF BEING FILED, on the breath system's own log files. The 07-24 harvest is uncommitted 3 days on. A proposal about losing work is now losing the record of itself. (2026-07-27)",
+    "A 642-LINE DIFF CAN BE COSMETIC. curriculum_spine.json and sequences/noise.json both show large diffs that json.loads proves semantically identical (reordering; spaces-to-tabs). Verify truth-source diffs by PARSING, not by reading the diff. (2026-07-27)",
+    "GRADE_C FELL WHILE THE CORPUS GREW. 197 -> 181 against +136 maps, from the human spawn audit (543 sp-only maps measured, 109 dead/crippled repaired). Real quality movement that the headline metric cannot express — direct support for changing the headline. (2026-07-27)",
+    "CAPTURE HARNESS FAMILY BUG (from breath 07-21, worth restating): capture_multi_angle.gd --mode=artifact did not stamp artifact_lookup_name, so every one-scene-many-names artifact captured as its FALLBACK variant — four probes shipping four identical images to gallery/book/artifact-md. Prior sessions worked around it with per-family capture scripts instead of fixing the pipeline everything downstream reads."
+  ],
+
+  "anomaly_watch": {
+    "scorer_garbage_reads": {
+      "occurrences": 4,
+      "dates": ["2026-07-03 (0.0)", "2026-07-06 (null)", "2026-07-12 (0.0)", "2026-07-18 (0.0)"],
+      "status": "NO RECURRENCE this period. 07-19, 07-20, 07-21, 07-23, 07-24 and today's read were all clean. Three clean weeks of reads.",
+      "risk": "prop-scorer-read-reliability remains open and remains worth applying: the head-sum is now 6.0833 rather than the long-memorable 6.0909, so a garbage read is harder to catch by eye. Lower urgency than last week given six consecutive clean reads."
+    },
+    "release_gates_json_staleness": {
+      "status": "RESOLVED — root cause found. run_release_gates.py:334 defines --json-out with default=\"\", and line 399 writes the file only if that argument is non-empty. The standard invocation in the breather's Baseline phase and in this scheduled task passes neither --json-out nor --md-out, so the persisted report has never been refreshed by a breath. Its mtime is 2026-06-10T23:01.",
+      "recommendation": "See prop-gates-report-persistence in proposals_owed_not_yet_written. Until applied, doc/reports/RELEASE_GATES.json must be treated as a June artifact, not a baseline."
+    },
+    "breath_cadence_gap": {
+      "detail": "No breath logged 2026-07-25, 07-26, or 07-27, across the highest-commit-volume 3 days in project history. The previous gap (07-13..07-17) was also unexplained.",
+      "recommendation": "Check whether the daily morning ada-breather scheduled task is still enabled and firing. A weekly audit that reports on breaths cannot detect its own absence of input except by this kind of gap."
+    },
+    "cumulative_skill_block_staleness": {
+      "detail": "improvement_trajectory.skill_effectiveness_cumulative carries _recomputed_from_raw_log_on 2026-05-13 and has not been re-summed across the ~20 breaths since.",
+      "recommendation": "Low priority — the raw breath log is intact, so this is recoverable at any time. But do not quote the cumulative block as current."
+    }
+  },
+
+  "summary_for_human": {
+    "is_the_project_healthy": "Yes, emphatically. All 4 release gates PASS, grade_F 0, grade_C actually FELL 197 -> 181 while the map corpus grew 7%, no sequence regressed, the Chamber_* documentation rescue holds across all 24, and the breath engine ran 7/7 clean. This was the highest-volume week of real work in the project's history.",
+    "did_it_improve": "Yes, substantially — but not in the number this audit is asked to report. The headline mean is flat at 6.0833 because it is at its ceiling. The real improvements were the cabinet family reaching 22 clean members, the catalyst lease landing across all 10 bound sequences, the wizard composition ladder, artifact-DNA stage 2 opening, and 109 broken maps getting a spawn.",
+    "is_it_stalled": "No. The stall test fired, and the honest answer is that the test is measuring a quantity that cannot move. (23*6 + 8)/24 = 6.0833 is the arithmetic maximum for headless work; the metric is finished, not stuck. This is the third consecutive audit to reach this conclusion — the test itself should now change.",
+    "the_one_thing_that_would_move_the_number": "Twenty-three in-VR comments. One line each, naming one CURRENTLY DECLARED map per sequence, typed into the DesktopMapSwitcherOverlay. That takes global_avg 6.0833 -> 7.2083 (+1.125) — the largest jump in project history. The last VR feedback in the file is dated 2026-02-20, 158 days ago. Note the trap: the February walks were real but are now invisible because their maps were dropped from the declared casts during re-casting, so a comment on a since-renamed map buys nothing.",
+    "three_things_that_need_you": [
+      "FOCUS_VECTOR.json is 121 days stale and points at two levers declared exhausted three weeks ago. Second week flagged. Candidates that match your actual work: the composition-canon wizard ladder, the cabinet grammar family, or the look-edge per THE EDGE ruling.",
+      "12 skill-evolution proposals queued unreviewed, oldest 98 days. Start with prop-010 — it recurred within a day of being filed and the breath system is now losing its own log. Then 003 and 008, which this audit's ceiling proof independently vindicates.",
+      "1407 undeclared map folders, up 129 this week, and the cause is now identified: ~30 untracked Trial_* / Probe_* / Deck* research folders in commons/maps. The decision the breather cannot make is whether gate/wizard research output belongs in commons/maps, in .gitignore, or in the scratchpad."
+    ],
+    "one_thing_a_breath_should_do_next": "Commit the 2026-07-24 harvest (2 files, uncommitted 3 days) and close gate B's 17 named registry entries. Both are bounded, headless, and verifiable — and the first one stops the breath system from losing its own audit trail."
+  }
+}
