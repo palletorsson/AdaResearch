@@ -1,0 +1,193 @@
+{
+ "_note": "Stage-2 DNA promotion of postfoundationscrisis, the spine-terminal sequence. Twelve artifacts, thirteen axes, authored by ONE designer so the vocabulary has one voice - the parallel-designers shape is what made `rig` a token name on one artifact and a value name on another. Kept because the reasoning about words KILLED is the part that cannot be recovered from the code.",
+ "generated": "2026-07-28",
+ "sequence": "postfoundationscrisis",
+ "vocabulary_notes": "THIRTEEN AXES FOR TWELVE ARTIFACTS. One each; two only on edge_as_ground_capstone, the environment-sized spine terminal, which genuinely holds two separable questions (what stands on the rim, what stands at the middle). Every other artifact got the single knob its own header argues about.\n\nCOLLISIONS CHECKED AGAINST. I enumerated the 33 axis names live in commons/artifacts/registry/*.json (axis_index, bay, body, channel, coherence, cols, count, custody, defaults_applied, duty, enclosure, face_inward, guard, house, live_props, mark, max_bands, mode, perspective_blend, poor_samples, presence, preview_hours, removed, reserve, reveal, statute, stock, subject, support, surface, tone, upkeep, voice) plus both shared ladders. None of my thirteen (sacrifice, reception, rim, assertion, adoption, exclusion, contradiction, provenance, merge, authorship, plan, standpoint, gathering) appears there, and none appears as a VALUE anywhere either — that is the `rig` failure mode and it is the thing I checked twice.\n\nWORDS I DREW AND THEN KILLED, and why:\n- `uptake` (ethical_design_clipboard) killed for `adoption`. `upkeep` is already an axis on station_pillar and station_crates. One letter apart, both about maintenance-adjacent commitment — that is the same class of trap as rig-at-two-levels, just spelled quieter.\n- `recall` (capstone rim) killed for `rim`. Three letters from `reveal`, an existing axis on stock_stratum, and both would mean roughly \"how much of the past is shown\".\n- `standing` (citation_graph_node) killed for `reception`. It would have put `support:stand`, `standing:contested` and `standpoint:cone` in one grammar — three words on the same stem at three different levels. `standpoint` survives because it is feminist epistemology's own term and situated_sensor literally cites it; `standing` was the expendable one.\n- `ground` (capstone centre) killed for `assertion`. The grid already owns `auto_ground` as a placement config key; an axis called `ground` would collide with the engine, not just the vocabulary.\n- `holding` (florensky) killed for `contradiction`. `house` is an existing axis on exhibit_podium and exhibit_furniture, and hold/house/housing is the retired family this grammar just finished cleaning up.\n- Value `band` (excluded_class_visualizer) killed for `slab`, because `max_bands` is an axis on stock_stratum.\n- Value `wall` (wiki_fragment_station, fragments raised into a standing screen) killed and the variant cut entirely. science_screen explicitly RETIRED `wall` from the grammar (it named WHERE not WHAT, and collided with layers.walls). Reintroducing a retired spelling as a value would resurrect it as a live word.\n- Value `canopy` (capstone assertion) killed for `shards`, because `gantry` in the shared `support` ladder already means \"an open structure OVER it, load from above\". A canopy is a gantry wearing a different noun.\n- Value `none` (cap_theorem_walk) killed for `whole`. `none` is a live value in both `support` and `guard`; even though the meaning would have been consistent, `whole` says more — all three lit AND tied by beams into the closed circuit CAP proves impossible.\n\nWORDS REUSED DELIBERATELY, same level, same meaning:\n- `triptych` on florensky's `contradiction` is science_screen's `surface:triptych` — three panels, hinged or in a row. Same thing, same level; two spellings would have been the mistake.\n- `fork` appears as a value on both merge_conflict_visualizer (`merge`) and peer_edit_ledger (`authorship`), meaning a split that never rejoins. Same spelling on purpose: I nearly wrote `forked` on the ledger, which is how a grammar drifts.\n- `many` appears as a value on both peer_edit_ledger (`authorship`) and situated_sensor (`standpoint`), meaning more than one of the thing that was singular. Consistent.\n\nNO `support`, NO `guard`, ON ANY OF THE TWELVE — a deliberate refusal, recorded here so it is not read as an oversight. Nine of the twelve do have housing (a stand, a tripod, a desk, two pedestals, a pillar), so `support` was available and would have declared cleanly. I declined because each artifact gets one shot at variation and spending it on furniture would leave twelve critical arguments still pinned at exactly one claim apiece — which is the condition bias_from_inside was promoted to escape. Where housing is the genuinely interesting second question, it is room_shape_demonstrator: its two pedestals frame the comparison as museum specimens, and `support:cabinet|pylon|stand|none` would let a map put the two floor plans on the floor with the player instead of under glass. That is the right next promotion on this sequence and it should reuse `support` verbatim, not invent a word.\n\nTIME-DOMAIN AXES REFUSED. Every one of these twelve animates in _process, and four of them (cap_theorem_walk's cycle_speed, citation_graph_node's rotation_speed, florensky's rotation_speed, edge_as_ground_capstone's rotation_speed) already export a speed that is begging to be swept. It would sweep to a sheet of identical stills. cap_theorem_walk was the sharp case: its argument IS the rotation, so the honest axis had to convert a temporal sacrifice into an amputated pillar, which is why `consistency`/`availability`/`partition` also stop the rotation rather than merely biasing it.\n\nVISIBILITY DISCIPLINE. Two axes were rewritten after failing the room-distance test. locatable_knowledge_station's first draft varied whether a font-14 source tag was drawn — a three-line text delta, invisible past two metres and therefore worthless; it became rods to floor anchors, floating books and pins on a map plate. citation_graph_node's `dogma` originally only removed the red satellites; it now also builds a second concentric green ring, so the variant has mass of its own rather than being defined by an absence.",
+ "axes": {
+  "cap_theorem_walk": {
+   "sacrifice": {
+    "values": [
+     "cycle",
+     "consistency",
+     "availability",
+     "partition",
+     "whole"
+    ],
+    "default": "cycle",
+    "meaning": "which of the three the system gave up — or whether it admits giving up anything"
+   }
+  },
+  "citation_graph_node": {
+   "reception": {
+    "values": [
+     "cited",
+     "contested",
+     "overturned",
+     "dogma",
+     "orphan"
+    ],
+    "default": "cited",
+    "meaning": "what the surrounding network does to the claim — and whether there is a network at all"
+   }
+  },
+  "edge_as_ground_capstone": {
+   "rim": {
+    "values": [
+     "closed",
+     "gapped",
+     "arc",
+     "crowded"
+    ],
+    "default": "closed",
+    "meaning": "whether the ring of recalled stations closes, and how near it presses"
+   },
+   "assertion": {
+    "values": [
+     "disc",
+     "void",
+     "cairn",
+     "shards"
+    ],
+    "default": "disc",
+    "meaning": "what form the spine's final sentence takes at the middle of the platform"
+   }
+  },
+  "ethical_design_clipboard": {
+   "adoption": {
+    "values": [
+     "paper",
+     "posted",
+     "built",
+     "dropped"
+    ],
+    "default": "paper",
+    "meaning": "how far the three principles have travelled from a written list to the room itself"
+   }
+  },
+  "excluded_class_visualizer": {
+   "exclusion": {
+    "values": [
+     "erased",
+     "fringe",
+     "slab",
+     "majority"
+    ],
+    "default": "fringe",
+    "meaning": "how much of the domain the model cannot decide, and whether that region is shown at all"
+   }
+  },
+  "florensky_in_production": {
+   "contradiction": {
+    "values": [
+     "triptych",
+     "folded",
+     "superposed",
+     "collapsed"
+    ],
+    "default": "triptych",
+    "meaning": "whether the two positions are held apart, held together in one volume, or resolved away"
+   }
+  },
+  "locatable_knowledge_station": {
+   "provenance": {
+    "values": [
+     "tagged",
+     "ghost",
+     "chained",
+     "mapped"
+    ],
+    "default": "tagged",
+    "meaning": "how visibly each claim carries the place it came from — or whether it has been cut loose"
+   }
+  },
+  "merge_conflict_visualizer": {
+   "merge": {
+    "values": [
+     "junction",
+     "overlap",
+     "resolved",
+     "fork"
+    ],
+    "default": "junction",
+    "meaning": "what the two branches actually do to each other where they meet"
+   }
+  },
+  "peer_edit_ledger": {
+   "authorship": {
+    "values": [
+     "many",
+     "sole",
+     "squashed",
+     "fork"
+    ],
+    "default": "many",
+    "meaning": "how many hands are in the stack, and whether their layers survived"
+   }
+  },
+  "room_shape_demonstrator": {
+   "plan": {
+    "values": [
+     "pair",
+     "head",
+     "circle",
+     "panopticon",
+     "vacant"
+    ],
+    "default": "pair",
+    "meaning": "which seating politics the model presents, and whether it is offered as a comparison or as the way things are"
+   }
+  },
+  "situated_sensor": {
+   "standpoint": {
+    "values": [
+     "located",
+     "nowhere",
+     "cone",
+     "many"
+    ],
+    "default": "located",
+    "meaning": "where the knowing happens from, and whether the limits of that position are shown"
+   }
+  },
+  "wiki_fragment_station": {
+   "gathering": {
+    "values": [
+     "drift",
+     "bound",
+     "swarm",
+     "scattered"
+    ],
+    "default": "drift",
+    "meaning": "whether the partial claims gather, totalize, multiply, or fall off the table"
+   }
+  }
+ },
+ "was": {
+  "cap_theorem_walk": "apply_grid_config() is an empty `pass`, so every placement shows the same anonymous rotation and no map can ever name which of the three the system it stands in actually gave up.",
+  "citation_graph_node": "apply_grid_config() is an empty `pass` and support_count/refute_count are pinned at 7 and 4, so every placement argues the same mildly-supported claim and the artifact's thesis (truth lives in the relations) is never tested against a claim whose relations are hostile, unanimous, or absent.",
+  "edge_as_ground_capstone": "apply_grid_config() reads only `ring_radius`, so the single thing a map can vary about the spine's terminal artifact is how far away the seven stations sit — the rim always closes and the sentence is always cast in one whole plate.",
+  "ethical_design_clipboard": "The header promises that toggling the three moves 'shifts the room around the clipboard — walls rearrange, lighting softens, a hidden door appears', and the code builds a stand, a board and three static tick lines with apply_grid_config() an empty `pass`; the room has never once moved.",
+  "excluded_class_visualizer": "apply_grid_config() is an empty `pass` and excluded_count is pinned at 10 against 60 classified points, so the artifact that argues bias is constitutive can only ever render it as a tidy 14% anomaly hugging a razor-thin line.",
+  "florensky_in_production": "apply_grid_config() is an empty `pass`, so the contradiction is always laid out as three separate panels in a row — the artifact explains holding-without-collapse rather than performing it, and the collapse it argues against is built nowhere.",
+  "locatable_knowledge_station": "The header says the claim and its location 'reveal together' as the player approaches, and the code builds both labels permanently on with apply_grid_config() an empty `pass`; the placeless fact the artifact calls 'the encyclopedia's own ghost' is described in a comment and rendered nowhere.",
+  "merge_conflict_visualizer": "The header claims 'two overlapping geometries occupy the same volume' and the code builds two 0.2 m posts standing 0.6 m apart that never touch, with apply_grid_config() an empty `pass` — the shared volume the artifact is named for has never been rendered.",
+  "peer_edit_ledger": "apply_grid_config() is an empty `pass` and layer_count is pinned at 24 over a five-colour palette, so every placement shows the same evenly multi-authored stack — a commons that is always healthy, whose failure modes (one author, a squashed history, an unmerged split) are built nowhere.",
+  "room_shape_demonstrator": "The header promises 'toggle indicators show which arrangement each implies' and there are no toggles; apply_grid_config() is an empty `pass`, so the artifact can only ever present its pre-settled two-up comparison, red authority on the left and green circle on the right.",
+  "situated_sensor": "apply_grid_config() is an empty `pass`, so the only standpoint this artifact ever builds is the one tripod, and the 'view from nowhere' it exists to deny — plus the field of view that makes a standpoint a standpoint — live only in the header comment and a font-18 coordinate readout.",
+  "wiki_fragment_station": "The header says the fragments 'suggest themselves into a larger emergent text without ever fully resolving' and the code orbits 14 plates under a fixed halo with apply_grid_config() an empty `pass`; neither the resolved book the artifact refuses nor the neglected commons is built anywhere."
+ },
+ "rationale": {
+  "cap_theorem_walk": "The artifact's whole content is a proven limit and the choice it forces, but the choice is delegated to a timer, which means the still shows an arbitrary phase and the sacrifice reads as decoration. Making the sacrifice settable lets a map about a real distributed system point at its own trade — and `whole` lets a map render the fantasy CAP disproves, which is the sequence's question (what do we build knowing the limit?) asked from the wrong side. Physical amputation, not dimming: a stump is legible at room distance where an emission delta is not.",
+  "citation_graph_node": "The satellite census IS the argument — a 7:4 ring quietly stages consensus-with-healthy-dissent as the natural shape of knowledge. `orphan` is the value that earns the axis: it builds the lone sphere the artifact claims is impossible, so a map can put the refuted thing next to the thing that refutes it. Counts and orbit radii are the most room-legible knob this object owns; nothing here needs a colour delta to read.",
+  "edge_as_ground_capstone": "This is the only environment-sized object of the twelve and it genuinely holds two independent questions: what the rim recalls, and what stands at the middle. A capstone whose sequence truth is 'knowing the limits of formalization' currently renders a perfectly closed seven-fold circle around an unbroken plate — the most complete thing in the project sits at the end of the argument against completeness. `gapped` and `shards` let a map say the honest version; `closed`/`disc` keeps every shipped placement identical.",
+  "ethical_design_clipboard": "This is the exemplar shape exactly: the thing the artifact exists to deliver appears in no capture. An artifact whose argument is 'ethics is not a checkbox after the fact' currently ships as three checkboxes and nothing else, which quietly proves the opposite. `built` is the promised room finally standing; `dropped` is the same three principles put down. The three floor members are named one-to-one against the three lines already in the code, so nothing is invented at build time.",
+  "excluded_class_visualizer": "Severity of the exclusion is the one number this object is entirely about, and it is the one number a map cannot touch. An ordered ladder — none, sliver, slab, flood — lets a map state the scope of a specific model's outside instead of always showing the polite case, and `erased` renders the published figure that omits the excluded class, which is the artifact's actual quarry. Every rung changes sphere count and domain occupancy, so the difference survives at walking distance.",
+  "florensky_in_production": "A row of three labelled panels is a diagram of paraconsistency, not an instance of it: 'is', 'is/not' and 'not' each get their own tidy frame. `superposed` puts all three positions in one volume so the still cannot separate them, and `collapsed` builds the resolution the artifact refuses, which is what makes the refusal legible. Panel count and sphere nesting are silhouette-level changes; `triptych` is reused verbatim from science_screen's `surface` vocabulary, same level, same meaning.",
+  "locatable_knowledge_station": "The source tag is currently a font-14 orange line — the artifact's entire thesis carried by text too small to read from across the room. Every value here converts provenance into mass: a floating untethered book, a rod running to a marked floor anchor, a pin standing on a mapped cell. That makes the claim's address a thing you can see the shape of rather than a caption, and `ghost` finally builds the counter-case the comment names.",
+  "merge_conflict_visualizer": "The strongest promotion in the set, because the code contradicts its own comment: contradiction-held-under-load is currently two separate posts and a floating ball between them, which is a picture of a gap, not of a conflict. `overlap` builds the interpenetration the header promises; `resolved` builds what merging usually means, so the artifact can stand next to the thing it refuses. Lean angles of 14 and 18 degrees move the tops by nearly a metre — decisive at room distance where a nudge would not be.",
+  "peer_edit_ledger": "The stack IS the claim, and right now it makes exactly one claim: many hands, all preserved, evenly. `squashed` renders history compaction — the ordinary thing that destroys the property this artifact celebrates — as two thirds of the object going from banded to an unreadable slab. `sole` and `fork` change silhouette as well as colour field (jitter removed; a Y), so none of them rely on a hue delta to survive a still. `fork` is spelled exactly as on merge_conflict_visualizer, same meaning.",
+  "room_shape_demonstrator": "A permanent side-by-side with the good option colour-coded green makes the moral argument for the viewer before they look. Letting a map show ONE plan at 1.5x scale forces the plan to be inhabited rather than compared; `panopticon` adds the arrangement the pair conspicuously omits; `vacant` renders the neutral floor plan whose neutrality is the exact fiction the artifact attacks. Pedestal count, table shape, chair count and chair facing all change together, so no two values can read as the same tile.",
+  "situated_sensor": "The artifact reports its position honestly but never shows what having a position COSTS. `cone` makes the seen region and its outside one solid object, which is the whole content of situated knowledge; `nowhere` builds the unlocated instrument as the visible absurdity it is; `many` puts three located knowers in a room with nothing reconciling them. Reusing standpoint theory's own word keeps the vocabulary honest to what the artifact cites.",
+  "wiki_fragment_station": "Fourteen fragments and one halo stage the commons at exactly one scale and exactly one state of health. `bound` builds the totalized encyclopedia — the noun the artifact insists is a verb — so a map can put the refusal beside the thing refused; `swarm` and `scattered` set the scope of the commons, which is the sequence's live question about what gets built after formalization fails. Fragment count and where they lie (tabletop, volume, floor) are the room-distance reads; the halo change rides along rather than carrying it."
+ }
+}

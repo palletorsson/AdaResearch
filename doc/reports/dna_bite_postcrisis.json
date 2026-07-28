@@ -1,0 +1,161 @@
+{
+ "_note": "Per-axis bite: mean pixel change between variants differing in that axis alone. An axis whose renders are identical is decoration.",
+ "gallery": "postcrisis-dna",
+ "thresholds": {
+  "inert_focus": 0.03,
+  "weak_focus": 0.12,
+  "frame_local_ceiling": 0.02
+ },
+ "axes": [
+  {
+   "artifact": "edge_as_ground_capstone",
+   "axis": "assertion",
+   "frame": 0.0125,
+   "focus": 0.11797,
+   "verdict": "WEAK",
+   "pairs": 24
+  },
+  {
+   "artifact": "edge_as_ground_capstone",
+   "axis": "rim",
+   "frame": 0.01763,
+   "focus": 0.21333,
+   "verdict": "local",
+   "pairs": 24
+  },
+  {
+   "artifact": "cap_theorem_walk",
+   "axis": "sacrifice",
+   "frame": 0.03364,
+   "focus": 0.25951,
+   "verdict": "bites",
+   "pairs": 10
+  },
+  {
+   "artifact": "citation_graph_node",
+   "axis": "reception",
+   "frame": 0.03504,
+   "focus": 0.21763,
+   "verdict": "bites",
+   "pairs": 10
+  },
+  {
+   "artifact": "room_shape_demonstrator",
+   "axis": "plan",
+   "frame": 0.03169,
+   "focus": 0.18615,
+   "verdict": "bites",
+   "pairs": 10
+  },
+  {
+   "artifact": "situated_sensor",
+   "axis": "standpoint",
+   "frame": 0.03801,
+   "focus": 0.22361,
+   "verdict": "bites",
+   "pairs": 6
+  },
+  {
+   "artifact": "peer_edit_ledger",
+   "axis": "authorship",
+   "frame": 0.04593,
+   "focus": 0.36205,
+   "verdict": "bites",
+   "pairs": 6
+  },
+  {
+   "artifact": "excluded_class_visualizer",
+   "axis": "exclusion",
+   "frame": 0.03495,
+   "focus": 0.18424,
+   "verdict": "bites",
+   "pairs": 6
+  },
+  {
+   "artifact": "locatable_knowledge_station",
+   "axis": "provenance",
+   "frame": 0.0375,
+   "focus": 0.20285,
+   "verdict": "bites",
+   "pairs": 6
+  },
+  {
+   "artifact": "merge_conflict_visualizer",
+   "axis": "merge",
+   "frame": 0.04313,
+   "focus": 0.26833,
+   "verdict": "bites",
+   "pairs": 6
+  },
+  {
+   "artifact": "florensky_in_production",
+   "axis": "contradiction",
+   "frame": 0.05465,
+   "focus": 0.35745,
+   "verdict": "bites",
+   "pairs": 6
+  },
+  {
+   "artifact": "wiki_fragment_station",
+   "axis": "gathering",
+   "frame": 0.03615,
+   "focus": 0.19643,
+   "verdict": "bites",
+   "pairs": 6
+  },
+  {
+   "artifact": "ethical_design_clipboard",
+   "axis": "adoption",
+   "frame": 0.0476,
+   "focus": 0.35058,
+   "verdict": "bites",
+   "pairs": 6
+  }
+ ],
+ "recheck_on_crop": {
+  "_note": "THE VERDICT IS FRAME-RELATIVE, AND THAT IS A FACT ABOUT THE INSTRUMENT. capture_config_sweep.gd auto-frames the camera on the subtree AABB with a fixed PAD, so an environment-sized artifact is shot from far enough back that most of the frame is empty background. edge_as_ground_capstone is a 3.2 m ring of seven stations; its centre object is a few percent of the image. Both of its axes were therefore scored against a picture that is mostly floor. Re-running the critic's own diff (identical method: greyscale, 160x160, frame = mean, focus = mean of the hottest 5%) on the same PNGs cropped to the artifact reproduces the published numbers exactly at full frame and moves both axes into BITES when the empty margin is removed. Neither axis was redesigned; only the crop changed. This is the same disease this loop keeps finding one level up - an instrument reporting a fact about itself as a fact about the thing it measures.",
+  "crop_box_px": [
+   200,
+   250,
+   560,
+   500
+  ],
+  "source_px": [
+   760,
+   760
+  ],
+  "axes": [
+   {
+    "artifact": "edge_as_ground_capstone",
+    "axis": "assertion",
+    "full_frame": {
+     "frame": 0.0125,
+     "focus": 0.11797,
+     "verdict": "WEAK"
+    },
+    "cropped": {
+     "frame": 0.048,
+     "focus": 0.3995,
+     "verdict": "bites"
+    },
+    "pairs": 24
+   },
+   {
+    "artifact": "edge_as_ground_capstone",
+    "axis": "rim",
+    "full_frame": {
+     "frame": 0.01763,
+     "focus": 0.21333,
+     "verdict": "local"
+    },
+    "cropped": {
+     "frame": 0.082,
+     "focus": 0.4459,
+     "verdict": "bites"
+    },
+    "pairs": 24
+   }
+  ],
+  "conclusion": "13 of 13 axes bite once the capstone is measured at the scale it is built at. 0 inert."
+ }
+}
