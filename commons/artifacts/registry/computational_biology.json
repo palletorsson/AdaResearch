@@ -1,898 +1,904 @@
 {
-	"registry_info": {
-		"name": "computational_biology",
-		"description": "Computational biology artifacts \u2014 limb growth, morphogenesis, protein folding, and radiolarian skeletons. Algorithms that model how living systems build themselves.",
-		"category": "biology",
-		"theoretical_grounding": "Morphogenesis (Turing), developmental biology, Monte Carlo methods in biochemistry, radiolarian geometry, procedural growth"
-	},
-	"artifacts": {
-		"growslimbs": {
-			"lookup_name": "growslimbs",
-			"scene": "res://algorithms/computationalbiology/growslimbs/growslimbs.tscn",
-			"name": "Growing Limbs",
-			"description": "Procedural limb growth simulation \u2014 branching structures emerge from growth rules, mimicking how organisms develop appendages through iterative cell division and differentiation.",
-			"category": "biology",
-			"complexity": "intermediate",
-			"tags": [
-				"growth",
-				"limb",
-				"branching",
-				"morphogenesis",
-				"biology",
-				"procedural"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"dev_themes": [
-				"biology",
-				"simulation"
-			],
-			"geometry_spec": {
-				"mesh_type": "parametric_surface",
-				"topology": "manifold_closed",
-				"construction": {
-					"method": "uv_grid_triangulation",
-					"primitives": [
-						"sphere"
-					],
-					"operations": [
-						"compute_vertices",
-						"generate_triangles",
-						"compute_normals"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "pbr",
-					"key_properties": [
-						"metallic",
-						"transparency"
-					]
-				},
-				"animation": {
-					"type": "vertex",
-					"driven_by": "per_frame_rebuild",
-					"affects": [
-						"vertex_positions"
-					]
-				},
-				"instance_strategy": "array",
-				"vertex_estimate": "~64"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 4,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [],
-				"preferred_zone": "any",
-				"measured_footprint_cells": 4,
-				"footprint_source": "measured"
-			},
-			"measurements": {
-				"aabb_size": [
-					3.03,
-					2.12,
-					0.42
-				],
-				"aabb_center": [
-					-0.01,
-					-1.02,
-					0.08
-				],
-				"grid_cells": [
-					4.0,
-					1.0
-				],
-				"max_dimension_m": 3.03,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
-			},
-			"footprint_measured": [
-				4.0,
-				1,
-				1.0
-			],
-			"spatial_profile": {
-				"dir_group": "panel",
-				"range": 10,
-				"density": "high",
-				"min_clearance": 1,
-				"stack_priority": 0.85,
-				"approach_dir": "front",
-				"derived_at": "2026-04-29T09:39:46.099934Z",
-				"derived_from": "aabb_size + category"
-			}
-		},
-		"limbgrowth": {
-			"lookup_name": "limbgrowth",
-			"scene": "res://algorithms/computationalbiology/limbgrowth/limbgrowth.tscn",
-			"name": "Limb Growth",
-			"description": "Detailed limb growth and segmentation model \u2014 joints, proportions, and symmetry emerging from simple growth parameters. Biology's recipe for building bodies.",
-			"category": "biology",
-			"complexity": "intermediate",
-			"tags": [
-				"limb",
-				"growth",
-				"segmentation",
-				"joints",
-				"biology",
-				"morphogenesis"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"dev_themes": [
-				"biology",
-				"simulation"
-			],
-			"geometry_spec": {
-				"mesh_type": "parametric_surface",
-				"topology": "manifold_open",
-				"construction": {
-					"method": "uv_grid_triangulation",
-					"primitives": [
-						"sphere"
-					],
-					"operations": [
-						"compute_vertices",
-						"generate_triangles",
-						"compute_normals"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "pbr",
-					"key_properties": [
-						"metallic"
-					]
-				},
-				"animation": {
-					"type": "vertex",
-					"driven_by": "per_frame_rebuild",
-					"affects": [
-						"vertex_positions"
-					]
-				},
-				"instance_strategy": "array",
-				"vertex_estimate": "unknown"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 4,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [],
-				"preferred_zone": "any",
-				"measured_footprint_cells": 4,
-				"footprint_source": "measured"
-			},
-			"measurements": {
-				"aabb_size": [
-					1.7,
-					1.7,
-					1.7
-				],
-				"aabb_center": [
-					0.0,
-					0.0,
-					0.0
-				],
-				"grid_cells": [
-					2.0,
-					2.0
-				],
-				"max_dimension_m": 1.7,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
-			},
-			"footprint_measured": [
-				2.0,
-				1,
-				2.0
-			],
-			"spatial_profile": {
-				"dir_group": "floor",
-				"range": 4,
-				"density": "medium",
-				"min_clearance": 1,
-				"stack_priority": 0.5,
-				"approach_dir": "any",
-				"derived_at": "2026-04-29T09:39:46.099934Z",
-				"derived_from": "aabb_size + category"
-			}
-		},
-		"monte_carlo_protein": {
-			"lookup_name": "monte_carlo_protein",
-			"scene": "res://algorithms/computationalbiology/montecarloproteinchain/monte_carl_methods_protein.tscn",
-			"name": "Monte Carlo Protein Folding",
-			"description": "Protein chain folding using Monte Carlo methods \u2014 random conformational changes accepted or rejected by energy minimization. The computational approach to understanding how amino acid sequences become functional 3D shapes.",
-			"category": "biology",
-			"complexity": "advanced",
-			"tags": [
-				"monte_carlo",
-				"protein",
-				"folding",
-				"energy_minimization",
-				"bioinformatics",
-				"biology"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"dev_themes": [
-				"biology",
-				"simulation"
-			],
-			"geometry_spec": {
-				"mesh_type": "parametric_surface",
-				"topology": "manifold_closed",
-				"construction": {
-					"method": "uv_grid_triangulation",
-					"primitives": [
-						"sphere",
-						"cylinder"
-					],
-					"operations": [
-						"compute_vertices",
-						"generate_triangles",
-						"compute_normals"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "emissive",
-					"key_properties": [
-						"emission",
-						"metallic",
-						"transparency"
-					]
-				},
-				"animation": {
-					"type": "particle_lifecycle",
-					"driven_by": "particle_system",
-					"affects": [
-						"transform",
-						"color",
-						"visibility"
-					]
-				},
-				"instance_strategy": "particles",
-				"vertex_estimate": "~0"
-			},
-			"spatial_needs": {
-				"platform": "pedestal",
-				"footprint_cells": 9,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [],
-				"preferred_zone": "end",
-				"measured_footprint_cells": 192,
-				"footprint_source": "measured_capped"
-			},
-			"measurements": {
-				"aabb_size": [
-					24.0,
-					8.0,
-					8.0
-				],
-				"aabb_center": [
-					0.0,
-					0.0,
-					0.0
-				],
-				"grid_cells": [
-					24.0,
-					8.0
-				],
-				"max_dimension_m": 24.0,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
-			},
-			"footprint_measured": [
-				24.0,
-				1,
-				8.0
-			],
-			"spatial_profile": {
-				"dir_group": "floor",
-				"range": 60,
-				"density": "high",
-				"min_clearance": 2,
-				"stack_priority": 0.85,
-				"approach_dir": "any",
-				"derived_at": "2026-04-29T09:39:46.099934Z",
-				"derived_from": "aabb_size + category"
-			}
-		},
-		"morphobody": {
-			"lookup_name": "morphobody",
-			"scene": "res://algorithms/computationalbiology/morphobody/morphobody.tscn",
-			"name": "Morpho Body",
-			"description": "Morphogenetic body construction \u2014 how body plans emerge from developmental rules. From simple gradients to complex anatomies through Turing-like pattern formation.",
-			"category": "biology",
-			"complexity": "intermediate",
-			"tags": [
-				"morphogenesis",
-				"body_plan",
-				"turing_pattern",
-				"development",
-				"biology"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"dev_themes": [
-				"biology",
-				"simulation"
-			],
-			"geometry_spec": {
-				"mesh_type": "composed_primitives",
-				"topology": "manifold_closed",
-				"construction": {
-					"method": "primitive_assembly",
-					"primitives": [
-						"sphere",
-						"capsule"
-					],
-					"operations": [
-						"create_primitives",
-						"position_children"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "pbr",
-					"key_properties": [
-						"metallic"
-					]
-				},
-				"animation": {
-					"type": "transform",
-					"driven_by": "per_frame_update",
-					"affects": [
-						"transform"
-					]
-				},
-				"instance_strategy": "array",
-				"vertex_estimate": "~576"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 1,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [],
-				"preferred_zone": "end",
-				"measured_footprint_cells": 1,
-				"footprint_source": "measured"
-			},
-			"measurements": {
-				"aabb_size": [
-					1.0,
-					1.6,
-					0.8
-				],
-				"aabb_center": [
-					0.0,
-					0.0,
-					0.0
-				],
-				"grid_cells": [
-					1.0,
-					1.0
-				],
-				"max_dimension_m": 1.6,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
-			},
-			"footprint_measured": [
-				1.0,
-				1,
-				1.0
-			],
-			"spatial_profile": {
-				"dir_group": "floor",
-				"range": 4,
-				"density": "medium",
-				"min_clearance": 1,
-				"stack_priority": 0.5,
-				"approach_dir": "any",
-				"derived_at": "2026-04-29T09:39:46.099934Z",
-				"derived_from": "aabb_size + category"
-			}
-		},
-		"radiolaria": {
-			"lookup_name": "radiolaria",
-			"scene": "res://algorithms/computationalbiology/radiolaria2/radiolaria.tscn",
-			"name": "Radiolaria",
-			"description": "Procedural radiolarian skeleton generation \u2014 the impossibly intricate silica structures of single-celled organisms. Geometry so perfect it inspired Ernst Haeckel's 'Art Forms in Nature'.",
-			"category": "biology",
-			"complexity": "intermediate",
-			"tags": [
-				"radiolaria",
-				"skeleton",
-				"haeckel",
-				"geometry",
-				"biology",
-				"procedural"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"softbodies"
-			],
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"dev_themes": [
-				"art",
-				"biology",
-				"simulation"
-			],
-			"geometry_spec": {
-				"mesh_type": "boolean_composition",
-				"topology": "volumetric",
-				"construction": {
-					"method": "csg_boolean",
-					"primitives": [
-						"box",
-						"sphere",
-						"cylinder",
-						"torus"
-					],
-					"operations": [
-						"create_primitives",
-						"position_primitives",
-						"boolean_combine"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "emissive",
-					"key_properties": [
-						"emission",
-						"metallic",
-						"transparency"
-					]
-				},
-				"animation": {
-					"type": "particle_lifecycle",
-					"driven_by": "particle_system",
-					"affects": [
-						"transform",
-						"color",
-						"visibility"
-					]
-				},
-				"instance_strategy": "particles",
-				"vertex_estimate": "~256"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 9,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 2,
-				"cluster_with": [],
-				"preferred_zone": "any",
-				"measured_footprint_cells": 169,
-				"footprint_source": "measured_capped"
-			},
-			"measurements": {
-				"aabb_size": [
-					13.0,
-					8.0,
-					13.0
-				],
-				"aabb_center": [
-					0.0,
-					0.0,
-					0.0
-				],
-				"grid_cells": [
-					13.0,
-					13.0
-				],
-				"max_dimension_m": 13.0,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
-			},
-			"footprint_measured": [
-				13.0,
-				1,
-				13.0
-			],
-			"spatial_profile": {
-				"dir_group": "floor",
-				"range": 35,
-				"density": "high",
-				"min_clearance": 2,
-				"stack_priority": 0.85,
-				"approach_dir": "any",
-				"derived_at": "2026-04-29T09:39:46.099934Z",
-				"derived_from": "aabb_size + category"
-			}
-		},
-		"ten_tulip_buckets": {
-			"lookup_name": "ten_tulip_buckets",
-			"scene": "res://algorithms/computationalbiology/bucketoftulips/ten_tulip_buckets.tscn",
-			"name": "Ten Tulip Buckets",
-			"description": "Array of procedurally generated tulip bouquets \u2014 each bucket grows tulips from parametric curves with randomized variations. Botanical algorithms producing natural beauty.",
-			"category": "biology",
-			"complexity": "beginner",
-			"tags": [
-				"tulip",
-				"plant",
-				"procedural",
-				"botanical",
-				"biology",
-				"array"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [],
-			"dev_themes": [
-				"biology",
-				"simulation"
-			],
-			"geometry_spec": {
-				"mesh_type": "delegated_scene",
-				"topology": "manifold_closed",
-				"construction": {
-					"method": "scene_instantiation",
-					"primitives": [],
-					"operations": [
-						"load_scene",
-						"instantiate",
-						"configure"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "pbr",
-					"key_properties": []
-				},
-				"animation": {
-					"type": "static",
-					"driven_by": null,
-					"affects": []
-				},
-				"instance_strategy": "few",
-				"vertex_estimate": "varies"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 9,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [],
-				"preferred_zone": "entry",
-				"measured_footprint_cells": 70,
-				"footprint_source": "measured_capped"
-			},
-			"measurements": {
-				"aabb_size": [
-					13.17,
-					0.58,
-					4.56
-				],
-				"aabb_center": [
-					-0.01,
-					-0.08,
-					-0.01
-				],
-				"grid_cells": [
-					14.0,
-					5.0
-				],
-				"max_dimension_m": 13.17,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
-			},
-			"footprint_measured": [
-				14.0,
-				1,
-				5.0
-			],
-			"spatial_profile": {
-				"dir_group": "plane",
-				"range": 35,
-				"density": "field",
-				"min_clearance": 0,
-				"stack_priority": 0.3,
-				"approach_dir": "any",
-				"derived_at": "2026-04-29T09:39:46.100444Z",
-				"derived_from": "aabb_size + category"
-			}
-		},
-		"MolecularDesigner": {
-			"lookup_name": "MolecularDesigner",
-			"scene": "res://algorithms/computationalbiology/molecular_framework/MolecularDesigner.tscn",
-			"name": "Molecular Designer",
-			"description": "Interactive molecular construction tool \u2014 atoms snap to valence rules, bonds obey geometry, and molecular structure emerges from chemical constraints. Formalization as hands-on building.",
-			"category": "biology",
-			"complexity": "advanced",
-			"tags": [
-				"molecular",
-				"chemistry",
-				"constraint_satisfaction",
-				"valence",
-				"biology",
-				"interactive"
-			],
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"postfoundationscrisis"
-			],
-			"parameters": {
-				"footprint": [
-					1,
-					6,
-					8
-				],
-				"size_group": "environment"
-			},
-			"dev_themes": [
-				"biology",
-				"simulation"
-			],
-			"geometry_spec": {
-				"mesh_type": "composed_primitives",
-				"topology": "manifold_closed",
-				"construction": {
-					"method": "primitive_assembly",
-					"primitives": [
-						"box",
-						"sphere",
-						"cylinder"
-					],
-					"operations": [
-						"create_primitives",
-						"position_children"
-					]
-				},
-				"material": {
-					"type": "unlit",
-					"shading_model": "unshaded",
-					"key_properties": [
-						"emission",
-						"metallic"
-					]
-				},
-				"animation": {
-					"type": "transform",
-					"driven_by": "per_frame_update",
-					"affects": [
-						"transform"
-					]
-				},
-				"instance_strategy": "array",
-				"vertex_estimate": "unknown"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 9,
-				"clearance": {
-					"front": 2,
-					"back": 2,
-					"left": 2,
-					"right": 2
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [
-					"unlocks",
-					"reductionist",
-					"design",
-					"thinking",
-					"depends"
-				],
-				"preferred_zone": "end",
-				"measured_footprint_cells": 12,
-				"footprint_source": "measured_capped"
-			},
-			"measurements": {
-				"aabb_size": [
-					2.8,
-					2.12,
-					3.14
-				],
-				"aabb_center": [
-					0.07,
-					2.04,
-					-0.01
-				],
-				"grid_cells": [
-					3.0,
-					4.0
-				],
-				"max_dimension_m": 3.14,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
-			},
-			"footprint_measured": [
-				3.0,
-				1,
-				4.0
-			],
-			"spatial_profile": {
-				"dir_group": "floor",
-				"range": 10,
-				"density": "medium",
-				"min_clearance": 2,
-				"stack_priority": 0.5,
-				"approach_dir": "any",
-				"derived_at": "2026-04-29T09:39:46.100444Z",
-				"derived_from": "aabb_size + category"
-			}
-		},
-		"attractorsphere": {
-			"lookup_name": "attractorsphere",
-			"name": "Attractor Sphere",
-			"description": "Morphogenetic sphere with Gray-Scott reaction-diffusion surface patterns, diffusion gradient arrows, and temporal growth phases",
-			"scene": "res://algorithms/computationalbiology/attractorsphere/attractorsphere.tscn",
-			"category": "computational_biology",
-			"include_in_map_data": true,
-			"map_ready": true,
-			"map_sequences": [
-				"transformation",
-				"computational_biology"
-			],
-			"footprint": [
-				1,
-				1,
-				1
-			],
-			"size_group": "compact",
-			"parameters": {
-				"footprint": [
-					1,
-					1,
-					1
-				],
-				"size_group": "compact"
-			},
-			"complexity": "intermediate",
-			"dev_themes": [
-				"biology",
-				"simulation",
-				"reaction-diffusion",
-				"morphogenesis"
-			],
-			"tags": [
-				"biology",
-				"reaction-diffusion",
-				"turing-patterns",
-				"gray-scott",
-				"morphogenesis"
-			],
-			"geometry_spec": {
-				"mesh_type": "procedural_line",
-				"topology": "manifold_closed",
-				"construction": {
-					"method": "vertex_line_strip",
-					"primitives": [
-						"sphere"
-					],
-					"operations": [
-						"compute_vertices",
-						"connect_lines"
-					]
-				},
-				"material": {
-					"type": "vertex_color",
-					"shading_model": "unshaded",
-					"key_properties": [
-						"transparency",
-						"double_sided"
-					]
-				},
-				"animation": {
-					"type": "vertex",
-					"driven_by": "per_frame_rebuild",
-					"affects": [
-						"vertex_positions"
-					]
-				},
-				"instance_strategy": "few",
-				"vertex_estimate": "~0"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 6,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 0,
-				"cluster_with": [],
-				"preferred_zone": "any",
-				"measured_footprint_cells": 6,
-				"footprint_source": "measured"
-			},
-			"measurements": {
-				"aabb_size": [
-					2.04,
-					2.36,
-					1.99
-				],
-				"aabb_center": [
-					-0.11,
-					-0.16,
-					-0.08
-				],
-				"grid_cells": [
-					3.0,
-					2.0
-				],
-				"max_dimension_m": 2.36,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
-			},
-			"spatial_profile": {
-				"dir_group": "floor",
-				"range": 6,
-				"density": "medium",
-				"min_clearance": 1,
-				"stack_priority": 0.5,
-				"approach_dir": "any",
-				"derived_at": "2026-04-29T09:39:46.100444Z",
-				"derived_from": "aabb_size + category"
-			}
-		}
-	}
+  "registry_info": {
+    "name": "computational_biology",
+    "description": "Computational biology artifacts — limb growth, morphogenesis, protein folding, and radiolarian skeletons. Algorithms that model how living systems build themselves.",
+    "category": "biology",
+    "theoretical_grounding": "Morphogenesis (Turing), developmental biology, Monte Carlo methods in biochemistry, radiolarian geometry, procedural growth"
+  },
+  "artifacts": {
+    "growslimbs": {
+      "lookup_name": "growslimbs",
+      "scene": "res://algorithms/computationalbiology/growslimbs/growslimbs.tscn",
+      "name": "Growing Limbs",
+      "description": "Procedural limb growth simulation — branching structures emerge from growth rules, mimicking how organisms develop appendages through iterative cell division and differentiation.",
+      "category": "biology",
+      "complexity": "intermediate",
+      "tags": [
+        "growth",
+        "limb",
+        "branching",
+        "morphogenesis",
+        "biology",
+        "procedural"
+      ],
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [],
+      "dev_themes": [
+        "biology",
+        "simulation"
+      ],
+      "geometry_spec": {
+        "mesh_type": "parametric_surface",
+        "topology": "manifold_closed",
+        "construction": {
+          "method": "uv_grid_triangulation",
+          "primitives": [
+            "sphere"
+          ],
+          "operations": [
+            "compute_vertices",
+            "generate_triangles",
+            "compute_normals"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "pbr",
+          "key_properties": [
+            "metallic",
+            "transparency"
+          ]
+        },
+        "animation": {
+          "type": "vertex",
+          "driven_by": "per_frame_rebuild",
+          "affects": [
+            "vertex_positions"
+          ]
+        },
+        "instance_strategy": "array",
+        "vertex_estimate": "~64"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 1,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "measured"
+      },
+      "measurements": {
+        "aabb_size": [
+          3.03,
+          2.12,
+          0.42
+        ],
+        "aabb_center": [
+          -0.01,
+          -1.02,
+          0.08
+        ],
+        "grid_cells": [
+          4.0,
+          1.0
+        ],
+        "max_dimension_m": 3.03,
+        "measured_at": "2026-04-29T07:09:56.762620Z"
+      },
+      "footprint_measured": [
+        4.0,
+        1,
+        1.0
+      ],
+      "spatial_profile": {
+        "dir_group": "panel",
+        "range": 10,
+        "density": "high",
+        "min_clearance": 1,
+        "stack_priority": 0.85,
+        "approach_dir": "front",
+        "derived_at": "2026-04-29T09:39:46.099934Z",
+        "derived_from": "aabb_size + category"
+      },
+      "qfep_connection": "Space colonization, not blueprint: attractor points are scattered as food and the growth nodes race toward them, kill_distance pruning any that arrive, a Skeleton3D laid down along the winners. A body shaped by external hunger — limbs appear where appetite was placed, form dictated by what the organism was made to want."
+    },
+    "limbgrowth": {
+      "lookup_name": "limbgrowth",
+      "scene": "res://algorithms/computationalbiology/limbgrowth/limbgrowth.tscn",
+      "name": "Limb Growth",
+      "description": "Detailed limb growth and segmentation model — joints, proportions, and symmetry emerging from simple growth parameters. Biology's recipe for building bodies.",
+      "category": "biology",
+      "complexity": "intermediate",
+      "tags": [
+        "limb",
+        "growth",
+        "segmentation",
+        "joints",
+        "biology",
+        "morphogenesis"
+      ],
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [],
+      "dev_themes": [
+        "biology",
+        "simulation"
+      ],
+      "geometry_spec": {
+        "mesh_type": "parametric_surface",
+        "topology": "manifold_open",
+        "construction": {
+          "method": "uv_grid_triangulation",
+          "primitives": [
+            "sphere"
+          ],
+          "operations": [
+            "compute_vertices",
+            "generate_triangles",
+            "compute_normals"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "pbr",
+          "key_properties": [
+            "metallic"
+          ]
+        },
+        "animation": {
+          "type": "vertex",
+          "driven_by": "per_frame_rebuild",
+          "affects": [
+            "vertex_positions"
+          ]
+        },
+        "instance_strategy": "array",
+        "vertex_estimate": "unknown"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 4,
+        "clearance": {
+          "front": 1,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 4,
+        "footprint_source": "measured"
+      },
+      "measurements": {
+        "aabb_size": [
+          1.7,
+          1.7,
+          1.7
+        ],
+        "aabb_center": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "grid_cells": [
+          2.0,
+          2.0
+        ],
+        "max_dimension_m": 1.7,
+        "measured_at": "2026-04-29T07:09:56.762620Z"
+      },
+      "footprint_measured": [
+        2.0,
+        1,
+        2.0
+      ],
+      "spatial_profile": {
+        "dir_group": "floor",
+        "range": 4,
+        "density": "medium",
+        "min_clearance": 1,
+        "stack_priority": 0.5,
+        "approach_dir": "any",
+        "derived_at": "2026-04-29T09:39:46.099934Z",
+        "derived_from": "aabb_size + category"
+      },
+      "qfep_connection": "Dynamic topology as attention made geometric — edges longer than max_edge_length subdivide, shorter than min collapse, so mesh resolution migrates to wherever the surface is actively extruding under gravity. Detail is not distributed evenly but earned by change; the still parts of the body stay coarse."
+    },
+    "monte_carlo_protein": {
+      "lookup_name": "monte_carlo_protein",
+      "scene": "res://algorithms/computationalbiology/montecarloproteinchain/monte_carl_methods_protein.tscn",
+      "name": "Monte Carlo Protein Folding",
+      "description": "Protein chain folding using Monte Carlo methods — random conformational changes accepted or rejected by energy minimization. The computational approach to understanding how amino acid sequences become functional 3D shapes.",
+      "category": "biology",
+      "complexity": "advanced",
+      "tags": [
+        "monte_carlo",
+        "protein",
+        "folding",
+        "energy_minimization",
+        "bioinformatics",
+        "biology"
+      ],
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [],
+      "dev_themes": [
+        "biology",
+        "simulation"
+      ],
+      "geometry_spec": {
+        "mesh_type": "parametric_surface",
+        "topology": "manifold_closed",
+        "construction": {
+          "method": "uv_grid_triangulation",
+          "primitives": [
+            "sphere",
+            "cylinder"
+          ],
+          "operations": [
+            "compute_vertices",
+            "generate_triangles",
+            "compute_normals"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "emissive",
+          "key_properties": [
+            "emission",
+            "metallic",
+            "transparency"
+          ]
+        },
+        "animation": {
+          "type": "particle_lifecycle",
+          "driven_by": "particle_system",
+          "affects": [
+            "transform",
+            "color",
+            "visibility"
+          ]
+        },
+        "instance_strategy": "particles",
+        "vertex_estimate": "~0"
+      },
+      "spatial_needs": {
+        "platform": "pedestal",
+        "footprint_cells": 9,
+        "clearance": {
+          "front": 1,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [],
+        "preferred_zone": "end",
+        "measured_footprint_cells": 192,
+        "footprint_source": "measured_capped"
+      },
+      "measurements": {
+        "aabb_size": [
+          24.0,
+          8.0,
+          8.0
+        ],
+        "aabb_center": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "grid_cells": [
+          24.0,
+          8.0
+        ],
+        "max_dimension_m": 24.0,
+        "measured_at": "2026-04-29T07:09:56.762620Z"
+      },
+      "footprint_measured": [
+        24.0,
+        1,
+        8.0
+      ],
+      "spatial_profile": {
+        "dir_group": "floor",
+        "range": 60,
+        "density": "high",
+        "min_clearance": 2,
+        "stack_priority": 0.85,
+        "approach_dir": "any",
+        "derived_at": "2026-04-29T09:39:46.099934Z",
+        "derived_from": "aabb_size + category"
+      },
+      "qfep_connection": "The fold is gambled, not solved: random dihedral kicks proposed and then accepted or refused by a Metropolis test against hydrophobic energy, TEMPERATURE tuning how often the chain is permitted to be wrong. Entropy proposes and free energy disposes — structure emerging from a governed willingness to make bad moves."
+    },
+    "morphobody": {
+      "lookup_name": "morphobody",
+      "scene": "res://algorithms/computationalbiology/morphobody/morphobody.tscn",
+      "name": "Morpho Body",
+      "description": "Morphogenetic body construction — how body plans emerge from developmental rules. From simple gradients to complex anatomies through Turing-like pattern formation.",
+      "category": "biology",
+      "complexity": "intermediate",
+      "tags": [
+        "morphogenesis",
+        "body_plan",
+        "turing_pattern",
+        "development",
+        "biology"
+      ],
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [],
+      "dev_themes": [
+        "biology",
+        "simulation"
+      ],
+      "geometry_spec": {
+        "mesh_type": "composed_primitives",
+        "topology": "manifold_closed",
+        "construction": {
+          "method": "primitive_assembly",
+          "primitives": [
+            "sphere",
+            "capsule"
+          ],
+          "operations": [
+            "create_primitives",
+            "position_children"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "pbr",
+          "key_properties": [
+            "metallic"
+          ]
+        },
+        "animation": {
+          "type": "transform",
+          "driven_by": "per_frame_update",
+          "affects": [
+            "transform"
+          ]
+        },
+        "instance_strategy": "array",
+        "vertex_estimate": "~576"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 1,
+        "clearance": {
+          "front": 1,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [],
+        "preferred_zone": "end",
+        "measured_footprint_cells": 1,
+        "footprint_source": "measured"
+      },
+      "measurements": {
+        "aabb_size": [
+          1.0,
+          1.6,
+          0.8
+        ],
+        "aabb_center": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "grid_cells": [
+          1.0,
+          1.0
+        ],
+        "max_dimension_m": 1.6,
+        "measured_at": "2026-04-29T07:09:56.762620Z"
+      },
+      "footprint_measured": [
+        1.0,
+        1,
+        1.0
+      ],
+      "spatial_profile": {
+        "dir_group": "floor",
+        "range": 4,
+        "density": "medium",
+        "min_clearance": 1,
+        "stack_priority": 0.5,
+        "approach_dir": "any",
+        "derived_at": "2026-04-29T09:39:46.099934Z",
+        "derived_from": "aabb_size + category"
+      },
+      "qfep_connection": "A Gray-Scott reaction-diffusion field decides anatomy — two reagents feed and kill across a 32³ grid, and wherever B crosses bud_threshold a limb is spawned and grown. Turing's chemistry answering a question no plan asked: where does an arm belong, resolved by what diffused there."
+    },
+    "radiolaria": {
+      "lookup_name": "radiolaria",
+      "scene": "res://algorithms/computationalbiology/radiolaria2/radiolaria.tscn",
+      "name": "Radiolaria",
+      "description": "Procedural radiolarian skeleton generation — the impossibly intricate silica structures of single-celled organisms. Geometry so perfect it inspired Ernst Haeckel's 'Art Forms in Nature'.",
+      "category": "biology",
+      "complexity": "intermediate",
+      "tags": [
+        "radiolaria",
+        "skeleton",
+        "haeckel",
+        "geometry",
+        "biology",
+        "procedural"
+      ],
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "softbodies"
+      ],
+      "parameters": {
+        "footprint": [
+          1,
+          1,
+          1
+        ],
+        "size_group": "compact"
+      },
+      "dev_themes": [
+        "art",
+        "biology",
+        "simulation"
+      ],
+      "geometry_spec": {
+        "mesh_type": "boolean_composition",
+        "topology": "volumetric",
+        "construction": {
+          "method": "csg_boolean",
+          "primitives": [
+            "box",
+            "sphere",
+            "cylinder",
+            "torus"
+          ],
+          "operations": [
+            "create_primitives",
+            "position_primitives",
+            "boolean_combine"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "emissive",
+          "key_properties": [
+            "emission",
+            "metallic",
+            "transparency"
+          ]
+        },
+        "animation": {
+          "type": "particle_lifecycle",
+          "driven_by": "particle_system",
+          "affects": [
+            "transform",
+            "color",
+            "visibility"
+          ]
+        },
+        "instance_strategy": "particles",
+        "vertex_estimate": "~256"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 9,
+        "clearance": {
+          "front": 1,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 2,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 169,
+        "footprint_source": "measured_capped"
+      },
+      "measurements": {
+        "aabb_size": [
+          13.0,
+          8.0,
+          13.0
+        ],
+        "aabb_center": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "grid_cells": [
+          13.0,
+          13.0
+        ],
+        "max_dimension_m": 13.0,
+        "measured_at": "2026-04-29T07:09:56.762620Z"
+      },
+      "footprint_measured": [
+        13.0,
+        1,
+        13.0
+      ],
+      "spatial_profile": {
+        "dir_group": "floor",
+        "range": 35,
+        "density": "high",
+        "min_clearance": 2,
+        "stack_priority": 0.85,
+        "approach_dir": "any",
+        "derived_at": "2026-04-29T09:39:46.099934Z",
+        "derived_from": "aabb_size + category"
+      }
+    },
+    "ten_tulip_buckets": {
+      "lookup_name": "ten_tulip_buckets",
+      "scene": "res://algorithms/computationalbiology/bucketoftulips/ten_tulip_buckets.tscn",
+      "name": "Ten Tulip Buckets",
+      "description": "Array of procedurally generated tulip bouquets — each bucket grows tulips from parametric curves with randomized variations. Botanical algorithms producing natural beauty.",
+      "category": "biology",
+      "complexity": "beginner",
+      "tags": [
+        "tulip",
+        "plant",
+        "procedural",
+        "botanical",
+        "biology",
+        "array"
+      ],
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [],
+      "dev_themes": [
+        "biology",
+        "simulation"
+      ],
+      "geometry_spec": {
+        "mesh_type": "delegated_scene",
+        "topology": "manifold_closed",
+        "construction": {
+          "method": "scene_instantiation",
+          "primitives": [],
+          "operations": [
+            "load_scene",
+            "instantiate",
+            "configure"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "pbr",
+          "key_properties": []
+        },
+        "animation": {
+          "type": "static",
+          "driven_by": null,
+          "affects": []
+        },
+        "instance_strategy": "few",
+        "vertex_estimate": "varies"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 9,
+        "clearance": {
+          "front": 1,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [],
+        "preferred_zone": "entry",
+        "measured_footprint_cells": 70,
+        "footprint_source": "measured_capped"
+      },
+      "measurements": {
+        "aabb_size": [
+          13.17,
+          0.58,
+          4.56
+        ],
+        "aabb_center": [
+          -0.01,
+          -0.08,
+          -0.01
+        ],
+        "grid_cells": [
+          14.0,
+          5.0
+        ],
+        "max_dimension_m": 13.17,
+        "measured_at": "2026-04-29T07:09:56.762620Z"
+      },
+      "footprint_measured": [
+        14.0,
+        1,
+        5.0
+      ],
+      "spatial_profile": {
+        "dir_group": "plane",
+        "range": 35,
+        "density": "field",
+        "min_clearance": 0,
+        "stack_priority": 0.3,
+        "approach_dir": "any",
+        "derived_at": "2026-04-29T09:39:46.100444Z",
+        "derived_from": "aabb_size + category"
+      },
+      "qfep_connection": "One parametric bouquet instanced ten times with randomized color and position — diversity performed by a cheap multiply. The eye reads a garden's variety; the code holds a single recipe wearing ten near-identical costumes, sameness dressed as abundance."
+    },
+    "MolecularDesigner": {
+      "lookup_name": "MolecularDesigner",
+      "scene": "res://algorithms/computationalbiology/molecular_framework/MolecularDesigner.tscn",
+      "name": "Molecular Designer",
+      "description": "Interactive molecular construction tool — atoms snap to valence rules, bonds obey geometry, and molecular structure emerges from chemical constraints. Formalization as hands-on building.",
+      "category": "biology",
+      "complexity": "advanced",
+      "tags": [
+        "molecular",
+        "chemistry",
+        "constraint_satisfaction",
+        "valence",
+        "biology",
+        "interactive"
+      ],
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "postfoundationscrisis"
+      ],
+      "parameters": {
+        "footprint": [
+          1,
+          6,
+          8
+        ],
+        "size_group": "environment"
+      },
+      "dev_themes": [
+        "biology",
+        "simulation"
+      ],
+      "geometry_spec": {
+        "mesh_type": "composed_primitives",
+        "topology": "manifold_closed",
+        "construction": {
+          "method": "primitive_assembly",
+          "primitives": [
+            "box",
+            "sphere",
+            "cylinder"
+          ],
+          "operations": [
+            "create_primitives",
+            "position_children"
+          ]
+        },
+        "material": {
+          "type": "unlit",
+          "shading_model": "unshaded",
+          "key_properties": [
+            "emission",
+            "metallic"
+          ]
+        },
+        "animation": {
+          "type": "transform",
+          "driven_by": "per_frame_update",
+          "affects": [
+            "transform"
+          ]
+        },
+        "instance_strategy": "array",
+        "vertex_estimate": "unknown"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 9,
+        "clearance": {
+          "front": 2,
+          "back": 2,
+          "left": 2,
+          "right": 2
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [
+          "unlocks",
+          "reductionist",
+          "design",
+          "thinking",
+          "depends"
+        ],
+        "preferred_zone": "end",
+        "measured_footprint_cells": 12,
+        "footprint_source": "measured_capped"
+      },
+      "measurements": {
+        "aabb_size": [
+          2.8,
+          2.12,
+          3.14
+        ],
+        "aabb_center": [
+          0.07,
+          2.04,
+          -0.01
+        ],
+        "grid_cells": [
+          3.0,
+          4.0
+        ],
+        "max_dimension_m": 3.14,
+        "measured_at": "2026-04-29T07:09:56.762620Z"
+      },
+      "footprint_measured": [
+        3.0,
+        1,
+        4.0
+      ],
+      "spatial_profile": {
+        "dir_group": "floor",
+        "range": 10,
+        "density": "medium",
+        "min_clearance": 2,
+        "stack_priority": 0.5,
+        "approach_dir": "any",
+        "derived_at": "2026-04-29T09:39:46.100444Z",
+        "derived_from": "aabb_size + category"
+      }
+    },
+    "attractorsphere": {
+      "lookup_name": "attractorsphere",
+      "name": "Attractor Sphere",
+      "description": "Morphogenetic sphere with Gray-Scott reaction-diffusion surface patterns, diffusion gradient arrows, and temporal growth phases",
+      "scene": "res://algorithms/computationalbiology/attractorsphere/attractorsphere.tscn",
+      "category": "computational_biology",
+      "include_in_map_data": true,
+      "map_ready": true,
+      "map_sequences": [
+        "transformation",
+        "computational_biology"
+      ],
+      "footprint": [
+        1,
+        1,
+        1
+      ],
+      "size_group": "compact",
+      "parameters": {
+        "footprint": [
+          1,
+          1,
+          1
+        ],
+        "size_group": "compact"
+      },
+      "complexity": "intermediate",
+      "dev_themes": [
+        "biology",
+        "simulation",
+        "reaction-diffusion",
+        "morphogenesis"
+      ],
+      "tags": [
+        "biology",
+        "reaction-diffusion",
+        "turing-patterns",
+        "gray-scott",
+        "morphogenesis"
+      ],
+      "geometry_spec": {
+        "mesh_type": "procedural_line",
+        "topology": "manifold_closed",
+        "construction": {
+          "method": "vertex_line_strip",
+          "primitives": [
+            "sphere"
+          ],
+          "operations": [
+            "compute_vertices",
+            "connect_lines"
+          ]
+        },
+        "material": {
+          "type": "vertex_color",
+          "shading_model": "unshaded",
+          "key_properties": [
+            "transparency",
+            "double_sided"
+          ]
+        },
+        "animation": {
+          "type": "vertex",
+          "driven_by": "per_frame_rebuild",
+          "affects": [
+            "vertex_positions"
+          ]
+        },
+        "instance_strategy": "few",
+        "vertex_estimate": "~0"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 6,
+        "clearance": {
+          "front": 1,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 0,
+        "cluster_with": [],
+        "preferred_zone": "any",
+        "measured_footprint_cells": 6,
+        "footprint_source": "measured"
+      },
+      "measurements": {
+        "aabb_size": [
+          2.04,
+          2.36,
+          1.99
+        ],
+        "aabb_center": [
+          -0.11,
+          -0.16,
+          -0.08
+        ],
+        "grid_cells": [
+          3.0,
+          2.0
+        ],
+        "max_dimension_m": 2.36,
+        "measured_at": "2026-04-29T07:09:56.762620Z"
+      },
+      "spatial_profile": {
+        "dir_group": "floor",
+        "range": 6,
+        "density": "medium",
+        "min_clearance": 1,
+        "stack_priority": 0.5,
+        "approach_dir": "any",
+        "derived_at": "2026-04-29T09:39:46.100444Z",
+        "derived_from": "aabb_size + category"
+      },
+      "qfep_connection": "Feed 0.055, kill 0.062 — the spots are the ratio's signature, not anyone's drawing. Gray-Scott on a sphere makes Turing's claim walkable: pattern is what two chemicals disagreeing about diffusion speed look like from outside, and the grab-attractors let a hand join the disagreement."
+    }
+  }
 }

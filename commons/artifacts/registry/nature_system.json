@@ -1,352 +1,353 @@
 {
-	"artifacts": {
-		"creature_gallery": {
-			"category": "nature_system",
-			"complexity": "advanced",
-			"description": "DNA organism gallery \u2014 12 preset pedestals in a ring + 5 kingdom clusters. Every organism spawned from CritterDNA at full detail. The proof that the nature system works.",
-			"include_in_map_data": true,
-			"lookup_name": "creature_gallery",
-			"map_ready": true,
-			"map_sequences": [
-				"pokemonstudio",
-				"hazards",
-				"testmaps"
-			],
-			"name": "Creature Gallery",
-			"scene": "res://commons/scenes/creature_gallery.tscn",
-			"tags": [
-				"gallery",
-				"creature",
-				"dna",
-				"showcase",
-				"nature_system"
-			],
-			"geometry_spec": {
-				"mesh_type": "composed_primitives",
-				"topology": "manifold_closed",
-				"construction": {
-					"method": "primitive_assembly",
-					"primitives": [
-						"cylinder",
-						"torus",
-						"plane"
-					],
-					"operations": [
-						"create_primitives",
-						"position_children"
-					]
-				},
-				"material": {
-					"type": "unlit",
-					"shading_model": "unshaded",
-					"key_properties": [
-						"emission",
-						"metallic",
-						"transparency"
-					]
-				},
-				"animation": {
-					"type": "transform",
-					"driven_by": "per_frame_update",
-					"affects": [
-						"transform"
-					]
-				},
-				"instance_strategy": "few",
-				"vertex_estimate": "~288"
-			},
-			"spatial_needs": {
-				"platform": "pedestal",
-				"footprint_cells": 9,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 1,
-				"cluster_with": [],
-				"preferred_zone": "end",
-				"measured_footprint_cells": 900,
-				"footprint_source": "measured_capped"
-			},
-			"measurements": {
-				"aabb_size": [
-					30.0,
-					3.9,
-					30.0
-				],
-				"aabb_center": [
-					0.0,
-					1.18,
-					0.0
-				],
-				"grid_cells": [
-					30.0,
-					30.0
-				],
-				"max_dimension_m": 30.0,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
-			},
-			"footprint_measured": [
-				30.0,
-				1,
-				30.0
-			],
-			"spatial_profile": {
-				"dir_group": "plane",
-				"range": 60,
-				"density": "field",
-				"min_clearance": 0,
-				"stack_priority": 0.3,
-				"approach_dir": "any",
-				"derived_at": "2026-04-29T09:39:46.165480Z",
-				"derived_from": "aabb_size + category"
-			}
-		},
-		"critter_placer": {
-			"category": "nature_system",
-			"complexity": "beginner",
-			"default_rotation": 0.0,
-			"default_y_offset": 0.0,
-			"description": "Grid-placeable DNA organism. Bridges the grid system and nature system. Place in interactables layer with config to spawn a specific organism at a grid cell. Supports presets (lsystem_tree, fibonacci_flower, turing_fungus, etc.) and custom DNA gene overrides.",
-			"dev_themes": [
-				"biology",
-				"nature",
-				"teaching",
-				"grid"
-			],
-			"include_in_map_data": true,
-			"interaction": "passive",
-			"lookup_name": "critter_placer",
-			"map_ready": true,
-			"name": "Critter Placer",
-			"placement_type": "environment",
-			"scene": "res://commons/artifacts/critter_placer/critter_placer.tscn",
-			"size_class": "compact_only",
-			"tags": [
-				"nature_system",
-				"critter_dna",
-				"grid_placeable",
-				"tree",
-				"flower",
-				"fungus",
-				"creature",
-				"hybrid",
-				"teaching"
-			],
-			"geometry_spec": {
-				"mesh_type": "composed_primitives",
-				"topology": "manifold_closed",
-				"construction": {
-					"method": "primitive_assembly",
-					"primitives": [],
-					"operations": [
-						"create_primitives",
-						"position_children"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "pbr",
-					"key_properties": [
-						"metallic",
-						"transparency"
-					]
-				},
-				"animation": {
-					"type": "static",
-					"driven_by": null,
-					"affects": []
-				},
-				"instance_strategy": "single",
-				"vertex_estimate": "unknown"
-			},
-			"spatial_needs": {
-				"platform": "table",
-				"footprint_cells": 1,
-				"clearance": {
-					"front": 1,
-					"back": 1,
-					"left": 1,
-					"right": 1
-				},
-				"player_position": "front",
-				"wall_backing": false,
-				"orientation": "face_approach",
-				"isolation": 1,
-				"cluster_with": [],
-				"preferred_zone": "entry",
-				"measured_footprint_cells": 1,
-				"footprint_source": "measured"
-			},
-			"measurements": {
-				"aabb_size": [
-					0.23,
-					0.7,
-					0.39
-				],
-				"aabb_center": [
-					0.03,
-					0.21,
-					0.06
-				],
-				"grid_cells": [
-					1.0,
-					1.0
-				],
-				"max_dimension_m": 0.7,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
-			},
-			"footprint_measured": [
-				1.0,
-				1,
-				1.0
-			],
-			"spatial_profile": {
-				"dir_group": "floor",
-				"range": 2,
-				"density": "medium",
-				"min_clearance": 1,
-				"stack_priority": 0.5,
-				"approach_dir": "any",
-				"derived_at": "2026-04-29T09:39:46.165480Z",
-				"derived_from": "aabb_size + category"
-			}
-		},
-		"nature_system_demo": {
-			"category": "nature_system",
-			"complexity": "advanced",
-			"description": "Visual test scene for the Q-FEP Nature System. Spawns critters from all 4 kingdoms (tree, creature, flower, fungus) in a grid. Keyboard controls: 1-4 spawn by kingdom, R randomize DNA, E evolve, L cycle LOD, H toggle hybrids, SPACE reset grid.",
-			"dev_themes": [
-				"biology",
-				"nature",
-				"qfep",
-				"simulation"
-			],
-			"footprint": [
-				3,
-				7,
-				14
-			],
-			"include_in_map_data": true,
-			"interaction": "immersive",
-			"lookup_name": "nature_system_demo",
-			"map_ready": false,
-			"map_sequences": [
-				"randomness"
-			],
-			"name": "Nature System Demo",
-			"parameters": {
-				"footprint": [
-					3,
-					7,
-					14
-				],
-				"size_group": "xlarge"
-			},
-			"qfep_connection": "Transmutation as free energy minimization \u2014 every critter is an algorithm exploring possibility space under constraints. Bonding with a critter changes the relationship, not the critter. The poison was always medicine. Donna Haraway meets Q-FEP.",
-			"scene": "res://algorithms/nature_system/demo/nature_system_demo.tscn",
-			"sequence": "nature_system",
-			"size_group": "xlarge",
-			"tags": [
-				"nature_system",
-				"critter_dna",
-				"evolution",
-				"transmutation",
-				"haraway",
-				"qfep",
-				"procedural_mesh",
-				"lsystem",
-				"flower",
-				"tree",
-				"creature",
-				"fungus",
-				"hybrid",
-				"cross_kingdom",
-				"interactive"
-			],
-			"geometry_spec": {
-				"mesh_type": "composed_primitives",
-				"topology": "manifold_closed",
-				"construction": {
-					"method": "primitive_assembly",
-					"primitives": [],
-					"operations": [
-						"create_primitives",
-						"position_children"
-					]
-				},
-				"material": {
-					"type": "standard",
-					"shading_model": "pbr",
-					"key_properties": []
-				},
-				"animation": {
-					"type": "transform",
-					"driven_by": "per_frame_update",
-					"affects": [
-						"transform"
-					]
-				},
-				"instance_strategy": "single",
-				"vertex_estimate": "unknown"
-			},
-			"spatial_needs": {
-				"platform": "none",
-				"footprint_cells": 9,
-				"clearance": {
-					"front": 2,
-					"back": 2,
-					"left": 2,
-					"right": 2
-				},
-				"player_position": "front",
-				"wall_backing": true,
-				"orientation": "face_approach",
-				"isolation": 1,
-				"cluster_with": [
-					"depends",
-					"contrasts",
-					"mushrooms",
-					"static",
-					"growth"
-				],
-				"preferred_zone": "end",
-				"measured_footprint_cells": 795,
-				"footprint_source": "measured_capped"
-			},
-			"measurements": {
-				"aabb_size": [
-					14.75,
-					7.96,
-					52.95
-				],
-				"aabb_center": [
-					4.71,
-					0.75,
-					24.95
-				],
-				"grid_cells": [
-					15.0,
-					53.0
-				],
-				"max_dimension_m": 52.95,
-				"measured_at": "2026-04-29T07:09:56.762620Z"
-			},
-			"spatial_profile": {
-				"dir_group": "plane",
-				"range": 79,
-				"density": "field",
-				"min_clearance": 0,
-				"stack_priority": 0.3,
-				"approach_dir": "any",
-				"derived_at": "2026-04-29T09:39:46.165480Z",
-				"derived_from": "aabb_size + category"
-			}
-		}
-	}
+  "artifacts": {
+    "creature_gallery": {
+      "category": "nature_system",
+      "complexity": "advanced",
+      "description": "DNA organism gallery — 12 preset pedestals in a ring + 5 kingdom clusters. Every organism spawned from CritterDNA at full detail. The proof that the nature system works.",
+      "include_in_map_data": true,
+      "lookup_name": "creature_gallery",
+      "map_ready": true,
+      "map_sequences": [
+        "pokemonstudio",
+        "hazards",
+        "testmaps"
+      ],
+      "name": "Creature Gallery",
+      "scene": "res://commons/scenes/creature_gallery.tscn",
+      "tags": [
+        "gallery",
+        "creature",
+        "dna",
+        "showcase",
+        "nature_system"
+      ],
+      "geometry_spec": {
+        "mesh_type": "composed_primitives",
+        "topology": "manifold_closed",
+        "construction": {
+          "method": "primitive_assembly",
+          "primitives": [
+            "cylinder",
+            "torus",
+            "plane"
+          ],
+          "operations": [
+            "create_primitives",
+            "position_children"
+          ]
+        },
+        "material": {
+          "type": "unlit",
+          "shading_model": "unshaded",
+          "key_properties": [
+            "emission",
+            "metallic",
+            "transparency"
+          ]
+        },
+        "animation": {
+          "type": "transform",
+          "driven_by": "per_frame_update",
+          "affects": [
+            "transform"
+          ]
+        },
+        "instance_strategy": "few",
+        "vertex_estimate": "~288"
+      },
+      "spatial_needs": {
+        "platform": "pedestal",
+        "footprint_cells": 9,
+        "clearance": {
+          "front": 1,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "end",
+        "measured_footprint_cells": 900,
+        "footprint_source": "measured_capped"
+      },
+      "measurements": {
+        "aabb_size": [
+          30.0,
+          3.9,
+          30.0
+        ],
+        "aabb_center": [
+          0.0,
+          1.18,
+          0.0
+        ],
+        "grid_cells": [
+          30.0,
+          30.0
+        ],
+        "max_dimension_m": 30.0,
+        "measured_at": "2026-04-29T07:09:56.762620Z"
+      },
+      "footprint_measured": [
+        30.0,
+        1,
+        30.0
+      ],
+      "spatial_profile": {
+        "dir_group": "plane",
+        "range": 60,
+        "density": "field",
+        "min_clearance": 0,
+        "stack_priority": 0.3,
+        "approach_dir": "any",
+        "derived_at": "2026-04-29T09:39:46.165480Z",
+        "derived_from": "aabb_size + category"
+      },
+      "qfep_connection": "Every body on these pedestals is one CritterDNA seed rendered at full detail, so the taxonomy on show is really a dozen points in a single parameter space. The slow rotation does what classification always does — holds the living still enough to compare."
+    },
+    "critter_placer": {
+      "category": "nature_system",
+      "complexity": "beginner",
+      "default_rotation": 0.0,
+      "default_y_offset": 0.0,
+      "description": "Grid-placeable DNA organism. Bridges the grid system and nature system. Place in interactables layer with config to spawn a specific organism at a grid cell. Supports presets (lsystem_tree, fibonacci_flower, turing_fungus, etc.) and custom DNA gene overrides.",
+      "dev_themes": [
+        "biology",
+        "nature",
+        "teaching",
+        "grid"
+      ],
+      "include_in_map_data": true,
+      "interaction": "passive",
+      "lookup_name": "critter_placer",
+      "map_ready": true,
+      "name": "Critter Placer",
+      "placement_type": "environment",
+      "scene": "res://commons/artifacts/critter_placer/critter_placer.tscn",
+      "size_class": "compact_only",
+      "tags": [
+        "nature_system",
+        "critter_dna",
+        "grid_placeable",
+        "tree",
+        "flower",
+        "fungus",
+        "creature",
+        "hybrid",
+        "teaching"
+      ],
+      "geometry_spec": {
+        "mesh_type": "composed_primitives",
+        "topology": "manifold_closed",
+        "construction": {
+          "method": "primitive_assembly",
+          "primitives": [],
+          "operations": [
+            "create_primitives",
+            "position_children"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "pbr",
+          "key_properties": [
+            "metallic",
+            "transparency"
+          ]
+        },
+        "animation": {
+          "type": "static",
+          "driven_by": null,
+          "affects": []
+        },
+        "instance_strategy": "single",
+        "vertex_estimate": "unknown"
+      },
+      "spatial_needs": {
+        "platform": "table",
+        "footprint_cells": 1,
+        "clearance": {
+          "front": 1,
+          "back": 1,
+          "left": 1,
+          "right": 1
+        },
+        "player_position": "front",
+        "wall_backing": false,
+        "orientation": "face_approach",
+        "isolation": 1,
+        "cluster_with": [],
+        "preferred_zone": "entry",
+        "measured_footprint_cells": 1,
+        "footprint_source": "measured"
+      },
+      "measurements": {
+        "aabb_size": [
+          0.23,
+          0.7,
+          0.39
+        ],
+        "aabb_center": [
+          0.03,
+          0.21,
+          0.06
+        ],
+        "grid_cells": [
+          1.0,
+          1.0
+        ],
+        "max_dimension_m": 0.7,
+        "measured_at": "2026-04-29T07:09:56.762620Z"
+      },
+      "footprint_measured": [
+        1.0,
+        1,
+        1.0
+      ],
+      "spatial_profile": {
+        "dir_group": "floor",
+        "range": 2,
+        "density": "medium",
+        "min_clearance": 1,
+        "stack_priority": 0.5,
+        "approach_dir": "any",
+        "derived_at": "2026-04-29T09:39:46.165480Z",
+        "derived_from": "aabb_size + category"
+      }
+    },
+    "nature_system_demo": {
+      "category": "nature_system",
+      "complexity": "advanced",
+      "description": "Visual test scene for the Q-FEP Nature System. Spawns critters from all 4 kingdoms (tree, creature, flower, fungus) in a grid. Keyboard controls: 1-4 spawn by kingdom, R randomize DNA, E evolve, L cycle LOD, H toggle hybrids, SPACE reset grid.",
+      "dev_themes": [
+        "biology",
+        "nature",
+        "qfep",
+        "simulation"
+      ],
+      "footprint": [
+        3,
+        7,
+        14
+      ],
+      "include_in_map_data": true,
+      "interaction": "immersive",
+      "lookup_name": "nature_system_demo",
+      "map_ready": false,
+      "map_sequences": [
+        "randomness"
+      ],
+      "name": "Nature System Demo",
+      "parameters": {
+        "footprint": [
+          3,
+          7,
+          14
+        ],
+        "size_group": "xlarge"
+      },
+      "qfep_connection": "Transmutation as free energy minimization — every critter is an algorithm exploring possibility space under constraints. Bonding with a critter changes the relationship, not the critter. The poison was always medicine. Donna Haraway meets Q-FEP.",
+      "scene": "res://algorithms/nature_system/demo/nature_system_demo.tscn",
+      "sequence": "nature_system",
+      "size_group": "xlarge",
+      "tags": [
+        "nature_system",
+        "critter_dna",
+        "evolution",
+        "transmutation",
+        "haraway",
+        "qfep",
+        "procedural_mesh",
+        "lsystem",
+        "flower",
+        "tree",
+        "creature",
+        "fungus",
+        "hybrid",
+        "cross_kingdom",
+        "interactive"
+      ],
+      "geometry_spec": {
+        "mesh_type": "composed_primitives",
+        "topology": "manifold_closed",
+        "construction": {
+          "method": "primitive_assembly",
+          "primitives": [],
+          "operations": [
+            "create_primitives",
+            "position_children"
+          ]
+        },
+        "material": {
+          "type": "standard",
+          "shading_model": "pbr",
+          "key_properties": []
+        },
+        "animation": {
+          "type": "transform",
+          "driven_by": "per_frame_update",
+          "affects": [
+            "transform"
+          ]
+        },
+        "instance_strategy": "single",
+        "vertex_estimate": "unknown"
+      },
+      "spatial_needs": {
+        "platform": "none",
+        "footprint_cells": 9,
+        "clearance": {
+          "front": 2,
+          "back": 2,
+          "left": 2,
+          "right": 2
+        },
+        "player_position": "front",
+        "wall_backing": true,
+        "orientation": "face_approach",
+        "isolation": 1,
+        "cluster_with": [
+          "depends",
+          "contrasts",
+          "mushrooms",
+          "static",
+          "growth"
+        ],
+        "preferred_zone": "end",
+        "measured_footprint_cells": 795,
+        "footprint_source": "measured_capped"
+      },
+      "measurements": {
+        "aabb_size": [
+          14.75,
+          7.96,
+          52.95
+        ],
+        "aabb_center": [
+          4.71,
+          0.75,
+          24.95
+        ],
+        "grid_cells": [
+          15.0,
+          53.0
+        ],
+        "max_dimension_m": 52.95,
+        "measured_at": "2026-04-29T07:09:56.762620Z"
+      },
+      "spatial_profile": {
+        "dir_group": "plane",
+        "range": 79,
+        "density": "field",
+        "min_clearance": 0,
+        "stack_priority": 0.3,
+        "approach_dir": "any",
+        "derived_at": "2026-04-29T09:39:46.165480Z",
+        "derived_from": "aabb_size + category"
+      }
+    }
+  }
 }

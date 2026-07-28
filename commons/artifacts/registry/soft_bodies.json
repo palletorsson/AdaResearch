@@ -329,7 +329,8 @@
     1.0,
     1,
     1.0
-   ]
+   ],
+   "qfep_connection": "The body reads its own name to learn what it is ('sphere' in node_name decides its pressure and precision), then cycles IDLE, ACTIVE, DEFORMED, RECOVERING on a three-second timer. Identity assigned by label, softness performed on a schedule — deformation not as event but as shift rotation."
   },
   "squishy_ball_pit": {
    "name": "Squishy Ball Pit",
@@ -428,7 +429,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.273850Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "Thirty pressurized spheres dripped one per half-second into a glass box: the squish only reads because the walls refuse to give. E_flux needs an F_order container to pile up against — without the rigid glass the softness would disperse into nothing worth watching."
   },
   "soft_trampoline": {
    "name": "Soft Trampoline",
@@ -529,7 +531,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.273850Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "The center can flex only because the perimeter is pinned to nothing — set_point_pinned with an empty NodePath fixes the edge vertices to world space itself. Bounce is a liberty financed by an absolute, invisible border."
   },
   "breathing_room": {
    "name": "Breathing Room",
@@ -1812,7 +1815,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.273850Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "A controlled trial for flesh: the same soft sphere dropped on a cube, a sphere, a capsule, a ramp, then against its own settings — high pressure, jelly, slow deflation. The floating labels must chase vertex 0 through PhysicsServer3D because a deforming body has no stable origin; where it 'is' becomes a convention renewed every frame."
   },
   "soft_mushroom": {
    "lookup_name": "soft_mushroom",

@@ -133,19 +133,19 @@
     },
     "fire_hose_box": {
       "dna": {
-       "axes": {
-        "support": [
-         "bracket",
-         "stand",
-         "cabinet"
-        ],
-        "statute": [
-         "issue",
-         "notice",
-         "joinery",
-         "lapse"
-        ]
-       }
+        "axes": {
+          "support": [
+            "bracket",
+            "stand",
+            "cabinet"
+          ],
+          "statute": [
+            "issue",
+            "notice",
+            "joinery",
+            "lapse"
+          ]
+        }
       },
       "lookup_name": "fire_hose_box",
       "scene": "res://commons/artifacts/fire_hose_box/fire_hose_box.tscn",
@@ -3109,21 +3109,21 @@
     },
     "info_board": {
       "dna": {
-       "axes": {
-        "voice": [
-         "system",
-         "tape",
-         "directory",
-         "noticeboard",
-         "flap"
-        ],
-        "support": [
-         "none",
-         "stand",
-         "cabinet",
-         "pylon"
-        ]
-       }
+        "axes": {
+          "voice": [
+            "system",
+            "tape",
+            "directory",
+            "noticeboard",
+            "flap"
+          ],
+          "support": [
+            "none",
+            "stand",
+            "cabinet",
+            "pylon"
+          ]
+        }
       },
       "lookup_name": "info_board",
       "scene": "res://commons/scenes/mapobjects/info_board.tscn",
@@ -3379,7 +3379,8 @@
         "approach_dir": "front",
         "derived_at": "2026-04-29T09:39:46.137147Z",
         "derived_from": "aabb_size + category"
-      }
+      },
+      "qfep_connection": "CRT screens scroll, VU needles swing, LEDs blink — all driven by nothing but the panel's own accumulated _time. Control as genre: the faders and buttons are real interactables, but the crisis they would manage was never instantiated."
     },
     "pipettedispenser": {
       "lookup_name": "pipettedispenser",
@@ -3479,7 +3480,8 @@
         "approach_dir": "any",
         "derived_at": "2026-04-29T09:39:46.137147Z",
         "derived_from": "aabb_size + category"
-      }
+      },
+      "qfep_connection": "Two refusals guard the plunger — no tip, no calibration, no dispense — before a 0.3-second animation moves nothing anywhere. Precision here is not accuracy but permission: a liturgy of preconditions graded from red to green."
     },
     "quantumentanglementmeter": {
       "lookup_name": "quantumentanglementmeter",
@@ -3578,7 +3580,8 @@
         "approach_dir": "any",
         "derived_at": "2026-04-29T09:39:46.137147Z",
         "derived_from": "aabb_size + category"
-      }
+      },
+      "qfep_connection": "When the simulated thresholds cross, two counter-rotating chambers surrender their separate blue and red for one shared hue. Entanglement staged as chromatic monogamy — correlation flattened into identical appearance, which is exactly what the physics forbids anyone to see."
     },
     "resonancechamber": {
       "lookup_name": "resonancechamber",
@@ -3685,7 +3688,8 @@
         "approach_dir": "any",
         "derived_at": "2026-04-29T09:39:46.137147Z",
         "derived_from": "aabb_size + category"
-      }
+      },
+      "qfep_connection": "Three rings counter-rotate at stepped speeds while quantum_energy integrates toward a collapse hard-coded at 100 — resonance not as harmony but as countdown. Coherence borrowed against a scripted breakdown: E_flux made legible as debt."
     },
     "fluxdetector": {
       "lookup_name": "fluxdetector",
@@ -3792,7 +3796,8 @@
         "approach_dir": "any",
         "derived_at": "2026-04-29T09:39:46.137147Z",
         "derived_from": "aabb_size + category"
-      }
+      },
+      "qfep_connection": "The 'temporal field' it monitors is sin of the wall clock plus randf noise, and when their sum crosses 0.4 the anomaly alarm fires. An instrument that synthesizes its own signal makes detection legible as production — the detector needs anomalies more than the field does."
     },
     "cryogenicpreservation": {
       "lookup_name": "cryogenicpreservation",
@@ -3899,7 +3904,8 @@
         "approach_dir": "any",
         "derived_at": "2026-04-29T09:39:46.137147Z",
         "derived_from": "aabb_size + category"
-      }
+      },
+      "qfep_connection": "Preservation is staged as labor, not stasis: the temperature drifts every second and must be pulled back toward −196, valves and mist cycling without end. Holding something unchanged turns out to be the most energy-hungry program in the room."
     },
     "robotarm": {
       "lookup_name": "robotarm",
@@ -4005,7 +4011,8 @@
         "approach_dir": "any",
         "derived_at": "2026-04-29T09:39:46.137147Z",
         "derived_from": "aabb_size + category"
-      }
+      },
+      "qfep_connection": "Its labor is a dictionary — four named poses with fixed joint angles and durations, replayed when a body walks close. Gesture without grasp: automated work staged as choreography that never touches a sample, only its coordinates."
     },
     "circularradarmonitor": {
       "lookup_name": "circularradarmonitor",
@@ -4102,7 +4109,8 @@
         "approach_dir": "any",
         "derived_at": "2026-04-29T09:39:46.137147Z",
         "derived_from": "aabb_size + category"
-      }
+      },
+      "qfep_connection": "The sweep performs vigilance, but every contact is cast by randi() % 3 — friendly, unknown, hostile assigned by die roll. A clean staging of how threat classification manufactures the enemies it claims to find."
     },
     "datatablet": {
       "lookup_name": "datatablet",
@@ -4201,7 +4209,8 @@
         "approach_dir": "any",
         "derived_at": "2026-04-29T09:39:46.137147Z",
         "derived_from": "aabb_size + category"
-      }
+      },
+      "qfep_connection": "Its research metrics only accumulate — experiments and samples increment by die roll every three seconds while accuracy is clamped so it can never fall below 85. A dashboard that can only report progress is not measurement; it is morale."
     },
     "electromagneticfieldgenerator": {
       "lookup_name": "electromagneticfieldgenerator",
@@ -4310,7 +4319,8 @@
         "approach_dir": "any",
         "derived_at": "2026-04-29T09:39:46.137147Z",
         "derived_from": "aabb_size + category"
-      }
+      },
+      "qfep_connection": "Once active, field_strength only integrates upward, delta by delta, until the overload trips at 10 — three coils in perfect 120-degree phase and no line of code for turning less on. Power staged as one-way arithmetic."
     },
     "terminal": {
       "lookup_name": "terminal",
@@ -4409,7 +4419,8 @@
         "approach_dir": "any",
         "derived_at": "2026-04-29T09:39:46.137147Z",
         "derived_from": "aabb_size + category"
-      }
+      },
+      "qfep_connection": "Walk close and it runs a four-second screen flicker, then announces analysis complete — no input read, no result written. Computation reduced to its lighting design: in a lab, thinking is mostly something screens perform for bodies."
     },
     "smallcontainment": {
       "lookup_name": "smallcontainment",
@@ -4515,7 +4526,8 @@
         "approach_dir": "any",
         "derived_at": "2026-04-29T09:39:46.137147Z",
         "derived_from": "aabb_size + category"
-      }
+      },
+      "qfep_connection": "The field's random walk is biased downward — randf_range(−5, 2) — so custody always trends toward its own breach warning. Twenty centimeters of politics: the specimen just floats and turns; all the drama belongs to the walls."
     },
     "chair2": {
       "lookup_name": "chair2",
@@ -4593,7 +4605,8 @@
         "approach_dir": "any",
         "derived_at": "2026-04-29T09:39:46.137147Z",
         "derived_from": "aabb_size + category"
-      }
+      },
+      "qfep_connection": "Seat, back, and eight-sided legs are re-derived from SurfaceTool triangles on every load, then skinned in a 45-degree checker with a glowing cyan gutter — furniture as a program that performs wood without ever having been a tree."
     },
     "entropy_visualization": {
       "lookup_name": "entropy_visualization",
@@ -6174,19 +6187,19 @@
     },
     "fire_extinguisher": {
       "dna": {
-       "axes": {
-        "support": [
-         "bracket",
-         "stand",
-         "cabinet"
-        ],
-        "statute": [
-         "issue",
-         "notice",
-         "joinery",
-         "lapse"
-        ]
-       }
+        "axes": {
+          "support": [
+            "bracket",
+            "stand",
+            "cabinet"
+          ],
+          "statute": [
+            "issue",
+            "notice",
+            "joinery",
+            "lapse"
+          ]
+        }
       },
       "lookup_name": "fire_extinguisher",
       "scene": "res://commons/artifacts/fire_extinguisher/fire_extinguisher.tscn",

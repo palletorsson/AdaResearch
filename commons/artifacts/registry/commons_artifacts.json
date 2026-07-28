@@ -211,7 +211,8 @@
     "approach_dir": "front",
     "derived_at": "2026-04-29T09:39:46.082521Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "A flat lesson about direction is itself given a position and an orientation — the XR viewport renders the 2D vector board to a texture and hangs it as a body in S. To read about vectors you must first solve one: stand somewhere, face the plane."
   },
   "AudioContr": {
    "category": "unknown",
@@ -430,7 +431,8 @@
     "approach_dir": "front",
     "derived_at": "2026-04-29T09:39:46.082521Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "Before the three triangles can join, the manager reparents every corner sphere to itself and resets each triangle to the identity transform — connection is bought by surrendering your own coordinate frame. Gravity only switches on after three links: weight is the reward for federation."
   },
   "HandheldInfoBoard": {
    "category": "unknown",
@@ -536,7 +538,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.082521Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "A 2D page pushed through a viewport onto a quad, then framed, glassed, and issued a clearance zone that keeps bodies at reading distance — text made into furniture that negotiates space for its own legibility."
   },
   "VRBrush": {
    "category": "unknown",
@@ -649,7 +652,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.082521Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "The brush raycasts into the mesh, splits any edge longer than 0.6 and smooths what it finds, so resolution accrues exactly where the hand lingers. Attention is spent as vertices; the untouched surface stays coarse."
   },
   "additive_wave_demo": {
    "category": "waves",
@@ -878,7 +882,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.082521Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "A walking figure assembled from cubes according to agent_data.json, handed a direction vector and set going — the body arrives as a file, the gait as a parameter. Character reduced to its config, which is precisely what makes it swappable."
   },
   "agnes_grid": {
    "category": "unknown",
@@ -984,7 +989,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.082521Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "Martin's hand-ruled grid, redrawn in code and piped through a SubViewport onto a grabbable slab — a painting demoted to a texture so it can be picked up and turned. What survives the pipeline is the grid; what doesn't is the tremor that made her lines worth standing near."
   },
   "agnes_grid_2d": {
    "category": "unknown",
@@ -1058,7 +1064,8 @@
     "isolation": 0,
     "cluster_with": [],
     "preferred_zone": "entry"
-   }
+   },
+   "qfep_connection": "One _draw() call: cream ground, grey lines at 0.3 alpha, ten by ten, never touched again. F_order at its most naked — a grid before anything is asked of it, with subtlety encoded as a literal transparency value."
   },
   "agnes_martin_grid_painting": {
    "category": "art",
@@ -2505,7 +2512,8 @@
     ],
     "max_dimension_m": 0.0,
     "measured_at": "2026-04-29T07:09:56.762620Z"
-   }
+   },
+   "qfep_connection": "The vectors lesson — 'Axiom 1: a point is a vector' — typeset on a viewport page at clipboard scale, while the title above it still reads keyboard-mash. A lecture on the invisible point, carried as office equipment, caught half-dressed."
   },
   "code": {
    "category": "unknown",
@@ -2553,7 +2561,8 @@
     "isolation": 0,
     "cluster_with": [],
     "preferred_zone": "entry"
-   }
+   },
+   "qfep_connection": "An A4 control whose text block is the .tscn source of an A4 control — the page displays its own serialization. Reading it is reading how everything else in this world is stored; the scene format caught describing itself."
   },
   "code_display": {
    "category": "unknown",
@@ -3086,7 +3095,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.083526Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "Prophecy is replaced by a boolean: contact flips is_touched in the shader, a 3.5-second timer flips it back. The cooldown's refusal to respond again immediately is what turns a switch into a ritual — the glow feels granted, not toggled."
   },
   "cube_create": {
    "category": "unknown",
@@ -3181,7 +3191,8 @@
     ],
     "max_dimension_m": 0.0,
     "measured_at": "2026-04-29T07:09:56.762620Z"
-   }
+   },
+   "qfep_connection": "Registered as a cube tool, it actually runs the genesis sequence — triangle, plane, pyramid, cube, on to sphere and fish — each hand-built from vertex arrays under a wireframe shader. The claim is ontological: every solid here is triangles that stopped apologizing for it."
   },
   "data_labor_counter": {
    "category": "critical",
@@ -3433,7 +3444,8 @@
     ],
     "max_dimension_m": 0.0,
     "measured_at": "2026-04-29T07:09:56.762620Z"
-   }
+   },
+   "qfep_connection": "Rather than bring its own stage, it hunts the map's GridMultiMesh through the parent hierarchy and plays its array lessons on the floor already under your feet — corner, row, column, snake, spiral. Indexing taught by possession: the level geometry becomes the array being indexed."
   },
   "distribution_sampler": {
    "category": "emergence",
@@ -3869,7 +3881,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.083526Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "Seven lines of code make the renderer confess its labor: one label polling RENDER_TOTAL_DRAW_CALLS every frame. The cost of appearing becomes an object you can stand beside — spectacle metering itself from inside the spectacle."
   },
   "drawing_paper": {
    "category": "unknown",
@@ -3978,7 +3991,8 @@
     "approach_dir": "front",
     "derived_at": "2026-04-29T09:39:46.083526Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "A pickable pen whose tip raycasts into a GPU canvas; with wet paint enabled, a simulation pass keeps the ink flowing after the hand has left. The mark outlives the gesture and goes on negotiating — drawing as a deposit into a surface with its own weather."
   },
   "drawing_pen": {
    "category": "unknown",
@@ -4056,7 +4070,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.083526Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "The pen holds no code — body and tip are bare meshes; the paper's raycast-and-texture surface does all the sensing and keeps every mark. Authorship migrates to the substrate, and the tool becomes an excuse to approach it."
   },
   "durer_scene": {
    "category": "unknown",
@@ -4751,7 +4766,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.083526Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "Seeded diamond-square to depth five: each subdivision halves the step and scales displacement by a roughness constant, then the result is meshed and given collision. Scale-invariance becomes floor — you sample the recursion with your ankles, at exactly one height per footfall."
   },
   "frame_counter_display": {
    "category": "unknown",
@@ -4965,7 +4981,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.083526Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "A Label3D printing frames-per-second inside the very frames it counts. The render loop's E_flux budget — normally invisible overhead — stands in the world as an object taxed by its own reading."
   },
   "game_of_life_petri": {
    "category": "emergence",
@@ -5499,7 +5516,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.083526Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "An Agnes Martin grid — grey lines at 0.3 alpha on cream — bolted to a rigid body you can pick up and drop. The quietest painting in modernism is given mass and a collision shape; contemplation becomes subject to gravity."
   },
   "grabable_mondrian": {
    "category": "unknown",
@@ -5603,7 +5621,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.083526Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "Neoplastic equilibrium regenerated on a ten-second timer, then mounted on a grabbable rigid body. Composition was supposed to be final; here it is a sample from a distribution that you can hold while it changes its mind."
   },
   "graphics_monitor": {
    "category": "unknown",
@@ -5803,7 +5822,8 @@
     ],
     "max_dimension_m": 0.0,
     "measured_at": "2026-04-29T07:09:56.762620Z"
-   }
+   },
+   "qfep_connection": "A textbook that turns its own pages: five seconds per frame, a SubViewport rendered to a sprite, no input accepted. The lesson advances whether or not you were looking — pedagogy's oldest politics, put on a timer."
   },
   "graphics_slideshow_2d": {
    "category": "unknown",
@@ -5877,7 +5897,8 @@
     "isolation": 0,
     "cluster_with": [],
     "preferred_zone": "any"
-   }
+   },
+   "qfep_connection": "The same teaching boards flattened to fullscreen and put under keyboard command, A and D instead of walking. What VR stages as encounter, the 2D fallback admits is a deck of slides — same sequence, body discarded."
   },
   "graphics_slideshow_all": {
    "category": "unknown",
@@ -5979,7 +6000,8 @@
     "approach_dir": "front",
     "derived_at": "2026-04-29T09:39:46.083526Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "Fourteen boards behind one screen, vectors through coordinate system, advanced by keypress; a map can pin the start_topic through grid config. The whole curriculum collapses to one index variable incremented mod fourteen — which is what a curriculum is, once you strip the walking."
   },
   "grid_eye": {
    "category": "unknown",
@@ -6087,7 +6109,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.083526Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "Every frame it rounds your position to integers, paints your cell red on a 24-by-24 texture, and asks aloud: in what way are we becoming a point on a grid? The answer is already executing in _process — quantization here is not a metaphor but a surveillance being applied to you."
   },
   "hand_color_controller": {
    "category": "unknown",
@@ -6606,7 +6629,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.083526Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "Rigid links strung on hinge joints, a grabbable Klein bottle for a hand: pull the end and the whole chain answers through its constraints. Assistance is staged honestly — the arm can only help along the degrees of freedom its hinges concede."
   },
   "hits_reset_display": {
    "category": "unknown",
@@ -7028,7 +7052,8 @@
     "derived_at": "2026-04-29T09:39:46.083526Z",
     "derived_from": "aabb_size + category"
    },
-   "content": "text"
+   "content": "text",
+   "qfep_connection": "A scrollable text panel that disciplines the hand before it delivers the text: enter its pose area and your fingers are forced into pointing. Reading is given a prescribed gesture — the interface decides what a hand is for."
   },
   "infokiosk": {
    "category": "unknown",
@@ -7109,7 +7134,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.083526Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "A message console and a vertical status monitor bolted into one freestanding cabinet: the lab's logging given a body you can walk up to. GameManager's console stream — normally developer exhaust — becomes furniture, the system narrating itself in public."
   },
   "interactable_demo": {
    "category": "unknown",
@@ -7609,14 +7635,34 @@
    "name": "Adjacency Shelf",
    "scene": "res://commons/artifacts/adjacency_shelf/adjacency_shelf.tscn",
    "complexity": "intermediate",
-   "tags": ["readymade", "arrangement", "shelf", "display"],
+   "tags": [
+    "readymade",
+    "arrangement",
+    "shelf",
+    "display"
+   ],
    "dna": {
-    "promoted": "2026-07-26", "stage": "2 - variation",
-    "axes": {"coherence": [0.0, 0.5, 1.0]},
+    "promoted": "2026-07-26",
+    "stage": "2 - variation",
+    "axes": {
+     "coherence": [
+      0.0,
+      0.5,
+      1.0
+     ]
+    },
     "default": "coherence=0.85"
    },
-   "spatial_needs": {"platform": "none", "footprint_cells": 2,
-    "clearance": {"front": 2, "back": 1, "left": 1, "right": 1}}
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 2,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    }
+   }
   },
   "poor_image_gate": {
    "category": "display",
@@ -7627,15 +7673,35 @@
    "name": "Poor Image Gate",
    "scene": "res://commons/artifacts/poor_image_gate/poor_image_gate.tscn",
    "complexity": "advanced",
-   "tags": ["seam", "resolution", "threshold", "display"],
+   "tags": [
+    "seam",
+    "resolution",
+    "threshold",
+    "display"
+   ],
    "dna": {
-    "promoted": "2026-07-26", "stage": "2 - variation",
-    "axes": {"poor_samples": [2, 4, 8]},
+    "promoted": "2026-07-26",
+    "stage": "2 - variation",
+    "axes": {
+     "poor_samples": [
+      2,
+      4,
+      8
+     ]
+    },
     "default": "poor_samples=4, rich_samples=26",
     "retired_axis": "rich_samples - measured INERT (focus 1.9%): 14 and 26 subdivisions both read as fine, so the knob varied nothing. The argument of this artifact lives on the POOR side; declaring an axis that does not move is how a sweep comes to look like evidence."
    },
-   "spatial_needs": {"platform": "none", "footprint_cells": 3,
-    "clearance": {"front": 3, "back": 3, "left": 1, "right": 1}}
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 3,
+    "clearance": {
+     "front": 3,
+     "back": 3,
+     "left": 1,
+     "right": 1
+    }
+   }
   },
   "unfinishable_terrarium": {
    "category": "display",
@@ -7646,15 +7712,36 @@
    "name": "Unfinishable Terrarium",
    "scene": "res://commons/artifacts/unfinishable_terrarium/unfinishable_terrarium.tscn",
    "complexity": "advanced",
-   "tags": ["persistence", "ecology", "meta", "display"],
+   "tags": [
+    "persistence",
+    "ecology",
+    "meta",
+    "display"
+   ],
    "dna": {
-    "promoted": "2026-07-26", "stage": "2 - variation",
-    "axes": {"preview_hours": [0, 24, 120, 600]},
+    "promoted": "2026-07-26",
+    "stage": "2 - variation",
+    "axes": {
+     "preview_hours": [
+      0,
+      24,
+      120,
+      600
+     ]
+    },
     "default": "preview_hours=-1 - read the real meter",
     "note": "preview_hours is for capture only. It previews a later reading; it does not reset anything, because nothing here resets."
    },
-   "spatial_needs": {"platform": "none", "footprint_cells": 1,
-    "clearance": {"front": 2, "back": 1, "left": 1, "right": 1}}
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 1,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    }
+   }
   },
   "multiple_ring": {
    "category": "display",
@@ -7665,14 +7752,43 @@
    "name": "Multiple Ring",
    "scene": "res://commons/artifacts/multiple_ring/multiple_ring.tscn",
    "complexity": "intermediate",
-   "tags": ["readymade", "multiple", "meta", "display"],
+   "tags": [
+    "readymade",
+    "multiple",
+    "meta",
+    "display"
+   ],
    "dna": {
-    "promoted": "2026-07-26", "stage": "2 - variation",
-    "axes": {"count": [6, 14, 24], "removed": [0, 3, 7], "face_inward": [true, false]},
+    "promoted": "2026-07-26",
+    "stage": "2 - variation",
+    "axes": {
+     "count": [
+      6,
+      14,
+      24
+     ],
+     "removed": [
+      0,
+      3,
+      7
+     ],
+     "face_inward": [
+      true,
+      false
+     ]
+    },
     "default": "subject=fire_extinguisher, count=14, removed=0"
    },
-   "spatial_needs": {"platform": "none", "footprint_cells": 3,
-    "clearance": {"front": 1, "back": 1, "left": 1, "right": 1}}
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 3,
+    "clearance": {
+     "front": 1,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    }
+   }
   },
   "default_body_bay": {
    "category": "display",
@@ -7683,14 +7799,38 @@
    "name": "Default Body Bay",
    "scene": "res://commons/artifacts/default_body_bay/default_body_bay.tscn",
    "complexity": "advanced",
-   "tags": ["bias", "default", "body", "meta", "display"],
+   "tags": [
+    "bias",
+    "default",
+    "body",
+    "meta",
+    "display"
+   ],
    "dna": {
-    "promoted": "2026-07-26", "stage": "2 - variation",
-    "axes": {"defaults_applied": [0, 1, 2, 3, 4, 5]},
+    "promoted": "2026-07-26",
+    "stage": "2 - variation",
+    "axes": {
+     "defaults_applied": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+     ]
+    },
     "default": "defaults_applied=0 - fully chroma, nothing decided yet"
    },
-   "spatial_needs": {"platform": "none", "footprint_cells": 3,
-    "clearance": {"front": 2, "back": 1, "left": 1, "right": 1}}
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 3,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    }
+   }
   },
   "operational_eye": {
    "category": "display",
@@ -7701,14 +7841,42 @@
    "name": "Operational Eye",
    "scene": "res://commons/artifacts/operational_eye/operational_eye.tscn",
    "complexity": "advanced",
-   "tags": ["machine-vision", "meta", "rack", "display"],
+   "tags": [
+    "machine-vision",
+    "meta",
+    "rack",
+    "display"
+   ],
    "dna": {
-    "promoted": "2026-07-26", "stage": "2 - variation",
-    "axes": {"channel": [0, 1, 2, 3, 4, 5], "cols": [2, 3, 6]},
+    "promoted": "2026-07-26",
+    "stage": "2 - variation",
+    "axes": {
+     "channel": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+     ],
+     "cols": [
+      2,
+      3,
+      6
+     ]
+    },
     "default": "channel=1 - the subject view foregrounded: you, as the system holds you"
    },
-   "spatial_needs": {"platform": "none", "footprint_cells": 3,
-    "clearance": {"front": 2, "back": 1, "left": 1, "right": 1}}
+   "spatial_needs": {
+    "platform": "none",
+    "footprint_cells": 3,
+    "clearance": {
+     "front": 2,
+     "back": 1,
+     "left": 1,
+     "right": 1
+    }
+   }
   },
   "stock_stratum": {
    "category": "display",
@@ -8042,7 +8210,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.083526Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "Two grab spheres and the segment between them, length read out live — but drag it near a whole number and it jitters, buzzes, and resists letting go. Integers are staged as privilege: the continuum pays a haptic toll at every round value."
   },
   "lsystem_editor": {
    "category": "procedural",
@@ -8246,7 +8415,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.084049Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "The lens bends no light; the shader rescales SCREEN_UV by 0.7 around center and re-presents pixels already rendered, with a Fresnel rim for a frame. Magnification as honest fake — in a rendered world, 'closer' is only a resampling."
   },
   "magnifying_glass_red": {
    "category": "unknown",
@@ -8324,7 +8494,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.084049Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "The same screen-space lens, except the fragment shader zeroes green and blue on the way out. The filter adds no red — it deletes everything else, which is how most ways of seeing actually operate."
   },
   "magnifying_glass_tool": {
    "category": "unknown",
@@ -8428,7 +8599,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.084049Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "Three lenses on rigid grabbable handles — two clear, one that keeps only the red channel — laid out for comparison. Instruments arrive in sets so that seeing itself becomes the variable while the thing under the glass stays constant."
   },
   "mario_cube": {
    "category": "primitives",
@@ -8841,7 +9013,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.084049Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "A label reading out the process's own static memory in megabytes, refreshed every frame. The world confesses its heap: everything you have walked past is still resident somewhere inside that number."
   },
   "mondrian_2d": {
    "category": "unknown",
@@ -8936,7 +9109,8 @@
     ],
     "max_dimension_m": 0.0,
     "measured_at": "2026-04-29T07:09:56.762620Z"
-   }
+   },
+   "qfep_connection": "A 60:55 canvas that redraws its grid of blacks and primaries every ten seconds from random splits. Dynamic equilibrium — Mondrian's word for a balance found once — is recast as a generator's output distribution: F_order as style, E_flux on a timer."
   },
   "mondrian_3d_display": {
    "category": "unknown",
@@ -9114,7 +9288,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.084049Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "Four kiosks, four cameras — overhead, behind, mirror, profile — every viewport locked to you. A panopticon that hands the watched party all of its feeds: surveillance rehearsed as self-portrait, the mirror multiplied into a control room."
   },
   "monte_carlo_estimator": {
    "category": "emergence",
@@ -9787,7 +9962,8 @@
     "approach_dir": "front",
     "derived_at": "2026-04-29T09:39:46.084049Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "Five graspable sliders — two frequencies, phase, amplitude, time-per-division — feed a phosphor trace that flips between waveform, Lissajous, and XY. Signal only becomes shape when one oscillation is plotted against another; the instrument stages relation, not tone."
   },
   "overfitting_demo": {
    "category": "machinelearning",
@@ -10121,19 +10297,19 @@
   "pick_up_cube": {
    "dna": {
     "axes": {
-    "stock": [
-    "wire",
-    "foam",
-    "crate",
-    "steel",
-    "clay"
-    ],
-    "custody": [
-    "none",
-    "tally",
-    "seal",
-    "wear"
-    ]
+     "stock": [
+      "wire",
+      "foam",
+      "crate",
+      "steel",
+      "clay"
+     ],
+     "custody": [
+      "none",
+      "tally",
+      "seal",
+      "wear"
+     ]
     }
    },
    "capacity": "MOVE an object through space and understand translation as carried displacement.",
@@ -10337,7 +10513,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.084049Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "A census of everything that consents to the hand: cubes, sticks, planes, five Platonic solids, a line, a point, a sheet of paper, each on its own pedestal. Grab is the project's first verb, and here it is conjugated through every geometry at once."
   },
   "pickup_gate": {
    "capacity": "REASON about threshold state change: when enough objects move through, the gate transforms from closed to open.",
@@ -10720,7 +10897,8 @@
     ],
     "max_dimension_m": 0.0,
     "measured_at": "2026-04-29T07:09:56.762620Z"
-   }
+   },
+   "qfep_connection": "Presence here is not proximity but scene-graph membership — a label polls five times a second for whether ../../XROrigin3D resolves, and calls that \"Player detected\". Being seen by this world means being instantiated in its tree."
   },
   "point_is": {
    "category": "unknown",
@@ -10972,7 +11150,8 @@
     "isolation": 0,
     "cluster_with": [],
     "preferred_zone": "entry"
-   }
+   },
+   "qfep_connection": "Four chords in a random major key, kick on one and three, hats on the offbeats — the whole song is decompressed from pop's rule-set at load time, every sample synthesized. F_order wearing a genre: intro, verse, and chorus are three densities of the same progression, crossfaded."
   },
   "portal": {
    "category": "unknown",
@@ -11699,7 +11878,8 @@
     ],
     "max_dimension_m": 0.0,
     "measured_at": "2026-04-29T07:09:56.762620Z"
-   }
+   },
+   "qfep_connection": "A kilometre-wide catch-plane hiding beneath the map, zeroing your velocity twice before setting you back at spawn — and manufacturing a spawn point if none exists. Falling out of the world is quietly made impossible; the floor under the floor is the promise that no failure here is terminal."
   },
   "reset_cube": {
    "category": "unknown",
@@ -11801,7 +11981,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.084049Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "The same catch-and-return logic as the hidden safety floor, shrunk to a pink shader-lit cylinder you must walk into. Reset recoded from net to door: going home becomes something the body chooses."
   },
   "rhizome_navigator": {
    "category": "speculative",
@@ -12060,7 +12241,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.084049Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "Named for music, it makes none — six light patterns (running dot, checkerboard, diagonal sweep) chase across a tile grid forever, timing rendered as pure albedo. The score without the sound: sequence itself, stripped to visible order."
   },
   "settings_ui": {
    "category": "unknown",
@@ -12162,7 +12344,8 @@
     "approach_dir": "front",
     "derived_at": "2026-04-29T09:39:46.084049Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "A dropdown where the curriculum's whole law of progression sits one enum from abolition — select Explorer and every sequence unlocks. The lock system admits, in a settings panel, that it was always a choice."
   },
   "sine_wave_controller": {
    "category": "unknown",
@@ -12266,7 +12449,8 @@
     "approach_dir": "front",
     "derived_at": "2026-04-29T09:39:46.084049Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "A sine has exactly three degrees of freedom, and each gets a graspable body: a 2D pad for frequency and amplitude, a 1D slider for phase. The equation is never displayed; you learn its shape by holding its parameters."
   },
   "soft_body_slicer": {
    "category": "physics",
@@ -12606,7 +12790,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.084049Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "A label printing Engine.time_scale every frame — the one parameter the player lives inside, gauged. When the engine slows the world, everything slows in sympathy; this readout is the only witness that \"1.00x\" was ever anything but natural."
   },
   "spit_text_3d": {
    "category": "unknown",
@@ -12704,7 +12889,8 @@
     "max_dimension_m": 0.0,
     "measured_at": "2026-04-29T07:09:56.762620Z"
    },
-   "content": "text"
+   "content": "text",
+   "qfep_connection": "Text arrives at typing speed, letter by letter, line by line, toggled from the A-button; dismissed, its labels are not hidden but freed. Reading restaged as duration, un-reading as deletion."
   },
   "spring_chain": {
    "category": "physics",
@@ -13259,7 +13445,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.084049Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "Every frame a fresh jagged path is rebuilt between two grabbable spheres — endpoints fixed by hands, every intermediate vertex jittered anew. E_flux on a leash: the randomness never escapes the segment your grip defines."
   },
   "tesla_sphere": {
    "category": "unknown",
@@ -13337,7 +13524,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.084049Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "A glowing pickable with gravity_scale −0.1, drifting faintly upward until held; its grab handler either emits a signal or files progress with a TaskManagerController. Touch is scored — the moment of grasp is where play gets audited."
   },
   "text_display": {
    "category": "unknown",
@@ -13440,7 +13628,8 @@
     "derived_at": "2026-04-29T09:39:46.084049Z",
     "derived_from": "aabb_size + category"
    },
-   "content": "text"
+   "content": "text",
+   "qfep_connection": "A violet glass pane carrying a 2D page inside a Viewport2Din3D, ringed by a hand-pose area that bends any approaching hand into a point. The scene decides how the body reads before a word appears: pages here demand a finger."
   },
   "transform_matrix_cube": {
    "category": "primitives",
@@ -13653,7 +13842,8 @@
     ],
     "max_dimension_m": 0.0,
     "measured_at": "2026-04-29T07:09:56.762620Z"
-   }
+   },
+   "qfep_connection": "One hard-coded sentence spoken aloud, then an audit that \"tts\" exists in the UtilityRegistry, reported to the console as check or cross. Speech in this world is a grid utility — a voice must be registered before it can be heard."
   },
   "turing_pattern_generator": {
    "category": "emergence",
@@ -13894,7 +14084,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.084544Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "One sphere absorbs three mappings at once: a 1D value becomes its size, 2D its position, 3D its emissive color. The mapping is the whole ontology; the sphere is merely the surface where dimensionality lands."
   },
   "vera_molnar_des_ordres": {
    "category": "art",
@@ -14266,7 +14457,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.084544Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "u_tt = c²∇²u on a clamped membrane: the fixed boundary is the whole reason a ripple becomes a note rather than a spill, and the viscous damping is E_flux leaking away frame by frame. The Courant number is a treaty — let space-step and time-step disagree past 1/√2 and the drumhead detonates instead of sings."
   },
   "wave_interference_tank": {
    "category": "waves",
@@ -14607,7 +14799,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.084544Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "F_order: a landscape flattened into a lookup table, sixty-by-sixty cells each resolving through a seven-key dictionary into one of seven colors and seven heights. Terrain here is not felt but indexed — a mountain is only the row that maps to 0.5."
   },
   "zelda_tilemap_2d": {
    "category": "unknown",
@@ -14656,7 +14849,8 @@
     "isolation": 0,
     "cluster_with": [],
     "preferred_zone": "entry"
-   }
+   },
+   "qfep_connection": "The same seven-terrain dictionary before it is granted relief — elevation collapsed back to pure color on a plane. What the 3D version stages as height, this holds as flat legend, the map admitting it was always a table of names."
   },
   "zelda_tiles_3d": {
    "category": "unknown",
@@ -14760,7 +14954,8 @@
     "approach_dir": "any",
     "derived_at": "2026-04-29T09:39:46.084544Z",
     "derived_from": "aabb_size + category"
-   }
+   },
+   "qfep_connection": "The world rendered into a SubViewport and mounted on the face of a grabbable RigidBody — the terrain you would have walked becomes a thing you pick up and turn. Cartography's oldest sleight, the territory shrunk to a handheld object, made literal and physical."
   },
   "artifact_workstation": {
    "category": "tools",
@@ -15319,7 +15514,8 @@
     "input"
    ],
    "map_ready": true,
-   "include_in_map_data": true
+   "include_in_map_data": true,
+   "qfep_connection": "Six degrees of freedom granted and then quietly curated: carry it anywhere, but release near a shelf_snap_point and it is pulled onto the grid of sanctioned resting places. The freedom of holding was real; the freedom of putting down was pre-negotiated."
   },
   "snap_socket": {
    "lookup_name": "snap_socket",
