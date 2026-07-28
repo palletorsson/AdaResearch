@@ -1,0 +1,322 @@
+{
+ "generated": "2026-07-28",
+ "source": "multi-agent triage of voice-wave refusals (workflow wf_74eb9db5-2b1)",
+ "note": "Zero VOICEABLE: all 45 refusals were honest. MISREGISTERED batch applied 2026-07-28 (d28c4c964).",
+ "findings": [
+  {
+   "token": "probability_sphere",
+   "verdict": "EMPTY_SCENE",
+   "placements": 5,
+   "evidence": "Registry primitives.json:14551 points at res://commons/primitives/spheres/probability_sphere.tscn. That file is 3 lines: `[gd_scene format=3]` + `[node name=\"Root\" type=\"Node3D\"]`. No ext_resource, no script, no mesh. No sibling probability_sphere.gd anywhere in the repo (only .godot/ and android/build/ export caches, plus a dressing_rooms JSON and doc/plans/artifacts/probability_sphere.md which itself records '[No dedicated GDScript found]'). The sibling laser_exploding_sphere.gd in the same directory IS real, so the family works — this member is just missing. Placed directly in F17_Zen_Garde",
+   "fix": "It is a compact pedestal-scale object in structure/devexamples maps and a shelf specimen in two curation bays — so it must read at ~0.4 scale from a metre away. Minimal honest body: probability_sphere.gd extending Node3D, building one SphereMesh shell (transparent, low alpha) plus N MultiMesh/small-sphere points sampled inside it each _process tick with randf() so the interior cloud visibly redistributes — density is the probability, and the shell is the sample space. Sequence guard applies: the maps are in `structure` (seq <7), where the curriculum-honesty rule forbids randf() — so drive the "
+  },
+  {
+   "token": "array_visualizer",
+   "verdict": "EMPTY_SCENE",
+   "placements": 3,
+   "evidence": "commons/primitives/tools/array_visualizer.tscn is 3 lines: [gd_scene format=3] and a single bare Node3D named Root. No script, no ext_resource, no mesh. Created by commit 966f442e5 purely to satisfy release Gate A. No sibling .gd anywhere in the repo — the only files bearing the name are the stub, the generated dressing_rooms/plans JSON, and Android/.godot build residue. The nearest real code, algorithms/arrays/index_visualizer/IndexVisualizer.gd, is a separately registered token doing something else (Label3D of the player's grid index), so this is not a misregistration. The previous agent was",
+   "fix": "Write commons/primitives/tools/array_visualizer.gd (extends Node3D, class_name ArrayVisualizer, procedural in _ready(), plus apply_grid_config) and rebuild the .tscn around it. Minimal honest body given the name and the proceduralgeneration placement: a row of N BoxMesh cells on a plinth, each cell's height driven by its stored value and its index rendered beneath via BakedTextAlbedo/TextScreen, with one highlighted read-head cell that steps along the row on a timer so index and element are visibly two different things. Reuse the bar_array family in commons/artifacts/registry/bar_array.json (b"
+  },
+  {
+   "token": "profiler_flame_graph",
+   "verdict": "EMPTY_SCENE",
+   "placements": 1,
+   "evidence": "Registry commons_artifacts.json:11388 points at res://commons/artifacts/profiler_flame_graph/profiler_flame_graph.tscn. That file is 57 bytes: `[gd_scene format=3]` + `[node name=\"Root\" type=\"Node3D\"]`. No script, no ext_resource, no mesh; the directory contains only the .tscn. No profiler/flame-graph .gd exists anywhere in algorithms/ or commons/ (grep for flame_graph|flamegraph returns nothing). doc/plans/artifacts/profiler_flame_graph.md records 'File | [No dedicated GDScript found]'. Placed once, in Gallery_Commons_3, beside request_note text:'profiler flame graph'.",
+   "fix": "Write profiler_flame_graph.gd building a static stacked-bar relief on a wall panel: a hardcoded nested call tree (root -> _process -> physics/render children with sample counts), rendered as rows of BoxMesh where bar width is proportional to self+child samples and row height is call depth, hot frames tinted toward red by sample share, plus a TextScreen caption naming the widest frame. Observe-only per its registry interaction, so no picking needed. Keep it to one commit and drop the 'Interactive' claim from the registry description, or add hover-to-highlight if interaction is kept."
+  },
+  {
+   "token": "schlegel_diagram",
+   "verdict": "EMPTY_SCENE",
+   "placements": 1,
+   "evidence": "Registry commons_artifacts.json:12112 points at res://commons/artifacts/schlegel_diagram/schlegel_diagram.tscn — the same 57-byte bare Node3D stub, no script, no mesh, directory holds nothing else. Grep for 'schlegel' across all .gd files in algorithms/ and commons/ returns zero hits, so nothing is misregistered; the implementation simply does not exist. Placed once, in Gallery_Commons_3, beside request_note text:'schlegel diagram'.",
+   "fix": "Adapt commons/artifacts/tesseract_bench/tesseract_bench.gd, which already holds working 4D machinery: `_vertices_4d: Array[Vector4]`, 32-edge construction by Hamming-1 pairing (`_hamming4`), and `_project()` doing perspective 4D->3D with `view_w`. A Schlegel diagram is that same projection taken from a viewpoint just outside one cell, so the outer cell becomes the enclosing hull and the rest nest inside it. Minimal honest body: build the 16 tesseract vertices, project with the 4D eye placed close to a chosen cell, render edges as thin cylinders and the cells as transparent tinted hulls, with t"
+  },
+  {
+   "token": "soft_body_slicer",
+   "verdict": "EMPTY_SCENE",
+   "placements": 1,
+   "evidence": "Registry commons_artifacts.json:12503 points at res://commons/artifacts/soft_body_slicer/soft_body_slicer.tscn — 57-byte bare Node3D stub, no script, no mesh, nothing else in the directory. No slicing/cut-plane soft-body implementation exists under any other name (the 'cut' grep hits in commons/artifacts are unrelated artifacts). Registry claims interaction 'grab', which nothing implements. Placed once, in Gallery_Commons_3, beside request_note text:'soft body slicer'.",
+   "fix": "Build on commons/soft_body/: `soft_body_shapes.make_jelly_box()` / `make_jelly_grid()` give a spring-mass body, `soft_body_sim.gd` runs it, `to_node3d()` renders it, and `grab_soft_body.gd` already supplies the grab handling the registry promises. Minimal honest body: a bench-top jelly cube plus a grabbable emissive plane; on release, delete every spring whose two particles straddle the plane and rebuild the surface mesh. The teaching moment is that cutting a soft body is a topology edit on the spring graph, not a mesh boolean — the halves sag apart because constraints were removed, not becaus"
+  },
+  {
+   "token": "sol_lewitt_wall_drawing",
+   "verdict": "EMPTY_SCENE",
+   "placements": 1,
+   "evidence": "Registry commons_artifacts.json:12580 points at res://commons/artifacts/sol_lewitt_wall_drawing/sol_lewitt_wall_drawing.tscn — 57-byte bare Node3D stub, no script, no mesh. Grep for 'wall_drawing' across all .gd files returns zero hits. The one 'lewitt' hit, commons/artifacts/prefab_sculpture/prefab_sculpture.gd (mode \"lewitt\" -> `_build_lewitt()`), is a separate registered artifact (registry/lab.json:1434) that builds LeWitt's modular OPEN-CUBE lattice — a different work in a different medium, not this token misfiled. Placed once, in Gallery_Commons_3, beside request_note text:'sol lewitt wal",
+   "fix": "Write sol_lewitt_wall_drawing.gd rendering a wall quad plus line geometry generated from a written instruction, with the instruction itself displayed as BakedTextAlbedo/TextScreen text beside the drawing — the certificate and the execution shown together, which is the whole point of LeWitt. Pick two or three canonical instructions (e.g. lines from each corner toward a common point; not-straight lines drawn at random within a band) and expose an `instruction` grid_config key that selects one and a `seed` that varies the execution, so two placements of the same instruction visibly differ while b"
+  },
+  {
+   "token": "vera_molnar_des_ordres",
+   "verdict": "EMPTY_SCENE",
+   "placements": 1,
+   "evidence": "Registry commons_artifacts.json points at res://commons/artifacts/vera_molnar_des_ordres/vera_molnar_des_ordres.tscn — 57-byte bare Node3D stub, no script, no mesh. A related implementation exists but is NOT this artifact: commons/primitives/puzzles/rotation_match_puzzle.gd (registry/primitives.json:17172) has `@export_enum(\"Molnar Desordres\", ...)`, a Molnar palette, `max_rotation`, and real geometry (`_create_canvas`, `_generate_composition`, `_create_rect_mesh` building QuadMesh rects). That is a grab-to-match puzzle with its own lookup name, whereas this token is registered interaction 'ob",
+   "fix": "Write vera_molnar_des_ordres.gd reusing the composition math already proven in commons/primitives/puzzles/rotation_match_puzzle.gd (`_calculate_rotation(col, row, index)`, the off-white/near-black Molnar palette, `_create_rect_mesh`), but as an observe-only wall canvas driven by a VR slider (commons pattern: preload slider_horizontal.tscn, listen to `slider_moved`, read `get_normalized_value()`). The slider scales `max_rotation` from 0 to ~25 degrees and regenerates in place, so a viewer watches an orthogonal grid dissolve into des ordres continuously rather than seeing two fixed states."
+  },
+  {
+   "token": "viscous_fluid_blob",
+   "verdict": "EMPTY_SCENE",
+   "placements": 1,
+   "evidence": "Registry commons_artifacts.json points at res://commons/artifacts/viscous_fluid_blob/viscous_fluid_blob.tscn — 57-byte bare Node3D stub, no script, no mesh. A genuine viscous-blob implementation exists at commons/artifacts/viscous_bench/viscous_bench.gd (registry/soft_bodies.json:2616) — Verlet blobs with stiffness 0.22 / damping 0.86 that slump and merge — but it is a separately registered, separately placed bench artifact with its own @identity and truth line, so this is a duplicate request, not a misregistration. Placed once, in Gallery_Commons_3, beside request_note text:'viscous fluid blo",
+   "fix": "Either retire the token into viscous_bench (single change: swap the Gallery_Commons_3 cell to viscous_bench and drop the entry), or, if a pedestal-scale sibling is genuinely wanted, write viscous_fluid_blob.gd as a one-cell version: `soft_body_shapes.make_jelly_box()` at low stiffness / high damping driven by soft_body_sim.gd, rendered via `to_node3d()`, on a plinth with no tray and no bench — the dressing room already specifies posture 'pedestal' and a 1x1x1 footprint. Retiring is the honest option unless the smaller framing earns its own claim."
+  },
+  {
+   "token": "knowledge_prism",
+   "verdict": "EMPTY_SCENE",
+   "placements": 1,
+   "evidence": "Registry primitives.json:10323 points at res://commons/primitives/prisms/knowledge_prism.tscn. That file is the same 3-line stub (`[gd_scene format=3]`, lone `Node3D` named Root). commons/primitives/prisms/ contains that one file and nothing else — no .gd, no other prism. doc/plans/artifacts/knowledge_prism.md confirms '[No dedicated GDScript found]' and lists no curriculum position at all. Only placement is the index map Gallery_Primitives_2 (`knowledge_prism:0:-0.5`).",
+   "fix": "Its only home is a primitives index gallery and its registry spatial_needs asks for a pedestal, so the honest minimum is small and static, not a simulation. Build knowledge_prism.gd: a triangular PrismMesh with a refractive/rim material, one narrow white beam entering a face (thin cylinder or an unshaded quad), and a fan of coloured beams leaving the opposite face at spread angles — the split is the whole claim. If it cannot earn even that, the cheaper correct move is to drop it from Gallery_Primitives_2 and delete the registry entry rather than keep an empty pedestal in the primitives showroo"
+  },
+  {
+   "token": "surveillance_panopticon",
+   "verdict": "EMPTY_SCENE",
+   "placements": 1,
+   "evidence": "Registry commons_artifacts.json:13314 points at res://commons/artifacts/surveillance_panopticon/surveillance_panopticon.tscn. The directory commons/artifacts/surveillance_panopticon/ contains that one .tscn and nothing else; the file is the 3-line bare `Node3D` stub. No panopticon .gd exists anywhere outside .godot/ and android/build/ caches. doc/plans/artifacts/surveillance_panopticon.md records '[No dedicated GDScript found]'. Registry declares size_group room_scale, footprint 4x3x4, sequence criticalalgorithms. Single placement: CriticalAlgorithms_Bias_Gallery at [1,3].",
+   "fix": "The registry description already specifies the body — 'Foucault panopticon. Central tower with CCTV cones' — and it is the critical-theory centrepiece of a bias gallery, so an empty 4x3x4 footprint is the worst possible failure here. Minimal honest body: surveillance_panopticon.gd building a central CylinderMesh tower (dark, opaque, windows as an emissive band you cannot see into), a ring of ~8-12 open cells on the circumference facing inward, and one translucent unshaded cone per cell sweeping from the tower — the cones should be visible from the cells but the tower interior never legible fro"
+  },
+  {
+   "token": "latent_space_walk",
+   "verdict": "EMPTY_SCENE",
+   "placements": 1,
+   "evidence": "Registry commons_artifacts.json:7585 points at res://commons/artifacts/latent_space_walk/latent_space_walk.tscn. Directory commons/artifacts/latent_space_walk/ holds that single file; it is the 3-line bare `Node3D` stub with no ext_resource. No latent_space_walk.gd or any latent-space implementation exists in the repo (search for 'latent' returns only this stub, its dressing_rooms JSON, doc/plans, and build caches). doc/plans/artifacts/latent_space_walk.md records '[No dedicated GDScript found]'. Registry claims room_scale, footprint 3x1x3, sequence machinelearning. Single placement: Gallery_C",
+   "fix": "3x1x3 and room_scale means the walk is meant to be literal — the player crosses it. Minimal honest body: latent_space_walk.gd laying a 3x3 m walkable plane and mounting a grid (say 7x7) of small quads or meshes whose form is a smooth function of the cell's (x,z) coordinate — a decoded morph between corner anchors via bilinear interpolation, no trained model needed. Walking the plane then IS traversing the interpolation, and the honest teaching point (the space is continuous, the decoder is deterministic, there is no 'between' that the decoder refuses) falls out of the geometry. If a walkable b"
+  },
+  {
+   "token": "found_object_assembler",
+   "verdict": "EMPTY_SCENE",
+   "placements": 1,
+   "evidence": "Registry commons_artifacts.json:4620 -> res://commons/artifacts/found_object_assembler/found_object_assembler.tscn. The file is 3 lines: [gd_scene format=3] and a single node named Root of type Node3D. No script, no ext_resource, no mesh. The directory commons/artifacts/found_object_assembler/ contains that .tscn and nothing else — no sibling .gd. doc/plans/artifacts/found_object_assembler.md confirms 'File: [No dedicated GDScript found]'. Unlike the other stubs this token is genuinely wanted: it declares sequence 'bricolage', interaction 'grab', tags found_object/duchamp/bricolage, footprint ",
+   "fix": "Write found_object_assembler.gd (extends Node3D, class_name FoundObjectAssembler, procedural in _ready, apply_grid_config) and attach it. Minimal honest body given the name and the room_scale 3x3 footprint: a low junk-pile plinth scattering ~10-14 mismatched primitive fragments (BoxMesh/CylinderMesh/TorusMesh offcuts, deterministic RNG seed so the pile is stable across loads), each fragment a RigidBody3D wrapped like commons/primitives/cubes/grab_cube.gd so it can be lifted, plus a bare assembly table surface where dropped fragments snap to a coarse grid and stay. Expose fragment_count / snap_"
+  },
+  {
+   "token": "rhizome_navigator",
+   "verdict": "EMPTY_SCENE",
+   "placements": 1,
+   "evidence": "Registry commons/artifacts/registry/commons_artifacts.json:12034 points at res://commons/artifacts/rhizome_navigator/rhizome_navigator.tscn. That directory contains exactly one file, a 3-line stub: gd_scene header plus a bare Node3D named Root — no script, no mesh, no children. No .gd exists for it anywhere in the working tree (a repo-wide GDScript grep for RhizomeNavigator/rhizome_navigator returns only commons/artifacts/rhizome_vault/rhizome_vault.gd, a cross-reference, not an implementation). doc/plans/artifacts/rhizome_navigator.md confirms it: File = [No dedicated GDScript found], Pattern",
+   "fix": "Cheapest honest fix: drop rhizome_navigator from commons/maps/SpeculativeComputation_Queer_Machines/map_data.json and place rhizome_grower there instead — commons/artifacts/rhizome_grower/rhizome_grower.gd already stages exactly this figure (nodes sprouting at the rim, linking to several existing points, never one parent, readout 'NODES/EDGES (no root)'). If the room genuinely needs the walk-through variant the 3x1x3 footprint promises, the minimal body is a floor-plane graph rather than a tabletop one: rhizome_grower's growth loop rewritten to lay its nodes as low plinths and its edges as flu"
+  },
+  {
+   "token": "garbage_collector_demo",
+   "verdict": "EMPTY_SCENE",
+   "placements": 1,
+   "evidence": "Registry commons_artifacts.json:5220 points at res://commons/artifacts/garbage_collector_demo/garbage_collector_demo.tscn. The file is 57 bytes and byte-identical to the other five stubs: `[gd_scene format=3]` + `[node name=\"Root\" type=\"Node3D\"]`. No ext_resource line, so no script; no mesh, no children. commons/artifacts/garbage_collector_demo/ holds that file alone — no sibling .gd. Born in gate commit 966f442e5 with 60 other placeholder scenes. Unlike hypercube_rotation and entropy_visualization there is no live twin anywhere in the repo: a repo-wide grep for garbage_collector/mark_sweep ac",
+   "fix": "Write commons/artifacts/garbage_collector_demo/garbage_collector_demo.gd (`extends Node3D`, `class_name GarbageCollectorDemo`, procedural in `_ready()`, plus `apply_grid_config(config_data: Dictionary)`) and add the ext_resource + script line to the .tscn. Minimal honest body inside the declared 2x1x2 footprint: a heap laid out as a small grid of BoxMesh cells, a root-set pillar at one edge, and reference edges drawn between cells with ImmediateMesh over a randomly generated object graph. A looping timer runs the two named phases — MARK walks the graph breadth-first from the roots and lights e"
+  },
+  {
+   "token": "attention_economy_sim",
+   "verdict": "EMPTY_SCENE",
+   "placements": 1,
+   "evidence": "Registry commons_artifacts.json:1148 points at res://commons/artifacts/attention_economy_sim/attention_economy_sim.tscn. 57 bytes, content `[gd_scene format=3]` + `[node name=\"Root\" type=\"Node3D\"]` — no ext_resource, no script, no mesh, no children. Directory contains that single file; no sibling .gd. Created by gate commit 966f442e5. No implementation exists elsewhere: grep for attention_economy across .gd/.tscn in algorithms/ and commons/ returns nothing, and the similarly-named registered artifacts are unrelated ML pieces (attention_mechanisms -> algorithms/machinelearning/attention_mechani",
+   "fix": "Write commons/artifacts/attention_economy_sim/attention_economy_sim.gd (`extends Node3D`, `class_name AttentionEconomySim`, procedural `_ready()`, `apply_grid_config`) and reference it from the .tscn. Minimal honest body in the 2x1x2 footprint: four or five vertical content-stream columns behind one shared horizontal attention bar. Each stream holds a bid that climbs the longer it is ignored; every tick the bar's fill is awarded whole to the current highest bidder while the losers keep escalating — growing brighter, taller, faster-flashing. The mechanism must make the escalation the visible pr"
+  },
+  {
+   "token": "data_labor_counter",
+   "verdict": "EMPTY_SCENE",
+   "placements": 1,
+   "evidence": "Registry commons_artifacts.json:3198 points at res://commons/artifacts/data_labor_counter/data_labor_counter.tscn. 57 bytes, `[gd_scene format=3]` + `[node name=\"Root\" type=\"Node3D\"]` — no ext_resource, no script, no mesh, no children. commons/artifacts/data_labor_counter/ contains only that file; no sibling .gd. Born in gate commit 966f442e5 among 61 stub scenes. Nothing implements it elsewhere: a repo-wide grep for data_labor across .gd and .tscn returns zero hits, and no registered token covers ghost work. Registry metadata is curated (\"Visualizes hidden human labor behind AI systems.\", cat",
+   "fix": "Write commons/artifacts/data_labor_counter/data_labor_counter.gd (`extends Node3D`, `class_name DataLaborCounter`, procedural `_ready()`, `apply_grid_config`) and wire it into the .tscn. Minimal honest body for the 1x1x1 footprint: a small counter panel using the project's canonical TextScreen (commons/ui/text_screen.gd) that ticks two numbers upward in step — items labelled, and human-hours accrued — while beneath it a physical pile of tally marks grows, one mark per N labels, until the pile is taller than the panel. The honesty is in the ratio: the model's output counter should run fast and "
+  },
+  {
+   "token": "filter_bubble_demo",
+   "verdict": "EMPTY_SCENE",
+   "placements": 1,
+   "evidence": "Registry commons_artifacts.json:4185 points at res://commons/artifacts/filter_bubble_demo/filter_bubble_demo.tscn. 57 bytes, content `[gd_scene format=3]` + `[node name=\"Root\" type=\"Node3D\"]` — no ext_resource, no script, no mesh, no children. Directory holds that one file; no sibling .gd. Created by gate commit 966f442e5. No implementation exists under another name: grep for filter_bubble across .gd/.tscn returns nothing, and the other 'bubble' tokens in the registry are unrelated (bar_array_bubble_sort, living_paper_bubble_sort, bubble_particles, bubbles_random, bubble_blaster). The closest ",
+   "fix": "Write commons/artifacts/filter_bubble_demo/filter_bubble_demo.gd (`extends Node3D`, `class_name FilterBubbleDemo`, procedural `_ready()`, `apply_grid_config`) and add the script to the .tscn. Minimal honest body in the 2x1x2 footprint: a wide ring of content points scattered across a topic circle, each a small emissive sphere coloured by position. Every tick the engine picks the point nearest the last selection and re-samples the whole population toward that neighbourhood, so the angular spread contracts visibly and the ring's radius shrinks toward a single hue. Keep the discarded points visib"
+  },
+  {
+   "token": "bridget_riley_op_art",
+   "verdict": "EMPTY_SCENE",
+   "placements": 1,
+   "evidence": "C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\commons\\artifacts\\bridget_riley_op_art\\bridget_riley_op_art.tscn is the 57-byte stub — no script, no mesh, no sibling .gd. No standalone Riley artifact exists anywhere in the repo. The only Riley code is C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\commons\\artifacts\\pattern_atlas_gallery\\shaders\\atlas_riley.gdshader (18 lines: parallel lines at fract(x*24), sinusoidally displaced inside a gaussian band so the eye supplies the motion), consumed as plate 13 of the twelve-tradition pattern_atlas_gallery — it cannot be repointed to without dragging ",
+   "fix": "Minimal honest body: a single upright plate (QuadMesh ~2x2 m, matching the registry footprint) with a ShaderMaterial loading the existing res://commons/artifacts/pattern_atlas_gallery/shaders/atlas_riley.gdshader, exporting g_scale / g_weight / g_wobble as grid config so the wobble is the critical parameter, plus a BakedTextAlbedo maker tag. Roughly twenty lines of _build() reusing shader that already works. If nobody wants a second Riley outside the atlas, retire the token instead and drop its cell from commons/maps/Gallery_Commons_1/map_data.json."
+  },
+  {
+   "token": "dimensional_analogy",
+   "verdict": "EMPTY_SCENE",
+   "placements": 1,
+   "evidence": "C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\commons\\artifacts\\dimensional_analogy\\dimensional_analogy.tscn is the 57-byte stub. Nothing in the repo builds the point->line->square->cube->tesseract ladder (grep for that progression returns nothing). Its higher_dimensions siblings hypercube_rotation and schlegel_diagram are byte-identical 57-byte stubs too; the only real 4D geometry is C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\commons\\artifacts\\tesseract_bench\\tesseract_bench.gd, which projects a spinning 4D hypercube (Vector4 vertices, x-w plane rotation, perspective divide by view_w) — ",
+   "fix": "Minimal honest body: five stations along a 3 m strip (the registered footprint is 3x1x1), each the previous one extruded along a fresh axis — a sphere; two spheres joined by an edge; four vertices/four edges; eight/twelve; sixteen/thirty-two projected from 4D with the same Vector4 -> perspective-divide maths already written in tesseract_bench.gd. One export (`stage`) walks the ladder so the extrusion is watched rather than labelled, with BakedTextAlbedo captions for vertex/edge counts (1/0, 2/1, 4/4, 8/12, 16/32). Reuse tesseract_bench's projection helper rather than reimplementing it."
+  },
+  {
+   "token": "backpropagation_flow",
+   "verdict": "EMPTY_SCENE",
+   "placements": 1,
+   "evidence": "C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\commons\\artifacts\\backpropagation_flow\\backpropagation_flow.tscn is the 57-byte stub — no script, no mesh. Real backpropagation exists but only inside a broader artifact: C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\algorithms\\machinelearning\\neuralnetworkvisualization\\neural_network_visualization.gd (696 lines, already registered as its own token neural_network_visualization) has backward_pass(targets) at line 497 computing per-layer deltas and a 'Backpropagate Error' loop at 516, with an @identity that already promises 'weights shimmer as grad",
+   "fix": "Either (a) retire the token — the backward pass is already visible inside neural_network_visualization, so drop the cell from commons/maps/Gallery_Commons_1/map_data.json; or (b) if a dedicated piece is wanted, the minimal honest body is a 3x1 m layer chain (3-4 planes of neuron spheres, matching the registered footprint) driven by the backward_pass() maths extracted from neural_network_visualization.gd:497 — a pulse travelling right-to-left along the edges, each edge's emission scaled by |delta| so the biggest gradients glow loudest and the vanishing-gradient dimming toward the input layer is"
+  },
+  {
+   "token": "fluid_taxonomy_tree",
+   "verdict": "EMPTY_SCENE",
+   "placements": 1,
+   "evidence": "commons_artifacts.json:4415 points at C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\commons\\artifacts\\fluid_taxonomy_tree\\fluid_taxonomy_tree.tscn — 57 bytes, exactly '[gd_scene format=3]' plus '[node name=\"Root\" type=\"Node3D\"]'. No script, no mesh, no ext_resource; the directory contains that one file and nothing else. Created by commit 966f442e5 (release-gate placeholder, one of 57 such stubs). No implementation exists anywhere in the repo under any other name. Placed once, at cell [3,1] of commons/maps/SpeculativeComputation_Queer_Machines/map_data.json — a genuinely curated 4-slot room (s",
+   "fix": "Write commons/artifacts/fluid_taxonomy_tree/fluid_taxonomy_tree.gd on the glitch_body pattern (extends Node3D, class_name FluidTaxonomyTree, procedural in _ready, apply_grid_config, @identity block) and add the ext_resource + script line to the .tscn. Minimal honest body: a branching node-and-edge tree of thin cylinders whose edge topology is re-solved on a timer — leaves migrate between parents, two branches fuse into one node, a node splits in two — so no leaf keeps a stable ancestor. Critical parameter = the reclassification interval; at zero it freezes into a clean Linnaean tree, raised it"
+  },
+  {
+   "token": "non_binary_classifier",
+   "verdict": "EMPTY_SCENE",
+   "placements": 1,
+   "evidence": "commons_artifacts.json:9579 points at C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\commons\\artifacts\\non_binary_classifier\\non_binary_classifier.tscn — 57 bytes, a lone Node3D, no script, no mesh, no ext_resource; the directory holds nothing else. Created by commit 966f442e5 alongside 56 other stub .tscn files written to satisfy the pipeline's 'every interactable has a scene file on disk' gate. Nothing implements this token elsewhere in the repo (doc/plans/artifacts/non_binary_classifier.md itself records 'File: [No dedicated GDScript found]'). Placed once, at cell [1,3] of commons/maps/Spec",
+   "fix": "Write commons/artifacts/non_binary_classifier/non_binary_classifier.gd (extends Node3D, class_name NonBinaryClassifier, procedural _ready, apply_grid_config, @identity block) and reference it from the .tscn. Minimal honest body: a visible decision boundary over a scatter of point-sprites — a curved separating surface running a few gradient steps per frame, deliberately never allowed to converge because samples sitting inside the margin get their labels re-drawn each pass. The readable mechanism is that the boundary keeps moving BECAUSE the ambiguous samples refuse to resolve, not because the o"
+  },
+  {
+   "token": "overfitting_demo",
+   "verdict": "EMPTY_SCENE",
+   "placements": 1,
+   "evidence": "commons/artifacts/overfitting_demo/ contains exactly one file, the 57-byte overfitting_demo.tscn: [gd_scene format=3] + lone Node3D. No script, no mesh, no sibling .gd; git log shows the directory and file were born in commit 966f442e5 as one of the 55 Gate A placeholders. A repo-wide grep for 'overfit' in .gd/.tscn returns only unrelated files (adaboost.gd, random_forest.gd, CrossValidationVR.gd) — none of which implements this token. Registry claims category machinelearning and 'Polynomial fitting with complexity slider', but no such fitting code exists. Sole placement is commons/maps/Galler",
+   "fix": "Build commons/artifacts/overfitting_demo/overfitting_demo.gd (extends Node3D, class_name OverfittingDemo) honouring the registry's own description. Minimal honest body: a 2x1 bench holding a scattered point cloud of ~15 noisy samples above a fixed ground-truth curve, an ImmediateMesh polynomial fit redrawn on each change, and one slider_horizontal bound to polynomial degree 1..15 — low degree visibly misses the points, high degree threads every sample while thrashing between them. Show train error and held-out error as two TextScreen readouts diverging as degree climbs; that divergence IS the "
+  },
+  {
+   "token": "pressure_soft_body",
+   "verdict": "EMPTY_SCENE",
+   "placements": 1,
+   "evidence": "commons/artifacts/pressure_soft_body/ contains exactly one file, the 57-byte pressure_soft_body.tscn: [gd_scene format=3] + lone Node3D. No script anywhere; created by commit 966f442e5 as a Gate A placeholder. Registry commons_artifacts.json declares category physics, sequence softbodies, interaction grab, 'Inflatable soft body with internal pressure control' — none of which is implemented. Real pressure_coefficient code does exist in the repo (algorithms/softbodies/rounded_softbody.gd:191, advanced_concepts/breathing_room.gd:139, mushrooms/soft_mushrooms.gd:96, advanced_concepts/squishy_ball_",
+   "fix": "Build commons/artifacts/pressure_soft_body/pressure_soft_body.gd (extends Node3D, class_name PressureSoftBody, plus apply_grid_config). Minimal honest body: a table-height plinth carrying a single closed SoftBody3D box/sphere mesh (closed is required for pressure to work — see breathing_room.gd:52) with linear_stiffness fixed and pressure_coefficient exposed on one slider_horizontal from deflated to over-inflated, and the registry's declared grab interaction wired so squeezing one side makes the opposite side bulge. Copy the parameter-binding block from algorithms/softbodies/rounded_softbody.g"
+  },
+  {
+   "token": "animated_cube",
+   "verdict": "MISREGISTERED",
+   "placements": 4,
+   "evidence": "Registry primitives.json:861 points at res://commons/primitives/cubes/animated_cube.tscn, which is a 3-line stub ([gd_scene format=3] + lone Node3D) created by commit 966f442e5 ('Gate A: 55 placeholder .tscn stubs'). The REAL implementation sits one directory deeper and was never wired up: C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\commons\\primitives\\cubes\\animationsine\\animated_cube.tscn -> script commons/primitives/cubes/animationsine/animated_cube_edit.gd (7.8 KB, 250+ lines). It builds real geometry: _create_handles() instantiates 8 grab_sphere_point.tscn VR handles at the cube corners",
+   "fix": "Change the \"scene\" field of animated_cube in commons/artifacts/registry/primitives.json (line 861) from res://commons/primitives/cubes/animated_cube.tscn to res://commons/primitives/cubes/animationsine/animated_cube.tscn, then delete the stub file commons/primitives/cubes/animated_cube.tscn so it cannot shadow the real one again. Note the real scene embeds a Camera3D — verify GridInteractablesComponent._suppress_embedded_chrome strips it on map load (known demo-as-artifact UI-leak class)."
+  },
+  {
+   "token": "renaissancepaintingfloorrattern",
+   "verdict": "MISREGISTERED",
+   "placements": 3,
+   "evidence": "Registry parametric.json:1497 points at C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\algorithms\\geometry\\renaissancepaintingfloorrattern\\renaissancepaintingfloorrattern.tscn — a 57-byte bare stub ([gd_scene format=3] + a lone Node3D), created by commit 966f442e5. The REAL implementation is C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\algorithms\\computationalgeometry\\renaissancepaintingfloorrattern\\renaissancepaintingfloorrattern.tscn (real scene with Camera3D + OmniLight3D) driving .../renaissancepaintingfloorrattern.gd — 367 lines that build a 24x16 checkerboard of BoxMesh tiles (create_b",
+   "fix": "Set the registry \"scene\" to res://algorithms/computationalgeometry/renaissancepaintingfloorrattern/renaissancepaintingfloorrattern.tscn, and repair that scene's ext_resource path string to res://algorithms/computationalgeometry/renaissancepaintingfloorrattern/renaissancepaintingfloorrattern.gd so it no longer depends on uid resolution alone. Then delete the algorithms/geometry/ stub directory."
+  },
+  {
+   "token": "voronoi_grid_3d",
+   "verdict": "MISREGISTERED",
+   "placements": 2,
+   "evidence": "Registry commons/artifacts/registry/procgen_extra.json:11835 points at res://algorithms/voronoi/voronoi_grid_3D.tscn — that directory holds nothing but a 3-line stub (bare Node3D, no script). The working scene is res://algorithms/computationalgeometry/voronoi_grid_3D.tscn (uid://bpbtmf4p3ogae), which loads uid://ngwofrr00cfs = algorithms/computationalgeometry/VoronoiGrid3D.gd (145 lines). That script builds real geometry: _ready() spawns grid_size^2 SphereMesh MeshInstance3D nodes on a lattice, add_line() builds an oriented CylinderMesh per edge with a hand-constructed Basis, and _process() ru",
+   "fix": "Repoint the registry scene to res://algorithms/computationalgeometry/voronoi_grid_3D.tscn (procgen_extra.json:11835), delete the orphan stub algorithms/voronoi/voronoi_grid_3D.tscn, and fix the stale ext_resource path string inside the real .tscn (it reads res://algorithms/voronoi/VoronoiGrid3D.gd; only the uid is currently saving it). Note the name is a lie either way — see voice — so consider renaming the token to flocking_lattice rather than shipping it as a Voronoi lesson."
+  },
+  {
+   "token": "kitbash_station",
+   "verdict": "MISREGISTERED",
+   "placements": 1,
+   "evidence": "Registry commons_artifacts.json:7508 points at res://commons/artifacts/kitbash_station/kitbash_station.tscn, which is the 3-line bare `Node3D` stub in a directory containing nothing else. But a real implementation of exactly this description ('Combine random artifact fragments into new forms') exists at algorithms/randomness/proceduralrandomness/geometrybased/kitbashing/kitbashing.gd — 1282 lines that actually build geometry: create_procedural_modules() dispatching on a `generation_rules` mode (surrealist/mechanical/organic), add_stacked_primitives/add_floating_parts/add_nonsensical_machine co",
+   "fix": "Repoint the kitbash_station registry entry's \"scene\" to res://algorithms/randomness/proceduralrandomness/geometrybased/kitbashing/kitbashing.tscn — this is the repo's established one-scene-many-names pattern (set_meta(\"artifact_lookup_name\") before _ready), already used across the bricolage build. Two things must be handled in the same change: (1) kitbashing.gd defaults to space_size Vector3(30,15,30), far past kitbash_station's declared footprint, so apply_grid_config must scale space_size down before generation rather than after; (2) kitbashing.tscn embeds a Camera3D — the known demo-as-arti"
+  },
+  {
+   "token": "bucket_of_tulips",
+   "verdict": "MISREGISTERED",
+   "placements": 1,
+   "evidence": "Registry primitives.json:1844 points at res://commons/primitives/plants/bucket_of_tulips.tscn, which is a 3-line stub ([gd_scene format=3] + a lone Node3D named Root, no script). The real implementation is C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\algorithms\\computationalbiology\\bucketoftulips\\bucket_of_tulips.gd (~700 lines, script attached in the sibling .tscn): Vogel-model phyllotaxis (r = radial_packing*sqrt(n), theta = n*137.508 deg) seeds 21 tulip positions; ImmediateMesh builds tapered 4-face stem tubes, 6-tepal flower heads in two whorls, and diamond leaves; a CylinderMesh bucket;",
+   "fix": "Repoint the registry scene to res://algorithms/computationalbiology/bucketoftulips/bucket_of_tulips.tscn and delete the orphan stub commons/primitives/plants/bucket_of_tulips.tscn (the plants/ directory contains nothing else). Note the real .tscn carries a stray Camera3D child at z=1.99 — strip it, or GridInteractablesComponent's chrome suppression will have to."
+  },
+  {
+   "token": "mondrian_3d_display",
+   "verdict": "MISREGISTERED",
+   "placements": 1,
+   "evidence": "Registry commons_artifacts.json:9154 points at res://commons/context/mondrian2d/mondrian_3d_display.tscn — a 3-line stub (bare Node3D, no script, no ext_resource). Its intended script exists one directory over under a hyphenated name that Godot never auto-links: commons/context/mondrian2d/mondrian-3d-display.gd (115 lines — configures a SubViewport to UPDATE_ALWAYS at 1024x1024, pipes get_texture() onto a Sprite3D with an unshaded StandardMaterial3D, and CSG-subtracts an inner box from an outer box to cut a black frame). That script requires $Sprite3D and $SubViewport children the stub does no",
+   "fix": "Repoint the registry scene to res://commons/context/mondrian2d/mondrian_2d.tscn. That path is already claimed by the token mondrian_2d (commons_artifacts.json:9059), so the cleaner resolution is to retire mondrian_3d_display as a duplicate and swap Gallery_Commons_2's cell to mondrian_2d or grabable_mondrian. Either way, delete the empty mondrian_3d_display.tscn and the dead hyphenated mondrian-3d-display.gd."
+  },
+  {
+   "token": "rhizome_cave_system",
+   "verdict": "MISREGISTERED",
+   "placements": 1,
+   "evidence": "Registry entry commons/artifacts/registry/isosurfaces.json:2199 points at res://algorithms/marchingcubes/scenes/rhizome_cave_demo.tscn — a 3-line stub (gd_scene header + bare Node3D, no script, no mesh). The real implementation is the sibling token rhizome_cave_demo (isosurfaces.json:1870), whose scene res://algorithms/spacetopology/marchingcubes/scenes/rhizome_cave_demo.tscn carries RhizomeCaveDemoController.gd (145 lines, with a full @identity block), which instantiates RhizomeCaveGenerator (algorithms/spacetopology/marchingcubes/rhizome/RhizomeCaveGenerator.gd, 436 lines: RhizomeVoxelChunk ",
+   "fix": "Repoint the registry scene for rhizome_cave_system to res://algorithms/spacetopology/marchingcubes/scenes/rhizome_cave_demo.tscn (isosurfaces.json:2199). Then decide the duplicate: rhizome_cave_system and rhizome_cave_demo would both address the same scene — either keep rhizome_cave_system as the map-facing name and retire rhizome_cave_demo, or drop rhizome_cave_system from Gallery_ProceduralGeneration and place rhizome_cave_demo there instead. Either way, delete the orphan stub algorithms/marchingcubes/scenes/rhizome_cave_demo.tscn so nothing else resolves to it."
+  },
+  {
+   "token": "big_o_race",
+   "verdict": "MISREGISTERED",
+   "placements": 1,
+   "evidence": "Registered scene C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\commons\\artifacts\\big_o_race\\big_o_race.tscn is a 57-byte stub (bare Node3D, no script). But a full implementation of exactly this artifact exists: C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\algorithms\\resourcemanagement\\big_o_complexity\\big_o_complexity.gd (171 lines, class_name BigOComplexity). Its own @identity block opens 'the COMPLEXITY RACE' — six bars, one per Big-O class (O(1), O(log n), O(n), O(n log n), O(n^2), O(2^n)), built in _build(), rescaled every frame in _process() as n sweeps to n_max=24, coloured green-to-r",
+   "fix": "Point the registry entry's \"scene\" at res://algorithms/resourcemanagement/big_o_complexity/big_o_complexity.tscn (which loads the script via ext_resource), or — cleaner, since big_o_complexity is already its own registered token with its own placements — retire big_o_race as a duplicate name and drop its single cell from commons/maps/Gallery_Commons_1/map_data.json. Do not author a second racing-bars artifact; the race already exists."
+  },
+  {
+   "token": "cache_hit_visualizer",
+   "verdict": "MISREGISTERED",
+   "placements": 1,
+   "evidence": "Registered scene C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\commons\\artifacts\\cache_hit_visualizer\\cache_hit_visualizer.tscn is the same 57-byte empty stub. The real body is C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\algorithms\\resourcemanagement\\data_locality_caching\\data_locality_caching.gd (class_name DataLocalityCaching): a six-platform MEMORY HIERARCHY LADDER — a LEVELS table of Registers/L1/L2/L3/RAM/Disk with real latency_ns and size strings — stacked at log(latency)-spaced heights, with a probe token climbed by _process() toward a cycling target level and a caption that flips H",
+   "fix": "Point \"scene\" at res://algorithms/resourcemanagement/data_locality_caching/data_locality_caching.tscn, or retire cache_hit_visualizer as a duplicate of the already-registered data_locality_caching and drop its cell from commons/maps/Gallery_Commons_1/map_data.json."
+  },
+  {
+   "token": "agnes_martin_grid_painting",
+   "verdict": "MISREGISTERED",
+   "placements": 1,
+   "evidence": "Registered scene C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\commons\\artifacts\\agnes_martin_grid_painting\\agnes_martin_grid_painting.tscn is the 57-byte empty stub. A working Agnes Martin grid painting already ships at C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\commons\\context\\agnesnatringrid\\agnes_grid.gd (Node2D, 35 lines: _draw() paints a cream ground and a 10x10 rule of grey lines at alpha 0.3) wrapped by agnes_grid_3d.tscn, which renders it through a SubViewport onto a Sprite3D bolted to a grab_cube.gd RigidBody with an XR highlight ring — a painting demoted to a texture so it can ",
+   "fix": "Point \"scene\" at res://commons/context/agnesnatringrid/agnes_grid_3d.tscn (use the one-scene-many-names pattern: set_meta(\"artifact_lookup_name\") before _ready). Caveat worth deciding first: the registry blurb promises 'micro-imperfections' and agnes_grid draws a mathematically perfect rule — the tremor is exactly what Martin's hand added. If the imperfection is wanted, add a jitter export to agnes_grid.gd rather than authoring a fourth Agnes scene; otherwise retire this token and drop its cell from commons/maps/Gallery_Commons_1/map_data.json."
+  },
+  {
+   "token": "player_position_to_console",
+   "verdict": "MISREGISTERED",
+   "placements": 1,
+   "evidence": "Registry commons_artifacts.json:10779 points at res://commons/displays/player_position_to_console.tscn — a 3-line stub from commit 966f442e5. In the SAME directory sits the real thing under a near-identical name: C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\commons\\displays\\player_position_console_display.tscn, a proper scene with an ext_resource script binding to commons/displays/player_position_console_display.gd (82 lines). That script builds behaviour, not geometry: _ready() creates a Timer at update_interval_seconds, _resolve_player() falls back through ../XROrigin3D -> exported player_",
+   "fix": "Repoint the scene field to res://commons/displays/player_position_console_display.tscn and delete the stub commons/displays/player_position_to_console.tscn. If a visible body is wanted in the gallery cell, pair it with a TextScreen or reuse algorithms/arrays/index_visualizer/IndexVisualizer.tscn, which already renders the same reading as a Label3D."
+  },
+  {
+   "token": "camera_context",
+   "verdict": "RETIRE",
+   "placements": 1,
+   "evidence": "Registry commons_artifacts.json:2039 points at res://commons/context/camera/camera.tscn. That file is two lines of content: `[gd_scene format=3 uid=...]` and `[node name=\"Camera\" type=\"Node3D\"]` — a Node3D that is not even a Camera3D, with no script and no children. Its own README.md calls it 'Minimal camera node for scene composition.' It has category 'unknown', map_sequences [], and exactly one placement: Gallery_Commons_1 (`camera_context:0:-0.5`), an auto-built index gallery. It is a scene-composition helper that was swept into the artifact registry, not an artifact.",
+   "fix": "Drop the `camera_context:0:-0.5` token from commons/maps/Gallery_Commons_1/map_data.json (interactables layer) and remove the entry from commons/artifacts/registry/commons_artifacts.json — or at minimum set include_in_map_data:false and map_ready:false so no future gallery build re-places it. commons/context/camera/camera.tscn should stay on disk as a composition helper; it just must not be reachable as a placeable interactable. Note this is also the safe direction: an artifact that instantiates a camera into a map is the known demo-as-artifact chrome-leak class that GridInteractablesComponent"
+  },
+  {
+   "token": "concept_synthesizer",
+   "verdict": "RETIRE",
+   "placements": 1,
+   "evidence": "Registry primitives.json:3039 -> res://commons/primitives/tools/concept_synthesizer.tscn, which is a 3-line stub (bare Node3D 'Root', no script). No sibling .gd anywhere in the repo — the only other hits are worktree copies and Android build remaps. Its neighbours in commons/primitives/tools/ (array_visualizer.tscn, reality_modifier.tscn, spatial_compass.tscn) are byte-identical stubs, so this is a batch of placeholder .tscn files someone generated from registry rows, not an implementation that rotted. The registry text is content-free filler ('Device for synthesizing abstract concepts into ta",
+   "fix": "Delete the concept_synthesizer entry from commons/artifacts/registry/primitives.json, delete commons/primitives/tools/concept_synthesizer.tscn, and drop the token from commons/maps/Gallery_Primitives_1/map_data.json (its only placement). Retire array_visualizer, reality_modifier and spatial_compass in the same pass — same stub, same origin."
+  },
+  {
+   "token": "dimension_lens",
+   "verdict": "RETIRE",
+   "placements": 1,
+   "evidence": "Registry primitives.json:5035 -> res://commons/primitives/tools/dimension_lens.tscn, a 3-line stub identical to its concept_synthesizer neighbour (bare Node3D, no script, no mesh). No .gd exists under any name. doc/plans/artifacts/dimension_lens.md records 'File: [No dedicated GDScript found]' and an empty Curriculum Position. The territory the name gestures at is already occupied by real, scripted artifacts: commons/artifacts/dimension_meter/dimension_meter.gd (211 lines), commons/artifacts/dimension_bench/dimension_bench.gd (187 lines), commons/artifacts/dimensional_analogy/, and algorithms/",
+   "fix": "Delete the dimension_lens entry from commons/artifacts/registry/primitives.json and the stub commons/primitives/tools/dimension_lens.tscn; drop the token from commons/maps/Gallery_Primitives_1/map_data.json. If a gallery slot is wanted there, substitute the already-working dimension_meter or dimension_bench."
+  },
+  {
+   "token": "geometric_crystal",
+   "verdict": "RETIRE",
+   "placements": 1,
+   "evidence": "Registry primitives.json:6958 -> res://commons/primitives/crystals/geometric_crystal.tscn, a 3-line stub (bare Node3D, no script). commons/primitives/crystals/ contains that one file and nothing else — no .gd, no kin. Meanwhile commons/primitives/crystal/ (singular) holds a fully realised crystal.tscn + crystal.gd that SurfaceTool-triangulates a hexagonal prism with pyramidal terminations and a per-ring radius taper (0.8 -> 0.9 -> 0.6), carrying a complete @identity block; commons/primitives/crystalcluster/ and commons/primitives/promoted/crystalcluster_v2/ extend the same family. The stub's d",
+   "fix": "Delete the geometric_crystal entry from commons/artifacts/registry/primitives.json, remove commons/primitives/crystals/ (the directory holds only the stub, and its near-identical name to commons/primitives/crystal/ is itself a trap), and drop the token from commons/maps/Gallery_Primitives_2/map_data.json. Use crystal or crystalcluster_v2 if that gallery cell should stay filled."
+  },
+  {
+   "token": "hypercube_rotation",
+   "verdict": "RETIRE",
+   "placements": 1,
+   "evidence": "Registry commons_artifacts.json:6742 points at res://commons/artifacts/hypercube_rotation/hypercube_rotation.tscn. That file is 57 bytes and its ENTIRE content is `[gd_scene format=3]` + `[node name=\"Root\" type=\"Node3D\"]` — no ext_resource, no script, no mesh, no children. The directory commons/artifacts/hypercube_rotation/ contains that one file and nothing else; there is no sibling .gd. `git log --follow` shows the file was born in commit 966f442e5 (\"fix: scoring bugs + release gates — pipeline avg 4.05->5.05, all 4 gates pass\", 2026-04-18), which added 61 identical stub .tscn files purely t",
+   "fix": "Drop `hypercube_rotation:0:-0.5` from the interactables layer of commons/maps/Gallery_Commons_2/map_data.json (line 109, the only placement in the repo) and delete the registry block at commons/artifacts/registry/commons_artifacts.json:6742. Delete the stub directory commons/artifacts/hypercube_rotation/. Do not build a body: the concept is already served by the live tesseract_tunnel; if that index cell should still show 4D, place `tesseract_tunnel` or `tesseract_bench` there instead."
+  },
+  {
+   "token": "entropy_visualization",
+   "verdict": "RETIRE",
+   "placements": 1,
+   "evidence": "Registry lab.json:4612 points at res://algorithms/advancedlaboratory/entropy_visualization/entropy_visualization.tscn. That file is 57 bytes, content `[gd_scene format=3]` + `[node name=\"Root\" type=\"Node3D\"]` — no script, no mesh, no children — and it is the ONLY file in algorithms/advancedlaboratory/, which is otherwise an empty directory. The registry row is itself degenerate auto-scaffolding: name, description and lookup_name are all the literal string \"entropy_visualization\" and category is \"unknown\". `git log --follow` shows the real history — commit 6301f13eb \"removing advancedlaboratory",
+   "fix": "Drop `entropy_visualization` from the interactables layer of commons/maps/AdvancedLaboratory_Systems_Lab/map_data.json (line 76, the only placement) and delete the registry block at commons/artifacts/registry/lab.json:4612. Remove the empty algorithms/advancedlaboratory/ tree. If that lab cell should still read out entropy beside its coupled_oscillator_lattice neighbour, place the already-working `shannon_entropy_meter` (res://commons/artifacts/shannon_entropy_meter/shannon_entropy_meter.tscn) or `entropy_meter` there instead."
+  },
+  {
+   "token": "marching_cubes_static",
+   "verdict": "RETIRE",
+   "placements": 1,
+   "evidence": "isosurfaces.json:2268 points at res://algorithms/marchingcubes/Scenes/Marching Cubes Static.tscn. The real file is C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\algorithms\\marchingcubes\\scenes\\Marching Cubes Static.tscn — 57 bytes, a lone Node3D, no script. `git log --all --diff-filter=A` shows the file has NEVER existed in any other form: it was born as a stub in commit 966f442e5. The whole algorithms/marchingcubes/ directory is a two-file phantom mirror (its only sibling, rhizome_cave_demo.tscn, is also a 57-byte stub shadowing the real algorithms/spacetopology/marchingcubes/scenes/rhizome_",
+   "fix": "Drop marching_cubes_static from commons/maps/Gallery_ProceduralGeneration/map_data.json (the interactables cell and its paired 'marching cubes static' request_note), delete the isosurfaces.json entry, and delete the algorithms/marchingcubes/ stub directory. If that gallery wants a static marching-cubes slot, place the existing fifteen_cases_demo. Separately worth filing: rhizome_cave_system (isosurfaces.json:2199) points at the same phantom directory and should be repointed to res://algorithms/spacetopology/marchingcubes/scenes/rhizome_cave_demo.tscn."
+  },
+  {
+   "token": "reality_modifier",
+   "verdict": "RETIRE",
+   "placements": 1,
+   "evidence": "primitives.json:16137 points at C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\commons\\primitives\\tools\\reality_modifier.tscn — 57 bytes, a lone Node3D, no script, no mesh, created by commit 966f442e5. All five files in commons/primitives/tools/ (array_visualizer, concept_synthesizer, dimension_lens, reality_modifier, spatial_compass) are identical 57-byte stubs — an invented 'tools' folder that was never implemented. No .gd exists under any name; the only repo hits are the stub, its dressing_rooms JSON, the generated doc/plans page ('File: [No dedicated GDScript found]'), and a .godot editor ",
+   "fix": "Drop reality_modifier from commons/maps/Gallery_Primitives_3/map_data.json (the interactables cell and its 'reality modifier' request_note), remove the primitives.json entry, and delete commons/primitives/tools/reality_modifier.tscn. There is nothing to build: the project's actual reality-modification mechanism is the catalyst/becoming system (commons/hazards/becoming_catalyst/), which already ships and is already registered. Consider the same sweep for its stub siblings concept_synthesizer and dimension_lens, which share the folder and the empty-sequence signature."
+  },
+  {
+   "token": "spatial_compass",
+   "verdict": "RETIRE",
+   "placements": 1,
+   "evidence": "primitives.json:18562 points at C:\\Users\\palle\\Documents\\GitHub\\AdaResearch_46\\commons\\primitives\\tools\\spatial_compass.tscn — 57 bytes, a lone Node3D, no script, no mesh, created by commit 966f442e5 in the same all-stub commons/primitives/tools/ folder. No GDScript exists for it anywhere; doc/plans/artifacts/spatial_compass.md itself records 'File: [No dedicated GDScript found]'. Registry map_sequences is empty, qfep_connection is null, description is 'Tool for navigating geometric algorithms'. Two REAL compass artifacts already ship under their own tokens and are separately registered: algor",
+   "fix": "Drop spatial_compass from commons/maps/Gallery_Primitives_3/map_data.json (cell plus its 'spatial compass' request_note), remove the primitives.json entry, and delete commons/primitives/tools/spatial_compass.tscn. If a navigation aid is genuinely wanted in that gallery, place the existing qfep_term_compass or compass_rose_floor instead. (Alternative if the name must survive: alias the registry entry to res://algorithms/qfeplaboratory/affordance_demos/qfep_term_compass.tscn — but that duplicates a live token, so retiring is cleaner.)"
+  },
+  {
+   "token": "point_is",
+   "verdict": "RETIRE",
+   "placements": 1,
+   "evidence": "commons/text/point_is.tscn is a 3-line stub ([gd_scene format=3] + bare Node3D) created by commit 966f442e5. Its declared home directory commons/text/ contains nothing but map_texts.json and this stub — no scripts, no scene family, no place for it to belong. No .gd has ever existed for it anywhere in the repo. Every field of the registry entry (commons_artifacts.json:10917) is machine-filler: description is the literal string 'point_is.', name is 'point_is', category 'unknown', map_sequences is an empty array, and doc/plans/artifacts/point_is.md records '[No dedicated GDScript found]'. The phr",
+   "fix": "Drop it from the one map that lists it: remove the 'point_is:0:-0.5' cell from the interactables layer of commons/maps/Gallery_Commons_3/map_data.json (Gallery_Commons_3 is the only map in commons/maps/ that references the token). Then delete the registry entry point_is from commons/artifacts/registry/commons_artifacts.json (lines ~10917-10965), delete the stub commons/text/point_is.tscn, and delete the generated satellites commons/artifacts/dressing_rooms/point_is.json (+ .json.bak), doc/plans/artifacts/point_is.md, and doc/dressing_rooms/point_is/. Worth flagging to the parent: this token is"
+  }
+ ]
+}
