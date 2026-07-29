@@ -6,11 +6,27 @@ extends "res://algorithms/vectors/shared/vector_scene_base.gd"
 # critical_parameter: The dragged endpoint of vector_a. Its position simultaneously defines magnitude, direction, and all three components.
 # triggers: Drag endpoint → magnitude arc sweeps, unit vector rescales, component arrows resize along axes, spring gadget deflects
 # emerges: The magnitude arc dotting from the x-axis toward the vector tip. The spring scale responding to vector length like a physical instrument.
-# needs: Grabbable vector endpoint [has], component decomposition [has], spring scale gadget [has]. Missing: VR button to toggle component visibility.
+# needs: Grabbable vector endpoint [has], component decomposition [has], spring scale gadget [has], reading axis that hides/shows the components [has, 2026-07-29]. Missing: an in-world VR button to switch reading without a map edit.
 # relationships: Entry point for all vector artifacts. Foundation for basis_vectors_rig (decomposition) and dot_product_projector (magnitude in dot product formula).
 # truth: A vector is not a number and not a point. It is a displacement — a difference between two positions, carrying both how far and which way.
 
 const SpringScaleScript = preload("res://algorithms/vectors/shared/gadgets/spring_scale_gadget.gd")
+
+# ── DNA (promoted 2026-07-29, stage 2) ───────────────────────────────────────
+# reading — which decomposition the bench asserts is what a vector IS.
+#   full      every apparatus at once (the historical build)
+#   polar     v = |v| * v-hat: magnitude arc, unit vector, spring scale. No components.
+#   cartesian v = (x, y, z): the three component arrows. No unit vector, no arc, no spring.
+#   bare      the arrow and the axes. Refuses both decompositions; a vector is a displacement.
+# The artifact's own truth is "a vector is not a number and not a point" — which
+# reading you leave on is the claim about what it is instead.
+@export_enum("full", "polar", "cartesian", "bare") var reading: String = "full"
+
+# reference — the direction the magnitude arc sweeps FROM. It was hard-coded to
+# Vector3.RIGHT, quietly privileging +X as the frame every angle is read against.
+#   x / y / z  a chosen world axis
+#   ground     the vector's own horizontal shadow, so the arc reads elevation
+@export_enum("x", "y", "z", "ground") var reference: String = "x"
 
 var vector_a: Node3D
 var unit_vector: Node3D
@@ -65,6 +81,8 @@ func _ready() -> void:
 	_cache_vector_nodes(component_vectors["y"], _cached_component_nodes["y"])
 	_cache_vector_nodes(component_vectors["z"], _cached_component_nodes["z"])
 
+	_apply_reading()
+
 func _process(_delta):
 	var vec = _get_vector_fast(vector_a, _cached_vector_a_nodes)
 	_update_unit_vector(vec)
@@ -113,14 +131,59 @@ func _update_components(vec: Vector3) -> void:
 	_update_vector_fast(component_vectors["z"], Vector3(0.0, 0.0, vec.z), _cached_component_nodes["z"])
 
 func _update_info(vec: Vector3) -> void:
+	if info_label == null:
+		return
 	var magnitude = vec.length()
 	var hat = vec / magnitude if magnitude > 0.001 else Vector3.ZERO
 	var builder := []
 	builder.append("a = (%.2f, %.2f, %.2f)" % [vec.x, vec.y, vec.z])
 	builder.append("|a| = %.2f" % magnitude)
-	builder.append("a-hat = (%.2f, %.2f, %.2f)" % [hat.x, hat.y, hat.z])
-	builder.append("x: %.2f  y: %.2f  z: %.2f" % [vec.x, vec.y, vec.z])
+	if _shows_direction():
+		builder.append("a-hat = (%.2f, %.2f, %.2f)" % [hat.x, hat.y, hat.z])
+	if _shows_components():
+		builder.append("x: %.2f  y: %.2f  z: %.2f" % [vec.x, vec.y, vec.z])
 	info_label.text = "\n".join(builder)
+
+# ── Reading (which decomposition the bench argues for) ──────────────────────
+
+func _shows_direction() -> bool:
+	return reading == "full" or reading == "polar"
+
+func _shows_components() -> bool:
+	return reading == "full" or reading == "cartesian"
+
+## Show/hide the apparatus that belongs to the current reading. Pure visibility —
+## every node stays built and stays updated, so switching reading is instant and
+## "full" is byte-for-byte the historical scene.
+func _apply_reading() -> void:
+	var show_polar: bool = _shows_direction()
+	var show_cart: bool = _shows_components()
+	if unit_vector:
+		unit_vector.visible = show_polar
+	for key in ["x", "y", "z"]:
+		var comp = component_vectors.get(key)
+		if comp is Node3D:
+			(comp as Node3D).visible = show_cart
+	if _magnitude_dots:
+		_magnitude_dots.visible = show_polar
+	if _magnitude_label:
+		_magnitude_label.visible = show_polar
+	if spring_gadget:
+		spring_gadget.visible = show_polar
+
+## The direction the magnitude arc sweeps from — the frame the angle is read
+## against. There is no privileged one; "x" is only the historical default.
+func _reference_axis(vec: Vector3) -> Vector3:
+	var axis: Vector3 = Vector3.RIGHT
+	if reference == "y":
+		axis = Vector3.UP
+	elif reference == "z":
+		axis = Vector3.BACK
+	elif reference == "ground":
+		var flat: Vector3 = Vector3(vec.x, 0.0, vec.z)
+		if flat.length() > 0.001:
+			axis = flat.normalized()
+	return axis
 
 # â”€â”€ Magnitude arc (dotted quarter-arc from X-axis toward vector) â”€â”€
 
@@ -159,6 +222,10 @@ func _create_mag_label() -> Label3D:
 	return label
 
 func _update_magnitude_arc(vec: Vector3) -> void:
+	if _magnitude_dots == null or _magnitude_label == null:
+		return
+	if not _magnitude_dots.visible:
+		return  # reading hides the arc; leave it alone
 	var mag = vec.length()
 	if mag < 0.01:
 		_magnitude_dots.multimesh.visible_instance_count = 0
@@ -169,9 +236,9 @@ func _update_magnitude_arc(vec: Vector3) -> void:
 	var arc_radius = mag * 0.35
 	var num_dots = 16
 	_magnitude_dots.multimesh.visible_instance_count = num_dots
-	# Arc sweeps from +X axis toward vector direction in the XY plane of the vector
+	# Arc sweeps from the reference axis toward the vector direction
 	var dir = vec.normalized()
-	var x_axis = Vector3.RIGHT
+	var x_axis: Vector3 = _reference_axis(vec)
 	for i in range(num_dots):
 		var t = float(i) / float(num_dots - 1)
 		var p = x_axis.slerp(dir, t) * arc_radius
@@ -187,5 +254,21 @@ func _exit_tree() -> void:
 			child.queue_free()
 
 
+## Deliberately does NOT chain to the base implementation: the base rebuild()
+## re-runs build_scene(), which this subclass does not use (it builds inline in
+## _ready), so chaining would empty every shipped placement. Both axes here are
+## applied live, so nothing is ever torn down.
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	if config == null or config.is_empty():
+		return
+	if config.has("reference"):
+		var r: String = str(config["reference"])
+		if r in ["x", "y", "z", "ground"]:
+			reference = r  # read per frame; no rebuild
+	if config.has("reading"):
+		var m: String = str(config["reading"])
+		if m in ["full", "polar", "cartesian", "bare"] and m != reading:
+			reading = m
+			# Only re-dress once _ready has actually built the scene.
+			if unit_vector != null:
+				_apply_reading()

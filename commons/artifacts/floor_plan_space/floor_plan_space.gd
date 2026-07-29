@@ -28,6 +28,23 @@ const MosaicFloorBuilder = preload("res://commons/grid/MosaicFloorBuilder.gd")
 @export var plan_path: String = ""
 @export var default_wall_preset: String = "classical"
 @export var y_offset: float = 0.0  # GridSystem places artifact at cube top; rooms build at y=0 internally
+
+# ── DNA (stage 2, promoted 2026-07-29) ───────────────────────────────────────
+# solidity — is the plan a DRAWING you pass through, or a BUILDING that stops
+#   you? The wall colliders were written and then commented out ("players can
+#   walk through walls for now"), so every room built so far is a diagram at
+#   1:1 scale: it looks like architecture and behaves like a projection.
+#   "diagram" (default) keeps exactly that. "built" gives the walls bodies, and
+#   the doorways in the JSON become the only way between rooms — the grammar of
+#   connections starts to bind.
+# bay_span — the facade module in metres. Every wall asks the FacadeComposer for
+#   round(width / 3.0) bays; 3.0 was a literal. It sets the rhythm of columns and
+#   openings: small spans read as a colonnade, large ones as monumental blank.
+## diagram = walls are surfaces only (pre-promotion); built = walls get colliders.
+@export_enum("diagram", "built") var solidity: String = "diagram"
+## Metres of wall per facade bay. 3.0 is the hard-coded module all rooms were built with.
+@export var bay_span: float = 3.0
+
 var _placed_as_artifact: bool = false  # Skip camera/lights when in a map
 
 var _floor_plan_data: Dictionary = {}
@@ -46,13 +63,37 @@ func _deferred_build() -> void:
 
 func apply_grid_config(config: Dictionary) -> void:
 	_placed_as_artifact = true
+	var changed: bool = false
 	if config.has("plan_path"):
-		plan_path = str(config["plan_path"])
+		var v_path: String = str(config["plan_path"])
+		if v_path != plan_path:
+			plan_path = v_path
+			changed = true
 	if config.has("wall_preset"):
-		default_wall_preset = str(config["wall_preset"])
+		var v_preset: String = str(config["wall_preset"])
+		if v_preset != default_wall_preset:
+			default_wall_preset = v_preset
+			changed = true
 	if config.has("y_offset"):
-		y_offset = float(config["y_offset"])
-	_load_and_build()
+		var v_yoff: float = float(config["y_offset"])
+		if v_yoff != y_offset:
+			y_offset = v_yoff
+			changed = true
+	if config.has("solidity"):
+		var v_solid: String = str(config["solidity"])
+		if v_solid != "" and v_solid != solidity:
+			solidity = v_solid
+			changed = true
+	if config.has("bay_span"):
+		var v_bay: float = float(config["bay_span"])
+		if v_bay > 0.0 and v_bay != bay_span:
+			bay_span = v_bay
+			changed = true
+	# Guarded rebuild: the first build still happens here (the grid calls this
+	# before _deferred_build runs), but a later config that changes nothing must
+	# NOT tear the space down and re-make it.
+	if not _built or changed:
+		_load_and_build()
 
 
 # ── Load & build ──────────────────────────────────────────────────────────────
@@ -891,7 +932,7 @@ func _build_facade_wall(parent: Node3D, pos: Vector3, rot_y: float,
 	preset_data["facade"]["total_width"] = width
 	preset_data["facade"]["total_height"] = height
 
-	var bays: int = maxi(1, roundi(width / 3.0))
+	var bays: int = maxi(1, roundi(width / maxf(bay_span, 0.5)))
 	preset_data["facade"]["bays"] = bays
 
 	var facade_node: Node3D = FacadeComposerScript.build_from_dict(preset_data)
@@ -905,6 +946,8 @@ func _build_facade_wall(parent: Node3D, pos: Vector3, rot_y: float,
 
 	facade_node.position = Vector3(-width * 0.5, -height * 0.5, 0.0)
 	wall_root.add_child(facade_node)
+
+	_add_wall_body(wall_root, width, height, wall_thickness)
 
 
 ## Build a simple box wall (fallback).
@@ -929,15 +972,25 @@ func _build_simple_wall(parent: Node3D, pos: Vector3, rot_y: float,
 	mesh_inst.material_override = mat
 	wall_root.add_child(mesh_inst)
 
-	# Wall colliders disabled — players can walk through walls for now
-	#var body := StaticBody3D.new()
-	#body.name = "WallCollision"
-	#var col_shape := CollisionShape3D.new()
-	#var shape := BoxShape3D.new()
-	#shape.size = Vector3(width, height, wall_thickness)
-	#col_shape.shape = shape
-	#body.add_child(col_shape)
-	#wall_root.add_child(body)
+	_add_wall_body(wall_root, width, height, wall_thickness)
+
+
+## solidity axis — the wall's body. Under "diagram" (the default, and what every
+## room built before 2026-07-29 was) this does nothing and the player walks
+## through the plan as through a drawing. Under "built" the wall gets a box
+## collider, so the doorways parsed out of the JSON become the only openings.
+func _add_wall_body(wall_root: Node3D, width: float, height: float,
+		wall_thickness: float) -> void:
+	if solidity != "built":
+		return
+	var body := StaticBody3D.new()
+	body.name = "WallCollision"
+	var col_shape := CollisionShape3D.new()
+	var shape := BoxShape3D.new()
+	shape.size = Vector3(maxf(width, 0.05), maxf(height, 0.05), maxf(wall_thickness, 0.1))
+	col_shape.shape = shape
+	body.add_child(col_shape)
+	wall_root.add_child(body)
 
 
 # ── Freestanding exhibit walls ─────────────────────────────────────────────

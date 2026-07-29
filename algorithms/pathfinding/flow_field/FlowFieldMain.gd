@@ -11,6 +11,32 @@ extends Node3D
 # truth: purpose is not inside the agent — it lives in the field the agent inhabits
 
 @export var agent_scene: PackedScene
+
+# --- DNA (stage 2, promoted 2026-07-29) -------------------------------------
+# scenario: which field topology the piece holds. "tour" is the shipped
+#   behaviour — all six scenarios on a 10-second carousel, ending parked in
+#   noise. Pinning a single scenario stops the carousel and makes the artifact
+#   argue one thing instead of surveying six: a wall that traps the gradient,
+#   a wind with no destination at all, a noise field that steers without
+#   steering anywhere.
+# field_display: whether the arrows are drawn. With arrows the piece is a
+#   diagram of a cause; with them hidden the agents look like they want
+#   something. Same simulation, opposite claim about where purpose lives.
+@export_enum("tour", "open", "block", "u_wall", "zigzag", "wind", "noise") var scenario: String = "tour"
+@export_enum("arrows", "hidden") var field_display: String = "arrows"
+
+# Scenario name -> the mode int set_scenario() already understood.
+# "tour" is -1: not a mode, the carousel that visits all of them.
+const SCENARIO_MODES = {
+	"tour": -1,
+	"open": 0,
+	"block": 1,
+	"u_wall": 2,
+	"zigzag": 3,
+	"wind": 4,
+	"noise": 5,
+}
+
 @onready var visualizer: MeshInstance3D = $FieldVisualizer
 @onready var camera: Camera3D = $Camera3D
 
@@ -28,15 +54,27 @@ func _ready() -> void:
 
 	# 1. Setup Grid
 	grid = FlowGrid.new(40, 40, 1.0)
-	
+
 	# 2. Setup Visualizer
 	visualizer.setup(grid)
-	
+	visualizer.visible = (field_display != "hidden")
+
 	# 3. Spawn Agents
 	spawn_agents(200)
-	
+
 	# 4. Start Sequence
-	set_scenario(0)
+	_apply_scenario()
+
+# Enter the declared scenario. With the default ("tour") this is exactly the
+# old set_scenario(0) plus a timer reset, so the carousel starts where it
+# always did.
+func _apply_scenario() -> void:
+	sequence_timer = 0.0
+	var mode: int = int(SCENARIO_MODES.get(scenario, -1))
+	if mode < 0:
+		mode = 0  # tour begins at Open Field
+	sequence_mode = mode
+	set_scenario(sequence_mode)
 
 func _process(delta: float) -> void:
 	# Animate Noise (if in final mode)
@@ -45,6 +83,10 @@ func _process(delta: float) -> void:
 		grid.generate_noise_field(12345, time * 0.05) # Slow, smooth scroll
 		visualizer.update_visuals()
 		return # Stay in this mode forever (or until manual reset)
+
+	# A pinned scenario holds; only the tour advances.
+	if scenario != "tour":
+		return
 
 	# Standard Sequence Logic
 	sequence_timer += delta
@@ -143,4 +185,24 @@ func raycast_from_mouse(mouse_pos):
 	return space.intersect_ray(query)
 
 func apply_grid_config(config: Dictionary) -> void:
-	pass
+	# Guarded: only touch anything a token actually names, and only re-enter
+	# a scenario when the value really changed AND _ready has already built
+	# the grid once. A map that passes no scenario/field_display token keeps
+	# the exact behaviour it shipped with.
+	var rebuild_scenario: bool = false
+
+	if config.has("scenario"):
+		var want: String = str(config["scenario"]).strip_edges().to_lower()
+		if SCENARIO_MODES.has(want) and want != scenario:
+			scenario = want
+			rebuild_scenario = true
+
+	if config.has("field_display"):
+		var display: String = str(config["field_display"]).strip_edges().to_lower()
+		if (display == "arrows" or display == "hidden") and display != field_display:
+			field_display = display
+			if visualizer != null:
+				visualizer.visible = (field_display != "hidden")
+
+	if rebuild_scenario and grid != null:
+		_apply_scenario()
