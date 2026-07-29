@@ -148,6 +148,31 @@ def main() -> int:
                     framing = _v
                 break
 
+    # Fixture: config an artifact needs SUPPLIED before its axis can be seen at
+    # all. library_rack builds nothing in _ready by design — it has no shelf
+    # until a collection arrives — so sweeping guard alone rendered five blank
+    # frames scoring 0.00%, a dead axis by measurement across 70 placements.
+    fixture: dict = {}
+    if targets:
+        import glob as _g2
+        for _f in _g2.glob(str(REPO / "commons/artifacts/registry/*.json")):
+            try:
+                _reg = json.loads(Path(_f).read_text(encoding="utf-8")).get("artifacts", {})
+            except Exception:
+                continue
+            _e = _reg.get(targets[0][0])
+            if isinstance(_e, dict) and isinstance(_e.get("dna"), dict):
+                _fx = _e["dna"].get("fixture")
+                if isinstance(_fx, dict):
+                    fixture = _fx
+                break
+    if fixture:
+        print(f"  fixture from registry: {fixture}")
+        for v in variants:
+            merged = dict(fixture)
+            merged.update(v["params"])
+            v["params"] = merged
+
     SPEC.parent.mkdir(exist_ok=True)
     SPEC.write_text(json.dumps({
         "scene": targets[0][1],

@@ -8073,7 +8073,13 @@
       "hood",
       "cordon"
      ]
-    }
+    },
+    "fixture": {
+     "collection": "color",
+     "layout": "rack_layout.json"
+    },
+    "fixture_note": "this artifact builds nothing in _ready by design - it has no shelf until a collection arrives via apply_grid_config, so a sweep that passes only its axis renders five blank frames and scores 0.00%. The sweep must supply a collection for the guard axis to be visible at all",
+    "sweep_note": "NOT STILL-VERIFIABLE by the current harness. This artifact builds nothing in _ready by design and needs a collection to have a shelf; supplying one through the fixture still renders blank, because _build_all instances scenes out of a registry file and that does not complete inside the sweep's settle. Its 0.00% is a fact about the harness, not a verdict on the guard axis. Judge this one in a map, or from its map-dna capture."
    },
    "category": "display",
    "description": "Universal collection display wall. Reads any artifact registry and builds a grid of cubes, each containing a scaled-down artifact or shader. Config: #collection:shaders#cols:6#rows:4",

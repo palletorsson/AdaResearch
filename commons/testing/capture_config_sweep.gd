@@ -142,6 +142,20 @@ func _run() -> void:
 		# added later would otherwise survive into the capture.
 		LabelFramer.frame_labels(inst)
 
+		# RESCUE: some artifacts deliberately build NOTHING in _ready(). library_rack
+		# says so in its own comment — it has nothing to build until a `collection`
+		# key arrives, and standing an empty 6x4 grid of blank cubes in every room
+		# would be worse than waiting. The sweep's contract is "set the exports, let
+		# _ready build", so those artifacts rendered five variants of an empty scene
+		# and scored 0.00%: a dead axis by measurement, across 70 placements, when
+		# the body had simply never been asked for. If nothing measurable exists,
+		# hand the params to apply_grid_config and settle again. Artifacts that
+		# already built have a real AABB and never reach this.
+		if _subtree_aabb(inst).size.length() < 0.001 and inst.has_method("apply_grid_config"):
+			inst.call("apply_grid_config", params)
+			await create_timer(SETTLE).timeout
+			LabelFramer.frame_labels(inst)
+
 		var aabb := _subtree_aabb(inst)
 		var c := aabb.get_center()
 		var radius: float = maxf(aabb.size.length() * 0.5, 0.2)
