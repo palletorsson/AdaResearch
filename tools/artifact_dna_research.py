@@ -205,6 +205,22 @@ def plan(axes: list[tuple[str, list, str]], max_variants: int) -> list[tuple[str
     return chosen
 
 
+def _bite_for(token: str) -> dict:
+    """The sweep's own measurement of whether its axis changed the image."""
+    p = SWEEP_SHEET / f"sweep_{token}_bite.json"
+    if not p.exists():
+        return {}
+    try:
+        d = json.loads(p.read_text(encoding="utf-8"))
+    except Exception:
+        return {}
+    pct = d.get("peak_changed_pct")
+    if pct is None:
+        return {}
+    return {"bite_pct": pct, "bite_verdict": d.get("verdict", ""),
+            "still_verifiable": bool(pct >= 2.0)}
+
+
 def sweep(token: str, chosen: list[tuple[str, list]], max_variants: int) -> Path | None:
     args = [sys.executable, str(REPO / "tools" / "cabinet_sweep.py"), token,
             f"--max={max_variants}"]
@@ -233,6 +249,11 @@ def publish(token: str, entry: dict, chosen: list, axes: list, sheet: Path | Non
         "time_domain_only": all(bool(TIME_AXIS.search(n)) for n, _ in chosen) if chosen else False,
         "variants": max(1, _product([len(v) for _, v in chosen])),
         "sheet": f"/artifact-dna/{token}/sweep.png" if sheet else None,
+        # Did the axis actually move the picture? Without this the manifest
+        # records that a sweep happened, which is not the same as recording
+        # that it showed anything — and a sheet of identical tiles reads as a
+        # verdict either way. cabinet_sweep measures it; carry the number.
+        **_bite_for(token),
         "url": f"/artifact-dna/{token}",
     }
     (d / "manifest.json").write_text(json.dumps(rec, indent=1), encoding="utf-8")
